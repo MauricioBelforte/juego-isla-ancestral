@@ -40,7 +40,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 22 | Historia Principal | ⬜ Sin iniciar | 0/100 | Alta | 4 | 21, 28 | — | — | — |
 | 23 | Historias Secundarias | ⬜ Sin iniciar | 0/100 | Media | 3 | 22 | — | — | — |
 | 24 | Templos y Puzzles | 🟢 Disponible | 100/100 | Alta | 5 | 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 23, framework emisor→receptor, 15 familias, validador de arbitrariedad, Guía del Templo |
-| 25 | Ruinas | ⬜ Sin iniciar | 0/100 | Media | 3 | 24 | — | — | — |
+| 25 | Ruinas | 🟢 Disponible | 100/100 | Media | 3 | 24 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 24, kit modular ≤40 piezas, 13 tipos, progresión 4 estados, activadores |
 | 26 | Templo Subterráneo | ⬜ Sin iniciar | 0/100 | Alta | 4 | 24, 25 | — | — | Templo de la Brisa |
 | 27 | Islas del Mundo | ⬜ Sin iniciar | 0/100 | Media | 4 | 28, 29 | — | — | — |
 | 28 | Viajes | ⬜ Sin iniciar | 0/100 | Media | 3 | 22, 27 | — | — | Gran Vapor |
