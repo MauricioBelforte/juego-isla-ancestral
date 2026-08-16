@@ -76,7 +76,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 58 | Accesibilidad | ⬜ Sin iniciar | 0/100 | Alta | 3 | 53, 57 | — | — | — |
 | 59 | Guardado | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07, 14 | — | — | GameState versionado |
 | 60 | Datos y Serialización | ⬜ Sin iniciar | 0/100 | Alta | 3 | 59 | — | — | — |
-| 61 | Rendimiento | ⬜ Sin iniciar | 0/100 | Alta | 5 | 08, 49 | — | — | — |
+| 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 03:39:37 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
 | 62 | Memoria | ⬜ Sin iniciar | 0/100 | Alta | 3 | 61 | — | — | — |
 | 63 | Cargas y Streaming | ⬜ Sin iniciar | 0/100 | Alta | 4 | 08, 61 | — | — | — |
 | 64 | IA de NPC | ⬜ Sin iniciar | 0/100 | Alta | 5 | 19, 61 | — | — | — |
@@ -122,7 +122,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 104 | Analytics | ⬜ Sin iniciar | 0/100 | Baja | 2 | 103 | — | — | — |
 | 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
 | 106 | Seguridad | ⬜ Sin iniciar | 0/100 | Baja | 2 | 77 | — | — | — |
-| 107 | Backups | ⬜ Sin iniciar | 0/100 | Alta | 1 | 59 | — | — | — |
+| 107 | Backups | � Disponible | 137/137 | Alta | 1 | 59 | — | 2026-08-16 18:50:00 | Documentación completa por Devin: Estrategia 3-2-1 (GitHub + Cloud + Disco Externo), automatización con GitHub Actions y Task Scheduler, verificación de integridad SHA-256, política de retención y plan de recuperación de desastres |
 | 108 | Pipeline de Assets | ⬜ Sin iniciar | 0/100 | Alta | 3 | 45 | — | — | — |
 | 109 | Herramientas Internas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
 | 110 | Debug Menu | ⬜ Sin iniciar | 0/100 | Media | 1 | 04 | — | — | — |
