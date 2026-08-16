@@ -15,7 +15,7 @@ DOCUMENTACION/
 ├── 5-FUTURAS-MEJORAS.md                        ← (pendiente) Ideas y mejoras del usuario
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
 ├── 01-Fundamentos-Del-Proyecto/                ← Base documental: decisiones y los 152 módulos
-├── 02-... a 152-.../                           ← (a crear) Un componente por módulo del plan
+├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -38,5 +38,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | Componente | Estado |
 |------------|--------|
 | 01-Fundamentos-Del-Proyecto | ✅ Creado — base documental (checklist de 152 módulos) |
+| 02-Vision-Y-Concepto | ✅ Creado — 5 archivos, checklist de 172 ítems (162 completados; 10 pendientes con dueño en M02/QA/Publicación) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.

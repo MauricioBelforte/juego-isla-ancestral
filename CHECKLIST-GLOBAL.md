@@ -17,7 +17,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | ID | Módulo | Estado | Progreso | Prioridad | Complejidad | Dependencias | Agente actual | Última actividad | Notas |
 |----|--------|--------|----------|-----------|-------------|--------------|---------------|------------------|-------|
 | 01 | Fundamentos del Proyecto | 🔵 En curso | 0/152 | Alta | 4 | — | DEEPSEEK V4 FLASH | 2026-08-15 | Base documental creada (5 archivos + checklist de 152 módulos). Pendiente: desglosar módulos 02-152 |
-| 02 | Visión y Concepto | ⬜ Sin iniciar | 0/100 | Alta | 2 | 01 | — | — | Crear componente 02-Vision-Y-Concepto |
+| 02 | Visión y Concepto | 🟢 Disponible | 162/172 | Alta | 2 | 01 | — | 2026-08-15 | Documentación completa por DEEPSEEK V4 FLASH (5 archivos + checklist 172 ítems). 10 pendientes con dueño externo (M02 legal, QA, Publicación) — ver Notas del Agente en plan-actual/04-Codigo.md |
 | 03 | Documentación del Proyecto | ⬜ Sin iniciar | 0/100 | Alta | 2 | 01 | — | — | — |
 | 04 | Game Engine | ⬜ Sin iniciar | 0/100 | Alta | 5 | 01 | — | — | Decisión Unity vs Godot se cierra aquí |
 | 05 | Lenguaje y Programación | ⬜ Sin iniciar | 0/100 | Alta | 3 | 04 | — | — | — |
