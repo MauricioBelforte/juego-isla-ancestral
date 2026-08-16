@@ -78,7 +78,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 60 | Datos y Serialización | ⬜ Sin iniciar | 0/100 | Alta | 3 | 59 | — | — | — |
 | 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 03:39:37 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
 | 62 | Memoria | ⬜ Sin iniciar | 0/100 | Alta | 3 | 61 | — | — | — |
-| 63 | Cargas y Streaming | ⬜ Sin iniciar | 0/100 | Alta | 4 | 08, 61 | — | — | — |
+| 63 | Cargas y Streaming | 🟢 Disponible | 101/101 | Alta | 4 | 08, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos, progreso real por pesos, LRU con tope, precalentamiento en menú, streaming océano/subterráneo/islas. Requiere M08 + presupuestos M61 |
 | 64 | IA de NPC | ⬜ Sin iniciar | 0/100 | Alta | 5 | 19, 61 | — | — | — |
 | 65 | Animales IA | ⬜ Sin iniciar | 0/100 | Media | 3 | 36, 64 | — | — | — |
 | 66 | Anti-Softlock | ⬜ Sin iniciar | 0/100 | Alta | 3 | 22, 26 | — | — | — |
