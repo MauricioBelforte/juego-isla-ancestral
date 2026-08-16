@@ -7,20 +7,20 @@
 
 ```
 M103 (Logging) ──► Logger Service (niveles, categorías, rotación)
-                      │
-                      ▼
-                      AnalyticsDirector (autoload, singleton)
-                      │
-              ──► Eventos locales (cola en memoria)
-                      │
-              ──► Batch Sender (enviado cada 30 min o al cierre)
-                      │
-              ──► Storage Local (JSON agregado, en Application.persistentDataPath)
-                      │
-              ──► Configuración M91 (opt-out toggle)
-                      │
-                      ▼
-                      Reportes Agregados (dashboard equipo desarrollo)
+                       │
+                       ▼
+                       AnalyticsDirector (autoload, singleton)
+                       │
+               ──► Eventos locales (cola en memoria)
+                       │
+               ──► Batch Sender (enviado cada 30 min o al cierre)
+                       │
+               ──► Storage Local (JSON agregado, en Application.persistentDataPath)
+                       │
+               ──► Configuración M91 (opt-out toggle)
+                       │
+                       ▼
+                       Reportes Agregados (dashboard equipo desarrollo)
 ```
 
 ## 2. Flujo de operación
@@ -58,3 +58,4 @@ M103 (Logging) ──► Logger Service (niveles, categorías, rotación)
 - Test de rendimiento: overhead < 1% en pruebas de profiling extendidas
 - Test de opt-out: toggle M91 detiene toda captura inmediatamente
 - Test de agregación: datos exportados son solo JSON agregado sin identificadores
+- Test de memoria: < 5 MB durante pantalla de analytics

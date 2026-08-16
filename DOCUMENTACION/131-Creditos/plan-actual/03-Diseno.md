@@ -10,20 +10,20 @@ M78 (Legal) ──► Validador de licencias
 M87 (Localización) ──► Traductor de textos
 M90 (Config Gráfica) ──► Configuración de fuente y tamaño
 M91 (Config Audio) ──► Volumen y velocidad de animación
-                      │
-                      ▼
-                      CreditsDirector (autoload, singleton)
-                      │
-              ──► UI CreditsCanvas (CanvasLayer)
-                      │
-              ──► CreditsText (RichTextLabel, desplazamiento)
-                      │
-              ──► CreditsSearch (TextEdit, filtro en tiempo real)
-                      │
-              ──► CreditsNavigator (controles de navegación)
-                      │
-                      ▼
-                      World Persistence (guardado último idioma)
+                       │
+                       ▼
+                       CreditsDirector (autoload, singleton)
+                       │
+               ──► UI CreditsCanvas (CanvasLayer)
+                       │
+               ──► CreditsText (RichTextLabel, desplazamiento)
+                       │
+               ──► CreditsSearch (TextEdit, filtro en tiempo real)
+                       │
+               ──► CreditsNavigator (controles de navegación)
+                       │
+                       ▼
+                       World Persistence (guardado último idioma)
 ```
 
 ## 2. Flujo de operación

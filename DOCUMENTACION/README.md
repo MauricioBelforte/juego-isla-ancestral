@@ -108,6 +108,10 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 22-Historia-Principal | ✅ Creado — DELEGABLE: 7 capítulos, 5 finales, grafo (100/100) |
 | 23-Historias-Secundarias | ✅ Creado — DELEGABLE: 60 cadenas, contexto obligatorio (100/100) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
+| 69-Fast-Travel | ✅ Creado por B1-Nemotron — DELEGABLE: 196 ítems, 13 puntos sección 68, costo/restricciones/día-noche (196/196) |
+| 104-Analytics | ✅ Creado por B1-Nemotron — DELEGABLE: privacidad por diseño, JSON agregado, opt-out M91 (142/142) |
+| 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (96/96) |
+| 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (138/138) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 || 88-Fuentes-Tipograficas | ? Creado por DEVIN � Fuentes Tipogr�ficas: Nunito + Fredoka One, jerarqu�a visual, estilos UI, optimizaci�n, accesibilidad, localizaci�n (218/218) |

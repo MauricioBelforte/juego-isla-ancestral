@@ -47,6 +47,10 @@
 | 64 — IA de NPC | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (107/107), push `96674dd` |
 | Logos 21-35 | Deepseek V4 Flash | 2026-08-17 | ✅ Renumeración cronológica completa + títulos internos + ULTIMO_NUMERO=35, push `6c01b99`; referencia M61 corregida, push `2bbf13f` |
 | Firmas B1 | Deepseek V4 Flash | 2026-08-16 | ✅ 40 archivos de Nemotron corregidos a "Nemotron 3.5 Lightning / Cline", incluidos en push `6c01b99` |
+| 69 — Fast Travel | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (196/196), 4 archivos + checklist 196 items en plan-inicial y plan-actual. Tanda B1 completada |
+| 104 — Analytics | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (142/142), 4 archivos + checklist 142 items en plan-inicial y plan-actual. Tanda B1 completada |
+| 118 — CI/CD | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (96/96), 4 archivos + checklist 96 items en plan-inicial y plan-actual. Tanda B1 completada |
+| 131 — Créditos | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (138/138), 4 archivos + checklist 138 items en plan-inicial y plan-actual. Tanda B1 completada |
 
 ## Decisiones pendientes/descartadas
 

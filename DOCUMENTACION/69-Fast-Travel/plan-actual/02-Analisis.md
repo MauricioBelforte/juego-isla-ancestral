@@ -17,8 +17,8 @@
 | 8 | Permitir cancelar | El jugador puede abortar el viaje al 50% de la animación y regresar |
 | 9 | Impedir uso durante ciertos estados | Bloqueado durante combate, diálogos críticos, eventos de clima severo |
 | 10 | Guardar último punto | El último destino visitado se recuerda para acceso rápido |
-| 11 | Evitar bypass de eventos críticos | El sistema verifica estado global antes de permitir viaje |
-| 12 | Evitar ruptura de misiones | Viajes que interrumpan misiones activas son suspendidos con warning |
+| 11 | Evadir bypass de eventos críticos | El sistema verifica estado global antes de permitir viaje |
+| 12 | Evadir ruptura de misiones | Viajes que interrumpan misiones activas son suspendidos con warning |
 | 13 | Probar navegación | Verificar que todos los puntos de viaje llevan a destinos válidos |
 
 ## 2. Decisiones clave
@@ -35,7 +35,15 @@
 
 ## 3. Alternativas descartadas
 
-- **Fast travel inmediato desde el inicio:** Permitir teletransportación desde el tutorial descartado; rompe la sensación de mundo conectado yReduce la valorización de los descubrimientos locales.
+- **Fast travel inmediato desde el inicio:** Permitir teletransportación desde el tutorial descartado; rompe la sensación de mundo conectado y reduce la valorización de los descubrimientos locales.
 - **Sin restricciones de estado:** Permitir fast travel durante cualquier situación descartado; riesgo de bypass de eventos críticos y rupturas de misión.
 - **Viajes gratuitos infinitos:** Sin costo de ningún tipo descartado; mina la economía de recursos y la progresión cozy de acumulación cuidadosa.
 - **Mapa mundial completo al instante:** Revelar todo el mapa descartado; elimina la gradual descubrimiento que es central en el diseño cozy.
+
+## 4. QA
+
+- Test M114: menú de fast travel accesible desde mapa y atajo de teclado
+- Test de restricciones: fast travel bloqueado durante combate y diálogos críticos
+- Test de costo: verificación de descuento de recursos y cooldowns
+- Test de transición: animación suave sin "jump" visual ni pausas prolongadas
+- Test de integración: fast travel respetando ciclo día/noche (M29/M31)

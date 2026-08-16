@@ -53,8 +53,8 @@ func obtener_ultimo_punto() -> String:
 
 ## 4. Notas del Agente
 
-**Modelo:** Nemotron 3.5 Lightning  
-**Plataforma:** Cline  
+**Modelo:** Nemotron 3.5 Lightning
+**Plataforma:** Cline
 **Fecha:** 2026-08-16 HH:MM:SS  
 **Estado:** Diseño completado, documentación lista para agente delegado
 

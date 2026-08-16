@@ -9,7 +9,7 @@
 |---|---|---|
 | 1 | Eventos de sesión | Capturar timestamp de inicio, duración, hora del día (usando M29/M31) |
 | 2 | Patrones de movimiento | Mapeo de calor (heatmap) de áreas visitadas, anonimizado por zona |
-| 3 | Frecuencia de features | Contadores por tipo: usos de fast travel, crafting completado, agricultura cosechada, peces capturados |
+| 3 | Frecuencia de features | Contadores por tipo: usos de fast travel, crafting completado, agricultura, pesca |
 | 4 | Tiempo de juego | Acumulación horaria total y por sesión, guardada en M103 Logger |
 | 5 | Eventos críticos | Errores, crashes, excepciones con stack trace truncated (sin variables personales) |
 | 6 | Configuración de reporte | Toggle en menú de configuración (M91); opt-out global por jugador |
@@ -33,3 +33,11 @@
 - **Perfiles de jugadores individuales:** Descartado; contradictorio con el diseño cozy y principios de privacidad del proyecto.
 - **Enviado de datos en tiempo real continuo:** Descartado; alto overhead de batería/red y posible fricción para el usuario.
 - **Perfilamiento de hardware detallado:** Descartado; innecesario para los objetivos de diseño y complejidad innecesaria.
+
+## 4. QA
+
+- Test M112: cada evento RF1-RF7 se captura y almacena correctamente
+- Test de privacidad: verificación de que no hay datos personales en logs exportados
+- Test de rendimiento: overhead < 1% en pruebas de profiling extendidas
+- Test de opt-out: toggle M91 detiene toda captura inmediatamente
+- Test de agregación: datos exportados son solo JSON agregado sin identificadores

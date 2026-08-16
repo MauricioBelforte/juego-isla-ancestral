@@ -9,16 +9,16 @@
 M28 (Viajes) ──► FastTravelManager (autoload)
 M29 (Tiempo) ──► validación ciclo día/noche
 M31 (Ciclo Día/Noche) ──► validación franjas horarias
-                      │
-                      ▼
-                      FastTravelService (singleton)
-                      │
-              ──► UI FastTravelMenu (CanvasLayer)
-                      │
-              ──► FastTravelEffect (node2D, animación de transición)
-                      │
-                      ▼
-                      World Persistence (guardado último punto)
+                       │
+                       ▼
+                       FastTravelService (singleton)
+                       │
+               ──► UI FastTravelMenu (CanvasLayer)
+                       │
+               ──► FastTravelEffect (node2D, animación de transición)
+                       │
+                       ▼
+                       World Persistence (guardado último punto)
 ```
 
 ## 2. Flujo de operación
@@ -55,3 +55,4 @@ M31 (Ciclo Día/Noche) ──► validación franjas horarias
 - Test de costo: verificación de descuento de recursos y cooldowns
 - Test de transición: animación suave sin "jump" visual ni pausas prolongadas
 - Test de integración: fast travel respetando ciclo día/noche (M29/M31)
+- Test de mapa: todos los puntos de viaje llevan a destinos válidos
