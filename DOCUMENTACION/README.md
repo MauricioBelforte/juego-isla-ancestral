@@ -26,6 +26,7 @@ DOCUMENTACION/
 ├── 10-Generacion-Del-Mundo/             ← M09: pipeline 8 capas, determinismo, semillas (104/104)
 ├── 11-Personaje-Del-Jugador/            ← M10: FSM 10 estados, hitbox, stamina, luz (102/102)
 ├── 12-Camara/                           ← M11: 5 modos, spring-arm, minimapa, anti-mareo (100/100)
+├── 13-Herramientas/                     ← M12: 9 herramientas x 4 niveles, contrato voxel (101/101)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -59,5 +60,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 10-Generacion-Del-Mundo | ✅ Creado — pipeline de 8 capas, PRNG por contexto, regeneración segura (104/104) |
 | 11-Personaje-Del-Jugador | ✅ Creado — FSM de 10 estados, físicas cozy, interacción y esporas de luz (102/102) |
 | 12-Camara | ✅ Creado — 5 modos de cámara, spring-arm con colisión, minimapa sin render (100/100) |
+| 13-Herramientas | ✅ Creado — 9 herramientas × 4 niveles, durabilidad cozy, contratos voxel (101/101) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
