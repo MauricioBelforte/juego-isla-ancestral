@@ -33,6 +33,7 @@ DOCUMENTACION/
 ├── 32-Clima/                            ← DELEGABLE: 9 climas deterministas, cozy (120/120)
 ├── 41-Musica/                           ← DELEGABLE: matriz de capas, leitmotifs (110/110)
 ├── 42-Sonido-Ambiental/                 ← DELEGABLE: banco por bioma, ≤11 buses (109/109)
+├── 43-Efectos-De-Sonido/                ← DELEGABLE: pool 24 voces, familia tonal (96/96)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -83,6 +84,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 32-Clima | ✅ Creado — DELEGABLE: 9 climas deterministas, regla anti-molestia, accesibilidad (120/120) |
 | 41-Musica | ✅ Creado — DELEGABLE: 51 puntos, matriz capas, leitmotifs, LUFS -16 (110/110) |
 | 42-Sonido-Ambiental | ✅ Creado — DELEGABLE: banco por bioma, capas hora/clima (109/109) |
+| 43-Efectos-De-Sonido | ✅ Creado — DELEGABLE: pool 24 voces, familia tonal (96/96) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
@@ -90,4 +92,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 
 || 90-Configuracion-Grafica | ? Creado por DEVIN � Configuraci�n Gr�fica: 23 opciones gr�ficas, 4 presets, detecci�n autom�tica de hardware, men� de settings, integraci�n con M58/M61/M88 (248/248) |
 
-|| 91-Configuracion-De-Audio | ? Creado por DEVIN � Configuraci�n de Audio: 15 opciones de audio, 7 buses de audio, audio 3D, subt�tulos, sonidos de interfaz, rango din�mico, compresi�n, dispositivo de salida, pruebas de audio, integraci�n con M58/M87/M61 (227/227) |
+|| 91-Configuracion-De-Audio | ? Creado por DEVIN � Configuraci�n de Audio: 15 opciones de audio, 7 buses de audio, audio 3D, subt�tulos, sonidos de interfaz, rango din�mico, compresi�n, dispositivo de salida, pruebas de audio, integraci�n con M58/M87/M61 (227/227) |
