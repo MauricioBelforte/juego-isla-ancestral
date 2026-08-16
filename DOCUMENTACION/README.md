@@ -28,6 +28,8 @@ DOCUMENTACION/
 ├── 12-Camara/                           ← M11: 5 modos, spring-arm, minimapa, anti-mareo (100/100)
 ├── 13-Herramientas/                     ← M12: 9 herramientas x 4 niveles, contrato voxel (101/101)
 ├── 29-Tiempo-Y-Calendario/              ← DELEGABLE: GameClock servicio puro, festivos (104/104)
+├── 30-Reloj-En-Tiempo-Real/             ← DELEGABLE: sin tiempo real, anti-exploit, display (104/104)
+├── 30-Bug-Tracking/                      ← Bug Tracking con GitHub Issues (121/121)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -63,5 +65,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 12-Camara | ✅ Creado — 5 modos de cámara, spring-arm con colisión, minimapa sin render (100/100) |
 | 13-Herramientas | ✅ Creado — 9 herramientas × 4 niveles, durabilidad cozy, contratos voxel (101/101) |
 | 29-Tiempo-Y-Calendario | ✅ Creado — DELEGABLE: GameClock, calendario Aurora, eventos repetibles (104/104) |
+| 30-Reloj-En-Tiempo-Real | ✅ Creado — DELEGABLE: sin tiempo real, anti-exploit, widget display (104/104) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
