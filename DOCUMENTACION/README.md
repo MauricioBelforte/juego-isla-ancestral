@@ -22,6 +22,7 @@ DOCUMENTACION/
 ├── 06-Control-De-Versiones/             ← M05: política git, semver, CHANGELOG (91/92)
 ├── 07-Arquitectura-General/             ← M06: Service Locator, capas, EventBus (102/102)
 ├── 08-Mundo-Voxel/                      ← M07: voxel 1m, chunks, catálogo, diffs (104/104)
+├── 09-Terreno-Y-Geografia/              ← M08: 25 puntos, 13 biomas, recetas, mapa Aurora (104/104)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -51,5 +52,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 06-Control-De-Versiones | ✅ Creado — política git, ramas, semver, auto-revisión; CHANGELOG.md creado (91/92) |
 | 07-Arquitectura-General | ✅ Creado — Service Locator, capas unidireccionales, EventBus por dominios, GameState (102/102) |
 | 08-Mundo-Voxel | ✅ Creado — voxel 1 m, chunks 16³, catálogo de bloques, reglas de validación, diffs (104/104) |
+| 09-Terreno-Y-Geografia | ✅ Creado — 25 puntos, 13 biomas, recetas de formaciones, mapa de Aurora (104/104) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
