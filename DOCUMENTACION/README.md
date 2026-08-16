@@ -44,6 +44,7 @@ DOCUMENTACION/
 ├── 25-Ruinas/                          ← DELEGABLE: kit modular ≤40 piezas, 13 tipos (100/100)
 ├── 26-Templo-Subterraneo/              ← DELEGABLE: Templo de la Brisa, 7 anillos (100/100)
 ├── 22-Historia-Principal/              ← DELEGABLE: 7 capítulos, 5 finales, grafo (100/100)
+├── 23-Historias-Secundarias/           ← DELEGABLE: 60 cadenas, contexto obligatorio (100/100)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -105,6 +106,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 25-Ruinas | ✅ Creado — DELEGABLE: kit modular ≤40 piezas, 13 tipos (100/100) |
 | 26-Templo-Subterraneo | ✅ Creado — DELEGABLE: Templo de la Brisa, 7 anillos (100/100) |
 | 22-Historia-Principal | ✅ Creado — DELEGABLE: 7 capítulos, 5 finales, grafo (100/100) |
+| 23-Historias-Secundarias | ✅ Creado — DELEGABLE: 60 cadenas, contexto obligatorio (100/100) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
