@@ -31,6 +31,7 @@ DOCUMENTACION/
 ├── 30-Reloj-En-Tiempo-Real/             ← DELEGABLE: sin tiempo real, anti-exploit, display (104/104)
 ├── 31-Ciclo-Dia-Noche/                  ← DELEGABLE: 5 franjas, anti-oscuridad, nocturnos (130/130)
 ├── 32-Clima/                            ← DELEGABLE: 9 climas deterministas, cozy (120/120)
+├── 41-Musica/                           ← DELEGABLE: matriz de capas, leitmotifs (110/110)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -78,9 +79,10 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 30-Reloj-En-Tiempo-Real | ✅ Creado — DELEGABLE: sin tiempo real, anti-exploit, widget display (104/104) |
 | 31-Ciclo-Dia-Noche | ✅ Creado — DELEGABLE: 5 franjas de fase, anti-oscuridad, eventos nocturnos (130/130) |
 | 32-Clima | ✅ Creado — DELEGABLE: 9 climas deterministas, regla anti-molestia, accesibilidad (120/120) |
+| 41-Musica | ✅ Creado — DELEGABLE: 51 puntos, matriz capas, leitmotifs, LUFS -16 (110/110) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
-|| 88-Fuentes-Tipograficas | ? Creado por DEVIN � Fuentes Tipogr�ficas: Nunito + Fredoka One, jerarqu�a visual, estilos UI, optimizaci�n, accesibilidad, localizaci�n (218/218) |
+|| 88-Fuentes-Tipograficas | ? Creado por DEVIN � Fuentes Tipogr�ficas: Nunito + Fredoka One, jerarqu�a visual, estilos UI, optimizaci�n, accesibilidad, localizaci�n (218/218) |
 
-|| 90-Configuracion-Grafica | ? Creado por DEVIN � Configuraci�n Gr�fica: 23 opciones gr�ficas, 4 presets, detecci�n autom�tica de hardware, men� de settings, integraci�n con M58/M61/M88 (248/248) |
+|| 90-Configuracion-Grafica | ? Creado por DEVIN � Configuraci�n Gr�fica: 23 opciones gr�ficas, 4 presets, detecci�n autom�tica de hardware, men� de settings, integraci�n con M58/M61/M88 (248/248) |

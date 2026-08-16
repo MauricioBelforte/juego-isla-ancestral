@@ -34,6 +34,7 @@
 | 32 — Clima | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (120/120), push en este commit |
 | 102 — Bug Tracking | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentado (121/121), carpeta renombrada a `102-Bug-Tracking` por coordinador |
 | 107, 110, 111, 122, 152, 88 — Tanda A | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentados y pusheados por Devin (137/138/248/335/189/218 ítems) |
+| 90 — Configuración Gráfica | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentado por Devin (carpeta completa en working dir); commit + push incluido por Deepseek V4 Flash en `2b183bd` |
 
 ## Decisiones pendientes/descartadas
 
