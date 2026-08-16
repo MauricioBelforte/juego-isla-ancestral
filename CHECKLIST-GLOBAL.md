@@ -39,7 +39,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 21 | Diálogos | ⬜ Sin iniciar | 0/100 | Alta | 4 | 19 | — | — | — |
 | 22 | Historia Principal | ⬜ Sin iniciar | 0/100 | Alta | 4 | 21, 28 | — | — | — |
 | 23 | Historias Secundarias | ⬜ Sin iniciar | 0/100 | Media | 3 | 22 | — | — | — |
-| 24 | Templos y Puzzles | ⬜ Sin iniciar | 0/100 | Alta | 5 | 13 | — | — | Framework emisor→receptor |
+| 24 | Templos y Puzzles | 🟢 Disponible | 100/100 | Alta | 5 | 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 23, framework emisor→receptor, 15 familias, validador de arbitrariedad, Guía del Templo |
 | 25 | Ruinas | ⬜ Sin iniciar | 0/100 | Media | 3 | 24 | — | — | — |
 | 26 | Templo Subterráneo | ⬜ Sin iniciar | 0/100 | Alta | 4 | 24, 25 | — | — | Templo de la Brisa |
 | 27 | Islas del Mundo | ⬜ Sin iniciar | 0/100 | Media | 4 | 28, 29 | — | — | — |
