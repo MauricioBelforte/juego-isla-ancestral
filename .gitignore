@@ -1,0 +1,116 @@
+# ─────────────────────────────────────────────
+# Isla Ancestral — .gitignore (proyecto Unity)
+# Base: gitignore oficial de Unity (github/gitignore)
+# Adaptado: la carpeta Logs/ de la raíz se VERSIONA
+# (contiene los logs del protocolo de documentación)
+# ─────────────────────────────────────────────
+
+# =============================================
+# Unity — Archivos generados
+# =============================================
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Ss]creenshots/
+/UIElementsSchema/
+
+# Logs de Unity dentro de Assets (compilación/editor)
+/Assets/**/[Ll]ogs/
+/Assets/**/[Ll]og.txt
+
+# Crash reports de Unity (runtime)
+/[Cc]rash[Rr]eport[Ii]nfo/
+/[Cc]rash[Rr]eport/
+
+# Accelerator / licencias locales
+/[Aa]ccelerator/[Ll]ogs/
+
+# =============================================
+# Unity — Plataformas (si se agregan builds específicos)
+# =============================================
+# iOS
+/*.apk
+/*.aab
+/*.unitypackage
+/*.app
+
+# Android
+[Aa]ndroid/AssetsPlugins/
+
+# =============================================
+# Visual Studio / IDE
+# =============================================
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Rider / ReSharper
+.settings/
+.solution/
+*.resharper
+
+# =============================================
+# Sistema operativo
+# =============================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# =============================================
+# Control de versiones de terceros
+# =============================================
+*.lfs
+LFS/
+
+# =============================================
+# Paquetes locales / cachés (no versionables)
+# =============================================
+/Packages/packages-lock.json.bak
+*.pidb.meta
+
+# =============================================
+# HERAMIENTAS DEL PROTOCOLO — respaldos generados
+# Los backups automáticos de scripts/ NO se versionan
+# =============================================
+/scripts/backups/
+
+# =============================================
+# Python (scripts de automatización)
+# =============================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# =============================================
+# EXCEPCIONES — Carpetas del proyecto que SÍ se versionan
+# =============================================
+!Logs/
+!Obsoletos/
+!DOCUMENTACION/
