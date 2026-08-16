@@ -41,7 +41,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 23 | Historias Secundarias | ⬜ Sin iniciar | 0/100 | Media | 3 | 22 | — | — | — |
 | 24 | Templos y Puzzles | 🟢 Disponible | 100/100 | Alta | 5 | 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 23, framework emisor→receptor, 15 familias, validador de arbitrariedad, Guía del Templo |
 | 25 | Ruinas | 🟢 Disponible | 100/100 | Media | 3 | 24 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 24, kit modular ≤40 piezas, 13 tipos, progresión 4 estados, activadores |
-| 26 | Templo Subterráneo | ⬜ Sin iniciar | 0/100 | Alta | 4 | 24, 25 | — | — | Templo de la Brisa |
+| 26 | Templo Subterráneo | 🟢 Disponible | 100/100 | Alta | 4 | 24, 25 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 25, metría voxel 4x4x4, 7 anillos + sello, 5 checkpoints atómicos, Templo de la Brisa |
 | 27 | Islas del Mundo | ⬜ Sin iniciar | 0/100 | Media | 4 | 28, 29 | — | — | — |
 | 28 | Viajes | ⬜ Sin iniciar | 0/100 | Media | 3 | 22, 27 | — | — | Gran Vapor |
 | 29 | Tiempo y Calendario | 🟢 Disponible | 104/104 | Alta | 3 | 07 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: GameClock servicio puro (API en plan-actual/03), calendario Aurora (día 24min, año 336d), eventos periódicos repetibles, regla cozy anti-frustración. Sin voxel/assets |
