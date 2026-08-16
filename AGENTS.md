@@ -34,7 +34,7 @@ Esta carpeta contiene la documentación original del proyecto. **No refleja el e
 
 ### DOCUMENTACION/ — Documentación por Componentes
 
-Cada componente agregado al sistema se documenta en una subcarpeta numerada cronológicamente. **Cada componente tiene DOS carpetas obligatorias:**
+Cada componente agregado al sistema se documenta en una subcarpeta que usa **el ID del módulo** como prefijo: `{ID-Módulo}-{Nombre}` (ej: `102-Bug-Tracking`). El ID se toma de `CHECKLIST-GLOBAL.md` (fuente de verdad). Si un módulo es nuevo y no existe en la tabla, se usa el **siguiente ID libre en orden** y se agrega a la tabla. **Cada componente tiene DOS carpetas obligatorias:**
 
 ```
 DOCUMENTACION/
@@ -45,7 +45,7 @@ DOCUMENTACION/
 ├── 4-DOCUMENTO-EJECUCION-ACTUAL.md
 ├── 5-FUTURAS-MEJORAS.md               ← Ideas y mejoras pendientes del usuario
 ├── 00-PLAN-INICIAL/                   ← Solo origen del proyecto (no modificar)
-├── 01-Nombre-Componente/
+├── {ID-Módulo}-Nombre-Componente/      ← Prefijo = ID del módulo según CHECKLIST-GLOBAL (ej: 102-Bug-Tracking)
 │   ├── plan-inicial/                  ← Documentación original del componente (NO MODIFICAR)
 │   │   ├── 01-Requerimientos.md
 │   │   ├── 02-Analisis.md
@@ -62,10 +62,10 @@ DOCUMENTACION/
 │       ├── 05-Checklist.md
 │       ├── 06-Plan-Testings.md
 │       └── 07-Resultados-Testings.md
-├── 02-Nombre-Componente/
+├── 30-Reloj-En-Tiempo-Real/           ← Ejemplo real: prefijo 30 = ID del módulo
 │   ├── plan-inicial/
 │   └── plan-actual/
-└── 03-Nombre-Componente/
+└── 102-Bug-Tracking/                  ← Ejemplo real: prefijo 102 = ID del módulo
     ├── plan-inicial/
     └── plan-actual/
 ```
@@ -258,8 +258,8 @@ Mensajes entre modelos/
 
 ## 11. Documentación de Nuevos Componentes (DOCUMENTACION)
 Al crear un nuevo componente o sistema del juego:
-1. Verificar el próximo número en `DOCUMENTACION/README.md`.
-2. Crear carpeta `DOCUMENTACION/{NN}-Nombre/`.
+1. **Tomar el ID del módulo de `CHECKLIST-GLOBAL.md`** (fuente de verdad). Si el módulo es nuevo y no existe en la tabla, registrar el siguiente ID libre en orden y agregar la fila.
+2. Crear carpeta `DOCUMENTACION/{ID-Módulo}-Nombre/`. ⚠️ **El prefijo SIEMPRE es el ID del módulo** (ej: `102-Bug-Tracking`, `29-Tiempo-Y-Calendario` **no** `30-Bug-Tracking` → el 30 es otro módulo). Queda prohibido usar numeración cronológica o por orden de creación.
 3. Crear la carpeta `plan-inicial/` dentro del componente.
 4. Crear los **5 archivos principales obligatorios** en `plan-inicial/`: `01-Requerimientos.md`, `02-Analisis.md`, `03-Diseno.md`, `04-Codigo.md`, `05-Checklist.md`.
    - **`05-Checklist.md` debe contener mínimo 100 ítems** (ver sección 3, "Regla del Checklist Mínimo").
