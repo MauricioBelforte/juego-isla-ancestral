@@ -1,4 +1,4 @@
-# Log 22 — Creación del Componente 103: Logging
+﻿# Log 21 — Creación del Componente 103: Logging
 
 **Modelo:** Devin
 **Plataforma:** Antigravity

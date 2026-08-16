@@ -1,4 +1,4 @@
-# Log 22 — Creación del Componente 32: Clima (delegable)
+﻿# Log 25 — Creación del Componente 32: Clima (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
