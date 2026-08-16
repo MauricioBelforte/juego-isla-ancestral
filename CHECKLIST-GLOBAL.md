@@ -81,7 +81,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 63 | Cargas y Streaming | 🟢 Disponible | 101/101 | Alta | 4 | 08, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos, progreso real por pesos, LRU con tope, precalentamiento en menú, streaming océano/subterráneo/islas. Requiere M08 + presupuestos M61 |
 | 64 | IA de NPC | 🟢 Disponible | 107/107 | Alta | 5 | 19, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, FSM con memoria de plan, 6 perfiles de rutina, simulación parcial por burbuja (≤60 plena), anti-atascos. Requiere M19 + presupuestos M61 |
 | 65 | Animales IA | 🟢 Disponible | 100/100 | Media | 3 | 36, 64 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 19/19 puntos sección 64, FSM 10 estados, manadas/bancos, migración estacional, presupuesto M61, cozy sin caza |
-| 66 | Anti-Softlock | ⬜ Sin iniciar | 0/100 | Alta | 3 | 22, 26 | — | — | — |
+| 66 | Anti-Softlock | 🟢 Disponible | 100/100 | Alta | 3 | 22, 26 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos sección 65, detector de invariantes, cofre de recuperación, checkpoints rotativos, IRecoverable |
 | 67 | Vehículos | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28 | — | — | — |
 | 68 | Transporte y Navegación | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28, 67 | — | — | — |
 | 69 | Fast Travel | ⬜ Sin iniciar | 0/100 | Baja | 1 | 28 | — | — | — |
