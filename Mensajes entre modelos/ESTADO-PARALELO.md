@@ -14,6 +14,7 @@
 |---|---|---|---|---|
 | Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | ⏸️ **EN PAUSA (2026-08-16 19:00)** — disponible para tareas puntuales del usuario | M31 ✅ terminado. Restan sin documentar (futuro): M32, M41-M44, M57 |
 | Documentación de módulos triviales (Tanda A + B) | SWE-1.6 | DEVIN | 🟢 Activo — CONTINÚA SOLO | Tanda A restante: 107, 110, 111, 122, 152, 88, 90, 91 (103 ya iniciado). Tanda B: 69, 72, 104, 118, 131, 149, 153 |
+| Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y log 23 |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
 
 ## Reglas de no-pisado
@@ -29,5 +30,11 @@
 |---|---|---|---|
 | 29 — Tiempo y Calendario | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (104/104), push `a3287a2` |
 | 30 — Reloj en Tiempo Real | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (104/104), push `2a37b98` |
-| 31 — Ciclo Día/Noche | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (130/130), push pendiente en este commit |
+| 31 — Ciclo Día/Noche | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (130/130), push `a89020c` |
 | 102 — Bug Tracking | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentado (121/121), carpeta renombrada a `102-Bug-Tracking` por coordinador |
+
+## Decisiones pendientes/descartadas
+
+| Fecha | Decisión |
+|---|---|
+| 2026-08-16 | ❌ **Delegación del M61 Rendimiento DESCARTADA**: el agente elegido (SWE-1.6/DEVIN, sesión de alta capacidad) consumió todos los créditos leyendo la documentación sin producir nada. El M61 queda **sin dueño por ahora**. Solo lo documentará Deepseek V4 Flash si retoma el rol de documentador (en pausa). Sin cronograma. |
