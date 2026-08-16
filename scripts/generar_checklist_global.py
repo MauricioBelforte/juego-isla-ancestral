@@ -56,11 +56,17 @@ COLUMNAS_MANUALES = {
 # Utilidades
 # ---------------------------------------------------------------------------
 def contar_checklist(archivo: Path):
-    """Cuenta [x], [ ] y [?] en un archivo de checklist."""
+    """Cuenta [x], [ ] y [?] en un archivo de checklist.
+
+    Solo cuenta ítems de lista (líneas que empiezan con ``- [x]``, ``- [ ]``
+    o ``- [?]``, ignorando sangría). Esto excluye la línea de leyenda de
+    marcadores (``> Marcadores: ...``) y resúmenes (``**Total:** ...``)
+    que antes inflaban el conteo.
+    """
     contenido = archivo.read_text(encoding="utf-8")
-    x = len(re.findall(r"\[x\]", contenido))
-    pendientes = len(re.findall(r"\[ \]", contenido))
-    dudas = len(re.findall(r"\[\?\]", contenido))
+    x = len(re.findall(r"(?m)^\s*- \[x\]", contenido))
+    pendientes = len(re.findall(r"(?m)^\s*- \[ \]", contenido))
+    dudas = len(re.findall(r"(?m)^\s*- \[\?\]", contenido))
     return x, pendientes, dudas
 
 
