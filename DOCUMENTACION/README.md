@@ -37,6 +37,7 @@ DOCUMENTACION/
 ├── 111-Codigo-De-Calidad/                ← Guía de estilo GDScript, interfaces, patrones, code reviews, deuda técnica (248/248)
 ├── 122-Crash-Reporting/                   ← Crash Reporting: Crashlytics/Sentry, metadata, contexto seguro, offline mode, dashboard, alertas (335/335)
 ├── 152-Principios-Innegociables/         ← Principios Innegociables: filosofía cozy, diseño de juego, técnicos, proceso de revisión, knowledge sharing (189/189)
+├── 88-Fuentes-Tipograficas/             ← Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (218/218)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
