@@ -19,6 +19,7 @@ DOCUMENTACION/
 ├── 03-Documentacion-Del-Proyecto/       ← M02: catálogo, convenciones, hitos, backlog (133/133)
 ├── 04-Game-Engine/                      ← M03: Godot 4.x adoptado + Voxel Tools (94/120)
 ├── 05-Lenguaje-Y-Programacion/          ← M04: GDScript, convenciones, patrones (102/102)
+├── 06-Control-De-Versiones/             ← M05: política git, semver, CHANGELOG (91/92)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -45,5 +46,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 03-Documentacion-Del-Proyecto | ✅ Creado — catálogo de 25 documentos, convenciones, hitos M1-M5, backlog; 5 docs generales *-ACTUAL.md creados |
 | 04-Game-Engine | ✅ Creado — decisión Godot 4.x + Voxel Tools, stack y config de proyecto base (94/120; pendientes = instalación/M1) |
 | 05-Lenguaje-Y-Programacion | ✅ Creado — GDScript adoptado, guía de convenciones y patrones transversales (102/102) |
+| 06-Control-De-Versiones | ✅ Creado — política git, ramas, semver, auto-revisión; CHANGELOG.md creado (91/92) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
