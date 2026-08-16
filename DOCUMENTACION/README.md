@@ -36,6 +36,7 @@ DOCUMENTACION/
 ├── 110-Debug-Menu/                       ← Debug Menu in-game: 5 paneles, teletransporte, tiempo, clima, objetos, visualizaciones, consola, diagnóstico (138/138)
 ├── 111-Codigo-De-Calidad/                ← Guía de estilo GDScript, interfaces, patrones, code reviews, deuda técnica (248/248)
 ├── 122-Crash-Reporting/                   ← Crash Reporting: Crashlytics/Sentry, metadata, contexto seguro, offline mode, dashboard, alertas (335/335)
+├── 152-Principios-Innegociables/         ← Principios Innegociables: filosofía cozy, diseño de juego, técnicos, proceso de revisión, knowledge sharing (189/189)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
