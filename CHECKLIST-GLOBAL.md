@@ -84,7 +84,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 66 | Anti-Softlock | 🟢 Disponible | 117/117 | Alta | 3 | 22, 26 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos sección 65, detector de invariantes, cofre de recuperación, checkpoints rotativos, IRecoverable |
 | 67 | Vehículos | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28 | — | — | — |
 | 68 | Transporte y Navegación | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28, 67 | — | — | — |
-| 69 | Fast Travel | 🟢 Disponible | 196/196 | Baja | 1 | 28 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1) - checklist 196 items verificado |
+| 69 | Fast Travel | 🟢 Disponible | 149/149 | Baja | 1 | 28 | — | 2026-08-17 | B1-Nemotron: 149 ítems checklist (sync plan-inicial → plan-actual) |
 | 70 | Interacciones | ⬜ Sin iniciar | 0/100 | Alta | 3 | 11, 13 | — | — | — |
 | 71 | Progresión | ⬜ Sin iniciar | 0/100 | Alta | 3 | 22, 38 | — | — | — |
 | 72 | Sistema de Logros | ⬜ Sin iniciar | 0/100 | Media | 2 | 71 | — | — | — |
@@ -119,7 +119,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 101 | QA General | ⬜ Sin iniciar | 0/100 | Alta | 3 | 110 | — | — | — |
 | 102 | Bug Tracking | 🟢 Disponible | 140/140 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
 | 103 | Logging | 🟢 Disponible | 157/157 | Media | 2 | 04 | — | 2026-08-16 17:50:00 | Documentación completa por Devin: Servicio Logger con niveles, categorías, rotación, sanitización de datos sensibles, exportación e integración con Bug Tracking/Debug Menu/Crash Reporting |
-| 104 | Analytics | 🟢 Disponible | 142/142 | Baja | 2 | 103 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1) - checklist 142 items verificado |
+| 104 | Analytics | 🟢 Disponible | 142/142 | Baja | 2 | 103 | — | 2026-08-17 | B1-Nemotron: 142 ítems checklist (sync plan-inicial → plan-actual) |
 | 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
 | 106 | Seguridad | ⬜ Sin iniciar | 0/100 | Baja | 2 | 77 | — | — | — |
 | 107 | Backups | 🟢 Disponible | 176/176 | Alta | 1 | 59 | — | 2026-08-16 18:50:00 | Documentación completa por Devin: Estrategia 3-2-1 (GitHub + Cloud + Disco Externo), automatización con GitHub Actions y Task Scheduler, verificación de integridad SHA-256, política de retención y plan de recuperación de desastres |
@@ -133,7 +133,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 115 | Hardware | ⬜ Sin iniciar | 0/100 | Media | 2 | 96 | — | — | — |
 | 116 | Instalador | ⬜ Sin iniciar | 0/100 | Baja | 1 | 116 | — | — | — |
 | 117 | Build System | ⬜ Sin iniciar | 0/100 | Media | 3 | 116 | — | — | — |
-| 118 | CI/CD | 🟢 Disponible | 96/96 | Baja | 2 | 117 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1) - checklist 96 items verificado |
+| 118 | CI/CD | 🟢 Disponible | 142/142 | Baja | 2 | 117 | — | 2026-08-17 | B1-Nemotron: 142 ítems checklist (sync plan-inicial → plan-actual) |
 | 119 | Actualizaciones | ⬜ Sin iniciar | 0/100 | Media | 2 | 117, 59 | — | — | — |
 | 120 | DLC y Expansiones | ⬜ Sin iniciar | 0/100 | Baja | 2 | 95, 142 | — | — | — |
 | 121 | Soporte Post-Lanzamiento | ⬜ Sin iniciar | 0/100 | Baja | 2 | 142 | — | — | — |
