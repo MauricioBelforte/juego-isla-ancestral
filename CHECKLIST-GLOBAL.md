@@ -23,7 +23,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 05 | Lenguaje y Programación | 🟢 Disponible | 102/102 | Alta | 3 | 04 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: GDScript adoptado, convenciones, patrones transversales (EventBus, GameClock, Logger), guía anti-patterns |
 | 06 | Control de Versiones | 🟢 Disponible | 91/92 | Media | 1 | 01 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: ramas, semver, auto-revisión, CHANGELOG.md creado. Pendiente: protección rama (Publicación) |
 | 07 | Arquitectura General | 🟢 Disponible | 102/102 | Alta | 5 | 04 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: Service Locator, capas unidireccionales, EventBus por dominios, GameState particionado, contrato de integración. Implementación → M1 |
-| 08 | Mundo Voxel | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07 | — | — | Mayor riesgo técnico del proyecto |
+| 08 | Mundo Voxel | 🟢 Disponible | 104/104 | Alta | 5 | 07 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: voxel 1m, chunks 16³, catálogo ~30 bloques, reglas de validación, diffs por chunk, Voxel Tools como base. Validación física → M1/M61 |
 | 09 | Terreno y Geografía | ⬜ Sin iniciar | 0/100 | Alta | 4 | 08 | — | — | — |
 | 10 | Generación del Mundo | ⬜ Sin iniciar | 0/100 | Alta | 5 | 08 | — | — | — |
 | 11 | Personaje del Jugador | ⬜ Sin iniciar | 0/100 | Alta | 3 | 07 | — | — | — |
