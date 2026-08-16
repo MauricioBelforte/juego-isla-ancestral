@@ -59,7 +59,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 41 | Música | 🟢 Disponible | 110/110 | Media | 4 | — | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 51/51 puntos, matriz de capas (base+tiempo+evento) para 12×4×3 contextos, leitmotifs, volumetría LUFS -16, presupuesto ≈90 archivos. Composición → assets |
 | 42 | Sonido Ambiental | 🟢 Disponible | 109/109 | Media | 3 | 41 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, mapa banco→bioma (13+1), capas hora/clima que suman, ≤11 buses, ≤-18 LUFS. Samples → compositor |
 | 43 | Efectos de Sonido | 🟢 Disponible | 96/96 | Media | 3 | 41 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, pool 24 voces con prioridades, familia tonal con M41, 6 superficies x4 variaciones |
-| 44 | ASMR y Feedback | ⬜ Sin iniciar | 0/100 | Media | 3 | 43 | — | — | — |
+| 44 | ASMR y Feedback | 🟢 Disponible | 113/113 | Media | 3 | 43 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 17/17 puntos, recetas de capas, sincronía keyframes M34, blacklist anti-agresión (True Peak/buzz), precedencia contextual fija |
 | 45 | Arte 3D | ⬜ Sin iniciar | 0/100 | Alta | 5 | — | — | — | — |
 | 46 | Arte 2D | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 47 | Texturas y Materiales | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |

@@ -34,6 +34,7 @@ DOCUMENTACION/
 ├── 41-Musica/                           ← DELEGABLE: matriz de capas, leitmotifs (110/110)
 ├── 42-Sonido-Ambiental/                 ← DELEGABLE: banco por bioma, ≤11 buses (109/109)
 ├── 43-Efectos-De-Sonido/                ← DELEGABLE: pool 24 voces, familia tonal (96/96)
+├── 44-ASMR-Y-Feedback/                  ← DELEGABLE: recetas de capas, blacklist cozy (113/113)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -85,6 +86,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 41-Musica | ✅ Creado — DELEGABLE: 51 puntos, matriz capas, leitmotifs, LUFS -16 (110/110) |
 | 42-Sonido-Ambiental | ✅ Creado — DELEGABLE: banco por bioma, capas hora/clima (109/109) |
 | 43-Efectos-De-Sonido | ✅ Creado — DELEGABLE: pool 24 voces, familia tonal (96/96) |
+| 44-ASMR-Y-Feedback | ✅ Creado — DELEGABLE: recetas de capas, blacklist cozy (113/113) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
