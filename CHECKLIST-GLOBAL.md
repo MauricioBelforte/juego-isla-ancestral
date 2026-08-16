@@ -27,7 +27,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 09 | Terreno y Geografía | 🟢 Disponible | 104/104 | Alta | 4 | 08 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: 25 puntos resueltos, 13 biomas, recetas de formaciones, mapa geográfico de Aurora con 8 POI, reglas anti-softlock. Calibración visual → M1 |
 | 10 | Generación del Mundo | 🟢 Disponible | 104/104 | Alta | 5 | 08 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: pipeline de 8 capas, PRNG por contexto, semilla dev, regen 80/0, estructuras ancladas. Implementación → M1/M61 |
 | 11 | Personaje del Jugador | 🟢 Disponible | 102/102 | Alta | 3 | 07 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: FSM 10 estados, hitbox 0.6x1.8, stamina informativa, interacción F, esporas de luz. Implementación → M1/M29/M65 |
-| 12 | Cámara | ⬜ Sin iniciar | 0/100 | Alta | 2 | 11 | — | — | — |
+| 12 | Cámara | 🟢 Disponible | 100/100 | Alta | 2 | 11 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: 5 modos de cámara, spring-arm con colisión, minimapa sin render, anti-mareo. Implementación → M1 |
 | 13 | Herramientas | ⬜ Sin iniciar | 0/100 | Alta | 4 | 11 | — | — | — |
 | 14 | Inventario | ⬜ Sin iniciar | 0/100 | Alta | 3 | 11 | — | — | — |
 | 15 | Recursos | ⬜ Sin iniciar | 0/100 | Alta | 3 | 14 | — | — | — |
