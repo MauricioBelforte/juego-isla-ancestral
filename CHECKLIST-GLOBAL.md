@@ -46,7 +46,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 28 | Viajes | ⬜ Sin iniciar | 0/100 | Media | 3 | 22, 27 | — | — | Gran Vapor |
 | 29 | Tiempo y Calendario | 🟢 Disponible | 104/104 | Alta | 3 | 07 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: GameClock servicio puro (API en plan-actual/03), calendario Aurora (día 24min, año 336d), eventos periódicos repetibles, regla cozy anti-frustración. Sin voxel/assets |
 | 30 | Reloj en Tiempo Real | 🟢 Disponible | 104/104 | Media | 3 | 29 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: decisión NO tiempo real (explotes/offline), regla de oro anti-reloj-SO, widget display puro, 10 pruebas de límites de fecha. Implementación tras M29 |
-| 31 | Ciclo Día/Noche | ⬜ Sin iniciar | 0/100 | Media | 3 | 29 | — | — | — |
+| 31 | Ciclo Día/Noche | 🟢 Disponible | 130/130 | Media | 3 | 29 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, 5 franjas (ALBA/DÍA/ATARDECER/NOCHE/PROFUNDA), anti-oscuridad (piso 0.15 + linterna + opción M58), eventos nocturnos opcionales. Implementación tras M29/M49 |
 | 32 | Clima | ⬜ Sin iniciar | 0/100 | Media | 3 | 29, 31 | — | — | — |
 | 33 | Agricultura | ⬜ Sin iniciar | 0/100 | Media | 3 | 17, 29 | — | — | — |
 | 34 | Pesca | ⬜ Sin iniciar | 0/100 | Media | 3 | 32 | — | — | — |
@@ -118,7 +118,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 100 | Community Management | ⬜ Sin iniciar | 0/100 | Baja | 2 | 99 | — | — | — |
 | 101 | QA General | ⬜ Sin iniciar | 0/100 | Alta | 3 | 110 | — | — | — |
 | 102 | Bug Tracking | 🟢 Disponible | 121/121 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
-| 103 | Logging | ⬜ Sin iniciar | 0/100 | Media | 2 | 04 | — | — | — |
+| 103 | Logging | � Disponible | 134/134 | Media | 2 | 04 | — | 2026-08-16 17:50:00 | Documentación completa por Devin: Servicio Logger con niveles, categorías, rotación, sanitización de datos sensibles, exportación e integración con Bug Tracking/Debug Menu/Crash Reporting |
 | 104 | Analytics | ⬜ Sin iniciar | 0/100 | Baja | 2 | 103 | — | — | — |
 | 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
 | 106 | Seguridad | ⬜ Sin iniciar | 0/100 | Baja | 2 | 77 | — | — | — |
