@@ -34,6 +34,7 @@ DOCUMENTACION/
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
 ├── 110-Debug-Menu/                       ← Debug Menu in-game: 5 paneles, teletransporte, tiempo, clima, objetos, visualizaciones, consola, diagnóstico (138/138)
+├── 111-Codigo-De-Calidad/                ← Guía de estilo GDScript, interfaces, patrones, code reviews, deuda técnica (248/248)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
