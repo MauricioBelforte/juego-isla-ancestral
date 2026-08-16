@@ -39,6 +39,7 @@ DOCUMENTACION/
 ├── 122-Crash-Reporting/                   ← Crash Reporting: Crashlytics/Sentry, metadata, contexto seguro, offline mode, dashboard, alertas (335/335)
 ├── 152-Principios-Innegociables/         ← Principios Innegociables: filosofía cozy, diseño de juego, técnicos, proceso de revisión, knowledge sharing (189/189)
 ├── 88-Fuentes-Tipograficas/             ← Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (218/218)
+├── 90-Configuracion-Grafica/            ← Configuración Gráfica: 23 opciones gráficas, 4 presets, detección automática de hardware, menú de settings, integración con M58/M61/M88 (248/248)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -80,3 +81,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
+|| 88-Fuentes-Tipograficas | ? Creado por DEVIN � Fuentes Tipogr�ficas: Nunito + Fredoka One, jerarqu�a visual, estilos UI, optimizaci�n, accesibilidad, localizaci�n (218/218) |
+
+|| 90-Configuracion-Grafica | ? Creado por DEVIN � Configuraci�n Gr�fica: 23 opciones gr�ficas, 4 presets, detecci�n autom�tica de hardware, men� de settings, integraci�n con M58/M61/M88 (248/248) |
