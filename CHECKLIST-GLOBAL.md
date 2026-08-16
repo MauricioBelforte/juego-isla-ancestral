@@ -37,7 +37,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 19 | NPC y Vecinos | ⬜ Sin iniciar | 0/100 | Alta | 4 | 11, 25 | — | — | — |
 | 20 | Sistema de Amistad | ⬜ Sin iniciar | 0/100 | Media | 3 | 19 | — | — | — |
 | 21 | Diálogos | ⬜ Sin iniciar | 0/100 | Alta | 4 | 19 | — | — | — |
-| 22 | Historia Principal | ⬜ Sin iniciar | 0/100 | Alta | 4 | 21, 28 | — | — | — |
+| 22 | Historia Principal | 🟢 Disponible | 100/100 | Alta | 4 | 21, 28 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 21, 7 capítulos, 5 finales, grafo validado, 7 sellos como gating |
 | 23 | Historias Secundarias | ⬜ Sin iniciar | 0/100 | Media | 3 | 22 | — | — | — |
 | 24 | Templos y Puzzles | 🟢 Disponible | 100/100 | Alta | 5 | 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 23, framework emisor→receptor, 15 familias, validador de arbitrariedad, Guía del Templo |
 | 25 | Ruinas | 🟢 Disponible | 100/100 | Media | 3 | 24 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 24, kit modular ≤40 piezas, 13 tipos, progresión 4 estados, activadores |
