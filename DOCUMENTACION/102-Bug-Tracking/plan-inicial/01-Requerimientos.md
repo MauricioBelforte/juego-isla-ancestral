@@ -5,7 +5,7 @@
 
 ## ID del Módulo
 - **Código:** M102 (plan maestro: sección 101 — Bug Tracking)
-- **Carpeta:** `DOCUMENTACION/30-Bug-Tracking/`
+- **Carpeta:** `DOCUMENTACION/102-Bug-Tracking/`
 - **Dependencias:** M101 (QA General). Dependen de este: M110 (Debug Menu), M112 (Testing Automático)
 - **Carácter:** Módulo de infraestructura de desarrollo (sin impacto en gameplay)
 

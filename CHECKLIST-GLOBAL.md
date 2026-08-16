@@ -117,7 +117,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 99 | Marketing | ⬜ Sin iniciar | 0/100 | Media | 3 | 97 | — | — | — |
 | 100 | Community Management | ⬜ Sin iniciar | 0/100 | Baja | 2 | 99 | — | — | — |
 | 101 | QA General | ⬜ Sin iniciar | 0/100 | Alta | 3 | 110 | — | — | — |
-| 102 | Bug Tracking | � Disponible | 121/121 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
+| 102 | Bug Tracking | 🟢 Disponible | 121/121 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
 | 103 | Logging | ⬜ Sin iniciar | 0/100 | Media | 2 | 04 | — | — | — |
 | 104 | Analytics | ⬜ Sin iniciar | 0/100 | Baja | 2 | 103 | — | — | — |
 | 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
