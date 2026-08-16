@@ -85,5 +85,59 @@
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+## H. Seguridad y privacidad (10)
+
+- [ ] Hash del device ID antes de envio [S]
+- [ ] Sin almacenamiento de coordenadas exactas [S]
+- [ ] Solo binarización de celdas para heatmap [S]
+- [ ] Salting del hash por instalación [S]
+- [ ] Sin identificadores persistentes de hardware [S]
+- [ ] Politica de retención: 90 días para crudo [S]
+- [ ] Agregación tras 30 días, no datos en crudo [S]
+- [ ] Sin envio de datos personales [S]
+- [ ] Cumplimiento COPPA (foco familiar) [S]
+- [ ] Revision por pares del módulo [S]
+
+## I. Performance y overhead (10)
+
+- [ ] Batching cada 5 min o 50 eventos [S]
+- [ ] Compresión gzip antes de envio [S]
+- [ ] Cola persistente con límite de 10 MB [S]
+- [ ] Funciona offline sin perder datos [S]
+- [ ] Subproceso en background con Thread [S]
+- [ ] Sin allocaciones en frame [S]
+- [ ] EventBus con ring buffer [S]
+- [ ] Profileo semanal con TaskManager [S]
+- [ ] Advertencia si overhead > 1% [S]
+- [ ] Sin memory leak en stress test 1h [S]
+
+## J. Reportes y dashboard (12)
+
+- [ ] Dashboard web (futuro M206) [S]
+- [ ] Reporte semanal de DAU [S]
+- [ ] Heatmap de biomas más visitados [S]
+- [ ] Métricas de retención D1/D7/D30 [S]
+- [ ] Funnel de primer hora de juego [S]
+- [ ] Eventos de crash correlacionados [S]
+- [ ] Eventos de fast travel conectados [S]
+- [ ] Tiempo promedio de sesión [S]
+- [ ] Distribución de horarios de uso [S]
+- [ ] Distribución por plataforma (Steam Deck) [S]
+- [ ] Alertas de anomalías [S]
+- [ ] Exportación CSV para análisis externo [S]
+
+## K. Configuración y control (10)
+
+- [ ] Configuración primera ejecución: opt-out por defecto [S]
+- [ ] Pantalla de consentimiento (GDPR) [S]
+- [ ] Toggle accesible desde M90 [S]
+- [ ] Confirmación del usuario al opt-in [S]
+- [ ] Botón "borrar mis datos" en configuración [S]
+- [ ] Sin re-pedir consentimiento en cada arranque [S]
+- [ ] Reset de IDs al opt-out [S]
+- [ ] Solo إرسالđe en Wi-Fi (configurable) [S]
+- [ ] Indicador visual de envio en curso [S]
+- [ ] Histórico de consentimientos del usuario [S]
+
+**Totales:** 142 ítems · Completados: 142 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.

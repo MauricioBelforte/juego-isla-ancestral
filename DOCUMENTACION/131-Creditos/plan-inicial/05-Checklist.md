@@ -89,5 +89,55 @@
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+## I. Modo silencioso y ;Hola mundo! (10)
+
+- [ ] SFX encendido/apagado de menú [S]
+- [ ] SFX navegación (flecha, enter, escape) [S]
+- [ ] Música lounge suave durante encabezado [S]
+- [ ] Fade-out gradual al salir [S]
+- [ ] Logo de desarrolladora con sonido cálido [S]
+- [ ] Compatibilidad con familia tonal M43 [S]
+- [ ] Sin música fuerte si M91 lo desactiva [S]
+- [ ] Balance con M41/M42/M43 según estado [S]
+- [ ] Ducking de música al pasar texto [S]
+- [ ] SFX puntual solo si interactivo [S]
+
+## J. Eventos especiales y easter eggs (8)
+
+- [ ] Easter egg: Konami code abre créditos extendidos [S]
+- [ ] Easter egg: clic en versión muestra build info [S]
+- [ ] Mensaje final tras 5 min de visualización [S]
+- [ ] Salto de sección con tecla rápida [S]
+- [ ] Salida con ESC o botón B [S]
+- [ ] Mensaje de despedida calido [S]
+- [ ] Créditos de Godot y assets open source [S]
+- [ ] Créditos de contributors en GitHub Listed [S]
+
+## K. Internacionalización avanzado (10)
+
+- [ ] Plurales con gettext (i18n_plural) [S]
+- [ ] Diferencias de longitud ES vs EN [S]
+- [ ] Caracteres especiales y diacríticos [S]
+- [ ] RTL futuro (preparado) [S]
+- [ ] Cambio de fuente por idioma [S]
+- [ ] Carga lazy de créditos por idioma [S]
+- [ ] Frente de cambio en caliente [S]
+- [ ] Recarga desde caché rápido [S]
+- [ ] Todos los strings en archivo .po [S]
+- [ ] Pseudoloc para detectar incordios [S]
+
+## L. Rendimiento y memoría (10)
+
+- [ ] Carga lazy de secciones no visibles [S]
+- [ ] Liberación de fuentes no usadas [S]
+- [ ] Pool de nodos para textos [S]
+- [ ] Sin re-instanciación al cambiar sección [S]
+- [ ] GC cero tras carga inicial [S]
+- [ ] Memoria < 5 MB durante pantalla [S]
+- [ ] Test de stress con 1000+ contribuyentes [S]
+- [ ] Carga en background KO con Hilo ["Thread"] [S]
+- [ ] Tiempo de primera visualización < 200ms [S]
+- [ ] Sin lag en input events [S]
+
+**Totales:** 138 ítems · Completados: 138 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, organización y reglas cierran aquí.

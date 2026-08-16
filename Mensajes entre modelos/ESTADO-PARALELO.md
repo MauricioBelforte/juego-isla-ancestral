@@ -14,7 +14,8 @@
 |---|---|---|---|---|
 | Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 **REANUDADO (2026-08-16 20:15)** — documentando de nuevo | M32 ✅ terminado. Siguientes: M41-M44, M57 (en orden) |
 | Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🔵 En curso — 2026-08-16 17:35 | M153 Objetivo Final → M149 Nomenclatura → M72 Logros (orden fijo) |
-| Documentación de módulos triviales (Tanda A + B1) | SWE-1.6 | DEVIN | 🟢 Activo — CONTINÚA SOLO | Tanda A restante: 107, 110, 111, 122, 152, 88, 90, 91 (103 ya iniciado). Tanda B1: 69, 104, 118, 131 — NO tocar |
+| Documentación Sub-tanda B1 (cozy/polish) | Claude Sonnet 4.5 | Cline (VS Code) | 🔵 En curso — 2026-08-16 18:00 | Tanda B1: M69 Fast Travel → M131 Créditos → M104 Analytics → M118 CI/CD (orden fijo) |
+| Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | 🟢 Disponible | Tanda A restante: 91 (90 ya pusheado). Tanda B1 (69, 104, 118, 131) reasignada a Claude Sonnet 4.5 — NO tocar |
 | Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y su log (número 36, el siguiente de la secuencia al crearlo) |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
 

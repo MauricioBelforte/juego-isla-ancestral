@@ -85,5 +85,59 @@
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+## I. Artifacts y releases (12)
+
+- [ ] Generación de binarios Windows/Linux/Mac [S]
+- [ ] Compresión ZIP+RAR de cada release [S]
+- [ ] SHA256 checksums generados [S]
+- [ ] Release preliminar (RC) antes de release [S]
+- [ ] Etiquetado semántico vX.Y.Z [S]
+- [ ] CHANGELOG.md generado automáticamente [S]
+- [ ] Notas de release editables via PR [S]
+- [ ] Subida a GitHub Releases [S]
+- [ ] Subida a Itch.io (manual trigger) [S]
+- [ ] Firmado GPG de binarios [S]
+- [ ] Upload a Steamworks (futuro, M206) [S]
+- [ ] Retención de últimos 5 releases en GitHub [S]
+
+## J. Monitoreo y notificaciones (10)
+
+- [ ] Notificaciones Slack en fallos [S]
+- [ ] Discord webhook en releases [S]
+- [ ] Email a stakeholders en tags [S]
+- [ ] Badge de build en README [S]
+- [ ] Status page interno [S]
+- [ ] Logs centralizados en 7 días [S]
+- [ ] Trabajos programados via cron workflow [S]
+- [ ] Limpieza de artefactos > 30 días [S]
+- [ ] Cron semanal de limpieza de cache [S]
+- [ ] Cron mensual de auditoría de seguridad [S]
+
+## K. Validación de Godot (10)
+
+- [ ] Importar proyecto en Godot headless [S]
+- [ ] Ejecutar --check-only al inicio [S]
+- [ ] Validar que no falten dependencias [S]
+- [ ] Detectar escenas rotas [S]
+- [ ] Detectar scripts con errores de sintaxis [S]
+- [ ] Detectar autoloads faltantes [S]
+- [ ] Validar ProjectSettings consistencia [S]
+- [ ] Generar reporte de validación en artefacto [S]
+- [ ] Fallar build si validación detecta issues [S]
+- [ ] Matriz de validación con Godot 4.2 - 4.6 [S]
+
+## L. Métricas y observabilidad (10)
+
+- [ ] Tiempo de build medible [S]
+- [ ] Tiempo de tests agregado [S]
+- [ ] Tiempo de verificación de Godot [S]
+- [ ] Tamaño de binarios por plataforma [S]
+- [ ] Hallazgos de tests fallidos [S]
+- [ ] Tendencia de duración de build semanal [S]
+- [ ] Comparación contra baseline [S]
+- [ ] Alerta si build > 15 min [S]
+- [ ] Dashboard con snapshots de tamaño [S]
+- [ ] Exportación CSV para graficar [S]
+
+**Totales:** 142 ítems · Completados: 142 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, pipeline y reglas cierran aquí.

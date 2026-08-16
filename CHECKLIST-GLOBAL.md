@@ -72,7 +72,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 54 | Mapa | ⬜ Sin iniciar | 0/100 | Media | 3 | 53 | — | — | — |
 | 55 | Diario del Jugador | ⬜ Sin iniciar | 0/100 | Baja | 3 | 53 | — | — | — |
 | 56 | Fotografía | ⬜ Sin iniciar | 0/100 | Baja | 2 | 53 | — | — | — |
-| 57 | Interfaz de Control | ⬜ Sin iniciar | 0/100 | Alta | 2 | 04 | — | — | — |
+| 57 | Interfaz de Control | 🟢 Disponible | 119/119 | Alta | 2 | 04 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, capa de acciones única, remapeo con conflictos, prompts dinámicos por dispositivo, persistencia atómica, Steam Deck |
 | 58 | Accesibilidad | ⬜ Sin iniciar | 0/100 | Alta | 3 | 53, 57 | — | — | — |
 | 59 | Guardado | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07, 14 | — | — | GameState versionado |
 | 60 | Datos y Serialización | ⬜ Sin iniciar | 0/100 | Alta | 3 | 59 | — | — | — |

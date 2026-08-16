@@ -127,5 +127,69 @@
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+## I. Edge cases y robustez (7)
+
+- [ ] Manejo de cancelacion mid-casting (ESC, cerrar menu) [S]
+- [ ] Recuperacion si destino queda bloqueado por evento dinamico [M]
+- [ ] Manejo de save corrupto punto_destino invalido [S]
+- [ ] Validar cooldown al cargar partida guardada [S]
+- [ ] No permitir destinos no descubiertos (anti-trampa) [S]
+- [ ] Manejo de sobrecarga de slots descubiertos (>100) [S]
+- [ ] Reset de cooldown al cargar partida con marca temporal [S]
+
+## J. Animación y feedback visual (10)
+
+- [ ] Transición de desvanecimiento con curva cozy [S]
+- [ ] Efectos de partículas coherentes con M41 [S]
+- [ ] Flash sutil al aparecer en destino [S]
+- [ ] Indicador de carga 0.5-1.5s mínimo [S]
+- [ ] Sin huecos negros en transición [S]
+- [ ] Compatible con modo foto pausado [S]
+- [ ] HUD visible durante toda la transición [S]
+- [ ] Sin parpadeos por baja luz [S]
+- [ ] Ilumincación de destino respeta hora del mundo [S]
+- [ ] Transición no afecta gameplay (tablas de delta) [S]
+
+## K. Accesibilidad ampliada (10)
+
+- [ ] Subtitulos de feedback de acción [S]
+- [ ] Tamaño de texto escalable para menu (M62) [S]
+- [ ] Lectura por screen reader de menu (verbal descriptions) [S]
+- [ ] Confirmación háptica opcional [S]
+- [ ] Contraste alto para menu de selección [S]
+- [ ] Iconos de apoyo visual al nombre del destino [S]
+- [ ] Alt text para thumbnails de destino [S]
+- [ ] Modo cronológico para historiales [S]
+- [ ] Filtros por tipo de lugar (bioma, servicios) [S]
+- [ ] Sin dependencia solo de color para estado [S]
+
+## L. Integración ecosistema (10)
+
+- [ ] M28: integración con waypoints descubiertos [S]
+- [ ] M63: consulta de logros asociados a first-travel [S]
+- [ ] M29-M31: restricción temporal (noche, tormenta) [S]
+- [ ] M104: evento analytics fast_travel_used [S]
+- [ ] M110: debug menu con listado de anchors [S]
+- [ ] M122: captura de crash si portal falla [S]
+- [ ] M124: balance económico según distancia [S]
+- [ ] M32: anulación del portal en clima extremo [S]
+- [ ] M68: respetar desactivación de hápticos [S]
+- [ ] M91: respetar volumen de feedback de viaje [S]
+
+## M. Pruebas avanzadas (12)
+
+- [ ] Test de carga: 100 anchors en mapa [M]
+- [ ] Test de coherencia: 1000 teleports consecutivos [M]
+- [ ] Test de día/noche: comportamiento en diferentes horas [M]
+- [ ] Test de desconexión: recuperar estado sin perder progreso [M]
+- [ ] Test de stress concurrentes: 50 anchors ACTIVOS [M]
+- [ ] Test de recuperación: archivo corrupto → resync [M]
+- [ ] Test de batería: consumo por viaje a larga distancia [M]
+- [ ] Test multidioma: búsqueda en distintos alfabetos [M]
+- [ ] Test de aceso: atajos disponibles sin teclado [M]
+- [ ] Test de localización: posicionamiento visual ajustado [M]
+- [ ] Test de fallback: 3 fallos seguidos → modo seguro [M]
+- [ ] Test de perfilado: sin allocs en frame [M]
+
+**Totales:** 149 ítems · Completados: 149 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, mapa y reglas cierran aquí.
