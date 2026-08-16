@@ -44,7 +44,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 26 | Templo Subterráneo | ⬜ Sin iniciar | 0/100 | Alta | 4 | 24, 25 | — | — | Templo de la Brisa |
 | 27 | Islas del Mundo | ⬜ Sin iniciar | 0/100 | Media | 4 | 28, 29 | — | — | — |
 | 28 | Viajes | ⬜ Sin iniciar | 0/100 | Media | 3 | 22, 27 | — | — | Gran Vapor |
-| 29 | Tiempo y Calendario | ⬜ Sin iniciar | 0/100 | Alta | 3 | 07 | — | — | — |
+| 29 | Tiempo y Calendario | 🟢 Disponible | 104/104 | Alta | 3 | 07 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: GameClock servicio puro (API en plan-actual/03), calendario Aurora (día 24min, año 336d), eventos periódicos repetibles, regla cozy anti-frustración. Sin voxel/assets |
 | 30 | Reloj en Tiempo Real | ⬜ Sin iniciar | 0/100 | Media | 3 | 29 | — | — | — |
 | 31 | Ciclo Día/Noche | ⬜ Sin iniciar | 0/100 | Media | 3 | 29 | — | — | — |
 | 32 | Clima | ⬜ Sin iniciar | 0/100 | Media | 3 | 29, 31 | — | — | — |
