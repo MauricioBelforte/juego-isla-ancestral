@@ -18,6 +18,7 @@ DOCUMENTACION/
 ├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)
 ├── 03-Documentacion-Del-Proyecto/       ← M02: catálogo, convenciones, hitos, backlog (133/133)
 ├── 04-Game-Engine/                      ← M03: Godot 4.x adoptado + Voxel Tools (94/120)
+├── 05-Lenguaje-Y-Programacion/          ← M04: GDScript, convenciones, patrones (102/102)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -43,5 +44,6 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 02-Vision-Y-Concepto | ✅ Creado — 5 archivos, checklist de 172 ítems (162 completados; 10 pendientes con dueño en M02/QA/Publicación) |
 | 03-Documentacion-Del-Proyecto | ✅ Creado — catálogo de 25 documentos, convenciones, hitos M1-M5, backlog; 5 docs generales *-ACTUAL.md creados |
 | 04-Game-Engine | ✅ Creado — decisión Godot 4.x + Voxel Tools, stack y config de proyecto base (94/120; pendientes = instalación/M1) |
+| 05-Lenguaje-Y-Programacion | ✅ Creado — GDScript adoptado, guía de convenciones y patrones transversales (102/102) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
