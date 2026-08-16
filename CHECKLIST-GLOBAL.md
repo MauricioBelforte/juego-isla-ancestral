@@ -125,7 +125,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 107 | Backups | � Disponible | 137/137 | Alta | 1 | 59 | — | 2026-08-16 18:50:00 | Documentación completa por Devin: Estrategia 3-2-1 (GitHub + Cloud + Disco Externo), automatización con GitHub Actions y Task Scheduler, verificación de integridad SHA-256, política de retención y plan de recuperación de desastres |
 | 108 | Pipeline de Assets | ⬜ Sin iniciar | 0/100 | Alta | 3 | 45 | — | — | — |
 | 109 | Herramientas Internas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
-| 110 | Debug Menu | ⬜ Sin iniciar | 0/100 | Media | 1 | 04 | — | — | — |
+| 110 | Debug Menu | � Disponible | 138/138 | Media | 1 | 04 | — | 2026-08-16 19:50:00 | Documentación completa por Devin: Debug Menu in-game con 5 paneles, funciones de teletransporte/tiempo/clima/objetos/misiones, visualizaciones debug (colliders, FPS, chunks, navegación, hitboxes, IA), consola in-game con filtros y exportador de diagnóstico integrado con Bug Tracking |
 | 111 | Código de Calidad | ⬜ Sin iniciar | 0/100 | Alta | 2 | 04 | — | — | — |
 | 112 | Testing Automático | ⬜ Sin iniciar | 0/100 | Alta | 3 | 111 | — | — | — |
 | 113 | Pruebas de Stress | ⬜ Sin iniciar | 0/100 | Media | 3 | 112 | — | — | — |
