@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-16 19:00:00
+> **Última actualización:** 2026-08-17 01:00:00
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -12,16 +12,16 @@
 
 | Agente | Modelo | Plataforma | Estado | Tareas |
 |---|---|---|---|---|
-| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 **REANUDADO (2026-08-16 20:15)** — documentando de nuevo | M32 ✅ terminado. Siguientes: M41-M44, M57 (en orden) |
+| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64. Siguientes: módulos Alta sin dueño (45, 24, 26...) |
 | Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🔵 En curso — 2026-08-16 17:35 | M153 Objetivo Final → M149 Nomenclatura → M72 Logros (orden fijo) |
-| Documentación Sub-tanda B1 (cozy/polish) | Claude Sonnet 4.5 | Cline (VS Code) | 🔵 En curso — 2026-08-16 18:00 | Tanda B1: M69 Fast Travel → M131 Créditos → M104 Analytics → M118 CI/CD (orden fijo) |
+| Documentación Sub-tanda B1 (69, 104, 118, 131) | Nemotron 3.5 Lightning | Cline | 🟢 En curso | 4 carpetas creadas (firmaron como Deepseek/OpenCode por error; corregido por el coordinador el 2026-08-16). ⚠️ Firmar siempre como: **Modelo: Nemotron 3.5 Lightning / Plataforma: Cline** |
 | Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | 🟢 Disponible | Tanda A restante: 91 (90 ya pusheado). Tanda B1 (69, 104, 118, 131) reasignada a Claude Sonnet 4.5 — NO tocar |
 | Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y su log (número 36, el siguiente de la secuencia al crearlo) |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
 
 ## Reglas de no-pisado
 
-- **Zona de Deepseek V4 Flash (OpenCode):** módulos 32, 41, 42, 43, 44, 57 (en pausa; no tocar mientras esté parado).
+- **Zona de Deepseek V4 Flash (OpenCode):** 32, 41, 42, 43, 44, 57 (✅ completados) + 63, 64 (✅ completados). En curso: ninguno.
 - **Zona de SWE-1.6 (DEVIN):** módulos 103, 107, 110, 111, 122, 152, 88, 90, 91, 69, 72, 104, 118, 131, 149, 153 (carpeta `{ID}-Nombre`). No tocar.
 - **Zona común:** `CHECKLIST-GLOBAL.md` (solo actualizar filas propias), `Logs/ULTIMO_NUMERO.txt` (secuencial, leer y avanzar), `Logs/` (solo crear), `DOCUMENTACION/README.md` (solo agregar entradas propias).
 - **Prohibido para ambos:** `00-PLAN-INICIAL/`, `plan-inicial/` de módulos ajenos, archivos `*-ACTUAL.md` de la raíz.
@@ -37,6 +37,15 @@
 | 102 — Bug Tracking | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentado (121/121), carpeta renombrada a `102-Bug-Tracking` por coordinador |
 | 107, 110, 111, 122, 152, 88 — Tanda A | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentados y pusheados por Devin (137/138/248/335/189/218 ítems) |
 | 90 — Configuración Gráfica | SWE-1.6 (DEVIN) | 2026-08-16 | ✅ Documentado por Devin (carpeta completa en working dir); commit + push incluido por Deepseek V4 Flash en `2b183bd` |
+| 41 — Música | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (110/110), push `4355993` |
+| 42 — Sonido Ambiental | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (109/109), push `dc1a154` |
+| 43 — Efectos de Sonido | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (96/96), push `de95a46` |
+| 44 — ASMR y Feedback | Deepseek V4 Flash | 2026-08-16 | ✅ Documentado (113/113), push `2913bcf` |
+| 57 — Interfaz de Control | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (119/119), push `882f28e` |
+| 63 — Cargas y Streaming | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (101/101), push `4980fbe` |
+| 64 — IA de NPC | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (107/107), push `96674dd` |
+| Logos 21-35 | Deepseek V4 Flash | 2026-08-17 | ✅ Renumeración cronológica completa + títulos internos + ULTIMO_NUMERO=35, push `6c01b99`; referencia M61 corregida, push `2bbf13f` |
+| Firmas B1 | Deepseek V4 Flash | 2026-08-16 | ✅ 40 archivos de Nemotron corregidos a "Nemotron 3.5 Lightning / Cline", incluidos en push `6c01b99` |
 
 ## Decisiones pendientes/descartadas
 
