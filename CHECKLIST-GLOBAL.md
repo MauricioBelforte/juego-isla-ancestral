@@ -22,7 +22,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 04 | Game Engine | 🟢 Disponible | 94/120 | Alta | 5 | 01 | — | 2026-08-16 | Decisión adoptada: Godot 4.x + Voxel Tools (Plan-prod §2). Pendientes: instalación y proyecto base → hito M1. Confirmación final del usuario |
 | 05 | Lenguaje y Programación | 🟢 Disponible | 102/102 | Alta | 3 | 04 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: GDScript adoptado, convenciones, patrones transversales (EventBus, GameClock, Logger), guía anti-patterns |
 | 06 | Control de Versiones | 🟢 Disponible | 91/92 | Media | 1 | 01 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: ramas, semver, auto-revisión, CHANGELOG.md creado. Pendiente: protección rama (Publicación) |
-| 07 | Arquitectura General | ⬜ Sin iniciar | 0/100 | Alta | 5 | 04 | — | — | — |
+| 07 | Arquitectura General | 🟢 Disponible | 102/102 | Alta | 5 | 04 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: Service Locator, capas unidireccionales, EventBus por dominios, GameState particionado, contrato de integración. Implementación → M1 |
 | 08 | Mundo Voxel | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07 | — | — | Mayor riesgo técnico del proyecto |
 | 09 | Terreno y Geografía | ⬜ Sin iniciar | 0/100 | Alta | 4 | 08 | — | — | — |
 | 10 | Generación del Mundo | ⬜ Sin iniciar | 0/100 | Alta | 5 | 08 | — | — | — |

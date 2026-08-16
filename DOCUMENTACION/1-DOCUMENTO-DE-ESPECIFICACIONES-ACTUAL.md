@@ -13,8 +13,8 @@ Especificaciones técnicas vigentes del sistema: motor, arquitectura, rendimient
 
 | Sección | Estado | Módulo dueño |
 |---|---|---|
-| Motor y pipeline (Unity vs Godot) | Pendiente | 04 Game Engine |
-| Arquitectura de software | Pendiente | 07 Arquitectura General |
+| Motor y pipeline (Unity vs Godot) | ✅ **Godot 4.x + Voxel Tools** — ver `04-Game-Engine/` | 04 Game Engine |
+| Arquitectura de software | ✅ Service Locator + capas unidireccionales + EventBus tipado — ver `07-Arquitectura-General/` | 07 Arquitectura |
 | Mundo voxel (chunks, culling, LOD) | Pendiente | 08 Mundo Voxel |
 | Rendimiento y frame budget | Pendiente | 61 Rendimiento |
 | Guardado y serialización | Pendiente | 59 Guardado |
