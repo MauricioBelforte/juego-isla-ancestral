@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 91: Configuración de Audio
 
@@ -513,8 +513,8 @@ func save_settings():
 
 ## 16. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-17 00:30:00
 **Estado:** Completado (especificación; implementación inmediata posible)
 

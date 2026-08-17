@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 03-Diseno.md — Módulo 103: Logging
 

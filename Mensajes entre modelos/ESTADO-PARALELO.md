@@ -12,7 +12,7 @@
 
 | Agente | Modelo | Plataforma | Estado | Tareas |
 |---|---|---|---|---|
-| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64. Siguientes: módulos Alta sin dueño (45, 24, 26...) |
+| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64 + Tandas 1-3 (14, 15, 16, 17, 18, 19, 20, 21, 27, 28, 33, 34, 35, 36, 37, 53), push `08a0df7`. Siguientes: módulos Alta sin dueño (45, 24, 26...) |
 | Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🔵 En curso — 2026-08-16 17:35 | M153 Objetivo Final → M149 Nomenclatura → M72 Logros (orden fijo) |
 | Documentación Sub-tanda B1 (69, 104, 118, 131) | Nemotron 3.5 Lightning | Cline | ✅ Completo | 4 carpetas completas (10 archivos c/u), pusheadas en `6c01b99`, firmas corregidas al estándar. **NO rehacer ni sobrescribir** |
 | ⚠️ Conflicto detectado 2026-08-17 | Claude Sonnet 4.5 | Cline | 🟡 En duda | Tenía B1 asignada por error (duplicada con Nemotron). **Cancelada**: primero `git pull`; no tocar archivos de B1. Si el usuario lo pide: QA cruzado (21.8) del trabajo de Nemotron |
@@ -47,10 +47,26 @@
 | 64 — IA de NPC | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (107/107), push `96674dd` |
 | Logos 21-35 | Deepseek V4 Flash | 2026-08-17 | ✅ Renumeración cronológica completa + títulos internos + ULTIMO_NUMERO=35, push `6c01b99`; referencia M61 corregida, push `2bbf13f` |
 | Firmas B1 | Deepseek V4 Flash | 2026-08-16 | ✅ 40 archivos de Nemotron corregidos a "Nemotron 3.5 Lightning / Cline", incluidos en push `6c01b99` |
-| 69 — Fast Travel | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (196/196), 4 archivos + checklist 196 items en plan-inicial y plan-actual. Tanda B1 completada |
-| 104 — Analytics | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (142/142), 4 archivos + checklist 142 items en plan-inicial y plan-actual. Tanda B1 completada |
-| 118 — CI/CD | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (96/96), 4 archivos + checklist 96 items en plan-inicial y plan-actual. Tanda B1 completada |
-| 131 — Créditos | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (138/138), 4 archivos + checklist 138 items en plan-inicial y plan-actual. Tanda B1 completada |
+| 69 — Fast Travel | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (143/143 reales verificados por Deepseek V4 Flash; 196 declarados por Nemotron eran inflados). Tanda B1 completada |
+| 104 — Analytics | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (100/100 reales verificados por Deepseek V4 Flash; 142 declarados eran inflados). Tanda B1 completada |
+| 118 — CI/CD | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (100/100 reales verificados por Deepseek V4 Flash; 96 declarados eran inflados). Tanda B1 completada |
+| 131 — Créditos | B1-Nemotron 3.5 Lightning | 2026-08-17 | ✅ Documentado (100/100 reales verificados por Deepseek V4 Flash; 138 declarados eran inflados). Tanda B1 completada |
+| 14 — Inventario | Deepseek V4 Flash (Tanda 1) | 2026-08-17 | ✅ Documentado (140/140), push `08a0df7` |
+| 15 — Recursos | Deepseek V4 Flash (Tanda 1) | 2026-08-17 | ✅ Documentado (165/165), push `08a0df7` |
+| 16 — Crafting | Deepseek V4 Flash (Tanda 1) | 2026-08-17 | ✅ Documentado (147/147), push `08a0df7` |
+| 17 — Construcción | Deepseek V4 Flash (Tanda 1) | 2026-08-17 | ✅ Documentado (174/174), push `08a0df7` |
+| 19 — NPC y Vecinos | Deepseek V4 Flash (Tanda 1) | 2026-08-17 | ✅ Documentado (130/130), push `08a0df7` |
+| 21 — Diálogos | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (129/129), push `08a0df7` |
+| 33 — Agricultura | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (153/153), push `08a0df7` |
+| 34 — Pesca | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (153/153), push `08a0df7` |
+| 35 — Minería | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (142/142), push `08a0df7` |
+| 36 — Fauna | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (142/142), push `08a0df7` |
+| 37 — Museos y Colecciones | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (148/148), push `08a0df7` |
+| 18 — Casas | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (125/125), push `08a0df7` |
+| 20 — Sistema de Amistad | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (147/147), push `08a0df7` |
+| 27 — Islas del Mundo | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (170/170), push `08a0df7` |
+| 28 — Viajes | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (130/130), push `08a0df7` |
+| 53 — UI/UX | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (144/144), push `08a0df7` |
 
 ## Decisiones pendientes/descartadas
 

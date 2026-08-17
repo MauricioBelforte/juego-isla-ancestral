@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 103: Logging
 
@@ -147,8 +147,8 @@ func get_log_file_path() -> String:
 
 ## 6. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-16 17:45:00
 **Estado:** Completado (especificación; implementación inmediata posible)
 

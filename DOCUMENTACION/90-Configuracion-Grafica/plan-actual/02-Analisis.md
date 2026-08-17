@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 02-Analisis.md — Módulo 90: Configuración Gráfica
 

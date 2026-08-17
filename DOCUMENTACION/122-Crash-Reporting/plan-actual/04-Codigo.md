@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 122: Crash Reporting
 
@@ -396,8 +396,8 @@ func _format_metadata() -> String:
 
 ## 14. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-16 21:30:00
 **Estado:** Completado (especificación; implementación inmediata posible)
 

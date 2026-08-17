@@ -135,7 +135,7 @@
 - [x] Botón "borrar mis datos" en configuración [S]
 - [x] Sin re-pedir consentimiento en cada arranque [S]
 - [x] Reset de IDs al opt-out [S]
-- [x] Solo إرسالđe en Wi-Fi (configurable) [S]
+- [x] Solo envío en Wi-Fi (configurable) [S]
 - [x] Indicador visual de envio en curso [S]
 - [x] Histórico de consentimientos del usuario [S]
 

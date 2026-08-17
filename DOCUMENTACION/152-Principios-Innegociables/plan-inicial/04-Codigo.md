@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 152: Principios Innegociables
 
@@ -449,8 +449,8 @@ Este documento define el proceso de knowledge sharing para evitar silos de conoc
 
 ## 13. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-16 22:30:00
 **Estado:** Completado (especificación; implementación inmediata posible)
 

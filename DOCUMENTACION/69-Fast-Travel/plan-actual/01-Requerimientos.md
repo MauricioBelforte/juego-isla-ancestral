@@ -37,7 +37,7 @@ El jugador necesita desplazarse eficientemente entre áreas del mundo sin fatiga
 
 1. Los 13 puntos de la sección 68 resueltos.
 2. Mapa de puntos de viaje en el mundo de Aurora.
-3. Regras de restricción y costo definidas.
+3. Reglas de restricción y costo definidas.
 4. Fast travel bloqueado durante combate/eventos críticos.
 5. Guardado del último punto de viaje por sesión.
 6. Delegable para implementación.

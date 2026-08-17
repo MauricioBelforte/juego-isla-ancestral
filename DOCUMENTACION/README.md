@@ -79,7 +79,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 01-Fundamentos-Del-Proyecto | ✅ Creado — base documental (checklist de 152 módulos) |
 | 02-Vision-Y-Concepto | ✅ Creado — 5 archivos, checklist de 172 ítems (162 completados; 10 pendientes con dueño en M02/QA/Publicación) |
 | 03-Documentacion-Del-Proyecto | ✅ Creado — catálogo de 25 documentos, convenciones, hitos M1-M5, backlog; 5 docs generales *-ACTUAL.md creados |
-| 04-Game-Engine | ✅ Creado — decisión Godot 4.x + Voxel Tools, stack y config de proyecto base (94/120; pendientes = instalación/M1) |
+| 04-Game-Engine | ✅ Creado — decisión Godot 4.x + Voxel Tools, stack y config de proyecto base (95/120; pendientes = instalación/M1) |
 | 05-Lenguaje-Y-Programacion | ✅ Creado — GDScript adoptado, guía de convenciones y patrones transversales (102/102) |
 | 06-Control-De-Versiones | ✅ Creado — política git, ramas, semver, auto-revisión; CHANGELOG.md creado (91/92) |
 | 07-Arquitectura-General | ✅ Creado — Service Locator, capas unidireccionales, EventBus por dominios, GameState (102/102) |
@@ -94,28 +94,26 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 31-Ciclo-Dia-Noche | ✅ Creado — DELEGABLE: 5 franjas de fase, anti-oscuridad, eventos nocturnos (130/130) |
 | 32-Clima | ✅ Creado — DELEGABLE: 9 climas deterministas, regla anti-molestia, accesibilidad (120/120) |
 | 41-Musica | ✅ Creado — DELEGABLE: 51 puntos, matriz capas, leitmotifs, LUFS -16 (110/110) |
-| 42-Sonido-Ambiental | ✅ Creado — DELEGABLE: banco por bioma, capas hora/clima (109/109) |
+| 42-Sonido-Ambiental | ✅ Creado — DELEGABLE: banco por bioma, capas hora/clima (99/99) |
 | 43-Efectos-De-Sonido | ✅ Creado — DELEGABLE: pool 24 voces, familia tonal (96/96) |
 | 44-ASMR-Y-Feedback | ✅ Creado — DELEGABLE: recetas de capas, blacklist cozy (113/113) |
 | 57-Interfaz-De-Control | ✅ Creado — DELEGABLE: capa de acciones, remapeo, prompts (119/119) |
 | 63-Cargas-Y-Streaming | ✅ Creado — DELEGABLE: progreso real, LRU, precalentamiento (101/101) |
 | 64-IA-De-NPC | ✅ Creado — DELEGABLE: FSM, rutinas, burbuja ≤60 (107/107) |
-| 65-Animales-IA | ✅ Creado — DELEGABLE: manadas, migración, presupuesto (100/100) |
-| 66-Anti-Softlock | ✅ Creado — DELEGABLE: invariantes, cofre, checkpoints (100/100) |
-| 24-Templos-Y-Puzzles | ✅ Creado — DELEGABLE: framework emisor→receptor, 15 familias (100/100) |
-| 25-Ruinas | ✅ Creado — DELEGABLE: kit modular ≤40 piezas, 13 tipos (100/100) |
-| 26-Templo-Subterraneo | ✅ Creado — DELEGABLE: Templo de la Brisa, 7 anillos (100/100) |
-| 22-Historia-Principal | ✅ Creado — DELEGABLE: 7 capítulos, 5 finales, grafo (100/100) |
-| 23-Historias-Secundarias | ✅ Creado — DELEGABLE: 60 cadenas, contexto obligatorio (100/100) |
-| 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (121/121) |
-| 69-Fast-Travel | ✅ Creado por B1-Nemotron — DELEGABLE: 196 ítems, 13 puntos sección 68, costo/restricciones/día-noche (196/196) |
-| 104-Analytics | ✅ Creado por B1-Nemotron — DELEGABLE: privacidad por diseño, JSON agregado, opt-out M91 (142/142) |
-| 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (96/96) |
-| 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (138/138) |
+| 65-Animales-IA | ✅ Creado — DELEGABLE: manadas, migración, presupuesto (129/129) |
+| 66-Anti-Softlock | ✅ Creado — DELEGABLE: invariantes, cofre, checkpoints (117/117) |
+| 24-Templos-Y-Puzzles | ✅ Creado — DELEGABLE: framework emisor→receptor, 15 familias (121/121) |
+| 25-Ruinas | ✅ Creado — DELEGABLE: kit modular ≤40 piezas, 13 tipos (116/116) |
+| 26-Templo-Subterraneo | ✅ Creado — DELEGABLE: Templo de la Brisa, 7 anillos (114/114) |
+| 22-Historia-Principal | ✅ Creado — DELEGABLE: 7 capítulos, 5 finales, grafo (94/94) |
+| 23-Historias-Secundarias | ✅ Creado — DELEGABLE: 60 cadenas, contexto obligatorio (104/104) |
+| 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (140/140) |
+| 69-Fast-Travel | ✅ Creado por B1-Nemotron — DELEGABLE: 143 ítems, 13 puntos sección 68, costo/restricciones/día-noche (143/143) |
+| 104-Analytics | ✅ Creado por B1-Nemotron — DELEGABLE: privacidad por diseño, JSON agregado, opt-out M91 (100/100) |
+| 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (100/100) |
+| 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (100/100) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
-|| 88-Fuentes-Tipograficas | ? Creado por DEVIN � Fuentes Tipogr�ficas: Nunito + Fredoka One, jerarqu�a visual, estilos UI, optimizaci�n, accesibilidad, localizaci�n (218/218) |
-
-|| 90-Configuracion-Grafica | ? Creado por DEVIN � Configuraci�n Gr�fica: 23 opciones gr�ficas, 4 presets, detecci�n autom�tica de hardware, men� de settings, integraci�n con M58/M61/M88 (248/248) |
-
-|| 91-Configuracion-De-Audio | ? Creado por DEVIN � Configuraci�n de Audio: 15 opciones de audio, 7 buses de audio, audio 3D, subt�tulos, sonidos de interfaz, rango din�mico, compresi�n, dispositivo de salida, pruebas de audio, integraci�n con M58/M87/M61 (227/227) |
+| 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
+| 90-Configuracion-Grafica | ✅ Creado por DEVIN — Configuración Gráfica: 23 opciones gráficas, 4 presets, detección automática de hardware, menú de settings, integración con M58/M61/M88 (248/248) |
+| 91-Configuracion-De-Audio | ✅ Creado por DEVIN — Configuración de Audio: 15 opciones de audio, 7 buses de audio, audio 3D, subtítulos, sonidos de interfaz, rango dinámico, compresión, dispositivo de salida, pruebas de audio, integración con M58/M87/M61 (239/239) |

@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 110: Debug Menu
 
@@ -299,8 +299,8 @@ func report_bug():
 
 ## 8. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-16 19:30:00
 **Estado:** Completado (especificación; implementación en M1)
 

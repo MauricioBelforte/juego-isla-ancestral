@@ -1,5 +1,5 @@
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 
 # 04-Codigo.md — Módulo 90: Configuración Gráfica
 
@@ -508,8 +508,8 @@ func save_settings():
 
 ## 12. Notas del Agente
 
-**Modelo:** Devin
-**Plataforma:** Antigravity
+**Modelo:** SWE-1.6
+**Plataforma:** Devin
 **Fecha:** 2026-08-17 00:30:00
 **Estado:** Completado (especificación; implementación inmediata posible)
 
