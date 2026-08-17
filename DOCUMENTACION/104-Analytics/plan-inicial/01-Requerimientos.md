@@ -1,43 +1,43 @@
 **Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
-# 01-Requerimientos.md ó MÛdulo 104: Analytics
+# 01-Requerimientos.md ‚Äî M√≥dulo 104: Analytics
 
-## ID del MÛdulo
-- **CÛdigo:** M104 (plan maestro: componente nuevo - Analytics)
+## ID del M√≥dulo
+- **C√≥digo:** M104 (plan maestro: componente nuevo - Analytics)
 - **Carpeta:** `DOCUMENTACION/104-Analytics/`
-- **Dependencias:** M103 (Logging), M61 (Rendimiento), M91 (ConfiguraciÛn de Audio)
-- **Delegable desde:** diseÒo completo; implementaciÛn tras sistema de logging/base
+- **Dependencias:** M103 (Logging), M61 (Rendimiento), M91 (Configuraci√≥n de Audio)
+- **Delegable desde:** dise√±o completo; implementaci√≥n tras sistema de logging/base
 
 ## 1. Problema
 
-Recoger y reportar datos de comportamiento del jugador de manera no intrusiva, anonimizada y respetuosa con la privacidad, para ofrecer al equipo de desarrollo informaciÛn valiosa sobre patrones de juego, ·reas populares, tiempo de sesiÛn y caracterÌsticas de uso del modo cozy. Los datos deben ser agregados, nunca individuales, y deben ofrecer una visiÛn clara del progreso del proyecto sin comprometer la confianza del jugador.
+Recoger y reportar datos de comportamiento del jugador de manera no intrusiva, anonimizada y respetuosa con la privacidad, para ofrecer al equipo de desarrollo informaci√≥n valiosa sobre patrones de juego, √°reas populares, tiempo de sesi√≥n y caracter√≠sticas de uso del modo cozy. Los datos deben ser agregados, nunca individuales, y deben ofrecer una visi√≥n clara del progreso del proyecto sin comprometer la confianza del jugador.
 
 ## 2. Requisitos Funcionales
 
 | # | Requisito | Detalle |
 |---|---|---|
-| RF1 | Eventos de sesiÛn | Capturar inicio, pausa, reanudaciÛn y fin de sesiÛn de juego |
-| RF2 | Patrones de movimiento | Registrar ·reas del mundo m·s visitadas, rutas frecuentes |
-| RF3 | Frecuencia de features | Contar uso de caracterÌsticas: fast travel, crafting, agricultura, pesca |
-| RF4 | Tiempo de juego | Acumular horas por sesiÛn y total del jugador (anonimizado) |
-| RF5 | Eventos crÌticos | Reportar errores, crashes y excepciones con contexto mÌnimo |
-| RF6 | ConfiguraciÛn de reporte | Permitir al jugador activar/desactivar reporte de an·lisis |
-| RF7 | Formato de datos | Todos los datos en formato JSON agregado, sin informaciÛn personal |
+| RF1 | Eventos de sesi√≥n | Capturar inicio, pausa, reanudaci√≥n y fin de sesi√≥n de juego |
+| RF2 | Patrones de movimiento | Registrar √°reas del mundo m√°s visitadas, rutas frecuentes |
+| RF3 | Frecuencia de features | Contar uso de caracter√≠sticas: fast travel, crafting, agricultura, pesca |
+| RF4 | Tiempo de juego | Acumular horas por sesi√≥n y total del jugador (anonimizado) |
+| RF5 | Eventos cr√≠ticos | Reportar errores, crashes y excepciones con contexto m√≠nimo |
+| RF6 | Configuraci√≥n de reporte | Permitir al jugador activar/desactivar reporte de an√°lisis |
+| RF7 | Formato de datos | Todos los datos en formato JSON agregado, sin informaci√≥n personal |
 
 ## 3. Requisitos No Funcionales
 
-- **Privacidad:** Datos totalmente anonimizados; IP truncada; ID de sesiÛn aleatorio
+- **Privacidad:** Datos totalmente anonimizados; IP truncada; ID de sesi√≥n aleatorio
 - **Rendimiento:** Overhead < 1% de CPU por frame; logging optimizado
-- **Coherencia con M103:** todos los logs de an·lisis pasan por el servicio Logger (M103)
-- **Configurabilidad:** El jugador puede opt-out en cualquier momento (configuraciÛn M91)
-- **Ancho de banda:** Datos enviados en lotes cada 30 minutos o al cierre de sesiÛn
+- **Coherencia con M103:** todos los logs de an√°lisis pasan por el servicio Logger (M103)
+- **Configurabilidad:** El jugador puede opt-out en cualquier momento (configuraci√≥n M91)
+- **Ancho de banda:** Datos enviados en lotes cada 30 minutos o al cierre de sesi√≥n
 
-## 4. Criterios de AceptaciÛn
+## 4. Criterios de Aceptaci√≥n
 
-1. Se capturan todos los eventos RF1-RF7 sin pÈrdida de datos crÌticos.
+1. Se capturan todos los eventos RF1-RF7 sin p√©rdida de datos cr√≠ticos.
 2. Los datos son totalmente anonimizados (sin IP completa, sin datos personales).
 3. Overhead de rendimiento < 1% medido en pruebas de perfilado.
-4. El jugador puede desactivar el reporte en cualquier momento desde configuraciÛn.
-5. Los datos se agregan por lotes y no contienen informaciÛn identificable.
-6. Delegable para implementaciÛn.
+4. El jugador puede desactivar el reporte en cualquier momento desde configuraci√≥n.
+5. Los datos se agregan por lotes y no contienen informaci√≥n identificable.
+6. Delegable para implementaci√≥n.
