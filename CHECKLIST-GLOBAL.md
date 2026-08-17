@@ -29,30 +29,30 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 11 | Personaje del Jugador | 🟢 Disponible | 102/102 | Alta | 3 | 07 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: FSM 10 estados, hitbox 0.6x1.8, stamina informativa, interacción F, esporas de luz. Implementación → M1/M29/M65 |
 | 12 | Cámara | 🟢 Disponible | 100/100 | Alta | 2 | 11 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: 5 modos de cámara, spring-arm con colisión, minimapa sin render, anti-mareo. Implementación → M1 |
 | 13 | Herramientas | 🟢 Disponible | 101/101 | Alta | 4 | 11 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: 9 herramientas x 4 niveles, durabilidad cozy (nunca se rompen), contrato try_extract/try_place, martillo y lupa infinitos. Implementación → M1/M17/M35 |
-| 14 | Inventario | ⬜ Sin iniciar | 0/100 | Alta | 3 | 11 | — | — | — |
-| 15 | Recursos | ⬜ Sin iniciar | 0/100 | Alta | 3 | 14 | — | — | — |
-| 16 | Crafting | ⬜ Sin iniciar | 0/100 | Alta | 3 | 14, 15 | — | — | — |
-| 17 | Construcción | ⬜ Sin iniciar | 0/100 | Alta | 5 | 08, 14 | — | — | — |
-| 18 | Casas | ⬜ Sin iniciar | 0/100 | Media | 3 | 17 | — | — | — |
-| 19 | NPC y Vecinos | ⬜ Sin iniciar | 0/100 | Alta | 4 | 11, 25 | — | — | — |
-| 20 | Sistema de Amistad | ⬜ Sin iniciar | 0/100 | Media | 3 | 19 | — | — | — |
-| 21 | Diálogos | ⬜ Sin iniciar | 0/100 | Alta | 4 | 19 | — | — | — |
+| 14 | Inventario | 🟢 Disponible | 140/140 | Alta | 3 | 11 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 15 | Recursos | 🟢 Disponible | 165/165 | Alta | 3 | 14 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 16 | Crafting | 🟢 Disponible | 147/147 | Alta | 3 | 14, 15 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 17 | Construcción | 🟢 Disponible | 174/174 | Alta | 5 | 08, 14 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 18 | Casas | 🟢 Disponible | 125/125 | Media | 3 | 17 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 19 | NPC y Vecinos | 🟢 Disponible | 130/130 | Alta | 4 | 11, 25 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 20 | Sistema de Amistad | 🟢 Disponible | 147/147 | Media | 3 | 19 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 21 | Diálogos | 🟢 Disponible | 129/129 | Alta | 4 | 19 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 22 | Historia Principal | 🟢 Disponible | 94/94 | Alta | 4 | 21, 28 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 21, 7 capítulos, 5 finales, grafo validado, 7 sellos como gating |
 | 23 | Historias Secundarias | 🟢 Disponible | 104/104 | Media | 3 | 22 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 22, 60 cadenas con contexto obligatorio, 12 consecuencias persistentes |
 | 24 | Templos y Puzzles | 🟢 Disponible | 121/121 | Alta | 5 | 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 23, framework emisor→receptor, 15 familias, validador de arbitrariedad, Guía del Templo |
 | 25 | Ruinas | 🟢 Disponible | 116/116 | Media | 3 | 24 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos sección 24, kit modular ≤40 piezas, 13 tipos, progresión 4 estados, activadores |
 | 26 | Templo Subterráneo | 🟢 Disponible | 114/114 | Alta | 4 | 24, 25 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 26/26 puntos sección 25, metría voxel 4x4x4, 7 anillos + sello, 5 checkpoints atómicos, Templo de la Brisa |
-| 27 | Islas del Mundo | ⬜ Sin iniciar | 0/100 | Media | 4 | 28, 29 | — | — | — |
-| 28 | Viajes | ⬜ Sin iniciar | 0/100 | Media | 3 | 22, 27 | — | — | Gran Vapor |
+| 27 | Islas del Mundo | 🟢 Disponible | 170/170 | Media | 4 | 28, 29 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 28 | Viajes | 🟢 Disponible | 130/130 | Media | 3 | 22, 27 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 29 | Tiempo y Calendario | 🟢 Disponible | 104/104 | Alta | 3 | 07 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: GameClock servicio puro (API en plan-actual/03), calendario Aurora (día 24min, año 336d), eventos periódicos repetibles, regla cozy anti-frustración. Sin voxel/assets |
 | 30 | Reloj en Tiempo Real | 🟢 Disponible | 104/104 | Media | 3 | 29 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: decisión NO tiempo real (explotes/offline), regla de oro anti-reloj-SO, widget display puro, 10 pruebas de límites de fecha. Implementación tras M29 |
 | 31 | Ciclo Día/Noche | 🟢 Disponible | 130/130 | Media | 3 | 29 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, 5 franjas (ALBA/DÍA/ATARDECER/NOCHE/PROFUNDA), anti-oscuridad (piso 0.15 + linterna + opción M58), eventos nocturnos opcionales. Implementación tras M29/M49 |
 | 32 | Clima | 🟢 Disponible | 120/120 | Media | 3 | 29, 31 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, 9 climas deterministas (seed+día), regla de oro anti-molestia (bono sí, bloqueo no), accesibilidad M58. Implementación tras M29/M31 |
-| 33 | Agricultura | ⬜ Sin iniciar | 0/100 | Media | 3 | 17, 29 | — | — | — |
-| 34 | Pesca | ⬜ Sin iniciar | 0/100 | Media | 3 | 32 | — | — | — |
-| 35 | Minería | ⬜ Sin iniciar | 0/100 | Media | 3 | 08, 13 | — | — | — |
-| 36 | Fauna | ⬜ Sin iniciar | 0/100 | Media | 3 | 07, 31 | — | — | — |
-| 37 | Museos y Colecciones | ⬜ Sin iniciar | 0/100 | Baja | 3 | 36 | — | — | — |
+| 33 | Agricultura | 🟢 Disponible | 153/153 | Media | 3 | 17, 29 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 34 | Pesca | 🟢 Disponible | 153/153 | Media | 3 | 32 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 35 | Minería | 🟢 Disponible | 142/142 | Media | 3 | 08, 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 36 | Fauna | 🟢 Disponible | 142/142 | Media | 3 | 07, 31 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
+| 37 | Museos y Colecciones | 🟢 Disponible | 148/148 | Baja | 3 | 36 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 38 | Economía | ⬜ Sin iniciar | 0/100 | Alta | 4 | 15, 16, 20 | — | — | — |
 | 39 | Tiendas | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
 | 40 | Infraestructura | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
@@ -68,7 +68,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 50 | Vegetación | ⬜ Sin iniciar | 0/100 | Media | 3 | 08, 45 | — | — | — |
 | 51 | Agua | ⬜ Sin iniciar | 0/100 | Media | 4 | 08, 24 | — | — | — |
 | 52 | Partículas y VFX | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
-| 53 | UI/UX | ⬜ Sin iniciar | 0/100 | Alta | 4 | 11, 14 | — | — | — |
+| 53 | UI/UX | 🟢 Disponible | 144/144 | Alta | 4 | 11, 14 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 54 | Mapa | ⬜ Sin iniciar | 0/100 | Media | 3 | 53 | — | — | — |
 | 55 | Diario del Jugador | ⬜ Sin iniciar | 0/100 | Baja | 3 | 53 | — | — | — |
 | 56 | Fotografía | ⬜ Sin iniciar | 0/100 | Baja | 2 | 53 | — | — | — |
