@@ -53,7 +53,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 35 | Minería | 🟢 Disponible | 142/142 | Media | 3 | 08, 13 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 36 | Fauna | 🟢 Disponible | 142/142 | Media | 3 | 07, 31 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 37 | Museos y Colecciones | 🟢 Disponible | 148/148 | Baja | 3 | 36 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
-| 38 | Economía | ⬜ Sin iniciar | 0/100 | Alta | 4 | 15, 16, 20 | — | — | — |
+| 38 | Economía | 🟢 Disponible | 158/158 | Alta | 4 | 15, 16, 20 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 39 | Tiendas | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
 | 40 | Infraestructura | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
 | 41 | Música | 🟢 Disponible | 110/110 | Media | 4 | — | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 51/51 puntos, matriz de capas (base+tiempo+evento) para 12×4×3 contextos, leitmotifs, volumetría LUFS -16, presupuesto ≈90 archivos. Composición → assets |
@@ -73,7 +73,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 55 | Diario del Jugador | ⬜ Sin iniciar | 0/100 | Baja | 3 | 53 | — | — | — |
 | 56 | Fotografía | ⬜ Sin iniciar | 0/100 | Baja | 2 | 53 | — | — | — |
 | 57 | Interfaz de Control | 🟢 Disponible | 119/119 | Alta | 2 | 04 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, capa de acciones única, remapeo con conflictos, prompts dinámicos por dispositivo, persistencia atómica, Steam Deck |
-| 58 | Accesibilidad | ⬜ Sin iniciar | 0/100 | Alta | 3 | 53, 57 | — | — | — |
+| 58 | Accesibilidad | 🟢 Disponible | 173/173 | Alta | 3 | 53, 57 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 59 | Guardado | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07, 14 | — | — | GameState versionado |
 | 60 | Datos y Serialización | ⬜ Sin iniciar | 0/100 | Alta | 3 | 59 | — | — | — |
 | 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
@@ -85,7 +85,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 67 | Vehículos | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28 | — | — | — |
 | 68 | Transporte y Navegación | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28, 67 | — | — | — |
 | 69 | Fast Travel | 🟢 Disponible | 143/143 | Baja | 1 | 28 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 143 ítems. DELEGABLE PARA IMPLEMENTAR |
-| 70 | Interacciones | ⬜ Sin iniciar | 0/100 | Alta | 3 | 11, 13 | — | — | — |
+| 70 | Interacciones | 🟢 Disponible | 197/197 | Alta | 3 | 11, 13 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 71 | Progresión | ⬜ Sin iniciar | 0/100 | Alta | 3 | 22, 38 | — | — | — |
 | 72 | Sistema de Logros | ⬜ Sin iniciar | 0/100 | Media | 2 | 71 | — | — | — |
 | 73 | Coleccionables | ⬜ Sin iniciar | 0/100 | Media | 3 | 71, 36 | — | — | — |
@@ -93,15 +93,15 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 75 | Postgame | ⬜ Sin iniciar | 0/100 | Baja | 3 | 22 | — | — | — |
 | 76 | Multijugador | ⬜ Sin iniciar | 0/100 | Baja | 5 | — | — | — | Decisión pendiente |
 | 77 | Online y Red | ⬜ Sin iniciar | 0/100 | Baja | 5 | 76 | — | — | — |
-| 78 | Legal — Propiedad Intelectual | ⬜ Sin iniciar | 0/100 | Alta | 2 | 01 | — | — | — |
+| 78 | Legal — Propiedad Intelectual | 🟢 Disponible | 157/157 | Alta | 2 | 01 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 79 | Legal — Contratos | ⬜ Sin iniciar | 0/100 | Media | 2 | 78 | — | — | — |
-| 80 | Legal — Privacidad | ⬜ Sin iniciar | 0/100 | Alta | 2 | 78 | — | — | — |
+| 80 | Legal — Privacidad | 🟢 Disponible | 144/144 | Alta | 2 | 78 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 81 | Legal — Menores | ⬜ Sin iniciar | 0/100 | Media | 2 | 80 | — | — | — |
 | 82 | Clasificación por Edades | ⬜ Sin iniciar | 0/100 | Media | 1 | 78 | — | — | IARC |
 | 83 | Licencias de Software | ⬜ Sin iniciar | 0/100 | Media | 2 | 78 | — | — | — |
 | 84 | Música y Audio — Legal | ⬜ Sin iniciar | 0/100 | Media | 2 | 41, 78 | — | — | — |
 | 85 | Modelos 3D — Legal | ⬜ Sin iniciar | 0/100 | Media | 2 | 45, 78 | — | — | — |
-| 86 | IA Generativa | ⬜ Sin iniciar | 0/100 | Alta | 3 | 78 | — | — | Declaración Steam |
+| 86 | IA Generativa | 🟢 Disponible | 129/129 | Alta | 3 | 78 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 87 | Localización | ⬜ Sin iniciar | 0/100 | Media | 3 | 21, 53 | — | — | — |
 | 88 | Fuentes Tipográficas | 🟢 Disponible | 172/172 | Baja | 1 | 53 | — | 2026-08-16 23:30:00 | Documentación completa por Devin: Se seleccionó Nunito como fuente principal (sans-serif, legible, amigable, soporta cirílico, SIL Open Font License 1.1). Se seleccionó Fredoka One como fuente secundaria (rounded, amigable, perfecta para estilo cozy, SIL Open Font License 1.1). Se revisaron licencias (SIL Open Font License 1.1 con atribución). Se revisaron caracteres especiales (tildes, ñ, símbolos, cirílico). Se definieron tamaños de fuente (H1 32px, H2 24px, H3 20px, BODY 16px, SMALL 12px, MICRO 10px). Se definieron pesos (Light 300, Regular 400, Medium 500, Bold 700). Se definieron tracking (normal 0, tight -1, loose 1). Se definió line height (título 1.0, cuerpo 1.2, párrafo 1.4). Se creó jerarquía visual (H1 > H2 > H3 > cuerpo > pequeño > micro). Se diseñaron estilos de UI en Godot (Theme, StyleBox, Label, RichTextLabel, Button). Se diseñó optimización de fuentes (subsetting, compresión WOFF2, caching). Se diseñó integración con M58 (Accesibilidad) para ajustes de tamaño y contraste. Se diseñó integración con M87 (Internacionalización) para carga de fuente según idioma. Se diseñó integración con M90 (Configuración Gráfica) para settings de fuentes. |
 | 89 | Diseño de Menús | ⬜ Sin iniciar | 0/100 | Media | 3 | 53 | — | — | — |
@@ -187,8 +187,8 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 44 (43 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 106
+- **Disponibles (`🟢`):** 66 (65 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 83
 - **Progreso total:** documentación de diseño de 43 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.

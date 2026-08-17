@@ -12,7 +12,7 @@
 
 | Agente | Modelo | Plataforma | Estado | Tareas |
 |---|---|---|---|---|
-| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64 + Tandas 1-3 (14, 15, 16, 17, 18, 19, 20, 21, 27, 28, 33, 34, 35, 36, 37, 53), push `08a0df7`. Siguientes: módulos Alta sin dueño (45, 24, 26...) |
+| Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64 + Tandas 1-3 (14, 15, 16, 17, 18, 19, 20, 21, 27, 28, 33, 34, 35, 36, 37, 53), push `08a0df7` + Tanda 4 (38, 58, 70, 78, 80, 86), commit tanda 4. Siguientes: módulos Alta sin dueño (59, 60, 71, 92...) |
 | Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🔵 En curso — 2026-08-16 17:35 | M153 Objetivo Final → M149 Nomenclatura → M72 Logros (orden fijo) |
 | Documentación Sub-tanda B1 (69, 104, 118, 131) | Nemotron 3.5 Lightning | Cline | ✅ Completo | 4 carpetas completas (10 archivos c/u), pusheadas en `6c01b99`, firmas corregidas al estándar. **NO rehacer ni sobrescribir** |
 | ⚠️ Conflicto detectado 2026-08-17 | Claude Sonnet 4.5 | Cline | 🟡 En duda | Tenía B1 asignada por error (duplicada con Nemotron). **Cancelada**: primero `git pull`; no tocar archivos de B1. Si el usuario lo pide: QA cruzado (21.8) del trabajo de Nemotron |
@@ -67,6 +67,12 @@
 | 27 — Islas del Mundo | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (170/170), push `08a0df7` |
 | 28 — Viajes | Deepseek V4 Flash (Tanda 3) | 2026-08-17 | ✅ Documentado (130/130), push `08a0df7` |
 | 53 — UI/UX | Deepseek V4 Flash (Tanda 2) | 2026-08-17 | ✅ Documentado (144/144), push `08a0df7` |
+| 38 — Economía | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (158/158), DELEGABLE |
+| 58 — Accesibilidad | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (173/173), DELEGABLE |
+| 70 — Interacciones | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (197/197), DELEGABLE |
+| 78 — Legal Propiedad Intelectual | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (157/157), DELEGABLE |
+| 80 — Legal Privacidad | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (144/144), DELEGABLE |
+| 86 — IA Generativa | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (129/129), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 

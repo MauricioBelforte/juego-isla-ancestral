@@ -112,6 +112,12 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 104-Analytics | ✅ Creado por B1-Nemotron — DELEGABLE: privacidad por diseño, JSON agregado, opt-out M91 (100/100) |
 | 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (100/100) |
 | 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (100/100) |
+| 38-Economia | ✅ Creado por Deepseek V4 Flash — DELEGABLE: moneda, precios, tiendas, trueque, equilibrio cozy (158/158) |
+| 58-Accesibilidad | ✅ Creado por Deepseek V4 Flash — DELEGABLE: visual, auditiva, motora, cognitiva, lectoescritura (173/173) |
+| 70-Interacciones | ✅ Creado por Deepseek V4 Flash — DELEGABLE: detección, prompts, prioridad, estados, feedback (197/197) |
+| 78-Legal-Propiedad-Intelectual | ✅ Creado por Deepseek V4 Flash — DELEGABLE: licencias, atribución, THIRD-PARTY-NOTICES (157/157) |
+| 80-Legal-Privacidad | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GDPR, COPPA, CCPA, consentimiento, opt-out (144/144) |
+| 86-IA-Generativa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: política IA, declaración Steam, registro de herramientas (129/129) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
