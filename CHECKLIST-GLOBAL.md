@@ -145,7 +145,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 127 | Copyright del Juego | ⬜ Sin iniciar | 0/100 | Baja | 1 | 78 | — | — | — |
 | 128 | Identidad de Marca | ⬜ Sin iniciar | 0/100 | Media | 2 | 78, 97 | — | — | — |
 | 129 | Merchandising | ⬜ Sin iniciar | 0/100 | Baja | 1 | 142 | — | — | — |
-| 131 | Créditos | 🟢 Disponible | 138/138 | Media | 1 | 142 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1) - checklist 138 items verificado |
+| 131 | Créditos | 🟢 Disponible | 100/100 | Media | 1 | 142 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Checklist alineado por Deepseek V4 Flash (2026-08-17, conteo real 100). DELEGABLE PARA IMPLEMENTAR |
 | 132 | Producción del Equipo | ⬜ Sin iniciar | 0/100 | Media | 1 | 134 | — | — | — |
 | 133 | Gestión del Proyecto | ⬜ Sin iniciar | 0/100 | Alta | 2 | 01 | — | — | — |
 | 134 | Presupuesto | ⬜ Sin iniciar | 0/100 | Media | 2 | 133 | — | — | — |
