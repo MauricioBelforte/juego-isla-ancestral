@@ -62,7 +62,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 44 | ASMR y Feedback | 🟢 Disponible | 113/113 | Media | 3 | 43 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 17/17 puntos, recetas de capas, sincronía keyframes M34, blacklist anti-agresión (True Peak/buzz), precedencia contextual fija |
 | 45 | Arte 3D | 🟢 Disponible | 157/157 | Alta | 5 | — | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): estilo Cozy Voxel, techos de polígonos por categoría, LOD, sockets, kit modular, validador de assets. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 44) |
 | 46 | Arte 2D | 🟢 Disponible | 109/109 | Media | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): estilo heredado del 3D, iconos, retratos con plantilla 3D, símbolos, atlas por superficie, validador. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 45) |
-| 47 | Texturas y Materiales | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
+| 47 | Texturas y Materiales | 🟢 Disponible | 107/107 | Media | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): atlas de bloques 32px con variantes procedurales por bioma, kit StandardMaterial3D, 4 shaders acotados (agua/lava/cristal/emisivo), validador + presupuesto VRAM. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 46) |
 | 48 | Animación | ⬜ Sin iniciar | 0/100 | Media | 4 | 45, 11, 19 | — | — | — |
 | 49 | Iluminación | ⬜ Sin iniciar | 0/100 | Media | 3 | 07, 45 | — | — | — |
 | 50 | Vegetación | ⬜ Sin iniciar | 0/100 | Media | 3 | 08, 45 | — | — | — |
@@ -187,12 +187,14 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 74 (73 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 75
-- **Progreso total:** documentación de diseño de 51 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 75 (74 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 74
+- **Progreso total:** documentación de diseño de 52 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
 > **Actualización 2026-08-17 (Deepseek V4 Flash):** se corrigieron progresos inflados (conteos reales de plan-actual), caracteres `` de filas Devin y se marcaron las filas B1 (69, 104, 118, 131) como documentadas pero con checklist sin marcar.
 
 > **Tanda 7 (2026-08-17, Deepseek V4 Flash):** se integraron los módulos 39, 40, 54, 72, 74, 87 (documentados en la sesión anterior, quedaron sin commitear). M72 liberado de la ruta de B2-Composer (ya documentado).
+
+> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 47 (Texturas y Materiales, 107/107). Push completado. 52 módulos documentados. Siguiente: 48-Animación (plan maestro sección 47).
