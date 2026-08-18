@@ -124,6 +124,12 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 112-Testing-Automatico | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GUT/GdUnit4, CI headless, cobertura (230/230) |
 | 133-Gestion-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: metodología, hitos, DoD, tablero (127/127) |
 | 135-Riesgos-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: matriz de riesgos, mitigaciones, monitoreo (134/134) |
+| 60-Datos-Y-Serializacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: JSON/binario, versionado, migraciones, saves (197/197) |
+| 97-Steam-Store-Page | ✅ Creado por Deepseek V4 Flash — DELEGABLE: descripción, tags, capturas, precio, wishlists (195/195) |
+| 101-QA-General | ✅ Creado por Deepseek V4 Flash — DELEGABLE: checklist por área, sesiones, regresión, release (205/205) |
+| 108-Pipeline-De-Assets | ✅ Creado por Deepseek V4 Flash — DELEGABLE: formatos, importación, optimización, review (181/181) |
+| 114-Playtest | ✅ Creado por Deepseek V4 Flash — DELEGABLE: sesiones, observación, encuestas, iteración (186/186) |
+| 136-Roadmap | ✅ Creado por Deepseek V4 Flash — DELEGABLE: hitos M137-143, dependencias, prioridades (199/199) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |

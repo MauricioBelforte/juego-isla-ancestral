@@ -75,7 +75,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 57 | Interfaz de Control | 🟢 Disponible | 119/119 | Alta | 2 | 04 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, capa de acciones única, remapeo con conflictos, prompts dinámicos por dispositivo, persistencia atómica, Steam Deck |
 | 58 | Accesibilidad | 🟢 Disponible | 173/173 | Alta | 3 | 53, 57 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 59 | Guardado | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07, 14 | — | — | GameState versionado |
-| 60 | Datos y Serialización | ⬜ Sin iniciar | 0/100 | Alta | 3 | 59 | — | — | — |
+| 60 | Datos y Serialización | 🟢 Disponible | 197/197 | Alta | 3 | 59 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
 | 62 | Memoria | 🟢 Disponible | 150/150 | Alta | 3 | 61 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 63 | Cargas y Streaming | 🟢 Disponible | 101/101 | Alta | 4 | 08, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos, progreso real por pesos, LRU con tope, precalentamiento en menú, streaming océano/subterráneo/islas. Requiere M08 + presupuestos M61 |
@@ -112,24 +112,24 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 94 | Retención sin FOMO | ⬜ Sin iniciar | 0/100 | Media | 3 | 93 | — | — | — |
 | 95 | Monetización | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
 | 96 | Plataformas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
-| 97 | Steam / Store Page | ⬜ Sin iniciar | 0/100 | Alta | 3 | 96 | — | — | — |
+| 97 | Steam / Store Page | 🟢 Disponible | 195/195 | Alta | 3 | 96 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 98 | Trailer | ⬜ Sin iniciar | 0/100 | Media | 2 | 97 | — | — | — |
 | 99 | Marketing | ⬜ Sin iniciar | 0/100 | Media | 3 | 97 | — | — | — |
 | 100 | Community Management | ⬜ Sin iniciar | 0/100 | Baja | 2 | 99 | — | — | — |
-| 101 | QA General | ⬜ Sin iniciar | 0/100 | Alta | 3 | 110 | — | — | — |
+| 101 | QA General | 🟢 Disponible | 205/205 | Alta | 3 | 110 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 102 | Bug Tracking | 🟢 Disponible | 140/140 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
 | 103 | Logging | 🟢 Disponible | 157/157 | Media | 2 | 04 | — | 2026-08-16 17:50:00 | Documentación completa por Devin: Servicio Logger con niveles, categorías, rotación, sanitización de datos sensibles, exportación e integración con Bug Tracking/Debug Menu/Crash Reporting |
 | 104 | Analytics | 🟢 Disponible | 100/100 | Baja | 2 | 103 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 100 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
 | 106 | Seguridad | ⬜ Sin iniciar | 0/100 | Baja | 2 | 77 | — | — | — |
 | 107 | Backups | 🟢 Disponible | 176/176 | Alta | 1 | 59 | — | 2026-08-16 18:50:00 | Documentación completa por Devin: Estrategia 3-2-1 (GitHub + Cloud + Disco Externo), automatización con GitHub Actions y Task Scheduler, verificación de integridad SHA-256, política de retención y plan de recuperación de desastres |
-| 108 | Pipeline de Assets | ⬜ Sin iniciar | 0/100 | Alta | 3 | 45 | — | — | — |
+| 108 | Pipeline de Assets | 🟢 Disponible | 181/181 | Alta | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 109 | Herramientas Internas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
 | 110 | Debug Menu | 🟢 Disponible | 222/222 | Media | 1 | 04 | — | 2026-08-16 19:50:00 | Documentación completa por Devin: Debug Menu in-game con 5 paneles, funciones de teletransporte/tiempo/clima/objetos/misiones, visualizaciones debug (colliders, FPS, chunks, navegación, hitboxes, IA), consola in-game con filtros y exportador de diagnóstico integrado con Bug Tracking |
 | 111 | Código de Calidad | 🟢 Disponible | 209/209 | Alta | 2 | 04 | — | 2026-08-16 20:30:00 | Documentación completa por Devin: Se especificó guía de estilo GDScript completa con convenciones de nomenclatura (PascalCase, snake_case, UPPER_CASE). Se definieron límites de tamaño: 50 líneas método, 300 líneas clase, 500 líneas archivo. Se diseñaron plantillas de documentación para clases y funciones. Se especificaron interfaces recomendadas (IInteractable, IDamageable, ISaveable). Se diseñaron patrones de diseño (State Machine, Observer, Factory, Command). Se diseñaron utilidades comunes (MathUtils, ValidationUtils, FormatUtils). Se diseñaron constantes, enums y structs del proyecto. Se especificó proceso de code review con checklist de 16 ítems. Se diseñó registro de deuda técnica con prioridades (Alta, Media, Baja). Se diseñó script de análisis estático CodeQualityCheck. Se integró con M07 (Arquitectura), M112 (Testing), M61 (Rendimiento), M62 (Memoria), M133 (Gestión del Proyecto). Se aplicaron principios SOLID. Se definieron code smells a evitar. Se especificaron buenas prácticas de seguridad, performance, memory management, multi-threading, optimización de assets. Se diseñó checklist de calidad por commit. Se especificaron sprints técnicos de refactorización. Se definieron 8 reglas de calidad obligatorias. |
 | 112 | Testing Automático | 🟢 Disponible | 230/230 | Alta | 3 | 111 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 113 | Pruebas de Stress | ⬜ Sin iniciar | 0/100 | Media | 3 | 112 | — | — | — |
-| 114 | Playtest | ⬜ Sin iniciar | 0/100 | Alta | 3 | 101, 137 | — | — | — |
+| 114 | Playtest | 🟢 Disponible | 186/186 | Alta | 3 | 101, 137 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 115 | Hardware | ⬜ Sin iniciar | 0/100 | Media | 2 | 96 | — | — | — |
 | 116 | Instalador | ⬜ Sin iniciar | 0/100 | Baja | 1 | 116 | — | — | — |
 | 117 | Build System | ⬜ Sin iniciar | 0/100 | Media | 3 | 116 | — | — | — |
@@ -150,7 +150,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 133 | Gestión del Proyecto | 🟢 Disponible | 127/127 | Alta | 2 | 01 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 134 | Presupuesto | ⬜ Sin iniciar | 0/100 | Media | 2 | 133 | — | — | — |
 | 135 | Riesgos del Proyecto | 🟢 Disponible | 134/134 | Alta | 2 | 133 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 136 | Roadmap | ⬜ Sin iniciar | 0/100 | Alta | 2 | 133, 135 | — | — | — |
+| 136 | Roadmap | 🟢 Disponible | 199/199 | Alta | 2 | 133, 135 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 137 | Prototipo | ⬜ Sin iniciar | 0/100 | Alta | 5 | 08, 11, 14, 59 | — | — | Hito crítico de preproducción |
 | 138 | Vertical Slice | ⬜ Sin iniciar | 0/100 | Alta | 5 | 137, 26, 19 | — | — | — |
 | 139 | Pre-Alpha | ⬜ Sin iniciar | 0/100 | Alta | 5 | 138 | — | — | — |

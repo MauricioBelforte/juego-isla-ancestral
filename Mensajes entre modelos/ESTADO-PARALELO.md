@@ -79,6 +79,12 @@
 | 112 — Testing Automático | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (230/230), DELEGABLE |
 | 133 — Gestión del Proyecto | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (127/127), DELEGABLE |
 | 135 — Riesgos del Proyecto | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (134/134), DELEGABLE |
+| 60 — Datos y Serialización | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (197/197), DELEGABLE |
+| 97 — Steam Store Page | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (195/195), DELEGABLE |
+| 101 — QA General | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (205/205), DELEGABLE |
+| 108 — Pipeline de Assets | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (181/181), DELEGABLE |
+| 114 — Playtest | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (186/186), DELEGABLE |
+| 136 — Roadmap | Deepseek V4 Flash (Tanda 6) | 2026-08-17 | ✅ Documentado (199/199), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 
