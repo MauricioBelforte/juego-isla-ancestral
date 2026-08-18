@@ -52,6 +52,7 @@ DOCUMENTACION/
 ├── 74-Eventos/                         ← DELEGABLE: festivales, repetibles, anti-FOMO (266/266)
 ├── 87-Localizacion/                    ← DELEGABLE: i18n/l10n, textos dinámicos (136/136)
 ├── 45-Arte-3D/                         ← DELEGABLE: estilo Cozy Voxel, LOD, kit modular (157/157)
+├── 46-Arte-2D/                         ← DELEGABLE: iconos, retratos, atlas (109/109)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -144,6 +145,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 74-Eventos | ✅ Creado por Deepseek V4 Flash — DELEGABLE: festivales estacionales, repetibles, anti-FOMO (266/266) |
 | 87-Localizacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: i18n/l10n, textos dinámicos, plurales (136/136) |
 | 45-Arte-3D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: estilo Cozy Voxel, techos de polígonos, LOD, sockets, kit modular, validador (157/157) |
+| 46-Arte-2D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: iconos, retratos con plantilla 3D, símbolos, atlas por superficie (109/109) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |

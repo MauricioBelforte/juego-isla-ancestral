@@ -61,7 +61,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 43 | Efectos de Sonido | 🟢 Disponible | 96/96 | Media | 3 | 41 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, pool 24 voces con prioridades, familia tonal con M41, 6 superficies x4 variaciones |
 | 44 | ASMR y Feedback | 🟢 Disponible | 113/113 | Media | 3 | 43 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 17/17 puntos, recetas de capas, sincronía keyframes M34, blacklist anti-agresión (True Peak/buzz), precedencia contextual fija |
 | 45 | Arte 3D | 🟢 Disponible | 157/157 | Alta | 5 | — | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): estilo Cozy Voxel, techos de polígonos por categoría, LOD, sockets, kit modular, validador de assets. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 44) |
-| 46 | Arte 2D | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
+| 46 | Arte 2D | 🟢 Disponible | 109/109 | Media | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): estilo heredado del 3D, iconos, retratos con plantilla 3D, símbolos, atlas por superficie, validador. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 45) |
 | 47 | Texturas y Materiales | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 48 | Animación | ⬜ Sin iniciar | 0/100 | Media | 4 | 45, 11, 19 | — | — | — |
 | 49 | Iluminación | ⬜ Sin iniciar | 0/100 | Media | 3 | 07, 45 | — | — | — |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 73 (72 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 76
-- **Progreso total:** documentación de diseño de 50 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 74 (73 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 75
+- **Progreso total:** documentación de diseño de 51 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 

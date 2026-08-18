@@ -92,6 +92,7 @@
 | 74 — Eventos | Deepseek V4 Flash (Tanda 7) | 2026-08-17 | ✅ Documentado (266/266), DELEGABLE |
 | 87 — Localización | Deepseek V4 Flash (Tanda 7) | 2026-08-17 | ✅ Documentado (136/136), DELEGABLE |
 | 45 — Arte 3D | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (157/157), DELEGABLE |
+| 46 — Arte 2D | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (109/109), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 
