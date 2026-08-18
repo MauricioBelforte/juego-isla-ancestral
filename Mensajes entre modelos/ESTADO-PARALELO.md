@@ -99,6 +99,7 @@
 | 50 — Vegetación | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (117/117), DELEGABLE |
 | 51 — Agua | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (129/129), DELEGABLE |
 | 52 — Partículas y VFX | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (120/120), DELEGABLE |
+| 55 — Diario del Jugador | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 

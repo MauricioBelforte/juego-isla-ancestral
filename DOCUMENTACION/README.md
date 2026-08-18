@@ -59,6 +59,7 @@ DOCUMENTACION/
 ├── 50-Vegetacion/                      ← DELEGABLE: 26+ especies, MultiMesh, viento (117/117)
 ├── 51-Agua/                            ← DELEGABLE: 7 tipos, nivel de mar, olas (129/129)
 ├── 52-Particulas-Y-VFX/                ← DELEGABLE: catálogo 25 efectos, pool (120/120)
+├── 55-Diario-Del-Jugador/              ← DELEGABLE: 14 categorías, anti-spoilers, % completado (130/130)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -158,6 +159,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 50-Vegetacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 26+ especies por bioma, MultiMesh con LOD/culling, viento GPU determinista, estaciones, tala voxel, validador (117/117) |
 | 51-Agua | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 7 tipos de agua, nivel de mar global, mesh por chunk con olas/espuma, corrientes por spline, hielo estacional anti-softlock (129/129) |
 | 52-Particulas-Y-VFX | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo de 25 efectos, pool GPUParticles, presupuesto por escena, trigger VFX+SFX+feedback, determinismo, sin luz por partícula (120/120) |
+| 55-Diario-Del-Jugador | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 14 categorías de registro, DiaryService por eventos, anti-spoilers, % de completado sobre descubierto, virtualización, persistencia GameState (130/130) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
