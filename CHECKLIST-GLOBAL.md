@@ -65,7 +65,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 47 | Texturas y Materiales | 🟢 Disponible | 107/107 | Media | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): atlas de bloques 32px con variantes procedurales por bioma, kit StandardMaterial3D, 4 shaders acotados (agua/lava/cristal/emisivo), validador + presupuesto VRAM. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 46) |
 | 48 | Animación | 🟢 Disponible | 122/122 | Media | 4 | 45, 11, 19 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): catálogo de 25 dominios, AnimationService con FSM espejo, LOD de animación, eventos en timelines, validador. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 47) |
 | 49 | Iluminación | 🟢 Disponible | 116/116 | Media | 3 | 07, 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): presets por franja M31, pool de luces, baked lightmaps, topes por escena, validador. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 48) |
-| 50 | Vegetación | ⬜ Sin iniciar | 0/100 | Media | 3 | 08, 45 | — | — | — |
+| 50 | Vegetación | 🟢 Disponible | 117/117 | Media | 3 | 08, 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): 26+ especies por bioma, MultiMesh con LOD/culling, viento GPU determinista, estaciones, tala voxel. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 49) |
 | 51 | Agua | ⬜ Sin iniciar | 0/100 | Media | 4 | 08, 24 | — | — | — |
 | 52 | Partículas y VFX | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 53 | UI/UX | 🟢 Disponible | 144/144 | Alta | 4 | 11, 14 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 77 (76 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 72
-- **Progreso total:** documentación de diseño de 54 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 78 (77 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 71
+- **Progreso total:** documentación de diseño de 55 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -202,3 +202,5 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 48 (Animación, 122/122). Push completado. 53 módulos documentados. Siguiente: 49-Iluminación (plan maestro sección 48).
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 49 (Iluminación, 116/116). Push completado. 54 módulos documentados. Siguiente: 50-Vegetación (plan maestro sección 49).
+
+> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 50 (Vegetación, 117/117). Push completado. 55 módulos documentados. Siguiente: 51-Agua (plan maestro sección 50).
