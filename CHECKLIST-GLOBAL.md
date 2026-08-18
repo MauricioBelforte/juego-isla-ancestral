@@ -54,13 +54,13 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 36 | Fauna | 🟢 Disponible | 142/142 | Media | 3 | 07, 31 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 37 | Museos y Colecciones | 🟢 Disponible | 148/148 | Baja | 3 | 36 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
 | 38 | Economía | 🟢 Disponible | 158/158 | Alta | 4 | 15, 16, 20 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 39 | Tiendas | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
-| 40 | Infraestructura | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
+| 39 | Tiendas | 🟢 Disponible | 181/181 | Media | 3 | 38 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): catálogos por NPC, horarios, stock renovable determinista, precios de M38. DELEGABLE PARA IMPLEMENTAR |
+| 40 | Infraestructura | 🟢 Disponible | 211/211 | Media | 3 | 38 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): autoloads de M38, servicios base, bootstrap. DELEGABLE PARA IMPLEMENTAR |
 | 41 | Música | 🟢 Disponible | 110/110 | Media | 4 | — | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 51/51 puntos, matriz de capas (base+tiempo+evento) para 12×4×3 contextos, leitmotifs, volumetría LUFS -16, presupuesto ≈90 archivos. Composición → assets |
 | 42 | Sonido Ambiental | 🟢 Disponible | 99/99 | Media | 3 | 41 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, mapa banco→bioma (13+1), capas hora/clima que suman, ≤11 buses, ≤-18 LUFS. Samples → compositor |
 | 43 | Efectos de Sonido | 🟢 Disponible | 96/96 | Media | 3 | 41 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 25/25 puntos, pool 24 voces con prioridades, familia tonal con M41, 6 superficies x4 variaciones |
 | 44 | ASMR y Feedback | 🟢 Disponible | 113/113 | Media | 3 | 43 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 17/17 puntos, recetas de capas, sincronía keyframes M34, blacklist anti-agresión (True Peak/buzz), precedencia contextual fija |
-| 45 | Arte 3D | ⬜ Sin iniciar | 0/100 | Alta | 5 | — | — | — | — |
+| 45 | Arte 3D | 🟢 Disponible | 157/157 | Alta | 5 | — | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (2026-08-17): estilo Cozy Voxel, techos de polígonos por categoría, LOD, sockets, kit modular, validador de assets. DELEGABLE PARA IMPLEMENTAR (plan maestro sección 44) |
 | 46 | Arte 2D | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 47 | Texturas y Materiales | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 48 | Animación | ⬜ Sin iniciar | 0/100 | Media | 4 | 45, 11, 19 | — | — | — |
@@ -69,7 +69,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 51 | Agua | ⬜ Sin iniciar | 0/100 | Media | 4 | 08, 24 | — | — | — |
 | 52 | Partículas y VFX | ⬜ Sin iniciar | 0/100 | Media | 3 | 45 | — | — | — |
 | 53 | UI/UX | 🟢 Disponible | 144/144 | Alta | 4 | 11, 14 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por Deepseek V4 Flash |
-| 54 | Mapa | ⬜ Sin iniciar | 0/100 | Media | 3 | 53 | — | — | — |
+| 54 | Mapa | 🟢 Disponible | 170/170 | Media | 3 | 53 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): mapa exploración + minimapa, POI, marcas propias. Conteo real verificado por script: 170 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 55 | Diario del Jugador | ⬜ Sin iniciar | 0/100 | Baja | 3 | 53 | — | — | — |
 | 56 | Fotografía | ⬜ Sin iniciar | 0/100 | Baja | 2 | 53 | — | — | — |
 | 57 | Interfaz de Control | 🟢 Disponible | 119/119 | Alta | 2 | 04 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, capa de acciones única, remapeo con conflictos, prompts dinámicos por dispositivo, persistencia atómica, Steam Deck |
@@ -87,9 +87,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 69 | Fast Travel | 🟢 Disponible | 143/143 | Baja | 1 | 28 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 143 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 70 | Interacciones | 🟢 Disponible | 197/197 | Alta | 3 | 11, 13 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 71 | Progresión | 🟢 Disponible | 213/213 | Alta | 3 | 22, 38 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 72 | Sistema de Logros | ⬜ Sin iniciar | 0/100 | Media | 2 | 71 | — | — | — |
+| 72 | Sistema de Logros | 🟢 Disponible | 190/190 | Media | 2 | 71 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): catálogo, desbloqueo, notificación, Steam sync, anti-grind. DELEGABLE PARA IMPLEMENTAR (M72 ya no pendiente de B2-Composer) |
 | 73 | Coleccionables | ⬜ Sin iniciar | 0/100 | Media | 3 | 71, 36 | — | — | — |
-| 74 | Eventos | ⬜ Sin iniciar | 0/100 | Media | 3 | 30, 29 | — | — | — |
+| 74 | Eventos | 🟢 Disponible | 266/266 | Media | 3 | 30, 29 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): festivales estacionales, eventos repetibles anuales, anti-FOMO. DELEGABLE PARA IMPLEMENTAR |
 | 75 | Postgame | ⬜ Sin iniciar | 0/100 | Baja | 3 | 22 | — | — | — |
 | 76 | Multijugador | ⬜ Sin iniciar | 0/100 | Baja | 5 | — | — | — | Decisión pendiente |
 | 77 | Online y Red | ⬜ Sin iniciar | 0/100 | Baja | 5 | 76 | — | — | — |
@@ -102,7 +102,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 84 | Música y Audio — Legal | ⬜ Sin iniciar | 0/100 | Media | 2 | 41, 78 | — | — | — |
 | 85 | Modelos 3D — Legal | ⬜ Sin iniciar | 0/100 | Media | 2 | 45, 78 | — | — | — |
 | 86 | IA Generativa | 🟢 Disponible | 129/129 | Alta | 3 | 78 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 87 | Localización | ⬜ Sin iniciar | 0/100 | Media | 3 | 21, 53 | — | — | — |
+| 87 | Localización | 🟢 Disponible | 136/136 | Media | 3 | 21, 53 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): i18n/l10n, textos dinámicos, plurales, cambio en vivo. DELEGABLE PARA IMPLEMENTAR |
 | 88 | Fuentes Tipográficas | 🟢 Disponible | 172/172 | Baja | 1 | 53 | — | 2026-08-16 23:30:00 | Documentación completa por Devin: Se seleccionó Nunito como fuente principal (sans-serif, legible, amigable, soporta cirílico, SIL Open Font License 1.1). Se seleccionó Fredoka One como fuente secundaria (rounded, amigable, perfecta para estilo cozy, SIL Open Font License 1.1). Se revisaron licencias (SIL Open Font License 1.1 con atribución). Se revisaron caracteres especiales (tildes, ñ, símbolos, cirílico). Se definieron tamaños de fuente (H1 32px, H2 24px, H3 20px, BODY 16px, SMALL 12px, MICRO 10px). Se definieron pesos (Light 300, Regular 400, Medium 500, Bold 700). Se definieron tracking (normal 0, tight -1, loose 1). Se definió line height (título 1.0, cuerpo 1.2, párrafo 1.4). Se creó jerarquía visual (H1 > H2 > H3 > cuerpo > pequeño > micro). Se diseñaron estilos de UI en Godot (Theme, StyleBox, Label, RichTextLabel, Button). Se diseñó optimización de fuentes (subsetting, compresión WOFF2, caching). Se diseñó integración con M58 (Accesibilidad) para ajustes de tamaño y contraste. Se diseñó integración con M87 (Internacionalización) para carga de fuente según idioma. Se diseñó integración con M90 (Configuración Gráfica) para settings de fuentes. |
 | 89 | Diseño de Menús | ⬜ Sin iniciar | 0/100 | Media | 3 | 53 | — | — | — |
 | 90 | Configuración Gráfica | 🟢 Disponible | 248/248 | Media | 1 | 53 | — | 2026-08-17 00:15:00 | Documentación completa por Devin: Se documentó configuración gráfica con 23 opciones (resolución, pantalla completa, ventana, borderless, VSync, FPS cap, escala de resolución, upscaling, calidad de sombras/texturas/efectos/vegetación/agua/partículas, anti-aliasing, anisotropic filtering, post-processing, bloom, motion blur, depth of field). Se definieron 4 presets gráficos (bajo, medio, alto, ultra). Se diseñó detección automática de hardware (GPU, RAM, CPU) y recomendación de preset. Se diseñó menú de configuración gráfica con todos los controles (dropdowns, toggles, sliders). Se diseñó GraphicsSettings (Resource) para configuración actual. Se diseñó GraphicsPresets con 4 presets. Se diseñó HardwareDetector para detección de hardware. Se diseñó GraphicsApplier para aplicación en tiempo real. Se diseñó GraphicsSettingsLoader para carga al inicio. Se diseñó GraphicsSettingsSaver para guardado al cerrar. Se diseñó integración con M58 (Accesibilidad) para ajustes de fuentes y reducción de effects. Se diseñó integración con M61 (Rendimiento) para FPS counter y profiling en debug. Se diseñó integración con M88 (Fuentes Tipográficas) para ajustes de fuentes. Se crearon 5 archivos de documentación con 248 ítems de checklist. |
@@ -187,10 +187,12 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 66 (65 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 83
-- **Progreso total:** documentación de diseño de 43 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 73 (72 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 76
+- **Progreso total:** documentación de diseño de 50 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
 > **Actualización 2026-08-17 (Deepseek V4 Flash):** se corrigieron progresos inflados (conteos reales de plan-actual), caracteres `` de filas Devin y se marcaron las filas B1 (69, 104, 118, 131) como documentadas pero con checklist sin marcar.
+
+> **Tanda 7 (2026-08-17, Deepseek V4 Flash):** se integraron los módulos 39, 40, 54, 72, 74, 87 (documentados en la sesión anterior, quedaron sin commitear). M72 liberado de la ruta de B2-Composer (ya documentado).

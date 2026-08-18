@@ -45,6 +45,13 @@ DOCUMENTACION/
 ├── 26-Templo-Subterraneo/              ← DELEGABLE: Templo de la Brisa, 7 anillos (100/100)
 ├── 22-Historia-Principal/              ← DELEGABLE: 7 capítulos, 5 finales, grafo (100/100)
 ├── 23-Historias-Secundarias/           ← DELEGABLE: 60 cadenas, contexto obligatorio (100/100)
+├── 39-Tiendas/                         ← DELEGABLE: catálogos por NPC, horarios, stock (181/181)
+├── 40-Infraestructura/                 ← DELEGABLE: autoloads, servicios base (211/211)
+├── 54-Mapa/                            ← DELEGABLE: mapa exploración, minimapa, POI (171/171)
+├── 72-Sistema-De-Logros/               ← DELEGABLE: logros, desbloqueo, Steam sync (190/190)
+├── 74-Eventos/                         ← DELEGABLE: festivales, repetibles, anti-FOMO (266/266)
+├── 87-Localizacion/                    ← DELEGABLE: i18n/l10n, textos dinámicos (136/136)
+├── 45-Arte-3D/                         ← DELEGABLE: estilo Cozy Voxel, LOD, kit modular (157/157)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -130,6 +137,13 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 108-Pipeline-De-Assets | ✅ Creado por Deepseek V4 Flash — DELEGABLE: formatos, importación, optimización, review (181/181) |
 | 114-Playtest | ✅ Creado por Deepseek V4 Flash — DELEGABLE: sesiones, observación, encuestas, iteración (186/186) |
 | 136-Roadmap | ✅ Creado por Deepseek V4 Flash — DELEGABLE: hitos M137-143, dependencias, prioridades (199/199) |
+| 39-Tiendas | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogos por NPC, horarios, stock renovable (181/181) |
+| 40-Infraestructura | ✅ Creado por Deepseek V4 Flash — DELEGABLE: autoloads, servicios base, bootstrap (211/211) |
+| 54-Mapa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: mapa de exploración, minimapa, POI, marcas (170/170) |
+| 72-Sistema-De-Logros | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo, desbloqueo, notificación, Steam sync (190/190) |
+| 74-Eventos | ✅ Creado por Deepseek V4 Flash — DELEGABLE: festivales estacionales, repetibles, anti-FOMO (266/266) |
+| 87-Localizacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: i18n/l10n, textos dinámicos, plurales (136/136) |
+| 45-Arte-3D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: estilo Cozy Voxel, techos de polígonos, LOD, sockets, kit modular, validador (157/157) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
