@@ -55,6 +55,7 @@ DOCUMENTACION/
 ├── 46-Arte-2D/                         ← DELEGABLE: iconos, retratos, atlas (109/109)
 ├── 47-Texturas-Y-Materiales/           ← DELEGABLE: atlas de bloques, variantes por bioma, shaders (107/107)
 ├── 48-Animacion/                       ← DELEGABLE: kit 25 dominios, FSM espejo, LOD anim (122/122)
+├── 49-Iluminacion/                     ← DELEGABLE: presets por franja, pool, baked (116/116)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -150,6 +151,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 46-Arte-2D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: iconos, retratos con plantilla 3D, símbolos, atlas por superficie (109/109) |
 | 47-Texturas-Y-Materiales | ✅ Creado por Deepseek V4 Flash — DELEGABLE: atlas de bloques 32px, variantes procedurales por bioma, kit de materiales, 4 shaders acotados, validador + presupuesto VRAM (107/107) |
 | 48-Animacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo de 25 dominios, AnimationService con FSM espejo, LOD de animación, eventos en timelines, validador (122/122) |
+| 49-Iluminacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presets por franja M31, pool de luces dinámicas, baked lightmaps, niebla por bioma, topes por escena, validador (116/116) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
