@@ -118,6 +118,12 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 78-Legal-Propiedad-Intelectual | ✅ Creado por Deepseek V4 Flash — DELEGABLE: licencias, atribución, THIRD-PARTY-NOTICES (157/157) |
 | 80-Legal-Privacidad | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GDPR, COPPA, CCPA, consentimiento, opt-out (144/144) |
 | 86-IA-Generativa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: política IA, declaración Steam, registro de herramientas (129/129) |
+| 62-Memoria | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presupuesto RAM, pooling, GC, prevención de leaks (150/150) |
+| 71-Progresion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: desbloqueos, hitos, mejoras, logros, anti-frustración (213/213) |
+| 92-Tutorial | ✅ Creado por Deepseek V4 Flash — DELEGABLE: onboarding inmersion, pistas contextuales, skip (185/185) |
+| 112-Testing-Automatico | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GUT/GdUnit4, CI headless, cobertura (230/230) |
+| 133-Gestion-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: metodología, hitos, DoD, tablero (127/127) |
+| 135-Riesgos-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: matriz de riesgos, mitigaciones, monitoreo (134/134) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |

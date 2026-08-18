@@ -73,6 +73,12 @@
 | 78 — Legal Propiedad Intelectual | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (157/157), DELEGABLE |
 | 80 — Legal Privacidad | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (144/144), DELEGABLE |
 | 86 — IA Generativa | Deepseek V4 Flash (Tanda 4) | 2026-08-17 | ✅ Documentado (129/129), DELEGABLE |
+| 62 — Memoria | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (150/150), DELEGABLE |
+| 71 — Progresión | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (213/213), DELEGABLE |
+| 92 — Tutorial | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (185/185), DELEGABLE |
+| 112 — Testing Automático | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (230/230), DELEGABLE |
+| 133 — Gestión del Proyecto | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (127/127), DELEGABLE |
+| 135 — Riesgos del Proyecto | Deepseek V4 Flash (Tanda 5) | 2026-08-17 | ✅ Documentado (134/134), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 
