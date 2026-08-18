@@ -57,6 +57,7 @@ DOCUMENTACION/
 ├── 48-Animacion/                       ← DELEGABLE: kit 25 dominios, FSM espejo, LOD anim (122/122)
 ├── 49-Iluminacion/                     ← DELEGABLE: presets por franja, pool, baked (116/116)
 ├── 50-Vegetacion/                      ← DELEGABLE: 26+ especies, MultiMesh, viento (117/117)
+├── 51-Agua/                            ← DELEGABLE: 7 tipos, nivel de mar, olas (129/129)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -154,6 +155,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 48-Animacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo de 25 dominios, AnimationService con FSM espejo, LOD de animación, eventos en timelines, validador (122/122) |
 | 49-Iluminacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presets por franja M31, pool de luces dinámicas, baked lightmaps, niebla por bioma, topes por escena, validador (116/116) |
 | 50-Vegetacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 26+ especies por bioma, MultiMesh con LOD/culling, viento GPU determinista, estaciones, tala voxel, validador (117/117) |
+| 51-Agua | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 7 tipos de agua, nivel de mar global, mesh por chunk con olas/espuma, corrientes por spline, hielo estacional anti-softlock (129/129) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
