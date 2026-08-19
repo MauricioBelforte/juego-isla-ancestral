@@ -82,7 +82,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 64 | IA de NPC | 🟢 Disponible | 107/107 | Alta | 5 | 19, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, FSM con memoria de plan, 6 perfiles de rutina, simulación parcial por burbuja (≤60 plena), anti-atascos. Requiere M19 + presupuestos M61 |
 | 65 | Animales IA | 🟢 Disponible | 129/129 | Media | 3 | 36, 64 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 19/19 puntos sección 64, FSM 10 estados, manadas/bancos, migración estacional, presupuesto M61, cozy sin caza |
 | 66 | Anti-Softlock | 🟢 Disponible | 117/117 | Alta | 3 | 22, 26 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos sección 65, detector de invariantes, cofre de recuperación, checkpoints rotativos, IRecoverable |
-| 67 | Vehículos | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28 | — | — | — |
+| 67 | Vehículos | 🟢 Disponible | 130/130 | Baja | 3 | 28 | — | 2026-08-17 09:10 | Documentado por DeepSeek; desfase plan maestro: sección 66 |
 | 68 | Transporte y Navegación | ⬜ Sin iniciar | 0/100 | Baja | 3 | 28, 67 | — | — | — |
 | 69 | Fast Travel | 🟢 Disponible | 143/143 | Baja | 1 | 28 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 143 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 70 | Interacciones | 🟢 Disponible | 197/197 | Alta | 3 | 11, 13 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 83 (82 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 66
-- **Progreso total:** documentación de diseño de 60 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 84 (83 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 65
+- **Progreso total:** documentación de diseño de 61 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -214,3 +214,5 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 56 (Fotografía, 130/130). Push completado. 59 módulos documentados. Siguiente: 57-Interfaz de Control (plan maestro sección 56, ya documentado en tanda anterior) → 61-Puzzles y Acertijos (siguiente en orden de ID disponible).
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 59 (Guardado, 130/130). Push completado. 60 módulos documentados. Siguiente: 67-Vehículos (siguiente en orden de ID disponible).
+
+> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 67 (Vehículos, 130/130). Push completado. 61 módulos documentados. Siguiente: 68-Transporte y Navegación (plan maestro sección 67).
