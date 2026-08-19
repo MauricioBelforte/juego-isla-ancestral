@@ -74,7 +74,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 56 | Fotografía | 🟢 Disponible | 130/130 | Baja | 2 | 53 | — | 2026-08-17 07:10 | Documentado por DeepSeek; desfase plan maestro: sección 55 |
 | 57 | Interfaz de Control | 🟢 Disponible | 119/119 | Alta | 2 | 04 | — | 2026-08-16 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, capa de acciones única, remapeo con conflictos, prompts dinámicos por dispositivo, persistencia atómica, Steam Deck |
 | 58 | Accesibilidad | 🟢 Disponible | 173/173 | Alta | 3 | 53, 57 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 59 | Guardado | ⬜ Sin iniciar | 0/100 | Alta | 5 | 07, 14 | — | — | GameState versionado |
+| 59 | Guardado | 🟢 Disponible | 130/130 | Alta | 5 | 07, 14 | — | 2026-08-17 08:10 | Documentado por DeepSeek; GameState versionado; desfase plan maestro: sección 58 |
 | 60 | Datos y Serialización | 🟢 Disponible | 197/197 | Alta | 3 | 59 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
 | 62 | Memoria | 🟢 Disponible | 150/150 | Alta | 3 | 61 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 82 (81 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 67
-- **Progreso total:** documentación de diseño de 59 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 83 (82 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 66
+- **Progreso total:** documentación de diseño de 60 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -212,3 +212,5 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 55 (Diario del Jugador, 130/130). Push completado. 58 módulos documentados. Siguiente: 56-Fotografía (plan maestro sección 55).
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 56 (Fotografía, 130/130). Push completado. 59 módulos documentados. Siguiente: 57-Interfaz de Control (plan maestro sección 56, ya documentado en tanda anterior) → 61-Puzzles y Acertijos (siguiente en orden de ID disponible).
+
+> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 59 (Guardado, 130/130). Push completado. 60 módulos documentados. Siguiente: 67-Vehículos (siguiente en orden de ID disponible).
