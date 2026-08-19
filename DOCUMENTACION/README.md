@@ -14,7 +14,7 @@ DOCUMENTACION/
 ├── 4-DOCUMENTO-EJECUCION-ACTUAL.md             ← (pendiente) Código de ejecución vigente
 ├── 5-FUTURAS-MEJORAS.md                        ← (pendiente) Ideas y mejoras del usuario
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
-├── 01-Fundamentos-Del-Proyecto/                ← Base documental: decisiones y los 152 módulos
+├── 01-Fundamentos-Del-Proyecto/                ← Portal/índice: 152 módulos, 68 documentados [x]
 ├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)
 ├── 03-Documentacion-Del-Proyecto/       ← M02: catálogo, convenciones, hitos, backlog (133/133)
 ├── 04-Game-Engine/                      ← M03: Godot 4.x adoptado + Voxel Tools (94/120)
@@ -101,7 +101,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 
 | Componente | Estado |
 |------------|--------|
-| 01-Fundamentos-Del-Proyecto | ✅ Creado — base documental (checklist de 152 módulos) |
+| 01-Fundamentos-Del-Proyecto | ✅ Actualizado por Deepseek V4 Flash 2026-08-19 — portal/índice maestro sincronizado: 68/152 módulos con documentación real marcada [x]; libre de bloqueos (68/152) |
 | 02-Vision-Y-Concepto | ✅ Creado — 5 archivos, checklist de 172 ítems (162 completados; 10 pendientes con dueño en M02/QA/Publicación) |
 | 03-Documentacion-Del-Proyecto | ✅ Creado — catálogo de 25 documentos, convenciones, hitos M1-M5, backlog; 5 docs generales *-ACTUAL.md creados |
 | 04-Game-Engine | ✅ Creado — decisión Godot 4.x + Voxel Tools, stack y config de proyecto base (95/120; pendientes = instalación/M1) |

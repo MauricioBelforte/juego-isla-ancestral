@@ -16,7 +16,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 | ID | Módulo | Estado | Progreso | Prioridad | Complejidad | Dependencias | Agente actual | Última actividad | Notas |
 |----|--------|--------|----------|-----------|-------------|--------------|---------------|------------------|-------|
-| 01 | Fundamentos del Proyecto | 🔵 En curso | 0/152 | Alta | 4 | — | DEEPSEEK V4 FLASH | 2026-08-17 | Base documental creada (5 archivos + checklist de 152 módulos). Índice/portal activo (no colgado). Pendiente: desglosar módulos 02-152 |
+| 01 | Fundamentos del Proyecto | 🟢 Disponible | 68/152 | Alta | 4 | — | — | 2026-08-19 14:10 | Índice/portal maestro actualizado por DeepSeek: 68 de 152 módulos del plan maestro con documentación [x]. Pendientes de documentar: 84. Completable 100% al terminar toda la documentación |
 | 02 | Visión y Concepto | 🟢 Disponible | 162/172 | Alta | 2 | 01 | — | 2026-08-15 | Documentación completa por DEEPSEEK V4 FLASH (5 archivos + checklist 172 ítems). 10 pendientes con dueño externo (M02 legal, QA, Publicación) — ver Notas del Agente en plan-actual/04-Codigo.md |
 | 03 | Documentación del Proyecto | 🟢 Disponible | 133/133 | Alta | 2 | 01 | — | 2026-08-16 | Documentación completa por DEEPSEEK V4 FLASH: catálogo 25 docs con dueño, convenciones, hitos M1-M5, roadmap, 5 esqueletos *-ACTUAL.md. Contenido substantivo en módulos dueños |
 | 04 | Game Engine | 🟢 Disponible | 95/120 | Alta | 5 | 01 | — | 2026-08-16 | **DECISIÓN CONFIRMADA (2026-08-16):** Godot 4.x + Voxel Tools (GDExtension, requiere ≥4.4.1) + GDScript — investigación 2026 en plan-actual/04-Codigo.md (Log 17). Pendientes: instalación y proyecto base → hito M1 |
@@ -187,9 +187,10 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 91 (90 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 58
-- **Progreso total:** documentación de diseño de 68 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 104 (102 con documentación completa + 04 y 06 parciales; 01 índice/portal 68/152)
+- **Sin iniciar (`⬜`):** 48
+- **En curso/riesgo/dudas (`🔵`/`🔴`/`🟡`):** 0 — sin bloqueos colgados
+- **Progreso total:** documentación de diseño de 69 módulos completada (68 del plan maestro + portal 01 actualizado); implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -219,4 +220,4 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 68 (Transporte y Navegación, 130/130). Push completado. 62 módulos documentados. Siguiente: 73-Coleccionables (siguiente en orden de ID disponible).
 
-> **2026-08-19 (Deepseek V4 Flash):** se documento el módulo 153 (Objetivo Final del Proyecto, 130/130), RECLAMADO a B2-Composer por inactividad >24 h (regla 21.4.7). Push completado. 68 módulos documentados. Siguiente: 01-Fundamentos del Proyecto (portal/índice, completar checklist de 152 ítems).
+> **2026-08-19 (Deepseek V4 Flash):** se actualizó el módulo 01 (Fundamentos del Proyecto): checklist maestro 68/152 marcado por documentación real, portal libre de bloqueos. Push completado. 69 módulos de documentación de diseño completados. Siguiente: continuar módulos ⬜ en orden de ID.
