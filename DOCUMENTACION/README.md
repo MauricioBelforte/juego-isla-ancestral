@@ -65,6 +65,7 @@ DOCUMENTACION/
 ├── 67-Vehiculos/                       ← DELEGABLE: barco, dirigible, submarino, streaming (130/130)
 ├── 68-Transporte-Y-Navegacion/         ← DELEGABLE: red de rutas, señalización, viajes (130/130)
 ├── 73-Coleccionables/                  ← DELEGABLE: 22 categorías, registro idempotente (130/130)
+├── 75-Postgame/                        ← DELEGABLE: orquestador del 100%, catálogo FASE 1/2 (130/130)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -170,6 +171,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 67-Vehiculos | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presets de barco/dirigible/submarino + plantilla locomotora condicional M68, física acotada sin fluidos, chunk_target de streaming (M10/M61), docking con magnetismo suave (M28), baúl M14 con mejoras persistentes, personalización cozy, audio/animaciones con LOD (130/130) |
 | 68-Transporte-Y-Navegacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: grafo central de paradas y rutas como única fuente de verdad, capa de transporte en el mapa (M54), señalización física consistente (M46), transición cozy sin perder al jugador (M61), costes con descuentos (M38/M20), viajes narrativos (M22/M23) y especiales (M74), coordinación con M69 por estaciones compartidas (130/130) |
 | 73-Coleccionables | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo central de 22 categorías con ids unívocos, registro idempotente por eventos (M07), progreso anti-spoiler, colecciones completas con recompensa y desbloqueos (M71), vistas compartidas de museo (M37) y diario (M55), persistencia compacta (M59/M60) (130/130) |
+| 75-Postgame | ✅ Creado por Deepseek V4 Flash — DELEGABLE: orquestador del contenido post-historia — epílogo (M22), hoja de ruta del 100% derivada y anti-spoiler (M55/M37/M73), logros finales categoría Epílogo (M72), eventos rotativos (M74/M29), catálogo de expansiones FASE 1/FASE 2 declarativo (M27/M51/M10/M16/M17) sin promesas al jugador, reglas cozy sin grindeo (130/130) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |

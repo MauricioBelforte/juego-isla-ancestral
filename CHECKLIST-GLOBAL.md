@@ -90,7 +90,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 72 | Sistema de Logros | 🟢 Disponible | 190/190 | Media | 2 | 71 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): catálogo, desbloqueo, notificación, Steam sync, anti-grind. DELEGABLE PARA IMPLEMENTAR (M72 ya no pendiente de B2-Composer) |
 | 73 | Coleccionables | 🟢 Disponible | 130/130 | Media | 3 | 71, 36 | — | 2026-08-17 11:10 | Documentado por DeepSeek; desfase plan maestro: sección 72 |
 | 74 | Eventos | 🟢 Disponible | 266/266 | Media | 3 | 30, 29 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 7, 2026-08-17): festivales estacionales, eventos repetibles anuales, anti-FOMO. DELEGABLE PARA IMPLEMENTAR |
-| 75 | Postgame | ⬜ Sin iniciar | 0/100 | Baja | 3 | 22 | — | — | — |
+| 75 | Postgame | 🟢 Disponible | 130/130 | Baja | 3 | 22 | — | 2026-08-17 11:40 | Documentado por DeepSeek; desfase plan maestro: sección 74 |
 | 76 | Multijugador | ⬜ Sin iniciar | 0/100 | Baja | 5 | — | — | — | Decisión pendiente |
 | 77 | Online y Red | ⬜ Sin iniciar | 0/100 | Baja | 5 | 76 | — | — | — |
 | 78 | Legal — Propiedad Intelectual | 🟢 Disponible | 157/157 | Alta | 2 | 01 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 86 (85 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 63
-- **Progreso total:** documentación de diseño de 63 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 87 (86 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 62
+- **Progreso total:** documentación de diseño de 64 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -219,4 +219,4 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 68 (Transporte y Navegación, 130/130). Push completado. 62 módulos documentados. Siguiente: 73-Coleccionables (siguiente en orden de ID disponible).
 
-> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 73 (Coleccionables, 130/130). Push completado. 63 módulos documentados. Siguiente: 75-Postgame (plan maestro sección 74).
+> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 75 (Postgame, 130/130). Push completado. 64 módulos documentados. Siguiente: 76-Multijugador (sección 75 del plan maestro, decisión pendiente).
