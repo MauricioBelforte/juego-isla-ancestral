@@ -66,6 +66,7 @@ DOCUMENTACION/
 ├── 68-Transporte-Y-Navegacion/         ← DELEGABLE: red de rutas, señalización, viajes (130/130)
 ├── 73-Coleccionables/                  ← DELEGABLE: 22 categorías, registro idempotente (130/130)
 ├── 75-Postgame/                        ← DELEGABLE: orquestador del 100%, catálogo FASE 1/2 (130/130)
+├── 76-Multijugador/                    ← DECISIÓN: single-player v1, contrato MP futuro (130/130)
 ├── 102-Bug-Tracking/                     ← GitHub Issues: plantillas, categorías, flujos (121/121)
 ├── 103-Logging/                          ← Servicio Logger: niveles, categorías, rotación, sanitización (134/134)
 ├── 107-Backups/                          ← Backups 3-2-1: GitHub Actions, Task Scheduler, verificación, recuperación (137/137)
@@ -172,6 +173,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 68-Transporte-Y-Navegacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: grafo central de paradas y rutas como única fuente de verdad, capa de transporte en el mapa (M54), señalización física consistente (M46), transición cozy sin perder al jugador (M61), costes con descuentos (M38/M20), viajes narrativos (M22/M23) y especiales (M74), coordinación con M69 por estaciones compartidas (130/130) |
 | 73-Coleccionables | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo central de 22 categorías con ids unívocos, registro idempotente por eventos (M07), progreso anti-spoiler, colecciones completas con recompensa y desbloqueos (M71), vistas compartidas de museo (M37) y diario (M55), persistencia compacta (M59/M60) (130/130) |
 | 75-Postgame | ✅ Creado por Deepseek V4 Flash — DELEGABLE: orquestador del contenido post-historia — epílogo (M22), hoja de ruta del 100% derivada y anti-spoiler (M55/M37/M73), logros finales categoría Epílogo (M72), eventos rotativos (M74/M29), catálogo de expansiones FASE 1/FASE 2 declarativo (M27/M51/M10/M16/M17) sin promesas al jugador, reglas cozy sin grindeo (130/130) |
+| 76-Multijugador | ✅ Creado por Deepseek V4 Flash — DECISIÓN: v1 single-player cozy (argumentos de género y coste); contrato MP futuro completo (25 puntos del plan maestro): local couch primero (host autoritativo, progreso individual, anti-griefing por diseño, $0 servidores), online condicionado a hit >10k descargas (M77), economía protegida (M38: solo decoración), chat sin texto libre, manifiesto mp_contract.json + verificador validate_mp_contract.gd; implementación BLOQUEADA por producto (130/130) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |

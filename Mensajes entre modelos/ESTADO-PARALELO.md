@@ -106,6 +106,7 @@
 | 68 — Transporte y Navegación | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 | 73 — Coleccionables | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 | 75 — Postgame | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
+| 76 — Multijugador | Deepseek V4 Flash | 2026-08-17 | ✅ Decisión + contrato (130/130); implementación BLOQUEADA |
 
 ## Decisiones pendientes/descartadas
 
