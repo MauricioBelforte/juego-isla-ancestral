@@ -76,7 +76,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 58 | Accesibilidad | 🟢 Disponible | 173/173 | Alta | 3 | 53, 57 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 59 | Guardado | 🟢 Disponible | 130/130 | Alta | 5 | 07, 14 | — | 2026-08-17 08:10 | Documentado por DeepSeek; GameState versionado; desfase plan maestro: sección 58 |
 | 60 | Datos y Serialización | 🟢 Disponible | 197/197 | Alta | 3 | 59 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 61 | Rendimiento | 🔵 En curso | 0/100 | Alta | 5 | 08, 49 | GPT-5 (Codex) | 2026-08-16 | Documentación técnica en preparación: presupuesto de frame, LOD, culling, streaming y medición para Godot 4.x + Voxel Tools. |
+| 61 | Rendimiento | 🟢 Disponible | 130/130 | Alta | 5 | 08, 49 | — | 2026-08-19 13:00 | Documentado por DeepSeek (RECLAMADO a GPT-5/Codex por inactividad >24 h, regla 21.4.7): norma de presupuestos 16,5 ms, bench scene, gate CI; desfase plan maestro: sección 60 |
 | 62 | Memoria | 🟢 Disponible | 150/150 | Alta | 3 | 61 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 63 | Cargas y Streaming | 🟢 Disponible | 101/101 | Alta | 4 | 08, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 15/15 puntos, progreso real por pesos, LRU con tope, precalentamiento en menú, streaming océano/subterráneo/islas. Requiere M08 + presupuestos M61 |
 | 64 | IA de NPC | 🟢 Disponible | 107/107 | Alta | 5 | 19, 61 | — | 2026-08-17 | **DELEGABLE PARA IMPLEMENTAR** — documentación completa por DEEPSEEK V4 FLASH: 22/22 puntos, FSM con memoria de plan, 6 perfiles de rutina, simulación parcial por burbuja (≤60 plena), anti-atascos. Requiere M19 + presupuestos M61 |
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 89 (88 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 60
-- **Progreso total:** documentación de diseño de 66 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 90 (89 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 59
+- **Progreso total:** documentación de diseño de 67 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -219,4 +219,4 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 68 (Transporte y Navegación, 130/130). Push completado. 62 módulos documentados. Siguiente: 73-Coleccionables (siguiente en orden de ID disponible).
 
-> **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 77 (Online y Red, 130/130; contrato futuro BLOQUEADO por hit de M76). Push completado. 66 módulos documentados. Siguiente: 78 (seccion 77 del plan maestro).
+> **2026-08-19 (Deepseek V4 Flash):** se documento el módulo 61 (Rendimiento, 130/130), RECLAMADO a GPT-5/Codex por inactividad >24 h (regla 21.4.7). Push completado. 67 módulos documentados. Siguiente: 153-Objetivo Final del Proyecto (seccion 152 del plan maestro).

@@ -108,6 +108,7 @@
 | 75 — Postgame | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 | 76 — Multijugador | Deepseek V4 Flash | 2026-08-17 | ✅ Decisión + contrato (130/130); implementación BLOQUEADA |
 | 77 — Online y Red | Deepseek V4 Flash | 2026-08-17 | ✅ Contrato de arquitectura (130/130); BLOQUEADO por hit M76 |
+| 61 — Rendimiento | Deepseek V4 Flash | 2026-08-19 | ✅ RECLAMADO a GPT-5 (inactividad >24 h) y documentado (130/130), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 
