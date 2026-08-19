@@ -167,7 +167,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 150 | Diseño Sonoro Narrativo | ⬜ Sin iniciar | 0/100 | Baja | 2 | 149 | — | — | — |
 | 151 | Control Final | ⬜ Sin iniciar | 0/100 | Alta | 3 | 143 | — | — | — |
 | 152 | Principios Innegociables | 🟢 Disponible | 202/202 | Alta | 1 | 01 | — | 2026-08-16 22:30:00 | Documentación completa por Devin: Se definieron principios de filosofía cozy (sin FOMO, sin castigos irreversibles, eventos repetibles, herramientas que no desaparecen, guardados confiables). Se definieron principios de diseño de juego (combate opcional, sistema de hambre no castigador, ritmo de juego accesible, sin metagaming forzado, variedad de NPCs, balance procedural vs curado, puzzles lógicos, información accesible, economía cozy). Se definieron principios técnicos (performance prioridad sobre visuals, sistemas con propósito, calidad > cantidad, profundidad > cantidad, offline-first, licencias claras de assets, knowledge sharing). Se diseñó proceso de revisión contra principios con checklist de 8 ítems. Se diseñó registro de desviaciones justificadas. Se especificó integración con todos los módulos de diseño e implementación. Se diseñó documentación de principios (README, filosofia_cozy, diseno_juego, tecnicos, proceso_revision, desviaciones_justificadas). Se diseñó documento de licencias de assets. Se diseñó documento de knowledge sharing. Se especificaron métricas de cumplimiento. Se especificó revisión periódica de principios (cada 3 meses). Se proporcionaron ejemplos de aplicación de principios. |
-| 153 | Objetivo Final del Proyecto | 🔵 En curso | 0/120 | Alta | 2 | 151 | B2-Composer | 2026-08-16 17:35 | Documentación transversal en preparación |
+| 153 | Objetivo Final del Proyecto | 🟢 Disponible | 130/130 | Alta | 2 | 151 | — | 2026-08-19 13:40 | Documentado por DeepSeek (RECLAMADO a B2-Composer por inactividad >24 h, regla 21.4.7): contrato de visión O1-O19 verificable, regla de integración; desfase plan maestro: sección 152 |
 
 ## Simbología de Estados
 
@@ -187,9 +187,9 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento por GPT-5, 153-Objetivo Final por B2-Composer)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 90 (89 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
-- **Sin iniciar (`⬜`):** 59
-- **Progreso total:** documentación de diseño de 67 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
+- **Disponibles (`🟢`):** 91 (90 con documentación completa por DeepSeek/Devin/Nemotron + 04 y 06 parciales)
+- **Sin iniciar (`⬜`):** 58
+- **Progreso total:** documentación de diseño de 68 módulos completada; implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
 > **Nota:** los 152 módulos de la tabla corresponden a las 152 secciones de `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md`. Cada uno se creará como componente propio con checklist de ≥100 ítems.
 
@@ -219,4 +219,4 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 > **2026-08-17 (Deepseek V4 Flash):** se documento el módulo 68 (Transporte y Navegación, 130/130). Push completado. 62 módulos documentados. Siguiente: 73-Coleccionables (siguiente en orden de ID disponible).
 
-> **2026-08-19 (Deepseek V4 Flash):** se documento el módulo 61 (Rendimiento, 130/130), RECLAMADO a GPT-5/Codex por inactividad >24 h (regla 21.4.7). Push completado. 67 módulos documentados. Siguiente: 153-Objetivo Final del Proyecto (seccion 152 del plan maestro).
+> **2026-08-19 (Deepseek V4 Flash):** se documento el módulo 153 (Objetivo Final del Proyecto, 130/130), RECLAMADO a B2-Composer por inactividad >24 h (regla 21.4.7). Push completado. 68 módulos documentados. Siguiente: 01-Fundamentos del Proyecto (portal/índice, completar checklist de 152 ítems).
