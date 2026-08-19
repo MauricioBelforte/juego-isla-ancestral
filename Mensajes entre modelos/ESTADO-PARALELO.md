@@ -103,6 +103,7 @@
 | 56 — Fotografía | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 | 59 — Guardado | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 | 67 — Vehículos | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
+| 68 — Transporte y Navegación | Deepseek V4 Flash | 2026-08-17 | ✅ Documentado (130/130), DELEGABLE |
 
 ## Decisiones pendientes/descartadas
 
