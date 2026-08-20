@@ -144,6 +144,7 @@
 | 94 — Retención sin FOMO | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (113/113): 5 normas anti-FOMO (0 streaks/expiración/castigo/exclusividad), objetivos rotatorios con sobremesa, eventos con 3+ variantes, postgame 5+ h, AntiFomoGate en CI. DELEGABLE. Pendiente QA cruzado |
 | 95 — Monetización | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (108/108): premium USD 24.99, 3 ediciones sin P2W, DLC expansión + cosmético sin fragmentar historia, impuestos/reembolsos, bundles, 0 lootboxes con gates CI. DELEGABLE. Pendiente QA cruzado |
 | 96 — Plataformas | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (102/102): matriz 20 pts x 11 plataformas, oleadas P0-P3 (Steam+Deck día 0, EGS/GOG/macOS/Linux-Proton P1, consolas GATE por presupuesto), cross-play no aplica, cross-save Steam↔Deck, IPlatformBridge sin APIs hardcodeadas, CI multi-target. DELEGABLE. Pendiente QA cruzado |
+| 99 — Marketing | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (169/169): identidad visual + logo, web con dominio/SEO, 6 canales con calendario, Discord con reglas, press/media kit, capturas/gifs/clips, 8 devlogs + blog, newsletter meta 500, campaña wishlist 10k, outreach 20+ creadores y 10+ prensa, demo en festivales, runbook día 0 para M143. DELEGABLE. Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
