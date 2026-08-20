@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-20 05:40:00 (cierre de sesión)
+> **Última actualización:** 2026-08-20 19:00:26
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -18,7 +18,7 @@
 | ⚠️ Conflicto detectado 2026-08-17 | Claude Sonnet 4.5 | Cline | 🟡 En duda | Tenía B1 asignada por error (duplicada con Nemotron). **Cancelada**: primero `git pull`; no tocar archivos de B1. Si el usuario lo pide: QA cruzado (21.8) del trabajo de Nemotron |
 | Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | ⏸️ FRENADO por el usuario 2026-08-20 | ✅ Lote 1 completado (11/11): 100, 105, 106, 116, 120, 121, 125, 126, 127, 129, 150 (todos integrados y pusheados por Deepseek V4 Flash). ⏸️ Pendientes de retomar cuando el usuario disponga (Lote 2, 15 módulos): 79, 81, 82, 83, 84, 85, 98, 115, 119, 128, 132, 134, 145, 146, 149. Zona B1 (69, 104, 118, 131) NO tocar |
 | Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y su log (número 36, el siguiente de la secuencia al crearlo) |
-| QA cruzado (verificador) | Gemini 3.7 Flash | Antigravity | 🟢 Disponible | ✅ QA Lote 1 (93, 147, 137, 138) + Lote 2 (10 módulos DEVIN) 2026-08-20, verificado por Deepseek V4 Flash. Archivo de estado: `01-QA-Cruzado-Gemini/ESTADO-QA.md`. Próximo QA: cuando haya módulos nuevos verificables |
+| QA cruzado (verificador) | Gemini 3.7 Flash | Antigravity | 🟢 Disponible | ✅ QA Lotes 1-3 (16 módulos: 93, 147, 137, 138, 10 DEVIN, 139, 150) 2026-08-20, verificado por Deepseek V4 Flash. Archivo de estado: `01-QA-Cruzado-Gemini/ESTADO-QA.md`. Próximo QA: cuando haya módulos nuevos verificables |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
 
 ## Reglas de no-pisado
@@ -132,8 +132,8 @@
 | 126 — Marketing Legal | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 101/101 (48 DEVIN + 50 propuestas Gemini + 3 propias) |
 | 127 — Copyright del Juego | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 101/101 (50 DEVIN + 49 propuestas Gemini + 2 propias) |
 | 129 — Merchandising | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 108/108 (59 DEVIN + 49 propuestas Gemini) |
-| M139 — Pre-Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (142/142): Aurora completa, NPC con rutinas, economía AO, construcción, Templo de Brisa, Gran Vapor a Coral, pipeline M108, save v3+menú, audio global, H1-H10 GONOGO a Alpha. DELEGABLE. Pendiente QA cruzado |
-| 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) + Deepseek V4 Flash | 2026-08-20 | ✅ CERRADO (151/151): DEVIN completó lo que faltaba y Deepseek revisó/mejoró (dependencias M42-M44/M24-M26, totales 151, carpeta tilde eliminada). Pendiente QA cruzado |
+| M139 — Pre-Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (142/142): Aurora completa, NPC con rutinas, economía AO, construcción, Templo de Brisa, Gran Vapor a Coral, pipeline M108, save v3+menú, audio global, H1-H10 GONOGO a Alpha. DELEGABLE. ✅ Verificado por Gemini 3.7 Flash (Antigravity) 2026-08-20 |
+| 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) + Deepseek V4 Flash | 2026-08-20 | ✅ CERRADO (151/151): DEVIN completó lo que faltaba y Deepseek revisó/mejoró (dependencias M42-M44/M24-M26, totales 151, carpeta tilde eliminada). ✅ Verificado por Gemini 3.7 Flash (Antigravity) 2026-08-20 |
 
 ## Decisiones pendientes/descartadas
 
