@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-20 19:00:26
+> **Última actualización:** 2026-08-20 19:05:03
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -134,6 +134,7 @@
 | 129 — Merchandising | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 108/108 (59 DEVIN + 49 propuestas Gemini) |
 | M139 — Pre-Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (142/142): Aurora completa, NPC con rutinas, economía AO, construcción, Templo de Brisa, Gran Vapor a Coral, pipeline M108, save v3+menú, audio global, H1-H10 GONOGO a Alpha. DELEGABLE. ✅ Verificado por Gemini 3.7 Flash (Antigravity) 2026-08-20 |
 | 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) + Deepseek V4 Flash | 2026-08-20 | ✅ CERRADO (151/151): DEVIN completó lo que faltaba y Deepseek revisó/mejoró (dependencias M42-M44/M24-M26, totales 151, carpeta tilde eliminada). ✅ Verificado por Gemini 3.7 Flash (Antigravity) 2026-08-20 |
+| 140 — Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (124/124): historia 6 Sellos (actos 1-3), mecánicas principales completas, 6 integraciones cruzadas, primer balance triple red, 4 islas, 2 templos nuevos, QA intensivo, 0 TODO/FIXME, GONOGO-BETA H1-H10. DELEGABLE. Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
