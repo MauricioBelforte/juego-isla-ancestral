@@ -143,6 +143,7 @@
 | 89 — Diseño de Menús | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (124/124): shell 21 pantallas (ShellManager/NavigatorManager), perfiles 1-3 x slots 3-6, settings.json local, pausa congelando el mundo, ajustes por categorías, pantallas de contenido servidas por managers (AGENTS.md §9). DELEGABLE. Pendiente QA cruzado |
 | 94 — Retención sin FOMO | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (113/113): 5 normas anti-FOMO (0 streaks/expiración/castigo/exclusividad), objetivos rotatorios con sobremesa, eventos con 3+ variantes, postgame 5+ h, AntiFomoGate en CI. DELEGABLE. Pendiente QA cruzado |
 | 95 — Monetización | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (108/108): premium USD 24.99, 3 ediciones sin P2W, DLC expansión + cosmético sin fragmentar historia, impuestos/reembolsos, bundles, 0 lootboxes con gates CI. DELEGABLE. Pendiente QA cruzado |
+| 96 — Plataformas | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (102/102): matriz 20 pts x 11 plataformas, oleadas P0-P3 (Steam+Deck día 0, EGS/GOG/macOS/Linux-Proton P1, consolas GATE por presupuesto), cross-play no aplica, cross-save Steam↔Deck, IPlatformBridge sin APIs hardcodeadas, CI multi-target. DELEGABLE. Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
