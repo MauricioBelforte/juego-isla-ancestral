@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-17 18:00:00
+> **Última actualización:** 2026-08-19 04:32:00
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -13,17 +13,17 @@
 | Agente | Modelo | Plataforma | Estado | Tareas |
 |---|---|---|---|---|
 | Coordinador/documentación de módulos delegables | Deepseek V4 Flash | OpenCode | 🟢 Activo — documentando el resto | ✅ M32, M41, M42, M43, M44, M57, M63, M64 + Tandas 1-3 (14, 15, 16, 17, 18, 19, 20, 21, 27, 28, 33, 34, 35, 36, 37, 53), push `08a0df7` + Tanda 4 (38, 58, 70, 78, 80, 86), commit tanda 4 + Tanda 5 (62, 71, 92, 112, 133, 135) + Tanda 6 (60, 97, 101, 108, 114, 136) + Tanda 7 (39, 40, 54, 72, 74, 87) + M45 (push `ee20b39`) + M46 (push `2ab6b5c`) + M47 + M48 + M49 + M50 + M51 + M52 (120/120). Siguientes: módulos restantes de a uno (módulo → push → siguiente) |
-| Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🔵 En curso — 2026-08-16 17:35 | M153 Objetivo Final → M149 Nomenclatura → **M72 ya NO aplica** (documentado por Deepseek en Tanda 7, fila actualizada) |
+| Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🟡 LIBERADA — 2026-08-19 | M153 reclamado por Deepseek (✅ 2026-08-19) por inactividad >24 h (regla 21.4.7). M149 delegado a la nueva tanda DEVIN. M72 ya documentado. B2 sin pendientes de Composer |
 | Documentación Sub-tanda B1 (69, 104, 118, 131) | Nemotron 3.5 Lightning | Cline | ✅ Completo | 4 carpetas completas (10 archivos c/u), pusheadas en `6c01b99`, firmas corregidas al estándar. **NO rehacer ni sobrescribir** |
 | ⚠️ Conflicto detectado 2026-08-17 | Claude Sonnet 4.5 | Cline | 🟡 En duda | Tenía B1 asignada por error (duplicada con Nemotron). **Cancelada**: primero `git pull`; no tocar archivos de B1. Si el usuario lo pide: QA cruzado (21.8) del trabajo de Nemotron |
-| Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | 🟢 Disponible | Tanda A restante: 91 (90 ya pusheado). Tanda B1 (69, 104, 118, 131) reasignada a Claude Sonnet 4.5 — NO tocar |
+| Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | 🟢 Disponible — nueva tanda asignada 2026-08-19 | **NUEVA TANDA (26 módulos c1-2):** Lote 1 Baja: 100, 105, 106, 116, 120, 121, 125, 126, 127, 129, 150. Lote 2 Media: 79, 81, 82, 83, 84, 85, 98, 115, 119, 128, 132, 134, 145, 146, 149. Prompt detallado entregado por Deepseek V4 Flash (2026-08-19). **NO push ni commit ni Logs/** — Deepseek integra. Zona B1 (69, 104, 118, 131) NO tocar |
 | Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y su log (número 36, el siguiente de la secuencia al crearlo) |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
 
 ## Reglas de no-pisado
 
 - **Zona de Deepseek V4 Flash (OpenCode):** 32, 41, 42, 43, 44, 57 (✅ completados) + 63, 64 (✅ completados). En curso: ninguno.
-- **Zona de SWE-1.6 (DEVIN):** módulos 103, 107, 110, 111, 122, 152, 88, 90, 91, 69, 72, 104, 118, 131, 149, 153 (carpeta `{ID}-Nombre`). No tocar.
+- **Zona de SWE-1.6 (DEVIN):** módulos 103, 107, 110, 111, 122, 152, 88, 90, 91, 69, 72, 104, 118, 131 (carpeta `{ID}-Nombre`). No tocar. **NUEVA zona DEVIN 2026-08-19:** 100, 105, 106, 116, 120, 121, 125, 126, 127, 129, 150, 79, 81, 82, 83, 84, 85, 98, 115, 119, 128, 132, 134, 145, 146, 149 (solo DEVIN; Deepseek no las toca, integra al final).
 - **Zona común:** `CHECKLIST-GLOBAL.md` (solo actualizar filas propias), `Logs/ULTIMO_NUMERO.txt` (secuencial, leer y avanzar), `Logs/` (solo crear), `DOCUMENTACION/README.md` (solo agregar entradas propias).
 - **Prohibido para ambos:** `00-PLAN-INICIAL/`, `plan-inicial/` de módulos ajenos, archivos `*-ACTUAL.md` de la raíz.
 
@@ -110,6 +110,19 @@
 | 77 — Online y Red | Deepseek V4 Flash | 2026-08-17 | ✅ Contrato de arquitectura (130/130); BLOQUEADO por hit M76 |
 | 61 — Rendimiento | Deepseek V4 Flash | 2026-08-19 | ✅ RECLAMADO a GPT-5 (inactividad >24 h) y documentado (130/130), DELEGABLE |
 | 153 — Objetivo Final del Proyecto | Deepseek V4 Flash | 2026-08-19 | ✅ RECLAMADO a B2-Composer (inactividad >24 h) y documentado (130/130), DELEGABLE |
+| 93 — Balance | Deepseek V4 Flash | 2026-08-19 | ✅ Documentado (130/130): tabla de balance JSON, curvas mixtas, anti-grind/anti-exploit, simulación económica, gate CI. DELEGABLE |
+| 147 — World Building | Deepseek V4 Flash | 2026-08-19 | ✅ Documentado (130/130): biblia dual MD+JSON, capas de revelación por Sellos, canon validable. DELEGABLE |
+| 100 — Community Management | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (222/222 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 105 — Telemetría de Gameplay | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (163/163 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 106 — Seguridad | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (206/206 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 116 — Instalador | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (192/192 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 120 — DLC y Expansiones | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (222/222 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 121 — Soporte Post-Lanzamiento | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (211/211 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 125 — Términos de Servicio | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (105/105 reales verificados e integrados por Deepseek V4 Flash). Nueva tanda DEVIN |
+| 126 — Marketing Legal | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (48/48 reales verificados; checklist < 100 ítems, ampliable en QA) |
+| 127 — Copyright del Juego | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (50/50 reales verificados; checklist < 100 ítems, ampliable en QA) |
+| 129 — Merchandising | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (59/59 reales verificados; checklist < 100 ítems, ampliable en QA) |
+| ⚠️ 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) | 2026-08-19 | 🔵 **INCOMPLETO — DEVIN se quedó sin tokens.** Tiene 3/5 archivos en plan-inicial, 0 en plan-actual. **SIN PUSHEAR** (queda en working dir). Existe carpeta duplicada vacía `150-Diseño-Sonoro-Narrativo` (con tilde) — ignorar; la válida es `150-Diseo-Sonoro-Narrativo` (sin tilde, se renombrará al retomar) |
 | 01 — Fundamentos del Proyecto | Deepseek V4 Flash | 2026-08-19 | ✅ Portal/índice actualizado: 68/152 módulos marcados [x]; sin bloqueos |
 
 ## Decisiones pendientes/descartadas

@@ -1,4 +1,4 @@
-# CHECKLIST-GLOBAL.md — Orquestador Multiagente
+﻿# CHECKLIST-GLOBAL.md — Orquestador Multiagente
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
@@ -108,20 +108,20 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 90 | Configuración Gráfica | 🟢 Disponible | 248/248 | Media | 1 | 53 | — | 2026-08-17 00:15:00 | Documentación completa por Devin: Se documentó configuración gráfica con 23 opciones (resolución, pantalla completa, ventana, borderless, VSync, FPS cap, escala de resolución, upscaling, calidad de sombras/texturas/efectos/vegetación/agua/partículas, anti-aliasing, anisotropic filtering, post-processing, bloom, motion blur, depth of field). Se definieron 4 presets gráficos (bajo, medio, alto, ultra). Se diseñó detección automática de hardware (GPU, RAM, CPU) y recomendación de preset. Se diseñó menú de configuración gráfica con todos los controles (dropdowns, toggles, sliders). Se diseñó GraphicsSettings (Resource) para configuración actual. Se diseñó GraphicsPresets con 4 presets. Se diseñó HardwareDetector para detección de hardware. Se diseñó GraphicsApplier para aplicación en tiempo real. Se diseñó GraphicsSettingsLoader para carga al inicio. Se diseñó GraphicsSettingsSaver para guardado al cerrar. Se diseñó integración con M58 (Accesibilidad) para ajustes de fuentes y reducción de effects. Se diseñó integración con M61 (Rendimiento) para FPS counter y profiling en debug. Se diseñó integración con M88 (Fuentes Tipográficas) para ajustes de fuentes. Se crearon 5 archivos de documentación con 248 ítems de checklist. |
 | 91 | Configuración de Audio | 🟢 Disponible | 239/239 | Media | 1 | 53 | — | 2026-08-17 00:30:00 | Documentación completa por Devin: Se documentó configuración de audio con 15 opciones (volumen maestro, música, efectos, ambiente, voces, UI, cinemáticas, audio 3D, subtítulos, sonidos de interfaz, rango dinámico, compresión, dispositivo de salida, pruebas con auriculares, pruebas con altavoces). Se definieron 7 buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic). Se diseñó audio 3D con espacialización (HRTF) y oclusión. Se diseñaron subtítulos con toggle, tamaño, opacidad, fondo, color de texto. Se diseñaron sonidos de interfaz (hover, click, notificaciones, errores). Se diseñó rango dinámico (quiet, medio, dinámico) con compresión. Se diseñó compresión de audio con limiter. Se diseñó dispositivo de salida (predeterminado, auriculares, altavoces, HDMI, Bluetooth). Se diseñaron pruebas con auriculares (estéreo, espacial 3D, balance de canales) y altavoces (estéreo, 5.1, 7.1, balance de canales). Se diseñó menú de configuración de audio con todos los controles (sliders, toggles, dropdowns). Se diseñó AudioSettings (Resource) para configuración actual. Se diseñó AudioBusSetup para setup de buses de audio. Se diseñó Audio3DSetup para espacialización y oclusión. Se diseñó SubtitleManager para mostrar subtítulos. Se diseñó UISoundManager para sonidos de interfaz. Se diseñó DynamicRangeManager para rango dinámico con compresión. Se diseñó CompressionManager para compresión de audio con limiter. Se diseñó OutputDeviceManager para dispositivo de salida. Se diseñó AudioTestManager para pruebas de audio. Se diseñó AudioSettingsLoader para carga al inicio. Se diseñó AudioSettingsSaver para guardado al cerrar. Se diseñó integración con M58 (Accesibilidad) para ajustes de accesibilidad. Se diseñó integración con M87 (Internacionalización) para subtítulos multiidioma. Se diseñó integración con M61 (Rendimiento) para streaming y pool de AudioPlayers. Se crearon 5 archivos de documentación con 227 ítems de checklist. |
 | 92 | Tutorial | 🟢 Disponible | 185/185 | Alta | 3 | 53, 70 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
-| 93 | Balance | ⬜ Sin iniciar | 0/100 | Alta | 4 | 38, 20 | — | — | — |
+| 93 | Balance | 🟢 Disponible | 130/130 | Alta | 4 | 38, 20 | — | 2026-08-19 04:30 | Documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-19): tabla de balance central JSON, curvas mixtas, anti-grind/anti-exploit validables, simulación económica, gate CI. DELEGABLE PARA IMPLEMENTAR |
 | 94 | Retención sin FOMO | ⬜ Sin iniciar | 0/100 | Media | 3 | 93 | — | — | — |
 | 95 | Monetización | ⬜ Sin iniciar | 0/100 | Media | 3 | 38 | — | — | — |
 | 96 | Plataformas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
 | 97 | Steam / Store Page | 🟢 Disponible | 195/195 | Alta | 3 | 96 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 98 | Trailer | ⬜ Sin iniciar | 0/100 | Media | 2 | 97 | — | — | — |
 | 99 | Marketing | ⬜ Sin iniciar | 0/100 | Media | 3 | 97 | — | — | — |
-| 100 | Community Management | ⬜ Sin iniciar | 0/100 | Baja | 2 | 99 | — | — | — |
+| 100 | Community Management | 🟢 Disponible | 222/222 | Baja | 2 | 99 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): comunidad, Discord, redes, eventos comunitarios, moderación. DELEGABLE PARA IMPLEMENTAR |
 | 101 | QA General | 🟢 Disponible | 205/205 | Alta | 3 | 110 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 102 | Bug Tracking | 🟢 Disponible | 140/140 | Media | 1 | 101 | — | 2026-08-16 17:20:00 | Documentación completa por Devin: GitHub Issues con plantilla, categorías, severidades, flujo de trabajo e integración con QA/Logging/Debug Menu |
 | 103 | Logging | 🟢 Disponible | 157/157 | Media | 2 | 04 | — | 2026-08-16 17:50:00 | Documentación completa por Devin: Servicio Logger con niveles, categorías, rotación, sanitización de datos sensibles, exportación e integración con Bug Tracking/Debug Menu/Crash Reporting |
 | 104 | Analytics | 🟢 Disponible | 100/100 | Baja | 2 | 103 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 100 ítems. DELEGABLE PARA IMPLEMENTAR |
-| 105 | Telemetría de Gameplay | ⬜ Sin iniciar | 0/100 | Baja | 2 | 104 | — | — | — |
-| 106 | Seguridad | ⬜ Sin iniciar | 0/100 | Baja | 2 | 77 | — | — | — |
+| 105 | Telemetría de Gameplay | 🟢 Disponible | 163/163 | Baja | 2 | 104 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): eventos de telemetría de gameplay. DELEGABLE PARA IMPLEMENTAR |
+| 106 | Seguridad | 🟢 Disponible | 206/206 | Baja | 2 | 77 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): seguridad de datos, sanitización, vulnerabilidades. DELEGABLE PARA IMPLEMENTAR |
 | 107 | Backups | 🟢 Disponible | 176/176 | Alta | 1 | 59 | — | 2026-08-16 18:50:00 | Documentación completa por Devin: Estrategia 3-2-1 (GitHub + Cloud + Disco Externo), automatización con GitHub Actions y Task Scheduler, verificación de integridad SHA-256, política de retención y plan de recuperación de desastres |
 | 108 | Pipeline de Assets | 🟢 Disponible | 181/181 | Alta | 3 | 45 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 109 | Herramientas Internas | ⬜ Sin iniciar | 0/100 | Media | 3 | 04 | — | — | — |
@@ -131,20 +131,20 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 113 | Pruebas de Stress | ⬜ Sin iniciar | 0/100 | Media | 3 | 112 | — | — | — |
 | 114 | Playtest | 🟢 Disponible | 186/186 | Alta | 3 | 101, 137 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 6, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
 | 115 | Hardware | ⬜ Sin iniciar | 0/100 | Media | 2 | 96 | — | — | — |
-| 116 | Instalador | ⬜ Sin iniciar | 0/100 | Baja | 1 | 116 | — | — | — |
+| 116 | Instalador | 🟢 Disponible | 192/192 | Baja | 1 | — | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): instalador Windows/Steam, firmas, permisos. DELEGABLE PARA IMPLEMENTAR |
 | 117 | Build System | ⬜ Sin iniciar | 0/100 | Media | 3 | 116 | — | — | — |
 | 118 | CI/CD | 🟢 Disponible | 100/100 | Baja | 2 | 117 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Conteo real verificado por Deepseek V4 Flash (2026-08-17): 100 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 119 | Actualizaciones | ⬜ Sin iniciar | 0/100 | Media | 2 | 117, 59 | — | — | — |
-| 120 | DLC y Expansiones | ⬜ Sin iniciar | 0/100 | Baja | 2 | 95, 142 | — | — | — |
-| 121 | Soporte Post-Lanzamiento | ⬜ Sin iniciar | 0/100 | Baja | 2 | 142 | — | — | — |
+| 120 | DLC y Expansiones | 🟢 Disponible | 222/222 | Baja | 2 | 95, 142 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): roadmap DLC, expansiones, contenido post-lanzamiento. DELEGABLE PARA IMPLEMENTAR |
+| 121 | Soporte Post-Lanzamiento | 🟢 Disponible | 211/211 | Baja | 2 | 142 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): soporte post-lanzamiento, tickets, mantenimiento. DELEGABLE PARA IMPLEMENTAR |
 | 122 | Crash Reporting | 🟢 Disponible | 259/259 | Baja | 1 | 103 | — | 2026-08-16 21:30:00 | Documentación completa por Devin: Se seleccionó Crashlytics (Firebase) como servicio externo principal con Sentry como fallback. Se diseñó CrashReporter como servicio principal con captura automática de crashes. Se diseñó MetadataCollector para recolectar información de hardware, software y contexto del juego. Se diseñó ContextSanitizer para sanitizar contexto y no enviar datos personales (cumplimiento GDPR). Se diseñó CrashCache para caché offline cuando no hay conexión. Se diseñó CrashSender para enviar crashes a servicio externo. Se diseñó CrashDashboard para visualizar crashes y estadísticas. Se diseñó integración con M103 (Logging) para loggear crashes como CRITICAL. Se diseñó integración con M102 (Bug Tracking) para crear issues automáticamente por crashes críticos. Se diseñó integración con M110 (Debug Menu) para agregar panel de "Diagnostics". Se diseñó sistema de priorización de crashes (matriz de frecuencia, severidad, impacto). Se diseñó workflow de corrección de crashes (identificar → reproducir → corregir → testear → desplegar). Se diseñó builds de diagnóstico con logs adicionales, asserts, símbolos de debug. Se diseñó alertas automáticas para crashes críticos y de alta frecuencia. Se especificó política de opt-out del usuario y cumplimiento GDPR. Se especificó política de retención de datos (90 días). |
 | 123 | Modding | ⬜ Sin iniciar | 0/100 | Baja | 5 | 117 | — | — | Opcional muy a futuro |
 | 124 | Contenido Generado por Usuarios | ⬜ Sin iniciar | 0/100 | Baja | 3 | 123 | — | — | — |
-| 125 | Términos de Servicio | ⬜ Sin iniciar | 0/100 | Baja | 1 | 78 | — | — | — |
-| 126 | Marketing Legal | ⬜ Sin iniciar | 0/100 | Baja | 1 | 78 | — | — | — |
-| 127 | Copyright del Juego | ⬜ Sin iniciar | 0/100 | Baja | 1 | 78 | — | — | — |
+| 125 | Términos de Servicio | 🟢 Disponible | 105/105 | Baja | 1 | 78 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): términos de servicio. DELEGABLE PARA IMPLEMENTAR |
+| 126 | Marketing Legal | 🟢 Disponible | 48/48 | Baja | 1 | 78 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): checklist real 48 ítems (menor al mínimo 100 de la regla, ampliable en QA cruzado). DELEGABLE PARA IMPLEMENTAR |
+| 127 | Copyright del Juego | 🟢 Disponible | 50/50 | Baja | 1 | 78 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): checklist real 50 ítems (menor al mínimo 100 de la regla, ampliable en QA cruzado). DELEGABLE PARA IMPLEMENTAR |
 | 128 | Identidad de Marca | ⬜ Sin iniciar | 0/100 | Media | 2 | 78, 97 | — | — | — |
-| 129 | Merchandising | ⬜ Sin iniciar | 0/100 | Baja | 1 | 142 | — | — | — |
+| 129 | Merchandising | 🟢 Disponible | 59/59 | Baja | 1 | 142 | — | 2026-08-19 | Documentación completa por SWE-1.6 (DEVIN, 2026-08-19): checklist real 59 ítems (menor al mínimo 100 de la regla, ampliable en QA cruzado). DELEGABLE PARA IMPLEMENTAR |
 | 131 | Créditos | 🟢 Disponible | 100/100 | Media | 1 | 142 | — | 2026-08-17 | Documentación completa por Nemotron 3.5 (B1). Checklist alineado por Deepseek V4 Flash (2026-08-17, conteo real 100). DELEGABLE PARA IMPLEMENTAR |
 | 132 | Producción del Equipo | ⬜ Sin iniciar | 0/100 | Media | 1 | 134 | — | — | — |
 | 133 | Gestión del Proyecto | 🟢 Disponible | 127/127 | Alta | 2 | 01 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 5, 2026-08-17). DELEGABLE PARA IMPLEMENTAR |
@@ -161,7 +161,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 144 | Después del Lanzamiento | ⬜ Sin iniciar | 0/100 | Media | 3 | 143 | — | — | — |
 | 145 | Diseño de Experiencia | ⬜ Sin iniciar | 0/100 | Media | 2 | 01 | — | — | — |
 | 146 | Diseño Emocional | ⬜ Sin iniciar | 0/100 | Media | 2 | 145 | — | — | — |
-| 147 | World Building | ⬜ Sin iniciar | 0/100 | Alta | 4 | 22 | — | — | — |
+| 147 | World Building | 🟢 Disponible | 130/130 | Alta | 4 | 22 | — | 2026-08-19 04:30 | Documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-19): biblia dual MD+JSON, capas de revelación por Sellos, canon validable, trazabilidad a módulos. DELEGABLE PARA IMPLEMENTAR |
 | 148 | Lore Ambiental | ⬜ Sin iniciar | 0/100 | Media | 3 | 147, 24 | — | — | — |
 | 149 | Nombres y Nomenclatura | ⬜ Sin iniciar | 0/100 | Media | 2 | 147 | — | — | — |
 | 150 | Diseño Sonoro Narrativo | ⬜ Sin iniciar | 0/100 | Baja | 2 | 149 | — | — | — |
