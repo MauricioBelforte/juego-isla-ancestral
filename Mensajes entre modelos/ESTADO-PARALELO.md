@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-20 19:14:42
+> **Última actualización:** 2026-08-20 19:17:13
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -137,6 +137,7 @@
 | 140 — Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (124/124): historia 6 Sellos (actos 1-3), mecánicas principales completas, 6 integraciones cruzadas, primer balance triple red, 4 islas, 2 templos nuevos, QA intensivo, 0 TODO/FIXME, GONOGO-BETA H1-H10. DELEGABLE. Pendiente QA cruzado |
 | 141 — Beta | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (151/151): contenido 100%, historia con Acto 3 y epílogo, 6 templos finales, 6 islas finales, audio 100%, localización 6 idiomas, accesibilidad M58, rendimiento objetivo, cero P0/P1, plataformas, store page y tráiler final, certificación. DELEGABLE. Pendiente QA cruzado |
 | 142 — Release Candidate | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (129/129): freeze de features y contenido, hotfixes P0/P1 por comité, build limpia, instalación y actualización verificadas, saves y cloud compatibles, logros, 6 idiomas, rendimiento objetivo, crash < 0.5% en 1000 sesiones, certificación, legal, marketing, soporte y plan de lanzamiento. DELEGABLE. Pendiente QA cruzado |
+| 143 — Lanzamiento | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (111/111): publicación día 0 (página, build, tráiler, comunicado), soporte y monitorización 72 h (crashes, reviews, servidores, compras, saves), triaje de bugs, hotfix 2.0.x, informe 72 h 4 ejes, comunidad, agradecimiento y preservación de builds. DELEGABLE. Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
