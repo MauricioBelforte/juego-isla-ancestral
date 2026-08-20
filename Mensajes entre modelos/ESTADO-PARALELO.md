@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-20 05:18:22
+> **Última actualización:** 2026-08-20 05:40:00 (cierre de sesión)
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -16,7 +16,7 @@
 | Documentación Sub-tanda B2 (transversales) | Composer | Cursor | 🟡 LIBERADA — 2026-08-19 | M153 reclamado por Deepseek (✅ 2026-08-19) por inactividad >24 h (regla 21.4.7). M149 delegado a la nueva tanda DEVIN. M72 ya documentado. B2 sin pendientes de Composer |
 | Documentación Sub-tanda B1 (69, 104, 118, 131) | Nemotron 3.5 Lightning | Cline | ✅ Completo | 4 carpetas completas (10 archivos c/u), pusheadas en `6c01b99`, firmas corregidas al estándar. **NO rehacer ni sobrescribir** |
 | ⚠️ Conflicto detectado 2026-08-17 | Claude Sonnet 4.5 | Cline | 🟡 En duda | Tenía B1 asignada por error (duplicada con Nemotron). **Cancelada**: primero `git pull`; no tocar archivos de B1. Si el usuario lo pide: QA cruzado (21.8) del trabajo de Nemotron |
-| Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | 🟢 Disponible — nueva tanda asignada 2026-08-19 | **NUEVA TANDA (26 módulos c1-2):** Lote 1 Baja: 100, 105, 106, 116, 120, 121, 125, 126, 127, 129, 150. Lote 2 Media: 79, 81, 82, 83, 84, 85, 98, 115, 119, 128, 132, 134, 145, 146, 149. Prompt detallado entregado por Deepseek V4 Flash (2026-08-19). **NO push ni commit ni Logs/** — Deepseek integra. Zona B1 (69, 104, 118, 131) NO tocar |
+| Documentación de módulos triviales (Tanda A) | SWE-1.6 | DEVIN | ⏸️ FRENADO por el usuario 2026-08-20 | ✅ Lote 1 completado (11/11): 100, 105, 106, 116, 120, 121, 125, 126, 127, 129, 150 (todos integrados y pusheados por Deepseek V4 Flash). ⏸️ Pendientes de retomar cuando el usuario disponga (Lote 2, 15 módulos): 79, 81, 82, 83, 84, 85, 98, 115, 119, 128, 132, 134, 145, 146, 149. Zona B1 (69, 104, 118, 131) NO tocar |
 | Documentación técnica de rendimiento | GPT-5 | Codex | 🔵 En curso — 2026-08-16 03:39:37 | M61 Rendimiento: documentación de diseño para Godot 4.x + Voxel Tools; archivos propios, fila 61, README de DOCUMENTACION y su log (número 36, el siguiente de la secuencia al crearlo) |
 | QA cruzado (verificador) | Gemini 3.7 Flash | Antigravity | 🟢 Disponible | ✅ QA Lote 1 (93, 147, 137, 138) + Lote 2 (10 módulos DEVIN) 2026-08-20, verificado por Deepseek V4 Flash. Archivo de estado: `01-QA-Cruzado-Gemini/ESTADO-QA.md`. Próximo QA: cuando haya módulos nuevos verificables |
 | — reservado — | — | — | — | M29, M30, M31 (documentados por Deepseek V4 Flash, libres para implementar) |
@@ -123,7 +123,7 @@
 | 126 — Marketing Legal | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (48/48 reales verificados; checklist < 100 ítems, ampliable en QA) |
 | 127 — Copyright del Juego | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (50/50 reales verificados; checklist < 100 ítems, ampliable en QA) |
 | 129 — Merchandising | SWE-1.6 (DEVIN) | 2026-08-19 | ✅ Documentado (59/59 reales verificados; checklist < 100 ítems, ampliable en QA) |
-| ⚠️ 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) | 2026-08-19 | 🔵 **INCOMPLETO — DEVIN se quedó sin tokens.** Tiene 3/5 archivos en plan-inicial, 0 en plan-actual. **SIN PUSHEAR** (queda en working dir). Existe carpeta duplicada vacía `150-Diseño-Sonoro-Narrativo` (con tilde) — ignorar; la válida es `150-Diseo-Sonoro-Narrativo` (sin tilde, se renombrará al retomar) |
+| ⚠️ 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) | 2026-08-20 | ✅ CERRADO por DEVIN (151/151) y revisado/mejorado por Deepseek V4 Flash (dependencias corregidas, totales 151, carpeta tilde vacía eliminada). Integrado al push final del día. DELEGABLE. Pendiente QA cruzado |
 | 137 — Prototipo | Deepseek V4 Flash | 2026-08-19 | ✅ Documentado (130/130): hito de preproducción, núcleo mínimo divertido, playtest GO/NO-GO, guardado delta, checks M152/M153. DELEGABLE |
 | 138 — Vertical Slice | Deepseek V4 Flash | 2026-08-19 | ✅ Documentado (130/130): slice de punta a punta (Aurora, Finneas, misión, puzzle, audio, UI, autosave), frame budget M61, GONOGO a Pre-Alpha. DELEGABLE |
 | 01 — Fundamentos del Proyecto | Deepseek V4 Flash | 2026-08-19 | ✅ Portal/índice actualizado: 68/152 módulos marcados [x]; sin bloqueos |
@@ -133,6 +133,7 @@
 | 127 — Copyright del Juego | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 101/101 (50 DEVIN + 49 propuestas Gemini + 2 propias) |
 | 129 — Merchandising | Gemini 3.7 Flash + Deepseek V4 Flash | 2026-08-20 | ✅ QA aprobado con hallazgo + EXTENDIDO por QA a 108/108 (59 DEVIN + 49 propuestas Gemini) |
 | M139 — Pre-Alpha | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (142/142): Aurora completa, NPC con rutinas, economía AO, construcción, Templo de Brisa, Gran Vapor a Coral, pipeline M108, save v3+menú, audio global, H1-H10 GONOGO a Alpha. DELEGABLE. Pendiente QA cruzado |
+| 150 — Diseño Sonoro Narrativo | SWE-1.6 (DEVIN) + Deepseek V4 Flash | 2026-08-20 | ✅ CERRADO (151/151): DEVIN completó lo que faltaba y Deepseek revisó/mejoró (dependencias M42-M44/M24-M26, totales 151, carpeta tilde eliminada). Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
