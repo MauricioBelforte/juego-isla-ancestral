@@ -2,7 +2,7 @@
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
-> **Última actualización:** 2026-08-20 19:24:41
+> **Última actualización:** 2026-08-20 19:26:46
 
 ## NORMA DE CARPETAS (2026-08-16, decisión del usuario)
 
@@ -141,6 +141,7 @@
 | 151 — Control Final | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (144/144): auditoría de los 26 puntos maestros con semáforo ✔/⚠/✖ y evidencia, acta firmada, encuestas ≥ 10 (diversión ≥ 4/5), telemetría real 72 h, contratos/licencias/PI indexados. DELEGABLE. Pendiente QA cruzado |
 | 148 — Lore Ambiental | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (114/114): LoreCatalogo con canonRef, 72+ piezas (12/isla), red de pistas 3-por-misterio, lore en peces/plantas/minerales, rumores puente, terreno revelador por temporada, anti-infodump 60/40. DELEGABLE. Pendiente QA cruzado |
 | 89 — Diseño de Menús | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (124/124): shell 21 pantallas (ShellManager/NavigatorManager), perfiles 1-3 x slots 3-6, settings.json local, pausa congelando el mundo, ajustes por categorías, pantallas de contenido servidas por managers (AGENTS.md §9). DELEGABLE. Pendiente QA cruzado |
+| 94 — Retención sin FOMO | Deepseek V4 Flash | 2026-08-20 | ✅ Documentado (113/113): 5 normas anti-FOMO (0 streaks/expiración/castigo/exclusividad), objetivos rotatorios con sobremesa, eventos con 3+ variantes, postgame 5+ h, AntiFomoGate en CI. DELEGABLE. Pendiente QA cruzado |
 
 ## Decisiones pendientes/descartadas
 
