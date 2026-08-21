@@ -87,6 +87,7 @@ DOCUMENTACION/
 ├── 85-Modelos-3D-Legal/                      ← 🔵 EN CURSO: contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA (100/100)
 ├── 115-Hardware/                             ← 🔵 EN CURSO: detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads (100/100)
 ├── 119-Actualizaciones/                      ← 🔵 EN CURSO: sistema de updates, notificación, compatibilidad de saves, rollback, integración plataformas (100/100)
+├── 128-Identidad-De-Marca/                   ← 🔵 EN CURSO: logo, paleta, tipografía, manual de marca, trademarks, presencia online (100/100)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -199,3 +200,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 85-Modelos-3D-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA, verificación pre-build (100/100) |
 | 115-Hardware | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads, dispositivos de entrada (100/100) |
 | 119-Actualizaciones | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistema de updates, notificación, compatibilidad de saves, rollback, integración con plataformas (100/100) |
+| 128-Identidad-De-Marca | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Logo, paleta, tipografía, manual de marca, trademarks, presencia online, merchandise (100/100) |
