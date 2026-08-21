@@ -84,6 +84,7 @@ DOCUMENTACION/
 ├── 82-Clasificacion-Por-Edades/              ← 🔵 EN CURSO: sistemas IARC/ESRB/PEGI/CERO/GRAC/ACB/USK/ClassInd, descriptores, rating objetivo, validación automática (100/100)
 ├── 83-Licencias-De-Software/                 ← 🔵 EN CURSO: inventario de licencias, validación de compatibilidad, generación automática de notices, integración build pipeline (100/100)
 ├── 84-Musica-Y-Audio-Legal/                  ← 🔵 EN CURSO: contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA (100/100)
+├── 85-Modelos-3D-Legal/                      ← 🔵 EN CURSO: contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA (100/100)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -193,3 +194,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 82-Clasificacion-Por-Edades | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistemas IARC/ESRB/PEGI/CERO/GRAC/ACB/USK/ClassInd, descriptores de contenido, rating objetivo Everyone, validación automática, submissions (100/100) |
 | 83-Licencias-De-Software | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Inventario de licencias, validación de compatibilidad, generación automática de notices, integración build pipeline, testing (100/100) |
 | 84-Musica-Y-Audio-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA, clearances (100/100) |
+| 85-Modelos-3D-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA, verificación pre-build (100/100) |
