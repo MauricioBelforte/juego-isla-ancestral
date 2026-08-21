@@ -86,6 +86,7 @@ DOCUMENTACION/
 ├── 84-Musica-Y-Audio-Legal/                  ← 🔵 EN CURSO: contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA (100/100)
 ├── 85-Modelos-3D-Legal/                      ← 🔵 EN CURSO: contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA (100/100)
 ├── 115-Hardware/                             ← 🔵 EN CURSO: detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads (100/100)
+├── 119-Actualizaciones/                      ← 🔵 EN CURSO: sistema de updates, notificación, compatibilidad de saves, rollback, integración plataformas (100/100)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -197,3 +198,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 84-Musica-Y-Audio-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA, clearances (100/100) |
 | 85-Modelos-3D-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA, verificación pre-build (100/100) |
 | 115-Hardware | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads, dispositivos de entrada (100/100) |
+| 119-Actualizaciones | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistema de updates, notificación, compatibilidad de saves, rollback, integración con plataformas (100/100) |
