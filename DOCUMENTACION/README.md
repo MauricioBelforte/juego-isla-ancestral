@@ -91,6 +91,7 @@ DOCUMENTACION/
 ├── 132-Produccion-De-Equipo/                 ← 🔵 EN CURSO: estructura organizativa, roles, comunicación, gestión de tareas, onboarding (100/100)
 ├── 134-Presupuesto/                          ← 🔵 EN CURSO: desglose por categorías, control de gastos, proyecciones de ingresos, break-even (100/100)
 ├── 145-Diseno-De-Experiencia/                ← 🔵 EN CURSO: player journey, onboarding, menús, feedback, accesibilidad, métricas (100/100)
+├── 146-Diseno-Emocional/                     ← 🔵 EN CURSO: paleta emocional, mapeo, mecánicas emocionales, wow moments, validación (100/100)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -207,3 +208,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 132-Produccion-De-Equipo | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Estructura organizativa, roles, comunicación, gestión de tareas, resolución de conflictos, onboarding (100/100) |
 | 134-Presupuesto | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Desglose por categorías, control de gastos, proyecciones de ingresos, break-even, reserva imprevistos (100/100) |
 | 145-Diseno-De-Experiencia | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Player journey, onboarding, arquitectura de menús, feedback, accesibilidad, métricas de experiencia (100/100) |
+| 146-Diseno-Emocional | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Paleta emocional, mapeo por fase, mecánicas emocionales, wow moments, validación, cozy checklist (100/100) |
