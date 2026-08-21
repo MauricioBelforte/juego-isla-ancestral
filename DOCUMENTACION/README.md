@@ -89,6 +89,7 @@ DOCUMENTACION/
 ├── 119-Actualizaciones/                      ← 🔵 EN CURSO: sistema de updates, notificación, compatibilidad de saves, rollback, integración plataformas (100/100)
 ├── 128-Identidad-De-Marca/                   ← 🔵 EN CURSO: logo, paleta, tipografía, manual de marca, trademarks, presencia online (100/100)
 ├── 132-Produccion-De-Equipo/                 ← 🔵 EN CURSO: estructura organizativa, roles, comunicación, gestión de tareas, onboarding (100/100)
+├── 134-Presupuesto/                          ← 🔵 EN CURSO: desglose por categorías, control de gastos, proyecciones de ingresos, break-even (100/100)
 ├── INVESTIGACION SOBRE OTROS JUEGOS/           ← Investigación de juegos de referencia
 ```
 
@@ -203,3 +204,4 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 119-Actualizaciones | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistema de updates, notificación, compatibilidad de saves, rollback, integración con plataformas (100/100) |
 | 128-Identidad-De-Marca | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Logo, paleta, tipografía, manual de marca, trademarks, presencia online, merchandise (100/100) |
 | 132-Produccion-De-Equipo | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Estructura organizativa, roles, comunicación, gestión de tareas, resolución de conflictos, onboarding (100/100) |
+| 134-Presupuesto | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Desglose por categorías, control de gastos, proyecciones de ingresos, break-even, reserva imprevistos (100/100) |
