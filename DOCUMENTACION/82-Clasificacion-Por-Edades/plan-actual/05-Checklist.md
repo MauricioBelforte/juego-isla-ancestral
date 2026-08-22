@@ -130,3 +130,12 @@
 - [ ] Verificar ratings visibles en stores antes de M143 Lanzamiento
 - [ ] Documentar timeline de submissions para el equipo
 - [ ] Crear recordatorio de recertificación anual
+
+## J. Integración con Otros Módulos (6 ítems)
+
+- [ ] Verificar coherencia con M81 (Legal Menores): age gating y clasificación
+- [ ] Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
+- [ ] Verificar coherencia con M86 (IA Generativa): contenido generado y clasificación
+- [ ] Verificar coherencia con M97 (Steam Store): metadata de clasificación en store
+- [ ] Verificar coherencia con M98 (Trailer): contenido del tráiler vs. clasificación
+- [ ] Documentar impacto de cada clasificación en el mercado objetivo
