@@ -1,5 +1,6 @@
-﻿**Modelo:** Nemotron 3.5 Lightning
-**Plataforma:** Cline
+﻿**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-08-22
 
 # 02-Analisis.md — Módulo 69: Fast Travel
 
@@ -13,7 +14,7 @@
 | 4 | Definir costes | Cada viaje consume recursos (madera, piedras) o tiempo de juego equivalente |
 | 5 | Definir animación | Transición visual suave con efecto de "bruma" que desvanece al destino |
 | 6 | Definir pantalla | Pantalla de carga minimalista con nombre del destino y icono de viaje |
-| 7 | Definir tiempos | Tiempo de viaje instantáneo pero con "tiempo transcurrido" simulado (opcional) |
+| 7 | Definir tiempos | Tiempo de viaje con duración real (no instantáneo); eventos durante el trayecto |
 | 8 | Permitir cancelar | El jugador puede abortar el viaje al 50% de la animación y regresar |
 | 9 | Impedir uso durante ciertos estados | Bloqueado durante combate, diálogos críticos, eventos de clima severo |
 | 10 | Guardar último punto | El último destino visitado se recuerda para acceso rápido |
@@ -23,19 +24,22 @@
 
 ## 2. Decisiones clave
 
-1. **Fast travel progresivo:** No disponible desde el inicio; se desbloquea tras completar el tutorial y descubrir suficientes puntos del mundo. Fomenta la exploración inicial.
+1. **Fast travel progresivo:** No disponible desde el inicio; se desbloquea tras completar el tutorial y descubrir suficientes puntos del mundo.
 
-2. **Costo por viaje:** Cada uso consume recursos del inventario (2-5 unidades) o tiempo de juego simulado (15-30 minutos), nunca es "gratis" para mantener la sensación de mundo persistente.
+2. **Costo por viaje:** Cada uso consume recursos del inventario (2-5 unidades) o tiempo de juego simulado (15-30 minutos).
 
-3. **Restricciones por estado:** El sistema verifica el estado actual del jugador (en combate, en diálogo, durante eventos climáticos especiales) y bloquea el fast travel automáticamente sin interrumpir la gameplay.
+3. **Experiencia de viaje (M157):** El fast travel YA NO es un teletransporte instantáneo. Cada viaje es una **experiencia jugable** con duración real, eventos aleatorios y misterios por resolver. El jugador elige el medio de transporte (barco, tren, avión, carreta, a pie) y vive el trayecto.
 
-4. **Integración con M29/M31:** Los tiempos y disponibilidad del fast travel respetan el ciclo día/noche (no disponible durante noches de luna nueva) y eventos del calendario Aurora (fiestas, celebraciones).
+4. **Integración con M157:** FastTravelManager delega la ejecución del viaje a TransportManager (M157), que crea un JourneyInstance con la ruta, transporte y eventos correspondientes.
 
-5. **Interfaz minimalista:** Menú de viaje con lista de puntos descubiertos, búsqueda por nombre y atajo de teclado (Tecla M rápido).
+5. **Misterios por ruta:** Cada ruta entre dos puntos tiene misterios predefinidos que aparecen aleatoriamente durante el viaje. Resolverlos otorga recompensas.
+
+6. **Interfaz minimalista:** Menú de viaje con lista de puntos descubiertos, selección de transporte, y estimación de costo/duración.
 
 ## 3. Alternativas descartadas
 
-- **Fast travel inmediato desde el inicio:** Permitir teletransportación desde el tutorial descartado; rompe la sensación de mundo conectado yReduce la valorización de los descubrimientos locales.
-- **Sin restricciones de estado:** Permitir fast travel durante cualquier situación descartado; riesgo de bypass de eventos críticos y rupturas de misión.
-- **Viajes gratuitos infinitos:** Sin costo de ningún tipo descartado; mina la economía de recursos y la progresión cozy de acumulación cuidadosa.
-- **Mapa mundial completo al instante:** Revelar todo el mapa descartado; elimina la gradual descubrimiento que es central en el diseño cozy.
+- **Fast travel instantáneo:** Descartado; rompe la inmersión y reduce el contenido del juego.
+- **Sin restricciones de estado:** Permitir fast travel durante cualquier situación descartado; riesgo de bypass de eventos críticos.
+- **Viajes gratuitos infinitos:** Sin costo de ningún tipo descartado; mina la economía de recursos.
+- **Mapa mundial completo al instante:** Revelar todo el mapa descartado; elimina la gradual descubrimiento.
+- **Solo un medio de transporte:** Descartada variedad; barco/tren/avión/carreta/a pie dan diversidad de experiencias.
