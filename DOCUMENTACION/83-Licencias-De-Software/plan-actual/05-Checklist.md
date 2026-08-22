@@ -66,13 +66,18 @@
 - [ ] Modo dry-run para verificar licencias sin generar notices
 - [ ] Skip de validación de licencias en builds de desarrollo (solo release)
 
-## E. Integración con Gestión de Dependencias (5 ítems)
+## E. Integración con Gestión de Dependencias (10 ítems)
 
 - [ ] Conexión con M55 (Gestión de Dependencias): leer inventario de dependencias
 - [ ] Al detectar dependencia nueva, escanear licencia automáticamente
 - [ ] Actualizar LicenseProfile cuando dependencia cambia de versión
 - [ ] Sincronizar inventario de licencias con package_manager
 - [ ] Soporte para dependencias Git (submodules, subdirectories)
+- [ ] Detectar dependencias huérfanas (instaladas pero no referenciadas)
+- [ ] Alerta al agregar dependencia con licencia incompatible
+- [ ] Verificar licencias de dependencias transitivas
+- [ ] Soporte para lock files (godot.lock o equivalente)
+- [ ] Generar reporte de dependencias × licencias para revisión
 
 ## F. Gestión de Licencias de Assets (10 ítems)
 
@@ -87,13 +92,18 @@
 - [ ] Generación de CREDITS.txt complementario a THIRD_PARTY_LICENSES.txt
 - [ ] Validación de licencias de assets en exportación a plataformas
 
-## G. Script de Build (5 ítems)
+## G. Script de Build (10 ítems)
 
 - [ ] Crear build_licenses.py para uso fuera de Godot
 - [ ] Script escanea directorio del proyecto y genera notices
 - [ ] Soporte para modo verbose (logging detallado)
 - [ ] Soporte para modo silencioso (solo errores)
 - [ ] Integración con CI/CD pipeline
+- [ ] Soporte para output en múltiples formatos (txt, md, json)
+- [ ] Filtrado por tipo de licencia (solo mostrar comercial, solo mostrar copyleft)
+- [ ] Resumen ejecutivo al final del reporte
+- [ ] Verificación de integridad de archivos de licencia
+- [ ] Modo compare: detectar cambios desde última ejecución
 
 ## H. Testing (10 ítems)
 
