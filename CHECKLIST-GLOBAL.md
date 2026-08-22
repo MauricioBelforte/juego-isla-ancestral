@@ -172,6 +172,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 155 | Vestimenta y Accesorios | 🟢 Disponible | 110/110 | Alta | 3 | 11, 14, 156 | — | 2026-08-22 04:05 | Documentación completa por MiMo V2.5 (OpenCode): 4 slots (cabeza, cuerpo, pies, accesorio), 16 prendas con bonos por terreno, EquipmentManager autoload, tabla de bonos, desbloqueo progresivo, integración M11/M14/M156/M59, 110 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 156 | Terrenos y Movimiento Diferenciado | 🟢 Disponible | 299/299 | Alta | 3 | 11, 155 | — | 2026-08-22 04:07 | Documentación completa por MiMo V2.5 (OpenCode): 7 tipos de terreno con modificadores de velocidad (0.6-1.0), sistema de detección por raycast, integración M11/M155, feedback visual/audio por terreno, indicador UI, 299 ítems checklist. DELEGABLE PARA IMPLEMENTAR |
 | 157 | Medios de Transporte | 🟢 Disponible | 106/106 | Alta | 4 | 69, 22, 24, 19 | — | 2026-08-22 04:10 | Documentación completa por MiMo V2.5 (OpenCode): 5 tipos de transporte (barco, tren, avión, carreta, a pie), sistema de viaje jugable con eventos aleatorios y misterios, JourneyInstance, 40+ eventos base, integración M69/M22/M24/M19/M29, 106 ítems. DELEGABLE PARA IMPLEMENTAR |
+| 158 | Herramientas y Desbloqueo de Zonas | 🟢 Disponible | 0/122 | Alta | 4 | 13, 38, 27, 28 | — | 2026-08-22 05:20 | Documentación completa por MiMo V2.5 (OpenCode): 4 tiers herramientas (Madera→Cobre→Hierro→Encantada), gates por tier en el mundo, forja por isla con profesional especializado, costos progresivos, cursos de oficio, venta de herramientas del jugador, NPCs visitantes 1x/dia, fuentes de ingreso, premium Steam, 122 ítems. DELEGABLE PARA IMPLEMENTAR |
 
 ## Simbología de Estados
 
@@ -186,7 +187,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 ## Resumen del Proyecto
 
-- **Total de módulos:** 154 (01 + los 152 del plan inicial + 156)
+- **Total de módulos:** 155 (01 + los 152 del plan inicial + 156 + 158)
 - **Completados (`✅`):** 0 (ninguno tiene código implementado ni QA cruzado; los documentados son DELEGABLES)
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento, 153-Objetivo Final)
 - **En riesgo (`🔴`):** 0
