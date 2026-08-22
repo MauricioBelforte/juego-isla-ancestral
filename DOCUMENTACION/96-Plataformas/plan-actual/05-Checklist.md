@@ -1,7 +1,7 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 96: Plataformas (110 ítems)
+# 05-Checklist.md — Módulo 96: Plataformas (102 ítems)
 
 ## Convención
 - `[x]` = completado por documentación (fase documentada y validable). `[ ]` = pendiente. `[?]` = no resuelto.

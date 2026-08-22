@@ -1,7 +1,7 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 98: Trailer (110 ítems)
+# 05-Checklist.md — Módulo 98: Trailer (101 ítems)
 
 ## Convención
 - `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
