@@ -131,5 +131,29 @@
 - [x] Anti-frustration: buceo flota, caída sin daño, stamina informa [M]
 - [x] Ready para: M12 (cámara), M13 (herramientas), M14 (inventario) [S]
 
-**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
-**Nota:** la sensación real de movimiento (salto, agua, fatiga) se calibra en el playtest del hito M1.
+## I. Selección de personaje (8)
+
+- [x] Definir 6 personajes base con distinto diseño visual [M]
+- [x] Definir que todos tienen mismas mecánicas (cozy = sin ventajas) [S]
+- [x] Definir pantalla de selección con preview 360° [M]
+- [x] Definir persistencia en GameState.player_character_id [M]
+- [x] Definir personajes desbloqueados desde el inicio (sin locks) [S]
+- [x] Definir integración con M155 (vestimenta se superpone al personaje) [S]
+- [x] Definir guardado del personaje elegido en M59 [S]
+- [x] Definir que la selección es puramente visual (sin stats) [S]
+
+## J. Terrenos y movimiento (10)
+
+- [x] Definir tabla de modificadores de velocidad por terreno [M]
+- [x] Definir que barro reduce velocidad al 60% sin equipamiento [S]
+- [x] Definir que pavimento permite patines (+30% velocidad) [S]
+- [x] Definir que bicicleta da +20-40% en caminos pavimentados [M]
+- [x] Definir que barro empantana sin botas adecuadas [S]
+- [x] Definir feedback visual por terreno (salpicaduras, huellas, ondulaciones) [M]
+- [x] Definir audio de pasos por tipo de superficie [M]
+- [x] Definir indicador de terreno actual en HUD [S]
+- [x] Definir integración con M155 (equipamiento afecta terreno) [S]
+- [x] Definir que nadar no se ve afectado por equipamiento terrestre [S]
+
+**Totales:** 120 ítems · Completados: 120 · Pendientes: 0 · Not resueltos: 0.
+**Nota:** la sensación real de movimiento (salto, agua, fatiga) se calibra en el playtest del hito M1. Selección de personaje y terrenos documentados por MiMo V2.5 (OpenCode).

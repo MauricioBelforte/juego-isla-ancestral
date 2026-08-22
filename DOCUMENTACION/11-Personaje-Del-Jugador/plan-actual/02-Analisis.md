@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
+**Fecha:** 2026-08-22
 
 # 02-Analisis.md — Módulo 11: Personaje del Jugador
 
@@ -20,7 +21,7 @@
 | 11 | Recogida de luz | ✅ Destellos: esfera de luz que entra al inventario de luz del alma al tocarla (magnetismo 1.2 m) |
 | 12 | Energía | ✅ Stamina 100; sprint drena 12/s; regen 8/s parado; sin bloqueos (siempre puede caminar) |
 | 13 | Vitalidad (opcional) | ⏸ M29 re-evalúa: hambre/sueño como mejoras de bienestar, no castigo |
-| 14 | Vestimenta | ✅ Capa visual de cosmetic (2 skins base + sombrero del pescador como evento) — sin stats |
+| 14 | Vestimenta | ✅ Sistema de vestimenta funcional (M155): 4 slots, bonos por terreno (M156), cosmética libre |
 | 15 | Voz | ✅ Sin voz principal (cozy); sonidos de acciones y pasos |
 | 16 | Raycast mira | ✅ InteractionRay de 4 m con highlight del objetivo |
 | 17 | Primera persona | ❌ NO en v1.0 (cámara 3ª fija; FPS descartado por coherencia cozy) |
@@ -37,6 +38,8 @@
 | 28 | Interfaz del estado | ✅ HUD: barra stamina (bajo consumo); indica interactuable |
 | 29 | Datos de arranque | ✅ spawn = hogar del jugador (primera noche); M22 decide el punto exacto |
 | 30 | Feedback suave | ✅ Slow-motion, vibrato o iconos de aviso para fatiga — NUNCA penalización |
+| 31 | Selección de personaje | ✅ 4-6 personajes con distinto diseño visual, mecánicas idénticas (cozy) |
+| 32 | Terrenos | ✅ Modificadores de velocidad por terreno + equipamiento (M156) |
 
 ## 2. Alternativas descartadas
 
@@ -45,6 +48,8 @@
 - **Daño por caída:** descartado — frustrante en mundo voxel; amortiguación de altura alta.
 - **Movimiento con física de terceros (KinematicBody libre):** descartado — control fino del FSM propio (cozy) sobre radiador de Voxel Tools.
 - **Hambre/sueño como penalización:** descartado — los sistemas de bienestar mejoran al jugador (M29), nunca lo castigan.
+- **Personajes con stats diferentes:** descartado —selectivo cozy = sin ventajas por elección estética.
+- **Equipamiento que bloquea movimientos:** descartado — las bonificaciones son suaves, nunca impiden acciones.
 
 ## 3. FSM de estados (máquina)
 
@@ -73,3 +78,5 @@ cualquiera → [INTERACT] (bloquea mov 0.3 s)
 - Estado del personaje → M25 (NPC reacciona), M74 (eventos de posición)
 - Punto de spawn → M22 (historia)
 - Stamina → M29 (bienestar: alimentos otorgan bonus)
+- Personaje elegido → M155 (vestimenta), M59 (guardado)
+- Modificadores de terreno → M156 (terrenos), M155 (equipamiento)
