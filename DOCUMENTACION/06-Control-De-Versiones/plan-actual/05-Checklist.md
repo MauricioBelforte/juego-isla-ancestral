@@ -123,6 +123,17 @@
 - [x] Actualizar DOCUMENTACION/README.md con el componente 06 [S]
 - [x] Generar log de finalización y actualizar ULTIMO_NUMERO [S]
 
+## I. Mantenimiento y Evolución (8 ítems)
+
+- [ ] Revisar política de ramas cada 6 meses
+- [ ] Actualizar .gitignore cuando se agreguen nuevas dependencias
+- [ ] Auditar permisos de acceso al repositorio trimestralmente
+- [ ] Verificar que CHANGELOG refleja todos los cambios significativos
+- [ ] Revisar utilidad de Git LFS cuando el proyecto tenga más assets
+- [ ] Documentar nuevas herramientas de Git adoptadas por el equipo
+- [ ] Actualizar convenciones de commit si cambian las necesidades del proyecto
+- [ ] Revisar política de backups anualmente
+
 ---
 
 **Totales:** 92 ítems · Completados: 91 · Pendientes: 1 (protección de rama main en GitHub → dueño: Publicación) · No resueltos: 0.
