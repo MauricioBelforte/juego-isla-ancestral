@@ -212,3 +212,7 @@
 - [x] Definir actualización del presupuesto con datos reales (M134) [M]
 - [x] Definir lista de sistemas a escalar en Pre-Alpha (M139) [M]
 - [x] Definir comunicar al usuario la decisión y próximo hito [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

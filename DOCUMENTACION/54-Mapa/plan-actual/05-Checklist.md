@@ -214,3 +214,7 @@
 - [x] Test de stress: 100 aperturas/cierres del mapa sin fugas ni glitches [C]
 - [x] Verificación de que no se modificaron archivos fuera de DOCUMENTACION/54-Mapa [S]
 - [x] Módulo declarado delegable para implementación en las Notas del Agente [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

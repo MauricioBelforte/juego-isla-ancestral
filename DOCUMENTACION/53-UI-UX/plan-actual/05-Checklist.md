@@ -188,3 +188,7 @@
 - [x] Módulo marcado delegable para implementación (tras M07, M11 y M57) [S]
 - [x] Acoplamiento verificado: gameplay, mundo y AI no importan res://ui [M]
 - [x] Checklist completo con mas de 110 items [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

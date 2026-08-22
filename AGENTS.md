@@ -787,3 +787,32 @@ Este archivo (`AGENTS.md`) junto con `CHECKLIST-GLOBAL.md` y la carpeta `scripts
 - **Comentarios:** Documentar con `///` (XML docs) las clases y métodos públicos
 - **Regiones:** Usar `#region` con moderación, solo para agrupar secciones grandes
 - **Serialización:** Usar `[SerializeField]` en vez de campos `public` cuando sea posible
+
+
+## 25. Visión del Agente (M154) — Prerrequisito Fundamental para Trabajo Visual
+
+> **Agregado:** 2026-08-22 · **Fuente:** directiva del usuario · **Módulo:** `DOCUMENTACION/154-Vision-Del-Agente/`
+
+El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para cualquier tarea que involucre diseño o codificación visual del juego.
+
+### Regla de oro
+
+> ⚠️ **Antes de comenzar a diseñar o codificar cualquier elemento visual** (personajes, escenas, UI, iluminación, efectos, assets 3D/2D), el agente DEBE verificar que el M154 esté **implementado y operativo**, con al menos una vía activa.
+
+### Vías disponibles (detalle completo en el módulo)
+
+| Vía | Mecanismo | Uso principal |
+|---|---|---|
+| V1 — Capturas en chat | Usuario pega screenshots; visión integrada | Validación estética final |
+| V2 — MCP custom de pantalla | Python PIL/ImageGrab vía MCP | Fallback universal |
+| V3 — Export web + Playwright | Godot HTML5 + skill webapp-testing | QA automatizado / regresión visual |
+| V4 — godot-mcp ⭐ | MCP controla editor Godot | Verificación dentro del juego (**FUNDAMENTAL**) |
+| V5 — Blender + blender-mcp ⭐ | bpy + viewport screenshot | Diseño/modelado de assets con visión |
+
+### Obligaciones del agente
+
+1. Al reclamar un módulo visual, verificar en su `05-Checklist.md` el ítem de dependencia M154.
+2. Si ninguna vía está operativa, solicitar al usuario la instalación correspondiente ANTES de proceder.
+3. Durante el trabajo visual, seguir el protocolo de iteración del M154 (capturar → analizar → ajustar; máximo 5 iteraciones autónomas).
+4. Los módulos visuales tienen en su checklist un ítem explícito de verificación M154 (agregado automáticamente el 2026-08-22).
+5. Los nuevos módulos visuales que se creen a futuro deben incluir este ítem desde su creación.

@@ -133,5 +133,9 @@
 - [x] Definición de Completado (DoD) cumplida: documento + log + firma [M]
 - [x] Ready para: M10 (Generación del Mundo) y M27 (Islas) [S]
 
-**Totales:** 104 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
 **Nota:** la calibración visual de recetas queda para el prototipo (M1); el diseño geográfico está cerrado aquí.

@@ -183,3 +183,7 @@
 - [x] Documentar el desfase de numeración del plan maestro (45=ARTE 2D → ID 46) [S]
 - [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
 - [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

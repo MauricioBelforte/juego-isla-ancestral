@@ -183,3 +183,7 @@
 - [x] Registrar los contratos M56/M37/M65/M09 en las fichas de integracion del proyecto [S]
 - [x] Copiar la documentacion completa a plan-actual [S]
 - [x] Generar log en Logs/ al implementar el modulo (DoD) [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

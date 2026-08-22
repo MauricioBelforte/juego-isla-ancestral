@@ -214,3 +214,7 @@
 - [x] Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler [C]
 - [x] Planear prueba de atajo global F10 desde título, pausa y gameplay [M]
 - [x] Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos [C]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

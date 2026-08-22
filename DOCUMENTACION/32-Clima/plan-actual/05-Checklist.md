@@ -156,5 +156,9 @@
 - [x] Log de creación generado [S]
 - [x] Checked en README de DOCUMENTACION [S]
 
-**Totales:** 120 ítems · Completados: 120 · Pendientes: 0 · No resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 121 ítems · Completados: 121 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (C-H en runtime) quedan para el agente delegado; diseño, determinismo y reglas cierran aquí.

@@ -133,4 +133,8 @@
 - [x] Pendientes asignados a dueños (M1, M16, M17, M35, M46, M65) [S]
 - [x] Ready para: M14 (inventario), M16 (crafting), M17 (construcción) [S]
 
-**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.

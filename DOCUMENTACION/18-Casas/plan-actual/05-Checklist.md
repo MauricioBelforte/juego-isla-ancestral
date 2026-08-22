@@ -166,3 +166,7 @@
 - [x] Test: 3 días simulados con visitas de vecinos sin fallos [C]
 - [x] Test: mudanza de muebles contenedores sin perdida de items [M]
 - [x] Test: obra en curso sin softlocks (M66) [M]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

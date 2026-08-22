@@ -244,3 +244,7 @@
 - [x] S10: test de integración End-to-End: partida nueva → prólogo → capítulo cultivo completo con mocks [C]
 - [x] S11: test de rendimiento: medición < 0.2 ms en escenario denso (zona de plaza) [C]
 - [x] S12: test de regresión con InputMap remapeado (íconos dinámicos correctos) [M]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

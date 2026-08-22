@@ -360,6 +360,10 @@
 - [x] Verificar coherencia visual total [M]
 - [x] Verificar coherencia audio total [M]
 
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
 **Totales:** 299 items - Completados: 299 - Pendientes: 0
 
 **Nota:** Documentacion completa por MiMo V2.5 (OpenCode).

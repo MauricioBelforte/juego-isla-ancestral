@@ -212,3 +212,7 @@
 - [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [x] Push del módulo y reporte al usuario [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

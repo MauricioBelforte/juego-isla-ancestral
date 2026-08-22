@@ -241,3 +241,7 @@
 - [x] Plan de pruebas de input: teclado E, gamepad A/B, remapeo y auto-repeat [M]
 - [x] Plan de pruebas de accesibilidad: tamaño de prompt, alto contraste, mantener presionado [M]
 - [x] Plan de pruebas de localización: nombres y razones traducibles sin cortes de layout [M]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

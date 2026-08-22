@@ -212,3 +212,7 @@
 - [x] Definir log en `Logs/` del cierre del hito [S]
 - [x] Definir que la fila 137 quede 🟢 DELEGABLE al cerrar [S]
 - [x] Definir comunicar al usuario la decisión GO/NO-GO y próximos pasos [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

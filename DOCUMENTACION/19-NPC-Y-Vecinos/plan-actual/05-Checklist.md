@@ -185,3 +185,7 @@
 - [x] 03-Diseno creado y firmado (arquitectura + contratos API) [S]
 - [x] 04-Codigo creado y firmado (rutas, firmas GDScript, Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo, 130 ítems) [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

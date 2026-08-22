@@ -227,3 +227,7 @@
 - [x] Playtest de construcción (M113) con teclado y mando: flujo completo sin fricción [C]
 - [x] Recorrido M114: construir y decorar la casa del jugador (M18) sin errores de consola [C]
 - [x] QA final: 0 errores en Play Mode, 0 excepciones al entrar/salir del modo repetidamente [M]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

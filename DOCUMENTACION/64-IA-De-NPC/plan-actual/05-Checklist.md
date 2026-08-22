@@ -149,5 +149,9 @@
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 107 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 108 ítems · Completados: 108 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de runtime (C-K) los verifica el agente delegado; FSM, perfiles, burbuja y reglas cierran aquí.

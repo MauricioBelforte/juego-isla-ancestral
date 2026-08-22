@@ -132,5 +132,9 @@
 - [x] Sin contradicciones con M17 (modo Build) [M]
 - [x] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
 **Nota:** la sensación real (ángulos, distancias, suavizado) se calibra en el playtest del hito M1.

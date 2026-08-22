@@ -155,5 +155,9 @@
 - [x] Definir integración con M155 (equipamiento afecta terreno) [S]
 - [x] Definir que nadar no se ve afectado por equipamiento terrestre [S]
 
-**Totales:** 120 ítems · Completados: 120 · Pendientes: 0 · Not resueltos: 0.
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 121 ítems · Completados: 121 · Pendientes: 0 · Not resueltos: 0.
 **Nota:** la sensación real de movimiento (salto, agua, fatiga) se calibra en el playtest del hito M1. Selección de personaje y terrenos documentados por MiMo V2.5 (OpenCode).

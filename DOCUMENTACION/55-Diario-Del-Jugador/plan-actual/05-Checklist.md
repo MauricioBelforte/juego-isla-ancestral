@@ -212,3 +212,7 @@
 - [x] Documentar plan de testings automáticos del diario [M]
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
 - [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

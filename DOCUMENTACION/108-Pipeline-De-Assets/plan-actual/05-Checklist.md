@@ -225,3 +225,7 @@
 - [x] Probar el memory reporter contra un caso conocido y verificar sus números [M]
 - [x] Probar el promote/retiro dejando el índice _APROBADAS.md correcto [M]
 - [x] Ejecutar los testings antes de la primera prueba manual del usuario y documentar resultados [M]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

@@ -217,3 +217,7 @@
 - [x] Test integración: regen 80/0 conserva anclas válidas [C]
 - [x] Test integración: guardar/cargar partida restaura descubrimiento [M]
 - [x] Test de estrés: 2 islas cargadas + 1 precargando bajo presupuesto M61 [C]
+
+## Dependencia: Visión del Agente (M154)
+
+- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
