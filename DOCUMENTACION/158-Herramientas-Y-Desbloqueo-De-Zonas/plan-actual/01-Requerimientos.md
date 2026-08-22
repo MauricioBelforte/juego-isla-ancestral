@@ -64,3 +64,142 @@ El jugador necesita una progresión clara de herramientas que desbloquee conteni
 **Dentro del alcance:** sistema de tiers de herramientas, gates por tier en el mundo, sistema de forja por isla, costos progresivos, cursos de oficio, venta de herramientas del jugador, progresión de la historia ligada a tiers, fuentes de ingreso del jugador, integración premium.
 
 **Fuera del alcance:** el sistema base de herramientas (M13), las tiendas NPCs (M39 se expande aparte), la economía general (M38 se expande aparte), los viajes entre islas (M28), la definición de islas (M27).
+
+---
+
+## L. MAPA DE PROGRESION COMPLETO (2026-08-22)
+
+### L.1 Estructura del Mundo
+
+`
+ISLA PRINCIPAL (Aurora)
+├── Pueblo central
+│   ├── Carpintero (vende T1, curso 300 monedas)
+│   ├── Tiendas del pueblo (M39)
+│   ├── Casa del jugador (M18)
+│   └── Muelle del barco (M28)
+├── Zonas explorables
+│   ├── Bosque (ramas, piedras, jarrones)
+│   ├── Costa (pescado, oro suelto)
+│   ├── Ruinas cercanas (puzzles T1)
+│   └── Montaña (minerales básicos)
+└── Gates T1
+    ├── Rama gruesa → bosque profundo
+    ├── Muro suave → cueva pequeña
+    └── Raíz → sendero oculto
+
+ISLA 2 (Coral) - 100 monedas boleto
+├── Puerto costero
+│   ├── Herrero (vende T2, curso 1500 monedas)
+│   ├── Tiendas de Coral (compra productos tropicales)
+│   └── Pueblo de pescadores
+├── Zonas explorables
+│   ├── Arrecife (coral, perlas)
+│   ├── Playa (conchas, arena dorada)
+│   ├── Pueblo oculto (desbloqueado con T2)
+│   └── Ruinas costeras (puzzles T2)
+└── Gates T2
+    ├── Muro de piedra → pueblo oculto
+    ├── Raíz gruesa → cueva del coral
+    └── Sello débil → pasaje subterráneo
+
+ISLA 3 (Verde) - 300 monedas boleto
+├── Selva densa
+│   ├── Herrero Avanzado (vende T3, curso 5000 monedas)
+│   ├── Sanador (compra plantas medicinales)
+│   └── Explorador (guía de la selva)
+├── Zonas explorables
+│   ├── Selva profunda (plantas raras, madera exótica)
+│   ├── Ruinas antiguas (puzzles T3, lore)
+│   ├── Cataratas (secreto detrás del agua)
+│   └── Templo de la Luna (requiere T3)
+└── Gates T3
+    ├── Sello ancestral → templo principal
+    ├── Muro de raíces → selva prohibida
+    └── Cristal crecido → cámara del sabio
+
+ISLA 4 (Cenizas) - 800 monedas boleto
+├── Zona volcánica
+│   ├── Encantador (vende T4, curso 10000 monedas)
+│   ├── Sabio (lore y secretos)
+│   └── Mercader de rarezas
+├── Zonas explorables
+│   ├── Volcán activo (cristales, minerales raros)
+│   ├── Templo del Fuego (puzzles T4, sellos finales)
+│   ├── Cámara secreta (lore oculto, final secreto)
+│   └── Grieta del mundo (zona más difícil)
+└── Gates T4
+    ├── Sello encantado → templo final
+    ├── Cristal bloqueado → cámara secreta
+    └── Tumba encantada → lore ancestral
+`
+
+### L.2 Flujo del Jugador Ejemplo
+
+`
+Día 1-3: Isla Principal
+  → Recolecta ramas, piedras (T1 gratis)
+  → Busca jarrones (5-15 monedas c/u)
+  → Pescado oro (1-5 monedas)
+  → Resuelve puzzle básico (50 monedas)
+  → TOTAL: ~200 monedas
+
+Día 4-5: Isla Principal
+  → Continúa juntando dinero
+  → Compra curso de carpintería (300 monedas)
+  → Aprende a vender herramientas T1
+  → TOTAL: ~500 monedas
+
+Día 6-7: Viaje a Isla 2
+  → Compra boleto (100 monedas)
+  → Conoce al herrero
+  → Forja herramienta T2 (500 monedas + 10 cobre)
+  → Explora pueblo oculto (desbloqueado con T2)
+  → TOTAL: ~0 monedas (gastó todo)
+
+Día 8-14: Isla 2
+  → Trabaja en Isla 2 (pescar coral, vender)
+  → Construye tienda en Isla 2
+  → NPCs visitantes compran productos
+  → Junta dinero para Isla 3
+  → TOTAL: ~800 monedas
+
+Día 15-20: Viaje a Isla 3
+  → Compra boleto (300 monedas)
+  → Conoce al herrero avanzado
+  → Forja herramienta T3 (2000 monedas + 20 hierro)
+  → Explora ruinas antiguas (puzzles T3)
+  → TOTAL: ~0 monedas
+
+Día 21-30: Isla 3
+  → Trabaja en Isla 3 (plantas medicinales)
+  → Construye tienda en Isla 3
+  → Comercia productos entre islas
+  → Junta dinero para Isla 4
+  → TOTAL: ~2000 monedas
+
+Día 31-40: Viaje a Isla 4
+  → Compra boleto (800 monedas)
+  → Conoce al encantador
+  → Forja herramienta T4 (5000 monedas + 5 cristales)
+  → Completa historia principal (requiere T4)
+  → TOTAL: ~0 monedas
+
+Día 41+: Post-game
+  → Explora todas las islas libremente
+  → Completa puzzles pendientes
+  → Mejora herramientas (afilar/templar/encantar)
+  → Construye tiendas en todas las islas
+  → Vende en todas partes
+`
+
+### L.3 Reglas de Progresión
+
+1. **No hay orden obligatorio:** el jugador puede ir a cualquier isla que haya desbloqueado
+2. **Cada isla es independiente:** no hay contenido bloqueado por isla anterior
+3. **El dinero es el gating principal:** el jugador debe juntar monedas para viajar y forjar
+4. **Las herramientas son el gating secundario:** cierto contenido requiere tier mínimo
+5. **Nunca hay bloqueo permanente:** siempre hay algo que hacer en cualquier isla
+6. **El jugador puede quedarse en cualquier isla:** construir casa y trabajar allí
+7. **El comercio inter-islas Motiva los viajes:** productos de una isla se venden mejor en otra
+8. **Premium acelera pero no reemplaza:** el jugador premium juntar dinero más rápido pero SIEMPRE debe viajar

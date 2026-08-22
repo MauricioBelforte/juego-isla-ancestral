@@ -83,3 +83,75 @@ Cada isla tiene una identidad visual unica que refleja su profesion:
 - Isla 2: metal, fragua, fuego
 - Isla 3: vegetacion densa, misterio
 - Isla 4: cristal, magia, ethereal
+
+---
+
+### 6.5 Cadena de Progresión de Islas
+
+El jugador avanza por una cadena de islas, pero el orden NO es lineal. Puede elegir qué isla visitar primero, pero cada isla tiene requisitos mínimos de dinero y herramientas.
+
+#### Requisitos de Acceso por Isla
+
+| Isla | Profesión | Boleto | Herramienta Mínima | Contenido Desbloqueado |
+|------|-----------|--------|--------------------|-----------------------|
+| Principal | Carpintería | — | T1 (gratis) | Pueblo, tiendas, puzzles básicos |
+| Isla 2 (Coral) | Herrería | 100 monedas | T1 | Herrero T2, pueblo costero, pesca tropical |
+| Isla 3 (Verde) | Herrería Avanzada | 300 monedas | T2 | Herrero avanzado T3, selva, ruinas antiguas |
+| Isla 4 (Cenizas) | Encantamiento | 800 monedas | T3 | Encantador T4, volcán, templos finales |
+
+#### Rutas de Progresión Posibles
+
+`
+Ruta A (lineal): Principal → Isla 2 → Isla 3 → Isla 4
+Ruta B (directa): Principal → Isla 2 → Isla 4 (si tiene dinero suficiente)
+Ruta C (exploradora): Principal → Isla 3 → Isla 2 → Isla 4
+Ruta D (economicista): Principal (junta dinero) → Isla 2 → Isla 4
+`
+
+**Regla:** el jugador SIEMPRE puede volver a la isla principal gratis. Nunca queda atrapado.
+
+### 6.6 Mapa de Progresión No Lineal
+
+El mapa NO es lineal tipo Zelda. Cada isla es un nodo independiente conectado por barco. El jugador puede ir a cualquier isla que haya desbloqueado (comprando boleto).
+
+`
+                    ┌─────────────┐
+                    │   Isla 4    │
+                    │ Encantamiento│
+                    └──────┬──────┘
+                           │
+                    ┌──────┴──────┐
+                    │   Isla 3    │
+                    │ Herrería    │
+                    │ Avanzada    │
+                    └──────┬──────┘
+                           │
+                    ┌──────┴──────┐
+                    │   Isla 2    │
+                    │  Herrería   │
+                    └──────┬──────┘
+                           │
+                    ┌──────┴──────┐
+                    │  Principal  │
+                    │ Carpintería │
+                    └─────────────┘
+`
+
+**Diferencia con Zelda:**
+- Zelda: isla → isla → isla (lineal, obligatorio)
+- Isla Ancestral: nodos conectados, jugador elige orden (no lineal, opcional)
+- Zelda: llave específica para puerta específica
+- Isla Ancestral: tier general que desbloquea contenido en CUALQUIER isla
+- Zelda: obliga a volver atrás para avanzar
+- Isla Ancestral: puede quedarse en cualquier isla y construir allí
+
+### 6.7 Productos Exclusivos por Isla
+
+Cada isla tiene productos que solo se consiguen allí, incentivando el comercio inter-islas:
+
+| Isla | Productos Exclusivos | Se venden mejor en |
+|------|---------------------|--------------------|
+| Principal | Madera común, frutas del pueblo | Isla 3 (precio +30%) |
+| Isla 2 | Coral, perlas, pescado tropical | Principal (precio +50%) |
+| Isla 3 | Plantas medicinales, madera exótica | Isla 2 (precio +40%) |
+| Isla 4 | Cristales, minerales raros, polvo ancestral | Isla 2 (precio +60%) |

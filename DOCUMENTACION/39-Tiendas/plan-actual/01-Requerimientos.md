@@ -155,3 +155,56 @@ Diseñar el sistema de tiendas del juego: puestos y establecimientos pertenecien
 | Herreria | Isla 2 | 1500 monedas | Vende T1-T2 (precio 15-30) |
 | Herreria Avanzada | Isla 3 | 5000 monedas | Vende T1-T3 (precio 20-50) |
 | Encantamiento | Isla 4 | 10000 monedas | Vende T1-T4 (precio 30-80) |
+
+---
+
+### 9.6 Tiendas Especializadas del Jugador
+
+El jugador puede construir y operar diferentes tipos de tiendas en su casa o en islas visitadas. Cada tienda tiene un catálogo propio y atrae NPCs específicos.
+
+#### Tipos de Tienda del Jugador
+
+| Tipo | Qué vende | Qué compra | NPCs que visitan |
+|------|-----------|------------|-------------------|
+| Taller de Herramientas | Herramientas forjadas | Materiales (cobre, hierro) | Herreros, aventureros |
+| Pesquería | Pescados, cebo, cañas | Pescados raros, perlas | Pescadores, chefs |
+| Herbolaria | Plantas medicinales, pociones | Hierbas raras, raíces | Sanadores, alquimistas |
+| Florería | Flores decorativas, semillas | Flores exóticas, frutos | Decoradores, NPCs románticos |
+| General | Mixto de todo | Lo que el jugador quiera | Cualquier NPC |
+
+#### Requisitos para Construir Tienda
+
+| Requisito | Detalle |
+|-----------|---------|
+| Curso aprendido | Debe tener el curso de la profesión correspondiente |
+| Espacio en casa | M18 debe tener una habitación disponible |
+| Herramientas | Martillo T1 para construir la tienda |
+| Stock inicial | Mínimo 5 items para abrir |
+
+#### Reglas de Tienda del Jugador
+
+- El jugador abre/cierra la tienda manualmente (no hay horario fijo)
+- Mientras está abierta, los NPCs pueden visitar (1×/día max)
+- El jugador fija los precios de venta (dentro de un rango: 50%-200% del precio base M38)
+- El jugador fija qué items compra (catálogo personalizado)
+- La tienda se construye una vez (no se mueve)
+- Se puede mejorar la tienda (más espacio, más stock, mejor reputación)
+
+#### Progresión de Tienda del Jugador
+
+`
+Nivel 1: Tienda básica (5 slots, 1 NPC/día)
+  → Invertir 500 monedas
+    Nivel 2: Tienda mediana (10 slots, 2 NPCs/día)
+      → Invertir 2000 monedas
+        Nivel 3: Tienda grande (15 slots, 3 NPCs/día)
+          → Invertir 5000 monedas
+`
+
+#### Integración con M158 (NPCs Visitantes)
+
+- Los NPCs visitantes vienen a la tienda del jugador (no al revés)
+- Compran items según sus preferencias (M19/M20)
+- Pagan precio que el jugador fijó
+- Si no hay stock, no vienen
+- La reputación de la tienda crece con las ventas (desbloquea NPCs especiales)

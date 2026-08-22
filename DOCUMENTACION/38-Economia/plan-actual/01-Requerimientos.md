@@ -138,3 +138,35 @@ La misma moneda (monedas_aurora) se usa en TODAS las islas. No hay monedas separ
 - Jarrones se reponen semanalmente
 - Peces y frutos aparecen diariamente
 - Nunca hay bloqueo economico permanente
+
+---
+
+### 9.6 Comercio Inter-Islas
+
+El jugador puede vender productos de una isla en otra isla a MEJOR PRECIO. Esto Motiva el viaje y la exploración.
+
+#### Tabla de Bonos por Origen-Destino
+
+| Producto | Origen | Destino | Precio base | Bono | Precio final |
+|----------|--------|---------|-------------|------|--------------|
+| Semillas tropicales | Isla 2 | Principal | 15 | +50% | 22 |
+| Pescado raro | Isla 3 | Principal | 25 | +40% | 35 |
+| Cristal sin pulir | Isla 4 | Isla 2 | 30 | +60% | 48 |
+| Madera exótica | Principal | Isla 3 | 10 | +30% | 13 |
+| Hierro en bruto | Isla 2 | Isla 4 | 20 | +50% | 30 |
+| Frutas medicinales | Isla 3 | Isla 2 | 12 | +40% | 16 |
+
+#### Reglas de Comercio Inter-Islas
+
+- El jugador debe llevar el producto fisicamente (inventario M14)
+- La tienda destino debe estar abierta (M39 horarios)
+- La tienda destino declara qué productos extranjeros compra
+- El bono por origen-destino es fijo (data-driven en .tres)
+- No hay limite de ventas por día para productos extranjeros
+- Los productos extranjeros no afectan el mercado local (M38 anti-inflación)
+
+#### Integración con M28 (Viajes)
+
+- El jugador puede transportar mercancía en el barco (capacidad limitada: 20 slots)
+- Transportar mercancía es parte de la experiencia de viaje (M157)
+- Si el inventario está lleno, no puede subir al barco (excepto equipamiento personal)
