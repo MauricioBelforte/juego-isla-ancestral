@@ -1,7 +1,7 @@
 # Log 120 — Creación del Componente 154-Vision-Del-Agente
 
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 **Fecha:** 2026-08-22 04:05:00
 
 ## Descripción breve

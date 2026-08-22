@@ -1,7 +1,7 @@
 # Log 122 — M154 declarado Prerrequisito Fundamental para Trabajo Visual
 
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 **Fecha:** 2026-08-22 04:28:00
 
 ## Descripción breve
