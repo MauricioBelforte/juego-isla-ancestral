@@ -49,58 +49,107 @@ Dar profundidad emocional al juego cozy sin mecánicas punitivas: el jugador deb
 8. Delegable para implementacion.
 ---
 
-## 4. EXPANSIONES COZY (2026-08-22)
+## 5. SISTEMA DE AMISTAD DETALLADO (Stardew Valley + Animal Crossing)
 
-### 4.1 Niveles de Amistad Expandidos
+**Filosofía:** La amistad es una inversión a largo plazo. No hay atajos. No hay penalización por no jugar. Los NPCs recuerdan las interacciones y reaccionan en consecuencia.
 
-| Nivel | Nombre | Desbloquea | Regalo semanal |
-|-------|--------|------------|----------------|
-| 0 | Desconocido | Nada | No |
-| 1 | Conocido | Diálogos básicos | No |
-| 2 | Amigo | Misiones secundarias | Sí (básico) |
-| 3 | Buen amigo | Regalos exclusivos | Sí (medio) |
-| 4 | Mejor amigo | Confidencias, recetas | Sí (raro) |
-| 5 | Alma gemela | Evento especial, viaje juntos | Sí (legendario) |
+### 5.1 Niveles de Amistad
 
-### 4.2 Sistema de Regalos Mejorado
+| Nivel | Nombre | Puntos necesarios | Desbloquea |
+|-------|--------|-------------------|------------|
+| 0 | Desconocido | 0 | Nada |
+| 1 | Conocido | 50 | Diálogos básicos |
+| 2 | Amigo | 150 | Misiones secundarias, regalo semanal |
+| 3 | Buen amigo | 300 | Regalos exclusivos, eventos |
+| 4 | Mejor amigo | 500 | Confidencias, recetas, visitas diarias |
+| 5 | Alma gemela | 800 | Evento especial, viaje juntos, regalo legendario |
 
-#### Gustos por Categoría de NPC
+**Regla cozy:** Los puntos NUNCA bajan por no jugar. Solo bajan por acciones negativas explícitas (regalar algo que odia). Nunca bajan de nivel.
 
-| Tipo NPC | Le gusta | Le disgusta |
-|----------|----------|-------------|
-| Herrero | Minerales, herramientas | Flores, comida |
-| Carpintero | Madera, muebles | Minerales, ropa |
-| Pescador | Pescados, cebo | Plantas, minerales |
-| Jardinero | Flores, semillas | Minerales, madera |
-| Cocinero | Ingredientes, recetas | Herramientas, minerales |
-| Arqueólogo | Glifos, reliquias | Comida, ropa |
-| Mercader | Items raros, monedas | Comida común |
-| Sabio | Libros, glifos | Herramientas, comida |
+### 5.2 Fuentes de Puntos de Amistad
 
-#### Impacto de Regalos en Amistad
+| Acción | Puntos | Frecuencia | Costo |
+|--------|--------|------------|-------|
+| Hablar | +1 | 1×/día/NPC | Gratis |
+| Regalar (le gusta) | +2/+3 | 1×/semana/NPC | Item + monedas |
+| Regalar (neutral) | +0 | 1×/semana/NPC | Item + monedas |
+| Regalar (le disgusta) | -1/-2 | 1×/semana/NPC | Item + monedas |
+| Sentarse juntos | +1 | 1×/día/NPC | 30 min tiempo |
+| Cocinar juntos | +2 | 1×/semana/NPC | Ingredientes |
+| Pasear juntos | +1 | 1×/semana/NPC | 1 hora tiempo |
+| Ayudar con trabajo | +2 | 1×/semana/NPC | 1 hora tiempo |
+| Celebrar cumpleaños | +5 | 1×/año/NPC | Regalo especial |
+| Completar misión del NPC | +3 | Según misión | Variable |
 
-| Calificación | Amistad | Recuerdo |
-|-------------|---------|----------|
-| ¡Le encanta! | +3 | 30 días |
-| Le gusta | +2 | 14 días |
-| Neutral | +0 | 7 días |
-| No le gusta | -1 | 30 días |
-| ¡Le odia! | -2 | 60 días |
+### 5.3 Sistema de Regalos Detallado
 
-### 4.3 Eventos de Amistad
+#### Gustos por NPC (ejemplo)
 
-| Evento | Condición | Recompensa |
-|--------|-----------|------------|
-| Cumpleaños del NPC | 1×/año (M29) | +5 amistad, regalo especial |
-| Fiesta sorpresa | Amistad nivel 4 | NPCs invitados vienen a la casa |
-| Viaje juntos | Amistad nivel 5 | Viaje a isla especial |
-| Carta de agradecimiento | 10 regalos dados | Receta secreta |
-| Talla en madera | 20 visitas del NPC | Mueble exclusivo |
+| NPC | ¡Le encanta! | Le gusta | Neutral | No le gusta | ¡Le odia! |
+|-----|-------------|----------|---------|-------------|-----------|
+| Luna (pintora) | Cuadros, flores raras | Libros, música | Comida | Herramientas | Minerales |
+| Rocky (herrero) | Minerales raros, herramientas | Madera, piedra | Comida | Flores | Libros |
+| Coral (exploradora) | Mapas, antiguas | Conchas, piedras | Comida | Ropa | Muebles |
+| Chef (cocinero) | Ingredientes raros, recetas | Especias, hierbas | Flores | Herramientas | Minerales |
+| Fin (pescador) | Pescados raros, cebo | Conchas, coral | Comida | Libros | Flores |
+| Flora (jardinera) | Flores raras, semillas | Plantas, tierra | Comida | Minerales | Herramientas |
+| Sage (bibliotecario) | Libros, glifos | Cristales, mapas | Comida | Herramientas | Ropa |
+| Merc (mercader) | Monedas, items raros | Comida cara | Flores | Herramientas | Libros |
 
-### 4.4 Memoria de Amistad
+#### Impacto de Regalos
+
+| Calificación | Puntos | Recuerdo | Memoria |
+|-------------|--------|----------|---------|
+| ¡Le encanta! | +3 | 60 días | Recuerda el regalo y lo menciona |
+| Le gusta | +2 | 30 días | Recuerda que le gustó |
+| Neutral | +0 | 7 días | No recuerda |
+| No le gusta | -1 | 30 días | Recuerda y menciona desagrado |
+| ¡Le odia! | -2 | 60 días | Recuerda y menciona enfado |
+
+#### Reglas de Repetición
+
+- Si el jugador repite un mismo regalo, la reacción es -1 punto adicional
+- Si el jugador da 3 regalos iguales seguidos, el NPC dice "¿Otro igual?"
+- El NPC recuerda los últimos 10 regalos recibidos
+- No hay límite de cuántos regalos puedes dar por semana (solo 1 efectivo)
+
+### 5.4 Eventos de Amistad
+
+| Evento | Condición | Recompensa | Frecuencia |
+|--------|-----------|------------|------------|
+| Cumpleaños del NPC | Amistad ≥ 2 | +5 amistad, regalo especial | 1×/año/NPC |
+| Fiesta sorpresa | Amistad ≥ 4 | NPCs invitados vienen a la casa | 1×/año |
+| Viaje juntos | Amistad = 5 | Viaje a isla especial | 1× por NPC |
+| Carta de agradecimiento | 10 regalos dados | Receta secreta | 1× por NPC |
+| Talla en madera | 20 visitas del NPC | Mueble exclusivo | 1× por NPC |
+| Cena especial | Amistad ≥ 3 | Comida rara + conversación | 1×/mes |
+
+### 5.5 Memoria de Amistad
 
 - Cada NPC recuerda: regalos recibidos, visitas del jugador, favoritos hechos
 - La memoria afecta los diálogos (M21): el NPC menciona cosas pasadas
-- Si el jugador no visita un NPC por mucho tiempo, la amistad baja lentamente (-1/mes)
-- Pero nunca baja de nivel 1 (si ya eran amigos, se mantienen)
+- Ejemplo: "¿Te acuerdas del cuadro que me regalaste? Sigue en mi pared."
 - Los NPCs hablan entre ellos del jugador (reputación social)
+- Si dos NPCs son amigos, comparten experiencias del jugador
+
+### 5.6 Decaimiento (suave, cozy)
+
+| Condición | Decaimiento | Mínimo |
+|-----------|-------------|--------|
+| No jugar 1 semana | 0 puntos | — |
+| No jugar 1 mes | 0 puntos | — |
+| No visitar NPC 1 mes | -2 puntos | Nunca baja de nivel 1 |
+| No visitar NPC 3 meses | -5 puntos | Nunca baja de nivel 1 |
+
+**Regla cozy:** El decaimiento es MUY suave. Si el jugador ya era amigo (nivel 2+), nunca baja de nivel 1. No hay FOMO.
+
+### 5.7 Anti-Frustración
+
+| Principio | Implementación |
+|-----------|---------------|
+| Sin FOMO | Todo contenido desbloqueable siempre |
+| Sin timers obligatorios | No hay recompensas diarias que perder |
+| Sin penalización por ausencia | La amistad no baja significativamente |
+| Sin bloqueo de contenido | Todo accesible sin amistad alta |
+| Sin presión de社交 | Puedes ignorar a los NPCs sin consecuencias |
+| Sin penalización por regalo malo | Solo -1/-2 puntos (recuperable en 1-2 semanas) |

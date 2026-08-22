@@ -79,33 +79,88 @@ La isla ancestral necesita habitantes. Sin ellos, la isla se siente vacía y el 
 6. Checklist de mínimo 110 ítems completado y documentación firmada.
 ---
 
-## 5. EXPANSIONES COZY (2026-08-22)
+## 7. SISTEMA DE RUTINAS Y VISITAS DE NPCs (Tsuki's Odyssey + Stardew Valley)
 
-### 5.1 Visitas Diarias de NPCs
+**Filosofía:** Los NPCs son personas con vida propia. Tienen horarios, gustos, personalidades y rutinas. El jugador puede conocerlos, hacerse amigo y recibir visitas. No hay obligación de socializar.
 
-Inspirado en Tsuki's Odyssey, los NPCs visitan al jugador según su rutina y amistad.
+### 7.1 Perfiles de NPC (8-12 NPCs)
+
+#### Personalidades
+
+| Personalidad | Comportamiento | Gustos | Disgustos |
+|--------------|---------------|--------|-----------|
+| Trabajador | Siempre en su tienda/taller | Herramientas, minerales | Flores, comida dulce |
+| Artístico | Pasea, dibuja, observa | Flores, cuadros, música | Herramientas, minerales |
+| Aventurero | Explora, busca tesoros | Mapas, antiguas, ruedas | Comida, muebles |
+| Cocinero | Cocina, prueba recetas | Ingredientes, recetas | Herramientas, minerales |
+| Pescador | Pesca, pasea por la costa | Pescados, cebo, conchas | Plantas, minerales |
+| Jardinero | Cuida plantas, pasea | Flores, semillas, tierra | Minerales, madera |
+| Sabio | Lee, investiga, medita | Libros, glifos, cristales | Comida, ropa |
+| Mercader | Vende, compra, negocia | Monedas, items raros | Comida común |
+
+#### Ejemplo de 8 NPCs
+
+| NPC | Especie | Personalidad | Profesión | Horario |
+|-----|---------|-------------|-----------|---------|
+| Luna | Gato | Artístico | Pintora | 08-20 (pasea, dibuja) |
+| Rocky | Oso | Trabajador | Herrero | 07-18 (taller) |
+| Coral | Sirena | Aventurero | Exploradora | 06-22 (playa, ruinas) |
+| Chef | Cerdo | Cocinero | Cocinero | 06-20 (cocina) |
+| Fin | Pez | Pescador | Pescador | 05-19 (río, costa) |
+| Flora | Conejo | Jardinero | Jardinera | 07-19 (jardín, pueblo) |
+| Sage | Búho | Sabio | Bibliotecario | 09-21 (biblioteca) |
+| Merc | Zorro | Mercader | Mercader | 08-18 (tienda) |
+
+### 7.2 Rutinas Diarias por NPC
+
+#### Formato de Rutina
+
+Cada NPC tiene una tabla de rutina con:
+- **Franja horaria** (mañana 06-12, tarde 12-18, noche 18-24)
+- **Actividad** (trabajo, paseo, descanso, social)
+- **Ubicación** (tienda, casa, playa, bosque, pueblo)
+- **Acción del jugador** (hablar, regalar, observar)
+
+#### Ejemplo: Rutina de Luna (Pintora)
+
+| Hora | Actividad | Ubicación | Acción del jugador |
+|------|-----------|-----------|-------------------|
+| 06:00 | Despertar | Casa | Mirar por la ventana |
+| 07:00 | Desayunar | Casa | Hablar (diálogo matutino) |
+| 08:00 | Paseo matutino | Pueblo | Regalar (si amistad ≥ 2) |
+| 09:00 | Dibujar | Playa/Bosque | Hablar (diálogo de arte) |
+| 12:00 | Almuerzo | Restaurante | Sentarse juntos (+amistad) |
+| 13:00 | Pintar | Pueblo/Casa | Observar (reacciona) |
+| 17:00 | Visitar tiendas | Pueblo | Hablar (diálogo de tarde) |
+| 19:00 | Regresar a casa | Casa | Despedirse |
+| 20:00 | Descansar | Casa | No disponible |
+| 22:00 | Dormir | Casa | No disponible |
+
+### 7.3 Visitas de NPCs al Jugador
 
 #### Reglas de Visita
 
-| Condición | Frecuencia | Duración |
-|-----------|------------|----------|
-| Amistad nivel 0-1 | 1×/semana | 30 min juego |
-| Amistad nivel 2 | 2×/semana | 1 hora juego |
-| Amistad nivel 3 | 3×/semana | 2 horas juego |
-| Amistad nivel 4 | Todos los días | 3 horas juego |
+| Nivel de amistad | Frecuencia | Duración | Qué hace |
+|-----------------|------------|----------|----------|
+| 0 (desconocido) | 0×/semana | — | No visita |
+| 1 (conocido) | 1×/semana | 30 min | Llama a la puerta, habla, se va |
+| 2 (amigo) | 2×/semana | 1 hora | Entra, mira decoración, regala item |
+| 3 (buen amigo) | 3×/semana | 2 horas | Entra, se sienta, pide favor, regala |
+| 4 (mejor amigo) | Todos los días | 3 horas | Entra, cocina juntos, regala raro |
 
 #### Qué Hacen los NPCs en la Visita
 
-| Acción | Resultado |
-|--------|-----------|
-| Llaman a la puerta | El jugador puede abrir o ignorar |
-| Entran a la casa | Miran la decoración, reaccionan |
-| Se sientan | Recuperan energía (cozy) |
-| Regalan un item | 1×/semana si amistad ≥ 2 |
-| Piden un favor | Misión secundaria opcional (M23) |
-| Se despiden | Se van después de un tiempo |
+| Acción | Resultado | Requisito |
+|--------|-----------|-----------|
+| Llaman a la puerta | El jugador puede abrir o ignorar | Amistad ≥ 1 |
+| Entran a la casa | Miran la decoración, reaccionan | Amistad ≥ 2 |
+| Se sientan | Recuperan energía (cozy) | Amistad ≥ 2 |
+| Regalan un item | 1×/semana si amistad ≥ 2 | Amistad ≥ 2 |
+| Piden un favor | Misión secundaria opcional (M23) | Amistad ≥ 3 |
+| Cocinan juntos | Crean comida especial | Amistad ≥ 4 |
+| Se despiden | Se van después de un tiempo | Siempre |
 
-### 5.2 Sistema de Regalos
+### 7.4 Sistema de Regalos Detallado
 
 #### Reglas de Regalo
 
@@ -113,39 +168,65 @@ Inspirado en Tsuki's Odyssey, los NPCs visitan al jugador según su rutina y ami
 |-------|---------|
 | Frecuencia | 1 regalo por NPC por semana |
 | Costo | El jugador gasta monedas o items |
-| Gustos | Cada NPC tiene gustos específicos (M19 perfil) |
-| Reacción | Feliz (gusta), neutro (indiferente), triste (disgusta) |
-| Amistad | +2 si gusta, +0 si neutro, -1 si disgusta |
-| Memoria | El NPC recuerda los últimos 5 regalos (no repetir) |
+| Gustos | Cada NPC tiene gustos específicos (perfil) |
+| Reacción | ¡Le encanta! (+3), Le gusta (+2), Neutral (+0), No le gusta (-1), ¡Le odia! (-2) |
+| Memoria | El NPC recuerda los últimos 10 regalos |
+| Repetición | Si repite un regalo, la reacción es -1 punto |
+| Cumpleaños | El regalo vale doble (positivo o negativo) |
 
-#### Categorías de Regalos
+#### Categorías de Regalos por NPC
 
-| Categoría | Ejemplo | Gusto promedio |
-|-----------|---------|----------------|
-| Comida | Pastel, pescado, fruta | Alto (la mayoría gusta) |
-| Madera | Madera tallada, caja | Medio (artesanos gusta) |
-| Flores | Rosa, girasol, orquídea | Alto ( NPCs femeninos) |
-| Minerales | Cobre, hierro, cristal | Medio (herreros gusta) |
-| Ropa | bufanda, sombrero | Bajo (solo gustos específicos) |
-| Herramientas | Pico, hacha | Bajo (solo artesanos) |
-| Antigüedades | Glifo, moneda antigua | Muy alto (arqueólogos) |
+| NPC | Le encanta | Le gusta | Neutral | No le gusta | Le odia |
+|-----|-----------|----------|---------|-------------|---------|
+| Luna (pintora) | Cuadros, flores | Libros, música | Comida | Herramientas | Minerales |
+| Rocky (herrero) | Minerales, herramientas | Madera, piedra | Comida | Flores | Libros |
+| Coral (exploradora) | Mapas, antiguas | Conchas, piedras | Comida | Ropa | Muebles |
+| Chef (cocinero) | Ingredientes raros | Recetas, especias | Flores | Herramientas | Minerales |
+| Fin (pescador) | Pescados raros | Cebo, conchas | Comida | Libros | Flores |
+| Flora (jardinera) | Flores raras, semillas | Plantas, tierra | Comida | Minerales | Herramientas |
+| Sage (bibliotecario) | Libros, glifos | Cristales, mapas | Comida | Herramientas | Ropa |
+| Merc (mercader) | Monedas, items raros | Comida cara | Flores | Herramientas | Libros |
 
-### 5.3 Regalos de NPC al Jugador
+### 7.5 Regalos de NPC al Jugador
 
 Los NPCs también regalan cosas al jugador:
 
-| Condición | Regalo |
-|-----------|--------|
-| Primera visita | Item temático de la profesión del NPC |
-| Amistad nivel 2 | Receta nueva (M16) |
-| Amistad nivel 3 | Mueble exclusivo |
-| Amistad nivel 4 | Item legendario / herramienta mejorada |
-| Cumpleaños del jugador (M29) | Regalo especial doble |
+| Condición | Regalo | Frecuencia |
+|-----------|--------|------------|
+| Primera visita | Item temático de la profesión | 1× |
+| Amistad nivel 2 | Receta nueva (M16) | 1× |
+| Amistad nivel 3 | Mueble exclusivo | 1× |
+| Amistad nivel 4 | Item legendario / herramienta mejorada | 1× |
+| Cumpleaños del jugador (M29) | Regalo especial doble | 1×/año |
+| Visita aleatoria | Comida, flores, monedas | 1×/semana |
 
-### 5.4 Memoría de NPCs
+### 7.6 Memoría de NPCs
 
 - Cada NPC recuerda los últimos 10 regalos recibidos
-- Si el jugador repite un regalo, el NPC reacciona menos entusiasta
+- Si el jugador repite un regalo, el NPC reacciona menos entusiasta (-1 punto)
 - Si el jugador da algo que disgusta, el NPC lo recuerda 30 días
+- Si el jugador da algo que le encanta, el NPC lo recuerda 60 días
 - La memoría se persiste en M58
 - Los NPCs comparten experiencias entre ellos (si dos NPCs son amigos, hablan del jugador)
+
+### 7.7 Interacciones Sociales
+
+| Interacción | Resultado | Costo |
+|-------------|-----------|-------|
+| Hablar | +1 amistad (si no hablado hoy) | Gratis |
+| Regalar | +2/+3 amistad (según gusto) | Item + monedas |
+| Sentarse juntos | +1 amistad (si amistad ≥ 2) | 30 min tiempo |
+| Cocinar juntos | +2 amistad + comida especial | Ingredientes |
+| Pasear juntos | +1 amistad + descubrimiento | 1 hora tiempo |
+| Ayudar con trabajo | +2 amistad + monedas | 1 hora tiempo |
+
+### 7.8 Anti-Frustración Social
+
+| Principio | Implementación |
+|-----------|---------------|
+| Sin penalización por no socializar | Los NPCs no se enojan si no los visitas |
+| Sin presión de tiempo | Las visitas no tienen fecha de expiración |
+| Sin bloqueo de contenido | Todo accesible sin amistad alta |
+| Sin obligación de regalar | Los regalos son opcionales |
+| Sin penalización por regalo malo | La amistad baja solo 1-2 puntos |
+| Sin exigencia de frecuencia | Puedes socializar cuando quieras |

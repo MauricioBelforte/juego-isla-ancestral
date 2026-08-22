@@ -49,29 +49,32 @@ Implementar una pesca cozy en un mundo voxel (Isla Ancestral): el jugador equipa
 5. Checklist de diseno con mas de 110 items de cobertura (implementacion, integracion, edge cases, optimizacion, documentacion y polish).
 ---
 
-## 4. EXPANSIONES COZY (2026-08-22)
+## 5. SISTEMA DE PESCA IDLE Y SOCIAL (Tsuki's Odyssey + Stardew Valley)
 
-### 4.1 Pesca Idle (automática)
+**Filosofía:** La pesca es una actividad cozy. El jugador puede pescar activamente (minijuego) o pasivamente (idle). No hay penalización por fallar. Los peces son útiles para recetas y venta.
 
-Inspirado en Tsuki's Odyssey, el jugador puede pescar automáticamente sin interacción constante.
+### 5.1 Modos de Pesca
 
-#### Modos de Pesca
+| Modo | Control | Recompensa | Calidad | Desbloqueo |
+|------|---------|------------|---------|------------|
+| Activo | Minijuego completo | Máxima | 100% | Desde el inicio |
+| Semi-pasivo | Lanza caña, espera automática | Media | 70% | Hacha T1 |
+| Idle | Pescador automático | Baja | 40% | Hacha T3 |
 
-| Modo | Control | Recompensa | Calidad |
-|------|---------|------------|---------|
-| Activo | Minijuego completo | Máxima | 100% |
-| Semi-pasivo | Lanza caña, espera automática | Media | 70% |
-| Idle | Pescador automático (nivel 3+) | Baja | 40% |
+### 5.2 Pesca Idle Detallada
 
-#### Pesca Idle - Reglas
+#### Reglas de Pesca Idle
 
-- Solo se desbloquea con hacha/pico nivel 3+ (herramientas avanzadas)
-- El personaje va al punto de pesca más cercano automáticamente
-- Pesca 1 pez cada 5 minutos de juego (no tiempo real)
-- La calidad del pez es baja (pero utilizable en recetas)
-- El jugador puede interrumpir en cualquier momento
-- No necesita cebo para pesca idle
-- No pesca peces raros o legendarios (solo comunes y poco comunes)
+| Regla | Detalle |
+|-------|---------|
+| Desbloqueo | Hacha T3 (herramientas avanzadas) |
+| Ubicación | El personaje va al punto de pesca más cercano |
+| Frecuencia | 1 pez cada 5 minutos de juego |
+| Calidad | Baja (40% calidad normal) |
+| Especies | Solo comunes y poco comunes (no raras/legendarias) |
+| Cebo | No necesita cebo |
+| Interrupción | El jugador puede interrumpir en cualquier momento |
+| Inventario | Si está lleno, deja de pescar |
 
 #### Integración con Modo Pasivo (M11)
 
@@ -81,18 +84,35 @@ Inspirado en Tsuki's Odyssey, el jugador puede pescar automáticamente sin inter
 - Si es de noche, busca un punto seguro para pescar
 - Si llueve, busca refugio y vuelve a pescar después
 
-### 4.2 Pesca Social
+### 5.3 Pesca Social
 
-- Otros NPCs pueden acompañar al jugador a pescar
-- Si un NPC pescador está cerca, pesca junto al jugador
-- Los peces que pesca el NPC se los puede pedir (trueque o compra)
-- Si el jugador le regala un pez a un NPC pescador, sube amistad +3
-- Los NPCs pescadores dan consejos que mejoran la calidad del pez (+10%)
+| Interacción | Resultado | Requisito |
+|-------------|-----------|-----------|
+| NPC pescador cerca | Pesca junto al jugador | Amistad ≥ 2 |
+| Pedir pez al NPC | Trueque o compra | Amistad ≥ 3 |
+| Regalar pez a NPC pescador | +3 amistad | Amistad ≥ 2 |
+| Consejo del NPC | +10% calidad del pez | Amistad ≥ 3 |
+| Pesca grupal | +20% velocidad de pesca | 3+ NPCs pescando |
 
-### 4.3 Enciclopedia de Pesca (M37)
+### 5.4 Enciclopedia de Pesca (M37)
 
-- Cada pez capturado se registra en la enciclopedia
-- La enciclopedia muestra: nombre, bioma, estación, hora, rareza, mejor tamaño
-- Completar categorías da recompensas (muebles de pesca,.decoraciones)
-- La enciclopedia se puede consultar en cualquier momento
-- No es obligatoria (cozy = sin presión de completar)
+| Categoría | Contenido | Recompensa al completar |
+|-----------|-----------|------------------------|
+| Peces de río | Todas las especies de río | Caña de río mejorada |
+| Peces de mar | Todas las especies de mar | Caña de mar mejorada |
+| Peces de laguna | Todas las especies de laguna | Caña de laguna mejorada |
+| Peces nocturnos | Especies que solo aparecen de noche | Lámpara de pesca |
+| Peces estacionales | Especies por estación | Mueble de pesca |
+| Peces legendarios | Los más raros | Caña de oro |
+
+**Regla cozy:** La enciclopedia es 100% opcional. No hay contenido bloqueado por no completarla.
+
+### 5.5 Anti-Frustración
+
+| Principio | Implementación |
+|-----------|---------------|
+| Sin penalización por fallar | El pez huye, se puede relanzar al instante |
+| Sin pérdida de items | No se pierden cebos ni cañas al fallar |
+| Sin presión de tiempo | La pesca idle no tiene límite |
+| Sin bloqueo de contenido | Todos los peces accesibles sin enciclopedia |
+| Sin exigencia de skill | El minijuego es indulgente |

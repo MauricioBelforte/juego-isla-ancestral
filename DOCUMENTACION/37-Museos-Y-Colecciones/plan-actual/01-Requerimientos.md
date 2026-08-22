@@ -53,63 +53,80 @@ El jugador explora una isla ancestral donde avista fauna, pesca, excava fósiles
 9. El modulo pasa el plan de testings (donacion feliz, duplicados, vitrina ocupada, recompensa unica, carga/descarga).
 ---
 
-## 4. EXPANSIONES COZY (2026-08-22)
+## 5. SISTEMA DE MUSEO Y COLECCIONES (Animal Crossing + Stardew Valley)
 
-### 4.1 Museo del Pueblo
+**Filosofía:** El museo es un lugar de descubrimiento y orgullo. Donar es opcional. Completar es cosmético. No hay contenido bloqueado por no donar.
 
-Inspirado en Animal Crossing y Tsuki's Odyssey, el jugador puede donar items al museo del pueblo para crear exhibiciones.
+### 5.1 Museo del Pueblo
 
 #### Salas del Museo
 
-| Sala | Contenido | Recompensa al completar |
-|------|-----------|------------------------|
-| Sala de Peces | Todos los peces del juego | Fuente decorativa |
-| Sala de Minerales | Todos los minerales | Lámpara de cristal |
-| Sala de Plantas | Todas las hierbas y flores | Maceta gigante |
-| Sala de Ruinas | Piezas arqueológicas | Glifo iluminado |
-| Sala de Historia | Reliquias ancestrales | Mapa del tesoro |
-| Sala del Jugador | Favoritos del jugador | Placa con su nombre |
+| Sala | Contenido | Piezas | Recompensa al completar |
+|------|-----------|--------|------------------------|
+| Sala de Peces | Todos los peces del juego | 30+ | Fuente decorativa para la casa |
+| Sala de Minerales | Todos los minerales | 20+ | Lámpara de cristal |
+| Sala de Plantas | Todas las hierbas y flores | 15+ | Maceta gigante |
+| Sala de Ruinas | Piezas arqueológicas | 25+ | Glifo iluminado |
+| Sala de Historia | Reliquias ancestrales | 10+ | Mapa del tesoro |
+| Sala del Jugador | Favoritos del jugador | 5+ | Placa con su nombre |
 
 #### Reglas del Museo
 
-- El jugador dona 1 ítem de cada tipo (no se pierde, se exhibe)
-- Cada ítem donado se muestra en una vitrina 3D
-- Completar una sala da un bonuses cosmético
-- El museo tiene horario (abierto 8:00-20:00)
-- El curador (NPC) comenta cada nueva donación
-- No hay obligación de donar todo (cozy = sin presión)
-- Los ítems donados no se pueden recuperar (pero el jugador tiene copia)
+| Regla | Detalle |
+|-------|---------|
+| Donación | El jugador dona 1 ítem de cada tipo (no se pierde, se exhibe) |
+| Exhibición | Cada ítem donado se muestra en una vitrina 3D |
+| Recompensa | Completar una sala da un bono cosmético |
+| Horario | Abierto 8:00-20:00 |
+| Curador | NPC que comenta cada nueva donación |
+| Obligatoriedad | No hay obligación de donar todo (cozy = sin presión) |
+| Recuperación | Los ítems donados no se pueden recuperar (pero el jugador tiene copia) |
 
-### 4.2 Colecciones del Jugador
+### 5.2 Colecciones del Jugador
 
-| Colección | Fuente | Recompensa |
-|-----------|--------|------------|
-| Peces legendarios | Pesca especial | Caña de oro |
-| Minerales raros | Minería profunda | Pico de cristal |
-| Flores exóticas | Exploración | Maceta encantada |
-| Glifos ancestrales | Ruinas | Lupa mejorada |
-| Recetas secretas | NPCs favoritos | Cocina especial |
-| Fotos del mundo | Fotografía (M56) | Marco dorado |
-| Muebles raros | Exploración/puzzles | Sala secreta de la casa |
+| Colección | Fuente | Recompensa | Dificultad |
+|-----------|--------|------------|------------|
+| Peces legendarios | Pesca especial | Caña de oro | Alta |
+| Minerales raros | Minería profunda | Pico de cristal | Media |
+| Flores exóticas | Exploración | Maceta encantada | Baja |
+| Glifos ancestrales | Ruinas | Lupa mejorada | Alta |
+| Recetas secretas | NPCs favoritos | Cocina especial | Media |
+| Fotos del mundo | Fotografía (M56) | Marco dorado | Baja |
+| Muebles raros | Exploración/puzzles | Sala secreta de la casa | Media |
 
-### 4.3 Tienda de Museo
+### 5.3 Tienda de Museo
 
-- El curador vende reproducciones de piezas donadas
-- Las reproducciones son más baratas que las originales
-- Son solo decorativas (no funcionales)
-- Útiles para decorar la casa sin tener que encontrar la pieza original
-- El curador trae 1 pieza nueva cada semana
+| Producto | Precio | Descripción |
+|----------|--------|-------------|
+| Reproducciones | 50-200 monedas | Réplicas decorativas de piezas donadas |
+| Pieza nueva | 300-500 monedas | Pieza rara que el curador trae 1×/semana |
+| Guía del museo | 100 monedas | Muestra ubicación de piezas faltantes |
+| Marco dorado | 250 monedas | Para exhibir fotos en la casa |
 
-### 4.4 Integración con M18 (Casas)
+### 5.4 Integración con M18 (Casas)
 
 - El jugador puede colocar réplicas de piezas del museo en su casa
 - Las piezas del museo tienen interacción (mirar, leer descripción)
 - Si el jugador completa una sala, desbloquea un estilo de decoración
 - Los NPCs visitantes reaccionan a las piezas del museo en la casa
 
-### 4.5 Integración con M158 (Herramientas)
+### 5.5 Integración con M158 (Herramientas)
 
-- Algunas piezas del museo solo se obtienen con herramientas específicas
-- Ejemplo: glifos ancestrales necesitan T3 para extraerlos
-- Esto motiva la progresión de herramientas
-- Pero no hay pieza OBLIGATORIA para completar la historia
+| Pieza | Herramienta necesaria | Ubicación |
+|-------|----------------------|-----------|
+| Glifos ancestrales | Hacha T3 | Ruinas profundas |
+| Fósiles raros | Pico T3 | Cueva ancestral |
+| Minerales épicos | Pico T4 | Mina profunda |
+| Flores exóticas | Hacha T2 | Bosque secreto |
+
+**Regla:** No hay pieza OBLIGATORIA para completar la historia. Las piezas que necesitan herramientas avanzadas son cosméticas.
+
+### 5.6 Anti-Frustración
+
+| Principio | Implementación |
+|-----------|---------------|
+| Sin penalización por no donar | Todo accesible sin museo |
+| Sin presión de tiempo | El museo no tiene límite de donaciones |
+| Sin bloqueo de contenido | Todo contenido accesible sin completar salas |
+| Sin exigencia de colección completa | Las recompensas son cosméticas |
+| Sin pérdida de items | Los ítems donados se exhiben (no se pierden) |

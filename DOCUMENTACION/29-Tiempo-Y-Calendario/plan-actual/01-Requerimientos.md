@@ -40,55 +40,82 @@ Aurora necesita un **flujo del tiempo** que organice la rutina del pueblo (NPC, 
 4. Contrato GameClock (API pública) escrito para que otros agentes lo consuman.
 ---
 
-## 4. EXPANSIONES COZY (2026-08-22)
+## 5. SISTEMA DE FESTIVALES Y EVENTOS (Stardew Valley + Animal Crossing)
 
-### 4.1 Festivales Estacionales
+**Filosofía:** Los festivales son celebraciones, no obligaciones. Si el jugador se pierde uno, se repite el próximo año. No hay contenido exclusivo permanente.
 
-Inspirado en Tsuki's Odyssey y Stardew Valley, cada estación tiene un festival único.
+### 5.1 Calendario del Juego
 
-| Estación | Festival | Contenido | Recompensa |
-|----------|----------|-----------|------------|
-| Primavera | Festival de las Flores | Decorar el pueblo con flores | Mueble floral exclusivo |
-| Verano | Festival del Mar | Pesca especial, playa | Caña de oro temporal |
-| Otoño | Festival de la Cosecha | Comida, trueques | Receta secreta |
-| Invierno | Festival de la Luz | Velas, fuegos artificiales | Lámpara encantada |
+| Parámetro | Valor | Nota |
+|-----------|-------|------|
+| 1 día juego | 20 minutos tiempo real | Ajustable |
+| 1 semana juego | 7 días = 140 min | — |
+| 1 mes juego | 28 días = 560 min | — |
+| 1 estación juego | 3 meses = 84 días | — |
+| 1 año juego | 4 estaciones = 336 días | ~56 horas reales |
+
+### 5.2 Festivales Estacionales
+
+| Estación | Festival | Duración | Contenido | Recompensa |
+|----------|----------|----------|-----------|------------|
+| Primavera | Festival de las Flores | 3 días | Decorar el pueblo, buscar flores raras | Mueble floral exclusivo |
+| Verano | Festival del Mar | 3 días | Pesca especial, competencia, playa | Caña de oro temporal |
+| Otoño | Festival de la Cosecha | 3 días | Comida, trueques, mercado especial | Receta secreta |
+| Invierno | Festival de la Luz | 3 días | Velas, fuegos artificiales, medianoche | Lámpara encantada |
 
 #### Reglas de Festivales
 
-- Cada festival dura 3 días del juego (M29)
-- Todos los NPCs participan (rutinas especiales)
-- Hay actividades únicas (minijuegos, pesca especial, etc.)
-- Los items del festival son coleccionables (solo disponibles ese año)
-- No hay penalización por perderse un festival (se repite cada año)
-- Los festivales son la principal fuente de items exclusivos
+| Regla | Detalle |
+|-------|---------|
+| Duración | 3 días del juego (M29) |
+| Participación | Todos los NPCs participan (rutinas especiales) |
+| Actividades | Minijuegos, pesca especial, búsqueda del tesoro |
+| Items exclusivos | Items coleccionables solo disponibles durante el festival |
+| Repetición | Cada festival se repite cada año (sin penalización por perderse) |
+| Recompensas |Items exclusivos cosméticos (no bloquean contenido) |
 
-### 4.2 Eventos Diarios
+### 5.3 Eventos Periódicos
 
-| Evento | Frecuencia | Contenido |
-|--------|------------|-----------|
-| Mercado del pueblo | Todos los días | Tiendas con stock renovado |
-| Paseo de NPCs | Diario | NPCs caminan por el pueblo |
-| Lluvia de estrellas | 1×/mes | Posibilidad de pedir un deseo (skip time) |
-| Visita de mercader | 1×/semana | Mercader viajero con items raros |
-| Carta del工会 | 1×/mes | Noticias del pueblo, nuevos NPCs |
+| Evento | Frecuencia | Contenido | Recompensa |
+|--------|------------|-----------|------------|
+| Mercado del pueblo | Todos los días | Tiendas con stock renovado | Items variados |
+| Paseo de NPCs | Diario | NPCs caminan por el pueblo | +1 amistad al hablar |
+| Lluvia de estrellas | 1×/mes | Posibilidad de pedir un deseo | Skip 1 hora juego |
+| Visita de mercader | 1×/semana | Mercader viajero con items raros | Items raros |
+| Carta del pueblo | 1×/mes | Noticias del pueblo | Información sobre eventos |
+| Cumpleaños de NPC | Según calendario | Celebración con el NPC | +5 amistad |
+| Día del pueblo | 1×/año | Celebración general | Regalo de todos los NPCs |
 
-### 4.3 Rutinas de NPCs por Hora
+### 5.4 Rutinas de NPCs por Hora
 
-| Hora | Acción del NPC |
-|------|----------------|
-| 06:00 | Despertar |
-| 07:00 | Ir a trabajar (tienda/taller) |
-| 12:00 | Almuerzo (casa o restaurante) |
-| 13:00 | Volver a trabajar |
-| 17:00 | Paseo por el pueblo |
-| 19:00 | Volver a casa |
-| 20:00 | Descanso / visita a vecinos |
-| 22:00 | Dormir |
+| Hora | Acción del NPC | Interacción del jugador |
+|------|----------------|------------------------|
+| 06:00 | Despertar | No disponible |
+| 07:00 | Ir a trabajar | Hablar (diálogo matutino) |
+| 08:00 | Trabajar | Regalar (si amistad ≥ 2) |
+| 12:00 | Almuerzo | Sentarse juntos (+amistad) |
+| 13:00 | Volver a trabajar | Hablar (diálogo de tarde) |
+| 17:00 | Paseo por el pueblo | Pasear juntos (+amistad) |
+| 19:00 | Volver a casa | Despedirse |
+| 20:00 | Descanso | No disponible |
+| 22:00 | Dormir | No disponible |
 
-### 4.4 Clima y Rutinas
+### 5.5 Clima y Rutinas
 
-- Si llueve, los NPCs buscan refugio
-- Si hace mucho calor, los NPCs van a la sombra
-- Si hay nieve, los NPCs se visten diferente
-- El clima afecta las actividades disponibles
-- Pero nunca bloquea completamente la vida del pueblo
+| Clima | Efecto en NPCs | Efecto en jugador |
+|-------|---------------|-------------------|
+| Soleado | Pasean más, actividades al aire libre | Todas las actividades disponibles |
+| Lluvioso | Buscan refugio, tiendas cerradas | Pesca mejorada (+20% calidad) |
+| Nublado | Rutina normal | Sin efecto |
+| Nieve | Se visten diferente, menos paseos | Caminar más lento (-10% velocidad) |
+| Tormenta | Se quedan en casa | No recommended outdoor activities |
+
+### 5.6 Anti-Frustración Temporal
+
+| Principio | Implementación |
+|-----------|---------------|
+| Sin FOMO | Los festivales se repiten cada año |
+| Sin contenido exclusivo permanente | Los items del festival son cosméticos |
+| Sin presión de tiempo | Los eventos duran 3 días (suficiente) |
+| Sin penalización por no participar | Los NPCs no se enojan |
+| Sin bloqueo de contenido | Todo accesible sin participar en festivales |
