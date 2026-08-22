@@ -129,5 +129,12 @@
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 
+## I. Integración y Mantenimiento (4 ítems)
+
+- [ ] Verificar coherencia de SFX con M41 (Música) y M42 (Sonido Ambiental)
+- [ ] Actualizar catálogo de SFX cuando se agreguen nuevas superficies
+- [ ] Verificar que SFX no generan fatiga auditiva en sesiones largas
+- [ ] Documentar lecciones de diseño sonoro para futuros módulos
+
 **Totales:** 96 ítems · Completados: 96 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (D-G2 en runtime) quedan para el agente delegado; diseño, mapa y reglas cierran aquí.
