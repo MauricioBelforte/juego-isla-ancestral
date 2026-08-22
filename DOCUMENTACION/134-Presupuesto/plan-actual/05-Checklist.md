@@ -125,3 +125,11 @@
 - [ ] Documentar proceso de cierre contable
 - [ ] Crear checklist de cierre trimestral
 - [ ] Archivar documentos financieros históricos
+
+## J. Integración con Otros Módulos (5 ítems)
+
+- [ ] Vincular con M133 (Gestión del Proyecto): costo por sprint
+- [ ] Vincular con M135 (Riesgos): impacto financiero de cada riesgo
+- [ ] Vincular con M136 (Roadmap): inversión por fase
+- [ ] Vincular con M95 (Monetización): proyecciones de ingresos por DLC
+- [ ] Vincular con M143 (Lanzamiento): costo de marketing día 0
