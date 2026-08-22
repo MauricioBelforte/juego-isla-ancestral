@@ -104,3 +104,54 @@ Diseñar el sistema de tiendas del juego: puestos y establecimientos pertenecien
 - Los comercios son espacios de comunidad, no trampas económicas: vender lo que uno cultiva o pesca es rentable (M38 garantiza los precios amables).
 - Los mercaderes viajeros aportan variedad y novedad sin romper la estabilidad de las tiendas fijas.
 - El stock, como los precios, es amable: los ítems básicos nunca faltan del todo.
+---
+
+## 9. EXPANSIONES DEL MODULO 158 (2026-08-22)
+
+### 9.1 Nuevos Tipos de Tienda
+
+| Tipo | Isla | Descripcion |
+|------|------|-------------|
+| CARPINTERO | Principal | Vende herramientas T1, cursos de carpinteria |
+| HERRERO | Isla 2 | Vende herramientas T2, cursos de herreria |
+| HERRERO_AVANZADO | Isla 3 | Vende herramientas T3, cursos avanzados |
+| ENCANTADOR | Isla 4 | Vende herramientas T4, cursos de encantamiento |
+| TIENDA_JUGADOR | Cualquier isla | Tienda del jugador, vende items craft/herramientas |
+
+### 9.2 Tienda del Jugador
+
+- El jugador puede construir una tienda en su casa (M18) o en isla visitada
+- La tienda del jugador recibe 1 NPC visitante por dia maximo
+- El NPC compra 1-3 items del stock del jugador
+- El jugador debe tener items en la tienda para que los compren
+- Si no hay items, no vienen NPCs
+- Los NPCs son aleatorios del pool de M19
+
+### 9.3 NPCs Visitantes (ShopVisitorManager)
+
+- 1 NPC por dia como maximo
+- El NPC trae monedas propias (no infinito, ~50-200 monedas)
+- Compra 1-3 items del stock del jugador
+- Prefiere items de la profesion del NPC
+- Si el jugador no tiene tienda abierta, no vienen
+- Se registra transaccion en log
+- Se emite signal visitor_sale(item, price)
+
+### 9.4 Integracion con M158 (Herramientas y Desbloqueo)
+
+- El carpintero de la isla principal vende herramientas T1
+- El herrero de isla 2 vende herramientas T2
+- El herrero avanzado de isla 3 vende herramientas T3
+- El encantador de isla 4 vende herramientas T4
+- Cada tienda profesional tambien ofrece cursos de oficio
+- Los cursos son unicos y caros (inversion a largo plazo)
+- Al tomar un curso, el jugador aprende a vender herramientas en su tienda
+
+### 9.5 Tabla de Cursos y Precios
+
+| Curso | Isla | Costo | Desbloquea |
+|-------|------|-------|------------|
+| Carpinteria Basica | Principal | 300 monedas | Vende T1 (precio 10-15) |
+| Herreria | Isla 2 | 1500 monedas | Vende T1-T2 (precio 15-30) |
+| Herreria Avanzada | Isla 3 | 5000 monedas | Vende T1-T3 (precio 20-50) |
+| Encantamiento | Isla 4 | 10000 monedas | Vende T1-T4 (precio 30-80) |

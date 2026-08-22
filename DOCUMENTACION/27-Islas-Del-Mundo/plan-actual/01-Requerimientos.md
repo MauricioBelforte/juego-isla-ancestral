@@ -53,3 +53,33 @@ Aurora no es una sola isla: es un archipiélago. Los/as jugadores/as deben poder
 
 - **Incluye:** definición de islas, registro de archipiélago, anclas, carga/descarga, props, integración con viajes, agua, generación y streaming.
 - **No incluye (otros módulos):** barco/transporte (M28, M67, M68), físicas de agua y olas (M51), generador de biomas (M09/M10), navmesh de islas (M09/M64), mapa UI (M54), puzzles de islas (M23/M24).
+---
+
+## 6. EXPANSIONES DEL MODULO 158 (2026-08-22)
+
+### 6.1 Profesiones por Isla
+
+Cada isla satelite tiene una profesion especializada que la identifica:
+
+| Isla | Profesion | Profesional | Herramienta |
+|------|-----------|-------------|-------------|
+| Principal (Aurora) | Carpinteria | Carpintero | T1 (Madera) |
+| Isla 2 (Coral) | Herreria | Herrero | T2 (Cobre) |
+| Isla 3 (Verde) | Herreria Avanzada | Herrero Avanzado | T3 (Hierro) |
+| Isla 4 (Cenizas) | Encantamiento | Encantador | T4 (Encantada) |
+
+### 6.2 Precios Progresivos por Isla
+
+Los precios de herramientas y cursos aumentan progresivamente entre islas. Esto motiva al jugador a explorar todas las islas y no quedarse en una sola.
+
+### 6.3 Construccion en Otras Islas
+
+El jugador puede construir casas en islas visitadas (usando M17). Esto le permite quedarse a trabajar en otra isla y tener una base de operaciones alli.
+
+### 6.4 Identidad Visual por Isla
+
+Cada isla tiene una identidad visual unica que refleja su profesion:
+- Principal: madera, naturaleza, calidez
+- Isla 2: metal, fragua, fuego
+- Isla 3: vegetacion densa, misterio
+- Isla 4: cristal, magia, ethereal

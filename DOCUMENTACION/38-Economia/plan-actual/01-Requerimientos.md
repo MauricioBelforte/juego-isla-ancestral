@@ -94,3 +94,47 @@ Diseñar el sistema económico del juego: una moneda única (`monedas_aurora`), 
 - El pueblo debe "sentirse vivo": tiendas con horarios y personas con gustos (M20).
 - Los precios son amables: vender lo que uno cultiva o pesca debe ser rentable sin inflar el saldo.
 - La moneda del juego se concibe como "monedas de la isla" (monedas_aurora), sin deuda ni banca.
+---
+
+## 9. EXPANSIONES DEL MODULO 158 (2026-08-22)
+
+### 9.1 Moneda Unificada Multi-Isla
+
+La misma moneda (monedas_aurora) se usa en TODAS las islas. No hay monedas separadas por isla.
+
+### 9.2 Fuentes de Ingreso del Jugador
+
+| Fuente | Cantidad | Frecuencia | Maximo estimado |
+|--------|----------|------------|-----------------|
+| Jarrones | 5-15 monedas | Semanal (cada 7 dias M29) | ~150/semana |
+| Peces dorados | 1-5 monedas | Diario | ~15/dia |
+| Arboles frutos dorados | 2-8 monedas | Diario | ~40/dia |
+| Puzzles resueltos | 50-200 monedas | Unico | ~3000 total |
+| Vender herramientas (NPCs) | 10-80 monedas | 1x/dia | ~80/dia |
+| Vender en tienda | Variable | Diario | Segun items |
+| Premium (Steam) | Variable | Instantaneo | Sin limite |
+
+### 9.3 Precios Escalonados por Isla
+
+| Isla | Profesion | T2 | T3 | T4 | Curso |
+|------|-----------|-----|-----|-----|-------|
+| Principal | Carpinteria | 100 | 500 | 2000 | 300 |
+| Isla 2 | Herreria | 500 | 2000 | 5000 | 1500 |
+| Isla 3 | Herreria Avanzada | 1000 | 4000 | 8000 | 5000 |
+| Isla 4 | Encantamiento | 2000 | 8000 | 15000 | 10000 |
+
+### 9.4 Compra Premium (Steam)
+
+- Paquete 500 monedas (.99 USD)
+- Paquete 2000 monedas (.99 USD)
+- Paquete 5000 monedas (.99 USD)
+- Monedas premium = monedas normales (misma moneda)
+- Premium NO compra herramientas directamente
+
+### 9.5 Regla Anti-Frustracion
+
+- No pagar: puzzles, pescar, jarrones = avance lento pero seguro
+- Pagar: avanza mas rapido pero recorre todo el mapa
+- Jarrones se reponen semanalmente
+- Peces y frutos aparecen diariamente
+- Nunca hay bloqueo economico permanente

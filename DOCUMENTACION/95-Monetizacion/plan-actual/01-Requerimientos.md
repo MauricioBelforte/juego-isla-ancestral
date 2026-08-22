@@ -66,3 +66,43 @@ Definir la **estrategia de monetización completa** del juego y su documentació
 2. Tablas de precios, impuestos y reembolsos listas para M149/M143.
 3. Roadmap de DLC y ediciones.
 4. Cláusulas anti-P2W/anti-lootbox adoptadas formalmente.
+---
+
+## 9. EXPANSIONES DEL MODULO 158 (2026-08-22)
+
+### 9.1 Compra de Monedas por Steam
+
+El juego permite comprar monedas del juego con dinero real a traves de Steam IAP. Esta es la unica forma de gastar dinero real dentro del juego.
+
+### 9.2 Paquetes de Monedas
+
+| Paquete | Monedas | Precio USD | Precio ARS (aprox) |
+|---------|---------|------------|---------------------|
+| Pequeno | 500 | .99 | ~150 ARS |
+| Mediano | 2000 | .99 | ~450 ARS |
+| Grande | 5000 | .99 | ~750 ARS |
+
+### 9.3 Reglas Premium
+
+- Monedas premium son IDENTICAS a monedas normales (misma moneda monedas_aurora)
+- Premium NO compra herramientas directamente
+- El jugador SIEMPRE debe ir a las islas y hablar con profesionales
+- Premium solo acelera la obtencion de monedas, no el recorrido
+- No hay limite de compra
+- No hay loot boxes ni cajas de azar
+- No hay contenido exclusivo premium (solo monedas)
+
+### 9.4 Anti-Pay-to-Win
+
+- Las monedas premium compran las mismas monedas que se obtienen jugando
+- No hay items exclusivos premium
+- No hay ventajas competitivas (juego single-player)
+- El jugador que no paga puede completar todo el juego
+- Premium es una OPCION para quienes quieran avanzar mas rapido
+
+### 9.5 Integracion con M158 (Herramientas)
+
+- El jugador premium puede comprar monedas para forjar herramientas mas rapido
+- Pero SIEMPRE debe ir a la isla correspondiente y hablar con el profesional
+- No puede comprar herramientas directamente en una tienda
+- El recorrido del mapa es obligatorio para todos los jugadores

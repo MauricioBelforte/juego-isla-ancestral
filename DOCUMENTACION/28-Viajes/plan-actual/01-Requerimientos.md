@@ -46,3 +46,29 @@ El jugador vive en la isla principal de Aurora pero el mundo se compone de múlt
 5. Muelle ocupado y cancelación resueltos con reglas concretas (cola de espera, devolución).
 6. Streaming M63 integrado: sin pausas visibles de carga en la transición entre islas.
 7. Delegable para implementación.
+---
+
+## 4. EXPANSIONES DEL MODULO 158 (2026-08-22)
+
+### 4.1 Boleto de Barco como Gating Suave
+
+Para viajar entre islas, el jugador necesita comprar un boleto de barco. Esto actua como un gating economico suave: no bloquea el juego, pero Motiva al jugador a juntar dinero primero.
+
+### 4.2 Costo de Boletos por Isla
+
+| Destino | Costo Monedas | Desbloquea |
+|---------|---------------|------------|
+| Isla 2 | 100 monedas | Herrero (T2) |
+| Isla 3 | 300 monedas | Herrero Avanzado (T3) |
+| Isla 4 | 800 monedas | Encantador (T4) |
+
+### 4.3 Boleto de Retorno Gratis
+
+El jugador siempre puede volver a la isla principal gratis. Nunca queda atrapado en otra isla.
+
+### 4.4 Integracion con M158
+
+- El boleto de barco es el primer gating economico del juego
+- El jugador debe juntar monedas en la isla principal antes de viajar
+- Esto Motiva a explorar la isla principal y resolver puzzles primero
+- El viaje es una EXPERIENCIA (M157), no una pantalla de carga
