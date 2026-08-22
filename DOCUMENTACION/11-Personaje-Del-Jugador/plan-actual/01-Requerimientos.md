@@ -46,3 +46,64 @@ El jugador necesita un **cuerpo jugable** con movimiento cómodo (cozy), físico
 4. Sin contradicción con la filosofía cozy (cero daño por caída, fatiga suave).
 5. Sistema de selección de personaje con 4-6 opciones visuales documentado.
 6. Integración con M155 (Vestimenta) y M156 (Terrenos) definida.
+---
+
+## 6. EXPANSIONES COZY (2026-08-22)
+
+### 6.1 Rutina Diaria Pasiva (estilo Tsuki's Odyssey)
+
+El jugador puede activar un modo pasivo donde el personaje ejecuta actividades automáticamente según la hora del día. Esto permite un estilo de juego relajado donde el jugador observa y disfruta.
+
+#### Horario del Personaje (automático)
+
+| Hora | Actividad | Dónde | Resultado |
+|------|-----------|-------|-----------|
+| 06:00 | Despertar | Casa | Energía restaurada |
+| 06:30 | Desayunar | Cocina | Bono de energía +10% |
+| 07:00 | Paseo matutino | Pueblo | Encuentra monedas sueltas |
+| 08:00 | Trabajo (según profesión) | Tallar/Tienda | Genera ingresos pasivos |
+| 12:00 | Almuerzo | Casa | Energía +20% |
+| 13:00 | Pesca / Exploración | Costa/Bosque | Encuentra items |
+| 17:00 | Visita a NPCs | Pueblo | Sube amistad +1 |
+| 19:00 | Regreso a casa | Casa | Cenas |
+| 20:00 | Lectura / Descanso | Casa | Bono experiencia +5% |
+| 22:00 | Dormir | Casa | Cierra el día |
+
+#### Reglas del Modo Pasivo
+
+- El jugador activa/desactiva el modo pasivo con un botón
+- Mientras está activo, el personaje se mueve solo
+- El jugador puede interrumpir en cualquier momento (tocar tecla)
+- Las actividades generan recompensas REALES (monedas, items, amistad)
+- El modo pasivo NO resuelve puzzles ni combate
+- El modo pasivo NO recoge tesoros de exploración profunda
+- Solo hace actividades seguras y básicas
+
+#### Actividades Pasivas Disponibles
+
+| Actividad | Requisito | Recompensa |
+|-----------|-----------|------------|
+| Pescar automáticamente | Caña equipada | Pescados (calidad baja) |
+| Buscar jarrones | Ninguno | Monedas (5-10 c/u) |
+| Cortar árboles pequeños | Hacha T1 | Madera |
+| Recoger hierbas | Ninguno | Hierbas comunes |
+| Pasear por el pueblo | Ninguno | Amistad +1 con 1 NPC |
+| Visitar la tienda | Tienda abierta | Venta automática de items |
+
+### 6.2 Modo Semi-Pasivo
+
+Una alternativa entre activo y pasivo:
+- El jugador controla al personaje
+- Pero las actividades se ejecutan automáticamente al llegar al punto
+- Ejemplo: el jugador camina al río, lanza la caña, y la pesca ocurre sola
+- El jugador solo recoge el resultado
+- Útil para quien quiere jugar sin estrés pero con algo de control
+
+### 6.3 Anti-Frustración del Modo Pasivo
+
+- Si el personaje no puede hacer algo (sin herramienta, sin dinero), simplemente no lo hace
+- No hay mensajes de error ni penalizaciones
+- El personaje puede volver a casa en cualquier momento
+- Si llueve (M32), el personaje busca refugio automáticamente
+- Si es de noche, el personaje vuelve a casa
+- Nunca queda atrapado en una zona peligrosa

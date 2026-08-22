@@ -45,3 +45,79 @@ La casa del jugador es el corazón cozy de la experiencia: un refugio que crece 
 3. Flujo completo verificado: construir casa, entrar, ampliar, decorar, almacenar y recibir visitas.
 4. Edge cases documentados (casa en construcción, mudanza de muebles, obra en curso).
 5. Delegable para implementación.
+---
+
+## 4. EXPANSIONES COZY (2026-08-22)
+
+### 4.1 Sistema de Colección de Muebles
+
+Inspirado en Tsuki's Odyssey y Animal Crossing, el jugador puede coleccionar muebles y objetos decorativos que encuentra en el mundo.
+
+#### Fuentes de Muebles
+
+| Fuente | Tipo de Mueble | Cantidad |
+|--------|---------------|----------|
+| Tiendas del pueblo | Básicos (mesas, sillas, lámparas) | 50+ |
+| Artesanos de otras islas | Específicos de isla | 20+ por isla |
+| Puzzles / Ruinas | Antiguos / Ancestrales | 30+ |
+| Recetas de crafting (M16) | Crafteados por el jugador | 40+ |
+| Regalos de NPCs | Exclusivos de NPC | 12+ (1 por NPC favorito) |
+| Eventos / Festivales | Estacionales | 10+ |
+| Tesoros ocultos | Raros / Legendarios | 15+ |
+
+#### Categorías de Muebles
+
+| Categoría | Ejemplos | Slots en casa |
+|-----------|----------|---------------|
+| Mobiliario | Mesas, sillas, camas, estanterías | Grid suelo |
+| Iluminación | Lámparas, faroles, velas, candiles | Grid pared/suelo |
+| Decoración de pared | Cuadros, estampas, espejos, relojes | Grid pared |
+| Plantas | Macetas, jardines interiores, árboles mini | Grid suelo |
+| Alfombras | Redondas, rectangulares, temáticas | Grid suelo |
+| Cocina | Mesón, horno, estantería de especias | Grid suelo |
+| Taller | Mesa de trabajo, herramientas decorativas | Grid suelo |
+| Exteriores | Bancos, fuentes, cercas, jardines | Parcela exterior |
+
+### 4.2 Estilos de Decoración (Sets)
+
+Cada set tiene una temática y un bono social cuando el jugador completa el set:
+
+| Set | Temática | Piezas | Bono al completar |
+|-----|----------|--------|-------------------|
+| Ancestral | Ruinas, piedra, glifos | 10 | NPC arqueólogos visitan |
+| Floral | Flores, jardín, primavera | 12 | NPC jardineros visitan |
+| Oceánico | Coral, conchas, azul | 10 | NPC pescadores visitan |
+| Bosque | Madera, hojas, natural | 10 | NPC exploradores visitan |
+| Nocturno | Cristal, brillo, misterio | 8 | NPCs nocturnos visitan |
+| Cocina | Utensilios, ollas, recetas | 8 | NPC chefs visitan |
+
+### 4.3 Bono de Decoración para NPCs
+
+- Cuando el jugador completa un set, los NPCs reaccionan positivamente
+- NPCs con gustos afines al set visitan la casa más frecuentemente
+- La reputación de la casa crece (visible en el mapa)
+- Los NPCs pueden regalar items raros si les gusta la decoración
+- No hay penalización por no decorar (cozy = sin presión)
+
+### 4.4 Interacción con Muebles
+
+| Mueble | Acción | Resultado |
+|--------|--------|-----------|
+| Cama | Dormir | Restaura energía, avanza tiempo |
+| Silla | Sentarse | Recuperación lenta de energía |
+| Mesa | Colocar item | Decoración + funcional |
+| Lámpara | Encender/apagar | Cambia iluminación de la habitación |
+| Estantería | Almacenar | Guarda items extra |
+| Cocina | Cocinar | Crea comidas (M16) |
+| Mesa de trabajo | Fabricar | Crea herramientas/items (M16) |
+| Radio/Música | Escuchar | Cambia música ambiental |
+| Cuadro | Mirar | Muestra vista previa de foto (M56) |
+| Maceta | Regar | Crecen plantas decorativas |
+
+### 4.5 Persistencia de Decoración
+
+- La decoración se guarda por completo en M58
+- Cada celda del grid almacena: ID mueble + rotación + variante
+- La decoración se carga instantáneamente al entrar a la casa
+- No hay límite de muebles por habitación (solo límite de grid)
+- Los muebles se pueden mover y recolocar libremente

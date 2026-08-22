@@ -77,3 +77,75 @@ La isla ancestral necesita habitantes. Sin ellos, la isla se siente vacía y el 
 4. Contrato de datos definido para que M64 consuma perfiles y agendas sin acoplarse a este módulo.
 5. Reglas de reacción a regalos y estado emocional claras y verificables.
 6. Checklist de mínimo 110 ítems completado y documentación firmada.
+---
+
+## 5. EXPANSIONES COZY (2026-08-22)
+
+### 5.1 Visitas Diarias de NPCs
+
+Inspirado en Tsuki's Odyssey, los NPCs visitan al jugador según su rutina y amistad.
+
+#### Reglas de Visita
+
+| Condición | Frecuencia | Duración |
+|-----------|------------|----------|
+| Amistad nivel 0-1 | 1×/semana | 30 min juego |
+| Amistad nivel 2 | 2×/semana | 1 hora juego |
+| Amistad nivel 3 | 3×/semana | 2 horas juego |
+| Amistad nivel 4 | Todos los días | 3 horas juego |
+
+#### Qué Hacen los NPCs en la Visita
+
+| Acción | Resultado |
+|--------|-----------|
+| Llaman a la puerta | El jugador puede abrir o ignorar |
+| Entran a la casa | Miran la decoración, reaccionan |
+| Se sientan | Recuperan energía (cozy) |
+| Regalan un item | 1×/semana si amistad ≥ 2 |
+| Piden un favor | Misión secundaria opcional (M23) |
+| Se despiden | Se van después de un tiempo |
+
+### 5.2 Sistema de Regalos
+
+#### Reglas de Regalo
+
+| Regla | Detalle |
+|-------|---------|
+| Frecuencia | 1 regalo por NPC por semana |
+| Costo | El jugador gasta monedas o items |
+| Gustos | Cada NPC tiene gustos específicos (M19 perfil) |
+| Reacción | Feliz (gusta), neutro (indiferente), triste (disgusta) |
+| Amistad | +2 si gusta, +0 si neutro, -1 si disgusta |
+| Memoria | El NPC recuerda los últimos 5 regalos (no repetir) |
+
+#### Categorías de Regalos
+
+| Categoría | Ejemplo | Gusto promedio |
+|-----------|---------|----------------|
+| Comida | Pastel, pescado, fruta | Alto (la mayoría gusta) |
+| Madera | Madera tallada, caja | Medio (artesanos gusta) |
+| Flores | Rosa, girasol, orquídea | Alto ( NPCs femeninos) |
+| Minerales | Cobre, hierro, cristal | Medio (herreros gusta) |
+| Ropa | bufanda, sombrero | Bajo (solo gustos específicos) |
+| Herramientas | Pico, hacha | Bajo (solo artesanos) |
+| Antigüedades | Glifo, moneda antigua | Muy alto (arqueólogos) |
+
+### 5.3 Regalos de NPC al Jugador
+
+Los NPCs también regalan cosas al jugador:
+
+| Condición | Regalo |
+|-----------|--------|
+| Primera visita | Item temático de la profesión del NPC |
+| Amistad nivel 2 | Receta nueva (M16) |
+| Amistad nivel 3 | Mueble exclusivo |
+| Amistad nivel 4 | Item legendario / herramienta mejorada |
+| Cumpleaños del jugador (M29) | Regalo especial doble |
+
+### 5.4 Memoría de NPCs
+
+- Cada NPC recuerda los últimos 10 regalos recibidos
+- Si el jugador repite un regalo, el NPC reacciona menos entusiasta
+- Si el jugador da algo que disgusta, el NPC lo recuerda 30 días
+- La memoría se persiste en M58
+- Los NPCs comparten experiencias entre ellos (si dos NPCs son amigos, hablan del jugador)

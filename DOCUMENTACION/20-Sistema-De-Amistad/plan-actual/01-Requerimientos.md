@@ -47,3 +47,60 @@ Dar profundidad emocional al juego cozy sin mecánicas punitivas: el jugador deb
 6. Gustos/disgustos por vecino consumidos desde los datos de M19.
 7. Eventos con amigos conectados a M23 (misiones de amistad) y M21 (dialogos).
 8. Delegable para implementacion.
+---
+
+## 4. EXPANSIONES COZY (2026-08-22)
+
+### 4.1 Niveles de Amistad Expandidos
+
+| Nivel | Nombre | Desbloquea | Regalo semanal |
+|-------|--------|------------|----------------|
+| 0 | Desconocido | Nada | No |
+| 1 | Conocido | Diálogos básicos | No |
+| 2 | Amigo | Misiones secundarias | Sí (básico) |
+| 3 | Buen amigo | Regalos exclusivos | Sí (medio) |
+| 4 | Mejor amigo | Confidencias, recetas | Sí (raro) |
+| 5 | Alma gemela | Evento especial, viaje juntos | Sí (legendario) |
+
+### 4.2 Sistema de Regalos Mejorado
+
+#### Gustos por Categoría de NPC
+
+| Tipo NPC | Le gusta | Le disgusta |
+|----------|----------|-------------|
+| Herrero | Minerales, herramientas | Flores, comida |
+| Carpintero | Madera, muebles | Minerales, ropa |
+| Pescador | Pescados, cebo | Plantas, minerales |
+| Jardinero | Flores, semillas | Minerales, madera |
+| Cocinero | Ingredientes, recetas | Herramientas, minerales |
+| Arqueólogo | Glifos, reliquias | Comida, ropa |
+| Mercader | Items raros, monedas | Comida común |
+| Sabio | Libros, glifos | Herramientas, comida |
+
+#### Impacto de Regalos en Amistad
+
+| Calificación | Amistad | Recuerdo |
+|-------------|---------|----------|
+| ¡Le encanta! | +3 | 30 días |
+| Le gusta | +2 | 14 días |
+| Neutral | +0 | 7 días |
+| No le gusta | -1 | 30 días |
+| ¡Le odia! | -2 | 60 días |
+
+### 4.3 Eventos de Amistad
+
+| Evento | Condición | Recompensa |
+|--------|-----------|------------|
+| Cumpleaños del NPC | 1×/año (M29) | +5 amistad, regalo especial |
+| Fiesta sorpresa | Amistad nivel 4 | NPCs invitados vienen a la casa |
+| Viaje juntos | Amistad nivel 5 | Viaje a isla especial |
+| Carta de agradecimiento | 10 regalos dados | Receta secreta |
+| Talla en madera | 20 visitas del NPC | Mueble exclusivo |
+
+### 4.4 Memoria de Amistad
+
+- Cada NPC recuerda: regalos recibidos, visitas del jugador, favoritos hechos
+- La memoria afecta los diálogos (M21): el NPC menciona cosas pasadas
+- Si el jugador no visita un NPC por mucho tiempo, la amistad baja lentamente (-1/mes)
+- Pero nunca baja de nivel 1 (si ya eran amigos, se mantienen)
+- Los NPCs hablan entre ellos del jugador (reputación social)

@@ -47,3 +47,52 @@ Implementar una pesca cozy en un mundo voxel (Isla Ancestral): el jugador equipa
 3. Integracion definida con M51 (agua voxel), M29/M31/M32 (tablas por estacion/hora/clima), M37 (piezas opcionales, sin requisito obligatorio) y M14 (pez como item, inventario y recetas).
 4. Contratos API en GDScript listos para que la implementacion sea delegable sin ambiguedades.
 5. Checklist de diseno con mas de 110 items de cobertura (implementacion, integracion, edge cases, optimizacion, documentacion y polish).
+---
+
+## 4. EXPANSIONES COZY (2026-08-22)
+
+### 4.1 Pesca Idle (automática)
+
+Inspirado en Tsuki's Odyssey, el jugador puede pescar automáticamente sin interacción constante.
+
+#### Modos de Pesca
+
+| Modo | Control | Recompensa | Calidad |
+|------|---------|------------|---------|
+| Activo | Minijuego completo | Máxima | 100% |
+| Semi-pasivo | Lanza caña, espera automática | Media | 70% |
+| Idle | Pescador automático (nivel 3+) | Baja | 40% |
+
+#### Pesca Idle - Reglas
+
+- Solo se desbloquea con hacha/pico nivel 3+ (herramientas avanzadas)
+- El personaje va al punto de pesca más cercano automáticamente
+- Pesca 1 pez cada 5 minutos de juego (no tiempo real)
+- La calidad del pez es baja (pero utilizable en recetas)
+- El jugador puede interrumpir en cualquier momento
+- No necesita cebo para pesca idle
+- No pesca peces raros o legendarios (solo comunes y poco comunes)
+
+#### Integración con Modo Pasivo (M11)
+
+- Si el modo pasivo está activo, el jugador pesca idle automáticamente
+- El pez va al inventario directamente
+- Si el inventario está lleno, deja de pescar
+- Si es de noche, busca un punto seguro para pescar
+- Si llueve, busca refugio y vuelve a pescar después
+
+### 4.2 Pesca Social
+
+- Otros NPCs pueden acompañar al jugador a pescar
+- Si un NPC pescador está cerca, pesca junto al jugador
+- Los peces que pesca el NPC se los puede pedir (trueque o compra)
+- Si el jugador le regala un pez a un NPC pescador, sube amistad +3
+- Los NPCs pescadores dan consejos que mejoran la calidad del pez (+10%)
+
+### 4.3 Enciclopedia de Pesca (M37)
+
+- Cada pez capturado se registra en la enciclopedia
+- La enciclopedia muestra: nombre, bioma, estación, hora, rareza, mejor tamaño
+- Completar categorías da recompensas (muebles de pesca,.decoraciones)
+- La enciclopedia se puede consultar en cualquier momento
+- No es obligatoria (cozy = sin presión de completar)
