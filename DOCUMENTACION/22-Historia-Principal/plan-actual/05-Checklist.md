@@ -134,4 +134,13 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S]
 - [x] Actualizar fila 22 en CHECKLIST-GLOBAL al implementar [S]
 
+## Mantenimiento y Evolución (6 ítems)
+
+- [ ] Revisar coherencia narrativa entre capítulos cada milestone
+- [ ] Verificar que giros narrativos no generan plot holes
+- [ ] Actualizar pistas/foreshadowing cuando cambien templos (M24-M26)
+- [ ] Verificar que finales alternativos son alcanzables sin exploits
+- [ ] Documentar lecciones de narrativa para futuros proyectos
+- [ ] Revisar integridad del grafo de escenas antes de cada release
+
 **Total:** 100/100 [x] — Módulo listo como **DELEGABLE PARA IMPLEMENTAR**.
