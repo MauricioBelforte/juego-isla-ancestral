@@ -95,7 +95,7 @@
 - [ ] Mantener historial de versiones anteriores
 - [ ] Test de rollback antes de cada release
 
-## H. Integración con Plataformas (10 ítems)
+## H. Integración con Plataformas (15 ítems)
 
 - [ ] Integración con Steam: SteamApp.UpdateAvailable()
 - [ ] Integración con GOG: Galaxy.UpdateAvailable()
@@ -107,6 +107,11 @@
 - [ ] Soporte para actualizaciones delta (diferenciales)
 - [ ] Soporte para actualizaciones de contenido (DLC)
 - [ ] Compatibilidad con versiones anteriores de saves
+- [ ] Verificar que updates no rompen logros existentes
+- [ ] Verificar que updates mantienen configuración del jugador
+- [ ] Documentar proceso de certificación por consola (Switch, PS, Xbox)
+- [ ] Soporte para actualizaciones diferidas (región × plataforma)
+- [ ] Integración con M96 (Plataformas) para matrix de compatibilidad
 
 ## I. Testing y Documentación (10 ítems)
 
@@ -120,3 +125,11 @@
 - [ ] Documentar proceso de release de updates
 - [ ] FAQ de actualizaciones para jugadores
 - [ ] Registro de cambios del módulo
+
+## J. Seguridad y Integridad (5 ítems)
+
+- [ ] Verificar firmas digitales de actualizaciones
+- [ ] Detectar actualizaciones corruptas o manipuladas
+- [ ] Verificar hash SHA-256 de cada paquete de actualización
+- [ ] Bloquear actualizaciones sin firma válida
+- [ ] Logging de intentos de actualización inválidos
