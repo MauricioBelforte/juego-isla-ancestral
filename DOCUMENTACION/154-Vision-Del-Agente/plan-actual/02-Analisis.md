@@ -43,6 +43,13 @@ Un LLM con capacidad de visión (VLM) puede analizar imágenes si estas le llega
 - **Contras:** export web tiene diferencias de rendering vs desktop (WebGL); build web añade tiempo al ciclo; threading/audio limitados en WASM.
 - **Veredicto:** ideal para QA automatizado y regresión visual; complementa, no reemplaza, la vista del editor.
 
+### V5 — Blender + blender-mcp (agregada 2026-08-22)
+
+- **Cómo funciona:** Blender (gratis, open source) es 100% scriptable vía su API Python `bpy`, incluso en modo headless (`blender -b archivo.blend -P script.py`). El servidor MCP comunitario **`blender-mcp` (ahujasid)** —uno de los MCP creativos más maduros y usados— se conecta a Blender mediante un addon interno (socket en puerto 9876) y expone tools al agente: `get_scene_info`, `get_object_info`, `get_viewport_screenshot`, `execute_blender_code`.
+- **Pros:** MCP maduro y activo; control TOTAL de Blender desde el agente (modelar, materiales, luces, cámara, render); renders de calidad de estudio independientes del motor; pipeline glTF nativo hacia Godot; soporta importar `.vox` de MagicaVoxel (estilo voxel del proyecto); permite generar variantes paramétricas de NPCs por código.
+- **Contras:** `execute_blender_code` es poderoso pero puede colgar Blender si el script falla (requiere prácticas seguras); el screenshot del viewport depende del modo de shading (necesita Material Preview/Rendered para verse bien); el render F12 va a archivo (no lo devuelve el MCP directamente); requiere Blender abierto con el addon habilitado.
+- **Veredicto:** la vía MÁS fácil y potente para que el agente tenga ojos sobre assets 3D. Complementa a Godot (Blender = taller de assets, Godot = casa final). No reemplaza a V4 para verificación dentro del juego.
+
 ### V4 — godot-mcp comunitario ⭐ FUNDAMENTAL
 - **Cómo funciona:** servidor MCP (Node/Python según implementación) se conecta al editor Godot (vía plugin/gdscript bridge o headless CLI) y expone tools: `run_scene`, `get_errors`, `capture_viewport`, `read_console`, `inspect_node`.
 - **Pros:** visión nativa del editor (viewport exacto, no pantalla completa); lee errores de consola directamente (integra con M103/M122); permite ejecutar escenas específicas (ej. escena de preview de personaje); es el más completo y el que el usuario designó como estándar permanente.
@@ -66,6 +73,7 @@ Un LLM con capacidad de visión (VLM) puede analizar imágenes si estas le llega
 | D3 | V2 (MCP custom de pantalla) se implementa como primer fallback | Genérica, simple (~50 líneas), útil incluso fuera de Godot |
 | D4 | V3 (web+Playwright) queda asociada a M118 CI/CD para regresión visual | Aprovecha infraestructura existente del skill webapp-testing |
 | D5 | V1 (chat) queda documentada como vía de validación artística final | El usuario conserva siempre la última palabra estética |
+| D6 | Se agrega V5 (Blender + blender-mcp) como vía de diseño de assets con visión | Directiva del usuario (2026-08-22): blender-mcp es el MCP creativo más maduro; bpy permite modelar+renderizar+ver sin depender del motor; cumple NFR2 (gratis/open source) |
 
 ## 5. Riesgos
 
@@ -75,3 +83,5 @@ Un LLM con capacidad de visión (VLM) puede analizar imágenes si estas le llega
 | Proyecto comunitario abandonado | Media | Medio | Fork interno o migración a V2; el módulo documenta cómo reemplazarlo |
 | Capturas consumen demasiado contexto del agente | Baja | Medio | Protocolo: 1 captura por iteración, resolución acotada (1280x720) |
 | Export web difiere visualmente del build desktop | Alta | Bajo | Usar V3 solo para lógica/QA, no para validación estética final |
+| Script bpy defectuoso cuelga Blender | Media | Medio | Scripts atómicos cortos; guardar .blend antes de execute_code; patrón try/except en scripts generados |
+| Viewport screenshot sale en modo sólido (sin materiales) | Alta | Bajo | Protocolo: forzar shading Material Preview antes de capturar (script bpy incluido) |

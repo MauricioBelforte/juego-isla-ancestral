@@ -152,6 +152,31 @@
 - [ ] Test de reproducibilidad: otro agente sigue la guía e instala V4 [C]
 - [ ] Documentar resultados de tests en 07-Resultados-Testings.md futuro [S]
 
+## K. Vía V5 — Blender + blender-mcp ⭐ (22)
+
+- [x] Evaluar blender-mcp como vía de visión para assets 3D (madurez comunitaria confirmada) [S]
+- [x] Decisión D6 registrada: V5 agregada como vía de diseño de assets [S]
+- [x] RF8/RF9 definidos (modelar/renderizar/ver/exportar; pipeline glTF→Godot) [S]
+- [x] Guía de instalación Windows documentada (6 pasos) [S]
+- [x] Contrato de tools documentado (get_scene_info, get_object_info, get_viewport_screenshot, execute_blender_code) [S]
+- [x] 12 capacidades del agente con ojos detalladas en 03-Diseno.md [S]
+- [x] Snippet generador de personaje voxel diseñado [S]
+- [x] Snippet export glTF→Godot diseñado [S]
+- [x] Script de seguridad estándar (respaldo .blend + shading Material Preview) diseñado [S]
+- [x] Protocolo de iteración V5 específico definido (6 pasos) [S]
+- [x] Riesgos V5 registrados con mitigación (script colgante, shading incorrecto) [S]
+- [ ] Instalar Blender 4.x LTS en el sistema [M]
+- [ ] Instalar addon blender-mcp en Blender y habilitarlo [S]
+- [ ] Verificar conexión socket 9876 (panel BlenderMCP → Connect) [S]
+- [ ] Registrar servidor "blender" en cline_mcp_settings.json [S]
+- [ ] Test get_scene_info: devuelve estructura real de escena [S]
+- [ ] Test get_viewport_screenshot: imagen legible con colores reales (Material Preview) [M]
+- [ ] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M]
+- [ ] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M]
+- [ ] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C]
+- [ ] Exportar personaje aprobado a .glb e importarlo en Godot [M]
+- [ ] Documentar versiones exactas instaladas (Blender, blender-mcp, commit) [S]
+
 ## J. Documentación y cierre (10)
 
 - [x] 01-Requerimientos.md creado y firmado [S]
@@ -165,5 +190,5 @@
 - [ ] Entrada agregada a DOCUMENTACION/README.md [S]
 - [ ] Commit + push realizados [S]
 
-**Totales:** 130 ítems · Completados: 44 · Pendientes: 86 · No resueltos: 0
-**Nota:** la documentación del módulo está completa; los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04) o decisiones del usuario sobre qué herramienta comunitaria adoptar.
+**Totales:** 152 ítems · Completados: 55 · Pendientes: 97 · No resueltos: 0
+**Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar.

@@ -101,16 +101,115 @@ Tools esperadas (según implementación comunitaria):
 
 **Regla de uso obligatoria:** toda sesión que involucre trabajo visual (personajes, escenas, UI) debe iniciar verificando que V4 está operativo; si no lo está, activar fallback V2 e informar al usuario.
 
+### V5 — Blender + blender-mcp: diseño detallado ⭐ (vía de diseño de assets)
+
+#### Arquitectura de conexión
+
+```
+┌──────────────┐   stdio/MCP   ┌────────────────┐   Socket TCP   ┌───────────────────┐
+│ Cline        │ ◄───────────► │ blender-mcp    │ ◄────────────► │ Addon Blender     │
+│ (agente)     │               │ server (Python)│   puerto 9876  │ (addon.py, bpy)   │
+└──────────────┘               └────────────────┘                └───────────────────┘
+                                                                      │
+                                                              Blender 4.x abierto
+                                                              con el addon habilitado
+```
+
+#### Guía de instalación (Windows)
+
+1. **Instalar Blender 4.x LTS** desde blender.org (gratis, open source — cumple NFR2).
+2. **Descargar `blender-mcp`** (github.com/ahujasid/blender-mcp): contiene el servidor Python y el addon.
+3. **Instalar el addon en Blender:** Edit → Preferences → Add-ons → Install → seleccionar `addon.py` del repo → habilitar "Blender MCP".
+4. **Iniciar la conexión:** en el panel N de Blender (pestaña "BlenderMCP") → "Connect to Claude" → esto levanta el socket en el puerto 9876.
+5. **Registrar el servidor en Cline** (`cline_mcp_settings.json`):
+```json
+{
+  "mcpServers": {
+    "blender": {
+      "command": "uvx",
+      "args": ["blender-mcp"],
+      "disabled": false
+    }
+  }
+}
+```
+   (alternativa sin uvx: `"command": "python", "args": ["-m", "blender_mcp"]` tras `pip install blender-mcp`)
+6. **Verificación:** pedir al agente `get_scene_info` con Blender abierto → debe devolver la estructura real de la escena.
+
+#### Tools disponibles vía blender-mcp
+
+| Tool | Qué hace | Uso en Isla Ancestral |
+|---|---|---|
+| `get_scene_info` | Estructura completa de la escena | Saber qué hay antes de tocar nada |
+| `get_object_info(name)` | Detalle de un objeto (mesh, materiales, transform) | Inspeccionar un personaje |
+| `get_viewport_screenshot` | Imagen base64 del viewport 3D | **LOS OJOS**: ver el modelo en cada iteración |
+| `execute_blender_code(code)` | Ejecuta Python `bpy` arbitrario | Modelar, iluminar, animar, exportar |
+
+#### Lo que el agente puede hacer con ojos (capacidades al detalle)
+
+1. **Modelado procedural de personajes voxel:** crear cubos unitarios (`bpy.ops.mesh.primitive_cube_add`), duplicarlos en grilla, aplicar colores por cara/material — un personaje voxel es una lista de `(x,y,z,color)` ejecutable como script.
+2. **Materiales y paletas:** crear Principled BSDF por color de paleta, asignar por slot; ajustar roughness/metallic para look cozy.
+3. **Iluminación de estudio estandarizada:** script de 3 puntos (key/fill/rim) + fondo neutro — idéntico para todas las iteraciones, garantiza comparabilidad.
+4. **Cámara fija:** encuadre documentado (ej. 3/4 frontal, distancia 3m, lente 50mm).
+5. **VER el resultado:** `get_viewport_screenshot` tras forzar shading Material Preview (script incluido abajo) → el agente analiza la imagen con su visión integrada.
+6. **Render de alta calidad:** configurar EEVEE (rápido) o Cycles (fidelidad), renderizar a PNG en `Logs/screenshots/`.
+7. **Rigging básico:** armature + bones vía bpy para poses de prueba.
+8. **Animación de prueba:** keyframes simples (idle bobbing, wave) para validar silueta en movimiento.
+9. **Variantes paramétricas:** mismo script con distinta semilla/paleta → N variantes de NPC en una pasada.
+10. **Export a Godot:** `bpy.ops.export_scene.gltf(filepath="assets/personaje.glb", export_format='GLB')` → import directo en Godot 4.x.
+11. **Importar MagicaVoxel `.vox`:** con importer addon, integrando el flujo voxel existente del proyecto.
+12. **Inspección reversa:** abrir un .glb/.blend existente, `get_scene_info`, y entender su estructura antes de modificarlo.
+
+#### Script de seguridad estándar (antes de cada captura)
+
+```python
+# Forzar shading Material Preview + encuadre (ejecutar vía execute_blender_code)
+import bpy
+for area in bpy.context.screen.areas:
+    if area.type == 'VIEW_3D':
+        for space in area.spaces:
+            if space.type == 'VIEW_3D':
+                space.shading.type = 'MATERIAL'   # ver colores reales
+# Guardar respaldo antes de cambios destructivos
+bpy.ops.wm.save_as_mainfile(filepath="//backups/pre_iteracion.blend", copy=True)
+```
+
+#### Protocolo de iteración V5 (específico)
+
+1. `get_scene_info` → entender estado actual.
+2. Respaldo automático (.blend copy).
+3. `execute_blender_code` con cambio ATÓMICO pequeño (un ajuste por vez).
+4. Script de shading Material Preview.
+5. `get_viewport_screenshot` → analizar imagen ANTES de proponer el siguiente cambio.
+6. Repetir (máx. 5 iteraciones autónomas) → export `.glb` cuando el usuario apruebe.
+
+#### Integración con el pipeline del proyecto
+
+```
+Blender (V5: diseño iterativo con ojos)
+   │  export glTF (.glb)
+   ▼
+assets/models/  →  Godot 4.x (import nativo glTF)
+   │
+   ▼
+V4 godot-mcp: capture_viewport del personaje DENTRO del juego
+   │
+   ▼
+V1: aprobación estética final del usuario
+```
+
 ## 3. Matriz de decisión: qué vía usar
 
 | Escenario | Vía primaria | Fallback |
 |---|---|---|
-| Diseño iterativo de personajes voxel | V4 (capture_viewport de escena preview) | V2 → V1 |
+| Diseño iterativo de personajes voxel (modelado) | **V5 (Blender viewport screenshot)** | V2 → V1 |
+| Diseño iterativo dentro del juego (escenas, UI) | V4 (capture_viewport de escena preview) | V2 → V1 |
 | QA visual de UI/menús | V4 | V3 (interacción automatizada) |
 | Regresión visual en CI | V3 | — (no aplica en CI sin display) |
 | Validación estética final (dirección de arte) | V1 (decisión del usuario) | — |
 | Verificar errores tras cambio de código | V4 (get_errors) | execute_command (consola) |
 | El agente necesita ver algo fuera del juego | V2 | V1 |
+| Generar variantes paramétricas de NPCs | V5 (batch bpy + screenshots muestrales) | — |
 
 ## 4. Protocolo de iteración visual (aplica a todas las vías)
 

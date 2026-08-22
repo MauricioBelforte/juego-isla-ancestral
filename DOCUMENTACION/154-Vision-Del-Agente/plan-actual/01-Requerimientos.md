@@ -30,6 +30,7 @@ Los agentes de IA que documentan e implementan Isla Ancestral **no pueden ver el
   - **V2 — MCP custom de captura de pantalla:** servidor MCP en Python (PIL/ImageGrab) que captura ventana/pantalla de Windows y devuelve imagen base64.
   - **V3 — Export web + Playwright:** export HTML5 de Godot + skill webapp-testing para capturas automatizadas.
   - **V4 — godot-mcp comunitario (FUNDAMENTAL):** servidor MCP que controla el editor Godot (ejecutar escenas, leer consola de errores, capturar viewport).
+  - **V5 — Blender + blender-mcp (agregada 2026-08-22 por directiva del usuario):** servidor MCP maduro (`blender-mcp` de ahujasid) + API Python `bpy` para modelar, renderizar y VER assets 3D (personajes, props) con calidad de estudio, exportando a glTF para Godot.
 - Protocolo de uso por escenario (diseño de personajes, QA UI, verificación de escenas).
 - Requisitos de instalación y configuración (cline_mcp_settings.json).
 - Integración con módulos existentes: M45 (Arte 3D), M48 (Animación), M53 (UI/UX), M61 (Rendimiento), M110 (Debug Menu), M112 (Testing).
@@ -50,6 +51,8 @@ Los agentes de IA que documentan e implementan Isla Ancestral **no pueden ver el
 | RF5 | Cada alternativa debe tener documentado su caso de uso recomendado y sus limitaciones |
 | RF6 | El protocolo de iteración visual (generar → renderizar → capturar → analizar → ajustar) debe estar definido para cada vía |
 | RF7 | La configuración MCP debe ser reproducible (instrucciones paso a paso para cualquier agente futuro) |
+| RF8 | El agente debe poder modelar, iluminar, renderizar y exportar personajes/props en Blender vía `bpy` + `blender-mcp`, viendo el resultado en cada iteración |
+| RF9 | El pipeline Blender → glTF → Godot debe estar documentado para que los assets diseñados en V5 lleguen al juego |
 
 ## 5. Requisitos No Funcionales (NFR)
 
