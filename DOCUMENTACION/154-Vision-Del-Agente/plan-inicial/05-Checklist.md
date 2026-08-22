@@ -1,5 +1,5 @@
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 
 # 05-Checklist.md — Módulo 154: Visión del Agente
 

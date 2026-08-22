@@ -1,5 +1,5 @@
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 154: Visión del Agente
 
@@ -154,8 +154,8 @@ bpy.ops.export_scene.gltf(
 
 ## Notas del Agente
 
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 **Fecha:** 2026-08-22 04:00:00
 **Estado:** Completado (documentación inicial)
 
@@ -182,8 +182,8 @@ bpy.ops.export_scene.gltf(
 
 ## Notas del Agente (actualización V5 — Blender)
 
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 **Fecha:** 2026-08-22 04:20:00
 **Estado:** Completado (documentación V5 agregada a plan-actual)
 

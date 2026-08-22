@@ -1,5 +1,5 @@
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 154: Visión del Agente
 
@@ -88,8 +88,8 @@ inspect_node(node_path: str) → {properties: {...}}
 
 ## Notas del Agente
 
-**Modelo:** Cline
-**Plataforma:** Nemotron 3.5 Lightning
+**Modelo:** stealth/ox-alpha
+**Plataforma:** Cline
 **Fecha:** 2026-08-22 04:00:00
 **Estado:** Completado (documentación inicial)
 
