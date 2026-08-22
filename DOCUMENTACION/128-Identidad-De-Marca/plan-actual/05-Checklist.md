@@ -87,13 +87,18 @@
 - [ ] Crear email corporativo (press@islaancestral.com)
 - [ ] Monitorear menciones de la marca
 
-## G. Merchandise (5 ítems)
+## G. Merchandise (10 ítems)
 
 - [ ] Definir qué productos de merchandise se permiten
 - [ ] Documentar logo mínimo para impresión
 - [ ] Crear template para proveedores de merchandise
 - [ ] Definir proceso de aprobación de diseños
 - [ ] Documentar restricciones de calidad
+- [ ] Definir estándares de calidad para merchandise (textil, cerámica, papel)
+- [ ] Crear guía de colores para impresión (CMYK vs. RGB)
+- [ ] Documentar process de muestreo antes de producción
+- [ ] Definir proveedores aprobados por región
+- [ ] Crear checklist de QA para merchandise recibido
 
 ## H. Validación y Testing (10 ítems)
 
@@ -120,3 +125,11 @@
 - [ ] Definir quién puede aprobar cambios de marca
 - [ ] Crear changelog del manual de marca
 - [ ] Documentar proceso para nuevos partners
+
+## J. Coherencia con Otros Módulos (5 ítems)
+
+- [ ] Verificar que M97 (Steam Store Page) usa identidad de marca correcta
+- [ ] Verificar que M98 (Trailer) usa logo y colores de marca
+- [ ] Verificar que M99 (Marketing) sigue manual de marca
+- [ ] Verificar que M53 (UI/UX) usa paleta y tipografía de marca
+- [ ] Verificar que M131 (Créditos) usa formato de marca
