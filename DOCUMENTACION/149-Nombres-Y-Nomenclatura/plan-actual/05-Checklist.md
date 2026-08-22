@@ -53,7 +53,7 @@
 - [ ] Verificar consistencia en código existente
 - [ ] Documentar proceso de code review
 
-## D. Convenciones de Archivos (10 ítems)
+## D. Convenciones de Archivos (15 ítems)
 
 - [ ] Definir convención para scripts: snake_case.gd
 - [ ] Definir convención para escenas: PascalCase.tscn
@@ -65,8 +65,13 @@
 - [ ] Crear tabla de convenciones de archivos
 - [ ] Documentar reglas de naming de assets
 - [ ] Verificar consistencia en assets existentes
+- [ ] Definir convención para materiales: snake_case.tres
+- [ ] Definir convención para shaders: snake_case.gdshader
+- [ ] Definir convención para archivos de datos: snake_case.json
+- [ ] Definir convención para diálogos: PascalCase_Dialogo.tres
+- [ ] Crear validador automático de nombres de archivos
 
-## E. Referencia Rápida (10 ítems)
+## E. Referencia Rápida (15 ítems)
 
 - [ ] Crear tabla visual de convenciones
 - [ ] Crear ejemplos copiables
@@ -78,6 +83,11 @@
 - [ ] Distribuir a todo el equipo
 - [ ] Actualizar trimestralmente
 - [ ] Mantener en repositorio fácil de encontrar
+- [ ] Crear poster visual de convenciones para el equipo
+- [ ] Crear cheatsheet de 1 página para impresión
+- [ ] Integrar con M111 (Código de Calidad) para linting
+- [ ] Crear snippet library para IDE (VS Code / Cursor)
+- [ ] Crear pre-commit hook que valide naming automáticamente
 
 ## F. Validación (10 ítems)
 
@@ -104,3 +114,19 @@
 - [ ] Archivar versiones anteriores
 - [ ] Crear changelog de naming conventions
 - [ ] Evaluar efectividad de convenciones
+
+## H. Localización y Multiidioma (5 ítems)
+
+- [ ] Definir reglas para nombres en diferentes idiomas (M87 Localización)
+- [ ] Verificar que nombres NPCs no tengan significado ofensivo en otros idiomas
+- [ ] Definir transliteración para idiomas con sistemas de escritura diferentes
+- [ ] Documentar qué nombres son internacionales vs. qué cambian por región
+- [ ] Crear tabla de equivalencias de lugares por idioma
+
+## I. Integración con Otros Módulos (5 ítems)
+
+- [ ] Verificar coherencia con M22 (Historia Principal): nombres de eventos y lugares
+- [ ] Verificar coherencia con M23 (NPCs): nombres de personajes secundarios
+- [ ] Verificar coherencia con M30 (Mundo): nombres de regiones y biomas
+- [ ] Verificar coherencia con M41 (Música): nombres de pistas y leitmotifs
+- [ ] Verificar coherencia con M150 (Diseño Sonoro): nombres de efectos de sonido
