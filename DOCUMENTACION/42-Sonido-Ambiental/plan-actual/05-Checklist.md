@@ -132,5 +132,9 @@
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 
+## I. Mantenimiento (1 ítem)
+
+- [ ] Actualizar bancos de sonido cuando se agreguen nuevos biomas o estaciones
+
 **Totales:** 109 ítems · Completados: 109 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (C-G2 en runtime) quedan para el agente delegado; diseño, mapa y reglas cierran aquí.
