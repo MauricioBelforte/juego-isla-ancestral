@@ -183,6 +183,24 @@
 - [ ] Definir rareza (solo Raro/Legendario)
 - [ ] Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)
 
+### Diseño Visual (15 ítems)
+
+- [ ] Crear `06-Diseno-Visual.md` con paleta global de colores
+- [ ] Definir colores HEX para cada categoría de objeto
+- [ ] Definir formas y proporciones por categoría
+- [ ] Definir materiales por categoría
+- [ ] Definir paleta por bioma (13 biomas)
+- [ ] Definir reglas de variantes de color (máx 6 por malla)
+- [ ] Definir proporciones para Godot (1m = 1 unidad)
+- [ ] Definir LODs por categoría
+- [ ] Definir texturas por material
+- [ ] Crear referencias visuales para mobiliario
+- [ ] Crear referencias visuales para herramientas
+- [ ] Crear referencias visuales para naturaleza
+- [ ] Validar paleta de colores con dirección de arte
+- [ ] Documentar variaciones por bioma
+- [ ] Integrar con M45 (Arte 3D) para producción de assets
+
 ### Integración y Validación (10 ítems)
 
 - [ ] Verificar que todos los IDs son únicos
@@ -204,4 +222,4 @@
 - [ ] Crear test de búsqueda por rareza
 - [ ] Crear test de integración con Inventario
 
-**Total: 120 ítems**
+**Total: 135 ítems**
