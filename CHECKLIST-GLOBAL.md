@@ -177,6 +177,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 159 | Catálogo de Objetos | 🟢 Disponible | 0/120 | Alta | 2 | 14, 16, 18, 45 | — | 2026-08-22 18:59 | Documentación completa por MiMo V2.5 (OpenCode): Catálogo maestro de 321+ objetos (16 categorías: mobiliario, decoración, iluminación, plantas, alfombras, cocina, taller, exteriores, naturaleza, construcción, herramientas, items, ropa, arte ancestral, eventos, secretos). 120 ítems checklist. Integración M14/M16/M18/M39/M45/M58/M155. DELEGABLE PARA IMPLEMENTAR |
 | 160 | Diseño de Ubicaciones del Mundo | 🟢 Disponible | 0/140 | Alta | 4 | 27, 17, 18, 39, 159 | — | 2026-08-22 20:30 | Documentación completa por MiMo V2.5 (OpenCode): Sistema de IDs de ubicaciones (LOC-ISLA-TIPO-NÚMERO), tabla maestra 46 ubicaciones en 4 islas, mapas conceptuales, distribución de objetos con IDs M159, Isla Raíz detallada (12 ubicaciones). 140 ítems checklist. Integración M27/M17/M18/M39/M159/M158/M58. DELEGABLE PARA IMPLEMENTAR |
 | 161 | Diseño Visual de NPCs | 🟢 Disponible | 0/130 | Alta | 3 | 19, 159, 45, 46, 155 | — | 2026-08-23 03:39 | Documentación completa por MiMo V2.5 (OpenCode): Diseño visual de 23 NPCs (4 islas), ropa completa con colores HEX (sombrero, camisa, pantalón, botas), herramientas en mano con IDs M159 (hacha, rastrillo, martillo, caña, etc.), rasgos físicos (piel, cabello, ojos), accesorios, variantes estacionales, reglas de identificación por profesión. 130 ítems checklist. Integración M19/M159/M45/M46/M155/M160/M27. DELEGABLE PARA IMPLEMENTAR |
+| 162 | Diálogos Contextuales de NPCs | 🟢 Disponible | 0/120 | Alta | 4 | 21, 22, 19, 161, 20, 29, 160 | — | 2026-08-23 19:50 | Documentación completa por MiMo V2.5 (OpenCode): Diálogos contextuales de 23 NPCs por capítulo (0-7) de la historia principal (M22), con variantes por amistad (3 niveles), estación, hora del día y ubicación. ~400 diálogos totales. Sistema de prioridad con fallback. JSON compatible con M21. Viajero Misterioso con arco narrativo propio. 120 ítems checklist. Integración M21/M22/M19/M161/M20/M29/M160. DELEGABLE PARA IMPLEMENTAR |
 
 ## Simbología de Estados
 
@@ -191,7 +192,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 ## Resumen del Proyecto
 
-- **Total de módulos:** 161 (01 + los 152 del plan inicial —incluido el 130-Artbook agregado el 2026-08-23— + 154 a 161)
+- **Total de módulos:** 162 (01 + los 152 del plan inicial —incluido el 130-Artbook agregado el 2026-08-23— + 154 a 162)
 - **Completados (`✅`):** 0 (ninguno tiene código implementado ni QA cruzado; los documentados son DELEGABLES)
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento, 153-Objetivo Final)
 - **En riesgo (`🔴`):** 0
@@ -236,3 +237,5 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-22 (MiMo V2.5, OpenCode):** se creó M160 (Diseño de Ubicaciones del Mundo, 140 ítems) con sistema de IDs de ubicaciones, tabla maestra de 46 ubicaciones en 4 islas, mapas conceptuales, distribución de objetos con IDs M159 e Isla Raíz detallada completamente. Total: 157 módulos documentados.
 
 > **2026-08-23 (ox-alpha, Cline):** se creó el módulo **130-Artbook** (plan-inicial + plan-actual, 10 archivos, checklist 105 ítems con 40 completados) para cubrir la sección #129 ARTBOOK del plan maestro que estaba huérfana. Se agregó la nota de trazabilidad de los **Pases de Mérito** en M38 Economía (plan-actual/02-Analisis.md §6.1): la moneda única (D1) se mantiene y la función de recompensas por tareas diarias quedó absorbida por M94/M74. Se corrigió el total de módulos del Resumen.
+
+> **2026-08-23 (MiMo V2.5, OpenCode):** se creó M162 (Diálogos Contextuales de NPCs, 120 ítems). Diálogos contextuales de 23 NPCs por capítulo (0-7) de la historia principal (M22), con variantes por amistad, estación, hora y ubicación. ~400 diálogos totales. Sistema de prioridad con fallback. JSON compatible con M21. Viajero Misterioso con arco narrativo propio. Total: 162 módulos documentados.
