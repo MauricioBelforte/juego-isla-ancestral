@@ -174,6 +174,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 157 | Medios de Transporte | 🟢 Disponible | 106/106 | Alta | 4 | 69, 22, 24, 19 | — | 2026-08-22 04:10 | Documentación completa por MiMo V2.5 (OpenCode): 5 tipos de transporte (barco, tren, avión, carreta, a pie), sistema de viaje jugable con eventos aleatorios y misterios, JourneyInstance, 40+ eventos base, integración M69/M22/M24/M19/M29, 106 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 158 | Herramientas y Desbloqueo de Zonas | 🟢 Disponible | 0/122 | Alta | 4 | 13, 38, 27, 28 | — | 2026-08-22 05:20 | Documentación completa por MiMo V2.5 (OpenCode): 4 tiers herramientas (Madera→Cobre→Hierro→Encantada), gates por tier en el mundo, forja por isla con profesional especializado, costos progresivos, cursos de oficio, venta de herramientas del jugador, NPCs visitantes 1x/dia, fuentes de ingreso, premium Steam, 122 ítems. DELEGABLE PARA IMPLEMENTAR |
 | 159 | Catálogo de Objetos | 🟢 Disponible | 0/120 | Alta | 2 | 14, 16, 18, 45 | — | 2026-08-22 18:59 | Documentación completa por MiMo V2.5 (OpenCode): Catálogo maestro de 321+ objetos (16 categorías: mobiliario, decoración, iluminación, plantas, alfombras, cocina, taller, exteriores, naturaleza, construcción, herramientas, items, ropa, arte ancestral, eventos, secretos). 120 ítems checklist. Integración M14/M16/M18/M39/M45/M58/M155. DELEGABLE PARA IMPLEMENTAR |
+| 160 | Diseño de Ubicaciones del Mundo | 🟢 Disponible | 0/140 | Alta | 4 | 27, 17, 18, 39, 159 | — | 2026-08-22 20:30 | Documentación completa por MiMo V2.5 (OpenCode): Sistema de IDs de ubicaciones (LOC-ISLA-TIPO-NÚMERO), tabla maestra 46 ubicaciones en 4 islas, mapas conceptuales, distribución de objetos con IDs M159, Isla Raíz detallada (12 ubicaciones). 140 ítems checklist. Integración M27/M17/M18/M39/M159/M158/M58. DELEGABLE PARA IMPLEMENTAR |
 
 ## Simbología de Estados
 
@@ -188,7 +189,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 ## Resumen del Proyecto
 
-- **Total de módulos:** 156 (01 + los 152 del plan inicial + 156 + 158 + 159)
+- **Total de módulos:** 157 (01 + los 152 del plan inicial + 156 + 158 + 159 + 160)
 - **Completados (`✅`):** 0 (ninguno tiene código implementado ni QA cruzado; los documentados son DELEGABLES)
 - **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento, 153-Objetivo Final)
 - **En riesgo (`🔴`):** 0
@@ -229,3 +230,5 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-19 (Deepseek V4 Flash):** se actualizó el módulo 01 (Fundamentos del Proyecto): checklist maestro 68/152 marcado por documentación real, portal libre de bloqueos. Push completado. 69 módulos de documentación de diseño completados. Siguiente: continuar módulos ⬜ en orden de ID.
 
 > **2026-08-22 (MiMo V2.5, OpenCode):** se expandió M11 (Personaje) con selección de personaje (6 opciones), sistema de terrenos e integración con M155/M156. Se crearon 3 módulos nuevos: M155 (Vestimenta y Accesorios, 110 ítems), M156 (Terrenos y Movimiento Diferenciado, 299 ítems), M157 (Medios de Transporte, 106 ítems). Se expandió M69 (Fast Travel) con experiencia de viaje jugable integrada con M157. Total: 156 módulos documentados.
+
+> **2026-08-22 (MiMo V2.5, OpenCode):** se creó M160 (Diseño de Ubicaciones del Mundo, 140 ítems) con sistema de IDs de ubicaciones, tabla maestra de 46 ubicaciones en 4 islas, mapas conceptuales, distribución de objetos con IDs M159 e Isla Raíz detallada completamente. Total: 157 módulos documentados.
