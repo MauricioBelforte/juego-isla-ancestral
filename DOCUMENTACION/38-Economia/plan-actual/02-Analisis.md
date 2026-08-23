@@ -103,6 +103,21 @@ La economía del juego se descompone en seis subsistemas interconectados:
 | M53 (UI/UX) | Consumidor de señales y datos; nunca inyecta lógica |
 | M104 (Analytics) | Registro de transacciones y tendencias del mercado |
 
+## 6.1 Trazabilidad con el Plan Inicial — Pases de Mérito (2026-08-23)
+
+> **Nota de trazabilidad agregada por ox-alpha (Cline).** La IDEA-BASE del proyecto (`DOCUMENTACION/00-PLAN-INICIAL/IDEA-BASE-DEL-JUEGO.md`, sección 3B) y el Plan-de-producción definían una **economía doble**: Gemas de Ámbar (principal) + **Pases de Mérito** (moneda secundaria obtenida por tareas diarias sencillas). Este módulo tomó la decisión explícita D1 de **moneda única `monedas_aurora`**, y la alternativa "Moneda única vs múltiples divisas" fue evaluada y elegida por simplicidad cozy (múltiples divisas = fricción).
+
+**Resolución estratégica del concepto "Pases de Mérito":**
+
+| Aspecto original | Estado actual | Módulo responsable |
+|---|---|---|
+| Moneda secundaria como wallet separada | **Superseded** por decisión D1 (moneda única) | M38 (este módulo) |
+| Recompensas por tareas diarias positivas ("Planta 3 flores", "Habla con 2 vecinos") | **Absorbido** por el tablero de objetivos diarios/semanales/mensuales rotatorios con recompensas en oro + amistad + ítems, sin FOMO | M94 Retención sin FOMO |
+| Rotación/generación de tareas diarias | **Absorbido** por el motor de objetivos rotatorios y eventos repetibles con variantes | M94 / M74 Eventos |
+| Anti-grind de tareas repetibles | Cubierto por límites diarios anti-grind (D4) y auditoría AntiFomoGate | M38 / M94 |
+
+**Conclusión:** no se requiere un módulo adicional ni reintroducir la segunda moneda. El diseño vigente (moneda única + tablero de objetivos de M94) cumple la intención original de recompensar acciones cotidianas positivas sin fricción. Esta nota queda registrada para trazabilidad histórica; cualquier revisión futura de esta decisión debe pasar por QA cruzado (sección 21.8 del AGENTS.md) y actualizar simultáneamente M93 (Balance), M94 y este módulo.
+
 ## 7. Conclusión del Análisis
 
 La economía de la isla Aurora será un sistema local, data-driven, orientado a eventos diarios, con moneda única y trueque como complemento, diseñado explícitamente para eliminar el estrés económico (sin deuda, sin inflación agresiva, con salvavidas universales). Los subsistemas se mantienen desacoplados mediante autoloads con señales; el diseño queda listo para implementación en Godot 4.x con GDScript tipado.

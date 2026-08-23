@@ -149,6 +149,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 69-Fast-Travel | ✅ Creado por B1-Nemotron — DELEGABLE: 143 ítems, 13 puntos sección 68, costo/restricciones/día-noche (143/143) |
 | 104-Analytics | ✅ Creado por B1-Nemotron — DELEGABLE: privacidad por diseño, JSON agregado, opt-out M91 (100/100) |
 | 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (100/100) |
+| 130-Artbook | ✅ Creado por ox-alpha (Cline) — DELEGABLE PARA PRODUCIR: artbook editorial de 12 capítulos (200-240 págs), manifiesto CSV de curaduría incremental, fichas estándar (pieza/comentario dev/descarte), specs digital+POD compatibles con M129; cubre la sección #129 ARTBOOK del plan maestro (40/105 ítems de diseño completados, producción post-RC) |
 | 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (100/100) |
 | 38-Economia | ✅ Creado por Deepseek V4 Flash — DELEGABLE: moneda, precios, tiendas, trueque, equilibrio cozy (158/158) |
 | 58-Accesibilidad | ✅ Creado por Deepseek V4 Flash — DELEGABLE: visual, auditiva, motora, cognitiva, lectoescritura (173/173) |
