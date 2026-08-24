@@ -196,10 +196,47 @@ Antes de realizar modificaciones grandes (como refactorizar el proceso principal
 
 ## 6. Registro de Cambios (Logs)
 Cada vez que finalices una tarea, genera un informe de cambios:
-1. **Carpeta de Logs:** En la carpeta `Logs/` en la raíz.
-2. **Numeración Secuencial:** Leer `Logs/ULTIMO_NUMERO.txt` para el próximo número, y actualizarlo.
-   - Formato: `NN-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
-3. **Contenido Obligatorio:** Detallar código original, nuevo código, y descripción breve de la modificación.
+
+### 6.1 Protocolo de Numeración (OBLIGATORIO — previene duplicados)
+
+> ⚠️ **Este protocolo debe seguirse EXACTAMENTE para evitar logs duplicados.**
+
+1. **Leer `Logs/ULTIMO_NUMERO.txt`** → obtener el número actual (N).
+2. **Calcular siguiente número:** N + 1.
+3. **VERIFICAR que no exista** un archivo con ese número:
+   ```
+   Logs/{N+1}-*.md
+   ```
+   Si existe → incrementar hasta encontrar un número libre.
+4. **ESCRIBIR el nuevo número** en `ULTIMO_NUMERO.txt` (solo el número, sin texto adicional).
+5. **Crear el archivo de log** con el nombre: `NN-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
+6. **Actualizar el header** del archivo con `# Log NN: Descripcion`.
+
+### 6.2 Formato del Archivo
+
+```
+# Log NN: Descripcion breve
+
+**Fecha:** YYYY-MM-DD
+**Modelo:** [Nombre del modelo]
+**Plataforma:** [Nombre de la plataforma]
+
+## Resumen
+[Que se hizo]
+
+## Cambios Realizados
+[Detalle]
+
+## Archivos Modificados/Creados
+[Lista]
+```
+
+### 6.3 Reglas de Seguridad
+
+- **NUNCA** editar el número directamente sin verificar que no exista un archivo con ese número.
+- **SIEMPRE** verificar la existencia del archivo antes de crearlo.
+- Si dos agentes leen `ULTIMO_NUMERO.txt` al mismo tiempo, el segundo debe verificar y encontrar el número tomado → incrementar.
+- **El número en ULTIMO_NUMERO.txt es el ÚLTIMO número usado**, no el próximo. Al leerlo, sumar 1.
 
 ## 7. Seguimiento de Progreso (Checklist)
 Cada vez que completes una tarea:

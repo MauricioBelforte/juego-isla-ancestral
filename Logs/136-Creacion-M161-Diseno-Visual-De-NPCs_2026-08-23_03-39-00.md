@@ -1,8 +1,8 @@
-**Modelo:** MiMo V2.5
+﻿**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-23 03:39:00
 
-# Log 128: Creación de M161 (Diseño Visual de NPCs)
+# Log 136: Creación de M161 (Diseño Visual de NPCs)
 
 ## Archivos Creados
 - `DOCUMENTACION/161-Diseno-Visual-De-NPCs/plan-inicial/01-Requerimientos.md`

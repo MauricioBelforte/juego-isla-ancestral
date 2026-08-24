@@ -1,4 +1,4 @@
-# Log 128 — Creación del módulo 130-Artbook y trazabilidad de la moneda (Pases de Mérito)
+﻿# Log 128 — Creación del módulo 130-Artbook y trazabilidad de la moneda (Pases de Mérito)
 
 **Modelo:** ox-alpha
 **Plataforma:** Cline
@@ -6,7 +6,7 @@
 
 ## Descripción breve de la modificación
 
-Continuando el Log 127 (auditoría del plan inicial), se ejecutaron las dos correcciones detectadas:
+Continuando el Log 135 (auditoría del plan inicial), se ejecutaron las dos correcciones detectadas:
 
 ### 1. Módulo 130-Artbook creado completo
 Carpeta `DOCUMENTACION/130-Artbook/` con **10 archivos** (5 en `plan-inicial/` + 5 en `plan-actual/`):
