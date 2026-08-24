@@ -42,3 +42,29 @@ Unificar TODOS los esquemas de control del juego (teclado+ratón, gamepad Xbox/P
 3. Prompts dinámicos por dispositivo con detección automática.
 4. Dead zones/sensibilidad/inversión/vibración especificados.
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Sistema de acciones de entrada |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M058** — Accesibilidad | Usado por accesibilidad |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M058** — Accesibilidad | Este módulo lo necesita |
+

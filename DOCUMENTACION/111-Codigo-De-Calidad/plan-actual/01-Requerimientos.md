@@ -53,3 +53,29 @@ El proyecto necesita **estándares de calidad de código** para mantener la base
 4. Convenciones de nomenclatura definidas.
 5. Plantillas de documentación creadas.
 6. Proceso de code review definido.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Guía de estilo y calidad |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M112** — Testing Automático | Usado por testing automático |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M112** — Testing Automático | Este módulo lo necesita |
+

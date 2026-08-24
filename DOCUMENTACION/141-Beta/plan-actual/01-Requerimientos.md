@@ -68,3 +68,29 @@ Entregar la primera build **pública beta** jugable de punta a punta (100% del c
 3. Inventario final de bugs conocidos (P2) para la ruta a RC.
 4. Store page final + tráiler final (M149).
 5. Candidato formal a Release Candidate.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M140** — Alpha | Beta sobre alpha |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M142** — Release Candidate | Release Candidate |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M140** — Alpha | Depende de este módulo |
+| **M142** — Release Candidate | Este módulo lo necesita |
+

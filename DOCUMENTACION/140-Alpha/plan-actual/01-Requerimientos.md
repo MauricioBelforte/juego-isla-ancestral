@@ -71,3 +71,29 @@ Completar el salto de mundo Pre-Alpha a **juego Alpha:** todas las mecánicas pr
 8. RF8: 0 TO-DO/FIXME pendientes en el repositorio al cierre (M111).
 9. RF9: la deuda técnica de M135 se redujo al menos un 50% y su métrica está documentada.
 10. RF10: el documento GONOGO-BETA existe, está firmado y el backlog de Beta (M141) tiene prioridad y esfuerzo.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M139** — Pre-Alpha | Alpha sobre pre-alpha |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M141** — Beta | Beta |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M139** — Pre-Alpha | Depende de este módulo |
+| **M141** — Beta | Este módulo lo necesita |
+

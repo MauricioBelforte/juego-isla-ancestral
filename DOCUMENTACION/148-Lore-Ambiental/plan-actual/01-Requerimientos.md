@@ -66,3 +66,24 @@ Diseñar el sistema de **Lore Ambiental**: capas narrativas no-dialógicas distr
 3. Red de pistas (murales→puzzles, estatuas→sellos, mapas→coleccionables, canciones→rumores).
 4. Data de lore por pez/planta/mineral integrada a colecciones.
 5. Terreno con secretos por temporada (3+ ubicaciones) y pacto anti-infodump documentado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M024** — Templos y Puzzles | Base para templos y puzzles |
+| **M147** — World Building | Lore ambiental en world building |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M024** — Templos y Puzzles | Depende de este módulo |
+| **M147** — World Building | Depende de este módulo |
+

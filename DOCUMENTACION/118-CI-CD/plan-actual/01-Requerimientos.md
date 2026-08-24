@@ -43,3 +43,22 @@ Automatizar los procesos de integración y despliegue del proyecto "Isla Ancestr
 6. Notificaciones de fallo llegan al equipo de desarrollo.
 7. Calidad de código verificada (style guide, tamaño de archivos, anti-patterns).
 8. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M117** — Build System | CI/CD sobre build |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M117** — Build System | Depende de este módulo |
+

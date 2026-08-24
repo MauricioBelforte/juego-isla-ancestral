@@ -47,3 +47,24 @@ El juego Isla Ancestral utiliza múltiples componentes de software de terceros (
 - [ ] Generador automático de license notices para cada build
 - [ ] Integración con build pipeline (M117)
 - [ ] Documentación de cada licencia en el inventario
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M055** — Diario del Jugador | Base para diario del jugador |
+| **M117** — Build System | Licencias en build |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M055** — Diario del Jugador | Depende de este módulo |
+| **M117** — Build System | Depende de este módulo |
+

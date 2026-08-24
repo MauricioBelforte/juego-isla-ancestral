@@ -72,3 +72,39 @@ El jugador siempre puede volver a la isla principal gratis. Nunca queda atrapado
 - El jugador debe juntar monedas en la isla principal antes de viajar
 - Esto Motiva a explorar la isla principal y resolver puzzles primero
 - El viaje es una EXPERIENCIA (M157), no una pantalla de carga
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | Base para historia principal |
+| **M027** — Islas del Mundo | Base para islas del mundo |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M022** — Historia Principal | Usado por historia principal |
+| **M027** — Islas del Mundo | Usado por islas del mundo |
+| **M067** — Vehículos | Usado por vehículos |
+| **M068** — Transporte y Navegación | Usado por transporte y navegación |
+| **M069** — Fast Travel | Usado por fast travel |
+| **M158** — Herramientas y Desbloqueo de Zonas | Usado por herramientas y desbloqueo de zonas |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+| **M027** — Islas del Mundo | Depende de este módulo |
+| **M067** — Vehículos | Este módulo lo necesita |
+| **M068** — Transporte y Navegación | Este módulo lo necesita |
+| **M069** — Fast Travel | Este módulo lo necesita |
+| **M158** — Herramientas y Desbloqueo de Zonas | Este módulo lo necesita |
+

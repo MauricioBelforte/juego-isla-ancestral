@@ -84,3 +84,29 @@ Documentar la arquitectura de red de referencia (contrato): cliente-servidor con
 5. Latencia >200 ms sin frustración (interpolación + predicción documentadas).
 6. Costes estimados por servicio con hit de decisión (>10k descargas).
 7. `validate_net_contract.gd` existe y pasa sin errores.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M076** — Multijugador | Base para multijugador |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M106** — Seguridad | Usado por seguridad |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M076** — Multijugador | Depende de este módulo |
+| **M106** — Seguridad | Este módulo lo necesita |
+

@@ -58,3 +58,22 @@ El proyecto necesita un sistema de **seguridad** para proteger APIs, claves, sec
 11. Sistema de backups automáticos (integración con M107).
 12. Sistema de rotación de credenciales (automatizada cuando sea posible).
 13. Sistema de auditoría de dependencias (integración con CI/CD).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M077** — Online y Red | Base para online y red |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M077** — Online y Red | Depende de este módulo |
+

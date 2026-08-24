@@ -86,3 +86,31 @@ Definir el sistema de balance del juego: un único lugar con los valores de equi
 8. El proceso de ajuste por playtest (M114) está documentado y conectado.
 9. La documentación plan-actual refleja el estado real del sistema.
 10. El log en `Logs/` está generado y firmado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M020** — Sistema de Amistad | Base para sistema de amistad |
+| **M038** — Economía | Balance de progresión |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M094** — Retención sin FOMO | Usado por retención sin fomo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M020** — Sistema de Amistad | Depende de este módulo |
+| **M038** — Economía | Depende de este módulo |
+| **M094** — Retención sin FOMO | Este módulo lo necesita |
+

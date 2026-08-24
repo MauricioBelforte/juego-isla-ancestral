@@ -51,3 +51,24 @@ El módulo 41 (Música) define la composición y el sistema de capas, pero no cu
 - [ ] Sistema de créditos de audio documentado
 - [ ] Proceso de clearances para muestras definido
 - [ ] Validación legal de audio generado por IA
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M041** — Música | Legal de música |
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M041** — Música | Depende de este módulo |
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

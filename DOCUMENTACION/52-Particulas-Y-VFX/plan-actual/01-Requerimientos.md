@@ -79,3 +79,22 @@ Definir el sistema de partículas y VFX de la isla: catálogo de efectos del pla
 6. Reduce Motion (M58) atenúa o desactiva VFX de UI y sensibles.
 7. Los atmosféricos responden a clima/estación (M32/M29) sin lag.
 8. El catálogo y la validación están integrados con CI (M118).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Partículas sobre modelos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+

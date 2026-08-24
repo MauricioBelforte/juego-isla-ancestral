@@ -109,3 +109,31 @@ Unificar cómo el jugador interactúa con el mundo de la isla Aurora mediante un
 8. Toda frase visible está localizable (`tr()`) y el prompt indica la tecla E con el ícono del dispositivo activo (teclado/gamepad).
 9. `GameState.M70` guarda y restaura correctamente cofres, puertas y animales acariciados en una sesión nueva.
 10. El módulo queda delegable para implementación con contrato `IInteractable` estable y pruebas de integración definidas.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Sistema de interacciones |
+| **M013** — Herramientas | Interacciones con herramientas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M092** — Tutorial | Usado por tutorial |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M013** — Herramientas | Depende de este módulo |
+| **M092** — Tutorial | Este módulo lo necesita |
+

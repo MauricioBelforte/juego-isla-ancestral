@@ -46,3 +46,42 @@ En un cozy game sin combate, el jugador pasa la mayor parte del tiempo recolecta
 3. Flujos completos diseñados: recolección → bolsillo, bolsillo → casa, casa → crafting, compra → bolsillo, regalo NPC → bolsillo/bandeja.
 4. Reglas de anti-frustración por llenura y descarte seguro definidas (RF8/RF9) sin ambigüedad.
 5. Delegable para implementación tras M13/M15 y M53.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Capacidad y slots del jugador |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M015** — Recursos | Recursos |
+| **M016** — Crafting | Crafting |
+| **M017** — Construcción | Construcción |
+| **M053** — UI/UX | Usado por ui/ux |
+| **M059** — Guardado | Guardado |
+| **M137** — Prototipo | Prototipo |
+| **M155** — Vestimenta y Accesorios | Usado por vestimenta y accesorios |
+| **M159** — Catálogo de Objetos | Catálogo de objetos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M015** — Recursos | Este módulo lo necesita |
+| **M016** — Crafting | Este módulo lo necesita |
+| **M017** — Construcción | Este módulo lo necesita |
+| **M053** — UI/UX | Este módulo lo necesita |
+| **M059** — Guardado | Este módulo lo necesita |
+| **M137** — Prototipo | Este módulo lo necesita |
+| **M155** — Vestimenta y Accesorios | Este módulo lo necesita |
+

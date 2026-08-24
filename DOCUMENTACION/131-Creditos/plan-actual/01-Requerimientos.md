@@ -43,3 +43,29 @@ Mostrar los créditos finales del juego de manera apropiada, reconociendo las co
 6. Copyright y año actual displayados.
 7. Accesibilidad de tamaño de texto y contraste.
 8. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M142** — Release Candidate | Base para release candidate |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M130** — Artbook | Usado por artbook |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M130** — Artbook | Este módulo lo necesita |
+| **M142** — Release Candidate | Depende de este módulo |
+

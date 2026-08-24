@@ -70,3 +70,22 @@ El juego existe como idea, narrativa (biblia) y GDD maestro, pero carece de una 
 4. El alcance v1.0 está por escrito y es revisitable (anti-scope-creep).
 5. `CHECKLIST-GLOBAL.md` refleja el estado del módulo.
 6. Log de finalización en `Logs/`.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Visión del proyecto y filosofía |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+

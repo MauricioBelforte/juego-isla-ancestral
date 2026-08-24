@@ -103,3 +103,37 @@ Cada objeto del catálogo tendrá:
 3. Checklist verificable con mín 100 ítems de validación
 4. Integración clara con M14 (Inventario), M16 (Crafting), M18 (Casas), M45 (Arte 3D)
 5. Documentación firmada y fechada
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M014** — Inventario | Objetos en inventario |
+| **M016** — Crafting | Objetos de crafting |
+| **M018** — Casas | Objetos en casas |
+| **M045** — Arte 3D | Modelos 3D de objetos |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M160** — Diseño de Ubicaciones del Mundo | Usado por diseño de ubicaciones del mundo |
+| **M161** — Diseño Visual de NPCs | Usado por diseño visual de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M014** — Inventario | Depende de este módulo |
+| **M016** — Crafting | Depende de este módulo |
+| **M018** — Casas | Depende de este módulo |
+| **M045** — Arte 3D | Depende de este módulo |
+| **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
+| **M161** — Diseño Visual de NPCs | Este módulo lo necesita |
+

@@ -56,3 +56,22 @@ El proyecto necesita un sistema de **Community Management** para gestionar la co
 8. Sistema de triage de bugs reportados por comunidad.
 9. Sistema de recopilación de sugerencias.
 10. Directrices para gestión de expectativas, críticas, contenido tóxico, spoilers, filtraciones, impersonación y copyright claims.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M099** — Marketing | Base para marketing |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M099** — Marketing | Depende de este módulo |
+

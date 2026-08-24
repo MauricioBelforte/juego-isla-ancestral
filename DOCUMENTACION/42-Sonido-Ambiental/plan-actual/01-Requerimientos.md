@@ -39,3 +39,22 @@ Crear el paisaje sonoro ambiental de Aurora: los sonidos "de fondo" que dan vida
 3. Capas por hora/clima definidas para cada banco.
 4. Clasificación posicional vs 2D y reglas de activación (atraer/ocioso).
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M041** — Música | Ambiente sobre música base |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M041** — Música | Depende de este módulo |
+

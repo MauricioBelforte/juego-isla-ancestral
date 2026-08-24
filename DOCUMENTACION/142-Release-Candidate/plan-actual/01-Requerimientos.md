@@ -73,3 +73,37 @@ Producir y validar el **Release Candidate final**: la build exacta que se public
 3. Informe de certificación y legal aprobado.
 4. Runbook y plan de lanzamiento aprobados (para M143).
 5. Backlog de soporte inicial (FAQ + procesos).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M141** — Beta | RC sobre beta |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M120** — DLC y Expansiones | Usado por dlc y expansiones |
+| **M121** — Soporte Post-Lanzamiento | Usado por soporte post-lanzamiento |
+| **M129** — Merchandising | Usado por merchandising |
+| **M131** — Créditos | Usado por créditos |
+| **M143** — Lanzamiento | Lanzamiento |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M120** — DLC y Expansiones | Este módulo lo necesita |
+| **M121** — Soporte Post-Lanzamiento | Este módulo lo necesita |
+| **M129** — Merchandising | Este módulo lo necesita |
+| **M131** — Créditos | Este módulo lo necesita |
+| **M141** — Beta | Depende de este módulo |
+| **M143** — Lanzamiento | Este módulo lo necesita |
+

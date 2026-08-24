@@ -40,3 +40,26 @@ Definir el sistema musical completo de Aurora: qué música suena en cada moment
 3. Sistema de capas/adaptativa especificado (cuántas capas, qué eventos la suben).
 4. Todo el catálogo con duraciones, loops, volúmenes y transiciones.
 5. Delegable para implementación; composición final requiere assets del compositor.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M042** — Sonido Ambiental | Usado por sonido ambiental |
+| **M043** — Efectos de Sonido | Usado por efectos de sonido |
+| **M084** — Música y Audio — Legal | Usado por música y audio — legal |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M042** — Sonido Ambiental | Este módulo lo necesita |
+| **M043** — Efectos de Sonido | Este módulo lo necesita |
+| **M084** — Música y Audio — Legal | Este módulo lo necesita |
+

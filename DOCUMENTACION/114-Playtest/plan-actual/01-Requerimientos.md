@@ -105,3 +105,24 @@ El módulo 114 resuelve este problema definiendo un **protocolo profesional y re
 5. La integración con M101, M102, M93, M104 y M137 está documentada con contratos de entrada/salida.
 6. Se incluyen edge cases conocidos (tester familiarizado, pocos testers, feedback contradictorio) con estrategia de manejo.
 7. Para el proyecto Godot 4.x: las plantillas son archivos Markdown en `docs/playtest/` (pendiente de implementación), no requieren código GDScript.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M101** — QA General | Base para qa general |
+| **M137** — Prototipo | Base para prototipo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M101** — QA General | Depende de este módulo |
+| **M137** — Prototipo | Depende de este módulo |
+

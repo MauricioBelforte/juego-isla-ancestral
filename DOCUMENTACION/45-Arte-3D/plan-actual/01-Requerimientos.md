@@ -103,3 +103,39 @@ Definir el sistema de arte 3D del juego: guía de estilo (estilo voxel redondead
 - Plan de producción §4: pipeline de arte y contenido 3D — dirección de arte, paleta por bioma, "Cozy Voxel" con modelado estilizado tradicional, low-poly redondeado, LOD con Transvoxel, Git LFS.
 - Plan de producción §5.6: la IA se usa para tareas repetitivas/técnicas; la dirección de arte es humana.
 - Principios innegociables (M152): calidad > cantidad, performance prioridad sobre visuales.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M046** — Arte 2D | Arte 2D |
+| **M047** — Texturas y Materiales | Texturas y materiales |
+| **M048** — Animación | Animación |
+| **M049** — Iluminación | Iluminación |
+| **M050** — Vegetación | Vegetación |
+| **M052** — Partículas y VFX | Partículas y VFX |
+| **M085** — Modelos 3D — Legal | Usado por modelos 3d — legal |
+| **M108** — Pipeline de Assets | Pipeline de assets |
+| **M130** — Artbook | Usado por artbook |
+| **M159** — Catálogo de Objetos | Catálogo de objetos |
+| **M161** — Diseño Visual de NPCs | Diseño visual de NPCs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M046** — Arte 2D | Este módulo lo necesita |
+| **M047** — Texturas y Materiales | Este módulo lo necesita |
+| **M048** — Animación | Este módulo lo necesita |
+| **M049** — Iluminación | Este módulo lo necesita |
+| **M050** — Vegetación | Este módulo lo necesita |
+| **M052** — Partículas y VFX | Este módulo lo necesita |
+| **M085** — Modelos 3D — Legal | Este módulo lo necesita |
+| **M108** — Pipeline de Assets | Este módulo lo necesita |
+

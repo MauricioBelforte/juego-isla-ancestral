@@ -153,3 +153,33 @@ Dar profundidad emocional al juego cozy sin mecánicas punitivas: el jugador deb
 | Sin bloqueo de contenido | Todo accesible sin amistad alta |
 | Sin presión de社交 | Puedes ignorar a los NPCs sin consecuencias |
 | Sin penalización por regalo malo | Solo -1/-2 puntos (recuperable en 1-2 semanas) |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | Sistema de amistad |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M038** — Economía | Usado por economía |
+| **M093** — Balance | Usado por balance |
+| **M162** — Diálogos Contextuales de NPCs | Usado por diálogos contextuales de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M038** — Economía | Este módulo lo necesita |
+| **M093** — Balance | Este módulo lo necesita |
+| **M162** — Diálogos Contextuales de NPCs | Este módulo lo necesita |
+

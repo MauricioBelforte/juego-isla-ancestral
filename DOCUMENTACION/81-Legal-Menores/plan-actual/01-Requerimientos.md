@@ -43,3 +43,22 @@ El juego "Isla Ancestral" tiene una estética "cozy voxel" que atrae naturalment
 - **Documentación legal revisada por abogado especializado en videojuegos y privacidad infantil**
 - **Idioma: Español (documentación), Inglés (políticas legales públicas)**
 - **Plazo: Completar antes de M139 Pre-Alpha (primer build distribuible externamente)**
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M080** — Legal — Privacidad | Base para legal — privacidad |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M080** — Legal — Privacidad | Depende de este módulo |
+

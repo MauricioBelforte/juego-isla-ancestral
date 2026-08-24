@@ -131,3 +131,24 @@ Crear un sistema de accesibilidad completo, persistente y aplicable **en tiempo 
 5. Modo Sereno, reducción de movimiento y asistencia de puntería funcionan sobre los sistemas existentes sin modificarlos.
 6. Autosave frecuente activo y verificado en sesiones largas (≥ 30 min jugados sin pérdida de progreso).
 7. Checklist del módulo con 125+ ítems completados y módulo marcado delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Accesibilidad UI |
+| **M057** — Interfaz de Control | Base para interfaz de control |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+| **M057** — Interfaz de Control | Depende de este módulo |
+

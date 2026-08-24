@@ -58,3 +58,35 @@ Documentar y diseñar el **sistema de builds** del proyecto: automatización com
 - **Aplican:** M112 (tests), M113 (stress gates), M109 (validators), M110 (debug menu — solo dev/QA), M116 (instalador), M118 (CI/CD), M96 (plataformas), M142/M143 (release).
 - Los builds de release NO incluyen Debug Menu ni herramientas de editor (M109/M110).
 - Tiempo máximo de build release: 60 min (objetivo con incremental).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M116** — Instalador | Build system sobre instalador |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M083** — Licencias de Software | Licencias en build |
+| **M118** — CI/CD | CI/CD |
+| **M119** — Actualizaciones | Actualizaciones |
+| **M123** — Modding | Modding |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M083** — Licencias de Software | Este módulo lo necesita |
+| **M116** — Instalador | Depende de este módulo |
+| **M118** — CI/CD | Este módulo lo necesita |
+| **M119** — Actualizaciones | Este módulo lo necesita |
+| **M123** — Modding | Este módulo lo necesita |
+

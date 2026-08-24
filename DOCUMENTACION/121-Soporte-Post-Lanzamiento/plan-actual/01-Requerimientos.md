@@ -67,3 +67,22 @@ El proyecto necesita un sistema de **soporte post-lanzamiento** para mantener el
 16. Backups automáticos configurados (integración con M107).
 17. Monitorización de servicios online configurada (si aplica).
 18. Plan de abandono del servicio documentado (si hay componentes online).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M142** — Release Candidate | Base para release candidate |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M142** — Release Candidate | Depende de este módulo |
+

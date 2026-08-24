@@ -75,3 +75,29 @@ Fuera de alcance: ejecución de las mitigaciones (le pertenece a cada módulo du
 5. El ciclo de revisión trimestral documentado paso a paso.
 6. La integración con M133 / M134 / M136 / M137 especificada sin bloquearlos.
 7. Checklist de 130 ítems con todos los subitems resueltos.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M133** — Gestión del Proyecto | Riesgos de gestión |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M136** — Roadmap | Usado por roadmap |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M133** — Gestión del Proyecto | Depende de este módulo |
+| **M136** — Roadmap | Este módulo lo necesita |
+

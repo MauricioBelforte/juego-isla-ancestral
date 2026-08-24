@@ -55,3 +55,22 @@ El proyecto necesita **fuentes tipográficas** legibles, accesibles y localizabl
 8. Jerarquía visual creada.
 9. Estilos de UI creados en Godot.
 10. Archivos de fuente optimizados (subsetting, compresión).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Fuentes en UI |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

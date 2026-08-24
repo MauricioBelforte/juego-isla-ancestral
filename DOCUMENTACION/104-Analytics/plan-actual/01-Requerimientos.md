@@ -41,3 +41,29 @@ Recoger y reportar datos de comportamiento del jugador de manera no intrusiva, a
 4. El jugador puede desactivar el reporte en cualquier momento desde configuración.
 5. Los datos se agregan por lotes y no contienen información identificable.
 6. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M103** — Logging | Base para logging |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M105** — Telemetría de Gameplay | Usado por telemetría de gameplay |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M103** — Logging | Depende de este módulo |
+| **M105** — Telemetría de Gameplay | Este módulo lo necesita |
+

@@ -42,3 +42,33 @@ El Templo de la Brisa (nota de la tabla global) es la culminación subterránea 
 2. El diseño voxeliza en M08 sin retrabajo (metría por corredor/pieza).
 3. La suite de testings cubre softlocks, exploits, orientación y accesibilidad.
 4. Telemetría por puzzle operativa y exportable para balance (M24).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M024** — Templos y Puzzles | Base para templos y puzzles |
+| **M025** — Ruinas | Base para ruinas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M066** — Anti-Softlock | Usado por anti-softlock |
+| **M138** — Vertical Slice | Usado por vertical slice |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M024** — Templos y Puzzles | Depende de este módulo |
+| **M025** — Ruinas | Depende de este módulo |
+| **M066** — Anti-Softlock | Este módulo lo necesita |
+| **M138** — Vertical Slice | Este módulo lo necesita |
+

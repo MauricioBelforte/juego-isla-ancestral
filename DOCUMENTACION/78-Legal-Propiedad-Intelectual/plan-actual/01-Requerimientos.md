@@ -109,3 +109,44 @@ Definir e implementar una política de propiedad intelectual transparente, simpl
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Marco legal general |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M079** — Legal — Contratos | Usado por legal — contratos |
+| **M080** — Legal — Privacidad | Usado por legal — privacidad |
+| **M082** — Clasificación por Edades | Usado por clasificación por edades |
+| **M084** — Música y Audio — Legal | Usado por música y audio — legal |
+| **M085** — Modelos 3D — Legal | Usado por modelos 3d — legal |
+| **M086** — IA Generativa | Usado por ia generativa |
+| **M125** — Términos de Servicio | Usado por términos de servicio |
+| **M126** — Marketing Legal | Usado por marketing legal |
+| **M127** — Copyright del Juego | Usado por copyright del juego |
+| **M128** — Identidad de Marca | Usado por identidad de marca |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+| **M079** — Legal — Contratos | Este módulo lo necesita |
+| **M080** — Legal — Privacidad | Este módulo lo necesita |
+| **M082** — Clasificación por Edades | Este módulo lo necesita |
+| **M084** — Música y Audio — Legal | Este módulo lo necesita |
+| **M085** — Modelos 3D — Legal | Este módulo lo necesita |
+| **M086** — IA Generativa | Este módulo lo necesita |
+| **M125** — Términos de Servicio | Este módulo lo necesita |
+

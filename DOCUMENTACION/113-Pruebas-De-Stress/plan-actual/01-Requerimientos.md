@@ -58,3 +58,22 @@ Diseñar y documentar el **plan de pruebas de stress**: escenarios de carga máx
 - **Aplican:** M61 (rendimiento), M62 (memoria), M63 (cargas/streaming), M112 (testing automático), M96 (objetivos por plataforma), M140-M143 (gates de producción).
 - Los stress tests corren en batch mode (no requieren interacción humana) y utilizan Debug Menu flag de carga máxima (M110/M109).
 - No afectan el build de jugador (solo dev/QA/CI).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M112** — Testing Automático | Base para testing automático |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M112** — Testing Automático | Depende de este módulo |
+

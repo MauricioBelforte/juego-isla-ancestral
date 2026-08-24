@@ -95,3 +95,29 @@ Definir el sistema de vehículos de la isla: barco (principal, costa y ríos), d
 6. El baúl (M14), las mejoras y la personalización persisten correctamente (M59).
 7. El vehículo no degrada el rendimiento (M61) ni supera el presupuesto de audio/luces (M43/M49).
 8. Los sonidos y animaciones (M43/M48) se detienen correctamente al salir del vehículo.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M028** — Viajes | Base para viajes |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M068** — Transporte y Navegación | Usado por transporte y navegación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M028** — Viajes | Depende de este módulo |
+| **M068** — Transporte y Navegación | Este módulo lo necesita |
+

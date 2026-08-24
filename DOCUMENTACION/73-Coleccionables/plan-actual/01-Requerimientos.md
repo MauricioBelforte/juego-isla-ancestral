@@ -82,3 +82,24 @@ Definir el sistema de coleccionables de la isla: catálogo central de 22 categor
 6. Los logros (M72) reciben el progreso real de las colecciones.
 7. Las recompensas no bloquean la historia principal (M22).
 8. `validate_collectibles.gd` pasa sin errores.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M036** — Fauna | Base para fauna |
+| **M071** — Progresión | Coleccionables sobre progresión |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M036** — Fauna | Depende de este módulo |
+| **M071** — Progresión | Depende de este módulo |
+

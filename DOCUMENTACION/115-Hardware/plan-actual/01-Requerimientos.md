@@ -49,3 +49,24 @@ El juego Isla Ancestral debe funcionar en una variedad de hardware del jugador, 
 - [ ] Sistema de ajuste automático de calidad
 - [ ] Perfiles de rendimiento por categoría
 - [ ] Soporte para gamepads principales
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Detección de hardware |
+| **M061** — Rendimiento | Ajuste por hardware |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M061** — Rendimiento | Depende de este módulo |
+

@@ -47,3 +47,45 @@ El juego (cozy, isla ancestral, mundo voxel, sin combate obligatorio) necesita u
 4. Integración verificada con M57 (Action Layer y prompts dinámicos), M58 (parámetros de accesibilidad aplicados en runtime), M88 (tema centrado en fuentes definidas), M89 (registro de menús), M90 (re-aplicación del tema al cambiar resolución).
 5. Presupuesto UI ≤ 8% frame bajo M61; sin draw calls duplicados entre capas (canvas merge donde corresponda).
 6. Construcción de checklist del módulo (>= 110 ítems) y documentación completa para delegación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | UI del jugador |
+| **M014** — Inventario | Inventario en UI |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M054** — Mapa | Mapa |
+| **M055** — Diario del Jugador | Diario |
+| **M056** — Fotografía | Fotografía |
+| **M058** — Accesibilidad | Accesibilidad |
+| **M087** — Localización | Localización |
+| **M088** — Fuentes Tipográficas | Fuentes tipográficas |
+| **M089** — Diseño de Menús | Diseño de menús |
+| **M090** — Configuración Gráfica | Configuración gráfica |
+| **M091** — Configuración de Audio | Configuración de audio |
+| **M092** — Tutorial | Tutorial |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M014** — Inventario | Depende de este módulo |
+| **M054** — Mapa | Este módulo lo necesita |
+| **M055** — Diario del Jugador | Este módulo lo necesita |
+| **M056** — Fotografía | Este módulo lo necesita |
+| **M058** — Accesibilidad | Este módulo lo necesita |
+| **M087** — Localización | Este módulo lo necesita |
+| **M088** — Fuentes Tipográficas | Este módulo lo necesita |
+

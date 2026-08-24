@@ -42,3 +42,37 @@ La isla ancestral contiene templos con puzzles que deben ser **justos, coherente
 2. El framework emisor→receptor exporta cada puzzle como datos serializables (JSON/YAML) y los tests los verifican sin escena.
 3. Tiempo medio de resolución medido por familia (playtests) y sesgo de dificultad documentado.
 4. Cero softlocks por puzzle (integración con M66) y cero excepciones en Consola.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M013** — Herramientas | Puzzles que requieren herramientas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M025** — Ruinas | Usado por ruinas |
+| **M026** — Templo Subterráneo | Usado por templo subterráneo |
+| **M051** — Agua | Usado por agua |
+| **M148** — Lore Ambiental | Usado por lore ambiental |
+| **M157** — Medios de Transporte | Usado por medios de transporte |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M013** — Herramientas | Depende de este módulo |
+| **M025** — Ruinas | Este módulo lo necesita |
+| **M026** — Templo Subterráneo | Este módulo lo necesita |
+| **M051** — Agua | Este módulo lo necesita |
+| **M148** — Lore Ambiental | Este módulo lo necesita |
+| **M157** — Medios de Transporte | Este módulo lo necesita |
+

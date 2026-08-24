@@ -51,3 +51,33 @@ El proyecto necesita un **sistema de logging robusto y estructurado** para regis
 3. Niveles de log implementados con filtros por configuración.
 4. Integración con M102 (Bug Tracking) para adjuntar logs a issues.
 5. Integración con M122 (Crash Reporting) para logs pre-crash.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Logging y categorías |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M104** — Analytics | Usado por analytics |
+| **M122** — Crash Reporting | Usado por crash reporting |
+| **M154** — Visión del Agente | Usado por visión del agente |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M104** — Analytics | Este módulo lo necesita |
+| **M122** — Crash Reporting | Este módulo lo necesita |
+| **M154** — Visión del Agente | Este módulo lo necesita |
+

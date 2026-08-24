@@ -89,3 +89,29 @@ Definir el sistema de diario del jugador de la isla: registro de 13+ categorías
 6. Todos los textos del diario se localizan (M87) sin cadenas embebidas.
 7. La galería de fotografías (M56) se abre desde el diario sin recargar la escena.
 8. El diario abre/cierra sin lag y navega con 2 clics (M53/M61).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Diario en UI |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M083** — Licencias de Software | Usado por licencias de software |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+| **M083** — Licencias de Software | Este módulo lo necesita |
+

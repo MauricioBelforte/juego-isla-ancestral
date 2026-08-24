@@ -82,3 +82,33 @@ Los NPC de Aurora necesitan conversar con el jugador de forma viva, ramificada y
 5. Los textos dinámicos se resuelven con el estado del mundo en runtime.
 6. La localización funciona con al menos dos idiomas de ejemplo.
 7. Módulo delegable para implementación, con plan de testings (sección 14 de AGENTS.md).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | Motor de diálogos |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M022** — Historia Principal | Historia principal |
+| **M087** — Localización | Localización |
+| **M162** — Diálogos Contextuales de NPCs | Diálogos contextuales |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M022** — Historia Principal | Este módulo lo necesita |
+| **M087** — Localización | Este módulo lo necesita |
+| **M162** — Diálogos Contextuales de NPCs | Este módulo lo necesita |
+

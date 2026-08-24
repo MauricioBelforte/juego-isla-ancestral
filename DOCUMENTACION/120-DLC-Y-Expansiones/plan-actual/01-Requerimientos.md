@@ -61,3 +61,24 @@ El proyecto necesita una estrategia de **DLC y expansiones** para contenido post
 14. Bundles y packs de DLC definidos.
 15. Marketing de DLC y expansiones definido.
 16. DLC no bloquea contenido esencial del juego base.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M095** — Monetización | Base para monetización |
+| **M142** — Release Candidate | Base para release candidate |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M095** — Monetización | Depende de este módulo |
+| **M142** — Release Candidate | Depende de este módulo |
+

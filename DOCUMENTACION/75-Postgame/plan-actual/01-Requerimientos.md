@@ -80,3 +80,22 @@ Definir el postgame de la isla: contenido inmediato tras el final (epílogo M22 
 6. Los logros finales (M72) se desbloquean correctamente en postgame.
 7. El progreso postgame persiste (M59) y migra (M60).
 8. `validate_postgame.gd` pasa sin errores.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | Postgame después de la historia |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+

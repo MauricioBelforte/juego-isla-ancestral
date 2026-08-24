@@ -110,3 +110,36 @@ Crear la **base documentada del proyecto** (plan inicial genérico) que sirva co
 | Burnout de equipo chico/solo | Medio | Roadmap por fases con hitos concretos |
 | Sorpresas fiscales/cambiarias (Argentina) | Medio | Contador con experiencia en exportación de servicios |
 | Lanzamiento sin audiencia | Medio | Página de Steam y wishlists con meses de antelación |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M002** — Visión y Concepto | Visión y concepto del proyecto |
+| **M003** — Documentación del Proyecto | Convenciones de documentación |
+| **M004** — Game Engine | Decisiones de motor |
+| **M006** — Control de Versiones | Versionado |
+| **M078** — Legal — Propiedad Intelectual | Marco legal |
+| **M133** — Gestión del Proyecto | Gestión del proyecto |
+| **M145** — Diseño de Experiencia | Diseño de experiencia |
+| **M152** — Principios Innegociables | Principios innegociables |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M002** — Visión y Concepto | Este módulo lo necesita |
+| **M003** — Documentación del Proyecto | Este módulo lo necesita |
+| **M004** — Game Engine | Este módulo lo necesita |
+| **M006** — Control de Versiones | Este módulo lo necesita |
+| **M078** — Legal — Propiedad Intelectual | Este módulo lo necesita |
+| **M133** — Gestión del Proyecto | Este módulo lo necesita |
+| **M145** — Diseño de Experiencia | Este módulo lo necesita |
+| **M152** — Principios Innegociables | Este módulo lo necesita |
+

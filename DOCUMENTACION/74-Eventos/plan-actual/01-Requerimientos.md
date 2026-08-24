@@ -89,3 +89,24 @@ Aurora es una isla **cozy** donde el pueblo vive: ferias, festivales estacionale
 5. El historial por partida persiste tras guardar/cargar y no se corrompe.
 6. Todos los requisitos funcionales y no funcionales verificables están en el `05-Checklist.md` con su caso de prueba.
 7. La integración con M19/M21/M29/M30/M32 no requiere modificar ninguno de esos módulos (solo consumo de APIs y señales).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M029** — Tiempo y Calendario | Eventos calendario |
+| **M030** — Reloj en Tiempo Real | Base para reloj en tiempo real |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M030** — Reloj en Tiempo Real | Depende de este módulo |
+

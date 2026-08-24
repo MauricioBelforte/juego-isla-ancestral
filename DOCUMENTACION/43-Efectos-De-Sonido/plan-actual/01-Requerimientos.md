@@ -39,3 +39,29 @@ Diseñar los **efectos de eventos** del juego (pasos, acciones, UI, logros): pol
 3. Reglas de prioridad de canal y pool de voces definidas.
 4. Coherencia con M34/M13/M17/M45 en las señales de entrada.
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M041** — Música | SFX sobre familia tonal |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M044** — ASMR y Feedback | Usado por asmr y feedback |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M041** — Música | Depende de este módulo |
+| **M044** — ASMR y Feedback | Este módulo lo necesita |
+

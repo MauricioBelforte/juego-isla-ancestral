@@ -48,3 +48,36 @@ El jugador debe poder personalizar Aurora y construir su hogar sobre el mundo vo
 3. Validación de ocupación, soporte, zonas y costos verificada con casos límite (pieza en el aire, fuera de zona, encima de NPC, recurso insuficiente).
 4. Integración demostrada con M18 (casa ampliable), M25 (ruinas solo visuales) y M64 (NPC desvía su ruta y comenta).
 5. Guardado y carga (M58) restauran las construcciones sin pérdidas; test de estrés M112 con muchas construcciones superado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Construcción sobre bloques |
+| **M014** — Inventario | Materiales de construcción |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M018** — Casas | Usado por casas |
+| **M033** — Agricultura | Usado por agricultura |
+| **M160** — Diseño de Ubicaciones del Mundo | Usado por diseño de ubicaciones del mundo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M014** — Inventario | Depende de este módulo |
+| **M018** — Casas | Este módulo lo necesita |
+| **M033** — Agricultura | Este módulo lo necesita |
+| **M137** — Prototipo | Comparten dependencias (M008, M014) |
+| **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
+

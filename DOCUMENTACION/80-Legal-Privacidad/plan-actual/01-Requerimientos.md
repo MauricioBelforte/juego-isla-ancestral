@@ -93,3 +93,29 @@ Producir la documentación completa del módulo Legal — Privacidad: política 
 5. Los derechos de acceso, borrado y portabilidad tienen canal de contacto definido.
 6. Los documentos incluyen el aviso de que no constituyen asesoramiento legal profesional.
 7. La checklist (05-Checklist.md) supera los 115 ítems y queda delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M081** — Legal — Menores | Usado por legal — menores |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+| **M081** — Legal — Menores | Este módulo lo necesita |
+

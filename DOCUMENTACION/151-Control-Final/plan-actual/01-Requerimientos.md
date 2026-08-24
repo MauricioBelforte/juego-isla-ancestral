@@ -72,3 +72,29 @@ Auditar y certificar que "Isla Ancestral" como producto está **listo, completo 
 2. Informe de playtest de control (encuestas de diversión).
 3. Inventario de ⚠ con plan de acción fechado.
 4. Documentos administrativos indexados (contratos, licencias, PI).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M143** — Lanzamiento | Control final post-lanzamiento |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M153** — Objetivo Final del Proyecto | Usado por objetivo final del proyecto |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M143** — Lanzamiento | Depende de este módulo |
+| **M153** — Objetivo Final del Proyecto | Este módulo lo necesita |
+

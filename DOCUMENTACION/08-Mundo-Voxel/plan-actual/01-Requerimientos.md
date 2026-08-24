@@ -38,3 +38,43 @@ El terreno voxel editable es el **riesgo técnico #1** (GDD directiva 1: 60 FPS 
 2. Prototipo (hito M1): chunk 16³, edición, raycast y 60 FPS verificados.
 3. Tabla de tipos de bloques inicial de Aurora definida (bloques + propiedades).
 4. Estrategia de persistencia por diffs aprobada por M59.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | Voxel Engine, chunks, bloques |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M009** — Terreno y Geografía | Terreno y geografía |
+| **M010** — Generación del Mundo | Generación del mundo |
+| **M017** — Construcción | Construcción |
+| **M035** — Minería | Minería |
+| **M050** — Vegetación | Vegetación |
+| **M051** — Agua | Agua |
+| **M061** — Rendimiento | Usado por rendimiento |
+| **M063** — Cargas y Streaming | Cargas y streaming |
+| **M137** — Prototipo | Prototipo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M009** — Terreno y Geografía | Este módulo lo necesita |
+| **M010** — Generación del Mundo | Este módulo lo necesita |
+| **M017** — Construcción | Este módulo lo necesita |
+| **M035** — Minería | Este módulo lo necesita |
+| **M050** — Vegetación | Este módulo lo necesita |
+| **M051** — Agua | Este módulo lo necesita |
+| **M061** — Rendimiento | Este módulo lo necesita |
+

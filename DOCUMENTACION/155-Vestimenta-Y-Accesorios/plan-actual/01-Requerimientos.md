@@ -41,3 +41,36 @@ El jugador necesita un sistema de vestimenta que le permita **personalizar la ap
 3. Sistema de desbloqueo progresivo documentado.
 4. Integración con M11 (personaje), M14 (inventario), M156 (terrenos), M59 (guardado) definida.
 5. Visual coherente con estilo voxel del juego.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Vestimenta sobre jugador |
+| **M014** — Inventario | Vestimenta en inventario |
+| **M156** — Terrenos y Movimiento Diferenciado | Vestimenta y terreno |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M156** — Terrenos y Movimiento Diferenciado | Usado por terrenos y movimiento diferenciado |
+| **M161** — Diseño Visual de NPCs | Usado por diseño visual de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M014** — Inventario | Depende de este módulo |
+| **M053** — UI/UX | Comparten dependencias (M011, M014) |
+| **M137** — Prototipo | Comparten dependencias (M011, M014) |
+| **M156** — Terrenos y Movimiento Diferenciado | Depende de este módulo |
+| **M161** — Diseño Visual de NPCs | Este módulo lo necesita |
+

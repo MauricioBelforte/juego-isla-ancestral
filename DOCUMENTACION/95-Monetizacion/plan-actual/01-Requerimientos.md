@@ -106,3 +106,29 @@ El juego permite comprar monedas del juego con dinero real a traves de Steam IAP
 - Pero SIEMPRE debe ir a la isla correspondiente y hablar con el profesional
 - No puede comprar herramientas directamente en una tienda
 - El recorrido del mapa es obligatorio para todos los jugadores
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M038** — Economía | Monetización |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M120** — DLC y Expansiones | Usado por dlc y expansiones |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M038** — Economía | Depende de este módulo |
+| **M120** — DLC y Expansiones | Este módulo lo necesita |
+

@@ -67,3 +67,22 @@ El proyecto ya produce documentación (GDD, biblia, planes, componentes), pero e
 3. Ninguna convención nueva contradice `AGENTS.md`.
 4. Los 5 `*-ACTUAL.md` existen en la raíz de `DOCUMENTACION/` con estructura y estado.
 5. `CHECKLIST-GLOBAL.md`, `DOCUMENTACION/README.md` y Logs actualizados.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Convenciones de documentación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+

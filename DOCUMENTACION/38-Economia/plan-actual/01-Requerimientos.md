@@ -170,3 +170,42 @@ El jugador puede vender productos de una isla en otra isla a MEJOR PRECIO. Esto 
 - El jugador puede transportar mercancía en el barco (capacidad limitada: 20 slots)
 - Transportar mercancía es parte de la experiencia de viaje (M157)
 - Si el inventario está lleno, no puede subir al barco (excepto equipamiento personal)
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M015** — Recursos | Precios de recursos |
+| **M016** — Crafting | Costos de crafting |
+| **M020** — Sistema de Amistad | Precios por amistad |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M039** — Tiendas | Tiendas |
+| **M040** — Infraestructura | Infraestructura |
+| **M071** — Progresión | Progresión |
+| **M093** — Balance | Balance |
+| **M095** — Monetización | Monetización |
+| **M158** — Herramientas y Desbloqueo de Zonas | Herramientas y zonas |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M015** — Recursos | Depende de este módulo |
+| **M016** — Crafting | Depende de este módulo |
+| **M020** — Sistema de Amistad | Depende de este módulo |
+| **M039** — Tiendas | Este módulo lo necesita |
+| **M040** — Infraestructura | Este módulo lo necesita |
+| **M071** — Progresión | Este módulo lo necesita |
+| **M093** — Balance | Este módulo lo necesita |
+| **M095** — Monetización | Este módulo lo necesita |
+

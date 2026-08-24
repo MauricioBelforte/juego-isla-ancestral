@@ -63,3 +63,22 @@ Documentar el **plan de tráilers** del juego: teaser (anuncio temprano), tráil
 - **Aplican:** M97 (Steam page), M99 (marketing — distribución), M41 (música), M84/M78 (legal música/PI), M87 (localización), M58 (accesibilidad/subtítulos), M148 (anti-spoilers), M143 (lanzamiento).
 - 100% de las escenas de gameplay real (pantallas del juego, no cinemáticas falsas de marketing).
 - Sin spoilers: nunca se muestran los 6 sellos, el Templo final, ni el epílogo.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M097** — Steam / Store Page | Base para steam / store page |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M097** — Steam / Store Page | Depende de este módulo |
+

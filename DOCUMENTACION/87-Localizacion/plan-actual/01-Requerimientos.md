@@ -109,3 +109,24 @@ Implementar sobre Godot 4.x un sistema de localización completo que:
 8. Los números y fechas se formatean según el idioma activo (1.234,56 vs 1,234.56).
 9. Se puede agregar un idioma futuro solo con un `.po` nuevo y una entrada en el selector.
 10. El checklist del módulo (05-Checklist.md) está completo y sin ítems pendientes.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M021** — Diálogos | Textos localizables |
+| **M053** — UI/UX | Textos localizados en UI |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M021** — Diálogos | Depende de este módulo |
+| **M053** — UI/UX | Depende de este módulo |
+

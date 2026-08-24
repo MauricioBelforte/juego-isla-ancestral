@@ -54,3 +54,22 @@ El proyecto necesita un sistema de **telemetría de gameplay** para medir cómo 
 6. Sistema de medición de dificultad percibida.
 7. Sistema de análisis de datos para mejorar diseño.
 8. Integración con M104 (Analytics) para envío de datos.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M104** — Analytics | Base para analytics |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M104** — Analytics | Depende de este módulo |
+

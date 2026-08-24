@@ -155,3 +155,34 @@ Cada isla tiene productos que solo se consiguen allí, incentivando el comercio 
 | Isla 2 | Coral, perlas, pescado tropical | Principal (precio +50%) |
 | Isla 3 | Plantas medicinales, madera exótica | Isla 2 (precio +40%) |
 | Isla 4 | Cristales, minerales raros, polvo ancestral | Isla 2 (precio +60%) |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M028** — Viajes | Base para viajes |
+| **M029** — Tiempo y Calendario | Base para tiempo y calendario |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M028** — Viajes | Usado por viajes |
+| **M158** — Herramientas y Desbloqueo de Zonas | Usado por herramientas y desbloqueo de zonas |
+| **M160** — Diseño de Ubicaciones del Mundo | Usado por diseño de ubicaciones del mundo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M028** — Viajes | Depende de este módulo |
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M158** — Herramientas y Desbloqueo de Zonas | Este módulo lo necesita |
+| **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
+

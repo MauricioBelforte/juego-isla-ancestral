@@ -47,3 +47,22 @@ La isla Aurora es un mundo voxel grande y abierto (estilo cozy, sin combate obli
 5. Rendimiento medido con Profiler bajo el presupuesto (≤ 5% frame, ≤ 3 draw calls con mapa abierto) en escena poblada con el mundo voxel completo.
 6. Mapa navegable al 100% con ratón, teclado y gamepad (30 minutos por método) incluyendo zoom, pan, filtros y pines.
 7. Checklist del módulo con ≥ 120 ítems y documentación completa (5 archivos × 2 carpetas) para delegación de implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Mapa en UI |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

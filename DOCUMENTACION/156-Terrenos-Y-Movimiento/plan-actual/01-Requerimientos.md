@@ -105,3 +105,30 @@ Implementar un sistema modular de detección de terrenos que interactúe con:
 - La prioridad es que se sienta bien, no que sea realista
 - Los modificadores deben ser editables fácilmente desde el inspector
 - El feedback audio/visual es tan importante como la mecánica de velocidad
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Terrenos sobre movimiento |
+| **M155** — Vestimenta y Accesorios | Terrenos y vestimenta |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M155** — Vestimenta y Accesorios | Usado por vestimenta y accesorios |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M155** — Vestimenta y Accesorios | Depende de este módulo |
+

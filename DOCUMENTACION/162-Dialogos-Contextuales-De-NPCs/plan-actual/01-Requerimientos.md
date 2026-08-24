@@ -64,3 +64,35 @@ Definir la progresión de diálogos de cada NPC por capítulo de la historia pri
 3. Los diálogos reflejan eventos de M22 sin contradecir la historia
 4. Integración con sistema de nodos de M21 verificada
 5. Organización por isla clara y consistente
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | Personalidades de NPCs |
+| **M020** — Sistema de Amistad | Condiciones de amistad |
+| **M021** — Diálogos | Motor de diálogos |
+| **M022** — Historia Principal | Contenido por capítulo |
+| **M029** — Tiempo y Calendario | Condiciones de tiempo |
+| **M160** — Diseño de Ubicaciones del Mundo | Condiciones de ubicación |
+| **M161** — Diseño Visual de NPCs | NPCs referenciados |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M020** — Sistema de Amistad | Depende de este módulo |
+| **M021** — Diálogos | Depende de este módulo |
+| **M022** — Historia Principal | Depende de este módulo |
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M157** — Medios de Transporte | Comparten dependencias (M019, M022) |
+| **M160** — Diseño de Ubicaciones del Mundo | Depende de este módulo |
+| **M161** — Diseño Visual de NPCs | Depende de este módulo |
+

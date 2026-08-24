@@ -82,3 +82,37 @@ Definir la **norma de rendimiento de Aurora**: objetivo 60 FPS constante (1080p,
 4. `validate_budget.gd` valida la tabla contra los datos medidos sin errores.
 5. Playtest en hardware mínimo: 30 FPS sostenidos con vsync (criterio duro).
 6. Sin GC pausas visibles (>50 ms) durante sesiones de 30 min (co-se verifica con M62).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Presupuestos de chunks |
+| **M049** — Iluminación | Presupuestos de iluminación |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M062** — Memoria | Memoria |
+| **M063** — Cargas y Streaming | Cargas y streaming |
+| **M064** — IA de NPC | IA de NPCs |
+| **M115** — Hardware | Hardware |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M049** — Iluminación | Depende de este módulo |
+| **M062** — Memoria | Este módulo lo necesita |
+| **M063** — Cargas y Streaming | Este módulo lo necesita |
+| **M064** — IA de NPC | Este módulo lo necesita |
+| **M115** — Hardware | Este módulo lo necesita |
+

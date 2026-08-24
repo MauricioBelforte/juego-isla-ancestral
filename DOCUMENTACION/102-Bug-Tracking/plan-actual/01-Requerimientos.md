@@ -46,3 +46,22 @@ El proyecto necesita un **sistema organizado de seguimiento de bugs** para regis
 2. Plantilla de issue definida en `.github/ISSUE_TEMPLATE/bug_report.md`.
 3. Flujo de estados y etiquetas documentado.
 4. Integración con M101 (QA General) y M110 (Debug Menu) especificada.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M101** — QA General | Base para qa general |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M101** — QA General | Depende de este módulo |
+

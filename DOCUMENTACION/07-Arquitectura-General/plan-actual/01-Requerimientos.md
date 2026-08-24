@@ -37,3 +37,39 @@ Sin una arquitectura fijada: managers inventados por módulo, dependencias circu
 2. Diagrama de managers + capas con dependencias NO circulares (verificable por script en M1).
 3. Contrato de integración: "agregar un sistema = crear módulo + registrarlo en Bootstrap + escuchar EventBus".
 4. Sin acceso directo a GameState desde gameplay (vía servicios).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Service Locator, capas, EventBus |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M008** — Mundo Voxel | Mundo voxel |
+| **M011** — Personaje del Jugador | Personaje |
+| **M029** — Tiempo y Calendario | Tiempo/calendario |
+| **M036** — Fauna | Fauna |
+| **M049** — Iluminación | Iluminación |
+| **M059** — Guardado | Usado por guardado |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M008** — Mundo Voxel | Este módulo lo necesita |
+| **M011** — Personaje del Jugador | Este módulo lo necesita |
+| **M029** — Tiempo y Calendario | Este módulo lo necesita |
+| **M036** — Fauna | Este módulo lo necesita |
+| **M049** — Iluminación | Este módulo lo necesita |
+| **M059** — Guardado | Este módulo lo necesita |
+

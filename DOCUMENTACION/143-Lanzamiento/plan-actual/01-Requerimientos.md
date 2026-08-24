@@ -71,3 +71,33 @@ Publicar "Isla Ancestral" con el RC final en todas las plataformas objetivo, man
 3. Cola de hotfix 2.0.x con prioridades y propietarios.
 4. Informe de métricas iniciales + aprendizajes.
 5. Acta de comunidad (respuestas, agradecimiento) y preservación de builds.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M097** — Steam / Store Page | Lanzamiento en Steam |
+| **M142** — Release Candidate | Lanzamiento sobre RC |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M144** — Después del Lanzamiento | Después del lanzamiento |
+| **M151** — Control Final | Control final |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M097** — Steam / Store Page | Depende de este módulo |
+| **M142** — Release Candidate | Depende de este módulo |
+| **M144** — Después del Lanzamiento | Este módulo lo necesita |
+| **M151** — Control Final | Este módulo lo necesita |
+

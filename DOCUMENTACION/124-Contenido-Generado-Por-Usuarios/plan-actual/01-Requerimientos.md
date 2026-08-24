@@ -59,3 +59,22 @@ Documentar el **plan de contenidos generados por usuarios**: decisión de alcanc
 - Sin UGC en V1 (M143): solo diseño + preparación de código (marcadores de telemetría opcionales).
 - Coste de almacenamiento contenido en presupuesto general: hace que las fotos se compriman a 4K→2K, los blueprints sean JSON comprimido.
 - El UGC nunca ejecuta scripts (alineado con M123).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M123** — Modding | Base para modding |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M123** — Modding | Depende de este módulo |
+

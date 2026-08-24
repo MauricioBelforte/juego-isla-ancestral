@@ -44,3 +44,31 @@ Definir el sistema de clima del mundo: tipos, frecuencia estacional, duración, 
 3. Regla anti-molestia documentada (qué NO puede hacer el clima nunca).
 4. Determinismo explicado con su fórmula.
 5. Módulo marcado delegable (implementación → AGENTE DELEGADO tras M29/M31).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M029** — Tiempo y Calendario | Clima depende de tiempo |
+| **M031** — Ciclo Día/Noche | Base para ciclo día/noche |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M034** — Pesca | Usado por pesca |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M031** — Ciclo Día/Noche | Depende de este módulo |
+| **M034** — Pesca | Este módulo lo necesita |
+

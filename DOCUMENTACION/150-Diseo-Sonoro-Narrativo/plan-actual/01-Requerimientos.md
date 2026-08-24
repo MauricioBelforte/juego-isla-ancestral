@@ -54,3 +54,22 @@ El proyecto necesita un sistema de **diseño sonoro narrativo** para guiar al ju
 12. Leitmotifs sonoros diseñados (personajes, islas, temas).
 13. Variación de intensidad según contexto.
 14. Silencio usado narrativamente (pausas, énfasis).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M149** — Nombres y Nomenclatura | Sonido narrativo con nombres |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M149** — Nombres y Nomenclatura | Depende de este módulo |
+

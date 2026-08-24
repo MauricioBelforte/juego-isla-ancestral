@@ -73,3 +73,37 @@ Definir el diseño completo de ubicaciones del mundo: una tabla maestra de ubica
 5. Todos los IDs de objetos coinciden con M159
 6. Sistema de IDs documentado y consistente
 7. Integración con módulos dependientes verificada
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M017** — Construcción | Ubicaciones y construcción |
+| **M018** — Casas | Ubicaciones y casas |
+| **M027** — Islas del Mundo | Ubicaciones por isla |
+| **M039** — Tiendas | Ubicaciones y tiendas |
+| **M159** — Catálogo de Objetos | Objetos en ubicaciones |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M162** — Diálogos Contextuales de NPCs | Usado por diálogos contextuales de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M017** — Construcción | Depende de este módulo |
+| **M018** — Casas | Depende de este módulo |
+| **M027** — Islas del Mundo | Depende de este módulo |
+| **M039** — Tiendas | Depende de este módulo |
+| **M159** — Catálogo de Objetos | Depende de este módulo |
+| **M162** — Diálogos Contextuales de NPCs | Este módulo lo necesita |
+

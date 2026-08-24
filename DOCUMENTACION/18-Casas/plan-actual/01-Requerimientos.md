@@ -168,3 +168,31 @@ Cada set tiene una temática y un bono social al completarlo:
 | Sin costo por recolocar | Los muebles se mueven gratis |
 | Sin bloqueo de contenido | Todo accesible sin decorar |
 | Sin presión de completar sets | Los sets son cosméticos
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M017** — Construcción | Base para construcción |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M159** — Catálogo de Objetos | Usado por catálogo de objetos |
+| **M160** — Diseño de Ubicaciones del Mundo | Usado por diseño de ubicaciones del mundo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M017** — Construcción | Depende de este módulo |
+| **M159** — Catálogo de Objetos | Este módulo lo necesita |
+| **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
+

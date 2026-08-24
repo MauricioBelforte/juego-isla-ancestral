@@ -37,3 +37,29 @@ Decidir cómo se muestra el **tiempo del mundo** al jugador y si el tiempo real 
 2. Decisión explícita: tiempo real NO condiciona el juego (justificada).
 3. Anti-exploit documentado (manipulación OS sin efecto).
 4. Estrategia de pruebas de fechas límite escrita.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M029** — Tiempo y Calendario | Widget de reloj |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M074** — Eventos | Usado por eventos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M074** — Eventos | Este módulo lo necesita |
+

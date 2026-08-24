@@ -79,3 +79,33 @@ Los problemas a resolver son:
 - Sin degradación en experiencia si el jugador no recuerda una receta: la UI debe indicar que existe algo por descubrir, pero nunca bloquear la progresión principal.
 - Los materiales se definen en M15; Crafting solo referencia IDs, no los define.
 - El conocimiento de recetas no puede comprarse con moneda real; solo con moneda del juego.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M014** — Inventario | Materiales de crafting |
+| **M015** — Recursos | Base para recursos |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M038** — Economía | Usado por economía |
+| **M159** — Catálogo de Objetos | Usado por catálogo de objetos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M014** — Inventario | Depende de este módulo |
+| **M015** — Recursos | Depende de este módulo |
+| **M038** — Economía | Este módulo lo necesita |
+| **M159** — Catálogo de Objetos | Este módulo lo necesita |
+

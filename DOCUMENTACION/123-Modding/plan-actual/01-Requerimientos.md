@@ -61,3 +61,29 @@ Documentar el **plan de modding**: decisión de alcance (post-V2), API pública 
 - Los scripts de mods NO se ejecutan (solo datos) en v1.
 - El seguro queda cubierto por M106 (integridad) y listas de aprobación.
 - Coste técnico debe mantenerse < 10% del presupuesto de V2 (estimado).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M117** — Build System | Modding con build |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M124** — Contenido Generado por Usuarios | Usado por contenido generado por usuarios |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M117** — Build System | Depende de este módulo |
+| **M124** — Contenido Generado por Usuarios | Este módulo lo necesita |
+

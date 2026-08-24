@@ -79,3 +79,27 @@ Definir el sistema de animación de la isla: flujo de producción de animación 
 6. El coste de animación de una escena pivote queda dentro del presupuesto de M61 (verificado por registro).
 7. Se respeta el determinismo de mundo (viento/agua/fuego) sin RNG visible en runtime.
 8. Las animaciones de UI respetan M58 (reducir movimiento) y corren a 60 fps.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Animaciones del personaje |
+| **M019** — NPC y Vecinos | Animaciones de NPCs |
+| **M045** — Arte 3D | Sockets de animación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M045** — Arte 3D | Depende de este módulo |
+| **M161** — Diseño Visual de NPCs | Comparten dependencias (M019, M045) |
+

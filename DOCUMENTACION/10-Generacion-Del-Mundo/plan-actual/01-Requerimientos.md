@@ -38,3 +38,22 @@ El mundo voxel (Aurora 2048×2048) debe generarse **computacionalmente** de form
 2. Pipeline de capas especificado con entradas/salidas por capa.
 3. Regla de determinismo (PRNG por contexto) escrita y consumible.
 4. Estructuras narrativas ancladas a posiciones fijas (faro, puerto, grieta).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Pipeline de generación procedural |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+

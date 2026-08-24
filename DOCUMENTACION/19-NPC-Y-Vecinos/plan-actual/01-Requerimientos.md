@@ -230,3 +230,43 @@ Los NPCs también regalan cosas al jugador:
 | Sin obligación de regalar | Los regalos son opcionales |
 | Sin penalización por regalo malo | La amistad baja solo 1-2 puntos |
 | Sin exigencia de frecuencia | Puedes socializar cuando quieras |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Rutinas y personalidades |
+| **M025** — Ruinas | NPCs en ruinas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M020** — Sistema de Amistad | Amistad |
+| **M021** — Diálogos | Diálogos |
+| **M048** — Animación | Animación de NPCs |
+| **M064** — IA de NPC | IA de NPCs |
+| **M138** — Vertical Slice | Vertical slice |
+| **M157** — Medios de Transporte | Transporte |
+| **M161** — Diseño Visual de NPCs | Diseño visual |
+| **M162** — Diálogos Contextuales de NPCs | Diálogos contextuales |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M020** — Sistema de Amistad | Este módulo lo necesita |
+| **M021** — Diálogos | Este módulo lo necesita |
+| **M025** — Ruinas | Depende de este módulo |
+| **M048** — Animación | Este módulo lo necesita |
+| **M064** — IA de NPC | Este módulo lo necesita |
+| **M138** — Vertical Slice | Este módulo lo necesita |
+| **M157** — Medios de Transporte | Este módulo lo necesita |
+

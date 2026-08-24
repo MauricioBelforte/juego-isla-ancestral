@@ -177,3 +177,24 @@ Definir una **hoja de ruta del desarrollo** de *Isla Ancestral* que organice los
 | M133 (Gestión del Proyecto) | Blanda (referencia) | Ciclo de gestión, DoD, ceremonias y flujo multiagente |
 | M135 (Riesgos del Proyecto) | Blanda (referencia) | Riesgos que amenazan hitos y sus mitigaciones |
 | M137-M143 (hitos) | Blanda (salida) | Reciben marco de fases, criterios y dependencias desde este módulo |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M133** — Gestión del Proyecto | Roadmap de gestión |
+| **M135** — Riesgos del Proyecto | Base para riesgos del proyecto |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M133** — Gestión del Proyecto | Depende de este módulo |
+| **M135** — Riesgos del Proyecto | Depende de este módulo |
+

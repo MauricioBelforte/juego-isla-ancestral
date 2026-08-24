@@ -80,3 +80,24 @@ Definir el sistema de vegetación de la isla: catálogo de especies por bioma (2
 6. La densidad de vegetación en pendientes/playas/alturas respeta los clamps.
 7. El costo de MultiMesh (memoria + draw calls) queda dentro del presupuesto M61/M62.
 8. La regeneración de árboles talados ocurre solo por eventos de juego y no rompe el determinismo del chunk.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Vegetación por bioma |
+| **M045** — Arte 3D | Modelos de vegetación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M045** — Arte 3D | Depende de este módulo |
+

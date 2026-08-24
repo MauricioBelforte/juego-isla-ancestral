@@ -119,3 +119,41 @@ Aurora necesita un **flujo del tiempo** que organice la rutina del pueblo (NPC, 
 | Sin presión de tiempo | Los eventos duran 3 días (suficiente) |
 | Sin penalización por no participar | Los NPCs no se enojan |
 | Sin bloqueo de contenido | Todo accesible sin participar en festivales |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | GameClock servicio puro |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M027** — Islas del Mundo | Usado por islas del mundo |
+| **M030** — Reloj en Tiempo Real | Reloj en tiempo real |
+| **M031** — Ciclo Día/Noche | Ciclo día/noche |
+| **M032** — Clima | Clima |
+| **M033** — Agricultura | Agricultura |
+| **M074** — Eventos | Eventos |
+| **M162** — Diálogos Contextuales de NPCs | Diálogos por hora/estación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M027** — Islas del Mundo | Este módulo lo necesita |
+| **M030** — Reloj en Tiempo Real | Este módulo lo necesita |
+| **M031** — Ciclo Día/Noche | Este módulo lo necesita |
+| **M032** — Clima | Este módulo lo necesita |
+| **M033** — Agricultura | Este módulo lo necesita |
+| **M074** — Eventos | Este módulo lo necesita |
+| **M162** — Diálogos Contextuales de NPCs | Este módulo lo necesita |
+

@@ -112,3 +112,22 @@ El proyecto "Isla Ancestral" es un desarrollo indie de mundo voxel cozy con iden
 5. El checklist del módulo tiene mínimo 110 ítems verificables.
 6. La documentación aclara que la política de Steam puede cambiar y debe verificarse al momento de publicar.
 7. El módulo 78 (Legal-PI) queda referenciado como dependencia y las reglas no lo contradicen.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

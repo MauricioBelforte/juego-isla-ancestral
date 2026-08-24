@@ -39,3 +39,22 @@ Convertir cada acción en una **sensación física placentera** (pilar cozy): mi
 3. Mapa sensación→capas de sonido (qué capas se apilan en cada acción).
 4. Sincronía con keyframes de M34 definida.
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M043** — Efectos de Sonido | ASMR con SFX |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M043** — Efectos de Sonido | Depende de este módulo |
+

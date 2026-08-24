@@ -67,3 +67,31 @@ El mundo voxel de la isla debe entregar los materiales que el jugador necesita p
 5. El estado de todos los nodos persiste entre sesiones (guardado/recarga).
 6. En una sesión de prueba de 3 días de juego (M114), el jugador siempre encuentra material para su crafting inmediato (M16).
 7. Rendimiento estable con el mundo poblado: sin picos de draw calls ni spawns masivos simultáneos (M61).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M014** — Inventario | Recursos almacenados |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M016** — Crafting | Usado por crafting |
+| **M038** — Economía | Usado por economía |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M014** — Inventario | Depende de este módulo |
+| **M016** — Crafting | Este módulo lo necesita |
+| **M038** — Economía | Este módulo lo necesita |
+

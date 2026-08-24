@@ -73,3 +73,29 @@ Definir el **plan de plataformas** del juego: matriz de análisis (costes, certi
 3. Decisiones técnicas (Linux/macOS, Steam Deck, cross-save).
 4. Tabla de costes por plataforma.
 5. Checklist de certificación por plataforma (feed a M142).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Soporte multiplataforma |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M097** — Steam / Store Page | Usado por steam / store page |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M097** — Steam / Store Page | Este módulo lo necesita |
+

@@ -208,3 +208,29 @@ Nivel 1: Tienda básica (5 slots, 1 NPC/día)
 - Pagan precio que el jugador fijó
 - Si no hay stock, no vienen
 - La reputación de la tienda crece con las ventas (desbloquea NPCs especiales)
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M038** — Economía | Tiendas con precios |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M160** — Diseño de Ubicaciones del Mundo | Usado por diseño de ubicaciones del mundo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M038** — Economía | Depende de este módulo |
+| **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
+

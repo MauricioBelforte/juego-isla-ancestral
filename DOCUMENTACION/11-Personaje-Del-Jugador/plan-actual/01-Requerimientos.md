@@ -181,3 +181,44 @@ Basado en principios de diseño de juegos cosy (Tsuki, Animal Crossing, Stardew 
 | M34 (Pesca) | Pesca idle genera pescados de calidad baja |
 | M38 (Economía) | Los ingresos pasivos se suman al balance |
 | M156 (Terrenos) | El personaje busca terreno seguro en modo pasivo |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | FSM, hitbox, interacción |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M012** — Cámara | Cámara |
+| **M013** — Herramientas | Herramientas |
+| **M014** — Inventario | Inventario |
+| **M019** — NPC y Vecinos | Usado por npc y vecinos |
+| **M048** — Animación | Animación |
+| **M053** — UI/UX | UI/UX |
+| **M070** — Interacciones | Interacciones |
+| **M137** — Prototipo | Prototipo |
+| **M155** — Vestimenta y Accesorios | Vestimenta |
+| **M156** — Terrenos y Movimiento Diferenciado | Terrenos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M012** — Cámara | Este módulo lo necesita |
+| **M013** — Herramientas | Este módulo lo necesita |
+| **M014** — Inventario | Este módulo lo necesita |
+| **M019** — NPC y Vecinos | Este módulo lo necesita |
+| **M048** — Animación | Este módulo lo necesita |
+| **M053** — UI/UX | Este módulo lo necesita |
+| **M070** — Interacciones | Este módulo lo necesita |
+

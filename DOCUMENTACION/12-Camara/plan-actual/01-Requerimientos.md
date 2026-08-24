@@ -37,3 +37,22 @@ La cámara debe **acompañar** al personaje en tercera persona sin marear al jug
 2. Spring-arm con colisión especificado (radio, margen, lerp).
 3. Modos de cámara (exploración, construcción, diálogo, cutscene, minimapa) con reglas de activación.
 4. Sin contradicciones con M11 (pivot, hitbox) ni con la filosofía cozy.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Cámara seguimiento |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+

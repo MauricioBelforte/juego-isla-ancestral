@@ -50,3 +50,22 @@ Un mundo cozy voxel con decenas de bloques, props, NPCs, animales y decoración 
 5. Presupuesto de memoria (M62) y frame budget (M61) respetados tras la entrada de los assets de prueba.
 6. Edge cases cubiertos: asset gigante, textura sin comprimir, nombre conflictivo, asset discontinuado.
 7. Delegable para implementación junto con la primera tanda de assets de M45.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Pipeline de assets 3D |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+

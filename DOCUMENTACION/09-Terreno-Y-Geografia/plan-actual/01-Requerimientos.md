@@ -35,3 +35,22 @@ El mundo voxel necesita **geografía con intención**: las formaciones de Aurora
 2. Recetas geográficas de Aurora (isla inicial) definidas con referencia a posición.
 3. Reglas de transición entre biomas establecidas.
 4. Mapa geográfico de Aurora esbozado (zonas y puntos de interés).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Biomas, terreno, formaciones |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+

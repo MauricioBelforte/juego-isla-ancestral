@@ -86,3 +86,24 @@ Definir el sistema de agua de la isla: catálogo de tipos (océano, río, lago, 
 6. El agua subterránea y los puzzles de compuertas/canales funcionan (M24).
 7. La natación (M11) flota suave, sin clipping, con chapoteo correcto.
 8. El presupuesto de render (mesh, reflejos, transparencia) se verifica con el validador.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Agua por chunks |
+| **M024** — Templos y Puzzles | Base para templos y puzzles |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M024** — Templos y Puzzles | Depende de este módulo |
+

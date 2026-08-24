@@ -49,3 +49,22 @@ El proyecto necesita **principios innegociables** que guíen todas las decisione
 3. Ejemplos de aplicación de cada principio.
 4. Proceso de revisión de decisiones contra principios.
 5. Mecanismo para registrar desviaciones justificadas.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Principios innegociables del proyecto |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+

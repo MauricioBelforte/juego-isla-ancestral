@@ -104,3 +104,33 @@ Diseñar el sistema de progresión central de la isla Aurora: un **registry de h
 - El pueblo se siente vivo: la reputación y la amistad (M20) son progresión social, no numérica.
 - Ritmo accesible: la curva temprana es rápida (primeras horas con desbloqueos frecuentes) y luego se vuelve una meseta cómoda (M02/M145).
 - El juego es cozy single-player 100% local; no hay progresión en red.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | Historia como guía |
+| **M038** — Economía | Economía como recompensa |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M072** — Sistema de Logros | Logros |
+| **M073** — Coleccionables | Coleccionables |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+| **M038** — Economía | Depende de este módulo |
+| **M072** — Sistema de Logros | Este módulo lo necesita |
+| **M073** — Coleccionables | Este módulo lo necesita |
+

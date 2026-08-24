@@ -59,3 +59,22 @@ El proyecto necesita un sistema de **instalador** para distribución del juego e
 13. Validación de instalación limpia (instalación funciona en máquina sin el juego).
 14. Validación de actualización (actualización desde versión anterior funciona).
 15. Validación de rollback (rollback a versión anterior funciona si actualización falla).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M117** — Build System | Usado por build system |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M117** — Build System | Este módulo lo necesita |
+

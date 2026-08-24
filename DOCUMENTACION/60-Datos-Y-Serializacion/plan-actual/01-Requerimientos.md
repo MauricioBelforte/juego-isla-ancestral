@@ -84,3 +84,22 @@ Definir e implementar la capa de datos del juego: un **DataStore** central (auto
 5. Save corrupto (bit flips de prueba) detectado por checksum, sin crash y con mensaje de recuperación (backup).
 6. ConfigFile de M58/90/91 leído al arranque y escrito al cambiar opciones.
 7. Tiempos de guardado/carga dentro de los objetivos RN1/RN2 medidos con `Time.get_ticks_msec()` en test.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M059** — Guardado | Base para guardado |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M059** — Guardado | Depende de este módulo |
+

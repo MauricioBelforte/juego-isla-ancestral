@@ -44,3 +44,22 @@ La isla necesita vida narrativa más allá de la Historia Principal (M22): histo
 2. Catálogo de 40+ cadenas con contexto verificables (cada cadena referencia un lugar/vecino real del mundo).
 3. Suite de testings: cadenas completables de punta a punta, cero softlocks, recompensas únicas.
 4. Las consecuencias y diálogos posteriores son persistentes y verificables.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | Secuelas de la historia |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+

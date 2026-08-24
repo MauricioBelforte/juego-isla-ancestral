@@ -82,3 +82,29 @@ Expandir el Vertical Slice a un **mundo Pre-Alpha**: Aurora completa (primer bio
 8. La sesión de playtest (RF13) termina con ≥ 80% de testers queriendo seguir jugando.
 9. La decisión GO/NO-GO Alpha (RF14) está documentada y firmada.
 10. El log en `Logs/` está generado y firmado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M138** — Vertical Slice | Pre-Alpha sobre vertical slice |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M140** — Alpha | Alpha |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M138** — Vertical Slice | Depende de este módulo |
+| **M140** — Alpha | Este módulo lo necesita |
+

@@ -86,3 +86,39 @@ Crear el prototipo del juego: un mapa pequeño jugable con movimiento y cámara,
 8. La decisión GO/NO-GO está documentada con criterios objetivos (RF17).
 9. No hay contenido que no sirva a la pregunta del núcleo (regla del plan maestro).
 10. El log en `Logs/` está generado y firmado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Base para mundo voxel |
+| **M011** — Personaje del Jugador | Prototipo con jugador |
+| **M014** — Inventario | Inventario en prototipo |
+| **M059** — Guardado | Base para guardado |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M114** — Playtest | Usado por playtest |
+| **M138** — Vertical Slice | Usado por vertical slice |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M014** — Inventario | Depende de este módulo |
+| **M017** — Construcción | Comparten dependencias (M008, M014) |
+| **M053** — UI/UX | Comparten dependencias (M011, M014) |
+| **M059** — Guardado | Depende de este módulo |
+| **M114** — Playtest | Este módulo lo necesita |
+| **M138** — Vertical Slice | Este módulo lo necesita |
+

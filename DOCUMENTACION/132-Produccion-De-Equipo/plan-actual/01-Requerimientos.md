@@ -50,3 +50,22 @@ El equipo de desarrollo de Isla Ancestral necesita un marco de trabajo para la p
 - [ ] Proceso de decisiones documentado
 - [ ] Protocolo de comunicación creado
 - [ ] Herramientas de gestión seleccionadas
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M134** — Presupuesto | Base para presupuesto |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M134** — Presupuesto | Depende de este módulo |
+

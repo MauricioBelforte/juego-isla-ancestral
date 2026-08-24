@@ -78,3 +78,22 @@ Tomar y documentar la decisión de producto con argumentos verificables, Y dejar
 4. El contrato exige anti-griefing y progreso individual para cualquier MP futuro.
 5. El análisis de costes de servidores está documentado con estimaciones.
 6. `validate_mp_contract.gd` existe y pasa sin errores.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M077** — Online y Red | Usado por online y red |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M077** — Online y Red | Este módulo lo necesita |
+

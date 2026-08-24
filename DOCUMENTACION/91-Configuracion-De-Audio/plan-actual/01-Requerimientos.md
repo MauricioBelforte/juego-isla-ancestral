@@ -52,3 +52,22 @@ El proyecto necesita **configuración de audio** para permitir al usuario ajusta
 6. Audio balanceado y sin clipping.
 7. Subtítulos legibles y sincronizados.
 8. Audio 3D funcionando correctamente.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Configuración de audio |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

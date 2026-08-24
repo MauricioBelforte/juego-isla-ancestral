@@ -119,3 +119,29 @@ Crear el framework de pruebas automatizadas del juego: seleccionar el framework 
 10. Tests de regresión ejecutados sobre flujos estables (RF13).
 11. Documentación completa del módulo (5 archivos de plan-inicial y plan-actual idénticos).
 12. Módulo delegable para implementación por otro agente.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M111** — Código de Calidad | Base para código de calidad |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M113** — Pruebas de Stress | Usado por pruebas de stress |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M111** — Código de Calidad | Depende de este módulo |
+| **M113** — Pruebas de Stress | Este módulo lo necesita |
+

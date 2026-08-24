@@ -42,3 +42,43 @@ La isla ancestral necesita una Historia Principal completa y coherente con el mu
 2. La historia se juega de punta a punta sin exposición excesiva (tests de guion: % de diálogo por escena > límite).
 3. Los 3 finales (principal, alternativos, secreto) son alcanzables según reglas documentadas.
 4. Cero softlocks de trama (todo gating verificable por M66).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M021** — Diálogos | Trama principal en nodos |
+| **M028** — Viajes | Viajes narrativos |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M023** — Historias Secundarias | Historias secundarias |
+| **M028** — Viajes | Usado por viajes |
+| **M066** — Anti-Softlock | Anti-softlock |
+| **M071** — Progresión | Progresión |
+| **M075** — Postgame | Postgame |
+| **M147** — World Building | World building |
+| **M157** — Medios de Transporte | Transporte narrativo |
+| **M162** — Diálogos Contextuales de NPCs | Usado por diálogos contextuales de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M021** — Diálogos | Depende de este módulo |
+| **M023** — Historias Secundarias | Este módulo lo necesita |
+| **M028** — Viajes | Depende de este módulo |
+| **M066** — Anti-Softlock | Este módulo lo necesita |
+| **M071** — Progresión | Este módulo lo necesita |
+| **M075** — Postgame | Este módulo lo necesita |
+| **M147** — World Building | Este módulo lo necesita |
+| **M157** — Medios de Transporte | Este módulo lo necesita |
+

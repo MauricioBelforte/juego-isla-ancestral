@@ -45,3 +45,24 @@ El jugador necesita una actividad calmada, opcional y con recompensa clara dentr
 3. Reglas cozy verificadas: sin muerte por sequía, sin muerte por invierno, sin hambre castigadora, sin destrucción por NPC.
 4. Presupuesto visual y de evaluación diaria definido y acotado (M61).
 5. Contrato API estable y delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M017** — Construcción | Base para construcción |
+| **M029** — Tiempo y Calendario | Cultivos por estación |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M017** — Construcción | Depende de este módulo |
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+

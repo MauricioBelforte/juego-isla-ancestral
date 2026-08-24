@@ -72,3 +72,29 @@ Definir y documentar el **plan de marketing** del juego: identidad visual y logo
 - **Aplican:** M97 (Steam store page — wishlist), M100 (community), M138 (Vertical Slice → demo), M143 (lanzamiento), M95 (precios — sin descuentos agresivos antes de 6 meses), M126/M127 (marketing legal, copyright), M45/M46/M47 (arte/identidad).
 - Presupuesto de marketing limitado: el outreach es orgánico + baja inversión en boosted posts solo si la tasa de conversión lo justifica.
 - Hora local del estudio en foco de la audiencia target (PC/indie, zonas EU/US).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M097** — Steam / Store Page | Base para steam / store page |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M100** — Community Management | Usado por community management |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M097** — Steam / Store Page | Depende de este módulo |
+| **M100** — Community Management | Este módulo lo necesita |
+

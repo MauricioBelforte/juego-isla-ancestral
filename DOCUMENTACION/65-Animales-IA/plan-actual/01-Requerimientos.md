@@ -43,3 +43,24 @@ La isla ancestral necesita fauna viva que habite cada bioma (sección 35 del pla
 2. Los 19 puntos de la sección 64 cumplidos, verificables con pruebas automatizadas (06-Plan-Testings).
 3. Población estable: nunca crece sin tope ni colapsa por un solo despawn.
 4. Sin errores en Consola ni bloqueos al entrar en Play Mode.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M036** — Fauna | IA de animales |
+| **M064** — IA de NPC | Patrones de IA reutilizados |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M036** — Fauna | Depende de este módulo |
+| **M064** — IA de NPC | Depende de este módulo |
+

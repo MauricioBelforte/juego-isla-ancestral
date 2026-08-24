@@ -48,3 +48,24 @@ El juego Isla Ancestral necesita un sistema de actualizaciones post-lanzamiento,
 - [ ] Compatibilidad de saves entre versiones
 - [ ] Proceso de rollback definido
 - [ ] Integración con plataformas (Steam, etc.)
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M059** — Guardado | Base para guardado |
+| **M117** — Build System | Updates con build |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M059** — Guardado | Depende de este módulo |
+| **M117** — Build System | Depende de este módulo |
+

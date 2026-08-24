@@ -92,3 +92,35 @@ Total del catálogo inicial: **27 especies** (expandibles vía `especies/*.tres`
 6. El presupuesto de la sección 5 se respeta en el mapa completo (profiler M113).
 7. El diario/registro persiste entre partidas y migra su formato.
 8. Cero colisiones de rendimiento ni excepciones en console tras 3 días simulados de recorrido (M114).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | Sistema de fauna y comportamientos |
+| **M031** — Ciclo Día/Noche | Base para ciclo día/noche |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M037** — Museos y Colecciones | Usado por museos y colecciones |
+| **M065** — Animales IA | Usado por animales ia |
+| **M073** — Coleccionables | Usado por coleccionables |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M031** — Ciclo Día/Noche | Depende de este módulo |
+| **M037** — Museos y Colecciones | Este módulo lo necesita |
+| **M065** — Animales IA | Este módulo lo necesita |
+| **M073** — Coleccionables | Este módulo lo necesita |
+

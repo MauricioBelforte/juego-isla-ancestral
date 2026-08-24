@@ -85,3 +85,22 @@ Definir el sistema de fotografía de la isla: modo fotográfico con cámara libr
 6. La galería del diario (M55) muestra las fotos del álbum sin recargar la escena.
 7. Compartir requiere confirmación y el archivo no contiene datos personales.
 8. El modo foto y la captura no degradan el rendimiento (M61) mediblemente.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Fotografía en UI |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

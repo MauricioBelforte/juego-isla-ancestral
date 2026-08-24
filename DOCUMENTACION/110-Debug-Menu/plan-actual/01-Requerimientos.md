@@ -54,3 +54,29 @@ El desarrollo necesita un **menú de debug accesible en runtime** para probar fu
 3. Todas las funciones de debug implementadas y probadas.
 4. Integración con M102 (Bug Tracking) para exportar diagnóstico.
 5. Visualizaciones debug (colliders, FPS, chunks) funcionales y optimizadas.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Panel de debug |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M101** — QA General | Usado por qa general |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M101** — QA General | Este módulo lo necesita |
+

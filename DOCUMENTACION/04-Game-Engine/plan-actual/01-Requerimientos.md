@@ -43,3 +43,44 @@ El motor define el costo, la viabilidad técnica del voxel (el riesgo #1 del pro
 
 - La decisión NO puede invertirse después del hito M1 sin re-planificación completa.
 - El GDD exige voxel a 60 FPS: esa es la vara mínima del motor.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Decisiones de motor y plataforma |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M005** — Lenguaje y Programación | Convenciones GDScript |
+| **M007** — Arquitectura General | Arquitectura del engine |
+| **M057** — Interfaz de Control | Sistema de entrada |
+| **M096** — Plataformas | Multiplataforma |
+| **M103** — Logging | Logging |
+| **M109** — Herramientas Internas | Herramientas internas |
+| **M110** — Debug Menu | Debug menu |
+| **M111** — Código de Calidad | Código de calidad |
+| **M115** — Hardware | Hardware |
+| **M154** — Visión del Agente | Visión del agente |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+| **M005** — Lenguaje y Programación | Este módulo lo necesita |
+| **M007** — Arquitectura General | Este módulo lo necesita |
+| **M057** — Interfaz de Control | Este módulo lo necesita |
+| **M096** — Plataformas | Este módulo lo necesita |
+| **M103** — Logging | Este módulo lo necesita |
+| **M109** — Herramientas Internas | Este módulo lo necesita |
+| **M110** — Debug Menu | Este módulo lo necesita |
+

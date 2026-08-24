@@ -130,3 +130,22 @@ El jugador explora una isla ancestral donde avista fauna, pesca, excava fósiles
 | Sin bloqueo de contenido | Todo contenido accesible sin completar salas |
 | Sin exigencia de colección completa | Las recompensas son cosméticas |
 | Sin pérdida de items | Los ítems donados se exhiben (no se pierden) |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M036** — Fauna | Base para fauna |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M036** — Fauna | Depende de este módulo |
+

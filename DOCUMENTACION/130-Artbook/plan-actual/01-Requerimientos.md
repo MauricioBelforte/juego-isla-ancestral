@@ -97,3 +97,31 @@ El plan maestro (sección #129 ARTBOOK) exige 15 contenidos: arte conceptual, ev
 | M108 Pipeline de Assets | Relación | Capítulo de proceso de producción |
 | M78/M127 Legal PI/Copyright | Relación | Derechos de las piezas incluidas |
 | M59 Guardado / M06 Git | Relación | Respaldo de la carpeta del artbook |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Base para arte 3d |
+| **M046** — Arte 2D | Base para arte 2d |
+| **M128** — Identidad de Marca | Base para identidad de marca |
+| **M129** — Merchandising | Base para merchandising |
+| **M131** — Créditos | Base para créditos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+| **M046** — Arte 2D | Depende de este módulo |
+| **M128** — Identidad de Marca | Depende de este módulo |
+| **M129** — Merchandising | Depende de este módulo |
+| **M131** — Créditos | Depende de este módulo |
+| **M161** — Diseño Visual de NPCs | Comparten dependencias (M045, M046) |
+

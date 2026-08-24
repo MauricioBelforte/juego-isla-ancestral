@@ -43,3 +43,31 @@ La isla ancestral está salpicada de ruinas de la civilización anterior: estruc
 2. El kit de 40 piezas arma los 13 tipos + variantes en el Editor sin escena rota (suite).
 3. Cada ruina tiene su estado persistente y su progresión de descubrimiento.
 4. Cero objetos inaccesibles (integración M66) y cero piezas sin pivote/snap válido (validación en Editor).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M024** — Templos y Puzzles | Base para templos y puzzles |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M019** — NPC y Vecinos | Usado por npc y vecinos |
+| **M026** — Templo Subterráneo | Usado por templo subterráneo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Este módulo lo necesita |
+| **M024** — Templos y Puzzles | Depende de este módulo |
+| **M026** — Templo Subterráneo | Este módulo lo necesita |
+

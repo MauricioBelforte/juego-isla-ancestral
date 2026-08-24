@@ -79,3 +79,22 @@ Memoria predecible y estable: un presupuesto de RAM por sistema, pools reutiliza
 4. Reglas anti-leak y anti-pico verificables en tests (RN2, RN3, RN10).
 5. Integraciones con M08/M41-44/M61/M63 documentadas sin tocar la carpeta 61.
 6. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M061** — Rendimiento | Gestión de memoria |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M061** — Rendimiento | Depende de este módulo |
+

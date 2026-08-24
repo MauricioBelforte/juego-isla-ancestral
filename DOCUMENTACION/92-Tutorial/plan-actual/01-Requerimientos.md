@@ -101,3 +101,24 @@ Que el jugador aprenda las mecánicas esenciales de la isla Aurora (moverse, int
 | RN10 | Estabilidad | Un capítulo roto (sin target, señal nunca emitida) NUNCA bloquea la partida: watchdog + re-programación + descarte seguro. |
 | RN11 | Rejugabilidad | El 92 se re-inicializa limpio en partida nueva; el re-play manual no contamina la partida en curso (snapshot del estado antes de re-jugar). |
 | RN12 | Accesibilidad | Pistas con duración extendida configurable (x1, x2, x4), tamaño de fuente del HUD de tutorial seguible desde M58, y alto contraste opcional. |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Tutorial en UI |
+| **M070** — Interacciones | Base para interacciones |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+| **M070** — Interacciones | Depende de este módulo |
+

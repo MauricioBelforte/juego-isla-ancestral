@@ -40,3 +40,24 @@ Cargar el mundo y los recursos sin congelar el juego: pantallas de carga con pro
 3. Encolado y presupuestos de streaming voxel/océano/subterráneo/islas definidos.
 4. Reglas anti-congelamiento y de descarga (LRU) especificadas.
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Streaming de chunks |
+| **M061** — Rendimiento | Streaming optimizado |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M061** — Rendimiento | Depende de este módulo |
+

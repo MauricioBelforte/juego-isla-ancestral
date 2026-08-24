@@ -49,3 +49,22 @@ El juego Isla Ancestral quiere generar emociones específicas en los jugadores p
 - [ ] Mecánicas emocionales diseñadas
 - [ ] Momentos memorables definidos
 - [ ] Proceso de validación documentado
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M145** — Diseño de Experiencia | Base para diseño de experiencia |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M145** — Diseño de Experiencia | Depende de este módulo |
+

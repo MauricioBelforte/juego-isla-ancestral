@@ -50,3 +50,29 @@ El juego Isla Ancestral necesita un diseño de experiencia (UX) coherente pero n
 - [ ] Arquitectura de información de menús
 - [ ] Sistema de feedback definido
 - [ ] Estándares de accesibilidad establecidos
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Player journey y onboarding |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M146** — Diseño Emocional | Usado por diseño emocional |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+| **M146** — Diseño Emocional | Este módulo lo necesita |
+

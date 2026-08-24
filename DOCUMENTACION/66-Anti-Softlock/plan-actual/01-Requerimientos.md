@@ -42,3 +42,24 @@ Un juego de mundo abierto con misiones, objetos únicos, terreno modificable (M0
 2. **Garantía demostrable:** suite de tests que provoca cada softlock y verifica la recuperación.
 3. Ningún objeto clave queda perdido salvo que la misión lo permita narrativamente.
 4. Sin excepciones en Consola y sin degradar el frame en ninguna escena de la isla.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | Anti-softlock narrativo |
+| **M026** — Templo Subterráneo | Base para templo subterráneo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+| **M026** — Templo Subterráneo | Depende de este módulo |
+

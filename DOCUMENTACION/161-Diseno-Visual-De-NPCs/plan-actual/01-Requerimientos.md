@@ -60,3 +60,39 @@ Definir el diseño visual completo de cada NPC: ropa (sombrero, camisa, pantaló
 5. Tabla resumen de visual por isla creada
 6. Variantes estacionales documentadas para al menos 10 NPCs
 7. Integración con M46 (retratos 2D) verificada
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | NPCs y su visual |
+| **M045** — Arte 3D | Modelos 3D de NPCs |
+| **M046** — Arte 2D | Retratos 2D de NPCs |
+| **M155** — Vestimenta y Accesorios | Ropa de NPCs |
+| **M159** — Catálogo de Objetos | Herramientas en mano (M159) |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M162** — Diálogos Contextuales de NPCs | Usado por diálogos contextuales de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M045** — Arte 3D | Depende de este módulo |
+| **M046** — Arte 2D | Depende de este módulo |
+| **M048** — Animación | Comparten dependencias (M019, M045) |
+| **M130** — Artbook | Comparten dependencias (M045, M046) |
+| **M155** — Vestimenta y Accesorios | Depende de este módulo |
+| **M159** — Catálogo de Objetos | Depende de este módulo |
+| **M162** — Diálogos Contextuales de NPCs | Este módulo lo necesita |
+

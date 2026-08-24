@@ -59,3 +59,22 @@ El proyecto necesita **configuración gráfica** para permitir al usuario ajusta
 6. Configuración guardada en settings (M90).
 7. Configuración aplicada en tiempo real cuando sea posible.
 8. Framerate estable y sin stuttering en preset recomendado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Configuración gráfica |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

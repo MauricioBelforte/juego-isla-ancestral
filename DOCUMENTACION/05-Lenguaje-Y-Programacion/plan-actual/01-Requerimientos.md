@@ -35,3 +35,22 @@ Sin convenciones de lenguaje y código fijadas, cada módulo escribiría a su ma
 2. Guía de convenciones verificable (checklist aplicable a cualquier PR).
 3. Compatible con Godot 4.x (M04) y la arquitectura de M07.
 4. El sistema de eventos global y de errores diseñado (base de M59 Guardado).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Convenciones GDScript y patrones |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+

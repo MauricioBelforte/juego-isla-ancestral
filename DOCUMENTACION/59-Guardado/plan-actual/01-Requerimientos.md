@@ -84,3 +84,37 @@ Definir el sistema de guardado de la isla: guardado automático (por eventos M07
 6. Todos los sistemas listados se guardan y cargan correctamente (mundo, inventario, etc.).
 7. La falta de espacio no pierde el save anterior y avisa claramente.
 8. El guardado manual tiene confirmación y feedback sin bloquear la UI.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | Base para arquitectura general |
+| **M014** — Inventario | Persistencia de inventario |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M060** — Datos y Serialización | Usado por datos y serialización |
+| **M107** — Backups | Usado por backups |
+| **M119** — Actualizaciones | Usado por actualizaciones |
+| **M137** — Prototipo | Usado por prototipo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M014** — Inventario | Depende de este módulo |
+| **M060** — Datos y Serialización | Este módulo lo necesita |
+| **M107** — Backups | Este módulo lo necesita |
+| **M119** — Actualizaciones | Este módulo lo necesita |
+| **M137** — Prototipo | Este módulo lo necesita |
+

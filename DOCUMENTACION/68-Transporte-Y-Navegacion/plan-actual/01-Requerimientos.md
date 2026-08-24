@@ -89,3 +89,24 @@ Definir el sistema de transporte y navegación de la isla: infraestructura físi
 6. Los viajes narrativos (M22) y especiales (M74) funcionan sin fallos.
 7. La coordinación con M69 (fast travel) no duplica rutas ni costes.
 8. La capa de transporte no degrada el rendimiento (M61).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M028** — Viajes | Base para viajes |
+| **M067** — Vehículos | Base para vehículos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M028** — Viajes | Depende de este módulo |
+| **M067** — Vehículos | Depende de este módulo |
+

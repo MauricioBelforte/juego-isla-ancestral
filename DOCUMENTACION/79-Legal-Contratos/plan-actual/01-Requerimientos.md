@@ -61,3 +61,22 @@ Documentar el **marco de contratos** del proyecto: contratos por rol (artistas, 
 - **Aplican:** M78 (propiedad intelectual), M127 (copyright del juego), M41 (música), M45-47 (arte), M21/M147 (escritura/lore), M87 (voces/idiomas), M100 (comunidad — colaboraciones).
 - No constituye asesoría legal definitiva: todos los contratos relevantes requieren revisión de abogado antes de firma (punto 20).
 - La jurisdicción base del estudio es Argentina (o la que corresponda según registro en M78); se documenta el foro.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

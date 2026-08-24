@@ -92,3 +92,31 @@ Crear el sistema de World Building del juego: una biblia de mundo versionada y v
 8. Los refranes/leyendas (RF25) solo revelan verdad parcial (regla de misterio).
 9. Todo texto de la biblia usa ids i18n preparados para localización (M87).
 10. El log en `Logs/` está generado y firmado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M022** — Historia Principal | World building y lore |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M148** — Lore Ambiental | Lore ambiental |
+| **M149** — Nombres y Nomenclatura | Nombres y nomenclatura |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M022** — Historia Principal | Depende de este módulo |
+| **M148** — Lore Ambiental | Este módulo lo necesita |
+| **M149** — Nombres y Nomenclatura | Este módulo lo necesita |
+

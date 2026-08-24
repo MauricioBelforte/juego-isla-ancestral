@@ -95,3 +95,31 @@ Definir el sistema de arte 2D del juego: guía de estilo 2D derivada de la 3D (M
 - Sección 45 "ARTE 2D": logo, iconos, UI, mapas, ilustraciones, retratos, pantallas, botones, inventario, iconos de objetos/materiales/herramientas, símbolos ancestrales, mapas antiguos, textos de ruinas, coleccionables, insignias, emblemas, definición de resolución/formato/atlas/compresión/transparencias y guías de estilo.
 - Plan de producción §4: dirección de arte, paleta pastel, consistencia visual UI ("juego cozy vive y muere por lo agradable que se siente navegar sus menús").
 - M152: calidad > cantidad; performance prioridad sobre visuales.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Estilo 2D hereda del 3D |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M130** — Artbook | Usado por artbook |
+| **M161** — Diseño Visual de NPCs | Usado por diseño visual de npcs |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+| **M130** — Artbook | Este módulo lo necesita |
+| **M161** — Diseño Visual de NPCs | Este módulo lo necesita |
+

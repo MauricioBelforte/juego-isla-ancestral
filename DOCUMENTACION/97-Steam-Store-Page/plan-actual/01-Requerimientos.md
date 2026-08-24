@@ -158,3 +158,33 @@ Crear y mantener la página de Steam de "Isla Ancestral" con el contenido comple
 - RN6: Verificación contra Steamworks: dimensiones, límites de caracteres, formatos de video y reglas de tags se validan contra la documentación vigente de Steam al publicar (Steam puede cambiar estos requisitos).
 - RN7: Accesibilidad (M58): subtítulos en el trailer, texto de alto contraste, sin flash parpadeante en capturas/trailer.
 - RN8: Seguridad legal (M78): sin assets propietarios, música licenciada, nombres registrados verificados; price point sin promesas de contenido posterior obligatorio.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M096** — Plataformas | Base para plataformas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M098** — Trailer | Usado por trailer |
+| **M099** — Marketing | Usado por marketing |
+| **M143** — Lanzamiento | Usado por lanzamiento |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M096** — Plataformas | Depende de este módulo |
+| **M098** — Trailer | Este módulo lo necesita |
+| **M099** — Marketing | Este módulo lo necesita |
+| **M143** — Lanzamiento | Este módulo lo necesita |
+

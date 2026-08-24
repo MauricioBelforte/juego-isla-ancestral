@@ -97,3 +97,35 @@ Herramienta base (T1)
 | Afilada | Brillo sutil en el filo |
 | Templada | Brillo dorado tenue |
 | Encantada | Brillo morado + partículas |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M011** — Personaje del Jugador | Herramientas en mano |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M024** — Templos y Puzzles | Usado por templos y puzzles |
+| **M035** — Minería | Usado por minería |
+| **M070** — Interacciones | Usado por interacciones |
+| **M158** — Herramientas y Desbloqueo de Zonas | Usado por herramientas y desbloqueo de zonas |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M011** — Personaje del Jugador | Depende de este módulo |
+| **M024** — Templos y Puzzles | Este módulo lo necesita |
+| **M035** — Minería | Este módulo lo necesita |
+| **M070** — Interacciones | Este módulo lo necesita |
+| **M158** — Herramientas y Desbloqueo de Zonas | Este módulo lo necesita |
+

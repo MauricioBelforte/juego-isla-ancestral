@@ -48,3 +48,22 @@ El proyecto necesita una **política robusta de backups** para proteger todo el 
 2. Política de backups documentada con frecuencias y ubicaciones.
 3. Plan de recuperación de desastres con procedimientos paso a paso.
 4. Procedimiento de pruebas de restauración definido.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M059** — Guardado | Base para guardado |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M059** — Guardado | Depende de este módulo |
+

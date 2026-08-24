@@ -50,3 +50,29 @@ El proyecto Isla Ancestral necesita gestión presupuestaria pero no hay definici
 - [ ] Proceso de control de gastos documentado
 - [ ] Proyecciones de ingresos calculadas
 - [ ] Punto de equilibrio determinado
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M133** — Gestión del Proyecto | Presupuesto de gestión |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M132** — Producción del Equipo | Usado por producción del equipo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M132** — Producción del Equipo | Este módulo lo necesita |
+| **M133** — Gestión del Proyecto | Depende de este módulo |
+

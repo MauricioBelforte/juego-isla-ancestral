@@ -41,3 +41,31 @@ Dar vida a los habitantes de Aurora sin máquinas de estado tontas ni costosas: 
 3. Presupuesto de agentes y simulación parcial definidos.
 4. Anti-atascos/superposición con reglas concretas.
 5. Delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | IA de NPCs |
+| **M061** — Rendimiento | IA dentro de frame budget |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M065** — Animales IA | Usado por animales ia |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M061** — Rendimiento | Depende de este módulo |
+| **M065** — Animales IA | Este módulo lo necesita |
+

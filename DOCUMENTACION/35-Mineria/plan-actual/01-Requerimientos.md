@@ -45,3 +45,24 @@ Minería cozy en un mundo voxel: vetas de minerales incrustadas en el terreno de
 3. El pico M13 extrae con eficiencia, durabilidad y drops M15 coherentes con su catálogo.
 4. Edge cases cubiertos: veta a medias, respawn con zona ocupada, jugador parado sobre la veta.
 5. Módulo delegable para implementación.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M008** — Mundo Voxel | Extracción de minerales |
+| **M013** — Herramientas | Minería con herramientas |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M008** — Mundo Voxel | Depende de este módulo |
+| **M013** — Herramientas | Depende de este módulo |
+

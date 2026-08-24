@@ -42,3 +42,22 @@ El proyecto necesita revisión legal de marketing. Debe revisar derechos de scre
 6. Influencers revisados (contratos, disclosure).
 7. Contratos promocionales revisados (prensa, plataformas).
 8. Giveaways revisados (normativas locales, impuestos).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

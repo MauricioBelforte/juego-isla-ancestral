@@ -53,3 +53,22 @@ El proyecto necesita un **sistema de crash reporting** para capturar automática
 8. Workflow de corrección de crashes críticos.
 9. Builds de diagnóstico disponibles.
 10. Integración con M103 (Logging) y M102 (Bug Tracking).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M103** — Logging | Base para logging |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M103** — Logging | Depende de este módulo |
+

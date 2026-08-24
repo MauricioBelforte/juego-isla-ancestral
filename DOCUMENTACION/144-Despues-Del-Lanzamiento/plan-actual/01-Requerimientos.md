@@ -54,3 +54,22 @@ Documentar el **plan post-lanzamiento**: revisión de reviews, bugs, rendimiento
 - **Aplican:** M143 (lanzamiento), M142 (RC/hotfix), M120 (DLC), M121 (soporte), M100 (comunidad), M105 (telemetría), M102 (bugs), M93 (balance), M92 (tutorial), M94 (retención), M107 (backups), M95 (monetización — precios/descuentos).
 - La cadencia post-launch se define por fases: D1-D7 (caliente), semanas 1-4, trimestres 1-2 (hasta V2 GATE).
 - Sin promesas públicas de fechas de parches que no estén en el roadmap (M136).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M143** — Lanzamiento | Post-lanzamiento |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M143** — Lanzamiento | Depende de este módulo |
+

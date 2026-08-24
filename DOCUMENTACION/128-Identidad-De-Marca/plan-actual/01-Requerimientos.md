@@ -51,3 +51,29 @@ El juego Isla Ancestral necesita una identidad de marca coherente pero no hay de
 - [ ] Tipografía oficial definida
 - [ ] Manual de marca creado
 - [ ] Estrategia de trademark documentada
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M130** — Artbook | Usado por artbook |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+| **M130** — Artbook | Este módulo lo necesita |
+

@@ -51,3 +51,24 @@ El módulo 45 (Arte 3D) define la creación de modelos voxel y low-poly, pero no
 - [ ] Inventario de modelos y sus licencias
 - [ ] Créditos de artistas 3D documentados
 - [ ] Proceso de verificación pre-build
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Base para arte 3d |
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

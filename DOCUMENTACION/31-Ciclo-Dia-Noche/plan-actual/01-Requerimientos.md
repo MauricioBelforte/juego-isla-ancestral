@@ -41,3 +41,31 @@ Definir cómo la luz, el cielo y el ambiente cambian con la hora del día (GameC
 3. Consumidores definidos con su comportamiento exacto por franja.
 4. Regla anti-oscuridad documentada con valores concretos.
 5. Módulo marcado delegable (implementación → AGENTE DELEGADO tras M29/M49).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M029** — Tiempo y Calendario | Ciclo día/noche |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M032** — Clima | Usado por clima |
+| **M036** — Fauna | Usado por fauna |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M029** — Tiempo y Calendario | Depende de este módulo |
+| **M032** — Clima | Este módulo lo necesita |
+| **M036** — Fauna | Este módulo lo necesita |
+

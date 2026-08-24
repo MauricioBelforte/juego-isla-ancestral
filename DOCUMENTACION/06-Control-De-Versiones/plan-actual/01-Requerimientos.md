@@ -35,3 +35,22 @@ El repo ya existe y funciona (commits e044c29 → 7dbe1b6), pero sin política e
 2. Política de ramas escrita y aplicable desde el próximo módulo.
 3. .gitignore verificado contra Godot (M04) y los binarios del motor.
 4. Changelog creado con las versiones documentadas hasta hoy.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Flujos de versionado |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+

@@ -35,3 +35,22 @@ El juego "Isla Ancestral" necesita obtener clasificación por edades (rating) en
 - **Contenido del juego debe ser compatible con rating objetivo (Everyone o Teen)**
 - **Costos de certificación contemplados en M134 Presupuesto**
 - **Idioma: Español (documentación), Inglés (submissions oficiales)**
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M078** — Legal — Propiedad Intelectual | Base para legal — propiedad intelectual |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M078** — Legal — Propiedad Intelectual | Depende de este módulo |
+

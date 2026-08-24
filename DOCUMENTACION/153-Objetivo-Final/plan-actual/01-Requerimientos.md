@@ -70,3 +70,22 @@ Convertir los 19 objetivos en un **contrato de visión verificable**: cada objet
 4. El Control Final (M150) usa este contrato como lista de verificación.
 5. El QA (M113/M101) incluye la "prueba de visión" (O1-O19) en cada playtest importante.
 6. Ningún objetivo contradice los principios de M151 (cero combate, cero FOMO, sin grind).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M151** — Control Final | Base para control final |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M151** — Control Final | Depende de este módulo |
+

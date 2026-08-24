@@ -159,3 +159,33 @@ Definir un **sistema de gestión del proyecto** simple, gratuito y sostenible qu
 | Dependencia total del fundador | Medio | Plan de continuidad y documentación autoexplicativa |
 | Pérdida de datos de gestión | Medio | Repositorio git + backups (M107) |
 | Tablero abandonado (herramienta sin mantenimiento) | Bajo | Estados viven en el repo (Markdown); el tablero es espejo opcional |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M001** — Fundamentos del Proyecto | Estructura de gestión |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M134** — Presupuesto | Presupuesto |
+| **M135** — Riesgos del Proyecto | Riesgos |
+| **M136** — Roadmap | Roadmap |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M001** — Fundamentos del Proyecto | Depende de este módulo |
+| **M134** — Presupuesto | Este módulo lo necesita |
+| **M135** — Riesgos del Proyecto | Este módulo lo necesita |
+| **M136** — Roadmap | Este módulo lo necesita |
+

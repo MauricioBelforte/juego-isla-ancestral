@@ -73,3 +73,22 @@ Diseñar e implementar el **sistema integral de menús** del juego: shell comple
 3. Persistencia de ajustes local.
 4. Ring de navegación gamepad/mouse con foco visible.
 5. Guía de estilo de menús (M06/M49) para las pantallas.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M053** — UI/UX | Menús |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M053** — UI/UX | Depende de este módulo |
+

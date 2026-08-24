@@ -72,3 +72,24 @@ Los agentes de IA que documentan e implementan Isla Ancestral **no pueden ver el
 - [ ] Existe una matriz de decisión "qué vía usar según el escenario".
 - [ ] El checklist tiene ≥100 ítems verificables.
 - [ ] plan-actual/ es espejo idéntico de plan-inicial/.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Vías de visión del agente |
+| **M103** — Logging | Base para logging |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+| **M103** — Logging | Depende de este módulo |
+

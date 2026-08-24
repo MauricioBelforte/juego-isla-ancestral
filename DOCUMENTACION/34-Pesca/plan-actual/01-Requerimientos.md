@@ -116,3 +116,22 @@ Implementar una pesca cozy en un mundo voxel (Isla Ancestral): el jugador equipa
 | Sin presión de tiempo | La pesca idle no tiene límite |
 | Sin bloqueo de contenido | Todos los peces accesibles sin enciclopedia |
 | Sin exigencia de skill | El minijuego es indulgente |
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M032** — Clima | Base para clima |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M032** — Clima | Depende de este módulo |
+

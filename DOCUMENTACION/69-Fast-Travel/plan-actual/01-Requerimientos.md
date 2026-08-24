@@ -48,3 +48,29 @@ El jugador necesita desplazarse eficientemente entre áreas del mundo sin fatiga
 6. Integración con M157 (Medios de Transporte) definida.
 7. Sistema de eventos aleatorios durante viajes documentado.
 8. Sistema de misterios por ruta definido.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M028** — Viajes | Base para viajes |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M157** — Medios de Transporte | Usado por medios de transporte |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M028** — Viajes | Depende de este módulo |
+| **M157** — Medios de Transporte | Este módulo lo necesita |
+

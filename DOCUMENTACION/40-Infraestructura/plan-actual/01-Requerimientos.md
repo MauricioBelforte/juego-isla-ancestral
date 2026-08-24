@@ -106,3 +106,22 @@ Definir la infraestructura técnica del juego: los autoloads CORE con su orden d
 - M07 define las reglas anti-circulares: un script de dominio solo importa core, data y dominios inferiores; EventBus no importa dominios; GameState no importa servicios.
 - M38 define los autoloads de economía que esta infraestructura debe registrar y ordenar.
 - AGENTS.md §9 exige separación de responsabilidades: UI solo llama funciones expuestas por managers/servicios (singletons o service locators).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M038** — Economía | Infraestructura económica |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M038** — Economía | Depende de este módulo |
+

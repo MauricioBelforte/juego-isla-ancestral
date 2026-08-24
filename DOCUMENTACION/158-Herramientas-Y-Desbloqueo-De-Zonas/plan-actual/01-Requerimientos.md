@@ -203,3 +203,28 @@ Día 41+: Post-game
 6. **El jugador puede quedarse en cualquier isla:** construir casa y trabajar allí
 7. **El comercio inter-islas Motiva los viajes:** productos de una isla se venden mejor en otra
 8. **Premium acelera pero no reemplaza:** el jugador premium juntar dinero más rápido pero SIEMPRE debe viajar
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M013** — Herramientas | Herramientas T1-T4 |
+| **M027** — Islas del Mundo | Gates por isla |
+| **M028** — Viajes | Gates por viaje |
+| **M038** — Economía | Precios de herramientas |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M013** — Herramientas | Depende de este módulo |
+| **M027** — Islas del Mundo | Depende de este módulo |
+| **M028** — Viajes | Depende de este módulo |
+| **M038** — Economía | Depende de este módulo |
+

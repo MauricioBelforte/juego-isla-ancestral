@@ -93,3 +93,31 @@ Definir el sistema de aseguramiento de calidad manual del juego: un checklist ma
 7. Coordinación con M114 (playtesting) y con M112 (tests automáticos) documentada.
 8. Guía de QA para agentes (verificación post-tarea) escrita y alineada con la sección 12 del AGENTS.md.
 9. Checklist del módulo (05-Checklist.md) con 125+ ítems completados.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M110** — Debug Menu | Base para debug menu |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M102** — Bug Tracking | Usado por bug tracking |
+| **M114** — Playtest | Usado por playtest |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M102** — Bug Tracking | Este módulo lo necesita |
+| **M110** — Debug Menu | Depende de este módulo |
+| **M114** — Playtest | Este módulo lo necesita |
+

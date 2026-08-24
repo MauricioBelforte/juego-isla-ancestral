@@ -64,3 +64,22 @@ Diseñar el sistema de **retención amable** de "Isla Ancestral": objetivos por 
 3. Sistema de recompensas acumuladas (sin expiración).
 4. Auditoría anti-FOMO (script de scan + código de revisión).
 5. Contenido de postgame (≥ 5 h) especificado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M093** — Balance | Retención sobre balance |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M093** — Balance | Depende de este módulo |
+

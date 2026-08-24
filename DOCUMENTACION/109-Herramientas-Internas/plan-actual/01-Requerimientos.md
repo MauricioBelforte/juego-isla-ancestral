@@ -61,3 +61,22 @@ Diseñar y documentar el **toolset interno de desarrollo**: 14 editores (bloques
 - **Aplican:** M04 (arquitectura/asmdef), M08-M10 (voxel/biomas/mundo), M16-M26 (crafting/construcción/misiones/templos), M31-M39 (tiempo/clima/economía), M54 (mapa), M57/M58, M108 (pipeline de datos), M110 (debug menu), M61/M62 (rendimiento/memoria).
 - Los editores NUNCA se empaquetan: se compila solo en el Editor (Unity asmdef `Editor` + `#if UNITY_EDITOR`).
 - Prioridad de implementación: datos primero (bloques/biomas/NPC/diálogos/recetas), luego rutinas avanzadas (economía/puzzles/ruinas).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M004** — Game Engine | Editores del editor |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M004** — Game Engine | Depende de este módulo |
+

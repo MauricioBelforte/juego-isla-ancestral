@@ -42,3 +42,29 @@ El proyecto necesita una estrategia de **merchandising** para productos físicos
 6. Soundtrack diseñado (tracks originales, remasters).
 7. Peluches diseñados (prototipos, producción).
 8. Figuras diseñadas (prototipos, producción).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M142** — Release Candidate | Base para release candidate |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M130** — Artbook | Usado por artbook |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M130** — Artbook | Este módulo lo necesita |
+| **M142** — Release Candidate | Depende de este módulo |
+

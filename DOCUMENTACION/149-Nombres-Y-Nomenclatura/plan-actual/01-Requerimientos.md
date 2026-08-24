@@ -53,3 +53,29 @@ Sin un sistema, cada desarrollador nombrará diferente, generando inconsistencia
 - [ ] Convenciones de código documentadas
 - [ ] Tabla de referencia creada
 - [ ] Proceso de validación establecido
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M147** — World Building | Nombres en world building |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M150** — Diseño Sonoro Narrativo | Diseño sonoro narrativo |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M147** — World Building | Depende de este módulo |
+| **M150** — Diseño Sonoro Narrativo | Este módulo lo necesita |
+

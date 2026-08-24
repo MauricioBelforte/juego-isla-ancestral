@@ -94,3 +94,22 @@ Definir el sistema de texturas y materiales de la isla: catálogo de superficies
 - Sección 46 "TEXTURAS Y MATERIALES": Tierra, Césped, Piedra, Arena, Arcilla, Madera, Metal, Cristal, Hielo, Lava, Agua, Coral, Musgo, Ruinas, Paredes, Pisos, Techos, Muebles, Ropa, Herramientas, Vehículos, Vegetación, Materiales ancestrales, Materiales luminosos, Variantes por bioma.
 - Plan de producción §4: paleta por bioma, coherencia visual, low-poly redondeado en materiales.
 - M152: performance prioridad sobre visuales; licencias de assets claras.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M045** — Arte 3D | Texturas de modelos |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M045** — Arte 3D | Depende de este módulo |
+

@@ -84,3 +84,33 @@ Crear el Vertical Slice: la primera zona completa del juego (una esquina de Auro
 8. El tutorial (M92) guía sin texto y sin bloquear la libertad.
 9. Todos los assets del slice cumplen el pipeline estándar (M108/M46/M47).
 10. El log en `Logs/` está generado y firmado.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | NPCs en vertical slice |
+| **M026** — Templo Subterráneo | Base para templo subterráneo |
+| **M137** — Prototipo | Base para prototipo |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M139** — Pre-Alpha | Pre-Alpha |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M026** — Templo Subterráneo | Depende de este módulo |
+| **M137** — Prototipo | Depende de este módulo |
+| **M139** — Pre-Alpha | Este módulo lo necesita |
+

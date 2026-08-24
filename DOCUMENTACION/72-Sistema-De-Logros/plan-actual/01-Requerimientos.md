@@ -99,3 +99,22 @@ Diseñar el sistema de logros de la isla Aurora: un **catálogo data-driven** de
 8. Borrar la partida limpia el estado de logros local y la próxima sesión Steam reconcilia.
 9. Los textos están en español y no hay caracteres raros ni codificaciones rotas.
 10. Toda la documentación de este módulo refleja el código real implementado (plan-actual).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M071** — Progresión | Logros sobre progresión |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M071** — Progresión | Depende de este módulo |
+

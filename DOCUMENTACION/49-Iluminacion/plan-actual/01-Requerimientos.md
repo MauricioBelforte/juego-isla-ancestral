@@ -87,3 +87,31 @@ Definir el sistema de iluminación de la isla: jerarquía de luces (sol/luna com
 6. El interior de una casa de vecino (M18) está horneado y legible sin luces dinámicas activas.
 7. La niebla de jungla/lluvia responde a M32/M09 y no rompe la legibilidad.
 8. No hay sombras negras totales ni acne visible en el voxel (revisión visual en hardware objetivo).
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M007** — Arquitectura General | Presupuestos de iluminación |
+| **M045** — Arte 3D | Luces en escenas |
+
+### Usado por (otros módulos que referencian este)
+
+| Módulo | Qué usa de este módulo |
+|--------|------------------------|
+| **M061** — Rendimiento | Usado por rendimiento |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M007** — Arquitectura General | Depende de este módulo |
+| **M045** — Arte 3D | Depende de este módulo |
+| **M061** — Rendimiento | Este módulo lo necesita |
+
