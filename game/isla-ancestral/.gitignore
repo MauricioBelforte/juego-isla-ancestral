@@ -3,7 +3,6 @@
 *.import
 /export_presets.cfg
 *.translation
-/project.godot
 
 # Mono/C# ignores
 .mono/
