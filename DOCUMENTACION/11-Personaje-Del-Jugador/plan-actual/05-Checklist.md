@@ -112,7 +112,7 @@
 - [x] 05-Checklist.md creado y firmado (este archivo) [S]
 - [x] Constantes consumibles en data/player/player_motion.tres [M]
 - [x] Contrato PlayerState → EventBus + GameState.M11 [M]
-- [x] Entrada por action map New Input System de Godot [S]
+- [x] Entrada por action map Input System de Godot [S]
 - [x] Sin contradicciones con M07 (ServiceLocator, capas) [M]
 - [x] Sin contradicciones con M08 (bloque 1 m, hitbox) [M]
 - [x] Sin contradicciones con M09 (biomas → pasos) [M]

@@ -50,6 +50,61 @@ El juego (cozy, isla ancestral, mundo voxel, sin combate obligatorio) necesita u
 
 ---
 
+## 5. Priorización de Pantallas (MVP vs Post-MVP)
+
+### MVP (Prototipo jugable — obligatorio)
+
+| # | Pantalla | Descripción | Prioridad | Dependencias |
+|---|----------|-------------|-----------|--------------|
+| 1 | HUD básico | Barra de vida/energía, reloj (M30), hotbar | P0 | M11, M30 |
+| 2 | Menú principal | Nuevo juego, cargar, opciones, salir | P0 | M59 |
+| 3 | Inventario | Cuadrícula de ítems, equipamiento, tooltip | P0 | M14 |
+| 4 | Pausa | Resume, opciones, guardar, salir | P0 | M59, M90, M91 |
+| 5 | Diálogo | Nombre NPC, retrato, texto, opciones | P0 | M19, M21 |
+| 6 | Guardado/Carga | Selección de slot, confirmación | P0 | M59 |
+| 7 | Configuración | Gráficos, audio, accesibilidad, controles | P1 | M58, M90, M91, M57 |
+| 8 | Notificaciones | Popups de logro, recolección, eventos | P1 | M72, M44 |
+| 9 | Tienda | Compra/venta, stock, precio | P1 | M38, M39 |
+| 10 | Crafting | Receta, materiales, resultado | P1 | M16 |
+
+### Post-MVP (Contenido completo)
+
+| # | Pantalla | Descripción | Prioridad | Dependencias |
+|---|----------|-------------|-----------|--------------|
+| 11 | Mapa | Mapa del mundo, POIs, ubicación actual | P2 | M54 |
+| 12 | Diario | Entradas, misiones, colecciones | P2 | M55, M22, M23 |
+| 13 | Relaciones | Niveles de amistad con NPCs | P2 | M20 |
+| 14 | Calendario | Días, estaciones, eventos próximos | P2 | M29 |
+| 15 | Construcción | Colocación de estructuras, preview | P2 | M17 |
+| 16 | Colecciones | Museo, bestiario, logros | P3 | M37, M72, M73 |
+| 17 | Modo foto | Cámara libre, filtros, captura | P3 | M56 |
+| 18 | Tutorial interactivo | Guías paso a paso | P3 | M92 |
+| 19 | Accesibilidad avanzada | Menú completo de opciones | P2 | M58 |
+| 20 | Transporte | Panel de viaje, mapa de rutas | P2 | M68 |
+| 21 | Minimapa | Widget en esquina con POIs | P2 | M54 |
+| 22 | Personalización | Vestimenta, color, accesorios | P2 | M155 |
+| 23 | Almacén/casa | Interior de la casa del jugador | P2 | M18 |
+| 24 | Herramientas | Panel de mejora/forja | P2 | M13, M158 |
+| 25 | Encantamientos | Panel del chamán | P2 | M163 |
+
+### Assets base de UI (especificaciones técnicas)
+
+| Elemento | Especificación |
+|----------|---------------|
+| Fuente principal | Nunito Bold 18px (títulos), Nunito Regular 14px (cuerpo) |
+| Fuente secundaria | Fredoka One 24px (títulos de pantalla) |
+| Paleta primaria | #FFD4A3 (melocotón), #A8D8B9 (verde suave), #B8E0FF (azul claro) |
+| Paleta secundaria | #FFB5B5 (rosa), #FFFACD (amarillo pálido), #E8D5FF (lila) |
+| Fondo de panel | #2D2D3D99 (oscuro semi-transparente) |
+| Texto principal | #FFFFFF (blanco), #F0F0F0 (gris claro) |
+| Texto de error | #FF6B6B (rojo suave) |
+| Texto de éxito | #6BCB77 (verde suave) |
+| Borde de panel | 2px #FFD4A3 (melocotón) |
+| Radio de esquinas | 8px (paneles), 12px (botones), 4px (inputs) |
+| Espaciado base | 8px (entre elementos), 16px (entre secciones), 24px (márgenes) |
+| Duración fade | 200ms (entre pantallas), 100ms (tooltips) |
+| Duración animación botón | 150ms (press), 300ms (hover) |
+
 ## Módulos Relacionados
 
 > **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.

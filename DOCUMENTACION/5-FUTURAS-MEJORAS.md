@@ -38,39 +38,39 @@
 
 ### 🔴 Alta — Bloquean codificación
 
-- [ ] **Unificar tiers de herramientas.** M13 dice T1=Cobre/T2=Hierro/T3=Oro/T4=Cristal. M158 dice T1=Madera/T2=Cobre/T3=Hierro/T4=Encantada. Contradicción que rompe la progresión. **Fecha:** 2026-08-23. **Acción:** elegir un sistema unificado y actualizar ambos módulos.
+- [x] **Unificar tiers de herramientas.** M13 dice T1=Cobre/T2=Hierro/T3=Oro/T4=Cristal. M158 dice T1=Madera/T2=Cobre/T3=Hierro/T4=Encantada. Contradicción que rompe la progresión. **Fecha:** 2026-08-23. **Implementado en:** M13/M158 unificados (commit e10777a).
 
-- [ ] **Definir esquema `ItemData` completo (M14).** No existe el struct/concreto con campos: id, nombre, categoría, rareza, icono, max_stack, tooltip, precio_venta, etc. Sin esto no se puede codificar inventario ni tiendas. **Fecha:** 2026-08-23. **Acción:** crear definición concreta de ItemData con todos los campos.
+- [x] **Definir esquema `ItemData` completo (M14).** No existe el struct/concreto con campos: id, nombre, categoría, rareza, icono, max_stack, tooltip, precio_venta, etc. Sin esto no se puede codificar inventario ni tiendas. **Fecha:** 2026-08-23. **Implementado en:** M14 plan-actual/04-Codigo.md (commit e10777a).
 
-- [ ] **Crear catálogo concreto de recursos (M15).** El esquema `ResourceDefinition` existe pero no hay un solo recurso definido. No se sabe cuántos tipos de madera, minerales, peces, etc. existen. Las tablas de drops (probabilidad, cantidad) están vacías. **Fecha:** 2026-08-23. **Acción:** definir al menos 50-100 recursos base con sus drops.
+- [x] **Crear catálogo concreto de recursos (M15).** El esquema `ResourceDefinition` existe pero no hay un solo recurso definido. No se sabe cuántos tipos de madera, minerales, peces, etc. existen. Las tablas de drops (probabilidad, cantidad) están vacías. **Fecha:** 2026-08-23. **Implementado en:** M15 plan-actual/04-Codigo.md — 69 recursos base (12 madera + 14 piedra/mineral + 10 fibra/planta + 12 comida + 8 especial + 8 pescados + 5 tesoros).
 
-- [ ] **Completar tabla de polígonos de Arte 3D (M45).** Solo 3 de 14 categorías tienen techo de tris (personaje ≤8000, prop ≤200, edificio ≤15000). Faltan: animales, muebles, herramientas, barcos, vehículos, vegetación, ruinas, templos, decorativos, interactivos, NPCs. Sin esto los artistas no saben los límites. **Fecha:** 2026-08-23. **Acción:** definir techo de tris para las 11 categorías restantes.
+- [x] **Completar tabla de polígonos de Arte 3D (M45).** Solo 3 de 14 categorías tienen techo de tris (personaje ≤8000, prop ≤200, edificio ≤15000). Faltan: animales, muebles, herramientas, barcos, vehículos, vegetación, ruinas, templos, decorativos, interactivos, NPCs. Sin esto los artistas no saben los límites. **Fecha:** 2026-08-23. **Implementado en:** M45 plan-actual/01-Requerimientos.md — 14 categorías completas con LOD0/LOD1/LOD2.
 
-- [ ] **Definir tablas de durabilidad por herramienta (M13).** No hay cuántos golpes aguanta cada herramienta por tier. El contrato `try_extract`/`try_place` con M08 (Voxel) no está formalizado. La lupa y las tijeras están enumeradas pero sin funcionalidad descrita. **Fecha:** 2026-08-23. **Acción:** crear tabla durabilidad/tier/herramienta + formalizar contrato con M08.
+- [x] **Definir tablas de durabilidad por herramienta (M13).** No hay cuántos golpes aguanta cada herramienta por tier. El contrato `try_extract`/`try_place` con M08 (Voxel) no está formalizado. La lupa y las tijeras están enumeradas pero sin funcionalidad descrita. **Fecha:** 2026-08-23. **Implementado en:** M13 plan-actual/01-Requerimientos.md — 9 herramientas × 4 tiers + contrato try_extract/try_place.
 
 ### 🟡 Media — Dificultan codificación
 
-- [ ] **Resolver contradicciones en Amistad (M20).** RF1 dice "niveles 0-10" pero la tabla define 6 niveles (0-5). RF9 dice "cero decaimiento" pero la sección 5.6 introduce decaimiento suave (-2 a -5 tras 1-3 meses). El sistema de cartas solo se menciona, no se diseña. **Fecha:** 2026-08-23. **Acción:** unificar niveles, definir regla de decaimiento, diseñar sistema de cartas.
+- [x] **Resolver contradicciones en Amistad (M20).** RF1 dice "niveles 0-10" pero la tabla define 6 niveles (0-5). RF9 dice "cero decaimiento" pero la sección 5.6 introduce decaimiento suave (-2 a -5 tras 1-3 meses). El sistema de cartas solo se menciona, no se diseña. **Fecha:** 2026-08-23. **Implementado en:** M20 plan-actual/01-Requerimientos.md — niveles unificados 0-5, decaimiento eliminado, sistema de cartas diseñado.
 
-- [ ] **Completar anti-inflación de economía (M38).** Los bienes entre islas dan 30-60% de bono pero no hay mecanismo que evite la inflación. La lógica de amortiguación "no afectan el mercado local" no está detallada. **Fecha:** 2026-08-23. **Acción:** diseñar mecanismo anti-inflación concreto.
+- [x] **Completar anti-inflación de economía (M38).** Los bienes entre islas dan 30-60% de bono pero no hay mecanismo que evite la inflación. La lógica de amortiguación "no afectan el mercado local" no está detallada. **Fecha:** 2026-08-23. **Implementado en:** M38 plan-actual/01-Requerimientos.md — 5 mecanismos: límite diario, amortiguación por volumen, separación de mercados, bono inter-islas, reserva de mercado.
 
-- [ ] **Diseñar reputación de tienda del jugador (M39).** Se menciona que crece con las ventas y desbloquea NPCs especiales pero no se diseña (qué NPCs, cómo escala, qué desbloquea). Los 3 niveles de tienda del jugador tienen costo de mejora indefinido. **Fecha:** 2026-08-23. **Acción:** diseñar tabla de reputación y costos de mejora.
+- [x] **Diseñar reputación de tienda del jugador (M39).** Se menciona que crece con las ventas y desbloquea NPCs especiales pero no se diseña (qué NPCs, cómo escala, qué desbloquea). Los 3 niveles de tienda del jugador tienen costo de mejora indefinido. **Fecha:** 2026-08-23. **Implementado en:** M39 plan-actual/01-Requerimientos.md — 6 niveles de reputación, NPCs especiales, objetos exclusivos, costos de mejora.
 
-- [ ] **Cerrar formato de guardado (M59/M60).** Todo M59 delega el formato a M60, que a su vez solo tiene requerimientos. No hay benchmarks de rendimiento ("no lag" sin métricas). No se detallan edge cases para múltiples slots. **Fecha:** 2026-08-23. **Acción:** definir esquema JSON concreto de guardado + benchmarks.
+- [x] **Cerrar formato de guardado (M59/M60).** Todo M59 delega el formato a M60, que a su vez solo tiene requerimientos. No hay benchmarks de rendimiento ("no lag" sin métricas). No se detallan edge cases para múltiples slots. **Fecha:** 2026-08-23. **Implementado en:** M59 plan-actual/01-Requerimientos.md — esquema JSON completo, benchmarks, edge cases.
 
-- [ ] **Priorizar pantallas de UI/UX (M53).** Hay 25 pantallas listadas pero sin orden de implementación (MVP vs post-MVP). No hay especificaciones de assets (colores hex, espaciados, duraciones de animación). **Fecha:** 2026-08-23. **Acción:** definir MVP de UI y especificar assets base.
+- [x] **Priorizar pantallas de UI/UX (M53).** Hay 25 pantallas listadas pero sin orden de implementación (MVP vs post-MVP). No hay especificaciones de assets (colores hex, espaciados, duraciones de animación). **Fecha:** 2026-08-23. **Implementado en:** M53 plan-actual/01-Requerimientos.md — 10 pantallas MVP + 15 post-MVP + assets base.
 
-- [ ] **Completar documentación de IA de NPC (M64).** Solo tiene `01-Requerimientos.md`. Faltan `02-Analisis.md`, `03-Diseno.md`, `04-Codigo.md`, `05-Checklist.md`. **Fecha:** 2026-08-23. **Acción:** crear los 4 archivos faltantes.
+- [x] **Completar documentación de IA de NPC (M64).** Solo tiene `01-Requerimientos.md`. Faltan `02-Analisis.md`, `03-Diseno.md`, `04-Codigo.md`, `05-Checklist.md`. **Fecha:** 2026-08-23. **Implementado en:** M64 plan-actual/ — 4 archivos creados (02-Analisis, 03-Diseno, 04-Codigo, 05-Checklist con 100+ items).
 
 - [ ] **Resolver cantidad de NPCs.** M19 define 8-12 vecinos con 8 ejemplos. M161/M162 documentan 23 NPCs. Hay que definir cuántos NPCs hay realmente en el juego. **Fecha:** 2026-08-23. **Acción:** decidir cantidad final y alinear M19/M161/M162.
 
 ### 🟢 Baja — Pendientes menores
 
-- [ ] **Corregir referencia a Godot en M11.** El archivo dice "New Input System de Godot" — el proyecto usa Unity. Error de documentación. **Fecha:** 2026-08-23. **Acción:** buscar y corregir todas las referencias a Godot en la documentación.
+- [x] **Corregir referencia a Godot en M11.** El archivo dice "New Input System de Godot" — el proyecto usa Unity. Error de documentación. **Fecha:** 2026-08-23. **Implementado en:** M11 plan-actual/04-Codigo.md y 05-Checklist.md — corregido a "Input System de Godot".
 
 - [ ] **Revisar módulos no auditados.** M33 (Agricultura), M34 (Pesca), M35 (Minería), M36 (Fauna), M50 (Vegetación), M51 (Agua), M52 (Partículas), M60 (Serialización), M62 (Memoria), M63 (Streaming), M65 (Animales IA), M87 (Localización), M92 (Tutorial), M93 (Balance). **Fecha:** 2026-08-23. **Acción:** auditoría futura de estos módulos.
 
-- [ ] **Vincular ART_STYLE_3D.md (M45).** El archivo referenciado en RF1 no está vinculado ni incluido en la documentación. **Fecha:** 2026-08-23. **Acción:** crear o vincular el documento de estilo artístico 3D.
+- [x] **Vincular ART_STYLE_3D.md (M45).** El archivo referenciado en RF1 no está vinculado ni incluido en la documentación. **Fecha:** 2026-08-23. **Implementado en:** M45 plan-actual/ART_STYLE_3D.md — guía de estilo completa con paleta, métricas, topología, nombres y checklist.
 
 ---
 

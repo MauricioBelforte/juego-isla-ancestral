@@ -25,7 +25,7 @@ data/player/terrain_modifiers.tres      → modificadores de velocidad por terre
 
 ## 3. Contratos de integración
 
-- **Entrada:** New Input System de Godot (action map `Player`: move, sprint, jump, interact, dive).
+- **Entrada:** Input System de Godot (action map `Player`: move, sprint, jump, interact, dive).
 - **Salida:** `PlayerState` observable (position, velocity, stamina, current_interactable, character_id, current_terrain) → EventBus (M07) + GameState.M11.
 - **Consume:** bloque bajo los pies (bioma → audio de pasos) de M08; IInteractable de cualquier módulo; datos de terreno de M156; datos de equipamiento de M155.
 - **Publica:** `player_state_changed`, `player_fatigue(30%)`, `light_collected(count)`, `terrain_changed(terrain_type)`.

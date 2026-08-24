@@ -60,6 +60,36 @@ Definir el sistema de arte 3D del juego: guía de estilo (estilo voxel redondead
 | RF2 | Software estándar | Blender como herramienta canónica; formato fuente `.blend`, salida glTF 2.0 |
 | RF3 | Escala unificada | Unidad Blender = 1 m; alineación a grilla voxel de 1 m (M08); personajes ~1.8 m como M11 |
 | RF4 | Techo de polígonos por categoría | Tabla de máximos: personaje ≤8k tris, prop pequeño ≤200 tris, edificio ≤15k tris, etc. |
+
+### Tabla completa de techo de polígonos por categoría (RF4)
+
+| Categoría | Prefijo | LOD0 (tris máx) | LOD1 (tris) | LOD2 (tris) | LOD Distancias | Notas |
+|-----------|---------|-----------------|-------------|-------------|----------------|-------|
+| Personaje | `chr_` | 8,000 | 3,000 | 1,000 | 20 / 40 / 80 m | Incluye rig; cabeza proporcionalmente grande |
+| NPC | `npc_` | 8,000 | 3,000 | 1,000 | 20 / 40 / 80 m | Mismas reglas que personaje |
+| Animales | `ani_` | 6,000 | 2,000 | 800 | 15 / 35 / 70 m | Grandes: hasta 10k; pequeños: 2-3k |
+| Edificios | `bld_` | 15,000 | 6,000 | 2,000 | 30 / 60 / 120 m | Casas, tiendas, Templos pequeños |
+| Muebles | `furn_` | 1,200 | 400 | 150 | 10 / 25 / 50 m | Mesas, sillas, estanterías |
+| Herramientas | `tool_` | 800 | 300 | — | — | En mano del jugador; sin LOD (siempre visibles) |
+| Barcos | `veh_b` | 20,000 | 8,000 | 3,000 | 25 / 50 / 100 m | Incluye velas y decoración |
+| Vehículos | `veh_` | 12,000 | 5,000 | 2,000 | 20 / 40 / 80 m | Dirigibles, locomotora |
+| Vegetación | `veg_` | 3,000 | 1,200 | 400 | 15 / 35 / 70 m | Árboles grandes: hasta 5k; arbustos: 1-2k |
+| Props | `prop_` | 200 | 80 | — | — | Objetos pequeños; sin LOD si <500 tris |
+| Ruinas | `ruin_` | 12,000 | 5,000 | 2,000 | 25 / 50 / 100 m | Estructuras parciales; reutilizar kit modular |
+| Templos | `temple_` | 15,000 | 6,000 | 2,000 | 30 / 60 / 120 m | Puzzle areas; misma regla que edificios |
+| Decorativos | `deco_` | 500 | 200 | — | 10 / 25 / 50 m | Faroles, bancos, señales |
+| Interactivos | `int_` | 1,500 | 600 | 200 | 10 / 25 / 50 m | Cajones, palancas, interruptores |
+
+### Reglas generales de polígonos
+
+1. **LOD obligatorio** si el asset tiene >500 tris en LOD0.
+2. **Sin LOD** para assets siempre cerca de cámara (herramientas en mano, UI 3D).
+3. **Presupuesto total por escena**: 150,000 tris visibles (incluyendo terreno voxel ~50k).
+4. **Draw calls máximos**: 200 por escena (M61).
+5. **Prop pequeños sin LOD**: solo si son ≤500 tris y no se repiten en masa.
+6. **Animales grandes** (dragón, oso): pueden llegar a 10k tris pero deben tener LOD agresivo.
+7. **Vehículos complejos** (dirigible decorado): usar LOD para elementos puramente decorativos.
+
 | RF5 | Topología válida | Sin n-gons (solo quads/tris), sin vértices duplicados no soldados, normales consistentes |
 | RF6 | UVs válidas | Sin superposición (excepto atlas intencional), dentro de 0..1, padding ≥4px, texel density por categoría |
 | RF7 | Origen y orientación | Origen del mesh en punto de anclaje convencional; +Z frente (o +X según convención Godot), Y arriba |

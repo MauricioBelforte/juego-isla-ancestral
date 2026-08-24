@@ -211,6 +211,79 @@ Nivel 1: Tienda básica (5 slots, 1 NPC/día)
 
 ---
 
+## 9.7 Sistema de Reputación de Tienda del Jugador
+
+### Concepto
+
+La tienda del jugador (M158/M39) gana reputación con las ventas. A mayor reputación, más NPCs visitantes, mejores precios y objetos exclusivos. La reputación es un acumulador puro (cozy, sin decaimiento).
+
+### Niveles de Reputación
+
+| Nivel | Nombre | Ventas necesarias | Recompensa |
+|-------|--------|-------------------|------------|
+| 0 | Desconocido | 0 ventas | Ninguna |
+| 1 | Tienda de barrio | 20 ventas | 1 NPC visitante/día, catálogo básico |
+| 2 | Comercio local | 60 ventas | 2 NPCs/día, +10% precios de venta |
+| 3 | Tienda popular | 150 ventas | 3 NPCs/día, +20% precios, objetos exclusivos |
+| 4 | Mercado de la isla | 300 ventas | 4 NPCs/día, +30% precios, NPCs especiales |
+| 5 | Leyenda del comercio | 500 ventas | 5 NPCs/día, +40% precios, objetos legendarios |
+
+### Tipos de Venta que Suben Reputación
+
+| Tipo de venta | Reputación ganada |
+|---------------|-------------------|
+| Venta normal (NPC compra 1 item) | +1 |
+| Venta grande (NPC compra 3+ items en 1 visita) | +3 |
+| Venta de item raro | +2 |
+| Venta a NPC de otra isla (viajero) | +5 |
+| Venta durante evento/feria (M73) | +2 extra |
+
+### NPCs Especiales Desbloqueados por Reputación
+
+| Nivel NPC | NPC especial | Qué trae | Cuándo aparece |
+|-----------|-------------|----------|----------------|
+| Nivel 3 | Mercader viajero | Catálogo rodante de items raros | 1×/semana |
+| Nivel 4 | Coleccionista | Compra items decorativos a 2× precio | 2×/semana |
+| Nivel 5 | Sabio anciano | Vende recetas exclusivas y mapas de tesoros | 1×/semana |
+
+### Objetos Exclusivos por Nivel de Reputación
+
+| Nivel | Objeto desbloqueado | Tipo | Efecto |
+|-------|---------------------|------|--------|
+| Nivel 2 | Letrero de tienda | Decoración | +5% visitas (decorativo) |
+| Nivel 3 | Caja fuerte | Mueble | +10 slots de stock |
+| Nivel 4 | Bandera de la tienda | Decoración | +15% precios de venta |
+| Nivel 5 | Corona de comerciante | Accesorio | +20% precios + NPC sabio |
+
+### Costos de Mejora de Tienda
+
+| Nivel | Costo de mejora | Requisitos adicionales |
+|-------|-----------------|----------------------|
+| 0 → 1 | 200 monedas + 10 madera | Curso de carpintería (M158) |
+| 1 → 2 | 500 monedas + 5 hierro | Nivel 1 de amistad con 3 NPCs |
+| 2 → 3 | 1500 monedas + 10 hierro + 5 oro | Nivel 2 de amistad con 5 NPCs |
+| 3 → 4 | 3000 monedas + 10 oro + 5 cristal | Nivel 3 de amistad con 8 NPCs |
+| 4 → 5 | 5000 monedas + 15 cristal + 3 reliquias | Nivel 4 de amistad con 12 NPCs |
+
+### Reglas de Reputación
+
+1. **Sin decaimiento:** La reputación nunca baja por ausencia ni por malas ventas (cozy).
+2. **Sin límite temporal:** El jugador puede llegar al nivel 5 en el primer día o en el centésimo.
+3. **Visible:** La reputación se muestra en el panel de la tienda (M53) con barra de progreso.
+4. **Persistente:** La reputación se guarda con la partida (M59/M60).
+5. **Coherente:** Los NPCs especiales solo aparecen si la tienda está abierta (horarios M39).
+
+### Integración con otros módulos
+
+- **M38 (Economía):** Los precios de venta de la tienda del jugador se ajustan según nivel de reputación
+- **M20 (Amistad):** Los NPCs especiales desbloqueados son aussi NPCs del pueblo con sus propios gustos
+- **M29 (Calendario):** Los NPCs especiales tienen sus propios horarios de aparición
+- **M73 (Eventos):** Las ventas durante eventos dan reputación extra
+- **M53 (UI/UX):** La reputación se muestra en un panel dedicado de la tienda
+- **M17 (Construcción):** Las mejoras de tienda requieren construir/mejorar la estructura
+
+---
+
 ## Módulos Relacionados
 
 > **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.

@@ -87,6 +87,139 @@ Definir el sistema de guardado de la isla: guardado automático (por eventos M07
 
 ---
 
+## 8. Esquema de Guardado Concreto (JSON)
+
+### Ruta de guardado
+
+```
+user://saves/slot_{N}/save.json       ← save principal
+user://saves/slot_{N}/save.json.bak   ← backup automático
+user://saves/slot_{N}/save.json.tmp   ← archivo temporal (escritura atómica)
+user://saves/slot_{N}/config.tres     ← configuración del slot
+```
+
+### Estructura del JSON (save.json)
+
+```json
+{
+  "schema_version": 1,
+  "timestamp": "2026-08-24T12:00:00Z",
+  "playtime_seconds": 36000,
+  "checksum": "a1b2c3d4",
+  "world": {
+    "seed": 12345,
+    "current_island": "raiz",
+    "discovered_islands": ["raiz", "ceniza"],
+    "explored_chunks": [[0,0], [1,0], [0,1]],
+    "voxel_edits": [
+      {"pos": [10, 5, 20], "block": "madera_roble", "action": "place"},
+      {"pos": [12, 3, 15], "block": "", "action": "remove"}
+    ],
+    "poi_visited": ["LOC-RIZ-POBLADO-01", "LOC-RIZ-BOSQUE-03"]
+  },
+  "player": {
+    "position": [10.5, 0.0, 20.3],
+    "rotation": 1.57,
+    "health": 100,
+    "energy": 80,
+    "stamina": 90,
+    "selected_character": 0,
+    "current_island": "raiz"
+  },
+  "inventory": {
+    "items": [
+      {"item_id": "madera_roble", "quantity": 25, "slot": 0},
+      {"item_id": "pico_cobre", "quantity": 1, "slot": 5, "durability": 120, "durability_max": 150},
+      {"item_id": "fruta_kaki", "quantity": 8, "slot": 12}
+    ],
+    "equipped_tools": ["pico_cobre", "hacha_cobre", "azada_cobre"],
+    "hotbar": [5, 0, 12]
+  },
+  "buildings": [
+    {"building_id": "casa_jugador", "position": [10, 0, 20], "rotation": 0, "level": 2, "rooms": ["dormitorio", "taller"]},
+    {"building_id": "tienda_jugador", "position": [15, 0, 25], "rotation": 90, "level": 1, "shop_type": "HERRAMIENTAS"}
+  ],
+  "npcs": [
+    {"npc_id": "luna", "position": [30, 0, 40], "current_state": "trabajando", "home": "casa_luna"},
+    {"npc_id": "rocky", "position": [25, 0, 35], "current_state": "dormiendo", "home": "herreria"}
+  ],
+  "friendship": [
+    {"npc_id": "luna", "points": 150, "level": 2, "gifts_today": 0, "last_gift": "flor_cerezo"},
+    {"npc_id": "rocky", "points": 300, "level": 3, "gifts_today": 1, "last_gift": "cobre_bruto"}
+  ],
+  "economy": {
+    "coins": 2500,
+    "daily_sales": {"madera_roble": 15, "piedra_granito": 8},
+    "shop_reputation": 3,
+    "shop_visitors_today": 2,
+    "trade_history": [
+      {"type": "sell", "item": "madera_roble", "quantity": 10, "price": 50, "shop": "ferreteria", "day": 15}
+    ]
+  },
+  "time": {
+    "day": 45,
+    "hour": 14,
+    "minute": 30,
+    "season": "verano",
+    "year": 1
+  },
+  "missions": {
+    "main_quest": {"current_chapter": 3, "completed_steps": ["hablar_con_luna", "explorar_bosque"]},
+    "secondary": [
+      {"mission_id": "mision_luna_1", "status": "completada", "progress": 100},
+      {"mission_id": "mision_rocky_2", "status": "en_progreso", "progress": 60}
+    ]
+  },
+  "collections": {
+    "museum": {"minerals": ["cobre_bruto", "hierro_bruto"], "fish": ["pez_gato"]},
+    "bestiary": ["conejito", "pajaro_azul"],
+    "diary_entries": [1, 5, 12, 23]
+  },
+  "events": {
+    "completed": ["feria_primavera_ano1", "noche_estrellas_ano1"],
+    "upcoming": ["fiesta_verano_ano1"],
+    "cooldowns": {"cumple_luna": 365}
+  },
+  "config": {
+    "graphics": {"resolution": "1920x1080", "quality": "medio", "fullscreen": true},
+    "audio": {"master": 80, "music": 70, "sfx": 90},
+    "accessibility": {"text_size": "normal", "high_contrast": false, "colorblind_mode": "ninguno"},
+    "controls": {"move_forward": "W", "interact": "E", "inventory": "I"}
+  }
+}
+```
+
+### Campos obligatorios por versión
+
+| Versión | Campos obligatorios | Migra desde |
+|---------|---------------------|-------------|
+| v1 | schema_version, checksum, world.seed, player.position, inventory.items, time.day, economy.coins | — (primera versión) |
+
+### Benchmark de rendimiento
+
+| Operación | Objetivo | Método de medición |
+|-----------|----------|-------------------|
+| Guardado completo | < 300 ms | `Time.get_ticks_msec()` antes/después de `save_game()` |
+| Carga completa | < 1 s | `Time.get_ticks_msec()` antes/después de `load_game()` |
+| Checksum CRC32 | < 5 ms | `HashingContext` de Godot |
+| Migración v1→v2 | < 100 ms | Test unitario con save de prueba |
+| Tamaño save | < 1 MB | `FileAccess.get_length()` |
+
+### Edge Cases
+
+| Caso | Manejo |
+|------|--------|
+| Save durante carga pesada | Guardado asíncrono en background thread; UI muestra feedback |
+| Falta de espacio en disco | Aviso al jugador; conservar save anterior (.bak) |
+| Save corrupto (apagado violento) | Checksum falla → recuperar .bak automáticamente → aviso |
+| Migración con campos nuevos | Campo nuevo tiene default; no se pierde data vieja |
+| Múltiples perfiles | Cada slot tiene su propia carpeta; sin cruzamiento |
+| Save de config vs save de progreso | Separados: config.tres ≠ save.json |
+| Slot vacío al cargar | Mensaje amable: "No hay partida guardada en este slot" |
+| Save de versión futura | Mensaje: "Este save es de una versión más reciente. Actualiza el juego." |
+
+---
+
 ## Módulos Relacionados
 
 > **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.

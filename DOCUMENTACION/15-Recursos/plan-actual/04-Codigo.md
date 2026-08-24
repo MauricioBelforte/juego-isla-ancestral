@@ -36,6 +36,120 @@
 | `voxel_modificado(...)` | M17/M08 (Construcción) |
 | `agregar_items(entrega)` | M14 (Inventario) |
 
+## 1.1 Catálogo de Recursos Base (50+ definiciones)
+
+> Cada recurso es un `ResourceDefinition` serializado como `.tres`. Los drops se calibran para que el jugador siempre tenga material para crafting inmediato (M16).
+
+### MADERA (12 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `madera_roble` | Madera de Roble | 0 | hacha_cualquiera | 3 | 2-4 madera_roble + 10% rama_seca | 5 | todas | cualquier |
+| `madera_pino` | Madera de Pino | 0 | hacha_cualquiera | 3 | 2-3 madera_pino + 15% resina_pino | 5 | todas | bosque_nevado |
+| `madera_olmo` | Madera de Olmo | 0 | hacha_cualquiera | 2 | 3-5 madera_olmo | 4 | todas | riberas |
+| `madera_cerezo` | Madera de Cerezo | 1 | hacha_cualquiera | 2 | 2-3 madera_cerezo + 5% flor_cerezo | 8 | primavera | isla_raiz |
+| `madera_cedro` | Madera de Cedro | 1 | hacha_hierro | 4 | 2-4 madera_cedro | 12 | todas | bosque_denso |
+| `madera_ebano` | Madera de Ébano | 2 | hacha_oro | 5 | 1-2 madera_ebano | 25 | todas | zona_oscura |
+| `madera_bambu` | Bambú | 0 | hacha_cualquiera | 1 | 3-6 bambu | 3 | todas | riberas |
+| `madera_sauce` | Madera de Sauce | 0 | hacha_cualquiera | 2 | 2-4 madera_sauce | 5 | todas | junto_agua |
+| `madera_abedul` | Madera de Abedul | 1 | hacha_cualquiera | 2 | 2-3 madera_abedul | 7 | todas | bosque_claro |
+| `madera_olivo` | Madera de Olivo | 1 | hacha_hierro | 3 | 1-2 madera_olivo | 15 | todas | isla_coral |
+| `madera_nogal` | Madera de Nogal | 2 | hacha_oro | 4 | 1-3 madera_nogal | 20 | todas | isla_aurora |
+| `madera_sandalia` | Madera de Sandalia | 3 | hacha_cristal | 5 | 1 madera_sandalia | 50 | todas | isla_aurora |
+
+### PIEDRA Y MINERALES (14 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `piedra_granito` | Granito | 0 | pico_cualquiera | 3 | 2-4 piedra_granito | 3 | todas | cualquier |
+| `piedra_caliza` | Caliza | 0 | pico_cualquiera | 2 | 3-5 piedra_caliza | 2 | todas | costas |
+| `piedra_schisto` | Esquisto | 0 | pico_cualquiera | 3 | 2-3 piedra_schisto | 4 | todas | montanas |
+| `cobre_bruto` | Cobre Bruto | 1 | pico_hierro | 4 | 1-3 cobre_bruto + 20% pirita | 10 | todas | minas_raiz |
+| `hierro_bruto` | Hierro Bruto | 1 | pico_hierro | 5 | 1-2 hierro_bruto | 15 | todas | minas_ceniza |
+| `oro_bruto` | Oro Bruto | 2 | pico_oro | 6 | 1 oro_bruto | 30 | todas | minas_coral |
+| `cristal_bruto` | Cristal Bruto | 3 | pico_cristal | 7 | 1 cristal_bruto | 60 | todas | minas_aurora |
+| `obsidiana` | Obsidiana | 2 | pico_oro | 8 | 1 obsidiana | 35 | todas | volcan |
+| `marmol` | Mármol | 1 | pico_hierro | 4 | 2-3 marmol | 12 | todas | ruinas |
+| `granito_rosa` | Granito Rosa | 1 | pico_hierro | 3 | 1-2 granito_rosa | 14 | todas | isla_coral |
+| `arena_cuarzo` | Arena de Cuarzo | 0 | pico_cualquiera | 1 | 3-5 arena_cuarzo | 2 | todas | costas |
+| `sal_gema` | Sal Gema | 1 | pico_cualquiera | 2 | 2-4 sal_gema | 8 | todas | cuevas |
+| `azabache` | Azabache | 2 | pico_oro | 5 | 1 azabache | 28 | todas | zona_oscura |
+| `ambar` | Ámbar | 2 | pico_oro | 4 | 1 ambar | 32 | todas | bosque_antiguo |
+
+### FIBRAS Y PLANTAS (10 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `fibra_algodon` | Algodón | 0 | tijeras | 1 | 2-4 fibra_algodon | 3 | todas | praderas |
+| `fibra_lino` | Lino | 0 | tijeras | 1 | 2-3 fibra_lino | 4 | todas | campos |
+| `fibra_caña` | Caña | 0 | tijeras | 1 | 3-5 cana | 2 | todas | riberas |
+| `hierba_seca` | Hierba Seca | 0 | manos | 1 | 2-3 hierba_seca | 1 | todas | cualquier |
+| `moho_luminoso` | Luminoso | 1 | lupa | 1 | 1 moho_luminoso | 8 | todas | cuevas |
+| `musgo_ancestral` | Musgo Ancestral | 2 | lupa | 2 | 1 musgo_ancestral | 20 | todas | ruinas |
+| `liquen_perla` | Liquen Perla | 2 | tijeras | 2 | 1 liquen_perla | 22 | todas | bosque_coral |
+| `flor_kaki` | Flor Kaki | 1 | tijeras | 1 | 1-2 flor_kaki | 6 | otoño | isla_raiz |
+| `flor_cerezo` | Flor de Cerezo | 1 | tijeras | 1 | 1 flor_cerezo | 10 | primavera | isla_raiz |
+| `algas_mares` | Algas del Mar | 0 | manos | 1 | 2-4 algas_mares | 2 | todas | costas |
+
+### COMIDA Y FRUTAS (12 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `fruta_kaki` | Kaki | 0 | manos | 1 | 1-3 fruta_kaki | 4 | otoño | isla_raiz |
+| `baya_azul` | Baya Azul | 0 | manos | 1 | 2-4 baya_azul | 3 | verano | bosque |
+| `manzana_dorada` | Manzana Dorada | 1 | manos | 1 | 1-2 manzana_dorada | 8 | otoño | isla_aurora |
+| `naranja_salvaje` | Naranja Salvaje | 0 | manos | 1 | 2-3 naranja_salvaje | 4 | primavera | isla_coral |
+| `coco_playa` | Coco | 0 | manos | 1 | 1-2 coco_playa | 3 | todas | costas |
+| `uva_cueva` | Uva de Cueva | 1 | tijeras | 1 | 2-3 uva_cueva | 6 | todas | cuevas |
+| ` seta_luminosa` | Seta Luminosa | 1 | lupa | 1 | 1-2 seta_luminosa | 7 | todas | bosque_humedo |
+| `tomate_montaña` | Tomate Montaña | 0 | manos | 1 | 1-3 tomate_montana | 3 | verano | isla_ceniza |
+| `papa_ancestral` | Papa Ancestral | 1 | azada | 2 | 1-2 papa_ancestral | 8 | todas | isla_raiz |
+| `calabaza_grande` | Calabaza | 0 | hacha | 2 | 1 calabaza_grande | 5 | otoño | isla_raiz |
+| `chile_volcan` | Chile Volcán | 2 | manos | 1 | 1 chile_volcan | 12 | verano | isla_ceniza |
+| `rosa_arctica` | Rosa Ártica | 3 | tijeras | 1 | 1 rosa_arctica | 40 | verano | isla_aurora |
+
+### RECURSOS ESPECIALES (8 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `polvo_estrellas` | Polvo de Estrellas | 3 | lupa | 1 | 1 polvo_estrellas | 80 | noche | templo |
+| `resina_pino` | Resina de Pino | 1 | hacha | 2 | 1-2 resina_pino | 6 | todas | bosque_nevado |
+| `barro_volcanico` | Barro Volcánico | 1 | pala | 2 | 2-3 barro_volcanico | 5 | todas | volcan |
+| `arcilla_roja` | Arcilla Roja | 0 | pala | 2 | 3-5 arcilla_roja | 3 | todas | riberas |
+| `incienso_silvestre` | Incienso Silvestre | 2 | tijeras | 1 | 1 incienso_silvestre | 25 | todas | monte_remoto |
+| `fragmento_anillo` | Fragmento de Anillo | 3 | lupa | 1 | 1 fragmento_anillo | 100 | todas | ruinas |
+| `semilla_ancestral` | Semilla Ancestral | 3 | azada | 1 | 1 semilla_ancestral | 120 | primavera | templo |
+| `cristal_caverna` | Cristal de Caverna | 2 | pico_oro | 5 | 1 cristal_caverna | 35 | todas | cuevas_profundas |
+
+### PECES (8 tipos) — M34 Pesca
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `pez_gato` | Pez Gato | 0 | cania | — | 1 pez_gato | 5 | todas | riberas |
+| `pez_dorado` | Pez Dorado | 1 | cania | — | 1 pez_dorado | 15 | todas | lagos |
+| `pez_volcan` | Pez Volcánico | 2 | cania_mejorada | — | 1 pez_volcan | 25 | todas | aguas_terminales |
+| `pez_luna` | Pez Luna | 2 | cania_avanzada | — | 1 pez_luna | 30 | noche | isla_aurora |
+| `pez_cueva` | Pez Ciego | 1 | cania | — | 1 pez_cueva | 12 | todas | cuevas |
+| `pez_mandarina` | Mandarina | 1 | cania | — | 1-2 pez_mandarina | 10 | primavera | isla_coral |
+| `pez_arcoiris` | Pez Arcoíris | 3 | cania_especial | — | 1 pez_arcoiris | 60 | verano | isla_aurora |
+| `pulpo_mini` | Mini Pulpo | 0 | cania | — | 1 pulpo_mini | 4 | todas | costas |
+
+### TESOROS RAROS (5 tipos)
+
+| def_id | display_name | Rareza | Herramienta | Golpes | Drops | Valor venta | Temporada | Región |
+|--------|-------------|--------|-------------|--------|-------|-------------|-----------|--------|
+| `moneda_ancestral` | Moneda Ancestral | 3 | pico_oro | — | 1 moneda_ancestral | 150 | todas | ruinas |
+| `reliquia_sol` | Reliquia del Sol | 3 | lupa | — | 1 reliquia_sol | 200 | todas | templo |
+| `gema_esmeralda` | Esmeralda | 2 | pico_oro | — | 1 gema_esmeralda | 45 | todas | minas_profundas |
+| `gema_rubi` | Rubí | 2 | pico_oro | — | 1 gema_rubi | 40 | todas | minas_profundas |
+| `mapa_tesoro` | Mapa del Tesoro | 2 | lupa | — | 1 mapa_tesoro | 50 | todas | costas |
+
+---
+
+TOTAL: 69 recursos base (12 madera + 14 piedra/mineral + 10 fibra/planta + 12 comida + 8 especial + 8 pescados + 5 tesoros)
+
+---
+
 ## 2. Funciones Clave (firmas GDScript)
 
 ```gdscript

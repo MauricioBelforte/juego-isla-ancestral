@@ -1,45 +1,93 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # 02-Analisis.md — Módulo 64: IA de NPC
 
-## 1. Resolución de los 22 puntos del plan maestro
+## 1. Análisis del Dominio
 
-| # | Punto | Resolución |
-|---|---|---|
-| 1 | Máquina de estados | FSM jerárquica con sub-árbol BT ligero: `Idle → Mover → Actividad → (Interrupción)`; transiciones por eventos del mundo |
-| 2 | Navegación | NavigationServer3D + navmesh global del mapa; regiones dinámicas excluyen agua profunda y acantilados |
-| 3 | Pathfinding | A\* del servidor (navmesh); replanificación con cooldown 0.5 s si el destino cambia; sin pathfinding por scan manual |
-| 4 | Obstáculos dinámicos | NPCs usan `navigation_agent` con avoidance radius; vallas/carretas: RID de obstáculo con prioridad |
-| 5 | Prioridades | Agenda = lista ordenada por prioridad: necesidades vitales > trabajo/horario > social > ocio; trivialidades se saltan |
-| 6 | Rutinas | Plan diario por NPC (perfiles: granjero, pescador, comerciante, artesano, niño, anciano); creado al spawn con PRNG M29 |
-| 7 | Comportamiento social | Saludos al pasar + charlas cortas (M21) en zonas sociales; afinidad por NPC tipo; sin filas infinitas |
-| 8 | Comportamiento contextual | Si está lloviendo (M32) → refugio mas cercano; si hace calor (verano) → sombra; viento fuerte → menos camino |
-| 9 | Reacción al clima | Lluvia/tormenta/nieve cambian destinos de rutina (indoor vs outdoor) con 2 tick de anticipación |
-| 10 | Reacción a estaciones | Otoño: recolectar hojas/mercado; invierno: indoor y fogatas; primavera: festivales (M73); verano: playa |
-| 11 | Reacción a obras | El jugador construye (M17): NPCs se acercan a mirar (curiosidad), evitan andamiajes (obstáculo) y comentan |
-| 12 | Reacción al jugador | Saludar de cerca; seguir con la mirada; si el jugador destroza (no aplica en cozy) no hay represalias violentas: se alejan con un comentario |
-| 13 | Búsqueda de lugares | `POI` registrados en M09/M40: el NPC consulta el catálogo de lugares compatibles con su rol |
-| 14 | Horarios | Reloj M31: 06:00 despertar, 08-12 trabajo, 12-13 almuerzo, 13-17 trabajo, 18-20 cena, 20-22 social, 22:30 dormir; variación ±30 min por NPC |
-| 15 | Interrupciones | Lectura de eventos (clima, obras, diálogo del jugador) con prioridad de interrupción; el plan vuelve después (memoria de plan) |
-| 16 | Recuperación de errores | Si el destino es inalcanzable: 2 reintentos con alternativas → fallback genérico (volver a casa) y log DOM-IA |
-| 17 | Fallback | Estado último recurso: `IrACasa` (siempre navegable) o `DetenersePathleísmo`: quedarse quieto 10 s + aviso de teleport suave |
-| 18 | Evitar NPC atascados | Detector de stuck (2 s sin progreso de posición) → re-path; si persiste → teletransporte discreto + log |
-| 19 | Evitar NPC superpuestos | Avoidance físico + separación radial; interpenetración máxima 0.3 m; ninguno empuja al jugador |
-| 20 | Evitar lugares imposibles | Navmesh valida destinos; rutinas nunca piden destinos fuera de navmesh (el mapa de POI incluye capa de caminabilidad) |
-| 21 | Optimizar cantidad de agentes | Zona activa ≤ 60 a plena IA; lejanos → simulación parcial (tick 1 s, ver RF9) — presupuesto M61 |
-| 22 | Simulación parcial | NPCs fuera de la burbuja del jugador: solo script de receta (estado → actividad por hora + destino flag), sin FSM completa ni pathfinding salvo al ser "reactivados" |
+La IA de NPC en un juego cozy tipo Stardew Valley no necesita comportamientos complejos de combate ni pathfinding perfecto. Necesita:
 
-## 2. Decisiones clave
+- **Rutinas diarias creíbles:** El NPC despierta, va a trabajar, come, se socializa, vuelve a casa y duerme. Las rutinas deben ser visibles por el jugador (el NPC "vive" en el pueblo).
+- **Reacciones ambientales:** Lluvia → busca refugio. Noche → vuelve a casa. Evento → participa.
+- **Socialización básica:** Saludos, charlas breves, reagrupación por proximidad.
+- **Navegación robusta:** Que no se atasquen entre ellos ni se queden bloqueados.
+- **Rendimiento:** Máximo 60 NPCs con IA completa; el resto en modo ligero.
 
-1. **FSM + agenda, no behavior tree puro**: el horario y las prioridades viven en datos (Rutina.tres), la FSM interpreta — fácil de balancear y setear por perfil.
-2. **Simulación parcial por burbuja**: 60 plena + resto "receta": NPC lejano no necesita pathfinding continuo; al entrar a la burbuja, se rehidrata plan y se coloca en el destino previsto (sin pop raro: fade de aparición en zona alejada).
-3. **Interrupciones con memoria de plan**: el NPC reanuda su rutina exactamente donde la dejó (índice de actividad + tiempo restante).
-4. **Determinismo suave por PRNG M29**: rutinas y variaciones reproducibles entre cargas.
-5. **Nada violento ni pasivo-agresivo**: reacciones cozy documentadas (curiosidad, comentario, alejarse).
+## 2. Alternativas Evaluadas
 
-## 3. Alternativas descartadas
+| Alternativa | Ventajas | Desventajas | Veredicto |
+|-------------|----------|-------------|-----------|
+| FSM simple (Idle/Walk/Work) | Fácil de implementar | Poco creíble, sin reacciones | ❌ Rechazada |
+| Behavior Trees | Muy potente, escalable | Complejo para un juego cozy, overkill | ❌ Rechazada |
+| GOAP (Goal-Oriented AI) | Flexible, autónomo | Complejo, difícil de debuggear | ❌ Rechazada |
+| FSM jerárquica + Rutinas | Balance entre complejidad y creibilidad | Requiere diseño de rutinas | ✅ Seleccionada |
+| Utility AI | Decisiones ponderadas | Costoso en CPU, innecesario | ❌ Rechazada |
 
-- **Behavior trees puros para TODO NPC**: sobre-ingeniería para rutinas deterministas; se usa BT solo en sub-estados de interacción (cocinar, trabajar); descartado como motor central.
-- **Simulación completa de todos los NPCs del mundo**: presupuesto inviable (cientos); descartado — simulación parcial obligatoria.
-- **Movement de boids para NPCs sociales (flocking)**: crea filas y artificialidad; se usa avoidance del Navigation y destinos escalonados; descartado.
+## 3. Decisión: FSM Jerárquica + Sistema de Rutinas
+
+### Arquitectura propuesta
+
+```
+NPCManager (autoload)
+├── NPCAgent[] (por cada NPC activo)
+│   ├── HFSM (FiniteStateMachine jerárquica)
+│   │   ├── Root
+│   │   │   ├── Idle (esperando)
+│   │   │   ├── Movement (navegando)
+│   │   │   ├── Working (en su trabajo)
+│   │   │   ├── Socializing (charlando)
+│   │   │   ├── Eating (comiendo)
+│   │   │   ├── Sleeping (durmiendo)
+│   │   │   ├── Reacting (reaccionando a evento)
+│   │   │   └── Interacting (hablando con jugador)
+│   │   └── Sub-estados (por ejemplo: Movement tiene Walk, Run, Avoid)
+│   ├── Routine (agenda diaria)
+│   ├── Needs (hambre, energía, social)
+│   └── Blackboard (datos compartidos: posición del jugador, clima, etc.)
+└── NavigationAgent3D (pathfinding)
+```
+
+### Flujo de decisión
+
+1. Cada tick (1-2 veces por segundo para NPCs normales):
+   - El NPC evalúa su estado actual (HFSM)
+   - Consulta la rutina del día (¿debería estar en otro lugar?)
+   - Consulta el entorno (lluvia, noche, evento)
+   - Si algo cambia → transición de estado
+   - Si nada cambia → continuar estado actual
+
+2. Las transiciones son suaves (el NPC no "teletransporta"):
+   - Primero termina la animación actual
+   - Luego se mueve al nuevo destino
+   - Finalmente ejecuta la nueva acción
+
+## 4. Análisis de Rendimiento
+
+| Componente | Costo estimado | Optimización |
+|-----------|---------------|-------------|
+| FSM tick (60 NPCs) | ~4 ms/frame | Batch update, no todos los ticks |
+| Pathfinding (NavigationServer3D) | ~2 ms/frame | Solo NPCs que se mueven |
+| Detección de obstáculos | ~1 ms/frame | PhysicsServer3D, no RayCast por NPC |
+| Social proximity | ~0.5 ms/frame | Grid espacial, no O(n²) |
+| **Total** | **~7.5 ms/frame** | **Dentro del presupuesto de M61** |
+
+### Simulación parcial (NPCs lejanos)
+
+| Distancia | Nivel de simulación | Actualizaciones |
+|-----------|--------------------|-----------------| 
+| < 30 m | Completo (HFSM + pathfinding + animaciones) | 2×/segundo |
+| 30-60 m | Medio (solo rutina, sin pathfinding continuo) | 1×/segundo |
+| 60-100 m | Ligero (solo posición en mapa, sin IA) | 1×/5 segundos |
+| > 100 m | Dormido (sin simulación) | Solo al acercarse |
+
+## 5. Integración con Otros Módulos
+
+| Módulo | Tipo de integración |
+|--------|---------------------|
+| M19 (NPC) | Consuma datos de NPCs (position, home, job) |
+| M29/M30 (Tiempo) | Consulta hora/día para rutinas |
+| M31/M32 (Clima/Estaciones) | Reacciones ambientales |
+| M21 (Diálogos) | El NPC inicia diálogos según estado |
+| M61 (Rendimiento) | Respeta presupuesto de agentes |
+| M65 (Animales IA) | Mismo sistema pero simplificado |
+| M08 (Mundo Voxel) | NavigationServer3D consume navmesh |

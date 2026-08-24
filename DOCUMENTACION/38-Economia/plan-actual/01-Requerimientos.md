@@ -96,6 +96,95 @@ Diseñar el sistema económico del juego: una moneda única (`monedas_aurora`), 
 - La moneda del juego se concibe como "monedas de la isla" (monedas_aurora), sin deuda ni banca.
 ---
 
+## 8.1 Mecanismo Anti-Inflación
+
+### Problema
+
+Sin control, el jugador puede acumular cantidades masivas de un solo recurso (ej: 500 maderas de roble) y venderlas todas en el mismo día, inflando artificialmente su saldo y rompiendo la curva económica del juego.
+
+### Solución: 3 mecanismos combinados
+
+#### 1. Límite diario de ventas por ítem (anti-grind)
+
+| Categoría | Límite diario | Notas |
+|-----------|---------------|-------|
+| Recursos comunes (M15) | 20 unidades | Madera, piedra, fibras, etc. |
+| Recursos medios | 10 unidades | Minerales T1-T2, comida |
+| Recursos raros | 5 unidades | Minerales T3-T4, tesoros |
+| Productos craft (M16) | 15 unidades | Artesanías, muebles |
+| Pescados (M34) | 12 unidades | Válidos en pescadería |
+| Herramientas (M13) | 3 unidades | Solo las sobrantes |
+
+**Regla:** Una vez alcanzado el límite, la tienda rechaza ese ítem hasta el próximo día laborable (M29). El jugador recibe un mensaje: "Hoy ya compré suficiente [ítem]. Vuelve mañana."
+
+#### 2. Amortiguación de precios por volumen (oferta local)
+
+Cuando el jugador vende la misma cantidad de un ítem en **la misma tienda** durante **3+ días consecutivos**, el precio baja suavemente:
+
+| Días consecutivos vendiendo | Ajuste de precio |
+|----------------------------|------------------|
+| 1-2 días | Precio base (sin cambio) |
+| 3-4 días | -5% |
+| 5-6 días | -10% |
+| 7+ días | -15% (máximo) |
+
+**Reset:** El precio vuelve al base si el jugador no vende ese ítem durante 2 días consecutivos.
+
+**Regla cozy:** El ajuste es TEMPORAL y SUAVE. No hay penalización permanente. Si el jugador deja de vender un par de días, todo vuelve a la normalidad.
+
+#### 3. Separación de mercados por isla (comercio inter-islas)
+
+Los productos de una isla **no afectan** el mercado de otra isla:
+
+| Producto | Isla origen | Isla destino | Efecto en mercado destino |
+|----------|-------------|--------------|---------------------------|
+| Madera de roble | Principal | Ceniza | No afecta (recurso desconocido) |
+| Hierro en bruto | Ceniza | Coral | No afecta (recurso diferente) |
+| Cristal bruto | Aurora | Principal | No afecta (recurso exclusivo) |
+
+**Mecanismo:** Cada tienda tiene un `mercado_id` (su isla). Los productos solo se registran en la ventana de oferta de su mercado de origen. Vender un producto de la Isla Ceniza en la Isla Coral no incrementa la oferta de productos de la Isla Coral.
+
+**Excepción:** Si un producto es COMÚN en ambas islas (ej: piedra caliza), ambos mercados comparten la ventana de oferta.
+
+#### 4. Bono por comercio inter-islas (incentivo al viaje)
+
+Vender productos de una isla en otra isla distinta da un **bono fijo**:
+
+| Origen → Destino | Bono |
+|------------------|------|
+| Principal → Ceniza | +30% |
+| Principal → Coral | +40% |
+| Principal → Aurora | +50% |
+| Ceniza → Coral | +35% |
+| Ceniza → Aurora | +45% |
+| Coral → Aurora | +25% |
+
+**Regla:** El bono se aplica al precio base, NO al precio ya ajustado por volumen. Primero se calcula el bono, luego la amortiguación.
+
+#### 5. Reserva de mercado (anti-monopolio)
+
+Si el jugador posee más del 50% del stock conocido de un ítem en una tienda, el precio de venta se reduce adicionalmente:
+
+| % del stock que posee el jugador | Penalización |
+|-----------------------------------|--------------|
+| 0-50% | Ninguna |
+| 51-75% | -10% |
+| 76-100% | -20% |
+
+**Regla:** Esto incentiva al jugador a distribuir sus ventas entre múltiples tiendas y múltiples días, en lugar de vaciar todo en un solo lugar.
+
+### Resumen de Anti-Inflación
+
+| Mecánica | Objetivo | Cozy? |
+|----------|----------|-------|
+| Límite diario por ítem | Evitar grind masivo | Sí (vende mañana) |
+| Amortiguación por volumen | Evitar sobreoferta local | Sí (temporal, suave) |
+| Separación de mercados | Evitar que islas se afecten entre sí | Sí (natural) |
+| Bono inter-islas | Incentivar viajes | Sí (recompensa) |
+| Reserva de mercado | Evitar monopolios | Sí (distribuir ventas) |
+
+---
+
 ## 9. EXPANSIONES DEL MODULO 158 (2026-08-22)
 
 ### 9.1 Moneda Unificada Multi-Isla

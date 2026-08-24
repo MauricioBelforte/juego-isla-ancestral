@@ -1,90 +1,218 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # 03-Diseno.md — Módulo 64: IA de NPC
 
-## 1. Arquitectura
+## 1. Arquitectura del Sistema
+
+### 1.1 Componentes Principales
 
 ```
-                NPCDirector.gd (autoload, única autoridad de agentes)
-   ┌──────────────┬───────────────┬──────────────┬──────────────┐
-   ▼              ▼               ▼              ▼              ▼
-FSM núcleo    Agenda/Rutinas  Interruptores Nav/mesh      Simulación
-(transiciones) (perfiles .tres) (señales M29/  (Navigation   parcial
-                              M31/M32/M17)   Server3D)     (burbuja)
-   │              │               │              │              │
-   └──────────────┴───────┬───────┴──────────────┴──────────────┘
-                          ▼
-              Presupuesto: ≤ 60 plena · resto receta (tick 1 s)
-                          ▼
-              Logs DOM-IA (stuck, fallbacks) — M111/103
+NPCIAController (Componente en cada NPC)
+├── HFSM (Máquina de estados jerárquica)
+│   ├── Root State
+│   │   ├── IdleState
+│   │   │   ├── IdleWait (esperando en posición)
+│   │   │   ├── IdleLook (mirando alrededor)
+│   │   │   └── IdleFidget (movimiento idle: rascarse, estirarse)
+│   │   ├── MovementState
+│   │   │   ├── WalkTo (caminando a destino)
+│   │   │   ├── RunTo (corriendo, si hay prisa)
+│   │   │   ├── Avoid (esquivando NPC/obstáculo)
+│   │   │   └── Wander (deambulando sin destino fijo)
+│   │   ├── WorkState
+│   │   │   ├── WorkAnimate (animación de trabajo)
+│   │   │   ├── WorkPause (pausa breve en trabajo)
+│   │   │   └── WorkComplete (trabajo terminado)
+│   │   ├── SocialState
+│   │   │   ├── Greet (saludo breve)
+│   │   │   ├── Chat (charla con otro NPC)
+│   │   │   └── GroupChat (conversación grupal)
+│   │   ├── EatState
+│   │   │   ├── GoToEat (ir a comer)
+│   │   │   ├── Eating (comiendo)
+│   │   │   └── LeaveEat (terminar de comer)
+│   │   ├── SleepState
+│   │   │   ├── GoToSleep (ir a dormir)
+│   │   │   ├── Sleeping (durmiendo)
+│   │   │   └── WakeUp (despertar)
+│   │   ├── ReactState
+│   │   │   ├── ReactRain (refugiarse por lluvia)
+│   │   │   ├── ReactEvent (ir a evento)
+│   │   │   ├── ReactPlayer (reaccionar al jugador)
+│   │   │   └── ReactDanger (evitar zona peligrosa)
+│   │   └── InteractState
+│   │       ├── TalkToPlayer (hablando con jugador)
+│   │       ├── GiveGift (recibiendo regalo)
+│   │       └── Trade (comerciando)
+│   ├── RoutineSystem (agenda diaria)
+│   ├── NeedsSystem (hambre, energía, social)
+│   └── Blackboard (datos compartidos)
+├── NavigationAgent3D (pathfinding)
+├── AnimationController (animator)
+└── AudioController (sonidos ambientales del NPC)
 ```
 
-## 2. FSM núcleo (estados y transiciones)
+### 1.2 Definición de Rutina
 
+Cada NPC tiene una `RoutineDefinition` (Resource `.tres`):
+
+```gdscript
+class_name RoutineDefinition
+extends Resource
+
+@export var npc_id: StringName
+@export var routine_slots: Array[RoutineSlot] = []
+
+# Ejemplo de routine_slots:
+# [
+#   {hour: 6, minute: 0, action: "wake_up", location: "casa"},
+#   {hour: 7, minute: 0, action: "go_to_work", location: "herreria"},
+#   {hour: 7, minute: 30, action: "work", location: "herreria"},
+#   {hour: 12, minute: 0, action: "go_to_eat", location: "casa"},
+#   {hour: 12, minute: 30, action: "eat", location: "casa"},
+#   {hour: 13, minute: 0, action: "go_to_work", location: "herreria"},
+#   {hour: 18, minute: 0, action: "go_home", location: "casa"},
+#   {hour: 18, minute: 30, action: "free_time", location: "pueblo"},
+#   {hour: 22, minute: 0, action: "go_to_sleep", location: "casa"},
+#   {hour: 22, minute: 30, action: "sleep", location: "casa"},
+# ]
+
+class_name RoutineSlot
+extends Resource
+
+@export var hour: int
+@export var minute: int
+@export var action: StringName
+@export var location: StringName
+@export var duration_minutes: int = 30
+@export var optional: bool = False  # Si es True, el NPC puede ignorarlo
 ```
-        ┌────────┐   evento   ┌────────┐
-        │ Idle   │──────────►│ Mover  │──► Actividad (trabajar/comer/social)
-        └────────┘  plan      └────────┘       ▲ ▼ memoria
-           ▲  ▲  │interrupción(│clima/obras/   │ │
-        fin│  │  ▼jugador)     └───────────────┘ │
-        └──┴──┴─────── Reaccionar ──► volver a plan (índice guardado)
-        └──── Fallback: IrACasa (siempre navegable) / Quieto + teleport suave
+
+### 1.3 Sistema de Necesidades
+
+```gdscript
+class_name NPCNeeds
+extends RefCounted
+
+var hunger: float = 100.0    # 0-100, baja al pasar el tiempo
+var energy: float = 100.0    # 0-100, baja con actividades
+var social: float = 50.0     # 0-100, baja sin interacción social
+var mood: float = 75.0       # 0-100, afecta diálogos
+
+func _process(delta: float) -> void:
+    hunger -= delta * 0.5     # Pierde 0.5 por segundo de juego
+    energy -= delta * 0.3
+    social -= delta * 0.1
+    
+    # Prioridades
+    if hunger < 20: return "need_eat"
+    if energy < 15: return "need_sleep"
+    if social < 20: return "need_socialize"
+    return "ok"
 ```
 
-Transiciones: eventos del mundo (señales M29/M31/M32/M17/M21/M69) → `interrumpir(motivo)`.
+## 2. Transiciones de Estado
 
-## 3. Perfiles de rutina (Rutina.tres)
+### 2.1 Reglas de Transición
 
-| Perfil | Despertar | Trabajo | Almuerzo | Tarde | Social | Dormir |
-|---|---|---|---|---|---|---|
-| Granjero | 06:00 | parcela 08-12 / 13-17 | 12-13 | parcela | plaza 20-22 | 22:30 |
-| Pescador | 05:30 | muelle 07-12 / 14-17 | 12-14 | muelle | cantina | 22:00 |
-| Comerciante | 07:00 | tienda 09-18 | 13-14 | tienda | mercado | 22:30 |
-| Artesano | 06:30 | taller 08-17 | 12-13 | taller | templo | 23:00 |
-| Niño | 07:30 | escuela 09-13 | 13-14 | juegos | plaza | 21:00 |
-| Anciano | 08:00 | banco/parque | 12-13 | parque | templo | 20:30 |
+| Desde | Hacia | Condición |
+|-------|-------|-----------|
+| Idle | Movement | La rutina dice que debería estar en otro lugar |
+| Idle | Work | Es hora de trabajar |
+| Idle | Sleep | Es hora de dormir |
+| Idle | React | Lluvia, evento, peligro |
+| Movement | Work | Llegó al destino de trabajo |
+| Movement | Eat | Llegó al destino de comida |
+| Movement | Sleep | Llegó a la cama |
+| Movement | Idle | No hay más acciones en la rutina |
+| Work | Social | Pausa de trabajo + NPC cercano |
+| Work | Eat | Hora de comer |
+| Work | Idle | Jornada terminada |
+| Social | Work | Fin de la pausa |
+| Social | Idle | No hay más acciones sociales |
+| Eat | Work | Comida terminada |
+| Eat | Sleep | Es noche |
+| Sleep | Idle | Despertar (hora de la rutina) |
+| Cualquiera | React | Evento urgente (lluvia, festival) |
+| React | Estado anterior | Evento terminado |
 
-Variación ±30 min (PRNG M29). Estaciones y clima desplazan indoor/outdoor (P9/P10).
+### 2.2 Prioridad de Transiciones
 
-## 4. Navegación
+1. **Urgente (interrumpe todo):** Lluvia intensa, evento de festival, peligro
+2. **Alta (interrumpe si es necesario):** Hora de dormir, hora de comer
+3. **Media (sigue la rutina):** Ir a trabajar, ir a socializar
+4. **Baja (idle):** Mirar alrededor, fidget, deambular
 
-- `NavigationServer3D` con navmesh global regenerada por M08 (regiones caminables); coste por bioma (césped 1, arena 1.2, roca 1.4).
-- Cada NPC con `NavigationAgent3D`: `path_desired_distance` 1.0, `target_desired_distance` 1.5, `path_max_distance` 4.0.
-- Obstáculos dinámicos: `NavigationObstacle3D` (carretas, andamiajes M17); prioridad de ruptura: el NPC más cercano re-planea (cooldown 0.5 s).
-- Nada de pathfinding a destinos fuera de navmesh: la capa POI valida (P20).
+## 3. Navegación y Pathfinding
 
-## 5. Interrupciones y recuperación
+### 3.1 Configuración de NavigationServer3D
 
-- Fuentes de interrupción: clima (M32) con 2 ticks de anticipación; obras (M17) al cambiar navmesh; diálogo (M21) cercano; eventos M73; jugador corriendo (desvío).
-- Memoria: `plan_reanudar = {indice, hora_restante}` — al volver, el NPC reanuda la actividad exacta (no empieza la rutina de cero).
-- Errores: destino inalcanzable → 2 reintentos con alternativas (POI secundario) → fallback IrACasa → log DOM-IA.
+```gdscript
+# En el NPC
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 
-## 6. Anti-atascos y anti-solapamiento
+func _ready():
+    nav_agent.path_desired_distance = 1.0
+    nav_agent.target_desired_distance = 0.5
+    nav_agent.radius = 0.4  # Radio del NPC
 
-- Detector de stuck: posición sin cambio > 2 s → re-path; > 6 s → teleport discreto a caminable cercano + log.
-- Separación radial entre NPCs: fuerza de empuje suave (máx 0.3 m de interpenetración); ceiling de 12 NPCs en un mismo tile de plaza → destinos escalonados al planificar.
-- Ningún NPC empuja al jugador: la avoidance se desactiva para el jugador (el NPC cede el paso).
+func navigate_to(target_pos: Vector3) -> void:
+    nav_agent.target_position = target_pos
+    # El pathfinding se procesa en el siguiente frame
 
-## 7. Simulación parcial (burbuja)
+func _physics_process(delta):
+    if nav_agent.is_navigation_finished():
+        return
+    
+    var next_pos = nav_agent.get_next_path_position()
+    var direction = (next_pos - global_position).normalized()
+    velocity = direction * move_speed
+    move_and_slide()
+```
 
-- Burbuja del jugador: radio 64 m (zona activa IA completa).
-- Fuera de burbuja: estado "receta" — tick 1 s: `estado = agenda[hora]`, `destino = poid[id]`, sin pathfinding.
-- Al volver a la burbuja: rehidratación — el NPC se coloca en el destino de su receta (fade en punto lejano al jugador si es necesario).
-- Presupuesto: ≤ 60 plena; si la zona tiene más (ciudad), el excedente alterna a receta "elegante" por las más lejanas.
+### 3.2 Anti-Atascos
 
-## 8. Presupuesto y rendimiento (M61)
+| Mecánica | Implementación |
+|----------|---------------|
+| Detección de stuck | Si no se mueve > 2 s intentando llegar → recalcula path |
+| Desvío de obstáculos | Si chocó con otro NPC → buscar punto alternativo cercano |
+| Separación | Fuerza de separación entre NPCs (evitar superposición) |
+| Respawn de emergencia | Si lleva > 10 s atascado → teletransportar a destino más cercano |
+| Límite de agentes | Máximo 60 paths simultáneos; el resto espera |
 
-| Métrica | Tope |
-|---|---|
-| NPC a plena IA en burbuja | 60 |
-| FSM ticks totales | ≤ 8 ms (promedio) |
-| Pathfinding simultáneos | ≤ 8 por frame |
-| Avoidance updates | ≤ 30 por frame |
-| Tick de receta (lejanos) | 1 s |
-| Allocs en camino IA | 0 (pool de caminos) |
+## 4. Comportamiento Social
 
-## 9. QA
+### 4.1 Reglas de Socialización
 
-- Test M112: rutinas cumplen horario (spot-check 24 h simuladas), interrupciones reanudan plan, stuck se recupera, presupuestos respetados (profiler M113).
-- Recorrido M114: pueblo vivo durante 3 días de juego; sin NPCs superpuestos ni atascados; reacciones correctas a lluvia/obras/jugador.
+| Evento | Acción | Duración |
+|--------|--------|----------|
+| Dos NPCs se cruzan | Saludo breve (asentir, grito) | 2-3 s |
+| Dos NPCs están cerca > 30 s | Iniciar charla | 30-60 s |
+| 3+ NPCs en zona social | Conversación grupal | 60-120 s |
+| Jugador se acerca a NPC trabajando | Saludo rápido, continúa trabajando | 5 s |
+| Jugador habla con NPC | Entrar en estado Interact | Variable |
+
+### 4.2 Selectividad Social
+
+Los NPCs no socializan con todos por igual:
+
+| Condición | Probabilidad de socializar |
+|-----------|---------------------------|
+| Mismo trabajo | +30% |
+| Vecinos de casa | +20% |
+| Amistad alta (M20) | +40% |
+| Mismo género | +10% |
+| Sin relación | Base (50%) |
+
+## 5. Reacciones Ambientales
+
+| Condición | Reacción |
+|-----------|----------|
+| Lluvia | Buscar refugio (techo cercano) |
+| Tormenta | Volver a casa inmediatamente |
+| Noche (> 22:00) | Volver a dormir |
+| Evento/festival | Ir al lugar del evento |
+| Construction nearby (M17) | Mirar la construcción, comentar |
+| Jugador pasa corriendo | Mirar al jugador, comentario rápido |
+| Recurso agotado cerca | Comentario sobre el recurso |
