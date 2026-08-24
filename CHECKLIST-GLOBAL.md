@@ -1,4 +1,4 @@
-﻿# CHECKLIST-GLOBAL.md — Orquestador Multiagente
+# CHECKLIST-GLOBAL.md — Orquestador Multiagente
 
 > **Modelo:** Deepseek V4 Flash
 > **Plataforma:** OpenCode
@@ -96,7 +96,7 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 78 | Legal — Propiedad Intelectual | 🟢 Disponible | 157/157 | Alta | 2 | 01 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). PENDIENTE DE VERIFICACIÓN CRUZADA (QA por Gemini). DELEGABLE PARA IMPLEMENTAR |
 | 79 | Legal — Contratos | 🟢 Disponible | 103/103 | Media | 2 | 78 | — | 2026-08-21 02:00 | Documentación completa (Deepseek V4 Flash / OpenCode): plantilla de contrato de contribución + 8 anexos (arte, programación, música, composición, diseño, escritura, voz, freelancer), cesión de PI al estudio con autoría conservada, remuneración fija + royalties opcionales (música/escritura), confidencialidad + NDA, terminación, portfolio sin spoilers, garantías de originalidad, responsabilidad limitada, legislación/foro y revisión de abogado; índice alimenta M151. PENDIENTE DE VERIFICACIÓN CRUZADA. DELEGABLE PARA IMPLEMENTAR |
 | 80 | Legal — Privacidad | 🟢 Disponible | 144/144 | Alta | 2 | 78 | — | 2026-08-17 | Documentación completa por Deepseek V4 Flash (tanda 4, 2026-08-17). PENDIENTE DE VERIFICACIÓN CRUZADA (QA por Gemini). DELEGABLE PARA IMPLEMENTAR |
-| 81 | Legal — Menores | 🔵 En curso | 0/110 | Media | 2 | 80 | NEMOTRON 3 ULTRA | 2026-08-21 21:00 | Documentación en curso por Nemotron 3 Ultra (OpenCode): análisis regulatorio (COPPA, GDPR-K, LGPD), diseño age gating, data sanitization, parental consent, IARC rating, políticas legales menores. Pendiente QA cruzado. DELEGABLE PARA IMPLEMENTAR |
+| 81 | Legal — Menores | 🟢 Disponible | 137/137 | Media | 2 | 80 | — | 2026-08-24 00:20 | Documentación completa por Nemotron 3 Ultra (OpenCode): análisis regulatorio (COPPA, GDPR-K, LGPD), diseño age gating, data sanitization, parental consent, IARC rating, políticas legales menores. Bloqueo colgado >24 h liberado por ox-alpha (Cline) según regla 21.4.7; conteo real verificado por script: 137/137 ítems [x], 0 pendientes, 0 dudas. PENDIENTE DE VERIFICACIÓN CRUZADA (QA por Gemini). DELEGABLE PARA IMPLEMENTAR |
 | 82 | Clasificación por Edades | 🟢 Disponible | 100/100 | Media | 1 | 78 | — | 2026-08-21 01:23 | Documentación completa por MiMo V2.5 (OpenCode): sistemas IARC/ESRB/PEGI/CERO/GRAC/ACB/USK/ClassInd, descriptores de contenido, rating objetivo Everyone, validación automática, submissions. DELEGABLE PARA IMPLEMENTAR |
 | 83 | Licencias de Software | 🟢 Disponible | 100/100 | Media | 2 | 55, 117 | — | 2026-08-21 01:24 | Documentación completa por MiMo V2.5 (OpenCode): inventario de licencias, validación de compatibilidad, generación automática de notices, integración build pipeline, testing. DELEGABLE PARA IMPLEMENTAR |
 | 84 | Música y Audio — Legal | 🟢 Disponible | 100/100 | Media | 2 | 41, 78 | — | 2026-08-21 01:25 | Documentación completa por MiMo V2.5 (OpenCode): contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA, clearances. DELEGABLE PARA IMPLEMENTAR |
@@ -178,6 +178,8 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 | 160 | Diseño de Ubicaciones del Mundo | 🟢 Disponible | 0/140 | Alta | 4 | 27, 17, 18, 39, 159 | — | 2026-08-22 20:30 | Documentación completa por MiMo V2.5 (OpenCode): Sistema de IDs de ubicaciones (LOC-ISLA-TIPO-NÚMERO), tabla maestra 46 ubicaciones en 4 islas, mapas conceptuales, distribución de objetos con IDs M159, Isla Raíz detallada (12 ubicaciones). 140 ítems checklist. Integración M27/M17/M18/M39/M159/M158/M58. DELEGABLE PARA IMPLEMENTAR |
 | 161 | Diseño Visual de NPCs | 🟢 Disponible | 0/130 | Alta | 3 | 19, 159, 45, 46, 155 | — | 2026-08-23 03:39 | Documentación completa por MiMo V2.5 (OpenCode): Diseño visual de 23 NPCs (4 islas), ropa completa con colores HEX (sombrero, camisa, pantalón, botas), herramientas en mano con IDs M159 (hacha, rastrillo, martillo, caña, etc.), rasgos físicos (piel, cabello, ojos), accesorios, variantes estacionales, reglas de identificación por profesión. 130 ítems checklist. Integración M19/M159/M45/M46/M155/M160/M27. DELEGABLE PARA IMPLEMENTAR |
 | 162 | Diálogos Contextuales de NPCs | 🟢 Disponible | 0/120 | Alta | 4 | 21, 22, 19, 161, 20, 29, 160 | — | 2026-08-23 19:50 | Documentación completa por MiMo V2.5 (OpenCode): Diálogos contextuales de 23 NPCs por capítulo (0-7) de la historia principal (M22), con variantes por amistad (3 niveles), estación, hora del día y ubicación. ~400 diálogos totales. Sistema de prioridad con fallback. JSON compatible con M21. Viajero Misterioso con arco narrativo propio. 120 ítems checklist. Integración M21/M22/M19/M161/M20/M29/M160. DELEGABLE PARA IMPLEMENTAR |
+| 163 | Sistema de Encantamientos | 🟢 Disponible | 0/120 | Alta | 3 | 13, 158, 159 | — | 2026-08-24 | Encantamientos por tier: Cobre Ancestral, Hierro Prospero, Oro Brillante, Cristal de Caverna. Chamán del monte (Isla Raíz) encanta herramientas con incienso. Cualquier tier se puede encantar. Encantamientos se pueden vender en tiendas especializadas. Recurso incienso renovable (cultivo/eventos). 120 ítems checklist. |
+| 164 | Isla de Combate Endgame | 🟢 Disponible | 0/120 | Alta | 4 | 158, 163, 22, 27, 38 | — | 2026-08-24 | Isla final accesible solo con gemas intercambiadas. Combate opcional con villanos, mobs y jefes. Mecánicas cozy (sin game over, sin penalidades). Recompensas exclusivas (cosméticos, herramientas únicas, títulos). Gema como moneda de acceso. Diseñado para jugadores que quieren combate. 120 ítems checklist. |
 
 ## Simbología de Estados
 
@@ -192,13 +194,13 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 
 ## Resumen del Proyecto
 
-- **Total de módulos:** 162 (01 + los 152 del plan inicial —incluido el 130-Artbook agregado el 2026-08-23— + 154 a 162)
+- **Total de módulos:** 164 (01 + los 152 del plan inicial —incluido el 130-Artbook agregado el 2026-08-23— + 154 a 164)
 - **Completados (`✅`):** 0 (ninguno tiene código implementado ni QA cruzado; los documentados son DELEGABLES)
-- **En curso (`🔵`):** 3 (01-Fundamentos, 61-Rendimiento, 153-Objetivo Final)
+- **En curso (`🔵`):** 0 — sin bloqueos activos (M81 liberado el 2026-08-24 tras verificar doc completa)
 - **En riesgo (`🔴`):** 0
 - **Con dudas (`🟡`):** 0
-- **Disponibles (`🟢`):** 116 (114 con documentación completa + 04 y 06 parciales; 01 índice/portal 68/152)
-- **Sin iniciar (`⬜`):** 36
+- **Disponibles (`🟢`):** 162 (con progreso parcial en 01, 04, 06, 130, 154, 158, 159 y 160; el resto con documentación de diseño completa)
+- **Sin iniciar (`⬜`):** 0
 - **En curso/riesgo/dudas (`🔵`/`🔴`/`🟡`):** 0 — sin bloqueos colgados
 - **Progreso total:** documentación de diseño de 69 módulos completada (68 del plan maestro + portal 01 actualizado); implementación de código pendiente en todos los módulos (se marcará `✅` solo con DoD: código + testings + logs + QA)
 
@@ -239,3 +241,6 @@ Ver sección 21 del `AGENTS.md` para el flujo completo (incluye QA cruzado, DoD 
 > **2026-08-23 (ox-alpha, Cline):** se creó el módulo **130-Artbook** (plan-inicial + plan-actual, 10 archivos, checklist 105 ítems con 40 completados) para cubrir la sección #129 ARTBOOK del plan maestro que estaba huérfana. Se agregó la nota de trazabilidad de los **Pases de Mérito** en M38 Economía (plan-actual/02-Analisis.md §6.1): la moneda única (D1) se mantiene y la función de recompensas por tareas diarias quedó absorbida por M94/M74. Se corrigió el total de módulos del Resumen.
 
 > **2026-08-23 (MiMo V2.5, OpenCode):** se creó M162 (Diálogos Contextuales de NPCs, 120 ítems). Diálogos contextuales de 23 NPCs por capítulo (0-7) de la historia principal (M22), con variantes por amistad, estación, hora y ubicación. ~400 diálogos totales. Sistema de prioridad con fallback. JSON compatible con M21. Viajero Misterioso con arco narrativo propio. Total: 162 módulos documentados.
+> **2026-08-24 (ox-alpha, Cline):** se corrigió la última inconsistencia pendiente de la auditoría del 2026-08-23: la fila M81 (Legal — Menores) estaba bloqueada como en curso por Nemotron 3 Ultra desde 2026-08-21 sin actividad (>24 h, regla 21.4.7). Verificación con script confirmó que la documentación está COMPLETA (plan-actual con 137/137 ítems marcados, 0 pendientes, 0 dudas). Fila actualizada a Disponible, progreso 137/137, bloqueo liberado. Resumen del Proyecto sincronizado.
+
+> **2026-08-24 (MiMo V2.5, OpenCode):** se crearon M163 (Sistema de Encantamientos, 120 ítems) y M164 (Isla de Combate Endgame, 120 ítems). Se actualizaron M13 y M158 con tiers unificados (Cobre→Hierro→Oro→Cristal) y sistema de encantamientos lateral. Se renombró "Encantar" de M13 a "Potenciar" para evitar confusión con encantamientos del chamán. Se actualizó esquema ItemData (M14) con campos de herramientas, encantamientos y ropa. Total: 164 módulos documentados.

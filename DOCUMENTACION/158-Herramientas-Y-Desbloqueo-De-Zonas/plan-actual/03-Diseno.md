@@ -18,37 +18,37 @@ ToolTierSystem (autoload)
 
 | Tier | Nombre | Color | Dano | Velocidad | Area | Material |
 |------|--------|-------|------|-----------|------|----------|
-| T1 | Madera | Marron | 1.0 | 1.0 | 1x1 | Auto-coleccion |
-| T2 | Cobre | Naranja | 2.0 | 1.5 | 1x1 | 10 cobre + 500 monedas |
-| T3 | Hierro | Gris | 3.5 | 2.0 | 2x2 | 20 hierro + 2000 monedas |
-| T4 | Encantada | Morado | 5.0 | 3.0 | 2x2 | 5 cristales + 5000 monedas |
+| T1 | Cobre | Naranja | 1.0 | 1.0 | 1x1 | Gratis (regalo del carpintero) |
+| T2 | Hierro | Gris | 2.0 | 1.5 | 1x1 | 10 hierro + 500 monedas |
+| T3 | Oro | Dorado | 3.5 | 2.0 | 2x2 | 20 oro + 2000 monedas |
+| T4 | Cristal | Azul claro | 5.0 | 3.0 | 2x2 | 5 cristales + 5000 monedas |
 
 ## 3. Sistema de Gates por Zona
 
 | Tipo de Gate | Ejemplo | Tier Requerido | Bloquea Historia |
 |-------------|---------|----------------|------------------|
-| Rama gruesa | Paso en sendero | T1 (hacha basica) | No |
-| Muro de piedra | Camino a pueblo | T2 (pico cobre) | Parcial |
-| Raiz anciana | Entrada a templo | T2 (hacha cobre) | Si |
-| Sello ancestral | Puerta de templo | T3 (pico hierro) | Si |
-| Cristal bloqueado | Camara secreta | T4 (encantada) | Final secreto |
-| Tumba encantada | Zona lore oculto | T4 (encantada) | No |
+| Rama gruesa | Paso en sendero | T1 (hacha cobre) | No |
+| Muro de piedra | Camino a pueblo | T2 (pico hierro) | Parcial |
+| Raiz anciana | Entrada a templo | T2 (hacha hierro) | Si |
+| Sello ancestral | Puerta de templo | T3 (pico oro) | Si |
+| Cristal bloqueado | Camara secreta | T4 (herramienta cristal) | Final secreto |
+| Tumba ancestral | Zona lore oculto | T4 (herramienta cristal) | No |
 
 ## 4. Sistema de Forja por Isla
 
 | Isla | Tier Forjado | Materiales | Monedas | Curso |
 |------|-------------|------------|---------|-------|
-| Principal | T1 | Auto-coleccion | Gratis | 300 monedas |
-| Isla 2 | T2 | 10 cobre | 500 | 1500 monedas |
-| Isla 3 | T3 | 20 hierro | 2000 | 5000 monedas |
-| Isla 4 | T4 | 5 cristales | 5000 | 10000 monedas |
+| Raiz | T1 Cobre | Gratis (regalo) | 0 | 300 monedas |
+| Ceniza | T2 Hierro | 10 hierro | 500 | 1500 monedas |
+| Coral | T3 Oro | 20 oro | 2000 | 5000 monedas |
+| Aurora | T4 Cristal | 5 cristales | 5000 | 10000 monedas |
 
 ## 5. Progresion de Cursos
 
-1. **Carpinteria (Principal)** - 300 monedas: vende T1, precio 10-15
-2. **Herreria (Isla 2)** - 1500 monedas: vende T1-T2, precio 15-30
-3. **Herreria Avanzada (Isla 3)** - 5000 monedas: vende T1-T3, precio 20-50
-4. **Encantamiento (Isla 4)** - 10000 monedas: vende T1-T4, precio 30-80
+1. **Carpinteria (Raiz)** - 300 monedas: vende T1, precio 10-15
+2. **Herreria (Ceniza)** - 1500 monedas: vende T1-T2, precio 15-30
+3. **Herreria Avanzada (Coral)** - 5000 monedas: vende T1-T3, precio 20-50
+4. **Cristaleria (Aurora)** - 10000 monedas: vende T1-T4, precio 30-80
 
 ## 6. NPCs Visitantes
 

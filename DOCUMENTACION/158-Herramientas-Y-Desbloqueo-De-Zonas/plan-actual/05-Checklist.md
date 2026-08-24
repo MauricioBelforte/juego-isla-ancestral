@@ -9,7 +9,7 @@
 
 - [ ] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S]
 - [ ] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S]
-- [ ] Definir 4 tiers: Madera(T1), Cobre(T2), Hierro(T3), Encantada(T4) [S]
+- [ ] Definir 4 tiers: Cobre(T1), Hierro(T2), Oro(T3), Cristal(T4) [S]
 - [ ] T1 se obtiene gratis en isla principal (auto-coleccion) [S]
 - [ ] T2-T4 se forjan en islas distintas con profesional especializado [M]
 - [ ] Forja requiere materiales + monedas [M]
@@ -25,7 +25,7 @@
 
 ## B. Sistema de Tiers (12)
 
-- [ ] Enum ToolTier definido (T1_MADERA, T2_COBRE, T3_HIERRO, T4_ENCANTADA) [S]
+- [ ] Enum ToolTier definido (T1_COBRE, T2_HIERRO, T3_ORO, T4_CRISTAL) [S]
 - [ ] ToolTierDefinition como Resource con propiedades por tier [M]
 - [ ] T1: dano 1.0, velocidad 1.0, area 1x1 [S]
 - [ ] T2: dano 2.0, velocidad 1.5, area 1x1 [S]
@@ -46,8 +46,8 @@
 - [ ] Gate tipo muro de piedra: requiere T2, pico [S]
 - [ ] Gate tipo raiz anciana: requiere T2, hacha [S]
 - [ ] Gate tipo sello ancestral: requiere T3, pico [S]
-- [ ] Gate tipo cristal bloqueado: requiere T4, encantada [S]
-- [ ] Gate tipo tumba encantada: requiere T4, encantada [S]
+- [ ] Gate tipo cristal bloqueado: requiere T4, cristal [S]
+- [ ] Gate tipo tumba ancestral: requiere T4, cristal [S]
 - [ ] Verificacion de tier: can_access_zone() retorna bool [M]
 - [ ] Feedback visual al no tener tier (brillo rojo suave) [S]
 - [ ] Tooltip informativo cuando el jugador no tiene tier [S]
@@ -59,10 +59,10 @@
 ## D. Forja por Isla (15)
 
 - [ ] ForgeRecipe como Resource (result_tool, result_tier, materials, coins) [M]
-- [ ] Isla Principal: forja T1 gratis (auto-coleccion) [S]
-- [ ] Isla 2: forja T2 con 10 cobre + 500 monedas [M]
-- [ ] Isla 3: forja T3 con 20 hierro + 2000 monedas [M]
-- [ ] Isla 4: forja T4 con 5 cristales + 5000 monedas [M]
+- [ ] Isla Raiz: forja T1 cobre gratis (regalo del carpintero) [S]
+- [ ] Isla Ceniza: forja T2 hierro con 10 hierro + 500 monedas [M]
+- [ ] Isla Coral: forja T3 oro con 20 oro + 2000 monedas [M]
+- [ ] Isla Aurora: forja T4 cristal con 5 cristales + 5000 monedas [M]
 - [ ] ForgeUI como Control con lista de recetas [M]
 - [ ] ForgeUI muestra materiales necesarios y monedas [S]
 - [ ] ForgeUI valida que el jugador tenga todo antes de forjar [M]
@@ -77,10 +77,10 @@
 ## E. Cursos de Oficio (12)
 
 - [ ] CourseDefinition como Resource (course_id, profession, cost, required_tier) [M]
-- [ ] Curso Carpinteria (Principal): 300 monedas, vende T1 [S]
-- [ ] Curso Herreria (Isla 2): 1500 monedas, vende T1-T2 [S]
-- [ ] Curso Herreria Avanzada (Isla 3): 5000 monedas, vende T1-T3 [S]
-- [ ] Curso Encantamiento (Isla 4): 10000 monedas, vende T1-T4 [S]
+- [ ] Curso Carpinteria (Raiz): 300 monedas, vende T1 [S]
+- [ ] Curso Herreria (Ceniza): 1500 monedas, vende T1-T2 [S]
+- [ ] Curso Herreria Avanzada (Coral): 5000 monedas, vende T1-T3 [S]
+- [ ] Curso Cristaleria (Aurora): 10000 monedas, vende T1-T4 [S]
 - [ ] CourseUI como Control con info del curso [M]
 - [ ] CourseUI valida tier requerido para tomar el curso [M]
 - [ ] Se registran cursos aprendidos en PlayerToolProgress [M]

@@ -52,14 +52,14 @@ Además de forjar herramientas nuevas, el jugador puede MEJORAR las que ya tiene
 |--------|-------|--------|---------------|
 | Afilar | 50 monedas + 3 piedras | +20% velocidad | Herrero de la isla |
 | Templar | 150 monedas + 5 minerales | +30% durabilidad | Herrero avanzado |
-| Encantar | 500 monedas + 2 cristales | +50% dano + efecto visual | Encantador |
+| Potenciar | 500 monedas + 2 cristales | +50% dano + efecto visual | Cristalero |
 
 #### Reglas de Mejora
 
 - Se mejora la herramienta que el jugador tiene equipada
 - La mejora es permanente (no se puede deshacer)
 - Cada herramienta solo recibe CADA mejora una vez (no se puede afilar 2 veces)
-- El orden de mejora es: Afilar → Templar → Encantar (secuencial)
+- El orden de mejora es: Afilar → Templar → Potenciar (secuencial)
 - La herramienta mejorada conserva su durabilidad actual
 - La herramienta mejorada se ve visualmente diferente (brillo, partículas)
 
@@ -69,16 +69,17 @@ Además de forjar herramientas nuevas, el jugador puede MEJORAR las que ya tiene
 Herramienta base (T1)
   → Afilar (+20% velocidad)
     → Templar (+30% durabilidad)
-      → Encantar (+50% dano + efecto visual)
-        → Herramienta T4 completa
+      → Potenciar (+50% dano + efecto visual)
+        → Herramienta mejorada al maximo
 `
 
 #### Integración con M158 (Tiers)
 
 - Las mejoras son OPCIONALES: el jugador puede forjar T2 sin mejorar T1
 - Pero las mejoras facilitan la exploración y los puzzles
-- Una herramienta T1 encantada puede ser útil en zonas T2
+- Una herramienta T1 potenciada puede ser útil en zonas T2
 - Las mejoras no reemplazan los tiers; son complementarias
+- Los encantamientos del chaman (M158) son un sistema SEPARADO: dan habilidades únicas por tier
 
 ### 9.2 Mejoras por Isla
 
@@ -86,8 +87,8 @@ Herramienta base (T1)
 |------|---------------------|-----------|
 | Principal | Afilar | Ninguno |
 | Isla 2 | Afilar, Templar | Herrería (curso) |
-| Isla 3 | Afilar, Templar, Encantar | Herrería Avanzada (curso) |
-| Isla 4 | Todas | Encantamiento (curso) |
+| Isla 3 | Afilar, Templar, Potenciar | Herrería Avanzada (curso) |
+| Isla 4 | Todas | Cristalería (curso) |
 
 ### 9.3 Visual de Mejoras
 
@@ -96,7 +97,7 @@ Herramienta base (T1)
 | Base | Sin brillo |
 | Afilada | Brillo sutil en el filo |
 | Templada | Brillo dorado tenue |
-| Encantada | Brillo morado + partículas |
+| Potenciada | Brillo morado + partículas |
 
 ---
 

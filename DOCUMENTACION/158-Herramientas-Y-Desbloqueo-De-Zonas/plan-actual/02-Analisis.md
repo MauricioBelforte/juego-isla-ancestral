@@ -9,10 +9,10 @@
 
 | Tier | Material | Isla | Profesional | Costo aprox | Contenido desbloqueado |
 |------|----------|------|-------------|-------------|------------------------|
-| T1 | Madera/Piedra | Principal | Auto-colección | Gratis | Ramas, piedras, jarrones, árboles |
-| T2 | Cobre | Isla 2 | Herrero | 500 monedas + 10 cobre | Muros piedra, raíces, caminos ocultos |
-| T3 | Hierro | Isla 3 | Herrero avanzado | 2000 monedas + 20 hierro | Sellos, puertas templo, historia |
-| T4 | Encantada | Isla 4 | Encantador | 5000 monedas + 5 cristales | Cámaras secretas, zonas encantadas |
+| T1 | Cobre | Raiz | Carpintero | Gratis (regalo) | Ramas, piedras, jarrones, arboles |
+| T2 | Hierro | Ceniza | Herrero | 500 monedas + 10 hierro | Muros piedra, raices, caminos ocultos |
+| T3 | Oro | Coral | Herrero avanzado | 2000 monedas + 20 oro | Sellos, puertas templo, historia |
+| T4 | Cristal | Aurora | Cristalero | 5000 monedas + 5 cristales | Camaras secretas, zonas encantadas |
 
 ### Fuentes de ingreso del jugador
 
@@ -40,13 +40,15 @@
 
 **D1: No hay bloqueo permanente.** El jugador que quiere vivir en su pueblo y pescar puede hacerlo. Las herramientas desbloquean contenido OPCIONAL, no la vida diaria.
 
-**D2: La historia SI requiere T4.** Para completar los 7 sellos y el final, el jugador necesita herramientas encantadas.
+**D2: La historia SI requiere T4.** Para completar los 7 sellos y el final, el jugador necesita herramientas de cristal.
 
 **D3: Premium acelera, no reemplaza.** El jugador premium compra monedas pero SIEMPRE debe recorrer el mapa. No puede comprar herramientas directamente.
 
-**D4: Cursos son inversiones.** Aprender carpinteria/herreria/encantamiento cuesta mucho, pero permite vender herramientas y recuperar la inversion.
+**D4: Cursos son inversiones.** Aprender carpinteria/herreria/herreria avanzada/cristaleria cuesta mucho, pero permite vender herramientas y recuperar la inversion.
 
 **D5: Islas como profesiones, no como niveles.** Cada isla tiene identidad propia pero no son niveles que obliguen a un orden.
+
+**D6: Encantamientos son laterales.** El chaman del monte encanta cualquier tier con habilidades únicas. No es obligatorio, pero agrega profundidad.
 
 ## 2. Analisis de Alternativas
 

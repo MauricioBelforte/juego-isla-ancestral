@@ -59,6 +59,17 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [x] Rechazo de ids desconocidos en from_dict con log DOM-14 [M]
 - [x] Enum ContainerType: BOLSILLO, MOCHILA, CASA, COFRE, ALMACEN, CORREO [S]
 - [x] Conversión de tamaño de contenedor sin perder ítems (clamp y migración) [M]
+- [ ] Campo item_type: TOOL, RESOURCE, FOOD, FISH, MATERIAL, GIFT, SPORE, FURNITURE, QUEST, CLOTHING, ENCHANTMENT [S]
+- [ ] Campo tool_type: string con tipo de herramienta (vacio si no es herramienta) [S]
+- [ ] Campo tool_tier: 0=none, 1=T1, 2=T2, 3=T3, 4=T4 [S]
+- [ ] Campo enchantment: string con id de encantamiento (vacio si no esta encantada) [S]
+- [ ] Campo is_enchanted: bool [S]
+- [ ] Campo durability: int (-1 = infinita, solo herramientas) [S]
+- [ ] Campo durability_max: int [S]
+- [ ] Campo tags: Array[String] para filtrado [S]
+- [ ] Campo is_quest_item: bool [S]
+- [ ] Campo visual_mesh: Mesh para items 3D en el mundo [S]
+- [ ] Campo visual_color: Color base del item [S]
 
 ## D. Slots, stacks y manipulación (10)
 

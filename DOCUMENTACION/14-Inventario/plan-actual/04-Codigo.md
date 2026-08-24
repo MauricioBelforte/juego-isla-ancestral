@@ -30,15 +30,28 @@
 ```
 # item_data.gd (Resource)
 @export var id: String                    # id inmutable (requisito M59/M87)
-@export var display_name_key: String      # clave de localización M87
+@export var display_name_key: String      # clave de localizacion M87
 @export var description_key: String
 @export var icon: Texture2D
-@export var category: ItemCategory        # enum de 9 categorías
+@export var category: ItemCategory        # enum de 9 categorias
 @export var stack_max: int = 99
 @export var rarity: Rarity                # enum: comun, raro, ancestral, divino
 @export var base_price: int
-@export var protected_from_discard: bool  # espóras, regalos, objetos de misión
+@export var protected_from_discard: bool  # esporas, regalos, objetos de mision
 @export var recipes_key: Array[String]    # ids de recetas M16 donde interviene
+# --- Nuevos campos (2026-08-23) ---
+@export var item_type: ItemType           # enum: TOOL, RESOURCE, FOOD, FISH, MATERIAL, GIFT, SPORE, FURNITURE, QUEST, CLOTHING, ENCHANTMENT
+@export var tool_type: String             # "pickaxe", "axe", "hoe", "shovel", "watering_can", "fishing_rod", "hammer", "scissors", "magnifying_glass" (vacio si no es herramienta)
+@export var tool_tier: int = 0            # 0=none, 1=T1_cobre, 2=T2_hierro, 3=T3_oro, 4=T4_cristal
+@export var enchantment: String           # "ancestral_cobre", "prospero_hierro", "brillante_oro", "caverna_cristal" (vacio si no esta encantada)
+@export var is_enchanted: bool = false
+@export var durability: int = -1          # -1 = infinita (solo para herramientas)
+@export var durability_max: int = -1
+@export var tags: Array[String]           # para filtrado: "mineral", "madera", "comida", "regalo", etc.
+@export var is_quest_item: bool = false
+# --- Campos visuales (M161) ---
+@export var visual_mesh: Mesh             # mesh 3D si el item se muestra en el mundo
+@export var visual_color: Color           # color base del item
 
 # inventory.gd (RefCounted)
 var slots: Array[InventorySlot]

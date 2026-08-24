@@ -46,9 +46,9 @@ ToolTierSystem.is_story_gate(gate_id: String) -> bool
 ## 3. Flujo de Forja
 
 ```
-Jugador habla con herrero en isla 2
+Jugador habla con herrero en Isla Ceniza
     → Se abre ForgeUI con recetas disponibles
-    → Jugador selecciona herramienta T2
+    → Jugador selecciona herramienta T2 (hierro)
     → ForgeUI muestra materiales necesarios + monedas
     → Si tiene todo: confirma forja
     → Se consumen materiales y monedas
