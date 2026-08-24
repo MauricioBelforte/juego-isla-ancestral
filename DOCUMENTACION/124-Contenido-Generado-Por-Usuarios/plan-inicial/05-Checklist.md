@@ -4,162 +4,162 @@
 # 05-Checklist.md — Módulo 124: Contenido Generado por Usuarios (110 ítems)
 
 ## Convención
-- `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
+- `[ ]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## 1. Decidir si existirá (1º)
 
-- [x] Definir UGC como post-V2 con GATE [M]
-- [x] Definir criterio: demanda comunitaria ≥ 25% (M100) [S]
-- [x] Definir criterio: coste mensual de almacenamiento ≤ presupuesto [S]
-- [x] Definir criterio: efectividad de moderación automática ≥ 75% [S]
-- [x] Definir criterio: diseño aprobado 100% [S]
-- [x] Definir posposición a V3 si el GATE falla [S]
-- [x] Definir sin UGC en V1 (M143) documentado [S]
+- [ ] Definir UGC como post-V2 con GATE [M]
+- [ ] Definir criterio: demanda comunitaria ≥ 25% (M100) [S]
+- [ ] Definir criterio: coste mensual de almacenamiento ≤ presupuesto [S]
+- [ ] Definir criterio: efectividad de moderación automática ≥ 75% [S]
+- [ ] Definir criterio: diseño aprobado 100% [S]
+- [ ] Definir posposición a V3 si el GATE falla [S]
+- [ ] Definir sin UGC en V1 (M143) documentado [S]
 
 ## 2. Definir fotografías (2º)
 
-- [x] Definir compartir fotos de la cámara (M56) [M]
-- [x] Definir compresión 4K → 2K al compartir [M]
-- [x] Definir tamaño máximo 3 MB por foto [S]
-- [x] Definir formato JPG/WebP [S]
-- [x] Definir metadatos mínimos (alias, timestamp, tag) [S]
-- [x] Definir opción de ocultar la foto de la galería [S]
-- [x] Definir licencia informada antes de subir [M]
-- [x] Definir sin datos de locación en la foto [S]
+- [ ] Definir compartir fotos de la cámara (M56) [M]
+- [ ] Definir compresión 4K → 2K al compartir [M]
+- [ ] Definir tamaño máximo 3 MB por foto [S]
+- [ ] Definir formato JPG/WebP [S]
+- [ ] Definir metadatos mínimos (alias, timestamp, tag) [S]
+- [ ] Definir opción de ocultar la foto de la galería [S]
+- [ ] Definir licencia informada antes de subir [M]
+- [ ] Definir sin datos de locación en la foto [S]
 
 ## 3. Definir diseños (3º)
 
-- [x] Definir compartir blueprints de diseño (M18) [M]
-- [x] Definir formato JSON comprimido (esquema M108) [M]
-- [x] Definir tamaño máximo 256 KB [S]
-- [x] Definir validación de límites del diseño al compartir (M109) [M]
-- [x] Definir previsualización del blueprint [S]
-- [x] Definir sin coords del save en el blueprint [S]
+- [ ] Definir compartir blueprints de diseño (M18) [M]
+- [ ] Definir formato JSON comprimido (esquema M108) [M]
+- [ ] Definir tamaño máximo 256 KB [S]
+- [ ] Definir validación de límites del diseño al compartir (M109) [M]
+- [ ] Definir previsualización del blueprint [S]
+- [ ] Definir sin coords del save en el blueprint [S]
 
 ## 4. Definir construcciones compartibles (4º)
 
-- [x] Definir compartir construcciones (M17) como blueprint expandido [M]
-- [x] Definir tamaño máximo 512 KB [S]
-- [x] Definir validación de requisitos del jugador receptor (M16/M17) [M]
-- [x] Definir ejemplos de materiales requeridos [S]
-- [x] Definir construcción en modo "fantasma" previa (M17) [M]
-- [x] Definir regla: no puede exceder límites de terreno del jugador [M]
+- [ ] Definir compartir construcciones (M17) como blueprint expandido [M]
+- [ ] Definir tamaño máximo 512 KB [S]
+- [ ] Definir validación de requisitos del jugador receptor (M16/M17) [M]
+- [ ] Definir ejemplos de materiales requeridos [S]
+- [ ] Definir construcción en modo "fantasma" previa (M17) [M]
+- [ ] Definir regla: no puede exceder límites de terreno del jugador [M]
 
 ## 5. Definir moderación (5º)
 
-- [x] Definir pipeline: hash → heurística → IA de imágenes → cola humana [C]
-- [x] Definir hash contra blacklist de contenido conocido [M]
-- [x] Definir umbral de IA para NSFW/odio [M]
-- [x] Definir cola humana con SLA 24 h [M]
-- [x] Definir apelación del usuario con 2ª instancia [M]
-- [x] Definir anonimato del moderador [S]
-- [x] Definir audit log de moderación sin datos personales (M103) [M]
-- [x] Definir reportes de usuario entran a la misma cola (M100) [M]
-- [x] Definir métrica de efectividad de la moderación automática [M]
-- [x] Definir guía de moderadores (criterios explícitos) [M]
+- [ ] Definir pipeline: hash → heurística → IA de imágenes → cola humana [C]
+- [ ] Definir hash contra blacklist de contenido conocido [M]
+- [ ] Definir umbral de IA para NSFW/odio [M]
+- [ ] Definir cola humana con SLA 24 h [M]
+- [ ] Definir apelación del usuario con 2ª instancia [M]
+- [ ] Definir anonimato del moderador [S]
+- [ ] Definir audit log de moderación sin datos personales (M103) [M]
+- [ ] Definir reportes de usuario entran a la misma cola (M100) [M]
+- [ ] Definir métrica de efectividad de la moderación automática [M]
+- [ ] Definir guía de moderadores (criterios explícitos) [M]
 
 ## 6. Definir almacenamiento (6º)
 
-- [x] Definir fotos en CDN [M]
-- [x] Definir blueprints en bucket/objeto pequeño [M]
-- [x] Definir presupuesto mensual fijo [M]
-- [x] Definir retención: quarentena 30 días [M]
-- [x] Definir retención: público ilimitado salvo reporte/baja [S]
-- [x] Definir compresión de todos los ítems [M]
-- [x] Definir monitoreo de espacio en dashboard (M104) [S]
-- [x] Definir reutilización de infra sin servidores propios [M]
+- [ ] Definir fotos en CDN [M]
+- [ ] Definir blueprints en bucket/objeto pequeño [M]
+- [ ] Definir presupuesto mensual fijo [M]
+- [ ] Definir retención: quarentena 30 días [M]
+- [ ] Definir retención: público ilimitado salvo reporte/baja [S]
+- [ ] Definir compresión de todos los ítems [M]
+- [ ] Definir monitoreo de espacio en dashboard (M104) [S]
+- [ ] Definir reutilización de infra sin servidores propios [M]
 
 ## 7. Definir reportes (7º)
 
-- [x] Definir categorías de reporte (NSFW/violencia/odio/spam/copyright/privacidad) [M]
-- [x] Definir SLA de remoción por categoría (< 24 h, < 48 h, < 72 h) [M]
-- [x] Definir notificación al autor de la decisión [S]
-- [x] Definir opción de apelación en la notificación [S]
-- [x] Definir proceso de stickers (repetir reportes abusivos) [S]
-- [x] Definir registro de resolución de reportes [S]
+- [ ] Definir categorías de reporte (NSFW/violencia/odio/spam/copyright/privacidad) [M]
+- [ ] Definir SLA de remoción por categoría (< 24 h, < 48 h, < 72 h) [M]
+- [ ] Definir notificación al autor de la decisión [S]
+- [ ] Definir opción de apelación en la notificación [S]
+- [ ] Definir proceso de stickers (repetir reportes abusivos) [S]
+- [ ] Definir registro de resolución de reportes [S]
 
 ## 8. Definir privacidad (8º)
 
-- [x] Definir consentimiento explícito al compartir (checkbox) [M]
-- [x] Definir minimización de datos (solo alias + timestamp) [M]
-- [x] Definir sin ID de plataforma expuesto en la galería [S]
-- [x] Definir almacenamiento según región de M80 [M]
-- [x] Definir política de cookies/privacidad para la galería (M80) [S]
-- [x] Definir derecho al olvido operativo (GDPR) [M]
-- [x] Definir auditoría de privacidad en M151 [S]
+- [ ] Definir consentimiento explícito al compartir (checkbox) [M]
+- [ ] Definir minimización de datos (solo alias + timestamp) [M]
+- [ ] Definir sin ID de plataforma expuesto en la galería [S]
+- [ ] Definir almacenamiento según región de M80 [M]
+- [ ] Definir política de cookies/privacidad para la galería (M80) [S]
+- [ ] Definir derecho al olvido operativo (GDPR) [M]
+- [ ] Definir auditoría de privacidad en M151 [S]
 
 ## 9. Definir copyright (9º)
 
-- [x] Definir que el usuario conserva el copyright de su contenido [M]
-- [x] Definir licencia limitada del usuario al servicio (alojar/mostrar/moderar) [M]
-- [x] Definir política de assets del juego para contenido derivado (M127) [M]
-- [x] Definir proceso DMCA para violaciones (M127/M78) [M]
-- [x] Definir atribución de autores en la galería [S]
-- [x] Definir prohibición de contenido de terceros no licenciado [M]
+- [ ] Definir que el usuario conserva el copyright de su contenido [M]
+- [ ] Definir licencia limitada del usuario al servicio (alojar/mostrar/moderar) [M]
+- [ ] Definir política de assets del juego para contenido derivado (M127) [M]
+- [ ] Definir proceso DMCA para violaciones (M127/M78) [M]
+- [ ] Definir atribución de autores en la galería [S]
+- [ ] Definir prohibición de contenido de terceros no licenciado [M]
 
 ## 10. Definir contenido ofensivo (10º)
 
-- [x] Definir criterios explícitos (lista tipo) [M]
-- [x] Definir política apta para todas las edades [M]
-- [x] Definir zona gris: decisión humana con guía [M]
-- [x] Definir remoción inmediata para contenido grave [S]
-- [x] Definir suspensión temporal del autor (3 strikes) [M]
-- [x] Definir re-publicación prohibida del contenido eliminado (hash) [S]
+- [ ] Definir criterios explícitos (lista tipo) [M]
+- [ ] Definir política apta para todas las edades [M]
+- [ ] Definir zona gris: decisión humana con guía [M]
+- [ ] Definir remoción inmediata para contenido grave [S]
+- [ ] Definir suspensión temporal del autor (3 strikes) [M]
+- [ ] Definir re-publicación prohibida del contenido eliminado (hash) [S]
 
 ## 11. Definir eliminación (11º)
 
-- [x] Definir botón de eliminación en perfil del autor [M]
-- [x] Definir borrado efectivo ≤ 30 días (GDPR) [M]
-- [x] Definir eliminación por moderación con notificación [S]
-- [x] Definir flag anti-re-publicación tras eliminación [S]
-- [x] Definir export / respaldo del contenido antes de borrar (pedido del autor) [S]
-- [x] Definir proceso documentado para pedidos legales [M]
+- [ ] Definir botón de eliminación en perfil del autor [M]
+- [ ] Definir borrado efectivo ≤ 30 días (GDPR) [M]
+- [ ] Definir eliminación por moderación con notificación [S]
+- [ ] Definir flag anti-re-publicación tras eliminación [S]
+- [ ] Definir export / respaldo del contenido antes de borrar (pedido del autor) [S]
+- [ ] Definir proceso documentado para pedidos legales [M]
 
 ## 12. Definir términos de servicio (12º)
 
-- [x] Definir cláusula UGC en los ToS (M125) [C]
-- [x] Definir secciones: propiedad, licencia, prohibiciones, moderación, eliminación, apelación y responsabilidad [M]
-- [x] Definir resumen en lenguaje simple + texto legal [M]
-- [x] Definir referencia a la política de comunidad (M100) [S]
-- [x] Definir consentimiento de menores (mínimo de edad) [M]
-- [x] Definir revisión legal anual del TOS (M126) [S]
+- [ ] Definir cláusula UGC en los ToS (M125) [C]
+- [ ] Definir secciones: propiedad, licencia, prohibiciones, moderación, eliminación, apelación y responsabilidad [M]
+- [ ] Definir resumen en lenguaje simple + texto legal [M]
+- [ ] Definir referencia a la política de comunidad (M100) [S]
+- [ ] Definir consentimiento de menores (mínimo de edad) [M]
+- [ ] Definir revisión legal anual del TOS (M126) [S]
 
 ## 13. Definir backups (13º)
 
-- [x] Definir backup diario de la tabla de ítems (RPO 24 h) [M]
-- [x] Definir retención de backups 90 días [S]
-- [x] Definir verificación semanal de restauración [S]
-- [x] Definir backup del audit log de moderación [S]
-- [x] Definir plan de contingencia ante caída del servicio UGC [M]
+- [ ] Definir backup diario de la tabla de ítems (RPO 24 h) [M]
+- [ ] Definir retención de backups 90 días [S]
+- [ ] Definir verificación semanal de restauración [S]
+- [ ] Definir backup del audit log de moderación [S]
+- [ ] Definir plan de contingencia ante caída del servicio UGC [M]
 
 ## 14. Definir límites de almacenamiento (14º)
 
-- [x] Definir 200 ítems activos por usuario [S]
-- [x] Definir 50 subidas de fotos por día [S]
-- [x] Definir 20 subidas de blueprints por día [S]
-- [x] Definir 10 MB de subida por día [S]
-- [x] Definir pesos máximos por ítem (3 MB / 512 KB) [S]
-- [x] Definir validación de límites en el cliente (M109) [M]
-- [x] Definir mensajes claros de superación de límite [S]
+- [ ] Definir 200 ítems activos por usuario [S]
+- [ ] Definir 50 subidas de fotos por día [S]
+- [ ] Definir 20 subidas de blueprints por día [S]
+- [ ] Definir 10 MB de subida por día [S]
+- [ ] Definir pesos máximos por ítem (3 MB / 512 KB) [S]
+- [ ] Definir validación de límites en el cliente (M109) [M]
+- [ ] Definir mensajes claros de superación de límite [S]
 
 ## 15. Galería y UX (integración M89/M100)
 
-- [x] Definir galería pública con filtros por tag [M]
-- [x] Definir tarjeta de ítem (foto/blueprint + alias + me gusta) [M]
-- [x] Definir acción reportar en cada tarjeta [S]
-- [x] Definir página de perfil con mis ítems y estados [M]
-- [x] Definir notificaciones de aprobación/remoción [S]
-- [x] Definir integración opcional con #showcase de Discord (M100) [S]
-- [x] Definir telemetría de vistas/descargas/reportes (M104) [M]
+- [ ] Definir galería pública con filtros por tag [M]
+- [ ] Definir tarjeta de ítem (foto/blueprint + alias + me gusta) [M]
+- [ ] Definir acción reportar en cada tarjeta [S]
+- [ ] Definir página de perfil con mis ítems y estados [M]
+- [ ] Definir notificaciones de aprobación/remoción [S]
+- [ ] Definir integración opcional con #showcase de Discord (M100) [S]
+- [ ] Definir telemetría de vistas/descargas/reportes (M104) [M]
 
 ## 16. Calidad y cierre
 
-- [x] Definir separación de backend UGC del juego (sin acople) [C]
-- [x] Definir seguridad de la API (auth + rate limit, M106) [M]
-- [x] Definir documentación plan-actual actualizada y firmada [S]
-- [x] Definir log del módulo en Logs/ [S]
-- [x] Definir feed a M125 (ToS) y M136 (roadmap V2) [S]
+- [ ] Definir separación de backend UGC del juego (sin acople) [C]
+- [ ] Definir seguridad de la API (auth + rate limit, M106) [M]
+- [ ] Definir documentación plan-actual actualizada y firmada [S]
+- [ ] Definir log del módulo en Logs/ [S]
+- [ ] Definir feed a M125 (ToS) y M136 (roadmap V2) [S]
 
 ## Totales
 

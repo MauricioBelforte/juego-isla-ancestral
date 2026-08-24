@@ -1,141 +1,141 @@
-ï»¿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
-# 05-Checklist.md â€” MÃ³dulo 82: ClasificaciÃ³n por Edades
+# 05-Checklist.md — Módulo 82: Clasificación por Edades
 
-> **Estado:** ðŸŸ¢ Disponible
+> **Estado:** ?? Disponible
 > **Agente:** MiMo V2.5 / OpenCode
 > **Fecha inicio:** 2026-08-21
-> **MÃ­nimo de Ã­tems:** 100
+> **Mínimo de ítems:** 100
 
 ---
 
-## A. AnÃ¡lisis de Sistemas de ClasificaciÃ³n (15 Ã­tems)
+## A. Análisis de Sistemas de Clasificación (15 ítems)
 
-- [x] Documentar proceso IARC (International Age Rating Coalition): cÃ³mo funciona, costos, plataforma de submission
-- [x] Documentar proceso ESRB (EE.UU./CanadÃ¡): submission, evaluaciÃ³n, costos, plazos
-- [x] Documentar proceso PEGI (Europa): cuestionario, evaluaciÃ³n, costos
-- [x] Documentar proceso CERO (JapÃ³n): submission, evaluaciÃ³n, representante local
-- [x] Documentar proceso GRAC (Corea): submission, evaluaciÃ³n, costos
-- [x] Documentar proceso ACB (Australia): submission, evaluaciÃ³n, costos
-- [x] Documentar proceso USK (Alemania): submission, evaluaciÃ³n, costos
-- [x] Documentar proceso ClassInd (Brasil): submission, evaluaciÃ³n, costos
-- [x] Comparar plazos de cada sistema (semanas/meses)
-- [x] Comparar costos de cada sistema (USD)
-- [x] Identificar quÃ© sistemas aceptan auto-evaluaciÃ³n vs. requieren revisiÃ³n humana
-- [x] Documentar requisitos de representante local para cada sistema
-- [x] Crear matriz de compatibilidad: plataforma Ã— sistema de clasificaciÃ³n
-- [x] Identificar sistemas obligatorios vs. opcionales por regiÃ³n
-- [x] Documentar proceso de renovaciÃ³n/recertificaciÃ³n periÃ³dica
+- [ ] Documentar proceso IARC (International Age Rating Coalition): cómo funciona, costos, plataforma de submission
+- [ ] Documentar proceso ESRB (EE.UU./Canadá): submission, evaluación, costos, plazos
+- [ ] Documentar proceso PEGI (Europa): cuestionario, evaluación, costos
+- [ ] Documentar proceso CERO (Japón): submission, evaluación, representante local
+- [ ] Documentar proceso GRAC (Corea): submission, evaluación, costos
+- [ ] Documentar proceso ACB (Australia): submission, evaluación, costos
+- [ ] Documentar proceso USK (Alemania): submission, evaluación, costos
+- [ ] Documentar proceso ClassInd (Brasil): submission, evaluación, costos
+- [ ] Comparar plazos de cada sistema (semanas/meses)
+- [ ] Comparar costos de cada sistema (USD)
+- [ ] Identificar qué sistemas aceptan auto-evaluación vs. requieren revisión humana
+- [ ] Documentar requisitos de representante local para cada sistema
+- [ ] Crear matriz de compatibilidad: plataforma × sistema de clasificación
+- [ ] Identificar sistemas obligatorios vs. opcionales por región
+- [ ] Documentar proceso de renovación/recertificación periódica
 
-## B. Descriptores de Contenido (15 Ã­tems)
+## B. Descriptores de Contenido (15 ítems)
 
-- [x] Definir lista completa de descriptores de contenido aplicables al juego
-- [x] Evaluar violencia: Â¿hay combate? Â¿hay daÃ±o a personajes? Â¿hay sangre?
-- [x] Evaluar lenguaje: Â¿hay lenguaje ofensivo? Â¿hay groserÃ­as?
-- [x] Evaluar miedo: Â¿hay atmÃ³sfera tensa en templos? Â¿hay jumpscares?
-- [x] Evaluar contenido sugestivo: Â¿hay romance? Â¿hay desnudez?
-- [x] Evaluar drogas: Â¿hay referencias a sustancias?
-- [x] Evaluar gambling: Â¿hay mecÃ¡nicas de azar real?
-- [x] Evaluar interacciÃ³n: Â¿hay chat? Â¿hay interacciÃ³n con otros jugadores?
-- [x] Evaluar compras: Â¿hay DLC? Â¿hay microtransacciones?
-- [x] Documentar cada descriptor con justificaciÃ³n y nivel
-- [x] Verificar descriptores contra checklist de M81 (Legal Menores)
-- [x] Documentar descriptores que podrÃ­an cambiar durante desarrollo
-- [x] Crear tabla de descriptores Ã— clasificaciÃ³n (quÃ© estÃ¡ permitido en cada una)
-- [x] Identificar descriptores ambiguos que requieren interpretaciÃ³n
-- [x] Documentar precedentes de juegos similares con su clasificaciÃ³n
+- [ ] Definir lista completa de descriptores de contenido aplicables al juego
+- [ ] Evaluar violencia: ¿hay combate? ¿hay daño a personajes? ¿hay sangre?
+- [ ] Evaluar lenguaje: ¿hay lenguaje ofensivo? ¿hay groserías?
+- [ ] Evaluar miedo: ¿hay atmósfera tensa en templos? ¿hay jumpscares?
+- [ ] Evaluar contenido sugestivo: ¿hay romance? ¿hay desnudez?
+- [ ] Evaluar drogas: ¿hay referencias a sustancias?
+- [ ] Evaluar gambling: ¿hay mecánicas de azar real?
+- [ ] Evaluar interacción: ¿hay chat? ¿hay interacción con otros jugadores?
+- [ ] Evaluar compras: ¿hay DLC? ¿hay microtransacciones?
+- [ ] Documentar cada descriptor con justificación y nivel
+- [ ] Verificar descriptores contra checklist de M81 (Legal Menores)
+- [ ] Documentar descriptores que podrían cambiar durante desarrollo
+- [ ] Crear tabla de descriptores × clasificación (qué está permitido en cada una)
+- [ ] Identificar descriptores ambiguos que requieren interpretación
+- [ ] Documentar precedentes de juegos similares con su clasificación
 
-## C. Rating Objetivo (10 Ã­tems)
+## C. Rating Objetivo (10 ítems)
 
-- [x] Definir rating objetivo para cada plataforma
-- [x] Verificar que contenido actual es compatible con "Everyone" / "PEGI 3"
-- [x] Identificar contenido que pueda elevar el rating (templos, enemies, etc.)
-- [x] Definir estrategia para mantener rating bajo (si es objetivo)
-- [x] Documentar trade-offs entre contenido y rating
-- [x] Validar con M81 (Legal â€” Menores) que rating objetivo es consistente
-- [x] Definir plan B si contenido forzado sube el rating
-- [x] Documentar cÃ³mo el rating afecta el alcance del mercado
-- [x] Verificar que rating objetivo es realista para el contenido planificado
-- [x] Crear escenario de "peor caso" (quÃ© pasa si sube a Teen/PEGI 7)
+- [ ] Definir rating objetivo para cada plataforma
+- [ ] Verificar que contenido actual es compatible con "Everyone" / "PEGI 3"
+- [ ] Identificar contenido que pueda elevar el rating (templos, enemies, etc.)
+- [ ] Definir estrategia para mantener rating bajo (si es objetivo)
+- [ ] Documentar trade-offs entre contenido y rating
+- [ ] Validar con M81 (Legal — Menores) que rating objetivo es consistente
+- [ ] Definir plan B si contenido forzado sube el rating
+- [ ] Documentar cómo el rating afecta el alcance del mercado
+- [ ] Verificar que rating objetivo es realista para el contenido planificado
+- [ ] Crear escenario de "peor caso" (qué pasa si sube a Teen/PEGI 7)
 
-## D. Proceso de Submission (10 Ã­tems)
+## D. Proceso de Submission (10 ítems)
 
-- [x] Crear timeline de submissions (cuÃ¡ndo submitir a cada sistema)
-- [x] Definir quiÃ©n realiza cada submission (responsable)
-- [x] Documentar documentaciÃ³n requerida para cada submission
-- [x] Definir proceso de actualizaciÃ³n si el contenido cambia
-- [x] Definir proceso de appeal si el rating no es el esperado
-- [x] Documentar plazos de respuesta de cada sistema
-- [x] Definir proceso de emergencia si rating es rechazado
-- [x] Crear checklist de pre-submission para cada sistema
-- [x] Definir proceso de QA interno antes de cada submission
-- [x] Documentar costo total estimado de submissions globales
+- [ ] Crear timeline de submissions (cuándo submitir a cada sistema)
+- [ ] Definir quién realiza cada submission (responsable)
+- [ ] Documentar documentación requerida para cada submission
+- [ ] Definir proceso de actualización si el contenido cambia
+- [ ] Definir proceso de appeal si el rating no es el esperado
+- [ ] Documentar plazos de respuesta de cada sistema
+- [ ] Definir proceso de emergencia si rating es rechazado
+- [ ] Crear checklist de pre-submission para cada sistema
+- [ ] Definir proceso de QA interno antes de cada submission
+- [ ] Documentar costo total estimado de submissions globales
 
-## E. IntegraciÃ³n con Plataformas (10 Ã­tems)
+## E. Integración con Plataformas (10 ítems)
 
-- [x] Verificar que Steam acepta IARC para todas las regiones
-- [x] Verificar que PlayStation acepta ESRB (EE.UU.) y PEGI (Europa)
-- [x] Verificar que Xbox acepta IARC y/o ESRB/PEGI
-- [x] Verificar que Nintendo acepta IARC y/o CERO/GRAC
-- [x] Documentar quÃ© plataforma requiere submission separada
-- [x] Definir proceso para cada plataforma que requiere submission propia
-- [x] Verificar compatibilidad de ratings entre regiones
-- [x] Documentar restricciones de contenido por plataforma
-- [x] Verificar que builds de plataformas mantienen mismo rating
-- [x] Definir proceso para versiones de consola vs. PC
+- [ ] Verificar que Steam acepta IARC para todas las regiones
+- [ ] Verificar que PlayStation acepta ESRB (EE.UU.) y PEGI (Europa)
+- [ ] Verificar que Xbox acepta IARC y/o ESRB/PEGI
+- [ ] Verificar que Nintendo acepta IARC y/o CERO/GRAC
+- [ ] Documentar qué plataforma requiere submission separada
+- [ ] Definir proceso para cada plataforma que requiere submission propia
+- [ ] Verificar compatibilidad de ratings entre regiones
+- [ ] Documentar restricciones de contenido por plataforma
+- [ ] Verificar que builds de plataformas mantienen mismo rating
+- [ ] Definir proceso para versiones de consola vs. PC
 
-## F. ValidaciÃ³n AutomÃ¡tica (10 Ã­tems)
+## F. Validación Automática (10 ítems)
 
-- [x] DiseÃ±ar ContentValidator que verifique contenido vs. rating
-- [x] Definir reglas de validaciÃ³n por rating (quÃ© contenido estÃ¡ permitido)
-- [x] Implementar gate en build pipeline: build falla si contenido inconsistente
-- [x] Definir proceso de revisiÃ³n manual cuando validaciÃ³n automÃ¡tica falla
-- [x] Documentar excepciones permitidas (ej: templos con tensiÃ³n leve en "Everyone")
-- [x] Verificar que validaciÃ³n funciona para todos los ratings objetivo
-- [x] Crear test automatizado de validaciÃ³n de contenido
-- [x] Integrar con M112 (Testing AutomÃ¡tico) para CI
-- [x] Definir sensibilidad de la validaciÃ³n (false positives vs. false negatives)
-- [x] Documentar cÃ³mo actualizar reglas de validaciÃ³n cuando el contenido cambia
+- [ ] Diseñar ContentValidator que verifique contenido vs. rating
+- [ ] Definir reglas de validación por rating (qué contenido está permitido)
+- [ ] Implementar gate en build pipeline: build falla si contenido inconsistente
+- [ ] Definir proceso de revisión manual cuando validación automática falla
+- [ ] Documentar excepciones permitidas (ej: templos con tensión leve en "Everyone")
+- [ ] Verificar que validación funciona para todos los ratings objetivo
+- [ ] Crear test automatizado de validación de contenido
+- [ ] Integrar con M112 (Testing Automático) para CI
+- [ ] Definir sensibilidad de la validación (false positives vs. false negatives)
+- [ ] Documentar cómo actualizar reglas de validación cuando el contenido cambia
 
-## G. IntegraciÃ³n con Marketing y Store (8 Ã­tems)
+## G. Integración con Marketing y Store (8 ítems)
 
-- [x] Verificar que M97 (Steam Store Page) muestra rating correcto
-- [x] Verificar que M98 (Trailer) es compatible con rating objetivo
-- [x] Verificar que M99 (Marketing) usa rating correcto en materials
-- [x] Definir proceso de actualizaciÃ³n de rating en store si contenido cambia
-- [x] Documentar cÃ³mo el rating afecta la visibilidad en stores
-- [x] Verificar que rating es visible en todas las plataformas objetivo
-- [x] Definir proceso de comunicaciÃ³n si rating cambia post-lanzamiento
-- [x] Verificar que screenshots y capturas son compatibles con rating
+- [ ] Verificar que M97 (Steam Store Page) muestra rating correcto
+- [ ] Verificar que M98 (Trailer) es compatible con rating objetivo
+- [ ] Verificar que M99 (Marketing) usa rating correcto en materials
+- [ ] Definir proceso de actualización de rating en store si contenido cambia
+- [ ] Documentar cómo el rating afecta la visibilidad en stores
+- [ ] Verificar que rating es visible en todas las plataformas objetivo
+- [ ] Definir proceso de comunicación si rating cambia post-lanzamiento
+- [ ] Verificar que screenshots y capturas son compatibles con rating
 
-## H. DocumentaciÃ³n y Compliance (8 Ã­tems)
+## H. Documentación y Compliance (8 ítems)
 
-- [x] Documentar proceso completo en CHECKLIST-GLOBAL.md
-- [x] Actualizar CHECKLIST-GLOBAL.md con estado del mÃ³dulo
-- [x] Actualizar README.md de DOCUMENTACION/
-- [x] Generar log de creaciÃ³n del mÃ³dulo en Logs/
-- [x] Verificar que no hay inconsistencias entre archivos del mÃ³dulo
-- [x] Crear resumen ejecutivo para stakeholders
-- [x] Documentar lecciones aprendidas para futuros proyectos
-- [x] Archivar versiones anteriores de clasificaciones
+- [ ] Documentar proceso completo en CHECKLIST-GLOBAL.md
+- [ ] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
+- [ ] Actualizar README.md de DOCUMENTACION/
+- [ ] Generar log de creación del módulo en Logs/
+- [ ] Verificar que no hay inconsistencias entre archivos del módulo
+- [ ] Crear resumen ejecutivo para stakeholders
+- [ ] Documentar lecciones aprendidas para futuros proyectos
+- [ ] Archivar versiones anteriores de clasificaciones
 
-## I. Entrega y Hitos (8 Ã­tems)
+## I. Entrega y Hitos (8 ítems)
 
-- [x] Completar anÃ¡lisis de sistemas antes de M138 Vertical Slice
-- [x] Completar definiciÃ³n de rating objetivo antes de M139 Pre-Alpha
-- [x] Completar primer submission IARC antes de M140 Alpha
-- [x] Completar submissions a plataformas antes de M141 Beta
-- [x] Verificar consistencia de ratings antes de M142 Release Candidate
-- [x] Verificar ratings visibles en stores antes de M143 Lanzamiento
-- [x] Documentar timeline de submissions para el equipo
-- [x] Crear recordatorio de recertificaciÃ³n anual
+- [ ] Completar análisis de sistemas antes de M138 Vertical Slice
+- [ ] Completar definición de rating objetivo antes de M139 Pre-Alpha
+- [ ] Completar primer submission IARC antes de M140 Alpha
+- [ ] Completar submissions a plataformas antes de M141 Beta
+- [ ] Verificar consistencia de ratings antes de M142 Release Candidate
+- [ ] Verificar ratings visibles en stores antes de M143 Lanzamiento
+- [ ] Documentar timeline de submissions para el equipo
+- [ ] Crear recordatorio de recertificación anual
 
-## J. IntegraciÃ³n con Otros MÃ³dulos (6 Ã­tems)
+## J. Integración con Otros Módulos (6 ítems)
 
-- [x] Verificar coherencia con M81 (Legal Menores): age gating y clasificaciÃ³n
-- [x] Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
-- [x] Verificar coherencia con M86 (IA Generativa): contenido generado y clasificaciÃ³n
-- [x] Verificar coherencia con M97 (Steam Store): metadata de clasificaciÃ³n en store
-- [x] Verificar coherencia con M98 (Trailer): contenido del trÃ¡iler vs. clasificaciÃ³n
-- [x] Documentar impacto de cada clasificaciÃ³n en el mercado objetivo
+- [ ] Verificar coherencia con M81 (Legal Menores): age gating y clasificación
+- [ ] Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
+- [ ] Verificar coherencia con M86 (IA Generativa): contenido generado y clasificación
+- [ ] Verificar coherencia con M97 (Steam Store): metadata de clasificación en store
+- [ ] Verificar coherencia con M98 (Trailer): contenido del tráiler vs. clasificación
+- [ ] Documentar impacto de cada clasificación en el mercado objetivo

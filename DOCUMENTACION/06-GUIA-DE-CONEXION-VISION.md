@@ -142,6 +142,7 @@ Al trabajar con visión: **capturar → analizar → ajustar**, máximo **5 iter
 ### Registro de verificación
 
 - **2026-08-24** — Verificada por **ox-alpha (Cline)**: `get_scene_info` respondió `success` con 3 objetos (Cube, Light, Camera) y 2 materiales en Blender 4.2.3 LTS.
+- **2026-08-24** — **Visión real confirmada**: creada `EsferaPrueba` con material naranja vía `execute_code` (bpy), capturada con `get_viewport_screenshot` (⚠️ requiere parámetro `filepath`, método "offscreen", sin `max_resolution`) y analizada por el agente: esfera naranja visible correctamente junto al cubo default. Flujo completo crear → pintar → capturar → VER → validar operativo. Script de prueba: `tools/mcp/blender-mcp/prueba_esfera.py`.
 
 ---
 

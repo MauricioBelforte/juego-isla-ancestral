@@ -20,14 +20,10 @@ def bc(t, p=None):
         s.close()
     return json.loads(data.decode())
 
-r = bc('get_viewport_screenshot', {})
+out = r'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\captura_esfera.png'
+r = bc('get_viewport_screenshot', {'filepath': out})
 print('status:', r.get('status'))
 res = r.get('result', {})
-if isinstance(res, dict) and 'base64_image' in res:
-    img = base64.b64decode(res['base64_image'])
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'captura_esfera.png')
-    with open(out, 'wb') as f:
-        f.write(img)
-    print('guardada:', out, len(img), 'bytes')
-else:
-    print('respuesta:', json.dumps(r, ensure_ascii=False)[:400])
+print('resultado:', json.dumps(res, ensure_ascii=False)[:300])
+if os.path.exists(out):
+    print('guardada:', out, os.path.getsize(out), 'bytes')

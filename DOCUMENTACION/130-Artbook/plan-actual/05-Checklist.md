@@ -5,36 +5,36 @@
 # 05-Checklist.md — Módulo 130: Artbook (plan-actual)
 
 > Estado: documentación de diseño completa (plan-inicial creado y decisiones D1-D10 definidas). Los ítems de producción editorial (selección de piezas, maquetación, impresión) quedan pendientes para la fase post-RC.
-> Convención: `[ ]` pendiente · `[x]` completado · `[?]` no resuelto (con explicación). Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
+> Convención: `[ ]` pendiente · `[ ]` completado · `[?]` no resuelto (con explicación). Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## A. Fundamentos y Estructura Editorial
 
-- [x] Confirmar cobertura de los 15 puntos del plan maestro sección #129 [S]
-- [x] Definir extensión objetivo total (200-240 páginas) [S]
-- [x] Definir los 12 capítulos temáticos con tabla de contenidos [S]
-- [x] Asignar extensión en páginas por capítulo [S]
-- [x] Definir piezas mínimas por capítulo [M]
+- [ ] Confirmar cobertura de los 15 puntos del plan maestro sección #129 [S]
+- [ ] Definir extensión objetivo total (200-240 páginas) [S]
+- [ ] Definir los 12 capítulos temáticos con tabla de contenidos [S]
+- [ ] Asignar extensión en páginas por capítulo [S]
+- [ ] Definir piezas mínimas por capítulo [M]
 - [ ] Definir criterios de curaduría generales (qué entra y qué no) [M]
-- [x] Definir política de spoilers con bandas de advertencia (D7) [S]
-- [x] Definir audiencias objetivo y sus implicaciones editoriales [S]
-- [x] Definir decisión un tomo vs volúmenes (D2: un tomo + opción vol. 2) [S]
-- [x] Definir orden temático vs cronológico (temático con cronología interna) [S]
+- [ ] Definir política de spoilers con bandas de advertencia (D7) [S]
+- [ ] Definir audiencias objetivo y sus implicaciones editoriales [S]
+- [ ] Definir decisión un tomo vs volúmenes (D2: un tomo + opción vol. 2) [S]
+- [ ] Definir orden temático vs cronológico (temático con cronología interna) [S]
 - [ ] Crear página de título e introducción ≤80 palabras por capítulo [M]
 - [ ] Redactar carta del director del prólogo [S]
-- [x] Definir criterio de apertura de cada capítulo [S]
-- [x] Validar que ningún punto del plan maestro quede huérfano [S]
+- [ ] Definir criterio de apertura de cada capítulo [S]
+- [ ] Validar que ningún punto del plan maestro quede huérfano [S]
 
 ## B. Manifiesto y Curaduría Incremental
 
-- [x] Definir decisión de curaduría continua vs final (D1: continua) [S]
-- [x] Diseñar esquema del `artbook_manifest.csv` [S]
-- [x] Definir campos obligatorios del manifiesto [S]
-- [x] Definir estados válidos de pieza (nominada/seleccionada/descartada) [S]
-- [x] Definir flujo de nominación de piezas por cualquier miembro [S]
-- [x] Definir sesión mensual de revisión de curaduría (≤1 h) [S]
+- [ ] Definir decisión de curaduría continua vs final (D1: continua) [S]
+- [ ] Diseñar esquema del `artbook_manifest.csv` [S]
+- [ ] Definir campos obligatorios del manifiesto [S]
+- [ ] Definir estados válidos de pieza (nominada/seleccionada/descartada) [S]
+- [ ] Definir flujo de nominación de piezas por cualquier miembro [S]
+- [ ] Definir sesión mensual de revisión de curaduría (≤1 h) [S]
 - [ ] Definir criterios de aprobación de pieza a `seleccionadas/` [M]
-- [x] Definir snapshot semanal de `candidatos/` (M107) [S]
-- [x] Definir validador del manifiesto (reglas 1-6 de 04-Codigo) [M]
+- [ ] Definir snapshot semanal de `candidatos/` (M107) [S]
+- [ ] Definir validador del manifiesto (reglas 1-6 de 04-Codigo) [M]
 - [ ] Definir manejo de piezas huérfanas (autor desconocido) [M]
 - [ ] Definir cuota máxima de piezas por capítulo para evitar desbalance [M]
 - [ ] Definir proceso de re-categorización de pieza entre capítulos [S]
@@ -44,17 +44,17 @@
 
 ## C. Fichas Estándar
 
-- [x] Definir plantilla de ficha de pieza (D3) [S]
-- [x] Definir plantilla de comentario de desarrollador (D4) [S]
-- [x] Definir límite de 40 palabras por comentario dev [S]
-- [x] Definir regla de firma con nombre + rol [S]
-- [x] Definir tono cálido y honesto con ejemplos [S]
-- [x] Definir plantilla de ficha de concepto descartado (D5) [S]
-- [x] Definir los 4 campos de la ficha de descarte (era/motivo/enseñanza/supervivencia) [S]
+- [ ] Definir plantilla de ficha de pieza (D3) [S]
+- [ ] Definir plantilla de comentario de desarrollador (D4) [S]
+- [ ] Definir límite de 40 palabras por comentario dev [S]
+- [ ] Definir regla de firma con nombre + rol [S]
+- [ ] Definir tono cálido y honesto con ejemplos [S]
+- [ ] Definir plantilla de ficha de concepto descartado (D5) [S]
+- [ ] Definir los 4 campos de la ficha de descarte (era/motivo/enseñanza/supervivencia) [S]
 - [ ] Crear 3 ejemplos completos de ficha de pieza [S]
 - [ ] Crear 3 ejemplos completos de comentario dev [S]
 - [ ] Crear 3 ejemplos completos de ficha de descarte [S]
-- [x] Definir dónde viven las fichas (estructura de carpetas) [S]
+- [ ] Definir dónde viven las fichas (estructura de carpetas) [S]
 
 ## D. Capítulo 2 — Arte Conceptual Fundacional
 
@@ -160,16 +160,16 @@
 
 ## O. Especificaciones Técnicas y Producción
 
-- [x] Definir tamaño de página (240 × 300 mm horizontal) [S]
-- [x] Definir resolución mínima 300 DPI para print [S]
-- [x] Definir perfil sRGB digital / CMYK print (D6) [S]
-- [x] Definir sangrado de 3 mm [S]
-- [x] Definir tipografías del libro (Nunito/Fredoka, M128) [S]
-- [x] Definir pesos objetivo de PDFs (≤150 MB / ≤500 MB) [S]
-- [x] Definir regla de DPI efectivo mínimo por imagen [S]
-- [x] Definir regla de densidad de piezas por página [S]
-- [x] Definir nomenclatura de archivos de imagen (M149) [S]
-- [x] Definir estructura de carpetas artbook/ (D8) [S]
+- [ ] Definir tamaño de página (240 × 300 mm horizontal) [S]
+- [ ] Definir resolución mínima 300 DPI para print [S]
+- [ ] Definir perfil sRGB digital / CMYK print (D6) [S]
+- [ ] Definir sangrado de 3 mm [S]
+- [ ] Definir tipografías del libro (Nunito/Fredoka, M128) [S]
+- [ ] Definir pesos objetivo de PDFs (≤150 MB / ≤500 MB) [S]
+- [ ] Definir regla de DPI efectivo mínimo por imagen [S]
+- [ ] Definir regla de densidad de piezas por página [S]
+- [ ] Definir nomenclatura de archivos de imagen (M149) [S]
+- [ ] Definir estructura de carpetas artbook/ (D8) [S]
 - [ ] Configurar Git LFS para imágenes >1 MB (M06) [M]
 - [ ] Definir snapshots mensuales de maqueta con changelog [S]
 - [ ] Definir tags de Git para PDFs finales [S]
@@ -199,9 +199,9 @@
 - [ ] Revisión cruzada de consistencia estética con M45/M46 [M]
 - [ ] Respaldo final 3-2-1 de la carpeta artbook/ (M107) [S]
 - [ ] Documentar lecciones aprendidas para volumen 2 [S]
-- [x] Actualizar CHECKLIST-GLOBAL.md con el estado del módulo [S]
-- [x] Actualizar DOCUMENTACION/README.md con la entrada del módulo [S]
-- [x] Generar log de creación del módulo en Logs/ [S]
+- [ ] Actualizar CHECKLIST-GLOBAL.md con el estado del módulo [S]
+- [ ] Actualizar DOCUMENTACION/README.md con la entrada del módulo [S]
+- [ ] Generar log de creación del módulo en Logs/ [S]
 
 ## Notas del Agente
 

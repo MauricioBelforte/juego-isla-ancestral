@@ -1,137 +1,137 @@
-ï»¿# MÃ³dulo 145: DiseÃ±o de Experiencia â€” Checklist
+# Módulo 145: Diseño de Experiencia — Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:32:00
 
-## A. Player Journey (15 Ã­tems)
+## A. Player Journey (15 ítems)
 
-- [x] Definir fase de Descubrimiento (trailer, screenshots, descripciÃ³n)
-- [x] Definir fase de Primera Vez (apertura, menÃº, nueva partida)
-- [x] Definir fase de IntroducciÃ³n (cutscene inicial, primer NPC)
-- [x] Definir fase de Primeros Pasos (movimiento, interacciÃ³n, herramientas)
-- [x] Definir fase de Juego Principal (exploraciÃ³n, misiones, construcciÃ³n)
-- [x] Definir fase de ProgresiÃ³n (desbloqueos, mejoras, historia)
-- [x] Definir fase de Postgame (contenido restante, coleccionables)
-- [x] Crear mapa de emociones por fase
-- [x] Definir puntos de decisiÃ³n del jugador
-- [x] Definir mÃ©tricas clave por fase
-- [x] Crear diagrama visual del journey
-- [x] Identificar momentos "wow" del juego
-- [x] Identificar puntos de abandono potenciales
-- [x] Definir ritmo de revelaciÃ³n de contenido
-- [x] Documentar flujo completo de punta a punta
+- [ ] Definir fase de Descubrimiento (trailer, screenshots, descripción)
+- [ ] Definir fase de Primera Vez (apertura, menú, nueva partida)
+- [ ] Definir fase de Introducción (cutscene inicial, primer NPC)
+- [ ] Definir fase de Primeros Pasos (movimiento, interacción, herramientas)
+- [ ] Definir fase de Juego Principal (exploración, misiones, construcción)
+- [ ] Definir fase de Progresión (desbloqueos, mejoras, historia)
+- [ ] Definir fase de Postgame (contenido restante, coleccionables)
+- [ ] Crear mapa de emociones por fase
+- [ ] Definir puntos de decisión del jugador
+- [ ] Definir métricas clave por fase
+- [ ] Crear diagrama visual del journey
+- [ ] Identificar momentos "wow" del juego
+- [ ] Identificar puntos de abandono potenciales
+- [ ] Definir ritmo de revelación de contenido
+- [ ] Documentar flujo completo de punta a punta
 
-## B. Onboarding (15 Ã­tems)
+## B. Onboarding (15 ítems)
 
-- [x] DiseÃ±ar evento guiado: primer paso (movimiento)
-- [x] DiseÃ±ar evento guiado: primera interacciÃ³n (tecla F)
-- [x] DiseÃ±ar evento guiado: primera herramienta
-- [x] DiseÃ±ar evento guiado: primera construcciÃ³n
-- [x] DiseÃ±ar evento guiado: primera misiÃ³n
-- [x] DiseÃ±ar evento guiado: primer viaje
-- [x] Definir prerrequisitos de cada evento
-- [x] Crear flujo de onboarding orgÃ¡nico (no tutoriales de texto)
-- [x] Definir opciÃ³n de saltar tutorial
-- [x] Crear recordatorios opcionales para jugadores perdidos
-- [x] Definir duraciÃ³n ideal del onboarding (5-10 min)
-- [x] Testear onboarding con jugadores nuevos
-- [x] Iterar segÃºn feedback de testing
-- [x] Documentar eventos de onboarding
-- [x] Crear mÃ©tricas de onboarding (tasa de completado)
+- [ ] Diseñar evento guiado: primer paso (movimiento)
+- [ ] Diseñar evento guiado: primera interacción (tecla F)
+- [ ] Diseñar evento guiado: primera herramienta
+- [ ] Diseñar evento guiado: primera construcción
+- [ ] Diseñar evento guiado: primera misión
+- [ ] Diseñar evento guiado: primer viaje
+- [ ] Definir prerrequisitos de cada evento
+- [ ] Crear flujo de onboarding orgánico (no tutoriales de texto)
+- [ ] Definir opción de saltar tutorial
+- [ ] Crear recordatorios opcionales para jugadores perdidos
+- [ ] Definir duración ideal del onboarding (5-10 min)
+- [ ] Testear onboarding con jugadores nuevos
+- [ ] Iterar según feedback de testing
+- [ ] Documentar eventos de onboarding
+- [ ] Crear métricas de onboarding (tasa de completado)
 
-## C. Arquitectura de InformaciÃ³n (15 Ã­tems)
+## C. Arquitectura de Información (15 ítems)
 
-- [x] DiseÃ±ar estructura de menÃº principal (5 opciones)
-- [x] DiseÃ±ar estructura de menÃº in-game (8 opciones)
-- [x] DiseÃ±ar estructura de configuraciÃ³n (4 categorÃ­as)
-- [x] Definir regla de mÃ¡ximo 3 niveles de profundidad
-- [x] Crear mapa de navegaciÃ³n entre menÃºs
-- [x] Definir atajos de teclado para acciones frecuentes
-- [x] DiseÃ±ar flujo de guardado/carga
-- [x] DiseÃ±ar flujo de opciones de accesibilidad
-- [x] Crear wireframes de cada pantalla de menÃº
-- [x] Definir comportamiento del botÃ³n "Volver"
-- [x] Definir transiciones entre menÃºs
-- [x] DiseÃ±ar bÃºsqueda en menÃºs con muchos items
-- [x] Testear navegaciÃ³n con jugadores
-- [x] Iterar segÃºn feedback
-- [x] Documentar arquitectura completa
+- [ ] Diseñar estructura de menú principal (5 opciones)
+- [ ] Diseñar estructura de menú in-game (8 opciones)
+- [ ] Diseñar estructura de configuración (4 categorías)
+- [ ] Definir regla de máximo 3 niveles de profundidad
+- [ ] Crear mapa de navegación entre menús
+- [ ] Definir atajos de teclado para acciones frecuentes
+- [ ] Diseñar flujo de guardado/carga
+- [ ] Diseñar flujo de opciones de accesibilidad
+- [ ] Crear wireframes de cada pantalla de menú
+- [ ] Definir comportamiento del botón "Volver"
+- [ ] Definir transiciones entre menús
+- [ ] Diseñar búsqueda en menús con muchos items
+- [ ] Testear navegación con jugadores
+- [ ] Iterar según feedback
+- [ ] Documentar arquitectura completa
 
-## D. Sistema de Feedback (15 Ã­tems)
+## D. Sistema de Feedback (15 ítems)
 
-- [x] Definir feedback visual: partÃ­culas, flashes, iconos
-- [x] Definir feedback sonoro: efectos, mÃºsica
-- [x] Definir feedback hÃ¡ptico: vibraciÃ³n del gamepad
-- [x] Definir feedback textual: mensajes, tooltips
-- [x] Crear mapeo de feedback por acciÃ³n (20 acciones)
-- [x] Definir feedback para recoger item
-- [x] Definir feedback para construir
-- [x] Definir feedback para completar misiÃ³n
-- [x] Definir feedback para recibir daÃ±o
-- [x] Definir feedback para descubrir lugar
-- [x] Definir feedback para hablar con NPC
-- [x] Definir reglas de feedback cozy (sutil, satisfactorio)
-- [x] Crear presupuesto de feedback por escena
-- [x] Testear feedback con jugadores
-- [x] Documentar sistema completo
+- [ ] Definir feedback visual: partículas, flashes, iconos
+- [ ] Definir feedback sonoro: efectos, música
+- [ ] Definir feedback háptico: vibración del gamepad
+- [ ] Definir feedback textual: mensajes, tooltips
+- [ ] Crear mapeo de feedback por acción (20 acciones)
+- [ ] Definir feedback para recoger item
+- [ ] Definir feedback para construir
+- [ ] Definir feedback para completar misión
+- [ ] Definir feedback para recibir daño
+- [ ] Definir feedback para descubrir lugar
+- [ ] Definir feedback para hablar con NPC
+- [ ] Definir reglas de feedback cozy (sutil, satisfactorio)
+- [ ] Crear presupuesto de feedback por escena
+- [ ] Testear feedback con jugadores
+- [ ] Documentar sistema completo
 
-## E. Accesibilidad (15 Ã­tems)
+## E. Accesibilidad (15 ítems)
 
-- [x] Definir requisito: subtÃ­tulos para todo el diÃ¡logo
-- [x] Definir requisito: opciones de color-blindness
-- [x] Definir requisito: tamaÃ±o de texto ajustable
-- [x] Definir requisito: controles remapeables
-- [x] Definir requisito: opciones de dificultad (sin penalizaciones)
-- [x] Definir requisito: soporte para gamepad y teclado
-- [x] Definir requisito: modo de alto contraste
-- [x] Definir requisito: reducciÃ³n de movimiento
-- [x] Crear checklist de accesibilidad (WCAG 2.1 AA)
-- [x] Verificar contraste de colores
-- [x] Verificar que sonidos tienen representaciÃ³n visual
-- [x] Verificar que eventos visuales tienen audio
-- [x] Verificar legibilidad de texto
-- [x] Testear con herramientas de accesibilidad
-- [x] Documentar estÃ¡ndares completos
+- [ ] Definir requisito: subtítulos para todo el diálogo
+- [ ] Definir requisito: opciones de color-blindness
+- [ ] Definir requisito: tamaño de texto ajustable
+- [ ] Definir requisito: controles remapeables
+- [ ] Definir requisito: opciones de dificultad (sin penalizaciones)
+- [ ] Definir requisito: soporte para gamepad y teclado
+- [ ] Definir requisito: modo de alto contraste
+- [ ] Definir requisito: reducción de movimiento
+- [ ] Crear checklist de accesibilidad (WCAG 2.1 AA)
+- [ ] Verificar contraste de colores
+- [ ] Verificar que sonidos tienen representación visual
+- [ ] Verificar que eventos visuales tienen audio
+- [ ] Verificar legibilidad de texto
+- [ ] Testear con herramientas de accesibilidad
+- [ ] Documentar estándares completos
 
-## F. Emociones y Ritmo (10 Ã­tems)
+## F. Emociones y Ritmo (10 ítems)
 
-- [x] Definir emociones objetivo por fase del juego
-- [x] Crear mapa de ritmo (tensiÃ³n â†’ descanso â†’ tensiÃ³n)
-- [x] Definir momentos de calma (exploraciÃ³n libre)
-- [x] Definir momentos de emociÃ³n (descubrimientos, logros)
-- [x] Definir momentos de satisfacciÃ³n (completar objetivos)
-- [x] Evitar momentos de frustraciÃ³n (cozy = sin penalizaciones)
-- [x] Crear curva de dificultad suave
-- [x] Definir recompensas emocionales (no solo items)
-- [x] Testear ritmo con jugadores
-- [x] Documentar diseÃ±o emocional
+- [ ] Definir emociones objetivo por fase del juego
+- [ ] Crear mapa de ritmo (tensión ? descanso ? tensión)
+- [ ] Definir momentos de calma (exploración libre)
+- [ ] Definir momentos de emoción (descubrimientos, logros)
+- [ ] Definir momentos de satisfacción (completar objetivos)
+- [ ] Evitar momentos de frustración (cozy = sin penalizaciones)
+- [ ] Crear curva de dificultad suave
+- [ ] Definir recompensas emocionales (no solo items)
+- [ ] Testear ritmo con jugadores
+- [ ] Documentar diseño emocional
 
-## G. MÃ©tricas de Experiencia (10 Ã­tems)
+## G. Métricas de Experiencia (10 ítems)
 
-- [x] Definir mÃ©tricas de onboarding (tasa completado, tiempo)
-- [x] Definir mÃ©tricas de retenciÃ³n (DAU, MAU, sesiones)
-- [x] Definir mÃ©tricas de satisfacciÃ³n (reviews, encuestas)
-- [x] Crear dashboard de mÃ©tricas
-- [x] Definir proceso de recolecciÃ³n de mÃ©tricas
-- [x] Definir proceso de anÃ¡lisis de mÃ©tricas
-- [x] Crear alertas de mÃ©tricas anÃ³malas
-- [x] Definir ciclo de mejora basado en mÃ©tricas
-- [x] Documentar mÃ©tricas clave
-- [x] Revisar mÃ©tricas mensualmente
+- [ ] Definir métricas de onboarding (tasa completado, tiempo)
+- [ ] Definir métricas de retención (DAU, MAU, sesiones)
+- [ ] Definir métricas de satisfacción (reviews, encuestas)
+- [ ] Crear dashboard de métricas
+- [ ] Definir proceso de recolección de métricas
+- [ ] Definir proceso de análisis de métricas
+- [ ] Crear alertas de métricas anómalas
+- [ ] Definir ciclo de mejora basado en métricas
+- [ ] Documentar métricas clave
+- [ ] Revisar métricas mensualmente
 
-## H. Testing de Experiencia (5 Ã­tems)
+## H. Testing de Experiencia (5 ítems)
 
-- [x] Planificar sesiones de playtesting
-- [x] Crear guÃ­a de testing para facilitadores
-- [x] Recolectar feedback cualitativo
-- [x] Recolectar feedback cuantitativo
-- [x] Iterar segÃºn hallazgos
+- [ ] Planificar sesiones de playtesting
+- [ ] Crear guía de testing para facilitadores
+- [ ] Recolectar feedback cualitativo
+- [ ] Recolectar feedback cuantitativo
+- [ ] Iterar según hallazgos
 
-## I. DocumentaciÃ³n (5 Ã­tems)
+## I. Documentación (5 ítems)
 
-- [x] Crear directorio docs/ux/ con todos los documentos
-- [x] Mantener documentos actualizados
-- [x] Distribuir guidelines al equipo
-- [x] Revisar experiencia trimestralmente
-- [x] Documentar lecciones aprendidas
+- [ ] Crear directorio docs/ux/ con todos los documentos
+- [ ] Mantener documentos actualizados
+- [ ] Distribuir guidelines al equipo
+- [ ] Revisar experiencia trimestralmente
+- [ ] Documentar lecciones aprendidas

@@ -4,7 +4,7 @@
 
 # 05-Checklist.md — Módulo 130: Artbook
 
-> Convención: `[ ]` pendiente · `[x]` completado · `[?]` no resuelto (con explicación). Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
+> Convención: `[ ]` pendiente · `[ ]` completado · `[?]` no resuelto (con explicación). Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## A. Fundamentos y Estructura Editorial
 

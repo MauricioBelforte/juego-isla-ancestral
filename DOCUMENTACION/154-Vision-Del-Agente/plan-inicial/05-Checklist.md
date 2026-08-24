@@ -3,52 +3,52 @@
 
 # 05-Checklist.md — Módulo 154: Visión del Agente
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **operativo**: combina documentación (hecha) con implementación de herramientas MCP (pendiente).
 
 ## A. Requisitos y alcance (10)
 
-- [x] Definir el problema: agentes sin visión limitan iteración de diseño visual [S]
-- [x] Registrar directiva del usuario: 4 vías como alternativas, V4 fundamental [S]
-- [x] Catalogar los 7 requisitos funcionales (RF1-RF7) [S]
-- [x] Definir 6 requisitos no funcionales (NFR1-NFR6) [S]
-- [x] Establecer criterios de aceptación del módulo [S]
-- [x] Delimitar alcance: incluir 4 vías, excluir modelos custom/APIs pagas/streaming [S]
-- [x] Identificar integraciones con M45/M48/M53/M61/M103/M110/M112/M118 [S]
+- [ ] Definir el problema: agentes sin visión limitan iteración de diseño visual [S]
+- [ ] Registrar directiva del usuario: 4 vías como alternativas, V4 fundamental [S]
+- [ ] Catalogar los 7 requisitos funcionales (RF1-RF7) [S]
+- [ ] Definir 6 requisitos no funcionales (NFR1-NFR6) [S]
+- [ ] Establecer criterios de aceptación del módulo [S]
+- [ ] Delimitar alcance: incluir 4 vías, excluir modelos custom/APIs pagas/streaming [S]
+- [ ] Identificar integraciones con M45/M48/M53/M61/M103/M110/M112/M118 [S]
 - [ ] Validar RF1 en la práctica: pegar imagen de prueba y analizarla [S]
 - [ ] Confirmar con el usuario la matriz de decisión por escenario [S]
 - [ ] Revisar alcance tras primera instalación real de godot-mcp [M]
 
 ## B. Análisis y decisiones (12)
 
-- [x] Analizar los 4 puntos de integración posibles de captura [S]
-- [x] Evaluar capacidades reales del stack Cline+Windows+Godot [S]
-- [x] Documentar pros/contras de cada una de las 4 vías [S]
-- [x] Descartar A1 (modelo de visión propio) con justificación de costo [S]
-- [x] Descartar A2 (API de visión paga crítica) por NFR2/NFR6 [S]
-- [x] Descartar A3 (streaming >5 FPS) por complejidad innecesaria [S]
-- [x] Decisión D1: V4 como estándar fundamental permanente [S]
-- [x] Decisión D2: vías complementarias con degradación elegante [S]
-- [x] Decisión D3: V2 como primer fallback universal [S]
-- [x] Decisión D4: V3 asociada a M118 para regresión visual [S]
-- [x] Decisión D5: V1 como validación artística final del usuario [S]
-- [x] Registrar riesgos con probabilidad/impacto/mitigación [S]
+- [ ] Analizar los 4 puntos de integración posibles de captura [S]
+- [ ] Evaluar capacidades reales del stack Cline+Windows+Godot [S]
+- [ ] Documentar pros/contras de cada una de las 4 vías [S]
+- [ ] Descartar A1 (modelo de visión propio) con justificación de costo [S]
+- [ ] Descartar A2 (API de visión paga crítica) por NFR2/NFR6 [S]
+- [ ] Descartar A3 (streaming >5 FPS) por complejidad innecesaria [S]
+- [ ] Decisión D1: V4 como estándar fundamental permanente [S]
+- [ ] Decisión D2: vías complementarias con degradación elegante [S]
+- [ ] Decisión D3: V2 como primer fallback universal [S]
+- [ ] Decisión D4: V3 asociada a M118 para regresión visual [S]
+- [ ] Decisión D5: V1 como validación artística final del usuario [S]
+- [ ] Registrar riesgos con probabilidad/impacto/mitigación [S]
 
 ## C. Diseño y arquitectura (14)
 
-- [x] Diagrama de arquitectura general de las 4 vías [S]
-- [x] Diseñar flujo V1 (chat) sin componentes nuevos [S]
-- [x] Diseñar API de screenshot_mcp.py (V2): capture_screen/capture_window/save_capture [S]
-- [x] Diseñar configuración JSON para cline_mcp_settings.json (V2) [S]
-- [x] Diseñar pipeline V3: export headless → http.server → Playwright [S]
-- [x] Diseñar arquitectura de conexión V4: Cline ↔ server ↔ plugin Godot [S]
-- [x] Definir contrato de tools esperadas de godot-mcp (6 tools) [S]
-- [x] Escribir guía de instalación de V4 en Windows (6 pasos) [S]
-- [x] Crear matriz de decisión "qué vía usar según escenario" (6 escenarios) [S]
-- [x] Definir protocolo de iteración visual de 6 pasos [S]
-- [x] Acotar resolución de capturas a ≤1280x720 (preservar contexto) [S]
-- [x] Limitar iteraciones autónomas a 5 antes de escalar al usuario [S]
-- [x] Diseñar convención de nombres para Logs/screenshots/ [S]
+- [ ] Diagrama de arquitectura general de las 4 vías [S]
+- [ ] Diseñar flujo V1 (chat) sin componentes nuevos [S]
+- [ ] Diseñar API de screenshot_mcp.py (V2): capture_screen/capture_window/save_capture [S]
+- [ ] Diseñar configuración JSON para cline_mcp_settings.json (V2) [S]
+- [ ] Diseñar pipeline V3: export headless → http.server → Playwright [S]
+- [ ] Diseñar arquitectura de conexión V4: Cline ↔ server ↔ plugin Godot [S]
+- [ ] Definir contrato de tools esperadas de godot-mcp (6 tools) [S]
+- [ ] Escribir guía de instalación de V4 en Windows (6 pasos) [S]
+- [ ] Crear matriz de decisión "qué vía usar según escenario" (6 escenarios) [S]
+- [ ] Definir protocolo de iteración visual de 6 pasos [S]
+- [ ] Acotar resolución de capturas a ≤1280x720 (preservar contexto) [S]
+- [ ] Limitar iteraciones autónomas a 5 antes de escalar al usuario [S]
+- [ ] Diseñar convención de nombres para Logs/screenshots/ [S]
 - [ ] Revisar diseño tras primera sesión real de uso [M]
 
 ## D. Implementación V2 — MCP de captura de pantalla (16)
@@ -122,12 +122,12 @@
 
 ## H. Protocolo y gobernanza (12)
 
-- [x] Regla obligatoria: verificar V4 al inicio de toda sesión visual [S]
-- [x] Fallback automático a V2 si V4 no responde [S]
-- [x] Informar al usuario cuando se active un fallback [S]
-- [x] Máximo 5 iteraciones autónomas antes de escalar (V1) [S]
-- [x] El agente describe lo observado ANTES de proponer cambios [S]
-- [x] Cambios de ajuste mínimos y medibles (no vagos) [S]
+- [ ] Regla obligatoria: verificar V4 al inicio de toda sesión visual [S]
+- [ ] Fallback automático a V2 si V4 no responde [S]
+- [ ] Informar al usuario cuando se active un fallback [S]
+- [ ] Máximo 5 iteraciones autónomas antes de escalar (V1) [S]
+- [ ] El agente describe lo observado ANTES de proponer cambios [S]
+- [ ] Cambios de ajuste mínimos y medibles (no vagos) [S]
 - [ ] Capacitar al usuario en el flujo V1 (pegar capturas) [S]
 - [ ] Redactar quick-start de 1 página para nuevos agentes [M]
 - [ ] Agregar referencia a este módulo desde AGENTS.md si el usuario lo aprueba [S]
@@ -154,11 +154,11 @@
 
 ## J. Documentación y cierre (10)
 
-- [x] 01-Requerimientos.md creado y firmado [S]
-- [x] 02-Analisis.md creado y firmado [S]
-- [x] 03-Diseno.md creado y firmado [S]
-- [x] 04-Codigo.md creado y firmado con Notas del Agente [S]
-- [x] 05-Checklist.md creado y firmado (este archivo) [S]
+- [ ] 01-Requerimientos.md creado y firmado [S]
+- [ ] 02-Analisis.md creado y firmado [S]
+- [ ] 03-Diseno.md creado y firmado [S]
+- [ ] 04-Codigo.md creado y firmado con Notas del Agente [S]
+- [ ] 05-Checklist.md creado y firmado (este archivo) [S]
 - [ ] plan-actual/ espejo idéntico verificado [S]
 - [ ] Log generado en Logs/ con numeración secuencial [S]
 - [ ] Fila 154 agregada a CHECKLIST-GLOBAL.md [S]

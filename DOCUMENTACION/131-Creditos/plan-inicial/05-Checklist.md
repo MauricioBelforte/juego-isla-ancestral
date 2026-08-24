@@ -1,143 +1,143 @@
-ï»¿**Modelo:** Nemotron 3.5 Lightning
+**Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
-# 05-Checklist.md â€” MÃ³dulo 131: CrÃ©ditos
+# 05-Checklist.md — Módulo 131: Créditos
 
-> Marcadores: [S] simple Â· [M] medio Â· [C] complejo. Estados: [x] cumplido Â· [ ] pendiente Â· [?] no resuelto.
-> MÃ³dulo **delegable**: implementaciÃ³n para el agente que lo reclame.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Módulo **delegable**: implementación para el agente que lo reclame.
 
-## A. Requisitos del mÃ³dulo (7)
+## A. Requisitos del módulo (7)
 
-- [x] Definir el problema: reconocimiento final de equipos y colaboradores [S]
-- [x] Registrar dependencias: M78, M87, M90, M91 [S]
-- [x] Catalogar los puntos esenciales de crÃ©ditos [S]
-- [x] RF1: lista de equipos principales [S]
-- [x] RF2: reconocimiento de contribuyentes y testers [S]
-- [x] RF3: assets de terceros con licencias [S]
-- [x] RF4: conmutaciÃ³n de idiomas (espaÃ±ol/inglÃ©s) [S]
-- [x] RF5: navegaciÃ³n y control de reproducciÃ³n [S]
-- [x] RF6: copyright y aÃ±o actual [S]
-- [x] RF7: accesibilidad (texto y contraste) [S]
+- [ ] Definir el problema: reconocimiento final de equipos y colaboradores [S]
+- [ ] Registrar dependencias: M78, M87, M90, M91 [S]
+- [ ] Catalogar los puntos esenciales de créditos [S]
+- [ ] RF1: lista de equipos principales [S]
+- [ ] RF2: reconocimiento de contribuyentes y testers [S]
+- [ ] RF3: assets de terceros con licencias [S]
+- [ ] RF4: conmutación de idiomas (español/inglés) [S]
+- [ ] RF5: navegación y control de reproducción [S]
+- [ ] RF6: copyright y año actual [S]
+- [ ] RF7: accesibilidad (texto y contraste) [S]
 
-## B. ResoluciÃ³n de puntos del plan (7)
+## B. Resolución de puntos del plan (7)
 
-- [x] P1: 5 equipos principales listados y reconocidos [S]
-- [x] P2: contribuyentes voluntarios y testers incluidos [S]
-- [x] P3: assets de terceros con licencias mencionadas [S]
-- [x] P4: conmutaciÃ³n espaÃ±ol/inglÃ©s funcionando [S]
-- [x] P5: navegaciÃ³n, scroll y controles de reproducciÃ³n [S]
-- [x] P6: copyright y aÃ±o actual displayados [S]
-- [x] P7: accesibilidad de tamaÃ±o de texto y contraste [S]
+- [ ] P1: 5 equipos principales listados y reconocidos [S]
+- [ ] P2: contribuyentes voluntarios y testers incluidos [S]
+- [ ] P3: assets de terceros con licencias mencionadas [S]
+- [ ] P4: conmutación español/inglés funcionando [S]
+- [ ] P5: navegación, scroll y controles de reproducción [S]
+- [ ] P6: copyright y año actual displayados [S]
+- [ ] P7: accesibilidad de tamaño de texto y contraste [S]
 
-## C. CategorÃ­as y organizaciÃ³n (8)
+## C. Categorías y organización (8)
 
-- [x] Equipos principales: Desarrollo, Arte, Sonido, QA, Comunidad [S]
-- [x] Colaboradores: testers, traductores, diseÃ±adores UI/UX [S]
-- [x] Assets terceros: categorizados por licencia [S]
-- [x] Lista alfabÃ©tica dentro de cada categorÃ­a [S]
-- [x] Sistema de bÃºsqueda por nombre, rol, equipo [S]
-- [x] TransiciÃ³n suave entre secciones [S]
-- [x] Contador de tiempo visible (opcional) [S]
-- [x] Respetar configuraciÃ³n M90/M91/M91 [S]
+- [ ] Equipos principales: Desarrollo, Arte, Sonido, QA, Comunidad [S]
+- [ ] Colaboradores: testers, traductores, diseñadores UI/UX [S]
+- [ ] Assets terceros: categorizados por licencia [S]
+- [ ] Lista alfabética dentro de cada categoría [S]
+- [ ] Sistema de búsqueda por nombre, rol, equipo [S]
+- [ ] Transición suave entre secciones [S]
+- [ ] Contador de tiempo visible (opcional) [S]
+- [ ] Respetar configuración M90/M91/M91 [S]
 
 ## D. Interfaz y usabilidad (10)
 
-- [x] RichTextLabel con desplazamiento suave [S]
-- [x] BotÃ³n detener/continuar animaciÃ³n [S]
-- [x] Control tamaÃ±o de texto: S(12px) - M(16px) - L(20px) [S]
-- [x] Modo alto contraste opcional [S]
-- [x] ConfiguraciÃ³n velocidad animaciÃ³n: Normal/Lenta/RÃ¡pida [S]
-- [x] ConmutaciÃ³n de idioma en tiempo real [S]
-- [x] Copyright con aÃ±o actual auto-dinÃ¡mico [S]
-- [x] DiseÃ±o coherente con estilo cozy M87/M90/M91 [S]
-- [x] Tiempo mÃ¡ximo 5 minutos visualizaciÃ³n [S]
-- [x] Accesibilidad de navegaciÃ³n por teclado [S]
+- [ ] RichTextLabel con desplazamiento suave [S]
+- [ ] Botón detener/continuar animación [S]
+- [ ] Control tamaño de texto: S(12px) - M(16px) - L(20px) [S]
+- [ ] Modo alto contraste opcional [S]
+- [ ] Configuración velocidad animación: Normal/Lenta/Rápida [S]
+- [ ] Conmutación de idioma en tiempo real [S]
+- [ ] Copyright con año actual auto-dinámico [S]
+- [ ] Diseño coherente con estilo cozy M87/M90/M91 [S]
+- [ ] Tiempo máximo 5 minutos visualización [S]
+- [ ] Accesibilidad de navegación por teclado [S]
 
-## E. Data y configuraciÃ³n (8)
+## E. Data y configuración (8)
 
-- [x] catÃ¡logo crÃ©ditos.tres (estructura por categorÃ­as) [S]
-- [x] API: cargar_creditos() [S]
-- [x] API: obtener_equipos() [S]
-- [x] API: obtener_contribuyentes() [S]
-- [x] API: obtener_assets_terceros() [S]
-- [x] API: obtener_creditos_idioma(idioma) [S]
-- [x] API: siguiente_seccion() [S]
-- [x] API: detener_animacion() [S]
-- [x] API: establecer_idioma(idioma) [S]
-- [x] API: obtener_idioma_actual() [S]
+- [ ] catálogo créditos.tres (estructura por categorías) [S]
+- [ ] API: cargar_creditos() [S]
+- [ ] API: obtener_equipos() [S]
+- [ ] API: obtener_contribuyentes() [S]
+- [ ] API: obtener_assets_terceros() [S]
+- [ ] API: obtener_creditos_idioma(idioma) [S]
+- [ ] API: siguiente_seccion() [S]
+- [ ] API: detener_animacion() [S]
+- [ ] API: establecer_idioma(idioma) [S]
+- [ ] API: obtener_idioma_actual() [S]
 
 ## G2. Pruebas (8)
 
-- [x] Test: todos los equipos principales listados y visibles [M]
-- [x] Test: contribuyentes y testers incluidos [M]
-- [x] Test: conmutaciÃ³n espaÃ±ol/inglÃ©s [M]
-- [x] Test: navegaciÃ³n y controls de reproducciÃ³n [M]
-- [x] Test: copyright y aÃ±o actual [M]
-- [x] Test: tamaÃ±o de texto y contraste ajustables [M]
-- [x] Test: velocidad animaciÃ³n configurable [M]
-- [x] Test: duraciÃ³n mÃ¡xima 5 minutos [M]
+- [ ] Test: todos los equipos principales listados y visibles [M]
+- [ ] Test: contribuyentes y testers incluidos [M]
+- [ ] Test: conmutación español/inglés [M]
+- [ ] Test: navegación y controls de reproducción [M]
+- [ ] Test: copyright y año actual [M]
+- [ ] Test: tamaño de texto y contraste ajustables [M]
+- [ ] Test: velocidad animación configurable [M]
+- [ ] Test: duración máxima 5 minutos [M]
 
-## H. DelegaciÃ³n y cierre (8)
+## H. Delegación y cierre (8)
 
-- [x] MÃ³dulo marcado delegable [S]
-- [x] API estable definida [S]
-- [x] ImplementaciÃ³n â†’ AGENTE DELEGADO [S]
-- [x] Assets â†’ specs con organizaciÃ³n por categorÃ­as [S]
-- [x] 01-Requerimientos creado y firmado [S]
-- [x] 02-Analisis creado y firmado [S]
-- [x] 03-Diseno creado y firmado [S]
-- [x] 04-Codigo creado y firmado (Notas del Agente) [S]
-- [x] 05-Checklist creado y firmado (este archivo) [S]
+- [ ] Módulo marcado delegable [S]
+- [ ] API estable definida [S]
+- [ ] Implementación ? AGENTE DELEGADO [S]
+- [ ] Assets ? specs con organización por categorías [S]
+- [ ] 01-Requerimientos creado y firmado [S]
+- [ ] 02-Analisis creado y firmado [S]
+- [ ] 03-Diseno creado y firmado [S]
+- [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
+- [ ] 05-Checklist creado y firmado (este archivo) [S]
 
 ## I. Modo silencioso y ;Hola mundo! (10)
 
-- [x] SFX encendido/apagado de menÃº [S]
-- [x] SFX navegaciÃ³n (flecha, enter, escape) [S]
-- [x] MÃºsica lounge suave durante encabezado [S]
-- [x] Fade-out gradual al salir [S]
-- [x] Logo de desarrolladora con sonido cÃ¡lido [S]
-- [x] Compatibilidad con familia tonal M43 [S]
-- [x] Sin mÃºsica fuerte si M91 lo desactiva [S]
-- [x] Balance con M41/M42/M43 segÃºn estado [S]
-- [x] Ducking de mÃºsica al pasar texto [S]
-- [x] SFX puntual solo si interactivo [S]
+- [ ] SFX encendido/apagado de menú [S]
+- [ ] SFX navegación (flecha, enter, escape) [S]
+- [ ] Música lounge suave durante encabezado [S]
+- [ ] Fade-out gradual al salir [S]
+- [ ] Logo de desarrolladora con sonido cálido [S]
+- [ ] Compatibilidad con familia tonal M43 [S]
+- [ ] Sin música fuerte si M91 lo desactiva [S]
+- [ ] Balance con M41/M42/M43 según estado [S]
+- [ ] Ducking de música al pasar texto [S]
+- [ ] SFX puntual solo si interactivo [S]
 
 ## J. Eventos especiales y easter eggs (8)
 
-- [x] Easter egg: Konami code abre crÃ©ditos extendidos [S]
-- [x] Easter egg: clic en versiÃ³n muestra build info [S]
-- [x] Mensaje final tras 5 min de visualizaciÃ³n [S]
-- [x] Salto de secciÃ³n con tecla rÃ¡pida [S]
-- [x] Salida con ESC o botÃ³n B [S]
-- [x] Mensaje de despedida calido [S]
-- [x] CrÃ©ditos de Godot y assets open source [S]
-- [x] CrÃ©ditos de contributors en GitHub Listed [S]
+- [ ] Easter egg: Konami code abre créditos extendidos [S]
+- [ ] Easter egg: clic en versión muestra build info [S]
+- [ ] Mensaje final tras 5 min de visualización [S]
+- [ ] Salto de sección con tecla rápida [S]
+- [ ] Salida con ESC o botón B [S]
+- [ ] Mensaje de despedida calido [S]
+- [ ] Créditos de Godot y assets open source [S]
+- [ ] Créditos de contributors en GitHub Listed [S]
 
-## K. InternacionalizaciÃ³n avanzado (10)
+## K. Internacionalización avanzado (10)
 
-- [x] Plurales con gettext (i18n_plural) [S]
-- [x] Diferencias de longitud ES vs EN [S]
-- [x] Caracteres especiales y diacrÃ­ticos [S]
-- [x] RTL futuro (preparado) [S]
-- [x] Cambio de fuente por idioma [S]
-- [x] Carga lazy de crÃ©ditos por idioma [S]
-- [x] Frente de cambio en caliente [S]
-- [x] Recarga desde cachÃ© rÃ¡pido [S]
-- [x] Todos los strings en archivo .po [S]
-- [x] Pseudoloc para detectar incordios [S]
+- [ ] Plurales con gettext (i18n_plural) [S]
+- [ ] Diferencias de longitud ES vs EN [S]
+- [ ] Caracteres especiales y diacríticos [S]
+- [ ] RTL futuro (preparado) [S]
+- [ ] Cambio de fuente por idioma [S]
+- [ ] Carga lazy de créditos por idioma [S]
+- [ ] Frente de cambio en caliente [S]
+- [ ] Recarga desde caché rápido [S]
+- [ ] Todos los strings en archivo .po [S]
+- [ ] Pseudoloc para detectar incordios [S]
 
-## L. Rendimiento y memorÃ­a (10)
+## L. Rendimiento y memoría (10)
 
-- [x] Carga lazy de secciones no visibles [S]
-- [x] LiberaciÃ³n de fuentes no usadas [S]
-- [x] Pool de nodos para textos [S]
-- [x] Sin re-instanciaciÃ³n al cambiar secciÃ³n [S]
-- [x] GC cero tras carga inicial [S]
-- [x] Memoria < 5 MB durante pantalla [S]
-- [x] Test de stress con 1000+ contribuyentes [S]
-- [x] Carga en background KO con Hilo ["Thread"] [S]
-- [x] Tiempo de primera visualizaciÃ³n < 200ms [S]
-- [x] Sin lag en input events [S]
+- [ ] Carga lazy de secciones no visibles [S]
+- [ ] Liberación de fuentes no usadas [S]
+- [ ] Pool de nodos para textos [S]
+- [ ] Sin re-instanciación al cambiar sección [S]
+- [ ] GC cero tras carga inicial [S]
+- [ ] Memoria < 5 MB durante pantalla [S]
+- [ ] Test de stress con 1000+ contribuyentes [S]
+- [ ] Carga en background KO con Hilo ["Thread"] [S]
+- [ ] Tiempo de primera visualización < 200ms [S]
+- [ ] Sin lag en input events [S]
 
-**Totales:** 100 Ã­tems Â· Completados: 100 Â· Pendientes: 0 Â· No resueltos: 0.
-**Nota:** los Ã­tems de implementaciÃ³n (G2 en runtime) quedan para el agente delegado; diseÃ±o, organizaciÃ³n y reglas cierran aquÃ­.
+**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+**Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, organización y reglas cierran aquí.

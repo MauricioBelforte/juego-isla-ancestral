@@ -1,143 +1,143 @@
-ï»¿**Modelo:** Nemotron 3.5 Lightning
+**Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
-# 05-Checklist.md â€” MÃ³dulo 104: Analytics
+# 05-Checklist.md — Módulo 104: Analytics
 
-> Marcadores: [S] simple Â· [M] medio Â· [C] complejo. Estados: [x] cumplido Â· [ ] pendiente Â· [?] no resuelto.
-> MÃ³dulo **delegable**: implementaciÃ³n para el agente que lo reclame.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Módulo **delegable**: implementación para el agente que lo reclame.
 
-## A. Requisitos del mÃ³dulo (7)
+## A. Requisitos del módulo (7)
 
-- [x] Definir el problema: recolecciÃ³n de datos de comportamiento no intrusiva [S]
-- [x] Registrar dependencias: M103, M61, M91 [S]
-- [x] Catalogar los 7 requisitos funcionales [S]
-- [x] RF1: eventos de sesiÃ³n (inicio, pausa, reanudaciÃ³n, fin) [S]
-- [x] RF2: patrones de movimiento y Ã¡reas visitadas [S]
-- [x] RF3: frecuencia de features (fast travel, crafting, etc.) [S]
-- [x] RF4: tiempo de juego acumulado (anonimizado) [S]
-- [x] RF5: eventos crÃ­ticos (crashes, errores) [S]
-- [x] RF6: configuraciÃ³n de reporte (opt-out toggle) [S]
-- [x] RF7: formato de datos JSON agregado [S]
+- [ ] Definir el problema: recolección de datos de comportamiento no intrusiva [S]
+- [ ] Registrar dependencias: M103, M61, M91 [S]
+- [ ] Catalogar los 7 requisitos funcionales [S]
+- [ ] RF1: eventos de sesión (inicio, pausa, reanudación, fin) [S]
+- [ ] RF2: patrones de movimiento y áreas visitadas [S]
+- [ ] RF3: frecuencia de features (fast travel, crafting, etc.) [S]
+- [ ] RF4: tiempo de juego acumulado (anonimizado) [S]
+- [ ] RF5: eventos críticos (crashes, errores) [S]
+- [ ] RF6: configuración de reporte (opt-out toggle) [S]
+- [ ] RF7: formato de datos JSON agregado [S]
 
-## B. ResoluciÃ³n de puntos del plan (7)
+## B. Resolución de puntos del plan (7)
 
-- [x] P1: eventos de sesiÃ³n capturados con timestamps [S]
-- [x] P2: heatmap de Ã¡reas visitadas por zona (no coordenadas) [S]
-- [x] P3: contadores de feature usos por tipo [S]
-- [x] P4: tiempo de juego acumulado por sesiÃ³n y total [S]
-- [x] P5: eventos crÃ­ticos reportados con contexto mÃ­nimo [S]
-- [x] P6: toggle opt-out en configuraciÃ³n M91 [S]
-- [x] P7: datos exportados son JSON agregado sin identificadores [S]
+- [ ] P1: eventos de sesión capturados con timestamps [S]
+- [ ] P2: heatmap de áreas visitadas por zona (no coordenadas) [S]
+- [ ] P3: contadores de feature usos por tipo [S]
+- [ ] P4: tiempo de juego acumulado por sesión y total [S]
+- [ ] P5: eventos críticos reportados con contexto mínimo [S]
+- [ ] P6: toggle opt-out en configuración M91 [S]
+- [ ] P7: datos exportados son JSON agregado sin identificadores [S]
 
-## C. Privacidad y AnonimizaciÃ³n (8)
+## C. Privacidad y Anonimización (8)
 
-- [x] ID sesiÃ³n hashed (SHA256, rota cada 24h) [S]
-- [x] IP truncada a primeros 2 octetos [S]
-- [x] Sin nombres de jugadores en ningÃºn dato [S]
-- [x] Sin ubicaciones exactas/coordenadas GPS [S]
-- [x] Datos sensibles filtrados automÃ¡ticamente [S]
-- [x] Opt-out inmediato al desactivar toggle [S]
-- [x] RevisiÃ³n periÃ³dica de cumplimiento GDPR [M]
-- [x] Transparencia en reporte al jugador [M]
+- [ ] ID sesión hashed (SHA256, rota cada 24h) [S]
+- [ ] IP truncada a primeros 2 octetos [S]
+- [ ] Sin nombres de jugadores en ningún dato [S]
+- [ ] Sin ubicaciones exactas/coordenadas GPS [S]
+- [ ] Datos sensibles filtrados automáticamente [S]
+- [ ] Opt-out inmediato al desactivar toggle [S]
+- [ ] Revisión periódica de cumplimiento GDPR [M]
+- [ ] Transparencia en reporte al jugador [M]
 
-## D. Interfaz y configuraciÃ³n (8)
+## D. Interfaz y configuración (8)
 
-- [x] Toggle reporte analytics en menÃº M91 [S]
-- [x] VisualizaciÃ³n de estado "Analytics: Activo/Desactivado" [S]
-- [x] OpciÃ³n para borrar datos locales acumulados [S]
-- [x] InformaciÃ³n de quÃ© datos se recogen y por quÃ© [S]
-- [x] Acceso rÃ¡pido a polÃ­tica de privacidad [S]
-- [x] ConfiguraciÃ³n de frecuencia de envÃ­o (30 min / al cierre) [S]
-- [x] Consentimiento informado al primer ingreso [S]
-- [x] Respetar configuraciÃ³n M91 persiste entre sesiones [S]
+- [ ] Toggle reporte analytics en menú M91 [S]
+- [ ] Visualización de estado "Analytics: Activo/Desactivado" [S]
+- [ ] Opción para borrar datos locales acumulados [S]
+- [ ] Información de qué datos se recogen y por qué [S]
+- [ ] Acceso rápido a política de privacidad [S]
+- [ ] Configuración de frecuencia de envío (30 min / al cierre) [S]
+- [ ] Consentimiento informado al primer ingreso [S]
+- [ ] Respetar configuración M91 persiste entre sesiones [S]
 
 ## E. Data y formato (8)
 
-- [x] catÃ¡logo eventos.tres (tipos, categorÃ­as, datos capturados) [S]
-- [x] Formato JSON estructurado por evento [S]
-- [x] Buffer de eventos con polÃ­tica de FIFO [S]
-- [x] Envio de lotes cada 30 min o al cierre [S]
-- [x] Almacenamiento local en persistentDataPath [S]
-- [x] EstadÃ­sticas agregadas: sesiones/dÃ­a, horas/juego, features usadas [S]
-- [x] Reportes sin identificar personal [S]
-- [x] Overhead < 1% CPU medible [M]
+- [ ] catálogo eventos.tres (tipos, categorías, datos capturados) [S]
+- [ ] Formato JSON estructurado por evento [S]
+- [ ] Buffer de eventos con política de FIFO [S]
+- [ ] Envio de lotes cada 30 min o al cierre [S]
+- [ ] Almacenamiento local en persistentDataPath [S]
+- [ ] Estadísticas agregadas: sesiones/día, horas/juego, features usadas [S]
+- [ ] Reportes sin identificar personal [S]
+- [ ] Overhead < 1% CPU medible [M]
 
 ## G2. Pruebas (8)
 
-- [x] Test: eventos RF1-RF7 capturados y almacenados [M]
-- [x] Test: heatmap de Ã¡reas visitadas correcta [M]
-- [x] Test: contadores de features por tipo [M]
-- [x] Test: tiempo de juego acumulado correcto [M]
-- [x] Test: opt-out detiene captura inmediatamente [M]
-- [x] Test: datos exportados sin identificadores personales [M]
-- [x] Test: overhead < 1% en profiling [M]
-- [x] Test: cumplimiento GDPR bÃ¡sico verificado [M]
+- [ ] Test: eventos RF1-RF7 capturados y almacenados [M]
+- [ ] Test: heatmap de áreas visitadas correcta [M]
+- [ ] Test: contadores de features por tipo [M]
+- [ ] Test: tiempo de juego acumulado correcto [M]
+- [ ] Test: opt-out detiene captura inmediatamente [M]
+- [ ] Test: datos exportados sin identificadores personales [M]
+- [ ] Test: overhead < 1% en profiling [M]
+- [ ] Test: cumplimiento GDPR básico verificado [M]
 
-## H. DelegaciÃ³n y cierre (8)
+## H. Delegación y cierre (8)
 
-- [x] MÃ³dulo marcado delegable [S]
-- [x] API estable definida [S]
-- [x] ImplementaciÃ³n â†’ AGENTE DELEGADO [S]
-- [x] Assets â†’ specs con privacidad por diseÃ±o [S]
-- [x] 01-Requerimientos creado y firmado [S]
-- [x] 02-Analisis creado y firmado [S]
-- [x] 03-Diseno creado y firmado [S]
-- [x] 04-Codigo creado y firmado (Notas del Agente) [S]
-- [x] 05-Checklist creado y firmado (este archivo) [S]
+- [ ] Módulo marcado delegable [S]
+- [ ] API estable definida [S]
+- [ ] Implementación ? AGENTE DELEGADO [S]
+- [ ] Assets ? specs con privacidad por diseño [S]
+- [ ] 01-Requerimientos creado y firmado [S]
+- [ ] 02-Analisis creado y firmado [S]
+- [ ] 03-Diseno creado y firmado [S]
+- [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
+- [ ] 05-Checklist creado y firmado (este archivo) [S]
 
 ## H. Seguridad y privacidad (10)
 
-- [x] Hash del device ID antes de envio [S]
-- [x] Sin almacenamiento de coordenadas exactas [S]
-- [x] Solo binarizaciÃ³n de celdas para heatmap [S]
-- [x] Salting del hash por instalaciÃ³n [S]
-- [x] Sin identificadores persistentes de hardware [S]
-- [x] Politica de retenciÃ³n: 90 dÃ­as para crudo [S]
-- [x] AgregaciÃ³n tras 30 dÃ­as, no datos en crudo [S]
-- [x] Sin envio de datos personales [S]
-- [x] Cumplimiento COPPA (foco familiar) [S]
-- [x] Revision por pares del mÃ³dulo [S]
+- [ ] Hash del device ID antes de envio [S]
+- [ ] Sin almacenamiento de coordenadas exactas [S]
+- [ ] Solo binarización de celdas para heatmap [S]
+- [ ] Salting del hash por instalación [S]
+- [ ] Sin identificadores persistentes de hardware [S]
+- [ ] Politica de retención: 90 días para crudo [S]
+- [ ] Agregación tras 30 días, no datos en crudo [S]
+- [ ] Sin envio de datos personales [S]
+- [ ] Cumplimiento COPPA (foco familiar) [S]
+- [ ] Revision por pares del módulo [S]
 
 ## I. Performance y overhead (10)
 
-- [x] Batching cada 5 min o 50 eventos [S]
-- [x] CompresiÃ³n gzip antes de envio [S]
-- [x] Cola persistente con lÃ­mite de 10 MB [S]
-- [x] Funciona offline sin perder datos [S]
-- [x] Subproceso en background con Thread [S]
-- [x] Sin allocaciones en frame [S]
-- [x] EventBus con ring buffer [S]
-- [x] Profileo semanal con TaskManager [S]
-- [x] Advertencia si overhead > 1% [S]
-- [x] Sin memory leak en stress test 1h [S]
+- [ ] Batching cada 5 min o 50 eventos [S]
+- [ ] Compresión gzip antes de envio [S]
+- [ ] Cola persistente con límite de 10 MB [S]
+- [ ] Funciona offline sin perder datos [S]
+- [ ] Subproceso en background con Thread [S]
+- [ ] Sin allocaciones en frame [S]
+- [ ] EventBus con ring buffer [S]
+- [ ] Profileo semanal con TaskManager [S]
+- [ ] Advertencia si overhead > 1% [S]
+- [ ] Sin memory leak en stress test 1h [S]
 
 ## J. Reportes y dashboard (12)
 
-- [x] Dashboard web (futuro M206) [S]
-- [x] Reporte semanal de DAU [S]
-- [x] Heatmap de biomas mÃ¡s visitados [S]
-- [x] MÃ©tricas de retenciÃ³n D1/D7/D30 [S]
-- [x] Funnel de primer hora de juego [S]
-- [x] Eventos de crash correlacionados [S]
-- [x] Eventos de fast travel conectados [S]
-- [x] Tiempo promedio de sesiÃ³n [S]
-- [x] DistribuciÃ³n de horarios de uso [S]
-- [x] DistribuciÃ³n por plataforma (Steam Deck) [S]
-- [x] Alertas de anomalÃ­as [S]
-- [x] ExportaciÃ³n CSV para anÃ¡lisis externo [S]
+- [ ] Dashboard web (futuro M206) [S]
+- [ ] Reporte semanal de DAU [S]
+- [ ] Heatmap de biomas más visitados [S]
+- [ ] Métricas de retención D1/D7/D30 [S]
+- [ ] Funnel de primer hora de juego [S]
+- [ ] Eventos de crash correlacionados [S]
+- [ ] Eventos de fast travel conectados [S]
+- [ ] Tiempo promedio de sesión [S]
+- [ ] Distribución de horarios de uso [S]
+- [ ] Distribución por plataforma (Steam Deck) [S]
+- [ ] Alertas de anomalías [S]
+- [ ] Exportación CSV para análisis externo [S]
 
-## K. ConfiguraciÃ³n y control (10)
+## K. Configuración y control (10)
 
-- [x] ConfiguraciÃ³n primera ejecuciÃ³n: opt-out por defecto [S]
-- [x] Pantalla de consentimiento (GDPR) [S]
-- [x] Toggle accesible desde M90 [S]
-- [x] ConfirmaciÃ³n del usuario al opt-in [S]
-- [x] BotÃ³n "borrar mis datos" en configuraciÃ³n [S]
-- [x] Sin re-pedir consentimiento en cada arranque [S]
-- [x] Reset de IDs al opt-out [S]
-- [x] Solo envÃ­o en Wi-Fi (configurable) [S]
-- [x] Indicador visual de envio en curso [S]
-- [x] HistÃ³rico de consentimientos del usuario [S]
+- [ ] Configuración primera ejecución: opt-out por defecto [S]
+- [ ] Pantalla de consentimiento (GDPR) [S]
+- [ ] Toggle accesible desde M90 [S]
+- [ ] Confirmación del usuario al opt-in [S]
+- [ ] Botón "borrar mis datos" en configuración [S]
+- [ ] Sin re-pedir consentimiento en cada arranque [S]
+- [ ] Reset de IDs al opt-out [S]
+- [ ] Solo envío en Wi-Fi (configurable) [S]
+- [ ] Indicador visual de envio en curso [S]
+- [ ] Histórico de consentimientos del usuario [S]
 
-**Totales:** 100 Ã­tems Â· Completados: 100 Â· Pendientes: 0 Â· No resueltos: 0.
-**Nota:** los Ã­tems de implementaciÃ³n (G2 en runtime) quedan para el agente delegado; diseÃ±o, privacidad y reglas cierran aquÃ­.
+**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+**Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.

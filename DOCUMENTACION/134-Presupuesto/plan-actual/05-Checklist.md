@@ -1,135 +1,135 @@
-Ôªø# M√≥dulo 134: Presupuesto ‚Äî Checklist
+# MÛdulo 134: Presupuesto ó Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:31:00
 
-## A. Definici√≥n del Presupuesto (10 √≠tems)
+## A. DefiniciÛn del Presupuesto (10 Ìtems)
 
-- [x] Definir presupuesto total del proyecto
-- [x] Establecer fuente de financiamiento principal
-- [x] Definir moneda de trabajo
-- [x] Establecer per√≠odo de presupuesto (trimestral/mensual)
-- [x] Definir proceso de aprobaci√≥n de presupuesto
-- [x] Crear documento maestro de presupuesto
-- [x] Distribuir presupuesto a leads de √°rea
-- [x] Establecer pol√≠tica de gastos
-- [x] Definir l√≠mites de aprobaci√≥n por rol
-- [x] Documentar supuestos de estimaci√≥n
+- [ ] Definir presupuesto total del proyecto
+- [ ] Establecer fuente de financiamiento principal
+- [ ] Definir moneda de trabajo
+- [ ] Establecer perÌodo de presupuesto (trimestral/mensual)
+- [ ] Definir proceso de aprobaciÛn de presupuesto
+- [ ] Crear documento maestro de presupuesto
+- [ ] Distribuir presupuesto a leads de ·rea
+- [ ] Establecer polÌtica de gastos
+- [ ] Definir lÌmites de aprobaciÛn por rol
+- [ ] Documentar supuestos de estimaciÛn
 
-## B. Desglose por Categor√≠as (15 √≠tems)
+## B. Desglose por CategorÌas (15 Ìtems)
 
-- [x] Personal: programadores (30%)
-- [x] Personal: artistas 3D/2D (15%)
-- [x] Personal: dise√±adores (5%)
-- [x] Personal: audio (3%)
-- [x] Personal: QA/producci√≥n (2%)
-- [x] Herramientas: software (5%)
-- [x] Herramientas: hardware (3%)
-- [x] Herramientas: licencias (2%)
-- [x] Marketing: ads digitales (8%)
-- [x] Marketing: eventos/convenciones (5%)
-- [x] Marketing: PR/comunidad (4%)
-- [x] Marketing: assets de marketing (3%)
-- [x] Operaciones: servicios (2%)
-- [x] Operaciones: legal (2%)
-- [x] Reserva: imprevistos (10-20%)
+- [ ] Personal: programadores (30%)
+- [ ] Personal: artistas 3D/2D (15%)
+- [ ] Personal: diseÒadores (5%)
+- [ ] Personal: audio (3%)
+- [ ] Personal: QA/producciÛn (2%)
+- [ ] Herramientas: software (5%)
+- [ ] Herramientas: hardware (3%)
+- [ ] Herramientas: licencias (2%)
+- [ ] Marketing: ads digitales (8%)
+- [ ] Marketing: eventos/convenciones (5%)
+- [ ] Marketing: PR/comunidad (4%)
+- [ ] Marketing: assets de marketing (3%)
+- [ ] Operaciones: servicios (2%)
+- [ ] Operaciones: legal (2%)
+- [ ] Reserva: imprevistos (10-20%)
 
-## C. Control de Gastos (10 √≠tems)
+## C. Control de Gastos (10 Ìtems)
 
-- [x] Crear template de registro de gastos
-- [x] Definir flujo de aprobaci√≥n (3 niveles)
-- [x] Establecer frecuencia de revisi√≥n (semanal/mensual)
-- [x] Crear proceso de reconciliaci√≥n bancaria
-- [x] Definir proceso de reembolsos
-- [x] Establecer pol√≠tica de facturaci√≥n
-- [x] Crear dashboard de gastos en tiempo real
-- [x] Definir alertas de exceso de presupuesto
-- [x] Establecer proceso de ajuste de presupuesto
-- [x] Documentar proceso de auditor√≠a
+- [ ] Crear template de registro de gastos
+- [ ] Definir flujo de aprobaciÛn (3 niveles)
+- [ ] Establecer frecuencia de revisiÛn (semanal/mensual)
+- [ ] Crear proceso de reconciliaciÛn bancaria
+- [ ] Definir proceso de reembolsos
+- [ ] Establecer polÌtica de facturaciÛn
+- [ ] Crear dashboard de gastos en tiempo real
+- [ ] Definir alertas de exceso de presupuesto
+- [ ] Establecer proceso de ajuste de presupuesto
+- [ ] Documentar proceso de auditorÌa
 
-## D. Proyecciones de Ingresos (10 √≠tems)
+## D. Proyecciones de Ingresos (10 Ìtems)
 
-- [x] Definir precio de venta del juego
-- [x] Crear escenario pesimista de ventas
-- [x] Crear escenario realista de ventas
-- [x] Crear escenario optimista de ventas
-- [x] Calcular break-even point
-- [x] Definir supuestos por plataforma (Steam, GOG, etc.)
-- [x] Proyectar ingresos por a√±o (3 a√±os)
-- [x] Considerar descuentos y sales
-- [x] Definir margen neto despu√©s de costos de plataforma
-- [x] Documentar sensibilidad del modelo a variables clave
+- [ ] Definir precio de venta del juego
+- [ ] Crear escenario pesimista de ventas
+- [ ] Crear escenario realista de ventas
+- [ ] Crear escenario optimista de ventas
+- [ ] Calcular break-even point
+- [ ] Definir supuestos por plataforma (Steam, GOG, etc.)
+- [ ] Proyectar ingresos por aÒo (3 aÒos)
+- [ ] Considerar descuentos y sales
+- [ ] Definir margen neto despuÈs de costos de plataforma
+- [ ] Documentar sensibilidad del modelo a variables clave
 
-## E. Gesti√≥n de Riesgos Financieros (10 √≠tems)
+## E. GestiÛn de Riesgos Financieros (10 Ìtems)
 
-- [x] Reserva del 20% para imprevistos
-- [x] Identificar riesgos de sobrecosto por categor√≠a
-- [x] Definir triggers de activaci√≥n de reserva
-- [x] Crear plan de contingencia financiero
-- [x] Definir proceso de corte de gastos si es necesario
-- [x] Establecer l√≠nea de cr√©dito de emergencia
-- [x] Documentar escenario de quiebra y salida ordenada
-- [x] Definir proceso de renegociaci√≥n de contratos
-- [x] Crear escenarios de reducci√≥n de alcance
-- [x] Establecer m√©tricas de alerta temprana
+- [ ] Reserva del 20% para imprevistos
+- [ ] Identificar riesgos de sobrecosto por categorÌa
+- [ ] Definir triggers de activaciÛn de reserva
+- [ ] Crear plan de contingencia financiero
+- [ ] Definir proceso de corte de gastos si es necesario
+- [ ] Establecer lÌnea de crÈdito de emergencia
+- [ ] Documentar escenario de quiebra y salida ordenada
+- [ ] Definir proceso de renegociaciÛn de contratos
+- [ ] Crear escenarios de reducciÛn de alcance
+- [ ] Establecer mÈtricas de alerta temprana
 
-## F. Reporting (10 √≠tems)
+## F. Reporting (10 Ìtems)
 
-- [x] Crear reporte mensual de presupuesto
-- [x] Incluir burn rate y runway
-- [x] Incluir varianza real vs. plan
-- [x] Incluir proyecci√≥n de fin de mes
-- [x] Incluir top 5 gastos del mes
-- [x] Distribuir reporte a leads semanalemente
-- [x] Crear dashboard ejecutivo
-- [x] Definir KPIs financieros clave
-- [x] Establecer reuni√≥n de revisi√≥n financiera mensual
-- [x] Documentar proceso de toma de decisiones financieras
+- [ ] Crear reporte mensual de presupuesto
+- [ ] Incluir burn rate y runway
+- [ ] Incluir varianza real vs. plan
+- [ ] Incluir proyecciÛn de fin de mes
+- [ ] Incluir top 5 gastos del mes
+- [ ] Distribuir reporte a leads semanalemente
+- [ ] Crear dashboard ejecutivo
+- [ ] Definir KPIs financieros clave
+- [ ] Establecer reuniÛn de revisiÛn financiera mensual
+- [ ] Documentar proceso de toma de decisiones financieras
 
-## G. Herramientas y Plantillas (10 √≠tems)
+## G. Herramientas y Plantillas (10 Ìtems)
 
-- [x] Seleccionar herramienta de hoja de c√°lculo (Google Sheets, Excel)
-- [x] Crear plantilla maestra de presupuesto
-- [x] Crear plantilla de registro de gastos
-- [x] Crear plantilla de proyecci√≥n de ingresos
-- [x] Crear plantilla de reporte mensual
-- [x] Crear dashboard con f√≥rmulas autom√°ticas
-- [x] Establecer formato est√°ndar de reportes
-- [x] Crear gu√≠a de uso de plantillas
-- [x] Capacitar al equipo en uso de herramientas
-- [x] Mantener plantillas actualizadas
+- [ ] Seleccionar herramienta de hoja de c·lculo (Google Sheets, Excel)
+- [ ] Crear plantilla maestra de presupuesto
+- [ ] Crear plantilla de registro de gastos
+- [ ] Crear plantilla de proyecciÛn de ingresos
+- [ ] Crear plantilla de reporte mensual
+- [ ] Crear dashboard con fÛrmulas autom·ticas
+- [ ] Establecer formato est·ndar de reportes
+- [ ] Crear guÌa de uso de plantillas
+- [ ] Capacitar al equipo en uso de herramientas
+- [ ] Mantener plantillas actualizadas
 
-## H. Integraci√≥n con Roadmap (10 √≠tems)
+## H. IntegraciÛn con Roadmap (10 Ìtems)
 
-- [x] Vincular presupuesto con cronograma (M136)
-- [x] Estimar costo por milestone
-- [x] Proyectar cash flow por trimestre
-- [x] Definir go/no-go financiero por milestone
-- [x] Establecer umbrales de inversi√≥n por fase
-- [x] Documentar dependency entre presupuesto y alcance
-- [x] Crear escenarios de cambio de alcance
-- [x] Definir proceso de priorizaci√≥n con budget limitado
-- [x] Establecer revisi√≥n de presupuesto por quarter
-- [x] Documentar lecciones aprendidas financieras
+- [ ] Vincular presupuesto con cronograma (M136)
+- [ ] Estimar costo por milestone
+- [ ] Proyectar cash flow por trimestre
+- [ ] Definir go/no-go financiero por milestone
+- [ ] Establecer umbrales de inversiÛn por fase
+- [ ] Documentar dependency entre presupuesto y alcance
+- [ ] Crear escenarios de cambio de alcance
+- [ ] Definir proceso de priorizaciÛn con budget limitado
+- [ ] Establecer revisiÛn de presupuesto por quarter
+- [ ] Documentar lecciones aprendidas financieras
 
-## I. Documentaci√≥n y Cumplimiento (10 √≠tems)
+## I. DocumentaciÛn y Cumplimiento (10 Ìtems)
 
-- [x] Crear directorio docs/budget/ con todos los documentos
-- [x] Mantener documentos actualizados
-- [x] Cumplir con requisitos legales de contabilidad
-- [x] Documentar procesos financieros
-- [x] Crear backup de datos financieros
-- [x] Establecer pol√≠tica de retenci√≥n de documentos
-- [x] Definir acceso restringido a datos financieros
-- [x] Documentar proceso de cierre contable
-- [x] Crear checklist de cierre trimestral
-- [x] Archivar documentos financieros hist√≥ricos
+- [ ] Crear directorio docs/budget/ con todos los documentos
+- [ ] Mantener documentos actualizados
+- [ ] Cumplir con requisitos legales de contabilidad
+- [ ] Documentar procesos financieros
+- [ ] Crear backup de datos financieros
+- [ ] Establecer polÌtica de retenciÛn de documentos
+- [ ] Definir acceso restringido a datos financieros
+- [ ] Documentar proceso de cierre contable
+- [ ] Crear checklist de cierre trimestral
+- [ ] Archivar documentos financieros histÛricos
 
-## J. Integraci√≥n con Otros M√≥dulos (5 √≠tems)
+## J. IntegraciÛn con Otros MÛdulos (5 Ìtems)
 
-- [x] Vincular con M133 (Gesti√≥n del Proyecto): costo por sprint
-- [x] Vincular con M135 (Riesgos): impacto financiero de cada riesgo
-- [x] Vincular con M136 (Roadmap): inversi√≥n por fase
-- [x] Vincular con M95 (Monetizaci√≥n): proyecciones de ingresos por DLC
-- [x] Vincular con M143 (Lanzamiento): costo de marketing d√≠a 0
+- [ ] Vincular con M133 (GestiÛn del Proyecto): costo por sprint
+- [ ] Vincular con M135 (Riesgos): impacto financiero de cada riesgo
+- [ ] Vincular con M136 (Roadmap): inversiÛn por fase
+- [ ] Vincular con M95 (MonetizaciÛn): proyecciones de ingresos por DLC
+- [ ] Vincular con M143 (Lanzamiento): costo de marketing dÌa 0

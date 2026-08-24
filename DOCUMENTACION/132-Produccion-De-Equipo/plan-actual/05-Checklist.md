@@ -1,137 +1,137 @@
-ï»¿# MÃ³dulo 132: ProducciÃ³n del Equipo â€” Checklist
+# Módulo 132: Producción del Equipo — Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:30:00
 
-## A. Estructura Organizativa (10 Ã­tems)
+## A. Estructura Organizativa (10 ítems)
 
-- [x] Definir estructura jerÃ¡rquica del equipo
-- [x] Documentar diagrama organizativo
-- [x] Definir roles principales: Game Director, Lead Programmer, Lead Artist, Game Designer, Producer
-- [x] Definir roles de soporte: QA, Community Manager
-- [x] Documentar lÃ­neas de reporte
-- [x] Definir roles flexibles para equipo pequeÃ±o
-- [x] Crear tabla RACI de decisiones
-- [x] Documentar responsabilidades de cada rol
-- [x] Definir proceso de cambio de roles
-- [x] Documentar proceso de incorporaciÃ³n de nuevos roles
+- [ ] Definir estructura jerárquica del equipo
+- [ ] Documentar diagrama organizativo
+- [ ] Definir roles principales: Game Director, Lead Programmer, Lead Artist, Game Designer, Producer
+- [ ] Definir roles de soporte: QA, Community Manager
+- [ ] Documentar líneas de reporte
+- [ ] Definir roles flexibles para equipo pequeño
+- [ ] Crear tabla RACI de decisiones
+- [ ] Documentar responsabilidades de cada rol
+- [ ] Definir proceso de cambio de roles
+- [ ] Documentar proceso de incorporación de nuevos roles
 
-## B. Roles y Responsabilidades (15 Ã­tems)
+## B. Roles y Responsabilidades (15 ítems)
 
-- [x] Game Director: visiÃ³n del juego, decisiones finales, prioridades
-- [x] Lead Programmer: arquitectura, cÃ³digo core, revisiÃ³n de PRs
-- [x] Lead Artist: direcciÃ³n artÃ­stica, pipeline de assets, calidad visual
-- [x] Game Designer: mecÃ¡nicas, niveles, balance, documentaciÃ³n de diseÃ±o
-- [x] Producer: schedule, presupuesto, coordinaciÃ³n, removal de blockers
-- [x] Programadores: implementaciÃ³n de features, bug fixes, testing
-- [x] 3D Artists: modelado, texturizado, animaciÃ³n
-- [x] 2D Artists: UI, iconos, concept art, ilustraciones
-- [x] Audio Lead: direcciÃ³n de audio, implementaciÃ³n, mixing
-- [x] QA: testing manual, automatizado, reportes de bugs
-- [x] Community Manager: redes sociales, comunicaciÃ³n, feedback
-- [x] Documentar Habilidades requeridas por rol
-- [x] Documentar Herramientas requeridas por rol
-- [x] Definir proceso de evaluaciÃ³n de desempeÃ±o
-- [x] Crear perfil de rol para cada posiciÃ³n
+- [ ] Game Director: visión del juego, decisiones finales, prioridades
+- [ ] Lead Programmer: arquitectura, código core, revisión de PRs
+- [ ] Lead Artist: dirección artística, pipeline de assets, calidad visual
+- [ ] Game Designer: mecánicas, niveles, balance, documentación de diseño
+- [ ] Producer: schedule, presupuesto, coordinación, removal de blockers
+- [ ] Programadores: implementación de features, bug fixes, testing
+- [ ] 3D Artists: modelado, texturizado, animación
+- [ ] 2D Artists: UI, iconos, concept art, ilustraciones
+- [ ] Audio Lead: dirección de audio, implementación, mixing
+- [ ] QA: testing manual, automatizado, reportes de bugs
+- [ ] Community Manager: redes sociales, comunicación, feedback
+- [ ] Documentar Habilidades requeridas por rol
+- [ ] Documentar Herramientas requeridas por rol
+- [ ] Definir proceso de evaluación de desempeño
+- [ ] Crear perfil de rol para cada posición
 
-## C. ComunicaciÃ³n Interna (15 Ã­tems)
+## C. Comunicación Interna (15 ítems)
 
-- [x] Definir canales de Discord por Ã¡rea (general, dev, art, design, production)
-- [x] Establecer horarios de trabajo y overlaps
-- [x] Definir reuniÃ³n Daily Standup (15 min, diaria)
-- [x] Definir reuniÃ³n Sprint Review (1 hora, semanal)
-- [x] Definir reuniÃ³n Retrospective (1 hora, quincenal)
-- [x] Definir reuniÃ³n Planning (2 horas, mensual)
-- [x] Definir reuniÃ³n 1:1 (30 min, quincenal)
-- [x] Definir reuniÃ³n All Hands (1 hora, mensual)
-- [x] Crear template de reuniÃ³n
-- [x] Definir reglas de comunicaciÃ³n asÃ­ncrona
-- [x] Definir reglas de respuesta a mensajes urgentes
-- [x] Documentar herramientas de comunicaciÃ³n (Discord, Notion, Linear)
-- [x] Crear guÃ­a de estilo para comunicaciÃ³n escrita
-- [x] Definir proceso de documentar decisiones
-- [x] Crear registro de decisiones tomadas
+- [ ] Definir canales de Discord por área (general, dev, art, design, production)
+- [ ] Establecer horarios de trabajo y overlaps
+- [ ] Definir reunión Daily Standup (15 min, diaria)
+- [ ] Definir reunión Sprint Review (1 hora, semanal)
+- [ ] Definir reunión Retrospective (1 hora, quincenal)
+- [ ] Definir reunión Planning (2 horas, mensual)
+- [ ] Definir reunión 1:1 (30 min, quincenal)
+- [ ] Definir reunión All Hands (1 hora, mensual)
+- [ ] Crear template de reunión
+- [ ] Definir reglas de comunicación asíncrona
+- [ ] Definir reglas de respuesta a mensajes urgentes
+- [ ] Documentar herramientas de comunicación (Discord, Notion, Linear)
+- [ ] Crear guía de estilo para comunicación escrita
+- [ ] Definir proceso de documentar decisiones
+- [ ] Crear registro de decisiones tomadas
 
-## D. GestiÃ³n de Tareas (15 Ã­tems)
+## D. Gestión de Tareas (15 ítems)
 
-- [x] Definir pipeline de tareas: Backlog â†’ To Do â†’ In Progress â†’ Review â†’ Done
-- [x] Definir estado Blocked con causa
-- [x] Crear sistema de priorizaciÃ³n: P0 (CrÃ­tico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)
-- [x] Definir WIP limits por columna
-- [x] Crear template de tarea completa
-- [x] Definir Definition of Done (cÃ³digo revisado, tests pasan, documentada)
-- [x] Definir Definition of Ready (tiene contexto, estimaciÃ³n, dependencias)
-- [x] Seleccionar herramienta de gestiÃ³n (Linear, Notion, GitHub Projects)
-- [x] Crear tablero Kanban inicial
-- [x] Definir proceso de estimation (story points o horas)
-- [x] Definir proceso de daily update de tareas
-- [x] Crear dashboard de progreso
-- [x] Definir proceso de cierre de sprint/review
-- [x] Definir proceso de retrospective
-- [x] Crear template de retrospective
+- [ ] Definir pipeline de tareas: Backlog ? To Do ? In Progress ? Review ? Done
+- [ ] Definir estado Blocked con causa
+- [ ] Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)
+- [ ] Definir WIP limits por columna
+- [ ] Crear template de tarea completa
+- [ ] Definir Definition of Done (código revisado, tests pasan, documentada)
+- [ ] Definir Definition of Ready (tiene contexto, estimación, dependencias)
+- [ ] Seleccionar herramienta de gestión (Linear, Notion, GitHub Projects)
+- [ ] Crear tablero Kanban inicial
+- [ ] Definir proceso de estimation (story points o horas)
+- [ ] Definir proceso de daily update de tareas
+- [ ] Crear dashboard de progreso
+- [ ] Definir proceso de cierre de sprint/review
+- [ ] Definir proceso de retrospective
+- [ ] Crear template de retrospective
 
-## E. Toma de Decisiones (10 Ã­tems)
+## E. Toma de Decisiones (10 ítems)
 
-- [x] Documentar modelo RACI para decisiones clave
-- [x] Definir quiÃ©n decide: arquitectura (Lead Programmer), arte (Lead Artist), producto (Game Director)
-- [x] Crear proceso de change request para cambios de alcance
-- [x] Definir proceso de escalaciÃ³n (3 niveles)
-- [x] Crear registro de decisiones tomadas
-- [x] Definir cuÃ¡ndo se necesita consenso vs. decide el lÃ­der
-- [x] Documentar proceso de A/B testing para decisiones de diseÃ±o
-- [x] Definir proceso de evaluaciÃ³n de riesgos en decisiones
-- [x] Crear template de documentaciÃ³n de decisiÃ³n
-- [x] Definir proceso de reversiÃ³n de decisiones
+- [ ] Documentar modelo RACI para decisiones clave
+- [ ] Definir quién decide: arquitectura (Lead Programmer), arte (Lead Artist), producto (Game Director)
+- [ ] Crear proceso de change request para cambios de alcance
+- [ ] Definir proceso de escalación (3 niveles)
+- [ ] Crear registro de decisiones tomadas
+- [ ] Definir cuándo se necesita consenso vs. decide el líder
+- [ ] Documentar proceso de A/B testing para decisiones de diseño
+- [ ] Definir proceso de evaluación de riesgos en decisiones
+- [ ] Crear template de documentación de decisión
+- [ ] Definir proceso de reversión de decisiones
 
-## F. ResoluciÃ³n de Conflictos (10 Ã­tems)
+## F. Resolución de Conflictos (10 ítems)
 
-- [x] Documentar proceso de escalaciÃ³n (3 niveles)
-- [x] Nivel 1: discusiÃ³n directa entre involucrados
-- [x] Nivel 2: media el Lead del Ã¡rea
-- [x] Nivel 3: decide el Game Director
-- [x] Crear template de mediaciÃ³n
-- [x] Definir proceso de mediaciÃ³n formal
-- [x] Crear registro de conflictos resueltos
-- [x] Definir polÃ­tica de tolerancia cero a acoso
-- [x] Documentar proceso de feedback constructivo
-- [x] Definir proceso de evaluaciÃ³n post-conflicto
+- [ ] Documentar proceso de escalación (3 niveles)
+- [ ] Nivel 1: discusión directa entre involucrados
+- [ ] Nivel 2: media el Lead del área
+- [ ] Nivel 3: decide el Game Director
+- [ ] Crear template de mediación
+- [ ] Definir proceso de mediación formal
+- [ ] Crear registro de conflictos resueltos
+- [ ] Definir política de tolerancia cero a acoso
+- [ ] Documentar proceso de feedback constructivo
+- [ ] Definir proceso de evaluación post-conflicto
 
-## G. Onboarding (10 Ã­tems)
+## G. Onboarding (10 ítems)
 
-- [x] Crear checklist de onboarding (semana 1)
-- [x] Documentar accesos necesarios (GitHub, Discord, herramientas)
-- [x] Crear guÃ­a de revisiÃ³n de documentaciÃ³n del proyecto
-- [x] Asignar mentor para cada nuevo miembro
-- [x] Definir primera tarea simple para familiarizarse
-- [x] Crear reuniÃ³n de bienvenida con Game Director
-- [x] Crear reuniÃ³n de bienvenida con Lead del Ã¡rea
-- [x] Documentar proceso de evaluaciÃ³n de onboarding
-- [x] Crear FAQ para nuevos miembros
-- [x] Definir perÃ­odo de prueba (30-90 dÃ­as)
+- [ ] Crear checklist de onboarding (semana 1)
+- [ ] Documentar accesos necesarios (GitHub, Discord, herramientas)
+- [ ] Crear guía de revisión de documentación del proyecto
+- [ ] Asignar mentor para cada nuevo miembro
+- [ ] Definir primera tarea simple para familiarizarse
+- [ ] Crear reunión de bienvenida con Game Director
+- [ ] Crear reunión de bienvenida con Lead del área
+- [ ] Documentar proceso de evaluación de onboarding
+- [ ] Crear FAQ para nuevos miembros
+- [ ] Definir período de prueba (30-90 días)
 
-## H. Productividad y Bienestar (10 Ã­tems)
+## H. Productividad y Bienestar (10 ítems)
 
-- [x] Definir horarios de trabajo flexibles
-- [x] Establecer lÃ­mite de horas extras
-- [x] Definir polÃ­tica de dÃ­as libres
-- [x] Crear proceso de prevenciÃ³n de burnout
-- [x] Definir polÃ­tica de trabajo remoto
-- [x] Crear espacio para socializaciÃ³n del equipo
-- [x] Definir proceso de feedback regular
-- [x] Crear encuesta de satisfacciÃ³n del equipo
-- [x] Definir proceso de mejora continua
-- [x] Documentar polÃ­tica de feriados y vacaciones
+- [ ] Definir horarios de trabajo flexibles
+- [ ] Establecer límite de horas extras
+- [ ] Definir política de días libres
+- [ ] Crear proceso de prevención de burnout
+- [ ] Definir política de trabajo remoto
+- [ ] Crear espacio para socialización del equipo
+- [ ] Definir proceso de feedback regular
+- [ ] Crear encuesta de satisfacción del equipo
+- [ ] Definir proceso de mejora continua
+- [ ] Documentar política de feriados y vacaciones
 
-## I. DocumentaciÃ³n y Mantenimiento (10 Ã­tems)
+## I. Documentación y Mantenimiento (10 ítems)
 
-- [x] Crear directorio docs/production/ con todos los documentos
-- [x] Mantener documentos actualizados
-- [x] Revisar procesos trimestralmente
-- [x] Documentar cambios en procesos
-- [x] Crear changelog de procesos
-- [x] Distribuir documentaciÃ³n a todo el equipo
-- [x] Entrenar al equipo en los procesos
-- [x] Evaluar efectividad de procesos
-- [x] Ajustar segÃºn feedback del equipo
-- [x] Archivar procesos obsoletos
+- [ ] Crear directorio docs/production/ con todos los documentos
+- [ ] Mantener documentos actualizados
+- [ ] Revisar procesos trimestralmente
+- [ ] Documentar cambios en procesos
+- [ ] Crear changelog de procesos
+- [ ] Distribuir documentación a todo el equipo
+- [ ] Entrenar al equipo en los procesos
+- [ ] Evaluar efectividad de procesos
+- [ ] Ajustar según feedback del equipo
+- [ ] Archivar procesos obsoletos
