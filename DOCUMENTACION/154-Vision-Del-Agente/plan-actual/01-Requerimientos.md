@@ -32,6 +32,7 @@ Los agentes de IA que documentan e implementan Isla Ancestral **no pueden ver el
   - **V4 — godot-mcp comunitario (FUNDAMENTAL):** servidor MCP que controla el editor Godot (ejecutar escenas, leer consola de errores, capturar viewport).
   - **V5 — Blender + blender-mcp (agregada 2026-08-22 por directiva del usuario):** servidor MCP maduro (`blender-mcp` de ahujasid) + API Python `bpy` para modelar, renderizar y VER assets 3D (personajes, props) con calidad de estudio, exportando a glTF para Godot.
 - Protocolo de uso por escenario (diseño de personajes, QA UI, verificación de escenas).
+- **Guía maestra de conexión (archivo 06 global):** `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (creada 2026-08-24 en la raíz de DOCUMENTACION/, luego de 5-FUTURAS-MEJORAS.md) — documento vivo que centraliza el estado de todas las vías y las instrucciones de conexión para cualquier agente de cualquier plataforma. Referenciada desde AGENTS.md (sección 25).
 - Requisitos de instalación y configuración (cline_mcp_settings.json).
 - Integración con módulos existentes: M45 (Arte 3D), M48 (Animación), M53 (UI/UX), M61 (Rendimiento), M110 (Debug Menu), M112 (Testing).
 

@@ -832,6 +832,9 @@ Este archivo (`AGENTS.md`) junto con `CHECKLIST-GLOBAL.md` y la carpeta `scripts
 
 El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para cualquier tarea que involucre diseño o codificación visual del juego.
 
+> 📖 **GUÍA MAESTRA DE CONEXIÓN (leer primero):** `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md`
+> Es el archivo de referencia de "los ojos" del proyecto: documenta TODAS las vías de visión, su estado operativo actualizado, y las instrucciones paso a paso para que cualquier agente de cualquier plataforma se conecte (instalación, conexión por sesión, ejemplos de código y checklist de verificación). **Todo agente que deba trabajar con visión debe leer ese archivo antes de empezar**, y debe actualizarlo al instalar o verificar una vía nueva.
+
 ### Regla de oro
 
 > ⚠️ **Antes de comenzar a diseñar o codificar cualquier elemento visual** (personajes, escenas, UI, iluminación, efectos, assets 3D/2D), el agente DEBE verificar que el M154 esté **implementado y operativo**, con al menos una vía activa.
@@ -848,8 +851,10 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 
 ### Obligaciones del agente
 
-1. Al reclamar un módulo visual, verificar en su `05-Checklist.md` el ítem de dependencia M154.
-2. Si ninguna vía está operativa, solicitar al usuario la instalación correspondiente ANTES de proceder.
-3. Durante el trabajo visual, seguir el protocolo de iteración del M154 (capturar → analizar → ajustar; máximo 5 iteraciones autónomas).
-4. Los módulos visuales tienen en su checklist un ítem explícito de verificación M154 (agregado automáticamente el 2026-08-22).
-5. Los nuevos módulos visuales que se creen a futuro deben incluir este ítem desde su creación.
+1. **Leer la guía maestra de conexión:** `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (estado de las vías + instrucciones de conexión de cada una).
+2. Al reclamar un módulo visual, verificar en su `05-Checklist.md` el ítem de dependencia M154.
+3. Si ninguna vía está operativa, solicitar al usuario la instalación correspondiente ANTES de proceder.
+4. Durante el trabajo visual, seguir el protocolo de iteración del M154 (capturar → analizar → ajustar; máximo 5 iteraciones autónomas).
+5. Los módulos visuales tienen en su checklist un ítem explícito de verificación M154 (agregado automáticamente el 2026-08-22).
+6. Los nuevos módulos visuales que se creen a futuro deben incluir este ítem desde su creación.
+7. Al instalar o verificar una vía nueva, **actualizar la guía maestra** (tabla de estado + sección de la vía + registro de verificación) y firmar el cambio.

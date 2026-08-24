@@ -1,7 +1,9 @@
-**Modelo:** stealth/ox-alpha
+**Modelo:** ox-alpha
 **Plataforma:** Cline
 
 # 05-Checklist.md — Módulo 154: Visión del Agente
+
+> **Actualizado:** 2026-08-24 — Verificación operativa de la Vía V5 (Blender + blender-mcp) y creación de la **guía maestra de conexión**: `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (archivo 06 global, en la raíz de DOCUMENTACION/; referencia obligatoria para cualquier agente — ver AGENTS.md sección 25).
 
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **operativo**: combina documentación (hecha) con implementación de herramientas MCP (pendiente).
@@ -165,11 +167,12 @@
 - [x] Script de seguridad estándar (respaldo .blend + shading Material Preview) diseñado [S]
 - [x] Protocolo de iteración V5 específico definido (6 pasos) [S]
 - [x] Riesgos V5 registrados con mitigación (script colgante, shading incorrecto) [S]
-- [ ] Instalar Blender 4.x LTS en el sistema [M]
-- [ ] Instalar addon blender-mcp en Blender y habilitarlo [S]
-- [ ] Verificar conexión socket 9876 (panel BlenderMCP → Connect) [S]
-- [ ] Registrar servidor "blender" en cline_mcp_settings.json [S]
-- [ ] Test get_scene_info: devuelve estructura real de escena [S]
+- [x] Instalar Blender 4.x LTS en el sistema (4.2.3 LTS instalada) [M]
+- [x] Instalar addon blender-mcp en Blender y habilitarlo (Install from Disk, flecha ˅ en Preferences 4.2+) [S]
+- [x] Verificar conexión socket 9876 (panel BlenderMCP → Connect to MCP server) [S]
+- [x] Registrar servidor "blender" en cline_mcp_settings.json [S]
+- [x] Test get_scene_info: devuelve estructura real de escena (success, 3 objetos, 2 materiales — 2026-08-24) [S]
+- [x] Crear guía maestra de conexión de visión: `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (archivo 06 global, referenciada desde AGENTS.md sección 25) [S]
 - [ ] Test get_viewport_screenshot: imagen legible con colores reales (Material Preview) [M]
 - [ ] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M]
 - [ ] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M]
@@ -190,5 +193,5 @@
 - [ ] Entrada agregada a DOCUMENTACION/README.md [S]
 - [ ] Commit + push realizados [S]
 
-**Totales:** 152 ítems · Completados: 55 · Pendientes: 97 · No resueltos: 0
-**Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar.
+**Totales:** 153 ítems · Completados: 61 · Pendientes: 92 · No resueltos: 0
+**Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-Guia-De-Conexion-Vision.md`.

@@ -13,6 +13,7 @@ DOCUMENTACION/
 ├── 3-DOCUMENTO-TAREAS-ACTUAL.md                ← (pendiente) Checklist de tareas con estado actual
 ├── 4-DOCUMENTO-EJECUCION-ACTUAL.md             ← (pendiente) Código de ejecución vigente
 ├── 5-FUTURAS-MEJORAS.md                        ← (pendiente) Ideas y mejoras del usuario
+├── 06-GUIA-DE-CONEXION-VISION.md               ← Guía maestra de "ojos" del agente (M154): vías de visión + cómo conectarse (V1-V5)
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
 ├── 01-Fundamentos-Del-Proyecto/                ← Portal/índice: 152 módulos, 68 documentados [x]
 ├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)

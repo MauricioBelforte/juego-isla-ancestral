@@ -110,3 +110,29 @@ El juego necesita un sistema de transporte que permita al jugador desplazarse en
 8. **CA-08:** No hay errores de runtime durante un viaje completo de cada tipo.
 9. **CA-09:** Los costos de viaje se deducen correctamente del inventario.
 10. **CA-10:** El sistema es extensible: se puede agregar un nuevo tipo de transporte sin modificar código existente.
+
+---
+
+## Módulos Relacionados
+
+> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
+
+### Depende de (necesito su documentación)
+
+| Módulo | Qué aporta a este módulo |
+|--------|--------------------------|
+| **M019** — NPC y Vecinos | Transporte con NPCs |
+| **M022** — Historia Principal | Transporte narrativo |
+| **M024** — Templos y Puzzles | Transporte y templos |
+| **M069** — Fast Travel | Transporte y fast travel |
+
+### Relacionados laterales (mismo dominio)
+
+| Módulo | Relación |
+|--------|----------|
+| **M019** — NPC y Vecinos | Depende de este módulo |
+| **M022** — Historia Principal | Depende de este módulo |
+| **M024** — Templos y Puzzles | Depende de este módulo |
+| **M069** — Fast Travel | Depende de este módulo |
+| **M162** — Diálogos Contextuales de NPCs | Comparten dependencias (M019, M022) |
+
