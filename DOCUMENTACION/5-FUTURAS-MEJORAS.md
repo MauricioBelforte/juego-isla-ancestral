@@ -62,7 +62,7 @@
 
 - [x] **Completar documentación de IA de NPC (M64).** Solo tiene `01-Requerimientos.md`. Faltan `02-Analisis.md`, `03-Diseno.md`, `04-Codigo.md`, `05-Checklist.md`. **Fecha:** 2026-08-23. **Implementado en:** M64 plan-actual/ — 4 archivos creados (02-Analisis, 03-Diseno, 04-Codigo, 05-Checklist con 100+ items).
 
-- [ ] **Resolver cantidad de NPCs.** M19 define 8-12 vecinos con 8 ejemplos. M161/M162 documentan 23 NPCs. Hay que definir cuántos NPCs hay realmente en el juego. **Fecha:** 2026-08-23. **Acción:** decidir cantidad final y alinear M19/M161/M162.
+- [x] **Resolver cantidad de NPCs.** M19 define 8-12 vecinos con 8 ejemplos. M161/M162 documentan 23 NPCs. Hay que definir cuántos NPCs hay realmente en el juego. **Fecha:** 2026-08-23. **Implementado en:** M19 plan-actual/01-Requerimientos.md — **35 NPCs** distribuidos en 4 islas (12 Raíz + 10 Ceniza + 8 Coral + 5 Aurora). M161/M162 necesitan actualización para alinear con los 35 NPCs.
 
 ### 🟢 Baja — Pendientes menores
 
