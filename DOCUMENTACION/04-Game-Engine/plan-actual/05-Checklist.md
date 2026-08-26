@@ -5,6 +5,14 @@
 
 **Estado:** `[ ]` pendiente · `[ ]` completado · `[?]` no resuelto. Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
+## Reserva actual
+
+- [x] Módulo reservado por GitHub Copilot para validación de la base del proyecto Godot 4.7.2 en la fase F1.
+- [x] Registro sincronizado con `CHECKLIST-GLOBAL.md`, `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` y `Mensajes entre modelos/ESTADO-PARALELO.md`.
+- [x] Validar que el binario Godot 4.7.2 exista y arranque correctamente. **✓ Completado:** Godot 4.7.2 en D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe arranca sin errores.
+- [x] Ejecutar el proyecto para descubrir errores de runtime o de configuración. **✓ Completado:** Proyecto en `game/isla-ancestral` carga correctamente; sistema VoxelTerrain + VoxelGeneratorNoise2D + colisión operativos.
+- [x] Corregir cualquier problema de arranque antes de continuar con M05/M07. **✓ Completado:** Parse error en `main_island.tscn` reparado (Transform3D y formato de string). Exit code 0.
+
 ---
 
 ## A. Evaluación de candidatos (12)
