@@ -29,3 +29,6 @@ Thumbs.db
 
 # GDSkills agent vision scratch (do not commit)
 .gdskills/
+
+# GDExtension binaries (instalar desde Godot Asset Library, no versionar)
+addons/*/bin/
