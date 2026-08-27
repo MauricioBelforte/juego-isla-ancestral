@@ -1,0 +1,105 @@
+extends Node3D
+
+## Escena principal — Isla Raíz con generación procedural (M09/M10)
+
+@onready var fps_label = $UI/FPSLabel
+@onready var terrain: VoxelTerrain = $VoxelTerrain
+@onready var viewer: VoxelViewer = $VoxelViewer
+
+var time := 0.0
+
+func _ready():
+	_setup_terrain()
+	_setup_player_visual()
+	print("Isla Ancestral — Isla Raíz")
+
+func _setup_terrain() -> void:
+	if not terrain:
+		print("ERROR: VoxelTerrain no encontrado")
+		return
+	
+	# Material con vertex color
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	terrain.material_override = mat
+	
+	# Mesher con catálogo de bloques por bioma
+	var mesher := VoxelMesherBlocky.new()
+	var library := VoxelBlockyLibrary.new()
+	
+	# Modelo 0: Aire
+	var air := VoxelBlockyModelEmpty.new()
+	air.set_name("air")
+	library.add_model(air)
+	
+	# Modelos 1-20: Bloques con colores de bioma
+	_add_block(library, "dirt", Color(0.55, 0.35, 0.2))
+	_add_block(library, "grass", Color(0.3, 0.6, 0.2))
+	_add_block(library, "stone", Color(0.5, 0.5, 0.5))
+	_add_block(library, "bedrock", Color(0.2, 0.2, 0.2))
+	_add_block(library, "sand", Color(0.85, 0.8, 0.55))
+	_add_block(library, "clay", Color(0.6, 0.5, 0.4))
+	_add_block(library, "wood", Color(0.45, 0.3, 0.15))
+	_add_block(library, "planks", Color(0.6, 0.45, 0.25))
+	_add_block(library, "copper_ore", Color(0.7, 0.45, 0.2))
+	_add_block(library, "iron_ore", Color(0.6, 0.6, 0.65))
+	_add_block(library, "crystal", Color(0.4, 0.7, 0.9))
+	_add_block(library, "gemstone", Color(0.9, 0.7, 0.1))
+	_add_block(library, "glass", Color(0.8, 0.9, 1.0))
+	_add_block(library, "ancient_crystal", Color(0.6, 0.8, 1.0))
+	_add_block(library, "lamp_glyph", Color(1.0, 0.9, 0.4))
+	_add_block(library, "ice", Color(0.7, 0.85, 1.0))
+	_add_block(library, "water", Color(0.2, 0.4, 0.8))
+	_add_block(library, "snow", Color(0.95, 0.95, 0.98))
+	_add_block(library, "gravel", Color(0.55, 0.5, 0.45))
+	_add_block(library, "moss", Color(0.25, 0.5, 0.2))
+	_add_block(library, "mud", Color(0.35, 0.25, 0.15))
+	
+	library.bake()
+	mesher.library = library
+	terrain.mesher = mesher
+	
+	# Generador de isla con biomas (M09/M10)
+	var generator = load("res://scripts/world/world_generator.gd").new()
+	generator.world_seed = 42
+	generator.island_radius = 64
+	generator.max_height = 40
+	terrain.generator = generator
+	
+	# Spawn del jugador en la playa (orilla de la isla, centro en 64,64)
+	var player = get_node_or_null("Player")
+	if player:
+		player.global_position = Vector3(20, 15, 64)
+	
+	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
+
+func _add_block(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void:
+	var cube := VoxelBlockyModelCube.new()
+	cube.set_name(block_name)
+	cube.set_color(color)
+	library.add_model(cube)
+
+func _setup_player_visual() -> void:
+	var player = get_node_or_null("Player")
+	if not player:
+		return
+	var mesh_inst: MeshInstance3D = player.get_node_or_null("BodyMesh")
+	if mesh_inst:
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.2, 0.5, 0.9)
+		mesh_inst.material_override = mat
+		print("[M08] Jugador coloreado de azul")
+
+func _process(delta: float) -> void:
+	time += delta
+	if time >= 0.5:
+		var fps = Engine.get_frames_per_second()
+		if fps_label:
+			fps_label.text = "FPS: %d" % fps
+			if fps >= 55:
+				fps_label.modulate = Color.GREEN
+			elif fps >= 30:
+				fps_label.modulate = Color.YELLOW
+			else:
+				fps_label.modulate = Color.RED
+		time = 0.0

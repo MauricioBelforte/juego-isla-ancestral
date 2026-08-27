@@ -197,4 +197,19 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Z. Validación visual del preview (2026-08-24, ox-alpha/Cline)
+
+- [x] Escena `preview_particles.tscn` creada y ejecutada en Godot 4.7.2 [S]
+- [x] Emisor CPUParticles3D corriendo sin errores en consola ("Polen creado OK") [M]
+- [x] Confirmación visual humana: partículas amarillas visibles emergiendo desde abajo (tipo chispas/fuegos artificiales) [S]
+- [x] Lanzamiento reproducible documentado (`scripts-reutilizables/lanzar_preview.py`) [S]
+- [x] Primera captura automatizada real del juego: `capturas/52-Particulas-Y-VFX/cap_52_2026-08-24_21-19-22_polen-validacion.png` (verificada visualmente por el agente) [S]
+- [x] Mejora estética: quad reducido 0.25→0.06 + textura radial suave generada por código (GradientTexture2D) + transparencia alpha. Verificado en capturas iter2/iter2b: polen pequeño redondeado difuminado, FPS 59 [M]
+
+## Z2. Iteraciones con flujo V4+V2 (2026-08-25, ox-alpha/Cline)
+
+- [x] Iter 3: turbulencia (deriva orgánica tipo brisa) + caída lenta + damping + amount 150→220 + lifetime 6→9. FPS 59 confirmado en iter3b (el 24 inicial era transitorio del arranque) [M]
+- [x] Iter 4: emisión en caja ancha (EMISSION_SHAPE_BOX, extents 3.5×0.5×1.0) para distribuir el polen por toda la escena en vez de amontonarlo en una columna. Verificado en captura: polen distribuido flotando a distintas alturas, FPS 59 [M]
+- [x] Flujo completo V4+V2 ejercitado: lanzar (script) → capturar (MCP screen) → comparar → ajustar → recapturar, con historial de capturas por iteración [S]

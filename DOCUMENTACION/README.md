@@ -1,8 +1,8 @@
 # DOCUMENTACION — Sistema de Documentación de Isla Ancestral
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-15
+**Modelo:** Deepseek V4 Flash / ox-alpha
+**Plataforma:** OpenCode / Cline
+**Fecha:** 2026-08-15 (actualizado 2026-08-24)
 
 ## Estructura
 
@@ -14,6 +14,8 @@ DOCUMENTACION/
 ├── 4-DOCUMENTO-EJECUCION-ACTUAL.md             ← (pendiente) Código de ejecución vigente
 ├── 5-FUTURAS-MEJORAS.md                        ← (pendiente) Ideas y mejoras del usuario
 ├── 06-GUIA-DE-CONEXION-VISION.md               ← Guía maestra de "ojos" del agente (M154): vías de visión + cómo conectarse (V1-V5)
+├── 07-GUIA-GODOT.md                              ← Guía de codificación en Godot 4.x: errores, convenciones, checklist, registro de errores (AGENTS.md §26)
+├── 08-GUIA-ORDEN-DE-IMPLEMENTACION.md            ← Orden principal de codificación, fases, puertas, dificultad, visión y delegación paralela
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
 ├── 01-Fundamentos-Del-Proyecto/                ← Portal/índice: 152 módulos, 68 documentados [x]
 ├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)

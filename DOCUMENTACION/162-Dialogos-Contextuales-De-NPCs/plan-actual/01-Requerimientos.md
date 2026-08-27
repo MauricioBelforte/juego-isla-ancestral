@@ -59,7 +59,7 @@ Definir la progresión de diálogos de cada NPC por capítulo de la historia pri
 
 ## 6. Criterios de Aceptación
 
-1. 23 NPCs documentados con diálogos para cada capítulo
+1. 35 NPCs documentados con diálogos para cada capítulo
 2. Cada NPC tiene al menos 3 tipos de diálogo (saludo, historia, ambiente)
 3. Los diálogos reflejan eventos de M22 sin contradecir la historia
 4. Integración con sistema de nodos de M21 verificada

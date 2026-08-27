@@ -26,3 +26,6 @@ Thumbs.db
 # Builds
 /builds/
 /export/
+
+# GDSkills agent vision scratch (do not commit)
+.gdskills/

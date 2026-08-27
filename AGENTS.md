@@ -1,4 +1,4 @@
-# Reglas Globales para la IA — Proyecto Unity (Isla Ancestral)
+# Reglas Globales para la IA — Proyecto Godot (Isla Ancestral)
 
 ## 1. Idioma
 - Todas las comunicaciones deben realizarse **estrictamente en español**.
@@ -27,6 +27,9 @@ En la raíz de `DOCUMENTACION/` están los 5 documentos generales que reflejan e
 | `3-DOCUMENTO-TAREAS-ACTUAL.md` | Checklist de tareas con estado actual |
 | `4-DOCUMENTO-EJECUCION-ACTUAL.md` | Código de ejecución vigente |
 | `5-FUTURAS-MEJORAS.md` | Checklist de ideas y mejoras pendientes del usuario (directivas propias, no propuestas del agente) |
+| `06-GUIA-DE-CONEXION-VISION.md` | Guía maestra de visión del agente (M154): vías V1–V5, cómo conectarse, cómo documentar descubrimientos (reforzado en AGENTS.md §26) |
+| `07-GUIA-GODOT.md` | Guía de codificación en Godot 4.x: errores comunes, convenciones, checklist, registro de errores (obligatorio leer antes de codificar — AGENTS.md §26) |
+| `08-GUIA-ORDEN-DE-IMPLEMENTACION.md` | Referencia principal de orden real, puertas, dificultad, necesidad de visión y reserva paralela de módulos |
 
 ### DOCUMENTACION/00-PLAN-INICIAL/ — Solo el origen del proyecto
 
@@ -307,10 +310,36 @@ Al crear un nuevo componente o sistema del juego:
 8. Actualizar `DOCUMENTACION/README.md`.
 
 ## 12. Verificación y Diagnóstico Post-Tarea
+
+### 12.1 Auto-corrección con MCP (obligatorio al codificar)
+
+> ⚠️ **Regla obligatoria:** Cuando un agente codifica en Godot, **DEBE** usar el MCP de Godot (V4) para verificar y corregir errores automáticamente **antes** de notificar al usuario.
+
+**Flujo de auto-corrección:**
+1. **Escribir código** → guardar archivos.
+2. **Ejecutar `get_debug_output`** vía godot-mcp → leer errores/warnings.
+3. **Si hay errores:**
+   - Leer el mensaje de error exacto.
+   - Consultar `07-GUIA-GODOT.md` §8 (Registro de Errores) para ver si ya se conoce la solución.
+   - Si no se conoce, buscar la solución (docs, web, etc.).
+   - **Corregir el código** directamente.
+   - Volver al paso 2.
+4. **Repetir hasta 3 intentos** de auto-corrección.
+5. **Si no se resuelve en 3 intentos:** documentar el error en `07-GUIA-GODOT.md` §8 y notificar al usuario con el error completo y los intentos realizados.
+
+**Herramientas MCP disponibles (V4):**
+- `get_debug_output` → Lee logs, errores y warnings de Godot en tiempo real.
+- `get_project_info` → Info del proyecto (escenas, scripts, assets).
+- `run_project` / `stop_project` → Ejecutar/detener el juego para probar.
+
+**NUNCA notificar al usuario "hay errores, fijate"** sin antes haber intentado corregirlos con el MCP.
+
+### 12.2 Verificación final
+
 Antes de dar una tarea por terminada:
-1. **Verificar compilación:** Asegurarse de que el proyecto Unity compile sin errores (0 errors en la Console de Unity). Warnings deben documentarse si no se pueden resolver inmediatamente.
-2. **Sin Errores en Consola:** Verificar que no haya excepciones en runtime (`NullReferenceException`, `MissingReferenceException`, etc.) al entrar en Play Mode.
-3. **Flujo Completo:** Si modificaste sistemas críticos (gameplay, IA, generación de mundo, persistencia, networking), verificar localmente en Play Mode que funcionen correctamente antes de dar la tarea por terminada.
+1. **Verificar compilación:** 0 errores en la consola de Godot (usar `get_debug_output`).
+2. **Sin Errores en Runtime:** Verificar que no haya excepciones al ejecutar (`NullReferenceException`, etc.).
+3. **Flujo Completo:** Si modificaste sistemas críticos (gameplay, IA, generación de mundo), verificar que funcionen correctamente.
 4. **Verificar en escenas relevantes:** Si el cambio afecta múltiples escenas, probar en cada una.
 
 ## 13. Flujo de Trabajo: Documentación Primero (Documentation-First)
@@ -320,17 +349,19 @@ Este es el **flujo de trabajo obligatorio**:
 ### Para tareas NUEVAS (nuevo componente):
 1. **Antes de escribir código:** Crear la carpeta del componente en `DOCUMENTACION/` y sus 5 archivos.
 2. Implementar la funcionalidad.
-3. Verificar que todo funcione (ejecutar el proyecto).
-4. Revisar los 5 archivos iniciales contra el código real y actualizar si hay diferencias.
-5. Generar log en `Logs/`.
+3. **Auto-corrección con MCP:** Ejecutar `get_debug_output` y corregir errores automáticamente (ver §12.1).
+4. Verificar que todo funcione (ejecutar el proyecto).
+5. Revisar los 5 archivos iniciales contra el código real y actualizar si hay diferencias.
+6. Generar log en `Logs/`.
 
 ### Para tareas sobre MÓDULOS EXISTENTES (mejoras, bugfixes):
 1. **Antes de escribir código:** Leer los archivos del componente en `DOCUMENTACION/` (o si no existe, usar el plan general).
 2. Implementar la modificación.
-3. Verificar que funcione.
-4. Actualizar los archivos del módulo/documentación para reflejar el cambio.
-5. Actualizar los `*-ACTUAL.md` de la raíz si el cambio es significativo (arquitectura, flujos principales).
-6. Generar log en `Logs/`.
+3. **Auto-corrección con MCP:** Ejecutar `get_debug_output` y corregir errores automáticamente (ver §12.1).
+4. Verificar que funcione.
+5. Actualizar los archivos del módulo/documentación para reflejar el cambio.
+6. Actualizar los `*-ACTUAL.md` de la raíz si el cambio es significativo (arquitectura, flujos principales).
+7. Generar log en `Logs/`.
 
 ## 14. Plan de Testings Profesional para Nuevos Módulos
 
@@ -825,6 +856,31 @@ Este archivo (`AGENTS.md`) junto con `CHECKLIST-GLOBAL.md` y la carpeta `scripts
 - **Regiones:** Usar `#region` con moderación, solo para agrupar secciones grandes
 - **Serialización:** Usar `[SerializeField]` en vez de campos `public` cuando sea posible
 
+### Convención de Scripts Temporales y Reutilizables + Capturas por Módulo
+
+> ⚠️ **Regla obligatoria (actualizada 2026-08-25):** Los scripts auxiliares se organizan en **DOS carpetas dentro de cada componente**, según su naturaleza. **Nunca en el root** del componente.
+
+**1. `scripts-prueba/` — Scripts esporádicos de prueba:**
+- Scripts de un solo uso: verificar algo puntual, debuggear una vez, probar una hipótesis.
+- Si el script demostró utilidad y se va a volver a usar → **graduarlo** a `scripts-reutilizables/`.
+- Ejemplos: `prueba_godot.py`, `prueba_esfera.py`.
+
+**2. `scripts-reutilizables/` — Scripts de desarrollo reutilizables:**
+- Herramientas estables que se usan repetidamente durante el desarrollo.
+- Ejemplos: `cap_godot.py` (captura con historial), `lanzar_preview.py`, `ver_debug.py`, `analizar_cap.py`.
+- Prefijos descriptivos: `cap_`, `lanzar_`, `ver_`, `analizar_`, `run_`.
+
+**3. `capturas/{ID-Modulo}-Nombre/` — Historial de screenshots por módulo:**
+- Toda captura de pantalla del juego se guarda en `tools/mcp/godot-mcp/capturas/{ID-Modulo}-Nombre/` (ej: `tools/mcp/godot-mcp/capturas/52-Particulas-Y-VFX/`).
+- **Ruta fija:** `{raíz-proyecto}/tools/mcp/godot-mcp/capturas/` — siempre junto a las capturas existentes de otros módulos.
+- Nomenclatura: `cap_{ID}_{AAAA-MM-DD_HH-MM-SS}[_nota].png` → **nunca sobrescribir**: cada captura nueva es un archivo nuevo con timestamp.
+- **Mínimo se conservan la captura anterior y la actual** por módulo: esa comparativa antes/después es la evidencia para documentar bugs y verificar correcciones.
+- **Regla (2026-08-25, directiva del usuario): durante el desarrollo se guardan TODAS las capturas, sin limpieza.** El historial completo permite ver el progreso visual y referenciar capturas viejas ("me gusta como se veía en la cap X"). La limpieza/depuración de capturas se hará recién cuando el usuario lo pida explícitamente.
+- Las capturas **no se versionan en git**: la carpeta `capturas/` está excluida en `.gitignore`.
+- La herramienta estándar es `scripts-reutilizables/cap_godot.py --modulo {ID} [--nota "..."]`, que crea la carpeta del módulo automáticamente.
+
+Si un componente no tiene estas carpetas todavía, **crearlas** antes de agregar scripts o capturas. Nunca dejar scripts temporales sueltos en el root de `tools/mcp/.../`.
+
 
 ## 25. Visión del Agente (M154) — Prerrequisito Fundamental para Trabajo Visual
 
@@ -858,3 +914,60 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 5. Los módulos visuales tienen en su checklist un ítem explícito de verificación M154 (agregado automáticamente el 2026-08-22).
 6. Los nuevos módulos visuales que se creen a futuro deben incluir este ítem desde su creación.
 7. Al instalar o verificar una vía nueva, **actualizar la guía maestra** (tabla de estado + sección de la vía + registro de verificación) y firmar el cambio.
+
+## 26. Guías de Referencia Obligatoria Antes de Codificar o Usar Herramientas
+
+> ⚠️ **Regla obligatoria (agregada 2026-08-24):** Antes de que cualquier agente tome un módulo y empiece a codificar o implementar, **DEBE** leer y consultar durante el desarrollo las siguientes guías. El objetivo es que **ningún agente arranque de cero** y repita errores ya documentados. Estas guías son la **memoria colectiva del conocimiento adquirido**.
+
+### Guía de Codificación en Godot — `DOCUMENTACION/07-GUIA-GODOT.md`
+
+- **Propósito:** Documenta errores comunes, soluciones, convenciones y mejores prácticas para escribir código GDScript en Godot 4.x.
+- **Uso obligatorio:** Cualquier agente que codifique en Godot **DEBE** leer esta guía **antes** de escribir código y consultarla cuando surja cualquier duda. La sección 6 ("Checklist al Escribir Código") debe verificarse antes de finalizar cualquier implementación.
+- **Documentación de nuevos descubrimientos:** Cada vez que un agente descubra un nuevo error, una mejor práctica, o el modo correcto/incorrecto de hacer algo en Godot, **DEBE** agregarlo a la sección 8 ("Registro de Errores") de esta guía, con: mensaje de error exacto, causa, solución y fecha. No se permite dejar un error nuevo sin documentarlo.
+- **Firmado:** Esta guía lleva el modelo y plataforma del último agente que la modificó. Al agregar contenido, actualizar la firma.
+
+### Guía de Conexión de Visión — `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md`
+
+- **Propósito:** Documenta todas las vías de visión (V1–V5) disponibles para que un agente "vea" lo que diseña/codifica, incluyendo **V4 — godot-mcp** para verificación dentro del juego.
+- **Uso obligatorio:** Cualquier agente que necesite trabajar con visión **DEBE** leer esta guía **antes** de comenzar, verificar qué vías están operativas y usar la disponible correspondiente. (Ver AGENTS.md, sección 25.)
+- **Documentación de nuevos descubrimientos:** Cada vez que un agente descubra algo nuevo sobre cómo usar correctamente el **MCP de Godot** (V4) — errores, trucos, limitaciones, mejores prácticas de conexión, uso de herramientas, outputs inesperados — **DEBE** documentarlo en esta guía (registro de verificación, notas para el agente o tabla de estado si la vía cambia de estado). Se debe actualizar también la tabla de estado si la vía cambia de estado. No se permite dejar un descubrimiento sobre V4 sin documentarlo.
+- **Firmado:** Esta guía lleva el modelo y plataforma del último agente que la modificó. Al agregar contenido, actualizar la firma.
+
+### Guía Maestra de Orden de Implementación — `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`
+
+- **Propósito:** Define el orden real de codificación por fases y puertas. El ID numérico de un módulo no implica que deba implementarse en ese orden.
+- **Uso obligatorio:** Antes de reservar un módulo, todo agente DEBE consultar esta guía, comprobar la fase habilitada, la dificultad y la marca de visión (`V0`, `V1` o `V2`).
+- **Fuente de orden:** Esta guía decide qué módulos están habilitados y cuáles pueden ejecutarse en paralelo.
+- **Fuente de estado:** `CHECKLIST-GLOBAL.md` sigue siendo la fuente de verdad para estado, progreso, agente actual y última actividad.
+- **Marcado obligatorio:** al reservar un módulo, el agente DEBE marcarlo como `🔵 En curso` en el registro de reservas de esta guía 08, en la fila correspondiente de `CHECKLIST-GLOBAL.md`, en `ESTADO-PARALELO.md` y en el bloque `Reserva actual` del `05-Checklist.md` del módulo.
+- **Cierre obligatorio:** al terminar o liberar, el agente DEBE actualizar los cuatro registros al mismo tiempo: esta guía 08, el `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md`.
+- **Regla de visión:** si un módulo es `V2`, solo puede reservarlo un agente con una vía de visión operativa. Mientras ese agente trabaja, otro agente puede tomar un módulo `V0` habilitado, siempre que no comparta archivos o escenas.
+- **Regla de dificultad:** la dificultad `1-5` debe coincidir con la capacidad del agente. Un agente no debe tomar un módulo `4-5` si no puede cubrir integración, rendimiento y pruebas.
+- **Reserva:** al iniciar, registrar en `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md` el módulo, fase, dificultad, visión, entrada, salida y archivos afectados.
+- **No interferencia:** dos agentes no pueden reservar simultáneamente la misma escena, asset, contrato o sesión visual sin coordinación explícita.
+- **Firmado:** esta guía lleva el modelo y plataforma del último agente que la modifique. Al actualizarla, renovar su firma y crear un log.
+
+> **Regla maestra:** si una guía aún no existe, **créala** siguiendo el formato correspondiente. Si existe pero no está actualizada con un descubrimiento, **actualízala**. No se permite arrancar de cero ni repetir errores ya documentados.
+
+## 27. Skills de Desarrollo Reutilizables (SKILL.md en la Raíz)
+
+> **Agregado:** 2026-08-25 · **Fuente:** iniciativa del usuario (skills.sh / repos de terceros auditados)
+
+### Propósito
+
+El proyecto cuenta con una biblioteca de **skills procedimentales** instalada en **`.claude/skills/`** en la raíz del proyecto. Son archivos `SKILL.md` (más scripts/referencias) que documentan **cómo hacer** tareas específicas de desarrollo, sin que el agente deba navegar la web.
+
+### Reglas de uso (obligatorias)
+
+1. **Todo agente — sea cual sea su plataforma (Cline, OpenCode, Claude Code, etc.) — que no sepa cómo resolver una tarea de Godot/Blender DEBE consultar primero `.claude/skills/`.** Son la memoria procedimental del proyecto.
+2. **Estructura estándar:** cada skill es una carpeta dentro de `.claude/skills/` con un `SKILL.md` (frontmatter YAML `name`/`description` + instrucciones) y opcionalmente `scripts/` y `references/`.
+3. **Buscar la skill:** por el nombre (ej `godot-particles`, `blender-modeler`). Listar `Get-ChildItem .claude/skills` para verlas todas. También existe `find-skills` para buscar en el catálogo de skills.sh.
+4. **Instalar/sincronizar:** los archivos en `.claude/skills/` se versionan en git (a diferencia de `capturas/`). Si un agente quiere agregar una skill nueva, debe curarla (solo las relevantes al proyecto, NO el repo completo) y documentarlo en Logs.
+5. **Origen y auditoría:** las skills provienen de repos de terceros auditados por su comunidad (`thedivergentai/GD-Agentic-Skills` — Godot, licencia LGPLv3; `arjun988/blender-skills` — Blender, MIT; `vercel-labs/skills` — find-skills). **Antes de ejecutar cualquier script de una skill, revisar su contenido.** No se ejecutan binarios sin auditar.
+6. **Curatoria específica del proyecto:** se instaló un *subconjunto curado* (no el total): `find-skills` + ~44 skills de Godot + ~24 de Blender, seleccionadas como relevantes al proyecto (mundo voxel/3D, partículas/VFX, cámara, combate, diálogo/NPC, misiones, inventario, audio, UI, estado de máquina, save/load, export, testing, optimización, iluminación/materiales/shaders, modelado, escena, exportación a Godot).
+7. **Relación con la Visión:** las skills de Godot de Divergent AI incluyen `godot-agent-vision` (patrones de visión del agente en Godot) y `godot-builder`/`godot-analyst`/`godot-auditor` (orquestación) — complementan el protocolo del M154.
+8. **Licencias:** GD-Agentic-Skills → LGPLv3 (los scripts/patrones pueden usarse libremente en el juego comercial; mejoras directas a la librería deben compartirse). Blender-skills → MIT. Mantener los `LICENSE` de cada skill si se redistribuyen.
+
+### Ubicación
+- Skills: `.claude/skills/` (raíz del proyecto, versionado en git)
+- Origen temporal (propio de quien instaló): `C:\Temp\skills_tmp\{vercel-skills, gd-agentic, blender-skills}` (clones de referencia, no versionado)

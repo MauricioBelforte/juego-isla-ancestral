@@ -120,6 +120,53 @@ signal storage_closed
 | Integraciones M16/M19/M39/M37 | Cuando existan esos módulos implementados |
 | Tests M112 y QA M114 | Matriz de operaciones y recorrido cozy |
 
+## Análisis previo a la implementación — Hallazgos (2026-08-26)
+
+**Modelo:** ox-alpha
+**Plataforma:** Cline
+
+> Fase de documentación de hallazgos previa a codificar (directiva del usuario). Cruce del diseño vigente contra los módulos YA implementados en `game/isla-ancestral/` (M59 Guardado, M159 Catálogo, M13 Herramientas, M39 Tiendas) y la skill `godot-inventory-system`.
+
+### H1 — Colisión de `class_name ItemData` ⚠️ CRÍTICO
+El diseño prevé un `ItemData.gd` propio del módulo en `res://src/inventario/`, pero **M159 ya creó `class_name ItemData extends Resource`** en `scripts/data/item_data.gd` (con id, stack_max, rareza, precio_compra/venta, categoria, apilable — gran solapamiento).
+**Decisión:** NO duplicar la clase. Extender el `ItemData` de M159 con los campos faltantes del diseño (`display_name_key`, `description_key`, `protected_from_discard`, `item_type`, `tags`). Duplicarlo rompería el catálogo y la preview de M13.
+
+### H2 — Nombre del autoload fijado por M39 ⚠️ CRÍTICO
+ShopManager (implementado, log 167) resuelve dependencias vía `get_node_or_null("/root/Inventario")` esperando los métodos `agregar_items({item_id: cantidad}) -> bool` y `remover_items({...}) -> bool`.
+El diseño llama al autoload `InventoryService` con otra API (`add_item(id, amount, container) -> int`).
+**Decisión:** el autoload se registra como **`Inventario`** (nombre que M39 ya espera) y expone adaptadores `agregar_items()`/`remover_items()` encima de la API rica del servicio. No se toca M39.
+
+### H3 — El catálogo ya existe: reutilizar ItemDatabase
+El diseño prevé `item_catalog.gd` propio. Ya existe el autoload **`ItemDatabase` (M159)** en `/root/ItemDatabase` con `get_item(id)` cargando `data/items/*.tres`.
+**Decisión:** usar ItemDatabase como fuente única (regla §15 anti-duplicación); el módulo NO crea su propio catálogo.
+
+### H4 — Durabilidad por instancia (M13) exige slots con instancia
+ToolData lleva `durabilidad_actual` por instancia + `serializar()/deserializar()`. Un slot no puede ser solo `(item_id, cantidad)` para herramientas.
+**Decisión:** `InventorySlot` = `{item_id, cantidad, favorito, bloqueado, instancia: Dictionary}`. Herramientas: `apilable=false`, 1 por slot, `instancia = tool.serializar()`. Al equipar/deserializar se reconstruye con `ToolData.deserializar(instancia)`.
+
+### H5 — Patrones de la skill `godot-inventory-system` que se adoptan
+- Ítems SIEMPRE Resources, nunca Nodes.
+- Add en **dos pasadas**: 1) llenar stacks parciales, 2) slots vacíos; devolver **sobrante como int** (encaja con el fallback bolsillo→casa→mundo del diseño).
+- Una sola señal `inventario_actualizado` batcheada tras operaciones múltiples (además de las `slot_changed` por-slot del diseño).
+- Cantidades siempre `int`; validar capacidad ANTES de mutar; la UI jamás muta contenedores (coincide con la regla de capas del diseño).
+- Persistencia: serializar solo `item_id` + `cantidad` (+ instancia para herramientas), nunca Resources anidados.
+- `duplicate(true)` al instanciar desde un `.tres` compartido (evita corromper el blueprint).
+
+### H6 — Primer `ISaveProvider` real (valida M59 end-to-end)
+SaveManager (log 163) expone `register_provider(ISaveProvider)` sin proveedores todavía.
+**Decisión:** el inventario implementa `ISaveProvider` con `get_section_name() == "inventory"` → será el primer sistema persistente real, probando checksum/backups/recuperación con datos verdaderos. La sección `inventory` debe agregarse al schema de M59 (hoy existe como default vacío — compatible).
+
+### H7 — Rutas: adaptar diseño a la convención real
+El diseño usa `res://src/inventario/...`; la convención real del repo es `res://scripts/inventario/...` (igual que saving/, shops/, core/). Los archivos se crearán allí.
+
+### H8 — Alcance de la primera iteración (propuesto)
+1. `scripts/inventario/container_type.gd` + `inventory_slot.gd` + `inventario_contenedor.gd` (núcleo puro, testeable)
+2. `scripts/inventario/inventario_service.gd` → autoload **Inventario** con API rica + adaptadores M39
+3. `scripts/inventario/inventario_save.gd` → ISaveProvider registrado en SaveManager
+4. UI/hotbar/tooltip/cofres: iteración posterior (requiere M53/M17)
+
+---
+
 ## Notas del Agente
 
 **Modelo:** Deepseek V4 Flash

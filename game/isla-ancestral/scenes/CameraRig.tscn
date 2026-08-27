@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://y7owcvev8t76"]
+
+[ext_resource type="Script" uid="uid://w4vl1b10xb1p" path="res://scripts/camera/camera_rig.gd" id="1_rig"]
+[ext_resource type="Script" uid="uid://dvke765611m8o" path="res://scripts/camera/camera_spring.gd" id="2_spring"]
+
+[node name="CameraRig" type="Node3D" unique_id=1636214823]
+script = ExtResource("1_rig")
+
+[node name="CameraSpring" type="Node3D" parent="." unique_id=1659115623]
+script = ExtResource("2_spring")
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraSpring" unique_id=558445508]
+target_position = Vector3(0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1772303481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00854063, -0.035873413, 0.026997566)
+fov = 70.0

@@ -6,15 +6,15 @@
 
 ## Detector central
 
-- [ ] Definir la arquitectura del detector central (SoftlockGuard) [M]
-- [ ] Implementar tick de 60 s reales del detector [S]
+- [x] Definir la arquitectura del detector central (SoftlockGuard) [M]
+- [x] Implementar tick de 60 s reales del detector [S]
 - [ ] Implementar disparo del detector en transiciones de escena [S]
 - [ ] Implementar disparo del detector al guardar [S]
-- [ ] Implementar chequeo por invariantes con orden de prioridad [M]
-- [ ] Implementar plan de recuperación en cascada [M]
-- [ ] Implementar registro de eventos de recuperación [S]
-- [ ] Implementar toast informativo solo si afecta al jugador [M]
-- [ ] Implementar flag de 3 recuperaciones por instancia en 10 min [S]
+- [x] Implementar chequeo por invariantes con orden de prioridad [M]
+- [x] Implementar plan de recuperación en cascada [M]
+- [x] Implementar registro de eventos de recuperación [S]
+- [x] Implementar toast informativo solo si afecta al jugador [M]
+- [x] Implementar flag de 3 recuperaciones por instancia en 10 min [S]
 - [ ] Implementar cahce de invariantes sin raycast en masa [M]
 - [ ] Documentar detector central en plan-actual [S]
 
@@ -26,8 +26,8 @@
 - [ ] Implementar registro de claves por misión [S]
 - [ ] Implementar seguimiento de claves en inventario serializado [M]
 - [ ] Implementar devolución al cofre si la clave no existe en el mundo [M]
-- [ ] Implementar marcado "recuperado" tras un solo uso [S]
-- [ ] Implementar slots del cofre con copia inmutable [M]
+- [x] Implementar marcado "recuperado" tras un solo uso [S]
+- [x] Implementar slots del cofre con copia inmutable [M]
 - [ ] Documentar invariantes de objetos en plan-actual [S]
 
 ## Invariantes de NPC
@@ -66,13 +66,13 @@
 
 ## Checkpoints
 
-- [ ] Implementar CheckpointManager con 3 slots por bioma [M]
-- [ ] Implementar slot global de emergencia [S]
-- [ ] Implementar escritura con patrón atómico (tmp+rename+.bak) [M]
+- [x] Implementar CheckpointManager con 3 slots por bioma [M]
+- [x] Implementar slot global de emergencia [S]
+- [x] Implementar escritura con patrón atómico (tmp+rename+.bak) [M]
 - [ ] Implementar checkpoint al entrar a bioma [S]
 - [ ] Implementar checkpoint al completar misión [S]
 - [ ] Implementar checkpoint al estabilizar vehículo [S]
-- [ ] Implementar rotación de slots sin borrar el más reciente [M]
+- [x] Implementar rotación de slots sin borrar el más reciente [M]
 - [ ] Implementar restauración del checkpoint más cercano para el jugador [M]
 - [ ] Implementar verificación de integridad post-restauración [M]
 - [ ] Implementar límite de 4 escrituras por evento [S]
@@ -125,7 +125,7 @@
 
 ## Integración y eventos
 
-- [ ] Implementar interfaz IRecoverable para sistemas externos [M]
+- [x] Implementar interfaz IRecoverable para sistemas externos [M]
 - [ ] Implementar integración con persistencia (guardado atómico) [M]
 - [ ] Implementar integración con M22 (Historia Principal) [M]
 - [ ] Implementar integración con M26 (Templo Subterráneo) [M]

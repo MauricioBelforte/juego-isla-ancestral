@@ -1,5 +1,5 @@
-**Modelo:** stealth/ox-alpha
-**Plataforma:** Cline
+**Modelo:** GitHub Copilot
+**Plataforma:** VS Code
 
 # 04-Codigo.md — Módulo 154: Visión del Agente
 
@@ -18,6 +18,12 @@
 | `addons_blender/blender_mcp_addon.py` | ⬜ Instalar en Blender | Addon del repo blender-mcp que levanta el socket 9876 (V5) |
 | `cline_mcp_settings.json` → servidor "blender" | ⬜ Pendiente | Registro del servidor blender-mcp (V5) |
 | `DOCUMENTACION/154-Vision-Del-Agente/` | ✅ Hecho | Este módulo documental |
+
+## Integración GitHub Copilot / VS Code (2026-08-25)
+
+Se creó `.vscode/mcp.json` con la sintaxis nativa de VS Code (`servers`) para registrar los servidores locales `screen` y `godot`. Esta configuración es distinta de Cline (`mcpServers`) y de OpenCode (`mcp`). La validación local confirmó que ambos ejecutables existen y que `godot-mcp/build/index.js` es JavaScript válido.
+
+La activación final requiere que el usuario ejecute `MCP: List Servers`, confíe en los servidores y habilite sus tools desde `Configure Tools`. La conexión interactiva no puede confirmarse desde una ejecución de terminal sin invocar la interfaz de VS Code.
 
 ## 2. API pública prevista
 

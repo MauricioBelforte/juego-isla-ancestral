@@ -23,26 +23,26 @@
 
 ## B. Duraciones y conversiones (12)
 
-- [ ] Duración del día: 24 min de juego [S]
-- [ ] Duración de la noche: 8 min (día total 32 min reales por ciclo) [S]
-- [ ] Proporción 1:40 (1 s real = 1 min de juego) [S]
+- [x] Duración del día: 24 min de juego [S]
+- [x] Duración de la noche: 8 min (día total 32 min reales por ciclo) [S]
+- [x] Proporción 1:40 (1 s real = 1 min de juego) [S]
 - [ ] Amanecer 06:00 con gradiente de 90 s (M31) [S]
 - [ ] Atardecer 20:00 con gradiente de 90 s (M31) [S]
-- [ ] Hora HH:MM dentro del ciclo [S]
-- [ ] Semana de 7 días con nombres [S]
-- [ ] Mes de 28 días (4 semanas) [S]
-- [ ] Año de 336 días (12 meses) [S]
-- [ ] Estaciones de 3 meses c/u [S]
-- [ ] Año 1 = fundación del refugio [S]
-- [ ] Sin bisiesto (año fijo; se documenta para no aplicar) [S]
-- [ ] Conversión fecha ↔ día del año (1-336) como función auxiliar [M]
-- [ ] Día 336 → transición limpia a año 2 (sin bug de año nuevo) [M]
-- [ ] Estación inicial de partida: Primavera (calibrada para tutorial) [S]
+- [x] Hora HH:MM dentro del ciclo [S]
+- [x] Semana de 7 días con nombres [S]
+- [x] Mes de 28 días (4 semanas) [S]
+- [x] Año de 336 días (12 meses) [S]
+- [x] Estaciones de 3 meses c/u [S]
+- [x] Año 1 = fundación del refugio [S]
+- [x] Sin bisiesto (año fijo; se documenta para no aplicar) [S]
+- [x] Conversión fecha ↔ día del año (1-336) como función auxiliar [M]
+- [x] Día 336 → transición limpia a año 2 (sin bug de año nuevo) [M]
+- [x] Estación inicial de partida: Primavera (calibrada para tutorial) [S]
 - [ ] Duración ajustable por knobs sin recompilar [S]
 - [ ] Formato de hora 12h/24h configurable en settings [S]
-- [ ] El tick usa delta real (no frame-dependent) [M]
-- [ ] Pausa de menú también pausa el tick [S]
-- [ ] Sin drift acumulado por fps bajos (acumulador de tiempo) [C]
+- [x] El tick usa delta real (no frame-dependent) [M]
+- [x] Pausa de menú también pausa el tick [S]
+- [x] Sin drift acumulado por fps bajos (acumulador de tiempo) [C]
 
 ## C. Eventos periódicos (12)
 
@@ -76,15 +76,15 @@
 
 ## E. Comportamiento temporal (10)
 
-- [ ] Tick por segundo (minuto de juego) [M]
-- [ ] Pausa en: diálogos, crafting, menú, carga, cutscenes [M]
-- [ ] Dormir en cama → avanzar_hasta(06:00) [M]
-- [ ] El reloj nunca retrocede [M]
-- [ ] El reloj no corre offline [M]
-- [ ] Sin exploits de reloj del sistema [M]
-- [ ] Sin castigo por no jugar (no pierde tiempo) [M]
-- [ ] Persistencia: retoma donde quedó al recargar [M]
-- [ ] Sin días fantasma entre sesiones [M]
+- [x] Tick por segundo (minuto de juego) [M]
+- [x] Pausa en: diálogos, crafting, menú, carga, cutscenes [M]
+- [x] Dormir en cama → avanzar_hasta(06:00) [M]
+- [x] El reloj nunca retrocede [M]
+- [x] El reloj no corre offline [M]
+- [x] Sin exploits de reloj del sistema [M]
+- [x] Sin castigo por no jugar (no pierde tiempo) [M]
+- [x] Persistencia: retoma donde quedó al recargar [M]
+- [x] Sin días fantasma entre sesiones [M]
 - [ ] Configurable en data/time/*.tres (knobs) [S]
 
 ## F. Rutinas NPC y consumo (8)
@@ -100,27 +100,27 @@
 
 ## G. API y modelado (10)
 
-- [ ] Señal `dia_cambio(DiaInfo)` [S]
-- [ ] Señal `hora_cambio(hora)` [S]
-- [ ] Señal `estacion_cambio(estacion)` [S]
-- [ ] Señal `evento_activado(EventoPeriodico)` [S]
-- [ ] `get_hora() -> Hora` [S]
-- [ ] `get_fecha() -> Fecha` [S]
-- [ ] `get_estacion() -> ESTACION` [S]
-- [ ] `es_de_dia() -> bool` [S]
-- [ ] `proximos_eventos() -> [EventoPeriodico]` [S]
-- [ ] `pausa()/resume()/avanzar_hasta(hora)` [S]
+- [x] Señal `dia_cambio(DiaInfo)` [S]
+- [x] Señal `hora_cambio(hora)` [S]
+- [x] Señal `estacion_cambio(estacion)` [S]
+- [x] Señal `evento_activado(EventoPeriodico)` [S]
+- [x] `get_hora() -> Hora` [S]
+- [x] `get_fecha() -> Fecha` [S]
+- [x] `get_estacion() -> ESTACION` [S]
+- [x] `es_de_dia() -> bool` [S]
+- [x] `proximos_eventos() -> [EventoPeriodico]` [S]
+- [x] `pausa()/resume()/avanzar_hasta(hora)` [S]
 
 ## H. Persistencia y data (8)
 
-- [ ] GameState.M29: fecha, hora, eventos_visitados, proximo_evento [M]
+- [x] GameState.M29: fecha, hora, eventos_visitados, proximo_evento [M]
 - [ ] data/time/time_config.tres (duraciones) [M]
 - [ ] data/time/festivals.tres (contenido) [M]
 - [ ] Nombres de meses/días en data (localizable M57) [M]
 - [ ] Semilla de tiempo por partida [M]
-- [ ] Compatibilidad con guardado M59 (versionado) [M]
-- [ ] Sin estado global disperso (solo vía servicio) [M]
-- [ ] Tests de ciclos (día→año) en M112 [M]
+- [x] Compatibilidad con guardado M59 (versionado) [M]
+- [x] Sin estado global disperso (solo vía servicio) [M]
+- [x] Tests de ciclos (día→año) en M112 [M]
 
 ## I. Delegación y cierre (12)
 

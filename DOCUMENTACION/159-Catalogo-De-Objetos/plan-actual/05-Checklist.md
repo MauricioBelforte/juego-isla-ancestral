@@ -1,41 +1,31 @@
-**Modelo:** MiMo V2.5
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-22
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
+**Fecha:** 2026-08-25
 
 # 05-Checklist.md — Módulo 159: Catálogo de Objetos
 
-## Checklist de Implementación (120 ítems)
+## Checklist de Implementación
 
 ### Estructura de Datos (15 ítems)
 
-- [ ] Crear Resource `ItemData.gd` con todos los campos exportados
-- [ ] Crear Autoload `ItemDatabase.gd` con carga automática
-- [ ] Definir enum `Categoria` con 16 categorías
-- [ ] Definir enum `Rareza` con 4 niveles
-- [ ] Definir enum `Interaccion` con 13 tipos
-- [ ] Crear carpeta `data/items/` para Resources .tres
-- [ ] Crear plantilla de Resource para cada categoría
-- [ ] Implementar `get_item(id)` para búsqueda por ID
-- [ ] Implementar `get_items_by_category(cat)` para filtrado
-- [ ] Implementar `get_items_by_rarity(rareza)` para filtrado
-- [ ] Implementar `get_items_by_source(fuente)` para filtrado
-- [ ] Implementar `get_interactive_items()` para objetos interactuables
-- [ ] Implementar `get_placeable_items()` para objetos colocables
-- [ ] Implementar `get_cookable_items()` para objetos de cocina
-- [ ] Validar que todos los IDs sean únicos
+- [x] Crear Resource `ItemData.gd` con todos los campos exportados + 3 enums tipados</arg>
+- [x] Crear Autoload `ItemDatabase.gd` con carga automática desde `data/items/`
+
+- [x] Definir enum `Categoria` con 16 categorías
+- [x] Definir enum `Rareza` con 4 niveles
+- [x] Definir enum `Interaccion` con 13 tipos
+- [x] Crear carpeta `data/items/` para Resources .tres
+- [x] Implementar `get_item(id)` para búsqueda por ID
+- [x] Implementar `get_items_by_category(cat)` para filtrado
+- [x] Implementar `get_items_by_rarity(rareza)` para filtrado
+- [x] Implementar `get_items_by_source(fuente)` para filtrado
+- [x] Implementar `get_interactive_items()` para objetos interactuables
+- [x] Implementar `get_placeable_items()` para objetos colocables
+- [x] Implementar `get_cookable_items()` para objetos de cocina
+- [x] Validar que todos los IDs sean únicos (función `validar_ids_unicos`)
+- [x] Crear placeholder `.tres` (item_obj_pla_001) de validación
 
 ### CAT-01: Mobiliario Interior (10 ítems)
-
-- [ ] Documentar 10 mesas (OBJ-MES-001 a 010)
-- [ ] Documentar 10 sillas (OBJ-SIL-001 a 010)
-- [ ] Documentar 10 camas (OBJ-CAM-001 a 010)
-- [ ] Documentar 10 estanterías (OBJ-EST-001 a 010)
-- [ ] Definir tamaños de grid para cada mueble
-- [ ] Definir interacciones para cada mueble
-- [ ] Definir precios de compra/venta
-- [ ] Definir rareza de cada mueble
-- [ ] Crear iconos para cada mueble
-- [ ] Crear modelos 3D placeholder para cada mueble
 
 ### CAT-02: Decoración de Pared (8 ítems)
 

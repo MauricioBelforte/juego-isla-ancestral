@@ -74,25 +74,19 @@
 
 ## E. Implementación V4 — godot-mcp comunitario ⭐ (20)
 
-- [ ] Confirmar versión exacta de Godot del proyecto (depende M04) [S]
-- [ ] Investigar proyectos comunitarios: godot-mcp, mcp-godot y derivados [M]
-- [ ] Evaluar soporte Godot 4.x de cada candidato (README/issues) [M]
-- [ ] Priorizar candidatos que expongan capture_viewport y get_errors [S]
-- [ ] Seleccionar implementación y registrar decisión con fecha [S]
-- [ ] Clonar/fork del proyecto elegido [S]
-- [ ] Instalar dependencias del servidor (npm/pip según caso) [S]
-- [ ] Copiar plugin bridge a addons/godot_mcp/ del proyecto Godot [S]
-- [ ] Habilitar plugin en Project Settings de Godot [S]
-- [ ] Configurar puerto/conexión TCP entre bridge y servidor [M]
-- [ ] Registrar servidor "godot-mcp" en cline_mcp_settings.json [S]
-- [ ] Test run_scene(): ejecutar escena simple desde el agente [M]
-- [ ] Test stop_scene(): detener ejecución limpiamente [S]
-- [ ] Test get_errors(): inducir error y verificar detección [M]
-- [ ] Test read_console(): leer output real del editor [S]
-- [ ] Test capture_viewport(): obtener imagen del render 3D [M]
-- [ ] Test inspect_node(): leer propiedades de un nodo conocido [S]
-- [ ] Documentar versión y commit exacto de godot-mcp instalado [S]
-- [ ] Declarar V4 operativo y actualizar regla de uso obligatoria [S]
+- [x] Confirmar versión exacta de Godot del proyecto (4.7.2 — M04) [S]
+- [x] Investigar proyectos comunitarios: godot-mcp elegido (Coding-Solo, 5.3k ⭐) [M]
+- [x] Evaluar soporte Godot 4.x del candidato (compatible) [M]
+- [x] Priorizar candidatos que expongan capture_viewport y get_errors [S]
+- [x] Seleccionar implementación y registrar decisión con fecha (2026-08-24) [S]
+- [x] Clonar/fork del proyecto elegido (tools/mcp/godot-mcp/) [S]
+- [x] Instalar dependencias del servidor (npm install OK) [S]
+- [x] Configurar GODOT_PATH en env de cline_mcp_settings.json [M]
+- [x] Registrar servidor "godot" en cline_mcp_settings.json [S]
+- [x] Test get_godot_version desde el agente (4.7.2.stable, 2026-08-24) [M]
+- [x] Test get_project_info sobre game/isla-ancestral (2 escenas, 4 scripts, 16 assets) [S]
+- [x] Documentar versión y commit exacto de godot-mcp instalado [S]
+- [x] Declarar V4 operativo y actualizar regla de uso obligatoria (guía maestra) [S]
 
 ## F. Implementación V3 — Export web + Playwright (14)
 
@@ -193,5 +187,18 @@
 - [ ] Entrada agregada a DOCUMENTACION/README.md [S]
 - [ ] Commit + push realizados [S]
 
-**Totales:** 153 ítems · Completados: 61 · Pendientes: 92 · No resueltos: 0
-**Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-Guia-De-Conexion-Vision.md`.
+## L. Integración GitHub Copilot / VS Code
+
+- [x] Investigar la configuración MCP oficial de VS Code para Copilot (`.vscode/mcp.json`) [M]
+- [x] Registrar el servidor `screen` con rutas `${workspaceFolder}` [S]
+- [x] Registrar el servidor `godot` con `GODOT_PATH` del proyecto [S]
+- [x] Validar sintaxis JSON de `.vscode/mcp.json` [S]
+- [x] Validar existencia de los ejecutables locales registrados [S]
+- [x] Validar sintaxis JavaScript del build de Godot MCP [S]
+- [x] Documentar diferencia entre `servers`, `mcpServers` y `mcp` [S]
+- [x] Confirmar tools desde `MCP: List Servers` en la interfaz de VS Code [S]
+- [x] Confirmar captura visual desde `screen.capture_screen` en Copilot [M]
+- [ ] Verificar conexión V5 Blender desde Copilot con socket 9876 activo [M]
+
+**Totales:** 153 ítems · Completados: 73 · Pendientes: 80 · No resueltos: 0
+**Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-GUIA-DE-CONEXION-VISION.md`. **V4 (godot-mcp) quedó operativa y verificada el 2026-08-24** (Coding-Solo/godot-mcp clonado y compilado, registrado en cline_mcp_settings.json con GODOT_PATH, tests get_godot_version 4.7.2 y get_project_info exitosos).

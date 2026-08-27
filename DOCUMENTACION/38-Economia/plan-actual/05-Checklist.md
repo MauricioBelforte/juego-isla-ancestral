@@ -66,28 +66,28 @@
 
 ## E. Diseño de subsistemas — Moneda
 
-- [ ] Definir saldo como entero no negativo persistido [S]
-- [ ] EconomyManager como único punto de modificación del saldo [M]
+- [x] Definir saldo como entero no negativo persistido [S]
+- [x] EconomyManager como único punto de modificación del saldo [M]
 - [ ] Implementar depositar_monedas(cantidad) con clamp a MAX_SALDO [M]
-- [ ] Implementar retirar_monedas(cantidad) que devuelve false si no alcanza [M]
-- [ ] Implementar puede_pagar(cantidad) para validaciones previas [S]
-- [ ] Emitir señal saldo_cambiado(saldo) en cada modificación [S]
-- [ ] Persistir saldo en guardado junto al resto de la partida [M]
+- [x] Implementar retirar_monedas(cantidad) que devuelve false si no alcanza [M]
+- [x] Implementar puede_pagar(cantidad) para validaciones previas [S]
+- [x] Emitir señal saldo_cambiado(saldo) en cada modificación [S]
+- [x] Persistir saldo en guardado junto al resto de la partida [M]
 - [ ] Registrar toda transacción monetaria en DOM-ECO-TRX [S]
 - [ ] Mantener saldo fuera de la capa de UI: el HUD solo lee [S]
 
 ## F. Diseño de subsistemas — Precios y equilibrio
 
 - [ ] Definir PriceDefinition con precio_compra_base y precio_venta_base [M]
-- [ ] Aplicar regla precio_venta < precio_compra para todo revendible [M]
+- [x] Aplicar regla precio_venta < precio_compra para todo revendible [M]
 - [ ] Definir descuento_amistad_max con tope del 15% y niveles 5/10/15 [M]
 - [ ] Definir variabilidad_mercado por ítem (0.0 fijo .. 1.0 sensible) [M]
-- [ ] Definir limite_venta_diario configurable por ítem [S]
+- [x] Definir limite_venta_diario configurable por ítem [S]
 - [ ] Definir temporada_bonus para ítems estacionales [S]
 - [ ] Definir flag revendible para ítems de misión o ancestrales [S]
 - [ ] Crear catálogo central economy_prices.tres [M]
 - [ ] Validar catálogo en editor con errores accionables (venta >= compra → error) [M]
-- [ ] Clamp final de precios vigentes: nunca por debajo de 1 moneda [S]
+- [x] Clamp final de precios vigentes: nunca por debajo de 1 moneda [S]
 - [ ] Registrar rangos de precio por rareza de M15 en tabla de balance [M]
 - [ ] Combinar descuentos de amistad y mercado sin superar -25% sobre compra base [M]
 

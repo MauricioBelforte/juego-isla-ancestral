@@ -40,21 +40,34 @@ Módulo de **diseño arquitectónico** (complejidad 5). Hoy entrega el contrato;
 
 ## 5. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
-**Fecha:** 2026-08-16 02:15:00
-**Estado:** Completado (diseño; implementación en M1)
+**Fecha:** 2026-08-26 01:30:00
+**Estado:** Implementación core completada y validada
 
 ### Lo que hice
-- Resolví los 27 puntos del plan maestro (sección 6) mapeándolos a 18 servicios por dominio.
-- Diseñé capas unidireccionales, Service Locator, EventBus por dominios, GameState particionado y contrato de integración.
-- Alternativas evaluadas (ECS descartado, MVC parcial).
+- Implementé `event_bus.gd`: Bus de eventos global con 9 dominios tipados (world, economy, inventory, quest, npc, calendar, travel, ui, player)
+- Implementé `service_registry.gd`: Service Locator con registro por interfaz, listado y validación
+- Implementé `bootstrap.gd`: Registro de servicios core + carga de escena principal (deferred)
+- Creé escena de prueba `test_arquitectura.tscn` que valida 6 puntos: EventBus activo, ServiceRegistry activo, registro en ServiceRegistry, dominios presentes, emisión/recepción de eventos, servicios listados
+- Registré EventBus y ServiceRegistry como autoloads en project.godot (orden: EventBus primero, Bootstrap último)
+- **Test: 6 PASS, 0 FAIL — arquitectura base validada**
 
-### Lo que NO pude hacer (honestidad obligatoria)
-- Implementar los scripts core → requiere el proyecto Godot (hito M1).
-- Validar la ausencia real de dependencias circulares → la verificación es de M1.
-- Medir el costo del bus de eventos → pendiente M61.
+### Errores encontrados y corregidos
+1. `class_name ServiceRegistry` colisiona con autoload del mismo nombre → eliminado class_name
+2. `class_name Bootstrap` colisiona con autoload → eliminado class_name
+3. `func get()` en Node ya existe (firma `get(StringName) -> Variant`) → renombrado a `get_service()`
+4. Parámetro `type` es palabra reservada en GDScript → renombrado a `expected_type` (luego eliminado `get_typed` por simplificar)
+5. `change_scene_to_file()` en `_ready()` causa error "Parent node busy" → cambiado a `call_deferred()`
+6. Lambda `func(): received = true` no captura variable externa → corregido con `func(_pos, _type): _event_received = true`
+7. Señal con 2 argumentos conectada a lambda de 0 argumentos → corregido con lambda que acepta los 2 argumentos
+
+### Lo que NO pude hacer
+- GameState (M59) → pendiente, placeholder registrado
+- Verificación de capas por script → pendiente
+- Presupuesto de eventos (perf) → pendiente M61
 
 ### Recomendaciones para el próximo agente
-- M08 (Mundo Voxel): VoxelWorld/ChunkManager deben cumplir el contrato de integración y comunicarse por `world:` events.
-- El prototipo M1 debe arrancar con Bootstrap + EventBus + ServiceRegistry mínimo (3 scripts) para validar el patrón antes de agregar voxel.
+- M08 (Mundo Voxel): VoxelWorld/ChunkManager deben cumplir el contrato de integración y comunicarse por `EventBus.world.*`
+- M11/M12 (Jugador/Cámara): pueden usar `EventBus.player.*` para comunicación
+- El siguiente paso es completar M08 (colisión + edibilidad de bloques) o M07 avanzado (GameState, más servicios)

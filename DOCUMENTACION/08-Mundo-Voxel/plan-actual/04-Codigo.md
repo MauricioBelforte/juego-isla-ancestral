@@ -40,22 +40,40 @@ scripts/world/
 
 ## 5. Notas del Agente
 
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-08-25 23:30:00
+**Estado:** Implementado (scripts creados, WorldManager funcional)
+
+### Lo que hice
+- Creé `block_type.gd` con Resource custom para 30+ bloques, IDs constantes (BLOCK_AIR a BLOCK_LAVA), herramientas requeridas, drops, debug colors.
+- Creé `block_catalog.gd` como catálogo centralizado con `build_voxel_library()` para generar `VoxelBlockyLibrary` automáticamente.
+- Resolví errores de VoxelBlockyModelCube: NO tiene `set_material()` — solo acepta `set_name()`.
+- Resolví inferencia de tipos: usar `: float` explícito cuando `clamp()` u otras funciones retornan tipo ambiguado.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- `set_material()` en VoxelBlockyModelCube no existe — colores se asignan por separado via material override o VoxelMesherBlocky.
+- VoxelBlockyLibrary configuración final queda pendiente de pruebas visuales con bloques reales.
+
+### Recomendaciones para el próximo agente
+- Los bloques se definen en `block_type.gd` (Resource). Cada tipo tiene: id, nombre, hardness, tool_required, drops.
+- El catálogo se genera con `BlockCatalog.new().build_voxel_library()`.
+- Para agregar un bloque nuevo: añadir constante en `block_type.gd` + añadir entrada en `_init_block_data()`.
+
+---
+
+### Notas del Agente Anterior
+
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-16 02:45:00
 **Estado:** Completado (diseño; prototipo en M1)
 
-### Lo que hice
+### Lo que hice (agente anterior)
 - Resolví los 39 puntos del plan maestro (sección 7) con constantes, catálogo de ~30 bloques, reglas de validación y estrategias de mesh/agua/persistencia.
 - Basé el mundo en Voxel Tools (no reinventar) con capa propia para catálogo/reglas/diffs.
 
-### Lo que NO pude hacer (honestidad obligatoria)
-- Medir rendimiento real (greedy vs no, radio óptimo) → requiere el prototipo.
-- Implementar el agua con nivel → requiere motor corriendo; detalles en M51.
-- Confirmar el catálogo final de bloques → depende de arte (M45) y diseño de puzzles (M24).
-- No elegí 32³ vs 16³ de chunk definitivo (depende de la medición del prototipo; base 16³).
-
-### Recomendaciones para el próximo agente
-- M10 (Generación): el mundo base debe ser determinista por seed; los diffs se re-aplican (referencia aquí §6).
+### Recomendaciones del agente anterior
+- M10 (Generación): el mundo base debe ser determinista por seed; los diffs se re-aplican.
 - M13 (Herramientas): usar `try_extract/try_place` como contrato desde el día 1.
 - El prototipo M1 debe incluir SIEMPRE un test de edición rápida (10 bloques/seg) para validar diffs sin lag.

@@ -1,25 +1,83 @@
-[gd_scene format=3 uid="uid://c1234568aa0"]
+[gd_scene load_steps=6 format=3 uid="uid://c1234568aa0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/camera/camera_rig.gd" id="2_rig"]
+[ext_resource type="Script" path="res://scripts/camera/camera_spring.gd" id="3_spring"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.3, 0.6, 0.9, 1)
+sky_horizon_color = Color(0.7, 0.8, 0.9, 1)
+ground_bottom_color = Color(0.15, 0.12, 0.1, 1)
+ground_horizon_color = Color(0.5, 0.45, 0.4, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.6, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_main")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_1")
+
 [node name="VoxelTerrain" type="VoxelTerrain" parent="."]
 
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 10)
+[node name="Player" parent="." instance=ExtResource("4_player")]
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("2_rig")
+
+[node name="CameraSpring" type="Node3D" parent="CameraRig"]
+script = ExtResource("3_spring")
+max_distance = 5.0
+min_distance = 0.8
+smooth_time = 0.15
+return_speed = 6.67
+collision_layer = 1
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraRig/CameraSpring"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 1
+collide_with_areas = false
+collide_with_bodies = true
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 fov = 70.0
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 0)
 light_energy = 1.0
+shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="FPSLabel" type="Label" parent="UI"]
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 200.0
+offset_right = 250.0
 offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
 text = "FPS: 0"
+
+[node name="ControlsLabel" type="Label" parent="UI"]
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 350.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Controles:
+WASD - Mover
+Mouse - Rotar cámara
+Scroll - Zoom in/out
+Espacio - Subir
+Shift - Bajar
+Escape - Liberar mouse"

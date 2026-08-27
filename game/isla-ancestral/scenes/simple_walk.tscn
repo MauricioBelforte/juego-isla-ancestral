@@ -1,0 +1,115 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/simple_walk.gd" id="1_walk"]
+[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="2_cam"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.4, 0.65, 0.95, 1)
+sky_horizon_color = Color(0.75, 0.85, 0.95, 1)
+ground_bottom_color = Color(0.2, 0.17, 0.13, 1)
+ground_horizon_color = Color(0.55, 0.5, 0.45, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 2
+ambient_light_color = Color(0.7, 0.7, 0.75, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="GrassMat"]
+albedo_color = Color(0.3, 0.6, 0.2, 1)
+
+[sub_resource type="PlaneMesh" id="GroundMesh"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="GroundShape"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="StandardMaterial3D" id="BodyMat"]
+albedo_color = Color(0.2, 0.3, 0.6, 1)
+
+[sub_resource type="CapsuleMesh" id="BodyMesh"]
+radius = 0.25
+height = 0.8
+
+[sub_resource type="StandardMaterial3D" id="HeadMat"]
+albedo_color = Color(0.9, 0.75, 0.6, 1)
+
+[sub_resource type="SphereMesh" id="HeadMesh"]
+radius = 0.18
+
+[sub_resource type="StandardMaterial3D" id="LimbMat"]
+albedo_color = Color(0.85, 0.7, 0.55, 1)
+
+[sub_resource type="CylinderMesh" id="LimbMesh"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="PlayerShape"]
+radius = 0.25
+height = 1.6
+
+[node name="Game" type="CharacterBody3D" unique_id=1217130252]
+script = ExtResource("1_walk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=759275071]
+environment = SubResource("Env_1")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1359860249]
+
+[node name="Mesh" type="MeshInstance3D" parent="Ground" unique_id=1829616801]
+material_override = SubResource("GrassMat")
+mesh = SubResource("GroundMesh")
+
+[node name="Shape" type="CollisionShape3D" parent="Ground" unique_id=1675309427]
+shape = SubResource("GroundShape")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1026463894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Player" unique_id=1438492210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+material_override = SubResource("BodyMat")
+mesh = SubResource("BodyMesh")
+
+[node name="Head" type="MeshInstance3D" parent="Player" unique_id=1251862500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+material_override = SubResource("HeadMat")
+mesh = SubResource("HeadMesh")
+
+[node name="LeftArm" type="MeshInstance3D" parent="Player" unique_id=902311374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, -0.15, 0)
+material_override = SubResource("LimbMat")
+mesh = SubResource("LimbMesh")
+
+[node name="RightArm" type="MeshInstance3D" parent="Player" unique_id=144697849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.15, 0)
+material_override = SubResource("LimbMat")
+mesh = SubResource("LimbMesh")
+
+[node name="LeftLeg" type="MeshInstance3D" parent="Player" unique_id=828641122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, -0.7, 0)
+material_override = SubResource("LimbMat")
+mesh = SubResource("LimbMesh")
+
+[node name="RightLeg" type="MeshInstance3D" parent="Player" unique_id=834471447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, -0.7, 0)
+material_override = SubResource("LimbMat")
+mesh = SubResource("LimbMesh")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Player" unique_id=1712375699]
+shape = SubResource("PlayerShape")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1343326356]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 0, 8, 12)
+script = ExtResource("2_cam")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="." unique_id=341269663]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 10)
+light_energy = 1.2
+shadow_enabled = true

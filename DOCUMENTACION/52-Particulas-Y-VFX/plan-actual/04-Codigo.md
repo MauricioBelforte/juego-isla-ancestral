@@ -31,7 +31,24 @@
 | `budget/vfx_budget.json` | Emisores y partículas vivas por escena | Vacía — pendiente |
 | `validate_vfx.gd` | Validador: presupuesto, naming, determinismo, sin luz por partícula | Pendiente de implementación |
 
-## 2. Funciones Clave (firmas GDScript previstas)
+## 3. Inicio de Implementación (ox-alpha/Cline, 2026-08-24)
+
+> **Actualizado por:** ox-alpha (Cline) — 2026-08-24
+> Estado previo: "Pendiente de implementación". Se añadió una **escena de preview** como primer asset runtime real del módulo.
+
+### Archivo real creado
+| Archivo | Ruta | Contenido |
+|---|---|---|
+| `preview_particles.tscn` | `game/isla-ancestral/scenes/` | Escena de demo: cielo procedural, luz direccional, cámara fija, nodo Tree, emisor CPUParticles3D, label FPS |
+| `preview_particles.gd` | `game/isla-ancestral/scripts/particles/` | Crea emisor de polen en runtime (CPUParticles3D: 60 partículas, dirección Y, spread, gravedad sutil, color amarillo) |
+
+> Corresponde a la categoría `emitters/*.tscn` del catálogo (§1.1). Es una prueba de concepto visual validada con godot-mcp (V4). Ver Log 145 para detalles y cómo lanzarla cuando se libere el proyecto.
+
+### Validación visual (2026-08-24)
+
+La escena fue ejecutada en vivo y el **usuario confirmó la validación visual**: partículas amarillas visibles emergiendo desde abajo con comportamiento tipo chispas/fuegos artificiales, dentro de lo esperado para el emisor de prueba (dirección Y + spread + gravedad sutil). Sin errores en consola durante la corrida. El lanzamiento es reproducible con `tools/mcp/godot-mcp/scripts-reutilizables/lanzar_preview.py`. Registro también anotado en `06-GUIA-DE-CONEXION-VISION.md` (registro de verificación V4).
+
+> ⚠️ **Aclaración (2026-08-25, actualizada):** la validación inicial fue **exclusivamente humana** (observación en vivo del usuario). Ese mismo día se generó la **primera captura automatizada real**: `capturas/52-Particulas-Y-VFX/cap_52_2026-08-24_21-19-22_polen-validacion.png`, verificada visualmente por el agente (ventana "isla-ancestral (DEBUG)", FPS 59, partículas amarillas visibles). El historial de capturas del módulo arranca allí.
 
 ```gdscript
 # ---------- vfx_manager.gd (autoload) ----------

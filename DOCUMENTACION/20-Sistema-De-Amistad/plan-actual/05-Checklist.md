@@ -39,16 +39,16 @@
 
 ## D. Regalos y evaluador (11)
 
-- [ ] GiftEvaluator como clase estatica pura y determinista [S]
-- [ ] Clasificacion amado / gusta / neutral / duplicado [S]
-- [ ] Consumir gustos y disgustos de VecinoData (M19) de solo lectura [S]
-- [ ] Consumir categoria, rareza, calidad y valor de ItemData (M14) [S]
-- [ ] Evaluacion sin aleatoriedad critica [S]
-- [ ] Registro de duplicados por vecino en la memoria del NPC [S]
-- [ ] El item regalado sale del inventario y queda del vecino [S]
+- [x] GiftEvaluator como clase estatica pura y determinista [S]
+- [x] Clasificacion amado / gusta / neutral / duplicado [S]
+- [x] Consumir gustos y disgustos de VecinoData (M19) de solo lectura [S]
+- [x] Consumir categoria, rareza, calidad y valor de ItemData (M14) [S]
+- [x] Evaluacion sin aleatoriedad critica [S]
+- [x] Registro de duplicados por vecino en la memoria del NPC [S]
+- [x] El item regalado sale del inventario y queda del vecino [S]
 - [ ] Reaccion del vecino por clase de regalo (expresion + texto M21) [M]
 - [ ] Soporte para regalos de cumpleanos sin consumir limite diario [M]
-- [ ] Soporte para objetos sin metadatos de regalo (regalo_valido = false) [S]
+- [x] Soporte para objetos sin metadatos de regalo (regalo_valido = false) [S]
 - [ ] Coste de evaluacion menor a 1 ms por regalo [S]
 
 ## E. Charlas (7)
@@ -85,36 +85,36 @@
 
 ## H. Sin decaimiento y sin FOMO (8)
 
-- [ ] Ausencia prolongada no reduce puntos ni niveles [S]
-- [ ] Ignorar a un vecino no afecta la relacion [S]
-- [ ] Sin timers de recompensas obligatorias diarias [S]
-- [ ] Contenido desbloqueable por amistad siempre disponible despues [S]
-- [ ] Recompensas por nivel no expiran [S]
+- [x] Ausencia prolongada no reduce puntos ni niveles [S]
+- [x] Ignorar a un vecino no afecta la relacion [S]
+- [x] Sin timers de recompensas obligatorias diarias [S]
+- [x] Contenido desbloqueable por amistad siempre disponible despues [S]
+- [x] Recompensas por nivel no expiran [S]
 - [ ] Festivos/cumpleanos perdidos no castigan (se pueden repetir o conmemorar despues) [S]
 - [ ] Decision documentada: Alternativa B (acumulativa) en 02-Analisis.md [S]
-- [ ] Sin acciones negativas implementadas en el alcance base [S]
+- [x] Sin acciones negativas implementadas en el alcance base [S]
 
 ## I. Arquitectura y servicio (9)
 
-- [ ] FriendshipService como autoload unico [S]
-- [ ] Separacion de logica pura y capa de UI [S]
-- [ ] Estado por vecino independiente (no globales) [S]
-- [ ] Senales: regalo_entregado, charla_realizada, carta_recibida, nivel_subido, evento_celebrado [S]
-- [ ] Sin bucles por vecino en update (evaluacion solo bajo accion) [S]
-- [ ] Desacoplamiento: UI suscribe senales y llama API publica [S]
+- [x] FriendshipService como autoload unico [S]
+- [x] Separacion de logica pura y capa de UI [S]
+- [x] Estado por vecino independiente (no globales) [S]
+- [x] Senales: regalo_entregado, charla_realizada, carta_recibida, nivel_subido, evento_celebrado [S]
+- [x] Sin bucles por vecino en update (evaluacion solo bajo accion) [S]
+- [x] Desacoplamiento: UI suscribe senales y llama API publica [S]
 - [ ] Recursos de configuracion (.tres) para niveles, eventos y cartas [S]
-- [ ] Compatible con pausa de M29 (contadores de dia congelados) [S]
+- [x] Compatible con pausa de M29 (contadores de dia congelados) [S]
 - [ ] Log DOM-AMISTAD centralizado con rotacion (seccion 18) [M]
 
 ## J. API GDScript (7)
 
-- [ ] get_nivel / get_puntos / get_progreso por vecino [S]
-- [ ] get_limite_dia(vecino, tipo) para UI [S]
-- [ ] regalar(vecino_id, item_id) -> Dictionary con clase y puntos [S]
-- [ ] charlar(vecino_id) -> Dictionary [S]
+- [x] get_nivel / get_puntos / get_progreso por vecino [S]
+- [x] get_limite_dia(vecino, tipo) para UI [S]
+- [x] regalar(vecino_id, item_id) -> Dictionary con clase y puntos [S]
+- [x] charlar(vecino_id) -> Dictionary [S]
 - [ ] enviar_carta / celebrar_evento con contratos definidos [S]
-- [ ] get_memoria / get_recompensas_pendientes / reclamar_recompensa [S]
-- [ ] API estable y documentada para otros modulos (M21, M23, UI) [S]
+- [x] get_memoria / get_recompensas_pendientes / reclamar_recompensa [S]
+- [x] API estable y documentada para otros modulos (M21, M23, UI) [S]
 
 ## K. Integracion M19 (NPC y Vecinos) (7)
 
@@ -146,11 +146,11 @@
 
 ## N. Persistencia (6)
 
-- [ ] Estado por vecino serializable: puntos, nivel, historial de hoy [S]
+- [x] Estado por vecino serializable: puntos, nivel, historial de hoy [S]
 - [ ] Cartas pendientes y respuestas guardadas [S]
-- [ ] Eventos celebrados y memoria persistidos [S]
+- [x] Eventos celebrados y memoria persistidos [S]
 - [ ] Schema versionado y migracion al cargar (M26) [M]
-- [ ] Guardar/recargar a mitad de nivel restaura progreso exacto [M]
+- [x] Guardar/recargar a mitad de nivel restaura progreso exacto [M]
 - [ ] Vecinos nuevos agregados al schema sin romper guardados previos [M]
 
 ## O. Edge cases (9)

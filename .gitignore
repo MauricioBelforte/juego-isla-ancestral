@@ -109,8 +109,16 @@ __pycache__/
 venv/
 
 # =============================================
+# Capturas del protocolo de visión (no versionables)
+# Se guardan TODAS en disco durante el desarrollo, pero fuera de git
+# =============================================
+**/capturas/
+
+# =============================================
 # EXCEPCIONES — Carpetas del proyecto que SÍ se versionan
 # =============================================
 !Logs/
 !Obsoletos/
 !DOCUMENTACION/
+# Builds web export (generados, no versionar)
+build/

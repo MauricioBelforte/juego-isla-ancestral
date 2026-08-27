@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-PLA-001"
+nombre = "Planta de interior de prueba"
+descripcion = "Placeholder para validar el catálogo M159."
+categoria = 3
+subcategoria = "Plantas"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [ 5 ]
+fuente = "Exploración"
+precio_compra = 200
+precio_venta = 100
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Tierra"
+color = "Verde"
+variante = "Base"
+requiere_herramienta = ""
+exportable = true

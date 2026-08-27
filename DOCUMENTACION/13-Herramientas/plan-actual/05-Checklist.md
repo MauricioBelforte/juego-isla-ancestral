@@ -65,8 +65,8 @@
 
 ## E. Contratos con el mundo (8)
 
-- [ ] Contrato try_extract(pos) → drops[] + diff (M08) [M]
-- [ ] Contrato try_place(pos, BlockId) → diff (M08, martillo) [M]
+- [x] Contrato try_extract(pos) → drops[] + diff (M08) [M]
+- [x] Contrato try_place(pos, BlockId) → diff (M08, martillo) [M]
 - [ ] Una sola escritura de diffs (sin doble escritura) [M]
 - [ ] Drops directos al inventario de bolsillo (M14) [M]
 - [ ] Overflow de drops → caja más cercana (M14) [M]
@@ -97,10 +97,10 @@
 - [ ] Tabla de tiempos base por bloque (0.6 tierra → 1.5 mineral/árbol) [M]
 - [ ] Sin gasto de energía del personaje al usar herramientas [M]
 - [ ] Stamina de M11 queda solo para sprint [M]
-- [ ] Alcance de 4 m con rayo de M11 [S]
+- [x] Alcance de 4 m con rayo de M11 [S]
 - [ ] Tutorial contextual: primera azada y caña en prólogo (M22) [M]
 - [ ] HUD de herramienta equipada (icono + durabilidad) [M]
-- [ ] Teclas 1-6 equipan herramientas dedicadas (M14 slots) [M]
+- [x] Teclas 1-6 equipan herramientas dedicadas (M14 slots) [M]
 - [ ] Cambio de herramienta suave (animación de mano) [M]
 - [ ] Herramientas sin uso indefinido no se degradan [S]
 - [ ] Compatible con construcción (M17: el martillo usa place) [M]
@@ -137,4 +137,4 @@
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 102 ítems · Completados: 5 · Pendientes: 97 · No resueltos: 0.

@@ -6,18 +6,21 @@
 
 ## 1. Archivos Relacionados
 
-| Archivo | Módulo | Función |
-|---------|--------|---------|
-| `scripts/data/item_database.gd` | M159 | ResourceLoader del catálogo |
-| `scripts/data/item_data.gd` | M159 | Resource de cada objeto |
-| `scripts/inventory/inventory_manager.gd` | M14 | Consumidor del catálogo |
-| `scripts/crafting/crafting_recipe.gd` | M16 | Usa IDs del catálogo |
-| `scripts/house/house_decor.gd` | M18 | Coloca objetos del catálogo |
-| `scripts/shop/shop_inventory.gd` | M39 | Vende objetos del catálogo |
-| `scripts/player/equipment.gd` | M155 | Equipa ropa del catálogo |
-| `assets/models/objects/` | M45 | Modelos 3D de cada objeto |
+| Archivo | Módulo | Función | Estado |
+|---------|--------|---------|--------|
+| `scripts/data/item_data.gd` | M159 | Resource con 16 categorías, rarezas e interacciones como enum | ✅ Implementado |
+| `scripts/data/item_database.gd` | M159 | Autoload con carga de `.tres`, 6 queries + debug | ✅ Implementado |
+| `data/items/item_obj_pla_001.tres` | M159 | Placeholder de validación | ✅ Creado |
+| `scripts/inventory/inventory_manager.gd` | M14 | Consumidor del catálogo *(no existe aún)* | Pendiente M14 |
+| `scripts/crafting/crafting_recipe.gd` | M16 | Usa IDs del catálogo *(no existe aún)* | Pendiente M16 |
+| `scripts/house/house_decor.gd` | M18 | Coloca objetos del catálogo *(no existe aún)* | Pendiente M18 |
+| `scripts/shop/shop_inventory.gd` | M39 | Vende objetos del catálogo *(no existe aún)* | Pendiente M39 |
+| `scripts/player/equipment.gd` | M155 | Equipa ropa del catálogo *(no existe aún)* | Pendiente M155 |
+| `assets/models/objects/` | M45 | Modelos 3D de cada objeto *(no existe aún)* | Pendiente M45 |
 
-## 2. Estructura de Datos
+## 2. Estructura de Datos Implementada
+
+**Nota:** A diferencia del diseño original de MiMo (que usaba `String` para `categoria`/`rareza`), la implementación real usa **enums tipados** (`ItemData.Categoria`, `ItemData.Rareza`, `ItemData.Interaccion`) — más seguro en tiempo de compilación y acorde a `07-GUIA-GODOT.md` §2 (convención `PascalCase` → `CamelCase` para enums).
 
 ### ItemData.gd (Resource)
 
@@ -25,68 +28,23 @@
 class_name ItemData
 extends Resource
 
-@export var id: String = ""
-@export var nombre: String = ""
-@export var descripcion: String = ""
-@export var categoria: String = ""
-@export var subcategoria: String = ""
+enum Categoria { MOBILIARIO_INTERIOR, DECORACION_PARED, ILUMINACION,
+	PLANTAS_INTERIOR, ALFOMBRAS, COCINA, TRABAJO,
+	EXTERIORES, NATURALEZA, CONSTRUCCION, HERRAMIENTAS,
+	ITEMS, ROPA, ARTE_ANCESTRAL, EVENTO, SECRETO }
+
+enum Rareza { COMUN, POCHO_COMUN, RARO, LEGENDARIO }
+
+enum Interaccion { NINGUNA, SENTARSE, DORMIR, ALMACENAR, COCINAR,
+	FABRICAR, ENCENDER, REGAR, COLOCAR_ITEM, MIRAR, ESCUCHAR,
+	RECOGER, ROMPER, ABRIR_CERRAR }
+
+@export var id: String
+@export var categoria: Categoria
+@export var rareza: Rareza
+@export var interacciones: Array[Interaccion]
 @export var tamano: Vector2i = Vector2i(1, 1)
-@export var interactivo: bool = false
-@export var accion: String = ""
-@export var fuente: String = ""
-@export var precio_compra: int = 0
-@export var precio_venta: int = 0
-@export var rareza: String = "Común"
-@export var apilable: bool = true
-@export var stack_max: int = 10
-@export var material: String = ""
-@export var color: String = ""
-@export var variante: String = ""
-@export var requiere_herramienta: String = ""
-@export var exportable: bool = true
-@export var icono: Texture2D = null
-@export var modelo_3d: PackedScene = null
-```
-
-### ItemDatabase.gd (Autoload)
-
-```gdscript
-class_name ItemDatabase
-extends Node
-
-var items: Dictionary = {}
-
-func _ready() -> void:
-    _load_all_items()
-
-func _load_all_items() -> void:
-    var dir = DirAccess.open("res://data/items/")
-    if dir:
-        dir.list_dir_begin()
-        var file_name = dir.get_next()
-        while file_name != "":
-            if file_name.ends_with(".tres"):
-                var item = load("res://data/items/" + file_name)
-                if item is ItemData:
-                    items[item.id] = item
-            file_name = dir.get_next()
-
-func get_item(id: String) -> ItemData:
-    return items.get(id)
-
-func get_items_by_category(cat: String) -> Array[ItemData]:
-    var result: Array[ItemData] = []
-    for item in items.values():
-        if item.categoria == cat:
-            result.append(item)
-    return result
-
-func get_items_by_rarity(rareza: String) -> Array[ItemData]:
-    var result: Array[ItemData] = []
-    for item in items.values():
-        if item.rareza == rareza:
-            result.append(item)
-    return result
+@export var price_buy: int ...
 ```
 
 ## 3. Integración con Módulos

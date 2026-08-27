@@ -20,13 +20,13 @@ Definir el diseño visual completo de cada NPC: ropa (sombrero, camisa, pantaló
 ## 3. Alcance
 
 ### 3.1 Dentro del alcance
-- Diseño visual de 25 NPCs principales (4 islas)
+- Diseño visual de 35 NPCs principales (4 islas)
 - Ropa por profesional: sombrero, camisa, pantalón, botas
 - Herramienta en mano: hacha, rastrillo, martillo, caña, etc.
 - Colores HEX por prenda y rasgo físico
 - Rasgos físicos: tipo de cabello, color de ojos, tono de piel
 - Accesorios: goggles, guantes, delantal, mochila, etc.
-- Variantes por estación (4 estaciones × 25 NPCs)
+- Variantes por estación (4 estaciones × 35 NPCs)
 - Tabla resumen visual por isla
 
 ### 3.2 Fuera del alcance
@@ -53,7 +53,7 @@ Definir el diseño visual completo de cada NPC: ropa (sombrero, camisa, pantaló
 
 ## 5. Criterios de Aceptación
 
-1. 25 NPCs documentados con diseño visual completo (ropa + herramienta + colores)
+1. 35 NPCs documentados con diseño visual completo (ropa + herramienta + colores)
 2. Cada NPC tiene colores HEX definidos para cada prenda
 3. Cada NPC profesional tiene herramienta en mano con ID de M159
 4. Todos los NPCs de una isla son coherentes entre sí

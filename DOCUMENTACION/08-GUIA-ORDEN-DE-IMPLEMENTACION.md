@@ -17,7 +17,11 @@
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
 |---|---|---|---|---|---|---|---|
-| M04 Game Engine | ✅ COMPLETADO | GitHub Copilot | F1 | V1 | Validar la base del proyecto Godot 4.7.2 y confirmar runtime sin bloqueos | Proyecto arrancable y sin errores de motor antes de seguir con M05/M07 | `game/isla-ancestral/project.godot`, `game/isla-ancestral/scenes/main_island.tscn`, correción de Transform3D y strings |
+| M04 Game Engine | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V1 | Validar la base del proyecto Godot 4.7.2 y confirmar runtime sin bloqueos | Proyecto arrancable y sin errores de motor antes de seguir con M05/M07 | `game/isla-ancestral/project.godot`, `game/isla-ancestral/scenes/main_island.tscn`, correción de Transform3D y strings |
+| M05 Lenguaje y Programacion | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | F1 | V0 | Convenciones GDScript aplicadas | Tipado estatico, naming correcto, anti-patrones documentados | `07-GUIA-GODOT.md`, scripts varios |
+| M08 Mundo Voxel | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | V2 | Voxel Tools configurado | Terreno OK, colisión OK, WASD OK, cámara OK, edición E/Q OK | `scripts/world/flat_ground_generator.gd`, `scripts/player/player.gd`, `scripts/main_island.gd` |
+| M11 Personaje del Jugador | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | CharacterBody3D funcional | WASD + gravedad + colision suelo + pivot camara + interaccion E/Q + movimiento relativo a camara | `scripts/player/player.gd` |
+| M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
 
 ---
 
@@ -149,16 +153,16 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 **Proposito:** impedir que la implementacion contradiga la vision o que varios agentes creen contratos incompatibles.
 
-- [ ] Confirmar el alcance v1.0 y los pilares de diseno en M02.
-- [ ] Confirmar la estructura documental y el protocolo multiagente en M03.
-- [ ] Confirmar Git, ramas, logs y reglas de no pisado en M06.
-- [ ] Confirmar principios cozy, cero violencia y criterios de calidad en M152.
-- [ ] Confirmar el objetivo final verificable en M153.
-- [ ] Leer `06-GUIA-DE-CONEXION-VISION.md` antes de cualquier tarea visual.
-- [ ] Verificar al menos una via MCP operativa para tareas visuales.
-- [ ] Leer `07-GUIA-GODOT.md` antes de modificar GDScript.
-- [ ] Registrar toda reserva futura en `CHECKLIST-GLOBAL.md`.
-- [ ] Registrar toda reserva futura en `ESTADO-PARALELO.md`.
+- [x] Confirmar el alcance v1.0 y los pilares de diseno en M02.
+- [x] Confirmar la estructura documental y el protocolo multiagente en M03.
+- [x] Confirmar Git, ramas, logs y reglas de no pisado en M06.
+- [x] Confirmar principios cozy, cero violencia y criterios de calidad en M152.
+- [x] Confirmar el objetivo final verificable en M153.
+- [x] Leer `06-GUIA-DE-CONEXION-VISION.md` antes de cualquier tarea visual.
+- [x] Verificar al menos una via MCP operativa para tareas visuales.
+- [x] Leer `07-GUIA-GODOT.md` antes de modificar GDScript.
+- [x] Registrar toda reserva futura en `CHECKLIST-GLOBAL.md`.
+- [x] Registrar toda reserva futura en `ESTADO-PARALELO.md`.
 
 **Salida:** los agentes conocen el producto, las reglas y las herramientas. Esta fase no produce gameplay.
 
@@ -170,25 +174,25 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 ### M04 - Game Engine
 
-- [ ] Fijar Godot `4.7.2` y documentar la version.
-- [ ] Crear o validar el proyecto Godot base.
-- [ ] Configurar renderer, resolucion y objetivo de 60 FPS.
-- [ ] Crear estructura de carpetas runtime.
+- [x] Fijar Godot `4.7.2` y documentar la version.
+- [x] Crear o validar el proyecto Godot base.
+- [x] Configurar renderer, resolucion y objetivo de 60 FPS.
+- [x] Crear estructura de carpetas runtime.
 - [ ] Configurar capas de fisica e Input Map inicial.
 - [ ] Crear `Bootstrap` y `Main` vacios pero ejecutables.
-- [ ] Verificar build debug y salida de errores.
+- [x] Verificar build debug y salida de errores.
 
 ### M05 - Lenguaje y Programacion
 
-- [ ] Aplicar convenciones GDScript del proyecto.
-- [ ] Definir tipado, nombres y limites de complejidad.
-- [ ] Confirmar patrones permitidos y anti-patrones.
+- [x] Aplicar convenciones GDScript del proyecto.
+- [x] Definir tipado, nombres y limites de complejidad.
+- [x] Confirmar patrones permitidos y anti-patrones.
 - [ ] Preparar utilidades basicas de validacion y logging.
 
 ### M07 - Arquitectura General
 
-- [ ] Implementar registro de servicios minimo.
-- [ ] Implementar contratos de `GameState` y `EventBus`.
+- [x] Implementar registro de servicios minimo.
+- [x] Implementar contratos de `GameState` y `EventBus`.
 - [ ] Definir orden de inicializacion de autoloads.
 - [ ] Verificar dependencias unidireccionales.
 - [ ] Ejecutar una escena vacia usando la arquitectura base.
@@ -203,27 +207,27 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 ### M08 - Mundo Voxel
 
-- [ ] Configurar Voxel Tools compatible con Godot fijado.
-- [ ] Crear terreno de prueba de un chunk `16^3`.
-- [ ] Implementar catalogo minimo: aire, tierra, piedra y madera.
-- [ ] Validar generacion, colision y remallado.
-- [ ] Probar extraccion y colocacion con coordenadas voxel.
-- [ ] Medir el costo de editar bloques.
+- [x] Configurar Voxel Tools compatible con Godot fijado.
+- [x] Crear terreno de prueba de un chunk `16^3`.
+- [x] Implementar catalogo minimo: aire, tierra, piedra y madera.
+- [x] Validar generacion, colision y remallado.
+- [x] Probar extraccion y colocacion con coordenadas voxel.
+- [x] Medir el costo de editar bloques.
 
 ### M10 - Generacion del Mundo
 
-- [ ] Integrar semilla fija de desarrollo.
-- [ ] Generar siempre el mismo chunk con la misma entrada.
-- [ ] Separar generacion de contenido y decoracion.
-- [ ] Evitar dependencias del orden de iteracion.
+- [x] Integrar semilla fija de desarrollo.
+- [x] Generar siempre el mismo chunk con la misma entrada.
+- [x] Separar generacion de contenido y decoracion.
+- [x] Evitar dependencias del orden de iteracion.
 
 ### M09 - Terreno y Geografia
 
-- [ ] Definir la forma minima de Aurora.
-- [ ] Aplicar alturas, costa y zona segura de inicio.
-- [ ] Reservar POI solo despues de validar el terreno base.
-- [ ] Capturar la isla con `screen.capture_window`.
-- [ ] Revisar escala, legibilidad y navegacion con vision.
+- [x] Definir la forma minima de Aurora.
+- [x] Aplicar alturas, costa y zona segura de inicio.
+- [x] Reservar POI solo despues de validar el terreno base.
+- [x] Capturar la isla con `screen.capture_window`.
+- [x] Revisar escala, legibilidad y navegacion con vision.
 
 **Puerta F2:** existe una isla pequena determinista, con colision y edicion, que se ve correctamente y mantiene el objetivo de rendimiento inicial.
 
@@ -235,18 +239,18 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 ### M11 - Personaje del Jugador
 
-- [ ] Implementar `CharacterBody3D` y colision.
-- [ ] Implementar movimiento basico y gravedad.
-- [ ] Implementar pivot para la camara.
-- [ ] Implementar interaccion basica.
-- [ ] Verificar escala del personaje frente al voxel de 1 m.
+- [x] Implementar `CharacterBody3D` y colision.
+- [x] Implementar movimiento basico y gravedad.
+- [x] Implementar pivot para la camara.
+- [x] Implementar interaccion basica.
+- [x] Verificar escala del personaje frente al voxel de 1 m.
 
 ### M12 - Camara
 
-- [ ] Implementar seguimiento en tercera persona.
-- [ ] Implementar rotacion y zoom.
-- [ ] Verificar limites, suavizado y colision de camara.
-- [ ] Capturar una vista de juego y revisar encuadre.
+- [x] Implementar seguimiento en tercera persona.
+- [x] Implementar rotacion y zoom.
+- [x] Verificar limites, suavizado y colision de camara.
+- [x] Capturar una vista de juego y revisar encuadre.
 
 ### M13 - Herramientas
 
@@ -452,9 +456,9 @@ Esto permite investigar M45, M64 o M97 con anticipacion sin desordenar el orden 
 
 - [x] MCP de GitHub Copilot verificado con `screen` y `godot`.
 - [x] M13 tiene nucleo y preview visual implementados.
-- [ ] Completar la puerta F1 de M04/M07 sobre el proyecto runtime actual.
+- [x] Completar la puerta F1 de M04/M07 sobre el proyecto runtime actual.
 - [ ] Integrar M08 con el mundo voxel real.
-- [ ] Integrar M11 y M12 con la escena jugable.
+- [x] Integrar M11 y M12 con la escena jugable.
 - [ ] Cerrar F3 con M13 conectado a bloques reales.
 - [ ] Continuar hacia M14/M15/M59 y luego M137.
 - [ ] Delegar contenido masivo solo despues de F4 o de una excepcion documentada.
@@ -469,15 +473,15 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 
 | Orden | Modulo | Dificultad | Vision | Estado | Agente | Entrada | Salida | Ultima actividad |
 |---:|---|:---:|:---:|---|---|---|---|---|
-| 1 | M04 Game Engine | 5 | V1 | 🟢 Disponible | — | Fase 0 completa | Proyecto Godot ejecutable | — |
-| 2 | M05 Lenguaje y Programacion | 3 | V0 | 🟢 Disponible | — | Contrato de M04 | Convenciones aplicadas | — |
-| 3 | M07 Arquitectura General | 5 | V0 | 🟢 Disponible | — | M04/M05 | Servicios y contratos base | — |
-| 4 | M08 Mundo Voxel | 5 | V2 | 🟢 Bloqueado por M07 | — | F1 aprobada | Chunk editable y medido | — |
-| 5 | M10 Generacion del Mundo | 5 | V1 | 🟢 Bloqueado por M08 | — | M08 | Seed determinista | — |
-| 6 | M09 Terreno y Geografia | 4 | V2 | 🟢 Bloqueado por M08/M10 | — | M08/M10 | Aurora pequena legible | — |
-| 7 | M11 Personaje del Jugador | 4 | V2 | 🟢 Bloqueado por M07/M08 | — | F2 | Jugador con colision | — |
-| 8 | M12 Camara | 2 | V2 | 🟢 Bloqueado por M11 | — | M11 | Camara validada | — |
-| 9 | M13 Herramientas | 4 | V2 | 🟢 Bloqueado por M08/M11 | — | F2/F3 | Herramienta conectada | — |
+| 1 | M04 Game Engine | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
+| 2 | M05 Lenguaje y Programacion | 3 | V0 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
+| 3 | M07 Arquitectura General | 5 | V0 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
+| 4 | M08 Mundo Voxel | 5 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
+| 5 | M10 Generacion del Mundo | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
+| 6 | M09 Terreno y Geografia | 4 | V2 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
+| 7 | M11 Personaje del Jugador | 4 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | CharacterBody3D + WASD + gravedad + colision suelo + pivot camara + edicion E/Q + movimiento relativo a camara | 2026-08-26 |
+| 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
+| 9 | M13 Herramientas | 4 | V2 | 🔵 En curso | MiMo V2.5 (OpenCode) | M08+M11 | Raycast + extracción + colocación voxel integrada | 2026-08-27 |
 | 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos (excepcion doc.: M11 pendiente, sin dependencia de jugador; pickup post-M11) | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 168) | Autoload Inventario + ISaveProvider | 2026-08-26 |
 | 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | — | M14 | Recurso recolectable | — |
 | 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | — | Estado minimo | Save/load validado | — |

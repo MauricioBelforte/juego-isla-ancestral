@@ -18,17 +18,17 @@
 
 ## B. RF — Catálogos por NPC
 
-- [ ] RF3: catálogo por comerciante con ítems ofrecidos y ítems recomprados (ShopCatalog) [M]
-- [ ] Definir items_venta como lista de StockEntry con rangos de stock [M]
-- [ ] Definir items_recompra como lista de item_id (recompra selectiva por tienda) [M]
+- [x] RF3: catálogo por comerciante con ítems ofrecidos y ítems recomprados (ShopCatalog) [M]
+- [x] Definir items_venta como lista de StockEntry con rangos de stock [M]
+- [x] Definir items_recompra como lista de item_id (recompra selectiva por tienda) [M]
 - [ ] Definir pool_rodante exclusivo de mercaderes viajeros [M]
 - [ ] Validar en editor que cada item_id del catálogo exista en M15 [M]
 - [ ] Validar en editor que no haya ítems duplicados dentro del mismo catálogo [S]
-- [ ] Garantizar que los ítems básicos de cada tipo tengan stock_min >= 1 [M]
+- [x] Garantizar que los ítems básicos de cada tipo tengan stock_min >= 1 [M]
 
 ## C. RF — Tipos de tienda
 
-- [ ] RF2: enum TipoTienda con SEMILLAS, PESCADERIA, FERRETERIA, GENERAL y VIAJERO [S]
+- [x] RF2: enum TipoTienda con SEMILLAS, PESCADERIA, FERRETERIA, GENERAL y VIAJERO (+ TIENDA_JUGADOR para reputación) [S]
 - [ ] Definir defaults de catálogo y stock por tipo (tabla de balance del 03-Diseno) [M]
 - [ ] Puesto de semillas: rotación estacional fuerte con semillas básicas siempre presentes [M]
 - [ ] Pescadería: catálogo ligado a la pesca de la estación y cebos [M]
@@ -38,26 +38,53 @@
 
 ## D. RF — Compra
 
-- [ ] RF10: flujo de compra jugador → tienda con validación en cascada completa (2.1 del 03-Diseno) [C]
-- [ ] Validar existencia de la tienda antes de cualquier operación [S]
-- [ ] Validar tienda abierta (consulta pura a M29/M30) antes de comprar [M]
-- [ ] Validar stock suficiente antes de descontar [M]
-- [ ] Validar fondos con EconomyManager.puede_pagar antes de retirar [M]
-- [ ] Validar cupo del inventario jugador (M14) antes de entregar ítems [M]
-- [ ] Calcular total = precio_compra_vigente * cantidad con enteros [M]
-- [ ] Ejecutar transacción atómica con reversión de stock si M14 falla [C]
-- [ ] Emitir señales compra_exitosa/compra_rechazada con motivo legible [S]
+- [x] RF10: flujo de compra jugador → tienda con validación en cascada completa (2.1 del 03-Diseno) [C]
+- [x] Validar existencia de la tienda antes de cualquier operación [S]
+- [x] Validar tienda abierta (consulta pura a M29/M30) antes de comprar [M]
+- [x] Validar stock suficiente antes de descontar [M]
+- [x] Validar fondos con EconomyManager.puede_pagar antes de retirar [M]
+- [x] Validar cupo del inventario jugador (M14) antes de entregar ítems [M]
+- [x] Calcular total = precio_compra_vigente * cantidad con enteros [M]
+- [x] Ejecutar transacción atómica con reversión de stock si M14 falla [C]
+- [x] Emitir señales compra_exitosa/compra_rechazada con motivo legible [S]
 
 ## E. RF — Venta
 
-- [ ] RF11: flujo de venta jugador → tienda con recompra selectiva (2.2 del 03-Diseno) [C]
-- [ ] Validar tienda existente y abierta antes de vender [S]
-- [ ] Validar que el ítem esté en items_recompra de la tienda (NO_RECOMPRA) [M]
-- [ ] Remover ítems del inventario jugador (M14) antes de depositar monedas [M]
-- [ ] Rechazar con SIN_ITEMS_JUGADOR si no hay cantidad suficiente [S]
-- [ ] Usar precio_venta_vigente de M38 (respeta anti-grind y ventana de oferta) [M]
-- [ ] Acumular en la tienda lo recomprado (stock_actual += cantidad vendida) [M]
-- [ ] Emitir venta_exitosa/venta_rechazada y registrar en log DOM-TIEN-VENTA [S]
+- [x] RF11: flujo de venta jugador → tienda con recompra selectiva (2.2 del 03-Diseno) [C]
+- [x] Validar tienda existente y abierta antes de vender [S]
+- [x] Validar que el ítem esté en items_recompra de la tienda (NO_RECOMPRA) [M]
+- [x] Remover ítems del inventario jugador (M14) antes de depositar monedas [M]
+- [x] Rechazar con SIN_ITEMS_JUGADOR si no hay cantidad suficiente [S]
+- [x] Usar precio_venta_vigente de M38 (respeta anti-grind y ventana de oferta) [M]
+- [x] Acumular en la tienda lo recomprado (stock_actual += cantidad vendida) [M]
+- [x] Emitir venta_exitosa/venta_rechazada y registrar en log DOM-TIEN-VENTA [S]
+
+---
+
+## Notas del Agente
+
+**Modelo:** ox-alpha
+**Plataforma:** Cline
+**Fecha:** 2026-08-25
+**Estado:** Parcial (capa de datos implementada; integraciones y UI pendientes)
+
+### Lo que hice
+- Implementé la capa de datos completa: `shop_data.gd` (Resource), `shop.gd` (runtime), `stock_generator.gd` (canalización determinista), `reputacion_tienda.gd` (niveles 0-5 cozy), `shop_manager.gd` (autoload con compra/venta atómica y señales).
+- Autoload ShopManager registrado en project.godot.
+- Los 5 scripts pasan `--check-only --headless` de Godot 4.7.2 sin errores.
+- Log 167 generado.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los ítems de flujo D/E marcados [x] tienen el CÓDIGO implementado, pero NO fueron probados end-to-end porque M38 (EconomyManager) y M14 (Inventario) aún no existen como autoloads. Hoy toda compra/venta rechaza con SISTEMA_NO_DISPONIBLE por diseño defensivo.
+- Rotación estacional real y filtros por eventos: placeholders hasta que existan M29/M73.
+- Pool rodante de mercader viajero, catálogos .tres reales, validación contra M15: pendientes.
+- UI de compra (M53): fuera de alcance de este turno según directiva del usuario.
+
+### Recomendaciones para el próximo agente
+- Cuando se implemente M38/M14, verificar que sus autoloads se llamen exactamente `EconomyManager` e `Inventario`, o ajustar las rutas en shop_manager.gd (`get_node_or_null("/root/...")`).
+- Probar transacción atómica con inventario lleno (revert de stock).
+- Conectar `tick_hora()` al reloj de M30 y `reabastecer_diario()` al calendario de M29.
+
 
 ## F. RF — Horarios y días de descanso
 

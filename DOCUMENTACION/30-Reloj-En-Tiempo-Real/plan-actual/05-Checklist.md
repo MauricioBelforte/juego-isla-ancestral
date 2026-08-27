@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** GLM
+**Plataforma:** Cline
 
 # 05-Checklist.md — Módulo 30: Reloj en Tiempo Real
 
@@ -59,20 +59,23 @@
 
 ## D. Widget de reloj — diseño (14)
 
-- [ ] Hora HH:MM con formato 12h/24h configurable [S]
-- [ ] Fecha completa: "Viernes, 12 de Primavera, Año 1" [S]
-- [ ] Ícono de estación (hoja/sol/hoja seca/copo) [S]
-- [ ] Color de fondo por estación [S]
-- [ ] Ubicación: superior derecha del HUD [S]
-- [ ] Desplegable al pasar el cursor (detalle) [S]
-- [ ] Suscripción a `hora_cambio` (sin polling) [S]
-- [ ] Suscripción a `dia_cambio` [S]
-- [ ] Suscripción a `estacion_cambio` [S]
-- [ ] Badge de evento activo (evento_activado) [S]
-- [ ] Localizable (M57): nombres desde data [S]
-- [ ] Config en `data/ui/w_reloj.tres` [S]
-- [ ] Fuente del GDD: HUD limpio, sin interfaz invasiva [S]
-- [ ] No bloquea clicks (área no interactiva) [S]
+> **Estado 2026-08-26 (GLM/Cline, iteración con visión V2):** núcleo implementado y **verificado visualmente con capturas** (`w_reloj.gd` + `preview_reloj.tscn`). Los ítems sin asset/hover quedan pendientes o `[?]`.
+> **Re-verificación in-engine 21:30 (GLM/Cline, Log 178):** reloj **visible, íntegro y avanzando en vivo** (08:00 → 09:00) confirmado con captura del viewport maximizado. Se corrigieron **3 bugs** descubiertos al relanzar: (1) el autoload Bootstrap pisaba la escena pedida por CLI → fix en `bootstrap.gd`; (2) el panel tenía altura negativa (-16 px) por `set_anchors_preset` + offsets parciales → fix con `set_anchors_and_offsets_preset(PRESET_TOP_RIGHT, PRESET_MODE_MINSIZE, 16)`; (3) DPI 125 % recortaba el HUD en la ventana CLI → fix con `WINDOW_MODE_MAXIMIZED` desde la preview. Detalles en 07-GUIA-GODOT §9.25–§9.28.
+
+- [x] Hora HH:MM con formato 12h/24h configurable [S] → `RelojHud.formatear_hora` (test 14/14 OK)
+- [x] Fecha completa: "Viernes, 12 de Primavera, Año 1" [S] → `_fecha_visual()` vía RelojHud
+- [?] Ícono de estación (hoja/sol/hoja seca/copo) [M] → sin assets aún; chip textual coloreado como placeholder. Requiere M45/M46 (fase arte)
+- [x] Color de fondo por estación [S] → chip `StyleBoxFlat` tintado con `COLOR_ESTACION`
+- [x] Ubicación: superior derecha del HUD [S] → anclado TOP_RIGHT en captura iter1
+- [ ] Desplegable al pasar el cursor (detalle) [S] → pendiente (animación tooltip)
+- [x] Suscripción a `hora_cambio` (sin polling) [S] → avance vivo confirmado entre capturas iter1/iter2
+- [x] Suscripción a `dia_cambio` [S]
+- [x] Suscripción a `estacion_cambio` [S]
+- [ ] Badge de evento activo (evento_activado) [S] → depende de señales de eventos (M64)
+- [x] Localizable (M57): nombres desde data [S] → usa NOMBRES_* de GameTime (pendiente claves M57)
+- [ ] Config en `data/ui/w_reloj.tres` [S] → valores hardcodeados aceptables por ahora
+- [x] Fuente del GDD: HUD limpio, sin interfaz invasiva [S] → panel compacto semitransparente
+- [x] No bloquea clicks (área no interactiva) [S] → `mouse_filter = MOUSE_FILTER_IGNORE`
 
 ## E. Pruebas de límites — diseño (14)
 
@@ -134,5 +137,33 @@
 - [ ] Log de creación generado [S]
 - [ ] Checked en README de DOCUMENTACION [S]
 
-**Totales:** 104 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 104 ítems · Diseño (A,B,C,H): cerrado por Deepseek V4 Flash · Bloque D (widget): **10/14 completados, 1 `[?]`, 3 pendientes** · E/F/G: runtime parcial, dependen de M46/M53/M57/M64.
 **Nota:** los ítems de implementación (D-F en runtime) quedan para el agente delegado; diseño y decisión anti-tiempo-real cierran aquí.
+
+## Notas del Agente
+
+**Modelo:** GLM
+**Plataforma:** Cline
+**Fecha:** 2026-08-26 18:40:00
+**Estado:** Parcial (núcleo HUD verificado con visión)
+
+### Lo que hice
+- Creé `game/isla-ancestral/scripts/clock/w_reloj.gd`: widget Control puro anclado arriba-derecha (hora 34px, fecha, chip de estación tintado con `COLOR_ESTACION`), suscripción a `hora_cambio`/`dia_cambio`/`estacion_cambio`, fallback mock si no hay GameTime, `mouse_filter = IGNORE`.
+- Creé `scenes/preview_reloj.tscn` (formato correcto `[gd_scene format=3]`, el header era lo que faltaba antes) + `scripts/clock/preview_reloj.gd` (cielo gradiente `TextureRect`+`GradientTexture2D`, pasto, sol; demo que avanza GameTime ×25 cada 2 s).
+- Verifiqué con visión (V2): layout legible sobre fondo claro/oscuro, chip de estación visible, **avance de hora EN VIVO confirmado entre capturas iter1/iter2** (binding por señales sin polling).
+- Capturas de evidencia en `tools/mcp/godot-mcp/capturas/30-Reloj-En-Tiempo-Real/` (iter1 y iter2).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Ícono de estación → no hay assets (M45/M46); dejé chip textual coloreado. `[?]`
+- Desplegable hover / badge de evento → requieren tooltip animado y señales de eventos M64. Pendientes `[ ]`.
+- Integración al HUD real (M53) y config `.tres` (M57/M46) → fuera del alcance de esta iteración.
+
+### Intentos fallidos / decisiones
+- Bug runtime corregido: `ColorRect.texture` no existe → reemplazado por `TextureRect` + `EXPAND_IGNORE_SIZE`.
+- GDScript 4 no permite `const` dentro de funciones → cambiado a `var` local.
+- Un agente anterior marcó totales "104/104" pero los estados eran `[ ]`; se recalcó honestamente solo el bloque D verificado esta sesión.
+
+### Recomendaciones para el próximo agente
+- Conectar WReloj como hijo del HUD principal cuando exista M53 (`ui_hud.tscn`).
+- Para hover/desplegable usar `mouse_filter = STOP` SOLO en el panel (no en hijos) y un Tween de opacidad (M52).
+- El patrón `.tscn` manual correcto está en `scenes/preview_reloj.tscn`; reutilizar ese header.
