@@ -177,10 +177,35 @@ func try_place(block_id: int, _metadata: Dictionary = {}) -> bool:
 	print("[M13] Colocado bloque %d en %s" % [block_id, place_pos])
 	return true
 
-## Obtiene los drops de un bloque (simplificado: drop = el mismo bloque).
+## Obtiene los drops de un bloque (simplificado: drop = el mismo bloque como string id).
+## M15/M35 refinarán con ItemData real.
 func _get_drops(block_id: int) -> Array:
-	# Por ahora, drop = el mismo bloque. M15/M35 refinarán.
-	return [block_id]
+	var item_id := _block_to_item_id(block_id)
+	return [{"item_id": item_id, "amount": 1}]
+
+## Mapea block_id (int) a item_id (string) para Inventario.
+## Temporal: luego M15 definirá el catálogo definitivo.
+static func _block_to_item_id(block_id: int) -> String:
+	match block_id:
+		1: return "dirt"
+		2: return "grass"
+		3: return "stone"
+		5: return "sand"
+		6: return "clay"
+		7: return "wood"
+		8: return "planks"
+		9: return "copper_ore"
+		10: return "iron_ore"
+		11: return "crystal"
+		12: return "gemstone"
+		13: return "glass"
+		14: return "ancient_crystal"
+		16: return "ice"
+		26: return "snow"
+		27: return "gravel"
+		28: return "moss"
+		29: return "mud"
+		_: return "unknown_%d" % block_id
 
 ## Devuelve info del último raycast para debug/HUD.
 func get_debug_info() -> String:

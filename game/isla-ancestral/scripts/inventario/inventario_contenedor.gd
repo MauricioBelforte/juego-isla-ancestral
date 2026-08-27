@@ -11,6 +11,9 @@
 class_name ContenedorInventario
 extends RefCounted
 
+## Señales para UI reactiva (solo emite cuando hay cambio real)
+signal slot_changed(idx: int)
+
 var tipo: int = ContainerType.Id.BOLSILLO
 var slots: Array[InventorySlot] = []
 
@@ -49,25 +52,29 @@ func add_item(item_id: String, cantidad: int, instancia: Dictionary = {}) -> int
 
 	# Pasada 1: completar stacks parciales del mismo item
 	if stack_max > 1 and instancia.is_empty():
-		for s in slots:
+		for i in slots.size():
 			if restante <= 0:
 				break
+			var s := slots[i]
 			if not s.esta_libre() and s.item_id == item_id and not s.favorito:
 				var cabe := stack_max - s.cantidad
 				if cabe > 0:
 					var tomar := mini(cabe, restante)
 					s.cantidad += tomar
 					restante -= tomar
+					slot_changed.emit(i)
 
 	# Pasada 2: slots vacios (no bloqueados, no favoritos vacios reservados)
 	if restante > 0:
-		for s in slots:
+		for i in slots.size():
 			if restante <= 0:
 				break
+			var s := slots[i]
 			if s.esta_libre() and not s.bloqueado:
 				var tomar := mini(stack_max, restante)
 				s.ocupar(item_id, tomar, instancia if stack_max == 1 else {})
 				restante -= tomar
+				slot_changed.emit(i)
 
 	return restante
 
@@ -86,6 +93,7 @@ func remove_item(item_id: String, cantidad: int) -> bool:
 			falta -= tomar
 			if s.cantidad <= 0:
 				s.vaciar()
+			slot_changed.emit(i)
 	return falta <= 0
 
 func count_item(item_id: String) -> int:

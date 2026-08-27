@@ -25,7 +25,9 @@ func _ready() -> void:
 	for id in [CONTAINER_TYPE_CLASS.Id.BOLSILLO, CONTAINER_TYPE_CLASS.Id.MOCHILA,
 			CONTAINER_TYPE_CLASS.Id.CASA, CONTAINER_TYPE_CLASS.Id.COFRE,
 			CONTAINER_TYPE_CLASS.Id.ALMACEN, CONTAINER_TYPE_CLASS.Id.CORREO]:
-		contenedores[id] = CONTENEDOR_SCRIPT.new(id)
+		var c = CONTENEDOR_SCRIPT.new(id)
+		c.slot_changed.connect(func(idx: int) -> void: slot_changed.emit(id, idx))
+		contenedores[id] = c
 	_registrar_como_proveedor_guardado()
 
 ## Se registra en SaveManager (M59) como primer ISaveProvider real.
@@ -81,6 +83,114 @@ func _contenedor(container: int) -> RefCounted:
 	if not contenedores.has(container):
 		contenedores[container] = CONTENEDOR_SCRIPT.new(container)
 	return contenedores[container]
+
+## ── Operaciones de movimiento (03-Diseno §3) ──────────────
+
+## Mueve el slot completo de un contenedor a otro (con auto-apilado).
+## Devuelve true si se movió correctamente.
+func move_item(from_container: int, from_slot: int, to_container: int) -> bool:
+	var fc := _contenedor(from_container)
+	var tc := _contenedor(to_container)
+	if from_slot < 0 or from_slot >= fc.slots.size():
+		return false
+	var s: InventorySlot = fc.slots[from_slot]
+	if s.esta_libre():
+		return false
+	var sobrante: int = tc.add_item(s.item_id, s.cantidad, s.instancia)
+	if sobrante < s.cantidad:
+		s.vaciar()
+		slot_changed.emit(from_container, from_slot)
+		inventario_actualizado.emit()
+		return true
+	return false
+
+## Intercambia dos slots (puede ser entre contenedores distintos).
+func swap_items(from_container: int, from_slot: int, to_container: int, to_slot: int) -> bool:
+	var fc := _contenedor(from_container)
+	var tc := _contenedor(to_container)
+	if from_slot < 0 or from_slot >= fc.slots.size():
+		return false
+	if to_slot < 0 or to_slot >= tc.slots.size():
+		return false
+	var a: InventorySlot = fc.slots[from_slot]
+	var b: InventorySlot = tc.slots[to_slot]
+	# Copiar datos de a a temporal
+	var tmp_id := a.item_id
+	var tmp_cant := a.cantidad
+	var tmp_fav := a.favorito
+	var tmp_lock := a.bloqueado
+	var tmp_inst := a.instancia.duplicate(true)
+	# Copiar b → a
+	a.item_id = b.item_id
+	a.cantidad = b.cantidad
+	a.favorito = b.favorito
+	a.bloqueado = b.bloqueado
+	a.instancia = b.instancia.duplicate(true)
+	# Copiar temporal → b
+	b.item_id = tmp_id
+	b.cantidad = tmp_cant
+	b.favorito = tmp_fav
+	b.bloqueado = tmp_lock
+	b.instancia = tmp_inst
+	slot_changed.emit(from_container, from_slot)
+	slot_changed.emit(to_container, to_slot)
+	inventario_actualizado.emit()
+	return true
+
+## Separa una cantidad exacta de un slot a un contenedor destino.
+## Devuelve true si se separó correctamente.
+func split_stack(from_container: int, from_slot: int, amount: int, to_container: int) -> bool:
+	var fc := _contenedor(from_container)
+	var tc := _contenedor(to_container)
+	if from_slot < 0 or from_slot >= fc.slots.size():
+		return false
+	var s: InventorySlot = fc.slots[from_slot]
+	if s.esta_libre():
+		return false
+	amount = clampi(amount, 1, s.cantidad - 1)
+	if amount <= 0:
+		return false
+	var sobrante: int = tc.add_item(s.item_id, amount, s.instancia if s.cantidad - amount <= 1 else {})
+	if sobrante == 0:
+		s.cantidad -= amount
+		slot_changed.emit(from_container, from_slot)
+		inventario_actualizado.emit()
+		return true
+	return false
+
+## Ordena un contenedor por categoría → rareza → nombre.
+func sort_container(container: int, _mode: int = 0) -> void:
+	var c := _contenedor(container)
+	# Recoger todos los ítems
+	var items: Array = []
+	for s in c.slots:
+		if not s.esta_libre():
+			items.append({
+				"id": s.item_id,
+				"n": s.cantidad,
+				"fav": s.favorito,
+				"lock": s.bloqueado,
+				"inst": s.instancia.duplicate(true),
+			})
+	# Ordenar: favoritos primero, luego por id
+	items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		if a.get("fav", false) and not b.get("fav", false):
+			return true
+		if not a.get("fav", false) and b.get("fav", false):
+			return false
+		return a.get("id", "") < b.get("id", "")
+	)
+	# Reconstruir slots
+	for s in c.slots:
+		s.vaciar()
+	for i in items.size():
+		if i < c.slots.size():
+			var d: Dictionary = items[i]
+			c.slots[i].ocupar(d["id"], d["n"], d.get("inst", {}))
+			c.slots[i].favorito = d.get("fav", false)
+			c.slots[i].bloqueado = d.get("lock", false)
+			slot_changed.emit(container, i)
+	inventario_actualizado.emit()
 
 ## ── Adaptadores para M39 ShopManager (contrato ya publicado) ──
 ## agregar_items({item_id: cantidad}) -> bool (true = todo colocado; fallback bolsa->casa)
