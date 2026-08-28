@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "catalina_oso"
+nombre = "Catalina"
+especie = "oso"
+personalidad = "dulce"
+edad_categoria = "adulto"
+profesion = "cocinera"
+color_cuerpo = Color(0.55, 0.35, 0.25, 1)
+color_cabeza = Color(0.75, 0.55, 0.4, 1)
+escala_cuerpo = 1.1
+historia = "Catalina llegó a la isla buscando recetas ancestrales. Su mermelada de frutos silvestres es legendaria."
+gustos = ["manzana", "miel", "fruta"]
+disgustos = ["piedra"]
+hobbies = ["cocinar", "jardinería"]
+linea_saludo = "¡Hola, amiguito! ¿Quieres probar algo delicioso?"
+linea_despedida = "¡Vuelve pronto! Siempre hay galletas frescas."
+linea_sueno = "Mmm... receta secreta..."
+hogar_deseado = "bosque"

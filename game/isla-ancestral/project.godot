@@ -30,6 +30,10 @@ Friendship="*res://scripts/friendship/friendship_service.gd"
 GameTime="*res://scripts/time/game_clock.gd"
 RelojHud="*res://scripts/clock/reloj_hud.gd"
 Bootstrap="*res://scripts/core/bootstrap.gd"
+UIManager="*res://scripts/ui/core/ui_manager.gd"
+TooltipService="*res://scripts/ui/services/tooltip_service.gd"
+NotificationService="*res://scripts/ui/services/notification_service.gd"
+VillagerManager="*res://scripts/npc/villager_manager.gd"
 
 [display]
 

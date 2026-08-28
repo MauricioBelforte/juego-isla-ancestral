@@ -32,9 +32,14 @@ var _hotbar: Array[ToolData] = []
 var _hotbar_index: int = 0
 ## Bloque a colocar (ciclo por scroll o teclado)
 var _block_to_place: int = 2  # Default: césped
+## Autoload Inventario (cache dinámico para evitar error de compilación MCP)
+var _inventario: Node = null
+var _item_database: Node = null
 
 func _ready() -> void:
 	add_to_group("player")
+	_inventario = get_node_or_null("/root/Inventario")
+	_item_database = get_node_or_null("/root/ItemDatabase")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# Setup VoxelBoxMover
@@ -182,9 +187,11 @@ func _on_bloque_extraido(_pos: Vector3i, block_id: int, drops: Array) -> void:
 		var item_id: String = str(drop.get("item_id", ""))
 		var amount: int = int(drop.get("amount", 1))
 		if item_id != "":
-			var sobrante := Inventario.add_item(item_id, amount)
-			if sobrante > 0:
-				print("[M14] Inventario lleno — %d x %s no caben" % [sobrante, item_id])
+			var inv_node: Node = get_node_or_null("/root/Inventario")
+			if inv_node and inv_node.has_method("add_item"):
+				var sobrante: int = inv_node.add_item(item_id, amount)
+				if sobrante > 0:
+					print("[M14] Inventario lleno — %d x %s no caben" % [sobrante, item_id])
 	print("[Player] Extraído bloque %d → inventario" % block_id)
 
 func _on_bloque_colocado(_pos: Vector3i, block_id: int) -> void:
@@ -496,7 +503,7 @@ func _create_inventory_panel() -> void:
 	# E20: Drag preview (oculto al inicio)
 	_create_drag_preview(bg)
 
-	Inventario.inventario_actualizado.connect(_refresh_inventory_ui)
+	_inventario.inventario_actualizado.connect(_refresh_inventory_ui)
 	_refresh_inventory_ui()
 
 func _on_category_pressed(cat_id: int) -> void:
@@ -509,7 +516,7 @@ func _refresh_inventory_ui() -> void:
 	var grid := _inventory_panel.get_node_or_null("VBox/SlotGrid")
 	if grid == null:
 		return
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	# E3+E4: Filtrar slots por categoría + búsqueda
 	var visible_slots: Array[int] = []
 	for i in bolsillo.slots.size():
@@ -519,12 +526,12 @@ func _refresh_inventory_ui() -> void:
 			continue
 		# Filtro por categoría
 		if _active_category != -1:
-			var item = ItemDatabase.get_item(s.item_id)
+			var item = _item_database.get_item(s.item_id)
 			if item != null and int(item.categoria) != _active_category:
 				continue
 		# E3: Filtro por texto de búsqueda
 		if _search_text != "":
-			var item = ItemDatabase.get_item(s.item_id)
+			var item = _item_database.get_item(s.item_id)
 			var search_lower := _search_text.to_lower()
 			var match_name: bool = (item != null and item.nombre.to_lower().contains(search_lower))
 			var match_id: bool = s.item_id.to_lower().contains(search_lower)
@@ -545,7 +552,7 @@ func _refresh_inventory_ui() -> void:
 		if i < bolsillo.slots.size() and visible_slots.has(i):
 			var s: InventorySlot = bolsillo.slots[i]
 			if not s.esta_libre():
-				var item = ItemDatabase.get_item(s.item_id)
+				var item = _item_database.get_item(s.item_id)
 				var display_name := s.item_id
 				if item != null:
 					display_name = item.nombre
@@ -566,7 +573,7 @@ func _refresh_inventory_ui() -> void:
 
 	var info_label := _inventory_panel.get_node_or_null("VBox/Header/CapacityLabel")
 	if info_label:
-		info_label.text = "%d/%d" % [Inventario.used_slots(0), Inventario.total_slots(0)]
+		info_label.text = "%d/%d" % [_inventario.used_slots(0), _inventario.total_slots(0)]
 
 ## ── Tooltip (lazy con delay) ──────────────────────────────
 
@@ -630,7 +637,7 @@ func _process(delta: float) -> void:
 func _show_tooltip_at(slot_idx: int) -> void:
 	if _tooltip == null or _inventory_panel == null:
 		return
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx >= bolsillo.slots.size():
 		return
 	var s: InventorySlot = bolsillo.slots[slot_idx]
@@ -640,7 +647,7 @@ func _show_tooltip_at(slot_idx: int) -> void:
 	var name_label := _tooltip.get_node_or_null("VBox/Name")
 	var desc_label := _tooltip.get_node_or_null("VBox/Desc")
 	var info_label := _tooltip.get_node_or_null("VBox/Info")
-	var item = ItemDatabase.get_item(s.item_id)
+	var item = _item_database.get_item(s.item_id)
 	if name_label:
 		name_label.text = item.nombre if item else s.item_id
 	if desc_label:
@@ -691,7 +698,7 @@ func _on_slot_input(event: InputEvent, slot_idx: int) -> void:
 func _show_context_menu(slot_idx: int, pos: Vector2) -> void:
 	if _context_menu == null:
 		return
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx >= bolsillo.slots.size():
 		return
 	var s: InventorySlot = bolsillo.slots[slot_idx]
@@ -704,7 +711,7 @@ func _show_context_menu(slot_idx: int, pos: Vector2) -> void:
 	for child in cm_vbox.get_children():
 		child.queue_free()
 
-	var item = ItemDatabase.get_item(s.item_id)
+	var item = _item_database.get_item(s.item_id)
 
 	# Opción: Usar
 	var use_btn := Button.new()
@@ -734,7 +741,7 @@ func _show_context_menu(slot_idx: int, pos: Vector2) -> void:
 func _on_use_item(slot_idx: int) -> void:
 	_hide_context_menu()
 	# Por ahora solo imprime — M15/M16 definirán acciones reales
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx < bolsillo.slots.size():
 		var s: InventorySlot = bolsillo.slots[slot_idx]
 		if not s.esta_libre():
@@ -742,22 +749,22 @@ func _on_use_item(slot_idx: int) -> void:
 
 func _on_toggle_favorite(slot_idx: int) -> void:
 	_hide_context_menu()
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx < bolsillo.slots.size():
 		bolsillo.slots[slot_idx].favorito = not bolsillo.slots[slot_idx].favorito
 		_refresh_inventory_ui()
 
 func _on_discard_item(slot_idx: int) -> void:
 	_hide_context_menu()
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx < bolsillo.slots.size():
 		var s: InventorySlot = bolsillo.slots[slot_idx]
 		if not s.esta_libre():
 			print("[M14] Descartado: %s x%d" % [s.item_id, s.cantidad])
 			s.vaciar()
 			_refresh_inventory_ui()
-			Inventario.slot_changed.emit(0, slot_idx)
-			Inventario.inventario_actualizado.emit()
+			_inventario.slot_changed.emit(0, slot_idx)
+			_inventario.inventario_actualizado.emit()
 
 ## ── M14: Hotbar HUD ───────────────────────────────────────
 
@@ -792,12 +799,12 @@ func _create_hotbar_hud() -> void:
 
 	_hotbar_hud = container
 	_refresh_hotbar()
-	Inventario.inventario_actualizado.connect(_refresh_hotbar)
+	_inventario.inventario_actualizado.connect(_refresh_hotbar)
 
 func _refresh_hotbar() -> void:
 	if _hotbar_hud == null:
 		return
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	for i in 6:
 		var slot_node := _hotbar_hud.get_node_or_null("Slot_%d" % i)
 		if slot_node == null:
@@ -824,7 +831,7 @@ func _on_sort_mode_changed(index: int) -> void:
 	_sort_mode = index
 
 func _on_sort_pressed() -> void:
-	Inventario.sort_container(0, _sort_mode)
+	_inventario.sort_container(0, _sort_mode)
 
 ## ── E20: Drag-drop entre slots ──────────────────────────
 
@@ -845,7 +852,7 @@ func _create_drag_preview(parent: Control) -> void:
 	_drag_label = lbl
 
 func _try_start_drag(slot_idx: int) -> void:
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if slot_idx >= bolsillo.slots.size():
 		return
 	var s: InventorySlot = bolsillo.slots[slot_idx]
@@ -855,7 +862,7 @@ func _try_start_drag(slot_idx: int) -> void:
 	_dragging = true
 	_drag_slot_idx = slot_idx
 	if _drag_label:
-		var item = ItemDatabase.get_item(s.item_id)
+		var item = _item_database.get_item(s.item_id)
 		var display_name := s.item_id
 		if item != null:
 			display_name = item.nombre
@@ -875,12 +882,12 @@ func _finish_drag(target_slot: int) -> void:
 	if _drag_slot_idx < 0 or _drag_slot_idx == target_slot:
 		_cancel_drag()
 		return
-	var bolsillo := Inventario._contenedor(0)
+	var bolsillo = _inventario._contenedor(0)
 	if target_slot >= bolsillo.slots.size():
 		_cancel_drag()
 		return
 	# Intentar swap
-	var ok := Inventario.swap_items(0, _drag_slot_idx, 0, target_slot)
+	var ok = _inventario.swap_items(0, _drag_slot_idx, 0, target_slot)
 	if ok:
 		_play_add_feedback(null)
 	_cancel_drag()

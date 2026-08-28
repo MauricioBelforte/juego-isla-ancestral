@@ -7,19 +7,19 @@
 
 ## A. Requisitos del módulo (8)
 
-- [ ] Definir el problema: isla vacía sin habitantes, necesidad de 8-12 vecinos memorables [S]
+- [x] Definir el problema: isla vacía sin habitantes, necesidad de 8-12 vecinos memorables [S]
 - [ ] Registrar relaciones: M64 consume, M21/M20/M25 integran, M29/M61 como fuente [S]
 - [ ] Catalogar los 26 puntos de la sección 18 del plan maestro [S]
 - [ ] RF1: población gestionada de 8-12 vecinos simultáneos [S]
 - [ ] RF2: mudanza con permiso del jugador (entrada) y aviso previo (salida) [S]
 - [ ] RF3: rutinas diarias por perfil y franja horaria [S]
-- [ ] RF4: interacción con tecla F con indicador y despacho a diálogo [S]
+- [x] RF4: interacción con tecla F con indicador y despacho a diálogo [S]
 - [ ] RF5+RF6+RF7: reacciones a regalos, estado emocional y memoria de interacciones [S]
 
 ## B. Resolución de los 26 puntos del plan (26)
 
 - [ ] P1: definir cantidad inicial de NPC (6 al primer día) [M]
-- [ ] P2: definir cantidad máxima (10 activos, rango 8-12) [S]
+- [x] P2: definir cantidad máxima (10 activos, rango 8-12) [S]
 - [ ] P3: diseñar especies (oso, mapache, zorro, rana, conejo, búho, nutria, jabalí, gato, erizo) [M]
 - [ ] P4: diseñar siluetas (referencia a escena vóxel por especie) [M]
 - [ ] P5: diseñar personalidades (animada, seria, dulce, tímida, soñadora, gruñona amable) [M]
@@ -42,24 +42,24 @@
 - [ ] P22: diseñar animaciones (saludar, sentarse, dormir, caminar, comer) [M]
 - [ ] P23: crear navegación (contrato de destinos válidos hacia M64; el vecino no patenta IA propia) [M]
 - [ ] P24: crear comportamiento (perfil alimenta la agenda de M64; reglas de ocupación del vecino) [M]
-- [ ] P25: crear estados emocionales (VillagerMood con base persistida + deltas) [M]
+- [x] P25: crear estados emocionales (VillagerMood con base persistida + deltas) [M]
 - [ ] P26: crear memoria de interacciones (historial por vecino: regalos, charlas, hitos) [M]
 
 ## C. Datos y perfiles del vecino (8)
 
-- [ ] VillagerProfile como Resource (.tres) editable en editor [S]
-- [ ] Campos: id, nombre, especie, silueta, personalidad, edad, profesión, historia [S]
-- [ ] Campos: gustos, disgustos, hobbies, linea_saludo, linea_despedida, linea_sueno [S]
+- [x] VillagerProfile como Resource (.tres) editable en editor [S]
+- [x] Campos: id, nombre, especie, silueta, personalidad, edad, profesión, historia [S]
+- [x] Campos: gustos, disgustos, hobbies, linea_saludo, linea_despedida, linea_sueno [S]
 - [ ] rutina_diaria como Dictionary hora→actividad [S]
-- [ ] hogar_deseado (bioma/estilo de parcela) [S]
-- [ ] Evaluación de objetos: evaluar_objeto() con tabla gustos/disgustos/neutro [S]
+- [x] hogar_deseado (bioma/estilo de parcela) [S]
+- [x] Evaluación de objetos: evaluar_objeto() con tabla gustos/disgustos/neutro [S]
 - [ ] Ids únicos de vecino sin duplicados posibles en el catálogo [S]
 - [ ] Catálogo de candidatos mayor que el límite activo (14 perfiles) [M]
 
 ## D. Población de la isla y mudanza (9)
 
 - [ ] 6 vecinos iniciales al primer día (población de arranque) [M]
-- [ ] Límite máximo 10 activos con plaza_libre() verificable [S]
+- [x] Límite máximo 10 activos con plaza_libre() verificable [S]
 - [ ] Candidato aparece como visitante en puerto/plaza cuando hay plaza libre [M]
 - [ ] Propuesta de mudanza visible con burbuja de interés (indicador) [M]
 - [ ] Aprobar mudanza asigna parcela libre y agenda llegada al día siguiente 08:00 [M]
@@ -92,9 +92,9 @@
 ## G. Regalos y reacciones (6)
 
 - [ ] Regalo desde inventario hacia el vecino con la tecla F (un objeto a la vez) [M]
-- [ ] Evaluación contra gustos/disgustos con evaluación numérica (+1.0 / -0.5 / 0.0) [S]
-- [ ] Línea de reacción contextual según resultado (hook hacia M21) [S]
-- [ ] Delta de estado emocional al recibir regalo (VillagerMood) [S]
+- [x] Evaluación contra gustos/disgustos con evaluación numérica (+1.0 / -0.5 / 0.0) [S]
+- [x] Línea de reacción contextual según resultado (hook hacia M21) [S]
+- [x] Delta de estado emocional al recibir regalo (VillagerMood) [S]
 - [ ] Señal regalo_recibido emitida para M20 (puntos de amistad) [S]
 - [ ] Límite de regalos por día (máx 3 por vecino, sin penalización adicional) [M]
 
@@ -102,8 +102,8 @@
 
 - [ ] ánimo_base persistido por vecino (checkpoint) [S]
 - [ ] Deltas calculados: clima (M31/M32), estación (M29), hora, eventos [M]
-- [ ] Clamp del ánimo a [-1.0, 1.0] con estado textual (alegre/neutral/triste) [S]
-- [ ] factor_dialogo que escala tono de líneas para M21 [S]
+- [x] Clamp del ánimo a [-1.0, 1.0] con estado textual (alegre/neutral/triste) [S]
+- [x] factor_dialogo que escala tono de líneas para M21 [S]
 - [ ] Historial persistente: regalos recibidos con fecha y resultado [M]
 - [ ] Historial persistente: charlas contadas y hitos de amistad [S]
 - [ ] Memoria de objetos rechazados repetidos (el vecino lo recuerda en charla) [M]
@@ -120,7 +120,7 @@
 
 ## J. Integración con M21 (Diálogos) (6)
 
-- [ ] VillagerDialogueHook con señal linea_solicitada [S]
+- [x] VillagerDialogueHook con señal linea_solicitada [S]
 - [ ] Líneas por contexto: saludo, clima, hora, estación, progreso, regalo [M]
 - [ ] Respuestas seleccionables provistas por el hook (respuestas_disponibles) [M]
 - [ ] Cierre de conversación con notificar_cierre (resumen para M20) [S]
@@ -129,8 +129,8 @@
 
 ## K. Integración con M20 (Amistad) (6)
 
-- [ ] Señal regalo_recibido con objeto_id y resultado de evaluación [S]
-- [ ] Señal conversacion_terminada con resumen (charla, opciones elegidas) [S]
+- [x] Señal regalo_recibido con objeto_id y resultado de evaluación [S]
+- [x] Señal conversacion_terminada con resumen (charla, opciones elegidas) [S]
 - [ ] Nivel de amistad consumible por el hook para líneas especiales [M]
 - [ ] Cambios de rutina por amistad alta (invitaciones del vecino) [M]
 - [ ] Eventos colectivos (fiestas) combinables con vínculos [S]
