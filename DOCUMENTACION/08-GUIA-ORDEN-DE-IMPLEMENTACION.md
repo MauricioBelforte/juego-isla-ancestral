@@ -22,6 +22,7 @@
 | M08 Mundo Voxel | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | V2 | Voxel Tools configurado | Terreno OK, colisión OK, WASD OK, cámara OK, edición E/Q OK | `scripts/world/flat_ground_generator.gd`, `scripts/player/player.gd`, `scripts/main_island.gd` |
 | M11 Personaje del Jugador | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | CharacterBody3D funcional | WASD + gravedad + colision suelo + pivot camara + interaccion E/Q + movimiento relativo a camara | `scripts/player/player.gd` |
 | M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
+| M53 UI/UX | 🔵 En curso | MiMo V2.5 (OpenCode) | F6 | V2 | Infraestructura core UI creada | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/` |
 
 ---
 
@@ -305,7 +306,7 @@ Solo se habilita despues de F4.
 - [ ] M18 Casas usa las reglas de construccion.
 - [ ] M20 Amistad consume eventos de M19.
 - [ ] M22 Historia consume M21 y M28 solo mediante contratos.
-- [ ] M29 Tiempo y Calendario se implementa como servicio puro.
+- [x] M29 Tiempo y Calendario se implementa como servicio puro.
 - [ ] M31 Dia/Noche consume M29 y alimenta M49.
 - [ ] M32 Clima consume seed y dia, sin bloquear progreso.
 - [ ] M38 Economia consume recursos, crafting y amistad.

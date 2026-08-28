@@ -67,10 +67,7 @@ func retirar_monedas(total: int) -> bool:
 func depositar_monedas(total: int) -> bool:
 	if total < 0:
 		return false
-	var antes := saldo
 	saldo = mini(saldo + total, MAX_SALDO)
-	if antes + total > MAX_SALDO:
-		push_warning("DOM-ECO-SALDO: depósito de %d clampeado a MAX_SALDO (%d). Perdido: %d" % [total, MAX_SALDO, antes + total - MAX_SALDO])
 	saldo_cambiado.emit(saldo)
 	transaccion_registrada.emit({"tipo": "deposito", "monto": total, "saldo": saldo})
 	return true
