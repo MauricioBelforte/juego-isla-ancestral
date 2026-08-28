@@ -110,7 +110,7 @@
 - [ ] Definir BarterOffer con oferta_id, pedido y entregado [M]
 - [ ] Definir amistad_minima para desbloqueo por nivel de M20 [M]
 - [ ] Definir temporada para propuestas estacionales [S]
-- [ ] Definir limite_por_dia para prevenir abuso [S]
+- [x] Definir limite_por_dia para prevenir abuso [S] (implementado: limite_ventas_dia por banda de rareza en PriceManager, log 191)
 - [ ] Implementar propuestas_disponibles(npc_id) con filtros de amistad y temporada [M]
 - [ ] Implementar ejecutar_trueque() con intercambio atÃ³mico vÃ­a M14 [C]
 - [ ] Emitir seÃ±ales trueque_exitoso y trueque_rechazado con motivo [M]
@@ -202,3 +202,4 @@
 - [ ] Definir prueba de rendimiento: 5000 transacciones simuladas sin picos [M]
 - [ ] Definir prueba de edge cases: precios cero, inventario lleno, 0 monedas [M]
 - [ ] Marcar testings como pendientes hasta la implementaciÃ³n (se ejecutarÃ¡n segÃºn secciÃ³n 14 de AGENTS.md) [S]
+- [x] Implementar limite_ventas_dia por banda de rareza: comun=3, poco_comun=3, raro=2, epico=1, con resolucion desde catalogo (PriceDefinition.rareza) y fallback al enum ItemData.Rareza [M] (log 191)
