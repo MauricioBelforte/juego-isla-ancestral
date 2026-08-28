@@ -1,54 +1,54 @@
-# MÛdulo 84: M˙sica y Audio ó Legal ó Checklist
+# M√≥dulo 84: M√∫sica y Audio ‚Äî Legal ‚Äî Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:25:00
 
-## A. Estructura Legal de Audio (15 Ìtems)
+## A. Estructura Legal de Audio (15 √≠tems)
 
 - [ ] Definir Resource AudioLicense con todos los campos: audio_name, audio_type, license_type, licensor, license_scope, perpetual, commercial_use, attribution_required, attribution_text, royalty_required, royalty_rate, territory, duration, license_document_path, notes
 - [ ] Definir enum AudioType: ORIGINAL_COMPOSITION, STOCK_LIBRARY, AI_GENERATED, SAMPLE, SOUND_DESIGN, VOICE_ACTING
 - [ ] Definir enum LicenseScope: EXCLUSIVE, NON_EXCLUSIVE, SOLE
 - [ ] Crear Resource AudioCredit con campos: person_name, role, contribution, track_list, contract_reference, payment_status
 - [ ] Documentar diferencias entre Work-for-Hire y License Agreement
-- [ ] Definir regla: composiciones core = Work-for-Hire, DLC = Licencia con regalÌas
+- [ ] Definir regla: composiciones core = Work-for-Hire, DLC = Licencia con regal√≠as
 - [ ] Definir regla: audio de IA siempre con composer humano como autor final
 - [ ] Crear template de contrato Work-for-Hire para compositores
-- [ ] Crear template de contrato de sesiÛn para m˙sicos
+- [ ] Crear template de contrato de sesi√≥n para m√∫sicos
 - [ ] Crear template de contrato para voice actors
-- [ ] Crear template de licencia para librerÌas de stock
+- [ ] Crear template de licencia para librer√≠as de stock
 - [ ] Definir proceso de clearances para muestras musicales
-- [ ] Definir polÌtica de atribuciÛn obligatoria para todos los audios
-- [ ] Crear checklist de verificaciÛn pre-build para audio
+- [ ] Definir pol√≠tica de atribuci√≥n obligatoria para todos los audios
+- [ ] Crear checklist de verificaci√≥n pre-build para audio
 - [ ] Documentar leyes relevantes por territorio (US, EU, LATAM)
 
-## B. Contratos de Compositor (10 Ìtems)
+## B. Contratos de Compositor (10 √≠tems)
 
-- [ ] Template Work-for-Hire con cesiÛn total de PI
-- [ ] Cl·usula de credito obligatorio en todos los builds
-- [ ] Cl·usula de pago upfront (flat fee)
-- [ ] Cl·usula de regalÌas opcionales para secuelas/DLC
-- [ ] Cl·usula de confidencialidad
-- [ ] Cl·usula de garantÌa de originalidad
-- [ ] Cl·usula de release de grabaciÛn
-- [ ] Cl·usula de jurisdiction y ley aplicable
+- [ ] Template Work-for-Hire con cesi√≥n total de PI
+- [ ] Cl√°usula de credito obligatorio en todos los builds
+- [ ] Cl√°usula de pago upfront (flat fee)
+- [ ] Cl√°usula de regal√≠as opcionales para secuelas/DLC
+- [ ] Cl√°usula de confidencialidad
+- [ ] Cl√°usula de garant√≠a de originalidad
+- [ ] Cl√°usula de release de grabaci√≥n
+- [ ] Cl√°usula de jurisdiction y ley aplicable
 - [ ] Template de anexo para especificaciones de entrega
-- [ ] Template de acta de entrega y aceptaciÛn
+- [ ] Template de acta de entrega y aceptaci√≥n
 
-## C. Contratos de Artistas (10 Ìtems)
+## C. Contratos de Artistas (10 √≠tems)
 
-- [ ] Template de contrato de sesiÛn (flat fee)
-- [ ] Cl·usula de credito obligatorio
-- [ ] Cl·usula de release de interpretaciÛn
-- [ ] Cl·usula de pago completo al finalizar
-- [ ] Cl·usula de que no hay regalÌas en juego base
-- [ ] Cl·usula de opciones para DLC (renegociaciÛn)
-- [ ] Cl·usula de confidencialidad
-- [ ] Template de hoja de sesiÛn (session sheet)
+- [ ] Template de contrato de sesi√≥n (flat fee)
+- [ ] Cl√°usula de credito obligatorio
+- [ ] Cl√°usula de release de interpretaci√≥n
+- [ ] Cl√°usula de pago completo al finalizar
+- [ ] Cl√°usula de que no hay regal√≠as en juego base
+- [ ] Cl√°usula de opciones para DLC (renegociaci√≥n)
+- [ ] Cl√°usula de confidencialidad
+- [ ] Template de hoja de sesi√≥n (session sheet)
 - [ ] Template de firma de release
-- [ ] Proceso de verificaciÛn de pagamento
+- [ ] Proceso de verificaci√≥n de pagamento
 
-## D. Licencias de Stock (10 Ìtems)
+## D. Licencias de Stock (10 √≠tems)
 
 - [ ] Verificar perpetual license (no subscription)
 - [ ] Verificar uso comercial permitido
@@ -58,75 +58,75 @@
 - [ ] Verificar si requiere credito en credits del juego
 - [ ] Verificar si hay restriction de territorio
 - [ ] Verificar si hay restriction de plataforma
-- [ ] Crear inventario de todas las librerÌas de stock
-- [ ] Proceso de renovaciÛn/re-verificaciÛn anual
+- [ ] Crear inventario de todas las librer√≠as de stock
+- [ ] Proceso de renovaci√≥n/re-verificaci√≥n anual
 
-## E. CrÈditos de Audio (10 Ìtems)
+## E. Cr√©ditos de Audio (10 √≠tems)
 
 - [ ] Crear AudioLegalManager con validate_all_audio()
 - [ ] Implementar add_license() y add_credit()
 - [ ] Implementar generate_game_credits() (formato compacto)
 - [ ] Implementar generate_web_credits() (formato detallado)
 - [ ] Implementar save_build_credits() para builds
-- [ ] Agrupar crÈditos por rol (Composer, Musician, Sound Designer)
-- [ ] Incluir pistas especÌficas por artista
-- [ ] Referenciar contrato en cada crÈdito
-- [ ] Incluir estado de pago en cada crÈdito
+- [ ] Agrupar cr√©ditos por rol (Composer, Musician, Sound Designer)
+- [ ] Incluir pistas espec√≠ficas por artista
+- [ ] Referenciar contrato en cada cr√©dito
+- [ ] Incluir estado de pago en cada cr√©dito
 - [ ] Generar archivo AUDIO_CREDITS.txt en cada build
 
-## F. Audio Generado por IA (10 Ìtems)
+## F. Audio Generado por IA (10 √≠tems)
 
 - [ ] Definir regla: AI es herramienta, no autor
 - [ ] Definir regla: composer humano es autor final
-- [ ] Requerir disclosure en crÈditos de audio con IA
+- [ ] Requerir disclosure en cr√©ditos de audio con IA
 - [ ] Verificar que la herramienta de IA permita uso comercial
-- [ ] Documentar quÈ herramientas de IA se usaron
-- [ ] Guardar logs de generaciÛn de audio por IA
+- [ ] Documentar qu√© herramientas de IA se usaron
+- [ ] Guardar logs de generaci√≥n de audio por IA
 - [ ] Validar que audio de IA no infrinja copyrights existentes
 - [ ] Definir proceso de review humano para audio de IA
-- [ ] Incluir advertencia en crÈditos: "Incluye elementos generados por IA"
+- [ ] Incluir advertencia en cr√©ditos: "Incluye elementos generados por IA"
 - [ ] Verificar compatibilidad con ESRB/PEGI (sin contenido ofensivo)
 
-## G. ValidaciÛn y Testing (10 Ìtems)
+## G. Validaci√≥n y Testing (10 √≠tems)
 
 - [ ] Test de AudioLicenseValidator con licencia completa
 - [ ] Test de AudioLicenseValidator con licencia sin attribution
 - [ ] Test de AudioLicenseValidator con licencia no-perpetual
-- [ ] Test de AudioLegalManager con inventario vacÌo
+- [ ] Test de AudioLegalManager con inventario vac√≠o
 - [ ] Test de AudioLegalManager con inventario completo
-- [ ] Test de generaciÛn de crÈditos compactos
-- [ ] Test de generaciÛn de crÈditos web
-- [ ] Test de verificaciÛn de uso comercial
-- [ ] Test de edge case: artista con m˙ltiples roles
-- [ ] Test de edge case: audio con m˙ltiples licencias
+- [ ] Test de generaci√≥n de cr√©ditos compactos
+- [ ] Test de generaci√≥n de cr√©ditos web
+- [ ] Test de verificaci√≥n de uso comercial
+- [ ] Test de edge case: artista con m√∫ltiples roles
+- [ ] Test de edge case: audio con m√∫ltiples licencias
 
-## H. IntegraciÛn con Build Pipeline (10 Ìtems)
+## H. Integraci√≥n con Build Pipeline (10 √≠tems)
 
-- [ ] Agregar paso de validaciÛn de audio en build_script.gd
-- [ ] Build falla si hay licencia de audio inv·lida
-- [ ] Build incluye AUDIO_CREDITS.txt autom·ticamente
-- [ ] IntegraciÛn con M117 (Build Pipeline)
-- [ ] IntegraciÛn con M83 (Licencias de Software)
-- [ ] Logging de validaciÛn de audio en build log
+- [ ] Agregar paso de validaci√≥n de audio en build_script.gd
+- [ ] Build falla si hay licencia de audio inv√°lida
+- [ ] Build incluye AUDIO_CREDITS.txt autom√°ticamente
+- [ ] Integraci√≥n con M117 (Build Pipeline)
+- [ ] Integraci√≥n con M83 (Licencias de Software)
+- [ ] Logging de validaci√≥n de audio en build log
 - [ ] Modo dry-run para verificar sin generar outputs
-- [ ] Skip de validaciÛn en builds de desarrollo
+- [ ] Skip de validaci√≥n en builds de desarrollo
 - [ ] Verificar que todos los audios del build tengan licencia
 - [ ] Generar reporte de licencias de audio por build
 
-## I. DocumentaciÛn y Mantenimiento (15 Ìtems)
+## I. Documentaci√≥n y Mantenimiento (15 √≠tems)
 
-- [ ] Documentar cada funciÛn p˙blica con XML docs
-- [ ] Crear guÌa de uso para el equipo de audio
-- [ ] Documentar cÛmo registrar nuevas licencias
-- [ ] Documentar cÛmo agregar nuevos crÈditos
+- [ ] Documentar cada funci√≥n p√∫blica con XML docs
+- [ ] Crear gu√≠a de uso para el equipo de audio
+- [ ] Documentar c√≥mo registrar nuevas licencias
+- [ ] Documentar c√≥mo agregar nuevos cr√©ditos
 - [ ] Crear FAQ de licencias de audio en juegos
-- [ ] Tabla de comparaciÛn de tipos de licencia
+- [ ] Tabla de comparaci√≥n de tipos de licencia
 - [ ] Ejemplos de uso de cada nodo
-- [ ] Proceso de auditorÌa de licencias pre-launch
+- [ ] Proceso de auditor√≠a de licencias pre-launch
 - [ ] Contacto de abogado especializado en entertainment law
-- [ ] Registro de cambios del mÛdulo
-- [ ] Proceso de actualizaciÛn de crÈditos
+- [ ] Registro de cambios del m√≥dulo
+- [ ] Proceso de actualizaci√≥n de cr√©ditos
 - [ ] Template de email para solicitar clearances
 - [ ] Checklist pre-release de audio legal
 - [ ] Proceso de handling de claims de copyright
-- [ ] Documentar casos de uso edge (audio de dominio p˙blico)
+- [ ] Documentar casos de uso edge (audio de dominio p√∫blico)

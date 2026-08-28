@@ -1,119 +1,119 @@
-# Módulo 128: Identidad de Marca — Checklist
+# MÃ³dulo 128: Identidad de Marca â€” Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:29:00
 
-## A. Nombre y Trademark (10 ítems)
+## A. Nombre y Trademark (10 Ã­tems)
 
 - [ ] Verificar disponibilidad del nombre "Isla Ancestral" como trademark
-- [ ] Registrar trademark en EE.UU. (USPTO) — clase 9 (software)
-- [ ] Registrar trademark en UE (EUIPO) — clase 9
-- [ ] Registrar trademark en España (OEPM) — clase 9
+- [ ] Registrar trademark en EE.UU. (USPTO) â€” clase 9 (software)
+- [ ] Registrar trademark en UE (EUIPO) â€” clase 9
+- [ ] Registrar trademark en EspaÃ±a (OEPM) â€” clase 9
 - [ ] Verificar disponibilidad de dominio web (islaancestral.com)
 - [ ] Registrar redes sociales con nombre consistente
 - [ ] Documentar proceso de registro de trademark
-- [ ] Definir política de cease & desist
+- [ ] Definir polÃ­tica de cease & desist
 - [ ] Crear alertas de monitoreo de trademark
 - [ ] Documentar territorios registrados y pendientes
 
-## B. Logo (15 ítems)
+## B. Logo (15 Ã­tems)
 
-- [ ] Diseñar logo principal del juego
+- [ ] DiseÃ±ar logo principal del juego
 - [ ] Crear variante mono (B/N) del logo
 - [ ] Crear variante icono (app icon) 512x512
 - [ ] Crear variante horizontal para headers
 - [ ] Crear variante vertical para merchandise
-- [ ] Definir espacio libre (clear space) mínimo
-- [ ] Definir tamaño mínimo (32px digital, 10mm impresión)
+- [ ] Definir espacio libre (clear space) mÃ­nimo
+- [ ] Definir tamaÃ±o mÃ­nimo (32px digital, 10mm impresiÃ³n)
 - [ ] Documentar usos permitidos del logo
 - [ ] Documentar usos PROHIBIDOS del logo
 - [ ] Exportar en formatos: PNG, SVG, AI
 - [ ] Crear versiones para fondo claro y oscuro
-- [ ] Test de legibilidad en tamaños pequeños
-- [ ] Test de impresión en merchandise
+- [ ] Test de legibilidad en tamaÃ±os pequeÃ±os
+- [ ] Test de impresiÃ³n en merchandise
 - [ ] Aprobar logo final con equipo
 - [ ] Distribuir logo a partners y prensa
 
-## C. Paleta de Colores (10 ítems)
+## C. Paleta de Colores (10 Ã­tems)
 
 - [ ] Definir color primario (Azul Bosque #2E5A4C)
 - [ ] Definir color secundario (Dorado Anciano #D4A843)
 - [ ] Definir color de acento (Blanco Perla #F5F0E8)
-- [ ] Definir neutros (Carbón, Gris Piedra, Crema)
+- [ ] Definir neutros (CarbÃ³n, Gris Piedra, Crema)
 - [ ] Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)
 - [ ] Verificar contraste WCAG AA para cada par de colores
 - [ ] Crear paleta en formato ASE/CLR
 - [ ] Documentar RGB, CMYK y HEX de cada color
 - [ ] Crear variaciones para modo oscuro
-- [ ] Distribuir paleta al equipo de diseño
+- [ ] Distribuir paleta al equipo de diseÃ±o
 
-## D. Tipografía (10 ítems)
+## D. TipografÃ­a (10 Ã­tems)
 
-- [ ] Seleccionar fuente principal (títulos)
+- [ ] Seleccionar fuente principal (tÃ­tulos)
 - [ ] Seleccionar fuente secundaria (cuerpo)
-- [ ] Seleccionar fuente monospace (código/datos)
+- [ ] Seleccionar fuente monospace (cÃ³digo/datos)
 - [ ] Verificar licencias de cada fuente
-- [ ] Definir jerarquía de tamaños (H1-H6, body, caption)
+- [ ] Definir jerarquÃ­a de tamaÃ±os (H1-H6, body, caption)
 - [ ] Definir pesos (regular, bold, light)
-- [ ] Crear muestras de tipografía
+- [ ] Crear muestras de tipografÃ­a
 - [ ] Documentar uso en interfaces
 - [ ] Distribuir fuentes al equipo
 - [ ] Verificar que fuentes son incluidas en builds
 
-## E. Manual de Marca (10 ítems)
+## E. Manual de Marca (10 Ã­tems)
 
 - [ ] Crear estructura del manual (10 secciones)
-- [ ] Redactar introducción y propósito
+- [ ] Redactar introducciÃ³n y propÃ³sito
 - [ ] Documentar identidad de marca (nombre, tagline, valores)
 - [ ] Documentar reglas de logo (variantes, clear space, usos)
 - [ ] Documentar paleta de colores completa
-- [ ] Documentar tipografía y jerarquía
-- [ ] Documentar iconografía y fotografía
+- [ ] Documentar tipografÃ­a y jerarquÃ­a
+- [ ] Documentar iconografÃ­a y fotografÃ­a
 - [ ] Documentar uso en redes sociales
 - [ ] Documentar restricciones de merchandise
-- [ ] Incluir contacto para aprobación de uso
+- [ ] Incluir contacto para aprobaciÃ³n de uso
 
-## F. Presencia Online (10 ítems)
+## F. Presencia Online (10 Ã­tems)
 
 - [ ] Registrar dominio islaancestral.com
-- [ ] Crear sitio web con información del juego
+- [ ] Crear sitio web con informaciÃ³n del juego
 - [ ] Crear perfiles en redes sociales principales
 - [ ] Usar logo y paleta coherentes en toda la web
 - [ ] Crear kit de prensa con assets de marca
 - [ ] Documentar guidelines para redes sociales
 - [ ] Crear plantillas de posts con marca
-- [ ] Definir tono de comunicación
+- [ ] Definir tono de comunicaciÃ³n
 - [ ] Crear email corporativo (press@islaancestral.com)
 - [ ] Monitorear menciones de la marca
 
-## G. Merchandise (10 ítems)
+## G. Merchandise (10 Ã­tems)
 
-- [ ] Definir qué productos de merchandise se permiten
-- [ ] Documentar logo mínimo para impresión
+- [ ] Definir quÃ© productos de merchandise se permiten
+- [ ] Documentar logo mÃ­nimo para impresiÃ³n
 - [ ] Crear template para proveedores de merchandise
-- [ ] Definir proceso de aprobación de diseños
+- [ ] Definir proceso de aprobaciÃ³n de diseÃ±os
 - [ ] Documentar restricciones de calidad
-- [ ] Definir estándares de calidad para merchandise (textil, cerámica, papel)
-- [ ] Crear guía de colores para impresión (CMYK vs. RGB)
-- [ ] Documentar process de muestreo antes de producción
-- [ ] Definir proveedores aprobados por región
+- [ ] Definir estÃ¡ndares de calidad para merchandise (textil, cerÃ¡mica, papel)
+- [ ] Crear guÃ­a de colores para impresiÃ³n (CMYK vs. RGB)
+- [ ] Documentar process de muestreo antes de producciÃ³n
+- [ ] Definir proveedores aprobados por regiÃ³n
 - [ ] Crear checklist de QA para merchandise recibido
 
-## H. Validación y Testing (10 ítems)
+## H. ValidaciÃ³n y Testing (10 Ã­tems)
 
 - [ ] Crear BrandConfig.gd con colores oficiales
 - [ ] Crear BrandValidator.gd para validar coherencia
 - [ ] Test de contraste WCAG AA para todos los pares de colores
-- [ ] Test de logo en tamaños mínimos
-- [ ] Test de legibilidad de tipografía
+- [ ] Test de logo en tamaÃ±os mÃ­nimos
+- [ ] Test de legibilidad de tipografÃ­a
 - [ ] Validar que UI del juego usa paleta de marca
 - [ ] Validar que builds incluyen fuentes correctas
-- [ ] Test de impresión de logo en merchandise
-- [ ] Auditoría visual pre-lanzamiento
+- [ ] Test de impresiÃ³n de logo en merchandise
+- [ ] AuditorÃ­a visual pre-lanzamiento
 - [ ] Documentar hallazgos y correcciones
 
-## I. Distribución y Mantenimiento (10 ítems)
+## I. DistribuciÃ³n y Mantenimiento (10 Ã­tems)
 
 - [ ] Crear brand/ con todos los assets
 - [ ] Crear manual-de-marca.pdf
@@ -121,15 +121,15 @@
 - [ ] Distribuir manual a todos los socios
 - [ ] Actualizar manual cuando cambien elementos
 - [ ] Mantener backups de assets de marca
-- [ ] Registrar fecha de última actualización
-- [ ] Definir quién puede aprobar cambios de marca
+- [ ] Registrar fecha de Ãºltima actualizaciÃ³n
+- [ ] Definir quiÃ©n puede aprobar cambios de marca
 - [ ] Crear changelog del manual de marca
 - [ ] Documentar proceso para nuevos partners
 
-## J. Coherencia con Otros Módulos (5 ítems)
+## J. Coherencia con Otros MÃ³dulos (5 Ã­tems)
 
 - [ ] Verificar que M97 (Steam Store Page) usa identidad de marca correcta
 - [ ] Verificar que M98 (Trailer) usa logo y colores de marca
 - [ ] Verificar que M99 (Marketing) sigue manual de marca
-- [ ] Verificar que M53 (UI/UX) usa paleta y tipografía de marca
-- [ ] Verificar que M131 (Créditos) usa formato de marca
+- [ ] Verificar que M53 (UI/UX) usa paleta y tipografÃ­a de marca
+- [ ] Verificar que M131 (CrÃ©ditos) usa formato de marca

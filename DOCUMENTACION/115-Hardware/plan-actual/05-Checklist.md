@@ -1,14 +1,14 @@
-# MÛdulo 115: Hardware ó Checklist
+# M√≥dulo 115: Hardware ‚Äî Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:27:00
 
-## A. Requisitos de Hardware (10 Ìtems)
+## A. Requisitos de Hardware (10 √≠tems)
 
-- [ ] Documentar requisitos mÌnimos de CPU (cores, frecuencia)
-- [ ] Documentar requisitos mÌnimos de RAM
-- [ ] Documentar requisitos mÌnimos de GPU (VRAM, modelo)
+- [ ] Documentar requisitos m√≠nimos de CPU (cores, frecuencia)
+- [ ] Documentar requisitos m√≠nimos de RAM
+- [ ] Documentar requisitos m√≠nimos de GPU (VRAM, modelo)
 - [ ] Documentar requisitos recomendados de CPU
 - [ ] Documentar requisitos recomendados de RAM
 - [ ] Documentar requisitos recomendados de GPU
@@ -17,25 +17,25 @@
 - [ ] Documentar espacio en disco requerido
 - [ ] Crear tabla comparativa de requisitos por plataforma
 
-## B. DetecciÛn de Hardware (15 Ìtems)
+## B. Detecci√≥n de Hardware (15 √≠tems)
 
 - [ ] Crear Resource HardwareProfile con campos: cpu_cores, cpu_name, cpu_freq_ghz, gpu_name, gpu_vram_mb, ram_mb, os_name, os_version, quality_preset, detected_at
 - [ ] Implementar HardwareDetector.detect() que retorna perfil completo
 - [ ] Detectar CPU: cores, nombre, frecuencia estimada
 - [ ] Detectar GPU: nombre, VRAM usando RenderingServer
 - [ ] Detectar RAM total usando OS.get_memory_info()
-- [ ] Detectar OS: nombre y versiÛn
+- [ ] Detectar OS: nombre y versi√≥n
 - [ ] Detectar dispositivos de entrada conectados
 - [ ] Implementar get_input_devices() para listar gamepads
 - [ ] Guardar perfil detectado en user://hardware_profile.tres
 - [ ] Cargar perfil guardado al inicio
-- [ ] Detectar si el hardware cambiÛ entre sesiones
-- [ ] Fallback a perfil conservador si detecciÛn falla
+- [ ] Detectar si el hardware cambi√≥ entre sesiones
+- [ ] Fallback a perfil conservador si detecci√≥n falla
 - [ ] Logging de hardware detectado
 - [ ] Implementar _estimate_cpu_freq() basado en cores
-- [ ] Soporte para m˙ltiples GPUs (laptops hybrid)
+- [ ] Soporte para m√∫ltiples GPUs (laptops hybrid)
 
-## C. SelecciÛn de Preset (10 Ìtems)
+## C. Selecci√≥n de Preset (10 √≠tems)
 
 - [ ] Definir enum QualityPreset: VERY_LOW, LOW, MEDIUM, HIGH, ULTRA
 - [ ] Implementar QualityPresetSelector.select_preset()
@@ -48,7 +48,7 @@
 - [ ] Guardar preset seleccionado en user://quality_settings.tres
 - [ ] Permitir override manual del jugador
 
-## D. AplicaciÛn de Calidad (15 Ìtems)
+## D. Aplicaci√≥n de Calidad (15 √≠tems)
 
 - [ ] Crear Resource QualitySettings con campos: preset, render_scale, shadow_quality, ssao, ssr, lod_bias, max_fps, vsync, texture_quality, antialiasing, volumetric_fog, grass_distance
 - [ ] Implementar QualityApplier.apply_preset()
@@ -58,7 +58,7 @@
 - [ ] High: render_scale 1.0, shadows high, 60 FPS target
 - [ ] Ultra: render_scale 1.0, shadows ultra, 120 FPS target
 - [ ] Aplicar render scale al viewport
-- [ ] Aplicar configuraciÛn de sombras
+- [ ] Aplicar configuraci√≥n de sombras
 - [ ] Aplicar SSAO on/off
 - [ ] Aplicar SSR on/off
 - [ ] Aplicar V-Sync
@@ -66,67 +66,67 @@
 - [ ] Aplicar texture quality
 - [ ] Aplicar antialiasing (None/FXAA/MSAA2/MSAA4)
 
-## E. GestiÛn Principal (10 Ìtems)
+## E. Gesti√≥n Principal (10 √≠tems)
 
 - [ ] Crear HardwareManager como autoload principal
-- [ ] Inicializar detecciÛn en _ready()
+- [ ] Inicializar detecci√≥n en _ready()
 - [ ] Cargar perfil guardado si existe
-- [ ] Seleccionar preset autom·ticamente
+- [ ] Seleccionar preset autom√°ticamente
 - [ ] Aplicar preset al motor
-- [ ] Guardar perfil despuÈs de cambio
+- [ ] Guardar perfil despu√©s de cambio
 - [ ] Implementar set_preset() para cambio manual
 - [ ] Implementar get_current_preset()
-- [ ] Emitir seÒal cuando el preset cambia
+- [ ] Emitir se√±al cuando el preset cambia
 - [ ] Soporte para cambio de preset en runtime (con reinicio)
 
-## F. Dispositivos de Entrada (10 Ìtems)
+## F. Dispositivos de Entrada (10 √≠tems)
 
 - [ ] Detectar teclado y mouse (siempre disponibles)
 - [ ] Detectar Xbox Controller (XInput)
 - [ ] Detectar PlayStation Controller (DualShock/DualSense)
 - [ ] Detectar Switch Pro Controller
-- [ ] Mapear botones genÈricamente (A/B/X/Y)
+- [ ] Mapear botones gen√©ricamente (A/B/X/Y)
 - [ ] Mostrar prompts correctos por dispositivo detectado
 - [ ] Guardar mapeo personalizado del jugador
 - [ ] Soporte para remapeo de botones
-- [ ] DetecciÛn de hot-plug (conectar/desconectar gamepad)
+- [ ] Detecci√≥n de hot-plug (conectar/desconectar gamepad)
 - [ ] Fallback a teclado si no hay gamepad
 
-## G. Testing (10 Ìtems)
+## G. Testing (10 √≠tems)
 
-- [ ] Test de detecciÛn con perfil de hardware mock
-- [ ] Test de selecciÛn de preset para cada categorÌa
-- [ ] Test de aplicaciÛn de Very Low settings
-- [ ] Test de aplicaciÛn de Ultra settings
+- [ ] Test de detecci√≥n con perfil de hardware mock
+- [ ] Test de selecci√≥n de preset para cada categor√≠a
+- [ ] Test de aplicaci√≥n de Very Low settings
+- [ ] Test de aplicaci√≥n de Ultra settings
 - [ ] Test de guardado y carga de perfil
 - [ ] Test de cambio de preset en runtime
-- [ ] Test de detecciÛn de gamepad
+- [ ] Test de detecci√≥n de gamepad
 - [ ] Test de mapeo de botones
 - [ ] Test de hot-plug de gamepad
-- [ ] Test de fallback cuando detecciÛn falla
+- [ ] Test de fallback cuando detecci√≥n falla
 
-## H. IntegraciÛn con Build Pipeline (10 Ìtems)
+## H. Integraci√≥n con Build Pipeline (10 √≠tems)
 
 - [ ] HardwareManager como autoload en project.godot
 - [ ] Perfiles de calidad incluidos en build
-- [ ] DetecciÛn funciona en todos los OS soportados
+- [ ] Detecci√≥n funciona en todos los OS soportados
 - [ ] Logging de hardware en build log
-- [ ] IntegraciÛn con M90 (ConfiguraciÛn Gr·fica)
-- [ ] IntegraciÛn con M61 (Rendimiento)
-- [ ] IntegraciÛn con M57 (Interfaz de Control)
-- [ ] IntegraciÛn con M72 (ValidaciÛn de Builds)
-- [ ] Soporte para Steam Deck (optimizaciÛn especÌfica)
+- [ ] Integraci√≥n con M90 (Configuraci√≥n Gr√°fica)
+- [ ] Integraci√≥n con M61 (Rendimiento)
+- [ ] Integraci√≥n con M57 (Interfaz de Control)
+- [ ] Integraci√≥n con M72 (Validaci√≥n de Builds)
+- [ ] Soporte para Steam Deck (optimizaci√≥n espec√≠fica)
 - [ ] Documentar hardware no soportado
 
-## I. DocumentaciÛn (10 Ìtems)
+## I. Documentaci√≥n (10 √≠tems)
 
-- [ ] Documentar cada funciÛn p˙blica con XML docs
-- [ ] Crear guÌa de uso para el jugador
-- [ ] Documentar cÛmo funciona la detecciÛn autom·tica
-- [ ] Documentar cÛmo cambiar calidad manualmente
-- [ ] Tabla de requisitos de hardware para la p·gina de Steam
+- [ ] Documentar cada funci√≥n p√∫blica con XML docs
+- [ ] Crear gu√≠a de uso para el jugador
+- [ ] Documentar c√≥mo funciona la detecci√≥n autom√°tica
+- [ ] Documentar c√≥mo cambiar calidad manualmente
+- [ ] Tabla de requisitos de hardware para la p√°gina de Steam
 - [ ] FAQ de problemas de hardware comunes
 - [ ] Documentar soporte de gamepads
-- [ ] Registro de cambios del mÛdulo
+- [ ] Registro de cambios del m√≥dulo
 - [ ] Proceso de testing en hardware diverso
-- [ ] Contacto de soporte tÈcnico para issues de hardware
+- [ ] Contacto de soporte t√©cnico para issues de hardware

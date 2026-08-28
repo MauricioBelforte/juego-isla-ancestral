@@ -19,6 +19,9 @@ signal transaccion_registrada(tx: Dictionary)
 ## Saldo inicial cozy: el jugador nunca arranca en bancarrota
 const SALDO_INICIAL: int = 100
 
+## Tope de saldo (anti-overflow y anti-grind extremo). Diseño M38 §2.
+const MAX_SALDO: int = 999999
+
 var saldo: int = SALDO_INICIAL
 var precios: RefCounted = null  # PriceManager (vía preload, sin race de autoloads)
 
@@ -64,7 +67,10 @@ func retirar_monedas(total: int) -> bool:
 func depositar_monedas(total: int) -> bool:
 	if total < 0:
 		return false
-	saldo += total
+	var antes := saldo
+	saldo = mini(saldo + total, MAX_SALDO)
+	if antes + total > MAX_SALDO:
+		push_warning("DOM-ECO-SALDO: depósito de %d clampeado a MAX_SALDO (%d). Perdido: %d" % [total, MAX_SALDO, antes + total - MAX_SALDO])
 	saldo_cambiado.emit(saldo)
 	transaccion_registrada.emit({"tipo": "deposito", "monto": total, "saldo": saldo})
 	return true
@@ -85,7 +91,7 @@ func get_save_data() -> Dictionary:
 	return d
 
 func restore_save_data(data: Dictionary) -> void:
-	saldo = maxi(0, int(data.get("saldo", SALDO_INICIAL)))
+	saldo = clampi(int(data.get("saldo", SALDO_INICIAL)), 0, MAX_SALDO)
 	if precios != null and data.has("precios") and typeof(data["precios"]) == TYPE_DICTIONARY:
 		precios.deserializar(data["precios"])
 	saldo_cambiado.emit(saldo)

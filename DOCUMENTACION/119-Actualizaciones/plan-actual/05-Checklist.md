@@ -1,135 +1,135 @@
-# Módulo 119: Actualizaciones — Checklist
+# MÃ³dulo 119: Actualizaciones â€” Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:28:00
 
-## A. Estrategia de Actualizaciones (10 ítems)
+## A. Estrategia de Actualizaciones (10 Ã­tems)
 
-- [ ] Definir tipos de actualizaciones: parche crítico, menor, mayor, DLC, free update
+- [ ] Definir tipos de actualizaciones: parche crÃ­tico, menor, mayor, DLC, free update
 - [ ] Establecer frecuencia de actualizaciones por tipo
-- [ ] Definir proceso de QA para cada tipo de actualización
-- [ ] Documentar estrategia de comunicación a jugadores
-- [ ] Definir política de actualizaciones forzadas (solo seguridad)
-- [ ] Crear roadmap público de actualizaciones
-- [ ] Definir proceso de hotfix para bugs críticos
-- [ ] Establecer SLA de respuesta para bugs críticos
-- [ ] Documentar proceso de certificación en consolas
+- [ ] Definir proceso de QA para cada tipo de actualizaciÃ³n
+- [ ] Documentar estrategia de comunicaciÃ³n a jugadores
+- [ ] Definir polÃ­tica de actualizaciones forzadas (solo seguridad)
+- [ ] Crear roadmap pÃºblico de actualizaciones
+- [ ] Definir proceso de hotfix para bugs crÃ­ticos
+- [ ] Establecer SLA de respuesta para bugs crÃ­ticos
+- [ ] Documentar proceso de certificaciÃ³n en consolas
 - [ ] Definir estrategia de beta testing para updates mayores
 
-## B. Versionado (10 ítems)
+## B. Versionado (10 Ã­tems)
 
-- [ ] Adoptar Semver para código interno (MAJOR.MINOR.PATCH)
-- [ ] Adoptar Calver para comunicación pública (YYYY.MM.DD)
+- [ ] Adoptar Semver para cÃ³digo interno (MAJOR.MINOR.PATCH)
+- [ ] Adoptar Calver para comunicaciÃ³n pÃºblica (YYYY.MM.DD)
 - [ ] Crear Resource GameVersion con campos: major, minor, patch, build, date
-- [ ] Implementar to_string() para mostrar versión
+- [ ] Implementar to_string() para mostrar versiÃ³n
 - [ ] Implementar is_newer_than() para comparar versiones
 - [ ] Implementar is_same_major_minor() para compatibilidad
-- [ ] Guardar versión actual en user://version.tres
-- [ ] Actualizar versión en cada build
-- [ ] Mostrar versión en menú principal
-- [ ] Log de versión en cada inicio del juego
+- [ ] Guardar versiÃ³n actual en user://version.tres
+- [ ] Actualizar versiÃ³n en cada build
+- [ ] Mostrar versiÃ³n en menÃº principal
+- [ ] Log de versiÃ³n en cada inicio del juego
 
-## C. Detección de Actualizaciones (10 ítems)
+## C. DetecciÃ³n de Actualizaciones (10 Ã­tems)
 
 - [ ] Crear UpdateChecker con check_latest()
-- [ ] Implementar verificación vía Steamworks API
-- [ ] Implementar verificación vía GOG Galaxy API
-- [ ] Implementar verificación vía HTTP para plataformas manuales
-- [ ] Cache de última verificación (no spam)
-- [ ] Intervalo configurable de verificación (ej: 24h)
-- [ ] Verificación manual desde settings
-- [ ] Logging de resultados de verificación
-- [ ] Manejo de errores de red (sin conexión, timeout)
+- [ ] Implementar verificaciÃ³n vÃ­a Steamworks API
+- [ ] Implementar verificaciÃ³n vÃ­a GOG Galaxy API
+- [ ] Implementar verificaciÃ³n vÃ­a HTTP para plataformas manuales
+- [ ] Cache de Ãºltima verificaciÃ³n (no spam)
+- [ ] Intervalo configurable de verificaciÃ³n (ej: 24h)
+- [ ] VerificaciÃ³n manual desde settings
+- [ ] Logging de resultados de verificaciÃ³n
+- [ ] Manejo de errores de red (sin conexiÃ³n, timeout)
 - [ ] Fallback si la API no responde
 
-## D. Descarga e Instalación (10 ítems)
+## D. Descarga e InstalaciÃ³n (10 Ã­tems)
 
 - [ ] Crear UpdateDownloader con download()
 - [ ] Descarga incremental (solo cambios, no todo el juego)
 - [ ] Barra de progreso de descarga
 - [ ] Soporte para resume de descarga
-- [ ] Verificación de integridad post-descarga (SHA-256)
+- [ ] VerificaciÃ³n de integridad post-descarga (SHA-256)
 - [ ] Almacenamiento temporal de update
 - [ ] Manejo de errores de red durante descarga
-- [ ] Cancelación de descarga por el usuario
-- [ ] Notificación de espacio insuficiente
+- [ ] CancelaciÃ³n de descarga por el usuario
+- [ ] NotificaciÃ³n de espacio insuficiente
 - [ ] Logging de descargas
 
-## E. Compatibilidad de Saves (10 ítems)
+## E. Compatibilidad de Saves (10 Ã­tems)
 
 - [ ] Crear SaveMigrator con migrate_save()
 - [ ] Definir SaveMigration Resource con versiones y script
-- [ ] Backup automático antes de migrar
-- [ ] Migración secuencial (v1 ? v2 ? v3, no saltos)
-- [ ] Verificación de integridad post-migración
-- [ ] Rollback de save si migración falla
-- [ ] Array de migraciones ordenado por versión
-- [ ] Script de migración testeable
-- [ ] Logging de cada paso de migración
-- [ ] Notificación al jugador si save fue migrado
+- [ ] Backup automÃ¡tico antes de migrar
+- [ ] MigraciÃ³n secuencial (v1 ? v2 ? v3, no saltos)
+- [ ] VerificaciÃ³n de integridad post-migraciÃ³n
+- [ ] Rollback de save si migraciÃ³n falla
+- [ ] Array de migraciones ordenado por versiÃ³n
+- [ ] Script de migraciÃ³n testeable
+- [ ] Logging de cada paso de migraciÃ³n
+- [ ] NotificaciÃ³n al jugador si save fue migrado
 
-## F. Notificación al Jugador (10 ítems)
+## F. NotificaciÃ³n al Jugador (10 Ã­tems)
 
-- [ ] Popup en menú principal cuando hay update disponible
-- [ ] Mostrar changelog de la actualización
-- [ ] Opción de "Actualizar ahora" / "Actualizar después"
-- [ ] Opción de "No volver a preguntar" para esta versión
-- [ ] Notificación en settings de updates disponibles
-- [ ] Badge de actualización en menú principal
-- [ ] Recordatorio periódico si el jugador rechaza
-- [ ] Forzar update si es de seguridad crítica
-- [ ] Notificación post-update de cambios realizados
-- [ ] Link a página de changelog online
+- [ ] Popup en menÃº principal cuando hay update disponible
+- [ ] Mostrar changelog de la actualizaciÃ³n
+- [ ] OpciÃ³n de "Actualizar ahora" / "Actualizar despuÃ©s"
+- [ ] OpciÃ³n de "No volver a preguntar" para esta versiÃ³n
+- [ ] NotificaciÃ³n en settings de updates disponibles
+- [ ] Badge de actualizaciÃ³n en menÃº principal
+- [ ] Recordatorio periÃ³dico si el jugador rechaza
+- [ ] Forzar update si es de seguridad crÃ­tica
+- [ ] NotificaciÃ³n post-update de cambios realizados
+- [ ] Link a pÃ¡gina de changelog online
 
-## G. Rollback (10 ítems)
+## G. Rollback (10 Ã­tems)
 
 - [ ] Crear RollbackManager con restore_previous_version()
-- [ ] Mantener versión anterior accesible
+- [ ] Mantener versiÃ³n anterior accesible
 - [ ] Restaurar save desde backup
 - [ ] Verificar integridad post-rollback
 - [ ] Notificar al jugador del rollback
 - [ ] Logging de rollback
-- [ ] Rollback automático si update falla
+- [ ] Rollback automÃ¡tico si update falla
 - [ ] Rollback manual desde settings
 - [ ] Mantener historial de versiones anteriores
 - [ ] Test de rollback antes de cada release
 
-## H. Integración con Plataformas (15 ítems)
+## H. IntegraciÃ³n con Plataformas (15 Ã­tems)
 
-- [ ] Integración con Steam: SteamApp.UpdateAvailable()
-- [ ] Integración con GOG: Galaxy.UpdateAvailable()
-- [ ] Integración manual: HTTP GET a URL de versión
+- [ ] IntegraciÃ³n con Steam: SteamApp.UpdateAvailable()
+- [ ] IntegraciÃ³n con GOG: Galaxy.UpdateAvailable()
+- [ ] IntegraciÃ³n manual: HTTP GET a URL de versiÃ³n
 - [ ] Soporte para auto-update de Steam
 - [ ] Soporte para auto-update de GOG
 - [ ] Soporte para actualizaciones manuales (itch.io)
-- [ ] Certificación de updates en consolas
+- [ ] CertificaciÃ³n de updates en consolas
 - [ ] Soporte para actualizaciones delta (diferenciales)
 - [ ] Soporte para actualizaciones de contenido (DLC)
 - [ ] Compatibilidad con versiones anteriores de saves
 - [ ] Verificar que updates no rompen logros existentes
-- [ ] Verificar que updates mantienen configuración del jugador
-- [ ] Documentar proceso de certificación por consola (Switch, PS, Xbox)
-- [ ] Soporte para actualizaciones diferidas (región × plataforma)
-- [ ] Integración con M96 (Plataformas) para matrix de compatibilidad
+- [ ] Verificar que updates mantienen configuraciÃ³n del jugador
+- [ ] Documentar proceso de certificaciÃ³n por consola (Switch, PS, Xbox)
+- [ ] Soporte para actualizaciones diferidas (regiÃ³n Ã— plataforma)
+- [ ] IntegraciÃ³n con M96 (Plataformas) para matrix de compatibilidad
 
-## I. Testing y Documentación (10 ítems)
+## I. Testing y DocumentaciÃ³n (10 Ã­tems)
 
-- [ ] Test de detección de actualizaciones
-- [ ] Test de descarga e instalación
-- [ ] Test de migración de saves
+- [ ] Test de detecciÃ³n de actualizaciones
+- [ ] Test de descarga e instalaciÃ³n
+- [ ] Test de migraciÃ³n de saves
 - [ ] Test de rollback
 - [ ] Test de compatibilidad entre versiones
-- [ ] Test de notificación al jugador
+- [ ] Test de notificaciÃ³n al jugador
 - [ ] Test de manejo de errores de red
 - [ ] Documentar proceso de release de updates
 - [ ] FAQ de actualizaciones para jugadores
-- [ ] Registro de cambios del módulo
+- [ ] Registro de cambios del mÃ³dulo
 
-## J. Seguridad y Integridad (5 ítems)
+## J. Seguridad y Integridad (5 Ã­tems)
 
 - [ ] Verificar firmas digitales de actualizaciones
 - [ ] Detectar actualizaciones corruptas o manipuladas
-- [ ] Verificar hash SHA-256 de cada paquete de actualización
-- [ ] Bloquear actualizaciones sin firma válida
-- [ ] Logging de intentos de actualización inválidos
+- [ ] Verificar hash SHA-256 de cada paquete de actualizaciÃ³n
+- [ ] Bloquear actualizaciones sin firma vÃ¡lida
+- [ ] Logging de intentos de actualizaciÃ³n invÃ¡lidos

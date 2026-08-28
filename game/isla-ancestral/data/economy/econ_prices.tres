@@ -1,0 +1,126 @@
+[gd_resource type="Resource" script_class="EconomyPriceCatalog" format=3]
+
+[ext_resource type="Script" path="res://scripts/economia/price_definition.gd" id="1_0bb7j"]
+[ext_resource type="Script" path="res://scripts/economia/economy_price_catalog.gd" id="2_en4hq"]
+
+[sub_resource type="Resource" id="Resource_4pjow"]
+script = ExtResource("1_0bb7j")
+item_id = "wood"
+precio_compra = 80
+precio_venta = 30
+
+[sub_resource type="Resource" id="Resource_uj73i"]
+script = ExtResource("1_0bb7j")
+item_id = "stone"
+precio_compra = 90
+precio_venta = 35
+
+[sub_resource type="Resource" id="Resource_xkvrg"]
+script = ExtResource("1_0bb7j")
+item_id = "copper_ore"
+precio_compra = 150
+precio_venta = 60
+rareza = "poco_comun"
+
+[sub_resource type="Resource" id="Resource_mdnuv"]
+script = ExtResource("1_0bb7j")
+item_id = "copper_bar"
+precio_compra = 260
+precio_venta = 110
+rareza = "poco_comun"
+
+[sub_resource type="Resource" id="Resource_fl1br"]
+script = ExtResource("1_0bb7j")
+item_id = "iron_ore"
+precio_compra = 220
+precio_venta = 90
+rareza = "poco_comun"
+
+[sub_resource type="Resource" id="Resource_unjpo"]
+script = ExtResource("1_0bb7j")
+item_id = "iron_bar"
+precio_compra = 380
+precio_venta = 160
+rareza = "raro"
+
+[sub_resource type="Resource" id="Resource_xnb0l"]
+script = ExtResource("1_0bb7j")
+item_id = "fiber"
+precio_compra = 30
+precio_venta = 12
+
+[sub_resource type="Resource" id="Resource_ykd6x"]
+script = ExtResource("1_0bb7j")
+item_id = "berry"
+precio_compra = 25
+precio_venta = 10
+
+[sub_resource type="Resource" id="Resource_onivj"]
+script = ExtResource("1_0bb7j")
+item_id = "herb"
+precio_compra = 45
+precio_venta = 18
+
+[sub_resource type="Resource" id="Resource_tf2vs"]
+script = ExtResource("1_0bb7j")
+item_id = "crystal"
+precio_compra = 400
+precio_venta = 180
+rareza = "raro"
+
+[sub_resource type="Resource" id="Resource_ox0e6"]
+script = ExtResource("1_0bb7j")
+item_id = "relic"
+precio_compra = 700
+precio_venta = 320
+rareza = "epico"
+
+[sub_resource type="Resource" id="Resource_lpoa2"]
+script = ExtResource("1_0bb7j")
+item_id = "fish_common"
+precio_compra = 40
+precio_venta = 16
+
+[sub_resource type="Resource" id="Resource_e3v4j"]
+script = ExtResource("1_0bb7j")
+item_id = "fish_rare"
+precio_compra = 120
+precio_venta = 55
+rareza = "poco_comun"
+
+[sub_resource type="Resource" id="Resource_hgv8c"]
+script = ExtResource("1_0bb7j")
+item_id = "seed_basic"
+precio_compra = 20
+precio_venta = 8
+
+[sub_resource type="Resource" id="Resource_7vouj"]
+script = ExtResource("1_0bb7j")
+item_id = "tool_kit"
+precio_compra = 150
+rareza = "raro"
+revendible = false
+
+[sub_resource type="Resource" id="Resource_74ivv"]
+script = ExtResource("1_0bb7j")
+item_id = "gem"
+precio_compra = 550
+precio_venta = 240
+rareza = "raro"
+
+[sub_resource type="Resource" id="Resource_fvt35"]
+script = ExtResource("1_0bb7j")
+item_id = "shell"
+precio_compra = 35
+precio_venta = 14
+
+[sub_resource type="Resource" id="Resource_l6vyb"]
+script = ExtResource("1_0bb7j")
+item_id = "amber"
+precio_compra = 300
+precio_venta = 130
+rareza = "raro"
+
+[resource]
+script = ExtResource("2_en4hq")
+price_overrides = [SubResource("Resource_4pjow"), SubResource("Resource_uj73i"), SubResource("Resource_xkvrg"), SubResource("Resource_mdnuv"), SubResource("Resource_fl1br"), SubResource("Resource_unjpo"), SubResource("Resource_xnb0l"), SubResource("Resource_ykd6x"), SubResource("Resource_onivj"), SubResource("Resource_tf2vs"), SubResource("Resource_ox0e6"), SubResource("Resource_lpoa2"), SubResource("Resource_e3v4j"), SubResource("Resource_hgv8c"), SubResource("Resource_7vouj"), SubResource("Resource_74ivv"), SubResource("Resource_fvt35"), SubResource("Resource_l6vyb")]

@@ -1,34 +1,34 @@
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 
-# 05-Checklist.md ó MÛdulo 81: Legal ó Menores
+# 05-Checklist.md ‚Äî M√≥dulo 81: Legal ‚Äî Menores
 
 > **Estado:** ?? En curso
 > **Agente:** Nemotron 3 Ultra / OpenCode
 > **Fecha inicio:** 2026-08-21
-> **MÌnimo de Ìtems:** 100
+> **M√≠nimo de √≠tems:** 100
 
 ---
 
-## A. An·lisis y Marco Regulatorio
+## A. An√°lisis y Marco Regulatorio
 
-- [ ] Identificar todas las normativas internacionales aplicables por jurisdicciÛn (COPPA, GDPR-K, LGPD, PIPL, etc.)
-- [ ] Documentar la edad de consentimiento por paÌs/regiones principales de venta
-- [ ] Mapear requisitos especÌficos de COPPA para menores de 13 aÒos en EE.UU.
-- [ ] Mapear requisitos especÌficos de GDPR Art.8 para menores en Espacio EconÛmico Europeo
+- [ ] Identificar todas las normativas internacionales aplicables por jurisdicci√≥n (COPPA, GDPR-K, LGPD, PIPL, etc.)
+- [ ] Documentar la edad de consentimiento por pa√≠s/regiones principales de venta
+- [ ] Mapear requisitos espec√≠ficos de COPPA para menores de 13 a√±os en EE.UU.
+- [ ] Mapear requisitos espec√≠ficos de GDPR Art.8 para menores en Espacio Econ√≥mico Europeo
 - [ ] Mapear requisitos de LGPD para menores en Brasil
-- [ ] Documentar diferencias entre normativas (edades, consentimiento, retenciÛn, eliminaciÛn)
+- [ ] Documentar diferencias entre normativas (edades, consentimiento, retenci√≥n, eliminaci√≥n)
 - [ ] Identificar jurisdicciones donde el juego NO puede venderse sin cumplimiento (si existen)
 - [ ] Documentar sanciones y multas por incumplimiento en cada normativa principal
-- [ ] Revisar guÌas de interpretaciÛn de la FTC para COPPA (2024-2026)
-- [ ] Revisar opiniones del EDPB para GDPR Art.8 (niÒos en entornos digitales)
+- [ ] Revisar gu√≠as de interpretaci√≥n de la FTC para COPPA (2024-2026)
+- [ ] Revisar opiniones del EDPB para GDPR Art.8 (ni√±os en entornos digitales)
 
-## B. An·lisis de Plataformas
+## B. An√°lisis de Plataformas
 
-- [ ] Documentar requisitos de IARC para rating de contenido (cÛmo obtener, costos, proceso)
+- [ ] Documentar requisitos de IARC para rating de contenido (c√≥mo obtener, costos, proceso)
 - [ ] Documentar requisitos de ESRB (EE.UU.) para contenido dirigido a menores
 - [ ] Documentar requisitos de PEGI (Europa) para contenido dirigido a menores
-- [ ] Documentar requisitos de CERO (JapÛn) para contenido dirigido a menores
+- [ ] Documentar requisitos de CERO (Jap√≥n) para contenido dirigido a menores
 - [ ] Documentar requisitos de GRAC (Corea) para contenido dirigido a menores
 - [ ] Documentar requisitos de ACB (Australia) para contenido dirigido a menores
 - [ ] Documentar requisitos de USK (Alemania) para contenido dirigido a menores
@@ -39,146 +39,146 @@
 - [ ] Documentar requisitos de Apple App Store para contenido con menores (si se planifica mobile futuro)
 - [ ] Documentar requisitos de Google Play para contenido con menores (si se planifica mobile futuro)
 
-## C. DiseÒo del Sistema Age Gating
+## C. Dise√±o del Sistema Age Gating
 
-- [ ] DiseÒar arquitectura del sistema de age gating (startup flow)
+- [ ] Dise√±ar arquitectura del sistema de age gating (startup flow)
 - [ ] Definir opciones de age gating: Visitante, Verificar Edad, Salir
-- [ ] DiseÒar UI de pantalla de age gate (AgeGateScreen)
-- [ ] DiseÒar flujo de consentimiento parental por email (parental email verification)
-- [ ] DiseÒar flujo de consentimiento parental por documento ID (m·s robusto)
-- [ ] DiseÒar flujo de consentimiento parental verbal/declaraciÛn (m·s simple)
-- [ ] DiseÒar flujo de consentimiento por plataforma familiar (Steam Family View, Xbox Family, etc.)
-- [ ] Definir quÈ features se desactivan en modo "Visitante" (sin consentimiento)
-- [ ] Definir quÈ features se desactivan en modo "Menor de 13" (aunque tenga consentimiento)
-- [ ] DiseÒar persistencia del estado de age gating en el save del jugador
-- [ ] DiseÒar re-evaluaciÛn de edad al cambio de perfil
-- [ ] DiseÒar comportamiento si save est· corrupto (default: m·s restrictivo)
-- [ ] DiseÒar comportamiento si el jugador rechaza age gating (modo visitante)
-- [ ] DiseÒar comportamiento si consentimiento parental falla (reintentar, salir, modo visitante)
-- [ ] DiseÒar comportamiento si el jugador cumple aÒos y cambia de grupo de edad
+- [ ] Dise√±ar UI de pantalla de age gate (AgeGateScreen)
+- [ ] Dise√±ar flujo de consentimiento parental por email (parental email verification)
+- [ ] Dise√±ar flujo de consentimiento parental por documento ID (m√°s robusto)
+- [ ] Dise√±ar flujo de consentimiento parental verbal/declaraci√≥n (m√°s simple)
+- [ ] Dise√±ar flujo de consentimiento por plataforma familiar (Steam Family View, Xbox Family, etc.)
+- [ ] Definir qu√© features se desactivan en modo "Visitante" (sin consentimiento)
+- [ ] Definir qu√© features se desactivan en modo "Menor de 13" (aunque tenga consentimiento)
+- [ ] Dise√±ar persistencia del estado de age gating en el save del jugador
+- [ ] Dise√±ar re-evaluaci√≥n de edad al cambio de perfil
+- [ ] Dise√±ar comportamiento si save est√° corrupto (default: m√°s restrictivo)
+- [ ] Dise√±ar comportamiento si el jugador rechaza age gating (modo visitante)
+- [ ] Dise√±ar comportamiento si consentimiento parental falla (reintentar, salir, modo visitante)
+- [ ] Dise√±ar comportamiento si el jugador cumple a√±os y cambia de grupo de edad
 
-## D. DiseÒo del Sistema de Consentimiento Parental
+## D. Dise√±o del Sistema de Consentimiento Parental
 
-- [ ] DiseÒar servicio de verificaciÛn por email (ParentalConsentService)
-- [ ] Definir formato de email de verificaciÛn (template HTML)
-- [ ] Definir flujo de verificaciÛn de token (link en email)
-- [ ] DiseÒar servicio de verificaciÛn por documento ID (integraciÛn con tercero o manual)
-- [ ] Definir flujo de verificaciÛn verbal (hash de declaraciÛn, sin almacenar ID)
-- [ ] DiseÒar almacenamiento de consentimiento: playerId, ageGroup, consentDate, consentMethod
-- [ ] Definir retenciÛn de datos de consentimiento (no PII, solo metadata booleana)
-- [ ] DiseÒar mecanismo de revocaciÛn de consentimiento (derecho al olvido GDPR)
-- [ ] DiseÒar notificaciÛn a padres sobre datos recolectados (COPPA requirement)
-- [ ] DiseÒar mecanismo para que padres revisen/eliminen datos de hijos (COPPA requirement)
+- [ ] Dise√±ar servicio de verificaci√≥n por email (ParentalConsentService)
+- [ ] Definir formato de email de verificaci√≥n (template HTML)
+- [ ] Definir flujo de verificaci√≥n de token (link en email)
+- [ ] Dise√±ar servicio de verificaci√≥n por documento ID (integraci√≥n con tercero o manual)
+- [ ] Definir flujo de verificaci√≥n verbal (hash de declaraci√≥n, sin almacenar ID)
+- [ ] Dise√±ar almacenamiento de consentimiento: playerId, ageGroup, consentDate, consentMethod
+- [ ] Definir retenci√≥n de datos de consentimiento (no PII, solo metadata booleana)
+- [ ] Dise√±ar mecanismo de revocaci√≥n de consentimiento (derecho al olvido GDPR)
+- [ ] Dise√±ar notificaci√≥n a padres sobre datos recolectados (COPPA requirement)
+- [ ] Dise√±ar mecanismo para que padres revisen/eliminen datos de hijos (COPPA requirement)
 
-## E. DiseÒo de MinimizaciÛn y AnonimizaciÛn de Datos
+## E. Dise√±o de Minimizaci√≥n y Anonimizaci√≥n de Datos
 
-- [ ] DiseÒar DataSanitizer.cs como servicio central de sanitizaciÛn
+- [ ] Dise√±ar DataSanitizer.cs como servicio central de sanitizaci√≥n
 - [ ] Implementar stripping de PII (Personal Identifiable Information) para menores
 - [ ] Implementar hashing de identificadores (SHA-256 truncado) para menores
-- [ ] Implementar reducciÛn de granularidad de timestamps para menores
-- [ ] Definir caps de eventos por sesiÛn para menores (ej: max 50 events)
-- [ ] Definir polÌtica de retenciÛn: 30 dÌas para <13, 365 dÌas para 13-17
-- [ ] Implementar eliminaciÛn autom·tica despuÈs del perÌodo de retenciÛn
-- [ ] DiseÒar sanitizaciÛn para Analytics (M104): datos anÛnimos, sin behavioral targeting
-- [ ] DiseÒar sanitizaciÛn para TelemetrÌa de Gameplay (M105): eventos genÈricos sin playerId
-- [ ] DiseÒar sanitizaciÛn para Crash Reporting (M121): sin datos de cuenta en crashes de menores
-- [ ] DiseÒar sanitizaciÛn para Logging (M103): logs sanitizados en runtime
-- [ ] DiseÒar sanitizaciÛn para Debug Menu (M110): panel de diagnÛstico sin datos menores
-- [ ] DiseÒar sanitizaciÛn para Bug Tracking (M102): reports anÛnimos si menores involucrados
+- [ ] Implementar reducci√≥n de granularidad de timestamps para menores
+- [ ] Definir caps de eventos por sesi√≥n para menores (ej: max 50 events)
+- [ ] Definir pol√≠tica de retenci√≥n: 30 d√≠as para <13, 365 d√≠as para 13-17
+- [ ] Implementar eliminaci√≥n autom√°tica despu√©s del per√≠odo de retenci√≥n
+- [ ] Dise√±ar sanitizaci√≥n para Analytics (M104): datos an√≥nimos, sin behavioral targeting
+- [ ] Dise√±ar sanitizaci√≥n para Telemetr√≠a de Gameplay (M105): eventos gen√©ricos sin playerId
+- [ ] Dise√±ar sanitizaci√≥n para Crash Reporting (M121): sin datos de cuenta en crashes de menores
+- [ ] Dise√±ar sanitizaci√≥n para Logging (M103): logs sanitizados en runtime
+- [ ] Dise√±ar sanitizaci√≥n para Debug Menu (M110): panel de diagn√≥stico sin datos menores
+- [ ] Dise√±ar sanitizaci√≥n para Bug Tracking (M102): reports an√≥nimos si menores involucrados
 
-## F. DiseÒo de Rating IARC y Contenido
+## F. Dise√±o de Rating IARC y Contenido
 
-- [ ] DiseÒar validaciÛn de rating IARC antes de cada build (IARCValidator)
+- [ ] Dise√±ar validaci√≥n de rating IARC antes de cada build (IARCValidator)
 - [ ] Definir descriptores de contenido aplicables al juego (violence, language, etc.)
 - [ ] Verificar que el contenido del juego es compatible con rating "Everyone" o "Everyone 10+"
-- [ ] DiseÒar proceso de_submission al portal IARC (International Age Rating Coalition)
-- [ ] Definir cÛmo el rating se refleja en Steam Store Page (M97)
-- [ ] Definir cÛmo el rating se refleja en consolas (certificaciÛn)
-- [ ] DiseÒar validaciÛn de que tr·iler (M98) no contiene contenido que eleve el rating
-- [ ] DiseÒar validaciÛn de que marketing (M99) no targetea directamente a menores
-- [ ] DiseÒar validaciÛn de que DLC y expansiones (M120) mantienen el mismo rating
-- [ ] DiseÒar gate en CI/CD (M117): build falla si rating no es v·lido o inconsistente
+- [ ] Dise√±ar proceso de_submission al portal IARC (International Age Rating Coalition)
+- [ ] Definir c√≥mo el rating se refleja en Steam Store Page (M97)
+- [ ] Definir c√≥mo el rating se refleja en consolas (certificaci√≥n)
+- [ ] Dise√±ar validaci√≥n de que tr√°iler (M98) no contiene contenido que eleve el rating
+- [ ] Dise√±ar validaci√≥n de que marketing (M99) no targetea directamente a menores
+- [ ] Dise√±ar validaci√≥n de que DLC y expansiones (M120) mantienen el mismo rating
+- [ ] Dise√±ar gate en CI/CD (M117): build falla si rating no es v√°lido o inconsistente
 
-## G. PolÌticas Legales (ToS y Privacy Policy)
+## G. Pol√≠ticas Legales (ToS y Privacy Policy)
 
-- [ ] Redactar secciÛn de PolÌtica de Privacidad para menores (COPPA-compliant)
-- [ ] Redactar secciÛn de PolÌtica de Privacidad para menores (GDPR-K compliant)
-- [ ] Redactar secciÛn de PolÌtica de Privacidad para menores (LGPD compliant)
-- [ ] Redactar secciÛn de TÈrminos de Servicio para menores
-- [ ] Redactar secciÛn de consentimiento parental para ToS
-- [ ] Redactar secciÛn de derechos del niÒo en la PolÌtica de Privacidad
-- [ ] Redactar secciÛn de eliminaciÛn de datos (derecho al olvido) para menores
-- [ ] Redactar secciÛn de quÈ datos NO se recolectan de menores
-- [ ] Redactar secciÛn de quÈ datos SÕ se recolectan de menores (con consentimiento)
-- [ ] Redactar secciÛn de retenciÛn de datos para menores
-- [ ] Incluir versiones en espaÒol e inglÈs de todas las polÌticas
-- [ ] Documentar proceso de revisiÛn por abogado especializado
-- [ ] Documentar fecha de ˙ltima actualizaciÛn de cada polÌtica
+- [ ] Redactar secci√≥n de Pol√≠tica de Privacidad para menores (COPPA-compliant)
+- [ ] Redactar secci√≥n de Pol√≠tica de Privacidad para menores (GDPR-K compliant)
+- [ ] Redactar secci√≥n de Pol√≠tica de Privacidad para menores (LGPD compliant)
+- [ ] Redactar secci√≥n de T√©rminos de Servicio para menores
+- [ ] Redactar secci√≥n de consentimiento parental para ToS
+- [ ] Redactar secci√≥n de derechos del ni√±o en la Pol√≠tica de Privacidad
+- [ ] Redactar secci√≥n de eliminaci√≥n de datos (derecho al olvido) para menores
+- [ ] Redactar secci√≥n de qu√© datos NO se recolectan de menores
+- [ ] Redactar secci√≥n de qu√© datos S√ç se recolectan de menores (con consentimiento)
+- [ ] Redactar secci√≥n de retenci√≥n de datos para menores
+- [ ] Incluir versiones en espa√±ol e ingl√©s de todas las pol√≠ticas
+- [ ] Documentar proceso de revisi√≥n por abogado especializado
+- [ ] Documentar fecha de √∫ltima actualizaci√≥n de cada pol√≠tica
 
-## H. IntegraciÛn con Sistemas Existentes
+## H. Integraci√≥n con Sistemas Existentes
 
 - [ ] Integrar LegalConfigService en ServiceLocator (M57 Arquitectura General)
 - [ ] Integrar PlayerAgeData en sistema de guardado (M59 Guardado, M60 Datos)
 - [ ] Integrar DataSanitizer en Logger (M103 Logging)
 - [ ] Integrar DataSanitizer en AnalyticsService (M104 Analytics)
-- [ ] Integrar DataSanitizer en TelemetryService (M105 TelemetrÌa)
+- [ ] Integrar DataSanitizer en TelemetryService (M105 Telemetr√≠a)
 - [ ] Integrar DataSanitizer en CrashReporter (M121 Crash Reporting)
 - [ ] Integrar IARCValidator en BuildScript (M117 Build System)
 - [ ] Integrar AgeGateSystem en GameBootstrap (M57 Arquitectura)
-- [ ] Integrar configuraciÛn legal en UI Settings (M53 UI/UX, M89 DiseÒo de Men˙s)
-- [ ] Integrar configuraciÛn legal en Accesibilidad (M58 Accesibilidad)
-- [ ] Integrar configuraciÛn legal en LocalizaciÛn (M87 LocalizaciÛn)
-- [ ] Integrar configuraciÛn legal en ConfiguraciÛn Gr·fica (M90 ConfiguraciÛn Gr·fica)
-- [ ] Integrar configuraciÛn legal en ConfiguraciÛn de Audio (M91 ConfiguraciÛn de Audio)
+- [ ] Integrar configuraci√≥n legal en UI Settings (M53 UI/UX, M89 Dise√±o de Men√∫s)
+- [ ] Integrar configuraci√≥n legal en Accesibilidad (M58 Accesibilidad)
+- [ ] Integrar configuraci√≥n legal en Localizaci√≥n (M87 Localizaci√≥n)
+- [ ] Integrar configuraci√≥n legal en Configuraci√≥n Gr√°fica (M90 Configuraci√≥n Gr√°fica)
+- [ ] Integrar configuraci√≥n legal en Configuraci√≥n de Audio (M91 Configuraci√≥n de Audio)
 
-## I. Consideraciones de MonetizaciÛn y DiseÒo …tico
+## I. Consideraciones de Monetizaci√≥n y Dise√±o √âtico
 
-- [ ] Verificar que NO hay loot boxes ni mec·nicas gacha (M95 MonetizaciÛn)
-- [ ] Verificar que NO hay dark patterns en compras (M95 MonetizaciÛn)
-- [ ] Verificar que NO hay presiÛn por compras (M94 RetenciÛn sin FOMO)
+- [ ] Verificar que NO hay loot boxes ni mec√°nicas gacha (M95 Monetizaci√≥n)
+- [ ] Verificar que NO hay dark patterns en compras (M95 Monetizaci√≥n)
+- [ ] Verificar que NO hay presi√≥n por compras (M94 Retenci√≥n sin FOMO)
 - [ ] Verificar que NO hay contenido con FOMO para menores
 - [ ] Verificar que compras requieren consentimiento parental si menores
 - [ ] Verificar que no hay publicidad dirigida a menores
 - [ ] Verificar que no hay marketing de terceros a menores
-- [ ] Verificar que no hay recolecciÛn de datos para targeting de menores
+- [ ] Verificar que no hay recolecci√≥n de datos para targeting de menores
 
-## J. QA, Testing y ValidaciÛn
+## J. QA, Testing y Validaci√≥n
 
 - [ ] Crear plan de tests unitarios para LegalConfigService
 - [ ] Crear plan de tests unitarios para DataSanitizer
 - [ ] Crear plan de tests unitarios para AgeGateSystem
-- [ ] Crear plan de tests de integraciÛn para ParentalConsentService
-- [ ] Crear plan de tests de integraciÛn para IARCValidator
+- [ ] Crear plan de tests de integraci√≥n para ParentalConsentService
+- [ ] Crear plan de tests de integraci√≥n para IARCValidator
 - [ ] Crear plan de tests E2E para flujo completo de age gating
-- [ ] Crear plan de tests de regresiÛn para cumplimiento legal
-- [ ] Crear plan de tests de estrÈs con m˙ltiples cuentas menores
+- [ ] Crear plan de tests de regresi√≥n para cumplimiento legal
+- [ ] Crear plan de tests de estr√©s con m√∫ltiples cuentas menores
 - [ ] Ejecutar tests de cumplimiento COPPA
 - [ ] Ejecutar tests de cumplimiento GDPR-K
 - [ ] Ejecutar tests de cumplimiento LGPD
 - [ ] Ejecutar tests de cumplimiento por plataforma (Steam, consolas)
 - [ ] Verificar que todos los tests pasan antes de cada release
 
-## K. DocumentaciÛn y Compliance
+## K. Documentaci√≥n y Compliance
 
 - [ ] Documentar proceso completo de cumplimiento legal en CHECKLIST-GLOBAL.md
-- [ ] Documentar decisiones de diseÒo en 03-Diseno.md
-- [ ] Documentar cÛdigo implementado en 04-Codigo.md
+- [ ] Documentar decisiones de dise√±o en 03-Diseno.md
+- [ ] Documentar c√≥digo implementado en 04-Codigo.md
 - [ ] Documentar resultados de testing en 07-Resultados-Testings.md (si aplica)
-- [ ] Generar log de creaciÛn del mÛdulo en Logs/
-- [ ] Actualizar CHECKLIST-GLOBAL.md con estado del mÛdulo
+- [ ] Generar log de creaci√≥n del m√≥dulo en Logs/
+- [ ] Actualizar CHECKLIST-GLOBAL.md con estado del m√≥dulo
 - [ ] Actualizar README.md de DOCUMENTACION/
-- [ ] Documentar dependencias con otros mÛdulos (verificar en cada sprint)
+- [ ] Documentar dependencias con otros m√≥dulos (verificar en cada sprint)
 - [ ] Mantener checklist actualizado con cada cambio significativo
 
 ## L. Entrega y Hitos
 
-- [ ] Completar an·lisis regulatorio completo antes de M137 Prototipo
-- [ ] Completar diseÒo del sistema de age gating antes de M138 Vertical Slice
-- [ ] Completar implementaciÛn mÌnima (age gating b·sico) antes de M139 Pre-Alpha
-- [ ] Completar integraciÛn con save system antes de M139 Pre-Alpha
-- [ ] Completar sanitizaciÛn de datos antes de M139 Pre-Alpha
-- [ ] Completar PolÌticas Legales (ToS + Privacy) antes de M140 Alpha
+- [ ] Completar an√°lisis regulatorio completo antes de M137 Prototipo
+- [ ] Completar dise√±o del sistema de age gating antes de M138 Vertical Slice
+- [ ] Completar implementaci√≥n m√≠nima (age gating b√°sico) antes de M139 Pre-Alpha
+- [ ] Completar integraci√≥n con save system antes de M139 Pre-Alpha
+- [ ] Completar sanitizaci√≥n de datos antes de M139 Pre-Alpha
+- [ ] Completar Pol√≠ticas Legales (ToS + Privacy) antes de M140 Alpha
 - [ ] Completar rating IARC antes de M141 Beta
 - [ ] Completar QA de cumplimiento antes de M142 Release Candidate
-- [ ] Completar revisiÛn por abogado antes de M143 Lanzamiento
-- [ ] Verificar cumplimiento post-lanzamiento en M144 DespuÈs del Lanzamiento
+- [ ] Completar revisi√≥n por abogado antes de M143 Lanzamiento
+- [ ] Verificar cumplimiento post-lanzamiento en M144 Despu√©s del Lanzamiento

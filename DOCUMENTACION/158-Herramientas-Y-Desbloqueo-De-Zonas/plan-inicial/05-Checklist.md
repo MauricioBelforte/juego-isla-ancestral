@@ -1,9 +1,9 @@
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Modulo 158: Herramientas y Desbloqueo de Zonas
+# 05-Checklist.md â€” Modulo 158: Herramientas y Desbloqueo de Zonas
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple Â· [M] medio Â· [C] complejo. Estados: [ ] cumplido Â· [ ] pendiente Â· [?] no resuelto.
 
 ## A. Requisitos del modulo (15)
 
@@ -181,4 +181,4 @@
 - [ ] Tabla de costos por isla documentada [S]
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 122 items · Completados: 0 · Pendientes: 122 · No resueltos: 0
+**Totales:** 122 items Â· Completados: 0 Â· Pendientes: 122 Â· No resueltos: 0

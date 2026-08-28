@@ -1,29 +1,29 @@
-# MÛdulo 134: Presupuesto ó Checklist
+# M√≥dulo 134: Presupuesto ‚Äî Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:31:00
 
-## A. DefiniciÛn del Presupuesto (10 Ìtems)
+## A. Definici√≥n del Presupuesto (10 √≠tems)
 
 - [ ] Definir presupuesto total del proyecto
 - [ ] Establecer fuente de financiamiento principal
 - [ ] Definir moneda de trabajo
-- [ ] Establecer perÌodo de presupuesto (trimestral/mensual)
-- [ ] Definir proceso de aprobaciÛn de presupuesto
+- [ ] Establecer per√≠odo de presupuesto (trimestral/mensual)
+- [ ] Definir proceso de aprobaci√≥n de presupuesto
 - [ ] Crear documento maestro de presupuesto
-- [ ] Distribuir presupuesto a leads de ·rea
-- [ ] Establecer polÌtica de gastos
-- [ ] Definir lÌmites de aprobaciÛn por rol
-- [ ] Documentar supuestos de estimaciÛn
+- [ ] Distribuir presupuesto a leads de √°rea
+- [ ] Establecer pol√≠tica de gastos
+- [ ] Definir l√≠mites de aprobaci√≥n por rol
+- [ ] Documentar supuestos de estimaci√≥n
 
-## B. Desglose por CategorÌas (15 Ìtems)
+## B. Desglose por Categor√≠as (15 √≠tems)
 
 - [ ] Personal: programadores (30%)
 - [ ] Personal: artistas 3D/2D (15%)
-- [ ] Personal: diseÒadores (5%)
+- [ ] Personal: dise√±adores (5%)
 - [ ] Personal: audio (3%)
-- [ ] Personal: QA/producciÛn (2%)
+- [ ] Personal: QA/producci√≥n (2%)
 - [ ] Herramientas: software (5%)
 - [ ] Herramientas: hardware (3%)
 - [ ] Herramientas: licencias (2%)
@@ -35,20 +35,20 @@
 - [ ] Operaciones: legal (2%)
 - [ ] Reserva: imprevistos (10-20%)
 
-## C. Control de Gastos (10 Ìtems)
+## C. Control de Gastos (10 √≠tems)
 
 - [ ] Crear template de registro de gastos
-- [ ] Definir flujo de aprobaciÛn (3 niveles)
-- [ ] Establecer frecuencia de revisiÛn (semanal/mensual)
-- [ ] Crear proceso de reconciliaciÛn bancaria
+- [ ] Definir flujo de aprobaci√≥n (3 niveles)
+- [ ] Establecer frecuencia de revisi√≥n (semanal/mensual)
+- [ ] Crear proceso de reconciliaci√≥n bancaria
 - [ ] Definir proceso de reembolsos
-- [ ] Establecer polÌtica de facturaciÛn
+- [ ] Establecer pol√≠tica de facturaci√≥n
 - [ ] Crear dashboard de gastos en tiempo real
 - [ ] Definir alertas de exceso de presupuesto
 - [ ] Establecer proceso de ajuste de presupuesto
-- [ ] Documentar proceso de auditorÌa
+- [ ] Documentar proceso de auditor√≠a
 
-## D. Proyecciones de Ingresos (10 Ìtems)
+## D. Proyecciones de Ingresos (10 √≠tems)
 
 - [ ] Definir precio de venta del juego
 - [ ] Crear escenario pesimista de ventas
@@ -56,80 +56,80 @@
 - [ ] Crear escenario optimista de ventas
 - [ ] Calcular break-even point
 - [ ] Definir supuestos por plataforma (Steam, GOG, etc.)
-- [ ] Proyectar ingresos por aÒo (3 aÒos)
+- [ ] Proyectar ingresos por a√±o (3 a√±os)
 - [ ] Considerar descuentos y sales
-- [ ] Definir margen neto despuÈs de costos de plataforma
+- [ ] Definir margen neto despu√©s de costos de plataforma
 - [ ] Documentar sensibilidad del modelo a variables clave
 
-## E. GestiÛn de Riesgos Financieros (10 Ìtems)
+## E. Gesti√≥n de Riesgos Financieros (10 √≠tems)
 
 - [ ] Reserva del 20% para imprevistos
-- [ ] Identificar riesgos de sobrecosto por categorÌa
-- [ ] Definir triggers de activaciÛn de reserva
+- [ ] Identificar riesgos de sobrecosto por categor√≠a
+- [ ] Definir triggers de activaci√≥n de reserva
 - [ ] Crear plan de contingencia financiero
 - [ ] Definir proceso de corte de gastos si es necesario
-- [ ] Establecer lÌnea de crÈdito de emergencia
+- [ ] Establecer l√≠nea de cr√©dito de emergencia
 - [ ] Documentar escenario de quiebra y salida ordenada
-- [ ] Definir proceso de renegociaciÛn de contratos
-- [ ] Crear escenarios de reducciÛn de alcance
-- [ ] Establecer mÈtricas de alerta temprana
+- [ ] Definir proceso de renegociaci√≥n de contratos
+- [ ] Crear escenarios de reducci√≥n de alcance
+- [ ] Establecer m√©tricas de alerta temprana
 
-## F. Reporting (10 Ìtems)
+## F. Reporting (10 √≠tems)
 
 - [ ] Crear reporte mensual de presupuesto
 - [ ] Incluir burn rate y runway
 - [ ] Incluir varianza real vs. plan
-- [ ] Incluir proyecciÛn de fin de mes
+- [ ] Incluir proyecci√≥n de fin de mes
 - [ ] Incluir top 5 gastos del mes
 - [ ] Distribuir reporte a leads semanalemente
 - [ ] Crear dashboard ejecutivo
 - [ ] Definir KPIs financieros clave
-- [ ] Establecer reuniÛn de revisiÛn financiera mensual
+- [ ] Establecer reuni√≥n de revisi√≥n financiera mensual
 - [ ] Documentar proceso de toma de decisiones financieras
 
-## G. Herramientas y Plantillas (10 Ìtems)
+## G. Herramientas y Plantillas (10 √≠tems)
 
-- [ ] Seleccionar herramienta de hoja de c·lculo (Google Sheets, Excel)
+- [ ] Seleccionar herramienta de hoja de c√°lculo (Google Sheets, Excel)
 - [ ] Crear plantilla maestra de presupuesto
 - [ ] Crear plantilla de registro de gastos
-- [ ] Crear plantilla de proyecciÛn de ingresos
+- [ ] Crear plantilla de proyecci√≥n de ingresos
 - [ ] Crear plantilla de reporte mensual
-- [ ] Crear dashboard con fÛrmulas autom·ticas
-- [ ] Establecer formato est·ndar de reportes
-- [ ] Crear guÌa de uso de plantillas
+- [ ] Crear dashboard con f√≥rmulas autom√°ticas
+- [ ] Establecer formato est√°ndar de reportes
+- [ ] Crear gu√≠a de uso de plantillas
 - [ ] Capacitar al equipo en uso de herramientas
 - [ ] Mantener plantillas actualizadas
 
-## H. IntegraciÛn con Roadmap (10 Ìtems)
+## H. Integraci√≥n con Roadmap (10 √≠tems)
 
 - [ ] Vincular presupuesto con cronograma (M136)
 - [ ] Estimar costo por milestone
 - [ ] Proyectar cash flow por trimestre
 - [ ] Definir go/no-go financiero por milestone
-- [ ] Establecer umbrales de inversiÛn por fase
+- [ ] Establecer umbrales de inversi√≥n por fase
 - [ ] Documentar dependency entre presupuesto y alcance
 - [ ] Crear escenarios de cambio de alcance
-- [ ] Definir proceso de priorizaciÛn con budget limitado
-- [ ] Establecer revisiÛn de presupuesto por quarter
+- [ ] Definir proceso de priorizaci√≥n con budget limitado
+- [ ] Establecer revisi√≥n de presupuesto por quarter
 - [ ] Documentar lecciones aprendidas financieras
 
-## I. DocumentaciÛn y Cumplimiento (10 Ìtems)
+## I. Documentaci√≥n y Cumplimiento (10 √≠tems)
 
 - [ ] Crear directorio docs/budget/ con todos los documentos
 - [ ] Mantener documentos actualizados
 - [ ] Cumplir con requisitos legales de contabilidad
 - [ ] Documentar procesos financieros
 - [ ] Crear backup de datos financieros
-- [ ] Establecer polÌtica de retenciÛn de documentos
+- [ ] Establecer pol√≠tica de retenci√≥n de documentos
 - [ ] Definir acceso restringido a datos financieros
 - [ ] Documentar proceso de cierre contable
 - [ ] Crear checklist de cierre trimestral
-- [ ] Archivar documentos financieros histÛricos
+- [ ] Archivar documentos financieros hist√≥ricos
 
-## J. IntegraciÛn con Otros MÛdulos (5 Ìtems)
+## J. Integraci√≥n con Otros M√≥dulos (5 √≠tems)
 
-- [ ] Vincular con M133 (GestiÛn del Proyecto): costo por sprint
+- [ ] Vincular con M133 (Gesti√≥n del Proyecto): costo por sprint
 - [ ] Vincular con M135 (Riesgos): impacto financiero de cada riesgo
-- [ ] Vincular con M136 (Roadmap): inversiÛn por fase
-- [ ] Vincular con M95 (MonetizaciÛn): proyecciones de ingresos por DLC
-- [ ] Vincular con M143 (Lanzamiento): costo de marketing dÌa 0
+- [ ] Vincular con M136 (Roadmap): inversi√≥n por fase
+- [ ] Vincular con M95 (Monetizaci√≥n): proyecciones de ingresos por DLC
+- [ ] Vincular con M143 (Lanzamiento): costo de marketing d√≠a 0

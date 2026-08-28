@@ -1,132 +1,132 @@
-# Módulo 146: Diseño Emocional — Checklist
+# MÃ³dulo 146: DiseÃ±o Emocional â€” Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:33:00
 
-## A. Paleta Emocional (10 ítems)
+## A. Paleta Emocional (10 Ã­tems)
 
-- [ ] Definir emoción principal: Calma
-- [ ] Definir emoción secundaria: Curiosidad
-- [ ] Definir emoción de logro: Satisfacción
-- [ ] Definir emoción de descubrimiento: Asombro
-- [ ] Definir emoción social: Pertenencia
-- [ ] Definir emoción nostálgica: Nostalgia
-- [ ] Definir intensidad de cada emoción (baja/media/alta)
-- [ ] Definir frecuencia de cada emoción (constante/frecuente/regular/infrecuente)
-- [ ] Documentar emociones a evitar (frustración, aburrimiento, ansiedad)
+- [ ] Definir emociÃ³n principal: Calma
+- [ ] Definir emociÃ³n secundaria: Curiosidad
+- [ ] Definir emociÃ³n de logro: SatisfacciÃ³n
+- [ ] Definir emociÃ³n de descubrimiento: Asombro
+- [ ] Definir emociÃ³n social: Pertenencia
+- [ ] Definir emociÃ³n nostÃ¡lgica: Nostalgia
+- [ ] Definir intensidad de cada emociÃ³n (baja/media/alta)
+- [ ] Definir frecuencia de cada emociÃ³n (constante/frecuente/regular/infrecuente)
+- [ ] Documentar emociones a evitar (frustraciÃ³n, aburrimiento, ansiedad)
 - [ ] Crear tabla resumen de paleta emocional
 
-## B. Mapeo Emocional (15 ítems)
+## B. Mapeo Emocional (15 Ã­tems)
 
-- [ ] Mapear emociones en fase de Introducción (0-30 min)
+- [ ] Mapear emociones en fase de IntroducciÃ³n (0-30 min)
 - [ ] Mapear emociones en fase de Primeras Horas (30 min - 3h)
 - [ ] Mapear emociones en fase de Juego Principal (3h+)
-- [ ] Mapear emociones por mecánica: Construcción
-- [ ] Mapear emociones por mecánica: Exploración
-- [ ] Mapear emociones por mecánica: Socialización
-- [ ] Mapear emociones por mecánica: Progresión
-- [ ] Mapear emociones por momento del día (mañana, tarde, noche)
-- [ ] Mapear emociones por estación del año
+- [ ] Mapear emociones por mecÃ¡nica: ConstrucciÃ³n
+- [ ] Mapear emociones por mecÃ¡nica: ExploraciÃ³n
+- [ ] Mapear emociones por mecÃ¡nica: SocializaciÃ³n
+- [ ] Mapear emociones por mecÃ¡nica: ProgresiÃ³n
+- [ ] Mapear emociones por momento del dÃ­a (maÃ±ana, tarde, noche)
+- [ ] Mapear emociones por estaciÃ³n del aÃ±o
 - [ ] Crear diagrama visual de mapeo emocional
 - [ ] Identificar gaps emocionales (faltan emociones en alguna fase)
-- [ ] Identificar over-emotional moments (demasiada emoción junta)
+- [ ] Identificar over-emotional moments (demasiada emociÃ³n junta)
 - [ ] Validar mapeo con playtesting
-- [ ] Iterar mapeo según hallazgos
+- [ ] Iterar mapeo segÃºn hallazgos
 - [ ] Documentar mapeo completo
 
-## C. Mecánicas Emocionales (15 ítems)
+## C. MecÃ¡nicas Emocionales (15 Ã­tems)
 
-- [ ] Diseñar mecánica de Construcción para generar satisfacción
-- [ ] Diseñar mecánica de Exploración para generar curiosidad
-- [ ] Diseñar mecánica de Socialización para generar pertenencia
-- [ ] Diseñar mecánica de Progresión para generar logro
-- [ ] Diseñar mecánica de Decoración para generar nostalgia
-- [ ] Definir feedback emocional por cada mecánica
-- [ ] Definir ritmo emocional por sesión de juego
+- [ ] DiseÃ±ar mecÃ¡nica de ConstrucciÃ³n para generar satisfacciÃ³n
+- [ ] DiseÃ±ar mecÃ¡nica de ExploraciÃ³n para generar curiosidad
+- [ ] DiseÃ±ar mecÃ¡nica de SocializaciÃ³n para generar pertenencia
+- [ ] DiseÃ±ar mecÃ¡nica de ProgresiÃ³n para generar logro
+- [ ] DiseÃ±ar mecÃ¡nica de DecoraciÃ³n para generar nostalgia
+- [ ] Definir feedback emocional por cada mecÃ¡nica
+- [ ] Definir ritmo emocional por sesiÃ³n de juego
 - [ ] Crear curva emocional por fase del juego
 - [ ] Identificar momentos de calma (descanso emocional)
-- [ ] Identificar momentos de emoción (pico)
+- [ ] Identificar momentos de emociÃ³n (pico)
 - [ ] Definir transiciones emocionales suaves
 - [ ] Evitar choques emocionales bruscos
-- [ ] Testear mecánicas emocionales con jugadores
-- [ ] Iterar según feedback emocional
-- [ ] Documentar mecánicas emocionales
+- [ ] Testear mecÃ¡nicas emocionales con jugadores
+- [ ] Iterar segÃºn feedback emocional
+- [ ] Documentar mecÃ¡nicas emocionales
 
-## D. Wow Moments (10 ítems)
+## D. Wow Moments (10 Ã­tems)
 
 - [ ] Definir Wow Moment #1: Primera vista de Aurora (asombro)
-- [ ] Definir Wow Moment #2: Primera casa completada (satisfacción)
+- [ ] Definir Wow Moment #2: Primera casa completada (satisfacciÃ³n)
 - [ ] Definir Wow Moment #3: Descubrir Templo de la Brisa (asombro)
 - [ ] Definir Wow Moment #4: Primer evento estacional (pertenencia)
 - [ ] Definir Wow Moment #5: Ver isla completa desde arriba (asombro)
 - [ ] Definir Wow Moment #6: Recibir regalo de NPC (pertenencia)
-- [ ] Definir Wow Moment #7: Completar historia principal (satisfacción)
+- [ ] Definir Wow Moment #7: Completar historia principal (satisfacciÃ³n)
 - [ ] Definir Wow Moment #8: Encontrar Easter egg final (curiosidad)
-- [ ] Diseñar estructura de cada wow moment (setup, reveal, payoff, afterglow)
+- [ ] DiseÃ±ar estructura de cada wow moment (setup, reveal, payoff, afterglow)
 - [ ] Presupuestar wow moments por fase
 
-## E. Audio Emocional (10 ítems)
+## E. Audio Emocional (10 Ã­tems)
 
-- [ ] Definir música para momentos de calma
-- [ ] Definir música para momentos de curiosidad
-- [ ] Definir música para momentos de satisfacción
-- [ ] Definir música para momentos de asombro
-- [ ] Definir música para momentos de pertenencia
+- [ ] Definir mÃºsica para momentos de calma
+- [ ] Definir mÃºsica para momentos de curiosidad
+- [ ] Definir mÃºsica para momentos de satisfacciÃ³n
+- [ ] Definir mÃºsica para momentos de asombro
+- [ ] Definir mÃºsica para momentos de pertenencia
 - [ ] Definir efectos de sonido emocionales (satisfactorios)
 - [ ] Definir transiciones musicales entre emociones
-- [ ] Colaborar con M41 (Música) en diseño emocional
+- [ ] Colaborar con M41 (MÃºsica) en diseÃ±o emocional
 - [ ] Colaborar con M42 (Sonido Ambiental) en calma
 - [ ] Testear audio emocional con jugadores
 
-## F. Visual Emocional (10 ítems)
+## F. Visual Emocional (10 Ã­tems)
 
-- [ ] Definir iluminación para calma (suave, cálida)
-- [ ] Definir iluminación para asombro (épica, dramática)
-- [ ] Definir partículas para satisfacción (brillo, colores)
-- [ ] Definir animaciones para satisfacción (suaves, satisfactorias)
-- [ ] Definir colores por emoción
-- [ ] Definir composición visual por emoción
+- [ ] Definir iluminaciÃ³n para calma (suave, cÃ¡lida)
+- [ ] Definir iluminaciÃ³n para asombro (Ã©pica, dramÃ¡tica)
+- [ ] Definir partÃ­culas para satisfacciÃ³n (brillo, colores)
+- [ ] Definir animaciones para satisfacciÃ³n (suaves, satisfactorias)
+- [ ] Definir colores por emociÃ³n
+- [ ] Definir composiciÃ³n visual por emociÃ³n
 - [ ] Colaborar con M45 (Arte 3D) en visual emocional
-- [ ] Colaborar con M49 (Iluminación) en iluminación emocional
+- [ ] Colaborar con M49 (IluminaciÃ³n) en iluminaciÃ³n emocional
 - [ ] Testear visual emocional con jugadores
 - [ ] Documentar guidelines visuales emocionales
 
-## G. Validación Emocional (10 ítems)
+## G. ValidaciÃ³n Emocional (10 Ã­tems)
 
-- [ ] Crear guía de playtesting emocional
+- [ ] Crear guÃ­a de playtesting emocional
 - [ ] Definir preguntas clave para playtesting
 - [ ] Crear checklist de emociones a verificar
-- [ ] Definir proceso de recolección de feedback emocional
+- [ ] Definir proceso de recolecciÃ³n de feedback emocional
 - [ ] Crear template de reporte emocional
-- [ ] Realizar playtesting emocional (mínimo 5 jugadores)
+- [ ] Realizar playtesting emocional (mÃ­nimo 5 jugadores)
 - [ ] Analizar resultados de playtesting
-- [ ] Iterar diseño según hallazgos
+- [ ] Iterar diseÃ±o segÃºn hallazgos
 - [ ] Documentar lecciones aprendidas
-- [ ] Revisar diseño emocional trimestralmente
+- [ ] Revisar diseÃ±o emocional trimestralmente
 
-## H. Cozy Checklist (10 ítems)
+## H. Cozy Checklist (10 Ã­tems)
 
-- [ ] Crear checklist "¿Esto es cozy?"
-- [ ] Incluir pregunta: ¿Genera frustración?
-- [ ] Incluir pregunta: ¿Genera ansiedad?
-- [ ] Incluir pregunta: ¿Es relajante?
-- [ ] Incluir pregunta: ¿Es satisfactorio?
-- [ ] Incluir pregunta: ¿Es accesible?
-- [ ] Incluir pregunta: ¿Es amigable?
-- [ ] Aplicar checklist a cada decisión de diseño
+- [ ] Crear checklist "Â¿Esto es cozy?"
+- [ ] Incluir pregunta: Â¿Genera frustraciÃ³n?
+- [ ] Incluir pregunta: Â¿Genera ansiedad?
+- [ ] Incluir pregunta: Â¿Es relajante?
+- [ ] Incluir pregunta: Â¿Es satisfactorio?
+- [ ] Incluir pregunta: Â¿Es accesible?
+- [ ] Incluir pregunta: Â¿Es amigable?
+- [ ] Aplicar checklist a cada decisiÃ³n de diseÃ±o
 - [ ] Distribuir checklist a todo el equipo
 - [ ] Revisar checklist trimestralmente
 
-## I. Documentación y Mantenimiento (10 ítems)
+## I. DocumentaciÃ³n y Mantenimiento (10 Ã­tems)
 
 - [ ] Crear directorio docs/emotional-design/
 - [ ] Mantener documentos actualizados
 - [ ] Distribuir guidelines al equipo
-- [ ] Entrenar al equipo en diseño emocional
-- [ ] Revisar diseño emocional por milestone
+- [ ] Entrenar al equipo en diseÃ±o emocional
+- [ ] Revisar diseÃ±o emocional por milestone
 - [ ] Documentar decisiones emocionales
-- [ ] Crear referencia rápida para el equipo
+- [ ] Crear referencia rÃ¡pida para el equipo
 - [ ] Archivar versiones anteriores
-- [ ] Crear changelog de diseño emocional
-- [ ] Evaluar efectividad del diseño emocional
+- [ ] Crear changelog de diseÃ±o emocional
+- [ ] Evaluar efectividad del diseÃ±o emocional

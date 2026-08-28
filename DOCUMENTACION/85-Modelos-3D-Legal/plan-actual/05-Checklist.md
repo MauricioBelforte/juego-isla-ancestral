@@ -1,10 +1,10 @@
-# MÛdulo 85: Modelos 3D ó Legal ó Checklist
+# M√≥dulo 85: Modelos 3D ‚Äî Legal ‚Äî Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:26:00
 
-## A. Estructura Legal de Modelos (15 Ìtems)
+## A. Estructura Legal de Modelos (15 √≠tems)
 
 - [ ] Definir Resource ModelLicense con campos: model_name, model_type, license_type, licensor, license_scope, perpetual, commercial_use, attribution_required, attribution_text, redistribution_allowed, modification_allowed, territory, license_document_path, notes
 - [ ] Definir enum ModelType: ORIGINAL, STOCK, OPEN_SOURCE, AI_GENERATED, MODIFIED
@@ -16,117 +16,117 @@
 - [ ] Crear template de contrato Work-for-Hire para artistas 3D
 - [ ] Crear template de licencia para modelos de stock
 - [ ] Crear template de attribution para modelos CC
-- [ ] Definir proceso de verificaciÛn de licencias pre-import
-- [ ] Definir polÌtica de uso de modelos editoriales (NO permitidos)
+- [ ] Definir proceso de verificaci√≥n de licencias pre-import
+- [ ] Definir pol√≠tica de uso de modelos editoriales (NO permitidos)
 - [ ] Documentar leyes relevantes por territorio
-- [ ] Crear checklist de verificaciÛn pre-build para modelos
+- [ ] Crear checklist de verificaci√≥n pre-build para modelos
 - [ ] Definir proceso de handling de modelos sin licencia
 
-## B. Contratos de Artistas 3D (10 Ìtems)
+## B. Contratos de Artistas 3D (10 √≠tems)
 
-- [ ] Template Work-for-Hire con cesiÛn total de PI
-- [ ] Cl·usula de credito obligatorio en todos los builds
-- [ ] Cl·usula de pago upfront (flat fee)
-- [ ] Cl·usula de regalÌas opcionales para DLC/merchandise
-- [ ] Cl·usula de confidencialidad
-- [ ] Cl·usula de garantÌa de originalidad
-- [ ] Cl·usula de release de modelos
-- [ ] Cl·usula de jurisdiction y ley aplicable
+- [ ] Template Work-for-Hire con cesi√≥n total de PI
+- [ ] Cl√°usula de credito obligatorio en todos los builds
+- [ ] Cl√°usula de pago upfront (flat fee)
+- [ ] Cl√°usula de regal√≠as opcionales para DLC/merchandise
+- [ ] Cl√°usula de confidencialidad
+- [ ] Cl√°usula de garant√≠a de originalidad
+- [ ] Cl√°usula de release de modelos
+- [ ] Cl√°usula de jurisdiction y ley aplicable
 - [ ] Template de anexo para especificaciones de entrega
-- [ ] Template de acta de entrega y aceptaciÛn
+- [ ] Template de acta de entrega y aceptaci√≥n
 
-## C. Licencias de Stock (10 Ìtems)
+## C. Licencias de Stock (10 √≠tems)
 
 - [ ] Verificar perpetual license (no subscription)
 - [ ] Verificar uso comercial permitido
 - [ ] Verificar attribution requirements
 - [ ] Guardar copia de licencia en repositorio
-- [ ] Documentar restricciones de redistribuciÛn
+- [ ] Documentar restricciones de redistribuci√≥n
 - [ ] Verificar si requiere credito en credits
 - [ ] Verificar restriction de territorio
 - [ ] Verificar restriction de plataforma
-- [ ] Crear inventario de todas las librerÌas de stock
-- [ ] Proceso de verificaciÛn anual de licencias
+- [ ] Crear inventario de todas las librer√≠as de stock
+- [ ] Proceso de verificaci√≥n anual de licencias
 
-## D. Modelos de CÛdigo Abierto (10 Ìtems)
+## D. Modelos de C√≥digo Abierto (10 √≠tems)
 
 - [ ] Verificar licencia CC (BY, BY-SA, BY-NC)
 - [ ] Cumplir con attribution en TODOS los builds
 - [ ] Verificar si SA requiere relicenciar el juego
-- [ ] Documentar attribution en crÈditos
+- [ ] Documentar attribution en cr√©ditos
 - [ ] Verificar si el modelo fue modificado (SA aplica)
 - [ ] Crear lista de modelos CC utilizados
 - [ ] Verificar que no hay NC en uso comercial
 - [ ] Documentar fuente de cada modelo CC
-- [ ] Proceso de actualizaciÛn cuando modelo se actualiza
+- [ ] Proceso de actualizaci√≥n cuando modelo se actualiza
 - [ ] Verificar compatibilidad entre licencias CC
 
-## E. CrÈditos de Modelos (10 Ìtems)
+## E. Cr√©ditos de Modelos (10 √≠tems)
 
 - [ ] Crear ModelLegalManager con validate_all_models()
 - [ ] Implementar add_license() y add_credit()
 - [ ] Implementar generate_credits_text() (formato compacto)
 - [ ] Implementar generate_credits_web() (formato detallado)
 - [ ] Implementar save_build_credits() para builds
-- [ ] Agrupar crÈditos por rol (3D Artist, Modeler, Sculptor)
-- [ ] Incluir modelos especÌficos por artista
-- [ ] Referenciar contrato en cada crÈdito
-- [ ] Incluir estado de pago en cada crÈdito
+- [ ] Agrupar cr√©ditos por rol (3D Artist, Modeler, Sculptor)
+- [ ] Incluir modelos espec√≠ficos por artista
+- [ ] Referenciar contrato en cada cr√©dito
+- [ ] Incluir estado de pago en cada cr√©dito
 - [ ] Generar archivo MODEL_CREDITS.txt en cada build
 
-## F. Modelos de IA Generativa (10 Ìtems)
+## F. Modelos de IA Generativa (10 √≠tems)
 
 - [ ] Definir regla: AI es herramienta, no autor
 - [ ] Definir regla: artista humano es autor final
-- [ ] Requerir disclosure en crÈditos de modelos con IA
+- [ ] Requerir disclosure en cr√©ditos de modelos con IA
 - [ ] Verificar que la herramienta de IA permita uso comercial
-- [ ] Documentar quÈ herramientas de IA se usaron
-- [ ] Guardar logs de generaciÛn de modelos por IA
+- [ ] Documentar qu√© herramientas de IA se usaron
+- [ ] Guardar logs de generaci√≥n de modelos por IA
 - [ ] Validar que modelos de IA no infringan copyrights
 - [ ] Definir proceso de review humano para modelos de IA
-- [ ] Incluir advertencia en crÈditos si aplica
+- [ ] Incluir advertencia en cr√©ditos si aplica
 - [ ] Verificar que modelos de IA son originales
 
-## G. ValidaciÛn y Testing (10 Ìtems)
+## G. Validaci√≥n y Testing (10 √≠tems)
 
 - [ ] Test de ModelLicenseValidator con licencia completa
 - [ ] Test de ModelLicenseValidator con licencia sin attribution
 - [ ] Test de ModelLicenseValidator con licencia no-perpetual
-- [ ] Test de ModelLegalManager con inventario vacÌo
+- [ ] Test de ModelLegalManager con inventario vac√≠o
 - [ ] Test de ModelLegalManager con inventario completo
-- [ ] Test de generaciÛn de crÈditos compactos
-- [ ] Test de generaciÛn de crÈditos web
-- [ ] Test de verificaciÛn de uso comercial
-- [ ] Test de edge case: artista con m˙ltiples roles
-- [ ] Test de edge case: modelo con m˙ltiples licencias
+- [ ] Test de generaci√≥n de cr√©ditos compactos
+- [ ] Test de generaci√≥n de cr√©ditos web
+- [ ] Test de verificaci√≥n de uso comercial
+- [ ] Test de edge case: artista con m√∫ltiples roles
+- [ ] Test de edge case: modelo con m√∫ltiples licencias
 
-## H. IntegraciÛn con Build Pipeline (10 Ìtems)
+## H. Integraci√≥n con Build Pipeline (10 √≠tems)
 
-- [ ] Agregar paso de validaciÛn de modelos en build_script.gd
-- [ ] Build falla si hay licencia de modelo inv·lida
-- [ ] Build incluye MODEL_CREDITS.txt autom·ticamente
-- [ ] IntegraciÛn con M117 (Build Pipeline)
-- [ ] IntegraciÛn con M72 (ValidaciÛn de Builds)
-- [ ] IntegraciÛn con M71 (GestiÛn de Assets)
-- [ ] Logging de validaciÛn de modelos en build log
+- [ ] Agregar paso de validaci√≥n de modelos en build_script.gd
+- [ ] Build falla si hay licencia de modelo inv√°lida
+- [ ] Build incluye MODEL_CREDITS.txt autom√°ticamente
+- [ ] Integraci√≥n con M117 (Build Pipeline)
+- [ ] Integraci√≥n con M72 (Validaci√≥n de Builds)
+- [ ] Integraci√≥n con M71 (Gesti√≥n de Assets)
+- [ ] Logging de validaci√≥n de modelos en build log
 - [ ] Modo dry-run para verificar sin generar outputs
-- [ ] Skip de validaciÛn en builds de desarrollo
+- [ ] Skip de validaci√≥n en builds de desarrollo
 - [ ] Generar reporte de licencias de modelos por build
 
-## I. DocumentaciÛn y Mantenimiento (15 Ìtems)
+## I. Documentaci√≥n y Mantenimiento (15 √≠tems)
 
-- [ ] Documentar cada funciÛn p˙blica con XML docs
-- [ ] Crear guÌa de uso para el equipo de arte
-- [ ] Documentar cÛmo registrar nuevas licencias
-- [ ] Documentar cÛmo agregar nuevos crÈditos
+- [ ] Documentar cada funci√≥n p√∫blica con XML docs
+- [ ] Crear gu√≠a de uso para el equipo de arte
+- [ ] Documentar c√≥mo registrar nuevas licencias
+- [ ] Documentar c√≥mo agregar nuevos cr√©ditos
 - [ ] Crear FAQ de licencias de modelos 3D
-- [ ] Tabla de comparaciÛn de tipos de licencia
+- [ ] Tabla de comparaci√≥n de tipos de licencia
 - [ ] Ejemplos de uso de cada nodo
-- [ ] Proceso de auditorÌa de licencias pre-launch
+- [ ] Proceso de auditor√≠a de licencias pre-launch
 - [ ] Contacto de abogado especializado
-- [ ] Registro de cambios del mÛdulo
-- [ ] Proceso de actualizaciÛn de crÈditos
+- [ ] Registro de cambios del m√≥dulo
+- [ ] Proceso de actualizaci√≥n de cr√©ditos
 - [ ] Template de email para solicitar licencias
 - [ ] Checklist pre-release de modelos legales
 - [ ] Proceso de handling de claims de copyright
-- [ ] Documentar casos de uso edge (modelos de dominio p˙blico)
+- [ ] Documentar casos de uso edge (modelos de dominio p√∫blico)

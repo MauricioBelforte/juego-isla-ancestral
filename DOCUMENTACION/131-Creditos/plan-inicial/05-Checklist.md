@@ -1,61 +1,61 @@
 **Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
-# 05-Checklist.md ó MÛdulo 131: CrÈditos
+# 05-Checklist.md ‚Äî M√≥dulo 131: Cr√©ditos
 
-> Marcadores: [S] simple ∑ [M] medio ∑ [C] complejo. Estados: [ ] cumplido ∑ [ ] pendiente ∑ [?] no resuelto.
-> MÛdulo **delegable**: implementaciÛn para el agente que lo reclame.
+> Marcadores: [S] simple ¬∑ [M] medio ¬∑ [C] complejo. Estados: [ ] cumplido ¬∑ [ ] pendiente ¬∑ [?] no resuelto.
+> M√≥dulo **delegable**: implementaci√≥n para el agente que lo reclame.
 
-## A. Requisitos del mÛdulo (7)
+## A. Requisitos del m√≥dulo (7)
 
 - [ ] Definir el problema: reconocimiento final de equipos y colaboradores [S]
 - [ ] Registrar dependencias: M78, M87, M90, M91 [S]
-- [ ] Catalogar los puntos esenciales de crÈditos [S]
+- [ ] Catalogar los puntos esenciales de cr√©ditos [S]
 - [ ] RF1: lista de equipos principales [S]
 - [ ] RF2: reconocimiento de contribuyentes y testers [S]
 - [ ] RF3: assets de terceros con licencias [S]
-- [ ] RF4: conmutaciÛn de idiomas (espaÒol/inglÈs) [S]
-- [ ] RF5: navegaciÛn y control de reproducciÛn [S]
-- [ ] RF6: copyright y aÒo actual [S]
+- [ ] RF4: conmutaci√≥n de idiomas (espa√±ol/ingl√©s) [S]
+- [ ] RF5: navegaci√≥n y control de reproducci√≥n [S]
+- [ ] RF6: copyright y a√±o actual [S]
 - [ ] RF7: accesibilidad (texto y contraste) [S]
 
-## B. ResoluciÛn de puntos del plan (7)
+## B. Resoluci√≥n de puntos del plan (7)
 
 - [ ] P1: 5 equipos principales listados y reconocidos [S]
 - [ ] P2: contribuyentes voluntarios y testers incluidos [S]
 - [ ] P3: assets de terceros con licencias mencionadas [S]
-- [ ] P4: conmutaciÛn espaÒol/inglÈs funcionando [S]
-- [ ] P5: navegaciÛn, scroll y controles de reproducciÛn [S]
-- [ ] P6: copyright y aÒo actual displayados [S]
-- [ ] P7: accesibilidad de tamaÒo de texto y contraste [S]
+- [ ] P4: conmutaci√≥n espa√±ol/ingl√©s funcionando [S]
+- [ ] P5: navegaci√≥n, scroll y controles de reproducci√≥n [S]
+- [ ] P6: copyright y a√±o actual displayados [S]
+- [ ] P7: accesibilidad de tama√±o de texto y contraste [S]
 
-## C. CategorÌas y organizaciÛn (8)
+## C. Categor√≠as y organizaci√≥n (8)
 
 - [ ] Equipos principales: Desarrollo, Arte, Sonido, QA, Comunidad [S]
-- [ ] Colaboradores: testers, traductores, diseÒadores UI/UX [S]
+- [ ] Colaboradores: testers, traductores, dise√±adores UI/UX [S]
 - [ ] Assets terceros: categorizados por licencia [S]
-- [ ] Lista alfabÈtica dentro de cada categorÌa [S]
-- [ ] Sistema de b˙squeda por nombre, rol, equipo [S]
-- [ ] TransiciÛn suave entre secciones [S]
+- [ ] Lista alfab√©tica dentro de cada categor√≠a [S]
+- [ ] Sistema de b√∫squeda por nombre, rol, equipo [S]
+- [ ] Transici√≥n suave entre secciones [S]
 - [ ] Contador de tiempo visible (opcional) [S]
-- [ ] Respetar configuraciÛn M90/M91/M91 [S]
+- [ ] Respetar configuraci√≥n M90/M91/M91 [S]
 
 ## D. Interfaz y usabilidad (10)
 
 - [ ] RichTextLabel con desplazamiento suave [S]
-- [ ] BotÛn detener/continuar animaciÛn [S]
-- [ ] Control tamaÒo de texto: S(12px) - M(16px) - L(20px) [S]
+- [ ] Bot√≥n detener/continuar animaci√≥n [S]
+- [ ] Control tama√±o de texto: S(12px) - M(16px) - L(20px) [S]
 - [ ] Modo alto contraste opcional [S]
-- [ ] ConfiguraciÛn velocidad animaciÛn: Normal/Lenta/R·pida [S]
-- [ ] ConmutaciÛn de idioma en tiempo real [S]
-- [ ] Copyright con aÒo actual auto-din·mico [S]
-- [ ] DiseÒo coherente con estilo cozy M87/M90/M91 [S]
-- [ ] Tiempo m·ximo 5 minutos visualizaciÛn [S]
-- [ ] Accesibilidad de navegaciÛn por teclado [S]
+- [ ] Configuraci√≥n velocidad animaci√≥n: Normal/Lenta/R√°pida [S]
+- [ ] Conmutaci√≥n de idioma en tiempo real [S]
+- [ ] Copyright con a√±o actual auto-din√°mico [S]
+- [ ] Dise√±o coherente con estilo cozy M87/M90/M91 [S]
+- [ ] Tiempo m√°ximo 5 minutos visualizaci√≥n [S]
+- [ ] Accesibilidad de navegaci√≥n por teclado [S]
 
-## E. Data y configuraciÛn (8)
+## E. Data y configuraci√≥n (8)
 
-- [ ] cat·logo crÈditos.tres (estructura por categorÌas) [S]
+- [ ] cat√°logo cr√©ditos.tres (estructura por categor√≠as) [S]
 - [ ] API: cargar_creditos() [S]
 - [ ] API: obtener_equipos() [S]
 - [ ] API: obtener_contribuyentes() [S]
@@ -70,19 +70,19 @@
 
 - [ ] Test: todos los equipos principales listados y visibles [M]
 - [ ] Test: contribuyentes y testers incluidos [M]
-- [ ] Test: conmutaciÛn espaÒol/inglÈs [M]
-- [ ] Test: navegaciÛn y controls de reproducciÛn [M]
-- [ ] Test: copyright y aÒo actual [M]
-- [ ] Test: tamaÒo de texto y contraste ajustables [M]
-- [ ] Test: velocidad animaciÛn configurable [M]
-- [ ] Test: duraciÛn m·xima 5 minutos [M]
+- [ ] Test: conmutaci√≥n espa√±ol/ingl√©s [M]
+- [ ] Test: navegaci√≥n y controls de reproducci√≥n [M]
+- [ ] Test: copyright y a√±o actual [M]
+- [ ] Test: tama√±o de texto y contraste ajustables [M]
+- [ ] Test: velocidad animaci√≥n configurable [M]
+- [ ] Test: duraci√≥n m√°xima 5 minutos [M]
 
-## H. DelegaciÛn y cierre (8)
+## H. Delegaci√≥n y cierre (8)
 
-- [ ] MÛdulo marcado delegable [S]
+- [ ] M√≥dulo marcado delegable [S]
 - [ ] API estable definida [S]
-- [ ] ImplementaciÛn ? AGENTE DELEGADO [S]
-- [ ] Assets ? specs con organizaciÛn por categorÌas [S]
+- [ ] Implementaci√≥n ? AGENTE DELEGADO [S]
+- [ ] Assets ? specs con organizaci√≥n por categor√≠as [S]
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis creado y firmado [S]
 - [ ] 03-Diseno creado y firmado [S]
@@ -91,53 +91,53 @@
 
 ## I. Modo silencioso y ;Hola mundo! (10)
 
-- [ ] SFX encendido/apagado de men˙ [S]
-- [ ] SFX navegaciÛn (flecha, enter, escape) [S]
-- [ ] M˙sica lounge suave durante encabezado [S]
+- [ ] SFX encendido/apagado de men√∫ [S]
+- [ ] SFX navegaci√≥n (flecha, enter, escape) [S]
+- [ ] M√∫sica lounge suave durante encabezado [S]
 - [ ] Fade-out gradual al salir [S]
-- [ ] Logo de desarrolladora con sonido c·lido [S]
+- [ ] Logo de desarrolladora con sonido c√°lido [S]
 - [ ] Compatibilidad con familia tonal M43 [S]
-- [ ] Sin m˙sica fuerte si M91 lo desactiva [S]
-- [ ] Balance con M41/M42/M43 seg˙n estado [S]
-- [ ] Ducking de m˙sica al pasar texto [S]
+- [ ] Sin m√∫sica fuerte si M91 lo desactiva [S]
+- [ ] Balance con M41/M42/M43 seg√∫n estado [S]
+- [ ] Ducking de m√∫sica al pasar texto [S]
 - [ ] SFX puntual solo si interactivo [S]
 
 ## J. Eventos especiales y easter eggs (8)
 
-- [ ] Easter egg: Konami code abre crÈditos extendidos [S]
-- [ ] Easter egg: clic en versiÛn muestra build info [S]
-- [ ] Mensaje final tras 5 min de visualizaciÛn [S]
-- [ ] Salto de secciÛn con tecla r·pida [S]
-- [ ] Salida con ESC o botÛn B [S]
+- [ ] Easter egg: Konami code abre cr√©ditos extendidos [S]
+- [ ] Easter egg: clic en versi√≥n muestra build info [S]
+- [ ] Mensaje final tras 5 min de visualizaci√≥n [S]
+- [ ] Salto de secci√≥n con tecla r√°pida [S]
+- [ ] Salida con ESC o bot√≥n B [S]
 - [ ] Mensaje de despedida calido [S]
-- [ ] CrÈditos de Godot y assets open source [S]
-- [ ] CrÈditos de contributors en GitHub Listed [S]
+- [ ] Cr√©ditos de Godot y assets open source [S]
+- [ ] Cr√©ditos de contributors en GitHub Listed [S]
 
-## K. InternacionalizaciÛn avanzado (10)
+## K. Internacionalizaci√≥n avanzado (10)
 
 - [ ] Plurales con gettext (i18n_plural) [S]
 - [ ] Diferencias de longitud ES vs EN [S]
-- [ ] Caracteres especiales y diacrÌticos [S]
+- [ ] Caracteres especiales y diacr√≠ticos [S]
 - [ ] RTL futuro (preparado) [S]
 - [ ] Cambio de fuente por idioma [S]
-- [ ] Carga lazy de crÈditos por idioma [S]
+- [ ] Carga lazy de cr√©ditos por idioma [S]
 - [ ] Frente de cambio en caliente [S]
-- [ ] Recarga desde cachÈ r·pido [S]
+- [ ] Recarga desde cach√© r√°pido [S]
 - [ ] Todos los strings en archivo .po [S]
 - [ ] Pseudoloc para detectar incordios [S]
 
-## L. Rendimiento y memorÌa (10)
+## L. Rendimiento y memor√≠a (10)
 
 - [ ] Carga lazy de secciones no visibles [S]
-- [ ] LiberaciÛn de fuentes no usadas [S]
+- [ ] Liberaci√≥n de fuentes no usadas [S]
 - [ ] Pool de nodos para textos [S]
-- [ ] Sin re-instanciaciÛn al cambiar secciÛn [S]
+- [ ] Sin re-instanciaci√≥n al cambiar secci√≥n [S]
 - [ ] GC cero tras carga inicial [S]
 - [ ] Memoria < 5 MB durante pantalla [S]
 - [ ] Test de stress con 1000+ contribuyentes [S]
 - [ ] Carga en background KO con Hilo ["Thread"] [S]
-- [ ] Tiempo de primera visualizaciÛn < 200ms [S]
+- [ ] Tiempo de primera visualizaci√≥n < 200ms [S]
 - [ ] Sin lag en input events [S]
 
-**Totales:** 100 Ìtems ∑ Completados: 100 ∑ Pendientes: 0 ∑ No resueltos: 0.
-**Nota:** los Ìtems de implementaciÛn (G2 en runtime) quedan para el agente delegado; diseÒo, organizaciÛn y reglas cierran aquÌ.
+**Totales:** 100 √≠tems ¬∑ Completados: 100 ¬∑ Pendientes: 0 ¬∑ No resueltos: 0.
+**Nota:** los √≠tems de implementaci√≥n (G2 en runtime) quedan para el agente delegado; dise√±o, organizaci√≥n y reglas cierran aqu√≠.

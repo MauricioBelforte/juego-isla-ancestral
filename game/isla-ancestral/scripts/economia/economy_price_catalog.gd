@@ -12,8 +12,10 @@ extends Resource
 ## Ruta canónica del recurso de datos (ver plan-actual/04-Codigo.md §1.2)
 const CATALOG_PATH: String = "res://data/economy/econ_prices.tres"
 
-## Entradas del catálogo (Array de PriceDefinition)
-@export var price_overrides: Array[PriceDefinition] = []
+## Entradas del catálogo (Array de PriceDefinition). Tipado como Array genérico
+## para evitar "Could not resolve external class" en runtime headless (class_name
+## externo no se registra fuera del árbol de escenas activo).
+@export var price_overrides: Array = []
 
 # Cache estático de la instancia cargada (ResourceLoader ya cachea, pero reforzamos).
 static var _instance: EconomyPriceCatalog = null

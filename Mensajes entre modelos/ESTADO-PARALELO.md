@@ -172,15 +172,16 @@
 
 
 
-| Implementación M30 Reloj HUD (capa visual) | GLM | Cline | 🟡 Parcial — liberado 2026-08-26 18:40 | Iteración con visión (V2): `w_reloj.gd` (widget arriba-derecha, chip estación coloreada, señales hora/día/estación) + `preview_reloj.tscn` (primer .tscn manual válido; el header `[gd_scene format=3]` era lo que faltaba) + preview con avance ×25. Validado con capturas iter1-iter3 (hora avanza EN VIVO). `[?]` ícono estación (sin assets). Pendientes: hover/desplegable, badge evento M64, integración M53. Capturas en `capturas/30-Reloj-En-Tiempo-Real/`. Log 177 |
-| Implementación M13 Herramientas | MiMo V2.5 | OpenCode | 🔵 En curso — implementación 2026-08-27 | Raycast voxel (VoxelTool.do_ray), extracción/colocación conectadas a ToolController. Player.gd integrado con hotbar (teclas 1-9, scroll). Compila y ejecuta sin errores. F3 validada: jugador puede moverse, E/Q con herramienta. Pendiente: feedback visual/sonoro, HUD durabilidad, test completo |
-| 🔑 Descubrimiento técnico: .tscn manual | GLM (Cline) | 2026-08-26 | Solución al bloqueo histórico "Godot 4 requiere escena generada por editor": un `.tscn` manual SÍ funciona si tiene el header correcto `[gd_scene load_steps=N format=3]`. Referencia válida probada: `scenes/preview_reloj.tscn`. Documentado también en Notas del Agente de M30 (log 177) |
-
+| Implementación M30 Reloj HUD (capa visual) | GLM | Cline | 🟡 Parcial — liberado 2026-08-26 18:40 | Iteración con visión (V2): `w_reloj.gd` (widget arriba-derecha, chip estación coloreada, señales hora/día/estación) + `preview_reloj.tscn` (primer .tscn manual válido; el header `[gd_scene format=3]` era lo que faltaba) + preview con avance ×25. Validado con capturas iter1-iter3 (hora avanza EN VIVO). `[?]` ícono estación (sin assets). Pendientes: hover/desplegable, badge evento M64, integración M53. Capturas en `capturas/30-Reloj-En-Tiempo-Real/`. Log 177 |
+| Implementación M13 Herramientas | MiMo V2.5 | OpenCode | 🔵 En curso — implementación 2026-08-27 | Raycast voxel (VoxelTool.do_ray), extracción/colocación conectadas a ToolController. Player.gd integrado con hotbar (teclas 1-9, scroll). Compila y ejecuta sin errores. F3 validada: jugador puede moverse, E/Q con herramienta. Pendiente: feedback visual/sonoro, HUD durabilidad, test completo |
+| 🔑 Descubrimiento técnico: .tscn manual | GLM (Cline) | 2026-08-26 | Solución al bloqueo histórico "Godot 4 requiere escena generada por editor": un `.tscn` manual SÍ funciona si tiene el header correcto `[gd_scene load_steps=N format=3]`. Referencia válida probada: `scenes/preview_reloj.tscn`. Documentado también en Notas del Agente de M30 (log 177) |
+
 ## Decisiones pendientes/descartadas
 
 | Fecha | Decisión |
 |---|---|
 | 2026-08-16 | ❌ **Delegación del M61 Rendimiento DESCARTADA**: el agente elegido (SWE-1.6/DEVIN, sesión de alta capacidad) consumió todos los créditos leyendo la documentación sin producir nada. El M61 queda **sin dueño por ahora**. Solo lo documentará Deepseek V4 Flash si retoma el rol de documentador (en pausa). Sin cronograma. |
-| 2026-08-26 | M29 GameClock: integraci�n de consumidores completada por ox-alpha (Cline). ShopManager/Friendship/PriceManager ahora consumen GameTime.dia_absoluto() y el anti-grind de ventas qued� activo. Test 14/14 OK. Log 175. |
+| 2026-08-26 | M29 GameClock: integraci�n de consumidores completada por ox-alpha (Cline). ShopManager/Friendship/PriceManager ahora consumen GameTime.dia_absoluto() y el anti-grind de ventas qued� activo. Test 14/14 OK. Log 175. |
 
-| 2026-08-26 21:40 | M30 Reloj: verificación final SIN visión (log 179) | ox-alpha (Cline) | Relanzada preview; reloj visible y íntegro (rect [994,16] 232x121), imagen� en-engine, entry sin errores. Cierre documentado en Log 179. |
+| 2026-08-26 21:40 | M30 Reloj: verificación final SIN visión (log 179) | ox-alpha (Cline) | Relanzada preview; reloj visible y íntegro (rect [994,16] 232x121), imagen� en-engine, entry sin errores. Cierre documentado en Log 179. |
+| 2026-08-26 | M38: 3 tareas simples completadas (cat�logo .tres, clamp MAX_SALDO+DOM-ECO-SALDO, descuento amistad verificado) � GLM/Cline |

@@ -8,7 +8,7 @@ import bpy
 import bmesh
 import math
 import os
-from math import radians, sin, pi
+from math import radians, sin, cos, pi
 from mathutils import Vector, Euler
 
 # ---------- 1) Limpieza de escena ----------
@@ -32,28 +32,45 @@ MAT_arena   = crear_mat('MAT_Arena_Isla',     (0.92, 0.84, 0.63), rough=1.00)
 MAT_corazon = crear_mat('MAT_Corazon_Corona', (0.35, 0.45, 0.15), rough=0.90)
 
 # ---------- 3) Suelo: disco de arena ----------
-bpy.ops.mesh.primitive_cylinder_add(vertices=28, radius=3.4, depth=0.3,
+bpy.ops.mesh.primitive_cylinder_add(vertices=28, radius=2.7, depth=0.3,
                                     location=(0, 0, -0.15))
 suelo = bpy.context.object
 suelo.name = 'SM_Arena_Base'
 suelo.data.materials.append(MAT_arena)
 
-# ---------- 4) Tronco curvado (segmentos apilados, giro 14° c/u) ----------
-SEG, ALT_SEG, CURVA = 7, 0.62, 1.05
-for i in range(SEG):
-    t = i / (SEG - 1)
-    r = 0.30 - 0.155 * t                      # se afina hacia arriba
-    x = CURVA * (t ** 2)                      # curvatura cuadrática
-    z = 0.08 + i * ALT_SEG
-    bpy.ops.mesh.primitive_cylinder_add(
-        vertices=7, radius=r, depth=ALT_SEG * 1.18,
-        location=(x, 0, z), rotation=(0, 0, radians(14 * i)))
-    seg = bpy.context.object
-    seg.name = 'SM_Tronco_%02d' % i
-    seg.data.materials.append(MAT_tronco)
+# ---------- 4) Tronco curvado: UNA sola malla con rings interpolados ----------
+import bmesh
+from mathutils import Vector
+
+SEG_L, RAD_L, LADOS = 9, 7, 7      # rings de altura, lados por ring
+CURVA = 0.70
+ALTURA = 3.9
+
+bm = bmesh.new()
+anillos = []
+for i in range(SEG_L + 1):
+    t = i / SEG_L
+    x = CURVA * (t ** 2)                      # centro: curvatura cuadrática
+    z = 0.08 + t * ALTURA
+    r = 0.30 - 0.12 * t                       # se afina hacia arriba
+    anillo = [bm.verts.new((x + r * cos(2 * pi * k / LADOS),
+                            r * sin(2 * pi * k / LADOS), z))
+              for k in range(LADOS)]
+    anillos.append(anillo)
+for i in range(SEG_L):                        # caras laterales
+    for k in range(LADOS):
+        bm.faces.new([anillos[i][k], anillos[i][(k + 1) % LADOS],
+                      anillos[i + 1][(k + 1) % LADOS], anillos[i + 1][k]])
+bm.faces.new(anillos[0][::-1])                # tapa inferior
+bm.faces.new(anillos[-1])                     # tapa superior
+me = bpy.data.meshes.new('M_Tronco')
+bm.to_mesh(me); bm.free()
+tronco = bpy.data.objects.new('SM_Tronco', me)
+bpy.context.collection.objects.link(tronco)
+tronco.data.materials.append(MAT_tronco)
 
 top_x = CURVA
-top_z = SEG * ALT_SEG + 0.12                  # punto de anclaje de la corona
+top_z = 0.08 + ALTURA + 0.12                  # punto de anclaje de la corona
 
 # ---------- 5) Corona (corazón) ----------
 bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.26,
@@ -67,7 +84,7 @@ cora.data.materials.append(MAT_corazon)
 def crear_fronda(idx, yaw_deg, pitch_deg):
     bm = bmesh.new()
     N = 6
-    largo = 2.35 + (0.22 if idx % 2 else 0.0)
+    largo = 2.6 + (0.25 if idx % 2 else 0.0)
     filas = []
     for j in range(N + 1):
         s = j / N
@@ -77,8 +94,8 @@ def crear_fronda(idx, yaw_deg, pitch_deg):
         elif s >= 1.0:
             w = 0.03
         else:
-            w = 0.36 * (sin(pi * s) ** 0.6)   # ancho: angosta-ancha-angosta
-        z = 0.55 - 0.18 * s - 1.05 * (s ** 2) # sale arriba y cae (parábola)
+            w = 0.38 * (sin(pi * s) ** 0.6)   # ancho: angosta-ancha-angosta
+        z = 0.62 - 0.10 * s - 1.45 * (s ** 2) # sale arriba y cae (parábola)
         filas.append((bm.verts.new((x, -w, z)), bm.verts.new((x, w, z))))
     for j in range(N):
         a1, b1 = filas[j]
@@ -102,9 +119,9 @@ for i in range(K):
     crear_fronda(i, yaw, pitch)
 
 # ---------- 7) Cocos ----------
-for k, (dx, dy) in enumerate([(0.22, 0.10), (-0.12, 0.22), (-0.10, -0.20)]):
+for k, (dx, dy) in enumerate([(0.26, 0.12), (-0.14, 0.26), (-0.12, -0.24)]):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.17,
-        location=(top_x + dx, dy, top_z - 0.22))
+        location=(top_x + dx, dy, top_z - 0.30))
     coco = bpy.context.object
     coco.name = 'SM_Coco_%d' % k
     coco.data.materials.append(MAT_coco)
@@ -113,8 +130,8 @@ for k, (dx, dy) in enumerate([(0.22, 0.10), (-0.12, 0.22), (-0.10, -0.20)]):
 bpy.ops.object.light_add(type='SUN', location=(5, -4, 9))
 sol = bpy.context.object
 sol.name = 'LGT_Sol'
-sol.data.energy = 3.2
-sol.rotation_euler = Euler((radians(55), radians(12), radians(35)), 'XYZ')
+sol.data.energy = 4.0
+sol.rotation_euler = Euler((radians(50), radians(8), radians(30)), 'XYZ')
 
 mundo = bpy.data.worlds['World']
 mundo.use_nodes = True
@@ -122,10 +139,10 @@ nodo_bg = mundo.node_tree.nodes.get('Background')
 nodo_bg.inputs[0].default_value = (0.58, 0.79, 0.95, 1.0)
 nodo_bg.inputs[1].default_value = 1.0
 
-bpy.ops.object.camera_add(location=(7.8, -6.8, 3.4))
+bpy.ops.object.camera_add(location=(6.2, -7.6, 4.3))
 cam = bpy.context.object
 cam.name = 'CAM_Palmera'
-dir_mira = Vector((top_x * 0.5, 0.0, top_z * 0.55)) - cam.location
+dir_mira = Vector((top_x * 0.6, 0.0, top_z * 0.45)) - cam.location
 cam.rotation_euler = dir_mira.to_track_quat('-Z', 'Y').to_euler()
 bpy.context.scene.camera = cam
 
@@ -134,14 +151,16 @@ bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.shade_flat()
 
 # ---------- 10) Encuadre del viewport (para captura de V5) ----------
+# Rendered (EEVEE) + sin overlays + vista alineada a CAM_Palmera
 for area in bpy.context.screen.areas:
     if area.type == 'VIEW_3D':
-        rv = area.spaces.active.region_3d
-        rv.view_perspective = 'ORTHO'
-        rv.view_location = (top_x * 0.4, 0.0, top_z * 0.52)
-        rv.view_distance = 10.5
-        dir_v = Vector((7.0, -6.0, 4.5)).normalized()
-        rv.view_rotation = dir_v.to_track_quat('-Z', 'Y').to_quaternion()
+        space = area.spaces.active
+        space.shading.type = 'RENDERED'
+        space.overlay.show_overlays = False
+        for region in area.regions:
+            if region.type == 'WINDOW':
+                with bpy.context.temp_override(area=area, region=region):
+                    bpy.ops.view3d.view_camera()
 
 # ---------- 11) Guardar .blend ----------
 ruta_blend = os.path.abspath(os.path.join(

@@ -85,6 +85,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_4: _equip_hotbar_slot(3)
 			KEY_5: _equip_hotbar_slot(4)
 			KEY_6: _equip_hotbar_slot(5)
+			# E5: F para toggle favorito en slot hover
+			KEY_F:
+				if _inventory_open and _hovered_slot >= 0:
+					_on_toggle_favorite(_hovered_slot)
 	
 	# M13: Scroll para cambiar hotbar
 	if event is InputEventMouseButton and event.pressed:
@@ -92,6 +96,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_cycle_hotbar(-1)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_cycle_hotbar(1)
+		# E20: Soltar drag con click izquierdo fuera de slots
+		elif event.button_index == MOUSE_BUTTON_LEFT and _dragging:
+			_cancel_drag()
 
 ## M13: Equipa un slot del hotbar
 func _equip_hotbar_slot(index: int) -> void:
@@ -261,6 +268,26 @@ var _tooltip_timer: float = 0.0
 var _tooltip_slot_idx: int = -1
 var _context_menu: Control = null
 
+## E3: Búsqueda por texto
+var _search_text: String = ""
+var _search_line: LineEdit = null
+
+## E4: Sort con memoria
+var _sort_mode: int = 0  # 0=favoritos+id, 1=nombre, 2=categoría, 3=rareza
+const SORT_MODES := ["Favoritos+ID", "Nombre", "Categoría", "Rareza"]
+
+## E5: Favoritos toggle
+var _hovered_slot: int = -1
+
+## E9: Feedback visual
+var _feedback_tween: Tween = null
+
+## E20: Drag-drop
+var _dragging: bool = false
+var _drag_slot_idx: int = -1
+var _drag_preview: Control = null
+var _drag_label: Label = null
+
 const CATEGORY_NAMES := {
 	-1: "Todos",
 	0: "Mobiliario", 1: "Decoración", 2: "Iluminación",
@@ -358,6 +385,53 @@ func _create_inventory_panel() -> void:
 		btn.pressed.connect(_on_category_pressed.bind(cat_id))
 		tabs.add_child(btn)
 
+	# E3: Barra de búsqueda
+	var search_row := HBoxContainer.new()
+	search_row.name = "SearchRow"
+	search_row.add_theme_constant_override("separation", 4)
+	outer_vbox.add_child(search_row)
+
+	var search_line := LineEdit.new()
+	search_line.name = "SearchLine"
+	search_line.placeholder_text = "Buscar ítem..."
+	search_line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	search_line.text_changed.connect(_on_search_changed)
+	search_row.add_child(search_line)
+	_search_line = search_line
+
+	var clear_btn := Button.new()
+	clear_btn.text = "X"
+	clear_btn.custom_minimum_size = Vector2(24, 24)
+	clear_btn.pressed.connect(func() -> void:
+		if _search_line:
+			_search_line.text = ""
+			_on_search_changed("")
+	)
+	search_row.add_child(clear_btn)
+
+	# E4: Botón de sort
+	var sort_btn_row := HBoxContainer.new()
+	sort_btn_row.name = "SortRow"
+	sort_btn_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	sort_btn_row.add_theme_constant_override("separation", 4)
+	outer_vbox.add_child(sort_btn_row)
+
+	var sort_label := Label.new()
+	sort_label.text = "Ordenar:"
+	sort_btn_row.add_child(sort_label)
+	var sort_option := OptionButton.new()
+	sort_option.name = "SortOption"
+	for mode_name in SORT_MODES:
+		sort_option.add_item(mode_name)
+	sort_option.selected = _sort_mode
+	sort_option.item_selected.connect(_on_sort_mode_changed)
+	sort_btn_row.add_child(sort_option)
+
+	var sort_btn := Button.new()
+	sort_btn.text = "Aplicar"
+	sort_btn.pressed.connect(_on_sort_pressed)
+	sort_btn_row.add_child(sort_btn)
+
 	# Grid de slots
 	var grid := GridContainer.new()
 	grid.name = "SlotGrid"
@@ -370,7 +444,7 @@ func _create_inventory_panel() -> void:
 		var slot_panel := PanelContainer.new()
 		slot_panel.custom_minimum_size = Vector2(56, 56)
 		slot_panel.name = "Slot_%d" % i
-		# Habilitar mouse para tooltip
+		# Habilitar mouse para tooltip, drag y click
 		slot_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 		slot_panel.gui_input.connect(_on_slot_input.bind(i))
 		slot_panel.mouse_entered.connect(_on_slot_hover.bind(i))
@@ -389,6 +463,15 @@ func _create_inventory_panel() -> void:
 		qty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		qty_label.add_theme_font_size_override("font_size", 8)
 		slot_vbox.add_child(qty_label)
+		# E5: Indicador de favorito
+		var fav_label := Label.new()
+		fav_label.name = "Fav"
+		fav_label.text = "★"
+		fav_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		fav_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		fav_label.add_theme_font_size_override("font_size", 8)
+		fav_label.visible = false
+		slot_panel.add_child(fav_label)
 		grid.add_child(slot_panel)
 
 	# Botones de acción
@@ -397,11 +480,6 @@ func _create_inventory_panel() -> void:
 	action_bar.alignment = BoxContainer.ALIGNMENT_CENTER
 	action_bar.add_theme_constant_override("separation", 8)
 	outer_vbox.add_child(action_bar)
-
-	var sort_btn := Button.new()
-	sort_btn.text = "Ordenar"
-	sort_btn.pressed.connect(_on_sort_pressed)
-	action_bar.add_child(sort_btn)
 
 	var close_btn := Button.new()
 	close_btn.text = "Cerrar (B)"
@@ -415,6 +493,8 @@ func _create_inventory_panel() -> void:
 	_create_tooltip(bg)
 	# Context menu (oculto al inicio)
 	_create_context_menu(bg)
+	# E20: Drag preview (oculto al inicio)
+	_create_drag_preview(bg)
 
 	Inventario.inventario_actualizado.connect(_refresh_inventory_ui)
 	_refresh_inventory_ui()
@@ -423,9 +503,6 @@ func _on_category_pressed(cat_id: int) -> void:
 	_active_category = cat_id
 	_refresh_inventory_ui()
 
-func _on_sort_pressed() -> void:
-	Inventario.sort_container(0)
-
 func _refresh_inventory_ui() -> void:
 	if _inventory_panel == null or not _inventory_panel.visible:
 		return
@@ -433,22 +510,28 @@ func _refresh_inventory_ui() -> void:
 	if grid == null:
 		return
 	var bolsillo := Inventario._contenedor(0)
-	# Filtrar slots por categoría activa
+	# E3+E4: Filtrar slots por categoría + búsqueda
 	var visible_slots: Array[int] = []
 	for i in bolsillo.slots.size():
 		var s: InventorySlot = bolsillo.slots[i]
 		if s.esta_libre():
 			visible_slots.append(i)
 			continue
-		if _active_category == -1:
-			visible_slots.append(i)
-			continue
-		# Buscar item en ItemDatabase para obtener categoría
-		var item = ItemDatabase.get_item(s.item_id)
-		if item != null and int(item.categoria) == _active_category:
-			visible_slots.append(i)
-		elif item == null:
-			visible_slots.append(i)  # mostrar si no se conoce la categoría
+		# Filtro por categoría
+		if _active_category != -1:
+			var item = ItemDatabase.get_item(s.item_id)
+			if item != null and int(item.categoria) != _active_category:
+				continue
+		# E3: Filtro por texto de búsqueda
+		if _search_text != "":
+			var item = ItemDatabase.get_item(s.item_id)
+			var search_lower := _search_text.to_lower()
+			var match_name: bool = (item != null and item.nombre.to_lower().contains(search_lower))
+			var match_id: bool = s.item_id.to_lower().contains(search_lower)
+			var match_desc: bool = (item != null and item.descripcion.to_lower().contains(search_lower))
+			if not match_name and not match_id and not match_desc:
+				continue
+		visible_slots.append(i)
 
 	for i in 24:
 		var slot_node := grid.get_node_or_null("Slot_%d" % i)
@@ -456,6 +539,7 @@ func _refresh_inventory_ui() -> void:
 			continue
 		var label := slot_node.get_node_or_null("VBox/Label")
 		var qty := slot_node.get_node_or_null("VBox/Qty")
+		var fav := slot_node.get_node_or_null("Fav")
 		if label == null or qty == null:
 			continue
 		if i < bolsillo.slots.size() and visible_slots.has(i):
@@ -468,10 +552,15 @@ func _refresh_inventory_ui() -> void:
 				label.text = display_name.left(8)
 				qty.text = "x%d" % s.cantidad
 				slot_node.visible = true
+				# E5: Mostrar indicador de favorito
+				if fav:
+					fav.visible = s.favorito
 			else:
 				label.text = ""
 				qty.text = ""
 				slot_node.visible = true
+				if fav:
+					fav.visible = false
 		else:
 			slot_node.visible = false
 
@@ -508,11 +597,15 @@ func _create_tooltip(parent: Control) -> void:
 
 func _on_slot_hover(slot_idx: int) -> void:
 	_tooltip_slot_idx = slot_idx
+	_hovered_slot = slot_idx
 	_tooltip_timer = 0.0
 
 func _on_slot_exit() -> void:
 	_tooltip_slot_idx = -1
+	_hovered_slot = -1
 	_hide_tooltip()
+	if _dragging:
+		_cancel_drag()
 
 func _hide_tooltip() -> void:
 	if _tooltip != null:
@@ -524,9 +617,15 @@ func _process(delta: float) -> void:
 		_tooltip_timer += delta
 		if _tooltip_timer >= 0.5:
 			_show_tooltip_at(_tooltip_slot_idx)
+	# E20: Mover preview de drag con el mouse
+	if _dragging and _drag_preview != null:
+		_drag_preview.global_position = get_viewport().get_mouse_position() + Vector2(16, 16)
 	# Cierre con ESC
 	if _inventory_open and Input.is_action_just_pressed("ui_cancel"):
-		_toggle_inventory()
+		if _dragging:
+			_cancel_drag()
+		else:
+			_toggle_inventory()
 
 func _show_tooltip_at(slot_idx: int) -> void:
 	if _tooltip == null or _inventory_panel == null:
@@ -550,7 +649,8 @@ func _show_tooltip_at(slot_idx: int) -> void:
 		var rarezas := ["Común", "Poco común", "Raro", "Legendario"]
 		var rareza_str: String = rarezas[item.rareza] if item else "?"
 		var precio: int = item.precio_venta if item else 0
-		info_label.text = "%s | $%d | x%d" % [rareza_str, precio, s.cantidad]
+		var fav_str: String = " | ★ Favorito" if s.favorito else ""
+		info_label.text = "%s | $%d | x%d%s" % [rareza_str, precio, s.cantidad, fav_str]
 	# Posicionar tooltip cerca del slot
 	var slot_node := _inventory_panel.get_node_or_null("VBox/SlotGrid/Slot_%d" % slot_idx)
 	if slot_node:
@@ -581,6 +681,12 @@ func _on_slot_input(event: InputEvent, slot_idx: int) -> void:
 			_show_context_menu(slot_idx, event.global_position)
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			_hide_context_menu()
+			if _dragging:
+				# E20: Soltar drag en este slot
+				_finish_drag(slot_idx)
+			else:
+				# E20: Iniciar drag si el slot tiene item
+				_try_start_drag(slot_idx)
 
 func _show_context_menu(slot_idx: int, pos: Vector2) -> void:
 	if _context_menu == null:
@@ -705,3 +811,88 @@ func _refresh_hotbar() -> void:
 				label.text = "%s\n%d" % [s.item_id.left(6), s.cantidad]
 			else:
 				label.text = ""
+
+## ── E3: Búsqueda por texto ──────────────────────────────
+
+func _on_search_changed(new_text: String) -> void:
+	_search_text = new_text
+	_refresh_inventory_ui()
+
+## ── E4: Sort con memoria ────────────────────────────────
+
+func _on_sort_mode_changed(index: int) -> void:
+	_sort_mode = index
+
+func _on_sort_pressed() -> void:
+	Inventario.sort_container(0, _sort_mode)
+
+## ── E20: Drag-drop entre slots ──────────────────────────
+
+func _create_drag_preview(parent: Control) -> void:
+	var preview := PanelContainer.new()
+	preview.name = "DragPreview"
+	preview.visible = false
+	preview.z_index = 30
+	preview.custom_minimum_size = Vector2(48, 48)
+	var lbl := Label.new()
+	lbl.name = "Label"
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.add_theme_font_size_override("font_size", 9)
+	preview.add_child(lbl)
+	parent.add_child(preview)
+	_drag_preview = preview
+	_drag_label = lbl
+
+func _try_start_drag(slot_idx: int) -> void:
+	var bolsillo := Inventario._contenedor(0)
+	if slot_idx >= bolsillo.slots.size():
+		return
+	var s: InventorySlot = bolsillo.slots[slot_idx]
+	if s.esta_libre():
+		return
+	# Iniciar drag
+	_dragging = true
+	_drag_slot_idx = slot_idx
+	if _drag_label:
+		var item = ItemDatabase.get_item(s.item_id)
+		var display_name := s.item_id
+		if item != null:
+			display_name = item.nombre
+		_drag_label.text = "%s\nx%d" % [display_name.left(6), s.cantidad]
+	if _drag_preview:
+		_drag_preview.visible = true
+		_drag_preview.global_position = get_viewport().get_mouse_position() + Vector2(16, 16)
+	_hide_tooltip()
+
+func _cancel_drag() -> void:
+	_dragging = false
+	_drag_slot_idx = -1
+	if _drag_preview:
+		_drag_preview.visible = false
+
+func _finish_drag(target_slot: int) -> void:
+	if _drag_slot_idx < 0 or _drag_slot_idx == target_slot:
+		_cancel_drag()
+		return
+	var bolsillo := Inventario._contenedor(0)
+	if target_slot >= bolsillo.slots.size():
+		_cancel_drag()
+		return
+	# Intentar swap
+	var ok := Inventario.swap_items(0, _drag_slot_idx, 0, target_slot)
+	if ok:
+		_play_add_feedback(null)
+	_cancel_drag()
+	_refresh_inventory_ui()
+
+## ── E9: Feedback visual ─────────────────────────────────
+
+func _play_add_feedback(slot_node: Control) -> void:
+	if slot_node == null:
+		return
+	if _feedback_tween and _feedback_tween.is_valid():
+		_feedback_tween.kill()
+	_feedback_tween = create_tween()
+	_feedback_tween.tween_property(slot_node, "scale", Vector2(1.2, 1.2), 0.05)
+	_feedback_tween.tween_property(slot_node, "scale", Vector2(1.0, 1.0), 0.1)

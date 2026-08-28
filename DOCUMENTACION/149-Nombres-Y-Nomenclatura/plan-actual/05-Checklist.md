@@ -1,108 +1,108 @@
-# MÛdulo 149: Nombres y Nomenclatura ó Checklist
+# M√≥dulo 149: Nombres y Nomenclatura ‚Äî Checklist
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:35:00
 
-## A. Nombres de NPCs (15 Ìtems)
+## A. Nombres de NPCs (15 √≠tems)
 
-- [ ] Definir categorÌa: Sabios/Ancianos (Amira, Karim, Nadia)
-- [ ] Definir categorÌa: Artesanos (Carmen, Youssef, Fatima)
-- [ ] Definir categorÌa: Exploradores (Tariq, Leila, Hakim)
-- [ ] Definir categorÌa: JÛvenes (Sofia, Omar, Amina)
-- [ ] Definir categorÌa: NiÒos (Lila, Zaid, Noor)
+- [ ] Definir categor√≠a: Sabios/Ancianos (Amira, Karim, Nadia)
+- [ ] Definir categor√≠a: Artesanos (Carmen, Youssef, Fatima)
+- [ ] Definir categor√≠a: Exploradores (Tariq, Leila, Hakim)
+- [ ] Definir categor√≠a: J√≥venes (Sofia, Omar, Amina)
+- [ ] Definir categor√≠a: Ni√±os (Lila, Zaid, Noor)
 - [ ] Verificar significado de cada nombre
-- [ ] Verificar pronunciaciÛn f·cil
+- [ ] Verificar pronunciaci√≥n f√°cil
 - [ ] Verificar que no sean ofensivos
 - [ ] Crear tabla de nombres NPCs
-- [ ] Documentar reglas de nombres por categorÌa
-- [ ] Crear guÌa de pronunciaciÛn
-- [ ] Establecer proceso de validaciÛn cultural
+- [ ] Documentar reglas de nombres por categor√≠a
+- [ ] Crear gu√≠a de pronunciaci√≥n
+- [ ] Establecer proceso de validaci√≥n cultural
 - [ ] Revisar con hablantes nativos
 - [ ] Documentar historial de cambios
 - [ ] Crear template para nuevos nombres
 
-## B. Nombres de Lugares (10 Ìtems)
+## B. Nombres de Lugares (10 √≠tems)
 
-- [ ] Definir categorÌa: ¡rea natural (Valle Serena, Playa de las Estrellas)
-- [ ] Definir categorÌa: Edificio importante (Templo de la Brisa, Casa del Sabio)
-- [ ] Definir categorÌa: Punto de referencia (Fuente del Deseo, Mirador del Alba)
-- [ ] Definir categorÌa: ¡rea de juego (Zona de ConstrucciÛn)
+- [ ] Definir categor√≠a: √Årea natural (Valle Serena, Playa de las Estrellas)
+- [ ] Definir categor√≠a: Edificio importante (Templo de la Brisa, Casa del Sabio)
+- [ ] Definir categor√≠a: Punto de referencia (Fuente del Deseo, Mirador del Alba)
+- [ ] Definir categor√≠a: √Årea de juego (Zona de Construcci√≥n)
 - [ ] Verificar significado de cada nombre
 - [ ] Verificar que sean evocadores
-- [ ] Verificar que sean cortos (m·x 4 palabras)
+- [ ] Verificar que sean cortos (m√°x 4 palabras)
 - [ ] Crear tabla de lugares principales
 - [ ] Documentar reglas de nombres de lugares
 - [ ] Crear mapa de referencias
 
-## C. Convenciones de CÛdigo GDScript (15 Ìtems)
+## C. Convenciones de C√≥digo GDScript (15 √≠tems)
 
-- [ ] Definir convenciÛn para clases: PascalCase
-- [ ] Definir convenciÛn para variables: snake_case
-- [ ] Definir convenciÛn para funciones: snake_case
-- [ ] Definir convenciÛn para seÒales: PascalCase
-- [ ] Definir convenciÛn para enums: PascalCase
-- [ ] Definir convenciÛn para constantes: UPPER_SNAKE_CASE
-- [ ] Definir convenciÛn para recursos: snake_case.tres
-- [ ] Definir convenciÛn para escenas: PascalCase.tscn
+- [ ] Definir convenci√≥n para clases: PascalCase
+- [ ] Definir convenci√≥n para variables: snake_case
+- [ ] Definir convenci√≥n para funciones: snake_case
+- [ ] Definir convenci√≥n para se√±ales: PascalCase
+- [ ] Definir convenci√≥n para enums: PascalCase
+- [ ] Definir convenci√≥n para constantes: UPPER_SNAKE_CASE
+- [ ] Definir convenci√≥n para recursos: snake_case.tres
+- [ ] Definir convenci√≥n para escenas: PascalCase.tscn
 - [ ] Crear tabla de convenciones
 - [ ] Crear ejemplos de correcto/incorrecto
 - [ ] Documentar reglas de archivos y carpetas
-- [ ] Definir tags y categorÌas
+- [ ] Definir tags y categor√≠as
 - [ ] Crear template de scripts
-- [ ] Verificar consistencia en cÛdigo existente
+- [ ] Verificar consistencia en c√≥digo existente
 - [ ] Documentar proceso de code review
 
-## D. Convenciones de Archivos (15 Ìtems)
+## D. Convenciones de Archivos (15 √≠tems)
 
-- [ ] Definir convenciÛn para scripts: snake_case.gd
-- [ ] Definir convenciÛn para escenas: PascalCase.tscn
-- [ ] Definir convenciÛn para recursos: snake_case.tres
-- [ ] Definir convenciÛn para texturas: snake_case.png
-- [ ] Definir convenciÛn para audio: snake_case.wav
-- [ ] Definir convenciÛn para modelos: PascalCase.glb
-- [ ] Definir convenciÛn para animaciones: PascalCase.anim
+- [ ] Definir convenci√≥n para scripts: snake_case.gd
+- [ ] Definir convenci√≥n para escenas: PascalCase.tscn
+- [ ] Definir convenci√≥n para recursos: snake_case.tres
+- [ ] Definir convenci√≥n para texturas: snake_case.png
+- [ ] Definir convenci√≥n para audio: snake_case.wav
+- [ ] Definir convenci√≥n para modelos: PascalCase.glb
+- [ ] Definir convenci√≥n para animaciones: PascalCase.anim
 - [ ] Crear tabla de convenciones de archivos
 - [ ] Documentar reglas de naming de assets
 - [ ] Verificar consistencia en assets existentes
-- [ ] Definir convenciÛn para materiales: snake_case.tres
-- [ ] Definir convenciÛn para shaders: snake_case.gdshader
-- [ ] Definir convenciÛn para archivos de datos: snake_case.json
-- [ ] Definir convenciÛn para di·logos: PascalCase_Dialogo.tres
-- [ ] Crear validador autom·tico de nombres de archivos
+- [ ] Definir convenci√≥n para materiales: snake_case.tres
+- [ ] Definir convenci√≥n para shaders: snake_case.gdshader
+- [ ] Definir convenci√≥n para archivos de datos: snake_case.json
+- [ ] Definir convenci√≥n para di√°logos: PascalCase_Dialogo.tres
+- [ ] Crear validador autom√°tico de nombres de archivos
 
-## E. Referencia R·pida (15 Ìtems)
+## E. Referencia R√°pida (15 √≠tems)
 
 - [ ] Crear tabla visual de convenciones
 - [ ] Crear ejemplos copiables
 - [ ] Crear checklist para developers
-- [ ] Crear secciÛn de "no hacer"
-- [ ] Crear template de script est·ndar
-- [ ] Crear template de escena est·ndar
-- [ ] Crear template de recurso est·ndar
+- [ ] Crear secci√≥n de "no hacer"
+- [ ] Crear template de script est√°ndar
+- [ ] Crear template de escena est√°ndar
+- [ ] Crear template de recurso est√°ndar
 - [ ] Distribuir a todo el equipo
 - [ ] Actualizar trimestralmente
-- [ ] Mantener en repositorio f·cil de encontrar
+- [ ] Mantener en repositorio f√°cil de encontrar
 - [ ] Crear poster visual de convenciones para el equipo
-- [ ] Crear cheatsheet de 1 p·gina para impresiÛn
-- [ ] Integrar con M111 (CÛdigo de Calidad) para linting
+- [ ] Crear cheatsheet de 1 p√°gina para impresi√≥n
+- [ ] Integrar con M111 (C√≥digo de Calidad) para linting
 - [ ] Crear snippet library para IDE (VS Code / Cursor)
-- [ ] Crear pre-commit hook que valide naming autom·ticamente
+- [ ] Crear pre-commit hook que valide naming autom√°ticamente
 
-## F. ValidaciÛn (10 Ìtems)
+## F. Validaci√≥n (10 √≠tems)
 
-- [ ] Definir proceso de validaciÛn de nombres
-- [ ] Crear checklist de revisiÛn cultural
+- [ ] Definir proceso de validaci√≥n de nombres
+- [ ] Crear checklist de revisi√≥n cultural
 - [ ] Definir proceso de code review para nombres
-- [ ] Crear scripts de automatizaciÛn de linting
-- [ ] Definir herramientas de validaciÛn
-- [ ] Crear proceso de aprobaciÛn de nuevos nombres
-- [ ] Documentar proceso de validaciÛn
-- [ ] Entrenar al equipo en validaciÛn
+- [ ] Crear scripts de automatizaci√≥n de linting
+- [ ] Definir herramientas de validaci√≥n
+- [ ] Crear proceso de aprobaci√≥n de nuevos nombres
+- [ ] Documentar proceso de validaci√≥n
+- [ ] Entrenar al equipo en validaci√≥n
 - [ ] Revisar proceso trimestralmente
 - [ ] Mantener historial de decisiones
 
-## G. DocumentaciÛn y Mantenimiento (10 Ìtems)
+## G. Documentaci√≥n y Mantenimiento (10 √≠tems)
 
 - [ ] Crear directorio docs/naming/
 - [ ] Mantener documentos actualizados
@@ -110,23 +110,23 @@
 - [ ] Entrenar al equipo en naming conventions
 - [ ] Revisar convenciones por milestone
 - [ ] Documentar decisiones de naming
-- [ ] Crear referencia r·pida para el equipo
+- [ ] Crear referencia r√°pida para el equipo
 - [ ] Archivar versiones anteriores
 - [ ] Crear changelog de naming conventions
 - [ ] Evaluar efectividad de convenciones
 
-## H. LocalizaciÛn y Multiidioma (5 Ìtems)
+## H. Localizaci√≥n y Multiidioma (5 √≠tems)
 
-- [ ] Definir reglas para nombres en diferentes idiomas (M87 LocalizaciÛn)
+- [ ] Definir reglas para nombres en diferentes idiomas (M87 Localizaci√≥n)
 - [ ] Verificar que nombres NPCs no tengan significado ofensivo en otros idiomas
-- [ ] Definir transliteraciÛn para idiomas con sistemas de escritura diferentes
-- [ ] Documentar quÈ nombres son internacionales vs. quÈ cambian por regiÛn
+- [ ] Definir transliteraci√≥n para idiomas con sistemas de escritura diferentes
+- [ ] Documentar qu√© nombres son internacionales vs. qu√© cambian por regi√≥n
 - [ ] Crear tabla de equivalencias de lugares por idioma
 
-## I. IntegraciÛn con Otros MÛdulos (5 Ìtems)
+## I. Integraci√≥n con Otros M√≥dulos (5 √≠tems)
 
 - [ ] Verificar coherencia con M22 (Historia Principal): nombres de eventos y lugares
 - [ ] Verificar coherencia con M23 (NPCs): nombres de personajes secundarios
 - [ ] Verificar coherencia con M30 (Mundo): nombres de regiones y biomas
-- [ ] Verificar coherencia con M41 (M˙sica): nombres de pistas y leitmotifs
-- [ ] Verificar coherencia con M150 (DiseÒo Sonoro): nombres de efectos de sonido
+- [ ] Verificar coherencia con M41 (M√∫sica): nombres de pistas y leitmotifs
+- [ ] Verificar coherencia con M150 (Dise√±o Sonoro): nombres de efectos de sonido

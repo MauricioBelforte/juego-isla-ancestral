@@ -158,28 +158,50 @@ func split_stack(from_container: int, from_slot: int, amount: int, to_container:
 		return true
 	return false
 
-## Ordena un contenedor por categoría → rareza → nombre.
-func sort_container(container: int, _mode: int = 0) -> void:
+## Ordena un contenedor. mode: 0=favoritos+id, 1=nombre, 2=categoría, 3=rareza
+func sort_container(container: int, mode: int = 0) -> void:
 	var c := _contenedor(container)
-	# Recoger todos los ítems
+	# Recoger todos los ítems con metadata para sort
 	var items: Array = []
 	for s in c.slots:
 		if not s.esta_libre():
+			var item_data = ItemDatabase.get_item(s.item_id)
 			items.append({
 				"id": s.item_id,
 				"n": s.cantidad,
 				"fav": s.favorito,
 				"lock": s.bloqueado,
 				"inst": s.instancia.duplicate(true),
+				"cat": int(item_data.categoria) if item_data else 0,
+				"rare": item_data.rareza if item_data else 0,
+				"name": item_data.nombre if item_data else s.item_id,
 			})
-	# Ordenar: favoritos primero, luego por id
-	items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		if a.get("fav", false) and not b.get("fav", false):
-			return true
-		if not a.get("fav", false) and b.get("fav", false):
-			return false
-		return a.get("id", "") < b.get("id", "")
-	)
+	# Ordenar según mode
+	match mode:
+		0:  # Favoritos primero, luego por id
+			items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+				if a.get("fav", false) and not b.get("fav", false):
+					return true
+				if not a.get("fav", false) and b.get("fav", false):
+					return false
+				return a.get("id", "") < b.get("id", "")
+			)
+		1:  # Por nombre
+			items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+				return a.get("name", "") < b.get("name", "")
+			)
+		2:  # Por categoría, luego nombre
+			items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+				if a.get("cat", 0) != b.get("cat", 0):
+					return a.get("cat", 0) < b.get("cat", 0)
+				return a.get("name", "") < b.get("name", "")
+			)
+		3:  # Por rareza (mayor primero), luego nombre
+			items.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+				if a.get("rare", 0) != b.get("rare", 0):
+					return a.get("rare", 0) > b.get("rare", 0)
+				return a.get("name", "") < b.get("name", "")
+			)
 	# Reconstruir slots
 	for s in c.slots:
 		s.vaciar()

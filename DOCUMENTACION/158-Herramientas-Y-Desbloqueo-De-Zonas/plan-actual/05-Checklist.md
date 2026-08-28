@@ -1,9 +1,9 @@
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Modulo 158: Herramientas y Desbloqueo de Zonas
+# 05-Checklist.md â€” Modulo 158: Herramientas y Desbloqueo de Zonas
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple Â· [M] medio Â· [C] complejo. Estados: [ ] cumplido Â· [ ] pendiente Â· [?] no resuelto.
 
 ## A. Requisitos del modulo (15)
 
@@ -46,7 +46,7 @@
 - [ ] Gate tipo muro de piedra: requiere T2, pico [S]
 - [ ] Gate tipo raiz anciana: requiere T2, hacha [S]
 - [ ] Gate tipo sello ancestral: requiere T3, pico [S]
-- [ ] Gate tipo cristal bloqueado: requiere T4, cristal [S]
+- [ ] Gate tipo cristal bloqueado: requiere T4, cristal [S]
 - [ ] Gate tipo tumba ancestral: requiere T4, cristal [S]
 - [ ] Verificacion de tier: can_access_zone() retorna bool [M]
 - [ ] Feedback visual al no tener tier (brillo rojo suave) [S]
@@ -59,8 +59,8 @@
 ## D. Forja por Isla (15)
 
 - [ ] ForgeRecipe como Resource (result_tool, result_tier, materials, coins) [M]
-- [ ] Isla Raiz: forja T1 cobre gratis (regalo del carpintero) [S]
-- [ ] Isla Ceniza: forja T2 hierro con 10 hierro + 500 monedas [M]
+- [ ] Isla Raiz: forja T1 cobre gratis (regalo del carpintero) [S]
+- [ ] Isla Ceniza: forja T2 hierro con 10 hierro + 500 monedas [M]
 - [ ] Isla Coral: forja T3 oro con 20 oro + 2000 monedas [M]
 - [ ] Isla Aurora: forja T4 cristal con 5 cristales + 5000 monedas [M]
 - [ ] ForgeUI como Control con lista de recetas [M]
@@ -77,8 +77,8 @@
 ## E. Cursos de Oficio (12)
 
 - [ ] CourseDefinition como Resource (course_id, profession, cost, required_tier) [M]
-- [ ] Curso Carpinteria (Raiz): 300 monedas, vende T1 [S]
-- [ ] Curso Herreria (Ceniza): 1500 monedas, vende T1-T2 [S]
+- [ ] Curso Carpinteria (Raiz): 300 monedas, vende T1 [S]
+- [ ] Curso Herreria (Ceniza): 1500 monedas, vende T1-T2 [S]
 - [ ] Curso Herreria Avanzada (Coral): 5000 monedas, vende T1-T3 [S]
 - [ ] Curso Cristaleria (Aurora): 10000 monedas, vende T1-T4 [S]
 - [ ] CourseUI como Control con info del curso [M]
@@ -181,4 +181,4 @@
 - [ ] Tabla de costos por isla documentada [S]
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 122 items · Completados: 0 · Pendientes: 122 · No resueltos: 0
+**Totales:** 122 items Â· Completados: 0 Â· Pendientes: 122 Â· No resueltos: 0
