@@ -77,7 +77,7 @@ func _crear_visuales() -> void:
 	_label_nombre.text = perfil.nombre if perfil else "Vecino"
 	_label_nombre.font_size = 14
 	_label_nombre.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_label_nombre.position.y = 1.7
+	_label_nombre.position.y = 2.0
 	_label_nombre.modulate = Color(1, 1, 1, 0.9)
 	_label_nombre.name = "LabelNombre"
 	add_child(_label_nombre)
