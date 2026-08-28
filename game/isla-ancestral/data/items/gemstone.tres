@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "gemstone"
+nombre = "Gema"
+descripcion = "Piedra preciosa de la isla. Brilla con luz propia."
+categoria = 14
+apilable = true
+stack_max = 20
+rareza = 2
+precio_venta = 50

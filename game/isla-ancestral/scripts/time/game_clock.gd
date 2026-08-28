@@ -28,6 +28,7 @@ const ESTACION_POR_MES := [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
 
 signal dia_cambio(info: Dictionary)
 signal hora_cambio(hora: int)
+signal minuto_cambio(minuto: int)
 signal estacion_cambio(estacion: int)
 signal evento_activado(evento: Dictionary)
 
@@ -58,12 +59,15 @@ func _process(delta: float) -> void:
 	while _acumulador >= 1.0:
 		_acumulador -= 1.0
 		_avanzar_minuto()
-## Avanza un minuto de juego; en cada hora emite hora_cambio, en día nuevo dia_cambio.
+## Avanza un minuto de juego; en cada minuto emite minuto_cambio, en cada hora
+## hora_cambio, en día nuevo dia_cambio.
 func _avanzar_minuto() -> void:
 	_minuto += 1
-	if _minuto < 60:
+	if _minuto >= 60:
+		_minuto = 0
+	minuto_cambio.emit(_minuto)
+	if _minuto != 0:
 		return
-	_minuto = 0
 	var hora_ant := _hora
 	_hora = (_hora + 1) % 24
 	if _hora != hora_ant:

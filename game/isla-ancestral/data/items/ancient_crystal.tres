@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "ancient_crystal"
+nombre = "Cristal Antiguo"
+descripcion = "Cristal de la civilización ancestral. Guarda memorias olvidadas."
+categoria = 14
+apilable = false
+stack_max = 1
+rareza = 3
+precio_venta = 200

@@ -1022,3 +1022,27 @@ var current_value = int(_terrain.get_voxel(pos, VoxelBuffer.CHANNEL_TYPE))
 | 2026-08-26 | MiMo V2.5 | OpenCode | Agregadas §9.29 (múltiples handlers ESC se anulan) y §9.30 (movimiento relativo a cámara). M12 completado |
 | 2026-08-26 | MiMo V2.5 | OpenCode | Agregadas §9.31 (VoxelBoxMover lee voxel directo), §9.32 (right vector invertido), §9.33 (GameSettings autoload pattern), §9.34 (look_at + lerp drift). M08/M11/M12 completados, M13 desbloqueado |
 | 2026-08-27 | MiMo V2.5 | OpenCode | Agregada §9.35 (VoxelTool retorna Variant, no usar `:=`). M13 implementado: tool_controller integrado con VoxelTerrain |
+
+---
+
+### 9.36 add_child durante _ready() causa "Parent node busy"
+
+**Error:** `ERROR: Parent node is busy setting up children, add_child() failed. Consider using add_child.call_deferred(child) instead.`
+
+**Causa:** Llamar `add_child()` dentro de `_ready()` mientras el padre aún está configurando sus hijos causa conflictos de orden. Especialmente común cuando se crean CanvasLayer/HUDs durante la inicialización del jugador.
+
+**Solución:** Usar `call_deferred()` para diferir la creación de nodos al siguiente frame:
+
+```gdscript
+# ❌ Incorrecto — falla durante _ready()
+func _ready() -> void:
+    _create_hotbar_hud()
+
+# ✅ Correcto — deferred al siguiente frame
+func _ready() -> void:
+    _create_hotbar_hud.call_deferred()
+```
+
+**Regla:** Si un nodo se agrega al scene tree durante `_ready()` y el padre aún no terminó, siempre usar `.call_deferred()`.
+
+**Archivo:** `scripts/player/player.gd`. **Fecha:** 2026-08-27 · **Agente:** MiMo V2.5 (OpenCode)

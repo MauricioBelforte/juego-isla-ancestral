@@ -31,12 +31,15 @@ func _ready() -> void:
 	_refrescar()
 	# Suscripción por señales (design doc §2: tick sin polling)
 	if _game_time != null:
+		_game_time.minuto_cambio.connect(_on_minuto_cambio)
 		_game_time.hora_cambio.connect(_on_hora_cambio)
 		_game_time.dia_cambio.connect(_on_dia_cambio)
 		_game_time.estacion_cambio.connect(_on_estacion_cambio)
 
 func _exit_tree() -> void:
 	if _game_time != null:
+		if _game_time.minuto_cambio.is_connected(_on_minuto_cambio):
+			_game_time.minuto_cambio.disconnect(_on_minuto_cambio)
 		if _game_time.hora_cambio.is_connected(_on_hora_cambio):
 			_game_time.hora_cambio.disconnect(_on_hora_cambio)
 		if _game_time.dia_cambio.is_connected(_on_dia_cambio):
@@ -144,6 +147,9 @@ func _estacion_nombre(est: int) -> String:
 	return NOMBRES[clampi(est, 0, 3)]
 
 ## ── Handlers de señales GameTime (M29) ───────────────────────────────────────
+func _on_minuto_cambio(_m: int) -> void:
+	_refrescar()
+
 func _on_hora_cambio(_h: int) -> void:
 	_refrescar()
 

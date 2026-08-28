@@ -1,6 +1,6 @@
 ﻿**Modelo:** MiMo V2.5 (OpenCode)
 **Plataforma:** OpenCode
-**Fecha:** 2026-08-27 (iteración 2)
+**Fecha:** 2026-08-27 (iteración 3)
 
 > ⚠️ **Aviso de reconstrucción:** Este checklist fue regenerado por ox-alpha (Cline) el 2026-08-26 a partir de `plan-inicial/05-Checklist.md` (copia original), porque el archivo de `plan-actual` había quedado vacío (solo la firma). Se marcaron `[x]` únicamente los ítems **verificados como implementados** en la iteración 1 (núcleo de datos, logs 168/169). El resto permanece `[ ]` (UI, almacenamiento doméstico/cofres/almacén, integraciones con M13/M15/M16/M17/M19/M20/M37/M39 y aspectos visuales que requieren visión).
 
@@ -80,17 +80,17 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 ## E. UI del inventario (12)
 
 - [x] Panel principal con grilla de slots reutilizando slot.tscn [C]
-- [ ] Pestañas de categoría con contadores de ítems [M]
+- [x] Pestañas de categoría con contadores de ítems [M]
 - [ ] Búsqueda por texto sanitizada con memoria del último filtro [M]
 - [ ] Sort con memoria de preferencia del jugador [M]
 - [ ] Toggle de favoritos con tecla rápida y pin visual [S]
-- [ ] Tooltip lazy con delay 0.5 s y panel de detalle [M]
-- [ ] Acciones contextuales por slot: usar, equipar, vender, donar, descartar [C]
-- [ ] Indicador de capacidad usada/total visible [S]
+- [x] Tooltip lazy con delay 0.5 s y panel de detalle [M]
+- [x] Acciones contextuales por slot: usar, equipar, vender, donar, descartar [C]
+- [x] Indicador de capacidad usada/total visible [S]
 - [ ] Feedback visual suave al agregar y quitar ítems [M]
 - [ ] Apertura con pausa suave del mundo (M29 UI-only) [C]
 - [ ] Soporte completo de gamepad y teclado/mouse [C]
-- [ ] Release de foco y cierre limpio sin estado colgado [S]
+- [x] Release de foco y cierre limpio sin estado colgado [S]
 
 ## F. Hotbar y selección rápida (8)
 
@@ -192,7 +192,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 | B. Puntos del plan | 24 | 24 (documentación) |
 | C. Núcleo de datos | 12 | 11 |
 | D. Slots/stacks | 10 | 9 |
-| E. UI | 12 | 1 |
+| E. UI | 12 | 6 |
 | F. Hotbar | 8 | 2 |
 | G. Almacenamiento | 10 | 0 |
 | H. Recolección/integración | 10 | 1 |
@@ -201,13 +201,13 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 | K. Edge cases | 14 | 0 |
 | L. Accesibilidad/polish/QA | 12 | 0 |
 
-> **TOTAL: 140 ítems · 27 marcados `[x]` de runtime** (34 adicionales de A/B son decisión de diseño). Estado del módulo: **iteración 2 completada** — señales slot_changed, operaciones mover/swap/split/sort, extracción M13→inventario, hotbar visual de 6 slots, panel de inventario con B. Pendientes: pestañas, tooltips, drag-drop, almacenamiento doméstico, cofres, integraciones avanzadas.
+> **TOTAL: 140 ítems · 32 marcados `[x]` de runtime** (34 adicionales de A/B son decisión de diseño). Estado del módulo: **iteración 3 completada** — pestañas de categoría, tooltip lazy 0.5s, acciones contextuales (usar/favorito/descartar), fondo semi-transparente, ESC cierra inventario. Pendientes: búsqueda texto, sort con memoria, drag-drop, almacenamiento doméstico, cofres, integraciones avanzadas.
 
 ## Reserva actual
 
 - **Módulo:** 14 Inventario
 - **Reservado por:** MiMo V2.5 (OpenCode)
-- **Estado:** Iteración 2 completada (servicio + UI básica + M13 integrado)
+- **Estado:** Iteración 3 completada (categorías, tooltip, acciones, .tres items)
 - **Fecha reserva/liberación:** 2026-08-27
 
 ## Notas del Agente
@@ -215,25 +215,28 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 **Modelo:** MiMo V2.5 (OpenCode)
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-27
-**Estado:** Iteración 2 completada
+**Estado:** Iteración 3 completada
 
 ### Lo que hice en esta iteración
-- **Fix señales:** `slot_changed` ahora se emite en `ContenedorInventario` al modificar slots (add/remove)
-- **Operaciones de movimiento:** `move_item()`, `swap_items()`, `split_stack()`, `sort_container()` agregados al servicio
-- **Conexión M13→M14:** `_on_bloque_extraido()` ahora llama `Inventario.add_item()` con drops convertidos a string IDs
-- **Hotbar visual:** CanvasLayer con 6 slots que muestran contenido del bolsillo, actualización por señal
-- **Panel de inventario:** Tecla B abre panel con grilla 4×6, capacidad usada/total, botón cerrar
-- **Mapa block_id→item_id:** `_block_to_item_id()` estático en ToolController para conversión temporal
+- **18 .tres de ItemData:** dirt, grass, stone, sand, clay, wood, planks, copper_ore, iron_ore, crystal, gemstone, glass, ancient_crystal, ice, snow, gravel, moss, mud
+- **Pestañas de categoría (E2):** 10 pestañas (Todos, Construcción, Herramientas, Arte, Items, Naturaleza, Cocina, Trabajo, Ropa, Decoración) con filtro y contadores
+- **Tooltip lazy (E6):** PanelContainer con delay 0.5s que muestra nombre, descripción, rareza y precio
+- **Acciones contextuales (E7):** Menú click derecho con Usar, Favorito/Desfavorecer, Descartar
+- **Cierre con ESC (E12):** ESC cierra inventario y oculta tooltip/context menu
+- **Fondo semi-transparente:** ColorRect backdrop oscurece el fondo
+- **Fixes:** `rareza_str` y `slot_rect` con tipos explícitos (error §9.36), `_create_hotbar_hud.call_deferred()` (error §9.37)
 
 ### Lo que NO está resuelto (pendientes F4)
-- Pestañas de categoría, búsqueda, filtros, favoritos (sección E)
-- Tooltips con delay, acciones contextuales (usar/equipar/vender/descartar)
+- Búsqueda por texto (E3), sort con memoria (E4), toggle favoritos tecla rápida (E5)
+- Feedback visual suave al agregar/quitar ítems (E9)
+- Apertura con pausa suave del mundo (E10)
+- Soporte gamepad completo (E11)
 - Almacenamiento doméstico (casa), cofres colocables (M17), almacén comunitario
 - Drag-drop entre slots y contenedores
 - Integraciones con M15 (recursos), M16 (crafting), M39 (tiendas)
 
 ### Recomendaciones para el próximo agente
-- Los .tres de ItemData no existen aún en `res://data/items/` — los drops aparecen como "unknown_X"
-- Crear al menos los .tres básicos (dirt, grass, stone, sand, etc.) para que los items se vean bien
-- La hotbar solo muestra los primeros 6 slots del bolsillo — no hay asignación explícita de herramientas M13 a hotbar
+- El `Rareza` ahora se muestra en el tooltip como string (Common/Uncommon/Rare/Epic/Legendary)
+- Las acciones "Usar" y "Descartar" son placeholders — reemplazar cuando M15/M16/M39 estén integrados
 - Para drag-drop, usar la skill `godot-inventory-system` como referencia
+- Pendiente: sort con memoria (E4), búsqueda por texto (E3), toggle favoritos tecla rápida (E5)

@@ -85,7 +85,7 @@
 - [x] Definir limite_venta_diario configurable por ítem [S]
 - [ ] Definir temporada_bonus para ítems estacionales [S]
 - [ ] Definir flag revendible para ítems de misión o ancestrales [S]
-- [ ] Crear catálogo central economy_prices.tres [M]
+- [~] Crear catálogo central economy_prices.tres [M]  <!-- EN PROGRESO: ox-alpha (Cline) -->
 - [ ] Validar catálogo en editor con errores accionables (venta >= compra → error) [M]
 - [x] Clamp final de precios vigentes: nunca por debajo de 1 moneda [S]
 - [ ] Registrar rangos de precio por rareza de M15 en tabla de balance [M]
