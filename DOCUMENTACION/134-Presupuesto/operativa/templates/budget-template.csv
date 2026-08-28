@@ -1,0 +1,17 @@
+Categoría,Subcategoría,Costo Mensual (USD),Duración (meses),Total (USD),Porcentaje (%),Notas
+Personal,Programadores,0,12,0,30,Techo del escenario financiado; montos 0 en modo actual
+Personal,Artistas 3D/2D,0,12,0,15,Techo del escenario financiado
+Personal,Disenadores,0,12,0,5,Techo del escenario financiado
+Personal,Audio,0,12,0,3,Techo del escenario financiado
+Personal,QA/Produccion,0,12,0,2,Techo del escenario financiado
+Herramientas,Software,0,12,0,5,Stack actual gratuito (Godot/Blender/git)
+Herramientas,Hardware,0,12,0,3,Equipo existente del fundador
+Herramientas,Licencias,0,12,0,2,Sin licencias pagas vigentes
+Marketing,Ads digitales,0,12,0,8,Modo actual: canales organicos (M99)
+Marketing,Eventos/Convenciones,0,12,0,5,Sin asistencia planificada
+Marketing,PR/Comunidad,0,12,0,4,Devolgs/redes propias
+Marketing,Assets de marketing,0,12,0,3,Capturas/trailers propios (M98)
+Operaciones,Servicios,0,12,0,2,Hosting/dominio segun M99
+Operaciones,Legal,0,12,0,2,Revisiones M78-M82 si corresponden
+Reserva,Imprevistos,0,12,0,11,Minimo 11% del total; objetivo 20%
+Gasto unico,Steam Direct Fee,0,1,100,,Unico desembolso confirmado (una vez, pre-publicacion)

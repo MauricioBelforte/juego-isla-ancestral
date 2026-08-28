@@ -164,14 +164,14 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 71-Progresion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: desbloqueos, hitos, mejoras, logros, anti-frustración (213/213) |
 | 92-Tutorial | ✅ Creado por Deepseek V4 Flash — DELEGABLE: onboarding inmersion, pistas contextuales, skip (185/185) |
 | 112-Testing-Automatico | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GUT/GdUnit4, CI headless, cobertura (230/230) |
-| 133-Gestion-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: metodología, hitos, DoD, tablero (127/127) |
-| 135-Riesgos-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — DELEGABLE: matriz de riesgos, mitigaciones, monitoreo (134/134) |
+| 133-Gestion-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: README gestión, guia-hitos, guia-sprints, flujo-multiagente, adrs/, actas/, reportes/ (127/127) |
+| 135-Riesgos-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: RISK-REGISTER.md (16 entradas) + GUIA-REVISION-TRIMESTRAL.md (134/134) |
 | 60-Datos-Y-Serializacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: JSON/binario, versionado, migraciones, saves (197/197) |
 | 97-Steam-Store-Page | ✅ Creado por Deepseek V4 Flash — DELEGABLE: descripción, tags, capturas, precio, wishlists (195/195) |
 | 101-QA-General | ✅ Creado por Deepseek V4 Flash — DELEGABLE: checklist por área, sesiones, regresión, release (205/205) |
 | 108-Pipeline-De-Assets | ✅ Creado por Deepseek V4 Flash — DELEGABLE: formatos, importación, optimización, review (181/181) |
 | 114-Playtest | ✅ Creado por Deepseek V4 Flash — DELEGABLE: sesiones, observación, encuestas, iteración (186/186) |
-| 136-Roadmap | ✅ Creado por Deepseek V4 Flash — DELEGABLE: hitos M137-143, dependencias, prioridades (199/199) |
+| 136-Roadmap | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: ROADMAP.md + hitos/137-143 con estados reales (199/199) |
 | 39-Tiendas | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogos por NPC, horarios, stock renovable (181/181) |
 | 40-Infraestructura | ✅ Creado por Deepseek V4 Flash — DELEGABLE: autoloads, servicios base, bootstrap (211/211) |
 | 54-Mapa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: mapa de exploración, minimapa, POI, marcas (170/170) |
@@ -196,7 +196,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 76-Multijugador | ✅ Creado por Deepseek V4 Flash — DECISIÓN: v1 single-player cozy (argumentos de género y coste); contrato MP futuro completo (25 puntos del plan maestro): local couch primero (host autoritativo, progreso individual, anti-griefing por diseño, $0 servidores), online condicionado a hit >10k descargas (M77), economía protegida (M38: solo decoración), chat sin texto libre, manifiesto mp_contract.json + verificador validate_mp_contract.gd; implementación BLOQUEADA por producto (130/130) |
 | 77-Online-Y-Red | ✅ Creado por Deepseek V4 Flash — CONTRATO: arquitectura de red futura (23 puntos del plan maestro) — cliente-servidor dedicado sobre P2P, snapshots @ 10 Hz por área, interpolación + predicción (latencia <200 ms), reconexión JWT <10 s, anti-trampas server-authoritative, seguridad API (TLS 1.3, rate limit), telemetría M64, autoscaling (1 instancia ≈ 200 CCU), backups RPO 15 min/RTO 2 h (M65), costes ~$230-370/mes condicionados a hit; net_contract.json + validate_net_contract.gd; BLOQUEADO por hit de M76, cero red en v1 (130/130) |
 | 61-Rendimiento | ✅ Creado por Deepseek V4 Flash (RECLAMADO a GPT-5 por inactividad >24 h) — NORMA transversal: objetivo 60/30 FPS, presupuesto por categorías (16,5 ms @ 60 FPS), hardware min/recomendado, técnicas obligatorias con módulo dueño (culling, occlusion en cuevas/templos, LOD 3 niveles + impostor, batching por chunk, GPU instancing, pooling), bench scene oficial de 60 s, gate CI ±10 % (M116), cero allocations y GC en pausas seguras; budget_profile.gd + validate_budget.gd + budgets.cfg (130/130) |
-| 153-Objetivo-Final | ✅ Creado por Deepseek V4 Flash (RECLAMADO a B2-Composer por inactividad >24 h) — VISIÓN: 19 objetivos del plan maestro (sección 152) convertidos en contrato O1-O19 con criterio verificable, indicador (playtest M113 / telemetría M104 / QA M101) y módulos dueños; regla de integración (cada módulo declara O#), subordinación a M151, prueba de visión para playtest, aplicación en M150 (Control Final); vision_contract.json + validate_vision.gd (130/130) |
+| 153-Objetivo-Final | ✅ Creado por Deepseek V4 Flash (RECLAMADO a B2-Composer por inactividad >24 h) — VISIÓN: 19 objetivos del plan maestro (sección 152) convertidos en contrato O1-O19 con criterio verificable, indicador (playtest M113 / telemetría M104 / QA M101) y módulos dueños; regla de integración (cada módulo declara O#), subordinación a M151, prueba de visión para playtest, aplicación en M150 (Control Final); vision_contract.json + validate_vision.gd (130/130) — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con contract v1.1 + validate_vision.py EN VERDE + prueba_vision.md (120/130 + 10 [?]) |
 | 154-Vision-Del-Agente | ✅ Creado por stealth/ox-alpha — 5 vías de visión para agentes (V1 chat, V2 MCP screen, V3 web+Playwright, V4 godot-mcp ⭐ fundamental, V5 Blender+blender-mcp ⭐ assets con guía detallada), matriz de decisión, protocolo de iteración visual (55/152) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
@@ -212,7 +212,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 119-Actualizaciones | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistema de updates, notificación, compatibilidad de saves, rollback, integración con plataformas (100/100) |
 | 128-Identidad-De-Marca | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Logo, paleta, tipografía, manual de marca, trademarks, presencia online, merchandise (100/100) |
 | 132-Produccion-De-Equipo | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Estructura organizativa, roles, comunicación, gestión de tareas, resolución de conflictos, onboarding (100/100) |
-| 134-Presupuesto | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Desglose por categorías, control de gastos, proyecciones de ingresos, break-even, reserva imprevistos (100/100) |
-| 145-Diseno-De-Experiencia | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Player journey, onboarding, arquitectura de menús, feedback, accesibilidad, métricas de experiencia (100/100) |
-| 146-Diseno-Emocional | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Paleta emocional, mapeo por fase, mecánicas emocionales, wow moments, validación, cozy checklist (100/100) |
-| 149-Nombres-Y-Nomenclatura | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Guía de nombres NPCs, lugares, convenciones GDScript, archivos, referencias rápidas, validación (100/100) |
+| 134-Presupuesto | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con desglose, control de gastos, proyecciones, dashboard, guía y 4 plantillas (100/100) |
+| 145-Diseno-De-Experiencia | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 7 docs (91/105 + 14 [?] de fase jugable) |
+| 146-Diseno-Emocional | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 5 docs (90/100 + 10 [?] de fase jugable) |
+| 149-Nombres-Y-Nomenclatura | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 5 docs + validador ejecutable (97/100 + 3 [?]) |

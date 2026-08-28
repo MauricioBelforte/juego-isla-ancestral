@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** Hy3
+**Plataforma:** Kilo
 
 # 04-Codigo.md — Módulo 13: Herramientas
 
@@ -61,3 +61,56 @@ data/tools/tool_catalog.tres          → tabla completa (9 × 4 niveles)
 - Respetar el contrato try_extract/try_place (una sola escritura de diffs, M08).
 - Nunca implementar rotura total de herramientas: es regla cozy roja del proyecto.
 - La caña y la lupa son "herramientas de conocimiento": no gastan durabilidad (M35/M26).
+
+## 6. Implementación real (2026-08-28 — Hy3 / Kilo)
+
+La especificación anterior se implementó con estos archivos reales:
+
+```
+scripts/tools/tool_data.gd          → Resource con STATS 9×4, acciones, durabilidad cozy, serialización
+scripts/tools/tool_controller.gd    → raycast por cámara (VoxelTool.raycast), extracción progresiva
+                                      multi-golpe (GOLPES 2-6), highlight válido/inválido, cooldown,
+                                      área 3×3 T3+, contrato try_extract/try_place (M08)
+scripts/tools/tool_feedback.gd      → sonidos sintetizados (AudioStreamWAV) + partículas (GPUParticles3D),
+                                      desacoplado: escucha señales del controller
+scripts/tools/test_herramientas.gd  → test headless (0 fallos): catálogo, cozy, serialización, contratos
+scripts/player/player.gd            → hotbar (1-6), HUD durabilidad M57, fallback de mano, herramientas
+                                      iniciales de cobre; E/Q polling en ToolController (§9.29)
+scripts/main_island.gd              → library de bloques alineada a BlockType (IDs 0-29)
+```
+
+Contratos vigentes: `intentar_golpe()` (E, con cooldown), `try_place(block_id)` (Q con martillo),
+señales `bloque_extraido/bloque_colocado/golpe_conectado/golpe_fallido/herramienta_equipada/durabilidad_cambiada`
+(snake_case §1.1). Lectura de voxel SOLO por `VoxelTool.get_voxel(pos)` (§9.40).
+
+## 7. Notas del Agente (cierre Fase 3)
+
+**Modelo:** Hy3
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 22:55:00
+**Estado:** Fase 3 completada (guía 08); núcleo jugable + feedback operativo
+
+### Lo que hice
+- Conexión real al mundo voxel con validación in-engine (V4 godot-mcp): raycast desde cámara,
+  extracción progresiva (dirt = 2 golpes verificado en vivo), drops → Inventario M14 (1/24 slots).
+- Highlight "late": solo objetivos válidos según categoría de bloque; amarillo al 60% de progreso;
+  inválidos (agua/roca madre/herramienta equivocada) nunca se iluminan; fallo avisa con sonido+log.
+- HUD M57 completo (verificado con captura in-engine): hotbar 6 slots, durabilidad por estado,
+  parpadeo <20%, herramienta activa resaltada, etiqueta equipada.
+- Sonido/partículas procedurales desacoplados en tool_feedback.gd (M65 dará assets finales).
+- Test headless 0 fallos + autotest in-engine end-to-end + 4 capturas en capturas/13-Herramientas/.
+- Fix estructural: library de bloques alineada a BlockType (IDs 18-25 placeholders) — corrige
+  renderizado/extracción de nieve/grava/musgo/barro.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Integraciones con dueños: M16 (mesa/mejoras/reparación), M17 (zonas), M33 (parcelas),
+  M35 (pesca), M46 (profundidad), M45 (modelo de mano), M65 (assets), M59 (persistencia),
+  M53/M19 (prompt F), M22 (tutorial), M71 (logros), M12 (zoom de uso).
+- Prueba de teclado inyectado por consola intermitente por foco; prueba de mano (E/Q, 1-6) para el usuario.
+
+### Recomendaciones para el próximo agente
+- El spawn (20,15,64) deja al jugador flotando sobre agua: revisar en M09/M11 (spec decía 20,8,64).
+- Para evidencia de UI usar captura in-engine (get_viewport().get_texture()); PrintWindow puede
+  omitir capas UI recientes (ver 06-GUIA-DE-CONEXION-VISION, descubrimientos de capturas).
+- Herramientas iniciales hardcodeadas en _crear_herramientas_iniciales(): reemplazar por
+  adquisición real cuando M14/M16 existan.

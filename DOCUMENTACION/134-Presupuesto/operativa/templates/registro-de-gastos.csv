@@ -1,0 +1,2 @@
+Fecha,Descripcion,Categoria,Subcategoria,Monto (USD),Metodo de pago,Aprobado por,Comprobante/URL,Notas
+2026-08-28,EJEMPLO (borrar al usar): Steam Direct Fee,Gasto unico,Publicacion,100,Tarjeta,Fundador,https://ejemplo/recibo.pdf,Registro append-only: nunca editar o borrar filas

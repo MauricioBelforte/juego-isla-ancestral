@@ -1,8 +1,8 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-17
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 (implementación) · 2026-08-17 (documentación original por Deepseek V4 Flash)
 **Componente:** 136-Roadmap
-**Estado:** Documentación inicial (plan original)
+**Estado:** Implementación operativa completa (pendiente de QA cruzado)
 
 ---
 
@@ -18,20 +18,20 @@ Módulo **administrativo / de planificación**: define la hoja de ruta del desar
 
 ## 2. Archivos Previstos (implementación del módulo)
 
-> ⚠️ **Todos estos archivos están "Pendiente de implementación"**: son la implementación operativa que un agente posterior (o el fundador) debe crear siguiendo este diseño. Este documento solo los especifica.
+> ✅ **Implementado el 2026-08-28 por GLM (Kilo).** `ROADMAP.md` y los 7 checklists de hito ya existen con contenido real (estados de CHECKLIST-GLOBAL al 2026-08-28). La especificación se conserva abajo como referencia.
 
 ```
 DOCUMENTACION/136-Roadmap/
 ├── plan-inicial/                       ← Documentación original (inmutable)
-├── plan-actual/                        ← Espejo del plan inicial (este módulo)
+├── plan-actual/                        ← Documentación vigente (espejo)
 │   ├── 01-Requerimientos.md
 │   ├── 02-Analisis.md
 │   ├── 03-Diseno.md
 │   ├── 04-Codigo.md
 │   ├── 05-Checklist.md
-│   └── ROADMAP.md                      ← PENDIENTE DE IMPLEMENTACIÓN (hoja de ruta ejecutiva)
-└── hitos/                              ← PENDIENTE DE IMPLEMENTACIÓN (checklist por hito)
-    ├── 137-prototipo-checklist.md
+│   └── ROADMAP.md                      ← ✅ IMPLEMENTADO (hoja de ruta ejecutiva con estado real)
+└── hitos/                              ← ✅ IMPLEMENTADO (checklist por hito)
+    ├── 137-prototipo-checklist.md      ← ⬜ en preparación (M13/M14 🔵)
     ├── 138-vertical-slice-checklist.md
     ├── 139-prealpha-checklist.md
     ├── 140-alpha-checklist.md
@@ -214,3 +214,31 @@ DOCUMENTACION/137...143...             ← Módulos de hitos (reciben este marco
 - Cuando M137 (Prototipo) se cierre, recalibrar el calendario acumulado y registrar el ajuste en el historial de `ROADMAP.md`.
 - Actualizar `CHECKLIST-GLOBAL.md` (fila 136: Alta, complejidad 2, dependencias 133 y 135) al completar la implementación y generar log en `Logs/` según la sección 6 de AGENTS.md.
 - No tocar `plan-inicial/` (inmutable); cualquier ajuste va en `plan-actual/`.
+
+---
+
+## Notas del Agente
+
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 21:30:00
+**Estado:** Completado (pendiente de QA cruzado)
+
+### Lo que hice
+- Implementé `ROADMAP.md`: resumen ejecutivo, fases/hitos con estado real, MoSCoW de primera pasada por fase (con módulos y estados de CHECKLIST-GLOBAL al 2026-08-28), dependencias entre hitos con estado real, top riesgos de M135 que amenazan el calendario, política de builds/etiquetas, edge cases operativos añadidos (los 5 no cubiertos por la documentación original) e historial de cambios.
+- Implementé los 7 checklists de hito (`hitos/137..143`) con criterios de entrada/salida del diseño, módulos incluidos con MoSCoW y estado real, tabla de retrasos/cortes y checklist de cierre.
+- Realicé la primera pasada de asignación de módulos a fases (delegable según el diseño) usando la guía 08 como fuente de orden y la tabla global como fuente de estado.
+- Marqué el checklist 199/199 con evidencia por ítem y verifiqué la cobertura de los docs originales con grep (D1-D8, refactor, alternativas, edge cases) antes de marcar.
+- Actualicé `04-Codigo.md` (implementación) y generé el log 198; reservé y liberé en los 4 registros.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No confirmé las duraciones del calendario con la disponibilidad real del fundador (los rangos siguen siendo orientativos).
+- El MoSCoW por fase es **primera pasada** delegable: la asignación definitiva requiere la revisión del fundador.
+- No abrí ningún hito formal (M137 en preparación: su apertura requiere cerrar M13 y el núcleo de M14, más la ceremonia de planificación del fundador).
+- No recalibré el calendario (el primer punto obligatorio es el cierre de M137, aún no cerrado).
+
+### Recomendaciones para el próximo agente
+- QA cruzado rápido: verificar los 9 archivos nuevos, coherencia de estados citados contra CHECKLIST-GLOBAL y checklist 199/199 sin `[?]`.
+- Al cerrar M13/M14, abrir formalmente M137 con la plantilla del checklist de hito y ejecutar la ceremonia de planificación del fundador.
+- Al cerrar M137, recalibrar el calendario acumulado y registrar el ajuste en el historial de `ROADMAP.md`.
+- Mantener el historial del roadmap append-only; los cambios de fases siempre con log.

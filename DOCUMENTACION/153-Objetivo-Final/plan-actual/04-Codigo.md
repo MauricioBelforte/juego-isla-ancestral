@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 (implementación) · 2026-08-19 (documentación original por Deepseek V4 Flash)
 
 # 04-Codigo.md — Módulo 153: Objetivo Final del Proyecto
 
@@ -7,9 +8,12 @@
 
 | Archivo | Ruta (proyecto) | Tipo | Estado |
 |---|---|---|---|
-| `vision_contract.json` | `Assets/_Project/Data/Vision/` | Contrato O1-O19 (máquina) | Prototipo de diseño (sin editor Godot) |
-| `validate_vision.gd` | `Assets/_Project/Editor/` | Guardián del contrato | Prototipo de diseño (sin editor Godot) |
-| `prueba_vision.md` | `DOCUMENTACION/` (checklist de playtest) | Checklist O1-O19 para M113/M150 | Documento |
+| `vision_contract.json` | Especificado: `game/isla-ancestral/data/vision/` (fase editor/CI). **Vigente: `DOCUMENTACION/153-Objetivo-Final/operativa/vision_contract.json`** | Contrato O1-O19 (máquina) | ✅ IMPLEMENTADO v1.1 (19 O con titulo/criterio/indicador/tipo/dueños/eventos) |
+| `validate_vision.gd` | Especificado: `game/isla-ancestral/scripts/editor/` (fase editor/CI M118) | Guardián del contrato (GDScript) | Especificado (04 §3); equivalente ejecutable actual = `operativa/validate_vision.py` |
+| `validate_vision.py` | `DOCUMENTACION/153-Objetivo-Final/operativa/validate_vision.py` | Guardián ejecutable (Python) | ✅ IMPLEMENTADO y ejecutado (en verde; cobertura con WARN real) |
+| `prueba_vision.md` | `DOCUMENTACION/153-Objetivo-Final/operativa/prueba_vision.md` | Checklist O1-O19 para M114/M151 | ✅ IMPLEMENTADO (condiciones, checklist, formulario, criterio ≥80%) |
+
+> **Adaptaciones documentadas:** (1) rutas Unity del spec original (`Assets/_Project/...`) → ubicación vigente en `operativa/` por convención `AGENTS.md` §3, con destino Godot anotado; (2) correcciones de módulos: playtest = **M114**, control final = **M151**, principios = **M152**, telemetría = **M104/M105** (el doc original citaba M113/M150/M151); (3) dueño técnico de O12 = **M07** (Arquitectura) junto a M26.
 
 ## 2. Funciones Clave
 
@@ -123,3 +127,31 @@ Sin editor/binary Godot en el entorno: `validate_vision.gd` y `vision_contract.j
 - Al crear cualquier módulo nuevo, declarar los O# que refuerza en su 01-Requerimientos (regla M153).
 - La "prueba de visión" O1-O19 debe incluirse en el plan de playtests de M113 desde el primer playtest externo.
 - M150 (Control Final) usará este contrato como checklist final de terminación.
+
+---
+
+## Notas del Agente
+
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 24:00:00
+**Estado:** Parcial programado (con [?] futuros) — pendiente de QA cruzado
+
+### Lo que hice
+- Implementé `vision_contract.json` v1.1: 19 objetivos con titulo, criterio verificable, indicador, tipo de indicador (playtest/telemetría/QA/arquitectura), dueños corregidos a módulos reales (M114/M151/M152/M104/M105/M147/M07) y eventos de telemetría especificados.
+- Implementé `validate_vision.py`: guardián **ejecutable** con los 4 checks del diseño (contrato, principios M152, cobertura O# con WARN, prueba presente). Ejecutado en verde tras una iteración real: el chequeo de palabras prohibidas detectó que O2 nombraba "FOMO" para negarlo → regla de redacción aprendida (los criterios describen el comportamiento deseado sin nombrar mecanismos prohibidos) y criterio corregido.
+- Implementé `prueba_vision.md`: condiciones (30-60 min, ≥5 jugadores), checklist O1-O19, formulario por objetivo, criterio ≥80% con bloqueo de ✖ en Must, flujo de retest y subordinación a M151/M152.
+- Auditado la cobertura real: **159 módulos aún sin declarar O#** en sus 01-Requerimientos — WARN documentado como línea base; la regla rige para módulos nuevos y alineación progresiva (excepciones de operación/build/legal previstas).
+- Marqué el checklist 120/130 `[x]` + 10 `[?]` (instrumentación de telemetría M105 y verificaciones que exigen juego implementado).
+- Reservé y liberé en los 4 registros, actualicé DOCUMENTACION/README y generé el log 202.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No instrumenté los 5 eventos de telemetría (volver_a_casa, acercarse_puerto, aproximacion_ruinas, bloque_construccion, pausa_contemplativa): requiere M105 implementado.
+- No migré `vision_contract.json`/`validate_vision.gd` dentro del árbol del juego (toca código runtime de zonas ajenas; destino documentado en el contrato _meta).
+- La alineación de los 159 módulos existentes con la regla O# es progresiva: exigirla completa de golpe tocaría zonas de muchos agentes.
+
+### Recomendaciones para el próximo agente
+- QA cruzado rápido: ejecutar `validate_vision.py` (en verde), verificar el JSON (19 O) y el marcado 120/130 + 10 `[?]` justificados.
+- M105 (al implementar telemetría) debe crear los 5 eventos del contrato; M114 debe usar `prueba_vision.md` en su primer corte.
+- Los módulos nuevos declaran O# desde hoy (validador lo verifica con WARN); la alineación de los existentes puede hacerse por tandas en los QA cruzados.
+- M151 (Control Final) consume `prueba_vision.md` como su checklist de terminación (19 en ✓ = condición de lanzamiento).

@@ -23,6 +23,15 @@
 | M11 Personaje del Jugador | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | CharacterBody3D funcional | WASD + gravedad + colision suelo + pivot camara + interaccion E/Q + movimiento relativo a camara | `scripts/player/player.gd` |
 | M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
 | M53 UI/UX | 🔵 En curso | MiMo V2.5 (OpenCode) | F6 | V2 | Infraestructura core UI creada | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/` |
+| M112 Testing Automático | 🔵 En curso | ox-alpha (Cline) | F0/transversal | V0 | M111 ✅ | Framework GdUnit4 v6.2.1 + 14 test files (160 tests), cobertura, CI | `res://tests/`, `res://addons/gdunit4/`, `.github/workflows/testing.yml`, `tests/gdunit_coverage.json` |
+| M133 Gestión del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | Protocolo §21 operativo + scripts §21.9 disponibles | Entregables operativos de gestión (README, guia-hitos, guia-sprints, flujo-multiagente, ADRs, actas, reportes) verificados con scripts; 127/127; log 195. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/133-Gestion-Del-Proyecto/` |
+| M134 Presupuesto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ (gestión operativa); política de costo cero | Presupuesto operativo implementado en `operativa/` (desglose, control, proyecciones, dashboard, plantillas); 100/100; log 196. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/134-Presupuesto/` |
+| M135 Riesgos del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ + M134 ✅ | RISK-REGISTER.md (16 entradas + matriz 5×5) + GUIA-REVISION-TRIMESTRAL.md; 134/134; log 197. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8). Pendiente 1ª revisión formal (fundador) | `DOCUMENTACION/135-Riesgos-Del-Proyecto/` |
+| M136 Roadmap | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ + M135 ✅ | ROADMAP.md ejecutivo + 7 checklists de hito (hitos/137-143) con estados reales; 199/199; log 198. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8). Pendiente MoSCoW definitivo (fundador) | `DOCUMENTACION/136-Roadmap/` |
+| M145 Diseño de Experiencia | 🟡 Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M01 ✅; dueños M53/M58/M89/M92/M105/M114 | operativa/ con 7 docs (journey, onboarding, menús, feedback, accesibilidad, métricas, plan testing); 90/105 + 15 [?] de fase jugable; log 199. 🔵 QA Hy3 2026-08-28: mantiene 🟡, 15 [?] justificados | `DOCUMENTACION/145-Diseno-De-Experiencia/` |
+| M146 Diseño Emocional | 🟡 Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M145 🟡; M152 ✅ | operativa/ con 5 docs (paleta, mapeo, wow moments, playtesting emocional, cozy checklist); 90/100 + 10 [?] de fase jugable; log 200. 🔵 QA Hy3 2026-08-28: mantiene 🟡, 10 [?] justificados | `DOCUMENTACION/146-Diseno-Emocional/` |
+| M149 Nombres y Nomenclatura | 🟡 Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M05/M147; canon real verificable | operativa/ con 5 docs + validador ejecutable de naming; 97/100 + 3 [?] (nativos/hook M111); log 201. 🔵 QA Hy3 2026-08-28: mantiene 🟡, 3 [?] justificados | `DOCUMENTACION/149-Nombres-Y-Nomenclatura/` |
+| M153 Objetivo Final | 🟡 Liberado c/programados | GLM (Kilo) | F0/gobernanza | V0 | Contrato O1-O19 documentado; dueños reales | vision_contract.json v1.1 + validate_vision.py (guardián en verde) + prueba_vision.md; 120/130 + 10 [?] telemetría/juego; log 202. 🔵 QA Hy3 2026-08-28: mantiene 🟡, 10 [?] justificados | `DOCUMENTACION/153-Objetivo-Final/` |
 
 ---
 
@@ -255,11 +264,11 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 
 ### M13 - Herramientas
 
-- [ ] Conectar el nucleo existente al mundo voxel real.
-- [ ] Validar raycast, alcance y tipo de bloque permitido.
-- [ ] Verificar feedback visual sin iluminar objetivos invalidos.
-- [ ] Mantener el contrato `try_extract` / `try_place`.
-- [ ] Dejar durabilidad, HUD y sonido desacoplados para fases posteriores.
+- [x] Conectar el nucleo existente al mundo voxel real.
+- [x] Validar raycast, alcance y tipo de bloque permitido.
+- [x] Verificar feedback visual sin iluminar objetivos invalidos.
+- [x] Mantener el contrato `try_extract` / `try_place`.
+- [x] Dejar durabilidad, HUD y sonido desacoplados para fases posteriores.
 
 **Puerta F3:** el jugador puede moverse, mirar, apuntar y usar una herramienta sobre un bloque valido. Esta es la primera sesion donde la vision de Copilot aporta valor directo.
 
@@ -482,13 +491,14 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 6 | M09 Terreno y Geografia | 4 | V2 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
 | 7 | M11 Personaje del Jugador | 4 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | CharacterBody3D + WASD + gravedad + colision suelo + pivot camara + edicion E/Q + movimiento relativo a camara | 2026-08-26 |
 | 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
-| 9 | M13 Herramientas | 4 | V2 | 🔵 En curso | MiMo V2.5 (OpenCode) | M08+M11 | Raycast + extracción + colocación voxel integrada | 2026-08-27 |
+| 9 | M13 Herramientas | 4 | V2 | 🟡 Liberado c/integraciones | Hy3 (Kilo) — relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracción progresiva + highlight + HUD durabilidad + sonido/partículas; 65/102; pendientes con dueño (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
 | 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos (excepcion doc.: M11 pendiente, sin dependencia de jugador; pickup post-M11) | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 168) | Autoload Inventario + ISaveProvider | 2026-08-26 |
 | 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | — | M14 | Recurso recolectable | — |
 | 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | — | Estado minimo | Save/load validado | — |
 | 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | — | F3 + M14/M15/M59 | GO/NO-GO | — |
 | 14 | M61 Rendimiento | 5 | V0 | 🟢 Investigable desde M08 | — | M08 | Presupuesto medido | — |
 | 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
+| — | M111 Código de Calidad | 2 | V0 | 🔵 En curso | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas | 2026-08-28 |
 
 ### Bloque `Reserva actual` obligatorio en cada checklist de módulo
 

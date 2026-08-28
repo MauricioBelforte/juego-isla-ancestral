@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "modulo": "153-Objetivo-Final",
+    "proyecto": "isla-ancestral",
+    "version": "1.1",
+    "actualizado": "2026-08-28",
+    "autor_actualizacion": "GLM (Kilo)",
+    "nota": "Contrato de visión O1-O19. Correcciones de dueños vs doc original: playtest = M114, control final = M151, principios = M152, telemetria = M104/M105. El guardián ejecutable actual es validate_vision.py (este modulo); validate_vision.gd queda especificado para la fase editor/CI (M118).",
+    "subordinacion": "M152 (Principios Innegociables) manda sobre cualquier objetivo; M151 (Control Final) aprueba el cumplimiento final."
+  },
+  "objetivos": [
+    {"id": "O1", "titulo": "Aurora como Hogar", "criterio": "El jugador vuelve voluntariamente a su casa >=1 vez por sesion de 30 min", "indicador": "telemetria: evento volver_a_casa", "indicador_tipo": "telemetria", "duenos": ["M17", "M15", "M18"], "evento_telemetria": "volver_a_casa", "prueba_vision": true},
+    {"id": "O2", "titulo": "Curiosidad por la Siguiente Isla", "criterio": "La isla siguiente es visible y el viaje se desea por curiosidad propia (sin urgencia, sin contenido que expira, sin recompensa por prisa)", "indicador": "telemetria: acercamientos al puerto + playtest", "indicador_tipo": "telemetria", "duenos": ["M26", "M27", "M28"], "evento_telemetria": "acercarse_puerto", "prueba_vision": true},
+    {"id": "O3", "titulo": "Recordar a los NPC", "criterio": ">=2 vecinos recordados por nombre tras 3 sesiones", "indicador": "playtest: test de memoria (M114)", "indicador_tipo": "playtest", "duenos": ["M18", "M19", "M21"], "prueba_vision": true},
+    {"id": "O4", "titulo": "Curiosidad por las Ruinas", "criterio": "Aproximacion espontanea a ruinas sin tutorial", "indicador": "telemetria: primeras aproximaciones sin marcador", "indicador_tipo": "telemetria", "duenos": ["M24", "M25"], "evento_telemetria": "aproximacion_ruinas", "prueba_vision": true},
+    {"id": "O5", "titulo": "Disfrutar Construyendo sin Historia", "criterio": "Sesiones de 15+ min de construccion continua sin contacto con la historia", "indicador": "telemetria: bloques de construccion continuos", "indicador_tipo": "telemetria", "duenos": ["M15", "M16", "M17"], "evento_telemetria": "bloque_construccion", "prueba_vision": true},
+    {"id": "O6", "titulo": "Poder Ignorar la Historia", "criterio": "El mundo completo es alcanzable sin tocar misiones", "indicador": "QA: recorrido de completado sin misiones", "indicador_tipo": "qa", "duenos": ["M22", "M15", "M74"], "prueba_vision": true},
+    {"id": "O7", "titulo": "Perseguir la Historia Cuando Quiera", "criterio": "Objetivo activo siempre visible; cero ventanas de tiempo", "indicador": "QA + playtest: UI de objetivo (M53) y diario (M55)", "indicador_tipo": "qa", "duenos": ["M22", "M53", "M92"], "prueba_vision": true},
+    {"id": "O8", "titulo": "Construcciones que Importan", "criterio": "Construir desbloquea contenido; el mundo recuerda las construcciones", "indicador": "QA: desbloqueos por construccion + persistencia (M59)", "indicador_tipo": "qa", "duenos": ["M15", "M18", "M74"], "prueba_vision": true},
+    {"id": "O9", "titulo": "Decisiones que Afectan el Entorno", "criterio": "El mapa visible cambia con las elecciones del jugador", "indicador": "QA: persistencia visual de cambios (M59/M54)", "indicador_tipo": "qa", "duenos": ["M74", "M15", "M54"], "prueba_vision": true},
+    {"id": "O10", "titulo": "Comprender la Resonancia", "criterio": "El jugador explica la Resonancia con palabras propias", "indicador": "playtest: test narrativo abierto", "indicador_tipo": "playtest", "duenos": ["M21", "M23"], "prueba_vision": true},
+    {"id": "O11", "titulo": "Mundo Continua Tras los Creditos", "criterio": "Postgame con 10+ h de vida propia", "indicador": "telemetria: horas postgame + contenido consumido", "indicador_tipo": "telemetria", "duenos": ["M74", "M75"], "prueba_vision": true},
+    {"id": "O12", "titulo": "Ampliar sin Romper Arquitectura", "criterio": "Una isla nueva se agrega sin tocar sistemas centrales", "indicador": "arquitectura: chequeo modular (M07/M15)", "indicador_tipo": "arquitectura", "duenos": ["M07", "M26"], "prueba_vision": false},
+    {"id": "O13", "titulo": "Contenido que Reutiliza Sistemas", "criterio": "Cero duplicacion de sistemas en el contenido nuevo", "indicador": "arquitectura: revision de 04-Codigo de modulos nuevos", "indicador_tipo": "arquitectura", "duenos": ["todos"], "prueba_vision": false},
+    {"id": "O14", "titulo": "Mundo Coherente", "criterio": "Cero contradicciones de lore/narrativa en QA transversal", "indicador": "qa: auditoria de coherencia (M101) + canon M147", "indicador_tipo": "qa", "duenos": ["M21", "M23", "M147"], "prueba_vision": true},
+    {"id": "O15", "titulo": "Tecnologia al Servicio de la Experiencia", "criterio": "Cada sistema declara que experiencia sirve (O# en 01-Requerimientos)", "indicador": "arquitectura: cobertura O# en los 01-Requerimientos (validate_vision)", "indicador_tipo": "arquitectura", "duenos": ["todos"], "prueba_vision": false},
+    {"id": "O16", "titulo": "Experiencia al Servicio de la Historia", "criterio": "Cada mecanica refuerza un hilo narrativo y no contradice el lore", "indicador": "playtest narrativo + revision de diseno (M21/M23)", "indicador_tipo": "playtest", "duenos": ["M21", "M23"], "prueba_vision": true},
+    {"id": "O17", "titulo": "Historia Refuerza Identidad del Mundo", "criterio": "El lore esta integrado en documentos, ruinas y colecciones", "indicador": "qa: canon M147 + piezas M148 en mundo y museo (M73)", "indicador_tipo": "qa", "duenos": ["M146", "M147", "M24", "M73"], "prueba_vision": true},
+    {"id": "O18", "titulo": "Mundo Agradable sin Eventos", "criterio": "30 min sin eventos siguen siendo disfrutables (calma es contenido)", "indicador": "playtest: sesion de inactividad guiada", "indicador_tipo": "playtest", "duenos": ["M30", "M31", "M40"], "prueba_vision": true},
+    {"id": "O19", "titulo": "Quedarse Escuchando Musica Mirando el Mar", "criterio": "2+ pausas contemplativas de 5 min sin input durante playtests largos", "indicador": "telemetria: evento pausa_contemplativa + observacion", "indicador_tipo": "telemetria", "duenos": ["M40", "M41", "M42", "M43", "M10"], "evento_telemetria": "pausa_contemplativa", "prueba_vision": true}
+  ],
+  "principios_superiores": {
+    "modulo": "M152",
+    "palabras_prohibidas_en_criterios": ["combate obligatorio", "fomo", "grind", "cofre aleatorio", "streak", "expiracion"],
+    "nota": "M151 (Control Final) no aprueba el lanzamiento si algun O se cumple violando M152. Regla de redaccion aprendida (validador 2026-08-28): los criterios no deben nombrar mecanismos prohibidos ni siquiera para negarlos; se describe el comportamiento deseado."
+  }
+}

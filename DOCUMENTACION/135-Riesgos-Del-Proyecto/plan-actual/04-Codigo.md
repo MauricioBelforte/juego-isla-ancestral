@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 (implementación) · 2026-08-17 (documentación original por Deepseek V4 Flash)
 
 # 04-Codigo.md — Módulo 135: Riesgos del Proyecto
 
@@ -9,17 +10,17 @@ Módulo **administrativo de gestión**: no genera código del juego (Godot 4.x /
 
 **06-Plan-Testings.md:** NO aplica como suite automatizada (documento de gestión); la verificación se realiza con chequeos de formato y simulaciones de revisión (sección 12 del checklist).
 
-## 2. Archivos previstos (Pendiente de implementación)
+## 2. Archivos previstos → Estado real de implementación
 
 ```
 DOCUMENTACION/135-Riesgos-Del-Proyecto/plan-actual/
-├── 01-Requerimientos.md                 ← CREADO (este módulo)
-├── 02-Analisis.md                       ← CREADO (este módulo)
-├── 03-Diseno.md                         ← CREADO (este módulo)
-├── 04-Codigo.md                         ← CREADO (este módulo)
-├── 05-Checklist.md                      ← CREADO (este módulo)
-├── RISK-REGISTER.md                     ← PENDIENTE DE IMPLEMENTACIÓN (registro vivo, inicia con los 15 riesgos R-01..R-15 de 02-Analisis.md)
-└── GUIA-REVISION-TRIMESTRAL.md          ← PENDIENTE DE IMPLEMENTACIÓN (opcional; procedimiento de la sección 6 de 03-Diseno.md)
+├── 01-Requerimientos.md                 ← CREADO (2026-08-17)
+├── 02-Analisis.md                       ← CREADO (2026-08-17)
+├── 03-Diseno.md                         ← CREADO (2026-08-17)
+├── 04-Codigo.md                         ← CREADO (2026-08-17; actualizado 2026-08-28)
+├── 05-Checklist.md                      ← CREADO (2026-08-17; marcado 2026-08-28)
+├── RISK-REGISTER.md                     ← ✅ IMPLEMENTADO 2026-08-28 (16 entradas: R-01..R-15 + R-16 por hallazgo real)
+└── GUIA-REVISION-TRIMESTRAL.md          ← ✅ IMPLEMENTADO 2026-08-28 (10 pasos + checklist de sesión)
 ```
 
 ## 3. Plantilla prevista: RISK-REGISTER.md
@@ -191,3 +192,30 @@ DOCUMENTACION/135-Riesgos-Del-Proyecto/plan-actual/
 - Referenciar siempre M133 sin bloquearlo: si M133 ya existe, alinear el ancla de la revisión trimestral con su ciclo.
 - Actualizar `CHECKLIST-GLOBAL.md` (fila 135, dependencia 133, Alta, complejidad 2) al completar la implementación, y generar log en `Logs/` según la sección 6 de AGENTS.md.
 - No tocar `plan-inicial/` (inmutable); cualquier ajuste va en `plan-actual/` y en el registro vivo.
+
+---
+
+## Notas del Agente
+
+**Modelo:** GLM
+**Plataforma:** Kilo
+**Fecha:** 2026-08-28 20:45:00
+**Estado:** Completado (pendiente de QA cruzado)
+
+### Lo que hice
+- Implementé `RISK-REGISTER.md`: 16 entradas (R-01..R-15 del análisis inicial + **R-16 nuevo** por el hallazgo real de voxel-sin-soporte-web del 2026-08-25), matriz 5×5 poblada, resumen de zonas (0 roja, 7 naranja, 8 amarilla, 1 verde) y reglas operativas.
+- Ejecuté una **revisión en papel** de los 15 riesgos contra evidencia real del proyecto (historiales actualizados por entrada: M08-M10 completados para R-03/R-05, M111 en curso para R-02, M134 implementado para R-11/R-12, multiplicidad de plataformas para R-09, etc.), documentada en el `Registro de revisiones`.
+- Decisión documentada de IDs: ID primario R-XX consecutivo + código de categoría (TEC-01, BUR-01…) como alias, reconciliando el esquema de `02-Analisis.md` con los ejemplos de `04-Codigo.md`.
+- Implementé `GUIA-REVISION-TRIMESTRAL.md` (10 pasos + checklist de sesión + regla de omisión/reprogramación), alineada al ciclo de M133.
+- Marqué el checklist 134/134 sin `[?]` y verifiqué hashes plan-inicial/plan-actual (02-05 idénticos; 01 con la sección "Módulos Relacionados" añadida, convención del proyecto).
+- Reservé y liberé el módulo en los 4 registros y generé el log 197.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No realicé la **primera revisión trimestral formal**: requiere el fundador (fechas y prioridades de salud de R-10 son decisión no delegable). La revisión en papel del 2026-08-28 no la sustituye.
+- Los valores P/I siguen siendo estimaciones iniciales: los recalqué contra evidencia disponible, pero la confirmación humana queda para la revisión formal.
+- No materialicé contingencias reales (no hay riesgos materializados ni en zona roja): los flujos se probaron en papel.
+
+### Recomendaciones para el próximo agente
+- QA cruzado rápido: verificar 16 entradas, matriz poblada coherente con P×I, historiales append-only y checklist 134/134 sin `[?]`.
+- Al cerrar M137 (Prototipo), ejecutar una revisión adelantada para recalibrar R-03/R-04/R-05 con datos reales de rendimiento.
+- Cuando M135 y M135-ciclo convivan con más riesgos de implementación (bugs M102), agregar entradas nuevas con ID consecutivo (R-17+) sin renumerar.

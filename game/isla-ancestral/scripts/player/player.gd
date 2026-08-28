@@ -32,6 +32,10 @@ var _hotbar: Array[ToolData] = []
 var _hotbar_index: int = 0
 ## Bloque a colocar (ciclo por scroll o teclado)
 var _block_to_place: int = 2  # Default: césped
+## M13: cooldown del fallback de mano (sin herramienta utilizable)
+var _mano_cooldown: float = 0.0
+## M13: flanco del Q para el fallback de mano
+var _q_prev_mano: bool = false
 ## Autoload Inventario (cache dinámico para evitar error de compilación MCP)
 var _inventario: Node = null
 var _item_database: Node = null
@@ -59,10 +63,16 @@ func _ready() -> void:
 	_tool_controller = ToolController.new()
 	_tool_controller.name = "ToolController"
 	add_child(_tool_controller)
+	_tool_controller.configurar(_camera)
 	_tool_controller.bloque_extraido.connect(_on_bloque_extraido)
 	_tool_controller.bloque_colocado.connect(_on_bloque_colocado)
+	_tool_controller.herramienta_equipada.connect(_on_herramienta_equipada)
+	_tool_controller.durabilidad_cambiada.connect(_on_durabilidad_cambiada)
 
-	# M14: Crear hotbar HUD visible desde el inicio (usa autoload Inventario)
+	# M13: Herramientas iniciales de prueba (M14/M16 darán la adquisición real)
+	_crear_herramientas_iniciales.call_deferred()
+
+	# M13/M57: Crear hotbar HUD de herramientas visible desde el inicio
 	_create_hotbar_hud.call_deferred()
 
 func _find_terrain() -> VoxelTerrain:
@@ -71,19 +81,13 @@ func _find_terrain() -> VoxelTerrain:
 		return root.get_node_or_null("VoxelTerrain")
 	return null
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not _voxel_tool or not _camera:
-		return
-	
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_E:
-				_break_block()
-			KEY_Q:
-				_place_block()
+func _unhandled_input(_event: InputEvent) -> void:
+	# Teclas de UI/inventario (no requieren voxel_tool)
+	if _event is InputEventKey and _event.pressed:
+		match _event.keycode:
 			KEY_B:
 				_toggle_inventory()
-			# M13: Teclas 1-9 para hotbar
+			# M13: Teclas 1-6 para hotbar de herramientas
 			KEY_1: _equip_hotbar_slot(0)
 			KEY_2: _equip_hotbar_slot(1)
 			KEY_3: _equip_hotbar_slot(2)
@@ -94,16 +98,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_F:
 				if _inventory_open and _hovered_slot >= 0:
 					_on_toggle_favorite(_hovered_slot)
-	
-	# M13: Scroll para cambiar hotbar
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_cycle_hotbar(-1)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_cycle_hotbar(1)
-		# E20: Soltar drag con click izquierdo fuera de slots
-		elif event.button_index == MOUSE_BUTTON_LEFT and _dragging:
-			_cancel_drag()
+
+	# M13: E/Q los procesa ToolController (polling en _physics_process, evita handlers duplicados §9.29)
+	# Scroll reservado a la cámara (lección 9.25: mouse solo para cámara)
 
 ## M13: Equipa un slot del hotbar
 func _equip_hotbar_slot(index: int) -> void:
@@ -132,15 +129,26 @@ func add_tool_to_hotbar(tool_data: ToolData) -> void:
 	if _hotbar.size() == 1:
 		_equip_hotbar_slot(0)
 
+## M13: Herramientas iniciales de cobre para probar el loop (M14/M16 darán adquisición real)
+func _crear_herramientas_iniciales() -> void:
+	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.PICO, ToolData.Nivel.COBRE))
+	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.HACHA, ToolData.Nivel.COBRE))
+	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.PALA, ToolData.Nivel.COBRE))
+	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.AZADA, ToolData.Nivel.COBRE))
+	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.MARTILLO, ToolData.Nivel.COBRE))
+	print("[M13] Hotbar inicial: %d herramientas" % _hotbar.size())
+
+## M13: Callback de equipado (refresca el HUD de herramientas)
+func _on_herramienta_equipada(_tool: ToolData) -> void:
+	_refresh_hotbar()
+
+## M13: Callback de durabilidad (refresca el HUD de herramientas)
+func _on_durabilidad_cambiada(_actual: int, _maximo: int) -> void:
+	_refresh_hotbar()
+
 func _break_block() -> void:
-	# M13: Si hay herramienta equipada, usar ToolController
-	if _tool_controller.herramienta != null:
-		var result := _tool_controller.try_extract()
-		if result.get("ok", false):
-			return
-		# Si la herramienta no aplica, fallback a romper con mano
-	
-	# Fallback: romper sin herramienta (mano, sin drops)
+	# M13: fallback de mano — SOLO se llama sin herramienta utilizable
+	# (con herramienta el flujo va por ToolController.intentar_golpe)
 	var ray_result = _do_raycast()
 	if ray_result == null:
 		return
@@ -153,13 +161,7 @@ func _break_block() -> void:
 	print("[Player] Bloque roto (mano) en: ", block_pos)
 
 func _place_block() -> void:
-	# M13: Si hay herramienta equipada con BUILD, usar ToolController
-	if _tool_controller.herramienta != null and _tool_controller.herramienta.permite(ToolData.Accion.BUILD):
-		var ok := _tool_controller.try_place(_block_to_place)
-		if ok:
-			return
-	
-	# Fallback: colocar sin herramienta
+	# M13: fallback de mano — SOLO se llama sin herramienta con BUILD
 	var result = _do_raycast()
 	if result == null:
 		return
@@ -206,6 +208,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_esc_was_pressed = esc_pressed
+
+	# M13: habilitación del controlador + fallback de mano (mutuamente excluyentes)
+	if _tool_controller:
+		_tool_controller.input_habilitado = not _inventory_open
+		var herramienta_util: bool = _tool_controller.herramienta != null and not _tool_controller.herramienta.inutilizada()
+		if not _inventory_open and not herramienta_util:
+			_mano_cooldown = maxf(_mano_cooldown - delta, 0.0)
+			var q_presionado: bool = Input.is_key_pressed(KEY_Q)
+			if Input.is_key_pressed(KEY_E) and _mano_cooldown <= 0.0:
+				_break_block()
+				_mano_cooldown = 0.8
+			if q_presionado and not _q_prev_mano:
+				_place_block()
+			_q_prev_mano = q_presionado
 	
 	# Gravedad (solo si no hay suelo)
 	if not _on_ground:
@@ -633,6 +649,13 @@ func _process(delta: float) -> void:
 			_cancel_drag()
 		else:
 			_toggle_inventory()
+	# M13: parpadeo de la herramienta activa cuando pide reparación (<20%, aviso no castigo)
+	_blink_tiempo += delta
+	if _tool_controller and _tool_controller.herramienta and _hotbar_hud:
+		var slot_activo = _hotbar_hud.get_node_or_null("Slot_%d" % _hotbar_index)
+		if _tool_controller.herramienta.necesita_reparacion() and slot_activo:
+			var pulso: float = 0.5 + 0.5 * sin(_blink_tiempo * 8.0)
+			slot_activo.modulate = Color(1.0, 0.35 + 0.35 * pulso, 0.35 + 0.35 * pulso)
 
 func _show_tooltip_at(slot_idx: int) -> void:
 	if _tooltip == null or _inventory_panel == null:
@@ -766,13 +789,44 @@ func _on_discard_item(slot_idx: int) -> void:
 			_inventario.slot_changed.emit(0, slot_idx)
 			_inventario.inventario_actualizado.emit()
 
-## ── M14: Hotbar HUD ───────────────────────────────────────
+## ── M13/M57: Hotbar HUD de herramientas ───────────────────
+
+var _hotbar_equipped_label: Label = null
+var _blink_tiempo: float = 0.0
 
 func _create_hotbar_hud() -> void:
-	var canvas := CanvasLayer.new()
-	canvas.name = "HotbarCanvas"
-	canvas.layer = 10
-	get_tree().current_scene.add_child(canvas)
+	var ui := get_tree().current_scene.get_node_or_null("UI")
+	var canvas := ui as CanvasLayer
+	if canvas == null:
+		canvas = CanvasLayer.new()
+		canvas.name = "HotbarCanvas"
+		canvas.layer = 10
+		get_tree().current_scene.add_child(canvas)
+
+	# Etiqueta de herramienta equipada (nombre + durabilidad)
+	var equipped_panel := PanelContainer.new()
+	equipped_panel.name = "EquippedPanel"
+	var eq_sb := StyleBoxFlat.new()
+	eq_sb.bg_color = Color(0.08, 0.08, 0.12, 0.75)
+	eq_sb.set_corner_radius_all(6)
+	eq_sb.content_margin_left = 10.0
+	eq_sb.content_margin_right = 10.0
+	eq_sb.content_margin_top = 2.0
+	eq_sb.content_margin_bottom = 2.0
+	equipped_panel.add_theme_stylebox_override("panel", eq_sb)
+	equipped_panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	equipped_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	equipped_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	equipped_panel.offset_bottom = -66
+	equipped_panel.offset_top = -92
+	var equipped := Label.new()
+	equipped.name = "EquippedLabel"
+	equipped.text = ""
+	equipped.add_theme_font_size_override("font_size", 13)
+	equipped.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	equipped_panel.add_child(equipped)
+	canvas.add_child(equipped_panel)
+	_hotbar_equipped_label = equipped
 
 	var container := HBoxContainer.new()
 	container.name = "Hotbar"
@@ -789,22 +843,33 @@ func _create_hotbar_hud() -> void:
 		var slot := PanelContainer.new()
 		slot.custom_minimum_size = Vector2(48, 48)
 		slot.name = "Slot_%d" % i
+		var slot_sb := StyleBoxFlat.new()
+		slot_sb.bg_color = Color(0.08, 0.08, 0.12, 0.7)
+		slot_sb.set_corner_radius_all(6)
+		slot_sb.border_color = Color(1, 1, 1, 0.25)
+		slot_sb.set_border_width_all(1)
+		slot.add_theme_stylebox_override("panel", slot_sb)
 		var lbl := Label.new()
 		lbl.name = "Label"
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		lbl.add_theme_font_size_override("font_size", 10)
+		lbl.add_theme_font_size_override("font_size", 9)
 		slot.add_child(lbl)
 		container.add_child(slot)
 
 	_hotbar_hud = container
 	_refresh_hotbar()
-	_inventario.inventario_actualizado.connect(_refresh_hotbar)
+	_verificar_rect_hotbar.call_deferred()
+
+func _verificar_rect_hotbar() -> void:
+	if _hotbar_hud == null:
+		return
+	await get_tree().process_frame
+	print("[M13] Hotbar HUD listo: ", _hotbar_hud.get_global_rect(), " padre=", _hotbar_hud.get_parent().name)
 
 func _refresh_hotbar() -> void:
 	if _hotbar_hud == null:
 		return
-	var bolsillo = _inventario._contenedor(0)
 	for i in 6:
 		var slot_node := _hotbar_hud.get_node_or_null("Slot_%d" % i)
 		if slot_node == null:
@@ -812,12 +877,28 @@ func _refresh_hotbar() -> void:
 		var label := slot_node.get_node_or_null("Label")
 		if label == null:
 			continue
-		if i < bolsillo.slots.size():
-			var s: InventorySlot = bolsillo.slots[i]
-			if not s.esta_libre():
-				label.text = "%s\n%d" % [s.item_id.left(6), s.cantidad]
+		if i < _hotbar.size():
+			var tool: ToolData = _hotbar[i]
+			var activo: bool = i == _hotbar_index
+			var dur_texto: String = "INF" if tool.durabilidad_infinita() else "%d/%d" % [tool.durabilidad_actual, tool.durabilidad_max]
+			label.text = "%s%s\n%s" % ["> " if activo else "", tool.nombre.left(7), dur_texto]
+			if activo:
+				slot_node.modulate = Color(1, 1, 0.55)
+			elif tool.necesita_reparacion():
+				slot_node.modulate = Color(1, 0.45, 0.45)
 			else:
-				label.text = ""
+				slot_node.modulate = Color(1, 1, 1)
+		else:
+			label.text = ""
+			slot_node.modulate = Color(1, 1, 1, 0.4)
+	if _hotbar_equipped_label:
+		var tool: ToolData = _tool_controller.herramienta if _tool_controller else null
+		if tool:
+			var dur_texto: String = "INF" if tool.durabilidad_infinita() else "%d/%d" % [tool.durabilidad_actual, tool.durabilidad_max]
+			var aviso: String = "  ⚠ REPARAR" if tool.necesita_reparacion() else ""
+			_hotbar_equipped_label.text = "%s  [%s]%s" % [tool.nombre, dur_texto, aviso]
+		else:
+			_hotbar_equipped_label.text = "Sin herramienta"
 
 ## ── E3: Búsqueda por texto ──────────────────────────────
 

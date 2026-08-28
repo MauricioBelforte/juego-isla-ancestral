@@ -1,9 +1,9 @@
 # 06 — Guía de Conexión de Visión del Agente (M154)
 
-**Modelo:** GitHub Copilot
-**Plataforma:** VS Code
+**Modelo:** Hy3
+**Plataforma:** Kilo
 **Fecha de creación:** 2026-08-24
-**Última actualización:** 2026-08-25 (configuración GitHub Copilot por VS Code)
+**Última actualización:** 2026-08-28 (conexión verificada desde Kilo: V4 nativa, V5 por socket, V2 por scripts)
 **Estado:** Viva — se actualiza cada vez que una vía nueva se instala o verifica
 
 > 📍 **Ubicación:** este archivo vive en la **raíz de `DOCUMENTACION/`** (archivo 06, después de `5-FUTURAS-MEJORAS.md`) para que todos los agentes lo encuentren de inmediato. El módulo dueño es `154-Vision-Del-Agente/`; referencias oficiales en `AGENTS.md` (sección 25) y en el `plan-actual/` del M154.
@@ -193,6 +193,20 @@ Al trabajar con visión: **capturar → analizar → ajustar**, máximo **5 iter
 
 - **2026-08-24** — Verificada por **ox-alpha (Cline)**: `get_scene_info` respondió `success` con 3 objetos (Cube, Light, Camera) y 2 materiales en Blender 4.2.3 LTS.
 - **2026-08-24** — **Visión real confirmada**: creada `EsferaPrueba` con material naranja vía `execute_code` (bpy), capturada con `get_viewport_screenshot` (⚠️ requiere parámetro `filepath`, método "offscreen", sin `max_resolution`) y analizada por el agente: esfera naranja visible correctamente junto al cubo default. Flujo completo crear → pintar → capturar → VER → validar operativo. Script de prueba: `tools/mcp/blender-mcp/scripts-prueba/prueba_esfera.py`.
+- **2026-08-28 — WorkBuddy AI:** registrado el server `blender` en `~/.workbuddy-ai/mcp.json` con `uvx blender-mcp`. Smoke stdio OK: `initialize` → `serverInfo {"name":"BlenderMCP","version":"1.29.1"}`. Sin Blender abierto el server arranca aunque falla el connect a `localhost:9876` (`WinError 10061`) — **esperado**.
+- **2026-08-28 — Inventario verificado:** Blender **4.2** instalado en `D:\Archivos de programa\Blender Foundation\Blender 4.2\blender.exe`. Addon ya instalado en `%APPDATA%\Blender Foundation\Blender\4.2\scripts\addons\addon.py` y **byte-idéntico** (md5 `a8eb45e84801206d72a799d59a26ac72`, 148.890 bytes) al `tools/mcp/blender-mcp/addon.py` del proyecto → no hace falta reinstalarlo.
+- **2026-08-28 — Verificada desde Kilo** por **Hy3**: Blender abierto con addon conectado (puerto 9876 escuchando); `get_scene_info` vía socket directo (`bpy_cliente.py`) → `success` con 10 objetos (`SM_Estrella_Mar`, `SOL`, `CAM_Orbital`, ...). En Kilo no hay cliente MCP registrado para Blender: usar **Opción B (socket directo)**.
+
+### Checklist V5 desde WorkBuddy (estado 2026-08-28)
+
+| Paso | Estado |
+|------|--------|
+| Blender 4.2 instalado | ✅ `D:\Archivos de programa\Blender Foundation\Blender 4.2\blender.exe` |
+| Addon instalado y coincide con el del proyecto | ✅ md5 idéntico |
+| Server MCP `blender` registrado | ✅ `uvx blender-mcp` en `~/.workbuddy-ai/mcp.json` |
+| **Blender abierto** | ⬜ requiere acción del usuario |
+| **Addon conectado (socket 9876)** | ⬜ panel `N` → BlenderMCP → "Connect to MCP server" |
+| **Nueva sesión de chat** (para que cargue el server) | ⬜ pendiente |
 
 ---
 
@@ -444,6 +458,7 @@ Con Godot instalado y un proyecto local, probar contra el servidor por el protoc
 - **2026-08-24** — Configuración en **OpenCode** realizada por **MiMo V2.5**: creado `opencode.json` en raíz del proyecto con MCP godot-mcp configurado como `"type": "local"`.
 - **2026-08-24** — ✅ **Verificación MCP OpenCode completada** por **MiMo V2.5**: `get_debug_output` → "No active Godot process" (esperado, sin proyecto corriendo). `run_project` → proyecto `game/isla-ancestral/` ejecutado correctamente: Godot 4.7.2, D3D12, AMD Radeon Graphics, "Isla Ancestral — Estilo Animal Crossing", sin errores. `stop_project` → detenido correctamente. **MCP godot-mcp completamente funcional en OpenCode.**
 - **2026-08-25** — ✅ **Verificación MCP OpenCode completada** por **MiMo V2.5**: `get_debug_output` → "No active Godot process". `run_project` → "Isla Ancestral — Isla Raíz", WorldManager inicializado (semilla: 42, radio: 64), sin errores. `stop_project` → detenido correctamente. **MCP funcional para run/stop/debug output.**
+- **2026-08-28** — ✅ **Verificada desde Kilo** por **Hy3**: Kilo expone las tools de godot-mcp **nativamente** en el chat (sin `mcp.json` ni configuración): `get_godot_version` → `4.7.2.stable.official.ed1daf0bf`; `get_project_info` → `isla-ancestral` (15 escenas, 101 scripts, 16 assets). Ver sección "Conexión desde Kilo".
 
 ### Dependencia para su uso completo
 
@@ -592,4 +607,111 @@ Root (Node3D)
 - ✅ **Método confiable #2 (SO):** `PrintWindow(hwnd, dc, PW_RENDERFULLCONTENT)` vía ctypes — captura el HWND aunque esté tapado. Script: `tools/mcp/godot-mcp/scripts-reutilizables/cap_printwindow.py` (uso: `python cap_printwindow.py "(DEBUG)" salida.png`).
 - ⚠️ **Ventana SO ≠ viewport lógico (DPI 125%):** `--resolution 1152x648` por CLI NO redimensionó la ventana; `SetWindowPos` sí, pero el render interno queda a la resolución del proyecto. Para capturas fiel al render, usar el método #1.
 - ⚠️ **Previews por CLI:** los autoloads con `change_scene_to_file` pueden pisar la escena pedida (ver 07-GUIA-GODOT §9.25). Bootstrap corregido para respetar la escena CLI.
+- ⚠️ **Confirmado 2026-08-28 (Hy3, Kilo — caso M13):** `cap_printwindow.py` (método #2) puede devolver el frame del mundo 3D **sin las capas de UI creadas por código** (hotbar HUD invisible en 4 capturas del SO mientras la captura in-engine lo mostraba completo). Regla práctica: para validar **UI** usar SIEMPRE el método #1 (in-engine); reservar #2 para el mundo 3D.
+
+## Conexión desde WorkBuddy AI (2026-08-28)
+
+`opencode.json` y `.vscode/mcp.json` no aplican a WorkBuddy: este cliente lee `~/.workbuddy-ai/mcp.json` con clave raíz `mcpServers`. Por eso los servidores `screen` y `godot`, aunque ya estaban operativos para Cline/Copilot/OpenCode, **no estaban disponibles en WorkBuddy** hasta ahora.
+
+### Configuración creada
+
+`C:\Users\Maury-New\.workbuddy-ai/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "screen": {
+      "command": "C:\\Users\\Maury-New\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "args": [
+        "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\screen-mcp\\server.py"
+      ],
+      "env": { "PYTHONIOENCODING": "utf-8", "PYTHONUNBUFFERED": "1" }
+    },
+    "godot": {
+      "command": "C:\\Users\\Maury-New\\.workbuddy-ai\\binaries\\node\\versions\\22.22.2-1\\node.exe",
+      "args": [
+        "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\godot-mcp\\build\\index.js"
+      ],
+      "env": { "GODOT_PATH": "D:\\ISLA ANCESTRAL\\Godot_v4.7.2-stable_win64.exe\\Godot_v4.7.2-stable_win64.exe" }
+    }
+  }
+}
+```
+
+Notas:
+- `screen` reusa el **Python del sistema** que ya tiene `fastmcp 3.4.7 / pillow 12.3.0 / PyGetWindow 0.0.9` instaladas (el venv `tools/mcp/.venv` del proyecto es opcional en WorkBuddy porque no hay riesgo de choque con otros proyectos del usuario en este host).
+- `godot` usa el **node administrado** de WorkBuddy (22.22.2-1) y `GODOT_PATH` apunta al `.exe` que ya usaba `opencode.json`.
+- **V5 Blender (agregado el 2026-08-28 a las 14:49):** sí se registró, vía `uvx blender-mcp`. ⚠️ **Corrección a lo dicho antes:** el server-side **no necesita instalación previa** — `uvx` lo descarga y cachea solo en el primer arranque. Lo único que faltaba era `uv`, que ya está en `C:\Users\Maury-New\.local\bin\uvx.exe`.
+
+```json
+"blender": {
+  "command": "C:\\Users\\Maury-New\\.local\\bin\\uvx.exe",
+  "args": ["blender-mcp"],
+  "disabled": false
+}
+```
+
+- **V5 depende de que Blender esté abierto y conectado:** el server arranca igual, pero al iniciar intenta conectar a `localhost:9876` y, si Blender no está, loguea `Failed to connect to Blender: [WinError 10061]` y sigue. Las tools solo responden cuando el addon está conectado.
+
+### Verificación end-to-end (2026-08-28)
+
+- JSON parseado: ✅ todas las rutas de `command`/`args`/`GODOT_PATH` existen.
+- Smoke stdio de `godot-mcp`: ✅ `initialize` → protocolVersion `2024-11-05`, serverInfo `godot-mcp`, logs `[SERVER] Using Godot at: ...Godot_v4.7.2-stable_win64.exe`. Sin warnings de fallback.
+- Smoke stdio de `screen-mcp`: ✅ `initialize` + `tools/list` → 4 tools (`list_windows`, `capture_screen`, `capture_window`, `save_capture`).
+- `tools/call list_windows` → ✅ 11 ventanas reales (incluye Godot Engine + WorkBuddy AI + VS Code).
+- Captura real de la ventana `Godot Engine`: ✅ `ImageGrab.grab(bbox=…)` 1550×838 → PNG en `tools/mcp/godot-mcp/capturas/prueba_vision_workbuddy.png` (240 KB) — **leída y visualizada por el agente** (se ve VS Code con el checklist M08-Implementación en la columna central y el panel Cline a la derecha). Visión operativa de extremo a extremo.
+
+### Activación en la sesión de WorkBuddy
+
+Tras crear/editar `~/.workbuddy-ai/mcp.json` el cliente **no activa los servers solo**; hay que:
+1. Abrir la pantalla de **Conectores / MCP** del IDE.
+2. Localizar los servers nuevos (`screen`, `godot`) en estado *pendiente de confianza*.
+3. Pulsar **Confiar** en cada uno para que arranquen.
+4. Si ya estaba abierta la sesión: recargar la ventana del IDE para que registre los servers.
+
+Después, las tools `mcp__screen__*` y `mcp__godot__*` quedan disponibles en el chat con la misma semántica documentada en V2 y V4.
+
+### ⚠️ Descubrimiento clave: "Confiar + habilitar" NO basta en la sesión en curso (2026-08-28)
+
+Verificado por inspección de logs y procesos tras pulsar Confiar y activar ambos servers:
+
+- `mcp-approvals.json` registró los dos servers (`screen` 14:22:48, `godot` 14:22:49) y WorkBuddy **reescribió `mcp.json`** agregando `"disabled": false` a cada uno → la config fue leída y aceptada.
+- Sin embargo **no se spawnó ningún proceso hijo**: con psutil no apareció ningún `python.exe` del sistema corriendo `screen-mcp/server.py` ni ningún `node.exe` corriendo `godot-mcp/build/index.js`.
+- En `daemon.log`, el `launch-spec resolved` de la sesión sigue reportando **`"mcpCount":1`** (solo el server built-in) y el mismo `fingerprint` antes y después del toggle → **la sesión de chat en curso resuelve su set de MCPs al arrancar y no lo re-resuelve en caliente**.
+- `mcp-apps-diag.log` → `catalog.refresh scanned=0 acceptedCount=0` (los servers stdio locales no entran al catálogo de MCP Apps; solo figuran ahí los remotos tipo `custom-mcp:ardot` / `custom-mcp:netdrive`).
+
+**Consecuencia práctica:** para que las tools aparezcan hay que **abrir una sesión/conversación nueva** (o reiniciar la app). No sirve recargar la ventana ni re-toguear dentro de la misma conversación. Es el equivalente WorkBuddy del "reconectar el servidor MCP" que ya estaba documentado para Cline.
+
+### Cómo diagnosticar si un MCP de WorkBuddy está realmente levantado
+
+1. **Procesos:** `psutil.process_iter` filtrando `python.exe` / `node.exe` y buscando la ruta del script en `cmdline`.
+   - ⚠️ **Falso positivo a evitar:** existen procesos `tools/mcp/.venv/Scripts/python.exe … screen-mcp/server.py` creados por **otros clientes** (Cline / VS Code) a las 12:42. Si se ven con el `.venv`, son de otro cliente, no de WorkBuddy (WorkBuddy usa el Python del sistema según `mcp.json`).
+   - `wmic.exe` está **bloqueado** por la política de seguridad del entorno; usar psutil en el venv administrado (`~/.workbuddy-ai/binaries/python/envs/default`).
+2. **Logs:** `~/.workbuddy-ai/logs/daemon.log` → buscar `launch-spec resolved` y leer `"mcpCount"`. `mcp-apps-diag.log` y `main.log` (`mcp:toggle`) confirman aprobación y toggle.
+3. **Estado real:** `~/.workbuddy-ai/mcp-approvals.json` (aprobaciones con timestamp) y la reescritura de `mcp.json` con `"disabled": false`.
+
+**Firma:** MiniMax-M3 · WorkBuddy AI · Windows · 2026-08-28.
+
+---
+
+## Conexión desde Kilo (2026-08-28)
+
+Kilo (plataforma del agente Hy3 en este proyecto) tiene las tools de **godot-mcp integradas de fábrica**: NO requiere `opencode.json`, `.vscode/mcp.json` ni `cline_mcp_settings.json`.
+
+### Estado verificado (2026-08-28)
+
+| Vía | Cómo se usa en Kilo | Verificación |
+|-----|---------------------|--------------|
+| V4 godot-mcp | **Nativa**: tools `godot_*` disponibles en el chat (`get_godot_version`, `get_project_info`, `run_project`, `stop_project`, `get_debug_output`, `create_scene`, `add_node`, `save_scene`, `get_uid`, etc.) | ✅ `get_godot_version` → `4.7.2.stable`; `get_project_info` → 15 escenas / 101 scripts |
+| V5 blender-mcp | **Socket directo (Opción B)**: `python tools/mcp/blender-mcp/scripts-reutilizables/bpy_cliente.py <comando>` (get_scene_info, execute_code, get_viewport_screenshot) | ✅ `get_scene_info` → success, 10 objetos |
+| V2 pantalla | **Scripts de consola** (sin MCP): `cap_godot.py`, `cap_printwindow.py`, `lanzar_preview.py` de `tools/mcp/godot-mcp/scripts-reutilizables/` | Misma semántica que en OpenCode (patrón ya documentado); no re-verificada desde Kilo |
+| V1 | Igual que cualquier plataforma: el usuario pega capturas en el chat | 🟢 |
+| V3 | Igual que en OpenCode: export web + `qa_web.py` por consola | ⬜ no verificada desde Kilo |
+
+Notas:
+- En Kilo NO hay tools MCP nativas para Blender ni para pantalla: V5 se usa por socket TCP 9876 (requiere Blender abierto con el addon conectado en cada sesión) y V2 por scripts Python directos.
+- El flujo híbrido de V4 sigue aplicando: godot-mcp no expone screenshot de viewport, así que lanzar/leer logs con las tools nativas y capturar por script (`cap_godot.py` / `cap_printwindow.py` / método in-engine).
+- Las tools Godot nativas de Kilo piden `projectPath` explícito: usar `game/isla-ancestral` (relativo a la raíz del repo).
+
+**Firma:** Hy3 · Kilo · Windows · 2026-08-28.
 

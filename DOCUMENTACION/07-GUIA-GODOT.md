@@ -1,5 +1,5 @@
-**Modelo:** MiMo V2.5 / ox-alpha
-**Plataforma:** OpenCode / Cline
+**Modelo:** Hy3
+**Plataforma:** Kilo
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
 
@@ -1046,3 +1046,85 @@ func _ready() -> void:
 **Regla:** Si un nodo se agrega al scene tree durante `_ready()` y el padre aún no terminó, siempre usar `.call_deferred()`.
 
 **Archivo:** `scripts/player/player.gd`. **Fecha:** 2026-08-27 · **Agente:** MiMo V2.5 (OpenCode)
+
+---
+
+### 9.38 Variant inference con `:=` y `get()`
+
+**Error:** `The variable type is being inferred from a Variant value, so it will be typed as Variant. (Warning treated as error.)`
+
+**Causa:** En Godot 4.7, `node.get("property")` retorna `Variant`. Usar `:=` (type inference) con un valor Variant causa este error porque el compilador no puede inferir el tipo concreto. También aplica a `Array.pop_front()`, `Array.pop_back()`, y otros métodos que retornan Variant.
+
+**Solución:** Usar tipado explícito en vez de `:=`:
+
+```gdscript
+# ❌ Incorrecto — Variant no puede inferirse con :=
+var ui_events := bus.get("ui")
+var oldest := _active.pop_front()
+
+# ✅ Correcto — tipado explícito
+var ui_events: Variant = bus.get("ui")
+var oldest: Dictionary = _active.pop_front()
+```
+
+**Regla:** Cuando se usa `get()`, `pop_front()`, `pop_back()`, o cualquier método que retorna Variant, SIEMPRE usar tipado explícito (`var x: Type = ...`) en vez de `:=`.
+
+**Archivo:** `scripts/ui/core/ui_manager.gd`, `scripts/ui/services/notification_service.gd`. **Fecha:** 2026-08-28 · **Agente:** MiMo V2.5 (OpenCode)
+
+---
+
+### 9.39 No se puede redefinir `show()` en CanvasLayer
+
+**Error:** `The function signature doesn't match the parent. Parent signature is "show() -> void".`
+
+**Causa:** `CanvasLayer` tiene un método built-in `show() -> void`. Si se intenta definir un método `show()` con firma diferente en una subclase, Godot lanza error de parser. Esto es especialmente común al crear servicios de UI que extienden CanvasLayer.
+
+**Solución:** Renombrar el método a algo específico:
+
+```gdscript
+# ❌ Incorrecto — conflicto con CanvasLayer.show()
+func show(text: String, at: Control) -> void:
+    pass
+
+# ✅ Correcto — nombre específico sin conflicto
+func show_tooltip(text: String, at: Control) -> void:
+    pass
+```
+
+**Regla:** Al extender CanvasLayer, NUNCA redefinir `show()`, `hide()`, `get_visible()`, `set_visible()`, `is_visible()` u otros métodos built-in. Usar nombres descriptivos específicos del dominio.
+
+**Archivo:** `scripts/ui/services/tooltip_service.gd`. **Fecha:** 2026-08-28 · **Agente:** MiMo V2.5 (OpenCode)
+
+---
+
+### 9.40 VoxelTerrain NO tiene get_voxel — leer por VoxelTool
+
+**Error:** `Invalid call. Nonexistent function 'get_voxel' in base 'VoxelTerrain'.`
+
+**Causa:** En esta versión de Voxel Tools (GDExtension con Godot 4.7.2), `VoxelTerrain` NO expone `get_voxel()`. La lectura de bloques se hace por el `VoxelTool` obtenido de `terrain.get_voxel_tool()`. Como el método retorna Variant, los intentos previos con `:=` fallaban antes en el parse (§9.35) y este error quedó latente hasta que un camino de código lo ejecutó en runtime.
+
+**Solución:** Obtener un VoxelTool fresco (cada llamada a `get_voxel_tool()` puede retornar una instancia nueva), configurar el canal y leer con `vt.get_voxel(pos)`:
+
+```gdscript
+# ❌ Incorrecto — VoxelTerrain no expone get_voxel
+var block_id: int = int(_terrain.get_voxel(pos, VoxelBuffer.CHANNEL_TYPE))
+
+# ✅ Correcto — lectura por VoxelTool (canal configurado)
+var vt := _terrain.get_voxel_tool()
+vt.channel = VoxelBuffer.CHANNEL_TYPE
+var block_id: int = int(vt.get_voxel(pos))
+```
+
+**Verificado en runtime** (dump de métodos vía `get_method_list()`): `VoxelTool` expone `get_voxel`, `get_voxel_f`, `set_voxel`, `raycast`, `do_point`, etc.; `VoxelTerrain` solo `get_voxel_tool`, `voxel_to_data_block`, `data_block_to_voxel`.
+
+**Consejo de diagnóstico:** ante dudas de API de una GDExtension, volcar `obj.get_method_list()` con un script `--script` headless es más fiable que asumir la firma de la doc.
+
+**Archivos:** `scripts/tools/tool_controller.gd` (M13). **Fecha:** 2026-08-28 · **Agente:** Hy3 (Kilo)
+
+---
+
+## Histórico de Versiones (adenda 2026-08-28)
+
+| Fecha | Modelo | Plataforma | Cambios |
+|-------|--------|------------|---------|
+| 2026-08-28 | Hy3 | Kilo | Agregada §9.40 (VoxelTerrain sin get_voxel → VoxelTool.get_voxel + diagnóstico por get_method_list). M13 Fase 3 cerrada |
