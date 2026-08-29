@@ -129,6 +129,7 @@ La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marc
 | 16 | M25 Ruinas | 3 | V2 | Estructura pequena y legibilidad | Despues de M24 |
 | 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
 | 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
+| 21 | M24 Templos y Puzzles | 5 | V2 | 🟡 Liberado (nucleo framework) | Hy3 (Kilo) | M13 ✅ | Framework emisor-receptor + validacion de no-arbitrariedad + test 0 fallos; puzzles jugables/familias/ayuda pendientes | 2026-08-29 02:20 |
 | 20 | M04+M05+M07 Cierre Fase 1 | 3-5 | V0/V1 | 🟡 Liberado (núcleo F1 verificado) | Hy3 (Kilo) | — | Puerta F1 cerrada: Input Map/capas física + registro.gd + verificar_arquitectura.gd + prueba_arquitectura.tscn SMOKE OK; auditoría completa de los 3 checklists pendiente | 2026-08-29 01:20 |
 | 19 | M138 Vertical Slice | 5 | V2 | Recorrido visual completo | No; requiere F4 |
 
