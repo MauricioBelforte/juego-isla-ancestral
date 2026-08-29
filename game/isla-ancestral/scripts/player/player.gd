@@ -230,6 +230,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 7.0
 		_on_ground = false
 
+	# DEV: descender al suelo (C) — el salto en dev flota; con C vuelve a tierra
+	if Input.is_key_pressed(KEY_C):
+		_descender_al_suelo()
+
 	# Gravedad (solo si no hay suelo)
 	if not _on_ground:
 		velocity.y -= gravity * delta
@@ -257,7 +261,7 @@ func _physics_process(delta: float) -> void:
 
 func _update_move_direction() -> void:
 	_move_direction = Vector3.ZERO
-	
+
 	var input_dir := Vector2.ZERO
 	if Input.is_key_pressed(KEY_W):
 		input_dir.y -= 1.0
@@ -280,6 +284,26 @@ func _update_move_direction() -> void:
 		_move_direction = (cam_right * input_dir.x + cam_forward * -input_dir.y)
 	else:
 		_move_direction = Vector3(input_dir.x, 0.0, input_dir.y)
+
+## DEV: desciende al jugador hasta el primer bloque solido bajo sus pies (tecla C).
+## El salto en modo dev flota (gravedad incompleta); con C vuelve a tierra.
+func _descender_al_suelo() -> void:
+	if _terrain == null:
+		return
+	var vt = _terrain.get_voxel_tool()
+	if vt == null:
+		return
+	vt.channel = VoxelBuffer.CHANNEL_TYPE
+	var p := global_position
+	for y in range(int(p.y), -1, -1):
+		if int(vt.get_voxel(Vector3i(int(p.x), y, int(p.z)))) != 0:
+			global_position = Vector3(p.x, float(y) + 2.0, p.z)
+			velocity.y = 0.0
+			_on_ground = true
+			return
+	global_position = Vector3(p.x, 2.0, p.z)
+	velocity.y = 0.0
+	_on_ground = true
 
 func _rotate_to_direction() -> void:
 	if _move_direction.length() < 0.1:

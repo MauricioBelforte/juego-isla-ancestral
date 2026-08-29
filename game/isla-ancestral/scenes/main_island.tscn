@@ -74,6 +74,7 @@ F - Hablar con NPC"
 script = ExtResource("4_reloj")
 
 [node name="CatalinaOso" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 10, 64)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1720, 30, 1000)
 script = ExtResource("5_villager")
 perfil = ExtResource("6_catalina")
+dialogue_id = "catalina_hola"

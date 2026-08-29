@@ -16,6 +16,8 @@ signal disponible_cambio(esta_disponible: bool)
 
 ## ── Configuración ──────────────────────────────────────
 @export var perfil: Resource
+## M21: id del diálogo en data/dialogues/ (ej: "catalina_hola")
+@export var dialogue_id: String = ""
 
 ## ── Nodos internos ─────────────────────────────────────
 var mood: Node
@@ -106,6 +108,7 @@ func _crear_componentes() -> void:
 	hook.name = "DialogueHook"
 	add_child(hook)
 	hook.inicializar(self)
+	hook.dialogue_id = dialogue_id
 
 
 ## ── Indicador de interacción (F) ───────────────────────
@@ -133,7 +136,7 @@ func _snap_to_ground() -> void:
 	var generator_script = load("res://scripts/world/island_generator.gd")
 	if generator_script:
 		var gen = generator_script.new(null, 42)  # seed=42, same as main_island
-		gen.island_radius = 64
+		gen.island_radius = 1024  # DEBE coincidir con el radio de la isla actual (main_island.gd)
 		gen.max_height = 40
 		var h: int = gen.get_height(int(global_position.x), int(global_position.z))
 		if h > 0:
