@@ -77,7 +77,7 @@ func _setup_terrain() -> void:
 	# Generador de isla con biomas (M09/M10)
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
-	generator.island_radius = 2048
+	generator.island_radius = 256
 	generator.max_height = 40
 	terrain.generator = generator
 	
@@ -85,10 +85,10 @@ func _setup_terrain() -> void:
 	# nunca en el agua del océano que está a nivel de mar)
 	var player = get_node_or_null("Player")
 	if player:
-		player.global_position = Vector3(3148, 16, 2048)
+		player.global_position = Vector3(256, 16, 256)
 	var voxel_viewer_node = get_node_or_null("VoxelViewer")
 	if voxel_viewer_node:
-		voxel_viewer_node.global_position = Vector3(3148, 30, 2048)
+		voxel_viewer_node.global_position = Vector3(256, 30, 256)
 	_ajustar_spawn_superficie.call_deferred()
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
@@ -129,8 +129,8 @@ func _ajustar_spawn_superficie() -> void:
 	# el jugador nace ya sobre la superficie real de la columna del spawn
 	var gen = terrain.generator
 	if gen != null and gen.has_method("_get_island_gen"):
-		var altura_spawn: int = int(gen._get_island_gen().get_height(3148, 2048))
+		var altura_spawn: int = int(gen._get_island_gen().get_height(256, 256))
 		var player = get_node_or_null("Player")
 		if player:
-			player.global_position = Vector3(3148, altura_spawn + 3, 2048)
+			player.global_position = Vector3(256, altura_spawn + 3, 256)
 			print("[M09] Spawn sobre superficie calculada Y=", altura_spawn + 3)
