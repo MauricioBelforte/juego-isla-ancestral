@@ -12,12 +12,19 @@ func _ready():
 	_setup_terrain()
 	_setup_player_visual()
 	_crear_ruina()
+	_crear_ui_dialogo()
 	print("Isla Ancestral — Isla Raíz")
 
 func _crear_ruina() -> void:
 	var ruina := RuinaChozavil.new()
 	ruina.name = "RuinaChozavil"
 	add_child(ruina)
+
+## M21: instancia la UI de diálogo (CanvasLayer autocontenido)
+func _crear_ui_dialogo() -> void:
+	var ui := DialogueUI.new()
+	ui.name = "DialogueUI"
+	add_child(ui)
 
 func _setup_terrain() -> void:
 	if not terrain:

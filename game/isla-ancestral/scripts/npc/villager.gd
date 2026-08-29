@@ -42,7 +42,21 @@ func _ready() -> void:
 	# Snap al terreno: buscar la altura real del suelo en mi posición XZ
 	# call_deferred porque current_scene no está listo durante _ready()
 	_snap_to_ground.call_deferred()
+	# M19/M21: registro en VillagerManager (deferred: el nodo debe estar en el arbol)
+	_registrar_en_manager.call_deferred()
 	print("[Villager] %s creado (especie=%s)" % [perfil.nombre if perfil else "?", perfil.especie if perfil else "?"])
+
+
+func _registrar_en_manager() -> void:
+	var vm = get_node_or_null("/root/VillagerManager")
+	if vm and vm.has_method("registrar_villager"):
+		vm.registrar_villager(self)
+
+
+func _exit_tree() -> void:
+	var vm = get_node_or_null("/root/VillagerManager")
+	if vm and vm.has_method("desregistrar_villager"):
+		vm.desregistrar_villager(self)
 
 
 func _process(_delta: float) -> void:

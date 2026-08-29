@@ -1,14 +1,15 @@
 extends Node
 
-## Módulo 19: NPC y Vecinos — Hook de diálogo (placeholder para M21)
-##
-## Contrato hacia M21 Diálogos: emite señales cuando el jugador
-## inicia/cierra una conversación. M21 consume estas señales para
-## mostrar la caja de diálogo y las opciones de respuesta.
+## Módulo 19: NPC y Vecinos — Hook de diálogo (conectado a M21 DialogueManager)
+## M21: al solicitar diálogo, inicia el DialogueManager (autoload) con el
+## dialogue_id del vecino.
 
 signal linea_solicitada(vecino: Node, clave_linea: String)
 signal respuestas_disponibles(vecino: Node, respuestas: Array[String])
 signal conversacion_terminada(vecino: Node, resumen: Dictionary)
+
+## ID del diálogo en data/dialogues/ (ej: "catalina_hola")
+@export var dialogue_id: String = ""
 
 var _vecino: Node = null
 var _en_conversacion: bool = false
@@ -18,11 +19,12 @@ func inicializar(vecino: Node) -> void:
 	_vecino = vecino
 
 
-## El jugador pulsa F sobre el vecino → iniciar diálogo.
+## El jugador solicita diálogo → inicia el DialogueManager de M21
 func solicitar_dialogo() -> void:
 	if _en_conversacion:
 		return
 	_en_conversacion = true
+	# Placeholder M19 (emitir señal)
 	var clave: String = "saludo"
 	if _vecino and _vecino.has_method("obtener_estado_animo"):
 		var estado: String = _vecino.obtener_estado_animo()
@@ -33,6 +35,19 @@ func solicitar_dialogo() -> void:
 	linea_solicitada.emit(_vecino, clave)
 	var nombre: String = _vecino.name if _vecino else "?"
 	print("[DialogueHook] %s solicita diálogo: %s" % [nombre, clave])
+	# M21: iniciar el DialogueManager (autoload) si tenemos dialogue_id
+	if dialogue_id != "":
+		var dm = get_node_or_null("/root/DialogueManager")
+		if dm:
+			dm.start_dialogue(dialogue_id, {"nombre_viajero": nombre})
+			dm.dialogue_ended.connect(_on_m21_terminado, CONNECT_ONE_SHOT)
+		else:
+			print("[DialogueHook] DialogueManager no encontrado (autoload?)")
+
+
+func _on_m21_terminado(_id: String, _ultimo: String) -> void:
+	_en_conversacion = false
+	notificar_cierre()
 
 
 ## M21 llama esto para dar líneas al jugador.
