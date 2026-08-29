@@ -137,7 +137,7 @@ func _snap_to_ground() -> void:
 		gen.max_height = 40
 		var h: int = gen.get_height(int(global_position.x), int(global_position.z))
 		if h > 0:
-			global_position.y = float(h) + 0.5  # +0.5 para estar sobre la superficie
+			global_position.y = float(h) + 0.5  # +0.5 para pies sobre la superficie
 			print("[Villager] %s snap al terreno en Y=%.1f (height=%d)" % [name, global_position.y, h])
 			return
 	# Fallback: mantener posición actual
