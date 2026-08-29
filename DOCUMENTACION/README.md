@@ -216,3 +216,5 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 145-Diseno-De-Experiencia | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 7 docs (91/105 + 14 [?] de fase jugable) |
 | 146-Diseno-Emocional | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 5 docs (90/100 + 10 [?] de fase jugable) |
 | 149-Nombres-Y-Nomenclatura | ✅ Creado por Nemotron 3 Ultra — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: operativa/ con 5 docs + validador ejecutable (97/100 + 3 [?]) |
+
+- `167-Registro-Del-Terreno-Y-Posicionamiento` — terreno fijo de la Isla Raíz, posicionamiento de objetos con get_height, y recovery (plantilla para islas futuras).

@@ -1,5 +1,5 @@
-**Modelo:** Hy3
-**Plataforma:** Kilo
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
 
@@ -1123,11 +1123,79 @@ var block_id: int = int(vt.get_voxel(pos))
 
 ---
 
+### 9.41 `class_name Logger` colisiona con la clase nativa `Logger` de Godot 4.7
+
+**Error:** `Parse Error: Class "Logger" hides a native class.`
+
+**Causa:** Godot 4.7 incorporó una clase nativa `Logger` (API de logging del motor). Declarar `class_name Logger` en un script propio produce un conflicto de nombres globales y el script no compila. Ojo: si además el script se registra como autoload, corregir el nombre a `GameLogger` con `class_name GameLogger` genera un segundo error distinto (ver §9.17): `Class "GameLogger" hides an autoload singleton` — un script autoload **no puede tener `class_name` igual al nombre del autoload**.
+
+**Solución:** Para un servicio de logging propio como autoload: quitar el `class_name` del script (el autoload ya expone el singleton globalmente) o nombrar la clase distinto del autoload. El nombre de servicio en ServiceRegistry (M07) puede seguir siendo `"logger"` (es una interfaz, no una clase).
+
+```gdscript
+# ❌ Incorrecto — Logger es clase nativa de Godot 4.7
+class_name Logger
+extends Node
+
+# ❌ Incorrecto si el script es autoload "GameLogger" — colisiona con el autoload
+class_name GameLogger
+extends Node
+
+# ✅ Correcto — autoload "GameLogger" sin class_name (singleton global por autoload)
+extends Node
+```
+
+**Archivos:** `scripts/logging/logger.gd` (M103). **Fecha:** 2026-08-29 · **Agente:** ox-alpha (Cline)
+
+---
+
+### 9.42 `String.compress()` no existe — la compresión es de PackedByteArray
+
+**Error:** `Parse Error: Cannot find member "compress" in base "String".` / `Function "compress()" not found in base String.`
+
+**Causa:** En Godot 4.x, `compress()` (y `decompress()`) son métodos de `PackedByteArray`, no de `String`. Intentar comprimir el texto de un log directamente sobre el String no compila.
+
+**Solución:** Leer el archivo como bytes y comprimir el buffer:
+
+```gdscript
+# ❌ Incorrecto
+var raw := FileAccess.get_file_as_string(path)
+var gz := raw.compress(FileAccess.COMPRESSION_GZIP)
+
+# ✅ Correcto
+var raw_bytes := FileAccess.get_file_as_bytes(path)
+var gz: PackedByteArray = raw_bytes.compress(FileAccess.COMPRESSION_GZIP)
+```
+
+**Archivos:** `scripts/logging/log_rotator.gd` (M103). **Fecha:** 2026-08-29 · **Agente:** ox-alpha (Cline)
+
+---
+
+### 9.43 `:=` sobre constantes accedidas vía instancia dinámica de autoload → Variant
+
+**Error:** `Parse Error: Cannot infer the type of "x" variable because the value doesn't have a set type.`
+
+**Causa:** Variante de §9.24/§9.38: cuando otro script accede a una constante de un autoload por instancia dinámica (`_ad.MI_CONST`, donde `_ad = get_node_or_null("AnalyticsDirector")`), la expresión es `Variant` (no se resuelve el tipo en parse-time). Un `var x := _ad.MI_CONST` falla si el proyecto trata ese warning como error.
+
+**Solución:** Tipado explícito en el consumidor:
+
+```gdscript
+# ❌ Incorrecto (Variant)
+var dir := _ad.DIR_ANALYTICS
+
+# ✅ Correcto
+var dir: String = _ad.DIR_ANALYTICS
+```
+
+**Archivos:** `scripts/analytics/test_analytics.gd` (M104). **Fecha:** 2026-08-29 · **Agente:** ox-alpha (Cline)
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |
 |-------|--------|------------|---------|
 | 2026-08-28 | Hy3 | Kilo | Agregada §9.40 (VoxelTerrain sin get_voxel → VoxelTool.get_voxel + diagnóstico por get_method_list). M13 Fase 3 cerrada |
+| 2026-08-29 | ox-alpha | Cline | Agregadas §9.41 (class_name Logger colisiona con clase nativa Godot 4.7 — usar autoload sin class_name), §9.42 (String.compress() no existe → PackedByteArray.compress), §9.43 (`:=` sobre constantes de autoload vía instancia dinámica → Variant). M103/M104 |
 
 
 ---
@@ -1385,3 +1453,47 @@ func _get_island_gen() -> IslandGenerator:
 ```
 **Regla general:** todo Resource creado dentro de un VoxelGeneratorScript y usado por
 sus threads DEBE tener referencia estatica global (o vivir en un autoload).
+
+
+### 10.15 LECCIONES DE LA JORNADA (2026-08-29 — terreno, cámara, spawn, NPC)
+
+> Completado tras iterar TODO el día con el usuario. El error dominante: tocar una
+> variable a la vez sin verificar el valor REAL del archivo (los `.replace()` que no
+> encuentran el string no fallan, simplemente no cambian nada).
+
+#### 10.15.1 NUNCA asumir el valor de una config — verificar SIEMPRE con grep
+- Los `.replace()` por script imprimen "OK" aunque NO encontraron el string. Esto
+  causó que el spawn quedara en (256,256) mientras la isla era radio 2048 durante
+  medio día. SIEMPRE verificar con `Select-String` el valor REAL antes de editar.
+
+#### 10.15.2 El radio de la isla define qué se ve (no el perfil)
+- El código del generador (montañas + plato + agua) fue el MISMO todo el día.
+- Lo que cambió la vista: el `island_radius`. Con 2048 (isla gigante) solo se ve
+  pasto hasta el horizonte; con 256 (isla chica) se ve montaña + arena + agua a la vez.
+- REGLA: para una isla "visible y completa" usar radio 256 (512 bloques de diámetro).
+
+#### 10.15.3 El CENTRO de la isla es (island_radius, island_radius)
+- `get_height` usa `dx = x - island_radius` → el centro es (radio, radio).
+- El spawn/objetos deben ir en el centro o en un punto calculado por `get_height`.
+- Con radio 256: centro = (256, 256). Con radio 2048: centro = (2048, 2048).
+
+#### 10.15.4 El snap del NPC al terreno usa get_height (no get_voxel)
+- El villager `_snap_to_ground` crea su propio IslandGenerator (debe tener el MISMO
+  island_radius que el mundo) y llama `get_height(x, z)`. Si el radio difiere, el
+  NPC se posiciona mal (flota o se entierra).
+- REGLA: el island_radius del snap DEL NPC debe coincidir con el del mundo.
+
+#### 10.15.5 La cámara busca al jugador UNA vez en _ready (bug "no me veo")
+- `follow_camera.gd` buscaba `get_first_node_in_group("player")` con `await process_frame`.
+  Si en ese frame el player aún no está en el grupo, `_target` queda null para SIEMPRE.
+- FIX: reintentar en `_physics_process` (si _target es null o inválido, re-buscar).
+- REGLA: los nodos que dependen de otro nodo deben REINTENTAR la búsqueda, no buscarla
+  una sola vez en _ready.
+
+#### 10.15.6 Posicionar un objeto sobre el terreno (método robusto)
+```gdscript
+var gen = terrain.generator  # el generador del mundo
+var h = int(gen._get_island_gen().get_height(x, z))  # altura real del suelo
+nodo.global_position = Vector3(x, h + 1, z)  # 1 bloque sobre la superficie
+```
+El snap de Catalina usa este patrón; al cambiar el radio, actualizar el radio del snap.
