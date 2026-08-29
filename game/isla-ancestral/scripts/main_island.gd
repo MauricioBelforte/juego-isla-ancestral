@@ -111,6 +111,10 @@ func _setup_player_visual() -> void:
 		print("[M08] Jugador coloreado de azul")
 
 func _process(delta: float) -> void:
+	var viewer_seg = get_node_or_null("VoxelViewer")
+	var jugador_seg = get_node_or_null("Player")
+	if viewer_seg and jugador_seg:
+		viewer_seg.global_position = jugador_seg.global_position
 	time += delta
 	if time >= 0.5:
 		var fps = Engine.get_frames_per_second()
