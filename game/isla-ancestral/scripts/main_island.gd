@@ -81,10 +81,11 @@ func _setup_terrain() -> void:
 	generator.max_height = 40
 	terrain.generator = generator
 	
-	# Spawn del jugador en la playa (orilla de la isla, centro en 64,64)
+	# Spawn del jugador: sobre la superficie de la isla (cae y aterriza en la cresta,
+	# nunca en el agua del océano que está a nivel de mar)
 	var player = get_node_or_null("Player")
 	if player:
-		player.global_position = Vector3(20, 15, 64)
+		player.global_position = Vector3(20, 30, 64)
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
 
