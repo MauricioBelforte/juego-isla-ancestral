@@ -1,0 +1,53 @@
+{
+	"id": "catalina_hola",
+	"start": "saludo",
+	"nodes": {
+		"saludo": {
+			"tipo": 0,
+			"speaker_key": "npc.catalina",
+			"text_key": "{nombre_viajero}! Que la isla te reciba con buen viento. Soy Catalina, guardiana de esta playa.",
+			"placeholders": {"nombre_viajero": "viajero"},
+			"next_id": "pregunta",
+			"tipo_fin": false
+		},
+		"pregunta": {
+			"tipo": 1,
+			"speaker_key": "npc.catalina",
+			"text_key": "Es tu primera vez en Isla Aurora, verdad?",
+			"options": [
+				{
+					"text_key": "Si, acabo de llegar.",
+					"next_id": "bienvenida"
+				},
+				{
+					"text_key": "Hace dias que camino la costa.",
+					"next_id": "curiosa"
+				}
+			]
+		},
+		"bienvenida": {
+			"tipo": 0,
+			"speaker_key": "npc.catalina",
+			"text_key": "Entonces toma mi consejo: la montana guarda secretos de piedra. Buscala cuando el sol este alto.",
+			"effects": [{"clave": "catalina_amistad", "accion": "increment", "valor": 1}],
+			"next_id": "despedida"
+		},
+		"curiosa": {
+			"tipo": 0,
+			"speaker_key": "npc.catalina",
+			"text_key": "Ah, entonces ya sabes que la marea sube rapido. No te confies en el agua oscura.",
+			"effects": [{"clave": "catalina_amistad", "accion": "increment", "valor": 1}],
+			"next_id": "despedida"
+		},
+		"despedida": {
+			"tipo": 0,
+			"speaker_key": "npc.catalina",
+			"text_key": "Vuelve cuando quieras. La isla siempre tiene algo nuevo para quien la escucha.",
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.catalina"
+		}
+	}
+}

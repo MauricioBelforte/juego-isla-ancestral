@@ -15,11 +15,36 @@ run/main_scene="res://scenes/main_island.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*res://scripts/core/event_bus.gd"
+DialogueManager="*res://scripts/dialogos/dialogue_manager.gd"
+GameSettings="*res://scripts/core/game_settings.gd"
+ServiceRegistry="*res://scripts/core/service_registry.gd"
+SaveManager="*res://scripts/saving/save_manager.gd"
+TimeCalendar="*res://scripts/time/time_calendar.gd"
+ItemDatabase="*res://scripts/data/item_database.gd"
+EconomyManager="*res://scripts/economia/economy_manager.gd"
+SoftlockGuard="*res://scripts/core/softlock_guard.gd"
+ShopManager="*res://scripts/shops/shop_manager.gd"
+Inventario="*res://scripts/inventario/inventario_service.gd"
+Friendship="*res://scripts/friendship/friendship_service.gd"
+GameTime="*res://scripts/time/game_clock.gd"
+RelojHud="*res://scripts/clock/reloj_hud.gd"
+Bootstrap="*res://scripts/core/bootstrap.gd"
+UIManager="*res://scripts/ui/core/ui_manager.gd"
+TooltipService="*res://scripts/ui/services/tooltip_service.gd"
+NotificationService="*res://scripts/ui/services/notification_service.gd"
+VillagerManager="*res://scripts/npc/villager_manager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [gdscript]
 
-# M111 - Configuración de linter y calidad de código
-# Habilitar linter estático de GDScript
-formatter/indent/type=1
+"#M111-ConfiguraciÃ³ndelinterycalidaddecÃ³digo#HabilitarlinterestÃ¡ticodeGDScriptformatter/indent/type"=1
 formatter/indent/size=4
 formatter/indent/continuation=4
 formatter/indent/preprocessor=1
@@ -55,76 +80,30 @@ linter/nesting_depth=4
 linter/naming_convention=true
 linter/require_documentation=true
 
-[autoload]
-
-EventBus="*res://scripts/core/event_bus.gd"
-GameSettings="*res://scripts/core/game_settings.gd"
-ServiceRegistry="*res://scripts/core/service_registry.gd"
-SaveManager="*res://scripts/saving/save_manager.gd"
-TimeCalendar="*res://scripts/time/time_calendar.gd"
-ItemDatabase="*res://scripts/data/item_database.gd"
-EconomyManager="*res://scripts/economia/economy_manager.gd"
-SoftlockGuard="*res://scripts/core/softlock_guard.gd"
-ShopManager="*res://scripts/shops/shop_manager.gd"
-Inventario="*res://scripts/inventario/inventario_service.gd"
-Friendship="*res://scripts/friendship/friendship_service.gd"
-GameTime="*res://scripts/time/game_clock.gd"
-RelojHud="*res://scripts/clock/reloj_hud.gd"
-Bootstrap="*res://scripts/core/bootstrap.gd"
-UIManager="*res://scripts/ui/core/ui_manager.gd"
-TooltipService="*res://scripts/ui/services/tooltip_service.gd"
-NotificationService="*res://scripts/ui/services/notification_service.gd"
-VillagerManager="*res://scripts/npc/villager_manager.gd"
-
-[display]
-
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-
-[physics]
-
-3d/physics_engine="Jolt Physics"
-
-[rendering]
-
-rendering_device/driver.windows="d3d12"
-
-[plugins]
-
-gdUnit4={"enabled": true, "path": "res://addons/gdUnit4/plugin.cfg"}
-
-[layer_names]
-
-3d_physics/layer_1="mundo"
-3d_physics/layer_2="jugador"
-3d_physics/layer_3="npc"
-3d_physics/layer_4="interactuable"
-3d_physics/layer_5="agua"
-
 [input]
 
 mover_norte={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null),
-Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 ]
 }
 mover_sur={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null),
-Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 ]
 }
 mover_este={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null),
-Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 ]
 }
 mover_oeste={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null),
-Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
 ]
 }
 interactuar={
@@ -192,32 +171,61 @@ pausa={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-
 hotbar_7={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":55,"key_label":0,"unicode":55,"location":0,"echo":false,"script":null)]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":55,"key_label":0,"unicode":55,"location":0,"echo":false,"script":null)
+]
 }
 hotbar_8={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":56,"key_label":0,"unicode":56,"location":0,"echo":false,"script":null)]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":56,"key_label":0,"unicode":56,"location":0,"echo":false,"script":null)
+]
 }
 hotbar_9={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":57,"key_label":0,"unicode":57,"location":0,"echo":false,"script":null)]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":57,"key_label":0,"unicode":57,"location":0,"echo":false,"script":null)
+]
 }
 camara_rotar_izquierda={
 "deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)]
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
+]
 }
 camara_rotar_derecha={
 "deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)]
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
+]
 }
 camara_rotar_arriba={
 "deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)]
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)
+]
 }
 camara_rotar_abajo={
 "deadzone": 0.2,
-"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)]
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
+]
 }
+
+[layer_names]
+
+3d_physics/layer_1="mundo"
+3d_physics/layer_2="jugador"
+3d_physics/layer_3="npc"
+3d_physics/layer_4="interactuable"
+3d_physics/layer_5="agua"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[plugins]
+
+gdUnit4={
+"enabled": true,
+"path": "res://addons/gdUnit4/plugin.cfg"
+}
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
