@@ -101,14 +101,19 @@ func get_height(x: int, z: int) -> int:
 	else:
 		height = 0
 	var crestas := _terrain_noise.get_noise_2d(float(x) / 6.0, float(z) / 6.0)
-	# Montanas CONICAS: la altura crece linealmente hacia el centro (forma de
-	# piramide/conica: pendiente suave, sin cortes bruscos de ruido). Base de
-	# cesped desde la arena, tope bajo-automatico sin picos de 20+.
-	if dist < 0.55:
-		var pendiente := (0.55 - dist) / 0.55  # lineal 0->1 hacia el centro
-		var altura_conica := 3.0 + pendiente * 12.0
-		var ondulacion := maxf(0.0, crestas) * 4.0
-		height = int(maxf(float(altura_conica + ondulacion), float(height)))
+	# MONTANAS DE ANTES, con descenso rellenado (spec usuario): se restaura la
+	# forma original de isla (pow(island_shape, 1.5) * max_height: picos reales
+	# de piedra) y alrededor se RELLENA la pendiente para eliminar los cortes
+	# bruscos: la altura final es la MEZCLA suave entre la montana de antes y la
+	# base de arena, ponderada por la distancia al pico (conica/redondeada).
+	var pico_original := pow(maxf(island_shape, 0.0), 1.5) * max_height
+	var pendiente := clampf((0.9 - dist) / 0.9, 0.0, 1.0)
+	var altura_suave := 3.0 + pow(pendiente, 1.3) * 10.0
+	var alturas := maxf(pico_original, altura_suave)
+	if crestas > 0.0:
+		alturas += crestas * 6.0
+	if alturas > float(height):
+		height = int(alturas)
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)
