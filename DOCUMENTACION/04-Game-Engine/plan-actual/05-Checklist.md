@@ -96,11 +96,11 @@
 - [ ] Configurar resolución y escalado (window mode, aspect) [S]
 - [ ] Configurar framerate objetivo 60 y VSync opcional [S]
 - [ ] Definir capas de física (voxel, jugador, NPC, props, UI, receptores) [M]
-- [ ] Configurar Input Map: mover (WASD+stick) [S]
-- [ ] Configurar Input Map: cámara rotación/zoom [S]
-- [ ] Configurar Input Map: herramienta/interacción [S]
-- [ ] Configurar Input Map: inventario/hotbar 1-9 [S]
-- [ ] Crear escena Bootstrap (config + carga) [M]
+- [x] Configurar Input Map: mover (WASD+stick) [S] (acciones mover_norte/sur/este/oeste con teclado y stick izquierdo)
+- [x] Configurar Input Map: cámara rotación/zoom [S] (camara_zoom_in/out por rueda; rotación por stick derecho)
+- [x] Configurar Input Map: herramienta/interacción [S] (interactuar=E, colocar=Q)
+- [x] Configurar Input Map: inventario/hotbar 1-9 [S] (inventario=B, favorito=F, hotbar_1..9)
+- [x] Crear escena Bootstrap (config + carga) [M] (scripts/core/bootstrap.gd: registra servicios y carga main_island; verificado en runtime)
 - [ ] Crear escena Main (world + player + cámara) [M]
 - [ ] Crear estructura de carpetas del proyecto (scenes, scripts, resources, data) [S]
 - [ ] Crear export presets Windows/Linux/Web/SteamOS [M]
@@ -131,7 +131,7 @@
 - [ ] Documentar la carga diegética del Gran Vapor (M28/M63) [S]
 - [ ] Documentar el raycast voxel para herramientas (M13) [S]
 - [ ] Documentar los singletons GameState/EventBus (M59 Guardado) [S]
-- [ ] Documentar el Input Map remapeable (M57/M58) [S]
+- [x] Documentar el Input Map remapeable (M57/M58) [S] (acciones en project.godot [input]; remapeables desde Project Settings; ver 04-Codigo.md)
 - [ ] Documentar el asset pipeline de audio (M41-M44) [S]
 - [ ] Documentar el pipeline de arte procedimental voxel (M45-M48) [S]
 - [ ] Documentar la UI del juego (Control nodes) con M53 [S]
@@ -168,3 +168,22 @@
 ---
 
 **Totales:** 120 ítems · Completados: 95 · Pendientes: 25 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+
+## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
+
+- [x] Configurar capas de fisica e Input Map inicial [M] (project.godot: [layer_names] 3d_physics mundo/jugador/npc/interactuable/agua + [input] con 18 acciones teclado/gamepad/rueda)
+- [x] Crear `Bootstrap` y `Main` vacios pero ejecutables [M] (bootstrap.gd + scenes/main_island.tscn ejecutan sin errores; verificado headless y runtime)
+- [x] Documentar el Input Map remapeable [S]
+
+
+## Notas del Agente (Cierre Fase 1 - 2026-08-29)
+
+**Modelo:** Hy3 | **Plataforma:** Kilo | **Estado:** items de la guia 08 completados y verificados; auditoria del resto del checklist pendiente (honestidad 21.4.3)
+
+### Lo que hice
+- Verificacion con Godot 4.7.2 headless + runtime: proyecto arranca sin errores de script.
+- Ver tilo de guia 08 del modulo completado con evidencia (ver seccion "Implementacion Fase 1").
+- Libere el modulo en CHECKLIST-GLOBAL y ESTADO-PARALELO como nucleo verificado (🟡); la auditoria completa del checklist queda para la siguiente pasada.
+
+### Pendiente (honestidad)
+- Auditoria item por item del resto de este checklist contra el codigo real.

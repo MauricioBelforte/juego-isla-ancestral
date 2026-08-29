@@ -11,7 +11,7 @@ Se detectó que `DOCUMENTACION/14-Inventario/plan-actual/05-Checklist.md` estaba
 
 - **Reconstruido** `DOCUMENTACION/14-Inventario/plan-actual/05-Checklist.md` (234 líneas):
   - Base: copia fiel del `plan-inicial/05-Checklist.md`.
-  - Se marcaron `[x]` únicamente los ítems **verificados como implementados** en la iteración 1 (logs 168/169):
+  - Se marcaron `[x]` únicamente los ítems **verificados como implementados** en la iteración 1 (logs 210/212):
     - **C. Núcleo de datos**: 10/12 (slots, contenedor, serialización, Enum ContainerType, fallback).
     - **D. Slots/stacks**: 6/10 (add auto-stack con dos pasadas, overflow sobrante int, inventory_full, remove validado, count, protección negativos/overflow).
     - **J. Guardado/rendimiento**: 2/10 (serialización to_dict/from_dict + deserialización validada).

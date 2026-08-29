@@ -24,8 +24,8 @@
 | M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
 | M53 UI/UX | 🔵 En curso | MiMo V2.5 (OpenCode) | F6 | V2 | Infraestructura core UI creada | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/` |
 | M112 Testing Automático | 🔵 En curso | ox-alpha (Cline) | F0/transversal | V0 | M111 ✅ | Framework GdUnit4 v6.2.1 + 14 test files (160 tests), cobertura, CI | `res://tests/`, `res://addons/gdunit4/`, `.github/workflows/testing.yml`, `tests/gdunit_coverage.json` |
-| M133 Gestión del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | Protocolo §21 operativo + scripts §21.9 disponibles | Entregables operativos de gestión (README, guia-hitos, guia-sprints, flujo-multiagente, ADRs, actas, reportes) verificados con scripts; 127/127; log 195. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/133-Gestion-Del-Proyecto/` |
-| M134 Presupuesto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ (gestión operativa); política de costo cero | Presupuesto operativo implementado en `operativa/` (desglose, control, proyecciones, dashboard, plantillas); 100/100; log 196. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/134-Presupuesto/` |
+| M133 Gestión del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | Protocolo §21 operativo + scripts §21.9 disponibles | Entregables operativos de gestión (README, guia-hitos, guia-sprints, flujo-multiagente, ADRs, actas, reportes) verificados con scripts; 127/127; log 219. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/133-Gestion-Del-Proyecto/` |
+| M134 Presupuesto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ (gestión operativa); política de costo cero | Presupuesto operativo implementado en `operativa/` (desglose, control, proyecciones, dashboard, plantillas); 100/100; log 221. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/134-Presupuesto/` |
 | M135 Riesgos del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ + M134 ✅ | RISK-REGISTER.md (16 entradas + matriz 5×5) + GUIA-REVISION-TRIMESTRAL.md; 134/134; log 197. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8). Pendiente 1ª revisión formal (fundador) | `DOCUMENTACION/135-Riesgos-Del-Proyecto/` |
 | M136 Roadmap | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ + M135 ✅ | ROADMAP.md ejecutivo + 7 checklists de hito (hitos/137-143) con estados reales; 199/199; log 198. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8). Pendiente MoSCoW definitivo (fundador) | `DOCUMENTACION/136-Roadmap/` |
 | M145 Diseño de Experiencia | 🟡 Liberado c/programados | GLM (Kilo) | F0/transversal | V0 | M01 ✅; dueños M53/M58/M89/M92/M105/M114 | operativa/ con 7 docs (journey, onboarding, menús, feedback, accesibilidad, métricas, plan testing); 90/105 + 15 [?] de fase jugable; log 199. 🔵 QA Hy3 2026-08-28: mantiene 🟡, 15 [?] justificados | `DOCUMENTACION/145-Diseno-De-Experiencia/` |
@@ -129,6 +129,7 @@ La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marc
 | 16 | M25 Ruinas | 3 | V2 | Estructura pequena y legibilidad | Despues de M24 |
 | 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
 | 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
+| 20 | M04+M05+M07 Cierre Fase 1 | 3-5 | V0/V1 | 🟡 Liberado (núcleo F1 verificado) | Hy3 (Kilo) | — | Puerta F1 cerrada: Input Map/capas física + registro.gd + verificar_arquitectura.gd + prueba_arquitectura.tscn SMOKE OK; auditoría completa de los 3 checklists pendiente | 2026-08-29 01:20 |
 | 19 | M138 Vertical Slice | 5 | V2 | Recorrido visual completo | No; requiere F4 |
 
 ### 3.3 Matriz de lineas paralelas
@@ -188,8 +189,8 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 - [x] Crear o validar el proyecto Godot base.
 - [x] Configurar renderer, resolucion y objetivo de 60 FPS.
 - [x] Crear estructura de carpetas runtime.
-- [ ] Configurar capas de fisica e Input Map inicial.
-- [ ] Crear `Bootstrap` y `Main` vacios pero ejecutables.
+- [x] Configurar capas de fisica e Input Map inicial.
+- [x] Crear `Bootstrap` y `Main` vacios pero ejecutables.
 - [x] Verificar build debug y salida de errores.
 
 ### M05 - Lenguaje y Programacion
@@ -197,15 +198,15 @@ Estas lineas pueden ejecutarse en paralelo **solo cuando la fase habilitante est
 - [x] Aplicar convenciones GDScript del proyecto.
 - [x] Definir tipado, nombres y limites de complejidad.
 - [x] Confirmar patrones permitidos y anti-patrones.
-- [ ] Preparar utilidades basicas de validacion y logging.
+- [x] Preparar utilidades basicas de validacion y logging.
 
 ### M07 - Arquitectura General
 
 - [x] Implementar registro de servicios minimo.
 - [x] Implementar contratos de `GameState` y `EventBus`.
-- [ ] Definir orden de inicializacion de autoloads.
-- [ ] Verificar dependencias unidireccionales.
-- [ ] Ejecutar una escena vacia usando la arquitectura base.
+- [x] Definir orden de inicializacion de autoloads.
+- [x] Verificar dependencias unidireccionales.
+- [x] Ejecutar una escena vacia usando la arquitectura base.
 
 **Puerta F1:** Godot arranca, los servicios se registran y no hay errores de arquitectura. Sin esta puerta no se reservan M08, M11, M29 ni M59 como implementacion runtime.
 
@@ -492,7 +493,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 7 | M11 Personaje del Jugador | 4 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | CharacterBody3D + WASD + gravedad + colision suelo + pivot camara + edicion E/Q + movimiento relativo a camara | 2026-08-26 |
 | 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
 | 9 | M13 Herramientas | 4 | V2 | 🟡 Liberado c/integraciones | Hy3 (Kilo) — relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracción progresiva + highlight + HUD durabilidad + sonido/partículas; 65/102; pendientes con dueño (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
-| 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos (excepcion doc.: M11 pendiente, sin dependencia de jugador; pickup post-M11) | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 168) | Autoload Inventario + ISaveProvider | 2026-08-26 |
+| 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos (excepcion doc.: M11 pendiente, sin dependencia de jugador; pickup post-M11) | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 210) | Autoload Inventario + ISaveProvider | 2026-08-26 |
 | 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | — | M14 | Recurso recolectable | — |
 | 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | — | Estado minimo | Save/load validado | — |
 | 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | — | F3 + M14/M15/M59 | GO/NO-GO | — |

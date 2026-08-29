@@ -11,7 +11,7 @@
 - Fase: F0/transversal de gestión, V0
 - Dificultad: 2
 - Visión: V0
-- Entrada: M133 ✅ (gestión operativa, log 195); M134 ✅ (presupuesto operativa, log 196)
+- Entrada: M133 ✅ (gestión operativa, log 219); M134 ✅ (presupuesto operativa, log 221)
 - Salida: `RISK-REGISTER.md` vivo con 15 riesgos iniciales + R-16 por hallazgo real, y `GUIA-REVISION-TRIMESTRAL.md` con procedimiento de 10 pasos
 - Archivos: `DOCUMENTACION/135-Riesgos-Del-Proyecto/plan-actual/RISK-REGISTER.md`, `plan-actual/GUIA-REVISION-TRIMESTRAL.md`, `plan-actual/04-Codigo.md`, `plan-actual/05-Checklist.md`, `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`, `Logs/`
 - Fecha: 2026-08-28 20:10:00 (reserva) · 2026-08-28 20:45:00 (liberación)
@@ -210,7 +210,7 @@
 - Conteo de ítems del checklist coincide con CHECKLIST-GLOBAL.md (ver recuento al inicio del archivo).
 - Entregables presentes en operativa/ (o plan-actual/) y firmados por el implementador GLM.
 - Sin errores de compilación/runtime: módulos V0 sin Godot; scripts validadores ejecutados por GLM (8 PASS/0 FAIL en M133; validate_vision.py en verde en M153; validar_nombres.py ejecutado en M149).
-- Logs 195-202 presentes en Logs/.
+- Logs 197-202, 220 y 221 presentes en Logs/.
 - Los [?] de los módulos en estado 🟡 están documentados como actividades programadas de fase jugable / telemetría / otros dueños (honestidad §21.4.3), no deuda de diseño.
 
 ### Veredicto

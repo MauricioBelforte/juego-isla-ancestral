@@ -11,12 +11,12 @@
 
 - [ ] Definir arquitectura modular por dominio [S]
 - [ ] Definir la separación de sistemas independientes [S]
-- [ ] Definir la regla de capas unidireccionales (UI→Servicios→Sistemas→Datos) [S]
+- [x] Definir la regla de capas unidireccionales (UI→Servicios→Sistemas→Datos) [S] (validada por verificar_arquitectura.gd: scripts/core no referencia capas superiores)
 - [ ] Minimizar dependencias circulares (4 reglas verificables) [S]
 - [ ] Definir los managers necesarios (lista de 18 servicios) [S]
-- [ ] Prohibir el GameManager monolítico (Bootstrap orquesta) [S]
+- [x] Prohibir el GameManager monolítico (Bootstrap orquesta) [S] (bootstrap.gd: solo registro y carga de escena)
 - [ ] Diseñar el sistema de eventos global tipado (EventBus) [S]
-- [ ] Diseñar el sistema de configuración (Settings autoload) [S]
+- [x] Diseñar el sistema de configuración (Settings autoload) [S] (game_settings.gd activo como autoload)
 - [ ] Diseñar el sistema de datos (Resources vs comportamiento) [S]
 - [ ] Diseñar el sistema de persistencia (GameState, alto nivel) [S]
 - [ ] Diseñar el sistema de streaming (escenas+chunks) [S]
@@ -45,8 +45,8 @@
 
 - [ ] Diseñar ServiceRegistry (registro por interfaz) [M]
 - [ ] Definir que los servicios se consultan por interface, no por nombre [S]
-- [ ] Diseñar Bootstrap (autoload 0: registro + arranque) [M]
-- [ ] Definir el orden de registro de servicios [S]
+- [x] Diseñar Bootstrap (autoload 0: registro + arranque) [M] (bootstrap.gd operativo; posición de autoload al final recomendada, diferido por reservas M53/M112)
+- [x] Definir el orden de registro de servicios [S] (event_bus -> service_registry; precedencias de autoloads validadas por script)
 - [ ] Diseñar el flujo de carga de isla (SceneManager→World→chunks→carga diégetica) [M]
 - [ ] Diseñar el flujo de cierre (autosave→flush→logs) [S]
 - [ ] Definir la cola de trabajo pesado (ThreadPool + call_deferred) [M]
@@ -119,7 +119,7 @@
 - [ ] Generar log de finalización y actualizar ULTIMO_NUMERO [S]
 - [ ] Copiar plan-inicial → plan-actual (espejo vigente) [S]
 - [ ] Documentar los pendientes con dueño (M1, M59, M61) [S]
-- [ ] Registrar el criterio de salida del módulo (bootstrap mínimo en M1) [S]
+- [x] Registrar el criterio de salida del módulo (bootstrap mínimo en M1) [S] (puerta F1 verificada: escena prueba_arquitectura.tscn SMOKE OK)
 
 ## I. Edge cases e integración con el mundo (12)
 
@@ -130,7 +130,7 @@
 - [ ] Documentar el flujo de pesca/minería → inventario → quest [S]
 - [ ] Documentar el flujo de viaje (travel_started → isla_loaded → autosave) [S]
 - [ ] Documentar el edge case: evento emitido durante carga de escena (diferir) [S]
-- [ ] Documentar el edge case: servicios que arrancan en distinto orden (bootstrap idempotente) [S]
+- [x] Documentar el edge case: servicios que arrancan en distinto orden (bootstrap idempotente) [S] (precedencias verificadas; bootstrap deferred e idempotente)
 - [ ] Documentar el edge case: reinicio del juego con servicios con estado en memoria [S]
 - [ ] Documentar el edge case: dos sistemas escribiendo el mismo dominio de GameState (API única) [S]
 - [ ] Documentar el edge case: tiempo real vs tiempo de juego (GameClock como única fuente) [S]
@@ -140,3 +140,22 @@
 
 **Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los detalles de implementación (bootstrap real, verificación de capas, perf de eventos) se ejecutan en el hito M1 y quedan registrados en 04-Codigo.md §4 como pendientes con dueño.
+
+## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
+
+- [x] Definir orden de inicializacion de autoloads [S] (precedencias canonicas en verificar_arquitectura.gd; EventBus primero; Bootstrap al final recomendado y diferido por reservas M53/M112)
+- [x] Verificar dependencias unidireccionales [S] (scripts/core sin referencias a capas superiores; verificado por script)
+- [x] Ejecutar una escena vacia usando la arquitectura base [S] (scenes/prueba_arquitectura.tscn: SMOKE OK en runtime real — autoloads, registro y EventBus por dominios)
+
+
+## Notas del Agente (Cierre Fase 1 - 2026-08-29)
+
+**Modelo:** Hy3 | **Plataforma:** Kilo | **Estado:** items de la guia 08 completados y verificados; auditoria del resto del checklist pendiente (honestidad 21.4.3)
+
+### Lo que hice
+- Verificacion con Godot 4.7.2 headless + runtime: proyecto arranca sin errores de script.
+- Ver tilo de guia 08 del modulo completado con evidencia (ver seccion "Implementacion Fase 1").
+- Libere el modulo en CHECKLIST-GLOBAL y ESTADO-PARALELO como nucleo verificado (🟡); la auditoria completa del checklist queda para la siguiente pasada.
+
+### Pendiente (honestidad)
+- Auditoria item por item del resto de este checklist contra el codigo real.

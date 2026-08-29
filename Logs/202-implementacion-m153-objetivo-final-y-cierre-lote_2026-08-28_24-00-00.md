@@ -24,8 +24,8 @@ Se implementó el módulo 153 (Objetivo Final): contrato de visión O1-O19 en JS
 
 | Módulo | Resultado | Progreso | Log |
 |---|---|---|---|
-| 133 Gestión del Proyecto | ✅ Completado (README, guías, ADRs, actas, reportes) | 127/127 | 195 |
-| 134 Presupuesto | ✅ Completado (operativa financiera + plantillas) | 100/100 | 196 |
+| 133 Gestión del Proyecto | ✅ Completado (README, guías, ADRs, actas, reportes) | 127/127 | 219 |
+| 134 Presupuesto | ✅ Completado (operativa financiera + plantillas) | 100/100 | 221 |
 | 135 Riesgos del Proyecto | ✅ Completado (RISK-REGISTER 16 entradas + guía trimestral) | 134/134 | 197 |
 | 136 Roadmap | ✅ Completado (ROADMAP.md + 7 checklists de hito) | 199/199 | 198 |
 | 145 Diseño de Experiencia | 🟡 Liberado (7 docs; testeo con jugadores pendiente) | 91/105 | 199 |

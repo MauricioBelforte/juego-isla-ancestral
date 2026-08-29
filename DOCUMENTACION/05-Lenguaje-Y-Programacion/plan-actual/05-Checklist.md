@@ -44,7 +44,7 @@
 ## C. Arquitectura de carpetas de código (12)
 
 - [ ] Diseñar `scenes/` por sistema [S]
-- [ ] Diseñar `scripts/core/` (autoloads) [S]
+- [x] Diseñar `scripts/core/` (autoloads) [S] (event_bus, game_settings, service_registry, softlock_guard, bootstrap + registro.gd)
 - [ ] Diseñar `scripts/gameplay/` [S]
 - [ ] Diseñar `scripts/ai/` [S]
 - [ ] Diseñar `scripts/world/` [S]
@@ -58,7 +58,7 @@
 
 ## D. Patrones transversales (20)
 
-- [ ] Diseñar EventBus (autoload, señales tipadas por dominio) [M]
+- [x] Diseñar EventBus (autoload, señales tipadas por dominio) [M] (event_bus.gd: EventBus_ con dominios world/economy/inventory/quest/npc/calendar/travel/ui/player; verificado con smoke)
 - [ ] Diseñar GameClock (fecha/estación/hora, patrón observer) [M]
 - [ ] Diseñar Settings autoload (config con persistencia .cfg) [M]
 - [ ] Diseñar Logger con niveles y rotación (AGENTS §18) [M]
@@ -75,7 +75,7 @@
 - [ ] Definir regla: estados no editan otros directamente [S]
 - [ ] Diseñar TimerManager centralizado [S]
 - [ ] Diseñar serialización JSON/Resource [S]
-- [ ] Diseñar sistema de dependencias (autoloads + resources, sin espagueti) [S]
+- [x] Diseñar sistema de dependencias (autoloads + resources, sin espagueti) [S] (verificado por verificar_arquitectura.gd: dependencias unidireccionales + precedencias)
 - [ ] Diseñar sistema de pooling reutilizable [S]
 - [ ] Diseñar el flujo de errores "log → fallback → (dev) pausa" [S]
 
@@ -136,3 +136,20 @@
 ---
 
 **Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
+
+## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
+
+- [x] Preparar utilidades basicas de validacion y logging [S] (scripts/core/registro.gd: info/aviso/error/verificar/verificar_no_nulo con contadores; test headless 0 fallos)
+
+
+## Notas del Agente (Cierre Fase 1 - 2026-08-29)
+
+**Modelo:** Hy3 | **Plataforma:** Kilo | **Estado:** items de la guia 08 completados y verificados; auditoria del resto del checklist pendiente (honestidad 21.4.3)
+
+### Lo que hice
+- Verificacion con Godot 4.7.2 headless + runtime: proyecto arranca sin errores de script.
+- Ver tilo de guia 08 del modulo completado con evidencia (ver seccion "Implementacion Fase 1").
+- Libere el modulo en CHECKLIST-GLOBAL y ESTADO-PARALELO como nucleo verificado (🟡); la auditoria completa del checklist queda para la siguiente pasada.
+
+### Pendiente (honestidad)
+- Auditoria item por item del resto de este checklist contra el codigo real.

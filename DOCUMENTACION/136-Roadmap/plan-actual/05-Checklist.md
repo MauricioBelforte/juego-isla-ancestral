@@ -11,7 +11,7 @@
 - Fase: F0/transversal de gestión, V0
 - Dificultad: 2
 - Visión: V0
-- Entrada: M133 ✅ (log 195) + M135 ✅ (log 197); estados reales de CHECKLIST-GLOBAL al 2026-08-28
+- Entrada: M133 ✅ (log 219) + M135 ✅ (log 197); estados reales de CHECKLIST-GLOBAL al 2026-08-28
 - Salida: `ROADMAP.md` ejecutivo con estado real + 7 checklists de hito (`hitos/137..143`) con módulos, MoSCoW y estados actuales
 - Archivos: `DOCUMENTACION/136-Roadmap/plan-actual/ROADMAP.md`, `plan-actual/hitos/*`, `plan-actual/04-Codigo.md`, `plan-actual/05-Checklist.md`, `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`, `Logs/`
 - Fecha: 2026-08-28 20:55:00 (reserva) · 2026-08-28 21:30:00 (liberación)
@@ -289,7 +289,7 @@
 - Conteo de ítems del checklist coincide con CHECKLIST-GLOBAL.md (ver recuento al inicio del archivo).
 - Entregables presentes en operativa/ (o plan-actual/) y firmados por el implementador GLM.
 - Sin errores de compilación/runtime: módulos V0 sin Godot; scripts validadores ejecutados por GLM (8 PASS/0 FAIL en M133; validate_vision.py en verde en M153; validar_nombres.py ejecutado en M149).
-- Logs 195-202 presentes en Logs/.
+- Logs 197-202, 220 y 221 presentes en Logs/.
 - Los [?] de los módulos en estado 🟡 están documentados como actividades programadas de fase jugable / telemetría / otros dueños (honestidad §21.4.3), no deuda de diseño.
 
 ### Veredicto

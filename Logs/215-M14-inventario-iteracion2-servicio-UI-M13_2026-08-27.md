@@ -1,4 +1,4 @@
-# Log 185: M14 Inventario — iteración 2 (servicio + UI básica + integración M13)
+# Log 215: M14 Inventario — iteración 2 (servicio + UI básica + integración M13)
 
 **Fecha:** 2026-08-27
 **Modelo:** MiMo V2.5

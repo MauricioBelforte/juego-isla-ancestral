@@ -138,3 +138,15 @@ build/
 # Repositorios embebidos (usar submodule si se necesita)
 # =============================================
 tools/mcp/godot-mcp/
+
+# =============================================
+# Blender - backups automaticos del editor
+# Blender genera .blend1 en cada guardado
+# (backup de la version anterior del .blend)
+# =============================================
+*.blend1
+
+# =============================================
+# Estado local de herramientas de agentes
+# =============================================
+.workbuddy-ai/

@@ -1,4 +1,4 @@
-# Log 170: Sincronizacion de reservas en la guia 08
+# Log 213: Sincronizacion de reservas en la guia 08
 
 **Modelo:** GitHub Copilot
 **Plataforma:** VS Code

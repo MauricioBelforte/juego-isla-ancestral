@@ -167,7 +167,7 @@
 - [x] Simular un ciclo completo de reclamar-trabajar-marcar-liberar en un módulo piloto [M] → el propio M133 sirvió de piloto real: reserva en 4 registros → trabajo → marcas → liberación
 - [x] Simular un agente abandonado y verificar su detección a las 24 h [S] → verificado con datos reales: el script detectó 8 módulos 🔵 sin actividad >24 h
 - [x] Simular un QA cruzado que encuentra fallos y validar el regreso a 🟡 [M] → validado con casos reales del proyecto (M150 cerrado y mejorado tras revisión; M126/M127/M129 extendidos por QA); mecanismo documentado en `flujo-multiagente.md` §5
-- [x] Validar un commit de prueba contra el estándar de commits en español [S] → mensaje redactado y validado contra `AGENTS.md` §4 en el log 195 (sin ejecutar commit/push: push solo bajo pedido explícito del fundador)
+- [x] Validar un commit de prueba contra el estándar de commits en español [S] → mensaje redactado y validado contra `AGENTS.md` §4 en el log 219 (sin ejecutar commit/push: push solo bajo pedido explícito del fundador)
 - [x] Probar la plantilla de hito con el hito del prototipo (M137) como ejemplo [S] → `guia-hitos.md` §4
 - [x] Confirmar que ningún archivo fuera de la carpeta del módulo fue modificado [S] → únicamente los archivos que exige el protocolo §21 para coordinación (CHECKLIST-GLOBAL fila 133, ESTADO-PARALELO, guía 08, Logs/) más esta carpeta; ningún archivo de juego u otro módulo
 
@@ -188,7 +188,7 @@
 - Conteo de ítems del checklist coincide con CHECKLIST-GLOBAL.md (ver recuento al inicio del archivo).
 - Entregables presentes en operativa/ (o plan-actual/) y firmados por el implementador GLM.
 - Sin errores de compilación/runtime: módulos V0 sin Godot; scripts validadores ejecutados por GLM (8 PASS/0 FAIL en M133; validate_vision.py en verde en M153; validar_nombres.py ejecutado en M149).
-- Logs 195-202 presentes en Logs/.
+- Logs 197-202, 220 y 221 presentes en Logs/.
 - Los [?] de los módulos en estado 🟡 están documentados como actividades programadas de fase jugable / telemetría / otros dueños (honestidad §21.4.3), no deuda de diseño.
 
 ### Veredicto

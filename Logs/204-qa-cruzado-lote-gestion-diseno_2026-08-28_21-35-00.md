@@ -11,7 +11,7 @@ Se ejecutó el QA cruzado (AGENTS.md §21.8) del lote de 8 módulos implementado
 - Verificación de consistencia entre `plan-actual/05-Checklist.md` y `CHECKLIST-GLOBAL.md`: los conteos coinciden exactamente (los primeros conteos con falsos positivos por prosa tipo `No hay [?]` fueron descartados; el recuento estricto confirma la tabla global).
 - Verificación de que los entregables existen y están firmados por el implementador GLM/Kilo en cada `plan-actual/04-Codigo.md` (y `05-Checklist.md`).
 - Verificación de ejecución de scripts validadores por GLM: M133 test 8 PASS/0 FAIL; M153 `validate_vision.py` en verde; M149 `validar_nombres.py` ejecutado (hallazgo legacy documentado).
-- Verificación de existencia de logs 195-202.
+- Verificación de existencia de logs 219, 221 y 197-202.
 - Marcado de verificación en los 4 registros: `CHECKLIST-GLOBAL.md` (col. Notas), `Mensajes entre modelos/ESTADO-PARALELO.md` (línea del lote), `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (sección reservas), y nota de QA en cada `05-Checklist.md`.
 
 ## Resultados por módulo
