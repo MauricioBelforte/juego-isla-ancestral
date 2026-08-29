@@ -21,3 +21,19 @@ dinámico (sigue al jugador), salto con ESPACIO, y velocidad dev.
 ## Pendiente
 - Verificar la orilla con el usuario (agua clara/profunda) al caminar
 - Vegetacion/palmeras (agente Blender) y cielo real (M31/M59)
+
+
+## ADENDA (transparencia): archivos de otros agentes incluidos por error
+
+En el commit de cierre (8270c58) el git add del directorio DOCUMENTACION completo
+arrastr archivos pendientes de OTROS agentes (sin commitear por ellos):
+- DOCUMENTACION/09-GUIA-BLENDER.md (337 lineas — agente Blender)
+- DOCUMENTACION/102-Bug-Tracking/plan-actual/05-Checklist.md (306)
+- DOCUMENTACION/39-Tiendas/plan-actual/05-Checklist.md (4)
+- DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md (52)
+- DOCUMENTACION/166-Variantes-Y-Perfil-De-Rendimiento/ (plan-inicial + plan-actual, 10 archivos)
+
+NO se revirtieron para no perder trabajo ajeno del repo: son documentacion legitima
+del proyecto, solo que el turno no era de esos agentes. Los dueos pueden continuar
+sobre ellos normalmente. Leccion: en commits de cierre, NUNCA usar git add del
+directorio DOCUMENTACION completo — siempre archivos especificos.
