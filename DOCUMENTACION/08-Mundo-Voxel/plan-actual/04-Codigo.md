@@ -77,3 +77,18 @@ scripts/world/
 - M10 (Generación): el mundo base debe ser determinista por seed; los diffs se re-aplican.
 - M13 (Herramientas): usar `try_extract/try_place` como contrato desde el día 1.
 - El prototipo M1 debe incluir SIEMPRE un test de edición rápida (10 bloques/seg) para validar diffs sin lag.
+
+## Paleta Maldivas aprobada (2026-08-29 — Hy3/Kilo)
+
+El usuario aprobo esta paleta para la isla (aplicada en main_island.gd, library de bloques):
+- SAND (arena blanca): #F5F0E1
+- GRASS (verde tropical): #55711E (ajustado por el usuario desde el propuesto #3AAF34)
+- DIRT (tierra calida): #8C5A28
+- WATER (agua profunda): #0A4B91
+- SHALLOW_WATER (agua clara pisable, nuevo bloque id 30): #25D2C7 aproximado (0.25, 0.82, 0.78)
+- STONE (piedra): #7D7D84
+
+DIRECTIVA NUEVA — colores por isla: cada isla definira su propia paleta de bloques
+(library propia o variantes de color por bioma) y los bloques extraidos por el
+personaje conservaran el color de la isla de origen (requiere campo origen_isla en
+ItemData + variante de color en el bloque colocado — a implementar en M08/M14/M15).

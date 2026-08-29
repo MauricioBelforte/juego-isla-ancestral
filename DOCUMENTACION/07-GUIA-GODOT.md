@@ -1344,3 +1344,21 @@ func _process(delta):
 - `* 22.0` (altura del sector): mas grande => montanas mas altas
 - `0.98` (inicio del mar): mas chico => mas anillo de arena antes del agua
 - `sector`: el rango angular donde van las montanas (foto isla-modelo-2/3)
+
+
+### 10.13 PALETA "MALDIVAS" APROBADA + DIRECTIVA COLORES POR ISLA (2026-08-29)
+
+Paleta aprobada por el usuario y aplicada en main_island.gd (library de bloques):
+- SAND (arena blanca): #F5F0E1
+- GRASS (verde tropical): #55711E (ajustado por el usuario desde #3AAF34)
+- DIRT (tierra calida): #8C5A28
+- SHALLOW_WATER (agua clara pisable, NUEVO bloque id 30): ~(0.25, 0.82, 0.78)
+- WATER (agua profunda): #0A4B91
+- STONE: #7D7D84
+
+La banda 0.94-0.98 del radio usa SHALLOW_WATER (pisable) y >0.98 WATER (se hunde).
+
+**DIRECTIVA (islas futuras):** cada isla tendra su propia paleta de bloques
+(ej. isla volcanica: arena negra, agua indigo). Los bloques extraidos conservan
+el color de la isla de origen: requiere `origen_isla` en ItemData + variante de
+color en el bloque colocado (M08/M14/M15 — pendiente de implementar).

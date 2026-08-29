@@ -39,11 +39,11 @@ func _setup_terrain() -> void:
 	library.add_model(air)
 	
 	# Modelos 1-20: Bloques con colores de bioma
-	_add_block(library, "dirt", Color(0.55, 0.35, 0.2))
-	_add_block(library, "grass", Color(0.3, 0.6, 0.2))
-	_add_block(library, "stone", Color(0.5, 0.5, 0.5))
+	_add_block(library, "dirt", Color(0.55, 0.35, 0.16))
+	_add_block(library, "grass", Color(0.33, 0.44, 0.12))  # 55711E
+	_add_block(library, "stone", Color(0.49, 0.49, 0.52))
 	_add_block(library, "bedrock", Color(0.2, 0.2, 0.2))
-	_add_block(library, "sand", Color(0.85, 0.8, 0.55))
+	_add_block(library, "sand", Color(0.96, 0.94, 0.88))
 	_add_block(library, "clay", Color(0.6, 0.5, 0.4))
 	_add_block(library, "wood", Color(0.45, 0.3, 0.15))
 	_add_block(library, "planks", Color(0.6, 0.45, 0.25))
@@ -55,7 +55,7 @@ func _setup_terrain() -> void:
 	_add_block(library, "ancient_crystal", Color(0.6, 0.8, 1.0))
 	_add_block(library, "lamp_glyph", Color(1.0, 0.9, 0.4))
 	_add_block(library, "ice", Color(0.7, 0.85, 1.0))
-	_add_block(library, "water", Color(0.2, 0.4, 0.8))
+	_add_block(library, "water", Color(0.04, 0.29, 0.57))
 	# IDs 18-25: placeholders alineados con BlockType (M24-M26 los usarán a futuro)
 	_add_block(library, "pressure_plate", Color(0.35, 0.3, 0.28))
 	_add_block(library, "light_receiver", Color(0.9, 0.8, 0.3))
@@ -69,6 +69,7 @@ func _setup_terrain() -> void:
 	_add_block(library, "gravel", Color(0.55, 0.5, 0.45))
 	_add_block(library, "moss", Color(0.25, 0.5, 0.2))
 	_add_block(library, "mud", Color(0.35, 0.25, 0.15))
+	_add_block(library, "shallow_water", Color(0.25, 0.82, 0.78))
 	
 	library.bake()
 	mesher.library = library

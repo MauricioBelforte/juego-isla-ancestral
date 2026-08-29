@@ -69,6 +69,7 @@ const ANCIENT_CRYSTAL: int = 14
 const LAMP_GLYPH: int = 15
 const ICE: int = 16
 const WATER: int = 17
+const SHALLOW_WATER: int = 30
 const PRESSURE_PLATE: int = 18
 const LIGHT_RECEIVER: int = 19
 const GLYPH_EMITTER: int = 20
