@@ -26,7 +26,7 @@ func _crear_terreno_y_ruina() -> void:
 	terrain.generator = generator
 	var viewer := VoxelViewer.new()
 	viewer.name = "VoxelViewer"
-	viewer.position = Vector3(8, 14, 8)
+	viewer.position = Vector3(68, 26, 68)
 	add_child(viewer)
 	_esperar_y_construir()
 
@@ -55,7 +55,7 @@ func _add(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void
 	library.add_model(cube)
 
 func _esperar_y_construir() -> void:
-	await get_tree().create_timer(8.0).timeout
+	await get_tree().create_timer(10.0).timeout
 	_generar_ruina()
 	_encuadrar_y_capturar()
 
@@ -74,28 +74,28 @@ func _generar_ruina() -> void:
 	if vt == null:
 		return
 	vt.channel = VoxelBuffer.CHANNEL_TYPE
-	_altura = _buscar_altura(8, 8) + 1
+	_altura = _buscar_altura(68, 68) + 1
 	var by := _altura
 	# Muro oeste (x=6) y este (x=9) a lo largo de z, mas muro sur (z=3)
 	for dz in range(10):
-		_write(vt, Vector3i(6, by, 3 + dz), 3)
-		_write(vt, Vector3i(9, by, 3 + dz), 3)
+		_write(vt, Vector3i(66, by, 63 + dz), 3)
+		_write(vt, Vector3i(69, by, 63 + dz), 3)
 	for dx in range(4):
-		_write(vt, Vector3i(6 + dx, by, 3), 3)
+		_write(vt, Vector3i(66 + dx, by, 63), 3)
 	# Esquina derrumbada (muro alto hacia el norte)
-	_write(vt, Vector3i(6, by + 1, 5), 3)
-	_write(vt, Vector3i(6, by + 1, 6), 3)
-	_write(vt, Vector3i(6, by + 1, 7), 3)
+	_write(vt, Vector3i(66, by + 1, 65), 3)
+	_write(vt, Vector3i(66, by + 1, 66), 3)
+	_write(vt, Vector3i(66, by + 1, 67), 3)
 	# Vano de puerta en el oeste
-	_write(vt, Vector3i(6, by, 8), 0)
-	_write(vt, Vector3i(6, by + 1, 8), 0)
+	_write(vt, Vector3i(66, by, 68), 0)
+	_write(vt, Vector3i(66, by + 1, 68), 0)
 	# Columna de madera rota en la esquina
-	_write(vt, Vector3i(6, by + 1, 4), 7)
+	_write(vt, Vector3i(66, by + 1, 64), 7)
 	# Piso interior de arena
 	for dx in range(3):
 		for dz in range(4):
-			if int(vt.get_voxel(Vector3i(7 + dx, by, 4 + dz))) == 0:
-				_write(vt, Vector3i(7 + dx, by, 4 + dz), 5)
+			if int(vt.get_voxel(Vector3i(67 + dx, by, 64 + dz))) == 0:
+				_write(vt, Vector3i(67 + dx, by, 64 + dz), 5)
 	print("[M25-PREVIEW] Ruina construida sobre superficie real y=", _altura)
 
 func _write(vt: VoxelTool, pos: Vector3i, value: int) -> void:
@@ -105,8 +105,8 @@ func _write(vt: VoxelTool, pos: Vector3i, value: int) -> void:
 func _encuadrar_y_capturar() -> void:
 	var cam := get_node("Camera3D") as Camera3D
 	if cam != null:
-		cam.position = Vector3(16, _altura + 8, 16)
-		cam.look_at(Vector3(8, _altura + 2, 8))
+		cam.position = Vector3(76, _altura + 8, 76)
+		cam.look_at(Vector3(68, _altura + 2, 68))
 	await get_tree().create_timer(2.0).timeout
 	await RenderingServer.frame_post_draw
 	var img := get_viewport().get_texture().get_image()
