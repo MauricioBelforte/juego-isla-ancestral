@@ -1227,3 +1227,35 @@ plato con `dist <= 0.98` y agua en el anillo exterior).
 
 **Estado:** la isla actual esta INFINTA por accidente (bug conocido, ver log de la jornada);
 el fix es volver a acotar el bloque de montanas con `if dist < 0.55:`. Conservada como tecnica.
+
+
+### 10.11 VELOCIDAD DEV DEL JUGADOR (hallazgo validado 2026-08-29)
+
+**Problema:** cambiar `@export var move_speed` en player.gd NO cambiaba la velocidad
+del juego (probado 40/120/300/2000/100: siempre igual de lenta).
+
+**Causa raiz (hallazgo clave):** la escena `Player.tscn` tiene el valor guardado
+como override de instancia: `move_speed = 5.0` — en Godot, el `.tscn` de la
+instancia PISA el valor del `@export` del script. Editar el script es inutil.
+
+**SOLUCION (activar velocidad dev):** en `_ready` de player.gd, DESPUES de que la
+escena aplico sus overrides, forzar el valor por codigo:
+```gdscript
+func _ready() -> void:
+	move_speed = 25.0  # DEV: velocidad de desarrollo (5x)
+	print("[DEV] move_speed=", move_speed)  # diagnostic: confirmar en el log
+```
+
+**VOLVER A VELOCIDAD NORMAL (modo jugador):** en player.gd, `_ready`, borrar o
+comentar la linea `move_speed = 25.0  # DEV` (el juego vuelve al 5.0 del tscn):
+```gdscript
+# move_speed = 25.0  # DEV: desactivada — vuelve al valor de la escena (5.0)
+```
+Tambien sirve editar directamente `Player.tscn` (buscar `move_speed = 5.0`).
+
+**REGLA GENERAL:** si un `@export` no cambia al editarlo en el script, revisar el
+`.tscn` de la instancia (o del padre que la instancia) — el valor guardado en la
+escena pisa al script. Verificarlo con un print en _ready.
+
+**Salto:** `velocity.y = 7.0` + `_on_ground = false` con gravity 20 => ~1.2 bloques
+(ver 10.6).
