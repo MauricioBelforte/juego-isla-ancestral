@@ -1,7 +1,9 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** ox-alpha
+**Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 111: Código de Calidad
+
+> **Nota de trazabilidad:** la especificación original es de **SWE-1.6 / Devin** (2026-08-16, ver "Notas del Agente" de la sección 10 más abajo). La **implementación real** la ejecutó **ox-alpha / Cline** el 2026-08-28 (ver "Notas del Agente (Implementación)" al final).
 
 ## 1. Carácter del Componente
 
@@ -345,3 +347,20 @@ enum Priority {
 - Los patrones de diseño (State Machine, Observer, etc.) deben seguirse en código nuevo.
 - Las interfaces (IInteractable, etc.) deben usarse para contratos entre sistemas.
 - Revisar código existente periódicamente y actualizar para cumplir estándares.
+
+
+## 11. Notas del Agente (Implementacion, 2026-08-28)
+
+**Modelo:** ox-alpha
+**Plataforma:** Cline
+**Fecha:** 2026-08-28 14:45:00
+**Estado:** Completado (248/248)
+
+### Archivos implementados
+- game/isla-ancestral/scripts/editor/code_quality_check.gd — CodeQualityCheck (EditorScript, 443 lineas): analiza estructuras, longitud de clase/metodo/archivo (50/300/500), complejidad ciclomatica (máx 10), anidamiento (máx 4), convenciones de nomenclatura (PascalCase/snake_case/UPPER_CASE) y documentacion publica; genera reporte a consola y archivo.
+- .pre-commit-config.yaml — hooks godot-format / godot-lint / godot-quality + check-yaml/check-json (pre-commit).
+- .github/workflows/quality.yml — CI Godot Linter (4.7.2) en push/PR a main y develop.
+- .gitignore — se anadio la configuracion del linter de GDScript en project.godot ([gdscript] con reglas del formateador).
+
+### Estado
+El modulo quedo completado por ox-alpha (Cline). La configuracion del linter ([gdscript] en project.godot) esta sin commitear en el working tree y viajara junto al Input Map de M04 en el proximo push.
