@@ -72,10 +72,8 @@ func get_height(x: int, z: int) -> int:
 	var shape_noise := _island_noise.get_noise_2d(float(x), float(z))
 	island_shape *= (0.7 + shape_noise * 0.5)
 
-	# Directiva 2026-08-29: el terreno cubre casi todo el mundo (meseta minima de 8
-	# con pasto), el agua queda recien en el borde exterior (85%+ del radio).
-	if island_shape <= 0.0 or dist >= 0.85:
-		return 0
+	# Directiva 2026-08-29: terreno continuo; el agua queda recien en el borde
+	# exterior, con transicion suave (playa -> oceano).
 
 	# Si la forma es muy baja pero seguimos dentro del terreno, usar la meseta
 	if island_shape < 0.15:
@@ -84,10 +82,20 @@ func get_height(x: int, z: int) -> int:
 	# Ruido de terreno para detalles
 	var terrain_noise := _terrain_noise.get_noise_2d(float(x), float(z))
 
-	# Altura final: forma * max_height + detalles, con piso minimo de 8.
-	# Tope de 14: la isla es una MESETA grande (sin montana central que tape la vista).
+	# Ruido de montañas a baja frecuencia: picos dispersos en la meseta (hasta ~35)
+	var mountain_noise := _terrain_noise.get_noise_2d(float(x) / 12.0, float(z) / 12.0)
+	
+	# Altura base: meseta de pasto (8-14) + montañas donde el ruido sube
 	var height := int(maxf(island_shape * max_height, 8.0) + terrain_noise * 5)
-	height = mini(height, 14)
+	if mountain_noise > 0.35:
+		height += int((mountain_noise - 0.35) * 30.0)
+	
+	# Transicion al mar: desde el 60% del radio, la meseta baja suavemente a 0
+	# (playa de arena -> oceano). Sin paredes de tierra marron en el horizonte.
+	if dist > 0.6:
+		var fade := maxf(0.0, 1.0 - (dist - 0.6) / 0.4)
+		fade = fade * fade
+		height = int(height * fade)
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)
