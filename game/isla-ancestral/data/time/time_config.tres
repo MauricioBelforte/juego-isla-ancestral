@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TimeConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/time/time_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+seg_dia_real = 1440.0
+min_por_dia = 1440
+dias_por_semana = 7
+dias_por_mes = 28
+meses_por_anio = 12
+proporcion_tiempo = 40.0
+nombres_dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+nombres_meses = ["Floración", "Lluvia", "Crecimiento", "Sol", "Cosecha", "Madurez", "Viento", "Caída", "Reposo", "Nieve", "Silencio", "Renacimiento"]
+nombres_estaciones = ["Primavera", "Verano", "Otoño", "Invierno"]
+estacion_por_mes = [0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]
+hora_amanecer = 6
+hora_atardecer = 20
+duracion_gradiente_amanecer = 90.0
+duracion_gradiente_atardecer = 90.0
+ventana_aviso_evento_horas = 24
+dias_proximos_eventos = 7
+anio_fundacion = 1
+estacion_inicial = 0
+usar_formato_12h = false
+usar_semilla_tiempo = true

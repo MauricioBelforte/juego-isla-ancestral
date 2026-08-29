@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AnalyticsConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/analytics/analytics_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+opt_out = false
+batch_interval_min = 30.0
+max_buffer = 500

@@ -27,6 +27,19 @@ const AJUSTE_OFERTA_MAX: float = 0.10   # -10% .. 0%
 ## Descuentos por amistad M20 (niveles 2/3/4) — activo cuando M20 exista
 const DESCUENTO_AMISTAD := {2: 0.05, 3: 0.10, 4: 0.15}
 
+## ── Precio minorista/mayorista por volumen (M38) ──────────
+## La compra en bulto baja el precio unitario (mayorista) respecto al minorista.
+## Regla cozy: tope TOTAL 20% (amistad + volumen) y NUNCA bonificar la venta del
+## jugador en volumen (anti-grind), el precio de venta por unidad es estable.
+const _VOLUMEN_TRAMOS := [
+	{"min": 1, "desc": 0.00},
+	{"min": 5, "desc": 0.05},
+	{"min": 10, "desc": 0.10},
+	{"min": 20, "desc": 0.15},
+]
+const DESCUENTO_VOLUMEN_MAX: float = 0.15
+const DESCUENTO_TOTAL_MAX: float = 0.20  # amistad + volumen nunca superan 20%
+
 ## Límites diarios de venta por banda (tabla §8): común/comida=3, procesado/fino=2, raro=1
 const LIMITE_VENTA_DEFAULT: int = 3
 
@@ -61,12 +74,17 @@ func _catalog_get():
 
 ## ── Consultas de precio ──────────────────────────────────
 
-func precio_compra_vigente(item_id: String, npc_id: String = "") -> int:
+## Precio de venta al jugador en la tienda (lo que paga). `cantidad` aplica el
+## descuento mayorista por volumen (M38). Devuelve precio UNITARIO (ShopManager
+## multiplica por cantidad), ya clampeado a >= 1.
+func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int = 1) -> int:
 	var base := _precio_base_compra(item_id)
 	if base <= 0:
 		return 0
-	var desc := _descuento_amistad(npc_id)
-	var final := int(round(float(base) * (1.0 - desc)))
+	var desc_amistad := _descuento_amistad(npc_id)
+	var desc_volumen := _descuento_volumen(cantidad)
+	var desc_total := minf(desc_amistad + desc_volumen, DESCUENTO_TOTAL_MAX)
+	var final := int(round(float(base) * (1.0 - desc_total)))
 	return maxi(1, final)
 
 func precio_venta_vigente(item_id: String) -> int:
@@ -174,6 +192,16 @@ func _ajuste_por_oferta(item_id: String, base: int) -> int:
 	var factor := 1.0 - minf(AJUSTE_OFERTA_MAX, float(vendidas) * 0.02)
 	var ajustado := int(round(float(base) * factor))
 	return clampi(ajustado, maxi(1, int(round(float(base) * (1.0 - AJUSTE_OFERTA_MAX)))), base)
+
+## Descuento minorista/mayorista por volumen: mayor cantidad → mayor descuento
+## por unidad (tramos 1/5/10/20). Nunca negativo; `cantidad <= 0` se trata como 1.
+func _descuento_volumen(cantidad: int) -> float:
+	var c := maxi(cantidad, 1)
+	var mejor := 0.0
+	for tramo in _VOLUMEN_TRAMOS:
+		if c >= int(tramo["min"]):
+			mejor = maxf(mejor, float(tramo["desc"]))
+	return mejor
 
 ## Descuento por amistad (M20): consulta niveles del autoload Friendship.
 ## Sin npc_id, sin M20 o nivel < 2 → sin descuento (comportamiento previo).

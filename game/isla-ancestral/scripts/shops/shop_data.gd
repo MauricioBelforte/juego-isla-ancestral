@@ -55,6 +55,10 @@ class StockEntry:
 @export var dias_descanso: Array[int] = []          # feriados/festivos extra
 @export var descanso_semanal: int = -1              # día fijo de descanso semanal (-1 = ninguno)
 
+## Si true, la tienda cierra los días con festival (M29 TimeCalendar). Data-driven:
+## cada tienda elige participar o no. Default false = comportamiento previo.
+@export var cierra_en_festivales: bool = false
+
 ## Catálogos
 @export var catalogo_venta: Array = []   # Array[StockEntry] — inner class, sin tipado estricto
 @export var catalogo_recompra: Array[String] = []    # item_ids que le compra al jugador

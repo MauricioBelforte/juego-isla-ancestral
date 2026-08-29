@@ -34,6 +34,7 @@ var _hotbar_index: int = 0
 var _block_to_place: int = 2  # Default: césped
 ## M13: cooldown del fallback de mano (sin herramienta utilizable)
 var _mano_cooldown: float = 0.0
+var _t_prev: bool = false
 ## M13: flanco del Q para el fallback de mano
 var _q_prev_mano: bool = false
 ## Autoload Inventario (cache dinámico para evitar error de compilación MCP)
@@ -233,6 +234,16 @@ func _physics_process(delta: float) -> void:
 	# DEV: descender al suelo (C) — el salto en dev flota; con C vuelve a tierra
 	if Input.is_key_pressed(KEY_C):
 		_descender_al_suelo()
+
+	# DEV: teleport junto a Catalina (T) — para probar el diálogo de M21
+	var t_presionado := Input.is_key_pressed(KEY_T)
+	if t_presionado and not _t_prev:
+		var catalina = get_tree().current_scene.get_node_or_null("CatalinaOso")
+		if catalina:
+			global_position = catalina.global_position + Vector3(2, 2, 0)
+			velocity.y = 0.0
+			print("[DEV] Teleport junto a Catalina")
+	_t_prev = t_presionado
 
 	# Gravedad (solo si no hay suelo)
 	if not _on_ground:

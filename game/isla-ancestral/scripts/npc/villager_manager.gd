@@ -126,7 +126,7 @@ func get_ground_height(xz_pos: Vector2) -> float:
 	var generator_script = load("res://scripts/world/island_generator.gd")
 	if generator_script:
 		var gen = generator_script.new(null, 42)
-		gen.island_radius = 64
+		gen.island_radius = 1024  # DEBE coincidir con el radio de la isla actual
 		gen.max_height = 40
 		var h: int = gen.get_height(int(xz_pos.x), int(xz_pos.y))
 		return float(h) if h > 0 else -1.0

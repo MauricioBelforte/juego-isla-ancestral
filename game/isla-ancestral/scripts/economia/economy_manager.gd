@@ -42,9 +42,9 @@ func _registrar_como_proveedor_guardado() -> void:
 		sm.register_provider(self)
 
 ## ── Consultas de precio (delegan a PriceManager) ─────────
-func precio_compra_vigente(item_id: String, npc_id: String = "") -> int:
+func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int = 1) -> int:
 	_asegurar_precios()
-	return precios.precio_compra_vigente(item_id, npc_id)
+	return precios.precio_compra_vigente(item_id, npc_id, cantidad)
 
 func precio_venta_vigente(item_id: String) -> int:
 	_asegurar_precios()

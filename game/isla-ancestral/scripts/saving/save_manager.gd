@@ -52,7 +52,10 @@ func _process(delta: float) -> void:
 		_auto_save_timer += delta
 		if _auto_save_timer >= auto_save_interval:
 			_auto_save_timer = 0.0
-			request_save(current_slot, "timer")
+			if current_slot >= 1:
+				request_save(current_slot, "timer")
+			else:
+				print("[SAVE] Auto-save omitido: no hay slot cargado (current_slot=%d)" % current_slot)
 
 var _auto_save_timer: float = 0.0
 

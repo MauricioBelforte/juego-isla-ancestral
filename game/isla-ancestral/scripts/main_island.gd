@@ -62,7 +62,7 @@ func _setup_terrain() -> void:
 	_add_block(library, "ancient_crystal", Color(0.6, 0.8, 1.0))
 	_add_block(library, "lamp_glyph", Color(1.0, 0.9, 0.4))
 	_add_block(library, "ice", Color(0.7, 0.85, 1.0))
-	_add_block(library, "water", Color(0.04, 0.29, 0.57))
+	_add_block(library, "water", Color(0.10, 0.45, 0.75))  # azul oceano mas claro
 	# IDs 18-25: placeholders alineados con BlockType (M24-M26 los usarán a futuro)
 	_add_block(library, "pressure_plate", Color(0.35, 0.3, 0.28))
 	_add_block(library, "light_receiver", Color(0.9, 0.8, 0.3))
@@ -85,7 +85,7 @@ func _setup_terrain() -> void:
 	# Generador de isla con biomas (M09/M10)
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
-	generator.island_radius = 256
+	generator.island_radius = 2048
 	generator.max_height = 40
 	terrain.generator = generator
 	

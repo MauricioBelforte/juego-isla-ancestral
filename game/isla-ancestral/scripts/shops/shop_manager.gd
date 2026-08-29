@@ -45,19 +45,23 @@ func _ready() -> void:
 	_reputacion = REPUTACION_SCRIPT.new()
 	_sincronizar_con_game_time()
 
-## Conexión con GameTime (M29): abre/cierra tiendas por hora, restock diario
-## automático y sincronía inicial sin esperar al primer tick.
-## Si M29 no existe (tests fuera de árbol), queda en modo manual igual que antes.
+## Conexión con el tiempo (M29 TimeCalendar, con fallback a M30 GameClock):
+## abre/cierra tiendas por hora, restock diario automático y sincronía inicial sin
+## esperar al primer tick. Si ambos faltan (tests fuera de árbol), queda modo manual.
+## M29 (TimeCalendar) es la fuente canónica: agrega festivales/eventos a la lógica
+## de apertura; M30 (GameTime) es el falback si M29 aún no está montado.
 func _sincronizar_con_game_time() -> void:
+	var tc = get_node_or_null("/root/TimeCalendar")
 	var gt = get_node_or_null("/root/GameTime")
-	if gt == null:
+	var fuente = tc if tc != null else gt
+	if fuente == null:
 		return
-	if gt.has_signal("hora_cambio"):
-		gt.hora_cambio.connect(_on_hora_game_time)
-	if gt.has_signal("dia_cambio"):
-		gt.dia_cambio.connect(_on_dia_game_time)
-	if gt.has_method("get_semana_dia") and gt.has_method("get_hora"):
-		tick_hora(gt.get_semana_dia(), gt.get_hora())
+	if fuente.has_signal("hora_cambio"):
+		fuente.hora_cambio.connect(_on_hora_game_time)
+	if fuente.has_signal("dia_cambio"):
+		fuente.dia_cambio.connect(_on_dia_game_time)
+	if fuente.has_method("get_semana_dia") and fuente.has_method("get_hora"):
+		tick_hora(fuente.get_semana_dia(), fuente.get_hora())
 
 func _on_hora_game_time(hora: int) -> void:
 	var gt = get_node_or_null("/root/GameTime")
@@ -111,7 +115,23 @@ func esta_abierta(shop_id: String) -> bool:
 	var shop = _tiendas.get(shop_id)
 	if shop == null:
 		return false
-	return shop.esta_abierta(_dia_laborable_actual, _hora_actual)
+	if not shop.esta_abierta(_dia_laborable_actual, _hora_actual):
+		return false
+	# Cierre por festival (M29 TimeCalendar): solo si la tienda lo configura.
+	if bool(shop.definicion.cierra_en_festivales) and _hay_festival_hoy():
+		return false
+	return true
+
+## Consulta si hoy hay festival, usando M29 TimeCalendar (fuente canónica) con
+## fallback a M30 GameClock. Devuelve false si ninguna fuente está disponible.
+func _hay_festival_hoy() -> bool:
+	var tc = get_node_or_null("/root/TimeCalendar")
+	if tc != null and tc.has_method("hay_festival_hoy"):
+		return bool(tc.hay_festival_hoy())
+	var gt = get_node_or_null("/root/GameTime")
+	if gt != null and gt.has_method("proximos_eventos"):
+		return gt.proximos_eventos(1).size() > 0
+	return false
 
 func listar_stock(shop_id: String) -> Dictionary:
 	var shop = _tiendas.get(shop_id)
@@ -136,7 +156,7 @@ func comprar(shop_id: String, item_id: String, cantidad: int) -> void:
 		compra_rechazada.emit(shop_id, item_id, Motivo.SISTEMA_NO_DISPONIBLE); return
 
 	# Precio SIEMPRE de M38 (este módulo jamás suma precios)
-	var precio: int = int(economia.precio_compra_vigente(item_id))
+	var precio: int = int(economia.precio_compra_vigente(item_id, "", cantidad))
 	var total: int = precio * cantidad
 	if not bool(economia.puede_pagar(total)):
 		compra_rechazada.emit(shop_id, item_id, Motivo.SIN_FONDOS); return

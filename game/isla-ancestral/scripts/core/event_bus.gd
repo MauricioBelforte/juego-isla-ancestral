@@ -96,6 +96,18 @@ class UIEvents:
 	signal hud_request(visible: bool)
 	## UI solicita abrir un diálogo
 	signal dialog_requested(npc_id: String, dialog_data: Dictionary)
+	## Diálogo finalizado
+	signal dialog_finished()
+	## UI solicita abrir una capa específica
+	signal layer_requested(layer_id: String)
+	## UI solicita confirmación
+	signal confirm_requested(title: String, message: String)
+	## UI envía notificación toast
+	signal notify(toast_data: Dictionary)
+	## Capas de UI cambiaron
+	signal ui_layers_changed()
+	## Foco de UI se movió
+	signal ui_focus_moved(node: Control)
 
 class PlayerEvents:
 	## Se emite cuando el jugador muere (cozy: respawn, no game over)

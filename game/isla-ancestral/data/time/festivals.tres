@@ -1,0 +1,153 @@
+[gd_resource type="Resource" script_class="FestivalData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/time/festival_data.gd" id="1_festival"]
+
+[resource]
+script = ExtResource("1_festival")
+festivales_estacionales = [
+{
+"id": "festival_primavera",
+"nombre": "Festival de la Floración",
+"descripcion": "Celebración del renacimiento de la naturaleza. Las flores cubren la plaza.",
+"tipo": "festival",
+"dia": 15,
+"mes": 1,
+"estacion": 0,
+"repetible": true,
+"duracion_horas": 24,
+"icono": "🌸",
+"efectos": { "decoracion_plaza": "flores", "tiendas_cerradas": true, "iluminacion_especial": false, "recompensas": ["semilla_flor", "miel"] },
+"condiciones": {}
+},
+{
+"id": "festival_verano",
+"nombre": "Festival de la Cosecha",
+"descripcion": "La vendimia llega a su punto máximo. Frutas y verduras abundan.",
+"tipo": "festival",
+"dia": 15,
+"mes": 5,
+"estacion": 1,
+"repetible": true,
+"duracion_horas": 24,
+"icono": "🌾",
+"efectos": { "decoracion_plaza": "cosecha", "tiendas_cerradas": true, "iluminacion_especial": false, "recompensas": ["fruta_madura", "vino"] },
+"condiciones": {}
+},
+{
+"id": "festival_otono",
+"nombre": "Festival del Viento",
+"descripcion": "Las hojas danzan al compás del viento otoñal. Cometas en el cielo.",
+"tipo": "festival",
+"dia": 15,
+"mes": 9,
+"estacion": 2,
+"repetible": true,
+"duracion_horas": 24,
+"icono": "🍂",
+"efectos": { "decoracion_plaza": "hojas_cometas", "tiendas_cerradas": true, "iluminacion_especial": false, "recompensas": ["cometa", "hoja_dorada"] },
+"condiciones": {}
+},
+{
+"id": "festival_invierno",
+"nombre": "Festival de la Nieve",
+"descripcion": "La primera nevada cubre la isla. Muñecos de nieve en cada esquina.",
+"tipo": "festival",
+"dia": 15,
+"mes": 11,
+"estacion": 3,
+"repetible": true,
+"duracion_horas": 24,
+"icono": "❄️",
+"efectos": { "decoracion_plaza": "nieve", "tiendas_cerradas": true, "iluminacion_especial": false, "recompensas": ["bufanda", "chocolate_caliente"] },
+"condiciones": {}
+}
+]
+festival_anual = {
+"id": "festival_luces",
+"nombre": "Festival de las Luces",
+"descripcion": "Fin de año: miles de faroles iluminan la noche más larga.",
+"tipo": "festival",
+"dia": 28,
+"mes": 12,
+"estacion": 3,
+"repetible": true,
+"duracion_horas": 12,
+"icono": "🏮",
+"efectos": { "decoracion_plaza": "faroles", "tiendas_cerradas": true, "iluminacion_especial": true, "recompensas": ["farol", "deseo_escrito"] },
+"condiciones": {}
+}
+plantilla_cumpleanos = { "id": "cumpleanos_", "nombre": "Cumpleaños de ", "descripcion": "¡Feliz cumpleaños! Ven a celebrarlo en la plaza.", "tipo": "cumpleanos", "dia": 1, "mes": 1, "estacion": -1, "repetible": true, "duracion_horas": 12, "icono": "🎂", "efectos": { "decoracion_plaza": "globos", "tiendas_cerradas": false, "iluminacion_especial": false, "recompensas": ["tarta", "regalo_amistad"] }, "condiciones": { "vecino_id": "" } }
+visitas_semanales = [
+{
+"id": "visita_comerciante",
+"nombre": "Llegada del Comerciante Viajero",
+"descripcion": "El Gran Vapor trae un comerciante con rarezas de otras islas.",
+"tipo": "visita",
+"dia": 7,
+"mes": -1,
+"estacion": -1,
+"repetible": true,
+"duracion_horas": 12,
+"icono": "⛴️",
+"efectos": { "decoracion_plaza": "puesto_comerciante", "tiendas_cerradas": false, "iluminacion_especial": false, "recompensas": ["objeto_raro", "semilla_exotica"] },
+"condiciones": { "frecuencia": "semanal", "dia_semana": 6 }
+},
+{
+"id": "visita_artesano",
+"nombre": "Visita del Artesano Errante",
+"descripcion": "Un artesano ofrece talleres y planos exclusivos.",
+"tipo": "visita",
+"dia": 14,
+"mes": -1,
+"estacion": -1,
+"repetible": true,
+"duracion_horas": 8,
+"icono": "🔨",
+"efectos": { "decoracion_plaza": "taller_temporal", "tiendas_cerradas": false, "iluminacion_especial": false, "recompensas": ["plano_exclusivo", "material_raro"] },
+"condiciones": { "frecuencia": "quincenal", "dia_semana": 6 }
+}
+]
+eventos_mensuales = [
+{
+"id": "mercado_especial",
+"nombre": "Mercado Especial Mensual",
+"descripcion": "Productores locales ofrecen lo mejor de la temporada.",
+"tipo": "mercado",
+"dia": 1,
+"mes": -1,
+"estacion": -1,
+"repetible": true,
+"duracion_horas": 12,
+"icono": "🏪",
+"efectos": { "decoracion_plaza": "puestos_mercado", "tiendas_cerradas": false, "iluminacion_especial": false, "recompensas": ["descuento_mercado"] },
+"condiciones": {}
+},
+{
+"id": "luna_cosecha",
+"nombre": "Luna de Cosecha",
+"descripcion": "Bajo la luna llena, los cultivos crecen más rápido esta noche.",
+"tipo": "especial",
+"dia": 14,
+"mes": -1,
+"estacion": -1,
+"repetible": true,
+"duracion_horas": 8,
+"icono": "🌕",
+"efectos": { "decoracion_plaza": "", "tiendas_cerradas": false, "iluminacion_especial": true, "recompensas": ["bonus_cultivo"] },
+"condiciones": { "solo_noche": true }
+}
+]
+cumpleanos_jugador = {
+"id": "cumpleanos_jugador",
+"nombre": "¡Tu Cumpleaños!",
+"descripcion": "¡Feliz cumpleaños! Los vecinos prepararon una sorpresa.",
+"tipo": "cumpleanos",
+"dia": 1,
+"mes": 1,
+"estacion": -1,
+"repetible": true,
+"duracion_horas": 24,
+"icono": "🎁",
+"efectos": { "decoracion_plaza": "fiesta_jugador", "tiendas_cerradas": false, "iluminacion_especial": true, "recompensas": ["regalo_especial", "carta_vecinos"] },
+"condiciones": {}
+}

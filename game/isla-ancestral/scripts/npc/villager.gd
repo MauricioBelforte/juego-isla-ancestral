@@ -150,7 +150,7 @@ func _snap_to_ground() -> void:
 	var generator_script = load("res://scripts/world/island_generator.gd")
 	if generator_script:
 		var gen = generator_script.new(null, 42)  # seed=42, same as main_island
-		gen.island_radius = 1024  # DEBE coincidir con el radio de la isla actual (main_island.gd)
+		gen.island_radius = 2048  # DEBE coincidir con el radio de la isla actual (main_island.gd)
 		gen.max_height = 40
 		var h: int = gen.get_height(int(global_position.x), int(global_position.z))
 		if h > 0:

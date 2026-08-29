@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LoggingConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/logging/logging_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+level_min = 0
+categories_enabled = Array[int]([0, 1, 2, 3, 4, 5, 6])
+max_file_size_mb = 10.0
+max_rotated_files = 5
+compress_old_logs = true
+json_output = false
+sanitize_sensitive = true
