@@ -1,11 +1,12 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 167 — Registro del Terreno y Posicionamiento
+# 167 — Isla Raíz (Registro del Terreno y Posicionamiento)
 
 ## Propósito
-Este módulo es la **fuente de verdad del terreno fijo de la Isla Raíz** y el sistema para
-posicionar objetos (NPCs, ruinas, estructuras) sobre él. Nació de la jornada del 2026-08-29,
+Este módulo es la **fuente de verdad del terreno FIJO de la ISLA RAIZ** y el sistema para
+posicionar objetos. **Es exclusivo de la Isla Raíz** — cada isla futura tendrá su propio
+módulo separado. (NPCs, ruinas, estructuras) sobre él. Nació de la jornada del 2026-08-29,
 donde el terreno y la cámara se rompieron y recuperar su estado requirió ir a commits anteriores.
 
 **Objetivo:** que cualquier agente pueda (1) reconstruir el terreno ideal exacto, (2) posicionar

@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 01-Requerimientos.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 01-Requerimientos.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 ## Problema
 El terreno de la Isla Raíz se rompió y se recuperó durante la jornada del 2026-08-29
@@ -26,7 +26,7 @@ objetos sobre el terreno.
 
 ## Fuera de alcance
 - El motor voxel (M08/M09/M10), el diseño de ubicaciones (M160), el diseño visual de NPCs (M161).
-- Otras islas (cada isla tendrá su propio módulo 1XX siguiendo esta plantilla).
+- Otras islas: cada isla tendrá su PROPIO módulo separado (patrón 16[7]X-Isla-Nombre). Este módulo es solo la Isla Raíz.
 
 ## Restricciones
 - No pisar la lógica de M08/M09/M10/12/19.

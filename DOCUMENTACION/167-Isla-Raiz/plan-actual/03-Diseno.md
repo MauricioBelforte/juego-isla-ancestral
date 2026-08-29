@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 03-Diseno.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 03-Diseno.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 ## 1. Configuración FIJA del terreno de la Isla Raíz (fuente de verdad)
 
