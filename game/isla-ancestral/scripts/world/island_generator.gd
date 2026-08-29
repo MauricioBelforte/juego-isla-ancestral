@@ -101,19 +101,26 @@ func get_height(x: int, z: int) -> int:
 	else:
 		height = 0
 	var crestas := _terrain_noise.get_noise_2d(float(x) / 6.0, float(z) / 6.0)
-	# MONTANAS DE ANTES, con descenso rellenado (spec usuario): se restaura la
-	# forma original de isla (pow(island_shape, 1.5) * max_height: picos reales
-	# de piedra) y alrededor se RELLENA la pendiente para eliminar los cortes
-	# bruscos: la altura final es la MEZCLA suave entre la montana de antes y la
-	# base de arena, ponderada por la distancia al pico (conica/redondeada).
+	# MONTANAS TIPO VOLCAN adentro del 55% (forma de antes: island_shape *
+	# max_height: picos altos de piedra por bioma mountain + selva en laderas),
+	# y PEQUENOS MONTICULOS DE PASTO en la llanura exterior (0.55-0.94).
+	# NUNCA rellenar fuera del 55% (eso hacia la isla infinita sin orilla).
+	# Ladera continua: la montana se estira hasta dist 0.78 y llega EXACTAMENTE
+	# a la altura de la planicie (3) — sin muro ni escalon. La pendiente es
+	# conica continua desde el pico (centro) hasta la llanura de arena.
+	# MONTANAS MULTIPLES (monticulos que varian entre ellos — spec usuario):
+	# pico_original usa el ruido de la isla => VARIOS volcanes de alturas y
+	# formas distintas. Se mezclan con la planicie mediante lerp suave
+	# (sin muros verticales de torta) y la costa (0.94-1.0) queda intacta:
+	# arena -> agua clara -> agua profunda.
 	var pico_original := pow(maxf(island_shape, 0.0), 1.5) * max_height
-	var pendiente := clampf((0.9 - dist) / 0.9, 0.0, 1.0)
+	var pendiente := clampf((0.85 - dist) / 0.85, 0.0, 1.0)
 	var altura_suave := 3.0 + pow(pendiente, 1.3) * 10.0
 	var alturas := maxf(pico_original, altura_suave)
 	if crestas > 0.0:
 		alturas += crestas * 6.0
-	if alturas > float(height):
-		height = int(alturas)
+	var peso_montana := clampf((0.85 - dist) / 0.15, 0.0, 1.0)
+	height = int(lerpf(float(height), float(alturas), peso_montana))
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)

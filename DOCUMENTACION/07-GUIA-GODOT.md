@@ -1259,3 +1259,88 @@ escena pisa al script. Verificarlo con un print en _ready.
 
 **Salto:** `velocity.y = 7.0` + `_on_ground = false` con gravity 20 => ~1.2 bloques
 (ver 10.6).
+
+
+### 10.12 RECETA VALIDADA: ISLA "PLATO DE ARENA + MONTANAS MULTIPLES + AGUAS DE DOS NIVELES"
+
+**Estado:** APROBADA POR EL USUARIO (captura cap_25_2026-08-29_05-09-09_montanas-multiples.png).
+Archivo: `game/isla-ancestral/scripts/world/island_generator.gd` (funcion get_height).
+Parametros: island_radius = 2048, water_level = 2, seed 42. Verificado FPS 60.
+
+#### PASO 1 — Centro de la isla y distancia normalizada
+```gdscript
+var dx := float(x - island_radius)
+var dz := float(z - island_radius)
+var dist := sqrt(dx * dx + dz * dz) / float(island_radius)
+var island_shape: float = 1.0 - clamp(dist, 0.0, 1.0)
+island_shape = pow(island_shape, 1.5)
+var shape_noise := _island_noise.get_noise_2d(float(x), float(z))
+island_shape *= (0.7 + shape_noise * 0.5)
+var terrain_noise := _terrain_noise.get_noise_2d(float(x), float(z))
+var mountain_noise := _terrain_noise.get_noise_2d(float(x) / 12.0, float(z) / 12.0)
+```
+IMPORTANTE: NO poner `if island_shape < 0.15: island_shape = 0.15` — ese piso era
+el responsable del terreno infinito sin orilla (10.10).
+
+#### PASO 2 — CAPA 1: AGUA PROFUNDA (borde exterior, 98-100%)
+```gdscript
+if dist > 0.98:
+    height = 0   # el water_level (2) llena con oceano azul oscuro
+```
+
+#### PASO 3 — CAPA 2: AGUA CLARA PISABLE (94-98%)
+```gdscript
+elif dist <= 0.98:
+    height = 2   # fondo a la altura del agua: el jugador camina sumergido hasta la cintura
+```
+
+#### PASO 4 — CAPA 3: ANILLO DE ARENA PLANA (hasta 94%)
+```gdscript
+elif dist <= 0.94:
+    height = 3 + int(maxf(0.0, terrain_noise) * 1.5)  # SAND por bioma beach (height <= 3)
+```
+
+#### PASO 5 — CAPA 4 (INTERIOR): MONTANAS MULTIPLES que varian entre ellas
+```gdscript
+var crestas := _terrain_noise.get_noise_2d(float(x) / 6.0, float(z) / 6.0)
+# PICOS: forma de la isla al cubo => varios volcanes de alturas y formas distintas
+# (NO un cono central unico). mountain_noise (freq /12) les da variacion.
+var pico_original := pow(maxf(island_shape, 0.0), 1.5) * max_height
+# RELLENO: pendiente suave desde la arena hacia el interior (elimina escalones)
+var pendiente := clampf((0.85 - dist) / 0.85, 0.0, 1.0)
+var altura_suave := 3.0 + pow(pendiente, 1.3) * 10.0
+var alturas := maxf(pico_original, altura_suave)
+if crestas > 0.0:
+    alturas += crestas * 6.0
+# MEZCLA SUAVE hacia la planicie: sin muros verticales en el borde del interior
+var peso_montana := clampf((0.85 - dist) / 0.15, 0.0, 1.0)
+height = int(lerpf(float(height), float(alturas), peso_montana))
+```
+
+#### PASO 6 — Spawn sobre superficie calculada (nunca Y fija)
+```gdscript
+var gen = terrain.generator
+var altura_spawn: int = int(gen._get_island_gen().get_height(spawn_x, spawn_z))
+player.global_position = Vector3(spawn_x, altura_spawn + 3, spawn_z)
+```
+
+#### PASO 7 — VoxelViewer sigue al jugador + radio generoso
+```gdscript
+func _process(delta):
+    viewer.global_position = player.global_position
+# y en _setup: viewer.viewer_radius = 512 (o mas; sin esto, borde cuadrado — ver 10.1)
+```
+
+#### ERRORES QUE ESTA RECETA EVITA (vistos hoy)
+- `if island_shape < 0.15: island_shape = 0.15` SIN acotar => terreno infinito sin orilla (10.10)
+- `altura` fija (Y 16/30/60) para el spawn => nace enterrado/flotando (10.5)
+- Transicion brusca montana->arena => muro vertical tipo "torta" (usar el lerp del paso 5)
+- VoxelViewer fijo => borde cuadrado del mundo (10.1)
+- Sub-stepping de get_motion a alta velocidad => 1 FPS (10.6-adjacente)
+- Cambiar @export en el script sin revisar el .tscn => el valor no aplica (10.11)
+
+#### Variantes de tunin (los numeros que se pueden tocar)
+- `0.35` (base de las montanas): mas chico => montanas mas al centro
+- `* 22.0` (altura del sector): mas grande => montanas mas altas
+- `0.98` (inicio del mar): mas chico => mas anillo de arena antes del agua
+- `sector`: el rango angular donde van las montanas (foto isla-modelo-2/3)
