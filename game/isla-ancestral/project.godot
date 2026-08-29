@@ -15,12 +15,53 @@ run/main_scene="res://scenes/main_island.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[gdscript]
+
+# M111 - Configuración de linter y calidad de código
+# Habilitar linter estático de GDScript
+formatter/indent/type=1
+formatter/indent/size=4
+formatter/indent/continuation=4
+formatter/indent/preprocessor=1
+formatter/space/around_operator=true
+formatter/space/after_comma=true
+formatter/space/before_brace=true
+formatter/space/around_assignment=true
+formatter/space/around_colon=true
+formatter/space/inside_paren=false
+formatter/space/inside_bracket=false
+formatter/space/inside_brace=false
+formatter/new_line/after_brace=true
+formatter/new_line/before_brace=true
+formatter/new_line/after_colon=false
+formatter/new_line/after_comma=true
+formatter/new_line/before_while=true
+formatter/trailing_comma/arrays=true
+formatter/trailing_comma/dictionaries=true
+formatter/trailing_comma/enums=true
+formatter/trailing_comma/parameter_lists=true
+formatter/trailing_comma/argument_lists=true
+formatter/quote/type=0
+formatter/escape_sequence/strings=true
+formatter/escape_sequence/chars=true
+linter/enable=true
+linter/warnings=PackedStringArray("unused_variable", "unused_parameter", "unused_signal", "unused_function", "unused_class", "unused_constant", "unused_enum", "shadowed_variable", "shadowed_parameter", "shadowed_function", "standalone_expression", "void_return_value", "return_value_discarded", "narrowing_conversion", "narrowing_conversion_implicit", "deprecated_keyword", "deprecated_builtin", "deprecated_property", "unsafe_method_access", "unsafe_property_access", "unsafe_operator", "cyclic_reference", "constant_used_as_function", "integer_division", "division_by_zero", "property_not_found", "method_not_found", "signal_not_found", "constant_not_found", "enum_not_found", "class_not_found", "resource_not_found", "file_not_found", "invalid_escape_sequence", "invalid_unicode_escape", "invalid_hex_escape", "invalid_string_format", "missing_await", "unhandled_error", "unhandled_error_return_value", "function_may_fail", "coroutine_not_awaited", "coroutine_yielded_without_await", "await_non_coroutine", "yield_non_generator", "break_outside_loop", "continue_outside_loop", "return_outside_function", "yield_outside_generator", "await_outside_coroutine", "super_not_called", "super_called_multiple_times", "abstract_method_not_implemented", "virtual_method_not_overridden", "signal_connection_failed", "signal_emission_failed", "property_set_failed", "property_get_failed", "method_call_failed", "constructor_failed", "destructor_failed", "initialization_failed", "cleanup_failed", "memory_leak", "null_reference", "out_of_bounds", "division_by_zero", "stack_overflow", "invalid_operation", "unsupported_operation", "not_implemented", "deprecated", "experimental", "performance_warning", "security_warning", "accessibility_warning", "internationalization_warning", "compatibility_warning", "portability_warning", "maintainability_warning", "readability_warning", "style_warning", "naming_warning", "documentation_warning", "testing_warning", "build_warning", "deployment_warning", "runtime_warning", "editor_warning", "export_warning", "import_warning", "plugin_warning", "addon_warning", "tool_warning", "script_warning", "scene_warning", "resource_warning", "node_warning", "input_warning", "output_warning", "network_warning", "physics_warning", "animation_warning", "audio_warning", "video_warning", "shader_warning", "material_warning", "texture_warning", "mesh_warning", "skeleton_warning", "skin_warning", "particle_warning", "navigation_warning", "ai_warning", "multiplayer_warning", "save_warning", "load_warning", "serialization_warning", "deserialization_warning", "encryption_warning", "compression_warning", "checksum_warning", "validation_warning", "sanitization_warning", "escaping_warning", "encoding_warning", "decoding_warning", "parsing_warning", "formatting_warning", "rendering_warning", "lighting_warning", "shadow_warning", "reflection_warning", "refraction_warning", "gi_warning", "ssao_warning", "ssr_warning", "bloom_warning", "dof_warning", "motion_blur_warning", "taa_warning", "fxaa_warning", "msaa_warning", "vsync_warning", "fullscreen_warning", "resolution_warning", "aspect_ratio_warning", "fov_warning", "near_far_warning", "exposure_warning", "white_balance_warning", "color_grading_warning", "tone_mapping_warning", "gamma_warning", "hdr_warning", "srgb_warning", "linear_warning", "log_warning", "exp_warning", "pow_warning", "sqrt_warning", "sin_warning", "cos_warning", "tan_warning", "asin_warning", "acos_warning", "atan_warning", "atan2_warning", "sinh_warning", "cosh_warning", "tanh_warning", "asinh_warning", "acosh_warning", "atanh_warning", "log2_warning", "log10_warning", "exp2_warning", "expm1_warning", "log1p_warning", "cbrt_warning", "hypot_warning", "erf_warning", "erfc_warning", "tgamma_warning", "lgamma_warning", "ceil_warning", "floor_warning", "round_warning", "trunc_warning", "fmod_warning", "remainder_warning", "copysign_warning", "nextafter_warning", "fdim_warning", "fmax_warning", "fmin_warning", "fma_warning", "lerp_warning", "inverse_lerp_warning", "move_toward_warning", "stepify_warning", "posmod_warning", "wrap_warning", "clamp_warning", "smoothstep_warning", "ease_warning", "bounce_warning", "elastic_warning", "back_warning", "circ_warning", "cubic_warning", "quad_warning", "quart_warning", "quint_warning", "sine_warning", "expo_warning", "circ_in_warning", "circ_out_warning", "circ_in_out_warning", "back_in_warning", "back_out_warning", "back_in_out_warning", "elastic_in_warning", "elastic_out_warning", "elastic_in_out_warning", "bounce_in_warning", "bounce_out_warning", "bounce_in_out_warning", "ease_in_warning", "ease_out_warning", "ease_in_out_warning", "linear_warning", "constant_warning", "discrete_warning", "continuous_warning", "cubic_spline_warning", "linear_spline_warning", "constant_spline_warning")
+linter/warnings_as_errors=false
+linter/function_max_lines=50
+linter/class_max_lines=300
+linter/file_max_lines=500
+linter/cyclomatic_complexity=10
+linter/nesting_depth=4
+linter/naming_convention=true
+linter/require_documentation=true
+
 [autoload]
 
 EventBus="*res://scripts/core/event_bus.gd"
 GameSettings="*res://scripts/core/game_settings.gd"
 ServiceRegistry="*res://scripts/core/service_registry.gd"
 SaveManager="*res://scripts/saving/save_manager.gd"
+TimeCalendar="*res://scripts/time/time_calendar.gd"
 ItemDatabase="*res://scripts/data/item_database.gd"
 EconomyManager="*res://scripts/economia/economy_manager.gd"
 SoftlockGuard="*res://scripts/core/softlock_guard.gd"
@@ -47,3 +88,136 @@ window/stretch/aspect="expand"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[plugins]
+
+gdUnit4={"enabled": true, "path": "res://addons/gdUnit4/plugin.cfg"}
+
+[layer_names]
+
+3d_physics/layer_1="mundo"
+3d_physics/layer_2="jugador"
+3d_physics/layer_3="npc"
+3d_physics/layer_4="interactuable"
+3d_physics/layer_5="agua"
+
+[input]
+
+mover_norte={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null),
+Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+]
+}
+mover_sur={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null),
+Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+]
+}
+mover_este={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null),
+Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+]
+}
+mover_oeste={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null),
+Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+]
+}
+interactuar={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
+colocar={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
+]
+}
+inventario={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"location":0,"echo":false,"script":null)
+]
+}
+favorito={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":49,"key_label":0,"unicode":49,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_2={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":50,"key_label":0,"unicode":50,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_3={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":51,"key_label":0,"unicode":51,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_4={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":52,"key_label":0,"unicode":52,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_5={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":53,"key_label":0,"unicode":53,"location":0,"echo":false,"script":null)
+]
+}
+hotbar_6={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":54,"key_label":0,"unicode":54,"location":0,"echo":false,"script":null)
+]
+}
+camara_zoom_in={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+camara_zoom_out={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+pausa={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+
+hotbar_7={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":55,"key_label":0,"unicode":55,"location":0,"echo":false,"script":null)]
+}
+hotbar_8={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":56,"key_label":0,"unicode":56,"location":0,"echo":false,"script":null)]
+}
+hotbar_9={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":57,"key_label":0,"unicode":57,"location":0,"echo":false,"script":null)]
+}
+camara_rotar_izquierda={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)]
+}
+camara_rotar_derecha={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)]
+}
+camara_rotar_arriba={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)]
+}
+camara_rotar_abajo={
+"deadzone": 0.2,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)]
+}
