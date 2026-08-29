@@ -71,16 +71,21 @@ func get_height(x: int, z: int) -> int:
 	# Suavizar bordes con ruido
 	var shape_noise := _island_noise.get_noise_2d(float(x), float(z))
 	island_shape *= (0.7 + shape_noise * 0.5)
-	
-	# Si la forma es muy baja, es agua (altura 0)
-	if island_shape < 0.15:
+
+	# Directiva 2026-08-29: el terreno cubre casi todo el mundo (meseta minima de 8
+	# con pasto), el agua queda recien en el borde exterior (85%+ del radio).
+	if island_shape <= 0.0 or dist >= 0.85:
 		return 0
-	
+
+	# Si la forma es muy baja pero seguimos dentro del terreno, usar la meseta
+	if island_shape < 0.15:
+		island_shape = 0.15
+
 	# Ruido de terreno para detalles
 	var terrain_noise := _terrain_noise.get_noise_2d(float(x), float(z))
-	
-	# Altura final: forma * max_height + detalles
-	var height := int(island_shape * max_height + terrain_noise * 5)
+
+	# Altura final: forma * max_height + detalles, con piso minimo de 8
+	var height := int(maxf(island_shape * max_height, 8.0) + terrain_noise * 5)
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)
