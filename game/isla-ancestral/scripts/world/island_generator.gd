@@ -8,7 +8,7 @@ extends RefCounted
 var seed_value: int = 42
 
 ## Tamaño de la isla en voxels
-var island_radius: int = 640
+var island_radius: int = 1280
 
 ## Altura máxima de la isla
 var max_height: int = 40
@@ -86,20 +86,24 @@ func get_height(x: int, z: int) -> int:
 	var mountain_noise := _terrain_noise.get_noise_2d(float(x) / 12.0, float(z) / 12.0)
 	var height := 0
 	
-	# PERFIL FINAL (spec del usuario):
-	# - ANILLO EXTERIOR PLANO DE ARENA: del 35% al 98% del radio, terreno plano
-	#   a altura 3 (bioma beach => SAND, playa que rodea toda la isla).
-	# - MONTAÑA PIRAMIDAL ADENTRO: dentro del 35%, la altura sube desde 3 en
-	#   la base hasta max_height en el centro, en forma conica (piramide).
-	# - AGUA: en el ultimo anillo (98-100%), el terreno cae a 0 y el water_level
-	#   llena de oceano alrededor del anillo de arena.
+	# PERFIL ISLA CIRCULAR (spec del usuario, fotos modelo):
+	# - CIRCULO DE ARENA: del 35% al 98% del radio, playa plana (SAND).
+	# - INTERIOR: planicie baja verde (6-8) con MONTANAS VERDES concentradas
+	#   en UN SECTOR angular (como la imagen: las montanas quedan a un lado,
+	#   no al centro). La selva rodea las montanas.
+	# - AGUA: ultimo anillo (98-100%) -> 0 -> oceano turquesa alrededor.
 	if dist > 0.35:
 		height = 3
 	else:
+		var ang := atan2(dz, dx)
+		var sector := 0.0
+		if ang > -1.3 and ang < 0.6:
+			sector = 1.0 - absf(ang - (-0.35)) / 0.95
+			sector = clampf(sector, 0.0, 1.0)
 		var t_m := 1.0 - dist / 0.35
-		height = int(t_m * (max_height - 3.0)) + 3
-		if mountain_noise > 0.3:
-			height += int((mountain_noise - 0.3) * 20.0)
+		height = 6 + int(t_m * 2.0 + terrain_noise * 2.0)
+		if sector > 0.0:
+			height += int(sector * t_m * 22.0 + maxf(0.0, mountain_noise) * 6.0)
 	if dist > 0.98:
 		height = 0
 	return maxi(height, 0)

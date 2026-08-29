@@ -5,7 +5,7 @@ extends VoxelGeneratorScript
 ## Semilla fija → generación determinista
 
 @export var world_seed: int = 42
-@export var island_radius: int = 64
+@export var island_radius: int = 1280
 @export var max_height: int = 40
 
 var _island_gen: IslandGenerator
