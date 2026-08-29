@@ -86,14 +86,29 @@ func get_height(x: int, z: int) -> int:
 	var mountain_noise := _terrain_noise.get_noise_2d(float(x) / 12.0, float(z) / 12.0)
 	var height := 0
 	
-	# PERFIL PLATO DE ARENA (spec del usuario): la isla es un plato circular
-	# de arena completamente plana (altura 3-4, bioma beach => SAND) desde el
-	# centro hasta el 98% del radio, y el ultimo anillo cae a 0 donde el
-	# water_level pone AGUA alrededor (oceano turquesa). Sin montanas.
-	if dist <= 0.98:
+	# PERFIL EN CAPAS (spec del usuario, fotos isla-modelo-2/3):
+	# 1) AGUA: ultimo anillo (98-100%) -> height 0 -> water_level pone oceano.
+	# 2) ANILLO CIRCULAR: centro hasta 98% -> arena plana/playa (height 3-4, SAND).
+	# 3) MONTANAS DE PIEDRA: dentro del 55%, picos escarpados de roca gris (STONE
+	#    via bioma mountain, height > max_height*0.65) con selva/bosque en la base.
+	# AGUAS EN DOS NIVELES (spec usuario): 0.94-0.98 = agua CLARA (fondo a
+	# altura 2: el jugador camina de pie sumergido hasta la cintura); >0.98 =
+	# agua PROFUNDA (fondo a 0: se hunde).
+	if dist <= 0.94:
 		height = 3 + int(maxf(0.0, terrain_noise) * 1.5)
+	elif dist <= 0.98:
+		height = 2
 	else:
 		height = 0
+	var crestas := _terrain_noise.get_noise_2d(float(x) / 6.0, float(z) / 6.0)
+	# Montanas CONICAS: la altura crece linealmente hacia el centro (forma de
+	# piramide/conica: pendiente suave, sin cortes bruscos de ruido). Base de
+	# cesped desde la arena, tope bajo-automatico sin picos de 20+.
+	if dist < 0.55:
+		var pendiente := (0.55 - dist) / 0.55  # lineal 0->1 hacia el centro
+		var altura_conica := 3.0 + pendiente * 12.0
+		var ondulacion := maxf(0.0, crestas) * 4.0
+		height = int(maxf(float(altura_conica + ondulacion), float(height)))
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)

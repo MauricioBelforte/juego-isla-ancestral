@@ -1181,3 +1181,28 @@ var block_id: int = int(vt.get_voxel(pos))
 3. Construir estructuras sobre get_height real, no Y fija (10.5).
 4. Salto 7.0 + `_on_ground = false` (10.6).
 5. Estructuras perfil-dependientes: al cambiar el perfil, regenerarlas (10.3).
+
+
+### 10.8 RECETA DE TERRENO POR CAPAS (orden obligatorio para islas)
+
+El terreno se hace en 3 capas, de afuera hacia adentro, SIN romper el borde:
+
+1. **AGUA** — ultimo anillo del radio (98-100%): `height = 0`; el `water_level` llena de oceano.
+2. **ANILLO CIRCULAR** — centro hasta el 98%: planicie de arena (`height 3-4`, SAND) o tierra segun la isla. Es el "plato".
+3. **MONTANAS** — dentro del 55-65% del radio: picos con ruido de baja frecuencia; el bioma existente los pinta: `height > max_height*0.65` => STONE (roca gris), la base queda en bosque/cesped automaticamente.
+
+Claves:
+- NUNCA tocar el anillo 98-100% (aqui vive el mar); mantener el borde circular intacto.
+- Las montañas se agregan DENTRO del anillo (multiplicando por peso `(0.55-dist)/0.55`) para que se disuelvan antes de la arena.
+- Regenerar estructuras/ruinas al cambiar el perfil (10.3).
+
+
+### 10.9 Orilla con agua clara (pisable) y agua profunda (se hunde)
+
+En el generador, la orilla se hace en DOS bandas de altura (el water_level cubre ambas):
+- **AGUA CLARA** (0.94-0.98 del radio): `height = 2` — el personaje queda parado con el agua
+  hasta la cintura (camina la orilla sumergido hasta media pierna). SE PUEDE PISAR.
+- **AGUA PROFUNDA** (>0.98): `height = 0` — no hay suelo al alcance, el personaje se hunde.
+
+Regla: la banda clara NUNCA debe ir por debajo de 2 (si no el jugador se hunde ahi
+tambien); la profunda siempre en 0. El water_level (2) cubre visualmente ambas.
