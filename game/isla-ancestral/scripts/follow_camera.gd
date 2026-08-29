@@ -57,6 +57,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			_distance = min(_distance + zoom_speed, max_distance)
 
 func _physics_process(delta: float) -> void:
+	# M21-fix: reintentar buscar al target si nunca se encontro (el _ready con
+	# await puede correr antes de que el Player este en el grupo)
+	if not _target or not is_instance_valid(_target):
+		_target = get_tree().get_first_node_in_group("player")
+		if _target == null:
+			_target = get_tree().current_scene.get_node_or_null("Player")
+		if _target:
+			print("[Camera] Target encontrado: " + _target.name)
 	if not _target:
 		return
 	
