@@ -89,3 +89,11 @@ data/generation/*.tres               → knobs
 - get_block_at ahora calcula dist (distancia normalizada al centro) para elegir
   SHALLOW_WATER (bloque 30, nuevo — turquesa pisable) en la banda 0.94-0.98
 - El perfil de aguas: agua clara pisable (94-98%) y profunda (98-100%)
+
+
+## Fix "previously freed" (2026-08-29 — Hy3/Kilo)
+
+El IslandGenerator se perdia mientras los threads del VoxelTerrain generaban chunks
+(error "get_block_at in previously freed" en world_generator.gd:34). FIX: referencia
+estatica global `_instancia_global` en world_generator.gd que mantiene vivo el
+generador. Validado: run completo sin errores. Detalle en guia Godot 10.14.

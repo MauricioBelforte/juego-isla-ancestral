@@ -1362,3 +1362,26 @@ La banda 0.94-0.98 del radio usa SHALLOW_WATER (pisable) y >0.98 WATER (se hunde
 (ej. isla volcanica: arena negra, agua indigo). Los bloques extraidos conservan
 el color de la isla de origen: requiere `origen_isla` en ItemData + variante de
 color en el bloque colocado (M08/M14/M15 — pendiente de implementar).
+
+
+### 10.14 FIX: "get_block_at in previously freed" (world_generator)
+
+**Sintoma:** al generar chunks en threads, `world_generator.gd:34` lanza "Invalid call
+'get_block_at' in previously freed" y a veces congela el arranque.
+**Causa:** el `IslandGenerator.new()` (Resource) dentro del VoxelGeneratorScript perde
+la referencia fuerte cuando los threads del VoxelTerrain reentran al generador.
+**FIX (validado — run completo sin errores):** referencia estatica global que mantiene
+vivo el generador para siempre:
+```gdscript
+static var _instancia_global: IslandGenerator
+
+func _get_island_gen() -> IslandGenerator:
+    if not _island_gen or not is_instance_valid(_island_gen):
+        _island_gen = IslandGenerator.new(null, world_seed)
+        _island_gen.island_radius = island_radius
+        _island_gen.max_height = max_height
+        _instancia_global = _island_gen   # <-- LA CLAVE
+    return _island_gen
+```
+**Regla general:** todo Resource creado dentro de un VoxelGeneratorScript y usado por
+sus threads DEBE tener referencia estatica global (o vivir en un autoload).

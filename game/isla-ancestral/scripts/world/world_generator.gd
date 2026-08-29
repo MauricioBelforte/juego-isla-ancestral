@@ -10,11 +10,17 @@ extends VoxelGeneratorScript
 
 var _island_gen: IslandGenerator
 
+## Referencia estatica fuerte: evita que el IslandGenerator se libere mientras
+## los threads de generacion del VoxelTerrain lo estan usando (error
+## "get_block_at in previously freed" — bug documentado en la guia Godot 10.14).
+static var _instancia_global: IslandGenerator
+
 func _get_island_gen() -> IslandGenerator:
-	if not _island_gen:
+	if not _island_gen or not is_instance_valid(_island_gen):
 		_island_gen = IslandGenerator.new(null, world_seed)
 		_island_gen.island_radius = island_radius
 		_island_gen.max_height = max_height
+		_instancia_global = _island_gen
 	return _island_gen
 
 func _get_used_channels_mask() -> int:
