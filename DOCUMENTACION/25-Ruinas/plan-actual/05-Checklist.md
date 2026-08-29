@@ -164,3 +164,25 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+
+## Implementacion (2026-08-29 — Hy3/Kilo)
+
+- [x] Disenar la ruina pequena y legible (estructura 3-5 piezas, banda Exploracion) [M] (chozavil: 3 muros rotos + vano de puerta + columna de madera + piso interior, verificada con vision)
+- [x] Construir la ruina sobre el terreno real del voxel world [C] (Tecnica de _buscar_altura: muestrea la superficie y construye sobre ella — corrige la enterrada que no se veia)
+- [x] Reutilizar el framework emisor-receptor de M24 para el puzzle de la ruina [M] (placa -> puerta sellada; ver generador_ruina.gd)
+- [x] Validar la legibilidad con vision (captura in-engine / PrintWindow) [M] (cap_25_2026-08-29_01-32-18_ruina-legible-oficial.png: la ruina se ve completa y distinguible)
+- [x] Mantener la integracion con la isla sin tocar M09/M10 (generador y stream intactos) [M]
+
+## Notas del Agente (2026-08-29)
+
+**Modelo:** Hy3 | **Plataforma:** Kilo | **Estado:** estructura pequena y legible validada visualmente (puerta F4 de M25 cubierta a nivel de diseno)
+
+### Lo que hice
+- Ruina chocavil legible (3 muros con vano + columna + piso) construida sobre la altura real del terreno: el bug raiz era que la ruina quedaba ENTERRADA (horcones a y fijo con el terreno mas alto). _buscar_altura la resuelve.
+- Escena preview autocontenida (scenes/ruina_preview.tscn + scripts/ruinas/preview_ruina.gd) sin interferir con la isla, con camara fija 45 grados.
+- Hallazgo: world_generator.gd:34 lanza un error latente de M09 ("get_block_at" sobre objeto liberado) al generar ciertos chunks — documentado para M09.
+
+### Pendientes (honestidad)
+- Pulido artistico de la ruina (M45/M65 assets; texturas de piedra rota con mas detalle).
+- Integracion de la ruina a la isla a la vista del puntaje V2 (la preview es la evidencia; el generador_ruina en main_island usa el mismo _buscar_altura, pero el spawn del jugador la dejaba fuera del encuadre inicial — requiere posicion definitiva cuando se cierre el layout).

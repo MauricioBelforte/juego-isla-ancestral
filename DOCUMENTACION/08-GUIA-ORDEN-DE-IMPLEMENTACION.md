@@ -130,7 +130,7 @@ La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marc
 | 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
 | 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
 | 21 | M24 Templos y Puzzles | 5 | V2 | 🟡 Liberado (nucleo framework) | Hy3 (Kilo) | M13 ✅ | Framework emisor-receptor + validacion de no-arbitrariedad + test 0 fallos; puzzles jugables/familias/ayuda pendientes | 2026-08-29 02:20 |
-| 22 | M25 Ruinas | 3 | V2 | 🔵 En curso | Hy3 (Kilo) | M24 ✅ | Estructura pequeña y legible + captura in-engine | 2026-08-29 03:45 |
+| 22 | M25 Ruinas | 3 | V2 | 🟡 Liberado (nucleo + validacion visual) | Hy3 (Kilo) | M24 ✅ | Ruina chocavil legible con _buscar_altura + escena preview + captura oficial; pulido M45/M65 pendiente | 2026-08-29 01:35 |
 | 20 | M04+M05+M07 Cierre Fase 1 | 3-5 | V0/V1 | 🟡 Liberado (núcleo F1 verificado) | Hy3 (Kilo) | — | Puerta F1 cerrada: Input Map/capas física + registro.gd + verificar_arquitectura.gd + prueba_arquitectura.tscn SMOKE OK; auditoría completa de los 3 checklists pendiente | 2026-08-29 01:20 |
 | 19 | M138 Vertical Slice | 5 | V2 | Recorrido visual completo | No; requiere F4 |
 
@@ -503,6 +503,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
 | — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
 | — | M112 Testing Automático | 3 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M111 ✅ | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
+| — | M102 Bug Tracking | 1 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M101 doc ✅ | GitHub Issues: plantilla, labels script, workflow métricas, guía, dashboard; 140/140 items | 2026-08-29 02:30 |
 
 ### Bloque `Reserva actual` obligatorio en cada checklist de módulo
 

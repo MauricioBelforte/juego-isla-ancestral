@@ -21,15 +21,23 @@ var _puerta: PuzzlePuerta = null
 var _placa: Area3D = null
 var _sello_pos: Array = []
 
-@export var base: Vector3 = Vector3(16, 9, 68)
+@export var base: Vector3 = Vector3(24, 9, 66)
 
 func _ready() -> void:
 	_terreno = _buscar_terreno()
 	if _terreno == null:
 		push_error("[M25] No se encontro VoxelTerrain")
 		return
+	_esperar_terreno()
+
+func _esperar_terreno() -> void:
+	await get_tree().create_timer(2.5).timeout
+	_iniciar_ruina()
+
+func _iniciar_ruina() -> void:
 	_sala = PuzzleRoom.new([0])
 	_sala.add_regla([0], "puerta")
+	base.y = _buscar_altura(int(base.x), int(base.z)) + 1
 	_construir_ruina()
 	_crear_placa()
 	_crear_puerta()
@@ -95,6 +103,16 @@ func _on_placa_entered(body: Node) -> void:
 		if "puerta" in activos and not _puerta.abierta:
 			_puerta.abrir()
 			print("[M25] Puzzle resuelto: placa pisada -> puerta abierta")
+
+func _buscar_altura(x: int, z: int) -> int:
+	var vt := _terreno.get_voxel_tool()
+	if vt == null:
+		return 9
+	vt.channel = VoxelBuffer.CHANNEL_TYPE
+	for y in range(40, -40, -1):
+		if int(vt.get_voxel(Vector3i(x, y, z))) != B_AIRE:
+			return y
+	return 9
 
 func _buscar_terreno() -> VoxelTerrain:
 	var root := get_tree().current_scene
