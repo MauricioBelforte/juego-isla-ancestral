@@ -1206,3 +1206,24 @@ En el generador, la orilla se hace en DOS bandas de altura (el water_level cubre
 
 Regla: la banda clara NUNCA debe ir por debajo de 2 (si no el jugador se hunde ahi
 tambien); la profunda siempre en 0. El water_level (2) cubre visualmente ambas.
+
+
+### 10.10 TERRENO INFINITO (descubrimiento accidental 2026-08-29 — tecnica validada en juego)
+
+**Descubrimiento:** al dejar el bloque de altura minima SIN acotar por distancia, el generador
+produce terreno en TODAS las columnas del mundo -> el terreno se vuelve INFINITO (el VoxelViewer
+sigue al jugador y genera chunks eternamente; 15 minutos de caminata sin orilla, verificado).
+
+**COMO HACERLO (receta de mundo infinito):**
+1. En `get_height`, aplicar una altura minima a TODO el mapa, sin condicion de distancia:
+   `var altura_min := 3.0 + pow(pendiente, 1.3) * 10.0` (pendiente calculada para cualquier dist).
+2. `if alturas > float(height): height = int(alturas)` — el relleno gana sobre el height 0 del mar.
+3. El VoxelViewer debe SEGUIR al jugador (10.1) para que los chunks se generen eternamente.
+
+**ADVERTENCIA CRITICA:** esta tecnica ELIMINA el agua del mundo (nunca hay height 0, el
+water_level nunca alcanza). Solo usarla para mundos de continente infinito sin mar.
+Para ISLAS con orilla, las alturas minimas deben ir ACO TADAS por distancia (10.2: perfil
+plato con `dist <= 0.98` y agua en el anillo exterior).
+
+**Estado:** la isla actual esta INFINTA por accidente (bug conocido, ver log de la jornada);
+el fix es volver a acotar el bloque de montanas con `if dist < 0.55:`. Conservada como tecnica.
