@@ -139,3 +139,5 @@
 
 **Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
 **Nota:** la implementación (ruido, asincronía, medición) es del prototipo M1 y M61; la especificación queda cerrada aquí.
+
+- [x] Agua clara pisable (SHALLOW_WATER 30) y agua profunda en el borde [M] (2026-08-29)

@@ -138,3 +138,5 @@
 
 **Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
 **Nota:** la sensación real (ángulos, distancias, suavizado) se calibra en el playtest del hito M1.
+
+- [x] VoxelViewer sigue al jugador (borde circular) [S] (2026-08-29, main_island.gd)

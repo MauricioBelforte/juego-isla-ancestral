@@ -242,7 +242,7 @@ Los scripts **son herramientas de apoyo que se ejecutan manualmente**; no sustit
 - Ejecuté la verificación de entrada: `test_scripts.py` (8 PASS, 0 FAIL), `verificar_checklist.py` (hallazgos documentados) y `generar_checklist_global.py --dry-run`.
 - Implementé los 8 entregables operativos que faltaban: `README.md` (onboarding + anti-abandono + contingencias), `guia-hitos.md` (hitos M0-M5 + plantilla + ejemplo M1/Prototipo), `guia-sprints.md` (bloques semanales, WIP, métricas), `flujo-multiagente.md` (ciclo, estados, DoD, QA cruzado, deuda técnica, 10 edge cases), `adrs/0001-README-adrs.md`, `adrs/0002-adopcion-herramienta-tablero.md` (Estado: Propuesto), `actas/0001-acta-planificacion-hito-M1.md` (plantilla + ejemplo) y `reportes/2026-08-reporte-avance.md` (primer reporte real con datos del script).
 - Marqué el `05-Checklist.md` completo (127/127 `[x]`, cero `[?]`) con notas de evidencia por ítem y verifiqué hashes plan-inicial vs plan-actual.
-- Reservé y liberé el módulo en los 4 registros (CHECKLIST-GLOBAL, ESTADO-PARALELO, guía 08, este checklist) y generé el log 195.
+- Reservé y liberé el módulo en los 4 registros (CHECKLIST-GLOBAL, ESTADO-PARALELO, guía 08, este checklist) y generé el log 219.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
 - No confirmé la herramienta de tablero (GitHub Projects v2) ni fijé fechas de hitos: son decisiones del fundador. El ADR-0002 quedó en `Propuesto` y las fechas como "por definir" con M136.

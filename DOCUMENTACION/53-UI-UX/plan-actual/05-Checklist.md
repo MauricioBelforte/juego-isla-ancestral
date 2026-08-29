@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** MiMo V2.5 (OpenCode)
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 53: UI/UX
@@ -20,7 +20,7 @@
 
 ## B. HUD mínimo (12)
 
-- [ ] Crear HUDScreen como CanvasLayer en capa 100 [S]
+- [x] Crear HUDScreen como CanvasLayer en capa 100 [S]
 - [ ] Crear StatusBar con vitales del jugador (M11) leídos por Callable [S]
 - [ ] Crear ClockWidget con formato cozy "Otoño 3, 14:30" (M29/M30) [S]
 - [ ] Crear SeasonWidget con icono y texto de estación [S]
@@ -28,22 +28,22 @@
 - [ ] Crear HotbarWidget sincronizado por eventos del inventario (M11) [S]
 - [ ] Crear InteractPrompt contextual de "puedes interactuar" (M70) [S]
 - [ ] Crear ActionPromptOverlay con prompts dinámicos por dispositivo (M57) [S]
-- [ ] Implementar force_refresh puntual y refresh a baja frecuencia (2 Hz) sin polling por frame [M]
-- [ ] Implementar set_hud_visible(false) para M56 Fotografía y capturas [S]
+- [x] Implementar force_refresh puntual y refresh a baja frecuencia (2 Hz) sin polling por frame [M]
+- [x] Implementar set_hud_visible(false) para M56 Fotografía y capturas [S]
 - [ ] Validar que el HUD no tape el centro de la pantalla (regla de layout) [S]
 - [ ] Verificar que el HUD siga coherente con pausa abierta en modo congelado [M]
 
 ## C. Navegación y foco (12)
 
 - [ ] Configurar focus_neighbor y focus_next/focus_prev en todas las pantallas del editor [M]
-- [ ] Implementar MenuNavigator con focus_first y focus_last [S]
-- [ ] Implementar wrap-around circular de foco en grids y listas [M]
+- [x] Implementar MenuNavigator con focus_first y focus_last [S]
+- [x] Implementar wrap-around circular de foco en grids y listas [M]
 - [ ] Soporte completo de navegación direccional con gamepad (4 direcciones) [M]
 - [ ] Soporte completo de navegación con teclado (flechas, tab, enter, esc) [M]
 - [ ] Soporte completo de navegación con ratón (hover, click, scroll) [S]
 - [ ] Definir política mixta: el hover del ratón no roba el foco del gamepad [M]
-- [ ] Tabular entre pestañas (tab_next/tab_prev) en pantallas con pestañas [S]
-- [ ] Foco inicial correcto en cada capa (primer control lógico) [S]
+- [x] Tabular entre pestañas (tab_next/tab_prev) en pantallas con pestañas [S]
+- [x] Foco inicial correcto en cada capa (primer control lógico) [S]
 - [ ] Atajos rápidos (inventario I, pausa Esc/P, mapa M) definidos en M57 [S]
 - [ ] Foco siempre visible con anillo de foco dorado (M58: visible sin ratón) [S]
 - [ ] Probar navegación completa de cada pantalla 30 minutos por método de input [C]
@@ -87,11 +87,11 @@
 
 ## G. Tooltips (8)
 
-- [ ] Crear TooltipService como CanvasLayer autoload [S]
-- [ ] Tooltip por hover de ratón con retardo configurable (350 ms default) [S]
+- [x] Crear TooltipService como CanvasLayer autoload [S]
+- [x] Tooltip por hover de ratón con retardo configurable (350 ms default) [S]
 - [ ] Tooltip por foco de teclado/gamepad (accesible sin ratón) [S]
-- [ ] Pool único de nodos tooltip sin allocaciones por uso [M]
-- [ ] Clamp de posición al viewport con margen de 8 px [S]
+- [x] Pool único de nodos tooltip sin allocaciones por uso [M]
+- [x] Clamp de posición al viewport con margen de 8 px [S]
 - [ ] Cierre al mover foco, salir del área o acción transversal [S]
 - [ ] Texto breve y amable con jerarquía M88 (título y cuerpo) [S]
 - [ ] Verificar que el tooltip nunca bloquea el input del mundo [S]
@@ -102,7 +102,7 @@
 - [ ] Hover de botones con cambio suave de color y sonido leve [S]
 - [ ] Click y confirm con sonido de confirmación corto [S]
 - [ ] Acción inválida con sonido suave no alarmante y texto amable [S]
-- [ ] Toasts con icono y SFX por tipo (obtención, evento, misión) [M]
+- [x] Toasts con icono y SFX por tipo (obtención, evento, misión) [M]
 - [ ] Feedback visual de colocación, cosecha y compra (Tween 120 ms) [M]
 - [ ] Vibración háptica leve opcional en gamepad (M57, ajustable en M58) [M]
 - [ ] Ajuste global del feedback (volumen UI en M91, háptica en M58) [S]
@@ -111,12 +111,12 @@
 
 ## I. ThemeUx y consistencia cozy (10)
 
-- [ ] Crear theme_ux.tres con paleta pastel (fondo arena, acento ocre, texto marrón) [S]
-- [ ] Crear style_factory con panel_rounded, button_cozy y focus_box [S]
+- [x] Crear theme_ux.tres con paleta pastel (fondo arena, acento ocre, texto marrón) [S]
+- [x] Crear style_factory con panel_rounded, button_cozy y focus_box [S]
 - [ ] Usar Nunito para cuerpo y Fredoka One para títulos (M88) [S]
-- [ ] Jerarquía tipográfica H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10 [S]
-- [ ] StyleBoxFlat redondeado (radius 12-16) en paneles y botones [S]
-- [ ] Estados hover, pressed, disabled y focus diferenciados por forma y color [S]
+- [x] Jerarquía tipográfica H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10 [S]
+- [x] StyleBoxFlat redondeado (radius 12-16) en paneles y botones [S]
+- [x] Estados hover, pressed, disabled y focus diferenciados por forma y color [S]
 - [ ] Aplicar ThemeUx como tema global en runtime [M]
 - [ ] Verificar legibilidad AA en todas las combinaciones de color [M]
 - [ ] Verificar coherencia visual entre todas las capas (un solo lenguaje) [M]
@@ -178,16 +178,16 @@
 
 ## N. Documentación, QA y cierre (10)
 
-- [ ] 01-Requerimientos creado y firmado [S]
-- [ ] 02-Analisis creado y firmado (alternativas y decisiones) [S]
-- [ ] 03-Diseno creado y firmado (arquitectura, flujos, contratos API) [S]
-- [ ] 04-Codigo creado y firmado (rutas, firmas clave, logs) [S]
-- [ ] 05-Checklist creado y firmado (este archivo) [S]
-- [ ] Plan-actual copiado idéntico desde plan-inicial [S]
+- [x] 01-Requerimientos creado y firmado [S]
+- [x] 02-Analisis creado y firmado (alternativas y decisiones) [S]
+- [x] 03-Diseno creado y firmado (arquitectura, flujos, contratos API) [S]
+- [x] 04-Codigo creado y firmado (rutas, firmas clave, logs) [S]
+- [x] 05-Checklist creado y firmado (este archivo) [S]
+- [x] Plan-actual copiado idéntico desde plan-inicial [S]
 - [ ] Plan de testings sugerido: navegación por 3 métodos, edge cases y rendimiento [M]
-- [ ] Módulo marcado delegable para implementación (tras M07, M11 y M57) [S]
+- [x] Módulo marcado delegable para implementación (tras M07, M11 y M57) [S]
 - [ ] Acoplamiento verificado: gameplay, mundo y AI no importan res://ui [M]
-- [ ] Checklist completo con mas de 110 items [S]
+- [x] Checklist completo con mas de 110 items [S]
 
 ## Dependencia: Visión del Agente (M154)
 

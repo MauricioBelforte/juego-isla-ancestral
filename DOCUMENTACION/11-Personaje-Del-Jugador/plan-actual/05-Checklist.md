@@ -161,3 +161,5 @@
 
 **Totales:** 121 ítems · Completados: 121 · Pendientes: 0 · Not resueltos: 0.
 **Nota:** la sensación real de movimiento (salto, agua, fatiga) se calibra en el playtest del hito M1. Selección de personaje y terrenos documentados por MiMo V2.5 (OpenCode).
+
+- [x] Salto con ESPACIO y velocidad dev (viewer dinamico) [S] (2026-08-29)

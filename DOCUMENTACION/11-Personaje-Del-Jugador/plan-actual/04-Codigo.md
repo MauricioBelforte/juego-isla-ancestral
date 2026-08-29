@@ -74,3 +74,11 @@ data/player/terrain_modifiers.tres      → modificadores de velocidad por terre
 - El sistema de selección de personaje es puramente visual: no agregar stats diferentes.
 - Los modificadores de terreno son suaves (+5-15%): nunca bloquear movimiento completo.
 - Conectar con M155 para equipamiento y M156 para detección de terreno.
+
+
+## Notas del Agente (2026-08-29 — Hy3/Kilo): salto + velocidad dev
+
+- Salto con ESPACIO: velocity.y = 7.0 + _on_ground = false (gravity 20 => ~1.2 bloques)
+- Velocidad dev 25: la escena Player.tscn PISA el @export move_speed (5.0) — los cambios
+  en el script no aplicaban (40/120/300/2000/100 ignorados). Fix: forzar en _ready.
+- Sub-stepping de get_motion RECHAZADO (1 FPS con velocidad 2000) — no repetir.

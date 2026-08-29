@@ -83,3 +83,9 @@ data/generation/*.tres               → knobs
 - M1 debe validar el determinismo con el test A (3 ordenes de regen → mismos bytes).
 - Respetar los diffs anclados en el regen (nunca regenerar narrativa).
 - Nunca colocar loot aleatorio en el generador: el contenido vive en GameState (M59).
+
+## Notas del Agente (2026-08-29 — Hy3/Kilo): biomas con get_block_at ampliado
+
+- get_block_at ahora calcula dist (distancia normalizada al centro) para elegir
+  SHALLOW_WATER (bloque 30, nuevo — turquesa pisable) en la banda 0.94-0.98
+- El perfil de aguas: agua clara pisable (94-98%) y profunda (98-100%)

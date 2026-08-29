@@ -59,3 +59,8 @@ data/camera/camera_settings.tres       → sensibilidad, distancias, fov
 - La cámara NUNCA atraviesa bloques (hash de colisión siempre).
 - La dirección de cámara = dirección del personaje (reducir orbitas libres).
 - Minimapa (M) y tercera persona, jamás FPS: mantener coherencia cozy.
+
+## Notas del Agente (2026-08-29 — Hy3/Kilo): viewer y camara
+
+- El VoxelViewer ahora SIGUE al jugador (main_island._process) — sin esto el borde del
+  mundo se ve CUADRADO (10.1 de la guia Godot). La camara no cambio.

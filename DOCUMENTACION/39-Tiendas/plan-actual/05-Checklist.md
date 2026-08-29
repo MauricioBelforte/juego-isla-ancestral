@@ -90,7 +90,7 @@
 
 - [ ] RF4: definir dias_abierto, hora_apertura y hora_cierre en ShopDefinition [M]
 - [ ] RF5: definir dias_descanso como días cerrados explícitos por tienda [M]
-- [ ] Implementar esta_abierta como función pura (día M29 + hora M30 + rangos) [M]
+- [x] Implementar esta_abierta como función pura (día M29 + hora M30 + rangos) [M] (implementado: ShopManager.esta_abierta consulta M29 TimeCalendar con fallback a M30 GameClock, log 192)
 - [ ] Sin estado interno booleano de apertura (D4: consulta, no flag) [M]
 - [ ] Emitir tienda_cerrada con próxima apertura para el cartel de la UI [M]
 - [ ] Probar borde de hora exacta: apertura a las 09:00 incluida, cierre a las 17:00 excluido [M]
@@ -188,7 +188,7 @@
 - [ ] Consumir nuevo_dia_laborable para restock y evaluación de mercaderes [C]
 - [ ] Consumir estacion_cambio para rotación estacional [M]
 - [ ] Recibir PRNG del día desde M29 para StockGenerator [M]
-- [ ] Consultar día y hora actuales a M29/M30 para esta_abierta [M]
+- [x] Consultar día y hora actuales a M29/M30 para esta_abierta [M] (implementado, log 192)
 - [ ] Días de la semana 1-7 consistentes con el calendario de M29 [S]
 - [ ] Sin estados de apertura manuales que puedan desincronizar (D4) [M]
 - [ ] Recuperación de días perdidos al cargar partidas viejas [M]
