@@ -8,7 +8,7 @@ extends RefCounted
 var seed_value: int = 42
 
 ## Tamaño de la isla en voxels
-var island_radius: int = 64
+var island_radius: int = 640
 
 ## Altura máxima de la isla
 var max_height: int = 40
@@ -84,8 +84,10 @@ func get_height(x: int, z: int) -> int:
 	# Ruido de terreno para detalles
 	var terrain_noise := _terrain_noise.get_noise_2d(float(x), float(z))
 
-	# Altura final: forma * max_height + detalles, con piso minimo de 8
+	# Altura final: forma * max_height + detalles, con piso minimo de 8.
+	# Tope de 14: la isla es una MESETA grande (sin montana central que tape la vista).
 	var height := int(maxf(island_shape * max_height, 8.0) + terrain_noise * 5)
+	height = mini(height, 14)
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)

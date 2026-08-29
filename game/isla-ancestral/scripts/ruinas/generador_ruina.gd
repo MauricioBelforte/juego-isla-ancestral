@@ -21,7 +21,7 @@ var _puerta: PuzzlePuerta = null
 var _placa: Area3D = null
 var _sello_pos: Array = []
 
-@export var base: Vector3 = Vector3(24, 9, 66)
+@export var base: Vector3 = Vector3(660, 9, 660)
 
 func _ready() -> void:
 	_terreno = _buscar_terreno()
@@ -31,7 +31,7 @@ func _ready() -> void:
 	_esperar_terreno()
 
 func _esperar_terreno() -> void:
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(6.0).timeout
 	_iniciar_ruina()
 
 func _iniciar_ruina() -> void:

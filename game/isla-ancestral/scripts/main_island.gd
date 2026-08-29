@@ -77,7 +77,7 @@ func _setup_terrain() -> void:
 	# Generador de isla con biomas (M09/M10)
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
-	generator.island_radius = 64
+	generator.island_radius = 640
 	generator.max_height = 40
 	terrain.generator = generator
 	
@@ -85,7 +85,10 @@ func _setup_terrain() -> void:
 	# nunca en el agua del océano que está a nivel de mar)
 	var player = get_node_or_null("Player")
 	if player:
-		player.global_position = Vector3(20, 30, 64)
+		player.global_position = Vector3(640, 16, 640)
+	var viewer = get_node_or_null("VoxelViewer")
+	if viewer:
+		viewer.global_position = Vector3(640, 30, 640)
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
 
