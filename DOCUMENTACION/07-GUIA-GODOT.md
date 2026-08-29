@@ -1128,3 +1128,56 @@ var block_id: int = int(vt.get_voxel(pos))
 | Fecha | Modelo | Plataforma | Cambios |
 |-------|--------|------------|---------|
 | 2026-08-28 | Hy3 | Kilo | Agregada §9.40 (VoxelTerrain sin get_voxel → VoxelTool.get_voxel + diagnóstico por get_method_list). M13 Fase 3 cerrada |
+
+
+---
+
+
+## 10. Mundo voxel: errores y aprendizajes (2026-08-29 — Hy3/Kilo, criterio interno para islas nuevas)
+
+> Fecha: 2026-08-29. Agente: Hy3 (Kilo). Referencia: main_island.gd + island_generator + world_generator.
+
+### 10.1 El VoxelViewer DEBE seguir al jugador
+
+**Sintoma:** el borde del mundo se ve CUADRADO (la orilla corta en línea recta).
+**Causa:** el VoxelViewer quedaba fijo en el centro de la isla; los chunks solo se generan en un cuadrado alrededor del viewer.
+**Solucion:** en `_process` de la escena: `viewer.global_position = jugador.global_position`. Los chunks se generan alrededor mientras caminas.
+**Checklist para islas nuevas:** una vez creado un VoxelTerrain + VoxelViewer, sempre conectar el seguimiento. Sin esto el mundo "se corta".
+
+### 10.2 El generador debe cubrir SOLO hasta el 98% y caer a 0
+
+**Sintoma:** el "agua" no aparece nunca (el mar faltaba).
+**Causa:** el get_height del generador nunca bajaba a 0; water_level llena de agua solo lo que esta bajo el nivel, pero el terreno exterior al 100% del radio no se generaba con altura 0.
+**Solucion (perfil plato):** arena plana (altura 3) hasta el 98% del radio; del 98% al 100% `height = 0` (ahi el water_level pone AGUA).
+**Formula:** `if dist <= 0.98: height = 3 + ruido_suave else: height = 0` — un "plato" circular con mar alrededor.
+
+### 10.3 Los bloques de mundo no se meshean sin el mesh de la library alineada
+
+**Sintoma:** bloques coloreados verde/crema pero terrenos "viejos" al cambiar el perfil (cubos de ruina de perfil anterior.
+**Causa:** las ruinas/estructuras guardan posiciones voxel calculadas con un perfil distinto; al regenerar el mundo con otro perfil quedan flotando.
+
+### 10.4 Orden de capas: generar primero, escribir despues
+
+**Sintoma:** las ruinas del chozavil "no se veian" (enterradas) con el perfil viejo.
+**Causa:** se construian a Y fija con el generador que aun no habia generado los chunks; el generador posterior pisaba los edit.
+**Solucion:** construir sobre altura real (get_height del generador) y esperar que el chunk exista (timer / señal) ANTES de escribir con do_point.
+
+### 10.5 Posición del spawn
+
+**Sintoma:** el personaje nacía bajo la tierra o flotando en el vacio.
+**Causa:** posicion fija (y=16 o y=60) que no coincide con la altura del terreno en ese (x,z).
+**Solucion:** calcular la altura real del generador al arrancar: `player.global_position = Vector3(x, get_height(x, z) + 3, z)`.
+
+### 10.6 Saltar: FORMA CORRECTA con VoxelBoxMover
+
+**Formula:** `if _on_ground and Input.is_key_pressed(KEY_SPACE): velocity.y = 7.0; _on_ground = false`
+**Por que 7.0:** con gravity=20, el salto a 4.5 apenas levantaba 0.5 bloques; 7.0 sube ~1.2 bloques.
+**Clave:** al saltar, poner `_on_ground = false` o la gravedad no lo reconoce y queda pegado.
+
+### 10.7 Regla de oro para islas nuevas
+
+1. VoxelViewer **siempre** sigue al jugador (10.1).
+2. Perfil: `dist <= 0.98` = terreno, `> 0.98` = 0 (mar) (10.2).
+3. Construir estructuras sobre get_height real, no Y fija (10.5).
+4. Salto 7.0 + `_on_ground = false` (10.6).
+5. Estructuras perfil-dependientes: al cambiar el perfil, regenerarlas (10.3).
