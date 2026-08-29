@@ -23,7 +23,7 @@
 | M11 Personaje del Jugador | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | CharacterBody3D funcional | WASD + gravedad + colision suelo + pivot camara + interaccion E/Q + movimiento relativo a camara | `scripts/player/player.gd` |
 | M12 Camara | ✅ Completado | MiMo V2.5 (OpenCode) | F3 | V2 | Camera3D + rotacion + zoom + colision + GameSettings | Rotacion mouse, zoom scroll, colision terreno, sensibilidad configurable | `scripts/follow_camera.gd` |
 | M53 UI/UX | 🔵 En curso | MiMo V2.5 (OpenCode) | F6 | V2 | Infraestructura core UI creada | UIManager, UILayer, MenuNavigator, HUDScreen, TooltipService, NotificationService, ThemeUx | `scripts/ui/core/`, `scripts/ui/hud/`, `scripts/ui/services/`, `scripts/ui/theme/` |
-| M112 Testing Automático | 🔵 En curso | ox-alpha (Cline) | F0/transversal | V0 | M111 ✅ | Framework GdUnit4 v6.2.1 + 14 test files (160 tests), cobertura, CI | `res://tests/`, `res://addons/gdunit4/`, `.github/workflows/testing.yml`, `tests/gdunit_coverage.json` |
+| M112 Testing Automático | ✅ Completado | ox-alpha (Cline) | F0/transversal | V0 | M111 ✅ | Framework GdUnit4 v6.2.1 + 14 test files (187 tests), cobertura, CI, test_runner.tscn | `res://tests/`, `res://addons/gdunit4/`, `.github/workflows/testing.yml`, `tests/gdunit_coverage.json`, `scenes/test_runner.tscn` | 2026-08-29
 | M133 Gestión del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | Protocolo §21 operativo + scripts §21.9 disponibles | Entregables operativos de gestión (README, guia-hitos, guia-sprints, flujo-multiagente, ADRs, actas, reportes) verificados con scripts; 127/127; log 219. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/133-Gestion-Del-Proyecto/` |
 | M134 Presupuesto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ (gestión operativa); política de costo cero | Presupuesto operativo implementado en `operativa/` (desglose, control, proyecciones, dashboard, plantillas); 100/100; log 221. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8) | `DOCUMENTACION/134-Presupuesto/` |
 | M135 Riesgos del Proyecto | ✅ COMPLETADO | GLM (Kilo) | F0/transversal | V0 | M133 ✅ + M134 ✅ | RISK-REGISTER.md (16 entradas + matriz 5×5) + GUIA-REVISION-TRIMESTRAL.md; 134/134; log 197. ✅ Verificado por Hy3 2026-08-28 (QA cruzado §21.8). Pendiente 1ª revisión formal (fundador) | `DOCUMENTACION/135-Riesgos-Del-Proyecto/` |
@@ -130,6 +130,7 @@ La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marc
 | 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
 | 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
 | 21 | M24 Templos y Puzzles | 5 | V2 | 🟡 Liberado (nucleo framework) | Hy3 (Kilo) | M13 ✅ | Framework emisor-receptor + validacion de no-arbitrariedad + test 0 fallos; puzzles jugables/familias/ayuda pendientes | 2026-08-29 02:20 |
+| 22 | M25 Ruinas | 3 | V2 | 🔵 En curso | Hy3 (Kilo) | M24 ✅ | Estructura pequeña y legible + captura in-engine | 2026-08-29 03:45 |
 | 20 | M04+M05+M07 Cierre Fase 1 | 3-5 | V0/V1 | 🟡 Liberado (núcleo F1 verificado) | Hy3 (Kilo) | — | Puerta F1 cerrada: Input Map/capas física + registro.gd + verificar_arquitectura.gd + prueba_arquitectura.tscn SMOKE OK; auditoría completa de los 3 checklists pendiente | 2026-08-29 01:20 |
 | 19 | M138 Vertical Slice | 5 | V2 | Recorrido visual completo | No; requiere F4 |
 
@@ -500,7 +501,8 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | — | F3 + M14/M15/M59 | GO/NO-GO | — |
 | 14 | M61 Rendimiento | 5 | V0 | 🟢 Investigable desde M08 | — | M08 | Presupuesto medido | — |
 | 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
-| — | M111 Código de Calidad | 2 | V0 | 🔵 En curso | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas | 2026-08-28 |
+| — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
+| — | M112 Testing Automático | 3 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M111 ✅ | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
 
 ### Bloque `Reserva actual` obligatorio en cada checklist de módulo
 

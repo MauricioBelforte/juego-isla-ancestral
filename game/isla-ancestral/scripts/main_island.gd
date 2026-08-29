@@ -11,7 +11,13 @@ var time := 0.0
 func _ready():
 	_setup_terrain()
 	_setup_player_visual()
+	_crear_ruina()
 	print("Isla Ancestral — Isla Raíz")
+
+func _crear_ruina() -> void:
+	var ruina := RuinaChozavil.new()
+	ruina.name = "RuinaChozavil"
+	add_child(ruina)
 
 func _setup_terrain() -> void:
 	if not terrain:
