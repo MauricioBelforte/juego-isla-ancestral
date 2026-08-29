@@ -5,7 +5,7 @@ extends CharacterBody3D
 ## + Edición de bloques con VoxelTool (raycast + break/place)
 ## + M13: ToolController para herramientas con stats y durabilidad
 
-@export var move_speed: float = 5.0
+@export var move_speed: float = 100.0  # DEV: 25 velocidad de desarrollo; valor de juego: 5.0
 @export var gravity: float = 20.0
 @export var jump_force: float = 8.0
 @export var edit_distance: float = 8.0  ## Alcance máximo para romper/colocar bloques
@@ -41,6 +41,8 @@ var _inventario: Node = null
 var _item_database: Node = null
 
 func _ready() -> void:
+	move_speed = 25.0  # DEV: velocidad de desarrollo (la escena player.tscn sobrescribe el @export con 5.0)
+	print("[DEV] move_speed=", move_speed)
 	add_to_group("player")
 	_inventario = get_node_or_null("/root/Inventario")
 	_item_database = get_node_or_null("/root/ItemDatabase")
