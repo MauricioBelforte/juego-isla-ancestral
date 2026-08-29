@@ -120,6 +120,41 @@ func entregar_regalo(vecino_id: String, objeto_id: String) -> void:
 
 ## ── Utilidades ─────────────────────────────────────────
 
+## Obtiene la altura del suelo en una posición XZ usando el generador de mundo.
+## Retorna la coordenada Y de la superficie, o -1.0 si no encontró nada.
+func get_ground_height(xz_pos: Vector2) -> float:
+	var generator_script = load("res://scripts/world/island_generator.gd")
+	if generator_script:
+		var gen = generator_script.new(null, 42)
+		gen.island_radius = 64
+		gen.max_height = 40
+		var h: int = gen.get_height(int(xz_pos.x), int(xz_pos.y))
+		return float(h) if h > 0 else -1.0
+	return -1.0
+
+
+## Posiciona un nodo sobre el terreno en la posición XZ dada.
+## Si no encuentra suelo, deja la posición actual.
+func colocar_sobre_terreno(nodo: Node3D, xz_pos: Vector2) -> void:
+	var h: float = get_ground_height(xz_pos)
+	if h >= 0.0:
+		nodo.global_position = Vector3(xz_pos.x, h, xz_pos.y)
+
+
+func _obtener_terrain() -> VoxelTerrain:
+	var root = get_tree().current_scene
+	if root:
+		var t = root.get_node_or_null("VoxelTerrain")
+		if t is VoxelTerrain:
+			return t
+	# Fallback: buscar desde la raíz del árbol
+	if get_tree().root:
+		var t = get_tree().root.get_node_or_null("Main/VoxelTerrain")
+		if t is VoxelTerrain:
+			return t
+	return null
+
+
 func _obtener_jugador() -> Node:
 	var players: Array[Node] = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:

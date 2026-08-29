@@ -37,6 +37,9 @@ func _ready() -> void:
 	_crear_indicador()
 	if perfil:
 		_aplicar_perfil()
+	# Snap al terreno: buscar la altura real del suelo en mi posición XZ
+	# call_deferred porque current_scene no está listo durante _ready()
+	_snap_to_ground.call_deferred()
 	print("[Villager] %s creado (especie=%s)" % [perfil.nombre if perfil else "?", perfil.especie if perfil else "?"])
 
 
@@ -75,7 +78,7 @@ func _crear_visuales() -> void:
 	# Label del nombre
 	_label_nombre = Label3D.new()
 	_label_nombre.text = perfil.nombre if perfil else "Vecino"
-	_label_nombre.font_size = 14
+	_label_nombre.font_size = 22
 	_label_nombre.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_label_nombre.position.y = 2.0
 	_label_nombre.modulate = Color(1, 1, 1, 0.9)
@@ -121,6 +124,24 @@ func _crear_indicador() -> void:
 	_indicador.add_child(label)
 
 	add_child(_indicador)
+
+
+## ── Snap al terreno ───────────────────────────────────
+
+func _snap_to_ground() -> void:
+	# Usar el generador de mundo directamente (determinista, no necesita chunks)
+	var generator_script = load("res://scripts/world/island_generator.gd")
+	if generator_script:
+		var gen = generator_script.new(null, 42)  # seed=42, same as main_island
+		gen.island_radius = 64
+		gen.max_height = 40
+		var h: int = gen.get_height(int(global_position.x), int(global_position.z))
+		if h > 0:
+			global_position.y = float(h) + 0.5  # +0.5 para estar sobre la superficie
+			print("[Villager] %s snap al terreno en Y=%.1f (height=%d)" % [name, global_position.y, h])
+			return
+	# Fallback: mantener posición actual
+	print("[Villager] %s no pudo calcular altura, manteniendo Y=%.1f" % [name, global_position.y])
 
 
 ## ── Aplicar datos del perfil a los visuales ────────────
