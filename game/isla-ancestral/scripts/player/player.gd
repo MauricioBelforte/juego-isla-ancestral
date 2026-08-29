@@ -223,6 +223,11 @@ func _physics_process(delta: float) -> void:
 				_place_block()
 			_q_prev_mano = q_presionado
 	
+	# Salto (ESPACIO) — solo cuando hay suelo
+	if _on_ground and Input.is_key_pressed(KEY_SPACE):
+		velocity.y = 7.0
+		_on_ground = false
+
 	# Gravedad (solo si no hay suelo)
 	if not _on_ground:
 		velocity.y -= gravity * delta

@@ -82,20 +82,26 @@ func get_height(x: int, z: int) -> int:
 	# Ruido de terreno para detalles
 	var terrain_noise := _terrain_noise.get_noise_2d(float(x), float(z))
 
-	# Ruido de montañas a baja frecuencia: picos dispersos en la meseta (hasta ~35)
+	# Ruido de terreno para el detalle de la montaña central
 	var mountain_noise := _terrain_noise.get_noise_2d(float(x) / 12.0, float(z) / 12.0)
+	var height := 0
 	
-	# Altura base: meseta de pasto (8-14) + montañas donde el ruido sube
-	var height := int(maxf(island_shape * max_height, 8.0) + terrain_noise * 5)
-	if mountain_noise > 0.35:
-		height += int((mountain_noise - 0.35) * 30.0)
-	
-	# Transicion al mar: desde el 60% del radio, la meseta baja suavemente a 0
-	# (playa de arena -> oceano). Sin paredes de tierra marron en el horizonte.
-	if dist > 0.6:
-		var fade := maxf(0.0, 1.0 - (dist - 0.6) / 0.4)
-		fade = fade * fade
-		height = int(height * fade)
+	# PERFIL FINAL (spec del usuario):
+	# - ANILLO EXTERIOR PLANO DE ARENA: del 35% al 98% del radio, terreno plano
+	#   a altura 3 (bioma beach => SAND, playa que rodea toda la isla).
+	# - MONTAÑA PIRAMIDAL ADENTRO: dentro del 35%, la altura sube desde 3 en
+	#   la base hasta max_height en el centro, en forma conica (piramide).
+	# - AGUA: en el ultimo anillo (98-100%), el terreno cae a 0 y el water_level
+	#   llena de oceano alrededor del anillo de arena.
+	if dist > 0.35:
+		height = 3
+	else:
+		var t_m := 1.0 - dist / 0.35
+		height = int(t_m * (max_height - 3.0)) + 3
+		if mountain_noise > 0.3:
+			height += int((mountain_noise - 0.3) * 20.0)
+	if dist > 0.98:
+		height = 0
 	return maxi(height, 0)
 
 ## Obtiene el tipo de bloque para una posición (x, y, z)
