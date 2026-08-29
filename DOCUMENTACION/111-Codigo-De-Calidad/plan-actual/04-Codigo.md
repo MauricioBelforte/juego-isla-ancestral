@@ -364,3 +364,14 @@ enum Priority {
 
 ### Estado
 El modulo quedo completado por ox-alpha (Cline). La configuracion del linter ([gdscript] en project.godot) esta sin commitear en el working tree y viajara junto al Input Map de M04 en el proximo push.
+
+
+## 12. Correccion del tool (2026-08-29 — Hy3/Kilo)
+
+El CodeQualityCheck NO compilaba en este proyecto (sintaxis invalida): se corrigieron 4 bugs de GDScript
+que este proyecto rechaza con warnings-as-errores.
+- var local \class_name\ (palabra reservada) -> \class_nombre\.
+- Iteracion de Dictionary con dos variables (\or a, b in dict\) -> clave + acceso por indice.
+- \or i, x in enumerate(arr)\ (destructuring no soportado aqui) -> \or i in range(arr.size())\.
+- Slice de String (\s[6:]\) -> \s.substr(6)\. Y \String.is_upper()\ inexistente -> comparacion to_upper/to_lower.
+El script ahora compila sin errores. Verificado con godot --headless --check-only.
