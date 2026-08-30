@@ -1312,6 +1312,14 @@ func _limpiar_opciones() -> void:
 
 **Fecha:** 2026-08-30 · **Agente:** MiMo V2.5 (OpenCode)
 
+**Caso adicional (2026-08-30, Deepseek V4 Flash / Kilo — Log 268):** la regla fue VIOLADA una vez
+más por el mismo patrón: se montó un `UIRoot` (CanvasLayer 100) con HUDScreen + widgets por código
+(ClockWidget/SeasonWidget/ResourceCounter/StatusBar) sobre el HUD oficial de la escena, causando
+superposición de nuevo. **Refuerzo obligatorio:** leer §9.47 Y los últimos commits de UI ANTES de
+agregar cualquier nodo UI (`git log --oneline -- scripts/ui/ game/isla-ancestral/scenes/`).
+El UIRoot del M53 ahora SOLO monta capas MODALES (Dialog/Pause/Menus/Confirm); el HUD vive
+únicamente en el CanvasLayer "UI" de la escena con sus widgets oficiales.
+
 ---
 
 ## Histórico de Versiones (adenda 2026-08-28)
