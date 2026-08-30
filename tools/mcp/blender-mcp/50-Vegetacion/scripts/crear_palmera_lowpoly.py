@@ -118,6 +118,20 @@ for i in range(K):
     pitch = 8.0 + (i % 3) * 6.0
     crear_fronda(i, yaw, pitch)
 
+# ---------- 6b) Autocorreccion de apoyo del TRONCO (E-12) ----------
+# El tronco es el unico elemento que toca la arena; se baja hasta que su z_min
+# mundial sea 0.045 (5 mm empotrado en la arena). NO movemos corona/frondas:
+# ya estan ancladas a la copa del tronco via top_x/top_z, y la corona/frondas
+# son "del tronco" en composicion.
+bpy.context.view_layer.update()
+tronco = bpy.data.objects.get('SM_Tronco')
+if tronco is not None:
+    z_min = min((tronco.matrix_world @ Vector(c)).z for c in tronco.bound_box)
+    delta = 0.045 - z_min
+    tronco.location.z += delta
+    bpy.context.view_layer.update()
+    print('TRONCO asento: z_min %.3f -> 0.045 (delta %+.3f)' % (z_min, delta))
+
 # ---------- 7) Cocos ----------
 for k, (dx, dy) in enumerate([(0.26, 0.12), (-0.14, 0.26), (-0.12, -0.24)]):
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=0.17,
@@ -133,7 +147,7 @@ sol.name = 'LGT_Sol'
 sol.data.energy = 4.0
 sol.rotation_euler = Euler((radians(50), radians(8), radians(30)), 'XYZ')
 
-mundo = bpy.data.worlds['World']
+mundo = bpy.data.worlds.get('World') or bpy.data.worlds.new('World')
 mundo.use_nodes = True
 nodo_bg = mundo.node_tree.nodes.get('Background')
 nodo_bg.inputs[0].default_value = (0.58, 0.79, 0.95, 1.0)
@@ -163,8 +177,11 @@ for area in bpy.context.screen.areas:
                     bpy.ops.view3d.view_camera()
 
 # ---------- 11) Guardar .blend ----------
-ruta_blend = os.path.abspath(os.path.join(
-    os.getcwd(), 'tools/mcp/blender-mcp/trabajos/palmera_lowpoly.blend'))
+# E-04: NO usar os.getcwd() — el cwd de Blender es su carpeta de instalación.
+# Ruta absoluta al módulo dentro del proyecto:
+RAIZ = r'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral'
+ruta_blend = os.path.join(RAIZ, 'tools', 'mcp', 'blender-mcp', '50-Vegetacion',
+                          'palmera_lowpoly.blend')
 os.makedirs(os.path.dirname(ruta_blend), exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=ruta_blend)
 

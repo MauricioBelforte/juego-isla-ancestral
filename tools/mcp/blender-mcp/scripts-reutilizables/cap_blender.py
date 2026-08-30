@@ -37,6 +37,22 @@ def main():
         r = blender_command('execute_code', {'code': code})
         print('blend:', json.dumps(r, ensure_ascii=False)[:300])
 
+    # E-06: el viewport puede estar en cualquier vista (no en la cámara de la
+    # escena). Antes de capturar, forzar TODOS los view3d a vista de cámara y
+    # shading MATERIAL, así la captura siempre muestra el encuadre autoral.
+    code_view = (
+        "import bpy\n"
+        "for area in bpy.context.screen.areas:\n"
+        "    if area.type == 'VIEW_3D':\n"
+        "        for space in area.spaces:\n"
+        "            if space.type == 'VIEW_3D':\n"
+        "                space.region_3d.view_perspective = 'CAMERA'\n"
+        "                space.shading.type = 'MATERIAL'\n"
+        "                space.shading.use_scene_lights = True\n"
+        "                space.shading.use_scene_world = True\n"
+    )
+    blender_command('execute_code', {'code': code_view})
+
     r = blender_command('get_viewport_screenshot',
                         {'filepath': ruta_cap, 'max_size': 1200, 'format': 'png'})
     print('captura:', json.dumps(r, ensure_ascii=False)[:500])
