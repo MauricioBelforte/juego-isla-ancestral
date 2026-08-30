@@ -8,14 +8,14 @@
 
 ## A. Requisitos del módulo (plan maestro sección 15) (25)
 
-- [ ] Diseñar banco de trabajo: mesa de trabajo como estación base del pueblo [S]
-- [ ] Diseñar estaciones de crafting: mesa de trabajo, fogata y telar con identidad propia [S]
-- [ ] Diseñar recetas: modelo Resource con materiales, cantidades y resultado [S]
-- [ ] Definir categorías: herramientas, estructura, textiles, cocina, decoracion, ancestral, oculta [S]
-- [ ] Definir niveles de recetas: escala 1 a 5 ligada a progreso [S]
-- [ ] Definir materiales: referencia por item_id al catálogo M15 [S]
-- [ ] Definir cantidades: coste verificable y balanceado por nivel [S]
-- [ ] Definir desbloqueos: conocimiento por experimentación y compra a NPC [S]
+- [x] Diseñar banco de trabajo: mesa de trabajo como estación base del pueblo [S]
+- [x] Diseñar estaciones de crafting: mesa de trabajo, fogata y telar con identidad propia [S]
+- [x] Diseñar recetas: modelo Resource con materiales, cantidades y resultado [S]
+- [x] Definir categorías: herramientas, estructura, textiles, cocina, decoracion, ancestral, oculta [S]
+- [x] Definir niveles de recetas: escala 1 a 5 ligada a progreso [S]
+- [x] Definir materiales: referencia por item_id al catálogo M15 [S]
+- [x] Definir cantidades: coste verificable y balanceado por nivel [S]
+- [x] Definir desbloqueos: conocimiento por experimentación y compra a NPC [S]
 - [ ] Definir recetas secretas: combinaciones poco obvias con feedback dorado [S]
 - [ ] Definir recetas ancestrales: ligadas a deidades, ofrendas y tienda ancestral [S]
 - [ ] Definir recetas estacionales: filtradas por temporada M29, conocimiento persistente [S]

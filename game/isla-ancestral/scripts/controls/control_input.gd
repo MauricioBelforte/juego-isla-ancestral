@@ -241,7 +241,7 @@ func _guardar_config() -> void:
 	if FileAccess.file_exists(RUTA_CONFIG):
 		DirAccess.rename_absolute(RUTA_CONFIG, RUTA_BACKUP)
 	# Rename atomico
-	var err := DirAccess.rename_absolute(RUTA_TMP, RUTA_CONFIG)
+	var err: Error = DirAccess.rename_absolute(RUTA_TMP, RUTA_CONFIG)
 	if err != OK:
 		push_warning("[M57] No se pudo renombrar config")
 

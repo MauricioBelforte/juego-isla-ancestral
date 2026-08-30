@@ -1,33 +1,84 @@
 {
 	"schema_version": 1,
 	"recetas": {
-		"herramienta_basica": {
-			"nombre_i18n": "CRAFTING.HERRAMIENTA_BASICA",
-			"coste_recursos": {"madera_roble": 5, "mineral_cobre": 2},
-			"coste_ao": 20,
-			"tiempo_min": 0.5,
-			"resultado": "herramienta_basica"
-		},
-		"pico_cobre": {
-			"nombre_i18n": "CRAFTING.PICO_COBRE",
-			"coste_recursos": {"madera_roble": 3, "mineral_cobre": 4},
-			"coste_ao": 35,
-			"tiempo_min": 1.0,
-			"resultado": "pico_cobre"
-		},
-		"hacha_cobre": {
-			"nombre_i18n": "CRAFTING.HACHA_COBRE",
-			"coste_recursos": {"madera_roble": 4, "mineral_cobre": 3},
-			"coste_ao": 30,
-			"tiempo_min": 1.0,
-			"resultado": "hacha_cobre"
-		},
-		"caja_almacenamiento": {
-			"nombre_i18n": "CRAFTING.CAJA_ALMACENAMIENTO",
+		"rec_mesa_robusta": {
+			"nombre": "Mesa robusta",
+			"categoria": "estructura",
+			"nivel": 1,
+			"estacion": "mesa_trabajo",
+			"origen": "inicial",
 			"coste_recursos": {"madera_roble": 8},
-			"coste_ao": 15,
-			"tiempo_min": 0.5,
-			"resultado": "caja_almacenamiento"
+			"coste_ao": 0,
+			"resultado": "mesa_robusta",
+			"resultado_cantidad": 1
+		},
+		"rec_pico_cobre": {
+			"nombre": "Pico de cobre",
+			"categoria": "herramientas",
+			"nivel": 1,
+			"estacion": "mesa_trabajo",
+			"origen": "inicial",
+			"coste_recursos": {"madera_roble": 3, "mineral_cobre": 4},
+			"coste_ao": 0,
+			"resultado": "pico_cobre",
+			"resultado_cantidad": 1
+		},
+		"rec_hacha_cobre": {
+			"nombre": "Hacha de cobre",
+			"categoria": "herramientas",
+			"nivel": 1,
+			"estacion": "mesa_trabajo",
+			"origen": "inicial",
+			"coste_recursos": {"madera_roble": 4, "mineral_cobre": 3},
+			"coste_ao": 0,
+			"resultado": "hacha_cobre",
+			"resultado_cantidad": 1
+		},
+		"rec_caja_almacenamiento": {
+			"nombre": "Caja de almacenamiento",
+			"categoria": "estructura",
+			"nivel": 1,
+			"estacion": "mesa_trabajo",
+			"origen": "inicial",
+			"coste_recursos": {"madera_roble": 8},
+			"coste_ao": 0,
+			"resultado": "caja_almacenamiento",
+			"resultado_cantidad": 1
+		},
+		"rec_tela_lino": {
+			"nombre": "Tela de lino",
+			"categoria": "textiles",
+			"nivel": 2,
+			"estacion": "telar",
+			"origen": "compra",
+			"precio_pergamino": 25,
+			"coste_recursos": {"fibra_algodon": 4},
+			"coste_ao": 0,
+			"resultado": "tela_lino",
+			"resultado_cantidad": 1
+		},
+		"rec_ensalada_bayas": {
+			"nombre": "Ensalada de bayas",
+			"categoria": "cocina",
+			"nivel": 1,
+			"estacion": "fogata",
+			"origen": "experimentacion",
+			"coste_recursos": {"baya_roja": 3},
+			"coste_ao": 0,
+			"resultado": "ensalada_bayas",
+			"resultado_cantidad": 1
+		},
+		"rec_talisman_ancestral": {
+			"nombre": "Talismán ancestral",
+			"categoria": "ancestral",
+			"nivel": 5,
+			"estacion": "mesa_trabajo",
+			"origen": "experimentacion",
+			"tags": ["ancestral"],
+			"coste_recursos": {"fragmento_ancestral": 1, "piedra_caliza": 5},
+			"coste_ao": 0,
+			"resultado": "talisman_ancestral",
+			"resultado_cantidad": 1
 		}
 	}
 }
