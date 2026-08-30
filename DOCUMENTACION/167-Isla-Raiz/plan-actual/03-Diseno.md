@@ -65,7 +65,7 @@ nodo.global_position = Vector3(x, h + 1, z)       # 1 bloque sobre la superficie
 | Objeto | Coordenada (X, Z) | Altura | Nota |
 |---|---|---|---|
 | Jugador (spawn) | (256, 256) | calculada +3 | Centro de la isla |
-| Catalina (NPC) | (268, 268) | snap Y=7 | Junto al spawn |
+| Catalina (NPC) | (268, 268) | snap Y=24 (montaña) | Sobre la superficie real (TerrainLocator) |
 | Ruina Chozavil | (660, 660) | snap | M25 (nota: radio viejo) |
 
 ## 3. Cámara (follow_camera.gd)

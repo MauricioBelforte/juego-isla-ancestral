@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 04-Codigo.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 04-Codigo.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 ## Archivos involucrados (estado actual de la Isla Raíz)
 

@@ -123,13 +123,13 @@ func entregar_regalo(vecino_id: String, objeto_id: String) -> void:
 ## Obtiene la altura del suelo en una posición XZ usando el generador de mundo.
 ## Retorna la coordenada Y de la superficie, o -1.0 si no encontró nada.
 func get_ground_height(xz_pos: Vector2) -> float:
-	var generator_script = load("res://scripts/world/island_generator.gd")
-	if generator_script:
-		var gen = generator_script.new(null, 42)
-		gen.island_radius = 1024  # DEBE coincidir con el radio de la isla actual
-		gen.max_height = 40
-		var h: int = gen.get_height(int(xz_pos.x), int(xz_pos.y))
-		return float(h) if h > 0 else -1.0
+	# Estrategia anti-flotamiento: usar el TerrainLocator (generador real del mundo),
+	# nunca crear un generador propio con radio hardcodeado.
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator:
+		var h: int = locator.get_height(int(xz_pos.x), int(xz_pos.y))
+		if h >= 0:
+			return float(h)
 	return -1.0
 
 

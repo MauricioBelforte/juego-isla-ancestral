@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 02-Analisis.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 02-Analisis.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 ## Análisis del dominio
 El mundo voxel de Godot (VoxelTools) genera el terreno proceduralmente con un `VoxelGeneratorScript`.

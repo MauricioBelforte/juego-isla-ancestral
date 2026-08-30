@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 05-Checklist.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 05-Checklist.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 > Estados: [x] cumplido · [ ] pendiente · [?] no resuelto. Marcadores: [S] simple, [M] medio, [C] complejo.
 

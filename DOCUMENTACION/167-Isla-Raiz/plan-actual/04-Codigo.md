@@ -1,7 +1,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 
-# 04-Codigo.md — Módulo 167: Registro del Terreno y Posicionamiento
+# 04-Codigo.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
 
 ## Archivos involucrados (estado actual de la Isla Raíz)
 
@@ -82,3 +82,19 @@ nodo.global_position = Vector3(obj_x, h + 1, obj_z)
 - NPC Catalina: a veces flota — el snap crea su propio IslandGenerator y su radio
   debe coincidir con el del mundo (256). El fix es usar el generador real del terrain.
 - Los ítems [ ] del checklist son las validaciones/mantenimiento futuro.
+
+
+## Actualización 2026-08-30 — TerrainLocator (estrategia anti-flotamiento)
+
+Se añadió el autoload `scripts/core/terrain_locator.gd` como ÚNICO punto de verdad del
+posicionamiento sobre el terreno. Todos los objetos lo usan:
+
+```
+scripts/core/terrain_locator.gd   ← autoload: get_height(x,z) + posicionar_sobre_terreno()
+scripts/npc/villager.gd           ← snap con TerrainLocator
+scripts/npc/villager_manager.gd   ← get_ground_height con TerrainLocator
+scripts/ruinas/generador_ruina.gd ← _buscar_altura con TerrainLocator
+scripts/main_island.gd            ← spawn con TerrainLocator
+```
+
+Regla: NUNCA crear `IslandGenerator` propio con radio hardcodeado (causa de flotamiento).

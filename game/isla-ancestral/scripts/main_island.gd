@@ -139,9 +139,10 @@ func _process(delta: float) -> void:
 func _ajustar_spawn_superficie() -> void:
 	# Altura calculada directo del generador (sin teleport de 4s):
 	# el jugador nace ya sobre la superficie real de la columna del spawn
-	var gen = terrain.generator
-	if gen != null and gen.has_method("_get_island_gen"):
-		var altura_spawn: int = int(gen._get_island_gen().get_height(256, 256))
+	# Estrategia anti-flotamiento: usar el TerrainLocator (un solo punto de verdad).
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator:
+		var altura_spawn: int = locator.get_height(256, 256)
 		var player = get_node_or_null("Player")
 		if player:
 			player.global_position = Vector3(256, altura_spawn + 3, 256)

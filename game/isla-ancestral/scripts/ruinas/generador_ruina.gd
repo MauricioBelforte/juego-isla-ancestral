@@ -105,15 +105,13 @@ func _on_placa_entered(body: Node) -> void:
 			print("[M25] Puzzle resuelto: placa pisada -> puerta abierta")
 
 func _buscar_altura(x: int, z: int) -> int:
-	var vt := _terreno.get_voxel_tool()
-	if vt == null:
-		return 9
-	vt.channel = VoxelBuffer.CHANNEL_TYPE
-	for y in range(40, -40, -1):
-		if int(vt.get_voxel(Vector3i(x, y, z))) != B_AIRE:
-			return y
-	return 9
-
+	# Estrategia anti-flotamiento: usar el TerrainLocator (generador real).
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator:
+		var h: int = locator.get_height(x, z)
+		if h >= 0:
+			return h
+	return 2
 func _buscar_terreno() -> VoxelTerrain:
 	var root := get_tree().current_scene
 	if root == null:

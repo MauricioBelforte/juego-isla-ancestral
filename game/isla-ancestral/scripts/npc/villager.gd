@@ -146,14 +146,13 @@ func _crear_indicador() -> void:
 ## ── Snap al terreno ───────────────────────────────────
 
 func _snap_to_ground() -> void:
-	# Usar el generador de mundo directamente (determinista, no necesita chunks)
-	var generator_script = load("res://scripts/world/island_generator.gd")
-	if generator_script:
-		var gen = generator_script.new(null, 42)  # seed=42, same as main_island
-		gen.island_radius = 2048  # DEBE coincidir con el radio de la isla actual (main_island.gd)
-		gen.max_height = 40
-		var h: int = gen.get_height(int(global_position.x), int(global_position.z))
-		if h > 0:
+	# Estrategia anti-flotamiento: usar el TerrainLocator (autoload) que consulta el
+	# generador REAL del mundo. NUNCA crear un IslandGenerator propio (la causa del
+	# flotamiento era un radio hardcodeado distinto al del mundo).
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator:
+		var h: int = locator.get_height(int(global_position.x), int(global_position.z))
+		if h >= 0:
 			global_position.y = float(h) + 1.0
 			print("[Villager] %s snap al terreno en Y=%.1f (height=%d)" % [name, global_position.y, h])
 			return

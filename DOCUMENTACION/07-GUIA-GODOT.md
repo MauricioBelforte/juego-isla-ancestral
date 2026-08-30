@@ -1506,3 +1506,42 @@ El snap de Catalina usa este patrón; al cambiar el radio, actualizar el radio d
   y completa con la config de tu isla. Cada isla = módulo propio.
 - Regla de oro: el centro de la isla es `(island_radius, island_radius)`; posicionar con
   `get_height(x,z)+1`; radio ~256 para isla visible; el snap del NPC usa el MISMO radio.
+
+
+### 10.16 ESTRATEGIA ANTI-FLOTAMIENTO: TerrainLocator (servicio central)
+
+**Problema:** los NPCs flotaban porque cada uno (villager, villager_manager) creaba su
+PROPIO `IslandGenerator` con un `island_radius` hardcodeado distinto al del mundo.
+Con radio equivocado, `get_height` devolvía la altura de una isla distinta → el NPC
+se posicionaba mal (flotaba o se enterraba).
+
+**Solución robusta (implementada 2026-08-30):** un autoload `TerrainLocator`
+(`scripts/core/terrain_locator.gd`) que consulta el generador REAL del mundo.
+
+```gdscript
+# TerrainLocator (autoload) — único punto de verdad del posicionamiento
+func get_height(x: int, z: int) -> int:
+    if _terrain == null or _terrain.generator == null:
+        return -1
+    var gen = _terrain.generator
+    if gen != null and gen.has_method("_get_island_gen"):
+        return int(gen._get_island_gen().get_height(x, z))
+    return -1
+
+func posicionar_sobre_terreno(nodo: Node3D, x: float, z: float) -> bool:
+    var h := get_height(int(x), int(z))
+    if h < 0:
+        return false
+    nodo.global_position = Vector3(x, float(h) + 1.0, z)
+    return true
+```
+
+**Regla:** TODOS los objetos (NPCs, ruinas, estructuras, spawn) USAN TerrainLocator.
+**NUNCA** crear un `IslandGenerator` propio con radio hardcodeado.
+- El snap del villager (`villager.gd`) usa TerrainLocator.
+- El `get_ground_height` del villager_manager usa TerrainLocator.
+- El `_buscar_altura` de la ruina usa TerrainLocator.
+- El spawn del jugador usa TerrainLocator.
+
+**Beneficio:** un solo punto de verdad → ningún NPC puede flotar; si el radio del mundo
+cambia, todos los objetos se adaptan automáticamente.
