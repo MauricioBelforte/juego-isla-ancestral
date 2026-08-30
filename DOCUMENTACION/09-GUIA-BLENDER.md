@@ -241,6 +241,393 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - **Calibración del umbral de poda** (asociado): en `generar_variante.py` se usa `UMBRAL_PODA = 1e-4 m³` (cubo 4.6 cm) — por debajo caen glifos y tirador, NO caen la gema ni las asas.
 - **Fecha:** 2026-08-28
 
+### E-24 — El re-asentado debe medir vértices reales, no las 8 esquinas del AABB
+- **Síntoma:** tras re-asentar una pieza rotada, el conjunto queda flotando a una altura absurda (ej. el Soporte de `palanca_madera` quedó a +0.486 m del suelo cuando el Brazo inclinado se midió desde el AABB).
+- **Causa:** `object.bound_box` devuelve **8 esquinas del AABB en el frame local del objeto** — incluye esquinas donde NO hay geometría real. Si el objeto está inclinado/rotado, la proyección de esas esquinas al world space arrastra el `z_min` a valores irreales (incluso negativos para mallas rotadas hacia abajo).
+- **Solución:** medir el `z_min` recorriendo los **vértices reales** de la malla: `min((o.matrix_world @ v.co).z for v in o.data.vertices)`. Solo caer al AABB si `len(o.data.vertices) == 0` (objetos vacíos / con shape keys).
+- **Helper ya integrado:** la función `zmin_real(o)` de `generar_variante.py` (FASE 3) usa vértices reales; cualquier nuevo script que necesite re-asentar debe reusarla o replicarla.
+- **Caso real:** `palanca_madera` Brazo inclinado 35° → AABB z_min = -0.396 → con la corrección por vértices reales z_min = +0.045 exacto.
+- **Fecha:** 2026-08-29
+
+### E-25 — `bpy.ops.object.modifier_apply` falla por contexto desde el socket MCP
+- **Síntoma:** `bpy.ops.object.modifier_apply.poll() failed, context is incorrect` al aplicar modificadores (`DECIMATE`, `SUBSURF`, `MIRROR`) en scripts enviados por el socket del addon.
+- **Causa:** el `poll()` chequea `bpy.context.active_object` y el override_area/viewport, y desde el socket el contexto es headless y no tiene las áreas de la UI inicializadas.
+- **Solución:** aplicar el modificador evaluando el depsgraph y reasignando la malla resultante:
+  ```python
+  mod = o.modifiers.new('Decimate', 'DECIMATE')
+  mod.ratio = 0.7
+  bpy.context.view_layer.update()
+  dg = bpy.context.evaluated_depsgraph_get()
+  me_eval = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+  mats = [m for m in o.data.materials if m is not None]
+  o.data = me_eval
+  for m in mats: o.data.materials.append(m)
+  o.modifiers.clear()
+  ```
+  Mismo resultado, sin tocar `bpy.ops`. Ya integrado en `generar_variante.py` (FASE 2) y `corregir_asset.py`.
+- **Fecha:** 2026-08-29
+
+### E-26 — `capturar_angulos.py` no abría el `.blend`; renderizaba la escena residual
+- **Síntoma:** las capturas de un asset mostraban piezas que NO correspondían al .blend (mezcla de assets viejos, o el set de captura anterior). El "OBJETOS_ENCUADRADOS" salía bien, pero el frame tenía más cosas.
+- **Causa:** el script asumía que el .blend activo en memoria era el del asset, sin garantía. Si Blender tenía otra escena cargada (de una sesión previa con el archivo aún abierto), la captura salía sobre eso.
+- **Solución doble:**
+  1. Pasar siempre `--blend <ruta>` al script de captura; internamente abrir con `bpy.ops.wm.open_mainfile(filepath=...)` antes de encuadrar.
+  2. Imprimir trazas obligatorias: `ARCHIVO_ABIERTO: <ruta>` y `OBJETOS_ENCUADRADOS: <N>` al inicio. Si no aparecen, el script no abrió el archivo correcto.
+- **Fecha:** 2026-08-29
+
+### E-27 — Sobreescribir `child.matrix_parent_inverse` tras `child.parent = parent` rompe la herencia
+- **Síntoma:** al parentar un objeto hijo, su posición `local.location` se aplica como posición **world directa** en vez de como offset dentro del frame del padre. El hijo aparece en el origen world (o muy lejos) en vez de donde se lo espera.
+- **Causa:** Blender, al asignar `child.parent = parent`, calcula `child.matrix_parent_inverse = parent.matrix_world.inverted()`. Si después sobreescribís esa variable manualmente, anulás la herencia: `child.matrix_world = parent.matrix_world @ child.matrix_parent_inverse @ child.matrix_local` se reduce a `child.matrix_world = child.matrix_local`, así que cualquier `child.location` posterior se interpreta en world space, no en el frame del padre.
+- **Caso GRAVE (M13, 2026-08-29):** si ADEMÁS movés el padre después de emparentar (paso 7 de los scripts de tools, `mango.location.z += delta` para asentar), los hijos NO lo siguen y quedan flotando a la altura anterior. En los .blend del módulo 13 se midió: mango en x=-0.097, cabeza/ataduras/pomo en x=0 → **9-10 cm de separación**, z_min global del source en -0.4629 (46 cm hundido).
+- **Solución:** después de `child.parent = parent`, NO tocar `matrix_parent_inverse`. Para mover el hijo dentro del frame del padre, setear `child.location = (lx, ly, lz)` en coords locales y dejar que Blender mantenga `matrix_parent_inverse` por su cuenta. Y si vas a mover al padre para asentar, dejá que los hijos lo sigan: con la herencia intacta, mover el mango arrastra a todos sus hijos.
+- **Patrón seguro `hijo()`:**
+  ```python
+  def hijo(objeto, padre):
+      bpy.context.view_layer.update()
+      objeto.parent = padre        # Blender calcula matrix_parent_inverse solo
+      return objeto
+  ```
+- **Patrón padre legible:** si además querés que el offset del hijo en el script sea en coords de mundo (no en el frame rotado del padre), mantené al padre con `matrix_world` identidad. Cero rotación + cero traslación inicial = `local == world`. Aplica a los scripts que modelan un mango tendido/vertical sin que el frame del mango influya en los hijos.
+- **Caso real (M166-cuerda):** `cuerda_enrollada` v1: `punta.parent = cabo; punta.matrix_parent_inverse = cabo.matrix_world.inverted(); punta.location = (0, 0, 0.193)` → el cono apareció en el origen. La versión correcta: `punta.parent = cabo; punta.location = (0, 0, 0.34/2 + 0.045/2)` (sin la línea del matrix_parent_inverse).
+- **Caso real (M13, 2026-08-29):** los 3 scripts `crear_{pico_piedra,pico_hierro,antorcha_mano}_lowpoly.py` usaban `hijo()` con el `matrix_parent_inverse = padre.matrix_world.inverted()` y además movían el mango al asentar. Resultado medido: separación 9.3-9.7 cm entre mango y resto, z_min del source -0.4629. v2 reescrito: `hijo()` sin tocar `matrix_parent_inverse`, mango con rotación identidad, y `assert abs(z_final - Z_APOYO) < 1e-4` al final para fallar fuerte si vuelve a fallar.
+- **Diagnóstico rápido:** si un objeto parentado aparece desplazado del padre y no respeta rotaciones/escalas del padre, es E-27. Borrá la línea `child.matrix_parent_inverse = ...` y volvé a setear `location` en local. Si el z_min global del source es muy negativo (-0.4 o peor) y los hijos están sobre z=0, es la misma clase: el padre se movió al asentar y los hijos no lo siguieron.
+- **Fecha:** 2026-08-29 (caso M13 agregado el 2026-08-29 19:36)
+
+### E-28 — El set de captura de un asset "de pared" debe estar ASENTADO en la arena
+- **Síntoma:** en un asset tipo antorcha de pared / cartel colgante / dintel, el operador ve "una placa cuadrada detrás separada flotando en el aire" — pero el asset (sin pared) está bien. La placa está volando 30–50 cm del suelo y a 0.4 m de distancia del panel.
+- **Causa:** los sets de captura referencian superficies (`Set_Pared`, `Set_Techo`, `Set_Suelo_Colgante`) que el script original dejó centradas en su altura nominal, no apoyadas en `z=0`. El panel de referencia queda flotando, y el asset (que sí está apoyado) parece estar "junto a una pared fantasma".
+- **Solución:** cualquier panel de referencia en el set de captura debe **asentarse en la arena con la misma regla que un asset regular**:
+  - `Z_CENTER_PARED = -0.05 + ALTO/2` (base enterrada ~5 cm en la arena, mismo offset que `asentar_en_base.py`).
+  - `Z_BASE_PARED = Z_CENTER - ALTO/2 ≤ 0.045` (verificable con `auditar_apoyos.py`).
+  - Para piezas montadas contra el panel, calcular la posición tangente a la cara frontal:
+    - `Y_CENTER_PARED = offset_negativo` (la cara frontal queda más cerca del origen)
+    - `Y_CENTER_PLACA = (Y_CENTER_PARED + ESP_PARED/2) + ESP_PLACA/2` (cara trasera de la placa = cara frontal del muro)
+    - Luego `X_BRAZO / Z_BRAZO` se calculan en función de `PLACA_FRONT_Y = Y_CENTER_PLACA + ESP_PLACA/2`.
+- **Caso real:** `antorcha_pared` v1: `Set_Pared` centrada en z=1.10, ALTO 1.40 → base a z=0.40 flotando; placa a y=-0.020 cuando la cara frontal del muro estaba en y=-0.425 → 0.42 unidades de aire. v2 corrigió con `PARED_Z_CENTER = -0.05 + 1.40/2 = 0.65` y `PLACA_Y_CENTER = (-0.45 + 0.025) + 0.010 = -0.415`.
+- **Directiva:** cualquier `Set_*` debe pasar `auditar_apoyos.py` con `z_min ≤ 0.05` ANTES de considerarlo válido para captura. Si el set flota, el asset no se puede aprobar visualmente.
+- **Fecha:** 2026-08-29
+
+### E-29 — `--ratio` como escape-valve per-asset para E-23
+- **Síntoma:** un asset con mucha geometría densa (frondas de helechos, ramas de nido, racimos) queda por encima del presupuesto BAJA de 700 tris aún con `DECIMATE_RATIO = 0.7` global.
+- **Causa:** E-23 calibró el ratio 0.7 como el sweet-spot para mallas planas lowpoly (cajas, paneles, aros). Pero para activos con muchas caras pequeñas contiguas (hojas, ramas, palitos), 0.7 sólo elimina un 30 % y el conteo queda alto.
+- **Solución:** `generar_variante.py` ahora acepta `--ratio <float>` por invocación, sobreescribiendo el default SOLO para ese asset. El global sigue siendo 0.7.
+  - Uso: `python generar_variante.py 16-Crafting hacha_piedra_lowpoly --ratio 0.4` → la BAJA sale con 0.4 en vez de 0.7. Verificá visualmente que la silueta se preserva.
+  - Casos calibrados 2026-08-29: `nido_cocos_baja` 970→611 tris con `--ratio 0.4`; `helecho_gigante_baja` 936→650 tris con `--ratio 0.5`. Ambos verificados visualmente.
+- **Regla de uso:** NO subir el global a 0.5 (rompe E-23 en cajas planas). Usar `--ratio` SOLO para activos puntuales con geometría densa y verificar siempre la silueta en la captura BAJA antes de aprobarla.
+- **Fecha:** 2026-08-29
+
+### E-30 — `contact_sheet.py` con glob produce hojas de 1 imagen
+- **Síntoma:** al ejecutar `python contact_sheet.py capturas/*.png hoja.jpg`, la hoja generada muestra UNA sola captura (repetida 6 veces en grilla) en vez de las 6 distintas. Visualmente parece aprobada pero en realidad solo revisaste 1 ángulo.
+- **Causa:** la shell expande el glob y todos los PNGs llegan como `sys.argv[1..N-1]`, pero la función `main()` tomaba solo `sys.argv[1]` como rutas. El output argument (último argv) se leía bien, pero los inputs se perdían. El mensaje "con 1 capturas" en el output era la única señal.
+- **Solución:** tomar `pngs = sys.argv[1:-1]` cuando el modo es por rutas (cualquier argv[1] que sea archivo o contenga `*`). Imprimir AVISO si `len(pngs) < 2` para detectar regresiones. Si esto vuelve a fallar y nadie lo nota, E-13 (verificación multi-ángulo) queda invalidada en silencio.
+- **Caso real (2026-08-29):** descubierto al regenerar las hojas de `pico_piedra_v2`. La primera corrida dio "con 1 capturas"; al investigar, encontré el bug. Fix aplicado a `scripts-reutilizables/contact_sheet.py`. El path programático (`verificar_visual.py` → `hoja(pngs, salida_jpg)`) SIEMPRE estuvo bien porque pasaba una lista.
+- **Diagnóstico rápido:** después de cada `contact_sheet.py ...`, verificar que el output diga "con 6 capturas" (o el N que corresponda). Si dice "con 1", el bug volvió.
+- **Fecha:** 2026-08-29
+
+### E-31 — Audit estático de E-27 da falsos negativos; el geométrico también puede confundir "E-27" con "sobresalir por diseño"
+- **Síntoma 1 (audit estático):** un AST walker que solo marca "RIESGO ALTO si el padre recibe una escritura `.location` DESPUÉS del parenting" pasa por alto dos casos reales:
+  - **Padre rotado ANTES del parenting** (`o_tallo.rotation_euler = ...` antes del bucle que parenta las hojuelas). El `matrix_parent_inverse` sobreescrito descarta esa rotación, y las hojuelas leen su `location` como mundo → todas se apilan en `+X` (caso `helecho_gigante` v1: 47/80 hojuelas separadas hasta 0.8351 m).
+  - **Mismo nombre de variable en scopes distintos** (`cuerpo` se mueve en el asentado L415, pero `cuerpo` aparece como `padre` en la línea 404 vía un `agregar()`). El audit no correlaciona ambas referencias (caso `cofre_ancestral` v1: 5 cm de gap).
+- **Síntoma 2 (audit geométrico AABB-gap):** la métrica `distancia Mínima AABB-AABB en world` (umbral 0.02 m) funciona bien para **hand-tools y vegetación** (las piezas están DENTRO del bbox del padre), pero confunde E-27 con **"sobresalir por diseño"** en cofres, casas y props similares (tiradores, asas, bisagras, salientes decorativos que sobresalen del cuerpo a propósito).
+- **Causa:** los dos audits usan heurísticas incompletas. La estática solo rastrea el camino de las variables; la geométrica mide espacio, no intención de diseño.
+- **Solución — la métrica correcta depende del TIPO de asset:**
+  1. **Hand-tools / hand-held** (pico, hacha, antorcha de mano, machete, etc.) y **vegetación** (helechos, palmeras, plantas con tallo central):
+     - Audit: AABB-gap ≤ 0.02 m funciona. Las piezas solidarias (cabeza, pomo, gemas, anillas, cordeles) están DENTRO del bbox del padre.
+     - El `assert abs(z_final - Z_APOYO) < 1e-4` del `hijo()` canónico (E-27) cubre la separación tras el asentado.
+  2. **Props con piezas que sobresalen a propósito** (cofres, casas, carros, balsas, antorchas de pared, paneles):
+     - El AABB-gap va a dar falsos positivos: el tirador de un cofre SOBRESALE 5 cm por diseño (es la manija), las asas 1.8 cm, las bisagras traseras 1.2 cm. La métrica correcta sería "el centroide del hijo cae sobre la SUPERFICIE del padre", no "el bbox-gap es chico".
+     - **No** poner un `assert` AABB-gap en el script: rompe builds válidos por diseño.
+     - El control de calidad pasa a la **verificación visual E-13** (6 capturas orbitales) — si el asentar hubiera roto el parenteo, el render lo mostraría.
+- **Regla de uso del audit AABB-gap:**
+  - Úsalo en `scripts-reutilizables/` como **herramienta de triaje** sobre hand-tools y vegetación, no como filtro automático.
+  - Para props con piezas sobresalientes, **anotá en el script** qué piezas tienen separación intencional y por qué, así el próximo que lo lea no "arregla" un bug que es feature.
+- **Caso real (2026-08-29, audit de 7 assets):**
+  - Estática: 6 RIESGO NULO, 1 RIESGO ALTO (`estrella_mar` — falso positivo por suposición de variable, ver diagnóstico abajo).
+  - Geométrica: `helecho_gigante` 47/80 separados (0.84 m, **bug real**), `cofre_ancestral` 1 separado (`SM_Cofre_Tirador` 5 cm, **diseño**), resto 0.
+  - Fijados: `helecho_gigante` (borrar línea de `matrix_parent_inverse`), `cofre_ancestral` (mismo fix + nota explícita en el script de que el tirador sobresale por diseño).
+- **Conclusión:** ningún audit es 100 % confiable. El **render E-13 con 6 ángulos** sigue siendo la fuente de verdad final.
+- **Fecha:** 2026-08-29 19:50
+
+### E-32 — No deducir el winding a mano: `recalc_face_normals` + 1 medición global
+- **Síntoma:** al armar una isla cerrada con bmesh (capa exterior + capa interior + borde perimetral, o un tubo, o una cuña), el orden de los vértices de cada cara determina la dirección de la normal. Deducirlo a mano con productos vectoriales "en el papel" es frágil: la primera versión de `crear_vieira_playa_lowpoly.py` puso la cara exterior mirando a `+X` y la interior a `-X` (lo opuesto a lo que el material asumía), y la orientación equivocada no se notó hasta el render E-13 (se veía la cáscara cremosa en vez del nácar).
+- **Causa:** el winding "correcto" depende de la convención local del script (orden de los parámetros, signo de la curvatura, etc.). Cualquier cambio sutil en el orden de los índices rompe la suposición.
+- **v1 (vieira, log 244) — dos patrones según la forma de la isla:**
+  1. **Isla cerrada y conexa** (cáscara, caja, domo, tubo con tapas): crear todas las caras en cualquier orden, llamar a `bmesh.ops.recalc_face_normals(bm, faces=...)` para que unifique las normales según la topología, y después hacer UNA sola medición que decida la orientación global. Ejemplo de la vieira:
+     ```python
+     bmesh.ops.recalc_face_normals(bm, faces=caras_valva)
+     suma_ext = sum(f.normal.x for f in caras_ext)
+     if suma_ext > 0.0:
+         bmesh.ops.reverse_faces(bm, faces=caras_valva)
+     assert suma_ext < 0.0, 'E-32: la capa exterior no mira a -X'
+     ```
+  2. **Isla cerrada y convexa** (cuña, prisma triangular, cono, pirámide): recalc unifica y después test de centroide por cara: si `f.normal.dot(f.calc_center_median() - centroide) < 0.0`, la cara está mirando hacia adentro → `f.normal_flip()`. Usado para las aurículas y la bisagra de la vieira.
+- **v2 (puente, log 245) — un único test para TODAS las islas cerradas (conexas o no, convexas o no):** el test de centroide de v1 solo sirve para islas **convexas**. Un tubo que sigue una catenaria (como las 4 cuerdas del puente) NO es convexo, y el test de centroide le erraría. El test exacto y universal es el **volumen con signo** (teorema de la divergencia):
+  ```python
+  def volumen_firmado(caras):
+      v = 0.0
+      for f in caras:
+          co = [vert.co for vert in f.verts]
+          for k in range(1, len(co) - 1):
+              v += co[0].dot(co[k].cross(co[k + 1]))
+      return v / 6.0
+  ```
+  `V > 0` -> las normales miran hacia afuera. `V < 0` -> la isla está dada vuelta. No depende de la forma, solo de que la isla sea **watertight**.
+  **Patrón final (reemplaza a los dos de v1):**
+  ```python
+  bmesh.ops.recalc_face_normals(bm, faces=isla)
+  if volumen_firmado(isla) < 0.0:
+      bmesh.ops.reverse_faces(bm, faces=isla)
+  ```
+  Aplicar **una vez por isla** (cada primitiva del script es su propia isla). Caso real: 4 cuerdas catenarias + 1 caja = 5 islas, todas orientadas con el mismo helper.
+- **Regla:** si podés medirlo, no lo deduzcas. La medición es robusta; la deducción es frágil.
+- **Casos reales (2026-08-29):**
+  - `crear_vieira_playa_lowpoly.py` v1: 3 familias de caras con winding derivado a mano, 2 invertidas. v2 con patrón (1) + assert anti-regresión. 10 min para encontrar el patrón correcto.
+  - `crear_puente_cuerda_lowpoly.py` (log 245): el patrón (2) de v1 (centroide) no le servía para los tubos catenarios. Reemplazo por volumen firmado: funcionó a la primera.
+- **Bonus lesson — `R_MIN > 0` en rejillas polares:** el mismo script de la vieira usaba `r = t * R_MAX` para los radios de la rejilla, de modo que en `i = 0` los `N_ANG + 1` vértices del arco de la bisagra colapsaban en un mismo punto y se generaban caras degeneradas (área cero, no reportadas por bmesh). La v2 hace `r = R_MIN + t * (R_MAX - R_MIN)` con `R_MIN = 0.035`, dándole a la bisagra una línea real de 6.8 cm. **Regla:** una rejilla polar que arranca en `r = 0` es un anti-patrón; siempre usar `R_MIN > 0` aunque sea chico.
+- **Fecha:** 2026-08-29 20:51 (v1) / 2026-08-29 21:12 (v2)
+
+### E-33 — `generar_variante.py` reporta CARAS, no triángulos. El presupuesto M166 está en triángulos reales.
+- **Síntoma:** la salida de `python generar_variante.py ... --baja` dice `objetos=1  tris=482  materiales=3` para la vieira. La tabla M166 §3.3 dice BAJA ≤ 700 **tris**. El primer impulso es "OK, 482 < 700". Pero al medir con `mesh.calc_loop_triangles()` (la fuente de verdad para el conteo de triángulos en Blender), la misma BAJA de la vieira tiene **676 tris reales**. La diferencia es ~2× porque `generar_variante.py` cuenta `len(mesh.polygons)` y la mayoría de las caras son quads (1 polígono = 2 triángulos).
+- **Causa:** la columna "tris" del output de `generar_variante.py` y de la checklist estaba usando `len(m.polygons)`, no `len(m.loop_triangles)`. Esto es un **bug histórico**: los 43 assets aprobados hasta ahora figuran en el checklist con números que son MITAD del tri-count real.
+- **Impacto medido (2026-08-29, muestra de 4 assets ya aprobados):**
+  - `cofre_ancestral` MEDIA: 784 reportados → **1482 tris reales** (límite 1500, pasa por 18 tris).
+  - `cofre_ancestral` BAJA: 571 → **962 tris reales** (límite 700, **excede por 37 %**).
+  - `helecho_gigante` MEDIA: 1190 → **2288 tris reales** (límite 1500, **excede por 53 %**).
+  - `helecho_gigante` BAJA: 672 → **1144 tris reales** (límite 700, **excede por 63 %**).
+  - `concha_mar` MEDIA: 319 → 649 tris reales (límite 1500, OK).
+  - `concha_mar` BAJA: 378 → 423 tris reales (límite 700, OK).
+  - `vieira_playa` MEDIA: 482 → 968 tris reales (límite 1500, OK).
+  - `vieira_playa` BAJA: 482 → 676 tris reales (límite 700, OK, margen de 24).
+- **Cuestiones derivadas que esto abre:**
+  1. El budget M166 debe ser re-validado para los 43 assets existentes. El script `auditar_optimizacion.py` (mencionado en el checklist §4) ya cuenta tris reales — correrlo sobre todos los assets y los que excedan pasan por un `--ratio` más agresivo (E-29).
+  2. La columna del checklist y el output de `generar_variante.py` deben mostrar triángulos reales. Fix sugerido: en `generar_variante.py`, cambiar la línea de impresión por `tris=len(m.loop_triangles)` (requiere `m.calc_loop_triangles()` antes).
+  3. La nueva medición NO invalida los assets visualmente aprobados (el render E-13 sigue siendo válido); lo que invalida es la **afirmación numérica de cumplimiento de presupuesto** para varios de ellos.
+- **Acción inmediata:** antes de empezar el pipeline Blender→Godot, correr `auditar_optimizacion.py` y aplicar `--ratio <F>` (E-29) a los assets que excedan. La escala es manejable: los BAJA problemáticos están ~2× arriba del límite, así que con `--ratio 0.4` en `cofre` y `helecho` (que ya está calibrado a 0.5) alcanzan.
+- **Regla nueva:** cualquier check numérico de presupuesto en Blender usa `mesh.calc_loop_triangles()` y `len(mesh.loop_triangles)`. No `len(mesh.polygons)`.
+- **Diagnóstico rápido:**
+  ```python
+  import bpy
+  for o in bpy.context.scene.objects:
+      if not o.name.startswith('SM_'): continue
+      o.data.calc_loop_triangles()
+      print(o.name, 'polygons=%d tris=%d' % (len(o.data.polygons), len(o.data.loop_triangles)))
+  ```
+- **Herramienta persistente:** `scripts-reutilizables/auditar_presupuesto.py` (log 245) recorre los 111 `_baja`/`_media`/`_alta_media` blends, abre cada uno, mide triángulos reales, slots y materiales usados, y reporta quién excede el presupuesto. Resultado del 2026-08-29 21:35 (post E-36): **23 de 111 exceden** — 16 con `tris+` (11 son los `_alta_media` héroes, 5 son `_lowpoly` aprobados que en realidad exceden), 5 con `mats+` solo (nido_cocos_baja, tablon_madera_baja, farola_fuego_baja, anillo_piedras_ritual_baja, arbusto_floral_baja), y 2 con ambos (cofre_ancestral_baja, hongo_luminoso_baja). Ver §E-36 adyacente para el bug original del audit que ocultaba los `mats+`.
+- **Acción derivada (ya hecha en log 245):** se arregló `generar_variante.py` para que imprima `len(m.loop_triangles)`, no `len(m.polygons)`. Diff de 1 línea. A partir de log 245 los outputs del script reflejan triángulos reales.
+- **Fecha:** 2026-08-29 20:51 (v1) / 2026-08-29 21:12 (v2 + herramienta persistente)
+
+### E-34 — `generar_variante.py` duplicaba los slots de material al aplicar decimate
+- **Síntoma:** después de correr `generar_variante.py ... --baja`, el `_baja.blend` del asset tenía el DOBLE de slots de material en `material_slots` que materiales realmente usados por las caras. Caso real (log 245): `puente_cuerda_baja` reportaba `materiales=6` cuando solo usaba 3. La BAJA del mismo asset sin el fix: `1 slots, 1 mats usados` o `3 slots, 3 mats usados` (después del fix), pero ANTES: `6 slots, 3 mats usados` para el puente, `2 slots, 1 mats usados` para muchos otros.
+- **Causa:** en la fase de decimate (líneas 200-211 de `generar_variante.py` v1), el código hacía:
+  ```python
+  me_eval = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+  mats = [m for m in o.data.materials if m is not None]
+  o.data = me_eval
+  for m in mats:
+      o.data.materials.append(m)
+  ```
+  `new_from_object()` **ya copia** los slots del objeto evaluado. Después, el bucle los vuelve a appendar → duplicados (3 → 6, 2 → 4, etc.). Las caras siguen apuntando a los slots 0..N-1, así que visualmente no hay draw calls de más, pero el CONTEO de materiales en el checklist se infla y algunos assets BAJA superaban el límite de 4 slots sin haberlo hecho realmente.
+- **Impacto medido (2026-08-29 21:12, mass-fix `saneo_bajas_e34.py`):** **45 de 46** `_baja.blend` tenían slots duplicados. Después del saneo, todas tienen el número correcto (en general 1; el puente tiene 3 legítimos).
+- **Solución — dos pasos:**
+  1. **Origen:** deduplicar los slots comparando con `mats` y solo si difieren reconstruir la lista. **NO usar `Mesh.materials.clear()` (ver E-35).** Diff:
+     ```python
+     me_eval = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+     mats = [m for m in o.data.materials if m is not None]
+     o.data = me_eval
+     if [s.material for s in o.material_slots] != mats:
+         idx_caras = [p.material_index for p in o.data.polygons]
+         o.data.materials.clear()
+         for m in mats:
+             o.data.materials.append(m)
+         for p, mi in zip(o.data.polygons, idx_caras):
+             p.material_index = mi
+     ```
+  2. **Batch fix:** `scripts-reutilizables/saneo_bajas_e34.py` abre cada `_baja.blend` y dedupa los slots con `o.data.materials.pop(index=i)` (no `clear()`). Re-ejecutable, idempotente: la segunda corrida no cambia nada.
+- **Regla nueva:** después de cualquier `generar_variante.py --baja`, correr `saneo_bajas_e34.py` (o el audit `auditar_presupuesto.py`) para confirmar que `slots == mats_usados`. Si difieren, hay duplicados.
+- **Caso real (2026-08-29):** descubierto al inspeccionar la BAJA del puente tras aplicar E-32 v2. El script de saneo también confirma que el bug afectaba a los 45 `_baja.blend` preexistentes — un bug silencioso de **3 meses** en los assets del proyecto.
+- **Herramientas persistentes:**
+  - `scripts-reutilizables/saneo_bajas_e34.py` (fix batch)
+  - `scripts-reutilizables/auditar_presupuesto.py` (verificación: cuenta slots vs mats usados y avisa si difieren)
+- **Fecha:** 2026-08-29 21:12
+
+### E-35 — `Mesh.materials.clear()` resetea a 0 el `material_index` de TODAS las caras
+- **Síntoma:** tras ejecutar la versión "fix" de E-34 que llamaba `o.data.materials.clear()`, la BAJA del asset se renderizaba con **un solo material** aunque los slots siguieran siendo N. El histograma de `material_index` colapsaba a `{0: N_caras}`. Caso real (2026-08-29 21:30, log 246): `puente_cuerda_baja` y `pozo_piedra_baja` regeneradas con la primera versión del fix salieron con `slots=3, mats_usados=1` y `slots=4, mats_usados=1` respectivamente, cuando deberían haber sido `3/3` y `4/4`.
+- **Causa:** `IDMaterials.clear()` (interfaz de bajo nivel de la lista de materiales del Mesh) borra todos los slots y, en Blender 4.2, pone `material_index = 0` en cada `MPoly` como parte de la limpieza. El bug **no es de mi script**: la API de Blender documenta que clear() remueve las referencias de la lista pero NO garantiza que las `material_index` de las caras queden dentro de rango — quedan en 0.
+- **Verificación experimental (log 246, `diag_merge_decimate.py`):**
+  ```
+  SRC        faces=361  hist={0:216, 1:102, 2:7, 3:36}   slots=4
+  BMESH      faces=361  hist={0:216, 1:102, 2:7, 3:36}
+  to_mesh    faces=361  hist={0:216, 1:102, 2:7, 3:36}   attrs=[material_index, sharp_face]
+  OBJ MERGED faces=361  hist={0:216, 1:102, 2:7, 3:36}   slots=4
+  EVALUATED  faces=299  hist={0:216, 1:57, 2:2, 3:24}    <-- decimate CONSERVA los indices
+  tras o.data=  faces=299  hist={0:216, 1:57, 2:2, 3:24}  slots=4
+  tras clear()  faces=299  hist={0:299}                  slots=0   <-- ACÁ se pierden
+  ```
+  El `Decimate` modifier respeta el `material_index` correctamente. El reset es exclusivo de `materials.clear()`.
+- **Solución definitiva:** la del propio E-34 v2 — respaldar `material_index` de cada cara antes del `clear()`, restaurar después con `p.material_index = mi`. Y ANTES de tocar nada, **solo reconstruir si la lista de slots realmente difiere** (chequeo de identidad en `o.material_slots`); si no difiere, no se hace nada y se eliminan ambos bugs.
+- **Impacto medido:** los 45 BAJA saneados con `saneo_bajas_e34.py` (que usa `pop()` en vez de `clear()`) están correctos. Solo `puente_cuerda_baja` y `pozo_piedra_baja` se rompieron porque fueron regeneradas con la versión "fix" defectuosa. Regeneradas con el fix v2: hist {0:24, 1:78, 2:206} y {0:216, 1:57, 2:2, 3:24} respectivamente.
+- **Regla nueva:** **NUNCA** `Mesh.materials.clear()` como paso de "limpieza" sobre una malla con caras. Si hay que deduplicar slots, usar `pop(index=i)` o respaldar+restaurar los indices.
+- **Fecha:** 2026-08-29 21:30
+
+### E-36 — `auditar_presupuesto.py` solo inspeccionaba `objs[0]` para materiales
+- **Síntoma:** la primera versión del audit (de log 245) reportaba `slots=1, mats_usados=1` para `tablon_madera_lowpoly_baja`, que en realidad tiene **6 slots y 6 materiales usados**. El mismo bug afectaba a `cofre_ancestral_baja` (6), `nido_cocos_baja` (5), `farola_fuego_baja` (5), `anillo_piedras_ritual_baja` (5), `arbusto_floral_baja` (5) y `hongo_luminoso_baja` (5). El conteo de triángulos sí estaba bien (iteraba todos los objs), pero el de materiales solo miraba el primero.
+- **Causa:** el script agregaba `tris` y `caras` en un loop sobre todos los `objs`, pero usaba `objs[0].material_slots` y `objs[0].data.polygons` para materiales. Para assets con un solo objeto esto no importa, pero los assets multi-objeto (varios `SM_*` con sus propias slots) quedaban sub-reportados.
+- **Verificación experimental:** el script `diag_alcance_e35.py` SÍ recorría todos los objs y reportó los 7 BAJA problemáticos. La discrepancia entre diag (correcto) y audit (defectuoso) me llevo a encontrar el bug.
+- **Solución:** mover el loop de slots y de caras dentro del for `o in objs`, igual que ya estaba para `tris` y `caras`:
+  ```python
+  total_slots = 0
+  mats_usados = set()
+  for o in objs:
+      m = o.data
+      m.calc_loop_triangles()
+      caras += len(m.polygons)
+      tris  += len(m.loop_triangles)
+      total_slots += len(o.material_slots)
+      for cara in m.polygons:
+          if cara.material_index < len(o.material_slots):
+              sm = o.material_slots[cara.material_index].material
+              if sm:
+                  mats_usados.add(sm.name)
+  ```
+- **Impacto medido (2026-08-29 21:35, post-fix):** el audit pasa de decir "**18 exceden (todos `tris+`)**" a decir "**23 exceden**": 16 con `tris+` (11 héroes `_alta_media` + 5 `_lowpoly` con triángulos de más), 5 con `mats+` solo (nido_cocos, tablon_madera, farola_fuego, anillo_piedras_ritual, arbusto_floral), y 2 con ambos (cofre_ancestral_baja, hongo_luminoso_baja).
+- **Regla nueva:** cuando se itera un grupo de objetos, los slots y materiales se cuentan DENTRO del mismo loop, no en una segunda pasada sobre `objs[0]`.
+- **Fecha:** 2026-08-29 21:35
+
+### E-37 — Un "fix" cosmético no es un fix; un bug de diseño sigue siendo bug aunque el render se vea distinto
+- **Síntoma:** la palanca de madera `palanca_madera_lowpoly` salía del E-13 aprobada ("palo clavado en una caja con una pelota en la punta"), luego un "fix" del log 233 la rotó a mano de 35° a 81.1° y reposicionó el pomo. El usuario la miró de nuevo y dijo "no le encuentro la forma, eso esta corregido?". El "fix" no había arreglado nada — solo había maquillado un problema de fondo que **seguía ahí**: el brazo cilíndrico se creaba en `(0,0,0.21)`, **el mismo punto que el cono del pivote**. El brazo atravesaba el pivote en cualquier ángulo.
+- **Causa:** confundir "cambio que produce otro render" con "arreglo que resuelve el problema". El log 233 midió `z_min` con E-24 (vértices reales), corrigió la flotación numérica con `zmin_real()`, y dio por bueno. Pero la pregunta correcta era: **¿se lee como palanca?** Y la respuesta era no, porque la geometría misma estaba mal armada (brazo+pivote=colisionan en el mismo punto del eje).
+- **Reglas derivadas:**
+  1. Antes de aprobar un asset, **preguntarse "¿se lee como X?"** en lugar de "¿z_min ≈ 0.045?". El E-13 (multi-ángulo) detecta la flotación numérica pero no detecta ambigüedad semántica.
+  2. Si un fix cambia la apariencia pero la queja del usuario es de fondo ("no le encuentro la forma"), el fix está **maquillando**, no arreglando. **Rediseñar.**
+  3. Cuando el brazo y el pivote son dos operaciones distintas en el mismo lugar, están colisionando por construcción. La solución no es moverlos unos centímetros — es **fusionarlos en un solo bmesh** donde brazo y pivote nacen como caras adyacentes.
+- **Caso real:** palanca de madera M70 v1 → v2 (pivote único) → v3 (horquilla). El v3 lo resolvió haciendo una sola operación bmesh con base + 2 montantes + brazo + perno + pomo, todos como caras del mismo mesh. 96 tris, 1 obj, 3 mats, **se lee como palanca**.
+- **Lección específica:** **para palancas mecánicas, la HORQUILLA (dos montantes + perno transversal) es incomparablemente más legible que el pivote único**. El pivote único es ambiguo ("¿es un perchero? ¿una hamaca? ¿un mazo?"). La horquilla con perno saliente es inequívocamente una palanca/bomba.
+- **Fecha:** 2026-08-29 23:05
+
+### E-38 — En mallas inclinadas, la CAÍDA VERTICAL de una cara NO es su semialto, es `semialto * cos(θ)`
+- **Síntoma:** assert geométrico `fondo_brazo = BRAZ_CZ - BRAZ_SEMIALTO == PIV_Z_TOP` falla con diff ~1 mm: `0.41 - 0.07 = 0.34` pero `BRAZ_CZ = PIV_Z_TOP + BRAZ_SEMIALTO = 0.34 + 0.07 = 0.41`, y al estar inclinado, la cara inferior del brazo desciende `SEMIALTO*cos(θ)` desde el centro, no `SEMIALTO`. Diff = 0.07 - 0.07*cos(10°) = 0.07 - 0.0689 = **0.0011 m** = 1.1 mm.
+- **Causa:** cuando se inclina una caja, la cara **+ez** (el "lomo") sube `+SEMIALTO*cos(θ) - SEMIALTO*sin(θ)*0` (sin contribución de ex) pero la cara **-ez** (el "vientre") baja `-SEMIALTO*cos(θ)`. La proyección vertical del semieje es siempre `semieje * cos(θ)`.
+- **Solución:** definir `CAIDA_VERT = SEMIALTO * cos(ANG_TILT)` y usar esa constante para cualquier cálculo vertical (asentado, asserts, distancia a la base). Mismo principio aplica a la **subida del lomo** (`SUBIDA_VERT = SEMIALTO * cos(θ)`) y a la **ganancia lateral** del brazo inclinado (`semieje * sin(θ)`).
+- **Caso real:** palanca v3 — sin este ajuste, el assert del "brazo sobre el pivote" salta y el brazo queda 1 mm flotando sobre el pivote (el peor caso: parece un fix, pero al render se nota el aire).
+- **Regla nueva:** **toda caja inclinada se analiza con sus semiejes proyectados**: `semieje_x · cos(θ)` para caída/subida vertical, `semieje_x · sin(θ)` para corrimiento lateral. NUNCA mezclar el semieje real con la altura que ocupa.
+- **Fecha:** 2026-08-29 23:05
+
+### E-39 — Para choques esfera-caja, NO comparar un solo eje; medir distancia punto-caja real
+- **Síntoma:** assert `POMO_Z - POMO_R > MON_Z_TOP` salta con "POMO: choca con los montantes", pero geométricamente el pomo está a **0.49 m en X** de la horquilla — no choca con nada. Solo se cumple que su `z_min = 0.34` está por debajo del `MON_Z_TOP = 0.40`, pero la condición de overlap 1D NO implica overlap 3D.
+- **Causa:** confundir "el pomo ocupa Z más bajo que el montante termina" con "el pomo choca con el montante". La primera es una condición **necesaria** para superlap en Z, pero NO suficiente: si las X no se solapan, no hay superlap real.
+- **Solución:** usar la **distancia mínima punto-AABB**:
+  ```python
+  def dist_punto_caja(p, cx, cy, cz, hx, hy, hz):
+      dx = max(abs(p.x - cx) - hx, 0.0)
+      dy = max(abs(p.y - cy) - hy, 0.0)
+      dz = max(abs(p.z - cz) - hz, 0.0)
+      return math.sqrt(dx*dx + dy*dy + dz*dz)
+  ```
+  Luego assert `dist > R_esfera + margen`. Si la distancia es ≤ 0, el punto está **dentro** de la caja.
+- **Caso real:** palanca v3 — el pomo a 0.49 m en X de la horquilla da `dist_punto_caja = 0.499`, vs `POMO_R = 0.115 + 0.02 margen = 0.135`. Margen real = 0.36 m. Sobra.
+- **Regla nueva:** **para validar no-colisión entre una esfera y una caja, SIEMPRE distancia punto-AABB + radio**. Nunca comparar componentes individuales en serie.
+- **Fecha:** 2026-08-29 23:05
+
+### E-40 — Medir TRIÁNGULOS REALES (`loop_triangles`), nunca CARAS (`polygons`)
+- **Síntoma:** `generar_alta.py` aprobaba assets que en realidad duplicaban su presupuesto. `totem_isla_alta` reportaba **10.507 caras → "OK"** cuando en realidad tenía **21.014 triángulos** contra un techo de 6.000. El auditor `auditar_presupuesto.py` decía otra cosa y nadie sabía a quién creerle.
+- **Causa:** un `polygon` de N vértices equivale a `N - 2` triángulos (quad = 2, hexágono = 4, octógono = 6). Contar caras subestima entre 1,5× y 2× en una malla lowpoly hecha con primitivas de pocos segmentos. **El presupuesto M166 está definido en triángulos**, así que medir caras es comparar peras con manzanas sin que salte ningún error.
+- **Solución:** siempre contar así:
+  ```python
+  def tris_de(lista):
+      t = 0
+      for o in lista:
+          o.data.calc_loop_triangles()      # hay que llamarlo: la cache no se refresca sola
+          t += len(o.data.loop_triangles)
+      return t
+  ```
+- **Caso real (2026-08-29, saneo de presupuesto):** el barrido con el conteo correcto destapó **23 variantes excedidas**, incluidos dos monstruos: `totem_isla_alta` 21.014 tris y `cofre_ancestral_alta` 11.510 tris. La causa de fondo era el BEVEL de `generar_alta.py` corriendo con `--segmentos 3 --subdiv` sobre esferas UV (una sola esfera UV de 32×16 ya son 768 tris; el totem tenía **27 piezas a exactamente 768**). Barrido con `--dry`: seg3+subdiv = 20.534 (reproduce el archivo emitido), seg2+subdiv = 11.854, seg2 = **3.106**, seg1 = 1.306. Se fijó **seg2 para el totem** y **seg1 para el cofre** (3.274 tris).
+- **Regla nueva:** **todo número que se compare contra un presupuesto se mide en triángulos reales.** Y si un script emite un veredicto "OK" que contradice al auditor, el bug está en el script, no en el auditor.
+- **Fecha:** 2026-08-30 00:15
+
+### E-41 — Al reescribir índices de material, respaldar por NOMBRE, no por número
+- **Síntoma:** tras una poda de materiales que decía `PODA MATERIALES: 6 -> 4`, el reporte final seguía mostrando `materiales=6`.
+- **Causa:** dos errores encadenados. (a) La poda remapeaba las caras pero **dejaba los slots vacíos**, así que `len(o.data.materials)` seguía contando 6. (b) Al purgar los slots sobrantes, `Mesh.materials.clear()` resetea a 0 el `material_index` de TODAS las caras (E-35), y el respaldo por número queda inutilizable.
+- **Solución:** antes de tocar los slots, guardar el nombre del material de cada cara en una lista paralela, y reconstruir el índice a partir de los nombres:
+  ```python
+  nombres_viejos = [m.name if m else '' for m in o.data.materials]
+  idx_nombres = [nombres_viejos[p.material_index] for p in o.data.polygons]
+  usados = [n for i, n in enumerate(idx_nombres) if n and n not in idx_nombres[:i]]
+  o.data.materials.clear()                       # seguro: ya tenemos el respaldo
+  for nm in usados:
+      o.data.materials.append(bpy.data.materials[nm])
+  nuevo_idx = {nm: k for k, nm in enumerate(usados)}
+  for p, nm in zip(o.data.polygons, idx_nombres):
+      p.material_index = nuevo_idx.get(nm, 0)
+  ```
+- **Regla nueva:** **`materials.clear()` es destructivo pero no prohibido** — lo que está prohibido es llamarlo sin haber respaldado antes el material de cada cara **por nombre**. El número de slot es una posición que cambia; el nombre es estable.
+- **Fecha:** 2026-08-30 00:15
+
+### E-42 — Reportar materiales USADOS POR CARAS, no slots
+- **Síntoma:** un asset con 4 materiales reales aparecía con 6 y superaba el techo de BAJA (4).
+- **Causa:** `len(o.data.materials)` cuenta **slots**, y un slot puede quedar huérfano (ninguna cara lo usa) tras una poda, un merge o un decimate.
+- **Solución:** el conteo relevante es el de materiales que efectivamente tienen caras:
+  ```python
+  n_mats = set()
+  for o in escena.objects:
+      if not es_asset(o):
+          continue
+      for p in o.data.polygons:
+          if p.material_index < len(o.material_slots):
+              sm = o.material_slots[p.material_index].material
+              if sm:
+                  n_mats.add(sm.name)
+  n_mats = len(n_mats)
+  ```
+  Es el mismo criterio que usa `auditar_presupuesto.py`, así que ambos dejan de contradecirse.
+- **Regla nueva:** **slots huérfanos no cuentan como materiales.** Si dos herramientas discrepan sobre el número de materiales, es porque una cuenta slots y la otra caras.
+- **Fecha:** 2026-08-30 00:15
+
+### E-43 — Colisión de nombres entre variantes: resolver con PRIORIDAD EXPLÍCITA
+- **Síntoma:** al exportar el catálogo a Godot aparecían 51 "altas" cuando el catálogo tiene 51 assets, pero el inspector de Godot mostraba un asset con 1 objeto y 96 tris donde debería haber 5 objetos.
+- **Causa:** un mismo asset puede tener **dos archivos que mapean al mismo destino**: `palanca_madera_alta.blend` y `palanca_madera_lowpoly.blend` (el `_lowpoly` es el nombre de autoría anterior al convenio `_alta`). Si el planificador itera el directorio en orden alfabético, gana el que llegue primero — y en este caso ganó el **viejo**, que era el diseño v2 que el usuario ya había rechazado ("no le encuentro la forma"). El archivo v3 (horquilla) quedó afuera del export.
+- **Solución:** no confiar en el orden del filesystem; declarar la prioridad:
+  ```python
+  PRIORIDAD = {
+      'alta':  ('_alta', '_lowpoly'),
+      'media': ('_alta_media', '_lowpoly_media'),
+      'baja':  ('_alta_baja', '_lowpoly_baja'),
+  }
+  ```
+  Al planificar, si un slot de destino ya está ocupado, **gana el sufijo de menor índice** en la tupla, sin importar en qué orden se leyeron los archivos.
+- **Caso real:** detectado por un cross-check de `mtime` entre derivado y fuente. `palanca_madera_alta.blend` era de las 14:13 (v2 rechazado) mientras su `_lowpoly` v3 era de las 22:54. Regenerado desde v3: **1 nodo, 516 tris**, correcto.
+- **Regla nueva:** **cuando dos archivos compiten por el mismo destino, la prioridad se declara, no se hereda del `os.listdir`.** Y un derivado más viejo que su fuente es siempre un bug (ver E-46).
+- **Fecha:** 2026-08-30 00:15
+
+### E-44 — Purgar todo objeto NO-`SM_` antes de exportar a glTF
+- **Síntoma:** los `.glb` importados en Godot traían nodos basura: `Base_Arena`, cámaras, luces.
+- **Causa:** los `.blend` de autoría incluyen el **set de captura** (disco de arena, sol, cámara orbital). El exportador glTF exporta la escena completa, no lo que a uno le interesa.
+- **Solución:** purgar antes de exportar:
+  ```python
+  for o in list(bpy.context.scene.objects):
+      if not o.name.startswith('SM_'):
+          bpy.data.objects.remove(o, do_unlink=True)
+  bpy.context.view_layer.update()
+  assert len([o for o in bpy.context.scene.objects if o.name.startswith('SM_')]) > 0
+  ```
+- **Caso real:** verificado parseando el chunk JSON de los **153 .glb** exportados: **0 de 153** contienen nodos que no empiecen con `SM_`.
+- **Regla nueva:** **el prefijo `SM_` es la frontera entre asset y set de captura.** Todo lo que no lo lleve se purga en el export; el `.blend` de autoría queda intacto porque la purga se hace sobre el archivo abierto en memoria, no sobre el disco.
+- **Fecha:** 2026-08-30 00:15
+
+### E-45 — `bpy.context` por socket NO tiene `active_object`: exportar glTF en HEADLESS
+- **Síntoma:** los **51** exports ALTA fallaron todos con `AttributeError: 'Context' object has no attribute 'active_object'`. Los 102 restantes ni se intentaron.
+- **Causa:** el código ejecutado vía el socket MCP recibe un `bpy.context` **restringido**. El exportador glTF de Blender 4.2 lee `bpy.context.active_object` en la **primera línea** de `gltf2_blender_export.save()`. No es un problema de argumentos: se probó con la llamada mínima `bpy.ops.export_scene.gltf(filepath=DEST, export_format='GLB')` y falla igual. Misma familia que E-22 (`bpy.ops.object.modifier_apply` también falla por socket).
+- **Solución:** **no exportar por socket.** Correr el export como proceso headless, que sí tiene contexto completo:
+  ```
+  blender.exe -b --factory-startup --python exportar_godot.py
+  ```
+  Dos detalles obligatorios:
+  1. Con `--factory-startup` el addon viene desactivado → `bpy.ops.preferences.addon_enable(module='io_scene_gltf2')`.
+  2. `-b --python` **no reenvía `sys.argv`** → las opciones se pasan por variables de entorno (`EXPORT_DRY`, `EXPORT_ONLY`, `EXPORT_MODULOS`).
+- **Parámetros de export usados:** `export_format='GLB'`, `export_materials='EXPORT'`, `export_apply=True`, `export_yup=True`, `export_normals=True`, `export_animations=False`, `export_cameras=False`, `export_lights=False`, `export_extras=False`.
+- **Caso real:** prueba sobre M70 → **15/15 OK, 0 errores**. Corrida completa → **153 GLB** (51 alta / 51 media / 51 baja), 7,7 MB totales, con la pirámide LOD comportándose (alta 4,0 MB · media 2,5 MB · baja 1,1 MB). Validación con Godot 4.7.2 real: `--headless --import` → **153/153 DONE** y 153 `.glb.import` con UID.
+- **Regla nueva:** **todo `bpy.ops` que toque contexto de ventana/objeto activo se corre en headless.** El socket sirve para inspeccionar y editar datos (`bpy.data`), no para operadores de UI.
+- **Fecha:** 2026-08-30 00:15
+
 ## 4. Checklist antes de dar por terminado un asset
 
 - [ ] Script idempotente (re-ejecutable sin duplicar)
@@ -257,7 +644,8 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - [ ] **Asentado en la base** (E-12): `z_min` del elemento que toca el suelo ≤ 0.05 (verificable con `auditar_apoyos.py`)
 - [ ] **Verificación multi-ángulo** (E-13, directiva del usuario 2026-08-28): correr `capturar_angulos.py SM_<asset> ruta.png 4` y revisar TODAS las capturas. Si UNA sola muestra luz/aire entre el objeto y su base, corregir y volver a correr. **Una sola captura frontal no alcanza.**
 - [ ] **Optimización obligatoria al aprobar** (M166, directiva del usuario 2026-08-28): una vez que el asset queda aprobado, correr `python generar_variante.py <modulo> <asset> --media --baja`. El merge por material es **lossless** (la geometría es idéntica, los draw calls bajan un 80 %+). **El `.blend` source con N objetos separados es el archivo de AUTORÍA: nunca se exporta a Godot. Solo se exporta el mergeado** (`_media.blend`).
-- [ ] **Auditoría de optimización**: correr `python auditar_optimizacion.py` y confirmar que el asset figura con `MEDIA = OK`. Si figura `FALTA`, no exportar todavía. Con `--falta` lista solo los pendientes; devuelve **exit 1** si falta alguno (apto para CI).
+- [ ] **Auditoría de presupuesto real** (E-33, E-36): correr `python scripts-reutilizables/auditar_presupuesto.py` y confirmar que el asset NO aparece en la lista de "excede el presupuesto". A diferencia de `auditar_optimizacion.py` (que solo verifica que existan los `_media`/`_baja`), este script abre cada `.blend`, cuenta triángulos REALES (`loop_triangles`), slots de material y materiales distintos usados, y avisa de cualquier exceso en `obj+`, `tris+` o `mats+`. Si excede, re-derivar con `--ratio <F>` (E-29) hasta que pase. Tras E-36, el conteo de materiales recorre TODOS los `objs` SM_ (no solo `objs[0]`).
+- [ ] **Saneo de slots** (E-34, E-35): tras un `generar_variante.py --baja` con una versión de `generar_variante.py` previa al fix de E-35, correr `python scripts-reutilizables/saneo_bajas_e34.py`. NUNCA usar `Mesh.materials.clear()` como "limpieza": resetea a 0 el `material_index` de todas las caras (E-35). `saneo_bajas_e34.py` usa `pop()` que no lo hace.
 - [ ] **Optimización por lote** (cuando hay varios assets pendientes): `python procesar_lote.py` procesa todos los módulos; `python procesar_lote.py 50-Vegetacion --media` restringe a un módulo y a una sola variante. Es **idempotente**: saltea los assets que ya tienen `_media`. Referencia: 41 assets en 168 s.
 - [ ] Hallazgos nuevos en §3 con fecha
 - [ ] Log en `Logs/`
@@ -386,10 +774,13 @@ El flujo de un estudio profesional difiere en varios puntos; saberlo evita sobre
 11. **M166 — generar variantes antes de exportar** (módulo 166): una vez aprobado el ALTA, correr `generar_variante.py --media --baja` para obtener las 2 variantes derivadas. Las 3 son la única fuente de verdad; no se versionan a mano.
 12. **R9 — el merge es obligatorio al aprobar, el source nunca se exporta** (M166 §3.4, directiva del usuario 2026-08-28): el `.blend` source con N objetos separados es el archivo de **autoría** (editable) y **nunca llega a Godot**. Solo se exportan `_media.blend` (merge lossless, ~6 draw calls) y `_baja.blend` (perfil bajo). No se "dejan objetos sin optimizar": el source no se envía. Verificable con `auditar_optimizacion.py`, que devuelve exit 1 si algún asset aprobado falta de mergear.
 13. **Por qué el merge NO va dentro del script de creación** (M166 §3.4): (a) durante la iteración hay que mover piezas sueltas y una malla fusionada no lo permite; (b) si el algoritmo mejora (como el fix decimate 0.5→0.7 de E-23), se cambia una constante en un script en vez de 117; (c) el merge es idempotente y barato, se regenera con un comando.
+14. **Set de captura para assets "de pared" (E-28)**: cuando un asset va montado sobre una superficie vertical (antorcha de pared, cartel colgante, dintel), el set de captura debe incluir un panel `Set_Pared` QUE TAMBIÉN ESTÉ ASENTADO EN LA ARENA. Fórmula: `Y_CENTER_PARED = offset_negativo` (más cerca del origen), `Z_CENTER_PARED = -0.05 + ALTO/2` (base enterrada 5 cm), y para piezas montadas `Y_CENTER_PLACA = (Y_CENTER_PARED + ESP_PARED/2) + ESP_PLACA/2` (cara trasera tangente a cara frontal). El panel de referencia pasa `auditar_apoyos.py` con `z_min ≤ 0.05` antes de aprobar. Si el `Set_Pared` flota, el operador ve "una placa cuadrada separada flotando en el aire" y el reporte puede confundir con un defecto del asset. Bug real: `antorcha_pared` v1.
 
 ---
 
-**Última actualización:** 2026-08-28 23:11 — MiniMax-M3 · WorkBuddy AI · Windows
+**Última actualización:** 2026-08-30 00:15 — MiniMax-M3 · WorkBuddy AI · Windows
+**Cambios 00:15 (cierre de pendientes M166 — presupuesto + pipeline Godot, logs 251/252):** se sanearon las **23 variantes que excedían el presupuesto M166** (quedaron en **0 excedidos**, 121 variantes auditadas). Causa de fondo: **E-40** `generar_alta.py` medía CARAS, no TRIS (`totem_isla_alta` reportaba "OK" con 10.507 caras = 21.014 tris contra techo 6.000). El sobre-teselado venía de BEVEL `--segmentos 3 --subdiv` sobre esferas UV (768 tris c/u); el totem tenía 27 piezas a 768. Fijados seg2 (totem 3.106) y seg1 (cofre 3.274). 15 MEDIA regeneradas con `--decima-media --ratio 0.29→0.88` (1.306–1.446 tris); 9 BAJA con `--ratio 0.28→0.70` (<700 tris, 6 de ellas podadas 5-6→4 mats vía **E-41** respaldo de índices por NOMBRE y **E-42** conteo de materiales usados por caras). Se escribió `exportar_godot.py` (HEADLESS, **E-44** purga no-`SM_`, **E-45** `bpy.context` por socket no tiene `active_object` → el exportador glTF falla por socket, se corre `blender -b --factory-startup --python` con `addon_enable('io_scene_gltf2')` y opciones por env-var). Resultado: **153 GLB** (51 alta / 51 media / 51 baja), 7,7 MB, pirámide LOD correcta. Godot 4.7.2 `--headless --import` → **153/153 DONE**. Se descubrió la **desincronización de variantes** (derivado más viejo que su fuente): `palanca_madera_alta` (v2 rechazada, 14:13) vs su `_lowpoly` v3 (22:54) — resuelta con **E-43** prioridad explícita de sufijos. Cross-check mtime final: **0 desincronizados**. M70 cerrado 5/5 (botón de piso, puerta corrediza, cofre pequeño, válvula con volante+manivela) y documentado. Contadores: 47 completados / 80 aprobados visualmente / 0 pendientes / 121 variantes en presupuesto / pipeline Godot vivo.
+**Cambios 23:05 (rediseño de la palanca M70, log 248):** el usuario reportó "aca estoy viendo una imagen de la palanca de madera en blender que esta mal, eso esta corregido? no le encuentro la forma". El bug era de fondo (v1 tenía brazo cilindro y cono del pivote en el MISMO punto `(0,0,0.21)` → el brazo atravesaba el pivote); el "fix" del log 233 solo había rotado el .blend a mano de 35° a 81.1° y reposicionado el pomo — maquillar, no arreglar. v3 rediseño completo como **HORQUILLA** (base + 2 montantes + brazo inclinado 10° entre ellos + perno de hierro transversal que sobresale 2 cm + pomo icosaedro en la punta). Todo un solo bmesh, 1 obj, 3 mats, 96 tris. Aprobado visualmente (E-13 OK, 6 capturas orbitales 23-05-00). Tres lecciones nuevas: **E-37** "un fix cosmético no es un fix; bug de diseño sigue siendo bug aunque el render se vea distinto" (preguntarse "¿se lee como X?", no solo "¿z_min ≈ 0.045?"), **E-38** "en mallas inclinadas la CAÍDA VERTICAL es `semialto · cos(θ)`, no `semialto`" (medido: diff 1.1 mm en el assert del brazo sobre pivote), **E-39** "para choques esfera-caja, distancia punto-AABB + radio, nunca comparar componentes individuales en serie" (el pomo a 0.49 m en X de la horquilla dio falso positivo al comparar solo Z). Checklist: palanca marcada `[x]` con la entrada detallada. Tier D sigue cerrado 7/7. Contadores: 47 completados / 80 aprobados visualmente / 0 pendientes.
 **Cambios 23:11 (QA visual del módulo 13 + orquestador):** E-10 quedó destrabado. El usuario
 abrió y cerró Blender, el socket 9876 volvió, y `Read` volvió a leer PNGs. Se hizo el primer
 barrido real de las BAJA del módulo 13 con el nuevo `verificar_visual.py` (encadena abrir

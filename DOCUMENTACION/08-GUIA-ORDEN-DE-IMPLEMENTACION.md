@@ -502,8 +502,12 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 14 | M61 Rendimiento | 5 | V0 | 🟢 Investigable desde M08 | — | M08 | Presupuesto medido | — |
 | 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
 | — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
+| — | M21 Diálogos | 4 | V1 | 🟡 Liberado — núcleo + WorldState (relevo autorizado) | Deepseek V4 Flash (Kilo) — relevo de Hy3 (Kilo) | M19 ✅, M21 núcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). Integración M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |
 | — | M112 Testing Automático | 3 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M111 ✅ | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
 | — | M102 Bug Tracking | 1 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M101 doc ✅ | GitHub Issues: plantilla, labels script, workflow métricas, guía, dashboard; 140/140 items | 2026-08-29 02:30 |
+| — | M103 Logging | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M04/M07 ✅ | Logger autoload GameLogger + LogRotator + Sanitizer + LogExporter + logging_config.tres, verificado headless Godot 4.7.2 (14/14). Pendiente: M110/M122. Log 236 | 2026-08-29 |
+| — | M104 Analytics | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M103 ✅ | AnalyticsDirector autoload + RF1-RF7 + opt-out + batch JSON offline + agregado histórico; test 18/18, regresión 8/8. Pendiente: M91/M110/M76. Log 237 | 2026-08-29 |
+| — | M105 Telemetría de Gameplay | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M104 ✅ | TelemetryDirector (sin class_name) + opt-in GDPR + 17 eventos + métricas + abandono/zonas; test 16/16, regresión M103 14/14 + M104 18/18. Reescrito sobre arquitectura real. Pendiente: hooks gameplay, UI M91/M53, envío remoto M76. Log 243 | M104 ✅ | 2026-08-29 |
 
 ### Bloque `Reserva actual` obligatorio en cada checklist de módulo
 
