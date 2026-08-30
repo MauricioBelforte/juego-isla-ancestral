@@ -150,3 +150,56 @@ tools/mcp/godot-mcp/
 # Estado local de herramientas de agentes
 # =============================================
 .workbuddy-ai/
+
+# =============================================
+# Godot — dependencias de terceros (addons)
+# gdUnit4 es un framework de tests externo (~160 MB); se instala via
+# AssetLib / addons manager, no se versiona. Usar submodule si se quiere pin.
+# =============================================
+game/isla-ancestral/addons/
+
+# =============================================
+# Godot — metadatos de import generados por el editor
+# Los .uid se regeneran al importar; los sueltos en raiz son ruido.
+# (los .uid dentro de scripts versionados se mantienen con el script)
+# =============================================
+*.uid
+
+# =============================================
+# Scripts sueltos / temporales en la raiz del repo
+# Son archivos de trabajo del agente, no fuente del proyecto.
+# =============================================
+_capture_tier_c.py
+_fix_piramide2.py
+_fix_spawn_pradera.py
+fix_test_l71.py
+check_godot.bat
+run_m105.ps1
+_gen_aprobado.gd
+_gen_ideal.gd
+_main_aprobado.gd
+isla-modelo-2.jpg
+isla-modelo-3.jpg
+isla-modelo.jpg
+paleta-propuesta-isla.png
+docs/
+.github/
+
+# =============================================
+# Backups de Blender (ya cubierto arriba, refuerzo explicito)
+# =============================================
+*.blend1
+
+# =============================================
+# Configuracion local de agentes / hooks (no es fuente del proyecto)
+# =============================================
+.claude/
+.pre-commit-config.yaml
+
+# =============================================
+# Probes temporales de colision generados durante QA
+# =============================================
+game/isla-ancestral/_probe_col.gd
+game/isla-ancestral/_probe_col.gd.uid
+game/isla-ancestral/_test_2x.gd.uid
+
