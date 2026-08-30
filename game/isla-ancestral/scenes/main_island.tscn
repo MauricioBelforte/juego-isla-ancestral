@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/npc/villager.gd" id="5_villager"]
 [ext_resource type="Resource" path="res://data/villagers/catalina_oso.tres" id="6_catalina"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/status_bar.gd" id="8_status"]
-[ext_resource type="Script" path="res://scripts/ui/widgets/hotbar_widget.gd" id="12_hotbar"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/interact_prompt.gd" id="13_interact"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
@@ -83,21 +82,6 @@ offset_right = 160.0
 offset_bottom = 510.0
 mouse_filter = 2
 script = ExtResource("8_status")
-
-[node name="HotbarWidget" type="Control" parent="UI"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -180.0
-offset_top = -65.0
-offset_right = 180.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_filter = 2
-script = ExtResource("12_hotbar")
 
 [node name="InteractPrompt" type="Control" parent="UI"]
 offset_left = 290.0
