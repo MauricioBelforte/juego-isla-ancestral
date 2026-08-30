@@ -36,17 +36,24 @@ dist > 0.98    → AGUA PROFUNDA (height 0, azul océano)
 | SHALLOW_WATER | **[COMPLETAR]** | **[COMPLETAR]** |
 | ... | (tabla completa de la library) | |
 
-## 2. Sistema de posicionamiento de objetos
+## 2. Sistema de posicionamiento de objetos (TerrainLocator)
+> 🏷️ **MÉTODO OBLIGATORIO.** Usa el autoload `TerrainLocator` — es el ÚNICO punto de verdad que
+> consulta el generador REAL del mundo. **NUNCA** crees un `IslandGenerator` propio con radio
+> hardcodeado (eso hacía flotar a los NPCs). Ver guía 07 §10.16.
+
 ```gdscript
-var gen = terrain.generator
-var h := int(gen._get_island_gen().get_height(x, z))
-nodo.global_position = Vector3(x, h + 1, z)   # 1 bloque sobre la superficie
+var locator = get_node_or_null("/root/TerrainLocator")
+var h := locator.get_height(int(x), int(z))       # altura real del suelo
+nodo.global_position = Vector3(x, float(h) + 1.0, z)  # 1 bloque sobre la superficie
+# o directamente:
+locator.posicionar_sobre_terreno(nodo, x, z)
 ```
 ### Reglas
-1. SIEMPRE `get_height` del generador real (nunca Y fija ni get_voxel).
-2. El snap del NPC debe usar el MISMO `island_radius` que el mundo.
+1. Usar SIEMPRE `TerrainLocator` (nunca Y fija, nunca get_voxel, nunca IslandGenerator propio).
+2. El snap del NPC debe usar TerrainLocator (radio automáticamente correcto).
 3. Posicionar con `call_deferred` (espera a que el nodo esté en el árbol).
-4. Si un objeto flota → el radio del snap está desalineado.
+4. Si un objeto flota → verificar que use TerrainLocator (no un generador clon).
+5. `TerrainLocator.get_height` devuelve -1 si no hay terreno; verificar >= 0 antes de usar.
 
 ### Mapa de ubicaciones (isla <Nombre>)
 | Objeto | Coordenada (X, Z) | Altura | Nota |

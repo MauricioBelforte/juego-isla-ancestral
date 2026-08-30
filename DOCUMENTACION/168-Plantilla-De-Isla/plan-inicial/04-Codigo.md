@@ -27,12 +27,16 @@ player.global_position = Vector3([COMPLETAR])
 voxel_viewer_node.global_position = Vector3([COMPLETAR])
 ```
 
-## Posicionar un objeto (patrón)
+## Posicionar un objeto (patrón OBLIGATORIO — TerrainLocator)
 ```gdscript
-var gen = terrain.generator
-var h := int(gen._get_island_gen().get_height(obj_x, obj_z))
-nodo.global_position = Vector3(obj_x, h + 1, obj_z)
+var locator = get_node_or_null("/root/TerrainLocator")
+var h := locator.get_height(int(obj_x), int(obj_z))   # -1 si no hay terreno
+if h >= 0:
+    nodo.global_position = Vector3(obj_x, float(h) + 1.0, obj_z)
+# o: locator.posicionar_sobre_terreno(nodo, obj_x, obj_z)
 ```
+> Regla: NUNCA crear IslandGenerator propio con radio hardcodeado (causa de flotamiento).
+> El autoload TerrainLocator consulta el generador real del mundo (radio correcto automáticamente).
 
 ## Nota importante
 Este módulo NO modifica el motor voxel. Solo documenta la config de la isla y el

@@ -973,6 +973,9 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 - **Reglas de oro heredadas:** el centro de la isla es `(island_radius, island_radius)`;
   posicionar con `get_height(x,z) + 1`; radio ~256 para isla visible; el snap del NPC debe
   usar el MISMO radio que el mundo (si no, flota).
+- **Posicionamiento (OBLIGATORIO):** usar el autoload `TerrainLocator` (`get_height` +
+  `posicionar_sobre_terreno`). **NUNCA** crear un `IslandGenerator` propio con radio
+  hardcodeado (causa de NPCs flotando). Ver guía 07 §10.16.
 - **Firmado:** la guía 07 §10.15 documenta el detalle técnico de estas reglas.
 
 > **Regla maestra:** si una guía aún no existe, **créala** siguiendo el formato correspondiente. Si existe pero no está actualizada con un descubrimiento, **actualízala**. No se permite arrancar de cero ni repetir errores ya documentados.
