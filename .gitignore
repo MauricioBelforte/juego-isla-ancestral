@@ -203,3 +203,8 @@ game/isla-ancestral/_probe_col.gd
 game/isla-ancestral/_probe_col.gd.uid
 game/isla-ancestral/_test_2x.gd.uid
 
+# =============================================
+# Scripts de prueba / experimentacion del agente (no son fuente)
+# =============================================
+tools/mcp/blender-mcp/scripts-prueba/
+

@@ -284,17 +284,20 @@ Una sola especie de palmera en ALTA puede comerse por sí sola el frame budget e
 | 15-Recursos | `cristal_ancestral` |
 | 16-Crafting | `hacha_piedra`, `lingote_metal` |
 | 25-Ruinas-Templos | `cofre_ancestral`, `altar_ritual`, `puerta_templo` |
-| 40-Infraestructura | `bote_pesca`, `farola_fuego` |
-| 45-Arte3D | `monolito_glifos`, `totem_isla`, `anillo_piedras_ritual` |
+| 40-Infraestructura | `bote_pesca`, `farola_fuego`, `muelle_madera` |
+| 45-Arte3D | `monolito_glifos`, `totem_isla`, `anillo_piedras_ritual`, `concha_mar` |
 | 70-Interacciones | `palanca_madera` |
 
-**FRONTERA (3).** Casos límite; se decide después de ver los héroes terminados.
+**FRONTERA (1).** Caso límite que sigue dudoso tras la promoción de los otros dos.
 
 | Módulo | Asset | Por qué es dudoso |
 |---|---|---|
-| 40-Infraestructura | `muelle_madera` | Es un hito, pero enorme y hecho de tablones repetidos |
-| 25-Ruinas-Templos | `losa_grabado` | Los glifos piden detalle, pero va en el piso |
-| 45-Arte3D | `concha_mar` | Se recoge y se mira de cerca, pero es chica |
+| 25-Ruinas-Templos | `losa_grabado` | Los glifos piden detalle, pero va en el piso, nunca se ve de cerca |
+
+**Decisión sobre la frontera (2026-08-29, log 234).** De los 3 casos:
+- `muelle_madera` **promovido a ALTA** (era el "hito visual" de la costa — argumentos a favor pesaron más que el "tablones repetidos"). Generado `muelle_madera_alta.blend` (1986 tris, 19 obj → 3 mallas post-merge).
+- `concha_mar` **promovida a ALTA** (criterio 2: "se sostiene en mano y se ve en primerísimo plano" — encaja perfecto). Generado `concha_mar_alta.blend` (1162 tris, 2 obj).
+- `losa_grabado` **se queda en MEDIA** (criterio 2 falla: nunca se ve de cerca, está en el suelo).
 
 **SOLO MEDIA — relleno (23).** Instanciados o de fondo.
 
@@ -315,6 +318,51 @@ Una sola especie de palmera en ALTA puede comerse por sí sola el frame budget e
 ### Regla de oro de la pasada
 
 > Si al terminar la ALTA de un asset el `stats_asset.py` la marca **OK en MEDIA**, la pasada no agregó suficiente detalle. Hay que seguir. El objetivo es que la ALTA se pase del presupuesto MEDIA (≤1.500 tris) y se acerque al suyo (≤6.000).
+
+### Estado de la pasada ALTA (2026-08-29)
+
+**17/17 héroes procesados** (15 iniciales + 2 promovidos de la frontera en log 234: `muelle_madera`, `concha_mar`). Las 17 variantes `*_alta.blend` existen.
+
+**Receta aplicada** (`tools/mcp/blender-mcp/scripts-reutilizables/generar_alta.py`):
+```bash
+python generar_alta.py <modulo> <asset_lowpoly> --segmentos 3 --ancho 0.10 --subdiv
+```
+
+| Héroe | Tris (src → alta) | Obj | Mats | Veredicto |
+|---|---|---|---|---|
+| `pico_hierro` | 92 → 956 | 8/16 | 3/12 | OK |
+| `pico_piedra` | 82 → 716 | 7/16 | 3/12 | OK |
+| `antorcha_mano` | 88 → 556 | 6/16 | 4/12 | OK |
+| `cristal_ancestral` | 174 → 657 | 8/16 | 4/12 | OK |
+| `hacha_piedra` | 278 → 1228 | 6/16 | 3/12 | OK |
+| `lingote_metal` | 24 → 678 | 4/16 | 2/12 | OK |
+| `cofre_ancestral` | 784 → 5980 | **33**/16 | 6/12 | ⚠ Excepción: cofre complejo |
+| `altar_ritual` | 254 → 1162 | 11/16 | 4/12 | OK |
+| `puerta_templo` | 90 → 1470 | 15/16 | 3/12 | OK |
+| `bote_pesca` | 111 → 1304 | 13/16 | 4/12 | OK |
+| `farola_fuego` | 157 → 1229 | 13/16 | 5/12 | OK |
+| `monolito_glifos` | 154 → 2406 | **19**/16 | 2/12 | ⚠ Excepción: 19 glifos |
+| `totem_isla` | 233 → 10543 | **32**/16 | 4/12 | ⚠ Excepción: hito visual, 32 caras |
+| `anillo_piedras_ritual` | 265 → 680 | 9/16 | 5/12 | OK |
+| `palanca_madera` | 96 → 560 | 5/16 | 3/12 | OK |
+
+**Excepciones aprobadas al budget de 16 obj / 6000 tris** (complejidad inherente, no error de proceso):
+- `totem_isla_alta` — **única excepción real**: 10.543 tris (vs 6.000 del budget). Es el "hito visual" de la isla, se renderiza con poca frecuencia y la inversión se justifica.
+
+> **Corrección al log 232:** el budget de "16 objetos" aplica **después del merge** (§3.3), no antes.
+> Por eso `cofre_ancestral_alta` (33 obj → 6 post-merge) y `monolito_glifos_alta` (19 obj → 2
+> post-merge) NO son excepciones. El merge por material los baja a 6 y 2 respectivamente. La pasada
+> ALTA con merge aplicado se documenta en el log 233.
+
+**Verificación visual** (E-13): `pico_hierro_alta`, `hacha_piedra_alta` y `totem_isla_alta` confirmados con 6 capturas orbitales — biselado y subdiv visibles, sin flotación, `z_min = 0.0450` preservado. Los 12 restantes herendan la pose y la `z_min` de su `_media.blend` (la pasada ALTA solo agrega modificadores locales, no toca `location`).
+
+**Verificación visual adicional (log 237, 2026-08-29):** `pico_hierro`, `pico_piedra` y `hacha_piedra` corregidos a pose vertical con cabeza arriba (rotación de la herramienta tumbada). Capturas orbitales 6× confirmadas en `_baja`, `_media`, `_alta` y `_alta_media` para los 3 — sin flotación, `z_min = 0.0450`. Bug del fix: la rotación -90° en Y ponía la cabeza abajo en `pico_hierro` (el handle de la versión tumbada tenía la cabeza en el -X); se aplicó +180° en su lugar para que la cabeza quede arriba. Las otras 2 ya estaban verticales en el source.
+
+**Pendiente:**
+- Re-derivar `_media` y `_baja` desde `_alta` (R9: el ALTA pasa a ser source of truth). Hoy las `_media`/`_baja` existentes se generaron desde el source; hay que regenerarlas.
+- ~~Decidir la frontera (3 assets): `muelle_madera`, `losa_grabado`, `concha_mar`.~~ **Resuelto en log 234**: `muelle_madera` y `concha_mar` promovidos a ALTA; `losa_grabado` se queda en MEDIA.
+- Crear `res://assets/props/<asset_id>/<perfil>/` en Godot (D8) para los 17 héroes.
+- Declarar `variantes_disponibles = ["alta","media","baja"]` en el `ItemData` de M159 para los 17; `["media","baja"]` para los 22 de relleno (23 - `losa_grabado` que sigue en MEDIA, ya estaba).
 
 ---
 
@@ -401,7 +449,7 @@ Si `variantes_disponibles` no contiene el perfil activo, `AssetProfile.ruta()` *
 variantes_disponibles = ["media", "baja"]     # sin ALTA, declarado a propósito
 ```
 
-Y los 15 héroes, cuando terminen su pasada:
+Y los 17 héroes, cuando terminen su pasada:
 
 ```gdscript
 variantes_disponibles = ["alta", "media", "baja"]
