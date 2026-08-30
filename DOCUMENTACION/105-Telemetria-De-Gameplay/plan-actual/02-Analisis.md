@@ -1,29 +1,42 @@
-**Modelo:** SWE-1.6
-**Plataforma:** DEVIN
+**Modelo:** ox-alpha
+**Plataforma:** Cline
 
 # 02-Analisis.md — Módulo 105: Telemetría de Gameplay
 
-## 1. Análisis de los puntos del plan maestro (sección 104)
+> **Reescritura 2026-08-29 sobre arquitectura REAL.** El análisis original de DEVIN
+> asumía APIs inexistentes; las decisiones se replantearon así:
 
-| # | Punto | Resolución |
+## 1. Decisiones de arquitectura (por qué cambió el plan)
+
+| Decisión DEVIN (plan original) | Decisión real (este plan) | Motivo |
 |---|---|---|
-| 1 | Medir primer tutorial completado | ✅ Evento telemetría: tutorial_first_completion |
-| 2 | Medir primer recurso recolectado | ✅ Evento telemetría: resource_first_collected |
-| 3 | Medir primera casa | ✅ Evento telemetría: house_first_built |
-| 4 | Medir primer NPC | ✅ Evento telemetría: npc_first_interaction |
-| 5 | Medir primer puzzle | ✅ Evento telemetría: puzzle_first_completed |
-| 6 | Medir primer Sello | ✅ Evento telemetría: seal_first_obtained |
-| 7 | Medir primer viaje | ✅ Evento telemetría: travel_first_completed |
-| 8 | Medir primera isla | ✅ Evento telemetría: island_first_discovered |
-| 9 | Medir primer museo | ✅ Evento telemetría: museum_first_visited |
-| 10 | Medir primer festival | ✅ Evento telemetría: festival_first_participated |
-| 11 | Medir primer proyecto comunitario | ✅ Evento telemetría: community_project_first_completed |
-| 12 | Medir tiempo hasta primer descubrimiento | ✅ Métrica: time_to_first_discovery |
-| 13 | Medir tiempo hasta primer viaje | ✅ Métrica: time_to_first_travel |
-| 14 | Medir puzzle abandonado | ✅ Evento telemetría: puzzle_abandoned |
-| 15 | Medir dificultad percibida | ✅ Encuesta post-puzzle: difficulty_perceived |
-| 16 | Medir zonas ignoradas | ✅ Métrica: zones_ignored |
-| 17 | Usar datos para mejorar diseño | ✅ Análisis de datos para identificar problemas de diseño |
+| `class_name GameplayTelemetry` | Autoload `TelemetryDirector` **sin class_name** | §9.41/§9.17 guía Godot: autoload + class_name colisiona; Godot 4.7 reserva "Telemetry" |
+| `GameState.get_setting()` | `ConfigFile user://settings/telemetry.cfg` | No existe GameState de settings en el proyecto |
+| `ServiceLocator.get_service()` | `ServiceRegistry.get_service("telemetry")` | La capa de servicios real es M07 ServiceRegistry |
+| `AnalyticsService.record_event()` | `AnalyticsDirector.registrar_evento(tipo, datos)` | La API real de M104 es esa, con tipos "telemetry"/"metrica" |
+| Storage propio `user://telemetry/*.json` | **Sin storage propio** — M104 ya hace batch/agregado/offline | §15 modularidad: no duplicar responsabilidades |
+| `session_id` propio generado | Sin session_id propio: M104 ya genera hash SHA256 rotativo 24h | Privacidad: evitar PII-adyacente duplicado |
+
+## 2. Resolución de los 17 puntos
+
+Todos los RF1-RF17 del plan original se mantienen (ver 01-Requerimientos). La resolución
+es la implementada en `scripts/telemetry/telemetry_director.gd`:
+- RF1-RF11: métodos `track_*_first_*()` con deduplicación por sesión (`_tracked` Dictionary).
+- RF12-RF13: métricas `time_to_first_discovery` / `time_to_first_travel`, registradas una sola vez (`_registrar_metrica_hasta`).
+- RF14: timer de 1s; abandono si un puzzle iniciado supera 300s (constante `PUZZLE_ABANDONO_SEGUNDOS`).
+- RF15: `track_difficulty_perceived(puzzle_id, rating)`; la señal UI la dispara.
+- RF16: `enter_zone`/`exit_zone` acumulan duración; `zone_ignored` si <60s (`ZONA_IGNORADA_SEGUNDOS`).
+- RF17: todo viaja a M104 (tipos "telemetry" y "metrica") que ya agrega y persiste.
+
+## 3. Integraciones reales
+
+- **M104 (Analytics):** única vía de salida. Inyección de stub posible para tests
+  (`analytics_service`). El opt-out de telemetría propaga `establecer_opt_out(true)` a M104.
+- **M103 (GameLogger):** logging con `GameLogger.Category.ANALYTICS` (info/debug).
+- **UI futura (M53/M91):** señales emitidas para consumo externo: `cambio_opt_in`,
+  `evento_rastreado`, `solicitar_encuesta`. El prompt de opt-in y la encuesta son UI, no V0.
+- **M71/M22/M102 (plan original):** integraciones diferidas; cuando existan, deben llamar
+  a los métodos `track_*` del director (hooks). No son prerequisitos de este módulo.
 
 ## 2. Eventos de telemetría
 

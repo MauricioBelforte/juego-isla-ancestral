@@ -1,75 +1,77 @@
-**Modelo:** SWE-1.6
-**Plataforma:** DEVIN
+﻿**Modelo:** ox-alpha
+**Plataforma:** Cline
 
 # 01-Requerimientos.md — Módulo 105: Telemetría de Gameplay
 
+> **Reescritura 2026-08-29:** el plan original (DEVIN/SWE-1.6) planteaba APIs inexistentes
+> en este proyecto (`GameState.get_setting`, `ServiceLocator`, `AnalyticsService.record_event`).
+> Este plan-actual replantea los requerimientos sobre la arquitectura REAL:
+> autoloads Godot + `ServiceRegistry` + `AnalyticsDirector` (M104) + `GameLogger` (M103).
+> El plan-inicial se conserva sin modificar como punto de partida histórico.
+
 ## ID del Módulo
-- **Código:** M105 (plan maestro: sección 104 — Telemetría de Gameplay)
+- **Código:** M105 (CHECKLIST-GLOBAL: 105-Telemetria-De-Gameplay)
 - **Carpeta:** `DOCUMENTACION/105-Telemetria-De-Gameplay/`
-- **Dependencias:** M104 (Analytics), M71 (Progresión), M22 (Historia Principal), M102 (Bug Tracking)
-- **Carácter:** Módulo de telemetría de gameplay para medir comportamiento de jugadores
+- **Dependencia real:** M104 Analytics ✅ (única vía de persistencia/batch de eventos)
+- **Dependencias del plan original NO requeridas:** M71 (Progresión), M22 (Historia), M102 (Bug Tracking) — son consumidores potenciales de los datos, no prerequisitos. La integración se hará por hooks cuando esos módulos existan.
 
 ## 1. Problema
 
-El proyecto necesita un sistema de **telemetría de gameplay** para medir cómo los jugadores interactúan con el juego, identificar patrones de comportamiento, detectar problemas de diseño y mejorar la experiencia. Debe medir eventos clave (primer tutorial completado, primer recurso recolectado, primera casa, primer NPC, primer puzzle, primer Sello, primer viaje, primera isla, primer museo, primer festival, primer proyecto comunitario), tiempos (hasta primer descubrimiento, hasta primer viaje), abandonos (puzzle abandonado, zonas ignoradas), dificultad percibida, y usar datos para mejorar diseño.
+El juego necesita medir cómo juegan los jugadores (eventos clave, tiempos, abandonos,
+dificultad percibida) para detectar problemas de diseño con datos reales, sin afectar
+rendimiento y sin recoger datos si el jugador no lo autoriza explícitamente.
 
 ## 2. Requisitos Funcionales
 
-| # | Requisito | Detalle |
+| # | Requisito | Implementación real |
 |---|---|---|
-| RF1 | Primer tutorial completado | Medir cuando el jugador completa el tutorial por primera vez |
-| RF2 | Primer recurso recolectado | Medir cuando el jugador recolecta el primer recurso |
-| RF3 | Primera casa | Medir cuando el jugador construye la primera casa |
-| RF4 | Primer NPC | Medir cuando el jugador interactúa con el primer NPC |
-| RF5 | Primer puzzle | Medir cuando el jugador completa el primer puzzle |
-| RF6 | Primer Sello | Medir cuando el jugador obtiene el primer Sello |
-| RF7 | Primer viaje | Medir cuando el jugador hace el primer viaje entre islas |
-| RF8 | Primera isla | Medir cuando el jugador descubre la primera isla |
-| RF9 | Primer museo | Medir cuando el jugador visita el primer museo |
-| RF10 | Primer festival | Medir cuando el jugador participa en el primer festival |
-| RF11 | Primer proyecto comunitario | Medir cuando el jugador completa el primer proyecto comunitario |
-| RF12 | Tiempo hasta primer descubrimiento | Medir tiempo desde inicio hasta primer descubrimiento importante |
-| RF13 | Tiempo hasta primer viaje | Medir tiempo desde inicio hasta primer viaje entre islas |
-| RF14 | Puzzle abandonado | Medir puzzles que el jugador abandona sin completar |
-| RF15 | Dificultad percibida | Medir dificultad percibida de puzzles y actividades |
-| RF16 | Zonas ignoradas | Medir zonas que el jugador no explora |
-| RF17 | Uso de datos para mejorar diseño | Analizar datos para identificar problemas de diseño y mejorar experiencia |
+| RF1 | Primer tutorial completado | `track_tutorial_first_completed()` → evento `tutorial_first_completion` |
+| RF2 | Primer recurso recolectado | `track_resource_first_collected(recurso)` |
+| RF3 | Primera casa | `track_house_first_built()` |
+| RF4 | Primer NPC | `track_npc_first_interaction(npc_id)` |
+| RF5 | Primer puzzle | `track_puzzle_first_completed(puzzle_id)` / `complete_puzzle()` |
+| RF6 | Primer Sello | `track_seal_first_obtained(sello_id)` |
+| RF7 | Primer viaje | `track_travel_first_completed(origen, destino)` |
+| RF8 | Primera isla | `track_island_first_discovered(isla_id)` |
+| RF9 | Primer museo | `track_museum_first_visited(museo_id)` |
+| RF10 | Primer festival | `track_festival_first_participated(festival_id)` |
+| RF11 | Primer proyecto comunitario | `track_community_project_first_completed(proyecto_id)` |
+| RF12 | Tiempo hasta primer descubrimiento | métrica `time_to_first_discovery` (una vez por sesión) |
+| RF13 | Tiempo hasta primer viaje | métrica `time_to_first_travel` |
+| RF14 | Puzzle abandonado | `start_puzzle()` + timer → `puzzle_abandoned` si >300s sin completar |
+| RF15 | Dificultad percibida | `track_difficulty_perceived(puzzle_id, rating 1-5)` (la UI la dispara) |
+| RF16 | Zonas ignoradas | `enter_zone()`/`exit_zone()` → `zone_ignored` si visita <60s acumulados |
+| RF17 | Datos para mejorar diseño | eventos type "telemetry"/"metrica" en M104 (agregación/batch/histórico) |
 
-## 3. Requisitos No Funcionales
+RNF: opt-in OFF por defecto (GDPR), sin PII, sin impacto en gameplay (delegación pasiva),
+offline-first (M104 persiste JSON local), test headless sin tocar disco real.
 
-- Telemetría debe ser opcional y con opt-in explícito (cumplimiento GDPR)
-- Datos deben ser anonimizados (sin identificadores personales)
-- Telemetría no debe afectar rendimiento del juego
-- Telemetría debe enviar datos en batch (no individualmente por evento)
-- Telemetría debe ser offline-first (caché local cuando no hay conexión)
-- Telemetría debe ser compatible con M104 (Analytics)
 
-## 4. Criterios de Aceptación
+## 3. Criterios de Aceptación
 
-1. Los 17 puntos de la sección 104 del plan maestro resueltos.
-2. Sistema de telemetría con opt-in explícito y GDPR-compliant.
-3. Eventos de telemetría medidos correctamente (17 eventos clave).
-4. Sistema de medición de tiempos (hasta primer descubrimiento, hasta primer viaje).
-5. Sistema de detección de abandonos (puzzle abandonado, zonas ignoradas).
-6. Sistema de medición de dificultad percibida.
-7. Sistema de análisis de datos para mejorar diseño.
-8. Integración con M104 (Analytics) para envío de datos.
+1. Autoload TelemetryDirector registrado (project.godot + ServiceRegistry "telemetry").
+2. Opt-in GDPR OFF por defecto, persistente, con propagación de opt-out a M104.
+3. Los 17 eventos RF1-RF17 implementados y testeados (test headless 16/16).
+4. Métricas de tiempo y detección de abandonos/zonas operativas.
+5. Cero errores de script en Godot 4.7.2 --headless; regresión M103/M104 sin fallos.
+6. Hooks de integración pendientes documentados en Notas del Agente.
 
 ---
 
 ## Módulos Relacionados
 
-> **Referencia rápida para codificación.** Al trabajar en este módulo, consulta la documentación de estos módulos relacionados.
-
 ### Depende de (necesito su documentación)
 
 | Módulo | Qué aporta a este módulo |
 |--------|--------------------------|
-| **M104** — Analytics | Base para analytics |
+| **M104** — Analytics | Persistencia, batch offline, agregación y anonimización de los eventos |
+| **M103** — Logging | GameLogger para trazabilidad (Category.ANALYTICS) |
+| **M07** — ServiceRegistry | Registro del servicio "telemetry" |
 
-### Relacionados laterales (mismo dominio)
+### Consumidores futuros (no prerequisitos)
 
 | Módulo | Relación |
 |--------|----------|
-| **M104** — Analytics | Depende de este módulo |
-
+| **M53/M91** — UI | Prompt de opt-in y encuesta de dificultad (señales ya emitidas) |
+| **M71/M22** — Progresión/Historia | Deben llamar a los track_* cuando existan |
+| **M102** — Bug Tracking | Consumidor de patrones de abandono como señales de bug |

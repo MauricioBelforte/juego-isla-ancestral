@@ -1,5 +1,17 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
+
+## Reserva actual
+
+- Estado: 🔵 En curso
+- Agente: ox-alpha (Cline)
+- Fase: F0/transversal (infraestructura)
+- Dificultad: 2
+- Vision: V0
+- Entrada: M04 Godot ✅ + M07 ServiceRegistry ✅
+- Salida: Logger (autoload) + LogRotator + SensitiveDataSanitizer + LogExporter + logging_config.tres, verificados headless Godot 4.7.2
+- Archivos: `game/isla-ancestral/scripts/logging/*.gd`, `data/logging/logging_config.tres`, `project.godot`
+- Fecha: 2026-08-29
 
 # 05-Checklist.md — Módulo 103: Logging
 
@@ -201,4 +213,28 @@
 - [ ] Pendientes asignados a dueños [S]
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 134 ítems · Completados: 134 · Pendientes: 0 · No resueltos: 0.
+## N. Implementación (ox-alpha/Cline 2026-08-29, V0, verificado headless)
+
+- [x] Crear scripts/logging/logger.gd como autoload **GameLogger** (⚠️ no `Logger`: clase nativa Godot 4.7) [M]
+- [x] Implementar API pública del Logger: debug/info/warning/error/critical con (message, category, context) [M]
+- [x] Implementar set_min_level/set_category_enabled/is_level_enabled/reload_config [M]
+- [x] Implementar enums Level (DEBUG..CRITICAL) y Category (BOOT..CRASH) [S]
+- [x] Implementar formato de línea humano [timestamp] [NIVEL] [CAT] mensaje + contexto opcional [M]
+- [x] Implementar formato JSON opcional (json_output) para herramientas [M]
+- [x] Implementar buffer + flush periódico (cada 100 líneas) para performance [M]
+- [x] Implementar export_all/export_last_lines/export_by_level/export_by_category/export_by_date [M]
+- [x] Crear scripts/logging/log_rotator.gd (LogRotator): rotación n→n+1, elimina el más antiguo [M]
+- [x] Implementar compresión gzip de rotados (compress_old_logs) [M]
+- [x] Crear scripts/logging/sensitive_data_sanitizer.gd: IPs, tokens/passwords, rutas de usuario → [REDACTED] [M]
+- [x] Implementar sanitización de contexto (Dictionary) preservando valores no sensibles [M]
+- [x] Crear scripts/logging/log_exporter.gd (LogExporter): export a user://logs/export_{ts}.log [M]
+- [x] Crear clase LoggingConfig (Resource) con getters para el Logger [M]
+- [x] Crear data/logging/logging_config.tres (config por build) [M]
+- [x] Registrar autoload GameLogger en project.godot [S]
+- [x] Registrar servicio "logger" en ServiceRegistry (M07) desde _ready [S]
+- [x] Emitir señal line_emitted(level, category, line) para consola in-game (M110 futuro) [M]
+- [x] Test headless test_logger.gd: 14/14 checks OK (niveles, sanitización, exportación, rotación, persistencia) [M]
+- [x] Regresión completa: 6 tests de economía/tiendas/tiempo con 0 fallos tras el autoload (Godot 4.7.2) [S]
+- [x] Documentar descubrimiento: Godot 4.7 reserva "Logger" → usar GameLogger (ver plan-actual/04-Codigo.md) [S]
+
+**Totales:** 134 ítems (diseño) + 21 ítems (implementación) · Diseño: 134 · Implementación: 21 completados

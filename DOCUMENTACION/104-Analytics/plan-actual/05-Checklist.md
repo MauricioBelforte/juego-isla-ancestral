@@ -1,7 +1,18 @@
-**Modelo:** Nemotron 3.5 Lightning
+﻿**Modelo:** ox-alpha (Cline)
 **Plataforma:** Cline
 
-# 05-Checklist.md — Módulo 104: Analytics
+
+## Reserva actual
+
+- Estado: En curso (🔵)
+- Agente: ox-alpha (Cline)
+- Fase: F0/transversal (infraestructura)
+- Dificultad: 2
+- Vision: V0
+- Entrada: M103 Logging completado (log 236)
+- Salida: AnalyticsDirector autoload + buffer RF1-RF7 + opt-out + storage JSON agregado, verificado headless Godot 4.7.2
+- Archivos: scripts/analytics/*.gd, data/analytics/config.tres, project.godot
+- Fecha: 2026-08-29
 
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame.
@@ -141,3 +152,21 @@
 
 **Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.
+## N. Implementacion (ox-alpha/Cline 2026-08-29, V0, verificado headless)
+
+- [x] Crear scripts/analytics/analytics_director.gd como autoload AnalyticsDirector [M]
+- [x] Implementar captura RF1-RF7: los 7 tipos de evento (sesion_inicio/fin, area, feature, error, pausa, config) [M]
+- [x] Implementar buffer en memoria con politica de descarte (max_buffer, descarta los mas viejos) [M]
+- [x] Implementar opt-out: establecer_opt_out persistente en user://analytics/opt_out.cfg, detiene captura inmediatamente [M]
+- [x] Implementar privacidad: session hash SHA256 rotativo 24h (16 hex), sin nombres/coordenadas/hardware en el JSON [M]
+- [x] Implementar agregacion por tipo (obtener_estadisticas_agregadas) [M]
+- [x] Implementar batch sender offline a JSON local (lote_{ts}.json) con flush al cerrar (sesion_fin) [M]
+- [x] Implementar agregado historico acumulado (aggregated.json, totales_por_tipo) [M]
+- [x] Implementar senal evento_registrado para dashboards futuros [S]
+- [x] Crear clase AnalyticsConfig (Resource) + data/analytics/config.tres (config por build) [M]
+- [x] Registrar autoload AnalyticsDirector en project.godot + servicio 'analytics' en ServiceRegistry (M07) [S]
+- [x] Integrar con M103 GameLogger (categoria ANALYTICS, sin contenido de eventos) [M]
+- [x] Test headless test_analytics.gd: 18/18 checks OK (captura, opt-out, privacidad, batch, historico, buffer) [M]
+- [x] Regresion completa: 8/8 tests del proyecto con 0 fallos tras el autoload (Godot 4.7.2) [S]
+
+**Totales:** Diseño: 100 ítems (documentado por B1) · Implementación: 14 ítems completados

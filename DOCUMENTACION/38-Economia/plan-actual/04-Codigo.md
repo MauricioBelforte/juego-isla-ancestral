@@ -1,10 +1,10 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 38: Economía
 
 > Rutas previstas dentro de `res://economia/` (estructura del proyecto Godot 4.x).
-> ⚠️ **Estado: Pendiente de implementación.** Los archivos listados son diseño/documentación; no existe código runtime todavía.
+> ⚠️ **Actualizado (ox-alpha/Cline, 2026-08-29):** La implementación real vive en `scripts/economia/` y `scripts/shops/` (no `economia/`). Núcleo de moneda, precios, límites por banda y minorista/mayorista implementados y verificados headless (Godot 4.7.2). Pendiente de implementar: trueque (BarterSystem), mercado con tabla diaria de oferta, ferias y helper de validación de catálogos.
 
 ## 1. Archivos Previstos
 
@@ -12,11 +12,12 @@
 
 | Archivo | Propósito | Estado |
 |---|---|---|
-| `res://economia/economy_manager.gd` | Autoload `EconomyManager`: saldo, transacciones monetarias, persistencia | Pendiente de implementación |
-| `res://economia/price_manager.gd` | Autoload `PriceManager`: precios vigentes, mercado, tabla del día, límites | Pendiente de implementación |
+| `scripts/economia/economy_manager.gd` | Autoload `EconomyManager`: saldo, transacciones monetarias, persistencia | **Implementado** (M38) |
+| `scripts/economia/price_manager.gd` | `PriceManager` (RefCounted): precios vigentes, minorista/mayorista, límites por banda, anti-arbitraje | **Implementado** (M38) |
 | `res://economia/shop_manager.gd` | Autoload `ShopManager`: tiendas, stock, horarios, reabastecimiento | Pendiente de implementación |
 | `res://economia/barter_system.gd` | Autoload `BarterSystem`: trueques, propuestas, límites diarios | Pendiente de implementación |
-| `res://economia/price_definition.gd` | Resource `PriceDefinition` (`.tres`): datos de precio de un ítem | Pendiente de implementación |
+| `scripts/economia/test_edge_cases_precio.gd` | Test headless (SceneTree) de edge cases de precios | **Implementado** (log 235) |
+| `scripts/economia/price_definition.gd` | Resource `PriceDefinition` (`.tres`): datos de precio de un ítem | **Implementado** (M38) |
 | `res://economia/shop_definition.gd` | Resource `ShopDefinition` (`.tres`): datos de una tienda | Pendiente de implementación |
 | `res://economia/barter_offer.gd` | Resource `BarterOffer` (`.tres`): propuesta de trueque | Pendiente de implementación |
 | `res://economia/economy_validation.gd` | Helper de validación de catálogos en editor | Pendiente de implementación |

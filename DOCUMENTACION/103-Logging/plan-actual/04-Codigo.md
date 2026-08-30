@@ -1,7 +1,21 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 103: Logging
+
+## 0. Estado de implementación (actualizado por ox-alpha/Cline 2026-08-29)
+
+> ⚠️ **IMPLEMENTADO (V0, verificado headless Godot 4.7.2).** Log 236.
+> Archivos creados en `scripts/logging/`:
+> - `logger.gd` → **autoload `GameLogger`** (⚠️ no `Logger`: Godot 4.7 tiene clase nativa `Logger`; usar `GameLogger` como singleton autoload + service name `"logger"`).
+> - `log_rotator.gd` → `LogRotator` (rotación + compresión gzip).
+> - `sensitive_data_sanitizer.gd` → `SensitiveDataSanitizer` (IPs, tokens, rutas de usuario).
+> - `log_exporter.gd` → `LogExporter` (export a `user://logs/export_{timestamp}.log`).
+> - `logging_config.gd` → clase `LoggingConfig` (Resource).
+> - `data/logging/logging_config.tres` → config por build.
+> - `test_logger.gd` → test headless (14/14 checks OK).
+> Registrado como autoload `GameLogger` en `project.godot` y como servicio `"logger"` en ServiceRegistry (M07).
+> Integración pendiente (no bloquea el módulo): consola in-game (M110), crash pre-crash (M122).
 
 ## 1. Carácter del Componente
 
@@ -173,3 +187,31 @@ func get_log_file_path() -> String:
 - La rotación de logs debe ser transparente para el usuario (no interrumpir el juego).
 - La exportación de logs debe ser rápida (para bug reports en runtime).
 - Integrar con el Debug Menu (M110) para mostrar logs en tiempo real con filtros.
+
+## Notas del Agente de la implementación
+
+**Modelo:** ox-alpha (Cline)
+**Plataforma:** Cline
+**Fecha:** 2026-08-29
+**Estado:** Completado (núcleo implementado y verificado headless Godot 4.7.2)
+
+### Lo que hice
+- Implementé `scripts/logging/` completo (5 scripts): logger, log_rotator, sensitive_data_sanitizer, log_exporter, logging_config.
+- Registré el autoload `GameLogger` en `project.godot` y el servicio `"logger"` en ServiceRegistry (M07) desde `_ready`.
+- Creé `data/logging/logging_config.tres` (config por build, Resource LoggingConfig).
+- Creé `test_logger.gd` (14/14 checks OK) y verifiqué regresión completa (6 tests de economía/tiendas/tiempo, 0 fallos).
+- Documenté el checklist (sección N de implementación, 21 ítems `[x]`) y el 04-Codigo.md.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Consola in-game en tiempo real (signal `line_emitted` emitida, pero el consumidor es M110 Debug Menu, no implementado aún).
+- Volcado de logs pre-crash automático (depende de M122 Crash Reporting).
+- Tests unitarios formalizados con GdUnit4 para el Logger (M112 ya hecho; se pueden agregar como suite adicional). Los 14 checks son un test headless custom, no parte de la suite GdUnit4.
+- Calibración de performance/frame budget exacta (M61 Rendimiento).
+
+### Hallazgo técnico importante
+- **Godot 4.7 tiene una clase nativa `Logger`** → usar `GameLogger` como nombre del autoload y `class_name`. El nombre de servicio en ServiceRegistry queda `"logger"` (interfaz, no clase).
+
+### Recomendaciones para el próximo agente
+- Conectar M110 (Debug Menu) a la señal `line_emitted(level, category, line)` para la consola in-game.
+- Conectar M122 (Crash Reporting) a `GameLogger.flush()` + `LogExporter` para volcado pre-crash.
+- Unificar con `registro.gd` (M05) si el equipo quiere un solo punto de logging; actualmente conviven (`registro.gd` = utilidades estáticas ligeras, `GameLogger` = servicio completo con rotación/export).

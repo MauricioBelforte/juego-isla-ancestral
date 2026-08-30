@@ -3,46 +3,59 @@
 
 # 05-Checklist.md — Módulo 105: Telemetría de Gameplay
 
+## Reserva actual
+
+- Estado: 🟡 Liberado — núcleo implementado (sin bloqueo)
+- Agente: ox-alpha (Cline) — liberado 2026-08-29 20:30
+- Fase: F0/transversal (infraestructura V0)
+- Dificultad: 2
+- Vision: V0
+- Entrada: M104 (Analytics) ✅ completado 2026-08-29
+- Salida: Autoload `TelemetryDirector` + 17 eventos + opt-in persistente + test headless, regresión 0 fallos
+- Archivos: `scripts/telemetry/telemetry_director.gd`; autoload en project.godot; servicio `\"telemetry\"` en ServiceRegistry
+- Nota: reescritura sobre arquitectura REAL. El plan original de DEVIN (SWE-1.6) usó `ServiceLocator`/`GameState`/`AnalyticsService.record_event` que no existen; se corrigió a `ServiceRegistry.get_service(\"analytics\")` + `AnalyticsDirector.registrar_evento(tipo, datos)`.
+- Fecha: 2026-08-29
+
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de telemetría de gameplay
-- [ ] Medir primer tutorial completado
-- [ ] Medir primer recurso recolectado
-- [ ] Medir primera casa
-- [ ] Medir primer NPC
-- [ ] Medir primer puzzle
-- [ ] Medir primer Sello
-- [ ] Medir primer viaje
-- [ ] Medir primera isla
-- [ ] Medir primer museo
-- [ ] Medir primer festival
-- [ ] Medir primer proyecto comunitario
-- [ ] Medir tiempo hasta primer descubrimiento
-- [ ] Medir tiempo hasta primer viaje
-- [ ] Medir puzzle abandonado
-- [ ] Medir dificultad percibida
-- [ ] Medir zonas ignoradas
-- [ ] Usar datos para mejorar diseño
+- [x] Medir primer tutorial completado [S]
+- [x] Medir primer recurso recolectado [S]
+- [x] Medir primera casa [S]
+- [x] Medir primer NPC [S]
+- [x] Medir primer puzzle [S]
+- [x] Medir primer Sello [S]
+- [x] Medir primer viaje [S]
+- [x] Medir primera isla [S]
+- [x] Medir primer museo [S]
+- [x] Medir primer festival [S]
+- [x] Medir primer proyecto comunitario [S]
+- [x] Medir tiempo hasta primer descubrimiento [S]
+- [x] Medir tiempo hasta primer viaje [S]
+- [x] Medir puzzle abandonado [S]
+- [x] Medir dificultad percibida [S]
+- [x] Medir zonas ignoradas [S]
+- [ ] Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) [C]
 
 ### [S] Eventos de telemetría
-- [ ] Definir evento tutorial_first_completion
-- [ ] Definir evento resource_first_collected
-- [ ] Definir evento house_first_built
-- [ ] Definir evento npc_first_interaction
-- [ ] Definir evento puzzle_first_completed
-- [ ] Definir evento seal_first_obtained
-- [ ] Definir evento travel_first_completed
-- [ ] Definir evento island_first_discovered
-- [ ] Definir evento museum_first_visited
-- [ ] Definir evento festival_first_participated
-- [ ] Definir evento community_project_first_completed
-- [ ] Definir evento puzzle_abandoned
-- [ ] Definir evento difficulty_perceived
-- [ ] Definir evento zone_entered
-- [ ] Definir evento zone_exited
-- [ ] Definir evento session_started
-- [ ] Definir evento session_ended
-- [ ] Definir evento chapter_completed
+- [x] Definir evento tutorial_first_completion [S]
+- [x] Definir evento resource_first_collected [S]
+- [x] Definir evento house_first_built [S]
+- [x] Definir evento npc_first_interaction [S]
+- [x] Definir evento puzzle_first_completed [S]
+- [x] Definir evento seal_first_obtained [S]
+- [x] Definir evento travel_first_completed [S]
+- [x] Definir evento island_first_discovered [S]
+- [x] Definir evento museum_first_visited [S]
+- [x] Definir evento festival_first_participated [S]
+- [x] Definir evento community_project_first_completed [S]
+- [x] Definir evento puzzle_abandoned [S]
+- [x] Definir evento difficulty_perceived [S]
+- [x] Definir evento zone_entered [S]
+- [x] Definir evento zone_exited [S]
+- [x] Definir evento session_started [S]
+- [x] Definir evento session_ended [S]
+- [ ] Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
 
 ### [S] Métricas de tiempo
 - [ ] Definir métrica time_to_first_discovery

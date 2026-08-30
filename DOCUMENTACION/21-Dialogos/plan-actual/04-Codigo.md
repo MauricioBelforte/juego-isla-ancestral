@@ -3,6 +3,10 @@
 
 # 04-Codigo.md — Módulo 21: Diálogos
 
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** este archivo mezcla el diseño original
+> (plan-inicial, rutas `res://_Project/...`) con el estado real. La implementación real
+> vigente está documentada en la sección 5 (Notas del Agente) y usa `res://scripts/dialogos/`.
+
 ## 1. Rutas propuestas
 
 ```
@@ -241,3 +245,33 @@ Registrado en `project.godot` como autoload `DialogueManager`. La UI se instanci
   guardar una copia mutable (ver 07-GUIA-GODOT §9.46).
 - Relevar el checklist plan-actual contra el código real (manager + grafo + UI ya existen).
 - Integrar la UI M21 con M53 (UIManager/pila de capas) cuando corresponda; hoy es autocontenida.
+
+### Iteración 2 — WorldStateService (2026-08-30, Deepseek V4 Flash / Kilo)
+
+#### Lo que hice
+- **Nuevo autoload `WorldState`** (`scripts/dialogos/world_state_service.gd`): capa única de
+  consulta del estado del mundo para condiciones/efectos de diálogo (RF5). Delega en los
+  autoloads existentes (TimeCalendar M29, Friendship M20) y guarda banderas propias `flag_*`
+  como proveedor de guardado M59 (sección "world_state").
+- **Integración en `DialogueManager`**: `_combinar_estado()` arma el estado combinado
+  (variables de sesión + claves del mundo usadas por las condiciones del nodo/opciones);
+  `_entrar_nodo()` evalúa condiciones y salta el nodo si no se cumplen; `choose_option()`
+  aplica los effects del nodo y de la opción elegida.
+- **`DialogueNode.apply_effects` y `DialogueOption.apply_effects`**: soporte de efectos con
+  `"destino": "world"` o claves `flag_*` → escriben en WorldState (persistente).
+- **Test nuevo** `scripts/dialogos/test_condiciones_mundo.gd`: condiciones por estación,
+  efectos world con bandera set/increment, condiciones por sesión (amistad). 0 fallos.
+- Registro del autoload en `project.godot` (orden: EventBus → WorldState → DialogueManager).
+- **Relevamiento del 05-Checklist.md**: 59 [x], 14 [?], 60 [ ] (de 133 ítems).
+
+#### Lo que NO hice (honestidad)
+- Clima (M32) no implementado → `_get_clima()` devuelve "" y las condiciones de clima quedan [?].
+- Condiciones de historia/misiones (M22/M23) y efectos sobre amistad real (M19) no conectadas.
+- La UI no filtra opciones por condiciones ni muestra nombre del hablante (M53/M87 pendientes).
+- Tests de validación formal con 5 grafos rotos, salto rápido y polish no realizados.
+
+#### Recomendaciones para el próximo agente
+- Conectar `amistad_*` con el ciclo de charla real de M20 (Friendship.charlar) cuando exista UI.
+- Cuando M32 (Clima) exista, reemplazar `_get_clima()` y quitar el [?] correspondiente.
+- La condición por sesión (`catalina_amistad`) queda como ejemplo; migrar a WorldState cuando M20
+  provea el nivel real por NPC.
