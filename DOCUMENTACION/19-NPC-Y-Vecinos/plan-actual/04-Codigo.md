@@ -98,6 +98,35 @@ func set_ocupado(ocupado: bool) -> void         # bloquea interacción (dormido/
 
 ## Notas del Agente
 
+**Modelo:** MiMo V2.5 (OpenCode)
+**Plataforma:** OpenCode
+**Fecha:** 2026-08-29 03:00:00
+**Estado:** Primer NPC visible e interactuable (snap al terreno + interacción F)
+
+### Lo que hice
+- 5 scripts creados en `scripts/npc/`: villager_profile.gd, villager_mood.gd, villager_dialogue_hook.gd, villager.gd, villager_manager.gd
+- Primer perfil: `data/villagers/catalina_oso.tres` (oso, cocinera, dulce)
+- NPC CatalinaOso spawna en `main_island.tscn` con visual placeholder (cápsula + esfera + Label3D + indicador [F])
+- VillagerManager autoload registrado con interacción F (rango 3.0m), gestión de población (max 10)
+- Corrección player.gd: 22 referencias a autoloads (Inventario×16, ItemDatabase×6) cambiadas a get_node_or_null() dinámico
+- Snap al terreno con IslandGenerator.get_height() directo (VoxelTool.raycast no funciona al inicio — chunks no cargados)
+- Offset +1.0 para pies sobre bloque (confirmado por usuario)
+- NPC movido de (5,8,5) a (30,10,64) — dentro de la isla (centro 64,64, radio 64)
+- Documentados errores §9.44 (VoxelTool raycast sin chunks) y §9.45 (offset NPC +1.0) en 07-GUIA-GODOT.md
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- class_name no funciona en este proyecto (razón desconocida) — se usa preload() + duck-typing
+- Persistencia de estado de NPCs en guardado (pendiente M59)
+- Q&A cruzado del módulo (pendiente)
+
+### Recomendaciones para el próximo agente
+- TODO NPC debe usar `get_height()` del IslandGenerator para snap, NUNCA VoxelTool.raycast al inicio
+- El island_radius del snap DEL NPC debe coincidir con el del mundo (64 en Isla Raíz)
+- Los autoloads no están disponibles en compilación MCP — usar get_node_or_null("/root/Nombre")
+- El NPC es CharacterBody3D pero NO llama move_and_slide() — no tiene gravedad propia
+
+## Notas del Agente (plan-inicial)
+
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-16 21:30:00

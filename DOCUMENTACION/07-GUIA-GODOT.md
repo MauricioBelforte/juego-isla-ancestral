@@ -1190,6 +1190,54 @@ var dir: String = _ad.DIR_ANALYTICS
 
 ---
 
+### 9.44 VoxelTool.raycast() no funciona al inicio — chunks no cargados
+
+**Error:** `raycast no encontró suelo en (X, Z)` — el raycast retorna null o vacío.
+
+**Causa:** `VoxelTool.raycast()` requiere que los chunks del terreno estén generados y cargados en memoria. Al inicio de la escena (`_ready()` o `call_deferred()`), los chunks aún no se han generado (la generación es asíncrona y depende del VoxelViewer). El raycast no encuentra voxels y retorna null.
+
+**Solución:** NO usar `VoxelTool.raycast()` para posicionamiento inicial. Usar directamente la función `get_height(x, z)` del `IslandGenerator` (es determinista, no necesita chunks cargados):
+
+```gdscript
+# ❌ No funciona al inicio (chunks no cargados)
+var tool: VoxelTool = terrain.get_voxel_tool()
+var result = tool.raycast(origin, Vector3.DOWN, 200.0)
+
+# ✅ Funciona siempre (cálculo directo del generador)
+var generator_script = load("res://scripts/world/island_generator.gd")
+var gen = generator_script.new(null, 42)
+gen.island_radius = 64
+gen.max_height = 40
+var h: int = gen.get_height(int(x), int(z))
+```
+
+**Regla:** si necesitás la altura del terreno al inicio, usá `IslandGenerator.get_height()`. Si la necesitás en runtime (después de que el mundo esté cargado), `VoxelTool.raycast()` también sirve.
+
+**Fecha:** 2026-08-29
+
+---
+
+### 9.45 Offset de NPC sobre bloques: +1.0 sobre get_height()
+
+**Error:** El NPC queda hundido mitad adentro del bloque o flotando.
+
+**Causa:** `IslandGenerator.get_height(x, z)` retorna la Y del bloque sólido más alto (ej: 8). Un bloque en Y=8 ocupa el espacio de Y=8 a Y=9. La cápsula del NPC tiene centro en local Y=0.5 (altura 1.0), por lo que los pies están en la raíz del nodo (local Y=0).
+
+**Solución:** Posicionar el NPC en `get_height(x, z) + 1.0`:
+- Con +0.5: pies en Y=8.5 → mitad dentro del bloque (INCORRECTO)
+- Con +1.0: pies en Y=9.0 → exactamente sobre la superficie del bloque (CORRECTO)
+- Con +1.5: pies en Y=9.5 → flotando sobre el bloque (CORRECTO pero con gap)
+
+```gdscript
+global_position.y = float(h) + 1.0  # pies justo sobre la superficie del bloque
+```
+
+**Nota:** este offset asume que la cápsula tiene centro en local Y=0.5 con altura 1.0. Si el mesh tiene dimensiones distintas, ajustar el offset en consecuencia.
+
+**Fecha:** 2026-08-29
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |

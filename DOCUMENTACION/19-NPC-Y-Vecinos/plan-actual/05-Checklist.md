@@ -81,13 +81,13 @@
 
 ## F. Interacción con tecla F (7)
 
-- [ ] Acción interactuar mapeada en InputMap de Godot (tecla F) [S]
-- [ ] Detección del vecino más cercano en rango 2.5 m del jugador [M]
+- [x] Acción interactuar mapeada en InputMap de Godot (tecla F) [S]
+- [x] Detección del vecino más cercano en rango 3.0 m del jugador [M]
 - [ ] Raycast vóxel entre jugador y vecino (no interactuar a través de paredes) [C]
-- [ ] Indicador visual "F" sobre la cabeza solo cuando hay objetivo válido [M]
+- [x] Indicador visual "F" sobre la cabeza solo cuando hay objetivo válido [M]
 - [ ] Vecinos ocupados (dormido, dialogando, evento) se excluyen o ignoran con feedback [M]
-- [ ] Un solo vecino por frame: prioridad al más cercano sin toggles raros [S]
-- [ ] Interacción despachada al VillagerDialogueHook (sin UI propia) [S]
+- [x] Un solo vecino por frame: prioridad al más cercano sin toggles raros [S]
+- [x] Interacción despachada al VillagerDialogueHook (sin UI propia) [S]
 
 ## G. Regalos y reacciones (6)
 
