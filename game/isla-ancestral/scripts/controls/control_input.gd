@@ -323,7 +323,7 @@ func _dict_a_evento(d: Dictionary) -> InputEvent:
 	match str(d.get("tipo", "")):
 		"tecla":
 			var k := InputEventKey.new()
-			k.physical_keycode = int(d.get("keycode", 0))
+			k.physical_keycode = int(d.get("keycode", 0)) as Key
 			return k
 		"boton":
 			var b := InputEventJoypadButton.new()

@@ -1,7 +1,24 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
+
+## Reserva actual
+
+- Estado: 🟡 Liberado — iteración 1 (catálogo + definiciones + drops + test) 2026-08-30
+- Agente: Deepseek V4 Flash (Kilo)
+- Fase: 4 (Prototipo mínimo divertido)
+- Dificultad: 3
+- Vision: V1 (ResourceNode 3D requiere visión)
+- Entrada: M14 core ✅ (Inventario autoload), M13 ✅ (herramientas)
+- Salida: ResourceManager autoload + ResourceDefinition + ResourceDropEntry + catálogo 6 tipos + drops con validación de herramienta + test 0 fallos
+- Archivos: `scripts/resources/*.gd`, `project.godot`
+- Fecha cierre: 2026-08-30 02:45
 
 # 05-Checklist.md — Módulo 15: Recursos
+
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** núcleo data-driven implementado: ResourceManager
+> autoload (catálogo, drops, validación herramienta, integración M14), ResourceDefinition class_name
+> (6 tipos), ResourceDropEntry. Test headless 0 fallos. Los ítems de nodos 3D (ResourceNode),
+> spawner en mundo voxel y respawn estacional requieren visión (V1/V2) y quedan pendientes. Log 256.
 
 > Marcador de esfuerzo al final de cada ítem: [S] simple · [M] medio · [C] complejo.
 > Módulo **delegable**: implementación tras M08 (mundo voxel) y M13 (herramientas).

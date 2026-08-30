@@ -1,7 +1,25 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
+
+## Reserva actual
+
+- Estado: 🟡 Liberado — iteración 1 (núcleo lógico) 2026-08-30
+- Agente: Deepseek V4 Flash (Kilo)
+- Fase: 8 (Vertical slice)
+- Dificultad: 3
+- Vision: V0 (lógica); UI de pistas/burbujas es V2 (M53)
+- Entrada: M53 🔵 (UI — en curso por MiMo), M70 pendiente
+- Salida: TutorialManager autoload + 4 capítulos base + triggers + revalidación + estados + persistencia M59 + test 0 fallos
+- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial.gd`, `project.godot`
+- Fecha cierre: 2026-08-30 03:10
 
 # 05-Checklist.md — Módulo 92: Tutorial
+
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** núcleo del tutorial implementado:
+> TutorialManager autoload (capítulos con pasos PISTA/SECUENCIA, triggers de señal,
+> revalidación, estados, skip/dormido, persistencia M59). Test headless 0 fallos.
+> La UI de presentación (burbujas world-space, marcadores de objetivo, pool de pistas,
+> iconos InputMap) pertenece a M53 (V2) y queda pendiente. Log 259.
 
 ## A. Problema, objetivos y alcance (12)
 
@@ -20,16 +38,16 @@
 
 ## B. RF: Triggers y detección de contexto (15)
 
-- [ ] RF1: estructurar el tutorial en capítulos (Llegada, Moverse, Interactuar, Herramientas, Cultivo, Pesca, Minería, Crafting, Vecinos) [M]
-- [ ] RF1: cada capítulo es un guion Resource reutilizable (partida nueva, re-play, New Game+) [M]
-- [ ] RF2: trigger por señal de sistema (M70, M33, M34, M35, M16...) con condición de contexto [M]
+- [x] RF1: estructurar el tutorial en capítulos (Llegada, Moverse, Interactuar, Herramientas, Cultivo, Pesca, Minería, Crafting, Vecinos) [M]
+- [x] RF1: cada capítulo es un guion Resource reutilizable (partida nueva, re-play, New Game+) [M]
+- [x] RF2: trigger por señal de sistema (M70, M33, M34, M35, M16...) con condición de contexto [M]
 - [ ] RF2: trigger por mundo (proximidad del jugador a ITutorialTarget, radio configurable) [M]
 - [ ] RF2: trigger por acción del jugador (primer paso, primera tecla E, primer equipar) [M]
 - [ ] RF2: los triggers se registran y desregistran según los mundos activos (M63 streaming) [M]
 - [ ] RF2: condiciones de contexto permitidas: día, hora, zona, sistema disponible [M]
-- [ ] RF3: revalidación de "ya lo sabe": señal de maestría antes del trigger completa el capítulo en silencio [C]
-- [ ] RF3: la revalidación no muestra ningún paso ni feedback al jugador que ya domina [M]
-- [ ] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M]
+- [x] RF3: revalidación de "ya lo sabe": señal de maestría antes del trigger completa el capítulo en silencio [C]
+- [x] RF3: la revalidación no muestra ningún paso ni feedback al jugador que ya domina [M]
+- [x] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M]
 - [ ] RF19: la revalidación registra log de M103 para trazabilidad [S]
 - [ ] RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M]
 - [ ] RF2: no disparar capítulos de sistemas no implementados (omisión con log de degradación) [M]
@@ -102,18 +120,17 @@
 
 ## G. Diseño y arquitectura (12)
 
-- [ ] G1: TutorialManager como autoload único con estados (ACTIVO, ESPERANDO, PISTA, CONSECUENCIA, SKIPPED, DORMIDO) [C]
-- [ ] G2: guiones como Resources con pasos tipados (PISTA, SECUENCIA, CONSEJO) [M]
-- [ ] G3: 3 tipos de trigger (señal, mundo, acción) derivados de la clase base Trigger [M]
-- [ ] G4: pool de pistas world-space con reutilización de nodos (max 2 vivas) [M]
+- [x] G1: TutorialManager como autoload único con estados (ACTIVO, ESPERANDO, PISTA, CONSECUENCIA, SKIPPED, DORMIDO) [C]
+- [x] G2: guiones como Resources con pasos tipados (PISTA, SECUENCIA, CONSEJO) [M]
+- [?] G3: 3 tipos de trigger (señal, mundo, acción) derivados de la clase base Trigger [M]- [ ] G4: pool de pistas world-space con reutilización de nodos (max 2 vivas) [M]
 - [ ] G5: interfaz ITutorialTarget opcional para autoetiquetar objetos del mundo [M]
 - [ ] G6: sistema de consejos con contexto permitido y cooldown [M]
 - [ ] G7: watchdog de tutorial con re-programación ×3 y descarte con log [M]
 - [ ] G8: diagrama de estados del presentador (M53) con transiciones sin parpadeo [M]
-- [ ] G9: flujo principal documentado: disparo → lección → cierre → feedback [M]
-- [ ] G10: flujo de skip y re-play con snapshot (RN11) [M]
-- [ ] G11: flujo de revalidación por señal de maestría [M]
-- [ ] G12: contratos de integración resumidos en tabla (sistemas ↔ 92) [S]
+- [x] G9: flujo principal documentado: disparo → lección → cierre → feedback [M]
+- [x] G10: flujo de skip y re-play con snapshot (RN11) [M]
+- [x] G11: flujo de revalidación por señal de maestría [M]
+- [x] G12: contratos de integración resumidos en tabla (sistemas ↔ 92) [S]
 
 ## H. Integración con 53-UI-UX (8)
 
