@@ -13,7 +13,14 @@ func _ready():
 	_setup_player_visual()
 	_crear_ruina()
 	_crear_ui_dialogo()
+	_poblar_recursos()
 	print("Isla Ancestral — Isla Raíz")
+
+## M15: población inicial de recursos alrededor del centro de la isla (deferred).
+func _poblar_recursos() -> void:
+	var rm = get_node_or_null("/root/ResourceManager")
+	if rm and rm.has_method("poblar_isla"):
+		rm.poblar_isla.call_deferred(Vector3(320, 0, 320))
 
 func _crear_ruina() -> void:
 	var ruina := RuinaChozavil.new()

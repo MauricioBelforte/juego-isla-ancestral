@@ -18,12 +18,27 @@ const SECCION_SAVE := "resource_manager"
 
 var _definiciones: Dictionary = {}   # def_id -> ResourceDefinition
 var _rng: RandomNumberGenerator
+var spawner: ResourceSpawner = null
 
 func _ready() -> void:
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = hash(Time.get_ticks_usec())
 	_cargar_definiciones_base()
 	_registrar_proveedor_guardado()
+	spawner = ResourceSpawner.new(self)
+	add_child(spawner)
+
+## ── API pública para spawner ─────────────────────────────
+
+func definir_region(region_id: String, centro: Vector3) -> void:
+	if spawner != null:
+		spawner.planificar_region(region_id, centro, self)
+
+## Pobla la isla inicial con recursos alrededor de un centro (spawn).
+## Se llama desde la escena principal al arrancar (deferred para TerrainLocator listo).
+func poblar_isla(centro: Vector3) -> void:
+	if spawner != null:
+		spawner.planificar_region("isla_raiz", centro, self)
 
 ## ── Catalogo data-driven ─────────────────────────────────
 

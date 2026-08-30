@@ -3,15 +3,15 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 1 (catálogo + definiciones + drops + test) 2026-08-30
+- Estado: 🟡 Liberado — iteración 2 (nodo 3D + spawner, con visión) 2026-08-30
 - Agente: Deepseek V4 Flash (Kilo)
 - Fase: 4 (Prototipo mínimo divertido)
 - Dificultad: 3
-- Vision: V1 (ResourceNode 3D requiere visión)
-- Entrada: M14 core ✅ (Inventario autoload), M13 ✅ (herramientas)
-- Salida: ResourceManager autoload + ResourceDefinition + ResourceDropEntry + catálogo 6 tipos + drops con validación de herramienta + test 0 fallos
-- Archivos: `scripts/resources/*.gd`, `project.godot`
-- Fecha cierre: 2026-08-30 02:45
+- Vision: V1/V2 (nodo 3D y spawner en mundo)
+- Entrada: M14 core ✅, M13 ✅, iteración 1 (catálogo+drops) Log 256
+- Salida: ResourceNode (estados INTACTO/DANIADO/AGOTADO) + ResourceSpawner (instanciación/planificación) + población inicial de la isla + test 0 fallos
+- Archivos: `scripts/resources/resource_node.gd`, `resource_spawner.gd`, `resource_manager.gd`, `scripts/main_island.gd`
+- Fecha cierre: 2026-08-30 03:55
 
 # 05-Checklist.md — Módulo 15: Recursos
 
@@ -66,15 +66,15 @@
 
 ## D. ResourceNode (12)
 
-- [ ] Clase `ResourceNode` extends Node3D con states INTACTO/DANIADO/AGOTADO [S]
-- [ ] Area3D de interacción con tamaño según mesh [M]
+- [x] Clase `ResourceNode` extends Node3D con states INTACTO/DANIADO/AGOTADO [S]
+- [x] Area3D de interacción con tamaño según mesh [M]
 - [ ] Suscripción a señal global `golpe_aplicado` de M13 [S]
-- [ ] `aplicar_golpe(pos, herramienta_id, fuerza)` con validación de distancia [S]
-- [ ] Rechazo suave con herramienta incorrecta: feedback "necesitas un pico" [S]
-- [ ] Desgaste por golpes: `golpes_restantes -= 1` y cambio de estado a DAÑADO [S]
-- [ ] Visual de dañado: mesh_daniado + grietas/partículas del material [M]
-- [ ] Cambio a AGOTADO: mesh_agotado (tocón, roca quebrada, arbusto vacío) [M]
-- [ ] Notificación `ResourceManager.recurso_agotado(node_id)` al agotarse [S]
+- [x] `aplicar_golpe(pos, herramienta_id, fuerza)` con validación de distancia [S]
+- [x] Rechazo suave con herramienta incorrecta: feedback "necesitas un pico" [S]
+- [x] Desgaste por golpes: `golpes_restantes -= 1` y cambio de estado a DAÑADO [S]
+- [x] Visual de dañado: mesh_daniado + grietas/partículas del material [M]
+- [x] Cambio a AGOTADO: mesh_agotado (tocón, roca quebrada, arbusto vacío) [M]
+- [x] Notificación `ResourceManager.recurso_agotado(node_id)` al agotarse [S]
 - [ ] Sacudida y animación leve por golpe (sin romper flujo cozy) [M]
 - [ ] Sonido por material (madera, piedra, fibra, fruta, metal) [M]
 - [ ] Modo impostor: mesh estático sin física ni Area3D para distancia [M]
@@ -94,18 +94,18 @@
 
 ## F. ResourceSpawner (12)
 
-- [ ] Clase `ResourceSpawner` con tabla global de nodos por región [M]
-- [ ] `planificar_region(region_id)` al recibir `region_activada` de M08 [M]
+- [x] Clase `ResourceSpawner` con tabla global de nodos por región [M]
+- [x] `planificar_region(region_id)` al recibir `region_activada` de M08 [M]
 - [ ] Generación de candidatos determinista por seed de partida [M]
 - [ ] Validación de candidato: caminable, sin superposición, dentro de límites [M]
 - [ ] Rechazo de recursos inaccesibles (regla del plan maestro) [S]
-- [ ] `instanciar_nodo(entry)` devuelve node_id y registra en tabla [M]
+- [x] `instanciar_nodo(entry)` devuelve node_id y registra en tabla [M]
 - [ ] `_aplicar_presupuesto()` por distancia al jugador en cada frame suavizado [C]
 - [ ] 0-48 m activos, 48-96 m impostores, +96 m solo datos [M]
-- [ ] Máx 200 instancias activas: excedente en cola priorizada [C]
+- [x] Máx 200 instancias activas: excedente en cola priorizada [C]
 - [ ] `revalidar_posiciones(region_id)` al cargar chunk o construir (M17) [M]
 - [ ] Reubicación de respawn al voxel libre más cercano (radio 8) [M]
-- [ ] Señal `recurso_reaparecio(def_id, pos)` para mundo vivo [S]
+- [x] Señal `recurso_reaparecio(def_id, pos)` para mundo vivo [S]
 
 ## G. Respawn y regla cozy (10)
 
