@@ -97,6 +97,11 @@ func _tr_clave(clave: String, params: Dictionary = {}, n: int = -1) -> String:
 	_cache[cache_key] = resuelto
 	return resuelto
 
+## Traduce una clave COMPLETA (ej "MAIN_MENU.PLAY" o "ITEMS.SE_OFRECEN").
+## Expone la traducción de claves tal como viven en el catálogo .po, sin dividir.
+func traducir_clave(clave: String, params: Dictionary = {}, n: int = -1) -> String:
+	return _tr_clave(clave, params, n)
+
 ## Busca en el catálogo activo; si falta, en español; si falta, la clave literal.
 func _buscar_texto(clave: String, n: int) -> String:
 	# Plurales primero: las claves plural viven en _plural_forms, no en mensajes.

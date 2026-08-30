@@ -85,8 +85,14 @@ func get_current_speaker_key() -> String:
 func get_current_text_key() -> String:
 	return _nodo_actual.text_key if _nodo_actual else ""
 
-## Resuelve texto: claves -> valores del contexto de sesion
+## Resuelve texto: claves -> valores del contexto de sesion.
+## Si el texto es una clave de localización (M87), se traduce con
+## Localization.traducir_clave; los placeholders {clave} se resuelven después.
 func resolve_text(texto: String, placeholders: Dictionary) -> String:
+	var loc = get_node_or_null("/root/Localization")
+	if loc != null and loc.has_method("traducir_clave") and _es_clave_localizacion(texto):
+		var n := int(placeholders.get("n", -1)) if placeholders.has("n") else -1
+		texto = loc.traducir_clave(texto, {}, n)
 	var resultado := texto
 	for clave in placeholders:
 		var marcador := "{" + str(clave) + "}"
@@ -95,6 +101,10 @@ func resolve_text(texto: String, placeholders: Dictionary) -> String:
 		else:
 			resultado = resultado.replace(marcador, str(placeholders[clave]))
 	return resultado
+
+## Heurística de clave de localización: MAYÚSCULAS + sin espacios + al menos un punto.
+func _es_clave_localizacion(texto: String) -> bool:
+	return texto.to_upper() == texto and not texto.contains(" ") and texto.contains(".")
 
 func get_session_vars() -> Dictionary:
 	return _session_vars
