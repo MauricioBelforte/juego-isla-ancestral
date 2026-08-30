@@ -46,8 +46,55 @@ func _ready() -> void:
 			if ui_events != null and ui_events.has_signal("dialog_requested"):
 				ui_events.dialog_requested.connect(_on_dialog_requested)
 
+## ── Acciones transversales (M57) ─────────────────────────
+## Navegación por teclado/gamepad: usa el InputMap del proyecto (M57) para
+## mover el foco entre controles de la capa visible, y abrir/cerrar capas.
+
+func _unhandled_input(event: InputEvent) -> void:
+	if _stack.is_empty():
+		return
+	var top_layer := _stack[_stack.size() - 1]
+	if event.is_action_pressed("pausa") and top_layer is UILayer:
+		close_top()
+		get_viewport().set_input_as_handled()
+		return
+	# Navegación direccional con acciones del InputMap (M57)
+	var nav: Vector2i = Vector2i.ZERO
+	if event.is_action_pressed("mover_norte"):
+		nav = Vector2i(0, -1)
+	elif event.is_action_pressed("mover_sur"):
+		nav = Vector2i(0, 1)
+	elif event.is_action_pressed("mover_este"):
+		nav = Vector2i(1, 0)
+	elif event.is_action_pressed("mover_oeste"):
+		nav = Vector2i(-1, 0)
+	# Si la capa es un UILayer y el input es parte del InputMap, navegar
+	if nav != Vector2i.ZERO and top_layer is UILayer:
+		MenuNavigator.wrap_focus(top_layer, nav)
+		get_viewport().set_input_as_handled()
+
 
 ## ── API pública: pila de capas ──────────────────────────
+
+## Registro automático desde UILayer._enter_tree.
+## Las capas modales se apilan al entrar al árbol y quedan ocultas hasta open().
+func register_layer(layer: Node) -> void:
+	if layer in _stack:
+		return
+	_stack.append(layer)
+	_apply_process_mode(layer)
+	_restore_focus_for_layer(layer)  # guarda/restaura sin foco forzado
+	_log("capa registrada: %s (tipo=%s, pila=%d)" % [layer.name, _get_layer_type_name(layer), _stack.size()])
+
+## Des-registro automático desde UILayer._exit_tree
+func unregister_layer(layer: Node) -> void:
+	var idx := _stack.find(layer)
+	if idx == -1:
+		return
+	_stack.remove_at(idx)
+	if _current_modal_full == layer:
+		_current_modal_full = null
+	_log("capa des-registrada: %s (pila=%d)" % [layer.name, _stack.size()])
 
 ## Registra una capa en la pila y la abre
 func push_layer(layer: Node) -> void:
@@ -164,12 +211,15 @@ func set_hud_visible(is_visible: bool) -> void:
 
 ## ── API pública: popup de confirmación ──────────────────
 
-## Abre un popup de confirmación genérico
-func open_confirm(title: StringName, _message: String, on_ok: Callable, _on_cancel: Callable = Callable()) -> void:
-	# TODO: instanciar ConfirmPopup cuando se implemente
-	_log("open_confirm solicitado: %s" % title)
-	if on_ok.is_valid():
-		on_ok.call()
+## Abre un popup de confirmación genérico (ConfirmaPopup si está montado).
+func open_confirm(title: StringName, message: String, on_ok: Callable, on_cancel: Callable = Callable()) -> void:
+	var popup = _buscar_capa("ConfirmPopup")
+	if popup and popup.has_method("configurar"):
+		popup.configurar(str(title), str(message), on_ok, on_cancel)
+	else:
+		_log("open_confirm solicitado: %s (sin ConfirmPopup montado)" % title)
+		if on_ok.is_valid():
+			on_ok.call()
 
 
 ## ── API pública: utilidades ─────────────────────────────
@@ -207,9 +257,9 @@ func _apply_process_mode(layer: Node) -> void:
 		LAYER_HUD:
 			layer.process_mode = Node.PROCESS_MODE_ALWAYS
 		LAYER_MODAL_SIMPLE:
-			layer.process_mode = Node.PROCESS_MODE_ALWAYS
+			layer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		LAYER_MODAL_FULL:
-			layer.process_mode = Node.PROCESS_MODE_DISABLED
+			layer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		LAYER_POPUP:
 			layer.process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -251,8 +301,29 @@ func _on_hud_request(_visible: bool) -> void:
 
 
 func _on_dialog_requested(_npc_id: String, _dialog_data: Dictionary) -> void:
-	# TODO: abrir DialogLayer cuando se implemente
-	_log("dialog_requested recibido (pendiente de implementar DialogLayer)")
+	# M53: abre el DialogLayer formal si existe; si no, el manager M21 lo cubre.
+	var layer = _buscar_capa("DialogLayer")
+	if layer:
+		push_layer(layer)
+	else:
+		_log("dialog_requested recibido (sin DialogLayer montado; M21 usa su fallback)")
+
+## Busca una capa por nombre recorriendo el árbol (robusto a la estructura de montaje).
+func _buscar_capa(nombre: String) -> Node:
+	if _stack.size() > 0:
+		for l in _stack:
+			if l.name == nombre:
+				return l
+	return _buscar_nodo(get_tree().root, nombre)
+
+func _buscar_nodo(node: Node, nombre: String) -> Node:
+	for child in node.get_children():
+		if child.name == nombre:
+			return child
+		var result := _buscar_nodo(child, nombre)
+		if result:
+			return result
+	return null
 
 
 ## ── Logging ─────────────────────────────────────────────

@@ -16,7 +16,23 @@
 - [ ] Definir RF6: tooltips contextuales por ratón y por foco [S]
 - [ ] Definir RF7: feedback visual, sonoro y háptico no punitivo [S]
 - [ ] Definir RF8: tema único cozy con M88 y lenguaje amable en textos [S]
-- [ ] Definir RF10: UIManager, UILayer, pila de capas y pausa coherente [S]
+- [x] Definir RF10: UIManager, UILayer, pila de capas y pausa coherente [S]
+
+## B1. Capas modales (framework, implementado 2026-08-30)
+
+- [x] Registro automático de capas UILayer en UIManager (register_layer/unregister_layer) [S]
+- [x] push_layer/pop_layer/close_top/top/is_modal_open en UIManager [S]
+- [x] process_mode WHEN_PAUSED para capas modales (el mundo se congela, la capa navega) [M]
+- [x] Navegación direccional por acciones M57 (mover_*) en _unhandled_input [M]
+- [x] Abrir/cerrar capas con acción `pausa` (M57) vía UIManager [S]
+- [x] DialogLayer: capa formal de presentación del diálogo M21 (MODAL_FULL) [M]
+- [x] PauseLayer: menú de pausa (Continuar/Ajustes/Guardar/Salir) con señales [M]
+- [x] MenusLayer: menú principal (Jugar/Continuar/Ajustes/Créditos/Salir) para M89 [M]
+- [x] ConfirmPopup: popup genérico OK/Cancelar para open_confirm [M]
+- [x] UIRoot: punto de montaje de las capas (CanvasLayer 100), instanciado en main_island [M]
+- [x] Textos de capas localizados con claves M87 (SETTINGS.*) [S]
+- [x] Open_confirm conectado al ConfirmPopup si está montado [S]
+- [x] Test framework headless (pila, registro, layer_type, open/close) [S]
 
 ## B. HUD mínimo (12)
 
@@ -38,8 +54,8 @@
 - [ ] Configurar focus_neighbor y focus_next/focus_prev en todas las pantallas del editor [M]
 - [x] Implementar MenuNavigator con focus_first y focus_last [S]
 - [x] Implementar wrap-around circular de foco en grids y listas [M]
-- [ ] Soporte completo de navegación direccional con gamepad (4 direcciones) [M]
-- [ ] Soporte completo de navegación con teclado (flechas, tab, enter, esc) [M]
+- [x] Soporte completo de navegación direccional con gamepad (4 direcciones) [M]
+- [x] Soporte completo de navegación con teclado (flechas, tab, enter, esc) [M]
 - [ ] Soporte completo de navegación con ratón (hover, click, scroll) [S]
 - [ ] Definir política mixta: el hover del ratón no roba el foco del gamepad [M]
 - [x] Tabular entre pestañas (tab_next/tab_prev) en pantallas con pestañas [S]
@@ -50,11 +66,11 @@
 
 ## D. Diálogos (10)
 
-- [ ] Crear DialogLayer como UILayer tipo MODAL_SIMPLE [S]
+- [x] Crear DialogLayer como UILayer tipo MODAL_SIMPLE [S]
 - [ ] Suscribirse a dialog_requested y dialog_finished del EventBus (M21) [S]
-- [ ] Mostrar nombre del NPC (M19), retrato y caja con autowrap [S]
-- [ ] Avance por página con confirm (M57) o click en botón [S]
-- [ ] Opciones de diálogo seleccionables por foco y confirm [S]
+- [x] Mostrar nombre del NPC (M19), retrato y caja con autowrap [S]
+- [x] Avance por página con confirm (M57) o click en botón [S]
+- [x] Opciones de diálogo seleccionables por foco y confirm [S]
 - [ ] Velocidad de texto ajustable en runtime (M58) [S]
 - [ ] Pausa de texto a pedido según M58 [S]
 - [ ] Subtítulos de diálogo si M58 los activa [M]

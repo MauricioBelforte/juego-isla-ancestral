@@ -23,8 +23,8 @@ var _ui_manager: Node = null
 func _enter_tree() -> void:
 	# Registrar en UIManager cuando entra al árbol
 	_ui_manager = _get_ui_manager()
-	if _ui_manager:
-		_ui_manager.register_layer(self) if _ui_manager.has_method("register_layer") else null
+	if _ui_manager and _ui_manager.has_method("register_layer"):
+		_ui_manager.register_layer(self)
 
 
 func _exit_tree() -> void:
@@ -78,9 +78,9 @@ func _apply_process_mode() -> void:
 		UILayerType.Type.HUD:
 			process_mode = Node.PROCESS_MODE_ALWAYS
 		UILayerType.Type.MODAL_SIMPLE:
-			process_mode = Node.PROCESS_MODE_ALWAYS
+			process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		UILayerType.Type.MODAL_FULL:
-			process_mode = Node.PROCESS_MODE_DISABLED
+			process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 		UILayerType.Type.POPUP:
 			process_mode = Node.PROCESS_MODE_ALWAYS
 

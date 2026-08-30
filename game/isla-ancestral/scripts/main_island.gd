@@ -13,8 +13,17 @@ func _ready():
 	_setup_player_visual()
 	_crear_ruina()
 	_crear_ui_dialogo()
+	_crear_ui_root()
 	_poblar_recursos()
 	print("Isla Ancestral — Isla Raíz")
+
+## M53: instala el framework de capas (DialogLayer, PauseLayer, MenusLayer, ConfirmPopup)
+func _crear_ui_root() -> void:
+	var root_script := load("res://scripts/ui/ui_root.gd")
+	if root_script:
+		var ui_root = root_script.new()
+		ui_root.name = "UIRoot"
+		add_child(ui_root)
 
 ## M15: población inicial de recursos alrededor del centro de la isla (deferred).
 func _poblar_recursos() -> void:

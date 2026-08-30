@@ -36,3 +36,39 @@ msgid "ITEMS.SE_OFRECEN"
 msgid_plural "ITEMS.SE_OFRECEN"
 msgstr[0] "Offering {n} item"
 msgstr[1] "Offering {n} items"
+
+msgid "SETTINGS.PAUSA"
+msgstr "Pause"
+
+msgid "SETTINGS.CONTINUAR"
+msgstr "Continue"
+
+msgid "SETTINGS.AJUSTES"
+msgstr "Settings"
+
+msgid "SETTINGS.GUARDAR"
+msgstr "Save"
+
+msgid "SETTINGS.SALIR"
+msgstr "Quit"
+
+msgid "SETTINGS.JUGAR"
+msgstr "Play"
+
+msgid "SETTINGS.CREDITOS"
+msgstr "Credits"
+
+msgid "SETTINGS.CONFIRMAR"
+msgstr "Confirm"
+
+msgid "SETTINGS.CANCELAR"
+msgstr "Cancel"
+
+msgid "SETTINGS.TITULO"
+msgstr "Ancestral Island"
+
+msgid "SETTINGS.ELEGIR_OPCION"
+msgstr "Choose an option"
+
+msgid "SETTINGS.ADVANCED"
+msgstr "Press Enter to continue"
