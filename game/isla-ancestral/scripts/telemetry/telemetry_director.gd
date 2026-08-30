@@ -1,4 +1,4 @@
-# Modelo: ox-alpha (Cline)
+﻿# Modelo: ox-alpha (Cline)
 # Plataforma: Cline
 # Fecha: 2026-08-29
 #
@@ -66,10 +66,9 @@ const EVT := {
 	COMMUNITY_PROJECT_FIRST_COMPLETED = "community_project_first_completed",
 	PUZZLE_ABANDONED = "puzzle_abandoned",
 	DIFFICULTY_PERCEIVED = "difficulty_perceived",
-	ZONE_ENTERED = "zone_entered",
-		ZONE_EXITED = "zone_exited",
-		DIFFICULTY_PERCEIVED = "difficulty_perceived",
 	ZONE_IGNORED = "zone_ignored",
+	ZONE_ENTERED = "zone_entered",
+	ZONE_EXITED = "zone_exited",
 	SESSION_STARTED = "session_started",
 	SESSION_ENDED = "session_ended",
 }
@@ -252,7 +251,7 @@ func _registrar_metrica(metrica: String, valor) -> void:
 		})
 
 func _ticks_desde_sesion() -> int:
-				return Time.get_ticks_msec() - _inicio_sesion_ms
+	return Time.get_ticks_msec() - _inicio_sesion_ms
 ## ─── Trackers "first" (RF1-RF11) ──────────────
 
 func _track_first(key: StringName, evento: String, datos: Dictionary = {}) -> bool:
@@ -309,7 +308,7 @@ func track_community_project_first_completed(proyecto_id: String) -> void:
 func track_difficulty_perceived(puzzle_id: String, rating: int) -> void:
 	if not opt_in:
 		return
-	var datos := {"puzzle_id": puzzle_id, "rating": rating, "ms_desde_sesion": _ticks_desde_sesion()}
+	var datos := {"evento": EVT.DIFFICULTY_PERCEIVED, "puzzle_id": puzzle_id, "rating": rating, "ms_desde_sesion": _ticks_desde_sesion()}
 	var ads := _resolve_analytics()
 	if ads != null and ads.has_method("registrar_evento"):
 		ads.registrar_evento(ANALYTICS_TIPO_EVENTO, datos)
@@ -350,7 +349,7 @@ func _on_puzzle_check() -> void:
 		var inicio: int = _puzzle_inicio[id]
 		var transcurrido_seg := (ahora - inicio) / 1000.0
 		if transcurrido_seg >= PUZZLE_ABANDONO_SEGUNDOS:
-			enviar_evento(EVT.PUZZLE_ABANDONADO, {"puzzle_id": id, "tiempo_seg": int(transcurrido_seg)})
+			enviar_evento(EVT.PUZZLE_ABANDONED, {"puzzle_id": id, "tiempo_seg": int(transcurrido_seg)})
 			_puzzle_inicio.erase(id)
 
 ## ─── Zonas ignoradas (RF16) ──────────────

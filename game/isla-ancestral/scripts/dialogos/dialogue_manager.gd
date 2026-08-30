@@ -69,7 +69,10 @@ func choose_option(index: int) -> void:
 	if index < 0 or index >= _nodo_actual.options.size():
 		return
 	var opcion = _nodo_actual.options[index]
-	_nodo_actual.apply_effects(_session_vars)
+	var estado_combinado := _combinar_estado(_nodo_actual)
+	_nodo_actual.apply_effects(_session_vars, estado_combinado)
+	if opcion is DialogueOption and opcion.effect.size() > 0:
+		opcion.apply_effects(_session_vars, estado_combinado)
 	option_selected.emit(index)
 	if opcion.next_id != "" and _grafo_actual.nodes.has(opcion.next_id):
 		_entrar_nodo(_grafo_actual.nodes[opcion.next_id])
@@ -108,8 +111,18 @@ func _entrar_nodo(nodo: DialogueNode) -> void:
 	if nodo == null:
 		stop_dialogue()
 		return
+	# M21 RF5: evaluar condiciones contra estado combinado (sesion + mundo).
+	var estado_combinado := _combinar_estado(nodo)
+	if not nodo.evaluate_conditions(estado_combinado):
+		# Condicion no cumplida: saltar al siguiente si existe, si no avanzar.
+		var siguiente := nodo.next_id if nodo.next_id != "" else nodo.goto_id
+		if siguiente != "" and _grafo_actual.nodes.has(siguiente):
+			_entrar_nodo(_grafo_actual.nodes[siguiente])
+		else:
+			advance()
+		return
 	_nodo_actual = nodo
-	nodo.apply_effects(_session_vars)
+	nodo.apply_effects(_session_vars, estado_combinado)
 	var texto_resuelto := resolve_text(nodo.text_key, nodo.placeholders)
 	node_entered.emit(nodo.id, nodo.speaker_key, texto_resuelto, nodo.tipo, nodo.options)
 	if nodo.tipo == DialogueNode.TIPO_EVENTO:
@@ -118,6 +131,38 @@ func _entrar_nodo(nodo: DialogueNode) -> void:
 		stop_dialogue()
 	elif nodo.tipo == DialogueNode.TIPO_LINEA:
 		line_complete.emit()
+
+## Combina variables de sesion con el estado del mundo (WorldStateService)
+## para evaluar condiciones. Las variables de sesion tienen prioridad.
+## `nodo` es opcional: si se pasa, se resuelven tambien las claves de sus
+## condiciones y opciones (incluye prefijos amistad_*/flag_*).
+func _combinar_estado(nodo: DialogueNode = null) -> Dictionary:
+	var estado := _session_vars.duplicate()
+	# Si el manager no esta en el arbol (tests headless), no consultar autoloads.
+	if not is_inside_tree():
+		return estado
+	var ws = get_node_or_null("/root/WorldState")
+	if ws == null or not ws.has_method("get_value"):
+		return estado
+	var claves_a_resolver: Array = [
+		"hora", "minuto", "dia", "mes", "anio", "estacion",
+		"es_de_dia", "es_noche", "dia_absoluto", "clima",
+	]
+	if nodo != null:
+		for cond in nodo.conditions:
+			var clave_cond: String = str(cond.get("clave", ""))
+			if clave_cond != "" and not claves_a_resolver.has(clave_cond):
+				claves_a_resolver.append(clave_cond)
+		for op in nodo.options:
+			if op is DialogueOption:
+				for cond in op.conditions:
+					var clave_op: String = str(cond.get("clave", ""))
+					if clave_op != "" and not claves_a_resolver.has(clave_op):
+						claves_a_resolver.append(clave_op)
+	for clave in claves_a_resolver:
+		if not estado.has(clave):
+			estado[clave] = ws.get_value(clave)
+	return estado
 
 func avance_evento() -> void:
 	advance()

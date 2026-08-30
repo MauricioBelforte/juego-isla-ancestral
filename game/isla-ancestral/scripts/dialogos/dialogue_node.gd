@@ -53,12 +53,29 @@ func _evalua_cond(cond: Dictionary, vars: Dictionary) -> bool:
 			return float(actual) < float(valor)
 	return false
 
-## Aplica los effects del nodo (sobre el estado de sesion)
-func apply_effects(session_vars: Dictionary) -> void:
+## Aplica los effects del nodo (sobre el estado de sesion).
+## Si un effect lleva "destino": "world" o la clave empieza con "flag_",
+## se escribe en WorldStateService (bandera persistente, M59).
+func apply_effects(session_vars: Dictionary, _estado_mundo: Dictionary = {}) -> void:
 	for ef in effects:
 		var clave: String = str(ef.get("clave", ""))
 		var accion: String = str(ef.get("accion", "set"))
+		var destino: String = str(ef.get("destino", "session"))
 		if clave == "":
+			continue
+		var es_world: bool = destino == "world" or clave.begins_with("flag_")
+		if es_world:
+			var ws = Engine.get_main_loop().root.get_node_or_null("/root/WorldState") if Engine.get_main_loop() else null
+			if ws == null:
+				continue
+			match accion:
+				"set":
+					ws.set_flag(clave, ef.get("valor", null))
+				"remove":
+					ws.set_flag(clave, null)
+				"increment":
+					var base: float = float(ws.get_flag(clave, 0.0))
+					ws.set_flag(clave, base + float(ef.get("valor", 1.0)))
 			continue
 		match accion:
 			"set":
