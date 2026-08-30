@@ -1,0 +1,11 @@
+{
+	"schema_version": 1,
+	"recursos": {
+		"madera_roble": {"bioma": "bosque", "temporadas": ["primavera", "verano", "otono"], "abundancia": "alta", "respawn_dias": 3},
+		"piedra_caliza": {"bioma": "montana", "temporadas": ["todas"], "abundancia": "alta", "respawn_dias": 2},
+		"fibra_algodon": {"bioma": "pradera", "temporadas": ["verano"], "abundancia": "media", "respawn_dias": 2},
+		"baya_roja": {"bioma": "bosque", "temporadas": ["otono"], "abundancia": "media", "respawn_dias": 1},
+		"mineral_cobre": {"bioma": "templo", "temporadas": ["todas"], "abundancia": "baja", "respawn_dias": 5},
+		"fragmento_ancestral": {"bioma": "templo", "temporadas": ["primavera"], "abundancia": "rara", "respawn_dias": 14}
+	}
+}

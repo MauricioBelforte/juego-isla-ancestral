@@ -1,0 +1,33 @@
+{
+	"schema_version": 1,
+	"recetas": {
+		"herramienta_basica": {
+			"nombre_i18n": "CRAFTING.HERRAMIENTA_BASICA",
+			"coste_recursos": {"madera_roble": 5, "mineral_cobre": 2},
+			"coste_ao": 20,
+			"tiempo_min": 0.5,
+			"resultado": "herramienta_basica"
+		},
+		"pico_cobre": {
+			"nombre_i18n": "CRAFTING.PICO_COBRE",
+			"coste_recursos": {"madera_roble": 3, "mineral_cobre": 4},
+			"coste_ao": 35,
+			"tiempo_min": 1.0,
+			"resultado": "pico_cobre"
+		},
+		"hacha_cobre": {
+			"nombre_i18n": "CRAFTING.HACHA_COBRE",
+			"coste_recursos": {"madera_roble": 4, "mineral_cobre": 3},
+			"coste_ao": 30,
+			"tiempo_min": 1.0,
+			"resultado": "hacha_cobre"
+		},
+		"caja_almacenamiento": {
+			"nombre_i18n": "CRAFTING.CAJA_ALMACENAMIENTO",
+			"coste_recursos": {"madera_roble": 8},
+			"coste_ao": 15,
+			"tiempo_min": 0.5,
+			"resultado": "caja_almacenamiento"
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"schema_version": 1,
+	"rutas": {
+		"isla_raiz_a_isla_sur": {"coste_ao": 50, "duracion_min": 2, "temporada": "todas"},
+		"isla_raiz_a_isla_norte": {"coste_ao": 80, "duracion_min": 3, "temporada": "verano"}
+	}
+}

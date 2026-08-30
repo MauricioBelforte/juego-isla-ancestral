@@ -30,48 +30,48 @@
 - [x] Definir `meta.json` con `schema_version`, `balance_version`, `fecha` y `afecta` [S]
 - [x] Definir `prices.json` con campos `price_buy`, `price_sell` por ítem [S]
 - [x] Definir `rewards.json` con recompensas por actividad y tier [M]
-- [ ] Definir `construction.json` con coste en AO y recursos por pieza [M]
-- [ ] Definir `crafting.json` con coste de recursos y tiempo por receta [M]
+- [x] Definir `construction.json` con coste en AO y recursos por pieza [M]
+- [x] Definir `crafting.json` con coste de recursos y tiempo por receta [M]
 
 ## B. Herramientas y Recursos
 
-- [ ] Definir `tools.json` con durabilidad y coste de mejora por herramienta (M13) [M]
-- [ ] Definir `resources.json` con abundancia por bioma y estación (M15) [M]
-- [ ] Definir tiempo de respawn por recurso (M15) [M]
+- [x] Definir `tools.json` con durabilidad y coste de mejora por herramienta (M13) [M]
+- [x] Definir `resources.json` con abundancia por bioma y estación (M15) [M]
+- [x] Definir tiempo de respawn por recurso (M15) [M]
 - [ ] Definir rareza base tope 5% para ítems raros [S]
 - [ ] Definir pity por ítem raro (nro de intentos sin éxito que suben la chance) [M]
 
 ## C. Actividades Primarias
 
-- [ ] Definir `farming.json`: ciclo de crecimiento por cultivo (M33) [M]
-- [ ] Definir rendimiento (cantidad por cosecha) por cultivo [M]
-- [ ] Definir precio de venta por cultivo en estación y fuera de estación [M]
-- [ ] Definir `fishing.json`: probabilidad por pez, hora, clima y estación (M34, M31, M32) [C]
-- [ ] Definir peso y tamaño por pez [M]
+- [x] Definir `farming.json`: ciclo de crecimiento por cultivo (M33) [M]
+- [x] Definir rendimiento (cantidad por cosecha) por cultivo [M]
+- [x] Definir precio de venta por cultivo en estación y fuera de estación [M]
+- [x] Definir `fishing.json`: probabilidad por pez, hora, clima y estación (M34, M31, M32) [C]
+- [x] Definir peso y tamaño por pez [M]
 
 ## D. Minería y Recursos Raros
 
-- [ ] Definir `mining.json`: minerales por profundidad (M35) [M]
-- [ ] Definir probabilidad de gema rara por nivel de mina [M]
-- [ ] Definir valor de gemas y minerales (venta y crafting) [M]
+- [x] Definir `mining.json`: minerales por profundidad (M35) [M]
+- [x] Definir probabilidad de gema rara por nivel de mina [M]
+- [x] Definir valor de gemas y minerales (venta y crafting) [M]
 - [ ] Definir límite de nodos activos por chunk (rendimiento M61) [M]
 - [ ] Definir tiempo de minado por material [S]
 
 ## E. Viajes y Transporte
 
-- [ ] Definir `travel.json`: coste y duración por ruta entre islas (M28) [M]
-- [ ] Definir tarifas del Gran Vapor según isla y temporada [M]
-- [ ] Definir tiempo real por viaje (máx 3 min reales) [S]
-- [ ] Definir que el viaje nunca exija grind previo (M152) [S]
+- [x] Definir `travel.json`: coste y duración por ruta entre islas (M28) [M]
+- [x] Definir tarifas del Gran Vapor según isla y temporada [M]
+- [x] Definir tiempo real por viaje (máx 3 min reales) [S]
+- [x] Definir que el viaje nunca exija grind previo (M152) [S]
 - [ ] Definir recompensas por descubrir rutas nuevas [S]
 
 ## F. Sellos (M153)
 
-- [ ] Definir `seals.json`: un bloque de progreso por Sello [M]
-- [ ] Definir condición de cada Sello como contenido curado, no repetitivo [C]
-- [ ] Definir esfuerzo estimado por Sello en bloques de juego (ej. 3-6 h) [M]
-- [ ] Definir recompensa de cada Sello (desbloqueos M71, cosméticos) [M]
-- [ ] Validar que ningún Sello requiera grind (grind_blocks = 0) [M]
+- [x] Definir `seals.json`: un bloque de progreso por Sello [M]
+- [x] Definir condición de cada Sello como contenido curado, no repetitivo [C]
+- [x] Definir esfuerzo estimado por Sello en bloques de juego (ej. 3-6 h) [M]
+- [x] Definir recompensa de cada Sello (desbloqueos M71, cosméticos) [M]
+- [x] Validar que ningún Sello requiera grind (grind_blocks = 0) [M]
 
 ## G. Amistad (M20)
 

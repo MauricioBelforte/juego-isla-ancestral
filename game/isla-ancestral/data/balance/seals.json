@@ -1,0 +1,8 @@
+{
+	"schema_version": 1,
+	"sellos": {
+		"sello_llegada": {"condicion_i18n": "SELLOS.SELLO_LLEGADA", "esfuerzo_horas": 2, "grind_blocks": 0, "recompensa": "viaje_gratuito"},
+		"sello_cultivador": {"condicion_i18n": "SELLOS.SELLO_CULTIVADOR", "esfuerzo_horas": 4, "grind_blocks": 0, "recompensa": "herramienta_hierro"},
+		"sello_guardian": {"condicion_i18n": "SELLOS.SELLO_GUARDIAN", "esfuerzo_horas": 6, "grind_blocks": 0, "recompensa": "decorativo_templo"}
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"schema_version": 1,
+	"misiones": {
+		"mision_secundaria_inicial": {"recompensa_ao": 50, "items": {"mineral_cobre": 2}, "duracion_estimada_min": 20},
+		"mision_principal_acto1": {"recompensa_ao": 200, "items": {"fragmento_ancestral": 1}, "duracion_estimada_min": 60}
+	}
+}

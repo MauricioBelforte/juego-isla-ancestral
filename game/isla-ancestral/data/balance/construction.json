@@ -1,0 +1,9 @@
+{
+	"schema_version": 1,
+	"piezas": {
+		"cerca_madera": {"coste_recursos": {"madera_roble": 2}, "coste_ao": 5},
+		"pared_adobe": {"coste_recursos": {"fibra_algodon": 1, "piedra_caliza": 2}, "coste_ao": 8},
+		"piso_madera": {"coste_recursos": {"madera_roble": 3}, "coste_ao": 6},
+		"fuente_decorativa": {"coste_recursos": {"piedra_caliza": 6, "mineral_cobre": 1}, "coste_ao": 40}
+	}
+}

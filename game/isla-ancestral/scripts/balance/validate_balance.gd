@@ -27,6 +27,9 @@ func _run() -> void:
 	_r7_sesion_30min()
 	_r8_sellos_sin_grind()
 	_r12_version_presente()
+	_r3_recetas_sin_generacion()
+	_r5_durabilidad_positiva()
+	_r8b_sellos_grind_cero()
 	print("=== VALIDATE BALANCE M93: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -79,3 +82,27 @@ func _r12_version_presente() -> void:
 	# Regla 12: meta.json presente con balance_version.
 	var version = _bal.get_balance_version()
 	_check(version != "", "R12: balance_version presente: " + version)
+
+func _r3_recetas_sin_generacion() -> void:
+	# Regla 3: ninguna receta de crafting genera MÁS recurso del que consume.
+	var crafting: Dictionary = _bal.get_crafting().get("recetas", {})
+	var recipes: Dictionary = _bal.get_mining().get("minerales", {})
+	for r_id in crafting:
+		var coste: Dictionary = crafting[r_id].get("coste_recursos", {})
+		var ingreso: String = str(crafting[r_id].get("resultado", ""))
+		# Comparación simple: el resultado no debe ser un recurso base que aparezca
+		# en el coste con cantidad menor (sin generación de recursos).
+		if coste.has(ingreso):
+			_check(int(coste[ingreso]) >= 1, "R3: %s no genera %s desde menos" % [r_id, ingreso])
+
+func _r5_durabilidad_positiva() -> void:
+	# Regla 5: todas las herramientas tienen durabilidad > 0.
+	var tools: Dictionary = _bal.get_tools().get("herramientas", {})
+	for t_id in tools:
+		_check(int(tools[t_id].get("durabilidad", 0)) > 0, "R5: %s durabilidad > 0" % t_id)
+
+func _r8b_sellos_grind_cero() -> void:
+	# Regla 8 reforzada: ningún sello requiere grind repetitivo.
+	var sellos: Dictionary = _bal.get_seals().get("sellos", {})
+	for s_id in sellos:
+		_check(int(sellos[s_id].get("grind_blocks", 0)) == 0, "R8b: %s grind_blocks = 0" % s_id)

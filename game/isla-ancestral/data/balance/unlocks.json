@@ -1,0 +1,8 @@
+{
+	"schema_version": 1,
+	"desbloqueos": {
+		"viaje_interislas": {"coste_ao": 300, "condicion": "sello_llegada"},
+		"taller_crafting": {"coste_ao": 150, "condicion": "mision_secundaria_inicial"},
+		"recetas_avanzadas": {"coste_ao": 500, "condicion": "sello_cultivador"}
+	}
+}

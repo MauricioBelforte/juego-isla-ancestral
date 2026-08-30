@@ -19,6 +19,7 @@ var _timing: Dictionary = {}
 var _progression: Dictionary = {}
 var _friendship: Dictionary = {}
 var _meta: Dictionary = {}
+var _tablas_extra: Dictionary = {}   # nombre -> Dictionary (crafting, construction, tools, ...)
 
 func _ready() -> void:
 	_cargar_todo()
@@ -30,6 +31,21 @@ func _cargar_todo() -> void:
 	_progression = _cargar_json("progression.json")
 	_friendship = _cargar_json("friendship.json")
 	_meta = _cargar_json("meta.json")
+	# Tablas de contenido (RF3-RF17)
+	_tablas_extra = {
+		"crafting": _cargar_json("crafting.json"),
+		"construction": _cargar_json("construction.json"),
+		"tools": _cargar_json("tools.json"),
+		"resources": _cargar_json("resources.json"),
+		"farming": _cargar_json("farming.json"),
+		"fishing": _cargar_json("fishing.json"),
+		"mining": _cargar_json("mining.json"),
+		"travel": _cargar_json("travel.json"),
+		"seals": _cargar_json("seals.json"),
+		"quests": _cargar_json("quests.json"),
+		"puzzles": _cargar_json("puzzles.json"),
+		"unlocks": _cargar_json("unlocks.json"),
+	}
 
 func _cargar_json(nombre: String) -> Dictionary:
 	var f := FileAccess.open(RUTA_BASE + nombre, FileAccess.READ)
@@ -117,4 +133,48 @@ func get_tabla(nombre: String) -> Dictionary:
 			return _friendship
 		"meta":
 			return _meta
-	return {}
+	return _tablas_extra.get(nombre, {})
+
+## ── Getters de tablas de contenido (RF3-RF17) ─────────────
+
+func get_crafting() -> Dictionary:
+	return _tablas_extra.get("crafting", {})
+
+func get_construction() -> Dictionary:
+	return _tablas_extra.get("construction", {})
+
+func get_tools() -> Dictionary:
+	return _tablas_extra.get("tools", {})
+
+func get_resources_balance() -> Dictionary:
+	return _tablas_extra.get("resources", {})
+
+func get_farming() -> Dictionary:
+	return _tablas_extra.get("farming", {})
+
+func get_fishing() -> Dictionary:
+	return _tablas_extra.get("fishing", {})
+
+func get_mining() -> Dictionary:
+	return _tablas_extra.get("mining", {})
+
+func get_travel() -> Dictionary:
+	return _tablas_extra.get("travel", {})
+
+func get_seals() -> Dictionary:
+	return _tablas_extra.get("seals", {})
+
+func get_quests_balance() -> Dictionary:
+	return _tablas_extra.get("quests", {})
+
+func get_puzzles() -> Dictionary:
+	return _tablas_extra.get("puzzles", {})
+
+func get_unlocks() -> Dictionary:
+	return _tablas_extra.get("unlocks", {})
+
+## ── Receta de crafting (RF4) ─────────────────────────────
+
+## Devuelve el coste total de recursos de una receta (RF4: utilidad >= coste).
+func coste_receta(recipe_id: String) -> Dictionary:
+	return get_crafting().get("recetas", {}).get(recipe_id, {}).get("coste_recursos", {})

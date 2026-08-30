@@ -1,0 +1,8 @@
+{
+	"schema_version": 1,
+	"minerales": {
+		"mineral_cobre": {"profundidad_min": 4, "profundidad_max": 20, "probabilidad_base": 0.15, "valor_venta": 15},
+		"mineral_hierro": {"profundidad_min": 12, "profundidad_max": 30, "probabilidad_base": 0.08, "valor_venta": 30},
+		"piedra_preciosa": {"profundidad_min": 20, "profundidad_max": 40, "probabilidad_base": 0.03, "valor_venta": 120}
+	}
+}

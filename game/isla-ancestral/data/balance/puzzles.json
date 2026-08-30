@@ -1,0 +1,7 @@
+{
+	"schema_version": 1,
+	"puzzles": {
+		"templo_agua": {"tiempo_max_con_ayuda_min": 20, "tiempo_max_sin_ayuda_min": 45, "recompensa_ao": 100},
+		"templo_fuego": {"tiempo_max_con_ayuda_min": 15, "tiempo_max_sin_ayuda_min": 35, "recompensa_ao": 120}
+	}
+}

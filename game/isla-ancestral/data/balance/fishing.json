@@ -1,0 +1,7 @@
+{
+	"schema_version": 1,
+	"peces": [
+		{"id": "pez_sardina", "nombre_i18n": "PESCA.PEZ_SARDINA", "temporadas": ["todas"], "horas": [4, 20], "clima": ["despejado", "lluvia"], "peso_kg": [0.3, 1.2], "precio_compra": 30, "precio_venta": 20, "probabilidad": 0.25, "pity": null},
+		{"id": "pez_luna", "nombre_i18n": "PESCA.PEZ_LUNA", "temporadas": ["verano"], "horas": [21, 3], "clima": ["lluvia"], "peso_kg": [12.0, 60.0], "precio_compra": 900, "precio_venta": 550, "probabilidad": 0.03, "pity": 80}
+	]
+}
