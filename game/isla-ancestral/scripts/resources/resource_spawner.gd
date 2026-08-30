@@ -69,14 +69,18 @@ func instanciar_nodo(def_id: StringName, x: float, z: float, _terreno: Node = nu
 	add_child(node)  # primero al árbol, luego posicionar (global_position necesita tree)
 	# Posicionar con TerrainLocator (anti-flotamiento) si existe
 	var locator = _buscar_terreno_locator()
+	var y: float = 30.0
 	if locator != null:
 		var ok: bool = locator.posicionar_sobre_terreno(node, x, z)
-		if not ok:
+		if ok:
+			y = node.global_position.y
+		else:
 			node.global_position = Vector3(x, 30.0, z)
 	else:
 		node.global_position = Vector3(x, 30.0, z)
 	_nodos[_next_id] = node
 	_next_id += 1
+	print("[M15] Nodo %s en (%.0f, %.0f, %.0f) y=%.0f" % [str(def_id), x, y, z, y])
 	return _next_id - 1
 
 func _on_nodo_agotado(def_id: StringName, pos: Vector3) -> void:
