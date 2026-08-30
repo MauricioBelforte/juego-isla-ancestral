@@ -79,15 +79,15 @@
 
 ## E. Inventario (10)
 
-- [ ] Crear InventoryLayer como UILayer tipo MODAL_FULL [S]
-- [ ] Grid de objetos con celdas enfocables y conteo de apilables (M11/M38) [M]
+- [x] Crear InventoryLayer como UILayer tipo MODAL_FULL [S]
+- [x] Grid de objetos con celdas enfocables y conteo de apilables (M11/M38) [M]
 - [ ] Drag & drop con ratón entre celdas y hotbar [M]
 - [ ] Mover objetos con gamepad (agarrar/soltar con confirm y dirección) [M]
 - [ ] Categorías y orden (nombre/peso/reciente) navegables [M]
 - [ ] Hotbar sincronizada con el inventario en ambos sentidos [M]
-- [ ] Tooltip del objeto al enfocar o hacer hover en la celda [S]
+- [x] Tooltip del objeto al enfocar o hacer hover en la celda [S]
 - [ ] Confirmación antes de descartar objetos permanentemente [S]
-- [ ] Actualización en vivo por inventory.changed sin re-render completo [M]
+- [x] Actualización en vivo por inventory.changed sin re-render completo [M]
 - [ ] Verificar que abrir inventario congele el mundo con fade suave (pausa) [M]
 
 ## F. Minimapa (8)

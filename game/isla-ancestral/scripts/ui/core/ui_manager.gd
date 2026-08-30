@@ -69,6 +69,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		close_top()
 		get_viewport().set_input_as_handled()
 		return
+	# M53 sección E: toggle del panel de inventario con acción `inventario` (I)
+	if event.is_action_pressed("inventario"):
+		var inv_layer = _buscar_capa("InventoryLayer")
+		if inv_layer and inv_layer.has_method("toggle"):
+			inv_layer.toggle()
+			get_viewport().set_input_as_handled()
+			return
 	# Navegación direccional con acciones del InputMap (M57)
 	var nav: Vector2i = Vector2i.ZERO
 	if event.is_action_pressed("mover_norte"):

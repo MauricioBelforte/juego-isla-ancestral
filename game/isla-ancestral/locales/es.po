@@ -102,3 +102,12 @@ msgstr "¡%s unidad(es) de %s creadas!"
 
 msgid "SETTINGS.CRAFT_FALLO"
 msgstr "Faltan materiales. No perdiste nada."
+
+msgid "SETTINGS.INVENTARIO_HINT"
+msgstr "Click en un objeto para marcar/desmarcar favorito. Esc para cerrar."
+
+msgid "SETTINGS.SLOT_LIBRE"
+msgstr "Slot libre"
+
+msgid "SETTINGS.SLOTS"
+msgstr "Slots"

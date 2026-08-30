@@ -101,3 +101,12 @@ msgstr "Crafted %s %s!"
 
 msgid "SETTINGS.CRAFT_FALLO"
 msgstr "Missing materials. You lost nothing."
+
+msgid "SETTINGS.INVENTARIO_HINT"
+msgstr "Click an item to toggle favorite. Esc to close."
+
+msgid "SETTINGS.SLOT_LIBRE"
+msgstr "Free slot"
+
+msgid "SETTINGS.SLOTS"
+msgstr "Slots"
