@@ -21,8 +21,12 @@ func inicializar(vecino: Node) -> void:
 
 ## El jugador solicita diálogo → inicia el DialogueManager de M21
 func solicitar_dialogo() -> void:
-	# Si ya estamos en conversación, no repetir (deja el diálogo actual fluir)
-	if _en_conversacion:
+	var dm = get_node_or_null("/root/DialogueManager")
+	# ¿Ya está en diálogo? (consulta el manager como fuente de verdad — evita
+	# quedarse bloqueado si el diálogo anterior no llegó al nodo FIN)
+	if dm and dm.is_dialogue_active():
+		return
+	if _en_conversacion and dm == null:
 		return
 	# Placeholder M19 (emitir señal)
 	var clave: String = "saludo"
@@ -36,21 +40,15 @@ func solicitar_dialogo() -> void:
 	var nombre: String = _vecino.name if _vecino else "?"
 	print("[DialogueHook] %s solicita diálogo: %s" % [nombre, clave])
 	# M21: iniciar el DialogueManager (autoload) si tenemos dialogue_id
-	if dialogue_id != "":
-		var dm = get_node_or_null("/root/DialogueManager")
-		if dm:
-			# ROBUSTO: si el manager quedó activo (diálogo sin cerrar), forzar cierre
-			if dm.is_dialogue_active():
-				dm.stop_dialogue()
-			_en_conversacion = true
-			var ok: bool = dm.start_dialogue(dialogue_id, {"nombre_viajero": nombre})
-			if ok:
-				dm.dialogue_ended.connect(_on_m21_terminado, CONNECT_ONE_SHOT)
-			else:
-				_en_conversacion = false
-				print("[DialogueHook] No se pudo iniciar diálogo (grafo inválido?)")
+	if dialogue_id != "" and dm:
+		_en_conversacion = true
+		var ok: bool = dm.start_dialogue(dialogue_id, {"nombre_viajero": nombre})
+		if ok:
+			dm.dialogue_ended.connect(_on_m21_terminado, CONNECT_ONE_SHOT)
 		else:
-			print("[DialogueHook] DialogueManager no encontrado (autoload?)")
+			_en_conversacion = false
+			print("[DialogueHook] No se pudo iniciar diálogo (grafo inválido?)")
+			# No es necesario resincronizar si el manager rechazó; será re-intentable
 
 
 func _on_m21_terminado(_id: String, _ultimo: String) -> void:
@@ -99,4 +97,8 @@ func linea_reaccion_regalo(objeto_id: String) -> String:
 
 
 func esta_en_conversacion() -> bool:
+	# Fuente de verdad: el manager (se resetea SOLO si el diálogo no quedó activo).
+	var dm = get_node_or_null("/root/DialogueManager")
+	if dm:
+		return dm.is_dialogue_active()
 	return _en_conversacion
