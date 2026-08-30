@@ -30,7 +30,7 @@
 - [x] Crear ActionPromptOverlay con prompts dinámicos por dispositivo (M57) [S]
 - [x] Implementar force_refresh puntual y refresh a baja frecuencia (2 Hz) sin polling por frame [M]
 - [x] Implementar set_hud_visible(false) para M56 Fotografía y capturas [S]
-- [ ] Validar que el HUD no tape el centro de la pantalla (regla de layout) [S]
+- [x] Verificar que el HUD no tape el centro de la pantalla (regla de layout) [S]
 - [ ] Verificar que el HUD siga coherente con pausa abierta en modo congelado [M]
 
 ## C. Navegación y foco (12)

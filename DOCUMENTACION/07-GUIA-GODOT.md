@@ -1,5 +1,5 @@
-**Modelo:** ox-alpha (Cline)
-**Plataforma:** Cline
+**Modelo:** MiMo V2.5 (OpenCode)
+**Plataforma:** OpenCode
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
 
@@ -1275,6 +1275,45 @@ func _limpiar_opciones() -> void:
 
 ---
 
+### 9.47 Superposición de widgets HUD: NO crear widgets que ya existen en otros scripts
+
+**Síntoma:** widgets del HUD superpuestos entre sí, texto ilegible, elementos duplicados en la misma zona de pantalla.
+
+**Causa:** al agregar widgets a la escena principal (`main_island.tscn`), se crearon nodos que ya existían generados dinámicamente por otros scripts:
+1. `HotbarWidget` (mi widget) se superpuso con el hotbar que `player.gd` ya crea dinámicamente en `_create_hotbar_hud()` (línea 839).
+2. `ClockWidget` (mi widget inferior) se superpuso con `RelojWidget` (`w_reloj.gd`) que ya estaba en la escena.
+3. `HUDScreen` CanvasLayer (layer 100) se creó como un SEGUNDO CanvasLayer junto al `UI` original, causando duplicación.
+4. `StatusBar` en TopLeft tapaba `FPSLabel` y `ControlsLabel`.
+
+**Solución aplicada:**
+- **Eliminar widgets duplicados:** quitar `HotbarWidget`, `ClockWidget`, `SeasonWidget`, `ResourceCounter` de la escena.
+- **Eliminar CanvasLayer duplicado:** quitar `HUDScreen` (layer 100), mantener solo `UI`.
+- **Restaurar widgets originales:** devolver `RelojWidget` (`w_reloj.gd`) al `UI`.
+- **Reposicionar widgets útiles:** `StatusBar` movido a esquina inferior izquierda (no tapa FPS/Controles).
+- **Un solo CanvasLayer UI** en la escena.
+
+**Regla general (OBLIGATORIA para M53 y cualquier módulo UI):**
+1. **ANTES de agregar un widget a la escena**, revisar si `player.gd`, `main_island.gd` u otro script ya lo crea dinámicamente con `_create_*_hud()` o similar.
+2. **Verificar la escena antes de modificar:** leer `main_island.tscn` y buscar nodos existentes en `UI` CanvasLayer.
+3. **NO crear un segundo CanvasLayer** para widgets del HUD. Siempre agregar al `UI` existente.
+4. **Los widgets de `player.gd` son los oficiales** para hotbar, herramientas y durabilidad. No duplicar.
+5. **Los widgets de `w_reloj.gd` son los oficiales** para reloj/fecha/estación. No reemplazar con versiones inferiores.
+
+**Lista de fuentes de widgets en la escena (verificar ANTES de crear nuevos):**
+
+| Widget | Fuente | Script | Notas |
+|--------|--------|--------|-------|
+| RelojWidget | Escena (UI) | `scripts/clock/w_reloj.gd` | Hora, fecha, chip estación. El oficial. |
+| Hotbar | player.gd dinámico | `scripts/player/player.gd:839` | 6 slots + durabilidad + nombre herramienta. El oficial. |
+| FPSLabel | Escena (UI) | Label estático | Debug, no tocar |
+| ControlsLabel | Escena (UI) | Label estático | Debug, no tocar |
+| StatusBar | Escena (UI) | `scripts/ui/widgets/status_bar.gd` | 3 barras vitales. Reposicionado a abajo-izq |
+| InteractPrompt | Escena (UI) | `scripts/ui/widgets/interact_prompt.gd` | [F] Hablar. Solo aparece cerca de NPC |
+
+**Fecha:** 2026-08-30 · **Agente:** MiMo V2.5 (OpenCode)
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |
@@ -1282,6 +1321,7 @@ func _limpiar_opciones() -> void:
 | 2026-08-28 | Hy3 | Kilo | Agregada §9.40 (VoxelTerrain sin get_voxel → VoxelTool.get_voxel + diagnóstico por get_method_list). M13 Fase 3 cerrada |
 | 2026-08-29 | ox-alpha | Cline | Agregadas §9.41 (class_name Logger colisiona con clase nativa Godot 4.7 — usar autoload sin class_name), §9.42 (String.compress() no existe → PackedByteArray.compress), §9.43 (`:=` sobre constantes de autoload vía instancia dinámica → Variant). M103/M104 |
 | 2026-08-30 | Deepseek V4 Flash | Kilo | Agregada §9.46 (Array por referencia: la UI vacía el grafo cacheado del diálogo M21 — usar duplicate() + reasignación, nunca clear() sobre la referencia). Fix de "diálogo solo funciona una vez". Log 251 |
+| 2026-08-30 | MiMo V2.5 | OpenCode | Agregada §9.47 (Superposición de widgets HUD: NO crear widgets que ya existen en otros scripts — verificar fuentes en player.gd, w_reloj.gd, main_island.tscn ANTES de agregar nodos UI). Corrección de superposición M53 |
 
 
 ---
