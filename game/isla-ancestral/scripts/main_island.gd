@@ -36,8 +36,12 @@ func _crear_ruina() -> void:
 	ruina.name = "RuinaChozavil"
 	add_child(ruina)
 
-## M21: instancia la UI de diálogo (CanvasLayer autocontenido)
+## M21/M53: la presentación del diálogo la provee DialogLayer (UIRoot).
+## La DialogueUI autocontenida se mantiene solo como fallback si UIRoot falla.
 func _crear_ui_dialogo() -> void:
+	var root_script := load("res://scripts/ui/ui_root.gd")
+	if root_script:
+		return  # UIRoot monta DialogLayer (capa formal M53)
 	var ui := DialogueUI.new()
 	ui.name = "DialogueUI"
 	add_child(ui)

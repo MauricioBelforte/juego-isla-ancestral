@@ -130,7 +130,7 @@ func _input(event: InputEvent) -> void:
 	var dm = get_node_or_null("/root/DialogueManager")
 	if dm == null:
 		return
-	if event.is_action_pressed("interactuar") or event.is_action_pressed("pausa"):
+	if event.is_action_pressed("interactuar"):
 		_avanzar(dm)
 		get_viewport().set_input_as_handled()
 	elif event is InputEventKey and event.pressed and not event.echo:

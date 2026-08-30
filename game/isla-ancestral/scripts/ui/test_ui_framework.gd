@@ -25,6 +25,7 @@ func _run() -> void:
 	_test_pila_ok()
 	_test_registro_automatico()
 	_test_layer_type()
+	_test_tema_global()
 	print("=== TEST M53 UI FRAMEWORK: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -68,3 +69,22 @@ func _test_layer_type() -> void:
 	_check(_ui.LAYER_MODAL_FULL == 2, "LAYER_MODAL_FULL == 2")
 	# is_modal_open no crashea
 	_check(_ui.is_modal_open() is bool, "is_modal_open devuelve bool")
+
+func _test_tema_global() -> void:
+	# ThemeService (M53) aplicó el tema cozy al root (herencia de Controls)
+	var ts = root.get_node_or_null("ThemeService")
+	_check(ts != null, "ThemeService autoload presente")
+	if ts == null:
+		return
+	_check(root.theme != null, "root.theme aplicado (herencia global)")
+	# El tema tiene estilos de botón cozy (paleta pastel)
+	var tema = root.theme
+	if tema != null:
+		var sb = tema.get_stylebox("normal", "Button")
+		_check(sb != null, "estilo Button normal presente en tema")
+		var fs = tema.get_font_size("font_size", "H1")
+		_check(int(fs) > 0, "jerarquía tipográfica H1 presente (%s)" % str(fs))
+	# Cambio de escala en vivo (M58)
+	ts.set_ui_scale(1.2)
+	_check(absf(float(ts.get_ui_scale()) - 1.2) < 0.01, "set_ui_scale 1.2 aplicado")
+	ts.set_ui_scale(1.0)

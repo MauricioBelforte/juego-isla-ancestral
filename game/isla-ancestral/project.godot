@@ -46,6 +46,7 @@ ResourceManager="*res://scripts/resources/resource_manager.gd"
 Localization="*res://scripts/localization/localization_manager.gd"
 Balance="*res://scripts/balance/balance_service.gd"
 Tutorial="*res://scripts/tutorial/tutorial_manager.gd"
+ThemeService="*res://scripts/ui/theme/theme_service.gd"
 
 [display]
 

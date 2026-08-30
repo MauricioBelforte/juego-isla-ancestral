@@ -45,6 +45,17 @@ func _ready() -> void:
 				ui_events.hud_request.connect(_on_hud_request)
 			if ui_events != null and ui_events.has_signal("dialog_requested"):
 				ui_events.dialog_requested.connect(_on_dialog_requested)
+	# M53 RF6: tooltip por foco (accesible por teclado/gamepad)
+	ui_focus_moved.connect(_on_focus_moved_tooltip)
+
+## Muestra el tooltip del control enfocado si define tooltip_text
+func _on_focus_moved_tooltip(node: Node) -> void:
+	if node is Control and str(node.tooltip_text) != "":
+		var ts = get_node_or_null("/root/TooltipService")
+		if ts == null:
+			ts = _buscar_nodo(get_tree().root, "TooltipService")
+		if ts and ts.has_method("show_tooltip"):
+			ts.show_tooltip(str(node.tooltip_text), node)
 
 ## ── Acciones transversales (M57) ─────────────────────────
 ## Navegación por teclado/gamepad: usa el InputMap del proyecto (M57) para

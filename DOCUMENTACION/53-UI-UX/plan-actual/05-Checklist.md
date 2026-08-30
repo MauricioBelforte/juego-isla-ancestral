@@ -105,10 +105,10 @@
 
 - [x] Crear TooltipService como CanvasLayer autoload [S]
 - [x] Tooltip por hover de ratón con retardo configurable (350 ms default) [S]
-- [ ] Tooltip por foco de teclado/gamepad (accesible sin ratón) [S]
+- [x] Tooltip por foco de teclado/gamepad (accesible sin ratón) [S]
 - [x] Pool único de nodos tooltip sin allocaciones por uso [M]
 - [x] Clamp de posición al viewport con margen de 8 px [S]
-- [ ] Cierre al mover foco, salir del área o acción transversal [S]
+- [x] Cierre al mover foco, salir del área o acción transversal [S]
 - [ ] Texto breve y amable con jerarquía M88 (título y cuerpo) [S]
 - [ ] Verificar que el tooltip nunca bloquea el input del mundo [S]
 
@@ -133,14 +133,14 @@
 - [x] Jerarquía tipográfica H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10 [S]
 - [x] StyleBoxFlat redondeado (radius 12-16) en paneles y botones [S]
 - [x] Estados hover, pressed, disabled y focus diferenciados por forma y color [S]
-- [ ] Aplicar ThemeUx como tema global en runtime [M]
+- [x] Aplicar ThemeUx como tema global en runtime [M]
 - [ ] Verificar legibilidad AA en todas las combinaciones de color [M]
 - [ ] Verificar coherencia visual entre todas las capas (un solo lenguaje) [M]
 - [ ] Revisar textos con locales largos (alemán) sin cortes (M87) [M]
 
 ## J. Accesibilidad M58 (10)
 
-- [ ] Integrar ui_scale 0.8-1.5 aplicado por ThemeUx en runtime [M]
+- [x] Integrar ui_scale 0.8-1.5 aplicado por ThemeUx en runtime [M]
 - [ ] Integrar text_scale independiente del escala de UI [M]
 - [ ] Integrar high_contrast con contraste AA y bordes reforzados [M]
 - [ ] Integrar modo daltonismo con formas y texturas además del color [M]
