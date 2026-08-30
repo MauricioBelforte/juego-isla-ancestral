@@ -21,9 +21,9 @@ func inicializar(vecino: Node) -> void:
 
 ## El jugador solicita diálogo → inicia el DialogueManager de M21
 func solicitar_dialogo() -> void:
+	# Si ya estamos en conversación, no repetir (deja el diálogo actual fluir)
 	if _en_conversacion:
 		return
-	_en_conversacion = true
 	# Placeholder M19 (emitir señal)
 	var clave: String = "saludo"
 	if _vecino and _vecino.has_method("obtener_estado_animo"):
@@ -39,8 +39,16 @@ func solicitar_dialogo() -> void:
 	if dialogue_id != "":
 		var dm = get_node_or_null("/root/DialogueManager")
 		if dm:
-			dm.start_dialogue(dialogue_id, {"nombre_viajero": nombre})
-			dm.dialogue_ended.connect(_on_m21_terminado, CONNECT_ONE_SHOT)
+			# ROBUSTO: si el manager quedó activo (diálogo sin cerrar), forzar cierre
+			if dm.is_dialogue_active():
+				dm.stop_dialogue()
+			_en_conversacion = true
+			var ok: bool = dm.start_dialogue(dialogue_id, {"nombre_viajero": nombre})
+			if ok:
+				dm.dialogue_ended.connect(_on_m21_terminado, CONNECT_ONE_SHOT)
+			else:
+				_en_conversacion = false
+				print("[DialogueHook] No se pudo iniciar diálogo (grafo inválido?)")
 		else:
 			print("[DialogueHook] DialogueManager no encontrado (autoload?)")
 

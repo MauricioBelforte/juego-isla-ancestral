@@ -15,6 +15,7 @@ func _init() -> void:
 	_test_opciones()
 	_test_eventos_y_sesion()
 	_test_validador_errores()
+	_test_reinicio_dialogo()
 	print("=== TEST DIALOGOS M21: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -81,3 +82,34 @@ func _test_validador_errores() -> void:
 	g2.nodes["a"].id = "a"
 	g2.nodes["a"].next_id = "fantasma"
 	_check(not g2.validate().is_empty(), "next inexistente detectado")
+
+
+func _test_reinicio_dialogo() -> void:
+	# Bug 'solo funciona una vez': debe poder iniciarse de nuevo tras terminar.
+	var manager = load("res://scripts/dialogos/dialogue_manager.gd").new()
+	var terminados: Array = []
+	manager.dialogue_ended.connect(func(id, ultimo): terminados.append(id))
+	# Primera ronda
+	_check(manager.start_dialogue("catalina_hola"), "1er inicio OK")
+	for i in range(10):
+		if not manager.is_dialogue_active():
+			break
+		if manager._nodo_actual.tipo == DialogueNode.TIPO_OPCIONES:
+			manager.choose_option(0)
+		else:
+			manager.advance()
+	_check(not manager.is_dialogue_active(), "1er dialogo termino (no activo)")
+	_check(terminados.size() == 1, "dialogue_ended emitido 1 vez")
+	# Segunda ronda (BLOQUEO DEBERIA PERMITIRLO)
+	_check(manager.start_dialogue("catalina_hola"), "2do inicio OK (reinicio)")
+	for i in range(10):
+		if not manager.is_dialogue_active():
+			break
+		if manager._nodo_actual.tipo == DialogueNode.TIPO_OPCIONES:
+			manager.choose_option(1)
+		else:
+			manager.advance()
+	_check(not manager.is_dialogue_active(), "2do dialogo termino")
+	_check(terminados.size() == 2, "dialogue_ended emitido 2 veces (reinicio funciona)")
+	manager._grafos_cache.clear()
+	

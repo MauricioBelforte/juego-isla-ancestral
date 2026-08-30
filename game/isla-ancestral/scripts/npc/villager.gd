@@ -91,13 +91,14 @@ func _crear_visuales() -> void:
 	head_mesh.name = "Head"
 	add_child(head_mesh)
 
-	# Label del nombre
+	# Label del nombre (agrandado para legibilidad — Fue 22, ahora 42)
 	_label_nombre = Label3D.new()
 	_label_nombre.text = perfil.nombre if perfil else "Vecino"
-	_label_nombre.font_size = 22
+	_label_nombre.font_size = 42
 	_label_nombre.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_label_nombre.position.y = 2.0
-	_label_nombre.modulate = Color(1, 1, 1, 0.9)
+	_label_nombre.modulate = Color(1, 1, 1, 0.95)
+	_label_nombre.outline_size = 6
 	_label_nombre.name = "LabelNombre"
 	add_child(_label_nombre)
 
