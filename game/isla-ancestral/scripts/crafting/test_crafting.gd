@@ -29,6 +29,7 @@ func _run() -> void:
 	_test_fabricar_sin_materiales()
 	_test_fabricar_desconocida()
 	_test_experimental()
+	_test_coste_ao()
 	_test_persistencia()
 	print("=== TEST M16 CRAFTING: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
@@ -92,6 +93,26 @@ func _test_experimental() -> void:
 	_check(receta != null and receta.id == "rec_ensalada_bayas", "combinación correcta descubre receta")
 	_check(_cs.es_conocida("rec_ensalada_bayas"), "receta descubierta conocida")
 	_check(_inv.count_item("baya_roja") == antes_bayas, "experimentación exitosa tampoco consume")
+
+func _test_coste_ao() -> void:
+	# Ruta M38: receta con coste_ao consume monedas (EconomyManager)
+	var eco = root.get_node_or_null("EconomyManager")
+	_check(eco != null, "EconomyManager autoload presente")
+	if eco == null:
+		return
+	# Materiales del talismán: 1 fragmento + 5 piedra (coste_ao = 10)
+	_inv.agregar_items({"fragmento_ancestral": 1, "piedra_caliza": 10})
+	# RF4: el talismán es de experimentación — descubrirlo primero (sin consumo)
+	var descubierta: CraftingRecipe = _cs.experimentar(CraftingRecipe.Estacion.MESA_TRABAJO,
+		{"fragmento_ancestral": 1, "piedra_caliza": 5})
+	_check(descubierta != null and descubierta.id == "rec_talisman_ancestral", "talismán descubierto por experimentación")
+	var saldo_antes: int = int(eco.saldo)
+	var ok: bool = _cs.craft("rec_talisman_ancestral", 1)
+	_check(ok, "craft talismán con AO exitoso")
+	_check(int(eco.saldo) == saldo_antes - 10, "AO consumido (saldo %d -> %d)" % [saldo_antes, int(eco.saldo)])
+	_check(_inv.count_item("talisman_ancestral") == 1, "talismán en inventario")
+	_check(_inv.count_item("fragmento_ancestral") == 0, "fragmento consumido")
+	_check(_inv.count_item("piedra_caliza") == 5, "piedra consumida (10-5)")
 
 func _test_persistencia() -> void:
 	var data: Dictionary = _cs.get_save_data()

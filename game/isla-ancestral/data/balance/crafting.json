@@ -76,7 +76,7 @@
 			"origen": "experimentacion",
 			"tags": ["ancestral"],
 			"coste_recursos": {"fragmento_ancestral": 1, "piedra_caliza": 5},
-			"coste_ao": 0,
+			"coste_ao": 10,
 			"resultado": "talisman_ancestral",
 			"resultado_cantidad": 1
 		}

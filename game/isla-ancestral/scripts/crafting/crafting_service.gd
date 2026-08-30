@@ -147,11 +147,11 @@ func craft(rec_id: String, cantidad: int = 1) -> bool:
 		return false
 	# Consumo de coste_ao (M38) si corresponde
 	if receta.coste_ao > 0:
-		var eco = get_node_or_null("/root/Economia")
-		if eco == null or not eco.has_method("gastar"):
+		var eco = get_node_or_null("/root/EconomyManager")
+		if eco == null or not eco.has_method("retirar_monedas"):
 			crafting_failed.emit(receta, "sin_economia")
 			return false
-		if not eco.gastar(receta.coste_ao * cantidad):
+		if not eco.puede_pagar(receta.coste_ao * cantidad) or not eco.retirar_monedas(receta.coste_ao * cantidad):
 			crafting_failed.emit(receta, "ao_insuficiente")
 			return false
 	# Consumo de materiales (todo-o-nada por unidad, multiplicado)
