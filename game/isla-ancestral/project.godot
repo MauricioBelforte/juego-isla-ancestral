@@ -41,6 +41,8 @@ TooltipService="*res://scripts/ui/services/tooltip_service.gd"
 NotificationService="*res://scripts/ui/services/notification_service.gd"
 TerrainLocator="*res://scripts/core/terrain_locator.gd"
 VillagerManager="*res://scripts/npc/villager_manager.gd"
+ControlInput="*res://scripts/controls/control_input.gd"
+ControlInput="*res://scripts/controls/control_input.gd"
 
 [display]
 
