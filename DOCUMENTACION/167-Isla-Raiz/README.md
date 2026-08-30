@@ -21,6 +21,9 @@ en el historial de commits.
 
 ## Archivos
 - `plan-inicial/` — documentación original (firma: Hy3/Kilo, 2026-08-29)
+- `plan-actual/MAPA-OBJETOS.md` — **mapa de posiciones** de todos los objetos del inicio de la
+  partida (jugador, NPCs, estructuras). Fuente de verdad; sincronizar con el código. Solo el
+  arranque (el jugador luego mueve cosas).
 - `plan-actual/` — estado vigente (se actualiza al cambiar el mundo)
 
 ## Módulos relacionados

@@ -22,6 +22,7 @@ completas con los datos de tu isla, y renombras.
 | `02-Analisis.md` | Análisis del terreno/isla, decisiones |
 | `03-Diseno.md` | **Fuente de verdad**: config del terreno, mapa de posiciones, recovery |
 | `04-Codigo.md` | Archivos involucrados, configuración exacta |
+| `MAPA-OBJETOS.md` | **Mapa de posiciones** de todos los objetos del inicio (fuente de verdad) |
 | `05-Checklist.md` | 100+ ítems de la isla |
 
 ## Reglas (heredadas de la jornada 2026-08-29)
