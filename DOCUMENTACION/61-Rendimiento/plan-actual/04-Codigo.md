@@ -1,9 +1,13 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
 
 # 04-Codigo.md — Módulo 61: Rendimiento
 
-## 1. Archivos Involucrados
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** las rutas del plan-inicial (`Assets/_Project/...`)
+> son referencia de diseño. La implementación real usa `res://scripts/performance/` y
+> `res://data/performance/`. Ver sección 5 (Notas del Agente).
+
+## 1. Archivos Involucrados (previstos, del plan-inicial)
 
 | Archivo | Ruta (proyecto) | Tipo | Estado |
 |---|---|---|---|
@@ -123,3 +127,47 @@ No existe editor/binary Godot en el entorno de trabajo: los `.gd`/`.tscn` de est
 - Implementar primero `budget_profile.gd` + `bench_scene_a` (sin módulos finales, el terreno voxel básico M08 basta) para tener la vara de medición antes de optimizar nada.
 - Configurar el gate CI en M116 apenas exista un build de profiling.
 - Coordinar con M62 (Memoria): las pausas de GC y las allocations se miden en el MISMO bench.
+
+---
+
+## Iteración 1 — Implementación real (2026-08-30, Deepseek V4 Flash / Kilo)
+
+### Archivos runtime vigentes (NO las rutas plan-inicial)
+
+```
+res://scripts/performance/
+├── budget_profile.gd        # Instrumentación por categorías (begin/end_section)
+├── validate_budget.gd       # Validador tabla ↔ medición (gate CI, exit 0/1)
+└── test_budget_profile.gd   # Test headless (0 fallos)
+res://data/performance/
+└── budgets.json             # Tabla oficial: 16,7 ms, tolerancia 10 %, 7 categorías
+```
+
+### Lo que hice
+
+- **`BudgetProfile`**: `begin_section/end_section` con `Time.get_ticks_usec()`, acumulado en ms
+  por categoría, contador de llamadas, promedio, `get_resumen()`, `reset_profile_run()` y
+  `set_activo(false)` → overhead cero en release.
+- **`budgets.json`**: presupuesto_total_ms=16.7, tolerancia_ci=0.10, hardware min/recomendado
+  (alineado a M114 en texto), 7 categorías (gameplay 2.5, mundo_voxel 4.0, ia_npc 2.0,
+  particulas 1.0, culling 0.5, render 5.0, ui 1.5).
+- **`ValidateBudget`**: valida tabla completa (RF28), categorías > 0, suma dentro del total con
+  margen, hardware declarado, y `_validar_medicion()` que detecta excesos individuales y totales
+  (tolerancia 10 %). Exit code 0/1 para gate CI (M116).
+- Test headless `validate_budget.gd`: 0 fallos (incluye medición excedida detectada).
+- Test headless `test_budget_profile.gd`: 0 fallos (acumulación, resumen, promedio, inactivo).
+
+### Lo que NO hice (honestidad)
+
+- `bench_scene_a.tscn`: requiere visión (V2) y escena 3D con M08/M50/M19/M51/M49 → pendiente
+  para agente con visión.
+- Gate CI real en M116: aquí queda el validador listo, el workflow es de M116.
+- Integración de categorías en módulos: cada módulo debe llamar `BudgetProfile.begin/end_section`
+  al implementar su técnica (LOD/batching/instancing/pooling viven en M07/M50/M52/...).
+- Medición de draw calls/GPU (`RenderingServer`) y tiempos de carga (M115): sin bench scene.
+
+### Recomendaciones para el próximo agente
+
+- Crear `bench_scene_a.tscn` con el terreno voxel básico (M08) y usar `BudgetProfile` +
+  `ValidateBudget` para la vara de medición antes de optimizar contenido.
+- Cuando exista el build de profiling, cablear `validate_budget.gd` como gate CI en M116.

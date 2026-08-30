@@ -1,52 +1,71 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
+
+## Reserva actual
+
+- Estado: 🟡 Liberado — iteración 1 implementada (2026-08-30)
+- Agente: Deepseek V4 Flash (Kilo)
+- Fase: 5 (Base de producción)
+- Dificultad: 5
+- Vision: V0 (bench scene es V2)
+- Entrada: M08 ✅ (terreno voxel), M04 ✅ (Godot)
+- Salida: BudgetProfile + budgets.json + ValidateBudget + tests 0 fallos
+- Archivos: `scripts/performance/*.gd`, `data/performance/budgets.json`
+- Fecha cierre: 2026-08-30 02:35
 
 # 05-Checklist.md — Módulo 61: Rendimiento (130 ítems)
 
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** M61 es una NORMA transversal. El plan-inicial
+> ya resolvía el diseño de los 28 RF. Esta iteración implementa la parte ejecutable:
+> `BudgetProfile` (instrumentación), `budgets.json` (tabla oficial 16,7 ms) y `ValidateBudget`
+> (gate CI). Los ítems de técnicas concretas (LOD/batching/instancing/pooling) viven en el
+> módulo dueño (M07/M50/M52/...) y quedan `[ ]` aquí. La `bench_scene_a.tscn` requiere visión
+> (V2). Log 255.
+
 ## A. Objetivo de FPS (RF1)
 
-- [ ] Definir 60 FPS como objetivo (hardware recomendado) [S]
-- [ ] Definir 30 FPS mínimo sostenido (hardware mínimo) [S]
+- [x] Definir 60 FPS como objetivo (hardware recomendado) [S]
+- [x] Definir 30 FPS mínimo sostenido (hardware mínimo) [S]
 - [ ] Definir vsync activado sin tearing [S]
 - [ ] Documentar objetivo por preset de calidad (M91) [M]
-- [ ] Registrar presupuesto total 16,7 ms en budgets.cfg [S]
+- [x] Registrar presupuesto total 16,7 ms en budgets.cfg [S]
 
 ## B. Hardware Mínimo (RF2)
 
-- [ ] Definir GPU integrada de referencia [M]
-- [ ] Definir 8 GB RAM como mínimo [S]
-- [ ] Definir SSD (cargas en <30 s frío) [S]
-- [ ] Alinear con M114 (hardware objetivo) [M]
+- [x] Definir GPU integrada de referencia [M]
+- [x] Definir 8 GB RAM como mínimo [S]
+- [x] Definir SSD (cargas en <30 s frío) [S]
+- [?] Alinear con M114 (hardware objetivo) [M]
 - [ ] Documentar resolución base (1080p) en mínimo [S]
 
 ## C. Hardware Recomendado (RF3)
 
-- [ ] Definir GPU dedicada de referencia [M]
-- [ ] Definir 16 GB RAM recomendado [S]
-- [ ] Definir SSD NVMe (cargas <10 s caliente) [S]
+- [x] Definir GPU dedicada de referencia [M]
+- [x] Definir 16 GB RAM recomendado [S]
+- [x] Definir SSD NVMe (cargas <10 s caliente) [S]
 - [ ] Documentar 1080p 60 FPS estable en recomendado [S]
-- [ ] Alinear con M114 y presets M91 [M]
+- [?] Alinear con M114 y presets M91 [M]
 
 ## D. Medir CPU (RF4)
 
-- [ ] Definir trazas por sistema (gameplay, voxel, IA, física) [M]
-- [ ] Definir presupuesto gameplay 2,5 ms [S]
-- [ ] Definir presupuesto mundo voxel 4,0 ms [S]
-- [ ] Definir presupuesto IA 2,0 ms [S]
-- [ ] Documentar metodología (Profiler Godot + etiquetas) [M]
+- [x] Definir trazas por sistema (gameplay, voxel, IA, física) [M]
+- [x] Definir presupuesto gameplay 2,5 ms [S]
+- [x] Definir presupuesto mundo voxel 4,0 ms [S]
+- [x] Definir presupuesto IA 2,0 ms [S]
+- [?] Documentar metodología (Profiler Godot + etiquetas) [M]
 
 ## E. Medir GPU (RF5)
 
 - [ ] Definir draw calls por escena objetivo [M]
-- [ ] Definir presupuesto render 5,0 ms [S]
+- [x] Definir presupuesto render 5,0 ms [S]
 - [ ] Definir control de overdraw (vegetación/sombras) [M]
 - [ ] Documentar coste de shaders por material [M]
 - [ ] Definir límite de draw calls por chunk [M]
 
 ## F. Medir RAM (RF6)
 
-- [ ] Delegar análisis de RAM a M62 [S]
-- [ ] Definir que M61 solo acota el frame (allocations) [S]
+- [x] Delegar análisis de RAM a M62 [S]
+- [x] Definir que M61 solo acota el frame (allocations) [S]
 - [ ] Registrar RSS por escena en bench JSON [M]
 - [ ] Coordinar pausas de GC con M62 [M]
 - [ ] Documentar presupuesto de VRAM en bench [M]
@@ -95,7 +114,7 @@
 
 - [ ] Definir ≤20 NPCs activos visibles [M]
 - [ ] Definir LOD de actualización por distancia (M19/M64) [M]
-- [ ] Definir presupuesto IA 2,0 ms (total) [S]
+- [x] Definir presupuesto IA 2,0 ms (total) [S]
 - [ ] Documentar pooling de instancias NPC [M]
 - [ ] Validar pueblo completo 60 FPS [C]
 
@@ -200,13 +219,13 @@
 - [ ] Definir cero allocations en bucles calientes [M]
 - [ ] Definir reuso de Arrays/Variants [M]
 - [ ] Definir GC en pausas seguras (transiciones M63) [M]
-- [ ] Definir gate CI con bench scene (M116) [M]
+- [?] Definir gate CI con bench scene (M116) [M]
 - [ ] Definir playtest obligatorio en build de profiling [M]
 
 ## Z. Cierre del Módulo
 
-- [ ] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
-- [ ] Firmar los documentos del módulo (modelo y plataforma) [S]
-- [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
+- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
+- [x] Firmar los documentos del módulo (modelo y plataforma) [S]
+- [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
-- [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+- [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]

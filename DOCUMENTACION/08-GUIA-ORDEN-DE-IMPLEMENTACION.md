@@ -499,7 +499,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | — | M14 | Recurso recolectable | — |
 | 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | — | Estado minimo | Save/load validado | — |
 | 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | — | F3 + M14/M15/M59 | GO/NO-GO | — |
-| 14 | M61 Rendimiento | 5 | V0 | 🟢 Investigable desde M08 | — | M08 | Presupuesto medido | — |
+| 14 | M61 Rendimiento | 5 | V0 | 🟡 Liberado — núcleo de presupuestos (norma transversal) | Deepseek V4 Flash (Kilo) | M08 | BudgetProfile + budgets.json (16,7 ms, 7 categorías) + ValidateBudget (gate CI, tol 10 %) + tests 0 fallos (Log 255). Pendiente: bench_scene_a.tscn (V2), gate CI M116, integración categorías en módulos | 2026-08-30 02:35 |
 | 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
 | — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
 | — | M21 Diálogos | 4 | V1 | 🟡 Liberado — núcleo + WorldState (relevo autorizado) | Deepseek V4 Flash (Kilo) — relevo de Hy3 (Kilo) | M19 ✅, M21 núcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). Integración M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |

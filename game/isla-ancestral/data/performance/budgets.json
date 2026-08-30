@@ -1,0 +1,18 @@
+{
+	"version": 1,
+	"presupuesto_total_ms": 16.7,
+	"tolerancia_ci": 0.10,
+	"hardware": {
+		"minimo": "GPU integrada de referencia, 8 GB RAM, SSD",
+		"recomendado": "GPU dedicada de referencia, 16 GB RAM, SSD NVMe"
+	},
+	"categorias": {
+		"gameplay_ms": 2.5,
+		"mundo_voxel_ms": 4.0,
+		"ia_npc_ms": 2.0,
+		"particulas_ms": 1.0,
+		"culling_ms": 0.5,
+		"render_ms": 5.0,
+		"ui_ms": 1.5
+	}
+}
