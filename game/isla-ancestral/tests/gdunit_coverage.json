@@ -1,0 +1,29 @@
+{
+  "coverage": {
+    "enabled": true,
+    "output_dir": "user://coverage/",
+    "formats": ["lcov", "cobertura", "html"],
+    "include": [
+      "res://scripts/**/*.gd"
+    ],
+    "exclude": [
+      "res://tests/**/*.gd",
+      "res://addons/**/*.gd",
+      "res://scripts/editor/**/*.gd",
+      "res://scripts/**/*_test.gd"
+    ],
+    "thresholds": {
+      "lines": 70,
+      "functions": 60,
+      "branches": 50
+    }
+  },
+  "gdunit4": {
+    "version": "6.2.1",
+    "runner": "res://addons/gdUnit4/bin/GdUnitCmdTool.gd",
+    "test_root": "res://tests",
+    "suites": ["unit", "integration", "regression"],
+    "fail_fast": false,
+    "verbose": true
+  }
+}

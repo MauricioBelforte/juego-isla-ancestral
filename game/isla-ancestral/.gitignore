@@ -23,6 +23,10 @@ Thumbs.db
 *.swo
 *~
 
+# Temp files (JetBrains, editors)
+*.TMP
+~$*
+
 # Builds
 /builds/
 /export/
@@ -32,3 +36,8 @@ Thumbs.db
 
 # GDExtension binaries (instalar desde Godot Asset Library, no versionar)
 addons/*/bin/
+
+# Godot executable (instalar localmente, no versionar)
+/Godot/
+/Godot_v*.exe
+Godot_*.exe
