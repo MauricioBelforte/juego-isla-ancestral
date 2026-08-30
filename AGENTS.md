@@ -68,6 +68,17 @@ DOCUMENTACION/
 ├── 30-Reloj-En-Tiempo-Real/           ← Ejemplo real: prefijo 30 = ID del módulo
 │   ├── plan-inicial/
 │   └── plan-actual/
+
+> ⚠️ **ANTES DE CREAR O MODIFICAR TERRENOS / ISLAS, CONSULTAR:**
+> - `DOCUMENTACION/167-Isla-Raiz/` — **fuente de verdad del terreno de la Isla Raíz**
+>   (config fija: radio 256, perfil en capas, paleta Maldivas, spawn, cámara, posicionamiento,
+>   y procedimiento de RECOVERY si se rompe). Es EXCLUSIVO de la Isla Raíz.
+> - `DOCUMENTACION/168-Plantilla-De-Isla/` — **MAQUETA** para crear módulos de islas NUEVAS:
+>   copiar a `<ID>-Isla-<Nombre>`, renombrar y completar. **Cada isla = su propio módulo**
+>   (para que un agente no rompa las demás).
+> - `DOCUMENTACION/07-GUIA-GODOT.md` §10.8-10.15: receta del terreno, lecciones de la jornada.
+
+## Archivos obligatorios
 └── 102-Bug-Tracking/                  ← Ejemplo real: prefijo 102 = ID del módulo
     ├── plan-inicial/
     └── plan-actual/
@@ -946,6 +957,23 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 - **Reserva:** al iniciar, registrar en `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md` el módulo, fase, dificultad, visión, entrada, salida y archivos afectados.
 - **No interferencia:** dos agentes no pueden reservar simultáneamente la misma escena, asset, contrato o sesión visual sin coordinación explícita.
 - **Firmado:** esta guía lleva el modelo y plataforma del último agente que la modifique. Al actualizarla, renovar su firma y crear un log.
+
+---
+
+### Módulos de Terreno e Islas — `DOCUMENTACION/167-Isla-Raiz/` y `DOCUMENTACION/168-Plantilla-De-Isla/`
+
+- **Propósito:** `167-Isla-Raiz` es la fuente de verdad del terreno de la Isla Raíz (config fija,
+  posicionamiento con get_height, recovery). `168-Plantilla-De-Isla` es la maqueta genérica
+  para crear módulos de islas nuevas.
+- **Uso obligatorio:** cualquier agente que vaya a crear o modificar un terreno/isla **DEBE**
+  consultar el `167-Isla-Raiz` (ejemplo resuelto) y, si crea una isla nueva, **copiar el `168`
+  a `DOCUMENTACION/<ID>-Isla-<Nombre>`** y completar sus placeholders.
+- **Regla de isolación:** cada isla es un módulo INDEPENDIENTE. Un agente que toque el terreno
+  de una isla NO debe modificar el de otra.
+- **Reglas de oro heredadas:** el centro de la isla es `(island_radius, island_radius)`;
+  posicionar con `get_height(x,z) + 1`; radio ~256 para isla visible; el snap del NPC debe
+  usar el MISMO radio que el mundo (si no, flota).
+- **Firmado:** la guía 07 §10.15 documenta el detalle técnico de estas reglas.
 
 > **Regla maestra:** si una guía aún no existe, **créala** siguiendo el formato correspondiente. Si existe pero no está actualizada con un descubrimiento, **actualízala**. No se permite arrancar de cero ni repetir errores ya documentados.
 

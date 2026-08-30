@@ -1497,3 +1497,12 @@ var h = int(gen._get_island_gen().get_height(x, z))  # altura real del suelo
 nodo.global_position = Vector3(x, h + 1, z)  # 1 bloque sobre la superficie
 ```
 El snap de Catalina usa este patrón; al cambiar el radio, actualizar el radio del snap.
+
+
+#### 10.15.7 Referencias a los módulos de terreno
+- `DOCUMENTACION/167-Isla-Raiz/` — fuente de verdad del terreno de la Isla Raíz (config fija,
+  mapa de posiciones, recovery). Ejemplo resuelto.
+- `DOCUMENTACION/168-Plantilla-De-Isla/` — maqueta genérica: copy this to `<ID>-Isla-<Nombre>`
+  y completa con la config de tu isla. Cada isla = módulo propio.
+- Regla de oro: el centro de la isla es `(island_radius, island_radius)`; posicionar con
+  `get_height(x,z)+1`; radio ~256 para isla visible; el snap del NPC usa el MISMO radio.
