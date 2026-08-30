@@ -1,0 +1,12 @@
+{
+	"schema_version": 1,
+	"rewards": {
+		"recoleccion_madera": {"ao": 5, "items": {"madera_roble": 1}, "amistad": 0},
+		"recoleccion_piedra": {"ao": 3, "items": {"piedra_caliza": 1}, "amistad": 0},
+		"recoleccion_baya": {"ao": 2, "items": {"baya_roja": 2}, "amistad": 0},
+		"charla_amistad": {"ao": 0, "items": {}, "amistad": 5},
+		"mision_secundaria": {"ao": 50, "items": {"mineral_cobre": 2}, "amistad": 10},
+		"mision_principal": {"ao": 200, "items": {"fragmento_ancestral": 1}, "amistad": 20},
+		"sello_obtenido": {"ao": 500, "items": {"reliquia_del_sello": 1}, "amistad": 0}
+	}
+}

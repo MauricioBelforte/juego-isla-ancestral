@@ -1,0 +1,12 @@
+{
+	"schema_version": 1,
+	"curvas": {
+		"dinero_diario_promedio_ao": 80,
+		"sello_1_umbral_ao": 1200,
+		"sello_1_tiempo_horas": 8,
+		"sello_1_sesiones_esperadas": 12,
+		"amistad_umbral_nivel_2": 30,
+		"amistad_umbral_nivel_3": 70,
+		"amistad_umbral_nivel_5": 150
+	}
+}

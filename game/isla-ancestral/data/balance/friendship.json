@@ -1,0 +1,17 @@
+{
+	"schema_version": 1,
+	"umbrales": {
+		"nivel_2": 30,
+		"nivel_3": 70,
+		"nivel_4": 120,
+		"nivel_5": 150,
+		"nivel_8": 260
+	},
+	"puntos": {
+		"regalo_gustado": 10,
+		"regalo_neutral": 5,
+		"charla": 5,
+		"carta": 8,
+		"evento_festival": 20
+	}
+}

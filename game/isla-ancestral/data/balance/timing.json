@@ -1,0 +1,11 @@
+{
+	"schema_version": 1,
+	"timing": {
+		"recoleccion_diaria_min": 10,
+		"charla_diaria_min": 5,
+		"pesca_diaria_min": 5,
+		"mineria_diaria_min": 5,
+		"viaje_diario_min": 3,
+		"sesion_rutina_total_min": 30
+	}
+}

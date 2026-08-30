@@ -44,6 +44,7 @@ VillagerManager="*res://scripts/npc/villager_manager.gd"
 ControlInput="*res://scripts/controls/control_input.gd"
 ResourceManager="*res://scripts/resources/resource_manager.gd"
 Localization="*res://scripts/localization/localization_manager.gd"
+Balance="*res://scripts/balance/balance_service.gd"
 
 [display]
 

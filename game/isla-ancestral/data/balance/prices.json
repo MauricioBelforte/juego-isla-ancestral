@@ -1,0 +1,13 @@
+{
+	"schema_version": 1,
+	"items": {
+		"madera_roble": {"compra": 10, "venta": 6, "historia": false},
+		"piedra_caliza": {"compra": 8, "venta": 5, "historia": false},
+		"fibra_algodon": {"compra": 6, "venta": 4, "historia": false},
+		"baya_roja": {"compra": 5, "venta": 3, "historia": false},
+		"mineral_cobre": {"compra": 25, "venta": 15, "historia": false},
+		"fragmento_ancestral": {"compra": 0, "venta": 75, "historia": true},
+		"reliquia_del_sello": {"compra": 0, "venta": 0, "historia": true},
+		"herramienta_basica": {"compra": 50, "venta": 30, "historia": false}
+	}
+}

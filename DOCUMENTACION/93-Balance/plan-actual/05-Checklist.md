@@ -1,15 +1,35 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
+
+## Reserva actual
+
+- Estado: 🟡 Liberado — iteración 1 (núcleo de datos + validación) 2026-08-30
+- Agente: Deepseek V4 Flash (Kilo)
+- Fase: 5 (Base de producción) / Economía y tiendas
+- Dificultad: 4
+- Vision: V0 (datos/validación)
+- Entrada: M38 🔵 (economía), M20 ✅ (amistad)
+- Salida: BalanceService autoload + data/balance/*.json (prices, rewards, timing, progression, friendship, meta) + ValidateBalance (6 reglas) + test 0 fallos
+- Archivos: `scripts/balance/*.gd`, `data/balance/*.json`, `project.godot`
+- Fecha cierre: 2026-08-30 03:05
 
 # 05-Checklist.md — Módulo 93: Balance (130 ítems)
+
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** núcleo de balance implementado: BalanceService
+> autoload (lectura central de data/balance/*.json), tabla base de precios/recompensas/timing/
+> progresión/amistad, y ValidateBalance con reglas anti-grind/anti-exploit (márgenes 55-70%,
+> historia sin compra, rareza, sesión ≤30 min, sellos sin grind, versión). Test y validador
+> 0 fallos. Tablas de contenido restantes (construction, crafting, tools, farming, fishing,
+> mining, travel, seals, quests, puzzles, unlocks) quedan `[ ]` para el agente que las complete
+> con datos de diseño. Log 258.
 
 **Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 92 + M152/M153/M38/M20/M105.
 
 ## A. Estructura de Datos Central
 
-- [ ] Definir `meta.json` con `schema_version`, `balance_version`, `fecha` y `afecta` [S]
-- [ ] Definir `prices.json` con campos `price_buy`, `price_sell` por ítem [S]
-- [ ] Definir `rewards.json` con recompensas por actividad y tier [M]
+- [x] Definir `meta.json` con `schema_version`, `balance_version`, `fecha` y `afecta` [S]
+- [x] Definir `prices.json` con campos `price_buy`, `price_sell` por ítem [S]
+- [x] Definir `rewards.json` con recompensas por actividad y tier [M]
 - [ ] Definir `construction.json` con coste en AO y recursos por pieza [M]
 - [ ] Definir `crafting.json` con coste de recursos y tiempo por receta [M]
 
