@@ -7,14 +7,9 @@
 [ext_resource type="Script" path="res://scripts/clock/w_reloj.gd" id="4_reloj"]
 [ext_resource type="Script" path="res://scripts/npc/villager.gd" id="5_villager"]
 [ext_resource type="Resource" path="res://data/villagers/catalina_oso.tres" id="6_catalina"]
-[ext_resource type="Script" path="res://scripts/ui/hud/hud_screen.gd" id="7_hud"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/status_bar.gd" id="8_status"]
-[ext_resource type="Script" path="res://scripts/ui/widgets/clock_widget.gd" id="9_clock"]
-[ext_resource type="Script" path="res://scripts/ui/widgets/season_widget.gd" id="10_season"]
-[ext_resource type="Script" path="res://scripts/ui/widgets/resource_counter.gd" id="11_resource"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/hotbar_widget.gd" id="12_hotbar"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/interact_prompt.gd" id="13_interact"]
-[ext_resource type="Script" path="res://scripts/ui/widgets/action_prompt_overlay.gd" id="14_action"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.4, 0.65, 0.95, 1)
@@ -81,114 +76,36 @@ F - Hablar con NPC"
 [node name="RelojWidget" type="PanelContainer" parent="UI" unique_id=732444007]
 script = ExtResource("4_reloj")
 
-[node name="HUDScreen" type="CanvasLayer" parent="."]
-layer = 100
-script = ExtResource("7_hud")
-
-[node name="TopLeft" type="MarginContainer" parent="HUDScreen"]
-anchors_preset = 0
-offset_right = 200.0
-offset_bottom = 80.0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-mouse_filter = 2
-
-[node name="StatusBar" type="Control" parent="HUDScreen/TopLeft"]
-unique_name_in_owner = true
-layout_mode = 2
+[node name="StatusBar" type="Control" parent="UI"]
+offset_left = 10.0
+offset_top = 460.0
+offset_right = 160.0
+offset_bottom = 510.0
 mouse_filter = 2
 script = ExtResource("8_status")
 
-[node name="TopRight" type="MarginContainer" parent="HUDScreen"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 60.0
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_top = 16
-mouse_filter = 2
-
-[node name="ClockWidget" type="Control" parent="HUDScreen/TopRight"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("9_clock")
-
-[node name="SeasonWidget" type="Control" parent="HUDScreen/TopRight"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_top = 28.0
-mouse_filter = 2
-script = ExtResource("10_season")
-
-[node name="TopCenter" type="MarginContainer" parent="HUDScreen"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -100.0
-offset_right = 100.0
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_constants/margin_top = 16
-mouse_filter = 2
-
-[node name="ResourceCounter" type="Control" parent="HUDScreen/TopCenter"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-script = ExtResource("11_resource")
-
-[node name="BottomCenter" type="MarginContainer" parent="HUDScreen"]
+[node name="HotbarWidget" type="Control" parent="UI"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -60.0
-offset_right = 200.0
+offset_left = -180.0
+offset_top = -65.0
+offset_right = 180.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/margin_bottom = 16
-mouse_filter = 2
-
-[node name="HotbarWidget" type="Control" parent="HUDScreen/BottomCenter"]
-unique_name_in_owner = true
-layout_mode = 2
 mouse_filter = 2
 script = ExtResource("12_hotbar")
 
-[node name="CenterBottom" type="MarginContainer" parent="HUDScreen"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -120.0
-offset_right = 120.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_bottom = 8
-mouse_filter = 2
-
-[node name="InteractPrompt" type="Control" parent="HUDScreen/CenterBottom"]
-unique_name_in_owner = true
-layout_mode = 2
+[node name="InteractPrompt" type="Control" parent="UI"]
+offset_left = 290.0
+offset_top = 520.0
+offset_right = 430.0
+offset_bottom = 570.0
 mouse_filter = 2
 script = ExtResource("13_interact")
-
-[node name="ActionPromptOverlay" type="Control" parent="HUDScreen"]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("14_action")
 
 [node name="CatalinaOso" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 268, 30, 268)
