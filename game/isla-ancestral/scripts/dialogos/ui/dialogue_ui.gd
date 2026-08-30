@@ -63,7 +63,7 @@ func _on_node_entered(_node_id: String, speaker_key: String, texto: String, tipo
 	_limpiar_opciones()
 	if tipo == DialogueNode.TIPO_OPCIONES and options.size() > 0:
 		_options_container.show()
-		_opciones_activas = options
+		_opciones_activas = options.duplicate()
 		for i in options.size():
 			var op = options[i]
 			var btn := Button.new()
@@ -80,7 +80,7 @@ func _on_dialogue_ended(_id: String, _ultimo: String) -> void:
 func _limpiar_opciones() -> void:
 	for child in _options_container.get_children():
 		child.queue_free()
-	_opciones_activas.clear()
+	_opciones_activas = []
 
 func _input(event: InputEvent) -> void:
 	if not visible:

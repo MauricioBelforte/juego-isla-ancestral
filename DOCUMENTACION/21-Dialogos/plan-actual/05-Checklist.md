@@ -1,7 +1,14 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
 
 # 05-Checklist.md — Módulo 21: Diálogos
+
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** El núcleo M21 está implementado (manager,
+> grafo, UI, JSON de ejemplo). Se documentó y corrigió el bug "el diálogo solo funciona una vez":
+> la UI mutaba el Array de opciones del grafo cacheado por referencia (fix en dialogue_ui.gd,
+> ver 07-GUIA-GODOT §9.46 y Notas del Agente en 04-Codigo.md). Los ítems `[ ]` de este checklist
+> aún no fueron relevados contra el código real por completo; los marcados `[x]` son los
+> correspondientes a este bugfix y su verificación.
 
 ## A. Requisitos del módulo (12)
 
@@ -130,6 +137,8 @@
 - [ ] Multiples hablantes en un mismo grafo: retrato y nombre cambian por nodo [S]
 - [ ] Recarga del grafo con datos rotos en caliente: el cache no se corrompe [S]
 - [ ] La UI nunca emite errores si el manager no esta activo [S]
+- [x] La UI no muta los datos del grafo cacheado: las opciones se copian con duplicate() y la limpieza reasigna en vez de clear() [S]
+- [x] El diálogo se puede reiniciar N veces sin errores [VAL-DGT] (fix verificado headless) [S]
 
 ## I. Optimización (7)
 
@@ -167,3 +176,4 @@
 - [ ] Test de validacion: 5 grafos invalidos propositados detectados en editor [M]
 - [ ] Test de integracion con un NPC del modulo M19 interactuable [M]
 - [ ] Verificacion de 0 errores en consola durante una partida de prueba [S]
+- [x] Test de reinicio del diálogo tras completarlo (test_dialogos.gd: _test_reinicio_dialogo — 0 fallos) [S]

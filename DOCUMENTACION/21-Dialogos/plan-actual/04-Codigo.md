@@ -184,17 +184,60 @@ Ejemplos:
 ## 5. Notas del Agente
 
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-16
-**Estado:** Documentación plan-inicial completada (plan-actual es copia idéntica). Implementación delegable conforme al protocolo multiagente.
+**Plataforma:** Kilo
+**Fecha:** 2026-08-30
+**Estado:** Núcleo implementado por Hy3 (Kilo) 2026-08-29; bugfix de reinicio documentado por Deepseek V4 Flash (Kilo) 2026-08-30.
 
-### Lo que hice
-- Requerimientos, análisis con alternativas justificadas, diseño con contratos API, rutas y firmas de código, y checklist de 129 ítems, todos resueltos a nivel de diseño.
+### Implementación real (archivos runtime vigentes — NO los plan-inicial)
 
-### Lo que NO hice
-- Implementación en GDScript (código runtime) y testings manuales: requieren el proyecto Godot abierto y ejecución en play mode; quedan para el agente que tome el módulo.
+El sistema de diálogos M21 está implementado en GDScript real (no coincide con las rutas
+`res://_Project/...` del plan-inicial, que quedaron como referencia de diseño):
+
+```
+res://scripts/dialogos/
+├── dialogue_manager.gd        # Autoload "DialogueManager" (máquina de conversación)
+├── dialogue_graph.gd          # Grafo: carga desde JSON + validación estática [VAL-DGT]
+├── dialogue_node.gd           # Nodo (LINEA=0 / OPCIONES=1 / EVENTO=2 / FIN=3)
+├── dialogue_option.gd         # Opción ramificada con conditions/effects
+├── ui/dialogue_ui.gd          # CanvasLayer autocontenido (presentación + input)
+├── test_dialogos.gd           # Suite headless (grafo, flujo, opciones, reinicio)
+res://data/dialogues/catalina_hola.json  # Grafo de ejemplo (Catalina, M19)
+```
+
+Registrado en `project.godot` como autoload `DialogueManager`. La UI se instancia desde
+`main_island.gd:_crear_ui_dialogo()` y se conecta a las señales del manager
+(`node_entered`, `dialogue_ended`). El disparo de la conversación lo hace
+`villager_dialogue_hook.gd` (M19) llamando `DialogueManager.start_dialogue(dialogue_id, ctx)`.
+
+### Lo que hice (2026-08-30)
+
+- **Bugfix "el diálogo solo funciona una vez" (M21):** la UI guardaba `_opciones_activas = options`
+  (referencia directa al Array de opciones del nodo del grafo cacheado) y `_limpiar_opciones()`
+  llamaba `_opciones_activas.clear()`, vaciando el array **original** en `DialogueManager._grafos_cache`.
+  La 2ª vez, `start_dialogue` validaba el grafo con el nodo OPCIONES sin opciones →
+  `ERROR: [VAL-DGT] nodo OPCIONES 'pregunta' sin opciones` → no iniciaba.
+  - Fix en `scripts/dialogos/ui/dialogue_ui.gd`: `_opciones_activas = options.duplicate()` y
+    `_limpiar_opciones()` usa `_opciones_activas = []` (reasignación, no `clear()`).
+  - Lección general documentada en `07-GUIA-GODOT.md` §9.46 (Arrays por referencia).
+  - Verificado: `test_dialogos.gd` headless 0 fallos; `--check-only` de `dialogue_ui.gd` sin errores.
+
+### Lo que NO hice (honestidad)
+
+- No marqué ítems del checklist como `[x]` de implementación completa: el núcleo ya existía de la
+  iteración de Hy3 y el checklist plan-actual aún está mayormente `[ ]` (pendiente de relevar
+  contra el código real). Solo marqué los ítems relacionados con este bugfix (ver 05-Checklist.md).
+- No ejecuté playtest manual completo con la UI visible (requiere Godot con ventana).
+
+### Intentos fallidos / decisiones
+
+- Primero intenté reproducir el bug con un test headless que instanciaba `DialogueUI` dentro de un
+  `SceneTree` (`test_reinicio_ui.gd`), pero **no se reproduce** porque el `_ready()` de la UI no se
+  ejecuta en scripts `SceneTree` con lógica en `_init()`. El diagnóstico se hizo por análisis del
+  flujo de referencias + el error real del depurador (MCP Godot). Archivo temporal eliminado.
 
 ### Recomendaciones para el próximo agente
-- Crear `dialogo_ejemplo.json` primero (valida el esquema end-to-end).
-- Implementar `dialogue_validator.gd` antes que la UI: los datos sólidos evitan errores en cascada.
-- Revisar el estado real de los IDs concat de M22/M23/M87 en `CHECKLIST-GLOBAL.md` antes de integrar.
+
+- Al conectar la UI con cualquier sistema que cache grafos/datos: SIEMPRE `duplicate()` antes de
+  guardar una copia mutable (ver 07-GUIA-GODOT §9.46).
+- Relevar el checklist plan-actual contra el código real (manager + grafo + UI ya existen).
+- Integrar la UI M21 con M53 (UIManager/pila de capas) cuando corresponda; hoy es autocontenida.

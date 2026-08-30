@@ -1238,12 +1238,50 @@ global_position.y = float(h) + 1.0  # pies justo sobre la superficie del bloque
 
 ---
 
+### 9.46 Arrays compartidos por referencia: la UI vacía el grafo cacheado del diálogo
+
+**Síntoma:** el diálogo con un NPC (M21) funciona **una sola vez**. La primera conversación se muestra y se completa normal; a partir de la segunda, al presionar F aparece en el depurador:
+```
+ERROR: [VAL-DGT] nodo OPCIONES 'pregunta' sin opciones
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace:
+       [0] start_dialogue (res://scripts/dialogos/dialogue_manager.gd:38)
+       [1] solicitar_dialogo (res://scripts/npc/villager_dialogue_hook.gd:45)
+```
+y `start_dialogue` devuelve `false` ("No se pudo iniciar diálogo (grafo inválido?)").
+
+**Causa raíz:** en GDScript, los `Array` son **tipos por referencia** (no por valor). La UI `dialogue_ui.gd` recibía el array de opciones vía la señal `node_entered(... options: Array)` y lo guardaba en `_opciones_activas = options` (asignación = referencia directa). Ese array era el **mismo objeto** que `DialogueNode.options` dentro del grafo cacheado en `DialogueManager._grafos_cache`. Al llamar `_opciones_activas.clear()` en `_limpiar_opciones()` (al avanzar de nodo o terminar la conversación), se **vaciaba el array original del grafo cacheado**. La 2ª vez que `start_dialogue` reutilizaba el grafo del cache, el nodo "pregunta" ya no tenía opciones → la validación estática (`[VAL-DGT]`) lo rechazaba.
+
+**Solución (aplicada en `scripts/dialogos/ui/dialogue_ui.gd`):**
+```gdscript
+# ❌ Incorrecto — referencia directa: la UI muta el array del grafo cacheado
+_opciones_activas = options
+# + _opciones_activas.clear() en _limpiar_opciones()  → vacía el grafo
+
+# ✅ Correcto — copia defensiva y reasignación en lugar de mutación
+_opciones_activas = options.duplicate()
+# ...
+func _limpiar_opciones() -> void:
+    for child in _options_container.get_children():
+        child.queue_free()
+    _opciones_activas = []   # reasigna, NO clear() sobre la referencia
+```
+
+**Regla general:** cualquier `Array` o `Dictionary` que la UI (o cualquier consumidor) reciba de un sistema central (cache, grafo, servicio) y vaya a **modificar o limpiar**, debe copiarse antes con `duplicate()`. NUNCA guardar la referencia directa y luego mutarla, porque corrompes los datos de origen para los siguientes consumidores. Aplicar la misma lógica a `Dictionary` (usar `duplicate(true)` si hay anidamiento).
+
+**Diagnóstico:** el test headless `test_dialogos.gd` NO detecta este bug porque ejercita el `DialogueManager` directamente sin instanciar la UI (el `_ready()` de la UI no corre en scripts `SceneTree` headless). El fallo solo aparece con el flujo real jugador→UI→manager.
+
+**Fecha:** 2026-08-30 · **Agente:** Deepseek V4 Flash (Kilo)
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |
 |-------|--------|------------|---------|
 | 2026-08-28 | Hy3 | Kilo | Agregada §9.40 (VoxelTerrain sin get_voxel → VoxelTool.get_voxel + diagnóstico por get_method_list). M13 Fase 3 cerrada |
 | 2026-08-29 | ox-alpha | Cline | Agregadas §9.41 (class_name Logger colisiona con clase nativa Godot 4.7 — usar autoload sin class_name), §9.42 (String.compress() no existe → PackedByteArray.compress), §9.43 (`:=` sobre constantes de autoload vía instancia dinámica → Variant). M103/M104 |
+| 2026-08-30 | Deepseek V4 Flash | Kilo | Agregada §9.46 (Array por referencia: la UI vacía el grafo cacheado del diálogo M21 — usar duplicate() + reasignación, nunca clear() sobre la referencia). Fix de "diálogo solo funciona una vez". Log 251 |
 
 
 ---
