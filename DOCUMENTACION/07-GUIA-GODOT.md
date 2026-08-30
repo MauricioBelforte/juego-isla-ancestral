@@ -1322,6 +1322,42 @@ El UIRoot del M53 ahora SOLO monta capas MODALES (Dialog/Pause/Menus/Confirm); e
 
 ---
 
+### 9.48 Cargar fuentes TTF/OTF en runtime: `FontFile.load_dynamic_font()` (NO `load()`)
+
+**Síntoma:** `FreeType: Error loading font: '' (face_index=0)` al intentar cargar fuentes
+TTF/OTF con `load("res://assets/fonts/Nunito-Regular.ttf")`. El error ocurre 3 veces
+(una por cada fuente) y se repite en cada frame que el tema se reconstruye.
+
+**Causa raíz:** `load()` sobre un `.ttf` retorna un `FontFile` importado por el editor
+cacheado en `.godot/imported/`, pero el objeto `FontFile` tiene su campo interno de datos
+de fuente vacío (string `''`). El motor FreeType no puede parsear datos vacíos → error.
+
+**Intentos fallidos (NO usar):**
+1. `load("res://X.ttf")` — retorna FontFile con datos vacíos
+2. `load("uid://...")` — resultado idéntico (UID resuelve al mismo import cache)
+3. Crear wrappers `.tres` con `ext_resource` apuntando a `.fontdata` — FontFile sigue vacío
+4. `preload("res://X.ttf")` — mismo problema (compile-time load usa el mismo cache)
+
+**Solución correcta:**
+```gdscript
+var font_file := FontFile.new()
+var err := font_file.load_dynamic_font("res://assets/fonts/Nunito-Regular.ttf")
+if err == OK:
+    # font_file ahora tiene datos internos parseados por FreeType
+    base.set_font("font", "Label", font_file)
+```
+
+**Por qué funciona:** `FontFile.load_dynamic_font(path)` lee el archivo TTF/OTF desde
+disco y parsea los datos de FreeType directamente, llenando el campo interno del FontFile.
+A diferencia de `load()`, no depende del importador del editor.
+
+**Aplicación en el proyecto:** `theme_ux.gd` → `_try_load_font()` usa este método.
+
+**Regla:** Para cargar fuentes `.ttf`/`.otf`/`.woff`/`.woff2` en runtime via GDScript,
+**SIEMPRE** usar `FontFile.new()` + `load_dynamic_font(path)`. NUNCA usar `load()`.
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |
@@ -1330,6 +1366,7 @@ El UIRoot del M53 ahora SOLO monta capas MODALES (Dialog/Pause/Menus/Confirm); e
 | 2026-08-29 | ox-alpha | Cline | Agregadas §9.41 (class_name Logger colisiona con clase nativa Godot 4.7 — usar autoload sin class_name), §9.42 (String.compress() no existe → PackedByteArray.compress), §9.43 (`:=` sobre constantes de autoload vía instancia dinámica → Variant). M103/M104 |
 | 2026-08-30 | Deepseek V4 Flash | Kilo | Agregada §9.46 (Array por referencia: la UI vacía el grafo cacheado del diálogo M21 — usar duplicate() + reasignación, nunca clear() sobre la referencia). Fix de "diálogo solo funciona una vez". Log 251 |
 | 2026-08-30 | MiMo V2.5 | OpenCode | Agregada §9.47 (Superposición de widgets HUD: NO crear widgets que ya existen en otros scripts — verificar fuentes en player.gd, w_reloj.gd, main_island.tscn ANTES de agregar nodos UI). Corrección de superposición M53 |
+| 2026-08-30 | MiMo V2.5 | OpenCode | Agregada §9.48 (Cargar fuentes TTF/OTF en runtime: `FontFile.load_dynamic_font()` — `load()` retorna FontFile con datos vacíos, causando `FreeType: Error loading font: ''`. Solución: `FontFile.new()` + `load_dynamic_font(path)`). Fix de 6 errores FreeType en theme_ux.gd |
 
 
 ---

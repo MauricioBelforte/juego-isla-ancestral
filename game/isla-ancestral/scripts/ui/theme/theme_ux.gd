@@ -19,6 +19,11 @@ const COLOR_PRESSED := Color(0.78, 0.72, 0.60)         # Presionado
 const COLOR_DISABLED := Color(0.65, 0.60, 0.55)        # Deshabilitado
 const COLOR_FOCUS_RING := Color(0.85, 0.72, 0.35, 0.8) # Anillo de foco
 
+## Rutas de fuentes (M88) — load_dynamic_font para Godot 4.7
+const PATH_FONT_BODY := "res://assets/fonts/Nunito-Regular.ttf"
+const PATH_FONT_BODY_BOLD := "res://assets/fonts/Nunito-Bold.ttf"
+const PATH_FONT_TITLE := "res://assets/fonts/FredokaOne-Regular.ttf"
+
 ## Jerarquía tipográfica
 const FONT_SIZE_H1 := 32
 const FONT_SIZE_H2 := 24
@@ -29,15 +34,22 @@ const FONT_SIZE_MICRO := 10
 
 ## ── Tema construido ─────────────────────────────────────
 var base: Theme = null
+var font_body: Font = null
+var font_body_bold: Font = null
+var font_title: Font = null
 
 ## ── API pública ─────────────────────────────────────────
 
 ## Construye el tema desde cero
 func build() -> Theme:
 	base = Theme.new()
+	_load_fonts()
 
 	# Colores base
 	_set_default_colors()
+
+	# Fuentes por control
+	_setup_font_bindings()
 
 	# Estilos de panel
 	_setup_panel_styles()
@@ -82,18 +94,28 @@ func apply(scale_ratio: float) -> void:
 	var scaled_small := int(FONT_SIZE_SMALL * scale_ratio)
 	var scaled_micro := int(FONT_SIZE_MICRO * scale_ratio)
 
+	# Títulos
 	base.set_font_size("font_size", "H1", scaled_h1)
 	base.set_font_size("font_size", "H2", scaled_h2)
 	base.set_font_size("font_size", "H3", scaled_h3)
-	base.set_font_size("font_size", "Body", scaled_body)
+
+	# Cuerpo
+	base.set_font_size("font_size", "Label", scaled_body)
+	base.set_font_size("font_size", "Button", scaled_body)
+	base.set_font_size("font_size", "LineEdit", scaled_body)
+	base.set_font_size("font_size", "OptionButton", scaled_body)
+	base.set_font_size("font_size", "ProgressBar", scaled_body)
+
+	# Small / Micro
 	base.set_font_size("font_size", "Small", scaled_small)
 	base.set_font_size("font_size", "Micro", scaled_micro)
 
 
 ## Recarga fuentes después de cambio de idioma (M87/M88)
 func reload_after_font_change() -> void:
-	# TODO: recargar fuentes desde M88 cuando esté disponible
-	pass
+	_load_fonts()
+	if base:
+		_setup_font_bindings()
 
 
 ## Ajusta contraste para accesibilidad (M58)
@@ -106,6 +128,49 @@ func ensure_contrast(_min_ratio: float) -> void:
 func reduce_motion_active() -> bool:
 	# TODO: leer de M58 cuando esté disponible
 	return false
+
+
+## ── Métodos privados: carga de fuentes ─────────────────
+
+func _load_fonts() -> void:
+	var fallback := ThemeDB.fallback_font
+	font_body = fallback
+	font_body_bold = fallback
+	font_title = fallback
+	
+	font_body = _try_load_font(PATH_FONT_BODY, fallback)
+	font_body_bold = _try_load_font(PATH_FONT_BODY_BOLD, fallback)
+	font_title = _try_load_font(PATH_FONT_TITLE, fallback)
+
+
+func _try_load_font(path: String, fallback_font: Font) -> Font:
+	var font_file := FontFile.new()
+	var err := font_file.load_dynamic_font(path)
+	if err == OK:
+		return font_file as Font
+	push_warning("ThemeUx: no se pudo cargar fuente desde " + path)
+	return fallback_font
+
+
+func _setup_font_bindings() -> void:
+	# Fredoka One → títulos (H1, H2, H3)
+	base.set_font("font", "H1", font_title)
+	base.set_font("font", "H2", font_title)
+	base.set_font("font", "H3", font_title)
+
+	# Nunito Bold → botones, entradas, option buttons
+	base.set_font("font", "Button", font_body_bold)
+	base.set_font("font", "LineEdit", font_body)
+	base.set_font("font", "OptionButton", font_body_bold)
+
+	# Nunito Regular → etiquetas de cuerpo
+	base.set_font("font", "Label", font_body)
+	base.set_font("font", "Body", font_body)
+	base.set_font("font", "Small", font_body)
+	base.set_font("font", "Micro", font_body)
+
+	# ProgressBar
+	base.set_font("font", "ProgressBar", font_body)
 
 
 ## ── Métodos privados: setup de estilos ──────────────────
