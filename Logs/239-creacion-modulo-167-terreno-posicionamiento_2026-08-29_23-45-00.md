@@ -24,3 +24,9 @@ terreno y la cámara se rompieron y requirieron recuperarse de commits anteriore
 - DOCUMENTACION/167-Registro-Del-Terreno-Y-Posicionamiento/ (11 archivos)
 - CHECKLIST-GLOBAL.md, DOCUMENTACION/README.md, DOCUMENTACION/07-GUIA-GODOT.md (§10.15)
 - Logs/239-creacion-modulo-167-terreno-posicionamiento_2026-08-29_23-45-00.md
+
+
+## Nota posterior (decisión del usuario)
+Se RENOMBRÓ el módulo a **167-Isla-Raiz**: es EXCLUSIVO de la Isla Raíz. Cada isla futura
+tendrá su PROPIO módulo separado (patrón 16[7]X-Isla-Nombre) para que un agente que toque
+el terreno de una isla no rompa las demás. El módulo 167 sirve de referencia para el formato.

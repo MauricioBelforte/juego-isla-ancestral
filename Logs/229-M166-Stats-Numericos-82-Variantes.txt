@@ -1,0 +1,89 @@
+# M166 · Volcado numérico de variantes (sin imágenes)
+# Generado: 2026-08-29 04:13:16
+# Perfiles: ALTA <=16/6000/12 · MEDIA <=8/1500/8 · BAJA <=6/700/4
+# Apoyo objetivo z_min=0.045 (rango 0.025..0.065)
+# modulo	variante	obj	tris	mats	z_min	apoyo	cumple
+13-Herramientas	antorcha_mano_lowpoly_media	obj=4	tris=88	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+13-Herramientas	antorcha_mano_lowpoly_baja	obj=4	tris=77	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+13-Herramientas	pico_hierro_lowpoly_media	obj=3	tris=92	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+13-Herramientas	pico_hierro_lowpoly_baja	obj=3	tris=83	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+13-Herramientas	pico_piedra_lowpoly_media	obj=3	tris=82	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+13-Herramientas	pico_piedra_lowpoly_baja	obj=3	tris=74	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	cristal_ancestral_lowpoly_media	obj=4	tris=174	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	cristal_ancestral_lowpoly_baja	obj=4	tris=162	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	monton_ramas_lowpoly_media	obj=1	tris=343	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	monton_ramas_lowpoly_baja	obj=1	tris=278	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	nido_cocos_lowpoly_media	obj=5	tris=1276	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+15-Recursos	nido_cocos_lowpoly_baja	obj=5	tris=970	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+15-Recursos	piedra_afilar_lowpoly_media	obj=2	tris=15	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	piedra_afilar_lowpoly_baja	obj=2	tris=15	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_comun_media	obj=1	tris=100	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_comun_baja	obj=1	tris=70	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_pedernal_lowpoly_media	obj=2	tris=340	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_pedernal_lowpoly_baja	obj=2	tris=238	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	tronco_caido_lowpoly_media	obj=3	tris=159	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	tronco_caido_lowpoly_baja	obj=3	tris=138	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_cobre_lowpoly_media	obj=3	tris=230	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_cobre_lowpoly_baja	obj=3	tris=170	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_hierro_lowpoly_media	obj=3	tris=260	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_hierro_lowpoly_baja	obj=3	tris=206	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_oro_lowpoly_media	obj=3	tris=374	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_oro_lowpoly_baja	obj=3	tris=301	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+16-Crafting	hacha_piedra_lowpoly_media	obj=3	tris=278	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+16-Crafting	hacha_piedra_lowpoly_baja	obj=3	tris=231	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+16-Crafting	lingote_metal_lowpoly_media	obj=2	tris=24	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+16-Crafting	lingote_metal_lowpoly_baja	obj=1	tris=5	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+16-Crafting	tablon_madera_lowpoly_media	obj=6	tris=36	mats=6	z_min=0.0450	OK	ALTA/MEDIA
+16-Crafting	tablon_madera_lowpoly_baja	obj=6	tris=32	mats=6	z_min=0.0450	OK	ALTA/MEDIA
+25-Ruinas-Templos	altar_ritual_lowpoly_media	obj=4	tris=254	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+25-Ruinas-Templos	altar_ritual_lowpoly_baja	obj=4	tris=231	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+25-Ruinas-Templos	cofre_ancestral_lowpoly_media	obj=6	tris=784	mats=6	z_min=0.0450	OK	ALTA/MEDIA
+25-Ruinas-Templos	cofre_ancestral_lowpoly_baja	obj=6	tris=571	mats=6	z_min=0.0450	OK	ALTA/MEDIA
+25-Ruinas-Templos	losa_grabado_lowpoly_media	obj=2	tris=102	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+25-Ruinas-Templos	losa_grabado_lowpoly_baja	obj=2	tris=70	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+25-Ruinas-Templos	puerta_templo_lowpoly_media	obj=3	tris=90	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+25-Ruinas-Templos	puerta_templo_lowpoly_baja	obj=3	tris=76	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+40-Infraestructura	bote_pesca_lowpoly_media	obj=4	tris=111	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+40-Infraestructura	bote_pesca_lowpoly_baja	obj=4	tris=91	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+40-Infraestructura	farola_fuego_lowpoly_media	obj=5	tris=157	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+40-Infraestructura	farola_fuego_lowpoly_baja	obj=5	tris=105	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+40-Infraestructura	muelle_madera_lowpoly_media	obj=3	tris=182	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+40-Infraestructura	muelle_madera_lowpoly_baja	obj=3	tris=153	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	anillo_piedras_ritual_lowpoly_media	obj=5	tris=265	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+45-Arte3D	anillo_piedras_ritual_lowpoly_baja	obj=5	tris=212	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+45-Arte3D	concha_mar_lowpoly_media	obj=2	tris=319	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	concha_mar_lowpoly_baja	obj=1	tris=378	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	estrella_mar_lowpoly_media	obj=2	tris=175	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	estrella_mar_lowpoly_baja	obj=1	tris=55	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	monolito_glifos_lowpoly_media	obj=2	tris=154	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	monolito_glifos_lowpoly_baja	obj=2	tris=60	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	totem_isla_lowpoly_media	obj=4	tris=233	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+45-Arte3D	totem_isla_lowpoly_baja	obj=4	tris=162	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	arbusto_floral_lowpoly_media	obj=5	tris=370	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	arbusto_floral_lowpoly_baja	obj=5	tris=262	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	arbusto_redondo_lowpoly_media	obj=4	tris=156	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	arbusto_redondo_lowpoly_baja	obj=4	tris=112	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	canas_bambu_lowpoly_media	obj=3	tris=11404	mats=3	z_min=0.0450	OK	
+50-Vegetacion	canas_bambu_lowpoly_baja	obj=3	tris=14404	mats=3	z_min=0.0450	OK	
+50-Vegetacion	flor_isla_lowpoly_media	obj=4	tris=117	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	flor_isla_lowpoly_baja	obj=4	tris=87	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_chico_lowpoly_media	obj=3	tris=496	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_chico_lowpoly_baja	obj=2	tris=224	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_gigante_lowpoly_media	obj=3	tris=1190	mats=3	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	helecho_gigante_lowpoly_baja	obj=3	tris=936	mats=3	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hierba_alta_lowpoly_media	obj=2	tris=896	mats=2	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hierba_alta_lowpoly_baja	obj=2	tris=604	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	hongo_luminoso_lowpoly_media	obj=5	tris=804	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hongo_luminoso_lowpoly_baja	obj=5	tris=678	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	liana_colgante_lowpoly_media	obj=4	tris=258	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	liana_colgante_lowpoly_baja	obj=4	tris=211	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_inclinada_lowpoly_media	obj=4	tris=181	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_inclinada_lowpoly_baja	obj=4	tris=133	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_joven_lowpoly_media	obj=3	tris=108	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_joven_lowpoly_baja	obj=3	tris=86	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_lowpoly_media	obj=5	tris=217	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	palmera_lowpoly_baja	obj=5	tris=172	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+70-Interacciones	palanca_madera_lowpoly_media	obj=3	tris=96	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+70-Interacciones	palanca_madera_lowpoly_baja	obj=3	tris=79	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+
+# RESUMEN: 82 variantes, 0 fallidas

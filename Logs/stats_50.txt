@@ -1,0 +1,31 @@
+# M166 · Volcado numérico de variantes (sin imágenes)
+# Generado: 2026-08-29 18:34:03
+# Perfiles: ALTA <=16/6000/12 · MEDIA <=8/1500/8 · BAJA <=6/700/4
+# Apoyo objetivo z_min=0.045 (rango 0.025..0.065)
+# modulo	variante	obj	tris	mats	z_min	apoyo	cumple
+50-Vegetacion	arbusto_floral_lowpoly_media	obj=5	tris=370	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	arbusto_floral_lowpoly_baja	obj=5	tris=262	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	arbusto_redondo_lowpoly_media	obj=4	tris=156	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	arbusto_redondo_lowpoly_baja	obj=4	tris=112	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	canas_bambu_lowpoly_media	obj=3	tris=1498	mats=3	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	canas_bambu_lowpoly_baja	obj=3	tris=694	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	flor_isla_lowpoly_media	obj=4	tris=117	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	flor_isla_lowpoly_baja	obj=4	tris=87	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_chico_lowpoly_media	obj=3	tris=496	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_chico_lowpoly_baja	obj=2	tris=224	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	helecho_gigante_lowpoly_media	obj=3	tris=1190	mats=3	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	helecho_gigante_lowpoly_baja	obj=3	tris=936	mats=3	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hierba_alta_lowpoly_media	obj=2	tris=896	mats=2	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hierba_alta_lowpoly_baja	obj=2	tris=604	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	hongo_luminoso_lowpoly_media	obj=5	tris=804	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	hongo_luminoso_lowpoly_baja	obj=5	tris=678	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+50-Vegetacion	liana_colgante_lowpoly_media	obj=4	tris=258	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	liana_colgante_lowpoly_baja	obj=4	tris=211	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_inclinada_lowpoly_media	obj=4	tris=181	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_inclinada_lowpoly_baja	obj=4	tris=133	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_joven_lowpoly_media	obj=3	tris=108	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_joven_lowpoly_baja	obj=3	tris=86	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_lowpoly_media	obj=4	tris=187	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+50-Vegetacion	palmera_lowpoly_baja	obj=4	tris=142	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+
+# RESUMEN: 24 variantes, 0 fallidas

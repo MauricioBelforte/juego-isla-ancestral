@@ -1,0 +1,27 @@
+# M166 · Volcado numérico de variantes (sin imágenes)
+# Generado: 2026-08-29 18:31:33
+# Perfiles: ALTA <=16/6000/12 · MEDIA <=8/1500/8 · BAJA <=6/700/4
+# Apoyo objetivo z_min=0.045 (rango 0.025..0.065)
+# modulo	variante	obj	tris	mats	z_min	apoyo	cumple
+15-Recursos	cristal_ancestral_lowpoly_media	obj=4	tris=174	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	cristal_ancestral_lowpoly_baja	obj=4	tris=162	mats=4	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	monton_ramas_lowpoly_media	obj=1	tris=343	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	monton_ramas_lowpoly_baja	obj=1	tris=278	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	nido_cocos_lowpoly_media	obj=5	tris=1276	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+15-Recursos	nido_cocos_lowpoly_baja	obj=5	tris=970	mats=5	z_min=0.0450	OK	ALTA/MEDIA
+15-Recursos	piedra_afilar_lowpoly_media	obj=2	tris=15	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	piedra_afilar_lowpoly_baja	obj=2	tris=15	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_comun_media	obj=1	tris=100	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_comun_baja	obj=1	tris=70	mats=1	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_pedernal_lowpoly_media	obj=2	tris=340	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	roca_pedernal_lowpoly_baja	obj=2	tris=238	mats=2	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	tronco_caido_lowpoly_media	obj=3	tris=159	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	tronco_caido_lowpoly_baja	obj=3	tris=138	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_cobre_lowpoly_media	obj=3	tris=230	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_cobre_lowpoly_baja	obj=3	tris=170	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_hierro_lowpoly_media	obj=3	tris=260	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_hierro_lowpoly_baja	obj=3	tris=206	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_oro_lowpoly_media	obj=3	tris=374	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+15-Recursos	veta_oro_lowpoly_baja	obj=3	tris=301	mats=3	z_min=0.0450	OK	ALTA/MEDIA/BAJA
+
+# RESUMEN: 20 variantes, 0 fallidas
