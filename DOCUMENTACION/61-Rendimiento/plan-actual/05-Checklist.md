@@ -219,7 +219,7 @@
 - [ ] Definir cero allocations en bucles calientes [M]
 - [ ] Definir reuso de Arrays/Variants [M]
 - [ ] Definir GC en pausas seguras (transiciones M63) [M]
-- [?] Definir gate CI con bench scene (M116) [M]
+- [x] Definir gate CI con bench scene (M116) [M]
 - [ ] Definir playtest obligatorio en build de profiling [M]
 
 ## Z. Cierre del Módulo
