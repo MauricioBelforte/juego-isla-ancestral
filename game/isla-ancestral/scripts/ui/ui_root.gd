@@ -23,6 +23,7 @@ var dialog_layer: Node
 var pause_layer: Node
 var menus_layer: Node
 var confirm_popup: Node
+var crafting_ui: Node = null
 
 func _ready() -> void:
 	layer = 100
@@ -57,8 +58,17 @@ func _build_layers() -> void:
 		confirm_popup.name = "ConfirmPopup"
 		add_child(confirm_popup)
 
-	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s)" % [
-		dialog_layer != null, pause_layer != null, menus_layer != null, confirm_popup != null])
+	# Panel de crafting (M16) como capa MODAL_SIMPLE
+	crafting_ui = null
+	var cu_load := load("res://scripts/crafting/crafting_ui.gd")
+	if cu_load:
+		crafting_ui = cu_load.new()
+		crafting_ui.name = "CraftingUI"
+		add_child(crafting_ui)
+
+	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s)" % [
+		dialog_layer != null, pause_layer != null, menus_layer != null,
+		confirm_popup != null, crafting_ui != null])
 
 func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> void:
 	if script == null:

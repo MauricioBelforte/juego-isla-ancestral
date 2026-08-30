@@ -12,14 +12,65 @@ extends Node3D
 
 enum Tipo { MESA_TRABAJO, FOGATA, TELAR }
 
+const RADIO_INTERACCION := 2.5
+
 @export var tipo: int = Tipo.MESA_TRABAJO
 @export var nombre_mostrado: String = "Mesa de trabajo"
 
 var _mesh: MeshInstance3D
 var _area: Area3D
+var _jugador: Node3D = null
 
 func _ready() -> void:
 	_crear_presentacion()
+	_buscar_jugador()
+
+func _buscar_jugador() -> void:
+	var tree := get_tree()
+	if tree == null:
+		return
+	var players := tree.get_nodes_in_group("player")
+	if players.size() > 0:
+		_jugador = players[0]
+	else:
+		# Reintentar al próximo frame (el player se agrega después en algunos flujos)
+		_buscar_jugador_deferred()
+
+func _buscar_jugador_deferred() -> void:
+	if is_inside_tree():
+		call_deferred("_buscar_jugador")
+
+## Interacción (RF1): el jugador cerca + acción interactuar abre el panel.
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("interactuar"):
+		return
+	if _jugador == null:
+		return
+	var dist: float = global_position.distance_to(_jugador.global_position)
+	if dist > RADIO_INTERACCION:
+		return
+	# No abrir si ya está abierto (idempotente)
+	var ui_root = _buscar_crafting_ui()
+	if ui_root != null and ui_root.visible:
+		return
+	if ui_root != null and ui_root.has_method("abrir"):
+		ui_root.abrir(tipo)
+		get_viewport().set_input_as_handled()
+
+func _buscar_crafting_ui() -> Node:
+	var tree := get_tree()
+	if tree == null:
+		return null
+	return _buscar_nodo(tree.root, "CraftingUI")
+
+func _buscar_nodo(node: Node, nombre: String) -> Node:
+	for child in node.get_children():
+		if child.name == nombre:
+			return child
+		var resultado := _buscar_nodo(child, nombre)
+		if resultado:
+			return resultado
+	return null
 
 ## Construye la presentación placeholder según el tipo de estación.
 func _crear_presentacion() -> void:

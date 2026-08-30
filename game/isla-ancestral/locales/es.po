@@ -72,3 +72,33 @@ msgstr "Elige una opción"
 
 msgid "SETTINGS.ADVANCED"
 msgstr "Enter para continuar"
+
+msgid "SETTINGS.CERRAR"
+msgstr "Cerrar"
+
+msgid "SETTINGS.MESA_TRABAJO"
+msgstr "Mesa de trabajo"
+
+msgid "SETTINGS.FOGATA"
+msgstr "Fogata"
+
+msgid "SETTINGS.TELAR"
+msgstr "Telar"
+
+msgid "SETTINGS.SIN_RECETAS"
+msgstr "Aún no conoces recetas para esta estación."
+
+msgid "SETTINGS.SELECCIONA_RECETA"
+msgstr "Selecciona una receta para ver los materiales."
+
+msgid "SETTINGS.CREAR_1"
+msgstr "Crear"
+
+msgid "SETTINGS.CREAR_N"
+msgstr "Crear máx."
+
+msgid "SETTINGS.CRAFT_OK"
+msgstr "¡%s unidad(es) de %s creadas!"
+
+msgid "SETTINGS.CRAFT_FALLO"
+msgstr "Faltan materiales. No perdiste nada."

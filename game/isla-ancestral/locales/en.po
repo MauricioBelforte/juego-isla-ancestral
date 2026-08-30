@@ -72,3 +72,32 @@ msgstr "Choose an option"
 
 msgid "SETTINGS.ADVANCED"
 msgstr "Press Enter to continue"
+msgid "SETTINGS.CERRAR"
+msgstr "Close"
+
+msgid "SETTINGS.MESA_TRABAJO"
+msgstr "Workbench"
+
+msgid "SETTINGS.FOGATA"
+msgstr "Campfire"
+
+msgid "SETTINGS.TELAR"
+msgstr "Loom"
+
+msgid "SETTINGS.SIN_RECETAS"
+msgstr "You don't know any recipes for this station yet."
+
+msgid "SETTINGS.SELECCIONA_RECETA"
+msgstr "Select a recipe to see materials."
+
+msgid "SETTINGS.CREAR_1"
+msgstr "Craft"
+
+msgid "SETTINGS.CREAR_N"
+msgstr "Craft max."
+
+msgid "SETTINGS.CRAFT_OK"
+msgstr "Crafted %s %s!"
+
+msgid "SETTINGS.CRAFT_FALLO"
+msgstr "Missing materials. You lost nothing."

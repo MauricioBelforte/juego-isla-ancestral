@@ -15,6 +15,7 @@ func _ready():
 	_crear_ui_dialogo()
 	_crear_ui_root()
 	_poblar_recursos()
+	_crear_estaciones_crafting()
 	print("Isla Ancestral — Isla Raíz")
 
 ## M53: instala el framework de capas (DialogLayer, PauseLayer, MenusLayer, ConfirmPopup)
@@ -24,6 +25,23 @@ func _crear_ui_root() -> void:
 		var ui_root = root_script.new()
 		ui_root.name = "UIRoot"
 		add_child(ui_root)
+
+## M16: coloca la estación de crafting inicial (mesa de trabajo) cerca del spawn.
+func _crear_estaciones_crafting() -> void:
+	var station_script := load("res://scripts/crafting/crafting_station.gd")
+	if station_script == null:
+		return
+	var mesa = station_script.new()
+	mesa.name = "MesaTrabajo"
+	mesa.tipo = 0  # CraftingStation.Tipo.MESA_TRABAJO
+	add_child(mesa)
+	# Posicionar sobre el terreno real (anti-flotamiento, M167)
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator and locator.has_method("posicionar_sobre_terreno"):
+		locator.posicionar_sobre_terreno.call_deferred(mesa, 326.0, 322.0)
+	else:
+		mesa.global_position = Vector3(326, 20, 322)
+	print("[M16] Mesa de trabajo colocada en (326, ~, 322)")
 
 ## M15: población inicial de recursos alrededor del centro de la isla (deferred).
 func _poblar_recursos() -> void:
