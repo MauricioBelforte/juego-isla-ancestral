@@ -356,7 +356,7 @@ python generar_alta.py <modulo> <asset_lowpoly> --segmentos 3 --ancho 0.10 --sub
 
 **Verificación visual** (E-13): `pico_hierro_alta`, `hacha_piedra_alta` y `totem_isla_alta` confirmados con 6 capturas orbitales — biselado y subdiv visibles, sin flotación, `z_min = 0.0450` preservado. Los 12 restantes herendan la pose y la `z_min` de su `_media.blend` (la pasada ALTA solo agrega modificadores locales, no toca `location`).
 
-**Verificación visual adicional (log 237, 2026-08-29):** `pico_hierro`, `pico_piedra` y `hacha_piedra` corregidos a pose vertical con cabeza arriba (rotación de la herramienta tumbada). Capturas orbitales 6× confirmadas en `_baja`, `_media`, `_alta` y `_alta_media` para los 3 — sin flotación, `z_min = 0.0450`. Bug del fix: la rotación -90° en Y ponía la cabeza abajo en `pico_hierro` (el handle de la versión tumbada tenía la cabeza en el -X); se aplicó +180° en su lugar para que la cabeza quede arriba. Las otras 2 ya estaban verticales en el source.
+**Verificación visual adicional (log 279, 2026-08-29):** `pico_hierro`, `pico_piedra` y `hacha_piedra` corregidos a pose vertical con cabeza arriba (rotación de la herramienta tumbada). Capturas orbitales 6× confirmadas en `_baja`, `_media`, `_alta` y `_alta_media` para los 3 — sin flotación, `z_min = 0.0450`. Bug del fix: la rotación -90° en Y ponía la cabeza abajo en `pico_hierro` (el handle de la versión tumbada tenía la cabeza en el -X); se aplicó +180° en su lugar para que la cabeza quede arriba. Las otras 2 ya estaban verticales en el source.
 
 **Pendiente:**
 - Re-derivar `_media` y `_baja` desde `_alta` (R9: el ALTA pasa a ser source of truth). Hoy las `_media`/`_baja` existentes se generaron desde el source; hay que regenerarlas.

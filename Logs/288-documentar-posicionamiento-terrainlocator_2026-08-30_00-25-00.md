@@ -1,4 +1,4 @@
-# Log 243: Documentar el posicionamiento con TerrainLocator para todos los agentes
+# Log 288: Documentar el posicionamiento con TerrainLocator para todos los agentes
 
 **Fecha:** 2026-08-30
 **Modelo:** Hy3
@@ -14,7 +14,7 @@ en módulos y guías, para que cualquier agente sepa cómo posicionar sin que lo
 - DOCUMENTACION/168-Plantilla-De-Isla: 03-Diseno y 04-Codigo actualizados con el método
   OBLIGATORIO TerrainLocator (para que las islas nuevas lo usen desde el inicio).
 - DOCUMENTACION/167-Isla-Raiz: ya documentado el TerrainLocator (04-Codigo, 03-Diseno, mapa).
-- DOCUMENTACION/07-GUIA-GODOT.md: §10.16 (TerrainLocator) ya anexada en log 242.
+- DOCUMENTACION/07-GUIA-GODOT.md: §10.16 (TerrainLocator) ya anexada en log 284.
 
 ## Uso para agentes
 - Para posicionar cualquier objeto/NPC/casita: usar "/root/TerrainLocator".get_height(x,z)+1

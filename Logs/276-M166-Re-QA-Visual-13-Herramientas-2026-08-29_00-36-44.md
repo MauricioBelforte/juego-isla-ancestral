@@ -1,4 +1,4 @@
-# Log 228 — M166 · Re-QA visual del módulo 13-Herramientas (3 assets, 6 variantes)
+# $1276 — M166 · Re-QA visual del módulo 13-Herramientas (3 assets, 6 variantes)
 
 **Fecha:** 2026-08-29 00:36 ART · **Módulo:** 166 · **Agente:** MiniMax-M3
 
@@ -11,7 +11,7 @@
 > 6 tomas presentes). La puerta visual queda **pendiente** con las hojas generadas.
 
 Re-corrida del circuito `verificar_visual.py` sobre las 6 variantes del módulo 13-Herramientas
-a pedido del usuario. El log 227 (22:50) ya había aprobado las 6 **con un modelo que sí
+a pedido del usuario. El $1275 (22:50) ya había aprobado las 6 **con un modelo que sí
 veía imágenes**; esa aprobación sigue siendo la vigente. Esta corrida genera una serie
 nueva de capturas con timestamp `00-34-*` y una medición fresca: **6/6 variantes pasan la
 puerta numérica, 0 fallos**, sin necesidad de tocar ningún `.blend`.
@@ -34,8 +34,8 @@ que todo el módulo sigue en pie después del procesamiento por lote del día 21
 Las 6 variantes cumplen el presupuesto M166 con margen (todas en OK contra ALTA / MEDIA / BAJA).
 **`z_min = 0.0450`** en las 6, **0 flotaciones, 0 hundimientos**.
 
-> Nota: los conteos de `antorcha_mano` (4 obj / 4 mats) discrepan con los del log 227
-> (3 obj / 3 mats). El log 227 midió con prefijo `SM_` (genérico), esta corrida midió con
+> Nota: los conteos de `antorcha_mano` (4 obj / 4 mats) discrepan con los del $1275
+> (3 obj / 3 mats). El $1275 midió con prefijo `SM_` (genérico), esta corrida midió con
 > `SM_Antorcha_` y encontró una pieza más (probablemente la brasa envuelta en tela
 > como objeto separado). El presupuesto sigue holgado.
 
@@ -92,7 +92,7 @@ done
 Duración total: **1 min 52 s** (6 × ~18 s). 36 PNGs orbitales + 6 hojas de contacto
 JPG en `13-Herramientas/capturas/` con sufijo `_00-34-{07,26,44,03,22,41}.{png,jpg}`.
 
-## Pendiente (sin cambios respecto a log 227)
+## Pendiente (sin cambios respecto a $1275)
 
 - **Recuperar la visión.** Sin un modelo que lea imágenes no se puede cerrar la puerta
   visual (E-13). Opciones: (a) cambiar a un modelo multimodal, (b) que el usuario revise

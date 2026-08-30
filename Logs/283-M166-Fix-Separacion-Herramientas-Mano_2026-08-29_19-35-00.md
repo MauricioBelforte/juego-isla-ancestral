@@ -1,4 +1,4 @@
-# Log 241 — M166 Fix de separación E-27 en las 3 herramientas de mano
+# $1283 — M166 Fix de separación E-27 en las 3 herramientas de mano
 
 **Fecha:** 2026-08-29 19:35 (GMT-3)
 **Módulo:** 13-Herramientas
@@ -75,7 +75,7 @@ def hijo(objeto, padre):
 El cilindro del mango nace a lo largo de Z; ya no lo roto. El padre (mango) tiene
 rotación y traslación cero → `matrix_world = I` → el `child.location` en local
 coincide con coords de mundo (legible). Esto también elimina la "rotación
-post-hoc" del log 237 que dejó las piezas con la brasa abajo y al mango
+post-hoc" del $1279 que dejó las piezas con la brasa abajo y al mango
 desplazado.
 
 Recomputé las posiciones de los hijos para la pose vertical:
@@ -155,9 +155,9 @@ Verificación post-fix: las 12 hojas dicen "con 6 capturas". OK.
 - **`Logs/ULTIMO_NUMERO.txt`** 240 → **241**.
 - **`.workbuddy-ai/memory/2026-08-29.md`** — entrada con el cierre (abajo).
 
-## 9. Lección meta: el log 237 aplicó la rotación sin notar E-27
+## 9. Lección meta: el $1279 aplicó la rotación sin notar E-27
 
-El log 237 ("Rotación de 3 hand tools + fix E-26 en capturas") decidió hacer
+El $1279 ("Rotación de 3 hand tools + fix E-26 en capturas") decidió hacer
 verticales los 3 hand tools aplicando una rotación -90° sobre Y a TODO el
 conjunto. Esa rotación del grupo a nivel `.blend` enmascaró el E-27 del
 parenting porque el source ya estaba "armado" en el script original (con la

@@ -1,4 +1,4 @@
-# Log 246: M19 — Snap al terreno y offset de NPC
+# Log 289: M19 — Snap al terreno y offset de NPC
 
 **Fecha:** 2026-08-29
 **Modelo:** MiMo V2.5 (OpenCode)

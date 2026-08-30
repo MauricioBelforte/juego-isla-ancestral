@@ -1,4 +1,4 @@
-# Log 229 — M166 · Auditoría numérica de las 82 variantes (sin visión)
+# $1277 — M166 · Auditoría numérica de las 82 variantes (sin visión)
 
 **Fecha:** 2026-08-29 04:13 ART · **Módulo:** 166 · **Agente:** MiniMax-M3
 
@@ -7,7 +7,7 @@
 Volcado numérico (obj / tris / mats / z_min) de las **82 variantes** (41 assets ×
 media + baja) con `auditar_stats.py`, un script nuevo que NO genera imágenes: abre
 cada `.blend`, mide y registra. Motivo: en esta sesión el modelo **no lee imágenes**
-(ver corrección en log 228), así que la única puerta verificable sin ojos es la
+(ver corrección en $1276), así que la única puerta verificable sin ojos es la
 numérica. 82 mediciones, **0 fallidas**, 517 s.
 
 Salida: `Logs/229-M166-Stats-Numericos-76-Variantes.txt` (nombre del archivo

@@ -1,4 +1,4 @@
-# Log 238 — M166 Tier D: cuerda enrollada + antorcha de pared (2026-08-29 17:55)
+# $1280 — M166 Tier D: cuerda enrollada + antorcha de pared (2026-08-29 17:55)
 
 ## Resumen ejecutivo
 

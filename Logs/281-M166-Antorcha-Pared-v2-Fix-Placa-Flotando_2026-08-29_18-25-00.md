@@ -1,4 +1,4 @@
-# Log 239 — Fix antorcha_pared v2 (bug reportado: placa flotando) (2026-08-29 18:25)
+# $1281 — Fix antorcha_pared v2 (bug reportado: placa flotando) (2026-08-29 18:25)
 
 ## Resumen ejecutivo
 
@@ -183,7 +183,7 @@ esta receta.
   sumar este fix porque no es un asset nuevo).
 - Siguiente paso de la cadena Tier D (M45 conchas, M25 puentes, M40 pozo, M40
   puentes) — pendiente directiva del usuario.
-- Carry-over del log 238: `hacha_piedra` offset lateral (defecto de modelado),
+- Carry-over del $1280: `hacha_piedra` offset lateral (defecto de modelado),
   `nido_cocos_baja` 970 tris y `helecho_gigante_baja` 936 tris exceden 700,
   `piedra_afilar` 15 tris sospechoso, 5 sources con AABB < 0.045 a verificar
   visualmente, `diagnosticar_pose.py` clasificación TUMBADO poco fiable.
