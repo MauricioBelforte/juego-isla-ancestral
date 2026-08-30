@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# M87: Catálogo español (fuente de verdad)
+msgid "MAIN_MENU.PLAY"
+msgstr "Jugar"
+
+msgid "MAIN_MENU.OPTIONS"
+msgstr "Opciones"
+
+msgid "HUD.ENERGIA"
+msgstr "Energía"
+
+msgid "HUD.VIDA"
+msgstr "Vida"
+
+msgid "ITEMS.MADERA"
+msgstr "Madera"
+
+msgid "ITEMS.MADERA_DESC"
+msgstr "Madera sólida de la isla Aurora."
+
+msgid "SETTINGS.IDIOMA"
+msgstr "Idioma"
+
+msgid "SETTINGS.IDIOMA_DESC"
+msgstr "Idioma de los textos del juego"
+
+msgid "DIALOGOS.VECINO_SALUDO"
+msgstr "¡Hola, vecino!"
+
+msgid "ITEMS.SE_OFRECEN"
+msgid_plural "ITEMS.SE_OFRECEN"
+msgstr[0] "Se ofrece {n} objeto"
+msgstr[1] "Se ofrecen {n} objetos"

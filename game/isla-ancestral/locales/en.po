@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# M87: English catalog (translations)
+msgid "MAIN_MENU.PLAY"
+msgstr "Play"
+
+msgid "MAIN_MENU.OPTIONS"
+msgstr "Options"
+
+msgid "HUD.ENERGIA"
+msgstr "Energy"
+
+msgid "HUD.VIDA"
+msgstr "Health"
+
+msgid "ITEMS.MADERA"
+msgstr "Wood"
+
+msgid "ITEMS.MADERA_DESC"
+msgstr "Solid wood from Aurora island."
+
+msgid "SETTINGS.IDIOMA"
+msgstr "Language"
+
+msgid "SETTINGS.IDIOMA_DESC"
+msgstr "Language of the game texts"
+
+msgid "DIALOGOS.VECINO_SALUDO"
+msgstr "Hello, neighbor!"
+
+msgid "ITEMS.SE_OFRECEN"
+msgid_plural "ITEMS.SE_OFRECEN"
+msgstr[0] "Offering {n} item"
+msgstr[1] "Offering {n} items"

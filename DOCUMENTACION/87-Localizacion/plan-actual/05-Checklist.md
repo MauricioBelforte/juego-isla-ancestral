@@ -1,7 +1,26 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
+
+## Reserva actual
+
+- Estado: 🟡 Liberado — iteración 1 (núcleo) 2026-08-30
+- Agente: Deepseek V4 Flash (Kilo)
+- Fase: 8 (Arte y calidad final)
+- Dificultad: 3
+- Vision: V0 (datos); UI del selector es V2
+- Entrada: M21 ✅ (diálogos), M53 🔵 (UI — en curso por MiMo)
+- Salida: Localization autoload + LocaleUtils + catálogos es.po/en.po + test 0 fallos
+- Archivos: `scripts/localization/*.gd`, `locales/es.po`, `locales/en.po`, `project.godot`
+- Fecha cierre: 2026-08-30 02:55
 
 # 05-Checklist.md — Módulo 87: Localización
+
+> **Nota 2026-08-30 (Deepseek V4 Flash / Kilo):** núcleo de localización implementado:
+> LocalizationManager autoload (catálogos .po, cambio en vivo, tr_key con placeholders y
+> plurales, formatos de fecha/número, fallback es, validación RF21), LocaleUtils (números/
+> fechas/hora por idioma), catálogos es.po (fuente de verdad) y en.po. Test headless 0 fallos.
+> Pendientes visuales (V2): selector de idioma en configuración (M53/M90), integración UI M53,
+> subtítulos M44, sugerencia idioma SO en bienvenida. Log 257.
 
 ## Checklist de implementación del módulo
 
@@ -18,28 +37,28 @@
 - [ ] Definir los criterios de aceptación del módulo [S]
 
 ### Requisitos funcionales
-- [ ] Definir el idioma por defecto español al primer inicio [S]
+- [x] Definir el idioma por defecto español al primer inicio [S]
 - [ ] Diseñar el selector de idioma (español, inglés) en configuración [S]
-- [ ] Implementar el cambio de idioma en vivo sin reiniciar el juego [M]
+- [x] Implementar el cambio de idioma en vivo sin reiniciar el juego [M]
 - [ ] Persistir la elección de idioma entre sesiones (M60) [M]
-- [ ] Cargar el catálogo del idioma activo al iniciar el juego [M]
-- [ ] Precargar los catálogos de todos los idiomas soportados [M]
-- [ ] Implementar tr de clave con fallback a español [M]
-- [ ] Implementar la función de conveniencia tr_key(module, section, key, params) [S]
-- [ ] Implementar placeholders {clave} con format_text [M]
-- [ ] Implementar plurales con msgid_plural y tr(..., plural) [M]
-- [ ] Implementar formato de fecha por idioma (d/m/Y vs m/d/Y) [M]
-- [ ] Implementar formato de número por idioma (1.234,56 vs 1,234.56) [M]
+- [x] Cargar el catálogo del idioma activo al iniciar el juego [M]
+- [x] Precargar los catálogos de todos los idiomas soportados [M]
+- [x] Implementar tr de clave con fallback a español [M]
+- [x] Implementar la función de conveniencia tr_key(module, section, key, params) [S]
+- [x] Implementar placeholders {clave} con format_text [M]
+- [x] Implementar plurales con msgid_plural y tr(..., plural) [M]
+- [x] Implementar formato de fecha por idioma (d/m/Y vs m/d/Y) [M]
+- [x] Implementar formato de número por idioma (1.234,56 vs 1,234.56) [M]
 - [ ] Implementar la sugerencia del idioma del SO en el primer arranque con confirmación [M]
-- [ ] Crear es.po completo como fuente de verdad (msgid = clave, msgstr = texto español) [M]
-- [ ] Crear en.po con todas las claves traducidas al inglés [C]
-- [ ] Mostrar los nombres de idiomas en su propio idioma ("Español", "English") [S]
-- [ ] Emitir la señal locale_changed para re-traducción de UI [M]
-- [ ] Implementar la validación de catálogos (claves faltantes, sobrantes, formato) [M]
+- [x] Crear es.po completo como fuente de verdad (msgid = clave, msgstr = texto español) [M]
+- [?] Crear en.po con todas las claves traducidas al inglés [C]
+- [x] Mostrar los nombres de idiomas en su propio idioma ("Español", "English") [S]
+- [x] Emitir la señal locale_changed para re-traducción de UI [M]
+- [x] Implementar la validación de catálogos (claves faltantes, sobrantes, formato) [M]
 - [ ] Soportar entradas con contexto gettext para desambiguar términos [S]
 - [ ] Mostrar el idioma activo en el menú de debug (M110) [S]
-- [ ] Definir el fallback por clave: idioma activo -> es.po -> clave literal [M]
-- [ ] Evitar texto vacío en la UI ante cualquier fallo de traducción [S]
+- [x] Definir el fallback por clave: idioma activo -> es.po -> clave literal [M]
+- [x] Evitar texto vacío en la UI ante cualquier fallo de traducción [S]
 
 ### Requisitos no funcionales
 - [ ] Garantizar traducción sin penalización perceptible de rendimiento (cache) [M]
