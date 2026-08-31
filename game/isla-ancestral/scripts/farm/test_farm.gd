@@ -29,6 +29,7 @@ func _run() -> void:
 	_test_ciclo_completo()
 	_test_pausa_agua()
 	_test_persistencia()
+	_test_controller_ruta()
 	print("=== TEST M33 FARM: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -109,3 +110,25 @@ func _test_persistencia() -> void:
 	_farm._tiles.clear()
 	_farm.restore_save_data(data)
 	_check(_farm._tiles.size() >= 1, "restore recupera tiles: %d" % _farm._tiles.size())
+
+## Iter. 2: ruta del FarmToolController con HEADLESS (sin cámara): simula el
+## arar→plantar→regar→cosechar vía API pública (la entrada por raycast es de runtime).
+func _test_controller_ruta() -> void:
+	var pos := Vector3i(306, 12, 306)
+	_check(_farm.puede_plantar_en(pos), "puede_plantar_en: vacío OK")
+	# Arar (till) + plantar (como hace el controller al apuntar tierra arada)
+	_farm.till_tile(pos)
+	_inv.agregar_items({"tomate": 5})
+	var tomate: CropDefinition = _farm.obtener_def(&"tomate")
+	_check(_farm.plant(tomate, pos), "plantar vía controller OK")
+	# Regar y avanzar días hasta cosecha
+	var tile: CropTile = _farm.get_tile(pos)
+	var dias: int = 0
+	while not tile.is_ready() and dias < 10:
+		_farm.water(pos)
+		tile.apply_daily_tick(1, false)
+		dias += 1
+	_check(tile.is_ready(), "controller ruta: cultivo listo en %d días" % dias)
+	var items: Array = _farm.harvest(pos)
+	_check(items.size() >= 1, "controller ruta: cosecha entrega items")
+	_check(_farm.get_tile(pos) == null, "controller ruta: tile removido tras cosecha")

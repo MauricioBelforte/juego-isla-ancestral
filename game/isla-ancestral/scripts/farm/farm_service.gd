@@ -139,6 +139,10 @@ func can_harvest(voxel_pos: Vector3i) -> bool:
 	var tile: CropTile = _tiles.get(voxel_pos, null)
 	return tile != null and tile.is_ready()
 
+## ¿Se puede plantar en esta posición (tierra arada sin cultivo)?
+func puede_plantar_en(voxel_pos: Vector3i) -> bool:
+	return not _tiles.has(voxel_pos)
+
 ## Cosecha: entrega ítems a M14; árboles quedan en cooldown, resto se elimina.
 func harvest(voxel_pos: Vector3i) -> Array:
 	var tile: CropTile = _tiles.get(voxel_pos, null)

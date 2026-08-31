@@ -16,7 +16,17 @@ func _ready():
 	_crear_ui_root()
 	_poblar_recursos()
 	_crear_estaciones_crafting()
+	_crear_farm_controller()
 	print("Isla Ancestral — Isla Raíz")
+
+## M33 (iter. 2): controller agrícola (arar/regar/cosechar con interactuar)
+func _crear_farm_controller() -> void:
+	var script := load("res://scripts/farm/farm_tool_controller.gd")
+	if script:
+		var ctrl = script.new()
+		ctrl.name = "FarmToolController"
+		add_child(ctrl)
+		print("[M33] FarmToolController montado")
 
 ## M53: instala el framework de capas (DialogLayer, PauseLayer, MenusLayer, ConfirmPopup)
 func _crear_ui_root() -> void:

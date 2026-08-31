@@ -61,6 +61,8 @@ func _construir_panel() -> void:
 	vbox.add_child(_info_label)
 
 	_btn(vbox, "Abrir tienda general", _accion_abrir_tienda)
+	_btn(vbox, "Plantar tomate demo", _accion_plantar_demo)
+	_btn(vbox, "Ayudar cosecha (1 día)", _accion_farm_dia)
 	_btn(vbox, "Día siguiente", _accion_dia_siguiente)
 	_btn(vbox, "Hora 06:00 (mañana)", _accion_hora_mañana)
 	_btn(vbox, "Hora 21:00 (noche)", _accion_hora_noche)
@@ -156,6 +158,32 @@ func _accion_abrir_tienda() -> void:
 		_log("ShopUI abierta")
 	else:
 		_log("ShopUI no montada")
+
+## M33 QA: plantar tomate en un punto fijo cerca del jugador
+func _accion_plantar_demo() -> void:
+	var farm = get_node_or_null("/root/Farm")
+	var ctrl = _buscar_nodo("FarmToolController")
+	if farm and ctrl and farm.has_method("obtener_def"):
+		var def = farm.obtener_def(&"tomate")
+		if def:
+			var p = _jugador_posicion()
+			var ok: bool = ctrl.plantar_demo(def, Vector3i(int(p.x) + 2, 12, int(p.z)))
+			_log("Plantar demo: %s" % ("OK" if ok else "fallo (tile ocupado)"))
+
+## M33 QA: avanzar un día agrícola (riego + crecer)
+func _accion_farm_dia() -> void:
+	var farm = get_node_or_null("/root/Farm")
+	if farm:
+		farm.apply_rain()  # simular lluvia: riega todo (M32 lo hará real)
+		farm.advance_day()
+		var stats: Dictionary = farm.get_active_farm_stats()
+		_log("Farm día avanzado: %s" % str(stats))
+
+func _jugador_posicion() -> Vector3:
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		return players[0].global_position
+	return Vector3(320, 12, 320)
 
 func _buscar_nodo(nombre: String) -> Node:
 	var tree := get_tree()
