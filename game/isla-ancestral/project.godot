@@ -50,6 +50,7 @@ ThemeService="*res://scripts/ui/theme/theme_service.gd"
 Crafting="*res://scripts/crafting/crafting_service.gd"
 DebugMenu="*res://scripts/debug/debug_menu.gd"
 CatalogoTiendas="*res://scripts/shops/catalogo_tiendas.gd"
+Farm="*res://scripts/farm/farm_service.gd"
 
 [display]
 

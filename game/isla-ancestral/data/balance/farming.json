@@ -1,8 +1,10 @@
 {
 	"schema_version": 1,
 	"cultivos": {
-		"tomate": {"crecimiento_dias": 4, "rendimiento_min": 2, "rendimiento_max": 4, "precio_venta": 15, "temporada": "verano"},
-		"zanahoria": {"crecimiento_dias": 3, "rendimiento_min": 2, "rendimiento_max": 3, "precio_venta": 10, "temporada": "primavera"},
-		"calabaza": {"crecimiento_dias": 6, "rendimiento_min": 1, "rendimiento_max": 2, "precio_venta": 35, "temporada": "otono"}
+		"tomate": {"crecimiento_dias": 4, "rendimiento_min": 2, "rendimiento_max": 4, "temporada": "verano"},
+		"zanahoria": {"crecimiento_dias": 3, "rendimiento_min": 2, "rendimiento_max": 3, "temporada": "primavera"},
+		"calabaza": {"crecimiento_dias": 6, "rendimiento_min": 1, "rendimiento_max": 2, "temporada": "otono"},
+		"fibra_algodon": {"crecimiento_dias": 3, "rendimiento_min": 2, "rendimiento_max": 4, "temporada": "verano"},
+		"baya_roja": {"crecimiento_dias": 2, "rendimiento_min": 1, "rendimiento_max": 3, "temporada": "otono"}
 	}
 }
