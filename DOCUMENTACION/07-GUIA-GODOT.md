@@ -1322,6 +1322,109 @@ El UIRoot del M53 ahora SOLO monta capas MODALES (Dialog/Pause/Menus/Confirm); e
 
 ---
 
+### 9.49 `Object.has()` no existe en Godot 4: la UI de opciones quedaba con texto vacío
+
+**Síntoma:** el diálogo (M21/M53) mostraba la línea y, al avanzar al nodo de OPCIONES, los botones
+de opciones aparecían **vacíos** (sin texto). El jugador no podía elegir; el diálogo quedaba
+"atascado" activo y la tecla de interacción (F) dejaba de responder
+(`is_dialogue_active()` sigue true esperando la elección que nunca llega).
+
+**Causa:** en `dialog_layer.gd` se usaba `op.has("text_key")` para verificar la propiedad del
+Resource `DialogueOption`. **`Object.has()` fue eliminado en Godot 4** (existía en 3.x). La llamada
+produce un error en runtime ("Nonexistent function 'has' in base 'Resource'"), aborta la función y
+el botón queda con texto vacío. El estado del manager queda correcto; solo la presentación muere
+en silencio — el jugador queda atrapado sin pistas visuales.
+
+**Solución:**
+```gdscript
+# ❌ Incorrecto en Godot 4 (el método fue eliminado)
+if op.has_method("get") and op.has("text_key"): ...
+
+# ✅ Correcto: operador `in` (verifica propiedad) o get() con null-check
+if "text_key" in op:
+    var clave: String = str(op.text_key)
+```
+
+**Lección general:** al migrar/mantener código GDScript 3→4, auditar llamadas a `has()` sobre
+objetos. En Godot 4: `obj.has_method()` para funciones, `"propiedad" in obj` o
+`obj.get("propiedad") != null` para propiedades. Este caso también demuestra por qué los fallos de
+presentación deben probarse con el flujo REAL (UI conectada al manager), no solo headless a nivel
+de datos: el test headless del M21 pasaba porque nunca instanciaba los botones.
+
+**Diagnóstico recomendado:** conectar la capa real + `start_dialogue` + `advance()` en headless e
+inspeccionar `_options_box.get_children()` con su `text` — revela el texto vacío de inmediato.
+
+**Fecha:** 2026-08-31 · **Agente:** Deepseek V4 Flash (Kilo)
+
+---
+
+### 9.51 Capas UI en PROCESS_MODE_WHEN_PAUSED no reciben input sin pausa real (diálogo congelado)
+
+**Síntoma (cadena completa, 3 síntomas encadenados):**
+1. El diálogo abre (F) y muestra la línea del "saludo", pero **Enter no avanza**.
+2. Al llegar al nodo de OPCIONES, **no se ven las opciones 1/2** (solo cambia el texto).
+3. El diálogo queda activo para siempre y **F deja de responder**: no se puede volver a hablar
+   con el NPC nunca más.
+
+**Causa raíz (3 causas en cadena):**
+
+**C1 — `Object.has()` eliminado en Godot 4 (ver §9.49):** `_texto_opcion()` usaba
+`op.has("text_key")` → error runtime silencioso → botones de opciones con texto vacío. Aunque el
+estado del manager era correcto, el jugador no veía nada que elegir.
+
+**C2 — Capas modales en `PROCESS_MODE_WHEN_PAUSED` sin pausar el mundo:** en la iteración 1 del
+M53 se pusieron las capas MODAL en `PROCESS_MODE_WHEN_PAUSED` creyendo que eso las dejaba "siempre
+vivas". Es lo contrario: ese modo **solo procesa cuando `get_tree().paused == true`**. Con el
+juego corriendo (sin pausa), la capa está congelada: el panel se ve (los callbacks de señales del
+manager igual disparan), pero `_input()` NUNCA recibe teclas → Enter/E/1 no hacen nada.
+
+**C3 — Sin congelación del mundo:** el diseño pedía que los MODAL_FULL pausen el mundo
+(03-Diseno), pero nunca se implementó `get_tree().paused`. Combinado con C2: ni la capa ni el
+mundo se detenían; el diálogo quedaba zombie (visible, no interactuable, bloqueando F para
+siempre vía `is_dialogue_active()`).
+
+**Solución (aplicada):**
+```gdscript
+# 1) Las capas UI van SIEMPRE en ALWAYS (procesan input con el juego corriendo):
+match lt:
+    LAYER_MODAL_FULL, LAYER_MODAL_SIMPLE, LAYER_POPUP, LAYER_HUD:
+        layer.process_mode = Node.PROCESS_MODE_ALWAYS
+
+# 2) El mundo se congela REALMENTE cuando hay un MODAL_FULL visible:
+func _actualizar_pausa_mundo() -> void:
+    var hay_modal := false
+    for capa in _stack:
+        if is_instance_valid(capa) and capa.visible and capa is UILayer:
+            if capa.layer_type == UILayerType.Type.MODAL_FULL:
+                hay_modal = true
+                break
+    var tree := get_tree()
+    if tree and tree.paused != hay_modal:
+        tree.paused = hay_modal
+
+# 3) UILayer notifica al manager en cada cambio de visibilidad:
+func _notification(what: int) -> void:
+    if what == NOTIFICATION_VISIBILITY_CHANGED and is_inside_tree():
+        um._actualizar_pausa_mundo()
+```
+Además: `Object.has()` → operador `in` (C1), y `NOTIFICATION_VISIBILITY_CHANGED` cubre cambios de
+`visible` hechos por código (no solo `_enter_tree`).
+
+**Cómo se diagnosticó (metodología que SÍ funcionó):** el test headless a nivel de manager pasaba
+(los datos avanzaban), pero el flujo REAL fallaba. La clave fue: 1) logging temporal en
+`DialogLayer._input()` — se verificó que **ni un solo evento de tecla llegaba** (C2), y 2) simular
+teclas reales sobre la ventana del juego (pygetwindow + WScript.Shell SendKeys) y capturar cada
+paso con visión. El log mostró `[DLG]` cero veces con el panel visible → input congelado.
+
+**Regla general:** una capa UI que debe recibir input SIEMPRE va en `PROCESS_MODE_ALWAYS`. Si
+además debe congelar el mundo, se pausa el árbol explícitamente (`get_tree().paused = true`) —
+NUNCA se resuelve con `WHEN_PAUSED` en la capa, porque ese modo depende de una pausa que puede no
+existir. Documentar el par capa-ALWAYS + mundo-pausado como binomio inseparable.
+
+**Fecha:** 2026-08-31 · **Agente:** Deepseek V4 Flash (Kilo) · **Log 273**
+
+---
+
 ### 9.48 Cargar fuentes TTF/OTF en runtime: `FontFile.load_dynamic_font()` (NO `load()`)
 
 **Síntoma:** `FreeType: Error loading font: '' (face_index=0)` al intentar cargar fuentes
@@ -1358,6 +1461,29 @@ A diferencia de `load()`, no depende del importador del editor.
 
 ---
 
+### 9.50 Anotar tipo con `class_name` de OTRO script no compila en headless (`--script`)
+
+**Error:** `SCRIPT ERROR: Parse Error: Could not find type "NpcPortraitUI" in the current scope.` / `ERROR: Failed to load script "res://scripts/dialogos/ui/dialogue_ui.gd" with error "Parse error."`
+
+**Causa:** En Godot 4.7, al ejecutar con `--headless --script` (o cualquier contexto donde el script dependiente no se haya compilado antes que el que lo referencia), una anotación de tipo que usa el `class_name` de **otro** script NO se resuelve en parse-time. El compilador solo conoce los tipos nativos y los `class_name` ya compilados en el mismo grafo; un script cargado en runtime vía `load()` no aporta su `class_name` al alcance del script que lo referencia. Es distinto de §9.17/§9.41 (colisión de nombre con autoload/clase nativa): aquí el nombre es válido, pero no está disponible en el momento del parse.
+
+**Solución:** No anotar la variable con el `class_name` del otro script. Usar tipo sin anotar (`var _portrait = null`) y crear la instancia en runtime con `load("res://ruta/al/script.gd").new()`; los métodos/propiedades se resuelven por duck-typing. Si se quiere tipado dentro del árbol, usar `preload()` (compila el script dependiente en el mismo paso) en vez de `load()`.
+
+Ejemplo (M21 iteración 5, Log 299):
+```gdscript
+# ❌ Parse Error en headless:
+var _portrait: NpcPortraitUI = null
+# ✅ Correcto (duck-typing):
+var _portrait = null
+# ...en _ready():
+_portrait = load("res://scripts/dialogos/ui/npc_portrait_ui.gd").new()
+_portrait.set_expression(expresion)  # resuelto en runtime
+```
+
+**Aplicación en el proyecto:** `dialogue_ui.gd` referencia `NpcPortraitUI` (npc_portrait_ui.gd) y lo instancia por `load().new()`. El test `test_eventos_dialogo_m21.gd` (`_test_ui_portrait_expresion`) verifica el tint por expresión. Regla general: en headless/`--script`, evitar anotaciones de tipo cruzadas entre scripts; preferir `preload` o tipos sin anotar.
+
+---
+
 ## Histórico de Versiones (adenda 2026-08-28)
 
 | Fecha | Modelo | Plataforma | Cambios |
@@ -1367,6 +1493,9 @@ A diferencia de `load()`, no depende del importador del editor.
 | 2026-08-30 | Deepseek V4 Flash | Kilo | Agregada §9.46 (Array por referencia: la UI vacía el grafo cacheado del diálogo M21 — usar duplicate() + reasignación, nunca clear() sobre la referencia). Fix de "diálogo solo funciona una vez". Log 251 |
 | 2026-08-30 | MiMo V2.5 | OpenCode | Agregada §9.47 (Superposición de widgets HUD: NO crear widgets que ya existen en otros scripts — verificar fuentes en player.gd, w_reloj.gd, main_island.tscn ANTES de agregar nodos UI). Corrección de superposición M53 |
 | 2026-08-30 | MiMo V2.5 | OpenCode | Agregada §9.48 (Cargar fuentes TTF/OTF en runtime: `FontFile.load_dynamic_font()` — `load()` retorna FontFile con datos vacíos, causando `FreeType: Error loading font: ''`. Solución: `FontFile.new()` + `load_dynamic_font(path)`). Fix de 6 errores FreeType en theme_ux.gd |
+| 2026-08-31 | Deepseek V4 Flash | Kilo | Agregada §9.49 (Object.has() eliminado en Godot 4 — usar operador in; caso UI opciones vacías M53). Log 273 |
+| 2026-08-31 | Deepseek V4 Flash | Kilo | Agregada §9.51 (PROCESS_MODE_WHEN_PAUSED sin pausa real congela el input de capas UI — capa ALWAYS + get_tree().paused). Fix diálogo congelado M53. Log 273 |
+| 2026-08-30 | Hy3 | Kilo | Agregada §9.50 (Anotar tipo con class_name de OTRO script no compila en headless --script → Parse Error "Could not find type"; usar tipo sin anotar + load().new() o preload. M21 iter 5, Log 299) |
 
 
 ---

@@ -110,3 +110,6 @@ msgstr "Free slot"
 
 msgid "SETTINGS.SLOTS"
 msgstr "Slots"
+
+msgid "npc.catalina"
+msgstr "Catalina"

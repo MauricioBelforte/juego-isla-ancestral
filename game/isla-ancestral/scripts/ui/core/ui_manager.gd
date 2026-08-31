@@ -48,6 +48,23 @@ func _ready() -> void:
 	# M53 RF6: tooltip por foco (accesible por teclado/gamepad)
 	ui_focus_moved.connect(_on_focus_moved_tooltip)
 
+## §9.50 — Congela el mundo mientras haya una capa MODAL_FULL visible.
+## Las capas UI van en PROCESS_MODE_ALWAYS (siguen recibiendo input); el resto
+## del árbol se pausa vía get_tree().paused. SIN esto, las capas en
+## PROCESS_MODE_WHEN_PAUSED quedan congeladas con el juego corriendo y no
+## reciben input (bug: Enter no avanzaba el diálogo).
+func _actualizar_pausa_mundo() -> void:
+	var hay_modal := false
+	for capa in _stack:
+		if is_instance_valid(capa) and capa.visible and capa is UILayer:
+			if capa.layer_type == UILayerType.Type.MODAL_FULL:
+				hay_modal = true
+				break
+	var tree := get_tree()
+	if tree and tree.paused != hay_modal:
+		tree.paused = hay_modal
+		_log("mundo %s (MODAL_FULL visible)" % ["PAUSADO" if hay_modal else "REANUDADO"])
+
 ## Muestra el tooltip del control enfocado si define tooltip_text
 func _on_focus_moved_tooltip(node: Node) -> void:
 	if node is Control and str(node.tooltip_text) != "":
@@ -275,11 +292,13 @@ func _apply_process_mode(layer: Node) -> void:
 		LAYER_HUD:
 			layer.process_mode = Node.PROCESS_MODE_ALWAYS
 		LAYER_MODAL_SIMPLE:
-			layer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+			layer.process_mode = Node.PROCESS_MODE_ALWAYS
 		LAYER_MODAL_FULL:
-			layer.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+			layer.process_mode = Node.PROCESS_MODE_ALWAYS
 		LAYER_POPUP:
 			layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	# §9.50: las capas UI SIEMPRE procesan input; el mundo se congela vía
+	# get_tree().paused cuando hay una capa MODAL_FULL visible (ver abajo).
 
 
 ## Guarda el foco actual antes de abrir una nueva capa

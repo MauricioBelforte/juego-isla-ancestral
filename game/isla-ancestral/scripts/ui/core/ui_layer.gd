@@ -26,6 +26,13 @@ func _enter_tree() -> void:
 	if _ui_manager and _ui_manager.has_method("register_layer"):
 		_ui_manager.register_layer(self)
 
+## §9.50: notifica al UIManager al cambiar visibilidad para pausar/reanudar el mundo
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED and is_inside_tree():
+		var um = _get_ui_manager()
+		if um and um.has_method("_actualizar_pausa_mundo"):
+			um._actualizar_pausa_mundo()
+
 
 func _exit_tree() -> void:
 	# Des-registrar de UIManager cuando sale del árbol

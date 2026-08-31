@@ -106,7 +106,7 @@ func _on_node_entered(_node_id: String, speaker_key: String, texto: String, tipo
 		for i in options.size():
 			var op = options[i]
 			var btn := Button.new()
-			btn.text = _texto_opcion(op)
+			btn.text = "[%d] %s" % [i + 1, _texto_opcion(op)]
 			btn.pressed.connect(_on_opt_pressed.bind(i))
 			_options_box.add_child(btn)
 		_hint_label.text = _t("SETTINGS.ELEGIR_OPCION")
@@ -162,23 +162,29 @@ func _on_opt_pressed(idx: int) -> void:
 func _texto_opcion(op) -> String:
 	if op == null:
 		return "?"
-	if op.has_method("get") and op.has("text_key"):
-		var clave = str(op.text_key)
-		return _traducir_clave(clave)
+	# ⚠️ Object.has() NO existe en Godot 4 — usar el operador `in` (§9.48 de la guía)
+	if "text_key" in op:
+		var clave: String = str(op.text_key)
+		return _traducir_texto(clave)
 	return str(op)
 
 func _traducir_hablante(speaker_key: String) -> String:
 	if speaker_key == "":
 		return ""
-	return _traducir_clave(speaker_key)
+	return _traducir_texto(speaker_key)
 
-func _traducir_clave(clave: String) -> String:
+## Traduce SOLO si el texto parece una clave (M87: MAYÚSCULAS/con puntos/guiones bajos,
+## sin espacios ni minúsculas de frase). Textos libres se devuelven tal cual.
+func _traducir_texto(texto: String) -> String:
+	if texto == "" or texto.contains(" "):
+		return texto
+	if texto != texto.to_upper() and not texto.contains("."):
+		return texto
 	var loc = get_node_or_null("/root/Localization")
 	if loc and loc.has_method("traducir_clave"):
-		var res = loc.traducir_clave(clave)
-		if res != clave:
-			return res
-	return clave
+		var res = loc.traducir_clave(texto)
+		return res
+	return texto
 
 func _t(clave: String) -> String:
 	var loc = get_node_or_null("/root/Localization")
