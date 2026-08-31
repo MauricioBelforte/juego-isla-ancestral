@@ -114,3 +114,63 @@ msgstr "Slots"
 
 msgid "npc.catalina"
 msgstr "Catalina"
+
+msgid "TIENDAS.GENERAL"
+msgstr "Tienda General"
+
+msgid "TIENDAS.HERRERIA"
+msgstr "Herrería"
+
+msgid "TIENDAS.VIAJERO"
+msgstr "Mercader Viajero"
+
+msgid "TIENDAS.CATALOGO"
+msgstr "Catálogo"
+
+msgid "TIENDAS.VENDER_TITULO"
+msgstr "Vender (aceptan recompra):"
+
+msgid "TIENDAS.SALDO"
+msgstr "Saldo"
+
+msgid "TIENDAS.SELECCIONA"
+msgstr "Selecciona un objeto del catálogo o de tus bolsillos."
+
+msgid "TIENDAS.COMPRAR_1"
+msgstr "Comprar"
+
+msgid "TIENDAS.COMPRAR_N"
+msgstr "Comprar máx."
+
+msgid "TIENDAS.VENDER_1"
+msgstr "Vender"
+
+msgid "TIENDAS.VENDER_N"
+msgstr "Vender máx."
+
+msgid "TIENDAS.COMPRA_INFO"
+msgstr "Comprar: %d AO (stock %d)"
+
+msgid "TIENDAS.VENTA_INFO"
+msgstr "Vender: %d AO (tienes %d)"
+
+msgid "TIENDAS.TRANSACCION_OK"
+msgstr "¡Listo! Transacción realizada."
+
+msgid "TIENDAS.TRANSACCION_FALLO"
+msgstr "No se pudo completar la transacción."
+
+msgid "TIENDAS.SIN_FONDOS"
+msgstr "No tienes suficientes Ánimos (AO)."
+
+msgid "TIENDAS.SIN_STOCK"
+msgstr "La tienda no tiene más stock de eso."
+
+msgid "TIENDAS.INVENTARIO_LLENO"
+msgstr "Tus bolsillos están llenos. No perdiste nada."
+
+msgid "TIENDAS.SIN_ITEMS"
+msgstr "No tienes ese objeto para vender."
+
+msgid "TIENDAS.CERRADA"
+msgstr "La tienda está cerrada. Vuelve en horario laboral."

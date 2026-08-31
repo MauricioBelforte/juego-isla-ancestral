@@ -175,6 +175,15 @@ func deserializar(d: Dictionary) -> void:
 # ── Internos ──────────────────────────────────────────────
 
 func _precio_base_compra(item_id: String) -> int:
+	# 1) Override del catálogo central (econ_prices.tres) — flujo documentado en
+	#    economy_price_catalog.gd §1: overrides PRIMERO, luego ItemData (M159).
+	#    (Fix M39: se usaba solo para rareza; el precio siempre caía a 0 sin M159.)
+	var cat = _catalog_get()
+	if cat != null and cat.has_method("get_price_def"):
+		var def = cat.get_price_def(item_id)
+		if def != null and int(def.precio_compra) > 0:
+			return maxi(0, int(def.precio_compra))
+	# 2) ItemData base (M159) cuando exista
 	var db = _db_get()
 	if db == null:
 		return 0

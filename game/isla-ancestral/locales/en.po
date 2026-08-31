@@ -113,3 +113,63 @@ msgstr "Slots"
 
 msgid "npc.catalina"
 msgstr "Catalina"
+
+msgid "TIENDAS.GENERAL"
+msgstr "General Store"
+
+msgid "TIENDAS.HERRERIA"
+msgstr "Smithy"
+
+msgid "TIENDAS.VIAJERO"
+msgstr "Traveling Merchant"
+
+msgid "TIENDAS.CATALOGO"
+msgstr "Catalog"
+
+msgid "TIENDAS.VENDER_TITULO"
+msgstr "Sell (they buy back):"
+
+msgid "TIENDAS.SALDO"
+msgstr "Balance"
+
+msgid "TIENDAS.SELECCIONA"
+msgstr "Select an item from the catalog or your pockets."
+
+msgid "TIENDAS.COMPRAR_1"
+msgstr "Buy"
+
+msgid "TIENDAS.COMPRAR_N"
+msgstr "Buy max."
+
+msgid "TIENDAS.VENDER_1"
+msgstr "Sell"
+
+msgid "TIENDAS.VENDER_N"
+msgstr "Sell max."
+
+msgid "TIENDAS.COMPRA_INFO"
+msgstr "Buy: %d AO (stock %d)"
+
+msgid "TIENDAS.VENTA_INFO"
+msgstr "Sell: %d AO (you have %d)"
+
+msgid "TIENDAS.TRANSACCION_OK"
+msgstr "Done! Transaction completed."
+
+msgid "TIENDAS.TRANSACCION_FALLO"
+msgstr "Could not complete the transaction."
+
+msgid "TIENDAS.SIN_FONDOS"
+msgstr "Not enough Ánimos (AO)."
+
+msgid "TIENDAS.SIN_STOCK"
+msgstr "The store is out of stock for that."
+
+msgid "TIENDAS.INVENTARIO_LLENO"
+msgstr "Your pockets are full. You lost nothing."
+
+msgid "TIENDAS.SIN_ITEMS"
+msgstr "You don't have that item to sell."
+
+msgid "TIENDAS.CERRADA"
+msgstr "The store is closed. Come back during business hours."

@@ -3,124 +3,101 @@
 [ext_resource type="Script" path="res://scripts/economia/price_definition.gd" id="1_0bb7j"]
 [ext_resource type="Script" path="res://scripts/economia/economy_price_catalog.gd" id="2_en4hq"]
 
-[sub_resource type="Resource" id="Resource_4pjow"]
+[sub_resource type="Resource" id="Resource_precio_madera"]
 script = ExtResource("1_0bb7j")
-item_id = "wood"
-precio_compra = 80
-precio_venta = 30
+item_id = "madera_roble"
+precio_compra = 10
+precio_venta = 6
 
-[sub_resource type="Resource" id="Resource_uj73i"]
+[sub_resource type="Resource" id="Resource_precio_piedra"]
 script = ExtResource("1_0bb7j")
-item_id = "stone"
-precio_compra = 90
-precio_venta = 35
+item_id = "piedra_caliza"
+precio_compra = 8
+precio_venta = 5
 
-[sub_resource type="Resource" id="Resource_xkvrg"]
+[sub_resource type="Resource" id="Resource_precio_fibra"]
 script = ExtResource("1_0bb7j")
-item_id = "copper_ore"
-precio_compra = 150
-precio_venta = 60
-rareza = "poco_comun"
+item_id = "fibra_algodon"
+precio_compra = 6
+precio_venta = 4
 
-[sub_resource type="Resource" id="Resource_mdnuv"]
+[sub_resource type="Resource" id="Resource_precio_baya"]
 script = ExtResource("1_0bb7j")
-item_id = "copper_bar"
-precio_compra = 260
-precio_venta = 110
-rareza = "poco_comun"
+item_id = "baya_roja"
+precio_compra = 5
+precio_venta = 3
 
-[sub_resource type="Resource" id="Resource_fl1br"]
+[sub_resource type="Resource" id="Resource_precio_cobre"]
 script = ExtResource("1_0bb7j")
-item_id = "iron_ore"
-precio_compra = 220
-precio_venta = 90
-rareza = "poco_comun"
-
-[sub_resource type="Resource" id="Resource_unjpo"]
-script = ExtResource("1_0bb7j")
-item_id = "iron_bar"
-precio_compra = 380
-precio_venta = 160
-rareza = "raro"
-
-[sub_resource type="Resource" id="Resource_xnb0l"]
-script = ExtResource("1_0bb7j")
-item_id = "fiber"
-precio_compra = 30
-precio_venta = 12
-
-[sub_resource type="Resource" id="Resource_ykd6x"]
-script = ExtResource("1_0bb7j")
-item_id = "berry"
+item_id = "mineral_cobre"
 precio_compra = 25
-precio_venta = 10
+precio_venta = 15
+rareza = "poco_comun"
 
-[sub_resource type="Resource" id="Resource_onivj"]
+[sub_resource type="Resource" id="Resource_precio_fragmento"]
 script = ExtResource("1_0bb7j")
-item_id = "herb"
-precio_compra = 45
-precio_venta = 18
-
-[sub_resource type="Resource" id="Resource_tf2vs"]
-script = ExtResource("1_0bb7j")
-item_id = "crystal"
-precio_compra = 400
-precio_venta = 180
-rareza = "raro"
-
-[sub_resource type="Resource" id="Resource_ox0e6"]
-script = ExtResource("1_0bb7j")
-item_id = "relic"
-precio_compra = 700
-precio_venta = 320
+item_id = "fragmento_ancestral"
+precio_compra = 0
+precio_venta = 75
 rareza = "epico"
 
-[sub_resource type="Resource" id="Resource_lpoa2"]
+[sub_resource type="Resource" id="Resource_precio_herramienta"]
 script = ExtResource("1_0bb7j")
-item_id = "fish_common"
-precio_compra = 40
-precio_venta = 16
+item_id = "herramienta_basica"
+precio_compra = 50
+precio_venta = 30
 
-[sub_resource type="Resource" id="Resource_e3v4j"]
+[sub_resource type="Resource" id="Resource_precio_talisman"]
 script = ExtResource("1_0bb7j")
-item_id = "fish_rare"
-precio_compra = 120
+item_id = "talisman_ancestral"
+precio_compra = 0
+precio_venta = 200
+rareza = "epico"
+
+[sub_resource type="Resource" id="Resource_precio_pico_cobre"]
+script = ExtResource("1_0bb7j")
+item_id = "pico_cobre"
+precio_compra = 0
+precio_venta = 60
+
+[sub_resource type="Resource" id="Resource_precio_hacha_cobre"]
+script = ExtResource("1_0bb7j")
+item_id = "hacha_cobre"
+precio_compra = 0
 precio_venta = 55
-rareza = "poco_comun"
 
-[sub_resource type="Resource" id="Resource_hgv8c"]
+[sub_resource type="Resource" id="Resource_precio_caja"]
 script = ExtResource("1_0bb7j")
-item_id = "seed_basic"
-precio_compra = 20
+item_id = "caja_almacenamiento"
+precio_compra = 0
+precio_venta = 40
+
+[sub_resource type="Resource" id="Resource_precio_tela"]
+script = ExtResource("1_0bb7j")
+item_id = "tela_lino"
+precio_compra = 60
+precio_venta = 35
+
+[sub_resource type="Resource" id="Resource_precio_ensalada"]
+script = ExtResource("1_0bb7j")
+item_id = "ensalada_bayas"
+precio_compra = 15
 precio_venta = 8
 
-[sub_resource type="Resource" id="Resource_7vouj"]
+[sub_resource type="Resource" id="Resource_precio_sardina"]
 script = ExtResource("1_0bb7j")
-item_id = "tool_kit"
-precio_compra = 150
-rareza = "raro"
+item_id = "pez_sardina"
+precio_compra = 30
+precio_venta = 20
+
+[sub_resource type="Resource" id="Resource_precio_reliquia"]
+script = ExtResource("1_0bb7j")
+item_id = "reliquia_del_sello"
+precio_compra = 0
+precio_venta = 0
+rareza = "epico"
 revendible = false
-
-[sub_resource type="Resource" id="Resource_74ivv"]
-script = ExtResource("1_0bb7j")
-item_id = "gem"
-precio_compra = 550
-precio_venta = 240
-rareza = "raro"
-
-[sub_resource type="Resource" id="Resource_fvt35"]
-script = ExtResource("1_0bb7j")
-item_id = "shell"
-precio_compra = 35
-precio_venta = 14
-
-[sub_resource type="Resource" id="Resource_l6vyb"]
-script = ExtResource("1_0bb7j")
-item_id = "amber"
-precio_compra = 300
-precio_venta = 130
-rareza = "raro"
 
 [resource]
 script = ExtResource("2_en4hq")
-price_overrides = [SubResource("Resource_4pjow"), SubResource("Resource_uj73i"), SubResource("Resource_xkvrg"), SubResource("Resource_mdnuv"), SubResource("Resource_fl1br"), SubResource("Resource_unjpo"), SubResource("Resource_xnb0l"), SubResource("Resource_ykd6x"), SubResource("Resource_onivj"), SubResource("Resource_tf2vs"), SubResource("Resource_ox0e6"), SubResource("Resource_lpoa2"), SubResource("Resource_e3v4j"), SubResource("Resource_hgv8c"), SubResource("Resource_7vouj"), SubResource("Resource_74ivv"), SubResource("Resource_fvt35"), SubResource("Resource_l6vyb")]
+price_overrides = [SubResource("Resource_precio_madera"), SubResource("Resource_precio_piedra"), SubResource("Resource_precio_fibra"), SubResource("Resource_precio_baya"), SubResource("Resource_precio_cobre"), SubResource("Resource_precio_fragmento"), SubResource("Resource_precio_herramienta"), SubResource("Resource_precio_talisman"), SubResource("Resource_precio_pico_cobre"), SubResource("Resource_precio_hacha_cobre"), SubResource("Resource_precio_caja"), SubResource("Resource_precio_tela"), SubResource("Resource_precio_ensalada"), SubResource("Resource_precio_sardina"), SubResource("Resource_precio_reliquia")]
