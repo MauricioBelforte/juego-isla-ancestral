@@ -37,8 +37,7 @@ Fix: `UIManager._actualizar_pausa_mundo()` — cuando hay una capa MODAL_FULL vi
    presentación.
 2. Simulación de teclas reales sobre la ventana (pygetwindow + SendKeys) + capturas por paso:
    reproducir exactamente el flujo del usuario y verificar cada estado con visión.
-3. Cuidado con el alcance de la prueba: Catalina (NPC) camina — tras minutos de juego queda fuera
-   de rango y el F no dispara; probar con la instancia recién iniciada.
+3. Fallos de simulación NO relacionados con el diálogo: (a) a veces las teclas no llegan a la ventana (foco) y (b) el VillagerManager es PAUSABLE — con get_tree().paused activo por una capa modal, F no dispara (correcto: mundo congelado). NOTA: Catalina es ESTÁTICA (M64 sin implementar) — no atribuir fallos de prueba a movimiento del NPC sin verificarlo.
 
 ## Archivos Modificados
 | Archivo | Acción |
