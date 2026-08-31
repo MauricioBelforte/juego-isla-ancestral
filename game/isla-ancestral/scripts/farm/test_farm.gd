@@ -115,9 +115,11 @@ func _test_persistencia() -> void:
 ## arar→plantar→regar→cosechar vía API pública (la entrada por raycast es de runtime).
 func _test_controller_ruta() -> void:
 	var pos := Vector3i(306, 12, 306)
-	_check(_farm.puede_plantar_en(pos), "puede_plantar_en: vacío OK")
+	# Flujo real: tierra NO arada -> no se puede plantar todavía
+	_check(not _farm.puede_plantar_en(pos), "puede_plantar_en: tierra sin arar NO permite plantar")
 	# Arar (till) + plantar (como hace el controller al apuntar tierra arada)
 	_farm.till_tile(pos)
+	_check(_farm.puede_plantar_en(pos), "puede_plantar_en: arada OK")
 	_inv.agregar_items({"tomate": 5})
 	var tomate: CropDefinition = _farm.obtener_def(&"tomate")
 	_check(_farm.plant(tomate, pos), "plantar vía controller OK")
