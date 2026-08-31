@@ -1,5 +1,5 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
 
 # 04-Codigo.md — Módulo 40: Infraestructura
 
@@ -202,7 +202,7 @@ Formato de línea de ejemplo: `[DOM-INF-BOOT] autoloads: EventBus,Logger,GameSta
 ## 4. Notas del Agente
 
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
 
@@ -227,3 +227,29 @@ Formato de línea de ejemplo: `[DOM-INF-BOOT] autoloads: EventBus,Logger,GameSta
 - Verificar en el editor la semántica de prioridad de autoloads de la versión de Godot en uso y ajustar las prioridades numéricas si hiciera falta manteniendo el ORDEN documentado (Bootstrap siempre último).
 - Al conectar M63, confirmar el nombre real de su contrato de carga con progreso antes de fijar la firma de `SceneManager.cambiar_escena`.
 - En `plan-actual/` copiar estos archivos y actualizarlos contra el código real a medida que se implemente (firma del último agente que modifique).
+---
+
+## Implementación real (2026-08-31, Deepseek V4 Flash / Kilo - Log 298)
+
+> La plan-inicial describe el orden canónico (Bootstrap ÚLTIMO, prioridades numéricas). El proyecto real tiene un orden histórico distinto (Bootstrap en posición media). NO se reordenó (riesgo de romper dependencias vivas); la divergencia queda documentada y el test M40 valida el comportamiento real.
+
+### Archivos runtime (autoloads)
+
+res://scripts/core/
+|-- game_flow_manager.gd   # autoload GameFlowManager
+|-- scene_manager.gd       # autoload SceneManager
+|-- bootstrap.gd           # extendido (autorregistro + integridad RF11)
+|-- test_infraestructura.gd
+
+### Implementado
+
+- GameFlowManager: enum Estado (BOOT/MENU/CARGANDO/MUNDO/PAUSA/ERROR), tabla TRANSICIONES específica del prototipo, cambiar_estado() con validación, en_juego(), señal estado_cambiado.
+- SceneManager: cambiar_escena(ruta) con ResourceLoader.exists + anti doble-click, change_scene_to_file diferido (§9.20/§9.25), señales, esta_cargando() (AGENTS §8).
+- Bootstrap extendido: DOMINIOS_ESPERADOS (9), _autoregistrar_dominios() por contrato, verificar_integridad_dominios() (DOM-INF-FALTANTE vía has()), _verificar_game_flow() (BOOT->MUNDO).
+
+### Divergencias vs plan-inicial (honestas)
+
+1. Orden de autoloads no reordenado (histórico).
+2. BOOT->MUNDO directo (sin menú aún; M89/M63 completarán el flujo).
+3. GameState no duplicado: lo cubre SaveManager/M59.
+4. Escenas raíz: mundo actual = main_island.tscn (plan-inicial preveía boot/main_menu/world - pendiente M89/M63).
