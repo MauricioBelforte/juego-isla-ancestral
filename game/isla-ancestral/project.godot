@@ -52,6 +52,8 @@ DebugMenu="*res://scripts/debug/debug_menu.gd"
 CatalogoTiendas="*res://scripts/shops/catalogo_tiendas.gd"
 Farm="*res://scripts/farm/farm_service.gd"
 Fishing="*res://scripts/fishing/fishing_manager.gd"
+GameFlowManager="*res://scripts/core/game_flow_manager.gd"
+SceneManager="*res://scripts/core/scene_manager.gd"
 
 [display]
 

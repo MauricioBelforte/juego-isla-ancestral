@@ -1,5 +1,5 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo
 
 # 05-Checklist.md — Módulo 35: Minería
 
@@ -183,3 +183,23 @@
 - [ ] Test: 24 h simuladas con reloj M30 sin desincronizar timers [M]
 - [ ] Profiler en cueva con 50 vetas activas [C]
 - [ ] Recorrido cozy completo: cantera, cueva norte y Templo sin fallos [C]
+
+## Nota de diseño pendiente (2026-08-31, Deepseek V4 Flash / Kilo)
+
+> ⚠️ **DECISIÓN DE DISEÑO PENDIENTE DEL USUARIO — leer antes de implementar.**
+>
+> El terreno voxel de la Isla Raíz (M08) es excavable de base: sin protección, el jugador
+> podría agujerear spawn/ruina (M25)/playa desde el arranque. El usuario evalúa dos caminos:
+>
+> 1. **Capa superficial indestructible** (opción A): regla de validez en la destrucción voxel
+>    (M08/M13) que impida excavar por encima de cierta profundidad + rectángulos protegidos
+>    (spawn, ruina, Catalina). El cavar túneles reales queda gated detrás de esta protección.
+> 2. **Solo minería en nodos/vetas** (opción B): minería como interacción con nodos de mineral
+>    (estilo M15 ResourceSpawner con spawns en profundidad/interiores M25), sin tocar el sistema
+>    de destrucción voxel.
+>
+> Recomendación del agente: escalonar — implementar B primero (reutiliza M15, riesgo 0 para la
+> isla) y dejar A como subsistema de M08 a analizar con el diseño delante. NO implementar
+> destrucción voxel hasta que el usuario resuelva la decisión.
+>
+> Relación: depende de M08 ✅, M13 ✅; desbloquea M71 (progresión minera) y alimenta M93 (mining.json ya definido).
