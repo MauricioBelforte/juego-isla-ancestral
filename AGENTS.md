@@ -232,6 +232,7 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 # Log NN: Descripcion breve
 
 **Fecha:** YYYY-MM-DD
+**Hora:** HH:MM
 **Modelo:** [Nombre del modelo]
 **Plataforma:** [Nombre de la plataforma]
 
@@ -244,6 +245,8 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 ## Archivos Modificados/Creados
 [Lista]
 ```
+
+> **Regla de Hora:** el campo `**Hora:**` debe incluir la hora real de creación del log en formato 24h (`HH:MM`). Usar la hora del sistema al momento de escribir el archivo.
 
 ### 6.3 Reglas de Seguridad
 

@@ -484,32 +484,49 @@ Esto permite investigar M45, M64 o M97 con anticipacion sin desordenar el orden 
 
 Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado. `CHECKLIST-GLOBAL.md` continua siendo la fuente detallada de progreso; esta tabla es la vista de coordinacion del orden.
 
-| Orden | Modulo | Dificultad | Vision | Estado | Agente | Entrada | Salida | Ultima actividad |
-|---:|---|:---:|:---:|---|---|---|---|---|
-| 1 | M04 Game Engine | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
-| 2 | M05 Lenguaje y Programacion | 3 | V0 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
-| 3 | M07 Arquitectura General | 5 | V0 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
-| 4 | M08 Mundo Voxel | 5 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
-| 5 | M10 Generacion del Mundo | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
-| 6 | M09 Terreno y Geografia | 4 | V2 | ✅ COMPLETADO | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
-| 7 | M11 Personaje del Jugador | 4 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | F2 | CharacterBody3D + WASD + gravedad + colision suelo + pivot camara + edicion E/Q + movimiento relativo a camara | 2026-08-26 |
-| 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
-| 9 | M13 Herramientas | 4 | V2 | 🟡 Liberado c/integraciones | Hy3 (Kilo) — relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracción progresiva + highlight + HUD durabilidad + sonido/partículas; 65/102; pendientes con dueño (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
-| 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos (excepcion doc.: M11 pendiente, sin dependencia de jugador; pickup post-M11) | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 210) | Autoload Inventario + ISaveProvider | 2026-08-26 |
-| 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | — | M14 | Recurso recolectable | — |
-| 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | — | Estado minimo | Save/load validado | — |
-| 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | — | F3 + M14/M15/M59 | GO/NO-GO | — |
-| 14 | M61 Rendimiento | 5 | V0 | 🟡 Liberado — núcleo de presupuestos (norma transversal) | Deepseek V4 Flash (Kilo) | M08 | BudgetProfile + budgets.json (16,7 ms, 7 categorías) + ValidateBudget (gate CI, tol 10 %) + tests 0 fallos (Log 255). Pendiente: bench_scene_a.tscn (V2), gate CI M116, integración categorías en módulos | 2026-08-30 02:35 |
-| 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | — | F4 | Slice aprobado | — |
-| — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
-| — | M21 Diálogos | 4 | V1 | 🟡 Liberado — núcleo + WorldState (relevo autorizado) | Deepseek V4 Flash (Kilo) — relevo de Hy3 (Kilo) | M19 ✅, M21 núcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). Integración M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |
-| — | M57 Interfaz de Control | 2 | V0/V1 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash (Kilo) | M04 ✅ | ControlInput autoload (capa acciones, detección dispositivo + señal, remapeo con conflictos, dead zones/sensibilidad/inversión/vibración, persistencia JSON atómica) + test 0 fallos (Log 254). Checklist 86/119 + 1 [?]. Pendientes: iconografía (arte), PromptButton M53, menú remapeo M46, migración gameplay M06/M13 | 2026-08-30 02:30 |
-| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado — núcleo lógico | Deepseek V4 Flash (Kilo) | M53 (UI, 🔵 en curso) | TutorialManager autoload (4 capítulos, triggers de señal, revalidación, estados, persistencia M59) + test 0 fallos (Log 259). Pendiente: UI burbujas/marcadores (M53, V2), triggers mundo/acción, consejos, watchdog | 2026-08-30 03:10 |
-| — | M112 Testing Automático | 3 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M111 ✅ | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
-| — | M102 Bug Tracking | 1 | V0 | ✅ COMPLETADO | ox-alpha (Cline) | M101 doc ✅ | GitHub Issues: plantilla, labels script, workflow métricas, guía, dashboard; 140/140 items | 2026-08-29 02:30 |
-| — | M103 Logging | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M04/M07 ✅ | Logger autoload GameLogger + LogRotator + Sanitizer + LogExporter + logging_config.tres, verificado headless Godot 4.7.2 (14/14). Pendiente: M110/M122. Log 236 | 2026-08-29 |
-| — | M104 Analytics | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M103 ✅ | AnalyticsDirector autoload + RF1-RF7 + opt-out + batch JSON offline + agregado histórico; test 18/18, regresión 8/8. Pendiente: M91/M110/M76. Log 237 | 2026-08-29 |
-| — | M105 Telemetría de Gameplay | 2 | V0 | 🟡 Liberado — núcleo implementado | ox-alpha (Cline) | M104 ✅ | TelemetryDirector (sin class_name) + opt-in GDPR + 17 eventos + métricas + abandono/zonas; test 16/16, regresión M103 14/14 + M104 18/18. Reescrito sobre arquitectura real. Pendiente: hooks gameplay, UI M91/M53, envío remoto M76. Log 243 | M104 ✅ | 2026-08-29 |
+### Flujo para modelos nuevos (SIEMPRE empezar en CHECKLIST-GLOBAL.md)
+
+1. **Leer `CHECKLIST-GLOBAL.md`** → buscar tu nombre en la columna **Recom**.
+2. **Elegir un módulo** `🟢 Disponible` que te corresponda por modelo.
+3. **Verificar acá** (tabla 17) que el módulo esté habilitado (fase, dependencias resueltas, visión si aplica).
+4. **Reservar** → actualizar: `CHECKLIST-GLOBAL.md` (`Agente actual` + `Estado`), `05-Checklist.md` del módulo, esta tabla, y `Mensajes entre modelos/ESTADO-PARALELO.md`.
+5. **Trabajar** → documentación primero, código, tests (AGENTS.md §13-14).
+6. **Liberar** → actualizar los 4 registros al mismo tiempo.
+
+> ⚠️ **No empezar acá.** Esta tabla es para verificar orden y dependencias, NO para elegir módulo. La fuente de qué módulo te corresponde es `CHECKLIST-GLOBAL.md` (columna Recom). Si trabajás un módulo que no te corresponde, otro modelo que sí puede hacerlo bien se queda sin tarea.
+
+> **Columna "Recomendado":** indica qué modelo es mejor candidato para trabajar cada módulo, basándose en sus fortalezas comprobadas. No es obligatorio seguirla, pero sirve de guía cuando un modelo se incorpora y busca tarea.
+
+| Orden | Modulo | Dificultad | Vision | Estado | Recomendado | Agente | Entrada | Salida | Ultima actividad |
+|---:|---|:---:|:---:|---|---|---|---|---|---|
+| 1 | M04 Game Engine | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Fase 0 completa | Proyecto Godot ejecutable, Godot 4.7.2, sin errores de motor | 2026-08-26 |
+| 2 | M05 Lenguaje y Programacion | 3 | V0 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | Contrato de M04 | Convenciones GDScript aplicadas, tipado estatico | 2026-08-26 |
+| 3 | M07 Arquitectura General | 5 | V0 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M04/M05 | EventBus(9 dominios) + ServiceRegistry + Bootstrap + test 6/6 PASS | 2026-08-26 |
+| 4 | M08 Mundo Voxel | 5 | V2 | ✅ Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | F1 aprobada | VoxelBoxMover + terreno OK + edicion E/Q OK | 2026-08-26 |
+| 5 | M10 Generacion del Mundo | 5 | V1 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08 | world_generator.gd + IslandGenerator + semilla 42 + 21 bloques con colores | 2026-08-26 |
+| 6 | M09 Terreno y Geografia | 4 | V2 | ✅ COMPLETADO | MiMo V2.5 | MiMo V2.5 (OpenCode) | M08/M10 | Isla Aurora: forma definida, playa visible, biomas (beach/grass/forest/mountain/snow), spawn en playa | 2026-08-26 |
+| 7 | M11 Personaje del Jugador | 4 | V2 | ✅ Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | F2 | CharacterBody3D + WASD + gravedad + colision suelo + pivot camara + edicion E/Q + movimiento relativo a camara | 2026-08-26 |
+| 8 | M12 Camara | 2 | V2 | ✅ Completado | MiMo V2.5 | MiMo V2.5 (OpenCode) | M11 | CameraFollowing: rotacion mouse + zoom scroll + colision terreno + GameSettings (sensibilidad + invert Y) | 2026-08-26 |
+| 9 | M13 Herramientas | 4 | V2 | 🟡 Liberado c/integraciones | Hy4 | Hy3 (Kilo) — relevo autorizado por el usuario | M08+M11 | Fase 3 cerrada: extracción progresiva + highlight + HUD durabilidad + sonido/partículas; 65/102; pendientes con dueño (M16/M17/M33/M35/M46/M59) | 2026-08-28 23:00 |
+| 10 | M14 Inventario | 3 | V1 | 🔵 Reservado - nucleo de datos | GLM 5.3 | ox-alpha (Cline) | F3 parcial / hallazgos H1-H8 (log 210) | Autoload Inventario + ISaveProvider | 2026-08-26 |
+| 11 | M15 Recursos | 3 | V1 | 🟢 Bloqueado por M14 | GLM 5.3 | — | M14 | Recurso recolectable | — |
+| 12 | M59 Guardado | 5 | V0 | 🟢 Bloqueado por M07/M14 | GLM 5.3 | — | Estado minimo | Save/load validado | — |
+| 13 | M137 Prototipo | 5 | V2 | 🟢 Bloqueado por dependencias | Hy4 + MiMo V2.5 | — | F3 + M14/M15/M59 | GO/NO-GO | — |
+| 14 | M61 Rendimiento | 5 | V0 | 🟡 Liberado — núcleo de presupuestos | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M08 | BudgetProfile + budgets.json (16,7 ms, 7 categorías) + ValidateBudget (gate CI, tol 10 %) + tests 0 fallos (Log 255). Pendiente: bench_scene_a.tscn (V2), gate CI M116, integración categorías en módulos | 2026-08-30 02:35 |
+| 15 | M138 Vertical Slice | 5 | V2 | 🟢 Bloqueado por M137 | Hy4 | — | F4 | Slice aprobado | — |
+| — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
+| — | M21 Diálogos | 4 | V1 | 🟡 Liberado — núcleo + WorldState | Hy3 | Deepseek V4 Flash (Kilo) — relevo de Hy3 (Kilo) | M19 ✅, M21 núcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). Integración M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |
+| — | M57 Interfaz de Control | 2 | V0/V1 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M04 ✅ | ControlInput autoload (capa acciones, detección dispositivo + señal, remapeo con conflictos, dead zones/sensibilidad/inversión/vibración, persistencia JSON atómica) + test 0 fallos (Log 254). Checklist 86/119 + 1 [?]. Pendientes: iconografía (arte), PromptButton M53, menú remapeo M46, migración gameplay M06/M13 | 2026-08-30 02:30 |
+| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado — núcleo lógico | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M53 (UI, 🔵 en curso) | TutorialManager autoload (4 capítulos, triggers de señal, revalidación, estados, persistencia M59) + test 0 fallos (Log 259). Pendiente: UI burbujas/marcadores (M53, V2), triggers mundo/acción, consejos, watchdog | 2026-08-30 03:10 |
+| — | M31 Ciclo Día/Noche | 3 | V1/V2 | 🟡 Liberado — iter 1 núcleo | GLM 5.3 | GLM (Kilo) | M29 ✅ | DayNightCycle escena (5 franjas, sol/luna, anti-oscuridad 0.15, `EventBus.time.fase_cambio`), test 12/0 OK (Log 302). 16 [?] honestos (curvas .tres, faroles, M45/M46, M49/M52/M58, QA M114, capturas V4) | 2026-08-31 06:50 |
+| — | M16 Crafting | 3 | V0/V1 | 🟡 Liberado — iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 ✅ M15 ✅ M29 ✅ M93 ✅ | Núcleo iter 1-2 (Deepseek) + iter 3 (GLM, Logs 303/304): RF5 estacional, pergaminos M14, SFX/VFX procedural, preview RF9, test season_changed. Test 0 fallos. 6 [?] con dueño cross-module | 2026-08-31 07:55 |
+| — | M15 Recursos | 3 | V1 | 🟡 Liberado — iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 ✅ M11 ✅ M13 ✅ M29 ✅ | Núcleo iter 1-2 (Deepseek) + iter 3 (GLM, Log 305): persistencia ISaveProvider, respawn con M29, helper `recibir_golpe_en_nodo`. Test 0 fallos. 5 [?] con dueño (cableado M13→M15, meshes, área, persistencia spawner, test dia_cambio) | 2026-08-31 08:25 |
+| — | M112 Testing Automático | 3 | V0 | ✅ COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M111 ✅ | GdUnit4 v6.2.1, 187 tests headless (3 runs 0 flaky), CI testing.yml | 2026-08-28 20:30 |
+| — | M102 Bug Tracking | 1 | V0 | ✅ COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M101 doc ✅ | GitHub Issues: plantilla, labels script, workflow métricas, guía, dashboard; 140/140 items | 2026-08-29 02:30 |
+| — | M103 Logging | 2 | V0 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M04/M07 ✅ | Logger autoload GameLogger + LogRotator + Sanitizer + LogExporter + logging_config.tres, verificado headless Godot 4.7.2 (14/14). Pendiente: M110/M122. Log 236 | 2026-08-29 |
+| — | M104 Analytics | 2 | V0 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M103 ✅ | AnalyticsDirector autoload + RF1-RF7 + opt-out + batch JSON offline + agregado histórico; test 18/18, regresión 8/8. Pendiente: M91/M110/M76. Log 237 | 2026-08-29 |
+| — | M105 Telemetría de Gameplay | 2 | V0 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash | ox-alpha (Cline) | M104 ✅ | TelemetryDirector (sin class_name) + opt-in GDPR + 17 eventos + métricas + abandono/zonas; test 16/16, regresión M103 14/14 + M104 18/18. Reescrito sobre arquitectura real. Pendiente: hooks gameplay, UI M91/M53, envío remoto M76. Log 243 | M104 ✅ | 2026-08-29 |
+| — | M107 Backups | 1 | V0 | 🔵 En curso — reservado | Deepseek V4 Flash | ox-alpha (Cline) | M59 🟡 (núcleo OK) | Scripts PS backup/verify/restore/registro de tarea + backup.yml (guard secrets) + docs retención/restauración/desastres. Adaptación a rutas reales (sin disco E:, destino D:\Backups) | 2026-08-31 |
 
 ### Bloque `Reserva actual` obligatorio en cada checklist de módulo
 
