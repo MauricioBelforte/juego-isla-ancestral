@@ -117,7 +117,7 @@ func presionar_interact() -> void:
 	if _objetivo_actual == null:
 		# Sin candidato: no genera error ni castigo (regla cozy RF8).
 		return
-	var obj: IInteractable = _objetivo_actual
+	var obj = _objetivo_actual  # duck-typed (IInteractable extends Resource, no Node)
 	var estado_obj: int = obj.obtener_estado()
 	if estado_obj != EstadoInteractuable.DISPONIBLE:
 		# Candidato atenuado: feedback respetuoso sin despacho (RF4, RF22).

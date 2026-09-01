@@ -9,7 +9,7 @@
 - Dificultad: 4
 - Vision: V1
 - Entrada: M19 ✅ (hook funcional); núcleo M21 implementado por Hy3 (2026-08-29); iter 2-7 previas (Hy3/Kilo + Deepseek)
-- Salida: iter 8 cierra 3 [?] (RF7 clima, F.11 condición clima, H.16 validación de claves en runtime). +3 [x] → 74/139 + 9 [?]. Archivos: `scripts/dialogos/dialog_graph_validator.gd` (allowlist canonica), `dialogue_manager.gd` (gate [VAL-DGV] con allowlist), `validate_all_dialogues.gd` (CLAVES_MUNDO desde validador), `test_clima_dialogo_m21.gd` (nuevo, 0 fallos).
+- Salida: iter 8 cierra 3 [?] (RF7 clima, F.11 condición clima, H.16 validación de claves en runtime). +5 [x] → 76/139 + 7 [?]. Archivos: `scripts/dialogos/dialog_graph_validator.gd` (allowlist canonica), `dialogue_manager.gd` (gate [VAL-DGV] con allowlist), `validate_all_dialogues.gd` (CLAVES_MUNDO desde validador), `test_clima_dialogo_m21.gd` (nuevo, 0 fallos).
 - Fecha cierre iter 8: 2026-08-31 23:55
 
 # 05-Checklist.md — Módulo 21: Diálogos
@@ -163,7 +163,7 @@
 
 - [ ] Cache de grafos cargados con descarte LRU por limite de memoria [M]
 - [ ] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S]
-- [?] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S]
+- [x] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S] — iter 9 (Hy3/WorkBuddy): _combinar_estado usa ws.get_snapshot(claves) en vez de N get_value
 - [x] UI oculta con visibility, sin procesos en idle cuando no hay dialogo [S]
 - [ ] Fuentes del modulo M87 con atlas compartido, sin reimport por nodo [S]
 - [ ] Load de JSON asincrono con carga diferida por zona del mapa [M]
@@ -192,7 +192,7 @@
 - [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]
 - [x] Test de salto rapido: tipeo, linea, nodo y salto completo (test_skip_m21.gd: skip hasta FIN, se detiene en OPCIONES, efectos aplicados, choose_option tras skip) 0 fallos (Log 309) [S]
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M]
-- [?] Test de validacion: 5 grafos invalidos propositados detectados en editor [M]
+- [x] Test de validacion: 5 grafos invalidos propositados detectados en editor [M] — iter 9 (Hy3/WorkBuddy): test_validacion_5_invalidos_m21.gd (huérfano/operador/clave/next/goto) 0 fallos
 - [x] Test de integracion con un NPC del modulo M19 interactuable [M]
 - [x] Verificacion de 0 errores en consola durante una partida de prueba [S]
 - [x] Test de reinicio del diálogo tras completarlo (test_dialogos.gd: _test_reinicio_dialogo — 0 fallos) [S]

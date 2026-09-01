@@ -242,9 +242,17 @@ func _combinar_estado(nodo: DialogueNode = null) -> Dictionary:
 					var clave_op: String = str(cond.get("clave", ""))
 					if clave_op != "" and not claves_a_resolver.has(clave_op):
 						claves_a_resolver.append(clave_op)
-	for clave in claves_a_resolver:
-		if not estado.has(clave):
-			estado[clave] = ws.get_value(clave)
+	# M21 (iter 9 / Hy3 WorkBuddy): evaluacion en lote con get_snapshot (una sola
+	# lectura de WorldStateService en vez de N llamadas get_value). Cierra [?] F/I.9.
+	if ws.has_method("get_snapshot"):
+		var snap: Dictionary = ws.get_snapshot(claves_a_resolver)
+		for clave in snap.keys():
+			if not estado.has(clave):
+				estado[clave] = snap[clave]
+	else:
+		for clave in claves_a_resolver:
+			if not estado.has(clave):
+				estado[clave] = ws.get_value(clave)
 	return estado
 
 func avance_evento() -> void:
