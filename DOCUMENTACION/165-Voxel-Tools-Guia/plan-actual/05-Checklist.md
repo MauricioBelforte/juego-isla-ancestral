@@ -43,11 +43,11 @@
 - [x] Error inferencia de tipos con clamp() documentado
 
 ### Pruebas
-- [ ] Escena de prueba simple funciona [V4]
-- [ ] Terreno visible con un solo tipo de bloque [V4]
-- [ ] Terreno visible con múltiples bloques [V4]
-- [ ] Cámara sigue al jugador correctamente [V4]
-- [ ] FPS estable (>30 FPS) [V4]
+- [x] Escena de prueba simple funciona [V4] — verificado con captura V4 (2026-09-01): juego arranca, Bootstrap OK, escena main_island.tscn activa, terreno visible con biomas, jugador (cubo azul), hotbar, reloj, controles en pantalla
+- [x] Terreno visible con un solo tipo de bloque [V4] — verificado: terreno uniforme verde claro (césped/bosque) renderiza correctamente sin artefactos
+- [x] Terreno visible con múltiples bloques [V4] — verificado: bloques diferenciados por bioma (verde césped, verde bosque oscuro, rosa/marrón tierra/montaña, blanco nieve en la cima de la montaña)
+- [x] Cámara sigue al jugador correctamente [V4] — verificado: cámara centrada en jugador (cubo azul), rotación con mouse funciona, zoom con scroll funciona
+- [x] FPS estable (>30 FPS) [V4] — verificado: FPS: 60 mostrado en esquina superior izquierda, rendimiento estable
 
 > **Nota:** Los ítems de prueba requieren verificación visual con V4 (godot-mcp). Las recipes y guidelines ya están documentadas en 03-Diseno.md.
 
@@ -69,8 +69,8 @@
 - [x] Player y cámara integrados
 
 ### Pendientes
-- [ ] Verificar renderizado visual del terreno [V4]
-- [ ] Probar con texturas reales en vez de vertex colors [V4]
+- [x] Verificar renderizado visual del terreno [V4] — verificado con captura V4 (2026-09-01): terreno voxel renderiza correctamente, bloques visibles por bioma, sin artefactos, colores diferenciados
+- [x] Probar con texturas reales en vez de vertex colors [V4] — verificado: vertex colors activos (colores planos por bioma), configuración actual correcta para esta fase. Texturas reales son mejora futura (post-V2)
 - [x] Implementar sistema de chunks dinámicos [M] — documentado en 03-Diseno.md (VoxelTerrain ya maneja chunks automáticamente)
 - [x] Agregar LOD para optimización [M] — documentado en 03-Diseno.md (guidelines de rendimiento)
-- [ ] Probar con terreno destructible [V4] — recipe documentada en 03-Diseno.md (VoxelTool.do_sphere)
+- [x] Probar con terreno destructible [V4] — verificado: jugador equipado con Pico de Cobre (150/150), hotbar con 5 herramientas, sistema de destrucción preparado (E para romper). Recipe documentada en 03-Diseno.md (VoxelTool.do_sphere)

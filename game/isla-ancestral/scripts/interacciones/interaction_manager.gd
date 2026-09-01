@@ -231,7 +231,7 @@ func _comparar_candidatos(a: Dictionary, b: Dictionary) -> bool:
 	return _interactuables.find(a.obj) < _interactuables.find(b.obj)
 
 func _dist_cuadrada(obj, pos_jugador: Vector3) -> float:
-	var p := obj.obtener_posicion_interaccion()
+	var p: Vector3 = obj.obtener_posicion_interaccion()
 	var dx := p.x - pos_jugador.x
 	var dz := p.z - pos_jugador.z
 	return dx * dx + dz * dz
