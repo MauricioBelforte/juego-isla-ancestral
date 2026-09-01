@@ -1,6 +1,7 @@
-# Log 228: M25 Ruinas — ruina legible validada con vision
+﻿# Log 228: M25 Ruinas — ruina legible validada con vision
 
 **Fecha:** 2026-08-29
+**Hora:** 01:35
 **Modelo:** Hy3
 **Plataforma:** Kilo
 

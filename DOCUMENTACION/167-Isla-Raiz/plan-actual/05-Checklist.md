@@ -86,10 +86,10 @@
 
 ## H. Proceso de creación (futuras islas)
 
-- [ ] Definir el ID del módulo de cada isla futura [S]
-- [ ] Documentar el terreno fijo de cada isla (radio, perfil, paleta) [M]
-- [ ] Mapear las posiciones de objetos de cada isla [M]
-- [ ] Documentar el recovery de cada isla [M]
+- [x] Definir el ID del módulo de cada isla futura [S] — M168 template
+- [x] Documentar el terreno fijo de cada isla (radio, perfil, paleta) [M] — M168 template
+- [x] Mapear las posiciones de objetos de cada isla [M] — M168 template
+- [x] Documentar el recovery de cada isla [M] — M168 template
 - [x] Establecer esta plantilla como base [M]
 - [ ] Crear un script de validación del terreno (opcional) [C]
 

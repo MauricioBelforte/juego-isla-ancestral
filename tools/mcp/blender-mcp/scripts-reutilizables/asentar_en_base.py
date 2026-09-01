@@ -30,18 +30,26 @@ Z_OBJ = float(sys.argv[2]) if len(sys.argv) > 2 else 0.05
 PLANTILLA = """
 import bpy
 from mathutils import Vector
+
+def zmin_real(o):
+    """E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
+    en objetos rotados -> falso hundido -> asentar SOBREELVA el conjunto."""
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ v.co).z for v in o.data.vertices)
+
 obs = [o for o in bpy.data.objects
        if o.type == 'MESH' and o.name.startswith('@@PREF@@')]
 if not obs:
     print('SIN OBJETOS con prefijo @@PREF@@')
 else:
     bpy.context.view_layer.update()
-    zmin_actual = min(min((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
+    zmin_actual = min(zmin_real(o) for o in obs)
     delta = @@Z@@ - zmin_actual
     for o in obs:
         o.location.z += delta
     bpy.context.view_layer.update()
-    zmin_nuevo = min(min((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
+    zmin_nuevo = min(zmin_real(o) for o in obs)
     if abs(delta) < 1e-4:
         aviso = 'YA ESTABA ASENTADO'
     elif zmin_nuevo > 0.05:

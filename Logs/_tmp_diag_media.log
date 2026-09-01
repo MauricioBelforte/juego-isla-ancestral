@@ -1,0 +1,256 @@
+
+=== antorcha_mano_lowpoly_media.blend ===
+  SM_Antorcha_M_Madera_Antorcha          nv=20  z zmin=0.0450..zmax=0.6450  tocando=toca=10  footprint=fp=0.055x0.058
+  SM_Antorcha_M_Tela_Carbonizada         nv=32  z zmin=0.6075..zmax=0.8384  tocando=toca=10  footprint=fp=0.107x0.112
+  SM_Antorcha_M_Brasa_Antorcha           nv=12  z zmin=0.8050..zmax=0.8650  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Antorcha_M_Cordel_Antorcha          nv=40  z zmin=0.5790..zmax=0.6410  tocando=toca=10  footprint=fp=0.080x0.084
+
+=== pico_hierro_lowpoly_media.blend ===
+  SM_PicoHierro_M_Madera_Mango           nv=32  z zmin=0.0450..zmax=0.9418  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_PicoHierro_M_Hierro_Pico            nv=56  z zmin=0.7393..zmax=0.8998  tocando=toca=8  footprint=fp=0.084x0.084
+  SM_PicoHierro_M_Cuero_Atadura          nv=40  z zmin=0.7278..zmax=0.8058  tocando=toca=10  footprint=fp=0.084x0.088
+
+=== pico_piedra_lowpoly_media.blend ===
+  SM_PicoPiedra_M_Madera_Mango           nv=32  z zmin=0.0450..zmax=0.9418  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_PicoPiedra_M_Piedra_Pico            nv=40  z zmin=0.7998..zmax=0.9038  tocando=toca=2  footprint=fp=0.000x0.100
+  SM_PicoPiedra_M_Cuero_Atadura          nv=40  z zmin=0.7218..zmax=0.8118  tocando=toca=10  footprint=fp=0.084x0.088
+
+=== cristal_ancestral_lowpoly_media.blend ===
+  SM_Cristal_M_Pedestal_Cristal          nv=12  z zmin=0.0450..zmax=0.2450  tocando=toca=6  footprint=fp=0.554x0.640
+  SM_Cristal_M_Cristal_Ancestral_Central nv=43  z zmin=0.0450..zmax=0.6650  tocando=toca=7  footprint=fp=0.000x0.000
+  SM_Cristal_M_Cristal_Ancestral_Claro   nv=125  z zmin=0.2264..zmax=0.5512  tocando=toca=2  footprint=fp=0.390x0.019
+  SM_Cristal_M_Talla_Cristal             nv=48  z zmin=0.1450..zmax=0.1850  tocando=toca=24  footprint=fp=0.720x0.720
+
+=== monton_ramas_lowpoly_media.blend ===
+  SM_Monton_M_Corteza_Rama_Madera_Rama   nv=308  z zmin=0.0450..zmax=0.1786  tocando=toca=3  footprint=fp=0.628x0.206
+
+=== nido_cocos_lowpoly_media.blend ===
+  SM_Coco_M_Coco_Fibra                   nv=139  z zmin=0.1520..zmax=0.8486  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Coco_M_Coco_Oscuro                  nv=139  z zmin=0.1454..zmax=0.8372  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Coco_M_Hoja_Seca                    nv=16  z zmin=0.0450..zmax=0.1150  tocando=toca=6  footprint=fp=1.687x1.159
+  SM_Coco_M_Hoja_Palmera                 nv=55  z zmin=0.1100..zmax=0.1700  tocando=toca=23  footprint=fp=1.701x1.701
+  SM_Coco_M_Coco_Ojos                    nv=402  z zmin=0.4836..zmax=0.8744  tocando=toca=2  footprint=fp=0.024x0.022
+
+=== piedra_afilar_lowpoly_media.blend ===
+  SM_Piedra_M_Piedra_Afilar              nv=9  z zmin=0.0450..zmax=0.0858  tocando=toca=4  footprint=fp=0.187x0.084
+  SM_Piedra_M_Piedra_Afilar_Osc          nv=8  z zmin=0.0450..zmax=0.0470  tocando=toca=8  footprint=fp=0.012x0.007
+
+=== roca_comun_lowpoly_media.blend ===
+  SM_Roca_M_Roca                         nv=54  z zmin=0.0450..zmax=1.4973  tocando=toca=2  footprint=fp=1.291x0.667
+
+=== roca_pedernal_lowpoly_media.blend ===
+  SM_Roca_M_Pedernal                     nv=162  z zmin=0.0451..zmax=3.6647  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Roca_M_Pedernal_C                   nv=12  z zmin=0.0450..zmax=0.8274  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== tronco_caido_lowpoly_media.blend ===
+  SM_Tronco_M_Corteza_Tronco_Madera_Corte nv=83  z zmin=0.1106..zmax=0.9086  tocando=toca=2  footprint=fp=0.281x0.430
+  SM_Tronco_M_Corteza_Tronco             nv=64  z zmin=0.1274..zmax=0.9586  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Tronco_M_Hojarasca                  nv=42  z zmin=0.0450..zmax=0.0800  tocando=toca=21  footprint=fp=1.908x1.508
+
+=== veta_cobre_lowpoly_media.blend ===
+  SM_Roca_M_Roca_Cobre                   nv=42  z zmin=0.0450..zmax=1.1726  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Roca_M_Cristal_Cobre                nv=90  z zmin=0.7414..zmax=2.1442  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Roca_M_Cristal_Cobre_Oscuro         nv=90  z zmin=0.6802..zmax=2.0232  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== veta_hierro_lowpoly_media.blend ===
+  SM_Veta_M_Cristal_Hierro               nv=96  z zmin=0.0450..zmax=0.9578  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Veta_M_Cristal_Hierro_Oscuro        nv=64  z zmin=0.0960..zmax=1.0199  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Veta_M_Roca_Hierro                  nv=42  z zmin=0.0450..zmax=1.1243  tocando=toca=16  footprint=fp=2.309x2.002
+
+=== veta_oro_lowpoly_media.blend ===
+  SM_VetaOro_M_Cristal_Oro               nv=152  z zmin=0.0838..zmax=1.7867  tocando=toca=2  footprint=fp=0.140x0.092
+  SM_VetaOro_M_Cristal_Oro_Osc           nv=114  z zmin=0.1597..zmax=1.6317  tocando=toca=2  footprint=fp=0.514x0.047
+  SM_VetaOro_M_Roca_Oro                  nv=42  z zmin=0.0450..zmax=1.7109  tocando=toca=16  footprint=fp=1.780x1.709
+
+=== cuerda_enrollada_lowpoly_media.blend ===
+  SM_Cuerda_M_Cuerda_Claro               nv=208  z zmin=0.0450..zmax=0.1550  tocando=toca=26  footprint=fp=0.518x0.539
+  SM_Cuerda_M_Cuerda_Oscuro              nv=199  z zmin=0.0450..zmax=0.1350  tocando=toca=25  footprint=fp=0.478x0.400
+
+=== hacha_piedra_lowpoly_media.blend ===
+  SM_Hacha_M_Piedra_Hacha                nv=26  z zmin=0.0740..zmax=0.1380  tocando=toca=2  footprint=fp=0.050x0.000
+  SM_Hacha_M_Madera_Hacha                nv=124  z zmin=0.0584..zmax=0.1536  tocando=toca=4  footprint=fp=0.133x0.000
+  SM_Hacha_M_Cuero_Hacha                 nv=120  z zmin=0.0450..zmax=0.1670  tocando=toca=2  footprint=fp=0.093x0.000
+
+=== lingote_metal_lowpoly_media.blend ===
+  SM_Lingote_M_Lingote_Cobre             nv=8  z zmin=0.0450..zmax=0.1050  tocando=toca=4  footprint=fp=0.340x0.120
+  SM_Lingote_M_Lingote_Marca             nv=24  z zmin=0.1050..zmax=0.1090  tocando=toca=24  footprint=fp=0.182x0.054
+
+=== tablon_madera_lowpoly_media.blend ===
+  SM_Tablon_M_Tablon_A                   nv=8  z zmin=0.0450..zmax=0.1050  tocando=toca=4  footprint=fp=1.206x0.222
+  SM_Tablon_M_Tablon_B                   nv=8  z zmin=0.1150..zmax=0.1750  tocando=toca=4  footprint=fp=1.210x0.263
+  SM_Tablon_M_Tablon_C                   nv=8  z zmin=0.1850..zmax=0.2450  tocando=toca=4  footprint=fp=1.212x0.304
+  SM_Tablon_M_Veta_1                     nv=8  z zmin=0.1055..zmax=0.1105  tocando=toca=8  footprint=fp=1.020x0.063
+  SM_Tablon_M_Veta_2                     nv=8  z zmin=0.1755..zmax=0.1805  tocando=toca=8  footprint=fp=1.019x0.098
+  SM_Tablon_M_Veta_3                     nv=8  z zmin=0.2455..zmax=0.2505  tocando=toca=8  footprint=fp=1.017x0.133
+
+=== altar_ritual_lowpoly_media.blend ===
+  SM_Altar_M_Piedra_Altar_Osc            nv=104  z zmin=0.0450..zmax=0.7350  tocando=toca=4  footprint=fp=1.200x0.900
+  SM_Altar_M_Piedra_Altar                nv=40  z zmin=0.1650..zmax=0.6550  tocando=toca=4  footprint=fp=1.000x0.750
+  SM_Altar_M_Talla_Altar                 nv=144  z zmin=0.6894..zmax=0.7206  tocando=toca=48  footprint=fp=1.018x1.018
+  SM_Altar_M_Brasa_Altar                 nv=12  z zmin=0.4750..zmax=0.5950  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== antorcha_pared_lowpoly_media.blend ===
+  SM_AntorchaP_M_Hierro_AntorchaP        nv=76  z zmin=0.0450..zmax=0.3650  tocando=toca=4  footprint=fp=0.160x0.020
+  SM_AntorchaP_M_Madera_AntorchaP        nv=16  z zmin=0.2334..zmax=0.4334  tocando=toca=8  footprint=fp=0.040x0.040
+  SM_AntorchaP_M_Tela_AntorchaP          nv=20  z zmin=0.3134..zmax=0.4134  tocando=toca=10  footprint=fp=0.076x0.080
+  SM_AntorchaP_M_Brasa_AntorchaP         nv=12  z zmin=0.3998..zmax=0.4678  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== cofre_ancestral_lowpoly_media.blend ===
+  SM_Cofre_M_Madera_Cofre                nv=151  z zmin=0.1050..zmax=0.6650  tocando=toca=4  footprint=fp=0.700x0.400
+  SM_Cofre_M_Madera_Cofre_Osc            nv=32  z zmin=0.0450..zmax=0.1050  tocando=toca=16  footprint=fp=0.700x0.400
+  SM_Cofre_M_Hierro_Cofre                nv=144  z zmin=0.1086..zmax=0.5095  tocando=toca=8  footprint=fp=0.745x0.430
+  SM_Cofre_M_Bronce_Cofre                nv=320  z zmin=0.1588..zmax=0.6730  tocando=toca=24  footprint=fp=0.522x0.455
+  SM_Cofre_M_Oro_Cofre                   nv=152  z zmin=0.2010..zmax=0.5950  tocando=toca=7  footprint=fp=0.130x0.067
+  SM_Cofre_M_Gema_Cofre.001              nv=42  z zmin=0.2750..zmax=0.3310  tocando=toca=6  footprint=fp=0.027x0.028
+
+=== losa_grabado_lowpoly_media.blend ===
+  SM_Losa_M_Losa_Grabado                 nv=40  z zmin=0.0450..zmax=0.1450  tocando=toca=4  footprint=fp=1.200x0.800
+  SM_Losa_M_Talla_Grabado                nv=96  z zmin=0.1006..zmax=0.2094  tocando=toca=8  footprint=fp=0.040x0.146
+
+=== puente_cuerda_lowpoly_media.blend ===
+  SM_Puente_M_Piedra_Puente_Madera_Puente_Cuerda_Puente nv=476  z zmin=0.0450..zmax=1.4450  tocando=toca=16  footprint=fp=2.570x1.070
+
+=== puerta_templo_lowpoly_media.blend ===
+  SM_Puerta_M_Marco_Puerta               nv=32  z zmin=0.1550..zmax=2.7750  tocando=toca=12  footprint=fp=1.800x0.180
+  SM_Puerta_M_Hoja_Puerta                nv=16  z zmin=0.2350..zmax=2.4850  tocando=toca=8  footprint=fp=1.380x0.153
+  SM_Puerta_M_Talla_Puerta               nv=72  z zmin=0.0450..zmax=2.9250  tocando=toca=8  footprint=fp=0.530x0.181
+
+=== bote_pesca_lowpoly_media.blend ===
+  SM_Bote_M_Madera_Bote_Osc              nv=72  z zmin=0.0450..zmax=0.6450  tocando=toca=20  footprint=fp=1.310x0.440
+  SM_Bote_M_Tela_Bote                    nv=8  z zmin=0.2753..zmax=0.3153  tocando=toca=4  footprint=fp=0.400x0.200
+  SM_Bote_M_Madera_Bote                  nv=13  z zmin=0.0450..zmax=0.2256  tocando=toca=5  footprint=fp=0.850x0.420
+  SM_Bote_M_Cuerda_Bote                  nv=40  z zmin=0.0485..zmax=0.1855  tocando=toca=2  footprint=fp=0.044x0.000
+
+=== cartel_indicador_lowpoly_media.blend ===
+  SM_Cartel_M_Madera_Poste               nv=8  z zmin=0.0450..zmax=1.4450  tocando=toca=4  footprint=fp=0.090x0.090
+  SM_Cartel_M_Madera_Tabla               nv=16  z zmin=0.7614..zmax=1.2750  tocando=toca=2  footprint=fp=0.003x0.030
+  SM_Cartel_M_Hierro_Clavo               nv=16  z zmin=0.8950..zmax=1.1750  tocando=toca=4  footprint=fp=0.020x0.050
+
+=== farola_fuego_lowpoly_media.blend ===
+  SM_Farola_M_Madera_Farola              nv=16  z zmin=0.1450..zmax=1.6450  tocando=toca=4  footprint=fp=0.100x0.100
+  SM_Farola_M_Hierro_Farola              nv=120  z zmin=0.2050..zmax=1.5600  tocando=toca=4  footprint=fp=0.140x0.140
+  SM_Farola_M_Piedra_Farola              nv=32  z zmin=0.0450..zmax=0.1450  tocando=toca=16  footprint=fp=0.400x0.400
+  SM_Farola_M_Brasa_Farola               nv=12  z zmin=1.3550..zmax=1.4550  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Farola_M_Llama_Farola               nv=9  z zmin=1.4050..zmax=1.5850  tocando=toca=8  footprint=fp=0.080x0.080
+
+=== muelle_madera_lowpoly_media.blend ===
+  SM_Muelle_M_Madera_Muelle_Osc          nv=72  z zmin=0.0450..zmax=1.4650  tocando=toca=24  footprint=fp=1.960x1.160
+  SM_Muelle_M_Madera_Muelle              nv=64  z zmin=0.7950..zmax=1.4700  tocando=toca=8  footprint=fp=1.950x1.120
+  SM_Muelle_M_Hierro_Muelle              nv=80  z zmin=0.9360..zmax=1.0540  tocando=toca=4  footprint=fp=1.038x0.000
+
+=== pozo_piedra_lowpoly_media.blend ===
+  SM_Pozo_M_Piedra_Pozo_Madera_Pozo_Cuerda_Pozo_Agua_Pozo nv=478  z zmin=0.0450..zmax=2.0810  tocando=toca=56  footprint=fp=1.130x0.946
+
+=== puente_troncos_lowpoly_media.blend ===
+  SM_Puente_M_Piedra_Puente_Madera_Puente_Cuerda_Puente nv=424  z zmin=0.0450..zmax=0.9800  tocando=toca=68  footprint=fp=3.200x1.314
+
+=== anillo_piedras_ritual_lowpoly_media.blend ===
+  SM_Anillo_M_Piedra_Anillo_0            nv=52  z zmin=0.0450..zmax=0.6650  tocando=toca=14  footprint=fp=2.758x0.715
+  SM_Anillo_M_Piedra_Anillo_1            nv=52  z zmin=0.0450..zmax=0.4650  tocando=toca=14  footprint=fp=2.066x2.407
+  SM_Anillo_M_Piedra_Anillo_2            nv=52  z zmin=0.0450..zmax=0.4950  tocando=toca=14  footprint=fp=0.507x3.011
+  SM_Anillo_M_Piedra_Anillo_3            nv=52  z zmin=0.0450..zmax=0.5450  tocando=toca=14  footprint=fp=1.960x2.373
+  SM_Anillo_M_Piedra_Anillo_4            nv=22  z zmin=0.0450..zmax=0.4250  tocando=toca=6  footprint=fp=0.401x0.351
+
+=== concha_mar_lowpoly_media.blend ===
+  SM_Concha_M_Concha_Mar                 nv=306  z zmin=0.0450..zmax=0.3304  tocando=toca=2  footprint=fp=0.048x0.020
+  SM_Concha_M_Concha_Interior            nv=24  z zmin=0.1440..zmax=0.2240  tocando=toca=2  footprint=fp=0.000x0.005
+
+=== estrella_mar_lowpoly_media.blend ===
+  SM_Estrella_M_EstrellaMar              nv=52  z zmin=0.0450..zmax=0.1650  tocando=toca=26  footprint=fp=0.468x0.488
+  SM_Estrella_M_EstrellaMar_Txt          nv=60  z zmin=0.1332..zmax=0.2652  tocando=toca=5  footprint=fp=0.190x0.200
+
+=== monolito_glifos_lowpoly_media.blend ===
+  SM_Monolito_M_Piedra_Monolito          nv=42  z zmin=0.0450..zmax=1.9070  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Monolito_M_Glifo_Ancestral          nv=136  z zmin=0.4495..zmax=1.7292  tocando=toca=4  footprint=fp=0.054x0.025
+
+=== totem_isla_lowpoly_media.blend ===
+  SM_Totem_M_Piedra_Totem_Osc            nv=52  z zmin=0.0450..zmax=1.4450  tocando=toca=4  footprint=fp=0.780x0.700
+  SM_Totem_M_Piedra_Totem                nv=16  z zmin=0.1850..zmax=1.9850  tocando=toca=4  footprint=fp=0.620x0.560
+  SM_Totem_M_Talla_Totem                 nv=149  z zmin=0.4028..zmax=2.2450  tocando=toca=8  footprint=fp=0.800x0.448
+  SM_Totem_M_Ojo_Totem                   nv=48  z zmin=0.5906..zmax=1.8314  tocando=toca=8  footprint=fp=0.320x0.040
+
+=== vieira_playa_lowpoly_media.blend ===
+  SM_Vieira_M_Vieira_Exterior_Vieira_Interior_Vieira_Bisagra nv=492  z zmin=0.0450..zmax=0.1990  tocando=toca=6  footprint=fp=0.030x0.048
+
+=== arbusto_floral_lowpoly_media.blend ===
+  SM_ArbustoFloral_M_ArbustoFloral_Hojas nv=42  z zmin=0.1378..zmax=1.0425  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_ArbustoFloral_M_ArbustoFloral_Tallo nv=16  z zmin=0.0450..zmax=0.2250  tocando=toca=8  footprint=fp=0.140x0.140
+  SM_ArbustoFloral_M_Flor_Amarillo       nv=48  z zmin=0.1414..zmax=0.3708  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_ArbustoFloral_M_Flor_Blanco         nv=60  z zmin=0.0924..zmax=0.4571  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_ArbustoFloral_M_Flor_Rosa           nv=60  z zmin=0.0864..zmax=0.5150  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== arbusto_redondo_lowpoly_media.blend ===
+  SM_Arbusto_M_Arbusto                   nv=42  z zmin=0.0615..zmax=1.7243  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Arbusto_M_Arbusto_Claro             nv=12  z zmin=0.0451..zmax=1.1610  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Arbusto_M_Arbusto_Oscuro            nv=12  z zmin=0.1136..zmax=1.0702  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Arbusto_M_Pasto_Base                nv=36  z zmin=0.0450..zmax=0.2163  tocando=toca=4  footprint=fp=1.094x0.158
+
+=== canas_bambu_lowpoly_media.blend ===
+  SM_Cana_M_Bambu_A                      nv=333  z zmin=0.0450..zmax=1.3050  tocando=toca=14  footprint=fp=0.325x0.352
+  SM_Cana_M_Bambu_B                      nv=368  z zmin=0.0450..zmax=1.5300  tocando=toca=14  footprint=fp=0.319x0.523
+  SM_Cana_M_Hoja_Bambu                   nv=28  z zmin=1.0863..zmax=1.6989  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== flor_isla_lowpoly_media.blend ===
+  SM_Tallo_M_Tallo_Flor                  nv=66  z zmin=0.0450..zmax=1.0950  tocando=toca=6  footprint=fp=0.080x0.069
+  SM_Tallo_M_Hoja_Flor                   nv=10  z zmin=0.3324..zmax=0.7511  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Tallo_M_Petalo_Flor                 nv=25  z zmin=0.9190..zmax=1.2281  tocando=toca=5  footprint=fp=0.342x0.357
+  SM_Tallo_M_Centro_Flor                 nv=12  z zmin=1.0705..zmax=1.2395  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== helecho_chico_lowpoly_media.blend ===
+  SM_HelechoChico_M_Tallo_HelechoChico   nv=276  z zmin=0.0950..zmax=0.2045  tocando=toca=36  footprint=fp=0.181x0.166
+  SM_HelechoChico_M_Hoja_HelechoChico    nv=288  z zmin=0.0917..zmax=0.2211  tocando=toca=16  footprint=fp=0.387x0.332
+  SM_HelechoChico_M_Tronco_HelechoChico  nv=16  z zmin=0.0450..zmax=0.3450  tocando=toca=8  footprint=fp=0.120x0.120
+
+=== helecho_gigante_lowpoly_media.blend ===
+  SM_Helecho_M_Helecho_Tallo             nv=397  z zmin=0.1886..zmax=0.4285  tocando=toca=20  footprint=fp=1.900x1.813
+  SM_Helecho_M_Helecho_Tronco            nv=10  z zmin=0.0450..zmax=0.4450  tocando=toca=5  footprint=fp=0.186x0.193
+  SM_Helecho_M_Helecho_Hoja              nv=438  z zmin=0.2101..zmax=0.4199  tocando=toca=29  footprint=fp=1.672x1.620
+
+=== hierba_alta_lowpoly_media.blend ===
+  SM_HierbaBrizna_M_Hierba_Alta_Osc      nv=369  z zmin=0.0450..zmax=0.4567  tocando=toca=64  footprint=fp=0.947x0.606
+  SM_HierbaBrizna_M_Hierba_Alta          nv=369  z zmin=0.0450..zmax=0.4614  tocando=toca=64  footprint=fp=0.961x0.578
+
+=== hongo_luminoso_lowpoly_media.blend ===
+  SM_Piedra_M_Piedra_Cueva               nv=12  z zmin=0.0450..zmax=0.6500  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Piedra_M_Hongo_Pie                  nv=64  z zmin=0.5475..zmax=1.3975  tocando=toca=8  footprint=fp=0.260x0.260
+  SM_Piedra_M_Hongo_Capa                 nv=27  z zmin=1.0800..zmax=1.3275  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Piedra_M_Hongo_Anillo               nv=576  z zmin=0.8925..zmax=1.3025  tocando=toca=5  footprint=fp=0.054x0.025
+  SM_Piedra_M_Hongo_Mota                 nv=60  z zmin=0.3626..zmax=0.6675  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== liana_colgante_lowpoly_media.blend ===
+  SM_Liana_M_Piedra_Liana                nv=16  z zmin=0.0450..zmax=1.8950  tocando=toca=8  footprint=fp=2.100x0.200
+  SM_Liana_M_Madera_Liana                nv=8  z zmin=1.7650..zmax=1.9250  tocando=toca=4  footprint=fp=2.120x0.200
+  SM_Liana_M_Tallo_Liana                 nv=172  z zmin=0.3717..zmax=1.7200  tocando=toca=6  footprint=fp=0.060x0.052
+  SM_Liana_M_Hoja_Liana                  nv=96  z zmin=0.6710..zmax=1.5097  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== palmera_inclinada_lowpoly_media.blend ===
+  SM_Tronco_M_Tronco_PalmeraIncl         nv=84  z zmin=0.0450..zmax=3.6450  tocando=toca=7  footprint=fp=0.570x0.585
+  SM_Tronco_M_Hoja_PalmeraIncl           nv=98  z zmin=1.7069..zmax=4.2970  tocando=toca=2  footprint=fp=0.060x0.005
+  SM_Tronco_M_Corazon_PalmeraIncl        nv=12  z zmin=3.6040..zmax=3.9960  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Tronco_M_Coco_PalmeraIncl           nv=24  z zmin=3.3200..zmax=3.6400  tocando=toca=2  footprint=fp=0.340x0.120
+
+=== palmera_joven_lowpoly_media.blend ===
+  SM_Tronco_M_Tronco_PalmeraJoven        nv=63  z zmin=0.0450..zmax=2.1950  tocando=toca=7  footprint=fp=0.361x0.370
+  SM_Tronco_M_Hoja_PalmeraJoven          nv=72  z zmin=1.3216..zmax=2.5785  tocando=toca=2  footprint=fp=0.049x0.035
+  SM_Tronco_M_Corazon_PalmeraJoven       nv=12  z zmin=2.1340..zmax=2.4060  tocando=toca=1  footprint=fp=0.000x0.000
+
+=== palmera_lowpoly_media.blend ===
+  SM_Tronco_M_Tronco_Palmera             nv=70  z zmin=0.0450..zmax=3.9450  tocando=toca=7  footprint=fp=0.570x0.585
+  SM_Tronco_M_Corazon_Corona             nv=12  z zmin=3.9050..zmax=4.2950  tocando=toca=1  footprint=fp=0.000x0.000
+  SM_Tronco_M_Hoja_Palmera               nv=98  z zmin=2.2013..zmax=4.6640  tocando=toca=2  footprint=fp=0.060x0.006
+  SM_Tronco_M_Coco                       nv=36  z zmin=3.6300..zmax=3.9700  tocando=toca=3  footprint=fp=0.400x0.500
+
+=== boton_piso_lowpoly_media.blend ===
+  SM_Boton_M_Piedra_Boton_Hierro_Placa_Bronce_Perno nv=80  z zmin=0.0450..zmax=0.2370  tocando=toca=8  footprint=fp=1.040x1.040
+
+=== cofre_pequeno_lowpoly_media.blend ===
+  SM_Cofre_M_Madera_Cofre_Peq_Hierro_Cofre_Peq_Bronce_Cierre nv=46  z zmin=0.0450..zmax=0.5450  tocando=toca=4  footprint=fp=0.620x0.400
+
+=== palanca_madera_lowpoly_media.blend ===
+  SM_Palanca_M_Madera_Pal_Osc_Madera_Pal_Cla_Hierro_Perno nv=60  z zmin=0.0450..zmax=0.6155  tocando=toca=4  footprint=fp=0.480x0.340
+
+=== puerta_corrediza_piedra_lowpoly_media.blend ===
+  SM_Puerta_M_Piedra_Puerta_Cla_Piedra_Puerta_Osc_Hierro_Riel nv=56  z zmin=0.0450..zmax=2.3150  tocando=toca=4  footprint=fp=3.100x0.440
+
+=== valvula_manivela_lowpoly_media.blend ===
+  SM_Valvula_M_Hierro_Valvula_Acero_Cubo_Bronce_Volante nv=136  z zmin=0.0450..zmax=0.7250  tocando=toca=8  footprint=fp=0.600x0.600

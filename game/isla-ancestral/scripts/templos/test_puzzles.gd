@@ -14,6 +14,7 @@ func _init() -> void:
 	_test_puzzle_arbitrario_invalido()
 	_test_transiciones_y_completado()
 	_test_emisor_inexistente()
+	_test_integracion_emisor_puerta()  # M24 QA cruzado Hy3/WorkBuddy iter 1
 	print("=== TEST PUZZLES M24: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -65,3 +66,28 @@ func _check(cond: bool, mensaje: String) -> void:
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + mensaje)
+
+## M24 (QA cruzado Hy3/WorkBuddy, iter 1): integracion emisor->receptor.
+## Verifica que activar emisores dispare el recalculo y abra la puerta via callback.
+## Antes de este fix el framework estaba desconectado: set_emisor no recalculaba ni
+## notificaba, asi que la puerta nunca se enteraba de los cambios.
+func _test_integracion_emisor_puerta() -> void:
+	var sala := PuzzleRoom.new([0, 1])
+	sala.add_regla([0, 1], "puerta_norte")
+	var puerta := PuzzlePuerta.new()
+	puerta.nombre_receptor = "puerta_norte"
+	# Conectar el callback de la sala a la puerta.
+	sala.al_cambiar = func(activos: Array): puerta.evaluar(activos)
+	_check(not puerta.abierta, "puerta arranca cerrada")
+	# Activar emisor 0 solo -> no debe abrir (falta el 1).
+	sala.set_emisor(0, true)
+	_check(not puerta.abierta, "con 1 emisor ON la puerta sigue cerrada")
+	# Activar emisor 1 -> ambos ON -> regla cumple -> callback abre la puerta.
+	sala.set_emisor(1, true)
+	_check(puerta.abierta, "con ambos emisores ON la puerta se ABRE automaticamente")
+	# Desactivar uno -> la sala ya no cumple; la puerta no se cierra sola (diseno:
+	# abrir es permanente hasta cerrar() explicito), pero el test verifica el disparo.
+	sala.set_emisor(0, false)
+	_check(puerta.abierta, "puerta permanece abierta tras desactivar (abierta es latch)")
+	puerta.cerrar()
+	_check(not puerta.abierta, "cerrar() resella la puerta")

@@ -15,12 +15,22 @@ var sello: Array = []
 var terreno: VoxelTerrain = null
 ## Abierta o no
 var abierta: bool = false
+## Nombre logico del receptor (debe coincidir con el "receptor" de la regla en PuzzleRoom)
+var nombre_receptor: String = ""
 
 @export var canal: int = 0
 
 func configurar(terreno_voxel: VoxelTerrain, posiciones: Array) -> void:
 	terreno = terreno_voxel
 	sello = posiciones
+
+## M24 (QA cruzado Hy3/WorkBuddy, iter 1): evalua la lista de receptores activos
+## que envia PuzzleRoom.al_cambiar. Si esta puerta esta en la lista, se abre.
+## Esto CIERRA el ciclo emisor->receptor que antes estaba desconectado
+## (activar emisores no abria la puerta automaticamente).
+func evaluar(activos: Array) -> void:
+	if activos.has(nombre_receptor):
+		abrir()
 
 ## Abre la puerta: remueve el sello (una sola escritura de diff)
 func abrir() -> void:

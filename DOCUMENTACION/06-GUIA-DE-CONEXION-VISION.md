@@ -715,3 +715,64 @@ Notas:
 
 **Firma:** Hy3 · Kilo · Windows · 2026-08-28.
 
+---
+
+## Arquitectura general de las 5 vías
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    AGENTE (LLM)                         │
+│  Ve imágenes en el chat (V1) o recibe screenshots       │
+│  de tools MCP/scripts (V2-V5)                           │
+└──────────┬──────────────────────────────────────────────┘
+           │
+    ┌──────┴──────┬──────────────┬──────────────┬─────────┐
+    │             │              │              │         │
+  ┌─▼─┐       ┌──▼──┐       ┌──▼──┐       ┌──▼──┐  ┌──▼──┐
+  │V1 │       │ V2  │       │ V3  │       │ V4  │  │ V5  │
+  │Chat│       │MCP  │       │Web  │       │MCP  │  │Blnd │
+  │    │       │pant.│       │+PW  │       │Godot│  │ MCP │
+  └─┬──┘       └──┬──┘       └──┬──┘       └──┬──┘  └──┬──┘
+    │             │              │              │         │
+    │        Python PIL     Playwright      Plugin     Addon
+    │        + pygetwindow  + http.server   Godot      Blender
+    │                                        │         │
+    │                                   ┌────▼────┐ ┌──▼───┐
+    │                                   │ Editor  │ │3D    │
+    │                                   │ Godot   │ │Viewpt│
+    │                                   └─────────┘ └──────┘
+    │
+  Usuario pega screenshot en el chat
+```
+
+## Matriz de decisión: qué vía usar según escenario
+
+| Escenario | Vía recomendada | Por qué |
+|-----------|----------------|---------|
+| Validación estética final del usuario | **V1** | El usuario ve la imagen y opina directamente |
+| Verificación de UI/menús | **V2** | Captura rápida de ventana Godot |
+| QA automatizado/regresión visual | **V3** | Playwright ejecuta y captura automáticamente |
+| Verificar dentro del juego (gameplay, terreno, cámara) | **V4** | Controla el editor Godot, ejecuta el juego |
+| Diseño/modelado de assets 3D | **V5** | Blender MCP da acceso al viewport 3D |
+| Sin MCP disponible (fallback universal) | **V2** | Funciona con solo Python + Pillow |
+| Plataforma sin Godot MCP nativo | **V2 + scripts** | Misma semántica, scripts Python directos |
+| Build web para QA visual | **V3** | Export + Playwright en headless |
+
+## Protocolo de iteración visual (6 pasos)
+
+1. **Capturar** → usar la vía disponible (V2-V5) o pedir al usuario (V1)
+2. **Analizar** → el agente examina la imagen (UX, posición, errores visuales)
+3. **Proponer** → sugerir cambios concretos (código, diseño, posición)
+4. **Implementar** → editar scripts/configuración
+5. **Re-capturar** → verificar el cambio con otra captura
+6. **Repetir** → máximo 5 iteraciones autónomas; si no se resuelve, escalar al usuario
+
+## Límites de iteración
+
+- **Máximo 5 iteraciones autónomas** antes de pedir confirmación al usuario
+- **Resolución máxima:** 1280x720 (preservar contexto del chat)
+- **Formato:** PNG para UI, WebP para assets (comprimir)
+- **Convención de nombres:** `logs/screenshots/{modulo}_{version}_{timestamp}.png`
+
+**Firma:** MiMo V2.5 · OpenCode · 2026-08-31.
+

@@ -118,6 +118,30 @@ bg = mundo.node_tree.nodes.get('Background')
 bg.inputs[0].default_value = (0.58, 0.79, 0.95, 1.0)
 bg.inputs[1].default_value = 0.55
 
+# ---------- 8.5) Asentado (E-12 + E-24): medir en caliente, nunca estimar ---
+# El apoyo se MIDE sobre la geometría ya generada. El Z de autoría es solo una
+# aproximación: cualquier escalado o composición posterior la desalinea (E-09).
+# Se usa el vértice real más bajo y NO el AABB, porque una pieza rotada tiene
+# esquinas vacías que tiran el mínimo hacia abajo y hunden assets correctos
+# (E-24). Objetivo: z_min = 0.045 (5 mm bajo el tope de arena z = 0.05).
+Z_APOYO = 0.045
+bpy.context.view_layer.update()
+
+def _as_zmin(o):
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ _as_v.co).z for _as_v in o.data.vertices)
+
+_as_piezas = [o for o in escena.objects
+              if o.type == 'MESH' and o.name.startswith('SM_')]
+_as_z = min(_as_zmin(o) for o in _as_piezas)
+_as_delta = Z_APOYO - _as_z
+for o in _as_piezas:
+    if o.parent is None:
+        o.location.z += _as_delta
+bpy.context.view_layer.update()
+print('ASENTADO: z_min %.4f -> %.4f (delta %+.4f)' % (_as_z, Z_APOYO, _as_delta))
+
 # ---------- 9) Cámara ----------
 bpy.ops.object.camera_add(location=(2.4, -3.0, 1.4))
 cam = bpy.context.object

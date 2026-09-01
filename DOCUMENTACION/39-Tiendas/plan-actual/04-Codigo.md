@@ -12,14 +12,11 @@
 
 | Archivo | Propósito | Estado |
 |---|---|---|
-| `res://tiendas/shop_manager.gd` | Autoload `ShopManager`: registro de tiendas, compra, venta, restock, mercaderes | Pendiente de implementación |
-| `res://tiendas/shop.gd` | Clase `Shop` (RefCounted): estado runtime de una tienda (definición + stock) | Pendiente de implementación |
-| `res://tiendas/stock_generator.gd` | Clase `StockGenerator`: canalización de stock en 5 etapas | Pendiente de implementación |
-| `res://tiendas/shop_definition.gd` | Resource `ShopDefinition` (`.tres`): datos de una tienda | Pendiente de implementación |
-| `res://tiendas/shop_catalog.gd` | Resource `ShopCatalog` (`.tres`): catálogo por NPC (venta + recompra) | Pendiente de implementación |
-| `res://tiendas/stock_entry.gd` | Resource `StockEntry` (`.tres`): ítem del catálogo con rangos y rotación | Pendiente de implementación |
-| `res://tiendas/shop_validation.gd` | Helper de validación de catálogos y tiendas en editor | Pendiente de implementación |
-| `res://tiendas/ui/shop_ui.gd` | Script de capa UI (M53): consume señales de ShopManager, muestra catálogo | Pendiente de implementación |
+| `scripts/shops/shop_manager.gd` | Autoload `ShopManager`: registro de tiendas, compra, venta, restock, mercaderes | **Implementado** |
+| `scripts/shops/shop.gd` | Clase `Shop` (RefCounted): estado runtime de una tienda (definición + stock) | **Implementado** |
+| `scripts/shops/shop_data.gd` | Resource `ShopData`: datos-driven por tienda. Enum `Tipo` (PUESTO_SEMILLAS, PESCADERIA, FERRETERIA, TIENDA_GENERAL, MERCADER_VIAJERO, TIENDA_JUGADOR). Inner class `StockEntry` con `item_id`, `stock_min/max`, `peso_rareza`, `es_basico`. Horarios, catálogos, rotación estacional | **Implementado** |
+| `scripts/shops/stock_generator.gd` | Clase `StockGenerator`: canalización de stock en 5 etapas | **Implementado** |
+| `scripts/shops/reputacion_tienda.gd` | Reputación del jugador por tienda. Niveles 0-5, cozy (sin decaimiento). Enum `MotivoVenta` (NORMAL +1, GRANDE +3, ITEM_RARO +2, VIAJERO +5, EVENTO_FERIA +2). Umbrales de XP por nivel | **Implementado** |
 
 ### 1.2 Recursos de datos (`.tres`) — editor
 

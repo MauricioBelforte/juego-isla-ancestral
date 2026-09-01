@@ -1,6 +1,7 @@
-# 233 — M166: Tier ALTA mergeada + fix de palanca (E-24)
+﻿# 233 — M166: Tier ALTA mergeada + fix de palanca (E-24)
 
 **Fecha:** 2026-08-29 14:15 (GMT-3)
+**Hora:** 14:15
 **Módulo:** M166 (Variantes y perfil de rendimiento)
 **Trigger:** Usuario pidió "agarra un nuevo tier y segui creando objetos". El nuevo tier natural era crear las `_alta_media.blend` (versiones mergeadas y exportables de los 15 `_alta.blend` generados en log 232).
 

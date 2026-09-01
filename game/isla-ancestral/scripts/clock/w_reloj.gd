@@ -1,6 +1,6 @@
-# Modelo: ox-alpha (GLM)
+# Modelo: ox-alpha (GLM) · iter. 2: glm-5.3
 # Plataforma: Cline
-# Fecha: 2026-08-26
+# Fecha: 2026-08-26 · iter. 2: 2026-08-31
 #
 # M30.2: Widget de Reloj (HUD) — Control puro, consumidor de RelojHud + GameTime.
 # Diseño según DOCUMENTACION/30 plan-actual 03-Diseno.md §2:
@@ -11,24 +11,45 @@
 #  - Tick por señales (hora_cambio/dia_cambio/estacion_cambio), NUNCA polling
 # Fallback: si no hay GameTime (preview standalone / test), muestra valores mock
 # marcados con "~" para no confundir con datos reales.
+# Iter. 2 (glm-5.3/Cline):
+#  - D70: desplegable al pasar el cursor — tooltip contextual vía TooltipService
+#    (M53), detectado por rect del cursor (NO captura el mouse: D78 se mantiene).
+#  - F100/F107: config data-driven data/ui/w_reloj.tres con fallback a defaults.
+#  - F101: formato 12h/24h real desde el config (RelojHud.formatear_hora puro).
 extends PanelContainer
 
 const RelojHudScript := preload("res://scripts/clock/reloj_hud.gd")
+const RUTA_CONFIG := "res://data/ui/w_reloj.tres"
 
+## Preview/demo: simula el cursor dentro del widget (D70) sin mouse real.
+@export var demo_cursor_dentro: bool = false
+## Config inyectable para tests/preview: si es WRelojConfig al entrar al árbol,
+## reemplaza al recurso en disco (los tests no tocan data/).
+var config_inyectada = null
+## Ruta del recurso de config (replicable en tests para probar el fallback F107).
+var ruta_config: String = RUTA_CONFIG
+
+var _config: WRelojConfig = null   # data/ui/w_reloj.tres (F100) · defaults (F107)
 var _reloj: Node = null            # instancia o autoload RelojHud
 var _game_time: Node = null        # autoload GameTime (si existe)
+var _tooltip_svc: CanvasLayer = null  # autoload TooltipService (M53)
+var _hover_activo: bool = false    # D70: cursor dentro del rect del reloj
 var _lbl_hora: Label = null
 var _lbl_fecha: Label = null
+var _fila_chip: HBoxContainer = null
 var _chip_estacion: PanelContainer = null
 var _lbl_estacion: Label = null
 
 func _ready() -> void:
+	_config = _cargar_config()  # F100: data-driven · F107: fallback a defaults
 	_reloj = get_node_or_null("/root/RelojHud")
 	if _reloj == null:
 		_reloj = RelojHudScript.new()  # fallback para preview standalone
 	_game_time = get_node_or_null("/root/GameTime")
+	_tooltip_svc = get_node_or_null("/root/TooltipService")
 	_construir_ui()
 	_refrescar()
+	set_process(true)  # D70: detección de hover por rect del cursor
 	# Suscripción por señales (design doc §2: tick sin polling)
 	if _game_time != null:
 		_game_time.minuto_cambio.connect(_on_minuto_cambio)
@@ -37,6 +58,10 @@ func _ready() -> void:
 		_game_time.estacion_cambio.connect(_on_estacion_cambio)
 
 func _exit_tree() -> void:
+	# D70: nunca dejar un tooltip huérfano al salir del árbol.
+	if _hover_activo and _tooltip_svc != null and _tooltip_svc.has_method("hide_tooltip"):
+		_tooltip_svc.hide_tooltip()
+		_hover_activo = false
 	if _game_time != null:
 		if _game_time.minuto_cambio.is_connected(_on_minuto_cambio):
 			_game_time.minuto_cambio.disconnect(_on_minuto_cambio)
@@ -57,14 +82,14 @@ func _construir_ui() -> void:
 	# escalado DPI 125 %, recorte del panel. La API canónica es
 	# set_anchors_and_offsets_preset con PRESET_MODE_MINSIZE + margen: posiciona
 	# por tamaño mínimo y sigue el borde derecho en cualquier resize/escala.
-	custom_minimum_size = Vector2(230, 0)
-	set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT, Control.PRESET_MODE_MINSIZE, 16)
+	custom_minimum_size = Vector2(_config.ancho_min, 0)
+	set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT, Control.PRESET_MODE_MINSIZE, _config.margen_borde)
 	grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	grow_vertical = Control.GROW_DIRECTION_END
 
 	# Fondo semitransparente oscuro, esquinas redondeadas (estilo cozy)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.09, 0.12, 0.78)
+	style.bg_color = _config.color_fondo
 	style.set_corner_radius_all(14)
 	style.content_margin_left = 18
 	style.content_margin_right = 18
@@ -112,6 +137,8 @@ func _construir_ui() -> void:
 	fila_chip.alignment = BoxContainer.ALIGNMENT_CENTER
 	fila_chip.add_child(_chip_estacion)
 	vbox.add_child(fila_chip)
+	_fila_chip = fila_chip
+	fila_chip.visible = _config.mostrar_chip_estacion
 
 ## ── Refresco ────────────────────────────────────────────────────────────────
 func _refrescar() -> void:
@@ -125,9 +152,12 @@ func _refrescar() -> void:
 	chip_style.bg_color = Color(color.r, color.g, color.b, 0.32)
 
 ## Si hay GameTime real muestra la hora viva; si no, un mock visible.
+## F101: el formato 12h/24h viene del config (lo escribirá Ajustes M46).
 func _hora_visual() -> String:
 	if _game_time != null:
-		return "%02d:%02d" % [_game_time.get_hora(), _game_time.get_minuto()]
+		var fmt: int = RelojHudScript.FormatoHora.HORAS_12 if _config.usar_formato_12h \
+			else RelojHudScript.FormatoHora.HORAS_24
+		return RelojHudScript.formatear_hora(_game_time.get_hora(), _game_time.get_minuto(), fmt)
 	return "~09:15"
 
 func _fecha_visual() -> String:
@@ -158,3 +188,61 @@ func _on_dia_cambio(_info: Dictionary) -> void:
 
 func _on_estacion_cambio(_e: int) -> void:
 	_refrescar()
+
+## ── Config (F100/F107) ───────────────────────────────────────────────────────
+## Carga data/ui/w_reloj.tres (WRelojConfig); si falta o está corrupto cae a
+## defaults (F107). config_inyectada permite a tests/preview instanciar con una
+## config propia sin tocar el recurso en disco.
+func _cargar_config() -> WRelojConfig:
+	if config_inyectada is WRelojConfig:
+		return config_inyectada
+	var cfg: WRelojConfig = load(ruta_config) as WRelojConfig
+	if cfg == null:
+		push_warning("M30: config '%s' ausente o corrupta; usando defaults (F107)." % ruta_config)
+		cfg = WRelojConfig.new()
+	return cfg
+
+## ── Hover/desplegable D70 — tooltip contextual vía TooltipService (M53) ───────
+## El panel NO captura el mouse (D78: MOUSE_FILTER_IGNORE se mantiene, el HUD
+## nunca bloquea clicks del juego): el hover se detecta comparando el rect global
+## del widget con la posición del cursor en cada frame (1 has_point, despreciable).
+## El desplegable muestra el "detalle": fecha, sesión del día, estación y
+## próximos eventos (todo desde GameTime M29 — nunca desde el reloj del SO).
+func _process(_delta: float) -> void:
+	var pos := get_global_mouse_position()
+	if demo_cursor_dentro:
+		pos = get_global_rect().get_center()
+	_actualizar_hover(pos)
+
+## Testeable: recibe la posición del cursor y decide mostrar/ocultar el tooltip.
+func _actualizar_hover(pos_cursor: Vector2) -> void:
+	if _tooltip_svc == null or not is_inside_tree():
+		return
+	var dentro: bool = is_visible_in_tree() and get_global_rect().has_point(pos_cursor)
+	if dentro and not _hover_activo:
+		_hover_activo = true
+		if _tooltip_svc.has_method("show_tooltip"):
+			_tooltip_svc.show_tooltip(_texto_tooltip(), self)
+	elif not dentro and _hover_activo:
+		_hover_activo = false
+		if _tooltip_svc.has_method("hide_tooltip"):
+			_tooltip_svc.hide_tooltip()
+
+## Contenido del desplegable: formato M88 de TooltipService ("Título|Cuerpo").
+## Título localizable cuando existan claves M57; por ahora texto directo.
+func _texto_tooltip() -> String:
+	var cuerpo := _fecha_visual()
+	if _game_time != null:
+		var sesion: int = RelojHudScript.get_sesion_dia_estatico(_game_time.get_hora())
+		var nombre_sesion := ["Mañana", "Día", "Tarde", "Noche"]
+		cuerpo += "\nSesión: %s" % nombre_sesion[sesion]
+		cuerpo += "\nEstación: %s" % _estacion_nombre(_estacion_actual())
+		var proximos: Array = _game_time.proximos_eventos(2)
+		if not proximos.is_empty():
+			var dias: Array = []
+			for ev in proximos:
+				dias.append("día %d" % int(ev.get("dia", 0)))
+			cuerpo += "\nPróximos eventos: %s" % ", ".join(PackedStringArray(dias))
+	else:
+		cuerpo += "\n(Sin GameTime: modo preview)"
+	return "Fecha y hora|%s" % cuerpo

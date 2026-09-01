@@ -13,7 +13,7 @@
 - [ ] RF3: semillas como ítem de inventario (M14/M15) [S]
 - [ ] RF4: etapas de crecimiento por CropDefinition [S]
 - [ ] RF5: ciclos por día del GameClock (M29) [S]
-- [ ] RF6: riego manual y por lluvia (M32) sin muerte por sequía [S]
+- [x] RF6: riego manual y por lluvia (M32) sin muerte por sequía [S] — water() manual + lluvia automática vía EventBus.weather; sin pérdida cozy
 - [x] RF7 a RF12: estaciones, cosecha, comida opcional, cultivos especiales, fertilizante y persistencia [S]
 
 ## B. Resolución de los 25 puntos del plan (25)
@@ -23,7 +23,7 @@
 - [ ] P3: semillas — catálogo M15 con consumo en M14 [S]
 - [x] P4: crecimiento — avance por días acumulados [S]
 - [ ] P5: etapas de crecimiento — enum GrowthStage de 7 estados [S]
-- [ ] P6: riego — nivel de agua 0..2, regadera y lluvia [S]
+- [x] P6: riego — nivel de agua 0..2, regadera y lluvia [S] — regar() manual (1/llamada) + apply_rain() (a 2, idempotente)
 - [ ] P7: fertilizantes — bono benigno que reduce días o mejora calidad [S]
 - [x] P8: cosecha — event crop_harvested y entrega a M14 [S]
 - [ ] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
@@ -77,7 +77,7 @@
 - [ ] Implementar till_tile con validación de bloque y parcela [M]
 - [ ] Implementar plant con consumo de semilla y cupo máximo [M]
 - [ ] Implementar water con tope de nivel 2 [S]
-- [ ] Implementar apply_rain (puente M32) [S]
+- [x] Implementar apply_rain (puente M32) [S] — glm-5.3-flash 2026-08-31: apply_rain de Deepseek + suscripción EventBus.weather.clima_cambio (LLUVIA/TORMENTA/TROPICAL), test_farm_clima.gd 0 fallos
 - [ ] Implementar can_harvest y harvest con cálculo de calidad [M]
 - [ ] Implementar get_tile y get_growth_hint (tooltips amables) [S]
 - [ ] Implementar get_active_farm_stats para M113/M104 [M]
@@ -99,7 +99,7 @@
 
 - [ ] Nivel de agua 0..2 persistente por cultivo [S]
 - [ ] Regadera (M13) suma 1 con feedback visual y sonoro [S]
-- [ ] Lluvia (M32) rellena cultivos expuestos sin techo [M]
+- [x] Lluvia (M32) rellena cultivos expuestos sin techo [M] — hook _tile_expuesto() centralizado (todo expuesto hasta que M17/M18 marquen techos)
 - [ ] Exceso de riego sin castigo (feedback juguetón) [S]
 - [ ] Visual de suelo húmedo (variante húmeda del bloque TIERRA_ARADA) [M]
 - [ ] Tooltip "Echó de menos el agua" cuando SIN_AGUA [S]
@@ -153,7 +153,7 @@
 - [ ] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
 - [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
 - [ ] Guardado a mitad del avance de día: el tick es idempotente [C]
-- [ ] Lluvia sobre cultivo ya regado: no excede el máximo [S]
+- [x] Lluvia sobre cultivo ya regado: no excede el máximo [S] — apply_rain idempotente (no excede 2 y no emite señal redundante), testeado
 
 ## L. Optimización M61 (8)
 

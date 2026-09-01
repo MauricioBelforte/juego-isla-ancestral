@@ -23,6 +23,18 @@ enum Categoria { MADERA, PIEDRA, FIBRA, COMIDA, MINERAL, RARO }
 @export var region: StringName = &""  # "" = cualquier
 @export var valor_venta: int = 0
 @export var fuentes_alternativas: Array[StringName] = []
+@export var dias_para_respawn: int = 2  # M15 iter 3: días M29 hasta respawn
+
+## M15 iter 3: mapeo temporada_respawn -> estación int (0..3) o -1 si "todas".
+func get_respawn_estacion_int() -> int:
+	var t: String = String(temporada_respawn).to_lower().strip_edges()
+	match t:
+		"primavera": return 0
+		"verano": return 1
+		"otono", "otoño": return 2
+		"invierno": return 3
+		"todas", "": return -1
+	return -1
 
 ## Devuelve los drops filtrados segun la herramienta usada.
 ## `mejorada` = true si la herramienta es de nivel superior (RF5).

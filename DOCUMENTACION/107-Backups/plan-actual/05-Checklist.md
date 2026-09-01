@@ -3,7 +3,19 @@
 
 # 05-Checklist.md — Módulo 107: Backups
 
-> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
+> Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente · [?] no resuelto.
+## Reserva actual
+
+- Estado: 🔵 En curso (reservado)
+- Agente: ox-alpha (Cline) — reclamo 2026-08-31 05:30
+- Fase: F0/transversal (infraestructura V0) · Dificultad: 1 · Visión: V0
+- Entrada: M59 Guardado 🟡 (núcleo implementado y validado 13/13 — salvedad aceptada)
+- Salida: Scripts PS `scripts/backup/` + workflow `backup.yml` + docs retención/restauración/desastres adaptados a rutas reales
+- Archivos: `scripts/backup/*.ps1`, `.github/workflows/backup.yml`, `docs/*.md`
+- Nota: el diseño DEVIN asume disco externo E: y Google Drive/rclone; la máquina real solo tiene C:/D:/F:(lector vacío). Se implementa lo automatizable localmente (backup a `D:\Backups\juego-isla-ancestral\` + GitHub como copia remota) y el workflow queda con guard de secrets (sin secrets → salta la subida, nunca rompe el pipeline).
+- Fecha: 2026-08-31
+
+
 
 ## A. Requisitos del módulo (15)
 

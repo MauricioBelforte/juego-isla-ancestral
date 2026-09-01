@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/friendship/amistad_config.gd" id="1_cfg"]
+
+[resource]
+script = ExtResource("1_cfg")
+umbrales = Array[int]([0, 20, 40, 70, 100, 140, 190, 250, 320, 400, 500])
+recompensas_nivel = {2: ["receta_herramienta_basica"], 3: ["decorativo_estatua"], 5: ["receta_comida_gourmet"], 8: ["decorativo_fuente"]}

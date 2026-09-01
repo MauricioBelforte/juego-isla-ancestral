@@ -1,0 +1,40 @@
+{
+	"id": "reaccion_nivel",
+	"start": "inicio",
+	"nodes": {
+		"inicio": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "",
+			"conditions": [{"clave": "new_level", "operador": "==", "valor": -999}],
+			"next_id": "nivel5"
+		},
+		"nivel5": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "¡Nivel {new_level}! {npc_id} te abraza con fuerza. —¡Somos grandes amigos! Esto merece una celebracion.",
+			"placeholders": {"npc_id": "alguien", "new_level": "?"},
+			"conditions": [{"clave": "new_level", "operador": ">=", "valor": 5}],
+			"next_id": "nivel3"
+		},
+		"nivel3": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "Llegamos al nivel {new_level}. {npc_id} sonrie de verdad. —Cada dia te aprecio un poco mas.",
+			"placeholders": {"npc_id": "alguien", "new_level": "?"},
+			"conditions": [{"clave": "new_level", "operador": ">=", "valor": 3}],
+			"next_id": "nivel_base"
+		},
+		"nivel_base": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "{npc_id} asiente, contento. —Nuestra amistad subio al nivel {new_level}. Gracias por estar.",
+			"placeholders": {"npc_id": "alguien", "new_level": "?"},
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc"
+		}
+	}
+}

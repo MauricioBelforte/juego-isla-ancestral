@@ -78,3 +78,39 @@ DayNightCycle (autoload/único, M07):
 - Implementar con la API de fase (no leer el reloj): aísla de cambios de M29 y hace testeable.
 - Las curvas .tres deben venir con valores que respeten el piso 0.15 (verificarlo en test).
 - Coordinar con M49 (iluminación global) y M61 (presupuesto de sombras) antes de polish.
+
+## Notas del Agente (iteración 1 — 2026-08-31)
+
+**Modelo:** GLM (Kilo)
+**Plataforma:** Kilo
+**Fecha:** 2026-08-31 06:30:00
+**Estado:** Núcleo runtime implementado y validado. Módulo sigue en curso para iteraciones futuras.
+
+### Lo que hice
+- `game/isla-ancestral/scripts/world/day_night_cycle.gd` (nuevo): orquestador del ciclo. 5 franjas, rotación sol/luna en arcos opuestos, tween 1.0 s de energía/color sol-luna-ambiente, anti-oscuridad piso 0.15, API `get_fase()`/`es_de_dia()`. Conexión a `GameTime.hora_cambio` y emisión a `EventBus.time.fase_cambio` (nuevo dominio).
+- `game/isla-ancestral/scripts/core/event_bus.gd`: nuevo dominio `time` con clase `TimeEvents` y señal `fase_cambio(fase: int)`.
+- `game/isla-ancestral/scenes/main_island.tscn`: nodos `DayNightCycle` (Node3D + script) y `DirLightLuna` (DirectionalLight3D, sin sombras, color 7500K) añadidos vía godot-mcp.
+- `game/isla-ancestral/scripts/world/test_ciclo_dia_noche.gd` (nuevo): suite headless 12/0 OK (fases correctas en 8 horas, sin doble señal, get_fase/es_de_dia).
+- Reserva en los 4 registros (guía 08, 05-Checklist, CHECKLIST-GLOBAL, ESTADO-PARALELO).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Curvas 24-puntos en `data/light/*.tres` (energía, color cielo, mods estacionales, umbrales). Implementé targets horarios inline en el script; las curvas como `.tres` son una iteración de datos.
+- Prefab de farol con omni 3200K y autoswitch por umbral (M17/M18).
+- Sincronización con M52 partículas (lluvia de estrellas) y M15 (flora brillante bonus x2).
+- QA visual M114 (checklist nocturno por zona) — M114 está en 🟢 sin implementar.
+- Integración con M49 iluminación global (M49 🟢 sin implementar).
+- Malla de luna y canvas de estrellas (M45/M46 🟢 sin implementar).
+- Pulido de transición 90 s amanecer/atardecer.
+- Opción M58 "Noche clara" (M58 🟢 sin implementar).
+- Lección a documentar en 07-GUIA-GODOT §9: nunca referenciar autoloads directos por global en scripts cargados vía `--script`; usar `get_node_or_null("/root/Nombre")`.
+
+### Intentos fallidos / decisiones
+- Referenciar `GameTime` directo → "Identifier not found" en parse. Resuelto con `get_node_or_null("/root/GameTime")`.
+- `class_name DayNightCycle` + `const DAY_NIGHT_CYCLE := preload(...)` en el test → "Nonexistent function 'new' in base 'GDScript'". Resuelto quitando `class_name` del script (no es autoload; se carga por path `res://`).
+- Rotación de fuentes: el `look_at` falla si el sol queda casi vertical (§9.9). Añadí guarda con `Vector3.FORWARD` cuando `dir.dot(UP) > 0.999`.
+
+### Recomendaciones para el próximo agente
+- Extraer las curvas horarios a `data/light/*.tres` (24 puntos sol, 24 cielo, 4 mods estacionales, umbrales de fase) y cargarlas en `_ready` con fallback a defaults inline.
+- Implementar el prefab de farol y registrarlo como grupo `faroles` para que `_aplicar_iluminacion` haga `for f in faroles: f.light_energy = ...` (umbral 0.35).
+- Cuando M49 exista, mover las constantes de energía/color a un servicio común para evitar duplicación.
+- El test visual (captura del juego a 08:00, 13:00, 19:00, 23:00) se puede hacer con `cap_godot.py --modulo 31` y comparar antes/después para validar el cambio de luz. Requiere V4 operativa (Kilo nativo).

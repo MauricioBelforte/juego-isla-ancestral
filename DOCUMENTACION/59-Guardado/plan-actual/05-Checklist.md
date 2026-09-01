@@ -1,25 +1,30 @@
-**Modelo:** ox-alpha
-**Plataforma:** Cline
+**Modelo:** glm-5.3-flash (último modificador; núcleo por ox-alpha)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 59: Guardado (130 ítems)
 
-**Estado:** 27/130 completados (capa de servicio núcleo implementada y validada con suite headless exit 0; UI, proveedores por sistema e hitos M07 pendientes). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 36/130 completados (núcleo ox-alpha 27 + iter. glm-5.3-flash: dirty tracking EventBus M07, auto-save día/misión/cierre, bloqueo en diálogo, provider "player"; UI/mundo/misiones pendientes). [S]=Simple [M]=Medio [C]=Complejo.
+
+> **Reserva actual (LIBERADA 🟡)**
+> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 21:45 · **Estado:** 🟡 Liberado (iter. auto-save/dirty/providers, Log 307)
+> **Entrada:** núcleo ox-alpha ✅ + EventBus M07 operativo · **Salida:** dirty tracking + auto-save (día/misión/cierre) + bloqueo en diálogo + PlayerSaveProvider + test headless 0 fallos + validate_save 13/13
+> **Archivos afectados:** `scripts/saving/save_manager.gd` (aditivo + fix de señal faltante), `scripts/saving/save_snapshot.gd` (fix bug latente Node-providers), `scripts/saving/player_save_provider.gd` (nuevo), `scripts/saving/test_autosave_m59.gd` (nuevo)
 
 ## A. SaveManager (autoload)
 
 - [x] Definir SaveManager como autoload único de guardado [M]
 - [ ] Encolar peticiones (un guardado a la vez) y procesar sin bloquear (M61) [C] — *cola síncrona implementada; background thread pendiente M61*
 - [x] Exponer API request_save(slot, reason) a la UI (M53) [S]
-- [ ] Marcar dirty al cambiar cualquier sistema (EventBus M07) [M] — *M07 no existe aún*
+- [x] Marcar dirty al cambiar cualquier sistema (EventBus M07) [M] — *glm-5.3-flash 2026-08-31: EventBus operativo (el motivo previo "M07 no existe" estaba desactualizado); señales calendar/economy/inventory/quest/npc/world conectadas + is_dirty/mark_dirty/clear_dirty*
 - [x] Registrar motivo de cada guardado (hito/manual/cierre) [S]
 
 ## B. Guardado Automático
 
-- [ ] Auto-save al final del día (M29 DAY_END) [M]
-- [ ] Auto-save al completar misión (M22/M23) [M]
-- [ ] Auto-save al finalizar evento (M74) y al cerrar el juego (M40) [M]
+- [x] Auto-save al final del día (M29 DAY_END) [M] — *glm-5.3-flash: EventBus.calendar.day_started → "auto_dia", probado en test*
+- [x] Auto-save al completar misión (M22/M23) [M] — *glm-5.3-flash: EventBus.quest.quest_completed → "auto_mision", probado; emisores reales pendientes M22/M23 (módulos no implementados)*
+- [ ] Auto-save al finalizar evento (M74) y al cerrar el juego (M40) [M] — *cierre del juego hecho (NOTIFICATION_WM_CLOSE_REQUEST, escritura síncrona best-effort); "fin de evento" pendiente de señal M74*
 - [x] Intervalo configurable de auto-save (M90) [M] — *auto_save_interval export, timer en _process*
-- [ ] No auto-save durante diálogo (M21), minijuego ni transición [M]
+- [ ] No auto-save durante diálogo (M21), minijuego ni transición [M] — *diálogo hecho (EventBus.ui dialog_requested/finished → set_save_blocked); minijuego M34 y transición M40 con dueño*
 
 ## C. Guardado Manual (M53)
 
@@ -74,7 +79,7 @@
 - [ ] Guardar islas, POI, exploración y niebla (M54) [M]
 - [ ] Guardar estado de ruinas (M25) y templos (M26) [M]
 - [ ] Guardar modificaciones del mundo (tala M50, minado M35) [M]
-- [ ] Guardar posición del jugador, zona y punto de spawn [S]
+- [ ] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider guarda/restaura posición y spawn_position (probado); "zone" queda "" hasta que exista sistema de zonas (M09/M54)*
 - [ ] Testear carga del mundo sin duplicar objetos [C]
 
 ## J. Guardado del Inventario (M14/M15/M16)
@@ -111,7 +116,7 @@
 
 ## N. Guardado de Tiempo y Eventos (M29/M31/M74)
 
-- [ ] Guardar fecha, hora, estación (M29/M31) y clima (M32) [S]
+- [x] Guardar fecha, hora, estación (M29/M31) y clima (M32) [S] — *time: GameClock + TimeCalendar (ox-alpha); clima: WeatherService sección "clima" (glm-5.3-flash, M32 iter. 1)*
 - [ ] Guardar eventos pasados y futuros programados (M74) [M]
 - [ ] Guardar festivales celebrados y calendario [M]
 - [ ] Testear carga en una fecha distinta a la del guardado [C]
@@ -199,11 +204,11 @@
 
 ## Y. Validación Final (DoD)
 
-- [ ] Firmar los documentos del módulo (modelo y plataforma) [S]
-- [ ] Actualizar CHECKLIST-GLOBAL con el progreso real [S]
-- [ ] Actualizar DOCUMENTACION/README.md con el módulo 59 [S]
-- [ ] Actualizar ESTADO-PARALELO.md [S]
-- [ ] Generar el log 62 en Logs/ [S]
+- [x] Firmar los documentos del módulo (modelo y plataforma) [S]
+- [x] Actualizar CHECKLIST-GLOBAL con el progreso real [S]
+- [x] Actualizar DOCUMENTACION/README.md con el módulo 59 [S]
+- [x] Actualizar ESTADO-PARALELO.md [S]
+- [x] Generar el log 62 en Logs/ [S] — *log 307 (glm-5.3-flash, 2026-08-31; el número 62 quedó obsoleto por el protocolo de numeración)*
 
 ## Z. Cierre del Módulo
 

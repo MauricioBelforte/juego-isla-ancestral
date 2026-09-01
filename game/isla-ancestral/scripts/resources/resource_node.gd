@@ -15,11 +15,17 @@ enum Estado { INTACTO, DANIADO, AGOTADO }
 
 signal golpe_aplicado(def_id: StringName, dano: int)
 signal agotado(def_id: StringName, pos: Vector3)
+signal respawn_completado(def_id: StringName)
 
 var def_id: StringName = &""
 var estado: int = Estado.INTACTO
 var golpes_restantes: int = 2
 var herramientas_requerida: StringName = &""
+
+## M15 iter 3: respawn. 0 = sin programar. dia_absoluto (M29) en que reaparece.
+var respawn_dia_absoluto: int = 0
+## Estación en que respawnea (0..3) o -1 para "cualquiera".
+var respawn_estacion: int = -1
 
 var _mesh_intacto: MeshInstance3D
 var _mesh_daniado: MeshInstance3D
@@ -31,6 +37,7 @@ func configurar(def: ResourceDefinition) -> void:
 	def_id = def.def_id
 	golpes_restantes = maxi(1, def.golpes_requeridos)
 	herramientas_requerida = def.herramienta_requerida
+	respawn_estacion = def.get_respawn_estacion_int()
 	_crear_presentacion(def.categoria, def.rareza)
 
 ## Aplica un golpe (llamado por el sistema de interacción/M13).
@@ -53,6 +60,34 @@ func _agotar() -> void:
 	estado = Estado.AGOTADO
 	_actualizar_mesh()
 	agotado.emit(def_id, global_position)
+
+## M15 iter 3: respawn. Programa la estación del nodo y el día absoluto (M29)
+## en que debe reaparecer. Llamado por ResourceManager al agotarse.
+func programar_respawn(dia_absoluto: int) -> void:
+	respawn_dia_absoluto = dia_absoluto
+
+## Indica si el nodo está en un estado que permite respawn inmediato
+## (AGOTADO y con respawn_dia_absoluto > 0).
+func esta_listo_para_respawn() -> bool:
+	return estado == Estado.AGOTADO and respawn_dia_absoluto > 0
+
+## M15 iter 3: evalúa si el nodo debe respawnear HOY y en la estación correcta.
+## Si dia_actual >= respawn_dia y (respawn_estacion==-1 o ==estacion_actual),
+## vuelve a INTACTO con golpes_restantes = max(1, golpes_originales).
+## dia_actual: int (M29 dia_absoluto). estacion_actual: int (0..3).
+func evaluar_respawn(dia_actual: int, estacion_actual: int) -> bool:
+	if not esta_listo_para_respawn():
+		return false
+	if dia_actual < respawn_dia_absoluto:
+		return false
+	if respawn_estacion >= 0 and respawn_estacion != estacion_actual:
+		return false
+	estado = Estado.INTACTO
+	golpes_restantes = 2  # valor por defecto; el manager puede ajustar
+	respawn_dia_absoluto = 0
+	_actualizar_mesh()
+	respawn_completado.emit(def_id)
+	return true
 
 ## ── Presentación (placeholder hasta assets del arte) ─────
 

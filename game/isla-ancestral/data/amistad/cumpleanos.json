@@ -1,0 +1,16 @@
+{
+	"schema_version": 1,
+	"nota": "Cumpleanos de NPCs (M20 + M29). Data-driven y desacoplado de M19: cuando VecinoData (M19) este completo, estos valores se sincronizan desde ahi. mes 1-12, dia 1-28 (calendario de Aurora: mes=28 dias). edad_base = edad en el ano 1 (fundacion).",
+	"cumpleanos": [
+		{ "vecino_id": "FINNEAS",   "nombre": "Finneas",   "mes": 4,  "dia": 12, "edad_base": 28 },
+		{ "vecino_id": "MARA",      "nombre": "Mara",      "mes": 7,  "dia": 3,  "edad_base": 24 },
+		{ "vecino_id": "BRUNO",     "nombre": "Bruno",     "mes": 1,  "dia": 19, "edad_base": 31 },
+		{ "vecino_id": "ELARA",     "nombre": "Elara",     "mes": 10, "dia": 25, "edad_base": 22 },
+		{ "vecino_id": "TOMAS",     "nombre": "Tomas",     "mes": 2,  "dia": 8,  "edad_base": 35 },
+		{ "vecino_id": "NEREIDA",   "nombre": "Nereida",   "mes": 6,  "dia": 30, "edad_base": 19 },
+		{ "vecino_id": "CASIO",     "nombre": "Casio",     "mes": 3,  "dia": 14, "edad_base": 27 },
+		{ "vecino_id": "VALERIA",   "nombre": "Valeria",   "mes": 9,  "dia": 5,  "edad_base": 26 },
+		{ "vecino_id": "OBERON",    "nombre": "Oberon",    "mes": 5,  "dia": 21, "edad_base": 40 },
+		{ "vecino_id": "LUCIA",     "nombre": "Lucia",     "mes": 11, "dia": 11, "edad_base": 23 }
+	]
+}

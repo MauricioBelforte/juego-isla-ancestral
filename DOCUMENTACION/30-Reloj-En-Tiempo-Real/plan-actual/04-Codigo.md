@@ -3,16 +3,20 @@
 
 # 04-Codigo.md — Módulo 30: Reloj en Tiempo Real
 
-## 1. Archivos involucrados (previstos)
+## 1. Archivos involucrados
 
-| Archivo | Tipo | Rol |
+### Scripts
+| Archivo | Propósito | Estado |
 |---|---|---|
-| `res://data/ui/w_reloj.tres` | Data | Config: formato 12h/24h, posición, colores por estación |
-| `res://ui/hud/w_reloj.gd` | Script | Widget HUD que muestra hora/fecha/estación (lee GameClock M29) |
-| `res://ui/hud/w_reloj.tscn` | Escena | UI del reloj |
-| `res://ui/hud/hud.gd` | Script | HUD principal (M53) — contenedor |
-| `res://tests/caso_reloj.tscn` | Test | Escenario de pruebas de límites de fecha (M112) |
-| `res://tests/caso_reloj_tests.gd` | Test | Suite: fin de día/mes/año, estación, cumpleaños, persistencia, anti-exploit |
+| `scripts/clock/w_reloj.gd` | Widget HUD de reloj (lee GameClock M29) | ✅ Implementado |
+| `scripts/clock/reloj_hud.gd` | HUD Reloj — capa de DISPLAY + POLÍTICA. Consumidor de GameClock (M29). Traduce estado interno a strings para Label. Formato 12h/24h, sesión del día (MAÑANA/DÍA/TARDE/NOCHE), helpers de estilo visual para UI | ✅ Implementado |
+
+### Escenas y datos
+| Archivo | Propósito |
+|---|---|
+| `res://data/ui/w_reloj.tres` | Config: formato 12h/24h, posición, colores por estación |
+| `res://ui/hud/w_reloj.tscn` | UI del reloj |
+| `res://ui/hud/hud.gd` | HUD principal (M53) — contenedor |
 
 ## 2. Contrato de datos (API consumida de M29)
 

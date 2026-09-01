@@ -1,3 +1,15 @@
+## Reserva actual
+
+- Estado: 🔵 En curso
+- Agente: GLM (Kilo)
+- Fase: 5 - Base de producción
+- Dificultad: 3
+- Visión: V0/V1
+- Entrada: M14 ✅, M15 ✅, M29 ✅, M93 ✅
+- Salida: RF5 estacional implementado, helper pergaminos M14, SFX/VFX procedurales, preview RF9 V1
+- Archivos: crafting_recipe.gd, crafting_service.gd, crafting_ui.gd, crafting_feedback.gd (nuevo), data/balance/crafting.json, test_crafting.gd extendido
+- Fecha: 2026-08-31 06:50
+
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
@@ -188,3 +200,50 @@
 - [ ] 04-Codigo creado y firmado (rutas, firmas GDScript y logs) [S]
 - [ ] 05-Checklist creado y firmado (este archivo, mínimo 110 ítems) [S]
 - [ ] Copia idéntica de los 5 archivos en plan-actual para continuidad [S]
+
+## M. Iteración 3 — Resolución de pendientes (GLM Kilo 2026-08-31) — Log 303
+
+> Cierra los 4 pendientes reportados en iter 2: RF5 estacional, pergaminos M14, SFX/VFX procedurales, preview RF9.
+
+### M.1 Implementado y verificado (test 0 fallos)
+
+- [x] RF5: campo `temporadas: Array[String]` en `CraftingRecipe` (vacío = siempre) [S]
+- [x] RF5: `es_fabricable_ahora(estacion: int) -> bool` con mapeo de claves texto→enum [S]
+- [x] RF5: `temporadas` en `crafting.json` para `rec_ensalada_bayas` (primavera/verano) y `rec_talisman_ancestral` (otono/invierno) [S]
+- [x] RF5: filtrado por estación actual en `recetas_por_estacion` (oculta sin borrar conocimiento) [M]
+- [x] RF5: `max_craftable`/`puede_craft` devuelven 0/false fuera de temporada [S]
+- [x] RF5: `craft` falla con motivo `temporada_cerrada` y emite `receta_bloqueada_estacion` [S]
+- [x] RF5: integración con M29 vía `GameTime.get_estacion()` + `estacion_cambio` signal [S]
+- [x] RF14: helper `usar_pergamino(item_id: String) -> Dictionary` con prefijo `pergamino_rec_` [S]
+- [x] RF14: nueva señal `pergamino_consumido(rec_id, aprendido)` para feedback honesto (no consume si ya conocida) [S]
+- [x] RF12: `CraftingFeedback` (nodo) instanciado como hijo del servicio en `_ready` [M]
+- [x] RF12: SFX procedural `AudioStreamWAV` (seno 660Hz OK / 880Hz descubrimiento) generado en memoria [M]
+- [x] RF12: VFX `CPUParticles2D` dorado en `CanvasLayer` propia para descubrimiento [M]
+- [x] RF12: notificación vía `NotificationService` con texto cozy (no punitivo) en éxito/fallo [S]
+- [x] RF9: preview V1 — `ColorRect` (swatch hash determinista) + Label `→ {resultado_id}` en `CraftingUI` [M]
+- [x] RF5 UI: aviso `FUERA_TEMPORADA` (ámbar) en el detalle cuando la receta está bloqueada [S]
+- [x] Test: `_test_estacional_rf5` (RF5) — 11 checks OK [M]
+- [x] Test: `_test_pergamino_m14` (RF14) — 4 checks OK [M]
+- [x] Test: `_test_feedback_cargado` (RF12) — 3 checks OK [S]
+- [x] Test: regresión `_test_coste_ao` actualizada para forzar otoño (talismán estacional) [S]
+- [x] Regresión: test M31 ciclo día/noche sigue 12/0 OK [S]
+- [x] Reserva/liberación M31 y reclamación M16 en 4 registros [S]
+- [x] Log 303 generado y firmado [S]
+
+### M.2 Pendientes con dueño (no resueltos en iter 3 / cierre)
+
+- [?] RF17: integración completa M14 use_item → `Crafting.usar_pergamino` (M14 🟡, requiere cambio en M14 para emitir use_item por item tipo pergamino) [M]
+- [?] RF9: preview 3D real con modelo del resultado (M45 sin implementar) [C]
+- [?] RF12: SFX master bus + librería SFX (M91 sin núcleo) [M]
+- [?] RF12: VFX avanzados (M52 sin núcleo) [C]
+- [?] RF14: tiendas venden pergaminos (M38 sin receta de tienda para pergaminos_rec_*) [M]
+- [?] RF3: recetas secretas/ancestrales con feedback dorado adicional (parcial: partículas en descubrimiento) [C]
+
+### M.3 Iteración 3 cierre (GLM Kilo 2026-08-31 07:50) — Log 304
+
+> Cierra los 2 items chicos pendientes del iter 3 y libera M16 a 🟡.
+
+- [x] RF5: test `_test_season_changed_runtime` — conexión a `estacion_cambio` de M29 + emisión segura + `get_estacion_actual()` coherente [M]
+- [x] Decisión de nomenclatura: `coste_recursos` (JSON M93) se mantiene como clave del schema; se mapea a `materiales` en `CraftingRecipe` (M93 es autoridad del schema de balance — usado por crafting + construction + validate_balance). Renombrar rompería M93 y construction. Documentado. [S]
+
+**Iteración 3 — 25 ítems [x], 6 ítems [?] honestos. Total módulo: 25 [x] + 116 [ ] + 6 [?] (de 147). Módulo liberado a 🟡.**

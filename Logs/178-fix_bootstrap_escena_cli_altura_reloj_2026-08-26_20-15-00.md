@@ -1,6 +1,7 @@
-# Log 178: Fix bootstrap escena CLI + altura negativa widget reloj — verificación in-engine M30
+﻿# Log 178: Fix bootstrap escena CLI + altura negativa widget reloj — verificación in-engine M30
 
 **Fecha:** 2026-08-26
+**Hora:** 20:15
 **Modelo:** GLM
 **Plataforma:** Cline
 
@@ -45,4 +46,3 @@ El usuario reportó que no veía el reloj en pantalla (solo FPS, controles WASD,
 - `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` — descubrimientos de capturas (stale/in-engine/PrintWindow)
 - `DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/05-Checklist.md` — nota de re-verificación
 - `CHECKLIST-GLOBAL.md` — fila 48 actualizada (actividad 20:10, notas Log 178)
-

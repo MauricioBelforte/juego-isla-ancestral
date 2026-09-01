@@ -25,6 +25,7 @@ enum Origen { INICIAL, EXPERIMENTACION, COMPRA, EVENTO }
 @export var origen: int = Origen.INICIAL
 @export var precio_pergamino: int = 0
 @export var tags: Array[String] = []
+@export var temporadas: Array[String] = []  # RF5: vacío = siempre; ["primavera","verano"] = solo esas
 
 ## Categorías de texto → enum (para carga data-driven)
 const CATEGORIAS_TEXTO := {
@@ -49,3 +50,30 @@ const ORIGENES_TEXTO := {
 	"compra": Origen.COMPRA,
 	"evento": Origen.EVENTO,
 }
+
+const ESTACIONES_ANYO_TEXTO := {
+	"primavera": 0,
+	"verano": 1,
+	"otono": 2,
+	"invierno": 3,
+}
+
+## ── RF5: filtrado estacional (M29) ────────────────────────
+
+## Indica si la receta es fabricable en la estacion actual del juego.
+## estacion: int (0..3) = GameTime.get_estacion(). Si temporadas vacío => siempre.
+func es_fabricable_ahora(estacion_actual: int) -> bool:
+	if temporadas.is_empty():
+		return true
+	for t in temporadas:
+		var clave: String = str(t).to_lower().strip_edges()
+		if ESTACIONES_ANYO_TEXTO.has(clave):
+			if int(ESTACIONES_ANYO_TEXTO[clave]) == int(estacion_actual):
+				return true
+	return false
+
+## Etiquetas legibles para UI.
+func etiquetas_temporadas() -> String:
+	if temporadas.is_empty():
+		return "todo el año"
+	return ", ".join(temporadas)

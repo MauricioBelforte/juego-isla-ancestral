@@ -15,6 +15,7 @@ var _grid: GridContainer
 var _titulo_label: Label
 var _info_label: Label
 var _slots: Array = []   # Botones del grid (índice = slot del contenedor)
+var _drag_source: int = -1  # Slot origen para swap por dos clicks
 
 func _ready() -> void:
 	layer_type = UILayerType.Type.MODAL_SIMPLE
@@ -144,16 +145,82 @@ func _nombre_item(item_id: String) -> String:
 
 ## ── Interacción ──────────────────────────────────────────
 
-## Click/foco en un slot: marca/desmarca favorito (F en el juego lo hace igual).
+## Click/foco en un slot: drag & drop por dos clicks (selección → swap).
+## Primer click selecciona, segundo click intercambia con el destino.
 func _on_slot_pressed(indice: int) -> void:
 	var inv = get_node_or_null("/root/Inventario")
 	if inv == null:
 		return
 	var slot = _leer_slot(inv, indice)
 	if slot == null or slot.esta_libre():
+		# Slot libre: si hay origen seleccionado, mover ítem aquí
+		if _drag_source >= 0 and _drag_source != indice:
+			_swap_slots(_drag_source, indice)
+			_cancel_drag()
 		return
-	slot.favorito = not slot.favorito
+
+	if _drag_source < 0:
+		# Primer click: seleccionar origen
+		_drag_source = indice
+		_resaltar_slot(indice, true)
+	elif _drag_source == indice:
+		# Segundo click en mismo slot: toggle favorito
+		slot.favorito = not slot.favorito
+		_cancel_drag()
+		_refrescar_contenido()
+	else:
+		# Segundo click en otro slot: intercambiar
+		_swap_slots(_drag_source, indice)
+		_cancel_drag()
+
+## Intercambia el contenido de dos slots vía InventarioService.
+func _swap_slots(a: int, b: int) -> void:
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null:
+		return
+	if inv.has_method("swap_slots"):
+		inv.swap_slots(0, a, 0, b)
+		_refrescar_contenido()
+		return
+	# Fallback: swap manual si el servicio no tiene el método aún
+	var slot_a = _leer_slot(inv, a)
+	var slot_b = _leer_slot(inv, b)
+	if slot_a == null or slot_b == null:
+		return
+	# Copia temporal
+	var tmp_id: String = str(slot_a.get("item_id", ""))
+	var tmp_cant: int = int(slot_a.get("cantidad", 0))
+	var tmp_fav: bool = bool(slot_a.get("favorito", false))
+	# B → A
+	if slot_b.has_method("set"):
+		slot_a.item_id = str(slot_b.get("item_id", ""))
+		slot_a.cantidad = int(slot_b.get("cantidad", 0))
+		slot_a.favorito = bool(slot_b.get("favorito", false))
+		slot_b.item_id = tmp_id
+		slot_b.cantidad = tmp_cant
+		slot_b.favorito = tmp_fav
 	_refrescar_contenido()
+
+## Resalta/des resalta un slot visualmente.
+func _resaltar_slot(indice: int, activo: bool) -> void:
+	if indice < 0 or indice >= _slots.size():
+		return
+	var btn: Button = _slots[indice]
+	if activo:
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = Color(0.85, 0.72, 0.35, 0.3)
+		sb.set_corner_radius_all(6)
+		sb.set_border_width_all(2)
+		sb.border_color = Color(0.85, 0.72, 0.35, 1.0)
+		btn.add_theme_stylebox_override("normal", sb)
+	else:
+		btn.remove_theme_stylebox_override("normal")
+
+## Cancela el estado de drag & drop.
+func _cancel_drag() -> void:
+	if _drag_source >= 0:
+		_resaltar_slot(_drag_source, false)
+	_drag_source = -1
 
 ## ── Callbacks ────────────────────────────────────────────
 
@@ -175,6 +242,20 @@ func toggle() -> void:
 	visible = not visible
 	if visible:
 		_refrescar_contenido()
+		_freeze_world(true)
+	else:
+		_freeze_world(false)
+		_cancel_drag()
+
+## Congela/descongela el mundo al abrir/cerrar inventario (pausa suave).
+func _freeze_world(frozen: bool) -> void:
+	var game_time = get_node_or_null("/root/GameTime")
+	if game_time and game_time.has_method("set_paused"):
+		game_time.set_paused(frozen)
+	# También notificar al UIManager si está disponible
+	var ui_mgr = get_node_or_null("/root/UIManager")
+	if ui_mgr and ui_mgr.has_method("set_world_frozen"):
+		ui_mgr.set_world_frozen(frozen)
 
 ## ── Utilidades ───────────────────────────────────────────
 
@@ -191,3 +272,5 @@ func on_layer_opened() -> void:
 
 func on_layer_closed() -> void:
 	visible = false
+	_cancel_drag()
+	_freeze_world(false)

@@ -1,0 +1,48 @@
+{
+	"id": "reaccion_regalo",
+	"start": "inicio",
+	"nodes": {
+		"inicio": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "",
+			"conditions": [{"clave": "reaccion_id", "operador": "==", "valor": "__nunca__"}],
+			"next_id": "gusta"
+		},
+		"gusta": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "{npc_id} recibe {item_id} con una sonrisa genuina. —Esto me encanta. Gracias de verdad.",
+			"placeholders": {"npc_id": "alguien", "item_id": "el regalo"},
+			"conditions": [{"clave": "reaccion_id", "operador": "==", "valor": "R_GUSTA"}],
+			"next_id": "amado"
+		},
+		"amado": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "{npc_id} se ilumina al recibir {item_id}. —¡Es mi favorito! No sabes cuanto significa esto.",
+			"placeholders": {"npc_id": "alguien", "item_id": "el regalo"},
+			"conditions": [{"clave": "reaccion_id", "operador": "==", "valor": "R_AMADO"}],
+			"next_id": "neutral"
+		},
+		"neutral": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "{npc_id} acepta {item_id} con amabilidad. —Qué detalle. Lo guardo con cariño.",
+			"placeholders": {"npc_id": "alguien", "item_id": "el regalo"},
+			"conditions": [{"clave": "reaccion_id", "operador": "==", "valor": "R_NEUTRAL"}],
+			"next_id": "duplicado"
+		},
+		"duplicado": {
+			"tipo": 0,
+			"speaker_key": "npc",
+			"text_key": "{npc_id} mira {item_id} y sonrie. —Ya lo tengo, pero repetir nunca sobra. Gracias.",
+			"placeholders": {"npc_id": "alguien", "item_id": "el regalo"},
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc"
+		}
+	}
+}

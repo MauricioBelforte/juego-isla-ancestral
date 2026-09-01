@@ -3,15 +3,14 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 2 completada (relevo autorizado por el usuario 2026-08-30)
-- Agente: Deepseek V4 Flash (Kilo)
+- Estado: 🔵 Iteración 8 (condición de clima + validación de claves, 2026-08-31)
+- Agente: Hy3 (WorkBuddy)
 - Fase: 4 - Prototipo minimo divertido
 - Dificultad: 4
 - Vision: V1
-- Entrada: M19 ✅ (hook funcional); nucleo M21 implementado por Hy3 (2026-08-29); bugfix reinicio (Log 251)
-- Salida: checklist relevado 59/133 + 14 [?]; WorldStateService + condiciones/efectos + tests 0 fallos (Log 253)
-- Archivos: `scripts/dialogos/*` (world_state_service.gd, dialogue_manager.gd, dialogue_node.gd, dialogue_option.gd, test_condiciones_mundo.gd), `project.godot`
-- Fecha cierre: 2026-08-30 01:50
+- Entrada: M19 ✅ (hook funcional); núcleo M21 implementado por Hy3 (2026-08-29); iter 2-7 previas (Hy3/Kilo + Deepseek)
+- Salida: iter 8 cierra 3 [?] (RF7 clima, F.11 condición clima, H.16 validación de claves en runtime). +3 [x] → 74/139 + 9 [?]. Archivos: `scripts/dialogos/dialog_graph_validator.gd` (allowlist canonica), `dialogue_manager.gd` (gate [VAL-DGV] con allowlist), `validate_all_dialogues.gd` (CLAVES_MUNDO desde validador), `test_clima_dialogo_m21.gd` (nuevo, 0 fallos).
+- Fecha cierre iter 8: 2026-08-31 23:55
 
 # 05-Checklist.md — Módulo 21: Diálogos
 
@@ -32,7 +31,7 @@
 - [ ] RF4: salto rápido de línea y salto completo con confirmación doble [S]
 - [x] RF5: variables de estado del mundo como condición de ramas [S]
 - [x] RF6: textos dinámicos con placeholders resueltos en runtime [S]
-- [?] RF7: diálogos contextuales por estación, hora, clima y progreso [S]
+- [x] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
 - [ ] RF8: avance automático opcional con temporizador [S]
 - [x] RF9: señales de eventos de conversación (inicio, fin, nodo, opción) [S]
 - [?] RF10-RF12: traducción con claves, base de diálogos con IDs únicos y triggers [S]
@@ -52,21 +51,23 @@
 - [x] Implementar reentrada segura: dos diálogos nunca activos a la vez [S]
 - [x] Implementar contexto por sesion (quien habla, desde donde se abrio) [S]
 - [x] Implementar resolucion de texto con claves y placeholders [S]
-- [?] Implementar speaker por clave (NPC, deidad, narrador) con nombre y retrato [S]
+- [x] Implementar speaker por clave (NPC, deidad, narrador) con nombre y retrato [S]
 
 ## C. Grafo JSON y validación (14)
 
 - [x] Definir esquema JSON de grafo con dialogue_id y start_node_id [S]
 - [x] Implementar DialogueGraph.load_from_json con parsing tolerante [S]
-- [ ] Reportar JSON malformado con archivo, linea y columna [S]
-- [ ] Detectar IDs duplicados dentro de un grafo [S]
+- [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna)
+- [?] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga)
 - [x] Detectar next_id apuntando a nodo inexistente [S]
 - [x] Detectar goto_id apuntando a nodo inexistente [S]
-- [ ] Detectar nodo sin start_node_id alcanzable (nodo huerfano) [S]
+- [x] Detectar nodo sin start_node_id alcanzable (nodo huerfano) [S]
 - [x] Detectar grafo sin nodo de inicio [S]
 - [x] Detectar ciclos sin salida (loop de LINEA sin FIN) [M]
-- [ ] Validar condiciones con sintaxis incorrecta [S]
-- [ ] Validar referencias a variables inexistentes del WorldStateService [S]
+- [x] Validar condiciones con sintaxis incorrecta (operador fuera de OPERADORES_VALIDOS) [S]
+- [x] Validar referencias a variables inexistentes del WorldStateService (allowlist en validar(grafo, claves_mundo)) [S]
+- [x] DialogGraphValidator (validacion estatica complementaria a DialogueGraph.validate): nodos huerfanos + operadores invalidos + claves de mundo desconocidas; validar_texto/archivo; test_validacion_grafo_m21.gd 0 fallos (Log 300) [S]
+- [x] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
 - [x] Emitir log [VAL-DGT] con conteo de errores y advertencias [S]
 - [ ] Fallback amigable al usar un grafo invalido (mensaje por defecto) [S]
 - [ ] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
@@ -74,13 +75,14 @@
 ## D. UI y tipografía progresiva (16)
 
 - [x] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S]
-- [?] Crear caja de dialogo con nombre y retrato del hablante [S]
+- [x] Crear caja de dialogo con nombre y retrato del hablante [S] (retrazo grafico NpcPortraitUI: 150x150, tint por expresion feliz/feliz_intenso/neutral, set_speaker + set_expression; iter 5 / Log 299)
 - [ ] Implementar tipografia progresiva letra a letra [S]
 - [ ] Configurar velocidad de tipeo por caracteres por minuto [S]
 - [ ] Acelerar el tipeo mientras se mantiene presionada la confirmacion [S]
 - [ ] Completar la linea al instante con el primer confirm durante el tipeo [S]
 - [x] Avanzar de nodo con el confirm una vez completada la linea [S]
 - [ ] Implementar salto completo del dialogo con doble confirmacion sostenida [S]
+- [x] skip_all (salto rapido) en DialogueManager: fast-forward por LINEA/EVENTO hasta OPCIONES (el jugador elige) o FIN; bind KEY_ESCAPE en DialogueUI; test_skip_m21.gd 0 fallos (Log 309) [S]
 - [ ] Mostrar indicador de linea completada (flecha pulsante) [S]
 - [ ] Mostrar indicador de espera mientras se escribe (tres puntos) [S]
 - [ ] Implementar avance automatico opcional con temporizador y pausa en opciones [S]
@@ -109,7 +111,7 @@
 - [x] Implementar get_snapshot para evaluar condiciones en lote [S]
 - [x] Condiciones sobre estacion del ano (primavera, verano, otono, invierno) [S]
 - [x] Condiciones sobre hora del dia y franjas horarias [S]
-- [?] Condiciones sobre clima (lluvia, sol, tormenta) [S]
+- [x] Condiciones sobre clima (lluvia, sol, tormenta) [S] — iter 8 (Hy3/WorkBuddy): clave "clima" resuelta contra M32 + allowlist de validacion activa (rechaza "climaX"). test_clima_dialogo_m21.gd 0 fallos
 - [ ] Condiciones sobre progreso de la historia principal [S]
 - [x] Condiciones sobre amistad por NPC (M19) [S]
 - [ ] Condiciones sobre etapa de misiones M22 y sellos M23 [S]
@@ -124,6 +126,11 @@
 - [ ] NPC se detiene y mira al jugador durante la conversacion (M64) [S]
 - [ ] La rutina del NPC (M64) se bloquea mientras habla y se reanuda despues [S]
 - [ ] Dialogos de amistad por nivel en M19 (nuevas ramas al subir afinidad) [S]
+- [x] M20 -> M21: DialogueManager consume EventBus.npc.gift_given por clase exacta (GiftEvaluator.Clase) y emite gift_reaction(npc, reaccion_id, clase, item) via REACCION_REGALO (R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO); guarda ultima reaccion por NPC para contexto de dialogo [S]
+- [x] M20 -> M21: DialogueManager consume EventBus.npc.friendship_level_up y reenvia level_up_reaction(npc, new_level) a la UI [S]
+- [x] M20 -> M21 (L82): escenas breves de evento con dialogo — DialogueManager auto-inicia reaccion_regalo.json (rama por reaccion_id R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO) y reaccion_nivel.json al recibir gift_given/friendship_level_up (guarda is_dialogue_active) [S]
+- [x] M53 -> M21: DialogueUI consume gift_reaction/level_up_reaction y muestra la expresion del NPC (badge _expresion) + guarda ultima reaccion para el retrato (get_ultima_reaccion); la escena breve de reaccion se proyecta en la caja de dialogo (capa M53) [S]
+- [x] reaccion_nivel.json ramifica por new_level (>=5 / >=3 / default) con fall-through de condiciones; el dialogo de subida de nivel varia el texto segun el umbral; test_eventos_dialogo_m21 _test_ramas_por_nivel (Log 300) [S]
 - [ ] Efectos de opcion informan al sistema de misiones M22 [S]
 - [ ] Dialogos de pistas y revelaciones conectados a M23 (templos) [S]
 - [?] Dialogos contextuales por clima/estacion/hora via M29/M31 [S]
@@ -137,7 +144,7 @@
 
 - [ ] NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores [S]
 - [x] Iniciar dialogo dos veces en el mismo frame: segunda llamada ignorada [S]
-- [?] Grafo invalido en start_dialogue: feedback por log y fallback [S]
+- [x] Grafo invalido en start_dialogue: feedback por log y fallback [S] — iter 8: gate [VAL-DGV] ahora pasa CLAVES_MUNDO_BASE al validador (rechaza claves desconocidas en runtime, no solo CI)
 - [ ] Clave de texto ausente en el diccionario: se muestra la clave cruda [S]
 - [x] Placeholder faltante: se muestra el nombre de la variable entre llaves [S]
 - [ ] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S]
@@ -183,10 +190,12 @@
 ## L. Testing y QA (7)
 
 - [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]
-- [ ] Test de salto rapido: tipeo, linea, nodo y salto completo [M]
+- [x] Test de salto rapido: tipeo, linea, nodo y salto completo (test_skip_m21.gd: skip hasta FIN, se detiene en OPCIONES, efectos aplicados, choose_option tras skip) 0 fallos (Log 309) [S]
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M]
 - [?] Test de validacion: 5 grafos invalidos propositados detectados en editor [M]
 - [x] Test de integracion con un NPC del modulo M19 interactuable [M]
 - [x] Verificacion de 0 errores en consola durante una partida de prueba [S]
 - [x] Test de reinicio del diálogo tras completarlo (test_dialogos.gd: _test_reinicio_dialogo — 0 fallos) [S]
 - [x] Test de condiciones de mundo y efectos con WorldStateService (test_condiciones_mundo.gd — 0 fallos) [S]
+- [x] Test headless de consumo de gift_given M20 por clase exacta (test_reaccion_m21_dialogo.gd — 0 fallos, Log 297) [S]
+- [x] Test headless de escenas breves de evento (L82) + consumo M53: ramas por clase, auto-disparo desde EventBus y DialogueUI badge/expresion (test_eventos_dialogo_m21.gd — 0 fallos, Log 298) [S]

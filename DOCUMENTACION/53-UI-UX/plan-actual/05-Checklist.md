@@ -81,14 +81,14 @@
 
 - [x] Crear InventoryLayer como UILayer tipo MODAL_FULL [S]
 - [x] Grid de objetos con celdas enfocables y conteo de apilables (M11/M38) [M]
-- [ ] Drag & drop con ratón entre celdas y hotbar [M]
+- [x] Drag & drop con ratón entre celdas y hotbar [M]
 - [ ] Mover objetos con gamepad (agarrar/soltar con confirm y dirección) [M]
 - [ ] Categorías y orden (nombre/peso/reciente) navegables [M]
-- [ ] Hotbar sincronizada con el inventario en ambos sentidos [M]
+- [x] Hotbar sincronizada con el inventario en ambos sentidos [M]
 - [x] Tooltip del objeto al enfocar o hacer hover en la celda [S]
 - [ ] Confirmación antes de descartar objetos permanentemente [S]
 - [x] Actualización en vivo por inventory.changed sin re-render completo [M]
-- [ ] Verificar que abrir inventario congele el mundo con fade suave (pausa) [M]
+- [x] Verificar que abrir inventario congele el mundo con fade suave (pausa) [M]
 
 ## F. Minimapa (8)
 
@@ -109,8 +109,8 @@
 - [x] Pool único de nodos tooltip sin allocaciones por uso [M]
 - [x] Clamp de posición al viewport con margen de 8 px [S]
 - [x] Cierre al mover foco, salir del área o acción transversal [S]
-- [ ] Texto breve y amable con jerarquía M88 (título y cuerpo) [S]
-- [ ] Verificar que el tooltip nunca bloquea el input del mundo [S]
+- [x] Texto breve y amable con jerarquía M88 (título y cuerpo) [S]
+- [x] Verificar que el tooltip nunca bloquea el input del mundo [S]
 
 ## H. Feedback visual, audio y táctil (10)
 

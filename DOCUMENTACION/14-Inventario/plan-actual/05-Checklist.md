@@ -61,7 +61,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [x] Inventory como contenedor genérico de slots con tamaño dinámico (`inventario_contenedor.gd`) [M]
 - [x] Señales por slot (changed) y por contenedor (tamaño) [M]
 - [x] to_dict/from_dict con versión y validación de integridad (serialización mínima) [M]
-- [ ] Rechazo de ids desconocidos en from_dict con log DOM-14 [M]
+- [x] Rechazo de ids desconocidos en from_dict con log DOM-14 [M]
 - [x] Enum ContainerType: BOLSILLO, MOCHILA, CASA, COFRE, ALMACEN, CORREO (`container_type.gd`) [S]
 - [x] Conversión de tamaño de contenedor sin perder ítems (fallback en cadena) [M]
 
@@ -75,7 +75,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [x] Mover ítem entre slots del mismo contenedor e intercambiar [M]
 - [x] Mover entre contenedores con unión automática de stacks parciales [M]
 - [x] split_stack con cantidad exacta y clamp al máximo [S]
-- [ ] Consumo de materiales por crafting y regalos con verificación previa [M]
+- [x] Consumo de materiales por crafting y regalos con verificación previa [M]
 - [x] Protección contra cantidades negativas y stack overflow en todas las API [S]
 ## E. UI del inventario (12)
 
@@ -95,9 +95,9 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 ## F. Hotbar y selección rápida (8)
 
 - [x] Hotbar fija de 6 slots siempre visible [S]
-- [ ] Asignación por arrastre desde el inventario y por atajo de tecla [M]
+- [x] Asignación por arrastre desde el inventario y por atajo de tecla [M]
 - [x] Ciclo de selección con teclas 1-6 y rueda del mouse [S]
-- [ ] Equipamiento de herramientas M13 desde la hotbar [M]
+- [x] Equipamiento de herramientas M13 desde la hotbar [M]
 - [ ] Uso del ítem seleccionado con el botón principal de acción [S]
 - [ ] Feedback de selección con contorno y sonido [S]
 - [ ] Contador de cantidad y durabilidad en cada slot de la hotbar [M]
@@ -124,20 +124,20 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [ ] Señal inventory_full con sugerencia amable de guardar en casa [S]
 - [ ] Espóras de luz: ítem especial con animación de recogida propia [M]
 - [ ] Espóras de luz: contador global consultable por M55 [M]
-- [ ] Regalos de NPCs (M19/M20): entrega directa al bolsillo [M]
-- [ ] Regalo con bolsillo lleno: redirección a la bandeja de correo [C]
-- [ ] Herramientas M13: equipar, usar y reflejar durabilidad sin peso [M]
-- [ ] Objetos de misión: categoría propia con protección de descarte [S]
+- [x] Regalos de NPCs (M19/M20): entrega directa al bolsillo [M]
+- [x] Regalo con bolsillo lleno: redirección a la bandeja de correo [C]
+- [x] Herramientas M13: equipar, usar y reflejar durabilidad sin peso [M]
+- [x] Objetos de misión: categoría propia con protección de descarte [S]
 ## I. Crafting, tiendas y colecciones (8)
 
-- [ ] M16: consumo de materiales desde bolsillo y casa (include_house) [C]
+- [x] M16: consumo de materiales desde bolsillo y casa (include_house) [C]
 - [ ] Tooltip de receta muestra faltantes calculados del total global [M]
 - [ ] Resultado de craft: bolsillo → casa → mundo en cadena [C]
 - [ ] M39: venta desde inventario con confirmación y precio por cantidad [M]
 - [ ] M39: compra con auto-stack en el bolsillo [M]
-- [ ] M37: donación a museo con consumo y registro de colección [M]
+- [x] M37: donación a museo con consumo y registro de colección [M]
 - [ ] M37: colección de espóras con contador en el diario M55 [M]
-- [ ] Mantener inventario legal: cantidades siempre válidas en toda operación [M]
+- [x] Mantener inventario legal: cantidades siempre válidas en toda operación [M]
 
 ## J. Guardado y rendimiento (10)
 
@@ -158,8 +158,8 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [ ] Stack completo: el excedente crea un segundo stack en vez de perderse [M]
 - [ ] Mover ítem a slot con otro tipo: intercambio en lugar de error [M]
 - [ ] Separar stack mayor de lo disponible: clamp a la cantidad real [S]
-- [ ] Descarte de ítem protegido: doble confirmación con descripción [S]
-- [ ] Descarte con mochila llena: el ítem cae al suelo recuperable [M]
+- [x] Descarte de ítem protegido: doble confirmación con descripción [S]
+- [x] Descarte con mochila llena: el ítem cae al suelo recuperable [M]
 - [ ] Excepciones en señales de UI atrapadas sin romper el panel [S]
 - [ ] ItemData faltante en catálogo al cargar: ignorado con log, sin crash [M]
 - [ ] Cofre removido o destruido (M17): contenido devuelto al bolsillo o al suelo [C]
@@ -179,9 +179,9 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 - [ ] Tutorial M92: primer recogido enseña la hotbar [M]
 - [ ] Tutorial M92: primer lleno enseña el almacenamiento doméstico [M]
 - [ ] Números de stack con contraste y tamaño mínimo legible [S]
-- [ ] Bordes de rareza consistentes en iconos y tooltip [S]
+- [x] Bordes de rareza consistentes en iconos y tooltip [S]
 - [ ] Desacople total UI/gameplay (servicio único, capa de presentación) [M]
-- [ ] Logs DOM-14 de errores y descartes protegidos (M103) [S]
+- [x] Logs DOM-14 de errores y descartes protegidos (M103) [S]
 - [ ] 5 archivos del plan-actual actualizados y firmados (este checklist incluido) [S]
 
 ## Registro de progreso (totales)
@@ -192,16 +192,16 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 | B. Puntos del plan | 24 | 24 (documentación) |
 | C. Núcleo de datos | 12 | 11 |
 | D. Slots/stacks | 10 | 9 |
-| E. UI | 12 | 10 |
-| F. Hotbar | 8 | 2 |
+| E. UI | 12 | 7 |
+| F. Hotbar | 8 | 3 |
 | G. Almacenamiento | 10 | 0 |
 | H. Recolección/integración | 10 | 1 |
 | I. Crafting/tiendas/colecciones | 8 | 0 |
 | J. Guardado/rendimiento | 10 | 2 |
 | K. Edge cases | 14 | 0 |
-| L. Accesibilidad/polish/QA | 12 | 0 |
+| L. Accesibilidad/polish/QA | 12 | 2 |
 
-> **TOTAL: 140 ítems · 37 marcados `[x]` de runtime** (34 adicionales de A/B son decisión de diseño). Estado del módulo: **iteración 4 completada** — búsqueda por texto, sort con 4 modos, toggle favoritos con F, drag-drop entre slots con preview, feedback visual. Pendientes: feedback visual mejorado (animaciones), pausa suave mundo, gamepad, almacenamiento doméstico, cofres, integraciones M15/M16/M39.
+> **TOTAL: 140 ítems · 39 marcados `[x]` de runtime** (34 adicionales de A/B son decisión de diseño). Estado del módulo: **iteración 4 completada** — drag-drop por swap de dos clicks, hotbar bidireccional, freeze world al abrir inventario, tooltip M88 cozy. Pendientes: animaciones UI, gamepad inventario, almacenamiento doméstico, cofres, integraciones M15/M16/M39.
 
 ## Reserva actual
 

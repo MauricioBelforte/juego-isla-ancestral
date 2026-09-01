@@ -228,3 +228,38 @@ V1: aprobación estética final del usuario
 - Test V4: `run_scene` lanza la escena; `get_errors()` refleja un error inducido; `capture_viewport()` devuelve imagen del render.
 - Test de fallback: deshabilitar V4 → el flujo de personaje funciona igual vía V2.
 - Test de contexto: 5 iteraciones seguidas no exceden presupuesto razonable de tokens.
+
+## 6. Escena de preview de personaje
+
+```
+# Estructura de preview_personaje.tscn
+Node3D (PreviewRoot)
+├── Camera3D (fija, encuadre documentado)
+│   └── Position3D (target: slot del modelo)
+├── DirectionalLight3D (key light, 45° arriba)
+├── DirectionalLight3D (fill light, -30° lateral, intensidad 0.3)
+├── DirectionalLight3D (rim light, detrás, intensidad 0.5)
+├── WorldEnvironment (fondo gris medio #808080, ambient light bajo)
+└── Slot (Node3D vacío, modelo voxel se instancia aquí)
+```
+
+**Uso:** el agente instancia un modelo voxel en el Slot, renderiza con V4, captura screenshot, y compara con referencia.
+
+**Scripts necesarios:**
+- `scripts/preview/preview_personaje.gd` — gestiona Slot, cámara, iluminación
+- `scripts/preview/captura_preview.gd` — captura directa a Logs/screenshots/
+
+## 7. Plan de QA detallado
+
+| Test | Vía | Criterio de éxito | Herramienta |
+|------|-----|-------------------|-------------|
+| V1 imagen | Chat | Agent identified elements correctly | Manual |
+| V2 capture_window | MCP screen | PNG readable, viewport visible | screen-mcp |
+| V3 export web | Playwright | Load <30s, screenshot shows scene | webapp-testing |
+| V3 interacción | Playwright | Click/key moves character | webapp-testing |
+| V4 run_scene | godot-mcp | Scene launches without errors | godot-mcp |
+| V4 get_errors | godot-mcp | Error reflected correctly | godot-mcp |
+| V4 capture_viewport | godot-mcp | Render image returned | godot-mcp |
+| Fallback | V2 | Flow works with V4 disabled | screen-mcp |
+| Contexto | All | 5 iterations within token budget | Manual |
+| Privacidad | All | No capture leaves local machine | Manual |

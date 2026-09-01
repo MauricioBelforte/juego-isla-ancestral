@@ -4,17 +4,29 @@
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-17
 
-## Archivos/componentes a crear (implementación futura)
+## Archivos/componentes (implementación)
 
-| Archivo | Contenido |
-|---|---|
-| `Assets/_Project/Scripts/Core/SoftlockGuard.cs` | Singleton detector + recuperador (tick 60 s + eventos) |
-| `Assets/_Project/Scripts/Core/Invariants/*.cs` | Invariantes por categoría (objeto, NPC, misión, puzzle, vehículo, jugador) |
-| `Assets/_Project/Scripts/Core/Recovery/CofreRecuperacion.cs` | Catálogo de objetos únicos recuperados (1 copia inmutable) |
-| `Assets/_Project/Scripts/Core/Recovery/CheckpointManager.cs` | 3 slots/bioma + emergencia; escritura atómica |
-| `Assets/_Project/Scripts/Core/Recovery/MisionFallbacks.cs` | Registro declarativo de rutas alternativas por objetivo |
-| `Assets/_Project/Scripts/Core/Recovery/NpcRestore.cs`, `VehiculoRestore.cs`, `JugadorRestore.cs` | Recuperaciones por categoría |
-| `Assets/_Project/Scripts/Data/SoftlockRules.asset` | Config (tiempos, radios, cantidades de slots) |
+> ⚠️ **Nota de paths (2026-08-30):** La implementación real es GDScript en `scripts/core/invariants/`, no C# como se documentó originalmente.
+
+### Scripts implementados
+| Archivo | Propósito | Estado |
+|---|---|---|
+| `scripts/core/softlock_guard.gd` | Singleton detector + recuperador (tick 60 s + eventos) | ✅ Implementado |
+| `scripts/core/invariants/invariant_base.gd` | `InvariantBase` (class_name): clase base abstracta para todas las invariantes. Cada subclase implementa `_check()` | ✅ Implementado |
+| `scripts/core/invariants/irecoverable.gd` | `IRecoverable` (class_name): contrato de recuperación. Cada sistema externo implementa este contrato y registra su handler al SoftlockGuard. Enum `CategoriaRecuperable` (JUGADOR=0, NPC=1, MISION=2, PUZZLE=3, VEHICULO=4, OBJETO_CLAVE=5) | ✅ Implementado |
+| `scripts/core/invariants/jugador_invariant.gd` | `JugadorInvariant`: valida jugador vivo, sobre geometría válida, dentro del mundo. Prioridad 0. Teleport al checkpoint | ✅ Implementado |
+| `scripts/core/invariants/npc_invariant.gd` | `NpcInvariant`: valida NPCs, nodo válido, agenda rehidratable, no atascados. Reusa watchdog anti-atasco de M64 (2s re-path / 6s teleport hogar) | ✅ Implementado |
+| `scripts/core/invariants/mision_invariant.gd` | `MisionInvariant`: valida misiones/objetivos en curso. Cada objetivo tiene un Fallback declarable; detecta condición imposible | ✅ Implementado |
+| `scripts/core/invariants/objeto_clave_invariant.gd` | `ObjetoClaveInvariant`: valida objetos clave únicos: posición válida y navegable, o justificación narrativa. 2+ caminos verificables | ✅ Implementado |
+| `scripts/core/invariants/puzzle_invariant.gd` | `PuzzleInvariant`: valida puzzles resoluble en 30s de diagnóstico. Reinicio al estado inicial del slot | ✅ Implementado |
+| `scripts/core/invariants/vehiculo_invariant.gd` | `VehiculoInvariant`: valida vehículos dentro del mundo. Reaparición en amarre tras 30s de timeout | ✅ Implementado |
+
+### Pendientes
+| Archivo | Propósito | Estado |
+|---|---|---|
+| `scripts/core/recovery/cofre_recuperacion.gd` | Catálogo de objetos únicos recuperados (1 copia inmutable) | ⬜ Pendiente |
+| `scripts/core/recovery/checkpoint_manager.gd` | 3 slots/bioma + emergencia; escritura atómica | ⬜ Pendiente |
+| `scripts/core/recovery/mission_fallbacks.gd` | Registro declarativo de rutas alternativas por objetivo | ⬜ Pendiente |
 
 ## API clave (borrador)
 

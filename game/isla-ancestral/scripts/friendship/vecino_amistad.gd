@@ -11,10 +11,15 @@ extends RefCounted
 ## Umbrales por nivel (03-Diseno §4): puntos acumulados para alcanzar cada nivel.
 const UMBRALES := [0, 20, 40, 70, 100, 140, 190, 250, 320, 400, 500]
 
+## Umbrales efectivos (data-driven): FriendshipService los inyecta desde
+## amistad_config.tres al crear la instancia; fallback = const UMBRALES.
+var umbrales: Array = UMBRALES
+
 const LIMITE_DIARIO := {
 	"regalo": 1,
 	"charla": 1,
 	"carta": 1,
+	"cumpleanos": 1,   # 1 regalo de cumpleanos por dia (NO consume el limite "regalo")
 }
 
 var vecino_id: String = ""
@@ -24,6 +29,7 @@ var _regalos_recibidos: Array = []          # item_ids ya regalados (memoria)
 var _limites_hoy: Dictionary = {}           # tipo -> cantidad usada hoy
 var _dia_actual: int = 0
 var _recompensas_pendientes: Array = []     # reward_ids por reclamar
+var _recuerdos: Array[String] = []          # memoria narrativa (primer regalo, cumpleanos)
 
 func _init(p_vecino_id: String) -> void:
 	vecino_id = p_vecino_id
@@ -36,8 +42,8 @@ func get_puntos() -> int:
 	return puntos
 
 func get_progreso() -> Dictionary:
-	var umbral_ini: int = int(UMBRALES[clampi(nivel - 1, 0, UMBRALES.size() - 1)])
-	var umbral_sig: int = int(UMBRALES[clampi(nivel, 0, UMBRALES.size() - 1)])
+	var umbral_ini: int = int(umbrales[clampi(nivel - 1, 0, umbrales.size() - 1)])
+	var umbral_sig: int = int(umbrales[clampi(nivel, 0, umbrales.size() - 1)])
 	var en_nivel: int = puntos - umbral_ini
 	var ancho: int = maxi(1, umbral_sig - umbral_ini)
 	return {"nivel": nivel, "puntos": puntos, "en_nivel": en_nivel, "ancho": ancho, "progreso": float(en_nivel) / float(ancho)}
@@ -55,6 +61,15 @@ func get_memoria() -> Array:
 
 func get_recompensas_pendientes() -> Array:
 	return _recompensas_pendientes.duplicate()
+
+## ── Recuerdos narrativos (para M21: el vecino menciona el primer regalo,
+##    cumpleanos celebrado, etc.) ──────────────────────────────
+func agregar_recuerdo(texto: String) -> void:
+	if not (texto in _recuerdos):
+		_recuerdos.append(texto)
+
+func get_recuerdos() -> Array[String]:
+	return _recuerdos.duplicate()
 
 ## ── Acciones ──────────────────────────────────────────────
 
@@ -75,7 +90,7 @@ func intentar_usar_limite(tipo: String, dia: int) -> bool:
 func aplicar_puntos(delta: int, recompensas_nivel: Dictionary) -> bool:
 	puntos += maxi(0, delta)
 	var subio := false
-	while nivel < UMBRALES.size() - 1 and puntos >= UMBRALES[nivel]:
+	while nivel < umbrales.size() - 1 and puntos >= umbrales[nivel]:
 		nivel += 1
 		subio = true
 		if recompensas_nivel.has(nivel):
@@ -104,12 +119,13 @@ func serializar() -> Dictionary:
 		"limites_hoy": _limites_hoy.duplicate(),
 		"dia": _dia_actual,
 		"pendientes": _recompensas_pendientes.duplicate(),
+		"recuerdos": _recuerdos.duplicate(),
 	}
 
 func deserializar(d: Dictionary) -> void:
 	vecino_id = str(d.get("vecino_id", vecino_id))
 	puntos = maxi(0, int(d.get("puntos", 0)))
-	nivel = clampi(int(d.get("nivel", 1)), 1, UMBRALES.size() - 1)
+	nivel = clampi(int(d.get("nivel", 1)), 1, umbrales.size() - 1)
 	_regalos_recibidos.clear()
 	for r in d.get("regalos", []):
 		_regalos_recibidos.append(str(r))
@@ -120,3 +136,6 @@ func deserializar(d: Dictionary) -> void:
 	_recompensas_pendientes.clear()
 	for p in d.get("pendientes", []):
 		_recompensas_pendientes.append(str(p))
+	_recuerdos.clear()
+	for r in d.get("recuerdos", []):
+		_recuerdos.append(str(r))

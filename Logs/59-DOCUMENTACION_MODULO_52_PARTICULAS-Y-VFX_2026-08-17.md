@@ -1,8 +1,9 @@
-# Log 59 — Documentación Módulo 52 (Partículas y VFX)
+﻿# Log 59 — Documentación Módulo 52 (Partículas y VFX)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-17
+**Hora:** 21:25
 
 ## Contexto
 

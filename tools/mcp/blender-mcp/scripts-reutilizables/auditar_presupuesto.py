@@ -49,8 +49,14 @@ for raiz, dirs, files in os.walk(BM):
                     sm = o.material_slots[cara.material_index].material
                     if sm:
                         mats_usados.add(sm.name)
-        zmin = min(min((o.matrix_world @ mathutils.Vector(c)).z
-                       for c in o.bound_box) for o in objs)
+        # E-24: vertices reales para reportar zmin honesto. AABB miente
+        # en rotados (esquinas vacias bajan el min). Solo display.
+        def zmin_real(o):
+            if len(o.data.vertices) == 0:
+                return min((o.matrix_world @ mathutils.Vector(c)).z
+                           for c in o.bound_box)
+            return min((o.matrix_world @ v.co).z for v in o.data.vertices)
+        zmin = min(zmin_real(o) for o in objs)
         rel = os.path.relpath(path, BM)
         lim = PRESUPUESTO[sufijo]
         flag = ''

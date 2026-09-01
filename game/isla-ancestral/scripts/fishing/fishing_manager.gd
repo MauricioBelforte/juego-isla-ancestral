@@ -165,17 +165,10 @@ func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
 		candidatas.append(pez)
 	if candidatas.is_empty():
 		candidatas = _peces  # fallback: nunca pescar "nada" (cozy)
-	# Peso: base x bono cebo x pity
+	# Peso: base x bono cebo x bono clima x pity
 	var pesos: Array = []
 	for pez in candidatas:
-		var peso: float = pez.peso_rareza
-		if cebo and pez.cebos_preferidos.has(cebo.id):
-			peso *= cebo.multiplicador_probabilidad
-		if pez.pity > 0:
-			var sin_exito: int = int(_pity_contadores.get(pez.id, 0))
-			if sin_exito >= pez.pity:
-				peso *= 10.0  # pity garantiza en el roll ponderado
-		pesos.append(peso)
+		pesos.append(_peso_efectivo(pez, cebo))
 	# PRNG ponderado
 	var total: float = 0.0
 	for p in pesos:
@@ -191,6 +184,55 @@ func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
 				_pity_contadores[elegido.id] = 0
 			return elegido
 	return candidatas[0] if candidatas.size() > 0 else null
+
+## ── Bonos de clima (M32→M34, glm-5.3-flash 2026-08-31) ──
+## Diseño M32 §6 / checklist P21: "lluvia +15% raro; tropical +25% raro;
+## nunca prohibida". El clima NUNCA filtra especies (bono sí, bloqueo no):
+## solo multiplica pesos. Criterios de bono (ambos se suman por multiplicación):
+##  1. Preferencia JSON: pez.climas incluye el clima actual (campo "clima" de
+##     fishing.json, cargado pero sin usar hasta hoy).
+##  2. Rareza: peso_rareza <= UMBRAL_RARO (los "raros" suben con lluvia/tropical).
+const UMBRAL_RARO: float = 0.08
+const BONO_LLUVIA: float = 1.15
+const BONO_TROPICAL: float = 1.25
+
+## Peso efectivo de un pez bajo el clima actual (+ cebo + pity).
+## Extraído de resolver_especie para testabilidad (sin roll).
+func _peso_efectivo(pez: FishDefinition, cebo: CeboDefinition = null) -> float:
+	var peso: float = pez.peso_rareza
+	var clima_m32 := _clima_actual_m32()
+	if clima_m32 >= 0:
+		var bono := 1.0
+		var es_preferido := pez.climas.has(_clima_m32_a_m34(clima_m32))
+		var es_raro := pez.peso_rareza <= UMBRAL_RARO
+		if clima_m32 == 2 and (es_preferido or es_raro):  # LLUVIA
+			bono = BONO_LLUVIA
+		elif clima_m32 == 7 and (es_preferido or es_raro):  # TROPICAL
+			bono = BONO_TROPICAL
+		peso *= bono
+	if cebo and pez.cebos_preferidos.has(cebo.id):
+		peso *= cebo.multiplicador_probabilidad
+	if pez.pity > 0:
+		var sin_exito: int = int(_pity_contadores.get(pez.id, 0))
+		if sin_exito >= pez.pity:
+			peso *= 10.0  # pity garantiza en el roll ponderado
+	return peso
+
+## Clima actual del WeatherService (M32) o -1 si no existe.
+func _clima_actual_m32() -> int:
+	var w := get_node_or_null("/root/Weather")
+	if w == null or not w.has_method("get_clima"):
+		return -1
+	return int(w.get_clima())
+
+## Convierte el enum de M32 (0-8) al formato numérico de fishing.json
+## (0=despejado, 1=lluvia, 2=tormenta, 3=nieve) que usan pez.climas.
+func _clima_m32_a_m34(clima_m32: int) -> int:
+	match clima_m32:
+		2: return 1  # LLUVIA
+		3: return 2  # TORMENTA
+		5: return 3  # NIEVE
+	return 0  # despejado (SOLEADO/NUBLADO/NIEBLA/VIENTO/TROPICAL/ESPECIAL)
 
 func _pity_incrementar() -> void:
 	for pez in _peces:

@@ -63,20 +63,26 @@ def abrir(modulo, nombre):
 
 
 def medir_apoyo(prefijo):
-    """Devuelve z_min y alto del grupo. Sirve para detectar flotacion (E-12)."""
+    """Devuelve z_min y alto del grupo. Sirve para detectar flotacion (E-12).
+
+    E-24: mide sobre VERTICES REALES, nunca sobre `bound_box`. Un objeto
+    rotado tiene esquinas de AABB vacias que tiran el minimo para abajo y
+    producen un falso "HUNDIDO". Caso real (log 303): `roca_comun`
+    SM_Roca_Comun_Chica con rot (0.2, -0.2, 1.1) daba bbox_min=-0.1092
+    cuando sus vertices reales solo bajan a 0.0450 -> 15 cm de falso hundido.
+    """
     code = """
 import bpy, json
-from mathutils import Vector
 PREF = @@PREF@@
 obs = [o for o in bpy.context.scene.objects
        if o.type == 'MESH' and o.name.startswith(PREF)]
 if not obs:
     print(json.dumps({'error': 'sin objetos'}))
 else:
-    zmin = min((o.matrix_world @ Vector(c)).z
-               for o in obs for c in o.bound_box)
-    zmax = max((o.matrix_world @ Vector(c)).z
-               for o in obs for c in o.bound_box)
+    # E-24: vertices reales en coordenadas de mundo.
+    zs = [(o.matrix_world @ v.co).z for o in obs for v in o.data.vertices]
+    zmin = min(zs)
+    zmax = max(zs)
     print(json.dumps({'z_min': round(zmin, 4),
                       'z_max': round(zmax, 4),
                       'alto': round(zmax - zmin, 4)}))

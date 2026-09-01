@@ -23,6 +23,10 @@ var quest := QuestEvents.new()
 var npc := NPCEvents.new()
 ## ── Dominio: CALENDAR ────────────────────────────────────
 var calendar := CalendarEvents.new()
+## ── Dominio: TIME ──────────────────────────────────────────
+var time := TimeEvents.new()
+## ── Dominio: WEATHER (M32) ───────────────────────────────
+var weather := WeatherEvents.new()
 ## ── Dominio: TRAVEL ──────────────────────────────────────
 var travel := TravelEvents.new()
 ## ── Dominio: UI ──────────────────────────────────────────
@@ -74,8 +78,14 @@ class NPCEvents:
 	signal npc_moved_in(npc_id: String, island: String)
 	## Se emite cuando sube el nivel de amistad
 	signal friendship_level_up(npc_id: String, new_level: int)
-	## Se emite cuando se le da un regalo a un NPC
-	signal gift_given(npc_id: String, item_id: String, liked: bool)
+	## Se emite cuando se le da un regalo a un NPC.
+	## clase: GiftEvaluator.Clase (AMADO/GUSTA/NEUTRAL/DUPLICADO) para que M21
+	## reaccione por clase exacta (expresion/texto), no solo "le gusto o no".
+	signal gift_given(npc_id: String, item_id: String, clase: int)
+	## Se emite cuando amanece el cumpleanos de un NPC (M20 + M29)
+	signal cumpleanos(npc_id: String, edad: int)
+	## Se emite cuando el jugador recibe la respuesta/carta de un NPC (M20 + M29)
+	signal carta_recibida(npc_id: String, respuesta_id: String)
 
 class CalendarEvents:
 	## Se emite cuando empieza un nuevo día
@@ -84,6 +94,16 @@ class CalendarEvents:
 	signal season_changed(old_season: String, new_season: String)
 	## Se emite cuando llega un barco/vessel
 	signal vessel_arrived(island: String, cargo: Array)
+
+class TimeEvents:
+	## Se emite solo al cambiar de franja horaria (no cada hora)
+	signal fase_cambio(fase: int)
+
+class WeatherEvents:
+	## Se emite a medianoche del juego cuando cambia el clima del día (M32)
+	signal clima_cambio(clima: int)
+	## Se emite al avanzar la intensidad de la transición del clima (0..1)
+	signal intensidad_cambio(intensidad: float)
 
 class TravelEvents:
 	## Se emite cuando inicia un viaje entre islas

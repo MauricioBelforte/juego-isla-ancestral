@@ -14,12 +14,25 @@ PREFIJO = sys.argv[1] if len(sys.argv) > 1 else 'SM_'
 PLANTILLA = """
 import bpy
 from mathutils import Vector
+
+# E-24: vertices reales para reportar zmin/zmax honestos. AABB miente en
+# rotados (esquinas vacias). El script es informativo (no decide), pero
+# el output se lee como dato y debe ser real.
+def zmin_real(o):
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ v.co).z for v in o.data.vertices)
+def zmax_real(o):
+    if len(o.data.vertices) == 0:
+        return max((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return max((o.matrix_world @ v.co).z for v in o.data.vertices)
+
 obs = [o for o in bpy.data.objects if o.type == 'MESH' and o.name.startswith('@@PREF@@')]
 if not obs:
     print('SIN OBJETOS con prefijo @@PREF@@')
 else:
-    zmin = min(min((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
-    zmax = max(max((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
+    zmin = min(zmin_real(o) for o in obs)
+    zmax = max(zmax_real(o) for o in obs)
     xs = [o.matrix_world.translation.x for o in obs]
     ys = [o.matrix_world.translation.y for o in obs]
     print('objetos:', len(obs))

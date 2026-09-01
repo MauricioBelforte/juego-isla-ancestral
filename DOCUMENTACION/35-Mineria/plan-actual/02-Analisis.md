@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 # 02-Analisis.md — Módulo 35: Minería
 
@@ -61,8 +61,16 @@ La minería en juegos cozy (Animal Crossing, Story of Seasons, Zelda cozy) no bu
 
 1. **Vetas fijas permanentes (D1-A):** descartada por contraer el espíritu cozy y matar la disponibilidad de recursos.
 2. **Golpe único sin dureza (D2-B):** descartada por eliminar el incentivo de progresión de herramientas M13.
-3. **Prefabs flotantes sobre el voxel (D3-B):** descartada por romper coherencia visual, física y de edición del mundo.
+3. **Prefabs flotantes sobre el voxel (D3-B original):** descartada por romper coherencia visual, física y de edición del mundo.
 4. **Drop fijo sin probabilidad (D4-A):** descartada por eliminar la sorpresa y la escalabilidad con picos superiores.
+
+> **⚠️ Cambio de decisión D3 en iter 1 (minimax-m3-free / Kilo Code, 2026-08-31):**
+> la opción A original ("bloques dentro del voxel M08") se sustituyó por **nodos `ResourceNode` de M15** (opción B). Razones:
+> - El sistema `ResourceManager` + `ResourceNode` + `ResourceSpawner` YA cubre drops, respawn calendario M29, persistencia M59, anti-frustración y PRNG de M15. Reescribirlo para M35 duplicaba trabajo y rompía contratos.
+> - Hasta que el usuario resuelva la "capa superficial indestructible" de M08, **tocar la edición del voxel base para M35 es riesgo alto** (el jugador podría agujerear spawn/ruina/playa). La opción B es riesgo 0.
+> - Las vetas siguen siendo bloques "visuales" del mundo (mesh placeholder de M15) pero **no son bloques del voxel**: no se pueden picar con `try_extract` de M13 sobre el voxel base. La integración con M13/M15 se hace vía `MiningManager.intentar_extraccion(nodo, tool)`.
+>
+> La opción A queda como tarea futura de M08 (subsistema de protección), no de M35.
 
 ## 3. Riesgos y mitigaciones
 

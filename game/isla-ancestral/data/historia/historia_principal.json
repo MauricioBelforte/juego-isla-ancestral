@@ -1,0 +1,139 @@
+{
+	"version": 1,
+	"capitulos_totales": 8,
+	"sellos_totales": 7,
+	"finales": ["principal", "regresar", "guardian", "secreto"],
+	"sellos": [
+		{ "id": "sello_ceniza_sala1", "isla": "ceniza", "sala": 1 },
+		{ "id": "sello_ceniza_sala2", "isla": "ceniza", "sala": 2 },
+		{ "id": "sello_mar_intermedia", "isla": "mar", "sala": 0 },
+		{ "id": "sello_mar_sala1", "isla": "mar", "sala": 1 },
+		{ "id": "sello_brisa_sala1", "isla": "brisa", "sala": 1 },
+		{ "id": "sello_brisa_sala2", "isla": "brisa", "sala": 2 },
+		{ "id": "sello_brisa_camara", "isla": "brisa", "sala": 3 }
+	],
+	"nodos": [
+		{
+			"id": "prologo",
+			"capitulo": 0,
+			"titulo": "La Llegada",
+			"tipo": "llegada",
+			"resumen": "El navegante llega a Aurora tras la tormenta y conoce a Finneas.",
+			"requisitos": [],
+			"siguiente": ["c1"]
+		},
+		{
+			"id": "c1",
+			"capitulo": 1,
+			"titulo": "Las Cenizas Futuras",
+			"tipo": "mision",
+			"resumen": "El mural de la biblioteca quemada revela el primer giro.",
+			"requisitos": [{ "tipo": "capitulo", "id": "prologo" }],
+			"siguiente": ["c2"]
+		},
+		{
+			"id": "c2",
+			"capitulo": 2,
+			"titulo": "El Puente de las Memorias",
+			"tipo": "mision",
+			"resumen": "La herramienta del templo abre el puente hacia la isla Mar.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c1" }],
+			"siguiente": ["c3"]
+		},
+		{
+			"id": "c3",
+			"capitulo": 3,
+			"titulo": "El Jardín Ahogado",
+			"tipo": "mision",
+			"resumen": "El faro ciego guarda la entrada al agua del jardín.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c2" }],
+			"siguiente": ["c4"]
+		},
+		{
+			"id": "c4",
+			"capitulo": 4,
+			"titulo": "El Valle de los Vientos",
+			"tipo": "templo",
+			"resumen": "El Templo de la Brisa exige los siete sellos para abrirse.",
+			"requisitos": [
+				{ "tipo": "capitulo", "id": "c3" },
+				{ "tipo": "sellos", "cantidad": 7 },
+				{ "tipo": "flag", "id": "templo_brisa_abierto" }
+			],
+			"siguiente": ["c5"]
+		},
+		{
+			"id": "c5",
+			"capitulo": 5,
+			"titulo": "La Noche Eterna",
+			"tipo": "cutscene",
+			"resumen": "El eclipse del Templo enciende el tema de la Brisa.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c4" }],
+			"siguiente": ["c6"]
+		},
+		{
+			"id": "c6",
+			"capitulo": 6,
+			"titulo": "El Corazón del Mundo",
+			"tipo": "cutscene",
+			"resumen": "La geoda volcánica confirma quién escondió el Sello.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c5" }],
+			"siguiente": ["c7"]
+		},
+		{
+			"id": "c7",
+			"capitulo": 7,
+			"titulo": "La Cámara del Sello",
+			"tipo": "templo",
+			"resumen": "La Cámara bajo el Templo de la Brisa espera la elección.",
+			"requisitos": [
+				{ "tipo": "capitulo", "id": "c6" },
+				{ "tipo": "sellos", "cantidad": 7 }
+			],
+			"siguiente": ["final_principal", "final_regresar", "final_guardian", "final_secreto"]
+		},
+		{
+			"id": "final_principal",
+			"capitulo": 7,
+			"titulo": "La Brisa y el Sello — Final Principal (florece)",
+			"tipo": "final",
+			"final_id": "principal",
+			"resumen": "Aurora florece; la aldea celebra la restauración.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c7" }],
+			"siguiente": []
+		},
+		{
+			"id": "final_regresar",
+			"capitulo": 7,
+			"titulo": "La Brisa y el Sello — Final Alternativo A (regresar)",
+			"tipo": "final",
+			"final_id": "regresar",
+			"resumen": "El navegante devuelve el Sello al mar y regresa a casa.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c7" }],
+			"siguiente": []
+		},
+		{
+			"id": "final_guardian",
+			"capitulo": 7,
+			"titulo": "La Brisa y el Sello — Final Alternativo B (guardián)",
+			"tipo": "final",
+			"final_id": "guardian",
+			"resumen": "El navegante toma el lugar del Primer Guardián.",
+			"requisitos": [{ "tipo": "capitulo", "id": "c7" }],
+			"siguiente": []
+		},
+		{
+			"id": "final_secreto",
+			"capitulo": 7,
+			"titulo": "La Brisa y el Sello — Final Secreto (epílogo)",
+			"tipo": "final",
+			"final_id": "secreto",
+			"resumen": "Las 30 pistas pagadas revelan el epílogo de la biblioteca.",
+			"requisitos": [
+				{ "tipo": "capitulo", "id": "c7" },
+				{ "tipo": "flag", "id": "pistas_secreto_completas" }
+			],
+			"siguiente": []
+		}
+	]
+}

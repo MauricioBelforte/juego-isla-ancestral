@@ -13,6 +13,7 @@
 | Archivo | Propósito | Estado |
 |---|---|---|
 | `scripts/economia/economy_manager.gd` | Autoload `EconomyManager`: saldo, transacciones monetarias, persistencia | **Implementado** (M38) |
+| `scripts/economia/economy_price_catalog.gd` | `EconomyPriceCatalog` (class_name): catálogo central de precios (`econ_prices.tres`). Resource cacheado. PriceManager consulta los overrides de aquí antes de caer al ItemData base (M159). Sin acoplamiento a autoloads | **Implementado** (M38) |
 | `scripts/economia/price_manager.gd` | `PriceManager` (RefCounted): precios vigentes, minorista/mayorista, límites por banda, anti-arbitraje | **Implementado** (M38) |
 | `res://economia/shop_manager.gd` | Autoload `ShopManager`: tiendas, stock, horarios, reabastecimiento | Pendiente de implementación |
 | `res://economia/barter_system.gd` | Autoload `BarterSystem`: trueques, propuestas, límites diarios | Pendiente de implementación |
@@ -236,3 +237,30 @@ Formato de línea de ejemplo: `[DOM-ECO-TRX] compra shop=tienda_pescaderia item=
 - Depender de M29/M30/M31 para horarios y días laborables: confirmar los nombres reales de sus señales antes de conectar.
 - Al conectar M20, verificar el nombre real de la señal de amistad y el rango de niveles (se asume 0-4).
 - En `plan-actual/` copiar estos archivos y actualizarlos contra el código real a medida que se implemente.
+
+---
+
+## Notas del Agente — Iteración BarterSystem (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31 24:05:00
+**Estado:** Parcial (BarterSystem implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- BarterOffer (Resource, scripts/economia/barter_offer.gd): pedido/entregado {item_id: cantidad}, amistad_minima (M20/RF8), estaciones (M29/RF7), es_salvavidas (RF12), limite_diario por oferta.
+- BarterSystem (autoload "Barter", scripts/economia/barter_system.gd) según 03-Diseno §2.3/§3.4: propuestas_disponibles(npc_id) con gating amistad+temporada+límite (salvavidas siempre visible), ejecutar_trueque(npc_id, oferta_id) con validación dura + intercambio atómico vía M14 (remover todo-o-nada; si lo recibido no entra → rollback cozy del pedido), límites diarios por npc_id reseteados por dia_absoluto (M29/M30), señales trueque_exitoso/trueque_rechazado, log DOM-ECO-TRUEQUE, persistencia ISaveProvider M59 sección "barter" {dia, usos}.
+- 3 ofertas .tres en data/economia/barter/: trueque_salvavidas (RF12, sin amistad ni temporada, no consume límite), trueque_finneas_herramienta (amistad 2, RF8), trueque_catalina_fibra (amistad 1, verano, límite 2).
+- Test scripts/economia/test_barter.gd: carga, salvavidas RF12 (disponible sin monedas/amistad), atomicidad (inventario intacto tras rechazo), límite diario con motivo, RF8 (amistad sube → oferta aparece), temporada RF7, saldo jamás tocado → **0 fallos**.
+- Regresiones: test_minorista_mayorista 14/0, test_topos_banda 11/0, test_tiendas M39 0 fallos, test_calendario M29 OK.
+- Checklist: 7 ítems marcados (RF7, RF8, RF12, H×4). Progreso real 26/160.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- UI de trueque (M53/M39-capas): las señales quedan listas para la capa UI.
+- Mercado/tabla diaria, ferias (M74), DOM-ECO restante: con dueño/próxima iteración.
+- Ofertas de producción: las 3 .tres son semilla; el contenido final pertenece a M93/M20-narrativa.
+
+### Recomendaciones para el próximo agente
+- UI: escuchar Barter.trueque_exitoso/trueque_rechazado; usar propuestas_disponibles(npc_id) para el panel del NPC.
+- Al sumar ofertas nuevas: una BarterOffer .tres por archivo en data/economia/barter/ (se cargan solas).
+- El rollback cozy agrega de vuelta el pedido si lo recibido no entra: mantener ese orden al tocar ejecutar_trueque.

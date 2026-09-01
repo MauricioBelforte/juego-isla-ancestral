@@ -206,3 +206,20 @@
 - Familias: luz/espejos/agua/hielo/bloques/gravedad/movimiento/sonido/secuencia/simbolos/ambientales/herramientas/multilateral.
 - Sistema de ayuda Guia del Templo (0/3 fallos, pistas ancladas al grafo).
 - Bandas de dificultad (Exploracion/Ritual/Antiguo).
+
+## QA Cruzado — Hy3 / WorkBuddy (2026-09-01, Log 314)
+
+**Modelo:** Hy3 · **Plataforma:** WorkBuddy · **Tipo:** QA cruzado §21.8 (modelo distinto al autor original Hy3/Kilo).
+
+**Veredicto:** ✅ APROBADO (con mejora de bug de integración). El framework emisor→receptor es sólido en tests unitarios, pero se detectó que **estaba desconectado en runtime**: `PuzzleRoom.set_emisor/toggle_emisor` no recalculaban ni notificaban, así que activar emisores nunca abría la puerta automáticamente.
+
+**Bug cerrado (mi fuerte — detección de bugs de integración):**
+- `PuzzleRoom`: agregado `al_cambiar: Callable` + `_notificar()` que recalcula y dispara el callback en `set_emisor`/`toggle_emisor`.
+- `PuzzlePuerta`: agregado `nombre_receptor` + `evaluar(activos)` que abre la puerta si su nombre está en la lista de receptores activos.
+- `test_puzzles.gd`: nuevo `_test_integracion_emisor_puerta()` verifica el ciclo completo (golpear emisores → puerta se abre vía callback).
+
+**Hallazgos honestos:**
+- `recalcular()` usa `completada = true` inicial y lo pone `false` si ALGUNA regla falla: para puzzles multi-puerta independiente, "sala completada" solo es true si TODAS abren a la vez. Es semánticamente válido para el caso de una sola puerta objetivo, pero ambiguo para multi-receptor. No lo cambié para no romper el test existente; queda como nota para el dueño si se implementan salas multi-puerta.
+- `puzzle_invariant.gd` (M66) delega la validación concreta a M24/M26 (`_check()` siempre true). El framework de M24 ahora expone `validar()` lista para ser usada por ese invariante.
+
+**Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.

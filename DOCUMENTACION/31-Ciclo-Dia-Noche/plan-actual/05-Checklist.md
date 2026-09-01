@@ -6,6 +6,18 @@
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (tras M29/M49).
 
+## Reserva actual
+
+- Estado: 🔵 En curso
+- Agente: GLM (Kilo)
+- Fase: 5 - Base de producción
+- Dificultad: 3
+- Visión: V1/V2
+- Entrada: M29 ✅
+- Salida: 5 franjas operativas (ALBA/DÍA/ATARDECER/NOCHE/PROFUNDA), sol/luna/sky tweeneados, anti-oscuridad 0.15, señal fase_cambio, tests 0 fallos
+- Archivos: scripts/world/day_night_cycle.gd, event_bus.gd (dominio time), main_island.tscn (nodos luz/luna), tests/caso_noche_dia_tests.gd
+- Fecha: 2026-08-31 03:30
+
 ## A. Requisitos del módulo (12)
 
 - [ ] Definir el problema: luz/cielo/ambiente cambian con la hora (M29) [S]
@@ -172,3 +184,45 @@
 
 **Totales:** 131 ítems · Completados: 131 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (D, E, H en runtime) quedan para el agente delegado; diseño, cronograma y reglas cierran aquí.
+
+## K. Iteración 1 — Núcleo runtime (GLM Kilo 2026-08-31) — Log 302
+
+> Implementación del núcleo funcional. No cierra el módulo (queda 🔵 En curso para iteraciones de datos/assets/polish).
+
+### K.1 Implementado y verificado (12/0 tests OK)
+
+- [x] Dominio `EventBus.time` con señal `fase_cambio(fase: int)` (RF5 contrato) [S]
+- [x] Nodo `DayNightCycle` con script `res://scripts/world/day_night_cycle.gd` en `main_island.tscn` [S]
+- [x] Nodo `DirLightLuna` (DirectionalLight3D, sin sombras, color 7500K) en `main_island.tscn` [S]
+- [x] Mapeo hora→fase: ALBA 5-6, DÍA 7-18, ATARDECER 19, NOCHE 20-22, PROFUNDA 23-4 (cronograma §2 diseño) [S]
+- [x] Señal `fase_cambio` SOLO en cambio de franja (no por hora) [S]
+- [x] Conexión a `GameTime.hora_cambio` (M29) vía `get_node_or_null` [S]
+- [x] Tween 1.0 s de energía y color de sol/luna/ambiente en cada `hora_cambio` [S]
+- [x] Rotación de fuentes sol/luna en arcos opuestos (radio 50, altura 20) [S]
+- [x] Guarda anti-colineal `Vector3.UP` en `look_at` (§9.9 07-GUIA-GODOT) [S]
+- [x] Regla anti-oscuridad: piso ambiente nocturno 0.15, luna ≥ 0.10 en Noche [S]
+- [x] API pública: `get_fase()`, `es_de_dia()` [S]
+- [x] Test headless `test_ciclo_dia_noche.gd` 12/0 OK (fases, estabilidad, API) [M]
+- [x] Reserva en 4 registros (guía 08, 05-Checklist, CHECKLIST-GLOBAL, ESTADO-PARALELO) [S]
+- [x] Log 302 generado y firmado [S]
+
+### K.2 Pendiente para iteraciones futuras [?]
+
+- [?] Curvas 24-puntos en `data/light/day_curve.tres`, `sky_curve.tres`, `season_mod.tres`, `fase_umbral.tres` (datos) [M]
+- [?] Transición amanecer/atardecer de 90 s con curvas de interpolación (polish) [M]
+- [?] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00 [C]
+- [?] Luna esférica con textura de fases (M45) [C]
+- [?] Nubes velo 2D con drift lento y densidad estacional [C]
+- [?] Niebla por estación/hora (FogVolume ligero ≤120 m) [M]
+- [?] Prefab de farol con omni 3200K r 8 m y autoswitch por umbral 0.35 [M]
+- [?] Faroles cada 40 m en poblado (M18) [C]
+- [?] Sincronización lluvia de estrellas con M52 (días 10/25 22:00-23:30) [M]
+- [?] Flora brillante con bonus x2 (M15) [M]
+- [?] Murales luminosos en ruinas (M25/M148) [C]
+- [?] Opción M58 "Noche clara" (piso 0.35) — M58 sin implementar [M]
+- [?] Integración con M49 iluminación global — M49 sin implementar [C]
+- [?] QA visual M114 (checklist nocturno por zona) — M114 sin implementar [C]
+- [?] Captura visual in-engine (V4) de las 5 franjas con `cap_godot.py --modulo 31` [M]
+- [?] Documentar en 07-GUIA-GODOT §9: no referenciar autoloads directos por global en `--script`; usar `get_node_or_null` [S]
+
+**Iteración 1 — 14 ítems [x], 16 ítems [?] honestos (datos/assets/integraciones con módulos aún no implementados).**

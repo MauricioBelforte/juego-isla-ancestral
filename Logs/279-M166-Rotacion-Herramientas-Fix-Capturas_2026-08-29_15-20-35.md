@@ -1,6 +1,7 @@
-# $1279 — M166: Rotación de las 3 herramientas tumbadas + fix E-26 en `capturar_angulos.py`
+﻿# $1279 — M166: Rotación de las 3 herramientas tumbadas + fix E-26 en `capturar_angulos.py`
 
-**Fecha:** 2026-08-29 15:20 GMT-3
+**Fecha:** 2026-08-29
+**Hora:** 15:20
 **Módulo:** M166 (Variantes y perfil de rendimiento)
 **Continuación de:** log 234 (promoción de la frontera)
 

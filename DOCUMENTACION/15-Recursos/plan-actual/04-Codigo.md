@@ -8,14 +8,15 @@
 ## 1. Archivos Involucrados
 
 ### Scripts (GDScript, tipado)
-| Archivo | Propósito |
-|---|---|
-| `res://_Project/Scripts/Gameplay/Resources/ResourceManager.gd` | Autoload orquestador: catálogo, registro de nodos, respawn, persistencia |
-| `res://_Project/Scripts/Gameplay/Resources/ResourceDefinition.gd` | Recurso serializable (`.tres`) con toda la data de un material |
-| `res://_Project/Scripts/Gameplay/Resources/ResourceNode.gd` | Nodo 3D recolectable con estados y feedback |
-| `res://_Project/Scripts/Gameplay/Resources/ResourceDrops.gd` | Generación, dispersión, pooling e imán de drops |
-| `res://_Project/Scripts/Gameplay/Resources/ResourceSpawner.gd` | Planificación por región, presupuesto y respawn |
-| `res://_Project/Scripts/Gameplay/Resources/RecursoBolsa.gd` | Bolsa de drops para suelo saturado |
+> ⚠️ **Nota de paths (2026-08-30):** Los scripts reales están en `res://scripts/resources/`, no en `res://_Project/Scripts/Gameplay/Resources/` como se documentó originalmente.
+
+| Archivo | Propósito | Estado |
+|---|---|---|
+| `scripts/resources/resource_manager.gd` | Autoload orquestador: catálogo, registro de nodos, respawn, persistencia. Señales: `drop_recogido`, `recurso_agotado`, `recoleccion_evento` | ✅ Implementado |
+| `scripts/resources/resource_definition.gd` | `ResourceDefinition` (class_name): recurso serializable con `def_id`, `display_name`, `categoria` (enum MADERA/PIEDRA/FIBRA/COMIDA/MINERAL/RARO), `rareza`, `herramienta_requerida`, `golpes_requeridos`, `drops`, `valor_venta` | ✅ Implementado |
+| `scripts/resources/resource_node.gd` | `ResourceNode` (class_name): nodo 3D recolectable con estados INTACTO/DANIADO/AGOTADO. Usa TerrainLocator para posicionarse. Mesh placeholder por estado | ✅ Implementado |
+| `scripts/resources/resource_drop_entry.gd` | `ResourceDropEntry` (class_name): entrada de drop con `item_id`, `cantidad_min/max`, `probabilidad`, `requiere_herramienta_mejorada` | ✅ Implementado |
+| `scripts/resources/resource_spawner.gd` | `ResourceSpawner` (class_name): planificación por región, presupuesto (max 200 nodos activos), radio de burbuja 48.0. Se comunica con ResourceManager | ✅ Implementado |
 
 ### Escenas y datos (editor)
 | Archivo | Propósito |
@@ -376,3 +377,31 @@ Formato de línea de ejemplo: `[DOM-REC] recolectado def=madera_roble cant=4 her
 - Implementar primero `ResourceDefinition` y el catálogo de 10-12 definiciones de ejemplo.
 - Validar el flujo de golpe antes que el respawn; el respawn depende de M29/M32.
 - En `plan-actual/` copiar estos archivos y actualizarlos contra el código real a medida que se implemente.
+
+## Notas del Agente (iteración 3 — 2026-08-31)
+
+**Modelo:** GLM (Kilo)
+**Plataforma:** Kilo
+**Fecha:** 2026-08-31 08:25:00
+**Estado:** Iter 3 cerrada. Módulo liberado a 🟡 con 5 [?] con dueño.
+
+### Lo que hice
+- **Persistencia ISaveProvider M59 (real):** `ResourceManager.get_save_data()` v2 retorna array de nodos con `{def_id, pos, estado, golpes_restantes, respawn_dia}`. `restore_save_data(data)` valida `version >= 2` y popula `_estado_guardado_pendiente`. El `ResourceSpawner` consulta `consumir_estado_guardado_para(def_id, pos)` al instanciar para aplicar el estado guardado.
+- **Respawn con M29:** `ResourceNode` tiene `respawn_dia_absoluto` y `respawn_estacion` (mapeado desde `def.temporada_respawn` por `get_respawn_estacion_int`). `evaluar_respawn(dia, estacion)` vuelve a INTACTO si dia>=respawn y temporada coincide. El manager escucha `GameTime.dia_cambio` y evalúa todos los nodos diariamente.
+- **Helper `recibir_golpe_en_nodo(nodo, herramienta)`:** valida `def.es_accesible_con(herramienta, true)`, aplica `aplicar_golpe`, al agotar programa respawn con `gt.dia_absoluto() + def.dias_para_respawn` (default 2), entrega drops a M14 vía `entregar_drops`, y emite `recurso_agotado`.
+- **Test `test_recursos_persistencia.gd` (nuevo):** 4 tests, 13 checks, 0 fallos. Regresiones M16/M31/M15-iter2 todas verdes.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Cableado M13→M15:** M13 `tool_controller.gd` usa `VoxelTool.raycast` (chunks voxel) y NO detecta `ResourceNode` (Node3D con Area3D). El helper `recibir_golpe_en_nodo` está listo y testeado, pero nadie lo invoca desde el input del jugador. Opciones: (a) añadir un `RayCast3D` físico en M13 que también detecte colisionadores Node3D; (b) que el Area3D del ResourceNode use `input_event` cuando el jugador está cerca. NO toqué M13 (es de Hy3). Documentado como [?] con dueño.
+- **Test de `dia_cambio` en runtime** que dispare respawn vía la señal real de M29 (el helper está, falta el test explícito).
+- **Meshes del arte** (placeholders funcionales).
+- **Recolección en área 3×3** (actualmente 1×1).
+- **Persistencia de ResourceSpawner** (regiones + presupuesto).
+
+### Intento fallido
+- Primera versión del test usaba `ResourceNode.new()` sin añadir al árbol. `global_position` en nodo suelto emite `ERR_FAIL_COND_V_MSG` y devuelve `(0,0,0)`, así que la save tenía pos=[0,0,0] y el `consumir_estado_guardado_para` no encontraba match. **Fix:** helper `_crear_nodo_registrado()` que hace `root.add_child(nodo)` antes de setear posición. Candidato a 07-GUIA-GODOT §9.
+
+### Recomendaciones para el próximo agente
+- Resolver el cableado M13→M15 (Hy3) o añadir un RayCast3D en M13 que atraviese tanto el buffer voxel como las colisiones Node3D.
+- Cuando M45 provea los meshes, reemplazar los placeholders en `ResourceNode._crear_mesh`.
+- Considerar pooling de `ResourceNode` cuando el presupuesto se acerque a MAX_NODOS_ACTIVOS.

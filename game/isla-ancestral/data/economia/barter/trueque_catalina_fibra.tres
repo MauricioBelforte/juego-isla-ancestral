@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BarterOffer" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/economia/barter_offer.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+oferta_id = &"trueque_catalina_fibra"
+npc_id = "catalina"
+pedido = {
+"baya_roja": 6
+}
+entregado = {
+"fibra_algodon": 3
+}
+amistad_minima = 1
+estaciones = [1]
+es_salvavidas = false
+limite_diario = 2

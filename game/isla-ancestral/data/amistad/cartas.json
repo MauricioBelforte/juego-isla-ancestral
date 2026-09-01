@@ -1,0 +1,21 @@
+{
+	"schema_version": 1,
+	"nota": "Plantillas de cartas (M20 + M29). El jugador envia 'texto_id'; al dia siguiente de juego (M29) el vecino responde con 'respuesta' y entrega 'adjunto_retorno' (opcional). CUMPLEANOS es la carta que el NPC envia al jugador el dia de su cumpleanos. Textos de produccion final a cargo de M21 (narrativa).",
+	"cartas": {
+		"CARTA_GENERICA": {
+			"cuerpo": "¡Hola! Espero que tu dia en la isla sea tranquilo y feliz.",
+			"respuesta": "Gracias por tu carta. Me alegro de tenerte por aqui, vecino.",
+			"adjunto_retorno": ""
+		},
+		"CARTA_GRACIAS": {
+			"cuerpo": "Queria agradecerte por lo de ayer. De verdad significo mucho para mi.",
+			"respuesta": "¡No hay de que! Siempre es un placer ayudarte. Tomate este pequeno detalle.",
+			"adjunto_retorno": "FLOR_SILVESTRE"
+		},
+		"CUMPLEANOS": {
+			"cuerpo": "¡Hoy es mi cumpleanos! Pase lo que pase, me encanta celebrarlo en la isla contigo.",
+			"respuesta": "¡Feliz cumpleanos! Te preparo algo especial para agradecer tu amistad.",
+			"adjunto_retorno": "PASTEL"
+		}
+	}
+}

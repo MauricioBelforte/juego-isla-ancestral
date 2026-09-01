@@ -1,6 +1,7 @@
-# Log 270: Fix carga de fuentes TTF — FontFile.load_dynamic_font()
+﻿# Log 270: Fix carga de fuentes TTF — FontFile.load_dynamic_font()
 
 **Fecha:** 2026-08-30
+**Hora:** 19:32
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 

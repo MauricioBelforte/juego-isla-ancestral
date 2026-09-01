@@ -1,6 +1,7 @@
-# Log 251: Fix reinicio diálogo M21 — Array por referencia en UI vacía grafo cacheado
+﻿# Log 251: Fix reinicio diálogo M21 — Array por referencia en UI vacía grafo cacheado
 
 **Fecha:** 2026-08-30
+**Hora:** 00:10
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** Kilo
 

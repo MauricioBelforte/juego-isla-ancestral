@@ -1,7 +1,7 @@
-**Modelo:** **[COMPLETAR]**
-**Plataforma:** **[COMPLETAR]**
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
 
-# 01-Requerimientos.md — Módulo <ID>: <Nombre de la Isla> [MAQUETA]
+# 01-Requerimientos.md — Módulo 168: Plantilla de Isla [MAQUETA]
 
 > ⚠️ **ESTE ES UN TEMPLATE.** Copia esta carpeta a `<ID>-Isla-<Nombre>` y reemplaza los
 > `[COMPLETAR]` con los datos de tu isla. No edites este módulo 168 directamente.

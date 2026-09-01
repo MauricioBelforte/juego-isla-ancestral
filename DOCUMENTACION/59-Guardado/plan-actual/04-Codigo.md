@@ -159,3 +159,31 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 
 ### Descubrimiento para 07-GUIA-GODOT (§8)
 - **JSON round-trip NO es determinista para hashear:** nunca calcular checksums sobre `JSON.stringify()` de un dict que fue parseado de JSON (orden de claves/format numérico pueden variar). Hash de la cadena exacta almacenada. Verificado 2026-08-25, ox-alpha/Cline.
+
+
+---
+
+## Notas del Agente — Iteración auto-save/dirty/providers (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31 21:45:00
+**Estado:** Parcial (iteración auto-save/dirty/providers implementada y verificada; módulo liberado 🟡)
+
+### Lo que hice
+- A4 dirty tracking: SaveManager escucha EventBus M07 (calendar/economy/inventory/quest/npc/world) y expone is_dirty/mark_dirty/clear_dirty; se limpia al completar un save. El motivo previo "M07 no existe" estaba desactualizado.
+- B1 auto-save fin de día (EventBus.calendar.day_started → "auto_dia"), B2 auto-save por misión (EventBus.quest.quest_completed → "auto_mision"; emisores reales M22/M23 pendientes), B3-parcial cierre del juego (NOTIFICATION_WM_CLOSE_REQUEST con escritura síncrona best-effort), B5-parcial bloqueo durante diálogo (EventBus.ui dialog_requested/finished → set_save_blocked).
+- I4 PlayerSaveProvider (sección "player" del schema): posición/spawn save/restore con búsqueda perezosa desde root.
+- FIX latente 1: la señal auto_save_skipped se emitía pero nunca fue declarada en SaveManager — declarada.
+- FIX latente 2 (preexistente): save_snapshot.gd tipaba los proveedores como ISaveProvider (RefCounted) y los Node-providers (world_state_service, time_calendar, farm, fishing, etc. — agregados después del núcleo) rompían collect()/restore() con "Trying to assign value of type..." — duck-typing sin tipo estricto.
+- Test headless scripts/saving/test_autosave_m59.gd: 0 fallos (dirty, bloqueo diálogo, auto_dia, auto_mision, round-trip player). Regresión validate_save.gd: VALIDACIÓN OK 13/13.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- "Zone" del player queda "" (no existe sistema de zonas M09/M54).
+- Auto-save "fin de evento" (M74) sin señal que consumir; minijuego M34 y transición M40 sin conectar (dueños).
+- UI de guardado (M53/M44), background thread (M61), providers world/npc/quests/collections: con dueño o fase posterior.
+
+### Recomendaciones para el próximo agente
+- Ejecutar test_autosave_m59.gd + validate_save.gd antes de tocar el módulo (ambos en verde).
+- Los Node-providers son el patrón real: NO reintroducir el typing ISaveProvider en collect()/restore().
+- Al implementar M22/M23/M74, solo emitir EventBus.quest.quest_completed / señal de fin de evento: SaveManager ya consume ambas.

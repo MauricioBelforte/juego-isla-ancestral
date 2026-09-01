@@ -7,16 +7,20 @@
 
 Módulo de **diseño arquitectónico** (complejidad 5). Hoy entrega el contrato; la implementación real (scripts core) arranca en el hito M1. Los 06/07 de testing se integrarán con el prototipo (verificación de capas por script).
 
-## 2. Archivos de referencia para M1 (esqueleto de implementación)
+## 2. Archivos involucrados
 
-| Script futuro | Rol |
-|---|---|
-| `scripts/core/bootstrap.gd` | Registro de servicios, arranque |
-| `scripts/core/event_bus.gd` | Señales tipadas por dominio |
-| `scripts/core/service_registry.gd` | Service Locator |
-| `scripts/core/thread_pool.gd` | Cola de trabajos pesados |
-| `scripts/world/voxel_world.gd` | World + chunks |
-| `scripts/data/game_state.gd` | Estado serializable (M59) |
+### Scripts implementados
+| Archivo | Rol | Estado |
+|---|---|---|
+| `scripts/core/event_bus.gd` | Señales tipadas por dominio (9 dominios) | ✅ Implementado |
+| `scripts/core/service_registry.gd` | Service Locator (registro por interfaz) | ✅ Implementado |
+| `scripts/core/bootstrap.gd` | Registro de servicios core + carga de escena principal | ✅ Implementado |
+| `scripts/core/game_settings.gd` | Singleton de configuración del juego (M46). Guarda/carga ajustes en `user://settings.cfg` (sensibilidad mouse, invertir Y, volumen, fullscreen, resolución). Señal `settings_changed` | ✅ Implementado |
+| `scripts/core/terrain_locator.gd` | Servicio CENTRAL de posicionamiento sobre terreno (M167/M168). Autoload que busca VoxelTerrain activo con reintento. Expone `get_height(x,z)`, `posicionar_sobre_terreno(nodo,x,z)`, `esta_sobre_superficie(nodo)`. Anti-flotamiento: TODOS los objetos usan este servicio | ✅ Implementado |
+| `scripts/core/registro.gd` | Clase estática de logging y validación (M05). `Registro.info()`, `.aviso()`, `.error()`, `.verificar()`, `.verificar_no_nulo()`. Contadores para tests | ✅ Implementado |
+| `scripts/core/thread_pool.gd` | Cola de trabajos pesados | ⬜ Pendiente |
+| `scripts/world/voxel_world.gd` | World + chunks | ⬜ Pendiente (M08) |
+| `scripts/data/game_state.gd` | Estado serializable (M59) | ⬜ Pendiente (M59) |
 
 ## 3. Decisiones que otros módulos consumen
 

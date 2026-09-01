@@ -1,6 +1,7 @@
-# $1283 — M166 Fix de separación E-27 en las 3 herramientas de mano
+﻿# $1283 — M166 Fix de separación E-27 en las 3 herramientas de mano
 
-**Fecha:** 2026-08-29 19:35 (GMT-3)
+**Fecha:** 2026-08-29
+**Hora:** 19:35
 **Módulo:** 13-Herramientas
 **Activos tocados:** `pico_piedra`, `pico_hierro`, `antorcha_mano`
 **Tiempo total:** ~15 min entre diagnóstico, fix, regenerado y QA

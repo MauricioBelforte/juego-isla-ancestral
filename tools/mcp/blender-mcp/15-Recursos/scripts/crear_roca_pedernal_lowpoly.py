@@ -89,6 +89,40 @@ bg = mundo.node_tree.nodes.get('Background')
 bg.inputs[0].default_value = (0.58, 0.79, 0.95, 1.0)
 bg.inputs[1].default_value = 0.55
 
+# ---------- 6.5) Composición: igualar la cota de apoyo de las dos rocas ------
+# La roca grande quedó 0.946 m POR DEBAJO de la chica: su Z de autoría (0.90)
+# no contempló el estirado vertical `v.co.z *= 1.30`, que lleva la semiextensión
+# vertical de ~1.30 a ~1.95. Sin este ajuste, asentar por el mínimo global
+# dejaría a la chica flotando 0.946 m sobre la arena. Se sube la grande a la
+# cota de la chica; el asentado final fija ambas en 0.045.
+for _as_o in escena.objects:
+    if _as_o.name == 'SM_Roca_Pedernal':
+        _as_o.location.z += 0.9457
+
+# ---------- 6.6) Asentado (E-12 + E-24): medir en caliente, nunca estimar ---
+# El apoyo se MIDE sobre la geometría ya generada. El Z de autoría es solo una
+# aproximación: cualquier escalado o composición posterior la desalinea (E-09).
+# Se usa el vértice real más bajo y NO el AABB, porque una pieza rotada tiene
+# esquinas vacías que tiran el mínimo hacia abajo y hunden assets correctos
+# (E-24). Objetivo: z_min = 0.045 (5 mm bajo el tope de arena z = 0.05).
+Z_APOYO = 0.045
+bpy.context.view_layer.update()
+
+def _as_zmin(o):
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ _as_v.co).z for _as_v in o.data.vertices)
+
+_as_piezas = [o for o in escena.objects
+              if o.type == 'MESH' and o.name.startswith('SM_')]
+_as_z = min(_as_zmin(o) for o in _as_piezas)
+_as_delta = Z_APOYO - _as_z
+for o in _as_piezas:
+    if o.parent is None:
+        o.location.z += _as_delta
+bpy.context.view_layer.update()
+print('ASENTADO: z_min %.4f -> %.4f (delta %+.4f)' % (_as_z, Z_APOYO, _as_delta))
+
 # ---------- 7) Cámara ----------
 bpy.ops.object.camera_add(location=(3.8, -4.6, 2.0))
 cam = bpy.context.object

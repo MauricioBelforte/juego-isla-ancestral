@@ -5,6 +5,7 @@ class_name HotbarWidget
 ## Muestra los slots de acceso rápido del inventario.
 ## Se sincroniza con Inventario (M14) vía señales.
 ## 8 slots horizontales con highlight en el seleccionado.
+## Refresh bidireccional: seleccionar slot notifica al inventario.
 
 ## ── Configuración ───────────────────────────────────────
 const SLOT_COUNT := 8
@@ -17,6 +18,7 @@ const SLOT_BG := Color(0.20, 0.18, 0.15, 0.7)
 var _selected_slot: int = 0
 var _slot_labels: Array[Label] = []
 var _slot_panels: Array[PanelContainer] = []
+var _slot_tooltips: Array[String] = []
 
 ## ── Ciclo de vida ──────────────────────────────────────
 
@@ -28,13 +30,14 @@ func _ready() -> void:
 
 ## ── API pública ─────────────────────────────────────────
 
-## Selecciona un slot de la hotbar
+## Selecciona un slot de la hotbar y notifica al inventario
 func select_slot(index: int) -> void:
 	_selected_slot = clampi(index, 0, SLOT_COUNT - 1)
 	_update_highlights()
+	_notify_inventory_selection()
 
 
-## Actualiza los datos de la hotbar
+## Actualiza los datos de la hotbar desde el inventario
 func refresh() -> void:
 	var inv := _get_inventario()
 	if not inv:
@@ -43,14 +46,20 @@ func refresh() -> void:
 	for i in range(SLOT_COUNT):
 		var item_id := ""
 		var quantity := 0
+		var tooltip_text := ""
 
-		if inv.has_method("get_hotbar_item"):
-			var data: Variant = inv.get_hotbar_item(i)
-			if data is Dictionary:
-				item_id = str(data.get("id", ""))
-				quantity = int(data.get("quantity", 0))
+		# Intentar leer del inventario directamente
+		var slot_data := _read_hotbar_slot(inv, i)
+		if slot_data != null:
+			item_id = str(slot_data.get("item_id", ""))
+			quantity = int(slot_data.get("cantidad", 0))
+			tooltip_text = _build_tooltip(item_id, quantity)
 
 		_update_slot(i, item_id, quantity)
+		if i < _slot_tooltips.size():
+			_slot_tooltips[i] = tooltip_text
+		if i < _slot_panels.size():
+			_slot_panels[i].tooltip_text = tooltip_text
 
 
 ## ── Métodos privados ────────────────────────────────────
@@ -83,6 +92,7 @@ func _build_ui() -> void:
 		hbox.add_child(panel)
 		_slot_panels.append(panel)
 		_slot_labels.append(label)
+		_slot_tooltips.append("")
 
 	_update_highlights()
 
@@ -93,10 +103,10 @@ func _update_slot(index: int, item_id: String, quantity: int) -> void:
 
 	var label := _slot_labels[index]
 	if quantity > 0:
-		# Mostrar cantidad y primeras letras del ID
-		var display := item_id.left(3) if not item_id.is_empty() else "?"
+		# Mostrar nombre amable y cantidad
+		var display := _friendly_name(item_id) if not item_id.is_empty() else "?"
 		if quantity > 1:
-			display += "\n%d" % quantity
+			display += "\nx%d" % quantity
 		label.text = display
 	else:
 		label.text = ""
@@ -124,6 +134,44 @@ func _connect_signals() -> void:
 		var inv_events: Variant = bus.inventory
 		if inv_events != null and inv_events.has_signal("hotbar_selected"):
 			inv_events.hotbar_selected.connect(select_slot)
+
+
+func _read_hotbar_slot(inv: Node, index: int) -> Variant:
+	# Intentar get_hotbar_item (API M14)
+	if inv.has_method("get_hotbar_item"):
+		var data: Variant = inv.get_hotbar_item(index)
+		if data is Dictionary:
+			return data
+	# Fallback: leer del contenedor bolsillo directamente
+	var contenedores = inv.get("contenedores")
+	if contenedores != null and contenedores.size() > 0:
+		var bolsillo = contenedores[0]
+		if bolsillo != null:
+			var slots: Array = bolsillo.get("slots", [])
+			if index < slots.size():
+				var slot = slots[index]
+				if slot != null and not slot.esta_libre():
+					return {"item_id": str(slot.get("item_id", "")), "cantidad": int(slot.get("cantidad", 0))}
+	return null
+
+
+func _notify_inventory_selection() -> void:
+	var inv := _get_inventario()
+	if inv and inv.has_method("select_hotbar_slot"):
+		inv.select_hotbar_slot(_selected_slot)
+
+
+func _friendly_name(item_id: String) -> String:
+	return item_id.replace("_", " ").capitalize()
+
+
+func _build_tooltip(item_id: String, quantity: int) -> String:
+	if item_id.is_empty():
+		return ""
+	var name := _friendly_name(item_id)
+	if quantity > 1:
+		return "%s (x%d)" % [name, quantity]
+	return name
 
 
 func _get_inventario() -> Node:

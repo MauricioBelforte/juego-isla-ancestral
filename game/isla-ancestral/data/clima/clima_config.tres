@@ -1,0 +1,136 @@
+[gd_resource type="Resource" script_class="WeatherConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/clima/weather_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+semilla_clima = 7919
+transicion_min_minutos = 60
+transicion_max_minutos = 90
+probabilidades_por_estacion = {
+0: [{
+"clima": 0,
+"prob": 0.4
+}, {
+"clima": 1,
+"prob": 0.3
+}, {
+"clima": 2,
+"prob": 0.18
+}, {
+"clima": 3,
+"prob": 0.06
+}, {
+"clima": 6,
+"prob": 0.06
+}],
+1: [{
+"clima": 0,
+"prob": 0.6
+}, {
+"clima": 1,
+"prob": 0.2
+}, {
+"clima": 3,
+"prob": 0.1
+}, {
+"clima": 7,
+"prob": 0.04
+}, {
+"clima": 6,
+"prob": 0.06
+}],
+2: [{
+"clima": 0,
+"prob": 0.35
+}, {
+"clima": 1,
+"prob": 0.3
+}, {
+"clima": 2,
+"prob": 0.12
+}, {
+"clima": 4,
+"prob": 0.1
+}, {
+"clima": 6,
+"prob": 0.13
+}],
+3: [{
+"clima": 0,
+"prob": 0.25
+}, {
+"clima": 1,
+"prob": 0.3
+}, {
+"clima": 4,
+"prob": 0.15
+}, {
+"clima": 5,
+"prob": 0.25
+}, {
+"clima": 6,
+"prob": 0.05
+}]
+}
+atenuacion_sol = {
+0: 1.0,
+1: 0.85,
+2: 0.7,
+3: 0.35,
+4: 0.6,
+5: 1.1,
+6: 1.0,
+7: 0.35,
+8: 1.0
+}
+duraciones_horas = {
+0: {
+"min": 2.0,
+"max": 4.0
+},
+1: {
+"min": 2.0,
+"max": 3.0
+},
+2: {
+"min": 2.0,
+"max": 4.0
+},
+3: {
+"min": 1.0,
+"max": 3.0
+},
+4: {
+"min": 2.0,
+"max": 3.0
+},
+5: {
+"min": 3.0,
+"max": 6.0
+},
+6: {
+"min": 2.0,
+"max": 3.0
+},
+7: {
+"min": 2.0,
+"max": 3.0
+},
+8: {
+"min": 0.5,
+"max": 1.0
+}
+}
+volumenes_audio = {
+0: 0.0,
+1: 0.0,
+2: 0.8,
+3: 1.0,
+4: 0.0,
+5: 0.4,
+6: 0.6,
+7: 0.9,
+8: 0.0
+}
+climas_profundos = [3, 7]

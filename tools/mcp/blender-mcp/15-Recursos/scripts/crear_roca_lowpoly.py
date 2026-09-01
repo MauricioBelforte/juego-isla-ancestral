@@ -99,6 +99,39 @@ for ob in escena.collection.objects:
 sol_data.energy = 3.0
 mundo.node_tree.nodes.get('Background').inputs[1].default_value = 0.45
 
+# ---------- 5c) Composición: igualar la cota de apoyo de las dos rocas -------
+# Tras el escalado global 0.72 de 5b), la roca chica quedó 0.127 m POR DEBAJO
+# de la grande. Sin este ajuste, asentar por el mínimo global dejaría a la
+# grande flotando 12.7 cm sobre la arena. Se sube la chica a la cota de la
+# grande; el asentado final fija ambas en 0.045.
+for _as_o in escena.collection.objects:
+    if _as_o.name == 'SM_Roca_Comun_Chica':
+        _as_o.location.z += 0.1267
+
+# ---------- 5d) Asentado (E-12 + E-24): medir en caliente, nunca estimar -----
+# El apoyo se MIDE sobre la geometría ya generada. El Z de autoría (0.92) era
+# solo una aproximación y el reescalado 0.72 de 5b) la desalineó (E-09).
+# Se usa el vértice real más bajo y NO el AABB, porque una pieza rotada tiene
+# esquinas vacías que tiran el mínimo hacia abajo y hunden assets correctos
+# (E-24). Objetivo: z_min = 0.045 (5 mm bajo el tope de arena z = 0.05).
+Z_APOYO = 0.045
+bpy.context.view_layer.update()
+
+def _as_zmin(o):
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ _as_v.co).z for _as_v in o.data.vertices)
+
+_as_piezas = [o for o in escena.objects
+              if o.type == 'MESH' and o.name.startswith('SM_')]
+_as_z = min(_as_zmin(o) for o in _as_piezas)
+_as_delta = Z_APOYO - _as_z
+for o in _as_piezas:
+    if o.parent is None:
+        o.location.z += _as_delta
+bpy.context.view_layer.update()
+print('ASENTADO: z_min %.4f -> %.4f (delta %+.4f)' % (_as_z, Z_APOYO, _as_delta))
+
 # ---------- 6) Cámara de captura (E-03) + viewport con luces de escena (E-06) ----------
 bpy.ops.object.camera_add(location=(4.2, -5.0, 2.2))
 cam = bpy.context.object
@@ -120,8 +153,11 @@ for area in bpy.context.screen.areas:
 # ---------- 7) Guardar .blend en la carpeta del módulo (E-04) ----------
 import os
 RAIZ = r'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral'
+# E-47: el nombre DEBE ser `..._lowpoly.blend`. Con el nombre plano
+# (`roca_comun.blend`) el planificador de exportar_godot.py no lo reconoce
+# como fuente —espera `N_lowpoly`— y el asset no genera GLB.
 ruta_blend = os.path.join(RAIZ, 'tools', 'mcp', 'blender-mcp', '15-Recursos',
-                          'roca_comun.blend')
+                          'roca_comun_lowpoly.blend')
 os.makedirs(os.path.dirname(ruta_blend), exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=ruta_blend)
 

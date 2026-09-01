@@ -1,18 +1,20 @@
-# Modelo: ox-alpha (GLM)
+# Modelo: ox-alpha (GLM) · iter. 2: glm-5.3
 # Plataforma: Cline
-# Fecha: 2026-08-26
+# Fecha: 2026-08-26 · iter. 2: 2026-08-31
 #
 # M30.2: Preview del Widget de Reloj — validación VISUAL (vía V2 capturas).
 # Escena generada por código: fondo de cielo + franja de pasto para evaluar
 # contraste/legibilidad del HUD en la esquina superior derecha.
 # Demo viva: cada 2 s avanza el GameTime real 25 minutos → el reloj cambia
 # visiblemente entre capturas (prueba del binding por señales).
+# Iter. 2: 3.ª captura con el tooltip del hover D70 forzado (demo_cursor_dentro).
 extends Control
 
 const WReloj := preload("res://scripts/clock/w_reloj.gd")
 
 var _game_time: Node = null
 var _acum := 0.0
+var _widget: PanelContainer = null
 
 func _ready() -> void:
 	# FIX M30 (2026-08-26 v4): en lugar de pelear con el escalado DPI de la ventana
@@ -34,14 +36,18 @@ func _process(delta: float) -> void:
 				_game_time._avanzar_minuto()
 
 func _auto_captura() -> void:
-	# Captura in-engine (V4): guarda 2 frames del viewport con 6 s de diferencia
-	# para verificar el reloj visible Y el avance de hora en vivo.
+	# Captura in-engine (V4): 3 frames del viewport —
+	#   (0) reloj visible · (1) hora avanzada en vivo · (2) tooltip del hover D70.
 	var dir := "res://../../tools/mcp/godot-mcp/capturas/30-Reloj-En-Tiempo-Real"
-	for i in range(2):
-		await get_tree().create_timer(3.0 if i == 0 else 6.0).timeout
+	var esperas := [3.0, 6.0, 4.0]
+	for i in range(3):
+		if i == 2 and _widget != null:
+			# D70: simula el cursor dentro del rect → tooltip del desplegable.
+			_widget.demo_cursor_dentro = true
+		await get_tree().create_timer(esperas[i]).timeout
 		var img := get_viewport().get_texture().get_image()
 		if img != null:
-			var ruta := "%s/cap_30_2026-08-26_20-06-%02d_inengine.png" % [dir, i]
+			var ruta := "%s/cap_30_2026-08-31_23-30-00_%02d_hover.png" % [dir, i]
 			var err := img.save_png(ruta)
 			print("[M30-CAP] frame ", i, " guardado (err=", err, "): ", ruta)
 
@@ -87,11 +93,11 @@ func _construir_escena() -> void:
 	add_child(sol)
 
 	# El widget en cuestión
-	var w = WReloj.new()
-	w.name = "WReloj"
-	add_child(w)
+	_widget = WReloj.new()
+	_widget.name = "WReloj"
+	add_child(_widget)
 	# DEBUG M30: verificar rect real del widget tras el layout
-	_w_debug_rect.call_deferred(w)
+	_w_debug_rect.call_deferred(_widget)
 
 	# Etiqueta informativa
 	var hint := Label.new()

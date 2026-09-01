@@ -1482,6 +1482,42 @@ _portrait.set_expression(expresion)  # resuelto en runtime
 
 **Aplicación en el proyecto:** `dialogue_ui.gd` referencia `NpcPortraitUI` (npc_portrait_ui.gd) y lo instancia por `load().new()`. El test `test_eventos_dialogo_m21.gd` (`_test_ui_portrait_expresion`) verifica el tint por expresión. Regla general: en headless/`--script`, evitar anotaciones de tipo cruzadas entre scripts; preferir `preload` o tipos sin anotar.
 
+### 9.51 Autoload referenciado como global produce "Identifier not found" en `--script`
+
+**Síntoma:** al ejecutar un test o herramienta con `godot --headless --path <proyecto> --script <ruta>`, un script dependiente falla al compilar con `SCRIPT ERROR: Compile Error: Identifier not found: GameTime` (u otro autoload declarado en `project.godot`).
+
+**Causa:** el parser de GDScript no resuelve el nombre global del autoload (`GameTime`, `EventBus`, etc.) en el momento de compilar el script dependiente cuando se ejecuta por `--script` con un grafo de dependencias mínimo. Los autoloads SÍ están registrados en el SceneTree, pero la resolución de identificadores globales del autoload falla en parse-time.
+
+**Solución:** acceder siempre al autoload por su path canónico:
+```gdscript
+# ❌ Identificador global — falla en --script
+func _ready() -> void:
+    GameTime.hora_cambio.connect(_on_hora_cambio)
+    var h: int = GameTime.get_hora()
+
+# ✅ Path canónico — funciona en --script, en escena y en tests
+var _gt: Node = null
+
+func _ready() -> void:
+    _gt = get_node_or_null("/root/GameTime")
+    if _gt != null and _gt.has_signal("hora_cambio"):
+        _gt.hora_cambio.connect(_on_hora_cambio)
+```
+
+**Regla general:** en este proyecto, todo acceso a autoloads (TimeCalendar, GameTime, EventBus, SaveManager, etc.) se hace con `get_node_or_null("/root/Nombre")` y se guarda la referencia. El patrón ya estaba documentado en `time_calendar.gd` y `time/test_consumidores_tiempo.gd`.
+
+**Aplicación en el proyecto:** `scripts/world/day_night_cycle.gd` (M31) cachea `_gt = get_node_or_null("/root/GameTime")` y lo usa para `get_hora()` y la señal `hora_cambio`. El test headless `scripts/world/test_ciclo_dia_noche.gd` (12/0 OK) depende de este patrón. **Fecha:** 2026-08-31 · **Agente:** GLM (Kilo)
+
+### 9.52 `class_name` del script + `const X := preload(mismo script)` en el test rompe `.new()`
+
+**Síntoma:** un test `extends SceneTree` que hace `const DAY_NIGHT_CYCLE := preload("res://scripts/world/day_night_cycle.gd")` y luego `DAY_NIGHT_CYCLE.new()` falla con `Invalid call. Nonexistent function 'new' in base 'GDScript'.` (en runtime) o errores de parse, aunque el script compila.
+
+**Causa:** cuando el script objetivo declara `class_name X` y el test declara `const X := preload(path)`, el identificador del const hace sombra al tipo global `X` (registered class). El `preload` puede retornar un `GDScript` "roto" o el lookup de `.new()` se confunde.
+
+**Solución:** o (a) no usar `class_name` en el script objetivo (cargarlo siempre por `res://` path), o (b) en el test evitar la colisión nombrando el const distinto del class_name, o (c) hacer la instanciación por `var inst = (load(path) as GDScript).new()`.
+
+**Aplicación en el proyecto:** `scripts/world/day_night_cycle.gd` (M31) NO tiene `class_name` para permitir que el test `test_ciclo_dia_noche.gd` haga `const DAY_NIGHT_CYCLE := preload(...)` y `DAY_NIGHT_CYCLE.new()` sin colisión. El script se identifica en logs/errores por su path `res://`. **Fecha:** 2026-08-31 · **Agente:** GLM (Kilo)
+
 ---
 
 ## Histórico de Versiones (adenda 2026-08-28)
@@ -1496,6 +1532,7 @@ _portrait.set_expression(expresion)  # resuelto en runtime
 | 2026-08-31 | Deepseek V4 Flash | Kilo | Agregada §9.49 (Object.has() eliminado en Godot 4 — usar operador in; caso UI opciones vacías M53). Log 273 |
 | 2026-08-31 | Deepseek V4 Flash | Kilo | Agregada §9.51 (PROCESS_MODE_WHEN_PAUSED sin pausa real congela el input de capas UI — capa ALWAYS + get_tree().paused). Fix diálogo congelado M53. Log 273 |
 | 2026-08-30 | Hy3 | Kilo | Agregada §9.50 (Anotar tipo con class_name de OTRO script no compila en headless --script → Parse Error "Could not find type"; usar tipo sin anotar + load().new() o preload. M21 iter 5, Log 299) |
+| 2026-08-31 | GLM | Kilo | Agregadas §9.51 (Autoload referenciado como global produce "Identifier not found" en `--script` → usar `get_node_or_null("/root/Nombre")` y cachear referencia) y §9.52 (`class_name` del script + `const X := preload(mismo script)` en el test rompe `.new()` → no usar `class_name` o renombrar el const). M31 núcleo, Log 302 |
 
 
 ---

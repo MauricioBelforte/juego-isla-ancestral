@@ -267,28 +267,48 @@ Los logs se emiten con la convención del sistema `DOM-` (dominio) y rotación s
 - El temporizador se guarda como **tiempo restante acumulado** (días de juego), no como timestamp real, para evitar exploits de guardado/carga.
 - Al cargar, `deserialize()` revalida contra el voxel M08: bloques que ya no existen (editados por M17) se descartan de la veta.
 
-## Notas del Agente
+## Notas del Agente (minimax-m3-free / Kilo Code)
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-16
-**Estado:** Diseño completo (delegable)
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31
+**Estado:** Iter 1 cerrada (núcleo V0 + tests OK + autoload activo). Módulo 🟡 Liberado con honestidad: lo que NO es de M35 queda [?] con dueño en el checklist.
 
 ### Lo que hice
-- Relevé los 24 puntos de la sección 34 del plan maestro y las dependencias reales del proyecto (M08, M13, M15, M26).
-- Defini 4 componentes (OreDefinition, OreVein, MiningTool, MiningManager) con contratos API concretos.
-- Diseñe los flujos completos de extracción, regeneración con validación de ocupacion, distribucion en chunks y persistencia, alineados con el catalogo de M15 (cobre, hierro, oro_ancestral, cristal_estacional, polvo_estrellas).
-- Aplique la decision de regeneracion por tiempo de juego con respawn lento y limite suave por zona, sin agotamiento permanente.
+
+- Implementé la **opción B** recomendada por Deepseek (ver nota de `05-Checklist.md`): las vetas son `ResourceNode` de M15 con `categoria = MINERAL/RARO` y `herramienta_requerida = "pico"`. **No toqué `ResourceManager`, `ResourceNode` ni `ResourceDefinition`.**
+- Agregué 3 archivos nuevos + 1 JSON + 1 línea en `project.godot`:
+  - `scripts/mineria/mining_vein_catalog.gd` (`MiningVeinCatalog`): lee `data/mining/ores.json` y registra las 6 vetas en `ResourceManager` **solo si el id no existe** (no pisa `_mineral_cobre` / `_fragmento_ancestral`).
+  - `scripts/mineria/mining_manager.gd` (`MiningManager`, autoload `mineria`): capa de dominio de minería. Expone `intentar_extraccion(nodo, tool)` con RF6 (doble drop si tool mejorada + def requiere mejorada) y RF10 (límite suave diario por zona, `zone_exhausted` signal). Persiste `zone_quota` y `zone_quota_dia` en M59.
+  - `data/mining/ores.json`: 6 vetas data-driven (cobre, hierro, oro, cristal, ancestral, polvo_estrellas) con `region` (cantera/cueva/templo) y `profundidad_banda`.
+  - `scripts/mineria/test_mineria.gd`: 42 asserts OK / 0 fallos.
+  - `project.godot`: `mineria="*res://scripts/mineria/mining_manager.gd"` agregado al `[autoload]`.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No hay codigo Godot ejecutable: el repositorio esta en fase de diseno/documentacion; las rutas `res://_Project/...` son propuestas y se ajustaran a la estructura final.
+
+- **RF4 cuevas/techos**: las vetas como `ResourceNode` se spawnean en superficie (M15 ResourceSpawner); las cuevas con vetas en paredes/techos dependen de M26 (Templo Subterráneo) y de la escena 3D. Documentado [?] en §C y §G.
+- **Polish cozy visual (partículas, sonidos, colores emisivos, derrumbes, chispa de anuncio)**: depende de assets de M45, M52, M43 — todos [?] con dueño en §C, §L.
+- **UI de durabilidad / texto flotante / vibración**: depende de M53 (UI) y del widget de tool_controller — [?].
+- **Profiler 50 vetas + recorrido end-to-end**: benchmarks de M61 + M138 — [?].
+- **Sistema de "capa superficial indestructible" (opción A)**: queda ABIERTO como tarea de M08, fuera del alcance de M35.
+- **Fundición de lingotes y precios de venta**: integración con M16 y M38 — el campo `valor_venta` está en el JSON, pero el flujo completo de fundición/economía lo hace cada módulo dueño.
 
 ### Intentos fallidos / decisiones
-- Descartada la edicion de vetas como prefabs flotantes (rompe el voxel M08).
-- Descartado el golpe unico (elimina la progresion de picos M13).
-- Descartadas las vetas permanentes (contradice el cozy y vacia recursos).
 
-### Recomendaciones para el proximo agente
-- Implementar tras M08 (hook de chunk), M13 (pico equipable) y M15 (agregar_recursos).
-- Respetar la mascara de colision exclusiva de vetas para cerrar el hot path del raycast.
-- Al conectar con M26, sembrar los nodos especiales desde eventos del Templo, no desde la distribucion general.
+- **Decisión clave: NO duplicar ResourceManager.** El diseño de `02-Analisis.md` proponía un `MiningManager` con `place_veins_in_chunk`, `_zone_quota`, `_veins`, `calcular_drops`. En el código real ya existe todo eso en `ResourceManager` + `ResourceSpawner` + `ResourceNode`. Implementar la versión A habría sido trabajo doble con bugs dobles. La opción B reduce ~80% del código y zero conflictos.
+- **Mapeo `ToolData.Nivel` → `tool_id`**: el contrato de M15 (`es_accesible_con`) compara `StringName` con el `herramienta_requerida` del def. Como `ToolData.Nivel` es 1..4 (COBRE/HIERRO/ORO/CRISTAL), el helper `_tool_id()` devuelve `pico`, `pico_hierro`, `pico_oro`, `pico_cristal`. Esto permite que un def con `herramienta_requerida="pico"` acepte los 4 tiers, mientras que uno con `"pico_oro"` solo acepte T3+. Si el dueño de M15 quiere el contrato inverso, hay que ajustar este mapeo (decisión de integración pendiente con M13/M15).
+- **Reset diario con `_zone_quota_dia`**: el manager usa `GameTime.dia_cambio` (señal M29) para resetear. Si `GameTime` no está disponible (test aislado), la cuota persiste — por eso `_reset_si_cambio_dia()` también chequea manualmente.
+
+### Recomendaciones para el próximo agente
+
+- **Integración con M13**: cuando el `ToolController` llame al golpe real, debería enrutar por `MiningManager.intentar_extraccion(nodo, herramienta)` en vez de llamar directo a `ResourceManager.recibir_golpe_en_nodo`. El cambio es de 1 línea en `tool_controller.gd` (no hecho en iter 1 para no modificar M13 sin coordinación con su dueño Hy3).
+- **Distribución en chunks**: el `ResourceSpawner` actual `planificar_region()` no distingue entre regiones mineras. Cuando el sistema de regiones mineras (cantera/cueva/templo) esté activo, conviene agregar una `region_id` específica para minería o reutilizar el `region` del def.
+- **Visuales**: los placeholders de M15 (cajas coloreadas) son feos para vetas mineras. El equipo de arte (M45) debería generar meshes con emissive por rareza (oro brillante, cristal luminoso, ancestral mágico).
+- **Tests E2E con GameTime real**: el test actual no usa GameTime (autoload ausente en headless aislado). Para probar respawn + reset diario reales, usar `godot --headless res://scenes/test_runner.tscn` (M112) con un test que cree un nodo, lo agote, avance el día y verifique respawn.
+- **QA cruzado (§21.8)**: el módulo está listo para verificación por **Hy3 (WorkBuddy)**.
+
+### Pitfalls de Godot documentados en este turno
+
+- **Mine_extraccion_fallida → mina_extraccion_fallida (typo de 信号)**: las señales NO se llaman como funciones; se emiten con `.emit(args)`. El linter de Godot 4.7 lo detecta correctamente. Documentado en 07-GUIA-GODOT §1.1 (ya estaba).
+- **Sin `class_name` en autoloads**: respetado (`MiningManager` extiende `Node`, registrado por path en project.godot, no por class_name). Ver 07-GUIA-GODOT §9.17/§9.41.
+- **Variables inferidas con `:=` y Dictionary/Array heterogéneos**: forzar tipo explícito (`var zona: String = ...`, `var tool_id: StringName = ...`) para evitar `Cannot infer the type` en parse.

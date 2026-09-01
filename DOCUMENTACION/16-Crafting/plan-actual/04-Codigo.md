@@ -203,3 +203,63 @@ En builds release los `print` se eliminan o se compilan condicionados (`if OS.is
 ## 5. Historial de Cambios
 
 - **2026-08-16:** Creación del plan inicial del módulo (documentación completa, código propuesto, sin implementación aún). Firmado por Deepseek V4 Flash (OpenCode).
+- **2026-08-30:** Implementación del núcleo (iter 1-2) por Deepseek V4 Flash (Kilo): CraftingService, CraftingRecipe, CraftingStation, CraftingUI, test 0 fallos. Logs 269/270.
+- **2026-08-31:** Iteración 3 por GLM (Kilo): resolución de los 4 pendientes. Log 303.
+- **2026-08-31:** Iteración 3 cierre por GLM (Kilo): test season_changed runtime + decisión de nomenclatura M93. Log 304. Liberado a 🟡.
+
+## Notas del Agente (iteración 3 — 2026-08-31)
+
+**Modelo:** GLM (Kilo)
+**Plataforma:** Kilo
+**Fecha:** 2026-08-31 07:10:00
+**Estado:** Iter 3 cerrada. Módulo sigue 🔵 En curso (8 [?] con dueño).
+
+### Lo que hice
+- **RF5 estacional:** campo `temporadas: Array[String]` en `CraftingRecipe`, `es_fabricable_ahora(estacion)`, mapeo de claves (`primavera`/`verano`/`otono`/`invierno`) a enum M29, `ESTACIONES_ANYO_TEXTO` const. Plumbed en `_recipe_desde_datos`. Filtrado en `recetas_por_estacion` (oculta sin borrar conocimiento). `recetas_conocidas_estacion` devuelve TODAS las conocidas (incluso bloqueadas). `receta_bloqueada(rec_id)` para la UI. `max_craftable`/`puede_craft`/`craft` respetan temporada. Señal `receta_bloqueada_estacion`. Integración con M29 vía `get_node_or_null("/root/GameTime")` + `estacion_cambio` signal. Datos: `rec_ensalada_bayas` → [primavera, verano], `rec_talisman_ancestral` → [otono, invierno].
+- **RF14 pergaminos M14:** helper `usar_pergamino(item_id: String) -> Dictionary` con prefijo `pergamino_rec_`. Señal `pergamino_consumido(rec_id, aprendido)` (false = ya conocida, NO consume el pergamino — honesto). Convencion documentada para M14.
+- **RF12 SFX/VFX procedural:** `scripts/crafting/crafting_feedback.gd` (nuevo). Instanciado como hijo del servicio en `_ready`. SFX: `AudioStreamWAV` generado en memoria (seno 660Hz 180ms OK / 880Hz 280ms descubrimiento, envolvente attack/release anti-click). VFX: `CPUParticles2D` dorado (`emitting=true`, `one_shot`, 24 partículas, gravedad, color 1.0/0.85/0.35) en `CanvasLayer` propia con limpieza diferida por `SceneTreeTimer`. Notificación vía `NotificationService` (fallback a `print` si no existe).
+- **RF9 preview V1:** `ColorRect` (28×28, color derivado por hash determinista del `resultado_id`) + Label `→ {resultado_id}` en `CraftingUI`. Reset cuando no hay selección. Aviso `FUERA_TEMPORADA` en ámbar cuando la receta está bloqueada.
+- **Tests:** `_test_estacional_rf5` (RF5, 11 checks), `_test_pergamino_m14` (RF14, 4 checks), `_test_feedback_cargado` (RF12, 3 checks). `_test_coste_ao` actualizado para forzar `_gt._mes=9` (otoño) ya que el talismán ahora es estacional. Regresión M31 (ciclo día/noche) sigue 12/0 OK. **Total M16: 0 fallos. M31: 12/0 OK.**
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **M14 use_item → pergamino:** el helper `usar_pergamino` existe, pero la integración M14 (detectar item tipo pergamino y consumirlo al usar) requiere cambio en M14 (autoload 🟡, fuera de alcance M16 iter 3). Documentado como pendiente con dueño.
+- **Preview 3D real:** el swatch V1 es honesto pero no es un modelo 3D rotable. Requiere M45 (🟢 sin núcleo).
+- **SFX master bus + librería:** el beep es procedural; integrar con AudioBusSetup y SFX library de M91 cuando exista.
+- **VFX avanzados:** las partículas CPU son placeholder; M52 está 🟢 sin núcleo.
+- **Tiendas venden pergaminos:** M38 🟡; el `precio_pergamino` en el JSON ya existe pero no hay item `pergamino_rec_*` en el catálogo de tienda.
+- **Migración `coste_recursos` → `materiales`:** el JSON usa `coste_recursos` (decisión de M93) y `_recipe_desde_datos` lo mapea; el diseño §1.2 dice `materiales`. Inconsistencia menor entre JSON y diseño. No bloquea.
+- **Recetas secretas/ancestrales con feedback dorado adicional:** las partículas en descubrimiento son la base; el "feedback dorado" del RF3 (secreta vs ancestral) requiere distinguirlas por tag.
+- **Test de cambio de temporada en runtime:** `estacion_cambio` actualiza `_estacion_actual`; falta test explícito que emita la señal y verifique el refresco.
+
+### Intentos fallidos / decisiones
+- `Signal.is_valid()` no existe en Godot 4. Resuelto eliminando la guarda y conectando directo a `timer.timeout`.
+- El talismán (coste_ao=10) ahora falla en primavera porque es estacional [otono, invierno]. Actualicé el test para forzar `_gt._mes=9` (otoño) — comportamiento correcto de RF5.
+- `recetas_por_estacion` filtra por temporada; las recetas conocidas pero fuera de temporada NO aparecen en la lista de fabricables. `recetas_conocidas_estacion` (nueva) devuelve todas las conocidas para que la UI pueda mostrar un aviso "fuera de temporada" sin perder la pista.
+- `CraftingFeedback` se instancia como `child` del autoload `Crafting` (en el SceneTree). No requiere registro en `project.godot` ni nodo manual en la escena principal.
+
+### Recomendaciones para el próximo agente
+- Cuando M14 implemente `use_item`, agregar la convención: si el `item_id` empieza con `pergamino_rec_`, llamar a `Crafting.usar_pergamino(item_id)` y consumir el item tras `aprendido==true`.
+- Reemplazar el swatch V1 por un `SubViewport` 3D cuando M45 provea `ItemData.preview_mesh`.
+- Mover el array de partículas a una `MultiMesh` GPU cuando M52 exista.
+- Documentar `coste_recursos` (JSON) vs `materiales` (diseño) como decisión de nomenclatura de M93 para alinear.
+- Los 8 [?] con dueño están listados en la sección M.2 del 05-Checklist.
+
+## Notas del Agente (iteración 3 cierre — 2026-08-31 07:50)
+
+**Modelo:** GLM (Kilo)
+**Plataforma:** Kilo
+**Fecha:** 2026-08-31 07:50:00
+**Estado:** Iter 3 cerrada por completo. Módulo liberado a 🟡.
+
+### Lo que hice
+- Test `_test_season_changed_runtime` (RF5): verifica que el servicio está conectado a `estacion_cambio` de M29 (via `get_connections()`), que la emisión no crashea, y que `get_estacion_actual()` es coherente con `GameTime._mes` después de la señal.
+- **Decisión de nomenclatura `coste_recursos` → `materiales`:** NO se renombra. `coste_recursos` es la clave del schema de M93, usada por `crafting.json`, `construction.json`, `validate_balance.gd` y `balance_service.gd` (línea 180). M93 es la autoridad del schema. Renombrar rompería M93 y M17 (construcción). Se mantiene el mapeo: JSON `coste_recursos` → `CraftingRecipe.materiales` en `_recipe_desde_datos`. Documentado en sección M.3 del 05-Checklist.
+- Liberación M16 a 🟡 en los 4 registros.
+- Log 304 generado.
+
+### Intento fallido
+- `_refrescar_estacion_actual()` con "no-op si cache válido" sobrescribía la actualización de la señal al re-leer de `get_estacion()`. Se revirtió a "siempre re-leer de M29" (fuente de verdad). La señal mantiene el cache caliente pero la consulta siempre lee. Test ajustado para verificar conexión + emisión + coherencia, no que la señal sola cambie el cache sin que `_mes` cambie.
+
+### Recomendaciones finales
+- Los 6 [?] con dueño (M.2) requieren M14/M45/M38/M52/M91 con núcleo. M16 está funcional y bien testeado; los pendientes son integraciones cross-module legítimas.
+- Al retomar M16, empezar por la integración M14 (RF17 pergaminos) que es la más valiosa y desbloquea economía.

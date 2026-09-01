@@ -6,7 +6,7 @@
 ## A. Requisitos y alcance (10)
 
 - [ ] Definir el problema: pesca cozy en mundo voxel sin frustracion [S]
-- [ ] Registrar dependencias: M51 (Agua), M32 (Clima) [S]
+- [x] Registrar dependencias: M51 (Agua), M32 (Clima) [S] — M32 núcleo operativo (Log 306); M51 pendiente con dueño
 - [ ] Registrar relaciones: M29, M31, M37, M14, M15 [S]
 - [ ] Catalogar los 25 puntos de la seccion 33 del plan maestro [S]
 - [ ] Definir RF1: cana equipable y lanzable desde la orilla [S]
@@ -22,7 +22,7 @@
 - [ ] P2: biomas — mar costero, rio, laguna, pozo ancestral [M]
 - [ ] P3: horarios — tablas por franjas de M31 (ALBA/DIA/ATARDECER/NOCHE/PROFUNDA) [M]
 - [ ] P4: estaciones — filtro por estacion de M29 (4 estaciones repetibles) [M]
-- [ ] P5: clima — filtro por los 9 climas de M32 con bono (nunca bloqueo) [M]
+- [x] P5: clima — filtro por los 9 climas de M32 con bono (nunca bloqueo) [M] — glm-5.3-flash 2026-08-31: bono sí bloqueo no (diseño M32 §6): lluvia/tropical multiplican peso de preferentes (JSON "clima") y raros (<=0.08); sin filtro
 - [ ] P6: rareza — pesos PRNG (comun 60, poco comun 25, raro 10, legendario 4, ancestral 1) [M]
 - [ ] P7: cebos — 4 cebos con multiplicadores (niego exclusividad) [M]
 - [ ] P8: canas — 3 canas que mejoran ventana/espera sin bloquear especies [M]
@@ -47,7 +47,7 @@
 ## C. Datos y definiciones (Resource) (10)
 
 - [ ] FishDefinition con id, nombre localizable y biomas [S]
-- [ ] FishDefinition con estaciones, franjas y climas como arrays [S]
+- [x] FishDefinition con estaciones, franjas y climas como arrays [S] — núcleo Deepseek (Log 297); climas ahora USADOS como bono (antes cargados y sin usar)
 - [ ] FishDefinition con peso_rareza y rangos de tamano [S]
 - [ ] FishDefinition con valor_venta y cebos_preferidos [S]
 - [ ] FishDefinition con pieza_museo y receta asociada [S]
@@ -97,7 +97,7 @@
 
 - [ ] Seleccion de estacion desde el calendario de M29 [S]
 - [ ] Franja horaria actual obtenida del ciclo M31 [S]
-- [ ] Clima actual obtenido del sistema M32 [S]
+- [x] Clima actual obtenido del sistema M32 [S] — _clima_actual_m32() consulta /root/Weather.get_clima() (neutro -1 si no existe); conversión _clima_m32_a_m34 al formato del JSON
 - [ ] Filtro de candidatas por estacion, franja y clima [M]
 - [ ] Clima con bono multiplicador de probabilidad (lluvia p.ej.) [M]
 - [ ] Cero bloqueos por clima en cualquier especie [S]

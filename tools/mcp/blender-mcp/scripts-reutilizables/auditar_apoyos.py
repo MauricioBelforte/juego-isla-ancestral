@@ -52,6 +52,23 @@ PREFIJOS_POR_SCRIPT = {
 TEMPLATE = """
 import bpy
 from mathutils import Vector
+
+def zmin_real(o):
+    """E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
+    en objetos rotados -> falso HUNDIDO/FLOTA. Caso real: roca_comun
+    SM_Roca_Comun_Chica con rot (0.2, -0.2, 1.1) daba bbox_min=-0.1092
+    cuando sus vertices reales solo bajan a 0.0450 -> 15 cm de falso hundido."""
+    if len(o.data.vertices) == 0:
+        return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return min((o.matrix_world @ v.co).z for v in o.data.vertices)
+
+def zmax_real(o):
+    """E-24: idem para el maximo. bbox_max sobreestima en rotados pero el
+    'z_max' en si mismo no afecta el FLOTA check; lo unimos por simetria."""
+    if len(o.data.vertices) == 0:
+        return max((o.matrix_world @ Vector(c)).z for c in o.bound_box)
+    return max((o.matrix_world @ v.co).z for v in o.data.vertices)
+
 bpy.context.view_layer.update()
 resultados = []
 # Z_MAX_BASE: altura maxima esperada de la PIEZA QUE TOCA LA ARENA.
@@ -64,8 +81,8 @@ for prefijo in @@PREFS@@:
     if not obs:
         resultados.append((prefijo, None, None, None, 0, 'NO ENCONTRADO'))
         continue
-    zmin = min(min((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
-    zmax = max(max((o.matrix_world @ Vector(c)).z for c in o.bound_box) for o in obs)
+    zmin = min(zmin_real(o) for o in obs)
+    zmax = max(zmax_real(o) for o in obs)
     if zmin > Z_MAX_BASE:
         estado = 'no es base (alto)'
     elif zmin > 0.05:

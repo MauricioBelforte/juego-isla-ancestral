@@ -64,7 +64,22 @@ func _on_delay_timeout() -> void:
 		return
 
 	var tooltip := _get_from_pool()
-	tooltip.get_node("Label").text = _pending_text
+	# M88: soporte para título y cuerpo separados por "|"
+	var parts := _pending_text.split("|", true, 1)
+	var title_label := tooltip.get_node_or_null("VBox/Title")
+	var body_label := tooltip.get_node_or_null("VBox/Body")
+	if title_label and body_label:
+		if parts.size() >= 2:
+			title_label.text = parts[0]
+			body_label.text = parts[1]
+			title_label.visible = true
+		else:
+			title_label.visible = false
+			body_label.text = _pending_text
+	elif tooltip.has_node("Label"):
+		# Fallback para tooltips legacy
+		tooltip.get_node("Label").text = _pending_text
+
 	tooltip.visible = true
 	tooltip.position = _calculate_position(_pending_control)
 	tooltip.size = tooltip.get_minimum_size()
@@ -79,19 +94,34 @@ func _get_from_pool() -> PanelContainer:
 		return _pool.pop_back()
 
 	var panel := PanelContainer.new()
-	var label := Label.new()
-	label.name = "Label"
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.custom_minimum_size = Vector2(200, 0)
-	panel.add_child(label)
+	var vbox := VBoxContainer.new()
+	vbox.name = "VBox"
+	vbox.add_theme_constant_override("separation", 2)
+	panel.add_child(vbox)
 
-	# Estilo básico (se aplicará desde ThemeUx cuando esté disponible)
+	# Título (M88: Fredoka One o negrita para títulos)
+	var title := Label.new()
+	title.name = "Title"
+	title.add_theme_font_size_override("font_size", 14)
+	title.add_theme_color_override("font_color", Color(0.85, 0.72, 0.35))
+	vbox.add_child(title)
+
+	# Cuerpo (M88: Nunito para cuerpo, tamaño legible)
+	var body := Label.new()
+	body.name = "Body"
+	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	body.custom_minimum_size = Vector2(180, 0)
+	body.add_theme_font_size_override("font_size", 12)
+	body.add_theme_color_override("font_color", Color(0.92, 0.88, 0.82))
+	vbox.add_child(body)
+
+	# Estilo del panel (cozy: esquinas redondeadas, fondo cálido)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.12, 0.10, 0.08, 0.92)
+	style.bg_color = Color(0.15, 0.12, 0.10, 0.94)
 	style.border_color = Color(0.6, 0.5, 0.3, 1.0)
 	style.set_border_width_all(1)
-	style.set_corner_radius_all(8)
-	style.set_content_margin_all(8)
+	style.set_corner_radius_all(10)
+	style.set_content_margin_all(10)
 	panel.add_theme_stylebox_override("panel", style)
 
 	add_child(panel)

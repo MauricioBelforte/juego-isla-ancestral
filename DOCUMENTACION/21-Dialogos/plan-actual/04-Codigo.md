@@ -275,3 +275,256 @@ Registrado en `project.godot` como autoload `DialogueManager`. La UI se instanci
 - Cuando M32 (Clima) exista, reemplazar `_get_clima()` y quitar el [?] correspondiente.
 - La condición por sesión (`catalina_amistad`) queda como ejemplo; migrar a WorldState cuando M20
   provea el nivel real por NPC.
+
+### Iteración 3 — Consumo de regalo M20 (gift_given por clase exacta) (2026-08-30, Hy3)
+
+**Contexto:** M20 (Friendship) emite `EventBus.npc.gift_given(npc_id, item_id, clase)` con la
+clase exacta de `GiftEvaluator.Clase` (0=AMADO, 1=GUSTA, 2=NEUTRAL, 3=DUPLICADO). M21 debía
+reaccionar por clase exacta (expresión + texto), no con un bool "le gustó / no". No había
+suscriptores previos a `gift_given` ni a `friendship_level_up`, así que el cableado es seguro
+(cambio de firma ya cerrado en M20, ver Log 296).
+
+#### Lo que hice
+- **`dialogue_manager.gd`** (autoload `DialogueManager`):
+  - `_ready()`: se suscribe a `EventBus.npc.gift_given` (`_on_gift_given`) y a
+    `EventBus.npc.friendship_level_up` (`_on_level_up`), con guardas
+    `has_signal` + `is_connected` para evitar doble suscripción.
+  - `const REACCION_REGALO`: mapa `GiftEvaluator.Clase -> {id, expresion, texto}`.
+    IDs `R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO` (coinciden con `GiftEvaluator._reaccion()`);
+    `texto` = clave de localización `REACCION_REGALO_*` (resuelta en M87 cuando exista la UI).
+  - `signal gift_reaction(npc_id, reaccion_id, clase, item_id)` y
+    `signal level_up_reaction(npc_id, new_level)`: la UI (M53/cuando exista) las consume para
+    mostrar expresión + texto.
+  - `_on_gift_given(npc_id, item_id, clase)`: si `REACCION_REGALO` tiene la clase, guarda
+    `_ultima_reaccion_regalo[npc_id]` (contexto para diálogos subsiguientes) y emite
+    `gift_reaction`. Clases fuera de rango se ignoran.
+  - `_on_level_up(npc_id, new_level)`: reenvía `level_up_reaction`.
+  - `get_ultima_reaccion_regalo(npc_id) -> Dictionary`: consulta la última reacción (o `{}`).
+- **Test nuevo** `scripts/dialogos/test_reaccion_m21_dialogo.gd`: usa el autoload real
+  `/root/DialogueManager` (su `_ready()` ya corrió). Difiere la ejecución con `call_deferred`
+  porque en `--script` los autoloads se añaden al árbol **después** de `_init()` (igual que
+  `test_amistad_eventos.gd`). Verifica: 4 clases → reacción correcta + `item_id` propagado,
+  `clase` propagada exacta, almacenamiento por NPC y `level_up_reaction`. **0 fallos.**
+
+#### Lo que NO hice (honestidad)
+- La UI (M53) aún no consume `gift_reaction`/`level_up_reaction` (no hay UI de reacción a regalo
+  implementada); el contrato de señal queda listo para cuando se construya.
+- Los textos `REACCION_REGALO_*` no están dados de alta en el diccionario de M87 (solo existen
+  las claves); se localizarán al integrar la UI.
+- `test_dialogos.gd` (regresión del manager) sigue 0 fallos tras agregar `_ready()`/handlers.
+
+#### Recomendaciones para el próximo agente
+- Para consumir la reacción en la UI: conectar a `DialogueManager.gift_reaction` y resolver
+  `reaccion_id` -> expresión del retrato + `texto` vía `Localization.traducir_clave`.
+- No cambiar la firma de `gift_given` (3 args) sin actualizar `REACCION_REGALO` y el test.
+
+### Iteración 4 — Escenas breves de evento (L82) + UI consume la reacción (2026-08-30, Hy3)
+
+**Contexto:** M20 (L82) pedía "escenas breves de evento con diálogo" de los vecinos; y la UI
+(M53) debía consumir `gift_reaction` en expresión + texto. Usuario aprobó ambos.
+
+#### Lo que hice
+- **Contenido (L82):** `data/dialogues/reaccion_regalo.json` (grafo que ramifica por
+  `reaccion_id` usando condiciones `==` sobre el contexto de sesión) con 4 líneas por clase
+  (R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO) y `data/dialogues/reaccion_nivel.json` (línea breve
+  de subida de nivel). El nodo `inicio` lleva una condición siempre-falsa (`__nunca__`) para
+  enrutar sin mostrar, y el último nodo de cada cadena es catch-all.
+- **Auto-disparo (M21):** en `dialogue_manager.gd`:
+  - `signal gift_reaction(npc_id, reaccion_id, clase, item_id, expresion)` — se agregó
+    `expresion` como 5º arg (retrocompatible: los lambdas con menos params siguen funcionando).
+  - `const REACCION_REGALO_DIALOGO := "reaccion_regalo"` / `REACCION_NIVEL_DIALOGO := "reaccion_nivel"`.
+  - `_on_gift_given`: emite `gift_reaction` con `expresion` y, si `not is_dialogue_active()`,
+    hace `start_dialogue(REACCION_REGALO_DIALOGO, {npc_id, reaccion_id, item_id})`.
+  - `_on_level_up`: emite `level_up_reaction` y, si no hay diálogo activo,
+    `start_dialogue(REACCION_NIVEL_DIALOGO, {npc_id, new_level})`.
+- **UI (M53) consume la reacción:** en `scripts/dialogos/ui/dialogue_ui.gd`:
+  - `_ready()` conecta `gift_reaction`/`level_up_reaction` del autoload.
+  - `_on_gift_reaction` guarda `_ultima_reaccion` (id/expresion/npc/item/clase) y muestra
+    `_expresion.text` (badge de expresión: feliz / neutral / feliz_intenso).
+  - `_on_level_up_reaction` guarda `R_NIVEL` + nivel. `get_ultima_reaccion()` lo expone para
+    el retrato (M53/M87). `_on_dialogue_ended` limpia el badge.
+  - La escena breve de reacción se proyecta en la caja de diálogo existente (capa M53) vía
+    `node_entered`.
+- **Robustez:** `resolve_text` ahora guarda el lookup de `/root/Localization` con
+  `is_inside_tree()` (antes emitía ERROR "get_node absolute path outside tree" cuando el
+  manager se usaba fuera del árbol, p.ej. en tests con instancias `.new()`).
+- **Test nuevo** `scripts/dialogos/test_eventos_dialogo_m21.gd`: carga/valida los 2 grafos,
+  verifica la rama correcta por `reaccion_id` (usando un manager fuera del árbol), el
+  auto-disparo desde `EventBus.npc.gift_given`/`friendship_level_up` (manager autoload real),
+  y que `DialogueUI` registra la reacción + badge de expresión. **0 fallos.**
+- Regresión: `test_reaccion_m21_dialogo.gd` (actualizado a la firma de 5 args) y
+  `test_dialogos.gd` **0 fallos**.
+
+#### Lo que NO hice (honestad)
+- El badge `_expresion` es texto plano (id de expresión); el retrato gráfico con expresión
+  (M53/M87) aún no existe — `get_ultima_reaccion()` queda listo para cuando se construya.
+- `reaccion_nivel.json` no ramifica por nivel (una sola línea); si se quiere variar por
+  umbral, añadir condiciones como en `reaccion_regalo.json`.
+
+#### Recomendaciones
+- No quitar el 5º arg `expresion` de `gift_reaction` sin actualizar DialogueUI y los tests.
+- Si se añaden más escenas breves, crear el grafo en `data/dialogues/` y sumarlo a
+  `REACCION_*_DIALOGO` en `dialogue_manager.gd`.
+
+### Iteración 5 — Retrato gráfico con expresión (M53/M87) (2026-08-30, Hy3)
+
+**Contexto:** Turn C (usuario aprobó "bien segui por ahi"): construir el retrato gráfico del
+hablante que lee `get_ultima_reaccion()` y cambia la "cara" del NPC según la expresión.
+
+#### Lo que hice
+- **Nuevo `scripts/dialogos/ui/npc_portrait_ui.gd`** (`class_name NpcPortraitUI`, `extends Control`):
+  retrato autocontenido de 150×150, sin assets de arte todavía. Tiene:
+  - `_bg: ColorRect` (fondo) + `_name_label` (nombre del hablante) + `_expr_label`
+    (etiqueta de expresión).
+  - `const EXPRESION_TINT` → tints por expresión cozy: `feliz_intenso`=(1.0,0.85,0.5) cálido,
+    `feliz`=(1.0,0.95,0.82), `neutral`=(0.82,0.82,0.88) gris. Default = (0.12,0.12,0.16,1.0).
+  - `set_speaker(speaker_key)` fija nombre; `set_expression(expresion)` aplica tint + etiqueta
+    vía `_aplicar_expresion()`; `get_expression()`/`get_speaker()`; `set_texture(tex)`
+    (gancho M87: cambiar textura por expresión/npc).
+- **Cableado en `dialogue_ui.gd`:**
+  - Retrato a la izquierda del panel (8,8 → 158,158); texto/opciones/badge `_expresion`
+    corridos a `offset_left = 170` para dejarle lugar.
+  - `_on_node_entered` → `_portrait.set_speaker(speaker_key)`.
+  - `_on_gift_reaction` → `_portrait.set_expression(expresion)`;
+    `_on_level_up_reaction` → `_portrait.set_expression("feliz")`.
+  - Variable `_portrait` **sin anotación de tipo** (`var _portrait = null`): `class_name
+    NpcPortraitUI` no se resuelve en parse-time headless (el script dependiente no se compila
+    antes), lo que daba `Parse Error: Could not find type "NpcPortraitUI"`. Se crea en runtime
+    con `load("res://scripts/dialogos/ui/npc_portrait_ui.gd").new()` y se usa por duck-typing.
+- **Test ampliado** `test_eventos_dialogo_m21.gd` → `_test_ui_portrait_expresion`: crea
+  `DialogueUI`, afirma `_portrait != null`, y que `gift_reaction` con `feliz`/`neutral`/
+  `feliz_intenso` produce `get_expression()` correcta + `_bg.color.is_equal_approx(...)` del
+  tint; y `set_speaker("npc.Catalina")` → `get_speaker()`. **0 fallos** (suite completa:
+  carga grafos, ramas por clase, auto-disparo EventBus, badge M53, retrato).
+- Regresión: `test_reaccion_m21_dialogo.gd` y `test_dialogos.gd` **0 fallos**.
+
+#### Lo que NO hice (honestad)
+- El retrato sigue sin textura de arte (placeholder de color); `set_texture` queda listo para
+  M87 (cargar `res://textures/portraits/<id>.png` por convención en `set_speaker`).
+- Sigue abierto: condiciones M22/M23/M32, salto rápido (skip_all).
+
+### Iteración 6 — reaccion_nivel por nivel + DialogGraphValidator (2026-08-30, Hy3)
+
+**Contexto:** el usuario pidió "busca tareas que no requieran vision, considera las que puedas
+hacer y hacelas". Escaneé CHECKLIST-GLOBAL + 05-Checklist y elegí dos tareas de M21 que conocía
+y son verificables headless: (A) ramificar `reaccion_nivel.json` por nivel, (B) validador
+estático de grafos. (Descarté registrar las claves `REACCION_REGALO_*` en M87: no se usan para
+mostrar texto — el texto real viene del grafo — así que no aportan.)
+
+#### Lo que hice — (A) reaccion_nivel por nivel
+- `data/dialogues/reaccion_nivel.json` reescrito con router `inicio` (condición siempre-falsa
+  `new_level == -999`) + fall-through por `>=`: `nivel5` (>=5), `nivel3` (>=3), `nivel_base`
+  (default), `fin`. El motor ya soporta `>=`/`<=`/`>`/`<` (dialogue_node.gd compara `float`).
+- `test_eventos_dialogo_m21.gd`: nueva `_test_ramas_por_nivel` (niveles 5/3/1 → substr
+  "grandes amigos"/"aprecio"/"subio al nivel"); el assert de `_test_autodisparo_desde_eventbus`
+  cambió de `contains("amistad")` a `contains("nivel")` porque la rama de nivel 3 ya no dice
+  "amistad". **0 fallos.**
+
+#### Lo que hice — (B) DialogGraphValidator
+- **Nuevo `scripts/dialogos/dialog_graph_validator.gd`** (`class_name DialogGraphValidator`,
+  `extends RefCounted`): `validar(grafo, claves_mundo=[])` detecta nodos huérfanos (BFS desde
+  start por next/goto/opciones), operadores de condición inválidos (fuera de
+  `OPERADORES_VALIDOS`), y claves de WorldStateService desconocidas (si se pasa allowlist).
+  `validar_texto(texto, ...)` / `validar_archivo(path, ...)` para CI/plugins (JSON malformado →
+  `{ok:false, error:"JSON invalido"}`; sin línea/columna — limitación de `JSON.parse_string`).
+- Complementa (no duplica) `DialogueGraph.validate()`, que ya chequea next/goto inexistentes,
+  OPCIONES vacías y FIN alcanzable.
+- **Parámetros sin anotación de tipo** (lección §9.50): `DialogGraphValidator` se referencia en
+  el test vía `load(...)` (no por `class_name` en parse-time), igual que DialogueManager.
+- **Nuevo `test_validacion_grafo_m21.gd`**: grafos reales (reaccion_regalo, reaccion_nivel)
+  sin problemas (sin falsos positivos); grafo roto con huérfano / operador `~~~` / clave de
+  mundo `foo_inexistente` (con allowlist) detectados; JSON malformado → `ok=false`. **0 fallos.**
+- Regresión: `test_eventos_dialogo_m21`, `test_reaccion_m21_dialogo`, `test_dialogos`,
+  `test_condiciones_mundo` **0 fallos** (5 suites M21 en verde).
+
+#### Lo que NO hice (honestad)
+- `DialogueGraphValidator` NO reporta línea/columna de JSON malformado (Godot no la expone) ni
+  IDs duplicados (load_from_json usa Dictionary y los colapsa). Ambos quedaron como `[?]` en
+  05-Checklist, documentados como no aplicables.
+- No se cableó el validador en runtime (solo util + test) para no cambiar el comportamiento de
+  `start_dialogue`; queda como gate de authoring/CI (llamarlo al guardar un .json o en un
+  EditorScript).
+
+### Iteración 7 — Gate CI/editor + salto rápido skip_all (2026-08-31, Hy3)
+
+**Contexto:** el usuario aprobó ("si hace esos 2") las dos tareas propuestas al cerrar iter 6:
+(1) cablear `DialogGraphValidator` como gate de CI/editor, (2) implementar el salto rápido
+(`skip_all`) en la UI de diálogo. Ambas verificables headless (sin visión).
+
+#### Lo que hice — (1) Gate CI/editor de validación
+- **Nuevo `scripts/dialogos/validate_all_dialogues.gd`** (`extends SceneTree`): recorre
+  `res://data/dialogues/*.json` y valida cada uno con `DialogGraphValidator.validar_archivo`;
+  imprime `[CI-DGT] <archivo>: OK` o lista de problemas y sale con `quit(1)` si hay problemas
+  (para fallar CI). `CLAVES_MUNDO` const opcional: si está vacío NO se chequean claves de mundo
+  (evita falsos positivos); se documenta cómo poblarlo con las claves de `world_state_service.gd`.
+  Es `extends SceneTree` (no `EditorScript`) para que el MISMO script corra en `--script` headless
+  (CI) y desde la terminal del editor.
+- **`start_dialogue` ahora también corre el validador en runtime** (iter 7): tras
+  `grafo.validate()`, llama `_obtener_validador_script().validar(grafo)` (claves_mundo vacío →
+  solo huérfanos + operadores) y aborta con `[VAL-DGV]` si hay problemas. Complementa
+  `DialogueGraph.validate()` sin cambiar el comportamiento para los diálogos ya válidos. El
+  cargue del validador es por `load()` en runtime (cacheado en `_validador_script`), sin
+  anotación de tipo → respeta §9.50.
+- **Nuevo `test_validacion_ci_m21.gd`**: espejo headless del gate — valida TODOS los JSON de la
+  carpeta y afirma 0 problemas. **0 fallos.** (Los 3 diálogos de producción — catalina_hola,
+  reaccion_regalo, reaccion_nivel — pasan limpios, así que cablear el validador en runtime no
+  rompe nada existente.)
+
+#### Lo que hice — (2) Salto rápido skip_all
+- **Nuevo `func skip_all()` en `dialogue_manager.gd`**: fast-forward por nodos LINEA/EVENTO
+  aplicando efectos, hasta detenerse en un nodo OPCIONES (el jugador elige) o llegar a FIN
+  (termina). No salta decisiones; loop con guarda 9999 + `stop_dialogue()` de salvaguarda ante
+  ciclos sin FIN.
+- **`dialogue_ui.gd` `_input`**: `KEY_ESCAPE` → `dm.skip_all()` (+ `set_input_as_handled`).
+  ENTER/SPACE siguen avanzando una línea; ESC salta todo hasta la próxima elección/fin.
+- **Nuevo `test_skip_m21.gd`** (4 sub-tests): skip hasta FIN termina; skip se detiene en
+  OPCIONES (diálogo activo, nodo `opt`); efecto de LINEA se aplica durante el salto; tras
+  detenerse en OPCIONES `choose_option(0)` sigue funcionando. **0 fallos.**
+
+#### Regresión (7 suites M21 en verde)
+`test_dialogos`, `test_condiciones_mundo`, `test_reaccion_m21_dialogo`, `test_eventos_dialogo_m21`,
+`test_validacion_grafo_m21`, `test_validacion_ci_m21`, `test_skip_m21` — todas **0 fallos**.
+Más el gate `validate_all_dialogues.gd` ejecutado end-to-end (resumen: 3 archivos, 0 problemas).
+
+
+
+---
+
+## Notas del Agente — Iteración 8 (Hy3 / WorkBuddy, 2026-08-31)
+
+**Modelo:** Hy3
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-08-31
+**Estado:** Cierra 3 `[?]` de su dominio (validación/condiciones de mundo/clima M32). +3 [x] → 74/139 + 9 [?].
+
+### Hallazgo de QA (validación) que motivó la iter 8
+La condición de clima YA estaba cableada en `world_state_service.gd` (`_get_clima()` delega en
+`Weather.get_nombre_clima()`, M32) y la clave `clima` figuraba en la constante de `dialogue_manager.gd`.
+Pero el ciclo de VALIDACIÓN estaba roto en silencio:
+- `validate_all_dialogues.gd` tenía `CLAVES_MUNDO = []` (vacío) ⇒ el chequeo de claves de mundo
+  NEVER corría ⇒ un typo como `"climaX"` en un diálogo NUNCA se detectaba (ni en CI ni en runtime).
+- El gate `[VAL-DGV]` en `dialogue_manager.gd` llamaba `.validar(grafo)` sin allowlist ⇒ lo mismo.
+El `[?]` F.11 (condiciones de clima) era legítimo: faltaba cerrar validación + resolución.
+
+### Lo que hice
+1. **Fuente única de verdad en `dialog_graph_validator.gd`**: nueva constante `CLAVES_MUNDO_BASE`
+   (incluye `clima`, `amistad_`, `flag_` como prefijos) + helper `_clave_conocida()` que reconoce
+   claves con sufijo (`amistad_<npc>`, `flag_<x>`). `_validar_cond` ahora SIEMPRE chequea claves
+   desconocidas (usa la base si no se pasa allowlist explícita).
+2. **`validate_all_dialogues.gd`**: `CLAVES_MUNDO` se resuelve en `_ejecutar()` desde
+   `DialogGraphValidator.CLAVES_MUNDO_BASE` (DRY, no duplicar la lista).
+3. **`dialogue_manager.gd` gate `[VAL-DGV]`**: ahora pasa `_obtener_validador_script().CLAVES_MUNDO_BASE`
+   al validador ⇒ rechaza claves desconocidas EN RUNTIME, no solo en CI (cierra H.16).
+4. **Nuevo `test_clima_dialogo_m21.gd`**: valida que el validador ACEPTA `clima`, RECHAZA `climaX`,
+   y que `WorldStateService.get_value("clima")` resuelve contra M32 (String) con fallback "" si M32
+   ausente. Sigue el patrón de los tests iter 7 (0 fallos esperados; no ejecutable aquí por falta de
+   Godot en el entorno, pero APIs verificadas estáticamente).
+
+### Lo que NO hice (honestidad)
+- No toqué la resolución de `clima` en `world_state_service.gd` (ya era correcta).
+- No cerré los `[?]` de M22/M23 (historia/misiones): requieren esos módulos como dueños.
+- No ejecuté el runtime headless (Godot no instalado en WorkBuddy); la verificación es estática de APIs.
+
+### Regresión esperada (8 suites M21 en verde)
+Las 7 previas + `test_clima_dialogo_m21` — todas 0 fallos. El cambio en el gate solo AGREGA
+detección de claves desconocidas; los JSON existentes usan solo claves válidas, así que no rompe.

@@ -1,7 +1,8 @@
-# Log 207 — Cofre ancestral v2: más detalles y materiales brillantes (directiva "muy simple / opaco")
+﻿# Log 207 — Cofre ancestral v2: más detalles y materiales brillantes (directiva "muy simple / opaco")
 
 **Módulo:** M25 (Ruinas/Templos)
 **Fecha:** 2026-08-28 20:30
+**Hora:** 20:30
 **Agente:** MiniMax-M3 · WorkBuddy AI
 **Disparador:** "me gustaria que le agregues mas detalles al cofre lo veo muy simple, como hiciste una vez con los cocos que lo fuiste mejorando. algo mas brillante no se lo veo opaco"
 

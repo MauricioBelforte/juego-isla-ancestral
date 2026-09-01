@@ -1,4 +1,6 @@
-# $1281 — Fix antorcha_pared v2 (bug reportado: placa flotando) (2026-08-29 18:25)
+﻿# $1281 — Fix antorcha_pared v2 (bug reportado: placa flotando) (2026-08-29 18:25)
+**Fecha:** (sin fecha)
+**Hora:** 18:25
 
 ## Resumen ejecutivo
 

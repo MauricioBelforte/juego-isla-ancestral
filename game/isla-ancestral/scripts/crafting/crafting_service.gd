@@ -17,16 +17,43 @@ signal receta_aprendida(recipe: CraftingRecipe)
 signal crafting_completed(recipe: CraftingRecipe, cantidad: int)
 signal crafting_failed(recipe: CraftingRecipe, motivo: String)
 signal experimento_fallido(estacion: int)
+signal pergamino_consumido(rec_id: String, aprendido: bool)  # false = ya conocida, no consume
+signal receta_bloqueada_estacion(rec_id: String)  # RF5: conocida pero fuera de temporada
 
 const SECCION_SAVE := "crafting"
 
 var _recetas: Dictionary = {}      # id -> CraftingRecipe
 var _conocidas: Array = []         # ids de recetas conocidas (persistente)
 var _experimentos_fallidos: int = 0
+var _gt: Node = null
+var _estacion_actual: int = 0
+var _estacion_cache_valida: bool = false
 
 func _ready() -> void:
+	_gt = get_node_or_null("/root/GameTime")
+	if _gt != null and _gt.has_signal("estacion_cambio"):
+		_gt.estacion_cambio.connect(_on_estacion_cambio)
+	_refrescar_estacion_actual()
 	_cargar_recetas()
 	_registrar_proveedor_guardado()
+	# Feedback procedural (SFX/VFX) como hijo del servicio (autoload)
+	var fb_script := load("res://scripts/crafting/crafting_feedback.gd")
+	if fb_script != null:
+		var fb = fb_script.new()
+		fb.name = "CraftingFeedback"
+		add_child(fb)
+
+func _on_estacion_cambio(est: int) -> void:
+	_estacion_actual = est
+	_estacion_cache_valida = true
+
+func _refrescar_estacion_actual() -> void:
+	# Lee siempre de M29 (fuente de verdad). La señal estacion_cambio mantiene
+	# el cache caliente, pero cada consulta re-lee para soportar tests/manipulación
+	# directa de GameTime._mes y para correctness ante cualquier cambio externo.
+	if _gt != null and _gt.has_method("get_estacion"):
+		_estacion_actual = int(_gt.get_estacion())
+		_estacion_cache_valida = true
 
 ## ── Carga data-driven (M93 crafting.json) ───────────────
 
@@ -62,6 +89,10 @@ func _recipe_desde_datos(rec_id: String, datos: Dictionary) -> CraftingRecipe:
 	var tags: Array = datos.get("tags", [])
 	for t in tags:
 		receta.tags.append(str(t))
+	# RF5: temporadas (vacío = siempre; ["primavera","verano"] = solo esas)
+	var temps: Array = datos.get("temporadas", [])
+	for t in temps:
+		receta.temporadas.append(str(t))
 	return receta
 
 ## ── Consulta ─────────────────────────────────────────────
@@ -71,10 +102,33 @@ func obtener_receta(rec_id: String) -> CraftingRecipe:
 
 func recetas_por_estacion(estacion: int) -> Array:
 	var out: Array = []
+	_refrescar_estacion_actual()
+	for receta in _recetas.values():
+		if receta.estacion != estacion:
+			continue
+		if receta.id not in _conocidas:
+			continue
+		# RF5: filtrar por temporada actual
+		if not receta.es_fabricable_ahora(_estacion_actual):
+			continue
+		out.append(receta)
+	return out
+
+## Devuelve TODAS las recetas conocidas de la estación, incluyendo las fuera de
+## temporada (RF5: temporada cerrada oculta pero no borra conocimiento).
+func recetas_conocidas_estacion(estacion: int) -> Array:
+	var out: Array = []
 	for receta in _recetas.values():
 		if receta.estacion == estacion and receta.id in _conocidas:
 			out.append(receta)
 	return out
+
+## Devuelve la receta si está conocida pero bloqueada por temporada (RF5).
+func receta_bloqueada(rec_id: String) -> bool:
+	var r: CraftingRecipe = _recetas.get(rec_id, null)
+	if r == null or rec_id not in _conocidas:
+		return false
+	return not r.es_fabricable_ahora(_estacion_actual)
 
 func recetas_conocidas() -> Array:
 	return _conocidas.duplicate()
@@ -101,18 +155,39 @@ func _conocer(rec_id: String, emitir: bool = true) -> void:
 func aprender_desde_pergamino(rec_id: String) -> bool:
 	var receta: CraftingRecipe = _recetas.get(rec_id, null)
 	if receta == null:
+		pergamino_consumido.emit(rec_id, false)
 		return false
 	if es_conocida(rec_id):
-		return false  # ya conocida: NO consume el pergamino (honesto)
+		pergamino_consumido.emit(rec_id, false)  # ya conocida: NO consume el pergamino (honesto)
+		return false
 	_conocer(rec_id)
+	pergamino_consumido.emit(rec_id, true)
 	return true
+
+## Helper M14: usa un item de tipo "pergamino_rec_<rec_id>" desde el inventario.
+## Convención de nombre del item: "pergamino_rec_tela_lino" -> rec_id "rec_tela_lino".
+## Devuelve { aprendido: bool, rec_id: String }. NO descuenta el item del inventario;
+## eso lo hace M14 al recibir el evento use_item.
+func usar_pergamino(item_id: String) -> Dictionary:
+	var id_limpio: String = str(item_id).strip_edges()
+	const PREFIJO := "pergamino_rec_"
+	if not id_limpio.begins_with(PREFIJO):
+		pergamino_consumido.emit(id_limpio, false)
+		return {"aprendido": false, "rec_id": ""}
+	var rec_id: String = id_limpio.substr(PREFIJO.length())
+	var ok: bool = aprender_desde_pergamino(rec_id)
+	return {"aprendido": ok, "rec_id": rec_id}
 
 ## ── Validación y fabricación (RF6/RF7/RF8/RF11) ─────────
 
 ## Calcula cuántas unidades puede fabricar con los materiales actuales (RF8).
+## RF5: devuelve 0 si la receta está fuera de temporada.
 func max_craftable(rec_id: String) -> int:
 	var receta: CraftingRecipe = _recetas.get(rec_id, null)
 	if receta == null:
+		return 0
+	_refrescar_estacion_actual()
+	if not receta.es_fabricable_ahora(_estacion_actual):
 		return 0
 	var inv = get_node_or_null("/root/Inventario")
 	if inv == null:
@@ -130,9 +205,15 @@ func max_craftable(rec_id: String) -> int:
 func puede_craft(rec_id: String) -> bool:
 	return max_craftable(rec_id) >= 1
 
+## Estacion actual cacheada (M29).
+func get_estacion_actual() -> int:
+	_refrescar_estacion_actual()
+	return _estacion_actual
+
 ## Fabrica `cantidad` unidades (RF7/RF8). Instantáneo (RF6).
 ## RF11: consume SOLO si todo puede completarse; si el resultado no entra,
 ## hace rollback completo (no se pierde material).
+## RF5: si la receta está fuera de temporada, falla sin consumir.
 func craft(rec_id: String, cantidad: int = 1) -> bool:
 	var receta: CraftingRecipe = _recetas.get(rec_id, null)
 	if receta == null or cantidad < 1:
@@ -140,6 +221,12 @@ func craft(rec_id: String, cantidad: int = 1) -> bool:
 		return false
 	if not es_conocida(rec_id):
 		crafting_failed.emit(receta, "receta_desconocida")
+		return false
+	# RF5: temporada cerrada -> oculta, no consume
+	_refrescar_estacion_actual()
+	if not receta.es_fabricable_ahora(_estacion_actual):
+		receta_bloqueada_estacion.emit(rec_id)
+		crafting_failed.emit(receta, "temporada_cerrada")
 		return false
 	var inv = get_node_or_null("/root/Inventario")
 	if inv == null:

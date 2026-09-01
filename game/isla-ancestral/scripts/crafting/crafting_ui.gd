@@ -18,6 +18,9 @@ var _receta_seleccionada: CraftingRecipe = null
 var _title_label: Label
 var _recetas_box: VBoxContainer
 var _detalle_label: RichTextLabel
+var _preview_box: HBoxContainer
+var _preview_icon: ColorRect
+var _preview_label: Label
 var _btn_crear1: Button
 var _btn_crear_n: Button
 var _mensaje_label: Label
@@ -84,6 +87,18 @@ func _crear_ui() -> void:
 	_detalle_label.fit_content = true
 	_detalle_label.custom_minimum_size = Vector2(0, 90)
 	vbox.add_child(_detalle_label)
+
+	# Preview del resultado (RF9) — V1: swatch de color + nombre del item
+	_preview_box = HBoxContainer.new()
+	_preview_box.add_theme_constant_override("separation", 8)
+	vbox.add_child(_preview_box)
+	_preview_icon = ColorRect.new()
+	_preview_icon.custom_minimum_size = Vector2(28, 28)
+	_preview_icon.color = Color(0.8, 0.75, 0.65, 1)
+	_preview_box.add_child(_preview_icon)
+	_preview_label = Label.new()
+	_preview_label.text = ""
+	_preview_box.add_child(_preview_label)
 
 	# Botones de creación
 	var hbox := HBoxContainer.new()
@@ -166,9 +181,14 @@ func _refrescar_detalle() -> void:
 	var inv = get_node_or_null("/root/Inventario")
 	if _receta_seleccionada == null:
 		_detalle_label.text = _t("SETTINGS.SELECCIONA_RECETA")
+		_preview_label.text = ""
+		_preview_icon.color = Color(0.8, 0.75, 0.65, 1)
 		_actualizar_botones(0)
 		return
 	var receta: CraftingRecipe = _receta_seleccionada
+	# RF9 preview: nombre del resultado + swatch derivado de su id
+	_preview_label.text = "→ %s" % receta.resultado_id
+	_preview_icon.color = _color_de_item(receta.resultado_id)
 	var lineas: Array = []
 	var cs = get_node_or_null("/root/Crafting")
 	var max_n: int = cs.max_craftable(receta.id) if cs else 0
@@ -181,8 +201,24 @@ func _refrescar_detalle() -> void:
 			lineas.append("[color=#c0392b]%s: %d/%d — %s[/color]" % [str(item_id), tengo, necesario, origen])
 		else:
 			lineas.append("[color=#2e7d32]%s: %d/%d[/color]" % [str(item_id), tengo, necesario])
+	# RF5: aviso de temporada si bloqueada
+	if cs != null and cs.receta_bloqueada(receta.id):
+		lineas.append("[color=#8e6e1a]%s[/color]" % _t("SETTINGS.FUERA_TEMPORADA"))
 	_detalle_label.text = "\n".join(lineas)
 	_actualizar_botones(max_n)
+
+
+## Color del swatch de preview (RF9): hash determinista del item_id.
+func _color_de_item(item_id: String) -> Color:
+	if item_id == "":
+		return Color(0.8, 0.75, 0.65, 1)
+	var h: int = 0
+	for i in range(item_id.length()):
+		h = (h * 31 + int(item_id.unicode_at(i))) & 0xFFFFFFFF
+	var r: float = 0.4 + 0.6 * float((h & 0xFF)) / 255.0
+	var g: float = 0.4 + 0.6 * float(((h >> 8) & 0xFF)) / 255.0
+	var b: float = 0.4 + 0.6 * float(((h >> 16) & 0xFF)) / 255.0
+	return Color(r, g, b, 1)
 
 func _origen_de(item_id: String) -> String:
 	var rm = get_node_or_null("/root/ResourceManager")

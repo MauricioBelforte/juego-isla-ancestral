@@ -198,13 +198,108 @@ func _registrar_proveedor_guardado() -> void:
 	var sm = get_node_or_null("/root/SaveManager")
 	if sm != null and sm.has_method("register_provider"):
 		sm.register_provider(self)
+	if _gt_dia_cambio_conectado == false:
+		var gt = get_node_or_null("/root/GameTime")
+		if gt != null and gt.has_signal("dia_cambio"):
+			gt.dia_cambio.connect(_on_dia_cambio_m29)
+			_gt_dia_cambio_conectado = true
+
+var _gt_dia_cambio_conectado: bool = false
+
+func _on_dia_cambio_m29(_info: Dictionary) -> void:
+	_evaluar_respawn_global()
+
+## RF respawn (M15 iter 3): evalúa todos los nodos activos y los que cumplan
+## el ciclo de respawn vuelven a INTACTO.
+func _evaluar_respawn_global() -> void:
+	var gt = get_node_or_null("/root/GameTime")
+	if gt == null:
+		return
+	var dia_actual: int = int(gt.dia_absoluto()) if gt.has_method("dia_absoluto") else 0
+	var estacion: int = int(gt.get_estacion()) if gt.has_method("get_estacion") else 0
+	for nodo in _nodos_activos:
+		if nodo == null or not is_instance_valid(nodo):
+			continue
+		nodo.evaluar_respawn(dia_actual, estacion)
+
+## API pública para golpe sobre un nodo (M13 / interacción futura).
+## Centraliza la validación de herramienta y dispara drops + respawn.
+func recibir_golpe_en_nodo(nodo: ResourceNode, herramienta_id: StringName) -> bool:
+	if nodo == null or not is_instance_valid(nodo):
+		return false
+	var def := obtener_def(nodo.def_id)
+	if def == null:
+		return false
+	if not def.es_accesible_con(herramienta_id, true):
+		return false
+	var antes_estado: int = nodo.estado
+	if not nodo.aplicar_golpe(herramienta_id):
+		return false
+	if antes_estado != ResourceNode.Estado.AGOTADO and nodo.estado == ResourceNode.Estado.AGOTADO:
+		# Programar respawn
+		var gt = get_node_or_null("/root/GameTime")
+		if gt != null and gt.has_method("dia_absoluto"):
+			nodo.programar_respawn(int(gt.dia_absoluto()) + maxi(1, def.dias_para_respawn))
+		var drops: Dictionary = generar_drops(nodo.def_id, herramienta_id, false)
+		entregar_drops(drops, nodo.def_id, herramienta_id, false)
+		recurso_agotado.emit(nodo.def_id, nodo.global_position)
+		if nodo.esta_listo_para_respawn():
+			_evaluar_respawn_global()
+	return true
+
+var _nodos_activos: Array = []
+
+## Registra un nodo en el manager (lo llama ResourceSpawner al instanciar).
+func registrar_nodo(nodo: ResourceNode) -> void:
+	if nodo != null and nodo not in _nodos_activos:
+		_nodos_activos.append(nodo)
+
+## Desregistra un nodo (al respawnear se reemplaza; al cerrar escena).
+func desregistrar_nodo(nodo: ResourceNode) -> void:
+	_nodos_activos.erase(nodo)
 
 func get_section_name() -> String:
 	return SECCION_SAVE
 
 func get_save_data() -> Dictionary:
-	# Placeholder: nodos agotados y tiempos de respawn
-	return {"version": 1}
+	# M15 iter 3: persistencia real — estado de cada nodo activo
+	var nodos_data: Array = []
+	for nodo in _nodos_activos:
+		if nodo == null or not is_instance_valid(nodo):
+			continue
+		nodos_data.append({
+			"def_id": String(nodo.def_id),
+			"pos": [nodo.global_position.x, nodo.global_position.y, nodo.global_position.z],
+			"estado": nodo.estado,
+			"golpes_restantes": nodo.golpes_restantes,
+			"respawn_dia": nodo.respawn_dia_absoluto,
+		})
+	return {"version": 2, "nodos": nodos_data}
 
-func restore_save_data(_data: Dictionary) -> void:
-	pass
+func restore_save_data(data: Dictionary) -> void:
+	# La restauración completa (re-instanciar nodos en sus posiciones) ocurre
+	# tras el spawn inicial. Aquí marcamos los flags para que el spawner
+	# aplique el estado guardado cuando cree los nodos.
+	if int(data.get("version", 0)) < 2:
+		return
+	_estado_guardado_pendiente = data.get("nodos", [])
+
+var _estado_guardado_pendiente: Array = []
+
+## Consumido por ResourceSpawner al planificar: aplica el estado guardado
+## a los nodos recién creados. Devuelve un dict def_id+pos -> estado.
+func consumir_estado_guardado_para(def_id: String, pos: Vector3) -> Dictionary:
+	if _estado_guardado_pendiente.is_empty():
+		return {}
+	for i in range(_estado_guardado_pendiente.size() - 1, -1, -1):
+		var nd: Dictionary = _estado_guardado_pendiente[i]
+		if String(nd.get("def_id", "")) != def_id:
+			continue
+		var p: Array = nd.get("pos", [])
+		if p.size() != 3:
+			continue
+		var d: float = Vector3(p[0], p[1], p[2]).distance_to(pos)
+		if d < 0.5:
+			_estado_guardado_pendiente.remove_at(i)
+			return nd
+	return {}

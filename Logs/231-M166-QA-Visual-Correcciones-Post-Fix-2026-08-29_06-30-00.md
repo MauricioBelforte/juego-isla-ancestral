@@ -1,6 +1,7 @@
-# 231 — M166 QA Visual: Correcciones post-fix + 2 defectos nuevos encontrados (z_min pitfall #3)
+﻿# 231 — M166 QA Visual: Correcciones post-fix + 2 defectos nuevos encontrados (z_min pitfall #3)
 
 **Fecha:** 2026-08-29 06:30 (GMT-3)
+**Hora:** 06:30
 **Módulo:** M166 (QA Visual de assets 3D)
 **Trigger:** Usuario pidió "arregla todo para aprobarlo primero" → corrigo los defectos del log 230 y, al re-renderizar, encuentro que varios de los veredictos de log 230 eran erróneos.
 

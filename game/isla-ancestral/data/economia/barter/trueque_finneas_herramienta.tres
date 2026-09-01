@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BarterOffer" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/economia/barter_offer.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+oferta_id = &"trueque_finneas_herramienta"
+npc_id = "finneas"
+pedido = {
+"madera_roble": 8,
+"fibra_algodon": 4
+}
+entregado = {
+"mineral_cobre": 2
+}
+amistad_minima = 2
+estaciones = []
+es_salvavidas = false
+limite_diario = 1

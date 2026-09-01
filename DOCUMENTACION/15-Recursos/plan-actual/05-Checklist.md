@@ -3,15 +3,15 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 2 (nodo 3D + spawner, con visión) 2026-08-30
-- Agente: Deepseek V4 Flash (Kilo)
+- Estado: 🟡 Liberado — iteración 3 cerrada 2026-08-31
+- Agente: GLM (Kilo) — iter 1-2 Deepseek V4 Flash (Kilo)
 - Fase: 4 (Prototipo mínimo divertido)
 - Dificultad: 3
-- Vision: V1/V2 (nodo 3D y spawner en mundo)
-- Entrada: M14 core ✅, M13 ✅, iteración 1 (catálogo+drops) Log 256
-- Salida: ResourceNode (estados INTACTO/DANIADO/AGOTADO) + ResourceSpawner (instanciación/planificación) + población inicial de la isla + test 0 fallos
-- Archivos: `scripts/resources/resource_node.gd`, `resource_spawner.gd`, `resource_manager.gd`, `scripts/main_island.gd`
-- Fecha cierre: 2026-08-30 03:55
+- Vision: V1 (con visión in-engine para respawn visual)
+- Entrada: M14 ✅, M11 ✅, M13 ✅, M29 ✅, iter 1-2 (Deepseek, Logs 256/260/264)
+- Salida: Persistencia ISaveProvider (M59), respawn con M29, helper `recibir_golpe_en_nodo`, test 0 fallos
+- Archivos: `scripts/resources/resource_node.gd`, `resource_definition.gd`, `resource_manager.gd`, `resource_spawner.gd`, `test_recursos_persistencia.gd` (nuevo)
+- Fecha: 2026-08-31 07:55
 
 # 05-Checklist.md — Módulo 15: Recursos
 
@@ -241,3 +241,42 @@
 - [ ] 03-Diseno creado y firmado [S]
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
+
+## N. Iteración 3 — Persistencia + Respawn + Helper golpe (GLM Kilo 2026-08-31) — Log 305
+
+> Cierra los pendientes reportados en iter 2 (persistencia de nodos, respawn M29, señal golpe M13). Test 0 fallos. Liberado a 🟡 con 1 [?] honesto (cableado M13→M15).
+
+### N.1 Implementado y verificado (test_recursos_persistencia.gd 0 fallos)
+
+- [x] `ResourceNode`: campos `respawn_dia_absoluto: int` y `respawn_estacion: int` (M15 iter 3) [S]
+- [x] `ResourceNode.esta_listo_para_respawn() -> bool` [S]
+- [x] `ResourceNode.programar_respawn(dia_absoluto: int)` [S]
+- [x] `ResourceNode.evaluar_respawn(dia_actual, estacion_actual) -> bool` con filtro de temporada [M]
+- [x] `ResourceNode.configurar()` setea `respawn_estacion` desde `def.get_respawn_estacion_int()` [S]
+- [x] `ResourceDefinition.dias_para_respawn: int = 2` (export) [S]
+- [x] `ResourceDefinition.get_respawn_estacion_int() -> int` (mapeo temporada_respawn→0..3 o -1) [S]
+- [x] `ResourceManager` ISaveProvider real: `get_save_data()` v2 con array de nodos (def_id, pos, estado, golpes_restantes, respawn_dia) [M]
+- [x] `ResourceManager.restore_save_data()` valida version=2 y almacena `_estado_guardado_pendiente` [S]
+- [x] `ResourceManager.consumir_estado_guardado_para(def_id, pos) -> Dictionary` (match por pos <0.5m, consume una vez) [M]
+- [x] `ResourceManager.registrar_nodo(nodo)` / `desregistrar_nodo(nodo)` [S]
+- [x] `ResourceManager.recibir_golpe_en_nodo(nodo, herramienta) -> bool`: valida herramienta, aplica golpe, al agotar programa respawn + entrega drops (M14) + emite `recurso_agotado` [M]
+- [x] `ResourceManager._on_dia_cambio_m29()` conecta a GameTime.dia_cambio y llama `_evaluar_respawn_global()` [S]
+- [x] `ResourceSpawner.instanciar_nodo()` aplica estado guardado vía `consumir_estado_guardado_para` y registra el nodo en el manager [M]
+- [x] Test: `_test_persistencia_round_trip` — save/restore + match por pos [M]
+- [x] Test: `_test_respawn_con_dia_y_estacion` — día exacto, todas-estaciones, filtro estacional [M]
+- [x] Test: `_test_helper_golpe_y_drops` — validación herramienta, agotado, drops, respawn programado [M]
+- [x] Test: `_test_registro_y_lista_nodos` — registro/desregistro refleja en save [S]
+- [x] Regresión M16 Crafting: 0 fallos [S]
+- [x] Regresión M31 Ciclo Día/Noche: 12/0 OK [S]
+- [x] Regresión M15 iter 2 (test_recurso_nodo): 0 fallos [S]
+- [x] Log 305 generado y firmado [S]
+
+### N.2 Pendientes con dueño (no resueltos en iter 3)
+
+- [?] Cableado M13→M15: M13 `tool_controller.gd` usa `VoxelTool.raycast` (terreno voxel) y NO detecta `ResourceNode` (Node3D con Area3D). El helper `ResourceManager.recibir_golpe_en_nodo(nodo, herramienta)` existe y está testeado; el cableado real (un `RayCast3D` adicional en M13 o un `input_event` en el Area3D del ResourceNode) requiere un cambio en M13 (Hy3) o en el ResourceNode. Documentado en Notas del Agente. [M]
+- [?] Meshes del arte (placeholders funcionales ahora) [C]
+- [?] `recolectar` en lote/área (M13 área 3×3) para ResourceNode [C]
+- [?] Persistencia de `ResourceSpawner` (regiones planificadas, presupuesto) [M]
+- [?] Test de cambio de día en runtime que dispare respawn vía GameTime [S]
+
+**Iteración 3 — 25 ítems [x], 5 ítems [?] honestos. Módulo liberado a 🟡. Total: 25 [x] + 135 [ ] + 5 [?] (de 165).**

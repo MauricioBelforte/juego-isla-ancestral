@@ -1,9 +1,10 @@
-**Modelo:** Claude Opus 4.6 (Thinking)
+﻿**Modelo:** Claude Opus 4.6 (Thinking)
 **Plataforma:** Antigravity
 
 # Log 02 — Adaptación del AGENTS.md a Unity/C#
 
-**Fecha:** 2026-08-15 22:46:00
+**Fecha:** 2026-08-15
+**Hora:** 22:46
 **Tipo:** Adaptación de protocolo
 
 ## Descripción

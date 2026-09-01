@@ -382,12 +382,32 @@ def zmin_real(o):
 
 z_min = min(zmin_real(o) for o in piezas)
 delta = Z_APOYO - z_min
-for o in piezas:
-    if o.parent is None:
-        o.location.z += delta
-bpy.context.view_layer.update()
-z_fin = min(zmin_real(o) for o in piezas)
-print('RE-ASENTADO: z_min %.3f -> %.3f (delta %+.3f)' % (z_min, z_fin, delta))
+
+# E-62: NO todo asset se apoya en la arena. Las piezas de construccion que se
+# montan SOBRE otras piezas (techos sobre paredes, aleros, cornisas) tienen su
+# z_min legitimo muy por encima de Z_APOYO (ej. techo_dos_aguas z_min 2.645).
+# Re-asentarlas incondicionalmente las HUNDIRIA esa distancia bajo el suelo:
+# delta = 0.045 - 2.645 = -2.60 m. El techo quedaria 2.6 m enterrado.
+# Regla: solo se re-asienta si el asset YA esta cerca de Z_APOYO, es decir si el
+# desajuste es del orden de un asset mal parado (centimetros), no de una pieza
+# que por diseno vive a otra altura (metros).
+# Este es el mismo contrato que E-60 impone en los scripts generadores (assert
+# de rango en vez de re-asentado); aca es la contrapartida del lado derivador.
+UMBRAL_REASENTADO = 0.25   # 25 cm: generoso para un mal apoyo, muy lejos de 2.6 m
+
+if abs(delta) > UMBRAL_REASENTADO:
+    # No tocar: es un asset que se apoya sobre otro (E-60). Solo informar.
+    print('RE-ASENTADO OMITIDO (E-62): z_min %.3f esta a %.3f m de Z_APOYO, '
+          'fuera del umbral de %.2f m. Se asume que este asset NO se apoya en '
+          'la arena (se monta sobre otra pieza). z_min se preserva.'
+          % (z_min, abs(delta), UMBRAL_REASENTADO))
+else:
+    for o in piezas:
+        if o.parent is None:
+            o.location.z += delta
+    bpy.context.view_layer.update()
+    z_fin = min(zmin_real(o) for o in piezas)
+    print('RE-ASENTADO: z_min %.3f -> %.3f (delta %+.3f)' % (z_min, z_fin, delta))
 
 # ============================================================
 # FASE 4 - Guardar

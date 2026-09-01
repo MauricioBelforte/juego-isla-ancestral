@@ -91,9 +91,12 @@ func _get_amistad(npc_id: String, default: Variant) -> Variant:
 		return default
 	return int(fs.get_nivel(npc_id))
 
-## M32 (Clima) aun no implementado: placeholder honesto.
+## M32 (Clima): delega en WeatherService autoload (núcleo determinista, glm-5.3-flash).
 func _get_clima() -> String:
-	return ""
+	var w := get_node_or_null("/root/Weather")
+	if w == null or not w.has_method("get_nombre_clima"):
+		return ""
+	return str(w.get_nombre_clima())
 
 ## ── Persistencia (ISaveProvider M59) ─────────────────────
 

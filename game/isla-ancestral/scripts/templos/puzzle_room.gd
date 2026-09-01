@@ -21,6 +21,12 @@ var reglas: Array = []
 ## Resultado del ultimo chequeo (para feedback/test)
 var completada: bool = false
 
+## M24 (QA cruzado Hy3/WorkBuddy, iter 1): callback de notificacion. Se invoca tras
+## cualquier cambio de estado con la lista de receptores activos. Permite conectar
+## el framework emisor->receptor sin acoplar PuzzleRoom a nodos (es RefCounted).
+## Uso: sala.al_cambiar = func(activos): puerta_evaluar(activos)
+var al_cambiar: Callable = Callable()
+
 func _init(ids_emisores: Array = []) -> void:
 	for id in ids_emisores:
 		emisores[id] = false
@@ -28,10 +34,20 @@ func _init(ids_emisores: Array = []) -> void:
 func set_emisor(id: int, valor: bool) -> void:
 	if emisores.has(id):
 		emisores[id] = valor
+		_notificar()
 
 func toggle_emisor(id: int) -> void:
 	if emisores.has(id):
 		emisores[id] = not emisores[id]
+		_notificar()
+
+## Recalcula el estado y dispara el callback al_cambiar (si asignado).
+## Devuelve los receptores activos (mismo que recalcular()).
+func _notificar() -> Array:
+	var activos := recalcular()
+	if al_cambiar.is_valid():
+		al_cambiar.call(activos)
+	return activos
 
 func emisor_on_count() -> int:
 	var n := 0

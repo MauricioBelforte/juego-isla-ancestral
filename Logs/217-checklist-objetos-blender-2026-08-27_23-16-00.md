@@ -1,6 +1,7 @@
-# Log 217: Checklist de objetos Blender por módulo + directiva de capturas
+﻿# Log 217: Checklist de objetos Blender por módulo + directiva de capturas
 
 **Fecha:** 2026-08-27
+**Hora:** 23:16
 **Modelo:** GLM
 **Plataforma:** Cline
 

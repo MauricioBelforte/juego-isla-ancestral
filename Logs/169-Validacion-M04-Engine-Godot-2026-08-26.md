@@ -1,4 +1,4 @@
-# Log 169: Validación M04 Engine Godot
+﻿# Log 169: Validación M04 Engine Godot
 
 **Modelo:** Claude Haiku 4.5
 **Plataforma:** GitHub Copilot

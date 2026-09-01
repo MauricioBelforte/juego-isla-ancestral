@@ -1,4 +1,5 @@
-**Modelo:** Deepseek V4 Flash
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 **Plataforma:** OpenCode
 
 # 01-Requerimientos.md — Módulo 35: Minería

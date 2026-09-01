@@ -1,8 +1,9 @@
-# Log 24 — Creación del Componente 110: Debug Menu
+﻿# Log 24 — Creación del Componente 110: Debug Menu
 
 **Modelo:** Devin
 **Plataforma:** Antigravity
-**Fecha:** 2026-08-16 19:50:00
+**Fecha:** 2026-08-16
+**Hora:** 19:50
 
 ## Descripción breve
 Se documentó el módulo M110 Debug Menu, especificando el menú de debug in-game con 5 paneles organizados por categoría, funciones de teletransporte/tiempo/clima/objetos/misiones, visualizaciones debug (colliders, FPS, chunks, navegación, hitboxes, estados IA), consola in-game con filtros y exportador de diagnóstico integrado con Bug Tracking.

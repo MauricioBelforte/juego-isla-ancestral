@@ -70,17 +70,30 @@ func instanciar_nodo(def_id: StringName, x: float, z: float, _terreno: Node = nu
 	# Posicionar con TerrainLocator (anti-flotamiento) si existe
 	var locator = _buscar_terreno_locator()
 	var y: float = 30.0
+	var pos_final: Vector3 = Vector3(x, 30.0, z)
 	if locator != null:
 		var ok: bool = locator.posicionar_sobre_terreno(node, x, z)
 		if ok:
 			y = node.global_position.y
+			pos_final = node.global_position
 		else:
 			node.global_position = Vector3(x, 30.0, z)
 	else:
 		node.global_position = Vector3(x, 30.0, z)
+	# M15 iter 3: aplicar estado guardado si coincide (def_id + pos cercana)
+	if _manager != null and _manager.has_method("consumir_estado_guardado_para"):
+		var estado_guardado: Dictionary = _manager.consumir_estado_guardado_para(String(def_id), pos_final)
+		if not estado_guardado.is_empty():
+			node.estado = int(estado_guardado.get("estado", node.estado))
+			node.golpes_restantes = int(estado_guardado.get("golpes_restantes", node.golpes_restantes))
+			node.respawn_dia_absoluto = int(estado_guardado.get("respawn_dia", 0))
+			node._actualizar_mesh()
+	# Registrar en el manager (M15 iter 3)
+	if _manager != null and _manager.has_method("registrar_nodo"):
+		_manager.registrar_nodo(node)
 	_nodos[_next_id] = node
 	_next_id += 1
-	print("[M15] Nodo %s en (%.0f, %.0f, %.0f) y=%.0f" % [str(def_id), x, y, z, y])
+	print("[M15] Nodo %s en (%.0f, %.0f, %.0f) y=%.0f estado=%d" % [str(def_id), x, y, z, y, node.estado])
 	return _next_id - 1
 
 func _on_nodo_agotado(def_id: StringName, pos: Vector3) -> void:

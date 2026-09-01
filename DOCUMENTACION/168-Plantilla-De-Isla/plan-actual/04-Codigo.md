@@ -1,7 +1,7 @@
-**Modelo:** **[COMPLETAR]**
-**Plataforma:** **[COMPLETAR]**
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
 
-# 04-Codigo.md — Módulo <ID>: <Nombre de la Isla> [MAQUETA]
+# 04-Codigo.md — Módulo 168: Plantilla de Isla [MAQUETA]
 
 > ⚠️ **TEMPLATE.** Copia a `<ID>-Isla-<Nombre>` y completa.
 

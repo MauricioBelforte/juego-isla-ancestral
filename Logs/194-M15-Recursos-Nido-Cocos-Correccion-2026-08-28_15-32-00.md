@@ -1,9 +1,10 @@
-**Modelo:** MiniMax-M3
+﻿**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 194 — M15-Recursos: Nido de cocos, corrección de apoyo + E-11
 
 **Fecha:** 2026-08-28 15:32:00
+**Hora:** 15:32
 
 ## Descripción breve
 El usuario reportó que el nido de cocos estaba flotando en el aire. Diagnostiqué dos errores combinados y los corregí: el lecho de hojas tenía un tilt Y de ±8° que elevaba su tope real de 0.075 a 0.134, y los 3 "ojos" de cada coco estaban posicionados en coords de mundo, no parentados al coco, así que quedaban enterrados dentro de la malla. Reescribí el script con autocorrección de apoyo en caliente y ojos como hijos del coco.

@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 # 03-Diseno.md — Módulo 35: Minería
 

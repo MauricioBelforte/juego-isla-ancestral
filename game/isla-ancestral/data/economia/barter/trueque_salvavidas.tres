@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BarterOffer" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/economia/barter_offer.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+oferta_id = &"trueque_salvavidas"
+npc_id = ""
+pedido = {
+"piedra_caliza": 2
+}
+entregado = {
+"madera_roble": 2
+}
+amistad_minima = 0
+estaciones = []
+es_salvavidas = true
+limite_diario = 1

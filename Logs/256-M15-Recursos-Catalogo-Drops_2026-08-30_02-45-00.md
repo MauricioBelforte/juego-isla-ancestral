@@ -1,6 +1,7 @@
-# Log 256: M15 Recursos — ResourceManager + ResourceDefinition + catálogo 6 tipos + drops
+﻿# Log 256: M15 Recursos — ResourceManager + ResourceDefinition + catálogo 6 tipos + drops
 
 **Fecha:** 2026-08-30
+**Hora:** 02:45
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** Kilo
 

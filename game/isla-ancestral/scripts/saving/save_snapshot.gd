@@ -37,7 +37,10 @@ func register_provider(provider) -> bool:
 func collect(profile_id: String = "") -> Dictionary:
 	var payload := SaveSchema.default_payload(profile_id)
 	for section in _providers:
-		var provider: ISaveProvider = _providers[section]
+		# Sin tipo estricto: los proveedores reales son autoloads Node
+		# (duck-typing del contrato); un ISaveProvider tipado rompe con
+		# Node-providers (bug latente corregido por glm-5.3-flash 2026-08-31).
+		var provider = _providers[section]
 		var data: Dictionary = provider.get_save_data()
 		payload[section] = data
 	return payload
@@ -47,7 +50,7 @@ func collect(profile_id: String = "") -> Dictionary:
 ## (se restaura en un momento posterior cuando el sistema exista).
 func restore(payload: Dictionary) -> void:
 	for section in _providers:
-		var provider: ISaveProvider = _providers[section]
+		var provider = _providers[section]
 		if payload.has(section) and typeof(payload[section]) == TYPE_DICTIONARY:
 			provider.restore_save_data(payload[section])
 

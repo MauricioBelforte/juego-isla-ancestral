@@ -52,7 +52,9 @@ import json         # noqa: E402
 #   EXPORT_DRY=1                      solo imprime el plan
 #   EXPORT_ONLY=alta|media|baja       una sola variante
 #   EXPORT_MODULOS=70-Interacciones;45-Arte3D    recorte por modulo
+#   EXPORT_FORZAR=1                    ignora el salto por mtime (E-49)
 DRY_RUN = os.environ.get('EXPORT_DRY', '0') == '1'
+FORZAR = os.environ.get('EXPORT_FORZAR', '0') == '1'
 ONLY = os.environ.get('EXPORT_ONLY') or None
 _fm = os.environ.get('EXPORT_MODULOS')
 FILTRO_MODULOS = _fm.split(';') if _fm else None
@@ -63,8 +65,14 @@ RAIZ = os.path.abspath(os.path.join(
 SRC_ROOT = os.path.join(RAIZ, 'tools', 'mcp', 'blender-mcp')
 DEST_ROOT = os.path.join(RAIZ, 'game', 'isla-ancestral', 'assets', '3d')
 
-MODULOS = ('13-Herramientas', '15-Recursos', '16-Crafting', '25-Ruinas-Templos',
+MODULOS = ('13-Herramientas', '15-Recursos', '16-Crafting', '18-Casas',
+           '25-Ruinas-Templos',
            '40-Infraestructura', '45-Arte3D', '50-Vegetacion', '70-Interacciones')
+# E-63: esta tupla es una whitelist. Un modulo nuevo que no este aqui se exporta
+# EN SILENCIO 0 archivos (el resumen dice "exportados: 0" sin error). Si creas un
+# modulo nuevo en tools/mcp/blender-mcp/, AGREGALO ACA o sus GLB nunca llegaran
+# al juego. Caso real: 18-Casas (Tier E) quedo fuera y el export dio
+# {"exportados": 0, "saltados": 0, "errores": 0} sin ninguna senal de falla.
 
 # Por variante, que sufijo gana (primero = mayor prioridad). Ver E-43.
 PRIORIDAD = {
@@ -129,7 +137,14 @@ def main():
                     continue
                 ruta_src, dest, suf = plan[modulo][base][variante]
 
-                if os.path.exists(dest) and \
+                # E-49: el salto por mtime asume que "GLB mas nuevo que el
+                # .blend" implica "GLB generado DESDE ese .blend". No siempre
+                # es cierto: copias restauradas, reloj desfasado o .blend
+                # traidos de git dejan el GLB viejo con mtime reciente.
+                # Caso real: `cristal_ancestral` media exportado en Y=0.000
+                # mientras su .blend media 0.045, y el salto lo ocultaba.
+                # EXPORT_FORZAR=1 re-exporta todo y resincroniza.
+                if os.path.exists(dest) and not FORZAR and \
                         os.path.getmtime(dest) >= os.path.getmtime(ruta_src):
                     saltados.append([modulo, base, variante, 'up-to-date'])
                     continue

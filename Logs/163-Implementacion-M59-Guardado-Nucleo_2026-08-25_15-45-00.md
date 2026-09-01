@@ -1,6 +1,7 @@
-# Log 163: Implementación núcleo M59 Guardado (Godot 4.7)
+﻿# Log 163: Implementación núcleo M59 Guardado (Godot 4.7)
 
 **Fecha:** 2026-08-25
+**Hora:** 15:45
 **Modelo:** ox-alpha
 **Plataforma:** Cline
 
@@ -62,5 +63,4 @@ El LSP del editor reportaba errores de versiones intermedias (caché). Verificac
 - Descubrimiento documentado en `07-GUIA-GODOT.md` §9.12 y corregido también el ejemplo erróneo en `06-GUIA-DE-CONEXION-VISION.md`.
 
 Nota para el usuario: si el editor sigue mostrando los errores viejos, recargar el proyecto (`Proyecto > Volver a cargar proyecto actual`) para refrescar el LSP.
-
 

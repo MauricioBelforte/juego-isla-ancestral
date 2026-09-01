@@ -1,9 +1,10 @@
-**Modelo:** MiniMax-M3
+﻿**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 193 — M15-Recursos: Tronco caído + Nido de cocos (tier 1)
 
 **Fecha:** 2026-08-28 15:24:30
+**Hora:** 15:24
 
 ## Descripción breve
 Se crearon dos assets del módulo 15 (Recursos): **Tronco caído** y **Nido de cocos**. Ambos con script, `.blend` y captura. Se documenta además una limitación de la sesión: la revisión visual de capturas quedó bloqueada porque el modelo en curso no acepta imágenes, por lo que el QA se hizo por verificación numérica de bounding boxes.

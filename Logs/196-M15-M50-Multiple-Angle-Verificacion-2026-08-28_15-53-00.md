@@ -1,9 +1,10 @@
-**Modelo:** MiniMax-M3
+﻿**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 196 — Verificación multi-ángulo obligatoria (E-13, directiva del usuario)
 
 **Fecha:** 2026-08-28 15:53:00
+**Hora:** 15:53
 
 ## Descripción breve
 El usuario dejó explícita la regla: **"si es necesario girá la cámara y sacá captura, pero no deben flotar los objetos en la base"**. Lo documenté en `09-GUIA-BLENDER.md` como E-13, agregué una nueva sección §6.2bis con el procedimiento, y creé la herramienta `capturar_angulos.py` que orbita la cámara alrededor del asset y genera N capturas equi-espaciadas (default 4, recomendado 6-8). Sin todas las capturas orbitales, el ítem del checklist **no** se aprueba.

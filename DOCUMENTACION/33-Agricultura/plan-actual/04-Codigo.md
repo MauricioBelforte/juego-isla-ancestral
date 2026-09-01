@@ -258,3 +258,33 @@ if WeatherService.is_raining_today():
 - Al implementar: priorizar `FarmService.advance_day()` y `FarmStateStore` antes que visuales; el visual se puede aproximar con placeholders si M08 aún no valida instancias.
 - Verificar el presupuesto de 400 cultivos con MultiMesh (M61) antes de la versión final.
 - Agregar el 06-Plan-Testings/07-Resultados en `plan-actual/` (pruebas de determinismo entre guardados y de estaciones).
+
+---
+
+## Notas del Agente — Iteración puente M32→M33 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31 23:15:00
+**Estado:** Parcial (puente lluvia implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- Puente M32→M33 (checklist "Implementar apply_rain (puente M32)"): FarmService suscribe `EventBus.weather.clima_cambio` y llama `apply_rain()` con LLUVIA/TORMENTA/TROPICAL (consumidores escuchan señales — diseño M32 §6; sin acoplamiento al WeatherService).
+- `apply_rain()` ahora es idempotente por tile: no excede el máximo (agua 2), no toca cultivos listos y NO emite `tile_watered` redundante cuando el nivel ya está al máximo (checklist G "no excede" + menor overhead).
+- Hook `_tile_expuesto(voxel_pos)` centralizado: hoy devuelve true (sin sistema de techos); M17/M18 podrán marcar cobertura tocando UNA función.
+- Test nuevo `scripts/farm/test_farm_clima.gd` (complementa test_farm.gd, no lo reemplaza): riego 0→2 por lluvia, cultivos secos con 5 climas sin riego, tormenta/tropical riegan, sin señal redundante a máximo → **0 fallos**.
+- Regresiones: test_farm.gd (núcleo Deepseek) **0 fallos**, test_clima.gd (M32) **0 fallos**.
+- Checklist: 5 ítems marcados (RF6, P6, apply_rain-puente, lluvia-expuestos, no-excede); progreso real 37/153.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- "Expuestos sin techo" real: no existe sistema de techos (M17/M18); el hook devuelve true siempre.
+- Nieve sobre tierra arada (G): requiere cubierta visual M08/M32 — con dueño.
+- Till voxel real, MultiMesh pool, HUD, pisoteo: con dueño (M08/M61/M53/M64).
+
+### Intentos fallidos / decisiones
+- El test inicial esperaba una emisión "a máximo": el diseño correcto es CERO señales redundantes (idempotencia), corregido junto con apply_rain.
+- Pitfall repetido: lambdas GDScript capturan por valor — el contador del test usa Array mutable (ya documentado en Log 306; aplica a todos los tests).
+
+### Recomendaciones para el próximo agente
+- M17/M18: al implementar techos, que marquen cobertura consultando `Farm._tile_expuesto` (o que Farm exponga `set_cubierta(pos, bool)`).
+- MultiMesh (M61): partir de `_crear_visual`/`_actualizar_visual` existentes; presupuesto 1 ms.

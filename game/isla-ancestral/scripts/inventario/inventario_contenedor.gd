@@ -125,4 +125,32 @@ func deserializar(lista: Array) -> void:
 	for d in lista:
 		var idx := int(d.get("slot", -1))
 		if idx >= 0 and idx < slots.size():
-			slots[idx] = InventorySlot.deserializar(d)
+			var slot := InventorySlot.deserializar(d)
+			# [64/164] Validar que el item_id exista en el catálogo
+			if slot.item_id != "":
+				var db = Engine.get_main_loop().root.get_node_or_null("/root/ItemDatabase")
+				if db != null and db.get_item(slot.item_id) == null:
+					push_warning("[M14-DOM-14] Item desconocido '%s' en slot %d, ignorado" % [slot.item_id, idx])
+					continue
+				if slot.cantidad <= 0:
+					push_warning("[M14] Cantidad inválida (%d) para '%s' en slot %d, ignorado" % [slot.cantidad, slot.item_id, idx])
+					continue
+			slots[idx] = slot
+
+## Valida que todas las cantidades sean legales (≥0, ≤stack_max).
+## Devuelve la cantidad de slots corregidos.
+func validate_quantities() -> int:
+	var fixes := 0
+	for s in slots:
+		if s.esta_libre():
+			continue
+		if s.cantidad < 0:
+			s.cantidad = 0
+			s.vaciar()
+			fixes += 1
+			continue
+		var stack_max := _stack_max_de(s.item_id)
+		if s.cantidad > stack_max:
+			s.cantidad = stack_max
+			fixes += 1
+	return fixes

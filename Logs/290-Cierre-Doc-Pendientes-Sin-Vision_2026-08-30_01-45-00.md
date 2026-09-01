@@ -1,6 +1,7 @@
-# Log 290 — Cierre de pendientes documentales (sin visión)
+﻿# Log 290 — Cierre de pendientes documentales (sin visión)
 
-**Fecha:** 2026-08-30 01:45 · **Modelo:** sin multimodalidad (vision bloqueada en este arranque)
+**Fecha:** 2026-08-30
+**Hora:** 01:45
 **Alcance:** cerrar los pendientes del log 252 que NO requieren leer capturas PNG/JPG.
 
 ## Contexto

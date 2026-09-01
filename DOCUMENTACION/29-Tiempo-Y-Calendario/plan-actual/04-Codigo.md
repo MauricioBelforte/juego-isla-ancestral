@@ -11,13 +11,19 @@ Módulo **totalmente delegable para implementación** por otro agente: es un ser
 
 ## 2. Archivos involucrados (implementación)
 
-```
-scripts/time/game_clock.gd            → servicio GameClock (API del diseño 03)
-scripts/time/date_model.gd            → struct Fecha (día/mes/año) + conversiones
-scripts/time/event_catalog.gd         → calendario de eventos (Resource)
-data/time/time_config.tres            → constantes de duración (knobs)
-data/time/festivals.tres              → festivales + cumpleaños (contenido M74)
-```
+### Scripts
+| Archivo | Propósito | Estado |
+|---|---|---|
+| `scripts/time/game_clock.gd` | Servicio GameClock — autoridad del tick de tiempo. Registro como autoload | ✅ Implementado |
+| `scripts/time/time_calendar.gd` | Fachada unificada (autoload "TimeCalendar"). Expone API pública: `get_hora()`, `get_minuto()`, `get_estacion()`, `es_de_dia()`, `es_noche()`, `formatear_hora()`, `obtener_eventos_hoy()`, `obtener_proximos_eventos()`. Conecta a GameClock para sincronizar cache. Implementa ISaveProvider (M59) | ✅ Implementado |
+| `scripts/time/festival_data.gd` | `FestivalData` (class_name): datos de eventos periódicos. 4 festivales estacionales, 1 anual, 2 visitas semanales, 2 eventos mensuales, cumpleaños jugador. Cargado desde `festivals.tres`. Métodos: `obtener_todos_eventos()`, `obtener_eventos_fecha()`, `obtener_proximos_eventos()` | ✅ Implementado |
+| `scripts/time/time_config.gd` | Configuración de constantes temporales (loadado como `time_config.tres`) | ✅ Implementado |
+
+### Datos
+| Archivo | Propósito |
+|---|---|
+| `data/time/time_config.tres` | Constantes de duración (knobs): min_por_dia, dias_por_mes, meses_por_anio, hora_amanecer, hora_atardecer, etc. |
+| `data/time/festivals.tres` | Festivales + cumpleaños (contenido M74) |
 
 ## 3. Contratos de integración
 

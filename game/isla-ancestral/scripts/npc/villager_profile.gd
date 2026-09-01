@@ -13,6 +13,14 @@ extends Resource
 @export var edad_categoria: String = "adulto"
 @export var profesion: String = ""
 
+## ── Cumpleanos (fuente de verdad para M20 Amistad) ─────
+## Calendario de Aurora: mes 1-12, dia 1-28. edad_base = edad en el ano 1.
+## 0 en mes/dia = "sin cumpleanos definido" (M20 ignora el perfil en ese caso y
+## se apoya en su seed data/amistad/cumpleanos.json hasta que se rellene).
+@export var cumpleanos_mes: int = 0
+@export var cumpleanos_dia: int = 0
+@export var edad_base: int = 0
+
 ## ── Apariencia ─────────────────────────────────────────
 ## Color de la silueta (placeholder visual hasta modelos reales)
 @export var color_cuerpo: Color = Color(0.6, 0.4, 0.3)

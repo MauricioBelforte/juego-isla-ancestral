@@ -1,0 +1,2081 @@
+########## LOTE 1/4: 50-Vegetacion
+====================================================================
+QA VISUAL POR LOTE · 12 assets x 1 variantes = 12 corridas
+Modulos: 50-Vegetacion
+====================================================================
+
+>>> [1/12] 50-Vegetacion / arbusto_floral_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / arbusto_floral_lowpoly_media
+====================================================================
+abierto: arbusto_floral_lowpoly_media.blend
+
+Objetos / draw calls : 5
+Triangulos           : 370
+Materiales           : 5 -> MAT_ArbustoFloral_Hojas, MAT_ArbustoFloral_Tallo, MAT_Flor_Amarillo, MAT_Flor_Blanco, MAT_Flor_Rosa
+
+  OK  ALTA   obj   5/16   tris   370/6000   mats 5/12
+  OK  MEDIA  obj   5/8    tris   370/1500   mats 5/8
+  NO  BAJA   obj   5/6    tris   370/700    mats 5/4
+
+z_min 0.0450  z_max 1.0425  alto 0.9975  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\arbusto_floral_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 5 (prefijo 'SM_')
+  · SM_ArbustoFloral_M_ArbustoFloral_Hojas
+  · SM_ArbustoFloral_M_ArbustoFloral_Tallo
+  · SM_ArbustoFloral_M_Flor_Amarillo
+  · SM_ArbustoFloral_M_Flor_Blanco
+  · SM_ArbustoFloral_M_Flor_Rosa
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_floral_lowpoly_media_03-32-18_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_arbusto_floral_lowpoly_media_03-32-18.jpg con 6 capturas 37377 bytes
+
+====================================================================
+Tiempo: 20.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_arbusto_floral_lowpoly_media_03-32-18.jpg
+====================================================================
+
+>>> [2/12] 50-Vegetacion / arbusto_redondo_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / arbusto_redondo_lowpoly_media
+====================================================================
+abierto: arbusto_redondo_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 156
+Materiales           : 4 -> MAT_Arbusto, MAT_Arbusto_Claro, MAT_Arbusto_Oscuro, MAT_Pasto_Base
+
+  OK  ALTA   obj   4/16   tris   156/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   156/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   156/700    mats 4/4
+
+z_min 0.0450  z_max 1.7243  alto 1.6793  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\arbusto_redondo_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Arbusto_M_Arbusto
+  · SM_Arbusto_M_Arbusto_Claro
+  · SM_Arbusto_M_Arbusto_Oscuro
+  · SM_Arbusto_M_Pasto_Base
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_arbusto_redondo_lowpoly_media_03-32-39_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_arbusto_redondo_lowpoly_media_03-32-39.jpg con 6 capturas 37247 bytes
+
+====================================================================
+Tiempo: 18.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_arbusto_redondo_lowpoly_media_03-32-39.jpg
+====================================================================
+
+>>> [3/12] 50-Vegetacion / canas_bambu_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / canas_bambu_lowpoly_media
+====================================================================
+abierto: canas_bambu_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 1390
+Materiales           : 3 -> MAT_Bambu_A, MAT_Bambu_B, MAT_Hoja_Bambu
+
+  OK  ALTA   obj   3/16   tris  1390/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris  1390/1500   mats 3/8
+  NO  BAJA   obj   3/6    tris  1390/700    mats 3/4
+
+z_min 0.0450  z_max 1.6989  alto 1.6539  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\canas_bambu_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Cana_M_Bambu_A
+  · SM_Cana_M_Bambu_B
+  · SM_Cana_M_Hoja_Bambu
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_canas_bambu_lowpoly_media_03-32-57_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_canas_bambu_lowpoly_media_03-32-57.jpg con 6 capturas 36330 bytes
+
+====================================================================
+Tiempo: 17.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_canas_bambu_lowpoly_media_03-32-57.jpg
+====================================================================
+
+>>> [4/12] 50-Vegetacion / flor_isla_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / flor_isla_lowpoly_media
+====================================================================
+abierto: flor_isla_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 117
+Materiales           : 4 -> MAT_Centro_Flor, MAT_Hoja_Flor, MAT_Petalo_Flor, MAT_Tallo_Flor
+
+  OK  ALTA   obj   4/16   tris   117/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   117/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   117/700    mats 4/4
+
+z_min 0.0450  z_max 1.2395  alto 1.1945  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\flor_isla_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Tallo_M_Centro_Flor
+  · SM_Tallo_M_Hoja_Flor
+  · SM_Tallo_M_Petalo_Flor
+  · SM_Tallo_M_Tallo_Flor
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_flor_isla_lowpoly_media_03-33-15_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_flor_isla_lowpoly_media_03-33-15.jpg con 6 capturas 33811 bytes
+
+====================================================================
+Tiempo: 17.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_flor_isla_lowpoly_media_03-33-15.jpg
+====================================================================
+
+>>> [5/12] 50-Vegetacion / helecho_chico_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / helecho_chico_lowpoly_media
+====================================================================
+abierto: helecho_chico_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 496
+Materiales           : 3 -> MAT_Hoja_HelechoChico, MAT_Tallo_HelechoChico, MAT_Tronco_HelechoChico
+
+  OK  ALTA   obj   3/16   tris   496/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   496/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   496/700    mats 3/4
+
+z_min 0.0450  z_max 0.3450  alto 0.3000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\helecho_chico_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_HelechoChico_M_Hoja_HelechoChico
+  · SM_HelechoChico_M_Tallo_HelechoChico
+  · SM_HelechoChico_M_Tronco_HelechoChico
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_chico_lowpoly_media_03-33-32_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_helecho_chico_lowpoly_media_03-33-32.jpg con 6 capturas 37258 bytes
+
+====================================================================
+Tiempo: 16.8 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_helecho_chico_lowpoly_media_03-33-32.jpg
+====================================================================
+
+>>> [6/12] 50-Vegetacion / helecho_gigante_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / helecho_gigante_lowpoly_media
+====================================================================
+abierto: helecho_gigante_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 772
+Materiales           : 3 -> MAT_Helecho_Hoja, MAT_Helecho_Tallo, MAT_Helecho_Tronco
+
+  OK  ALTA   obj   3/16   tris   772/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   772/1500   mats 3/8
+  NO  BAJA   obj   3/6    tris   772/700    mats 3/4
+
+z_min 0.0450  z_max 0.4450  alto 0.4000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\helecho_gigante_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Helecho_M_Helecho_Hoja
+  · SM_Helecho_M_Helecho_Tallo
+  · SM_Helecho_M_Helecho_Tronco
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_helecho_gigante_lowpoly_media_03-33-49_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_helecho_gigante_lowpoly_media_03-33-49.jpg con 6 capturas 39691 bytes
+
+====================================================================
+Tiempo: 16.2 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_helecho_gigante_lowpoly_media_03-33-49.jpg
+====================================================================
+
+>>> [7/12] 50-Vegetacion / hierba_alta_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / hierba_alta_lowpoly_media
+====================================================================
+abierto: hierba_alta_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 743
+Materiales           : 2 -> MAT_Hierba_Alta, MAT_Hierba_Alta_Osc
+
+  OK  ALTA   obj   2/16   tris   743/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   743/1500   mats 2/8
+  NO  BAJA   obj   2/6    tris   743/700    mats 2/4
+
+z_min 0.0450  z_max 0.4614  alto 0.4164  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\hierba_alta_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_HierbaBrizna_M_Hierba_Alta
+  · SM_HierbaBrizna_M_Hierba_Alta_Osc
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hierba_alta_lowpoly_media_03-34-05_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_hierba_alta_lowpoly_media_03-34-05.jpg con 6 capturas 34344 bytes
+
+====================================================================
+Tiempo: 17.2 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_hierba_alta_lowpoly_media_03-34-05.jpg
+====================================================================
+
+>>> [8/12] 50-Vegetacion / hongo_luminoso_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / hongo_luminoso_lowpoly_media
+====================================================================
+abierto: hongo_luminoso_lowpoly_media.blend
+
+Objetos / draw calls : 5
+Triangulos           : 804
+Materiales           : 5 -> MAT_Hongo_Anillo, MAT_Hongo_Capa, MAT_Hongo_Mota, MAT_Hongo_Pie, MAT_Piedra_Cueva
+
+  OK  ALTA   obj   5/16   tris   804/6000   mats 5/12
+  OK  MEDIA  obj   5/8    tris   804/1500   mats 5/8
+  NO  BAJA   obj   5/6    tris   804/700    mats 5/4
+
+z_min 0.0450  z_max 1.3975  alto 1.3525  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\hongo_luminoso_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 5 (prefijo 'SM_')
+  · SM_Piedra_M_Hongo_Anillo
+  · SM_Piedra_M_Hongo_Capa
+  · SM_Piedra_M_Hongo_Mota
+  · SM_Piedra_M_Hongo_Pie
+  · SM_Piedra_M_Piedra_Cueva
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_hongo_luminoso_lowpoly_media_03-34-23_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_hongo_luminoso_lowpoly_media_03-34-23.jpg con 6 capturas 44339 bytes
+
+====================================================================
+Tiempo: 17.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_hongo_luminoso_lowpoly_media_03-34-23.jpg
+====================================================================
+
+>>> [9/12] 50-Vegetacion / liana_colgante_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / liana_colgante_lowpoly_media
+====================================================================
+abierto: liana_colgante_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 258
+Materiales           : 4 -> MAT_Hoja_Liana, MAT_Madera_Liana, MAT_Piedra_Liana, MAT_Tallo_Liana
+
+  OK  ALTA   obj   4/16   tris   258/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   258/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   258/700    mats 4/4
+
+z_min 0.0450  z_max 1.9250  alto 1.8800  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\liana_colgante_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Liana_M_Hoja_Liana
+  · SM_Liana_M_Madera_Liana
+  · SM_Liana_M_Piedra_Liana
+  · SM_Liana_M_Tallo_Liana
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_liana_colgante_lowpoly_media_03-34-40_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_liana_colgante_lowpoly_media_03-34-40.jpg con 6 capturas 41226 bytes
+
+====================================================================
+Tiempo: 16.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_liana_colgante_lowpoly_media_03-34-40.jpg
+====================================================================
+
+>>> [10/12] 50-Vegetacion / palmera_inclinada_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / palmera_inclinada_lowpoly_media
+====================================================================
+abierto: palmera_inclinada_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 181
+Materiales           : 4 -> MAT_Coco_PalmeraIncl, MAT_Corazon_PalmeraIncl, MAT_Hoja_PalmeraIncl, MAT_Tronco_PalmeraIncl
+
+  OK  ALTA   obj   4/16   tris   181/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   181/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   181/700    mats 4/4
+
+z_min 0.0450  z_max 4.2970  alto 4.2520  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\palmera_inclinada_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Tronco_M_Coco_PalmeraIncl
+  · SM_Tronco_M_Corazon_PalmeraIncl
+  · SM_Tronco_M_Hoja_PalmeraIncl
+  · SM_Tronco_M_Tronco_PalmeraIncl
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_inclinada_lowpoly_media_03-34-56_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_inclinada_lowpoly_media_03-34-56.jpg con 6 capturas 42839 bytes
+
+====================================================================
+Tiempo: 14.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_inclinada_lowpoly_media_03-34-56.jpg
+====================================================================
+
+>>> [11/12] 50-Vegetacion / palmera_joven_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / palmera_joven_lowpoly_media
+====================================================================
+abierto: palmera_joven_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 108
+Materiales           : 3 -> MAT_Corazon_PalmeraJoven, MAT_Hoja_PalmeraJoven, MAT_Tronco_PalmeraJoven
+
+  OK  ALTA   obj   3/16   tris   108/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   108/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   108/700    mats 3/4
+
+z_min 0.0450  z_max 2.5785  alto 2.5335  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\palmera_joven_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Tronco_M_Corazon_PalmeraJoven
+  · SM_Tronco_M_Hoja_PalmeraJoven
+  · SM_Tronco_M_Tronco_PalmeraJoven
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_joven_lowpoly_media_03-35-10_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_joven_lowpoly_media_03-35-10.jpg con 6 capturas 37483 bytes
+
+====================================================================
+Tiempo: 14.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_joven_lowpoly_media_03-35-10.jpg
+====================================================================
+
+>>> [12/12] 50-Vegetacion / palmera_lowpoly_media
+====================================================================
+QA VISUAL · 50-Vegetacion / palmera_lowpoly_media
+====================================================================
+abierto: palmera_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 187
+Materiales           : 4 -> MAT_Coco, MAT_Corazon_Corona, MAT_Hoja_Palmera, MAT_Tronco_Palmera
+
+  OK  ALTA   obj   4/16   tris   187/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   187/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   187/700    mats 4/4
+
+z_min 0.0450  z_max 4.6640  alto 4.6190  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\palmera_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Tronco_M_Coco
+  · SM_Tronco_M_Corazon_Corona
+  · SM_Tronco_M_Hoja_Palmera
+  · SM_Tronco_M_Tronco_Palmera
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\cap_50_palmera_lowpoly_media_03-35-24_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_lowpoly_media_03-35-24.jpg con 6 capturas 37071 bytes
+
+====================================================================
+Tiempo: 12.8 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\50-Vegetacion\capturas\_hoja_cap_50_palmera_lowpoly_media_03-35-24.jpg
+====================================================================
+
+====================================================================
+--- RESULTADO DEL LOTE ---
+Corridas   : 12
+Fallidas   : 0
+Tiempo     : 199.0 s (3.3 min)
+
+Pendiente: revision VISUAL de las hojas de contacto (no automatica).
+====================================================================
+########## LOTE 2/4: 15-Recursos 16-Crafting
+====================================================================
+QA VISUAL POR LOTE · 14 assets x 1 variantes = 14 corridas
+Modulos: 15-Recursos, 16-Crafting
+====================================================================
+
+>>> [1/14] 15-Recursos / cristal_ancestral_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / cristal_ancestral_lowpoly_media
+====================================================================
+abierto: cristal_ancestral_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 174
+Materiales           : 4 -> MAT_Cristal_Ancestral_Central, MAT_Cristal_Ancestral_Claro, MAT_Pedestal_Cristal, MAT_Talla_Cristal
+
+  OK  ALTA   obj   4/16   tris   174/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   174/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   174/700    mats 4/4
+
+z_min 0.0450  z_max 0.6650  alto 0.6200  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\cristal_ancestral_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Cristal_M_Cristal_Ancestral_Central
+  · SM_Cristal_M_Cristal_Ancestral_Claro
+  · SM_Cristal_M_Pedestal_Cristal
+  · SM_Cristal_M_Talla_Cristal
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_cristal_ancestral_lowpoly_media_03-35-38_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_cristal_ancestral_lowpoly_media_03-35-38.jpg con 6 capturas 43472 bytes
+
+====================================================================
+Tiempo: 17.2 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_cristal_ancestral_lowpoly_media_03-35-38.jpg
+====================================================================
+
+>>> [2/14] 15-Recursos / monton_ramas_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / monton_ramas_lowpoly_media
+====================================================================
+abierto: monton_ramas_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 343
+Materiales           : 2 -> MAT_Corteza_Rama, MAT_Madera_Rama
+
+  OK  ALTA   obj   1/16   tris   343/6000   mats 2/12
+  OK  MEDIA  obj   1/8    tris   343/1500   mats 2/8
+  OK  BAJA   obj   1/6    tris   343/700    mats 2/4
+
+z_min 0.0450  z_max 0.1786  alto 0.1336  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\monton_ramas_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Monton_M_Corteza_Rama_Madera_Rama
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_monton_ramas_lowpoly_media_03-35-55_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_monton_ramas_lowpoly_media_03-35-55.jpg con 6 capturas 31374 bytes
+
+====================================================================
+Tiempo: 17.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_monton_ramas_lowpoly_media_03-35-55.jpg
+====================================================================
+
+>>> [3/14] 15-Recursos / nido_cocos_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / nido_cocos_lowpoly_media
+====================================================================
+abierto: nido_cocos_lowpoly_media.blend
+
+Objetos / draw calls : 5
+Triangulos           : 1062
+Materiales           : 5 -> MAT_Coco_Fibra, MAT_Coco_Ojos, MAT_Coco_Oscuro, MAT_Hoja_Palmera, MAT_Hoja_Seca
+
+  OK  ALTA   obj   5/16   tris  1062/6000   mats 5/12
+  OK  MEDIA  obj   5/8    tris  1062/1500   mats 5/8
+  NO  BAJA   obj   5/6    tris  1062/700    mats 5/4
+
+z_min 0.0450  z_max 0.8744  alto 0.8294  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\nido_cocos_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 5 (prefijo 'SM_')
+  · SM_Coco_M_Coco_Fibra
+  · SM_Coco_M_Coco_Ojos
+  · SM_Coco_M_Coco_Oscuro
+  · SM_Coco_M_Hoja_Palmera
+  · SM_Coco_M_Hoja_Seca
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_nido_cocos_lowpoly_media_03-36-12_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_nido_cocos_lowpoly_media_03-36-12.jpg con 6 capturas 44379 bytes
+
+====================================================================
+Tiempo: 17.0 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_nido_cocos_lowpoly_media_03-36-12.jpg
+====================================================================
+
+>>> [4/14] 15-Recursos / piedra_afilar_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / piedra_afilar_lowpoly_media
+====================================================================
+abierto: piedra_afilar_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 15
+Materiales           : 2 -> MAT_Piedra_Afilar, MAT_Piedra_Afilar_Osc
+
+  OK  ALTA   obj   2/16   tris    15/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris    15/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris    15/700    mats 2/4
+
+z_min 0.0450  z_max 0.0858  alto 0.0408  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\piedra_afilar_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Piedra_M_Piedra_Afilar
+  · SM_Piedra_M_Piedra_Afilar_Osc
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_piedra_afilar_lowpoly_media_03-36-29_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_piedra_afilar_lowpoly_media_03-36-29.jpg con 6 capturas 23655 bytes
+
+====================================================================
+Tiempo: 18.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_piedra_afilar_lowpoly_media_03-36-29.jpg
+====================================================================
+
+>>> [5/14] 15-Recursos / roca_comun_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / roca_comun_lowpoly_media
+====================================================================
+abierto: roca_comun_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 100
+Materiales           : 1 -> MAT_Roca
+
+  OK  ALTA   obj   1/16   tris   100/6000   mats 1/12
+  OK  MEDIA  obj   1/8    tris   100/1500   mats 1/8
+  OK  BAJA   obj   1/6    tris   100/700    mats 1/4
+
+z_min 0.0450  z_max 1.4973  alto 1.4523  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\roca_comun_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Roca_M_Roca
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_comun_lowpoly_media_03-36-48_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_roca_comun_lowpoly_media_03-36-48.jpg con 6 capturas 37310 bytes
+
+====================================================================
+Tiempo: 14.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_roca_comun_lowpoly_media_03-36-48.jpg
+====================================================================
+
+>>> [6/14] 15-Recursos / roca_pedernal_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / roca_pedernal_lowpoly_media
+====================================================================
+abierto: roca_pedernal_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 340
+Materiales           : 2 -> MAT_Pedernal, MAT_Pedernal_C
+
+  OK  ALTA   obj   2/16   tris   340/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   340/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   340/700    mats 2/4
+
+z_min 0.0450  z_max 3.6647  alto 3.6197  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\roca_pedernal_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Roca_M_Pedernal
+  · SM_Roca_M_Pedernal_C
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_roca_pedernal_lowpoly_media_03-37-02_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_roca_pedernal_lowpoly_media_03-37-02.jpg con 6 capturas 36689 bytes
+
+====================================================================
+Tiempo: 15.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_roca_pedernal_lowpoly_media_03-37-02.jpg
+====================================================================
+
+>>> [7/14] 15-Recursos / tronco_caido_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / tronco_caido_lowpoly_media
+====================================================================
+abierto: tronco_caido_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 159
+Materiales           : 3 -> MAT_Corteza_Tronco, MAT_Hojarasca, MAT_Madera_Corte
+
+  OK  ALTA   obj   3/16   tris   159/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   159/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   159/700    mats 3/4
+
+z_min 0.0450  z_max 0.9586  alto 0.9136  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\tronco_caido_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Tronco_M_Corteza_Tronco
+  · SM_Tronco_M_Corteza_Tronco_Madera_Corte
+  · SM_Tronco_M_Hojarasca
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_tronco_caido_lowpoly_media_03-37-18_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_tronco_caido_lowpoly_media_03-37-18.jpg con 6 capturas 36466 bytes
+
+====================================================================
+Tiempo: 14.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_tronco_caido_lowpoly_media_03-37-18.jpg
+====================================================================
+
+>>> [8/14] 15-Recursos / veta_cobre_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / veta_cobre_lowpoly_media
+====================================================================
+abierto: veta_cobre_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 230
+Materiales           : 3 -> MAT_Cristal_Cobre, MAT_Cristal_Cobre_Oscuro, MAT_Roca_Cobre
+
+  OK  ALTA   obj   3/16   tris   230/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   230/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   230/700    mats 3/4
+
+z_min 0.0450  z_max 2.1442  alto 2.0992  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\veta_cobre_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Roca_M_Cristal_Cobre
+  · SM_Roca_M_Cristal_Cobre_Oscuro
+  · SM_Roca_M_Roca_Cobre
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_cobre_lowpoly_media_03-37-33_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_cobre_lowpoly_media_03-37-33.jpg con 6 capturas 37303 bytes
+
+====================================================================
+Tiempo: 14.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_cobre_lowpoly_media_03-37-33.jpg
+====================================================================
+
+>>> [9/14] 15-Recursos / veta_hierro_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / veta_hierro_lowpoly_media
+====================================================================
+abierto: veta_hierro_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 260
+Materiales           : 3 -> MAT_Cristal_Hierro, MAT_Cristal_Hierro_Oscuro, MAT_Roca_Hierro
+
+  OK  ALTA   obj   3/16   tris   260/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   260/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   260/700    mats 3/4
+
+z_min 0.0450  z_max 1.1243  alto 1.0793  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\veta_hierro_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Veta_M_Cristal_Hierro
+  · SM_Veta_M_Cristal_Hierro_Oscuro
+  · SM_Veta_M_Roca_Hierro
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_hierro_lowpoly_media_03-37-47_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_hierro_lowpoly_media_03-37-47.jpg con 6 capturas 36613 bytes
+
+====================================================================
+Tiempo: 15.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_hierro_lowpoly_media_03-37-47.jpg
+====================================================================
+
+>>> [10/14] 15-Recursos / veta_oro_lowpoly_media
+====================================================================
+QA VISUAL · 15-Recursos / veta_oro_lowpoly_media
+====================================================================
+abierto: veta_oro_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 374
+Materiales           : 3 -> MAT_Cristal_Oro, MAT_Cristal_Oro_Osc, MAT_Roca_Oro
+
+  OK  ALTA   obj   3/16   tris   374/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   374/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   374/700    mats 3/4
+
+z_min 0.0450  z_max 1.7867  alto 1.7417  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\veta_oro_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_VetaOro_M_Cristal_Oro
+  · SM_VetaOro_M_Cristal_Oro_Osc
+  · SM_VetaOro_M_Roca_Oro
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\cap_15_veta_oro_lowpoly_media_03-38-03_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_oro_lowpoly_media_03-38-03.jpg con 6 capturas 34076 bytes
+
+====================================================================
+Tiempo: 16.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\15-Recursos\capturas\_hoja_cap_15_veta_oro_lowpoly_media_03-38-03.jpg
+====================================================================
+
+>>> [11/14] 16-Crafting / cuerda_enrollada_lowpoly_media
+====================================================================
+QA VISUAL · 16-Crafting / cuerda_enrollada_lowpoly_media
+====================================================================
+abierto: cuerda_enrollada_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 401
+Materiales           : 2 -> MAT_Cuerda_Claro, MAT_Cuerda_Oscuro
+
+  OK  ALTA   obj   2/16   tris   401/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   401/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   401/700    mats 2/4
+
+z_min 0.0450  z_max 0.1550  alto 0.1100  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\cuerda_enrollada_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Cuerda_M_Cuerda_Claro
+  · SM_Cuerda_M_Cuerda_Oscuro
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_cuerda_enrollada_lowpoly_media_03-38-20_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_cuerda_enrollada_lowpoly_media_03-38-20.jpg con 6 capturas 28584 bytes
+
+====================================================================
+Tiempo: 17.6 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_cuerda_enrollada_lowpoly_media_03-38-20.jpg
+====================================================================
+
+>>> [12/14] 16-Crafting / hacha_piedra_lowpoly_media
+====================================================================
+QA VISUAL · 16-Crafting / hacha_piedra_lowpoly_media
+====================================================================
+abierto: hacha_piedra_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 278
+Materiales           : 3 -> MAT_Cuero_Hacha, MAT_Madera_Hacha, MAT_Piedra_Hacha
+
+  OK  ALTA   obj   3/16   tris   278/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   278/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   278/700    mats 3/4
+
+z_min 0.0450  z_max 0.1670  alto 0.1220  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\hacha_piedra_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Hacha_M_Cuero_Hacha
+  · SM_Hacha_M_Madera_Hacha
+  · SM_Hacha_M_Piedra_Hacha
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_hacha_piedra_lowpoly_media_03-38-37_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_hacha_piedra_lowpoly_media_03-38-37.jpg con 6 capturas 28828 bytes
+
+====================================================================
+Tiempo: 17.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_hacha_piedra_lowpoly_media_03-38-37.jpg
+====================================================================
+
+>>> [13/14] 16-Crafting / lingote_metal_lowpoly_media
+====================================================================
+QA VISUAL · 16-Crafting / lingote_metal_lowpoly_media
+====================================================================
+abierto: lingote_metal_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 24
+Materiales           : 2 -> MAT_Lingote_Cobre, MAT_Lingote_Marca
+
+  OK  ALTA   obj   2/16   tris    24/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris    24/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris    24/700    mats 2/4
+
+z_min 0.0450  z_max 0.1090  alto 0.0640  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\lingote_metal_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Lingote_M_Lingote_Cobre
+  · SM_Lingote_M_Lingote_Marca
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_lingote_metal_lowpoly_media_03-38-55_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_lingote_metal_lowpoly_media_03-38-55.jpg con 6 capturas 25459 bytes
+
+====================================================================
+Tiempo: 17.8 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_lingote_metal_lowpoly_media_03-38-55.jpg
+====================================================================
+
+>>> [14/14] 16-Crafting / tablon_madera_lowpoly_media
+====================================================================
+QA VISUAL · 16-Crafting / tablon_madera_lowpoly_media
+====================================================================
+abierto: tablon_madera_lowpoly_media.blend
+
+Objetos / draw calls : 6
+Triangulos           : 36
+Materiales           : 6 -> MAT_Tablon_A, MAT_Tablon_B, MAT_Tablon_C, MAT_Veta_1, MAT_Veta_2, MAT_Veta_3
+
+  OK  ALTA   obj   6/16   tris    36/6000   mats 6/12
+  OK  MEDIA  obj   6/8    tris    36/1500   mats 6/8
+  NO  BAJA   obj   6/6    tris    36/700    mats 6/4
+
+z_min 0.0450  z_max 0.2505  alto 0.2055  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\tablon_madera_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 6 (prefijo 'SM_')
+  · SM_Tablon_M_Tablon_A
+  · SM_Tablon_M_Tablon_B
+  · SM_Tablon_M_Tablon_C
+  · SM_Tablon_M_Veta_1
+  · SM_Tablon_M_Veta_2
+  · SM_Tablon_M_Veta_3
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\cap_16_tablon_madera_lowpoly_media_03-39-13_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_tablon_madera_lowpoly_media_03-39-13.jpg con 6 capturas 29780 bytes
+
+====================================================================
+Tiempo: 17.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\16-Crafting\capturas\_hoja_cap_16_tablon_madera_lowpoly_media_03-39-13.jpg
+====================================================================
+
+====================================================================
+--- RESULTADO DEL LOTE ---
+Corridas   : 14
+Fallidas   : 0
+Tiempo     : 232.4 s (3.9 min)
+
+Pendiente: revision VISUAL de las hojas de contacto (no automatica).
+====================================================================
+########## LOTE 3/4: 25-Ruinas-Templos 40-Infraestructura
+====================================================================
+QA VISUAL POR LOTE · 12 assets x 1 variantes = 12 corridas
+Modulos: 25-Ruinas-Templos, 40-Infraestructura
+====================================================================
+
+>>> [1/12] 25-Ruinas-Templos / altar_ritual_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / altar_ritual_lowpoly_media
+====================================================================
+abierto: altar_ritual_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 254
+Materiales           : 4 -> MAT_Brasa_Altar, MAT_Piedra_Altar, MAT_Piedra_Altar_Osc, MAT_Talla_Altar
+
+  OK  ALTA   obj   4/16   tris   254/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   254/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   254/700    mats 4/4
+
+z_min 0.0450  z_max 0.7350  alto 0.6900  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\altar_ritual_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Altar_M_Brasa_Altar
+  · SM_Altar_M_Piedra_Altar
+  · SM_Altar_M_Piedra_Altar_Osc
+  · SM_Altar_M_Talla_Altar
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_altar_ritual_lowpoly_media_03-39-31_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_altar_ritual_lowpoly_media_03-39-31.jpg con 6 capturas 43222 bytes
+
+====================================================================
+Tiempo: 17.8 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_altar_ritual_lowpoly_media_03-39-31.jpg
+====================================================================
+
+>>> [2/12] 25-Ruinas-Templos / antorcha_pared_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / antorcha_pared_lowpoly_media
+====================================================================
+abierto: antorcha_pared_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 94
+Materiales           : 4 -> MAT_Brasa_AntorchaP, MAT_Hierro_AntorchaP, MAT_Madera_AntorchaP, MAT_Tela_AntorchaP
+
+  OK  ALTA   obj   4/16   tris    94/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris    94/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris    94/700    mats 4/4
+
+z_min 0.0450  z_max 0.4678  alto 0.4228  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\antorcha_pared_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_AntorchaP_M_Brasa_AntorchaP
+  · SM_AntorchaP_M_Hierro_AntorchaP
+  · SM_AntorchaP_M_Madera_AntorchaP
+  · SM_AntorchaP_M_Tela_AntorchaP
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_antorcha_pared_lowpoly_media_03-39-49_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_antorcha_pared_lowpoly_media_03-39-49.jpg con 6 capturas 29539 bytes
+
+====================================================================
+Tiempo: 20.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_antorcha_pared_lowpoly_media_03-39-49.jpg
+====================================================================
+
+>>> [3/12] 25-Ruinas-Templos / cofre_ancestral_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / cofre_ancestral_lowpoly_media
+====================================================================
+abierto: cofre_ancestral_lowpoly_media.blend
+
+Objetos / draw calls : 6
+Triangulos           : 784
+Materiales           : 6 -> MAT_Bronce_Cofre, MAT_Gema_Cofre.001, MAT_Hierro_Cofre, MAT_Madera_Cofre, MAT_Madera_Cofre_Osc, MAT_Oro_Cofre
+
+  OK  ALTA   obj   6/16   tris   784/6000   mats 6/12
+  OK  MEDIA  obj   6/8    tris   784/1500   mats 6/8
+  NO  BAJA   obj   6/6    tris   784/700    mats 6/4
+
+z_min 0.0450  z_max 0.6730  alto 0.6280  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\cofre_ancestral_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 6 (prefijo 'SM_')
+  · SM_Cofre_M_Bronce_Cofre
+  · SM_Cofre_M_Gema_Cofre.001
+  · SM_Cofre_M_Hierro_Cofre
+  · SM_Cofre_M_Madera_Cofre
+  · SM_Cofre_M_Madera_Cofre_Osc
+  · SM_Cofre_M_Oro_Cofre
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_cofre_ancestral_lowpoly_media_03-40-09_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_cofre_ancestral_lowpoly_media_03-40-09.jpg con 6 capturas 44925 bytes
+
+====================================================================
+Tiempo: 20.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_cofre_ancestral_lowpoly_media_03-40-09.jpg
+====================================================================
+
+>>> [4/12] 25-Ruinas-Templos / losa_grabado_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / losa_grabado_lowpoly_media
+====================================================================
+abierto: losa_grabado_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 102
+Materiales           : 2 -> MAT_Losa_Grabado, MAT_Talla_Grabado
+
+  OK  ALTA   obj   2/16   tris   102/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   102/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   102/700    mats 2/4
+
+z_min 0.0450  z_max 0.2094  alto 0.1644  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\losa_grabado_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Losa_M_Losa_Grabado
+  · SM_Losa_M_Talla_Grabado
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_losa_grabado_lowpoly_media_03-40-29_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_losa_grabado_lowpoly_media_03-40-29.jpg con 6 capturas 31980 bytes
+
+====================================================================
+Tiempo: 17.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_losa_grabado_lowpoly_media_03-40-29.jpg
+====================================================================
+
+>>> [5/12] 25-Ruinas-Templos / puente_cuerda_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / puente_cuerda_lowpoly_media
+====================================================================
+abierto: puente_cuerda_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 410
+Materiales           : 3 -> MAT_Cuerda_Puente, MAT_Madera_Puente, MAT_Piedra_Puente
+
+  OK  ALTA   obj   1/16   tris   410/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris   410/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris   410/700    mats 3/4
+
+z_min 0.0450  z_max 1.4450  alto 1.4000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\puente_cuerda_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Puente_M_Piedra_Puente_Madera_Puente_Cuerda_Puente
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puente_cuerda_lowpoly_media_03-40-47_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_puente_cuerda_lowpoly_media_03-40-47.jpg con 6 capturas 49101 bytes
+
+====================================================================
+Tiempo: 16.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_puente_cuerda_lowpoly_media_03-40-47.jpg
+====================================================================
+
+>>> [6/12] 25-Ruinas-Templos / puerta_templo_lowpoly_media
+====================================================================
+QA VISUAL · 25-Ruinas-Templos / puerta_templo_lowpoly_media
+====================================================================
+abierto: puerta_templo_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 90
+Materiales           : 3 -> MAT_Hoja_Puerta, MAT_Marco_Puerta, MAT_Talla_Puerta
+
+  OK  ALTA   obj   3/16   tris    90/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris    90/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris    90/700    mats 3/4
+
+z_min 0.0450  z_max 2.9250  alto 2.8800  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\puerta_templo_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Puerta_M_Hoja_Puerta
+  · SM_Puerta_M_Marco_Puerta
+  · SM_Puerta_M_Talla_Puerta
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\cap_25_puerta_templo_lowpoly_media_03-41-03_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_puerta_templo_lowpoly_media_03-41-03.jpg con 6 capturas 32588 bytes
+
+====================================================================
+Tiempo: 14.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\_hoja_cap_25_puerta_templo_lowpoly_media_03-41-03.jpg
+====================================================================
+
+>>> [7/12] 40-Infraestructura / bote_pesca_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / bote_pesca_lowpoly_media
+====================================================================
+abierto: bote_pesca_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 111
+Materiales           : 4 -> MAT_Cuerda_Bote, MAT_Madera_Bote, MAT_Madera_Bote_Osc, MAT_Tela_Bote
+
+  OK  ALTA   obj   4/16   tris   111/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   111/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   111/700    mats 4/4
+
+z_min 0.0450  z_max 0.6450  alto 0.6000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\bote_pesca_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Bote_M_Cuerda_Bote
+  · SM_Bote_M_Madera_Bote
+  · SM_Bote_M_Madera_Bote_Osc
+  · SM_Bote_M_Tela_Bote
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_bote_pesca_lowpoly_media_03-41-18_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_bote_pesca_lowpoly_media_03-41-18.jpg con 6 capturas 33621 bytes
+
+====================================================================
+Tiempo: 17.0 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_bote_pesca_lowpoly_media_03-41-18.jpg
+====================================================================
+
+>>> [8/12] 40-Infraestructura / cartel_indicador_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / cartel_indicador_lowpoly_media
+====================================================================
+abierto: cartel_indicador_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 30
+Materiales           : 3 -> MAT_Hierro_Clavo, MAT_Madera_Poste, MAT_Madera_Tabla
+
+  OK  ALTA   obj   3/16   tris    30/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris    30/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris    30/700    mats 3/4
+
+z_min 0.0450  z_max 1.4450  alto 1.4000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\cartel_indicador_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Cartel_M_Hierro_Clavo
+  · SM_Cartel_M_Madera_Poste
+  · SM_Cartel_M_Madera_Tabla
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_cartel_indicador_lowpoly_media_03-41-35_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_cartel_indicador_lowpoly_media_03-41-35.jpg con 6 capturas 31213 bytes
+
+====================================================================
+Tiempo: 16.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_cartel_indicador_lowpoly_media_03-41-35.jpg
+====================================================================
+
+>>> [9/12] 40-Infraestructura / farola_fuego_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / farola_fuego_lowpoly_media
+====================================================================
+abierto: farola_fuego_lowpoly_media.blend
+
+Objetos / draw calls : 5
+Triangulos           : 157
+Materiales           : 5 -> MAT_Brasa_Farola, MAT_Hierro_Farola, MAT_Llama_Farola, MAT_Madera_Farola, MAT_Piedra_Farola
+
+  OK  ALTA   obj   5/16   tris   157/6000   mats 5/12
+  OK  MEDIA  obj   5/8    tris   157/1500   mats 5/8
+  NO  BAJA   obj   5/6    tris   157/700    mats 5/4
+
+z_min 0.0450  z_max 1.6450  alto 1.6000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\farola_fuego_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 5 (prefijo 'SM_')
+  · SM_Farola_M_Brasa_Farola
+  · SM_Farola_M_Hierro_Farola
+  · SM_Farola_M_Llama_Farola
+  · SM_Farola_M_Madera_Farola
+  · SM_Farola_M_Piedra_Farola
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_farola_fuego_lowpoly_media_03-41-51_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_farola_fuego_lowpoly_media_03-41-51.jpg con 6 capturas 34478 bytes
+
+====================================================================
+Tiempo: 13.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_farola_fuego_lowpoly_media_03-41-51.jpg
+====================================================================
+
+>>> [10/12] 40-Infraestructura / muelle_madera_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / muelle_madera_lowpoly_media
+====================================================================
+abierto: muelle_madera_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 182
+Materiales           : 3 -> MAT_Hierro_Muelle, MAT_Madera_Muelle, MAT_Madera_Muelle_Osc
+
+  OK  ALTA   obj   3/16   tris   182/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris   182/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris   182/700    mats 3/4
+
+z_min 0.0450  z_max 1.4700  alto 1.4250  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\muelle_madera_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_Muelle_M_Hierro_Muelle
+  · SM_Muelle_M_Madera_Muelle
+  · SM_Muelle_M_Madera_Muelle_Osc
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_muelle_madera_lowpoly_media_03-42-04_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_muelle_madera_lowpoly_media_03-42-04.jpg con 6 capturas 46936 bytes
+
+====================================================================
+Tiempo: 17.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_muelle_madera_lowpoly_media_03-42-04.jpg
+====================================================================
+
+>>> [11/12] 40-Infraestructura / pozo_piedra_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / pozo_piedra_lowpoly_media
+====================================================================
+abierto: pozo_piedra_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 361
+Materiales           : 4 -> MAT_Agua_Pozo, MAT_Cuerda_Pozo, MAT_Madera_Pozo, MAT_Piedra_Pozo
+
+  OK  ALTA   obj   1/16   tris   361/6000   mats 4/12
+  OK  MEDIA  obj   1/8    tris   361/1500   mats 4/8
+  OK  BAJA   obj   1/6    tris   361/700    mats 4/4
+
+z_min 0.0450  z_max 2.0810  alto 2.0360  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\pozo_piedra_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Pozo_M_Piedra_Pozo_Madera_Pozo_Cuerda_Pozo_Agua_Pozo
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_pozo_piedra_lowpoly_media_03-42-21_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_pozo_piedra_lowpoly_media_03-42-21.jpg con 6 capturas 43984 bytes
+
+====================================================================
+Tiempo: 14.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_pozo_piedra_lowpoly_media_03-42-21.jpg
+====================================================================
+
+>>> [12/12] 40-Infraestructura / puente_troncos_lowpoly_media
+====================================================================
+QA VISUAL · 40-Infraestructura / puente_troncos_lowpoly_media
+====================================================================
+abierto: puente_troncos_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 320
+Materiales           : 3 -> MAT_Cuerda_Puente, MAT_Madera_Puente, MAT_Piedra_Puente
+
+  OK  ALTA   obj   1/16   tris   320/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris   320/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris   320/700    mats 3/4
+
+z_min 0.0450  z_max 0.9800  alto 0.9350  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\puente_troncos_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Puente_M_Piedra_Puente_Madera_Puente_Cuerda_Puente
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\cap_40_puente_troncos_lowpoly_media_03-42-36_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_puente_troncos_lowpoly_media_03-42-36.jpg con 6 capturas 40907 bytes
+
+====================================================================
+Tiempo: 13.8 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\40-Infraestructura\capturas\_hoja_cap_40_puente_troncos_lowpoly_media_03-42-36.jpg
+====================================================================
+
+====================================================================
+--- RESULTADO DEL LOTE ---
+Corridas   : 12
+Fallidas   : 0
+Tiempo     : 198.7 s (3.3 min)
+
+Pendiente: revision VISUAL de las hojas de contacto (no automatica).
+====================================================================
+########## LOTE 4/4: 13-Herramientas 45-Arte3D 70-Interacciones
+====================================================================
+QA VISUAL POR LOTE · 14 assets x 1 variantes = 14 corridas
+Modulos: 13-Herramientas, 45-Arte3D, 70-Interacciones
+====================================================================
+
+>>> [1/14] 13-Herramientas / antorcha_mano_lowpoly_media
+====================================================================
+QA VISUAL · 13-Herramientas / antorcha_mano_lowpoly_media
+====================================================================
+abierto: antorcha_mano_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 88
+Materiales           : 4 -> MAT_Brasa_Antorcha, MAT_Cordel_Antorcha, MAT_Madera_Antorcha, MAT_Tela_Carbonizada
+
+  OK  ALTA   obj   4/16   tris    88/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris    88/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris    88/700    mats 4/4
+
+z_min 0.0450  z_max 0.8650  alto 0.8200  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\antorcha_mano_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Antorcha_M_Brasa_Antorcha
+  · SM_Antorcha_M_Cordel_Antorcha
+  · SM_Antorcha_M_Madera_Antorcha
+  · SM_Antorcha_M_Tela_Carbonizada
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_antorcha_mano_lowpoly_media_03-42-50_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_antorcha_mano_lowpoly_media_03-42-50.jpg con 6 capturas 29867 bytes
+
+====================================================================
+Tiempo: 15.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_antorcha_mano_lowpoly_media_03-42-50.jpg
+====================================================================
+
+>>> [2/14] 13-Herramientas / pico_hierro_lowpoly_media
+====================================================================
+QA VISUAL · 13-Herramientas / pico_hierro_lowpoly_media
+====================================================================
+abierto: pico_hierro_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 92
+Materiales           : 3 -> MAT_Cuero_Atadura, MAT_Hierro_Pico, MAT_Madera_Mango
+
+  OK  ALTA   obj   3/16   tris    92/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris    92/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris    92/700    mats 3/4
+
+z_min 0.0450  z_max 0.9418  alto 0.8968  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\pico_hierro_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_PicoHierro_M_Cuero_Atadura
+  · SM_PicoHierro_M_Hierro_Pico
+  · SM_PicoHierro_M_Madera_Mango
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_hierro_lowpoly_media_03-43-06_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_pico_hierro_lowpoly_media_03-43-06.jpg con 6 capturas 31167 bytes
+
+====================================================================
+Tiempo: 16.3 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_pico_hierro_lowpoly_media_03-43-06.jpg
+====================================================================
+
+>>> [3/14] 13-Herramientas / pico_piedra_lowpoly_media
+====================================================================
+QA VISUAL · 13-Herramientas / pico_piedra_lowpoly_media
+====================================================================
+abierto: pico_piedra_lowpoly_media.blend
+
+Objetos / draw calls : 3
+Triangulos           : 82
+Materiales           : 3 -> MAT_Cuero_Atadura, MAT_Madera_Mango, MAT_Piedra_Pico
+
+  OK  ALTA   obj   3/16   tris    82/6000   mats 3/12
+  OK  MEDIA  obj   3/8    tris    82/1500   mats 3/8
+  OK  BAJA   obj   3/6    tris    82/700    mats 3/4
+
+z_min 0.0450  z_max 0.9418  alto 0.8968  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\pico_piedra_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 3 (prefijo 'SM_')
+  · SM_PicoPiedra_M_Cuero_Atadura
+  · SM_PicoPiedra_M_Madera_Mango
+  · SM_PicoPiedra_M_Piedra_Pico
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\cap_13_pico_piedra_lowpoly_media_03-43-22_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_pico_piedra_lowpoly_media_03-43-22.jpg con 6 capturas 30994 bytes
+
+====================================================================
+Tiempo: 16.0 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\13-Herramientas\capturas\_hoja_cap_13_pico_piedra_lowpoly_media_03-43-22.jpg
+====================================================================
+
+>>> [4/14] 45-Arte3D / anillo_piedras_ritual_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / anillo_piedras_ritual_lowpoly_media
+====================================================================
+abierto: anillo_piedras_ritual_lowpoly_media.blend
+
+Objetos / draw calls : 5
+Triangulos           : 265
+Materiales           : 5 -> MAT_Piedra_Anillo_0, MAT_Piedra_Anillo_1, MAT_Piedra_Anillo_2, MAT_Piedra_Anillo_3, MAT_Piedra_Anillo_4
+
+  OK  ALTA   obj   5/16   tris   265/6000   mats 5/12
+  OK  MEDIA  obj   5/8    tris   265/1500   mats 5/8
+  NO  BAJA   obj   5/6    tris   265/700    mats 5/4
+
+z_min 0.0450  z_max 0.6650  alto 0.6200  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\anillo_piedras_ritual_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 5 (prefijo 'SM_')
+  · SM_Anillo_M_Piedra_Anillo_0
+  · SM_Anillo_M_Piedra_Anillo_1
+  · SM_Anillo_M_Piedra_Anillo_2
+  · SM_Anillo_M_Piedra_Anillo_3
+  · SM_Anillo_M_Piedra_Anillo_4
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38.jpg con 6 capturas 35876 bytes
+
+====================================================================
+Tiempo: 14.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_anillo_piedras_ritual_lowpoly_media_03-43-38.jpg
+====================================================================
+
+>>> [5/14] 45-Arte3D / concha_mar_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / concha_mar_lowpoly_media
+====================================================================
+abierto: concha_mar_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 319
+Materiales           : 2 -> MAT_Concha_Interior, MAT_Concha_Mar
+
+  OK  ALTA   obj   2/16   tris   319/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   319/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   319/700    mats 2/4
+
+z_min 0.0450  z_max 0.3304  alto 0.2854  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\concha_mar_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Concha_M_Concha_Interior
+  · SM_Concha_M_Concha_Mar
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_concha_mar_lowpoly_media_03-43-53_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_concha_mar_lowpoly_media_03-43-53.jpg con 6 capturas 31449 bytes
+
+====================================================================
+Tiempo: 17.2 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_concha_mar_lowpoly_media_03-43-53.jpg
+====================================================================
+
+>>> [6/14] 45-Arte3D / estrella_mar_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / estrella_mar_lowpoly_media
+====================================================================
+abierto: estrella_mar_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 175
+Materiales           : 2 -> MAT_EstrellaMar, MAT_EstrellaMar_Txt
+
+  OK  ALTA   obj   2/16   tris   175/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   175/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   175/700    mats 2/4
+
+z_min 0.0450  z_max 0.2652  alto 0.2202  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\estrella_mar_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Estrella_M_EstrellaMar
+  · SM_Estrella_M_EstrellaMar_Txt
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_estrella_mar_lowpoly_media_03-44-10_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_estrella_mar_lowpoly_media_03-44-10.jpg con 6 capturas 30725 bytes
+
+====================================================================
+Tiempo: 17.5 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_estrella_mar_lowpoly_media_03-44-10.jpg
+====================================================================
+
+>>> [7/14] 45-Arte3D / monolito_glifos_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / monolito_glifos_lowpoly_media
+====================================================================
+abierto: monolito_glifos_lowpoly_media.blend
+
+Objetos / draw calls : 2
+Triangulos           : 154
+Materiales           : 2 -> MAT_Glifo_Ancestral, MAT_Piedra_Monolito
+
+  OK  ALTA   obj   2/16   tris   154/6000   mats 2/12
+  OK  MEDIA  obj   2/8    tris   154/1500   mats 2/8
+  OK  BAJA   obj   2/6    tris   154/700    mats 2/4
+
+z_min 0.0450  z_max 1.9070  alto 1.8620  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\monolito_glifos_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 2 (prefijo 'SM_')
+  · SM_Monolito_M_Glifo_Ancestral
+  · SM_Monolito_M_Piedra_Monolito
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_monolito_glifos_lowpoly_media_03-44-27_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_monolito_glifos_lowpoly_media_03-44-27.jpg con 6 capturas 30483 bytes
+
+====================================================================
+Tiempo: 14.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_monolito_glifos_lowpoly_media_03-44-27.jpg
+====================================================================
+
+>>> [8/14] 45-Arte3D / totem_isla_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / totem_isla_lowpoly_media
+====================================================================
+abierto: totem_isla_lowpoly_media.blend
+
+Objetos / draw calls : 4
+Triangulos           : 233
+Materiales           : 4 -> MAT_Ojo_Totem, MAT_Piedra_Totem, MAT_Piedra_Totem_Osc, MAT_Talla_Totem
+
+  OK  ALTA   obj   4/16   tris   233/6000   mats 4/12
+  OK  MEDIA  obj   4/8    tris   233/1500   mats 4/8
+  OK  BAJA   obj   4/6    tris   233/700    mats 4/4
+
+z_min 0.0450  z_max 2.2450  alto 2.2000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\totem_isla_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 4 (prefijo 'SM_')
+  · SM_Totem_M_Ojo_Totem
+  · SM_Totem_M_Piedra_Totem
+  · SM_Totem_M_Piedra_Totem_Osc
+  · SM_Totem_M_Talla_Totem
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_totem_isla_lowpoly_media_03-44-42_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_totem_isla_lowpoly_media_03-44-42.jpg con 6 capturas 36991 bytes
+
+====================================================================
+Tiempo: 14.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_totem_isla_lowpoly_media_03-44-42.jpg
+====================================================================
+
+>>> [9/14] 45-Arte3D / vieira_playa_lowpoly_media
+====================================================================
+QA VISUAL · 45-Arte3D / vieira_playa_lowpoly_media
+====================================================================
+abierto: vieira_playa_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 482
+Materiales           : 3 -> MAT_Vieira_Bisagra, MAT_Vieira_Exterior, MAT_Vieira_Interior
+
+  OK  ALTA   obj   1/16   tris   482/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris   482/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris   482/700    mats 3/4
+
+z_min 0.0450  z_max 0.1990  alto 0.1540  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\vieira_playa_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Vieira_M_Vieira_Exterior_Vieira_Interior_Vieira_Bisagra
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\cap_45_vieira_playa_lowpoly_media_03-44-57_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_vieira_playa_lowpoly_media_03-44-57.jpg con 6 capturas 25025 bytes
+
+====================================================================
+Tiempo: 17.1 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\45-Arte3D\capturas\_hoja_cap_45_vieira_playa_lowpoly_media_03-44-57.jpg
+====================================================================
+
+>>> [10/14] 70-Interacciones / boton_piso_lowpoly_media
+====================================================================
+QA VISUAL · 70-Interacciones / boton_piso_lowpoly_media
+====================================================================
+abierto: boton_piso_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 52
+Materiales           : 3 -> MAT_Bronce_Perno, MAT_Hierro_Placa, MAT_Piedra_Boton
+
+  OK  ALTA   obj   1/16   tris    52/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris    52/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris    52/700    mats 3/4
+
+z_min 0.0450  z_max 0.2370  alto 0.1920  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\boton_piso_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Boton_M_Piedra_Boton_Hierro_Placa_Bronce_Perno
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_boton_piso_lowpoly_media_03-45-14_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_boton_piso_lowpoly_media_03-45-14.jpg con 6 capturas 31549 bytes
+
+====================================================================
+Tiempo: 16.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_boton_piso_lowpoly_media_03-45-14.jpg
+====================================================================
+
+>>> [11/14] 70-Interacciones / cofre_pequeno_lowpoly_media
+====================================================================
+QA VISUAL · 70-Interacciones / cofre_pequeno_lowpoly_media
+====================================================================
+abierto: cofre_pequeno_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 33
+Materiales           : 3 -> MAT_Bronce_Cierre, MAT_Hierro_Cofre_Peq, MAT_Madera_Cofre_Peq
+
+  OK  ALTA   obj   1/16   tris    33/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris    33/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris    33/700    mats 3/4
+
+z_min 0.0450  z_max 0.5450  alto 0.5000  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\cofre_pequeno_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Cofre_M_Madera_Cofre_Peq_Hierro_Cofre_Peq_Bronce_Cierre
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_cofre_pequeno_lowpoly_media_03-45-31_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_cofre_pequeno_lowpoly_media_03-45-31.jpg con 6 capturas 34912 bytes
+
+====================================================================
+Tiempo: 17.7 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_cofre_pequeno_lowpoly_media_03-45-31.jpg
+====================================================================
+
+>>> [12/14] 70-Interacciones / palanca_madera_lowpoly_media
+====================================================================
+QA VISUAL · 70-Interacciones / palanca_madera_lowpoly_media
+====================================================================
+abierto: palanca_madera_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 54
+Materiales           : 3 -> MAT_Hierro_Perno, MAT_Madera_Pal_Cla, MAT_Madera_Pal_Osc
+
+  OK  ALTA   obj   1/16   tris    54/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris    54/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris    54/700    mats 3/4
+
+z_min 0.0450  z_max 0.6155  alto 0.5705  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\palanca_madera_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Palanca_M_Madera_Pal_Osc_Madera_Pal_Cla_Hierro_Perno
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_palanca_madera_lowpoly_media_03-45-48_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_palanca_madera_lowpoly_media_03-45-48.jpg con 6 capturas 35150 bytes
+
+====================================================================
+Tiempo: 16.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_palanca_madera_lowpoly_media_03-45-48.jpg
+====================================================================
+
+>>> [13/14] 70-Interacciones / puerta_corrediza_piedra_lowpoly_media
+====================================================================
+QA VISUAL · 70-Interacciones / puerta_corrediza_piedra_lowpoly_media
+====================================================================
+abierto: puerta_corrediza_piedra_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 42
+Materiales           : 3 -> MAT_Hierro_Riel, MAT_Piedra_Puerta_Cla, MAT_Piedra_Puerta_Osc
+
+  OK  ALTA   obj   1/16   tris    42/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris    42/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris    42/700    mats 3/4
+
+z_min 0.0450  z_max 2.3150  alto 2.2700  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\puerta_corrediza_piedra_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Puerta_M_Piedra_Puerta_Cla_Piedra_Puerta_Osc_Hierro_Riel
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05.jpg con 6 capturas 35450 bytes
+
+====================================================================
+Tiempo: 15.4 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_puerta_corrediza_piedra_lowpoly_media_03-46-05.jpg
+====================================================================
+
+>>> [14/14] 70-Interacciones / valvula_manivela_lowpoly_media
+====================================================================
+QA VISUAL · 70-Interacciones / valvula_manivela_lowpoly_media
+====================================================================
+abierto: valvula_manivela_lowpoly_media.blend
+
+Objetos / draw calls : 1
+Triangulos           : 102
+Materiales           : 3 -> MAT_Acero_Cubo, MAT_Bronce_Volante, MAT_Hierro_Valvula
+
+  OK  ALTA   obj   1/16   tris   102/6000   mats 3/12
+  OK  MEDIA  obj   1/8    tris   102/1500   mats 3/8
+  OK  BAJA   obj   1/6    tris   102/700    mats 3/4
+
+z_min 0.0450  z_max 0.7250  alto 0.6800  -> apoyo OK
+
+--- Capturando 6 angulos ---
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\valvula_manivela_lowpoly_media.blend
+OBJETOS_ENCUADRADOS: 1 (prefijo 'SM_')
+  · SM_Valvula_M_Hierro_Valvula_Acero_Cubo_Bronce_Volante
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\cap_70_valvula_manivela_lowpoly_media_03-46-21_az300.png
+
+---
+Revisá TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base. Si la hay, corregí y volvé a correr.
+OK D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_valvula_manivela_lowpoly_media_03-46-21.jpg con 6 capturas 36337 bytes
+
+====================================================================
+Tiempo: 16.9 s
+HOJA PARA LEER: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\70-Interacciones\capturas\_hoja_cap_70_valvula_manivela_lowpoly_media_03-46-21.jpg
+====================================================================
+
+====================================================================
+--- RESULTADO DEL LOTE ---
+Corridas   : 14
+Fallidas   : 0
+Tiempo     : 227.4 s (3.8 min)
+
+Pendiente: revision VISUAL de las hojas de contacto (no automatica).
+====================================================================
+########## FIN BARRIDO MEDIA

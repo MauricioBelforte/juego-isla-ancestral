@@ -1,7 +1,7 @@
-**Modelo:** **[COMPLETAR]**
-**Plataforma:** **[COMPLETAR]**
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
 
-# 03-Diseno.md — Módulo <ID>: <Nombre de la Isla> [MAQUETA]
+# 03-Diseno.md — Módulo 168: Plantilla de Isla [MAQUETA]
 
 > ⚠️ **TEMPLATE.** Copia a `<ID>-Isla-<Nombre>` y completa la tabla CON SU CONFIGURACIÓN REAL.
 > Cada isla es independiente: si se rompe su terreno, no afecta a las demás.

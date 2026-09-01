@@ -1,3 +1,5 @@
+﻿**Fecha:** (sin fecha)
+**Hora:** 23:45
 
 
 ## Segunda pasada (auditoria exhaustiva solicitada por el usuario)

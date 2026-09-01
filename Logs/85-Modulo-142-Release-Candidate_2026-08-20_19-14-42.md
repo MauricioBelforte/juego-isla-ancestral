@@ -1,9 +1,10 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # Log 85 — Módulo 142 Release Candidate documentado (129/129)
 
-**Fecha:** 2026-08-20 19:14:42
+**Fecha:** 2026-08-20
+**Hora:** 19:14
 
 ## Descripción
 Se completó la documentación del módulo **142-Release-Candidate** (plan maestro: sección 141 "RELEASE CANDIDATE", 17 puntos base: freeze de features, freeze de contenido, solo correcciones críticas, build limpia, instalación limpia, actualización funcional, saves compatibles, cloud saves, logros, idiomas, rendimiento, crash rate, certificación, legal, marketing, soporte, plan de lanzamiento).

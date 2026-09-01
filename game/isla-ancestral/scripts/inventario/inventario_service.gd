@@ -249,6 +249,139 @@ func remover_items(items: Dictionary) -> bool:
 				falta -= tomar
 	return true
 
+## ── Consumo para crafting (M16) ──────────────────────────────
+## [78/133] Consume materiales verificando primero. Incluye casa si include_house.
+## Devuelve true si todo-o-nada fue exitoso.
+
+func consume_for_crafting(recipe: Dictionary, include_house: bool = false) -> bool:
+	# recipe = {item_id: cantidad, ...}
+	for item_id in recipe:
+		var cantidad := int(recipe[item_id])
+		var total := count_item(item_id, include_house)
+		if total < cantidad:
+			return false
+	# Remover de bolsillo primero, luego casa
+	for item_id in recipe:
+		var falta := int(recipe[item_id])
+		for c in [CONTAINER_TYPE_CLASS.Id.BOLSILLO, CONTAINER_TYPE_CLASS.Id.CASA]:
+			if not include_house and c == CONTAINER_TYPE_CLASS.Id.CASA:
+				continue
+			if falta <= 0:
+				break
+			var tiene: int = _contenedor(c).count_item(item_id)
+			var tomar: int = mini(tiene, falta)
+			if tomar > 0:
+				remove_item(item_id, tomar, c)
+				falta -= tomar
+	return true
+
+## ── Regalos de NPCs (M19/M20) ───────────────────────────────
+## [127] Entrega directa al bolsillo. Si está lleno, fallback a casa.
+
+func give_gift(item_id: String, cantidad: int = 1) -> bool:
+	var sobrante := add_item(item_id, cantidad, CONTAINER_TYPE_CLASS.Id.BOLSILLO)
+	if sobrante > 0:
+		sobrante = add_item(item_id, sobrante, CONTAINER_TYPE_CLASS.Id.CASA)
+	if sobrante > 0:
+		# [128] Redirección a bandeja de correo (M39/CORREO)
+		sobrante = add_item(item_id, sobrante, CONTAINER_TYPE_CLASS.Id.CORREO)
+	return sobrante <= 0
+
+## ── Herramientas M13 ─────────────────────────────────────────
+## [129] Equipar herramienta desde inventario.
+
+func equip_tool(slot_container: int, slot_idx: int) -> bool:
+	var c := _contenedor(slot_container)
+	if slot_idx < 0 or slot_idx >= c.slots.size():
+		return false
+	var s: InventorySlot = c.slots[slot_idx]
+	if s.esta_libre():
+		return false
+	# Verificar que sea herramienta (M13, categoría HERRAMIENTAS)
+	var db = get_node_or_null("/root/ItemDatabase")
+	if db != null:
+		var item = db.get_item(s.item_id)
+		if item == null or item.categoria != ItemData.Categoria.HERRAMIENTAS:
+			return false
+	# Marcar como equipada (instancia.active = true)
+	s.instancia["equipped"] = true
+	slot_changed.emit(slot_container, slot_idx)
+	inventario_actualizado.emit()
+	return true
+
+## [129] Usar herramienta seleccionada, reducir durabilidad.
+
+func use_toolDurability(slot_container: int, slot_idx: int, amount: int = 1) -> bool:
+	var c := _contenedor(slot_container)
+	if slot_idx < 0 or slot_idx >= c.slots.size():
+		return false
+	var s: InventorySlot = c.slots[slot_idx]
+	if s.esta_libre():
+		return false
+	# Reducir durabilidad
+	var durability: int = int(s.instancia.get("durability", 0))
+	durability -= amount
+	if durability <= 0:
+		# Herramienta rota: remover del inventario
+		s.vaciar()
+		slot_changed.emit(slot_container, slot_idx)
+		inventario_actualizado.emit()
+		return true
+	s.instancia["durability"] = durability
+	slot_changed.emit(slot_container, slot_idx)
+	inventario_actualizado.emit()
+	return true
+
+## ── Descarte de ítems ────────────────────────────────────────
+## [161] Descarte protegido: doble verificación.
+## [162] Si el inventario está lleno, el ítem cae al mundo.
+
+func discard_item(container: int, slot_idx: int, confirmado: bool = false) -> bool:
+	if not confirmado:
+		return false  # [161] Se necesita doble confirmación
+	var c := _contenedor(container)
+	if slot_idx < 0 or slot_idx >= c.slots.size():
+		return false
+	var s: InventorySlot = c.slots[slot_idx]
+	if s.esta_libre():
+		return false
+	# [130] No descartar objetos de misión
+	if s.item_id.begins_with("mission_"):
+		return false
+	var item_id := s.item_id
+	var cantidad := s.cantidad
+	s.vaciar()
+	slot_changed.emit(container, slot_idx)
+	inventario_actualizado.emit()
+	# [162] Emitir señal para que el mundo cree un pickup
+	item_removed.emit(item_id, cantidad, container)
+	return true
+
+## ── Donación a museo (M37) ───────────────────────────────────
+## [138] Consume ítem y retorna true si fue donado.
+
+func donate_item(item_id: String, cantidad: int = 1) -> bool:
+	if count_item(item_id, true) < cantidad:
+		return false
+	return remove_item(item_id, cantidad, CONTAINER_TYPE_CLASS.Id.BOLSILLO)
+
+## ── Objetos de misión (M22) ──────────────────────────────────
+## [130] Verifica si un ítem es de misión (protegido contra descarte).
+
+func is_mission_item(item_id: String) -> bool:
+	return item_id.begins_with("mission_")
+
+## ── Validación global ─────────────────────────────────────────
+## [140] Asegura que todas las cantidades sean legales en todos los contenedores.
+
+func validate_all_containers() -> int:
+	var total_fixes := 0
+	for id in contenedores:
+		total_fixes += contenedores[id].validate_quantities()
+	if total_fixes > 0:
+		inventario_actualizado.emit()
+	return total_fixes
+
 ## ── ISaveProvider (M59) — primer proveedor real ───────────
 
 func get_section_name() -> String:

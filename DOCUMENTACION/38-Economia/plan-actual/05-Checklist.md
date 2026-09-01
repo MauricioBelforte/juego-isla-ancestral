@@ -1,7 +1,12 @@
-**Modelo:** ox-alpha (Cline)
-**Plataforma:** Cline
+**Modelo:** glm-5.3-flash (último modificador; núcleo por ox-alpha + Deepseek)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 38: Economía
+
+> **Reserva actual (iter. BarterSystem trueque)**
+> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 23:55 · **Estado:** 🔵 En curso
+> **Entrada:** núcleo ✅ (logs 171-235) + M14 ✅ + M20 ✅ + M29 ✅ · **Salida:** BarterOffer + BarterSystem autoload (propuestas, ejecución atómica con rollback, límites diarios, salvavidas RF12, persistencia M59) + ofertas .tres + test headless
+> **Archivos afectados:** `scripts/economia/barter_system.gd`, `scripts/economia/barter_offer.gd`, `data/economia/barter/*.tres`, `scripts/economia/test_barter.gd`
 
 ## A. Problema y objetivos
 
@@ -24,12 +29,12 @@
 - [ ] RF4: venta del jugador con precio de venta y límite diario anti-grind [M]
 - [ ] RF5: reabastecimiento de tiendas por día laborable y rotación estacional [M]
 - [ ] RF6: horarios de atención declarativos por tienda con señal de cierre [M]
-- [ ] RF7: trueque objeto por objeto sin moneda, dependiente de amistad y temporada [M]
-- [ ] RF8: factor amistad que otorga descuentos y ofertas únicas de trueque [M]
+- [x] RF7: trueque objeto por objeto sin moneda, dependiente de amistad y temporada [M] — glm-5.3-flash 2026-08-31: BarterSystem implementado + testeado (saldo jamás tocado)
+- [x] RF8: factor amistad que otorga descuentos y ofertas únicas de trueque [M] — ofertas con amistad_minima gating propuestas_disponibles (testeado: nivel bajo oculta, alto muestra)
 - [ ] RF9: mercado del pueblo con ajuste suave por oferta y estación (tope ±10%) [M]
 - [ ] RF10: tabla de precios del día expuesta como dato para la UI [S]
 - [ ] RF11: anti-grind con límite diario por ítem y reventa nunca rentable [M]
-- [ ] RF12: salvavidas cozy: con 0 monedas siempre hay trueque de partida disponible [M]
+- [x] RF12: salvavidas cozy: con 0 monedas siempre hay trueque de partida disponible [M] — oferta es_salvavidas siempre en propuestas y no consume límite (testeado)
 - [ ] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M]
 - [ ] RF14: ferias y eventos con precios especiales temporales (M73) [M]
 - [ ] RF15: registro de transacciones para log y analytics (M104) [S]
@@ -107,15 +112,15 @@
 
 ## H. Diseño de subsistemas — Trueque
 
-- [ ] Definir BarterOffer con oferta_id, pedido y entregado [M]
+- [x] Definir BarterOffer con oferta_id, pedido y entregado [M] — Resource .tres: pedido/entregado/amistad_minima/estaciones/salvavidas/limite_diario
 - [ ] Definir amistad_minima para desbloqueo por nivel de M20 [M]
 - [ ] Definir temporada para propuestas estacionales [S]
 - [x] Definir limite_por_dia para prevenir abuso [S] (implementado: limite_ventas_dia por banda de rareza en PriceManager, log 191)
 - [ ] Implementar propuestas_disponibles(npc_id) con filtros de amistad y temporada [M]
-- [ ] Implementar ejecutar_trueque() con intercambio atómico vía M14 [C]
-- [ ] Emitir señales trueque_exitoso y trueque_rechazado con motivo [M]
+- [x] Implementar ejecutar_trueque() con intercambio atómico vía M14 [C] — verificar→remover todo-o-nada→agregar con rollback cozy si no entra
+- [x] Emitir señales trueque_exitoso y trueque_rechazado con motivo [M] — + log DOM-ECO-TRUEQUE (convención del proyecto)
 - [ ] Implementar contadores usos_hoy y limite_diario por NPC [M]
-- [ ] Definir trueque de partida salvavidas: bienes comunes por herramienta básica [M]
+- [x] Definir trueque de partida salvavidas: bienes comunes por herramienta básica [M] — trueque_salvavidas.tres (piedra→madera); entregable sin amistad ni temporada
 - [ ] Registrar DOM-ECO-TRUEQUE en cada ejecución [S]
 - [ ] Validar que el trueque nunca intercambie ítems únicos de progreso (M22/M23) [S]
 

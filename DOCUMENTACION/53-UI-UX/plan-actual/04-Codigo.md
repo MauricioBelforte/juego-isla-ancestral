@@ -5,39 +5,37 @@
 
 ## 1. Ubicación de archivos
 
+> ⚠️ **Nota de paths (2026-08-30):** Los scripts reales están en `res://scripts/ui/`, no en `res://ui/` como se documentó originalmente.
+
 ```
-res://ui/
+res://scripts/ui/
+├── ui_root.gd                  # UIRoot (class_name): punto de montaje de capas modales M53
 ├── core/
-│   ├── ui_manager.gd               # Autoload UIManager (pila de capas, foco, pausa)
-│   ├── ui_layer.gd                 # Clase base UILayer
-│   ├── ui_layer_type.gd            # enum Type { HUD, MODAL_SIMPLE, MODAL_FULL, POPUP }
-│   ├── menu_navigator.gd           # Navegación por foco con wrap-around
-│   └── confirm_popup.gd            # Popup genérico confirmar/cancelar
+│   ├── ui_manager.gd           # Autoload UIManager (pila de capas, foco, pausa)
+│   ├── ui_layer.gd             # Clase base UILayer
+│   ├── ui_layer_type.gd        # enum Type { HUD, MODAL_SIMPLE, MODAL_FULL, POPUP }
+│   └── menu_navigator.gd       # Navegación por foco con wrap-around
 ├── hud/
-│   ├── hud_screen.gd               # HUDScreen (CanvasLayer, widgets agregados)
-│   ├── hud_screen.tscn
-│   ├── status_bar.gd               # Vitales/energía del jugador (M11)
-│   ├── clock_widget.gd             # Reloj y estación (M29/M30)
+│   ├── hud_screen.gd           # HUDScreen (CanvasLayer, widgets agregados)
+│   ├── status_bar.gd           # Vitales/energía del jugador (M11)
+│   ├── clock_widget.gd         # Reloj y estación (M29/M30)
 │   ├── season_widget.gd
-│   ├── resource_counter.gd         # Contadores de recursos (M38)
-│   ├── hotbar_widget.gd            # Hotbar sincronizada (M11)
-│   ├── interact_prompt.gd          # Prompt contextual de interacción (M70)
-│   ├── minimap_widget.gd           # Minimapa simple (datos de M54)
-│   └── action_prompt_overlay.gd    # Prompts dinámicos por dispositivo (M57)
+│   ├── resource_counter.gd     # Contadores de recursos (M38)
+│   ├── hotbar_widget.gd        # Hotbar sincronizada (M11)
+│   ├── interact_prompt.gd      # Prompt contextual de interacción (M70)
+│   └── action_prompt_overlay.gd # Prompts dinámicos por dispositivo (M57)
 ├── layers/
-│   ├── dialog_layer.gd/.tscn       # Presentación de diálogos (M21)
-│   ├── inventory_layer.gd/.tscn    # Inventario: grid, drag&drop, hotbar (M11)
-│   ├── pause_layer.gd/.tscn        # Pausa con deep-linking (M89)
-│   ├── menus_layer.gd/.tscn        # Menú principal/continuar/cargar (M89)
-│   ├── settings_layer.gd/.tscn     # Ajustes: general/controles/audio/gráfica/accesibilidad
-│   ├── tutorial_layer.gd/.tscn     # Tutoriales y tips (M92 consume)
-│   └── loading_layer.gd/.tscn      # Progreso visual de cargas (M63, AGENTS 8)
+│   ├── dialog_layer.gd         # Presentación de diálogos (M21)
+│   ├── inventory_layer.gd      # Inventario: grid, drag&drop, hotbar (M11)
+│   ├── pause_layer.gd          # Pausa con deep-linking (M89)
+│   ├── menus_layer.gd          # Menú principal/continuar/cargar (M89)
+│   └── confirm_popup.gd        # Popup genérico confirmar/cancelar
 ├── services/
-│   ├── tooltip_service.gd          # Autoload TooltipService
-│   ├── notification_service.gd     # Autoload NotificationService (toasts)
-│   └── toast_data.gd               # Recurso de datos del toast
-├── theme/
-│   ├── theme_ux.gd                 # Construye Theme en runtime desde recursos
+│   ├── tooltip_service.gd      # Autoload TooltipService
+│   └── notification_service.gd # Autoload NotificationService (toasts)
+└── theme/
+    ├── theme_service.gd        # Autoload ThemeService (tema cozy global, escala, fuentes)
+    └── theme_ux.gd             # Construye Theme en runtime desde recursos
 │   ├── theme_ux.tres               # Colores, StyleBoxFlat, constantes base
 │   ├── style_factory.gd            # Helpers de StyleBoxFlat (radius, hover, focus)
 │   └── aanim_config.gd             # Curvas y duraciones de transiciones (reduce_motion)
@@ -51,11 +49,12 @@ res://ui/
 
 ```
 [autoload]
-UIManager="*res://ui/core/ui_manager.gd"
-TooltipService="*res://ui/services/tooltip_service.gd"
-NotificationService="*res://ui/services/notification_service.gd"
+UIManager="*res://scripts/ui/core/ui_manager.gd"
+ThemeService="*res://scripts/ui/theme/theme_service.gd"
+TooltipService="*res://scripts/ui/services/tooltip_service.gd"
+NotificationService="*res://scripts/ui/services/notification_service.gd"
 ```
-Orden de carga: después de Bootstrap, EventBus y ActionLayer (M57). UIManager construye el ThemeUx y lo aplica a root en `_ready()`.
+Orden de carga: después de Bootstrap, EventBus y ActionLayer (M57). ThemeService construye el tema cozy global en `_ready()` y lo aplica al root del SceneTree. UIManager gestiona la pila de capas.
 
 ## 3. Firmas clave
 

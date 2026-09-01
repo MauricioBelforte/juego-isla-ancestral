@@ -13,14 +13,76 @@ signal dialogue_ended(dialogue_id: String, last_node_id: String)
 signal node_entered(node_id: String, speaker_key: String, text: String, tipo: int, options: Array)
 signal line_complete()
 signal option_selected(option_index: int)
+## M20 -> M21: reaccion del NPC a un regalo, por clase exacta de GiftEvaluator.Clase.
+## La UI (cuando exista) muestra expresion + texto a partir de reaccion_id.
+signal gift_reaction(npc_id: String, reaccion_id: String, clase: int, item_id: String, expresion: String)
+## M20 -> M21: el NPC subio de nivel de amistad (reaccion de dialogo opcional).
+signal level_up_reaction(npc_id: String, new_level: int)
 
 const CARPETA_DIALOGOS := "res://data/dialogues/"
+
+## M20 -> M21: mapeo de GiftEvaluator.Clase (0=AMADO, 1=GUSTA, 2=NEUTRAL, 3=DUPLICADO)
+## a una reaccion de dialogo (id + expresion + texto_key). El texto se localiza en M87.
+const REACCION_REGALO := {
+	0: {"id": "R_AMADO", "expresion": "feliz_intenso", "texto": "REACCION_REGALO_AMADO"},
+	1: {"id": "R_GUSTA", "expresion": "feliz", "texto": "REACCION_REGALO_GUSTA"},
+	2: {"id": "R_NEUTRAL", "expresion": "neutral", "texto": "REACCION_REGALO_NEUTRAL"},
+	3: {"id": "R_DUPLICADO", "expresion": "neutral", "texto": "REACCION_REGALO_DUPLICADO"},
+}
+
+## M20 -> M21 (L82): ids de los grafos de dialogo breve de evento disparados por
+## gift_reaction / level_up_reaction. Los grafos viven en data/dialogues/.
+const REACCION_REGALO_DIALOGO := "reaccion_regalo"
+const REACCION_NIVEL_DIALOGO := "reaccion_nivel"
+
+## M20 -> M21: ultima reaccion de regalo por NPC (contexto para diálogos
+## subsiguientes). Clave = npc_id. Valor = {id, expresion, texto, item_id}.
+var _ultima_reaccion_regalo: Dictionary = {}
+
+func _ready() -> void:
+	var bus: Node = get_node_or_null("/root/EventBus")
+	if bus != null and bus.npc != null:
+		if bus.npc.has_signal("gift_given") and not bus.npc.gift_given.is_connected(_on_gift_given):
+			bus.npc.gift_given.connect(_on_gift_given)
+		if bus.npc.has_signal("friendship_level_up") and not bus.npc.friendship_level_up.is_connected(_on_level_up):
+			bus.npc.friendship_level_up.connect(_on_level_up)
+
+## M20 -> M21: traduce la clase exacta del regalo a una reaccion de dialogo
+## (id + expresion + texto_key) y la emite para que la UI la muestre.
+func _on_gift_given(npc_id: String, item_id: String, clase: int) -> void:
+	if not REACCION_REGALO.has(clase):
+		return
+	var r: Dictionary = REACCION_REGALO[clase]
+	_ultima_reaccion_regalo[npc_id] = {
+		"id": r["id"], "expresion": r["expresion"], "texto": r["texto"], "item_id": item_id,
+	}
+	gift_reaction.emit(npc_id, r["id"], clase, item_id, r["expresion"])
+	# L82: escena breve de evento con dialogo (M21). Solo si no hay otro dialogo activo.
+	if not is_dialogue_active():
+		start_dialogue(REACCION_REGALO_DIALOGO,
+			{"npc_id": npc_id, "reaccion_id": r["id"], "item_id": item_id})
+
+## M20 -> M21: el NPC subio de nivel de amistad; la UI puede reaccionar.
+func _on_level_up(npc_id: String, new_level: int) -> void:
+	level_up_reaction.emit(npc_id, new_level)
+	# L82: escena breve de evento con dialogo (M21). Solo si no hay otro dialogo activo.
+	if not is_dialogue_active():
+		start_dialogue(REACCION_NIVEL_DIALOGO, {"npc_id": npc_id, "new_level": new_level})
+
+## M20 -> M21: consulta la ultima reaccion de regalo de un NPC (o {} si no hay).
+func get_ultima_reaccion_regalo(npc_id: String) -> Dictionary:
+	return _ultima_reaccion_regalo.get(npc_id, {})
 
 var _grafo_actual: DialogueGraph = null
 var _nodo_actual: DialogueNode = null
 var _dialogue_id: String = ""
 var _session_vars: Dictionary = {}
 var _grafos_cache: Dictionary = {}
+
+## M21 (iter 7): cache del script DialogGraphValidator para validacion estatica en
+## start_dialogue. Sin anotacion de tipo (class_name de otro script no compila en
+## headless, ver 07-GUIA-GODOT.md §9.50); se resuelve con load() en runtime.
+var _validador_script = null
 
 func is_dialogue_active() -> bool:
 	return _nodo_actual != null
@@ -36,6 +98,15 @@ func start_dialogue(dialogue_id: String, context: Dictionary = {}) -> bool:
 	if not problemas.is_empty():
 		for prob in problemas:
 			push_error("[VAL-DGT] " + str(prob))
+		return false
+	# M21 (iter 8 / Hy3 WorkBuddy): validacion estatica complementaria (nodos huerfanos,
+	# operadores de condicion y claves de mundo). Ahora SI se chequean claves desconocidas
+	# usando la allowlist canonica del validador (incluye "clima"), para detectar typos como
+	# "climaX" en runtime y no solo en CI. Esto cierra el [?] F.11 de condiciones de clima.
+	var vprob: Array = _obtener_validador_script().validar(grafo, _obtener_validador_script().CLAVES_MUNDO_BASE)
+	if not vprob.is_empty():
+		for p in vprob:
+			push_error("[VAL-DGV] " + str(p))
 		return false
 	_dialogue_id = dialogue_id
 	_grafo_actual = grafo
@@ -89,7 +160,9 @@ func get_current_text_key() -> String:
 ## Si el texto es una clave de localización (M87), se traduce con
 ## Localization.traducir_clave; los placeholders {clave} se resuelven después.
 func resolve_text(texto: String, placeholders: Dictionary) -> String:
-	var loc = get_node_or_null("/root/Localization")
+	var loc = null
+	if is_inside_tree():
+		loc = get_node_or_null("/root/Localization")
 	if loc != null and loc.has_method("traducir_clave") and _es_clave_localizacion(texto):
 		var n := int(placeholders.get("n", -1)) if placeholders.has("n") else -1
 		texto = loc.traducir_clave(texto, {}, n)
@@ -176,3 +249,29 @@ func _combinar_estado(nodo: DialogueNode = null) -> Dictionary:
 
 func avance_evento() -> void:
 	advance()
+
+## M21 (iter 7): cachea y devuelve el script DialogGraphValidator (load en runtime,
+## evita dependencia de parse-time / §9.50).
+func _obtener_validador_script():
+	if _validador_script == null:
+		_validador_script = load("res://scripts/dialogos/dialog_graph_validator.gd")
+	return _validador_script
+
+## M21 (iter 7): salto rapido (fast-skip). Avanza automaticamente por nodos de LINEA
+## y EVENTO aplicando sus efectos, hasta detenerse en un nodo de OPCIONES (el jugador
+## debe elegir) o llegar a un FIN (termina el dialogo). NO salta decisiones: se queda
+## en la primera bifurcacion para que el jugador elija. Usado por la UI (KEY_ESCAPE).
+func skip_all() -> void:
+	if not is_dialogue_active() or _nodo_actual == null:
+		return
+	var guard := 0
+	while is_dialogue_active() and _nodo_actual != null and guard < 9999:
+		guard += 1
+		if _nodo_actual.tipo == DialogueNode.TIPO_OPCIONES:
+			return  # se detiene en la eleccion: el jugador elige
+		if _nodo_actual.tipo == DialogueNode.TIPO_FIN:
+			stop_dialogue()
+			return
+		advance()  # LINEA o EVENTO: avanzar (los efectos ya se aplicaron al entrar)
+	if is_dialogue_active():
+		stop_dialogue()  # salvaguarda ante grafos ciclicos sin FIN

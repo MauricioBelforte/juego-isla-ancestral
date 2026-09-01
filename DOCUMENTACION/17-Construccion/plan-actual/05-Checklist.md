@@ -1,5 +1,19 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** qwen/qwen3.8-max:free
+**Plataforma:** Kilo Code
+
+## Reserva actual
+
+| Campo | Valor |
+|---|---|
+| Módulo | M17 Construcción (iter. 1) |
+| Estado | 🔵 En curso |
+| Agente | qwen/qwen3.8-max:free (Kilo Code) |
+| Fase | F5 (base de producción) |
+| Visión | V0 |
+| Entrada | M08✅ M14🟢 — sistema de construcción voxel complejo |
+| Salida | BuildingService autoload + catálogos data-driven + integración terreno M08 + inventario M14 + economía M38 + persistencia M59 + tests headless |
+| Archivos afectados | `game/isla-ancestral/scripts/construccion/` (a crear), `tests/test_construccion.gd` (a crear) |
+| Fecha reserva | 2026-09-01 00:15 |
 
 # 05-Checklist.md — Módulo 17: Construcción
 

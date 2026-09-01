@@ -1,7 +1,7 @@
-**Modelo:** **[COMPLETAR]**
-**Plataforma:** **[COMPLETAR]**
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo <ID>: <Nombre de la Isla> [MAQUETA]
+# 05-Checklist.md — Módulo 168: Plantilla de Isla [MAQUETA]
 
 > ⚠️ **TEMPLATE.** Copia a `<ID>-Isla-<Nombre>` y marca según tu isla. Debe tener NO MENOS de 100 ítems.
 > Este listado base debe completarse con los ítems específicos de tu isla.
@@ -82,3 +82,64 @@
 ## NOTA
 Agrega aquí los ítems específicos de TU isla hasta superar 100. Usa el checklist de
 `167-Isla-Raiz` como ejemplo completo (tiene 104 ítems).
+
+## J. Documentación de la isla
+- [ ] Crear carpeta `DOCUMENTACION/<ID>-Isla-<Nombre>/` [S]
+- [ ] Crear `plan-inicial/` con los 5 archivos obligatorios [M]
+- [ ] Crear `plan-actual/` (copia de plan-inicial al inicio) [S]
+- [ ] Documentar nombre de la isla y su propósito [S]
+- [ ] Documentar bioma/temática de la isla [S]
+- [ ] Documentar tamaño aproximado (radio) [S]
+- [ ] Documentar dificultad de navegación [S]
+- [ ] Documentar objetos/NPCs exclusivos de la isla [M]
+- [ ] Documentar misiones o eventsos de la isla [M]
+- [ ] Documentar conexiones con otras islas [S]
+
+## K. Configuración visual
+- [ ] Documentar paleta de colores (pasto, arena, agua, roca) [M]
+- [ ] Documentar tipo de terreno (planicie, colinas, montañas) [M]
+- [ ] Documentar altura máxima del terreno [S]
+- [ ] Documentar presencia de agua (ríos, lagos, costa) [M]
+- [ ] Documentar vegetación (árboles, arbustos, flores) [M]
+- [ ] Documentar iluminación (hora del día, niebla, clima) [M]
+
+## L. Integración con el mundo
+- [ ] Verificar que la isla no superpone con otra [M]
+- [ ] Verificar que el spawn del jugador está sobre terreno [M]
+- [ ] Verificar que la cámara funciona en la isla [M]
+- [ ] Verificar que los NPCs están posicionados correctamente [M]
+- [ ] Verificar que el agua es visible y navegable [M]
+- [ ] Verificar que no hay huecos en el terreno [M]
+
+## M. Testing de la isla
+- [ ] Compilar el proyecto sin errores [S]
+- [ ] Ejecutar el juego y verificar FPS >30 [S]
+- [ ] Caminar por toda la isla sin caer al mar [M]
+- [ ] Verificar que todos los NPCs son visibles [M]
+- [ ] Verificar que la cámara no se atora [M]
+- [ ] Verificar que el inventario funciona en la isla [M]
+- [ ] Verificar que el día/noche funciona [M]
+
+## N. Optimización
+- [ ] Verificar que la isla no tiene más de 10k bloques visibles [M]
+- [ ] Verificar que el LOD funciona (si está implementado) [M]
+- [ ] Verificar que la memoria no supera 512 MB [M]
+- [ ] Verificar que no hay chunks vacíos visibles [M]
+- [ ] Documentar rendimiento (FPS promedio, memoria) [M]
+
+## O. Checklist de creación (pasos para nueva isla)
+- [ ] Elegir ID libre en CHECKLIST-GLOBAL.md [S]
+- [ ] Copiar esta plantilla a `DOCUMENTACION/<ID>-Isla-<Nombre>/` [S]
+- [ ] Renombrar todos los `<ID>` y `<Nombre>` en los archivos [S]
+- [ ] Elegir radio de la isla (recomendado: 256 para isla chica) [S]
+- [ ] Elegir world_seed para el generador [S]
+- [ ] Configurar perfil en capas (ver M167 como referencia) [M]
+- [ ] Elegir paleta de colores (pasto, agua, roca, arena) [M]
+- [ ] Definir spawn del jugador (centro de la isla) [S]
+- [ ] Definir ubicaciones de NPCs/objetos [M]
+- [ ] Registrar la isla en CHECKLIST-GLOBAL.md [S]
+- [ ] Registrar en DOCUMENTACION/README.md [S]
+- [ ] Verificar que compila sin errores [S]
+- [ ] Verificar que el jugador aparece sobre terreno [S]
+- [ ] Verificar que la cámara funciona [S]
+- [ ] Documentar lecciones aprendidas en plan-actual [M]

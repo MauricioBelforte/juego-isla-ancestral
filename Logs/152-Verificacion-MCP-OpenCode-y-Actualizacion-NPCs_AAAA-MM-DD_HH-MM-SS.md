@@ -1,6 +1,7 @@
-# Log 152: Verificación MCP OpenCode + Actualización NPCs a 35
+﻿# Log 152: Verificación MCP OpenCode + Actualización NPCs a 35
 
 **Fecha:** 2026-08-24
+**Hora:** 21:25
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 

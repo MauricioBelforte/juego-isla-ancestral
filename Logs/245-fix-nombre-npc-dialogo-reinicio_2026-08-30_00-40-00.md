@@ -1,6 +1,7 @@
-# Log 245: Fix nombre del NPC (grande) + diálogo reiniciable
+﻿# Log 245: Fix nombre del NPC (grande) + diálogo reiniciable
 
 **Fecha:** 2026-08-30
+**Hora:** 00:40
 **Modelo:** Hy3
 **Plataforma:** Kilo
 

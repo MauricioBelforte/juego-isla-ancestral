@@ -6,6 +6,8 @@
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (después de M29).
 
+> **Reserva actual:** 🔵 **glm-5.3 / Cline** · 2026-08-31 23:00 · **Iteración 2** — hover/desplegable D70 (TooltipService), suite bloque E (`caso_reloj_tests.gd` + `caso_reloj.tscn`), config `data/ui/w_reloj.tres` (F100/F107/F101), scan anti-reloj-SO (C56/E89/E90). Archivos: `scripts/clock/{w_reloj,w_reloj_config,caso_reloj_tests,preview_reloj}.gd`, `data/ui/w_reloj.tres`, `scenes/caso_reloj.tscn`.
+
 ## A. Requisitos del módulo (12)
 
 - [ ] Definir el problema: mostrar el tiempo del mundo al jugador [S]

@@ -104,3 +104,29 @@ func _on_captura_fallida(motivo: String) -> void
 - **Persistencia (AGENTS seccion 18):** sin logs dentro de `Assets/`; si se requiere telemetria de pesca (especies capturadas por sesion), se escribe fuera del proyecto con rotacion `NN-pesca-YYYY-MM-DD.log` en `logs/rotated/`.
 - **Debug builds:** los logs se compilan solo con `#if TOOLS` o canal de debug para no penalizar release.
 - **Telemetria de balance:** cada captura registra (especie, tamano, estacion, franja, clima, cebo, cana) para ajustar pesos sin afectar determinismo (tabla en `07-Resultados-Testings.md` si se ejecuta plan de testings).
+
+---
+
+## Notas del Agente — Iteración bonos clima M32→M34 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31 23:40:00
+**Estado:** Parcial (bonos de clima implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- Bono de clima en `resolver_especie` (checklist P5/"clima M32" del núcleo): el cálculo de peso se extrajo a `_peso_efectivo(pez, cebo)` (testeable, sin roll) y añade el factor clima consultando `/root/Weather.get_clima()` (M32).
+- Reglas (diseño M32 §6 / "bono sí, bloqueo no"): LLUVIA → peso ×1.15 y TROPICAL → ×1.25 para peces que (a) declaran preferencia en el JSON `"clima"` (campo cargado por el núcleo pero SIN USAR hasta hoy) o (b) son raros (`peso_rareza <= UMBRAL_RARO = 0.08`). El clima NUNCA filtra especies (§6 "nunca prohibida") y el peso efectivo nunca es 0.
+- Conversión `_clima_m32_a_m34()`: el enum de M32 (0-8) al formato numérico del JSON de Deepseek (0=despejado, 1=lluvia, 2=tormenta, 3=nieve) que usa `FishDefinition.climas`. Neutro (-1) si Weather no existe (headless/menú).
+- Test `scripts/fishing/test_fishing_clima.gd`: conversión de enums, bono por preferencia (soleado base/lluvia ×1.15), bono por rareza (lluvia/tropical), preferente-de-lluvia NO raro bajo tropical queda en base (según diseño), "nunca prohibida" (catálogo completo con peso > 0 en 5 climas + resolver nunca null) → **0 fallos**.
+- Regresiones: test_fishing.gd (núcleo Deepseek) **0 fallos**, test_clima.gd (M32) **0 fallos**.
+- Checklist: 4 ítems marcados (dependencias M32, P5 clima, FishDefinition arrays, clima-actual-M32).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- "tropical" no está mapeado en `_clima_numero` de Deepseek (cae en 0=despejado): si el JSON llega a tener peces con "clima": ["tropical"], conviene agregar el caso → M34 valor 4 y su bono. No lo toqué (función del núcleo ajeno; hoy no hay datos que lo usen).
+- Peces estacionales: todos los del JSON actual filtran por temporada, así que el test "nunca prohibida" valida pesos por clima (determinista), no aparición estadística (evita flakiness).
+- Voxels M51, flotador físico + UI minijuego M53, museo M37, cebos M93: con dueño.
+
+### Recomendaciones para el próximo agente
+- M53 (flotador/UI): la intensidad de lluvia (M32 `get_intensidad()`) puede modular VFX de picada.
+- Si se agregan peces "tropical" al JSON, extender `_clima_numero` y el bono en `_peso_efectivo` (caso clima 4).

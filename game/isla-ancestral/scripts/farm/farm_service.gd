@@ -32,6 +32,34 @@ func _ready() -> void:
 	_cargar_definiciones()
 	_registrar_proveedor_guardado()
 	_suscribir_tiempo()
+	_suscribir_clima()
+
+## ── Clima (M32, glm-5.3-flash 2026-08-31) ────────────────
+
+## Puente M32→M33: cuando el clima del día es de precipitación, la lluvia
+## riega los cultivos expuestos (checklist G: "lluvia rellena cultivos
+## expuestos sin techo"). Consumidores escuchan señales (03-Diseno M32 §6),
+## nunca consultan internals del WeatherService.
+##  - LLUVIA/TORMENTA/TROPICAL → apply_rain() al cambiar el clima del día.
+##  - Regla cozy G: la lluvia no excede el máximo de agua (ver _on_clima_cambio).
+##  - "Expuesto sin techo": hook _tile_expuesto() — mientras no exista techo
+##    (M17/M18), todo tile está expuesto; el hook centraliza el chequeo.
+func _suscribir_clima() -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null or not bus.weather.has_signal("clima_cambio"):
+		push_warning("[M33] EventBus.weather no disponible; riego por lluvia desactivado")
+		return
+	bus.weather.clima_cambio.connect(_on_clima_cambio)
+
+func _on_clima_cambio(clima: int) -> void:
+	# 2=LLUVIA, 3=TORMENTA, 7=TROPICAL (WeatherService.Clima)
+	if clima == 2 or clima == 3 or clima == 7:
+		apply_rain()
+
+## Un tile está "expuesto a la lluvia" si no tiene techo encima.
+## Hook único: M17/M18 (construcción/casas) marcarán cobertura aquí.
+func _tile_expuesto(_voxel_pos: Vector3i) -> bool:
+	return true
 
 ## ── Catálogo (M93 farming.json) ──────────────────────────
 
@@ -155,12 +183,17 @@ func water(voxel_pos: Vector3i) -> void:
 	_visual_fx(voxel_pos, "water")
 
 ## Lluvia (M32): rellena agua de todos los cultivos expuestos.
+## Regla cozy (checklist G): nunca excede el máximo (agua máx 2), no toca
+## cultivos listos (ya no consumen agua) y no emite señal redundante si el
+## nivel ya está al máximo (idempotente por tile).
 func apply_rain() -> void:
 	for voxel_pos in _tiles:
 		var tile: CropTile = _tiles[voxel_pos]
-		if tile != null and not tile.is_ready():
-			tile.water_level = 2
-			tile_watered.emit(voxel_pos, tile.water_level)
+		if tile != null and not tile.is_ready() and _tile_expuesto(voxel_pos):
+			var nuevo := mini(tile.water_level + 2, 2)
+			if nuevo != tile.water_level:
+				tile.water_level = nuevo
+				tile_watered.emit(voxel_pos, tile.water_level)
 
 func can_harvest(voxel_pos: Vector3i) -> bool:
 	var tile: CropTile = _tiles.get(voxel_pos, null)

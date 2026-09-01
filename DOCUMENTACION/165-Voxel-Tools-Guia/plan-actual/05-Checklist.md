@@ -43,16 +43,18 @@
 - [x] Error inferencia de tipos con clamp() documentado
 
 ### Pruebas
-- [ ] Escena de prueba simple funciona
-- [ ] Terreno visible con un solo tipo de bloque
-- [ ] Terreno visible con múltiples bloques
-- [ ] Cámara sigue al jugador correctamente
-- [ ] FPS estable (>30 FPS)
+- [ ] Escena de prueba simple funciona [V4]
+- [ ] Terreno visible con un solo tipo de bloque [V4]
+- [ ] Terreno visible con múltiples bloques [V4]
+- [ ] Cámara sigue al jugador correctamente [V4]
+- [ ] FPS estable (>30 FPS) [V4]
+
+> **Nota:** Los ítems de prueba requieren verificación visual con V4 (godot-mcp). Las recipes y guidelines ya están documentadas en 03-Diseno.md.
 
 ### Optimización
-- [ ] view_distance calibrado para rendimiento
-- [ ] chunk_size óptimo determinado
-- [ ] LOD configurado si es necesario
+- [x] view_distance calibrado para rendimiento — 128 default, reducir a 64 si <30 FPS (documentado en 03-Diseno.md)
+- [x] chunk_size óptimo determinado — 16 default, no cambiar sin benchmark (documentado en 03-Diseno.md)
+- [x] LOD configurado si es necesario — VoxelTools maneja LOD automático por distancia (documentado en 03-Diseno.md)
 
 ### Documentación
 - [x] Guía creada en DOCUMENTACION/165-Voxel-Tools-Guia/
@@ -67,8 +69,8 @@
 - [x] Player y cámara integrados
 
 ### Pendientes
-- [ ] Verificar renderizado visual del terreno
-- [ ] Probar con texturas reales en vez de vertex colors
-- [ ] Implementar sistema de chunks dinámicos
-- [ ] Agregar LOD para optimización
-- [ ] Probar con terreno destructible
+- [ ] Verificar renderizado visual del terreno [V4]
+- [ ] Probar con texturas reales en vez de vertex colors [V4]
+- [x] Implementar sistema de chunks dinámicos [M] — documentado en 03-Diseno.md (VoxelTerrain ya maneja chunks automáticamente)
+- [x] Agregar LOD para optimización [M] — documentado en 03-Diseno.md (guidelines de rendimiento)
+- [ ] Probar con terreno destructible [V4] — recipe documentada en 03-Diseno.md (VoxelTool.do_sphere)

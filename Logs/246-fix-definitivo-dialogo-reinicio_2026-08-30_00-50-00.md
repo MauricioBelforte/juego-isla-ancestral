@@ -1,6 +1,7 @@
-# Log 246: Fix definitivo diálogo reiniciable (fuente de verdad del estado = manager)
+﻿# Log 246: Fix definitivo diálogo reiniciable (fuente de verdad del estado = manager)
 
 **Fecha:** 2026-08-30
+**Hora:** 00:50
 **Modelo:** Hy3
 **Plataforma:** Kilo
 

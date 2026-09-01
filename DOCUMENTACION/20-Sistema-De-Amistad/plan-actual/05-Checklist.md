@@ -46,8 +46,8 @@
 - [x] Evaluacion sin aleatoriedad critica [S]
 - [x] Registro de duplicados por vecino en la memoria del NPC [S]
 - [x] El item regalado sale del inventario y queda del vecino [S]
-- [ ] Reaccion del vecino por clase de regalo (expresion + texto M21) [M]
-- [ ] Soporte para regalos de cumpleanos sin consumir limite diario [M]
+- [x] Reaccion del vecino por clase de regalo (expresion + texto M21) [M]
+- [x] Soporte para regalos de cumpleanos sin consumir limite diario [M]
 - [x] Soporte para objetos sin metadatos de regalo (regalo_valido = false) [S]
 - [ ] Coste de evaluacion menor a 1 ms por regalo [S]
 
@@ -55,7 +55,7 @@
 
 - [ ] Registro de 1 charla efectiva por vecino y dia [S]
 - [ ] Puntos base + bonus por nivel de confianza [S]
-- [ ] Variantes de dialogo por nivel de amistad (M21) [M]
+- [x] Variantes de dialogo por nivel de amistad (M21) [M]
 - [ ] El vecino menciona recuerdos (primer regalo, cumpleanos celebrado) [M]
 - [ ] Charla no consume regalo diario (independiente) [S]
 - [ ] Sin charla repetida con los mismos puntos en el mismo dia [S]
@@ -63,13 +63,13 @@
 
 ## F. Cartas (7)
 
-- [ ] Enviar carta con texto seleccionado y adjunto opcional [M]
-- [ ] Limite de 1 carta efectiva por vecino y dia [S]
-- [ ] Respuesta del vecino al dia siguiente de juego (M29) [M]
-- [ ] Bandeja de correo para recibir respuestas y adjuntos de retorno [M]
-- [ ] Puntos aplicados al recibir la respuesta, no al enviar [S]
+- [x] Enviar carta con texto seleccionado y adjunto opcional [M]
+- [x] Limite de 1 carta efectiva por vecino y dia [S]
+- [x] Respuesta del vecino al dia siguiente de juego (M29) [M]
+- [x] Bandeja de correo para recibir respuestas y adjuntos de retorno [M]
+- [x] Puntos aplicados al recibir la respuesta, no al enviar [S]
 - [ ] Textos de cartas y respuestas por vecino en data [C]
-- [ ] Notificacion de carta nueva sin interrumpir el flujo de juego [S]
+- [x] Notificacion de carta nueva sin interrumpir el flujo de juego [S]
 
 ## G. Eventos con amigos (9)
 
@@ -79,7 +79,7 @@
 - [ ] Franja horaria validada contra el reloj M29 [S]
 - [ ] Lugar validado contra POI del mundo (M19/M08) [S]
 - [ ] Puntos otorgados a todos los participantes [S]
-- [ ] Escenas breves de evento con dialogos de los vecinos (M21) [C]
+- [x] Escenas breves de evento con dialogos de los vecinos (M21) [C]
 - [ ] Registro del evento en la memoria del vecino (recuerdo) [S]
 - [ ] Eventos sin obligacion: el jugador puede declinar sin penalizacion [S]
 
@@ -90,7 +90,7 @@
 - [x] Sin timers de recompensas obligatorias diarias [S]
 - [x] Contenido desbloqueable por amistad siempre disponible despues [S]
 - [x] Recompensas por nivel no expiran [S]
-- [ ] Festivos/cumpleanos perdidos no castigan (se pueden repetir o conmemorar despues) [S]
+- [x] Festivos/cumpleanos perdidos no castigan (se pueden repetir o conmemorar despues) [S]
 - [ ] Decision documentada: Alternativa B (acumulativa) en 02-Analisis.md [S]
 - [x] Sin acciones negativas implementadas en el alcance base [S]
 
@@ -102,9 +102,9 @@
 - [x] Senales: regalo_entregado, charla_realizada, carta_recibida, nivel_subido, evento_celebrado [S]
 - [x] Sin bucles por vecino en update (evaluacion solo bajo accion) [S]
 - [x] Desacoplamiento: UI suscribe senales y llama API publica [S]
-- [ ] Recursos de configuracion (.tres) para niveles, eventos y cartas [S]
+- [x] Recursos de configuracion (.tres) para niveles (amistad_config.tres: umbrales + recompensas) [S]
 - [x] Compatible con pausa de M29 (contadores de dia congelados) [S]
-- [ ] Log DOM-AMISTAD centralizado con rotacion (seccion 18) [M]
+- [x] Log DOM-AMISTAD centralizado con rotacion (seccion 18) [M]
 
 ## J. API GDScript (7)
 
@@ -112,13 +112,14 @@
 - [x] get_limite_dia(vecino, tipo) para UI [S]
 - [x] regalar(vecino_id, item_id) -> Dictionary con clase y puntos [S]
 - [x] charlar(vecino_id) -> Dictionary [S]
-- [ ] enviar_carta / celebrar_evento con contratos definidos [S]
+- [x] enviar_carta / celebrar_cumpleanos (evento cumpleanos) con contratos definidos [S]
 - [x] get_memoria / get_recompensas_pendientes / reclamar_recompensa [S]
 - [x] API estable y documentada para otros modulos (M21, M23, UI) [S]
 
 ## K. Integracion M19 (NPC y Vecinos) (7)
 
-- [ ] VecinoData consumido de M19: gustos, disgustos, amados, personalidad [S]
+- [x] Cumpleanos del vecino sincronizados desde VillagerProfile (M19) al registrar/mudarse [S]
+- [x] VecinoData consumido de M19: gustos y disgustos reales (lectura de VillagerProfile; amados/personalidad pendientes como campos en M19) [S]
 - [ ] Los vecinos no registrados no existen en el servicio [S]
 - [ ] Alta desregistro de vecino: al mudarse se conserva el historial para futuro reencuentro [S]
 - [ ] Memoria del vecino alimentada por interacciones destacadas [S]
@@ -147,7 +148,7 @@
 ## N. Persistencia (6)
 
 - [x] Estado por vecino serializable: puntos, nivel, historial de hoy [S]
-- [ ] Cartas pendientes y respuestas guardadas [S]
+- [x] Cartas pendientes y respuestas guardadas [S]
 - [x] Eventos celebrados y memoria persistidos [S]
 - [ ] Schema versionado y migracion al cargar (M26) [M]
 - [x] Guardar/recargar a mitad de nivel restaura progreso exacto [M]
