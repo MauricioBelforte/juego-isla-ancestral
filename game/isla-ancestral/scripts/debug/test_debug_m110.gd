@@ -59,12 +59,18 @@ func _test_comandos() -> void:
 	_check("contador = 5 (inexistente no cuenta)", dm.comandos_ejecutados() == 5, "count=%d" % dm.comandos_ejecutados())
 
 func _test_metricas() -> void:
-	print("--- Métricas de sistema ---")
+	print("--- Métricas de sistema ampliadas ---")
 	var dm := root.get_node_or_null("DebugMenu")
 	var m = dm.metricas_sistema()
 	_check("fps > 0", m.get("fps", 0) > 0, "fps=%s" % str(m.get("fps", 0)))
 	_check("objetos >= 0", m.get("objetos", -1) >= 0)
 	_check("memoria definida", m.has("memoria_mb"))
+	_check("nodos definidos", m.has("nodos"))
+	_check("marcadores explorados definido", m.has("marcadores_explorados"))
+	_check("pestanas_ids = 3", dm.pestanas_ids().size() == 3, "size=%d" % dm.pestanas_ids().size())
+	var jugador = dm.comandos_por_pestana("jugador")
+	_check("pestana jugador tiene 5 comandos", jugador.size() == 5, "size=%d" % jugador.size())
+	_check("pestana inexistente vacía", dm.comandos_por_pestana("no_existe").is_empty())
 
 func _summary() -> void:
 	print("=== Resumen M110: %d checks, %d fallos ===" % [_checks, _fallos])

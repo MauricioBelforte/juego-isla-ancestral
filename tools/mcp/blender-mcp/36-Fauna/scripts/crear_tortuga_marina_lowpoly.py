@@ -1,26 +1,21 @@
 # crear_tortuga_marina_lowpoly.py - Tortuga marina (M36 Fauna, checklist linea 110)
 #
-# v3 (2026-09-02, pedido del usuario: "mejorarla al maximo posible"):
-#   - ALETAS DELANTERAS: fuera cajas -> bmesh tipo REMO (6 anillos
-#     loftados): base angosta escondida bajo el caparazon, se ENSANCHA
-#     hacia la punta (perfil de aleta real) y afina en el borde. Pose
-#     de nado a 40 grados. Isla cerrada -> recalc + volumen firmado
-#     (E-32 v2) garantiza normales hacia afuera.
-#   - ALETAS TRASERAS: cono achatado (scale local Y = Z mundo) orientado
-#     con to_track_quat (E-58/E-69), raiz DENTRO del plastron (oculta),
-#     timon a 140 grados con leve ensanche en la punta (paddle).
-#   - CABEZA: esfera escalada (organica, no caja) de 16x8 + PICO de
-#     queratina (cono ancho, chato e inclinado 12 grados hacia abajo) —
-#     el rasgo que mas identifica a la tortuga marina + ojos laterales.
-#   - CAPARAZON: 9 ESCUDOS realzados (fila central de 3 + 4 laterales
-#     + 2 traseros) construidos por PROYECCION sobre la elipsoide del
-#     domo: cada esquina de cada escudo calcula su z sobre la superficie
-#     real +2 cm de relieve -> el pad SIGUE la curvatura, nada flota.
-#     Anillo marginal de 16 segmentos. Falda oscura 16 lados (borde de
-#     escudos) + domo oliva 20x10 = contraste clasico del caparazon.
-#   - CUELLO: cono que se afina hacia la cabeza (antes cilindro).
-#   - Paleta a 6 materiales (caparazon/escudos/piel/plastron/ojos/pico).
+# v4 (2026-09-02, mix pedido por el usuario entre v2 y v3):
+#   - CABEZA: queda la esfera organica de la v3 pero SIN el pico de
+#     queratina (al usuario no le gustaba la trompa): redonda, solo con
+#     2 ojos algo mas grandes y adelantados para que no quede sosa.
+#   - ALETAS DELANTERAS: se MANTIENEN los remos bmesh de la v3 (los que
+#     le gustaron: perfil loftado, se ensancha a pala y afina en punta).
+#   - ALETAS TRASERAS: DISENO NUEVO (rechazo de caja v2 y cono v3):
+#     remo COMPACTO de 4 anillos con seccion ELIPTICA (ancho en Y,
+#     achatado en Z) -> pala plana de bordes redondeados, tipo aleta
+#     trasera real: mas corta y ancha que la delantera. Mismo lenguaje
+#     formal que las delanteras (coherencia), distinta proporcion.
+#   - COLA: cono corto apuntando a -X (la de la v2, la que gusto).
+#   - Resto del caparazon v3 intacto (falda 16 + domo + anillo marginal
+#     + 9 escudos proyectados sobre la curvatura).
 #
+# v3: remos delanteros, escudos proyectados, pico (eliminado en v4).
 # v2: fix E-50 (esfera colgaba bajo el plastron) + E-19 (cola al reves).
 # v1: primera version.
 #
@@ -29,13 +24,13 @@
 # nace ENTERRADO en el plastron (polo sur z=0.055 dentro de la losa
 # 0.045..0.105) -> jamas define el asentado.
 #
-# E-70 (contar ANTES de generar): 15 SM_ <= 16 tope ALTA. Margen 1.
+# E-70 (contar ANTES de generar): 14 SM_ <= 16 tope ALTA. Margen 2.
 #   1 plastron + 1 falda + 1 domo + 1 anillo + 1 escudos(9 pads en 1
-#   malla) + 1 cuello + 1 cabeza + 1 pico + 2 ojos + 2 aletas_d + 2
-#   aletas_t + 1 cola = 15.
+#   malla) + 1 cuello + 1 cabeza + 2 ojos + 2 aletas_d + 2 aletas_t
+#   + 1 cola = 14 (v4: sin pico).
 #
 # Presupuesto M166 ALTA: <=16 obj / <=6000 tris / <=12 mats.
-#   15 obj · ~1300 tris reales · 6 mats usados -> OK (medido 2026-09-02).
+#   14 obj · ~1100 tris reales · 5 mats usados -> OK (medido 2026-09-02).
 #
 # E-68: caja() NO multiplica por 2 (dimension final, no semieje).
 # E-19: rot Y +90 lleva +Z(local) a +X(mundo); rot Y -90 lo lleva a -X.
@@ -60,13 +55,12 @@ from plantilla_asset import (limpiar, mat, arena, iluminar, asentar, camara,
 
 escena = limpiar()
 
-# ---------------- Paleta (6 mats) ----------------
+# ---------------- Paleta (5 mats) ----------------
 MAT_caparazon = mat('MAT_Tortuga_Caparazon', (0.46, 0.42, 0.26), rough=0.90)   # oliva
 MAT_escudos = mat('MAT_Tortuga_Escudos', (0.32, 0.25, 0.13), rough=0.88)      # marron calido
 MAT_piel = mat('MAT_Tortuga_Piel', (0.56, 0.53, 0.35), rough=0.95)           # piel oliva-crema
 MAT_plastron = mat('MAT_Tortuga_Plastron', (0.86, 0.80, 0.62), rough=0.95)    # crema
 MAT_ojos = mat('MAT_Tortuga_Ojos', (0.05, 0.04, 0.03), rough=0.35, spec=0.50) # humedo
-MAT_pico = mat('MAT_Tortuga_Pico', (0.80, 0.72, 0.54), rough=0.60)            # queratina
 
 
 def caja_rot(nombre, x, y, z, sx, sy, sz, material, rot=(0, 0, 0)):
@@ -200,7 +194,10 @@ cuello.name = 'SM_Tortuga_Cuello'
 cuello.rotation_euler = (0.0, radians(-90), 0.0)
 cuello.data.materials.append(MAT_piel)
 
-# ===================== 7) CABEZA (esfera organica) + PICO =====================
+# ===================== 7) CABEZA (esfera organica, SIN pico) =====================
+# v4: el usuario pidio cabeza redonda sin la trompa de la v3. Esfera
+# escalada con 2 ojos algo mas grandes y ADELANTE (x 0.60) para que la
+# cara no quede sosa sin el pico.
 bpy.ops.mesh.primitive_uv_sphere_add(
     segments=16, ring_count=8, radius=0.105,
     location=(0.545, 0.0, 0.165))
@@ -209,22 +206,9 @@ cabeza.name = 'SM_Tortuga_Cabeza'
 cabeza.scale = (1.05, 1.00, 0.92)
 cabeza.data.materials.append(MAT_piel)
 
-# Pico de queratina: cono ancho y CHATO. Rot Y -90 apunta la punta a +X;
-# el scale X 0.55 se aplica en frame LOCAL (antes de rotar) -> aplasta el
-# anillo base en la direccion que tras la rotacion queda VERTICAL en mundo
-# -> pico eliptico ancho (Y) y bajo (Z), como el pico de tortuga real.
-bpy.ops.mesh.primitive_cone_add(
-    vertices=10, radius1=0.070, radius2=0.0, depth=0.11,
-    location=(0.665, 0.0, 0.140))
-pico = bpy.context.object
-pico.name = 'SM_Tortuga_Pico'
-pico.rotation_euler = (0.0, radians(-90), 0.0)
-pico.scale = (0.55, 1.0, 1.0)
-pico.data.materials.append(MAT_pico)
-
-# Ojos: 2 cajitas oscuras tangentes a los costados de la cabeza.
-caja_rot('SM_Tortuga_Ojo_0', 0.575, -0.098, 0.185, 0.050, 0.025, 0.045, MAT_ojos)
-caja_rot('SM_Tortuga_Ojo_1', 0.575, +0.098, 0.185, 0.050, 0.025, 0.045, MAT_ojos)
+# Ojos: 2 cajitas oscuras tangentes, algo mayores (v4).
+caja_rot('SM_Tortuga_Ojo_0', 0.585, -0.098, 0.188, 0.055, 0.028, 0.050, MAT_ojos)
+caja_rot('SM_Tortuga_Ojo_1', 0.585, +0.098, 0.188, 0.055, 0.028, 0.050, MAT_ojos)
 
 # ===================== 8) ALETAS DELANTERAS (bmesh tipo remo) =====================
 # Loft de 6 anillos octogonales a lo largo del eje X local del objeto:
@@ -282,23 +266,51 @@ def aleta_remo(nombre, lado):
 aleta_remo('SM_Tortuga_Aleta_D_0', -1)
 aleta_remo('SM_Tortuga_Aleta_D_1', +1)
 
-# ===================== 9) ALETAS TRASERAS (cono paddle) =====================
-# Cono achatado orientado con to_track_quat (E-58/E-69): la direccion
-# apunta del hombro hacia atras-afuera (timon). Raiz DENTRO del plastron.
+# ===================== 9) ALETAS TRASERAS (remo compacto eliptico) =====================
+# v4: diseno NUEVO (usuario rechazo caja v2 y cono v3). Remo compacto de
+# 4 anillos con seccion ELIPTICA (ancho en Y, plano en Z): raiz angosta
+# -> pala ANCHA y PLANA (elipse 0.13 x 0.035) -> borde redondeado que se
+# afina. Lenguaje formal de las delanteras (remo) pero proporcion de
+# aleta trasera real: corta, ancha, timon. La pala NACE tocando 0.045.
 def aleta_timon(nombre, lado):
-    direccion = Vector((-0.55, 0.55 * lado, 0.10)).normalized()
-    rot = direccion.to_track_quat('Z', 'Y').to_euler()
-    bpy.ops.mesh.primitive_cone_add(
-        vertices=10, radius1=0.055, radius2=0.0, depth=0.30,
-        location=(0, 0, 0))
-    o = bpy.context.object
-    o.name = nombre
-    o.rotation_euler = rot
-    o.scale = (1.0, 0.45, 1.0)  # achatado: pala plana
-    # raiz en el cuadrante trasero, media dentro del plastron (z 0.045..0.105)
-    o.location = Vector((-0.22, 0.28 * lado, 0.077)) + direccion * 0.09
-    o.data.materials.append(MAT_piel)
-    return o
+    bm = bmesh.new()
+    N = 8
+    LARGO = 0.34
+    # perfil (t, ancho_y, alto_z): raiz -> pala -> borde
+    PERFIL = [(0.00, 0.035, 0.030),
+              (0.45, 0.065, 0.038),
+              (0.75, 0.130, 0.035),
+              (1.00, 0.055, 0.022)]
+    anillos = []
+    for (t, ry, rz) in PERFIL:
+        ring = []
+        for a in range(N):
+            ang = 2.0 * pi * a / N
+            ring.append(bm.verts.new((t * LARGO,
+                                      ry * cos(ang),
+                                      rz * sin(ang))))
+        anillos.append(ring)
+    caras = []
+    for k in range(len(PERFIL) - 1):
+        for a in range(N):
+            b = (a + 1) % N
+            caras.append(bm.faces.new((anillos[k][a], anillos[k][b],
+                                       anillos[k + 1][b], anillos[k + 1][a])))
+    for a in range(1, N - 1):
+        caras.append(bm.faces.new((anillos[0][0], anillos[0][a],
+                                   anillos[0][a + 1])))
+        caras.append(bm.faces.new((anillos[3][0], anillos[3][a + 1],
+                                   anillos[3][a])))
+    _orientar(bm, caras)
+    aleta = objeto_desde_bmesh(nombre, bm, MAT_piel)
+    # Pose de timon: apunta a atras-afuera. El eje +X del remo se alinea
+    # con la direccion via rot Z (E-58 en 2D alcanza: el remo es plano).
+    ang_z = radians(150.0) if lado > 0 else (pi - radians(150.0))
+    aleta.rotation_euler = (0.0, 0.0, ang_z)
+    # Anclaje (E-09): la pala (rz 0.035 max) nace tocando 0.045:
+    # location.z = 0.045 + 0.035 = 0.08. Raiz dentro del caparazon.
+    aleta.location = (-0.10, 0.26 * lado, 0.08)
+    return aleta
 
 
 aleta_timon('SM_Tortuga_Aleta_T_0', -1)

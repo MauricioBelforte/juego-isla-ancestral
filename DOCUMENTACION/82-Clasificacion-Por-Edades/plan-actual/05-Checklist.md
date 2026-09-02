@@ -68,7 +68,7 @@
 - [x] Definir proceso de appeal si el rating no es el esperado
 - [x] Documentar plazos de respuesta de cada sistema
 - [x] Definir proceso de emergencia si rating es rechazado
-- [ ] Crear checklist de pre-submission para cada sistema
+- [x] Crear checklist de pre-submission para cada sistema
 - [ ] Definir proceso de QA interno antes de cada submission
 - [x] Documentar costo total estimado de submissions globales
 
@@ -112,7 +112,7 @@
 ## H. Documentación y Compliance (8 ítems)
 
 - [x] Documentar proceso completo en CHECKLIST-GLOBAL.md
-- [ ] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
+- [x] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
 - [x] Actualizar README.md de DOCUMENTACION/
 - [ ] Generar log de creación del módulo en Logs/
 - [ ] Verificar que no hay inconsistencias entre archivos del módulo

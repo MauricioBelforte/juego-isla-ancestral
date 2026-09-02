@@ -54,7 +54,7 @@
 - [x] T-044 RF5: definir preset de audio OGG con calidad por uso (música alta, SFX media) [S]
 - [x] T-045 RF5: definir preset de audio WAV loop con normalize, trim y bounds de loop [S]
 - [x] T-046 RF5: definir preset de fuente TTF con MSDF on, antialiasing on y subsetting [M]
-- [?] T-047 Implementar apply_import_presets.gd que reimporte con los presets y corrija desviaciones [C] — Diseño documentado en 04-Codigo.md; implementación requiere núcleo M108.
+- [?] T-047 Implementar apply_import_presets.gd que reimporte con los presets y corrija desviaciones [C] — Diseño + lógica V0 creados en `apply_import_presets_logic.gd` + wrapper `apply_import_presets.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
 - [?] T-048 Detectar en el validador texturas importadas sin VRAM Compressed y reportarlas [M] — Diseño documentado; implementación requiere núcleo M108.
 - [?] T-049 Excluir staging/ de la importación de runtime mediante .gdignore [S] — Diseño documentado; implementación requiere núcleo M108.
 - [?] T-050 Garantizar que el reimport no rompa referencias existentes a assets aprobados [M] — Diseño documentado; implementación requiere núcleo M108.
@@ -121,7 +121,7 @@
 - [x] T-111 Definir que archive/ conserva retirados sin cargarse [S]
 - [?] T-112 Diseñar asset_validator.gd: reglas, reporte markdown y salida JSON para CI [C] — Diseño documentado en 04-Codigo.md; implementación requiere núcleo M108.
 - [?] T-113 Diseñar apply_import_presets.gd: reimporta y corrige desviaciones de import [C] — Diseño documentado en 04-Codigo.md; implementación requiere núcleo M108.
-- [?] T-114 Diseñar promote_asset.gd: mueve aprobados de staging a final y actualiza el índice [M] — Diseño documentado; implementación requiere núcleo M108.
+- [?] T-114 Diseñar promote_asset.gd: mueve aprobados de staging a final y actualiza el índice [M] — Diseño + lógica V0 creados en `promote_asset_logic.gd` + wrapper `promote_asset.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
 - [?] T-115 Diseñar atlas_builder.gd: empaca atlas ≤ 4096² con margen y reporta ahorro [M] — Diseño documentado; implementación requiere núcleo M108.
 - [?] T-116 Diseñar retire_asset.gd: retira, registra id y detecta referencias dependientes [M] — Diseño documentado; implementación requiere núcleo M108.
 - [?] T-117 Diseñar asset_memory_reporter.gd: totaliza VRAM/RAM contra M62 [C] — Diseño documentado; implementación requiere núcleo M108.

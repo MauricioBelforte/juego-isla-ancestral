@@ -155,7 +155,7 @@
 - [ ] Definir rollback restaura versión anterior del juego
 - [x] Definir rollback conserva savegames y configuración
 - [ ] Definir rollback accesible desde Panel de Control
-- [ ] Diseñar backup de versión anterior antes de actualizar
+- [x] Diseñar backup de versión anterior antes de actualizar
 - [ ] Diseñar rollback automático si actualización falla
 - [ ] Diseñar restauración de versión anterior
 - [ ] Diseñar conservación de datos del usuario
@@ -197,9 +197,9 @@
 - [ ] Diseñar conservación de datos del usuario
 
 ### [S] Rollback a versión anterior
-- [ ] Diseñar procedimiento BackupPreviousVersion()
+- [x] Diseñar procedimiento BackupPreviousVersion()
 - [ ] Diseñar procedimiento RollbackToPreviousVersion()
-- [ ] Diseñar backup de versión anterior antes de actualizar
+- [x] Diseñar backup de versión anterior antes de actualizar
 - [ ] Diseñar rollback automático si actualización falla
 - [ ] Diseñar restauración de versión anterior
 - [ ] Diseñar conservación de datos del usuario

@@ -60,7 +60,7 @@
 - [ ] Build genera warning si licencia no verificada (UNKNOWN)
 - [x] LicenseNoticeGenerator ejecuta después de validación exitosa
 - [ ] Notices incluidos automáticamente en cada build de distribución
-- [ ] Integración con M72 (Validación de Builds): agregar checks de licencia
+- [x] Integración con M72 (Validación de Builds): agregar checks de licencia
 - [ ] Integración con M117 (Build Pipeline): flujo completo de licencias
 - [ ] Logging de resultados de validación en build log
 - [ ] Modo dry-run para verificar licencias sin generar notices

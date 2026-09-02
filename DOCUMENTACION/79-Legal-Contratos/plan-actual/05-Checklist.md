@@ -4,7 +4,7 @@
 # 05-Checklist.md — Módulo 79: Legal — Contratos (110 ítems)
 
 ## Convención
-- `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
+- `[x]` = completado por documentación. `[x]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple · `[M]` medio · `[C]` complejo.
 
 ## 1. Contratos con artistas (1º)

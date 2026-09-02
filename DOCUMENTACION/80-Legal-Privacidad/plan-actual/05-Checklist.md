@@ -162,7 +162,7 @@
 - [x] 04-Codigo.md: esqueletos de PRIVACY-POLICY.md y DATA-DEclaration.md [M]
 - [x] 04-Codigo.md: APIs previstas en GDScript (Godot 4.x) [M]
 - [ ] 04-Codigo.md: Notas del Agente con honestidad y recomendaciones [S]
-- [ ] 05-Checklist.md: mínimo 115 ítems, todos verificables [S]
+- [x] 05-Checklist.md: mínimo 115 ítems, todos verificables [S]
 - [x] Firma «Modelo: Deepseek V4 Flash / Plataforma: OpenCode» al inicio de cada archivo [S]
 
 ## K. Testings
@@ -170,8 +170,8 @@
 - [ ] Verificar que los 10 archivos del módulo existen (5 + 5) [S]
 - [ ] Verificar que plan-actual es byte a byte idéntico a plan-inicial [S]
 - [x] Verificar que no se tocaron archivos fuera de DOCUMENTACION/80-Legal-Privacidad/ [S]
-- [ ] Verificar que la checklist tiene ≥115 ítems, todos con formato «- [ ] » [S]
-- [ ] Verificar marcadores [S]/[M]/[C] al final de cada ítem de la checklist [S]
+- [x] Verificar que la checklist tiene ≥115 ítems, todos con formato «- [ ] » [S]
+- [x] Verificar marcadores [S]/[M]/[C] al final de cada ítem de la checklist [S]
 - [ ] Verificar pérdida de encoding UTF-8 sin caracteres raros en los 10 archivos [S]
 - [ ] Verificar la coherencia entre las afirmaciones de la política y el diseño de M104 [C]
 - [ ] Verificar que el aviso de no asesoramiento legal está en los 5 archivos [S]

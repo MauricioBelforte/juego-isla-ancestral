@@ -165,10 +165,10 @@
 - [x] Documentar código implementado en 04-Codigo.md
 - [x] Documentar resultados de testing en 07-Resultados-Testings.md (si aplica)
 - [ ] Generar log de creación del módulo en Logs/
-- [ ] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
+- [x] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
 - [x] Actualizar README.md de DOCUMENTACION/
 - [x] Documentar dependencias con otros módulos (verificar en cada sprint)
-- [ ] Mantener checklist actualizado con cada cambio significativo
+- [x] Mantener checklist actualizado con cada cambio significativo
 
 ## L. Entrega y Hitos
 

@@ -87,10 +87,30 @@ func ejecutar_comando(id: String) -> Dictionary:
 func comandos_ejecutados() -> int:
 	return _comandos_ejecutados
 
+## Filtra comandos por pestaña (string id).
+func comandos_por_pestana(pestana_id: String) -> Array:
+	var lista: Array = []
+	for p in config.get("pestanas", []):
+		if String(p.get("id", "")) == pestana_id:
+			lista = p.get("comandos", []).duplicate()
+			break
+	return lista
+
 func metricas_sistema() -> Dictionary:
 	var memoria := get_node_or_null("/root/MemoryMonitor")
+	var mm := get_node_or_null("/root/MapManager")
 	return {
 		"memoria_mb": memoria.memoria_actual_mb() if memoria else 0.0,
 		"objetos": Performance.get_monitor(Performance.OBJECT_COUNT),
 		"fps": Performance.get_monitor(Performance.TIME_FPS),
+		"nodos": Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
+		"nodos_huerfanos": Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT),
+		"marcadores_explorados": mm.contar_exploradas() if mm else 0,
+		"comandos_ejecutados": _comandos_ejecutados,
 	}
+
+func pestanas_ids() -> Array:
+	var ids: Array = []
+	for p in config.get("pestanas", []):
+		ids.append(p.get("id", ""))
+	return ids

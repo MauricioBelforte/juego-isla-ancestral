@@ -270,6 +270,7 @@
 - [x] 142 tareas de diseño cerradas en checklist personal con referencia a documentación existente [S]
 - [x] ASSET-PIPELINE.md guía rectora presente en `plan-actual/` [S]
 - [x] Núcleo V0 iniciado: `asset_validator_logic.gd` + wrapper `asset_validator.gd` + runner `run_m108_test.gd` + escena `scenes/tests/test_m108.tscn` creados [M]
+- [x] `apply_import_presets_logic.gd` + wrapper `apply_import_presets.gd` creados (lógica V0 headless-compatible) [M]
 - [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C]
 - [ ] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [ ] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]

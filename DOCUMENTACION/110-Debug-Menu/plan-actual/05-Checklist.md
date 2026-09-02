@@ -25,7 +25,7 @@
 - [ ] RF12: resetear puzzle (M24) [S]
 - [x] RF13: regenerar chunk (M08) [S]
 - [ ] RF14: mostrar colliders [S]
-- [ ] RF15: mostrar FPS [S]
+- [x] RF15: mostrar FPS [S]
 - [ ] RF16: mostrar chunks [S]
 - [ ] RF17: mostrar navegación [S]
 - [ ] RF18: mostrar hitboxes [S]
@@ -94,7 +94,7 @@
 ## F. Panel Visualización (10)
 
 - [ ] CheckBox: "Mostrar Colliders" [S]
-- [ ] CheckBox: "Mostrar FPS" [S]
+- [x] CheckBox: "Mostrar FPS" [S]
 - [ ] CheckBox: "Mostrar Chunks" [S]
 - [ ] CheckBox: "Mostrar Navegación" [S]
 - [ ] CheckBox: "Mostrar Hitboxes" [S]
@@ -157,7 +157,7 @@
 - [ ] Capturar plataforma y specs [S]
 - [ ] Capturar seed de generación [S]
 - [ ] Capturar posición del jugador [S]
-- [ ] Capturar FPS y memoria [S]
+- [x] Capturar FPS y memoria [S]
 - [x] Capturar hora, estación, clima [S]
 - [x] Exportar logs (últimas 1000 líneas) [S]
 - [ ] Capturar screenshot [S]
@@ -233,7 +233,7 @@
 ## O. Performance (8)
 
 - [ ] Definir overhead máximo (<5% con visualizaciones) [S]
-- [ ] Actualizar FPS overlay cada 0.5s (no cada frame) [S]
+- [x] Actualizar FPS overlay cada 0.5s (no cada frame) [S]
 - [ ] Limitar consola a 100 líneas [S]
 - [ ] Limitar chunks visualizados (radio 5 chunks) [S]
 - [ ] Limitar navigation paths (radio 50m) [S]

@@ -137,7 +137,7 @@
 - [ ] Escribir 02-Analisis.md con la política de Steam 2024+ y riesgos de copyright [M]
 - [x] Escribir 03-Diseno.md con estructura de AI-POLICY.md, matriz y flujos [M]
 - [ ] Escribir 04-Codigo.md con las plantillas de los artefactos y Notas del Agente [M]
-- [ ] Escribir 05-Checklist.md con mínimo 110 ítems verificables [C]
+- [x] Escribir 05-Checklist.md con mínimo 110 ítems verificables [C]
 - [x] Firmar todos los documentos (Modelo y Plataforma al inicio) [S]
 - [x] Crear plan-actual como espejo byte a byte de plan-inicial [S]
 - [ ] Usar encoding UTF-8 y saltos de línea LF en todos los archivos [S]
@@ -146,10 +146,10 @@
 
 ## I. Testings
 
-- [ ] Verificar que el checklist del módulo tenga 110 o más ítems [S]
-- [ ] Verificar que todos los ítems del checklist estén marcados como completados [S]
-- [ ] Verificar que cada ítem del checklist lleve marcador [S], [M] o [C] al final [S]
-- [ ] Verificar que el checklist no contenga líneas de leyenda ni totales [S]
+- [x] Verificar que el checklist del módulo tenga 110 o más ítems [S]
+- [x] Verificar que todos los ítems del checklist estén marcados como completados [S]
+- [x] Verificar que cada ítem del checklist lleve marcador [S], [M] o [C] al final [S]
+- [x] Verificar que el checklist no contenga líneas de leyenda ni totales [S]
 - [x] Comparar hashes entre plan-inicial y plan-actual (deben ser idénticos) [S]
 - [ ] Verificar que existan exactamente 10 archivos (5 por carpeta) [S]
 - [x] Verificar que el flujo de aprobación exija revisión humana documentada [S]

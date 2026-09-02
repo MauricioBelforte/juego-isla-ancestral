@@ -240,3 +240,8 @@
 **Total de ítems:** 144
 **Ítems resueltos por documentación:** 144 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Iteración 1 — Puerta de release (2026-09-02 17:45 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/control_final/control_final_schema.gd` — ControlFinalSchema: 7 gates (suite tests verde, smoke aprobado, 0 críticos abiertos, crash rate cero, CI gates verdes, textos localizados, backup configurado) con verificar_gates() y veredicto()
+- [x] Test 6/6 OK (gates, detección de 2 fallidos, veredicto bloqueado/OK)
+- [?] Integración con M118 CI (gate automático de release al push) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
