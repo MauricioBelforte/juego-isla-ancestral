@@ -193,3 +193,9 @@
 
 **Totales:** 143 ítems · Completados: 143 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, mapa y reglas cierran aquí.
+## Iteración 1 (2026-09-02 05:40 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/fasttravel/anclas.json` — 4 anclas de la Isla Raíz (spawn/plaza/faro/playa), con coordenadas del mundo y desbloqueo base
+- [x] `scripts/fasttravel/fast_travel_service.gd` — FastTravelService: anclas cargadas por isla, desbloqueo (siñal ancla_desbloqueada), solicitud de viaje con señal viaje_solicitado (la ejecución la hace M28/M59)
+- [x] Test headless: 7/7 checks OK (carga, coords, desbloqueo no duplica, viaje señal, ancla inexistente -> false)
+- [?] UI del viaje (mapa M54 + atajo M57) y ejecución del viaje (M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)

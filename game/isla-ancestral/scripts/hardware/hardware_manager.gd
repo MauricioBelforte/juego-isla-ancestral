@@ -10,6 +10,10 @@ extends Node
 
 const ProfileRef = preload("res://scripts/hardware/hardware_profile.gd")
 
+## Senal emitida cuando el preset cambia (manual o automatico).
+## Consumida por M90 (aplicar calidad) y M55 (mostrar notificacion en diario).
+signal preset_changed(new_preset: int, old_preset: int, user_initiated: bool)
+
 ## Perfil activo (Resource). Tras _ready, queda con datos detectados o cargados.
 var profile = null
 ## Detector (Node interno).
@@ -40,21 +44,28 @@ func _ready() -> void:
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
 ## Cambia el preset manualmente (RF C: permitir override del jugador).
+## Emite preset_changed con user_initiated=true.
 func set_preset(preset: int) -> void:
 	if profile == null:
 		return
+	var old: int = profile.quality_preset
 	profile.quality_preset = preset
 	profile.user_override = true
 	_detector.save_profile(profile)
+	preset_changed.emit(preset, old, true)
 
 ## Resetea el override y vuelve a detectar.
+## Emite preset_changed con user_initiated=false (es la deteccion automatica).
 func reset_to_detected() -> void:
-	if profile == null:
-		profile = _detector.detect()
-	else:
+	var old: int = -1
+	if profile != null:
+		old = profile.quality_preset
 		profile.user_override = false
 		profile.quality_preset = _detector._recommend_preset(profile)
+	else:
+		profile = _detector.detect()
 	_detector.save_profile(profile)
+	preset_changed.emit(profile.quality_preset, old, false)
 
 ## Devuelve el preset activo (alias para profile.quality_preset).
 func get_active_preset() -> int:
