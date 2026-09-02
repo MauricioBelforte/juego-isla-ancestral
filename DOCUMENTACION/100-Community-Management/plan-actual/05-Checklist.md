@@ -8,7 +8,7 @@
 ### [S] Especificación de community management
 - [ ] Crear reglas comunitarias
 - [ ] Crear moderación
-- [ ] Crear sistema de reportes
+- [x] Crear sistema de reportes
 - [x] Crear canales de feedback
 - [ ] Crear roadmap público si conviene
 - [ ] Crear changelog público
@@ -43,7 +43,7 @@
 
 ### [S] Sistema de moderación
 - [ ] Definir rol Admin (control total, puede banear, gestionar roles)
-- [ ] Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)
+- [x] Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)
 - [ ] Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)
 - [x] Definir rol Usuario (puede reportar contenido, participar en canales)
 - [ ] Definir permisos por rol
@@ -59,12 +59,12 @@
 - [ ] Definir categoría: impersonación
 - [ ] Definir categoría: copyright infringement
 - [ ] Definir categoría: otro (con descripción)
-- [ ] Diseñar workflow de reportes (usuario reporta → moderador revisa → acción)
+- [x] Diseñar workflow de reportes (usuario reporta → moderador revisa → acción)
 - [ ] Diseñar notificación a moderadores
 - [ ] Diseñar notificación al usuario que reportó
 - [ ] Diseñar notificación al usuario reportado (si aplica acción)
-- [ ] Diseñar dashboard de reportes para moderadores
-- [ ] Diseñar logs de reportes y acciones
+- [x] Diseñar dashboard de reportes para moderadores
+- [x] Diseñar logs de reportes y acciones
 - [x] Diseñar configuración de categorías (report_categories.json)
 
 ### [S] Canales de feedback
@@ -129,7 +129,7 @@
 - [ ] Definir verificación (reproducible, no reproducible)
 - [ ] Diseñar integración con M102 (Bug Tracking)
 - [ ] Diseñar workflow (usuario reporta → triage → issue en M102)
-- [ ] Diseñar plantilla de reporte de bug
+- [x] Diseñar plantilla de reporte de bug
 - [ ] Diseñar sistema de etiquetas para categorías
 - [ ] Diseñar respuesta automática de confirmación
 - [ ] Diseñar explicación al usuario si no es bug
@@ -210,13 +210,13 @@
 - [ ] Definir cuentas falsas que prometen contenido no oficial
 - [ ] Definir scams utilizando nombre del juego
 - [ ] Definir verificación oficial de desarrolladores (etiquetas de verified dev)
-- [ ] Definir reporte de cuentas de impersonación a plataformas
+- [x] Definir reporte de cuentas de impersonación a plataformas
 - [ ] Definir comunicación con comunidad sobre cuentas oficiales
 - [x] Definir ban inmediato de impersonadores en canales oficiales
 - [ ] Diseñar etiquetas de verified dev en Discord
 - [x] Diseñar cuentas oficiales verificadas en Steam (developer badge)
 - [ ] Diseñar listado de cuentas oficiales en sitio web
-- [ ] Diseñar protocolo de reporte de impersonación
+- [x] Diseñar protocolo de reporte de impersonación
 
 ### [S] Gestión de copyright claims
 - [ ] Definir copyright claims en contenido de fans (fan art, fan music, fan fiction)
@@ -228,7 +228,7 @@
 - [ ] Definir directrices: respeto a copyright de terceros
 - [ ] Diseñar política de contenido de fans documentada
 - [ ] Diseñar directrices de atribución
-- [ ] Diseñar sistema de reporte de infracción de copyright
+- [x] Diseñar sistema de reporte de infracción de copyright
 - [ ] Diseñar respuesta a claims de terceros
 
 ### [S] Comunicación proactiva

@@ -50,16 +50,16 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-046 Definir zonas_ignored (detección)
 - [x] T-047 Diseñar detector de puzzle abandonado (timer de 60 segundos)
 - [x] T-048 Diseñar umbral de puzzle abandonado (5 minutos sin completar)
-- [ ] T-049 Diseñar detector de zonas ignoradas (timer de 60 segundos)
-- [ ] T-050 Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
-- [ ] T-051 Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
-- [ ] T-052 Diseñar registro de zones_ignored con zone_id y timestamp
-- [ ] T-053 Definir encuesta post-puzzle
-- [ ] T-054 Definir rating 1-5 (1: muy fácil, 5: muy difícil)
-- [ ] T-055 Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
-- [ ] T-056 Diseñar registro de difficulty_perceived con puzzle_id y rating
-- [ ] T-057 Diseñar encuesta opcional después de completar puzzle
-- [ ] T-058 Definir análisis de datos para identificar puzzles con alta tasa de abandono
+- [x] T-049 Diseñar detector de zonas ignoradas (timer de 60 segundos)
+- [x] T-050 Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
+- [x] T-051 Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
+- [x] T-052 Diseñar registro de zones_ignored con zone_id y timestamp
+- [x] T-053 Definir encuesta post-puzzle
+- [x] T-054 Definir rating 1-5 (1: muy fácil, 5: muy difícil)
+- [x] T-055 Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
+- [x] T-056 Diseñar registro de difficulty_perceived con puzzle_id y rating
+- [x] T-057 Diseñar encuesta opcional después de completar puzzle
+- [x] T-058 Definir análisis de datos para identificar puzzles con alta tasa de abandono
 - [ ] T-059 Definir análisis de datos para identificar zonas ignoradas
 - [ ] T-060 Definir análisis de datos para identificar eventos clave no alcanzados
 - [ ] T-061 Definir análisis de datos para identificar tiempos anormales
