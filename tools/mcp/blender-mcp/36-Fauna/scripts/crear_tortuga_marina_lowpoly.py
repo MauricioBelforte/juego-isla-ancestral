@@ -300,9 +300,11 @@ def aleta_timon(nombre, lado):
                                    anillos[3][a])))
     _orientar(bm, caras)
     aleta = objeto_desde_bmesh(nombre, bm, MAT_piel)
-    # Pose de timon: apunta a atras-afuera. El eje +X del remo se alinea
-    # con la direccion via rot Z (E-58 en 2D alcanza: el remo es plano).
-    ang_z = radians(150.0) if lado > 0 else (pi - radians(150.0))
+    # Pose de timon: apunta a atras-afuera. Espejo CORRECTO entre lados
+    # (E-74): NEGAR el angulo Z, nunca pi-ang. lado +1 -> +150deg =
+    # atras-derecha; lado -1 -> -150deg = atras-izquierda. Con el bug
+    # (pi-150 = 30deg) la pala cruzaba por debajo del cuerpo.
+    ang_z = radians(150.0) * lado
     aleta.rotation_euler = (0.0, 0.0, ang_z)
     # Anclaje (E-09): la pala (rz 0.035 max) nace tocando 0.045:
     # location.z = 0.045 + 0.035 = 0.08. Raiz dentro del caparazon.
@@ -314,13 +316,16 @@ aleta_timon('SM_Tortuga_Aleta_T_0', -1)
 aleta_timon('SM_Tortuga_Aleta_T_1', +1)
 
 # ===================== 10) COLA (cono corto atras) =====================
-# Anillo base (r 0.075) con su punto bajo a 0.045: location.z = 0.12.
+# v5: restaurada la de la PRIMER tortuga vista (v2) — cono simple r 0.075
+# x 0.16, rot Y -90 = punta a -X (E-19 correcto), anillo base tocando
+# 0.045 (location.z = 0.045 + r = 0.120). En v3/v4 la habia puesto con
+# rot +90 (punta hacia adelante): recaida del E-19.
 bpy.ops.mesh.primitive_cone_add(
     vertices=8, radius1=0.075, radius2=0.0, depth=0.16,
     location=(-0.42, 0.0, 0.120))
 cola = bpy.context.object
 cola.name = 'SM_Tortuga_Cola'
-cola.rotation_euler = (0.0, radians(90), 0.0)  # punta a -X (E-19)
+cola.rotation_euler = (0.0, radians(-90), 0.0)  # punta a -X (v2, la que gusto)
 cola.data.materials.append(MAT_piel)
 
 arena(radio=1.6)

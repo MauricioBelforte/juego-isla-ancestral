@@ -107,7 +107,7 @@
 - [ ] Cabra
 - [ ] Gallina
 - [ ] Mariposa (alas simples para animar)
-- [ ] Tortuga marina
+- [x] Tortuga marina — `crear_tortuga_marina_lowpoly.py` v5 (2026-09-02, log 533, glm-5.3/Kilo Code) + 6 capturas orbitales (hojas v2..v5; la v5 es la aprobada). **APROBADA por el usuario** tras 4 iteraciones de feedback directo (V1): v3 remos+escudos proyectados → v4 mix (sin pico, traseras remo elíptico) → v5 cola v2 restaurada + espejo E-74 + cabeza grande. Composición: plastrón cilíndrico 12 lados + falda cónica 16 + domo elipsoide + anillo marginal torus + **9 escudos proyectados sobre la curvatura real del domo** (1 malla bmesh) + cuello cónico + cabeza esférica r 0.12 con 2 ojos + 2 aletas delanteras **remo bmesh loftado** (6 anillos, ensancha a pala) + 2 traseras remo elíptico compacto (±150°) + cola cono. **14 SM_ / 1430 tris reales / 5 mats** · z_min 0.0450 · huella 19 verts 0.75×0.89 · E-32 v2 (volumen firmado) en cada isla bmesh. Variantes MEDIA (5 obj/1430) y BAJA (4 obj/982, ojos podados) + 3 GLB (103/80/61 KB) + 3 `.import` + 3 `.scn` (E-65). **E-74 descubierto:** espejo de piezas pareadas entre lados = NEGAR el ángulo Z, nunca `π−áng` (con el bug la aleta izquierda cruzaba por debajo del cuerpo y quedaba oculta: "una sola pata").
 
 ## Módulo 19/161 — NPCs y Vecinos 🧑‍🌾
 

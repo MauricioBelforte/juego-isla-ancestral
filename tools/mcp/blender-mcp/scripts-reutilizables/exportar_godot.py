@@ -67,7 +67,7 @@ DEST_ROOT = os.path.join(RAIZ, 'game', 'isla-ancestral', 'assets', '3d')
 
 MODULOS = ('13-Herramientas', '15-Recursos', '16-Crafting', '18-Casas',
            '25-Ruinas-Templos', '27-Islas-Ubicaciones',
-           '33-Agricultura', '35-Mineria',
+           '33-Agricultura', '35-Mineria', '36-Fauna',
            '40-Infraestructura', '45-Arte3D', '50-Vegetacion', '70-Interacciones')
 # E-63: esta tupla es una whitelist. Un modulo nuevo que no este aqui se exporta
 # EN SILENCIO 0 archivos (el resumen dice "exportados: 0" sin error). Si creas un
