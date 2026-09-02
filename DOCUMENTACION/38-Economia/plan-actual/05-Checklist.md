@@ -3,10 +3,11 @@
 
 # 05-Checklist.md — Módulo 38: Economía
 
-> **Reserva actual (iter. BarterSystem trueque)**
-> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 23:55 · **Estado:** 🔵 En curso
-> **Entrada:** núcleo ✅ (logs 171-235) + M14 ✅ + M20 ✅ + M29 ✅ · **Salida:** BarterOffer + BarterSystem autoload (propuestas, ejecución atómica con rollback, límites diarios, salvavidas RF12, persistencia M59) + ofertas .tres + test headless
-> **Archivos afectados:** `scripts/economia/barter_system.gd`, `scripts/economia/barter_offer.gd`, `data/economia/barter/*.tres`, `scripts/economia/test_barter.gd`
+> **Reserva actual (iter. 2 mercado día + transacciones)**
+> **Agente:** glm-5.3-flash · **Plataforma:** Cline · **Fecha:** 2026-09-02 15:25 · **Estado:** 🔵 En curso
+> **Entrada:** núcleo ✅ (logs 171-235) + BarterSystem ✅ (Log 311) + M14 ✅ + M20 ✅ + M29 ✅ · **Salida:** RF10 tabla_del_dia() expuesta para UI + RF15 historial de transacciones (cap 200, M104) + persistencia del historial (RF13 parcial) + test headless 0 fallos
+> **Archivos afectados:** `game/isla-ancestral/scripts/economia/price_manager.gd`, `economy_manager.gd`, `test_tabla_dia_transacciones.gd`
+> **Log reservado:** 538
 
 ## A. Problema y objetivos
 

@@ -60,13 +60,13 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-056 Diseñar registro de difficulty_perceived con puzzle_id y rating
 - [x] T-057 Diseñar encuesta opcional después de completar puzzle
 - [x] T-058 Definir análisis de datos para identificar puzzles con alta tasa de abandono
-- [ ] T-059 Definir análisis de datos para identificar zonas ignoradas
-- [ ] T-060 Definir análisis de datos para identificar eventos clave no alcanzados
-- [ ] T-061 Definir análisis de datos para identificar tiempos anormales
-- [ ] T-062 Definir ajuste de balance basado en datos reales
-- [ ] T-063 Definir opt-in explícito
-- [ ] T-064 Definir prompt en primer inicio del juego
-- [ ] T-065 Definir opción de opt-out en settings
+- [x] T-059 Definir análisis de datos para identificar zonas ignoradas
+- [x] T-060 Definir análisis de datos para identificar eventos clave no alcanzados
+- [x] T-061 Definir análisis de datos para identificar tiempos anormales
+- [x] T-062 Definir ajuste de balance basado en datos reales
+- [x] T-063 Definir opt-in explícito
+- [x] T-064 Definir prompt en primer inicio del juego
+- [x] T-065 Definir opción de opt-out en settings
 - [ ] T-066 Definir datos anonimizados (sin identificadores personales)
 - [ ] T-067 Definir no recolectar nombres, emails, IPs
 - [ ] T-068 Definir solo recolectar datos de gameplay y comportamiento

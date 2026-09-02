@@ -22,8 +22,13 @@ const SALDO_INICIAL: int = 100
 ## Tope de saldo (anti-overflow y anti-grind extremo). Diseño M38 §2.
 const MAX_SALDO: int = 999999
 
+## RF15: historial de transacciones para log/analytics (M104 lo consume).
+## Anillo acotado: se conservan las últimas HISTORIAL_MAX (memoria constante).
+const HISTORIAL_MAX: int = 200
+
 var saldo: int = SALDO_INICIAL
 var precios: RefCounted = null  # PriceManager (vía preload, sin race de autoloads)
+var _historial: Array = []      # [{tipo, monto, saldo, dia, ts}] — RF15
 
 func _ready() -> void:
 	_asegurar_precios()
@@ -61,7 +66,7 @@ func retirar_monedas(total: int) -> bool:
 		return false
 	saldo -= total
 	saldo_cambiado.emit(saldo)
-	transaccion_registrada.emit({"tipo": "retiro", "monto": total, "saldo": saldo})
+	_registrar_tx("retiro", total)
 	return true
 
 func depositar_monedas(total: int) -> bool:
@@ -69,8 +74,42 @@ func depositar_monedas(total: int) -> bool:
 		return false
 	saldo = mini(saldo + total, MAX_SALDO)
 	saldo_cambiado.emit(saldo)
-	transaccion_registrada.emit({"tipo": "deposito", "monto": total, "saldo": saldo})
+	_registrar_tx("deposito", total)
 	return true
+
+## ── RF15: historial de transacciones ─────────────────────
+## Registra la transacción, emite la señal del contrato §5 y recorta el anillo.
+func _registrar_tx(tipo: String, monto: int) -> void:
+	var tx := {
+		"tipo": tipo,
+		"monto": monto,
+		"saldo": saldo,
+		"dia": _dia_absoluto_actual(),
+		"ts": Time.get_ticks_msec(),
+	}
+	_historial.append(tx)
+	while _historial.size() > HISTORIAL_MAX:
+		_historial.pop_front()  # anillo: se descarta la más antigua
+	transaccion_registrada.emit(tx)
+
+## Día absoluto del calendario (M29) por duck-typing; 0 si no está disponible.
+func _dia_absoluto_actual() -> int:
+	var tc = get_node_or_null("/root/TimeCalendar")
+	if tc != null and tc.has_method("get_dia_absoluto"):
+		return int(tc.get_dia_absoluto())
+	return 0
+
+## Devuelve el historial (copia). `limite > 0` → solo las últimas `limite` entradas.
+## Dato puro para M104 (analytics/log) y M53 (UI de movimientos).
+func obtener_historial(limite: int = -1) -> Array:
+	if limite > 0 and _historial.size() > limite:
+		return _historial.slice(_historial.size() - limite).duplicate(true)
+	return _historial.duplicate(true)
+
+## ── RF10: tabla de precios del día (delega en PriceManager) ──
+func tabla_del_dia(item_ids: Array = []) -> Dictionary:
+	_asegurar_precios()
+	return precios.tabla_del_dia(item_ids)
 
 ## Registro de venta para la ventana de oferta del PriceManager (M39 lo invoca).
 func registrar_venta_para_mercado(item_id: String, cantidad: int, dia: int) -> void:
@@ -85,10 +124,27 @@ func get_save_data() -> Dictionary:
 	var d := {"saldo": saldo}
 	if precios != null:
 		d["precios"] = precios.serializar()
+	# RF13 (parcial): el historial persiste acotado (máx. HISTORIAL_MAX entradas).
+	d["historial"] = _historial.duplicate(true)
 	return d
 
 func restore_save_data(data: Dictionary) -> void:
 	saldo = clampi(int(data.get("saldo", SALDO_INICIAL)), 0, MAX_SALDO)
 	if precios != null and data.has("precios") and typeof(data["precios"]) == TYPE_DICTIONARY:
 		precios.deserializar(data["precios"])
+	# RF13 (parcial): restaurar historial con saneamiento defensivo y tope.
+	_historial.clear()
+	if data.has("historial") and typeof(data["historial"]) == TYPE_ARRAY:
+		for tx in data["historial"]:
+			if typeof(tx) != TYPE_DICTIONARY:
+				continue
+			_historial.append({
+				"tipo": str(tx.get("tipo", "")),
+				"monto": int(tx.get("monto", 0)),
+				"saldo": int(tx.get("saldo", 0)),
+				"dia": int(tx.get("dia", 0)),
+				"ts": int(tx.get("ts", 0)),
+			})
+	while _historial.size() > HISTORIAL_MAX:
+		_historial.pop_front()
 	saldo_cambiado.emit(saldo)

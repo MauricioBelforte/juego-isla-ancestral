@@ -24,11 +24,11 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-020 Diseñar configuración de Godot export
 - [x] T-021 Diseñar Application/Config/features: Compress (lzma)
 - [x] T-022 Diseñar Application/Config/pack_mode: Single-file (opcional)
-- [ ] T-023 Diseñar Application/Run/args: --release
-- [ ] T-024 Diseñar Binary/export_console_wrapper: No
-- [ ] T-025 Diseñar Binary/export_embedded_pck: Yes
-- [ ] T-026 Diseñar Binary/export_filter: include/exclude patterns
-- [ ] T-027 Diseñar Binary/export_path: builds/windows/
+- [x] T-023 Diseñar Application/Run/args: --release
+- [x] T-024 Diseñar Binary/export_console_wrapper: No
+- [x] T-025 Diseñar Binary/export_embedded_pck: Yes
+- [x] T-026 Diseñar Binary/export_filter: include/exclude patterns
+- [x] T-027 Diseñar Binary/export_path: builds/windows/
 - [ ] T-028 Diseñar Binary/file_format: exe
 - [ ] T-029 Diseñar Binary/icon: icon.ico
 - [ ] T-030 Diseñar Binary/name: Isla Ancestral

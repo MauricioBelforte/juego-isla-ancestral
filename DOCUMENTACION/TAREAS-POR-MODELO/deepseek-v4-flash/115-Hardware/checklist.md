@@ -47,11 +47,11 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-043 Aplicar antialiasing (None/FXAA/MSAA2/MSAA4) [S] *(M90)*
 - [x] T-044 Crear Resource QualitySettings con campos: preset, render_scale, shadow_quality, ssao, ssr, lod_bias, max_fps, vsync, texture_quality, antialiasing, volumetric_fog, grass_distance [S] *(M90 — fuera de alcance M115)*
 - [x] T-045 Implementar QualityApplier.apply_preset() [S] *(M90)*
-- [ ] T-046 Very Low: render_scale 0.5, shadows off, 30 FPS target [S] *(M90 aplica; M115 expone el preset)*
-- [ ] T-047 Low: render_scale 0.7, shadows low, 30 FPS target [S] *(M90)*
-- [ ] T-048 Medium: render_scale 0.85, shadows medium, 60 FPS target [S] *(M90)*
-- [ ] T-049 High: render_scale 1.0, shadows high, 60 FPS target [S] *(M90)*
-- [ ] T-050 Ultra: render_scale 1.0, shadows ultra, 120 FPS target [S] *(M90)*
+- [x] T-046 Very Low: render_scale 0.5, shadows off, 30 FPS target [S] *(M90 aplica; M115 expone el preset)*
+- [x] T-047 Low: render_scale 0.7, shadows low, 30 FPS target [S] *(M90)*
+- [x] T-048 Medium: render_scale 0.85, shadows medium, 60 FPS target [S] *(M90)*
+- [x] T-049 High: render_scale 1.0, shadows high, 60 FPS target [S] *(M90)*
+- [x] T-050 Ultra: render_scale 1.0, shadows ultra, 120 FPS target [S] *(M90)*
 - [x] T-051 Crear HardwareManager como autoload principal [S] *(hardware_manager.gd registrado como `hardware`)*
 - [x] T-052 Inicializar detección en _ready() [S] *(load_profile → detect → save_profile)*
 - [x] T-053 Cargar perfil guardado si existe [S] *(load_profile retorna null si no existe, entonces detecta)*

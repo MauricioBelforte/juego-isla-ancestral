@@ -123,9 +123,13 @@ func _test_giro_riel() -> void:
 	var rumbo0: float = float(ctrl.rumbo)
 	_vm.tick_conduccion(0.1, false, 1, false)
 	_check(float(ctrl.rumbo) > rumbo0, "girar derecha incrementa rumbo")
+	# 5 ticks más a la derecha (rumbo ~0.96) para alejarse del wrap 0..TAU
+	for i in range(5):
+		_vm.tick_conduccion(0.1, false, 1, false)
+	var rumbo_alto: float = float(ctrl.rumbo)
 	_vm.tick_conduccion(0.1, false, -1, false)
 	_vm.tick_conduccion(0.1, false, -1, false)
-	_check(float(ctrl.rumbo) < rumbo0, "girar izquierda dos ticks baja rumbo")
+	_check(float(ctrl.rumbo) < rumbo_alto, "girar izquierda dos ticks baja rumbo (sin wrap)")
 	_vm.exit()
 
 

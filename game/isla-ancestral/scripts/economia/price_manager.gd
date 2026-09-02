@@ -154,6 +154,49 @@ func registrar_venta(item_id: String, cantidad: int, dia: int) -> void:
 func precio_rebajado_hoy(item_id: String) -> bool:
 	return ventas_hoy(item_id) > limite_ventas_dia(item_id)
 
+## ── RF10: Tabla de precios del día (dato puro para la UI, M53/M55) ──
+## Devuelve { item_id: {compra, venta, limite, vendidas_hoy, rebajado} }.
+## `item_ids` vacío → enumera candidatos del catálogo central (overrides) + ítems
+## con ventas registradas. Solo incluye ítems con precio base > 0.
+## Sin bucles por frame: se consulta bajo demanda (apertura de tienda/diario).
+func tabla_del_dia(item_ids: Array = []) -> Dictionary:
+	var candidatos: Array[String] = []
+	for id in item_ids:
+		var s := str(id)
+		if not s.is_empty() and not candidatos.has(s):
+			candidatos.append(s)
+	if candidatos.is_empty():
+		# Enumeración fallback: overrides del catálogo + ítems con actividad.
+		var cat = _catalog_get()
+		if cat != null and "price_overrides" in cat:
+			for e in cat.price_overrides:
+				var s2 := str(e.item_id)
+				if not candidatos.has(s2):
+					candidatos.append(s2)
+		for id in _ventas_hoy:
+			var s3 := str(id)
+			if not candidatos.has(s3):
+				candidatos.append(s3)
+		for e in _ventas_ventana:
+			var s4 := str(e["item_id"])
+			if not candidatos.has(s4):
+				candidatos.append(s4)
+		candidatos.sort()  # orden estable para la UI (determinismo de datos)
+
+	var tabla: Dictionary = {}
+	for id in candidatos:
+		var compra := precio_compra_vigente(id, "", 1)
+		if compra <= 0:
+			continue  # ítem sin precio definido: fuera de la tabla del día
+		tabla[id] = {
+			"compra": compra,
+			"venta": precio_venta_vigente(id),
+			"limite": limite_ventas_dia(id),
+			"vendidas_hoy": ventas_hoy(id),
+			"rebajado": precio_rebajado_hoy(id),
+		}
+	return tabla
+
 ## Serializa estado (§6)
 func serializar() -> Dictionary:
 	return {
