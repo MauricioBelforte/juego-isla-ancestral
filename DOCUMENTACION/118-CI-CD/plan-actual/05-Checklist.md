@@ -12,7 +12,7 @@
 - [x] Registrar dependencias: M117, M103, M112, M61 [S]
 - [x] Catalogar los 7 requisitos funcionales [S]
 - [x] RF1: pipeline de integración en cada commit [S]
-- [ ] RF2: pipeline de pruebas automáticas [S]
+- [x] RF2: pipeline de pruebas automáticas [S]
 - [x] RF3: build de desarrollo con < 10 min [S]
 - [x] RF4: build release optimizado [S]
 - [ ] RF5: despliegue automático al crear tag [S]
@@ -49,7 +49,7 @@
 - [x] RF2: pipeline de pruebas automáticas [S]
 - [x] RF3: build de desarrollo con < 10 min [S]
 - [x] Integración con M112 (Testing Automático) [M]
-- [ ] Reportes de cobertura de tests después de cada pipeline [M]
+- [x] Reportes de cobertura de tests después de cada pipeline [M]
 
 ## E. Data y formato (8)
 
@@ -70,7 +70,7 @@
 - [ ] Test: despliegue tag ? itch.io [M]
 - [x] Test: notificaciones de fallo llegan al equipo [M]
 - [ ] Test: calidad M111 verificada antes éxito [M]
-- [ ] Test: coverage de tests = 80% mantenido [M]
+- [x] Test: coverage de tests = 80% mantenido [M]
 - [ ] Test: fallback manual después de 3 fallos [M]
 
 ## H. Delegación y cierre (8)
@@ -78,7 +78,7 @@
 - [ ] Módulo marcado delegable [S]
 - [ ] API estable definida [S]
 - [x] Implementación ? AGENTE DELEGADO [S]
-- [ ] Assets ? specs con pipeline Godot-centric [S]
+- [x] Assets ? specs con pipeline Godot-centric [S]
 - [x] Test headless de CI/CD gates [M]
 - [x] Test headless de checklist integración [M]
 - [x] Autoload CiCdManager registrado en project.godot [S]

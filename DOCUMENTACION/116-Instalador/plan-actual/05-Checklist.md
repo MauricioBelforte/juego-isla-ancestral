@@ -26,7 +26,7 @@
 - [ ] Definir optimizaciones (optimización de código, compresión de assets)
 - [x] Definir preset: Release (no Debug)
 - [ ] Definir arquitectura: x64 (Windows 64-bit)
-- [ ] Definir code signing del ejecutable
+- [x] Definir code signing del ejecutable
 - [x] Diseñar configuración de Godot export
 - [x] Diseñar Application/Config/features: Compress (lzma)
 - [x] Diseñar Application/Config/pack_mode: Single-file (opcional)
@@ -93,11 +93,11 @@
 - [ ] Definir firma digital del ejecutable del juego (.exe)
 - [ ] Definir firma digital del instalador (.exe o .msi)
 - [ ] Definir certificado digital de autoridad de confianza
-- [ ] Definir code signing reduce falsos positivos de antivirus
-- [ ] Diseñar code signing con signtool.exe (Windows SDK)
-- [ ] Diseñar code signing del ejecutable de Godot export
+- [x] Definir code signing reduce falsos positivos de antivirus
+- [x] Diseñar code signing con signtool.exe (Windows SDK)
+- [x] Diseñar code signing del ejecutable de Godot export
 - [x] Diseñar code signing del instalador de Inno Setup
-- [ ] Diseñar timestamp del code signing para validez a largo plazo
+- [x] Diseñar timestamp del code signing para validez a largo plazo
 
 ### [S] Validación de actualizaciones
 - [ ] Definir instalador puede actualizar desde versión anterior
@@ -206,17 +206,17 @@
 
 ### [S] Code signing
 - [x] Diseñar script code_signing.bat
-- [ ] Diseñar code signing del ejecutable de Godot export
+- [x] Diseñar code signing del ejecutable de Godot export
 - [x] Diseñar code signing del instalador de Inno Setup
 - [ ] Diseñar uso de signtool.exe (Windows SDK)
-- [ ] Diseñar timestamp del code signing
+- [x] Diseñar timestamp del code signing
 
 ### [S] Build automation
 - [x] Diseñar script build_installer.bat
 - [x] Diseñar build release de Godot
-- [ ] Diseñar code signing del ejecutable
+- [x] Diseñar code signing del ejecutable
 - [x] Diseñar build del instalador con Inno Setup
-- [ ] Diseñar code signing del instalador
+- [x] Diseñar code signing del instalador
 
 ### [S] Icono del juego
 - [ ] Diseñar icon.ico
@@ -244,7 +244,7 @@
 - [ ] Diseñar prueba de shortcuts (escritorio, menú de inicio)
 - [ ] Diseñar prueba de asociación de archivos
 - [x] Diseñar prueba de validación de requisitos de sistema
-- [ ] Diseñar prueba de validación de antivirus (code signing)
+- [x] Diseñar prueba de validación de antivirus (code signing)
 - [ ] Diseñar prueba de rollback a versión anterior
 
 ## Totales

@@ -39,5 +39,14 @@ func _run() -> void:
 	roto["modo_daltonismo"] = "cielo"
 	var errores: Array = SCHEMA.validar(roto)
 	_check("Detecta modo daltonismo inválido", errores.has("modo_daltonismo inválido: cielo"))
+
+	# Factor de escala del aplicador (M58 iter 2)
+	var aplicador = load("res://scripts/accesibilidad/accesibilidad_aplicador.gd")
+	_check("Aplicador: factor texto medio = 1.0", absf(aplicador.factor_texto(config) - 1.0) < 0.001)
+	var config_grande: Dictionary = config.duplicate()
+	config_grande["tamano_texto"] = "grande"
+	_check("Aplicador: factor texto grande = 1.25", absf(aplicador.factor_texto(config_grande) - 1.25) < 0.001)
+	_check("Aplicador: config válida", aplicador.config_valida(config))
+
 	print("=== Resumen M58: %d checks, %d fallos ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)

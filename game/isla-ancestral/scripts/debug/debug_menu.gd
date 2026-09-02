@@ -81,6 +81,16 @@ func ejecutar_comando(id: String) -> Dictionary:
 			return {"ok": true, "comando": id, "resultado": "%s=%s" % [flag, str(nuevo)]}
 		"exportar":
 			return {"ok": true, "comando": id, "resultado": "diagnóstico exportado (stub M102)"}
+		"ayuda":
+			return {"ok": true, "comando": id, "resultado": "comandos: %s" % str(config.get("comandos", {}).keys())}
+		"estadisticas":
+			return {"ok": true, "comando": id, "resultado": str(metricas_sistema())}
+		"reset_flags":
+			var devtools2 := get_node_or_null("/root/DevTools")
+			if devtools2 != null and devtools2.has_method("set_flag"):
+				devtools2.set_flag("mostrar_debug", false)
+				devtools2.set_flag("mostrar_ui", true)
+			return {"ok": true, "comando": id, "resultado": "flags reseteados"}
 		_:
 			return {"ok": false, "comando": id, "resultado": "acción desconocida"}
 

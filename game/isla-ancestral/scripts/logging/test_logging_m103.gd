@@ -1,4 +1,4 @@
-# Modelo: deepseek-v4-flash
+﻿# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
@@ -51,6 +51,30 @@ func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	else:
 		_fallos += 1
 		print("  [FAIL] %s %s" % [nombre, detalle])
+
+
+func _test_export() -> void:
+	print("--- Exportación por nivel/categoría ---")
+	var gl := root.get_node_or_null("GameLogger")
+	gl.info("export_test_info")
+	var all := gl.export_all()
+	_check("export_all contiene info", all.contains("export_test_info"))
+	var ultimas := gl.export_last_lines(3)
+	_check("export_last_lines no vacío", ultimas.length() > 0)
+	var path: String = gl.get_log_file_path()
+	_check("log file path no vacío", path != "")
+
+func _test_rotation() -> void:
+	print("--- Rotación configurada ---")
+	var gl := root.get_node_or_null("GameLogger")
+	_check("tiene flush", gl.has_method("flush"))
+	_check("tiene set_min_level", gl.has_method("set_min_level"))
+	_check("tiene set_category_enabled", gl.has_method("set_category_enabled"))
+	_check("tiene export_by_level", gl.has_method("export_by_level"))
+	_check("tiene export_by_category", gl.has_method("export_by_category"))
+	_check("tiene export_by_date", gl.has_method("export_by_date"))
+	_check("tiene get_log_file_path", gl.has_method("get_log_file_path"))
+	_check("tiene set_log_path", gl.has_method("set_log_path"))
 
 func _summary() -> void:
 	print("=== Resumen M103: %d checks, %d fallos ===" % [_checks, _fallos])

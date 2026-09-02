@@ -1,9 +1,9 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** deepseek-v4-flash (última modificación 2026-09-01: §9 agregada — autoevaluación honesta de deepseek-v4-flash / Kilo Code con confirmación de §5.B/§5.B2 y ajuste de delegación). Pasadas previas: glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; MiniMax-M3 escribió §6 el 2026-08-31; glm-5.3-flash escribió §7 el 2026-08-31; **Hy3 (Kilo Code) §11 el 2026-09-02**)
-> **Plataforma:** Kilo Code
-> **Fecha:** 2026-09-01
-> **Última confirmación por el agente:** 2026-09-01 (deepseek-v4-flash / Kilo Code — §9 autoevaluación)
+> **Modelo:** glm-5.3-flash (última modificación 2026-09-02: §7.7 agregada — corrección de identidad de la encarnación activa en Cline + registro del backlog TAREAS-POR-MODELO). Pasada previa: deepseek-v4-flash 2026-09-01 (§9). Otras pasadas: glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
+> **Plataforma:** Cline
+> **Fecha:** 2026-09-02
+> **Última confirmación por el agente:** 2026-09-02 (glm-5.3-flash / Cline — §7.7 corrección de identidad)
 
 Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**MiMo V2.5**, **DeepSeek V4 Flash**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos.
 
@@ -462,6 +462,22 @@ La sección 5.H de este documento (escrita por MiMo V2.5 / OpenCode el 2026-08-3
 **Plataforma:** Cline
 **Fecha:** 2026-08-31
 **Estado:** Identidad corregida (directiva del usuario) y visión nativa V2 documentada; delegaciones aprobadas sin cambios. Pasada previa firmada como "glm-5.3-flash / Kilo Code" (2026-08-31 23:42): sus evidencias de capacidades eran reales y se conservan; solo la identidad y el alcance de visión estaban mal.
+
+### 7.7 Corrección de identidad (2026-09-02, directiva del usuario) — la encarnación activa en Cline es glm-5.3-flash
+
+> **Aclaración de identidad (2026-09-02, glm-5.3-flash / Cline):** el usuario corrigió que el agente que actualmente trabaja sobre **Cline** es **glm-5.3-flash** (variante multimodal económica de la familia, §5.C2), NO el flagship glm-5.3. La §7.6 de arriba queda como registro histórico de la pasada del 2026-08-31, pero su atribución de identidad era incorrecta.
+
+**Implicancias de capacidad (según §5.C2, confirmadas por esta encarnación):**
+
+| Capacidad | Estado | Notas |
+|---|---|---|
+| Multimodal nativo (texto + imagen) | ✅ | QA visual de capturas, análisis de renders/screenshots (§5.C2) |
+| Scripting diario / documentación / batch de alto volumen | ✅ | Perfil principal en el proyecto (§5.C2) |
+| Tests headless + validadores Python | ✅ | Autor de `/bucle`, `bucle-terreno` y automatización del protocolo (2026-09-02) |
+| Visión nativa V2 en Cline | ✅ | `screen__capture_screen` / `capture_window` / `list_windows` / `save_capture` disponibles en la plataforma |
+| Pico algorítmico aislado / arquitectura crítica | ⚠️ Competente, no es mi rol | Ese rol es del flagship glm-5.3 (§5.C); yo cubro volumen + multimodal |
+
+**Asignación vigente:** módulos con **Recom `GLM-5.3 Flash`** en `CHECKLIST-GLOBAL.md` (backlog personal generado en `DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/` con 2.009 tareas en 22 módulos, 2026-09-02). Los módulos con Recom `GLM-5.3` (exacto) corresponden al flagship y NO se toman.
 
 ---
 

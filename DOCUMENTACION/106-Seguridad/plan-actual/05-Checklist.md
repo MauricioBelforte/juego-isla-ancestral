@@ -42,7 +42,7 @@
 
 ### [S] No incluir secrets en builds
 - [x] Definir secrets en .gitignore
-- [ ] Definir variables de entorno en lugar de hardcoded values
+- [x] Definir variables de entorno en lugar de hardcoded values
 - [x] Diseñar scripts de build que validan que no hay secrets en código
 - [x] Diseñar scanners de secrets en CI/CD
 - [x] Diseñar templates de configuración (.env.example) sin secrets

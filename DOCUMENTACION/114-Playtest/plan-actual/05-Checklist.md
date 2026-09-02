@@ -23,7 +23,7 @@
 - [x] Exigir una pregunta central accionable (una sola) por cada ronda [S]
 - [x] Definir plantilla de guía de sesión completada antes de empezar el reclutamiento [M]
 - [x] Definir tamaño de ronda: mínimo 3 jugadores, estándar 5-8 [M]
-- [ ] Implementar la regla de saturación: 5 jugadores consecutivos con el mismo hallazgo confirman el problema [M]
+- [x] Implementar la regla de saturación: 5 jugadores consecutivos con el mismo hallazgo confirman el problema [M]
 - [x] Definir composición de perfiles: cozy gamers, casuales y al menos un no jugador [M]
 - [x] Establecer timeline de sesión: briefing 5 min, juego libre 40 min, tareas 15 min, encuesta 10 min, entrevista 10 min [M]
 
@@ -32,7 +32,7 @@
 - [x] Definir canales de reclutamiento gratuitos: Discord, comunidades cozy, amigos del equipo [S]
 - [x] Redactar convocatoria de tester con criterios de exclusión (sin spoilers del roadmap, sin desarrollo de juegos) [M]
 - [ ] Exigir firma de NDA antes de la primera sesión [S]
-- [ ] Definir contenido mínimo del NDA: prohibición de divulgación de builds, mecánicas y grabaciones [M]
+- [x] Definir contenido mínimo del NDA: prohibición de divulgación de builds, mecánicas y grabaciones [M]
 - [ ] Definir consentimiento informado de grabación (pantalla, audio, webcam opcional) [M]
 - [x] Documentar el derecho del tester a retirarse y solicitar borrado de datos [S]
 - [ ] Establecer incentivo opcional y ético (gift card pequeña, créditos, early access) [S]
@@ -223,7 +223,7 @@
 - [ ] Crear 03-Diseno.md con arquitectura del Módulo y componentes de diseño [M]
 - [x] Crear 04-Codigo.md con archivos previstos, esqueletos de plantillas, ejemplo y notas del agente [M]
 - [ ] Crear 05-Checklist.md con más de 120 ítems verificables [M]
-- [ ] Firmar todos los archivos con modelo y plataforma (Deepseek V4 Flash / OpenCode) [S]
+- [x] Firmar todos los archivos con modelo y plataforma (Deepseek V4 Flash / OpenCode) [S]
 - [ ] Mantener todo el contenido del módulo en español [S]
 - [ ] Garantizar que plan-inicial es idéntico a plan-actual (verificado con hashes SHA-256) [S]
 

@@ -1,4 +1,4 @@
-# Modelo: deepseek-v4-flash
+﻿# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
@@ -39,7 +39,7 @@ func _test_config() -> void:
 		return
 	_check("DebugMenu autoload presente", true)
 	_check("3 pestañas", dm.pestanas().size() == 3, "size=%d" % dm.pestanas().size())
-	_check("12 comandos", dm.config.get("comandos", {}).size() == 12, "size=%d" % dm.config.get("comandos", {}).size())
+	_check("15 comandos", dm.config.get("comandos", {}).size() == 15, "size=%d" % dm.config.get("comandos", {}).size())
 
 func _test_comandos() -> void:
 	print("--- Comandos: teleport/spawn/time/flags/exportar ---")

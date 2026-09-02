@@ -1,21 +1,122 @@
 {
   "pestanas": [
-    {"id": "jugador", "nombre": "Jugador", "comandos": ["teleport_casa", "spawn_madera", "spawn_piedra", "toggle_ui", "set_vida"]},
-    {"id": "mundo", "nombre": "Mundo", "comandos": ["cambiar_hora", "cambiar_clima", "regenerar_chunks", "avanzar_dia"]},
-    {"id": "sistema", "nombre": "Sistema", "comandos": ["toggle_debug", "toggle_ui", "exportar_diagnostico", "limpiar_cache"]}
+    {
+      "id": "jugador",
+      "nombre": "Jugador",
+      "comandos": [
+        "teleport_casa",
+        "spawn_madera",
+        "spawn_piedra",
+        "toggle_ui",
+        "set_vida"
+      ]
+    },
+    {
+      "id": "mundo",
+      "nombre": "Mundo",
+      "comandos": [
+        "cambiar_hora",
+        "cambiar_clima",
+        "regenerar_chunks",
+        "avanzar_dia"
+      ]
+    },
+    {
+      "id": "sistema",
+      "nombre": "Sistema",
+      "comandos": [
+        "toggle_debug",
+        "toggle_ui",
+        "exportar_diagnostico",
+        "limpiar_cache",
+        "help",
+        "stats",
+        "reset_flags"
+      ]
+    }
   ],
   "comandos": {
-    "teleport_casa": {"accion": "teleport", "parametros": {"x": 256, "y": 30, "z": 256}},
-    "spawn_madera": {"accion": "spawn", "parametros": {"item": "wood", "n": 5}},
-    "spawn_piedra": {"accion": "spawn", "parametros": {"item": "stone", "n": 5}},
-    "set_vida": {"accion": "set_vida", "parametros": {"vida": 100}},
-    "cambiar_hora": {"accion": "cambiar_hora", "parametros": {"hora": 12}},
-    "cambiar_clima": {"accion": "cambiar_clima", "parametros": {"clima": 0}},
-    "regenerar_chunks": {"accion": "regenerar_chunks", "parametros": {}},
-    "avanzar_dia": {"accion": "avanzar_dia", "parametros": {"dias": 1}},
-    "toggle_debug": {"accion": "toggle_flag", "parametros": {"flag": "mostrar_debug"}},
-    "toggle_ui": {"accion": "toggle_flag", "parametros": {"flag": "mostrar_ui"}},
-    "exportar_diagnostico": {"accion": "exportar", "parametros": {}},
-    "limpiar_cache": {"accion": "limpiar_cache", "parametros": {}}
+    "teleport_casa": {
+      "accion": "teleport",
+      "parametros": {
+        "x": 256,
+        "y": 30,
+        "z": 256
+      }
+    },
+    "spawn_madera": {
+      "accion": "spawn",
+      "parametros": {
+        "item": "wood",
+        "n": 5
+      }
+    },
+    "spawn_piedra": {
+      "accion": "spawn",
+      "parametros": {
+        "item": "stone",
+        "n": 5
+      }
+    },
+    "set_vida": {
+      "accion": "set_vida",
+      "parametros": {
+        "vida": 100
+      }
+    },
+    "cambiar_hora": {
+      "accion": "cambiar_hora",
+      "parametros": {
+        "hora": 12
+      }
+    },
+    "cambiar_clima": {
+      "accion": "cambiar_clima",
+      "parametros": {
+        "clima": 0
+      }
+    },
+    "regenerar_chunks": {
+      "accion": "regenerar_chunks",
+      "parametros": {}
+    },
+    "avanzar_dia": {
+      "accion": "avanzar_dia",
+      "parametros": {
+        "dias": 1
+      }
+    },
+    "toggle_debug": {
+      "accion": "toggle_flag",
+      "parametros": {
+        "flag": "mostrar_debug"
+      }
+    },
+    "toggle_ui": {
+      "accion": "toggle_flag",
+      "parametros": {
+        "flag": "mostrar_ui"
+      }
+    },
+    "exportar_diagnostico": {
+      "accion": "exportar",
+      "parametros": {}
+    },
+    "limpiar_cache": {
+      "accion": "limpiar_cache",
+      "parametros": {}
+    },
+    "help": {
+      "accion": "ayuda",
+      "parametros": {}
+    },
+    "stats": {
+      "accion": "estadisticas",
+      "parametros": {}
+    },
+    "reset_flags": {
+      "accion": "reset_flags",
+      "parametros": {}
+    }
   }
 }

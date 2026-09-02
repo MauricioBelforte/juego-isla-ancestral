@@ -130,9 +130,9 @@
 - [ ] Diseñar M105 generar issues en M102 basados en patrones de datos
 
 ### [S] GameplayTelemetry (servicio)
-- [ ] Diseñar GameplayTelemetry como autoload
-- [ ] Diseñar signal telemetry_event(event_name, data)
-- [ ] Diseñar método track_event(event_name, data)
+- [x] Diseñar GameplayTelemetry como autoload
+- [x] Diseñar signal telemetry_event(event_name, data)
+- [x] Diseñar método track_event(event_name, data)
 - [ ] Diseñar método start_session()
 - [ ] Diseñar método end_session()
 - [ ] Diseñar método generate_session_id()
@@ -142,9 +142,9 @@
 - [ ] Diseñar variable opt_in
 - [ ] Diseñar variable session_id
 - [ ] Diseñar variable session_start_time
-- [ ] Diseñar variable tracked_events
-- [ ] Diseñar método has_tracked(event_name)
-- [ ] Diseñar método mark_tracked(event_name)
+- [x] Diseñar variable tracked_events
+- [x] Diseñar método has_tracked(event_name)
+- [x] Diseñar método mark_tracked(event_name)
 
 ### [S] Métodos de track de eventos
 - [ ] Diseñar método track_tutorial_first_completion()
@@ -189,31 +189,31 @@
 - [ ] Diseñar encuesta opcional (no forzar)
 
 ### [S] Almacenamiento local
-- [ ] Diseñar archivo user://telemetry/gameplay_events.json
+- [x] Diseñar archivo user://telemetry/gameplay_events.json
 - [x] Diseñar formato JSON de eventos
-- [ ] Diseñar método save_events_to_cache()
+- [x] Diseñar método save_events_to_cache()
 - [x] Diseñar carga de eventos al inicio (opcional)
 
 ### [S] Configuración
-- [ ] Diseñar archivo user://settings/telemetry.json
-- [ ] Diseñar formato JSON de configuración
+- [x] Diseñar archivo user://settings/telemetry.json
+- [x] Diseñar formato JSON de configuración
 - [ ] Diseñar método load_opt_in_status()
 - [ ] Diseñar método save_opt_in_status()
 
 ### [S] GameplayTelemetryLoader
-- [ ] Diseñar GameplayTelemetryLoader
+- [x] Diseñar GameplayTelemetryLoader
 - [ ] Diseñar método load_opt_in_status()
 - [ ] Diseñar integración con al inicio del juego
 
 ### [S] GameplayTelemetrySaver
-- [ ] Diseñar GameplayTelemetrySaver
+- [x] Diseñar GameplayTelemetrySaver
 - [ ] Diseñar método save_opt_in_status()
 - [ ] Diseñar integración al cerrar el juego
 
 ### [S] Archivos de implementación
-- [ ] Diseñar res://telemetry/gameplay_telemetry.gd
-- [ ] Diseñar res://telemetry/gameplay_telemetry_loader.gd
-- [ ] Diseñar res://telemetry/gameplay_telemetry_saver.gd
+- [x] Diseñar res://telemetry/gameplay_telemetry.gd
+- [x] Diseñar res://telemetry/gameplay_telemetry_loader.gd
+- [x] Diseñar res://telemetry/gameplay_telemetry_saver.gd
 
 ### [S] Pruebas de calidad
 - [x] Diseñar prueba de opt-in y opt-out de telemetría
