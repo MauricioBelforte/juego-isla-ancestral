@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "checks": {
+    "salud_general": {
+      "titulo": "Salud General del Juego",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "rev_001", "categoria": "reviews", "titulo": "Monitoreo de reviews en Steam/EGS/GOG", "dueno": "M97 marketing", "frecuencia": "diaria", "sla": "24h respuesta", "metricas": ["rating_promedio", "rating_ultima_semana", "numero_reviews"]},
+        {"id": "rev_002", "categoria": "reviews", "titulo": "Clasificacion automatica de reviews por tema", "dueno": "M101 QA", "frecuencia": "diaria", "metodo": "NLP sobre texto de review", "salida": "tag: bug|balance|ux|request"},
+        {"id": "rev_003", "categoria": "reviews", "titulo": "Respuesta a reviews < 48 h", "dueno": "M100 community", "frecuencia": "diaria", "sla": "48h"},
+        {"id": "rev_004", "categoria": "reviews", "titulo": "Deteccion de review bombing", "dueno": "M106 security", "frecuencia": "tiempo_real", "metodo": "spike detection sobre rating/tiempo"}
+      ]
+    },
+    "bugs": {
+      "titulo": "Triage de Bugs Post-Lanzamiento",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "bug_001", "categoria": "bugs", "titulo": "Triage continuo (P0-P3)", "dueno": "M102 crash", "frecuencia": "diaria", "metricas": ["abiertos_P0", "abiertos_P1", "cerrados_semana"]},
+        {"id": "bug_002", "categoria": "bugs", "titulo": "Regresion por parche", "dueno": "M112 testing", "metodo": "comparar tests antes/despues de cada release"},
+        {"id": "bug_003", "categoria": "bugs", "titulo": "Label post-launch en el tracker", "dueno": "M143 monitor"},
+        {"id": "bug_004", "categoria": "bugs", "titulo": "Informe semanal de bugs abiertos/cerrados", "dueno": "M143 monitor", "frecuencia": "semanal"}
+      ]
+    },
+    "rendimiento": {
+      "titulo": "Rendimiento en Produccion",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "perf_001", "categoria": "performance", "titulo": "Telemetria de FPS p50/p95", "dueno": "M105 telemetry", "frecuencia": "diaria", "metricas": ["fps_p50", "fps_p95", "fps_p99"]},
+        {"id": "perf_002", "categoria": "performance", "titulo": "Monitoreo de crashes (1k sesiones)", "dueno": "M122 crash", "umbral": "<0.1% crash rate"},
+        {"id": "perf_003", "categoria": "performance", "titulo": "Comparacion de perf entre parches", "dueno": "M96 plataformas"},
+        {"id": "perf_004", "categoria": "performance", "titulo": "Reporte de memoria en sesiones largas", "dueno": "M62 memoria", "umbral": "<2GB tras 4h de sesion"}
+      ]
+    },
+    "economia": {
+      "titulo": "Economia en Produccion",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "eco_001", "categoria": "economia", "titulo": "Inflacion / deflacion detectable", "dueno": "M38 economia", "frecuencia": "diaria", "umbral": "variacion <5% semanal"},
+        {"id": "eco_002", "categoria": "economia", "titulo": "Distribucion de moneda entre jugadores", "dueno": "M38 economia", "frecuencia": "semanal"},
+        {"id": "eco_003", "categoria": "economia", "titulo": "Detectar exploits de duplicacion", "dueno": "M106 security"}
+      ]
+    },
+    "retencion": {
+      "titulo": "Retencion Voluntaria (sin FOMO)",
+      "frecuencia": "semanal",
+      "items": [
+        {"id": "ret_001", "categoria": "retencion", "titulo": "Dias promedio entre sesiones (libre)", "dueno": "M94 retencion", "frecuencia": "semanal"},
+        {"id": "ret_002", "categoria": "retencion", "titulo": "Sesiones sin objetivo obligatorio cumplido", "dueno": "M94 retencion", "frecuencia": "semanal", "umbral": ">80% sesiones son libres"},
+        {"id": "ret_003", "categoria": "retencion", "titulo": "Tasa de retorno voluntario (no forzado)", "dueno": "M94 retencion", "frecuencia": "semanal"}
+      ]
+    },
+    "soporte": {
+      "titulo": "Soporte al Jugador",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "sup_001", "categoria": "soporte", "titulo": "Tickets de soporte < 24 h", "dueno": "M100 community", "sla": "24h primera respuesta"},
+        {"id": "sup_002", "categoria": "soporte", "titulo": "FAQ actualizada con problemas frecuentes", "dueno": "M100 community", "frecuencia": "semanal"},
+        {"id": "sup_003", "categoria": "soporte", "titulo": "Discord/forum con moderadores activos", "dueno": "M100 community"}
+      ]
+    },
+    "comunidad": {
+      "titulo": "Gestion de Comunidad",
+      "frecuencia": "diaria",
+      "items": [
+        {"id": "com_001", "categoria": "comunidad", "titulo": "Anuncios oficiales de parches", "dueno": "M100 community"},
+        {"id": "com_002", "categoria": "comunidad", "titulo": "Eventos tematicos mensuales (M74)", "dueno": "M100 community"},
+        {"id": "com_003", "categoria": "comunidad", "titulo": "Destacar creations de la comunidad (M124)", "dueno": "M100 community"}
+      ]
+    },
+    "versionado": {
+      "titulo": "Versionado y Parches",
+      "frecuencia": "por_parche",
+      "items": [
+        {"id": "ver_001", "categoria": "versionado", "titulo": "Politica de versionado semver", "dueno": "M118 CI-CD", "frecuencia": "por_parche"},
+        {"id": "ver_002", "categoria": "versionado", "titulo": "CHANGELOG.md generado automaticamente", "dueno": "M118 CI-CD"},
+        {"id": "ver_003", "categoria": "versionado", "titulo": "Hotfix path < 24 h para criticos", "dueno": "M143 monitor", "sla": "24h P0"}
+      ]
+    },
+    "hotfix": {
+      "titulo": "Pipeline de Hotfix",
+      "frecuencia": "por_bug",
+      "items": [
+        {"id": "fix_001", "categoria": "hotfix", "titulo": "Criterio de escalamiento a hotfix (P0)", "dueno": "M122 crash"},
+        {"id": "fix_002", "categoria": "hotfix", "titulo": "Branch hotfix aislado de main", "dueno": "M118 CI-CD"},
+        {"id": "fix_003", "categoria": "hotfix", "titulo": "Test de regresion obligatorio antes de merge", "dueno": "M112 testing"}
+      ]
+    }
+  },
+  "politicas": {
+    "reportes_automaticos": "data-driven, sin redaccion manual",
+    "frecuencia_minima_diaria": ["salud_general", "bugs", "rendimiento", "economia", "soporte", "comunidad"],
+    "frecuencia_minima_semanal": ["retencion", "versionado"],
+    "alertas_inmediatas": ["crash", "review_bombing", "exploit_economia"]
+  }
+}

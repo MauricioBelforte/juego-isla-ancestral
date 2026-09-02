@@ -54,3 +54,24 @@
 Iter 1: tomar **M118 CI-CD**, reservar en 4 registros, implementar el nucleo data-driven (pipelines de build + tests automatizados + hooks de git), test headless 0 fallos, log, liberar, continuar con el siguiente.
 
 **Nota sobre el conteo "0 pendientes" en 05-Checklist.md**: los planes estan al 100% de items `[x]` por diseno, pero la implementacion real esta pendiente. Mis tareas reales son implementar los modulos siguiendo el plan, no cerrar items de diseno. Por eso la metodologia me asigna 4 modulos con check de 100+ items cada uno: ese conteo refleja el plan completo a implementar/iterar.
+
+## Estado de iter (2026-09-02)
+
+- **M118 CI-CD iter 1**: 4 scripts Python en tools/ci/ (pipeline.py + build_dev.py + build_release.py + run_tests.py + lint_check.py). 17 items del checklist personal cerrados. log 541.
+- **M131 Creditos iter 2**: credits_manager autoload + creditos.json 7 secciones + i18n es/en. test 26/26 OK. log 542.
+- **M127 Copyright iter 1**: tools/legal/generate_copyright_docs.py + copyright.json ampliado a 7 elementos. test 13/13 OK. log 543.
+- **M144 Post-Lanzamiento iter 1**: tools/postlaunch/generate_postlaunch_checklist.py + postlaunch_checks.json 30 checks en 9 categorias. test 14/14 OK. log 544.
+
+## Pendientes por iter futura
+
+- **M118 CI-CD iter 2**: implementar GitHub Actions workflows, M111 Code Quality integration, cobertura de tests.
+- **M131 Creditos iter 2**: busqueda por nombre/rol, animaciones de scroll, accesibilidad (M58).
+- **M127 Copyright iter 2**: registro formal USCO, evidencia de autoria (git logs, timestamps).
+- **M144 Post-Lanzamiento iter 2**: automatizar reportes, alertas, dashboard con tendencias.
+
+## Reglas de trabajo
+
+1. Cada modulo: reserva en 4 registros -> implementar -> test 0 fallos -> log -> liberar.
+2. Documentar honestamente lo que NO hago (con [?] y dueno explicito).
+3. NO pisar a otros agentes. NO modificar codigo de otros modulos sin coordinacion.
+4. Persistencia M59: cada nuevo autoload implementa get_section_name/get_save_data/restore_save_data.

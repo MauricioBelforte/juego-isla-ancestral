@@ -1,5 +1,0 @@
-numero: 551
-agente: glm-5.3
-plataforma: Kilo Code
-modulo: M36-Fauna (asset 3D cangrejo_playa)
-fecha: 2026-09-02 21:25

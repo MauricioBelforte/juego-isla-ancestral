@@ -1,0 +1,34 @@
+LICENSE — Isla Ancestral
+
+Copyright (c) 2026 Isla Ancestral Team
+
+Licencia aplicable: Propietaria
+
+---
+
+TODOS LOS DERECHOS RESERVADOS.
+
+Este software y su contenido asociado (graficos, audio, narrativa) son
+propiedad de Isla Ancestral Team. No se permite la redistribucion, modificacion,
+o uso comercial sin autorizacion escrita del titular.
+
+---
+
+## Componentes
+
+- Isla Ancestral (Nombre del juego) (marca_y_copyright) © 2026 Isla Ancestral Team
+- Codigo fuente (GDScript, C# si aplica) (copyright) © 2026 Isla Ancestral Team
+- Assets visuales (texturas, modelos 3D, sprites, animaciones) (copyright) © 2026 Isla Ancestral Team
+- Musica y efectos de sonido originales (copyright) © 2026 Isla Ancestral Team
+- Narrativa, dialogos, lore y canon del mundo (copyright) © 2026 Isla Ancestral Team
+- Motor voxel (codigo personalizado) (copyright) © 2026 Isla Ancestral Team
+- Logo 'Isla Ancestral' y branding (marca) © 2026 Isla Ancestral Team
+
+## Software y assets de terceros (atribuciones)
+
+Ver NOTICE.md para la lista completa de licencias de terceros.
+
+---
+
+Este archivo fue generado automaticamente por `tools/legal/generate_copyright_docs.py` el 2026-09-02T18:45:47.793857.
+Si modifica manualmente el copyright, regenere con el script.

@@ -1,10 +1,78 @@
 {
   "elementos": [
-    {"id": "nombre_juego", "elemento": "Nombre del juego", "titular": "Estudio", "protegido": true},
-    {"id": "codigo_fuente", "elemento": "Código fuente", "titular": "Estudio", "protegido": true},
-    {"id": "assets_visuales", "elemento": "Assets visuales", "titular": "Estudio", "protegido": true},
-    {"id": "musica", "elemento": "Música", "titular": "Estudio", "protegido": true},
-    {"id": "narrativa", "elemento": "Narrativa y canon", "titular": "Estudio", "protegido": true}
+    {
+      "id": "nombre_juego",
+      "elemento": "Isla Ancestral (Nombre del juego)",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "marca_y_copyright",
+      "jurisdiccion": "global",
+      "nota": "Berne Convention: proteccion automatica al crear la obra"
+    },
+    {
+      "id": "codigo_fuente",
+      "elemento": "Codigo fuente (GDScript, C# si aplica)",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "copyright",
+      "licencia": "Propietaria",
+      "nota": "Todos los derechos reservados. Ver LICENSE para terminos."
+    },
+    {
+      "id": "assets_visuales",
+      "elemento": "Assets visuales (texturas, modelos 3D, sprites, animaciones)",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "copyright",
+      "licencia": "Propietaria"
+    },
+    {
+      "id": "musica",
+      "elemento": "Musica y efectos de sonido originales",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "copyright",
+      "licencia": "Propietaria"
+    },
+    {
+      "id": "narrativa",
+      "elemento": "Narrativa, dialogos, lore y canon del mundo",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "copyright",
+      "licencia": "Propietaria"
+    },
+    {
+      "id": "voxel_engine",
+      "elemento": "Motor voxel (codigo personalizado)",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "copyright",
+      "licencia": "Propietaria"
+    },
+    {
+      "id": "logo_marca",
+      "elemento": "Logo 'Isla Ancestral' y branding",
+      "titular": "Isla Ancestral Team",
+      "protegido": true,
+      "year": 2026,
+      "tipo": "marca",
+      "jurisdiccion": "global",
+      "registro": "pendiente",
+      "nota": "Registro formal pendiente pre-lanzamiento"
+    }
   ],
-  "politicas": {"marca_copyright_en_distribucion": true, "registro_opcional": true}
+  "politicas": {
+    "marca_copyright_en_distribucion": true,
+    "registro_opcional": true,
+    "year_display": "auto",
+    "incluir_licencias_terceros": true,
+    "incluir_atribuciones": true
+  }
 }
