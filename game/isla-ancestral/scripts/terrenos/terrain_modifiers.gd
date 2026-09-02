@@ -23,10 +23,27 @@ static func get_terrain_modifier(provider: Node, terrain_id: int) -> float:
 
 
 ## Bonificación de equipación desde M155 (0.0 si no está, §3.1)
+## M155.get_terrain_bonus espera terrain_type: String (nombre del terreno);
+## el provider de M156 usa ids numéricos → mapeo id→nombre del §4.1.
+const NOMBRES_TERRENO := {
+	0: "caminado", 1: "barro", 2: "césped", 3: "arena",
+	4: "agua", 5: "nieve", 6: "rocas",
+}
+
 static func get_equipment_bonus(equipment_system: Node, terrain_id: int) -> float:
 	if equipment_system != null and equipment_system.has_method("get_terrain_bonus"):
-		return float(equipment_system.get_terrain_bonus(terrain_id))
+		# Puente tipado: M155 es String; si el manager rechaza int, convertir
+		var nombre: String = String(NOMBRES_TERRENO.get(terrain_id, "caminado"))
+		var bonus := 0.0
+		var r: Variant = equipment_system.get_terrain_bonus(nombre)
+		bonus = float(r)
+		return bonus
 	return 0.0
+
+
+## Integración end-to-end (iter. 1): provider + equipo → velocidad efectiva
+static func calculate_full(base_speed: float, provider: Node, terrain_id: int, equipment_system: Node) -> float:
+	return calculate_effective_speed(base_speed, get_terrain_modifier(provider, terrain_id), get_equipment_bonus(equipment_system, terrain_id))
 
 
 ## ── Iter. 2: suavizado de cambios de velocidad (diseño "suavizar") ──
