@@ -141,3 +141,9 @@
 
 **Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, pipeline y reglas cierran aquí.
+## Auditoría + fix CI (2026-09-02 17:40 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Auditoría de workflows (4): backup.yml (Google Drive), bug_metrics.yml (Python), quality.yml (GDScript Linter headless), testing.yml (GdUnit4 via firebelley/godot-export)
+- [x] **Fix: testing.yml usaba godot_version 4.3 con el proyecto 4.7.2** (el CI de tests estaba roto de facto) → actualizado a 4.7.2
+- [x] El gate de tests del CI usa GdUnit4 (run tests del proyecto) — pipeline coherente con la metodología de tests del repo
+- [?] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar upgrade para resolver 4.7.2 en CI — dueño: deepseek-v4-flash-vision-exp, verificar en el primer push)

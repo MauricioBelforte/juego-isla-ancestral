@@ -166,3 +166,7 @@
 **Total de ítems:** 106
 **Ítems resueltos por documentación:** 106 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_modding_m123.gd: 16/16 checks OK (ModdingManager 2 mods, compatibilidad por versión 1.0.0/0.8.0, activación, conflicto override detectado (mod_aurora_qol → mod_aurora_items), config válida)
+- [x] Módulo operativo: gestión de mods con validación y conflictos

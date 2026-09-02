@@ -205,3 +205,7 @@
 **Total de ítems:** 108
 **Ítems resueltos por documentación:** 108 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_monetizacion_m95.gd: 17/17 checks OK (3 ediciones standard/deluxe/coleccionista con historia completa, precios correctos (standard 24.99), 2 DLC planificados (expansión + cosmético), roadmap ordenado, catálogo vacío OK)
+- [x] Módulo operativo: ediciones y roadmap verificados

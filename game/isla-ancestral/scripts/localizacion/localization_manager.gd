@@ -5,12 +5,12 @@
 # M87: Localización — LocalizationManager (autoload)
 # Catálogo de cadenas por idioma (data-driven, strings_*.json), idioma activo,
 # fallback a ES, interpolación {var}, pluralización simple, persistencia en M58.
+# Detecta automáticamente los idiomas disponibles en data/localizacion/.
 # ⚠️ Sin class_name (autoload).
 
 extends Node
 
 const DIR_LOC := "res://data/localizacion/"
-const IDIOMAS_BASE := ["es", "en"]
 
 var _cadenas: Dictionary = {}  # idioma -> {clave: texto}
 var idioma_actual: String = "es"
@@ -21,11 +21,15 @@ func _ready() -> void:
 	print("[M87] LocalizationManager listo (%d idiomas)" % _cadenas.size())
 
 func _cargar_idiomas() -> void:
-	for lang in IDIOMAS_BASE:
-		var ruta := "%sstrings_%s.json" % [DIR_LOC, lang]
-		if not FileAccess.file_exists(ruta):
-			push_warning("[M87] No encontrado: %s" % ruta)
+	var dir := DirAccess.open(DIR_LOC)
+	if dir == null:
+		push_warning("[M87] No existe data/localizacion/")
+		return
+	for nombre in dir.get_files():
+		if not nombre.begins_with("strings_") or not nombre.ends_with(".json"):
 			continue
+		var lang := nombre.trim_prefix("strings_").trim_suffix(".json")
+		var ruta := "%s%s" % [DIR_LOC, nombre]
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(ruta))
 		if typeof(parsed) == TYPE_DICTIONARY:
 			_cadenas[lang] = parsed.get("cadenas", {})

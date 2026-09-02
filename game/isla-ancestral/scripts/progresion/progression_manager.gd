@@ -50,6 +50,7 @@ func _ready() -> void:
 	_registrar_proveedor_guardado()
 	_conectar_eventos()
 	_log_info("ProgressionManager ready, " + str(_hitost.size()) + " hitos cargados")
+	_validar_catalogo_en_ruta()
 
 
 ## ── Logger helper ────────────────────────────────────────
@@ -474,6 +475,135 @@ func _stats_validos_conocidos() -> Array[String]:
 			"nivel_pico", "nivel_azada", "nivel_hacha", "nivel_pala",
 			"nivel_regadera", "nivel_cana", "nivel_martillo", "nivel_tijeras",
 			"nivel_lupa"]
+
+
+## ── Validación de catálogo (RF16, T-001) ────────────────────────
+## Valida el hitos.json en busca de errores que deben corregirse antes de jugar.
+func validar_catalogo() -> Array[String]:
+	"""Retorna lista de warnings/errors encontrados en el catálogo.
+	Empty array = catálogo válido."""
+	var errores: Array[String] = []
+	# 1. IDs únicos
+	var ids_vistos: Dictionary = {}
+	for hito_id in _hitost:
+		if ids_vistos.has(hito_id):
+			errores.append("Hito duplicado: '" + hito_id + "'")
+		ids_vistos[hito_id] = true
+	# 2. Condiciones con referencias inválidas
+	var stats_conocidas := _stats_validos_conocidos()
+	for hito_id in _hitost:
+		var cond: Dictionary = _hitost[hito_id].get("condicion", {})
+		_validar_condicion(cond, hito_id, errores, stats_conocidas)
+	# 3. Ciclos en hitos_previo (simple: max depth 10)
+	var ciclos := _detectar_ciclos_hito_previo()
+	for ciclo in ciclos:
+		errores.append("Ciclo detectado en hitos_previo: " + " -> ".join(ciclo))
+	# 4. Hitos con condición vacía pero recompensas
+	for hito_id in _hitost:
+		var hito: Dictionary = _hitost[hito_id]
+		var cond: Dictionary = hito.get("condicion", {})
+		var recompensas: Array = hito.get("recompensas", [])
+		if cond.is_empty() and recompensas.size() > 0:
+			errores.append("Hito '" + hito_id + "' tiene recompensas sin condición")
+	return errores
+
+
+func _validar_condicion(cond: Dictionary, hito_id: String, errores: Array[String], stats: Array[String]) -> void:
+	if cond.is_empty():
+		return
+	var tipo := String(cond.get("tipo", ""))
+	match tipo:
+		"stat_min", "riqueza_acumulada":
+			var sid := String(cond.get("stat_id", ""))
+			if sid != "" and not stats.has(sid):
+				errores.append("Hito '" + hito_id + "' referencia stat desconocida: '" + sid + "'")
+			if int(cond.get("umbral", 0)) < 0:
+				errores.append("Hito '" + hito_id + "' umbral negativo: " + str(cond.get("umbral")))
+		"dias_jugados":
+			if int(cond.get("umbral", 0)) < 0:
+				errores.append("Hito '" + hito_id + "' umbral dias_jugados negativo")
+		"sello_historia":
+			var sello_id := String(cond.get("sello_id", ""))
+			if sello_id.is_empty():
+				errores.append("Hito '" + hito_id + "' sello_historia sin sello_id")
+		"capitulo_historia":
+			pass  # no se puede validar sin autoload Historia
+		"coleccion_completa":
+			var cid := String(cond.get("coleccion_id", ""))
+			if cid.is_empty():
+				errores.append("Hito '" + hito_id + "' coleccion_completa sin coleccion_id")
+		"nivel_modulo":
+			var mod := String(cond.get("modulo", ""))
+			if mod != "herramienta" and mod != "casa":
+				errores.append("Hito '" + hito_id + "' nivel_modulo modulo invalido: '" + mod + "'")
+			if int(cond.get("umbral", 0)) < 0:
+				errores.append("Hito '" + hito_id + "' nivel_modulo umbral negativo")
+		"primera_vez":
+			var act_id := String(cond.get("actividad_id", ""))
+			if act_id.is_empty():
+				errores.append("Hito '" + hito_id + "' primera_vez sin actividad_id")
+		"hito_previo":
+			var ref := String(cond.get("milestone_id", ""))
+			if ref.is_empty():
+				errores.append("Hito '" + hito_id + "' hito_previo sin milestone_id")
+		"compuesta":
+			var hijos: Array = cond.get("hijos", [])
+			for hijo in hijos:
+				if hijo is Dictionary:
+					_validar_condicion(hijo as Dictionary, hito_id, errores, stats)
+		_:
+			if tipo != "":
+				errores.append("Hito '" + hito_id + "' tipo condicion desconocido: '" + tipo + "'")
+
+
+func _detectar_ciclos_hito_previo() -> Array:
+	"""Detecta ciclos simples en dependencias hito_previo (max profundidad 10)."""
+	var ciclos: Array = []
+	const MAX_DEPTH: int = 10
+	for hito_id in _hitost:
+		var visitada: Array[String] = []
+		var path_actual: Array[String] = [hito_id]
+		if _seguir_hito_previo(hito_id, visitada, path_actual, ciclos, 0, MAX_DEPTH):
+			break
+	return ciclos
+
+
+func _seguir_hito_previo(hito_id: String, visitadas: Array[String], path: Array[String],
+						 ciclos: Array, depth: int, max_depth: int) -> bool:
+	if depth >= max_depth:
+		return false
+	if visitadas.has(hito_id):
+		# Encontró ciclo
+		var idx := visitadas.find(hito_id)
+		if idx >= 0:
+			ciclos.append(path.duplicate() + [hito_id])
+		return true
+	visitadas.append(hito_id)
+	var cond: Dictionary = _hitost.get(hito_id, {}).get("condicion", {})
+	if String(cond.get("tipo", "")) == "compuesta":
+		var hijos: Array = cond.get("hijos", [])
+		for hijo in hijos:
+			if hijo is Dictionary:
+				var h := hijo as Dictionary
+				if String(h.get("tipo", "")) == "hito_previo":
+					var ref := String(h.get("milestone_id", ""))
+					if ref != "" and _hitost.has(ref):
+						if _seguir_hito_previo(ref, visitadas, path + [ref], ciclos, depth + 1, max_depth):
+							visitadas.pop_back()
+							return true
+	visitadas.pop_back()
+	return false
+
+
+func _validar_catalogo_en_ruta() -> void:
+	"""Valida el catálogo cargado y loguea cualquier problema."""
+	var errores := validar_catalogo()
+	if errores.size() == 0:
+		_log_info("Catálogo validado OK: " + str(_hitost.size()) + " hitos, 0 errores")
+	else:
+		for err in errores:
+			push_warning("[M71] Error catálogo: " + err)
+			_log_info("Catálogo warning: " + err)
 
 
 ## ── Evaluador de condiciones (11 tipos, §3.6) ───────────

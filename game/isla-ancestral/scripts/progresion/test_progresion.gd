@@ -40,6 +40,7 @@ func _run() -> void:
 	_test_impossible_conditions()
 	_test_pure_predicate()
 	_test_cache_and_reevaluar()
+	_test_catalogo_validacion()
 	print("=== TEST M71 PROGRESION: " + str(_fallos) + " fallo(s) ===")
 	quit(1 if _fallos > 0 else 0)
 
@@ -220,4 +221,18 @@ func _test_cache_and_reevaluar() -> void:
 	var post_count: int = _pm.hitos_alcanzados().size()
 	# Debe ser >= (nunca disminuye); algunos nuevos hitos pueden dispararse
 	_check(post_count >= pre_count, "reevaluar_sucias: no reduce hitos alcanzados (%d->%d)" % [pre_count, post_count])
+
+
+func _test_catalogo_validacion() -> void:
+	# Catálogo actual debe ser limpio (0 errores)
+	var errores: Array[String] = _pm.validar_catalogo()
+	_check(errores is Array, "validar_catalogo() retorna Array")
+	_check(errores.size() == 0, "catálogo actual sin errores de validación (descubiertos: %d)" % errores.size())
+	# IDs únicos: verificar que ninguno está duplicado
+	var ids: Dictionary = {}
+	for h in ["hito_items_10", "hito_monedas_1000", "hito_misiones_1", "hito_regalos_5"]:
+		if ids.has(h):
+			_check(false, "ID duplicado: " + h)
+		ids[h] = true
+	_check(ids.size() == 4, "IDs únicos verificados (4)")
 

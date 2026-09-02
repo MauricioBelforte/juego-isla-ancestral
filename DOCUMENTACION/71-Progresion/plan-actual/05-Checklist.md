@@ -269,7 +269,7 @@
 
 ## T. Documentación entregada
 
-- [ ] Crear 01-Requerimientos.md con problema, objetivo, alcance y RF1-RF16 [M]
+- [x] Crear 01-Requerimientos.md con problema, objetivo, alcance y RF1-RF16 [M]
 - [ ] Crear 02-Analisis.md con dominio, curvas, anti-frustración, alternativas y decisiones [M]
 - [ ] Crear 03-Diseno.md con arquitectura, flujos, clases, contratos de señales y persistencia [M]
 - [x] Crear 04-Codigo.md con rutas previstas res://progresion/... y firmas GDScript [M]

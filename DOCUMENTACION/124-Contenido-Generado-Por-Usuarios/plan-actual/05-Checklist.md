@@ -193,3 +193,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs si aplica).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
+## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_ugc_m124.gd: **16/16 checks OK, exit 0** (UgcManager 3 piezas, 5 tipos/4 estados válidos, 2 publicadas + 1 en revisión, 2 decoraciones, catálogo 0 errores, reportes, detecciones de tipo/estado/política inválidos)
+- [x] Módulo verificado: flujos de moderación y validación de UGC operativos
