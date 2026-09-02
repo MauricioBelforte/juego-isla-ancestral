@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnchantmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enchantment/enchantment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "brillante_oro"
+display_name = "Oro Brillante"
+description = "+50% precio de venta en tiendas"
+tool_tier = 3
+ability_type = "sell_bonus"
+ability_value = 0.5
+visual_color = Color(1, 0.84, 0, 1)
+incense_cost = 8
+coin_cost = 800
+animation_duration = 4.0
+icon = null

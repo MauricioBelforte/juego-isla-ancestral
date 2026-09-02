@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_001-CAP1-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_001",
+      "text_key": "La ceniza no es solo restos. Es energia concentrada de la civilizacion perdida.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_001"
+    }
+  }
+}

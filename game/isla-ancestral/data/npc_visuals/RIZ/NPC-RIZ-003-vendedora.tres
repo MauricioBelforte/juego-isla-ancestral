@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Bufanda ligera"
+estilo = "Anudada atrás"
+color_principal = "#E2725B"
+material = "Tela"
+notas = "Terracota"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa básica"
+estilo = "Manga media"
+color_principal = "#FFFDD0"
+material = "Algodón"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Falda"
+estilo = "Hasta rodillas"
+color_principal = "#E2725B"
+material = "Tela"
+notas = "Terracota"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas bajas"
+estilo = "Cuero suave"
+color_principal = "#C4A882"
+material = "Cuero"
+notas = "Marrón claro"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Bolsa de tela"
+ubicacion = "manos"
+color = "#A0522D"
+notas = "Mercancía"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-RIZ-003"
+nombre = "Vendedora Tienda General"
+isla = "RIZ"
+piel = "SK-02"
+cabello = "HR-02"
+ojos = "EY-02"
+complexion = "MEDIA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5")]
+variantes_estacionales = {}

@@ -1,0 +1,26 @@
+{
+  "gates": {
+    "pr": {
+      "nombre": "Gate PR (rápido)",
+      "requisitos": ["lint", "tests_rapidos", "stress_save"],
+      "modulos_obligatorios": ["M113", "M112"]
+    },
+    "nightly": {
+      "nombre": "Gate Nocturno",
+      "requisitos": ["tests_completos", "stress_full", "regresion_visual"],
+      "modulos_obligatorios": ["M61", "M62", "M63"]
+    },
+    "release": {
+      "nombre": "Gate Release",
+      "requisitos": ["tests_completos", "stress_full", "perf_gate", "crash_gate", "qa_cruzado"],
+      "modulos_obligatorios": ["M142", "M143", "M144"]
+    }
+  },
+  "checklist_integracion": [
+    {"id": "build_limpio", "descripcion": "Build compila sin errores"},
+    {"id": "tests_ok", "descripcion": "Suite de tests 100% OK"},
+    {"id": "sin_regresiones", "descripcion": "Regresión de módulos core OK"},
+    {"id": "docs_actualizadas", "descripcion": "Plan-actual y checklists al día"},
+    {"id": "logs_generados", "descripcion": "Log del módulo en Logs/"}
+  ]
+}

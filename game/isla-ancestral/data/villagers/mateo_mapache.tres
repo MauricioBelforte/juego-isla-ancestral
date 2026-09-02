@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "mateo_mapache"
+nombre = "Mateo"
+especie = "mapache"
+personalidad = "animada"
+edad_categoria = "juventud"
+profesion = "granjero"
+cumpleanos_mes = 8
+cumpleanos_dia = 2
+edad_base = 22
+color_cuerpo = Color(0.5, 0.42, 0.36, 1)
+color_cabeza = Color(0.62, 0.5, 0.4, 1)
+escala_cuerpo = 0.95
+historia = "Mateo llegó con una maleta llena de semillas y ninguna idea de dónde plantarlas. Catalina lo adoptó como ayudante."
+gustos = ["tomate", "fibra_algodon"]
+disgustos = ["fragmento_ancestral"]
+hobbies = ["jardinería", "cantar"]
+rutina_diaria = {
+"07:00": "trabajar",
+"11:00": "regar",
+"16:00": "trabajar",
+"21:00": "descansar"
+}
+linea_saludo = "¡Las semillas no se siembran solas! ¿Me das una mano?"
+linea_despedida = "Nos vemos en la parcela, ¡el sol no espera!"
+linea_sueno = "Zzz... tomates gigantes..."
+hogar_deseado = "pradera"

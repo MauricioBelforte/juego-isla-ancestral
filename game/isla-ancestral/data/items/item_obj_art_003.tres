@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-ART-003"
+nombre = "Cristal ancestral"
+descripcion = ""
+categoria = 13
+subcategoria = "CRISTALES"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [9]
+fuente = ""
+precio_compra = 500
+precio_venta = 250
+rareza = 3
+apilable = false
+stack_max = 1
+material = "Cristal"
+color = "#00CED1"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

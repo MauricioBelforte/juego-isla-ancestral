@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_005-CAP2-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_005",
+      "text_key": "Ahora puedo pescar desde el otro lado del puente. ¡Nuevos peces!",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_005"
+    }
+  }
+}

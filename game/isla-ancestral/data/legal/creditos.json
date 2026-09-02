@@ -1,0 +1,8 @@
+{
+  "secciones": [
+    {"id": "desarrollo", "titulo": "Desarrollo", "rol": "equipo", "entradas": ["Diseñador", "Programador", "Artista"]},
+    {"id": "musica", "titulo": "Música y sonido", "rol": "equipo", "entradas": ["Compositor", "Diseñador de sonido"]},
+    {"id": "agradecimientos", "titulo": "Agradecimientos", "rol": "comunidad", "entradas": ["Testers", "Beta"]}
+  ],
+  "politicas": {"credit_obligatorio_para_contribuidores": true, "verificacion_nombres": true}
+}

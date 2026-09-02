@@ -1,0 +1,17 @@
+{
+  "id": "DLG-CEN_001-CAP0-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cen_001",
+      "text_key": "El hierro de Ceniza es el mejor del archipielago. Viene de las montanas.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cen_001"
+    }
+  }
+}

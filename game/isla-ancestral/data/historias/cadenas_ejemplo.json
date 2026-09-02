@@ -1,0 +1,53 @@
+{
+  "cadenas": [
+    {
+      "id": "cadena-faro",
+      "titulo": "El Faro de las Memorias",
+      "contexto": "El farero recuerda la noche del eclipse y quiere encender el faro una vez más para guiar a los barcos perdidos.",
+      "tipo": "vecinos",
+      "pasos": [
+        {"id": "p1", "tipo": "hablar", "npc": "farero", "condicion": "estado_mundo.faro_apagado"},
+        {"id": "p2", "tipo": "explorar", "lugar": "faro", "requisito": "mejor_interior"},
+        {"id": "p3", "tipo": "puzzle", "ref": "M25-faro-linterna"},
+        {"id": "p4", "tipo": "entregar", "objeto": "farol_cargado"}
+      ],
+      "recompensa": {"diario": "capitulo-faro", "cosmetico": "farol de atardecer"},
+      "consecuencia": {"estado_mundo.faro_encendido": true},
+      "dialogo_posterior": "farero_final",
+      "oculta": false,
+      "postgame": false
+    },
+    {
+      "id": "cadena-biblioteca",
+      "titulo": "La Biblioteca Perdida",
+      "contexto": "La biblioteca del pueblo guarda tomos antiguos sobre la historia de la isla, pero necesita un investigador que los catalogue.",
+      "tipo": "lugares",
+      "pasos": [
+        {"id": "p1", "tipo": "hablar", "npc": "bibliotecaria", "condicion": "estado_mundo.biblioteca_abierta"},
+        {"id": "p2", "tipo": "explorar", "lugar": "biblioteca", "requisito": "linterna"},
+        {"id": "p3", "tipo": "entregar", "objeto": "tomo_antiguo"}
+      ],
+      "recompensa": {"diario": "capitulo-biblioteca", "cosmetico": "gafas_estudioso"},
+      "consecuencia": {"estado_mundo.biblioteca_iluminada": true},
+      "dialogo_posterior": "bibliotecaria_final",
+      "oculta": false,
+      "postgame": false
+    },
+    {
+      "id": "cadena-postgame-plaza",
+      "titulo": "Epílogo: La Plaza del Pueblo",
+      "contexto": "Tras el final de la historia principal, el pueblo se reúne para reconstruir la plaza y honrar a quienes salvaron la isla.",
+      "tipo": "postgame",
+      "pasos": [
+        {"id": "p1", "tipo": "hablar", "npc": "alcalde", "condicion": "final_eligido"},
+        {"id": "p2", "tipo": "construir", "lugar": "plaza", "requisito": "materiales_plaza"},
+        {"id": "p3", "tipo": "entregar", "objeto": "plaza_reconstruida"}
+      ],
+      "recompensa": {"diario": "epilogo-plaza", "cosmetico": "medalla_ciudadano"},
+      "consecuencia": {"estado_mundo.plaza_decorada": true},
+      "dialogo_posterior": "alcalde_epilogo",
+      "oculta": false,
+      "postgame": true
+    }
+  ]
+}

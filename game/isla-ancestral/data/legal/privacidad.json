@@ -1,0 +1,14 @@
+{
+  "datos_recolectados": [
+    {"id": "guardados", "tipo": "local", "descripcion": "Saves locales del jugador", "base_legal": "contrato"},
+    {"id": "crash_reports", "tipo": "opcional", "descripcion": "Reportes de crash anónimos", "base_legal": "interes_legitimo"},
+    {"id": "telemetria", "tipo": "opcional", "descripcion": "Métricas de gameplay agregadas", "base_legal": "interes_legitimo"},
+    {"id": "email_newsletter", "tipo": "opt_in", "descripcion": "Email para newsletter", "base_legal": "consentimiento"}
+  ],
+  "regiones": ["gdpr", "ccpa", "latam"],
+  "politicas": {
+    "consentimiento_explicito": true,
+    "derecho_olvido": true,
+    "portabilidad": true
+  }
+}

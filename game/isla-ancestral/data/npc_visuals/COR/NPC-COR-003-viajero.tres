@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Turbante"
+estilo = "Enrollado, pluma roja"
+color_principal = "#FFD700"
+color_secundario = "#FF4500"
+material = "Tela"
+notas = "Pluma roja"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Túnica fluida"
+estilo = "Manga amplia, bordados"
+color_principal = "#FFD700"
+material = "Seda"
+notas = "Dorado"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón bombacho"
+estilo = "Suelto"
+color_principal = "#FFFDD0"
+material = "Lino"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas bajas"
+estilo = "Suaves"
+color_principal = "#A0522D"
+material = "Cuero"
+notas = "Silenciosas"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Bolsa de cuero"
+ubicacion = "manos"
+color = "#A0522D"
+notas = "Mercancía"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Anillos"
+ubicacion = "manos"
+color = "#FFD700"
+notas = "Dedos"
+
+[sub_resource type="Resource" id="sub_7"]
+script = ExtResource("3")
+nombre = "Cinturón con monedas"
+ubicacion = "cinturon"
+color = "#FFD700"
+notas = "Monedas"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-COR-003"
+nombre = "Comerciante Viajero"
+isla = "COR"
+piel = "SK-02"
+cabello = "HR-02"
+ojos = "EY-05"
+complexion = "MEDIA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6"), SubResource("sub_7")]
+variantes_estacionales = {}

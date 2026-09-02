@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_002-CAP0-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_002",
+      "text_key": "Bienvenido. Soy la sanadora. Si te lastimas, ven a verme.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_002"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "preset_activo": "media",
+  "presets": {
+    "baja": {
+      "voxel": 512,
+      "texturas": 384,
+      "audio": 128,
+      "escenas": 256,
+      "pools": 128,
+      "ui": 64,
+      "shaders": 64,
+      "reserva": 128
+    },
+    "media": {
+      "voxel": 640,
+      "texturas": 512,
+      "audio": 160,
+      "escenas": 320,
+      "pools": 160,
+      "ui": 80,
+      "shaders": 80,
+      "reserva": 160
+    },
+    "alta": {
+      "voxel": 768,
+      "texturas": 640,
+      "audio": 192,
+      "escenas": 384,
+      "pools": 192,
+      "ui": 96,
+      "shaders": 96,
+      "reserva": 192
+    }
+  }
+}

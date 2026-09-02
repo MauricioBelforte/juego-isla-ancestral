@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_001-CAP7-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_001",
+      "text_key": "La decision que tomes resonara con la magia. Elige sabiamente.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_001"
+    }
+  }
+}

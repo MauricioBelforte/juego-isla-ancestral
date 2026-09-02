@@ -1,0 +1,15 @@
+{
+  "canales": ["email", "discord", "steam_forums"],
+  "politica_respuesta": {
+    "primer_contacto_horas": 24,
+    "resolucion_bugs_dias": 7,
+    "idiomas": ["es", "en"]
+  },
+  "categorias": ["bug", "crash", "rendimiento", "cuenta", "guardado", "pregunta_general"],
+  "faq": [
+    {"id": "save_perdido", "categoria": "guardado", "pregunta": "Perdí mi partida", "respuesta": "Verifica la carpeta de backups o contacta soporte con tu id de sesión."},
+    {"id": "crash_inicio", "categoria": "crash", "pregunta": "El juego crashea al iniciar", "respuesta": "Revisa requisitos mínimos y actualiza drivers. Si persiste, envía el crash report."},
+    {"id": "rendimiento_bajo", "categoria": "rendimiento", "pregunta": "El juego va lento", "respuesta": "Baja la calidad gráfica y revisa que la GPU cumpla los requisitos."},
+    {"id": "link_steam", "categoria": "cuenta", "pregunta": "¿Cómo vinculo mi cuenta de Steam?", "respuesta": "Inicia sesión desde la pantalla principal y acepta el vinculo."}
+  ]
+}

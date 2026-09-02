@@ -1,0 +1,9 @@
+{
+  "pilares": [
+    {"id": "calma", "pilar": "Calma y relajación", "detalle": "Sin presión temporal", "obligatorio": true},
+    {"id": "comunidad", "pilar": "Comunidad y amistad", "detalle": "Vecinos y vida social", "obligatorio": true},
+    {"id": "descubrimiento", "pilar": "Descubrimiento", "detalle": "Islas, templos y misterios", "obligatorio": true},
+    {"id": "creacion", "pilar": "Creación y personalización", "detalle": "Construcción y decoración", "obligatorio": true}
+  ],
+  "politicas": {"vision_coherente_con_m152": true, "revision_vision": true}
+}

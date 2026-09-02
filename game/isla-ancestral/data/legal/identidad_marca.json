@@ -1,0 +1,8 @@
+{
+  "elementos": [
+    {"id": "logo_principal", "elemento": "Logo principal", "uso": "digital", "version": "1.0"},
+    {"id": "paleta_colores", "elemento": "Paleta de colores", "uso": "digital", "version": "1.0"},
+    {"id": "tipografia", "elemento": "Tipografía corporativa", "uso": "digital", "version": "1.0"}
+  ],
+  "politicas": {"manual_de_marca": true, "revision_anual": true}
+}

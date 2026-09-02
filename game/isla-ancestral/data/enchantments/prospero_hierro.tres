@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnchantmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enchantment/enchantment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "prospero_hierro"
+display_name = "Hierro Prospero"
+description = "x2 monedas al romper minerales"
+tool_tier = 2
+ability_type = "double_coins"
+ability_value = 2.0
+visual_color = Color(0.7, 0.7, 0.7, 1)
+incense_cost = 5
+coin_cost = 500
+animation_duration = 3.0
+icon = null

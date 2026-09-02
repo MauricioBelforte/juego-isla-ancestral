@@ -1,0 +1,21 @@
+{
+  "mods": [
+    {
+      "id": "mod_aurora_items",
+      "nombre": "Aurora Items",
+      "version": "1.0.0",
+      "min_build": "1.0.0",
+      "override": [],
+      "ruta": "user://mods/mod_aurora_items"
+    },
+    {
+      "id": "mod_aurora_qol",
+      "nombre": "Aurora QoL",
+      "version": "0.9.0",
+      "min_build": "1.0.0",
+      "override": ["mod_aurora_items"],
+      "ruta": "user://mods/mod_aurora_qol"
+    }
+  ],
+  "carpeta_mods": "user://mods"
+}

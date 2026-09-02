@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Gorro de alcalde"
+estilo = "Ala ancha, placa dorada"
+color_principal = "#2E5A4C"
+color_secundario = "#FFD700"
+material = "Tela"
+notas = "Placa dorada"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa larga"
+estilo = "Manga arremangada"
+color_principal = "#F5F0E8"
+material = "Algodón"
+notas = "Blanca perla"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón largo"
+estilo = "Tejido grueso"
+color_principal = "#36454F"
+material = "Lana"
+notas = "Gris oscuro"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas altas"
+estilo = "Cuero, suelas gruesas"
+color_principal = "#5C4033"
+material = "Cuero"
+notas = "Altas"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Cadena con medalla"
+ubicacion = "cuello"
+color = "#FFD700"
+notas = "Dorada"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Chaleco"
+ubicacion = "torso"
+color = "#8B6914"
+notas = "Botones dorados"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-RIZ-001"
+nombre = "Mayor del Pueblo"
+isla = "RIZ"
+piel = "SK-02"
+cabello = "HR-06"
+ojos = "EY-01"
+complexion = "MEDIA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

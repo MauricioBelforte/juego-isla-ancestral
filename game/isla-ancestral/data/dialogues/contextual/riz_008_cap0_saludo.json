@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_008-CAP0-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_008",
+      "text_key": "¡Bienvenido! Soy el animador. Preparo festivales y eventos.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_008"
+    }
+  }
+}

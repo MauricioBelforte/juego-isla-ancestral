@@ -1,0 +1,8 @@
+{
+  "madera": {"variaciones": ["golpe_madera_1", "golpe_madera_2", "golpe_madera_3", "golpe_madera_4"]},
+  "piedra": {"variaciones": ["golpe_piedra_1", "golpe_piedra_2", "golpe_piedra_3", "golpe_piedra_4"]},
+  "tierra": {"variaciones": ["golpe_tierra_1", "golpe_tierra_2", "golpe_tierra_3", "golpe_tierra_4"]},
+  "agua": {"variaciones": ["splash_1", "splash_2", "splash_3", "splash_4"]},
+  "metal": {"variaciones": ["golpe_metal_1", "golpe_metal_2", "golpe_metal_3", "golpe_metal_4"]},
+  "cristal": {"variaciones": ["cristal_1", "cristal_2", "cristal_3", "cristal_4"]}
+}

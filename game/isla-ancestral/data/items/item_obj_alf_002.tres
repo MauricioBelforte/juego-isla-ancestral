@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-ALF-002"
+nombre = "Alfombra grande"
+descripcion = "Alfombra decorativa grande"
+categoria = 4
+subcategoria = "ALFOMBRAS"
+tamano = Vector2i(3, 2)
+interactivo = false
+interacciones = []
+fuente = ""
+precio_compra = 90
+precio_venta = 45
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Lana"
+color = "#8B6914"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

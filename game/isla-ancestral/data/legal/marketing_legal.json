@@ -1,0 +1,9 @@
+{
+  "cumplimientos": [
+    {"id": "claims_veraces", "regla": "Toda afirmación de marketing debe ser verificable", "aplica_a": ["descripcion", "trailer", "anuncios"]},
+    {"id": "no_publi_enganosa", "regla": "Prohibida publicidad engañosa o comparativas falsas", "aplica_a": ["anuncios", "banners"]},
+    {"id": "influencers_divulgacion", "regla": "Influencers deben divulgar contenido patrocinado", "aplica_a": ["influencers"]},
+    {"id": "precios_transparentes", "regla": "Precios y descuentos deben ser transparentes", "aplica_a": ["steam", "bundles"]}
+  ],
+  "politicas": {"revision_legal_marketing": true, "archivo_claims": true}
+}

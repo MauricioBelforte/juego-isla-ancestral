@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_001-CAP0-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_001",
+      "text_key": "El cobre de esta isla es especial. Viene del volcan dormido.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_001"
+    }
+  }
+}

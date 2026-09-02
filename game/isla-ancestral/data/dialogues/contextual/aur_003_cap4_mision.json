@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_003-CAP4-MISION",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_003",
+      "text_key": "Los 7 sellos deben ser restaurados. Es tu mision. Yo te cubro.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_003"
+    }
+  }
+}

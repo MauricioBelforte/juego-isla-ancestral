@@ -1,0 +1,46 @@
+{
+	"schema_version": 1,
+	"descripcion": "Umbrales del ciclo día/noche M31 (diseño §P1-P11). Valores data-driven para day_night_cycle.gd. Los consumidores leen vía DayNightCycle o el JSON directo.",
+	"sol": {
+		"curva": "res://data/light/day_curve.tres",
+		"descripcion": "Energía del sol por hora (0-24). Pico 1.0 día (7-17), 0.5 en 6/18, 0.2 alba 19, 0 de noche (diseño §P1)"
+	},
+	"luna": {
+		"curva": "res://data/light/moon_curve.tres",
+		"descripcion": "Energía de la luna: 0.12 profunda, 0.15-0.2 noche, 0 de día (diseño §P2)"
+	},
+	"cielo": {
+		"curva": "res://data/light/sky_curve.tres",
+		"descripcion": "Energía ambiental del cielo: 0.15 profunda (anti-oscuridad), 0.22 noche, 0.4 atardecer, 1.0 día (diseño §P5)"
+	},
+	"niebla": {
+		"curva": "res://data/light/fog_curve.tres",
+		"descripcion": "Densidad de niebla por hora: matinal 1.1-1.2 (5-7), mediodía 0.5, atardecer 1.0-1.3, noche 0.9 (diseño §P11)"
+	},
+	"fase_umbral": {
+		"descripcion": "Umbrales de franja (diseño §P13): [inicio_hora, fase] — alba 5-6, día 7-18, atardecer 19, noche 20-22, profunda resto",
+		"franjas": [
+			{ "desde": 5, "hasta": 6, "fase": 0, "nombre": "ALBA" },
+			{ "desde": 7, "hasta": 18, "fase": 1, "nombre": "DIA" },
+			{ "desde": 19, "hasta": 19, "fase": 2, "nombre": "ATARDECER" },
+			{ "desde": 20, "hasta": 22, "fase": 3, "nombre": "NOCHE" },
+			{ "desde": 23, "hasta": 4, "fase": 4, "nombre": "PROFUNDA" }
+		]
+	},
+	"luces_artificiales": {
+		"umbral_encendido": 0.35,
+		"temperatura_k": 3200,
+		"radio_m": 8.0,
+		"descripcion": "Farol/omnipoint se enciende cuando la energía del cielo baja de 0.35 (diseño §P10/§P12)"
+	},
+	"estrellas": {
+		"alpha_inicio": 20,
+		"alpha_fin": 22,
+		"alpha_max": 1.0,
+		"descripcion": "Estrellas suben de 0 a 100% entre 20:00 y 22:00 (diseño §P6)"
+	},
+	"transicion": {
+		"duracion_seg": 1.0,
+		"descripcion": "Crossfade de luz al cambiar de hora (el núcleo usa tween de 1 s; el polish de 90 s con curvas finas es [?] con dueño)"
+	}
+}

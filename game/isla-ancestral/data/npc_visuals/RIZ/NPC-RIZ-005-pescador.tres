@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Gorro de pescador"
+estilo = "Con red al cuello"
+color_principal = "#87CEEB"
+material = "Tela"
+notas = "Cielo"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa rayas"
+estilo = "Manga corta"
+color_principal = "#87CEEB"
+color_secundario = "#FFFDD0"
+material = "Algodón"
+notas = "Azul y blanco"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón corto"
+estilo = "Tejido resistente"
+color_principal = "#FFFDD0"
+material = "Lino"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas de agua"
+estilo = "Largas, impermeables"
+color_principal = "#36454F"
+material = "Cuero"
+notas = "Gris oscuro"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Cinta con anzuelos"
+ubicacion = "cuello"
+color = "#FFD700"
+notas = "Anzuelos"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-RIZ-005"
+nombre = "Pescador del Puerto"
+isla = "RIZ"
+piel = "SK-03"
+cabello = "HR-05"
+ojos = "EY-01"
+complexion = "MUSCULOSA"
+herramienta_derecha = "OBJ-HER-006"
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5")]
+variantes_estacionales = {}

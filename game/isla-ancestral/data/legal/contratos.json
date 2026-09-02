@@ -1,0 +1,11 @@
+{
+  "contratos": [
+    {"id": "contrato_compositor", "tipo": "servicios", "proveedor": "Compositor", "estado": "firmado", "fecha_inicio": "2026-08-01", "renovable": false},
+    {"id": "contrato_editor_assets", "tipo": "servicios", "proveedor": "Estudio de assets", "estado": "pendiente_firma", "fecha_inicio": "2026-09-01", "renovable": false},
+    {"id": "contrato_traduccion", "tipo": "servicios", "proveedor": "Agencia de localización", "estado": "borrador", "fecha_inicio": "2026-10-01", "renovable": false}
+  ],
+  "politicas": {
+    "revision_contratos_anual": true,
+    "ndas_obligatorios": true
+  }
+}

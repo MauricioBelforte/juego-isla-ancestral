@@ -1,7 +1,17 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"misiones": {
-		"mision_secundaria_inicial": {"recompensa_ao": 50, "items": {"mineral_cobre": 2}, "duracion_estimada_min": 20},
-		"mision_principal_acto1": {"recompensa_ao": 200, "items": {"fragmento_ancestral": 1}, "duracion_estimada_min": 60}
+		"mision_secundaria_inicial": {"recompensa_ao": 15, "items": {"mineral_cobre": 2}, "duracion_estimada_min": 20, "tipo": "secundaria"},
+		"mision_principal_acto1": {"recompensa_ao": 200, "items": {"fragmento_ancestral": 1}, "duracion_estimada_min": 60, "tipo": "principal", "items_exclusivos": true}
+	},
+	"reglas": {
+		"recompensa_secundaria_ao": "5-15% del desbloqueo siguiente (checklist M93). taller_crafting=150 AO → rango [8, 22]. 15 AO = 10%.",
+		"items_exclusivos_no_monetizables": true,
+		"misiones_siempre_completables": true
+	},
+	"bonus_eventos_temporada": {
+		"descripcion": "Recompensas de eventos (M74) como bonus de temporada (no parte del ritmo base)",
+		"festival_primavera": {"recompensa_ao": 30, "items": {"baya_roja": 5}},
+		"festival_invierno": {"recompensa_ao": 40, "items": {"madera_roble": 5}}
 	}
 }

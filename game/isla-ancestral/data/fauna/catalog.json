@@ -1,0 +1,226 @@
+[
+  {
+    "id": "gaviota_playera",
+    "display_name": "Gaviota Playera",
+    "nombre_cientifico": "Larus marinus",
+    "bioma_principal": "playa",
+    "rareza": "COMUN",
+    "ventana_horaria": "DIURNA",
+    "comportamiento": "PASIVA_AEREA",
+    "clase": "AEREA",
+    "gregaria": true,
+    "manada_min": 3,
+    "manada_max": 8,
+    "escala_min": 0.4,
+    "escala_max": 0.7,
+    "velocidad_deambular": 2.0,
+    "velocidad_huida": 5.0,
+    "radio_alarma": 3.0,
+    "radio_curiosidad": 5.0,
+    "factor_miedo_base": 1.2,
+    "color_variantes": [
+      [
+        0.95,
+        0.95,
+        0.95
+      ],
+      [
+        0.85,
+        0.85,
+        0.9
+      ]
+    ]
+  },
+  {
+    "id": "conejo_pradera",
+    "display_name": "Conejo de Pradera",
+    "nombre_cientifico": "Oryctolagus cuniculus",
+    "bioma_principal": "pradera",
+    "rareza": "COMUN",
+    "ventana_horaria": "DIURNA",
+    "comportamiento": "HUIDA_INSTINTIVA",
+    "clase": "TERRESTRE",
+    "gregaria": true,
+    "manada_min": 2,
+    "manada_max": 4,
+    "escala_min": 0.3,
+    "escala_max": 0.5,
+    "velocidad_deambular": 1.5,
+    "velocidad_huida": 6.0,
+    "radio_alarma": 4.0,
+    "radio_curiosidad": 6.0,
+    "factor_miedo_base": 1.5,
+    "color_variantes": [
+      [
+        0.7,
+        0.55,
+        0.4
+      ],
+      [
+        0.6,
+        0.5,
+        0.4
+      ]
+    ]
+  },
+  {
+    "id": "nutria_ribera",
+    "display_name": "Nutria de Ribera",
+    "nombre_cientifico": "Lutra lutra",
+    "bioma_principal": "ribera",
+    "rareza": "POCO_COMUN",
+    "ventana_horaria": "DIURNA",
+    "comportamiento": "CURIOSA",
+    "clase": "ANFIBIA",
+    "gregaria": false,
+    "manada_min": 1,
+    "manada_max": 1,
+    "escala_min": 0.6,
+    "escala_max": 0.9,
+    "velocidad_deambular": 1.2,
+    "velocidad_huida": 4.0,
+    "radio_alarma": 3.5,
+    "radio_curiosidad": 6.0,
+    "factor_miedo_base": 1.0,
+    "color_variantes": [
+      [
+        0.55,
+        0.38,
+        0.28
+      ],
+      [
+        0.42,
+        0.3,
+        0.24
+      ]
+    ]
+  },
+  {
+    "id": "lechuza_bosque",
+    "display_name": "Lechuza del Bosque",
+    "nombre_cientifico": "Strix aluco",
+    "bioma_principal": "bosque",
+    "rareza": "POCO_COMUN",
+    "ventana_horaria": "NOCTURNA",
+    "comportamiento": "PASIVA_AEREA",
+    "clase": "AEREA",
+    "gregaria": false,
+    "manada_min": 1,
+    "manada_max": 1,
+    "escala_min": 0.5,
+    "escala_max": 0.7,
+    "velocidad_deambular": 1.5,
+    "velocidad_huida": 4.5,
+    "radio_alarma": 3.0,
+    "radio_curiosidad": 4.0,
+    "factor_miedo_base": 0.9,
+    "color_variantes": [
+      [
+        0.82,
+        0.78,
+        0.7
+      ],
+      [
+        0.62,
+        0.55,
+        0.45
+      ]
+    ]
+  },
+  {
+    "id": "salamandra_ancestral",
+    "display_name": "Salamandra Ancestral",
+    "nombre_cientifico": "Salamandra ancestris",
+    "bioma_principal": "bosque_ancestral",
+    "rareza": "MUY_RARA",
+    "ventana_horaria": "CREPUSCULAR",
+    "comportamiento": "CURIOSA",
+    "clase": "ANFIBIA",
+    "gregaria": false,
+    "manada_min": 1,
+    "manada_max": 1,
+    "escala_min": 0.3,
+    "escala_max": 0.5,
+    "velocidad_deambular": 0.8,
+    "velocidad_huida": 2.5,
+    "radio_alarma": 2.0,
+    "radio_curiosidad": 7.0,
+    "factor_miedo_base": 0.7,
+    "color_variantes": [
+      [
+        0.8,
+        0.3,
+        0.1
+      ],
+      [
+        0.9,
+        0.4,
+        0.2
+      ]
+    ]
+  },
+  {
+    "id": "cangrejo_humedal",
+    "display_name": "Cangrejo de Humedal",
+    "nombre_cientifico": "Cancer palustris",
+    "bioma_principal": "humedal",
+    "rareza": "COMUN",
+    "ventana_horaria": "TODA_HORA",
+    "comportamiento": "PASIVA",
+    "clase": "ACUATICA",
+    "gregaria": true,
+    "manada_min": 3,
+    "manada_max": 6,
+    "escala_min": 0.2,
+    "escala_max": 0.4,
+    "velocidad_deambular": 0.6,
+    "velocidad_huida": 2.0,
+    "radio_alarma": 2.0,
+    "radio_curiosidad": 3.0,
+    "factor_miedo_base": 1.0,
+    "color_variantes": [
+      [
+        0.6,
+        0.4,
+        0.2
+      ],
+      [
+        0.5,
+        0.3,
+        0.1
+      ]
+    ]
+  },
+  {
+    "id": "halcon_montana",
+    "display_name": "Halcon de Montana",
+    "nombre_cientifico": "Falco montis",
+    "bioma_principal": "montana",
+    "rareza": "RARA",
+    "ventana_horaria": "DIURNA",
+    "comportamiento": "PASIVA_AEREA",
+    "clase": "AEREA",
+    "gregaria": false,
+    "manada_min": 1,
+    "manada_max": 1,
+    "escala_min": 0.5,
+    "escala_max": 0.7,
+    "velocidad_deambular": 3.0,
+    "velocidad_huida": 8.0,
+    "radio_alarma": 3.0,
+    "radio_curiosidad": 5.0,
+    "factor_miedo_base": 0.8,
+    "color_variantes": [
+      [
+        0.4,
+        0.3,
+        0.2
+      ],
+      [
+        0.5,
+        0.4,
+        0.3
+      ]
+    ]
+  }
+]

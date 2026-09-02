@@ -1,0 +1,20 @@
+{
+  "momentos": {
+    "sello_obtenido": {"sonido": "sello_obtenido", "intensidad": 1.0, "duracion_s": 3.0, "leitmotif": "aurora_motivo"},
+    "templo_entrada": {"sonido": "templo_entrada", "intensidad": 0.6, "duracion_s": 5.0, "leitmotif": "templo_motivo"},
+    "resonancia_activada": {"sonido": "resonancia", "intensidad": 0.8, "duracion_s": 4.0, "leitmotif": "resonancia_motivo"},
+    "elysia_avistada": {"sonido": "elysia_revelacion", "intensidad": 1.0, "duracion_s": 8.0, "leitmotif": "elysia_motivo"},
+    "misterio_pista": {"sonido": "pista_descubierta", "intensidad": 0.5, "duracion_s": 2.0, "leitmotif": ""},
+    "postgame_inicio": {"sonido": "postgame_intro", "intensidad": 0.9, "duracion_s": 6.0, "leitmotif": "aurora_motivo"}
+  },
+  "leitmotifs": {
+    "aurora_motivo": {"nombre": "Motivo de Aurora", "peso": 1},
+    "templo_motivo": {"nombre": "Motivo de Templo", "peso": 1},
+    "resonancia_motivo": {"nombre": "Motivo de Resonancia", "peso": 1},
+    "elysia_motivo": {"nombre": "Motivo de Elysia", "peso": 1}
+  },
+  "reglas": {
+    "silencio_narrativo_tras_sello": true,
+    "intensidad_max_45s_tension": true
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "bundles": [
+    {"id": "bundle_deluxe", "nombre": "Coleccionista Digital", "dlcs": ["isla_hielo", "pack_aurora"], "descuento": 0.15}
+  ]
+}

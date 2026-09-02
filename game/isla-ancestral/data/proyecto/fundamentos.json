@@ -1,0 +1,9 @@
+{
+  "fundamentos": [
+    {"id": "vision", "titulo": "Visión del proyecto", "detalle": "Un paraíso voxel cozy de islas y templos", "obligatorio": true},
+    {"id": "audiencia", "titulo": "Audiencia objetivo", "detalle": "Jugadores cozy y casuales", "obligatorio": true},
+    {"id": "genero", "titulo": "Género", "detalle": "Life sim / farming / exploración", "obligatorio": true},
+    {"id": "plataformas", "titulo": "Plataformas", "detalle": "PC (Steam/EGS/GOG), consolas gate", "obligatorio": true}
+  ],
+  "politicas": {"documento_vision_obligatorio": true, "revision_fundamentos": true}
+}

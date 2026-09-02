@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "isla_base": "RIZ",
+  "islas": {
+    "RIZ": {
+      "nombre": "Isla Raíz",
+      "centro": [256, 256],
+      "radio": 256,
+      "biomas_principales": ["playa", "pradera", "bosque", "montana"]
+    }
+  },
+  "pois": [
+    {"id": "poi_spawn", "nombre": "Punto de partida", "categoria": "punto", "x": 256, "z": 256},
+    {"id": "poi_choza", "nombre": "Biblioteca de la Chozavil", "categoria": "hogar", "x": 320, "z": 320},
+    {"id": "poi_ruina", "nombre": "Ruina Chozavil", "categoria": "ruina", "x": 320, "z": 322},
+    {"id": "poi_mesa", "nombre": "Mesa de trabajo", "categoria": "taller", "x": 326, "z": 322},
+    {"id": "poi_faro", "nombre": "Faro", "categoria": "hito", "x": 350, "z": 350},
+    {"id": "poi_templo_raiz", "nombre": "Templo de la Raíz", "categoria": "templo", "x": 200, "z": 200},
+    {"id": "poi_playa_norte", "nombre": "Playa del Norte", "categoria": "playa", "x": 256, "z": 80},
+    {"id": "poi_plaza", "nombre": "Plaza del Pueblo", "categoria": "pueblo", "x": 310, "z": 310},
+    {"id": "poi_ladera_montana", "nombre": "Ladera de la Montaña", "categoria": "montana", "x": 300, "z": 230}
+  ]
+}

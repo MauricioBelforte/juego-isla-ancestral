@@ -1,0 +1,10 @@
+{
+  "clasificaciones": {
+    "pegi": {"rating": "3", "contenidos": ["violencia_muy_ligera"], "region": "europa"},
+    "esrb": {"rating": "E", "contenidos": ["fantasia_violencia"], "region": "america"},
+    "cero": {"rating": "A", "contenidos": [], "region": "japon"},
+    "criwb": {"rating": "G", "contenidos": [], "region": "corea"}
+  },
+  "contenidos_posibles": ["violencia_muy_ligera", "fantasia_violencia", "lenguaje_ligero", "compras_in_app"],
+  "politicas": {"clasificacion_obligatoria_antes_venta": true, "revision_tras_contenido_nuevo": true}
+}

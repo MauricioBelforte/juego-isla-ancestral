@@ -1,0 +1,17 @@
+{
+  "id": "DLG-CEN_003-CAP5-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cen_003",
+      "text_key": "La noche eterna es ideal para guisos calientes. ¿Quieres uno?",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cen_003"
+    }
+  }
+}

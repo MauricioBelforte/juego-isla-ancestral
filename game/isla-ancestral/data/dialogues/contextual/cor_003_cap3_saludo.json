@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_003-CAP3-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_003",
+      "text_key": "El agua trae tesoros del fondo. ¿Has visto las perlas que aparecen?",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_003"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-MES-006"
+nombre = "Silla acolchada"
+descripcion = "Silla cómoda acolchada"
+categoria = 0
+subcategoria = "SILLAS"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [1, 2]
+fuente = ""
+precio_compra = 120
+precio_venta = 60
+rareza = 1
+apilable = false
+stack_max = 1
+material = "Tela"
+color = "#C4A882"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

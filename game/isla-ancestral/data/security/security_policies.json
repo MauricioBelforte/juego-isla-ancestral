@@ -1,0 +1,13 @@
+{
+  "politicas": {
+    "validar_saves": {"habilitada": true, "descripcion": "Validar integridad de saves con checksum"},
+    "bloquear_carpetas_res": {"habilitada": true, "descripcion": "Bloquear escritura en res://"},
+    "rechazar_input_invalido": {"habilitada": true, "descripcion": "Validar inputs contra rangos permitidos"},
+    "no_logs_sensibles": {"habilitada": true, "descripcion": "No registrar datos personales en logs"}
+  },
+  "restricciones": {
+    "max_objetos_inventario": 99,
+    "max_plata": 999999,
+    "max_nivel": 50
+  }
+}

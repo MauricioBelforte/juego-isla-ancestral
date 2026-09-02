@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-COC-006"
+nombre = "Ollas"
+descripcion = ""
+categoria = 5
+subcategoria = "UTENSILIOS"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [6]
+fuente = ""
+precio_compra = 40
+precio_venta = 20
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Metal"
+color = "#71797E"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

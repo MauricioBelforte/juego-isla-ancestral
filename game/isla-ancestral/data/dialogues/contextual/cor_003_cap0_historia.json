@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_003-CAP0-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_003",
+      "text_key": "He recorrido mares lejanos. Pero Aurora... Aurora es especial.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_003"
+    }
+  }
+}

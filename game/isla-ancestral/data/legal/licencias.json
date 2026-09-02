@@ -1,0 +1,8 @@
+{
+  "licencias": [
+    {"id": "godot", "software": "Godot Engine", "licencia": "MIT", "uso": "motor", "comercial_ok": true},
+    {"id": "voxel_tools", "software": "Voxel Tools", "licencia": "MIT", "uso": "voxel", "comercial_ok": true},
+    {"id": "gdscript", "software": "GDScript", "licencia": "MIT", "uso": "lenguaje", "comercial_ok": true}
+  ],
+  "politicas": {"attribution_obligatoria": true, "copiar_licencias_en_distribucion": true}
+}

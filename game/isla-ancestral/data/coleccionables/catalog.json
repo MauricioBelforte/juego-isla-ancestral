@@ -1,0 +1,152 @@
+[
+  {
+    "categoria": "minerales",
+    "id_local": "001",
+    "display_name": "Cobre",
+    "rareza": 0,
+    "fuente": "mineria",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 50,
+    "puntos": 5
+  },
+  {
+    "categoria": "minerales",
+    "id_local": "002",
+    "display_name": "Hierro",
+    "rareza": 1,
+    "fuente": "mineria",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 10
+  },
+  {
+    "categoria": "minerales",
+    "id_local": "003",
+    "display_name": "Oro",
+    "rareza": 2,
+    "fuente": "mineria",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 200,
+    "puntos": 25
+  },
+  {
+    "categoria": "minerales",
+    "id_local": "004",
+    "display_name": "Cristal Estacional",
+    "rareza": 2,
+    "fuente": "mineria",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 250,
+    "puntos": 25
+  },
+  {
+    "categoria": "minerales",
+    "id_local": "005",
+    "display_name": "Mineral Ancestral",
+    "rareza": 3,
+    "fuente": "mineria",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 100
+  },
+  {
+    "categoria": "animales",
+    "id_local": "001",
+    "display_name": "Conejo de Pradera",
+    "rareza": 0,
+    "fuente": "fauna",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 30,
+    "puntos": 5
+  },
+  {
+    "categoria": "animales",
+    "id_local": "002",
+    "display_name": "Gaviota Playera",
+    "rareza": 0,
+    "fuente": "fauna",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 30,
+    "puntos": 5
+  },
+  {
+    "categoria": "animales",
+    "id_local": "003",
+    "display_name": "Nutria de Ribera",
+    "rareza": 1,
+    "fuente": "fauna",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 60,
+    "puntos": 15
+  },
+  {
+    "categoria": "animales",
+    "id_local": "004",
+    "display_name": "Salamandra Ancestral",
+    "rareza": 3,
+    "fuente": "fauna",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 150
+  },
+  {
+    "categoria": "conchas",
+    "id_local": "001",
+    "display_name": "Concha Caracol",
+    "rareza": 0,
+    "fuente": "playa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 20,
+    "puntos": 5
+  },
+  {
+    "categoria": "conchas",
+    "id_local": "002",
+    "display_name": "Concha Vieira",
+    "rareza": 0,
+    "fuente": "playa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 25,
+    "puntos": 5
+  },
+  {
+    "categoria": "conchas",
+    "id_local": "003",
+    "display_name": "Concha Nacar Ancestral",
+    "rareza": 2,
+    "fuente": "playa",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 100,
+    "puntos": 30
+  },
+  {
+    "categoria": "reliquias",
+    "id_local": "001",
+    "display_name": "Mascara de Ancestro",
+    "rareza": 3,
+    "fuente": "ruinas",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 200
+  },
+  {
+    "categoria": "reliquias",
+    "id_local": "002",
+    "display_name": "Vasija Ancestral",
+    "rareza": 2,
+    "fuente": "ruinas",
+    "recompensa_item": "moneda_ancestral",
+    "recompensa_cantidad": 300,
+    "puntos": 80
+  },
+  {
+    "categoria": "reliquias",
+    "id_local": "003",
+    "display_name": "Idolo de Piedra",
+    "rareza": 3,
+    "fuente": "templo",
+    "recompensa_item": "gema_ancestral",
+    "recompensa_cantidad": 1,
+    "puntos": 200
+  }
+]

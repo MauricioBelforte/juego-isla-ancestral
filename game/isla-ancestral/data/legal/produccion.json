@@ -1,0 +1,9 @@
+{
+  "roles": [
+    {"id": "disenador", "rol": "Diseñador de juego", "estado": "activo"},
+    {"id": "programador", "rol": "Programador", "estado": "activo"},
+    {"id": "artista", "rol": "Artista", "estado": "activo"},
+    {"id": "compositor", "rol": "Compositor", "estado": "contratado"}
+  ],
+  "politicas": {"revision_semanal": true, "gestor_de_tareas": "CHECKLIST-GLOBAL"}
+}

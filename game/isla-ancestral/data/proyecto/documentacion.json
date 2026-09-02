@@ -1,0 +1,9 @@
+{
+  "categorias": [
+    {"id": "especificaciones", "nombre": "Especificaciones", "ubicacion": "DOCUMENTACION/", "obligatorio": true},
+    {"id": "diseno", "nombre": "Diseño", "ubicacion": "DOCUMENTACION/", "obligatorio": true},
+    {"id": "plan_inicial", "nombre": "Plan inicial", "ubicacion": "DOCUMENTACION/", "obligatorio": true},
+    {"id": "guias", "nombre": "Guías de referencia", "ubicacion": "DOCUMENTACION/", "obligatorio": true}
+  ],
+  "politicas": {"documentacion_obligatoria_por_modulo": true, "firmada_por_agente": true}
+}

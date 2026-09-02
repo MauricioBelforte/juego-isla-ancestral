@@ -1,0 +1,17 @@
+{
+  "id": "DLG-CEN_002-CAP0-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cen_002",
+      "text_key": "Las minas de Ceniza tienen minerales que no se encuentran en ningun otro lado.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cen_002"
+    }
+  }
+}

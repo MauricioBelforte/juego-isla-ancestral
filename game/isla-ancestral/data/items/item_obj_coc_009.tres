@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-COC-009"
+nombre = "Tazas"
+descripcion = ""
+categoria = 5
+subcategoria = "VAJILLA"
+tamano = Vector2i(1, 1)
+interactivo = false
+interacciones = []
+fuente = ""
+precio_compra = 15
+precio_venta = 7
+rareza = 0
+apilable = true
+stack_max = 8
+material = "Cerámica"
+color = "#FFFDD0"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

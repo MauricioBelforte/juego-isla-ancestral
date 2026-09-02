@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Paja ancha"
+estilo = "Cinta azul"
+color_principal = "#F5DEB3"
+color_secundario = "#5F9EA0"
+material = "Paja"
+notas = "Concha decorativa"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa sin mangas"
+estilo = "Tejido ligero"
+color_principal = "#5F9EA0"
+material = "Algodón"
+notas = "Estampado olas"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Falda larga"
+estilo = "Hasta tobillos"
+color_principal = "#FFFDD0"
+material = "Tela"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Sandalias"
+estilo = "Tiras de cuero"
+color_principal = "#C4A882"
+material = "Cuero"
+notas = "Bajas"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Red de pesca"
+ubicacion = "manos"
+color = "#A0522D"
+notas = "Pequeña"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Collar de perlas"
+ubicacion = "cuello"
+color = "#FFFDD0"
+notas = "Perlas"
+
+[sub_resource type="Resource" id="sub_7"]
+script = ExtResource("3")
+nombre = "Pulsera de coral"
+ubicacion = "manos"
+color = "#FF4500"
+notas = "Coral"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-COR-002"
+nombre = "Pescadora de Coral"
+isla = "COR"
+piel = "SK-03"
+cabello = "HR-01"
+ojos = "EY-03"
+complexion = "MEDIA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6"), SubResource("sub_7")]
+variantes_estacionales = {}

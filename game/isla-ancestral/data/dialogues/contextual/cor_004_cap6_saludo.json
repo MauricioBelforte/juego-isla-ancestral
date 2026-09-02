@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_004-CAP6-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_004",
+      "text_key": "La geoda esta a salvo. Yo me aseguro de que lo siga siendo.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_004"
+    }
+  }
+}

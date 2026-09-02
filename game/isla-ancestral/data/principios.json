@@ -1,0 +1,56 @@
+{
+  "principios": [
+    {
+      "id": "sin_fomo",
+      "nombre": "Sin FOMO",
+      "descripcion": "Nunca penalizar al jugador por ausencia ni forzar login.",
+      "reglas": ["no_streaks", "no_expiracion_recompensas", "no_castigo_ausencia"]
+    },
+    {
+      "id": "sin_castigos_irreversibles",
+      "nombre": "Sin castigos irreversibles",
+      "descripcion": "Nada que el jugador haga puede cerrarle el juego para siempre.",
+      "reglas": ["no_perdida_permanente", "no_corrupcion_save"]
+    },
+    {
+      "id": "eventos_repetibles",
+      "nombre": "Eventos repetibles",
+      "descripcion": "Todo evento se puede repetir o compensar.",
+      "reglas": ["no_exclusivo_temporal", "variantes_repetibles"]
+    },
+    {
+      "id": "herramientas_no_desaparecen",
+      "nombre": "Herramientas que no desaparecen",
+      "descripcion": "Las herramientas no se rompen para siempre.",
+      "reglas": ["no_perdida_herramientas", "reparables"]
+    },
+    {
+      "id": "guardados_confiables",
+      "nombre": "Guardados confiables",
+      "descripcion": "Los saves nunca se corrompen y siempre son recuperables.",
+      "reglas": ["backup", "atomicidad", "checksum"]
+    },
+    {
+      "id": "salud_jugador",
+      "nombre": "Salud del jugador",
+      "descripcion": "El juego nunca promueve ansiedad ni comparación.",
+      "reglas": ["no_pay2win", "no_lootbox", "descanso_respetado"]
+    },
+    {
+      "id": "diversion_sostenida",
+      "nombre": "Diversión sostenida",
+      "descripcion": "La motivación viene de metas voluntarias, no obligatorias.",
+      "reglas": ["objetivos_voluntarios", "no_grind_obligatorio"]
+    },
+    {
+      "id": "canon_coherente",
+      "nombre": "Canon coherente",
+      "descripcion": "La historia nunca contradice las mecánicas.",
+      "reglas": ["canon_validable", "sin_contradicciones"]
+    }
+  ],
+  "auditoria": {
+    "modulos_relacionados": ["M94", "M95", "M152"],
+    "prohibido_totalmente": ["streak_rewards", "contenido_exclusivo_temporal", "pay2win", "lootbox", "castigo_por_ausencia"]
+  }
+}

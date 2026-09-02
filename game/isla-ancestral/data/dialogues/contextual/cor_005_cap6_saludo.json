@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_005-CAP6-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_005",
+      "text_key": "La geoda brilla mas que todas las conchas juntas.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_005"
+    }
+  }
+}

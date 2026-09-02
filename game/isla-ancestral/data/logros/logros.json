@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"logros": [
+		{
+			"id": "logro_primer_sello",
+			"nombre": "La Llave de Ceniza",
+			"descripcion": "Obtuviste el primer sello ancestral.",
+			"condicion": { "tipo": "sello_historia", "sello_id": "sello_ceniza_sala1" }
+		},
+		{
+			"id": "logro_siete_sellos",
+			"nombre": "Guardián Completo",
+			"descripcion": "Reuniste los siete sellos de Aurora.",
+			"condicion": { "tipo": "stat_min", "stat_id": "sellos_obtenidos", "umbral": 7 }
+		},
+		{
+			"id": "logro_coleccionista",
+			"nombre": "Ojo de Curador",
+			"descripcion": "Completaste el herbario del museo.",
+			"condicion": { "tipo": "coleccion_completa", "coleccion_id": "flora" }
+		},
+		{
+			"id": "logro_viajero",
+			"nombre": "Mar Adentro",
+			"descripcion": "Realizaste 3 viajes en vapor.",
+			"condicion": { "tipo": "stat_min", "stat_id": "viajes_realizados", "umbral": 3 },
+			"progreso_parcial": true
+		},
+		{
+			"id": "logro_vecino",
+			"nombre": "Cara Conocida",
+			"descripcion": "Un vecino se mudó a Aurora gracias a vos.",
+			"condicion": { "tipo": "stat_min", "stat_id": "regalos_dados", "umbral": 1 }
+		},
+		{
+			"id": "logro_misionero",
+			"nombre": "Manos Ocupadas",
+			"descripcion": "Completaste tu primera misión secundaria.",
+			"condicion": { "tipo": "stat_min", "stat_id": "misiones_completadas", "umbral": 1 }
+		},
+		{
+			"id": "logro_secreto_guardian",
+			"nombre": "El Último Guardián",
+			"descripcion": "???",
+			"condicion": { "tipo": "hito_previo", "milestone_id": "hito_sello_ceniza_sala1" },
+			"oculto": true
+		}
+	]
+}

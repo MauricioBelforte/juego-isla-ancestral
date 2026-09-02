@@ -1,0 +1,10 @@
+{
+  "secciones": [
+    {"id": "aceptacion", "titulo": "Aceptación de los términos", "obligatoria": true},
+    {"id": "licencia_juego", "titulo": "Licencia de uso del juego", "obligatoria": true},
+    {"id": "contenido_generado", "titulo": "Contenido generado por el usuario", "obligatoria": true},
+    {"id": "responsabilidad", "titulo": "Limitación de responsabilidad", "obligatoria": true},
+    {"id": "terminacion", "titulo": "Terminación del servicio", "obligatoria": true}
+  ],
+  "politicas": {"version_fechada": true, "aceptacion_explicita_al_iniciar": true}
+}

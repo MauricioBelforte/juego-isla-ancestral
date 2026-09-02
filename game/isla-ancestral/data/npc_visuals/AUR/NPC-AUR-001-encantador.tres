@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Sombrero mágico"
+estilo = "Fluida"
+color_principal = "#191970"
+color_secundario = "#FFD700"
+material = "Tela"
+notas = "Estrellas bordadas"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Túnica larga"
+color_principal = "#191970"
+material = "Seda"
+notas = "Constelaciones bordadas"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Túnica inferior"
+estilo = "Fluida"
+color_principal = "#191970"
+material = "Seda"
+notas = "Constelaciones"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas altas"
+estilo = "Cuero suave"
+color_principal = "#2C2C2C"
+material = "Cuero"
+notas = "Negras"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Anillo con gema"
+ubicacion = "manos"
+color = "#FFD700"
+notas = "Gema"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Collar de runas"
+ubicacion = "cuello"
+color = "#FFD700"
+notas = "Runas"
+
+[sub_resource type="Resource" id="sub_7"]
+script = ExtResource("3")
+nombre = "Guantes sin dedos"
+ubicacion = "manos"
+color = "#191970"
+notas = "Magia"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-AUR-001"
+nombre = "Encantador"
+isla = "AUR"
+piel = "SK-01"
+cabello = "HR-07"
+ojos = "EY-03"
+complexion = "DELGADA"
+herramienta_derecha = "OBJ-ART-005"
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6"), SubResource("sub_7")]
+variantes_estacionales = {}

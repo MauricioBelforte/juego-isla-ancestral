@@ -1,0 +1,13 @@
+{
+  "contenido": [
+    {"id": "creacion_1", "tipo": "decoracion", "nombre": "Jardín de coral", "creador": "tester_01", "estado": "publicado", "rating": 4.5},
+    {"id": "creacion_2", "tipo": "construccion", "nombre": "Puente colgante", "creador": "tester_02", "estado": "revision", "rating": 0.0},
+    {"id": "creacion_3", "tipo": "decoracion", "nombre": "Cabaña del faro", "creador": "tester_03", "estado": "publicado", "rating": 4.8}
+  ],
+  "tipos_validos": ["decoracion", "construccion", "pintura", "musica", "historia"],
+  "estados_validos": ["borrador", "revision", "publicado", "rechazado"],
+  "politica": {
+    "requiere_revision": true,
+    "max_creaciones_por_usuario": 50
+  }
+}

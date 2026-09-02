@@ -1,0 +1,267 @@
+{
+	"schema_version": 1,
+	"hitos": [
+		{
+			"id": "hito_items_10",
+			"nombre": "Coleccionista Novato",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "items_recolectados",
+				"umbral": 10
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "El mundo de Aurora está lleno de cosas que recoger."
+				}
+			]
+		},
+		{
+			"id": "hito_monedas_1000",
+			"nombre": "Primer Millar",
+			"dominio": "economia",
+			"condicion": {
+				"tipo": "riqueza_acumulada",
+				"umbral": 1000
+			},
+			"recompensas": [
+				{
+					"tipo": "cosmetico",
+					"valor": "marcador de mapa dorado"
+				}
+			]
+		},
+		{
+			"id": "hito_misiones_1",
+			"nombre": "Buen Vecino",
+			"dominio": "amistad",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "misiones_completadas",
+				"umbral": 1
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Los vecinos empiezan a confiar en vos."
+				}
+			]
+		},
+		{
+			"id": "hito_regalos_5",
+			"nombre": "Detallista",
+			"dominio": "amistad",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "regalos_dados",
+				"umbral": 5
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Tus regalos alegran la isla."
+				}
+			]
+		},
+		{
+			"id": "hito_sello_ceniza_sala1",
+			"nombre": "Sello de Ceniza I",
+			"dominio": "historia",
+			"condicion": {
+				"tipo": "compuesta",
+				"operador": "AND",
+				"hijos": [
+					{
+						"tipo": "sello_historia",
+						"sello_id": "sello_ceniza_sala1"
+					},
+					{
+						"tipo": "stat_min",
+						"stat_id": "sellos_obtenidos",
+						"umbral": 1
+					}
+				]
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Lore: el primer sello vibra con la brisa."
+				}
+			]
+		},
+		{
+			"id": "hito_viajero_3",
+			"nombre": "Viajero de Aurora",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "viajes_realizados",
+				"umbral": 3
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "El mar ya no tiene secretos para vos."
+				}
+			]
+		},
+		{
+			"id": "hito_primera_venta",
+			"nombre": "Primera Venta",
+			"dominio": "economia",
+			"condicion": {
+				"tipo": "primera_vez",
+				"actividad_id": "primera_venta"
+			},
+			"recompensas": []
+		},
+		{
+			"id": "hito_amistades_5",
+			"nombre": "Pilar de la Comunidad",
+			"dominio": "amistad",
+			"condicion": {
+				"tipo": "compuesta",
+				"operador": "AND",
+				"hijos": [
+					{
+						"tipo": "stat_min",
+						"stat_id": "amistades_subidas",
+						"umbral": 5
+					},
+					{
+						"tipo": "stat_min",
+						"stat_id": "regalos_dados",
+						"umbral": 3
+					}
+				]
+			},
+			"recompensas": [
+				{
+					"tipo": "titulo",
+					"valor": "Amigo del Pueblo"
+				}
+			]
+		},
+		{
+			"id": "hito_coleccion_flora",
+			"nombre": "Herbario Completo",
+			"dominio": "colecciones",
+			"condicion": {
+				"tipo": "coleccion_completa",
+				"coleccion_id": "flora"
+			},
+			"recompensas": [
+				{
+					"tipo": "unlock",
+					"tipo_unlock": "info",
+					"valor": "placa de herbario dorada"
+				}
+			]
+		},
+		{
+			"id": "hito_dias_7",
+			"nombre": "Primera Semana",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "dias_jugados",
+				"umbral": 7
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Ya llevas una semana en Aurora."
+				}
+			]
+		},
+		{
+			"id": "hito_dias_30",
+			"nombre": "Residente Permanente",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "dias_jugados",
+				"umbral": 30
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Aurora ya es tu hogar."
+				}
+			]
+		},
+		{
+			"id": "hito_items_50",
+			"nombre": "Coleccionista Experimentado",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "items_recolectados",
+				"umbral": 50
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Tu inventario cuenta centenas de objetos."
+				}
+			]
+		},
+		{
+			"id": "hito_misiones_5",
+			"nombre": "Vecino Confiable",
+			"dominio": "amistad",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "misiones_completadas",
+				"umbral": 5
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Los vecinos cuentan contigo."
+				}
+			]
+		},
+		{
+			"id": "hito_viajeros_10",
+			"nombre": "Navegante Experimentado",
+			"dominio": "generales",
+			"condicion": {
+				"tipo": "stat_min",
+				"stat_id": "viajes_realizados",
+				"umbral": 10
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "Conoces cada rincón del archipiélago."
+				}
+			]
+		},
+		{
+			"id": "hito_sello_ceniza_sala2",
+			"nombre": "Sello de Ceniza II",
+			"dominio": "historia",
+			"condicion": {
+				"tipo": "compuesta",
+				"operador": "AND",
+				"hijos": [
+					{
+						"tipo": "sello_historia",
+						"sello_id": "sello_ceniza_sala2"
+					},
+					{
+						"tipo": "stat_min",
+						"stat_id": "sellos_obtenidos",
+						"umbral": 2
+					}
+				]
+			},
+			"recompensas": [
+				{
+					"tipo": "info",
+					"valor": "La sala 2 revela un secreto ancestral."
+				}
+			]
+		}
+	]
+}

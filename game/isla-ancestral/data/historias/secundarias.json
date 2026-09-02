@@ -1,0 +1,63 @@
+{
+	"schema_version": 1,
+	"cadenas": [
+		{
+			"id": "cadena-faro",
+			"titulo": "El Faro de las Memorias",
+			"contexto": "El farero recuerda la noche del eclipse; quiere encender el faro una vez más",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "farero", "condicion": "estado_mundo.faro_apagado" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "faro" },
+				{ "id": "p3", "tipo": "puzzle", "ref": "faro-linterna" },
+				{ "id": "p4", "tipo": "entregar", "objeto": "farol_cargado" }
+			],
+			"recompensa": { "diario": "capitulo-faro", "cosmetico": "farol de atardecer" },
+			"consecuencia": { "faro_encendido": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-invernadero",
+			"titulo": "El Invernadero Olvidado",
+			"contexto": "Mateo encontró las llaves de un invernadero abandonado; cree que aún puede rescatar semillas antiguas",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "mateo_mapache" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "invernadero" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "semilla_antigua" }
+			],
+			"recompensa": { "diario": "capitulo-invernadero", "cosmetico": "semillero decorativo" },
+			"consecuencia": { "invernadero_abierto": true },
+			"oculta": false,
+			"postgame": false
+		},
+		{
+			"id": "cadena-epilogo-plaza",
+			"titulo": "La Plaza de Todos",
+			"contexto": "Tras el final, el pueblo quiere reconstruir la plaza donde Aurora celebraba sus festivales",
+			"pasos": [
+				{ "id": "p1", "tipo": "hablar", "npc": "bruno_sapo" },
+				{ "id": "p2", "tipo": "explorar", "lugar": "plaza" },
+				{ "id": "p3", "tipo": "entregar", "objeto": "madera_roble" },
+				{ "id": "p4", "tipo": "hablar", "npc": "catalina_oso" }
+			],
+			"recompensa": { "diario": "capitulo-plaza" },
+			"consecuencia": { "plaza_decorada": true },
+			"oculta": false,
+			"postgame": true
+		},
+		{
+			"id": "cadena-secretta-luciernagas",
+			"titulo": "Luciérnagas del Sur",
+			"contexto": "Nadie recuerda por qué las luciérnagas abandonaron la playa del sur; la respuesta está en la niebla",
+			"pasos": [
+				{ "id": "p1", "tipo": "explorar", "lugar": "playa_sur" },
+				{ "id": "p2", "tipo": "puzzle", "ref": "niebla-luciernagas" },
+				{ "id": "p3", "tipo": "hablar", "npc": "luna_zorra" }
+			],
+			"recompensa": { "cosmetico": "linterna de luciérnagas" },
+			"consecuencia": { "luciernagas_vueltas": true },
+			"oculta": true,
+			"postgame": false
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_005-CAP2-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_005",
+      "text_key": "El puente... recuerdo cuando era nuevo. Si, soy muy viejo.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_005"
+    }
+  }
+}

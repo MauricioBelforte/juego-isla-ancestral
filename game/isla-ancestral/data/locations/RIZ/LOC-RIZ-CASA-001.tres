@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_requirements.gd" id="1_v8kn2"]
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="2_e8o1f"]
+
+[sub_resource type="Resource" id="Resource_mx3gg"]
+script = ExtResource("1_v8kn2")
+descripcion_requisitos = "Acceso libre"
+
+[resource]
+script = ExtResource("2_e8o1f")
+location_id = "LOC-RIZ-CASA-001"
+nombre = "Casa del Jugador"
+tipo = 1
+descripcion = "Casa inicial del jugador en la Isla Raiz."
+requisitos = SubResource("Resource_mx3gg")
+conexiones = ["LOC-RIZ-PUB-001"]
+ampliable = true
+tags = ["tutorial", "casa"]

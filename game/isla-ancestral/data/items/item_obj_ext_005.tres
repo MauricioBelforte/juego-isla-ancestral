@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-EXT-005"
+nombre = "Decoración de patio"
+descripcion = ""
+categoria = 7
+subcategoria = "DECORACION_JARDIN"
+tamano = Vector2i(1, 1)
+interactivo = false
+interacciones = []
+fuente = ""
+precio_compra = 60
+precio_venta = 30
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Cerámica"
+color = "#FF69B4"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

@@ -1,0 +1,10 @@
+{
+  "elementos": [
+    {"id": "nombre_juego", "elemento": "Nombre del juego", "titular": "Estudio", "protegido": true},
+    {"id": "codigo_fuente", "elemento": "Código fuente", "titular": "Estudio", "protegido": true},
+    {"id": "assets_visuales", "elemento": "Assets visuales", "titular": "Estudio", "protegido": true},
+    {"id": "musica", "elemento": "Música", "titular": "Estudio", "protegido": true},
+    {"id": "narrativa", "elemento": "Narrativa y canon", "titular": "Estudio", "protegido": true}
+  ],
+  "politicas": {"marca_copyright_en_distribucion": true, "registro_opcional": true}
+}

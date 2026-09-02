@@ -1,0 +1,15 @@
+{
+  "playa": {"capas": ["olas", "gaviotas"], "clima_2": "lluvia_suave"},
+  "bosque": {"capas": ["viento_hojas", "pajaros"], "clima_2": "lluvia_bosque"},
+  "pradera": {"capas": ["viento", "grillos"], "clima_2": "lluvia_suave"},
+  "volcan": {"capas": ["fuego_lejano", "viento_caliente"], "clima_2": "ceniza"},
+  "montana": {"capas": ["viento_alto", "aves_rapaces"], "clima_2": "nieve"},
+  "selva": {"capas": ["cascada", "aves_tropicales"], "clima_2": "tormenta"},
+  "desierto": {"capas": ["viento_arena", "silbido_lejano"], "clima_2": "viento_arena"},
+  "laguna": {"capas": ["agua_tranquila", "ranas"], "clima_2": "lluvia_suave"},
+  "arrecife": {"capas": ["olas_coral", "peces_saltando"], "clima_2": "tormenta"},
+  "ceniza": {"capas": ["viento_ceniza", "roca_caida"], "clima_2": "ceniza"},
+  "aurora": {"capas": ["cristal_luz", "viento_frio"], "clima_2": "nieve"},
+  "cueva": {"capas": ["goteo", "eco_profundo"], "clima_2": "goteo_intenso"},
+  "subterraneo": {"capas": ["viento_subterraneo", "mecanismo_lejano"], "clima_2": "vibracion"}
+}

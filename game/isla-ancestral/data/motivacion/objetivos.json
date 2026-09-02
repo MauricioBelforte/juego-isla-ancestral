@@ -1,0 +1,74 @@
+{
+  "objetivos": [
+    {
+      "id": "recolectar_madera",
+      "nombre": "Recolectar madera",
+      "descripcion": "Corta 10 troncos de madera",
+      "plazo": "diario",
+      "condicion": "recolectar_madera",
+      "cantidad_requerida": 10,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 50
+    },
+    {
+      "id": "hablar_con_vecinos",
+      "nombre": "Charlar con vecinos",
+      "descripcion": "Habla con 3 vecinos diferentes",
+      "plazo": "diario",
+      "condicion": "hablar_npc",
+      "cantidad_requerida": 3,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 30
+    },
+    {
+      "id": "regalar_regalo",
+      "nombre": "Hacer un regalo",
+      "descripcion": "Regala un objeto a un vecino",
+      "plazo": "diario",
+      "condicion": "regalar_npc",
+      "cantidad_requerida": 1,
+      "recompensa_id": "punto_amistad",
+      "recompensa_cantidad": 2
+    },
+    {
+      "id": "pescar_tres",
+      "nombre": "Ir a pescar",
+      "descripcion": "Pesca 3 peces",
+      "plazo": "semanal",
+      "condicion": "pescar",
+      "cantidad_requerida": 3,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 200
+    },
+    {
+      "id": "minerales",
+      "nombre": "Recolectar minerales",
+      "descripcion": "Extrae 5 minerales de la mina",
+      "plazo": "semanal",
+      "condicion": "mineria",
+      "cantidad_requerida": 5,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 150
+    },
+    {
+      "id": "construir_mueble",
+      "nombre": "Construir un mueble",
+      "descripcion": "Fabrica un mueble o decoración",
+      "plazo": "mensual",
+      "condicion": "construir",
+      "cantidad_requerida": 1,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 500
+    },
+    {
+      "id": "explorar_isla",
+      "nombre": "Explorar una isla nueva",
+      "descripcion": "Visita una isla que no hayas explorado",
+      "plazo": "mensual",
+      "condicion": "viajar",
+      "cantidad_requerida": 1,
+      "recompensa_id": "moneda",
+      "recompensa_cantidad": 1000
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "atajos": {
+    "teleport_casa": {"comando": "teleport", "parametros": {"x": 256, "y": 30, "z": 256}, "nombre": "Ir a casa"},
+    "spawn_madera": {"comando": "spawn", "parametros": {"item": "wood", "n": 5}, "nombre": "Generar madera"},
+    "toggle_ui": {"comando": "toggle_flag", "parametros": {"flag": "mostrar_ui"}, "nombre": "Mostrar/ocultar UI"},
+    "toggle_debug": {"comando": "toggle_flag", "parametros": {"flag": "mostrar_debug"}, "nombre": "Panel debug"}
+  },
+  "flags": {
+    "mostrar_ui": {"default": true, "descripcion": "Interfaz de usuario visible"},
+    "mostrar_debug": {"default": false, "descripcion": "Panel de depuración visible"},
+    "modo_edicion": {"default": false, "descripcion": "Modo edición de terreno"}
+  }
+}

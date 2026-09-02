@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Beret"
+estilo = "Inclinado"
+color_principal = "#2C2C2C"
+material = "Tela"
+notas = "Negra"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa manga larga"
+estilo = "Tejido suelto"
+color_principal = "#FFFDD0"
+material = "Algodón"
+notas = "Manchas pintura"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón largo"
+estilo = "Tejido suelto"
+color_principal = "#FFFDD0"
+material = "Algodón"
+notas = "Manchas pintura"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas bajas"
+estilo = "Cuero suave"
+color_principal = "#A0522D"
+material = "Cuero"
+notas = "Manchas pintura"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Paleta de pintor"
+ubicacion = "manos"
+color = "#B87333"
+notas = "Colores"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Pinceles"
+ubicacion = "bolsillo"
+color = "#2C2C2C"
+notas = "Bolsillo"
+
+[sub_resource type="Resource" id="sub_7"]
+script = ExtResource("3")
+nombre = "Delantal de pintor"
+ubicacion = "torso"
+color = "#B87333"
+notas = "Manchas"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-AUR-004"
+nombre = "Artista del Pueblo"
+isla = "AUR"
+piel = "SK-01"
+cabello = "HR-04"
+ojos = "EY-04"
+complexion = "MEDIA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6"), SubResource("sub_7")]
+variantes_estacionales = {}

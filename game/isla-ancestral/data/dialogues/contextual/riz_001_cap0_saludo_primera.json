@@ -1,0 +1,20 @@
+{
+ "id": "DLG-RIZ_001-CAP0-SALUDO-PRIMERA",
+ "start": "n0",
+ "nodes": {
+  "n0": {
+   "tipo": 0,
+   "speaker_key": "npc.riz_001",
+   "text_key": "¡Bienvenido a Aurora! Soy el mayor de este pueblo. Si necesitas algo, no dudes en preguntar.",
+   "next_id": "fin",
+   "tipo_fin": false,
+   "placeholders": {
+    "nombre": "viajero"
+   }
+  },
+  "fin": {
+   "tipo": 3,
+   "speaker_key": "npc.riz_001"
+  }
+ }
+}

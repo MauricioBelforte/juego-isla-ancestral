@@ -1,0 +1,40 @@
+{
+  "canon_version": "1.0.0",
+  "personajes": {
+    "finneas": {"id": "finneas", "nombre": "Finneas", "rol": "guia", "isla": "raiz", "bio": "El anciano del faro. Conoce la historia de las islas."},
+    "lia": {"id": "lia", "nombre": "Lía", "rol": "curandera", "isla": "raiz", "bio": "Curandera de la isla Raíz. Sabe de plantas y remedios ancestrales."},
+    "bruno": {"id": "bruno", "nombre": "Bruno", "rol": "constructor", "isla": "coral", "bio": "Constructor de Coral. Sueña con reconstruir el puente entre islas."},
+    "nilo": {"id": "nilo", "nombre": "Nilo", "rol": "pescador", "isla": "coral", "bio": "Pescador solitario. Conoce los secretos de la laguna."},
+    "vera": {"id": "vera", "nombre": "Vera", "rol": "herreria", "isla": "ceniza", "bio": "Herrera de Ceniza. Forja herramientas con mineral volcánico."},
+    "orion": {"id": "orion", "nombre": "Orión", "rol": "navegante", "isla": "aurora", "bio": "Navegante de Aurora. Busca la isla perdida de Elysia."}
+  },
+  "lugares": {
+    "faro": {"id": "faro", "nombre": "Faro de la Isla Raíz", "isla": "raiz", "tipo": "construccion", "descripcion": "Faro antiguo que guía a los viajeros."},
+    "templo_raiz": {"id": "templo_raiz", "nombre": "Templo de los Orígenes", "isla": "raiz", "tipo": "templo", "descripcion": "Primer templo, dedicado al abrazo entre el cielo y la tierra."},
+    "laguna_coral": {"id": "laguna_coral", "nombre": "Laguna de Coral", "isla": "coral", "tipo": "accidente_natural", "descripcion": "Laguna bioluminiscente en el centro de la isla Coral."},
+    "templo_coral": {"id": "templo_coral", "nombre": "Templo de las Profundidades", "isla": "coral", "tipo": "templo", "descripcion": "Templo sumergido dedicado a la promesa bajo el agua."},
+    "volcan": {"id": "volcan", "nombre": "Volcán de Ceniza", "isla": "ceniza", "tipo": "accidente_natural", "descripcion": "Volcán activo que nutre la isla con minerales."},
+    "templo_ceniza": {"id": "templo_ceniza", "nombre": "Templo de la Forja", "isla": "ceniza", "tipo": "templo", "descripcion": "Templo construido en obsidiana, dedicado al Hacedor."},
+    "aurora_cielo": {"id": "aurora_cielo", "nombre": "Cúpula de Aurora", "isla": "aurora", "tipo": "construccion", "descripcion": "Cúpula de cristal que atrapa la luz del cielo."},
+    "templo_aurora": {"id": "templo_aurora", "nombre": "Templo del Cazador", "isla": "aurora", "tipo": "templo", "descripcion": "Templo de hielo dedicado a la cacería celestial."}
+  },
+  "simbolos": {
+    "sello_marea": {"id": "sello_marea", "nombre": "Sello de la Marea", "descripcion": "Representa el flujo constante de la vida."},
+    "sello_profundidades": {"id": "sello_profundidades", "nombre": "Sello de las Profundidades", "descripcion": "Guarda el secreto de lo que yace bajo el agua."},
+    "sello_llama": {"id": "sello_llama", "nombre": "Sello de la Llama", "descripcion": "El fuego que nunca se apaga."},
+    "sello_aurora": {"id": "sello_aurora", "nombre": "Sello de la Aurora", "descripcion": "La luz que guía a los perdidos."}
+  },
+  "capas_por_sello": {
+    "sello_marea": { "orden": 1, "isla": "raiz", "revela": ["faro", "templo_raiz", "finneas", "lia"] },
+    "sello_profundidades": { "orden": 2, "isla": "coral", "revela": ["laguna_coral", "templo_coral", "bruno", "nilo"] },
+    "sello_llama": { "orden": 3, "isla": "ceniza", "revela": ["volcan", "templo_ceniza", "vera"] },
+    "sello_aurora": { "orden": 4, "isla": "aurora", "revela": ["aurora_cielo", "templo_aurora", "orion"] }
+  },
+  "linea_tiempo": [
+    {"epoch": "fundacion", "nombre": "Fundación", "descripcion": "Los Arquitectos del Alba llegan a las islas.", "orden": 1},
+    {"epoch": "apogeo", "nombre": "Apogeo", "descripcion": "Construcción de los templos y el faro.", "orden": 2},
+    {"epoch": "eclipse", "nombre": "El Eclipse", "descripcion": "La Resonancia se rompe. Los Arquitectos desaparecen.", "orden": 3},
+    {"epoch": "redescubrimiento", "nombre": "Redescubrimiento", "descripcion": "Los Primeros Jardineros encuentran las islas vacías.", "orden": 4},
+    {"epoch": "presente", "nombre": "El Presente", "descripcion": "El jugador llega a la Isla Aurora.", "orden": 5}
+  ]
+}

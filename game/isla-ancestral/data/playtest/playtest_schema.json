@@ -1,0 +1,18 @@
+{
+  "schema_sesion": {
+    "campos_obligatorios": ["build", "fecha", "ronda", "tipo"],
+    "tipos_validos": ["GUIADA", "LIBRE"],
+    "perfiles": ["cozy", "casual", "no_jugador"]
+  },
+  "schema_encuesta": {
+    "preguntas_tono": ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7"],
+    "rango_tono": [1, 5],
+    "meta_tono_prototipo": 0.5,
+    "meta_tono_prealpha": 1.0
+  },
+  "schema_informe": {
+    "severidades": ["S1", "S2", "S3", "S4"],
+    "max_fixes_comprometidos": 5,
+    "modulos_destino_validos": ["M101", "M102", "M93", "M104", "M114"]
+  }
+}

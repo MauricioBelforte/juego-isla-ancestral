@@ -1,0 +1,12 @@
+{
+  "canales": {
+    "estable": {"version_actual": "1.0.0", "url": "https://example.com/stable"},
+    "beta": {"version_actual": "1.1.0-beta.1", "url": "https://example.com/beta"},
+    "dev": {"version_actual": "1.1.0-dev.3", "url": "https://example.com/dev"}
+  },
+  "politica": {
+    "min_versiones_atras": 2,
+    "aviso_previa": true,
+    "requiere_reinicio": true
+  }
+}

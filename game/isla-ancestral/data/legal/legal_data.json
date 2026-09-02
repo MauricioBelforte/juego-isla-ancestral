@@ -1,0 +1,13 @@
+{
+  "ips": [
+    {"id": "marca_isla_ancestral", "tipo": "marca", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
+    {"id": "codigo_juego", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
+    {"id": "arte_2d", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
+    {"id": "musica_ost", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
+    {"id": "voxel_engine", "tipo": "licencia_tercero", "titular": "Tercero", "licencia": "MIT", "registro": "ok", "jurisdiccion": "global"}
+  ],
+  "politicas": {
+    "registro_marcas_previo_lanzamiento": true,
+    "revision_legal_anual": true
+  }
+}

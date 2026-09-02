@@ -1,6 +1,25 @@
 {
-	"schema_version": 1,
-	"balance_version": "1.0.0",
-	"fecha": "2026-08-30",
-	"afecta": ["M38", "M20", "M15", "M16", "M17", "M13", "M33", "M34", "M35", "M28", "M22", "M23", "M24", "M71", "M153"]
+	"schema_version": 2,
+	"balance_version": "1.1.0",
+	"fecha": "2026-09-01",
+	"afecta": ["M38", "M20", "M15", "M16", "M17", "M13", "M33", "M34", "M35", "M28", "M22", "M23", "M24", "M71", "M153"],
+	"rareza": {
+		"descripcion": "Rareza base con tope 5% para ítems raros + pity (checklist M93 ítems 41-42)",
+		"probabilidad_raro_max": 0.05,
+		"pity": {
+			"descripcion": "Intentos sin éxito que suben la chance del ítem raro (+10% de la base por intento, cap 2x)",
+			"incremento_por_fallo": 0.1,
+			"multiplicador_max": 2.0,
+			"reset_al_conseguir": true
+		}
+	},
+	"rendimiento": {
+		"descripcion": "Límites de gameplay ligados a rendimiento (checklist ítem 57: límite de nodos activos por chunk M61)",
+		"nodos_activos_max_por_chunk": 8
+	},
+	"viajes": {
+		"descripcion": "Recompensa por descubrir rutas nuevas (checklist ítem 66)",
+		"recompensa_descubrir_ruta_ao": 25,
+		"items": {"baya_roja": 2}
+	}
 }

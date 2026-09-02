@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-LUZ-004"
+nombre = "Veladora"
+descripcion = "Candelabro pequeño"
+categoria = 2
+subcategoria = "VELAS"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [6, 9]
+fuente = ""
+precio_compra = 20
+precio_venta = 10
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Cera"
+color = "#FFFDD0"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

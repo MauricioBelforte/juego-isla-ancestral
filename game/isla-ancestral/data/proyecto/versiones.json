@@ -1,0 +1,9 @@
+{
+  "reglas": [
+    {"id": "git_flow", "regla": "Usar git flow con ramas main/dev/feature", "obligatorio": true},
+    {"id": "commits", "regla": "Commits en español, tiempo pasado descriptivo", "obligatorio": true},
+    {"id": "pull_requests", "regla": "PR obligatorio a dev antes de merge", "obligatorio": true},
+    {"id": "tags", "regla": "Tags semánticos vX.Y.Z para releases", "obligatorio": true}
+  ],
+  "politicas": {"revision_version": true, "changelog_obligatorio": true}
+}

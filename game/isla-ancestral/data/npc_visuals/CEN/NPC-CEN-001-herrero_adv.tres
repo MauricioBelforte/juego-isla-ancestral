@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Sin sombrero"
+estilo = "Gafas de soldador en frente"
+color_principal = ""
+material = ""
+notas = "Gafas"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa sin mangas"
+estilo = "Tejido resistente"
+color_principal = "#36454F"
+material = "Tela"
+notas = "Manchas de ceniza"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón largo"
+estilo = "Resistente"
+color_principal = "#2C2C2C"
+material = "Cuero"
+notas = "Negro"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas altas"
+estilo = "Cuero reforzado"
+color_principal = "#2C2C2C"
+material = "Cuero"
+notas = "Placas hierro"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Cadena de metal"
+ubicacion = "cinturon"
+color = "#71797E"
+notas = "Cinturón"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Brazaletes de hierro"
+ubicacion = "manos"
+color = "#71797E"
+notas = "Hierro"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-CEN-001"
+nombre = "Herrero Avanzado"
+isla = "CEN"
+piel = "SK-05"
+cabello = "HR-05"
+ojos = "EY-01"
+complexion = "MUSCULOSA"
+herramienta_derecha = "OBJ-TAL-002"
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

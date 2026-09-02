@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_001-CAP1-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_001",
+      "text_key": "Las cenizas tienen poder residual. Las antiguas las usaban para encantar.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_001"
+    }
+  }
+}

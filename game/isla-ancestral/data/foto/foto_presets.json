@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "presets": {
+    "natural": {
+      "nombre": "Natural (sin filtro)",
+      "saturacion": 1.0,
+      "contraste": 1.0,
+      "temperatura": 0.0,
+      "vineta": 0.0,
+      "dof": 0.0
+    },
+    "calido_playa": {
+      "nombre": "Cálido playa",
+      "saturacion": 1.08,
+      "contraste": 1.05,
+      "temperatura": 0.12,
+      "vineta": 0.08,
+      "dof": 0.0
+    },
+    "verde_selva": {
+      "nombre": "Verde selva",
+      "saturacion": 0.92,
+      "contraste": 1.1,
+      "temperatura": -0.08,
+      "vineta": 0.12,
+      "dof": 0.05
+    },
+    "crepusculo_rojo": {
+      "nombre": "Crepúsculo rojo",
+      "saturacion": 1.1,
+      "contraste": 1.12,
+      "temperatura": 0.2,
+      "vineta": 0.18,
+      "dof": 0.08
+    },
+    "niebla_costera": {
+      "nombre": "Niebla costera",
+      "saturacion": 0.75,
+      "contraste": 0.9,
+      "temperatura": -0.04,
+      "vineta": 0.1,
+      "dof": 0.12
+    },
+    "pintura_retro": {
+      "nombre": "Pintura retro",
+      "saturacion": 0.85,
+      "contraste": 0.95,
+      "temperatura": 0.1,
+      "vineta": 0.22,
+      "dof": 0.1
+    }
+  }
+}

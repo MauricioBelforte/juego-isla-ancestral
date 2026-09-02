@@ -1,0 +1,9 @@
+{
+  "edades": {
+    "mayoria_edad_consentimiento": 16,
+    "requiere_consentimiento_parental_hasta": 16,
+    "restriccion_contenido_edad_minima": 7
+  },
+  "regiones": {"gdpr": {"edad_consentimiento": 16}, "latam": {"edad_consentimiento": 18}},
+  "politicas": {"consentimiento_parental_obligatorio": true, "no_venta_datos_menores": true, "moderacion_chat": true}
+}

@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_004-CAP4-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_004",
+      "text_key": "El valle... los vientos pintan en el aire. Quiero capturarlo.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_004"
+    }
+  }
+}

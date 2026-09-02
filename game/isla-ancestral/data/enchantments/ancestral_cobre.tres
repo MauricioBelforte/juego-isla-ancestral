@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnchantmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enchantment/enchantment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "ancestral_cobre"
+display_name = "Cobre Ancestral"
+description = "Intercambio especial con NPCs y bonus adicional"
+tool_tier = 1
+ability_type = "special_trade"
+ability_value = 1.0
+visual_color = Color(1, 0.6, 0.2, 1)
+incense_cost = 3
+coin_cost = 200
+animation_duration = 2.0
+icon = null

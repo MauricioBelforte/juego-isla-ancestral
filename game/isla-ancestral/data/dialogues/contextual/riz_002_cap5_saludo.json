@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_002-CAP5-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_002",
+      "text_key": "Trabajo a la luz de las velas. No es ideal, pero se hace.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_002"
+    }
+  }
+}

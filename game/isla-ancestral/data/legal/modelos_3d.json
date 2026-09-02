@@ -1,0 +1,8 @@
+{
+  "assets": [
+    {"id": "voxel_characters", "nombre": "Personajes voxel", "origen": "propio", "licencia": "propia", "uso": "gameplay"},
+    {"id": "terrain_textures", "nombre": "Texturas de terreno", "origen": "tercero", "licencia": "CC0", "uso": "ambiente"},
+    {"id": "ui_icons", "nombre": "Iconos de UI", "origen": "tercero", "licencia": "MIT", "uso": "ui"}
+  ],
+  "politicas": {"attribution_en_creditos": true, "licencias_terceros_en_archivo": true}
+}

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "luna_zorra"
+nombre = "Luna"
+especie = "zorra"
+personalidad = "timida"
+edad_categoria = "niñez"
+profesion = "artesana"
+cumpleanos_mes = 11
+cumpleanos_dia = 9
+edad_base = 11
+color_cuerpo = Color(0.7, 0.6, 0.75, 1)
+color_cabeza = Color(0.8, 0.7, 0.85, 1)
+escala_cuerpo = 0.8
+historia = "Luna dibuja constelaciones en la arena y jura que se mueven cuando nadie mira."
+gustos = ["fibra_algodon", "flores"]
+disgustos = ["mineral_cobre"]
+hobbies = ["dibujar", "coleccionar"]
+rutina_diaria = {
+"09:00": "trabajar",
+"13:00": "jugar",
+"18:00": "pasear",
+"20:00": "descansar"
+}
+linea_saludo = "Ah... hola. ¿También te gusta mirar las estrellas?"
+linea_despedida = "Adiós... vuelve cuando quieras."
+linea_sueno = "Mmm... cometas..."
+hogar_deseado = "colina"

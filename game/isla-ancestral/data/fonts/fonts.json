@@ -1,0 +1,9 @@
+{
+  "fuentes": [
+    {"id": "museo_moderno", "nombre": "Museo Moderno", "familia": "display", "pesos": ["regular", "bold"], "licencia": "OFL", "tiene_archivo": false, "cobertura": ["todos"]},
+    {"id": "texto_cozy", "nombre": "Texto Cozy", "familia": "body", "pesos": ["regular", "bold", "italic"], "licencia": "OFL", "tiene_archivo": false, "cobertura": ["es", "en"]},
+    {"id": "script_isla", "nombre": "Script de la Isla", "familia": "decorativa", "pesos": ["regular"], "licencia": "CC-BY", "tiene_archivo": false, "cobertura": ["es"]},
+    {"id": "mono_debug", "nombre": "Mono Debug", "familia": "mono", "pesos": ["regular"], "licencia": "OFL", "tiene_archivo": false, "cobertura": ["todos"]}
+  ],
+  "licencias_permitidas": ["OFL", "MIT", "CC-BY", "CC0"]
+}

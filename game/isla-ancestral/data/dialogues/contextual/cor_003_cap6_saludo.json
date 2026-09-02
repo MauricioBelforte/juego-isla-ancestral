@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_003-CAP6-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_003",
+      "text_key": "La geoda... esa cosa vale mas que todo mi comercio. Pero no la vendo.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_003"
+    }
+  }
+}

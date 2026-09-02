@@ -1,5 +1,5 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"umbrales": {
 		"nivel_2": 30,
 		"nivel_3": 70,
@@ -13,5 +13,19 @@
 		"charla": 5,
 		"carta": 8,
 		"evento_festival": 20
-	}
+	},
+	"generosidad_favorito": {
+		"descripcion": "Regalo FAVORITO del vecino: x3 puntos (checklist M93: 'regalos favoritos +x3')",
+		"multiplicador": 3,
+		"puntos_base_aplicado": "regalo_gustado"
+	},
+	"beneficios_por_nivel": {
+		"descripcion": "Qué desbloquea cada nivel de amistad (checklist: recetas, descuentos, eventos). M20/M39/M22 los consultan.",
+		"2": ["recetas_basicas"],
+		"3": ["descuento_tienda_5"],
+		"4": ["recetas_avanzadas", "oferta_trueque_especial"],
+		"5": ["evento_regalo_aniversario"],
+		"8": ["lineas_dialogo_secretas"]
+	},
+	"sin_decaimiento_por_ausencia": true
 }

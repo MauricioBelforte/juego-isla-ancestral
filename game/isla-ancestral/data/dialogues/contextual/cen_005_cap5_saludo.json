@@ -1,0 +1,17 @@
+{
+  "id": "DLG-CEN_005-CAP5-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cen_005",
+      "text_key": "La mina es oscura siempre. La noche eterna no cambia nada.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cen_005"
+    }
+  }
+}

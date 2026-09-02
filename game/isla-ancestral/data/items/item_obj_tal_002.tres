@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-TAL-002"
+nombre = "Yunque"
+descripcion = ""
+categoria = 6
+subcategoria = "TALLER_METAL"
+tamano = Vector2i(1, 1)
+interactivo = true
+interacciones = [6]
+fuente = ""
+precio_compra = 220
+precio_venta = 110
+rareza = 1
+apilable = false
+stack_max = 1
+material = "Metal"
+color = "#2F4F4F"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

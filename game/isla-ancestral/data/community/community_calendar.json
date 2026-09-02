@@ -1,0 +1,12 @@
+{
+  "canales": ["discord", "steam_forums", "x_twitter", "youtube", "newsletter"],
+  "calendario": [
+    {"id": "anuncio_ronda1", "tipo": "anuncio", "frecuencia": "semanal", "canal": "discord", "descripcion": "Resumen de avance de la ronda"},
+    {"id": "screenshot_friday", "tipo": "contenido", "frecuencia": "semanal", "canal": "x_twitter", "descripcion": "Captura destacada del viernes"},
+    {"id": "devlog_mensual", "tipo": "devlog", "frecuencia": "mensual", "canal": "youtube", "descripcion": "Video devlog mensual"},
+    {"id": "newsletter_bimensual", "tipo": "newsletter", "frecuencia": "bimensual", "canal": "newsletter", "descripcion": "Newsletter cada 2 semanas"}
+  ],
+  "metricas": {
+    "kpis": ["miembros", "mensajes_activos", "crecimiento_semanal", "reacciones"]
+  }
+}

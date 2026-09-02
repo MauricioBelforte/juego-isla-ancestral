@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_001-CAP1-MISION",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_001",
+      "text_key": "¿Podrias investigar las cenizas? Habla con el viejo sabio, el sabe de estas cosas.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_001"
+    }
+  }
+}

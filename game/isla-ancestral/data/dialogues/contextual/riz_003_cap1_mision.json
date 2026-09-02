@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_003-CAP1-MISION",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_003",
+      "text_key": "¿Puedes traerme hierbas limpias del bosque? Las necesito para remedios.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_003"
+    }
+  }
+}

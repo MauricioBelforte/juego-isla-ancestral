@@ -1,0 +1,29 @@
+{
+  "ediciones": [
+    {
+      "id": "standard",
+      "nombre": "Standard",
+      "precio_usd": 24.99,
+      "historia_completa": true,
+      "contenido": ["juego_base", "historia_completa"],
+      "cosmeticos": false
+    },
+    {
+      "id": "deluxe",
+      "nombre": "Deluxe",
+      "precio_usd": 34.99,
+      "historia_completa": true,
+      "contenido": ["juego_base", "historia_completa", "ost", "cosmeticos_basicos"],
+      "cosmeticos": true
+    },
+    {
+      "id": "coleccionista",
+      "nombre": "Coleccionista",
+      "precio_usd": 59.99,
+      "historia_completa": true,
+      "contenido": ["juego_base", "historia_completa", "ost", "cosmeticos_basicos", "cosmeticos_exclusivos", "arte_digital", "mapa"],
+      "cosmeticos": true,
+      "fisica": true
+    }
+  ]
+}

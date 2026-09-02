@@ -1,0 +1,17 @@
+{
+  "id": "DLG-CEN_004-CAP0-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cen_004",
+      "text_key": "Bienvenido a la biblioteca. El silencio, por favor.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cen_004"
+    }
+  }
+}

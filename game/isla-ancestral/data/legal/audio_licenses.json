@@ -1,0 +1,8 @@
+{
+  "tracks": [
+    {"id": "aurora_main", "titulo": "Aurora Main Theme", "autor": "Compositor del estudio", "licencia": "propia", "uso": "musica_principal"},
+    {"id": "ost_piano_01", "titulo": "Piano Relax 01", "autor": "Banco libre", "licencia": "CC-BY", "uso": "ambiente", "attribution": "Banco libre (CC-BY)"},
+    {"id": "sfx_ambiente_01", "titulo": "Ambiente Bosque", "autor": "Banco libre", "licencia": "CC0", "uso": "sfx"}
+  ],
+  "politicas": {"actas_por_track": true, "registro_licencias_obligatorio": true}
+}

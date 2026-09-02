@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnchantmentData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/enchantment/enchantment_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "caverna_cristal"
+display_name = "Cristal de Caverna"
+description = "Bonus de extracción en cuevas"
+tool_tier = 4
+ability_type = "cave_bonus"
+ability_value = 1.5
+visual_color = Color(0.4, 0.7, 1, 1)
+incense_cost = 12
+coin_cost = 1000
+animation_duration = 5.0
+icon = null

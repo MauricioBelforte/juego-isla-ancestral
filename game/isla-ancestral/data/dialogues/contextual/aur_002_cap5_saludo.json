@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_002-CAP5-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_002",
+      "text_key": "La noche eterna trae melancolia. Tengo tes para el alma.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_002"
+    }
+  }
+}

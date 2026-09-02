@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "bruno_sapo"
+nombre = "Bruno"
+especie = "sapo"
+personalidad = "dulce"
+edad_categoria = "anciano"
+profesion = "carpintero"
+cumpleanos_mes = 1
+cumpleanos_dia = 27
+edad_base = 67
+color_cuerpo = Color(0.4, 0.55, 0.35, 1)
+color_cabeza = Color(0.5, 0.65, 0.42, 1)
+escala_cuerpo = 1.05
+historia = "Bruno construyó la mitad de las casas del continente y dice que la mitad justa. Nunca apura una viga."
+gustos = ["madera_roble", "miel"]
+disgustos = ["pescado"]
+hobbies = ["carpintería", "contar historias"]
+rutina_diaria = {
+"08:00": "trabajar",
+"12:00": "almorzar",
+"15:00": "trabajar",
+"19:00": "descansar"
+}
+linea_saludo = "Tranquilo, tranquilo... toda viga llega a su ranura."
+linea_despedida = "Que el viento sople a favor."
+linea_sueno = "Zzz... planeando..."
+hogar_deseado = "bosque"

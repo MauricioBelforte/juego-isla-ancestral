@@ -1,7 +1,25 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"puzzles": {
-		"templo_agua": {"tiempo_max_con_ayuda_min": 20, "tiempo_max_sin_ayuda_min": 45, "recompensa_ao": 100},
-		"templo_fuego": {"tiempo_max_con_ayuda_min": 15, "tiempo_max_sin_ayuda_min": 35, "recompensa_ao": 120}
+		"templo_agua": {"tiempo_max_con_ayuda_min": 20, "tiempo_max_sin_ayuda_min": 45, "recompensa_ao": 100, "nivel_herramientas": 1},
+		"templo_fuego": {"tiempo_max_con_ayuda_min": 15, "tiempo_max_sin_ayuda_min": 35, "recompensa_ao": 120, "nivel_herramientas": 2}
+	},
+	"recompensa_templo": {
+		"descripcion": "Cada templo otorga una herramienta ÚNICA no monetizable (checklist M93: 'recompensa de templo herramienta única M13/M26')",
+		"item_unico": true,
+		"monetizable": false,
+		"templo_agua": "canta_gotas",
+		"templo_fuego": "abraska_volcan"
+	},
+	"recompensa_ruinas": {
+		"descripcion": "Las ruinas (M25) recompensan fragmentos y lore (no AO)",
+		"fragmentos": 1,
+		"lore": true,
+		"recompensa_ao": 0
+	},
+	"reglas": {
+		"resoluble_con_herramientas_del_momento": true,
+		"tiempo_max_con_ayuda_min": 20,
+		"tiempo_max_sin_ayuda_min": 45
 	}
 }

@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_004-CAP3-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_004",
+      "text_key": "La sombra del templo no es peligrosa. Es... una memoria. Un eco de luz.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_004"
+    }
+  }
+}

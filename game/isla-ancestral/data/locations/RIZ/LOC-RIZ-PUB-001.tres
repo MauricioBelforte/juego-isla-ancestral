@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_requirements.gd" id="1_1o6rm"]
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="2_e7dkg"]
+
+[sub_resource type="Resource" id="Resource_vfept"]
+script = ExtResource("1_1o6rm")
+descripcion_requisitos = "Acceso libre"
+
+[resource]
+script = ExtResource("2_e7dkg")
+location_id = "LOC-RIZ-PUB-001"
+nombre = "Pueblo Raiz"
+descripcion = "Pueblo central de la Isla Raiz. Punto de encuentro y tutorial."
+requisitos = SubResource("Resource_vfept")
+npcs = ["NPC-GUIA-001"]
+conexiones = ["LOC-RIZ-CASA-001", "LOC-RIZ-TIE-001"]
+tags = ["tutorial", "pueblo"]

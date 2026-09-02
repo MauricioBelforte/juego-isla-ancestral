@@ -1,0 +1,27 @@
+{
+  "trailer": {
+    "id": "trailer_lanzamiento",
+    "tipo": "lanzamiento",
+    "duracion_total_s": 75,
+    "formato": "16:9",
+    "resolucion": "3840x2160",
+    "fps": 60,
+    "lufs_master": -14,
+    "idiomas_subtitulos": ["es", "en", "pt", "de", "fr", "it"]
+  },
+  "tomas": [
+    {"id": "t1", "descripcion": "Amanecer en la Isla Aurora", "duracion_s": 8, "tipo": "establecimiento", "musica": "aurora_motivo"},
+    {"id": "t2", "descripcion": "Jugador planta el primer cultivo", "duracion_s": 5, "tipo": "gameplay", "musica": "aurora_motivo"},
+    {"id": "t3", "descripcion": "Pesca en la laguna", "duracion_s": 5, "tipo": "gameplay", "musica": "aurora_motivo"},
+    {"id": "t4", "descripcion": "Exploración del bosque", "duracion_s": 5, "tipo": "gameplay", "musica": "aurora_motivo"},
+    {"id": "t5", "descripcion": "Construcción de la casa", "duracion_s": 5, "tipo": "gameplay", "musica": "templo_motivo"},
+    {"id": "t6", "descripcion": "Cosecha de cultivos", "duracion_s": 5, "tipo": "gameplay", "musica": "aurora_motivo"},
+    {"id": "t7", "descripcion": "Vecinos en el pueblo", "duracion_s": 5, "tipo": "gameplay", "musica": "aurora_motivo"},
+    {"id": "t8", "descripcion": "Minando en la cueva", "duracion_s": 5, "tipo": "gameplay", "musica": "templo_motivo"},
+    {"id": "t9", "descripcion": "Paseo en barco al atardecer", "duracion_s": 7, "tipo": "gameplay", "musica": "templo_motivo"},
+    {"id": "t10", "descripcion": "Templo ancestral con aurora boreal", "duracion_s": 10, "tipo": "misterio", "musica": "templo_motivo"},
+    {"id": "t11", "descripcion": "El faro en la tormenta", "duracion_s": 7, "tipo": "misterio", "musica": "templo_motivo"},
+    {"id": "t12", "descripcion": "Logo del juego", "duracion_s": 8, "tipo": "logo", "musica": "aurora_motivo"}
+  ],
+  "checklist_antiespoiler": ["no_mostrar_elysia", "no_revelar_sellos", "no_mostrar_epilogo"]
+}

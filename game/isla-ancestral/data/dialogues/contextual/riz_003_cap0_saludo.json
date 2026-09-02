@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_003-CAP0-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_003",
+      "text_key": "¡Hola! ¿Eres nuevo? Bienvenido a mi tienda. Tenemos de todo.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_003"
+    }
+  }
+}

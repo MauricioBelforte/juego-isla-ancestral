@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Cofia"
+estilo = "Tela blanca, cubre cabello"
+color_principal = "#FFFDD0"
+material = "Tela"
+notas = "Limpia"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Blusa"
+estilo = "Manga larga"
+color_principal = "#FFFDD0"
+material = "Algodón"
+notas = "Arremangada"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Falda larga"
+estilo = "Hasta tobillos"
+color_principal = "#E2725B"
+material = "Tela"
+notas = "Terracota"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas bajas"
+estilo = "Cuero suave"
+color_principal = "#C4A882"
+material = "Cuero"
+notas = "Marrón claro"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Delantal"
+ubicacion = "torso"
+color = "#E2725B"
+notas = "Manchas de comida"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Pañuelo"
+ubicacion = "cuello"
+color = "#FFFDD0"
+notas = "Cuello"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-CEN-003"
+nombre = "Cocinera del Pueblo"
+isla = "CEN"
+piel = "SK-02"
+cabello = "HR-03"
+ojos = "EY-02"
+complexion = "REDONDA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

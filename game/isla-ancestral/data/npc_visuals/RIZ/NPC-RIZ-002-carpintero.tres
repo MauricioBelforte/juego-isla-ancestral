@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="RopaSombrero"]
+script = ExtResource("2")
+nombre = "Fedora de paja"
+color_principal = "#F5DEB3"
+estilo = "Ala ancha, cinta marrón"
+color_principal = "#F5DEB3"
+color_secundario = "#8B6914"
+material = "Paja"
+notas = "Cinta de cuero alrededor"
+
+[sub_resource type="Resource" id="RopaTorso"]
+script = ExtResource("2")
+nombre = "Camisa de trabajo"
+estilo = "Manga corta, arremangada"
+color_principal = "#C4A882"
+color_secundario = ""
+material = "Lino grueso"
+notas = "Manchas de aserrín"
+
+[sub_resource type="Resource" id="RopaPiernas"]
+script = ExtResource("2")
+nombre = "Pantalón de trabajo"
+estilo = "Largo, resistente"
+color_principal = "#8B6914"
+color_secundario = ""
+material = "Tela gruesa"
+notas = "Manchas de aserrín"
+
+[sub_resource type="Resource" id="RopaPies"]
+script = ExtResource("2")
+nombre = "Botas de carpintero"
+estilo = "Altas, cuero grueso"
+color_principal = "#5C4033"
+color_secundario = ""
+material = "Cuero"
+notas = "Sin cordones, suelas gruesas"
+
+[sub_resource type="Resource" id="AccDelantal"]
+script = ExtResource("3")
+nombre = "Delantal de cuero"
+ubicacion = "torso"
+color = "#A0522D"
+notas = "Bolsillos para herramientas"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-RIZ-002"
+nombre = "Carpintero"
+isla = "RIZ"
+piel = "SK-03"
+cabello = "HR-03"
+ojos = "EY-04"
+complexion = "MUSCULOSA"
+
+sombrero = SubResource("RopaSombrero")
+torso = SubResource("RopaTorso")
+piernas = SubResource("RopaPiernas")
+pies = SubResource("RopaPies")
+
+accesorios = [SubResource("AccDelantal")]
+
+herramienta_derecha = "OBJ-HER-001"
+herramienta_izquierda = ""
+
+variantes_estacionales = {}
+retrato_path = ""

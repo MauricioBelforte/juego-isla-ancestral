@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_005-CAP7-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_005",
+      "text_key": "El sello no estaba roto. Fue escondido para protegernos de nosotros mismos. Ahora confio en ti, nuevo guardian.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_005"
+    }
+  }
+}

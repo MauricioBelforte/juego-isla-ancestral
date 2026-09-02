@@ -1,0 +1,9 @@
+{
+  "impuestos": [
+    { "plataforma": "steam", "region": "latam", "tasa": 0.16, "nota": "IVA regional" },
+    { "plataforma": "steam", "region": "eu", "tasa": 0.21, "nota": "IVA UE" },
+    { "plataforma": "steam", "region": "us", "tasa": 0.0, "nota": "sin IVA nacional" },
+    { "plataforma": "epic", "region": "latam", "tasa": 0.16, "nota": "IVA regional" },
+    { "plataforma": "gog", "region": "eu", "tasa": 0.21, "nota": "IVA UE" }
+  ]
+}

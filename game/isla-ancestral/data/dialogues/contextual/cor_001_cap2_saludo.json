@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_001-CAP2-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_001",
+      "text_key": "Con el puente puedo traer hierro del continente. ¡Nuevas posibilidades!",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_001"
+    }
+  }
+}

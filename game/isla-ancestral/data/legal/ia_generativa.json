@@ -1,0 +1,10 @@
+{
+  "politicas": {
+    "uso_permitido": ["generacion_conceptos", "borradores_texto", "revision_codigo"],
+    "uso_prohibido": ["assets_finales", "codigo_produccion_sin_revision", "contenido_narrativo_final", "datos_personales"]
+  },
+  "atribucion": {
+    "requerida": true,
+    "formato": "mencionar_herramienta_y_version_en_documentacion"
+  }
+}

@@ -1,0 +1,35 @@
+{
+	"schema_version": 1,
+	"exposiciones": [
+		{
+			"id": "peces",
+			"nombre": "Acuario de Aurora",
+			"descripcion": "Cada especie del mar de Aurora nada en su acuario.",
+			"categoria": "acuario",
+			"origen": "M34",
+			"items": ["trucha_cascada", "bacalao_nube", "gobio_mar", "anguila_brisa"],
+			"recompensa_item_id": "fragmento_ancestral",
+			"recompensa_nombre": "Fragmento del Guardián del Mar"
+		},
+		{
+			"id": "fosiles",
+			"nombre": "Sala de Fósiles",
+			"descripcion": "Restos de la civilización ancestral, donados por exploradores.",
+			"categoria": "pedestal",
+			"origen": "M25",
+			"items": ["fragmento_ancestral"],
+			"recompensa_item_id": "talisman_ancestral",
+			"recompensa_nombre": "Talismán del Primer Guardián"
+		},
+		{
+			"id": "flora",
+			"nombre": "Herbario Vivo",
+			"descripcion": "La flora de la isla preservada para las futuras generaciones.",
+			"categoria": "diorama",
+			"origen": "M15",
+			"items": ["baya_roja", "fibra_algodon", "madera_roble", "mineral_cobre"],
+			"recompensa_item_id": "semilla_tomate",
+			"recompensa_nombre": "Semilla Dorada del Herbario"
+		}
+	]
+}

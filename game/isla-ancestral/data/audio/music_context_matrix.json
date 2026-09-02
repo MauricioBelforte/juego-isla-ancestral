@@ -1,0 +1,26 @@
+{
+  "temas": {
+    "aurora_dia": {"capas": ["base_aurora", "tiempo_dia"], "peso": 1},
+    "aurora_noche": {"capas": ["base_aurora", "tiempo_noche"], "peso": 1},
+    "aurora_lluvia": {"capas": ["base_aurora", "tiempo_dia", "evento_lluvia"], "peso": 1},
+    "coral_dia": {"capas": ["base_coral", "tiempo_dia"], "peso": 1},
+    "coral_noche": {"capas": ["base_coral", "tiempo_noche"], "peso": 1},
+    "ceniza_dia": {"capas": ["base_ceniza", "tiempo_dia"], "peso": 1},
+    "aurora_festival": {"capas": ["base_aurora", "tiempo_dia", "evento_festival"], "peso": 1}
+  },
+  "capas": {
+    "base_aurora": {"id": "base_aurora", "nombre": "Base Aurora", "lufs": -16},
+    "base_coral": {"id": "base_coral", "nombre": "Base Coral", "lufs": -16},
+    "base_ceniza": {"id": "base_ceniza", "nombre": "Base Ceniza", "lufs": -16},
+    "tiempo_dia": {"id": "tiempo_dia", "nombre": "Capa de día", "lufs": -20},
+    "tiempo_noche": {"id": "tiempo_noche", "nombre": "Capa de noche", "lufs": -20},
+    "evento_lluvia": {"id": "evento_lluvia", "nombre": "Evento lluvia", "lufs": -24},
+    "evento_festival": {"id": "evento_festival", "nombre": "Evento festival", "lufs": -24}
+  },
+  "variaciones": {
+    "aurora_dia": ["aurora_dia_v1", "aurora_dia_v2", "aurora_dia_v3"],
+    "aurora_noche": ["aurora_noche_v1", "aurora_noche_v2"],
+    "coral_dia": ["coral_dia_v1", "coral_dia_v2", "coral_dia_v3", "coral_dia_v4"],
+    "ceniza_dia": ["ceniza_dia_v1", "ceniza_dia_v2"]
+  }
+}

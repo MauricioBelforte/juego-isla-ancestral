@@ -1,0 +1,42 @@
+{
+	"schema_version": 1,
+	"rutas": [
+		{
+			"id": "raiz_sur",
+			"origen": "isla_raiz",
+			"destino": "isla_sur",
+			"duracion_seg": 20.0,
+			"coste_ao": 50,
+			"nocturna": false,
+			"temporada": "todas"
+		},
+		{
+			"id": "raiz_norte",
+			"origen": "isla_raiz",
+			"destino": "isla_norte",
+			"duracion_seg": 30.0,
+			"coste_ao": 80,
+			"nocturna": false,
+			"temporada": "verano"
+		},
+		{
+			"id": "raiz_brisa_nocturna",
+			"origen": "isla_raiz",
+			"destino": "isla_brisa",
+			"duracion_seg": 45.0,
+			"coste_ao": 120,
+			"requiere_flag": "templo_brisa_abierto",
+			"secreta": true,
+			"nocturna": true
+		},
+		{
+			"id": "raiz_espejo_diurna",
+			"origen": "isla_raiz",
+			"destino": "isla_espejo",
+			"duracion_seg": 60.0,
+			"coste_ao": 200,
+			"requiere_flag": "pistas_secreto_completas",
+			"secreta": true
+		}
+	]
+}

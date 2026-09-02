@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-ITE-002"
+nombre = "Piedra"
+descripcion = ""
+categoria = 11
+subcategoria = "MATERIALES"
+tamano = Vector2i(1, 1)
+interactivo = false
+interacciones = []
+fuente = ""
+precio_compra = 8
+precio_venta = 4
+rareza = 0
+apilable = true
+stack_max = 50
+material = "Piedra"
+color = "#696969"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

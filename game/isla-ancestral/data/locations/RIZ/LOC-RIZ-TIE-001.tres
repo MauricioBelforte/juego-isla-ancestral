@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_requirements.gd" id="1_laf4v"]
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="2_3o3w7"]
+
+[sub_resource type="Resource" id="Resource_l1h84"]
+script = ExtResource("1_laf4v")
+descripcion_requisitos = "Acceso libre"
+
+[resource]
+script = ExtResource("2_3o3w7")
+location_id = "LOC-RIZ-TIE-001"
+nombre = "Tienda General"
+tipo = 2
+descripcion = "Tienda basica de la Isla Raiz."
+requisitos = SubResource("Resource_l1h84")
+npcs = ["NPC-TENDERO-001"]
+conexiones = ["LOC-RIZ-PUB-001"]
+tags = ["tienda", "economia"]

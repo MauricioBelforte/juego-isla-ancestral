@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_001-CAP0-HISTORIA",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_001",
+      "text_key": "Esta isla lleva siglos en paz. Las ruinas del norte cuentan historias de una civilizacion antigua...",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_001"
+    }
+  }
+}

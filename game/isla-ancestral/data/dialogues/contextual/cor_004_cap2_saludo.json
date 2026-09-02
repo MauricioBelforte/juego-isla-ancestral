@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_004-CAP2-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_004",
+      "text_key": "El puente necesita guardia tambien. Ampliare mi patrulla.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_004"
+    }
+  }
+}

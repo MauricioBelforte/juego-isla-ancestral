@@ -1,0 +1,32 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/villager_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+id = "finneas_zorro"
+nombre = "Finneas"
+especie = "zorro"
+personalidad = "seria"
+edad_categoria = "adulto"
+profesion = "pescador"
+cumpleanos_mes = 3
+cumpleanos_dia = 21
+edad_base = 34
+color_cuerpo = Color(0.85, 0.55, 0.3, 1)
+color_cabeza = Color(0.95, 0.7, 0.45, 1)
+escala_cuerpo = 1.0
+historia = "Finneas conoce las corrientes de Aurora mejor que nadie. Dice que la brisa le susurra dónde pescar."
+gustos = ["pescado", "mineral_cobre"]
+disgustos = ["baya_roja"]
+hobbies = ["pescar", "navegar"]
+rutina_diaria = {
+"06:00": "pescar",
+"12:00": "almorzar",
+"14:00": "pescar",
+"20:00": "descansar"
+}
+linea_saludo = "La marea está tranquila hoy. ¿Subes a la lancha?"
+linea_despedida = "Cuida la costa, yo vigilo el agua."
+linea_sueno = "Zzz... caña en mano..."
+hogar_deseado = "costa"

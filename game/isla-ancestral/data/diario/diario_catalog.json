@@ -1,0 +1,118 @@
+{
+	"schema_version": 1,
+	"categorias": [
+		{
+			"id": "personajes",
+			"entradas": [
+				{ "id": "vecino_catalina_oso", "titulo": "Catalina Oso" },
+				{ "id": "vecino_finneas_zorro", "titulo": "Finneas Zorro" },
+				{ "id": "vecino_mateo_mapache", "titulo": "Mateo Mapache" },
+				{ "id": "vecino_luna_zorra", "titulo": "Luna Zorra" },
+				{ "id": "vecino_bruno_sapo", "titulo": "Bruno Sapo" }
+			]
+		},
+		{
+			"id": "lugares",
+			"entradas": [
+				{ "id": "lugar_isla_raiz", "titulo": "Isla Raíz" },
+				{ "id": "lugar_isla_sur", "titulo": "Isla del Sur" },
+				{ "id": "lugar_isla_norte", "titulo": "Isla del Norte" },
+				{ "id": "lugar_isla_brisa", "titulo": "Isla de la Brisa" },
+				{ "id": "lugar_isla_espejo", "titulo": "Isla del Espejo" }
+			]
+		},
+		{
+			"id": "criaturas",
+			"entradas": [
+				{ "id": "pez_trucha_cascada", "titulo": "Trucha de Cascada" },
+				{ "id": "pez_bacalao_nube", "titulo": "Bacalao Nube" },
+				{ "id": "pez_gobio_mar", "titulo": "Gobio de Mar" },
+				{ "id": "pez_anguila_brisa", "titulo": "Anguila de Brisa" }
+			]
+		},
+		{
+			"id": "sellos",
+			"entradas": [
+				{ "id": "sello_sello_ceniza_sala1", "titulo": "Sello de Ceniza I" },
+				{ "id": "sello_sello_ceniza_sala2", "titulo": "Sello de Ceniza II" },
+				{ "id": "sello_sello_mar_intermedia", "titulo": "Sello del Mar" },
+				{ "id": "sello_sello_mar_sala1", "titulo": "Sello del Coral" },
+				{ "id": "sello_sello_brisa_sala1", "titulo": "Sello de Brisa I" },
+				{ "id": "sello_sello_brisa_sala2", "titulo": "Sello de Brisa II" },
+				{ "id": "sello_sello_brisa_camara", "titulo": "Sello de la Cámara" }
+			]
+		},
+		{
+			"id": "misiones",
+			"entradas": [
+				{ "id": "mision_test_quest", "titulo": "Encargo perdido" },
+				{ "id": "mision_prologo", "titulo": "La Llegada" },
+				{ "id": "mision_cadena-faro", "titulo": "El Faro de las Memorias" },
+				{ "id": "mision_cadena-invernadero", "titulo": "El Invernadero Olvidado" }
+			]
+		},
+		{
+			"id": "eventos",
+			"entradas": [
+				{ "id": "evento_primavera", "titulo": "Festival de Primavera" },
+				{ "id": "evento_verano", "titulo": "Festival del Verano" },
+				{ "id": "evento_otono", "titulo": "Festival de Otoño" },
+				{ "id": "evento_invierno", "titulo": "Festival de Invierno" }
+			]
+		},
+		{
+			"id": "cartas",
+			"entradas": [
+				{ "id": "carta_carta_bienvenida", "titulo": "Carta de Bienvenida" }
+			]
+		},
+		{
+			"id": "recetas",
+			"entradas": [
+				{ "id": "receta_rec_mesa_robusta", "titulo": "Mesa Robusta" },
+				{ "id": "receta_rec_pico_cobre", "titulo": "Pico de Cobre" }
+			]
+		},
+		{
+			"id": "plantas",
+			"entradas": [
+				{ "id": "planta_baya_roja", "titulo": "Bayas Rojas" },
+				{ "id": "planta_fibra_algodon", "titulo": "Fibra de Algodón" }
+			]
+		},
+		{
+			"id": "minerales",
+			"entradas": [
+				{ "id": "mineral_madera_roble", "titulo": "Madera de Roble" },
+				{ "id": "mineral_piedra_caliza", "titulo": "Piedra Caliza" },
+				{ "id": "mineral_mineral_cobre", "titulo": "Mineral de Cobre" }
+			]
+		},
+		{
+			"id": "ruinas",
+			"entradas": [
+				{ "id": "ruina_templo_ceniza", "titulo": "Ruinas de Ceniza" },
+				{ "id": "ruina_templo_mar", "titulo": "Ruinas Sumergidas" }
+			]
+		},
+		{
+			"id": "descubrimientos",
+			"entradas": [
+				{ "id": "descubrimiento_gran_vapor", "titulo": "El Gran Vapor" },
+				{ "id": "descubrimiento_aurora", "titulo": "Aurora — La Isla Viva" },
+				{ "id": "descubrimiento_fallback_mision_test", "titulo": "Camino Alternativo" }
+			]
+		},
+		{
+			"id": "pistas",
+			"entradas": [
+				{ "id": "pista_pista_01", "titulo": "Primer Misterio" },
+				{ "id": "pista_pista_02", "titulo": "La Biblio­teca Quemada" }
+			]
+		},
+		{
+			"id": "fotografias",
+			"entradas": []
+		}
+	]
+}

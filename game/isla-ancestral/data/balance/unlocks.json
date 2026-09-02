@@ -1,8 +1,19 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"desbloqueos": {
-		"viaje_interislas": {"coste_ao": 300, "condicion": "sello_llegada"},
-		"taller_crafting": {"coste_ao": 150, "condicion": "mision_secundaria_inicial"},
-		"recetas_avanzadas": {"coste_ao": 500, "condicion": "sello_cultivador"}
+		"viaje_interislas": {"coste_ao": 300, "condicion": "sello_llegada", "orden": 2},
+		"taller_crafting": {"coste_ao": 150, "condicion": "mision_secundaria_inicial", "orden": 1},
+		"recetas_avanzadas": {"coste_ao": 500, "condicion": "sello_cultivador", "orden": 3}
+	},
+	"orden_global": ["taller_crafting", "viaje_interislas", "recetas_avanzadas"],
+	"reglas": {
+		"historia_sin_coste_monetario": true,
+		"desbloqueos_historia": ["sello_llegada", "sello_cultivador"],
+		"cosmeticos_sink_ao": {
+			"descripcion": "Los cosméticos son sinks de AO (nunca afectan gameplay)",
+			"ejemplos": ["sombrilla_floral", "gorro_cocinero", "pañuelo_marino"],
+			"rango_coste_ao": [50, 200]
+		},
+		"museo_records_no_monetarios": true
 	}
 }

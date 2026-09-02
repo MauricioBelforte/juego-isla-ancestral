@@ -1,0 +1,17 @@
+{
+  "id": "DLG-RIZ_001-CAP1-AMBIENTE",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.riz_001",
+      "text_key": "El aire se ha vuelto extrano ultimamente. Como si la isla recordara algo...",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.riz_001"
+    }
+  }
+}

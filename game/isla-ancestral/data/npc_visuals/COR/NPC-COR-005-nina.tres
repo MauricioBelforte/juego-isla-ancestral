@@ -1,0 +1,71 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Flores en cabello"
+estilo = "Plumeros"
+color_principal = "#FF69B4"
+color_secundario = "#FFD700"
+material = "Flores"
+notas = "Rosa y dorado"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa sin mangas"
+estilo = "Ligera"
+color_principal = "#87CEEB"
+material = "Algodón"
+notas = "Estampado peces"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Falda corta"
+estilo = "Tejido ligero"
+color_principal = "#FFFDD0"
+material = "Tela"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Descalza"
+estilo = "Pies descalzos"
+color_principal = ""
+material = ""
+notas = "Sin calzado"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Collar de caracoles"
+ubicacion = "cuello"
+color = "#FFFDD0"
+notas = "Conchas"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Cubo de arena"
+ubicacion = "manos"
+color = "#A0522D"
+notas = "Pequeño"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-COR-005"
+nombre = "Niña de la Playa"
+isla = "COR"
+piel = "SK-03"
+cabello = "HR-01"
+ojos = "EY-03"
+complexion = "PEQUENA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

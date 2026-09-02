@@ -1,0 +1,10 @@
+{
+  "bloque_roto": {"capas": ["crack", "roca", "eco"], "interior_capa": "reverb_interior"},
+  "bloque_colocado": {"capas": ["thud", "arena"], "interior_capa": "reverb_interior"},
+  "plantar": {"capas": ["tierra_mano", "semilla"], "interior_capa": ""},
+  "cosechar": {"capas": ["hoja", "arranque"], "interior_capa": ""},
+  "cocinar": {"capas": ["sizzle", "vapor"], "interior_capa": ""},
+  "abrir_contenedor": {"capas": ["madera_apertura", "click_cierre"], "interior_capa": "reverb_interior"},
+  "pescar_captura": {"capas": ["splash", "lucha"], "interior_capa": ""},
+  "mineria_golpe": {"capas": ["golpe_roca", "eco"], "interior_capa": "reverb_cueva"}
+}

@@ -1,0 +1,25 @@
+{
+  "version_base_requerida": "1.0.0",
+  "dlcs": [
+    {
+      "id": "isla_hielo",
+      "nombre": "Isla de Hielo",
+      "tipo": "expansion",
+      "estado": "planificado",
+      "hito_lanzamiento": "M145",
+      "version_requerida": "1.0.0",
+      "dependencias": [],
+      "contenido": ["islas", "biomas", "npcs", "historias", "colecciones"]
+    },
+    {
+      "id": "pack_aurora",
+      "nombre": "Pack Decoración Aurora",
+      "tipo": "cosmetico",
+      "estado": "planificado",
+      "hito_lanzamiento": "M146",
+      "version_requerida": "1.0.0",
+      "dependencias": [],
+      "contenido": ["cosmeticos"]
+    }
+  ]
+}

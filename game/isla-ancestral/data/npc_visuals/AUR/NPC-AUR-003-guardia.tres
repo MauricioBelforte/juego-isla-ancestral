@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Casco ancestral"
+estilo = "Con cuernos dorados"
+color_principal = "#FFD700"
+color_secundario = "#36454F"
+material = "Metal"
+notas = "Cuernos dorados"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Armadura ligera"
+estilo = "Escamas superpuestas"
+color_principal = "#FFD700"
+material = "Metal"
+notas = "Escamas"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Pantalón largo"
+estilo = "Tejido resistente"
+color_principal = "#36454F"
+material = "Tela"
+notas = "Gris oscuro"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Botas armadura"
+estilo = "Placas metálicas"
+color_principal = "#FFD700"
+color_secundario = "#36454F"
+material = "Metal"
+notas = "Placas"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Brazaletes dorados"
+ubicacion = "manos"
+color = "#FFD700"
+notas = "Dorados"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Medalla"
+ubicacion = "cuello"
+color = "#FFD700"
+notas = "Dorada"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-AUR-003"
+nombre = "Guardia Ancestral"
+isla = "AUR"
+piel = "SK-05"
+cabello = "HR-05"
+ojos = "EY-01"
+complexion = "ALTA"
+herramienta_derecha = "OBJ-HER-001"
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

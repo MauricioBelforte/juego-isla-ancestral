@@ -1,0 +1,38 @@
+{
+  "descripcion_corta": {
+    "es": "Huyendo del ruido del mundo, llegas a la Isla Aurora: un paraíso voxel de campos tranquilos, vecinos amistosos y templos ancestrales. Cultiva, pesca, mina y construye tu refugio acogedor a tu propio ritmo.",
+    "en": "Fleeing the noise of the world, you arrive at Aurora Island: a voxel paradise of calm fields, friendly neighbors and ancient temples. Farm, fish, mine and build your own cozy haven at your own pace.",
+    "max_caracteres": 300
+  },
+  "about_secciones": [
+    {"titulo": "Tu refugio, tu ritmo", "bullet": ["día/noche", "sin presión"]},
+    {"titulo": "Cultiva tu vida", "bullet": ["agricultura", "pesca", "minería"]},
+    {"titulo": "Construye tu hogar", "bullet": ["crafting", "construcción"]},
+    {"titulo": "Una isla viva", "bullet": ["vecinos", "amistad", "diálogos"]},
+    {"titulo": "Historias y misterios", "bullet": ["templos", "ruinas", "islas"]},
+    {"titulo": "Para ti", "bullet": ["accesibilidad", "controles", "subtítulos"]}
+  ],
+  "keywords": ["cozy", "calm", "relax", "farming", "farming sim", "island", "voxel", "build", "crafting", "fishing", "mining", "adventure", "exploration", "aurora island", "life sim"],
+  "tags": ["cozy", "farming", "simulation", "voxel", "building", "fishing", "relaxing", "indie"],
+  "requisitos": {
+    "so_min": "Win10 64-bit",
+    "so_rec": "Win11 64-bit",
+    "cpu_min": "i5/Ryzen5 4-6 núcleos",
+    "cpu_rec": "i5/Ryzen5 6+ núcleos",
+    "ram_min": "8 GB",
+    "ram_rec": "16 GB",
+    "gpu_min": "iGPU moderna/DX11",
+    "gpu_rec": "GTX1060/RX580+",
+    "disco": "4 GB"
+  },
+  "assets": [
+    {"id": "header_capsule", "nombre": "Header capsule", "dimension": "460x215", "estado": "pendiente"},
+    {"id": "small_capsule", "nombre": "Small capsule", "dimension": "231x87", "estado": "pendiente"},
+    {"id": "main_capsule", "nombre": "Main capsule", "dimension": "616x353", "estado": "pendiente"},
+    {"id": "vertical_capsule", "nombre": "Vertical capsule", "dimension": "600x900", "estado": "pendiente"},
+    {"id": "library_hero", "nombre": "Library hero", "dimension": "3840x1240", "estado": "pendiente"},
+    {"id": "page_background", "nombre": "Fondo de página", "dimension": "1438x810", "estado": "pendiente"},
+    {"id": "capturas", "nombre": "Capturas 1920x1080", "dimension": "1920x1080", "estado": "pendiente", "cantidad_minima": 6},
+    {"id": "trailer", "nombre": "Trailer MP4 H.264", "dimension": "60-90s", "estado": "pendiente"}
+  ]
+}

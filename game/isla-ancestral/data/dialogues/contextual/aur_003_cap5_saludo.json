@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_003-CAP5-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_003",
+      "text_key": "La noche eterna... es la prueba definitiva. No me movere de aqui.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_003"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "OBJ-MES-001"
+nombre = "Mesa de cocina"
+descripcion = "Mesa rústica de cocina"
+categoria = 0
+subcategoria = "MESAS"
+tamano = Vector2i(2, 2)
+interactivo = true
+interacciones = [1, 8]
+fuente = ""
+precio_compra = 50
+precio_venta = 25
+rareza = 0
+apilable = false
+stack_max = 1
+material = "Madera"
+color = "#8B6914"
+variante = ""
+requiere_herramienta = ""
+exportable = true
+icono = null
+modelo_3d = null

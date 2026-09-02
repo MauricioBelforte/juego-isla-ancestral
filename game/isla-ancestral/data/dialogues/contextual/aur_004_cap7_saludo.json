@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_004-CAP7-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_004",
+      "text_key": "Tu historia sera mi proxima obra. El viaje del guardian de Aurora.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_004"
+    }
+  }
+}

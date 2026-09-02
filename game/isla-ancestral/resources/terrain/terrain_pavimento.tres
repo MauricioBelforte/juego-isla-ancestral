@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TerrainData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/terrain/terrain_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+terrain_id = 2
+nombre = "Pavimento"
+speed_modifier = 1.0
+visual_config = {}
+audio_config = {}

@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="NPCVisualData" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/npc_visual_data.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/data/ropa_data.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/data/accesorio_data.gd" id="3"]
+
+[sub_resource type="Resource" id="sub_1"]
+script = ExtResource("2")
+nombre = "Cinta de pelo"
+estilo = "Lazo"
+color_principal = "#FF69B4"
+material = "Tela"
+notas = "Rosa"
+
+[sub_resource type="Resource" id="sub_2"]
+script = ExtResource("2")
+nombre = "Camisa básica"
+estilo = "Manga corta"
+color_principal = "#87CEEB"
+material = "Algodón"
+notas = "Estrellas"
+
+[sub_resource type="Resource" id="sub_3"]
+script = ExtResource("2")
+nombre = "Falda corta"
+estilo = "Plišada"
+color_principal = "#FFFDD0"
+material = "Tela"
+notas = "Crema"
+
+[sub_resource type="Resource" id="sub_4"]
+script = ExtResource("2")
+nombre = "Zapatillas blandas"
+estilo = "Tela"
+color_principal = "#FF69B4"
+material = "Tela"
+notas = "Rosa"
+
+[sub_resource type="Resource" id="sub_5"]
+script = ExtResource("3")
+nombre = "Mochila pequeña"
+ubicacion = "espalda"
+color = "#FF69B4"
+notas = "Tela"
+
+[sub_resource type="Resource" id="sub_6"]
+script = ExtResource("3")
+nombre = "Pelota de tela"
+ubicacion = "manos"
+color = "#FFD700"
+notas = "Decorativa"
+
+[resource]
+script = ExtResource("1")
+npc_id = "NPC-RIZ-007"
+nombre = "Niña del Pueblo"
+isla = "RIZ"
+piel = "SK-01"
+cabello = "HR-01"
+ojos = "EY-03"
+complexion = "PEQUENA"
+herramienta_derecha = ""
+herramienta_izquierda = ""
+retrato_path = ""
+sombrero = SubResource("sub_1")
+torso = SubResource("sub_2")
+piernas = SubResource("sub_3")
+pies = SubResource("sub_4")
+accesorios = [SubResource("sub_5"), SubResource("sub_6")]
+variantes_estacionales = {}

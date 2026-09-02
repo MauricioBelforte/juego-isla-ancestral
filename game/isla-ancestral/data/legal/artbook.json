@@ -1,0 +1,9 @@
+{
+  "secciones": [
+    {"id": "concepto_isla", "nombre": "Concepto de la Isla Aurora", "estado": "planificado"},
+    {"id": "personajes", "nombre": "Personajes principales", "estado": "planificado"},
+    {"id": "entorno", "nombre": "Entornos y biomas", "estado": "planificado"},
+    {"id": "detalles", "nombre": "Detalles y curiosidades", "estado": "planificado"}
+  ],
+  "politicas": {"post_lanzamiento": true, "formato_digital": true}
+}

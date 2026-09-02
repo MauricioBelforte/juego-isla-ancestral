@@ -1,0 +1,17 @@
+{
+  "id": "DLG-COR_002-CAP2-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.cor_002",
+      "text_key": "Ahora puedo pescar en ambos lados. ¡Mas peces, mas variedad!",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.cor_002"
+    }
+  }
+}

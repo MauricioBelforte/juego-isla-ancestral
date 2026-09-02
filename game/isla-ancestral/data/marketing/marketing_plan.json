@@ -1,0 +1,14 @@
+{
+  "canales": ["steam", "discord", "x_twitter", "youtube", "instagram", "newsletter"],
+  "campanas": [
+    {"id": "teaser_anuncio", "nombre": "Teaser de anuncio", "canal": "youtube", "fase": "pre_lanzamiento", "fecha": "F1"},
+    {"id": "wishlist_campana", "nombre": "Campaña de wishlist", "canal": "steam", "fase": "coming_soon", "fecha": "F2"},
+    {"id": "lanzamiento", "nombre": "Campaña de lanzamiento", "canal": "todos", "fase": "lanzamiento", "fecha": "F3"}
+  ],
+  "presupuesto": {
+    "total_usd": 5000,
+    "publicidad_pagada_usd": 3000,
+    "produccion_assets_usd": 2000
+  },
+  "kpis": ["wishlists", "seguidores", "vistas_trailer", "tasa_conversion"]
+}

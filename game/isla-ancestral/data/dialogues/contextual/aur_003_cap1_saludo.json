@@ -1,0 +1,17 @@
+{
+  "id": "DLG-AUR_003-CAP1-SALUDO",
+  "start": "n0",
+  "nodes": {
+    "n0": {
+      "tipo": 0,
+      "speaker_key": "npc.aur_003",
+      "text_key": "Las cenizas no deben tocar el templo. Es peligroso.",
+      "next_id": "fin",
+      "tipo_fin": false
+    },
+    "fin": {
+      "tipo": 3,
+      "speaker_key": "npc.aur_003"
+    }
+  }
+}
