@@ -1,0 +1,12 @@
+{
+  "gates": {
+    "suite_tests_verde": true,
+    "smoke_aprobado": true,
+    "zero_criticos_abiertos": false,
+    "crash_rate_cero": true,
+    "ci_gates_verdes": false,
+    "textos_localizados": false,
+    "backup_configurado": true
+  },
+  "registro": "2026-09-02 18:00 — estado actual del proyecto (pre-release)"
+}

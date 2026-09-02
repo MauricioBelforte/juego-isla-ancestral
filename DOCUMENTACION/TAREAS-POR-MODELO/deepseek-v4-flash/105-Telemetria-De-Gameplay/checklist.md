@@ -37,19 +37,19 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-033 Definir evento session_started [S]
 - [x] T-034 Definir evento session_ended [S]
 - [ ] T-035 Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
-- [ ] T-036 Definir métrica time_to_first_discovery
+- [x] T-036 Definir métrica time_to_first_discovery
 - [x] T-037 Definir métrica time_to_first_travel
-- [ ] T-038 Definir métrica time_to_first_house
-- [ ] T-039 Definir métrica time_to_first_puzzle
-- [ ] T-040 Definir métrica time_to_first_seal
+- [x] T-038 Definir métrica time_to_first_house
+- [x] T-039 Definir métrica time_to_first_puzzle
+- [x] T-040 Definir métrica time_to_first_seal
 - [x] T-041 Definir métrica session_duration
-- [ ] T-042 Diseñar cálculo de time_to_first_discovery
+- [x] T-042 Diseñar cálculo de time_to_first_discovery
 - [x] T-043 Diseñar cálculo de time_to_first_travel
 - [x] T-044 Diseñar cálculo de session_duration
 - [x] T-045 Definir puzzle_abandoned (detección)
 - [x] T-046 Definir zonas_ignored (detección)
-- [ ] T-047 Diseñar detector de puzzle abandonado (timer de 60 segundos)
-- [ ] T-048 Diseñar umbral de puzzle abandonado (5 minutos sin completar)
+- [x] T-047 Diseñar detector de puzzle abandonado (timer de 60 segundos)
+- [x] T-048 Diseñar umbral de puzzle abandonado (5 minutos sin completar)
 - [ ] T-049 Diseñar detector de zonas ignoradas (timer de 60 segundos)
 - [ ] T-050 Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
 - [ ] T-051 Diseñar registro de puzzle_abandoned con timestamp y puzzle_id

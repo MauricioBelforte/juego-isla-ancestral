@@ -10,17 +10,17 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-006 Configurar asociación de archivos si corresponde
 - [x] T-007 Validar permisos
 - [x] T-008 Validar antivirus
-- [ ] T-009 Validar actualizaciones
-- [ ] T-010 Validar reparación
-- [ ] T-011 Validar desinstalación
-- [ ] T-012 Validar instalación limpia
-- [ ] T-013 Validar actualización
-- [ ] T-014 Validar rollback
-- [ ] T-015 Definir Godot 4.x export para Windows Desktop
-- [ ] T-016 Definir optimizaciones (optimización de código, compresión de assets)
-- [ ] T-017 Definir preset: Release (no Debug)
-- [ ] T-018 Definir arquitectura: x64 (Windows 64-bit)
-- [ ] T-019 Definir code signing del ejecutable
+- [x] T-009 Validar actualizaciones
+- [x] T-010 Validar reparación
+- [x] T-011 Validar desinstalación
+- [x] T-012 Validar instalación limpia
+- [x] T-013 Validar actualización
+- [x] T-014 Validar rollback
+- [x] T-015 Definir Godot 4.x export para Windows Desktop
+- [x] T-016 Definir optimizaciones (optimización de código, compresión de assets)
+- [x] T-017 Definir preset: Release (no Debug)
+- [x] T-018 Definir arquitectura: x64 (Windows 64-bit)
+- [x] T-019 Definir code signing del ejecutable
 - [x] T-020 Diseñar configuración de Godot export
 - [x] T-021 Diseñar Application/Config/features: Compress (lzma)
 - [x] T-022 Diseñar Application/Config/pack_mode: Single-file (opcional)

@@ -55,41 +55,41 @@
 - [x] Definir evento zone_exited [S]
 - [x] Definir evento session_started [S]
 - [x] Definir evento session_ended [S]
-- [ ] Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
+- [x] Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
 
 ### [S] Métricas de tiempo
-- [ ] Definir métrica time_to_first_discovery
+- [x] Definir métrica time_to_first_discovery
 - [x] Definir métrica time_to_first_travel
-- [ ] Definir métrica time_to_first_house
-- [ ] Definir métrica time_to_first_puzzle
-- [ ] Definir métrica time_to_first_seal
-- [ ] Definir métrica session_duration
-- [ ] Diseñar cálculo de time_to_first_discovery
+- [x] Definir métrica time_to_first_house
+- [x] Definir métrica time_to_first_puzzle
+- [x] Definir métrica time_to_first_seal
+- [x] Definir métrica session_duration
+- [x] Diseñar cálculo de time_to_first_discovery
 - [x] Diseñar cálculo de time_to_first_travel
 - [ ] Diseñar cálculo de session_duration
 
 ### [S] Detección de abandonos
 - [x] Definir puzzle_abandoned (detección)
 - [x] Definir zonas_ignored (detección)
-- [ ] Diseñar detector de puzzle abandonado (timer de 60 segundos)
-- [ ] Diseñar umbral de puzzle abandonado (5 minutos sin completar)
+- [x] Diseñar detector de puzzle abandonado (timer de 60 segundos)
+- [x] Diseñar umbral de puzzle abandonado (5 minutos sin completar)
 - [x] Diseñar detector de zonas ignoradas (timer de 60 segundos)
 - [x] Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
 - [x] Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
 - [ ] Diseñar registro de zones_ignored con zone_id y timestamp
 
 ### [S] Dificultad percibida
-- [ ] Definir encuesta post-puzzle
+- [x] Definir encuesta post-puzzle
 - [ ] Definir rating 1-5 (1: muy fácil, 5: muy difícil)
-- [ ] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
-- [ ] Diseñar registro de difficulty_perceived con puzzle_id y rating
-- [ ] Diseñar encuesta opcional después de completar puzzle
+- [x] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
+- [x] Diseñar registro de difficulty_perceived con puzzle_id y rating
+- [x] Diseñar encuesta opcional después de completar puzzle
 
 ### [S] Uso de datos para mejorar diseño
-- [ ] Definir análisis de datos para identificar puzzles con alta tasa de abandono
+- [x] Definir análisis de datos para identificar puzzles con alta tasa de abandono
 - [x] Definir análisis de datos para identificar zonas ignoradas
 - [x] Definir análisis de datos para identificar eventos clave no alcanzados
-- [ ] Definir análisis de datos para identificar tiempos anormales
+- [x] Definir análisis de datos para identificar tiempos anormales
 - [ ] Definir ajuste de balance basado en datos reales
 
 ### [S] Opt-in y GDPR
@@ -112,7 +112,7 @@
 ### [S] Integración con M71 (Progresión)
 - [x] Diseñar integración con M71 para observación de eventos
 - [x] Diseñar M71 notificar a M105 cuando ocurren eventos clave
-- [ ] Diseñar M105 registrar timestamp del evento
+- [x] Diseñar M105 registrar timestamp del evento
 - [ ] Diseñar M105 no afectar lógica de progresión de M71
 - [x] Diseñar M105 como observador pasivo de eventos de M71
 
@@ -125,7 +125,7 @@
 ### [S] Integración con M102 (Bug Tracking)
 - [ ] Diseñar integración con M102 para generación de issues
 - [ ] Diseñar datos de telemetría identificar bugs emergentes
-- [ ] Diseñar alta tasa de abandono en puzzle → posible bug
+- [x] Diseñar alta tasa de abandono en puzzle → posible bug
 - [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
 - [ ] Diseñar M105 generar issues en M102 basados en patrones de datos
 
@@ -151,7 +151,7 @@
 - [ ] Diseñar método track_resource_first_collected(resource_type)
 - [ ] Diseñar método track_house_first_built()
 - [ ] Diseñar método track_npc_first_interaction(npc_id)
-- [ ] Diseñar método track_puzzle_first_completed(puzzle_id)
+- [x] Diseñar método track_puzzle_first_completed(puzzle_id)
 - [ ] Diseñar método track_seal_first_obtained(seal_id)
 - [ ] Diseñar método track_travel_first_completed(from_island, to_island)
 - [ ] Diseñar método track_island_first_discovered(island_id)
@@ -159,18 +159,18 @@
 - [ ] Diseñar método track_festival_first_participated(festival_id)
 - [ ] Diseñar método track_community_project_first_completed(project_id)
 - [x] Diseñar método track_puzzle_abandoned(puzzle_id, time_in_puzzle)
-- [ ] Diseñar método track_difficulty_perceived(puzzle_id, rating)
+- [x] Diseñar método track_difficulty_perceived(puzzle_id, rating)
 - [ ] Diseñar método track_zone_entered(zone_id)
 - [ ] Diseñar método track_zone_exited(zone_id, time_in_zone)
 - [ ] Diseñar método track_zone_ignored(zone_id)
 
 ### [S] Detección de puzzles abandonados
-- [ ] Diseñar puzzle_active_start_time (Dictionary)
-- [ ] Diseñar puzzle_check_timer (Timer)
-- [ ] Diseñar método setup_puzzle_detector()
-- [ ] Diseñar método start_puzzle(puzzle_id)
-- [ ] Diseñar método complete_puzzle(puzzle_id)
-- [ ] Diseñar método _on_puzzle_check()
+- [x] Diseñar puzzle_active_start_time (Dictionary)
+- [x] Diseñar puzzle_check_timer (Timer)
+- [x] Diseñar método setup_puzzle_detector()
+- [x] Diseñar método start_puzzle(puzzle_id)
+- [x] Diseñar método complete_puzzle(puzzle_id)
+- [x] Diseñar método _on_puzzle_check()
 - [ ] Diseñar umbral de 5 minutos sin completar
 
 ### [S] Detección de zonas ignoradas
@@ -183,9 +183,9 @@
 - [ ] Diseñar umbral de 1 minuto sin explorar
 
 ### [S] Encuesta de dificultad percibida
-- [ ] Diseñar método show_difficulty_survey(puzzle_id)
-- [ ] Diseñar método submit_difficulty_rating(puzzle_id, rating)
-- [ ] Diseñar UI de encuesta post-puzzle
+- [x] Diseñar método show_difficulty_survey(puzzle_id)
+- [x] Diseñar método submit_difficulty_rating(puzzle_id, rating)
+- [x] Diseñar UI de encuesta post-puzzle
 - [ ] Diseñar encuesta opcional (no forzar)
 
 ### [S] Almacenamiento local
@@ -218,8 +218,8 @@
 ### [S] Pruebas de calidad
 - [x] Diseñar prueba de opt-in y opt-out de telemetría
 - [x] Diseñar prueba de registro de eventos clave
-- [ ] Diseñar prueba de cálculo de métricas de tiempo
-- [ ] Diseñar prueba de detección de puzzles abandonados
+- [x] Diseñar prueba de cálculo de métricas de tiempo
+- [x] Diseñar prueba de detección de puzzles abandonados
 - [x] Diseñar prueba de detección de zonas ignoradas
 - [ ] Diseñar prueba de encuesta de dificultad percibida
 - [ ] Diseñar prueba de integración con M104 (Analytics)

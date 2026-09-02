@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "vfx": [
+    {"id": "vfx_bloque_roto", "nombre": "Bloque roto", "tipo": "polvo", "evento": "bloque_roto", "cantidad": 24, "color": "#C8B08A", "emision": 0.35},
+    {"id": "vfx_pesca_exito", "nombre": "Pesca exitosa", "tipo": "splash", "evento": "pesca_exito", "cantidad": 40, "color": "#6FB7DE", "emision": 0.6},
+    {"id": "vfx_cosecha", "nombre": "Cosecha", "tipo": "hojas", "evento": "cosecha_realizada", "cantidad": 30, "color": "#58A55D", "emision": 0.5},
+    {"id": "vfx_polen", "nombre": "Polen", "tipo": "flotante", "evento": "primavera_inicio", "cantidad": 150, "color": "#F4E04D", "emision": 1.2},
+    {"id": "vfx_lluvia_salpicadura", "nombre": "Salpicadura de lluvia", "tipo": "gotas", "evento": "clima_lluvia", "cantidad": 60, "color": "#8FBFE0", "emision": 0.8},
+    {"id": "vfx_regalo_amistad", "nombre": "Regalo de amistad", "tipo": "corazones", "evento": "amistad_subio", "cantidad": 12, "color": "#E08FB0", "emision": 0.5},
+    {"id": "vfx_crafteo", "nombre": "Crafteo completado", "tipo": "chispas", "evento": "crafting_completado", "cantidad": 20, "color": "#FFD700", "emision": 0.4},
+    {"id": "vfx_evento_festival", "nombre": "Festival", "tipo": "confeti", "evento": "evento_iniciado", "cantidad": 120, "color": "#C77FDB", "emision": 0.9}
+  ]
+}

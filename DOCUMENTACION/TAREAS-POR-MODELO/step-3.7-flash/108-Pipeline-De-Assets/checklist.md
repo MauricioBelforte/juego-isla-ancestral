@@ -122,9 +122,9 @@
 - [?] T-112 Diseñar asset_validator.gd: reglas, reporte markdown y salida JSON para CI [C] — Diseño documentado en 04-Codigo.md; implementación requiere núcleo M108.
 - [?] T-113 Diseñar apply_import_presets.gd: reimporta y corrige desviaciones de import [C] — Diseño documentado en 04-Codigo.md; implementación requiere núcleo M108.
 - [?] T-114 Diseñar promote_asset.gd: mueve aprobados de staging a final y actualiza el índice [M] — Diseño + lógica V0 creados en `promote_asset_logic.gd` + wrapper `promote_asset.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
-- [?] T-115 Diseñar atlas_builder.gd: empaca atlas ≤ 4096² con margen y reporta ahorro [M] — Diseño documentado; implementación requiere núcleo M108.
-- [?] T-116 Diseñar retire_asset.gd: retira, registra id y detecta referencias dependientes [M] — Diseño documentado; implementación requiere núcleo M108.
-- [?] T-117 Diseñar asset_memory_reporter.gd: totaliza VRAM/RAM contra M62 [C] — Diseño documentado; implementación requiere núcleo M108.
+- [?] T-115 Diseñar atlas_builder.gd: empaca atlas ≤ 4096² con margen y reporta ahorro [M] — Diseño + lógica V0 creados en `atlas_builder_logic.gd` + wrapper `atlas_builder.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
+- [?] T-116 Diseñar retire_asset.gd: retira, registra id y detecta referencias dependientes [M] — Diseño + lógica V0 creados en `retire_asset_logic.gd` + wrapper `retire_asset.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
+- [?] T-117 Diseñar asset_memory_reporter.gd: totaliza VRAM/RAM contra M62 [C] — Diseño + lógica V0 creados en `asset_memory_reporter_logic.gd` + wrapper `asset_memory_reporter.gd`; pruebas headless pendientes por bloqueo de escena test_m108.
 - [x] T-118 Diseñar la ficha de asset con todos sus campos (origen, licencia, estado, referencias) [M]
 - [x] T-119 Definir el flujo de estados: staging → validado → en_review → aprobado → retirado [S]
 - [x] T-120 Definir que la ficha es la única fuente del estado del asset [S]

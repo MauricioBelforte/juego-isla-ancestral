@@ -245,3 +245,9 @@
 - [x] `scripts/control_final/control_final_schema.gd` — ControlFinalSchema: 7 gates (suite tests verde, smoke aprobado, 0 críticos abiertos, crash rate cero, CI gates verdes, textos localizados, backup configurado) con verificar_gates() y veredicto()
 - [x] Test 6/6 OK (gates, detección de 2 fallidos, veredicto bloqueado/OK)
 - [?] Integración con M118 CI (gate automático de release al push) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 2 (2026-09-02 18:00 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/control_final/control_final_gate.gd` — gate CLI de la puerta de release (lee data/control_final/estado_release.json, exit 0 OK / 1 BLOQUEADO con los gates pendientes inscritos)
+- [x] `data/control_final/estado_release.json` — estado actual pre-release (4/7 gates cumplidos)
+- [x] Gate ejecutado: **BLOQUEADO** con 3 gates pendientes (zero_criticos_abiertos, ci_gates_verdes, textos_localizados) — veredicto realista del estado del proyecto
+- [?] Cablear el gate al CI (workflow de release que ejecute el gate al tag) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
