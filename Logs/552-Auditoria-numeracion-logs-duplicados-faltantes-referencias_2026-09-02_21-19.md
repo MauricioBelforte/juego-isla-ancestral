@@ -31,19 +31,38 @@ Números con múltiples archivos: 401, 407, 410, 413, 414, 415, 416, 417, 418, 4
 - Salida guardada en: `C:\Users\Maury-New\.local\share\kilo\tool-output\tool_063fe8c9a0019IlEduZC3TNkI2`.
 - Referencias cruzadas verificadas en: `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `08-GUIA-ORDEN-DE-IMPLEMENTACION.md`, `BACKLOG-MASTER.md`, `DOCUMENTACION/*/plan-actual/05-Checklist.md`, `DOCUMENTACION/TAREAS-POR-MODELO/*/checklist.md`.
 
-## Correcciones aplicadas (lote 3 — 2026-09-02)
-- `426-M81-Legal-Menores-Nucleo-Iter1_...md` → `426-dup1-M81-Legal-Menores-Nucleo-Iter1_...md`
-- `428-M83-Licencias-De-Software-Nucleo-Iter1_...md` → `428-dup1-M83-Licencias-De-Software-Nucleo-Iter1_...md`
-- `429-M84-Musica-Y-Audio-Legal-Nucleo-Iter1_...md` → `429-dup1-M84-Musica-Y-Audio-Legal-Nucleo-Iter1_...md`
-- `430-M85-Modelos-3D-Legal-Nucleo-Iter1_...md` → `430-dup1-M85-Modelos-3D-Legal-Nucleo-Iter1_...md`
-- `431-M86-IA-Generativa-Nucleo-Iter1_...md` → `431-dup1-M86-IA-Generativa-Nucleo-Iter1_...md`
+## Correcciones aplicadas (lote 5 — 2026-09-02)
+- `441-QA-CRUZADO-CLUSTER-LEGAL-M78-M86-Y-UGC-M124_...md` → `441-dup1-QA-CRUZADO-CLUSTER-LEGAL-M78-M86-Y-UGC-M124_...md`
+- `442-AGNES-M71-ITER3-EVALUADOR-CACHE_...md` → `442-dup1-AGNES-M71-ITER3-EVALUADOR-CACHE_...md`
+- `444-M06-Control-De-Versiones-Nucleo-Iter1_...md` → `444-dup1-M06-Control-De-Versiones-Nucleo-Iter1_...md`
+- `446-QA-CRUZADO-M39-TIENDAS_...md` → `446-dup1-QA-CRUZADO-M39-TIENDAS_...md`
+- `448-M95-Monetizacion-Nucleo-Iter1_...md` → `448-dup1-M95-Monetizacion-Nucleo-Iter1_...md`
 
-## Correcciones aplicadas (lote 4 — 2026-09-02)
-- `432-BUCLE-CONTINUACION-M110-M122_...md` → `432-dup1-BUCLE-CONTINUACION-M110-M122_...md`
-- `434-Guia10-Autoevaluacion-Real-y-Capacidades-Nativas_...md` → `434-dup1-Guia10-Autoevaluacion-Real-y-Capacidades-Nativas_...md`
-- `436-Guia10-Vision-V2-Kilo_...md` → `436-dup1-Guia10-Vision-V2-Kilo_...md`
-- `438-AGNES-BUCLE-FINAL_...md` → `438-dup1-AGNES-BUCLE-FINAL_...md`
-- `440-AGNES-BUCLE-MARKING-CONTINUACION_...md` → `440-dup1-AGNES-BUCLE-MARKING-CONTINUACION_...md`
+## Correcciones aplicadas (lote 6 — 2026-09-02)
+- `449-AGNES-BUCLE-FINAL-M71-RF16-M156_...md` → `449-dup1-AGNES-BUCLE-FINAL-M71-RF16-M156_...md`
+- `450-AGNES-M73-COLLECTIBLE-CATEGORY-IMPLEMENTACION_...md` → `450-dup1-AGNES-M73-COLLECTIBLE-CATEGORY-IMPLEMENTACION_...md`
+- `451-AGNES-BUCLE-M73-COLLECTIBLECATEGORY-M113_...md` → `451-dup1-AGNES-BUCLE-M73-COLLECTIBLECATEGORY-M113_...md`
+- `452-AGNES-BUCLE-MARKING-LEGAL-AUDIO_...md` → `452-dup1-AGNES-BUCLE-MARKING-LEGAL-AUDIO_...md`
+- `453-AGNES-BUCLE-M73-M115-M147_...md` → `453-dup1-AGNES-BUCLE-M73-M115-M147_...md`
+
+## Correcciones aplicadas (lote 7 — 2026-09-02)
+- `455-M57-Migracion-Gameplay-ControlInput_...md` → `455-dup1-M57-Migracion-Gameplay-ControlInput_...md`
+- `456-M66-Disparos-Detector_...md` → `456-dup1-M66-Disparos-Detector_...md`
+- `457-AGNES-BUCLE-MARKING-FINAL_...md` → `457-dup1-AGNES-BUCLE-MARKING-FINAL_...md`
+- `458-AGNES-BUCLE-M096-M036_...md` → `458-dup1-AGNES-BUCLE-M096-M036_...md`
+
+## Correcciones aplicadas (lote 8 — 2026-09-02)
+- `427-M82-Clasificacion-Por-Edades-Nucleo-Iter1_...md` → `427-dup1-M82-Clasificacion-Por-Edades-Nucleo-Iter1_...md`
+- `433-M126-Marketing-Legal-Nucleo-Iter1_...md` → `433-dup1-M126-Marketing-Legal-Nucleo-Iter1_...md`
+- `435-M128-Identidad-De-Marca-Nucleo-Iter1_...md` → `435-dup1-M128-Identidad-De-Marca-Nucleo-Iter1_...md`
+- `437-M130-Artbook-Nucleo-Iter1_...md` → `437-dup1-M130-Artbook-Nucleo-Iter1_...md`
+- `439-M132-Produccion-De-Equipo-Nucleo-Iter1_...md` → `439-dup1-M132-Produccion-De-Equipo-Nucleo-Iter1_...md`
+
+## Correcciones aplicadas (lote 9 — 2026-09-02)
+- `472-M162-Dialogos-Contextuales-Iter2-Cierre_...md` → `472-dup1-M162-Dialogos-Contextuales-Iter2-Cierre_...md`
+- `473-Reasignacion-M17-Qwen38-A-Vision_...md` → `473-dup1-Reasignacion-M17-Qwen38-A-Vision_...md`
+- `474-M119-Actualizaciones-Nucleo-Iter1_...md` → `474-dup1-M119-Actualizaciones-Nucleo-Iter1_...md`
+- `475-M109-Herramientas-Internas-Nucleo-Iter1_...md` → `475-dup1-M109-Herramientas-Internas-Nucleo-Iter1_...md`
 
 ## Regla permanente incorporada
 - Ver `BACKLOG-MASTER.md` (step-3.7-flash) y `04-Codigo.md` de M119 para la checklist de verificación obligatoria en cada ciclo.
