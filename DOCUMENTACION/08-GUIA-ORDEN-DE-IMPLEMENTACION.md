@@ -47,6 +47,7 @@
 ---
 
 | M73 Coleccionables (iter. 2 cierre) | 🟡 Liberado 2026-09-02 | minimax-m3 (Kilo Code) | F8 (desbloqueo) | V0/V1 | M71🟡, M36🟡 Liberado | Iter 2: catalogo JSON completo (37 items / 12 cats). test_coleccionables 44/44 OK (Log 408). Listo para QA cruzado (Hy3 en WorkBuddy) | game/isla-ancestral/scripts/coleccionables/{coleccionable_item,coleccionables_catalog,coleccionables_manager,test_coleccionables}.gd, game/isla-ancestral/data/coleccionables/catalog.json (nuevo, 37 items) |
+| M115 Hardware (iter. 2 cierre) | 🔵 En curso 2026-09-02 | minimax-m3 (Kilo Code) | F8 (calidad) | V0/V1 | M04✅, M61🟡 | Cerrar 32 items restantes del CHECKLIST. Codigo ya implementado en log 327 (30/30 OK). Perfil data-driven integracion multi-archivo. | game/isla-ancestral/scripts/hardware/ (existentes) |
 | M94 Retención sin FOMO (iter. 1) | 🔵 En curso 2026-09-02 | minimax-m3-free (Kilo Code) | F8 (retención) | V0/V1 | M93🟡 OK | Sistema anti-FOMO data-driven: regeneracion natural, eventos de retorno progresivos, regalos de bienvenida, tasa de retorno. Perfil minimax-m3-free según guía 10 §6 | game/isla-ancestral/scripts/retencion/ (a crear) |
 ## 1. Regla principal
 
