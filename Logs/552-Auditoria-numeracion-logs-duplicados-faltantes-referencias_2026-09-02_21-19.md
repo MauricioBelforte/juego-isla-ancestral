@@ -67,6 +67,72 @@ Números con múltiples archivos: 401, 407, 410, 413, 414, 415, 416, 417, 418, 4
 ## Regla permanente incorporada
 - Ver `BACKLOG-MASTER.md` (step-3.7-flash) y `04-Codigo.md` de M119 para la checklist de verificación obligatoria en cada ciclo.
 
+## Correcciones aplicadas (lote 10 — 2026-09-02)
+- `418-M117-Build-System-Nucleo-Iter1_...md` → `418-dup1-M117-Build-System-Nucleo-Iter1_...md`
+- `426-AUDIT-CHECKLIST-CONSISTENCIA_...md` → `426-dup1-AUDIT-CHECKLIST-CONSISTENCIA_...md`
+- `428-M65A94M132-CIERRE_BATCH_AGNES_...md` → `428-dup1-M65A94M132-CIERRE_BATCH_AGNES_...md`
+- `429-M41-Musica-Cierre_...md` → `429-dup1-M41-Musica-Cierre_...md`
+- `430-AUDIO-BATCH-M41M150_...md` → `430-dup1-AUDIO-BATCH-M41M150_...md`
+
+## Correcciones aplicadas (lote 11 — 2026-09-02)
+- `431-BUCLE-AGNES-32-MODULOS-CIERRE_...md` → `431-dup1-BUCLE-AGNES-32-MODULOS-CIERRE_...md`
+- `432-M125-Terminos-De-Servicio-Nucleo-Iter1_...md` → `432-dup1-M125-Terminos-De-Servicio-Nucleo-Iter1_...md`
+- `434-Guia10-Autoevaluacion-Real-y-Capacidades-Nativas_...md` → `434-dup1-Guia10-Autoevaluacion-Real-y-Capacidades-Nativas_...md`
+- `435-AGNES-BUCLE-CIERRE_...md` → `435-dup1-AGNES-BUCLE-CIERRE_...md`
+- `436-Guia10-Vision-V2-Kilo_...md` → `436-dup1-Guia10-Vision-V2-Kilo_...md`
+
+## Correcciones aplicadas (lote 12 — 2026-09-02)
+- `437-AGNES-BUCLE-CONTINUACION_...md` → `437-dup1-AGNES-BUCLE-CONTINUACION_...md`
+- `438-M131-Creditos-Nucleo-Iter1_...md` → `438-dup1-M131-Creditos-Nucleo-Iter1_...md`
+- `439-AGNES-BUCLE-CONTINUACION_...md` → `439-dup1-AGNES-BUCLE-CONTINUACION_...md`
+- `440-QA-CRUZADO-CLUSTER-LEGAL-M125-M131_...md` → `440-dup1-QA-CRUZADO-CLUSTER-LEGAL-M125-M131_...md`
+- `441-AGNES-BUCLE-FINAL-ITERACION_...md` → `441-dup1-AGNES-BUCLE-FINAL-ITERACION_...md`
+
+## Correcciones aplicadas (lote 13 — 2026-09-02)
+- `442-M154-RECONCILIACION-ESTADO-V3_...md` → `442-dup1-M154-RECONCILIACION-ESTADO-V3_...md`
+- `444-M06-Control-De-Versiones-Nucleo-Iter1_...md` → `444-dup1-M06-Control-De-Versiones-Nucleo-Iter1_...md`
+- `445-QA-CRUZADO-M29-TIEMPO-CALENDARIO_...md` → `445-dup1-QA-CRUZADO-M29-TIEMPO-CALENDARIO_...md`
+- `446-AGNES-BUCLE-M103-M104-M105-M118_...md` → `446-dup1-AGNES-BUCLE-M103-M104-M105-M118_...md`
+- `448-AGNES-BUCLE-M156-EXPANSION_...md` → `448-dup1-AGNES-BUCLE-M156-EXPANSION_...md`
+
+## Correcciones aplicadas (lote 14 — 2026-09-02)
+- `449-M155-Iter2-UI-Unlock-Integracion_...md` → `449-dup1-M155-Iter2-UI-Unlock-Integracion_...md`
+- `450-M65-Animales-IA-Iter1_...md` → `450-dup1-M65-Animales-IA-Iter1_...md`
+- `451-M110-DebugMenu-Implementacion_...md` → `451-dup1-M110-DebugMenu-Implementacion_...md`
+- `452-M31-Curvas-Data-Driven_...md` → `452-dup1-M31-Curvas-Data-Driven_...md`
+- `454-M96-Plataformas-Nucleo-Iter1_...md` → `454-dup1-M96-Plataformas-Nucleo-Iter1_...md`
+
+## Correcciones aplicadas (lote 15 — 2026-09-02)
+- `455-AGNES-BUCLE-FINAL-SESION_...md` → `455-dup1-AGNES-BUCLE-FINAL-SESION_...md`
+- `456-AGNES-BUCLE-M58-MARKING_...md` → `456-dup1-AGNES-BUCLE-M58-MARKING_...md`
+- `457-M63-Cargas-Y-Streaming-Nucleo-Iter1_...md` → `457-dup1-M63-Cargas-Y-Streaming-Nucleo-Iter1_...md`
+- `458-M62-Memoria-Enforcement_...md` → `458-dup1-M62-Memoria-Enforcement_...md`
+
+## Correcciones aplicadas (lote 16 — 2026-09-02)
+- `500-dup1-M122-Crash-Reporting-Nucleo-Iter1_...md` → ya estaba renombrado, conservado
+- `501-dup1-M71-Progresion-Iter3-M13-Integration_...md` → conservado
+- `502-dup1-M120-DLC-Nucleo-Iter1_...md` → conservado
+- `503-dup1-M121-Soporte-Nucleo-Iter1_...md` → conservado
+- `504-dup1-M129-M131-Validadores-Legal_...md` → conservado
+
+## Correcciones aplicadas (lote 17 — 2026-09-02)
+- `521-M160-Ubicaciones-Iter1_...md` → `521-dup1-M160-Ubicaciones-Iter1_...md`
+- `526-M115-Hardware-Nucleo-Iter1_...md` → `526-dup1-M115-Hardware-Nucleo-Iter1_...md`
+- `529-M25-Arco-Entrada-Templo-E68_...md` → `529-dup1-M25-Arco-Entrada-Templo-E68_...md`
+- `540-M108-Nucleo-V0-Headless-Bloqueado_...md` → `540-dup1-M108-Nucleo-V0-Headless-Bloqueado_...md`
+- `541-M118-CI-CD-Iter1_...md` → `541-dup1-M118-CI-CD-Iter1_...md`
+
+## Correcciones aplicadas (lote 18 — 2026-09-02)
+- `545-M36-Tortuga-NPC-Godot_...md` → `545-dup1-M36-Tortuga-NPC-Godot_...md`
+- `546-CREACION-11-BUGS-REGISTRO-CENTRAL_...md` → `546-dup1-CREACION-11-BUGS-REGISTRO-CENTRAL_...md`
+- `547-QA-Visual-Estado-Mundo-B001_...md` → `547-dup1-QA-Visual-Estado-Mundo-B001_...md`
+
+## Cierre de auditoría
+- **Total duplicados renombrados:** 40+ archivos con sufijo `-dup1` conservados.
+- **Referencias vivas protegidas (no renombradas):** 509, 511, 512, 517, 518, 522, 523, 524, 525, 527, 528, 529, 530, 531, 532, 540, 542, 543, 549, 550, 551, 553, 554.
+- **Regla permanente:** cada ciclo inicia con verificación de numeración contra `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `08-GUIA-ORDEN-DE-IMPLEMENTACION.md` y `plan-actual/05-Checklist.md` antes de renombrar.
+- **Próximo paso recomendado:** seguir cerrando módulos del backlog step-3.7-flash; no reabrir renombres a menos que se autorice una migración numeral completa con actualización de referencias.
+
 ## Archivos Modificados/Creados
 - `DOCUMENTACION/11-Bugs.md` (registro BUG-002)
 - `Logs/552-Auditoria-numeracion-logs-duplicados-faltantes-referencias_2026-09-02_21-19.md`
