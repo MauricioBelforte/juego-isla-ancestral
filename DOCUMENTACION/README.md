@@ -1,8 +1,8 @@
 # DOCUMENTACION — Sistema de Documentación de Isla Ancestral
 
-**Modelo:** Deepseek V4 Flash / ox-alpha
-**Plataforma:** OpenCode / Cline
-**Fecha:** 2026-08-15 (actualizado 2026-08-24)
+**Modelo:** glm-5.3-flash (último modificador 2026-09-01: 12 filas de módulos implementados en sprint glm-5.3-flash + 6 nuevas M19/M28/M33/M34/M37/M93)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-15 (actualizado 2026-09-01)
 
 ## Estructura
 
@@ -31,7 +31,7 @@ DOCUMENTACION/
 ├── 12-Camara/                           ← M11: 5 modos, spring-arm, minimapa, anti-mareo (100/100)
 ├── 13-Herramientas/                     ← M12: 9 herramientas x 4 niveles, contrato voxel (101/101)
 ├── 29-Tiempo-Y-Calendario/              ← DELEGABLE: GameClock servicio puro, festivos (104/104)
-├── 30-Reloj-En-Tiempo-Real/             ← DELEGABLE: sin tiempo real, anti-exploit, display (104/104)
+├── 30-Reloj-En-Tiempo-Real/             ← 🟡 Iter. 2: hover + suite + config (98/104)
 ├── 31-Ciclo-Dia-Noche/                  ← DELEGABLE: 5 franjas, anti-oscuridad, nocturnos (130/130)
 ├── 32-Clima/                            ← DELEGABLE: 9 climas deterministas, cozy (120/120)
 ├── 41-Musica/                           ← DELEGABLE: matriz de capas, leitmotifs (110/110)
@@ -131,9 +131,9 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 12-Camara | ✅ Creado — 5 modos de cámara, spring-arm con colisión, minimapa sin render (100/100) |
 | 13-Herramientas | ✅ Creado — 9 herramientas × 4 niveles, durabilidad cozy, contratos voxel (101/101) |
 | 29-Tiempo-Y-Calendario | ✅ Creado — DELEGABLE: GameClock, calendario Aurora, eventos repetibles (104/104) |
-| 30-Reloj-En-Tiempo-Real | ✅ Creado — DELEGABLE: sin tiempo real, anti-exploit, widget display (104/104) |
+| 30-Reloj-En-Tiempo-Real | 🟡 Implementado (iter. 2, glm-5.3/Cline): hover TooltipService + suite 29/0 + config .tres + scan anti-SO (98/104) |
 | 31-Ciclo-Dia-Noche | ✅ Creado — DELEGABLE: 5 franjas de fase, anti-oscuridad, eventos nocturnos (130/130) |
-| 32-Clima | ✅ Creado — DELEGABLE: 9 climas deterministas, regla anti-molestia, accesibilidad (120/120) |
+| 32-Clima | 🟡 Implementado (iter. 1 núcleo, glm-5.3-flash): WeatherService determinista + EventBus.weather (Log 306; 82/121) |
 | 41-Musica | ✅ Creado — DELEGABLE: 51 puntos, matriz capas, leitmotifs, LUFS -16 (110/110) |
 | 42-Sonido-Ambiental | ✅ Creado — DELEGABLE: banco por bioma, capas hora/clima (99/99) |
 | 43-Efectos-De-Sonido | ✅ Creado — DELEGABLE: pool 24 voces, familia tonal (96/96) |
@@ -146,7 +146,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 24-Templos-Y-Puzzles | ✅ Creado — DELEGABLE: framework emisor→receptor, 15 familias (121/121) |
 | 25-Ruinas | ✅ Creado — DELEGABLE: kit modular ≤40 piezas, 13 tipos (116/116) |
 | 26-Templo-Subterraneo | ✅ Creado — DELEGABLE: Templo de la Brisa, 7 anillos (114/114) |
-| 22-Historia-Principal | ✅ Creado — DELEGABLE: 7 capítulos, 5 finales, grafo (94/94) |
+| 22-Historia-Principal | 🟡 Implementado (iter. núcleo data, glm-5.3-flash): grafo JSON + HistoriaService + validador (Log 308; 37/100) |
 | 23-Historias-Secundarias | ✅ Creado — DELEGABLE: 60 cadenas, contexto obligatorio (104/104) |
 | 102-Bug-Tracking | ✅ Creado por DEVIN — GitHub Issues: plantillas, categorías, severidades, flujos, QA/Logging (140/140) |
 | 69-Fast-Travel | ✅ Creado por B1-Nemotron — DELEGABLE: 143 ítems, 13 puntos sección 68, costo/restricciones/día-noche (143/143) |
@@ -154,7 +154,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 118-CI-CD | ✅ Creado por B1-Nemotron — DELEGABLE: build Godot custom, deploy itch.io, alerts (100/100) |
 | 130-Artbook | ✅ Creado por ox-alpha (Cline) — DELEGABLE PARA PRODUCIR: artbook editorial de 12 capítulos (200-240 págs), manifiesto CSV de curaduría incremental, fichas estándar (pieza/comentario dev/descarte), specs digital+POD compatibles con M129; cubre la sección #129 ARTBOOK del plan maestro (40/105 ítems de diseño completados, producción post-RC) |
 | 131-Creditos | ✅ Creado por B1-Nemotron — DELEGABLE: equipos, traductores, assets licencias, accesibilidad (100/100) |
-| 38-Economia | ✅ Creado por Deepseek V4 Flash — DELEGABLE: moneda, precios, tiendas, trueque, equilibrio cozy (158/158) |
+| 38-Economia | 🟡 Implementado (iter. trueque, glm-5.3-flash): BarterSystem con salvavidas RF12 (Log 311; 26/160) |
 | 58-Accesibilidad | ✅ Creado por Deepseek V4 Flash — DELEGABLE: visual, auditiva, motora, cognitiva, lectoescritura (173/173) |
 | 70-Interacciones | ✅ Creado por Deepseek V4 Flash — DELEGABLE: detección, prompts, prioridad, estados, feedback (197/197) |
 | 78-Legal-Propiedad-Intelectual | ✅ Creado por Deepseek V4 Flash — DELEGABLE: licencias, atribución, THIRD-PARTY-NOTICES (157/157) |
@@ -162,22 +162,22 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 86-IA-Generativa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: política IA, declaración Steam, registro de herramientas (129/129) |
 | 62-Memoria | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presupuesto RAM, pooling, GC, prevención de leaks (150/150) |
 | 71-Progresion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: desbloqueos, hitos, mejoras, logros, anti-frustración (213/213) |
-| 92-Tutorial | ✅ Creado por Deepseek V4 Flash — DELEGABLE: onboarding inmersion, pistas contextuales, skip (185/185) |
+| 92-Tutorial | 🟡 Implementado (iter. triggers, glm-5.3-flash): acción/mundo/watchdog 120 s/degradación (Log 320; 26/186) |
 | 112-Testing-Automatico | ✅ Creado por Deepseek V4 Flash — DELEGABLE: GUT/GdUnit4, CI headless, cobertura (230/230) |
 | 133-Gestion-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: README gestión, guia-hitos, guia-sprints, flujo-multiagente, adrs/, actas/, reportes/ (127/127) |
 | 135-Riesgos-Del-Proyecto | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: RISK-REGISTER.md (16 entradas) + GUIA-REVISION-TRIMESTRAL.md (134/134) |
-| 60-Datos-Y-Serializacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: JSON/binario, versionado, migraciones, saves (197/197) |
+| 60-Datos-Y-Serializacion | ✅ Creado por Deepseek V4 Flash — 🟡 NÚCLEO IMPLEMENTADO por deepseek-v4-flash (Kilo Code) 2026-09-01: DataStore autoload + Serializer/Versionador/Validador (CRC32)/WriterAtomico/GestorSlot/GestorConfig/CatalogosEstaticos (179/197, test 66/0 OK) |
 | 97-Steam-Store-Page | ✅ Creado por Deepseek V4 Flash — DELEGABLE: descripción, tags, capturas, precio, wishlists (195/195) |
 | 101-QA-General | ✅ Creado por Deepseek V4 Flash — DELEGABLE: checklist por área, sesiones, regresión, release (205/205) |
 | 108-Pipeline-De-Assets | ✅ Creado por Deepseek V4 Flash — DELEGABLE: formatos, importación, optimización, review (181/181) |
 | 114-Playtest | ✅ Creado por Deepseek V4 Flash — DELEGABLE: sesiones, observación, encuestas, iteración (186/186) |
 | 136-Roadmap | ✅ Creado por Deepseek V4 Flash — ✅ IMPLEMENTADO por GLM (Kilo) 2026-08-28: ROADMAP.md + hitos/137-143 con estados reales (199/199) |
 | 39-Tiendas | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogos por NPC, horarios, stock renovable (181/181) |
-| 40-Infraestructura | ✅ Creado por Deepseek V4 Flash — DELEGABLE: autoloads, servicios base, bootstrap (211/211) |
+| 40-Infraestructura | ✅ Creado por Deepseek V4 Flash — 🟡 NÚCLEO+EVENTOS IMPLEMENTADOS por deepseek-v4-flash (Kilo Code): GFM/SceneManager/Bootstrap (iter. 1, Log 298) + dominio infra en EventBus + transiciones_permitidas + test 28/0 (iter. 2, Log 328; 40/211) |
 | 54-Mapa | ✅ Creado por Deepseek V4 Flash — DELEGABLE: mapa de exploración, minimapa, POI, marcas (170/170) |
 | 72-Sistema-De-Logros | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo, desbloqueo, notificación, Steam sync (190/190) |
 | 74-Eventos | ✅ Creado por Deepseek V4 Flash — DELEGABLE: festivales estacionales, repetibles, anti-FOMO (266/266) |
-| 87-Localizacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: i18n/l10n, textos dinámicos, plurales (136/136) |
+| 87-Localizacion | 🟡 Implementado (iter. 2, glm-5.3-flash): persistencia M60 + sugerencia SO + tr_ctx (Log 322; 25/136) |
 | 45-Arte-3D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: estilo Cozy Voxel, techos de polígonos, LOD, sockets, kit modular, validador (157/157) |
 | 46-Arte-2D | ✅ Creado por Deepseek V4 Flash — DELEGABLE: iconos, retratos con plantilla 3D, símbolos, atlas por superficie (109/109) |
 | 47-Texturas-Y-Materiales | ✅ Creado por Deepseek V4 Flash — DELEGABLE: atlas de bloques 32px, variantes procedurales por bioma, kit de materiales, 4 shaders acotados, validador + presupuesto VRAM (107/107) |
@@ -188,7 +188,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 52-Particulas-Y-VFX | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo de 25 efectos, pool GPUParticles, presupuesto por escena, trigger VFX+SFX+feedback, determinismo, sin luz por partícula (120/120) |
 | 55-Diario-Del-Jugador | ✅ Creado por Deepseek V4 Flash — DELEGABLE: 14 categorías de registro, DiaryService por eventos, anti-spoilers, % de completado sobre descubierto, virtualización, persistencia GameState (130/130) |
 | 56-Fotografia | ✅ Creado por Deepseek V4 Flash — DELEGABLE: modo foto (Fotostate M31), cámara réplica Navigator con zoom 0.5x-8x, 6-8 presets artísticos, poses por evento M07, álbum WebP con presupuesto 150 MB, compartición local con confirmación de privacidad (130/130) |
-| 59-Guardado | ✅ Creado por Deepseek V4 Flash — DELEGABLE: SaveManager con encolado, escritura atómica .tmp+rename, checksum SHA-256, migración solo-hacia-delante (M60) con backup previo, rotación local de backups, snapshot por sistema vía ISaveProvider, disco lleno y 3+ slots (130/130) |
+| 59-Guardado | 🟡 Implementado (iter. auto-save, glm-5.3-flash): dirty M07 + auto-save día/misión/cierre + provider player (Log 307; 36/130) |
 | 67-Vehiculos | ✅ Creado por Deepseek V4 Flash — DELEGABLE: presets de barco/dirigible/submarino + plantilla locomotora condicional M68, física acotada sin fluidos, chunk_target de streaming (M10/M61), docking con magnetismo suave (M28), baúl M14 con mejoras persistentes, personalización cozy, audio/animaciones con LOD (130/130) |
 | 68-Transporte-Y-Navegacion | ✅ Creado por Deepseek V4 Flash — DELEGABLE: grafo central de paradas y rutas como única fuente de verdad, capa de transporte en el mapa (M54), señalización física consistente (M46), transición cozy sin perder al jugador (M61), costes con descuentos (M38/M20), viajes narrativos (M22/M23) y especiales (M74), coordinación con M69 por estaciones compartidas (130/130) |
 | 73-Coleccionables | ✅ Creado por Deepseek V4 Flash — DELEGABLE: catálogo central de 22 categorías con ids unívocos, registro idempotente por eventos (M07), progreso anti-spoiler, colecciones completas con recompensa y desbloqueos (M71), vistas compartidas de museo (M37) y diario (M55), persistencia compacta (M59/M60) (130/130) |
@@ -200,6 +200,12 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 154-Vision-Del-Agente | ✅ Creado por stealth/ox-alpha — 5 vías de visión para agentes (V1 chat, V2 MCP screen, V3 web+Playwright, V4 godot-mcp ⭐ fundamental, V5 Blender+blender-mcp ⭐ assets con guía detallada), matriz de decisión, protocolo de iteración visual (55/152) |
 
 > Reglas completas en `AGENTS.md` (raíz del proyecto). Coordinación global en `CHECKLIST-GLOBAL.md`.
+| 19-NPC-Y-Vecinos | 🟡 Implementado (iter. mudanzas + visión, glm-5.3-flash): población lógica completa, 5 perfiles, raycast F (Log 312; 32/131) |
+| 28-Viajes | 🟡 Implementado (iter. núcleo V0, glm-5.3-flash): TravelService 4 rutas, clima retraso-sin-bloqueo, persistencia (Log 319; 10/130) |
+| 33-Agricultura | 🟡 Implementado (iter. puente lluvia, glm-5.3-flash): apply_rain idempotente vía M32 (Log 309; 37/153) |
+| 34-Pesca | 🟡 Implementado (iter. bonos clima, glm-5.3-flash): lluvia ×1.15 / tropical ×1.25 nunca filtra (Log 310; 24/153) |
+| 37-Museos-Y-Colecciones | 🟡 Implementado (iter. núcleo, glm-5.3-flash): CollectionRegistry + DonationService + exhibiciones (Log 321; 14/148) |
+| 93-Balance | 🟡 Implementado (iter. 3 tablas, glm-5.3-flash): friendship/quests/puzzles/unlocks/meta v2 + rareza pity (Log 313; 47/130) |
 | 88-Fuentes-Tipograficas | ✅ Creado por DEVIN — Fuentes Tipográficas: Nunito + Fredoka One, jerarquía visual, estilos UI, optimización, accesibilidad, localización (172/172) |
 | 90-Configuracion-Grafica | ✅ Creado por DEVIN — Configuración Gráfica: 23 opciones gráficas, 4 presets, detección automática de hardware, menú de settings, integración con M58/M61/M88 (248/248) |
 | 91-Configuracion-De-Audio | ✅ Creado por DEVIN — Configuración de Audio: 15 opciones de audio, 7 buses de audio, audio 3D, subtítulos, sonidos de interfaz, rango dinámico, compresión, dispositivo de salida, pruebas de audio, integración con M58/M87/M61 (239/239) |

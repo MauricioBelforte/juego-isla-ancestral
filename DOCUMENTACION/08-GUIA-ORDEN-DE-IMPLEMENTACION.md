@@ -46,6 +46,8 @@
 
 ---
 
+| M73 Coleccionables (iter. 2 cierre) | 🟡 Liberado 2026-09-02 | minimax-m3 (Kilo Code) | F8 (desbloqueo) | V0/V1 | M71🟡, M36🟡 Liberado | Iter 2: catalogo JSON completo (37 items / 12 cats). test_coleccionables 44/44 OK (Log 408). Listo para QA cruzado (Hy3 en WorkBuddy) | game/isla-ancestral/scripts/coleccionables/{coleccionable_item,coleccionables_catalog,coleccionables_manager,test_coleccionables}.gd, game/isla-ancestral/data/coleccionables/catalog.json (nuevo, 37 items) |
+| M94 Retención sin FOMO (iter. 1) | 🔵 En curso 2026-09-02 | minimax-m3-free (Kilo Code) | F8 (retención) | V0/V1 | M93🟡 OK | Sistema anti-FOMO data-driven: regeneracion natural, eventos de retorno progresivos, regalos de bienvenida, tasa de retorno. Perfil minimax-m3-free según guía 10 §6 | game/isla-ancestral/scripts/retencion/ (a crear) |
 ## 1. Regla principal
 
 Ningun agente debe reservar un modulo solo porque aparezca como `🟢 Disponible`. Antes debe comprobar que:
@@ -136,7 +138,8 @@ La dificultad describe el riesgo del modulo, no la cantidad de archivos. La marc
 | 12 | M59 Guardado | 5 | V0 | Serializacion, slots y migraciones | Con M14/M15, sin UI final |
 | 13 | M19 NPC y Vecinos | 4 | V2 | NPC de prueba y presencia visual | Despues de M11 |
 | 14 | M21 Dialogos | 4 | V1 | Conversacion y datos | Despues de M19 |
-| 15 | M24 Templos y Puzzles | 5 | V2 | Puzzle observable y verificable | Despues de M13 |
+| 15 | M23 Historias Secundarias (iter. 1) | 🔵 En curso 2026-09-02 | Step 3.7 Flash (Kilo Code) | F7 (producción de contenido) | V0 | M22✅ | Núcleo data-driven de cadenas de misiones secundarias + validación anti-repetición + integración M22/M68. 40+ cadenas con contexto, 12 consecuencias persistentes. Complejidad 3 | `game/isla-ancestral/data/historias/` (a crear), `game/isla-ancestral/scripts/historias/` (a crear), `project.godot` |
+| M24 Templos y Puzzles | 5 | V2 | Puzzle observable y verificable | Despues de M13 |
 | 16 | M25 Ruinas | 3 | V2 | Estructura pequena y legibilidad | Despues de M24 |
 | 17 | M137 Prototipo | 5 | V2 | Integracion y GO/NO-GO | No; es la puerta F4 |
 | 18 | M61 Rendimiento | 5 | V0 | Presupuesto, profiling y gates | Desde M08; cierre despues de M137 |
@@ -528,7 +531,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | — | M111 Código de Calidad | 2 | V0 | ✅ COMPLETADO | Deepseek V4 Flash | ox-alpha (Cline) | M04 ✅ | Herramientas estáticas, CI gates, plantillas, 248/248 items | 2026-08-28 14:45 |
 | — | M21 Diálogos | 4 | V1 | 🟡 Liberado — núcleo + WorldState | Hy3 | Deepseek V4 Flash (Kilo) — relevo de Hy3 (Kilo) | M19 ✅, M21 núcleo implementado por Hy3 | Checklist relevado 59/133 + 14 [?]; WorldStateService (RF5) + condiciones/efectos + tests 0 fallos (Log 253). Integración M53/M87, condiciones M22/M23/M32 pendientes | 2026-08-30 01:50 |
 | — | M57 Interfaz de Control | 2 | V0/V1 | 🟡 Liberado — núcleo implementado | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M04 ✅ | ControlInput autoload (capa acciones, detección dispositivo + señal, remapeo con conflictos, dead zones/sensibilidad/inversión/vibración, persistencia JSON atómica) + test 0 fallos (Log 254). Checklist 86/119 + 1 [?]. Pendientes: iconografía (arte), PromptButton M53, menú remapeo M46, migración gameplay M06/M13 | 2026-08-30 02:30 |
-| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado — núcleo lógico | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M53 (UI, 🔵 en curso) | TutorialManager autoload (4 capítulos, triggers de señal, revalidación, estados, persistencia M59) + test 0 fallos (Log 259). Pendiente: UI burbujas/marcadores (M53, V2), triggers mundo/acción, consejos, watchdog | 2026-08-30 03:10 |
+| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado ? núcleo lógico | Deepseek V4 Flash | Deepseek V4 Flash (Kilo) | M53 (UI, 🔵 en curso) | TutorialManager autoload (4 capítulos, triggers de señal, revalidación, estados, persistencia M59) + test 0 fallos (Log 259). Pendiente: UI burbujas/marcadores (M53, V2), triggers mundo/acción, consejos, watchdog | 2026-08-30 03:10 |
 | — | M31 Ciclo Día/Noche | 3 | V1/V2 | 🟡 Liberado — iter 1 núcleo | GLM 5.3 | GLM (Kilo) | M29 ✅ | DayNightCycle escena (5 franjas, sol/luna, anti-oscuridad 0.15, `EventBus.time.fase_cambio`), test 12/0 OK (Log 302). 16 [?] honestos (curvas .tres, faroles, M45/M46, M49/M52/M58, QA M114, capturas V4) | 2026-08-31 06:50 |
 | — | M16 Crafting | 3 | V0/V1 | 🟡 Liberado — iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 ✅ M15 ✅ M29 ✅ M93 ✅ | Núcleo iter 1-2 (Deepseek) + iter 3 (GLM, Logs 303/304): RF5 estacional, pergaminos M14, SFX/VFX procedural, preview RF9, test season_changed. Test 0 fallos. 6 [?] con dueño cross-module | 2026-08-31 07:55 |
 | — | M15 Recursos | 3 | V1 | 🟡 Liberado — iter 3 cerrada | GLM 5.3 | GLM (Kilo) | M14 ✅ M11 ✅ M13 ✅ M29 ✅ | Núcleo iter 1-2 (Deepseek) + iter 3 (GLM, Log 305): persistencia ISaveProvider, respawn con M29, helper `recibir_golpe_en_nodo`. Test 0 fallos. 5 [?] con dueño (cableado M13→M15, meshes, área, persistencia spawner, test dia_cambio) | 2026-08-31 08:25 |

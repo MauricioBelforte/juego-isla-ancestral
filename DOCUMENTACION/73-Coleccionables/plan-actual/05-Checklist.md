@@ -257,3 +257,9 @@ egistrar_por_fuente(fuente, id_local) para sistemas que solo saben donde lo obtu
 > - Smoke test del proyecto: bloqueado por errores pre-existentes (M14/M59/M64).
 > 
 > **Estado:** 🟡 Liberado con honestidad. Listo para QA cruzado (Hy3 en WorkBuddy).
+## Verificación + data-driven (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_coleccionables.gd oficial: 0 fallos (autoload, 15 items, 4 categorías)
+- [x] **Hallazgo de auditoría:** data/coleccionables/catalog.json NO existía — el sistema corría 100% con el fallback in-code (el diseño pide data-driven). Se generó el JSON con los 15 items (5 minerales/4 animales/3 conchas/3 reliquias) extraídos del fallback: id_local, display_name, rareza (0-3), fuente (mineria/fauna/playa/ruinas/templo), recompensa (moneda/gema), puntos
+- [x] Re-verificado: el sistema carga desde el JSON (15 items, 4 categorías, 0 fallos) — data-driven activa
+- [?] Recompensas de gema_ancestral/moneda_ancestral vinculadas a M159/M93 (dueño: modulos de economia)

@@ -1,5 +1,5 @@
-**Modelo:** MiMo V2.5 (OpenCode)
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador 2026-09-01: §9.56 lambdas por valor, §9.57 clase interna de autoload, §9.58 GestorConfig claves raíz, §9.59 proveedores Node, §9.60 Curve dominio 0-1. Historial: deepseek-v4-flash §9.54/§9.55, glm-5.3 §9.53, MiMo V2.5 creó la guía; múltiples agentes §9.x)
+**Plataforma:** Kilo Code
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
 
@@ -1533,10 +1533,165 @@ func _ready() -> void:
 | 2026-08-31 | Deepseek V4 Flash | Kilo | Agregada §9.51 (PROCESS_MODE_WHEN_PAUSED sin pausa real congela el input de capas UI — capa ALWAYS + get_tree().paused). Fix diálogo congelado M53. Log 273 |
 | 2026-08-30 | Hy3 | Kilo | Agregada §9.50 (Anotar tipo con class_name de OTRO script no compila en headless --script → Parse Error "Could not find type"; usar tipo sin anotar + load().new() o preload. M21 iter 5, Log 299) |
 | 2026-08-31 | GLM | Kilo | Agregadas §9.51 (Autoload referenciado como global produce "Identifier not found" en `--script` → usar `get_node_or_null("/root/Nombre")` y cachear referencia) y §9.52 (`class_name` del script + `const X := preload(mismo script)` en el test rompe `.new()` → no usar `class_name` o renombrar el const). M31 núcleo, Log 302 |
+| 2026-09-01 | glm-5.3 | Cline | Agregada §9.53 (Fuente ausente en theme global → TODOS los Labels sin texto; aplicar la fuente solo si `ResourceLoader.exists()` o instalarlas. Hallazgo iter. 2 de M30, Log 318; dueño del fix M53/M88). ⚠️ Nota de auditoría (Log 320): esta sección se publicó por error como "§9.50" (colisionaba con la §9.50 de Hy3/Log 299) y fue renumerada a §9.53. Existe además una colisión previa de §9.51 duplicada (Logs 273 y 302, referencias vivas a ambas) — renumeración pendiente coordinada con sus dueños |
+| 2026-09-01 | deepseek-v4-flash | Kilo Code | Agregadas §9.54 (JSON.parse_string devuelve FLOAT para enteros en Godot 4.7 → normalizar int tras round-trip en contratos de datos) y §9.55 (FileAccess sin .close() bloquea borrado/rename en Windows). Hallazgos del núcleo M60 Datos y Serialización, test 66/0 OK |
 
 
 ---
 
+
+### 9.53 Fuente ausente en el theme global → TODOS los Labels del juego sin texto
+**Error:** `FreeType: Error loading font: '' (face_index=0)` + `Parameter "hb_font" is null` (repetidos en el arranque). Síntoma visible: los Labels que heredan el theme global (ThemeService M53/M88) renderizan **vacíos** (hora, fecha, chips, hints de HUD, etc.).
+**Causa:** el theme global aplica una fuente (Nunito/Fredoka One, M88) que no existe en el proyecto; `FontFile` carga `""` y el TextServer no puede dar forma al texto. Confirmado comparando capturas: el reloj M30 mostraba texto el 26/08 (antes del theme global) y quedó sin texto el 01/09. Los Labels SIN theme override sí renderizan (ej.: tooltips de TooltipService).
+**Solución:** en M53/M88: (a) aplicar la fuente custom SOLO si `ResourceLoader.exists(ruta)` / `FileAccess.file_exists(ruta)` (fallback silencioso a la fuente default del engine), o (b) instalar las fuentes reales. Ver §9.48 para el patrón correcto de carga runtime (`FontFile.load_dynamic_font`).
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3 (Cline) — hallazgo durante la iter. 2 de M30 (Log 318); dueño del fix: M53/M88
+
+### 9.54 `JSON.parse_string` devuelve FLOAT para enteros en Godot 4.7 — validaciones de tipo `int` fallan tras round-trip
+
+**Error:** `contrato inválido: version no es int` en M60 al cargar un save que se guardó con `version: 1` (entero). El validador hacía `typeof(datos["version"]) != TYPE_INT` y rechazaba el save después de un guardado→carga correcto.
+
+**Causa:** en Godot 4.7, `JSON.parse_string()` devuelve números sin punto decimal como `float` (`1.0`, `typeof=3`) cuando el JSON proviene de `JSON.stringify()` de un Dictionary con claves mixtas o en cierrtos formatos. Verificado experimentalmente: `JSON.stringify({"version":1})` → `JSON.parse_string` devolvió `version=1.0 typeof=3` (TYPE_FLOAT). No es determinista por tipo: el round-trip altera el tipo literal del entero.
+
+**Solución:** al validar contratos con campos numéricos que deben ser `int` (ej. `version`), aceptar ambos tipos y normalizar: si `typeof(v) == TYPE_FLOAT`, convertir a `int` solo si el valor fraccional es exacto (`float(int(vf)) == vf`). Jamás hacer `typeof() != TYPE_INT` como único chequeo sobre datos parseados de JSON; o guardar version como string. Implementado en `scripts/datos/validador.gd` (M60, `validar_contrato`).
+
+```gdscript
+# ❌ Incorrecto — rechaza un int parseado como float
+if typeof(v) != TYPE_INT: errors.append("version no es int")
+
+# ✅ Correcto — normaliza 1.0 -> 1 antes de validar el contrato
+if typeof(v) == TYPE_FLOAT and float(int(v)) == v:
+    datos["version"] = int(v)
+```
+
+**Archivos relacionados:** `scripts/datos/validador.gd`, `scripts/datos/test_datos_m60.gd` (M60, Log 338). **Fecha:** 2026-09-01 · **Agente:** deepseek-v4-flash (Kilo Code)
+
+### 9.55 `FileAccess.open(...).store_string(...)` sin `.close()` deja el archivo BLOQUEADO en Windows → `DirAccess.remove_absolute` falla al borrar
+
+**Error:** `[FAIL] borrar via DataStore` en M60: `borrar_slot()` devolvía `false` y `existe_slot()` seguía `true` tras borrar, aunque el archivo existiera. Corrupción sin detectar en test.
+
+**Causa:** el test abría y escribía el archivo en una sola expresión (`FileAccess.open(path, WRITE).store_string("...")`) y NUNCA llamaba `.close()`. En Windows, el handle queda abierto por el proceso → `DirAccess.remove_absolute()` falla con `ERR_FILE_IN_USE` y el archivo no se elimina. Los errores de borrado se manifestaban solo en Windows (POSIX permite borrar archivos abiertos).
+
+**Solución:** siempre guardar la referencia del `FileAccess` y llamar `.close()` (o `.flush()`) antes de operaciones de borrado/rename. En M60 se corrigió el test usando `var f := FileAccess.open(...); f.store_string(...); f.close()`. Regla general: en Windows, todo `FileAccess` escrito debe cerrarse explícitamente antes de `remove_absolute`/`rename_absolute` sobre ese archivo.
+
+**Archivos relacionados:** `scripts/datos/test_datos_m60.gd` (M60). **Fecha:** 2026-09-01 · **Agente:** deepseek-v4-flash (Kilo Code)
+
+### 9.56 Lambdas GDScript capturan por VALOR — los contadores en tests no incrementan
+
+**Error:** el test conecta una lambda a una señal para contar emisiones; tras la emisión, la variable contada sigue en 0 (o el check "esperaba 1" falla sin error visible).
+
+**Causa:** en GDScript 4, las lambdas capturan las variables locales del scope por **valor** (copia), no por referencia. `var emitidos := 0; var cb := func(_i): emitidos += 1` incrementa la COPIA de la lambda, nunca la variable del test. La señal sí se emite: el problema es el patrón del test, no el emisor.
+
+**Solución:** usar un contenedor mutable capturado (Array o Dictionary — la lambda copia la referencia al contenedor, y el contenido sí es compartido):
+
+```gdscript
+# ❌ No funciona: captura por valor
+var emitidos := 0
+var cb := func(_i: float) -> void:
+    emitidos += 1
+# ✅ Correcto: contenedor mutable
+var contador: Array = [0]
+var cb := func(_i: float) -> void:
+    contador[0] += 1
+```
+
+**Aplicación en el proyecto:** test_clima.gd (M32), test_farm_clima.gd (M33), test_viajes.gd (M28) — todos usan contenedor mutable. Regla general: en tests, NUNCA confiar en variables locales mutadas dentro de lambdas.
+
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
+
+### 9.57 Clase interna de un autoload no es visible fuera — extraer a archivo propio con `class_name`
+
+**Error:** `SCRIPT ERROR: Parse Error: Could not find type "DonationResult" in the current scope.` en un test que declara `var res: DonationResult`.
+
+**Causa:** una `class X` declarada DENTRO de un autoload (inner class) solo es accesible por `NombreAutoload.X` desde runtime — NO como tipo global anotable en otros scripts. El diseño (M37 §5) documentaba `class DonationResult` dentro del contrato del autoload DonationService, y el test no podía tipar el retorno.
+
+**Solución:** extraer la clase interna a su propio archivo con `class_name` global (`donation_result.gd` → `class_name DonationResult extends RefCounted`) y regenerar la caché de clases (`--headless --editor --quit` — ver §9.49/§9.50). El autoload la usa igual y tests/UI pueden anotar el tipo.
+
+**Aplicación en el proyecto:** `scripts/museum/donation_result.gd` (M37). Regla general: el CONTRATO del diseño puede agrupar clases bajo el autoload, pero la implementación GDScript exige archivo propio con `class_name` para todo tipo anotable desde otros scripts.
+
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
+
+### 9.58 GestorConfig descarta claves RAÍZ del dict de config — solo persiste secciones registradas
+
+**Error:** `set_locale("en")` persiste; en el arranque siguiente `_leer_locale_m60()` devuelve "" — la elección se pierde sin warning.
+
+**Causa:** `gestor_config.gd` (M60) itera SOLO las secciones de `SECCIONES` (`["graficos", "audio", "accesibilidad"]`) tanto al guardar como al cargar; cualquier clave raíz fuera de ellas (ej. `config["locale"] = "en"`) se descarta silenciosamente. El placeholder del núcleo M87 (GameSettings inexistente) ocultaba el problema.
+
+**Solución:** registrar la sección nueva en GestorConfig (SECCIONES + DEFAULTS_BASE con default sano). Para M87: sección `"general"` con `{"idioma": "es"}`; el locale se lee/escribe en `config["general"]["idioma"]`.
+
+**Aplicación en el proyecto:** `scripts/datos/gestor_config.gd` + `scripts/localization/localization_manager.gd` (M87 iter. 2). Regla general: CUALQUIER módulo que persista configuración vía M60 DEBE agregar su sección a SECCIONES+DEFAULTS_BASE primero; validar con `test_datos_m60.gd` (66 checks) que sigue en verde.
+
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
+
+### 9.59 Proveedores de save tipados como `RefCounted` rompen con autoloads Node
+
+**Error:** `Trying to assign value of type 'Node' to a variable of type 'ISaveProvider'` en `SaveSnapshot.collect()`/`restore()` cuando se registran proveedores nuevos (world_state, time_calendar, farm, fishing, weather, etc.).
+
+**Causa:** el núcleo M59 de ox-alpha tipaba el dict interno como `ISaveProvider` (RefCounted con el contrato). Los proveedores reales del proyecto son **autoloads Node** que cumplen el contrato por duck-typing; el typing estricto los rechaza en runtime. El registro era sin tipo, pero collect/restore sí tipaban.
+
+**Solución:** duck-typing en collect/restore (sin tipo estricto): `var provider = _providers[section]` + llamada directa a `get_save_data()/restore_save_data()`. El contrato `ISaveProvider` queda como DOCUMENTACIÓN del contrato (qué métodos debe implementar un proveedor), no como tipo de anotación.
+
+**Aplicación en el proyecto:** `scripts/saving/save_snapshot.gd` (M59 iter., Log 307). Regla general: los Node-providers son el patrón real del proyecto — NO reintroducir typing ISaveProvider en el snapshot.
+
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
+
+### 9.60 Mezcla de espacios/tabs en GDScript rompe el PARSE de TODO el proyecto
+
+**Error:** `Parser Error: Used space character for indentation instead of tab as used before in the file.` (Debugger Break en el arranque) + `Parser Error: Key "X" was already used in this dictionary (at line N)`. Debajo del primero aparecen otros parser errors en cadena (ej. `Function "_get_registry()" not found in base self`) que son regresiones INDEPENDIENTES de otros módulos.
+
+**Causa:** (1) ediciones con editor que inserta ESPACIOS en un archivo que ya usaba TABS — GDScript exige coherencia; (2) literales de diccionario con la clave repetida dos veces; (3) llamadas a métodos que nunca se definieron. Un solo parser error en un script cargado por autoload frena el boot del proyecto completo (Debugger Break), impidiendo correr cualquier escena de QA.
+
+**Solución:** conversión mecánica espacios→tabs (4 espacios = 1 tab) en el rango afectado:
+
+```python
+lineas = s.split(chr(10))
+for i, linea in enumerate(lineas):
+    if linea.startswith(' '):
+        n = len(linea) - len(linea.lstrip(' '))
+        if n % 4 == 0:
+            lineas[i] = chr(9) * (n // 4) + linea[n:]
+```
+
+**Aplicado en el proyecto:** `scripts/player/equipment_manager.gd` (35 líneas, 2026-09-01, deepseek-v4-flash-vision-exp). PENDIENTE DE DUEÑOS: `fauna_manager.gd:79` (M36 — `_get_registry()` no definido) y `equipment_manager.gd:106/122` (M13/M155 — claves duplicadas `body_vest_explorer`/`acc_backpack`).
+
+**Fecha:** 2026-09-01 · **Agente:** deepseek-v4-flash-vision-exp (Kilo Code)
+
+### 9.61 `Curve.add_point` espera Vector2 con DOMINIO de posición 0-1 (no horas/datos absolutos)
+
+**Error:** crear una Curve con `add_point(Vector2(hora, energia))` (posiciones 0-24) y luego `curve.sample(hora)` devuelve 0 para hora > 1 — silenciosamente, sin warning.
+
+**Causa:** el dominio de posición de una Curve de Godot es normalizado 0-1. Los puntos con posición > 1 se CLAMPEAN silenciosamente al guardar/insertar (punto en x=6 queda en x=1, el resto desaparece). Al samplear con 12/23, la curva no tiene puntos y devuelve min_value (0).
+
+**Solución:** normalizar el dominio al guardar (punto = hora/24) y samplear con la misma normalización (`curve.sample(hora / 24.0)`). Verificar SIEMPRE con `point_count` + muestras conocidas después de generar.
+
+Ejemplo (M31 iter. 2, Log 452, `scripts/world/gen_curvas.gd`):
+```gdscript
+# ❌ Posición fuera de dominio (0-24):
+c.add_point(Vector2(6, 0.5))   # queda clampeado en x=1
+var v := c.sample(6.0)         # 0.0 — ¡punto perdido!
+
+# ✅ Dominio normalizado:
+c.add_point(Vector2(6.0 / 24.0, 0.5))
+var v2 := c.sample(6.0 / 24.0) # 0.5
+```
+
+**Aplicación en el proyecto:** curvas de luz M31 (`data/light/day_curve.tres`, `sky_curve.tres`, `moon_curve.tres`, `fog_curve.tres`) generadas por `scripts/world/gen_curvas.gd` y sampleadas por `scripts/world/day_night_cycle.gd`. Verificación con `scripts/world/debug_curve.gd` (imprime point_count + samples).
+
+**Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
+
+### 9.62 `print()` con dos argumentos y un solo format: Debugger Break GLOBAL
+
+**Error:** `SCRIPT ERROR: not enough arguments for format string in operator '%'` → `Debugger Break` en `_ready` (ej: res://scripts/dlc/dlc_manager.gd:24) → **el boot se frena con "debug>" y NADA más arranca** (la escena queda congelada en el splash, el juego no genera frame).
+
+**Causa:** `print("[X] listo (%d DLC, %d bundles)" % a.size(), b.size())` — GDScript aplica `%` SOLO al primer operando cuando no hay tupla; `b.size()` queda como argumento extra de `print`, y el formato esperaba 2 valores.
+
+**Solución:** envolver los argumentos en `[...]` dentro del `%`:
+```gdscript
+print("[X] listo (%d DLC, %d bundles)" % [a.size(), b.size()])
+```
+
+**Aplicado en el proyecto:** `scripts/dlc/dlc_manager.gd:24` (M120, 2026-09-01 — detectado en la sesión QA #01; el juego estaba freenable por este print). Fix por deepseek-v4-flash-vision-exp (Log 395), verificado con suite completa ÉXITO + boot con el DlcManager cargando: "[M120] DlcManager listo (2 DLC, 1 bundles)" + mundo FPS 60 (captura 101-QA-General postfix).
+
+**Fecha:** 2026-09-01 · **Agente:** deepseek-v4-flash-vision-exp (Kilo Code)
 
 ## 10. Mundo voxel: errores y aprendizajes (2026-08-29 — Hy3/Kilo, criterio interno para islas nuevas)
 

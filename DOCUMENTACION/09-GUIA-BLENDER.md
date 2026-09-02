@@ -860,6 +860,58 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - **Defensa:** correr siempre `EXPORT_DRY=1` antes del export real y comparar el número contra `11 assets × 3 variantes`. Si da 0, es E-63, no "no hay nada que hacer".
 - **Fecha:** 2026-09-01 00:00
 
+### E-64 — Los `ERROR` de la GDExtension de voxel con el editor abierto son RUIDO: el import SÍ funciona
+
+- **Síntoma:** corrés `godot --headless --path game/isla-ancestral --import` con el editor Godot abierto y aparecen 4 `ERROR:` seguidos:
+
+  ```
+  ERROR: Failed to open '.../addons/zylann.voxel/bin/~libvoxel.windows.editor.x86_64.dll'.
+  ERROR: Error copying library: .../libvoxel.windows.editor.x86_64.dll
+  ERROR: Can't open GDExtension dynamic library: 'res://addons/zylann.voxel/voxel.gdextension'.
+  ERROR: Error loading extension: 'res://addons/zylann.voxel/voxel.gdextension'.
+  ```
+
+- **Trampa:** la reacción natural es "el editor lockeó la DLL → la GDExtension no carga → el import se abortó". **ES FALSO.** El editor en ejecución tiene tomada la DLL `libvoxel.windows.editor.x86_64.dll`, sí, y la GDExtension de voxel no carga, sí — pero **el import de assets se completa igual**, porque importar un `.glb` no depende de la GDExtension. El log sigue y termina con `loading_editor_layout ... [ DONE ]`.
+- **Evidencia dura:** con el editor abierto (PID 3672, 1.6 GB) se importaron correctamente los **33 GLB de M18** (21:02) y los **9 GLB de M50 Tier F** (21:16), 20 segundos después de cada export. Cobertura final: **198 GLB / 198 `.import`**, cero pendientes.
+- **Consecuencia:** **no cerrar el editor del usuario para "desbloquear" el import.** Es una pérdida de tiempo y una molestia injustificada. Correr el import con el editor abierto y verificar por archivo, no por log.
+- **Cómo diagnosticar de verdad (E-65):** el log no sirve; contar archivos sí. Ver E-65 para la forma correcta.
+- **Efecto secundario real (este sí):** los intentos dejan temporales `~libvoxel.windows.editor.x86_64.dll~RF<hex>.TMP` en `addons/zylann.voxel/bin/`. Había **11 juntando 82 MB** desde el 26-ago. Son basura, no bloquean nada; borrarlos con el editor cerrado, cuando sea conveniente.
+- **Fecha:** 2026-09-01 12:20. **Corrige** una formulación anterior de esta misma entrada (05:00) que afirmaba erróneamente que el import se salteaba.
+
+### E-65 — El sidecar se llama `<asset>.glb.import`, no `<asset>.import` → falsos "no se importó nada"
+
+- **Síntoma:** verificás el import con `ls 50-Vegetacion_*.import | wc -l` y da **0**. Concluís que Godot no importó, escribís un error en la guía y le pedís al usuario que cierre el editor. Todo innecesario.
+- **Causa:** Godot nombra el sidecar con el nombre de recurso **completo**, incluida la extensión: `arbol_frutal.glb` → `arbol_frutal.glb.import`. Un glob del estilo `<modulo>_<asset>.import` **no matchea nunca**.
+- **Verificación correcta — contar por variante:**
+
+  ```bash
+  cd game/isla-ancestral/assets/3d
+  for v in alta media baja; do
+    echo "$v: glb=$(ls $v/*.glb | wc -l)  import=$(ls $v/*.import | wc -l)"
+  done
+  ```
+
+  Los dos números tienen que ser iguales. (Estado real: 66/66, 66/66, 66/66.)
+
+- **Verificación fina — por mtime:** el `.import` tiene que ser **posterior** al `.glb` (segundos después, no días):
+
+  ```bash
+  date -r alta/50-Vegetacion_arbol_frutal.glb        '+%m-%d %H:%M:%S'
+  date -r alta/50-Vegetacion_arbol_frutal.glb.import '+%m-%d %H:%M:%S'
+  ```
+
+  Si el `.glb` es más nuevo que su `.import`, el import está desactualizado y hay que re-correrlo.
+
+- **Verificación de humo — el cache:** tiene que existir un `.scn` por variante en `.godot/imported/`:
+
+  ```bash
+  ls ../../.godot/imported/50-Vegetacion_arbol_frutal.glb-*.scn | wc -l   # → 3
+  ```
+
+  Si los `.import` existen pero faltan los `.scn`, el recurso no terminó de procesarse.
+
+- **Fecha:** 2026-09-01 12:20. Causa raíz del falso E-64 de las 05:00.
+
 ## 4. Checklist antes de dar por terminado un asset
 
 - [ ] Script idempotente (re-ejecutable sin duplicar)
@@ -881,6 +933,7 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - [ ] **Optimización por lote** (cuando hay varios assets pendientes): `python procesar_lote.py` procesa todos los módulos; `python procesar_lote.py 50-Vegetacion --media` restringe a un módulo y a una sola variante. Es **idempotente**: saltea los assets que ya tienen `_media`. Referencia: 41 assets en 168 s.
 - [ ] **Módulo registrado en el export** (E-63): si el módulo es NUEVO, agregarlo a la tupla `MODULOS` de `exportar_godot.py`. Si no, el export devuelve `{"exportados": 0}` **sin ningún error**.
 - [ ] **Dry-run antes del export real** (E-63): `EXPORT_DRY=1 EXPORT_MODULOS=<mod> blender -b --factory-startup --python exportar_godot.py` y confirmar que el número sea `assets × 3 variantes`. Recién entonces correr con `EXPORT_FORZAR=1` (E-49) y terminar con el `--headless --import` de Godot.
+- [ ] **Import verificado por ARCHIVOS, no por log** (E-64/E-65): por variante, `glb == import` (alta 66/66, media 66/66, baja 66/66) y el mtime del `.import` posterior al del `.glb`. El glob correcto es `*.import` (el sidecar es `<asset>.glb.import`, **no** `<asset>.import`). Los `ERROR:` de `voxel.gdextension` con el editor abierto son ruido benigno: **no** hay que cerrar el editor.
 - [ ] **Variantes a la misma altura** (E-48 + E-62): el `z_min` de alta/media/baja tiene que coincidir. Si difiere, el objeto salta al cambiar de LOD o quedó enterrado. `chk_asset.py` lo reporta sin necesitar socket.
 - [ ] Hallazgos nuevos en §3 con fecha
 - [ ] Log en `Logs/`
@@ -1015,7 +1068,9 @@ El flujo de un estudio profesional difiere en varios puntos; saberlo evita sobre
 
 **Cambios 2026-09-01 00:00 (M18 cerrado + E-62/E-63):** cierre administrativo del Tier E. Con Blender GUI abierto (socket UP) se desbloqueó E-56 y se derivaron las variantes de los 11 assets de `18-Casas`: MEDIA ≤6 obj/≤212 tris/≤6 mats y BAJA ≤6 obj/≤144 tris/≤4 mats, todas dentro de M166 §3.3. **Antes de derivar apareció E-62**: `generar_variante.py` re-asentaba incondicionalmente y hundía 2.6 m los techos; se agregó el umbral `UMBRAL_REASENTADO = 0.25`. Los techos conservan `z_min 2.6450` en las 3 variantes (sin salto de LOD, E-48). **Al exportar apareció E-63**: `18-Casas` no estaba en la whitelist `MODULOS` de `exportar_godot.py` y el export devolvió `{"exportados": 0}` sin warning; agregado + `--dry-run` incorporado como práctica obligatoria. Resultado: **33 GLB exportados** a `assets/3d/{alta,media,baja}/18-Casas_*.glb` y **33 `.import`** generados por Godot. **M18 = 100% cerrado** (autoría + auditoría + 6 capturas × 11 + visión + variantes + GLB + import). Hallazgo colateral: el backlog de M50 Vegetación decía 5 pendientes pero son **3 reales** — las líneas "Hongo luminoso" y "Flor de isla" figuraban como `- [ ]` siendo duplicados rancios de ítems ya hechos más abajo en la misma lista.
 
-**Última actualización:** 2026-09-01 00:00 — MiniMax-M3 · WorkBuddy AI · Windows (E-58/59/60/61/62/63; track_to_quat, alpha BSDF, techos sobre paredes, overhang de alero, re-asentado condicional, whitelist de módulos en el export)
+**Cambios 2026-09-01 05:00 (Tier F cerrado + E-64):** cierre del **Tier F — M50 Vegetación**. El backlog decía 5 pendientes pero 2 eran duplicados rancios, así que eran **3 reales**: `arbol_frutal` (15 obj/464 tris/4 mats, faldón cónico + 4 raíces horizontales + tronco 2.30 m + copa de 3 ico-esferas + 6 frutas), `musgo_roca` (9/204/4, cilindro bajo de 12 lados con jitter) y `raices_expuestas` (6/106/2, tocón + 5 raíces en abanico de 150°). Los 3 con `z_min 0.0450` y huella validada (E-50: ≥8 vértices tocando y footprint ≥0.30 m por eje). Los 3 auditados con `chk_asset.py`, 6 capturas orbitales c/u y aprobados por visión; variantes MEDIA/BAJA derivadas; **9 GLB exportados**. **Sobre el import:** primero se diagnosticó mal (E-64 a las 05:00) creyendo que el editor abierto bloqueaba el import. Verificado por archivos a las 12:20, **el import nunca estuvo bloqueado**: los 33 GLB de M18 entraron a las 21:02 y los 9 de M50 a las 21:16, con el editor abierto (PID 3672). El diagnóstico falso vino de E-65: el sidecar se llama `<asset>.glb.import`, así que el glob `*_<asset>.import` daba 0. Los `ERROR:` de `voxel.gdextension` son ruido benigno. **Estado real: 198 GLB / 198 `.import`, cobertura 100%, cero pendientes de import.** Deja temporales `~libvoxel...TMP` (11 archivos / 82 MB desde el 26-ago) que son basura no bloqueante.
+
+**Última actualización:** 2026-09-01 12:20 — MiniMax-M3 · WorkBuddy AI · Windows (E-58/59/60/61/62/63/64/65; track_to_quat, alpha BSDF, techos sobre paredes, overhang de alero, re-asentado condicional, whitelist de módulos en el export, errores de GDExtension benignos, sidecar `.glb.import`)
 **Cambios 04:35 (barrido visual ALTA completo, 52/52):** tras la auditoría E-24, lancé el barrido visual ALTA (52 assets) por bucle shell directo (`for b in $(find ...)` con `cut -d/ -f4`) — `qa_lote.py` espera `N_lowpoly_VARIANTE.blend` pero para ALTA la fuente ES `N_lowpoly.blend`. Duración 16m 27s, 0 fallidas. **52/52 APROBADAS** en los 6 azimuts (E-13). Único outlier numérico: `veta_hierro_lowpoly` `z_min 0.0275` — **NO bug**: la roca (SM_Veta_Roca) está en 0.0450 (toca=16, fp=2.3×2.0); los 5 cristales cuelgan en 0.027-0.149 (diseño decorativo). El grupo arrastra el `z_min=0.0275` por el cristal_3. **M166 visual sweep: 100% (52 BAJA + 52 MEDIA + 52 ALTA = 156/156).** Capturas especiales: `antorcha_pared` el set de pared (E-28) bloquea el asset en az 240/300 (esperado), `puerta_templo` se ve de canto en az 000/180 (esperado), `palmera` (4.66m) pierde el suelo en algunas azimuts por encuadre (no flota).
 **Cambios 04:15 (auditoría E-24 completa, 5 archivos corregidos):** el usuario reabrió Blender ("ya tenes abierto blender nuevamente segui"). Re-corrí `verificar_visual.py` corregido en `roca_comun_lowpoly` y `roca_pedernal_lowpoly` source — ambos pasan `z_min 0.0450 → apoyo OK` (antes: HUNDIDO 0.154 m / HUNDIDO 0.337 m). Leí las 6 hojas de contacto (04-04 a 04-06) y confirmé visualmente el fix E-50: roca_comun y roca_pedernal apoyados en los 6 azimuts. **Barrido E-24 en `scripts-reutilizables/`** (17 hits en 11 archivos): **5 archivos corregidos**, 6 SAFE. Críticos: `verificar_visual.py:medir_apoyo()` (el bug original), `asentar_en_base.py:PLANTILLA` (sobre-eleva grupo 15 cm si fuente tiene un rotado), `auditar_apoyos.py:TEMPLATE` (reporta FLOTA falsamente en rotados), `corregir_asset.py:zmin_de()` (5 sitios, el delta de re-asentado). Cosméticos: `auditar_presupuesto.py:52-53` (display), `verificar_bounds.py:21-22` (engañoso, se lee como `z_min` real). SAFE: `capturar_angulos.py`, `diagnosticar_pose.py`, `inspeccionar_escena.py` (framing/display), `auditar_flotantes.py:93` y `generar_variante.py:380` (fallback empty-mesh con docstring E-24). **Sanity check roca_comun_lowpoly:** `SM_Roca_Comun_Chica` rot=(0.2,-0.2,1.1) → `real_zmin=0.0450` vs `bbox_zmin=-0.1092` (delta 15.4 cm). Confirmado que el bug era real y que el fix lo cierra. Patrón obligatorio para scripts nuevos: NUNCA `o.bound_box` para decidir re-asentado; usar `zmin_real(o)` con fallback AABB solo si `len(o.data.vertices) == 0`. **Pendiente:** QA visual ALTA (17 hero assets) — ahora seguro porque los scripts numéricos ya no mienten.
 **Cambios 03:25 (fix E-50 en veta_hierro + veta_oro, doc E-47/48/49/50/51, log 301/302):** descubierto nuevo patrón "apoyo puntual en domo" (E-50): `z_min=0.0450` con `toca=1, footprint=0×0` significa que el objeto (usualmente un huso: punta r=0.025 abajo, punta r=0.05 arriba, ecuador r=1.2 a z=0.6) está apoyado sobre un vértice y el ecuador flota 50+ cm arriba del suelo. **Caso real:** `veta_hierro` — la roca gris-azulada estaba suspended en los 6 azimuts con sombra debajo que no tocaba la arena (visible incluso numéricamente OK: `SM_Veta_Roca` zmin=0.0450 pero ecuador a 0.36). **`piedra_afilar` fue falsa alarma E-31** (loseta con footprint 0.187×0.034, plana sobre la arena — mi juicio visual previo fue erróneo, corregido midiendo vértices reales con `diag_apoyo.py` — aprendizaje: E-37 también aplica al diagnóstico). **Fix correcto:** script `aplanar_dome.py` (BFS sobre aristas — E-51, no distancia XY, que elige vértices del techo) toma el vértice más bajo + K anillos topológicos y los aplana a `z=Z_OBJ`. K=2 funciona para husos de 42 verts (base hexagonal de ~2 m). Aplicado a `veta_hierro` (3 variantes) y `veta_oro` (3 variantes). NO aplicado a `veta_cobre`/`roca_comun`/`roca_pedernal` porque su flat-top ecuatorial disimula el single-vertex contact y pasan el E-13 visual. **Decisión arquitectural:** para vetas/rocas con flat-top ecuatorial (anillo de vértices al mismo z), la base sí es un punto pero el ojo lee el disco plano de arriba y aprueba — es E-50 latente pero aceptable. Documentado E-47 (fuente debe llamarse `N_lowpoly.blend`), E-48 (`generar_variante.py` re-asienta derivados → ALTA/MEDIA/BAJA GLBs pueden quedar a alturas distintas), E-49 (mtime-skip miente tras restores/clock-skew/git-pull → usar `EXPORT_FORZAR=1`), E-50 (apoyo puntual en domo), E-51 (vecindario por topología de aristas, no distancia XY). **6 GLBs re-exportadas** (alta/media/baja × veta_hierro + veta_oro) en `game/isla-ancestral/assets/3d/`. **Barrido visual BAJA completo**: 52/52 assets capturados (4 lotes, ~16 min totales, 0 fallos de pipeline, 0 excedidos de presupuesto). 51/52 aprobados visualmente; `veta_hierro_baja` era el único rechazo, ahora resuelto. **Pendiente próximo:** QA visual MEDIA (41 assets) y ALTA (17 assets) — mismo flujo `qa_lote.py --variante media|alta`.

@@ -193,3 +193,9 @@
 **Total de ítems:** 102
 **Ítems resueltos por documentación:** 102 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Verificación (2026-09-02 05:20 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_plataformas_m96.gd: 10/10 checks OK (PlatformManager presente, NullBridge en dev, matriz con 10 plataformas — steam incluida, inexistente -> {}, P0 = steam+deck con steam primero, P2 = 3 consolas (GATE presupuesto), ids = 10, cloud no disponible en dev)
+- [x] Matriz de plataformas verificada (10 entries, priorización por canal P0/P2 correcta)
+- [x] Steambridge conectado vía NullBridge en dev (el perfil de producción lo reemplaza según Config M91) — sin ejecución de Steam en dev (comportamiento deseado)
+- [?] Verificación con Steam real (M77 online + middleware) — cuando exista credenciales de Steamworks (dueño: M97/M118)
