@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "viajes": {
+    "RIZ": {
+      "anclas": [
+        {"id": "ancla_spawn", "nombre": "Punto de partida", "x": 256, "z": 256, "desbloquea": true},
+        {"id": "ancla_plaza", "nombre": "Plaza del Pueblo", "x": 310, "z": 310, "desbloquea": true},
+        {"id": "ancla_faro", "nombre": "Faro", "x": 350, "z": 350, "desbloquea": true},
+        {"id": "ancla_playa", "nombre": "Playa del Norte", "x": 256, "z": 80, "desbloquea": true}
+      ]
+    }
+  }
+}
