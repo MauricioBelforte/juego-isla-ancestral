@@ -56,6 +56,10 @@ func _registrar_tienda_general(sm) -> void:
 		_entry("baya_roja", 3, 10, 1.0, true),
 		_entry("fibra_algodon", 3, 8, 1.2, false),
 		_entry("mineral_cobre", 1, 4, 2.0, false),
+		# M16 RF14 (glm-5.3-flash): pergaminos de receta (origen "compra" en
+		# balance/crafting.json) — usar_item → Crafting.usar_pergamino aprende
+		# la receta. Stock limitado 1 por día (recompensa de progresión cozy).
+		_entry("pergamino_rec_tela_lino", 1, 1, 2.0, false),
 	]
 	var recompra_g: Array[String] = [
 		"madera_roble", "piedra_caliza", "baya_roja", "fibra_algodon",

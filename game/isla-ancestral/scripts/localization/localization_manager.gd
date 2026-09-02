@@ -41,17 +41,54 @@ func _cargar_catalogos() -> void:
 		TranslationServer.add_translation(trans)
 
 func _restaurar_locale_guardado() -> void:
-	# Lee la elección persistida de M60 (configuración). Si no hay, español.
-	var gs = get_node_or_null("/root/GameSettings")
-	var guardado := ""
-	if gs != null and gs.has_method("get_setting"):
-		guardado = str(gs.get_setting("locale", ""))
+	# glm-5.3-flash (2026-09-01, iter. 2): persistencia REAL vía M60 DataStore
+	# (el núcleo consultaba GameSettings que no existe — placeholder honesto).
+	# Orden: config M60 → (primer arranque) sugerencia del SO → español.
+	var guardado := _leer_locale_m60()
 	if guardado != "" and guardado in LOCALES_SOPORTADOS:
 		_aplicar_locale(guardado)
-	else:
-		_aplicar_locale(LOCALE_DEFECTO)
+		return
+	# RF primer arranque: sugerir el idioma del SO con confirmación pendiente
+	# (la UI de confirmación es de M53; acá solo proponemos y persistimos la
+	# sugerencia como locale activo si el SO soporta uno de los disponibles).
+	var sugerido := _sugerir_locale_so()
+	if sugerido != "" and sugerido in LOCALES_SOPORTADOS:
+		_aplicar_locale(sugerido)
+		print("[M87] Primer arranque: sugerido idioma del SO '%s' (confirmación con M53)" % sugerido)
+		_persistir_locale(sugerido)
+		return
+	_aplicar_locale(LOCALE_DEFECTO)
+
+## Persistencia vía M60 DataStore (sección "general" de gestor_config)
+func _leer_locale_m60() -> String:
+	var ds := get_node_or_null("/root/DataStore")
+	if ds == null or not ds.has_method("cargar_config"):
+		return ""
+	var config: Dictionary = ds.cargar_config()
+	var general: Dictionary = config.get("general", {})
+	return str(general.get("idioma", ""))
+
+
+func _sugerir_locale_so() -> String:
+	var so := OS.get_locale_language()  # "es", "en", ...
+	if so in LOCALES_SOPORTADOS:
+		return so
+	return ""
 
 ## ── API pública ──────────────────────────────────────────
+
+## Cambia el idioma y persiste la elección (checklist "persistir entre sesiones")
+func set_locale_persistente(locale: String) -> bool:
+	var ok := set_locale(locale)
+	if ok:
+		_persistir_locale(locale)
+	return ok
+
+## Contexto gettext (checklist "entradas con contexto"): clave "ctx|clave"
+## desambigua términos iguales con traducciones distintas (ej. "Cerrar" botón
+## vs "Cerrar" narrativo). El .po guarda las entradas con el prefijo.
+func tr_ctx(contexto: String, module: String, section: String, key: String, params: Dictionary = {}) -> String:
+	return tr_key(module, section, contexto + "|" + key, params)
 
 func set_locale(locale: String) -> bool:
 	if not locale in LOCALES_SOPORTADOS:
@@ -232,6 +269,15 @@ func _indice_plural(locale: String, n: int, nformas: int) -> int:
 ## ── Persistencia (M60) ───────────────────────────────────
 
 func _persistir_locale(locale: String) -> void:
-	var gs = get_node_or_null("/root/GameSettings")
-	if gs != null and gs.has_method("set_setting"):
-		gs.set_setting("locale", locale)
+	# glm-5.3-flash (2026-09-01): persistencia REAL vía M60 DataStore, sección
+	# "general" de gestor_config (reemplaza el placeholder GameSettings).
+	var ds := get_node_or_null("/root/DataStore")
+	if ds == null or not ds.has_method("guardar_config"):
+		push_warning("[M87] DataStore ausente; elección de idioma no persistida")
+		return
+	var config: Dictionary = ds.cargar_config()
+	if typeof(config.get("general")) != TYPE_DICTIONARY:
+		config["general"] = {}
+	var general: Dictionary = config["general"]
+	general["idioma"] = locale
+	ds.guardar_config(config)

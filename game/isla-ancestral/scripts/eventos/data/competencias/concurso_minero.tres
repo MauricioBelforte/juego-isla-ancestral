@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "concurso_minero"
+tipo = 2
+nombre_clave = &"concurso_minero_nombre"
+descripcion_clave = &"concurso_minero_desc"
+dia = 14
+mes = 6
+estacion = 1
+hora_inicio = 8 * 60
+hora_fin = 16 * 60
+dias_aviso = 2
+prioridad = 70
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_competencia": true, "actividad": "mineria"}

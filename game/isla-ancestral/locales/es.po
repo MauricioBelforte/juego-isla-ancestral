@@ -174,3 +174,15 @@ msgstr "No tienes ese objeto para vender."
 
 msgid "TIENDAS.CERRADA"
 msgstr "La tienda está cerrada. Vuelve en horario laboral."
+
+msgid "CLOCK.ESTACIONES.0"
+msgstr "Primavera"
+
+msgid "CLOCK.ESTACIONES.1"
+msgstr "Verano"
+
+msgid "CLOCK.ESTACIONES.2"
+msgstr "Otoño"
+
+msgid "CLOCK.ESTACIONES.3"
+msgstr "Invierno"

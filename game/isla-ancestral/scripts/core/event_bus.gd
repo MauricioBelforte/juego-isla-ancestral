@@ -33,6 +33,10 @@ var travel := TravelEvents.new()
 var ui := UIEvents.new()
 ## ── Dominio: PLAYER ──────────────────────────────────────
 var player := PlayerEvents.new()
+## ── Dominio: INFRA (M40) ─────────────────────────────────
+var infra := InfraEvents.new()
+var diary := DiaryEvents.new()
+var progresion := ProgresionEvents.new()
 
 
 ## ── Clases de eventos por dominio ───────────────────────
@@ -136,3 +140,35 @@ class PlayerEvents:
 	signal level_up(new_level: int)
 	## Se emite cuando el jugador recibe daño
 	signal damage_taken(amount: int, source: String)
+
+## Dominio INFRA (M40): eventos de infraestructura del flujo del juego.
+## Aditivo — no rompe contratos existentes (M40 iter. 2, deepseek-v4-flash/Kilo).
+## Convención D5 del módulo: eventos de flujo y boot aquí.
+class InfraEvents:
+	## Cambió el estado del flujo (GameFlowManager): anterior, nuevo (enum Estado)
+	signal game_flow_changed(anterior: int, nuevo: int)
+	## Inicio de carga de una escena raíz (SceneManager)
+	signal carga_iniciada(ruta: String)
+	## Carga de escena raíz completada
+	signal carga_completada(ruta: String)
+	## Boot terminado (Bootstrap) — los sistemas pueden montar UI/HUD (M53)
+	signal boot_completado()
+
+## Dominio PROGRESION (M71): niveles de módulos de power (M13/M18) y progreso.
+## Aditivo (glm-5.3-flash/Kilo) — M71 emite/produce, consumidores M13/M18/M53.
+class ProgresionEvents:
+	## M13/M18: nivel de herramienta/casa cambió (0-3 cobre..cristal / 0-2 casa)
+	signal nivel_herramienta_cambio(herramienta_id: String, nivel: int)
+	signal nivel_casa_cambio(nivel: int)
+	## M20: nivel de amistad de un vecino cambió (0-4)
+	signal nivel_amistad_cambio(npc_id: String, nivel: int)
+
+## Dominio DIARY (M55): registro de entradas del diario del jugador.
+## Aditivo (glm-5.3-flash/Kilo) — los sistemas emiten vía DiaryService.
+class DiaryEvents:
+	## Entrada nueva registrada (notificación sutil M53/M44)
+	signal entrada_nueva(entrada_id: String, categoria: String)
+	## Una categoría llegó al 100% de sus entradas descubiertas
+	signal categoria_completa(categoria: String)
+	## Progreso global del diario cambió (sobre lo descubierto, §3.2)
+	signal progreso_cambiado(porcentaje: float)

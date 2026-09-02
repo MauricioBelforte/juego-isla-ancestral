@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "niebla_faro"
+tipo = 4
+nombre_clave = &"niebla_faro_nombre"
+descripcion_clave = &"niebla_faro_desc"
+dia = 0
+mes = -1
+estacion = 0
+hora_inicio = 6 * 60
+hora_fin = 10 * 60
+dias_aviso = 0
+prioridad = 30
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_climatico": true, "probabilidad_diaria": 0.1}

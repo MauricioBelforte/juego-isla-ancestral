@@ -18,6 +18,9 @@ signal item_removed(item_id: String, cantidad: int, container: int)
 signal slot_changed(container: int, slot_idx: int)
 signal inventario_actualizado()  # señal batched única tras operaciones múltiples
 signal inventario_lleno(container: int, item_id: String, sobrante: int)
+## M16 RF17 (glm-5.3-flash): uso de item consumible (ej. pergamino) — el sistema dueño
+## (Crafting.usar_pergamino) escucha y remueve el item si corresponde.
+signal item_usado(item_id: String, contexto: String)
 
 var contenedores: Dictionary = {}   # ContainerType.Id -> ContenedorInventario
 
@@ -401,3 +404,17 @@ func restore_save_data(data: Dictionary) -> void:
 			if typeof(lista) == TYPE_ARRAY:
 				contenedores[c].deserializar(lista)
 	inventario_actualizado.emit()
+
+## ── M163: acceso de lectura a slots para UI de encantamiento ──
+
+func get_container_slots(container: int) -> Array:
+	var c := _contenedor(container)
+	var result: Array = []
+	for s in c.slots:
+		if not s.esta_libre():
+			result.append({
+				"item_id": s.item_id,
+				"cantidad": s.cantidad,
+				"instancia": s.instancia
+			})
+	return result

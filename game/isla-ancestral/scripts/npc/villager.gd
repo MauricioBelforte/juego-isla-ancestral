@@ -146,6 +146,8 @@ func _crear_indicador() -> void:
 
 ## ── Snap al terreno ───────────────────────────────────
 
+var _snap_intentos: int = 0
+
 func _snap_to_ground() -> void:
 	# Estrategia anti-flotamiento: usar el TerrainLocator (autoload) que consulta el
 	# generador REAL del mundo. NUNCA crear un IslandGenerator propio (la causa del
@@ -157,8 +159,14 @@ func _snap_to_ground() -> void:
 			global_position.y = float(h) + 1.0
 			print("[Villager] %s snap al terreno en Y=%.1f (height=%d)" % [name, global_position.y, h])
 			return
-	# Fallback: mantener posición actual
-	print("[Villager] %s no pudo calcular altura, manteniendo Y=%.1f" % [name, global_position.y])
+	# M167: el locator aún no tiene el terreno en el arranque (h = -1).
+	# Reintentar en vez de quedar flotando en la posición hardcodeada.
+	_snap_intentos += 1
+	if _snap_intentos <= 6:
+		var timer := get_tree().create_timer(0.5)
+		timer.timeout.connect(_snap_to_ground)
+		return
+	print("[Villager] %s no pudo calcular altura tras %d intentos, manteniendo Y=%.1f" % [name, _snap_intentos, global_position.y])
 
 
 ## ── Aplicar datos del perfil a los visuales ────────────

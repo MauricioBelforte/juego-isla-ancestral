@@ -89,6 +89,18 @@ func _conectar_eventos() -> void:
 	bus.calendar.day_started.connect(_on_auto_save_dia)
 	# B2: auto-save al completar misión (señal existe; emisores M22/M23 pendientes)
 	bus.quest.quest_completed.connect(_on_auto_save_mision)
+	# B1-bis (M59 iter. 2, glm-5.3-flash): auto-save al finalizar un evento (M74)
+	# M74 emite su señal propia (no en calendar): conectamos directo al manager.
+	var em := get_node_or_null("/root/EventManager")
+	if em != null and em.has_signal("evento_terminado"):
+		em.evento_terminado.connect(_on_auto_save_evento)
+	# B5-bis: no auto-save durante minijuego (M34 pesca — sesión activa bloquea)
+	if bus.travel != null and bus.has_user_signal("pesca_iniciada"):
+		pass  # la señal de pesca vive en FishingManager, conectado abajo
+	var fm := get_node_or_null("/root/Fishing")
+	if fm != null and fm.has_signal("sesion_iniciada") and fm.has_signal("sesion_terminada"):
+		fm.sesion_iniciada.connect(func(_s): set_save_blocked(true))
+		fm.sesion_terminada.connect(func(_s): set_save_blocked(false))
 	# B5: no auto-save durante diálogo (M21) — EventBus.ui
 	bus.ui.dialog_requested.connect(_on_dialogo_abierto)
 	bus.ui.dialog_finished.connect(_on_dialogo_cerrado)
@@ -100,6 +112,11 @@ func _on_auto_save_dia(_day: int, _season: String) -> void:
 func _on_auto_save_mision(_quest_id: String) -> void:
 	if current_slot >= 1:
 		request_save(current_slot, "auto_mision")
+
+## M59 iter. 2: auto-save al finalizar un evento de temporada (M74)
+func _on_auto_save_evento(_evento_id: StringName) -> void:
+	if current_slot >= 1:
+		request_save(current_slot, "auto_evento")
 
 func _on_dialogo_abierto(_npc_id: String, _data: Dictionary) -> void:
 	set_save_blocked(true)

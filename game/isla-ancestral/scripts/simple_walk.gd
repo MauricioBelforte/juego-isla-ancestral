@@ -12,12 +12,21 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# M57 iter. 2: input via ControlInput (capa única de acciones RF2) —
+	# teclado/mando unificado, sin Input directo en gameplay.
+	var ci := get_node_or_null("/root/ControlInput")
+	if ci != null and ci.accion_justa("saltar") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	elif ci == null and Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir: Vector2 = Vector2.ZERO
+	if ci != null:
+		input_dir = ci.vector_movimiento()
+	else:
+		input_dir = Input.get_vector("mover_oeste", "mover_este", "mover_norte", "mover_sur")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
+
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED

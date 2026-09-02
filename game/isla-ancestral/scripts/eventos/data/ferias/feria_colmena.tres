@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "feria_colmena"
+tipo = 1
+nombre_clave = &"feria_colmena_nombre"
+descripcion_clave = &"feria_colmena_desc"
+dia = 1
+mes = -1
+estacion = -1
+hora_inicio = 10 * 60
+hora_fin = 18 * 60
+dias_aviso = 1
+prioridad = 50
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_feria": true, "frecuencia": "mensual"}

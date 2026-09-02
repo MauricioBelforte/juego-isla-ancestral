@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ia_npc/npc_agent.gd" id="1_npc_agent"]
+
+[sub_resource type="CapsuleMesh" id="1_capsule"]
+radius = 0.3
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="1_shape"]
+radius = 0.3
+height = 1.6
+
+[node name="NPCAgent" type="CharacterBody3D"]
+script = ExtResource("1_npc_agent")
+
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
+path_desired_distance = 1.0
+target_desired_distance = 0.5
+radius = 0.4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1_shape")
+position = Vector3(0, 0.8, 0)

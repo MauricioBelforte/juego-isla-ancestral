@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "festival_primavera"
+tipo = 0
+nombre_clave = &"festival_primavera_nombre"
+descripcion_clave = &"festival_primavera_desc"
+dia = 15
+mes = 1
+estacion = 0
+hora_inicio = 6 * 60
+hora_fin = 22 * 60
+dias_aviso = 3
+prioridad = 100
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_festival": true, "decoracion": "flores"}

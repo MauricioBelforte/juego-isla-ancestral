@@ -186,6 +186,11 @@ func marcar_sello(sello_id: String) -> bool:
 	return true
 
 
+## ¿El sello está marcado? (M71/M72 consultan — M22 es la fuente de verdad §2.2)
+func sello_marcado(sello_id: String) -> bool:
+	return sello_id in _sellos
+
+
 ## Intenta completar un nodo (valida requisitos otra vez, contracto M66).
 func completar_nodo(id: String) -> Dictionary:
 	var res := puede_entrar(id)

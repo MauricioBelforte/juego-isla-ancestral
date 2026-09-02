@@ -123,8 +123,20 @@ func stop_dialogue() -> void:
 	_grafo_actual = null
 	dialogue_ended.emit(_dialogue_id, ultimo)
 
+## M21 (iter 10 / Hy3 WorkBuddy): estado de tipeo. La UI lo setea via set_tipeando()
+## para que advance() respete el texto en curso (RF4 / [?] D.3: "advance() que respeta
+## tipeo activo"). El manager es capa sin UI, asi que delega el flag a quien lo consume.
+var _tipeando: bool = false
+
+func set_tipeando(valor: bool) -> void:
+	_tipeando = valor
+
 func advance() -> void:
 	if not is_dialogue_active() or _nodo_actual == null:
+		return
+	# Si la UI esta tipeando, el avance inmediato no debe saltar la linea:
+	# la UI completa el texto primero y vuelve a llamar advance() con _tipeando=false.
+	if _tipeando:
 		return
 	var siguiente := _nodo_actual.next_id
 	if siguiente == "":

@@ -1,0 +1,2 @@
+
+=== Resultado: 268 grafos auditados, 268 OK, 1 con problemas ===

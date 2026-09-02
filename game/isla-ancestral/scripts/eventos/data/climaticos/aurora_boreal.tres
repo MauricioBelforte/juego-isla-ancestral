@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "aurora_boreal"
+tipo = 4
+nombre_clave = &"aurora_boreal_nombre"
+descripcion_clave = &"aurora_boreal_desc"
+dia = 0
+mes = -1
+estacion = 3
+hora_inicio = 23 * 60
+hora_fin = 23 * 60 + 59
+dias_aviso = 0
+prioridad = 40
+recompensas = [ExtResource("2_recomp")]
+condiciones = []
+flags = {"es_climatico": true, "probabilidad_diaria": 0.05}

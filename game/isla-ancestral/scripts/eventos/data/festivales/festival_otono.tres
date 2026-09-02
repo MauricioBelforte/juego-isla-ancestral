@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "festival_otono"
+tipo = 0
+nombre_clave = &"festival_otono_nombre"
+descripcion_clave = &"festival_otono_desc"
+dia = 15
+mes = 9
+estacion = 2
+hora_inicio = 8 * 60
+hora_fin = 20 * 60
+dias_aviso = 3
+prioridad = 100
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_festival": true, "decoracion": "hojas_cometas"}

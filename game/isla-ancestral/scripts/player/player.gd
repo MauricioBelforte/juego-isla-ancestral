@@ -41,6 +41,15 @@ var _q_prev_mano: bool = false
 var _inventario: Node = null
 var _item_database: Node = null
 
+# M57 iter. 2 (glm-5.3-flash): helper de migración — accion_justa por
+# ControlInput (capa única de acciones RF2) con fallback a Input directo
+# si ControlInput no está disponible (headless/test).
+func _accion_justa_m57(accion: String) -> bool:
+	var ci := get_node_or_null("/root/ControlInput")
+	if ci != null and ci.has_method("accion_justa"):
+		return bool(ci.accion_justa(accion))
+	return Input.is_action_just_pressed(accion)
+
 func _ready() -> void:
 	move_speed = 25.0  # DEV: velocidad de desarrollo (la escena player.tscn sobrescribe el @export con 5.0)
 	print("[DEV] move_speed=", move_speed)
@@ -685,8 +694,8 @@ func _process(delta: float) -> void:
 	# E20: Mover preview de drag con el mouse
 	if _dragging and _drag_preview != null:
 		_drag_preview.global_position = get_viewport().get_mouse_position() + Vector2(16, 16)
-	# Cierre con ESC
-	if _inventory_open and Input.is_action_just_pressed("ui_cancel"):
+	# Cierre con ESC (M57 iter. 2: vía ControlInput, capa única de acciones)
+	if _inventory_open and ControlInput.accion_justa("inventario"):
 		if _dragging:
 			_cancel_drag()
 		else:

@@ -173,6 +173,14 @@ func _estacion_actual() -> int:
 	return 0
 
 func _estacion_nombre(est: int) -> String:
+	# M30 iter. 3 (glm-5.3-flash): nombres localizables por clave (M87) —
+	# CLOCK.ESTACIONES.0..3 en los .po; fallback al hardcode del núcleo si
+	# Localization no está disponible (headless).
+	var loc := get_node_or_null("/root/Localization")
+	if loc != null and loc.has_method("tr_key"):
+		var traducido := String(loc.tr_key("clock", "estaciones", str(clampi(est, 0, 3))))
+		if traducido != "" and not traducido.begins_with("CLOCK."):
+			return traducido
 	var NOMBRES := ["Primavera", "Verano", "Otoño", "Invierno"]
 	return NOMBRES[clampi(est, 0, 3)]
 

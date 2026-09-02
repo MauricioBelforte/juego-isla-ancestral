@@ -83,6 +83,13 @@ func has_flag(clave: String) -> bool:
 		clave = "flag_" + clave
 	return _banderas.has(clave)
 
+## Elimina una bandera (setear a false NO es lo mismo: has_flag sigue true).
+## Uso: tests y M22 (re-aventura), no rompe el contrato de banderas M59.
+func remove_flag(clave: String) -> void:
+	if not clave.begins_with("flag_"):
+		clave = "flag_" + clave
+	_banderas.erase(clave)
+
 ## ── Internos ─────────────────────────────────────────────
 
 func _get_amistad(npc_id: String, default: Variant) -> Variant:

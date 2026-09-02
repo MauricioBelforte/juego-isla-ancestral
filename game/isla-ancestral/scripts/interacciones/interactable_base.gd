@@ -2,7 +2,7 @@
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M70: Interacciones — InteractableBase (Node3D con auto-registro).
+# M70: Interacciones - InteractableBase (Node3D con auto-registro).
 # Clase base opcional para consumidores que quieren delegar el ciclo de vida al
 # InteractionManager. NO obligatoria: cualquier nodo puede implementar IInteractable
 # y llamar InteractionManager.registrar() manualmente.
@@ -11,16 +11,16 @@
 class_name InteractableBase
 extends Node3D
 
-## Categoria semantica (np | /cof | re /puerta /cosecha /animal /objeto /evento /decorativo).
+# Categoria semantica (np | /cof | re /puerta /cosecha /animal /objeto /evento /decorativo).
 @export var categoria: StringName = &"objeto"
-## Prioridad base (RF5: mayor gana en empate).
+# Prioridad base (RF5: mayor gana en empate).
 @export var prioridad: int = 0
-## Radio de deteccion (m). Default 1.5 m (sumado a DEFAULT_RANGO del manager = 4 m).
+# Radio de deteccion (m). Default 1.5 m (sumado a DEFAULT_RANGO del manager = 4 m).
 @export var radio: float = 1.5
-## Si true, el nodo se auto-registra al entrar al arbol (default true).
+# Si true, el nodo se auto-registra al entrar al arbol (default true).
 @export var auto_register: bool = true
 
-## Estado del interactuable (RF4 filtro).
+# Estado del interactuable (RF4 filtro).
 var estado: int = 0  # EstadoInteractuable.DISPONIBLE
 
 func _ready() -> void:
@@ -35,10 +35,13 @@ func _exit_tree() -> void:
 		if mgr != null:
 			mgr.desregistrar(self)
 
-## ── Implementacion por defecto del contrato IInteractable ─────
+# Implementacion por defecto del contrato IInteractable --------------------
 
 func obtener_estado() -> int:
 	return estado
+
+func obtener_prioridad() -> int:
+	return prioridad
 
 func obtener_categoria() -> StringName:
 	return categoria
@@ -70,7 +73,14 @@ func cancelar_interaccion() -> void:
 func obtener_duracion_esperada() -> float:
 	return 0.0
 
-## ── Helpers ────────────────────────────────────────────────────
+# Restaura el estado persistido (RF18 / M59). El InteractionManager llama a esto
+# desde registrar() si existe un snapshot para esta instancia. Por defecto solo
+# restaura el estado publico; los consumidores pueden override para mas campos.
+func aplicar_estado_guardado(saved: Dictionary) -> void:
+	if saved.has("estado"):
+		estado = int(saved["estado"])
+
+# Helpers -------------------------------------------------------------------
 
 func _get_manager() -> Node:
 	return Engine.get_main_loop().root.get_node_or_null("interacciones")

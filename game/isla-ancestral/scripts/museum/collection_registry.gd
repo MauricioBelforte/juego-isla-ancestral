@@ -1,0 +1,199 @@
+# Modelo: glm-5.3-flash
+# Plataforma: Kilo Code
+# Fecha: 2026-09-01
+#
+# M37: Museos y Colecciones — CollectionRegistry (autoload "CollectionRegistry")
+# Única autoridad de progreso (03-Diseno §2.1):
+#  - Qué piezas están registradas en cada exposición y qué recompensas se otorgaron.
+#  - Emite item_registered / exhibition_completed (una sola vez, marca guardada).
+#  - Persistencia ISaveProvider M59: sección "collections".
+#  - Exposiciones data-driven en data/museum/exhibiciones.json (M34 pesca
+#    capturada, M25 fósiles, M15/M33 flora — piezas físicas del inventario).
+# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+extends Node
+
+signal item_registered(exhibition_id: String, item_id: String)
+signal exhibition_completed(exhibition_id: String)
+
+## id_exposicion -> {nombre, categoria, items: Array[String], recompensa_item_id, recompensa_nombre}
+var _exposiciones: Dictionary = {}
+## id_exposicion -> Array[String] de items registrados
+var _registradas: Dictionary = {}
+## id_exposicion -> true si la recompensa ya se otorgó (idempotencia §4.2)
+var _recompensas: Dictionary = {}
+
+
+func _ready() -> void:
+	_cargar_exposiciones()
+	_registrar_proveedor_guardado()
+
+
+func _cargar_exposiciones() -> void:
+	_exposiciones.clear()
+	var texto := FileAccess.get_file_as_string("res://data/museum/exhibiciones.json")
+	var parseado: Variant = JSON.parse_string(texto)
+	if typeof(parseado) != TYPE_DICTIONARY:
+		push_error("[M37] exhibiciones.json inválido")
+		return
+	for exp in parseado.get("exposiciones", []):
+		var id := String(exp.get("id", ""))
+		if id.is_empty():
+			continue
+		var items: Array[String] = []
+		for it in exp.get("items", []):
+			items.append(String(it))
+		_exposiciones[id] = {
+			"nombre": String(exp.get("nombre", id)),
+			"descripcion": String(exp.get("descripcion", "")),
+			"categoria": String(exp.get("categoria", "pedestal")),
+			"origen": String(exp.get("origen", "")),
+			"items": items,
+			"recompensa_item_id": String(exp.get("recompensa_item_id", "")),
+			"recompensa_nombre": String(exp.get("recompensa_nombre", "")),
+		}
+	print("[M37] Exposiciones cargadas: %d" % _exposiciones.size())
+
+
+func _registrar_proveedor_guardado() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("register_provider"):
+		sm.register_provider(self)
+
+
+## ── API pública (03-Diseno §5) ──────────────────────────
+
+func exposiciones_count() -> int:
+	return _exposiciones.size()
+
+
+func pertenece(exhibition_id: String, item_id: String) -> bool:
+	var exp: Dictionary = _exposiciones.get(exhibition_id, {})
+	return String(item_id) in exp.get("items", [])
+
+
+func register_item(exhibition_id: String, item_id: String) -> bool:
+	# §4.4.3: si ya está registrado, la operación es no-op idempotente
+	if is_registered(exhibition_id, item_id):
+		return false
+	if not _exposiciones.has(exhibition_id):
+		return false
+	if not _registradas.has(exhibition_id):
+		_registradas[exhibition_id] = []
+	_registradas[exhibition_id].append(String(item_id))
+	item_registered.emit(exhibition_id, String(item_id))
+	# §4.2: exposición completa → una sola vez (marca guardada)
+	if is_exhibition_completed(exhibition_id) and not is_reward_claimed(exhibition_id):
+		exhibition_completed.emit(exhibition_id)
+	return true
+
+
+func is_registered(exhibition_id: String, item_id: String) -> bool:
+	return _registradas.has(exhibition_id) and String(item_id) in _registradas[exhibition_id]
+
+
+func is_exhibition_completed(exhibition_id: String) -> bool:
+	var exp: Dictionary = _exposiciones.get(exhibition_id, {})
+	if exp.is_empty():
+		return false
+	for item_id in exp.get("items", []):
+		if not is_registered(exhibition_id, String(item_id)):
+			return false
+	return true
+
+
+func get_registered(exhibition_id: String) -> Array:
+	return (_registradas.get(exhibition_id, []) as Array).duplicate()
+
+
+## Progreso de una exposición: {registered, total, percent}
+func get_exhibition_progress(exhibition_id: String) -> Dictionary:
+	var exp: Dictionary = _exposiciones.get(exhibition_id, {})
+	var total: int = (exp.get("items", []) as Array).size()
+	var reg: int = get_registered(exhibition_id).size()
+	var percent := 0.0
+	if total > 0:
+		percent = float(reg) / float(total)
+	return {"registered": reg, "total": total, "percent": percent}
+
+
+## Progreso global del museo (cartel de entrada, §7)
+func get_total_progress() -> float:
+	var total := 0
+	var reg := 0
+	for id in _exposiciones:
+		var p: Dictionary = get_exhibition_progress(String(id))
+		total += int(p.get("total", 0))
+		reg += int(p.get("registered", 0))
+	if total == 0:
+		return 0.0
+	return float(reg) / float(total)
+
+
+## Recompensa única (idempotente): marca y devuelve el ítem de recompensa
+func otorgar_recompensa(exhibition_id: String) -> String:
+	if not is_exhibition_completed(exhibition_id):
+		return ""
+	if is_reward_claimed(exhibition_id):
+		return ""  # §4.2.4: nunca doble recompensa
+	_exposiciones[exhibition_id]["recompensa_otorgada"] = true
+	_recompensas[exhibition_id] = true
+	var inv := get_node_or_null("/root/Inventario")
+	var item := String(_exposiciones[exhibition_id].get("recompensa_item_id", ""))
+	if inv != null and item != "":
+		inv.agregar_items({item: 1})
+	return item
+
+
+func mark_reward_claimed(exhibition_id: String) -> void:
+	_recompensas[exhibition_id] = true
+
+
+func is_reward_claimed(exhibition_id: String) -> bool:
+	return _recompensas.has(exhibition_id)
+
+
+## Lista de piezas DONABLES de una exposición: no registradas + presentes
+## en el inventario del jugador (para la UI de donación §4.1.2)
+func donables_pendientes(exhibition_id: String) -> Array[String]:
+	var result: Array[String] = []
+	var inv := get_node_or_null("/root/Inventario")
+	var exp: Dictionary = _exposiciones.get(exhibition_id, {})
+	for item_id in exp.get("items", []):
+		var iid := String(item_id)
+		if is_registered(exhibition_id, iid):
+			continue
+		if inv != null and inv.count_item(iid) > 0:
+			result.append(iid)
+	return result
+
+
+## ── Persistencia (M59, §8: bloque único atómico) ────────
+
+func get_section_name() -> String:
+	return "collections"
+
+
+func get_save_data() -> Dictionary:
+	var piezas := {}
+	for id in _registradas:
+		piezas[String(id)] = get_registered(String(id))
+	return {
+		"piezas": piezas,
+		"recompensas": _recompensas.keys(),
+	}
+
+
+func restore_save_data(data: Dictionary) -> void:
+	_registradas.clear()
+	var piezas: Dictionary = data.get("piezas", {})
+	for id in piezas:
+		if _exposiciones.has(String(id)):
+			var lista: Array[String] = []
+			for p in piezas[id]:
+				lista.append(String(p))
+			_registradas[String(id)] = lista
+		else:
+			print("[M37] Huérfana ignorada al cargar: exposición %s" % String(id))
+	_recompensas.clear()
+	for r in data.get("recompensas", []):
+		_recompensas[String(r)] = true

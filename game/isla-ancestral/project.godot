@@ -8,6 +8,8 @@
 
 config_version=5
 
+"ï»¿config_version"=5
+
 [application]
 
 config/name="isla-ancestral"
@@ -45,6 +47,14 @@ ControlInput="*res://scripts/controls/control_input.gd"
 ResourceManager="*res://scripts/resources/resource_manager.gd"
 mineria="*res://scripts/mineria/mining_manager.gd"
 interacciones="*res://scripts/interacciones/interaction_manager.gd"
+hardware="*res://scripts/hardware/hardware_manager.gd"
+fauna_registry="*res://scripts/fauna/fauna_registry.gd"
+fauna="*res://scripts/fauna/fauna_manager.gd"
+animal_ai="*res://scripts/animales_ia/m65_animal_ai.gd"
+coleccionables="*res://scripts/coleccionables/coleccionables_manager.gd"
+hotbar="*res://scripts/inventario/hotbar_state.gd"
+inventario_helper="*res://scripts/inventario/inventario_iter4.gd"
+inventario_iter5="*res://scripts/inventario/inventario_iter5.gd"
 Localization="*res://scripts/localization/localization_manager.gd"
 Balance="*res://scripts/balance/balance_service.gd"
 Tutorial="*res://scripts/tutorial/tutorial_manager.gd"
@@ -56,18 +66,62 @@ Farm="*res://scripts/farm/farm_service.gd"
 Fishing="*res://scripts/fishing/fishing_manager.gd"
 Weather="*res://scripts/clima/weather_service.gd"
 Historia="*res://scripts/historia/story_manager.gd"
+Historias="*res://scripts/historias/secondary_stories_service.gd"
 Barter="*res://scripts/economia/barter_system.gd"
+TravelService="*res://scripts/viajes/travel_service.gd"
+CollectionRegistry="*res://scripts/museum/collection_registry.gd"
+DonationService="*res://scripts/museum/donation_service.gd"
+Diary="*res://scripts/diario/diary_service.gd"
+PlayerProfile="*res://scripts/progresion/player_profile.gd"
+ProgressionManager="*res://scripts/progresion/progression_manager.gd"
+Achievements="*res://scripts/logros/achievement_service.gd"
+AudioConfig="*res://scripts/audio/audio_config_service.gd"
+StreamManager="*res://scripts/stream/stream_manager.gd"
+TerrainProvider="*res://scripts/terrenos/terrain_provider.gd"
 GameFlowManager="*res://scripts/core/game_flow_manager.gd"
 SceneManager="*res://scripts/core/scene_manager.gd"
+DataStore="*res://scripts/datos/data_store.gd"
+MotivacionManager="*res://scripts/motivacion/motivacion_manager.gd"
+PlatformManager="*res://scripts/plataformas/platform_manager.gd"
+WorldBible="*res://scripts/world/world_bible.gd"
+MemoryMonitor="*res://scripts/rendimiento/memoria/memory_monitor.gd"
+MusicDirector="*res://scripts/audio/music_director.gd"
+AmbientDirector="*res://scripts/audio/ambient_director.gd"
+SFXManager="*res://scripts/audio/sfx_manager.gd"
+FeedbackDirector="*res://scripts/audio/feedback_director.gd"
+NarrativeSound="*res://scripts/audio/narrative_sound.gd"
+CrashReporter="*res://scripts/crash/crash_reporter.gd"
+CiCdManager="*res://scripts/ci/cicd_manager.gd"
+BuildConfigManager="*res://scripts/build/build_config_manager.gd"
+UpdateManager="*res://scripts/updates/update_manager.gd"
+DevTools="*res://scripts/dev/dev_tools.gd"
+SecurityManager="*res://scripts/security/security_manager.gd"
+FontCatalog="*res://scripts/fonts/font_catalog.gd"
+BackupManager="*res://scripts/backup/backup_manager.gd"
+DlcManager="*res://scripts/dlc/dlc_manager.gd"
+SupportManager="*res://scripts/support/support_manager.gd"
+ModdingManager="*res://scripts/modding/modding_manager.gd"
+UgcManager="*res://scripts/ugc/ugc_manager.gd"
+CommunityManager="*res://scripts/community/community_manager.gd"
+NPCManager="*res://scripts/ia_npc/npc_manager.gd"
+eventos="*res://scripts/eventos/event_manager.gd"
+EquipmentManager="*res://scripts/player/equipment_manager.gd"
+NPCVisualDatabase="*res://scripts/data/npc_visual_database.gd"
+WorldLocations="*res://scripts/data/world_locations.gd"
+EnchantmentSystem="*res://scripts/enchantment/enchantment_system.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://scripts/editor/plugin_herramientas.gd")
+
 [gdscript]
 
-"#M111-ConfiguraciÃ³ndelinterycalidaddecÃ³digo#HabilitarlinterestÃ¡ticodeGDScriptformatter/indent/type"=1
+"#M111-ConfiguraciÃƒÂ³ndelinterycalidaddecÃƒÂ³digo#HabilitarlinterestÃƒÂ¡ticodeGDScriptformatter/indent/type"=1
 formatter/indent/size=4
 formatter/indent/continuation=4
 formatter/indent/preprocessor=1
@@ -144,9 +198,20 @@ inventario={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"location":0,"echo":false,"script":null)
 ]
 }
-favorito={
+equipamiento={
 "deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
+favorito={
+"deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
+]
+}
+saltar={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
 hotbar_1={

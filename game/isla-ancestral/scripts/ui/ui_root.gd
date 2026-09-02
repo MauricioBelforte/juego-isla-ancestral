@@ -26,6 +26,7 @@ var confirm_popup: Node
 var crafting_ui: Node = null
 var inventory_layer: Node = null
 var shop_ui: Node = null
+var equipment_ui: Node = null
 
 func _ready() -> void:
 	layer = 100
@@ -82,9 +83,16 @@ func _build_layers() -> void:
 		shop_ui.name = "ShopUI"
 		add_child(shop_ui)
 
-	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s)" % [
+	# Panel de vestimenta (M155, consume EquipmentManager) — 4 slots + catálogo
+	var eq_load := load("res://scripts/ui/layers/equipment_layer.gd")
+	if eq_load:
+		equipment_ui = eq_load.new()
+		equipment_ui.name = "EquipmentLayer"
+		add_child(equipment_ui)
+
+	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s)" % [
 		dialog_layer != null, pause_layer != null, menus_layer != null,
-		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null])
+		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null, equipment_ui != null])
 
 func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> void:
 	if script == null:

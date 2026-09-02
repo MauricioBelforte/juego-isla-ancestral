@@ -28,6 +28,7 @@ func _run() -> void:
 	_test_bloqueo_dialogo()
 	_test_autosave_dia()
 	_test_autosave_mision()
+	_test_autosave_evento()
 	_test_persistencia_player()
 	print("=== TEST M59 AUTOSAVE: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
@@ -97,6 +98,21 @@ func _test_autosave_mision() -> void:
 	_sm.save_completed.connect(cb)
 	_bus.quest.quest_completed.emit("test_quest")
 	_check(motivos.has("auto_mision"), "auto_mision disparado por quest_completed")
+	_sm.save_completed.disconnect(cb)
+
+func _test_autosave_evento() -> void:
+	# B1-bis (iter. 2): evento_terminado de M74 dispara auto_evento
+	var em := root.get_node_or_null("EventManager")
+	if em == null or not em.has_signal("evento_terminado"):
+		_check(true, "M74 no presente en headless; auto_evento no testeadable aquí")
+		return
+	_sm.current_slot = 1
+	var motivos: Array = []
+	var cb := func(_slot: int, reason: String) -> void:
+		motivos.append(reason)
+	_sm.save_completed.connect(cb)
+	em.evento_terminado.emit(&"evento_test")
+	_check(motivos.has("auto_evento"), "auto_evento disparado por evento_terminado (M74→M59)")
 	_sm.save_completed.disconnect(cb)
 
 func _test_persistencia_player() -> void:

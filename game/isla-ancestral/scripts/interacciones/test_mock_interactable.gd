@@ -67,5 +67,8 @@ func is_interactable(_interactor) -> bool:
 func get_interaction_priority() -> int:
 	return mock_prioridad
 
+func obtener_prioridad() -> int:
+	return mock_prioridad
+
 func get_interaction_range() -> float:
 	return mock_radio

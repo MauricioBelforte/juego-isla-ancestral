@@ -77,6 +77,18 @@ func apply_effects(session_vars: Dictionary, _estado_mundo: Dictionary = {}) -> 
 					var base: float = float(ws.get_flag(clave, 0.0))
 					ws.set_flag(clave, base + float(ef.get("valor", 1.0)))
 			continue
+		# M21 (iter 10 / Hy3 WorkBuddy): efectos de amistad hacia un NPC (M19).
+		# destino == "amistad" + clave = <npc_id> aplica set/increment a Friendship.
+		if destino == "amistad":
+			var fs = Engine.get_main_loop().root.get_node_or_null("/root/Friendship") if Engine.get_main_loop() else null
+			if fs == null or not fs.has_method("set_nivel"):
+				continue
+			match accion:
+				"set":
+					fs.set_nivel(clave, int(ef.get("valor", 0)))
+				"increment":
+					var base_i: int = int(fs.get_nivel(clave)) if fs.has_method("get_nivel") else 0
+					fs.set_nivel(clave, base_i + int(ef.get("valor", 1)))
 		match accion:
 			"set":
 				session_vars[clave] = ef.get("valor", null)

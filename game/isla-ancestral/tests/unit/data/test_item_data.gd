@@ -104,3 +104,36 @@ func test_es_valido_false_invalid_size() -> void:
 
 	item.tamano = Vector2i(-1, 1)
 	assert_that(item.es_valido()).is_false()
+
+## --- ItemDatabase (M159) --- ##
+
+func test_item_database_autoload_disponible() -> void:
+	assert_that(ItemDatabase).is_not_null()
+
+func test_item_database_tiene_items_cargados() -> void:
+	assert_that(ItemDatabase.count()).is_greater_than(0)
+
+func test_get_item_por_id_existente() -> void:
+	var item := ItemDatabase.get_item("OBJ-COC-001")
+	assert_that(item).is_not_null()
+	assert_that(item.nombre).is_equal_to("Horno de leña")
+
+func test_get_item_por_id_inexistente() -> void:
+	var item := ItemDatabase.get_item("OBJ-INE-000")
+	assert_that(item).is_null()
+
+func test_get_items_by_category_cocina() -> void:
+	var items := ItemDatabase.get_items_by_category(ItemData.Categoria.COCINA)
+	assert_that(items.size()).is_greater_than(0)
+	for it in items:
+		assert_that(it.categoria).is_equal_to(ItemData.Categoria.COCINA)
+
+func test_get_items_by_rarity_comun() -> void:
+	var items := ItemDatabase.get_items_by_rarity(ItemData.Rareza.COMUN)
+	assert_that(items.size()).is_greater_than(0)
+	for it in items:
+		assert_that(it.rareza).is_equal_to(ItemData.Rareza.COMUN)
+
+func test_validar_ids_unicos_true() -> void:
+	assert_that(ItemDatabase.validar_ids_unicos()).is_true()
+

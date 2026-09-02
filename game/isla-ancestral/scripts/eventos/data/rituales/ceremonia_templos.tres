@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "ceremonia_templos"
+tipo = 3
+nombre_clave = &"ceremonia_templos_nombre"
+descripcion_clave = &"ceremonia_templos_desc"
+dia = 1
+mes = 1
+estacion = 0
+hora_inicio = 5 * 60
+hora_fin = 8 * 60
+dias_aviso = 7
+prioridad = 80
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_ritual": true, "requisito": "sello_1"}

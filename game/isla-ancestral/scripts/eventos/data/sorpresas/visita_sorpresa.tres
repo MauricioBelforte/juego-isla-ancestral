@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "visita_sorpresa"
+tipo = 5
+nombre_clave = &"visita_sorpresa_nombre"
+descripcion_clave = &"visita_sorpresa_desc"
+dia = 0
+mes = 0
+estacion = -1
+hora_inicio = 10 * 60
+hora_fin = 14 * 60
+dias_aviso = 0
+prioridad = 20
+recompensas = [ExtResource("2_recomp")]
+ocupacion_npc = []
+flags = {"es_sorpresa": true, "probabilidad_diaria": 0.1}

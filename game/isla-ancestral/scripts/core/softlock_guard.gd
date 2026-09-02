@@ -63,6 +63,17 @@ func _ready() -> void:
 		checkpoints = _CheckpointManager.new()
 		add_child(checkpoints)
 	_registrar_invariantes_por_defecto()
+	_conectar_disparos()
+
+## M66 iter. 2 (glm-5.3-flash): disparos del detector (checklist ítems 11-12)
+## — transición de escena (M40 infra.carga_iniciada) y guardado (M59 save_completed).
+func _conectar_disparos() -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null and bus.infra != null and bus.infra.has_signal("carga_iniciada"):
+		bus.infra.carga_iniciada.connect(func(_ruta: String): forzar_chequeo("transicion_escena"))
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_signal("save_completed"):
+		sm.save_completed.connect(func(_slot: int, _reason: String): forzar_chequeo("guardado"))
 
 ## Registra las 6 invariantes base en orden de prioridad (jugador primero).
 func _registrar_invariantes_por_defecto() -> void:

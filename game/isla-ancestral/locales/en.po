@@ -173,3 +173,15 @@ msgstr "You don't have that item to sell."
 
 msgid "TIENDAS.CERRADA"
 msgstr "The store is closed. Come back during business hours."
+
+msgid "CLOCK.ESTACIONES.0"
+msgstr "Spring"
+
+msgid "CLOCK.ESTACIONES.1"
+msgstr "Summer"
+
+msgid "CLOCK.ESTACIONES.2"
+msgstr "Autumn"
+
+msgid "CLOCK.ESTACIONES.3"
+msgstr "Winter"

@@ -37,10 +37,20 @@ func is_interactable(interactor: Node) -> bool:
 func get_interaction_priority() -> int:
 	return 0
 
+## Prioridad de interacción (M70 v2, español). Default delega a get_interaction_priority()
+## para mantener compatibilidad con consumidores v1. Sobrescribir en subclases para
+## evitar el doble dispatch.
+func obtener_prioridad() -> int:
+	return get_interaction_priority()
+
 ## Distancia máxima de interacción en metros/unidades.
 # @return Distancia (default 2.0)
 func get_interaction_range() -> float:
 	return 2.0
+
+## Distancia máxima de interacción (M70 v2, español). Default delega a v1.
+func obtener_rango() -> float:
+	return get_interaction_range()
 
 ## ── M70: métodos opcionales ampliados (non-breaking) ────────────
 

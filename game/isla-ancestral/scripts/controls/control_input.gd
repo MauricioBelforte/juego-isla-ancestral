@@ -73,8 +73,11 @@ func eje(accion: String) -> float:
 	return _aplicar_deadzone(valor, dead)
 
 ## Vector de movimiento 2D combinando las 4 acciones direccionales.
+## glm-5.3-flash (M57 iter. 2): ejes corregidos — get_vector espera
+## (negativo_x, positivo_x, negativo_y, positivo_y) = (oeste, este, norte, sur).
+## La versión previa tenía este/sur como negativos (movimiento invertido).
 func vector_movimiento() -> Vector2:
-	var v := Input.get_vector("mover_este", "mover_oeste", "mover_sur", "mover_norte")
+	var v := Input.get_vector("mover_oeste", "mover_este", "mover_norte", "mover_sur")
 	return _aplicar_deadzone_vector(v)
 
 ## Ejes de camara con sensibilidad e inversion aplicadas (RF4).

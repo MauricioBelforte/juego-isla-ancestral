@@ -17,6 +17,7 @@ func _ready():
 	_poblar_recursos()
 	_crear_estaciones_crafting()
 	_crear_farm_controller()
+	_crear_shaman()
 	print("Isla Ancestral — Isla Raíz")
 
 ## M33 (iter. 2): controller agrícola (arar/regar/cosechar con interactuar)
@@ -193,5 +194,44 @@ func _ajustar_spawn_superficie() -> void:
 		var altura_spawn: int = locator.get_height(256, 256)
 		var player = get_node_or_null("Player")
 		if player:
-			player.global_position = Vector3(256, altura_spawn + 3, 256)
-			print("[M09] Spawn sobre superficie calculada Y=", altura_spawn + 3)
+			if altura_spawn >= 0:
+				player.global_position = Vector3(256, altura_spawn + 3, 256)
+				print("[M09] Spawn sobre superficie calculada Y=", altura_spawn + 3)
+			elif not _spawn_ajustado:
+				# M167: el locator aún no tiene el terreno en el arranque
+				# (h = -1). NO enterrar al jugador: conservar (256,16,256)
+				# y reintentar hasta que el generador esté disponible.
+				_reintentar_spawn()
+			else:
+				print("[M09] Spawn: locator sin terreno tras reintentos, en (256,16,256)")
+
+var _spawn_ajustado: bool = false
+var _spawn_intentos: int = 0
+
+func _reintentar_spawn() -> void:
+	_spawn_intentos += 1
+	if _spawn_intentos > 6:
+		_spawn_ajustado = true
+		return
+	var timer := get_tree().create_timer(0.5)
+	timer.timeout.connect(_ajustar_spawn_superficie)
+
+## M163: spawn del Chaman del Monte en la Isla Raiz (montaña remota).
+func _crear_shaman() -> void:
+	var shaman_script = load("res://scripts/enchantment/shaman_npc.gd")
+	if not shaman_script:
+		push_warning("[M163] ShamanNPC script no encontrado")
+		return
+	var shaman = shaman_script.new()
+	shaman.name = "ShamanMonte"
+	add_child(shaman)
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator and locator.has_method("get_height"):
+		var h: int = locator.get_height(320, 300)
+		if h >= 0:
+			shaman.global_position = Vector3(320, h + 1, 300)
+		else:
+			shaman.global_position = Vector3(320, 35, 300)
+	else:
+		shaman.global_position = Vector3(320, 35, 300)
+	print("[M163] Chaman del Monte spawneado en ", shaman.global_position)

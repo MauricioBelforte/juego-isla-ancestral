@@ -28,6 +28,7 @@ func cambiar_escena(ruta: String) -> bool:
 		return false
 	_cargando = true
 	cambio_iniciado.emit(ruta)
+	_emitir_infra("carga_iniciada", ruta)
 	# §9.20/§9.25: diferido — NUNCA change_scene dentro de _ready/_input directo
 	call_deferred("_do_cambio", ruta)
 	return true
@@ -44,8 +45,20 @@ func _do_cambio(ruta: String) -> void:
 		cambio_fallido.emit(ruta, "error_%d" % err)
 		return
 	cambio_completado.emit(ruta)
+	_emitir_infra("carga_completada", ruta)
 	print("[M40] Escena cargada: " + ruta)
 
 ## ¿Hay una carga en curso? (para bloquear UI, AGENTS §8)
 func esta_cargando() -> bool:
 	return _cargando
+
+## Reenvía eventos de carga por EventBus.infra (dominio infra M40, iter. 2).
+## Sin class_name: acceso por get_node_or_null (pitfall §9.17/§9.51).
+func _emitir_infra(evento: String, ruta: String) -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	var infra: Variant = bus.get("infra")
+	if infra == null or not (infra is Object) or not infra.has_signal(evento):
+		return
+	infra[evento].emit(ruta)

@@ -252,7 +252,12 @@ func registrar_captura(pez, tamano: float) -> void:
 	_coleccion[pez.id] = entry
 
 func entrega_museo(_pez) -> bool:
-	# M37 no implementado: placeholder honesto
+	# M37 núcleo implementado (glm-5.3-flash): la donación real la procesa
+	# DonationService.donate("peces", pez.id) con el inventario del jugador.
+	# Este método queda como compat (devuelve si la pieza ya está registrada).
+	var registry := get_node_or_null("/root/CollectionRegistry")
+	if registry != null and registry.has_method("is_registered"):
+		return bool(registry.is_registered("peces", String(_pez.id)))
 	return false
 
 func get_collection_data() -> Dictionary:

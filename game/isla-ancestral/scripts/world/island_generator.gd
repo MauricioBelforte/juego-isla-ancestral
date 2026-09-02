@@ -128,10 +128,14 @@ func get_block_at(x: int, y: int, z: int) -> int:
 	var height := get_height(x, z)
 	var dist := sqrt(pow(float(x - island_radius), 2.0) + pow(float(z - island_radius), 2.0)) / float(island_radius)
 	
-	# Fuera del agua: agua CLARA (turquesa, pisable) en la banda costera
-	# (0.94-0.98) y agua PROFUNDA (azul oscuro) en el exterior
+	# Fuera del terreno: agua en dos niveles (spec M167). Banda costera
+	# 0.94-0.98 = agua CLARA turquesa (SHALLOW_WATER) pisable sobre el fondo de
+	# arena; >0.98 = agua PROFUNDA azul. La capa de agua clara se coloca en
+	# y = height+1 (=3) para que el jugador camine sumergido hasta la cintura
+	# (fix 2026-09-01, deepseek-v4-flash-vision-exp: antes y <= water_level
+	# dejaba esa celda como AIR -> el agua turquesa nunca se generaba).
 	if y > height:
-		if y <= water_level:
+		if y <= water_level + 1:
 			if dist > 0.94 and dist <= 0.98:
 				return BlockType.SHALLOW_WATER
 			return BlockType.WATER
@@ -140,7 +144,7 @@ func get_block_at(x: int, y: int, z: int) -> int:
 	# Roca madre en el fondo
 	if y <= 0:
 		return BlockType.BEDROCK
-	
+
 	# Bioma
 	var biome := _get_biome(x, z)
 	

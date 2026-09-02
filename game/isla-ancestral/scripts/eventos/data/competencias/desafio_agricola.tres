@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "desafio_agricola"
+tipo = 2
+nombre_clave = &"desafio_agricola_nombre"
+descripcion_clave = &"desafio_agricola_desc"
+dia = 21
+mes = 8
+estacion = 2
+hora_inicio = 6 * 60
+hora_fin = 15 * 60
+dias_aviso = 2
+prioridad = 70
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_competencia": true, "actividad": "agricultura"}

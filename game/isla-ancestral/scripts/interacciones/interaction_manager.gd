@@ -2,7 +2,7 @@
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M70: Interacciones — InteractionManager (autoload "interacciones").
+# M70: Interacciones - InteractionManager (autoload "interacciones").
 # Orquestador unico del modulo. NO conoce los consumidores, solo despacha por
 # contrato IInteractable + emite senales. Diseno simplificado para iter 1;
 # lo que queda fuera (prompts visuales world-space, linea de vision voxel,
@@ -15,9 +15,9 @@
 #   - SaveManager (M59) para persistencia de estado por interactuable
 #
 # Pitfalls respetados (07-GUIA-GODOT):
-#   - Sin class_name (autoload, §9.17/§9.41)
-#   - snake_case en señales (§1.1)
-#   - _ en vars no usadas (§1.3)
+#   - Sin class_name (autoload, seccion 9.17/9.41)
+#   - snake_case en senales (seccion 1.1)
+#   - _ en vars no usadas (seccion 1.3)
 
 extends Node
 
@@ -28,32 +28,34 @@ signal interaccion_terminada(objetivo, ok: bool)
 signal interaccion_cancelada(objetivo, motivo: String)
 signal estado_cambiado(estado: int)
 
-## Estado global del gestor (replica InteractionState del plan).
+# Estado global del gestor (replica InteractionState del plan).
 enum InteractionState { INACTIVO, SELECCIONANDO, INTERACTUANDO, DORMIDO }
-## Estado del interactuable (replica EstadoInteractuable del plan).
+# Estado del interactuable (replica EstadoInteractuable del plan).
 enum EstadoInteractuable { DISPONIBLE, INTERACTUANDO, NO_DISPONIBLE, OCULTO }
 
 const SECCION_SAVE := "interacciones"
 const DEFAULT_RANGO := 2.5
-const HISTERESIS_M := 0.15   # metros: mantener objetivo si nuevo esta <= 0.15 m mas cerca
+const HISTERESIS_M := 0.15  # metros: mantener objetivo si nuevo esta <= 0.15 m mas cerca
 
-## Jugador (inyectado por la escena principal o por tests)
+# Jugador (inyectado por la escena principal o por tests)
 var _jugador: Node = null
-## VoxelTool (opcional, para línea de visión; M08)
+# VoxelTool (opcional, para linea de vision; M08)
 var _voxel_tool = null
 
-## Registro de interactuables. Array (orden de registro) para determinismo.
+# Registro de interactuables. Array (orden de registro) para determinismo.
 var _interactuables: Array = []
-## Cache de evaluación de 1 frame (re-evaluado en cada _process).
+# Cache de evaluacion de 1 frame (re-evaluado en cada _process).
 var _candidatos_frame: Array = []
-## Objetivo seleccionado actualmente (duck-typed: cualquier nodo con contrato IInteractable).
+# Objetivo seleccionado actualmente (duck-typed: cualquier nodo con contrato IInteractable).
 var _objetivo_actual = null
-## Estado del gestor.
+# Estado del gestor.
 var _estado: int = InteractionState.INACTIVO
-## Estado dormido externo (pausa/UI modal).
+# Estado dormido externo (pausa/UI modal).
 var _externo_dormido: bool = false
+# Estado anterior antes de dormir (para restaurar al despertar).
+var _estado_anterior: int = -1
 
-## Persistencia: estado por interactuable (def_id -> dict).
+# Persistencia: estado por interactuable (instance_id -> dict).
 var _estado_guardado: Dictionary = {}
 
 func _ready() -> void:
@@ -61,7 +63,7 @@ func _ready() -> void:
 	var sm := _get_save_manager()
 	if sm != null and sm.has_method("register_provider"):
 		sm.register_provider(self)
-	# Cambio de día: invalidar caches que dependen del calendario (M29)
+	# Cambio de dia: invalidar caches que dependen del calendario (M29)
 	var gt := _get_game_time()
 	if gt != null and gt.has_signal("dia_cambio"):
 		gt.dia_cambio.connect(_on_dia_cambio)
@@ -74,18 +76,18 @@ func _process(_delta: float) -> void:
 		estado_cambiado.emit(_estado)
 	_evaluar_y_seleccionar()
 
-## ── API publica ─────────────────────────────────────────────
+# API publica ---------------------------------------------------------------
 
-## Inyecta el nodo jugador (M11). Llamado por la escena al arrancar.
+# Inyecta el nodo jugador (M11). Llamado por la escena al arrancar.
 func configurar_jugador(jugador: Node) -> void:
 	_jugador = jugador
 
-## Inyecta el VoxelTool (M08) para línea de visión. Opcional.
+# Inyecta el VoxelTool (M08) para linea de vision. Opcional.
 func configurar_voxel(voxel_tool) -> void:
 	_voxel_tool = voxel_tool
 
-## Registra un interactuable (orden de registro = desempate final).
-## Llamar en _ready de cada nodo que implemente IInteractable, o manualmente.
+# Registra un interactuable (orden de registro = desempate final).
+# Llamar en _ready de cada nodo que implemente IInteractable, o manualmente.
 func registrar(interactuable) -> void:
 	if interactuable == null:
 		return
@@ -97,8 +99,8 @@ func registrar(interactuable) -> void:
 		var saved: Dictionary = _estado_guardado[str(interactuable.get_instance_id())]
 		_aplicar_estado_guardado(interactuable, saved)
 
-## Desregistra un interactuable. Llamar en _exit_tree o cuando se destruye.
-## Si era el objetivo actual, lo limpia y emite objetivo_perdido.
+# Desregistra un interactuable. Llamar en _exit_tree o cuando se destruye.
+# Si era el objetivo actual, lo limpia y emite objetivo_perdido.
 func desregistrar(interactuable) -> void:
 	if interactuable == null:
 		return
@@ -107,8 +109,8 @@ func desregistrar(interactuable) -> void:
 		_objetivo_actual = null
 		objetivo_perdido.emit()
 
-## Entrada unica de input. Llamado por el input handler al presionar "interact".
-## Delega al consumidor del objetivo actual via IInteractable.interactuar().
+# Entrada unica de input. Llamado por el input handler al presionar "interact".
+# Delega al consumidor del objetivo actual via IInteractable.interactuar().
 func presionar_interact() -> void:
 	if _estado == InteractionState.DORMIDO or _externo_dormido:
 		return
@@ -129,22 +131,29 @@ func presionar_interact() -> void:
 	interaccion_iniciada.emit(obj, obj.obtener_categoria())
 	var datos := {"jugador": _jugador, "tool": _tool_en_mano(), "timestamp": Time.get_ticks_msec()}
 	obj.interactuar(datos)
+	# FIX QA (Log 378, Hy3): auto-finalizar interacciones instantaneas (duracion 0)
+	# para evitar que el gestor quede pegado en INTERACTUANDO y bloquee TODAS las
+	# interacciones siguientes (soft-lock, M66). Si el consumidor ya llamo
+	# finalizar_interaccion dentro de interactuar(), _estado ya volvio a
+	# SELECCIONANDO y este bloque no hace nada (sin doble emision).
+	if _estado == InteractionState.INTERACTUANDO and obj.obtener_duracion_esperada() <= 0.0:
+		finalizar_interaccion(obj, true)
 
-## Notifica al gestor que una interacción terminó. Llamado por el consumidor (RF9).
+# Notifica al gestor que una interaccion termino. Llamado por el consumidor (RF9).
 func finalizar_interaccion(objetivo, ok: bool) -> void:
 	if objetivo == _objetivo_actual:
 		_estado = InteractionState.SELECCIONANDO
 		estado_cambiado.emit(_estado)
 	interaccion_terminada.emit(objetivo, ok)
 
-## Cancela la interacción en curso (RF12). Llamado por UI/pausa o por el consumidor.
+# Cancela la interaccion en curso (RF12). Llamado por UI/pausa o por el consumidor.
 func cancelar_interaccion(objetivo, motivo: String) -> void:
 	if objetivo == _objetivo_actual:
 		_estado = InteractionState.SELECCIONANDO
 		estado_cambiado.emit(_estado)
 	interaccion_cancelada.emit(objetivo, motivo)
 
-## Pausa / reanuda el gestor (RF14, RF25). Llamado por UIManager (M53).
+# Pausa / reanuda el gestor (RF14, RF25). Llamado por UIManager (M53).
 func set_estado_dormido(dormido: bool) -> void:
 	_externo_dormido = dormido
 	if dormido:
@@ -158,25 +167,23 @@ func set_estado_dormido(dormido: bool) -> void:
 			_estado_anterior = -1
 			estado_cambiado.emit(_estado)
 
-var _estado_anterior: int = -1
-
-## Devuelve el objetivo actualmente seleccionado (o null).
+# Devuelve el objetivo actualmente seleccionado (o null).
 func obtener_objetivo_actual():
 	return _objetivo_actual
 
-## Devuelve el estado actual del gestor.
+# Devuelve el estado actual del gestor.
 func obtener_estado() -> int:
 	return _estado
 
-## Cantidad de interactuables registrados (para tests / debug).
+# Cantidad de interactuables registrados (para tests / debug).
 func cantidad_registrados() -> int:
 	return _interactuables.size()
 
-## Para tests: snapshot del array de candidatos del último frame.
+# Para tests: snapshot del array de candidatos del ultimo frame.
 func obtener_candidatos_frame() -> Array:
 	return _candidatos_frame.duplicate()
 
-## ── Evaluacion y seleccion (RF4-RF6, RF19) ────────────────────
+# Evaluacion y seleccion (RF4-RF6, RF19) ----------------------------------
 
 func _evaluar_y_seleccionar() -> void:
 	_candidatos_frame.clear()
@@ -185,6 +192,7 @@ func _evaluar_y_seleccionar() -> void:
 	var pos_jugador: Vector3 = _jugador.global_position
 	var rango_max := DEFAULT_RANGO
 	var candidatos_validos: Array = []
+	var objs_validos: Array = []
 	for it in _interactuables:
 		if it == null or not is_instance_valid(it):
 			continue
@@ -200,9 +208,10 @@ func _evaluar_y_seleccionar() -> void:
 		if dist_cuad > rango_total * rango_total:
 			continue  # filtro barato sin sqrt (RN-rendimiento)
 		if not it.requisitos_cumplidos(_jugador):
-			_candidatos_frame.append({"obj": it, "valido": false, "dist": dist_cuad, "prioridad": it.get_interaction_priority()})
+			_candidatos_frame.append({"obj": it, "valido": false, "dist": dist_cuad, "prioridad": it.obtener_prioridad()})
 			continue
-		candidatos_validos.append({"obj": it, "valido": true, "dist": dist_cuad, "prioridad": it.obtener_interaction_priority()})
+		candidatos_validos.append({"obj": it, "valido": true, "dist": dist_cuad, "prioridad": it.obtener_prioridad()})
+		objs_validos.append(it)
 	_candidatos_frame.append_array(candidatos_validos)
 	# Ordenar: prioridad desc, luego dist asc, luego orden de registro (estable).
 	candidatos_validos.sort_custom(_comparar_candidatos)
@@ -210,8 +219,11 @@ func _evaluar_y_seleccionar() -> void:
 		_perder_objetivo_si_corresponde()
 		return
 	var mejor: Dictionary = candidatos_validos[0]
-	# Histéresis (RF6): mantener objetivo si el nuevo no es >HISTERESIS_M más cerca.
-	if _objetivo_actual != null and _objetivo_actual in _interactuables:
+	# Histeresis (RF6): mantener objetivo si el nuevo no es >HISTERESIS_M mas cerca.
+	# FIX QA (Log 378, Hy3): solo mantener si el objetivo actual SIGUE siendo un
+	# candidato VALIDO. Si paso a OCULTO/INTERACTUANDO o dejo de cumplir requisitos,
+	# no debe quedar "pegado" como objetivo (RF12/RF22, anti-stale-target).
+	if _objetivo_actual != null and _objetivo_actual in objs_validos:
 		var dist_actual: float = _dist_cuadrada(_objetivo_actual, pos_jugador)
 		if dist_actual - mejor.dist <= HISTERESIS_M * HISTERESIS_M:
 			return  # mantener
@@ -227,13 +239,13 @@ func _comparar_candidatos(a: Dictionary, b: Dictionary) -> bool:
 	# distancia asc
 	if not is_equal_approx(a.dist, b.dist):
 		return a.dist < b.dist
-	# orden de registro: el que apareció antes gana (estable)
+	# orden de registro: el que aparecio antes gana (estable)
 	return _interactuables.find(a.obj) < _interactuables.find(b.obj)
 
 func _dist_cuadrada(obj, pos_jugador: Vector3) -> float:
 	var p: Vector3 = obj.obtener_posicion_interaccion()
-	var dx := p.x - pos_jugador.x
-	var dz := p.z - pos_jugador.z
+	var dx: float = p.x - pos_jugador.x
+	var dz: float = p.z - pos_jugador.z
 	return dx * dx + dz * dz
 
 func _perder_objetivo_si_corresponde() -> void:
@@ -241,7 +253,7 @@ func _perder_objetivo_si_corresponde() -> void:
 		_objetivo_actual = null
 		objetivo_perdido.emit()
 
-## ── Persistencia M59 ─────────────────────────────────────────
+# Persistencia M59 ---------------------------------------------------------
 
 func get_section_name() -> String:
 	return SECCION_SAVE
@@ -279,7 +291,7 @@ func _on_dia_cambio(_info: Dictionary) -> void:
 	if _estado == InteractionState.SELECCIONANDO:
 		_evaluar_y_seleccionar()
 
-## ── Helpers internos ──────────────────────────────────────────
+# Helpers internos ---------------------------------------------------------
 
 func _tool_en_mano():
 	# Sin acoplar a M13: si existe ToolController, expone tool actual.

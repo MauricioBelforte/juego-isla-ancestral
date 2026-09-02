@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "torneo_pesca"
+tipo = 2
+nombre_clave = &"torneo_pesca_nombre"
+descripcion_clave = &"torneo_pesca_desc"
+dia = 7
+mes = 3
+estacion = 0
+hora_inicio = 7 * 60
+hora_fin = 14 * 60
+dias_aviso = 2
+prioridad = 70
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_competencia": true, "actividad": "pesca"}

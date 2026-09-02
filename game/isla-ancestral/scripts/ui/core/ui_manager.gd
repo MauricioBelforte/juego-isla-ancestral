@@ -93,6 +93,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			inv_layer.toggle()
 			get_viewport().set_input_as_handled()
 			return
+	# M155: toggle del panel de equipamiento con acción `equipamiento` (E)
+	if event.is_action_pressed("equipamiento"):
+		var eq_layer = _buscar_capa("EquipmentLayer")
+		if eq_layer and eq_layer.has_method("toggle"):
+			eq_layer.toggle()
+			get_viewport().set_input_as_handled()
+			return
 	# Navegación direccional con acciones del InputMap (M57)
 	var nav: Vector2i = Vector2i.ZERO
 	if event.is_action_pressed("mover_norte"):

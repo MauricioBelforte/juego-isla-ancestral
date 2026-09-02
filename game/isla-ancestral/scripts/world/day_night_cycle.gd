@@ -8,6 +8,10 @@ const FASE_PROFUNDA: int = 4
 
 const PHASE_NAMES: Array[String] = ["ALBA", "DIA", "ATARDECER", "NOCHE", "PROFUNDA"]
 
+## M31 iter. 2 (glm-5.3-flash): iluminación data-driven.
+## Las curvas .tres de data/light/ (diseño §P1-P5) reemplazan los valores
+## hardcodeados; el JSON fase_umbral.json documenta los parámetros y franjas.
+## Fallback: si una curva falta, se usan los valores del núcleo de Log 302.
 @onready var sun: DirectionalLight3D = get_node_or_null("../DirectionalLight")
 @onready var moon: DirectionalLight3D = get_node_or_null("../DirLightLuna")
 @onready var env: WorldEnvironment = get_node_or_null("../WorldEnvironment")
@@ -15,9 +19,14 @@ const PHASE_NAMES: Array[String] = ["ALBA", "DIA", "ATARDECER", "NOCHE", "PROFUN
 var _fase_actual: int = -1
 var _tween: Tween = null
 var _gt: Node = null
+## Curvas data-driven (null = fallback hardcodeado del núcleo)
+var _day_curve: Curve = null
+var _sky_curve: Curve = null
+var _moon_curve: Curve = null
 
 
 func _ready() -> void:
+	_cargar_curvas()
 	_gt = get_node_or_null("/root/GameTime")
 	if _gt == null:
 		push_warning("[DayNightCycle] GameTime no disponible; el ciclo no se actualizara por hora")
@@ -33,6 +42,17 @@ func _ready() -> void:
 	_aplicar_iluminacion(hora_inicial, false)
 	if _gt != null and _gt.has_signal("hora_cambio"):
 		_gt.hora_cambio.connect(_on_hora_cambio)
+
+
+func _cargar_curvas() -> void:
+	# M31 iter. 2: datos §P1/P2/P5 del diseño — si un .tres falta, fallback al núcleo
+	_day_curve = load("res://data/light/day_curve.tres") as Curve
+	_sky_curve = load("res://data/light/sky_curve.tres") as Curve
+	_moon_curve = load("res://data/light/moon_curve.tres") as Curve
+	if _day_curve != null:
+		print("[DayNightCycle] Curvas data-driven cargadas (data/light/)")
+	else:
+		push_warning("[DayNightCycle] day_curve.tres ausente; fallback a valores del núcleo")
 
 
 func _on_hora_cambio(hora: int) -> void:
@@ -74,7 +94,19 @@ func _aplicar_iluminacion(hora: int, tween: bool) -> void:
 	var sun_color: Color = Color(1.0, 0.95, 0.85, 1)
 	var moon_color: Color = Color(0.7, 0.75, 0.9, 1)
 
-	if hora >= 7 and hora <= 17:
+	# M31 iter. 2: data-driven por curvas 24-puntos (diseño §P1/P2/P5);
+	# el dominio de la curva es 0-1 (fracción del día) → sample(hora/24.0).
+	# Fallback a los valores del núcleo (Log 302) si los .tres faltan.
+	if _day_curve != null and _sky_curve != null and _moon_curve != null:
+		var t := float(clampi(hora, 0, 24)) / 24.0
+		sun_energy = _day_curve.sample(t)
+		ambient_energy = _sky_curve.sample(t)
+		moon_energy = _moon_curve.sample(t)
+		if sun_energy > 0.0 and hora <= 8:
+			sun_color = Color(1.0, 0.7, 0.5, 1)  # amanecer cálido
+		elif sun_energy > 0.0 and hora >= 17:
+			sun_color = Color(0.9, 0.5, 0.3, 1)  # atardecer
+	elif hora >= 7 and hora <= 17:
 		sun_energy = 1.0
 		ambient_energy = 1.0
 	elif hora == 6 or hora == 18:

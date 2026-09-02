@@ -33,6 +33,12 @@ func _ready() -> void:
 	_gt = get_node_or_null("/root/GameTime")
 	if _gt != null and _gt.has_signal("estacion_cambio"):
 		_gt.estacion_cambio.connect(_on_estacion_cambio)
+	# M16 RF17 (glm-5.3-flash, iter. 5): M14 emite item_usado para pergaminos →
+	# flujo completo: usar item → aprender receta → consumir pergamino.
+	var inv := get_node_or_null("/root/Inventario")
+	if inv != null and inv.has_signal("item_usado"):
+		inv.item_usado.connect(_on_item_usado)
+		print("[M16] RF17: use_item de M14 conectado (pergaminos)")
 	_refrescar_estacion_actual()
 	_cargar_recetas()
 	_registrar_proveedor_guardado()
@@ -165,18 +171,30 @@ func aprender_desde_pergamino(rec_id: String) -> bool:
 	return true
 
 ## Helper M14: usa un item de tipo "pergamino_rec_<rec_id>" desde el inventario.
-## Convención de nombre del item: "pergamino_rec_tela_lino" -> rec_id "rec_tela_lino".
-## Devuelve { aprendido: bool, rec_id: String }. NO descuenta el item del inventario;
-## eso lo hace M14 al recibir el evento use_item.
+## Convención: "pergamino_rec_tela_lino" → strip "pergamino_" → "rec_tela_lino"
+## (glm-5.3-flash FIX: el prefijo anterior "pergamino_rec_" recortaba el "rec_"
+## del rec_id y la receta nunca se encontraba). Devuelve { aprendido, rec_id }.
+## NO descuenta el item del inventario; eso lo hace M14 al recibir el evento use_item.
 func usar_pergamino(item_id: String) -> Dictionary:
 	var id_limpio: String = str(item_id).strip_edges()
-	const PREFIJO := "pergamino_rec_"
+	const PREFIJO := "pergamino_"
 	if not id_limpio.begins_with(PREFIJO):
 		pergamino_consumido.emit(id_limpio, false)
 		return {"aprendido": false, "rec_id": ""}
 	var rec_id: String = id_limpio.substr(PREFIJO.length())
 	var ok: bool = aprender_desde_pergamino(rec_id)
 	return {"aprendido": ok, "rec_id": rec_id}
+
+## RF17 (glm-5.3-flash): handler de item_usado de M14 — flujo completo.
+## Un pergamino usado aprende la receta y se retira del inventario (consume).
+## Si la receta ya se conoce, el pergamino NO se retira (honesto, cozy).
+func _on_item_usado(item_id: String, _contexto: String) -> void:
+	if not str(item_id).begins_with("pergamino_rec_"):
+		return
+	var inv := get_node_or_null("/root/Inventario")
+	var res := usar_pergamino(item_id)
+	if bool(res.get("aprendido", false)) and inv != null:
+		inv.remover_items({item_id: 1})
 
 ## ── Validación y fabricación (RF6/RF7/RF8/RF11) ─────────
 

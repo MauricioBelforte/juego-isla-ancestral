@@ -29,6 +29,8 @@ signal estado_cambiado(anterior: int, nuevo: int)
 var estado: int = Estado.BOOT
 
 ## Cambia de estado validando la transición. Devuelve false si es inválida.
+## Desde iter. 2 (Log 323) también reenvía el cambio por EventBus.infra
+## (dominio infra de M40) para que la UI/escuchas no dependan de la señal local.
 func cambiar_estado(nuevo: int) -> bool:
 	if nuevo == estado:
 		return true
@@ -39,6 +41,7 @@ func cambiar_estado(nuevo: int) -> bool:
 	var anterior := estado
 	estado = nuevo
 	estado_cambiado.emit(anterior, nuevo)
+	_emitir_por_event_bus(anterior, nuevo)
 	print("[M40] Flujo: %d -> %d" % [anterior, nuevo])
 	return true
 
@@ -51,3 +54,20 @@ func es_estado(nuevo: int) -> bool:
 ## ¿El juego está en mundo jugable (o pausado sobre él)?
 func en_juego() -> bool:
 	return estado == Estado.MUNDO or estado == Estado.PAUSA
+
+## Devuelve las transiciones permitidas desde el estado actual (copia).
+## Para la UI de pausa/menú (ítem L de 05-Checklist M40).
+func transiciones_permitidas() -> Array:
+	var desde: Array = TRANSICIONES.get(estado, [])
+	return desde.duplicate()
+
+## Reenvía el cambio de estado por EventBus.infra (dominio infra M40).
+## Sin class_name: accede por get_node_or_null (pitfall §9.17/§9.51).
+func _emitir_por_event_bus(anterior: int, nuevo: int) -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	var infra: Variant = bus.get("infra")
+	if infra == null or not (infra is Object) or not infra.has_signal("game_flow_changed"):
+		return
+	infra.game_flow_changed.emit(anterior, nuevo)

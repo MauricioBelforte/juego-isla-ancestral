@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+[ext_resource type="Script" path="res://scripts/eventos/recompensa_def.gd" id="2_recomp"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "festival_luces"
+tipo = 0
+nombre_clave = &"festival_luces_nombre"
+descripcion_clave = &"festival_luces_desc"
+dia = 28
+mes = 12
+estacion = 3
+hora_inicio = 20 * 60
+hora_fin = 23 * 60 + 59
+dias_aviso = 5
+prioridad = 110
+recompensas = [ExtResource("2_recomp")]
+flags = {"es_festival": true, "es_anual": true, "decoracion": "faroles"}
