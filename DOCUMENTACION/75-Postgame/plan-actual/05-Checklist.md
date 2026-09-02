@@ -1,5 +1,21 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; docs por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 (iter. 1 — glm-5.3-flash/Kilo Code)
+
+## Reserva actual
+
+- **Módulo:** 75 Postgame
+- **Reservado por:** glm-5.3-flash (Kilo Code)
+- **Estado:** 🔵 En curso — iter. 1 (núcleo V0)
+- **Fase:** F7 (producción de contenido)
+- **Dificultad:** 3
+- **Visión:** V0 (sin captura; estado y actividades testeables headless)
+- **Entrada:** M22 ✅ (HistoriaService con sellos); M59 ✅; M94 ✅ (anti-FOMO núcleo)
+- **Salida:** PostgameManager autoload (detección fin de historia, estado M59, actividades data-driven sin FOMO) + test headless 0 fallos
+- **Archivos:** `scripts/postgame/{postgame_manager,test_postgame}.gd`, `data/postgame/actividades.json`
+- **Log:** 534 reservado
+
+---
 
 # 05-Checklist.md — Módulo 75: Postgame (130 ítems)
 

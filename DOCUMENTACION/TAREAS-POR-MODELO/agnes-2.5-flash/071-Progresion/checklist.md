@@ -6,7 +6,7 @@
 
 ## Tareas pendientes
 
-[ ] T-001 RF16: validación de catálogos en editor: ids únicos, estadísticas existentes, sin ciclos, sin condiciones imposibles [M]
+[x] T-001 RF16: validación de catálogos en editor: ids únicos, estadísticas existentes, sin ciclos, sin condiciones imposibles [M]
 [ ] T-002 Crear milestone_catalog.tres como catálogo central cargado por el registry [M]
 [ ] T-003 Permitir desbloqueos cuya condición referencia niveles de herramientas (ej: picota nivel 3 → cueva profunda) [M]
 [ ] T-004 Permitir desbloqueos cuya condición referencia niveles de casa [S]
@@ -92,7 +92,7 @@
 [ ] T-084 Primeras veces y hitos en Dictionary[StringName, bool] sin arrays lineales [S]
 [ ] T-085 Estado de progresión plano (Dictionary) de tamaño acotado, independiente de los frames [S]
 [ ] T-086 Sin asignaciones pesadas en el camino de evaluación (predicados puros) [M]
-[ ] T-087 Crear 01-Requerimientos.md con problema, objetivo, alcance y RF1-RF16 [M]
+[x] T-087 Crear 01-Requerimientos.md con problema, objetivo, alcance y RF1-RF16 [M]
 [ ] T-088 Crear 02-Analisis.md con dominio, curvas, anti-frustración, alternativas y decisiones [M]
 [ ] T-089 Crear 03-Diseno.md con arquitectura, flujos, clases, contratos de señales y persistencia [M]
 [ ] T-090 Crear 04-Codigo.md con rutas previstas res://progresion/... y firmas GDScript [M]

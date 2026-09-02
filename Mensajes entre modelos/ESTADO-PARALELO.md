@@ -11,7 +11,8 @@
 **Toda carpeta de componente se nombra `{ID-M—dulo}-{Nombre}` seg—n el ID de `CHECKLIST-GLOBAL.md`** (ej: `102-Bug-Tracking`, `103-Logging`, `31-Ciclo-Dia-Noche`). NO usar numeraci—n cronol—gica, el orden de creaci—n ni prefijos duplicados. El primer intento de SWE-1.6 (`30-Bug-Tracking`/`31-Bug-Tracking`) se renombr— a `102-Bug-Tracking` — la ruta correcta es esa.
 
 ## Agentes activos
-| **M67 Vehículos (iter. 1 núcleo)** | **glm-5.3-flash** | **Kilo Code** | **🔵 En curso — 2026-09-02 07:30** | **V0 dif 3. Deps M28 ✅ (Harbor/M28 liberado Log 517). VehicleManager autoload + presets data-driven + controller + EventBus.vehicle aditivo + test headless. Log 528.** |
+| **M75 Postgame (iter. 1 núcleo)** | **glm-5.3-flash** | **Kilo Code** | **🔵 En curso — 2026-09-02 07:50** | **V0 dif 3. Deps M22 ✅. PostgameManager autoload (fin de historia M22, estado M59, actividades data-driven sin FOMO M94) + test headless. Log 534.** |
+| **M67 Vehículos (iter. 1 núcleo)** | **glm-5.3-flash** | **Kilo Code** | **📡 Liberado — 2026-09-02 07:40 (Log 528)** | **VehicleManager autoload + presets data-driven + controller lógico + EventBus.vehicle aditivo + test 0 fallos + regresiones M28/M71/M72 0 fallos. Pendientes iter. 2: nodos 3D, HUD M53, baúul M14, controles M57. Pitfall: set_script en RefCounted no inicializa vars.** |
 | **M72 Logros (iter. 3)** | **glm-5.3-flash** | **Kilo Code** | **📡 Liberado — 2026-09-02 07:20 (Log 527)** | **RF4 fechas M29 + RF5 retroactividad + RF3 EventBus + RF8 progreso humano + RF10 API consulta + RF6 toasts + RF14 validación + persistencia v2. test_logros 0 fallos. Hallazgo: M71 revertido por agente concurrente (ver Log 518).** |
 
 | Agente | Modelo | Plataforma | Estado | Tareas |

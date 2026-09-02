@@ -240,7 +240,7 @@
 - [ ] Diseñar prueba de instalación limpia en máquina sin el juego
 - [ ] Diseñar prueba de actualización desde versión anterior
 - [ ] Diseñar prueba de reparación de instalación corrupta
-- [ ] Diseñar prueba de desinstalación completa
+- [x] Diseñar prueba de desinstalación completa
 - [ ] Diseñar prueba de shortcuts (escritorio, menú de inicio)
 - [ ] Diseñar prueba de asociación de archivos
 - [x] Diseñar prueba de validación de requisitos de sistema

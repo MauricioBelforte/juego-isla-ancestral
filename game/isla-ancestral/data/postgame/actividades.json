@@ -1,0 +1,75 @@
+{
+	"schema_version": 1,
+	"actividades": [
+		{
+			"id": "postgame_isla_este",
+			"nombre": "La Isla del Este",
+			"tipo": "isla",
+			"repite": false,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M27",
+			"nota": "FASE 1 — desbloqueo narrativo ya activado por el postgame"
+		},
+		{
+			"id": "postgame_isla_flotante",
+			"nombre": "La Isla Flotante",
+			"tipo": "isla",
+			"repite": false,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M27/M10",
+			"nota": "FASE 2 — requiere arquitectura de streaming (M61/M63)"
+		},
+		{
+			"id": "postgame_ruina_final",
+			"nombre": "Restaurar la Ruina Final",
+			"tipo": "ruina",
+			"repite": false,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M25/M37",
+			"nota": "Progreso visible en museo; recompensa única M38; logro M72"
+		},
+		{
+			"id": "postgame_vecinos_nuevos",
+			"nombre": "Invitar a nuevos vecinos",
+			"tipo": "vecinos",
+			"repite": true,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M19/M71",
+			"nota": "Mudanza por invitación; sin fechas únicas (sin FOMO)"
+		},
+		{
+			"id": "postgame_hibridacion",
+			"nombre": "Hibridar plantas raras",
+			"tipo": "plantas",
+			"repite": true,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M50/M33",
+			"nota": "Especies estacionales postgame; validadas por calendario M29"
+		},
+		{
+			"id": "postgame_especies_raras",
+			"nombre": "Avistar especies raras",
+			"tipo": "fauna",
+			"repite": true,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M36/M35",
+			"nota": "Por clima, sin grindeo; avistamientos al diario M55"
+		},
+		{
+			"id": "postgame_muebles_evento",
+			"nombre": "Muebles únicos de eventos",
+			"tipo": "muebles",
+			"repite": true,
+			"requisito_stat": "",
+			"umbral": 0,
+			"dueno": "M18/M16",
+			"nota": "Obtenibles en actividades naturales, sin grindeo"
+		}
+	]
+}

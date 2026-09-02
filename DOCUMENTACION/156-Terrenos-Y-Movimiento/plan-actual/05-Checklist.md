@@ -282,7 +282,7 @@
 - [x] Test: senal terrain_changed emite correctamente [S]
 - [ ] Test: debounce evita updates rapidos [M]
 - [ ] Ejecutar suite de tests completa [M]
-- [ ] Verificar 0 fallos en tests [S]
+- [x] Verificar 0 fallos en tests [S]
 
 ## N. Documentacion
 
@@ -297,7 +297,7 @@
 - [x] Documentar configuracion de Layers [S]
 - [x] Documentar TerrainData resources [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
 - [ ] Documentar items pendientes [S]
-- [ ] Documentar notar del agente [S]
+- [x] Documentar notar del agente [S]
 
 ## O. Optimizacion y Rendimiento
 

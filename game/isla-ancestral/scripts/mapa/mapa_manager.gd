@@ -1,4 +1,4 @@
-# Modelo: deepseek-v4-flash
+﻿# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
@@ -140,6 +140,30 @@ func contar_regiones_exploradas() -> int:
 		if _regiones_exploradas[id]:
 			count += 1
 	return count
+
+
+## Persistencia de exploración (compatible M59/JSON).
+func guardar_exploracion() -> void:
+	var f := FileAccess.open("user://mapa_exploracion.json", FileAccess.WRITE)
+	if f == null:
+		return
+	f.store_string(JSON.stringify({"exploradas": _exploradas, "regiones": _regiones_exploradas}, "  "))
+	f.close()
+
+func cargar_exploracion() -> void:
+	if not FileAccess.file_exists("user://mapa_exploracion.json"):
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("user://mapa_exploracion.json"))
+	if typeof(parsed) != TYPE_DICTIONARY:
+		return
+	if parsed.has("exploradas"):
+		for id in parsed["exploradas"]:
+			if _exploradas.has(id):
+				_exploradas[id] = bool(parsed["exploradas"][id])
+	if parsed.has("regiones"):
+		for id in parsed["regiones"]:
+			if _regiones_exploradas.has(id):
+				_regiones_exploradas[id] = bool(parsed["regiones"][id])
 
 ## Persistencia de pines (M59-compatible, data-driven).
 func _guardar_pines() -> void:

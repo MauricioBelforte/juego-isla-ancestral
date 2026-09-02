@@ -1,4 +1,4 @@
-# Modelo: deepseek-v4-flash
+﻿# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
@@ -27,6 +27,7 @@ func _run() -> void:
 	_test_exploracion()
 	_test_pines()
 	_test_region()
+	_test_persistencia()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -91,6 +92,23 @@ func _test_region() -> void:
 	_check("tipo_forma tienda -> cuadrado", mm.tipo_forma("tienda") == "cuadrado")
 	_check("tipo_forma viaje -> triangulo", mm.tipo_forma("viaje") == "triangulo")
 	_check("marcadores por tipo lugar (3)", mm.marcadores_por_tipo("lugar").size() == 3, "size=%d" % mm.marcadores_por_tipo("lugar").size())
+
+func _test_persistencia() -> void:
+	print("--- Persistencia de exploración ---")
+	var mm := root.get_node_or_null("MapManager")
+	mm.marcar_explorada("templo_coral")
+	mm.guardar_exploracion()
+	var antes: int = mm.contar_exploradas()
+	# Reset interno y recargar
+	mm._exploradas = {}
+	for m in mm.config.get("marcadores", []):
+		var id: String = String(m.get("id", ""))
+		if not id.is_empty():
+			mm._exploradas[id] = bool(m.get("visible_inicial", false))
+	mm.cargar_exploracion()
+	_check("exploración persistida (templo_coral)", mm.esta_explorada("templo_coral") == true)
+	_check("conteo tras recargar >= antes", mm.contar_exploradas() >= antes, "count=%d" % mm.contar_exploradas())
+	DirAccess.remove_absolute("user://mapa_exploracion.json")
 
 func _summary() -> void:
 	print("=== Resumen M54: %d checks, %d fallos ===" % [_checks, _fallos])

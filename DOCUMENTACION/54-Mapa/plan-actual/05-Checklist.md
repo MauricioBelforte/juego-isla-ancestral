@@ -12,7 +12,7 @@
 - [ ] Registrar dependencia principal M53 (UI/UX: UILayer, foco, ThemeUx, TooltipService) [S]
 - [ ] Registrar dependencias de datos M09/M27 (regiones y biomas) y M69 (fast travel por interfaz) [S]
 - [ ] Definir la estética: mapa ilustrado cozy, paleta pastel de M53, sin saturación [S]
-- [ ] Definir criterios de aceptación medibles (rendimiento, navegación, persistencia, checklist ≥ 120) [S]
+- [x] Definir criterios de aceptación medibles (rendimiento, navegación, persistencia, checklist ≥ 120) [S]
 
 ## B. RF1 Minimapa (14)
 
@@ -58,7 +58,7 @@
 - [x] Clusterización de marcadores cercanos con contador y tooltip con nombres [M]
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
 - [x] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M]
-- [ ] Filtro por tipo de marcador con persistencia de preferencia [M]
+- [x] Filtro por tipo de marcador con persistencia de preferencia [M]
 - [ ] Diferenciación por forma + color para daltonismo (M58) [S]
 - [ ] Pool de sprites sin crear/destruir nodos al navegar [M]
 - [ ] Escala constante de los marcadores al hacer zoom (top_level, sin deformar) [M]
@@ -85,7 +85,7 @@
 - [ ] Textura de niebla sobre el mapa completo (FogTextureRect opaco, modulate) [M]
 - [ ] Textura de niebla aplicada también en el minimapa [M]
 - [ ] Actualización solo en mosaicos sucios (sin regenerar la textura completa por frame) [M]
-- [ ] Persistencia de exploración con M60 (bits por región/celda, no texturas) [C]
+- [x] Persistencia de exploración con M60 (bits por región/celda, no texturas) [C]
 - [ ] Transición suave de revelado (Tween 300 ms) reducible por reduce_motion (M58) [M]
 - [ ] Límites de región delineados dentro de la niebla (bordes visibles) [S]
 - [ ] Niebla más clara en zonas visitadas y oscura en no exploradas [S]
@@ -101,7 +101,7 @@
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco [M]
 - [ ] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo [S]
 - [x] Persistencia de pines con M60 (PinData serializable) [C]
-- [ ] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M]
+- [x] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M]
 - [ ] Pines visibles en minimapa y mapa completo con estilo diferenciado [M]
 - [ ] Eliminar pin con confirmación amable y sin datos perdidos [S]
 - [ ] Tooltip del pin con nombre y día de creación [S]
@@ -162,7 +162,7 @@
 - [ ] M53: capa modal, foco, TooltipService, NotificationService y ThemeUx [M]
 - [ ] M57: acciones map_toggle, zoom, pan, cierre, pin y centro [M]
 - [ ] M58: reduce_motion, daltonismo, contraste AA y todo operable por foco [M]
-- [ ] M60: persistencia de exploración, pines, preferencias y caché de textura [C]
+- [x] M60: persistencia de exploración, pines, preferencias y caché de textura [C]
 - [ ] M63: bake en background con barra de progreso (AGENTS 8) [M]
 - [ ] M69: destinos, desbloqueo y viaje por interfaz (sin acoplamiento) [M]
 
@@ -187,7 +187,7 @@
 
 ## M. Optimización (10)
 
-- [ ] No regenerar la textura del mapa en cada apertura (caché persistente) [C]
+- [x] No regenerar la textura del mapa en cada apertura (caché persistente) [C]
 - [ ] Bake incremental por secciones del mundo para no bloquear (M63) [C]
 - [ ] Pool único de sprites de marcadores, clusters y pines en ambas vistas [M]
 - [ ] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) [M]
@@ -210,7 +210,7 @@
 - [ ] Test de rendimiento con el mundo voxel completo cargado (≤ 5% frame) [C]
 - [ ] Test de navegación completa con gamepad (30 minutos) [M]
 - [ ] Test de viaje rápido end-to-end con M69 [C]
-- [ ] Test de persistencia: exploración y pines tras guardar/cargar/reiniciar [C]
+- [x] Test de persistencia: exploración y pines tras guardar/cargar/reiniciar [C]
 - [ ] Test de stress: 100 aperturas/cierres del mapa sin fugas ni glitches [C]
 - [ ] Verificación de que no se modificaron archivos fuera de DOCUMENTACION/54-Mapa [S]
 - [ ] Módulo declarado delegable para implementación en las Notas del Agente [S]

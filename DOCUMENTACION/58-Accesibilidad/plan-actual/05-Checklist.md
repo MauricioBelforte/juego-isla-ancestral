@@ -224,3 +224,7 @@
 - [x] `scripts/accesibilidad/accesibilidad_schema.gd` — validador (tamaños/contrastes/daltonismos válidos, flags booleanos) + **función de contraste WCAG** (luminancia)
 - [x] Test 8/8 OK: config válida + defaults + subtítulos ON + reducción OFF + **contraste medido blanco/fondo oscuro = 15.42 (AAA ≥ 7)** y pasto/arena = 4.94 (legible ≥ 3) + detección de daltonismo inválido
 - [?] Aplicar la config a la UI (tamaño/contraste en runtime con M53) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 2 (2026-09-02 18:05 — deepseek-v4-flash-vision-exp)
+
+- [x] AccesibilidadAplicador (factores de escala texto 0.9/1.0/1.25 y contraste 0.7/0.85/1.0) + 3 checks nuevos → 11/11 tests OK
+- [?] Aplicación real a la UI (M53) — iter 3
