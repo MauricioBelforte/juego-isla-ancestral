@@ -1,4 +1,7 @@
-# Módulo 115: Hardware — Código
+﻿# Módulo 115: Hardware — Código
+
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode

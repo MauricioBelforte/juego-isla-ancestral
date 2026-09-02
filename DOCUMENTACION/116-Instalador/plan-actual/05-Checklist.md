@@ -252,3 +252,11 @@
 **Total de ítems:** 156
 **Ítems resueltos por documentación:** 156
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `installer/setup_windows.ps1` — instalador user-space (RF2/RF3): -InstallDir (default %LocalAppData%\IslaAncestral), copia del build, shortcuts (RF5, -NoShortcuts), validación de archivos críticos exe+pck (RF12), -DryRun (simulación)
+- [x] `installer/uninstall_windows.ps1` — desinstalador (RF4): shortcuts + directorio completo, -DryRun, confirmación/-Force
+- [x] `installer/README.md` — documentación de uso y convención de build (.build)
+- [x] Parse de ambos scripts verificado (UTF-8 BOM; sin ParserError)
+- [?] Smoke de ejecución en consola real (ventana PowerShell nativa) — el host de agentes no captura el host-stream de scripts .ps1 (dueño: deepseek-v4-flash-vision-exp)
+- [?] RF6-RF13 (asociación, permisos, antivirus, actualizaciones, reparación, desinstalación real, instalación limpia/actualización): iter 2 con build release de M117/M118

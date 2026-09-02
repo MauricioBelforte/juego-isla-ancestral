@@ -131,3 +131,33 @@ remapeo, la detección de dispositivo y la persistencia.
   sin recargar.
 - Documentar un descubrimiento de GDScript en 07-GUIA-GODOT: `b.button_index = int(...)`
   dispara "Integer used when an enum value is expected" → usar cast `as JoyButton`/`MouseButton`/`JoyAxis`.
+
+---
+
+## Notas del Agente — Iteración 2 migración gameplay (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 19:35:00
+**Estado:** Parcial (migración gameplay a ControlInput implementada y verificada; módulo liberado 🟡)
+
+### Lo que hice
+- player.gd: cierre del inventario migrado de Input directo a ControlInput (helper `_accion_justa_m57(accion)` con fallback grácil si el autoload no existe — headless/test). Ya no hay `Input.is_action_just_pressed("ui_cancel")` en el gameplay.
+- simple_walk.gd (prototipo de movimiento): migrado a ControlInput — movimiento via `vector_movimiento()` (dead zone RF4 aplicada) y salto via acción nueva **`saltar`** (InputMap: Espacio + botón A de mando).
+- **FIX del núcleo (Log 254)**: `vector_movimiento()` tenía los ejes invertidos — `get_vector("mover_este", "mover_oeste", "mover_sur", "mover_norte")` ponía este/sur como negativos; corregido a la firma de Godot `(negativo_x, positivo_x, negativo_y, positivo_y)` = (oeste, este, norte, sur). El bug no se había detectado porque no había consumidor real del vector.
+- InputMap: acción `saltar` agregada a project.godot (faltaba en el catálogo RF5).
+- Test test_migracion_m57.gd: InputMap completo (10 acciones), vector con dead zone sin input real, player migrado (helper presente, sin Input directo), simple_walk migrado (camino principal ControlInput, fallback solo headless), acción saltar → **0 fallos**.
+- Regresión: test_control_input (núcleo Deepseek) 0 fallos.
+- Checklist: 2 ítems [x] adicionales (integración M06/M11 gameplay + InputMap saltar). Progreso 86→88/119.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- PromptButton/PromptDB con iconos por dispositivo (M46 arte): con dueño.
+- Menú de remapeo con spinner (M46/M58): UI con dueño.
+- Navegación focus (Tab/Enter/D-pad) en todos los menús: M53 con dueño.
+- Steam Deck (M115), vibración global M91, M34 via InputLayer: con dueños.
+- El Input directo queda como FALLBACK explícito solo cuando ControlInput no está disponible (headless/test) — el camino de gameplay es ControlInput.
+
+### Recomendaciones para el próximo agente
+- M13: al migrar el tool_controller, usar el mismo helper pattern (`_accion_justa_m57`) o inyectar ControlInput por grupo.
+- M46: el menú de opciones debe listar ControlInput.ACCIONES_CATALOGO (ya existe la constante).
+- M34: leer ejes via `ControlInput.eje("...")` para heredar dead zones configurables.

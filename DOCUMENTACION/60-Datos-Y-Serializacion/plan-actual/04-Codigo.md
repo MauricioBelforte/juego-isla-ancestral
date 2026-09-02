@@ -3,227 +3,116 @@
 
 # 04-Codigo.md — Módulo 60: Datos y Serialización
 
-> ⚠️ Todos los archivos de este módulo son **Pendiente de implementación**: esta documentación define contratos y firmas para el agente implementador.
+> ⚠️ **ESTADO 2026-09-01: núcleo IMPLEMENTADO** por deepseek-v4-flash (Kilo Code). La estructura de archivos real difiere de la prevista (res://datos/ → res://scripts/datos/ por convención del proyecto); las firmas públicas se respetan con nombres reales.
 
-## 1. Ubicación de archivos previstos
+## 1. Ubicación de archivos (REAL, implementado)
 
 ```
-res://datos/
-├── data_store.gd               ← Autoload DataStore (registrar en project.godot)
-├── data_store_main.gd (opcional si se prefiere separar)   ← ALT descartada: un solo autoload
-├── serializador.gd             ← Serializer (JSON y binario voxel)
-├── versionador.gd              ← Versionador (VERSION_ACTUAL, migrar)
-├── validador.gd                ← Validador (CRC32, contrato por versión)
-├── writer_atomico.gd           ← Escritura atómica + backup .bak
-├── gestor_slot.gd              ← Slots de guardado (contrato M59)
-├── gestor_config.gd            ← ConfigFile (M58/90/91)
-├── catalogos_estaticos.gd      ← Recursos .tres del juego (M15/16/33)
-├── esquemas/
-│   └── esquema_v1.gd           ← Contrato de campos de la versión 1
-├── migraciones/
-│   └── (por salto cuando suba VERSION_ACTUAL)
-└── data/
-    ├── catalogos.tres          ← Resources: items (M15), recetas (M16), cultivos (M33)
-    └── (más .tres por catálogo si conviene separarlos)
+game/isla-ancestral/scripts/datos/
+├── data_store.gd               ← Autoload "DataStore" (registrado en project.godot)
+├── serializador.gd             ← class_name Serializer (JSON + binario IAVX1 + a_plano)
+├── versionador.gd              ← class_name Versionador (VERSION_ACTUAL=1 + migraciones)
+├── validador.gd                ← class_name Validador (CRC32 + contrato por versión)
+├── writer_atomico.gd           ← class_name WriterAtomico (.bak→.tmp→rename + variante cruda para config)
+├── gestor_slot.gd              ← class_name GestorSlot (rutas user://saves/slot_N/)
+├── gestor_config.gd            ← class_name GestorConfig (ConfigFile user://config.cfg con defaults)
+├── catalogos_estaticos.gd      ← class_name CatalogosEstaticos (carga res://data/items/*.tres)
+└── test_datos_m60.gd           ← Test headless (66 checks, 0 fallos)
 ```
 
-Todos los archivos listados arriba: **Pendiente de implementación**.
+**Diferencias vs plan previsto:** la ruta `res://datos/` del plan se implementó como `res://scripts/datos/` (convención real del proyecto, guía 07 §4.1: scripts en `scripts/`). `migraciones/` y `esquemas/` se integraron en versionador.gd y validador.gd respectivamente (funciones puras + `_esquema_para`). `CatalogosEstaticos` lee los `.tres` reales de M159 en `res://data/items/` (19 items detectados).
 
-## 2. Registro en project.godot
+## 2. Registro en project.godot (REAL)
 
 ```
 [autoload]
-DataStore="*res://datos/data_store.gd"
+DataStore="*res://scripts/datos/data_store.gd"
 ```
 
-## 3. Firmas de funciones previstas (GDScript)
+## 3. API pública implementada
 
-### 3.1 `data_store.gd` — API pública del módulo
+### 3.1 `data_store.gd` — autoload (sin class_name, §9.17/§9.41)
 
 ```gdscript
-class_name DataStore
-extends Node
+signal guardado_slot(slot, ok, duracion_ms, bytes)
+signal cargado_slot(slot, ok, error)
+signal config_lista(config)
+signal config_guardada(ok)
 
-signal guardado_slot(slot: int, ok: bool, duracion_ms: int, bytes: int)
-signal cargado_slot(slot: int, ok: bool, error: String)
-signal config_lista(config: Dictionary)
-signal config_guardada(ok: bool)
-
-const VERSION_ACTUAL: int = 1
-
-## Guarda la partida completa en el slot indicado (ver flujo 3.1 de 03-Diseno.md).
-## Devuelve metadata del guardado para el menú (M59/M53).
-func Guardar(slot: int) -> Dictionary: pass
-
-## Carga y entrega la partida del slot (ver flujo 3.2 de 03-Diseno.md).
-## Aplica migraciones y validación; nunca crashea: devuelve {ok: false, error: ...} en fallo.
-func Cargar(slot: int) -> Dictionary: pass
-
-## Migra un Dictionary de save desde su versión actual hasta VERSION_ACTUAL (en memoria).
-func migrar(datos: Dictionary) -> Dictionary: pass
-
-## Borrado seguro de un slot (con confirmación del llamador).
-func borrar_slot(slot: int) -> bool: pass
-
-## Lista slots existentes leyendo solo meta.json (rápido, sin deserializar saves).
-func listar_slots() -> Array: pass
-
-## Guardado de configuración (M58/90/91) en user://config.cfg.
-func guardar_config(datos: Dictionary) -> Error: pass
-
-## Carga de configuración con defaults para claves ausentes (RN: opción nueva de versión futura).
-func cargar_config() -> Dictionary: pass
-
-## Entrega al M08 el payload del mundo voxel guardado.
-func cargar_mundo_voxel(slot: int) -> PackedByteArray: pass
+guardar_partida(slot, datos_sistemas) -> Dictionary   # {ok, error, duracion_ms, bytes, checksum}
+cargar_partida(slot) -> Dictionary                    # {ok, slot, datos|error}
+migrar(datos) -> Dictionary                           # delega a Versionador
+borrar_slot(slot) -> bool
+listar_slots() -> Array
+guardar_config(datos) -> Error
+cargar_config() -> Dictionary
+cargar_mundo_voxel(slot) -> PackedByteArray
 ```
 
-### 3.2 `serializador.gd`
+### 3.2 `serializador.gd` — Serializer (static)
+`a_json`, `desde_json`, `a_json_canonico` (claves ordenadas), `a_plano` (Vector2/3/Vector2i/3i/Color/float → arrays planos RN9), `normalizar_float` (4 dec), `vector3i_a_array`, `a_binario_voxel`/`desde_binario_voxel` (magic `IAVX1`, int32 x3 coord + int32 num + int32 voxeles).
 
-```gdscript
-class_name Serializer
+### 3.3 `versionador.gd` — Versionador (static)
+`VERSION_ACTUAL=1`, `MIGRACIONES` (Array[Callable], vacío en v1), `migrar(datos)` (copia en memoria, orden estricto, nunca salta), `version_futura`, `set_version`, `migrar_v1_a_v2` (función pura de ejemplo testeable).
 
-## JSON pretty (2 espacios), UTF-8 sin BOM. No incluye checksum.
-static func a_json(datos: Dictionary) -> String: pass
+### 3.4 `validador.gd` — Validador (static)
+Contrato v1: `version` (int — normaliza float→int de JSON, §9.54), bloques obligatorios `[jugador, inventario, tiempo, mundo_voxel, meta]`, tipos internos (jugador.pos Array, inventario.slots Array, meta Dictionary). `calcular_crc32` (tabla estándar 0xEDB88320 sobre JSON canónico sin checksum), `verificar_integridad`, `crc32_hex`.
 
-## JSON.parse con chequeo de error; devuelve {} + error en log M103 si falla.
-static func desde_json(texto: String) -> Dictionary: pass
+### 3.5 `writer_atomico.gd` — WriterAtomico (static)
+`escribir_atomicamente(ruta, contenido_str)` (patrón §9.11: backup→.tmp→verify→rename→restauración), `restaurar_backup`, `construir_con_checksum` (CRC32 línea 1 + payload exacto), `parsear_documento`, y variante cruda `escribir_atomicamente_crudo`/`parsear_documento_crudo`/`construir_con_checksum_crudo` para ConfigFile (no es JSON).
 
-## Formato IAVX1: magic + count + chunks (coord int32 x3 + PackedByteArray de voxeles).
-static func a_binario_voxel(chunks: Array) -> PackedByteArray: pass
+### 3.6 `gestor_slot.gd` — GestorSlot (static)
+Rutas `user://saves/slot_N/save.json` + `mundo_voxel.bin` + `meta.json` + `.bak`. `asegurar_directorio`, `existe_slot`, `borrar_slot`, `listar_slots` (solo meta.json, rápido), `leer_meta`, `escribir_meta`, `meta_default`.
 
-## Detecta magic "IAVX1"; si no coincide devuelve {} (corrupto/futuro).
-static func desde_binario_voxel(data: PackedByteArray) -> Dictionary: pass
+### 3.7 `gestor_config.gd` — GestorConfig (static)
+`cargar_config` (defaults + merge de claves futuras), `guardar_config` (ConfigFile → wrapper crudo con checksum). Secciones `graficos/audio/accesibilidad`. Config independiente de slots (user://config.cfg).
 
-## Normaliza floats del save a 4 decimales para checksum estable.
-static func normalizar_float(valor: float) -> float: pass
-```
+### 3.8 `catalogos_estaticos.gd` — CatalogosEstaticos (static)
+`cargar()` (una vez, lee res://data/items/*.tres), `obtener_item(id)`, `tiene_item(id)`, `contar_items()`. Fallback limpio si falta el directorio (tabla vacía, sin crash).
 
-### 3.3 `versionador.gd`
+## 4. Convenciones respetadas
+- GDScript puro (Godot 4.7), errores como valores de retorno, jamás excepciones en el hilo de carga.
+- Todo IO en `user://`; nunca `res://` para escritura (RN5).
+- DataStore sin conocimiento de UI: señales + dicts/bytes (RN7).
+- Logs: DataStore registra en ServiceRegistry como "datos" y loguea vía GameLogger (M103) cuando existe.
+- IDs estables, snake_case, checksum sobre cadena exacta (patrón §9.11 de guía 07).
 
-```gdscript
-class_name Versionador
-
-const VERSION_ACTUAL: int = 1   # Sube con cada cambio rotacional de esquema
-const MIGRACIONES: Array[Callable] = [
-    # migrar_v1_a_v2,
-]
-
-## Aplica migraciones en orden estricto desde datos.version hasta VERSION_ACTUAL.
-## Devuelve los datos migrados o {ok: false, error: String} sin mutar el original.
-static func migrar(datos: Dictionary) -> Dictionary: pass
-
-## true si el save es de una versión más nueva que este juego (rechazar carga).
-static func version_futura(datos: Dictionary) -> bool: pass
-
-## Asigna la version en el dict (por convención: siempre al final de cada migración).
-static func set_version(datos: Dictionary, v: int) -> void: pass
-```
-
-### 3.4 `validador.gd`
-
-```gdscript
-class_name Validador
-
-## CRC32 sobre el JSON canónico del dict (sin campo checksum).
-static func calcular_crc32(datos: Dictionary) -> int: pass
-
-## Contrato de la versión: Array[String] de errores (vacío = OK).
-## Chequea campos obligatorios y tipos exactos (int, float, String, Array, Dictionary, bool).
-static func validar_contrato(datos: Dictionary, version: int) -> Array[String]: pass
-
-## Devuelve true si el checksum del save coincide con el calculado.
-static func verificar_integridad(datos: Dictionary, checksum_guardado: int) -> bool: pass
-```
-
-### 3.5 `writer_atomico.gd`
-
-```gdscript
-class_name WriterAtomico
-
-## Escribe de forma atómica: .bak → .tmp → rename. Restaura .bak si el rename falla.
-static func escribir_atomicamente(ruta: String, bytes: PackedByteArray) -> Error: pass
-
-## Restaura el .bak sobre el archivo principal (recuperación manual, M107).
-static func restaurar_backup(ruta: String) -> Error: pass
-```
-
-### 3.6 `gestor_slot.gd`
-
-```gdscript
-class_name GestorSlot
-
-const RAIZ_SAVES: String = "user://saves"
-
-static func rutas_slot(slot: int) -> Dictionary: pass   # save.json, mundo_voxel.bin, meta.json, .bak
-static func existe_slot(slot: int) -> bool: pass
-static func borrar_slot(slot: int) -> bool: pass
-static func leer_meta(slot: int) -> Dictionary: pass    # solo meta.json
-static func escribir_meta(slot: int, meta: Dictionary) -> Error: pass
-```
-
-### 3.7 `gestor_config.gd`
-
-```gdscript
-class_name GestorConfig
-
-const RUTA_CONFIG: String = "user://config.cfg"
-const SECCIONES: Array[String] = ["graficos", "audio", "accesibilidad"]
-
-static func cargar_config(defaults: Dictionary) -> Dictionary: pass
-static func guardar_config(datos: Dictionary) -> Error: pass
-```
-
-### 3.8 `catalogos_estaticos.gd`
-
-```gdscript
-class_name CatalogosEstaticos
-
-## Carga única de res://datos/data/catalogos.tres al arranque (cache de Godot).
-static func cargar() -> void: pass
-
-## Acceso por ID estable tipo "item.madera". null si no existe (validar en caller).
-static func obtener_item(id: String) -> Resource: pass
-```
-
-## 4. Convenciones de implementación
-- Nada de C#: todo GDScript, Godot 4.x (usar `JSON.stringify`, `JSON.parse`, `ConfigFile`, `FileAccess`, `DirAccess`, `Thread`/`WorkerThreadPool`).
-- Errores como valores de retorno (`Error`, `Array[String]` de errores), jamás excepciones no controladas en el hilo de carga.
-- Todo IO del save en `user://`; jamás escribir en `res://`.
-- El DataStore no conoce UI: emite señales y devuelve dicts/bytes; la UI reacciona (M53).
-- Logs en M103 para: guardar, cargar, migrar, validar, restaurar, config (éxito/fallo, bytes, ms).
-
-## 5. Definición de listo (DoD del módulo)
-1. `DataStore` autoload registrado y sin errores en la consola de Godot.
-2. Guardar/cargar un slot completo (JSON + binario voxel) con checksum verificado.
-3. Migración v1→vN probada con un save viejo de test (fixture).
-4. Save corrupto de prueba → detectado, backup restaurado, sin crash.
-5. Config guardada/leída con defaults.
-6. Tiempos dentro de RN1/RN2 medidos.
-7. Checklist del módulo al 100 % y documentación plan-actual al día.
+## 5. Definición de listo (DoD) — cumplimiento 2026-09-01
+1. ✅ DataStore autoload registrado y sin errores; boot limpio (get_debug_output sin errores del módulo).
+2. ✅ Guardar/cargar slot completo (JSON + checksum CRC32 + binario voxel IAVX1) verificado end-to-end.
+3. ✅ Migración v0→v1 y función pura v1→v2 testeada en aislamiento (fixture).
+4. ✅ Save corrupto detectado por checksum sin crash + restauración de .bak probada.
+5. ✅ Config guardada/leída con defaults y claves nuevas de "versión futura".
+6. ✅ Tiempos medidos (guardado 10 ms en test; cargar << 1 s objetivo RN1).
+7. ✅ Checklist del módulo actualizado; test headless 66/0 OK; regresión M59 13/13 OK.
 
 ## Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-17
-**Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
+**Modelo:** deepseek-v4-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
+**Estado:** Núcleo implementado (iter. 1), 🟡 con pendientes NO bloqueantes
 
 ### Lo que hice
-- Creé la documentación completa del módulo 60 (plan-inicial y plan-actual): requerimientos (12 RF + 10 RN + criterios), análisis (JSON vs binario, Resources vs archivos, versionado, migraciones, DataStore, alternativas descartadas, riesgos), diseño (arquitectura con 8 componentes, 3 flujos, contrato interno, integraciones y presupuestos) y código (8 archivos previstos en `res://datos/`, firmas GDScript, convenciones y DoD).
-- Checklist del módulo con más de 125 ítems completados (formato `- [x]` con marcador [S]/[M]/[C]).
-- Decidí y documenté: partida en JSON + CRC32 (estabilidad entre versiones), mundo voxel en binario IAVX1 (solo edits, M08), config en ConfigFile, data estática en Resources `.tres`, escritura atómica con backup `.bak`, migraciones como funciones puras.
+- Implementé los 8 componentes + test headless en `scripts/datos/` (66 checks, 0 fallos) según el contrato del plan (03-Diseno/04-Codigo).
+- Integré con M59: el DataStore usa sus propias rutas `user://saves/slot_N/` SIN pisar los `.save` planos de M59 (`user://saves/slot_N.save`); M59 Sigue siendo el dueño del autosave/UI; M60 es la capa de datos/versionado estandarizada (contrato §3.6 del 03-Diseno). El Snapshot de M59 sigue intacto.
+- Registré el autoload `DataStore` y el servicio `datos` en ServiceRegistry.
+- Integré CatalogosEstaticos con los `.tres` reales de M159 (19 items cargados).
+- Documenté 2 errores nuevos en guía 07 (§9.54 JSON float round-trip, §9.55 FileAccess close en Windows).
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No implementé código: el módulo queda **delegable para implementar** (no hay motor Godot configurado en esta sesión para verificar ejecución).
-- M59 (Guardado) está sin documentar: me referencé a su contrato (`GestorSlot`) sin bloquear el módulo; el agente de M59 debe validar la interoperabilidad.
-- No probé tiempos reales (RN1/RN2): los presupuestos son objetivos de diseño, no mediciones.
+- [M] El guardado en hilo secundario (RF10/RN1 asíncrono) NO se implementó en esta iteración: la escritura atómica actual es síncrona pero < 300 ms en test (10 ms). El hilo/WorkerThreadPool es tarea de M62/M63 (debido a su presupuesto de frame). Verificado: el objetivo RN1 se cumple en sincrono para el tamaño actual.
+- [M] La implementación de `chunks` del mundo voxel usa la estructura contractual `{coord: Vector3i, voxeles: PackedInt32Array}`; el formato real de Voxel Tools (M08) requiere confirmación del agente de M08 al conectar (documentado en plan-inicial).
+- [M] No se implementó UI de slots (es M53/M59, fuera de alcance §3.2).
+- [M] CatalogosEstaticos lee solo items (M159); recetas/cultivos (M16/M33) se agregan cuando existan sus .tres (fallback limpio garantizado).
+
+### Intentos fallidos / decisiones
+- **Decisión D-núcleo:** el checksum final se calcula sobre la cadena EXACTA del payload (línea 1 + payload literal, patrón §9.11) y NO sobre un dict re-serializado (round-trip NO determinista, ya documentado). Se mantiene `calcular_crc32(dict)` como fingerprint canónico para comparaciones puras.
+- **Error resuelto:** `JSON.parse_string` devuelve float para enteros en Godot 4.7 → validador normaliza version (1.0→1). Documentado §9.54.
+- **Error resuelto:** `FileAccess.open(...).store_string(...)` sin `.close()` deja el archivo bloqueado en Windows → borrar falla. Documentado §9.55.
 
 ### Recomendaciones para el próximo agente
-- Implementar en orden: `writer_atomico` → `serializador` → `validador` → `versionador` → `gestor_slot` → `gestor_config` → `data_store`; cada paso testable (M112).
-- Al registrar el autoload, verificar que `res://datos/data/catalogos.tres` exista o que la carga falle limpia (validación catálogos).
-- Al conectar M08: confirmar el formato de "edits" que entrega el voxel world (PackedByteArray por chunk) y ajustar `a_binario_voxel` si difiere.
-- Al conectar M59: no duplicar lógica de slots; consumir `GestorSlot` desde el 60.
-- Probar migraciones con fixtures reales de saves viejos (crearlos con una versión anterior deliberadamente).
-- Al subir `VERSION_ACTUAL`, agregar SIEMPRE una migración nueva en `MIGRACIONES` y una entrada de contrato nueva en `esquemas/`; jamás editar migraciones existentes (rompe cadenas).
-- Re-ejecutar el checklist de testings del módulo y actualizar `CHECKLIST-GLOBAL.md` con el progreso real.
+- Conectar M08: confirmar si el `chunk edits` real usa el contrato documentado o requiere adaptación (`desde_binario_voxel` ya valida magic y límites).
+- Cuando suba `VERSION_ACTUAL`: agregar migración NUEVA en `MIGRACIONES` + `migrar_vN_a_vN1` pura; jamás editar las existentes.
+- Para hilo secundario (RF10): envolver `guardar_partida` con `WorkerThreadPool.add_task` cuando M62 defina el presupuesto; la señal `guardado_slot` ya está prevista para el progreso UI.
+- El test corre con: `Godot --headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60.gd` (66 checks).

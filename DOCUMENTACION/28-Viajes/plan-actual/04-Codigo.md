@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 28: Viajes
 
@@ -151,3 +151,31 @@ func restore(saved: Dictionary) -> void:
 - Sin `get_node()` en bucles calientes: cachear `_boat`, `_harbors` y `_routes` en `_ready()`.
 - `TravelUI` no conoce economía ni clima: solo emite señales (sección 9 AGENTS.md).
 - Recursos `BoatRoute` como `.tres` versionables en `res://_Project/data/routes/`.
+
+---
+
+## Notas del Agente — Iteración núcleo V0 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 02:05:00
+**Estado:** Parcial (núcleo lógico de viajes implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- BoatRoute (Resource, scripts/viajes/boat_route.gd): route_id/origen/destino/duración/coste AO/requiere_flag (M22)/secreta/nocturna/temporada; sample_position lineal (curva 3D en V2) y compute_duration_with_weather (+25% adverso).
+- TravelService autoload (scripts/viajes/travel_service.gd) según 03-Diseno §2-§6: rutas data-driven en data/viajes/rutas.json (4 rutas; costes coherentes con travel.json de M93: 50/80/120/200), request_travel con validaciones (destino desbloqueado por flag M22 vía WorldState, secreta oculta sin flag, línea nocturna solo 21:00-05:00, temporada coherente con M93, boleto pagado con M38, un solo viaje activo §6), clima M32 retraso-sin-bloqueo (§3.1.5/§3.2.4: delay salida 5-15 s + duración +25%, señal travel_delayed con aviso amable, jamás cancelación), cancelación §3.4 (pre-embarque 100%, en travesía no cancelable), progreso 0-1 con señal travel_progress, llegada con travel_arrived + registro de visitados (base para M69 fast travel).
+- Persistencia M59 (§6): sección "viajes" {estado, ruta_id, transcurrido, duracion_efectiva, visitados} — restauración con tiempo restante intacto y ruta huérfana descartada sin soft-lock (§3.3.2).
+- Test scripts/viajes/test_viajes.gd: carga, visibilidad de secretas (M22), embarque+travesía+llegada, bloqueo M22 con motivo, boleto insuficiente (saldo intacto), clima retraso-sin-bloqueo (delay 5-15 s, +25%, llega igual), refunds 100%, un viaje activo, persistencia mitad de ruta → **0 fallos**.
+- Regresiones: test_clima M32 0 fallos, test_balance_m93_iter3 0 fallos, test_autosave M59 0 fallos, runtime MCP boot → MUNDO OK ("[M28] Rutas cargadas: 4", DOM-INF 9 dominios OK).
+- Warning propio corregido (var gt sin usar en _isla_actual).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Boat/Harbor/HarborDock/TravelUI/BoatDeck/escenas y visuales (Vapor 3D, estela M51, UI M52/M53): iteración V2 con visión — las señales del contrato quedan listas.
+- Curvas 3D de rutas (Curve3D): sample_position lineal en V0.
+- Fast travel M69, streaming M63 (precarga de isla destino), línea nocturna con faroles visuales: señales/ganchos listos.
+-isla_actual(): fija "isla_raiz" en V0 (M27/M11 definirán la isla actual del jugador).
+
+### Recomendaciones para el próximo agente
+- M27: al crear islas, registrar Harbors con island_id coherente con rutas.json y conectar HarborDock.lock/release a _atracar().
+- M53/M52: TravelUI escucha travel_started/travel_progress/travel_delayed/travel_arrived; barra de progreso obligatoria (sección 8 AGENTS.md).
+- M63: enganchar precarga de destino en request_travel tras el pago.

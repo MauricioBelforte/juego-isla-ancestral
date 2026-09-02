@@ -9,11 +9,12 @@
 |---------|------|-------------|
 | enchantment_system.gd | Autoload | Sistema central de encantamientos |
 | enchantment_data.gd | Resource | Definicion de cada encantamiento |
-| shaman_npc.gd | Node3D | NPC chaman del monte |
+| shaman_npc.gd | InteractableBase | NPC chaman del monte |
 | shaman_ui.gd | Control | UI del chaman |
-| incense_cultivation.gd | Resource | Sistema de cultivo de incienso |
-| enchanted_tool_visual.gd | Node3D | Efectos visuales de herramienta encantada |
-| incense_spawner.gd | Node3D | Spawner de plantas de incienso |
+| test_enchantment.gd | Test | Pruebas headless del sistema |
+| incense_cultivation.gd | Resource | Pendiente — sistema de cultivo de incienso |
+| enchanted_tool_visual.gd | Node3D | Pendiente — efectos visuales de herramienta encantada |
+| incense_spawner.gd | Node3D | Pendiente — spawner de plantas de incienso |
 
 ## 2. Contratos Clave
 
@@ -79,3 +80,34 @@ EnchantmentTool.get_sell_bonus(tool_id: String) -> float
 | **M039** — Tiendas | Vende encantados |
 | **M014** — Inventario | Guarda encantados |
 | **M011** — Personaje | Equipa encantados |
+
+## Notas del Agente
+
+**Modelo:** GLM-5.3 Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 03:58
+**Estado:** Parcial — Sección A completada (15/15), Sección B iniciada (4/20)
+
+### Lo que hice
+- Completé sección A: núcleo data-driven con EnchantmentSystem autoload, EnchantmentData Resource, 4 archivos .tres cargados y API de lectura en inventario_service.gd.
+- Creé shaman_npc.gd como InteractableBase, con posición fija en Isla Raíz (320, 11, 300).
+- Creé shaman_ui.gd como Control básico para interfaz de encantamientos.
+- Integré spawn del chamán en main_island.gd y registré NPC en escena.
+- Corregí errores de parsing, rutas .tres y tipos en scripts.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No probé interacción real con el chamán en runtime.
+- No creé el diálogo shaman_intro en data/dialogues/.
+- No implementé sección C (Incienso) ni sección D (Encantamientos por Tier).
+
+### Intentos fallidos / decisiones
+- Intenté usar class_name EnchantmentSystem en autoload → error de parser por conflicto con singleton. Solución: eliminar class_name.
+- Intenté usar tipo EnchantmentData en anotaciones → parser no resolvía el tipo. Solución: usar Resource como tipo genérico.
+- Inferencia de tipo en TerrainLocator.get_height() → agregado int explícito.
+- Posición del NPC antes de add_child() → reordenado para evitar warnings.
+
+### Recomendaciones para el próximo agente
+- Probar interacción real con el chamán en runtime antes de continuar.
+- Crear diálogo shaman_intro en data/dialogues/ e integrar con M21/M162.
+- Implementar sección C (Incienso) antes de sección D.
+- Usar V4 (godot-mcp) para capturas de prueba de UI.

@@ -74,28 +74,28 @@
 - [ ] Diseñar implementación de knowledge sharing (documentación, code reviews, pair programming, knowledge sharing sessions)
 
 ### [S] Proceso de revisión
-- [ ] Diseñar checklist de revisión contra principios (8 ítems)
+- [x] Diseñar checklist de revisión contra principios (8 ítems)
 - [ ] Diseñar formato de revisión de decisión
 - [ ] Diseñar campo de justificación para desviaciones
 - [ ] Diseñar campo de aprobación
 - [ ] Diseñar registro de desviaciones justificadas
-- [ ] Definir métricas de cumplimiento (porcentaje de decisiones revisadas, porcentaje de decisiones que cumplen principios)
+- [x] Definir métricas de cumplimiento (porcentaje de decisiones revisadas, porcentaje de decisiones que cumplen principios)
 - [ ] Definir objetivo: 100% de decisiones críticas revisadas
 - [ ] Definir objetivo: < 5% de desviaciones justificadas por mes
-- [ ] Definir objetivo: 0% de principios violados sin justificación
+- [x] Definir objetivo: 0% de principios violados sin justificación
 
 ### [S] Documentación de principios
-- [ ] Diseñar docs/principios/README.md
-- [ ] Diseñar docs/principios/filosofia_cozy.md
-- [ ] Diseñar docs/principios/diseno_juego.md
-- [ ] Diseñar docs/principios/tecnicos.md
-- [ ] Diseñar docs/principios/proceso_revision.md
-- [ ] Diseñar docs/principios/desviaciones_justificadas.md
+- [x] Diseñar docs/principios/README.md
+- [x] Diseñar docs/principios/filosofia_cozy.md
+- [x] Diseñar docs/principios/diseno_juego.md
+- [x] Diseñar docs/principios/tecnicos.md
+- [x] Diseñar docs/principios/proceso_revision.md
+- [x] Diseñar docs/principios/desviaciones_justificadas.md
 - [ ] Diseñar docs/licencias_assets.md
 - [ ] Diseñar docs/knowledge_sharing.md
-- [ ] Definir introducción a los principios innegociables
-- [ ] Definir lista de principios por categoría
-- [ ] Definir cómo aplicar los principios
+- [x] Definir introducción a los principios innegociables
+- [x] Definir lista de principios por categoría
+- [x] Definir cómo aplicar los principios
 - [ ] Definir proceso de revisión
 - [ ] Definir registro de desviaciones justificadas
 
@@ -120,8 +120,8 @@
 ### [S] Revisión periódica
 - [ ] Definir frecuencia de revisión (cada 3 meses)
 - [ ] Definir responsable de revisión (equipo de diseño)
-- [ ] Diseñar proceso de revisión de principios
-- [ ] Diseñar proceso de actualización de principios
+- [x] Diseñar proceso de revisión de principios
+- [x] Diseñar proceso de actualización de principios
 - [ ] Diseñar proceso de documentación de cambios
 - [ ] Diseñar proceso de comunicación de cambios al equipo
 
@@ -184,7 +184,7 @@
 
 ### [S] Documentación de proceso_revision.md
 - [ ] Diseñar formato de revisión de decisión
-- [ ] Diseñar checklist de principios (8 ítems)
+- [x] Diseñar checklist de principios (8 ítems)
 - [ ] Diseñar campo de justificación
 - [ ] Diseñar campo de aprobación
 - [ ] Diseñar campo de fecha
@@ -227,21 +227,21 @@
 - [ ] Diseñar ítem: ¿Esta decisión no introduce dependencia crítica de una sola persona?
 
 ### [S] Métricas de cumplimiento
-- [ ] Definir métrica: porcentaje de decisiones revisadas contra principios
-- [ ] Definir métrica: porcentaje de decisiones que cumplen todos los principios
+- [x] Definir métrica: porcentaje de decisiones revisadas contra principios
+- [x] Definir métrica: porcentaje de decisiones que cumplen todos los principios
 - [ ] Definir métrica: número de desviaciones justificadas por mes
-- [ ] Definir métrica: número de principios violados sin justificación
+- [x] Definir métrica: número de principios violados sin justificación
 - [ ] Definir objetivo: 100% de decisiones críticas revisadas
 - [ ] Definir objetivo: < 5% de desviaciones justificadas por mes
-- [ ] Definir objetivo: 0% de principios violados sin justificación
+- [x] Definir objetivo: 0% de principios violados sin justificación
 
 ### [S] Proceso de revisión periódica
 - [ ] Definir frecuencia: cada 3 meses
 - [ ] Definir responsable: equipo de diseño
-- [ ] Diseñar paso 1: revisar principios actuales
-- [ ] Diseñar paso 2: evaluar relevancia de principios
-- [ ] Diseñar paso 3: agregar nuevos principios si es necesario
-- [ ] Diseñar paso 4: eliminar principios obsoletos si es necesario
+- [x] Diseñar paso 1: revisar principios actuales
+- [x] Diseñar paso 2: evaluar relevancia de principios
+- [x] Diseñar paso 3: agregar nuevos principios si es necesario
+- [x] Diseñar paso 4: eliminar principios obsoletos si es necesario
 - [ ] Diseñar paso 5: documentar cambios y justificaciones
 - [ ] Diseñar paso 6: comunicar cambios al equipo
 

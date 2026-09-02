@@ -1,5 +1,8 @@
 # Módulo 115: Hardware — Diseño
 
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:27:00
@@ -242,9 +245,9 @@ func _get_settings_for_preset(preset: QualityPreset) -> QualitySettings:
 ### Perfiles de Hardware Guardados
 
 ```
-user://hardware_profile.tres     ← Perfil detectado
-user://quality_settings.tres     ← Configuración de calidad
-user://input_mapping.tres        ← Mapeo de dispositivos
+user://hardware_profile.tres     �? Perfil detectado
+user://quality_settings.tres     �? Configuración de calidad
+user://input_mapping.tres        �? Mapeo de dispositivos
 ```
 
 ## 6. Perfiles de Rendimiento

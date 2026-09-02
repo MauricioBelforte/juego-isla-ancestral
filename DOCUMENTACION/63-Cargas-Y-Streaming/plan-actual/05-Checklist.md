@@ -1,21 +1,32 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 63: Cargas y Streaming
+# 05-Checklist.md
+
+## Reserva actual
+
+- Estado: 🟡 Liberado (núcleo iter. 1 implementado) — 2026-09-01
+- Agente: deepseek-v4-flash (Kilo Code)
+- Fase: Base de producción (soporte M61/M62)
+- Dificultad: 4
+- Visión: V0
+- Salida: StreamManager autoload (cola con pesos, LRU, progreso real, pausa/reanudar) + ProgressCalculator + weights.json + test headless 17/0 OK
+- Fecha cierre: 2026-09-01 (Log 457)
+ — Módulo 63: Cargas y Streaming
 
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto.
 > Módulo **delegable**: implementación para el agente que lo reclame (requiere M08 y M61).
 
 ## A. Requisitos del módulo (9)
 
-- [ ] Definir el problema: cargas sin congelar, streaming de mundo y progreso real [S]
+- [x] Definir el problema: cargas sin congelar, streaming de mundo y progreso real [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] Registrar dependencias: M08, M61; relaciones M45-M47, M12, M29, M28/M69 [S]
 - [ ] Catalogar los 15 puntos de la sección 62 [S]
-- [ ] RF1: pantalla de carga cozy con progreso real [S]
+- [x] RF1: pantalla de carga cozy con progreso real [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] RF2: cargas asíncronas (load_threaded_request) [S]
 - [ ] RF3: chunks cercanos/lejanos con LRU [S]
 - [ ] RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S]
-- [ ] RF6+RF7: progreso real y streaming por región [S]
+- [x] RF6+RF7: progreso real y streaming por región [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] RF8: anti-congelamiento verificable [S]
 
 ## B. Resolución de los 15 puntos del plan (15)
@@ -30,7 +41,7 @@
 - [ ] P8: shaders — precalentamiento + caché de variantes [S]
 - [ ] P9: precalentar — menú principal → mundo casi instantáneo [S]
 - [ ] P10: evitar congelamientos — deltas < 50 ms [S]
-- [ ] P11: progreso real — pesos por operación, nunca fake [S]
+- [x] P11: progreso real — pesos por operación, nunca fake [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] P12: streaming del océano — 3 coronas de LOD [S]
 - [ ] P13: streaming subterráneo — pisos LOD 0-2 [S]
 - [ ] P14: streaming de islas — StreamableBox por isla [S]
@@ -52,9 +63,9 @@
 - [ ] Prioridad 0-1: anillo inmediato del jugador [S]
 - [ ] Prioridad 2-3: precarga anticipada del movimiento [S]
 - [ ] Prioridad bancos+texturas de región [S]
-- [ ] Prioridad anillo 4-5 solo si presupuesto [S]
+- [x] Prioridad anillo 4-5 solo si presupuesto [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] Pre-carga por near-event (destino Gran Vapor) [S]
-- [ ] Cola con pesos y callbacks por operación [S]
+- [x] Cola con pesos y callbacks por operación [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 
 ## E. LRU de chunks (7)
 
@@ -82,7 +93,7 @@
 
 - [ ] Escena full-screen con arte del mundo [S]
 - [ ] Nubes/parallax en animación suave [S]
-- [ ] Barra de progreso real + etapa ("Cargando islas...") [S]
+- [x] Barra de progreso real + etapa ("Cargando islas...") [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] Textos de estado descriptivos (sección 8 AGENTS) [S]
 - [ ] Consejos de mundo rotando (tips.txt, seed M29) [S]
 - [ ] Fade a escena al terminar [S]
@@ -110,13 +121,13 @@
 
 ## J. Integración (8)
 
-- [ ] M08: encolado de chunks y mesh en hilos [S]
+- [x] M08: encolado de chunks y mesh en hilos [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] M12: anillo de cámara y eventos de región [S]
 - [ ] M28/M69: precarga de destino [S]
 - [ ] M29: pausa de cargas en pantallas [S]
 - [ ] M45/M46: LoadingScreen reutilizable [S]
 - [ ] M47: mips por LOD [S]
-- [ ] M61: presupuestos aplicados [S]
+- [x] M61: presupuestos aplicados [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
 - [ ] Sin acoplamiento al save del mundo (M29) [S]
 
 ## K. Pruebas y QA (8)

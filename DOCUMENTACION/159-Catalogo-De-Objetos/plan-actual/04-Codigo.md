@@ -74,3 +74,27 @@ enum Interaccion { NINGUNA, SENTARSE, DORMIR, ALMACENAR, COCINAR,
 - Log 123: Expansiones cozy (Tsuki's Odyssey)
 - Log 124: Mejora documentación cozy con investigación web
 - Log 125: Creación de M159 (Catálogo de Objetos)
+- Log 388: Iteración 1 — .tres x29, checklist ampliado
+- Log 477: Iteración 2 — .tres x65 adicionales + tests ItemDatabase
+
+## 6. Notas del Agente
+
+**Modelo:** stepfun-3.7-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 22:51
+**Estado:** Iter 2 completada — catálogo ampliado a 94 .tres + tests ItemDatabase
+
+### Lo que hice
+- Creé 65 archivos `.tres` adicionales en `data/items/` cubriendo COCINA (10), TALLER (5), EXTERIORES (5), NATURALEZA (5), CONSTRUCCION (5), HERRAMIENTAS (5), ITEMS (10), ROPA (5), ARTE_ANCESTRAL (5), EVENTO (5) y SECRETO (5).
+- Amplié `tests/unit/data/test_item_data.gd` con 7 tests de `ItemDatabase`: autoload disponible, carga con items, `get_item`, `get_items_by_category`, `get_items_by_rarity` y `validar_ids_unicos`.
+- Actualicé `05-Checklist.md` marcando `[x]` tests de catálogo y `[?]` honestos para integraciones pendientes.
+
+### Lo que NO pudo hacer (honestidad obligatoria)
+- No completé el 100% de objetos por categoría (quedan subcategorías y variantes pendientes).
+- No cubrí `get_items_by_source` en tests.
+- No integré consumos reales con M14/M16/M18/M39/M155 (dependen de módulos externos).
+
+### Recomendaciones para el próximo agente
+- Completar catálogo por categoría hasta >=300 objetos.
+- Agregar tests de `get_items_by_source` y carga headless Godot.
+- Integrar catálogo con M14/M16/M18/M39 cuando estén listos.

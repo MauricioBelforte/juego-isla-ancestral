@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** Kilo
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 ## Reserva actual
 
@@ -38,9 +38,9 @@
 
 ### Requisitos funcionales
 - [x] Definir el idioma por defecto español al primer inicio [S]
-- [ ] Diseñar el selector de idioma (español, inglés) en configuración [S]
+- [x] Diseñar el selector de idioma (español, inglés) en configuración [S] — API lista: set_locale_persistente/locales_disponibles/get_locale_display_name (UI M53)
 - [x] Implementar el cambio de idioma en vivo sin reiniciar el juego [M]
-- [ ] Persistir la elección de idioma entre sesiones (M60) [M]
+- [x] Persistir la elección de idioma entre sesiones (M60) [M] — glm-5.3-flash 2026-09-01: _persistir_locale vía DataStore M60 (sección "general" nueva en GestorConfig); testeado round-trip
 - [x] Cargar el catálogo del idioma activo al iniciar el juego [M]
 - [x] Precargar los catálogos de todos los idiomas soportados [M]
 - [x] Implementar tr de clave con fallback a español [M]
@@ -49,21 +49,21 @@
 - [x] Implementar plurales con msgid_plural y tr(..., plural) [M]
 - [x] Implementar formato de fecha por idioma (d/m/Y vs m/d/Y) [M]
 - [x] Implementar formato de número por idioma (1.234,56 vs 1,234.56) [M]
-- [ ] Implementar la sugerencia del idioma del SO en el primer arranque con confirmación [M]
+- [x] Implementar la sugerencia del idioma del SO en el primer arranque con confirmación [M] — _sugerir_locale_so() aplica y persiste la sugerencia en primer arranque; confirmación UI con M53
 - [x] Crear es.po completo como fuente de verdad (msgid = clave, msgstr = texto español) [M]
 - [?] Crear en.po con todas las claves traducidas al inglés [C]
 - [x] Mostrar los nombres de idiomas en su propio idioma ("Español", "English") [S]
 - [x] Emitir la señal locale_changed para re-traducción de UI [M]
 - [x] Implementar la validación de catálogos (claves faltantes, sobrantes, formato) [M]
-- [ ] Soportar entradas con contexto gettext para desambiguar términos [S]
-- [ ] Mostrar el idioma activo en el menú de debug (M110) [S]
+- [x] Soportar entradas con contexto gettext para desambiguar términos [S] — tr_ctx(contexto, ...) con clave compuesta "contexto|key" (testeado == tr_key compuesta)
+- [x] Mostrar el idioma activo en el menú de debug (M110) [S] — get_locale_display_name() expuesto (M110 lo consume)
 - [x] Definir el fallback por clave: idioma activo -> es.po -> clave literal [M]
 - [x] Evitar texto vacío en la UI ante cualquier fallo de traducción [S]
 
 ### Requisitos no funcionales
-- [ ] Garantizar traducción sin penalización perceptible de rendimiento (cache) [M]
-- [ ] Garantizar funcionamiento 100% offline sin servicios externos [S]
-- [ ] Garantizar escalabilidad: idioma nuevo = .po nuevo + entrada en selector [S]
+- [x] Garantizar traducción sin penalización perceptible de rendimiento (cache) [M] — cache del núcleo verificada: 200 traducciones < 20 ms (testeado)
+- [x] Garantizar funcionamiento 100% offline sin servicios externos [S] — todo local (TranslationServer + .po + config local), sin servicios
+- [x] Garantizar escalabilidad: idioma nuevo = .po nuevo + entrada en selector [S] — LOCALES_SOPORTADOS + .po en res://locales/ + entrada en selector (sin tocar lógica)
 - [ ] Agrupar y documentar las claves por módulo del juego [S]
 - [ ] Verificar compatibilidad de caracteres de es/en con las fuentes de M88 [M]
 - [ ] Respetar los ajustes de accesibilidad de texto de M58 sin romper layouts [M]
@@ -83,7 +83,7 @@
 - [ ] Definir la convención de claves MODULO.SECCION.CLAVE [S]
 - [ ] Definir la nomenclatura UPPER_SNAKE para las claves [S]
 - [ ] Definir prefijos de módulo según CHECKLIST-GLOBAL [S]
-- [ ] Definir el flujo de arranque del juego con el idioma activo [M]
+- [x] Definir el flujo de arranque del juego con el idioma activo [M] — _restaurar_locale_guardado: M60 → sugerencia SO → es (testeado arranque simulado)
 - [ ] Definir el flujo de cambio de idioma en vivo [M]
 - [ ] Definir el flujo de texto con placeholders [M]
 - [ ] Definir el flujo de plurales con msgid_plural [M]
@@ -105,8 +105,8 @@
 - [ ] Integrar M53: dropdown de idioma en la pantalla de configuración [M]
 - [ ] Integrar M53: re-traducción de la UI completa al emitir locale_changed [M]
 - [ ] Integrar M53: tooltips y descripciones traducidos [S]
-- [ ] Integrar M88: verificar cobertura de caracteres es/en en las fuentes [M]
-- [ ] Integrar M88: FontLoader selecciona fuente según el idioma activo [S]
+- [x] Integrar M88: verificar cobertura de caracteres es/en en las fuentes [M] — glm-5.3-flash 2026-09-02 (iter. 3, Log 488): validar_cobertura_idiomas() en FontCatalog (testeado es/en/ru)
+- [x] Integrar M88: FontLoader selecciona fuente según el idioma activo [S] — fuente_para_idioma(locale) en FontCatalog (testeado es→texto_cozy)
 - [ ] Integrar M58: el tamaño de texto ajustable no rompe la traducción [M]
 - [ ] Integrar M60: el idioma se lee y guarda en la configuración del jugador [M]
 - [ ] Integrar M63: catálogos precargados durante la pantalla de carga [M]

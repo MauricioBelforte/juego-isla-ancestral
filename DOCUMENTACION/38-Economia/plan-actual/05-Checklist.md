@@ -85,7 +85,7 @@
 
 - [ ] Definir PriceDefinition con precio_compra_base y precio_venta_base [M]
 - [x] Aplicar regla precio_venta < precio_compra para todo revendible [M]
-- [x] Definir descuento_amistad_max con tope del 15% � escalones 5/10/15% en niveles de amistad 2/3/4 de M20 (implementado en price_manager, validado con test_consumidores_tiempo) [M]
+- [x] Definir descuento_amistad_max con tope del 15% ? escalones 5/10/15% en niveles de amistad 2/3/4 de M20 (implementado en price_manager, validado con test_consumidores_tiempo) [M]
 - [ ] Definir variabilidad_mercado por ítem (0.0 fijo .. 1.0 sensible) [M]
 - [x] Definir limite_venta_diario configurable por ítem [S]
 - [ ] Definir temporada_bonus para ítems estacionales [S]
@@ -166,7 +166,7 @@
 - [ ] Día sin ventas: tabla del día sin cambios, sin ajuste por oferta vacía [S]
 - [ ] Evento feria al amanecer: precios especiales conviven con el recálculo sin pisarse [M]
 - [ ] Guardado a mitad del día: contadores diarios y ventana se restauran exactos [M]
-- [x] Saldo en MAX_SALDO: dep�sitos se clampan con aviso DOM-ECO-SALDO [S]
+- [x] Saldo en MAX_SALDO: dep?sitos se clampan con aviso DOM-ECO-SALDO [S]
 - [ ] Ítem sin PriceDefinition en catálogo: error de validación en editor, precaución en runtime [M]
 - [ ] Descuento de amistad + penalización de límite: nunca precio final 0 o negativo [M]
 
@@ -205,7 +205,7 @@
 - [ ] Definir prueba de descuentos por amistad en 3 niveles [M]
 - [ ] Definir prueba de anti-aribitraje: reventa de crafting nunca rentable [M]
 - [ ] Definir prueba de rendimiento: 5000 transacciones simuladas sin picos [M]
-- [x] Definir prueba de edge cases: precios cero, inventario lleno, 0 monedas [M] (parcial: precios/cantidades inv�lidas cubiertas por test_edge_cases_precio.gd; inventario lleno/0 monedas pendientes en M14/M39)
+- [x] Definir prueba de edge cases: precios cero, inventario lleno, 0 monedas [M] (parcial: precios/cantidades inv?lidas cubiertas por test_edge_cases_precio.gd; inventario lleno/0 monedas pendientes en M14/M39)
 - [ ] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 - [x] Implementar limite_ventas_dia por banda de rareza: comun=3, poco_comun=3, raro=2, epico=1, con resolucion desde catalogo (PriceDefinition.rareza) y fallback al enum ItemData.Rareza [M] (log 191)
 - [x] Crear test_edge_cases_precio.gd (headless, M38): cantidad 0/negativa = minorista, tope volumen 15%, venta estable anti-arbitraje, clamp >=1 en base minima, reseteo por dia, limite por banda. 20/20 checks OK [M] (log 235)

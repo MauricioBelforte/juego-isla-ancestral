@@ -1,4 +1,4 @@
-**Modelo:** qwen/qwen3.8-max:free
+**Modelo:** deepseek-v4-flash
 **Plataforma:** Kilo Code
 
 ## Reserva actual
@@ -6,8 +6,8 @@
 | Campo | Valor |
 |---|---|
 | Módulo | M17 Construcción (iter. 1) |
-| Estado | 🔵 En curso |
-| Agente | qwen/qwen3.8-max:free (Kilo Code) |
+| Estado | 🟢 Disponible |
+| Agente | DeepSeek V4 Flash (Kilo Code) |
 | Fase | F5 (base de producción) |
 | Visión | V0 |
 | Entrada | M08✅ M14🟢 — sistema de construcción voxel complejo |

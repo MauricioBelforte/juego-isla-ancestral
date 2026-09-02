@@ -3,6 +3,21 @@
 
 # 05-Checklist.md — Módulo 108: Pipeline de Assets
 
+## Bloque `Reserva actual`
+
+| Campo | Valor |
+|---|---|
+| Módulo | M108 — Pipeline de Assets |
+| Fase | 8 (Arte y calidad final) |
+| Dificultad | 3 |
+| Visión | V1 |
+| Agente | deepseek-v4-flash-vision-exp (Kilo Code) |
+| Fecha reserva | 2026-09-01 12:40 |
+| Estado | 🔵 En curso — iter 1 núcleo |
+| Entrada | Doc completa (tanda 6) + 153 GLB reales en assets/3d/{media,baja} (M166/M18) |
+| Salida | Validador `asset_validator.gd` + guía ASSET-PIPELINE.md + plantilla de ficha + 20 fichas + reporte de auditoría |
+| Archivos | `game/isla-ancestral/tools/asset_validator.gd` (nuevo) + `DOCUMENTACION/108-Pipeline-De-Assets/plan-actual/*` + `game/isla-ancestral/assets/fichas/*.md` |
+
 ## A. Problema y objetivos
 
 - [ ] Definir el problema: sin pipeline los assets entran sin formato, nombre, optimización ni legalidad verificables [S]
@@ -215,6 +230,25 @@
 
 - [ ] Definir el plan de testings del pipeline (06-Plan-Testings.md) cuando se implemente [C]
 - [ ] Probar el flujo completo con 20 assets de prueba representativos [C]
+
+## Iteración 1 cerrada (2026-09-01) — deepseek-v4-flash-vision-exp / Kilo Code
+
+- [x] CREAR ASSET-PIPELINE.md (guía rectora) — en `plan-actual/ASSET-PIPELINE.md` (formatos RF2/RF3, convención de nombres adoptada §3, ficha RF8, review RF9, optimización RF6, IA RF10, auditoría RF11, retiro RF12) [C]
+- [x] Auditor total del árbol: `tools/asset_validator.gd` — **198 assets GLB, 198 OK, 0 errores, exit 0** (re-ejecutado 2 veces: 138 errores antes de fichas → 0 después) [C]
+- [x] 66 fichas de asset creadas en `assets/fichas/*.md` (66 IDs únicos de assets/3d/{media,baja,alta}; estado APROBADO por barrido E-13 de M166) [M]
+- [x] RF11 reporte generado en `tools/reportes/asset_validation.txt` consumible por humanos y CI [M]
+- [x] RF9 review visual de muestra: `scenes/preview_assets.tscn` + `scripts/assets/preview_assets.gd` — 3 assets (casa_completa_ejemplo, totem_isla, palmera) verificados en runtime (captura `tools/mcp/godot-mcp/capturas/108-Pipeline-De-Assets/`): siluetas/correctas, escala, sin artefactos [M]
+- [x] RF4 convención de nombres adoptada y documentada: `{NN}-{Modulo}_{snake_case}[_variante].glb` (coherente con M166; NO se renombra la tanda existente) [M]
+- [x] RF12 reglas de actualización/retiro documentadas en la guía [S]
+
+### Pendientes de esta iteración (honestidad)
+
+- [?] Presets de importación por tipo (RF5): pendiente — requiere definir import settings por tipo (textura/audio/fuente) cuando M46/M47/M41 entren en producción (dueño: M45/M108 iter 2). Los glb ya importados se importan con defaults de Godot.
+- [?] Reglas de tamaño/compresión VRAM auditables (RF6 completo): el validador audita tamaño; mipmaps/compresión se auditarán con texturas reales (M47).
+- [?] Flujo `assets/staging/` → aprobación (RF1): carpeta creada en caliente por la guía; el proceso de mover/importar será usado en la primera tanda M45 (dueño: M45/108 iter 2).
+- [x] Presupuesto de memoria/frame tras entrada de assets (M61/M62) — CERRADO 2026-09-01 (Log 386): bench real FPS 59.35 / draw calls 374.0 (≤400) / frame 16.35 ms sobre la isla completa; el terreno voxel queda dentro del presupuesto con margen para content.
+
+**Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-01
 - [ ] Probar el edge case de asset gigante y su rechazo [M]
 - [ ] Probar el edge case de textura sin comprimir y su corrección con presets [M]
 - [ ] Probar el edge case de nombre conflictivo y la resolución guiada [M]

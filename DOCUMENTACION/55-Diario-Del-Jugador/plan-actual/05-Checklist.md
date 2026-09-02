@@ -1,9 +1,14 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; documentación base por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
-# 05-Checklist.md — Módulo 55: Diario del Jugador (120 ítems)
+# 05-Checklist.md — Módulo 55: Diario del Jugador (131 ítems)
 
-**Estado:** 120/120 completados. [S]=Simple [M]=Medio [C]=Complejo.
+> **Reserva actual (LIBERADA 🟡)**
+> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-09-01 12:25 · **Estado:** 🟡 Liberado (iter. 1 núcleo V0/V1, Log 374 — renumerado desde 327, ver Log 375)
+> **Entrada:** M07 ✅ + M22 ✅ + M19 ✅ + M28 ✅ + M29 ✅ (emiten las señales consumidas) · **Salida:** DiaryService autoload + catálogo 14 categorías JSON + registro por eventos reales + anti-spoiler + persistencia M59
+> **Archivos afectados:** `scripts/diario/diary_service.gd`, `data/diario/diario_catalog.json`, `scripts/diario/test_diario.gd`, `scripts/core/event_bus.gd` (dominio diary), `project.godot`
+
+**Estado:** 7/131 completados (iter. 1 núcleo: catálogo, 6 mapeos de eventos reales, anti-spoiler, favoritos/búsqueda, persistencia). [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. Diseño General del Diario
 
@@ -11,7 +16,7 @@
 - [ ] Definir navegación de 2 clics hacia cualquier entrada [M]
 - [ ] Definir estados de entrada: no_visto, visto, completado [S]
 - [ ] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M]
-- [ ] Separar datos del catálogo de la lógica del servicio (M15) [M]
+- [x] Separar datos del catálogo de la lógica del servicio (M15) [M] — glm-5.3-flash 2026-09-01: catálogo data-driven en data/diario/diario_catalog.json + DiaryService autoload
 
 ## B. Diseño de UI (M53)
 
@@ -24,7 +29,7 @@
 ## C. Registro por Eventos (EventBus M07)
 
 - [ ] Definir el EventBus como único canal de registro [M]
-- [ ] Mapear evento NPC_CONOCIDO (M19) → entrada personaje [M]
+- [x] Mapear evento NPC_CONOCIDO (M19) → entrada personaje [M] — IMPLEMENTADO: puente npc.npc_moved_in (M19) → personajes, _slug normalizado (testeado)
 - [ ] Mapear evento LUGAR_VISITADO (M09) → entrada lugar [M]
 - [ ] Mapear evento ESPECIE_AVISTADA (M36/M65) → entrada criatura [M]
 - [ ] Mapear evento PLANTA_IDENTIFICADA (M50) → entrada planta [M]
@@ -34,15 +39,15 @@
 - [ ] Mapear evento MINERAL_DESCUBIERTO (M35) → entrada mineral [M]
 - [ ] Mapear evento RECETA_DESBLOQUEADA (M16) → entrada receta [M]
 - [ ] Mapear evento PISTA_LEIDA (M24/M26) → entrada pista releíble [M]
-- [ ] Mapear evento SELLO_OBTENIDO (M22/M26) → entrada Sello completada [M]
+- [x] Mapear evento SELLO_OBTENIDO (M22/M26) → entrada Sello completada [M] — IMPLEMENTADO: puente quest.prereq_met (M22) → sellos (testeado)
 - [ ] Mapear evento RUIDA_PROGRESADA (M25) → entrada ruina con estado 1-4 [M]
 
 ## E. Registro por Eventos (final)
 
-- [ ] Mapear evento CARTA_RECIBIDA (M74) → entrada carta [M]
+- [x] Mapear evento CARTA_RECIBIDA (M74) → entrada carta [M] — IMPLEMENTADO: puente npc.carta_recibida → cartas (testeado)
 - [ ] Mapear evento DESCUBRIMIENTO (M71) → entrada descubrimiento [M]
-- [ ] Mapear evento MISION_CAMBIADA (M22/M23) → entrada misión [M]
-- [ ] Mapear evento EVENTO_OCURRIDO (M74/M29) → entrada evento [M]
+- [x] Mapear evento MISION_CAMBIADA (M22/M23) → entrada misión [M] — IMPLEMENTADO: puente quest.quest_completed → misiones (testeado); quest_started/updated quedan para M22/M23 richer payloads
+- [x] Mapear evento EVENTO_OCURRIDO (M74/M29) → entrada evento [M] — IMPLEMENTADO: puente calendar.season_changed → eventos (testeado, slug sin tildes)
 - [ ] Mapear evento FOTO_TOMADA (M56) → entrada fotografía [M]
 
 ## F. Registro de Personajes (M19)
@@ -58,7 +63,7 @@
 - [ ] Vincular POI del mapa (M54) con la entrada [M]
 - [ ] Guardar estado de exploración del lugar [S]
 - [ ] Marcar completado al 100% de exploración del lugar [M]
-- [ ] No listar lugares no visitados (anti-spoiler) [M]
+- [x] No listar lugares no visitados (anti-spoiler) [M] — IMPLEMENTADO: anti-spoiler general §3.2 en entradas_de() (no descubierto invisible, testeado)
 - [ ] Mostrar fauna/flora del lugar por avistamientos [M]
 
 ## H. Registro de Criaturas (M36/M65)

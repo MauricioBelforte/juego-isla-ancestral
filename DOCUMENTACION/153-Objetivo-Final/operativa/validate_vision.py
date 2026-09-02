@@ -75,8 +75,12 @@ def validate_prueba(ruta_prueba: Path) -> list:
     if not ruta_prueba.exists():
         return [f"prueba de visión ausente: {ruta_prueba.name}"]
     texto = ruta_prueba.read_text(encoding="utf-8", errors="ignore")
+    # M153 (QA cruzado Hy3/WorkBuddy, iter 1): usar tokens O# con limite de palabra
+    # (\\bO\\d+\\b) en vez de substring "O{n}". El substring causaba falso positivo:
+    # "O10" contiene "O1", asi que un texto con O10 pero sin "O1" aislado fallaba.
+    tokens = set(re.findall(r"\bO\d+\b", texto))
     for n in range(1, 20):
-        if f"O{n}" not in texto:
+        if f"O{n}" not in tokens:
             problemas.append(f"prueba de visión no menciona O{n}")
     return problemas
 
@@ -89,7 +93,12 @@ def main() -> int:
 
     aqui = Path(__file__).resolve().parent
     contrato_path = Path(args.contrato) if args.contrato else aqui / "vision_contract.json"
-    docs_root = Path(args.docs) if args.docs else aqui.parents[1]
+    # M153 (QA cruzado Hy3/WorkBuddy, iter 1): docs_root debe ser la raíz DOCUMENTACION
+    # (aqui = .../operativa -> parents[1] = 153-Objetivo-Final -> parents[2] = DOCUMENTACION).
+    # El valor anterior parents[1] apuntaba a la carpeta del módulo 153, por lo que el
+    # glob "*/plan-actual/01-Requerimientos.md" nunca matcheaba los módulos reales y la
+    # cobertura O# quedaba silenciosamente vacía. Se corrige a parents[2].
+    docs_root = Path(args.docs) if args.docs else aqui.parents[2]
 
     if not contrato_path.exists():
         print(f"ERROR: contrato no encontrado: {contrato_path}")

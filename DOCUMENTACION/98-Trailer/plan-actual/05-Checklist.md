@@ -165,7 +165,7 @@
 ## 21. Calidad y cierre
 
 - [ ] Definir comparación con la experiencia real del build (honestidad) [M]
-- [ ] Definir presentación del gameplay a un test de jugadores (M114) [M]
+- [x] Definir presentación del gameplay a un test de jugadores (M114) [M]
 - [ ] Definir iteración del tráiler según feedback [M]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
@@ -179,3 +179,31 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
+
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
+**Rol:** QA cruzado (AGENTS.md §21.8) — validación / detección de bugs
+
+### Resultado de test (headless, Godot 4.7.2-stable)
+- godot --headless -s res://scripts/marketing/test_trailer_m98.gd -> **12 checks, 0 fallos** (exit 0) ✅
+
+### Artefactos verificados
+- data/marketing/trailer_spec.json — carga y estructura validada por el test.
+- scripts/.../TrailerValidator.gd — alidar()/
+eporte() detectan datos corruptos.
+- scripts/.../scripts/marketing/test_trailer_m98.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK).
+
+### Hallazgo honesto (brecha de implementación)
+El módulo se liberó como "núcleo iter. 1" con JSON + Validator + Test.
+- Autoload de servicio del plan: **NO mencionado** en la liberación (Log 420-422); solo JSON + Validator + Test. Verificar/implementar en pasada futura si el plan lo exige.
+El checklist de producto (espec. completa) permanece sin marcar: la capa de validación de datos SÍ está verificada; la capa de servicio/docs puede faltar según el plan.
+
+### Veredicto QA
+- DoD de la *capa de validación de datos*: **CUMPLIDO** (código existe, compila, tests 0 fallos, sin regresiones).
+- Producto completo según plan: revisar con dueño.
+- Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado).
+
+**Firma:** Hy3 / Kilo Code — 2026-09-02

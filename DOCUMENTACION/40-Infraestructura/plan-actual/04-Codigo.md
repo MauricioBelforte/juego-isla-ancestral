@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** Kilo
+﻿**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (iter. 2 — Log 328; historial: Deepseek V4 Flash/Kilo iter. 1 Log 298; doc original 2026-08-17)
 
 # 04-Codigo.md — Módulo 40: Infraestructura
 
@@ -253,3 +254,55 @@ res://scripts/core/
 2. BOOT->MUNDO directo (sin menú aún; M89/M63 completarán el flujo).
 3. GameState no duplicado: lo cubre SaveManager/M59.
 4. Escenas raíz: mundo actual = main_island.tscn (plan-inicial preveía boot/main_menu/world - pendiente M89/M63).
+
+---
+
+## Implementación real iter. 2 (2026-09-01, deepseek-v4-flash / Kilo Code — Log 328)
+
+> Retome del núcleo iter. 1 (Log 298). Enfoque: cerrar el circuito de eventos de
+> infraestructura (dominio `infra` en EventBus) y exponer la API de consulta del
+> flujo, con verificación headless.
+
+### Cambios de código
+
+| Archivo | Cambio |
+|---|---|
+| `scripts/core/event_bus.gd` | + dominio `infra` (InfraEvents): `game_flow_changed(anterior, nuevo)`, `carga_iniciada(ruta)`, `carga_completada(ruta)`, `boot_completado()` — aditivo, sin romper dominios existentes |
+| `scripts/core/game_flow_manager.gd` | + `transiciones_permitidas()` (copia, para UI pausa/menú); `cambiar_estado()` reenvía el cambio por `EventBus.infra.game_flow_changed` (vía `get_node_or_null`, sin class_name) |
+| `scripts/core/scene_manager.gd` | `cambiar_escena()` y `_do_cambio()` reenvían `carga_iniciada`/`carga_completada` por `EventBus.infra` |
+| `scripts/core/test_infraestructura_m40.gd` | **NUEVO**: test headless del flujo (28 checks) |
+
+### Cobertura del test (28/0 OK)
+
+- Dominio infra presente y señales declaradas.
+- Transiciones válidas (BOOT→MUNDO, MUNDO→PAUSA, PAUSA→MUNDO, MUNDO→MENU, MENU→CARGANDO, CARGANDO→MUNDO, ERROR→BOOT) e ilegales (PAUSA→BOOT rechazada sin mutar estado).
+- `transiciones_permitidas()` en estado actual.
+- Reenvío por `EventBus.infra.game_flow_changed` (2 eventos medidos con estado normalizado).
+- SceneManager: rechazo de ruta inexistente, aceptación de escena válida, anti doble-click, señales infra emitidas.
+
+Comando: `Godot --headless --path game/isla-ancestral --script res://scripts/core/test_infraestructura_m40.gd`
+
+### Verificación
+
+- Test M40: **28/0 OK**.
+- Boot del proyecto headless: `[M40] Flujo: 0 -> 3`, `DOM-INF integridad OK: 9 dominios`, DataStore M60 sin errores.
+- Regresión M60: **66/0 OK** (EventBus compartido sin romper).
+
+### Pendientes con dueño (siguiente iteración)
+
+- Menú real (`main_menu.tscn` — M89/M53) y flujo BOOT→MENU→CARGANDO→MUNDO completo (M63).
+- Escenas `boot.tscn` / `error.tscn` con motivo i18n y reintento (D10).
+- Diagnóstico estático RF10 (cicl ImportScan) — `diagnostico.gd`.
+- `limpiar_receptor(nodo)` en EventBus (poda de suscriptores huérfanos).
+- GameState real como datopia (lo cubre parcialmente M60/M59).
+- Progreso visual de carga en transiciones (M63).
+
+### Notas del Agente (iter. 2)
+
+**Modelo:** deepseek-v4-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
+**Estado:** Parcial (núcleo + circuito de eventos infra), 🟡 liberado a QA cruzado
+
+- Los 2 `[?]` del checklist corresponden a divergencias deliberadas D8 (BOOT y CARGANDO permiten rutas extra del prototipo sin menú); se mantienen hasta que M89/M63 cierren el flujo canónico.
+- El dominio `infra` es aditivo: 40 módulos existentes emiten por sus propios dominios; no se tocó ninguna señal existente.

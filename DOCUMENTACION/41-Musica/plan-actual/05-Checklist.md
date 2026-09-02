@@ -75,7 +75,7 @@
 
 ## C. Arquitectura del sistema (10)
 
-- [ ] MusicDirector como autoload único [S]
+- [x] MusicDirector como autoload único [S]
 - [ ] Matriz de contexto en data (.tres) sin hardcode [S]
 - [ ] 3 capas máx: base + tiempo + evento [S]
 - [ ] Recolorización estacional (orquestación, no armonía) [S]
@@ -116,11 +116,11 @@
 - [ ] music_tema_bank.tres (catálogo) [S]
 - [ ] music_context_matrix.tres (matriz) [S]
 - [ ] music_volumes.tres (volúmenes/límites) [S]
-- [ ] Test: cada contexto → tema válido sin ambigüedad [S]
-- [ ] Test: crossfade A/B sin superposición [S]
-- [ ] Test: shuffle sin repetición consecutiva (200 loops simulados) [S]
-- [ ] Test: ducking reduce -6 dB durante diálogo [S]
-- [ ] Suite en caso_musica_tests.gd (M112) [M]
+- [x] Test: cada contexto → tema válido sin ambigüedad [S]
+- [x] Test: crossfade A/B sin superposición [S]
+- [x] Test: shuffle sin repetición consecutiva (200 loops simulados) [S]
+- [x] Test: ducking reduce -6 dB durante diálogo [S]
+- [x] Suite en caso_musica_tests.gd (M112) [M]
 
 ## G. Delegación y cierre (12)
 

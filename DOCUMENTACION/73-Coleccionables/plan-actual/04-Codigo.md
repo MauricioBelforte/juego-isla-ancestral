@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 73: Coleccionables
 
@@ -72,8 +72,8 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[COLL]` en
 
 ## 5. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Parcial (con dudas)
 

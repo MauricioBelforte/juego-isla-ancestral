@@ -214,17 +214,47 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 ### 6.1 Protocolo de Numeración (OBLIGATORIO — previene duplicados)
 
 > ⚠️ **Este protocolo debe seguirse EXACTAMENTE para evitar logs duplicados.**
+> **Versión 2 (2026-09-01, propuesta del usuario + glm-5.3-flash):** el número de log se
+> **RESERVA al bloquear el módulo** (no al escribir el log), y la reserva vive en una
+> carpeta de archivos temporales `Logs/reservas/` (no en memoria del agente).
+
+**Semántica de `ULTIMO_NUMERO.txt` (v2):** contiene el último número **RESERVADO** (no el último usado). Puede haber huecos en la secuencia si una reserva no se consumió — los huecos son inofensivos.
+
+#### 6.1.a RESERVA del número (en el MISMO momento de bloquear el módulo)
 
 1. **Leer `Logs/ULTIMO_NUMERO.txt`** → obtener el número actual (N).
-2. **Calcular siguiente número:** N + 1.
-3. **VERIFICAR que no exista** un archivo con ese número:
+2. **Calcular siguiente:** N + 1. **VERIFICAR** que no exista `Logs/{N+1}-*.md` NI `Logs/reservas/{N+1}-*`; si existe → incrementar hasta número libre (bucle).
+3. **ESCRIBIR el número reservado** en `ULTIMO_NUMERO.txt` (ahora N+1).
+4. **CREAR la reserva temporal** en la carpeta de reservas (la "variable temporal" compartida):
    ```
-   Logs/{N+1}-*.md
+   Logs/reservas/{NUMERO}-{AGENTE}-{MODULO}.txt
    ```
-   Si existe → incrementar hasta encontrar un número libre.
-4. **ESCRIBIR el nuevo número** en `ULTIMO_NUMERO.txt` (solo el número, sin texto adicional).
-5. **Crear el archivo de log** con el nombre: `NN-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
-6. **Actualizar el header** del archivo con `# Log NN: Descripcion`.
+   Ejemplo: `Logs/reservas/376-glm-5.3-flash-M32.txt` con contenido:
+   ```
+   numero: 376
+   agente: glm-5.3-flash
+   plataforma: Kilo Code
+   modulo: M32-Clima
+   fecha: 2026-09-01 12:00
+   ```
+5. **Anotar el número en la reserva del módulo** (CHECKLIST-GLOBAL / ESTADO-PARALELO / 05-Checklist): "Log reservado: {NUMERO}" — trazabilidad si la sesión muere.
+6. Conservar el número en la sesión (variable temporal del agente) para el paso 6.1.c.
+
+#### 6.1.b ESCRITURA del log (al finalizar la tarea)
+
+1. **VERIFICAR** que `Logs/{NUMERO}-*.md` no exista (otra reserva puede haber colisionado por race residual); si existe → incrementar hasta número libre (y actualizar la reserva temporal).
+2. **Crear el archivo de log** con el nombre: `{NUMERO}-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
+3. **Actualizar el header** del archivo con `# Log {NUMERO}: Descripcion`.
+4. **BORRAR la reserva temporal** `Logs/reservas/{NUMERO}-{AGENTE}-{MODULO}.txt` (la variable temporal se consume).
+
+#### 6.1.c ABORTO o liberación sin log
+
+- Si el agente libera el módulo **sin haber escrito el log**, la reserva queda como **hueco** (inofensivo): **BORRAR el archivo de reserva** y anotar "log reservado {N} no usado" en la liberación.
+- **Reservas huérfanas** (archivo en `Logs/reservas/` sin log asociado y con más de 48 h): el siguiente agente puede borrarlas y liberar el número para su reuso.
+
+#### 6.1.d Colisión residual (carrera en ULTIMO_NUMERO.txt)
+
+- Si dos agentes reservan a la vez y obtienen el mismo número: la verificación de `Logs/reservas/` en el paso 2 de 6.1.a detecta el duplicado → el segundo incrementa. La verificación de 6.1.b.1 absorbe cualquier caso residual.
 
 ### 6.2 Formato del Archivo
 
@@ -250,12 +280,26 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 ### 6.3 Reglas de Seguridad
 
-- **NUNCA** editar el número directamente sin verificar que no exista un archivo con ese número.
+- **NUNCA** editar el número directamente sin verificar que no exista un archivo con ese número NI una reserva en `Logs/reservas/`.
 - **SIEMPRE** verificar la existencia del archivo antes de crearlo.
-- Si dos agentes leen `ULTIMO_NUMERO.txt` al mismo tiempo, el segundo debe verificar y encontrar el número tomado → incrementar.
-- **El número en ULTIMO_NUMERO.txt es el ÚLTIMO número usado**, no el próximo. Al leerlo, sumar 1.
+- **La reserva vive en `Logs/reservas/`** (carpeta compartida, auditable por todos): NUNCA guardar el número solo en memoria ni ensuciar el código con constantes.
+- **El número en ULTIMO_NUMERO.txt es el ÚLTIMO número RESERVADO** (no el usado). Al leerlo, sumar 1.
+- Si dos agentes leen `ULTIMO_NUMERO.txt` al mismo tiempo, el segundo debe verificar reservas y archivos y encontrar el número tomado → incrementar.
 
 ## 7. Seguimiento de Progreso (Checklist)
+
+### 6.4 Comando /bucle — Automatización del bucle multiagente (2026-09-02, glm-5.3-flash/Kilo Code)
+
+El bucle reservar → leer → implementar → testear → documentar → liberar está automatizado en Kilo Code:
+
+- **Comando `/bucle`** (`.kilo/command/bucle.md`): invocable por CUALQUIER modelo en cualquier sesión. Arranca el bucle indefinido: elige módulo de su línea (columna Recom del CHECKLIST), reserva log (protocolo v2 §6.1.a), implementa, testea headless, documenta con evidencia, libera, repite hasta agotar tokens.
+- **Agente `bucle-terreno`** (`.kilo/agent/bucle-terreno.md`, mode: primary, 200 pasos): variante de glm-5.3-flash.
+- **Agente `bucle`** (`.kilo/agent/bucle.md`, mode: all, 200 pasos): variante genérica para cualquier modelo — busca módulos con Recom = su propio modelo.
+- Cada modelo firma sus documentos y usa su identidad en las reservas (`Logs/reservas/{N}-{agente}-{MODULO}.txt`).
+- Al agotarse tokens en una sesión, el usuario (o el mismo modelo) reinicia `/bucle` — el estado continúa desde CHECKLIST-GLOBAL.md (fuente de verdad persistida).
+
+TODO agente que abra una sesión de este proyecto debe arrancar su trabajo con `/bucle` (o seguir el ciclo manual si su plataforma no tiene el comando).
+
 Cada vez que completes una tarea:
 1. Leer `DOCUMENTACION/3-DOCUMENTO-TAREAS-ACTUAL.md` (o el equivalente local).
 2. Marcar como completado cambiando `[ ]` por `[x]`.
@@ -915,6 +959,7 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 |---|---|---|
 | V1 — Capturas en chat | Usuario pega screenshots; visión integrada | Validación estética final |
 | V2 — MCP custom de pantalla | Python PIL/ImageGrab vía MCP | Fallback universal |
+| **V2 REAL en Kilo Code (2026-09-02, glm-5.3-flash):** MCPs declarados en `.kilo/kilo.json` — godot (15 tools: run_project, get_debug_output, escenas, uid), screen (capture_screen/capture_window/save_capture con fastmcp+PIL, deps OK) y blender (addon.py, DESHABILITADO hasta validar conexión con Blender). Tras recargar la ventana de VS Code, los agentes tienen `mcp__screen__*` y `mcp__godot__*` nativos — la V2/V4 deja de ser manual |
 | V3 — Export web + Playwright | Godot HTML5 + skill webapp-testing | QA automatizado / regresión visual |
 | V4 — godot-mcp ⭐ | MCP controla editor Godot | Verificación dentro del juego (**FUNDAMENTAL**) |
 | V5 — Blender + blender-mcp ⭐ | bpy + viewport screenshot | Diseño/modelado de assets con visión |
@@ -1005,3 +1050,29 @@ El proyecto cuenta con una biblioteca de **skills procedimentales** instalada en
 ### Ubicación
 - Skills: `.claude/skills/` (raíz del proyecto, versionado en git)
 - Origen temporal (propio de quien instaló): `C:\Temp\skills_tmp\{vercel-skills, gd-agentic, blender-skills}` (clones de referencia, no versionado)
+
+## 28. Codificación de Archivos (UTF-8 Obligatorio)
+
+> **Agregado:** 2026-09-02 · **Fuente:** iniciativa del usuario (directiva de codificación de archivos)
+
+### Problema detectado
+Varias plataformas de agentes (p. ej. OpenCode/uagent en Windows) escriben los archivos del proyecto usando la **página de códigos 1252 (cp1252 / ANSI)** en lugar de **UTF-8**. Esto corrompe todos los caracteres no ASCII:
+- Acentos y eñes (`á`, `é`, `í`, `ó`, `ú`, `ñ`, `Ñ`) → aparecen como mojibake doble (`Ã¡`, `Ã©`, `â€`, `Ã±`).
+- Emojis de estado del protocolo (`✅`, `🔵`, `🟡`, `🟢`, `⬜`, `🔴`) → se rompen en secuencias ilegibles.
+- El archivo `AGENTS.md` y otros documentos quedan parcialmente ilegibles para agentes y humanos, y el diff de git se ensucia con cambios de codificación.
+
+### Regla obligatoria
+1. **Todos los archivos de texto del proyecto deben guardarse en UTF-8 sin BOM.** Esto aplica a `.md`, `.gd`, `.cs`, `.py`, `.json`, `.tscn`, `.tres`, `.cfg`, `.txt` y cualquier otro archivo de texto versionado.
+2. **NUNCA escribir en cp1252/ANSI.** Si la plataforma del agente guarda por defecto en cp1252, debe reconfigurarse para usar UTF-8 antes de tocar el repositorio.
+3. **Al editar un archivo existente**, preservar su codificación (UTF-8). No "re-encodear" ni convertir a cp1252.
+4. **Verificación antes de commit:** si un agente sospecha que escribió en cp1252, debe convertir el archivo a UTF-8 (`utf-8` estricto) antes de notificar al usuario. En Windows PowerShell:
+   ```powershell
+   Get-Content -LiteralPath ruta\archivo.md -Encoding Byte | Set-Content -LiteralPath ruta\archivo.md -Encoding Byte
+   # y reescribir con UTF-8:
+   $c = [System.IO.File]::ReadAllText('ruta\archivo.md', [System.Text.Encoding]::GetEncoding(1252))
+   [System.IO.File]::WriteAllText('ruta\archivo.md', $c, [System.Text.Encoding]::UTF8)
+   ```
+5. **Detección temprana:** los caracteres `Ã`, `â€` o `Â` en un diff son señal segura de archivo guardado en cp1252. Corregir inmediatamente.
+6. **Firma de documentos:** las firmas (`**Modelo:**`, `**Plataforma:**`) y los emojis de estado deben quedar legibles; si aparecen corruptos tras una edición, el agente debe reescribir el archivo en UTF-8.
+
+> **Nota de operación:** si se detecta una corrupción masiva de codificación en archivos ya versionados, aplicar una pasada de saneamiento que **decodifique cp1252 → re-encode UTF-8** solo a los archivos afectados, verificando con `git diff` que no se introduzcan cambios semánticos. No aplicar conversión ciega a binarios (`.png`, `.res`, `.import`, etc.).

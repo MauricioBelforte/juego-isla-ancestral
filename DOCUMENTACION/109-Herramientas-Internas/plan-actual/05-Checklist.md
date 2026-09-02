@@ -208,3 +208,18 @@
 **Total de ítems:** 127
 **Ítems resueltos por documentación:** 127 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Framework común de editores: `scripts/editor/tools/editor_base.gd` (@tool PanelContainer) — lista de entradas + formulario por campo + guardado con backup .bak + mensajes de estado (base data-driven para los 14 editores RF1)
+- [x] Núcleo de validación testeable: `scripts/editor/support/recipe_schema.gd` (RecipeSchema) — reglas de `data/balance/crafting.json` (categorías, estaciones, nivel>=1, resultado_cantidad>=1, coste_recursos bien formado) con `validar()/costes_a_texto()/texto_a_costes()`
+- [x] Editor de recetas OPERATIVO (RF6): `scripts/editor/tools/recipe_tool.gd` — lista de recetas reales del juego, formulario de 10 campos, guardado a `crafting.json` con backup `.bak`, validación previa con RecipeSchema
+- [x] Plugin del editor: `scripts/editor/plugin_herramientas.gd` (EditorPlugin) registrado en project.godot [editor_plugins] — dock "Herramientas internas" con el catálogo de editores (Recetas activo; los 13 siguientes listos para sumarse por el patrón)
+- [x] Tests del núcleo (6 gdUnit): receta válida (pico de cobre real), invalidaciones (sin costes, id vacío, estación inválida, nivel 0), roundtrip de costes → suite completa ÉXITO (0 fallos)
+- [?] Verificación visual del dock del editor: pendiente — requiere reinicio del editor de Godot (instancia activa de otro agente); se revalida con la primera captura de layout en la próxima sesión con editor propio (dueño: deepseek-v4-flash-vision-exp)
+- [?] Editores restantes (bloques, biomas, NPC, diálogos, misiones, economía, tiendas, clima, estaciones, puzzles, ruinas, spawns, mapas, teleport, profiling = 13+2): siguen el patrón EditorBase con su propio schema validable — iteración 2 (dueño: deepseek-v4-flash-vision-exp, M109 iter 2)
+## Iteración 2 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Editor de diálogos (RF4) — núcleo: `scripts/editor/support/dialogo_schema.gd` (validador de grafos M21/M23: start existe, nodos con text, referencias next/opciones a nodos existentes, sin inalcanzables)
+- [x] **Auditoría masiva del dataset real**: `scripts/editor/tools/dialogos_auditor.gd` recorre los 268 grafos (data/dialogues/ + contextual) → **268 OK, 0 con problemas** (reporte: tools/reportes/dialogos_audit.txt, exit 0) — ningún problema de referencia/huérfano en el contenido de los agentes
+- [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
+- [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)

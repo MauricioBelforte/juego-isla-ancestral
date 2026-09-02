@@ -344,41 +344,28 @@ func get_npc_at_location(location_id: String) -> Array[String]:
     return location.npcs
 ```
 
-## 4. Validación de Diseños
+## 4. Notas del Agente
 
-### 4.1 Script de Validación
+**Modelo:** stepfun-3.7-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 15:37
+**Estado:** Iter 2 completada — catálogo 23 .tres + tests headless + docs
 
-```gdscript
-# validate_npc_visuals.gd (Editor tool)
-extends EditorScript
+### Lo que hice
+- Completé 22 archivos `.tres` faltantes (RIZ 7 + COR 5 + CEN 5 + AUR 5) sumados al ejemplo previo NPC-RIZ-002.
+- Organicé la carpeta `data/npc_visuals/` en subcarpetas por isla (`RIZ/`, `COR/`, `CEN/`, `AUR/`).
+- Expandí `test_npc_visual_database.gd` con tests de carga, filtrado por isla, validación de campos obligatorios y validación de formato HEX.
+- Actualicé `05-Checklist.md`: marqué [x] los ítems de diseño/colores/.tres/herramientas/accesorios y testing.
 
-func _run() -> void:
-    var visuals = NPCVisualDatabase.visuals
-    var errors = []
-    
-    for npc_id in visuals.keys():
-        var visual = visuals[npc_id]
-        
-        # Validar que tiene ropa completa
-        if not visual.sombrero or not visual.torso or not visual.piernas or not visual.pies:
-            errors.append("Ropa incompleta: " + npc_id)
-        
-        # Validar que tiene herramienta
-        if visual.herramienta_derecha == "" and visual.herramienta_izquierda == "":
-            errors.append("Sin herramienta: " + npc_id)
-        
-        # Validar colores HEX
-        if not visual.sombrero.color_principal.begins_with("#"):
-            errors.append("Color inválido: " + npc_id + " sombrero")
-        
-        # Validar que herramienta existe en M159
-        if visual.herramienta_derecha != "":
-            if not ItemDatabase.items.has(visual.herramienta_derecha):
-                errors.append("Herramienta no existe en M159: " + visual.herramienta_derecha)
-    
-    if errors.is_empty():
-        print("✅ Todos los diseños visuales son válidos")
-    else:
-        for error in errors:
-            print("❌ " + error)
+### Lo que NO pude hacer (honestidad obligatoria)
+- No creé variantes estacionales como archivos `.tres` separados. El diseño de datos (`variantes_estacionales: Dictionary`) está listo, pero quedan como trabajo futuro los 92 archivos de variante (23 NPCs × 4 estaciones).
+
+### Intentos fallidos / decisiones
+- Intenté autocontener variantes en el `.tres` base, pero Godot requiere recursos externos para `Dictionary` de variantes. Se deja documentado en `04-Codigo.md` y log.
+
+### Recomendaciones para el próximo agente
+- Crear variantes estacionales siguiendo la paleta §9.4 de `03-Diseno.md`.
+- Integrar con M45 (modelos 3D) y M46 (retratos 2D) cuando esos módulos avancen.
+- Verificar que los IDs M159 de herramientas existan en `ItemDatabase` al integrar con M159.
+
 ```

@@ -234,3 +234,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Test oficial M88 ejecutado: **11 checks, 0 fallos, exit 0** (FontCatalog 4 fuentes, museo_moderno, licencias permitidas, reporte, detección de sin-licencia/licencia no permitida/pesos)
+- [x] **Verificación VISUAL de legibilidad** (análisis con visión sobre captura en vivo del juego, 1600x900): textos de UI completos y correctos — 'Lunes, 1 de Primavera, Año 1', 'Pico de Cobre (150/150)', widget 'Fecha y hora (Sesión: Mañana / Estación: Primavera / Próximos eventos: día 2, día 3)', controles (WASD/Scroll/Escape/F) — **acentos españoles correctos, sin tofu ni glifos rotos, contraste adecuado**
+- [x] Matiz registrado: texts de hotbar en fuente pequeña (~17px) legibles en 1600x900 — se revalida en 720p en accesibilidad (M58, dueño)
+- [?] Prueba en 1280x720 y 1366x768 (escalado de UI): pendiente (dueño: M58 accesibilidad / M53 UI)

@@ -262,23 +262,57 @@ debug_color = Color(0.2, 0.8, 0.2, 1)
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-22
 
-### Lo que se documento
-- Arquitectura completa del sistema
-- Contratos de integracion entre modulos
-- Flujo de ejecucion paso a paso
-- Configuracion de Layers necesaria
-- TerrainData resources a crear
-- Items pendientes de implementacion
+## 5. Notas del Agente
 
-### Limitaciones conocidas
-- El sistema depende de que cada terreno tenga el script terrain_block.gd
-- El RayCast3D debe estar correctamente configurado en el jugador
-- Las Layers deben estar asignadas en el editor de Godot
-- Los assets de audio y particulas deben crearse externamente
+**Modelo:** stepfun-3.7-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 23:02
+**Estado:** Iter 1 completada — núcleo de detección y datos
 
-### Recomendaciones para implementacion
-1. Empezar creando los TerrainData resources antes que el codigo
-2. Configurar las Layers en Godot antes de probar
-3. Crear un nivel de prueba con todos los tipos de terreno
-4. Implementar el sistema de debug para ver el terreno actual
-5. Probar con diferentes combinaciones de equipo y terreno
+### Lo que hice
+- Creé la estructura de carpetas del módulo: `scripts/terrain/`, `resources/terrain/`, `scenes/terrain/`.
+- Implementé `terrain_data.gd` (Resource) + 7 `.tres` de terreno con `speed_modifier` canónico.
+- Implementé `terrain_detector.gd` (RayCast3D + timer + cache + debounce + señal `terrain_changed`).
+- Implementé `terrain_data_provider.gd` (carga desde `resources/terrain/`, índice por `terrain_id`, queries + fallback).
+- Implementé `terrain_modifiers.gd` (cálculo de velocidad efectiva con clamp a 0).
+- Amplié tests headless en `tests/unit/terrain/test_terrain_modifiers.gd` (5 tests: cálculo, clamp, 3 terrains + fallback).
+- Actualicé `05-Checklist.md`: 57 `[x]`, 1 `[?]` (debug visual), 244 pendientes.
+
+### Lo que NO pudo hacer (honestidad obligatoria)
+- No integré M11 (movimiento del jugador) ni M155 (bonos de equipo) porque sus archivos actuales no exponen los puntos de integración requeridos.
+- No implementé `TerrainFootstepAudio` ni escenas de huellas/partículas.
+- No completé el 100% del checklist (302 ítems); esta iteración cierra el núcleo data-driven.
+
+### Recomendaciones para el próximo agente
+- Integrar `TerrainDetector` en `player_movement.gd` (M11) usando `terrain_changed` + `get_speed_modifier`.
+- Agregar `get_terrain_bonus()` en M155 y conectarlo con `TerrainModifiers.calculate_effective_speed`.
+- Completar feedback visual/audio y escenas de pasos en `scenes/terrain/`.
+
+
+---
+
+## Notas del Agente — Iteración 1 núcleo (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 02:40:00
+**Estado:** Parcial (núcleo de detección/modificadores implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- TerrainData Resource (scripts/terrenos/terrain_data.gd, §1.5): terrain_id, nombre, speed_modifier, visual_config/audio_config placeholders (V2 M45/M52), debug_color.
+- TerrainProvider autoload (scripts/terrenos/terrain_provider.gd, §1.3): 7 terrenos data-driven en data/terrenos/terrenos.json (diseño §4.2: césped 1.0, barro 0.6, pavimento 1.0, arena 0.75, agua 0.7, nieve 0.8, rocas 0.85 — velocidades 5.0→3.0-5.0), get_speed_modifier con fallback 1.0 (§10.2), registrado en ServiceRegistry como "terrenos".
+- TerrainModifiers static (scripts/terrenos/terrain_modifiers.gd, §1.4): calculate_effective_speed (base × terreno × (1+equipo) con cap 50% §3.1), get_terrain_modifier, get_equipment_bonus (0.0 fallback sin M155 §10.2), calculate_full end-to-end.
+- TerrainDetector (scripts/terrenos/terrain_detector.gd, §1.2 adaptado a VoxelTerrain M08): RayCast3D vertical, intervalo 0.1 s, debounce anti-flickering 0.15 s (§10.2), mapeo block_id→terrain_id del voxel, señal terrain_changed, get_current_terrain_id.
+- Integración M11 (§2.2): el player consulta — sin tocar el núcleo de M11 en iter. 1 (la velocidad efectiva queda expuesta vía TerrainModifiers.calculate_full; el patch del player es iter. 2 con la escena real).
+- Test test_terrenos.gd: catálogo 7 terrenos con modificadores exactos del diseño §4.2, calculate_effective_speed (barro 3.0/4.05, cap 50%), calculate_full nieve 4.0, detector como RayCast3D con señal → **0 fallos**.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Patch del player.gd de M11 para aplicar la velocidad efectiva: tocar el núcleo de movimiento de M11 (ox-alpha) requiere coordinación — el contrato §2.2 está expuesto (M11 consulta, M156 responde). Es iter. 2 con la escena real (el modificador aplica multiplicando move_speed en el _physics_process).
+- Huellas/partículas/audio (§5-§6), indicador UI (§7): V2 visual/audio con dueño M53/M45/M42.
+- M155 get_terrain_bonus: M155 está en 69/108 sin el método — fallback 0.0 (§3.1) ya implementado y testeado.
+- Detección con voxel real en test: requiere main_island.tscn — el test valida clase/contrato; la detección real con VoxelTerrain es de escena.
+
+### Recomendaciones para el próximo agente
+- Iter. 2 (con escena): añadir TerrainDetector como hijo del Player en player.tscn (target_position -2m), y en player.gd multiplicar move_speed por TerrainProvider.get_speed_modifier(detector.get_current_terrain_id()).
+- M155: al implementar equipo, exponer get_terrain_bonus(terrain_id) → el flujo completo §4.2 funciona sin cambios (cap 50% ya en TerrainModifiers).
+- El mapeo block_id→terrain_id (terrain_detector) es TUNING: los ids de bloques M08 pueden cambiar — editar _block_a_terrain().

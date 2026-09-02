@@ -115,3 +115,56 @@ Implementé el **núcleo funcional** del detector anti-softlock en Godot 4.7.2 (
 - El módulo queda **DELEGABLE**: para implementar requiere M22 (Historia Principal) y M26 (Templo Subterráneo) publicando sus invariantes.
 - Detector central con reglas declarativas; cosito: cofre de recuperación con copias inmutables —jamás duplicar--.
 - Al implementar, actualizar fila 66 del CHECKLIST-GLOBAL y crear el Log correspondiente.
+
+---
+
+## Notas del Agente — Iteración 2 disparos (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 20:05:00
+**Estado:** Parcial (disparos del detector implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- Disparos del detector (checklist ítems 11-12): SoftlockGuard._conectar_disparos() — transición de escena vía EventBus.infra.carga_iniciada (M40) y guardado vía SaveManager.save_completed (M59). Ambos llaman forzar_chequeo() (el tick de 60 s del núcleo sigue activo).
+- Coherencia con M23 (integración): las cadenas de historias secundarias pasan el validador anti-softlock (validar_cadenas() con referencias/recompensa/consecuencia verificables) — verificado en test.
+- Test test_anti_softlock_m66.gd: autoload + forzar_chequeo + disparo por guardado sin crash + disparo por transición sin crash + cadenas M23 sin softlocks → **0 fallos**.
+- Checklist: +2 ítems [x] (disparos 11-12). Progreso 14→16/117.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- NavigationServer3D 2-caminos (ObjetoClaveInvariant): requiere NavigationRegion3D de las islas M11/M27 — con dueño.
+- Watchdog NPC 2s/6s + re-path + teleport (NpcInvariant): requiere el FSM de M64 (en curso por agnes) — con dueño.
+- MisionInvariant con fallback de recompensa equivalente: los fallbacks se registran (registrar_fallback existe) pero las misiones reales M22/M23 emitirán objetivos cuando el contenido narrativo exista.
+- QA M114, capturas V4: con dueño.
+
+### Recomendaciones para el próximo agente
+- M11/M27: al crear islas navegables, registrar las claves con registrar_clave(clave, item_id) y validar los 2 caminos con NavigationServer3D.
+- M64: al implementar el FSM, registrar el watchdog del NPC como handler IRecoverable (registrar_handler).
+- M22/M23: al agregar contenido, registrar fallbacks por objetivo (registrar_fallback) — el guard ya los consume.
+
+
+---
+
+## Notas del Agente — Iteración 3 fallbacks funcionales (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 23:10:00
+**Estado:** Parcial (MisionInvariant funcional con fallbacks/recompensas/diario; módulo liberado 🟡)
+
+### Lo que hice
+- MisionInvariant FUNCIONAL (era un stub con _check()->true, checklist ítems 46-51): _check() detecta objetivos activos SIN fallback declarado (condición imposible → señal estado_invalido_detectado del detector central §2.4), _razon_fallo() con objetivo específico.
+- activar_fallback(objetivo_id, mision_id): activa la ruta alternativa + registra aviso en el diario (M55 categoría descubrimientos — checklist "aviso en diario de misión al activar fallback"). Funciona desde RefCounted vía Engine.get_main_loop().
+- registrar_recompensa_entregada()/recompensa_ya_entregada(): recompensa equivalente del fallback NO duplicada (checklist "recompensa no duplicada si el fallback se completó" — coherencia §4.2 M37).
+- Catálogo M55 ampliado: +1 entrada descubrimiento_fallback_* (los fallbacks tienen entrada en el diario).
+- Test test_fallbacks_m66.gd: fallback registrado, _check detecta imposible sin fallback, con fallback pasa, activar_fallback → aviso en M55, recompensa no duplicada → **0 fallos**.
+- Checklist: +3 ítems [x] (MisionInvariant 46-51 parciales). Progreso 17→20/117.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- El resto de ítems del fallback (recompensa equivalente REAL en items): la entrega de items es de M14 via el sistema de donación — el registro anti-duplicado queda listo para el hook.
+- Objetivos reales de misiones: M22/M23 deben llamar registrar_objetivo() al activar misiones (puentes con dueño).
+- NavigationServer3D/watchdog NPC: M64/M27 con dueño.
+
+### Recomendaciones para el próximo agente
+- M22/M23: al activar una misión con objetivo, llamar SoftlockGuard reg.en MisionInvariant.registrar_objetivo(mision_id, objetivo_id) y registrar_fallback(objetivo, alternativa).
+- Al activar fallback: llamar activar_fallback() y registrar_recompensa_entregada(alternativo) al entregar la recompensa equivalente.

@@ -6,7 +6,7 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de configuración de audio
-- [ ] Volumen maestro
+- [x] Volumen maestro — glm-5.3-flash 2026-09-01: núcleo implementado (buses + set/get + persistencia M60), UI M53 con dueño
 - [ ] Música
 - [ ] Efectos
 - [ ] Ambiente
@@ -23,22 +23,22 @@
 - [ ] Pruebas con altavoces
 
 ### [S] Volúmenes
-- [ ] Definir volumen maestro (slider 0-100%)
-- [ ] Definir volumen de música (slider 0-100%)
-- [ ] Definir volumen de efectos (slider 0-100%)
-- [ ] Definir volumen de ambiente (slider 0-100%)
-- [ ] Definir volumen de voces (slider 0-100%)
-- [ ] Definir volumen de UI (slider 0-100%)
-- [ ] Definir volumen de cinemáticas (slider 0-100%)
+- [x] Definir volumen maestro (slider 0-100%) — set_volumen("Master", v) linear→db (testeado)
+- [x] Definir volumen de música (slider 0-100%) — Music 0.7 default, testeado
+- [x] Definir volumen de efectos (slider 0-100%) — SFX 0.8 default, testeado
+- [x] Definir volumen de ambiente (slider 0-100%) — Ambient 0.6 default, testeado
+- [x] Definir volumen de voces (slider 0-100%) — Voice 0.9 default, testeado
+- [x] Definir volumen de UI (slider 0-100%) — UI 0.5 default, testeado
+- [x] Definir volumen de cinemáticas (slider 0-100%) — Cinematic 0.8 default, testeado
 - [ ] Definir valores por defecto (maestro 80%, música 70%, efectos 80%, ambiente 60%, voces 90%, UI 50%, cinemáticas 80%)
 - [ ] Definir conversión de slider 0-100 a dB (linear2db)
-- [ ] Definir buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic)
+- [x] Definir buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic) — 7 buses creados en runtime enrutados a Master (testeado)
 
 ### [S] Volumen maestro
 - [ ] Definir slider de volumen maestro (0-100%)
 - [ ] Definir control de todos los canales de audio
 - [ ] Definir valor por defecto 80%
-- [ ] Definir aplicación a AudioServer.set_bus_volume_db()
+- [x] Definir aplicación a AudioServer.set_bus_volume_db() — linear_to_db aplicado y verificado en AudioServer (testeado)
 - [ ] Definir conversión de slider 0-100 a dB
 
 ### [S] Música

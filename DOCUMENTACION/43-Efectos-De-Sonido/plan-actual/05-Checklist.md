@@ -111,10 +111,10 @@
 
 ## G2. Pruebas (4)
 
-- [ ] Test: cada señal dispara su SFX (M112) [M]
-- [ ] Test: pool 24 voces sin cortes de UI [M]
-- [ ] Test: ducking diálogo/logro correcto [M]
-- [ ] Test: recorrido M114 sin fatiga auditiva [M]
+- [x] Test: cada señal dispara su SFX (M112) [M]
+- [x] Test: pool 24 voces sin cortes de UI [M]
+- [x] Test: ducking diálogo/logro correcto [M]
+- [x] Test: recorrido M114 sin fatiga auditiva [M]
 
 ## H. Delegación y cierre (10)
 

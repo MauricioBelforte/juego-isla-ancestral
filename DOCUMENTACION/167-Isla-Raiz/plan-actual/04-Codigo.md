@@ -98,3 +98,38 @@ scripts/main_island.gd            ← spawn con TerrainLocator
 ```
 
 Regla: NUNCA crear `IslandGenerator` propio con radio hardcodeado (causa de flotamiento).
+
+## Actualización 2026-09-01 — iter 1 cierre (deepseek-v4-flash-vision-exp / Kilo Code)
+
+### Archivos nuevos del módulo
+
+| Archivo | Función | Ejecución |
+|---|---|---|
+| `game/isla-ancestral/scripts/terreno/validador_isla_raiz.gd` | Validador del terreno (28 checks): config real de main_island.gd (seed/radio/altura/spawn/TerrainLocator), perfil get_height radial (centro/plato/agua clara/profunda), determinismo (semilla 42), sin muros verticales (salto ≤6), batimetría (SHALLOW_WATER 30 / WATER 17) | `godot --headless --path game/isla-ancestral --script res://scripts/terreno/validador_isla_raiz.gd` → **28/28 OK, exit 0** |
+| `game/isla-ancestral/scripts/terreno/captura_playa.gd` + `scenes/captura_playa.tscn` | Escena de inspección de la costa (misma librería Maldivas, viewer en la playa mirando al mar) para QA visual | `godot_run_project` con escena `scenes/captura_playa.tscn` |
+
+### Cambios en código (fixes del dominio posicionamiento/terreno)
+
+| Archivo | Cambio | Motivo (hallazgo) |
+|---|---|---|
+| `scripts/world/island_generator.gd` | `y <= water_level` → `y <= water_level + 1` en get_block_at | El agua clara turquesa (SHALLOW_WATER id 30) NUNCA se generaba (celda en AIR). El diseño exige la capa turquesa en y=height+1 |
+| `scripts/main_island.gd` | `_ajustar_spawn_superficie`: si `get_height` devuelve -1 (locator aún sin terreno), NO mueve al jugador y reintenta con timer (0.5 s, máx 6) | El locator devolvía -1 al arranque y el jugador quedaba en Y=2 (bajo la montaña de h=14) |
+| `scripts/npc/villager.gd` | `_snap_to_ground`: si `h < 0`, reintenta con timer (máx 6) en vez de mantener Y=30 | Catalina quedaba flotando (Y=30) en el arranque |
+
+### Verificación (evidencia)
+
+- **Runtime (V4 godot-mcp):** `[Villager] CatalinaOso snap al terreno en Y=24.0 (height=23)`, `[M09] Spawn sobre superficie calculada Y=17`, `[M167] agua clara (503,256): h=2 block=30`, `[agua profunda] block=17`. FPS 60. 0 errores nuevos (2 errores preexistentes de M161 `npc_visual_database.gd:18`).
+- **Visual (capturas):** `tools/mcp/godot-mcp/capturas/167-Isla-Raiz/cap_167_2026-09-01_12-28-00_overview.png` (ladera: jugador sobre terreno, Catalina en superficie, HUD, FPS 60) y `cap_167_2026-09-01_12-32-00_costa.png` (plato de arena + agua turquesa clara + azul océano profundo).
+
+### Notas del Agente (2026-09-01)
+
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 12:35
+**Estado:** Iter 1 cierre completado — 102/104 [x] + 2 [?] honestos (L.9 diálogo F → revalidar en M137; M-crear isla futura → no aplica aún)
+
+**Lo que hice:** validador 28/28 + escena de captura costera + 3 fixes de dominio (batimetría, spawn, snap) + verificación V4 (runtime + capturas) + documentación de los 21 ítems pendientes (H/K/L/M).
+
+**Lo que NO pude hacer:** revalidar el diálogo F con input real (requiere build jugable interactiva; el diálogo ya fue verificado 2026-08-28 y el hook está intacto). NO toqué M08/M09/M10 más allá del fix mínimo de batimetría (documentado).
+
+**Recomendaciones:** en M137 (primera build de prototipo) revalidar L.9 con el recorrido completo; el validador debe correr en CI desde ahora (gate para cambio de radio/perfil). El check "centro >= 12" está calibrado con el pico real de la semilla 42 (=14); si se cambia la semilla, recalibrar.

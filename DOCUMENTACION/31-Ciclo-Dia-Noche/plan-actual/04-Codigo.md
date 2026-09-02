@@ -114,3 +114,33 @@ DayNightCycle (autoload/único, M07):
 - Implementar el prefab de farol y registrarlo como grupo `faroles` para que `_aplicar_iluminacion` haga `for f in faroles: f.light_energy = ...` (umbral 0.35).
 - Cuando M49 exista, mover las constantes de energía/color a un servicio común para evitar duplicación.
 - El test visual (captura del juego a 08:00, 13:00, 19:00, 23:00) se puede hacer con `cap_godot.py --modulo 31` y comparar antes/después para validar el cambio de luz. Requiere V4 operativa (Kilo nativo).
+
+---
+
+## Notas del Agente — Iteración 2 curvas data-driven (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 18:55:00
+**Estado:** Parcial (curvas de luz data-driven implementadas y verificadas; módulo liberado 🟡 — cierra el [?] de datos, quedan [?] con dueño)
+
+### Lo que hice
+- Curvas de luz canónicas (data/light/): day_curve.tres (sol: 0 noche → 0.5 amanecer 6h → 1.0 día 7-17 → 0.2 atardecer 19 → 0), sky_curve.tres (cielo/ambiente: 0.15 anti-oscuridad profunda → 0.22 noche → 0.4 atardecer → 1.0 día), moon_curve.tres (luna: 0.12 profunda → 0.18 noche → 0), fog_curve.tres (niebla por hora: matinal 1.1-1.2, mediodía 0.5, atardecer 1.0-1.3). Generadas con el serializador de Godot (gen_curvas.gd) — formato .tres canónico garantizado.
+- fase_umbral.json (data/light/): umbrales de las 5 franjas §P13, parámetros de luces artificiales (0.35/3200K/8 m §P10/P12), estrellas (20-22 h §P6) y transición — todo data-driven.
+- day_night_cycle.gd (aditivo, §P1/P2/P5): _cargar_curvas() + sample(hora/24) — el núcleo usa curvas con fallback a los valores hardcodeados del Log 302 si los .tres faltan; amanecer/atardecer con color cálido/cálido-rojo por hora.
+- Integración M71: reset_dia del PlayerProfile conectado a calendar.day_started M29 (RF7 de M71 — pendiente anotado allí, ahora cerrado).
+- Test test_curvas_luz.gd: curvas cargables, valores del diseño (mediodía/noche/profundidad), rampa de amanecer, umbrales JSON, núcleo data-driven con estructura real (sun 1.0/0, cielo 1.0/0.15, luna 0/0.12), reset_dia → **0 fallos**.
+- Regresión: test_ciclo_dia_noche (núcleo Log 302) 12 checks/0 fallos.
+
+### Hallazgo documentado (07-GUIA-GODOT §9.60 — pendiente de copiar en la próxima pasada de guía)
+- `Curve.add_point` espera Vector2 y el DOMINIO de posición es 0-1 (curva normalizada). Intentar guardar horas 0-24 como posiciones clampa silenciosamente todos los puntos a ≤1 y sample(hora) devuelve 0. El consumidor debe samplear con hora/24.0. (Anotado en Log 452; copiar a §9 en la próxima edición de la guía.)
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Cielo procedural, estrellas visuales, luna con textura, nubes, faroles, murales luminosos: V2/escénicos con dueño (M45/M49/M52).
+- Opción M58 "Noche clara", QA M114, capturas V4: con dueño.
+- Transición 90 s polish: queda [ ] (el crossfade de 1 s del núcleo se mantiene).
+
+### Recomendaciones para el próximo agente
+- M49: la iluminación global puede consultar directamente las mismas curvas de data/light/ (fuente única).
+- M52/M58: los parámetros de luces nocturnas y opciones de accesibilidad leen fase_umbral.json.
+- Los valores de curva son tuning fino: editar gen_curvas.gd y regenerar (nunca editar el .tres a mano).

@@ -216,3 +216,11 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Núcleo data-driven: `data/foto/foto_presets.json` (6 presets RF5) + `scripts/foto/foto_schema.gd` (validación de preset: sat/contraste>0, vineta/temp/dof en rango)
+- [x] `scripts/foto/photo_service.gd` — PhotoService (núcleo del modo: activación con señal, presets cargados, aplicar preset con fallback a natural, preset actual)
+- [x] Test headless: 10/10 checks OK (schema 4 + service 6; presets 6, señal, fallback) — exit 0
+- [x] **Verificación VISUAL de los 6 presets** (pipeline PIL aplicado a captura real del juego → comparativo analizado con visión): estética cozy/no invasiva cumplida (RF5); calido_playa/verde_selva/crepusculo_rojo/pintura_retro/natural excelentes; niebla_costera con dof global perceptible
+- [?] DoF selectivo (foco claro, RF6) y cámara libre/zoom/filtros en vivo (RF1-RF4) — iteración 2 con M49/M31 (dueño: deepseek-v4-flash-vision-exp)
+- [?] Integración del atajo con M57 — iter 2

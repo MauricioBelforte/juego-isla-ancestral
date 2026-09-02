@@ -574,3 +574,31 @@ func save_settings():
 - Probar compresión de audio.
 - Probar cambio de dispositivo de salida.
 - Probar sonidos de interfaz.
+
+
+---
+
+## Notas del Agente — Iteración 1 núcleo (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 24:05:00
+**Estado:** Parcial (núcleo de configuración de audio implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- AudioConfigService autoload (scripts/audio/audio_config_service.gd): 7 buses de audio creados en runtime enrutados a Master (Master/Music/SFX/Ambient/Voice/UI/Cinematic — §4), set_volumen/get_volumen con clamp y linear→db, set_mute/esta_muteado, defaults del diseño §3 coherentes con GestorConfig DEFAULTS_BASE de M60 (Master 0.8/Music 0.7/SFX 0.8/Ambient 0.6/Voice 0.9/UI 0.5/Cinematic 0.8), persistencia automática en cada set vía M60 GestorConfig sección "audio" (ya existía en DEFAULTS_BASE desde mi iter. 2 de M87), señales volumen_cambiado/mute_cambiado para UI M53 y M41-M44.
+- Provider ISaveProvider M59 sección "audio_config" (volúmenes + mutes por sesión).
+- Test test_audio_config.gd: buses creados y enrutados, defaults, set/clamp, AudioServer refleja db, mute/unmute, persistencia M60 round-trip, coherencia con GestorConfig → **0 fallos a la primera**.
+- Regresiones: test_datos_m60 66/0, test_localizacion_iter2 M87 0 fallos.
+- Checklist: progreso relevado (ítems del núcleo).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Menú de sliders (audio_settings_menu.gd): UI M53 con dueño (las señales/API están listas).
+- Audio 3D HRTF/oclusión, subtítulos, rango dinámico, compresión, dispositivo de salida: iteraciones V2 (requieren AudioEffect3D real en escenas y UI).
+- Buses reales de música/SFX reproduciendo contenido: M41-M44 (los buses ya existen para cuando reproduzcan).
+
+### Recomendaciones para el próximo agente
+- M53: sliders usan set_volumen(bus, valor) y escuchan volumen_cambiado; buses_disponibles() devuelve las claves.
+- M41-M44: reproducir contenido por bus con AudioServer.get_bus_index("Music"/"SFX"/"Ambient"/"Voice") — ya creados.
+- M58: "Sin truenos" puede mutear SFX vía set_mute("SFX", true) parcial (o filtrar por stream).
+- La persistencia es automática en cada set (GestorConfig M60) — no duplicar en el menú.

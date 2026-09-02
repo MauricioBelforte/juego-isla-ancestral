@@ -1,5 +1,6 @@
-**Modelo:** ox-alpha
-**Plataforma:** Cline
+**Modelo:** glm-5.3-flash (último modificador; núcleo por ox-alpha)
+
+**Plataforma:**Kilo Code
 
 # 04-Codigo.md — Módulo 59: Guardado
 
@@ -129,8 +130,9 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 
 ## 5. Notas del Agente
 
-**Modelo:** ox-alpha
-**Plataforma:** Cline
+**Modelo:** glm-5.3-flash (último modificador; núcleo por ox-alpha)
+
+**Plataforma:**Kilo Code
 **Fecha:** 2026-08-25 15:30:00
 **Estado:** Parcial (con dudas) — capa de servicio implementada y validada; UI y proveedores de sistemas pendientes
 
@@ -187,3 +189,28 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 - Ejecutar test_autosave_m59.gd + validate_save.gd antes de tocar el módulo (ambos en verde).
 - Los Node-providers son el patrón real: NO reintroducir el typing ISaveProvider en collect()/restore().
 - Al implementar M22/M23/M74, solo emitir EventBus.quest.quest_completed / señal de fin de evento: SaveManager ya consume ambas.
+
+
+---
+
+## Notas del Agente — Iteración 2 auto-save fin de evento (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 20:55:00
+**Estado:** Parcial (auto-save de fin de evento implementado; módulo liberado 🟡)
+
+### Lo que hice
+- B1-bis: auto-save al finalizar un evento de temporada (checklist "auto-save al finalizar evento M74") — SaveManager conecta `EventManager.evento_terminado` (señal propia de M74, no en calendar) → request_save "auto_evento". Probado en test con emisión directa.
+- B5-bis: bloqueo durante minijuego de pesca — si FishingManager existe y emite sesion_iniciada/sesion_terminada, el guard se activa/desactiva (conexión condicional: el bloqueo ya está activo si M34 emite).
+- Test test_autosave_m59.gd: +_test_autosave_evento → **0 fallos**.
+- Checklist: +2 ítems (fin de evento, minijuego parcial). Progreso 36→38/130.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- M34 pesca no emite aún sesion_iniciada/terminada (la conexión queda condicional — cuando M34 las emita, el bloqueo funciona sin tocar M59).
+- UI de slots/botón guardar/migración aviso: M53/M44 con dueño.
+- Background thread M61: con dueño.
+
+### Recomendaciones para el próximo agente
+- M34: al implementar sesión de pesca, emitir sesion_iniciada/sesion_terminada — el bloqueo del auto-save se activará solo.
+- M74: si el evento se cancela (evento_cancelado), considerar si amerita auto-save también (decisión de diseño).

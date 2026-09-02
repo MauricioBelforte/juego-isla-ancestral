@@ -1,77 +1,93 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (implementación iter. 1 núcleo; diseño original Unity/C# por Deepseek V4 Flash / OpenCode 2026-08-20)
 
 # 04-Codigo.md — Módulo 96: Plataformas
 
-## 1. Archivos involucrados
+## 1. Archivos involucrados (REAL — Godot 4.7 / GDScript)
 
-### 1.1 Nuevos
-| Archivo | Sistema | Propósito |
-|---------|---------|-----------|
-| `Assets/_Project/Scripts/Core/Platform/IPlatformBridge.cs` | Abstracción | Interfaz común: logros, cloud, overlay, store (impl por plataforma) |
-| `Assets/_Project/Scripts/Core/Platform/SteamBridge.cs` | Steamworks | Implementación Steam (logros, cloud, overlay, deck) |
-| `Assets/_Project/Scripts/Core/Platform/EosBridge.cs` | EGS/EOS | Implementación EGS (logros, cloud, overlay) |
-| `Assets/_Project/Scripts/Core/Platform/GogBridge.cs` | GOG (opcional) | Implementación GOG Galaxy |
-| `Assets/_Project/Scripts/Core/Platform/NullBridge.cs` | Fallback | Sin plataforma (dev/standalone) |
-| `Assets/_Project/Scripts/Core/Platform/PlatformManager.cs` | Manager | Selecciona el bridge activo; expone servicios |
-| `scripts/ci/build_targets.ps1` / `.sh` | CI | Builds por target: Windows, macOS(AS), Linux(Proton), SteamDeck settings |
-| `scripts/ci/steamdeck_check.py` | CI | Simula 800p + gamepad para el check Deck Verified |
+### 1.1 Nuevos (`game/isla-ancestral/scripts/plataformas/`)
+| Archivo | Propósito |
+|---------|-----------|
+| `iplatform_bridge.gd` | `IPlatformBridge` (base): interfaz común — desbloquear_logro, cloud_disponible, guardar/cargar_cloud, mostrar_overlay, guardar/cargar_save_cloud (cross-save) |
+| `null_bridge.gd` | `NullBridge`: fallback de desarrollo (sin cloud, sin logros, no-op) |
+| `steam_bridge.gd` | `SteamBridge` (MOCK): contrato Steamworks con cloud simulada en disco, logros stub (SDK real pendiente M149) |
+| `platform_manager.gd` | Autoload `PlatformManager`: selecciona el bridge activo, expone servicios unificados, carga matriz data-driven |
+| `test_plataformas_m96.gd` | Test headless (23/0 OK) |
+| `data/plataformas/plataformas.json` | Matriz data-driven: 10 plataformas × 20 puntos (prioridad, orden, tienda, logros, cloud, overlay, controller, cross_save, deck_verified, coste_devkit, fee, nota) |
 
-### 1.2 Modificados
+### 1.2 Modificado
 | Archivo | Cambio |
 |---------|--------|
-| `SaveManager.cs` (M59/M60) | Cloud detrás de IPlatformBridge; save portable |
-| `InputManager.cs` (M57) | Perfiles de control por plataforma (deck/steam/console) |
-| `SettingsManager.cs` (M89) | Safe area y escalado de UI por resolución (M58) |
-| `Bootstrapper` | Inicializa PlatformManager |
+| `project.godot` | Autoload `PlatformManager="*res://scripts/plataformas/platform_manager.gd"` |
 
-## 2. Funciones clave
-```csharp
-// PlatformManager
-public static IPlatformBridge Activo { get; }     // platforma activa
-public void Inicializar(PaisajePlataforma p);      // Steam | EOS | GOG | Null
+### 1.3 Diferencias vs diseño original (Unity/C#)
+- `IPlatformBridge.cs` → `iplatform_bridge.gd` (RefCounted base, métodos virtuales)
+- `NullBridge.cs` / `SteamBridge.cs` → `null_bridge.gd` / `steam_bridge.gd` (GDScript)
+- `PlatformManager.cs` → `platform_manager.gd` (autoload, sin class_name §9.17)
+- `plataformas.json` de M96 → implementado como data-driven en `data/plataformas/`
+- `steamdeck_check.py`, `build_targets.ps1` → pendientes (CI, M149)
 
-// IPlatformBridge
-public void DesbloquearLogro(string id);           // M59 mapeo
-public bool CloudDisponible();
-public void GuardarCloud(byte[] data);             // M60
-public byte[] CargarCloud();
-public void MostrarOverlay();                      // overlay de plataforma
+## 2. API pública
 
-// steamdeck_check.py
-def verificar_deck(build_path): -> ReporteDeck   // 800p, gamepad, textos, perf
+### 2.1 `platform_manager.gd` — autoload
+```gdscript
+bridge: IPlatformBridge          # bridge activo (NullBridge en dev)
+matriz: Dictionary               # data-driven desde JSON
+
+desbloquear_logro(id)
+cloud_disponible() -> bool
+guardar_save_cloud(ruta_local) -> bool
+cargar_save_cloud(ruta_local) -> bool
+mostrar_overlay()
+obtener_plataforma(id) -> Dictionary
+plataformas_por_prioridad(p) -> Array    # ordenado por lanzamiento
+ids_plataformas() -> Array
 ```
 
-## 3. Datos / config
-| Dato | Formato | Sistema |
-|------|---------|---------|
-| Mapa de logros | SO `{logroId, plataformaId}` | IPlatformBridge |
-| Build targets | CI config (yaml/ps1) | scripts/ci |
-| Safe areas | SO por resolución | SettingsManager |
-| Prioridades de tiendas | `plataformas.json` de M96 | Matriz de decisiones |
+### 2.2 `iplatform_bridge.gd` — IPlatformBridge (base)
+```gdscript
+var nombre: String
+desbloquear_logro(id)          # mapeo M59
+cloud_disponible() -> bool
+guardar_cloud(data) -> bool
+cargar_cloud() -> PackedByteArray
+mostrar_overlay()
+guardar_save_cloud(ruta) -> bool   # cross-save (RF13)
+cargar_save_cloud(ruta) -> bool
+```
 
-## 4. Tests (Unity Test Framework — M112)
-| Suite | Tipo | Cobertura |
-|-------|------|-----------|
-| `PlatformManagerTests` | PlayMode | Bridge nulo en dev; selección correcta por target |
-| `SteamBridgeTests` | PlayMode (mock) | Logros/cloud con SDK simulado |
-| `EosBridgeTests` | PlayMode (mock) | idem EGS |
-| `CrossSaveTests` | PlayMode | Save portable carga en Steam y Null (v3.x) |
-| `DeckCheckTests` | CI | 800p + gamepad + textos (script) |
-| `ConsoleReadyTests` | EditMode | Sin referencias directas a APIs de tienda en el core |
+## 3. Verificación
+- Test M96: `Godot --headless --path game/isla-ancestral --script res://scripts/plataformas/test_plataformas_m96.gd` → **23 checks, 0 fallos**.
+- Regresión M60: **66/0 OK**.
 
-## 5. CI multi-target
-| Target | Build | Gate |
-|--------|-------|------|
-| Windows x64 | PC | ReleaseGate (M142) |
-| macOS (Apple Silicon) | P1 | PerfGate + orientación de ventana |
-| Linux (Proton test) | P1 | Run bajo Proton en CI (o reporte manual mensual) |
-| Steam Deck | P0.5 | DeckCheck (800p + gamepad + perf) |
-| WebGL | NO | Descartado (documentado) |
+## 4. Pendientes honestos (92 ítems de checklist)
+- Bridges EOS/GOG/consolas (PlayStation/Xbox/Switch) — pendientes de SDKs reales (M149).
+- SDK Steamworks real (el SteamBridge es MOCK con cloud simulada; SDK real en M149).
+- CI multi-target (`build_targets.ps1`), steamdeck_check.py (800p + gamepad).
+- Certificación por plataforma (M142), precios por tienda (M149).
+- Detectores de plataforma real en runtime (OS.get_name + defines de build).
 
-## 6. Notas de integración
-- El core del juego nunca referencea Steamworks/EOS directamente: siempre IPlatformBridge (grado de limpieza para futuras plataformas).
-- Los logros se mapean en SO (M59); la cloud reutiliza el save v3.x (M60).
-- El Controller Input es ciudadano de primer orden desde el día 1 (M57) por las consolas futuras.
-- Este módulo alimenta los requisitos de M149 (tiendas) y M142 (certificación RC) con los checklists por plataforma.
-- Los precios por plataforma (M95) se conectan al config de tiendas de M149.
+## Notas del Agente
+
+**Modelo:** deepseek-v4-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
+**Estado:** Núcleo implementado (iter. 1), 🟡 liberado
+
+### Lo que hice
+- IPlatformBridge interfaz común (sin hardcode de SDKs en el core).
+- NullBridge fallback dev + SteamBridge mock con cloud simulada y cross-save.
+- PlatformManager autoload con API unificada (logros/cloud/overlay/cross-save).
+- Matriz data-driven (10 plataformas × 20 pts, prioridades P0-P3).
+- Test headless 23/0 OK + regresión M60 66/0 OK.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- [M] SDKs reales (Steamworks/EOS/GOG/consolas): requieren M149 (tiendas) y las APIs oficiales; SteamBridge es MOCK.
+- [M] CI multi-target y steamdeck_check.py: requieren el pipeline CI (M112) y builds reales.
+- [M] Certificación M142 y precios por tienda M149.
+
+### Recomendaciones para el próximo agente
+- Cuando M149 defina las tiendas, reemplazar el mock de SteamBridge por Steamworks real (mantener la interfaz).
+- Conectar el cross-save de M60: en DataStore, al guardar llamar `PlatformManager.guardar_save_cloud(ruta)` si `cloud_disponible()`.
+- Ejecutar `plataformas_por_prioridad("P0")` para el menú de lanzamiento (Steam + Deck primero).

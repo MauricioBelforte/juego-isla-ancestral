@@ -1,7 +1,21 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (reserva + iter. 1 núcleo)
+**Historial:** documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-20)
 
 # 05-Checklist.md — Módulo 113: Pruebas de Stress (110 ítems)
+
+## Reserva actual
+
+- Estado: 🔵 En curso (iter. 1 núcleo)
+- Agente: deepseek-v4-flash (Kilo Code)
+- Fase: QA y operación (soporte de M112 Testing)
+- Dificultad: 3
+- Visión: V0
+- Entrada: M112 ✅ (testing automático), M61 🟡 (rendimiento, métricas base)
+- Salida: StressRunner headless (SceneTree batch mode) + StressScenario base + StressReport (p50/p95/memoria/JSON) + escenarios SaveLoadStress y BlockEditStress + test headless
+- Archivos: `game/isla-ancestral/scripts/stress/`
+- Fecha: 2026-09-01 15:10:00
 
 ## Convención
 - `[ ]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
@@ -9,23 +23,23 @@
 
 ## 1. Framework de stress (RF1-RF3)
 
-- [ ] Definir StressRunner headless con batch mode [C]
-- [ ] Definir clase base StressScenario (Setup/Execute/Teardown) [M]
-- [ ] Definir medición p50/p95/max por métrica [M]
-- [ ] Definir reporte JSON de cada corrida [M]
+- [x] Definir StressRunner headless con batch mode [C]
+- [x] Definir clase base StressScenario (Setup/Execute/Teardown) [M]
+- [x] Definir medición p50/p95/max por métrica [M]
+- [x] Definir reporte JSON de cada corrida [M]
 - [ ] Definir baseline versionado perf_base.json [M]
 - [ ] Definir comparación automática ±5% [M]
 - [ ] Definir seeds fijas por escenario (M10) [S]
 - [ ] Definir corre en hardware fijo (label CI) [S]
 - [ ] Definir exclusión del framework del build de jugador [M]
 - [ ] Definir integración con Debug Menu (M110) para spawn/teleport [M]
-- [ ] Definir status por escenario en el reporte [S]
+- [x] Definir status por escenario en el reporte [S]
 
 ## 2. Miles de bloques modificados (1º)
 
-- [ ] Definir escenario de edición de 100 000 bloques [C]
+- [x] Definir escenario de edición de 100 000 bloques [C]
 - [ ] Definir métrica: FPS ≥ 30 p95 durante edición [M]
-- [ ] Definir métrica: edit operations/s ≥ 60 [M]
+- [x] Definir métrica: edit operations/s ≥ 60 [M]
 - [ ] Definir verificación de integridad de chunks tras edición [M]
 - [ ] Definir undo masivo en el escenario [S]
 - [ ] Definir guardado del mundo denso tras el escenario [M]
@@ -115,17 +129,17 @@
 
 ## 13. Guardados repetidos (12º)
 
-- [ ] Definir escenario de guardado continuo (100 ciclos) [C]
-- [ ] Definir métrica: tiempo de guardado < 5 s [M]
-- [ ] Definir verificación de integridad tras cada guardado [M]
+- [x] Definir escenario de guardado continuo (100 ciclos) [C]
+- [x] Definir métrica: tiempo de guardado < 5 s [M]
+- [x] Definir verificación de integridad tras cada guardado [M]
 - [ ] Definir prueba de guardado durante cambios de worldgen [S]
 - [ ] Definir prueba de guardado concurrente (auto-save + manual) [M]
 
 ## 14. Cargas repetidas (13º)
 
-- [ ] Definir escenario de carga repetida (100 ciclos) [C]
-- [ ] Definir métrica: carga < 30 s [M]
-- [ ] Definir verificación de 0 corrupción al cargar [M]
+- [x] Definir escenario de carga repetida (100 ciclos) [C]
+- [x] Definir métrica: carga < 30 s [M]
+- [x] Definir verificación de 0 corrupción al cargar [M]
 - [ ] Definir prueba de carga tras guardado parcial [S]
 - [ ] Definir prueba de carga en equipment/UI activa [S]
 
@@ -188,7 +202,7 @@
 
 ## 22. Reportes y gates
 
-- [ ] Definir reporte JSON con p50/p95 por escenario [M]
+- [x] Definir reporte JSON con p50/p95 por escenario [M]
 - [ ] Definir gráfica opcional en artifact del CI [S]
 - [ ] Definir comparación con baseline en cada corrida [M]
 - [ ] Definir gate `stress-save` en PR (rápido) [M]
@@ -197,11 +211,18 @@
 - [ ] Definir gate pre-Beta/pre-RC (M141/M142) [M]
 - [ ] Definir integración de hallazgos con M61/M62 [S]
 - [ ] Definir feed de límites desde M96 [S]
-- [ ] Definir documentación plan-actual actualizada y firmada [S]
-- [ ] Definir log del módulo en Logs/ [S]
+- [x] Definir documentación plan-actual actualizada y firmada [S]
+- [x] Definir log del módulo en Logs/ [S]
 
 ## Totales
 
 **Total de ítems:** 127
 **Ítems resueltos por documentación:** 127 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Iteración 3 — Verificación visual del reporte (2026-09-02, deepseek-v4-flash-vision-exp)
+
+- [x] Análisis del reporte real `user://stress_report.json` (4 escenarios, 4323 ms, exit 0): lecturas coherentes, integridad 1.0 en los 3 flujos de datos reales (SaveLoad 100 ciclos ok, Inventory conteos exactos, Equipment slots vacíos)
+- [x] Gráficos de rendimiento generados (visualización): duración por escenario (barras) y operaciones por segundo por flujo (barras)
+- [x] Interpretación QA del reporte (nota de lectura): BlockEdit 595k ops/s es una simulación RAM (no comparable con la API real); Inventory ADD ~50k ops/s (7x más lento que remove 360k — coste de señales/stacking) y Equipment equip ~50k ops/s — números realistas y sanos para el estado actual
+- [x] Memoria estable: +104 KB estáticos entre inicio/fin de la corrida de referencia (sin acarreo)
+- [?] Comparar con objetivo de referencia (umbral definido por escenario): pendiente en el diseño original (dueño: iter 4 con módulos en producción M19/M50/M65)

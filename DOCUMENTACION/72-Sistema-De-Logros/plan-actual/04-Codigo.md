@@ -251,3 +251,33 @@ func store_stats() -> void: ...
 - Agregar los archivos de testing (`06-Plan-Testings.md` y `07-Resultados-Testings.md`) en plan-actual cuando se implemente, según la sección 14 de AGENTS.md.
 - Al completar la implementación, marcar los ítems pertinentes del `05-Checklist.md`, actualizar `CHECKLIST-GLOBAL.md` (fila 72) y generar el log en `Logs/` con el formato estándar.
 - Respetar las reglas cozy del checklist: ningún logro con números abusivos, cero FOMO; validar cada definición del catálogo con la regla de alcance amable.
+
+---
+
+## Notas del Agente — Iteración 1 núcleo (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 22:35:00
+**Estado:** Parcial (núcleo de logros implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- AchievementService autoload (scripts/logros/achievement_service.gd): catálogo data-driven de 7 logros (data/logros/logros.json) con condiciones en el MISMO formato de M71 — evaluación delegada a ProgressionManager.evaluar_condicion() (§no duplicar lógica). Desbloqueo idempotente + señal logro_desbloqueado + log [DOM-LOGRO]. Progreso parcial perezoso para la UI (logro_progreso). % REAL de logros (porcentaje_real — los logros usan total real, no el anti-spoiler del diario M55 §3.2). listado_para_ui() con ocultos como "???" hasta desbloquearse.
+- Evaluación event-driven: escucha progreso_hito_alcanzado/progreso_desbloqueado de M71 → evaluar_todos() (sin bucle por frame).
+- Persistencia ISaveProvider M59 sección "achievements"; logros de catálogo viejo purgados; NUNCA re-emitir señales restauradas.
+- FIX arquitectural M22↔M71 (descubrido por el test): la condición sello_historia de M71 consultaba el REFLEJO en catálogo (nunca se marca para sellos de M22) — corregida a consulta directa de M22 (fuente de verdad §2.2) vía nuevo getter Historia.sello_marcado(). El reflejo queda solo para la UI.
+- Catálogo M55 ampliado: +2 entradas mision_cadena-* (coherencia M23→M55 del sprint).
+- Test test_logros.gd: catálogo, cadena completa M22→M71→M72 (marcar_sello → hito → logro), idempotencia, % real, ocultos, persistencia con logro de catálogo viejo → **0 fallos**.
+- Regresiones: test_progresion M71 0 fallos, test_historia M22 0 fallos.
+- Checklist: progreso relevado (núcleo implementado).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Steam sync (M97) y presentación UI (M53): con dueños — las señales/API están listas.
+- Logros con múltiples hitos dependientes o progresos fraccionados (ej. "50 peces"): el evaluador de M71 soporta stat_min con umbral arbitrario — solo falta el contenido del catálogo.
+- Notificación de logro en pantalla (M53): señal logro_desbloqueado lista.
+
+### Recomendaciones para el próximo agente
+- M97: al integrar Steam, leer desbloqueados() y mapear ids a Steam Achievements.
+- M53: pantalla escucha logro_desbloqueado y usa listado_para_ui() (los ocultos ya llegan como "???").
+- Nuevo logro = nueva entrada en logros.json con condición del vocabulario M71 (§3.6) — sin tocar código.
+- M71.progreso_parcial solo funciona con condiciones stat_min; para otros tipos la UI muestra desbloqueado/no.

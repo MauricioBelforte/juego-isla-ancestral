@@ -20,7 +20,7 @@
 - [ ] RF5: martillo (construir ✓) y lupa (inspeccionar → contenido M26/M44) [M]
 - [x] RF6: mejora de área y velocidad por nivel [S]
 - [x] RF7: feedback por uso (partículas, sonido, mira) [M]
-- [ ] RF8: persistencia en GameState.M13 (dueño M59: GameState/autoload de guardado por sección) [M]
+- [x] RF8: persistencia en GameState.M13 (dueño M59: GameState/autoload de guardado por sección) [M] — glm-5.3-flash 2026-09-02 (iter. 5, Log 489): M59 ISaveProvider + PlayerProfile estadísticas nivel_<id> (monótonas, vía EventBus.progresion.nivel_herramienta_cambio) + test_nivel_herramienta 0 fallos
 
 ## B. Catálogo de herramientas (12)
 

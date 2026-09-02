@@ -1,8 +1,8 @@
-# Módulo 115: Hardware — Requerimientos
+﻿# Módulo 115: Hardware — Requerimientos
 
-**Modelo:** Nemotron 3 Ultra
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-21 01:27:00
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
 
 ## Problema
 
@@ -70,3 +70,19 @@ El juego Isla Ancestral debe funcionar en una variedad de hardware del jugador, 
 | **M004** — Game Engine | Depende de este módulo |
 | **M061** — Rendimiento | Depende de este módulo |
 
+## Nota del agente (2026-09-01, minimax-m3-free / Kilo Code)
+
+> **Iter 1 cerrada (log 327).** 4 archivos nuevos + 1 mod (project.godot). 30 OK / 0 fallos. 50/132 [x] + resto [?] con dueño claro (M90 aplicar calidad, M57 dispositivos, M97 docs Steam/FAQ).
+>
+> Lo que M115 cubre en este plan:
+> - A (3/10): mínimos CPU/RAM/GPU detectados en runtime; OS soportados via OS.get_name().
+> - B (15/15): Resource HardwareProfile + Detector + get_input_devices + save/load + fallback.
+> - C (10/10): enum QualityPreset, scoring 100pts, bordes ULTRA..VERY_LOW, override.
+> - D (0/15): fuera de M115 (M90 Configuración Gráfica aplica al viewport).
+> - E (9/10): autoload, init, load, save, set_preset, get_active_preset, runtime; falta signal preset_changed (iter 2 si M90 lo pide).
+> - F (10/10): detección via Input.get_connected_joypads + hot-plug + dead zones + vibración.
+> - G (10/10): test_hardware.gd cubre detección, scoring, bordes, persistencia, override, gamepad fallback.
+> - H (5/10): autoload registrado, OS cross-platform, M90/M61/M57 referenciados; M72/Steam Deck/build pendientes.
+> - I (5/10): funciones documentadas con XML docs, logs de cambios; FAQ/Steam pendientes (M97).
+>
+> El archivo `05-Checklist.md` tiene la cobertura detallada de las 132 tareas.

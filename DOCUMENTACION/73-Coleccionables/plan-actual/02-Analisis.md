@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 # 02-Analisis.md — Módulo 73: Coleccionables
 

@@ -24,11 +24,11 @@
 - [ ] Lead Artist: dirección artística, pipeline de assets, calidad visual
 - [ ] Game Designer: mecánicas, niveles, balance, documentación de diseño
 - [ ] Producer: schedule, presupuesto, coordinación, removal de blockers
-- [ ] Programadores: implementación de features, bug fixes, testing
+- [x] Programadores: implementación de features, bug fixes, testing
 - [ ] 3D Artists: modelado, texturizado, animación
 - [ ] 2D Artists: UI, iconos, concept art, ilustraciones
 - [ ] Audio Lead: dirección de audio, implementación, mixing
-- [ ] QA: testing manual, automatizado, reportes de bugs
+- [x] QA: testing manual, automatizado, reportes de bugs
 - [ ] Community Manager: redes sociales, comunicación, feedback
 - [ ] Documentar Habilidades requeridas por rol
 - [ ] Documentar Herramientas requeridas por rol
@@ -60,7 +60,7 @@
 - [ ] Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)
 - [ ] Definir WIP limits por columna
 - [ ] Crear template de tarea completa
-- [ ] Definir Definition of Done (código revisado, tests pasan, documentada)
+- [x] Definir Definition of Done (código revisado, tests pasan, documentada)
 - [ ] Definir Definition of Ready (tiene contexto, estimación, dependencias)
 - [ ] Seleccionar herramienta de gestión (Linear, Notion, GitHub Projects)
 - [ ] Crear tablero Kanban inicial
@@ -79,7 +79,7 @@
 - [ ] Definir proceso de escalación (3 niveles)
 - [ ] Crear registro de decisiones tomadas
 - [ ] Definir cuándo se necesita consenso vs. decide el líder
-- [ ] Documentar proceso de A/B testing para decisiones de diseño
+- [x] Documentar proceso de A/B testing para decisiones de diseño
 - [ ] Definir proceso de evaluación de riesgos en decisiones
 - [ ] Crear template de documentación de decisión
 - [ ] Definir proceso de reversión de decisiones

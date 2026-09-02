@@ -329,3 +329,33 @@ func report_bug():
 - La consola in-game debe suscribirse a las señales del Logger (M103).
 - El exportador de diagnóstico debe integrarse completamente con M102 (Bug Tracking).
 - Asegurarse de que el Debug Menu esté completamente desactivado en release builds.
+## Notas del Agente
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
+**Estado:** Implementación iter 1 completada (debug_menu.gd reescrito desde cero)
+
+### Lo que hice
+- Reescribi debug_menu.gd desde cero (391 líneas) eliminando problemas de cross-ref GDScript 4.x
+- Implementé RF1-6 con integración real: teleport jugador, hora/ dia (GameTime.avanzar_hasta), clima (EventBus weather signal), inventario (Inventario.add_item), economia (EconomyManager.depositar_monedas)
+- RF7-13: stubs funcionales con logging + emission de senyal debug_action
+- RF14-19: toggles visuales (colliders, FPS, chunks, nav, hitboxes, AI states)
+- RF20: exportador de diagnostico a user://diagnostics/ + info sistema
+- F12 toggle + Escape para cerrar
+- Creé test headless tests/test_debug_menu.gd con 13 secciones
+- Fix: OS.get_unix_time() -> Time.get_unix_time_from_system(), Performance.MEMORY_HEAP_CURRENT no disponible -> fallback 0.0, DirAccess.open() pattern corregido
+- Tipografia: corregido typo vb->vbox, stub signature function
+
+### Lo que NO pude hacer
+- RF3 (estacion): M29/GameTime no expone setter de estacion publico, solo getter -> stub
+- RF14-19 visualizations: solo togglean flags, no implementan draw real (requiere VisualDebugger/GDScript Drawing API mas avanzada)
+- Test headless de ejecucion: timeout por carga de autoloads M64+M74 en inicializacion (check-only passa OK)
+- RF8-10 (tool/island/seal unlock): M13/M28 no tienen API publico de desbloqueo
+- RF12 (puzzle reset): M24 no expone reset publico
+- RF13 (chunk regen): M08 WorldManager no expone regeneracion
+
+### Recomendaciones para el proximo agente
+- debug_menu.gd usa patterns Godot 4.x correctos: has_method() guards, explicit typing, no inner classes
+- RF7-13 stubs deben conectarse cuando M22/M24/M28/M13 expongan APIs publicas
+- Para visualizations RF14-19 reales, usar Viewport.debug_draw_enabled o implementar DebugVisualizer.gd con _draw() custom

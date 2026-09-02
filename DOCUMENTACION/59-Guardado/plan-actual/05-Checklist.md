@@ -22,7 +22,7 @@
 
 - [x] Auto-save al final del día (M29 DAY_END) [M] — *glm-5.3-flash: EventBus.calendar.day_started → "auto_dia", probado en test*
 - [x] Auto-save al completar misión (M22/M23) [M] — *glm-5.3-flash: EventBus.quest.quest_completed → "auto_mision", probado; emisores reales pendientes M22/M23 (módulos no implementados)*
-- [ ] Auto-save al finalizar evento (M74) y al cerrar el juego (M40) [M] — *cierre del juego hecho (NOTIFICATION_WM_CLOSE_REQUEST, escritura síncrona best-effort); "fin de evento" pendiente de señal M74*
+- [x] Auto-save al finalizar evento (M74) y al cerrar el juego (M40) [M] — *cierre del juego hecho (NOTIFICATION_WM_CLOSE_REQUEST, escritura síncrona best-effort); "fin de evento" pendiente de señal M74* — glm-5.3-flash 2026-09-01: evento_terminado (M74) → auto_evento conectado y testeado; cierre del juego ya hecho (iter. anterior). Ambos cerrados
 - [x] Intervalo configurable de auto-save (M90) [M] — *auto_save_interval export, timer en _process*
 - [ ] No auto-save durante diálogo (M21), minijuego ni transición [M] — *diálogo hecho (EventBus.ui dialog_requested/finished → set_save_blocked); minijuego M34 y transición M40 con dueño*
 

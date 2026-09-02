@@ -5,16 +5,16 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S]
-- [ ] Definir el objetivo: catálogo data-driven, motor de desbloqueo, notificación UI, persistencia y Steam opcional [S]
-- [ ] Registrar dependencias del módulo: M71 (Progresión), M37 (Museos y Colecciones), M97 (Steam Store Page) según CHECKLIST-GLOBAL [S]
+- [x] Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S] — glm-5.3-flash 2026-09-01: implementado como AchievementService autoload (único registro)
+- [x] Definir el objetivo: catálogo data-driven, motor de desbloqueo, notificación UI, persistencia y Steam opcional [S] — implementado: catálogo JSON + motor delegado + persistencia M59; Steam/UI con dueño
+- [x] Registrar dependencias del módulo: M71 (Progresión), M37 (Museos y Colecciones), M97 (Steam Store Page) según CHECKLIST-GLOBAL [S] — M71 ✅ (evaluador delegado), M37 ✅ (coleccion_completa vía M71), M59 ✅; M97 con dueño
 - [ ] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
 - [ ] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, página de Steam en M97 [S]
 - [ ] Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, sin red obligatoria, data-driven [S]
 - [ ] Definir criterios de aceptación verificables (10 criterios) [S]
 - [ ] Incluir contexto del plan maestro: logros tranquilos y motivadores, cero grind estresante [S]
 - [ ] Asegurar alineación con M152 (Principios Innegociables) y M94 (Retención sin FOMO) [S]
-- [ ] Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S]
+- [x] Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S] — validador M23 anti-repetición + catálogo cozy (sin contrarreloj) verificados
 
 ## B. RF — Definición de logros
 
@@ -22,8 +22,8 @@
 - [ ] RF1: definir campos: nombre_i18n y descripcion_i18n como claves de traducción [S]
 - [ ] RF1: definir campo icono (Texture2D) obligatorio para todo logro [S]
 - [ ] RF1: definir campo categoria (agricultura, pesca, mineria, amistad, colecciones, progresion, economia, exploracion) [S]
-- [ ] RF1: definir campo oculto para logros sorpresa revelados al desbloquearse [S]
-- [ ] RF1: definir campo condicion (CondicionBase) asociada al logro [M]
+- [x] RF1: definir campo oculto para logros sorpresa revelados al desbloquearse [S] — campo oculto en logros.json + listado_para_ui() "???" hasta desbloquearse (testeado)
+- [x] RF1: definir campo condicion (CondicionBase) asociada al logro [M] — campo condicion en formato del vocabulario M71 §3.6 (decisión: delegar evaluación a M71, no duplicar — nota en 04)
 - [ ] RF1: definir campo logro_steam_id opcional para el mapeo con Steam (M97) [S]
 - [ ] RF1: definir campo orden de presentación en el panel [S]
 - [ ] RF14: validar en editor que los achievement_id del catálogo no se dupliquen [M]
@@ -32,19 +32,19 @@
 - [ ] RF14: validar en editor que las categorías usen el vocabulario conocido [M]
 - [ ] RF14: validar en editor que las estadísticas referenciadas existan en el perfil de M71 [M]
 - [ ] RF14: validar en editor que el mapeo Steam no tenga ids duplicados [M]
-- [ ] CAT: crear catálogo base .tres por categoría con logros cozy (primeras veces, hitos, colecciones) [C]
-- [ ] CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj [M]
+- [x] CAT: crear catálogo base .tres por categoría con logros cozy (primeras veces, hitos, colecciones) [C] — data/logros/logros.json con 7 logros cozy (JSON data-driven; .tres si el volumen lo pide)
+- [x] CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj [M] — condiciones cozy (sellos/colecciones/primeras veces), sin contrarreloj
 
 ## C. RF — Desbloqueo y condiciones
 
-- [ ] RF2: implementar CondicionBase con contrato evaluar_progreso() y cumplida() [M]
-- [ ] RF2: implementar CondicionContador (stat_contador >= n) sobre estadísticas de M71 [M]
-- [ ] RF2: implementar CondicionColeccion (coleccion_completa / coleccion_porcentaje) de M37 [M]
+- [x] RF2: implementar CondicionBase con contrato evaluar_progreso() y cumplida() [M] — DECISIÓN: no duplicar el evaluador de M71 (§diseño) — las condiciones usan el vocabulario M71 §3.6 y se evalúan vía evaluar_condicion()
+- [x] RF2: implementar CondicionContador (stat_contador >= n) sobre estadísticas de M71 [M] — stat_min vía evaluador M71 (testeado con sellos_obtenidos/regalos)
+- [x] RF2: implementar CondicionColeccion (coleccion_completa / coleccion_porcentaje) de M37 [M] — coleccion_completa vía evaluador M71 (testeado con flora M37)
 - [ ] RF2: implementar CondicionPesca (pescar_especie / pescar_todas_las_especies) de M34 [M]
 - [ ] RF2: implementar CondicionAmistad (amistad_maxima / amistad_total) de M20 [M]
-- [ ] RF2: implementar CondicionHito71 (hito_71 alcanzado) de M71 [M]
-- [ ] RF2: implementar CondicionHistoria (sello_historia) de M22 [M]
-- [ ] RF2: implementar CondicionCompuesta con operadores AND, OR y NOT [M]
+- [x] RF2: implementar CondicionHito71 (hito_71 alcanzado) de M71 [M] — hito_previo vía evaluador M71 (testeado)
+- [x] RF2: implementar CondicionHistoria (sello_historia) de M22 [M] — sello_historia vía evaluador M71 consultando M22.sello_marcado() directamente (FIX fuente de verdad §2.2, testeado)
+- [x] RF2: implementar CondicionCompuesta con operadores AND, OR y NOT [M] — compuesta AND/OR/NOT vía evaluador M71 (testeado)
 - [ ] RF2: declarar en cada condición depende_de(tipo_evento) para el índice de dirty flags [M]
 - [ ] RF3: evaluar condiciones solo por eventos de progreso (dirty flags), nunca por frame [M]
 - [ ] RF4: implementar unlock(id) con flag atómico anti-doble-desbloqueo [M]

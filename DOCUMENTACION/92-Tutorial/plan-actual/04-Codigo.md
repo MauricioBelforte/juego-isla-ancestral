@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 92: Tutorial
 
@@ -203,8 +203,8 @@ func _on_timeout(capitulo_id: StringName) -> void   # reprogramar x3 o descartar
 
 ## 6. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
 
@@ -229,3 +229,32 @@ func _on_timeout(capitulo_id: StringName) -> void   # reprogramar x3 o descartar
 - Coordinar con M53 para que la burbuja y los marcadores los dibuje la capa de presentación; los .tscn del 92 son solo de depuración.
 - Validar la regla de "≤ 2 pistas vivas" con el presupuesto de 0.2 ms/frame (RN4) en la zona de la plaza con varios NPC y cultivos.
 - Al terminar, crear el log en Logs/, marcar el checklist del plan-actual y actualizar CHECKLIST-GLOBAL.md (módulo 92: Progreso y Estado).
+
+---
+
+## Notas del Agente — Iteración triggers avanzados (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 02:15:00
+**Estado:** Parcial (triggers de acción/mundo + watchdog + degradación implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- Triggers de acción vía EventBus M07 REAL (RF2): primer item_added → capítulo prólogo, primer block_placed → capítulo herramienta, primer gift_given → capítulo vecino. Conexión degradación grácil (señal sin emisor → omitida con log). Anti-duplicado: cada señal de sistema solo despliega una vez (_senales_emitidas).
+- Triggers de mundo por proximidad (RF2): registrar_trigger_mundo/desregistrar_trigger_mundo/activar_trigger_mundo; chequeo con throttle 0.25 s en _process (presupuesto ≤0.2 ms — solo distancia² contra pocos targets); cada target dispara una vez; desregistro para M63 (mundos activos).
+- Watchdog RF23: timeout 120 s (WATCHDOG_TIMEOUT_S) acumulado solo con capítulo ACTIVO; al vencer PAUSA el capítulo (señal capitulo_timeout, no se marca completado — re-disparable; cozy: nunca castiga). Reset al desplegar otro capítulo.
+- Degradación (RF2): registrar_capitulo acepta extra {sistema: "Autoload"} — si el sistema no existe, el capítulo se omite con log una sola vez (_degradados); con sistema real despliega normal.
+- Gate M19 (RF2): extra {requiere_vecino_libre, vecino_id} — _vecino_libre consulta VillagerManager.obtener_vecino().esta_disponible(); si el vecino está ocupado el capítulo NO despliega (se reintenta en el próximo trigger). Sin manager → no bloquea (cozy).
+- Test test_tutorial_triggers.gd: acción vía EventBus + anti-duplicado, proximidad (cerca dispara / lejos no / desregistro), gate vecino ocupado→libre, degradación (sistema fantasma omitido con log / sistema real despliega), watchdog (121 s simulados → pausa sin completar) → **0 fallos a la primera corrida**.
+- Regresiones: test_tutorial (núcleo Deepseek) 0 fallos, test_mudanzas M19 0 fallos.
+- Checklist: progreso sube con los ítems RF2/RF23 implementados (relevados en 05).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- UI de presentación de pasos/burbujas (M53, V2): las señales paso_mostrado/capitulo_* quedan listas.
+- Streaming M63 (registro/desregistro automático por mundos activos): API manual lista (activar/desregistrar); el enganche con M63 es del dueño.
+- Conectar cumplir_meta reales de los sistemas enseñados (M13/M33/etc.): cada sistema llama cumplir_meta(meta) cuando el jugador ejecuta la acción — contrato ya publicado.
+
+### Recomendaciones para el próximo agente
+- M53: dibujar pasos escuchando paso_mostrado; respetar skip_todo()/set_dormido() del núcleo.
+- M63: llamar activar_trigger_mundo(id, false/true) al (des)cargar un mundo.
+- M13/M33/M34/M16: llamar Tutorial.cumplir_meta("usar_herramienta"/etc.) al ejecutar la acción enseñada — el capítulo se cierra solo.

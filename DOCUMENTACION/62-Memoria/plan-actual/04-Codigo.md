@@ -112,3 +112,32 @@ func ejecutar_descarga(hasta_mb: int, max_por_frame: int) -> int   # MB liberado
 - Verificar con mediciones reales los puntos de interés de RN10 (menú, spawn, horizonte, subterráneo, tormenta).
 - El handshake con M63 es la pieza más delicada: probarlo con teletransporte extremo (10 saltos) antes de cerrar la integración.
 - Validar en preset Baja con hardware de 4 GB de RAM: es el escenario donde la degradación graceful se ejercita.
+
+---
+
+## Notas del Agente — Iteración 2 enforcement (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 20:25:00
+**Estado:** Parcial (enforcement suave/duro + alarma de pico implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- Enforcement (diseño §2/§3, RF9): MemoryMonitor._enforcement(actual_mb) — suave al 90% del presupuesto (descarga ordenada vía UnloadPolicy, MAX_POR_FRAME=3) y duro al 95% (sin excepción). Objetivo de descarga: bajar al 80%. Idempotente por nivel (gate _ultimo_enforcement; el nivel 2 siempre re-aplica). Log [M62] con nivel/actual/presupuesto/liberados.
+- Alarma de pico (§RN3/RF1): _alarma_pico() — salto > 200 MB entre muestras consecutivas → push_warning con delta (registro para análisis; sin gameplay cost).
+- registrar_candidato_descarga(): API para que los sistemas (voxel M08, clima M32, herramientas M13) marquen recursos descargables con peso y distancia.
+- Integración en _muestrear(): enforcement + alarma por muestra (el muestreo ya era throttled por el núcleo).
+- Test test_enforcement_m62.gd: BudgetRegistry (consumo/tope/verificar sobre tope), enforcement sin crash + UnloadPolicy respeta MAX_POR_FRAME, alarma de pico sin crash → **0 fallos**.
+- Regresión: test_memoria_m62 (núcleo ox-alpha) 26 checks/0 fallos.
+- Checklist: +2 ítems [x] (enforcement suave/duro, verificación periódica — el resto del bloque §2 son presets M90 con dueño). Progreso 14→16/150.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Presets por calidad M90 (Baja 1.5 GB / Media 2.0 / Alta 2.5): con dueño M90 — los topes por sistema ya se registran en BudgetRegistry.
+- Muestreo condicionado por movimiento de cámara (1 s vs 5 s): el núcleo muestrea por frame del monitor; la cámara vive en M11/M12.
+- Contadores propios por sistema (voxel/audio/texturas reales): requiere instrumentación de cada sistema — con dueños.
+- Panel del Debug Menu M110: el monitor expone memoria_actual/pico/semaforo/drift — el panel es de M110.
+
+### Recomendaciones para el próximo agente
+- M90: presets deben llamar budget.registrar_sistema() con los topes del §2 y setear los umbrales del semáforo.
+- M08/M13/M32: al crear recursos descargables (chunks, efectos), llamar monitor.registrar_candidato_descarga() para que el enforcement pueda liberarlos.
+- El enforcement usa memoria REAL del OS (OS.get_static_memory_usage) contra presupuesto declarado — no confundir con el consumo por sistema simulado de BudgetRegistry.

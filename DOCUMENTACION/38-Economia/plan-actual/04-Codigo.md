@@ -1,5 +1,6 @@
-**Modelo:** ox-alpha (Cline)
-**Plataforma:** Cline
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. previa por ox-alpha + Deepseek)
+
+**Plataforma:**Kilo Code
 
 # 04-Codigo.md — Módulo 38: Economía
 
@@ -214,8 +215,9 @@ Formato de línea de ejemplo: `[DOM-ECO-TRX] compra shop=tienda_pescaderia item=
 
 ## 4. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+
+**Plataforma:**Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
 

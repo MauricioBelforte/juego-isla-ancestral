@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 37: Museos y Colecciones
 
@@ -12,10 +12,10 @@
 - [ ] Registrar relaciones: M29/M31 (reloj), M71 (logros), M39 (infraestructura), M69 (fast travel) [S]
 - [ ] RF1: edificio de museo visitable en Aurora [S]
 - [ ] RF2: donacion de fauna avistada desde M36 [S]
-- [ ] RF3: donacion de peces capturados desde M34 [S]
-- [ ] RF4: donacion de fosiles y piezas de ruinas desde M25 [S]
+- [x] RF3: donacion de peces capturados desde M34 [S] — glm-5.3-flash 2026-09-01: implementado y testeado (trucha del catálogo M34 al acuario)
+- [x] RF4: donacion de fosiles y piezas de ruinas desde M25 [S] — mecánica implementada (sala fósiles con fragmento_ancestral); los fósiles llegan cuando M25 emita más ítems
 - [ ] RF5: donacion de obras de arte ancestral [S]
-- [ ] RF6: exposiciones completables con recompensa por coleccion completa [S]
+- [x] RF6: exposiciones completables con recompensa por coleccion completa [S] — recompensa única idempotente al completar (testeado §4.2)
 - [ ] RF7+RF8: registro de donaciones, colecciones y recompensas en M55 Diario [S]
 
 ## B. Analisis y decisiones (8)
@@ -25,23 +25,23 @@
 - [ ] Analizar alternativa C: tour guiado con camara fija y galeria cinematica [S]
 - [ ] Analizar alternativa D: catalogo integrado unicamente en M55 Diario [S]
 - [ ] Decidir: edificio visitable con vitrinas instanciadas (alternativa B) [S]
-- [ ] Decidir: CollectionRegistry como autoridad unica de progreso [S]
-- [ ] Decidir: DonationService separado para validacion y consumo [S]
+- [x] Decidir: CollectionRegistry como autoridad unica de progreso [S] — implementado como autoload autoridad única
+- [x] Decidir: DonationService separado para validacion y consumo [S] — implementado como autoload separado (§2.4)
 - [ ] Documentar alternativas descartadas con justificacion tecnica [S]
 
 ## C. Arquitectura y datos (12)
 
 - [ ] Clase Museum como nodo raiz de la escena del edificio [S]
-- [ ] Clase CollectionRegistry como autoload de registro y persistencia [M]
+- [x] Clase CollectionRegistry como autoload de registro y persistencia [M] — scripts/museum/collection_registry.gd + sección "collections" M59
 - [ ] Clase ExhibitSlot para vitrinas instanciables por pieza [S]
-- [ ] Clase DonationService como autoload orquestador de donaciones [M]
-- [ ] Clase ExhibitionData (Resource) con lista de piezas y recompensa [S]
+- [x] Clase DonationService como autoload orquestador de donaciones [M] — scripts/museum/donation_service.gd con señales tipadas
+- [x] Clase ExhibitionData (Resource) con lista de piezas y recompensa [S] — adaptado: exposiciones en data/museum/exhibiciones.json (data-driven; BoatRoute-style, curator de .tres cuando haya visuales)
 - [ ] Clase ExhibitData (Resource) con metadatos de la pieza [S]
 - [ ] Clase DonationResult con estado aceptado y motivo de rechazo [S]
-- [ ] IDs unicos por pieza (exposicion_id + item_id) como clave de registro [S]
+- [x] IDs unicos por pieza (exposicion_id + item_id) como clave de registro [S] — clave (exposición, item_id) en _registradas; no-op idempotente (§4.4.3, testeado)
 - [ ] Esquema de carpetas res:// definido para scripts, escenas y datos [S]
 - [ ] Desacople total UI vs sistema de coleccion mediante senales [M]
-- [ ] Compatibilidad de extension: nuevas exposiciones sin cambios estructurales [S]
+- [x] Compatibilidad de extension: nuevas exposiciones sin cambios estructurales [S] — JSON: agregar entrada sin tocar scripts (testeado por carga dinámica)
 - [ ] Versionado del bloque de guardado para migraciones futuras [M]
 
 ## D. Museum: edificio y salas (12)
@@ -78,9 +78,9 @@
 
 - [ ] Donacion desde el inventario del jugador con seleccion en UI [M]
 - [ ] Validacion de propiedad del item antes de donar [S]
-- [ ] Validacion de item existente en el catalogo de la exposicion [S]
-- [ ] Donacion duplicada rechazada con motivo "duplicate" [S]
-- [ ] Donacion de item de otra exposicion rechazada con motivo "wrong_exhibition" [S]
+- [x] Validacion de item existente en el catalogo de la exposicion [S] — validate() con pertenece() + invalid_item (testeado)
+- [x] Donacion duplicada rechazada con motivo "duplicate" [S] — reason "duplicate" (testeado §4.3)
+- [x] Donacion de item de otra exposicion rechazada con motivo "wrong_exhibition" [S] — reason "wrong_exhibition" (testeado §4.3)
 - [ ] Donacion de item inexistente rechazada con motivo "invalid_item" [S]
 - [ ] Donacion de item no poseido rechazada con motivo "not_owned" [S]
 - [ ] Confirmacion del jugador antes de consumir el item [S]
@@ -132,7 +132,7 @@
 
 ## J. Edge cases y manejo de errores (12)
 
-- [ ] Donacion duplicada rechazada sin consumir inventario [S]
+- [x] Donacion duplicada rechazada sin consumir inventario [S] — reason "duplicate" (testeado §4.3)
 - [ ] Vitrina ocupada nunca sobrescrita con otra pieza [S]
 - [ ] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
 - [ ] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]

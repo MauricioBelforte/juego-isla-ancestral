@@ -114,3 +114,31 @@ señales `bloque_extraido/bloque_colocado/golpe_conectado/golpe_fallido/herramie
   omitir capas UI recientes (ver 06-GUIA-DE-CONEXION-VISION, descubrimientos de capturas).
 - Herramientas iniciales hardcodeadas en _crear_herramientas_iniciales(): reemplazar por
   adquisición real cuando M14/M16 existan.
+
+---
+
+## Notas del Agente — Iteración 5 niveles → progresión (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 01:15:00
+**Estado:** Parcial (señal nivel_herramienta_cambio implementada y verificada; módulo liberado 🟡)
+
+### Lo que hice
+- EventBus M07: dominio nuevo `progresion` (aditivo) con señales nivel_herramienta_cambio/nivel_casa_cambio/nivel_amistad_cambio — la señal estándar que el diseño M71 §3.6/§5 requería.
+- ProgressionManager M71: puente `conectar_tool_controller(tc)` público (el ToolController es de ESCENA, no autoload) que traduce herramienta_equipada(tool: ToolData) → nivel_herramienta_cambio(id_legible, nivel) + estadística monótona `nivel_pico`/`nivel_azada`/... en PlayerProfile (solo sube, nunca baja — §3.6 nivel_modulo consume nivel máximo).
+- tool_id legible del enum Tipo: pico/azada/hacha/pala/regadera/cana/martillo/tijeras/lupa.
+- Núcleo M13 (tool_controller.gd) NO modificado — la conexión es desde M71 (§4.1: sin acoplamiento).
+- Test test_nivel_herramienta.gd: puente emite señal, estadística monótona sube con HIERRO→ORO y no baja con COBRE → **0 fallos**.
+- Regresiones: test_progresion M71 0 fallos, test_herramientas M13 0 fallos.
+- Checklist: +2 ítems [x] (señal de niveles M13 + integración M71). Progreso 65→67/102.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- La ESCENA real (main_island.tscn) debe llamar ProgressionManager.conectar_tool_controller(tc) al montar el ToolController — 1 línea en el Bootstrap/escena (con dueño del escenerio, yo no edito la escena principal sin dueño).
+- nivel_casa_cambio/nivel_amistad_cambio: iguales patrones para M18/M20 (puentes de 1 línea cuando M18/M20 lo implementen).
+- Nombres i18n de niveles: ToolData.NOMBRES usa español hardcode — M87 puede traducir con claves TOOLS.* en próxima iteración.
+
+### Recomendaciones para el próximo agente
+- Bootstrap/escena principal: llamar ProgressionManager.conectar_tool_controller($ToolController) en _ready de la escena (1 línea, cierra el puente en runtime real).
+- M71: las condiciones nivel_modulo(picota, 2) del §3.6 usan stat "nivel_pico" >= 2 — el formato del stat_id es "nivel_" + tool_id legible.
+- M18 (casas): replicar el patrón exacto con nivel_casa_cambio.

@@ -1,7 +1,8 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-
 # 04-Codigo.md — Módulo 35: Minería
+
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Fecha:** 2026-08-31
 
 > Rutas propuestas dentro de `res://_Project/` (estructura adaptada a Godot 4.x según AGENTS.md sección 24). Se ajustarán a la estructura final del proyecto Godot.
 

@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 87: Localización
 
@@ -198,8 +198,8 @@ msgstr[1] "Se ofrecen {n} objetos"
 
 ## 9. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
 
@@ -228,3 +228,57 @@ msgstr[1] "Se ofrecen {n} objetos"
 - Al implementar, extraer los textos hardcodeados existentes a claves en es.po y en.po (tareas de migración de UI M53 y diálogos M21).
 - Ejecutar el plan de testings (06-Plan-Testings.md) y documentar resultados en 07-Resultados-Testings.md antes de la primera prueba manual del usuario.
 - Cuando el módulo esté implementado, actualizar CHECKLIST-GLOBAL.md (estado, progreso 136/136, firma) y generar el log en `Logs/`.
+
+---
+
+## Notas del Agente — Iteración 2 persistencia/SO/contexto (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 03:30:00
+**Estado:** Parcial (persistencia real de idioma, sugerencia del SO y contexto gettext implementados; módulo liberado 🟡)
+
+### Lo que hice
+- Persistencia REAL del idioma (checklist "persistir entre sesiones", M60): el núcleo usaba GameSettings que NO existe (placeholder); ahora _persistir_locale y _leer_locale_m60 operan sobre DataStore.guardar_config/cargar_config. REQUERÍA ampliar GestorConfig (M60): nueva sección "general" con default {"idioma": "es"} — las claves raíz del dict se descartaban (SECCIONES registradas). Cambio estructural mínimo, validado con la suite M60 completa (66/0).
+- set_locale_persistente(locale) API pública: set_locale + persistencia en un paso (para el selector de idioma de M53/M110).
+- Sugerencia del SO en primer arranque (checklist): _sugerir_locale_so() mapea OS.get_locale_language() a los soportados; si el jugador nunca eligió, se aplica la sugerencia y se persiste (la confirmación UI es de M53).
+- Contexto gettext (checklist): tr_ctx(contexto, module, section, key) → clave compuesta "contexto|key" desambiguante; testeado que tr_ctx("ui",...) == tr_key("ui|cerrar",...).
+- Test test_localizacion_iter2.gd: persistencia M60 round-trip (en→es, rechazo "fr" sin contaminar), arranque simulado que restaura, sugerencia del SO determinista, contexto gettext, cache de rendimiento (200 traducciones < 20 ms) → **0 fallos**.
+- Regresiones: test_localization (núcleo Deepseek) 0 fallos, test_datos_m60 (M60) 66 checks/0 fallos.
+- Checklist: progreso actualizado con los ítems implementados (persistencia, sugerencia SO, contexto, cache, selector data).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Selector de idioma VISUAL en configuración (M53): la API set_locale_persistente/locales_disponibles/get_locale_display_name está lista para la UI.
+- Confirmación del idioma del SO al primer arranque (diálogo): parte de la UI M53; acá se aplica + persiste la sugerencia.
+- Idioma activo en menú de debug M110: get_locale_display_name() expuesto; el menú es de otro módulo.
+- Catálogos es/en completos del juego: la expansión de contenido traducible es continua (todo texto nuevo debe usar tr_key).
+
+### Recomendaciones para el próximo agente
+- M53: selector usa set_locale_persistente() + locales_disponibles() + get_locale_display_name(); la confirmación del SO usa get_locale_display_name() del sugerido.
+- NUEVAS secciones de GestorConfig (M60): SIEMPRE agregarlas a SECCIONES+DEFAULTS_BASE — las claves raíz se descartan silenciosamente (pitfall documentado).
+- Los textos nuevos del juego: tr_key("modulo", "seccion", "clave") y entrada en es.po/en.po; validar RF21 con validar_catalogos().
+
+
+---
+
+## Notas del Agente — Iteración 3 integración M88 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 01:30:00
+**Estado:** Parcial (integración M88 cobertura/FontLoader implementada y verificada; módulo liberado 🟡)
+
+### Lo que hice
+- FontCatalog (M88) ampliado con API de cobertura: cobertura_de(id), soporta_idioma(id, locale), fuente_para_idioma(locale) (primera de familia "body" que cubra el locale, fallback al primero), validar_cobertura_idiomas(locales) (RF14: fuente sin cobertura de ningún locale activo = error).
+- fonts.json: campo "cobertura" por fuente — museo_moderno/mono_debug "todos", texto_cozy ["es","en"], script_isla ["es"].
+- test_localizacion_iter3.gd: cobertura data-driven, fuente por idioma (es→texto_cozy), validación RF14 (es/en limpio; ru detecta las 2 fuentes sin cobertura) → **0 fallos**.
+- Regresión: test_localizacion_iter2 0 fallos.
+- Checklist: ítems "compatibilidad de caracteres" y "FontLoader según idioma" → [x] (la selección de fuente física .ttf real queda cuando M46 entregue los archivos — tiene_archivo: false).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Archivos .ttf reales de Nunito/Fredoka (M46 arte): tiene_archivo false — el FontLoader físico es la iter. con arte.
+- Cirílico/CJK: no planeados MVP (checklist) — la estructura de cobertura los soporta cuando lleguen.
+
+### Recomendaciones para el próximo agente
+- M46: al entregar los .ttf, marcar tiene_archivo: true en fonts.json y agregar el campo "ruta" por fuente — FontCatalog.fuente(id) ya lo expone.
+- M53: setear el theme default font según fuente_para_idioma(locale) al cambiar idioma (señal locale_changed de M87).

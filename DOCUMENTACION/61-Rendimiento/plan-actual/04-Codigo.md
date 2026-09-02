@@ -171,3 +171,72 @@ res://data/performance/
 - Crear `bench_scene_a.tscn` con el terreno voxel básico (M08) y usar `BudgetProfile` +
   `ValidateBudget` para la vara de medición antes de optimizar contenido.
 - Cuando exista el build de profiling, cablear `validate_budget.gd` como gate CI en M116.
+
+---
+
+## Iteración 2 — Benchmark visual (2026-09-01, deepseek-v4-flash-vision-exp / Kilo Code)
+
+### Archivos nuevos
+
+```
+res://scenes/bench_scene_a.tscn              # Bench oficial (V2)
+res://scripts/performance/bench_recorder.gd  # Recorder: 6 waypoints × 15 s, overlay, muestreo, JSON
+res://tools/reportes/asset_validation.txt    # (de M108, no del bench)
+```
+
+### Implementación
+
+- **bench_scene_a.tscn** — terreno voxel M08 (world_generator seed 42, radio 256, altura 40, paleta
+  Maldivas completa con SHALLOW_WATER), VoxelViewer y Camera3D con 6 waypoints (norte, NE, este,
+  sur, oeste, cenital) y look_at al centro (12,12,256).
+- **bench_recorder.gd** — interpolación de cámara por waypoint (15 s), Label overlay en pantalla
+  con `FPS + Draw calls + Objetos + Waypoint N/6`, muestreo cada 30 frames
+  (`Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME` / `_OBJECTS` / `TIME_PROCESS`), medición de la
+  sección `render` con BudgetProfile (`frame_post_draw`), JSON final en
+  `user://logs/bench/bench_AAAAMMDD.json` con medias, máximo de draw calls, hardware
+  (RenderingServer), y veredicto `OK (>=60 FPS) / WARN`.
+
+### Fix aplicado (regresión global ajena que bloqueaba el boot)
+
+- `scripts/player/equipment_manager.gd` — 35 líneas con indentación de ESPACIOS pasadas a TABS
+  (conversión mecánica, sin cambio de lógica). Sin esto el proyecto no arrancaba
+  (Debugger Break: `Used space character for indentation`). Detalle en guía 07 §9.60.
+
+### Lo que NO pude hacer (honestidad)
+
+- **[?] Ejecutar el bench y tener mediciones reales:** al momento de la iteración el árbol dev
+  NO compila por regresiones adicionales ajenas sin dueño activo:
+  - `scripts/fauna/fauna_manager.gd:79` — `Function "_get_registry()" not found in base self`
+    (módulo M36/M37; el método falta en la clase).
+  - `scripts/player/equipment_manager.gd:106/122` — `Key "body_vest_explorer" / "acc_backpack"
+    was already used in this dictionary` (módulos M13/M155; duplicados en el catálogo literal).
+  NO pisé esos archivos (regla §21.4.2: trabajo de módulos con dueño); se documentan en guía 07
+  §9.60 y en ESTADO-PARALELO para que sus dueños los corrijan. Una vez corregidos, la ejecución
+  del bench tarda 90 s y el resultado queda en `user://logs/bench/bench_*.json`.
+
+### Notas del Agente (iter 2)
+
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 17:05
+**Estado:** Iter 2 PARCIAL — bench implementado (listo para ejecución) + fix de boot; medición real pendiente de regresiones ajenas
+
+**Recomendaciones:** cuando los dueños de M36/M13/M155 corrijan sus parse errors, ejecutar
+`godot_run_project bench_scene_a.tscn` (90 s) y cerrar la iteración con el JSON + captura de
+overlay. El gate CI (M116) debe cablear `validate_budget.gd` con la medición del bench
+## Iteración 2b — MEDICIÓN REAL (2026-09-01 19:01, deepseek-v4-flash-vision-exp)
+
+Recorrido completo de 90 s (6 waypoints) con bench_scene_a + bench_recorder (build de escritorio, AMD Radeon):
+
+| Métrica | Valor medido | Objetivo (budgets.json) | Estado |
+|---|---|---|---|
+| FPS promedio | **59.35** (179 muestras) | >= 60 | ⚠️ WARN (0.65 FPS por debajo; Vsync/carga de chunks) |
+| Draw calls promedio | **374.0** (máx 471) | <= 400 (objetivo definido E.59) | ✅ dentro (margen 26) |
+| Objetos en frame | **477** (máx 575) | — | Informe |
+| TIME_PROCESS | **0.018 ms** | — | ✅ CPU casi libre (freno por GPU/Vsync) |
+| Frame render (frame_post_draw, 1 vuelta) | **16.35 ms** | 16.7 total | ✅ dentro del presupuesto total |
+
+- JSON: user://logs/bench/bench_2026-09-01.json (179 muestras, 6 waypoints, hardware AMD) — apto para gate CI M116.
+- Evidencia visual: 	ools/mcp/godot-mcp/capturas/61-Rendimiento/cap_61_..._bench_mid2.png (FPS 60 + draw calls 343 + objetos 447, waypoint 3/6) y ..._bench_final.png (veredicto WARN, vista cenital isla completa).
+- Draw calls del terreno de isla 256 completo: ~343-471 según ángulo — valor base para M07/M50 (batching/LOD) y para el objetivo E.59 (<= 400).
+

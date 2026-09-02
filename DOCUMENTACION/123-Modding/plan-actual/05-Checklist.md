@@ -9,13 +9,13 @@
 
 ## 1. Decidir si habrá modding (1º)
 
-- [ ] Definir evaluación de modding post-lanzamiento (V2) [M]
+- [x] Definir evaluación de modding post-lanzamiento (V2) [M]
 - [ ] Definir criterio: pedidos de la comunidad ≥ 50 [M]
 - [ ] Definir criterio: presupuesto ≤ 10% [M]
 - [ ] Definir criterio: diseño aprobado 100% [S]
 - [ ] Definir criterio: cero re-arquitectura [S]
-- [ ] Definir GATE ejecutable en V2 (no en V1) [S]
-- [ ] Definir posposición a V3 si el GATE falla [S]
+- [x] Definir GATE ejecutable en V2 (no en V1) [S]
+- [x] Definir posposición a V3 si el GATE falla [S]
 - [ ] Definir decisión de "no modding en V1" documentada [S]
 
 ## 2. Diseñar API (2º)
@@ -99,7 +99,7 @@
 ## 10. Definir distribución (10º)
 
 - [ ] Definir solo Steam Workshop para distribución oficial [M]
-- [ ] Definir no tienda propia de mods en V2 [S]
+- [x] Definir no tienda propia de mods en V2 [S]
 - [ ] Definir actualización de mods por Workshop [M]
 - [ ] Definir integración con M97 (Steamworks) [M]
 - [ ] Definir moderación de mods (reportes → M100) [M]
@@ -136,7 +136,7 @@
 
 - [ ] Definir triaje: bugs con mods SOLO si reproducen sin mods [M]
 - [ ] Definir flag `--no-mods` de soporte [S]
-- [ ] Definir SLA de respuesta 72 h a issues de mods (V2) [S]
+- [x] Definir SLA de respuesta 72 h a issues de mods (V2) [S]
 - [ ] Definir canal #modding en Discord (M100) [S]
 - [ ] Definir exclusiones de soporte (mods maliciosos/corruptos) [S]
 - [ ] Definir base de conocimientos de mods en web [M]
@@ -150,7 +150,7 @@
 - [ ] Definir estimación: Workshop+telemetría (40-60 h) [M]
 - [ ] Definir estimación: docs+ejemplo+soporte (30-40 h) [M]
 - [ ] Definir total estimado 240-360 h (< 10% presupuesto) [M]
-- [ ] Definir tracking de horas reales en V2 contra la estimación [S]
+- [x] Definir tracking de horas reales en V2 contra la estimación [S]
 - [ ] Definir re-evaluación del GATE tras el tracking [S]
 
 ## 16. Calidad y cierre
@@ -159,7 +159,7 @@
 - [ ] Definir separación del loader del gameplay core [M]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
-- [ ] Definir feed a V2 roadmap (M136) y M100 [S]
+- [x] Definir feed a V2 roadmap (M136) y M100 [S]
 
 ## Totales
 

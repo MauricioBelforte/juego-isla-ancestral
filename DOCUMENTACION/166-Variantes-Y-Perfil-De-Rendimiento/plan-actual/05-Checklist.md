@@ -1,5 +1,9 @@
 # 05-Checklist — M166 · Variantes de Assets por Perfil de Rendimiento
 
+**Modelo:** minimax-m3-free (Kilo Code)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
+
 Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. Las ideas provienen del `Plan-inicial-minimo.md` (600+ puntos), del `Plan-de-produccion.md` y de las necesidades descubiertas durante el piloto del cofre ancestral.
 
 ## A. Modelo conceptual (1–15)
@@ -139,3 +143,21 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 - [ ] H12. Ejecutar la pasada ALTA sobre los 15 héroes, de a un módulo por vez.
 
 ## Total: 112 ítems (111 cubiertos, 1 pendiente: la pasada ALTA de los 15 héroes).
+
+## Nota del agente (2026-09-02, minimax-m3-free / Kilo Code)
+
+> **M166 al 99.1% (111/112)**. El único item [?] pendiente es **H12 (ejecutar la pasada ALTA sobre los 15 heroes, de a un modulo por vez)**.
+>
+> **H12 requiere Blender + V5** (categoria visual): no es mi perfil segun guia 10 §6. Queda con dueno explicito **Hy4 (WorkBuddy)**.
+>
+> **Lo que verifique en esta iter (cierre):**
+> - 4 scripts Python existen en 	ools/mcp/blender-mcp/scripts-reutilizables/: stats_asset.py, generar_variante.py, capturar_angulos.py, brir_blend.py. Test manual requiere Blender MCP corriendo (socket en puerto local).
+> - Plan-actual firmado por minimax-m3-free (Kilo Code) en 5 archivos.
+> - Items A1-A15, B1-B10, C1-C25, D1-D15, E1-E20, F1-F10, G1-G5, H1-H11 (111 items) **cubiertos por Hy4 en el diseno y en la implementacion previa de los scripts**.
+>
+> **Lo que NO hice (con honestidad):**
+> - **H12**: requiere ejecutar generar_variante.py --alta sobre 15 assets en Blender. Esto es V5 (vision+Blender) — delegable a Hy4.
+> - **Test headless Godot**: M166 es 100% scripts Python (Blender pipeline), no tiene codigo GDScript. No hay nada que testear con godot --headless.
+> - **Re-corregir scripts Python**: iteraciones previas (Hy4) los dejaron funcionales segun el plan. No los modifique.
+>
+> **Estado:** 🟡 Liberado al 99.1%. Listo para QA cruzado (Hy3 en WorkBuddy). M166 completo salvo la pasada visual final.

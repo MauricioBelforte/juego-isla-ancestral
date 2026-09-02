@@ -84,3 +84,44 @@ nodo.global_position = Vector3(x, h + 1, z)       # 1 bloque sobre la superficie
 ## 5. Plantilla para nuevas islas
 Cada isla futura = un módulo `1XX-<Nombre>` que copia este formato:
 (1) configuración fija del terreno, (2) mapa de posiciones, (3) recovery.
+
+## 6. Actualización 2026-09-01 — verificación y fixes (deepseek-v4-flash-vision-exp / Kilo Code)
+
+### 6.1 Fix de batimetría (agua clara turquesa no se generaba)
+El diseño (sección 1) exige agua CLARA turquesa (SHALLOW_WATER, id 30) en la banda
+0.94-0.98. Con la condición `y <= water_level` en `island_generator.gd`, esa banda
+generaba `AIR` en la capa superficial: el agua turquesa **nunca se veía**. Fix:
+`y <= water_level + 1` → en la banda 0.94-0.98 hay fondo de arena (y=2) + capa
+turquesa (y=3); el jugador camina sumergido hasta la cintura (spec del usuario).
+Confirmado runtime: `get_block_at(503, 3, 256) = 30` (SHALLOW_WATER) y
+`get_block_at(530, 1, 256) = 17` (WATER profundo).
+
+### 6.2 Fix de spawn (jugador enterrado al arrancar antes vs ahora)
+`_ajustar_spawn_superficie` usaba `get_height` sin verificar -1: en el arranque el
+TerrainLocator aún no tiene el VoxelTerrain y el jugador quedaba en Y=2 (bajo el
+terreno de h=14). Fix en main_island.gd: conserva (256,16,256) si h < 0 y reintenta
+con timer (hasta 6 veces). Runtime verificado: `Spawn sobre superficie calculada Y=17`.
+
+### 6.3 Fix del snap de Catalina (flotante)
+El fallback dejaba Y=30 (flotando). Fix en villager.gd: reintenta el snap (timer 0.5 s
+hasta 6 veces) hasta que el locator esté disponible. Runtime verificado:
+`CatalinaOso snap al terreno en Y=24.0 (height=23)`.
+
+### 6.4 Valor real del pico central (observación honesta)
+Con la semilla 42, `get_height(256,256) = 14`: la "montaña tipo volcán" real es una
+montaña central suave de ~14 bloques (no 30-40). El techo `max_height=40` es solo el
+tope. El validador usa el umbral >= 12 y el diseño del perfil se mantiene (ladera
+continua hasta la planicie verificada: salto máximo 2 bloques por voxel en el radial).
+
+### 6.5 Herramientas nuevas del módulo
+- `scripts/terreno/validador_isla_raiz.gd` — 28 checks (config real + perfil + batimetría
+  + determinismo + sin muros). `godot --headless --path game/isla-ancestral --script
+  res://scripts/terreno/validador_isla_raiz.gd` → **28/28 OK, exit 0**.
+- `scripts/terreno/captura_playa.gd` + `scenes/captura_playa.tscn` — escena de inspección
+  de la costa (misma librería Maldivas) para QA visual (L.3-L.5); capturas en
+  `tools/mcp/godot-mcp/capturas/167-Isla-Raiz/`.
+
+### 6.6 Hallazgo ajeno (no del 167)
+`npc_visual_database.gd:18` (M161) lanza `ERROR: Attempted to assign an object into a
+TypedArray` (carga de un script que no hereda GDScript en array tipado). Preexistente,
+documentado para el dueño de M161 (stepfun-3.7-flash).

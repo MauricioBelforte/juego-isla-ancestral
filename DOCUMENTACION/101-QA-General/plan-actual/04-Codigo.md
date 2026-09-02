@@ -165,3 +165,53 @@ godot --headless --path . --script res://tests/run_tests.gd -gexit
 - Verificar que los ítems del QA-CHECKLIST.md usen el patrón "acción → resultado esperado" y el modo verificable por logs (M103) además de visual, para que los agentes sin visión no queden bloqueados.
 - Coordinar con el dueño de M112: al primer bug de regresión reproducible, convertir el caso en test automático y etiquetar el issue M102 con `regresion`.
 - Después de implementar, actualizar el 05-Checklist.md marcando los ítems reales y escribir el log en `Logs/` con la firma del modelo.
+
+---
+
+## 6. Implementación iteración 1 (2026-09-01) — deepseek-v4-flash-vision-exp / Kilo Code
+
+### Archivos creados (implementación del punto 2)
+
+| Archivo | Contenido | Estado |
+|---|---|---|
+| `QA-CHECKLIST.md` | Checklist maestro de QA: 27 áreas (cada una con 4-9 ítems verificables con IDs `NN.MM`), marcadores `🔍` (verificable por logs M103) y `🎮` (requiere debug menu M110), 12 estados de borde transversales (EB.01-EB.12), reglas de uso y cadencia de actualización | ✅ |
+| `QA-SESSION.md` | Plantilla de sesión obligatoria (cabecera completa, resultados por ítem, bugs, conversión M112, evidencias, conclusión, métricas, firma) + campos obligatorios y duraciones esperadas | ✅ |
+| `QA-SMOKE.md` | Smoke de 7 pasos (< 15 min) con tiempos por paso, veredicto aprobado/rechazado y 3 reglas (evidencia de log, doble semilla por determinismo, build exacta) | ✅ |
+| `QA-REGRESION.md` | Ciclo de regresión: tablas de frecuencia (post-cambio/post-build/post-hito/QA cruzado), reglas de dependencias, conversión a M112 (RF10), presupuesto/prioridad y guía rápida en 6 pasos para agentes | ✅ |
+| `QA-RELEASE-CRITERIA.md` | DoD de QA de 7 puntos con verificación y evidencia por punto, veredictos de severidad (M102) con efecto en hito, criterios entrada/salida por hito M137-M142 y consecuencias | ✅ |
+| `QA-PLAYTEST-BRIDGE.md` | Coordinación M101↔M114: división de roles, reglas EA.1 (build saneada) y EA.2 (re-chequeo), EA.3/EA.4/EA.5 (issues técnicos, señales→ítems, momento del ciclo) | ✅ |
+| `guia-para-agentes.md` | Verificación post-tarea para agentes: flujo en 6 pasos, reglas para agentes sin/con visión, reglas de honestidad (§21.4), integración con el ciclo §21.3 y check rápido de cierre (15 ítems) | ✅ |
+| `sesiones/QA-HITO-M137.md` … `M141.md` | Sesión definida por hito: contexto, criterios de entrada, sesión a ejecutar, criterios de salida y plantilla copiable para `sesiones/M1XX-*/` | ✅ |
+| `sesiones/00-EJEMPLO-DEMO/sesion-ficticia.md` | Sesión ficticia de validación de la plantilla (ítem de testing del checklist): 7 validaciones de formato concluidas + 1 límite honesto (validación real en M137) | ✅ |
+
+### Diferencias vs diseño (03-Diseno.md)
+
+- El diseño previó "una carpeta `sesiones/M137-PROTOTIPO/`"; se agregó además la **plantilla de cada hito directamente en `sesiones/QA-HITO-M1XX.md`** para que el agente-tester copie y complete sin buscar en el diseño.
+- Se agregó el marcador `🔍` (verificable por logs) para que agentes sin visión ejecuten los ítems igualmente (recomendación del autor original de la doc; ver nota previa).
+- La sesión ficticia de validación vive en `sesiones/00-EJEMPLO-DEMO/` (no en una carpeta de hito) para no ensuciar las carpetas reales.
+
+## Notas del Agente
+
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 15:30
+**Estado:** Iter 1 completada (salida prevista) — módulo 🟡 Liberado con 2 `[?]` de validación real (ver DoD del 05-Checklist)
+
+### Lo que hice
+
+- Implementé la totalidad de los entregables del módulo 101 (proceso/plantillas, sin código runtime): checklist maestro 27 áreas (~185 ítems + 12 EB), plantilla de sesión, smoke de 7 pasos, regresión por dependencias, DoD de 7 puntos, puente con M114, guía para agentes, sesiones M137-M141 definidas con criterios de entrada/salida y sesión ficticia de validación.
+- Reservé el módulo en los 4 registros (CHECKLIST-GLOBAL, 05-Checklist con bloque `Reserva actual`, ESTADO-PARALELO, guía 08) y lo liberé actualizando los mismos 4.
+- Marquí el 05-Checklist a 203/205 `[x]` con 2 `[?]` honestos y doy la definición de completado del módulo en su DoD.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Validación real de las plantillas:** no existe aún build jugable (los módulos de gameplay siguen en desarrollo); la sesión ficticia valida FORMATO, no contenido. La primera sesión real es del hito M137 — plantilla lista.
+- **Ítems dependientes de módulos no implementados:** los ítems del QA-CHECKLIST referencian comportamientos de módulos aún `🟡`/`🟢` (M13/M14/M15 parciales, M64, M65...). Son ítems **preventivos** que se revalidarán en cada hito contra el plan-actual real.
+- **QA cruzado (§21.8):** no lo ejecuto (regla del proyecto: Hy3 / WorkBuddy). El módulo queda listo para verificación externa.
+
+### Recomendaciones para el próximo agente
+
+- Al aparecer la build M137: ejecutar el primer smoke real y crear `sesiones/M137-PROTOTIPO/sesion-01-{fecha}.md` (plantilla en QA-HITO-M137.md) — ese es el ítem de validación que cierra la iteración.
+- Un QA cruzado puede validar que las reglas EA.1/EA.2 no contradicen 03-Diseno.md de M114 (ítem ya [x]; verificación externa deseable).
+- Si el checklist maestro se vuelve imponente en un hito, priorizar los ítems `🔍` (logs) para agentes sin visión y los `🎮` para agentes con visión.
+- Próxima mejora natural: convertir los ítems `🔍` de áreas maduras en tests M112 de regresión (el puente ya está definido).

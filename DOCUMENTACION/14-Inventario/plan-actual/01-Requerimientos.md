@@ -1,5 +1,5 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo Code
 
 # 01-Requerimientos.md — Módulo 14: Inventario
 

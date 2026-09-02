@@ -245,3 +245,30 @@
 - [ ] Ejecutar el pase de tags post-lanzamiento y documentar resultados [M]
 - [ ] Verificar que las dimensiones de assets coinciden con las docs vigentes [S]
 - [ ] Confirmar que los textos finales tienen aprobación humana del fundador [S]
+## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
+
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
+**Rol:** QA cruzado (AGENTS.md §21.8) — validación / detección de bugs
+
+### Resultado de test (headless, Godot 4.7.2-stable)
+- godot --headless -s res://scripts/store/test_store_m97.gd -> **15 checks, 0 fallos** (exit 0) ✅
+
+### Artefactos verificados
+- data/store/store_page.json — carga y estructura validada por el test.
+- scripts/.../StorePageValidator.gd — alidar()/
+eporte() detectan datos corruptos.
+- scripts/.../scripts/store/test_store_m97.gd — ejecuta sin errores, sin regresiones con M60 (66/0 OK).
+
+### Hallazgo honesto (brecha de implementación)
+El módulo se liberó como "núcleo iter. 1" con JSON + Validator + Test.
+- Autoload de servicio del plan: **NO mencionado** en la liberación (Log 420-422); solo JSON + Validator + Test. Verificar/implementar en pasada futura si el plan lo exige.
+El checklist de producto (espec. completa) permanece sin marcar: la capa de validación de datos SÍ está verificada; la capa de servicio/docs puede faltar según el plan.
+
+### Veredicto QA
+- DoD de la *capa de validación de datos*: **CUMPLIDO** (código existe, compila, tests 0 fallos, sin regresiones).
+- Producto completo según plan: revisar con dueño.
+- Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado).
+
+**Firma:** Hy3 / Kilo Code — 2026-09-02

@@ -1,9 +1,26 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** agnes-2.5-flash (implementación) / Deepseek V4 Flash (plan)
+**Plataforma:** Kilo Code / OpenCode
+**Última actualización:** 2026-09-01
 
 # 04-Codigo.md — Módulo 74: Eventos
 
-## 1. Archivos previstos (Pendiente de implementación)
+## 1. Archivos Implementados
+
+| Archivo | Estado | Propósito |
+|---|---|---|
+| scripts/eventos/event_manager.gd | ✅ Autoload eventos | Orquestador: catálogo, agenda, disparo, participación, recompensas, persistencia M59 |
+| scripts/eventos/event_definition.gd | ✅ class_name EventDefinition | Resource data-driven: ID, tipo, fecha, franja horaria, condiciones, recompensas |
+| scripts/eventos/condicion_evento.gd | ✅ class_name CondicionEvento | Condiciones reutilizables (hora, estación, clima, amistad, inventario, historia) |
+| scripts/eventos/recompensa_def.gd | ✅ class_name RecompensaDef | Definiciones de recompensa (objeto, moneda, amistad, progreso, recuerdo) |
+| scripts/eventos/event_state.gd | ✅ class_name EventState | Estado serializable por evento/año:PENDIENTE/EN_CURSO/PARTICIPADO/NO_PARTICIPADO/CANCELADO |
+| scripts/eventos/contexto_festival.gd | ✅ class_name ContextoFestival | Contexto para diálogos M21 |
+| scripts/eventos/data/festivales/*.tres | ✅ 6 archivos | Primavera, Verano, Otoño, Invierno, Luces |
+| scripts/eventos/data/ferias/*.tres | ✅ 1 archivo | Feria Colmena |
+| scripts/eventos/data/competencias/*.tres | ✅ 3 archivos | Torneo Pesca, Concurso Minero, Desafío Agrícola |
+| scripts/eventos/data/rituales/*.tres | ✅ 2 archivos | Ceremonia Templos, Vigilia Luna |
+| scripts/eventos/data/climaticos/*.tres | ✅ 2 archivos | Aurora Boreal, Niebla Faro |
+| scripts/eventos/data/sorpresas/*.tres | ✅ 2 archivos | Visita Sorpresa, Regalo Puerta |
+| 	ests/test_eventos.gd | ✅ Headless 59/0 | Suite de pruebas unitarias e integración |
 
 | Archivo | Tipo | Rol |
 |---|---|---|

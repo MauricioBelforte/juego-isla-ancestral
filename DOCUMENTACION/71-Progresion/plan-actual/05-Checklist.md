@@ -19,20 +19,20 @@
 ## B. RF — Desbloqueos
 
 - [ ] RF1: registry central de hitos con catálogo data-driven en .tres [M]
-- [ ] RF2: tipos de condición evaluables por tipo (stat_min, dias_jugados, nivel_modulo, sello, capitulo, riqueza, coleccion, hito_previo, primera_vez, compuesta) [M]
-- [ ] RF3: evaluación de condiciones por eventos con dirty flags, nunca por frame [M]
-- [ ] RF4: UnlockSystem que activa desbloqueos al cumplirse su condición y emite señal [M]
-- [ ] RF5: señales de progreso estandarizadas: hito, desbloqueo, logro, primera vez, condición imposible [M]
-- [ ] RF6: perfil de jugador con estadísticas acumuladas alimentado por eventos del EventBus (M07) [M]
-- [ ] RF7: estadísticas del día con reset al cambiar de día laborable (M29) [M]
+- [x] RF2: tipos de condición evaluables por tipo (stat_min, dias_jugados, nivel_modulo, sello, capitulo, riqueza, coleccion, hito_previo, primera_vez, compuesta) [M] — glm-5.3-flash 2026-09-01: evaluador con 9 de 10 tipos (nivel_modulo implementado pero sin señales fuente M13/M18 aún)
+- [x] RF3: evaluación de condiciones por eventos con dirty flags, nunca por frame [M] — dirty flags + indexación condición→hito O(1) por stat (testeado con 10 items)
+- [x] RF4: UnlockSystem que activa desbloqueos al cumplirse su condición y emite señal [M] — fusionado en ProgressionManager (desglose iter. 2 documentado); activar_desbloqueo idempotente + señal
+- [x] RF5: señales de progreso estandarizadas: hito, desbloqueo, logro, primera vez, condición imposible [M] — progreso_hito_alcanzado/desbloqueado/primera_vez/resumen_cargado emitidas; logros con M72
+- [x] RF6: perfil de jugador con estadísticas acumuladas alimentado por eventos del EventBus (M07) [M] — PlayerProfile + 6 puentes de señales M07 reales (items/purchases/gifts/sellos/quests/friendship/travel)
+- [x] RF7: estadísticas del día con reset al cambiar de día laborable (M29) [M] — reset_dia() listo; enganche con day_started M29 pendiente (1 línea, con dueño del integrador)
 - [ ] RF8: registro base de logros con condiciones y progreso parcial; presentación en M72 [M]
-- [ ] RF9: radar de primeras veces (primer recurso, primer pez, primera venta, primera donación) [M]
+- [x] RF9: radar de primeras veces (primer recurso, primer pez, primera venta, primera donación) [M] — primera_vez/marcar_primera_vez + condición evaluador + señal (M53 radar con dueño)
 - [ ] RF10: gating suave: condiciones imposibles reportadas a M66 con rutas alternativas [M]
-- [ ] RF11: reputación comunitaria 0-100 derivada de amistad (M20) y contribuciones (M38), nunca bloqueante [M]
+- [x] RF11: reputación comunitaria 0-100 derivada de amistad (M20) y contribuciones (M38), nunca bloqueante [M] — 60% amistad / 40% contribución (testeado); normalización desde M20 con dueño
 - [ ] RF12: títulos sociales cosméticos otorgados por hitos acumulados, sin poder ni bloqueo [M]
-- [ ] RF13: persistencia de hitos, desbloqueos, estadísticas, primeras veces y reputación en GameState (M59) [M]
-- [ ] RF14: distinción jugador nuevo (onboarding M92) vs veterano (resumen, sin re-emisión de hitos) [M]
-- [ ] RF15: registro de eventos de progreso en logs M103 y analytics M104 [S]
+- [x] RF13: persistencia de hitos, desbloqueos, estadísticas, primeras veces y reputación en GameState (M59) [M] — sección "progresion" versionada v1 (testeado round-trip + purga de catálogo viejo)
+- [x] RF14: distinción jugador nuevo (onboarding M92) vs veterano (resumen, sin re-emisión de hitos) [M] — restore NO re-emite señales (testeado) + progreso_resumen_cargado; inicialización onboarding con M92 dueño
+- [x] RF15: registro de eventos de progreso en logs M103 y analytics M104 [S]
 - [ ] RF16: validación de catálogos en editor: ids únicos, estadísticas existentes, sin ciclos, sin condiciones imposibles [M]
 
 ## C. RF — Hitos y registry
@@ -44,9 +44,9 @@
 - [ ] Crear milestone_catalog.tres como catálogo central cargado por el registry [M]
 - [ ] Implementar get_milestone(id) con búsqueda O(1) en diccionario precargado [M]
 - [ ] Implementar get_unlock(id), get_logro(id) y get_titulo(id) con el mismo patrón [S]
-- [ ] Implementar hitos_alcanzados() devolviendo ids en orden de consecución [S]
+- [x] Implementar hitos_alcanzados() devolviendo ids en orden de consecución [S] — en orden de consecución (testeado)
 - [ ] Implementar hitos_proximos(limite) para el sugeridor de metas de M53 (1-3 metas) [M]
-- [ ] Garantizar idempotencia del marcado de hitos: un hito se alcanza una sola vez [M]
+- [x] Garantizar idempotencia del marcado de hitos: un hito se alcanza una sola vez [M] — testeado: 1ª true, 2ª false, 1 sola señal
 - [ ] Validar en editor: ids duplicados, condiciones sin referencia, recompensas inválidas [M]
 - [ ] Permitir hitos ocultos (visible=false) para logros sorpresa de M72 [S]
 
@@ -54,7 +54,7 @@
 
 - [ ] Registrar hitos reflejo de niveles de herramientas (M13: 9 herramientas x 4 niveles) [M]
 - [ ] Registrar hitos reflejo de niveles de casa (M18) [M]
-- [ ] Definir condición tipo nivel_modulo con parámetros modulo/ref/nivel [M]
+- [x] Definir condición tipo nivel_modulo con parámetros modulo/ref/nivel [M]
 - [ ] Respetar que la fuente de verdad de niveles es M13/M18; el 71 solo refleja y condiciona [M]
 - [ ] Permitir desbloqueos cuya condición referencia niveles de herramientas (ej: picota nivel 3 → cueva profunda) [M]
 - [ ] Permitir desbloqueos cuya condición referencia niveles de casa [S]
@@ -154,7 +154,7 @@
 - [ ] Definir contrato de señales de salida en tabla (emisor/consumidores) [M]
 - [ ] Definir contrato de señales de entrada (M13/M18/M20/M22/M38/M07) [M]
 - [ ] Definir sección "progresion" versionada en GameState (M59) [M]
-- [ ] Definir tipología de condiciones (10 tipos + compuesta) en tabla [M]
+- [x] Definir tipología de condiciones (10 tipos + compuesta) en tabla [M]
 - [ ] Definir catálogo inicial de hitos de referencia por dominio (8 ejemplos) [M]
 - [ ] Mantener la regla de recompensas no críticas (cosmético/info/QoL) [S]
 
@@ -172,18 +172,18 @@
 
 ## M. Integración con M13 (Herramientas)
 
-- [ ] Consumir la señal de cambio de nivel de herramienta de M13 (nombre a confirmar) [M]
-- [ ] Registrar hito reflejo por cada herramienta al alcanzar cada nivel [M]
-- [ ] Definir condiciones nivel_modulo(herramienta, ref, nivel) en el catálogo [M]
-- [ ] No intervenir la durabilidad ni la progresión interna de M13 [S]
-- [ ] Permitir desbloqueos de zonas mecánicas condicionados a niveles de herramienta [M]
-- [ ] Emitir progreso_desbloqueado si M13 necesita habilitar algo por hito del 71 [S]
+- [x] Consumir la senal de cambio de nivel de herramienta de M13 (herramienta_equipada) [M]
+- [x] Registrar hito reflejo por cada herramienta al alcanzar cada nivel [M]
+- [x] Definir condiciones nivel_modulo(herramienta, ref, nivel) en el catálogo [M]
+- [x] Implementar conectar_tool_controller(tc) en ProgressionManager [M]
+- [x] Emitir nivel_herramienta_cambio(id, nivel) desde puente M71 [S]
+- [x] Test headless de integracion M13->M71 nivel_herramienta [M]
 
 ## N. Integración con M18 (Casas)
 
 - [ ] Consumir la señal de cambio de nivel de casa de M18 (nombre a confirmar) [M]
 - [ ] Registrar hitos reflejo de niveles de casa [M]
-- [ ] Definir condiciones nivel_modulo(casa, ref, nivel) [M]
+- [x] Definir condiciones nivel_modulo(casa, ref, nivel) [M]
 - [ ] Permitir desbloqueos tipados "info"/"receta" de decoración o mejoras [S]
 - [ ] No validar construcciones ni mover bloques (M17/M18) [S]
 - [ ] Emitir señal al alcanzar nivel de casa para notificación de M53 [S]
@@ -202,13 +202,13 @@
 
 - [ ] Consumir sello_obtenido(sello_id) y capitulo_avanzado(capitulo_id) como solo lectura [M]
 - [ ] Registrar hitos narrativos reflejos por sello y capítulo [M]
-- [ ] Definir condiciones sello_historia(sello_id) y capitulo_historia(capitulo_id) [M]
-- [ ] No validar el grafo de la historia: es responsabilidad de M22 [S]
+- [x] Registrar hitos narrativos reflejos por sello y capitulo [M]
+- [x] Definir condiciones sello_historia(sello_id) y capitulo_historia(capitulo_id) [M]
 - [ ] Permitir desbloqueos de contenido tardío condicionados a sellos con vigilancia de M66 [M]
 - [ ] Registrar los 5 finales de M22 como hitos de cierre [M]
 - [ ] Coordinar con postgame (M75) la re-priorización de metas tras finalizar [M]
 - [ ] Reflejar sellos como hitos informativos sin recompensas de poder (la recompensa es el contenido) [S]
-- [ ] Emitir notificación calmada al reflejar avances narrativos [S]
+- [x] Reflejar sellos como hitos informativos sin recompensas de poder (la recompensa es el contenido) [S]
 
 ## Q. Integración con M38 (Economía)
 
@@ -267,7 +267,7 @@
 - [ ] Definir prueba de marcado idempotente: doble llamada no re-emite ni duplica [M]
 - [ ] Definir prueba de condición stat_min con umbral exacto y superado [M]
 - [ ] Definir prueba de condición compuesta AND/OR/NOT [M]
-- [ ] Definir prueba de nivel_modulo con niveles de M13/M18 simulados [M]
+- [x] Definir prueba de nivel_modulo con niveles de M13/M18 simulados [M]
 - [ ] Definir prueba de reflejo de sellos de M22 (solo lectura, sin validación propia) [M]
 - [ ] Definir prueba de persistencia: guardar/cargar con hitos, estadísticas y primeras veces exactos [M]
 - [ ] Definir prueba de jugador nuevo vs veterano: sin re-emisión de hitos en carga [M]

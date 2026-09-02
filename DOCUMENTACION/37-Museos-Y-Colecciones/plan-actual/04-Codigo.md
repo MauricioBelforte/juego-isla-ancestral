@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 37: Museos y Colecciones
 
@@ -194,8 +194,8 @@ Sistema de logging del juego (formato `[M37]` para filtrar el modulo). No se cre
 
 ## 6. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-16 (documentacion plan-inicial)
 **Estado:** Plan inicial de diseno — sin codigo implementado aun (modulo sin iniciar en CHECKLIST-GLOBAL).
 
@@ -209,3 +209,34 @@ Sistema de logging del juego (formato `[M37]` para filtrar el modulo). No se cre
 - Generar los 4 ExhibitionData.tres partiendo de los catalogos reales de M36/M34/M25.
 - Conectar el adaptador de M55 Diario por senales antes de la UI de donacion.
 - Ejecutar el plan de testings (seccion N del 05-Checklist) antes de la primera prueba manual.
+
+---
+
+## Notas del Agente — Iteración núcleo V0/V1 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 02:55:00
+**Estado:** Parcial (núcleo lógico de museo implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- CollectionRegistry autoload (scripts/museum/collection_registry.gd, §2.1): única autoridad de progreso — 3 exposiciones data-driven en data/museum/exhibiciones.json (Acuario de Aurora ← peces M34, Sala de Fósiles ← fragmentos M25, Herbario Vivo ← flora M15), register_item idempotente (§4.4.3), is_registered/pertenece/is_exhibition_completed/get_exhibition_progress/get_total_progress, otorgar_recompensa ÚNICA e idempotente (§4.2.4), donables_pendientes para la UI (§4.1.2), persistencia ISaveProvider M59 sección "collections" (§8, huérfanas purgadas con log).
+- DonationService autoload (scripts/museum/donation_service.gd, §2.4): validate/donate con DonationResult estructurado (clase global en donation_result.gd; reasons: duplicate/not_owned/wrong_exhibition/invalid_item), consumo del item SOLO tras validación completa (§4.1.5), rollback cozy si el Registry no está disponible, señales tipadas donation_accepted/donation_rejected/reward_granted para M55/UI, get_donatable_items.
+- Integración M34: entrega_museo() del placeholder honesto ahora consulta CollectionRegistry.is_registered (compat); la donación real de peces va por DonationService.donate("peces", pez_id) — probado con trucha_cascada del catálogo real.
+- Test scripts/museum/test_museo.gd: carga, donación feliz (inventario -1 + señal), 4 rechazos con motivo (inventario intacto, §4.3.3), recompensa única idempotente (leída de la tabla, no hardcodeada), integración M34, persistencia round-trip → **0 fallos**.
+- Regresión: test_fishing M34 0 fallos.
+- Checklist: progreso sube con los ítems del núcleo (relevados en 05).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Museum/ExhibitSlot escénicos (museum.tscn/exhibit_slot.tscn, salas, vitrinas, siluetas "Por donar"): V2 con visión — las señales quedan listas para que la escena consulte al Registry.
+- Exposición "fauna" (M36 avistamientos): M36 🟢 sin implementar — cuando exista, sus avistamientos entran como piezas de registro (no ítem físico) vía CollectionRegistry.register_item directo.
+- Curador NPC (diálogo de donación): M21/M19 con dueño.
+- M55 Diario: adaptador que escucha las 3 señales — con dueño (M37 solo emite).
+
+### Hallazgos ajenos (no tocados, tienen dueño)
+- scripts/ia_npc/ y scenes/npc/npc_agent.tscn (M64 de agnes-2.5-flash, en curso) y scripts/eventos/event_manager.gd (M74) tienen errores de parse headless: módulos en construcción por otros agentes.
+
+### Recomendaciones para el próximo agente
+- M53/M52: el panel de donación usa DonationService.get_donatable_items(exhibition_id) y donate(); feedback de rechazo con DonationResult.reason (ya traducible i18n).
+- M36: al implementar avistamientos, registrar directamente con CollectionRegistry.register_item("fauna", especie_id) + añadir la exposición fauna a exhibiciones.json.
+- La recompensa de cada exposición vive en exhibiciones.json (recompensa_item_id) — no hardcodear en scripts.

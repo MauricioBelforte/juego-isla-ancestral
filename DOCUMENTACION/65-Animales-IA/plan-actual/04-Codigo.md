@@ -1,61 +1,38 @@
-# 04 — Código — M65: Animales IA
+# 65-Animales-IA — Código (plan-actual)
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-17
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
 
-## Archivos/componentes a crear (implementación futura)
+## Archivos
+- `game/isla-ancestral/scripts/animales_ia/m65_animal_ai.gd` — autoload.
+- `game/isla-ancestral/scripts/animales_ia/test_m65.gd` — test headless.
+- `game/isla-ancestral/scripts/fauna/pack_logic.gd` — manada (M65, fuera de carpeta).
+- `game/isla-ancestral/scripts/fauna/school_logic.gd` — banco (M65, fuera de carpeta).
+- `game/isla-ancestral/scripts/fauna/fauna_behavior.gd` — MODIFICADO en QA (Log 415):
+  auto-impulso FSM + cableado avistamiento.
 
-| Archivo | Contenido |
-|---|---|
-| `Assets/_Project/Scripts/AI/FaunaManager.cs` | Orquestador de fauna; delega del NPCManager (M64); burbuja 64 m, tick 1 s lejanos, presupuesto |
-| `Assets/_Project/Scripts/AI/FaunaBrain.cs` | FSM datos-driven: estados del perfil + agenda (hambre, energía, etapa) |
-| `Assets/_Project/Scripts/AI/FaunaProfile.cs` (ScriptableObject) | Perfil por especie: biomas, horarios, radios (huida/curiosidad/alarma), comida, velocidad, manada |
-| `Assets/_Project/Scripts/AI/FaunaBody.cs` | Pool: cuerpo + animación instanciada + anclado (reciclado fuera de burbuja) |
-| `Assets/_Project/Scripts/AI/PackLogic.cs` / `SchoolLogic.cs` | Manada/banco: delta ≤ 1.2 m, líder rotativo, sincronización leve |
-| `Assets/_Project/Scripts/AI/FaunaSpawner.cs` | Sorteo por slot (pesos por bioma), densidad, validación de navegación, despawn/rehidratación |
-| `Assets/_Project/Scripts/Data/FaunaCatalog.asset` | Catálogo de especies (15-25 perfiles) |
-| M42/M43 (audio) | Timestamps por evento con cooldowns (tabla del diseño) |
+## Funciones clave
+- `registrar(nodo)` / `desregistrar(nodo)`: alta/baja de individuos + conexión señal.
+- `tick(dt)`: recorre individuos y ejecuta movimiento (`_procesar_individuo`).
+- `_on_solicitar_movimiento`: actualiza destino/velocidad/en_movimiento.
 
-## API clave (borrador)
+## Logs
+- Log 384 (implementación minimax-m3-free, 23 OK/0).
+- Log 453 (pack/school logic, agnes-2.5-flash).
+- Log 415 (QA cruzado Hy3: fix integración M36↔M65).
 
-```csharp
-public enum FaunaState { Dormir, Pastorear, Hidratarse, Comer, Explorar, Curiosear, Huir, Migrar, Reproducir, Anclado }
+## Notas del Agente (QA)
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 00:50
+**Estado:** QA cruzado aprobado (mantiene 🟡).
 
-public class FaunaManager : MonoBehaviour
-{
-    public int Activos { get; private set; }
-    public int PresupuestoAnimales { get; private set; }   // M61: tope global
-    public bool EntraEnPresupuesto(FaunaBody body);        // tope + bioma + manada
-    public void Anclar(FaunaBody body);                    // reciclaje fuera de burbuja
-    public FaunaBody Rehidratar(AncladoRecord r);          // estado completo al volver
-}
+### Lo que corregí
+- `fauna_behavior.gd`: `set_process(true)` + `_process` que llama `tick`; conexión
+  `solicitar_avistamiento` → `fauna_registry.registrar_avistamiento`. Sin esto, en
+  gameplay real los animales no se moverían ni se registrarían avistamientos.
 
-public class FaunaSpawner : MonoBehaviour
-{
-    public bool SlotValido(Slot s, FaunaProfile p);        // navegable + suelo/agua correctos
-    public FaunaBody SorteoSpawn(Bioma b, int slotId);     // seed = seedPartida + biomaId + slotId
-    public void RevalidarZona(Chunk c);                    // M08/M28: revalidación por chunk
-}
-```
-
-## Reglas de implementación (para quien concrete)
-
-1. **No tocar** NPCManager (M64) salvo contrato `FaunaManager`; compartir pool, NavigationServer3D y watchdog anti-atasco.
-2. FSM con agenda en datos, sin behavior tree; estados unit-testables sin escena.
-3. Toda operación asíncrona con callbacks; cero `WaitForSeconds` en Update; cero asignaciones (pool).
-4. `FaunaProfile` sobre ScriptableObject; perfiles por especie; pesos normalizados por bioma.
-5. Los estados con efectos colaterales (sonido, cría, migración) emiten eventos → managers (M42/M43, M29, M36).
-6. Documentar cada desvío en `plan-actual/` + Log en `Logs/` + fila 65 del CHECKLIST-GLOBAL con estado real.
-
-## Notas del Agente
-
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-17
-**Estado:** Documentación completa (delegable) — implementación pendiente
-
-- Documenté los 19/19 puntos de la sección 64 con checklist de 100 ítems (ver `05-Checklist.md`).
-- El módulo queda **DELEGABLE**: depende de M36, M64 (ya documentados) para su implementación; presupuestos M61 necesarios.
-- Reproducción sin explotación: sin loot ni crías recolectables (regla cozy).
-- Al implementar, actualizar fila 65 del CHECKLIST-GLOBAL y crear el Log correspondiente.
+### Recomendaciones
+- Mover `pack_logic.gd`/`school_logic.gd` a `scripts/animales_ia/`.
+- Resolver `[?]`: NavigationServer3D (M08), spawner burbuja 72m (M09), visuales M45, sonidos M43.

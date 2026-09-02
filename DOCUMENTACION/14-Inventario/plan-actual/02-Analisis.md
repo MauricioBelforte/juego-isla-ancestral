@@ -1,5 +1,5 @@
 **Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Plataforma:** Kilo Code
 
 # 02-Analisis.md — Módulo 14: Inventario
 

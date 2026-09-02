@@ -87,11 +87,11 @@
 
 ## G2. Pruebas (5)
 
-- [ ] Test: receta→capas correctas (M112) [M]
-- [ ] Test: keyframes sincronizados [M]
-- [ ] Test: blacklist de picos no dispara [M]
-- [ ] Test: recorrido M114 — 15 min sin fatiga [M]
-- [ ] Master test True Peak ≤ -1 dBFS toda sesión [M]
+- [x] Test: receta→capas correctas (M112) [M]
+- [x] Test: keyframes sincronizados [M]
+- [x] Test: blacklist de picos no dispara [M]
+- [x] Test: recorrido M114 — 15 min sin fatiga [M]
+- [x] Master test True Peak ≤ -1 dBFS toda sesión [M]
 
 ## J. Integración con otros módulos (12)
 
@@ -131,7 +131,7 @@
 - [ ] Microfoley dulce y premiador en cada interacción [S]
 - [ ] Revisión final contra pilar cozy (checklist M0) [S]
 - [ ] Documento de permisos de assets (licencias) [S]
-- [ ] Suite de tests M112 incluye blacklist [M]
+- [x] Suite de tests M112 incluye blacklist [M]
 - [ ] Registro en Logs/ con numeración secuencial [S]
 
 ## H. Data y API (6)

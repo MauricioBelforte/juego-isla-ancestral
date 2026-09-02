@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+
+**Plataforma:**Kilo Code
 
 # 04-Codigo.md — Módulo 93: Balance
 
@@ -177,8 +178,9 @@ func _init() -> void:
 
 ## 6. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+
+**Plataforma:**Kilo Code
 **Fecha:** 2026-08-19 04:23
 **Estado:** Documentación completa
 
@@ -193,3 +195,32 @@ func _init() -> void:
 ### Recomendaciones para el próximo agente
 - Al implementar, empezar por `balance.gd` + `meta.json` y conectar M38/M39 (tiendas) primero.
 - El gate CI de balance (M118) debe correr en cada PR que toque `data/balance/`.
+
+---
+
+## Notas del Agente — Iteración 3 tablas faltantes (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 01:25:00
+**Estado:** Parcial (22 ítems más cerrados; módulo liberado 🟡)
+
+### Lo que hice
+- friendship.json v2: generosidad_favorito (x3 puntos, checklist 82), beneficios_por_nivel 2-8 (recetas/descuento/trueque especial/eventos/diálogo secreto, checklist 80), sin_decaimiento_por_ausencia=true (M94, checklist 81).
+- quests.json v2: secundaria 15 AO = 10% de taller_crafting (regla 5-15% del siguiente desbloqueo, checklist 87), reglas items_exclusivos_no_monetizables/misiones_siempre_completables (88/89), bonus_eventos_temporada (90).
+- puzzles.json v2: recompensa_templo (item_unico no monetizable: canta_gotas/abraska_volcan, checklist 96), recompensa_ruinas (fragmentos+lore, 0 AO, 98), reglas resoluble_con_herramientas_del_momento (97), tiempos 20/45 verificados (95).
+- unlocks.json v2: orden_global + campo orden individual (103), historia_sin_coste_monetario (104), cosmeticos_sink_ao (105), museo_records_no_monetarios (106).
+- meta.json v2 (1.1.0): rareza probabilidad_raro_max 0.05 (41) + pity (+10%/fallo, cap 2x, reset — 42; M34 ya lo implementa), rendimiento.nodos_activos_max_por_chunk 8 (57, M61), viajes.recompensa_descubrir_ruta_ao 25 (66, M28).
+- Test nuevo test_balance_m93_iter3.gd: valida TODAS las reglas nuevas + coherencia con M20 REAL (30 puntos = +1 nivel) y M22 (nodos templo en el grafo) → **0 fallos**.
+- FIX del núcleo (test_balance.gd de Deepseek): 2 asserts rotos DESDE SIEMPRE — schema_version==1 rígido (ahora >=1, evolución forward) y "herramienta_basica" receta que NUNCA existió en crafting.json (verificado contra git HEAD; ahora valida una receta real del catálogo). El test núcleo quedó en 0 fallos.
+- Regresiones: validate_balance (12 reglas) 0 fallos, test_balance núcleo 0 fallos.
+- Checklist: +22 ítems [x]. Progreso 25→47/130.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Integración consumo M38/M16/M20 (cablear los servicios a estas tablas): es una iteración de integración aparte; los getters del BalanceService ya existen.
+- Simulación económica RF20 y reporte playtest RF22: requieren iteración con más módulos activos.
+
+### Recomendaciones para el próximo agente
+- Integración consumo: M20 debe leer beneficios_por_nivel (nivel 4 → oferta_trueque_especial) y M39 el descuento_tienda_5.
+- M61/M35: respetar nodos_activos_max_por_chunk=8.
+- M28: al implementar viajes, pagar recompensa_descubrir_ruta_ao al descubrir ruta nueva.

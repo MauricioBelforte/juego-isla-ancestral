@@ -8,15 +8,15 @@
 
 - [x] Definir la arquitectura del detector central (SoftlockGuard) [M]
 - [x] Implementar tick de 60 s reales del detector [S]
-- [ ] Implementar disparo del detector en transiciones de escena [S]
-- [ ] Implementar disparo del detector al guardar [S]
+- [x] Implementar disparo del detector en transiciones de escena [S] — glm-5.3-flash 2026-09-01: EventBus.infra.carga_iniciada (M40) → forzar_chequeo (testeado)
+- [x] Implementar disparo del detector al guardar [S] — SaveManager.save_completed (M59) → forzar_chequeo (testeado)
 - [x] Implementar chequeo por invariantes con orden de prioridad [M]
 - [x] Implementar plan de recuperación en cascada [M]
 - [x] Implementar registro de eventos de recuperación [S]
 - [x] Implementar toast informativo solo si afecta al jugador [M]
 - [x] Implementar flag de 3 recuperaciones por instancia en 10 min [S]
 - [ ] Implementar cahce de invariantes sin raycast en masa [M]
-- [ ] Documentar detector central en plan-actual [S]
+- [x] Documentar detector central en plan-actual [S] — 04-Codigo Notas iter. 2 (dispatcher en cascada + cooldown de toast del núcleo ox-alpha)
 
 ## Invariantes de objetos clave
 
@@ -43,12 +43,12 @@
 
 ## Invariantes de misiones
 
-- [ ] Implementar MisionInvariant (objetivos existentes) [M]
-- [ ] Implementar registro declarativo de fallbacks por objetivo [M]
-- [ ] Implementar detección de condición imposible [M]
-- [ ] Implementar fallback con recompensa equivalente [M]
-- [ ] Implementar aviso en diario de misión al activar fallback [S]
-- [ ] Implementar recompensa no duplicada si el fallback se completó [M]
+- [x] Implementar MisionInvariant (objetivos existentes) [M] — glm-5.3-flash 2026-09-01: funcional (era stub con _check()->true)
+- [x] Implementar registro declarativo de fallbacks por objetivo [M] — registrar_fallback ya existía; ahora el _check lo consume
+- [x] Implementar detección de condición imposible [M] — _check() detecta objetivo activo sin fallback → señal del detector central (testeado)
+- [x] Implementar fallback con recompensa equivalente [M] — activar_fallback() + registro anti-duplicado (testeado)
+- [x] Implementar aviso en diario de misión al activar fallback [S] — activar_fallback registra entrada en M55 categoría descubrimientos (testeado)
+- [x] Implementar recompensa no duplicada si el fallback se completó [M] — registrar/recompensa_ya_entregada (testeado)
 - [ ] Implementar sincronización con persistencia de misiones (M22) [M]
 - [ ] Implementar pruebas de misiones imposibles (injerto) [M]
 - [ ] Documentar invariantes de misiones en plan-actual [S]

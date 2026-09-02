@@ -3,15 +3,24 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 1 implementada (2026-08-30)
-- Agente: Deepseek V4 Flash (Kilo)
+- Estado: 🔵 En curso — iter 2 benchmark visual (2026-09-01, deepseek-v4-flash-vision-exp / Kilo Code)
+- Agente: deepseek-v4-flash-vision-exp (Kilo Code)
 - Fase: 5 (Base de producción)
 - Dificultad: 5
-- Vision: V0 (bench scene es V2)
-- Entrada: M08 ✅ (terreno voxel), M04 ✅ (Godot)
-- Salida: BudgetProfile + budgets.json + ValidateBudget + tests 0 fallos
-- Archivos: `scripts/performance/*.gd`, `data/performance/budgets.json`
-- Fecha cierre: 2026-08-30 02:35
+- Vision: V2 (benchmark visual: profiler screenshots, draw calls, capturas)
+- Entrada: M08 ✅ (terreno voxel), iter 1 ✅ (BudgetProfile + budgets.json + ValidateBudget)
+- Salida: bench_scene_a.tscn + bench_recorder.gd + mediciones reales (JSON) + capturas + check ValidateBudget
+- Archivos: `scenes/bench_scene_a.tscn`, `scripts/performance/bench_recorder.gd`, `docs/performance/medicion_2026-09-01.md`
+- Fecha reserva: 2026-09-01 16:30
+
+## Iteración 2 (benchmark visual — 2026-09-01, deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Crear `bench_scene_a.tscn` — escena de benchmark oficial [C] — `scenes/bench_scene_a.tscn` (terreno M08 seed 42/radio 256/altura 40 + paleta Maldivas completa + viewer + cámara con 6 waypoints)
+- [x] Crear `bench_recorder.gd` [C] — `scripts/performance/bench_recorder.gd`: recorrido 90 s (6 waypoints × 15 s), overlay FPS + draw calls + objects en pantalla, muestreo cada 30 frames, JSON en `user://logs/bench/bench_AAAAMMDD.json`, check `ValidateBudget`/veredicto 60 FPS, hardware capturado (RenderingServer)
+- [x] Instrumentar con BudgetProfile (etiquetas del Profiler, metodología RF D.55) [M] — sección render medida con `begin_section`/`frame_post_draw`/`end_section` en el recorder
+- [x] Fix regresión de indentación en `equipment_manager.gd` (35 líneas espacios→tabs) que bloqueaba el boot [S] — causa del Debugger Break (ver guía 07 §9.60)
+- [x] Ejecución del bench → mediciones reales [C] — COMPLETADO 2026-09-01 (Log 386): 90 s, 179 muestras; FPS 59.35 (WARN -0.65), draw calls 374.0 (máx 471; objetivo <=400 ✅), objects 477, process 0.018 ms, frame 16.35 ms; JSON user://logs/bench/bench_2026-09-01.json + 2 capturas en tools/mcp/godot-mcp/capturas/61-Rendimiento/
+- [x] Documentar metodología de capturas del profiler [S] — capturas planificadas en `tools/mcp/godot-mcp/capturas/61-Rendimiento/` (overlay con FPS/draw calls visible en primer plano) + sección 6 de 04-Codigo
 
 # 05-Checklist.md — Módulo 61: Rendimiento (130 ítems)
 
@@ -229,3 +238,8 @@
 - [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+## Iteración 2c — Gate verificado (2026-09-01 22:35, deepseek-v4-flash-vision-exp)
+
+- [x] Gate ValidateBudget ejecutado en headless: godot --headless -s res://scripts/performance/validate_budget.gd → **0 fallos, exit 0** (tabla budgets.json completa: total>0, tolerancia>0, 7 categorías, suma coherente, hardware decl., medición OK/excedida detectada) [S]
+- [x] Medición real del bench (Log 386) validada contra el presupuesto manualmente: frame 16.35 ms <= 16.7 ms total (dentro de tolerancia) — punto de partida del gate CI
+- [?] Cableado del gate a GitHub Actions (job que corra validate_budget + bench en CI) — pertenece al módulo M118 (CI-CD, 0/100, 🟢 disponible); el runner necesita GPU/Windows para el bench y el workflow actual usa Godot 4.3 (el proyecto es 4.7.2) — actualizarlo es tarea de M118

@@ -1,184 +1,87 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (implementación iter. 1 núcleo; diseño original por Deepseek V4 Flash / OpenCode 2026-08-19)
 
 # 04-Codigo.md — Módulo 147: World Building
 
-## 1. Archivos Involucrados
+## 1. Archivos involucrados (REAL — Godot 4.7 / GDScript)
 
+### 1.1 Nuevos
 | Archivo | Tipo | Propósito |
-|---|---|---|
-| `world_bible/00-indice.md` | Datos | Índice y reglas de la biblia |
-| `world_bible/01-linea-de-tiempo.md` | Datos | Cronología canónica (RF) |
-| `world_bible/02-aurora.md` | Datos | Historia de Aurora (RF2) |
-| `world_bible/03-islas.md` | Datos | Historias por isla (RF3) |
-| `world_bible/04-arquitectos-del-alba.md` | Datos | Civilización constructora (RF4) |
-| `world_bible/05-primeros-jardineros.md` | Datos | Civilización botánica (RF5) |
-| `world_bible/06-la-resonancia.md` | Datos | Fenómeno central (RF6) |
-| `world_bible/07-elisia.md` | Datos | Misterio con capas (RF7) |
-| `world_bible/08-personajes/{finneas,lia,bruno,nilo,vera,...}.md` | Datos | Biografías (RF8-RF13) |
-| `world_bible/09..20-*.md` | Datos | Religiones, costumbres, arquitectura, símbolos, lenguaje, calendario, tecnología, economía, mapas, catástrofes, migraciones, leyendas (RF14-RF25) |
-| `world_bible/CHANGELOG.md` | Datos | Registro de cambios de canon |
-| `world_data.json` | Datos | JSON técnico generado (RF26) |
-| `scripts/world/sync_world_data.gd` | Tool | MD `DATA:` → JSON |
-| `scripts/world/validate_world.gd` | Tool | Consistencia y referencias |
-| `scripts/world/world.gd` | Autoload | Acceso runtime solo lectura |
-| `tests/world/test_world.gd` | Test | Suite de tests del canon |
+|---------|------|-----------|
+| `data/world_data.json` | Datos | Canon data-driven: 6 personajes, 8 lugares, 4 sellos, 4 capas_por_sello, 5 épocas timeline, canon_version 1.0.0 |
+| `scripts/world/world_bible.gd` | Autoload `WorldBible` | Acceso runtime solo lectura al canon: get_personaje/get_lugar/get_simbolo/get_capa_minima/linea_tiempo/version |
+| `scripts/world/validate_world.gd` | `ValidateWorld` (static) | Consistencia: IDs únicos, canonRef de capas, sellos definidos, timeline ordenada, canon_version |
+| `scripts/world/test_world_m147.gd` | Test headless | 23/0 OK |
 
-## 2. Funciones Clave
+### 1.2 Modificado
+| Archivo | Cambio |
+|---------|--------|
+| `project.godot` | Autoload `WorldBible="*res://scripts/world/world_bible.gd"` |
 
-### 2.1 `world.gd` (autoload)
+### 1.3 Diferencias vs diseño original
+- `sync_world_data.gd` (MD→JSON) NO implementado: el JSON se escribió manualmente con contenido canónico de ejemplo (6 personajes, 8 lugares); el sync automático desde `world_bible/*.md` queda pendiente.
+- `world.gd` del diseño → `world_bible.gd` (autoload `WorldBible`, nombre más descriptivo).
+- `tests/world/test_world.gd` → `test_world_m147.gd` (patrón headless del proyecto).
 
+## 2. API pública
+
+### 2.1 `world_bible.gd` — autoload WorldBible
 ```gdscript
-extends Node
-## Acceso al canon del mundo. Carga única, solo lectura.
-
 signal canon_changed(version: String)
+var canon_version: String = "1.0.0"
 
-var _data: Dictionary = {}
-var canon_version: String = "0.0.0"
-
-func _ready() -> void:
-    load_canon()
-
-func load_canon() -> void:
-    var f := FileAccess.open("res://data/world_data.json", FileAccess.READ)
-    if f == null:
-        push_error("World: no se pudo cargar world_data.json")
-        return
-    _data = JSON.parse_string(f.get_as_text())
-    canon_version = _data.get("canon_version", "0.0.0")
-
-func get_personaje(id: String) -> Dictionary:
-    return _data.get("personajes", {}).get(id, {})
-
-func get_lugar(id: String) -> Dictionary:
-    return _data.get("lugares", {}).get(id, {})
-
-func get_simbolo(id: String) -> Dictionary:
-    return _data.get("simbolos", {}).get(id, {})
-
-func get_capa_minima(ids: Array) -> int:
-    ## Mayor capa requerida por los ids pedidos (para filtrar contenido).
-    var max_capa: int = 0
-    for id in ids:
-        for grupo in ["personajes", "lugares", "eventos", "leyendas"]:
-            var e: Dictionary = _data[grupo].get(id, {})
-            max_capa = max(max_capa, int(e.get("capa", 0)))
-    return max_capa
+cargar_canon()
+get_personaje(id) -> Dictionary
+get_lugar(id) -> Dictionary
+get_simbolo(id) -> Dictionary
+get_capa_minima(ids: Array) -> int      # 0..4 según Sellos
+linea_tiempo() -> Array
+version() -> String
 ```
 
-### 2.2 `validate_world.gd` (reglas clave)
-
+### 2.2 `validate_world.gd` — ValidateWorld (static)
 ```gdscript
-extends RefCounted
-## Valida consistencia del canon.
-
-static func check_all(data: Dictionary) -> Array[String]:
-    var errors: Array[String] = []
-    errors.append_array(check_ids(data))
-    errors.append_array(check_linea_tiempo(data))
-    errors.append_array(check_capas(data))
-    errors.append_array(check_modulos(data))
-    return errors
-
-static func check_ids(data: Dictionary) -> Array[String]:
-    var errors: Array[String] = []
-    var todos: Dictionary = {}
-    for grupo in ["personajes", "lugares", "simbolos", "eventos", "leyendas"]:
-        for id: String in data.get(grupo, {}):
-            if todos.has(id):
-                errors.append("ID duplicado: %s (grupos %s y %s)" % [id, todos[id], grupo])
-            todos[id] = grupo
-    return errors
-
-static func check_linea_tiempo(data: Dictionary) -> Array[String]:
-    var errors: Array[String] = []
-    var eventos: Array = data.get("linea_tiempo", [])
-    var prev_anio: int = -999999
-    for e in eventos:
-        var anio: int = int(e.get("anio_antiguo", e.get("anio_actual", -999999)))
-        if anio < prev_anio:
-            errors.append("LÍNEA DE TIEMPO fuera de orden: %s" % e.get("evento"))
-        prev_anio = anio
-    return errors
-
-static func check_capas(data: Dictionary) -> Array[String]:
-    ## Capa 4 (Elysia/verdad) solo consumida por M153 (Sellos).
-    var errors: Array[String] = []
-    for grupo in ["personajes", "lugares", "eventos", "leyendas"]:
-        for id: String in data.get(grupo, {}):
-            var e: Dictionary = data[grupo][id]
-            if int(e.get("capa", 0)) >= 4:
-                var consumidores: Array = e.get("consumido_por", [])
-                if not consumidores.has("M153") and not consumidores.has("M148"):
-                    errors.append("CAPA 4 %s.%s sin consumidor M153/M148: %s" % [grupo, id, consumidores])
-    return errors
+validar(data: Dictionary) -> Array[String]   # errores (vacío = OK)
+reporte(errores) -> String
 ```
 
-### 2.3 `sync_world_data.gd` (esqueleto)
+## 3. Canon data-driven (world_data.json)
+- **personajes**: finneas, lia, bruno, nilo, vera, orion (rol + isla + bio).
+- **lugares**: 8 (faro, 4 templos, laguna, volcán, cúpula).
+- **simbolos**: 4 sellos (marea, profundidades, llama, aurora).
+- **capas_por_sello**: orden 1-4, cada sello revela personajes/lugares de su isla.
+- **linea_tiempo**: 5 épocas (fundación → presente) con orden.
 
-```gdscript
-extends SceneTree
-## Regenera world_data.json desde world_bible/*.md (bloques DATA:).
-## Uso: godot --headless -s scripts/world/sync_world_data.gd
+## 4. Verificación
+- Test M147: `Godot --headless --path game/isla-ancestral --script res://scripts/world/test_world_m147.gd` → **23 checks, 0 fallos**.
+- Regresión M60: **66/0 OK**.
 
-func _init() -> void:
-    var canon: Dictionary = {}
-    var dir := DirAccess.open("res://world_bible/")
-    for file: String in dir.get_files():
-        if not file.ends_with(".md"):
-            continue
-        var texto: String = FileAccess.get_file_as_string("res://world_bible/" + file)
-        for m in RegEx.create_from_string(r"## DATA \{([^}]*)\}").search_all(texto):
-            var raw: Dictionary = JSON.parse_string("{" + m.get_string(1) + "}")
-            canon = _merge_entry(canon, raw)
-    var out := FileAccess.open("res://data/world_data.json", FileAccess.WRITE)
-    out.store_string(JSON.stringify(canon, "\t"))
-    print("WORLD sync OK")
-    quit(0)
-```
+## 5. Pendientes honestos (115 ítems de checklist)
+- `sync_world_data.gd` (MD → JSON) + hash MD↔JSON (W).
+- Contenido narrativo completo: biblia MD por sección (01-20), biografías detalladas, timeline completa, religiones, lenguaje, economía, catástrofes, leyendas.
+- CHANGELOG de canon, gate CI por PR a `world_bible/` (M118).
+- Consumo por M21 (diálogos), M25 (ruinas), M24/M26 (templos), M73 (coleccionables).
 
-## 3. Logs Relacionados
+## Notas del Agente
 
-| Mensaje | Nivel | Cuándo |
-|---|---|---|
-| `WORLD canon vX.Y.Z cargado (N personajes, M lugares)` | info | Carga única |
-| `WORLD referencia rota: {id}` | error | Validación |
-| `WORLD capa 4 expuesta por {modulo}` | warning | Debug (evita spoilers) |
-| `WORLD validate falló: {N} errores` | error | CI/editor |
-| `WORLD canon desincronizado: {doc}` | error | MD vs JSON (sync) |
-
-## 4. Cambios de Canon (Ejemplos)
-
-| Cambio | Archivo(s) | Validación |
-|---|---|---|
-| Renombrar un NPC (M149) | `08-personajes/*.md` + referencias | validate (ids rotos) |
-| Añadir una leyenda | `20-leyendas.md` | validate (verdad_parcial) + sync |
-| Mover el Sello del Alba a capa 4 | `07-elisia.md` | validate (consumidores M153) |
-| Nueva isla en el roadmap (M136) | `03-islas.md` | validate + M27 |
-| Ajustar fecha de la Gran Calma | `01-linea-de-tiempo.md` | validate (orden cronológico) |
-
-## 5. Tests (M112)
-
-- `test_world.gd`: carga del JSON, ids únicos, orden cronológico, capas correctas, sincronía MD↔JSON, nombres propios duplicados.
-- Ejecución: `godot --headless -s res://tests/world/run_tests.gd`.
-
-## 6. Notas del Agente
-
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-19 04:23
-**Estado:** Documentación completa
+**Modelo:** deepseek-v4-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
+**Estado:** Núcleo implementado (iter. 1), 🟡 liberado
 
 ### Lo que hice
-- Documenté el módulo World Building completo (5 archivos, plan-inicial y plan-actual idénticos al inicio).
-- Checklist de 130 ítems verificables, derivados de la sección 146 del plan maestro (24 ítems) + pensamiento propio alineado a M22/M153/M148/M152.
-- Diseñé la biblia dual (MD editorial + JSON técnico sincronizado), modelo de capas de revelación y validador de consistencia.
+- Canon data-driven en world_data.json con estructura completa (personajes/lugares/símbolos/capas/timeline).
+- WorldBible autoload (solo lectura, canon_version, getters, capas por Sello).
+- ValidateWorld con detección de errores (IDs, canonRef, sellos, timeline, versión).
+- Test headless 23/0 OK + regresión M60 66/0 OK.
 
-### Lo que NO pude hacer
-- Ningún ítem quedó `[?]`: la documentación es diseño a implementar; los textos narrativos finales corresponden a la biblia del usuario (GDD) y a M149/M21.
+### Lo que NO pude hacer (honestidad obligatoria)
+- [M] sync_world_data.gd (MD→JSON): el contenido de la biblia MD aún no existe en volumen; el JSON de ejemplo es la estructura canónica.
+- [C] Contenido narrativo completo (20 secciones de biblia, biografías, leyendas): es contenido de escritura, no código.
+- [M] Consumo por M21/M25/M24/M26/M73: hooks listos, dependen de esos módulos.
 
 ### Recomendaciones para el próximo agente
-- Antes de implementar, consolidar con el usuario el canon de los nombres (M149) para no trabajar con ids provisionales.
-- M148 (Lore Ambiental) debe consumir `world_data.json` para sus murales/texturas.
-- El gate CI (M118) debe correr `validate_world.gd` en cada PR que toque `world_bible/`.
+- Usar validate_world.gd como gate CI: fallar si `validar()` no está vacío al tocar world_data.json.
+- Cuando M21 (diálogos) consuma el canon, usar get_capa_minima para que los NPC solo conozcan sus capas.
+- El sync_world_data.gd debe regenerar el JSON desde los MD con hash MD↔JSON para detectar desincronización.

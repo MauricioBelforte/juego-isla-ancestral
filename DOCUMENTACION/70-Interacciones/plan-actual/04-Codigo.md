@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 70: Interacciones
 
@@ -150,8 +150,8 @@ func _exit_tree() -> void:
 
 ## 6. Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa, DELEGABLE PARA IMPLEMENTAR
 

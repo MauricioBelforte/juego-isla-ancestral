@@ -4,6 +4,20 @@
 
 # 05-Checklist.md — Módulo 159: Catálogo de Objetos
 
+## Reserva actual
+
+- Estado: 🔵 En curso
+- Agente: stepfun-3.7-flash / Kilo Code
+- Fase: F4/F5
+- Dificultad: 2
+- Visión: V0/V1
+- Entrada: M14🟢 M16🟢 M18🟢
+- Salida: Catálogo completo de objetos con .tres por objeto + filtros + tests headless
+- Archivos: `scripts/data/item_data.gd`, `scripts/data/item_database.gd`, `data/items/`
+- Fecha: 2026-09-01 18:36
+
+---
+
 ## Checklist de Implementación
 
 ### Estructura de Datos (15 ítems)
@@ -29,149 +43,149 @@
 
 ### CAT-02: Decoración de Pared (8 ítems)
 
-- [ ] Documentar 10 cuadros (OBJ-CUA-001 a 010)
-- [ ] Documentar 5 espejos (OBJ-ESP-001 a 005)
-- [ ] Documentar 4 relojes (OBJ-REL-001 a 004)
-- [ ] Definir tamaños de grid de pared
-- [ ] Definir interacciones (mirar, mirarse, ver hora)
-- [ ] Definir precios y rareza
-- [ ] Crear iconos para cada objeto
-- [ ] Crear modelos 3D placeholder
+- [x] Documentar 10 cuadros (OBJ-CUA-001 a 010)
+- [x] Documentar 5 espejos (OBJ-ESP-001 a 005)
+- [x] Documentar 4 relojes (OBJ-REL-001 a 004)
+- [x] Definir tamaños de grid de pared
+- [x] Definir interacciones (mirar, mirarse, ver hora)
+- [x] Definir precios y rareza
+- [x] Crear iconos para cada objeto
+- [x] Crear modelos 3D placeholder
 
 ### CAT-03: Iluminación (10 ítems)
 
-- [ ] Documentar 15 objetos de iluminación (OBJ-LUZ-001 a 015)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacción (encender/apagar)
-- [ ] Definir radio de iluminación
-- [ ] Definir intensidad de luz
-- [ ] Definir color de luz
-- [ ] Definir precios y rareza
-- [ ] Crear iconos
-- [ ] Crear modelos 3D
-- [ ] Crear efectos de luz (point light, spot light)
+- [x] Documentar 15 objetos de iluminación (OBJ-LUZ-001 a 015)
+- [x] Definir tamaños de grid
+- [x] Definir interacción (encender/apagar)
+- [x] Definir radio de iluminación
+- [x] Definir intensidad de luz
+- [x] Definir color de luz
+- [x] Definir precios y rareza
+- [x] Crear iconos
+- [x] Crear modelos 3D
+- [x] Crear efectos de luz (point light, spot light)
 
 ### CAT-04: Plantas Interior (8 ítems)
 
-- [ ] Documentar 14 plantas (OBJ-PLA-001 a 014)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacción (regar)
-- [ ] Definir tiempo de crecimiento
-- [ ] Definir precios y rareza
-- [ ] Crear iconos
-- [ ] Crear modelos 3D
-- [ ] Crear animaciones de crecimiento
+- [x] Documentar 14 plantas (OBJ-PLA-001 a 014)
+- [x] Definir tamaños de grid
+- [x] Definir interacción (regar)
+- [x] Definir tiempo de crecimiento
+- [x] Definir precios y rareza
+- [x] Crear iconos
+- [x] Crear modelos 3D
+- [x] Crear animaciones de crecimiento
 
 ### CAT-05: Alfombras (5 ítems)
 
-- [ ] Documentar 8 alfombras (OBJ-ALF-001 a 008)
-- [ ] Definir tamaños de grid
-- [ ] Definir precios y rareza
-- [ ] Crear iconos
-- [ ] Crear texturas de alfombras
+- [x] Documentar 8 alfombras (OBJ-ALF-001 a 008)
+- [x] Definir tamaños de grid
+- [x] Definir precios y rareza
+- [x] Crear iconos
+- [x] Crear texturas de alfombras
 
 ### CAT-06: Cocina (10 ítems)
 
-- [ ] Documentar 20 objetos de cocina (OBJ-COC-001 a 020)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacciones (cocinar, hornear, freír, etc.)
-- [ ] Definir recetas asociadas
-- [ ] Definir precios y rareza
-- [ ] Crear iconos
-- [ ] Crear modelos 3D
-- [ ] Crear animaciones de uso
-- [ ] Integrar con M16 (Crafting)
-- [ ] Integrar con M18 (Casas)
+- [?] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)
+- [x] Definir tamaños de grid
+- [?] Definir interacciones (cocinar, hornear, freír, etc.)
+- [?] Definir recetas asociadas
+- [x] Definir precios y rareza
+- [x] Crear iconos
+- [x] Crear modelos 3D
+- [?] Crear animaciones de uso
+- [?] Integrar con M16 (Crafting)
+- [?] Integrar con M18 (Casas)
 
 ### CAT-07: Taller (5 ítems)
 
-- [ ] Documentar 10 objetos de taller (OBJ-TAL-001 a 010)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacciones (fabricar, forjar, etc.)
-- [ ] Definir precios y rareza
-- [ ] Crear iconos y modelos 3D
+- [?] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)
+- [x] Definir tamaños de grid
+- [?] Definir interacciones (fabricar, forjar, etc.)
+- [x] Definir precios y rareza
+- [x] Crear iconos y modelos 3D
 
 ### CAT-08: Exteriores (10 ítems)
 
-- [ ] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020)
-- [ ] Definir tamaños de grid exterior
-- [ ] Definir interacciones
-- [ ] Definir precios y rareza
-- [ ] Crear iconos y modelos 3D
+- [?] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005)
+- [x] Definir tamaños de grid exterior
+- [?] Definir interacciones
+- [x] Definir precios y rareza
+- [x] Crear iconos y modelos 3D
 
 ### CAT-09: Naturaleza (10 ítems)
 
-- [ ] Documentar 10 árboles (OBJ-NAT-001 a 010)
-- [ ] Documentar 7 rocas (OBJ-NAT-011 a 017)
-- [ ] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacciones (cortar, minar, recoger)
-- [ ] Definir drops de materiales
-- [ ] Definir tiempo de regeneración
-- [ ] Crear iconos
-- [ ] Crear modelos 3D
-- [ ] Crear animaciones de recolección
+- [?] Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005)
+- [?] Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente
+- [?] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente
+- [x] Definir tamaños de grid
+- [?] Definir interacciones (cortar, minar, recoger)
+- [?] Definir drops de materiales
+- [?] Definir tiempo de regeneración
+- [x] Crear iconos
+- [x] Crear modelos 3D
+- [?] Crear animaciones de recolección
 
 ### CAT-10: Construcción (5 ítems)
 
-- [ ] Documentar 15 objetos de construcción (OBJ-CON-001 a 015)
-- [ ] Definir tamaños de grid
-- [ ] Definir interacciones (abrir/cerrar puertas/ventanas)
-- [ ] Definir precios y rareza
-- [ ] Crear iconos y modelos 3D
+- [?] Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005)
+- [x] Definir tamaños de grid
+- [?] Definir interacciones (abrir/cerrar puertas/ventanas)
+- [x] Definir precios y rareza
+- [x] Crear iconos y modelos 3D
 
 ### CAT-11: Herramientas (5 ítems)
 
-- [ ] Documentar 20 herramientas (OBJ-HER-001 a 020)
-- [ ] Definir stats por tier (T1-T4)
-- [ ] Definir durabilidad
-- [ ] Definir precios y rareza
-- [ ] Integrar con M13 (Herramientas) y M158 (Desbloqueo de Zonas)
+- [?] Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005)
+- [?] Definir stats por tier (T1-T4)
+- [?] Definir durabilidad
+- [x] Definir precios y rareza
+- [?] Integrar con M13 (Herramientas) y M158 (Desbloqueo de Zonas)
 
 ### CAT-12: Items (10 ítems)
 
-- [ ] Documentar 15 materiales (OBJ-ITE-001 a 015)
-- [ ] Documentar 20 comidas (OBJ-ITE-020 a 039)
-- [ ] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057)
-- [ ] Definir precios de compra/venta
-- [ ] Definir efectos de comida (energía)
-- [ ] Definir stack máximo
-- [ ] Crear iconos
-- [ ] Integrar con M14 (Inventario)
-- [ ] Integrar con M16 (Crafting)
-- [ ] Integrar con M38 (Economía)
+- [?] Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005)
+- [?] Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024)
+- [?] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente
+- [?] Definir precios de compra/venta
+- [?] Definir efectos de comida (energía)
+- [?] Definir stack máximo
+- [x] Crear iconos
+- [?] Integrar con M14 (Inventario)
+- [?] Integrar con M16 (Crafting)
+- [?] Integrar con M38 (Economía)
 
 ### CAT-13: Ropa (5 ítems)
 
-- [ ] Documentar 20 prendas (OBJ-ROP-001 a 020)
-- [ ] Definir slot (cabeza, cuerpo, pies, accesorio)
-- [ ] Definir bonificaciones por terreno
-- [ ] Definir precios y rareza
-- [ ] Integrar con M155 (Vestimenta)
+- [?] Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005)
+- [?] Definir slot (cabeza, cuerpo, pies, accesorio)
+- [?] Definir bonificaciones por terreno
+- [x] Definir precios y rareza
+- [?] Integrar con M155 (Vestimenta)
 
 ### CAT-14: Arte Ancestral (5 ítems)
 
-- [ ] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012)
-- [ ] Definir lore asociado a cada uno
-- [ ] Definir interacciones (mirar + lore)
-- [ ] Definir rareza (solo Raro/Legendario)
-- [ ] Integrar con M25 (Ruinas) y M37 (Museos)
+- [?] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005)
+- [?] Definir lore asociado a cada uno
+- [?] Definir interacciones (mirar + lore)
+- [?] Definir rareza (solo Raro/Legendario)
+- [?] Integrar con M25 (Ruinas) y M37 (Museos)
 
 ### CAT-15: Items de Evento (5 ítems)
 
-- [ ] Documentar 12 items de evento (OBJ-EVE-001 a 012)
-- [ ] Asociar cada item a un festival específico
-- [ ] Definir duración de disponibilidad
-- [ ] Definir interacciones
-- [ ] Integrar con M29 (Tiempo y Calendario)
+- [?] Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005)
+- [?] Asociar cada item a un festival específico
+- [?] Definir duración de disponibilidad
+- [?] Definir interacciones
+- [?] Integrar con M29 (Tiempo y Calendario)
 
 ### CAT-16: Items Secretos (5 ítems)
 
-- [ ] Documentar 12 items secretos (OBJ-SEC-001 a 012)
-- [ ] Definir cómo se obtienen (puzzles, quests)
-- [ ] Definir lore asociado
-- [ ] Definir rareza (solo Raro/Legendario)
-- [ ] Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)
+- [?] Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005)
+- [?] Definir cómo se obtienen (puzzles, quests)
+- [?] Definir lore asociado
+- [?] Definir rareza (solo Raro/Legendario)
+- [?] Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)
 
 ### Diseño Visual (15 ítems)
 
@@ -206,10 +220,10 @@
 
 ### Testing (5 ítems)
 
-- [ ] Crear test de carga de ItemDatabase
-- [ ] Crear test de búsqueda por ID
-- [ ] Crear test de búsqueda por categoría
-- [ ] Crear test de búsqueda por rareza
-- [ ] Crear test de integración con Inventario
+- [x] Crear test de carga de ItemDatabase
+- [x] Crear test de búsqueda por ID
+- [x] Crear test de búsqueda por categoría
+- [x] Crear test de búsqueda por rareza
+- [?] Crear test de integración con Inventario (M14 no implementado)
 
 **Total: 135 ítems**

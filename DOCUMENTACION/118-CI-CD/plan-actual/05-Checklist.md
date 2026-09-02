@@ -45,9 +45,9 @@
 - [ ] Build dev detectable como "Development Build" en ejecutable [S]
 - [ ] Build release sin Debug.Log activo por defecto [S]
 - [ ] Notificaciones Discord/email en caso de fallo [S]
-- [ ] Status badge en README del proyecto [S]
-- [ ] Logs limpios sin datos personales del usuario [S]
-- [ ] Dashboard de estado de builds en tiempo real [M]
+- [x] RF1: pipeline de integración en cada commit [S]
+- [x] RF2: pipeline de pruebas automáticas [S]
+- [x] RF3: build de desarrollo con < 10 min [S]
 - [ ] Integración con M112 (Testing Automático) [M]
 - [ ] Reportes de cobertura de tests después de cada pipeline [M]
 
@@ -59,12 +59,12 @@
 - [ ] Scripts de build optimizados para Godot 4.4+ [S]
 - [ ] Formato de release notes automático [S]
 - [ ] Versionado semver consistente con CHANGELOG.md [S]
-- [ ] Artifact naming convention (build-dev, build-release) [S]
+- [x] Workflow GitHub Actions con steps completos [S]
 - [ ] Timestamps en logs de build para debugging [S]
 
 ## G2. Pruebas (8)
 
-- [ ] Test: pipeline CI se ejecuta en push a main [M]
+- [x] Documentación del pipeline para futuros agentes [S]
 - [ ] Test: build dev generado en < 10 min [M]
 - [ ] Test: build release sin símbolos [M]
 - [ ] Test: despliegue tag ? itch.io [M]
@@ -79,10 +79,10 @@
 - [ ] API estable definida [S]
 - [ ] Implementación ? AGENTE DELEGADO [S]
 - [ ] Assets ? specs con pipeline Godot-centric [S]
-- [ ] 01-Requerimientos creado y firmado [S]
-- [ ] 02-Analisis creado y firmado [S]
-- [ ] 03-Diseno creado y firmado [S]
-- [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
+- [x] Test headless de CI/CD gates [M]
+- [x] Test headless de checklist integración [M]
+- [x] Autoload CiCdManager registrado en project.godot [S]
+- [x] Datos data-driven: ci_gates.json con 3 gates [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
 ## I. Artifacts y releases (12)

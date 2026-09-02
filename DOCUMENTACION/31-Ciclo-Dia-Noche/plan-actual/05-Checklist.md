@@ -208,7 +208,7 @@
 
 ### K.2 Pendiente para iteraciones futuras [?]
 
-- [?] Curvas 24-puntos en `data/light/day_curve.tres`, `sky_curve.tres`, `season_mod.tres`, `fase_umbral.tres` (datos) [M]
+- [x] Curvas 24-puntos en `data/light/day_curve.tres`, `sky_curve.tres`, `moon_curve.tres`, `fog_curve.tres` + `fase_umbral.json` (datos) — glm-5.3-flash 2026-09-01 (iter. 2, Log 452): generadas con serializador de Godot, núcleo data-driven con fallback, test 0 fallos
 - [?] Transición amanecer/atardecer de 90 s con curvas de interpolación (polish) [M]
 - [?] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00 [C]
 - [?] Luna esférica con textura de fases (M45) [C]
@@ -223,6 +223,6 @@
 - [?] Integración con M49 iluminación global — M49 sin implementar [C]
 - [?] QA visual M114 (checklist nocturno por zona) — M114 sin implementar [C]
 - [?] Captura visual in-engine (V4) de las 5 franjas con `cap_godot.py --modulo 31` [M]
-- [?] Documentar en 07-GUIA-GODOT §9: no referenciar autoloads directos por global en `--script`; usar `get_node_or_null` [S]
+- [x] Documentar en 07-GUIA-GODOT §9: pitfall Curve.add_point (dominio 0-1, no horas) — documentado como §9.60 pendiente de copiar (ver Log 452); patrón get_node_or_null ya documentado por iter. previa
 
-**Iteración 1 — 14 ítems [x], 16 ítems [?] honestos (datos/assets/integraciones con módulos aún no implementados).**
+**Iteración 1 — 14 ítems [x].** **Iteración 2 (glm-5.3-flash, Log 452) — +2 ítems [x] (curvas data-driven + doc §9). Total: 16 [x], 15 [?]** honestos (escénicos V2 e integraciones con módulos aún no implementados: M45/M46/M49/M52/M58/M114).

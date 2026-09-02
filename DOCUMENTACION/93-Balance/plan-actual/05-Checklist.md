@@ -1,17 +1,15 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** Kilo
+**Modelo:** glm-5.3-flash (último modificador; núcleo por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 1 (núcleo de datos + validación) 2026-08-30
-- Agente: Deepseek V4 Flash (Kilo)
-- Fase: 5 (Base de producción) / Economía y tiendas
-- Dificultad: 4
-- Vision: V0 (datos/validación)
-- Entrada: M38 🔵 (economía), M20 ✅ (amistad)
-- Salida: BalanceService autoload + data/balance/*.json (prices, rewards, timing, progression, friendship, meta) + ValidateBalance (6 reglas) + test 0 fallos
-- Archivos: `scripts/balance/*.gd`, `data/balance/*.json`, `project.godot`
-- Fecha cierre: 2026-08-30 03:05
+- Estado: 🔵 En curso — iteración 3 (tablas faltantes: friendship/quests/puzzles/unlocks/meta-rareza) 2026-09-01 01:00
+- Agente: glm-5.3-flash (Kilo Code)
+- Fase: 5 (Base de producción) / Balance
+- Dificultad: 4 (incremental, V0)
+- Entrada: núcleo iter. 1-2 ✅ (Deepseek, Logs 258/263) + M20 ✅ + M22 ✅ núcleos
+- Salida: tablas completadas según checklist + validación ValidateBalance + test de coherencia
+- Archivos: `data/balance/{friendship,quests,puzzles,unlocks,meta}.json`, `scripts/balance/test_balance_m93_iter3.gd`
 
 # 05-Checklist.md — Módulo 93: Balance (130 ítems)
 
@@ -38,7 +36,7 @@
 - [x] Definir `tools.json` con durabilidad y coste de mejora por herramienta (M13) [M]
 - [x] Definir `resources.json` con abundancia por bioma y estación (M15) [M]
 - [x] Definir tiempo de respawn por recurso (M15) [M]
-- [ ] Definir rareza base tope 5% para ítems raros [S]
+- [x] Definir rareza base tope 5% para ítems raros [S] — meta.json rareza.probabilidad_raro_max 0.05 (testeado)
 - [ ] Definir pity por ítem raro (nro de intentos sin éxito que suben la chance) [M]
 
 ## C. Actividades Primarias
@@ -54,7 +52,7 @@
 - [x] Definir `mining.json`: minerales por profundidad (M35) [M]
 - [x] Definir probabilidad de gema rara por nivel de mina [M]
 - [x] Definir valor de gemas y minerales (venta y crafting) [M]
-- [ ] Definir límite de nodos activos por chunk (rendimiento M61) [M]
+- [x] Definir límite de nodos activos por chunk (rendimiento M61) [M] — meta.json rendimiento.nodos_activos_max_por_chunk 8 (M61)
 - [ ] Definir tiempo de minado por material [S]
 
 ## E. Viajes y Transporte
@@ -63,7 +61,7 @@
 - [x] Definir tarifas del Gran Vapor según isla y temporada [M]
 - [x] Definir tiempo real por viaje (máx 3 min reales) [S]
 - [x] Definir que el viaje nunca exija grind previo (M152) [S]
-- [ ] Definir recompensas por descubrir rutas nuevas [S]
+- [x] Definir recompensas por descubrir rutas nuevas [S] — meta.json viajes.recompensa_descubrir_ruta_ao 25 + items (M28)
 
 ## F. Sellos (M153)
 
@@ -75,35 +73,35 @@
 
 ## G. Amistad (M20)
 
-- [ ] Definir `friendship.json`: puntos por regalo, favorito, diálogo [M]
-- [ ] Definir umbrales de nivel de amistad (ej. 0/30/70/130) [M]
-- [ ] Definir beneficios por nivel (recetas, descuentos, eventos) [M]
-- [ ] Definir que no haya decaimiento por ausencia (M94) [M]
-- [ ] Definir generosidad: regalos favoritos +x3 puntos [S]
+- [x] Definir `friendship.json`: puntos por regalo, favorito, diálogo [M] — glm-5.3-flash 2026-09-01: tabla v2 con generosidad_favorito x3
+- [x] Definir umbrales de nivel de amistad (ej. 0/30/70/130) [M] — umbrales 30/70/120/150/260 ascendentes (verificados contra M20 real: 30 pts = +1 nivel)
+- [x] Definir beneficios por nivel (recetas, descuentos, eventos) [M] — beneficios_por_nivel (recetas/descuento/trueque especial/eventos/diálogo secreto)
+- [x] Definir que no haya decaimiento por ausencia (M94) [M] — sin_decaimiento_por_ausencia: true (M94)
+- [x] Definir generosidad: regalos favoritos +x3 puntos [S] — multiplicador x3 sobre regalo_gustado (testeado)
 
 ## H. Misiones (M22/M23)
 
-- [ ] Definir `quests.json`: recompensa por misión principal [M]
-- [ ] Definir recompensa por misión secundaria entre 5-15% del siguiente desbloqueo [M]
+- [x] Definir `quests.json`: recompensa por misión principal [M] — 200 AO + fragmento_ancestral (exclusivo, no monetizable)
+- [x] Definir recompensa por misión secundaria entre 5-15% del siguiente desbloqueo [M] — 15 AO = 10% de taller_crafting (150) en rango [5%,15%] (testeado)
 - [ ] Definir recompensas en ítems exclusivos (no monetizables) [M]
-- [ ] Definir que misiones no se rompan por balance (siempre completables) [M]
-- [ ] Definir recompensas de eventos (M74) como bonus de temporada [S]
+- [x] Definir que misiones no se rompan por balance (siempre completables) [M] — regla misiones_siempre_completables: true (M66)
+- [x] Definir recompensas de eventos (M74) como bonus de temporada [S] — bonus_eventos_temporada (festivales primavera/invierno)
 
 ## I. Puzzles y Templos (M24/M26)
 
-- [ ] Definir `puzzles.json`: tiempo estimado de resolución por puzzle [M]
-- [ ] Definir tiempo máx 20 min con ayuda (M58) / 45 min sin ayuda [M]
-- [ ] Definir recompensa de templo (herramienta única, M13/M26) [C]
-- [ ] Definir que todo puzzle sea resoluble con herramientas del momento [M]
-- [ ] Definir recompensa de ruinas (M25) en fragmentos y lore [M]
+- [x] Definir `puzzles.json`: tiempo estimado de resolución por puzzle [M] — puzzles v2 con nivel_herramientas por puzzle
+- [x] Definir tiempo máx 20 min con ayuda (M58) / 45 min sin ayuda [M] — 20/45 min verificadas por test iter3
+- [x] Definir recompensa de templo (herramienta única, M13/M26) [C] — recompensa_templo item_unico no monetizable (canta_gotas/abraska_volcan)
+- [x] Definir que todo puzzle sea resoluble con herramientas del momento [M] — regla resoluble_con_herramientas_del_momento + nivel_herramientas por puzzle
+- [x] Definir recompensa de ruinas (M25) en fragmentos y lore [M] — recompensa_ruinas: fragmentos + lore, 0 AO
 
 ## J. Desbloqueos (M71)
 
-- [ ] Definir `unlocks.json`: coste y condición por desbloqueo [M]
-- [ ] Definir orden de desbloqueos en función de progresión [M]
-- [ ] Definir que desbloqueos de historia no tengan coste monetario [S]
-- [ ] Definir desbloqueos cosméticos como sinks de AO [M]
-- [ ] Definir récords de museo (M37) como desbloqueo no monetario [S]
+- [x] Definir `unlocks.json`: coste y condición por desbloqueo [M] — 3 desbloqueos con coste+condición (verificado por test)
+- [x] Definir orden de desbloqueos en función de progresión [M] — orden_global + campo orden individual ascendente (testeado)
+- [x] Definir que desbloqueos de historia no tengan coste monetario [S] — regla historia_sin_coste_monetario + desbloqueos_historia listados
+- [x] Definir desbloqueos cosméticos como sinks de AO [M] — cosmeticos_sink_ao con rango [50,200] AO, sin gameplay
+- [x] Definir récords de museo (M37) como desbloqueo no monetario [S] — museo_records_no_monetarios: true (M37)
 
 ## K. Tiempo y Rutina Diaria
 

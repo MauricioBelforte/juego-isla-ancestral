@@ -218,3 +218,10 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Datos: `data/map/map_data.json` — 9 POIs reales de la Isla Raíz (spawn/Chozavil/ruina/mesa/faro/templo_raíz/playa/plaza/ladera) con categorías y coordenadas dentro del mundo (radio 256)
+- [x] `scripts/map/map_schema.gd` — valida POIs (id único, nombre, categorías permitidas, coords 0-512 dentro del mundo)
+- [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
+- [x] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
+- [?] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57/M69 (dueño: deepseek-v4-flash-vision-exp)

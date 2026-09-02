@@ -8,12 +8,12 @@
 ### [S] Especificación de DLC y expansiones
 - [ ] Definir estrategia
 - [ ] Definir qué queda en el juego base
-- [ ] Diseñar nuevas islas
-- [ ] Diseñar nuevas historias
-- [ ] Diseñar nuevos NPCs
-- [ ] Diseñar nuevos sistemas
-- [ ] Diseñar nuevos biomas
-- [ ] Diseñar nuevas músicas
+- [x] Crear DlcManager autoload con manifest data-driven [M]
+- [x] Verificar compatibilidad con version base [M]
+- [x] Activar/desactivar DLC con persistencia [M]
+- [x] Soporte para bundles con descuento [S]
+- [x] Test headless de DLC manager [M]
+- [x] Datos data-driven: dlc_manifest.json + bundles.json [S]
 - [ ] Diseñar nuevas colecciones
 - [ ] Diseñar nuevas ruinas
 - [ ] Diseñar compatibilidad

@@ -279,3 +279,60 @@ Formato de línea de ejemplo: `[DOM-PROG-HITO] alcanzado milestone=hito_picota_n
 - Al conectar M66 (anti-softlock), acordar el formato de `progreso_condicion_imposible` y el manejo de `alternativa_id`.
 - Coordinar con M72 el reparto del catálogo de logros (quiénes definen qué) antes de poblar `achievement_catalog.tres`.
 - En `plan-actual/` copiar estos archivos y actualizarlos contra el código real a medida que se implemente.
+
+---
+
+## Notas del Agente — Iteración 1 núcleo (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 16:25:00
+**Estado:** Parcial (núcleo de progresión implementado y verificado; módulo liberado 🟡)
+
+### Lo que hice
+- PlayerProfile autoload (scripts/progresion/player_profile.gd, §3.4): estadísticas totales y del día, primeras veces, contribución comunitaria (monedas ganadas), dirty flags por estadística, reputación 60% amistad / 40% contribución (§4.5, normalizaciones documentadas: 10 niveles-amistad máx, 2000 AO contribución = 100%), reset_dia, serialización propia.
+- ProgressionManager autoload (scripts/progresion/progression_manager.gd, §1/§3.1): suscribe 6 señales de dominio M07 (items→items_recolectados, purchase_done→monedas_gastadas, gift_given→regalos_dados, prereq_met→sellos, quest_completed→misiones, friendship_level_up→amistades_subidas, travel_started→viajes); evaluador de condiciones de los 10 tipos §3.6 (stat_min, dias_jugados, sello_historia, capitulo_historia, riqueza_acumulada, coleccion_completa, hito_previo, primera_vez, compuesta AND/OR/NOT) con dirty-flagging O(1) por estadística (indexación condición→hito al cargar, §7); marcar_hito idempotente con señal progreso_hito_alcanzado y log [DOM-PROG-HITO]; desbloqueos idempotentes con progreso_desbloqueado + log [DOM-PROG-UNLOCK]; progreso_parcial perezoso para M53; reflejo narrativo solo-lectura de M22 (§2.2); persistencia ISaveProvider M59 sección "progresion" versionada (§6: hitos/desbloqueos/estadísticas/primeras veces/contribución, hitos de catálogo viejo purgados, NUNCA re-emitir señales restauradas).
+- Catálogo data-driven data/progresion/hitos.json (§8): 9 hitos de referencia de los 7 dominios con condiciones de los tipos del §3.6 y recompensas cosméticas/info (nunca poder duro — §8 regla de balance).
+- Test test_progresion.gd: catálogo, reevaluación dirty por eventos reales (10 items → hito), idempotencia, tipos de condición (compuesta AND/NOT, coleccion, hito_previo, primera_vez, desconocido), desbloqueos idempotentes, reputación 60/40, persistencia con hito de catálogo viejo → **0 fallos**.
+- Regresiones: test_historia M22 0 fallos (M71 refleja sus sellos), test_autosave M59 0 fallos.
+- Checklist: relevado con los ítems del núcleo implementados.
+
+### Fusión documentada (iter. 1)
+- MilestoneRegistry y UnlockSystem del diseño §1 quedan FUSIONADOS dentro de ProgressionManager: el catálogo es JSON (no .tres) y el evaluador vive en el manager. El desglose a 4 autoloads (extraer registry/evaluador) es iter. 2 si el volumen de hitos lo justifica — las señales y el contrato NO cambian.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Nivel de módulos M13/M18 como condición (nivel_modulo del §3.6): implementado el tipo pero las señales nivel_herramienta_cambio/nivel_casa_cambio no existen aún en M13/M18 (el tipo queda listo; los puentes son de 1 línea cuando M13/M18 las emitan).
+- Reputación con amistad real de M20: reputacion(amistad_normalizada) espera que un puente calcule la normalización desde M20 (nivel medio/max de los vecinos) — queda con dueño.
+- Logros (M72) y títulos con catálogo: los tipos Achievement/Title del §3.5 quedan para la iteración con M72.
+- RUIDA_PROGRESADA (M25), ESPECIE_AVISTADA (M36): puentes con dueño de esos módulos.
+
+### Recomendaciones para el próximo agente
+- M13/M18: al emitir nivel_herramienta_cambio/nivel_casa_cambio, conectar puente 1-línea en _conectar_eventos() (patrón existente) — el tipo nivel_modulo del evaluador ya lo consume.
+- M72: AchievementDefinition puede reusar el evaluador de condiciones (evaluar_condicion) — no duplicar la lógica.
+- Catálogo: nuevo hito = nueva entrada en hitos.json (sin tocar código). Los recompensas tipo "unlock" activan desbloqueos automáticamente.
+
+## Notas del Agente — Iteración 2 (historial, no borra anteriores)
+
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 00:20
+**Estado:** Iter 2 completada
+
+### Lo que hice
+- Integré GameLogger (M103) en ProgressionManager: helpers _log_info/_log_dom_hito/_log_dom_unlock usan logger.info(msg, 3) con fallback a print().
+- Añadí tipo condicional nivel_modulo (§3.6): evalúa nivel de herramienta (M13) o casa (M18) vía duck-typing directo (no señales). Retorna false sin crash si el módulo no existe.
+- Corregí bug en _sello_obtenido: había código muerto (and false if false else) que dejaba la función en estado ambiguo.
+- Expandí catálogo hitos.json de 9 a 15 hitos (6 nuevos: dias_7, dias_30, items_50, misiones_5, viajeros_10, sello_ceniza_sala2).
+- Actualicé test_progresion.gd: esperado 15 hitos, nuevo test _test_nivel_modulo_fallback (3 checks).
+
+### Lo que NO pude hacer
+- Señales de nivel (M13/M18): el tipo nivel_modulo funciona por lectura directa, pero las señales permitirían dirty-flagging proactivo. Depende de dueños M13/M18.
+- Reputación con amistad real de M20: normalización pendiente.
+- Logros/títulos M72: para iteración conjunta.
+- Catálogo completo 22 categorías: contenido a poblar por M93/M72.
+
+### Recomendaciones para el próximo agente
+- Cuando M13/M18 emitan señales de nivel, conectar puentes 1-línea en _conectar_eventos() (patrón existente).
+- M72 puede reusar evaluar_condicion() para condiciones de logros — no duplicar lógica.
+- El catálogo hitos.json es data-driven: nuevo hito = nueva entrada JSON, sin tocar código.
+

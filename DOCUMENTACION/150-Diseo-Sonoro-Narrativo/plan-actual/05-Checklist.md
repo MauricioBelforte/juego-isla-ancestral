@@ -142,7 +142,7 @@
 - [ ] Diseñar silencio después de música → impacto
 
 ### [S] NarrativeAudioManager (servicio)
-- [ ] Diseñar NarrativeAudioManager como autoload
+- [x] Diseñar NarrativeAudioManager como autoload
 - [ ] Diseñar signal leitmotif_started(leitmotif_id)
 - [ ] Diseñar signal leitmotif_ended(leitmotif_id)
 - [ ] Diseñar método setup_audio_context()

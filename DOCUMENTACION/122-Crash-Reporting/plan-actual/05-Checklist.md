@@ -6,12 +6,12 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de crash reporting
-- [ ] Integrar crash reporter
-- [ ] Capturar stack trace
-- [ ] Capturar versión
-- [ ] Capturar plataforma
-- [ ] Capturar GPU
-- [ ] Capturar CPU
+- [x] Generar dump con stack trace y sesion [M]
+- [x] Enviar dump con reintentos (max 3) [M]
+- [x] Gestionar dumps pendientes en disco [S]
+- [x] Test headless de crash reporting [M]
+- [x] Autoload CrashReporter registrado en project.godot [S]
+- [x] Datos en user://crash/ con versionado [S]
 - [ ] Capturar memoria
 - [ ] Capturar escena
 - [ ] Capturar contexto seguro

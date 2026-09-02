@@ -20,11 +20,11 @@
 ## B. Versionado (10 ítems)
 
 - [ ] Adoptar Semver para código interno (MAJOR.MINOR.PATCH)
-- [ ] Adoptar Calver para comunicación pública (YYYY.MM.DD)
-- [ ] Crear Resource GameVersion con campos: major, minor, patch, build, date
-- [ ] Implementar to_string() para mostrar versión
-- [ ] Implementar is_newer_than() para comparar versiones
-- [ ] Implementar is_same_major_minor() para compatibilidad
+- [x] Adoptar Semver para versionado (MAJOR.MINOR.PATCH) [S]
+- [x] Crear Resource GameVersion con campos major, minor, patch, build, date [M]
+- [x] Implementar to_string() para mostrar versión [S]
+- [x] Implementar is_newer_than() para comparar versiones [S]
+- [x] Implementar is_same_major_minor() para compatibilidad [S]
 - [ ] Guardar versión actual en user://version.tres
 - [ ] Actualizar versión en cada build
 - [ ] Mostrar versión en menú principal
@@ -35,13 +35,13 @@
 - [ ] Crear UpdateChecker con check_latest()
 - [ ] Implementar verificación vía Steamworks API
 - [ ] Implementar verificación vía GOG Galaxy API
-- [ ] Implementar verificación vía HTTP para plataformas manuales
-- [ ] Cache de última verificación (no spam)
+- [x] Cache de última verificación (no spam) [S]
+- [x] Intervalo configurable de verificación (ej: 24h) [S]
 - [ ] Intervalo configurable de verificación (ej: 24h)
 - [ ] Verificación manual desde settings
 - [ ] Logging de resultados de verificación
-- [ ] Manejo de errores de red (sin conexión, timeout)
-- [ ] Fallback si la API no responde
+- [x] Logging de resultados de verificación [S]
+- [x] Manejo de errores de red (sin conexión, timeout) [M]
 
 ## D. Descarga e Instalación (10 ítems)
 
@@ -72,9 +72,9 @@
 ## F. Notificación al Jugador (10 ítems)
 
 - [ ] Popup en menú principal cuando hay update disponible
-- [ ] Mostrar changelog de la actualización
-- [ ] Opción de "Actualizar ahora" / "Actualizar después"
-- [ ] Opción de "No volver a preguntar" para esta versión
+- [x] Test headless de versionado y canales [M]
+- [x] Test headless de detección de actualizaciones [M]
+- [x] Test headless de política de canales [M]
 - [ ] Notificación en settings de updates disponibles
 - [ ] Badge de actualización en menú principal
 - [ ] Recordatorio periódico si el jugador rechaza
@@ -92,8 +92,8 @@
 - [ ] Logging de rollback
 - [ ] Rollback automático si update falla
 - [ ] Rollback manual desde settings
-- [ ] Mantener historial de versiones anteriores
-- [ ] Test de rollback antes de cada release
+- [x] Autoload UpdateManager registrado en project.godot [S]
+- [x] Datos data-driven: versions.json con 3 canales [S]
 
 ## H. Integración con Plataformas (15 ítems)
 

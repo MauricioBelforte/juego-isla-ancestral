@@ -97,9 +97,9 @@
 - [ ] Diálogos +6 dB sobre música (M21) [S]
 - [ ] Ningún bioma en silencio total [S]
 - [ ] Ningún bioma con "pared de sonido" [S]
-- [ ] Test de balance en M114 (recorrido de mapa) [S]
-- [ ] Test de pausa sin sonido residual [S]
-- [ ] Test de rendimiento ≤ 11 buses (M113) [S]
+- [x] Test de balance en M114 (recorrido de mapa) [S]
+- [x] Test de pausa sin sonido residual [S]
+- [x] Test de rendimiento ≤ 11 buses (M113) [S]
 
 ## G. Data y API (8)
 
@@ -110,14 +110,14 @@
 - [ ] API: set_estado_clima() [S]
 - [ ] API: set_fase() [S]
 - [ ] API: fuente_posicional() [S]
-- [ ] Sin hardcode de paths en scripts [S]
+- [x] Sin hardcode de paths en scripts [S]
 
 ## G2. Pruebas (4)
 
-- [ ] Test: banco→bioma sin huecos [S]
-- [ ] Test: capas hora/clima correctas [S]
-- [ ] Test: ≤ 11 buses en profiler [S]
-- [ ] Suite en caso_ambiental_tests.gd (M112) [M]
+- [x] Test: banco→bioma sin huecos [S]
+- [x] Test: capas hora/clima correctas [S]
+- [x] Test: ≤ 11 buses en profiler [S]
+- [x] Suite en caso_ambiental_tests.gd (M112) [M]
 
 ## H. Delegación y cierre (10)
 

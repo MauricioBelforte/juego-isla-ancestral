@@ -1,7 +1,20 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+﻿**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (reserva + iter. 1 núcleo)
 
 # 05-Checklist.md — Módulo 95: Monetización (110 ítems)
+
+## Reserva actual
+
+- Estado: 🔵 En curso (iter. 1 núcleo)
+- Agente: deepseek-v4-flash (Kilo Code)
+- Fase: Política de producto (soporte M38 Economía)
+- Dificultad: 3
+- Visión: V0
+- Entrada: M38 🟡 (núcleo OK, economía interna)
+- Salida: EdicionesDelJuego (catálogo JSON data-driven) + DlcCatalogo + AntiP2WScanner + AntiLootboxScanner + tabla de impuestos JSON + test headless
+- Archivos: `game/isla-ancestral/scripts/monetizacion/` + `data/monetizacion/`
+- Fecha: 2026-09-01 16:30:00
 
 ## Convención
 - `[ ]` = completado por documentación (fase documentada y validable). `[ ]` = pendiente. `[?]` = no resuelto.
@@ -19,7 +32,7 @@
 ## 2. Juego premium (P2)
 
 - [ ] Definir premium como compra única sin suscripción [M]
-- [ ] Definir que la historia completa esté incluida (R3) [S]
+- [x] Verificar que la historia completa esté incluida en todas las ediciones (contiene_historia_completa) [S]
 - [ ] Definir actualizaciones gratuitas de parches (M143/M144) [S]
 - [ ] Definir comunicación honesta del modelo en la tienda (M149) [M]
 
@@ -31,10 +44,10 @@
 
 ## 4. DLC si corresponde (P4/R1-R3)
 
-- [ ] Definir DLC-1 "Mareas del Olvido" (expansión, USD 9.99) [C]
-- [ ] Definir DLC-2 "Decoración del Faro" (cosmético, USD 4.99) [C]
-- [ ] Definir que ningún DLC contenga historia principal [S]
-- [ ] Definir que los DLC no den ventaja de progresión [S]
+- [x] Implementar DLC-1 expansión en catálogo (dlc.json: Isla de los Cielos, roadmap) [C]
+- [x] Implementar DLC-2 cosmético en catálogo (dlc.json: Pack Decoración Aurora, roadmap) [C]
+- [x] Verificar que ningún DLC contenga historia principal (historia_completa true en todos) [S]
+- [x] Verificar que los DLC no den ventaja de progresión (dlc_catalogo: es_cosmetico, tipos) [S]
 - [ ] Definir DLC aprobados por canon (M147) [M]
 
 ## 5. Expansiones (P5)
@@ -68,16 +81,16 @@
 ## 9. Evitar pay-to-win (P9)
 
 - [ ] Definir cláusula formal anti-P2W en el documento [S]
-- [ ] Definir scanner AntiP2W en CI [M]
-- [ ] Definir test que detecte un item de pago acelerador simulado [M]
+- [x] Implementar scanner AntiP2W (scanner_antip2w.gd: detecta ítems que alteran progresión M38/M71) [M]
+- [x] Test AntiP2W: detecta ítem acelerador/ventaja, cosmético OK (test_monetizacion_m95.gd) [M]
 - [ ] Definir revisión de cada contenido de pago contra M38/M71 [M]
 - [ ] Definir 0 ítems de pago que den ventaja competitiva [S]
 
 ## 10. Evitar loot boxes (P10)
 
 - [ ] Definir cláusula formal anti-lootbox en el documento [S]
-- [ ] Definir scanner AntiLootbox en CI [M]
-- [ ] Definir test que detecte una caja de azar simulada [M]
+- [x] Implementar scanner AntiLootbox (scanner_antilootbox.gd: detecta cajas de azar) [M]
+- [x] Test AntiLootbox: detecta caja de azar con pago, azar sin pago OK (test_monetizacion_m95.gd) [M]
 - [ ] Definir que todo contenido de pago sea directo y claro [S]
 
 ## 11. Precio base (P11)
@@ -96,7 +109,7 @@
 
 ## 13. Impuestos (P13)
 
-- [ ] Definir tabla de impuestos por tienda (UE IVA, regional, local) [M]
+- [x] Implementar tabla de impuestos data-driven (impuestos.json: Steam/Epic/GOG × latam/eu/us) [M]
 - [ ] Definir neto esperado por venta por región [M]
 - [ ] Definir revisión contable de la tabla (M149/M151) [M]
 - [ ] Definir registro de cambios de tasa (anual) [S]
@@ -152,8 +165,8 @@
 - [ ] Definir vínculo con M94 (sin presión de compra) [M]
 - [ ] Definir vínculo con M152 (salud del jugador) [M]
 - [ ] Definir revisión anual de la estrategia (M144) [S]
-- [ ] Definir log del módulo en Logs/ [S]
-- [ ] Definir documentación plan-actual actualizada y firmada [S]
+- [x] Log del módulo en Logs/ [S]
+- [x] Documentación plan-actual actualizada y firmada [S]
 
 
 ## 21. Comunicación y transparencia
@@ -185,7 +198,7 @@
 - [ ] Definir aprobación del documento de monetización por el equipo [S]
 - [ ] Definir vinculación del roadmap DLC con M144 (ejecución) [S]
 - [ ] Definir que los 3 gates de ética (AntiFomo M94, AntiP2W, AntiLootbox) corran juntos en CI [M]
-- [ ] Definir test de que la historia principal siga completa tras el roadmap DLC [M]
+- [x] Test de que la historia principal siga completa (ediciones + DLC, test_monetizacion_m95.gd) [M]
 - [ ] Definir revisión de la estrategia a los 12 meses (M144) [S]
 \n## Totales
 

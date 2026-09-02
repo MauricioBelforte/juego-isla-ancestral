@@ -1,249 +1,153 @@
-**Modelo:** MiMo V2.5
-**Plataforma:** OpenCode
+**Modelo original:** MiMo V2.5
+**Plataforma original:** OpenCode
+**Actualizado por:** Hy3 / WorkBuddy (iter 1, 2026-09-01 — Log 363)
 
 # 04-Codigo.md — Módulo 162: Diálogos Contextuales de NPCs
 
 ## 1. Archivos Involucrados
 
-### 1.1 Archivos de Este Módulo
+### 1.1 Archivos creados en iter 1 (Hy3 / WorkBuddy)
+
 | Archivo | Propósito |
 |---------|-----------|
-| `DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-inicial/01-Requerimientos.md` | Requisitos funcionales |
-| `DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-inicial/02-Analisis.md` | Análisis de alternativas |
-| `DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-inicial/03-Diseno.md` | Diseño de diálogos (1406 líneas) |
-| `DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-inicial/04-Codigo.md` | Este archivo |
-| `DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-inicial/05-Checklist.md` | Checklist de tareas |
+| `scripts/dialogos/contextual_dialogue_manager.gd` | Selector de prioridad + fallback (RefCounted, no autoload) |
+| `scripts/dialogos/test_contextual_dialogue_m162.gd` | Test headless (valida grafos con `DialogGraphValidator` + prueba el selector) |
+| `scripts/gen_m162_dialogues.py` | Generador reproducible de grafos + `registry.json` |
+| `data/dialogues/contextual/registry.json` | Registro de entradas: `{npc, tipo, graph, prioridad, condiciones[]}` |
+| `data/dialogues/contextual/*.json` (78) | Grafos M21, uno por entrada contextual |
 
-### 1.2 Archivos de Módulos Relacionados (lectura)
-| Módulo | Archivo | Razón |
-|--------|---------|-------|
-| M21 | `plan-actual/01-Requerimientos.md` | Motor de diálogos nodales, JSON, condiciones |
-| M22 | `plan-actual/03-Diseno.md` | 7 capítulos, grafo de escenas, eventos |
-| M19 | `plan-actual/01-Requerimientos.md` | 23 NPCs, personalidades, rutinas |
-| M161 | `plan-actual/01-Requerimientos.md` | Diseño visual de NPCs |
-| M20 | `plan-actual/01-Requerimientos.md` | Sistema de amistad (3 niveles) |
-| M29 | `plan-actual/01-Requerimientos.md` | Tiempo, estaciones, hora |
-| M160 | `plan-actual/01-Requerimientos.md` | 46 ubicaciones, LOC-ISLA-TIPO-NUMERO |
+### 1.2 Módulos relacionados (solo lectura, no se toca su código)
 
-### 1.3 Archivos de Código a Crear (fase de implementación)
-| Archivo | Propósito |
-|---------|-----------|
-| `scripts/dialogues/dialogue_data.gd` | Recursos GDScript para diálogos |
-| `scripts/dialogues/dialogue_manager.gd` | Gestor de diálogos contextuales |
-| `scripts/dialogues/dialogue_conditions.gd` | Evaluador de condiciones |
-| `data/dialogues/` | Archivos JSON por NPC (23 archivos) |
-| `scripts/resources/dialogue_resource.gd` | Resource para diálogos |
+M21 (`dialogue_graph.gd`, `dialogue_node.gd`, `dialog_graph_validator.gd`),
+M22 (historia/capítulos), M19 (NPCs), M161 (visuales), M20 (amistad),
+M29 (tiempo), M160 (ubicaciones).
 
-## 2. Funciones Clave
+## 2. Formato JSON (compatible con M21 — DialogueGraph)
 
-### 2.1 DialogueManager (gestor principal)
-```gdscript
-# scripts/dialogues/dialogue_manager.gd
-class_name DialogueManager
-extends Node
+Cada entrada contextual es un **grafo M21 completo**, no el formato simplificado
+`{nodes:[{id,text,next}]}` del diseño previo (ese formato NO es aceptado por M21).
 
-## Obtiene el diálogo apropiado para un NPC dado el contexto actual
-func get_dialogue(npc_id: String, tipo: String) -> Dictionary:
-    # 1. Obtener capítulo actual de game_progress
-    # 2. Obtener nivel de amistad del NPC
-    # 3. Obtener estación y hora del mundo
-    # 4. Buscar diálogos del NPC para el capítulo
-    # 5. Filtrar por condiciones (amistad, estación, hora)
-    # 6. Aplicar prioridad si hay múltiples válidos
-    # 7. Retornar el diálogo seleccionado
-
-## Verifica si un diálogo cumple todas las condiciones
-func check_conditions(dialogue: Dictionary, context: Dictionary) -> bool:
-    # Evaluar cada condición del diálogo contra el contexto
-
-## Obtiene todos los diálogos disponibles para un NPC
-func get_all_dialogues(npc_id: String) -> Array:
-    # Retornar lista completa de diálogos del NPC
-```
-
-### 2.2 DialogueConditions (evaluador)
-```gdscript
-# scripts/dialogues/dialogue_conditions.gd
-class_name DialogueConditions
-extends RefCounted
-
-## Evalúa condición de capítulo
-static func check_chapter(condition: Dictionary, chapter: int) -> bool:
-    # Verificar min/max del capítulo
-
-## Evalúa condición de amistad
-static func check_friendship(condition: Dictionary, friendship: int) -> bool:
-    # Verificar min/max de amistad
-
-## Evalúa condición de estación
-static func check_season(condition: Dictionary, season: String) -> bool:
-    # Verificar estación requerida
-
-## Evalúa condición de hora
-static func check_hour(condition: Dictionary, hour: int) -> bool:
-    # Verificar franja horaria (mañana/tarde/noche)
-
-## Evalúa condición de ubicación
-static func check_location(condition: Dictionary, location: String) -> bool:
-    # Verificar ubicación del jugador
-```
-
-### 2.3 DialogueResource (recurso)
-```gdscript
-# scripts/resources/dialogue_resource.gd
-class_name DialogueResource
-extends Resource
-
-@export var dialogue_id: String
-@export var npc_id: String
-@export var tipo: String  # SALUDO, HISTORIA, MISION, AMBIENTE, AMISTAD, ESTACIONAL, HORA
-@export var capitulo: int  # 0-7
-@export var condiciones: Dictionary
-@export var nodes: Array[Dictionary]
-@export var prioridad: int  # 0=baja, 1=media, 2=alta
-```
-
-## 3. Estructura de Datos JSON
-
-### 3.1 Formato por NPC
 ```json
 {
-  "npc_id": "NPC-RIZ-001",
-  "npc_name": "Mayor del Pueblo",
-  "isla": "RIZ",
-  "dialogues": [
-    {
-      "dialogue_id": "DLG-RIZ-001-CAP0-SALUDO",
-      "tipo": "SALUDO",
-      "capitulo": 0,
-      "condiciones": {
-        "game_progress.chapter": {"min": 0, "max": 0},
-        "friendship": {"min": 0, "max": 100}
-      },
-      "prioridad": 1,
-      "nodes": [
-        {
-          "id": "start",
-          "text": "¡Bienvenido a Aurora! Soy el mayor de este pueblo.",
-          "next": "end"
-        }
-      ]
-    }
+  "id": "DLG-RIZ_001-CAP0-SALUDO-PRIMERA",
+  "start": "n0",
+  "nodes": {
+    "n0": { "tipo": 0, "speaker_key": "npc.riz_001",
+            "text_key": "¡Bienvenido a Aurora! ...", "next_id": "fin", "tipo_fin": false },
+    "fin": { "tipo": 3, "speaker_key": "npc.riz_001" }
+  }
+}
+```
+
+- `tipo`: 0=LÍNEA, 1=OPCIONES, 2=EVENTO, 3=FIN (de `dialogue_node.gd`).
+- `speaker_key`: `npc.<slug>` (slug = `riz_001`, `aur_005`, ...).
+- `text_key`: texto cozy literal en español (convención de `catalina_hola.json`).
+- `placeholders`: `{"nombre": "viajero"}` para `{nombre}` en el texto.
+- `conditions` / `options` / `effects`: igual que M21.
+- Validación: todos los grafos pasan `DialogGraphValidator.validar_archivo`.
+
+## 3. Selector — `ContextualDialogueManager`
+
+```gdscript
+# scripts/dialogos/contextual_dialogue_manager.gd
+class_name ContextualDialogueManager
+extends RefCounted
+
+## Retorna {ok, graph, entry} para npc_id + tipo según el contexto.
+## contexto: Dictionary con variables de mundo (claves M21, ver §4).
+static func seleccionar(npc_id: String, tipo: String, contexto: Dictionary) -> Dictionary
+```
+
+Algoritmo:
+1. Resuelve `slug` desde `npc_id` (o lo usa directo si ya es slug).
+2. Filtra entradas de `registry.json` por `npc == slug` y `tipo`.
+3. Descarta las que no cumplen sus `condiciones` (misma semántica que
+   `DialogueNode._evalua_cond`: operadores `== != >= <= > <`).
+4. Entre las válidas, elige la de **mayor `prioridad`** (empate → primera).
+5. Si ninguna vale, **fallback** = entrada del mismo NPC+tipo con MENOS condiciones
+   (más genérica); si hay empate de condiciones, la de mayor prioridad.
+6. Carga el grafo JSON y lo devuelve para que M21 lo reproduzca.
+
+## 4. Contrato de Variables de Estado (ÚNICO formato válido en M21)
+
+> **Corrección de integración:** el diseño previo (`game_progress.chapter`,
+> `friendship[npc_id]`, `world.season`, `world.hour`, `player.location`,
+> `quest.completed`) **NO existe** en M21. `dialog_graph_validator.gd`
+> (`CLAVES_MUNDO_BASE`) solo acepta estas claves. M162 las usa:
+
+| Dimensión | Clave M21 | Quién la fija |
+|-----------|-----------|---------------|
+| Capítulo (0-7) | `flag_capitulo` (int) | M22 al avanzar |
+| Estación | `estacion` | M29 |
+| Hora / día / noche | `hora`, `es_de_dia`, `es_noche` | M29 |
+| Clima | `clima` | M29/M32 |
+| Amistad NPC | `amistad_<slug>` (int 0-100) | M20 |
+| Ubicación | `flag_ubicacion_<loc>` | M160/M19 |
+| Misión | `flag_quest_<id>` | M22/quests |
+| Otras banderas | `flag_<clave>` | WorldState (M59) |
+
+## 5. Ejemplo de entry en `registry.json`
+
+```json
+{
+  "id": "DLG-RIZ_001-CAP0-SALUDO-PRIMAVERA",
+  "npc": "riz_001", "tipo": "SALUDO",
+  "graph": "riz_001_cap0_saludo_primavera.json",
+  "prioridad": 3,
+  "condiciones": [
+    {"clave": "flag_capitulo", "operador": "==", "valor": 0},
+    {"clave": "flag_riz_001_visitado", "operador": "==", "valor": false},
+    {"clave": "estacion", "operador": "==", "valor": "PRIMAVERA"}
   ]
 }
 ```
 
-### 3.2 Variables de Estado (M21)
-| Variable | Tipo | Rango | Uso en M162 |
-|----------|------|-------|-------------|
-| `game_progress.chapter` | int | 0-7 | Capítulo actual de la historia |
-| `friendship[npc_id]` | int | 0-100 | Nivel de amistad con el NPC |
-| `world.season` | String | PRIMAVERA/VERANO/OTONIO/INVIERNO | Estación actual |
-| `world.hour` | int | 0-23 | Hora del día |
-| `player.location` | String | LOC-* | Ubicación actual del jugador |
-| `quest.completed[quest_id]` | bool | true/false | Misión completada |
+Prioridades demostradas (Mayor cap0 SALUDO): primavera=3, primera vez=2,
+repetido=1 → el selector elige la variante de mayor prioridad que cumpla.
 
-## 4. Flujo de Ejecución
+## 6. Cómo regenerar / extender
 
+```bash
+python scripts/gen_m162_dialogues.py
 ```
-1. Jugador habla con NPC
-   ↓
-2. DialogueManager.get_dialogue(npc_id, "SALUDO")
-   ↓
-3. Obtener contexto actual:
-   - chapter = game_progress.chapter
-   - friendship = friendship[npc_id]
-   - season = world.season
-   - hour = world.hour
-   - location = player.location
-   ↓
-4. Cargar diálogos del NPC desde JSON
-   ↓
-5. Filtrar diálogos por capítulo
-   ↓
-6. Para cada diálogo restante:
-   - Evaluar condiciones (amistad, estación, hora, ubicación)
-   - Si todas pasan → candidato válido
-   ↓
-7. Si hay múltiples candidatos:
-   - Seleccionar por prioridad (mayor prioridad gana)
-   - Si empate → seleccionar aleatoriamente
-   ↓
-8. Si no hay candidatos:
-   - Usar fallback: diálogo genérico del capítulo
-   ↓
-9. Retornar nodo de diálogo seleccionado
-   ↓
-10. M21 muestra el diálogo al jugador
+El script es la "fuente de verdad" del contenido; editar el dict `entries`
+y reejecutar regenera grafos + registry (y valida cada grafo localmente).
+
+## 7. Testing
+
+```bash
+godot --headless --path game/isla-ancestral \
+      --script res://scripts/dialogos/test_contextual_dialogue_m162.gd
 ```
+Valida los 78 grafos con `DialogGraphValidator` y prueba el selector
+(prioridad primavera/primera/repeat, Viajero noche/día, fallback).
+**Estado iter 1:** test escrito; ejecución runtime pendiente (entorno sin Godot).
+La lógica de selección fue validada por simulación en Python (8/8 OK).
 
-## 5. Notas de Implementación
+## 8. Estado iter 1 (Log 363)
 
-### 5.1 Organización de Archivos JSON
-```
-data/dialogues/
-├── NPC-RIZ-001-mayor.json
-├── NPC-RIZ-002-carpintero.json
-├── NPC-RIZ-003-vendedora.json
-├── NPC-RIZ-004-sabio.json
-├── NPC-RIZ-005-pescador.json
-├── NPC-RIZ-006-agricultora.json
-├── NPC-RIZ-007-nina.json
-├── NPC-RIZ-008-animador.json
-├── NPC-COR-001-herrero.json
-├── NPC-COR-002-pescadora.json
-├── NPC-COR-003-comerciante.json
-├── NPC-COR-004-guardia.json
-├── NPC-COR-005-nina-playa.json
-├── NPC-CEN-001-herrero-avanzado.json
-├── NPC-CEN-002-minero.json
-├── NPC-CEN-003-cocinera.json
-├── NPC-CEN-004-bibliotecario.json
-├── NPC-CEN-005-guardia-mina.json
-├── NPC-AUR-001-encantador.json
-├── NPC-AUR-002-sanadora.json
-├── NPC-AUR-003-guardia-ancestral.json
-├── NPC-AUR-004-artista.json
-└── NPC-AUR-005-viajero-misterioso.json
-```
+- 78 grafos M21 generados, 0 inválidos, 23/23 NPCs con ≥1 diálogo.
+- Completos cap 0-7: Mayor (RIZ-001), Viejo Sabio (RIZ-004), Viajero Misterioso (AUR-005).
+- Demostradas variantes: primera vez / repetido, estación (PRIMAVERA), noche/día (Viajero).
+- **Pendiente ([?]):** variantes amistad (0-29/30-69/70-100), estación (3 restantes),
+  hora (mañana/tarde/noche) y ubicación; capítulos 1-7 de los 20 NPCs secundarios
+  (~330 diálogos); ejecución runtime en Godot.
 
-### 5.2 Conteo de Diálogos por NPC
-| NPC | Capítulos | Tipos por capítulo | Total estimado |
-|-----|-----------|-------------------|----------------|
-| Mayor RIZ | 8 | 3-4 | ~28 |
-| Carpintero RIZ | 8 | 2-3 | ~20 |
-| Vendedora RIZ | 8 | 2-3 | ~20 |
-| Viejo Sabio RIZ | 8 | 2-3 | ~20 |
-| Pescador RIZ | 8 | 2-3 | ~20 |
-| Agricultora RIZ | 8 | 2-3 | ~20 |
-| Niña RIZ | 8 | 1-2 | ~12 |
-| Animador RIZ | 8 | 1-2 | ~12 |
-| Herrero COR | 8 | 2-3 | ~20 |
-| Pescadora COR | 8 | 2-3 | ~20 |
-| Comerciante COR | 8 | 2-3 | ~20 |
-| Guardia COR | 8 | 1-2 | ~12 |
-| Niña Playa COR | 8 | 1-2 | ~12 |
-| Herrero CEN | 8 | 2-3 | ~20 |
-| Minero CEN | 8 | 2-3 | ~20 |
-| Cocinera CEN | 8 | 2-3 | ~20 |
-| Bibliotecario CEN | 8 | 2-3 | ~20 |
-| Guardia Mina CEN | 8 | 1-2 | ~12 |
-| Encantador AUR | 8 | 2-3 | ~20 |
-| Sanadora AUR | 8 | 2-3 | ~20 |
-| Guardia Ancestral AUR | 8 | 2-3 | ~20 |
-| Artista AUR | 8 | 1-2 | ~12 |
-| Viajero Misterioso AUR | 8 | 2-3 | ~20 |
-| **TOTAL** | | | **~400** |
+## 9. Estado iter 2 (Log 472 — Hy3 / Kilo Code, 2026-09-01)
 
-### 5.3 Integración con Sistema de Detección (M160)
-- Los diálogos pueden referenciar ubicaciones usando IDs de M160
-- Ejemplo: `player.location == "LOC-RIZ-PUER-001"` para detectar si el jugador está en el puerto
-
-### 5.4 Extensibilidad
-- Agregar un NPC nuevo: crear JSON + agregar entradas en DialogueManager
-- Agregar un capítulo nuevo: agregar entradas en cada JSON existente
-- Agregar un tipo de diálogo nuevo: agregar caso en DialogueManager.get_dialogue()
-
-## 6. Logs Relacionados
-- Ver `Logs/` para registros de creación de este módulo
-- Commit de creación: pendiente
+- Generador `scripts/gen_m162_dialogues.py` **recreado** (faltaba en disco; el 04-Codigo
+  iter 1 decía que existía pero no estaba) y ejecutado como fuente de verdad del contenido.
+- **260 grafos M21 generados** (264 archivos .json en `data/dialogues/contextual/`, incluidos
+  los 2 de variante PRIMAVERA/PRIMERA del Mayor preservados del iter 1), **263 entries** en
+  `registry.json`.
+- Contenido completado: capítulos 1-7 (SALUDO/HISTORIA/MISION/AMBIENTE según diseño) para
+  los 20 NPCs secundarios, más HISTORIA/MISION/AMBIENTE cap 0 donde el diseño los define.
+  Total módulo: 98 [x] / 22 [?] de 120 (plan-actual/05-Checklist.md).
+- **Validación:** réplica de `DialogGraphValidator` en Python (mismos criterios: start existe,
+  `fin` alcanzable, sin huérfanos) → 264/264 grafos OK, 0 fallos; `registry.json` 263 entries,
+  0 claves de mundo desconocidas (todas `flag_capitulo`/`estacion`/`es_noche`/`flag_*` válidas).
+- `test_contextual_dialogue_m162.gd` actualizado: COR-001 ya tiene HISTORIA cap0 (antes era
+  pendiente); el fallback ahora verifica que no hay variante de amistad aún.
+- **Pendiente ([?]):** dimensiones de variación (amistad/estación-restantes/hora/ubicación) y
+  checks de coherencia cruzada con M158/M160/M22. Ejecución runtime del test en Godot pendiente
+  (el MCP disponible solo corre el juego principal, no `--script`).

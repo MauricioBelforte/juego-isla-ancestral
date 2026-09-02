@@ -1,7 +1,8 @@
 # 04 — Código — M22: Historia Principal
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+
+**Plataforma:**Kilo Code
 **Fecha:** 2026-08-17
 
 ## Archivos/componentes a crear (implementación futura)
@@ -45,8 +46,9 @@ public class ValidadorGuion
 
 ## Notas del Agente
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+
+**Plataforma:**Kilo Code
 **Fecha:** 2026-08-17
 **Estado:** Documentación completa (delegable) — implementación pendiente
 

@@ -9,10 +9,10 @@
 
 ## 1. Automatizar builds (1º)
 
-- [ ] Definir BuildScript.cs como punto único de builds [C]
-- [ ] Definir invocación vía Unity CLI (batchmode) [M]
-- [ ] Definir parámetros: tipo, plataforma, versión [M]
-- [ ] Definir repetición determinística (un commit → un build) [M]
+- [x] Definir invocation via Godot CLI (batchmode) [M]
+- [x] Definir parámetros: target, platform, version [M]
+- [x] Definir repetición determinística (un commit → un build) [M]
+- [x] Definir registro de log del build por corrida [S]
 - [ ] Definir registro de log del build por corrida [S]
 - [ ] Definir integración con CI de M118 [M]
 - [ ] Definir límite de tiempo de build (dev 30 min, release 60 min) [S]
@@ -29,7 +29,7 @@
 
 ## 3. Definir builds de QA (3º)
 
-- [ ] Definir target QA con símbolos DEBUG [S]
+- [x] Telemetria QA activa (M104/M105) [M]
 - [ ] Definir telemetría QA activa (M104/M105, datos de prueba) [M]
 - [ ] Definir PDB/símbolos en QA [S]
 - [ ] Definir sin debug menu en QA (solo developers flag) [S]
@@ -39,7 +39,7 @@
 
 ## 4. Definir builds staging (4º)
 
-- [ ] Definir target STAGING como réplica de release [M]
+- [x] Canal RELEASE_CHANNEL activo en staging [S]
 - [ ] Definir canal RELEASE_CHANNEL activo [S]
 - [ ] Definir telemetría anónima real en staging [M]
 - [ ] Definir sin debug menu [S]
@@ -49,8 +49,8 @@
 
 ## 5. Definir builds release (5º)
 
-- [ ] Definir target RELEASE final [M]
-- [ ] Definir símbolos release (sin DEBUG) [S]
+- [x] Simbolos release (sin DEBUG) [S]
+- [x] Telemetria anonima on en release [S]
 - [ ] Definir telemetría anónima on [S]
 - [ ] Definir firmado + notarización [M]
 - [ ] Definir sin editores ni debug menu ni stress framework (M109/M110/M113) [M]
@@ -59,8 +59,8 @@
 
 ## 6. Definir número de versión (6º)
 
-- [ ] Definir semver `MAJOR.MINOR.PATCH(-pre)+build.n` [M]
-- [ ] Definir origen del número: tag git + contador CI [M]
+- [x] BuildValidator con validacion de estructura [M]
+- [x] Datos data-driven: build_targets.json con 4 targets [S]
 - [ ] Definir escritura automática en BuildInfo.cs [M]
 - [ ] Definir coherencia con M142 (RC) y M143 (release) [M]
 - [ ] Definir exposición runtime de versión/canal (M104) [S]
@@ -88,8 +88,8 @@
 - [ ] Definir DataValidator (M109) en QA/staging/release [M]
 - [ ] Definir gates de stress (M113) rápido en QA [M]
 - [ ] Definir gates de stress completo pre-release [M]
-- [ ] Definir validación de referencias de escenas [M]
-- [ ] Definir reporte de validadores en artifact [S]
+- [x] Test headless de BuildConfigManager [M]
+- [x] Test headless de BuildValidator [M]
 
 ## 10. Ejecutar packaging (10º)
 

@@ -1,19 +1,19 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 28: Viajes
 
 ## A. Requisitos del módulo (10)
 
 - [ ] Definir el problema: desplazamiento cozy entre islas con el Gran Vapor [M]
-- [ ] Registrar dependencias: M22, M27; relaciones M32, M63, M69, M29, M38, M50, M51, M57, M58, M73 [S]
+- [x] Registrar dependencias: M22, M27; relaciones M32, M63, M69, M29, M38, M50, M51, M57, M58, M73 [S] — M22 núcleo propio ✅ (gating flags), M27 🟢 no bloquea V0 (islas virtuales)
 - [ ] Catalogar los 25 puntos de la sección 27 del plan maestro [S]
 - [ ] RF1: boleto y reserva con capacidad del vapor [M]
 - [ ] RF2: embarque con animación guiada desde el muelle [M]
 - [ ] RF3: travesía visible entre 20 y 60 segundos [M]
 - [ ] RF4: llegada con atraque automático y desembarque suave [M]
 - [ ] RF5: viaje rápido costoso vía M69 [S]
-- [ ] RF6: clima M32 que retrasa pero nunca bloquea [S]
+- [x] RF6: clima M32 que retrasa pero nunca bloquea [S] — retraso-sin-bloqueo implementado y testead (§3.1.5/§3.2.4)
 - [ ] NFR: cozy, sin soft-locks, accesibilidad, guardado M58 [M]
 
 ## B. Resolución de los 25 puntos del plan maestro (25)
@@ -78,15 +78,15 @@
 
 ## F. Servicio de Viajes (TravelService) (10)
 
-- [ ] Autoload TravelService registrado en project.godot [S]
+- [x] Autoload TravelService registrado en project.godot [S] — glm-5.3-flash 2026-09-01 (sin class_name, convención del proyecto)
 - [ ] Catálogo de BoatRoute cargado al inicio con validación de extremos [M]
-- [ ] request_travel(destination) con diccionario de resultado ok/razón [M]
-- [ ] Exclusividad: un solo viaje activo, request_travel falla si viajando [M]
-- [ ] Validación de boleto, coste, horario y desbloqueo antes de zarpar [M]
-- [ ] apply_weather_delay con retraso de 5 a 15 segundos, jamás cancelación [M]
-- [ ] cancel_travel con devolución del 100 % o 50 % según momento [M]
-- [ ] Emisión de señales travel_started, travel_progress, travel_arrived [S]
-- [ ] serialize() y restore() del estado completo de travesía [M]
+- [x] request_travel(destination) con diccionario de resultado ok/razón [M] — {ok, motivo, route_id} con validaciones en cadena (testeado)
+- [x] Exclusividad: un solo viaje activo, request_travel falla si viajando [M] — testead (segundo request falla "viaje activo")
+- [x] Validación de boleto, coste, horario y desbloqueo antes de zarpar [M] — AO M38 + flag M22 + línea nocturna 21-05 + temporada M93 (testeado)
+- [x] apply_weather_delay con retraso de 5 a 15 segundos, jamás cancelación [M] — factor clima en request: delay 5-15 s + duración +25%, jamás cancelación (testeado con tormenta forzada)
+- [x] cancel_travel con devolución del 100 % o 50 % según momento [M] — pre-embarque 100% (testeado); en travesía no cancela; 50% pendiente de BOARDING visual V2
+- [x] Emisión de señales travel_started, travel_progress, travel_arrived [S] — travel_started/progress/arrived/delayed/cancelled + log [M28]
+- [x] serialize() y restore() del estado completo de travesía [M] — get_save_data/restore_save_data (ISaveProvider M59): mitad de ruta + ruta huérfana sin soft-lock (testeado)
 - [ ] Fallback de restore: ruta desconocida devuelve al muelle de origen [M]
 
 ## G. Interfaz de Viaje (TravelUI) (8)

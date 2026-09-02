@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 19: NPC y Vecinos
 
@@ -127,8 +127,8 @@ func set_ocupado(ocupado: bool) -> void         # bloquea interacción (dormido/
 
 ## Notas del Agente (plan-inicial)
 
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
 **Fecha:** 2026-08-16 21:30:00
 **Estado:** Documentación de diseño completa (plan-inicial)
 
@@ -149,3 +149,35 @@ func set_ocupado(ocupado: bool) -> void         # bloquea interacción (dormido/
 - El raycast vóxel del objetivo F es crítico: probarlo en casa con pared de 1 vóxel.
 - Mantener la API de las secciones 3-5 sin renombrar: M64 y M21 ya referencian estos contratos.
 - Probar la cancelación de mudanza en las 3 fases (propuesta, aprobada, llegada) con tests manuales.
+
+---
+
+## Notas del Agente — Iteración mudanzas + línea de visión (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 00:40:00
+**Estado:** Parcial (mudanzas/catálogo/línea de visión implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- Población lógica de mudanzas en VillagerManager (diseño §2.1/§3.2): proponer_mudanza (visitante), aprobar_mudanza (llegada agendada día siguiente), cancelar_mudanza (propuesta/aprobada), llegada 08:00 vía GameTime.hora_cambio con _asignar_hogar (índice de parcela libre) y señal vecino_llego + EventBus.npc.npc_moved_in (M20/M21 consumen), anunciar/aceptar/rechazar partida con enfriamiento de 30 días (ENFRIAMIENTO_PARTIDA) y puede_avisar_partida() para M64/M21.
+- Catálogo data-driven: 4 perfiles .tres nuevos en data/villagers/ (finneas_zorro pescador/costa, mateo_mapache granjero/pradera, luna_zorra artesana/colina, bruno_sapo carpintero/bosque) siguiendo el formato de catalina_oso; total 5 perfiles (checklist "catálogo mayor que el límite" en progreso — 14 es la meta final).
+- Línea de visión (checklist ítem 86): hay_linea_de_vision(desde, hasta) muestreo DDA 0.5 m vía VoxelTool.get_voxel (patrón de raycast de M13), integrada en _intentar_interaccion() y detectar_objetivo() — no se interactúa a través de paredes. Fallbacks de _obtener_terrain ampliados (bootstrap carga la escena manualmente).
+- Persistencia ISaveProvider M59 sección "npc" (diseño §5): visitantes/llegadas/partidas/avisos/enfriamientos/hogares; IDs huérfanos eliminados con log al cargar.
+- Test scripts/npc/test_mudanzas.gd: catálogo, ciclo completo de mudanza con señales, cancelación en ambas fases, partida con enfriamiento (vencimiento simulado), línea de visión (aire libre/bajo tierra/short-circuit), persistencia → **0 fallos**.
+- Regresiones: test_amistad M20 14/0, test_autosave M59 0 fallos.
+- Checklist: 9 ítems [x]. Progreso 23→32/131.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Indicador/burbuja visual de mudanza y aviso (M53) y casas de mudanza visibles (M17/M18): señales listas.
+- Rutinas/agenda jugable (M64) y comportamiento M64: rutinas en los perfiles listas para su agenda.
+- 14 perfiles del catálogo: 5 hoy (9 restantes, contenido narrativo con dueño).
+- Mudanza física del vecino al llegar (spawn/casa 3D): la lógica de población emite vecino_llego; el spawn real depende de M17/M18 (casas) y M64.
+
+### Hallazgos ajenos (no tocados, tienen dueño)
+- scripts/interacciones/interaction_manager.gd tiene errores de parse en headless (vars dx/dz/p sin tipo inferible): módulo en curso de otro agente (M70). No lo toqué.
+
+### Recomendaciones para el próximo agente
+- M64: consumir obtener_activos() + perfil.rutina_diaria + hogar_de() para la agenda; respetar puede_avisar_partida().
+- M53: burbuja de mudanza escuchando mudanza_propuesta, indicador de partida con aviso_partida.
+- M17/M18: al existir casas, conectar _asignar_hogar con la posición real de la parcela.

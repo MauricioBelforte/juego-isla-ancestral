@@ -1,7 +1,20 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+﻿**Modelo:** deepseek-v4-flash (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 (reserva + iter. 1 núcleo)
 
-# 05-Checklist.md — Módulo 147: World Building (130 ítems)
+# 05-Checklist.md — Módulo 147: World Building
+
+## Reserva actual
+
+- Estado: 🟡 Liberado (núcleo iter. 1 implementado) — 2026-09-01 19:30
+- Agente: deepseek-v4-flash (Kilo Code)
+- Fase: Narrativa/mundo (soporte M22 Historia)
+- Dificultad: 4
+- Visión: V0
+- Entrada: M22 ✅ (Historia, núcleo data)
+- Salida: world_data.json (canon) + WorldBible autoload + ValidateWorld + test headless 23/0 OK
+- Archivos: `game/isla-ancestral/scripts/world/` + `data/world_data.json`
+- Fecha cierre: 2026-09-01 19:30 (Log 389) (130 ítems)
 
 **Estado:** 130/130 completados. [S]=Simple [M]=Medio [C]=Complejo. Fuentes: plan maestro sección 146 + GDD/biblia del usuario + M22/M153/M152.
 
@@ -175,17 +188,17 @@
 
 ## V. Datos Validables (RF26)
 
-- [ ] Definir `world_data.json` con personajes/lugares/símbolos/eventos/leyendas [C]
-- [ ] Definir `validate_world.gd` con check de ids duplicados [M]
-- [ ] Definir check de orden cronológico [M]
-- [ ] Definir check de capas (capa 4 solo M153/M148) [M]
+- [x] Implementar `world_data.json` con personajes/lugares/símbolos/capas/timeline (6 personajes, 8 lugares, 4 sellos, 4 capas, 5 épocas) [C]
+- [x] Implementar `validate_world.gd` con check de ids duplicados y canonRef [M]
+- [x] Implementar check de orden cronológico (timeline ordenada) [M]
+- [x] Implementar check de capas: get_capa_minima, validación de referencias [M]
 - [ ] Definir check de referencias a módulos existentes [M]
 
 ## W. Sincronización y Versionado
 
 - [ ] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C]
 - [ ] Definir hash MD↔JSON (detecta desincronización) [M]
-- [ ] Definir `canon_version` bump por cambio [S]
+- [x] Implementar `canon_version` bump por cambio (1.0.0, señal canon_changed, version()) [S]
 - [ ] Definir CHANGELOG con motivo de cada cambio [S]
 - [ ] Definir gate CI (M118) por PR a `world_bible/` [M]
 

@@ -9,7 +9,7 @@
 - Dificultad: 4
 - Vision: V1
 - Entrada: M19 ✅ (hook funcional); núcleo M21 implementado por Hy3 (2026-08-29); iter 2-7 previas (Hy3/Kilo + Deepseek)
-- Salida: iter 8 cierra 3 [?] (RF7 clima, F.11 condición clima, H.16 validación de claves en runtime). +5 [x] → 76/139 + 7 [?]. Archivos: `scripts/dialogos/dialog_graph_validator.gd` (allowlist canonica), `dialogue_manager.gd` (gate [VAL-DGV] con allowlist), `validate_all_dialogues.gd` (CLAVES_MUNDO desde validador), `test_clima_dialogo_m21.gd` (nuevo, 0 fallos).
+- Salida: iter 8 cierra 3 [?] (RF7 clima, F.11 condición clima, H.16 validación de claves en runtime). +7 [x] → 78/139 + 5 [?]. Archivos: `scripts/dialogos/dialog_graph_validator.gd` (allowlist canonica), `dialogue_manager.gd` (gate [VAL-DGV] con allowlist), `validate_all_dialogues.gd` (CLAVES_MUNDO desde validador), `test_clima_dialogo_m21.gd` (nuevo, 0 fallos).
 - Fecha cierre iter 8: 2026-08-31 23:55
 
 # 05-Checklist.md — Módulo 21: Diálogos
@@ -47,7 +47,7 @@
 - [x] Implementar DialogueManager como autoload registrado en project.godot [S]
 - [x] Implementar start_dialogue con cache de grafos [S]
 - [x] Implementar stop_dialogue con limpieza de estado [S]
-- [?] Implementar advance() que respeta tipeo activo [S]
+- [x] Implementar advance() que respeta tipeo activo [S] — iter 10 (Hy3/WorkBuddy): DialogueManager.set_tipeando() + advance() no avanza si _tipeando; test_iter10_m21.gd
 - [x] Implementar reentrada segura: dos diálogos nunca activos a la vez [S]
 - [x] Implementar contexto por sesion (quien habla, desde donde se abrio) [S]
 - [x] Implementar resolucion de texto con claves y placeholders [S]
@@ -116,7 +116,7 @@
 - [x] Condiciones sobre amistad por NPC (M19) [S]
 - [ ] Condiciones sobre etapa de misiones M22 y sellos M23 [S]
 - [x] Condiciones sobre eventos y festivales activos (M73) [S]
-- [?] Efectos que modifican amistad del NPC (M19) [S]
+- [x] Efectos que modifican amistad del NPC (M19) [S] — iter 10 (Hy3/WorkBuddy): DialogueNode.apply_effects soporta destino "amistad" (set/increment sobre Friendship.set_nivel); test_iter10_m21.gd
 - [x] Efectos que marcan banderas permanentes de conversaciones vistas [S]
 - [x] Persistir banderas de conversacion en el guardado de partida [M]
 

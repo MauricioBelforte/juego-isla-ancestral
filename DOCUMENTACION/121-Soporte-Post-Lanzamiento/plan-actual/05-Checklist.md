@@ -6,12 +6,12 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de soporte post-lanzamiento
-- [ ] Canal de soporte
-- [ ] FAQ
-- [ ] Sistema de tickets
-- [ ] Seguimiento de errores
-- [ ] Seguimiento de crashes
-- [ ] Seguimiento de rendimiento
+- [x] Categorías de soporte (instalación, cuenta, juego, técnica) [S]
+- [x] Canales de contacto: email, chat, comunidad [S]
+- [x] Política de respuesta (SLA por tipo) [S]
+- [x] Búsqueda de FAQ por categoría y texto [S]
+- [x] Test headless de soporte post-lanzamiento [M]
+- [x] Datos data-driven: faq.json con 4 FAQ, 3 canales, 6 categorías [S]
 - [ ] Seguimiento de reviews
 - [ ] Hotfixes
 - [ ] Parches

@@ -263,3 +263,78 @@ En builds release los `print` se eliminan o se compilan condicionados (`if OS.is
 ### Recomendaciones finales
 - Los 6 [?] con dueño (M.2) requieren M14/M45/M38/M52/M91 con núcleo. M16 está funcional y bien testeado; los pendientes son integraciones cross-module legítimas.
 - Al retomar M16, empezar por la integración M14 (RF17 pergaminos) que es la más valiosa y desbloquea economía.
+
+---
+
+## Notas del Agente — Iteración 4 RF14 tiendas venden pergaminos (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 21:15:00
+**Estado:** Parcial (RF14 implementado + FIX de flujo; módulo liberado 🟡)
+
+### Lo que hice
+- RF14 (cierra el [?]): la tienda general vende `pergamino_rec_tela_lino` (stock 1/día — cozy) — el único rec_id con `origen: compra` y `precio_pergamino: 25` en balance/crafting.json.
+- **FIX del flujo de pergaminos (núcleo M16)**: `usar_pergamino()` tenía PREFIJO `pergamino_rec_` que recortaba el `rec_` del rec_id ("pergamino_rec_tela_lino" → buscaba rec_id "tela_lino" → receta NUNCA encontrada → ningún pergamino funcionó jamás). Corregido a PREFIJO `pergamino_` → "rec_tela_lino" ✓.
+- Test test_pergaminos_tienda.gd: tienda vende pergamino (RF14) + flujo completo comprar→usar→aprender + contrato núcleo (usar_pergamino NO descuenta inventario — lo hace M14 via use_item) + idempotencia honesta → **0 fallos**.
+- Regresiones: test_tiendas M39 0 fallos (26 checks), test_migracion M57 0 fallos.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- El descuento real del pergamino del inventario: el contrato del núcleo lo delega a M14 vía evento use_item — la emisión desde la UI de compra es con dueño M53/M39.
+- Más pergaminos en tiendas: rec_tela_lino es la única receta con origen "compra"; nuevas recetas con precio_pergamino entrarán al stock con el mismo patrón.
+- Integración completa M14 use_item → usar_pergamino (RF17 [?]): requiere la emisión en M14 (dueño M14/ox-alpha) — documentado.
+
+### Recomendaciones para el próximo agente
+- M53/M39: al vender desde UI, agregar el item pergamino al inventario (la compra de la tienda ya funciona via M39) y al usarlo llamar Crafting.usar_pergamino(item_id) + remover el item.
+- M14: emitir use_item → el flujo de consumo completo se activará.
+
+
+---
+
+## Notas del Agente — Iteración 5 RF17 integración M14 (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01 23:15:00
+**Estado:** Parcial (RF17 cerrado; módulo liberado 🟡 — 5 [?] restantes todos con dueño ajeno)
+
+### Lo que hice
+- RF17 (cierra el [?]): M14 (Inventario) emite señal nueva `item_usado(item_id, contexto)` — aditiva al núcleo de ox-alpha. Crafting._ready conecta el puente: item_id con prefijo `pergamino_rec_` → usar_pergamino(item_id) → aprende receta → remover_items (consume el pergamino). Si la receta ya se conoce, el pergamino NO se consume (honesto cozy, coherente con aprender_desde_pergamino).
+- Test ampliado (test_pergaminos_tienda.gd): flujo RF17 completo via item_usado con reset de recetas conocidas via restore_save_data (clave "recetas_conocidas" del núcleo) → **0 fallos**.
+- Checklist: [?] RF17 → [x]. Progreso 35→37/147 (25+12 con los RF14/RF17 marcados). [?] restantes: 4 (RF9 preview M45, RF12 M91/M52, RF3 feedback dorado — todos visuales/ajenos).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los 4 [?] restantes son visuales/ajenos (M45 preview, M91 SFX, M52 VFX, feedback dorado) — con dueños.
+
+### Recomendaciones para el próximo agente
+- M53: la UI de inventario puede usar el patrón inv.item_usado.emit(item_id, contexto) para consumibles — Crafting ya filtra solo pergaminos.
+- El fix del prefijo (iter. 4) + RF17 (iter. 5) completan el ciclo de pergaminos: comprar → inventario → usar → aprender → consumir.
+
+---
+
+## Notas del Agente — Iteración 6 revisión y cierre de núcleo (Step 3.7 Flash / Kilo Code)
+
+**Modelo:** Step 3.7 Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 01:47
+**Estado:** Parcial — núcleo verificado en código, tests headless no ejecutados (sin godot en PATH), módulo liberado a 🟡 con 6 [?] honestos.
+
+### Lo que hice
+- Revisión estática del núcleo implementado: `crafting_service.gd` (325 líneas), `crafting_recipe.gd`, `crafting_station.gd`, `crafting_ui.gd`, `crafting_feedback.gd` y `test_crafting.gd` (237 líneas).
+- Confirmado en código: RF5 estacional (`temporadas`, `es_fabricable_ahora`, `recetas_por_estacion` filtra por temporada), RF14 pergaminos (`usar_pergamino` con prefijo `pergamino_`, señal `pergamino_consumido`), RF12 feedback procedural (`CraftingFeedback` hijo del servicio, SFX WAV + CPUParticles2D), RF9 preview V1 (swatch hash en CraftingUI), RF17 integración M14 (`item_usado` conectado en `_ready`, consumo del pergamino si aprende).
+- Confirmado en código: persistencia M59 (`build_save_data`/`restore_save_data` con clave `"crafting"`), rollback honesto (`_consume_and_deliver` no implementado como método separado, pero `craft` hace reembolso explícito si `add_item` devuelve sobrante), experimentación sin consumo (`experimentar` no llama a `remover_items`).
+- Actualización de registros multiagente: CHECKLIST-GLOBAL, ESTADO-PARALELO, guía 08 y 05-Checklist con reserva Log 443.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No ejecuté `test_crafting.gd` headless porque `godot` no está en PATH en este entorno.
+- No marqué masivamente items del 05-Checklist como [x] sin evidencia de test ejecutado (lección Log 433).
+- Los 6 [?] con dueño ajeno permanecen sin resolver: RF9 preview 3D (M45), RF12 SFX bus (M91), RF12 VFX avanzados (M52), RF3 feedback dorado (parcial), RF14 más pergaminos en tiendas (M38).
+
+### Intentos fallidos / decisiones
+- Intenté ejecutar tests headless con `godot --headless ...` → `godot` no encontrado en PATH. Decisión: no bloquear el bucle; avanzar con documentación y release honesto.
+- Decisión de no marcar items [x] masivamente: los items de diseño/secciones A-L en su mayoría ya están documentados en plan-actual, pero la verificación de implementación corresponde a tests ejecutados, no a lectura estática.
+
+### Recomendaciones para el próximo agente
+- Verificar ejecución de `test_crafting.gd` en entorno con Godot CLI; debería mantener 0 fallos según iteraciones anteriores.
+- Enfocarse en los 6 [?] con dueño si los módulos dependientes (M45, M52, M91, M38) avanzan.
+- Considerar marcar items del 05-Checklist como [x] solo después de verificar tests o implementación explícita.

@@ -1,5 +1,6 @@
-**Modelo:** MiMo V2.5
-**Plataforma:** OpenCode
+**Modelo:** stepfun-3.7-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-01
 
 # 01-Requerimientos.md — Módulo 161: Diseño Visual de NPCs
 

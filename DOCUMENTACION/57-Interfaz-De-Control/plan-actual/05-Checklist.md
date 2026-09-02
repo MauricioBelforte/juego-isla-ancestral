@@ -135,13 +135,13 @@
 - [ ] Perfil por defecto para el mando Deck [S]
 - [ ] Focus y prompts del Deck con iconos de mando [S]
 - [x] Sin overlays táctiles en PC [S]
-- [ ] Capa de acciones lista para botones táctiles futuros [S]
+- [x] Capa de acciones lista para botones táctiles futuros [S] — ControlInput como única capa (RF2) tras la migración de gameplay
 - [x] Decisión táctil registrada en 02-Analisis (alternativa descartada) [S]
 
 ## J. Integración y rendimiento (10)
 
 - [ ] M34 lee acciones y ejes vía InputLayer [S]
-- [ ] M13/M17 usan "interactuar"/"usar herramienta" [S]
+- [x] M13/M17 usan "interactuar"/"usar herramienta" [M] — glm-5.3-flash 2026-09-01: player.gd (cierre inventario) y simple_walk.gd (movimiento+salto) migrados a ControlInput con fallback headless; acción saltar agregada al InputMap; test_migracion_m57 0 fallos
 - [ ] M46 hostea el menú de opciones de control [S]
 - [ ] M58 remapeo completo (accesibilidad) [S]
 - [ ] M91 vibración global desde el mismo JSON [S]
