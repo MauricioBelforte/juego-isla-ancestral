@@ -1,49 +1,28 @@
 # ─────────────────────────────────────────────
-# Isla Ancestral — .gitignore (proyecto Unity)
-# Base: gitignore oficial de Unity (github/gitignore)
-# Adaptado: la carpeta Logs/ de la raíz se VERSIONA
-# (contiene los logs del protocolo de documentación)
+# Isla Ancestral — .gitignore (Godot 4.x)
 # ─────────────────────────────────────────────
 
 # =============================================
-# Unity — Archivos generados
+# Godot — Archivos generados
 # =============================================
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Uu]ser[Ss]ettings/
-/[Mm]emoryCaptures/
-/[Rr]ecordings/
-/[Ss]creenshots/
-/UIElementsSchema/
+.godot/
+*.import
+*.translation
 
-# Logs de Unity dentro de Assets (compilación/editor)
-/Assets/**/[Ll]ogs/
-/Assets/**/[Ll]og.txt
+# Godot — metadatos de import sueltos
+*.uid
 
-# Crash reports de Unity (runtime)
-/[Cc]rash[Rr]eport[Ii]nfo/
-/[Cc]rash[Rr]eport/
-
-# Accelerator / licencias locales
-/[Aa]ccelerator/[Ll]ogs/
+# Godot — addons (se instalan via AssetLib, no se versionan)
+game/isla-ancestral/addons/
 
 # =============================================
-# Unity — Plataformas (si se agregan builds específicos)
+# Builds
 # =============================================
-# iOS
-/*.apk
-/*.aab
-/*.unitypackage
-/*.app
-
-# Android
-[Aa]ndroid/AssetsPlugins/
+build/
+Builds/
 
 # =============================================
-# Visual Studio / IDE
+# IDE / Editor
 # =============================================
 .vs/
 .vscode/
@@ -53,62 +32,16 @@
 *.suo
 *.user
 *.userprefs
-*.pidb
-*.booproj
-*.svd
-*.pdb
-*.mdb
-*.opendb
-*.VC.db
-
-# Rider / ReSharper
-.settings/
-.solution/
-*.resharper
 
 # =============================================
 # Sistema operativo
 # =============================================
-# Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 *.tmp
-
-# macOS
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# =============================================
-# Control de versiones de terceros
-# =============================================
-*.lfs
-LFS/
-
-# =============================================
-# Paquetes locales / cachés (no versionables)
-# =============================================
-/Packages/packages-lock.json.bak
-*.pidb.meta
-
-# =============================================
-# HERAMIENTAS DEL PROTOCOLO — respaldos generados
-# Los backups automáticos de scripts/ NO se versionan
-# =============================================
-/scripts/backups/
-
-# =============================================
-# Agentes y configuraciones locales
-# =============================================
-.agents/
-
-# =============================================
-# Respaldos y scripts temporales
-# =============================================
-*.bak-*
-validate_*.bat
 
 # =============================================
 # Python (scripts de automatización)
@@ -120,54 +53,46 @@ __pycache__/
 venv/
 
 # =============================================
-# Capturas del protocolo de visión (no versionables)
-# Se guardan TODAS en disco durante el desarrollo, pero fuera de git
+# Node.js (MCP servers)
 # =============================================
-**/capturas/
+node_modules/
 
 # =============================================
-# EXCEPCIONES — Carpetas del proyecto que SÍ se versionan
-# =============================================
-!Logs/
-!Obsoletos/
-!DOCUMENTACION/
-# Builds web export (generados, no versionar)
-build/
-
-# =============================================
-# Repositorios embebidos (usar submodule si se necesita)
-# =============================================
-tools/mcp/godot-mcp/
-
-# =============================================
-# Blender - backups automaticos del editor
-# Blender genera .blend1 en cada guardado
-# (backup de la version anterior del .blend)
+# Blender — backups del editor
 # =============================================
 *.blend1
 
 # =============================================
-# Estado local de herramientas de agentes
+# Agentes y configuraciones locales
 # =============================================
+.agents/
+.kilo/
+.gdskills/
 .workbuddy-ai/
+.claude/
+.pre-commit-config.yaml
 
 # =============================================
-# Godot — dependencias de terceros (addons)
-# gdUnit4 es un framework de tests externo (~160 MB); se instala via
-# AssetLib / addons manager, no se versiona. Usar submodule si se quiere pin.
+# Capturas de pantalla (no versionar)
 # =============================================
-game/isla-ancestral/addons/
+**/capturas/
 
 # =============================================
-# Godot — metadatos de import generados por el editor
-# Los .uid se regeneran al importar; los sueltos en raiz son ruido.
-# (los .uid dentro de scripts versionados se mantienen con el script)
+# Herramientas MCP — repos embebidos
 # =============================================
-*.uid
+tools/mcp/godot-mcp/
+tools/mcp/.venv/
 
 # =============================================
-# Scripts sueltos / temporales en la raiz del repo
-# Son archivos de trabajo del agente, no fuente del proyecto.
+# Respaldos y temporales
+# =============================================
+*.bak-*
+Obsoletos/
+scripts/backups/
+validate_*.bat
+
+# =============================================
+# Archivos sueltos de raíz (temporales de agentes)
 # =============================================
 _capture_tier_c.py
 _fix_piramide2.py
@@ -178,33 +103,36 @@ run_m105.ps1
 _gen_aprobado.gd
 _gen_ideal.gd
 _main_aprobado.gd
+isla-modelo.jpg
 isla-modelo-2.jpg
 isla-modelo-3.jpg
-isla-modelo.jpg
 paleta-propuesta-isla.png
 docs/
 .github/
+tmp_*.py
+tmp_*.txt
+corregir_logs.py
+analizar_logs.py
+recover_estado*.py
+patch_m74*.py
+mark_m74_checklist.py
+revert_m74.py
+renombrar_logs.py
+renombrados_logs.json
+tmp_orig_guide.md
+tmp_orig_s6.txt
+fix_*.py
+verify_*.py
+gen_*.py
 
 # =============================================
-# Backups de Blender (ya cubierto arriba, refuerzo explicito)
+# Assets pesados de Blender (usar Git LFS si se necesitan)
 # =============================================
-*.blend1
+*.blend
 
 # =============================================
-# Configuracion local de agentes / hooks (no es fuente del proyecto)
+# EXCEPCIONES — carpetas que SÍ se versionan
 # =============================================
-.claude/
-.pre-commit-config.yaml
-
-# =============================================
-# Probes temporales de colision generados durante QA
-# =============================================
-game/isla-ancestral/_probe_col.gd
-game/isla-ancestral/_probe_col.gd.uid
-game/isla-ancestral/_test_2x.gd.uid
-
-# =============================================
-# Scripts de prueba / experimentacion del agente (no son fuente)
-# =============================================
-tools/mcp/blender-mcp/scripts-prueba/
-
+!Logs/
+!Obsoletos/
+!DOCUMENTACION/
