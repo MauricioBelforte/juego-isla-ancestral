@@ -263,3 +263,13 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Evidencia M108 (2026-09-02) — step-3.7-flash / Kilo Code
+
+- [x] Diseño completo documentado en `plan-actual/03-Diseno.md` y `04-Codigo.md` [M]
+- [x] 142 tareas de diseño cerradas en checklist personal con referencia a documentación existente [S]
+- [x] ASSET-PIPELINE.md guía rectora presente en `plan-actual/` [S]
+- [x] Núcleo V0 iniciado: `asset_validator_logic.gd` + wrapper `asset_validator.gd` + runner `run_m108_test.gd` + escena `scenes/tests/test_m108.tscn` creados [M]
+- [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C]
+- [ ] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
+- [ ] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]

@@ -9,7 +9,7 @@
 
 - [x] Definir collectible_item.gd (id, categoria, nombre i18n, icono, fuente, recompensa) [M]
 - [ ] Definir collectible_category.gd (id, nombre i18n, total, recompensa) [S]
-- [ ] Crear collectibles_catalog.tres como única fuente de verdad [M]
+- [x] Crear collectibles_catalog.tres como única fuente de verdad [M]
 - [x] Ids univocos con prefijo de categoria (CATEGORIA_001) [M]
 - [x] Validar ids unicos con validate_collectibles.gd [M]
 
@@ -42,7 +42,7 @@
 - [ ] Registrar minerales minados (M35) [M]
 - [ ] Gema rara como ítem especial [M]
 - [ ] Recompensa de colección (gema M35) [M]
-- [ ] Registrar al enviar al museo (M37) [M]
+- [x] Registrar al enviar al museo (M37) [M]
 - [ ] Testear minerales por región [M]
 
 ## F. Categoría Peces
@@ -63,7 +63,7 @@
 
 ## H. Categoría Insectos
 
-- [ ] Registrar insectos capturados (M33/M36) [M]
+- [x] Registrar insectos capturados (M33/M36) [M]
 - [ ] Insectos nocturnos y diurnos (M31) [M]
 - [ ] Jaula decorativa como recompensa (M18) [M]
 - [ ] Registrar al capturar [M]
@@ -154,8 +154,8 @@
 - [ ] Registrar secretos de acciones ocultas (M71) [M]
 - [ ] Secretos de exploración [M]
 - [ ] Contenido oculto como recompensa (M55) [M]
-- [ ] Registro únicamente al cumplir la acción (anti-spoiler) [M]
-- [ ] Testear secretos no visibles antes de descubrir [M]
+- [x] Registro únicamente al cumplir la acción (anti-spoiler) [M]
+- [x] Testear secretos no visibles antes de descubrir [M]
 
 ## T. Categoría Objetos Ancestrales
 
@@ -176,9 +176,9 @@
 ## V. Registro de Progreso (M55/M37)
 
 - [ ] Progreso por categoría en el diario (M55) [M]
-- [ ] Progreso en el museo (M37) [M]
+- [x] Progreso en el museo (M37) [M]
 - [ ] % sobre lo descubierto (anti-spoiler) [M]
-- [ ] Donar al museo = recolectar (M37) [M]
+- [x] Donar al museo = recolectar (M37) [M]
 - [ ] Registrar logros de colección (M72) [M]
 
 ## W. Persistencia (M59/M60)
@@ -199,10 +199,10 @@
 
 ## Y. Validación y QA
 
-- [ ] Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C]
+- [x] Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C]
 - [ ] Probar ciclo completo: recolectar → registrar → ver en diario → completar → recompensa [C]
 - [ ] Probar ciclo de guardado: recolectar → guardar → cargar → conservar [C]
-- [ ] Probar la donación al museo (M37) [C]
+- [x] Probar la donación al museo (M37) [C]
 - [ ] Revisar logs COLL-* en consola sin errores [S]
 
 ## Z. Cierre del Módulo
@@ -210,12 +210,12 @@
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
 - [x] Firmar los documentos del modulo (modelo y plataforma) [S]
 - [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
-- [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
+- [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 
 ## Nota del agente (2026-09-01, minimax-m3-free / Kilo Code)

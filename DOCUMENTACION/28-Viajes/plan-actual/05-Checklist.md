@@ -1,5 +1,21 @@
 **Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
 **Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 (iter. 2 — glm-5.3-flash/Kilo Code)
+
+## Reserva actual
+
+- **Módulo:** 28 Viajes
+- **Reservado por:** glm-5.3-flash (Kilo Code)
+- **Estado:** ✅ Liberado — iter. 2 cerrada (Log 517)
+- **Fase:** F7 (producción de contenido)
+- **Dificultad:** 3
+- **Visión:** V0 (sin captura obligatoria; TravelService ya verificado headless)
+- **Entrada:** TravelService autoload ✅ (iter. 1, glm-5.3-flash 2026-09-01); M22✅ M29✅ M32✅ M38✅ M59✅
+- **Salida:** HarborDock/Harbor/EmbarkTrigger + TravelUI capa UI + test_harbor_viajes 26/0 OK
+- **Archivos:** `scripts/viajes/{travel_service,boat_route,harbor_dock,harbor,embark_trigger,travel_ui,test_viajes,test_harbor_viajes}.gd`
+- **Log:** 517
+
+---
 
 # 05-Checklist.md — Módulo 28: Viajes
 
@@ -67,14 +83,14 @@
 
 ## E. Puerto (Harbor) (8)
 
-- [ ] Clase Harbor (Node3D) instanciada por isla de M27 [M]
-- [ ] Lista de docks con HarborDock (Marker3D) y detección de ocupación [M]
-- [ ] find_free_dock con retorno de muelle libre o nulo [M]
-- [ ] lock() y release() de docks con referencia al barco atracado [M]
-- [ ] EmbarkTrigger (Area3D) con prompt "Hablar con el conserje" [S]
-- [ ] Reserva temprana del dock de destino al zarpar [M]
-- [ ] Muelle secundario como respaldo ante ocupación prolongada [M]
-- [ ] Posición de aparición del jugador tras desembarcar [S]
+- [x] Clase Harbor (Node3D) instanciada por isla de M27 [M] — iter. 2: harbor.gd autoload-ready (island_id export, find_free_dock, lock_dock/release_dock, dock_count, occupied_dock_count, get_embark_position); test_harbor 10/10 OK
+- [x] Lista de docks con HarborDock (Marker3D) y detección de ocupación [M] — iter. 2: harbor_dock.gd (lock/release/is_locked/get_boat/dock_locked/dock_released signals); test_harbor validates
+- [x] find_free_dock con retorno de muelle libre o nulo [M] — iter. 2: retorna primer dock no bloqueado, emite no_free_dock si ninguno
+- [x] lock() y release() de docks con referencia al barco atracado [M] — iter. 2: ambas implementadas y testeadas
+- [x] EmbarkTrigger (Area3D) con prompt "Hablar con el conserje" [S] — iter. 2: embark_trigger.gd (body_entered/exited, emitir prompt via EventBus.interaction, abrir_pantalla_viaje)
+- [ ] Reserva temprana del dock de destino al zarpar [M] — pendiente integración M27 (islas reales con Harbour)
+- [ ] Muelle secundario como respaldo ante ocupación prolongada [M] — [?] diseño: espera 10s en data-driven, sin auto-switch; dueño M27
+- [x] Posición de aparición del jugador tras desembarcar [S] — iter. 2: get_embark_position() retorna global_position del primer dock libre (o fallback primer dock)
 
 ## F. Servicio de Viajes (TravelService) (10)
 
@@ -91,14 +107,14 @@
 
 ## G. Interfaz de Viaje (TravelUI) (8)
 
-- [ ] Pantalla de reserva con lista de destinos, coste y horario [M]
-- [ ] Botón de abordar deshabilitado hasta completar validaciones [S]
-- [ ] Botón de cancelar visible hasta zarpar [S]
-- [ ] Barra de progreso "Llegando a [isla]..." durante SAILING [M]
-- [ ] Aviso amistoso de retraso por clima con diálogo del capitán [S]
-- [ ] Confirmación explícita del coste del viaje rápido (M69) [S]
-- [ ] Notificación de devolución tras cancelar [S]
-- [ ] set_interactive(false) durante transiciones (sección 8 AGENTS.md) [S]
+- [x] Pantalla de reserva con lista de destinos, coste y horario [M] — iter. 2: TravelUI.show_reservation_screen(harbor_id) emite opciones desde TravelService.get_available_destinations(); bridge a M53 vía EventBus.ui.travel_ui_cambio
+- [ ] Botón de abordar deshabilitado hasta completar validaciones [S] — dueño M53 (capa UI)
+- [ ] Botón de cancelar visible hasta zarpar [S] — dueño M53
+- [ ] Barra de progreso "Llegando a [isla]..." durante SAILING [M] — iter. 2: show_travel_progress(progress, label) implementado; bridge M53
+- [ ] Aviso amistoso de retraso por clima con diálogo del capitán [S] — iter. 2: show_weather_delay_notice(seconds, reason) implementado
+- [ ] Confirmación explícita del coste del viaje rápido (M69) [S] — dueño M69
+- [ ] Notificación de devolución tras cancelar [S] — iter. 2: show_refund_notice(coins) con auto-cerrar 2s
+- [ ] set_interactive(false) durante transiciones (sección 8 AGENTS.md) [S] — iter. 2: _set_interactivo disponible; M53 consumirá
 
 ## H. Flujos del viaje (10)
 
@@ -163,11 +179,55 @@
 
 ## M. Documentación y testings (8)
 
-- [ ] 01-Requerimientos.md creado y firmado [S]
-- [ ] 02-Analisis.md con alternativas y decisiones justificadas [S]
-- [ ] 03-Diseno.md con arquitectura, flujos y contratos API [S]
-- [ ] 04-Codigo.md con rutas, firmas clave y logs [S]
-- [ ] Este 05-Checklist.md con todos los ítems del módulo [S]
-- [ ] Copia idéntica completada en plan-actual/ [S]
-- [ ] Casos de prueba de puerto ocupado, clima y cancelación cubiertos en diseño [M]
-- [ ] Verificación de que el diseño cumple la Definición de Completado (sección 21.6 AGENTS.md) [M]
+- [x] 01-Requerimientos.md creado y firmado [S] — iter. 1 Deepseek
+- [x] 02-Analisis.md con alternativas y decisiones justificadas [S] — iter. 1 Deepseek
+- [x] 03-Diseno.md con arquitectura, flujos y contratos API [S] — iter. 1 Deepseek
+- [x] 04-Codigo.md con rutas, firmas clave y logs [S] — iter. 1+2 glm-5.3-flash
+- [x] Este 05-Checklist.md con todos los ítems del módulo [S] — iter. 2 glm-5.3-flash
+- [x] Copia idéntica completada en plan-actual/ [S] — iter. 1+2
+- [x] Casos de prueba de puerto ocupado, clima y cancelación cubiertos en diseño [M] — iter. 2: test_harbor_viajes.gd cubre puerto ocupado; test_viajes.gd cubre clima/cancelación
+- [x] Verificación de que el diseño cumple la Definición de Completado (sección 21.6 AGENTS.md) [M] — iter. 2: test headless 0 fallos; DoD cumplido para iter. 2
+
+---
+
+## Notas del Agente
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 06:15
+**Estado:** Liberado (iter. 2 cerrada)
+
+### Lo que hice en iter. 2 (Log 517)
+- **HarborDock.gd** (40 l�neas): lock(boat)/release()/is_locked()/get_boat() + se�ales dock_locked/dock_released. Duck-typing: nodes without class_name.
+- **Harbor.gd** (70 l�neas): find_free_dock(), lock_dock(boat)/release_dock(boat)/is_dock_available(), dock_count()/occupied_dock_count()/get_embark_position(). Recolecta hijos HarborDock en _ready.
+- **EmbarkTrigger.gd** (50 l�neas): Area3D con body_entered/exited, emite prompt via EventBus.interaction.prompt_visible/hidden, abre pantalla viaje v�a TravelUI.show_reservation_screen.
+- **TravelUI.gd** (95 l�neas): CanvasLayer con show_reservation_screen(harbor_id)/show_travel_progress/show_weather_delay_notice/show_refund_notice/set_interactive. Bridge a M53 v�a EventBus.ui.travel_ui_cambio.
+- **test_harbor_viajes.gd** (180 l�neas): 26 checks � HarborDock lock/release, Harbor multi-dock, TravelUI screens, flujo integrado. 0 fallos.
+
+### Lo que NO est� resuelto (pendientes con due�o)
+- Integraci�n M27: Harbor no est� vinculado a islas reales (requiere M27 islas)
+- UI completa M53: botones de reserva/cancelaci�n, barra visual de progreso
+- Boat escena V2: Node3D con movimiento por curva, part�culas, colisi�n
+- Optimizaci�n secci�n K: precarga M63, culling, budget frame
+- Audio/VFX secci�n L: olas, silbato, gaviotas, m�sica, lluvia, faroles
+- Reserva temprana dock destino al zarpar (E6): requiere integraci�n M27
+- Muelle secundario (E7): dise�o pendiente [?]
+
+### Decisiones clave
+1. Sin class_name en autoloads (Harbor, TravelUI) � convenci�n proyecto �9.17. Solo BoatRoute tiene class_name porque es Resource.
+2. Duck-typing en TODO: TravelService usa get_node_or_null para WorldState/EconomyManager/Weather/GameTime/TimeCalendar. Si no existen, fallback seguro.
+3. TravelUI no tiene l�gica de gameplay: solo refleja estado y emite se�ales. M53 consumir� EventBus.ui.travel_ui_cambio.
+4. Harbor recolecta docks hijos en _ready via duck-typing (has_method "lock"/"release"). No requiere escenas pre-configuradas para tests.
+
+### Validaci�n
+- Compilaci�n: 0 errores tras iter. 2 (solo warnings pre-existentes del proyecto).
+- test_harbor_viajes.gd: 26/26 OK, exit 0.
+- test_viajes.gd (regresi�n): 0 fallos, exit 0.
+- test_progresion.gd (M71 regresi�n): 0 fallos, exit 0.
+- Boot runtime: [M28] Rutas cargadas: 4, sin errores.
+
+### Recomendaciones para el pr�ximo agente
+- Para integrar M27: cada isla debe instanciar un Harbor con docks hijos; el harbor_id debe coincidir con island_id.
+- Para M53: escuchar EventBus.ui.travel_ui_cambio y mostrar paneles seg�n tipo (RESERVATION/PROGRESS/WEATHER_DELAY/REFUND/HIDDEN).
+- Para Boat V2: reutilizar BoatRoute.sample_position(t) y _process delta para movimiento; agregar part�culas con M51.
+- El flujo de reserva temprana de dock destino requiere llamar Harbor.lock_dock() desde TravelService._zarpar().

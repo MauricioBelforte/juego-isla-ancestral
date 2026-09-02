@@ -1,0 +1,58 @@
+{
+	"schema_version": 1,
+	"vehiculos": [
+		{
+			"id": "barco",
+			"tipo": "agua",
+			"nombre": "Barquita de Aurora",
+			"velocidad_max": 12.0,
+			"velocidad_crucero": 6.0,
+			"giro": 1.6,
+			"frenado": 4.0,
+			"altitud_max": 0.0,
+			"profundidad_max": 0.0,
+			"baul_slots": 12,
+			"tiene_reversa": true
+		},
+		{
+			"id": "dirigible",
+			"tipo": "aire",
+			"nombre": "Globo del Viento",
+			"velocidad_max": 15.0,
+			"velocidad_crucero": 8.0,
+			"giro": 1.0,
+			"frenado": 3.0,
+			"altitud_max": 60.0,
+			"profundidad_max": 0.0,
+			"baul_slots": 8,
+			"tiene_reversa": true
+		},
+		{
+			"id": "submarino",
+			"tipo": "subagua",
+			"nombre": "Perla Ancestral",
+			"velocidad_max": 8.0,
+			"velocidad_crucero": 4.0,
+			"giro": 1.2,
+			"frenado": 3.5,
+			"altitud_max": 0.0,
+			"profundidad_max": -40.0,
+			"baul_slots": 10,
+			"tiene_reversa": true
+		},
+		{
+			"id": "locomotora",
+			"tipo": "riel",
+			"nombre": "Gran Vapor (plantilla M68)",
+			"velocidad_max": 20.0,
+			"velocidad_crucero": 20.0,
+			"giro": 0.0,
+			"frenado": 6.0,
+			"altitud_max": 0.0,
+			"profundidad_max": 0.0,
+			"baul_slots": 16,
+			"tiene_reversa": false,
+			"condicional": "M68"
+		}
+	]
+}

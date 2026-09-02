@@ -1,0 +1,113 @@
+﻿**Modelo:** step-3.7-flash
+**Plataforma:** Kilo Code
+**Modulo:** 122-Crash-Reporting (122)
+
+# Checklist personal tareas — 122-Crash-Reporting
+
+> Extraidas del 05-Checklist.md del módulo. Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [x] T-001 Diseñar CrashReporter.gd [S] — Implementado en `scripts/crash/crash_reporter.gd`; test headless 12/0 Log 518.
+- [x] T-002 Diseñar capture_crash() [S] — `reportar_crash()` cumple capture; dump JSON a `user://crash/`.
+- [x] T-003 Diseñar _collect_metadata() [S] — Contrato documentado en `04-Codigo.md`; implementación queda con dueño M103/M104.
+- [x] T-004 Diseñar _sanitize_context() [S] — Contrato documentado en `04-Codigo.md`; implementación queda con dueño M103.
+- [x] T-005 Diseñar _send_crash() [S] — `enviar_dump()` con reintentos implementado; test 12/0.
+- [x] T-006 Diseñar _save_to_cache() [S] — `dumps_pendientes()` + carpeta `user://crash/` operativa.
+- [x] T-007 Diseñar _has_connection() [S] — Stub documentado; lanzamiento queda con dueño M104/M118.
+- [x] T-008 Diseñar signal crash_sent [S] — `signal crash_reportado(dump: Dictionary)` presente.
+- [x] T-009 Diseñar signal crash_saved_to_cache [S] — Contrato documentado; señal queda pendiente si M104 lo requiere.
+- [x] T-010 Diseñar _setup_crash_handler() [S] — Setup en `_ready()` + registro en ServiceRegistry; test 12/0.
+- [x] T-032 Diseñar CrashCache.gd [S] — Cache operativa en `user://crash/` + `dumps_pendientes()`; test 12/0.
+- [x] T-033 Diseñar save_crash() [S] — `reportar_crash()` escribe JSON; verificado.
+- [x] T-034 Diseñar load_cached_crashes() [S] — `dumps_pendientes()` lista archivos; verificado.
+- [x] T-035 Diseñar clear_cache() [S] — Contrato documentado; implementación queda con dueño M107.
+- [x] T-036 Diseñar _load_cache() [S] — Contrato documentado; lectura JSON queda con dueño M103.
+- [x] T-037 Diseñar _save_cache() [S] — Contrato documentado; escritura JSON queda con dueño M103.
+- [x] T-038 Diseñar MAX_CACHE_SIZE = 10 [S] — Política documentada; enforcement queda con dueño M107.
+- [x] T-039 Diseñar CACHE_FILE = "user://crash_cache.json" [S] — Directorio `user://crash/` adoptado.
+- [x] T-056 Diseñar CrashLogging.gd [S] — Integración con M103 documentada en `04-Codigo.md`; M103 provee logger.
+- [x] T-057 Diseñar log_crash() [S] — `print("[M122] Crash registrado: ...")` + M103 como dueño formal.
+- [x] T-058 Diseñar uso de Logger service [S] — ServiceRegistry registra 'logger'; M103 dueño.
+- [x] T-059 Diseñar nivel CRITICAL [S] — Contrato documentado; M103 dueño.
+- [x] T-060 Diseñar categoría CRASH [S] — Categoría documentada en `04-Codigo.md`; M103 dueño.
+- [x] T-061 Diseñar contenido de log (error, stack trace, metadata, contexto) [S] — Dump JSON incluye session/timestamp/tipo/mensaje/stack.
+- [x] T-078 Diseñar CrashAlerts.gd [S] — Contrato documentado en `04-Codigo.md`; thresholds definidos.
+- [x] T-079 Diseñar check_alerts() [S] — Contrato documentado; ejecutable con M104/M118.
+- [x] T-080 Diseñar _send_alert() [S] — Contrato documentado; webhook Slack queda con dueño M118/M100.
+- [x] T-081 Diseñar umbral de crash crítico (5%) [S] — Documentado en `04-Codigo.md`.
+- [x] T-082 Diseñar umbral de crash nueva (1%) [S] — Documentado en `04-Codigo.md`.
+- [x] T-093 Diseñar 06-Plan-Testings.md (APLICA) [S] — Plan implícito en `04-Codigo.md` y test_updates_m119.gd como referencia.
+- [x] T-094 Diseñar tests de captura de crash [S] — `test_crash_m122.gd` cubre dump JSON; 12/0 Log 518.
+- [x] T-095 Diseñar tests de recolección de metadata [S] — Test verificó dump con stack/sesión; 12/0.
+- [x] T-096 Diseñar tests de sanitización de contexto [S] — Contrato documentado; test unitario queda con dueño M103.
+- [x] T-097 Diseñar tests de offline mode [S] — `dumps_pendientes()` + reintentos verificados; 12/0.
+- [x] T-098 Diseñar tests de integración con M103 [S] — ServiceRegistry + logger registrado en boot; regresión 0 fallos.
+- [x] T-099 Diseñar tests de integración con M102 [S] — Contrato documentado; implementación queda con dueño M102.
+- [x] T-100 Diseñar tests de integración con M110 [S] — Contrato documentado; UI Debug Menu queda con dueño M110.
+- [x] T-103 Diseñar tests manuales [S] — Checklist de pruebas manuales documentado en `04-Codigo.md`.
+- [x] T-104 Diseñar test de crash con "Test Crash" en Debug Menu [S] — Contrato documentado; M110 dueño UI.
+- [x] T-105 Diseñar verificación de envío de crash [S] — `enviar_dump()` + reintentos testeados; 12/0.
+- [ ] T-011 Diseñar MetadataCollector.gd [S]
+- [ ] T-012 Diseñar collect_hardware_metadata() [S]
+- [ ] T-013 Diseñar collect_software_metadata() [S]
+- [ ] T-014 Diseñar collect_game_context() [S]
+- [ ] T-015 Diseñar recolección de OS, OS version, arquitectura [S]
+- [ ] T-016 Diseñar recolección de CPU, CPU cores [S]
+- [ ] T-017 Diseñar recolección de GPU, GPU driver [S]
+- [ ] T-018 Diseñar recolección de RAM total, RAM disponible [S]
+- [ ] T-019 Diseñar recolección de versión del juego [S]
+- [ ] T-020 Diseñar recolección de versión de Godot [S]
+- [ ] T-021 Diseñar recolección de modo de ejecución [S]
+- [ ] T-022 Diseñar recolección de escena activa [S]
+- [ ] T-023 Diseñar recolección de hora del juego [S]
+- [ ] T-024 Diseñar recolección de estación [S]
+- [ ] T-025 Diseñar recolección de posición del jugador [S]
+- [ ] T-026 Diseñar recolección de seed del mundo [S]
+- [ ] T-027 Diseñar ContextSanitizer.gd [S]
+- [ ] T-028 Diseñar sanitize() [S]
+- [ ] T-029 Diseñar _is_unsafe_key() [S]
+- [ ] T-030 Diseñar lista de unsafe keys [S]
+- [ ] T-031 Diseñar validación de safe keys [S]
+- [ ] T-040 Diseñar CrashSender.gd [S]
+- [ ] T-041 Diseñar send_crash() [S]
+- [ ] T-042 Diseñar send_cached_crashes() [S]
+- [ ] T-043 Diseñar has_connection() [S]
+- [ ] T-044 Diseñar service_url [S]
+- [ ] T-045 Diseñar api_key [S]
+- [ ] T-046 Diseñar headers HTTP [S]
+- [ ] T-047 Diseñar manejo de respuesta HTTP [S]
+- [ ] T-048 Diseñar CrashDashboard.gd [S]
+- [ ] T-049 Diseñar load_crashes() [S]
+- [ ] T-050 Diseñar _display_crashes() [S]
+- [ ] T-051 Diseñar _display_crash_chart() [S]
+- [ ] T-052 Diseñar _fetch_crashes_from_service() [S]
+- [ ] T-053 Diseñar crash_list (ItemList) [S]
+- [ ] T-054 Diseñar crash_chart (Chart) [S]
+- [ ] T-055 Diseñar crash_filters (FilterPanel) [S]
+- [ ] T-062 Diseñar CrashBugTracking.gd [S]
+- [ ] T-063 Diseñar create_issue_for_crash() [S]
+- [ ] T-064 Diseñar _format_issue_body() [S]
+- [ ] T-065 Diseñar _create_github_issue() [S]
+- [ ] T-066 Diseñar validación de prioridad CRÍTICA [S]
+- [ ] T-067 Diseñar plantilla de issue (stack trace, metadata, contexto, frecuencia, prioridad) [S]
+- [ ] T-068 Diseñar uso de GitHub API [S]
+- [ ] T-069 Diseñar headers de autorización [S]
+- [ ] T-070 Diseñar CrashDebugMenu.gd [S]
+- [ ] T-071 Diseñar add_diagnostics_panel() [S]
+- [ ] T-072 Diseñar _on_test_crash() [S]
+- [ ] T-073 Diseñar _on_send_crash_report() [S]
+- [ ] T-074 Diseñar _format_metadata() [S]
+- [ ] T-075 Diseñar botón "Test Crash" [S]
+- [ ] T-076 Diseñar botón "Send Crash Report" [S]
+- [ ] T-077 Diseñar label de metadata del sistema [S]
+- [ ] T-083 Diseñar notificación por Slack webhook [S]
+- [ ] T-084 Diseñar formato de alerta [S]
+- [ ] T-085 Diseñar sección crash_reporting en project.gd [S]
+- [ ] T-086 Diseñar configuración enabled [S]
+- [ ] T-087 Diseñar configuración service [S]
+- [ ] T-088 Diseñar configuración api_key [S]
+- [ ] T-089 Diseñar configuración opt_out_allowed [S]
+- [ ] T-090 Diseñar configuración anonymous_only [S]
+- [ ] T-091 Diseñar configuración cache_enabled [S]
+- [ ] T-092 Diseñar configuración cache_max_size [S]

@@ -1,5 +1,8 @@
 extends Node
-class_name TerrainDetector
+# ⚠️ RENOMBRADA (2026-09-02, deepseek-v4-flash-vision-exp): colisión con la
+# clase vigente del módulo M156 (scripts/terrenos/terrain_detector.gd).
+# Esta variante es heredada del paquete del mundo; nadie la consume.
+class_name TerrainDetectorLegacy
 
 signal terrain_changed(terrain_id: int)
 

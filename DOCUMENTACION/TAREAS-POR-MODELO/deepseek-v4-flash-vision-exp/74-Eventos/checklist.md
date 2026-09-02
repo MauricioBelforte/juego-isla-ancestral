@@ -1,0 +1,211 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 74-Eventos (74)
+
+# Checklist personal tareas — 74-Eventos
+
+> Extraidas del 05-Checklist.md del módulo (201 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Documentar el problema: Aurora necesita eventos que den vida al pueblo sin frustrar al jugador
+- [ ] T-002 Definir el objetivo 1: sistema de eventos dirigido por datos
+- [ ] T-003 Definir el objetivo 2: programar eventos en el calendario Aurora
+- [ ] T-004 Definir el objetivo 3: disparar eventos con aviso previo, inicio y cierre
+- [ ] T-005 Definir el objetivo 5: recompensas seguras sin duplicados
+- [ ] T-006 Definir el objetivo 6: repetibilidad anual y ausencia de FOMO (M94)
+- [ ] T-007 Definir el alcance: festivales, ferias, competencias, rituales, climáticos, sorpresas
+- [ ] T-008 Definir las exclusiones: minijuegos, guiones, economía, arte/audio
+- [ ] T-009 Documentar restricciones: Godot 4.x + GDScript, recursos `.tres`
+- [ ] T-010 Documentar restricción anti-FOMO: contenido único irrecuperable prohibido
+- [ ] T-011 Documentar restricción de determinismo: nunca reloj del SO
+- [ ] T-012 Documentar restricción de sesión: mundo congelado offline (M30)
+- [ ] T-013 Documentar restricción de modularidad: UI separada por señales (M09)
+- [ ] T-014 Documentar restricción de rendimiento: cero polling por frame
+- [ ] T-015 Documentar restricción de persistencia: registro versionado en GameState (M60)
+- [ ] T-016 Documentar restricción de no tocar módulos estables (M19/M21/M29/M30/M32)
+- [ ] T-017 RF1.4: definir franja horaria: hora_inicio y hora_fin en minutos internos (M30)
+- [ ] T-018 RF1.9: definir campo escena_recinto (PackedScene bajo demanda, M63)
+- [ ] T-019 RF1.13: definir campo recompensa_compensatoria para fallback de carga
+- [ ] T-020 RF1.15: definir claves de localización nombre_clave y descripcion_clave (M57)
+- [ ] T-021 RF1.25: documentar que los datos son editables sin tocar código
+- [ ] T-022 RF2.4: construir agenda anual al cambio de año (M29 año_cambio)
+- [ ] T-023 RF3.2: emitir aviso con anticipación configurable (default 3 días)
+- [ ] T-024 RF3.3: no re-emitir el aviso varias veces el mismo día
+- [ ] T-025 RF4.4: emitir señal evento_cancelado con razón (fallback de carga)
+- [ ] T-026 RF4.6: activar el recinto del evento (interacción M70)
+- [ ] T-027 RF4.7: activar música y ambiente festivo por señales (M41/M42/M43)
+- [ ] T-028 RF4.8: registrar en el historial el estado NO_PARTICIPADO si el jugador no entra
+- [ ] T-029 RF4.9: chequear agenda al dia_cambio de M29 con coste O(n)
+- [ ] T-030 RF4.10: manejar eventos relativos (segundo sábado de Otoño) al construir agenda
+- [ ] T-031 RF4.11: manejar eventos del día de año nuevo sin duplicar avisos
+- [ ] T-032 RF4.12: re-validar eventos al cargar si la franja sigue abierta
+- [ ] T-033 RF5.9: devolver mensaje de fallo localizable y amable
+- [ ] T-034 RF5.10: no bloquear el juego si una condición falla
+- [ ] T-035 RF5.15: lanzar el minijuego/partida del festival por contrato de escena
+- [ ] T-036 RF6.2: validación doble: definición de datos + estado guardado
+- [ ] T-037 RF6.3: entregar objetos vía inventario M14
+- [ ] T-038 RF6.4: entregar moneda del mundo vía economía M38
+- [ ] T-039 RF6.5: entregar moneda de feria canjeable acumulable el mismo año
+- [ ] T-040 RF6.6: entregar amistad vía M20 con id_npc
+- [ ] T-041 RF6.7: entregar progreso vía M71
+- [ ] T-042 RF6.8: registrar recuerdos para la galería M37
+- [ ] T-043 RF6.9: fallback a buzón de entregas si el inventario está lleno (M14)
+- [ ] T-044 RF6.10: retención de buzón de 30 días sin pérdida
+- [ ] T-045 RF6.13: informar en UI "Ya recibiste la recompensa de este año"
+- [ ] T-046 RF6.14: entregar recompensa compensatoria solo si el fallback de carga falló
+- [ ] T-047 RF6.15: registrar recompensas_recibidas en PackedStringArray del estado
+- [ ] T-048 RF7.1: reprogramar todos los festivales automáticamente al año siguiente
+- [ ] T-049 RF7.3: mantener histórico de participaciones por año en GameState.M74
+- [ ] T-050 RF7.4: registrar títulos de bicampeón (anillo dorado con años ganados)
+- [ ] T-051 RF7.5: garantizar que un evento perdido se repite completo el año siguiente
+- [ ] T-052 RF8.2: intercambiar recinto por variante_cubierta ante clima severo
+- [ ] T-053 RF8.3: trasladar el evento un día si no existe variante y el clima es severo
+- [ ] T-054 RF8.4: no interrumpir el evento abruptamente si la tormenta aparece a mitad
+- [ ] T-055 RF8.5: esperar al cierre del día para finalizar un evento interrumpido
+- [ ] T-056 RF8.6: ejecutar diálogos de variante para recintos techados (M21)
+- [ ] T-057 RF9.2: aplicar límite semanal de sorpresas (3)
+- [ ] T-058 RF9.3: evitar sorpresas en días de festival
+- [ ] T-059 RF9.4: re-programar la sorpresa descartada a otro día
+- [ ] T-060 RF9.5: marcar sorpresa_ya_usada por semana en EventState
+- [ ] T-061 RF10.1: publicar agenda_actualizada para el panel UI
+- [ ] T-062 RF10.3: conectar tutorial de primer festival (M92)
+- [ ] T-063 RF11.1: persistir historial de participación por año
+- [ ] T-064 RF12.1: cancelar con aviso amable si la escena del recinto falla (M63)
+- [ ] T-065 RF12.2: jamás crashear ante recinto faltante o corrupto
+- [ ] T-066 RN1: tick de eventos < 0.05 ms por frame
+- [ ] T-067 RN2: sin polling continuo; checks en cambios de día/sesión
+- [ ] T-068 RN3: catálogo completo de datos < 1 MB
+- [ ] T-069 RN4: carga de recintos bajo demanda (M63)
+- [ ] T-070 RN5: esquema de persistencia versionado (M60)
+- [ ] T-071 RN6: reconstrucción del historial sin perder partida ante corrupción
+- [ ] T-072 RN7: avisos accesibles con texto y ícono (M58)
+- [ ] T-073 RN8: opción de pausar avisos de eventos
+- [ ] T-074 RN9: alto contraste en banners
+- [ ] T-075 RN10: nombres y descripciones siempre localizables (M57)
+- [ ] T-076 RN11: cero texto hardcodeado en GDScript
+- [ ] T-077 RN12: determinismo con misma semilla de partida
+- [ ] T-078 RN13: validación doble de recompensas contra estado guardado
+- [ ] T-079 RN14: banners no-modales que no bloquean el juego
+- [ ] T-080 RN15: EventManager sin referencias a escenas de UI concretas
+- [ ] T-081 RN16: auditoría anti-FOMO por evento en los datos (RN10 del doc)
+- [ ] T-082 H3: definir agenda anual ordenada por fecha y prioridad
+- [ ] T-083 H4: definir evento_actual y evento_actual_id públicos
+- [ ] T-084 H7: definir EventState con 5 estados y campos serializables
+- [ ] T-085 H8: diseñar el flujo de festival completo (aviso → inicio → participación → premio → cierre)
+- [ ] T-086 H9: diseñar el diagrama de secuencia de disparo y participación
+- [ ] T-087 H10: diseñar el diagrama de estados del evento anual
+- [ ] T-088 H11: diseñar la UI w_agenda (panel anual)
+- [ ] T-089 H12: diseñar la UI w_banner_evento (no-modal)
+- [ ] T-090 H13: diseñar la UI w_ventana_festival (condiciones, recompensas, estado)
+- [ ] T-091 H18: definir contrato de minijuego por señales (partida_pedida/partida_finalizada)
+- [ ] T-092 I1: consumir M29 dia_cambio para el chequeo diario
+- [ ] T-093 I2: consumir M29 año_cambio para reprogramar la agenda
+- [ ] T-094 I3: consumir M29 estacion_cambio para validar estaciones
+- [ ] T-095 I4: consumir M30 GameClock.get_minutos_dia() sin leer el reloj del SO
+- [ ] T-096 I5: documentar la regla de oro anti-reloj-SO en el módulo
+- [ ] T-097 I9: consumir M14 inventario con fallback a buzón
+- [ ] T-098 I10: consumir M20 amistad.modificar para recompensas de amistad
+- [ ] T-099 I11: consumir M38 economía para monedas y moneda de feria
+- [ ] T-100 I12: consumir M71 progreso para recompensas de progresión
+- [ ] T-101 I13: consumir M37 registrar_recuerdo para la galería
+- [ ] T-102 I14: consumir M60 GameState.M74 para persistencia versionada
+- [ ] T-103 I15: consumir M63 cargador bajo demanda para recintos
+- [ ] T-104 I16: consumir M53 convenciones de UI/HUD
+- [ ] T-105 I17: consumir M57 localización en todas las claves de texto
+- [ ] T-106 I18: consumir M58 accesibilidad en banners y avisos
+- [ ] T-107 I19: M94 anti-FOMO: todo festival repetible cada año
+- [ ] T-108 I20: M94 anti-FOMO: sin contenido exclusivo irrecuperable
+- [ ] T-109 I21: M94 anti-FOMO: sin castigos por ausencia (mundo congelado)
+- [ ] T-110 I22: M94 anti-FOMO: sin urgencia artificial (sin "última oportunidad")
+- [ ] T-111 I23: M94 anti-FOMO: recompensas importantes con ruta alternativa (M39/M37/M23)
+- [ ] T-112 I24: integración con M92 tutorial en el primer festival
+- [ ] T-113 I25: integración con M104 analytics: registrar participación sin PII
+- [ ] T-114 I26: no modificar ningún archivo de M19/M21/M29/M30/M32
+- [ ] T-115 J1: evento en año nuevo: encadenar transición de año con inicio de evento
+- [ ] T-116 J2: año nuevo: sin doble aviso ni evento saltado
+- [ ] T-117 J3: evento en fin de mes y fin de año simultáneo
+- [ ] T-118 J4: jugador ausente: conecta días después sin penalización
+- [ ] T-119 J5: jugador ausente: historial marca "no participó"
+- [ ] T-120 J6: jugador ausente: evento completo disponible el año siguiente
+- [ ] T-121 J7: evento solapado: prioridad festival > competencia > feria > ritual > sorpresa
+- [ ] T-122 J8: evento solapado: el perdedor se corre un día con aviso
+- [ ] T-123 J10: recompensa duplicada: aviso claro en la ventana del festival
+- [ ] T-124 J11: festival con lluvia: variante cubierta sin cancelación
+- [ ] T-125 J12: tormenta a mitad de evento: cierre normal sin interrupción abrupta
+- [ ] T-126 J13: guardar a mitad de evento: al cargar el recinto sigue accesible si queda franja
+- [ ] T-127 J14: guardar a mitad de evento: sin banners re-mostrados al cargar
+- [ ] T-128 J15: inventario lleno al recibir premio: buzón con retención
+- [ ] T-129 J16: recinto roto/corrupto: evento_cancelado + compensación sin crash
+- [ ] T-130 J17: re-entrada rápida el mismo evento: segunda entrada bloqueada
+- [ ] T-131 J18: carga concurrente doble: sin clonación de recompensas
+- [ ] T-132 J19: evento relativo en año bisiesto del calendario Aurora
+- [ ] T-133 J20: cumpleaños de NPC (M29) y feria el mismo día: feria se corre
+- [ ] T-134 J21: sorpresas: límite semanal y nunca en día de festival
+- [ ] T-135 J22: partida vieja sin módulo M74: migración de datos sin pérdida
+- [ ] T-136 J23: evento sin recompensas configuradas: no crashea y avisa
+- [ ] T-137 J24: evento sin recinto (solo diálogo): funciona sin escena
+- [ ] T-138 J25: franja horaria de 00:00 (evento de medianoche): manejo correcto
+- [ ] T-139 J26: jugador en otra isla (M28) al momento del evento: el evento no se pierde
+- [ ] T-140 J27: múltiples guardados rápidos durante el premio: sin duplicados
+- [ ] T-141 J28: cambio de clima a mitad de un evento interior: sin efectos
+- [ ] T-142 K1: cero polling por frame en EventManager
+- [ ] T-143 K2: chequeo diario en O(n) con n ≈ 40 eventos
+- [ ] T-144 K3: reutilización de instancias de EventState para la agenda
+- [ ] T-145 K4: carga de recintos solo al iniciar el evento (bajo demanda)
+- [ ] T-146 K5: liberar escenas de recinto al terminarse el evento
+- [ ] T-147 K6: señales con argumentos tipados para evitar alloc innecesario
+- [ ] T-148 K7: numeración de diccionarios con StringName en lugar de String para ids
+- [ ] T-149 K9: banda de aviso calculada una vez por día
+- [ ] T-150 K10: persistencia diferida del historial anual (una escritura al fin de año)
+- [ ] T-151 K11: UI de agenda con instancias recicladas por fila
+- [ ] T-152 K12: banners con animación única de entrada, sin repintado continuo
+- [ ] T-153 K13: monitorear allocate de strings en bucles de agenda
+- [ ] T-154 K14: test de frame budget en Profiler de Godot
+- [ ] T-155 K15: medición de memoria del catálogo cargado
+- [ ] T-156 L1: crear plan-inicial/01-Requerimientos.md
+- [ ] T-157 L2: crear plan-inicial/02-Analisis.md
+- [ ] T-158 L3: crear plan-inicial/03-Diseno.md
+- [ ] T-159 L4: crear plan-inicial/04-Codigo.md
+- [ ] T-160 L5: crear plan-inicial/05-Checklist.md
+- [ ] T-161 L6: crear plan-actual/ como espejo idéntico de plan-inicial
+- [ ] T-162 L7: firmar cada archivo con el modelo y la plataforma
+- [ ] T-163 L8: documentar "Notas del Agente" en 04-Codigo.md
+- [ ] T-164 L9: documentar las reglas de oro (anti-reloj-SO, anti-duplicado, UI separada)
+- [ ] T-165 L10: documentar el contrato de señales con otros módulos
+- [ ] T-166 L11: documentar la tabla de pruebas de límites para M112
+- [ ] T-167 L12: documentar pendientes del agente delegado
+- [ ] T-168 L13: documentar análisis del dominio de festivales y tipos de evento
+- [ ] T-169 L14: documentar el análisis FOMO vs repetibilidad
+- [ ] T-170 L15: documentar alternativas consideradas y decisiones (D1–D7)
+- [ ] T-171 L16: documentar riesgos y mitigaciones
+- [ ] T-172 L17: documentar referencias al plan maestro
+- [ ] T-173 L18: mantener esta checklist de 120+ ítems con marcadores [S]/[M]/[C]
+- [ ] T-174 M1: planear suite test_calendario: programación de fechas fijas
+- [ ] T-175 M2: planear suite test_calendario: eventos relativos al mes
+- [ ] T-176 M3: planear suite test_disparo: aviso a -3 días
+- [ ] T-177 M4: planear suite test_disparo: inicio y fin de franja
+- [ ] T-178 M5: planear suite test_disparo: evento_iniciado una sola vez
+- [ ] T-179 M6: planear suite test_recompensas: token por año y re-entrada
+- [ ] T-180 M7: planear suite test_recompensas: años consecutivos con premio
+- [ ] T-181 M8: planear suite test_recompensas: inventario lleno → buzón
+- [ ] T-182 M9: planear suite test_clima: variante cubierta y traslado
+- [ ] T-183 M10: planear suite test_persistencia: guardar/cargar en curso
+- [ ] T-184 M11: planear casos de año nuevo y fin de año
+- [ ] T-185 M12: planear casos de solapamiento por prioridad
+- [ ] T-186 M13: planear caso de jugador ausente
+- [ ] T-187 M14: planear caso de carga concurrente sin clonación
+- [ ] T-188 M15: planear caso de migración de partida vieja
+- [ ] T-189 M16: definir criterios de éxito de cada caso
+- [ ] T-190 M17: ejecutar las suites antes de la primera prueba manual del usuario
+- [ ] T-191 M18: documentar resultados en 07-Resultados-Testings.md (cuando exista)
+- [ ] T-192 M19: corregir fallos encontrados antes de la entrega
+- [ ] T-193 M20: medir frame budget con Profiler en escena de festival
+- [ ] T-194 M21: verificar 0 errores en consola al entrar en Play Mode
+- [ ] T-195 M22: verificar ausencia de NullReference/MissingReference en runtime
+- [ ] T-196 M23: probar el flujo completo de un festival de extremo a extremo
+- [ ] T-197 M24: probar en la escena de la plaza y en la del recinto
+- [ ] T-198 M25: probar con clima severo forzado desde el debug (M32/M110)
+- [ ] T-199 M26: probar recompensas con inventario lleno y vacío
+- [ ] T-200 M27: probar ausencia de FOMO: perder un festival y vivirlo el año siguiente
+- [ ] T-201 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

@@ -389,3 +389,10 @@
 ## Corrección de honestidad (glm-5.3-flash, 2026-09-02 02:50)
 
 Un regex amplio de marcado automático marcó 7 ítems [x] que NO se hicieron (montaje del TerrainDetector en player.tscn, conexión en M11, medición de FPS — requieren editar la escena/medir con herramienta de perf). Se revirtieron a [ ] con nota "clase lista V0; montaje/medición en escena = iter. 2 con dueño de escena". Honestidad §21.4: mejor [ ] que [x] falso.
+## Verificación + fix de colisión (2026-09-02 07:00 — deepseek-v4-flash-vision-exp)
+
+- [x] TEST M156: 0 fallos, exit 0 (TerrainProvider + TerrainModifiers + TerrainDetector: catálogo, modificadores, efectividad de velocidad con equipo, detección de clase)
+- [x] **Fix de colisión de clases globales:** existían DUPLICADOS — scripts/terrain/terrain_modifiers.gd y terrain_detector.gd (paquete del mundo heredado) con los mismos class_name que los vigentes de scripts/terrenos/ (M156). Renombrados los heredados a TerrainModifiersLegacy/TerrainDetectorLegacy (nadie los consumía — verificado por grep) + test M156 con preloads explícitos (patrón §9.17)
+- [x] Cache de clases globales regenerada (--editor --quit)
+- [x] Test fijo también en plugin_herramientas.gd (const preload sin := en const — parse del editor)
+- [?] Aviso de regresión AJENA: scripts/core/event_bus.gd con parse error ('Unexpected Indent in class body' + class name renombrada a EventBus_) — modificación reciente de otro agente (git M); el árbol no bootea hasta que el dueño lo corrija (NO se tocó, regla §21.4)

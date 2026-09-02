@@ -1076,3 +1076,19 @@ Varias plataformas de agentes (p. ej. OpenCode/uagent en Windows) escriben los a
 6. **Firma de documentos:** las firmas (`**Modelo:**`, `**Plataforma:**`) y los emojis de estado deben quedar legibles; si aparecen corruptos tras una edición, el agente debe reescribir el archivo en UTF-8.
 
 > **Nota de operación:** si se detecta una corrupción masiva de codificación en archivos ya versionados, aplicar una pasada de saneamiento que **decodifique cp1252 → re-encode UTF-8** solo a los archivos afectados, verificando con `git diff` que no se introduzcan cambios semánticos. No aplicar conversión ciega a binarios (`.png`, `.res`, `.import`, etc.).
+
+---
+
+## 29. Tareas por Modelo — Checklists Personales (metodología multiagente)
+
+> **Agregado:** 2026-09-02 · **Fuente:** directiva del usuario · **Primero en usar:** deepseek-v4-flash-vision-exp / Kilo Code
+
+La CHECKLIST-GLOBAL.md es el **tablero de resumen** (una fila por módulo). El trabajo granular (≈18.000 subítems) vive en las **checklists personales de cada modelo**:
+
+- **Ubicación:** `DOCUMENTACION/TAREAS-POR-MODELO/`
+- **Guía obligatoria para todo modelo:** `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md` — reglas de estructura, marcado (`[ ]`/`[x]`/`[?]`/`[→]` con IDs T-###), extracción desde los `05-Checklist.md` de cada módulo, priorización y ciclo de trabajo.
+- **Estructura:** `TAREAS-POR-MODELO/<MODELO>/` con `BACKLOG-MASTER.md` (índice) y `<ID-Modulo>-<Nombre>/checklist.md` (tareas granulares).
+- **Regla de oro:** al completar una tarea T-###, marcar los TRES lugares: la checklist personal del modelo, el `05-Checklist.md` del módulo y la fila de CHECKLIST-GLOBAL (progreso).
+- **Mínimo obligatorio:** todo modelo que se une a la metodología debe asignarse **no menos de 100 tareas** en su backlog (se extraen de los módulos con su Recom; 2000+ es válido — ejemplo: deepseek-v4-flash-vision-exp arrancó con 3.474).
+- **Nuevos modelos:** al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar su backlog con el extractor por módulos con su Recom.
+

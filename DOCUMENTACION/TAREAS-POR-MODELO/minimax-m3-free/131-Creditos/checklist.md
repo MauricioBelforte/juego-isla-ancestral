@@ -1,0 +1,111 @@
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Modulo:** 131-Creditos
+
+# Checklist personal tareas — 131-Creditos
+
+> Extraidas del 05-Checklist.md del modulo. Fuente de verdad del item: el 05-Checklist.md.
+> Total: 100 items (13 ya [x], 87 [ ] pendientes, 0 [?] no resueltos).
+
+## Tareas
+
+- [x] T-001 Test headless de validacion de creditos
+- [x] T-002 Datos data-driven: creditos.json con 3 secciones
+- [x] T-003 Datos data-driven: creditos.json con 3 secciones
+- [ ] T-004 RF1: lista de equipos principales
+- [ ] T-005 RF2: reconocimiento de contribuyentes y testers
+- [ ] T-006 RF3: assets de terceros con licencias
+- [ ] T-007 RF4: conmutación de idiomas (español/inglés)
+- [ ] T-008 RF5: navegación y control de reproducción
+- [x] T-009 RF6: copyright y año actual
+- [ ] T-010 RF7: accesibilidad (texto y contraste)
+- [ ] T-011 P1: 5 equipos principales listados y reconocidos
+- [ ] T-012 P2: contribuyentes voluntarios y testers incluidos
+- [ ] T-013 P3: assets de terceros con licencias mencionadas
+- [ ] T-014 P4: conmutación español/inglés funcionando
+- [ ] T-015 P5: navegación, scroll y controles de reproducción
+- [x] T-016 P6: copyright y año actual displayados
+- [ ] T-017 P7: accesibilidad de tamaño de texto y contraste
+- [ ] T-018 Equipos principales: Desarrollo, Arte, Sonido, QA, Comunidad
+- [ ] T-019 Colaboradores: testers, traductores, diseñadores UI/UX
+- [ ] T-020 Assets terceros: categorizados por licencia
+- [ ] T-021 Lista alfabética dentro de cada categoría
+- [ ] T-022 Sistema de búsqueda por nombre, rol, equipo
+- [ ] T-023 Transición suave entre secciones
+- [ ] T-024 Contador de tiempo visible (opcional)
+- [ ] T-025 Respetar configuración M90/M91/M91
+- [ ] T-026 RichTextLabel con desplazamiento suave
+- [ ] T-027 Botón detener/continuar animación
+- [ ] T-028 Control tamaño de texto: S(12px) - M(16px) - L(20px)
+- [ ] T-029 Modo alto contraste opcional
+- [x] T-030 Configuración velocidad animación: Normal/Lenta/Rápida
+- [ ] T-031 Conmutación de idioma en tiempo real
+- [x] T-032 Copyright con año actual auto-dinámico
+- [ ] T-033 Diseño coherente con estilo cozy M87/M90/M91
+- [ ] T-034 Tiempo máximo 5 minutos visualización
+- [ ] T-035 Accesibilidad de navegación por teclado
+- [x] T-036 catálogo créditos.tres (estructura por categorías)
+- [x] T-037 API: cargar_creditos()
+- [ ] T-038 API: obtener_equipos()
+- [ ] T-039 API: obtener_contribuyentes()
+- [ ] T-040 API: obtener_assets_terceros()
+- [x] T-041 API: obtener_creditos_idioma(idioma)
+- [ ] T-042 API: siguiente_seccion()
+- [ ] T-043 API: detener_animacion()
+- [ ] T-044 API: establecer_idioma(idioma)
+- [ ] T-045 API: obtener_idioma_actual()
+- [ ] T-046 Test: todos los equipos principales listados y visibles
+- [ ] T-047 Test: contribuyentes y testers incluidos
+- [ ] T-048 Test: conmutación español/inglés
+- [ ] T-049 Test: navegación y controls de reproducción
+- [x] T-050 Test: copyright y año actual
+- [ ] T-051 Test: tamaño de texto y contraste ajustables
+- [ ] T-052 Test: velocidad animación configurable
+- [ ] T-053 Test: duración máxima 5 minutos
+- [x] T-054 Módulo marcado delegable
+- [ ] T-055 API estable definida
+- [ ] T-056 Implementación ? AGENTE DELEGADO
+- [ ] T-057 Assets ? specs con organización por categorías
+- [ ] T-058 01-Requerimientos creado y firmado
+- [ ] T-059 02-Analisis creado y firmado
+- [ ] T-060 03-Diseno creado y firmado
+- [ ] T-061 04-Codigo creado y firmado (Notas del Agente)
+- [ ] T-062 05-Checklist creado y firmado (este archivo)
+- [ ] T-063 SFX encendido/apagado de menú
+- [ ] T-064 SFX navegación (flecha, enter, escape)
+- [ ] T-065 Música lounge suave durante encabezado
+- [ ] T-066 Fade-out gradual al salir
+- [x] T-067 Logo de desarrolladora con sonido cálido
+- [ ] T-068 Compatibilidad con familia tonal M43
+- [ ] T-069 Sin música fuerte si M91 lo desactiva
+- [ ] T-070 Balance con M41/M42/M43 según estado
+- [ ] T-071 Ducking de música al pasar texto
+- [ ] T-072 SFX puntual solo si interactivo
+- [ ] T-073 Easter egg: Konami code abre créditos extendidos
+- [ ] T-074 Easter egg: clic en versión muestra build info
+- [ ] T-075 Mensaje final tras 5 min de visualización
+- [ ] T-076 Salto de sección con tecla rápida
+- [ ] T-077 Salida con ESC o botón B
+- [ ] T-078 Mensaje de despedida calido
+- [ ] T-079 Créditos de Godot y assets open source
+- [ ] T-080 Créditos de contributors en GitHub Listed
+- [ ] T-081 Plurales con gettext (i18n_plural)
+- [ ] T-082 Diferencias de longitud ES vs EN
+- [ ] T-083 Caracteres especiales y diacríticos
+- [ ] T-084 RTL futuro (preparado)
+- [ ] T-085 Cambio de fuente por idioma
+- [ ] T-086 Carga lazy de créditos por idioma
+- [ ] T-087 Frente de cambio en caliente
+- [ ] T-088 Recarga desde caché rápido
+- [ ] T-089 Todos los strings en archivo .po
+- [ ] T-090 Pseudoloc para detectar incordios
+- [ ] T-091 Carga lazy de secciones no visibles
+- [ ] T-092 Liberación de fuentes no usadas
+- [ ] T-093 Pool de nodos para textos
+- [ ] T-094 Sin re-instanciación al cambiar sección
+- [ ] T-095 GC cero tras carga inicial
+- [ ] T-096 Memoria < 5 MB durante pantalla
+- [ ] T-097 Test de stress con 1000+ contribuyentes
+- [ ] T-098 Carga en background KO con Hilo ["Thread"]
+- [ ] T-099 Tiempo de primera visualización < 200ms
+- [ ] T-100 Sin lag en input events

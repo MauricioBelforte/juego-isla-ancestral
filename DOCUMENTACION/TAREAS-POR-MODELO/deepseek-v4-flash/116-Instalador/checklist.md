@@ -1,0 +1,202 @@
+# Checklist de tareas — 116-Instalador (deepseek-v4-flash / Kilo Code)
+
+Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
+
+- [x] T-001 Crear build release
+- [x] T-002 Crear instalador
+- [x] T-003 Definir directorio de instalación
+- [x] T-004 Crear desinstalador
+- [x] T-005 Configurar shortcuts si corresponde
+- [x] T-006 Configurar asociación de archivos si corresponde
+- [x] T-007 Validar permisos
+- [x] T-008 Validar antivirus
+- [ ] T-009 Validar actualizaciones
+- [ ] T-010 Validar reparación
+- [ ] T-011 Validar desinstalación
+- [ ] T-012 Validar instalación limpia
+- [ ] T-013 Validar actualización
+- [ ] T-014 Validar rollback
+- [ ] T-015 Definir Godot 4.x export para Windows Desktop
+- [ ] T-016 Definir optimizaciones (optimización de código, compresión de assets)
+- [ ] T-017 Definir preset: Release (no Debug)
+- [ ] T-018 Definir arquitectura: x64 (Windows 64-bit)
+- [ ] T-019 Definir code signing del ejecutable
+- [x] T-020 Diseñar configuración de Godot export
+- [x] T-021 Diseñar Application/Config/features: Compress (lzma)
+- [x] T-022 Diseñar Application/Config/pack_mode: Single-file (opcional)
+- [ ] T-023 Diseñar Application/Run/args: --release
+- [ ] T-024 Diseñar Binary/export_console_wrapper: No
+- [ ] T-025 Diseñar Binary/export_embedded_pck: Yes
+- [ ] T-026 Diseñar Binary/export_filter: include/exclude patterns
+- [ ] T-027 Diseñar Binary/export_path: builds/windows/
+- [ ] T-028 Diseñar Binary/file_format: exe
+- [ ] T-029 Diseñar Binary/icon: icon.ico
+- [ ] T-030 Diseñar Binary/name: Isla Ancestral
+- [ ] T-031 Definir Inno Setup (recomendado)
+- [ ] T-032 Definir WiX Toolset (alternativa)
+- [ ] T-033 Definir NSIS (alternativa)
+- [x] T-034 Diseñar script de Inno Setup (.iss)
+- [ ] T-035 Diseñar wizard step-by-step (Bienvenida → Directorio → Shortcuts → Instalación → Finalización)
+- [ ] T-036 Diseñar directorio de instalación predeterminado
+- [ ] T-037 Diseñar opciones: desktop shortcut, start menu shortcut, association de files
+- [ ] T-038 Diseñar validación de espacio en disco
+- [ ] T-039 Diseñar validación de requisitos de sistema
+- [ ] T-040 Definir C:\Program Files\Isla Ancestral (requiere permisos)
+- [ ] T-041 Definir C:\Users\Usuario\AppData\Local\Isla Ancestral (sin permisos)
+- [ ] T-042 Diseñar Inno Setup permite elegir directorio de instalación
+- [ ] T-043 Diseñar validación de espacio en disco
+- [ ] T-044 Diseñar validación de requisitos de sistema
+- [ ] T-045 Definir Inno Setup genera automáticamente desinstalador
+- [ ] T-046 Definir desinstalador elimina todos los archivos del juego
+- [ ] T-047 Definir desinstalador elimina shortcuts (escritorio, menú de inicio)
+- [ ] T-048 Definir desinstalador elimina asociación de archivos (si aplica)
+- [x] T-049 Definir desinstalador elimina entradas de registro (si aplica)
+- [ ] T-050 Diseñar Inno Setup genera unins000.exe
+- [ ] T-051 Diseñar desinstalador accesible desde Panel de Control
+- [ ] T-052 Diseñar desinstalador accesible desde Start Menu
+- [ ] T-053 Definir shortcut en escritorio (opcional)
+- [ ] T-054 Definir shortcut en menú de inicio (carpeta Isla Ancestral)
+- [ ] T-055 Definir shortcut de desinstalador en menú de inicio
+- [ ] T-056 Diseñar Inno Setup crea shortcuts automáticamente
+- [ ] T-057 Diseñar usuario puede elegir si crear shortcut en escritorio
+- [ ] T-058 Diseñar shortcuts tienen icono del juego
+- [ ] T-059 Definir asociación para savegames (.island)
+- [x] T-060 Definir asociación para configuración (.config)
+- [ ] T-061 Diseñar Inno Setup permite asociación de archivos
+- [x] T-062 Diseñar asociación escrita en registro de Windows
+- [ ] T-063 Diseñar asociación con icono específico
+- [ ] T-064 Definir instalación en C:\Program Files requiere permisos de administrador
+- [ ] T-065 Definir instalación en AppData no requiere permisos de administrador
+- [ ] T-066 Diseñar Inno Setup solicita permisos de administrador automáticamente
+- [ ] T-067 Diseñar UAC de Windows solicita confirmación al usuario
+- [ ] T-068 Diseñar validación de permisos antes de iniciar instalación
+- [ ] T-069 Definir firma digital del ejecutable del juego (.exe)
+- [ ] T-070 Definir firma digital del instalador (.exe o .msi)
+- [ ] T-071 Definir certificado digital de autoridad de confianza
+- [ ] T-072 Definir code signing reduce falsos positivos de antivirus
+- [ ] T-073 Diseñar code signing con signtool.exe (Windows SDK)
+- [ ] T-074 Diseñar code signing del ejecutable de Godot export
+- [ ] T-075 Diseñar code signing del instalador de Inno Setup
+- [ ] T-076 Diseñar timestamp del code signing para validez a largo plazo
+- [ ] T-077 Definir instalador puede actualizar desde versión anterior
+- [ ] T-078 Definir instalador detecta versión instalada
+- [ ] T-079 Definir instalador descarga e instala nueva versión
+- [x] T-080 Definir instalador conserva savegames y configuración
+- [ ] T-081 Diseñar Inno Setup soporta actualizaciones
+- [x] T-082 Diseñar detección de versión instalada (registro de Windows)
+- [ ] T-083 Diseñar actualización incremental (solo archivos modificados)
+- [x] T-084 Diseñar conservación de datos del usuario (savegames, configuración)
+- [ ] T-085 Definir instalador puede reparar instalación corrupta
+- [ ] T-086 Definir reparación reinstala archivos corruptos
+- [x] T-087 Definir reparación conserva savegames y configuración
+- [ ] T-088 Definir reparación accesible desde Panel de Control
+- [ ] T-089 Diseñar Inno Setup soporta reparación
+- [ ] T-090 Diseñar validación de integridad de archivos
+- [ ] T-091 Diseñar reinstalación de archivos corruptos
+- [ ] T-092 Diseñar conservación de datos del usuario
+- [ ] T-093 Definir desinstalador elimina todos los archivos del juego
+- [ ] T-094 Definir desinstalador elimina shortcuts
+- [ ] T-095 Definir desinstalador elimina asociación de archivos
+- [x] T-096 Definir desinstalador elimina entradas de registro
+- [x] T-097 Definir desinstalador conserva savegames y configuración (por defecto)
+- [ ] T-098 Diseñar Inno Setup genera desinstalador automáticamente
+- [ ] T-099 Diseñar desinstalador elimina todos los archivos del directorio de instalación
+- [ ] T-100 Diseñar desinstalador elimina shortcuts y asociación de archivos
+- [x] T-101 Diseñar desinstalador puede conservar savegames y configuración (opcional)
+- [ ] T-102 Definir instalación funciona en máquina sin el juego
+- [ ] T-103 Definir instalación no requiere dependencias externas
+- [ ] T-104 Definir instalación valida requisitos de sistema (Windows 10/11, GPU, RAM)
+- [ ] T-105 Definir instalación muestra error si requisitos no se cumplen
+- [ ] T-106 Diseñar validación de sistema operativo (Windows 10/11)
+- [ ] T-107 Diseñar validación de GPU (DirectX 11 compatible)
+- [ ] T-108 Diseñar validación de RAM (mínimo 8GB)
+- [ ] T-109 Diseñar validación de espacio en disco (mínimo 5GB)
+- [ ] T-110 Definir actualización desde versión X a versión Y funciona
+- [x] T-111 Definir actualización conserva savegames y configuración
+- [ ] T-112 Definir actualización actualiza shortcuts y asociación de archivos
+- [x] T-113 Definir actualización actualiza entradas de registro
+- [x] T-114 Diseñar detección de versión instalada (registro de Windows)
+- [ ] T-115 Diseñar actualización incremental (solo archivos modificados)
+- [ ] T-116 Diseñar conservación de datos del usuario
+- [ ] T-117 Diseñar actualización de shortcuts y asociación de archivos
+- [ ] T-118 Definir rollback a versión anterior funciona si actualización falla
+- [ ] T-119 Definir rollback restaura versión anterior del juego
+- [x] T-120 Definir rollback conserva savegames y configuración
+- [ ] T-121 Definir rollback accesible desde Panel de Control
+- [ ] T-122 Diseñar backup de versión anterior antes de actualizar
+- [ ] T-123 Diseñar rollback automático si actualización falla
+- [ ] T-124 Diseñar restauración de versión anterior
+- [ ] T-125 Diseñar conservación de datos del usuario
+- [ ] T-126 Diseñar [Setup] con AppName, AppVersion, DefaultDirName, etc.
+- [ ] T-127 Diseñar [Files] con Source, DestDir, Flags
+- [ ] T-128 Diseñar [Icons] con Name, Filename, Tasks
+- [x] T-129 Diseñar [Tasks] con Name, Description, GroupDescription, Flags
+- [ ] T-130 Diseñar [Registry] con Root, Subkey, ValueType, ValueName, ValueData, Flags
+- [x] T-131 Diseñar [Run] con Filename, Description, Flags
+- [ ] T-132 Diseñar [UninstallDelete] con Type, Name
+- [ ] T-133 Diseñar función IsWindows10Or11()
+- [ ] T-134 Diseñar función IsDirectX11Available()
+- [ ] T-135 Diseñar función HasEnoughRAM()
+- [ ] T-136 Diseñar función HasEnoughDiskSpace()
+- [ ] T-137 Diseñar función InitializeSetup()
+- [ ] T-138 Diseñar validación de Windows 10/11
+- [ ] T-139 Diseñar validación de DirectX 11 compatible
+- [ ] T-140 Diseñar validación de RAM (mínimo 8GB)
+- [ ] T-141 Diseñar validación de espacio en disco (mínimo 5GB)
+- [ ] T-142 Diseñar función GetInstalledVersion()
+- [ ] T-143 Diseñar función IsUpdate()
+- [ ] T-144 Diseñar procedimiento CurStepChanged()
+- [x] T-145 Diseñar detección de versión instalada (registro de Windows)
+- [ ] T-146 Diseñar actualización incremental (solo archivos modificados)
+- [ ] T-147 Diseñar conservación de datos del usuario
+- [ ] T-148 Diseñar actualización de shortcuts y asociación de archivos
+- [ ] T-149 Diseñar función ValidateFileIntegrity()
+- [ ] T-150 Diseñar procedimiento RepairInstallation()
+- [ ] T-151 Diseñar validación de integridad de archivos
+- [ ] T-152 Diseñar reinstalación de archivos corruptos
+- [ ] T-153 Diseñar conservación de datos del usuario
+- [ ] T-154 Diseñar procedimiento BackupPreviousVersion()
+- [ ] T-155 Diseñar procedimiento RollbackToPreviousVersion()
+- [ ] T-156 Diseñar backup de versión anterior antes de actualizar
+- [ ] T-157 Diseñar rollback automático si actualización falla
+- [ ] T-158 Diseñar restauración de versión anterior
+- [ ] T-159 Diseñar conservación de datos del usuario
+- [x] T-160 Diseñar script code_signing.bat
+- [ ] T-161 Diseñar code signing del ejecutable de Godot export
+- [ ] T-162 Diseñar code signing del instalador de Inno Setup
+- [ ] T-163 Diseñar uso de signtool.exe (Windows SDK)
+- [ ] T-164 Diseñar timestamp del code signing
+- [x] T-165 Diseñar script build_installer.bat
+- [ ] T-166 Diseñar build release de Godot
+- [ ] T-167 Diseñar code signing del ejecutable
+- [ ] T-168 Diseñar build del instalador con Inno Setup
+- [ ] T-169 Diseñar code signing del instalador
+- [ ] T-170 Diseñar icon.ico
+- [ ] T-171 Diseñar icono para el ejecutable
+- [ ] T-172 Diseñar icono para el instalador
+- [ ] T-173 Diseñar icono para shortcuts
+- [ ] T-174 Diseñar resoluciones: 16x16, 32x32, 48x48, 64x64, 256x256
+- [ ] T-175 Diseñar installer/IslaAncestral.iss
+- [ ] T-176 Diseñar installer/system_requirements.iss
+- [ ] T-177 Diseñar installer/update.iss
+- [ ] T-178 Diseñar installer/repair.iss
+- [ ] T-179 Diseñar installer/rollback.iss
+- [ ] T-180 Diseñar installer/code_signing.bat
+- [x] T-181 Diseñar scripts/build_installer.bat
+- [ ] T-182 Diseñar icon.ico
+- [ ] T-183 Diseñar license.txt
+- [ ] T-184 Diseñar prueba de instalación limpia en máquina sin el juego
+- [ ] T-185 Diseñar prueba de actualización desde versión anterior
+- [ ] T-186 Diseñar prueba de reparación de instalación corrupta
+- [ ] T-187 Diseñar prueba de desinstalación completa
+- [ ] T-188 Diseñar prueba de shortcuts (escritorio, menú de inicio)
+- [ ] T-189 Diseñar prueba de asociación de archivos
+- [ ] T-190 Diseñar prueba de validación de requisitos de sistema
+- [ ] T-191 Diseñar prueba de validación de antivirus (code signing)
+- [ ] T-192 Diseñar prueba de rollback a versión anterior
+- [x] T-193 `installer/setup_windows.ps1` — instalador user-space (RF2/RF3): -InstallDir (default %LocalAppData%\IslaAncestral), copia del build, shortcuts (RF5, -NoShortcuts), validación de archivos críticos exe+pck (RF12), -DryRun (simulación)
+- [x] T-194 `installer/uninstall_windows.ps1` — desinstalador (RF4): shortcuts + directorio completo, -DryRun, confirmación/-Force
+- [x] T-195 `installer/README.md` — documentación de uso y convención de build (.build)
+- [x] T-196 Parse de ambos scripts verificado (UTF-8 BOM; sin ParserError)
+- [?] T-197 Smoke de ejecución en consola real (ventana PowerShell nativa) — el host de agentes no captura el host-stream de scripts .ps1 (dueño: deepseek-v4-flash-vision-exp)
+- [?] T-198 RF6-RF13 (asociación, permisos, antivirus, actualizaciones, reparación, desinstalación real, instalación limpia/actualización): iter 2 con build release de M117/M118

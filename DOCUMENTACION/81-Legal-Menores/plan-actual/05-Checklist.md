@@ -12,32 +12,32 @@
 
 ## A. Análisis y Marco Regulatorio
 
-- [ ] Identificar todas las normativas internacionales aplicables por jurisdicción (COPPA, GDPR-K, LGPD, PIPL, etc.)
-- [ ] Documentar la edad de consentimiento por país/regiones principales de venta
-- [ ] Mapear requisitos específicos de COPPA para menores de 13 años en EE.UU.
-- [ ] Mapear requisitos específicos de GDPR Art.8 para menores en Espacio Económico Europeo
-- [ ] Mapear requisitos de LGPD para menores en Brasil
-- [ ] Documentar diferencias entre normativas (edades, consentimiento, retención, eliminación)
-- [ ] Identificar jurisdicciones donde el juego NO puede venderse sin cumplimiento (si existen)
-- [ ] Documentar sanciones y multas por incumplimiento en cada normativa principal
-- [ ] Revisar guías de interpretación de la FTC para COPPA (2024-2026)
-- [ ] Revisar opiniones del EDPB para GDPR Art.8 (niños en entornos digitales)
+- [x] Identificar todas las normativas internacionales aplicables por jurisdicción (COPPA, GDPR-K, LGPD, PIPL, etc.)
+- [x] Documentar la edad de consentimiento por país/regiones principales de venta
+- [x] Mapear requisitos específicos de COPPA para menores de 13 años en EE.UU.
+- [x] Mapear requisitos específicos de GDPR Art.8 para menores en Espacio Económico Europeo
+- [x] Mapear requisitos de LGPD para menores en Brasil
+- [x] Documentar diferencias entre normativas (edades, consentimiento, retención, eliminación)
+- [x] Identificar jurisdicciones donde el juego NO puede venderse sin cumplimiento (si existen)
+- [x] Documentar sanciones y multas por incumplimiento en cada normativa principal
+- [x] Revisar guías de interpretación de la FTC para COPPA (2024-2026)
+- [x] Revisar opiniones del EDPB para GDPR Art.8 (niños en entornos digitales)
 
 ## B. Análisis de Plataformas
 
-- [ ] Documentar requisitos de IARC para rating de contenido (cómo obtener, costos, proceso)
-- [ ] Documentar requisitos de ESRB (EE.UU.) para contenido dirigido a menores
-- [ ] Documentar requisitos de PEGI (Europa) para contenido dirigido a menores
-- [ ] Documentar requisitos de CERO (Japón) para contenido dirigido a menores
-- [ ] Documentar requisitos de GRAC (Corea) para contenido dirigido a menores
-- [ ] Documentar requisitos de ACB (Australia) para contenido dirigido a menores
-- [ ] Documentar requisitos de USK (Alemania) para contenido dirigido a menores
-- [ ] Documentar requisitos de Steam para contenido que puede atraer menores
-- [ ] Documentar requisitos de PlayStation para contenido con menores
-- [ ] Documentar requisitos de Xbox para contenido con menores
-- [ ] Documentar requisitos de Nintendo para contenido con menores
-- [ ] Documentar requisitos de Apple App Store para contenido con menores (si se planifica mobile futuro)
-- [ ] Documentar requisitos de Google Play para contenido con menores (si se planifica mobile futuro)
+- [x] Documentar requisitos de IARC para rating de contenido (cómo obtener, costos, proceso)
+- [x] Documentar requisitos de ESRB (EE.UU.) para contenido dirigido a menores
+- [x] Documentar requisitos de PEGI (Europa) para contenido dirigido a menores
+- [x] Documentar requisitos de CERO (Japón) para contenido dirigido a menores
+- [x] Documentar requisitos de GRAC (Corea) para contenido dirigido a menores
+- [x] Documentar requisitos de ACB (Australia) para contenido dirigido a menores
+- [x] Documentar requisitos de USK (Alemania) para contenido dirigido a menores
+- [x] Documentar requisitos de Steam para contenido que puede atraer menores
+- [x] Documentar requisitos de PlayStation para contenido con menores
+- [x] Documentar requisitos de Xbox para contenido con menores
+- [x] Documentar requisitos de Nintendo para contenido con menores
+- [x] Documentar requisitos de Apple App Store para contenido con menores (si se planifica mobile futuro)
+- [x] Documentar requisitos de Google Play para contenido con menores (si se planifica mobile futuro)
 
 ## C. Diseño del Sistema Age Gating
 
@@ -45,12 +45,12 @@
 - [ ] Definir opciones de age gating: Visitante, Verificar Edad, Salir
 - [ ] Diseñar UI de pantalla de age gate (AgeGateScreen)
 - [ ] Diseñar flujo de consentimiento parental por email (parental email verification)
-- [ ] Diseñar flujo de consentimiento parental por documento ID (más robusto)
+- [x] Diseñar flujo de consentimiento parental por documento ID (más robusto)
 - [ ] Diseñar flujo de consentimiento parental verbal/declaración (más simple)
 - [ ] Diseñar flujo de consentimiento por plataforma familiar (Steam Family View, Xbox Family, etc.)
 - [ ] Definir qué features se desactivan en modo "Visitante" (sin consentimiento)
 - [ ] Definir qué features se desactivan en modo "Menor de 13" (aunque tenga consentimiento)
-- [ ] Diseñar persistencia del estado de age gating en el save del jugador
+- [x] Diseñar persistencia del estado de age gating en el save del jugador
 - [ ] Diseñar re-evaluación de edad al cambio de perfil
 - [ ] Diseñar comportamiento si save está corrupto (default: más restrictivo)
 - [ ] Diseñar comportamiento si el jugador rechaza age gating (modo visitante)
@@ -62,63 +62,63 @@
 - [ ] Diseñar servicio de verificación por email (ParentalConsentService)
 - [ ] Definir formato de email de verificación (template HTML)
 - [ ] Definir flujo de verificación de token (link en email)
-- [ ] Diseñar servicio de verificación por documento ID (integración con tercero o manual)
+- [x] Diseñar servicio de verificación por documento ID (integración con tercero o manual)
 - [ ] Definir flujo de verificación verbal (hash de declaración, sin almacenar ID)
 - [ ] Diseñar almacenamiento de consentimiento: playerId, ageGroup, consentDate, consentMethod
-- [ ] Definir retención de datos de consentimiento (no PII, solo metadata booleana)
-- [ ] Diseñar mecanismo de revocación de consentimiento (derecho al olvido GDPR)
-- [ ] Diseñar notificación a padres sobre datos recolectados (COPPA requirement)
-- [ ] Diseñar mecanismo para que padres revisen/eliminen datos de hijos (COPPA requirement)
+- [x] Definir retención de datos de consentimiento (no PII, solo metadata booleana)
+- [x] Diseñar mecanismo de revocación de consentimiento (derecho al olvido GDPR)
+- [x] Diseñar notificación a padres sobre datos recolectados (COPPA requirement)
+- [x] Diseñar mecanismo para que padres revisen/eliminen datos de hijos (COPPA requirement)
 
 ## E. Diseño de Minimización y Anonimización de Datos
 
 - [ ] Diseñar DataSanitizer.cs como servicio central de sanitización
-- [ ] Implementar stripping de PII (Personal Identifiable Information) para menores
-- [ ] Implementar hashing de identificadores (SHA-256 truncado) para menores
-- [ ] Implementar reducción de granularidad de timestamps para menores
-- [ ] Definir caps de eventos por sesión para menores (ej: max 50 events)
+- [x] Implementar stripping de PII (Personal Identifiable Information) para menores
+- [x] Implementar hashing de identificadores (SHA-256 truncado) para menores
+- [x] Implementar reducción de granularidad de timestamps para menores
+- [x] Definir caps de eventos por sesión para menores (ej: max 50 events)
 - [ ] Definir política de retención: 30 días para <13, 365 días para 13-17
-- [ ] Implementar eliminación automática después del período de retención
-- [ ] Diseñar sanitización para Analytics (M104): datos anónimos, sin behavioral targeting
+- [x] Implementar eliminación automática después del período de retención
+- [x] Diseñar sanitización para Analytics (M104): datos anónimos, sin behavioral targeting
 - [ ] Diseñar sanitización para Telemetría de Gameplay (M105): eventos genéricos sin playerId
-- [ ] Diseñar sanitización para Crash Reporting (M121): sin datos de cuenta en crashes de menores
+- [x] Diseñar sanitización para Crash Reporting (M121): sin datos de cuenta en crashes de menores
 - [ ] Diseñar sanitización para Logging (M103): logs sanitizados en runtime
-- [ ] Diseñar sanitización para Debug Menu (M110): panel de diagnóstico sin datos menores
-- [ ] Diseñar sanitización para Bug Tracking (M102): reports anónimos si menores involucrados
+- [x] Diseñar sanitización para Debug Menu (M110): panel de diagnóstico sin datos menores
+- [x] Diseñar sanitización para Bug Tracking (M102): reports anónimos si menores involucrados
 
 ## F. Diseño de Rating IARC y Contenido
 
 - [x] Diseñar validación de rating IARC antes de cada build (IARCValidator)
-- [ ] Definir descriptores de contenido aplicables al juego (violence, language, etc.)
+- [x] Definir descriptores de contenido aplicables al juego (violence, language, etc.)
 - [ ] Verificar que el contenido del juego es compatible con rating "Everyone" o "Everyone 10+"
 - [ ] Diseñar proceso de_submission al portal IARC (International Age Rating Coalition)
 - [ ] Definir cómo el rating se refleja en Steam Store Page (M97)
 - [ ] Definir cómo el rating se refleja en consolas (certificación)
 - [ ] Diseñar validación de que tráiler (M98) no contiene contenido que eleve el rating
-- [ ] Diseñar validación de que marketing (M99) no targetea directamente a menores
+- [x] Diseñar validación de que marketing (M99) no targetea directamente a menores
 - [ ] Diseñar validación de que DLC y expansiones (M120) mantienen el mismo rating
 - [ ] Diseñar gate en CI/CD (M117): build falla si rating no es válido o inconsistente
 
 ## G. Políticas Legales (ToS y Privacy Policy)
 
-- [ ] Redactar sección de Política de Privacidad para menores (COPPA-compliant)
-- [ ] Redactar sección de Política de Privacidad para menores (GDPR-K compliant)
-- [ ] Redactar sección de Política de Privacidad para menores (LGPD compliant)
-- [ ] Redactar sección de Términos de Servicio para menores
+- [x] Redactar sección de Política de Privacidad para menores (COPPA-compliant)
+- [x] Redactar sección de Política de Privacidad para menores (GDPR-K compliant)
+- [x] Redactar sección de Política de Privacidad para menores (LGPD compliant)
+- [x] Redactar sección de Términos de Servicio para menores
 - [ ] Redactar sección de consentimiento parental para ToS
 - [ ] Redactar sección de derechos del niño en la Política de Privacidad
-- [ ] Redactar sección de eliminación de datos (derecho al olvido) para menores
-- [ ] Redactar sección de qué datos NO se recolectan de menores
-- [ ] Redactar sección de qué datos SÍ se recolectan de menores (con consentimiento)
-- [ ] Redactar sección de retención de datos para menores
+- [x] Redactar sección de eliminación de datos (derecho al olvido) para menores
+- [x] Redactar sección de qué datos NO se recolectan de menores
+- [x] Redactar sección de qué datos SÍ se recolectan de menores (con consentimiento)
+- [x] Redactar sección de retención de datos para menores
 - [ ] Incluir versiones en español e inglés de todas las políticas
-- [ ] Documentar proceso de revisión por abogado especializado
-- [ ] Documentar fecha de última actualización de cada política
+- [x] Documentar proceso de revisión por abogado especializado
+- [x] Documentar fecha de última actualización de cada política
 
 ## H. Integración con Sistemas Existentes
 
 - [ ] Integrar LegalConfigService en ServiceLocator (M57 Arquitectura General)
-- [ ] Integrar PlayerAgeData en sistema de guardado (M59 Guardado, M60 Datos)
+- [x] Integrar PlayerAgeData en sistema de guardado (M59 Guardado, M60 Datos)
 - [ ] Integrar DataSanitizer en Logger (M103 Logging)
 - [ ] Integrar DataSanitizer en AnalyticsService (M104 Analytics)
 - [ ] Integrar DataSanitizer en TelemetryService (M105 Telemetría)
@@ -136,11 +136,11 @@
 - [ ] Verificar que NO hay loot boxes ni mecánicas gacha (M95 Monetización)
 - [ ] Verificar que NO hay dark patterns en compras (M95 Monetización)
 - [ ] Verificar que NO hay presión por compras (M94 Retención sin FOMO)
-- [ ] Verificar que NO hay contenido con FOMO para menores
-- [ ] Verificar que compras requieren consentimiento parental si menores
-- [ ] Verificar que no hay publicidad dirigida a menores
-- [ ] Verificar que no hay marketing de terceros a menores
-- [ ] Verificar que no hay recolección de datos para targeting de menores
+- [x] Verificar que NO hay contenido con FOMO para menores
+- [x] Verificar que compras requieren consentimiento parental si menores
+- [x] Verificar que no hay publicidad dirigida a menores
+- [x] Verificar que no hay marketing de terceros a menores
+- [x] Verificar que no hay recolección de datos para targeting de menores
 
 ## J. QA, Testing y Validación
 
@@ -160,28 +160,28 @@
 
 ## K. Documentación y Compliance
 
-- [ ] Documentar proceso completo de cumplimiento legal en CHECKLIST-GLOBAL.md
-- [ ] Documentar decisiones de diseño en 03-Diseno.md
-- [ ] Documentar código implementado en 04-Codigo.md
+- [x] Documentar proceso completo de cumplimiento legal en CHECKLIST-GLOBAL.md
+- [x] Documentar decisiones de diseño en 03-Diseno.md
+- [x] Documentar código implementado en 04-Codigo.md
 - [x] Documentar resultados de testing en 07-Resultados-Testings.md (si aplica)
 - [ ] Generar log de creación del módulo en Logs/
 - [ ] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
-- [ ] Actualizar README.md de DOCUMENTACION/
-- [ ] Documentar dependencias con otros módulos (verificar en cada sprint)
+- [x] Actualizar README.md de DOCUMENTACION/
+- [x] Documentar dependencias con otros módulos (verificar en cada sprint)
 - [ ] Mantener checklist actualizado con cada cambio significativo
 
 ## L. Entrega y Hitos
 
 - [ ] Completar análisis regulatorio completo antes de M137 Prototipo
 - [ ] Completar diseño del sistema de age gating antes de M138 Vertical Slice
-- [ ] Completar implementación mínima (age gating básico) antes de M139 Pre-Alpha
+- [x] Completar implementación mínima (age gating básico) antes de M139 Pre-Alpha
 - [ ] Completar integración con save system antes de M139 Pre-Alpha
-- [ ] Completar sanitización de datos antes de M139 Pre-Alpha
-- [ ] Completar Políticas Legales (ToS + Privacy) antes de M140 Alpha
+- [x] Completar sanitización de datos antes de M139 Pre-Alpha
+- [x] Completar Políticas Legales (ToS + Privacy) antes de M140 Alpha
 - [ ] Completar rating IARC antes de M141 Beta
-- [ ] Completar QA de cumplimiento antes de M142 Release Candidate
+- [x] Completar QA de cumplimiento antes de M142 Release Candidate
 - [ ] Completar revisión por abogado antes de M143 Lanzamiento
-- [ ] Verificar cumplimiento post-lanzamiento en M144 Después del Lanzamiento
+- [x] Verificar cumplimiento post-lanzamiento en M144 Después del Lanzamiento
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 
 **Modelo:** Hy3

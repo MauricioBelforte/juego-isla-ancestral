@@ -58,11 +58,59 @@ def mat(nombre, color, rough=0.95, spec=0.08, emisivo=None):
     return m
 
 
+# ---------- 2b) Helper de caja centrada (E-68) ----------
+def caja(nombre, x, y, z, sx, sy, sz, material, rot_euler=None):
+    """Crea una caja centrada en (x,y,z) con dimensiones sx × sy × sz.
+
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    !  ATENCION E-68 (2026-09-02, arco entrada templo M25 v3 → v4):       !
+    !  primitive_cube_add(size=1, scale=s) produce un cubo de sx × sy × sz !
+    !  (la dimension FINAL del cubo), NO de 2*sx × 2*sy × 2*sz.            !
+    !                                                                     !
+    !  Por lo tanto sx, sy, sz deben ser las DIMENSIONES FINALES que vos  !
+    !  queres para el cubo. Si queres "un cubo de 2.36 m de alto centrado !
+    !  en z=1.30", pasa sx=cualquiera, sy=cualquiera, sz=2.36 — NUNCA     !
+    !  sz=2.36/2=1.18 (eso da un cubo de 1.18 m, la MITAD).               !
+    !                                                                     !
+    !  Patron de bug que se repite: cualquier llamada de la forma          !
+    !      caja(..., ANCHO/2.0, ALTO/2.0, ...)                            !
+    !  esta MAL escrita si la intencion es "el cubo mide ANCHO × ALTO".   !
+    !  Equivale a confundir BoxGeometry(width, height, depth) de three.js  !
+    !  (donde width es la dimension completa) con la API de Blender (donde !
+    !  scale es la dimension completa).                                   !
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    Ejemplo (pilar de arco de 0.45 m de ancho × 2.36 m de alto × 0.45 m de
+    prof, centrado en x=0.90, z=1.30):
+        caja('SM_Pilar', 0.90, 0, 1.30, 0.45, 0.45, 2.36, MAT_piedra)
+
+    Resultado: cubo de 0.45 × 0.45 × 2.36 m, centrado en (0.90, 0, 1.30).
+    Va de z=0.12 a z=2.48. (No "de z=-1.06 a z=3.66" como daria el /2.)
+    """
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(x, y, z))
+    o = bpy.context.object
+    o.name = nombre
+    o.scale = (sx, sy, sz)
+    if rot_euler is not None:
+        o.rotation_euler = rot_euler
+    o.data.materials.append(material)
+    return o
+
+
 # ---------- 3) Disco de arena de referencia (para las capturas) ----------
+ALTURA_ARENA = 0.05  # E-12: arena top en z=0.05; los assets (Z_APOYO=0.045) van 5mm hundidos
+
+
 def arena(radio=2.0, profundo=0.22):
-    """Disco NO exportado (no empieza con SM_, E-44). Solo da referencia visual."""
-    bpy.ops.mesh.primitive_cylinder_add(vertices=24, radius=radio,
-                                        depth=profundo, location=(0, 0, -profundo / 2))
+    """Disco NO exportado (no empieza con SM_, E-44). Solo da referencia visual.
+    La cara superior queda en z=ALTURA_ARENA (=0.05). Asi el asset con
+    z_min=0.045 (Z_APOYO) aparece 5mm hundido en la arena, no flotando.
+    Antes (E-67): location.z = -profundo/2 -> top en z=0, los assets flotaban
+    4.5cm sobre la arena visual en cualquier vista lateral (cliff, faro, etc.).
+    """
+    bpy.ops.mesh.primitive_cylinder_add(
+        vertices=24, radius=radio, depth=profundo,
+        location=(0, 0, ALTURA_ARENA - profundo / 2))
     o = bpy.context.object
     o.name = 'Base_Arena'
     return o

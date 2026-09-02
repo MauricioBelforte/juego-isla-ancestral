@@ -1,9 +1,9 @@
-Log reservado: 508
-# 05 — Checklist — M23: Historias Secundarias (100/100)
+Log reservado: 510
+# 05 — Checklist — M23: Historias Secundarias (22/100)
 
-**Modelo:** glm-5.3-flash (último modificador; documentación base por Deepseek V4 Flash)
-**Plataforma:** OpenCode
-**Fecha:** 2026-08-17
+**Modelo:** step-3.7-flash (último modificador; documentación base por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
 
 ## Historias de vecinos
 
@@ -166,12 +166,18 @@ Log reservado: 508
 **Rol:** QA cruzado (AGENTS.md §21.8) — diálogos / narrativa / detección de bugs
 
 ### Resultado de test (headless, Godot 4.7.2-stable)
-- godot --headless -s res://scripts/historias/test_historias.gd -> bootea el juego completo (9 dominios, todos los autoloads) y finaliza con **exit 0**, sin fallos de aserción. ✅
+- godot --headless --path game/isla-ancestral --script res://scripts/historias/test_historias.gd -> **0 fallos** (assertions + cadena completa + entrega inventario + ocultas + postgame + persistencia).
+- Comando exacto usado: `"D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64.exe" --headless --path "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\game\isla-ancestral" --script "res://scripts/historias/test_historias.gd"`
+- Salida clave: `=== TEST M23 HISTORIAS: 0 fallo(s) ===` + cadenas `cadena-faro`, `cadena-invernadero`, `cadena-secretta-luciernagas`, `cadena-epilogo-plaza` iniciadas/completadas en el mismo test.
 
-### Artefactos verificados
-- SecondaryStoriesService autoload presente y registrado (cadenas JSON data-driven, evidencia _slug, consume M14, consecuencia → WorldState M21, recompensa.diario → M55, gating M22).
-- Validador anti-repetición (contexto >= 10 chars, pasos >= 3, tipos, ids únicos, títulos únicos).
-- 4 cadenas de ejemplo + test_historias.gd (0 fallos) + regresiones M55/M71/M22 0 fallos.
+### Evidencia por ítem
+- `_test_carga`: 4 cadenas cargadas + sección `secondary_stories` presente.
+- `_test_validador`: catálogo base sin errores de anti-repetición.
+- `_test_cadena_completa`: secuencia hablar/explorar/puzzle/entregar -> completada + `faro_encendido` aplicado en WorldState M21 + diario `mision_cadena-faro` en M55.
+- `_test_entrega_inventario`: rechazo sin objeto + avance con `semilla_antigua` + consecuencia `invernadero_abierto`.
+- `_test_ocultas`: `cadena-secretta-luciernagas` ausente en `cadenas_disponibles()` antes de iniciar, visible después.
+- `_test_postgame`: `cadena-epilogo-plaza` bloqueada sin final M22, abierta tras `final_elegido` no vacío.
+- `_test_persistencia`: round-trip `get_save_data`/`restore_save_data` + purga de huérfanas.
 
 ### Hallazgo honesto (brecha de producto)
 A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test), M23 SÍ incluye un autoload de servicio real. Lo pendiente son ítems de PRODUCTO/contenido (60 cadenas narrativas, diálogos posteriores M21, cosméticos M53/M45, integraciones M68/M36/M37/M32, testings E2E) — trabajo de contenido, no de bug.

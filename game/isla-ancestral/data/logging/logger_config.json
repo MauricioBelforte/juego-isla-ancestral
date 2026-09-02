@@ -1,0 +1,7 @@
+{
+  "nivel_por_defecto": "INFO",
+  "niveles": ["DEBUG", "INFO", "WARN", "ERROR"],
+  "max_tamano_bytes": 512000,
+  "dir_logs": "user://logs/",
+  "rotacion_activa": true
+}

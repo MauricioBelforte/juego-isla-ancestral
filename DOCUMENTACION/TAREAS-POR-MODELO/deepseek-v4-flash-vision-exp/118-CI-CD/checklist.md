@@ -1,0 +1,101 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 118-CI-CD (118)
+
+# Checklist personal tareas — 118-CI-CD
+
+> Extraidas del 05-Checklist.md del módulo (91 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: automatización de builds y despliegues
+- [ ] T-002 Registrar dependencias: M117, M103, M112, M61
+- [ ] T-003 Catalogar los 7 requisitos funcionales
+- [ ] T-004 RF1: pipeline de integración en cada commit
+- [ ] T-005 RF2: pipeline de pruebas automáticas
+- [ ] T-006 RF3: build de desarrollo con < 10 min
+- [ ] T-007 RF4: build release optimizado
+- [ ] T-008 RF5: despliegue automático al crear tag
+- [ ] T-009 RF6: notificaciones de fallo al equipo
+- [ ] T-010 RF7: calidad de código verificada (M111)
+- [ ] T-011 P1: pipeline CI se ejecuta en cada push a main/develop
+- [ ] T-012 P2: tests edit-mode y play-mode se ejecutan automáticamente
+- [ ] T-013 P3: build de desarrollo generado en < 10 minutos
+- [ ] T-014 P4: build release optimizado sin símbolos de debug
+- [ ] T-015 P5: despliegue a itch.io al crear tag semver
+- [ ] T-016 P6: notificaciones de fallo al equipo de desarrollo
+- [ ] T-017 P7: calidad de código (M111) verificada antes de éxito
+- [ ] T-018 Godot Editor script BuildScript.cs configurado
+- [ ] T-019 Workflow GitHub Actions con steps completos
+- [ ] T-020 Scripts PowerShell build_dev.ps1 y build_release.ps1
+- [ ] T-021 Tests run_tests.gd con cobertura mínima 80%
+- [ ] T-022 Integración con M111 (Code Quality) automática
+- [ ] T-023 Fallback manual después de 3 fallos seguidos
+- [ ] T-024 Documentación del pipeline para futuros agentes
+- [ ] T-025 Versionado semver (vX.Y.Z) para triggers de despliegue
+- [ ] T-026 Build dev detectable como "Development Build" en ejecutable
+- [ ] T-027 Build release sin Debug.Log activo por defecto
+- [ ] T-028 Notificaciones Discord/email en caso de fallo
+- [ ] T-029 Integración con M112 (Testing Automático)
+- [ ] T-030 Reportes de cobertura de tests después de cada pipeline
+- [ ] T-031 catálogo build.tres (configuración por tipo de build)
+- [ ] T-032 Configuración de escenas en Build Settings
+- [ ] T-033 Parámetros de calidad (resolución, VSync, anti-aliasing)
+- [ ] T-034 Scripts de build optimizados para Godot 4.4+
+- [ ] T-035 Formato de release notes automático
+- [ ] T-036 Versionado semver consistente con CHANGELOG.md
+- [ ] T-037 Timestamps en logs de build para debugging
+- [ ] T-038 Test: build dev generado en < 10 min
+- [ ] T-039 Test: build release sin símbolos
+- [ ] T-040 Test: despliegue tag ? itch.io
+- [ ] T-041 Test: notificaciones de fallo llegan al equipo
+- [ ] T-042 Test: calidad M111 verificada antes éxito
+- [ ] T-043 Test: coverage de tests = 80% mantenido
+- [ ] T-044 Test: fallback manual después de 3 fallos
+- [ ] T-045 Módulo marcado delegable
+- [ ] T-046 API estable definida
+- [ ] T-047 Implementación ? AGENTE DELEGADO
+- [ ] T-048 Assets ? specs con pipeline Godot-centric
+- [ ] T-049 05-Checklist creado y firmado (este archivo)
+- [ ] T-050 Generación de binarios Windows/Linux/Mac
+- [ ] T-051 Compresión ZIP+RAR de cada release
+- [ ] T-052 SHA256 checksums generados
+- [ ] T-053 Release preliminar (RC) antes de release
+- [ ] T-054 Etiquetado semántico vX.Y.Z
+- [ ] T-055 CHANGELOG.md generado automáticamente
+- [ ] T-056 Notas de release editables via PR
+- [ ] T-057 Subida a GitHub Releases
+- [ ] T-058 Subida a Itch.io (manual trigger)
+- [ ] T-059 Firmado GPG de binarios
+- [ ] T-060 Upload a Steamworks (futuro, M206)
+- [ ] T-061 Retención de últimos 5 releases en GitHub
+- [ ] T-062 Notificaciones Slack en fallos
+- [ ] T-063 Discord webhook en releases
+- [ ] T-064 Email a stakeholders en tags
+- [ ] T-065 Badge de build en README
+- [ ] T-066 Status page interno
+- [ ] T-067 Logs centralizados en 7 días
+- [ ] T-068 Trabajos programados via cron workflow
+- [ ] T-069 Limpieza de artefactos > 30 días
+- [ ] T-070 Cron semanal de limpieza de cache
+- [ ] T-071 Cron mensual de auditoría de seguridad
+- [ ] T-072 Importar proyecto en Godot headless
+- [ ] T-073 Ejecutar --check-only al inicio
+- [ ] T-074 Validar que no falten dependencias
+- [ ] T-075 Detectar escenas rotas
+- [ ] T-076 Detectar scripts con errores de sintaxis
+- [ ] T-077 Detectar autoloads faltantes
+- [ ] T-078 Validar ProjectSettings consistencia
+- [ ] T-079 Generar reporte de validación en artefacto
+- [ ] T-080 Fallar build si validación detecta issues
+- [ ] T-081 Matriz de validación con Godot 4.2 - 4.6
+- [ ] T-082 Tiempo de build medible
+- [ ] T-083 Tiempo de tests agregado
+- [ ] T-084 Tiempo de verificación de Godot
+- [ ] T-085 Tamaño de binarios por plataforma
+- [ ] T-086 Hallazgos de tests fallidos
+- [ ] T-087 Tendencia de duración de build semanal
+- [ ] T-088 Comparación contra baseline
+- [ ] T-089 Alerta si build > 15 min
+- [ ] T-090 Dashboard con snapshots de tamaño
+- [ ] T-091 Exportación CSV para graficar

@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 54: Mapa
@@ -100,7 +100,7 @@
 - [ ] Nombre del pin editable (diálogo de M53, caracteres M87) [M]
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco [M]
 - [ ] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo [S]
-- [ ] Persistencia de pines con M60 (PinData serializable) [C]
+- [x] Persistencia de pines con M60 (PinData serializable) [C]
 - [ ] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M]
 - [ ] Pines visibles en minimapa y mapa completo con estilo diferenciado [M]
 - [ ] Eliminar pin con confirmación amable y sin datos perdidos [S]

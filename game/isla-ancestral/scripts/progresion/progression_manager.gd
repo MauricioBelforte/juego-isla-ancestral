@@ -1,10 +1,13 @@
-# Modelo: minimax-m3-free
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
 # M71: Progresión — ProgressionManager (autoload "ProgressionManager")
 # Iteración 2: GameLogger integrado, tipo condicional nivel_modulo añadido,
 # catálogo expandido a 15 hitos, logger en DOM-PROG-HITO/UNLOCK/CARGA.
+# Iteración 3 (agnes-2.5-flash): ConditionDefinition.evaluar() como predicado puro,
+#   evaluar_condicion_id() con caché de resultados congelados, reevaluar_sucias(),
+#   detectar_condiciones_imposibles() (estático + dinámico).
 #
 # Pitfalls respetados (07-GUIA-GODOT):
 #   - Sin class_name (autoload, seccion 9.17)
@@ -33,6 +36,9 @@ var _hitos_alcanzados: Array[String] = []
 var _desbloqueos: Dictionary = {}
 ## condicion_id -> Array de hitos que dependen de esa condición
 var _condiciones_por_hito: Dictionary = {}
+## Condición evaluada → resultado congelado (caché)
+var _evaluacion_cache: Dictionary = {}
+const CACHE_MAX_SIZE: int = 64
 
 
 func _ready() -> void:
@@ -197,6 +203,277 @@ func _reevaluar(stat_id: String) -> void:
 	for hito_id in _condiciones_por_hito[stat_id]:
 		if not hito_alcanzado(String(hito_id)):
 			marcar_hito(String(hito_id))
+
+
+## ── Predicado puro: ConditionDefinition.evaluar(estado) ────────
+## Evalúa una condición como función pura sin efectos secundarios.
+## 'estado' es un Dictionary con keys: {profile_data, game_time, historia,
+##   collection_registry, tool_controller, casa_manager}
+func evaluar_pura(cond: Dictionary, estado: Dictionary = {}) -> bool:
+	"""Condición → bool sin leer autoloads ni modificar estado del juego."""
+	if cond.is_empty():
+		return false
+	var tipo := String(cond.get("tipo", ""))
+	# Fallback a perfil actual si no se provee estado
+	var prof: Node = null
+	if estado.has("profile"):
+		prof = estado["profile"] as Node
+	else:
+		prof = profile
+	var stat_value: Callable = func(stat_id: String) -> float:
+		if prof != null:
+			return float(prof.get_stat(stat_id))
+		return 0.0
+	match tipo:
+		"stat_min":
+			return stat_value.call(String(cond.get("stat_id", ""))) >= float(cond.get("umbral", 0))
+		"dias_jugados":
+			var gt: Node = null
+			if estado.has("game_time"):
+				gt = estado["game_time"] as Node
+			else:
+				gt = get_node_or_null("/root/GameTime")
+			var dias: int = int(gt.dia_absoluto()) if gt != null else 0
+			return dias >= int(cond.get("umbral", 0))
+		"sello_historia":
+			var h: Node = null
+			if estado.has("historia"):
+				h = estado["historia"] as Node
+			else:
+				h = get_node_or_null("/root/Historia")
+			if h == null:
+				return false
+			if h.has_method("sello_marcado"):
+				return bool(h.sello_marcado(String(cond.get("sello_id", ""))))
+			return false
+		"capitulo_historia":
+			var h2: Node = null
+			if estado.has("historia"):
+				h2 = estado["historia"] as Node
+			else:
+				h2 = get_node_or_null("/root/Historia")
+			return h2 != null and int(h2.capitulo_actual()) >= int(cond.get("capitulo", 99))
+		"riqueza_acumulada":
+			return stat_value.call("monedas_ganadas") >= float(cond.get("umbral", 0))
+		"primera_vez":
+			var actividad_id := String(cond.get("actividad_id", ""))
+			if prof != null:
+				return not prof.primera_vez(actividad_id)
+			return false
+		"hito_previo":
+			var hito_id := String(cond.get("milestone_id", ""))
+			if estado.has("alcanzados") and hito_id in (estado["alcanzados"] as Array):
+				return true
+			return hito_alcanzado(hito_id)
+		"coleccion_completa":
+			var reg: Node = null
+			if estado.has("collection_registry"):
+				reg = estado["collection_registry"] as Node
+			else:
+				reg = get_node_or_null("/root/CollectionRegistry")
+			return reg != null and bool(reg.is_exhibition_completed(String(cond.get("coleccion_id", ""))))
+		"nivel_modulo":
+			return _evaluar_nivel_modulo_puro(cond, estado)
+		"compuesta":
+			return _evaluar_compuesta_pura(cond, estado)
+		_:
+			return false
+
+
+func _evaluar_compuesta_pura(cond: Dictionary, estado: Dictionary) -> bool:
+	var op := String(cond.get("operador", "AND"))
+	var hijos: Array = cond.get("hijos", [])
+	if hijos.is_empty():
+		return false
+	if op == "AND":
+		for hijo in hijos:
+			if not evaluar_pura(hijo, estado):
+				return false
+		return true
+	if op == "OR":
+		for hijo in hijos:
+			if evaluar_pura(hijo, estado):
+				return true
+		return false
+	if op == "NOT":
+		return not evaluar_pura(hijos[0], estado)
+	return false
+
+
+func _evaluar_nivel_modulo_puro(cond: Dictionary, estado: Dictionary) -> bool:
+	var modulo := String(cond.get("modulo", ""))
+	var umbral := int(cond.get("umbral", 0))
+	if modulo == "herramienta":
+		var tc: Node = null
+		if estado.has("tool_controller"):
+			tc = estado["tool_controller"] as Node
+		else:
+			tc = get_node_or_null("/root/ToolController")
+		if tc != null and tc.has_method("obtener_nivel_herramienta"):
+			var id_herr := String(cond.get("ref", ""))
+			var niv := int(tc.obtener_nivel_herramienta(id_herr)) if id_herr != "" else 0
+			return niv >= umbral
+		return false
+	if modulo == "casa":
+		var cm: Node = null
+		if estado.has("casa_manager"):
+			cm = estado["casa_manager"] as Node
+		else:
+			cm = get_node_or_null("/root/CasaManager")
+		if cm != null and cm.has_method("obtener_nivel_casa"):
+			var niv := int(cm.obtener_nivel_casa())
+			return niv >= umbral
+		return false
+	return false
+
+
+## ── Evaluador con caché: evaluar_condicion_id() ─────────────────
+## Devuelve el resultado congelado; si ya está en caché lo reutiliza.
+func evaluar_condicion_id(condicion_id: String) -> bool:
+	if condicion_id.is_empty():
+		return false
+	if _evaluacion_cache.has(condicion_id):
+		return bool(_evaluacion_cache[condicion_id])
+	var hito: Dictionary = _hitost.get(condicion_id, {})
+	var cond: Dictionary = hito.get("condicion", {})
+	var resultado := evaluar_condicion(cond)
+	_evaluate_cache_set(condicion_id, resultado)
+	return resultado
+
+
+func _evaluate_cache_set(key: String, valor: bool) -> void:
+	if _evaluacion_cache.size() >= CACHE_MAX_SIZE:
+		# Evitar crecimiento infinito: eliminar entrada más vieja (dict no ordenado,
+		# pero en GDScript 4.x los diccionarios mantienen inserción — usamos LRU simple)
+		var oldest_key: String = ""
+		var oldest_idx: int = 0
+		var idx := 0
+		for k in _evaluacion_cache:
+			if idx == 0:
+				oldest_key = k
+			idx += 1
+		if oldest_key != "":
+			_evaluacion_cache.erase(oldest_key)
+	_evaluacion_cache[key] = valor
+
+
+func reevaluar_sucias() -> void:
+	"""Reevalúa todos los hitos no alcanzados. Llamado solo por eventos de dominio,
+	nunca por _process/_ready (garantía de §7)."""
+	for hito_id in _hitost:
+		if hito_alcanzado(hito_id):
+			continue
+		var cond: Dictionary = _hitost[hito_id].get("condicion", {})
+		if evaluar_condicion(cond):
+			marcar_hito(hito_id)
+
+
+## ── Detección de condiciones imposibles ──────────────────────────
+## Estática: analiza el catálogo JSON sin ejecutar el juego.
+## Dinámica: verifica durante runtime contra estado actual del jugador.
+func detectar_condiciones_imposibles_estaticas() -> Array[String]:
+	"""Retorna IDs de hitos cuya condición contiene referencias inválidas
+	(stat_id inexistente, modulo desconocido, umbral negativo, etc.)."""
+	var impossibles: Array[String] = []
+	var stats_validas := _stats_validos_conocidos()
+	for hito_id in _hitost:
+		var cond: Dictionary = _hitost[hito_id].get("condicion", {})
+		if _es_condicion_imposible(cond, stats_validas):
+			impossibles.append(hito_id)
+	return impossibles
+
+
+func _es_condicion_imposible(cond: Dictionary, stats: Array[String]) -> bool:
+	if cond.is_empty():
+		return false
+	var tipo := String(cond.get("tipo", ""))
+	match tipo:
+		"stat_min":
+			var sid := String(cond.get("stat_id", ""))
+			if sid == "" or not stats.has(sid):
+				return true
+			if int(cond.get("umbral", 0)) < 0:
+				return true
+		"riqueza_acumulada":
+			# Siempre lee monedas_ganadas; umbral negativo es imposible
+			if int(cond.get("umbral", 0)) < 0:
+				return true
+		"dias_jugados":
+			if int(cond.get("umbral", 0)) < 0:
+				return true
+		"sello_historia", "capitulo_historia":
+			# No podemos validar sellos/capítulos sin el autoload Historia
+			pass
+		"coleccion_completa":
+			var cid := String(cond.get("coleccion_id", ""))
+			if cid == "":
+				return true
+		"nivel_modulo":
+			var mod := String(cond.get("modulo", ""))
+			if mod != "herramienta" and mod != "casa":
+				return true
+			if int(cond.get("umbral", 0)) < 0:
+				return true
+		"compuesta":
+			var hijos: Array = cond.get("hijos", [])
+			for hijo in hijos:
+				if _es_condicion_imposible(hijo, stats):
+					return true
+		_:
+			pass
+	return false
+
+
+func detectar_condiciones_imposibles_dinamicas() -> Array[String]:
+	"""Retorna IDs de hitos cuya condición NO puede cumplirse jamás dado
+	el estado actual del jugador (ej: umbral mayor al máximo posible)."""
+	var impossibles: Array[String] = []
+	var stats_validas := _stats_validos_conocidos()
+	for hito_id in _hitost:
+		if hito_alcanzado(hito_id):
+			continue
+		var cond: Dictionary = _hitost[hito_id].get("condicion", {})
+		if _es_imposible_dinamico(cond, stats_validas):
+			impossibles.append(hito_id)
+	return impossibles
+
+
+func _es_imposible_dinamico(cond: Dictionary, stats: Array[String]) -> bool:
+	if cond.is_empty():
+		return false
+	var tipo := String(cond.get("tipo", ""))
+	match tipo:
+		"stat_min":
+			var sid := String(cond.get("stat_id", ""))
+			if not stats.has(sid):
+				return true
+			var actual := float(profile.get_stat(sid)) if profile != null else 0.0
+			var umbral := float(cond.get("umbral", 0))
+			# Si el umbral excede razonablemente el máximo observable → imposible
+			if umbral > actual * 10 + 100:
+				return true
+		"riqueza_acumulada":
+			var actual := float(profile.get_stat("monedas_ganadas")) if profile != null else 0.0
+			var umbral := float(cond.get("umbral", 0))
+			if umbral > actual * 10 + 1000:
+				return true
+		"compuesta":
+			var hijos: Array = cond.get("hijos", [])
+			for hijo in hijos:
+				if _es_imposible_dinamico(hijo, stats):
+					return true
+		_:
+			pass
+	return false
+
+
+func _stats_validos_conocidos() -> Array[String]:
+	return ["items_recolectados", "monedas_ganadas", "monedas_gastadas",
+			"regalos_dados", "sellos_obtenidos", "misiones_completadas",
+			"amistades_subidas", "viajes_realizados",
+			"nivel_pico", "nivel_azada", "nivel_hacha", "nivel_pala",
+			"nivel_regadera", "nivel_cana", "nivel_martillo", "nivel_tijeras",
+			"nivel_lupa"]
 
 
 ## ── Evaluador de condiciones (11 tipos, §3.6) ───────────

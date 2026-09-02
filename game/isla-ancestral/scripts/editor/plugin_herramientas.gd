@@ -9,7 +9,7 @@
 @tool
 extends EditorPlugin
 
-const RECIPE_TOOL := preload("res://scripts/editor/tools/recipe_tool.gd")
+const RECIPE_TOOL = preload("res://scripts/editor/tools/recipe_tool.gd")
 
 var _dock: PanelContainer
 

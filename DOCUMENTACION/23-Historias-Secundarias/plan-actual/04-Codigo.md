@@ -57,8 +57,8 @@ func validar_todas() -> Array  # para Editor/CI
 
 **Modelo:** Step 3.7 Flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-02 05:09
-**Estado:** Parcial — núcleo data-driven implementado (QuestChain Resource + QuestChainService autoload + validador + JSON ejemplo). Liberado a 🟡.
+**Fecha:** 2026-09-02 05:17
+**Estado:** Parcial — núcleo data-driven verificado y QA cruzado aprobado; liberado 🟡.
 
 ### Lo que hice
 - Creé `quest_chain.gd` como Resource con campos: id, título, contexto, pasos, recompensa, consecuencia, diálogo_posterior, oculta, postgame.
@@ -66,20 +66,25 @@ func validar_todas() -> Array  # para Editor/CI
 - Creé `validate_quest_chains.gd` como EditorScript para validación batch en Editor/CI.
 - Creé `data/historias/cadenas_ejemplo.json` con 3 cadenas de ejemplo (faro, biblioteca, plaza postgame).
 - Actualicé 04-Codigo.md con la API implementada y reglas de implementación.
+- Ejecuté test headless `test_historias.gd` con Godot 4.7.2: **0 fallos** en carga, validador, cadena completa, entrega con inventario, ocultas, postgame y persistencia.
+
+### Evidencia de testeo (2026-09-02)
+- Comando: `"D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64.exe" --headless --path "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\game\isla-ancestral" --script "res://scripts/historias/test_historias.gd"`
+- Salida: `=== TEST M23 HISTORIAS: 0 fallo(s) ===`
+- Cadenas ejercitadas: `cadena-faro`, `cadena-invernadero`, `cadena-secretta-luciernagas`, `cadena-epilogo-plaza`.
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No ejecuté el validador headless (no hay godot en PATH en este entorno).
-- No implementé las 40+ cadenas del catálogo completo (solo 3 de ejemplo).
-- No integré con M22/M68 (hooks de consecuencia y ejecución de misiones).
-- No implementé las 12 consecuencias persistentes completas (solo el schema en datos).
-- No implementé las recompensas narrativas/cosméticas completas (20 capítulos de diario, 10+ cosméticos).
+- No implementé las 40+ cadenas del catálogo completo (solo 4 de ejemplo en `secundarias.json`).
+- No integré ejecución real de pasos "puzzle" con M25/M26 (el motor valida evidencia; la resolución la hacen dueños).
+- No implementé diálogos posteriores completos ni contenido narrativo de las 60 cadenas.
+- No implementé recompensas cosméticas visibles ni consecuencias visuales del mundo.
 
 ### Recomendaciones para el próximo agente
-- Ejecutar `validate_quest_chains.gd` desde el Editor para verificar las cadenas de ejemplo.
-- Ampliar `cadenas_ejemplo.json` a 40+ cadenas con contexto verificable.
-- Integrar con M22 (hooks de consecuencia) y M68 (ejecución de objetivos).
-- Implementar las 12 consecuencias persistentes en el estado de mundo.
-- Agregar las recompensas narrativas/cosméticas completas.
+- Ejecutar `validate_quest_chains.gd` desde el Editor para verificar las cadenas antes de commit.
+- Ampliar `secundarias.json` a 40+ cadenas con contexto verificable y respetar el validador anti-repetición.
+- Integrar con M22 (consecuencias) y M68 (objetivos) cuando esos módulos estén estables.
+- M25/M26: reportar `reportar_paso(cadena_id, "puzzle", ref)` al resolver puzzles asociados.
+- M55: asegurar entradas `mision_{cadena_id}` en el catálogo de diario.
 
 ---
 

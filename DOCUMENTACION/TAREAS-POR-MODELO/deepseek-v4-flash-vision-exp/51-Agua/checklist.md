@@ -1,0 +1,141 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 51-Agua (51)
+
+# Checklist personal tareas — 51-Agua
+
+> Extraidas del 05-Checklist.md del módulo (131 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de agua el océano es caro e inconsistente
+- [ ] T-002 Definir el objetivo: agua determinista, cozy y barata con física coherente
+- [ ] T-003 Registrar dependencias: M09 (nivel de mar), M10 (splines), M47 (shader), M08 (bloques), M04 (Godot), M61/M62 (presupuestos)
+- [ ] T-004 Mapear la sección 50 "AGUA" del plan maestro al ID 51 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: fauna → M36/M65, barcos → M28/M67, sonido → M42, natación → M11
+- [ ] T-006 Documentar restricciones: nivel global, determinismo, transparencia acotada, sin refracción global
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Listar los 7 tipos del plan maestro
+- [ ] T-009 Agua de océano
+- [ ] T-010 Agua de río
+- [ ] T-011 Agua de lago
+- [ ] T-012 Agua de cascada
+- [ ] T-013 Agua subterránea
+- [ ] T-014 Agua congelada
+- [ ] T-015 Agua especial (termales/laguna brillante)
+- [ ] T-016 Definir parámetros por tipo (shader, sonido, física)
+- [ ] T-017 Definir nivel de mar global por semilla (M09/M10)
+- [ ] T-018 Definir consistencia ± 0.01 m entre chunks
+- [ ] T-019 Definir excepciones de POI documentadas
+- [ ] T-020 Definir mesh por chunk con LOD (lejano plano)
+- [ ] T-021 Definir olas GPU con fase fija por cuerpo
+- [ ] T-022 Definir espuma costera (altura de ola vs costa)
+- [ ] T-023 Definir transparencia con depth_prepass
+- [ ] T-024 Definir ReflectionProbe ≤ 2 por escena
+- [ ] T-025 Definir sin refracción global
+- [ ] T-026 Definir refracción solo en pools de puzzles (M24)
+- [ ] T-027 Definir overdraw ≤ 1.5×
+- [ ] T-028 Definir olas deterministas (fase + semilla)
+- [ ] T-029 Definir corriente por spline de río (M10)
+- [ ] T-030 Definir corriente mueve objetos (M70)
+- [ ] T-031 Definir corriente mueve barcos (M28/M67)
+- [ ] T-032 Definir mesh de caída con VF
+- [ ] T-033 Definir partículas en base (M52)
+- [ ] T-034 Definir sonido de cascada (M42)
+- [ ] T-035 Definir charcos y nivel estático en cuevas (M26)
+- [ ] T-036 Definir espuma de esporas
+- [ ] T-037 Definir sin olas
+- [ ] T-038 Definir congelamiento estacional (M29/M32)
+- [ ] T-039 Definir hielo caminable con límites de tiempo (M31)
+- [ ] T-040 Definir derretimiento con fuego (M13)
+- [ ] T-041 Definir anti-softlock (M66)
+- [ ] T-042 Definir termales sin daño y sin congelamiento
+- [ ] T-043 Definir lagunas brillantes (M47 emisivos)
+- [ ] T-044 Definir compuertas y represas (M24)
+- [ ] T-045 Definir lluvia eleva lagos temporales con tope (M32)
+- [ ] T-046 Definir sine inundar zonas de juego
+- [ ] T-047 Definir lagos efímeros del desierto (M32)
+- [ ] T-048 Definir secado gradual determinista
+- [ ] T-049 Definir sin impacto en progresión
+- [ ] T-050 Definir balde (M13) y botella (M15)
+- [ ] T-051 Definir riego (M33)
+- [ ] T-052 Definir agua como ítem finito (M14)
+- [ ] T-053 Definir canales y flujo direccional (M24)
+- [ ] T-054 Definir cerraduras de agua
+- [ ] T-055 Definir pools con refracción acotada
+- [ ] T-056 Definir flotabilidad del casco
+- [ ] T-057 Definir deriva por corriente (≤0.3 m/s)
+- [ ] T-058 Definir olas afectan balanceo visual
+- [ ] T-059 Definir peces nadan según corrientes (M36/M65)
+- [ ] T-060 Definir sin colisiones duras
+- [ ] T-061 Definir natación (M11): flotación suave
+- [ ] T-062 Definir inmersión visual 0.8 m
+- [ ] T-063 Definir sprint en agua costoso (M11)
+- [ ] T-064 Definir chapoteo al entrar/salir
+- [ ] T-065 Definir olas por bioma/franja (M42)
+- [ ] T-066 Definir chapoteo y balde
+- [ ] T-067 Definir cascada en loop
+- [ ] T-068 Definir crujido de hielo
+- [ ] T-069 Definir salpicaduras de pies
+- [ ] T-070 Definir rocío de cascada
+- [ ] T-071 Definir gotas al salir del agua
+- [ ] T-072 Definir superficie sólida plana por chunk
+- [ ] T-073 Definir bloques de agua (M08) interactuables
+- [ ] T-074 Definir física voxel coherente
+- [ ] T-075 Definir verts por chunk ≤ 2.000
+- [ ] T-076 Definir LOD de malla
+- [ ] T-077 Definir presupuesto contra M61/M62
+- [ ] T-078 Definir validate_water.gd
+- [ ] T-079 Verificar nivel de mar consistente
+- [ ] T-080 Verificar presupuesto de render
+- [ ] T-081 Verificar determinismo de olas
+- [ ] T-082 Definir prefijos water_, wave_
+- [ ] T-083 Alinear con M108
+- [ ] T-084 Rendimiento: mesh+LOD, probes y refracción acotadas
+- [ ] T-085 Memoria: buffers de agua (M62)
+- [ ] T-086 Determinismo: fases fijas + semilla
+- [ ] T-087 Cozy: corrientes suaves, sin penalización cruel
+- [ ] T-088 Mantenible: tipos centrales por .tres
+- [ ] T-089 Descartar océano voxel masivo
+- [ ] T-090 Descartar refracción global
+- [ ] T-091 Descartar probes por todo el océano
+- [ ] T-092 Descartar simulación de fluidos
+- [ ] T-093 Descartar ríos como bloques estáticos
+- [ ] T-094 Descartar hielo permanente
+- [ ] T-095 Riesgo de overdraw → presupuesto + LOD + depth_prepass
+- [ ] T-096 Riesgo de nivel inconsistente → valor global + validación
+- [ ] T-097 Riesgo de softlock de hielo → límites M66
+- [ ] T-098 Riesgo de corrientes injustas → fuerza suave + cozy
+- [ ] T-099 Riesgo de reflejos caros → ≤2 probes + prueba M90
+- [ ] T-100 Riesgo de ríos rotos → splines M10 + validador de pendiente
+- [ ] T-101 Documentar integración con M08/M10 (bloques/nivel/splines)
+- [ ] T-102 Documentar integración con M09 (nivel global)
+- [ ] T-103 Documentar integración con M47 (shader)
+- [ ] T-104 Documentar integración con M11 (natación)
+- [ ] T-105 Documentar integración con M13/M15/M33 (herramientas)
+- [ ] T-106 Documentar integración con M24 (puzzles)
+- [ ] T-107 Documentar integración con M28/M67 (barcos)
+- [ ] T-108 Documentar integración con M36/M65 (fauna)
+- [ ] T-109 Documentar integración con M29/M31/M32 (estaciones/clima)
+- [ ] T-110 Documentar integración con M42/M44 (sonido/feedback)
+- [ ] T-111 Documentar integración con M52 (partículas)
+- [ ] T-112 Documentar integración con M61/M62 (presupuestos)
+- [ ] T-113 Documentar integración con M66 (anti-softlock)
+- [ ] T-114 Documentar integración con M70 (objetos)
+- [ ] T-115 Documentar integración con M108/M118 (import/CI)
+- [ ] T-116 Documentar flujo de generación de chunk de océano
+- [ ] T-117 Documentar flujo de congelamiento estacional
+- [ ] T-118 Documentar flujo de puzzle de compuerta
+- [ ] T-119 Nivel de mar consistente entre chunks
+- [ ] T-120 Océano con olas/espuma dentro del presupuesto
+- [ ] T-121 Corrientes mueven objetos y barcos
+- [ ] T-122 Hielo solo estacional y sin softlock
+- [ ] T-123 Cascadas con sonido + partículas sincronizados
+- [ ] T-124 Puzzles de compuertas/canales funcionan (M24)
+- [ ] T-125 Natación suave sin clipping con chapoteo
+- [ ] T-126 Presupuesto verificado por validador
+- [ ] T-127 Documentar el desfase de numeración del plan maestro (50=AGUA → ID 51)
+- [ ] T-128 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-129 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-130 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md
+- [ ] T-131 Animación de superficie de agua (ondas, transparencia, reflejos) y materiales — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere shaders/M49)

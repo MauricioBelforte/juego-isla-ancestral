@@ -1,0 +1,141 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 67-Vehiculos (67)
+
+# Checklist personal tareas — 67-Vehiculos
+
+> Extraidas del 05-Checklist.md del módulo (131 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir VehicleManager como autoload único de vehículos
+- [ ] T-002 Gestionar el vehículo activo (uno a la vez) y API enter/exit (M70)
+- [ ] T-003 Validar estado antes de entrar (docked, superficie)
+- [ ] T-004 Registrar logs VEH-ENTER y VEH-EXIT
+- [ ] T-005 Emitir eventos VEHICLE_ENTERED/EXITED (M07)
+- [ ] T-006 Definir vehicle_preset.gd (tipo, física, capacidades, mejoras)
+- [ ] T-007 Crear vehicles_catalog.tres: barco, dirigible, submarino + plantilla locomotora
+- [ ] T-008 Preset barco (agua M51, 12 m/s)
+- [ ] T-009 Preset dirigible (aire, altitud máx 60 m)
+- [ ] T-010 Preset submarino (subagua, profundidad máx −40 m)
+- [ ] T-011 Navegar por agua leyendo la superficie (M51, sin fluidos)
+- [ ] T-012 Velocidad de crucero/rápida, timón suave y reversa
+- [ ] T-013 Colisiones con islas, rocas y vegetación (M50) sin atravesar
+- [ ] T-014 No atascarse en aguas poco profundas (aviso)
+- [ ] T-015 Vela desplegable (M48) y estela por evento (M52)
+- [ ] T-016 Vuelo con altitud/descenso y aterrizaje suave en plataformas
+- [ ] T-017 Altitud máxima 60 m (mejorable a 90 m)
+- [ ] T-018 No romper el streaming a gran altura (chunk_target + LOD, M10/M61)
+- [ ] T-019 No colisionar con vegetación alta (paso por encima)
+- [ ] T-020 Viento lateral (M32) y farol nocturno (M49)
+- [ ] T-021 Buceo/emersión con límite −40 m y flotabilidad mínima
+- [ ] T-022 Visibilidad y luces bajo el agua (M49)
+- [ ] T-023 Explorar cuevas subacuáticas (M25)
+- [ ] T-024 Burbujas por evento (M52) y audio amortiguado (M43)
+- [ ] T-025 Cámara estable bajo el agua (sin mareo)
+- [ ] T-026 Plantilla de locomotora SOLO si M68 exige ferrocarril
+- [ ] T-027 Velocidad sobre riel fija (20 m/s) y sin giro libre
+- [ ] T-028 Vagón de carga (16 slots, M14)
+- [ ] T-029 Documentar el estado condicional en 01-Requerimientos.md
+- [ ] T-030 Definir contrato de integración con M68
+- [ ] T-031 Física acotada: velocidad/giro/frenado por preset con suavizado
+- [ ] T-032 Controles con WASD y gamepad (palanca/gatillos)
+- [ ] T-033 Reversa para barco
+- [ ] T-034 Velocidad limitada por tipo (nunca romper streaming)
+- [ ] T-035 Testear física en 30/60 FPS (delta correcto)
+- [ ] T-036 Establecer chunk_target = vehículo durante la conducción
+- [ ] T-037 Volver chunk_target = jugador al salir
+- [ ] T-038 LOD de chunks por altitud del dirigible
+- [ ] T-039 Cargar islas cercanas (M27) antes que el terreno lejano
+- [ ] T-040 Testear barco/dirigible/submarino sin popping de terreno
+- [ ] T-041 Colisiones suaves con islas, rocas y vegetación (M50)
+- [ ] T-042 Barco no puede ir a tierra; submarino no emerge en tierra
+- [ ] T-043 Dirigible con techo de altitud
+- [ ] T-044 Vehículos no atraviesan puentes (M11) ni ruinas (M25)
+- [ ] T-045 No atropellar animales (M36)
+- [ ] T-046 Interacción para entrar/salir del vehículo
+- [ ] T-047 Entrada solo si está docked o en superficie
+- [ ] T-048 Al salir: restaurar cámara, HUD y sonidos (sin fugas)
+- [ ] T-049 No quedar atascado cerca de muros al entrar/salir
+- [ ] T-050 Testear entrada/salida con gamepad y durante eventos (M74)
+- [ ] T-051 Atraque con magnetismo suave en muelles
+- [ ] T-052 Ajustar posición y rotación; ángulo inválido → reintento
+- [ ] T-053 Docking de barco y dirigible en plataformas
+- [ ] T-054 Indicador visual de zona de atraque (M53) y sonido (M43)
+- [ ] T-055 Testear docking en muelles angostos y con olas (M51)
+- [ ] T-056 Baúl integrado con slots por tipo (barco 12, dirigible 8, submarino 10)
+- [ ] T-057 Abrir el baúl desde el HUD y mover ítems
+- [ ] T-058 Límite de slots respetado y apilables
+- [ ] T-059 Mejora de baúl persistente (M59)
+- [ ] T-060 Testear baúl con inventario lleno
+- [ ] T-061 Definir mejoras por vehículo (velocidad, giro, faroles, baúl)
+- [ ] T-062 Mejoras de velocidad/giro (niveles)
+- [ ] T-063 Mejoras de faroles (M49) y baúl
+- [ ] T-064 Comprar en tienda (M39) o artesanales (M16)
+- [ ] T-065 Persistencia y visualización de nivel en el HUD
+- [ ] T-066 Pintura del vehículo (paleta cozy, M46)
+- [ ] T-067 Banderas personalizables con viento (M50/M48)
+- [ ] T-068 Nombre del vehículo editable y localizable (M87)
+- [ ] T-069 Materiales de pintura del pool (M45/M49)
+- [ ] T-070 Persistencia de personalización (M59)
+- [ ] T-071 Sonidos de motor/agua/viento por vehículo
+- [ ] T-072 LOD de audio: atenuar > 40 m, silenciar > 80 m
+- [ ] T-073 Sin fugas de audio al salir
+- [ ] T-074 Sonidos de docking/salida y balance con M91
+- [ ] T-075 Testear audio 3D y bajo el agua (amortiguado)
+- [ ] T-076 Timón al girar, olas/estela y hélices del dirigible
+- [ ] T-077 Pasajeros a bordo y banderas con viento
+- [ ] T-078 Detener animaciones al salir (sin fuga)
+- [ ] T-079 LOD de animaciones en distancia
+- [ ] T-080 Testear animaciones con Reduce Motion (M58)
+- [ ] T-081 Cámara 3ª persona con zoom de cámara
+- [ ] T-082 Seguimiento suave sin mareo (M57)
+- [ ] T-083 Reducir movimiento con Reduce Motion (M58)
+- [ ] T-084 Cámara del submarino estable y sin clipping del dirigible
+- [ ] T-085 Testear cámara en 16:9 y 4:3 (M08)
+- [ ] T-086 Presupuesto por vehículo ≤ 30 draw calls (pooling M62)
+- [ ] T-087 Luces de faroles en pool (M49, máx 2 por vehículo)
+- [ ] T-088 VFX solo por eventos (M52)
+- [ ] T-089 Sin GC pesado durante la conducción
+- [ ] T-090 Probar con profiler (M116) y baja calidad (M90)
+- [ ] T-091 Entrar con inventario abierto (M14) o durante diálogo (M21, bloqueado)
+- [ ] T-092 Salir con el vehículo en movimiento rápido
+- [ ] T-093 Vehículo atascado en roca (desatascado manual)
+- [ ] T-094 Barco en agua congelada (hielo M51) y dirigible con viento fuerte (M32)
+- [ ] T-095 Carga de guardado con vehículo en el agua o a 60 m (M59)
+- [ ] T-096 Localizar HUD del vehículo (velocidad, dirección)
+- [ ] T-097 Localizar menús de personalización y avisos de docking
+- [ ] T-098 Localizar nombres de vehículos
+- [ ] T-099 Testear HUD en 3 idiomas sin desbordes
+- [ ] T-100 Localizar mensajes de límites (profundidad, altitud)
+- [ ] T-101 HUD legible con alto contraste opcional
+- [ ] T-102 Tamaño de texto configurable
+- [ ] T-103 Reduce Motion: cámara y animaciones reducidas
+- [ ] T-104 Subtítulos en avisos del vehículo
+- [ ] T-105 Controles completos con gamepad (sin mouse)
+- [ ] T-106 Crear validate_vehicles.gd (física, streaming, colisiones, presupuestos)
+- [ ] T-107 Probar ciclo barco: dock → entrar → navegar → atracar → salir
+- [ ] T-108 Probar ciclo dirigible: despegar → volar → aterrizar
+- [ ] T-109 Probar ciclo submarino: sumergir → explorar → emerger
+- [ ] T-110 Revisar logs VEH-* en consola sin errores
+- [ ] T-111 Documentar la API de VehicleManager
+- [ ] T-112 Documentar los presets en 04-Codigo.md
+- [ ] T-113 Documentar el flujo de streaming (chunk_target)
+- [ ] T-114 Documentar la condición de la locomotora
+- [ ] T-115 Agregar notas del agente al 04-Codigo.md (honestidad)
+- [ ] T-116 Alimentar logros de exploración (M72) por viajes
+- [ ] T-117 Registrar fotos del vehículo (M56, PHOTO_POSE_REQUEST)
+- [ ] T-118 Guardar estado del vehículo en el mundo (M59)
+- [ ] T-119 Coordinar con M68 la navegación asistida
+- [ ] T-120 Testear integración con M28 (viajes entre islas)
+- [ ] T-121 Firmar los documentos del módulo (modelo y plataforma)
+- [ ] T-122 Actualizar CHECKLIST-GLOBAL con el progreso real
+- [ ] T-123 Actualizar DOCUMENTACION/README.md con el módulo 67
+- [ ] T-124 Actualizar ESTADO-PARALELO.md
+- [ ] T-125 Generar el log 63 en Logs/
+- [ ] T-126 Verificar con verificar_checklist.py (sin alertas nuevas)
+- [ ] T-127 Push del módulo y reporte al usuario
+- [ ] T-128 Marcar ítems solo al cumplir la DoD (sección 21.6)
+- [ ] T-129 Revisar que plan-inicial == plan-actual (SHA-256)
+- [ ] T-130 Confirmar 130 ítems exactos
+- [ ] T-131 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

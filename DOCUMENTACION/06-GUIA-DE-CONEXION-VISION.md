@@ -3,7 +3,7 @@
 **Modelo:** Hy3
 **Plataforma:** Kilo
 **Fecha de creación:** 2026-08-24
-**Última actualización:** 2026-08-28 (conexión verificada desde Kilo: V4 nativa, V5 por socket, V2 por scripts)
+**Última actualización:** 2026-09-02 (reconciliado estado V3: marcada 🟡 Operativa limitada — ver sección V3; el resto de vías sin cambios)
 **Estado:** Viva — se actualiza cada vez que una vía nueva se instala o verifica
 
 > 📍 **Ubicación:** este archivo vive en la **raíz de `DOCUMENTACION/`** (archivo 06, después de `5-FUTURAS-MEJORAS.md`) para que todos los agentes lo encuentren de inmediato. El módulo dueño es `154-Vision-Del-Agente/`; referencias oficiales en `AGENTS.md` (sección 25) y en el `plan-actual/` del M154.
@@ -32,7 +32,7 @@ Esta guía se actualiza cada vez que se instala o verifica una vía nueva. **Si 
 |-----|--------|--------|---------------|------------|
 | V1 | Capturas en chat | 🟢 Operativa | Validación estética final (el usuario pega screenshots) | 2026-08-22 |
 | V2 | MCP custom de pantalla | 🟢 **Operativa** | Fallback universal (PIL/ImageGrab) | **2026-08-25** |
-| V3 | Export web + Playwright | ⬜ No instalada | QA automatizado / regresión visual | — |
+| V3 | Export web + Playwright | 🟡 Operativa (limitada) | QA automatizado / regresión visual (escenas sin voxel) | 2026-08-25 |
 | V4 | godot-mcp | 🟢 **Operativa** | Verificación dentro del juego (**FUNDAMENTAL**) | **2026-08-24** |
 | V5 | Blender + blender-mcp | 🟢 **Operativa** | Diseño/modelado de assets 3D con visión | **2026-08-24** |
 
@@ -196,6 +196,7 @@ Al trabajar con visión: **capturar → analizar → ajustar**, máximo **5 iter
 - **2026-08-28 — WorkBuddy AI:** registrado el server `blender` en `~/.workbuddy-ai/mcp.json` con `uvx blender-mcp`. Smoke stdio OK: `initialize` → `serverInfo {"name":"BlenderMCP","version":"1.29.1"}`. Sin Blender abierto el server arranca aunque falla el connect a `localhost:9876` (`WinError 10061`) — **esperado**.
 - **2026-08-28 — Inventario verificado:** Blender **4.2** instalado en `D:\Archivos de programa\Blender Foundation\Blender 4.2\blender.exe`. Addon ya instalado en `%APPDATA%\Blender Foundation\Blender\4.2\scripts\addons\addon.py` y **byte-idéntico** (md5 `a8eb45e84801206d72a799d59a26ac72`, 148.890 bytes) al `tools/mcp/blender-mcp/addon.py` del proyecto → no hace falta reinstalarlo.
 - **2026-08-28 — Verificada desde Kilo** por **Hy3**: Blender abierto con addon conectado (puerto 9876 escuchando); `get_scene_info` vía socket directo (`bpy_cliente.py`) → `success` con 10 objetos (`SM_Estrella_Mar`, `SOL`, `CAM_Orbital`, ...). En Kilo no hay cliente MCP registrado para Blender: usar **Opción B (socket directo)**.
+- **2026-09-02 — Verificada desde Kilo Code** por **GLM 5.3 (z-ai)**: puerto 9876 ABIERTO; `get_scene_info` vía `bpy_cliente.py` → `success` con 9 objetos (set del espantapájaros M33); captura offscreen 1200×639 generada OK (`cap_154_2026-09-02_05-40-32_prueba-kilo-glm53.png`). ⚠️ **E-10 aplicado:** este modelo NO acepta imágenes en el chat (la lectura del PNG devuelve "this model does not support image input"), así que la revisión visual queda para el usuario (V1) o un modelo multimodal; el QA de este agente es **numérico** (`verificar_bounds.py`, huella E-50, tris reales E-33).
 
 ### Checklist V5 desde WorkBuddy (estado 2026-08-28)
 
@@ -712,8 +713,9 @@ Notas:
 - En Kilo NO hay tools MCP nativas para Blender ni para pantalla: V5 se usa por socket TCP 9876 (requiere Blender abierto con el addon conectado en cada sesión) y V2 por scripts Python directos.
 - El flujo híbrido de V4 sigue aplicando: godot-mcp no expone screenshot de viewport, así que lanzar/leer logs con las tools nativas y capturar por script (`cap_godot.py` / `cap_printwindow.py` / método in-engine).
 - Las tools Godot nativas de Kilo piden `projectPath` explícito: usar `game/isla-ancestral` (relativo a la raíz del repo).
+- **2026-09-02 (GLM 5.3, z-ai):** V4 y V5 re-verificadas desde Kilo Code (Godot 4.7.2 + socket 9876 vivo con el set M33 en escena). ⚠️ E-10: GLM 5.3 free NO acepta imágenes en el chat — la aprobación visual E-13/E-37 debe hacerla el usuario (V1) o un modelo multimodal; este agente entrega QA numérico completo.
 
-**Firma:** Hy3 · Kilo · Windows · 2026-08-28.
+**Firma:** Hy3 · Kilo · Windows · 2026-08-28. (Re-verificación GLM 5.3: ver registro V5 2026-09-02.)
 
 ---
 

@@ -221,3 +221,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 — Config de islas data-driven (2026-09-02 06:20, deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/islas/islas.json` — config de las 4 islas (RIZ 256/256/256 Raíz, COR 1024/256/220 Coral, CEN 256/1024/220 Ceniza, AUR 1024/1024/200 Aurora) con biomas y color de agua por isla
+- [x] `scripts/islas/islas_schema.gd` — IslasSchema: valida codigos (RIZ/COR/CEN/AUR), centro 2D, radio>0, nombre, biomas>0, color_agua #RRGGBB
+- [x] Test headless: 5/5 checks OK (config válida, radio 256 de RIZ, 3 biomas Aurora, detección de color inválido e isla faltante)
+- [?] Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)

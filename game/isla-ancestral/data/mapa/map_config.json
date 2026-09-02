@@ -1,0 +1,16 @@
+{
+  "islas": ["raiz", "coral", "ceniza", "aurora"],
+  "marcadores": [
+    {"id": "faro", "tipo": "lugar", "isla": "raiz", "coords": [256, 20, 256], "visible_inicial": true},
+    {"id": "templo_raiz", "tipo": "templo", "isla": "raiz", "coords": [300, 25, 280], "visible_inicial": false},
+    {"id": "puerto_coral", "tipo": "lugar", "isla": "coral", "coords": [400, 15, 200], "visible_inicial": true},
+    {"id": "templo_coral", "tipo": "templo", "isla": "coral", "coords": [350, 18, 150], "visible_inicial": false},
+    {"id": "volcan_ceniza", "tipo": "lugar", "isla": "ceniza", "coords": [500, 40, 300], "visible_inicial": true},
+    {"id": "templo_ceniza", "tipo": "templo", "isla": "ceniza", "coords": [520, 35, 260], "visible_inicial": false}
+  ],
+  "config": {
+    "radio_revelado": 32,
+    "tamano_minimapa": 128,
+    "colores": {"explorado": "verde", "no_explorado": "gris"}
+  }
+}

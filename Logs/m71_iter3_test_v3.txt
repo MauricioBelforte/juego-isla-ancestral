@@ -1,0 +1,217 @@
+﻿Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ServiceRegistry: inicializado
+ServiceRegistry: registrado 'logger' → Node
+[2026-09-02T03:08:43] [INFO] [BOOT] Logger inicializado
+ServiceRegistry: registrado 'analytics' → Node
+[2026-09-02T03:08:43] [DEBUG] [ANALYTICS] analytics: sesion_inicio
+[2026-09-02T03:08:43] [INFO] [ANALYTICS] AnalyticsDirector inicializado
+ServiceRegistry: registrado 'telemetry' → Node
+[2026-09-02T03:08:43] [INFO] [ANALYTICS] Telemetry: servicio inicializado (opt-in OFF — sin captura)
+[TimeCalendar] Configuración cargada: día 1440 min, año 336 días, 4 estaciones
+=== Bootstrap Iniciando ===
+[Bootstrap] Registrando servicios core...
+ServiceRegistry: registrado 'event_bus' → Node
+ServiceRegistry: registrado 'service_registry' → Node
+[Bootstrap] Servicios core registrados (5): ["logger", "analytics", "telemetry", "event_bus", "service_registry"]
+[Bootstrap] Todos los servicios obligatorios están registrados
+=== Bootstrap Completado ===
+[VillagerManager] Inicializado (población max: 10)
+[M19] Catálogo de vecinos: 5 perfiles
+[M35] Catalogo de vetas mineras cargado: 6 vetas
+[M36] FaunaManager ready: 7 especies en catalogo
+[M73] ColeccionablesManager ready: 15 items, 4 categorias
+[M92] Triggers EventBus conectados: ["inventory.item_added", "world.block_placed", "npc.gift_given"]
+[M53] Tema cozy global aplicado (escala 1.00)
+[M16] RF17: use_item de M14 conectado (pergaminos)
+ServiceRegistry: registrado 'debug_menu' → Node
+[M110] DebugMenu listo (3 pestañas)
+[M39] Catálogos definitivos registrados: tienda_general, herreria, mercader_viajero
+[M23] Cadenas cargadas: 4
+[M28] Rutas cargadas: 4
+[M37] Exposiciones cargadas: 3
+[M55] Catálogo: 14 categorías, 44 entradas
+[2026-09-02T03:08:43] [INFO] [WORLD] Hitos cargados: 15
+[2026-09-02T03:08:43] [INFO] [WORLD] ProgressionManager ready, 15 hitos cargados
+[M72] Logros cargados: 7
+[M156] Terrenos cargados: 7
+ServiceRegistry: registrado 'datos' → Node
+[M60] DataStore registrado en ServiceRegistry como 'datos'
+[M60] DataStore listo (VERSION_ACTUAL=1)
+ServiceRegistry: registrado 'motivacion' → Node
+[M94] MotivacionManager listo (7 objetivos en catálogo)
+ServiceRegistry: registrado 'plataformas' → Node
+[M96] PlatformManager listo: bridge=SteamBridge, plataforma=windows, 10 plataformas en matriz
+ServiceRegistry: registrado 'world' → Node
+[M147] WorldBible listo: canon 1.0.0 (6 personajes, 8 lugares)
+ServiceRegistry: registrado 'memoria' → Node
+[M62] MemoryMonitor listo
+ServiceRegistry: registrado 'music' → Node
+[M41] MusicDirector listo (7 temas)
+ServiceRegistry: registrado 'ambient' → Node
+[M42] AmbientDirector listo (13 biomas)
+ServiceRegistry: registrado 'sfx' → Node
+[M43] SFXManager listo (6 superficies)
+ServiceRegistry: registrado 'feedback' → Node
+[M44] FeedbackDirector listo (8 recetas)
+ServiceRegistry: registrado 'narrative_sound' → Node
+[M150] NarrativeSound listo (6 momentos)
+ServiceRegistry: registrado 'crash' → Node
+[M122] CrashReporter listo (sesión 2026-09-02T06:08:43_1862623)
+ServiceRegistry: registrado 'cicd' → Node
+[M118] CiCdManager listo (3 gates)
+ServiceRegistry: registrado 'instalador' → Node
+[M116] InstaladorConfig listo (3 plataformas, 4 pasos)
+ServiceRegistry: registrado 'mapa' → Node
+[M54] MapManager listo (6 marcadores)
+ServiceRegistry: registrado 'localizacion' → Node
+[M87] LocalizationManager listo (2 idiomas)
+ServiceRegistry: registrado 'build' → Node
+[M117] BuildConfigManager listo (4 targets, 1 presets)
+ServiceRegistry: registrado 'updates' → Node
+[M119] UpdateManager listo (canal estable, versión 1.0.0)
+ServiceRegistry: registrado 'devtools' → Node
+[M109] DevTools listo (4 atajos, 3 flags)
+ServiceRegistry: registrado 'security' → Node
+[M106] SecurityManager listo (4 políticas)
+ServiceRegistry: registrado 'fonts' → Node
+[M88] FontCatalog listo (4 fuentes)
+ServiceRegistry: registrado 'backup' → Node
+[M107] BackupManager listo (máx 5 copias)
+ServiceRegistry: registrado 'dlc' → Node
+[M120] DlcManager listo (2 DLC, 1 bundles)
+ServiceRegistry: registrado 'support' → Node
+[M121] SupportManager listo (4 FAQ, 3 canales)
+ServiceRegistry: registrado 'modding' → Node
+[M123] ModdingManager listo (2 mods)
+ServiceRegistry: registrado 'ugc' → Node
+[M124] UgcManager listo (3 piezas UGC)
+ServiceRegistry: registrado 'community' → Node
+[M100] CommunityManager listo (5 canales, 4 eventos)
+[NPCManager] Inicializado (burbujas: full=30m med=60m light=100m)
+[NPCManager] Suscrito a VillagerManager.poblacion_cambio
+[EventManager] Inicializando M74...
+[EventManager] Cargado: festival_invierno (festival_invierno_nombre)
+[EventManager] Cargado: festival_luces (festival_luces_nombre)
+[EventManager] Cargado: festival_otono (festival_otono_nombre)
+[EventManager] Cargado: festival_primavera (festival_primavera_nombre)
+[EventManager] Cargado: festival_verano (festival_verano_nombre)
+[EventManager] Cargado: feria_colmena (feria_colmena_nombre)
+[EventManager] Cargado: concurso_minero (concurso_minero_nombre)
+[EventManager] Cargado: desafio_agricola (desafio_agricola_nombre)
+[EventManager] Cargado: torneo_pesca (torneo_pesca_nombre)
+[EventManager] Cargado: ceremonia_templos (ceremonia_templos_nombre)
+[EventManager] Cargado: vigilia_luna (vigilia_luna_nombre)
+[EventManager] Cargado: aurora_boreal (aurora_boreal_nombre)
+[EventManager] Cargado: niebla_faro (niebla_faro_nombre)
+[EventManager] Cargado: regalo_puerta (regalo_puerta_nombre)
+[EventManager] Cargado: visita_sorpresa (visita_sorpresa_nombre)
+[EventManager] Suscrito a GameTime.dia_cambio
+[EventManager] Suscrito a TimeCalendar.evento_activado
+[EventManager] Suscrito a EventBus.weather.clima_cambio
+[EventManager] CatÃ¡logo cargado: 15 eventos
+[EquipmentManager] Catálogo cargado: 16 prendas
+[EquipmentManager] Tabla de bonos por terrain cargada
+[NPCVisualDatabase] Cargados 23 diseños visuales
+[M160] Ubicaciones cargadas: 3
+[2026-09-02T03:08:43] [INFO] [WORLD] hito_items_10 (Coleccionista Novato)
+[2026-09-02T03:08:43] [INFO] [WORLD] hito_items_50 (Coleccionista Experimentado)
+[2026-09-02T03:08:43] [INFO] [WORLD] hito_misiones_1 (Buen Vecino)
+[DIARY-ADD] sello_sello_ceniza_sala1 (sellos)
+[DOM-LOGRO] logro_secreto_guardian — El Último Guardián
+[2026-09-02T03:08:43] [INFO] [WORLD] hito_sello_ceniza_sala1 (Sello de Ceniza I)
+[2026-09-02T03:08:43] [INFO] [WORLD] hito_sello_ceniza_sala2 (Sello de Ceniza II)
+[M37] Donación aceptada: baya_roja → flora
+[M37] Donación aceptada: fibra_algodon → flora
+[M37] Donación aceptada: madera_roble → flora
+[M37] Donación aceptada: mineral_cobre → flora
+[M37] Exposición 'flora' completada: recompensa 'semilla_tomate'
+[DOM-LOGRO] logro_coleccionista — Ojo de Curador
+[2026-09-02T03:08:43] [INFO] [WORLD] unlock_test (info: x)
+[2026-09-02T03:08:43] [INFO] [WORLD] Progreso restaurado: 0 hitos, 0 desbloqueos, 0 títulos
+[2026-09-02T03:08:43] [INFO] [WORLD] Hito de catálogo antiguo ignorado: hito_de_catalogo_viejo
+[2026-09-02T03:08:43] [INFO] [WORLD] Progreso restaurado: 5 hitos, 1 desbloqueos, 0 títulos
+=== TEST M71 PROGRESION: 0 fallo(s) ===
+[M40] Flujo: 0 -> 3
+[Bootstrap] GameFlowManager -> MUNDO
+ServiceRegistry: registrado 'economy_manager' → Node
+ServiceRegistry: registrado 'shop_manager' → Node
+ServiceRegistry: registrado 'inventario' → Node
+ServiceRegistry: registrado 'balance' → Node
+ServiceRegistry: registrado 'time_calendar' → Node
+ServiceRegistry: registrado 'farm' → Node
+ServiceRegistry: registrado 'fishing' → Node
+ServiceRegistry: registrado 'dialogue_manager' → Node
+ServiceRegistry: registrado 'crafting' → Node
+ServiceRegistry: registrado 'game_flow' → Node
+ServiceRegistry: registrado 'scene_manager' → Node
+[Bootstrap] DOM-INF integridad OK: 9 dominios de juego verificados
+[Bootstrap] Cargando escena principal: res://scenes/main_island.tscn
+[DEV] move_speed=25.0
+[Player] VoxelBoxMover listo, terrain encontrado
+[Villager] Catalina creado (especie=oso)
+[M09] Isla Aurora — terreno con biomas (semilla: 42)
+[M08] Jugador coloreado de azul
+[DOM-UI] capa registrada: DialogLayer (tipo=MODAL_FULL, pila=1)
+[DOM-UI] capa registrada: PauseLayer (tipo=MODAL_FULL, pila=2)
+[DOM-UI] capa registrada: MenusLayer (tipo=MODAL_FULL, pila=3)
+[DOM-UI] capa registrada: ConfirmPopup (tipo=MODAL_FULL, pila=4)
+[DOM-UI] capa registrada: CraftingUI (tipo=MODAL_FULL, pila=5)
+[DOM-UI] capa registrada: InventoryLayer (tipo=MODAL_FULL, pila=6)
+[DOM-UI] capa registrada: ShopUI (tipo=MODAL_FULL, pila=7)
+[DOM-UI] capa registrada: EquipmentLayer (tipo=MODAL_FULL, pila=8)
+[DOM-UI] UIRoot: capas montadas (dialogo=true pausa=true menus=true confirm=true crafting=true inventario=true tienda=true equipamiento=true)
+[M16] Mesa de trabajo colocada en (326, ~, 322)
+[M33] FarmToolController montado
+[M163] Chaman del Monte spawneado en (320.0, 35.0, 300.0)
+Isla Ancestral — Isla Raíz
+[M13] Equipada: Pico de Cobre (dur 150/150)
+[Player] Hotbar 1: Pico de Cobre
+[M13] Hotbar inicial: 5 herramientas
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: CatalinaOso
+[VillagerManager] CatalinaOso registrado (1 activos)
+[M15] Nodo madera_roble en (329, 30, 320) y=30 estado=0
+[M15] Nodo madera_roble en (326, 30, 326) y=30 estado=0
+[M15] Nodo madera_roble en (320, 30, 329) y=30 estado=0
+[M15] Nodo madera_roble en (314, 30, 326) y=30 estado=0
+[M15] Nodo piedra_caliza en (327, 30, 320) y=30 estado=0
+[M15] Nodo fibra_algodon en (329, 30, 320) y=30 estado=0
+[M15] Nodo baya_roja en (327, 30, 320) y=30 estado=0
+[M15] Nodo mineral_cobre en (330, 30, 320) y=30 estado=0
+[M15] Nodo fragmento_ancestral en (326, 30, 320) y=30 estado=0
+[M15] Nodo veta_cobre en (326, 30, 320) y=30 estado=0
+[M15] Nodo veta_hierro en (327, 30, 320) y=30 estado=0
+[M15] Nodo veta_oro en (327, 30, 320) y=30 estado=0
+[DOM-UI] capa des-registrada: EquipmentLayer (pila=7)
+[DOM-UI] capa des-registrada: ShopUI (pila=6)
+[DOM-UI] capa des-registrada: InventoryLayer (pila=5)
+[DOM-UI] capa des-registrada: CraftingUI (pila=4)
+[DOM-UI] capa des-registrada: ConfirmPopup (pila=3)
+[DOM-UI] capa des-registrada: MenusLayer (pila=2)
+[DOM-UI] capa des-registrada: PauseLayer (pila=1)
+[DOM-UI] capa des-registrada: DialogLayer (pila=0)
+[NPCManager] Agente removido: CatalinaOso
+[VillagerManager] CatalinaOso desregistrado (0 activos)
+[2026-09-02T03:08:44] [DEBUG] [ANALYTICS] analytics: sesion_fin
+Godot_v4.7.2-stable_win64.exe : WARNING: 18 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+En línea: 4 Carácter: 1
++ & "D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stabl ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: 18 Obj...` for details).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

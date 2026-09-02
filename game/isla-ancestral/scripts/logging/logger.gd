@@ -127,10 +127,13 @@ func _log(level: int, message: String, category: int, context: Dictionary) -> vo
 	line_emitted.emit(level, category, line)
 	print(line)
 
-	# Buffer + flush periódico (cada 100 líneas)
-	log_buffer.append(line)
-	if _file != null and log_buffer.size() >= 100:
-		_flush()
+	# Escritura INMEDIATA + flush línea a línea (fix 2026-09-02,
+	# deepseek-v4-flash-vision-exp): el buffer de 100 líneas retrasaba la
+	# lectura del archivo — el QA por logs (M103/M101) y el crash-proof
+	# necesitan las líneas en disco al momento. Mantiene rotación y _flush.
+	if _file != null:
+		_file.store_line(line)
+		_file.flush()
 
 ## Escapa caracteres para JSON payload.
 func _json_escape(s: String) -> String:

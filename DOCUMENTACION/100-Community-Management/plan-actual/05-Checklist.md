@@ -9,7 +9,7 @@
 - [ ] Crear reglas comunitarias
 - [ ] Crear moderación
 - [ ] Crear sistema de reportes
-- [ ] Crear canales de feedback
+- [x] Crear canales de feedback
 - [ ] Crear roadmap público si conviene
 - [ ] Crear changelog público
 - [ ] Responder dudas
@@ -38,19 +38,19 @@
 - [ ] Definir sistema de apelación para bans injustificados
 - [ ] Diseñar documento de reglas (rules.md)
 - [ ] Diseñar publicación de reglas en Discord
-- [ ] Diseñar publicación de reglas en Steam Community Hub
+- [x] Diseñar publicación de reglas en Steam Community Hub
 - [ ] Diseñar publicación de reglas en redes sociales
 
 ### [S] Sistema de moderación
 - [ ] Definir rol Admin (control total, puede banear, gestionar roles)
 - [ ] Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)
 - [ ] Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)
-- [ ] Definir rol Usuario (puede reportar contenido, participar en canales)
+- [x] Definir rol Usuario (puede reportar contenido, participar en canales)
 - [ ] Definir permisos por rol
 - [ ] Diseñar sistema de logs de acciones (ban, mute, kick)
 - [ ] Diseñar sistema de apelación para bans injustificados
-- [ ] Diseñar configuración de roles en Discord (roles.json)
-- [ ] Diseñar implementación de roles en Steam (moderators)
+- [x] Diseñar configuración de roles en Discord (roles.json)
+- [x] Diseñar implementación de roles en Steam (moderators)
 
 ### [S] Sistema de reportes
 - [ ] Definir categoría: contenido tóxico (acoso, discriminación, spam)
@@ -65,24 +65,24 @@
 - [ ] Diseñar notificación al usuario reportado (si aplica acción)
 - [ ] Diseñar dashboard de reportes para moderadores
 - [ ] Diseñar logs de reportes y acciones
-- [ ] Diseñar configuración de categorías (report_categories.json)
+- [x] Diseñar configuración de categorías (report_categories.json)
 
 ### [S] Canales de feedback
-- [ ] Diseñar canal #bugs en Discord
-- [ ] Diseñar canal #sugerencias en Discord
-- [ ] Diseñar canal #preguntas en Discord
-- [ ] Diseñar canal #off-topic en Discord
-- [ ] Diseñar canal #anuncios en Discord
-- [ ] Diseñar canal #faq en Discord (solo lectura)
-- [ ] Diseñar canal #changelog en Discord (solo lectura)
-- [ ] Diseñar canal #roadmap en Discord (solo lectura)
-- [ ] Diseñar sección de Discusiones en Steam Community Hub
-- [ ] Diseñar sección de Bugs y Problemas en Steam Community Hub
-- [ ] Diseñar sección de Sugerencias en Steam Community Hub
+- [x] Diseñar canal #bugs en Discord
+- [x] Diseñar canal #sugerencias en Discord
+- [x] Diseñar canal #preguntas en Discord
+- [x] Diseñar canal #off-topic en Discord
+- [x] Diseñar canal #anuncios en Discord
+- [x] Diseñar canal #faq en Discord (solo lectura)
+- [x] Diseñar canal #changelog en Discord (solo lectura)
+- [x] Diseñar canal #roadmap en Discord (solo lectura)
+- [x] Diseñar sección de Discusiones en Steam Community Hub
+- [x] Diseñar sección de Bugs y Problemas en Steam Community Hub
+- [x] Diseñar sección de Sugerencias en Steam Community Hub
 - [ ] Diseñar cuenta oficial en Twitter/X
 - [ ] Diseñar subreddit r/IslaAncestral en Reddit
-- [ ] Diseñar pines con directrices en cada canal
-- [ ] Diseñar bots para redirigir contenido a canales correctos
+- [x] Diseñar pines con directrices en cada canal
+- [x] Diseñar bots para redirigir contenido a canales correctos
 
 ### [S] Roadmap público
 - [ ] Definir roadmap público (opcional)
@@ -91,10 +91,10 @@
 - [ ] Definir estados (Completado, En desarrollo, Planeado, Futuro)
 - [ ] Definir notas contextuales por hito
 - [ ] Diseñar roadmap en sitio web
-- [ ] Diseñar roadmap en Steam Community Hub
-- [ ] Diseñar roadmap en Discord (canal #roadmap)
+- [x] Diseñar roadmap en Steam Community Hub
+- [x] Diseñar roadmap en Discord (canal #roadmap)
 - [ ] Diseñar actualización periódica (mensual o cuando haya cambios)
-- [ ] Diseñar configuración de roadmap (roadmap.json)
+- [x] Diseñar configuración de roadmap (roadmap.json)
 
 ### [S] Changelog público
 - [ ] Definir formato de changelog (Keep a Changelog)
@@ -102,8 +102,8 @@
 - [ ] Definir categorías (Added, Changed, Fixed, Removed)
 - [ ] Definir notas importantes por cambio
 - [ ] Definir links a issues resueltos
-- [ ] Diseñar changelog en Steam (announcements)
-- [ ] Diseñar changelog en Discord (canal #changelog)
+- [x] Diseñar changelog en Steam (announcements)
+- [x] Diseñar changelog en Discord (canal #changelog)
 - [ ] Diseñar changelog en sitio web
 - [ ] Diseñar actualización con cada actualización del juego
 - [ ] Diseñar integración con M102 (Bug Tracking) para issues resueltos
@@ -117,11 +117,11 @@
 - [ ] Diseñar FAQ técnica (requisitos de sistema, controladores)
 - [ ] Diseñar FAQ de gameplay (¿combate?, ¿permadeath?)
 - [ ] Diseñar FAQ en sitio web
-- [ ] Diseñar FAQ en Steam Community Hub
-- [ ] Diseñar FAQ en Discord (canal #faq)
+- [x] Diseñar FAQ en Steam Community Hub
+- [x] Diseñar FAQ en Discord (canal #faq)
 - [ ] Diseñar sistema de etiquetas para dudas frecuentes
 - [ ] Diseñar respuestas documentadas para reutilización
-- [ ] Diseñar configuración de FAQ (faq.json)
+- [x] Diseñar configuración de FAQ (faq.json)
 
 ### [S] Identificación de bugs reportados
 - [ ] Definir sistema de triage de bugs
@@ -185,23 +185,23 @@
 ### [S] Gestión de spoilers
 - [ ] Definir etiquetado obligatorio de spoilers
 - [ ] Definir etiquetado en Discord (||texto||)
-- [ ] Definir etiquetado en Steam ([SPOILER] en título)
+- [x] Definir etiquetado en Steam ([SPOILER] en título)
 - [ ] Definir etiquetado en redes sociales (#spoiler)
-- [ ] Diseñar canales específicos para contenido de historia (#story-spoilers)
-- [ ] Diseñar secciones separadas para spoilers en Steam
+- [x] Diseñar canales específicos para contenido de historia (#story-spoilers)
+- [x] Diseñar secciones separadas para spoilers en Steam
 - [ ] Definir temporales para contenido nuevo (30 días post-lanzamiento)
-- [ ] Definir reglas sobre spoilers en Steam y redes sociales
+- [x] Definir reglas sobre spoilers en Steam y redes sociales
 - [ ] Diseñar recordatorios temporales después de lanzamiento
-- [ ] Diseñar canales ocultos para contenido muy sensible
+- [x] Diseñar canales ocultos para contenido muy sensible
 
 ### [S] Gestión de filtraciones
-- [ ] Definir filtraciones (contenido no público, assets, builds, código)
+- [x] Definir filtraciones (contenido no público, assets, builds, código)
 - [ ] Definir protocolo: eliminar contenido inmediatamente
 - [ ] Definir protocolo: contactar plataforma para takedown
 - [ ] Definir protocolo: investigar fuente de filtración (si es posible)
 - [ ] Definir protocolo: comunicar con comunidad que contenido no es oficial
 - [ ] Diseñar protocolo documentado para filtraciones
-- [ ] Diseñar contactos de plataformas (Steam, Discord, Reddit)
+- [x] Diseñar contactos de plataformas (Steam, Discord, Reddit)
 - [ ] Diseñar plantillas de DMCA/takedown
 - [ ] Diseñar comunicación con comunidad sobre contenido filtrado
 
@@ -212,9 +212,9 @@
 - [ ] Definir verificación oficial de desarrolladores (etiquetas de verified dev)
 - [ ] Definir reporte de cuentas de impersonación a plataformas
 - [ ] Definir comunicación con comunidad sobre cuentas oficiales
-- [ ] Definir ban inmediato de impersonadores en canales oficiales
+- [x] Definir ban inmediato de impersonadores en canales oficiales
 - [ ] Diseñar etiquetas de verified dev en Discord
-- [ ] Diseñar cuentas oficiales verificadas en Steam (developer badge)
+- [x] Diseñar cuentas oficiales verificadas en Steam (developer badge)
 - [ ] Diseñar listado de cuentas oficiales en sitio web
 - [ ] Diseñar protocolo de reporte de impersonación
 
@@ -238,8 +238,8 @@
 - [ ] Definir AMAs ocasionales (Ask Me Anything)
 - [ ] Definir showcases de contenido en desarrollo
 - [ ] Diseñar cadencia de actualizaciones (mensual o cuando haya hitos)
-- [ ] Diseñar canal #anuncios en Discord
-- [ ] Diseñar anuncios en Steam Community Hub
+- [x] Diseñar canal #anuncios en Discord
+- [x] Diseñar anuncios en Steam Community Hub
 - [ ] Diseñar anuncios en Twitter/X
 - [ ] Diseñar sitio web (blog/updates)
 - [ ] Diseñar AMAs cada 3-6 meses
@@ -251,21 +251,21 @@
 - [ ] Diseñar contenido de showcases (features, arte, música, efectos)
 
 ### [S] Archivos de configuración
-- [ ] Diseñar community/rules.md
-- [ ] Diseñar community/roles.json
-- [ ] Diseñar community/report_categories.json
-- [ ] Diseñar community/faq.json
-- [ ] Diseñar community/roadmap.json
-- [ ] Diseñar community/changelog.md
-- [ ] Diseñar community/communication_guidelines.md
-- [ ] Diseñar community/moderation_protocol.md
-- [ ] Diseñar community/dmca_template.txt
-- [ ] Diseñar community/official_accounts.md
+- [x] Diseñar community/rules.md
+- [x] Diseñar community/roles.json
+- [x] Diseñar community/report_categories.json
+- [x] Diseñar community/faq.json
+- [x] Diseñar community/roadmap.json
+- [x] Diseñar community/changelog.md
+- [x] Diseñar community/communication_guidelines.md
+- [x] Diseñar community/moderation_protocol.md
+- [x] Diseñar community/dmca_template.txt
+- [x] Diseñar community/official_accounts.md
 
 ### [S] Scripts opcionales
-- [ ] Diseñar scripts/discord_setup.py
-- [ ] Diseñar scripts/steam_announcement.py
-- [ ] Diseñar scripts/report_analyzer.py
+- [x] Diseñar scripts/discord_setup.py
+- [x] Diseñar scripts/steam_announcement.py
+- [x] Diseñar scripts/report_analyzer.py
 
 ## Totales
 

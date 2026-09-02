@@ -1,0 +1,167 @@
+# Checklist de tareas — 105-Telemetria-De-Gameplay (deepseek-v4-flash / Kilo Code)
+
+Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
+
+- [x] T-001 Medir primer tutorial completado [S]
+- [x] T-002 Medir primer recurso recolectado [S]
+- [x] T-003 Medir primera casa [S]
+- [x] T-004 Medir primer NPC [S]
+- [x] T-005 Medir primer puzzle [S]
+- [x] T-006 Medir primer Sello [S]
+- [x] T-007 Medir primer viaje [S]
+- [x] T-008 Medir primera isla [S]
+- [x] T-009 Medir primer museo [S]
+- [x] T-010 Medir primer festival [S]
+- [x] T-011 Medir primer proyecto comunitario [S]
+- [x] T-012 Medir tiempo hasta primer descubrimiento [S]
+- [x] T-013 Medir tiempo hasta primer viaje [S]
+- [x] T-014 Medir puzzle abandonado [S]
+- [x] T-015 Medir dificultad percibida [S]
+- [x] T-016 Medir zonas ignoradas [S]
+- [ ] T-017 Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) [C]
+- [x] T-018 Definir evento tutorial_first_completion [S]
+- [x] T-019 Definir evento resource_first_collected [S]
+- [x] T-020 Definir evento house_first_built [S]
+- [x] T-021 Definir evento npc_first_interaction [S]
+- [x] T-022 Definir evento puzzle_first_completed [S]
+- [x] T-023 Definir evento seal_first_obtained [S]
+- [x] T-024 Definir evento travel_first_completed [S]
+- [x] T-025 Definir evento island_first_discovered [S]
+- [x] T-026 Definir evento museum_first_visited [S]
+- [x] T-027 Definir evento festival_first_participated [S]
+- [x] T-028 Definir evento community_project_first_completed [S]
+- [x] T-029 Definir evento puzzle_abandoned [S]
+- [x] T-030 Definir evento difficulty_perceived [S]
+- [x] T-031 Definir evento zone_entered [S]
+- [x] T-032 Definir evento zone_exited [S]
+- [x] T-033 Definir evento session_started [S]
+- [x] T-034 Definir evento session_ended [S]
+- [ ] T-035 Definir evento chapter_completed (dep sistema de capítulos no implementado; pendiente integración) [M]
+- [ ] T-036 Definir métrica time_to_first_discovery
+- [x] T-037 Definir métrica time_to_first_travel
+- [ ] T-038 Definir métrica time_to_first_house
+- [ ] T-039 Definir métrica time_to_first_puzzle
+- [ ] T-040 Definir métrica time_to_first_seal
+- [x] T-041 Definir métrica session_duration
+- [ ] T-042 Diseñar cálculo de time_to_first_discovery
+- [x] T-043 Diseñar cálculo de time_to_first_travel
+- [x] T-044 Diseñar cálculo de session_duration
+- [x] T-045 Definir puzzle_abandoned (detección)
+- [x] T-046 Definir zonas_ignored (detección)
+- [ ] T-047 Diseñar detector de puzzle abandonado (timer de 60 segundos)
+- [ ] T-048 Diseñar umbral de puzzle abandonado (5 minutos sin completar)
+- [ ] T-049 Diseñar detector de zonas ignoradas (timer de 60 segundos)
+- [ ] T-050 Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
+- [ ] T-051 Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
+- [ ] T-052 Diseñar registro de zones_ignored con zone_id y timestamp
+- [ ] T-053 Definir encuesta post-puzzle
+- [ ] T-054 Definir rating 1-5 (1: muy fácil, 5: muy difícil)
+- [ ] T-055 Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
+- [ ] T-056 Diseñar registro de difficulty_perceived con puzzle_id y rating
+- [ ] T-057 Diseñar encuesta opcional después de completar puzzle
+- [ ] T-058 Definir análisis de datos para identificar puzzles con alta tasa de abandono
+- [ ] T-059 Definir análisis de datos para identificar zonas ignoradas
+- [ ] T-060 Definir análisis de datos para identificar eventos clave no alcanzados
+- [ ] T-061 Definir análisis de datos para identificar tiempos anormales
+- [ ] T-062 Definir ajuste de balance basado en datos reales
+- [ ] T-063 Definir opt-in explícito
+- [ ] T-064 Definir prompt en primer inicio del juego
+- [ ] T-065 Definir opción de opt-out en settings
+- [ ] T-066 Definir datos anonimizados (sin identificadores personales)
+- [ ] T-067 Definir no recolectar nombres, emails, IPs
+- [ ] T-068 Definir solo recolectar datos de gameplay y comportamiento
+- [ ] T-069 Definir posibilidad de solicitar eliminación de datos
+- [ ] T-070 Definir política de privacidad documentada
+- [ ] T-071 Diseñar integración con M104 para envío de eventos
+- [ ] T-072 Diseñar GameplayTelemetry emitir eventos a AnalyticsService
+- [ ] T-073 Diseñar AnalyticsService batching y envío
+- [ ] T-074 Diseñar AnalyticsService anonimización y GDPR compliance
+- [ ] T-075 Diseñar AnalyticsService caché local y envío batch
+- [ ] T-076 Diseñar integración con M71 para observación de eventos
+- [ ] T-077 Diseñar M71 notificar a M105 cuando ocurren eventos clave
+- [ ] T-078 Diseñar M105 registrar timestamp del evento
+- [ ] T-079 Diseñar M105 no afectar lógica de progresión de M71
+- [ ] T-080 Diseñar M105 como observador pasivo de eventos de M71
+- [ ] T-081 Diseñar integración con M22 para observación de eventos
+- [ ] T-082 Diseñar M22 notificar a M105 cuando se completan capítulos
+- [ ] T-083 Diseñar M105 registrar progreso de historia principal
+- [ ] T-084 Diseñar M105 identificar capítulos donde muchos jugadores se atascans
+- [ ] T-085 Diseñar integración con M102 para generación de issues
+- [ ] T-086 Diseñar datos de telemetría identificar bugs emergentes
+- [ ] T-087 Diseñar alta tasa de abandono en puzzle → posible bug
+- [ ] T-088 Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
+- [ ] T-089 Diseñar M105 generar issues en M102 basados en patrones de datos
+- [ ] T-090 Diseñar GameplayTelemetry como autoload
+- [ ] T-091 Diseñar signal telemetry_event(event_name, data)
+- [ ] T-092 Diseñar método track_event(event_name, data)
+- [ ] T-093 Diseñar método start_session()
+- [ ] T-094 Diseñar método end_session()
+- [ ] T-095 Diseñar método generate_session_id()
+- [ ] T-096 Diseñar método set_opt_in(enabled)
+- [ ] T-097 Diseñar método load_opt_in_status()
+- [ ] T-098 Diseñar método save_opt_in_status()
+- [ ] T-099 Diseñar variable opt_in
+- [ ] T-100 Diseñar variable session_id
+- [ ] T-101 Diseñar variable session_start_time
+- [ ] T-102 Diseñar variable tracked_events
+- [ ] T-103 Diseñar método has_tracked(event_name)
+- [ ] T-104 Diseñar método mark_tracked(event_name)
+- [ ] T-105 Diseñar método track_tutorial_first_completion()
+- [ ] T-106 Diseñar método track_resource_first_collected(resource_type)
+- [ ] T-107 Diseñar método track_house_first_built()
+- [ ] T-108 Diseñar método track_npc_first_interaction(npc_id)
+- [ ] T-109 Diseñar método track_puzzle_first_completed(puzzle_id)
+- [ ] T-110 Diseñar método track_seal_first_obtained(seal_id)
+- [ ] T-111 Diseñar método track_travel_first_completed(from_island, to_island)
+- [ ] T-112 Diseñar método track_island_first_discovered(island_id)
+- [ ] T-113 Diseñar método track_museum_first_visited(museum_id)
+- [ ] T-114 Diseñar método track_festival_first_participated(festival_id)
+- [ ] T-115 Diseñar método track_community_project_first_completed(project_id)
+- [ ] T-116 Diseñar método track_puzzle_abandoned(puzzle_id, time_in_puzzle)
+- [ ] T-117 Diseñar método track_difficulty_perceived(puzzle_id, rating)
+- [ ] T-118 Diseñar método track_zone_entered(zone_id)
+- [ ] T-119 Diseñar método track_zone_exited(zone_id, time_in_zone)
+- [ ] T-120 Diseñar método track_zone_ignored(zone_id)
+- [ ] T-121 Diseñar puzzle_active_start_time (Dictionary)
+- [ ] T-122 Diseñar puzzle_check_timer (Timer)
+- [ ] T-123 Diseñar método setup_puzzle_detector()
+- [ ] T-124 Diseñar método start_puzzle(puzzle_id)
+- [ ] T-125 Diseñar método complete_puzzle(puzzle_id)
+- [ ] T-126 Diseñar método _on_puzzle_check()
+- [ ] T-127 Diseñar umbral de 5 minutos sin completar
+- [ ] T-128 Diseñar zone_enter_time (Dictionary)
+- [ ] T-129 Diseñar zone_check_timer (Timer)
+- [ ] T-130 Diseñar método setup_zone_detector()
+- [ ] T-131 Diseñar método enter_zone(zone_id)
+- [ ] T-132 Diseñar método exit_zone(zone_id)
+- [ ] T-133 Diseñar método _on_zone_check()
+- [ ] T-134 Diseñar umbral de 1 minuto sin explorar
+- [ ] T-135 Diseñar método show_difficulty_survey(puzzle_id)
+- [ ] T-136 Diseñar método submit_difficulty_rating(puzzle_id, rating)
+- [ ] T-137 Diseñar UI de encuesta post-puzzle
+- [ ] T-138 Diseñar encuesta opcional (no forzar)
+- [ ] T-139 Diseñar archivo user://telemetry/gameplay_events.json
+- [ ] T-140 Diseñar formato JSON de eventos
+- [ ] T-141 Diseñar método save_events_to_cache()
+- [ ] T-142 Diseñar carga de eventos al inicio (opcional)
+- [ ] T-143 Diseñar archivo user://settings/telemetry.json
+- [ ] T-144 Diseñar formato JSON de configuración
+- [ ] T-145 Diseñar método load_opt_in_status()
+- [ ] T-146 Diseñar método save_opt_in_status()
+- [ ] T-147 Diseñar GameplayTelemetryLoader
+- [ ] T-148 Diseñar método load_opt_in_status()
+- [ ] T-149 Diseñar integración con al inicio del juego
+- [ ] T-150 Diseñar GameplayTelemetrySaver
+- [ ] T-151 Diseñar método save_opt_in_status()
+- [ ] T-152 Diseñar integración al cerrar el juego
+- [ ] T-153 Diseñar res://telemetry/gameplay_telemetry.gd
+- [ ] T-154 Diseñar res://telemetry/gameplay_telemetry_loader.gd
+- [ ] T-155 Diseñar res://telemetry/gameplay_telemetry_saver.gd
+- [ ] T-156 Diseñar prueba de opt-in y opt-out de telemetría
+- [ ] T-157 Diseñar prueba de registro de eventos clave
+- [ ] T-158 Diseñar prueba de cálculo de métricas de tiempo
+- [ ] T-159 Diseñar prueba de detección de puzzles abandonados
+- [ ] T-160 Diseñar prueba de detección de zonas ignoradas
+- [ ] T-161 Diseñar prueba de encuesta de dificultad percibida
+- [ ] T-162 Diseñar prueba de integración con M104 (Analytics)
+- [ ] T-163 Diseñar prueba de anonimización de datos

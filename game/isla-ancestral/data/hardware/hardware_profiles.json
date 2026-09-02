@@ -1,0 +1,12 @@
+{
+  "perfiles": [
+    {"id": "baja", "nombre": "Baja", "gpu": "integradas", "ram_mb": 8192, "fps_objetivo": 30, "resolucion": "720p"},
+    {"id": "media", "nombre": "Media", "gpu": "GTX1060/RX580", "ram_mb": 16384, "fps_objetivo": 60, "resolucion": "1080p"},
+    {"id": "alta", "nombre": "Alta", "gpu": "RTX3060/RX6700", "ram_mb": 32768, "fps_objetivo": 60, "resolucion": "1440p"}
+  ],
+  "plataformas": {
+    "windows": {"perfil_minimo": "baja", "perfil_recomendado": "media"},
+    "macos": {"perfil_minimo": "baja", "perfil_recomendado": "media"},
+    "linux": {"perfil_minimo": "baja", "perfil_recomendado": "media"}
+  }
+}

@@ -1,0 +1,302 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 156-Terrenos-Y-Movimiento (156)
+
+# Checklist personal tareas — 156-Terrenos-Y-Movimiento
+
+> Extraidas del 05-Checklist.md del módulo (292 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir estructura de carpetas del modulo
+- [ ] T-002 Crear directorio scripts/terrain/
+- [ ] T-003 Crear directorio resources/terrain/
+- [ ] T-004 Crear directorio scenes/terrain/
+- [ ] T-005 Definir nombres de archivos del modulo
+- [ ] T-006 Documentar dependencias con M11
+- [ ] T-007 Documentar dependencias con M155
+- [ ] T-008 Definir interfaz publica del sistema
+- [ ] T-009 Definir senales del sistema
+- [ ] T-010 Definir eventos de comunicacion entre modulos
+- [ ] T-011 Crear diagrama de componentes
+- [ ] T-012 Crear diagrama de secuencia
+- [ ] T-013 Definir orden de ejecucion por frame
+- [ ] T-014 Documentar flujo principal de ejecucion
+- [ ] T-015 Documentar flujo de audio
+- [ ] T-016 Documentar flujo de efectos visuales
+- [ ] T-017 Definir constantes del sistema
+- [ ] T-018 Definir variables de configuracion
+- [ ] T-019 Documentar edge cases conocidos
+- [ ] T-020 Crear terrain_detector.gd
+- [ ] T-021 Implementar RayCast3D vertical
+- [ ] T-022 Implementar timer de deteccion configurable
+- [ ] T-023 Implementar deteccion por collision layer
+- [ ] T-024 Implementar senal terrain_changed
+- [ ] T-025 Implementar get_current_terrain_id()
+- [ ] T-026 Implementar cache de ultimo terreno
+- [ ] T-027 Implementar debounce para evitar flickering
+- [ ] T-028 Implementar manejo de raycast sin colision
+- [ ] T-029 Implementar manejo de collider sin get_terrain_id()
+- [ ] T-030 Configurar ray_length por defecto (2.0)
+- [ ] T-031 Configurar detection_interval por defecto (0.1s)
+- [ ] T-032 Implementar _ready() con inicializacion
+- [ ] T-033 Implementar _process() con timer
+- [ ] T-034 Documentar parametros export
+- [ ] T-035 Implementar debug visual (draw raycast)
+- [ ] T-036 Crear terrain_data_provider.gd
+- [ ] T-037 Implementar array de terrain_resources
+- [ ] T-038 Implementar _build_map() para indexar
+- [ ] T-039 Implementar get_terrain_data(terrain_id)
+- [ ] T-040 Implementar get_speed_modifier(terrain_id)
+- [ ] T-041 Implementar get_visual_config(terrain_id)
+- [ ] T-042 Implementar get_audio_config(terrain_id)
+- [ ] T-043 Manejar terrain_id no encontrado (fallback)
+- [ ] T-044 Implementar validacion de recursos
+- [ ] T-045 Documentar uso de ScriptableObjects
+- [ ] T-046 Crear terrain_ceped.tres
+- [ ] T-047 Crear terrain_barro.tres
+- [ ] T-048 Crear terrain_pavimento.tres
+- [ ] T-049 Crear terrain_arena.tres
+- [ ] T-050 Crear terrain_agua.tres
+- [ ] T-051 Crear terrain_nieve.tres
+- [ ] T-052 Crear terrain_rocas.tres
+- [ ] T-053 Verificar modificador de ceped = 1.0
+- [ ] T-054 Verificar modificador de barro = 0.6
+- [ ] T-055 Verificar modificador de pavimento = 1.0
+- [ ] T-056 Verificar modificador de arena = 0.75
+- [ ] T-057 Verificar modificador de agua = 0.7
+- [ ] T-058 Verificar modificador de nieve = 0.8
+- [ ] T-059 Verificar modificador de rocas = 0.85
+- [ ] T-060 Verificar modificador de nieve = 0.8 [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
+- [ ] T-061 Verificar modificador de rocas = 0.85 [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
+- [ ] T-062 Crear terrain_modifiers.gd
+- [ ] T-063 Validar formula: base * terrain * (1 + bonus)
+- [ ] T-064 Caso base: 5.0 * 1.0 * (1 + 0.0) = 5.0
+- [ ] T-065 Caso barro: 5.0 * 0.6 * (1 + 0.0) = 3.0 [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-066 Caso barro+botas: 5.0 * 0.6 * (1 + 0.35) = 4.05 [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-067 Caso nieve+botas: 5.0 * 0.8 * (1 + 0.3) = 5.2 [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-068 Caso todoterreno: 5.0 * 0.6 * (1 + 0.1) = 3.3
+- [ ] T-069 Validar que resultado nunca es negativo
+- [ ] T-070 Validar que resultado no excede 2x base
+- [ ] T-071 Crear tests unitarios para calculos
+- [ ] T-072 Documentar interfaz estatica
+- [ ] T-073 Crear terrain_data.gd como Resource
+- [ ] T-074 Definir property terrain_id: int
+- [ ] T-075 Definir property terrain_name: String
+- [ ] T-076 Definir property speed_modifier: float
+- [ ] T-077 Definir property visual_config: Dictionary
+- [ ] T-078 Definir property audio_config: Dictionary
+- [ ] T-079 Definir property debug_color: Color
+- [ ] T-080 Validar terrain_id unico por resource
+- [ ] T-081 Validar speed_modifier en rango 0.5-1.5
+- [ ] T-082 Documentar estructura de visual_config
+- [ ] T-083 Documentar estructura de audio_config
+- [ ] T-084 Crear archivo .gd correspondiente
+- [ ] T-085 Crear terrain_block.gd
+- [ ] T-086 Implementar property terrain_id: int
+- [ ] T-087 Implementar get_terrain_id()
+- [ ] T-088 Heredar de StaticBody3D
+- [ ] T-089 Requerir CollisionShape3D hijo
+- [ ] T-090 Documentar uso por bloques de terreno
+- [ ] T-091 Crear escena base terrain_block.tscn
+- [ ] T-092 Configurar CollisionShape3D con BoxShape3D
+- [ ] T-093 Asignar layer correcta segun terreno
+- [ ] T-094 Asignar terrain_id correcto
+- [ ] T-095 Crear variante terrain_block_ceped
+- [ ] T-096 Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-097 Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-098 Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-099 Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-100 Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-101 Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-102 Agregar referencia a TerrainDetector en M11 [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-103 Agregar referencia a TerrainDataProvider en M11 [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-104 Agregar referencia a EquipmentSystem (M155)
+- [ ] T-105 Conectar signal terrain_changed en _ready()
+- [ ] T-106 Implementar _on_terrain_changed()
+- [ ] T-107 Implementar _update_effective_speed()
+- [ ] T-108 Implementar get_current_speed()
+- [ ] T-109 Almacenar _current_effective_speed
+- [ ] T-110 Usar _current_effective_speed en movimiento
+- [ ] T-111 No romper movimiento existente de M11
+- [ ] T-112 Mantener compatibilidad si no hay M156
+- [ ] T-113 Agregar null checks para referencias
+- [ ] T-114 Documentar cambios en player_movement.gd
+- [ ] T-115 Verificar que move_and_slide() usa velocidad efectiva [M] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
+- [ ] T-116 Agregar metodo get_terrain_bonus() a M155
+- [ ] T-117 Implementar logica de bonificacion por terreno
+- [ ] T-118 Retornar 0.0 si no hay bonificacion
+- [ ] T-119 Retornar valor positivo si hay equipo adecuado
+- [ ] T-120 Limitar bonificacion maxima a 0.5
+- [ ] T-121 Iterar por slots equipados
+- [ ] T-122 Consultar item.get_terrain_bonus()
+- [ ] T-123 Sumar bonificaciones de multiples items
+- [ ] T-124 Documentar contrato de interfaz
+- [ ] T-125 Verificar compatibilidad con sistema de equipacion
+- [ ] T-126 Crear sistema de huellas por terreno
+- [ ] T-127 Crear escena huella_ceped.tscn
+- [ ] T-128 Crear escena huella_barro.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-129 Crear escena huella_pavimento.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-130 Crear escena huella_arena.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-131 Crear escena huella_agua.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-132 Crear escena huella_nieve.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-133 Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-134 Crear sistema de particulas por terreno
+- [ ] T-135 Crear particulas_ceped.gd
+- [ ] T-136 Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-137 Crear particulas_arena.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-138 Crear particulas_agua.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-139 Crear particulas_nieve.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-140 Crear particulas_rocas.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-141 Configurar ParticleProcessMaterial para ceped
+- [ ] T-142 Configurar ParticleProcessMaterial para barro [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-143 Configurar ParticleProcessMaterial para arena [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-144 Configurar ParticleProcessMaterial para agua [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-145 Configurar ParticleProcessMaterial para nieve [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-146 Configurar ParticleProcessMaterial para rocas [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-147 Implementar activacion solo en movimiento
+- [ ] T-148 Implementar desactivacion al detenerse
+- [ ] T-149 Configurar frecuencia de efectos por terreno
+- [ ] T-150 Configurar intensidad de efectos por terreno
+- [ ] T-151 Instanciar huellas en posicion del jugador
+- [ ] T-152 Destruir huellas despues de tiempo configurable
+- [ ] T-153 Limitar numero maximo de huellas activas
+- [ ] T-154 Implementar pooling de huellas
+- [ ] T-155 Crear terrain_footstep_audio.gd
+- [ ] T-156 Implementar referencia a AudioStreamPlayer3D
+- [ ] T-157 Implementar referencia a TerrainDataProvider [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-158 Implementar play_footstep(terrain_id)
+- [ ] T-159 Seleccionar sonido aleatorio del array
+- [ ] T-160 Aplicar variacion de pitch configurable
+- [ ] T-161 Aplicar volumen configurable
+- [ ] T-162 Configurar bus de audio a SFX
+- [ ] T-163 Crear samples audio_ceped_step_1.wav
+- [ ] T-164 Crear samples audio_ceped_step_2.wav
+- [ ] T-165 Crear samples audio_barro_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-166 Crear samples audio_barro_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-167 Crear samples audio_pavimento_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-168 Crear samples audio_pavimento_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-169 Crear samples audio_arena_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-170 Crear samples audio_arena_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-171 Crear samples audio_agua_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-172 Crear samples audio_agua_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-173 Crear samples audio_nieve_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-174 Crear samples audio_nieve_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-175 Crear samples audio_rocas_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-176 Crear samples audio_rocas_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-177 Sincronizar con evento de animacion
+- [ ] T-178 Evitar reproduccion doble
+- [ ] T-179 Implementar fade al cambiar terreno
+- [ ] T-180 Definir Layer 2 = Terrain_Grass
+- [ ] T-181 Definir Layer 3 = Terrain_Mud
+- [ ] T-182 Definir Layer 4 = Terrain_Pavement
+- [ ] T-183 Definir Layer 5 = Terrain_Sand
+- [ ] T-184 Definir Layer 6 = Terrain_Water
+- [ ] T-185 Definir Layer 7 = Terrain_Snow
+- [ ] T-186 Definir Layer 8 = Terrain_Rock
+- [ ] T-187 Configurar collision_mask del RayCast3D [S] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-188 Asignar collision_layer a cada terrain_block
+- [ ] T-189 Verificar que el jugador NO tiene layers de terreno
+- [ ] T-190 Documentar configuracion de Layers
+- [ ] T-191 Crear escena terrain_indicator.tscn
+- [ ] T-192 Agregar TextureRect para icono de terreno
+- [ ] T-193 Agregar Label para nombre de terreno
+- [ ] T-194 Agregar ProgressBar para velocidad efectiva [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
+- [ ] T-195 Conectar signal terrain_changed a UI
+- [ ] T-196 Actualizar icono segun terreno
+- [ ] T-197 Actualizar texto segun terreno
+- [ ] T-198 Actualizar barra de progreso
+- [ ] T-199 Implementar tooltip con detalles
+- [ ] T-200 Posicionar UI en esquina inferior
+- [ ] T-201 Configurar opacidad de UI
+- [ ] T-202 Animar transiciones de UI
+- [ ] T-203 Crear test_terrain_modifiers.gd
+- [ ] T-204 Test: resultado nunca negativo
+- [ ] T-205 Test: resultado no excede 2x base
+- [ ] T-206 Crear test_terrain_provider.gd [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-207 Test: get_terrain_data retorna data valida
+- [ ] T-208 Test: get_terrain_data retorna null para ID invalido
+- [ ] T-209 Test: get_speed_modifier retorna valor correcto
+- [ ] T-210 Test: get_speed_modifier retorna 1.0 para ID invalido
+- [ ] T-211 Crear test_terrain_detector.gd
+- [ ] T-212 Test: deteccion inicial es -1
+- [ ] T-213 Test: deteccion actualiza terrain_id
+- [ ] T-214 Test: senal terrain_changed emite correctamente
+- [ ] T-215 Test: debounce evita updates rapidos
+- [ ] T-216 Ejecutar suite de tests completa
+- [ ] T-217 Verificar 0 fallos en tests
+- [ ] T-218 Crear 01-Requerimientos.md
+- [ ] T-219 Crear 02-Analisis.md
+- [ ] T-220 Crear 03-Diseno.md
+- [ ] T-221 Crear 04-Codigo.md
+- [ ] T-222 Crear 05-Checklist.md
+- [ ] T-223 Documentar arquitectura del sistema
+- [ ] T-224 Documentar contratos de integracion
+- [ ] T-225 Documentar flujo de ejecucion
+- [ ] T-226 Documentar configuracion de Layers
+- [ ] T-227 Documentar TerrainData resources [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-228 Documentar items pendientes
+- [ ] T-229 Documentar notar del agente
+- [ ] T-230 Implementar timer de deteccion (no cada frame)
+- [ ] T-231 Implementar cache de ultimo terreno
+- [ ] T-232 Implementar debounce para evitar flickering
+- [ ] T-233 Limitar numero maximo de huellas activas
+- [ ] T-234 Implementar pooling de huellas
+- [ ] T-235 Usar Object pooling para particulas
+- [ ] T-236 Verificar que raycast no impacta FPS [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-237 Verificar que audio no causa lag
+- [ ] T-238 Medir tiempo de ejecucion por deteccion
+- [ ] T-239 Documentar impacto en rendimiento
+- [ ] T-240 Funcionar sin M155 (equipacion opcional)
+- [ ] T-241 Funcionar sin TerrainDataProvider (fallback) [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-242 Manejar terrain_id no encontrado
+- [ ] T-243 Manejar audio_config vacio
+- [ ] T-244 Manejar visual_config vacio
+- [ ] T-245 Manejar terrain_resources array vacio
+- [ ] T-246 No romper movimiento existente de M11
+- [ ] T-247 Mantener backwards compatibility
+- [ ] T-248 Null checks en todas las referencias
+- [ ] T-249 Graceful degradation sin errores
+- [ ] T-250 Agregar TerrainDetector como hijo del jugador [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-251 Agregar TerrainDataProvider como hijo del jugador [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-252 Asignar terrain_resources al TerrainDataProvider [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-253 Conectar TerrainDetector.terrain_changed [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-254 Asignar referencia de TerrainDetector en M11 [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
+- [ ] T-255 Asignar referencia de TerrainDataProvider en M11 [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-256 Asignar referencia de EquipmentSystem en M11
+- [ ] T-257 Agregar TerrainFootstepAudio al jugador
+- [ ] T-258 Configurar AudioStreamPlayer3D
+- [ ] T-259 Asignar terrain_provider al TerrainFootstepAudio [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [ ] T-260 Agregar TerrainIndicator a la escena UI
+- [ ] T-261 Conectar TerrainIndicator al terrain_changed
+- [ ] T-262 Crear escena de prueba con 7 terrenos [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-263 Verificar movimiento lento en barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-264 Verificar movimiento normal en ceped
+- [ ] T-265 Verificar movimiento normal en pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-266 Verificar movimiento medio en arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-267 Verificar movimiento medio en agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-268 Verificar movimiento bueno en nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-269 Verificar movimiento bueno en rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-270 Verificar botas de barro mejoran barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-271 Verificar botas de nieve mejoran nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-272 Verificar botas de agua mejoran agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-273 Verificar botas de arena mejoran arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [ ] T-274 Verificar botas todoterreno mejoran todos
+- [ ] T-275 Verificar sonidos diferentes por terreno
+- [ ] T-276 Verificar huellas diferentes por terreno
+- [ ] T-277 Verificar particulas diferentes por terreno
+- [ ] T-278 Verificar indicador de UI actualiza
+- [ ] T-279 Verificar que jugador nunca se bloquea
+- [ ] T-280 Verificar FPS estable a 60
+- [ ] T-281 Verificar sin errores en consola
+- [ ] T-282 Ajustar volumenes de audio por terreno
+- [ ] T-283 Ajustar variacion de pitch por terreno
+- [ ] T-284 Ajustar intensidad de huellas por terreno
+- [ ] T-285 Ajustar intensidad de particulas por terreno
+- [ ] T-286 Ajustar colores de debug por terreno
+- [ ] T-287 Agregar tooltips informativos
+- [ ] T-288 Animar transiciones de terreno
+- [ ] T-289 Suavizar cambios de velocidad
+- [ ] T-290 Verificar coherencia visual total
+- [ ] T-291 Verificar coherencia audio total
+- [ ] T-292 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

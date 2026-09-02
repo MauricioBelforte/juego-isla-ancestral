@@ -358,3 +358,8 @@ funcionalmente coherente. Falta validación runtime del usuario.
 - Token anti-duplicado funciona directamente vía EventState.marcar_recompensa_recibida()
 - Para integración M21: usar ContextoFestival como parámetro en dialogue_manager.start_dialogue()
 - Verificar EventBus.weather.clima_cambio cuando M32 agregue la señal
+## Verificación (2026-09-02 07:05 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] EventManager instanciado; catálogo REAL cargado: **15 eventos** (festivales/ferias/competencias/rituales/climáticos/sorpresas)
+- [x] Normalización de agenda y guardado (sección 'events_m74') sin fallos
+- [?] Simulación de inicio/fin por día: **colgada por regresiones ajenas en el árbol** (event_bus.gd parse error + vehicle_manager.gd autoload roto — avisos en ESTADO-PARALELO, dueños ajenos) — se revalida con el árbol sano

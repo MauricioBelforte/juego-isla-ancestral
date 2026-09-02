@@ -1,0 +1,130 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 52-Particulas-Y-VFX (52)
+
+# Checklist personal tareas — 52-Particulas-Y-VFX
+
+> Extraidas del 05-Checklist.md del módulo (120 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de VFX el feedback visual es inconsistente y caro
+- [ ] T-002 Definir el objetivo: VFX baratos, deterministas y armónicos con el estilo cozy
+- [ ] T-003 Registrar dependencias: M04 (GPUParticles), M45/M47 (materiales), M49 (glow/luz), M61/M62 (presupuestos), M58 (accesibilidad)
+- [ ] T-004 Mapear la sección 51 "PARTÍCULAS Y VFX" del plan maestro al ID 52 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: luz de fuego → M49, sonido → M43/M44, sprites → M45/M47
+- [ ] T-006 Documentar restricciones: GPUParticles, sin RNG, sin luz por partícula, presupuesto verificable
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Listar los 25 efectos del plan maestro
+- [ ] T-009 Humo y polvo
+- [ ] T-010 Hojas y pétalos
+- [ ] T-011 Chispas
+- [ ] T-012 Agua (salpicaduras)
+- [ ] T-013 Lluvia y nieve
+- [ ] T-014 Fuego y lava
+- [ ] T-015 Luz y magia tecnológica
+- [ ] T-016 Resonancia y activación de runas
+- [ ] T-017 Teletransporte (si existe)
+- [ ] T-018 Obtención de Sello
+- [ ] T-019 Resolución de puzzle
+- [ ] T-020 Construcción, cosecha y pesca
+- [ ] T-021 Descubrimiento
+- [ ] T-022 Cambio estacional
+- [ ] T-023 Efectos de interfaz
+- [ ] T-024 Efectos atmosféricos
+- [ ] T-025 Definir parámetros por efecto (tipo, material, emisor, presupuesto)
+- [ ] T-026 Definir VfxManager (autoload)
+- [ ] T-027 Definir pool de emisores one-shot prestados/liberados
+- [ ] T-028 Definir loops registrados con culling
+- [ ] T-029 Definir precalentamiento del pool (8 emisores)
+- [ ] T-030 Definir máx emisores activos (12 preset medio)
+- [ ] T-031 Definir máx partículas vivas (4.000 preset medio)
+- [ ] T-032 Definir presupuesto por preset (M90)
+- [ ] T-033 Definir log VFX-SKIP cuando se excede
+- [ ] T-034 Definir semillas de contexto (M10) en one-shots
+- [ ] T-035 Definir loops con fase fija
+- [ ] T-036 Definir sin RNG por frame
+- [ ] T-037 Definir verificación de determinismo en validador
+- [ ] T-038 Definir triggers en timelines (M48)
+- [ ] T-039 Minado, cosecha, pesca, construcción desde animación
+- [ ] T-040 Definir trigger centralizado VFX+SFX+feedback
+- [ ] T-041 Definir obtención de Sello (M22)
+- [ ] T-042 Definir resolución de puzzle (M24)
+- [ ] T-043 Definir descubrimiento (M71)
+- [ ] T-044 Definir festivales (M74)
+- [ ] T-045 Definir humo + ascuas de fuego
+- [ ] T-046 Definir burbujas + ascuas de lava
+- [ ] T-047 Definir sin luz por partícula (luz = M49)
+- [ ] T-048 Definir salpicaduras al nadar (M51/M11)
+- [ ] T-049 Definir gotas de cascada
+- [ ] T-050 Definir chapoteo de balde (M13)
+- [ ] T-051 Definir lluvia por clima (M32)
+- [ ] T-052 Definir nieve por clima/estación (M32/M29)
+- [ ] T-053 Definir polvo del desierto
+- [ ] T-054 Definir hojas al viento (M50)
+- [ ] T-055 Definir pétalos primaverales (M29)
+- [ ] T-056 Definir un emisor global por zona (no por chunk)
+- [ ] T-057 Definir resonancia de runas (M24/M26)
+- [ ] T-058 Definir activación de glifos
+- [ ] T-059 Definir estelas de luz (M47)
+- [ ] T-060 Definir magia tecnológica (M86)
+- [ ] T-061 Definir partículas 2D en menús/recompensas (M53)
+- [ ] T-062 Definir Reduce Motion (M58)
+- [ ] T-063 Definir sin estroboscopios (>10 Hz prohibido)
+- [ ] T-064 Definir transición de VFX por estación (M29)
+- [ ] T-065 Definir pétalos ↔ hojas ↔ nieve
+- [ ] T-066 Definir estela de entrada/salida (si se implementa M28)
+- [ ] T-067 Definir tope de partículas vivas
+- [ ] T-068 Definir culling por distancia (40 m pausa)
+- [ ] T-069 Definir LOD de emisores (25% lejos)
+- [ ] T-070 Definir pooling (M62)
+- [ ] T-071 Definir validate_vfx.gd
+- [ ] T-072 Verificar presupuesto por escena
+- [ ] T-073 Verificar naming
+- [ ] T-074 Verificar determinismo (semillas)
+- [ ] T-075 Verificar sin luz por partícula
+- [ ] T-076 Verificar mapeo completo de eventos de juego
+- [ ] T-077 Definir prefijos vfx_, part_
+- [ ] T-078 Alinear con M108
+- [ ] T-079 Rendimiento: límites + LOD + pooling (M61)
+- [ ] T-080 Memoria: pool precalentado (M62)
+- [ ] T-081 Determinismo: semillas + fases fijas
+- [ ] T-082 Cozy: amplitudes suaves, sin humo denso negro
+- [ ] T-083 Accesible: vfx_quality 3 niveles (M58)
+- [ ] T-084 Mantenible: catálogo central único
+- [ ] T-085 Descartar CPUParticles para todo
+- [ ] T-086 Descartar emisores sin pool (GC/stutter)
+- [ ] T-087 Descartar luz integrada en partículas
+- [ ] T-088 Descartar RNG en runtime
+- [ ] T-089 Descartar sin límite de partículas
+- [ ] T-090 Descartar VFX 100% procedural por shaders
+- [ ] T-091 Riesgo de overdraw → presupuesto + tope + LOD
+- [ ] T-092 Riesgo de desincronía → trigger centralizado
+- [ ] T-093 Riesgo de determinismo roto → semillas + validador
+- [ ] T-094 Riesgo de stutter → pool precalentado
+- [ ] T-095 Riesgo de molestias (fotosensibilidad) → vfx_quality (M58)
+- [ ] T-096 Riesgo de efectos fuera de estilo → guía de amplitudes + review
+- [ ] T-097 Documentar integración con M04 (GPUParticles)
+- [ ] T-098 Documentar integración con M13/M17/M22/M24/M33/M34/M71 (eventos)
+- [ ] T-099 Documentar integración con M48 (timelines)
+- [ ] T-100 Documentar integración con M43/M44 (audio/feedback)
+- [ ] T-101 Documentar integración con M32/M29 (clima/estaciones)
+- [ ] T-102 Documentar integración con M50/M51 (hojas/salpicaduras)
+- [ ] T-103 Documentar integración con M47/M49 (materiales/luz)
+- [ ] T-104 Documentar integración con M53/M58 (UI/accesibilidad)
+- [ ] T-105 Documentar integración con M61/M62 (presupuestos)
+- [ ] T-106 Documentar integración con M108/M118 (import/CI)
+- [ ] T-107 Documentar flujo de emisión one-shot
+- [ ] T-108 Documentar flujo de loop ambiental (humo)
+- [ ] T-109 Documentar flujo de atmosféricos por clima/estación
+- [ ] T-110 Todos los efectos del plan maestro en el catálogo
+- [ ] T-111 Escena pivote sin exceder límites y sin caída de fps
+- [ ] T-112 One-shots deterministas (misma semilla, misma distribución)
+- [ ] T-113 Triggers sincronizados con animación/sonido/feedback
+- [ ] T-114 Fuego/lava sin luz (solo M49)
+- [ ] T-115 Reduce Motion atenúa/desactiva VFX
+- [ ] T-116 Atmosféricos responden a clima/estación sin lag
+- [ ] T-117 Catálogo y validación integrados con CI (M118)
+- [ ] T-118 Documentar el desfase de numeración del plan maestro (51=PARTÍCULAS Y VFX → ID 52)
+- [ ] T-119 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-120 Registrar dependencia de implementación con el hito M1 (proyecto Godot)

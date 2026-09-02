@@ -1,0 +1,16 @@
+{
+  "idioma": "en",
+  "cadenas": {
+    "ui.inventario": "Inventory",
+    "ui.tienda": "Shop",
+    "ui.diario": "Diary",
+    "ui.mapa": "Map",
+    "ui.guardar": "Save",
+    "ui.opciones": "Options",
+    "msg.inventario_lleno": "Inventory full",
+    "msg.no_materiales": "Not enough materials",
+    "msg.nuevo_dia": "New day",
+    "npc.hola": "Hello",
+    "npc.adios": "Goodbye"
+  }
+}

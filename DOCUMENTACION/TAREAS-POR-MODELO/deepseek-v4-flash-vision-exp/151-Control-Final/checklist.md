@@ -1,0 +1,154 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 151-Control-Final (151)
+
+# Checklist personal tareas — 151-Control-Final
+
+> Extraidas del 05-Checklist.md del módulo (144 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir ventana de auditoría de 7-14 días post-lanzamiento
+- [ ] T-002 Definir fijación de criterios de los 26 puntos con la biblia (M147) en S1
+- [ ] T-003 Definir semáforo ✔/⚠/✖ con evidencia por punto (D1)
+- [ ] T-004 Definir evidencia obligatoria para cada estado (sin evidencia = no aprobado)
+- [ ] T-005 Definir plan de acción con dueño y fecha para cada ⚠/✖
+- [ ] T-006 Definir 0 puntos en ✖ al cierre (requisito)
+- [ ] T-007 Definir acta firmada por producción y QA
+- [ ] T-008 Definir índice de documentos administrativos en el acta
+- [ ] T-009 Definir traspaso de ⚠ a la hoja de ruta de M144
+- [ ] T-010 Definir auditoría sin implementación (solo certificación)
+- [ ] T-011 Definir propuesta de juego (elevator pitch) escrita en acta
+- [ ] T-012 Definir benchmark contra 3 juegos similares (diferenciación)
+- [ ] T-013 Definir verificación de estilo artístico único (M06/M49)
+- [ ] T-014 Definir verificación de tono narrativo único (M147)
+- [ ] T-015 Definir verificación de nombre/marca disponible (PI, P22)
+- [ ] T-016 Definir criterio: encuesta diversión ≥ 4/5 del bucle
+- [ ] T-017 Definir 3 sesiones observadas de bucle (mañana, mitad, final de partida)
+- [ ] T-018 Definir métrica de sesión larga (retención ≥ 60% a la hora)
+- [ ] T-019 Definir criterio anti-fatiga: 40 h sin quiebre percibido (M93)
+- [ ] T-020 Definir registro de qué es "bucle principal" (predictable en acta)
+- [ ] T-021 Definir criterio: encuesta construcción ≥ 4/5
+- [ ] T-022 Definir sesión de construcción de 30 min observada
+- [ ] T-023 Definir verificación de legibilidad del grid y catálogo (M17/M65)
+- [ ] T-024 Definir verificación de recompensa visual por construcción
+- [ ] T-025 Definir verificación de no-fricción: piezas se colocan sin bugs
+- [ ] T-026 Definir criterio: encuesta exploración ≥ 4/5
+- [ ] T-027 Definir mapa de descubrimientos por isla completo (M28/M50)
+- [ ] T-028 Definir verificación de curiosidades por zona (hit de vista)
+- [ ] T-029 Definir verificación de recompensas de exploración (coleccionables)
+- [ ] T-030 Definir verificación de desplazamiento cómodo (viajes/cámara)
+- [ ] T-031 Definir criterio: encuesta puzzles ≥ 4/5
+- [ ] T-032 Definir criterio: tasa de rendición < 15% (M93)
+- [ ] T-033 Definir verificación de pistas en todos los templos (M24/M26)
+- [ ] T-034 Definir verificación de dificultad progresiva sin picos
+- [ ] T-035 Definir verificación de accesibilidad de puzzles (modo color/dificultad)
+- [ ] T-036 Definir criterio: encuesta NPC ≥ 4/5
+- [ ] T-037 Definir revisión del guión final por acto (M21/M23)
+- [ ] T-038 Definir verificación de personalidad por NPC (biblia)
+- [ ] T-039 Definir verificación de cadenas de amistad memorables (M20)
+- [ ] T-040 Definir verificación de voz/guiño audiovisual en hitos
+- [ ] T-041 Definir verificación: simulación M93 40 h sin quiebras
+- [ ] T-042 Definir verificación: curva precio/día sana en todas las islas
+- [ ] T-043 Definir verificación: sin exploits conocidos abiertos
+- [ ] T-044 Definir verificación: tiendas/AO sin precios rotos
+- [ ] T-045 Definir verificación: recompensas proporcionales al esfuerzo
+- [ ] T-046 Definir verificación de los 6 sellos desbloqueables en orden libre
+- [ ] T-047 Definir verificación de habilidades con ventajas visibles (M71)
+- [ ] T-048 Definir verificación de herramientas 5 niveles sin saltos de poder
+- [ ] T-049 Definir verificación de artefactos 6+1 sin dominancia excesiva (M13)
+- [ ] T-050 Definir verificación de retroalimentación de progreso en UI (M53)
+- [ ] T-051 Definir verificación de rutinas NPC completas 7 días (M25)
+- [ ] T-052 Definir verificación de eventos sin huecos de actividad
+- [ ] T-053 Definir verificación de reacciones del mundo (clima/ciclo)
+- [ ] T-054 Definir verificación de vida silvestre (fauna M36)
+- [ ] T-055 Definir verificación de inexistencia de "NPC robot" (diálogos repetidos)
+- [ ] T-056 Definir verificación de cultivos por temporada funcional (M33)
+- [ ] T-057 Definir verificación de eventos por temporada (M74)
+- [ ] T-058 Definir verificación de decorado estacional por isla (M50)
+- [ ] T-059 Definir verificación de impacto económico estacional (precios)
+- [ ] T-060 Definir verificación de audio estacional (M43)
+- [ ] T-061 Definir verificación de lluvia con efecto agricultura (M32)
+- [ ] T-062 Definir verificación de helada con riesgo real
+- [ ] T-063 Definir verificación de clima cambiante por isla (M50)
+- [ ] T-064 Definir verificación de visual de clima coherente por zona
+- [ ] T-065 Definir verificación de aviso climático en diario (M55)
+- [ ] T-066 Definir verificación de playlist por zona/isla (M41)
+- [ ] T-067 Definir verificación de música por acto (M41)
+- [ ] T-068 Definir test auditivo de 5 zonas (ritmo/tono acorde)
+- [ ] T-069 Definir verificación de transiciones sin cortes
+- [ ] T-070 Definir verificación de ducking con diálogos
+- [ ] T-071 Definir matriz de SFX por interacción completa (M42)
+- [ ] T-072 Definir verificación de SFX de hitos (brindis, sellos)
+- [ ] T-073 Definir verificación de feedback sonoro de crafting/construcción
+- [ ] T-074 Definir verificación de volumen balanceado en las 6 zonas
+- [ ] T-075 Definir verificación de voces en hitos (M44)
+- [ ] T-076 Definir revisión de guía de estilo (M06/M49) vigente
+- [ ] T-077 Definir verificación de estilo unificado entre islas
+- [ ] T-078 Definir screenshot por zona para el acta (6+1)
+- [ ] T-079 Definir verificación de contraste de UI coherente (M58)
+- [ ] T-080 Definir verificación de no assets placeholder en build final
+- [ ] T-081 Definir verificación de presupuesto de voxels (M08/M11)
+- [ ] T-082 Definir verificación de draw calls por zona dentro de presupuesto (M61)
+- [ ] T-083 Definir verificación de memoria de chunks/caché (M62)
+- [ ] T-084 Definir verificación de streaming de chunks sin picos (M63)
+- [ ] T-085 Definir verificación de LOD/culling activo en todas las islas
+- [ ] T-086 Definir re-verificación de 30 ciclos de guardar/cargar
+- [ ] T-087 Definir verificación de 0 reportes de save perdido en 72 h (M143)
+- [ ] T-088 Definir verificación de backup/reintento de cloud (M60)
+- [ ] T-089 Definir verificación de migración de versiones sin pérdida
+- [ ] T-090 Definir verificación de anti-softlock con ítems clave (M66)
+- [ ] T-091 Definir verificación de crash < 0.5% en telemetría real
+- [ ] T-092 Definir verificación de fps p99 ≥ objetivo (M61)
+- [ ] T-093 Definir verificación de tiempos de carga dentro de presupuesto (M63)
+- [ ] T-094 Definir verificación de memoria estable en sesiones largas (M62)
+- [ ] T-095 Definir verificación de performance en hardware mínimo y recomendado
+- [ ] T-096 Definir checklist M58 100% verificado en build final
+- [ ] T-097 Definir verificación de remapeo, subtítulos y modos de color
+- [ ] T-098 Definir verificación de reduce motion/flashing
+- [ ] T-099 Definir verificación de tamaño de texto 150%
+- [ ] T-100 Definir registro de M58 en el acta con evidencia
+- [ ] T-101 Definir checklist M87 100% verificado en build final
+- [ ] T-102 Definir verificación de 6 idiomas sin claves rotas
+- [ ] T-103 Definir verificación de subtítulos y textos UI por idioma
+- [ ] T-104 Definir verificación de fechas/formatos por idioma
+- [ ] T-105 Definir registro de M87 en el acta con evidencia
+- [ ] T-106 Definir índice de contratos del equipo (roles, NDA)
+- [ ] T-107 Definir índice de contratos de terceros (voces, arte, música)
+- [ ] T-108 Definir ubicación segura de contratos documentada (sin exponer)
+- [ ] T-109 Definir verificación de vigencia de contratos clave
+- [ ] T-110 Definir copia de respaldo de contratos firmados
+- [ ] T-111 Definir inventario de licencias de assets (store/vendors)
+- [ ] T-112 Definir inventario de licencias de herramientas de desarrollo
+- [ ] T-113 Definir verificación de licencias de audio/música (M41-M44)
+- [ ] T-114 Definir verificación de licencias de plugins de Unity
+- [ ] T-115 Definir indexado de licencias en el acta
+- [ ] T-116 Definir registro de marca (nombre del juego)
+- [ ] T-117 Definir registro de logo y elementos de marca
+- [ ] T-118 Definir verificación de disponibilidad de nombre en plataformas
+- [ ] T-119 Definir política de uso de la marca para la comunidad
+- [ ] T-120 Definir indexado de PI en el acta
+- [ ] T-121 Definir verificación de store page publicada (M149)
+- [ ] T-122 Definir verificación de capturas finales cargadas
+- [ ] T-123 Definir verificación de requisitos correctos
+- [ ] T-124 Definir verificación de enlaces a soporte/canales en la página
+- [ ] T-125 Definir verificación de descuento/pre-venta configurados (si aplica)
+- [ ] T-126 Definir verificación de canales activos post-lanzamiento (M152)
+- [ ] T-127 Definir verificación de SLA cumplido en las primeras 72 h
+- [ ] T-128 Definir verificación de FAQ actualizada con bugs reales
+- [ ] T-129 Definir verificación de triaje de soporte en producción
+- [ ] T-130 Definir verificación del pipeline de hotfix/parche probado (M142/M143)
+- [ ] T-131 Definir verificación de actualización in-place sin pérdida de saves
+- [ ] T-132 Definir verificación de notas de parche listas (plantilla)
+- [ ] T-133 Definir verificación de rollback disponible si falla un parche
+- [ ] T-134 Definir hoja de ruta M144 aprobada (contenido, bugs, comunidad)
+- [ ] T-135 Definir cola de hotfix 2.0.x documentada (M143)
+- [ ] T-136 Definir lista de mejoras de comunidad priorizada (5-FUTURAS-MEJORAS)
+- [ ] T-137 Definir dueño por función del post-lanzamiento
+- [ ] T-138 Definir fecha de revisión del plan (M144)
+- [ ] T-139 Definir acta generada con los 26 puntos y evidencia
+- [ ] T-140 Definir verificación automática: puntos sin evidencia = alerta
+- [ ] T-141 Definir firma de producción y QA
+- [ ] T-142 Definir archivo del acta en plan-actual
+- [ ] T-143 Definir traspaso formal de ⚠ y aprendizajes a M144
+- [ ] T-144 Definir log de cierre del módulo en Logs/

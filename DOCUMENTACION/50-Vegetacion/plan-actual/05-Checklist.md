@@ -189,3 +189,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 — Inventario + verificación visual (2026-09-02 05:50, deepseek-v4-flash-vision-exp)
+
+- [x] Inventario de vegetación del proyecto: **15 tipos × 3 variantes (media/baja/alta) = 45 GLB** en assets/3d (árbol frutal, arbustos ×2, cañas bambú, flor isla, helechos ×2, hierba alta, hongo luminoso, liana, musgo roca, palmeras ×3, raíces); los 45 ya validados por el pipeline M108 (198 GLB OK)
+- [x] Verificación VISUAL de vegetación representativa (preview_assets extendido): palmera ✓, helecho gigante ✓, hongo luminoso ✓, arbusto floral ✓ — siluetas claras, escala uniforme, colores cozy, sin artefactos (captura analizada en tools/mcp/godot-mcp/capturas/50-Vegetacion/)
+- [x] Cross-referencia: los assets de vegetación pertenecen al módulo M50 (prefijo 50-Vegetacion) y a la paleta Maldivas/M166
+- [?] VegetationManager (spawn por bioma/estación, pooling, densidad) — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere M08/M10 en producción)

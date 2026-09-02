@@ -1,0 +1,116 @@
+**Modelo:** minimax-m3-free
+**Plataforma:** Kilo Code
+**Modulo:** 144-Despues-Del-Lanzamiento
+
+# Checklist personal tareas — 144-Despues-Del-Lanzamiento
+
+> Extraidas del 05-Checklist.md del modulo. Fuente de verdad del item: el 05-Checklist.md.
+> Total: 105 items (0 ya [x], 105 [ ] pendientes, 0 [?] no resueltos).
+
+## Tareas
+
+- [ ] T-001 Definir monitoreo de reviews en Steam/EGS/GOG (M97)
+- [ ] T-002 Definir clasificación de reviews por tema (bug, balance, UX, request)
+- [ ] T-003 Definir respuesta a reviews < 48 h (M100)
+- [ ] T-004 Definir seguimiento de la evolución de rating semanal
+- [ ] T-005 Definir pull de reviews al tablero de M144
+- [ ] T-006 Definir detección de review bombing
+- [ ] T-007 Definir plantillas de respuesta revisadas (M126)
+- [ ] T-008 Definir escalamiento de reviews críticas a hotfix
+- [ ] T-009 Definir triaje continuo post-lanzamiento (M102)
+- [ ] T-010 Definir severidades y SLA por severidad
+- [ ] T-011 Definir regresión por parche (M112)
+- [ ] T-012 Definir label "post-launch" en el tracker
+- [ ] T-013 Definir informe semanal de bugs abiertos/cerrados
+- [ ] T-014 Definir correlación de bugs con reviews
+- [ ] T-015 Definir priorización P0-P3 tras lanzamiento
+- [ ] T-016 Definir telemetría de FPS p50/p95 post-lanzamiento (M105)
+- [ ] T-017 Definir monitoreo de crashes (M122)
+- [ ] T-018 Definir análisis de perf por hardware (M96)
+- [ ] T-019 Definir comparación de perf entre parches
+- [ ] T-020 Definir reporte de memoria en sesiones largas (M62)
+- [ ] T-021 Definir gate de perf para parches (M61)
+- [ ] T-022 Definir telemetría de economía (M38/M105)
+- [ ] T-023 Definir detección de exploits de dinero
+- [ ] T-024 Definir análisis de inflación/precios
+- [ ] T-025 Definir comparación con el balance de diseño (M93)
+- [ ] T-026 Definir hotfix de exploit en < 72 h
+- [ ] T-027 Definir parche de balance económico mensual
+- [ ] T-028 Definir metrica de abandono por sistema (M105)
+- [ ] T-029 Definir análisis de curvas de dificultad reales (M93)
+- [ ] T-030 Definir decisiones de cambio con condiciones de diseño
+- [ ] T-031 Definir simulación de ajustes antes de parchear (M113)
+- [ ] T-032 Definir opciones de dificultad sin romper balance (M58)
+- [ ] T-033 Definir métrica de completado del tutorial (M92)
+- [ ] T-034 Definir análisis de abandonos en tutorial
+- [ ] T-035 Definir test de tutorial con nuevos usuarios (M114)
+- [ ] T-036 Definir mejoras de tutorial en patch mensual
+- [ ] T-037 Definir etelemetría de saltar tutorial
+- [ ] T-038 Definir conversión de los primeros 30 min (M105)
+- [ ] T-039 Definir playtest de onboarding recurrentes (M114)
+- [ ] T-040 Definir análisis de primera sesión (D1)
+- [ ] T-041 Definir mejoras de onboarding por evidencia
+- [ ] T-042 Definir test A/B de onboarding (M105)
+- [ ] T-043 Definir curvas D1/D7/D30 (M105/M94)
+- [ ] T-044 Definir cohortes por fecha de compra
+- [ ] T-045 Definir análisis de retención por plataforma (M96)
+- [ ] T-046 Definir campañas de re-enganche (M100)
+- [ ] T-047 Definir horario de sesión por región
+- [ ] T-048 Definir comparación con benchmarks del género cosy
+- [ ] T-049 Definir ranking de sistemas por uso (M105)
+- [ ] T-050 Definir horas por sistema (pesca, construcción, templos)
+- [ ] T-051 Definir cruce con reviews (qué se pide)
+- [ ] T-052 Definir priorización de mejoras a lo más jugado
+- [ ] T-053 Definir contenido de DLC alineado a lo más jugado (M120)
+- [ ] T-054 Definir umbral de contenido ignorado (< 10% uso)
+- [ ] T-055 Definir diagnóstico de causas (telemetría+soporte)
+- [ ] T-056 Definir decisión: mejorar (target 3 meses) o archivar
+- [ ] T-057 Definir archivar con nota pública (M100)
+- [ ] T-058 Definir reporte mensual de contenido procesado
+- [ ] T-059 Definir hotfix P0/P1 < 72 h (M142/M143)
+- [ ] T-060 Definir patch mensual con balance/mejoras
+- [ ] T-061 Definir changelog público en cada parche
+- [ ] T-062 Definir pipeline de parche = M117 (gates)
+- [ ] T-063 Definir regresión completa por patch (M112)
+- [ ] T-064 Definir rollback plan por parche (M107/M117)
+- [ ] T-065 Definir prueba de actualización de parche (M116)
+- [ ] T-066 Definir hotfix sin features (solo fixes)
+- [ ] T-067 Definir compatibilidad de saves entre parches (M59)
+- [ ] T-068 Definir backlog de mejoras con evidencia (M105/reviews)
+- [ ] T-069 Definir priorización semanal con datos
+- [ ] T-070 Definir impacto medible por mejora (target)
+- [ ] T-071 Definir mejoras de accesibilidad post-lanzamiento (M58)
+- [ ] T-072 Definir mejoras de localización según quejas (M87)
+- [ ] T-073 Definir GATE de contenido nuevo (M120)
+- [ ] T-074 Definir evaluación mensual del GATE
+- [ ] T-075 Definir contenido-lite en parches (eventos M74, items M95)
+- [ ] T-076 Definir DLC/expansión con su propio plan si GATE pasa
+- [ ] T-077 Definir no contenido gratuito que canibalice V2 sin roadmap
+- [ ] T-078 Definir alineación con el roadmap público (M136)
+- [ ] T-079 Definir backups de servicio (RPO 24 h) (M107)
+- [ ] T-080 Definir backup de bases de datos trimestrales
+- [ ] T-081 Definir restauración probada trimestral
+- [ ] T-082 Definir retención de backups 90 días
+- [ ] T-083 Definir respaldo de builds de lanzamiento (M143)
+- [ ] T-084 Definir disaster recovery plan post-lanzamiento
+- [ ] T-085 Definir SLA de primera respuesta ≤ 72 h (M121)
+- [ ] T-086 Definir base de conocimientos actualizada
+- [ ] T-087 Definir plantillas de respuestas (M126 legal)
+- [ ] T-088 Definir escalamiento de soporte a bugs P0/P1
+- [ ] T-089 Definir canal de sugerencias oficial (M100)
+- [ ] T-090 Definir reporte mensual de tickets
+- [ ] T-091 Definir notas de parche público (Steam/web)
+- [ ] T-092 Definir wiki del juego actualizada (M100)
+- [ ] T-093 Definir FAQ viva por tema recurrente
+- [ ] T-094 Definir documentación interna de cambios (Logs/)
+- [ ] T-095 Definir plantilla única de changelog
+- [ ] T-096 Definir versionado de la documentación con cada parche
+- [ ] T-097 Definir tablero semanal de 9 métricas (M105)
+- [ ] T-098 Definir reunión semanal de 30 min de post-launch
+- [ ] T-099 Definir fases: D1-D7 / semanas 1-4 / meses 2-6 / trimestres
+- [ ] T-100 Definir roles: dev/CM/QA/DATA/OPS (M143)
+- [ ] T-101 Definir reporte mensual a M136 (roadmap)
+- [ ] T-102 Definir decisiones solo con evidencia (no intuición)
+- [ ] T-103 Definir documentación plan-actual actualizada y firmada
+- [ ] T-104 Definir log del módulo en Logs/
+- [ ] T-105 Definir feed del tablero al GATE de M120

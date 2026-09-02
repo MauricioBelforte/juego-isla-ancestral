@@ -1,0 +1,133 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 48-Animacion (48)
+
+# Checklist personal tareas — 48-Animacion
+
+> Extraidas del 05-Checklist.md del módulo (123 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de animación los actores se ven robóticos o sin animación
+- [ ] T-002 Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado
+- [ ] T-003 Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos)
+- [ ] T-004 Mapear la sección 47 "ANIMACIÓN" del plan maestro al ID 48 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: rigs → M45, FSM de comportamiento → M11/M64/M65, VFX → M52, sonido → M43
+- [ ] T-006 Documentar restricciones: Godot 4.x, FPS 30 base (UI 60), determinismo de mundo, sin RNG, sincronía en timelines
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Incluir contexto del plan de producción §4 (rigs por familia, coherencia)
+- [ ] T-009 Definir pipeline: rig (M45) → blocking → polish → export 30 fps
+- [ ] T-010 Definir convenciones de exportación: FBX, T-pose única, bones subset por familia
+- [ ] T-011 Definir familias de rigs: humanoide, cuadrúpedo, ave, pez
+- [ ] T-012 Definir plantilla de import en editor (import_animation_defaults.gd)
+- [ ] T-013 Definir máximos de duración por categoría
+- [ ] T-014 Cubrir los 10 estados de la FSM de M11 con animaciones
+- [ ] T-015 Idle, caminar, correr del jugador
+- [ ] T-016 Saltar, nadar, escalar del jugador
+- [ ] T-017 Extraer, colocar, minar, pescar del jugador
+- [ ] T-018 Cosecha, regado, diálogo, dormir del jugador
+- [ ] T-019 Definir blend space 2D de locomoción (dirección × velocidad)
+- [ ] T-020 Definir sockets de herramientas (grip) con M45
+- [ ] T-021 Idle y caminata de NPC (M19)
+- [ ] T-022 Rutinas de trabajo de NPC (M64)
+- [ ] T-023 Conversación y gestos de amistad (M20)
+- [ ] T-024 Animaciones festivas (M74)
+- [ ] T-025 Definir variantes por personalidad (≤3 por gesto)
+- [ ] T-026 Estados de M36/M65: idle, pastorear, huir, volar, nadar, dormir
+- [ ] T-027 Variantes de fase en manadas/bancos (fases escalonadas)
+- [ ] T-028 Definir LOD de animación de fauna (distancia)
+- [ ] T-029 9 herramientas × 4 niveles con animación de uso
+- [ ] T-030 Swing de minado/pico con eventos de impacto
+- [ ] T-031 Plantación, regado y cosecha
+- [ ] T-032 Pesca: lanzar, espera, tensión, cobro
+- [ ] T-033 Martillo y lupa (mecánicas infinitas)
+- [ ] T-034 Puertas: abrir/cerrar con easing
+- [ ] T-035 Puentes: bajar/subir
+- [ ] T-036 Mecanismos: activar/desactivar
+- [ ] T-037 Ascensores: subir/bajar con easing
+- [ ] T-038 Construcción: colocar/levantar piezas (M17)
+- [ ] T-039 Puzzles: mover piezas, activación (M24)
+- [ ] T-040 Barcos: balanceo en agua, atraque (M28/M67)
+- [ ] T-041 Dirigibles: ascender/descender, balanceo
+- [ ] T-042 Submarinos: sumergir/emergir
+- [ ] T-043 Vegetación: viento procedural determinista (M50)
+- [ ] T-044 Agua: ondas procedurales deterministas (M51)
+- [ ] T-045 Fuego: procedural de partículas (M52)
+- [ ] T-046 Sin RNG en runtime (fases fijas por TIME)
+- [ ] T-047 Transiciones de menú 60 fps (M53)
+- [ ] T-048 Recompensas, contadores, sparkles (M71/M72)
+- [ ] T-049 Descubrimientos y tooltips
+- [ ] T-050 Diálogos: retratos, burbujas, gestos (M21/M46)
+- [ ] T-051 Reducir movimiento con M58 (Reduce Motion)
+- [ ] T-052 No animar UI fuera de pantalla
+- [ ] T-053 Eventos de sonido embebidos en timelines (M43)
+- [ ] T-054 Eventos de feedback ASMR en timelines (M44)
+- [ ] T-055 Triggers de partículas en timelines (M52)
+- [ ] T-056 Regla: el evento se emite al frame que lo produce visualmente
+- [ ] T-057 Test de desincronía sonido/impacto
+- [ ] T-058 Burbuja ≤60 actores plenos (M64)
+- [ ] T-059 Fuera de burbuja: idle simplificado o sin animación por distancia
+- [ ] T-060 Blend trees ≤4 nodos por actor
+- [ ] T-061 Pooling de AnimationPlayer (M62)
+- [ ] T-062 Keyframes optimizados sin redundancia (M61)
+- [ ] T-063 Definir script validate_animation.gd
+- [ ] T-064 Verificar naming anim_[actor]_[estado]
+- [ ] T-065 Verificar fps 30 base / UI 60
+- [ ] T-066 Verificar duración dentro de máximos por categoría
+- [ ] T-067 Verificar T-pose única y bones subset
+- [ ] T-068 Verificar keyframes de evento requeridos
+- [ ] T-069 Verificar coste por actor en animation_budget.json
+- [ ] T-070 Definir prefijos anim_, librerías por actor
+- [ ] T-071 Alinear con M108
+- [ ] T-072 Definir animation_budget.json por actor/animación
+- [ ] T-073 Definir suma por escena pivote contra presupuesto M61
+- [ ] T-074 Definir alerta de excedente en editor
+- [ ] T-075 Definir AnimationService con play(actor, estado, blend_time)
+- [ ] T-076 La gameplay llama por ESTADO, no por clip
+- [ ] T-077 Definir fallback idle ante estado sin clip (log WARN)
+- [ ] T-078 Definir señales animation_started/finished/missing
+- [ ] T-079 Prohibir que la capa de animación decida comportamiento
+- [ ] T-080 Rendimiento: burbuja, LOD, pooling, blend trees acotados
+- [ ] T-081 Memoria (M62): bibliotecas compartidas, sin duplicados por escena
+- [ ] T-082 Cozy: movimientos suaves, anticipación corta, follow-through sutil
+- [ ] T-083 Accesible: Reduce Motion en UI (M58)
+- [ ] T-084 Determinismo: mundo procedural sin RNG
+- [ ] T-085 Mantenible: catálogo estado→clip único
+- [ ] T-086 Descartar animación embebida por escena (duplicados)
+- [ ] T-087 Descartar animación 100% por código (calidad)
+- [ ] T-088 Descartar AnimationPlayer global único
+- [ ] T-089 Descartar retargeting genérico en tiempo real
+- [ ] T-090 Descartar blend trees ilimitados
+- [ ] T-091 Descartar animación 2D/impostores para todo el mundo
+- [ ] T-092 Riesgo de clips duplicados → AnimationLibrary central + validación
+- [ ] T-093 Riesgo de snaps por blending → blend 250 ms + revisión visual
+- [ ] T-094 Riesgo de desincronía → eventos en timelines + tests
+- [ ] T-095 Riesgo de coste de huesos → burbuja + LOD + registro
+- [ ] T-096 Riesgo de UI molesta → Reduce Motion + duraciones cortas
+- [ ] T-097 Riesgo de imports inconsistentes → plantilla + validador
+- [ ] T-098 Documentar integración con M11/M19/M36 (FSM)
+- [ ] T-099 Documentar integración con M64/M65 (burbuja)
+- [ ] T-100 Documentar integración con M45 (rigs/sockets)
+- [ ] T-101 Documentar integración con M13 (herramientas)
+- [ ] T-102 Documentar integración con M43/M44/M52 (eventos)
+- [ ] T-103 Documentar integración con M50/M51 (procedural)
+- [ ] T-104 Documentar integración con M21/M53/M58 (UI)
+- [ ] T-105 Documentar integración con M61/M62 (presupuesto)
+- [ ] T-106 Documentar integración con M74 (festivales)
+- [ ] T-107 Documentar integración con M108/M118 (import + CI)
+- [ ] T-108 Documentar flujo estado→clip (AnimationService)
+- [ ] T-109 Documentar flujo de producción de un clip
+- [ ] T-110 Documentar flujo de validación al importar
+- [ ] T-111 Documentar plantilla de import FBX
+- [ ] T-112 100% de estados FSM de actores cubiertos con animaciones
+- [ ] T-113 Toda mecánica lista tiene animación o "intencional sin animación" definida
+- [ ] T-114 Clips generados con un flujo único y validados sin errores
+- [ ] T-115 Transiciones sin snaps (blend ≤250 ms)
+- [ ] T-116 Sonido y feedback al frame correcto
+- [ ] T-117 Coste de escena pivote dentro del presupuesto M61
+- [ ] T-118 Mundo determinista sin RNG visible
+- [ ] T-119 UI respeta M58 y corre a 60 fps
+- [ ] T-120 Documentar el desfase de numeración del plan maestro (47=ANIMACIÓN → ID 48)
+- [ ] T-121 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-122 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-123 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

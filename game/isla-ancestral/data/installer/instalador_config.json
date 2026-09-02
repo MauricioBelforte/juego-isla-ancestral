@@ -1,0 +1,19 @@
+{
+  "plataformas": ["windows", "macos", "linux"],
+  "pasos": [
+    {"id": "verificar_requisitos", "descripcion": "Verificar requisitos del sistema", "tipo": "chequeo"},
+    {"id": "copiar_archivos", "descripcion": "Copiar archivos del juego", "tipo": "archivo"},
+    {"id": "crear_accesos", "descripcion": "Crear accesos directos", "tipo": "acceso"},
+    {"id": "registrar_desinstalador", "descripcion": "Registrar desinstalador", "tipo": "registro"},
+    {"id": "verificar_instalacion", "descripcion": "Verificar instalación (checksum)", "tipo": "verificacion"}
+  ],
+  "requisitos": {
+    "disco_min_mb": 4096,
+    "ram_min_mb": 8192
+  },
+  "checksum": {
+    "algoritmo": "crc32",
+    "verificar_archivos_clave": true,
+    "archivos_clave": ["game.exe", "pck/game.pck"]
+  }
+}

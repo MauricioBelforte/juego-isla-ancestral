@@ -47,7 +47,7 @@
 - [x] Definir ejemplos base: encargos de isla, recolección de minerales [M]
 - [x] Definir recompensa mayor (ítem + boost de recolección) [M]
 - [x] Definir reseteo al comenzar la semana de juego [M]
-- [ ] Definir sin objetivo semanal obligatorio [S]
+- [x] Definir sin objetivo semanal obligatorio [S]
 - [ ] Definir progreso visible durante la semana (M55) [S]
 
 ## 4. Objetivos mensuales (P3)
@@ -78,7 +78,7 @@
 
 ## 7. Completar contenido después (P6)
 
-- [ ] Definir misiones secundarias reintentables/posponibles sin caducidad [M]
+- [x] Definir misiones secundarias reintentables/posponibles sin caducidad [M]
 - [x] Definir eventos repetibles con variantes (3+) — MotorEventosVariantes [M]
 - [x] Definir sobremesa de recompensas vencidas en el diario — RecompensaAcumulada [M]
 - [x] Definir límite de 50 pendientes; excedente liquidado en oro [S]
@@ -86,7 +86,7 @@
 
 ## 8. Descubrimientos inesperados (P7)
 
-- [ ] Definir eventos aleatorios del mundo (cometas, mareas, migración) [C]
+- [x] Definir eventos aleatorios del mundo (cometas, mareas, migración) [C]
 - [ ] Definir ventanas de 1-2 días de juego (no de calendario real) [M]
 - [ ] Definir anuncio anticipado en diario [M]
 - [x] Definir repeticion del evento si no se participo [S]
@@ -104,12 +104,12 @@
 
 ## 10. Metas de largo plazo (P9)
 
-- [ ] Definir 6 Sellos + Acto 3 como meta sin prisa [M]
+- [x] Definir 6 Sellos + Acto 3 como meta sin prisa [M]
 - [ ] Definir museo 100% (M37/M73) sin fecha límite [M]
-- [ ] Definir ciudad/islas construidas (M17/M68) persistente [M]
+- [x] Definir ciudad/islas construidas (M17/M68) persistente [M]
 - [ ] Definir amistad máxima con 30 NPC sin decaimiento [M]
 - [ ] Definir misterios completos abiertos a ritmo propio [S]
-- [ ] Definir seguimiento visible de cada meta (M55) [M]
+- [x] Definir seguimiento visible de cada meta (M55) [M]
 
 ## 11. Colecciones (P10)
 
@@ -155,26 +155,26 @@
 - [ ] Definir prohibición de "¡vuelve o lo pierdes!" [S]
 - [ ] Definir prohibición de penalización de ausencia [S]
 - [ ] Definir auditor de scan en build (falla la build si viola) [M]
-- [ ] Definir revisión de nuevas mecánicas contra el manifiesto anti-FOMO [M]
+- [x] Definir revisión de nuevas mecánicas contra el manifiesto anti-FOMO [M]
 
 ## 17. Tablero y diario (M55)
 
-- [ ] Definir sección Objetivos en el diario [M]
+- [x] Definir sección Objetivos en el diario [M]
 - [ ] Definir sección Sobremesa en el diario (cobrables) [M]
 - [ ] Definir contador de pendientes visible [S]
-- [ ] Definir notificación suave de objetivo cumplido [S]
+- [x] Definir notificación suave de objetivo cumplido [S]
 - [ ] Definir navegación gamepad del tablero (M57) [M]
 
 ## 18. Persistencia (M59)
 
 - [x] Definir save con campo motivación (snapshot/restaurar: objetivos, recompensas, variantes) [M]
 - [ ] Definir migración v3.1 → v3.2 [M]
-- [ ] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M]
+- [x] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M]
 - [x] Definir sin dependencia de reloj real en persistencia [S]
 
 ## 19. Telemetría (M104)
 
-- [ ] Definir métrica "sesiones libres" (sin objetivos vencidos pendientes) [M]
+- [x] Definir métrica "sesiones libres" (sin objetivos vencidos pendientes) [M]
 - [ ] Definir métrica "recompensas cobradas pendientes" [M]
 - [ ] Definir métrica de retención por voluntad (días jugados) [M]
 - [ ] Definir sin telemetría que manipule recompensas [S]
@@ -188,7 +188,7 @@
 - [x] Definir suite EventosVariantes (3+ variantes, ciclo, round-trip) — test_motivacion_m94.gd [M]
 - [x] Definir suite RecompensaAcumulada (límite 50 + cobro) — test_motivacion_m94.gd [M]
 - [ ] Definir suite Postgame (desbloqueo + 3 bloques) [M]
-- [ ] Definir suite MigraciónMotivacion (v3.1→3.2) [M]
+- [x] Definir suite MigraciónMotivacion (v3.1→3.2) [M]
 - [ ] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M]
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
@@ -198,3 +198,9 @@
 **Total de ítems:** 113
 **Ítems resueltos por documentación:** 113 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Verificación (2026-09-02 06:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] MotivacionManager: 7 objetivos de retención en el catálogo (data/motivacion/objetivos.json)
+- [x] AntiFomoAuditor: 6/6 checks OK — 7 objetivos sin violaciones (retención cozy) + detección de las normas R2 (recompensas expiran), R3 (castigo por ausencia) y R5 (tiempo real penaliza) + reporte generable
+- [x] Test headless permanente: scripts/motivacion/test_antifomo_headless.gd (exit 0)
+- [!] Nota: el escanear no analiza timelimit por objetivo (solo flags de config) — suficiente para las 5 normas R1-R5 (documentado)

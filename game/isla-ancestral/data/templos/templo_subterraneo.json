@@ -1,0 +1,19 @@
+{
+  "id": "templo_subterraneo",
+  "nombre": "Templo Subterráneo",
+  "isla": "RIZ",
+  "profundidad": 40,
+  "salas": [
+    {"id": "sala_entrada", "nombre": "Sala de entrada", "puzzles": ["puz_asas"], "salida_a": "sala_lago", "checkpoint": false},
+    {"id": "sala_lago", "nombre": "Sala del lago subterráneo", "puzzles": ["puz_luz_espejos"], "salida_a": "sala_camaras", "checkpoint": true},
+    {"id": "sala_camaras", "nombre": "Cámara de estalactitas", "puzzles": ["puz_peso"], "salida_a": "sala_sello", "checkpoint": true},
+    {"id": "sala_sello", "nombre": "Cámara del Sello de la Raíz", "puzzles": ["puz_final"], "salida_a": "", "checkpoint": true}
+  ],
+  "puzzles": [
+    {"id": "puz_asas", "tipo": "asas", "emisor": "asas_a", "receptor": "receptor_puerta", "solucion": "asas_derechas", "recompensa": "moneda_ancestral", "cantidad": 100},
+    {"id": "puz_luz_espejos", "tipo": "espejos", "emisor": "luz_central", "receptor": "receptor_lago", "solucion": "espejos_alineados", "recompensa": "gema_ancestral", "cantidad": 1},
+    {"id": "puz_peso", "tipo": "pesos", "emisor": "plataforma_peso", "receptor": "receptor_puente", "solucion": "peso_correcto", "recompensa": "moneda_ancestral", "cantidad": 200},
+    {"id": "puz_final", "tipo": "secuencia", "emisor": "sellos_anillo", "receptor": "receptor_sello", "solucion": "secuencia_raiz", "recompensa": "sello_raiz", "cantidad": 1}
+  ],
+  "guardian": {"id": "guardian_polilla_raiz", "tipo": "guardian", "sala": "sala_sello", "nivel": 3}
+}

@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "plataformas": [
+    {
+      "id": "steam_windows",
+      "nombre_display": "Steam (Windows)",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "D3D11/Vulkan"},
+      "requisitos_recomendados": {"cpu_cores": 6, "ram_mb": 16384, "gpu_vram_mb": 4096, "api": "D3D12/Vulkan"},
+      "soporte_steam_deck": "verificado",
+      "complejidad_build": 1,
+      "prioridad_oleada": "P0",
+      "notas": "Soporte principal. Verificado en Windows 10/11."
+    },
+    {
+      "id": "steam_deck",
+      "nombre_display": "Steam Deck",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 16384, "gpu_vram_mb": 1024, "api": "Vulkan"},
+      "requisitos_recomendados": {"cpu_cores": 4, "ram_mb": 16384, "gpu_vram_mb": 1024, "api": "Vulkan"},
+      "soporte_steam_deck": "nativo",
+      "complejidad_build": 2,
+      "prioridad_oleada": "P0",
+      "notas": "Preset MEDIUM por defecto. Proton native. Linear scaling automatico."
+    },
+    {
+      "id": "epic_gog_windows",
+      "nombre_display": "Epic Games / GOG (Windows)",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "D3D11"},
+      "requisitos_recomendados": {"cpu_cores": 6, "ram_mb": 16384, "gpu_vram_mb": 4096, "api": "D3D12"},
+      "soporte_steam_deck": "via_proton",
+      "complejidad_build": 2,
+      "prioridad_oleada": "P1",
+      "notas": "Wrapper de Steam build. Sin logros cross-platform."
+    },
+    {
+      "id": "mac_native",
+      "nombre_display": "macOS (Nativo)",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "Metal"},
+      "requisitos_recomendados": {"cpu_cores": 8, "ram_mb": 16384, "gpu_vram_mb": 4096, "api": "Metal"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 3,
+      "prioridad_oleada": "P1",
+      "notas": "Build para Apple Silicon (M1/M2/M3) + Intel. iOS/iPadOS via Catalyst (futuro)."
+    },
+    {
+      "id": "linux_proton",
+      "nombre_display": "Linux (Proton/Steam)",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "Vulkan"},
+      "requisitos_recomendados": {"cpu_cores": 6, "ram_mb": 16384, "gpu_vram_mb": 4096, "api": "Vulkan"},
+      "soporte_steam_deck": "nativo",
+      "complejidad_build": 2,
+      "prioridad_oleada": "P1",
+      "notas": "Wrapper Linux build. Proton como capa de compatibilidad. Mismas configs que Windows."
+    },
+    {
+      "id": "switch",
+      "nombre_display": "Nintendo Switch",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 4096, "gpu_vram_mb": 1024, "api": "NVN"},
+      "requisitos_recomendados": {"cpu_cores": 4, "ram_mb": 4096, "gpu_vram_mb": 1024, "api": "NVN"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 4,
+      "prioridad_oleada": "P2",
+      "notas": "Build dedicada. Recursos limitados. Requiere test fisico."
+    },
+    {
+      "id": "playstation",
+      "nombre_display": "PlayStation 4/5",
+      "requisitos_minimos": {"cpu_cores": 8, "ram_mb": 8192, "gpu_vram_mb": 4096, "api": "GNM/GNMx"},
+      "requisitos_recomendados": {"cpu_cores": 8, "ram_mb": 16384, "gpu_vram_mb": 8192, "api": "GNM"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 5,
+      "prioridad_oleada": "P3",
+      "notas": "Build certificada Sony. NDA requerido. No para prototipo."
+    },
+    {
+      "id": "xbox",
+      "nombre_display": "Xbox One/Series",
+      "requisitos_minimos": {"cpu_cores": 8, "ram_mb": 8192, "gpu_vram_mb": 4096, "api": "D3D12"},
+      "requisitos_recomendados": {"cpu_cores": 8, "ram_mb": 16384, "gpu_vram_mb": 8192, "api": "D3D12"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 4,
+      "prioridad_oleada": "P3",
+      "notas": "Build certificada Microsoft. GDK requerido."
+    },
+    {
+      "id": "ms_store",
+      "nombre_display": "Microsoft Store (PC Game Pass)",
+      "requisitos_minimos": {"cpu_cores": 4, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "D3D11"},
+      "requisitos_recomendados": {"cpu_cores": 6, "ram_mb": 16384, "gpu_vram_mb": 4096, "api": "D3D12"},
+      "soporte_steam_deck": "via_proton",
+      "complejidad_build": 3,
+      "prioridad_oleada": "P3",
+      "notas": "Wrapper de Steam build. Game Pass requiere adaptador Microsoft."
+    },
+    {
+      "id": "android_tablet",
+      "nombre_display": "Android Tablet",
+      "requisitos_minimos": {"cpu_cores": 6, "ram_mb": 4096, "gpu_vram_mb": 1024, "api": "Vulkan"},
+      "requisitos_recomendados": {"cpu_cores": 8, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "Vulkan"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 4,
+      "prioridad_oleada": "P2",
+      "notas": "Touch UI obligatorio. Rendering tier bajo. No es objetivo principal."
+    },
+    {
+      "id": "ios",
+      "nombre_display": "iOS / iPadOS",
+      "requisitos_minimos": {"cpu_cores": 6, "ram_mb": 4096, "gpu_vram_mb": 1024, "api": "Metal"},
+      "requisitos_recomendados": {"cpu_cores": 8, "ram_mb": 8192, "gpu_vram_mb": 2048, "api": "Metal"},
+      "soporte_steam_deck": "no",
+      "complejidad_build": 4,
+      "prioridad_oleada": "P3",
+      "notas": "Build via Game Porting Toolkit. Touch UI obligatorio. Review Apple."
+    }
+  ]
+}

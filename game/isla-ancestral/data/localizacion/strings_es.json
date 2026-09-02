@@ -1,0 +1,16 @@
+{
+  "idioma": "es",
+  "cadenas": {
+    "ui.inventario": "Inventario",
+    "ui.tienda": "Tienda",
+    "ui.diario": "Diario",
+    "ui.mapa": "Mapa",
+    "ui.guardar": "Guardar",
+    "ui.opciones": "Opciones",
+    "msg.inventario_lleno": "Inventario lleno",
+    "msg.no_materiales": "Faltan materiales",
+    "msg.nuevo_dia": "Nuevo día",
+    "npc.hola": "Hola",
+    "npc.adios": "Adiós"
+  }
+}

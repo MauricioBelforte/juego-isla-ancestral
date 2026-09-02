@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqv5xj7k2m3r"]
+
+[ext_resource type="Script" path="res://tools/asset_pipeline/run_m108_test.gd" id="1"]
+
+[node name="TestM108" type="Node"]
+script = ExtResource("1")

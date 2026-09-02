@@ -1,0 +1,129 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 50-Vegetacion (50)
+
+# Checklist personal tareas — 50-Vegetacion
+
+> Extraidas del 05-Checklist.md del módulo (119 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de vegetación el mundo se siente vacío o el frame explota
+- [ ] T-002 Definir el objetivo: vegetación densa pero barata, viva y determinista por bioma
+- [ ] T-003 Registrar dependencias: M09 (biomas), M10 (PRNG), M08 (tala), M45 (mallas), M04 (MultiMesh), M61/M62 (presupuestos)
+- [ ] T-004 Mapear la sección 49 "VEGETACIÓN" del plan maestro al ID 50 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: agricultura → M33, tala como recurso → M08/M13, viento → M48 (shader de este módulo)
+- [ ] T-006 Documentar restricciones: MultiMesh GPU, determinismo, clamps de terreno, estaciones
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Listar las 26+ especies del plan maestro
+- [ ] T-009 Hierba y flores
+- [ ] T-010 Arbustos
+- [ ] T-011 Árboles pequeños, grandes y ancestrales
+- [ ] T-012 Palmeras y bambú
+- [ ] T-013 Plantas tropicales
+- [ ] T-014 Plantas acuáticas y submarinas
+- [ ] T-015 Musgo, enredaderas y hongos
+- [ ] T-016 Plantas luminosas
+- [ ] T-017 Variantes estacionales
+- [ ] T-018 Definir parámetros por especie: malla, material, biomas, densidad
+- [ ] T-019 Definir tabla bioma → especies → densidades
+- [ ] T-020 Definir distribución con PRNG de chunk (M10)
+- [ ] T-021 Definir clamps por pendiente
+- [ ] T-022 Definir clamps por altura (línea de árboles)
+- [ ] T-023 Definir playa sin vegetación alta
+- [ ] T-024 Definir determinismo total (misma semilla, mismo bosque)
+- [ ] T-025 Definir MultiMesh por especie × chunk
+- [ ] T-026 Definir límite de instancias por chunk
+- [ ] T-027 Definir presupuesto de instancias visibles por escena
+- [ ] T-028 Definir memoria VRAM por instancia ≤ 64 bytes
+- [ ] T-029 Definir 1 draw call por especie/chunk
+- [ ] T-030 Definir vertex shader GPU (fase = hash instancia)
+- [ ] T-031 Definir amplitud/frecuencia por especie
+- [ ] T-032 Definir modulación por bioma y clima (M32)
+- [ ] T-033 Definir bloqueo en nieve (amplitud 0.2)
+- [ ] T-034 Definir determinismo (sin RNG por frame)
+- [ ] T-035 Definir tala de árboles voxel (M08)
+- [ ] T-036 Definir caída de follaje tras tala (tween 1-2 s)
+- [ ] T-037 Definir hierba pisada transitoria
+- [ ] T-038 Definir recolección de flores (M33)
+- [ ] T-039 Definir que lo decorativo no sea destructible
+- [ ] T-040 Definir viento fuerte modulando amplitud (M32)
+- [ ] T-041 Definir lluvia solo sonora (M42), no visual
+- [ ] T-042 Definir nieve estacionaria opcional (M32/M90)
+- [ ] T-043 Definir plantas acuáticas en aguas poco profundas (M51)
+- [ ] T-044 Definir plantas submarinas en el fondo
+- [ ] T-045 Definir sin vegetación bajo hielo
+- [ ] T-046 Definir límites de profundidad por especie
+- [ ] T-047 Definir clamp de pendiente ≤ umbral por especie
+- [ ] T-048 Definir línea de árboles por altura (M09)
+- [ ] T-049 Definir playa desnuda
+- [ ] T-050 Definir no vegetación dentro de cuevas
+- [ ] T-051 Definir variantes de color por estación (M29)
+- [ ] T-052 Definir floración en primavera
+- [ ] T-053 Definir hojas en otoño
+- [ ] T-054 Definir nieve en invierno (opcional)
+- [ ] T-055 Definir transición suave (fade 5 s)
+- [ ] T-056 Definir árboles jóvenes → adultos por tiempo de mundo
+- [ ] T-057 Definir densidad regulada por chunk
+- [ ] T-058 Definir sin saltos visuales (transiciones)
+- [ ] T-059 Definir regeneración solo por eventos de juego
+- [ ] T-060 Definir LOD 2 niveles por especie
+- [ ] T-061 Definir distancia de LOD (24 m) y cull (40 m)
+- [ ] T-062 Definir culling por frustum + distancia
+- [ ] T-063 Definir presupuesto contra M61
+- [ ] T-064 Definir draw calls por chunk ≤ umbral
+- [ ] T-065 Definir pooling de instancias (M62)
+- [ ] T-066 Definir liberación de memoria al descargar chunk
+- [ ] T-067 Definir registro vegetation_budget.json
+- [ ] T-068 Definir validate_vegetation.gd
+- [ ] T-069 Verificar densidad real vs tabla
+- [ ] T-070 Verificar instancias fuera de agua/cueva (arte sucio)
+- [ ] T-071 Verificar LOD presente
+- [ ] T-072 Verificar presupuesto (instancias/draw calls/VRAM)
+- [ ] T-073 Verificar naming
+- [ ] T-074 Definir prefijos veg_, tree_, foliage_
+- [ ] T-075 Alinear con M108
+- [ ] T-076 Rendimiento: instancias visibles ≤ 8.000 (preset medio)
+- [ ] T-077 Memoria: buffers de MultiMesh contra M62
+- [ ] T-078 Determinismo: PRNG de chunk
+- [ ] T-079 Cozy: vegetación variada sin ruido visual
+- [ ] T-080 Mantenible: catálogo y tabla centrales
+- [ ] T-081 Descartar MeshInstance por planta
+- [ ] T-082 Descartar vegetación procedural con RNG en runtime
+- [ ] T-083 Descartar árboles 100% malla 3D (tala voxel)
+- [ ] T-084 Descartar viento con bones por instancia
+- [ ] T-085 Descartar un MultiMesh gigante mundial
+- [ ] T-086 Descartar viento con RNG por frame
+- [ ] T-087 Riesgo de draw calls desbordados → presupuesto por chunk + LOD
+- [ ] T-088 Riesgo de arte sucio (agua/acantilados) → placement post-terreno + validador
+- [ ] T-089 Riesgo de viento costoso → LOD reduce verts
+- [ ] T-090 Riesgo de reaparecer árboles talados → regeneración por eventos
+- [ ] T-091 Riesgo de densidad desigual → PRNG con seeds derivadas
+- [ ] T-092 Riesgo de determinismo roto → deltas versionados (M10/M60)
+- [ ] T-093 Documentar integración con M08/M10 (tala/deltas/PRNG)
+- [ ] T-094 Documentar integración con M09 (biomas)
+- [ ] T-095 Documentar integración con M45/M47 (mallas/materiales)
+- [ ] T-096 Documentar integración con M48 (viento)
+- [ ] T-097 Documentar integración con M61/M62 (presupuestos)
+- [ ] T-098 Documentar integración con M29 (estaciones)
+- [ ] T-099 Documentar integración con M33 (agricultura)
+- [ ] T-100 Documentar integración con M32 (clima)
+- [ ] T-101 Documentar integración con M51 (agua)
+- [ ] T-102 Documentar integración con M52 (VFX)
+- [ ] T-103 Documentar integración con M108/M118 (import/CI)
+- [ ] T-104 Documentar flujo de generación de chunk
+- [ ] T-105 Documentar flujo de tala
+- [ ] T-106 Documentar flujo de cambio de estación
+- [ ] T-107 Cada bioma muestra su vegetación característica verificada
+- [ ] T-108 Escena pivote sin caída de frame (M61)
+- [ ] T-109 Viento determinista con amplitud por bioma/clima
+- [ ] T-110 Tala funcional (M08) y decorativo no destructible
+- [ ] T-111 Estaciones cambian color visualmente en ≤ X s
+- [ ] T-112 Densidad respeta clamps de terreno
+- [ ] T-113 Costo MultiMesh dentro del presupuesto
+- [ ] T-114 Regeneración por eventos sin romper determinismo
+- [ ] T-115 Documentar el desfase de numeración del plan maestro (49=VEGETACIÓN → ID 50)
+- [ ] T-116 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-117 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-118 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md
+- [ ] T-119 VegetationManager (spawn por bioma/estación, pooling, densidad) — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere M08/M10 en producción)

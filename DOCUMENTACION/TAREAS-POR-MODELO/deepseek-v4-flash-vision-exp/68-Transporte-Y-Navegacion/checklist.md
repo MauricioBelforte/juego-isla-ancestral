@@ -1,0 +1,141 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 68-Transporte-Y-Navegacion (68)
+
+# Checklist personal tareas — 68-Transporte-Y-Navegacion
+
+> Extraidas del 05-Checklist.md del módulo (131 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir TransportManager como autoload único de transporte
+- [ ] T-002 Cargar el grafo de paradas/rutas desde transport_network.tres
+- [ ] T-003 Exponer API list_routes/buy_ticket a la UI (M53)
+- [ ] T-004 Registrar logs TRIP-START y TRIP-END
+- [ ] T-005 Emitir eventos TRIP_FINISHED (M07)
+- [ ] T-006 Definir paradas tipo barco en islas principales (M28)
+- [ ] T-007 Muelles con docking del vehículo (M67)
+- [ ] T-008 Puertos con cartel y marcador en el mapa (M54)
+- [ ] T-009 Puerto de festival temporal (M74)
+- [ ] T-010 Testear docking del barco en puertos angostos
+- [ ] T-011 Plataformas de dirigible con parada
+- [ ] T-012 Estación central de tren SOLO si M67 define la locomotora
+- [ ] T-013 Parada en la isla del Este y del Norte
+- [ ] T-014 Estaciones con indicación de horarios (M29)
+- [ ] T-015 Documentar el estado condicional de la estación de tren
+- [ ] T-016 Definir transport_route.gd (origen, destino, duración, coste)
+- [ ] T-017 Crear transport_network.tres como única fuente de verdad
+- [ ] T-018 Definir 8-12 paradas y 15-20 rutas típicas
+- [ ] T-019 Sin bucles duplicados (grafo simple validado)
+- [ ] T-020 Testear el grafo con ruta corta (dijkstra, orden de paradas)
+- [ ] T-021 Definir coste base por ruta (M38)
+- [ ] T-022 Coste directo mayor que combinar rutas (incentivo de exploración)
+- [ ] T-023 Descuento del 20% con amistad nivel 5+ (M20)
+- [ ] T-024 Descuentos visibles en el panel (M53)
+- [ ] T-025 Testear costes con economía vacía y llena
+- [ ] T-026 Desbloquear paradas al construir infraestructura (M71)
+- [ ] T-027 Desbloquear rutas por progreso de historia (M22)
+- [ ] T-028 Rutas bloqueadas con aviso de requisito
+- [ ] T-029 Log STOP-UNLOCKED
+- [ ] T-030 Testear desbloqueo en orden correcto
+- [ ] T-031 Rutas respetan horario (M29: apertura/cierre por parada)
+- [ ] T-032 Rutas de barco bloqueadas con tormenta (M32)
+- [ ] T-033 Dirigible bloqueado con viento fuerte (M32)
+- [ ] T-034 Aviso claro si se intenta viajar fuera de horario
+- [ ] T-035 Testear restricciones con cambios de clima en vivo
+- [ ] T-036 Definir capa de transporte en el mapa (M54)
+- [ ] T-037 Dibujar rutas como líneas en la capa
+- [ ] T-038 Marcadores de parada con horarios en el mapa
+- [ ] T-039 Sincronizar capa con el grafo (una sola fuente)
+- [ ] T-040 Testear el mapa con 3 idiomas (M87)
+- [ ] T-041 Carteles de madera con direcciones y distancias
+- [ ] T-042 Carteles de parada con horarios
+- [ ] T-043 Carteles en atlas batchable (M46/M61)
+- [ ] T-044 Señalización consistente con el mapa (validador)
+- [ ] T-045 Testear carteles de noche (legibles, M49)
+- [ ] T-046 Marcadores de paradas en el mapa (M54)
+- [ ] T-047 Waypoints automáticos en rutas largas
+- [ ] T-048 Waypoints manuales del jugador (marcas en el mapa)
+- [ ] T-049 Persistencia de waypoints (M59)
+- [ ] T-050 Testear waypoints con rutas de 2+ paradas
+- [ ] T-051 Panel de transporte con lista de rutas
+- [ ] T-052 Mostrar coste, duración y horario por ruta
+- [ ] T-053 Confirmación de compra con aviso de dinero insuficiente
+- [ ] T-054 Botón de "viajar ahora" y "programar" (esperar horario)
+- [ ] T-055 Testear panel en pausa y desde el mapa
+- [ ] T-056 Duración por ruta (real o montaje con fade)
+- [ ] T-057 Viajes cortos (muelle cercano) en tiempo real con vehículo (M67)
+- [ ] T-058 Viajes largos con montaje de fade
+- [ ] T-059 Tiempos visibles en el panel antes de comprar
+- [ ] T-060 Testear tiempos en 3 rutas distintas
+- [ ] T-061 Transición cozy < 4 s con mensaje "Viajando a X..." (M44)
+- [ ] T-062 Barra de progreso (M08) si el destino tarda
+- [ ] T-063 Cargar destino ANTES de mover al jugador (M61)
+- [ ] T-064 Reaparición orientada al destino (nunca perder al jugador)
+- [ ] T-065 Testear transición con streaming pesado
+- [ ] T-066 Viaje al festival (parada temporal, M74)
+- [ ] T-067 Tour de luna llena (M31) con precio especial
+- [ ] T-068 Viajes especiales registrados en el calendario (M29)
+- [ ] T-069 No aparecer en el grafo normal (solo programados)
+- [ ] T-070 Testear viajes especiales fuera de fecha (no disponibles)
+- [ ] T-071 Rutas narrativas sin coste
+- [ ] T-072 Diálogos a bordo durante el trayecto (M21)
+- [ ] T-073 Avanzar hitos de historia al llegar (M22/M23)
+- [ ] T-074 Viaje narrativo no interrumpible
+- [ ] T-075 Testear viaje narrativo del capítulo 1 al 7
+- [ ] T-076 Encuentros suaves en ruta (NPC M64 en el muelle)
+- [ ] T-077 Eventos de ruta sin peligro (sin clima hostil inesperado)
+- [ ] T-078 Señal sonora/visual de evento en ruta (M43/M44)
+- [ ] T-079 Evento de ruta del festival (M74)
+- [ ] T-080 Testear eventos sin romper la transición
+- [ ] T-081 Compartir estaciones con M69 (misma red)
+- [ ] T-082 M69 solo muestra destinos con estación desbloqueada
+- [ ] T-083 M69 sin duplicar costes ni rutas de M68
+- [ ] T-084 M69 más caro que el boleto de ruta (decisión)
+- [ ] T-085 Testear coordinación con M69 en 3 destinos
+- [ ] T-086 Puertas/gangways animados en paradas (M48)
+- [ ] T-087 Bandera del barco con viento (M50) en paradas
+- [ ] T-088 NPC pasajeros en paradas (M64)
+- [ ] T-089 NPC abordando el vehículo (M67)
+- [ ] T-090 Testear animaciones con LOD (M61)
+- [ ] T-091 HUD del viaje legible con alto contraste
+- [ ] T-092 Tamaño de texto configurable en el panel
+- [ ] T-093 Reduce Motion: transiciones cortas sin zoom
+- [ ] T-094 Subtítulos en mensajes de viaje
+- [ ] T-095 Panel de transporte accesible con gamepad (M57)
+- [ ] T-096 Viajar con dinero justo o en la última hora de horario
+- [ ] T-097 Viajar durante diálogo (M21, bloqueado) o con inventario lleno
+- [ ] T-098 Viajar al destino destruido (ruina M25) o con el vehículo en uso (M67)
+- [ ] T-099 Carga de guardado a mitad de viaje (M59) y viajes dobles (cola)
+- [ ] T-100 Parada recién desbloqueada sin señal y clima cambiadizo (M32)
+- [ ] T-101 Red en un solo .tres (sin nodos por escena)
+- [ ] T-102 Señalización batchable (M46, ≤ 4 carteles por escena)
+- [ ] T-103 Capa de mapa sin draw calls nuevos
+- [ ] T-104 Transición reutilizable (SceneTransition M61)
+- [ ] T-105 Probar con profiler (M116)
+- [ ] T-106 Localizar nombres de paradas y rutas
+- [ ] T-107 Localizar mensajes de viaje y horarios
+- [ ] T-108 Localizar carteles del mundo
+- [ ] T-109 Respetar plurales y formatos de hora (12h/24h)
+- [ ] T-110 Testear panel y carteles en 3 idiomas
+- [ ] T-111 Crear validate_transport.gd (grafo, señalización vs mapa, costes, transiciones)
+- [ ] T-112 Probar ciclo completo: abrir mapa → elegir ruta → pagar → viajar → llegar
+- [ ] T-113 Probar viaje narrativo completo (M22)
+- [ ] T-114 Probar viaje de festival (M74)
+- [ ] T-115 Revisar logs TRP-* en consola sin errores
+- [ ] T-116 Documentar la red de transporte en 04-Codigo.md
+- [ ] T-117 Documentar la coordinación con M69
+- [ ] T-118 Documentar la regla "nunca perder al jugador"
+- [ ] T-119 Documentar el estado condicional de la estación de tren
+- [ ] T-120 Agregar notas del agente al 04-Codigo.md (honestidad)
+- [ ] T-121 Firmar los documentos del módulo (modelo y plataforma)
+- [ ] T-122 Actualizar CHECKLIST-GLOBAL con el progreso real
+- [ ] T-123 Actualizar DOCUMENTACION/README.md con el módulo 68
+- [ ] T-124 Actualizar ESTADO-PARALELO.md
+- [ ] T-125 Generar el log 64 en Logs/
+- [ ] T-126 Verificar con verificar_checklist.py (sin alertas nuevas)
+- [ ] T-127 Push del módulo y reporte al usuario
+- [ ] T-128 Marcar ítems solo al cumplir la DoD (sección 21.6)
+- [ ] T-129 Revisar que plan-inicial == plan-actual (SHA-256)
+- [ ] T-130 Confirmar 130 ítems exactos
+- [ ] T-131 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

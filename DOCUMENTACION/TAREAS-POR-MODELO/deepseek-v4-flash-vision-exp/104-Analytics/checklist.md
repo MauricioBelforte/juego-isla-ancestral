@@ -1,0 +1,110 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 104-Analytics (104)
+
+# Checklist personal tareas — 104-Analytics
+
+> Extraidas del 05-Checklist.md del módulo (100 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: recolección de datos de comportamiento no intrusiva
+- [ ] T-002 Registrar dependencias: M103, M61, M91
+- [ ] T-003 Catalogar los 7 requisitos funcionales
+- [ ] T-004 RF1: eventos de sesión (inicio, pausa, reanudación, fin)
+- [ ] T-005 RF2: patrones de movimiento y áreas visitadas
+- [ ] T-006 RF3: frecuencia de features (fast travel, crafting, etc.)
+- [ ] T-007 RF4: tiempo de juego acumulado (anonimizado)
+- [ ] T-008 RF5: eventos críticos (crashes, errores)
+- [ ] T-009 RF6: configuración de reporte (opt-out toggle)
+- [ ] T-010 RF7: formato de datos JSON agregado
+- [ ] T-011 P1: eventos de sesión capturados con timestamps
+- [ ] T-012 P2: heatmap de áreas visitadas por zona (no coordenadas)
+- [ ] T-013 P3: contadores de feature usos por tipo
+- [ ] T-014 P4: tiempo de juego acumulado por sesión y total
+- [ ] T-015 P5: eventos críticos reportados con contexto mínimo
+- [ ] T-016 P6: toggle opt-out en configuración M91
+- [ ] T-017 P7: datos exportados son JSON agregado sin identificadores
+- [ ] T-018 ID sesión hashed (SHA256, rota cada 24h)
+- [ ] T-019 IP truncada a primeros 2 octetos
+- [ ] T-020 Sin nombres de jugadores en ningún dato
+- [ ] T-021 Sin ubicaciones exactas/coordenadas GPS
+- [ ] T-022 Datos sensibles filtrados automáticamente
+- [ ] T-023 Opt-out inmediato al desactivar toggle
+- [ ] T-024 Revisión periódica de cumplimiento GDPR
+- [ ] T-025 Transparencia en reporte al jugador
+- [ ] T-026 Toggle reporte analytics en menú M91
+- [ ] T-027 Visualización de estado "Analytics: Activo/Desactivado"
+- [ ] T-028 Opción para borrar datos locales acumulados
+- [ ] T-029 Información de qué datos se recogen y por qué
+- [ ] T-030 Acceso rápido a política de privacidad
+- [ ] T-031 Configuración de frecuencia de envío (30 min / al cierre)
+- [ ] T-032 Consentimiento informado al primer ingreso
+- [ ] T-033 Respetar configuración M91 persiste entre sesiones
+- [ ] T-034 catálogo eventos.tres (tipos, categorías, datos capturados)
+- [ ] T-035 Formato JSON estructurado por evento
+- [ ] T-036 Buffer de eventos con política de FIFO
+- [ ] T-037 Envio de lotes cada 30 min o al cierre
+- [ ] T-038 Almacenamiento local en persistentDataPath
+- [ ] T-039 Estadísticas agregadas: sesiones/día, horas/juego, features usadas
+- [ ] T-040 Reportes sin identificar personal
+- [ ] T-041 Overhead < 1% CPU medible
+- [ ] T-042 Test: eventos RF1-RF7 capturados y almacenados
+- [ ] T-043 Test: heatmap de áreas visitadas correcta
+- [ ] T-044 Test: contadores de features por tipo
+- [ ] T-045 Test: tiempo de juego acumulado correcto
+- [ ] T-046 Test: opt-out detiene captura inmediatamente
+- [ ] T-047 Test: datos exportados sin identificadores personales
+- [ ] T-048 Test: overhead < 1% en profiling
+- [ ] T-049 Test: cumplimiento GDPR básico verificado
+- [ ] T-050 Módulo marcado delegable
+- [ ] T-051 API estable definida
+- [ ] T-052 Implementación ? AGENTE DELEGADO
+- [ ] T-053 Assets ? specs con privacidad por diseño
+- [ ] T-054 01-Requerimientos creado y firmado
+- [ ] T-055 02-Analisis creado y firmado
+- [ ] T-056 03-Diseno creado y firmado
+- [ ] T-057 04-Codigo creado y firmado (Notas del Agente)
+- [ ] T-058 05-Checklist creado y firmado (este archivo)
+- [ ] T-059 Hash del device ID antes de envio
+- [ ] T-060 Sin almacenamiento de coordenadas exactas
+- [ ] T-061 Solo binarización de celdas para heatmap
+- [ ] T-062 Salting del hash por instalación
+- [ ] T-063 Sin identificadores persistentes de hardware
+- [ ] T-064 Politica de retención: 90 días para crudo
+- [ ] T-065 Agregación tras 30 días, no datos en crudo
+- [ ] T-066 Sin envio de datos personales
+- [ ] T-067 Cumplimiento COPPA (foco familiar)
+- [ ] T-068 Revision por pares del módulo
+- [ ] T-069 Batching cada 5 min o 50 eventos
+- [ ] T-070 Compresión gzip antes de envio
+- [ ] T-071 Cola persistente con límite de 10 MB
+- [ ] T-072 Funciona offline sin perder datos
+- [ ] T-073 Subproceso en background con Thread
+- [ ] T-074 Sin allocaciones en frame
+- [ ] T-075 EventBus con ring buffer
+- [ ] T-076 Profileo semanal con TaskManager
+- [ ] T-077 Advertencia si overhead > 1%
+- [ ] T-078 Sin memory leak en stress test 1h
+- [ ] T-079 Dashboard web (futuro M206)
+- [ ] T-080 Reporte semanal de DAU
+- [ ] T-081 Heatmap de biomas más visitados
+- [ ] T-082 Métricas de retención D1/D7/D30
+- [ ] T-083 Funnel de primer hora de juego
+- [ ] T-084 Eventos de crash correlacionados
+- [ ] T-085 Eventos de fast travel conectados
+- [ ] T-086 Tiempo promedio de sesión
+- [ ] T-087 Distribución de horarios de uso
+- [ ] T-088 Distribución por plataforma (Steam Deck)
+- [ ] T-089 Alertas de anomalías
+- [ ] T-090 Exportación CSV para análisis externo
+- [ ] T-091 Configuración primera ejecución: opt-out por defecto
+- [ ] T-092 Pantalla de consentimiento (GDPR)
+- [ ] T-093 Toggle accesible desde M90
+- [ ] T-094 Confirmación del usuario al opt-in
+- [ ] T-095 Botón "borrar mis datos" en configuración
+- [ ] T-096 Sin re-pedir consentimiento en cada arranque
+- [ ] T-097 Reset de IDs al opt-out
+- [ ] T-098 Solo envío en Wi-Fi (configurable)
+- [ ] T-099 Indicador visual de envio en curso
+- [ ] T-100 Histórico de consentimientos del usuario

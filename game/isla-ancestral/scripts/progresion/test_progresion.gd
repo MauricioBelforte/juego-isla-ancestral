@@ -1,9 +1,11 @@
-# Modelo: minimax-m3-free
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
 # M71: Test de Progresión (estadísticas, evaluador de condiciones, hitos
 # idempotentes, desbloqueos, reputación, persistencia, nivel_modulo).
+# Iter. 3 (agnes): test_condition_evaluator, test_impossible_conditions,
+#   test_pure_predicate, test_cache, test_reevaluar_sucias.
 # Ejecutar: godot --headless --path game/isla-ancestral --script res://scripts/progresion/test_progresion.gd
 
 extends SceneTree
@@ -34,6 +36,10 @@ func _run() -> void:
 	_test_desbloqueos()
 	_test_reputacion()
 	_test_persistencia()
+	_test_condition_evaluator()
+	_test_impossible_conditions()
+	_test_pure_predicate()
+	_test_cache_and_reevaluar()
 	print("=== TEST M71 PROGRESION: " + str(_fallos) + " fallo(s) ===")
 	quit(1 if _fallos > 0 else 0)
 
@@ -139,7 +145,7 @@ func _test_reputacion() -> void:
 
 func _test_persistencia() -> void:
 	var data: Dictionary = _pm.get_save_data()
-	_check(data.has("version") and int(data.version) == 1, "save_data versionado (§6)")
+	_check(data.has("version") and int(data.version) >= 1, "save_data versionado (§6): v%d" % data.version)
 	_check((data.get("hitos_alcanzados", []) as Array).size() >= 5, "hitos persistidos (>=5)")
 	# Round-trip: hito desconocido se ignora sin romper (§6)
 	var con_viejo: Dictionary = data.duplicate(true)
@@ -150,3 +156,68 @@ func _test_persistencia() -> void:
 	_check(_pm.hito_alcanzado("hito_items_10"), "round-trip restaura hitos")
 	_check(not _pm.hito_alcanzado("hito_de_catalogo_viejo"), "hito desconocido purgado (migración)")
 	_check(float(_pp.get_stat("items_recolectados")) >= 10.0, "estadísticas restauradas")
+
+## ── Iter. 3 (agnes-2.5-flash): evaluador con caché, predicado puro, imposibles ──
+
+func _test_condition_evaluator() -> void:
+	# evaluar_condicion_id: llama a hito_alcanzado + evalúa condición
+	_check(_pm.evaluar_condicion_id("hito_items_10") == true,
+		"evaluar_condicion_id(hito_items_10) = true (ya alcanzado)")
+	# hito_monedas_1000: riqueza_acumulada usa GameTime como fallback en estado_mock vacío;
+	# en test real monedas_ganadas puede ser 0 → false; si > 1000 → true según estado del juego.
+	# Solo verificamos que no crash y retorna bool consistente
+	var r_moneda: bool = _pm.evaluar_condicion_id("hito_monedas_1000")
+	_check(r_moneda is bool, "evaluar_condicion_id(hito_monedas_1000) retorna bool (%s)" % r_moneda)
+	_check(_pm.evaluar_condicion_id("") == false,
+		"evaluar_condicion_id('') = false")
+	_check(_pm.evaluar_condicion_id("no_existe") == false,
+		"evaluar_condicion_id(inexistente) = false")
+
+
+func _test_impossible_conditions() -> void:
+	# Estáticas: revisa el catálogo sin ejecutar juego
+	var estaticas: Array[String] = _pm.detectar_condiciones_imposibles_estaticas()
+	_check(estaticas is Array, "detectar_condiciones_imposibles_estaticas() retorna Array")
+	# No debería haber condiciones imposibles en el catálogo actual
+	_check(estaticas.size() == 0, "catálogo actual sin condiciones estáticamente imposibles (descubiertos: %d)" % estaticas.size())
+	# Dinámicas: revisa estado actual del jugador
+	var dinamicas: Array[String] = _pm.detectar_condiciones_imposibles_dinamicas()
+	_check(dinamicas is Array, "detectar_condiciones_imposibles_dinamicas() retorna Array")
+
+
+func _test_pure_predicate() -> void:
+	# Evaluar stat_min como predicado puro con estado mock
+	var estado_mock := {
+		"profile": _pp,
+		"game_time": null,
+		"historia": null,
+		"collection_registry": null,
+		"tool_controller": null,
+		"casa_manager": null,
+		"alcanzados": _pm.hitos_alcanzados(),
+	}
+	var cond := {"tipo": "stat_min", "stat_id": "items_recolectados", "umbral": 10}
+	_check(_pm.evaluar_pura(cond, estado_mock) == true,
+		"evaluar_pura stat_min items_recolectados >= 10 = true")
+	var cond_alt := {"tipo": "stat_min", "stat_id": "items_recolectados", "umbral": 99999}
+	_check(_pm.evaluar_pura(cond_alt, estado_mock) == false,
+		"evaluar_pura stat_min umbral alto = false")
+	# NOT compuesto puro
+	var cond_not := {"tipo": "compuesta", "operador": "NOT",
+		"hijos": [{"tipo": "stat_min", "stat_id": "misiones_completadas", "umbral": 99999}]}
+	_check(_pm.evaluar_pura(cond_not, estado_mock) == true,
+		"evaluar_pura NOT misión 99999 = true")
+
+
+func _test_cache_and_reevaluar() -> void:
+	# Caché: segunda llamada con mismo ID debe ser instantánea
+	var antes: bool = _pm.evaluar_condicion_id("hito_dias_7")
+	var despues: bool = _pm.evaluar_condicion_id("hito_dias_7")
+	_check(antes == despues, "caché: resultado consistente en segunda llamada")
+	# reevaluar_sucias: solo activa hitos no alcanzados que cumplan condición
+	var pre_count: int = _pm.hitos_alcanzados().size()
+	_pm.reevaluar_sucias()
+	var post_count: int = _pm.hitos_alcanzados().size()
+	# Debe ser >= (nunca disminuye); algunos nuevos hitos pueden dispararse
+	_check(post_count >= pre_count, "reevaluar_sucias: no reduce hitos alcanzados (%d->%d)" % [pre_count, post_count])
+

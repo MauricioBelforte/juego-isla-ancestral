@@ -1,0 +1,112 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 124-Contenido-Generado-Por-Usuarios (124)
+
+# Checklist personal tareas — 124-Contenido-Generado-Por-Usuarios
+
+> Extraidas del 05-Checklist.md del módulo (102 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir criterio: demanda comunitaria ≥ 25% (M100)
+- [ ] T-002 Definir criterio: coste mensual de almacenamiento ≤ presupuesto
+- [ ] T-003 Definir criterio: efectividad de moderación automática ≥ 75%
+- [ ] T-004 Definir criterio: diseño aprobado 100%
+- [ ] T-005 Definir sin UGC en V1 (M143) documentado
+- [ ] T-006 Definir compartir fotos de la cámara (M56)
+- [ ] T-007 Definir compresión 4K → 2K al compartir
+- [ ] T-008 Definir tamaño máximo 3 MB por foto
+- [ ] T-009 Definir formato JPG/WebP
+- [ ] T-010 Definir metadatos mínimos (alias, timestamp, tag)
+- [ ] T-011 Definir opción de ocultar la foto de la galería
+- [ ] T-012 Definir licencia informada antes de subir
+- [ ] T-013 Definir sin datos de locación en la foto
+- [ ] T-014 Definir compartir blueprints de diseño (M18)
+- [ ] T-015 Definir tamaño máximo 256 KB
+- [ ] T-016 Definir validación de límites del diseño al compartir (M109)
+- [ ] T-017 Definir previsualización del blueprint
+- [ ] T-018 Definir sin coords del save en el blueprint
+- [ ] T-019 Definir compartir construcciones (M17) como blueprint expandido
+- [ ] T-020 Definir tamaño máximo 512 KB
+- [ ] T-021 Definir validación de requisitos del jugador receptor (M16/M17)
+- [ ] T-022 Definir ejemplos de materiales requeridos
+- [ ] T-023 Definir construcción en modo "fantasma" previa (M17)
+- [ ] T-024 Definir regla: no puede exceder límites de terreno del jugador
+- [ ] T-025 Definir pipeline: hash → heurística → IA de imágenes → cola humana
+- [ ] T-026 Definir hash contra blacklist de contenido conocido
+- [ ] T-027 Definir umbral de IA para NSFW/odio
+- [ ] T-028 Definir cola humana con SLA 24 h
+- [ ] T-029 Definir apelación del usuario con 2ª instancia
+- [ ] T-030 Definir anonimato del moderador
+- [ ] T-031 Definir audit log de moderación sin datos personales (M103)
+- [ ] T-032 Definir reportes de usuario entran a la misma cola (M100)
+- [ ] T-033 Definir métrica de efectividad de la moderación automática
+- [ ] T-034 Definir guía de moderadores (criterios explícitos)
+- [ ] T-035 Definir fotos en CDN
+- [ ] T-036 Definir blueprints en bucket/objeto pequeño
+- [ ] T-037 Definir presupuesto mensual fijo
+- [ ] T-038 Definir retención: quarentena 30 días
+- [ ] T-039 Definir retención: público ilimitado salvo reporte/baja
+- [ ] T-040 Definir compresión de todos los ítems
+- [ ] T-041 Definir monitoreo de espacio en dashboard (M104)
+- [ ] T-042 Definir reutilización de infra sin servidores propios
+- [ ] T-043 Definir categorías de reporte (NSFW/violencia/odio/spam/copyright/privacidad)
+- [ ] T-044 Definir SLA de remoción por categoría (< 24 h, < 48 h, < 72 h)
+- [ ] T-045 Definir notificación al autor de la decisión
+- [ ] T-046 Definir opción de apelación en la notificación
+- [ ] T-047 Definir proceso de stickers (repetir reportes abusivos)
+- [ ] T-048 Definir registro de resolución de reportes
+- [ ] T-049 Definir consentimiento explícito al compartir (checkbox)
+- [ ] T-050 Definir minimización de datos (solo alias + timestamp)
+- [ ] T-051 Definir sin ID de plataforma expuesto en la galería
+- [ ] T-052 Definir almacenamiento según región de M80
+- [ ] T-053 Definir política de cookies/privacidad para la galería (M80)
+- [ ] T-054 Definir derecho al olvido operativo (GDPR)
+- [ ] T-055 Definir auditoría de privacidad en M151
+- [ ] T-056 Definir que el usuario conserva el copyright de su contenido
+- [ ] T-057 Definir licencia limitada del usuario al servicio (alojar/mostrar/moderar)
+- [ ] T-058 Definir política de assets del juego para contenido derivado (M127)
+- [ ] T-059 Definir proceso DMCA para violaciones (M127/M78)
+- [ ] T-060 Definir atribución de autores en la galería
+- [ ] T-061 Definir prohibición de contenido de terceros no licenciado
+- [ ] T-062 Definir criterios explícitos (lista tipo)
+- [ ] T-063 Definir política apta para todas las edades
+- [ ] T-064 Definir zona gris: decisión humana con guía
+- [ ] T-065 Definir remoción inmediata para contenido grave
+- [ ] T-066 Definir suspensión temporal del autor (3 strikes)
+- [ ] T-067 Definir re-publicación prohibida del contenido eliminado (hash)
+- [ ] T-068 Definir botón de eliminación en perfil del autor
+- [ ] T-069 Definir borrado efectivo ≤ 30 días (GDPR)
+- [ ] T-070 Definir eliminación por moderación con notificación
+- [ ] T-071 Definir flag anti-re-publicación tras eliminación
+- [ ] T-072 Definir export / respaldo del contenido antes de borrar (pedido del autor)
+- [ ] T-073 Definir proceso documentado para pedidos legales
+- [ ] T-074 Definir cláusula UGC en los ToS (M125)
+- [ ] T-075 Definir secciones: propiedad, licencia, prohibiciones, moderación, eliminación, apelación y responsabilidad
+- [ ] T-076 Definir resumen en lenguaje simple + texto legal
+- [ ] T-077 Definir referencia a la política de comunidad (M100)
+- [ ] T-078 Definir consentimiento de menores (mínimo de edad)
+- [ ] T-079 Definir revisión legal anual del TOS (M126)
+- [ ] T-080 Definir backup diario de la tabla de ítems (RPO 24 h)
+- [ ] T-081 Definir retención de backups 90 días
+- [ ] T-082 Definir verificación semanal de restauración
+- [ ] T-083 Definir backup del audit log de moderación
+- [ ] T-084 Definir plan de contingencia ante caída del servicio UGC
+- [ ] T-085 Definir 200 ítems activos por usuario
+- [ ] T-086 Definir 50 subidas de fotos por día
+- [ ] T-087 Definir 20 subidas de blueprints por día
+- [ ] T-088 Definir 10 MB de subida por día
+- [ ] T-089 Definir pesos máximos por ítem (3 MB / 512 KB)
+- [ ] T-090 Definir validación de límites en el cliente (M109)
+- [ ] T-091 Definir mensajes claros de superación de límite
+- [ ] T-092 Definir galería pública con filtros por tag
+- [ ] T-093 Definir tarjeta de ítem (foto/blueprint + alias + me gusta)
+- [ ] T-094 Definir acción reportar en cada tarjeta
+- [ ] T-095 Definir página de perfil con mis ítems y estados
+- [ ] T-096 Definir notificaciones de aprobación/remoción
+- [ ] T-097 Definir integración opcional con #showcase de Discord (M100)
+- [ ] T-098 Definir telemetría de vistas/descargas/reportes (M104)
+- [ ] T-099 Definir separación de backend UGC del juego (sin acople)
+- [ ] T-100 Definir seguridad de la API (auth + rate limit, M106)
+- [ ] T-101 Definir documentación plan-actual actualizada y firmada
+- [ ] T-102 Definir log del módulo en Logs/

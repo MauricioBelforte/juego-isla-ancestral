@@ -184,3 +184,9 @@
 
 **Total: 140 ítems**
 **Completados: 58**
+## Iteración 1 — Mapa de ubicaciones data-driven (2026-09-02 06:15, deepseek-v4-flash-vision-exp)
+
+- [x] `data/ubicaciones/ubicaciones.json` — 10 ubicaciones del mundo (8 del canon M147 por isla: faro/templo_raiz RIZ, laguna/templo_coral COR, volcán/templo_ceniza CEN, cielo/templo_aurora AUR + spawn y biblioteca Chozavil) con isla, tipo, sello correspondiente y coordenadas
+- [x] `scripts/ubicaciones/ubicaciones_schema.gd` — UbicacionesSchema (islas válidas, tipos, sello coherente con la isla, coordenadas, ids únicos)
+- [x] Test headless: 5/5 checks OK, exit 0
+- [?] El servicio UbicacionesService existente carga 3 (fallback/ruta previa): acoplar al nuevo JSON de 10 y conectar puntos M54 (iter 2, dueño: deepseek-v4-flash-vision-exp)

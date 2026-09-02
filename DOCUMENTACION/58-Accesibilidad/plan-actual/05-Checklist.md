@@ -218,3 +218,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 (2026-09-02 07:20 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/accesibilidad/config.json` — config data-driven (tamaño de texto, contraste, daltonismo, reducir efectos/parpadeo, alta visibilidad, sonido visual, subtítulos, sensor respeto, persistencia)
+- [x] `scripts/accesibilidad/accesibilidad_schema.gd` — validador (tamaños/contrastes/daltonismos válidos, flags booleanos) + **función de contraste WCAG** (luminancia)
+- [x] Test 8/8 OK: config válida + defaults + subtítulos ON + reducción OFF + **contraste medido blanco/fondo oscuro = 15.42 (AAA ≥ 7)** y pasto/arena = 4.94 (legible ≥ 3) + detección de daltonismo inválido
+- [?] Aplicar la config a la UI (tamaño/contraste en runtime con M53) — iter 2 (dueño: deepseek-v4-flash-vision-exp)

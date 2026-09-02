@@ -213,3 +213,9 @@
 - [x] Iter 3: turbulencia (deriva orgánica tipo brisa) + caída lenta + damping + amount 150→220 + lifetime 6→9. FPS 59 confirmado en iter3b (el 24 inicial era transitorio del arranque) [M]
 - [x] Iter 4: emisión en caja ancha (EMISSION_SHAPE_BOX, extents 3.5×0.5×1.0) para distribuir el polen por toda la escena en vez de amontonarlo en una columna. Verificado en captura: polen distribuido flotando a distintas alturas, FPS 59 [M]
 - [x] Flujo completo V4+V2 ejercitado: lanzar (script) → capturar (MCP screen) → comparar → ajustar → recapturar, con historial de capturas por iteración [S]
+## Verificación visual (2026-09-02 06:50 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Preview de polen (GPUParticles3D, amount 150, quad 0.06 textura radial) ejecutado y capturado: cientos de partículas flotando visibles, textura suave, sin frames rotos
+- [x] **Rendimiento visual: FPS 59** en la escena (sin degradación con 150+ partículas — presupuesto OK)
+- [x] GPUParticles3D (recomendado por M52) confirmado como vía correcta en D3D12 (no CPU)
+- [?] Catálogo de VFX por evento (M44 feedback + M92 tutorial): iter 2 — catálogo data-driven (dueño: deepseek-v4-flash-vision-exp)

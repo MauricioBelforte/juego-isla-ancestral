@@ -1,0 +1,136 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 147-World-Building (147)
+
+# Checklist personal tareas — 147-World-Building
+
+> Extraidas del 05-Checklist.md del módulo (126 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir índice de la biblia (`00-indice.md`) con reglas editoriales
+- [ ] T-002 Definir línea de tiempo canónica (`01-linea-de-tiempo.md`)
+- [ ] T-003 Definir reglas de formato de datos `## DATA { }`
+- [ ] T-004 Definir `world_data.json` generado desde los MD
+- [ ] T-005 Definir `world_bible/CHANGELOG.md` para cambios de canon
+- [ ] T-006 Definir origen de Aurora y su nombre previo
+- [ ] T-007 Definir relación de Aurora con los Arquitectos del Alba
+- [ ] T-008 Definir relación de Aurora con los Primeros Jardineros
+- [ ] T-009 Definir la "voz" de Aurora (sensación al recorrerla: hogar/misterio)
+- [ ] T-010 Definir qué sabe el jugador nuevo de Aurora (capa 0-1)
+- [ ] T-011 Definir historia de la Isla Coral (arrecife, Gran Vapor)
+- [ ] T-012 Definir historia de la Isla Verde (cultivos, jardineros)
+- [ ] T-013 Definir historia de la Isla de las Cenizas (catástrofe)
+- [ ] T-014 Definir historia de las Islas del Cielo (misterio, cielo)
+- [ ] T-015 Definir relación de cada isla con la Resonancia
+- [ ] T-016 Definir origen de los Arquitectos
+- [ ] T-017 Definir tecnología que construyó templos y Sellos
+- [ ] T-018 Definir su sistema de 1 símbolo por Sello
+- [ ] T-019 Definir su desaparición (relación con la Gran Quietud)
+- [ ] T-020 Definir legado jugable: templos (M24/M26), drones, herramientas únicas (M13)
+- [ ] T-021 Definir origen de los Jardineros
+- [ ] T-022 Definir su relación con cultivos y bosques (M33/M50)
+- [ ] T-023 Definir el "idioma del viento" (pistas ambientales, M148)
+- [ ] T-024 Definir su dispersión (no murieron: se dispersaron)
+- [ ] T-025 Definir legado jugable: semillas sagradas, festivales de siembra
+- [ ] T-026 Definir qué es la Resonancia (fenómeno)
+- [ ] T-027 Definir reglas de la Resonancia (qué puede y qué no)
+- [ ] T-028 Definir conexión con el terreno voxel y sismos (M09/M12)
+- [ ] T-029 Definir conexión con las herramientas únicas (M13/M26)
+- [ ] T-030 Definir conexión con los Sellos (M153)
+- [ ] T-031 Definir qué es Elysia para el jugador al inicio (capa 1)
+- [ ] T-032 Definir capas de revelación de Elysia por Sello
+- [ ] T-033 Definir la verdad de Elysia (capa 4) sin spoilers tempranos
+- [ ] T-034 Definir su rol en la Era del Alba (post-final)
+- [ ] T-035 Definir qué NO es Elysia (evita derivas de canon)
+- [ ] T-036 Definir biografía de Finneas (guía, capa 1)
+- [ ] T-037 Definir biografía de Lía (arco emocional, capa 2)
+- [ ] T-038 Definir biografía de Bruno (arco, capa 2)
+- [ ] T-039 Definir biografía de Nilo (arco, capa 2)
+- [ ] T-040 Definir biografía de Vera (arco, capa 2)
+- [ ] T-041 Definir regla 1-5-25 de detalle por personaje
+- [ ] T-042 Definir personajes de fondo con 1 párrafo de canon
+- [ ] T-043 Definir secundarios con misión (M23) con 5 párrafos
+- [ ] T-044 Definir comerciantes con historia ligada a M39
+- [ ] T-045 Definir niños NPC con capa 0 (nunca spoilers)
+- [ ] T-046 Definir creencias de los Arquitectos (el Orden del Alba)
+- [ ] T-047 Definir creencias de los Jardineros (la Madre Semilla)
+- [ ] T-048 Definir estado actual de las religiones (restos, festivales)
+- [ ] T-049 Definir símbolos religiosos reutilizados en puzzles (M24)
+- [ ] T-050 Definir que ninguna religión sea siniestra (cozy, M152)
+- [ ] T-051 Definir festivales anuales con origen histórico (M74)
+- [ ] T-052 Definir costumbres de saludo/despedida (diálogos M21)
+- [ ] T-053 Definir tradición de donación al museo (M37)
+- [ ] T-054 Definir tradición de plantar un árbol por evento (M33)
+- [ ] T-055 Definir derivación de cada costumbre desde la historia
+- [ ] T-056 Definir estilos arquitectónicos por civilización
+- [ ] T-057 Definir huella de cada estilo en construcciones actuales (M17/M18)
+- [ ] T-058 Definir detalles arquitectónicos que narran (M148)
+- [ ] T-059 Definir ornamentación de templos según Sello
+- [ ] T-060 Definir estilo de Elysia (distinto, capa 4)
+- [ ] T-061 Definir sistema de símbolos de los Arquitectos
+- [ ] T-062 Definir sistema de símbolos de los Jardineros
+- [ ] T-063 Definir un símbolo por Sello (M153)
+- [ ] T-064 Definir símbolos en reliquias y murales (M73/M148)
+- [ ] T-065 Definir que los símbolos se decodifiquen por progresión, no por texto
+- [ ] T-066 Definir glosario mínimo del lenguaje antiguo
+- [ ] T-067 Definir frases cortas de uso en puzzles (M24)
+- [ ] T-068 Definir regla: el jugador nunca traduce el idioma completo
+- [ ] T-069 Definir inscripciones de templos con texto coherente
+- [ ] T-070 Definir nombres derivados del lenguaje antiguo (para M149)
+- [ ] T-071 Definir nombres de meses/estaciones antiguas
+- [ ] T-072 Definir equivalencia con el calendario de juego (M29)
+- [ ] T-073 Definir festivales antiguos y su versión moderna
+- [ ] T-074 Definir ciclo de Sellos en el calendario (M153)
+- [ ] T-075 Definir numerales antiguos (relojes/reliquias)
+- [ ] T-076 Definir tecnologías de los Arquitectos (rigidez, precisión)
+- [ ] T-077 Definir tecnologías de los Jardineros (orgánicas)
+- [ ] T-078 Definir drones/máquinas residuales operativas (M26)
+- [ ] T-079 Definir pérdida de tecnología (por qué no se repara todo)
+- [ ] T-080 Definir límite: nada anacrónico en manos del jugador
+- [ ] T-081 Definir intercambio en la era antigua (trueque + AO origen)
+- [ ] T-082 Definir derivación de la moneda AO moderna (M38)
+- [ ] T-083 Definir qué valoraban los Arquitectos vs. los Jardineros
+- [ ] T-084 Definir ruinas de mercados antiguos como lugares (M25)
+- [ ] T-085 Definir que la economía antigua explique el comercio actual
+- [ ] T-086 Definir mapas antiguos como coleccionables (M73)
+- [ ] T-087 Definir mapas con rutas de islas ya hundidas
+- [ ] T-088 Definir mapas como pistas de puzzles (M24)
+- [ ] T-089 Definir estilo visual de mapas antiguos (M46/M47)
+- [ ] T-090 Definir que los mapas marquen lugares de la capa 4 sin revelarla
+- [ ] T-091 Definir la Gran Quietud (catástrofe central)
+- [ ] T-092 Definir catástrofes menores por isla (Cenizas, hundimientos)
+- [ ] T-093 Definir efecto visible de la Gran Quietud en el mundo (M08/M09)
+- [ ] T-094 Definir ruinas como resultado de catástrofes (M25)
+- [ ] T-095 Definir que las catástrofes nunca sean "castigos divinos" (cozy)
+- [ ] T-096 Definir por qué existen los asentamientos actuales
+- [ ] T-097 Definir migración de los Jardineros y su regreso tímido
+- [ ] T-098 Definir llegada del Gran Vapor y su rol (M28)
+- [ ] T-099 Definir población actual de Aurora (M19)
+- [ ] T-100 Definir que las migraciones expliquen variedad de NPC
+- [ ] T-101 Definir leyenda de la Semilla (verdad parcial)
+- [ ] T-102 Definir leyenda del Viento que Canta
+- [ ] T-103 Definir leyenda del Corazón de la Isla
+- [ ] T-104 Definir regla: toda leyenda es 70% verdad distorsionada
+- [ ] T-105 Definir vehículo: libros, murales, cuentos de NPC (M148/M21)
+- [ ] T-106 Definir check de referencias a módulos existentes
+- [ ] T-107 Definir `sync_world_data.gd` que regenera el JSON desde los MD
+- [ ] T-108 Definir hash MD↔JSON (detecta desincronización)
+- [ ] T-109 Definir CHANGELOG con motivo de cada cambio
+- [ ] T-110 Definir gate CI (M118) por PR a `world_bible/`
+- [ ] T-111 Definir consumo de `world_data.json` por M21 (diálogos)
+- [ ] T-112 Definir consumo por M25 (ruinas) y M24/M26 (templos)
+- [ ] T-113 Definir consumo por M27 (islas)
+- [ ] T-114 Definir consumo por M73 (coleccionables canónicos)
+- [ ] T-115 Definir consumo por M150 (sonido narrativo) al quedar definido
+- [ ] T-116 Definir que el jugador no lector pierda máx 10% de la historia
+- [ ] T-117 Definir que ningún diálogo explique más del 30% del canon
+- [ ] T-118 Definir que los NPC conozcan solo sus capas (M64)
+- [ ] T-119 Definir prueba de consistencia durante playtest (M114)
+- [ ] T-120 Definir que el canon no contradiga mecánicas (regla mar/pesca)
+- [ ] T-121 Definir trazabilidad bloque de lore → módulos consumidores
+- [ ] T-122 Definir revisión del canon contra M152 (principios)
+- [ ] T-123 Definir revisión contra M153 (contrato O1-O19)
+- [ ] T-124 Definir coordinación con M149 (nomenclatura) para ids definitivos
+- [ ] T-125 Definir revisión periódica de la biblia con el usuario (dueño del canon)
+- [ ] T-126 Aplicación del canon en gameplay (M22 historia/sellos — dueño: Hy3/WorkBuddy)

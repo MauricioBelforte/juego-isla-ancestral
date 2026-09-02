@@ -1,0 +1,184 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 58-Accesibilidad (58)
+
+# Checklist personal tareas — 58-Accesibilidad
+
+> Extraidas del 05-Checklist.md del módulo (174 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: jugadores con discapacidades visuales, auditivas, motoras, cognitivas o de lectura quedan excluidos sin opciones
+- [ ] T-002 Ubicar M58 como módulo transversal dependiente de M53 (UI-UX) y M57 (Interfaz de Control)
+- [ ] T-003 Registrar relaciones con M88 (fuentes), M90 (gráficos), M91 (audio/subtítulos) y M87 (traducciones)
+- [ ] T-004 Definir el objetivo: sistema completo, persistente y aplicable en tiempo real
+- [ ] T-005 Cubrir las cinco áreas: visual/color, auditiva, motora, cognitiva y lectoescritura
+- [ ] T-006 Garantizar acceso a las opciones desde el arranque, antes de cargar partida
+- [ ] T-007 Garantizar navegación del menú por teclado y mando
+- [ ] T-008 Garantizar que los cambios se apliquen en vivo sin reiniciar el juego
+- [ ] T-009 Asegurar persistencia del perfil entre sesiones
+- [ ] T-010 Definir alcance explícito (incluye y excluye) del módulo
+- [ ] T-011 Declarar restricciones: Godot 4.x, GDScript, sin lógica en capas de UI
+- [ ] T-012 Redactar criterios de aceptación verificables
+- [ ] T-013 RF1: definir los tres perfiles de daltonismo (protanopia, deuteranopia, tritanopia)
+- [ ] T-014 RF1: diseñar vista previa en vivo del filtro antes de confirmar
+- [ ] T-015 RF1: definir intensidad del filtro 0–100 % con valor por defecto conservador
+- [ ] T-016 RF2: definir modo alto contraste ≥ 4.5:1 para texto y ≥ 3:1 para elementos grandes
+- [ ] T-017 RF2: reforzar bordes y fondos de la UI en modo alto contraste
+- [ ] T-018 RF3: definir escala de interfaz 80 %–200 % en pasos de 10 %
+- [ ] T-019 RF4: definir niveles de texto Normal/Grande/Muy grande delegados a M88
+- [ ] T-020 RF5: garantizar que ningún dato crítico se comunique solo por color
+- [ ] T-021 RF6: definir contornos destacados opcionales para objetos interactuables del mundo
+- [ ] T-022 RF7: definir opacidad configurable de fondos de UI y subtítulos
+- [ ] T-023 Verificar que el filtro de color cubra el mundo voxel, no solo la UI
+- [ ] T-024 Definir fallback del filtro para presets gráficos bajos (modulate sin shader)
+- [ ] T-025 Diseñar preview de color sobre una muestra real del mundo voxel
+- [ ] T-026 Definir que el estado de recursos/rarezas use icono + color + texto (redundancia)
+- [ ] T-027 Verificar legibilidad de la UI de M53 con escala 200 % sin cortes
+- [ ] T-028 Definir aviso de "reset por sección" para no perder todas las opciones al experimentar
+- [ ] T-029 RF8: subtítulos activos por defecto en diálogos y eventos ambientales
+- [ ] T-030 RF8: definir opciones de tamaño, fondo y velocidad de subtítulos (integra M91)
+- [ ] T-031 RF9: definir indicadores visuales (rizos/anillos) para sonidos no visualizables
+- [ ] T-032 RF9: cubrir insectos, agua, cofres y cantos de NPC con indicador visual
+- [ ] T-033 RF10: referenciar los buses de audio de M91 sin duplicar su lógica
+- [ ] T-034 RF10: definir opción de silenciar ambientes en eventos de diálogo
+- [ ] T-035 RF11: definir carteles visuales de alertas (baja vida, tormenta, hambre)
+- [ ] T-036 RF12: auditar que ningún puzzle dependa de oír un sonido específico
+- [ ] T-037 RF12: definir alternativa visual para las pistas auditivas existentes
+- [ ] T-038 Definir que los subtítulos cubran SFX importantes (M43) y feedback ASMR (M44)
+- [ ] T-039 Definir velocidad de subtítulos 0.5x–2x con valor por defecto 1x
+- [ ] T-040 Definir fondo de subtítulos de opaco a dado y tamaño grande
+- [ ] T-041 Verificar que los indicadores de audio no produzcan spam visual en sesiones largas
+- [ ] T-042 RF13: consumir la capa de acciones remapeables de M57 (nunca scancodes)
+- [ ] T-043 RF13: definir perfiles de control accesibles: single_hand y low_mobility
+- [ ] T-044 RF14: definir modo retención/alternancia por acción (correr, agachar, mirar)
+- [ ] T-045 RF15: definir asistencia de puntería 0–100 % (pesca, minería, combate)
+- [ ] T-046 RF15: garantizar 0 % = experiencia clásica sin ninguna corrección
+- [ ] T-047 RF15: definir magnetismo solo hacia el blanco más cercano dentro de amortiguador
+- [ ] T-048 RF16: permitir desactivar vibración y feedback háptico por completo
+- [ ] T-049 RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57)
+- [ ] T-050 RF18: pausa inmediata con un único botón desde cualquier estado
+- [ ] T-051 RF18: garantizar pausa sin diálogos intermedios durante gameplay
+- [ ] T-052 Definir que los presets de control se carguen y persistan por jugador
+- [ ] T-053 Definir que el remapeo respete los conflictos detectados por M57
+- [ ] T-054 Garantizar que los inputs alternados no penalicen la precisión de puntería
+- [ ] T-055 Definir latencia de entrada sin degradación frente a la exigencia < 16 ms de M57
+- [ ] T-056 Verificar el preset single_hand con las 9 acciones principales del juego
+- [ ] T-057 Verificar el preset low_mobility con retención mínima de botones
+- [ ] T-058 Definir indicador visual del perfil de control activo en el menú
+- [ ] T-059 RF19: definir presets de dificultad: Sereno, Estándar y Personalizado
+- [ ] T-060 RF19: modo Sereno sin combate estresante ni penalizaciones por muerte
+- [ ] T-061 RF20: timers de pesca y misiones extendidos o eliminados en modo Sereno
+- [ ] T-062 RF21: modo reducción de movimiento con factor 0–100 % (anti-mareo)
+- [ ] T-063 RF21: aplicar el factor a shake, parallax, transiciones y motion blur
+- [ ] T-064 RF21: preset predefinido "Prevenir mareos" con factor 20 %
+- [ ] T-065 RF22: tutoriales opcionales y pistas de objetivos reforzadas
+- [ ] T-066 RF22: marcador de dirección del objetivo sin exigir memorizar rutas
+- [ ] T-067 RF23: diálogos a ritmo del jugador, sin cuenta regresiva
+- [ ] T-068 RF23: reabrir el último diálogo sin perder contexto
+- [ ] T-069 Definir que la dificultad sea modificable en cualquier momento, incluso en partida
+- [ ] T-070 Definir que las opciones cognitivas no alteren la progresión de la historia principal
+- [ ] T-071 Garantizar que el modo Sereno conserve la economía cozy (sin socavar crafting/recursos)
+- [ ] T-072 Definir aviso claro al cambiar de dificultad en partida activa
+- [ ] T-073 Verificar que la reducción de movimiento no rompa la cámara en espacios cerrados (M26)
+- [ ] T-074 RF24: definir espaciado de texto 0.8–1.5 y line-height 0.9–1.6
+- [ ] T-075 RF24: definir selección de estilo de fuente legible (Nunito/Fredoka One de M88)
+- [ ] T-076 RF25: subtítulos con fondo opaco, tamaño grande y velocidad configurable, activos por defecto
+- [ ] T-077 RF26: redactar guía de textos críticos con frases cortas y vocabulario simple
+- [ ] T-078 RF26: definir que las instrucciones clave no exijan lectura veloz
+- [ ] T-079 RF27: opción "Texto grande" global que escala todos los textos de UI
+- [ ] T-080 RF27: verificar que el texto grande no desborde diálogos ni inventario (M53)
+- [ ] T-081 RF28: exponer interfaz/evento de lectura de texto para TTS futuro (sin implementar)
+- [ ] T-082 Definir que los textos del mundo (letreros) tengan alternativa en diálogo o marca visual
+- [ ] T-083 Verificar la legibilidad del texto grande con las fuentes de M88 en español (tildes, ñ)
+- [ ] T-084 Definir que las opciones de lectura apliquen también a subtítulos de eventos sonoros
+- [ ] T-085 NFR: aplicar el perfil con overhead menor a ~1 ms por frame
+- [ ] T-086 NFR: filtro de color vía shader en canvas sin allocate en _process
+- [ ] T-087 NFR: fallback modulate en calidad gráfica Baja de M90
+- [ ] T-088 NFR: funcionar en Godot 4.x estable sin plugins externos
+- [ ] T-089 NFR: compatible con Steam Deck y mandos genéricos (via M57)
+- [ ] T-090 NFR: escritura atómica del JSON con backup
+- [ ] T-091 NFR: cero errores de consola al entrar en Play Mode
+- [ ] T-092 NFR: cero advertencias de tipos GDScript en el módulo
+- [ ] T-093 NFR: debounce de guardado (no escribir en cada tick de slider)
+- [ ] T-094 NFR: UI del menú navegable 100 % por teclado y mando
+- [ ] T-095 NFR: textos de ayuda de una línea por opción
+- [ ] T-096 NFR: documentación 100 % en español y checklist completo antes de delegar
+- [ ] T-097 Diseñar AccessibilityProfile (Resource) con campos por área
+- [ ] T-098 Diseñar SettingsManager (autoload) como primer autoload del proyecto
+- [ ] T-099 Diseñar AccessibilityApplier (servicio estático) con aplicación por áreas
+- [ ] T-100 Diseñar AccessibilityMenuUI como vista pura sin lógica de gameplay
+- [ ] T-101 Diseñar ColorFilter con shader passthrough + fallback modulate
+- [ ] T-102 Diseñar MotionReducer que consume amplitudes de M12
+- [ ] T-103 Diseñar AimAssist con slider de magnetismo y amortiguador
+- [ ] T-104 Diseñar InputPresets (single_hand, low_mobility) integrados a M57
+- [ ] T-105 Diseñar DifficultyProvider que expone flags a sistemas de juego
+- [ ] T-106 Diseñar ProfileIO con validación, atomicidad y backup
+- [ ] T-107 Diseñar señales: profile_loaded, profile_changed, profile_reset
+- [ ] T-108 Diseñar presets estáticos: DEFAULT, PREVENT_MOTION_SICKNESS, HIGH_CONTRAST, SERENE_MODE, SINGLE_HAND
+- [ ] T-109 Diseñar el flujo de arranque: boot → load → apply → título
+- [ ] T-110 Diseñar el flujo de cambio en vivo: UI → SettingsManager → Applier → preview
+- [ ] T-111 Diseñar la persistencia con versión de perfil (version: 1) para migraciones
+- [ ] T-112 Diseñar recuperación ante corrupción con backup y aviso único
+- [ ] T-113 Diseñar el diagrama de estados del perfil (DEFAULT → EDITADO → PERSISTIDO → RECUPERADO)
+- [ ] T-114 Integrar con M53: pestaña "Accesibilidad" dentro del menú de Opciones
+- [ ] T-115 Integrar con M53: escalado aplicado al nodo raíz de UI (0.8–2.0)
+- [ ] T-116 Integrar con M53: foco/navegación del menú con el focus system existente
+- [ ] T-117 Integrar con M53: previews dentro del menú sin escenas externas
+- [ ] T-118 Integrar con M57: consumir inputs por nombre de acción
+- [ ] T-119 Integrar con M57: aplicar remapeo de presets accesibles sobre la capa de acciones
+- [ ] T-120 Integrar con M57: vibración OFF propagada al sistema de feedback
+- [ ] T-121 Integrar con M57: dead zones/sensibilidad expuestos como accesos directos en el menú
+- [ ] T-122 Integrar con M88: tamaños de texto y opciones de lectura sobre el theme
+- [ ] T-123 Integrar con M91: perfil de subtítulos consumido por SubtitleManager
+- [ ] T-124 Integrar con M90: fallback del filtro según preset gráfico y desactivar motion blur en modo reducido
+- [ ] T-125 Integrar con M12: factor motion_reduction aplicado a shake/parallax/transiciones
+- [ ] T-126 JSON corrupto o ilegible → defaults + aviso único + intento de backup
+- [ ] T-127 JSON de versión antigua → migración a la versión actual
+- [ ] T-128 Perfil con valores fuera de rango → coerce a rangos válidos
+- [ ] T-129 Slider arrastrado rápido → debounce de guardado sin pérdida del último valor
+- [ ] T-130 Jugador cambia de preset gráfico con filtro activo → aplicar fallback correcto sin reset
+- [ ] T-131 Mando desconectado a mitad de sesión → perfil intacto, prompts actualizados por M57
+- [ ] T-132 Cambio de escala UI con diálogo abierto → el layout se reajusta sin desbordes
+- [ ] T-133 Texto grande con inventario lleno (36 slots) → sin elementos cortados
+- [ ] T-134 Reducción de movimiento en transiciones de escena → duraciones escaladas sin saltos
+- [ ] T-135 Apertura del menú de accesibilidad durante combate → pausa correcta sin pérdida de estado
+- [ ] T-136 Persistencia durante autosave simultáneo → escrituras atómicas sin corrupción
+- [ ] T-137 Focus del teclado perdido al abrir atajo global → restaurado al volver al menú
+- [ ] T-138 Subtítulos con velocidad 0.5x y diálogo largo → no se acumulan textos superpuestos
+- [ ] T-139 Cambio de idioma (M87) con perfil activo → textos del menú traducidos sin romper claves
+- [ ] T-140 Aplicar el perfil solo con deltas por área, no reconstruir toda la UI
+- [ ] T-141 Evitar allocaciones en _process del SettingsManager
+- [ ] T-142 Shader de color con muestreo único y sin pasadas múltiples
+- [ ] T-143 Rizos de audio indicadores reutilizados con pooling (sin instancias infinitas)
+- [ ] T-144 Carteles de alerta con tiempo de vida y fade-out sin tween acumulados
+- [ ] T-145 Scale de UI aplicado una sola vez por cambio, no por frame
+- [ ] T-146 Consultas al perfil cacheadas cuando no hay cambios (is_dirty)
+- [ ] T-147 Escaneo de interactuables para contornos solo en radio cercano al jugador
+- [ ] T-148 Verificar que M58 no sume draw calls perceptibles en escenas pobladas (M61)
+- [ ] T-149 Crear 01-Requerimientos.md con problema, objetivo, alcance, restricciones, RF y RN
+- [ ] T-150 Crear 02-Analisis.md con análisis del dominio (5 áreas), alternativas A1–A8 y decisiones D1–D8
+- [ ] T-151 Crear 03-Diseno.md con arquitectura, flujos y persistencia
+- [ ] T-152 Crear 04-Codigo.md con 20 archivos previstos y firmas GDScript
+- [ ] T-153 Crear 05-Checklist.md con 125+ ítems verificables
+- [ ] T-154 Marcar los archivos previstos como "Pendiente de implementación"
+- [ ] T-155 Firmar los documentos con modelo y plataforma
+- [ ] T-156 Mantener el plan-actual byte a byte idéntico a plan-inicial
+- [ ] T-157 No modificar archivos fuera de DOCUMENTACION/58-Accesibilidad/
+- [ ] T-158 Planear prueba unitaria de ProfileIO: guardar, cargar, validar y fallback
+- [ ] T-159 Planear prueba de escritura atómica simulando interrupción a mitad de escritura
+- [ ] T-160 Planear prueba de coerce de rangos con valores extremos en el JSON
+- [ ] T-161 Planear prueba de migración de versión 1 del perfil
+- [ ] T-162 Planear prueba de cambio en vivo de escala UI en el menú de Opciones
+- [ ] T-163 Planear prueba de filtros de daltonismo comparando matices críticos (SVG/colores del juego)
+- [ ] T-164 Planear prueba de alto contraste sobre todos los estados de UI de M53
+- [ ] T-165 Planear prueba del modo reducción de movimiento en escenas de M12 (shake, parallax)
+- [ ] T-166 Planear prueba de aim assist en pesca (M34) con slider en 0 %, 50 % y 100 %
+- [ ] T-167 Planear prueba del preset single_hand sin conflictos con el remapeo de M57
+- [ ] T-168 Planear prueba de subtítulos a velocidad 0.5x y 2x con diálogos largos
+- [ ] T-169 Planear prueba de persistencia: cambiar, reiniciar el juego y verificar el perfil intacto
+- [ ] T-170 Planear prueba de recuperación ante corrupción del JSON
+- [ ] T-171 Planear prueba de rendimiento: overhead del perfil en escena poblada con profiler
+- [ ] T-172 Planear prueba de atajo global F10 desde título, pausa y gameplay
+- [ ] T-173 Planear prueba de sesión larga (≥ 30 min) verificando los autosaves cada 5 minutos
+- [ ] T-174 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

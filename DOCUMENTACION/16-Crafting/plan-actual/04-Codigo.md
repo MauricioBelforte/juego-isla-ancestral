@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 04-Codigo.md — Módulo 16: Crafting
@@ -338,3 +338,33 @@ En builds release los `print` se eliminan o se compilan condicionados (`if OS.is
 - Verificar ejecución de `test_crafting.gd` en entorno con Godot CLI; debería mantener 0 fallos según iteraciones anteriores.
 - Enfocarse en los 6 [?] con dueño si los módulos dependientes (M45, M52, M91, M38) avanzan.
 - Considerar marcar items del 05-Checklist como [x] solo después de verificar tests o implementación explícita.
+
+## Notas del Agente — Iteración 5 cierre de brecha M16 (Step 3.7 Flash / Kilo Code) — Log 512
+
+**Modelo:** Step 3.7 Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 05:31
+**Estado:** Parcial — brecha cerrada parcialmente: test headless 0 fallos + RF3 mejorado; módulo liberado a 🟡.
+
+### Lo que hice
+- Ejecuté 	est_crafting.gd headless con Godot 4.7.2: === TEST M16 CRAFTING: 0 fallo(s) ===.
+- RF3: modifiqué crafting_feedback.gd para que el descubrimiento distinga tags:
+  - ncestral: SFX 1046 Hz + notificación ¡Receta ancestral!: + partículas ampliadas (32, lifetime 1.1, color cálido).
+  - secreta: SFX 988 Hz + notificación ¡Receta secreta!: + partículas doradas (28, lifetime 1.0).
+  - normal: preserva el comportamiento previo (880 Hz, 24 partículas, lifetime 0.9).
+- RF12: añadí 2 AudioStreamPlayer adicionales en _ready y parametronicé _emitir_particulas_doradas(color, cantidad, lifetime) sin cambiar el contrato.
+
+### Evidencia
+- Salida de test: [M16] ¡Receta ancestral!: Talismán ancestral y === TEST M16 CRAFTING: 0 fallo(s) ===.
+- Archivos tocados: scripts/crafting/crafting_feedback.gd, DOCUMENTACION/16-Crafting/plan-actual/04-Codigo.md,  5-Checklist.md, CHECKLIST-GLOBAL.md, guía 08, ESTADO-PARALELO.md. Log 512.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- RF9 preview 3D real: depende de M45 (assets), fuera de alcance M16.
+- RF12 SFX master bus / VFX avanzados: dependen de M91/M52, fuera de alcance M16.
+- RF14 más pergaminos en tiendas: depende de contenido/recetas nuevas con origen: compra en M38.
+- Integración UI emisión item_usado desde compra: depende de M53/M39.
+
+### Recomendaciones para el próximo agente
+- Retomar RF9 cuando M45 provea ItemData.preview_mesh.
+- Retomar RF12 cuando M91/M52 tengan núcleo.
+- Retomar RF14 cuando M38/M53 avancen: agregar más recetas con origen: compra + precio_pergamino.

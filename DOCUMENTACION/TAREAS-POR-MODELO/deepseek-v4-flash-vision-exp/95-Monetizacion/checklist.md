@@ -1,0 +1,105 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 95-Monetizacion (95)
+
+# Checklist personal tareas — 95-Monetizacion
+
+> Extraidas del 05-Checklist.md del módulo (95 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir decisión formal: juego premium de compra única
+- [ ] T-002 Definir justificación con 3 referencias de mercado (Stardew, A Short Hike, Tchia)
+- [ ] T-003 Definir comparativa de ventajas/desventajas F2P vs premium
+- [ ] T-004 Definir 0 microtransacciones en el juego base
+- [ ] T-005 Definir sin divisa premium ni cajas
+- [ ] T-006 Definir soporte a largo plazo con DLC opcionales (no GaaS)
+- [ ] T-007 Definir premium como compra única sin suscripción
+- [ ] T-008 Definir actualizaciones gratuitas de parches (M143/M144)
+- [ ] T-009 Definir comunicación honesta del modelo en la tienda (M149)
+- [ ] T-010 Definir decisión explícita: NO F2P con motivos técnicos (sin servidores)
+- [ ] T-011 Definir decisión ética: F2P entra en conflicto con M94 (sin FOMO)
+- [ ] T-012 Definir documento de la decisión para el equipo
+- [ ] T-013 Definir DLC aprobados por canon (M147)
+- [ ] T-014 Definir roadmap de expansiones post-lanzamiento (M144)
+- [ ] T-015 Definir expansión con 2 templos nuevos y 3 NPC
+- [ ] T-016 Definir expansión ubicada post-epílogo (sin fragmentación)
+- [ ] T-017 Definir defensa de canon de la expansión
+- [ ] T-018 Definir OST vendible en tienda digital (24 pistas, M41)
+- [ ] T-019 Definir OST incluida en Deluxe/Coleccionista
+- [ ] T-020 Definir OST con derechos despejados (M41-M44)
+- [ ] T-021 Definir OST física opcional (CD/vinilo) post-lanzamiento
+- [ ] T-022 Definir línea de merchandise física (mapa de tela, póster, llavero, librillo)
+- [ ] T-023 Definir canal de venta (tienda propia/partner)
+- [ ] T-024 Definir no-merch que comprometa la PI (M151)
+- [ ] T-025 Definir presupuesto de producción del merchandise
+- [ ] T-026 Definir cosméticos de decoración (faro/casa, M17/M65)
+- [ ] T-027 Definir que los cosméticos nunca alteren poder (R1)
+- [ ] T-028 Definir 2 cosméticos en Deluxe y 4 en Coleccionista
+- [ ] T-029 Definir cosméticos DLC (DLC-2, 15 piezas)
+- [ ] T-030 Definir cláusula formal anti-P2W en el documento
+- [ ] T-031 Definir revisión de cada contenido de pago contra M38/M71
+- [ ] T-032 Definir 0 ítems de pago que den ventaja competitiva
+- [ ] T-033 Definir cláusula formal anti-lootbox en el documento
+- [ ] T-034 Definir que todo contenido de pago sea directo y claro
+- [ ] T-035 Definir precio base USD 24.99
+- [ ] T-036 Definir justificación con horas de contenido (60-100 h)
+- [ ] T-037 Definir precio de referencia del género
+- [ ] T-038 Definir sin precio inflado para rebajas (R5)
+- [ ] T-039 Definir tabla de precios por plataforma (M149)
+- [ ] T-040 Definir rango regional (19.99-29.99)
+- [ ] T-041 Definir política de igualación de precio en promo
+- [ ] T-042 Definir revisión de precios regionales con datos de tienda
+- [ ] T-043 Definir neto esperado por venta por región
+- [ ] T-044 Definir revisión contable de la tabla (M149/M151)
+- [ ] T-045 Definir registro de cambios de tasa (anual)
+- [ ] T-046 Definir respeto de la política de cada tienda
+- [ ] T-047 Definir política propia de venta directa (14 días / < 2 h)
+- [ ] T-048 Definir proceso de reembolso con soporte humano (M152)
+- [ ] T-049 Definir definición de casos especiales (hardware, duplicados)
+- [ ] T-050 Definir bundle de estreno (juego + OST)
+- [ ] T-051 Definir bundle de DLC (10-15% off)
+- [ ] T-052 Definir bundle Coleccionista Digital (Deluxe + DLC-1, 15%)
+- [ ] T-053 Definir sin bundles engañosos (valor nominal claro)
+- [ ] T-054 Definir primer descuento a los 6 meses
+- [ ] T-055 Definir máximo 25% en rebajas
+- [ ] T-056 Definir máximo 2 rebajas anuales
+- [ ] T-057 Definir prohibición de precio original falsificado (R5)
+- [ ] T-058 Definir política de descuentos para acceso anticipado (pre-orden con bonus, sin rebaja de precio)
+- [ ] T-059 Definir Edición Deluxe (base + OST + 2 cosméticos + 12 láminas)
+- [ ] T-060 Definir precio Deluxe USD 34.99
+- [ ] T-061 Definir upgradeable de Standard a Deluxe
+- [ ] T-062 Definir sin ventaja de progresión en Deluxe (R1)
+- [ ] T-063 Definir Edición Coleccionista (Deluxe + físico)
+- [ ] T-064 Definir físico: mapa de tela, póster A2, llavero, librillo 40 pág
+- [ ] T-065 Definir precio Coleccionista USD 69.99 (precio orientativo regional)
+- [ ] T-066 Definir existencias limitadas con comunicación honesta
+- [ ] T-067 Definir envío internacional / impuestos de envío
+- [ ] T-068 Definir cláusula: historia principal 100% en el juego base
+- [ ] T-069 Definir que los sellos/actos/epílogo nunca sean DLC
+- [ ] T-070 Definir que el DLC-1 sea paralelo (post-epílogo) no intermedio
+- [ ] T-071 Definir auditoría de contenido: juego base incluye todo M22
+- [ ] T-072 Definir comunicación en tienda de "historia completa incluida"
+- [ ] T-073 Definir documento de monetización firmado y versionado
+- [ ] T-074 Definir vínculo con M94 (sin presión de compra)
+- [ ] T-075 Definir vínculo con M152 (salud del jugador)
+- [ ] T-076 Definir revisión anual de la estrategia (M144)
+- [ ] T-077 Definir FAQ de monetización pública (qué incluye cada edición)
+- [ ] T-078 Definir página de tienda con todos los precios claros
+- [ ] T-079 Definir que el juego base anuncie el roadmap DLC publicado (M149)
+- [ ] T-080 Definir sin anuncio de DLC antes del lanzamiento (M143)
+- [ ] T-081 Definir separación visual clara de los cosméticos (sin engaño)
+- [ ] T-082 Definir integración de la API de la tienda para versiones DLC (M149)
+- [ ] T-083 Definir validación de propiedad de DLC (sin piratería) en runtime
+- [ ] T-084 Definir odificción de ediciones en el build (version flag)
+- [ ] T-085 Definir que la tienda no toque el gameplay loop (M38)
+- [ ] T-086 Definir log de compras/activaciones auditables (M104)
+- [ ] T-087 Definir asesoría fiscal por región objetivo
+- [ ] T-088 Definir registros de ventas y facturación archivados (M151)
+- [ ] T-089 Definir cumplimiento de políticas de contenido de cada tienda (M149)
+- [ ] T-090 Definir revisión legal del texto de monetización (M151)
+- [ ] T-091 Definir seguro de responsabilidad de reembolsos (política escrita)
+- [ ] T-092 Definir aprobación del documento de monetización por el equipo
+- [ ] T-093 Definir vinculación del roadmap DLC con M144 (ejecución)
+- [ ] T-094 Definir que los 3 gates de ética (AntiFomo M94, AntiP2W, AntiLootbox) corran juntos en CI
+- [ ] T-095 Definir revisión de la estrategia a los 12 meses (M144)

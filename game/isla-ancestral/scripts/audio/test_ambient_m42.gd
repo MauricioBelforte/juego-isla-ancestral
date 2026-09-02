@@ -19,6 +19,8 @@ func _run() -> void:
 	_test_banco()
 	_test_director()
 	_test_clima()
+	_test_ducking()
+	_test_pausa()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -68,6 +70,26 @@ func _test_clima() -> void:
 	ad.set_bioma("cueva")
 	ad.set_estado_clima(2, 0.5)
 	_check("cueva con lluvia -> goteo_intenso", cambios.size() >= 4 and "goteo_intenso" in cambios[cambios.size()-1])
+
+func _test_ducking() -> void:
+	print("--- AmbientDirector: ducking ---")
+	var ad := root.get_node_or_null("AmbientDirector")
+	ad.set_bioma("playa")
+	ad.set_ducking(true)
+	_check("esta_ducking true", ad.esta_ducking())
+	var capa0: AudioStreamPlayer = ad.get_node("Layer_0")
+	_check("capa 0 baja -6 dB al ducking", is_equal_approx(capa0.volume_db, -6.0), "db=%f" % capa0.volume_db)
+	ad.set_ducking(false)
+	_check("capa 0 vuelve a 0 dB", is_equal_approx(capa0.volume_db, 0.0), "db=%f" % capa0.volume_db)
+
+func _test_pausa() -> void:
+	print("--- AmbientDirector: pausa ---")
+	var ad := root.get_node_or_null("AmbientDirector")
+	ad.set_bioma("bosque")
+	ad.pausar()
+	_check("esta_pausado true", ad.esta_pausado())
+	ad.reanudar()
+	_check("esta_pausado false", not ad.esta_pausado())
 
 func _summary() -> void:
 	print("=== Resumen M42: %d checks, %d fallos ===" % [_checks, _fallos])

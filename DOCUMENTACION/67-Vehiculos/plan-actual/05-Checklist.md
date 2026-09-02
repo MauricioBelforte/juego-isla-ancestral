@@ -1,5 +1,21 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-flash (último modificador; docs por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 (iter. 1 — glm-5.3-flash/Kilo Code)
+
+## Reserva actual
+
+- **Módulo:** 67 Vehículos
+- **Reservado por:** glm-5.3-flash (Kilo Code)
+- **Estado:** 🔵 En curso — iter. 1 (núcleo V0)
+- **Fase:** F7 (producción de contenido)
+- **Dificultad:** 3
+- **Visión:** V0 (sin captura; física acotada testeada headless)
+- **Entrada:** M28 ✅ (TravelService+Harbor, Log 517); M59 ✅; M07 ✅
+- **Salida:** VehicleManager autoload + presets data-driven + controller física + EventBus.vehicle + test headless 0 fallos
+- **Archivos:** `scripts/vehiculos/{vehicle_manager,vehicle_preset,vehicle_controller,test_vehiculos}.gd`, `data/vehiculos/vehicles.json`, `scripts/core/event_bus.gd` (aditivo)
+- **Log:** 528 reservado
+
+---
 
 # 05-Checklist.md — Módulo 67: Vehículos (130 ítems)
 

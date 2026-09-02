@@ -52,7 +52,7 @@
 - [ ] Planta madura cosechable (etapa 3)
 - [ ] Bananero (cultivo)
 - [ ] Plantación de caña
-- [ ] Espantapájaros lowpoly
+- [x] Espantapájaros lowpoly — `crear_espantapajaros_lowpoly.py` (M33 2026-09-02 04:50, log 532) + 6 capturas orbitales 04-50. **APROBADO**: base cilíndrica de tierra (12 verts) + poste vertical + palo horizontal (brazo) con 2 manos de paja + camisa-cuerpo + cabeza-saco con 2 ojos y boca + sombrero (Copa + Ala tipo mejicano) + 2 mechones de paja asomando de la camisa + atadura de cuerda al cuello. **15 SM_**, z_min 0.045, toca=20, fp=0.80×0.80. Variantes MEDIA (7/308/7), BAJA (6/186/4). E-37 validado: silueta lee como espantapájaros en los 6 azimuts (sombrero+cruz+camisa+cara). 3 GLB + 3 `.import` + 3 `.scn` (E-65).
 - [ ] Compostera
 
 ## Módulo 18 — Casas (construcciones del jugador) 🏠
@@ -75,15 +75,15 @@
 - [ ] Columna entera con capitel
 - [ ] Bloque de piedra tallada (módulo de muro)
 - [ ] Dintel caído
-- [ ] Estatua ancestral erosionada
-- [ ] Arco de entrada de templo
+- [x] Estatua ancestral erosionada — `crear_estatua_ancestral_erosionada_lowpoly.py` + 6 capturas orbitales 04-15 (aprobado 2026-09-02 04:15; E-50 fix inicial: pedestal de cubo (4 verts) → cilindro de 12 verts en base + cubo de transición; E-37 validado: silueta lee como estatua humanoide — pedestal cilíndrico + monolito torso+piernas + hombros anchos + 2 brazos inclinados ±10° + cabeza aplanada con nariz y 2 ojos + 3 manchas de musgo; ALTA 15 obj/15 SM_, MEDIA 5/260/5, BAJA 5/178/4; footprint 1.10×1.10, toca=12; 3 GLB + 3 .import + 3 .scn en Godot).
+- [x] Arco de entrada de templo — `crear_arco_entrada_templo_lowpoly.py` v4 + 6 capturas orbitales 04-00 (aprobado 2026-09-02 04:00; E-68 descubierto y corregido: `primitive_cube_add(size=1, scale=s)` produce cubo de sx×sy×sz, no 2*sx×2*sy×2*sz; dovelas con `sx = ANCHO_D` y `ANCHO_D = chord*1.04` cierran el wedge gap; ALTA 15 obj/60 caras placeholder→recalculado, MEDIA 3/212/3, BAJA 3/146/3; footprint 2.44×0.64, dovelas se tocan visiblemente en los 6 azimuts; va a unir 2 pilares con semicírculo de 7 dovelas; musgo en basas). 3 GLB exportados + 3 .import + 3 .scn (E-65).
 - [x] Altar ritual central — `crear_altar_ritual_lowpoly.py` + 6 capturas orbitales 19-36 (aprobado, pirámide escalonada + techo + 4 pilares + cristal; z_min 0.045) 2026-08-28
 - [x] Losa con grabado (piso de puzzle) — `crear_losa_grabado_lowpoly.py` + 6 capturas orbitales 19-34 (aprobado, placa + 4 prismas; z_min 0.045) 2026-08-28
 - [ ] Palanca de puzzle (interactuable)
 - [x] Cofre ancestral (recompensa) — `crear_cofre_ancestral_lowpoly.py` + 6 capturas orbitales 19-40 (aprobado, tapa medio-cilindro + 5 bandas hierro + falleba; z_min 0.045) 2026-08-28. **v3 2026-08-29 19:55 corrige E-27 (tirador 5 cm de su padre)**: borradas 3 líneas `o.matrix_parent_inverse = padre.matrix_world.inverted()` (en `agregar()` L176, costillas L339, post-parenting L404). **NO se agregó assert AABB-gap** (E-31): el tirador sobresale 5 cm por diseño (es la manija), las asas 1.8 cm, las bisagras traseras 1.2 cm. La separación es geométricamente verdadera pero semánticamente correcta. Source regenerado (36 obj, z_min 0.045), MEDIA (6/784/6), BAJA (6/571/6) — todos los hijos siguen al cuerpo en los 6 ángulos. 3 hojas v3 19-55-26.
 - [x] Antorcha de pared — `crear_antorcha_pared_lowpoly.py` v2 + 6 capturas orbitales 18-14/18-18 (corregido 2026-08-29 18:11 por bug reportado: en v1 el panel de pared del set de captura flotaba a z=0.40 y la placa estaba 0.42 unidades separada del muro. v2: `Set_Pared` asentada en la arena con base ligeramente enterrada y placa montada al ras del muro con sus 4 remaches; z_min 0.045, 7 piezas: placa + brazo + copa + mango + tela + brasa + 4 remaches). Variantes M166 MEDIA (4 obj/94 tris/4 mats) y BAJA (4 obj/80 tris/4 mats) regeneradas desde v2 y aprobadas 2026-08-29 18:18 (ver Tier D).
 - [x] Puerta de templo (doble hoja de piedra) — `crear_puerta_templo_lowpoly.py` + 6 capturas orbitales 19-32 (aprobado, marco azul + paneles; z_min 0.045) 2026-08-28
-- [ ] Puente de cuerda colgante (25/28 viajes)
+- [x] Puente de cuerda colgante (25/28 viajes) — **DUPLICADO**, cerrado 2026-09-02 04:24 (log 531). Cubierto por `- [x] Puentes de cuerda (M25)` = `crear_puente_cuerda_lowpoly.py`, aprobado 2026-08-29 21:12 con sus 3 GLB ya importados. **No generar un segundo puente para esta línea.** (El asset nuevo `40-Infraestructura_puente_cuerda_colgante` de M40 es OTRO ítem, añadido aparte en la sección M40.)
 - [ ] Estructura sumergida parcial (marea)
 
 ## Módulo 40 — Infraestructura 🌉
@@ -94,6 +94,7 @@
 - [ ] Valla de madera (módulo recto + esquina)
 - [x] Cartel indicador (poste con tabla) — `crear_cartel_indicador_lowpoly.py` + 6 capturas orbitales 17:39 (aprobado, 5 obj, z_min 0.045). Ver Tier D arriba.
 - [x] Pozo de piedra
+- [x] **Puente de cuerda colgante (M40, NUEVO 2026-09-02 04:24, log 531)** — `crear_puente_cuerda_colgante_lowpoly.py` v2. **APROBADO**: 2 basas de piedra + 2 postes + **6 segmentos de cable principal (3 por lado)** en parábola + 3 tablones de tablero + 2 barandillas de cuerda. **15 SM_ / 15 obj** (ALTA ≤16 ✓). z_min 0.0450, toca=8, footprint 4.85×0.45. Variantes MEDIA (**4 obj / 244 tris / 4 mats**) y BAJA (**4 obj / 168 tris / 4 mats**) generadas y aprobadas. 3 GLB + 3 `.import` + 3 `.scn` verificados (E-65). **Lección de curva:** para tablero con carga uniformemente distribuida la curva real es una **parábola**, no una catenaria `cosh`: `z(x) = Z_CENTRO + (x/HALF_SPAN)^2 * (Z_POSTE_TOP - Z_CENTRO)`. Se aproxima con N segmentos cortos de cilindro girados con `direccion.to_track_quat('Z','Y').to_euler()` (E-58). **Lección de presupuesto (v1→v2):** 6 segmentos por lado = 21 obj, EXCEDE el tope ALTA de ≤16. Bajar a 3 por lado (6 total) → 15 obj. Contar los SM_ ANTES de generar. **NO confundir** con `- [x] Puentes de cuerda (M25)` = `crear_puente_cuerda_lowpoly.py` (2026-08-29), que es OTRO asset (postes de piedra + tablones en catenaria).
 - [x] Puente de troncos (arroyos) — `crear_puente_troncos_lowpoly.py` (2026-08-29 22:33, log 247) + 6 capturas orbitales 22-31 (3 hojas src/MEDIA/BAJA, aprobado: 2 estribos de piedra con 6 piedras de terraplen + 3 vigas longitudinales + 11 troncos transversales + 6 postes hincados en la arena + 2 pasamanos + 4 ataduras de cuerda; z_min 0.045; 1 obj, 3 mats; bbox x[-1.55..1.55], y[-0.66..0.66], z[0.045..0.98]). Variantes M166 MEDIA (728 tris / 1 obj / 3 mats) y BAJA (508 tris / 1 obj / 3 mats) generadas y aprobadas 2026-08-29 22:33 desde la fuente. Leccion: los postes de la barandilla se clavan en la arena (no en la cubierta) para eliminar el calculo de interseccion y garantizar apoyo sin flotacion. Ver Tier D arriba.
 
 ## Módulo 36 — Fauna (modelos base, IA aparte) 🦀
@@ -117,7 +118,7 @@
 - [ ] Cangrejo ermitaño (recompensa rara)
 - [x] Pico de piedra — `crear_pico_piedra_lowpoly.py` v2 (2026-08-29 19-29) + 6 orbitales 19-29-26. **v2 corrige E-27 (separación 9.7 cm entre mango y cabeza/ataduras/pomo)**: hijo() sin tocar matrix_parent_inverse, mango con rotación identidad, pose vertical nativa, assertion anti-regresión en el asentado. MEDIA 3/82, BAJA 3/76, ALTA 7/716, ALTA_MEDIA 3/716, z_min 0.045 en todas.
 - [x] Pico de hierro — `crear_pico_hierro_lowpoly.py` v2 (2026-08-29 19-33) + 6 orbitales 19-33-32. **Mismo E-27 que pico_piedra (separación 9.3 cm)**: v2 corrige con el mismo patrón (hijo() sin matrix_parent_inverse, mango vertical identidad, assertion). MEDIA 3/92, BAJA 3/87, ALTA 8/956, ALTA_MEDIA 3/956, z_min 0.045.
-- [ ] Carretilla de minero
+- [x] Carretilla de minero — `crear_carretilla_minero_lowpoly.py` (M35 2026-09-02 04:46, log 532) + 6 capturas orbitales 04-43. **APROBADO**: rueda 14 lados + eje + 2 largueros horizontales (y=±0.26) que soportan la batea en tronco de pirámide (laterales abiertos ±16.7° en X) + batea con piso/2 lados abiertos/frente inclinado 14°/trasera + 2 patas traseras + 2 mangos (de larguero a (x=-1.20, z=0.48), +23.2° en Y) + 2 tepes de mineral asomando. **15 SM_**, z_min 0.045, toca=10, fp=1.51×0.60. Variantes MEDIA (4/252/4), BAJA (4/176/4). E-50✓ (trípode rueda+2patas), E-37 validado: silueta lee como carretilla en los 6 azimuts (rueda+laterales abiertos+mangos = carretilla), la rueda no atraviesa el frente de la batea (avanzada a x=+0.75). 3 GLB + 3 `.import` + 3 `.scn` (E-65).
 - [ ] Carrito de vías (26 subterráneo)
 
 ## Módulo 16 — Crafting / 14 — Inventario (representables en mano) 🔨
@@ -140,13 +141,13 @@
 - [x] Tótem de isla (lore) — `crear_totem_isla_lowpoly.py` + 6 capturas orbitales 19-18 (aprobado, 3 caras apiladas + piedras; z_min 0.045) 2026-08-28
 - [x] Monolito con glifos — `crear_monolito_glifos_lowpoly.py` + 6 capturas orbitales 18-36 (aprobado, 2 obj cuerpo+roto, z_min 0.045)
 - [x] Anillo de piedras ritual — `crear_anillo_piedras_ritual_lowpoly.py` + 6 capturas orbitales 18-48 (aprobado, 9 piedras, z_min 0.045)
-- [ ] Barco hundido (playa)
-- [ ] Caveira de criatura marina (playa)
-- [ ] Coral abanico
+- [x] **Barco hundido (playa)** — `crear_barco_hundido_lowpoly.py` (2026-09-01 12:46, log 366) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:22 (E-67 fix)**: hull + 4-vert proa + mástil inclinado (E-60) + 3 ribs + duna 12 lados. **7 obj, 126 tris reales, 3 mats**. z_min 0.0450, toca=17, footprint 2.95×1.70. Variantes MEDIA+BAJA + 3 GLB exportados + 3 .import.
+- [x] **Caveira de criatura marina (playa)** — `crear_caveira_criatura_lowpoly.py` (2026-09-01 12:46, log 366) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:22 (E-67 fix)**: cilindro 8 lados acostado + cono 6 lados hocico + mandíbula + 2 sockets + 4 dientes cónicos + base 12 lados. **10 obj, 176 tris, 4 mats**. z_min 0.0450, toca=12, fp=1.20×1.20. Variantes + GLB + import.
+- [x] **Coral abanico** — `crear_coral_abanico_lowpoly.py` (2026-09-01 12:46, log 366) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:22 (E-67 fix)**: cono invertido aplanado + 2 ramas inclinadas (E-58 to_track_quat) + roca 12 lados. **4 obj, 128 tris, 3 mats**. z_min 0.0450, toca=12, fp=0.48×0.48. Variantes + GLB + import.
 - [x] Estrella de mar — `crear_estrella_mar_lowpoly.py` + 6 capturas orbitales 18-47 (aprobado, 1 malla, z_min 0.040)
 - [x] Concha de mar — `crear_concha_mar_lowpoly.py` + 6 capturas orbitales 19-02 (aprobado, espiral enterrada en arena diseño intencional, z_min -0.040)
-- [ ] Ancla de naufragio
-- [ ] Jarrones/urnas decorativas (3 variantes)
+- [x] **Ancla de naufragio** — `crear_ancla_naufragio_lowpoly.py` (2026-09-01 12:46, log 366) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:22 (E-67 fix)**: shank 10 lados + crossbar + aro parado + 2 arms + 2 flukes alineados con to_track_quat (E-58) + duna baja que **ENTIERRA** (no soporta, decisión E-60: arms hasta x=1.65, más allá de la duna). **8 obj, 256 tris, 3 mats**. z_min 0.0450, toca=25, fp=2.64×1.10. Variantes + GLB + import.
+- [x] **Jarrones/urnas decorativas (3 variantes)** — `crear_jarrones_urnas_lowpoly.py` (2026-09-01 12:46, log 366) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:22 (E-67 fix)**: ánfora con cuello + 2 asas torus, urna ancha, cuenco bajo; cada una en cilindro 12 lados. Helper `cil()` con bottom EXACTO en `z_base` (E-24 por construcción). **10 obj, 504 tris, 3 mats**. z_min 0.0450, toca=36, fp=1.88×0.60. Variantes + GLB + import.
 
 ## Módulo 70 — Interacciones (objetos interactivos comunes)
 
@@ -158,20 +159,21 @@
 
 ## Módulo 27/160 — Islas y Ubicaciones (landmarks) 🗺️
 
-- [ ] Volcán lowpoly (isla central)
-- [ ] Cascada (roca; agua en módulo 51)
-- [ ] Faro viejo
-- [ ] Campamento abandonado (carpa + fogata)
-- [ ] Cementerio de barcos (agrupación)
+- [x] **Volcán lowpoly (isla central)** — `crear_volcan_lowpoly.py` (2026-09-01 12:54, log 367) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:20 (E-67 fix)**: cono truncado 12 lados (base 4.0, boca 1.2, h=5.5) + torus rim crater + cilindro emissive lava. **3 obj, 188 tris, 3 mats**. z_min 0.0450, toca=12, fp=8.00×8.00, bbox 8×8×5.70. Variantes + GLB + import.
+- [x] **Cascada (roca; agua en módulo 51)** — `crear_cascada_lowpoly.py` (2026-09-01 12:51, log 367) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:20 (E-67 fix)**: cliff box 4×0.8×4 + repisa + 3 rocas musgo 12 lados al pie. **5 obj, 156 tris, 3 mats**. z_min 0.0450, toca=40, fp=4.00×1.39. Variantes + GLB + import.
+- [x] **Faro viejo** — `crear_faro_viejo_lowpoly.py` (2026-09-01 12:51, log 367) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:20 (E-67 fix)**: base roca 12 lados + puerta + 2 cuerpos apilados (bandas blanco/rojo) + galería + lámpara emissive + techo cónico. **7 obj, 260 tris, 6 mats**. z_min 0.0450, toca=12, fp=3.20×3.20, bbox Z hasta 8.045. Variantes + GLB + import.
+- [x] **Campamento abandonado (carpa + fogata)** — `crear_campamento_abandonado_lowpoly.py` (2026-09-01 12:54, log 367) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:20 (E-67 fix)**: lona plana + carpa pirámide 3 verts + fogata 6 piedras + cilindro ceniza + 3 leños cruzados (E-60: `LENO_Z = 0.04 + 0.55/2 = 0.315` = bottom en top de ceniza). **12 obj, 240 tris, 5 mats**. z_min 0.0450, toca=25, fp=3.92×1.80. Variantes + GLB + import.
+- [x] **Cementerio de barcos (agrupación)** — `crear_cementerio_barcos_lowpoly.py` (2026-09-01 12:53, log 367) + 6 capturas orbitales. **APROBADO v2 2026-09-02 03:20 (E-67 fix)**: 3 cascos acostados a distintas rotaciones + 2 mástiles rotos + 4 ribs + duna arena. **10 obj, 168 tris, 3 mats**. z_min 0.0450, toca=24, fp=4.77×3.71. Variantes + GLB + import.
 
 ## Contadores
 
-- Total ítems: **114** (117 menos 3 duplicados eliminados: `- [ ] Puentes de troncos (M40)` 2026-08-31; y 2026-09-01 los dos `- [ ] Hongo luminoso` y `- [ ] Flor de isla` de M50, que repetían ítems ya marcados `[x]` más abajo en la misma lista)
-- Completados: **66** (los 3 del Tier F pasaron de `[/]` a `[x]` al verificarse el import Godot, 2026-09-01 12:20)
-- Pendientes: **48**
+- Total ítems: **116** (117 − 4 duplicados + 3 añadidos: puente M40, carretilla M35, espantapájaros M33 → 117 − 4 + 3 = 116)
+- Completados: **81** (+2: carretilla M35 + espantapájaros M33)
+- Pendientes: **33**
 - Pendientes de captura: **0**
-- Aprobados visualmente: 84 + 11 M18 (4 vision ✓ 2026-08-31 04:15 + 7 vision ✓ turno previo) + 3 M50 Tier F (vision ✓ 2026-09-01 21:15-21:16)
+- Aprobados visualmente: 84 + 11 M18 (4 vision ✓ 2026-08-31 04:15 + 7 vision ✓ turno previo) + 3 M50 Tier F (vision ✓ 2026-09-01 21:15-21:16) + 10 M45+M27 (vision ✓ 2026-09-02 03:20, re-verificados post E-67) + 3 arco M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:00, post E-68) + 3 estatua M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:15) + 3 puente colgante M40 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:24) + 3 carretilla M35 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:46) + 3 espantapájaros M33 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:50)
 - **Pendientes de Tier D: 0** (Tier D cerrado 7/7)
+- **Módulo 27 cerrado al 100%** (2026-09-02 03:20, log 367): 5 landmarks (volcán/cascada/faro/campamento/cementerio), variantes MEDIA/BAJA generadas (E-62 OK, delta +0.000), 15 GLB exportados, 15 .import. **Módulo 45 cerrado al 100%** (5 nuevos en este turn: barco_hundido/caveira_criatura/coral_abanico/ancla_naufragio/jarrones_urnas; 11 totales ya hechos). **Arco de entrada M25 cerrado** (2026-09-02 04:00, log 529): E-68 descubierto en v3, corregido en v4, 3 GLB + 3 .import + 3 .scn. **Estatua ancestral erosionada M25 cerrada** (2026-09-02 04:15, log 530): E-50 fix inicial (pedestal de cubo → cilindro 12 verts), E-37 validado. **Puente de cuerda colgante M40 cerrado** (2026-09-02 04:24, log 531): parábola (no catenaria) en 6 segmentos `to_track_quat`, 15 SM_ tras recortar de 21 (v1 excedía ALTA ≤16). **Carretilla de minero M35 cerrada** (2026-09-02 04:46, log 532): batea en tronco de pirámide (laterales ±16.7° en X) sobre largueros, trípode de apoyo (rueda + 2 patas), 15 SM_, ALTA/MEDIA/BAJA 4/252/4 / 4/176/4. **Espantapájaros M33 cerrado** (2026-09-02 04:50, log 532): sombrero mejicano + cruz + camisa-cuerpo + cara con ojos/boca, 15 SM_, MEDIA 7/308/7, BAJA 6/186/4. Verificado por archivos (E-65): **243 GLB / 243 `.import` / 243 `.scn`**, 81/81/81.
 - **Módulo 70 cerrado:** palanca (v3) + botón + puerta corrediza + cofre pequeño + válvula. Faltan ítems no listables (puerta de puzzle etc.) pero los 5 principales ya están.
 - **Presupuesto M166: 0 excedidos** (2026-08-30, log 252). Las 23 variantes excedidas se regeneraron con `--decima-media --ratio` (MEDIA) y `--ratio` (BAJA, 6 de ellas con poda de materiales 5-6→4). Causa de fondo: `generar_alta.py` medía CARAS, no TRIS (E-40); el totem bajó de 21.014 a 3.106 tris y el cofre de 11.510 a 3.274. Auditoría final: **121 variantes, 0 exceden**.
 - **Pipeline Godot: VIVO** (2026-08-30, log 252). `exportar_godot.py` corre en headless (`blender -b --factory-startup --python`) por E-45 (`bpy.context` por socket no tiene `active_object`). Exportados **153 GLB** (51 alta / 51 media / 51 baja), 7,7 MB, pirámide LOD correcta. Godot 4.7.2 `--headless --import` → **153/153 DONE**. 0 de 153 GLB con nodos no-`SM_` (E-44).

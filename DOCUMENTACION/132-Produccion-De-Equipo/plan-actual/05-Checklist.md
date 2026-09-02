@@ -6,32 +6,32 @@
 
 ## A. Estructura Organizativa (10 ítems)
 
-- [ ] Definir estructura jerárquica del equipo
-- [ ] Documentar diagrama organizativo
+- [x] Definir estructura jerárquica del equipo
+- [x] Documentar diagrama organizativo
 - [ ] Definir roles principales: Game Director, Lead Programmer, Lead Artist, Game Designer, Producer
-- [ ] Definir roles de soporte: QA, Community Manager
-- [ ] Documentar líneas de reporte
+- [x] Definir roles de soporte: QA, Community Manager
+- [x] Documentar líneas de reporte
 - [ ] Definir roles flexibles para equipo pequeño
 - [ ] Crear tabla RACI de decisiones
-- [ ] Documentar responsabilidades de cada rol
+- [x] Documentar responsabilidades de cada rol
 - [ ] Definir proceso de cambio de roles
-- [ ] Documentar proceso de incorporación de nuevos roles
+- [x] Documentar proceso de incorporación de nuevos roles
 
 ## B. Roles y Responsabilidades (15 ítems)
 
 - [ ] Game Director: visión del juego, decisiones finales, prioridades
 - [ ] Lead Programmer: arquitectura, código core, revisión de PRs
 - [ ] Lead Artist: dirección artística, pipeline de assets, calidad visual
-- [ ] Game Designer: mecánicas, niveles, balance, documentación de diseño
+- [x] Game Designer: mecánicas, niveles, balance, documentación de diseño
 - [ ] Producer: schedule, presupuesto, coordinación, removal de blockers
 - [x] Programadores: implementación de features, bug fixes, testing
 - [ ] 3D Artists: modelado, texturizado, animación
 - [ ] 2D Artists: UI, iconos, concept art, ilustraciones
-- [ ] Audio Lead: dirección de audio, implementación, mixing
+- [x] Audio Lead: dirección de audio, implementación, mixing
 - [x] QA: testing manual, automatizado, reportes de bugs
-- [ ] Community Manager: redes sociales, comunicación, feedback
-- [ ] Documentar Habilidades requeridas por rol
-- [ ] Documentar Herramientas requeridas por rol
+- [x] Community Manager: redes sociales, comunicación, feedback
+- [x] Documentar Habilidades requeridas por rol
+- [x] Documentar Herramientas requeridas por rol
 - [ ] Definir proceso de evaluación de desempeño
 - [ ] Crear perfil de rol para cada posición
 
@@ -48,10 +48,10 @@
 - [ ] Crear template de reunión
 - [ ] Definir reglas de comunicación asíncrona
 - [ ] Definir reglas de respuesta a mensajes urgentes
-- [ ] Documentar herramientas de comunicación (Discord, Notion, Linear)
+- [x] Documentar herramientas de comunicación (Discord, Notion, Linear)
 - [ ] Crear guía de estilo para comunicación escrita
-- [ ] Definir proceso de documentar decisiones
-- [ ] Crear registro de decisiones tomadas
+- [x] Definir proceso de documentar decisiones
+- [x] Crear registro de decisiones tomadas
 
 ## D. Gestión de Tareas (15 ítems)
 
@@ -73,40 +73,40 @@
 
 ## E. Toma de Decisiones (10 ítems)
 
-- [ ] Documentar modelo RACI para decisiones clave
+- [x] Documentar modelo RACI para decisiones clave
 - [ ] Definir quién decide: arquitectura (Lead Programmer), arte (Lead Artist), producto (Game Director)
 - [ ] Crear proceso de change request para cambios de alcance
 - [ ] Definir proceso de escalación (3 niveles)
-- [ ] Crear registro de decisiones tomadas
+- [x] Crear registro de decisiones tomadas
 - [ ] Definir cuándo se necesita consenso vs. decide el líder
 - [x] Documentar proceso de A/B testing para decisiones de diseño
 - [ ] Definir proceso de evaluación de riesgos en decisiones
-- [ ] Crear template de documentación de decisión
+- [x] Crear template de documentación de decisión
 - [ ] Definir proceso de reversión de decisiones
 
 ## F. Resolución de Conflictos (10 ítems)
 
-- [ ] Documentar proceso de escalación (3 niveles)
+- [x] Documentar proceso de escalación (3 niveles)
 - [ ] Nivel 1: discusión directa entre involucrados
 - [ ] Nivel 2: media el Lead del área
 - [ ] Nivel 3: decide el Game Director
 - [ ] Crear template de mediación
 - [ ] Definir proceso de mediación formal
-- [ ] Crear registro de conflictos resueltos
+- [x] Crear registro de conflictos resueltos
 - [ ] Definir política de tolerancia cero a acoso
-- [ ] Documentar proceso de feedback constructivo
+- [x] Documentar proceso de feedback constructivo
 - [ ] Definir proceso de evaluación post-conflicto
 
 ## G. Onboarding (10 ítems)
 
-- [ ] Crear checklist de onboarding (semana 1)
-- [ ] Documentar accesos necesarios (GitHub, Discord, herramientas)
-- [ ] Crear guía de revisión de documentación del proyecto
+- [x] Crear checklist de onboarding (semana 1)
+- [x] Documentar accesos necesarios (GitHub, Discord, herramientas)
+- [x] Crear guía de revisión de documentación del proyecto
 - [ ] Asignar mentor para cada nuevo miembro
 - [ ] Definir primera tarea simple para familiarizarse
 - [ ] Crear reunión de bienvenida con Game Director
 - [ ] Crear reunión de bienvenida con Lead del área
-- [ ] Documentar proceso de evaluación de onboarding
+- [x] Documentar proceso de evaluación de onboarding
 - [ ] Crear FAQ para nuevos miembros
 - [ ] Definir período de prueba (30-90 días)
 
@@ -121,16 +121,16 @@
 - [ ] Definir proceso de feedback regular
 - [ ] Crear encuesta de satisfacción del equipo
 - [ ] Definir proceso de mejora continua
-- [ ] Documentar política de feriados y vacaciones
+- [x] Documentar política de feriados y vacaciones
 
 ## I. Documentación y Mantenimiento (10 ítems)
 
-- [ ] Crear directorio docs/production/ con todos los documentos
-- [ ] Mantener documentos actualizados
+- [x] Crear directorio docs/production/ con todos los documentos
+- [x] Mantener documentos actualizados
 - [ ] Revisar procesos trimestralmente
-- [ ] Documentar cambios en procesos
+- [x] Documentar cambios en procesos
 - [ ] Crear changelog de procesos
-- [ ] Distribuir documentación a todo el equipo
+- [x] Distribuir documentación a todo el equipo
 - [ ] Entrenar al equipo en los procesos
 - [ ] Evaluar efectividad de procesos
 - [ ] Ajustar según feedback del equipo

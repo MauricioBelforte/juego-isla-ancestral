@@ -170,3 +170,8 @@
 - [x] Regresion completa: 8/8 tests del proyecto con 0 fallos tras el autoload (Godot 4.7.2) [S]
 
 **Totales:** Diseño: 100 ítems (documentado por B1) · Implementación: 14 ítems completados
+## Verificación (2026-09-02 06:35 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] test_analytics.gd: **18/18 checks OK, exit 0** — AnalyticsDirector (autoload + ServiceRegistry), buffer + lote JSON, session hash 16-hex sin nombres personales, aggregados (area_visitada/feature_usada/config_cambio), persistencia aggregated.json, **opt-out completo** (está_opt_out descarta eventos y persiste opt_out.cfg)
+- [x] Privacidad verificada: sin datos personales en lotes (hash de sesión anónimo)
+- [x] Test headless permanente disponibles (M104)

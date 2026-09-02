@@ -1,0 +1,120 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 46-Arte-2D (46)
+
+# Checklist personal tareas — 46-Arte-2D
+
+> Extraidas del 05-Checklist.md del módulo (110 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin dirección 2D, iconos/retratos/UI se sienten de otro juego e incoherentes con el 3D
+- [ ] T-002 Definir el objetivo: guía de estilo 2D heredada del 3D, bancos de iconos/retratos, atlas y validación
+- [ ] T-003 Registrar dependencias: M45 (3D), M53 (UI), M88 (fuentes), M14 (iconos), M47 (texturas), M57 (input), M108 (pipeline)
+- [ ] T-004 Mapear la sección 45 "ARTE 2D" del plan maestro al ID 46 de la tabla global (desfase de numeración)
+- [ ] T-005 Separar dentro/fuera de alcance: layout de UI → M53, fuentes → M88, animación → M48, texturas 3D → M47
+- [ ] T-006 Documentar restricciones: estilo heredado, sin texto en arte, atlas ≤2K, resoluciones estándar, SVG fuente
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Incluir contexto del plan de producción §4: paleta pastel, "el juego cozy vive y muere por sus menús"
+- [ ] T-009 Definir ART_STYLE_2D.md derivado de M45: paleta, trazo, sombreado, redondeo
+- [ ] T-010 Definir trazo exterior redondeado 2-3 px a 128 px
+- [ ] T-011 Definir sombra plana inferior 10%
+- [ ] T-012 Prohibir gradientes complejos, ruido, texturas foto, neón
+- [ ] T-013 Definir recetas visuales por familia de iconos
+- [ ] T-014 Definir logo principal + variante clara/oscura + icono solo
+- [ ] T-015 Definir fuentes SVG y raster 1024
+- [ ] T-016 Definir submarca para iconos de plataforma (Steam M97)
+- [ ] T-017 Definir iconos de todos los ítems de M14/M15 con claves i18n
+- [ ] T-018 Definir tamaño de trabajo 128×128
+- [ ] T-019 Definir legibilidad mínima 32 px (prueba obligatoria)
+- [ ] T-020 Definir fondo de rareza por color según M38
+- [ ] T-021 Definir ángulo canónico 3/4 con plantilla 3D
+- [ ] T-022 Definir iconos de 9 herramientas × 4 niveles (M13)
+- [ ] T-023 Definir diferencias visuales de nivel (mango, hoja, aura)
+- [ ] T-024 Definir variante de nivel 4 ancestral con símbolo
+- [ ] T-025 Definir retrato de cada NPC (M19) y jugador
+- [ ] T-026 Definir 5 expresiones base: base, alegre, triste, sorprendido, pensativo
+- [ ] T-027 Definir +3 expresiones extra para NPCs románticos (M20)
+- [ ] T-028 Definir plantilla 3D obligatoria (render del modelo + repintado)
+- [ ] T-029 Definir tamaño 256×256 y prueba a 96 px
+- [ ] T-030 Definir iconos de acciones (M57): interactuar, atacar, saltar, menú
+- [ ] T-031 Definir botones, marcos y paneles como slice9 para M53
+- [ ] T-032 Definir estados visuales: normal, hover, pressed, disabled
+- [ ] T-033 Definir set de símbolos para M24/M25/M26 sin palabras
+- [ ] T-034 Definir geometría suave y reutilizable
+- [ ] T-035 Definir símbolos en superficies: ruinas, templos, sellos
+- [ ] T-036 Definir ilustración pergamino para mapas del tesoro (M25)
+- [ ] T-037 Definir estilo con safe zone central para UI
+- [ ] T-038 Definir integración con M54 (mapa) como skin artística opcional
+- [ ] T-039 Definir marco común de insignias (círculo + figura + borde de rareza)
+- [ ] T-040 Definir tamaño grande 100 px y pequeño 48 px
+- [ ] T-041 Definir integración con logros (M72) y sellos (M22)
+- [ ] T-042 Definir fondo de museo para coleccionables (M37)
+- [ ] T-043 Definir pantallas de carga con arte de Aurora
+- [ ] T-044 Definir formato 1024×1024 con área de texto libre
+- [ ] T-045 Definir integración con M63 (progreso real sobre el arte)
+- [ ] T-046 Definir icono del jugador en mapa/minimapa coherente con personaje 3D
+- [ ] T-047 Definir variante de dirección (heading) para minimapa
+- [ ] T-048 Definir ui_atlas, icons_atlas, portraits_atlas, story_atlas, badges_atlas
+- [ ] T-049 Definir límite 2048×2048 por atlas
+- [ ] T-050 Definir padding ≥ 2 px
+- [ ] T-051 Definir sin rotaciones en empaquetado
+- [ ] T-052 Definir regeneración por script (pack_atlas.gd)
+- [ ] T-053 Definir SVG como fuente editable (Inkscape/Krita)
+- [ ] T-054 Definir PNG/WebP como runtime (M108)
+- [ ] T-055 Definir transparencia sin halos (alfa limpio)
+- [ ] T-056 Definir tamaños múltiplos de 4 (compresión)
+- [ ] T-057 Definir script validate_2d.gd en Assets/_Project/Editor/
+- [ ] T-058 Verificar formato y tamaño cuadrado permitido
+- [ ] T-059 Verificar resolución múltiplo de 4
+- [ ] T-060 Verificar alfa sin halos en bordes
+- [ ] T-061 Verificar duplicados de id contra catálogo
+- [ ] T-062 Verificar convenciones de nombres por tipo
+- [ ] T-063 Definir prefijos: ico_, pt_, illus_, sym_, badge_, ui_art_
+- [ ] T-064 Alinear con M108 (Pipeline de Assets)
+- [ ] T-065 Definir sufijos de variantes de expresión (pt_<npc>_alegre)
+- [ ] T-066 Definir regla dura: 0 textos en arte
+- [ ] T-067 Documentar que M87/M88 superponen todo texto
+- [ ] T-068 Incluir verificación de regiones de texto en el validador
+- [ ] T-069 Legibilidad a 32 px con contraste AA (M58)
+- [ ] T-070 Consistencia: un solo set de iconos en todas las superficies
+- [ ] T-071 Rendimiento: atlas únicos, carga diferida (M63), sin duplicados (M62)
+- [ ] T-072 Cozy: colores amables, sin parpadeos, insignias que celebran
+- [ ] T-073 Mantenible: SVG editable, regeneración por script
+- [ ] T-074 Accesibilidad: variantes de alto contraste separadas
+- [ ] T-075 Descartar iconos sin referencia 3D (incoherencia)
+- [ ] T-076 Descartar retratos por IA directa (inconsistencia + legal)
+- [ ] T-077 Descartar un solo atlas gigante (memoria M62)
+- [ ] T-078 Descartar texto embebido (localización M87)
+- [ ] T-079 Adoptar atlas por superficie + SVG fuente
+- [ ] T-080 Riesgo de iconos incoherentes → guía + recetas + review
+- [ ] T-081 Riesgo de retratos que no parecen al NPC → plantilla 3D + comparación
+- [ ] T-082 Riesgo de atlas descontrolados → límite 2K + regeneración
+- [ ] T-083 Riesgo de texto en arte → regla dura + validador
+- [ ] T-084 Riesgo de memoria por texturas 2D → compresión + carga diferida
+- [ ] T-085 Documentar integración con M45 (plantillas 3D, catálogo compartido)
+- [ ] T-086 Documentar integración con M53 (piezas UI)
+- [ ] T-087 Documentar integración con M87 (localización, cero texto)
+- [ ] T-088 Documentar integración con M88 (fuentes)
+- [ ] T-089 Documentar integración con M63 (carga diferida)
+- [ ] T-090 Documentar integración con M62 (memoria)
+- [ ] T-091 Documentar integración con M108 (importación)
+- [ ] T-092 Documentar integración con M72/M22/M37 (insignias, sellos, coleccionables)
+- [ ] T-093 Documentar integración con M58 (accesibilidad)
+- [ ] T-094 Documentar flujo de creación de icono (plantilla 3D → ilustrar → validar → atlas)
+- [ ] T-095 Documentar flujo de creación de retrato (render → repintado → expresiones → atlas)
+- [ ] T-096 Documentar flujo de empaquetado (pack_atlas.gd)
+- [ ] T-097 Documentar herramientas: Inkscape, Krita, Blender para renders
+- [ ] T-098 Documentar uso de IA como base + repintado (M86)
+- [ ] T-099 ART_STYLE_2D.md permite dibujar sin preguntar
+- [ ] T-100 Icono de cada objeto legible a 32 px en inventario y tienda
+- [ ] T-101 Retrato del NPC se parece al modelo 3D (comparación lado a lado)
+- [ ] T-102 Símbolos ancestrales sin texto reutilizables
+- [ ] T-103 Atlas con carga diferida sin duplicados en memoria
+- [ ] T-104 Validador rechaza pieza con resolución o halo incorrectos
+- [ ] T-105 Botón con texto usa fuente M88, nunca arte
+- [ ] T-106 Piezas cumplen M108 y Git LFS
+- [ ] T-107 Documentar el desfase de numeración del plan maestro (45=ARTE 2D → ID 46)
+- [ ] T-108 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-109 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-110 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

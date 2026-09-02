@@ -1,0 +1,118 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 47-Texturas-Y-Materiales (47)
+
+# Checklist personal tareas — 47-Texturas-Y-Materiales
+
+> Extraidas del 05-Checklist.md del módulo (108 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de texturas/materiales las superficies lucen dispares y el presupuesto se rompe
+- [ ] T-002 Definir el objetivo: "material kit" central con atlas eficientes, variantes por bioma y presupuesto verificado
+- [ ] T-003 Registrar dependencias: M08 (voxel), M45 (slots), M46 (paleta), M04 (Godot), M61/M62 (presupuestos), M108
+- [ ] T-004 Mapear la sección 46 "TEXTURAS Y MATERIALES" del plan maestro al ID 47 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: modelado → M45, iluminación → M49, pipeline → M108, arte 2D UI → M46
+- [ ] T-006 Documentar restricciones: Godot 4.x, presupuesto VRAM, determinismo PRNG, atlas único de bloques, compresión
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Incluir contexto del plan de producción §4 (paleta por bioma, coherencia visual)
+- [ ] T-009 Listar las 25+ superficies del plan maestro
+- [ ] T-010 Tierra, césped, piedra, arena, arcilla
+- [ ] T-011 Madera, metal, cristal, hielo, lava
+- [ ] T-012 Agua, coral, musgo, ruinas
+- [ ] T-013 Paredes, pisos, techos, muebles
+- [ ] T-014 Ropa, herramientas, vehículos, vegetación
+- [ ] T-015 Materiales ancestrales, materiales luminosos
+- [ ] T-016 Variantes por bioma
+- [ ] T-017 Asignar prioridad y biomas a cada superficie
+- [ ] T-018 Definir tileset único con todos los bloques de M08
+- [ ] T-019 Definir resolución de tile: 32 px (LOD 16 px)
+- [ ] T-020 Definir atlas 1024 con ~32 tiles
+- [ ] T-021 Soportar caras diferenciadas (césped: verde arriba/tierra lados)
+- [ ] T-022 Definir ≥3 variantes por bloque/bioma con misma métrica UV
+- [ ] T-023 Prohibir duplicar un bloque en otro atlas
+- [ ] T-024 Definir variantes procedurales deterministas (semilla M10)
+- [ ] T-025 Definir paleta por bioma (M09) como única entrada de color
+- [ ] T-026 Definir barajado de variantes por PRNG de chunk
+- [ ] T-027 Commitar PNG generados como fuente (nunca regenerar en runtime)
+- [ ] T-028 Definir slots de material de ropa (M19/M11)
+- [ ] T-029 Definir recolor por NPC vía albedo compartida + texture swap
+- [ ] T-030 Prohibir duplicar material por instancia
+- [ ] T-031 Definir atlas de mobiliario/construcción (M17/M18)
+- [ ] T-032 Definir niveles de madera (base, oscura, teñida, ancestral)
+- [ ] T-033 Definir acabado ancestral para M25 y M24/M26
+- [ ] T-034 Definir acabado de piedra desgastada con musgo (M09 bioma)
+- [ ] T-035 Definir shader emisivo_ancestral (sellos, glifos, esporas M11)
+- [ ] T-036 Definir tope de emisión ≤ 1.5 (sin bloom agresivo M49)
+- [ ] T-037 Definir pulso sutil determinista
+- [ ] T-038 Definir shader agua con normalmap animado por TIME
+- [ ] T-039 Definir sin refracción global (solo pools pequeños)
+- [ ] T-040 Definir coordinación con M51
+- [ ] T-041 Definir color por bioma
+- [ ] T-042 Definir shader lava con ruido desplazado cruzado
+- [ ] T-043 Definir emisión moderada
+- [ ] T-044 Definir presencia solo en biomas volcánicos
+- [ ] T-045 Definir shader cristal con transparencia y refracción ligera
+- [ ] T-046 Definir máximo 2 instancias por escena
+- [ ] T-047 Definir uso en vitrinas M37 y templos M24/M26
+- [ ] T-048 Definir materiales de 9 herramientas × 4 niveles (M13)
+- [ ] T-049 Definir diferencias de material por nivel (mango, hoja, aura)
+- [ ] T-050 Definir script validate_material.gd
+- [ ] T-051 Verificar resolución múltiplo de 4 y ≤ 2K
+- [ ] T-052 Verificar alineación de tiles al atlas
+- [ ] T-053 Verificar overlap de UVs entre tiles
+- [ ] T-054 Verificar naming (tex_/mat_/atlas_)
+- [ ] T-055 Verificar formato PNG/WebP y mipmaps
+- [ ] T-056 Verificar memoria por escena pivote
+- [ ] T-057 Verificar whitelist de shaders y conteo ≤ 2 costosos
+- [ ] T-058 Definir prefijos tex_, mat_, atlas_
+- [ ] T-059 Alinear con M108
+- [ ] T-060 Definir texture_budget.json por textura (resolución, formato, VRAM)
+- [ ] T-061 Definir suma por escena contra presupuesto M62
+- [ ] T-062 Definir alerta de excedente en editor
+- [ ] T-063 Definir script generate_textures.gd con seed = hash(semilla, superficie, bioma, variante)
+- [ ] T-064 Definir reproducción exacta entre partidas
+- [ ] T-065 Prohibir RNG en runtime
+- [ ] T-066 Rendimiento: un draw call por material compartido, ≤2 shaders costosos por escena
+- [ ] T-067 Memoria (M62): atlas ≤ 2K, sin texturas runtime > 2K
+- [ ] T-068 Variedad percibida: ≥3 variantes por bioma
+- [ ] T-069 Cozy: paleta pastel M09 sin contrastes agresivos
+- [ ] T-070 Mantenible: fuentes procedurales versionadas, PNG en Git LFS
+- [ ] T-071 Consistencia: atlas de bloques único
+- [ ] T-072 Descartar textura individual por bloque (draw calls/memoria)
+- [ ] T-073 Descartar solo 16 px/tile (calidad cozy)
+- [ ] T-074 Descartar variantes 100% a mano (900+ inmanejables)
+- [ ] T-075 Descartar regenerar texturas en runtime (determinismo M10/M63)
+- [ ] T-076 Descartar shaders para todo (costo M61)
+- [ ] T-077 Descartar recolor por instancia (state changes)
+- [ ] T-078 Riesgo de duplicados en memoria → registro + validador
+- [ ] T-079 Riesgo de tiling visible → variantes + barajado + normalmap
+- [ ] T-080 Riesgo de shaders costosos → whitelist + conteo por escena
+- [ ] T-081 Riesgo de atlas desalineado → validador de alineación
+- [ ] T-082 Riesgo de memoria creciente → texture_budget.json en cada PR
+- [ ] T-083 Documentar integración con M08/M10 (atlas + semillas)
+- [ ] T-084 Documentar integración con M09 (paletas por bioma)
+- [ ] T-085 Documentar integración con M45 (slots)
+- [ ] T-086 Documentar integración con M46 (paleta 2D)
+- [ ] T-087 Documentar integración con M49 (emisión vs bloom)
+- [ ] T-088 Documentar integración con M50/M51 (vegetación/agua)
+- [ ] T-089 Documentar integración con M61/M62 (presupuestos)
+- [ ] T-090 Documentar integración con M108 (importación)
+- [ ] T-091 Documentar integración con M06 (Git LFS)
+- [ ] T-092 Documentar flujo de generación procedural (base → paleta → ruido → variantes)
+- [ ] T-093 Documentar flujo de asignación de material a prop (slots → kit → variante)
+- [ ] T-094 Documentar flujo de validación al importar
+- [ ] T-095 Documentar herramientas: Godot NoiseTexture2D, scripts de editor
+- [ ] T-096 Documentar uso de IA como apoyo de paleta (M86)
+- [ ] T-097 Catálogo con 25+ superficies todas con material asignado
+- [ ] T-098 Atlas de bloques completo con variantes por bioma sin duplicados
+- [ ] T-099 Misma semilla → mismas variantes procedurales
+- [ ] T-100 Recolor de personaje sin duplicar memoria
+- [ ] T-101 Lava y cristal con shaders acotados (≤2 costosos en escena)
+- [ ] T-102 Validador rechaza textura 4K o desalineada
+- [ ] T-103 VRAM de escena pivote dentro del presupuesto M62
+- [ ] T-104 Superficies cumplen M108 y Git LFS
+- [ ] T-105 Documentar el desfase de numeración del plan maestro (46=TEXTURAS → ID 47)
+- [ ] T-106 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-107 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-108 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

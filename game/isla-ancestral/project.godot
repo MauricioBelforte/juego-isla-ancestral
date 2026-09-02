@@ -1,4 +1,4 @@
-; Engine configuration file.
+﻿; Engine configuration file.
 ; It's best edited using the editor UI and not directly,
 ; since the parameters that go here are not all obvious.
 ;
@@ -75,6 +75,7 @@ Diary="*res://scripts/diario/diary_service.gd"
 PlayerProfile="*res://scripts/progresion/player_profile.gd"
 ProgressionManager="*res://scripts/progresion/progression_manager.gd"
 Achievements="*res://scripts/logros/achievement_service.gd"
+Vehiculos="*res://scripts/vehiculos/vehicle_manager.gd"
 AudioConfig="*res://scripts/audio/audio_config_service.gd"
 StreamManager="*res://scripts/stream/stream_manager.gd"
 TerrainProvider="*res://scripts/terrenos/terrain_provider.gd"
@@ -92,6 +93,10 @@ FeedbackDirector="*res://scripts/audio/feedback_director.gd"
 NarrativeSound="*res://scripts/audio/narrative_sound.gd"
 CrashReporter="*res://scripts/crash/crash_reporter.gd"
 CiCdManager="*res://scripts/ci/cicd_manager.gd"
+InstaladorConfig="*res://scripts/installer/instalador_config.gd"
+MapManager="*res://scripts/mapa/mapa_manager.gd"
+LocalizationManager="*res://scripts/localizacion/localization_manager.gd"
+HardwareManager="*res://scripts/hardware/hardware_manager.gd"
 BuildConfigManager="*res://scripts/build/build_config_manager.gd"
 UpdateManager="*res://scripts/updates/update_manager.gd"
 DevTools="*res://scripts/dev/dev_tools.gd"

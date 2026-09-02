@@ -30,10 +30,11 @@ func _ready() -> void:
 	cam.rotation_degrees = Vector3(-18, 0, 0)
 	add_child(cam)
 
-	_cargar("res://assets/3d/media/18-Casas_casa_completa_ejemplo.glb", Vector3(-4, 0, 0))
-	_cargar("res://assets/3d/media/45-Arte3D_totem_isla.glb", Vector3(0, 0, 0))
-	_cargar("res://assets/3d/media/50-Vegetacion_palmera.glb", Vector3(4, 0, 0))
-	print("=== M108: PREVIEW DE ASSETS (RF9) ===")
+	_cargar("res://assets/3d/media/50-Vegetacion_palmera.glb", Vector3(-6, 0, -2))
+	_cargar("res://assets/3d/media/50-Vegetacion_helecho_gigante.glb", Vector3(-2, 0, -2))
+	_cargar("res://assets/3d/media/50-Vegetacion_hongo_luminoso.glb", Vector3(2, 0, -2))
+	_cargar("res://assets/3d/media/50-Vegetacion_arbusto_floral.glb", Vector3(6, 0, -2))
+	print("=== M108/M50: PREVIEW DE ASSETS + VEGETACION (RF9) ===")
 
 func _cargar(ruta: String, pos: Vector3) -> void:
 	var res: PackedScene = load(ruta)

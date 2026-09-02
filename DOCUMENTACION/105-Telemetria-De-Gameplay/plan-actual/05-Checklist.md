@@ -59,23 +59,23 @@
 
 ### [S] Métricas de tiempo
 - [ ] Definir métrica time_to_first_discovery
-- [ ] Definir métrica time_to_first_travel
+- [x] Definir métrica time_to_first_travel
 - [ ] Definir métrica time_to_first_house
 - [ ] Definir métrica time_to_first_puzzle
 - [ ] Definir métrica time_to_first_seal
 - [ ] Definir métrica session_duration
 - [ ] Diseñar cálculo de time_to_first_discovery
-- [ ] Diseñar cálculo de time_to_first_travel
+- [x] Diseñar cálculo de time_to_first_travel
 - [ ] Diseñar cálculo de session_duration
 
 ### [S] Detección de abandonos
-- [ ] Definir puzzle_abandoned (detección)
-- [ ] Definir zonas_ignored (detección)
+- [x] Definir puzzle_abandoned (detección)
+- [x] Definir zonas_ignored (detección)
 - [ ] Diseñar detector de puzzle abandonado (timer de 60 segundos)
 - [ ] Diseñar umbral de puzzle abandonado (5 minutos sin completar)
-- [ ] Diseñar detector de zonas ignoradas (timer de 60 segundos)
-- [ ] Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
-- [ ] Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
+- [x] Diseñar detector de zonas ignoradas (timer de 60 segundos)
+- [x] Diseñar umbral de zonas ignoradas (1 minuto sin explorar)
+- [x] Diseñar registro de puzzle_abandoned con timestamp y puzzle_id
 - [ ] Diseñar registro de zones_ignored con zone_id y timestamp
 
 ### [S] Dificultad percibida
@@ -87,13 +87,13 @@
 
 ### [S] Uso de datos para mejorar diseño
 - [ ] Definir análisis de datos para identificar puzzles con alta tasa de abandono
-- [ ] Definir análisis de datos para identificar zonas ignoradas
-- [ ] Definir análisis de datos para identificar eventos clave no alcanzados
+- [x] Definir análisis de datos para identificar zonas ignoradas
+- [x] Definir análisis de datos para identificar eventos clave no alcanzados
 - [ ] Definir análisis de datos para identificar tiempos anormales
 - [ ] Definir ajuste de balance basado en datos reales
 
 ### [S] Opt-in y GDPR
-- [ ] Definir opt-in explícito
+- [x] Definir opt-in explícito
 - [ ] Definir prompt en primer inicio del juego
 - [ ] Definir opción de opt-out en settings
 - [ ] Definir datos anonimizados (sin identificadores personales)
@@ -103,21 +103,21 @@
 - [ ] Definir política de privacidad documentada
 
 ### [S] Integración con M104 (Analytics)
-- [ ] Diseñar integración con M104 para envío de eventos
-- [ ] Diseñar GameplayTelemetry emitir eventos a AnalyticsService
+- [x] Diseñar integración con M104 para envío de eventos
+- [x] Diseñar GameplayTelemetry emitir eventos a AnalyticsService
 - [ ] Diseñar AnalyticsService batching y envío
 - [ ] Diseñar AnalyticsService anonimización y GDPR compliance
 - [ ] Diseñar AnalyticsService caché local y envío batch
 
 ### [S] Integración con M71 (Progresión)
-- [ ] Diseñar integración con M71 para observación de eventos
-- [ ] Diseñar M71 notificar a M105 cuando ocurren eventos clave
+- [x] Diseñar integración con M71 para observación de eventos
+- [x] Diseñar M71 notificar a M105 cuando ocurren eventos clave
 - [ ] Diseñar M105 registrar timestamp del evento
 - [ ] Diseñar M105 no afectar lógica de progresión de M71
-- [ ] Diseñar M105 como observador pasivo de eventos de M71
+- [x] Diseñar M105 como observador pasivo de eventos de M71
 
 ### [S] Integración con M22 (Historia Principal)
-- [ ] Diseñar integración con M22 para observación de eventos
+- [x] Diseñar integración con M22 para observación de eventos
 - [ ] Diseñar M22 notificar a M105 cuando se completan capítulos
 - [ ] Diseñar M105 registrar progreso de historia principal
 - [ ] Diseñar M105 identificar capítulos donde muchos jugadores se atascans
@@ -126,7 +126,7 @@
 - [ ] Diseñar integración con M102 para generación de issues
 - [ ] Diseñar datos de telemetría identificar bugs emergentes
 - [ ] Diseñar alta tasa de abandono en puzzle → posible bug
-- [ ] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
+- [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
 - [ ] Diseñar M105 generar issues en M102 basados en patrones de datos
 
 ### [S] GameplayTelemetry (servicio)
@@ -158,7 +158,7 @@
 - [ ] Diseñar método track_museum_first_visited(museum_id)
 - [ ] Diseñar método track_festival_first_participated(festival_id)
 - [ ] Diseñar método track_community_project_first_completed(project_id)
-- [ ] Diseñar método track_puzzle_abandoned(puzzle_id, time_in_puzzle)
+- [x] Diseñar método track_puzzle_abandoned(puzzle_id, time_in_puzzle)
 - [ ] Diseñar método track_difficulty_perceived(puzzle_id, rating)
 - [ ] Diseñar método track_zone_entered(zone_id)
 - [ ] Diseñar método track_zone_exited(zone_id, time_in_zone)
@@ -190,9 +190,9 @@
 
 ### [S] Almacenamiento local
 - [ ] Diseñar archivo user://telemetry/gameplay_events.json
-- [ ] Diseñar formato JSON de eventos
+- [x] Diseñar formato JSON de eventos
 - [ ] Diseñar método save_events_to_cache()
-- [ ] Diseñar carga de eventos al inicio (opcional)
+- [x] Diseñar carga de eventos al inicio (opcional)
 
 ### [S] Configuración
 - [ ] Diseñar archivo user://settings/telemetry.json
@@ -216,11 +216,11 @@
 - [ ] Diseñar res://telemetry/gameplay_telemetry_saver.gd
 
 ### [S] Pruebas de calidad
-- [ ] Diseñar prueba de opt-in y opt-out de telemetría
-- [ ] Diseñar prueba de registro de eventos clave
+- [x] Diseñar prueba de opt-in y opt-out de telemetría
+- [x] Diseñar prueba de registro de eventos clave
 - [ ] Diseñar prueba de cálculo de métricas de tiempo
 - [ ] Diseñar prueba de detección de puzzles abandonados
-- [ ] Diseñar prueba de detección de zonas ignoradas
+- [x] Diseñar prueba de detección de zonas ignoradas
 - [ ] Diseñar prueba de encuesta de dificultad percibida
 - [ ] Diseñar prueba de integración con M104 (Analytics)
 - [ ] Diseñar prueba de anonimización de datos

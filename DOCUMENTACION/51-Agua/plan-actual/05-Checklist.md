@@ -225,3 +225,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Verificación (2026-09-02 06:00 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Parámetros de la batimetría verificados en código (island_generator): water_level=2, banda 0.94-0.98 = agua CLARA (fondo 2, capa turquesa en y=3 con el fix M167), >0.98 = océano profundo (height 0); paleta Maldivas: water #1A73BF (0.10,0.45,0.75) y shallow_water #40D1C7 (0.25,0.82,0.78)
+- [x] Verificación visual (evidencia M167): captura de costa mostrando plato de arena + franja turquesa + azul profundo (cap_167 costa) — el agua clara pisable y el océano azul se renderizan correctamente tras el fix
+- [x] Validación programática: get_block_at(503,3,256)=SHALLOW_WATER(30) y get_block_at(530,1,256)=WATER(17) — verificado en runtime y en el validador M167 (28/28)
+- [?] Animación de superficie de agua (ondas, transparencia, reflejos) y materiales — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere shaders/M49)

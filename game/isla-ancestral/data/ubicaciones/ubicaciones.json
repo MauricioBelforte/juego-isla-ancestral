@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "ubicaciones": [
+    {"id": "ubic_faro", "nombre": "Faro", "isla": "RIZ", "tipo": "hito", "sello": "sello_raiz", "x": 350, "z": 350},
+    {"id": "ubic_templo_raiz", "nombre": "Templo de la Raíz", "isla": "RIZ", "tipo": "templo", "sello": "sello_raiz", "x": 200, "z": 200},
+    {"id": "ubic_laguna_coral", "nombre": "Laguna Coral", "isla": "COR", "tipo": "laguna", "sello": "sello_coral", "x": 1024, "z": 256},
+    {"id": "ubic_templo_coral", "nombre": "Templo Coral", "isla": "COR", "tipo": "templo", "sello": "sello_coral", "x": 1200, "z": 256},
+    {"id": "ubic_volcan", "nombre": "Volcán", "isla": "CEN", "tipo": "volcan", "sello": "sello_ceniza", "x": 256, "z": 1024},
+    {"id": "ubic_templo_ceniza", "nombre": "Templo de la Ceniza", "isla": "CEN", "tipo": "templo", "sello": "sello_ceniza", "x": 400, "z": 1024},
+    {"id": "ubic_aurora_cielo", "nombre": "Cielo de la Aurora", "isla": "AUR", "tipo": "cielo", "sello": "sello_aurora", "x": 1024, "z": 1024},
+    {"id": "ubic_templo_aurora", "nombre": "Templo de la Aurora", "isla": "AUR", "tipo": "templo", "sello": "sello_aurora", "x": 1150, "z": 1024},
+    {"id": "ubic_spawn_riz", "nombre": "Punto de partida", "isla": "RIZ", "tipo": "punto", "sello": "", "x": 256, "z": 256},
+    {"id": "ubic_biblioteca_choza", "nombre": "Biblioteca de la Chozavil", "isla": "RIZ", "tipo": "hogar", "sello": "", "x": 320, "z": 320}
+  ]
+}

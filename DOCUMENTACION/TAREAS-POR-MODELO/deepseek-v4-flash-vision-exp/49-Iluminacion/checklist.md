@@ -1,0 +1,127 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 49-Iluminacion (49)
+
+# Checklist personal tareas — 49-Iluminacion
+
+> Extraidas del 05-Checklist.md del módulo (117 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado
+- [ ] T-002 Definir el objetivo: iluminación cozy consistente por franja con presupuestos verificables
+- [ ] T-003 Registrar dependencias: M31 (franjas), M32 (clima), M09 (biomas), M08 (voxel), M04 (Godot), M61/M62 (presupuestos), M90 (presets), M58 (accesibilidad)
+- [ ] T-004 Mapear la sección 48 "ILUMINACIÓN" del plan maestro al ID 49 de la tabla global
+- [ ] T-005 Separar dentro/fuera de alcance: franjas → M31, clima → M32, VFX → M52, materiales → M47
+- [ ] T-006 Documentar restricciones: Forward+, ACES sutil, piso anti-oscuridad 0.15, determinismo, sin niebla volumétrica
+- [ ] T-007 Definir criterios de aceptación verificables (8 criterios)
+- [ ] T-008 Definir WorldEnvironment base (tonemapping ACES, gamma 2.2)
+- [ ] T-009 Definir cielo procedural por bioma (M09)
+- [ ] T-010 Definir ambiente por franja con piso mínimo
+- [ ] T-011 Definir sky material por bioma en materials/
+- [ ] T-012 Definir una única direccional (sol/luna con curvas de color)
+- [ ] T-013 Definir presets por las 5 franjas de M31 (elevación, color, intensidad)
+- [ ] T-014 Definir easing de 3 s entre franjas (sin snaps)
+- [ ] T-015 Definir curva fría de la luna en NOCHE/PROFUNDA
+- [ ] T-016 Decidir: lightmaps para estáticos (casas, templos, ruinas, cuevas)
+- [ ] T-017 Decidir: SDFGI/VoxelGI OFF por defecto (prueba documentada si se activa)
+- [ ] T-018 Definir bake en CI (M118) con semilla fija
+- [ ] T-019 Definir memoria de lightmaps contra M62
+- [ ] T-020 Definir pool de luces dinámicas (M62)
+- [ ] T-021 Definir tope con sombra ≤ 6 por escena
+- [ ] T-022 Definir tope total ≤ 20 por escena
+- [ ] T-023 Definir desactivación por distancia 30 m (M61)
+- [ ] T-024 Definir luz cálida de casas (M18)
+- [ ] T-025 Definir luz de tiendas (M39) y talleres
+- [ ] T-026 Definir ventanas con luz diurna (baked)
+- [ ] T-027 Definir perfil interior_casa.gd
+- [ ] T-028 Definir faroles de pueblo y caminos
+- [ ] T-029 Definir flicker determinista (fase + semilla)
+- [ ] T-030 Definir luz desde el pool (no por instancia)
+- [ ] T-031 Definir opción de desactivación (M58/M90)
+- [ ] T-032 Definir luz cálida de hogueras/chimeneas
+- [ ] T-033 Definir parpadeo suave (≤2 Hz, ≤15%)
+- [ ] T-034 Integrar con partículas de M52
+- [ ] T-035 Definir luz ambiental sutil de cristales (M47)
+- [ ] T-036 Definir glow acotado (sin bloom agresivo)
+- [ ] T-037 No bloquear rango de luz del jugador
+- [ ] T-038 Definir piso anti-oscuridad 0.15 en cuevas (M31)
+- [ ] T-039 Definir esporas de luz (M11) como luz ambiental
+- [ ] T-040 Definir transición gradual día→cueva (fade)
+- [ ] T-041 Definir perfil subterraneo.gd
+- [ ] T-042 Definir rayo cenital en salas principales (M24/M25)
+- [ ] T-043 Definir iluminación de bajorrelieves
+- [ ] T-044 Definir ambience suave por sala
+- [ ] T-045 Definir perfil interior_templo.gd
+- [ ] T-046 Definir niebla exponencial por bioma/franja (M09/M32)
+- [ ] T-047 Definir lluvia: dimming solar suave
+- [ ] T-048 Descartar niebla volumétrica (coste)
+- [ ] T-049 Definir niebla de jungla densa y costa baja
+- [ ] T-050 Definir cascades ≤ 4 (por preset M90)
+- [ ] T-051 Definir distancia dinámica de sombras (45 m / 25 m bajo)
+- [ ] T-052 Definir bias voxel fino sin acne
+- [ ] T-053 Definir resolución de shadow atlas por preset (1024/2048)
+- [ ] T-054 Definir sombras suaves (PCF ≥ 4 samples)
+- [ ] T-055 Prohibir siluetas negras (ambiente de relleno)
+- [ ] T-056 Definir pool con MAX_DINAMICAS y MAX_CONT_SOMBRA
+- [ ] T-057 Descartar luz por instancia de props
+- [ ] T-058 Definir desactivación offscreen (M61)
+- [ ] T-059 Definir dónde hornea (interiores y estructuras)
+- [ ] T-060 Definir formato/registro de memoria (M62)
+- [ ] T-061 Definir regeneración en CI
+- [ ] T-062 Definir prueba de iluminación en hardware medio (M90)
+- [ ] T-063 Definir presets de calidad de sombras/luz (M90)
+- [ ] T-064 Definir objetivo 30 fps mínimo / 60 deseado
+- [ ] T-065 Definir validate_lighting.gd
+- [ ] T-066 Verificar límites de luces por escena
+- [ ] T-067 Verificar piso ambiental 0.15
+- [ ] T-068 Verificar niebla en rango por bioma/franja
+- [ ] T-069 Verificar flicker por accesibilidad
+- [ ] T-070 Definir lighting_budget.json
+- [ ] T-071 Definir prefijos light_, env_, lightmap_
+- [ ] T-072 Alinear con M108
+- [ ] T-073 Rendimiento: límites + pool + distancias (M61)
+- [ ] T-074 Memoria: lightmap + registro (M62)
+- [ ] T-075 Cozy: atmósfera por franja, legibilidad siempre
+- [ ] T-076 Accesible: flicker suave, opciones M58/M90
+- [ ] T-077 Determinismo: fase fija, semilla por luz
+- [ ] T-078 Mantenible: presets centrales por franja/bioma
+- [ ] T-079 Descartar SDFGI global por defecto
+- [ ] T-080 Descartar lightmap de todo el mundo abierto
+- [ ] T-081 Descartar niebla volumétrica
+- [ ] T-082 Descartar luz por instancia
+- [ ] T-083 Descartar un único preset de sombras
+- [ ] T-084 Descartar flicker con RNG
+- [ ] T-085 Riesgo de overdraw en pueblo → pool + topes + distancia
+- [ ] T-086 Riesgo de acne voxel → bias fino + validación visual
+- [ ] T-087 Riesgo de bake desactualizado → CI con bake + versión en registro
+- [ ] T-088 Riesgo de snaps entre franjas → easing 3 s
+- [ ] T-089 Riesgo de cuevas ilegibles → piso 0.15 + niebla diferenciada
+- [ ] T-090 Riesgo de sombras caras → distancias por preset + pruebas M90
+- [ ] T-091 Documentar integración con M31 (franjas)
+- [ ] T-092 Documentar integración con M32 (clima)
+- [ ] T-093 Documentar integración con M09 (biomas/sky)
+- [ ] T-094 Documentar integración con M08/M10 (voxel)
+- [ ] T-095 Documentar integración con M18/M24/M25/M26 (interiores)
+- [ ] T-096 Documentar integración con M47 (emisivos)
+- [ ] T-097 Documentar integración con M11 (esporas)
+- [ ] T-098 Documentar integración con M52 (fuego)
+- [ ] T-099 Documentar integración con M61/M62 (presupuestos)
+- [ ] T-100 Documentar integración con M90 (presets)
+- [ ] T-101 Documentar integración con M58 (accesibilidad)
+- [ ] T-102 Documentar integración con M108/M118 (import/bake)
+- [ ] T-103 Documentar flujo de transición de franja
+- [ ] T-104 Documentar flujo de entrada a cueva
+- [ ] T-105 Documentar flujo de validación de escena
+- [ ] T-106 Escena pivote ≥ 30 fps en hardware medio con preset default
+- [ ] T-107 5 franjas distinguibles y correctas según M31
+- [ ] T-108 Cuevas legibles (piso 0.15) sin luces por instancia
+- [ ] T-109 Luces dinámicas ≤ tope verificado por validador
+- [ ] T-110 Flicker determinista con misma semilla
+- [ ] T-111 Interior de casa horneado y legible sin dinámicas
+- [ ] T-112 Niebla por bioma/lluvia sin romper legibilidad
+- [ ] T-113 Sin sombras negras ni acne visible
+- [ ] T-114 Documentar el desfase de numeración del plan maestro (48=ILUMINACIÓN → ID 49)
+- [ ] T-115 Marcar el módulo como DELEGABLE PARA IMPLEMENTAR
+- [ ] T-116 Registrar dependencia de implementación con el hito M1 (proyecto Godot)
+- [ ] T-117 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md

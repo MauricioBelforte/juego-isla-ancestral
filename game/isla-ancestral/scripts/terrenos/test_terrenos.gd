@@ -7,6 +7,10 @@
 
 extends SceneTree
 
+const TerrainModifiers = preload("res://scripts/terrenos/terrain_modifiers.gd")
+const TerrainDetector = preload("res://scripts/terrenos/terrain_detector.gd")
+
+
 var _fallos: int = 0
 
 func _init() -> void:

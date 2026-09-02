@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "islas": {
+    "RIZ": {"nombre": "Isla Raíz", "codigo": "RIZ", "centro": [256, 256], "radio": 256, "biomas": ["playa", "pradera", "bosque", "montana"], "color_agua": "#40D1C7", "persistente": true},
+    "COR": {"nombre": "Isla Coral", "codigo": "COR", "centro": [1024, 256], "radio": 220, "biomas": ["playa", "arrecife", "laguna"], "color_agua": "#3EC8C2", "persistente": true},
+    "CEN": {"nombre": "Isla Ceniza", "codigo": "CEN", "centro": [256, 1024], "radio": 220, "biomas": ["volcan", "ceniza", "roca"], "color_agua": "#2A6E8A", "persistente": true},
+    "AUR": {"nombre": "Isla Aurora", "codigo": "AUR", "centro": [1024, 1024], "radio": 200, "biomas": ["bosque_ancestral", "pradera", "lago"], "color_agua": "#7EC8E3", "persistente": true}
+  }
+}

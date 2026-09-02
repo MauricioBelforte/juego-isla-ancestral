@@ -1,0 +1,103 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 96-Plataformas (96)
+
+# Checklist personal tareas — 96-Plataformas
+
+> Extraidas del 05-Checklist.md del módulo (93 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir fuente de datos verificable por celda (precio, SDK, requisitos)
+- [ ] T-002 Definir actualización trimestral de la matriz (M144)
+- [ ] T-003 Definir formato único de la matriz (tabla markdown en plan-actual)
+- [ ] T-004 Definir PC como plataforma principal (ventana base)
+- [ ] T-005 Definir targets de PC: Windows x64 (P0), macOS (P1), Linux-Proton (P1)
+- [ ] T-006 Definir requisitos mínimos y recomendados probados (M61)
+- [ ] T-007 Definir build Steam Deck compatible desde el target PC
+- [ ] T-008 Definir Steam como tienda primaria (lanzamiento día 0)
+- [ ] T-009 Definir logros Steam mapeados (M59)
+- [ ] T-010 Definir overlay Steam operativo
+- [ ] T-011 Definir validación "Deck Verified" en la página
+- [ ] T-012 Definir build branch/ómo beta de RC
+- [ ] T-013 Definir EGS como P1 (decisión en Beta por coste/beneficio)
+- [ ] T-014 Definir SDK EOS integrado vía bridge (si se aprueba)
+- [ ] T-015 Definir logros EOS mapeados
+- [ ] T-016 Definir cloud EOS (opcional)
+- [ ] T-017 Definir revisión de contenido y build EGS en M142
+- [ ] T-018 Definir exclusividad temporal decidida explícitamente (NO por defecto)
+- [ ] T-019 Definir GOG como opcional P1 (DRM-free)
+- [ ] T-020 Definir requisitos de distribución GOG sin logros obligatorios
+- [ ] T-021 Definir cloud GOG Galaxy (opcional)
+- [ ] T-022 Definir decisión final de GOG en fase Beta
+- [ ] T-023 Definir Microsoft Store como P3 (GATE de infraestructura)
+- [ ] T-024 Definir requisitos UWP/MSIX documentados
+- [ ] T-025 Definir evaluación de Xbox Game Pass (solo con contrato)
+- [ ] T-026 Definir sin compromiso de fecha para MS Store
+- [ ] T-027 Definir PlayStation como P2 (GATE por presupuesto/NDA)
+- [ ] T-028 Definir requisitos de certificación PS documentados
+- [ ] T-029 Definir devkit PS estimado en costes
+- [ ] T-030 Definir logros/cloud PS mapeados si hay GATE
+- [ ] T-031 Definir diseño console-ready lo hace barato (M57/M58/M63)
+- [ ] T-032 Definir Xbox como P2 (GATE por presupuesto/NDA)
+- [ ] T-033 Definir requisitos XR/Xbox documentados
+- [ ] T-034 Definir Play Anywhere evaluado (solo si aplica)
+- [ ] T-035 Definir devkit Xbox estimado en costes
+- [ ] T-036 Definir Switch como P2 (GATE por presupuesto/NDA; sugerida primera en consolas)
+- [ ] T-037 Definir requisitos LOTC y políticas eShop documentados
+- [ ] T-038 Definir devkit Switch estimado en costes
+- [ ] T-039 Definir rendimiento Switch (portátil/dock) presupuestado (M61)
+- [ ] T-040 Definir verificación "Deck Verified" como objetivo P0.5
+- [ ] T-041 Definir cheque deck en CI: 800p + gamepad + textos
+- [ ] T-042 Definir perfil de control específico Deck (M57)
+- [ ] T-043 Definir pruebas de rendimiento en Deck (M61)
+- [ ] T-044 Definir manejo de suspensión/resumen del Deck
+- [ ] T-045 Definir reporte público del estado Deck en la página Steam
+- [ ] T-046 Definir decisión: Linux vía Proton verificado (no nativo)
+- [ ] T-047 Definir test de Proton mensual (build actual)
+- [ ] T-048 Definir comunicación del soporte de Linux en FAQ/Store
+- [ ] T-049 Definir nativo Linux solo si telemetría lo demanda
+- [ ] T-050 Definir decisión: build nativa Apple Silicon
+- [ ] T-051 Definir Intel macOS condicional a telemetría de usuarios
+- [ ] T-052 Definir notarización/requisitos de macOS documentados
+- [ ] T-053 Definir CI de build macOS en pipeline
+- [ ] T-054 Definir recursos asignados por prioridad
+- [ ] T-055 Definir ventanas: P0 día 0; P1 +1-3 meses; P2 post-lanzamiento
+- [ ] T-056 Definir revisión de prioridades en M144
+- [ ] T-057 Definir checklist de certificación Steam (revisión de contenido)
+- [ ] T-058 Definir checklist de certificación EGS y GOG
+- [ ] T-059 Definir checklist de consolas (TRC/XR/LOTC) si GATE
+- [ ] T-060 Definir revisión temprana de certificación 2 meses antes del RC
+- [ ] T-061 Definir Cero sorpresas de certificación en P0 (objetivo medible)
+- [ ] T-062 Definir tabla de costes: fees de tiendas (Steam $100, EGS 0)
+- [ ] T-063 Definir tabla de costes: devkits por consola
+- [ ] T-064 Definir tabla de costes: testing 3rd party por plataforma
+- [ ] T-065 Definir total estimado por plan de plataformas
+- [ ] T-066 Definir revisión de costes con M149 (presupuesto de marketing)
+- [ ] T-067 Definir versión de Steamworks target
+- [ ] T-068 Definir versión de EOS target
+- [ ] T-069 Definir versiones de SDK de consolas (si GATE)
+- [ ] T-070 Definir política de actualización de SDKs (mensual)
+- [ ] T-071 Definir mapeo de logros por plataforma (M59)
+- [ ] T-072 Definir logros desbloqueables sin red (progresión local)
+- [ ] T-073 Definir catch-up de logros con saves existentes
+- [ ] T-074 Definir prueba de logros por plataforma en CI mock
+- [ ] T-075 Definir portabilidad del save v3.x entre plataformas
+- [ ] T-076 Definir resolución de conflictos (último ganador + backup, M60)
+- [ ] T-077 Definir 30 ciclos de cloud por plataforma (M112)
+- [ ] T-078 Definir gamepad tratamiento ciudadano de primer orden (M57)
+- [ ] T-079 Definir perfiles de gamepad por plataforma (deck/ps/xb/nx)
+- [ ] T-080 Definir UI 100% navegable con gamepad (M57/M89)
+- [ ] T-081 Definir remapeo completo (M58)
+- [ ] T-082 Definir notificación de cambio de input (gamepad↔teclado)
+- [ ] T-083 Definir Steam↔Steam Deck automático (documentado)
+- [ ] T-084 Definir consolas con cloud de plataforma (si GATE)
+- [ ] T-085 Definir sin infraestructura cross-save propia nueva
+- [ ] T-086 Definir prueba de cross-save 30 ciclos (M112)
+- [ ] T-087 Definir decisión: NO aplica (single-player)
+- [ ] T-088 Definir cláusula documentada del porqué (sin servidores)
+- [ ] T-089 Definir re-evaluación si un DLC agrega cooperación local (M144)
+- [ ] T-090 Definir CI multi-target (Windows/macOS/Linux-Proton/Deck)
+- [ ] T-091 Definir acta de decisiones de plataformas (resumen P0-P3)
+- [ ] T-092 Definir feed del módulo a M149/M142/M143 (checklist y prioridades)
+- [ ] T-093 Verificación con Steam real (M77 online + middleware) — cuando exista credenciales de Steamworks (dueño: M97/M118)

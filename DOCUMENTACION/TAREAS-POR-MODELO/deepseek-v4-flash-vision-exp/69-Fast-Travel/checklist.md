@@ -1,0 +1,154 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 69-Fast-Travel (69)
+
+# Checklist personal tareas — 69-Fast-Travel
+
+> Extraidas del 05-Checklist.md del módulo (144 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: desplazamiento rápido sin fatiga ni bypass
+- [ ] T-002 Registrar dependencias: M28, M29, M31
+- [ ] T-003 Catalogar los 13 puntos de la sección 68
+- [ ] T-004 RF1: viajes rápidos disponibles progresivamente
+- [ ] T-005 RF2: punto de viaje marcable
+- [ ] T-006 RF3: restricciones de acceso por estado
+- [ ] T-007 RF4: costo de viaje (recursos o tiempo)
+- [ ] T-008 RF5: teletransporte a deidades
+- [ ] T-009 RF6: cancelación por parte del jugador
+- [ ] T-010 RF7: guardado automático del último punto
+- [ ] T-011 RF8: interfaz clara y tranquila
+- [ ] T-012 RF9: pausa automática en single-player
+- [ ] T-013 RF10: integración con ciclo día/noche
+- [ ] T-014 RF10: accesibilidad (ataljo teclado, menú intuitivo)
+- [ ] T-015 P1: fast travel disponible con restricciones progresivas
+- [ ] T-016 P2: puntos de viaje desbloqueados al descubrir ubicaciones
+- [ ] T-017 P3: costo en recursos o tiempo por viaje
+- [ ] T-018 P4: transición visual suave (bruma/desvanecimiento)
+- [ ] T-019 P5: pantalla de carga minimalista con nombre destino
+- [ ] T-020 P6: tiempos de viaje instantáneo con tiempo simulado opcional
+- [ ] T-021 P7: cancelación a mitad de animación
+- [ ] T-022 P8: bloqueado durante combate/eventos críticos
+- [ ] T-023 P9: guardado del último punto por sesión
+- [ ] T-024 P10: evitación de bypass de eventos críticos
+- [ ] T-025 P11: evitación de ruptura de misiones activas
+- [ ] T-026 P12: prueba de navegación a todos los destinos
+- [ ] T-027 P13: delegable para implementación
+- [ ] T-028 SFX coherente con M41/M42/M43 (familia tonal compartida)
+- [ ] T-029 Confirmación de viaje: tono ascendente cálido
+- [ ] T-030 Error en viaje: tono descendente suave, no agresivo
+- [ ] T-031 Interfaz con family tones M45
+- [ ] T-032 Volumen configurable por bus (M91)
+- [ ] T-033 Lógica O(1) para lookup de destinos
+- [ ] T-034 Sin cálculos complejos por frame
+- [ ] T-035 Pool de estados (disponible/bloqueado/cooldown)
+- [ ] T-036 Integración con M29/M31 sin conflictos
+- [ ] T-037 Test de pool: estados máx sin memory leak
+- [ ] T-038 Test de rendimiento: < 16ms por operación de viaje
+- [ ] T-039 Test de integración: día/noche y calendario
+- [ ] T-040 Test de costo: recursos descontados correctamente
+- [ ] T-041 Test de restricciones: bloqueo durante estados prohibidos
+- [ ] T-042 Test de transición: animación sin jumps visuales
+- [ ] T-043 Pueblo: desbloqueado tras área inicial
+- [ ] T-044 Santuario: desbloqueado tras visitar a pie
+- [ ] T-045 Isla: desbloqueado tras explorar
+- [ ] T-046 Bosque: desbloqueado al descubrir 3+ puntos bioma
+- [ ] T-047 Montaña: desbloqueado al alcanzar cumbres
+- [ ] T-048 Desierto: desbloqueado al descubrir oasis
+- [ ] T-049 Cueva: desbloqueado al explorar primeras cuevas
+- [ ] T-050 Playa: desbloqueado al descubrir costa
+- [ ] T-051 Valle: desbloqueado en zonas bajas del mapa
+- [ ] T-052 Ciudadela: punto final/late-game
+- [ ] T-053 Lista completa ordenada alfabéticamente
+- [ ] T-054 Buscar por nombre en el menú
+- [ ] T-055 Acceso por atajo de teclado rápido
+- [ ] T-056 Prioridad por proximidad/costo
+- [ ] T-057 SFX -6 dB durante diálogos (M21) si se cancela viaje
+- [ ] T-058 Música -6 dB durante logros si se usa fast travel
+- [ ] T-059 Correr +3 dB sobre paso normal
+- [ ] T-060 SFX por debajo de diálogo en jerarquía
+- [ ] T-061 Error 0.4 s no punitivo
+- [ ] T-062 Ningún SFX estridente (cozy)
+- [ ] T-063 Volumen configurable por bus (M91)
+- [ ] T-064 Pausa con GameClock sin residuos (M29)
+- [ ] T-065 catálogo puntos de viaje.tres (nombres, posiciones, costos)
+- [ ] T-066 API: viajar_a(destino)
+- [ ] T-067 API: esta_disponible(destino)
+- [ ] T-068 API: agregar_punto_viaje(nombre, pos)
+- [ ] T-069 API: obtener_puntos_disponibles()
+- [ ] T-070 API: establecer_ultimo_punto(nombre)
+- [ ] T-071 API: obtener_ultimo_punto()
+- [ ] T-072 Sin hardcode de paths de destino
+- [ ] T-073 Configuración de costo por defecto
+- [ ] T-074 Cooldown real: 1 uso cada 2 horas
+- [ ] T-075 Test: menú accesible desde mapa y atajo M
+- [ ] T-076 Test: fast travel bloqueado durante combate
+- [ ] T-077 Test: fast travel bloqueado durante diálogos críticos
+- [ ] T-078 Test: verificación de costo de recursos
+- [ ] T-079 Test: cooldown real de 1 cada 2 horas
+- [ ] T-080 Test: animación suave sin jumps visuales
+- [ ] T-081 Test: respeto a ciclo día/noche
+- [ ] T-082 Test: restricción durante estados especiales
+- [ ] T-083 Test: guardado/recarga del último punto
+- [ ] T-084 Test: recorrido M114 sin ruptura de misiones
+- [ ] T-085 Módulo marcado delegable
+- [ ] T-086 3 alternativas descartadas documentadas
+- [ ] T-087 API estable definida
+- [ ] T-088 Implementación ? AGENTE DELEGADO
+- [ ] T-089 Assets ? specs con family tonal
+- [ ] T-090 01-Requerimientos creado y firmado
+- [ ] T-091 02-Analisis creado y firmado
+- [ ] T-092 03-Diseno creado y firmado
+- [ ] T-093 04-Codigo creado y firmado (Notas del Agente)
+- [ ] T-094 05-Checklist creado y firmado (este archivo)
+- [ ] T-095 Manejo de cancelacion mid-casting (ESC, cerrar menu)
+- [ ] T-096 Recuperacion si destino queda bloqueado por evento dinamico
+- [ ] T-097 Manejo de save corrupto punto_destino invalido
+- [ ] T-098 Validar cooldown al cargar partida guardada
+- [ ] T-099 No permitir destinos no descubiertos (anti-trampa)
+- [ ] T-100 Manejo de sobrecarga de slots descubiertos (>100)
+- [ ] T-101 Reset de cooldown al cargar partida con marca temporal
+- [ ] T-102 Transición de desvanecimiento con curva cozy
+- [ ] T-103 Efectos de partículas coherentes con M41
+- [ ] T-104 Flash sutil al aparecer en destino
+- [ ] T-105 Indicador de carga 0.5-1.5s mínimo
+- [ ] T-106 Sin huecos negros en transición
+- [ ] T-107 Compatible con modo foto pausado
+- [ ] T-108 HUD visible durante toda la transición
+- [ ] T-109 Sin parpadeos por baja luz
+- [ ] T-110 Ilumincación de destino respeta hora del mundo
+- [ ] T-111 Transición no afecta gameplay (tablas de delta)
+- [ ] T-112 Subtitulos de feedback de acción
+- [ ] T-113 Tamaño de texto escalable para menu (M62)
+- [ ] T-114 Lectura por screen reader de menu (verbal descriptions)
+- [ ] T-115 Confirmación háptica opcional
+- [ ] T-116 Contraste alto para menu de selección
+- [ ] T-117 Iconos de apoyo visual al nombre del destino
+- [ ] T-118 Alt text para thumbnails de destino
+- [ ] T-119 Modo cronológico para historiales
+- [ ] T-120 Filtros por tipo de lugar (bioma, servicios)
+- [ ] T-121 Sin dependencia solo de color para estado
+- [ ] T-122 M28: integración con waypoints descubiertos
+- [ ] T-123 M63: consulta de logros asociados a first-travel
+- [ ] T-124 M29-M31: restricción temporal (noche, tormenta)
+- [ ] T-125 M104: evento analytics fast_travel_used
+- [ ] T-126 M110: debug menu con listado de anchors
+- [ ] T-127 M122: captura de crash si portal falla
+- [ ] T-128 M124: balance económico según distancia
+- [ ] T-129 M32: anulación del portal en clima extremo
+- [ ] T-130 M68: respetar desactivación de hápticos
+- [ ] T-131 M91: respetar volumen de feedback de viaje
+- [ ] T-132 Test de carga: 100 anchors en mapa
+- [ ] T-133 Test de coherencia: 1000 teleports consecutivos
+- [ ] T-134 Test de día/noche: comportamiento en diferentes horas
+- [ ] T-135 Test de desconexión: recuperar estado sin perder progreso
+- [ ] T-136 Test de stress concurrentes: 50 anchors ACTIVOS
+- [ ] T-137 Test de recuperación: archivo corrupto ? resync
+- [ ] T-138 Test de batería: consumo por viaje a larga distancia
+- [ ] T-139 Test multidioma: búsqueda en distintos alfabetos
+- [ ] T-140 Test de aceso: atajos disponibles sin teclado
+- [ ] T-141 Test de localización: posicionamiento visual ajustado
+- [ ] T-142 Test de fallback: 3 fallos seguidos ? modo seguro
+- [ ] T-143 Test de perfilado: sin allocs en frame
+- [ ] T-144 UI del viaje (mapa M54 + atajo M57) y ejecución del viaje (M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)

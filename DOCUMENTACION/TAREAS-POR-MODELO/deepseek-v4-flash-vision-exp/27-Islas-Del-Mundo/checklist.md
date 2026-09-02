@@ -1,0 +1,182 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 27-Islas-Del-Mundo (27)
+
+# Checklist personal tareas — 27-Islas-Del-Mundo
+
+> Extraidas del 05-Checklist.md del módulo (172 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el problema: archipiélago con isla principal Aurora + 12 satélites con identidad propia
+- [ ] T-002 Catalogar los 24 puntos de la sección 26 del plan maestro (isla principal a relevancia narrativa)
+- [ ] T-003 Registrar dependencias: M28, M29; relaciones M08, M09, M10, M51, M61, M63, M54, M59
+- [ ] T-004 Resolver cada punto de la sección 26 (diseño, distancia, navegación, clima, flora, fauna, recursos, NPC, arquitectura, música, puzzles, recompensa, narrativa)
+- [ ] T-005 Declarar que el módulo es delegable para implementación tras M08/M10 base y presupuestos M61
+- [ ] T-006 Mantener el alcance separado de M28 (barco/viaje), M51 (agua), M63 (streaming general)
+- [ ] T-007 Definir criterios de aceptación verificables (catálogo 13 islas, anclas válidas, viaje ida y vuelta, contenido exclusivo)
+- [ ] T-008 Asegurar coherencia cozy: sin contenido crítico exclusivo e inaccesible, regreso siempre gratis
+- [ ] T-009 Verificar que el diseño no contradice los principios innegociables (M152 cozy, sin FOMO)
+- [ ] T-010 Documentar el módulo en los 5 archivos obligatorios (plan-inicial y plan-actual)
+- [ ] T-011 Create class IslandDefinition como Resource con @export de metadatos
+- [ ] T-012 Campo id (StringName) único por isla
+- [ ] T-013 Campo nombre_display localizable (M87)
+- [ ] T-014 Campo descripcion/lore para el diario (M55)
+- [ ] T-015 Campo bioma_base (id M09) y biomas_mezcla (Array con proporciones)
+- [ ] T-016 Campos de losa: radio, altura_min, altura_max, playa_ancho
+- [ ] T-017 Campo ancla (Vector3i centro) poblado por M10
+- [ ] T-018 Campo semilla_isla derivada de la semilla de partida (PRNG M10)
+- [ ] T-019 Campo clima_tendencia (id M32) por isla
+- [ ] T-020 Campo musica_theme (id M41) por isla
+- [ ] T-021 Campos de contenido exclusivo: recursos, flora, fauna, puzzles, npc_residentes
+- [ ] T-022 Campo punto_llegada y punto_partida locales (muelle/embarque)
+- [ ] T-023 Campo anillo (enum NUCLEO/CERCANO/MEDIO/LEJANO) que controla distancia y requisitos
+- [ ] T-024 Campo es_secreta (oculta en mapa M54 hasta descubrir)
+- [ ] T-025 Campo es_flotante para islas del cielo (sin océano debajo)
+- [ ] T-026 Campo desbloqueo (Callable) evaluado por M22/M28
+- [ ] T-027 Método bounds_locales() -> Rect2i para streaming M63
+- [ ] T-028 Método centro_mundo() -> Vector3 para POI y cámara
+- [ ] T-029 Método validar() que devuelve errores de definición (radios, anclas, ids)
+- [ ] T-030 Archivo .tres por satélite: 12 definiciones editables (coral, verde, cenizas, cielo, nieve, desierto, volcanica, submarina, flotante, misteriosa, pequena, secreta)
+- [ ] T-031 Create autoload IslandRegistry como servicio tipo Service Locator (M07)
+- [ ] T-032 init(anclas: Dictionary) que construye el catálogo desde M10
+- [ ] T-033 get_isla(id) -> IslandDefinition con manejo de id inexistente (null + log WARN)
+- [ ] T-034 todas_las_islas() -> Array ordenada determinista por id (nunca por orden de carga)
+- [ ] T-035 isla_principal() -> Aurora (id constante `aurora`)
+- [ ] T-036 posicion_ancla(id) -> Vector3i con cache de M10
+- [ ] T-037 vecinas(id, corte_anillo) -> Array de islas dentro de radio de streaming
+- [ ] T-038 coordenadas_por_isla(id) -> Rect2i (bounds en voxels para M63)
+- [ ] T-039 validar_anclas() -> Array[String] de errores
+- [ ] T-040 Señal archipielago_cargado emitida al terminar init
+- [ ] T-041 Registro sin duplicados: ids únicos garantizados al cargar .tres
+- [ ] T-042 Carga de .tres diferida (no bloqueante) al iniciar partida
+- [ ] T-043 Estado "descubierta/visitada" consultable (delega a M59 GameState)
+- [ ] T-044 Orden de catálogo estable entre ejecuciones (misma semilla)
+- [ ] T-045 Fallback: si falta un .tres, se loguea ERROR y Aurora siempre carga
+- [ ] T-046 Solicitar a M10 la capa de anclas que posiciona cada isla
+- [ ] T-047 Las anclas se derivan del PRNG de contexto 2 (mismo mundo, misma semilla)
+- [ ] T-048 Validar distancia mínima entre centros: radio_a + radio_b + MARGEN_MAR (64 m)
+- [ ] T-049 Validar que ninguna isla invade el templo subterráneo (M26) ni ruinas (M25)
+- [ ] T-050 Validar que Aurora está en el centro del mundo/archipiélago
+- [ ] T-051 Re-roll de ancla con la misma semilla ante solapamiento (máx 8 intentos)
+- [ ] T-052 Log WARN con detalle de cada ancla re-rollada
+- [ ] T-053 Log ERROR si tras 8 intentos no hay ancla válida (fallback: echar isla al anillo siguiente)
+- [ ] T-054 Regeneración 80/0 de M10 produce anclas consistentes (test de regen)
+- [ ] T-055 Estructuras ancladas de M10 respetan las islas (no generan dentro del mar)
+- [ ] T-056 Semilla dev para tests deterministas de anclas
+- [ ] T-057 Los NPC (M19) y POI de M09 se generan sobre el terreno de la isla ya anclado
+- [ ] T-058 Create servicio IslandLoading separado del generador (no tocar M10)
+- [ ] T-059 cargar_isla(id, preferencia) -> bool con estados de progreso
+- [ ] T-060 Enum IslandPref { PRELOAD, DESCARGA }
+- [ ] T-061 Pesos de carga: losa 60%, props 25%, audio 10%, navmesh 5%
+- [ ] T-062 Emitir isla_cargando(id, progreso, etapa) en cada etapa
+- [ ] T-063 Emitir isla_cargada(id) al 100%
+- [ ] T-064 Emitir isla_descargada(id) al liberar
+- [ ] T-065 descargar_isla(id) nunca descarga Aurora (isla principal)
+- [ ] T-066 descargar_isla(id) nunca descarga la isla actual del jugador
+- [ ] T-067 cacheado(id) -> bool para evitar recargas
+- [ ] T-068 isla_actual() -> StringName rastreada por el servicio
+- [ ] T-069 punto_de_llegada(id) -> Vector3 world-space del muelle
+- [ ] T-070 punto_de_partida(id) -> Vector3 world-space del embarque
+- [ ] T-071 Precarga de isla vecina al cruzar el borde de chunks (radio + RADIO_PRECARGA)
+- [ ] T-072 Descarga LRU bajo presión de memoria (M62) respetando candidatas
+- [ ] T-073 Carga asíncrona sin congelar el frame (threads de Voxel Tools + M63)
+- [ ] T-074 Progreso real por pesos reportado a la pantalla de viaje (M28)
+- [ ] T-075 Si la carga falla (sin disco/red), log ERROR y mensaje cozy al jugador
+- [ ] T-076 El jugador nunca queda atrapado: fallback = seguir en la isla actual
+- [ ] T-077 Create servicio IslandProps con registrar_spawner(tipo, callable)
+- [ ] T-078 materializar(isla, zona) que invoca spawners registrados
+- [ ] T-079 Spawn de flora endémica (contrato M50) solo en bioma de la isla
+- [ ] T-080 Spawn de fauna endémica (contrato M36) dentro de los bounds de la isla
+- [ ] T-081 Spawn de recursos exclusivos (contrato M15) en zonas deterministas
+- [ ] T-082 Spawn de POI (muelle, plaza, faro, templo, mirador) consumidos por M64
+- [ ] T-083 limpiar(id) libera props al descargar la isla
+- [ ] T-084 Los props no se generan en el mar (zona acuática M51)
+- [ ] T-085 Determinismo: misma semilla genera los mismos props (PRNG por isla)
+- [ ] T-086 Los props de islas lejanas no se spawnan hasta que la isla se carga
+- [ ] T-087 Contrato: M28 consulta posicion_ancla(destino) para trazar la ruta
+- [ ] T-088 Embarque: jugador en punto_partida → M28 inicia travesía
+- [ ] T-089 Pantalla de viaje muestra progreso real de IslandLoading (M63)
+- [ ] T-090 Desembarco posiciona al jugador en punto_de_llegada(destino)
+- [ ] T-091 Al desembarcar se marca la isla como visitada (M59/M54)
+- [ ] T-092 Regreso a Aurora gratis desde cualquier muelle (anti-frustración)
+- [ ] T-093 Viajes estacionales/de expedición consultan calendario M29
+- [ ] T-094 Viajes nocturnos y estacionales respetan clima (M32) y hora (M31)
+- [ ] T-095 Boleto/requisitos (M28) no bloquean el regreso a Aurora
+- [ ] T-096 NPC viajeros (M28) respetan la isla cargada (spawn solo si su isla activa)
+- [ ] T-097 El barco no atraca en islas sin desbloqueo (anillo LEJANO)
+- [ ] T-098 Si la isla destino ya está cacheada, la travesía se salta la carga (inmediato)
+- [ ] T-099 Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel
+- [ ] T-100 El agua entre islas es navegable por barco (no bloqueo invisible)
+- [ ] T-101 Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina
+- [ ] T-102 Espuma de costas (M51) presente en playas de cada isla
+- [ ] T-103 Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago
+- [ ] T-104 El agua no se congela ni inunda dentro de las islas salvo eventos M32
+- [ ] T-105 La isla Flotante y las del Cielo no tienen océano debajo (es_flotante)
+- [ ] T-106 Los sonidos del mar (M42) cambian según distancia a la isla más cercana
+- [ ] T-107 El agua interactúa con puzzles de islas (M23/M24) solo isla cargada
+- [ ] T-108 Rendimiento del océano: shader de agua (M51) presupuestado por M61
+- [ ] T-109 Cada isla declara bioma_base y mezcla contra el catálogo de 13 biomas de M09
+- [ ] T-110 Transiciones entre biomas dentro de una isla suaves (falloff M09)
+- [ ] T-111 Playas/acantilados por recetas de formaciones de M09
+- [ ] T-112 Clima por isla consultado por M32 (lluvia en Verde, nieve en Nieve)
+- [ ] T-113 La música cambia al desembarcar (M41 theme de la isla)
+- [ ] T-114 La fauna (M36) y vegetación (M50) respetan el bioma al spawnar
+- [ ] T-115 Guardar islas_descubiertas (PackedStringArray) en GameState M59
+- [ ] T-116 Guardar islas_visitadas (PackedStringArray) en GameState M59
+- [ ] T-117 Al cargar partida, el registro restaura descubrimiento/visita
+- [ ] T-118 El mapa (M54) marca islas descubiertas y visitadas
+- [ ] T-119 Islas secretas ocultas en el mapa hasta descubrirlas
+- [ ] T-120 Reintentar regen 80/0 no pierde progreso de islas (persistencia aparte)
+- [ ] T-121 Carga de isla vecina mientras el jugador navega el borde (sin congelar)
+- [ ] T-122 Viajar a una isla mientras otra se está descargando (cola de operaciones)
+- [ ] T-123 Ancla faltante en M10 para una isla definida → ERROR + fallback
+- [ ] T-124 Anclas inconsistentes entre ejecuciones (misma semilla debe dar lo mismo)
+- [ ] T-125 Jugador en el mar sin barco (M28 no iniciado) → salvavidas/limite de zona
+- [ ] T-126 Isla secreta descubierta por pista pero su ancla aún no generada → espera coherente
+- [ ] T-127 Dos islas con el mismo id en .tres → error de registro y primera gana
+- [ ] T-128 Radio negativo o altura invertida en definición → validar() captura
+- [ ] T-129 Desembarco sobre agua si el muelle se generó mal → punto seguro por software
+- [ ] T-130 Viaje cancelado a mitad de carga → cancelación limpia de task
+- [ ] T-131 Guardado durante una carga → el guardado espera a terminar la operación
+- [ ] T-132 M54 consulta isla secreta no descubierta → inaccesible (sin leak de datos)
+- [ ] T-133 El jugador suelta el barco en el océano abierto → respawn cozy en isla más cercana
+- [ ] T-134 Streaming falla por memoria baja → descarga forzada sin perder estado de partida
+- [ ] T-135 Máximo 2 islas completas en memoria a la vez
+- [ ] T-136 Aurora siempre cargada pero con streaming fino de chunks lejanos
+- [ ] T-137 Metadatos (definiciones) livianos: sin cargar voxel de islas lejanas
+- [ ] T-138 LRU con tope de memoria configurado por M62
+- [ ] T-139 Sin allocs grandes en el hot path de búsqueda de vecinas
+- [ ] T-140 Búsquedas de vecinas con índice espacial (grid por anillo)
+- [ ] T-141 Carga de props por etapas (sin picos)
+- [ ] T-142 Precalentamiento en el menú (M63): cachea Aurora al boot
+- [ ] T-143 Telemetría de carga (M105): tiempos por isla, memoria, errores
+- [ ] T-144 Profiling: la carga de la isla más grande cabe en frame budget M61
+- [ ] T-145 La precarga de vecinas no inicia si la GPU está al límite (M61)
+- [ ] T-146 Los .tres usan PackedStringArray (serialización compacta M60)
+- [ ] T-147 01-Requerimientos.md completo (problema, RF, NFR, criterios de aceptación, alcance)
+- [ ] T-148 02-Analisis.md: alternativas A/B/C/D evaluadas y justificadas
+- [ ] T-149 03-Diseno.md: arquitectura, 4 flujos en texto, contratos API, integraciones
+- [ ] T-150 04-Codigo.md: rutas res://, firmas clave, pesos de carga, subs, logs
+- [ ] T-151 05-Checklist.md con 100+ ítems verificables
+- [ ] T-152 Logs en Logs/ tras implementación (formato estándar, sección 6 de AGENTS.md)
+- [ ] T-153 Mensaje al descubrir una isla (toast/M54) sin romper la inmersión
+- [ ] T-154 El mapa muestra nombre de la isla al pasar el cursor (M54)
+- [ ] T-155 Transición de embarque suave (M28) con música de travesía
+- [ ] T-156 Ningún contenido exclusivo se pierde: accesible luego por otras vías (M73/feria)
+- [ ] T-157 El regreso siempre disponible: sin estados bloqueados
+- [ ] T-158 Indicador de "isla nueva por descubrir" sutil en el mapa (sin FOMO)
+- [ ] T-159 Los NPC residentes comentan sus islas (M21) al volver (coherente con M64)
+- [ ] T-160 Test manual de recorrido completo: Aurora → Coral → Aurora (idioma y UX)
+- [ ] T-161 Test unitario: validar_anclas detecta solapamiento coral/cenizas
+- [ ] T-162 Test unitario: catálogo ordenado y sin duplicados
+- [ ] T-163 Test unitario: bounds y centro de isla correctos
+- [ ] T-164 Test unitario: registry tolera .tres faltante (error + Aurora)
+- [ ] T-165 Test unitario: semilla_id determinista por isla
+- [ ] T-166 Test integración: viaje Aurora→Nieve y regreso sin pérdida de estado
+- [ ] T-167 Test integración: carga de vecina al navegar el borde sin congelar
+- [ ] T-168 Test integración: regen 80/0 conserva anclas válidas
+- [ ] T-169 Test integración: guardar/cargar partida restaura descubrimiento
+- [ ] T-170 Test de estrés: 2 islas cargadas + 1 precargando bajo presupuesto M61
+- [ ] T-171 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md
+- [ ] T-172 Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)

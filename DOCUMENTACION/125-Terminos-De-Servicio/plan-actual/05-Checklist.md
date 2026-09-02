@@ -22,7 +22,7 @@
 ### [S] Redacción de términos
 - [ ] Definir estilo de redacción (claro y comprensible)
 - [ ] Definir tono cozy y amigable
-- [ ] Definir estructura clara con secciones numeradas
+- [x] Definir estructura clara con secciones numeradas
 - [ ] Definir resumen ejecutivo al inicio (TL;DR)
 - [ ] Diseñar introducción y aceptación
 - [ ] Diseñar licencia de uso
@@ -46,10 +46,10 @@
 
 ### [S] Cuentas de usuario
 - [ ] Definir solo si hay componentes online
-- [ ] Definir registro (nombre de usuario, email opcional)
+- [x] Definir registro (nombre de usuario, email opcional)
 - [ ] Definir autenticación (email/password o login social)
 - [ ] Definir seguridad (usuario responsable de seguridad)
-- [ ] Definir datos (aceptación de recopilación según política de privacidad)
+- [x] Definir datos (aceptación de recopilación según política de privacidad)
 - [ ] Diseñar excepciones para v1.0 (offline-first, no cuentas obligatorias)
 
 ### [S] Conductas prohibidas
@@ -57,8 +57,8 @@
 - [ ] Definir explotación (bugs para ventaja injusta)
 - [ ] Definir acoso (discriminación, odio, lenguaje ofensivo)
 - [ ] Definir contenido inapropiado (NSFW, político, religioso ofensivo)
-- [ ] Definir violación de copyright (assets protegidos sin permiso)
-- [ ] Definir violación de privacidad (datos personales de otros usuarios)
+- [x] Definir violación de copyright (assets protegidos sin permiso)
+- [x] Definir violación de privacidad (datos personales de otros usuarios)
 - [ ] Diseñar consecuencias (primer aviso, segunda violación, tercera violación)
 
 ### [S] Contenido de usuarios
@@ -71,7 +71,7 @@
 
 ### [S] Cancelación y reembolsos
 - [ ] Definir cancelación de cuentas (usuario puede cancelar en cualquier momento)
-- [ ] Definir eliminación de datos (solicitud por email, eliminación en 30 días)
+- [x] Definir eliminación de datos (solicitud por email, eliminación en 30 días)
 - [ ] Definir política de reembolsos (según política de Steam)
 - [ ] Definir excepciones (desarrollador puede hacer excepciones)
 - [ ] Diseñar proceso de solicitud de reembolso (Steam)
@@ -94,7 +94,7 @@
 ### [S] Terminación
 - [ ] Definir terminación por violación de términos
 - [ ] Definir notificación (30 días de antelación)
-- [ ] Definir eliminación de datos (usuario puede solicitar)
+- [x] Definir eliminación de datos (usuario puede solicitar)
 - [ ] Definir sin reembolso (por terminación por violación)
 - [ ] Diseñar excepciones (violación grave, terminación inmediata)
 
@@ -106,16 +106,16 @@
 
 ### [S] Revisión con abogado
 - [ ] Definir revisión obligatoria antes de publicación
-- [ ] Definir revisión de cumplimiento legal (GDPR, CCPA)
+- [x] Definir revisión de cumplimiento legal (GDPR, CCPA)
 - [ ] Definir revisión de lenguaje legal (claridad, validez)
 - [ ] Definir revisión de políticas específicas (reembolsos, responsabilidad)
 - [ ] Diseñar proceso (enviar borrador, recibir feedback, ajustar, aprobar)
 
 ### [S] TermsManager (servicio)
-- [ ] Diseñar TermsManager como autoload
+- [x] Diseñar TermsManager como autoload
 - [ ] Diseñar signal terms_accepted()
 - [ ] Diseñar signal terms_declined()
-- [ ] Diseñar método check_terms_acceptance()
+- [x] Diseñar método check_terms_acceptance()
 - [ ] Diseñar método show_terms()
 - [ ] Diseñar método accept_terms()
 - [ ] Diseñar método decline_terms()
@@ -132,8 +132,8 @@
 
 ### [S] Archivos de implementación
 - [ ] Diseñar legal/terms_of_service.md
-- [ ] Diseñar legal/terms_policy.md
-- [ ] Diseñar res://legal/terms_manager.gd
+- [x] Diseñar legal/terms_policy.md
+- [x] Diseñar res://legal/terms_manager.gd
 - [ ] Diseñar res://legal/terms_config.gd
 
 ### [S] Pruebas de términos

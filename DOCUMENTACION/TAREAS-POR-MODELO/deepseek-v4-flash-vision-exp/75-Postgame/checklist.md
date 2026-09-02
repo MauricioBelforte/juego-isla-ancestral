@@ -1,0 +1,140 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 75-Postgame (75)
+
+# Checklist personal tareas — 75-Postgame
+
+> Extraidas del 05-Checklist.md del módulo (130 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir el epílogo de la historia (M22)
+- [ ] T-002 Mostrar "¿Qué sigue?" tras los créditos (M92)
+- [ ] T-003 Mantener el tono cozy en el cierre (M21/M44)
+- [ ] T-004 No mostrar pantalla de "Fin" fría
+- [ ] T-005 Guardar el estado postgame en el save (M59)
+- [ ] T-006 Catalogar la isla del Este (FASE 1, M27)
+- [ ] T-007 Catalogar la isla flotante (FASE 2, M10)
+- [ ] T-008 Marcar requisito de desbloqueo de cada isla
+- [ ] T-009 Asignar módulo dueño a cada expansión
+- [ ] T-010 Verificar streaming/LOD de las nuevas islas (M61)
+- [ ] T-011 Diseñar 1-2 vecinos nuevos postgame (M19)
+- [ ] T-012 Rutinas propias de los vecinos nuevos
+- [ ] T-013 Mudanza por invitación (M71)
+- [ ] T-014 Diálogos de vecinos postgame (M21)
+- [ ] T-015 Ningún vecino depende de fechas únicas
+- [ ] T-016 Catálogo de muebles postgame (M18)
+- [ ] T-017 Muebles obtenibles sin grindeo (actividades naturales)
+- [ ] T-018 Muebles únicos de eventos postgame
+- [ ] T-019 Recetas de muebles integradas (M16)
+- [ ] T-020 Validación de muebles con ids unívocos
+- [ ] T-021 Especies estacionales postgame (M50/M33)
+- [ ] T-022 Plantas raras postgame (solo después del final)
+- [ ] T-023 Hibridación disponible en postgame (M50)
+- [ ] T-024 Plantas sin promesa de fase 2 sin arquitectura
+- [ ] T-025 Validar temporadas con el calendario (M29)
+- [ ] T-026 Especies raras solo postgame (M36)
+- [ ] T-027 Animales libres con ritmos propios (M35)
+- [ ] T-028 Avistamientos marcados en el diario (M55)
+- [ ] T-029 Sin grindeo para atraer especies raras
+- [ ] T-030 Validar aparición por clima (M28)
+- [ ] T-031 Ruina final restaurable postgame (M25)
+- [ ] T-032 Progreso de restauración visible en museo (M37)
+- [ ] T-033 Recompensa única al restaurarla (M38)
+- [ ] T-034 Logro al finalizar la restauración (M72)
+- [ ] T-035 La ruina aporta al 100% de la hoja de ruta
+- [ ] T-036 Puzzle del Sello oculto (FASE 2, M24)
+- [ ] T-037 Puzzle opcional, nunca bloquea la historia (M22)
+- [ ] T-038 Recompensa del puzzle sin spoilers
+- [ ] T-039 Puzzle rejugable sin repetir (M24)
+- [ ] T-040 Validar solución única del puzzle
+- [ ] T-041 Categorías postgame en el catálogo (M73)
+- [ ] T-042 Documentos finales de la historia (M73)
+- [ ] T-043 Colecciones postgame con totales reales
+- [ ] T-044 Compleción de colección = donación al museo (M37)
+- [ ] T-045 Sin duplicación de registro (idempotencia M73)
+- [ ] T-046 Herramienta de jardín acuático (FASE 2, M16)
+- [ ] T-047 Mejora de herramienta postgame (M17)
+- [ ] T-048 Herramientas sin combustible/durabilidad (cozy)
+- [ ] T-049 Herramienta con animación propia (M13)
+- [ ] T-050 Validar receta de la herramienta postgame
+- [ ] T-051 Mejora del ático postgame (M17)
+- [ ] T-052 Casa con expansión visible al vecindario (M19)
+- [ ] T-053 Mejora con material raro postgame
+- [ ] T-054 Sin grindeo para conseguir material raro
+- [ ] T-055 Validar mejoras con M60 (migración)
+- [ ] T-056 Cadenas secundarias postgame (M23)
+- [ ] T-057 Historias que cierran arcos de vecinos (M19/M21)
+- [ ] T-058 Historias sin exigencia multijugador
+- [ ] T-059 Diálogos postgame con doblaje si aplica (M93)
+- [ ] T-060 Conflictos resueltos sin romper eventos (M74/M29)
+- [ ] T-061 Festivales rotativos postgame (M74)
+- [ ] T-062 Programación en calendario (M29)
+- [ ] T-063 Ciclo anual cozy sin fechas únicas
+- [ ] T-064 Recompensas únicas de festival (M38/M20)
+- [ ] T-065 Logros de eventos postgame (M72)
+- [ ] T-066 Secretos desbloqueables solo postgame (M71)
+- [ ] T-067 Secretos anti-spoiler en el diario (M55)
+- [ ] T-068 Secretos con pistas de exploración natural
+- [ ] T-069 Sin secuencias bloqueantes en secretos
+- [ ] T-070 Validar secretos con ids únicos
+- [ ] T-071 Arrecife profundo (FASE 2, M51)
+- [ ] T-072 Acceso con submarino (M67)
+- [ ] T-073 Streaming del arrecife (M61/M10)
+- [ ] T-074 Fauna/submarina propia (M36/M51)
+- [ ] T-075 Sin buceo frustrante (oxígeno generoso, cozy)
+- [ ] T-076 Isla flotante (FASE 2, M10)
+- [ ] T-077 Acceso con dirigible (M67)
+- [ ] T-078 Gravedad carismática sin romper mecánicas
+- [ ] T-079 LOD del terreno flotante (M61)
+- [ ] T-080 Sin caídas frustrantes (muerte suave, retorno)
+- [ ] T-081 Jardín acuático (FASE 2, M16)
+- [ ] T-082 Criadero de peces (FASE 2, M34)
+- [ ] T-083 Sistemas marcados `hidden` hasta lanzamiento
+- [ ] T-084 Ningún sistema opcional bloquea el 100% de FASE 1
+- [ ] T-085 Validar que la FASE 2 no prometa UI al jugador
+- [ ] T-086 Hoja de ruta "Isla al 100%" en el diario (M55)
+- [ ] T-087 % por categoría derivado (no almacenado)
+- [ ] T-088 Anti-spoiler: solo se ve lo descubierto (M55)
+- [ ] T-089 Museo (M37) aporta su % al total
+- [ ] T-090 Sin grindeo en el 100% (actividades naturales)
+- [ ] T-091 Categoría "Epílogo" en M72
+- [ ] T-092 Logro: colección completa
+- [ ] T-093 Logro: ruina restaurada
+- [ ] T-094 Logro: primer festival postgame
+- [ ] T-095 Logro: 100% de la hoja de ruta
+- [ ] T-096 Mundo 100% abierto tras el final
+- [ ] T-097 Sin bloqueos de progresión postgame (M71)
+- [ ] T-098 Transporte accesible a todas las zonas (M68)
+- [ ] T-099 Exploración recompensada (M73/M71)
+- [ ] T-100 Cero contenido exclusivo de multijugador
+- [ ] T-101 `postgame_unlocked` en save global (M59)
+- [ ] T-102 Hoja de ruta sin duplicación de estado
+- [ ] T-103 Migración v1.4 del flag (M60)
+- [ ] T-104 Catálogo como Resource embebido (no serializado)
+- [ ] T-105 Guardado automático al desbloquear (M59)
+- [ ] T-106 Sin grindeo en actividades del 100%
+- [ ] T-107 Sin fechas únicas missable
+- [ ] T-108 Sin logros imposibles (validados)
+- [ ] T-109 Epílogo cálido, no menú frío
+- [ ] T-110 La isla sigue viva tras los créditos
+- [ ] T-111 "¿Qué sigue?" post-créditos (M92/M44)
+- [ ] T-112 Pestaña "Isla al 100%" en el diario (M55)
+- [ ] T-113 Notificación de meta cumplida (M44)
+- [ ] T-114 Confeti sutil en logros finales (M52)
+- [ ] T-115 UI sin spoilers de fase 2
+- [ ] T-116 Desbloquear postgame con save sin final (no aplica)
+- [ ] T-117 Hoja de ruta con sistemas vacíos (0/0)
+- [ ] T-118 Evento postgame durante viaje (M68)
+- [ ] T-119 Expansión con módulo ausente en CHECKLIST
+- [ ] T-120 Probar con profiler: hoja de ruta bajo demanda (M61/M116)
+- [ ] T-121 Integrar con M22 (epílogo)
+- [ ] T-122 Integrar con M72 (categoría Epílogo)
+- [ ] T-123 Integrar con M74/M29 (eventos)
+- [ ] T-124 Integrar con M73/M37/M55 (100%)
+- [ ] T-125 Integrar con M92 (tutorial "¿qué sigue?")
+- [ ] T-126 Agregar notas del agente al 04-Codigo.md (honestidad)
+- [ ] T-127 Firmar los documentos del módulo (modelo y plataforma)
+- [ ] T-128 Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log
+- [ ] T-129 Verificar con verificar_checklist.py (sin alertas nuevas)
+- [ ] T-130 Confirmar 130 ítems exactos y plan-inicial == plan-actual

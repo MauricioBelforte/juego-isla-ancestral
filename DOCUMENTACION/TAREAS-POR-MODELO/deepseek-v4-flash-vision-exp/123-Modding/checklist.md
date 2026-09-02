@@ -1,0 +1,102 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 123-Modding (123)
+
+# Checklist personal tareas — 123-Modding
+
+> Extraidas del 05-Checklist.md del módulo (92 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir criterio: pedidos de la comunidad ≥ 50
+- [ ] T-002 Definir criterio: presupuesto ≤ 10%
+- [ ] T-003 Definir criterio: diseño aprobado 100%
+- [ ] T-004 Definir criterio: cero re-arquitectura
+- [ ] T-005 Definir decisión de "no modding en V1" documentada
+- [ ] T-006 Definir dominios modables: objetos/items
+- [ ] T-007 Definir dominios modables: recetas
+- [ ] T-008 Definir dominios modables: biomas/vegetación
+- [ ] T-009 Definir dominios modables: misiones secundarias
+- [ ] T-010 Definir dominios modables: NPC nuevos
+- [ ] T-011 Definir dominios modables: tiendas/economía
+- [ ] T-012 Definir dominios modables: clima/estaciones
+- [ ] T-013 Definir dominios modables: texturas/paletas
+- [ ] T-014 Definir NO modables: mundo core, sellos, IA, física
+- [ ] T-015 Definir campos del manifiesto (id, versión, minBuild, author, override)
+- [ ] T-016 Definir esquema data idéntico al de M108
+- [ ] T-017 Definir carpeta assets/ con referencias por id
+- [ ] T-018 Definir readme obligatorio en el paquete
+- [ ] T-019 Definir límite 100 MB por mod
+- [ ] T-020 Definir límite 100 mods simultáneos
+- [ ] T-021 Definir límite 10 MB de assets por dominio
+- [ ] T-022 Definir validación de datos al cargar (M109 validators)
+- [ ] T-023 Definir rechazo de paquete corrupto con error claro
+- [ ] T-024 Definir no acceso a la red por parte de mods
+- [ ] T-025 Definir aislamiento de paths (sin path traversal)
+- [ ] T-026 Definir log de mods cargados (M103)
+- [ ] T-027 Definir ModLoader al boot (M63)
+- [ ] T-028 Definir orden de carga: base < ui < contenido < override
+- [ ] T-029 Definir validación previa al montaje por mod
+- [ ] T-030 Definir mod inválido omitido con reporte
+- [ ] T-031 Definir recarga en caliente solo para contenido
+- [ ] T-032 Definir tiempo de carga objetivo < 5 s con 100 mods
+- [ ] T-033 Definir detección de ids duplicados sin override
+- [ ] T-034 Definir comportamiento: menor prioridad se omite + warning
+- [ ] T-035 Definir override explícito en manifest gana
+- [ ] T-036 Definir reporte de conflictos en pantalla Mods (M89)
+- [ ] T-037 Definir códigos de error por caso
+- [ ] T-038 Definir 0 conflictos no detectados en pruebas
+- [ ] T-039 Definir semver de mods contra build (M117)
+- [ ] T-040 Definir mod con minBuild mayor → bloqueado
+- [ ] T-041 Definir mod con versión baja → warning
+- [ ] T-042 Definir incompatibilidad por funciones inexistentes → advertencia en gate
+- [ ] T-043 Definir regla de compatibilidad con updates (M118)
+- [ ] T-044 Definir exportador "Exportar a Mod" en editores de M109
+- [ ] T-045 Definir CLI modchecker (validate) en CI
+- [ ] T-046 Definir reutilización de DataValidator con reglas de mod
+- [ ] T-047 Definir vista de previsualización del paquete
+- [ ] T-048 Definir documentación de uso de las herramientas
+- [ ] T-049 Definir guía "Crear tu primer mod" (web M99)
+- [ ] T-050 Definir 1 mod de ejemplo funcional (cultivo + receta)
+- [ ] T-051 Definir FAQ de modding (M100)
+- [ ] T-052 Definir documentación de límites y políticas
+- [ ] T-053 Definir solo Steam Workshop para distribución oficial
+- [ ] T-054 Definir actualización de mods por Workshop
+- [ ] T-055 Definir integración con M97 (Steamworks)
+- [ ] T-056 Definir moderación de mods (reportes → M100)
+- [ ] T-057 Definir límite de tamaños del Workshop (100 MB)
+- [ ] T-058 Definir soporte Workshop vía Steamworks API
+- [ ] T-059 Definir appid y región del Workshop
+- [ ] T-060 Definir telemetría de subscripciones (M104) sin datos personales
+- [ ] T-061 Definir lista negra de mods retirados
+- [ ] T-062 Definir notificación de actualización de mods
+- [ ] T-063 Definir dominios modables (whitelist)
+- [ ] T-064 Definir tamaño por mod (100 MB) y por assets (10 MB)
+- [ ] T-065 Definir máximo de mods simultáneos (100)
+- [ ] T-066 Definir límite de override por mod
+- [ ] T-067 Definir límite de entidades por mod (npc/items)
+- [ ] T-068 Definir marca `modsActive[]` en save v3.x (M59)
+- [ ] T-069 Definir carga de save con mods sin loader → advertencia
+- [ ] T-070 Definir opciones: continuar / activar mods
+- [ ] T-071 Definir guardado de save con mods: marca y versión
+- [ ] T-072 Definir backup del save antes de cargar mods nuevos (M107)
+- [ ] T-073 Definir icono visual de "mundo con mods" en slots (M89)
+- [ ] T-074 Definir logros desactivados en sesiones con mods (M72)
+- [ ] T-075 Definir 100 ciclos de prueba de carga con mods
+- [ ] T-076 Definir triaje: bugs con mods SOLO si reproducen sin mods
+- [ ] T-077 Definir flag `--no-mods` de soporte
+- [ ] T-078 Definir canal #modding en Discord (M100)
+- [ ] T-079 Definir exclusiones de soporte (mods maliciosos/corruptos)
+- [ ] T-080 Definir base de conocimientos de mods en web
+- [ ] T-081 Definir estimación: ModLoader+manifiesto+conflictos (80-120 h)
+- [ ] T-082 Definir estimación: validación de mods (30-50 h)
+- [ ] T-083 Definir estimación: exportadores M109 (40-60 h)
+- [ ] T-084 Definir estimación: saves con mods (20-30 h)
+- [ ] T-085 Definir estimación: Workshop+telemetría (40-60 h)
+- [ ] T-086 Definir estimación: docs+ejemplo+soporte (30-40 h)
+- [ ] T-087 Definir total estimado 240-360 h (< 10% presupuesto)
+- [ ] T-088 Definir re-evaluación del GATE tras el tracking
+- [ ] T-089 Definir notificación de mods en telemetría (flag)
+- [ ] T-090 Definir separación del loader del gameplay core
+- [ ] T-091 Definir documentación plan-actual actualizada y firmada
+- [ ] T-092 Definir log del módulo en Logs/

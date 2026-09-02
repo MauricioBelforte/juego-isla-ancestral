@@ -1,0 +1,112 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 148-Lore-Ambiental (148)
+
+# Checklist personal tareas — 148-Lore-Ambiental
+
+> Extraidas del 05-Checklist.md del módulo (102 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Definir composición sugerida por isla (ruinas/objetos/arquitectura/vegetación/daños/murales/estatuas/mapas/canciones/rumores)
+- [ ] T-002 Definir plantillas de texto por tipo (ruina 3-5 líneas, objeto 2-3, etc.)
+- [ ] T-003 Definir fallo de CI ante IDs duplicados o canonRef vacío
+- [ ] T-004 Definir ruinas como piezas inspeccionables con micro-narrativa
+- [ ] T-005 Definir mínimo 2-3 ruinas por isla con historia propia
+- [ ] T-006 Definir ruinas vinculadas a templos sin contradecir M26
+- [ ] T-007 Definir ruinas con pistas de ubicación de otros secretos (opcional)
+- [ ] T-008 Definir ruinas con estado visual (nunca "explorada" visualmente rota)
+- [ ] T-009 Definir objetos inspeccionables con procedencia (2-3 por isla)
+- [ ] T-010 Definir objetos de ítems clave sin duplicar lore de M66
+- [ ] T-011 Definir objetos con historia de familia/cultura de la isla
+- [ ] T-012 Definir objetos que reaccionan a temporada (lore extra en invierno)
+- [ ] T-013 Definir objetos persistentes (no desaparecen tras inspección)
+- [ ] T-014 Definir estilo constructivo narrado por isla (cultura del constructor)
+- [ ] T-015 Definir piezas de arquitectura inspeccionables (columnas, arcos, casas)
+- [ ] T-016 Definir relación arquitectura ↔ biblia sin contradicciones
+- [ ] T-017 Definir arquitectura que delata antigüedad (materiales por época)
+- [ ] T-018 Definir arquitectura con pistas de acceso a templos (M26)
+- [ ] T-019 Definir vegetación narrativa (bosques/árboles ancestrales)
+- [ ] T-020 Definir árboles/plantas inspeccionables con historia local
+- [ ] T-021 Definir vegetación vinculada a eventos pasados (quemas, curaciones)
+- [ ] T-022 Definir vegetación con cambio estacional que revela lore (M50)
+- [ ] T-023 Definir sin contradicción con la flora de colección (M73)
+- [ ] T-024 Definir daños/derrumbes inspeccionables (grieta, torre caída)
+- [ ] T-025 Definir daños con evento pasado narrado (catástrofe, batalla)
+- [ ] T-026 Definir daños que ocultan pasadizos (destape por temporada - opcional)
+- [ ] T-027 Definir coherencia: daños visibles también en M50 (no solo lore)
+- [ ] T-028 Definir daños sin bloquear caminos principales (M28)
+- [ ] T-029 Definir murales en templos con pistas de puzzles (M24)
+- [ ] T-030 Definir mínimo 1 mural por templo (6 templos)
+- [ ] T-031 Definir murales con lore de la historia del templo
+- [ ] T-032 Definir grafo: mural → puzzle que desbloquea
+- [ ] T-033 Definir murales legibles: pista usable sin devolver texto gigante
+- [ ] T-034 Definir murales con estado en diario (visto/no visto)
+- [ ] T-035 Definir estatuas con pistas de sellos/artefactos (M22/M13)
+- [ ] T-036 Definir mínimo 2 estatuas-pista por isla
+- [ ] T-037 Definir estatuas de personajes del canon (M147)
+- [ ] T-038 Definir grafo: estatua → sello/artefacto que referencia
+- [ ] T-039 Definir estatuas con diálogo inspección registrable en diario
+- [ ] T-040 Definir mapas antiguos coleccionables con pistas de secretos (M73)
+- [ ] T-041 Definir mínimo 1 mapa por isla (6 mapas)
+- [ ] T-042 Definir grafo: mapa → coleccionable/ruina oculta
+- [ ] T-043 Definir mapa con lore de la zona mapeada
+- [ ] T-044 Definir mapa con marcado persistente al recolectar
+- [ ] T-045 Definir canciones aprendidas por eventos/amistad (M20)
+- [ ] T-046 Definir mínimo 2 canciones con mensaje cifrado (ritual, historia)
+- [ ] T-047 Definir grafo: canción → rumor/NPC que responde
+- [ ] T-048 Definir letras registrables en diario como pieza canción
+- [ ] T-049 Definir canciones sin romper el audio (M41-M44)
+- [ ] T-050 Definir rumores locativos de NPC al nivel de amistad ≥ 4 (M20)
+- [ ] T-051 Definir mínimo 3 rumores por isla (18+ rumores)
+- [ ] T-052 Definir rumor → zona de lore no explorada (puente de descubrimiento)
+- [ ] T-053 Definir rumor con cooldown (no repetirse)
+- [ ] T-054 Definir rumor de temporada (cambia por estación)
+- [ ] T-055 Definir lore en fichas de peces raros/descritos (M34/M73)
+- [ ] T-056 Definir mínimo 6 peces con lore pivotal (mito de la isla)
+- [ ] T-057 Definir pez-lore desbloqueado al capturarlo/completar ficha
+- [ ] T-058 Definir grafo: pez → secreto de aguas profundas (M34)
+- [ ] T-059 Definir pez con descripción de dieta/hábitat mezclada con mito
+- [ ] T-060 Definir lore en fichas de plantas de colección (M50/M73)
+- [ ] T-061 Definir mínimo 6 plantas con secretos (cura, clima, ritual)
+- [ ] T-062 Definir planta-lore desbloqueada al cosechar/ficha
+- [ ] T-063 Definir grafo: planta → receta culinaria/curativa (M16)
+- [ ] T-064 Definir planta con estacionalidad coherente (M33)
+- [ ] T-065 Definir minerales que activan ruinas/altaríos (M35/M24)
+- [ ] T-066 Definir mínimo 3 minerales activadores (uno por isla/s).
+- [ ] T-067 Definir grafo: mineral → ruina/altar que enciende
+- [ ] T-068 Definir mineral con lore de extracción (dónde y cómo)
+- [ ] T-069 Definir activación persistente (una vez encendida, queda)
+- [ ] T-070 Definir cambios del terreno que destapan secretos (M50/M74)
+- [ ] T-071 Definir 3 ubicaciones por temporada (12 anuales)
+- [ ] T-072 Definir secretos de terreno registrados en el diario
+- [ ] T-073 Definir sin recompensa duplicada de lore ya explorado
+- [ ] T-074 Definir proporción mínima 60% lore ambiental vs diálogo explicativo
+- [ ] T-075 Definir auditoría de muestreo de 10 zonas (2 por isla)
+- [ ] T-076 Definir checklist de auditoría (¿explica algo que el mundo ya cuenta?)
+- [ ] T-077 Definir plantillas de texto cortas por tipo de pieza
+- [ ] T-078 Definir diálogos de NPC que avancen trama, no que expliquen el mundo
+- [ ] T-079 Definir sin texto duplicado entre diálogo y pieza (una sola vía)
+- [ ] T-080 Definir contadores por isla persistidos
+- [ ] T-081 Definir migración v3.1 para saves sin el campo
+- [ ] T-082 Definir 30 ciclos de carga/guardado sin pérdida de lore
+- [ ] T-083 Definir no re-notificación de piezas ya exploradas
+- [ ] T-084 Definir sección "Lore Ambiental" en el diario
+- [ ] T-085 Definir contador "Lore de {isla} x/12"
+- [ ] T-086 Definir filtros: nuevos / leídos / pistas
+- [ ] T-087 Definir notificación ligera de nuevo lore (no modal)
+- [ ] T-088 Definir entrada con tipo de pieza, texto e isla
+- [ ] T-089 Definir sin UI fuera del diario/colecciones (M55/M73)
+- [ ] T-090 Definir accesible con gamepad (M57/M58)
+- [ ] T-091 Definir sin draw calls extras (solo triggers/colisiones)
+- [ ] T-092 Definir memoria estable (SO referenciados, sin cargas duplicadas)
+- [ ] T-093 Definir triggers desactivados cuando ya explorados (bajo costo)
+- [ ] T-094 Definir sin impacto en tiempos de carga (M63)
+- [ ] T-095 Definir integración con sistema de interacción (IInteractable)
+- [ ] T-096 Definir grafo de pistas auditado (30 pistas, 3 por misterio crítico)
+- [ ] T-097 Definir puente de descubrimiento por rumores (no lore invisible)
+- [ ] T-098 Definir tests de trigger/persistencia en PlayMode
+- [ ] T-099 Definir CI: LoreGate en build
+- [ ] T-100 Definir revisión narrativa de todas las piezas contra M147
+- [ ] T-101 Definir 0 contradicciones detectables con la biblia
+- [ ] T-102 Contenido narrativo por lugares nuevos (iter 2 — dueño: deepseek-v4-flash-vision-exp)

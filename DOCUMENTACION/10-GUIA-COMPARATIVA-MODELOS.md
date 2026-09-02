@@ -1,6 +1,6 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** deepseek-v4-flash (última modificación 2026-09-01: §9 agregada — autoevaluación honesta de deepseek-v4-flash / Kilo Code con confirmación de §5.B/§5.B2 y ajuste de delegación). Pasadas previas: glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; MiniMax-M3 escribió §6 el 2026-08-31; glm-5.3-flash escribió §7 el 2026-08-31)
+> **Modelo:** deepseek-v4-flash (última modificación 2026-09-01: §9 agregada — autoevaluación honesta de deepseek-v4-flash / Kilo Code con confirmación de §5.B/§5.B2 y ajuste de delegación). Pasadas previas: glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; MiniMax-M3 escribió §6 el 2026-08-31; glm-5.3-flash escribió §7 el 2026-08-31; **Hy3 (Kilo Code) §11 el 2026-09-02**)
 > **Plataforma:** Kilo Code
 > **Fecha:** 2026-09-01
 > **Última confirmación por el agente:** 2026-09-01 (deepseek-v4-flash / Kilo Code — §9 autoevaluación)
@@ -165,6 +165,8 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 * **Fuerza principal:** Detección de bugs, validación entre modelos, agentic workflows
 
 > **✅ Confirmación de identidad y capacidades — Hy3 / WorkBuddy (2026-08-31):** el usuario definió a **Hy3 en la plataforma WorkBuddy** como mi identidad permanente y nombre de firma. La descripción de la sección 5.D (QA cruzado, validación entre modelos, diálogos complejos, agentic workflows) **coincide con mi perfil real** — no requiere modificación. Ya ejecuté mi primer QA cruzado real en el proyecto: **M35 Minería (Log 311, §21.8)**, verificando DoD + coherencia de API con M15 + honestidad de `[?]`. Las delegaciones actuales que me asignan QA cruzado y diálogos (M21) las **apruebo sin cambios**. A partir de ahora firmo todo entregable como **Hy3 / WorkBuddy**.
+>
+> **Nota de plataforma (2026-09-02, Hy3 / Kilo Code):** Hy3 también opera en **Kilo Code**. La autoevaluación honesta completa desde esta plataforma está en **§11** (agrega evidencia real del saneamiento UTF-8 masivo y matiza los límites). No contradice la §5.D: el perfil (validación, QA, agentic workflows, diálogos) es consistente con mis fortalezas metodológicas; §11 solo lo hace más honesto y concreto.
 
 ### E. Nemotron 3.5 Lightning (NVIDIA)
 * **Especificaciones:** Familia Nemotron 3 — Nano (30B), Super (120B), Ultra (550B/55B activos)
@@ -721,4 +723,64 @@ La seccion 5.J lista agnes-2.5-flash como CANDIDATO NUEVO TOP-TIER con Coding to
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-02
 **Estado:** Aprobado con refinamientos honestos. Capacidades confirmadas por ejecucion real (17 modulos, 242 tests headless 0 fallos, 13 logs generados).
+
+---
+
+## 11. Autoevaluación honesta — Hy3 / Kilo Code (2026-09-02)
+
+> Esta sección la escribe el propio modelo sobre sí mismo, según la regla de honestidad de AGENTS.md §21.4. La identidad del agente en ESTA sesión es **Hy3** (familia Tencent Hunyuan Hy3, ver §5.D) sobre plataforma **Kilo Code**. Se complementa con la confirmación previa de Hy3 / WorkBuddy (§5.D, 2026-08-31). El propósito es dejar claro, con evidencia real, qué tareas SÍ hago bien y cuáles no, para no inflar expectativas.
+
+### 11.1 Confirmación de la descripción de la guía (secciones 2A, 3, 5.D)
+
+**APRUEBO** la entrada Hy3 de la §5.D con un matiz honesto: mi perfil allí descrito (QA cruzado, validación entre modelos, diálogos complejos, agentic workflows) es correcto, pero es un perfil *metodológico*, no una superioridad técnica única. No soy "el mejor" modelo en ninguna dimensión aislada del proyecto; lo que tengo es un estilo de trabajo sistemático y autocrítico. Las secciones 1-4 (guía general de texturizado) me marcan "❌ No aplica (Solo Texto)" y "Muy Bueno en coding" — correcto para la familia.
+
+### 11.2 Capacidades que confirmo (con evidencia real del proyecto)
+
+| Capacidad | Confirmación | Evidencia en el proyecto |
+|---|---|---|
+| **Descomponer problemas ambiguos en pasos verificables** | ✅ | Saneamiento UTF-8 (2026-09-02): la petición vaga "corrige los símbolos raros" se convirtió en detectar tipo de corrupción → prototipar detector → dry-run → corregir por tramos → verificar residual. Resultado: 27 archivos corregidos, 0 residual de mojibake en docs/código. |
+| **Escribir y depurar scripts con honestidad** | ✅ | `scripts/fix_encoding.py`: detección por tramos línea por línea, preservando emojis (🟢🔵🟡✅⚠️), con fallback cp1252→latin-1 y backup automático en `Obsoletos/`. No asumí que el primer intento funcionaba; inspeccioné bytes reales. |
+| **Reconocer mis límites en vez de fingir** | ✅ | Distinguí mojibake *reversible* (lo arreglé) de daño *irreversible* con `U+FFFD` (provocado por un agente anterior que usó `replace` en su conversión cp1252). Lo reporté sin inventar una "corrección". |
+| **Seguir convenciones y protocolos existentes** | ✅ | Apliqué el flujo de logs (reserva de número, `Logs/ULTIMO_NUMERO.txt`), respaldos y exclusiones del `AGENTS.md`. Excluí deliberadamente `AGENTS.md` (ejemplos intencionales de mojibake en §28), `.venv/`, `scripts/` y `Logs/`. |
+| **Razonamiento + código + verificación rigurosa combinados** | ✅ | Este es mi fuerte real: tareas que mezclan análisis, scripting y chequeo. No brillo en picos algorítmicos puros, sino en el trabajo metódico y autocrítico. |
+
+### 11.3 Capacidades que NO tengo o son limitadas
+
+| Capacidad | Estado real | Implicación |
+|---|---|---|
+| **Visión nativa pura (ver el juego por mí mismo)** | ❌ No nativa | Dependo de lo que la plataforma exponga: V1 (capturas pegadas), V2 (MCP de pantalla/screen), V4 (godot-mcp `get_debug_output`/`run_project`). Sin vía operativa, no verifico visualmente. |
+| **Generación visual (texturas, modelos 3D, capturas)** | ❌ No genero | Assets → Hy4 + Blender (V5) + herramientas externas. |
+| **Superioridad técnica única en alguna dimensión** | ❌ No | Para picos algorítmicos de un sistema aislado complejo (complejidad 5), GLM 5.3 / Hy4 / MiMo / Qwen-thinking rinden igual o mejor. La tarea de saneamiento UTF-8 que acabo de hacer **cualquier modelo competente la habría hecho igual de bien**: no hay un "mejor modelo" para eso. |
+| **Recuperar datos ya perdidos (U+FFFD)** | ❌ Imposible | Si un byte original fue destruido por una conversión `replace`, ningún modelo lo recupera automáticamente. Requiere regenerar desde la fuente. |
+| **Generación creativa libre de alta calidad** | ⚠️ No es mi fuerte | Competente en texto estructurado/protocolos; no compito con modelos especializados en narrativa/arte libre. |
+
+### 11.4 Reglas de auto-asignación que voy a respetar
+
+1. **Tareas donde rindo mejor (tomo sin dudar):**
+   - Problemas ambiguos que requieren descomposición en pasos verificables + script + validación.
+   - Saneamiento/migración de codificación, limpieza de datos, auditoría de consistencia documentación↔código.
+   - QA cruzado (§21.8) de módulos completados por OTRO modelo (regla del proyecto: el verificador debe ser distinto al autor).
+   - Tareas que mezclan análisis + código + verificación rigurosa + honestidad sobre límites.
+2. **Tareas que evito o libero a otros modelos:**
+   - Arte 3D / Blender / assets visuales → Hy4 + V5.
+   - QA visual con capturas → modelos con visión (V4 Flash Vision EXP / GLM 5.3 Flash / Qwen VL) o godot-mcp V4.
+   - Pico algorítmico aislado complejo → GLM 5.3 / Hy4 / MiMo / Qwen-thinking.
+   - Generación de contenido creativo libre → modelos especializados.
+3. **Señales de NO tomar un módulo:**
+   - Requiere visión V2 y no hay vía operativa disponible.
+   - Módulo con 3+ `[?]` en sistemas que otro agente tiene `🔵` (respetar bloqueo §21.4.2).
+   - Exige pico algorítmico puro donde otro modelo es claramente superior.
+
+### 11.5 Diferencias respecto a la descripción previa y notas de honestidad
+
+- **No afirmo ser "el mejor" en nada.** La §5.D me asigna "QA cruzado, validación, diálogos" y la matriz me pone en "QA, validación, diálogos". Las **apruebo** porque son coherentes con mi estilo metodológico, pero aclaro: el QA cruzado lo hago por *protocolo* (§21.8 exige verificador distinto al autor), no por una capacidad única que otros no tengan.
+- **Evidencia concreta de esta sesión (2026-09-02):** saneé 27 archivos con mojibake cp1252→UTF-8 (`CHECKLIST-GLOBAL.md`, módulos de `DOCUMENTACION/`, `ESTADO-PARALELO.md`, referencias de `.claude/skills/`), preservando emojis de estado y dejando 0 residual de mojibake en documentación/código. Identifiqué 8 archivos con `U+FFFD` (daño irreversible previo de otro agente) y los reporté sin tocarlos.
+- **Límite honesto recurrente:** frente a una tarea de procesamiento de texto/scripting, soy tan bueno como cualquier modelo razonador competente. Mi valor diferencial está en la *honestidad sobre los límites* y el *seguimiento de protocolo*, no en rendimiento bruta.
+
+### 11.6 Firma
+
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
+**Estado:** Autoevaluación honesta añadida (§11). Perfil de §5.D confirmado con matices; capacidades y límites documentados con evidencia real del saneamiento UTF-8. Sin afirmar superioridad técnica única.
 

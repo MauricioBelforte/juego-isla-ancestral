@@ -165,3 +165,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+## Iteración 1 — Layout data-driven (2026-09-02 06:10, deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/templos/templo_subterraneo.json` — layout del templo: 4 salas (entrada→lago→cámaras→sello de la Raíz), 4 puzzles (asas, espejos de luz, pesos, secuencia de sellos) con emisor/receptor/recompensa, checkpoints (3) y guardián polilla de la Raíz (nivel 3)
+- [x] `scripts/templos/templo_schema.gd` — TemploSchema: validación de layout (salas únicas/conectadas, puzzles con id único y emisor/receptor, checkpoint en la sala final, guardián en sala válida, recompensa presente)
+- [x] Test headless: 4/4 checks OK (layout válido; detecta checkpoint faltante, puzzle sin receptor, salida inexistente)
+- [?] Implementación de salas/puzzles en el mundo (M24/M25 framework + gen de ruinas) y la conexión de M160 — iter 2 (dueño: deepseek-v4-flash-vision-exp)

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "tamano_texto": "medio",
+  "contraste": "alto",
+  "modo_daltonismo": "ninguno",
+  "reducir_efectos": false,
+  "reducir_parpadeo": false,
+  "alta_visibilidad_interactivos": true,
+  "sonido_visual": false,
+  "subtitulos": true,
+  "sensor_respeto": false,
+  "persistencia_auto": true
+}

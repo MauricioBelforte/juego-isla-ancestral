@@ -1,0 +1,126 @@
+**Modelo:** deepseek-v4-flash-vision-exp
+**Plataforma:** Kilo Code
+**Modulo:** 26-Templo-Subterraneo (26)
+
+# Checklist personal tareas — 26-Templo-Subterraneo
+
+> Extraidas del 05-Checklist.md del módulo (116 pendientes). Fuente de verdad del item: el 05-Checklist.md.
+
+## Tareas
+
+- [ ] T-001 Diseñar la entrada del templo (pórtico bajo raíces, puerta sellada)
+- [ ] T-002 Definir respiradero de brisa visible en la entrada
+- [ ] T-003 Diseñar el vestíbulo con 3 vías de orientación
+- [ ] T-004 Definir plaza de desembarque de la entrada
+- [ ] T-005 Definir primera vía al templo (núcleo)
+- [ ] T-006 Definir vía a la Guarda de la Brisa
+- [ ] T-007 Documentar entrada y vestíbulo en el plan-actual
+- [ ] T-008 Diseñar "Sala de los Vientos" con 3 puzzles de viento
+- [ ] T-009 Definir el tutorial guiado (panel Guía del Templo)
+- [ ] T-010 Definir 1 puzzle guiado paso a paso
+- [ ] T-011 Definir banda de dificultad Exploración en la sala inicial
+- [ ] T-012 Definir acceso al pasillo del Artesano desde la sala
+- [ ] T-013 Documentar primera sala y tutorial
+- [ ] T-014 Diseñar 6 habitaciones intermedias
+- [ ] T-015 Definir 2 salas de luz (M24)
+- [ ] T-016 Definir 1 sala de agua
+- [ ] T-017 Definir 1 sala de presión
+- [ ] T-018 Definir 1 sala de sonido
+- [ ] T-019 Definir 1 sala de secuencia
+- [ ] T-020 Diseñar el pasillo del Artesano (alternativa lateral)
+- [ ] T-021 Definir 1 puzzle de herramientas en el pasillo
+- [ ] T-022 Definir 2+ caminos para cada rama (M66)
+- [ ] T-023 Documentar habitaciones y caminos alternativos
+- [ ] T-024 Diseñar 4 salas secretas
+- [ ] T-025 Definir sala bajo placa de presión
+- [ ] T-026 Definir sala tras puerta falsa
+- [ ] T-027 Definir sala tras mural giratorio
+- [ ] T-028 Definir sala bajo el acuífero
+- [ ] T-029 Definir 2+ caminos de acceso a cada sala
+- [ ] T-030 Definir recompensas únicas (sellos de cristal) en las salas
+- [ ] T-031 Documentar salas secretas
+- [ ] T-032 Diseñar la rotonda de la Columna
+- [ ] T-033 Definir el mecanismo de 7 anillos de viento
+- [ ] T-034 Definir 4 sellos de cristal de salas secretas
+- [ ] T-035 Definir 3 sellos de habitaciones intermedias
+- [ ] T-036 Definir activación de anillo con sello + posición de glifo (M24 símbolos)
+- [ ] T-037 Definir estado de sala multipllex para los 7 anillos
+- [ ] T-038 Documentar sala central y mecanismo
+- [ ] T-039 Diseñar el puzzle final en 3 fases
+- [ ] T-040 Definir fase 1: espejo maestro y rayo cenital (luz)
+- [ ] T-041 Definir fase 2: 3 gongs en el orden de glifos (sonido)
+- [ ] T-042 Definir pista de la secuencia visible tras 2 intentos
+- [ ] T-043 Definir fase 3: timón de agua y barca (agua)
+- [ ] T-044 Diseñar la Cámara del Sello (sancta)
+- [ ] T-045 Definir pedestal del Sello
+- [ ] T-046 Definir cutscene contextual mínima (hook M33)
+- [ ] T-047 Definir restauración del sello abre la salida
+- [ ] T-048 Documentar puzzle final y cámara del Sello
+- [ ] T-049 Diseñar la salida (túnel del amanecer)
+- [ ] T-050 Definir atajo al puerto por la salida
+- [ ] T-051 Definir apertura de salida solo con sello restaurado
+- [ ] T-052 Diseñar 5 checkpoints (porte, vestíbulo, vientos, central, sello)
+- [ ] T-053 Definir guardado atómico en cada checkpoint
+- [ ] T-054 Definir respaldo `.bak` en cada checkpoint
+- [ ] T-055 Documentar salida y checkpoints
+- [ ] T-056 Diseñar faros de cristal por sala
+- [ ] T-057 Definir luz volumétrica suave "brisa"
+- [ ] T-058 Definir contraste ≥ 4.5:1 en iconografía (M58)
+- [ ] T-059 Diseñar sonido de brisa en corredores (M42)
+- [ ] T-060 Diseñar goteo de agua (M43)
+- [ ] T-061 Definir 3 ambiences por banda de dificultad (M41)
+- [ ] T-062 Documentar iluminación y sonido ambiental
+- [ ] T-063 Diseñar polvo de luz en la rotonda (M52)
+- [ ] T-064 Definir viento visible en corredores
+- [ ] T-065 Definir límite de 256 partículas por escena
+- [ ] T-066 Definir paleta de materiales del templo (piedra de brisa, cristal, bronce)
+- [ ] T-067 Definir 3 materiales base + variantes por edad (M47)
+- [ ] T-068 Definir 12 texturas clave con LOD 0-2 (M47/M63)
+- [ ] T-069 Documentar partículas, materiales y texturas
+- [ ] T-070 Diseñar 8 glifos del Sello (4 comunes + 4 de cámara)
+- [ ] T-071 Definir glosario en la Guía del Templo (M24)
+- [ ] T-072 Definir arquitectura voxel-compatible (corredores 4x4x4 m)
+- [ ] T-073 Definir puertas de 2x3 bloques
+- [ ] T-074 Definir techos de 3x3 bloques
+- [ ] T-075 Definir transiciones en 45°
+- [ ] T-076 Definir rampas con pendiente ≤ 20°
+- [ ] T-077 Documentar iconografía y arquitectura
+- [ ] T-078 Crear navegación con NavigationServer3D por piso
+- [ ] T-079 Definir vínculos verticales (rampas y huecos discretos)
+- [ ] T-080 Definir sin teleports en navegación (anti-exploit)
+- [ ] T-081 Crear telemetría de puzzles (intentos, pistas, tiempo)
+- [ ] T-082 Definir exportación JSON a M24 para balance
+- [ ] T-083 Documentar navegación y telemetría
+- [ ] T-084 Testear softlocks por zona (suite M66)
+- [ ] T-085 Testear objetos y llaves perdidos
+- [ ] T-086 Testear NPC atascados en el templo
+- [ ] T-087 Testear puzzles irresolubles
+- [ ] T-088 Testear exploits por acceleración en rampas
+- [ ] T-089 Testear duplicación de sellos
+- [ ] T-090 Testear entrada por la salida sellada
+- [ ] T-091 Implementar mojones visuales cada 40 m
+- [ ] T-092 Implementar mapa de zona simplificado (panel M58)
+- [ ] T-093 Definir prueba de deriva (jugador perdido < 2 min)
+- [ ] T-094 Documentar softlocks, exploits y orientación
+- [ ] T-095 Definir iconografía ≥ 16 px (M58)
+- [ ] T-096 Definir contraste ≥ 4.5:1
+- [ ] T-097 Definir sin presión temporal en puzzles
+- [ ] T-098 Definir subtítulos activables (M43)
+- [ ] T-099 Definir reducción de partículas y parpadeo (fotosensibilidad)
+- [ ] T-100 Definir presupuesto por región (M63, streaming por piso)
+- [ ] T-101 Definir instancing de columnas en la rotonda
+- [ ] T-102 Definir luz volumétrica solo en 2 salas fijas
+- [ ] T-103 Documentar accesibilidad y rendimiento
+- [ ] T-104 Diseñar 06-Plan-Testings.md: gating (sellos y salida)
+- [ ] T-105 Diseñar 06-Plan-Testings.md: anti-exploit (suite de saltos)
+- [ ] T-106 Diseñar 06-Plan-Testings.md: orientación (deriva)
+- [ ] T-107 Diseñar 06-Plan-Testings.md: softlocks por zona
+- [ ] T-108 Diseñar 06-Plan-Testings.md: accesibilidad (contrastes)
+- [ ] T-109 Definir criterio de éxito: suite completa pasa sin fallos
+- [ ] T-110 Crear 07-Resultados-Testings.md para registrar la ejecución
+- [ ] T-111 Documentar todas las decisiones en 02-Analisis y 03-Diseno
+- [ ] T-112 Actualizar plan-actual como espejo del estado real
+- [ ] T-113 Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA
+- [ ] T-114 Actualizar fila 26 en CHECKLIST-GLOBAL al implementar
+- [ ] T-115 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md
+- [ ] T-116 Implementación de salas/puzzles en el mundo (M24/M25 framework + gen de ruinas) y la conexión de M160 — iter 2 (dueño: deepseek-v4-flash-vision-exp)

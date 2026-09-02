@@ -25,6 +25,8 @@ func _run() -> void:
 	_test_null_bridge()
 	_test_steam_bridge()
 	_test_cross_save()
+	_test_iter2_auto_detect()  # iter 2 (minimax-m3)
+	_test_iter2_senales()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -44,7 +46,10 @@ func _test_manager() -> void:
 		quit(1)
 		return
 	_check("PlatformManager autoload presente", true)
-	_check("bridge activo (NullBridge en dev)", pm.bridge != null and pm.bridge.nombre == "NullBridge")
+	# Iter 2 (minimax-m3): en dev, OS.get_name() detecta plataforma real.
+	# Windows -> "steam" o "windows" -> SteamBridge mock. Linux/macOS -> similar.
+	# NullBridge es solo fallback si OS no se reconoce.
+	_check("bridge activo", pm.bridge != null and (pm.bridge.nombre == "NullBridge" or pm.bridge.nombre == "SteamBridge"))
 	_check("matriz con 10 plataformas", pm.matriz.size() == 10, "size=%d" % pm.matriz.size())
 	var steam = pm.obtener_plataforma("steam")
 	_check("steam en matriz", not steam.is_empty() and steam.get("prioridad", "") == "P0")
@@ -56,7 +61,7 @@ func _test_manager() -> void:
 	_check("P2 = 3 consolas (GATE presupuesto)", p2.size() == 3, "size=%d" % p2.size())
 	_check("ids = 10", pm.ids_plataformas().size() == 10)
 	# API bridge en dev
-	_check("cloud no disponible en dev (NullBridge)", pm.cloud_disponible() == false)
+	_check("cloud_disponible() en dev", pm.cloud_disponible() == pm.bridge.cloud_disponible() if pm.bridge else false)
 
 func _test_null_bridge() -> void:
 	print("--- NullBridge: fallback sin cloud ---")
@@ -110,3 +115,41 @@ func _summary() -> void:
 	else:
 		print("TEST M96 OK — todos los checks pasaron")
 		quit(0)
+
+## ── Tests iter 2 (minimax-m3) ────────────────────────────────
+
+func _test_iter2_auto_detect() -> void:
+	print("--- Iter 2: auto-deteccion de plataforma via OS.get_name() ---")
+	var pm := root.get_node_or_null("PlatformManager")
+	if pm == null:
+		_check("PlatformManager presente (iter 2)", false)
+		return
+	# plataforma_actual debe ser uno de los IDs conocidos
+	_check("plataforma_actual detectada", pm.plataforma_actual != "")
+	# "linux"/"macos"/"windows" son alias del id "steam" en dev (RF3: el build de Windows/Linux/macOS va a Steam)
+	# Por lo tanto, plataforma_actual puede ser cualquiera de {steam, windows, linux, macos, null}
+	var plat_in_matriz: bool = pm.matriz.has(pm.plataforma_actual) or pm.plataforma_actual in ["windows", "linux", "macos", "null"]
+	_check("plataforma_actual conocida por el manager", plat_in_matriz)
+	# _detectar_plataforma_actual debe devolver un id valido para OS actual
+	var detected: String = pm._detectar_plataforma_actual()
+	_check("_detectar_plataforma_actual() retorna string no vacio", detected != "")
+	_check("detectada en {steam, windows, linux, macos, null}", detected in ["steam", "windows", "linux", "macos", "null"])
+	# _bridge_para retorna Callable valida para plataformas conocidas, invalida para desconocidas
+	var cb_steam: Callable = pm._bridge_para("steam")
+	_check("_bridge_para(steam) valida", cb_steam.is_valid())
+	var cb_deck: Callable = pm._bridge_para("steam_deck")
+	_check("_bridge_para(steam_deck) valida", cb_deck.is_valid())
+	var cb_unknown: Callable = pm._bridge_para("plataforma_fake_xyz")
+	_check("_bridge_para(fake) invalida", not cb_unknown.is_valid())
+
+func _test_iter2_senales() -> void:
+	print("--- Iter 2: senales plataforma_cambiada y plataforma_no_soportada ---")
+	var pm := root.get_node_or_null("PlatformManager")
+	if pm == null:
+		_check("PlatformManager presente (senales)", false)
+		return
+	# plataforma_cambiada es una signal property; verificamos que existe
+	_check("plataforma_cambiada es una senal", pm.has_signal("plataforma_cambiada"))
+	_check("plataforma_no_soportada es una senal", pm.has_signal("plataforma_no_soportada"))
+	# plataforma_actual no debe estar vacio (se setea en _ready)
+	_check("plataforma_actual seteada en _ready", pm.plataforma_actual != "")

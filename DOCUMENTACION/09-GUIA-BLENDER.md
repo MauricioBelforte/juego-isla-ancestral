@@ -900,7 +900,7 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
   date -r alta/50-Vegetacion_arbol_frutal.glb.import '+%m-%d %H:%M:%S'
   ```
 
-  Si el `.glb` es más nuevo que su `.import`, el import está desactualizado y hay que re-correrlo.
+  Si el `.glb` es más nuevo que su `.import`, **sospechá** de import desactualizado — pero leé **E-72** antes de re-correr nada: Godot decide re-importar por **hash de contenido**, no por mtime, así que un `.glb` re-exportado byte-idéntico NO renueva el `.import` y su `.scn` viejo sigue siendo válido.
 
 - **Verificación de humo — el cache:** tiene que existir un `.scn` por variante en `.godot/imported/`:
 
@@ -911,6 +911,160 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
   Si los `.import` existen pero faltan los `.scn`, el recurso no terminó de procesarse.
 
 - **Fecha:** 2026-09-01 12:20. Causa raíz del falso E-64 de las 05:00.
+
+### E-66 — `contact_sheet.py`: el shell NO expande globos entre comillas dobles (E-57) y el `argv` con `*` rompe el script
+
+- **Síntoma:** `python contact_sheet.py "capturas/cap_27_*_az*.png" salida.jpg` falla con `OSError: [Errno 22] Invalid argument: '...az*.png'`. Peor: si el `*` llega literal a `Image.open()` porque el glob ya se había expandido parcialmente, **genera una hoja de UNA sola captura que PARECE aprobada sin cumplir E-13** (≥6 azimuts).
+- **Causa:** combinación de E-57 (el shell no expande `*` dentro de comillas dobles) + el script asumía que `sys.argv[1]` era siempre un path resuelto. Si era un patrón `*az*.png` con glob literal, lo pasaba crudo a `Image.open()`.
+- **Solución (en `contact_sheet.py`):** detectar el `*` y expandirlo con `glob.glob()` antes de procesar:
+
+  ```python
+  if '*' in sys.argv[1]:
+      import glob as _g
+      pngs = sorted(_g.glob(sys.argv[1]))
+  elif os.path.isfile(sys.argv[1]):
+      pngs = sys.argv[1:-1]
+  ```
+
+- **Defensa del caller:** pasar SIEMPRE el patrón expandido (sin comillas) al `python` desde el shell. Pero como el script ya está parcheado, alcanza con `python contact_sheet.py "capturas/cap_27_*_az*.png" salida.jpg` y el fix interno se encarga.
+
+### E-67 — `arena()` del helper ponía el top del disco en z=0, no en z=0.05 → assets flotaban 4.5 cm en la vista
+
+- **Síntoma (descubierto 2026-09-02):** al re-revisar las hojas de contacto de M27 cascada y faro_viejo (verticales), se veía un gap horizontal de ~4-5 cm entre la base de la pieza y la superficie del disco. En M45 (jarrones, barco) también. La auditoría numérica `z_min 0.0450 → OK` no lo detectaba.
+- **Causa:** E-12 dice "Z_APOYO = 0.045 = 5 mm hundido en la arena; arena top en z=0.05". Pero `plantilla_asset.arena()` creaba el disco con `location=(0,0,-profundo/2)` y `depth=profundo` → su **top caía en z=0**, no en z=0.05. Los SM_ asentados a 0.045 quedaban 4.5 cm por ARRIBA del top visual del disco, no 5 mm por debajo.
+- **Por qué no se detectó antes:** en assets de silueta ancha (cono de volcán, coral abanico) el borde del objeto coincide con el borde del disco, el ojo no percibe el gap. En cliff de cascada y bases de faro/jarrones, las paredes verticales hacen que el gap horizontal sea obvio.
+- **Fix (en `plantilla_asset.py`):** nueva constante `ALTURA_ARENA = 0.05` y `location.z = ALTURA_ARENA - profundo/2`. Comentario cita E-12 explícitamente. Los 10 assets M45+M27 se re-generaron con el helper corregido y la auditoría visual los aprobó.
+- **Lección:** la auditoría numérica `z_min == Z_APOYO` es **necesaria pero no suficiente** (E-13/E-37/E-52). La captura orbital es la fuente de verdad final. Y siempre que un helper tenga una constante "física" del proyecto, validar contra el comentario E-12 — si no coinciden, el comentario es la fuente de verdad y el código está mal.
+
+### E-68 — `primitive_cube_add(size=1, scale=s)` produce un cubo de `s`, NO de `2*s` (semántica de `size` vs `scale`)
+- **Síntoma (descubierto 2026-09-02, arco entrada templo M25 v3):** el pilar del arco media 1.18 m de alto en lugar de 2.36 m planeados, dejando un gap de 60 cm entre el pilar y el capitel (la dovela del arranque no tocaba nada). Las dovelas adyacentes, diseñadas con `sx = chord/2`, tenían 0.224 m de ancho tangencial cuando la separación entre centros era 0.466 m → gaps visibles de ~25 cm entre dovelas. La auditoría numérica (`toca=24`, `footprint OK`) no lo detectó.
+- **Causa:** confusión entre dos propiedades de Blender:
+  - `primitive_cube_add(size=1)` crea un cubo de **1×1×1 m**.
+  - Aplicar `o.scale = (sx, sy, sz)` escala el cubo en `sx × sy × sz` m, NO en `2*sx × 2*sy × 2*sz` m.
+  - Es decir: `scale` es la **dimensión final del cubo**, no "la mitad de la dimensión final".
+  - Equivale al `dimensions` post, no a `dimensions / 2`.
+- **Patrón de bug que se repite:** cualquier línea de la forma `caja(nombre, x, y, z, ANCHO/2.0, ALTO/2.0, ...)` está MAL escrita. Si la intención es "el cubo mide ANCHO × ALTO", el código correcto es `caja(..., ANCHO, ALTO, ...)` (sin dividir por 2). Si la intención es "el cubo está centrado en (x, y, z) y va de (x-ANCHO/2, x+ANCHO/2)", entonces `location = (x, y, z)` y `scale = (ANCHO, ALTO, FONDO)` funciona **solo si** `size=1` (lo que usamos por defecto). La confusión viene de APIs como `BoxGeometry(width, height, depth)` de three.js donde `width` es la dimensión completa.
+- **Fix aplicado (arco v4):** quitar el `/2` de las dovelas (`sx = ANCHO_D`, `sz = RADIAL`); documentar el `size=1` vs `scale` en el docstring del script (`# ATENCION E-68`); subir `ANCHO_D = chord * 1.04` para que las dovelas rectangulares superpongan levemente y absorban el wedge gap del arco circular.
+- **Lección:** cuando un asset compuesto por primitivas `cube_add` tenga tamaños "raros" (la mitad de lo esperado, gaps inexplicables), verificar PRIMERO si hay un `/2` espurio en `scale=(...)`. Y siempre comentar la semántica `size=1 ↔ scale=s` en el helper `caja()` cuando se cree uno nuevo.
+- **Verificación de humo:** pillar 2.36 m de alto + capitel encima + primera dovela tocando capitel + dovelas adyacentes sin gap visible. Si la auditoría numérica pasa pero la captura muestra gaps, es E-68 hasta que se demuestre lo contrario.
+
+### E-69 — Cuerda "colgante": la curva es una PARÁBOLA, no una catenaria `cosh`
+
+- **Síntoma (potencial; evitado por diseño en el puente M40, 2026-09-02):** al autorar un
+  puente colgante la intuición dice "catenaria". Si se usa `cosh`, el vientre queda
+  demasiado bajo o demasiado alto respecto al tablero real, y los tramos discretizados
+  no cierran simétricos sobre los postes.
+- **Causa — dos curvas distintas:**
+  - **Catenaria** `z = a·cosh(x/a)`: forma de una **cuerda suelta** que solo carga su
+    **propio peso** (la carga es uniforme por unidad de *longitud de arco*).
+  - **Parábola**: forma de una cuerda que sostiene un **tablero** (la carga es uniforme
+    por unidad de *longitud horizontal*). Es el caso de cualquier puente colgante con
+    tablones.
+- **Fórmula a usar (tablero / carga uniforme en x):**
+
+  ```python
+  def z_cable(x):
+      return Z_CENTRO + (x / HALF_SPAN) ** 2 * (Z_POSTE_TOP - Z_CENTRO)
+  ```
+
+  Con `x = ±HALF_SPAN` da `Z_POSTE_TOP` (apoyo) y con `x = 0` da `Z_CENTRO` (vientre).
+  Exacta, sin `cosh` y sin resolver numéricamente nada.
+- **Discretización — N tramos rectos orientados con `to_track_quat` (E-58):**
+
+  ```python
+  def segmento_cable(nombre, p0, p1, radio, material):
+      direccion = p1 - p0
+      largo = direccion.length
+      centro = (p0 + p1) / 2.0
+      bpy.ops.mesh.primitive_cylinder_add(
+          vertices=6, radius=radio, depth=largo, location=centro)
+      o = bpy.context.object
+      o.name = nombre
+      o.rotation_euler = direccion.to_track_quat('Z', 'Y').to_euler()
+      o.data.materials.append(material)
+      return o
+  ```
+
+  `to_track_quat('Z','Y')` alinea el eje **+Z** del cilindro (que es su largo) con la
+  dirección del tramo. Sin esto cada segmento queda vertical. **Nunca** calcular el
+  ángulo con trig manual (E-58).
+- **Lección:** la palabra del backlog ("colgante", "catenaria") describe la *forma
+  percibida*, no la física del caso. Preguntarse siempre **dónde está la carga**:
+  en la cuerda → `cosh`; en el tablero → parábola.
+
+### E-70 — Contar los `SM_` ANTES de generar: el presupuesto ALTA es ≤16 objetos
+
+- **Síntoma (puente colgante M40 v1, 2026-09-02):** el script generó **21 objetos**
+  (6 tramos de cable por lado = 12, más 2 basas + 2 postes + 3 tablones + 2 barandillas).
+  El presupuesto M166 §3.3 para ALTA es **≤16 obj**. Había que rehacer.
+- **Causa:** no hice la cuenta de objetos antes de ejecutar. El presupuesto se siente
+  "holgado" hasta que una pieza se genera **dentro de un doble bucle** (`for lado ... for
+  tramo ...`), donde el conteo crece multiplicativo, no aditivo.
+- **Regla:** escribir la fórmula de conteo en el docstring antes de generar.
+  Para el puente: `2 basas + 2 postes + 2·N cables + 3 tablones + 2 barandillas = 9 + 2N`
+  → `9 + 2N ≤ 16` → **`N ≤ 3`**. El v2 usa `N = 3` (3 tramos por lado) → 15 objetos.
+- **Dónde duele más:** cualquier bucle anidado de "lado × repetición". Multiplicar
+  mentalmente `2 × N` antes de correr. Y recordar que el merge a MEDIA/BAJA
+  (`generar_variante.py`) **no puede** arreglar un exceso de objetos de la fuente si
+  vienen de materiales distintos.
+- **Lección:** contar objetos es tan obligatorio como contar tris. El límite de
+  **objetos** es el que se viola primero cuando se discretiza una curva.
+
+### E-71 — Los ítems duplicados del checklist viven en SECCIONES DISTINTAS: el grep debe ser global
+
+- **Síntoma (2026-09-02, log 531):** perseguí el ítem
+  `- [ ] Puente de cuerda colgante (25/28 viajes)` (sección **M25**), generé un asset
+  completo (15 piezas, 3 LOD, 3 GLB) y **al cerrarlo** descubrí que ya existía:
+  `- [x] Puentes de cuerda (M25)` = `crear_puente_cuerda_lowpoly.py`, aprobado
+  2026-08-29 21:12 (log 246), con sus 3 GLB ya en Godot. Trabajo duplicado.
+- **Causa:** revisé solo la sección del módulo donde estaba la línea. El duplicado
+  estaba **más abajo en el mismo documento, en otra sección**. Es el **cuarto** caso:
+  `Puentes de troncos (M40)`, `Hongo luminoso`, `Flor de isla`, y este.
+- **Defensa obligatoria — antes de crear cualquier asset nuevo:**
+
+  ```bash
+  grep -in "palabra_clave" tools/mcp/blender-mcp/CHECKLIST-OBJETOS-BLENDER.md
+  ```
+
+  y comparar contra **todas** las líneas `[x]` del documento, no solo las de la sección.
+  Si ya existe una línea `[x]` con el mismo concepto, la línea sin marcar es duplicada:
+  **cerrarla como duplicada** en vez de autorar otra vez.
+- **Contabilidad honesta si ya se generó el asset:** el duplicado **no** suma a
+  "completados" (su gemelo ya estaba contado). El asset nuevo es **adicional**:
+  total `117 − N_dup + 1`. Ver log 531 §6.
+- **Lección:** el checklist es una lista **plana con encabezados**, no una base de datos
+  relacional. Nada impide que el mismo concepto aparezca dos veces. El grep es global.
+
+### E-72 — mtime de `.import` más viejo que el `.glb` NO significa import desactualizado
+
+- **Síntoma (2026-09-02):** tras un `EXPORT_FORZAR=1` sobre M25, el GLB
+  `25-Ruinas-Templos_puente_cuerda.glb` quedó con mtime **04:13** mientras su
+  `.glb.import` y su `.scn` seguían con mtime **Aug 30**. Aplicando E-65 al pie de la
+  letra, eso "exigía" re-correr el import.
+- **Realidad:** corrí el import headless de todas formas y **los sidecars no se
+  tocaron** (mtime sin cambios). Godot decidió que no había nada que re-importar.
+- **Causa:** Godot **no** compara mtimes para decidir. Guarda en el `.import` un
+  **hash del contenido del recurso fuente** (`source_md5` / `[deps] source_file` +
+  `dest_files`). Si el `.glb` regenerado es **byte-idéntico** (o su hash coincide), el
+  `.scn` cacheado en `.godot/imported/` sigue siendo válido y no se re-escribe nada.
+  Como `EXPORT_FORZAR=1` re-exporta *todos* los GLB del módulo, la mayoría salen
+  idénticos → sus sidecars legítimamente no se renuevan.
+- **Consecuencia:** el mtime es una **señal de sospecha**, no una prueba. La prueba es
+  el **conteo por variante y la existencia del `.scn`** (E-65):
+
+  ```bash
+  cd game/isla-ancestral
+  echo "GLB:    $(find assets/3d -name '*.glb' | wc -l)"
+  echo "IMPORT: $(find assets/3d -name '*.glb.import' | wc -l)"
+  echo "SCN:    $(find .godot/imported -name '*.scn' | wc -l)"
+  ```
+
+  Los tres números iguales ⇒ cobertura completa, **independientemente de los mtimes**.
+- **Cuándo SÍ re-importar:** si el `.glb` cambió de **contenido** (regeneraste la fuente
+  y el mesh difiere) y querés que el `.scn` se refresque. En ese caso el `.import` sí se
+  renueva solo, o forzalo borrando el `.import` + el `.scn` correspondiente.
+- **Lección:** no perseguir mtimes. Verificar por **existencia y conteo de archivos**.
+  El mtime solo sirve cuando el contenido realmente cambió.
 
 ## 4. Checklist antes de dar por terminado un asset
 
@@ -924,6 +1078,10 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - [ ] QA numérico: `z_min` apoyado (ni flotando ni hundido), sin centros duplicados, materiales asignados
 - [ ] **Detalles "pegados" a un cuerpo** (ojos, remaches, vetas, ...) parentados al cuerpo con `matrix_parent_inverse` identidad (E-11)
 - [ ] **Apoyos medidos en caliente**, no calculados a partir del espesor nominal (E-09): el script autocorrige midiendo el bounding box y trasladando el objeto al objetivo
+- [ ] **`grep -in` GLOBAL al checklist antes de empezar**: si el ítem ya existe marcado `[x]` en OTRA sección, es duplicado → cerrarlo como tal, no autorar otra vez (E-71, 4 casos ya)
+- [ ] **Conteo de `SM_` hecho ANTES de ejecutar**: `≤16` ALTA. Ojo con los bucles anidados (lado × repetición), que crecen multiplicativo (E-70)
+- [ ] **Curva correcta según dónde esté la carga**: cuerda suelta → `cosh`; tablero con carga uniforme → parábola (E-69)
+- [ ] **Verificación de import por CONTEO de archivos**, no por mtime: `glb == .glb.import == .scn` (E-65 + E-72)
 - [ ] **Cobertura total del apoyo** (E-12): el elemento sobre el que se asienta el asset cubre TODA su planta (anillos/abanicos completos, no parciales)
 - [ ] **Asentado en la base** (E-12): `z_min` del elemento que toca el suelo ≤ 0.05 (verificable con `auditar_apoyos.py`)
 - [ ] **Verificación multi-ángulo** (E-13, directiva del usuario 2026-08-28): correr `capturar_angulos.py SM_<asset> ruta.png 4` y revisar TODAS las capturas. Si UNA sola muestra luz/aire entre el objeto y su base, corregir y volver a correr. **Una sola captura frontal no alcanza.**
@@ -1070,7 +1228,7 @@ El flujo de un estudio profesional difiere en varios puntos; saberlo evita sobre
 
 **Cambios 2026-09-01 05:00 (Tier F cerrado + E-64):** cierre del **Tier F — M50 Vegetación**. El backlog decía 5 pendientes pero 2 eran duplicados rancios, así que eran **3 reales**: `arbol_frutal` (15 obj/464 tris/4 mats, faldón cónico + 4 raíces horizontales + tronco 2.30 m + copa de 3 ico-esferas + 6 frutas), `musgo_roca` (9/204/4, cilindro bajo de 12 lados con jitter) y `raices_expuestas` (6/106/2, tocón + 5 raíces en abanico de 150°). Los 3 con `z_min 0.0450` y huella validada (E-50: ≥8 vértices tocando y footprint ≥0.30 m por eje). Los 3 auditados con `chk_asset.py`, 6 capturas orbitales c/u y aprobados por visión; variantes MEDIA/BAJA derivadas; **9 GLB exportados**. **Sobre el import:** primero se diagnosticó mal (E-64 a las 05:00) creyendo que el editor abierto bloqueaba el import. Verificado por archivos a las 12:20, **el import nunca estuvo bloqueado**: los 33 GLB de M18 entraron a las 21:02 y los 9 de M50 a las 21:16, con el editor abierto (PID 3672). El diagnóstico falso vino de E-65: el sidecar se llama `<asset>.glb.import`, así que el glob `*_<asset>.import` daba 0. Los `ERROR:` de `voxel.gdextension` son ruido benigno. **Estado real: 198 GLB / 198 `.import`, cobertura 100%, cero pendientes de import.** Deja temporales `~libvoxel...TMP` (11 archivos / 82 MB desde el 26-ago) que son basura no bloqueante.
 
-**Última actualización:** 2026-09-01 12:20 — MiniMax-M3 · WorkBuddy AI · Windows (E-58/59/60/61/62/63/64/65; track_to_quat, alpha BSDF, techos sobre paredes, overhang de alero, re-asentado condicional, whitelist de módulos en el export, errores de GDExtension benignos, sidecar `.glb.import`)
+**Última actualización:** 2026-09-02 04:55 — MiniMax-M3 · WorkBuddy AI · Windows (tarea #56 cerrada: **M35 carretilla_minero** + **M33 espantapajaros**). 15 SM_ cada uno, 243 GLB/`.import`/`.scn` en Godot (cobertura 100%). Nuevos módulos `35-Mineria/` y `33-Agricultura/` agregados a la whitelist `MODULOS` de `exportar_godot.py` (**E-63**). Además: lecciones de **rueda adelantada** (carretilla: para que el cilindro de la rueda no atraviese el frente inclinado de la batea) y de **sombrero copa+ala** (espantapájaros: dos cilindros separados leen como sombrero mejicano en lowpoly, más robusto que un mesh toroidal). **E-37 positivo** = la diferencia entre "poste con cajas" y "espantapájaros" son 3 señales: sombrero, cara con rasgos, paja asomando.)
 **Cambios 04:35 (barrido visual ALTA completo, 52/52):** tras la auditoría E-24, lancé el barrido visual ALTA (52 assets) por bucle shell directo (`for b in $(find ...)` con `cut -d/ -f4`) — `qa_lote.py` espera `N_lowpoly_VARIANTE.blend` pero para ALTA la fuente ES `N_lowpoly.blend`. Duración 16m 27s, 0 fallidas. **52/52 APROBADAS** en los 6 azimuts (E-13). Único outlier numérico: `veta_hierro_lowpoly` `z_min 0.0275` — **NO bug**: la roca (SM_Veta_Roca) está en 0.0450 (toca=16, fp=2.3×2.0); los 5 cristales cuelgan en 0.027-0.149 (diseño decorativo). El grupo arrastra el `z_min=0.0275` por el cristal_3. **M166 visual sweep: 100% (52 BAJA + 52 MEDIA + 52 ALTA = 156/156).** Capturas especiales: `antorcha_pared` el set de pared (E-28) bloquea el asset en az 240/300 (esperado), `puerta_templo` se ve de canto en az 000/180 (esperado), `palmera` (4.66m) pierde el suelo en algunas azimuts por encuadre (no flota).
 **Cambios 04:15 (auditoría E-24 completa, 5 archivos corregidos):** el usuario reabrió Blender ("ya tenes abierto blender nuevamente segui"). Re-corrí `verificar_visual.py` corregido en `roca_comun_lowpoly` y `roca_pedernal_lowpoly` source — ambos pasan `z_min 0.0450 → apoyo OK` (antes: HUNDIDO 0.154 m / HUNDIDO 0.337 m). Leí las 6 hojas de contacto (04-04 a 04-06) y confirmé visualmente el fix E-50: roca_comun y roca_pedernal apoyados en los 6 azimuts. **Barrido E-24 en `scripts-reutilizables/`** (17 hits en 11 archivos): **5 archivos corregidos**, 6 SAFE. Críticos: `verificar_visual.py:medir_apoyo()` (el bug original), `asentar_en_base.py:PLANTILLA` (sobre-eleva grupo 15 cm si fuente tiene un rotado), `auditar_apoyos.py:TEMPLATE` (reporta FLOTA falsamente en rotados), `corregir_asset.py:zmin_de()` (5 sitios, el delta de re-asentado). Cosméticos: `auditar_presupuesto.py:52-53` (display), `verificar_bounds.py:21-22` (engañoso, se lee como `z_min` real). SAFE: `capturar_angulos.py`, `diagnosticar_pose.py`, `inspeccionar_escena.py` (framing/display), `auditar_flotantes.py:93` y `generar_variante.py:380` (fallback empty-mesh con docstring E-24). **Sanity check roca_comun_lowpoly:** `SM_Roca_Comun_Chica` rot=(0.2,-0.2,1.1) → `real_zmin=0.0450` vs `bbox_zmin=-0.1092` (delta 15.4 cm). Confirmado que el bug era real y que el fix lo cierra. Patrón obligatorio para scripts nuevos: NUNCA `o.bound_box` para decidir re-asentado; usar `zmin_real(o)` con fallback AABB solo si `len(o.data.vertices) == 0`. **Pendiente:** QA visual ALTA (17 hero assets) — ahora seguro porque los scripts numéricos ya no mienten.
 **Cambios 03:25 (fix E-50 en veta_hierro + veta_oro, doc E-47/48/49/50/51, log 301/302):** descubierto nuevo patrón "apoyo puntual en domo" (E-50): `z_min=0.0450` con `toca=1, footprint=0×0` significa que el objeto (usualmente un huso: punta r=0.025 abajo, punta r=0.05 arriba, ecuador r=1.2 a z=0.6) está apoyado sobre un vértice y el ecuador flota 50+ cm arriba del suelo. **Caso real:** `veta_hierro` — la roca gris-azulada estaba suspended en los 6 azimuts con sombra debajo que no tocaba la arena (visible incluso numéricamente OK: `SM_Veta_Roca` zmin=0.0450 pero ecuador a 0.36). **`piedra_afilar` fue falsa alarma E-31** (loseta con footprint 0.187×0.034, plana sobre la arena — mi juicio visual previo fue erróneo, corregido midiendo vértices reales con `diag_apoyo.py` — aprendizaje: E-37 también aplica al diagnóstico). **Fix correcto:** script `aplanar_dome.py` (BFS sobre aristas — E-51, no distancia XY, que elige vértices del techo) toma el vértice más bajo + K anillos topológicos y los aplana a `z=Z_OBJ`. K=2 funciona para husos de 42 verts (base hexagonal de ~2 m). Aplicado a `veta_hierro` (3 variantes) y `veta_oro` (3 variantes). NO aplicado a `veta_cobre`/`roca_comun`/`roca_pedernal` porque su flat-top ecuatorial disimula el single-vertex contact y pasan el E-13 visual. **Decisión arquitectural:** para vetas/rocas con flat-top ecuatorial (anillo de vértices al mismo z), la base sí es un punto pero el ojo lee el disco plano de arriba y aprueba — es E-50 latente pero aceptable. Documentado E-47 (fuente debe llamarse `N_lowpoly.blend`), E-48 (`generar_variante.py` re-asienta derivados → ALTA/MEDIA/BAJA GLBs pueden quedar a alturas distintas), E-49 (mtime-skip miente tras restores/clock-skew/git-pull → usar `EXPORT_FORZAR=1`), E-50 (apoyo puntual en domo), E-51 (vecindario por topología de aristas, no distancia XY). **6 GLBs re-exportadas** (alta/media/baja × veta_hierro + veta_oro) en `game/isla-ancestral/assets/3d/`. **Barrido visual BAJA completo**: 52/52 assets capturados (4 lotes, ~16 min totales, 0 fallos de pipeline, 0 excedidos de presupuesto). 51/52 aprobados visualmente; `veta_hierro_baja` era el único rechazo, ahora resuelto. **Pendiente próximo:** QA visual MEDIA (41 assets) y ALTA (17 assets) — mismo flujo `qa_lote.py --variante media|alta`.

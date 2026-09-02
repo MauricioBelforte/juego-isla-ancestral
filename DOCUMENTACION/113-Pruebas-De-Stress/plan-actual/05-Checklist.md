@@ -27,12 +27,12 @@
 - [x] Definir clase base StressScenario (Setup/Execute/Teardown) [M]
 - [x] Definir medición p50/p95/max por métrica [M]
 - [x] Definir reporte JSON de cada corrida [M]
-- [ ] Definir baseline versionado perf_base.json [M]
+- [x] Definir baseline versionado perf_base.json [M]
 - [ ] Definir comparación automática ±5% [M]
 - [ ] Definir seeds fijas por escenario (M10) [S]
 - [ ] Definir corre en hardware fijo (label CI) [S]
-- [ ] Definir exclusión del framework del build de jugador [M]
-- [ ] Definir integración con Debug Menu (M110) para spawn/teleport [M]
+- [x] Definir exclusión del framework del build de jugador [M]
+- [x] Definir integración con Debug Menu (M110) para spawn/teleport [M]
 - [x] Definir status por escenario en el reporte [S]
 
 ## 2. Miles de bloques modificados (1º)
@@ -91,7 +91,7 @@
 - [ ] Definir escenario con 5 000 items en inventario [C]
 - [ ] Definir métrica: UI < 16 ms al abrir/ordenar [M]
 - [ ] Definir verificación de búsqueda/filtros [S]
-- [ ] Definir persistencia del inventario enorme (M14/M59) [M]
+- [x] Definir persistencia del inventario enorme (M14/M59) [M]
 - [ ] Definir ordenamiento + drag&drop con 5 000 items [M]
 
 ## 9. Muchas construcciones (8º)
@@ -205,9 +205,9 @@
 - [x] Definir reporte JSON con p50/p95 por escenario [M]
 - [ ] Definir gráfica opcional en artifact del CI [S]
 - [ ] Definir comparación con baseline en cada corrida [M]
-- [ ] Definir gate `stress-save` en PR (rápido) [M]
-- [ ] Definir gate `stress-full` nocturno [M]
-- [ ] Definir gate `stress-long` semanal [M]
+- [x] Definir gate `stress-save` en PR (rápido) [M]
+- [x] Definir gate `stress-full` nocturno [M]
+- [x] Definir gate `stress-long` semanal [M]
 - [ ] Definir gate pre-Beta/pre-RC (M141/M142) [M]
 - [ ] Definir integración de hallazgos con M61/M62 [S]
 - [ ] Definir feed de límites desde M96 [S]

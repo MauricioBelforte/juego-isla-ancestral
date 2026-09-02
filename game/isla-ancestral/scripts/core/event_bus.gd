@@ -29,6 +29,8 @@ var time := TimeEvents.new()
 var weather := WeatherEvents.new()
 ## ── Dominio: TRAVEL ──────────────────────────────────────
 var travel := TravelEvents.new()
+## ── Dominio: VEHICLE (M67) — aditivo iter. 1 ─────────────
+var vehicle := VehicleEvents.new()
 ## ── Dominio: UI ──────────────────────────────────────────
 var ui := UIEvents.new()
 ## ── Dominio: PLAYER ──────────────────────────────────────
@@ -114,6 +116,18 @@ class TravelEvents:
 	signal travel_started(from_island: String, to_island: String)
 	## Se emite cuando se carga una isla
 	signal island_loaded(island: String)
+
+## Dominio VEHICLE (M67): eventos de vehículos. Aditivo (iter. 1, glm-5.3-flash
+## /Kilo 2026-09-02) — no rompe contratos existentes (§9 modularidad).
+class VehicleEvents:
+	## El jugador entró a un vehículo (vehicle_id, tipo del preset)
+	signal vehicle_entered(vehicle_id: String, tipo: String)
+	## El jugador salió del vehículo
+	signal vehicle_exited(vehicle_id: String, tipo: String)
+	## El vehículo atracó en un dock (magnetismo/lock M28)
+	signal vehicle_docked(vehicle_id: String, dock_id: String)
+	## Aviso amable de aguas poco profundas / límite de altitud (cozy, sin daño)
+	signal vehicle_aviso(vehicle_id: String, mensaje: String)
 
 class UIEvents:
 	## UI solicita mostrar el HUD
