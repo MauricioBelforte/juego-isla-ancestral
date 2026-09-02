@@ -263,6 +263,65 @@ Al cerrar el inventario, el `Backdrop` (ColorRect negro α=0.5 creado por `playe
 
 _No hay bugs resueltos todavía._
 
+
+### BUG-003 — Boot global frenado por print con formato sin tupla (M120)
+
+- **Estado:** [x] Resuelto (2026-09-01 23:42) | **Módulo:** M120 DLC | **Severidad:** Alta (bloqueaba el arranque de todo el juego)
+- **Síntoma:** Debugger Break en `dlc_manager.gd:24` ("not enough arguments for format string") — el juego quedaba congelado en el splash.
+- **Causa:** `print("%d %d" % a, b)` — falta la tupla `[...]` en los argumentos del `%`.
+- **Solución:** `print("...%d %d" % [a, b])` (guía 07 §9.62). Verificado: suite ÉXITO + boot con `[M120] DlcManager listo (2 DLC, 1 bundles)`.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-01 23:42 (Log 395)
+
+### BUG-004 — Perfil de hardware persistido corrupto (M115)
+
+- **Estado:** [x] Resuelto (2026-09-02 06:45) | **Módulo:** M115 Hardware | **Severidad:** Media
+- **Síntoma:** `cpu_freq_ghz=0.0` y `os_name=Unknown` en la detección; el test fallaba 2/30.
+- **Causa:** `load_profile` restauraba un perfil persistido de una detección fallida previa sin validar.
+- **Solución:** validación en `load_profile` (freq<=0 u os vacío → re-detección). Test: 30/30 OK.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 06:45 (Log 405)
+
+### BUG-005 — 23 diseños de NPC con prendas nulas (.tres inválidos, M161)
+
+- **Estado:** [x] Resuelto (2026-09-02 00:40) | **Módulo:** M161 Diseño Visual | **Severidad:** Alta (contenido visual 100% null)
+- **Síntoma:** el loader cargaba 1/23 diseños; todas las prendas `sombrero/torso/piernas/pies` eran null.
+- **Causa:** formato `[sub_resource script=ExtResource(...)]` inválido (script en el header) + loader no recursivo + carpintero fuera de RIZ/.
+- **Solución:** sub_resources normalizados (22+1), loader recursivo, reubicación y HEX de la Fedora faltante. 23/23, 0 fallos.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 00:40 (Log 396)
+
+### BUG-006 — Catálogo de coleccionables inexistente (fallback in-code, M73)
+
+- **Estado:** [x] Resuelto (2026-09-02 05:12) | **Módulo:** M73 Coleccionables | **Severidad:** Media (contra el diseño data-driven)
+- **Síntoma:** el catálogo `data/coleccionables/catalog.json` no existía — el sistema corría con el fallback in-code.
+- **Solución:** generado el JSON con los 15 items (5 minerales/4 animales/3 conchas/3 reliquias) y verificado cargando desde data-driven (Log 411).
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 05:12 (Log 411)
+
+### BUG-007 — Logs no visibles en disco (buffer de 100 líneas, M103)
+
+- **Estado:** [x] Resuelto (2026-09-02 06:45) | **Módulo:** M103 Logging | **Severidad:** Alta (crítico para QA por logs/crash-proof)
+- **Síntoma:** `GameLogger` escribía al archivo solo cada 100 líneas — un crash perdía las líneas recientes.
+- **Solución:** escritura inmediata con flush línea a línea (se preserva rotación). Test: 14/14 OK.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 06:45 (Log 525)
+
+### BUG-008 — Colisión de clases globales TerrainModifiers/TerrainDetector (M156)
+
+- **Estado:** [x] Resuelto (2026-09-02 07:00) | **Módulo:** M156 Terrenos | **Severidad:** Alta (parse global)
+- **Síntoma:** duplicados en `scripts/terrain/` (heredados) vs `scripts/terrenos/` (vigentes); el test M156 no parseaba ("not found in base").
+- **Solución:** renombrados los heredados a `TerrainModifiersLegacy`/`TerrainDetectorLegacy` (nadie los usaba) + preloads explícitos en el test. 0 fallos.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 07:00 (Log 527)
+
+### BUG-009 — CI de tests con Godot 4.3 (proyecto 4.7.2, M118)
+
+- **Estado:** [x] Resuelto (2026-09-02 17:40) | **Módulo:** M118 CI-CD | **Severidad:** Media (CI roto de facto)
+- **Síntoma:** `testing.yml` usaba `godot_version: 4.3` con el proyecto 4.7.2.
+- **Solución:** actualizado a 4.7.2 en el workflow.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 17:40 (Log 533)
+
+### BUG-010 — Atajo F12 del debug menu no cableado (M110)
+
+- **Estado:** [x] Resuelto (2026-09-02 21:05) | **Módulo:** M110 Debug Menu | **Severidad:** Media
+- **Síntoma:** el menú no alternaba con F12 (el script no tenía `_unhandled_input`).
+- **Solución:** implementado `_unhandled_input` con `KEY_F12` (protección de viewport) + check ampliado.
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 21:05 (Log 549)
 ---
 
 ## 8. Bugs Delegados a Otros Agentes
@@ -271,9 +330,28 @@ _No hay bugs resueltos todavía._
 
 _No hay bugs delegados todavía._
 
+
+### BUG-011 — Watchdog de NPC en bucle infinito ("NPC atascado NPCAgent por 2.0s")
+
+- **Estado:** [?] Delegado (2026-09-02 20:50) | **Módulo:** M64/M19 (IA NPC/vecinos) | **Severidad:** Alta
+- **Síntoma:** el `[StateMachine]` repite el estado atascado sin recuperación (spam masivo de log; CPU extra). Re-confirmado en QA visual (Log 547).
+- **Causa probable:** Catalina con `perfil=unknown` → sin rutina → el watchdog de atascado se dispara sin recuperación.
+- **Dato:** la sesión del QA (Log 394) lo documentó; el dueño (M64/M19 + Hy3) no lo resolvió aún.
+- **Delegado a:** M64/M19 (IA de NPC — agnes / Hy3 según módulo en curso).
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 20:50
+
+### BUG-012 — Selector de diálogos contextuales falla 15/15 (M162)
+
+- **Estado:** [?] Delegado (2026-09-02 06:20) | **Módulo:** M21/M162 (diálogos) | **Severidad:** Alta
+- **Síntoma:** `test_contextual_dialogue_m162.gd` falla en TODOS los checks de selección (prioridades 1/2/3, saludo cap0, viajero noche, fallback, amistad) — los 268 grafos validan OK.
+- **Causa probable:** API de selección/firma de `_cargar_registry` del `ContextualDialogueManager` (resultados null en headless).
+- **Estado actual:** aún falla (re-verificado 2026-09-02 18:00).
+- **Delegado a:** M21 (Hy3/WorkBuddy — sistema 🔵 en curso).
+- **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 06:20
 ---
 
 ## 9. Historial de Modificaciones de Este Archivo
+| 2026-09-02 21:40 | deepseek-v4-flash-vision-exp | Kilo Code | Registro BUG-003..BUG-010 (resueltos: M120/M115/M161/M73/M103/M156/M118/M110) y BUG-011..BUG-012 (delegados: M64-M19 y M21-M162) |
 
 | Fecha | Modelo | Plataforma | Resumen del cambio |
 |-------|--------|-----------|--------------------|
