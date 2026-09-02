@@ -27,6 +27,8 @@ func _run() -> void:
 	_test_modificadores(prov)
 	_test_modifiers_calculo()
 	_test_detector_clase()
+	_test_suavizado_iter2()
+	_test_puente_m155_iter2()
 	print("=== TEST M156 TERRENOS: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -79,3 +81,40 @@ func _test_detector_clase() -> void:
 		_check(detector.has_signal("terrain_changed"), "señal terrain_changed presente")
 		_check(absf(detector.detection_interval - 0.1) < 0.01, "detection_interval default 0.1")
 		detector.free()
+
+func _test_suavizado_iter2() -> void:
+	# Iter. 2: suavizado de cambios de velocidad (transiciones cozy sin tirones)
+	var v := 1.0
+	var objetivo := 0.6
+	# 1 tick no llega al objetivo
+	var v1: float = TerrainModifiers.suavizar_velocidad(v, objetivo, 0.05)
+	_check(v1 > objetivo and v1 < v, "suavizado baja progresivamente (1 tick: %.3f)" % v1)
+	# Converge al objetivo (30 ticks de 0.05 = 1.5 s)
+	var vi := 1.0
+	for i in range(30):
+		vi = TerrainModifiers.suavizar_velocidad(vi, objetivo, 0.05)
+	_check(absf(vi - objetivo) < 0.01, "suavizado converge al objetivo (%.4f)" % vi)
+	# Umbral: pega directo cerca del objetivo
+	_check(TerrainModifiers.suavizar_velocidad(0.601, 0.6, 0.05) == 0.6, "umbral pega al objetivo (sin flicker)")
+	# delta 0 no cambia nada
+	_check(TerrainModifiers.suavizar_velocidad(1.0, 0.6, 0.0) == 1.0, "delta 0 = sin cambio")
+	# calcular_suavizado end-to-end con provider real: barro 5.0 → objetivo 3.0
+	var prov := root.get_node_or_null("TerrainProvider")
+	var v2 := TerrainModifiers.calcular_suavizado(5.0, 5.0, prov, 1, null, 0.05)
+	_check(v2 < 5.0 and v2 > 3.0, "calcular_suavizado barro progresivo (%.3f)" % v2)
+	# Y converge al 3.0 con equipo nulo
+	var v3 := 5.0
+	for i in range(60):
+		v3 = TerrainModifiers.calcular_suavizado(v3, 5.0, prov, 1, null, 0.05)
+	_check(absf(v3 - 3.0) < 0.05, "calcular_suavizado converge a 3.0 m/s barro (%.3f)" % v3)
+
+func _test_puente_m155_iter2() -> void:
+	# Iter. 2: puente opcional M155 — EquipmentManager real devuelve bonus 0.0
+	# si no hay equipación (contrato: M155 ausente o sin botas = 0.0, §3.1)
+	var eq := root.get_node_or_null("EquipmentManager")
+	var bonus: float = TerrainModifiers.get_equipment_bonus(eq, 1)
+	_check(bonus == 0.0, "M155 real sin equipación → bonus 0.0 (got %.3f)" % bonus)
+	# calculate_full con M155 real sigue capado al 50%
+	var prov := root.get_node_or_null("TerrainProvider")
+	var eff: float = TerrainModifiers.calculate_full(5.0, prov, 1, eq)
+	_check(eff <= 3.0 * 1.5 + 0.01, "con M155 real barro ≤ cap 50%% (%.3f)" % eff)
