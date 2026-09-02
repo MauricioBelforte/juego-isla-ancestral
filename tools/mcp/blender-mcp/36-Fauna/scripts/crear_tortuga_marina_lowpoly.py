@@ -1,20 +1,19 @@
 # crear_tortuga_marina_lowpoly.py - Tortuga marina (M36 Fauna, checklist linea 110)
 #
-# v4 (2026-09-02, mix pedido por el usuario entre v2 y v3):
-#   - CABEZA: queda la esfera organica de la v3 pero SIN el pico de
-#     queratina (al usuario no le gustaba la trompa): redonda, solo con
-#     2 ojos algo mas grandes y adelantados para que no quede sosa.
-#   - ALETAS DELANTERAS: se MANTIENEN los remos bmesh de la v3 (los que
-#     le gustaron: perfil loftado, se ensancha a pala y afina en punta).
-#   - ALETAS TRASERAS: DISENO NUEVO (rechazo de caja v2 y cono v3):
-#     remo COMPACTO de 4 anillos con seccion ELIPTICA (ancho en Y,
-#     achatado en Z) -> pala plana de bordes redondeados, tipo aleta
-#     trasera real: mas corta y ancha que la delantera. Mismo lenguaje
-#     formal que las delanteras (coherencia), distinta proporcion.
-#   - COLA: cono corto apuntando a -X (la de la v2, la que gusto).
-#   - Resto del caparazon v3 intacto (falda 16 + domo + anillo marginal
-#     + 9 escudos proyectados sobre la curvatura).
+# v5 (2026-09-02, feedback del usuario):
+#   - COLA: restaurada la de la PRIMER version vista (v2): cono r 0.08
+#     x 0.18 con rot Y -90 (punta a -X, anillo tocando 0.045). En v3/v4
+#     la habia invertido por error (rot +90: punta hacia ADELANTE y la
+#     base colgando atras — recaida del E-19 que el z_min NO detecta).
+#   - ALETA TRASERA IZQUIERDA (bug E-74): para el lado -1 usaba
+#     ang_z = pi - 150deg = 30deg -> la pala apuntaba ADELANTE-DERECHA,
+#     cruzaba por debajo del cuerpo y quedaba oculta junto a la otra
+#     (por eso se veia UNA sola pata). El espejo correcto entre
+#     izquierda/derecha es NEGAR el angulo Z: -150deg (atras-izquierda).
+#   - CABEZA: agrandada r 0.105 -> 0.120 (pedido del usuario), ojos
+#     re-ubicados a la nueva superficie (y +-0.105).
 #
+# v4: mix v2/v3 (cabeza sin pico, delanteras remo, traseras remo eliptico).
 # v3: remos delanteros, escudos proyectados, pico (eliminado en v4).
 # v2: fix E-50 (esfera colgaba bajo el plastron) + E-19 (cola al reves).
 # v1: primera version.
@@ -195,20 +194,18 @@ cuello.rotation_euler = (0.0, radians(-90), 0.0)
 cuello.data.materials.append(MAT_piel)
 
 # ===================== 7) CABEZA (esfera organica, SIN pico) =====================
-# v4: el usuario pidio cabeza redonda sin la trompa de la v3. Esfera
-# escalada con 2 ojos algo mas grandes y ADELANTE (x 0.60) para que la
-# cara no quede sosa sin el pico.
+# v5: agrandada a pedido del usuario (r 0.105 -> 0.120).
 bpy.ops.mesh.primitive_uv_sphere_add(
-    segments=16, ring_count=8, radius=0.105,
+    segments=16, ring_count=8, radius=0.120,
     location=(0.545, 0.0, 0.165))
 cabeza = bpy.context.object
 cabeza.name = 'SM_Tortuga_Cabeza'
 cabeza.scale = (1.05, 1.00, 0.92)
 cabeza.data.materials.append(MAT_piel)
 
-# Ojos: 2 cajitas oscuras tangentes, algo mayores (v4).
-caja_rot('SM_Tortuga_Ojo_0', 0.585, -0.098, 0.188, 0.055, 0.028, 0.050, MAT_ojos)
-caja_rot('SM_Tortuga_Ojo_1', 0.585, +0.098, 0.188, 0.055, 0.028, 0.050, MAT_ojos)
+# Ojos (v5): tangentes a la cabeza grande (semieje Y 0.12 -> y +-0.105).
+caja_rot('SM_Tortuga_Ojo_0', 0.590, -0.105, 0.190, 0.060, 0.030, 0.055, MAT_ojos)
+caja_rot('SM_Tortuga_Ojo_1', 0.590, +0.105, 0.190, 0.060, 0.030, 0.055, MAT_ojos)
 
 # ===================== 8) ALETAS DELANTERAS (bmesh tipo remo) =====================
 # Loft de 6 anillos octogonales a lo largo del eje X local del objeto:
