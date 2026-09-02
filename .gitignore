@@ -125,6 +125,23 @@ fix_*.py
 verify_*.py
 gen_*.py
 
+# Temporales de agentes (raíz del proyecto)
+_tmp_*.txt
+_tmp_*.py
+bloquear_m23.py
+reservar_log.ps1
+postlaunch_checklist.json
+
+# Temporales de game/
+game/isla-ancestral/_probe_col.gd
+game/isla-ancestral/reservar_log.ps1
+
+# Build output
+out/
+
+# Imágenes de prueba
+tools/mcp/blender-mcp/scripts-prueba/test_vision.png
+
 # =============================================
 # Assets pesados de Blender (usar Git LFS si se necesitan)
 # =============================================
