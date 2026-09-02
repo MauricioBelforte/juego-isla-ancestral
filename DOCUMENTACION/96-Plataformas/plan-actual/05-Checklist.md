@@ -23,34 +23,34 @@
 ## 1. Matriz de plataformas (RF1)
 
 - [x] Implementar matriz data-driven (plataformas.json: 10 plataformas, 20 pts c/u) [C]
-- [ ] Definir fuente de datos verificable por celda (precio, SDK, requisitos) [M]
+- [x] Definir fuente de datos verificable por celda (precio, SDK, requisitos) [M]
 - [ ] Definir actualización trimestral de la matriz (M144) [S]
 - [ ] Definir formato único de la matriz (tabla markdown en plan-actual) [S]
 
 ## 2. PC (P1)
 
 - [ ] Definir PC como plataforma principal (ventana base) [M]
-- [ ] Definir targets de PC: Windows x64 (P0), macOS (P1), Linux-Proton (P1) [M]
+- [x] Definir targets de PC: Windows x64 (P0), macOS (P1), Linux-Proton (P1) [M]
 - [ ] Definir requisitos mínimos y recomendados probados (M61) [M]
-- [ ] Definir build Steam Deck compatible desde el target PC [M]
+- [x] Definir build Steam Deck compatible desde el target PC [M]
 
 ## 3. Steam (P2)
 
-- [ ] Definir Steam como tienda primaria (lanzamiento día 0) [M]
+- [x] Definir Steam como tienda primaria (lanzamiento día 0) [M]
 - [x] Implementar SteamBridge mock (contrato SDK, cloud simulada, logros stub) [M]
-- [ ] Definir logros Steam mapeados (M59) [M]
+- [x] Definir logros Steam mapeados (M59) [M]
 - [x] Implementar cloud Steam (steam_bridge.gd: guardar/cargar cloud, cross-save) [M]
-- [ ] Definir overlay Steam operativo [M]
-- [ ] Definir validación "Deck Verified" en la página [M]
-- [ ] Definir build branch/ómo beta de RC [S]
+- [x] Definir overlay Steam operativo [M]
+- [x] Definir validación "Deck Verified" en la página [M]
+- [x] Definir build branch/ómo beta de RC [S]
 
 ## 4. Epic Games Store (P3)
 
 - [ ] Definir EGS como P1 (decisión en Beta por coste/beneficio) [M]
-- [ ] Definir SDK EOS integrado vía bridge (si se aprueba) [M]
-- [ ] Definir logros EOS mapeados [M]
-- [ ] Definir cloud EOS (opcional) [M]
-- [ ] Definir revisión de contenido y build EGS en M142 [M]
+- [x] Definir SDK EOS integrado vía bridge (si se aprueba) [M]
+- [x] Definir logros EOS mapeados [M]
+- [x] Definir cloud EOS (opcional) [M]
+- [x] Definir revisión de contenido y build EGS en M142 [M]
 - [ ] Definir exclusividad temporal decidida explícitamente (NO por defecto) [S]
 
 ## 5. GOG (P4)
@@ -91,26 +91,26 @@
 
 ## 10. Steam Deck (P9)
 
-- [ ] Definir verificación "Deck Verified" como objetivo P0.5 [M]
-- [ ] Definir cheque deck en CI: 800p + gamepad + textos [M]
-- [ ] Definir perfil de control específico Deck (M57) [M]
-- [ ] Definir pruebas de rendimiento en Deck (M61) [M]
-- [ ] Definir manejo de suspensión/resumen del Deck [S]
-- [ ] Definir reporte público del estado Deck en la página Steam [S]
+- [x] Definir verificación "Deck Verified" como objetivo P0.5 [M]
+- [x] Definir cheque deck en CI: 800p + gamepad + textos [M]
+- [x] Definir perfil de control específico Deck (M57) [M]
+- [x] Definir pruebas de rendimiento en Deck (M61) [M]
+- [x] Definir manejo de suspensión/resumen del Deck [S]
+- [x] Definir reporte público del estado Deck en la página Steam [S]
 
 ## 11. Linux si corresponde (P10)
 
 - [ ] Definir decisión: Linux vía Proton verificado (no nativo) [M]
-- [ ] Definir test de Proton mensual (build actual) [M]
+- [x] Definir test de Proton mensual (build actual) [M]
 - [ ] Definir comunicación del soporte de Linux en FAQ/Store [S]
 - [ ] Definir nativo Linux solo si telemetría lo demanda [S]
 
 ## 12. macOS si corresponde (P11)
 
-- [ ] Definir decisión: build nativa Apple Silicon [M]
+- [x] Definir decisión: build nativa Apple Silicon [M]
 - [ ] Definir Intel macOS condicional a telemetría de usuarios [M]
 - [ ] Definir notarización/requisitos de macOS documentados [M]
-- [ ] Definir CI de build macOS en pipeline [M]
+- [x] Definir CI de build macOS en pipeline [M]
 
 ## 13. Definir prioridad (P12)
 
@@ -121,7 +121,7 @@
 
 ## 14. Analizar certificación (P13)
 
-- [ ] Definir checklist de certificación Steam (revisión de contenido) [M]
+- [x] Definir checklist de certificación Steam (revisión de contenido) [M]
 - [ ] Definir checklist de certificación EGS y GOG [M]
 - [ ] Definir checklist de consolas (TRC/XR/LOTC) si GATE [M]
 - [ ] Definir revisión temprana de certificación 2 meses antes del RC [M]
@@ -129,7 +129,7 @@
 
 ## 15. Analizar costes (P14)
 
-- [ ] Definir tabla de costes: fees de tiendas (Steam $100, EGS 0) [M]
+- [x] Definir tabla de costes: fees de tiendas (Steam $100, EGS 0) [M]
 - [ ] Definir tabla de costes: devkits por consola [M]
 - [ ] Definir tabla de costes: testing 3rd party por plataforma [M]
 - [ ] Definir total estimado por plan de plataformas [M]
@@ -137,10 +137,10 @@
 
 ## 16. Analizar SDK (P15)
 
-- [ ] Definir versión de Steamworks target [M]
-- [ ] Definir versión de EOS target [M]
-- [ ] Definir versiones de SDK de consolas (si GATE) [M]
-- [ ] Definir política de actualización de SDKs (mensual) [S]
+- [x] Definir versión de Steamworks target [M]
+- [x] Definir versión de EOS target [M]
+- [x] Definir versiones de SDK de consolas (si GATE) [M]
+- [x] Definir política de actualización de SDKs (mensual) [S]
 - [x] Implementar IPlatformBridge abstracta (interfaz común sin hardcode de SDKs) [S]
 
 ## 17. Analizar logros (P16)
@@ -160,7 +160,7 @@
 ## 19. Analizar controller support (P18)
 
 - [ ] Definir gamepad tratamiento ciudadano de primer orden (M57) [M]
-- [ ] Definir perfiles de gamepad por plataforma (deck/ps/xb/nx) [M]
+- [x] Definir perfiles de gamepad por plataforma (deck/ps/xb/nx) [M]
 - [ ] Definir UI 100% navegable con gamepad (M57/M89) [M]
 - [ ] Definir remapeo completo (M58) [C]
 - [ ] Definir notificación de cambio de input (gamepad↔teclado) [S]
@@ -168,7 +168,7 @@
 ## 20. Analizar cross-save (P19)
 
 - [x] Implementar cross-save (guardar_save_cloud/cargar_save_cloud en IPlatformBridge) [M]
-- [ ] Definir Steam↔Steam Deck automático (documentado) [S]
+- [x] Definir Steam↔Steam Deck automático (documentado) [S]
 - [ ] Definir consolas con cloud de plataforma (si GATE) [M]
 - [ ] Definir sin infraestructura cross-save propia nueva [S]
 - [ ] Definir prueba de cross-save 30 ciclos (M112) [M]
@@ -181,7 +181,7 @@
 
 ## 22. Calidad y cierre
 
-- [ ] Definir CI multi-target (Windows/macOS/Linux-Proton/Deck) [C]
+- [x] Definir CI multi-target (Windows/macOS/Linux-Proton/Deck) [C]
 - [x] Tests de plataforma: NullBridge, SteamBridge mock, cross-save, matriz (test_plataformas_m96.gd, 23/0 OK) [M]
 - [x] Documentación plan-actual actualizada y firmada [S]
 - [x] Log del módulo en Logs/ [S]

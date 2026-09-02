@@ -9,6 +9,7 @@
 [ext_resource type="Resource" path="res://data/villagers/catalina_oso.tres" id="6_catalina"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/status_bar.gd" id="8_status"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/interact_prompt.gd" id="13_interact"]
+[ext_resource type="Script" path="res://scripts/fauna/tortuga_npc.gd" id="14_tortuga"]
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
 sky_top_color = Color(0.4, 0.65, 0.95, 1)
@@ -103,3 +104,7 @@ perfil = ExtResource("6_catalina")
 dialogue_id = "catalina_hola"
 
 [node name="DayNightCycle" type="Node3D" parent="." unique_id=671106117]
+
+[node name="TortugaNPC" type="CharacterBody3D" parent="." unique_id=884620771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 268, 16, 250)
+script = ExtResource("14_tortuga")

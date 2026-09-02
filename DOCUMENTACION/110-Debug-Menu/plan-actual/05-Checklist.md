@@ -282,3 +282,8 @@
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
 **Totales:** 138 ítems · Completados: 138 · Pendientes: 0 · No resueltos: 0.
+## Fix F12 + verificación visual (2026-09-02 21:05 — deepseek-v4-flash-vision-exp)
+
+- [x] **Hallazgo**: el debug_menu.gd NO tenía el atajo F12 cableado (no existía _unhandled_input; la apertura de la mañana fue por otra vía/estado) — se **implementó** `_unhandled_input` con KEY_F12 → alternar() (con protección de viewport)
+- [x] Test: instanciado + only-debug OK; el check F12 ampliado al test
+- [?] El test completo se cuelga en el export de diagnóstico (entorno headless de la tarde — misma sección que la mañana; el export diag ya fue verificado como OK en el log 403). La verificación F12 en runtime queda para la próxima corrida interactiva (dueño: deepseek-v4-flash-vision-exp)

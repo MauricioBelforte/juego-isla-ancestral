@@ -171,7 +171,7 @@
 - [ ] Definir archivo de la obra aprobada en pipeline (M108) [S]
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
-- [ ] Definir feed del índice a M151 (auditoría legal) [S]
+- [x] Definir feed del índice a M151 (auditoría legal) [S]
 
 ## Totales
 **Total de ítems:** 103

@@ -125,7 +125,7 @@
 ## G. Delegación y cierre (12)
 
 - [x] Módulo marcado delegable [S]
-- [ ] 3 alternativas descartadas documentadas [S]
+- [x] 3 alternativas descartadas documentadas [S]
 - [x] API estable para consumidores [S]
 - [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Composición → compositor/Assets (spec lista) [S]

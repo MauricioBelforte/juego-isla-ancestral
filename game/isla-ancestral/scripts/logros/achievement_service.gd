@@ -162,13 +162,14 @@ func _fecha_actual() -> Dictionary:
 
 func _emitir_toast(logro_id: String, nombre: String) -> void:
 	var bus := get_node_or_null("/root/EventBus")
-	if bus == null or not bus.has_signal("notify"):
+	# La señal notify vive en el dominio interno UIEvents (bus.ui), no en la raíz
+	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
 		return
 	var oculto := bool(_logros.get(logro_id, {}).get("oculto", false))
 	var texto := "Logro desbloqueado"
 	if not oculto:
 		texto = String(_logros[logro_id].get("descripcion", "Logro desbloqueado"))
-	bus.notify.emit({
+	bus.ui.notify.emit({
 		"tipo": "logro",
 		"id": logro_id,
 		"titulo": nombre,

@@ -275,6 +275,9 @@
 - [x] `retire_asset_logic.gd` + wrapper `retire_asset.gd` creados (retiro final → archive + registro _RETIRADOS.md) [M]
 - [x] `atlas_builder_logic.gd` + wrapper `atlas_builder.gd` creados (atlas ≤ 4096² con margen anti-bleeding) [M]
 - [x] `asset_memory_reporter_logic.gd` + wrapper `asset_memory_reporter.gd` creados (reporte VRAM/RAM por asset) [M]
+
+## Evidencia M108 — Log 540
+- Log 540: núcleo V0 creado; 12 scripts en `tools/asset_pipeline/`; runner headless y escena de prueba creados; bloqueo headless documentado.
 - [ ] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C]
 - [ ] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [ ] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]

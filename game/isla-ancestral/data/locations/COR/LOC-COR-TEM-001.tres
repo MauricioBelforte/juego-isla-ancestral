@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_od8de"]
+
+[resource]
+script = ExtResource("1_od8de")
+location_id = "LOC-COR-TEM-001"
+nombre = "Templo Coral"
+tipo = 11
+isla = 1
+descripcion = "Templo ancestral del arrecife. Guiado por el sacerdote del coral."
+conexiones = ["LOC-COR-SEL-001"]
+tags = ["templo", "sello"]

@@ -119,7 +119,7 @@
 ## H. Delegación y cierre (10)
 
 - [x] Módulo marcado delegable [S]
-- [ ] 3 alternativas descartadas documentadas [S]
+- [x] 3 alternativas descartadas documentadas [S]
 - [x] API estable [S]
 - [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Assets → compositor (spec con familia tonal) [S]
@@ -134,7 +134,7 @@
 - [x] Verificar coherencia de SFX con M41 (Música) y M42 (Sonido Ambiental)
 - [x] Actualizar catálogo de SFX cuando se agreguen nuevas superficies
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
-- [ ] Documentar lecciones de diseño sonoro para futuros módulos
+- [x] Documentar lecciones de diseño sonoro para futuros módulos
 
 **Totales:** 96 ítems · Completados: 30 · Pendientes: 66 · No resueltos: 0.
 **Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool estático de 24 voces, prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4), API `reproducir`/`reproducir_superficie`/`configurar_volumen`. Test headless `test_sfx_m43.gd` **15/0 OK**. Pendiente: assets reales de SFX (P1-P25) y `reproducir_localizado` 3D (RF3/RF5) → compositor/integración.

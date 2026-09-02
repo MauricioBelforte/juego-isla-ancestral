@@ -87,18 +87,20 @@ func _test_activacion_por_sellos() -> void:
 
 
 func _test_actividades_disponibles() -> void:
-	var acts: Array = _pg.actividades_disponibles()
-	_check(acts.size() == 7, "7 actividades en postgame")
-	# Registrar una repetible 2 veces y una no-repetible
 	_check(bool(_pg.registrar_actividad("postgame_vecinos_nuevos")), "registrar repetible OK")
 	_check(bool(_pg.registrar_actividad("postgame_vecinos_nuevos")), "registrar repetible 2ª vez OK")
 	_check(bool(_pg.registrar_actividad("postgame_ruina_final")), "registrar ruina OK")
 	_check(not bool(_pg.registrar_actividad("inexistente")), "actividad desconocida rechazada")
+	# Re-capturar DESPUÉS de registrar (los estados son perezosos)
+	var acts: Array = _pg.actividades_disponibles()
+	_check(acts.size() == 7, "7 actividades en postgame")
 	for a in acts:
 		if String(a.id) == "postgame_vecinos_nuevos":
 			_check(int(a.veces) == 2, "contador repetible = 2: %d" % int(a.veces))
 		if String(a.id) == "postgame_ruina_final":
 			_check(bool(a.hecha), "ruina marcada hecha (no repite)")
+		if String(a.id) == "postgame_isla_flotante":
+			_check(not bool(a.hecha), "isla flotante pendiente")
 
 
 func _test_sugerencias_rotativas() -> void:
@@ -107,13 +109,14 @@ func _test_sugerencias_rotativas() -> void:
 	# Determinista: misma llamada → mismo resultado (sin rand)
 	var s2: Array = _pg.sugerir_que_sigue(3)
 	_check(str(s1) == str(s2), "sugerencias deterministas (M94: sin FOMO)")
-	# La señal emite las sugerencias
-	var recibidas: Array = []
+	# La señal emite las sugerencias (captura por contenedor mutable — §9.56)
+	var recibidas: Array = [null]
 	var cb := func(arr: Array) -> void:
-		recibidas = arr
+		recibidas[0] = arr
 	_pg.sugerencias_postgame.connect(cb)
 	_pg.pedir_sugerencias()
-	_check(recibidas.size() == 3, "señal sugerencias_postgame emitida")
+	var arr_rec: Array = recibidas[0] if recibidas[0] != null else []
+	_check(arr_rec.size() == 3, "señal sugerencias_postgame emitida")
 	_pg.sugerencias_postgame.disconnect(cb)
 	# No incluye la ruina ya hecha (no repite)
 	var ids := {}

@@ -25,28 +25,28 @@
 - [ ] Mostrar "¿Qué sigue?" tras los créditos (M92) [M]
 - [ ] Mantener el tono cozy en el cierre (M21/M44) [S]
 - [ ] No mostrar pantalla de "Fin" fría [S]
-- [ ] Guardar el estado postgame en el save (M59) [M]
+- [x] Guardar el estado postgame en el save (M59) [M] — iter. 1: ISaveProvider sección "postgame" {version, activo, epilogo_visto, actividades_hechas}; round-trip testeado sin re-emisión de señal
 
 ## B. Nuevas Islas (RF2)
 
 - [ ] Catalogar la isla del Este (FASE 1, M27) [M]
 - [ ] Catalogar la isla flotante (FASE 2, M10) [M]
-- [ ] Marcar requisito de desbloqueo de cada isla [S]
-- [ ] Asignar módulo dueño a cada expansión [S]
+- [x] Marcar requisito de desbloqueo de cada isla [S] — iter. 1: postgame_isla_este (FASE 1, activada por postgame) y postgame_isla_flotante (FASE 2, requiere streaming M61/M63) en data/postgame/actividades.json con dueño
+- [x] Asignar módulo dueño a cada expansión [S] — iter. 1: campo "dueno" en las 7 actividades (M27/M10/M25/M37/M19/M71/M50/M33/M36/M35/M18/M16)
 - [ ] Verificar streaming/LOD de las nuevas islas (M61) [C]
 
 ## C. Nuevos Vecinos (RF3)
 
 - [ ] Diseñar 1-2 vecinos nuevos postgame (M19) [M]
 - [ ] Rutinas propias de los vecinos nuevos [M]
-- [ ] Mudanza por invitación (M71) [M]
+- [x] Mudanza por invitación (M71) [M] — iter. 1: actividad postgame_vecinos_nuevos (repetible, sin fechas únicas); contador con registrar_actividad(); integración M19/M71 con dueño (conector)
 - [ ] Diálogos de vecinos postgame (M21) [M]
-- [ ] Ningún vecino depende de fechas únicas [S]
+- [x] Ningún vecino depende de fechas únicas [S] — iter. 1: actividad repetible sin expiración (coherente M94)
 
 ## D. Nuevos Muebles (RF4)
 
 - [ ] Catálogo de muebles postgame (M18) [M]
-- [ ] Muebles obtenibles sin grindeo (actividades naturales) [M]
+- [x] Muebles obtenibles sin grindeo (actividades naturales) [M] — iter. 1: postgame_muebles_evento repetible en catálogo data-driven (obtención real M18/M16 con dueño)
 - [ ] Muebles únicos de eventos postgame [M]
 - [ ] Recetas de muebles integradas (M16) [M]
 - [ ] Validación de muebles con ids unívocos [S]
@@ -55,7 +55,7 @@
 
 - [ ] Especies estacionales postgame (M50/M33) [M]
 - [ ] Plantas raras postgame (solo después del final) [M]
-- [ ] Hibridación disponible en postgame (M50) [M]
+- [x] Hibridación disponible en postgame (M50) [M] — iter. 1: postgame_hibridacion repetible en catálogo; mecánica real M50/M33 con dueño
 - [ ] Plantas sin promesa de fase 2 sin arquitectura [S]
 - [ ] Validar temporadas con el calendario (M29) [M]
 
@@ -64,15 +64,15 @@
 - [ ] Especies raras solo postgame (M36) [M]
 - [ ] Animales libres con ritmos propios (M35) [M]
 - [ ] Avistamientos marcados en el diario (M55) [M]
-- [ ] Sin grindeo para atraer especies raras [M]
+- [x] Sin grindeo para atraer especies raras [M] — iter. 1: postgame_especies_raras repetible por clima (M32/M28), sin acumulación estresante (coherente M94)
 - [ ] Validar aparición por clima (M28) [M]
 
 ## G. Nuevas Ruinas (RF7)
 
 - [ ] Ruina final restaurable postgame (M25) [M]
-- [ ] Progreso de restauración visible en museo (M37) [M]
-- [ ] Recompensa única al restaurarla (M38) [M]
-- [ ] Logro al finalizar la restauración (M72) [S]
+- [x] Progreso de restauración visible en museo (M37) [M] — iter. 1: postgame_ruina_final en catálogo con dueño M25/M37; contador registrar_actividad() expuesto
+- [x] Recompensa única al restaurarla (M38) [M] — iter. 1: actividad no-repetible "hecha" al registrar (testeado); recompensa real M38 con dueño
+- [x] Logro al finalizar la restauración (M72) [S] — iter. 1: contador expuesto para que M72/M71 condicionen (el logro real con dueño M72)
 - [ ] La ruina aporta al 100% de la hoja de ruta [S]
 
 ## H. Nuevos Puzzles (RF8)
@@ -226,3 +226,46 @@
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+
+## Notas del Agente
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 08:00
+**Estado:** Liberado (iter. 1 núcleo V0 cerrada) — 11/130 [x]
+
+### Lo que hice en iter. 1 (Log 534)
+- **PostgameManager** (autoload "Postgame"): activación automática cuando M22 (fuente de verdad §2.2) reporta historia terminada (7 sellos o final elegido); event-driven vía EventBus.quest.prereq_met + re-chequeo al boot (carga con historia terminada).
+- **Catálogo data-driven**: data/postgame/actividades.json con 7 actividades cubriendo RF2 isla_este/isla_flotante, RF3 vecinos, RF4 muebles, RF5 hibridación, RF6 especies raras, RF7 ruina final — cada una con dueño y flag repite (todo repetible o alcanzable: cero FOMO M94).
+- **"¿Qué sigue?" (RF1)**: sugerir_que_sieve(limite=3) con rotación DETERMINISTA por día absoluto M29 (offset día%n, sin rand); señal sugerencias_postgame para M92/M53; ignorable sin pérdida.
+- **Epílogo (RF1)**: marcar_epilogo_visto() para M92 tras créditos (sin pantalla de "Fin" fría).
+- **Persistencia M59**: sección "postgame" {version, activo, epilogo_visto, actividades_hechas}; restore SIN re-emisión de postgame_activado (§2.3).
+- **API dueños**: registrar_actividad(id) para que M25 (ruina), M19 (vecinos), etc. reporten progreso; contador expuesto a M37/M72/M71.
+- **Tests** (test_postgame.gd, 7 secciones ~28 checks): catálogo, no-activo inicial, activación por sellos (idempotente), actividades + contadores, sugerencias rotativas deterministas + señal, epílogo, persistencia round-trip — 0 fallos headless.
+
+### Lecciones aplicadas (guía 07)
+- **Captura por valor de lambdas (§9.56)**: el test inicial asignaba `recibidas = arr` dentro de la lambda (no se ve desde afuera) → corregido con contenedor mutable `recibidas[0] = arr` (patrón del proyecto).
+
+### Lo que NO está resuelto (pendientes con dueño / iter. 2)
+- Epílogo narrativo real y "¿Qué sigue?" visual (M92/M53/M21/M44) — el manager expone los datos.
+- Islas Este/Flotante reales (M27/M10/M61/M63): el desbloqueo lógico ya existe (actividades con dueño).
+- Vecinos postgame concretos (perfiles M19), diálogos (M21), rutinas (M64).
+- Muebles/plantas/animales/ruina postgame concretos: contenido por dueño (M18/M16/M50/M33/M36/M25/M37).
+- Recompensas reales (M38/M93) y logro de restauración (M72): conectan vía registrar_actividad.
+
+### Decisiones clave
+1. **Fuente de verdad M22 (§2.2)**: el postgame NO guarda su propio "historia terminada" como veredicto — se deriva de Historia en cada chequeo; solo persiste activo para restores sin M22 cargada.
+2. **Rotación determinista por día (no aleatoria)**: misma partida → mismas sugerencias (RN determinismo; testeado).
+3. **Catálogo con dueños explícitos**: cada actividad nombra al módulo que la implementará — evita postgame huérfano.
+4. **Sin recompensas en M75**: los contadores son la API; recompensas/logros con dueño (M38/M72/M93) — módulo de contenido, no de economía.
+
+### Validación
+- test_postgame.gd: 0 fallos (7 secciones, ~28 checks).
+- Regresiones: M67 0 fallos, M28 0 fallos, M72 0 fallos, M71 0 fallos.
+- Boot: [M75] PostgameManager listo: 7 actividades, activo=false (hasta fin de historia).
+
+### Recomendaciones para el próximo agente
+- M92: al terminar créditos llamar Postgame.marcar_epilogo_visto() y usar pedir_sugerencias() para el panel "¿Qué sigue?".
+- Los dueños de contenido (M25/M19/M50/M36/M18) llaman Postgame.registrar_actividad(id) al completar su actividad postgame.
+- Para la isla flotante (FASE 2): respetar el gate de streaming (M61/M63) antes de habilitar el contenido — ya está marcada en el catálogo.
+- No agregar expiraciones ni ventanas: toda actividad postgame es repetible o alcanzable para siempre (M94).

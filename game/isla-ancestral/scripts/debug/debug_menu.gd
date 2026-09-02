@@ -46,6 +46,15 @@ func alternar() -> void:
 	visible = not visible
 	print("[M110] Debug menu %s" % ("visible" if visible else "oculto"))
 
+## Atajo F12 para alternar el menú (fix 2026-09-02, deepseek-v4-flash-vision-exp):
+## el menú no tenía input cableado; F12 alterna visible.
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F12:
+		alternar()
+		var vp := get_viewport()
+		if vp:
+			vp.set_input_as_handled()
+
 func esta_visible() -> bool:
 	return visible
 

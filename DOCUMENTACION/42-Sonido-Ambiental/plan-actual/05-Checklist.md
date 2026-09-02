@@ -122,7 +122,7 @@
 ## H. Delegación y cierre (10)
 
 - [x] Módulo marcado delegable [S]
-- [ ] 3 alternativas descartadas documentadas [S]
+- [x] 3 alternativas descartadas documentadas [S]
 - [x] API estable [S]
 - [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Samples → compositor (spec lista) [S]

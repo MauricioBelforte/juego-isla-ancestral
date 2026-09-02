@@ -1,4 +1,4 @@
-extends CharacterBody3D
+﻿extends CharacterBody3D
 
 ## Módulo 06: Jugador — Movimiento estilo Animal Crossing
 ## Usa VoxelBoxMover para colisión voxel (Minecraft-like)
@@ -97,8 +97,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 	# Teclas de UI/inventario (no requieren voxel_tool)
 	if _event is InputEventKey and _event.pressed:
 		match _event.keycode:
-			KEY_B:
-				_toggle_inventory()
 			# M13: Teclas 1-6 para hotbar de herramientas
 			KEY_1: _equip_hotbar_slot(0)
 			KEY_2: _equip_hotbar_slot(1)
@@ -106,10 +104,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 			KEY_4: _equip_hotbar_slot(3)
 			KEY_5: _equip_hotbar_slot(4)
 			KEY_6: _equip_hotbar_slot(5)
-			# E5: F para toggle favorito en slot hover
-			KEY_F:
-				if _inventory_open and _hovered_slot >= 0:
-					_on_toggle_favorite(_hovered_slot)
 
 	# M13: E/Q los procesa ToolController (polling en _physics_process, evita handlers duplicados §9.29)
 	# Scroll reservado a la cámara (lección 9.25: mouse solo para cámara)
@@ -331,7 +325,11 @@ func _rotate_to_direction() -> void:
 	var target_angle: float = atan2(_move_direction.x, _move_direction.z)
 	rotation.y = target_angle
 
-## ── M14: Inventario y Hotbar ──────────────────────────────
+## ── M14: Inventario (LEGACY INERTE — BUG-001 2026-09-02) y Hotbar ──────────────
+## ⚠️ UNIFICACIÓN: el panel de inventario de esta sección quedó DESACTIVADO.
+## La acción `inventario` (tecla B) la gestiona InventoryLayer (M53) vía UIManager.
+## Solo `_hotbar_hud` y el hotbar M13 siguen activos; el resto es código legado
+## inerte (eliminar en refactor definitivo de M14 con próximo agente).
 
 var _inventory_open: bool = false
 var _inventory_panel: Control = null
@@ -686,20 +684,6 @@ func _hide_tooltip() -> void:
 		_tooltip.visible = false
 
 func _process(delta: float) -> void:
-	# Tooltip delay
-	if _tooltip_slot_idx >= 0 and _inventory_open:
-		_tooltip_timer += delta
-		if _tooltip_timer >= 0.5:
-			_show_tooltip_at(_tooltip_slot_idx)
-	# E20: Mover preview de drag con el mouse
-	if _dragging and _drag_preview != null:
-		_drag_preview.global_position = get_viewport().get_mouse_position() + Vector2(16, 16)
-	# Cierre con ESC (M57 iter. 2: vía ControlInput, capa única de acciones)
-	if _inventory_open and ControlInput.accion_justa("inventario"):
-		if _dragging:
-			_cancel_drag()
-		else:
-			_toggle_inventory()
 	# M13: parpadeo de la herramienta activa cuando pide reparación (<20%, aviso no castigo)
 	_blink_tiempo += delta
 	if _tool_controller and _tool_controller.herramienta and _hotbar_hud:

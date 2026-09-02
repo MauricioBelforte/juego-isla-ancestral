@@ -1,23 +1,21 @@
 {
-  "version": 1,
+  "version": 2,
   "isla_base": "RIZ",
   "islas": {
-    "RIZ": {
-      "nombre": "Isla Raíz",
-      "centro": [256, 256],
-      "radio": 256,
-      "biomas_principales": ["playa", "pradera", "bosque", "montana"]
-    }
+    "RIZ": {"nombre": "Isla Raíz", "centro": [256, 256], "radio": 256, "biomas_principales": ["playa", "pradera", "bosque", "montana"]},
+    "COR": {"nombre": "Isla Coral", "centro": [1024, 256], "radio": 220, "biomas_principales": ["playa", "arrecife", "laguna"]},
+    "CEN": {"nombre": "Isla Ceniza", "centro": [256, 1024], "radio": 220, "biomas_principales": ["volcan", "ceniza", "roca"]},
+    "AUR": {"nombre": "Isla Aurora", "centro": [1024, 1024], "radio": 200, "biomas_principales": ["bosque_ancestral", "pradera", "lago"]}
   },
   "pois": [
-    {"id": "poi_spawn", "nombre": "Punto de partida", "categoria": "punto", "x": 256, "z": 256},
-    {"id": "poi_choza", "nombre": "Biblioteca de la Chozavil", "categoria": "hogar", "x": 320, "z": 320},
-    {"id": "poi_ruina", "nombre": "Ruina Chozavil", "categoria": "ruina", "x": 320, "z": 322},
-    {"id": "poi_mesa", "nombre": "Mesa de trabajo", "categoria": "taller", "x": 326, "z": 322},
-    {"id": "poi_faro", "nombre": "Faro", "categoria": "hito", "x": 350, "z": 350},
-    {"id": "poi_templo_raiz", "nombre": "Templo de la Raíz", "categoria": "templo", "x": 200, "z": 200},
-    {"id": "poi_playa_norte", "nombre": "Playa del Norte", "categoria": "playa", "x": 256, "z": 80},
-    {"id": "poi_plaza", "nombre": "Plaza del Pueblo", "categoria": "pueblo", "x": 310, "z": 310},
-    {"id": "poi_ladera_montana", "nombre": "Ladera de la Montaña", "categoria": "montana", "x": 300, "z": 230}
+    {"id": "LOC-RIZ-PUB-001", "nombre": "Pueblo Raiz", "categoria": "pueblo", "x": 256, "z": 256, "isla": "RIZ"},
+    {"id": "LOC-RIZ-CASA-001", "nombre": "Casa del Jugador", "categoria": "hogar", "x": 310, "z": 310, "isla": "RIZ"},
+    {"id": "LOC-RIZ-TIE-001", "nombre": "Tienda General", "categoria": "taller", "x": 320, "z": 320, "isla": "RIZ"},
+    {"id": "LOC-COR-SEL-001", "nombre": "Laguna Coral", "categoria": "laguna", "x": 1024, "z": 256, "isla": "COR"},
+    {"id": "LOC-COR-TEM-001", "nombre": "Templo Coral", "categoria": "templo", "x": 1200, "z": 256, "isla": "COR"},
+    {"id": "LOC-CEN-MON-001", "nombre": "Volcan de la Ceniza", "categoria": "montana", "x": 256, "z": 1024, "isla": "CEN"},
+    {"id": "LOC-CEN-TEM-001", "nombre": "Templo de la Ceniza", "categoria": "templo", "x": 400, "z": 1024, "isla": "CEN"},
+    {"id": "LOC-AUR-PUER-001", "nombre": "Cielo de la Aurora", "categoria": "punto", "x": 1024, "z": 1024, "isla": "AUR"},
+    {"id": "LOC-AUR-TEM-001", "nombre": "Templo de la Aurora", "categoria": "templo", "x": 1150, "z": 1024, "isla": "AUR"}
   ]
 }

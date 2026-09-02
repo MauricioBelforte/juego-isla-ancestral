@@ -26,11 +26,11 @@
 - [ ] T-015 RF5: reabastecimiento de tiendas por día laborable y rotación estacional [M]
 - [ ] T-016 RF6: horarios de atención declarativos por tienda con señal de cierre [M]
 - [ ] T-017 RF9: mercado del pueblo con ajuste suave por oferta y estación (tope ±10%) [M]
-- [ ] T-018 RF10: tabla de precios del día expuesta como dato para la UI [S]
+- [x] T-018 RF10: tabla del dia para UI [S] — tabla_del_dia() en PriceManager+EconomyManager, test 29/0 (Log 538) [S]
 - [ ] T-019 RF11: anti-grind con límite diario por ítem y reventa nunca rentable [M]
-- [ ] T-020 RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M]
+- [ ] T-020 RF13: persistencia saldo/reputacion/historial/inventarios tienda [M] — PARCIAL (Log 538): saldo+historial persistidos; reputacion e inventarios pendientes
 - [ ] T-021 RF14: ferias y eventos con precios especiales temporales (M73) [M]
-- [ ] T-022 RF15: registro de transacciones para log y analytics (M104) [S]
+- [x] T-022 RF15: registro de transacciones para log y analytics (M104) [S] — _registrar_tx + obtener_historial() anillo cap 200, señal emite lo mismo que se guarda, test 29/0 (Log 538)
 - [ ] T-023 RNF1: cero penalizaciones duras, la pobreza no existe como concepto [S]
 - [ ] T-024 RNF2: precios estables a corto plazo, cambios lentos y anunciados [S]
 - [ ] T-025 RNF3: rendimiento por eventos discretos, sin bucles por frame [M]

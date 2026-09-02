@@ -1,5 +1,0 @@
-numero: 533
-agente: glm-5.3
-plataforma: Kilo Code
-modulo: M36-Fauna (asset 3D tortuga_marina, no datos GDScript)
-fecha: 2026-09-02 09:00

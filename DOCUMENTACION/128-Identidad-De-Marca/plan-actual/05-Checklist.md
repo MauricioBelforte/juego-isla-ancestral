@@ -42,7 +42,7 @@
 - [ ] Definir color de acento (Blanco Perla #F5F0E8)
 - [ ] Definir neutros (Carbón, Gris Piedra, Crema)
 - [ ] Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)
-- [ ] Verificar contraste WCAG AA para cada par de colores
+- [x] Verificar contraste WCAG AA para cada par de colores
 - [x] Crear paleta en formato ASE/CLR
 - [x] Documentar RGB, CMYK y HEX de cada color
 - [ ] Crear variaciones para modo oscuro
@@ -104,7 +104,7 @@
 
 - [ ] Crear BrandConfig.gd con colores oficiales
 - [x] Crear BrandValidator.gd para validar coherencia
-- [ ] Test de contraste WCAG AA para todos los pares de colores
+- [x] Test de contraste WCAG AA para todos los pares de colores
 - [x] Test de logo en tamaños mínimos
 - [ ] Test de legibilidad de tipografía
 - [x] Validar que UI del juego usa paleta de marca

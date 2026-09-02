@@ -67,13 +67,13 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-063 Definir opt-in explícito
 - [x] T-064 Definir prompt en primer inicio del juego
 - [x] T-065 Definir opción de opt-out en settings
-- [ ] T-066 Definir datos anonimizados (sin identificadores personales)
-- [ ] T-067 Definir no recolectar nombres, emails, IPs
-- [ ] T-068 Definir solo recolectar datos de gameplay y comportamiento
-- [ ] T-069 Definir posibilidad de solicitar eliminación de datos
-- [ ] T-070 Definir política de privacidad documentada
-- [ ] T-071 Diseñar integración con M104 para envío de eventos
-- [ ] T-072 Diseñar GameplayTelemetry emitir eventos a AnalyticsService
+- [x] T-066 Definir datos anonimizados (sin identificadores personales)
+- [x] T-067 Definir no recolectar nombres, emails, IPs
+- [x] T-068 Definir solo recolectar datos de gameplay y comportamiento
+- [x] T-069 Definir posibilidad de solicitar eliminación de datos
+- [x] T-070 Definir política de privacidad documentada
+- [x] T-071 Diseñar integración con M104 para envío de eventos
+- [x] T-072 Diseñar GameplayTelemetry emitir eventos a AnalyticsService
 - [ ] T-073 Diseñar AnalyticsService batching y envío
 - [ ] T-074 Diseñar AnalyticsService anonimización y GDPR compliance
 - [ ] T-075 Diseñar AnalyticsService caché local y envío batch

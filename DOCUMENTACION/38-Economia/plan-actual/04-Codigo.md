@@ -266,3 +266,54 @@ Formato de línea de ejemplo: `[DOM-ECO-TRX] compra shop=tienda_pescaderia item=
 - UI: escuchar Barter.trueque_exitoso/trueque_rechazado; usar propuestas_disponibles(npc_id) para el panel del NPC.
 - Al sumar ofertas nuevas: una BarterOffer .tres por archivo en data/economia/barter/ (se cargan solas).
 - El rollback cozy agrega de vuelta el pedido si lo recibido no entra: mantener ese orden al tocar ejecutar_trueque.
+
+---
+
+## Notas del Agente — Iteración 2: tabla del día + transacciones (historial)
+
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 18:30
+**Estado:** Iter.2 completada (test headless 29/0, Godot 4.7.2)
+
+### Lo que hice
+- Verifiqué la iteración 2 dejada en curso por glm-5.3-flash (Cline): `EconomyManager.tabla_del_dia()` (RF10) ya delega en `PriceManager.tabla_del_dia()` y expone `{compra, venta, limite, vendidas_hoy, rebajado}`.
+- `RF15` historial de transacciones: `_registrar_tx` + señal `transaccion_registrada` + anillo `HISTORIAL_MAX=200` + `obtener_historial(limite)` devuelve copia defensiva.
+- `RF13` parcial: `get_save_data()/restore_save_data()` persisten `historial` acotado con saneamiento defensivo (descarta no-diccionarios, clamp a HISTORIAL_MAX).
+- Corregí el test `test_tabla_dia_transacciones.gd` para usar un ítem real con override de catálogo (`madera_roble`, compra=10 → venta=6) en lugar de un id inexistente; el test ahora pasa 29/29.
+- Ejecuté el test headless y confirmé 0 fallos (sin regresión en el código fuente: no edité `economy_manager.gd` ni `price_manager.gd`).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No implementé la persistencia de reputación ni de inventarios de tienda (RF13 completo sigue pendiente en M39).
+- No edité el código fuente de price/economy: la iteración ya estaba implementada; solo faltaba el cierre de verificación + documentación.
+
+### Recomendaciones para el próximo agente
+- UI (M53/M55): consumir `EconomyManager.tabla_del_dia(ids)` para el panel de precios del día; refrescar al amanecer (M31) vía `tabla_precios_actualizada` (aún no emitida en esta iteración — ver pendientes de la sección I).
+- M104 (analytics) ya puede suscribirse a `transaccion_registrada`.
+- Para cerrar RF13: M39 debe persistir stock de tiendas e inventarios bajo la sección "economy" o su propia sección.
+
+---
+
+## Notas del Agente — Iteración 3: estación (RF9), anti-grind (RF11), reputación (RF13), ferias (RF14)
+
+**Modelo:** Hy3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 20:35
+**Estado:** Iter.3 completada (test headless 23/0, Godot 4.7.2; sin regresión: test_tabla_dia 29/0)
+
+### Lo que hice
+- **RF9 (mercado/estación):** `PriceManager._ajuste_estacional(item_id, base)` aplica +5% en la temporada del ítem (desde `PriceDefinition.temporada_bonus` en el catálogo) y -10% fuera. `recalcular_tabla_dia()` recalcula y emite `tabla_precios_actualizada` (gancho para el amanecer de M31). Estación resuelta con duck-typing: autoload `/root/TimeCalendar` o `ServiceRegistry.get_service("time_calendar")`.
+- **RF11 (anti-grind):** `precio_venta_vigente()` ahora garantiza `venta <= precio_compra_vigente` aunque haya feria agresiva (reventa nunca rentable). El límite diario por banda ya existía (log 191).
+- **RF13 reputación:** `EconomyManager` ganó `reputacion` (0-100, inicial 50), `get_reputacion()`, `ajustar_reputacion(delta)`, señal `reputacion_cambiada`, y persistencia en `get_save_data()/restore_save_data()`. Cada `depositar_monedas` suma +1 (cozy: solo crece).
+- **RF14 (ferias):** `PriceManager.vincular_eventos()` conecta `evento_iniciado`/`evento_terminado` de `EventManager` (M73) por duck-typing. Al iniciar una feria lee `EventDefinition.flags["precio_compra"]` / `["precio_venta"]` y aplica/limpia multiplicadores con `aplicar_precios_feria()` / `limpiar_precios_feria()`. No acopla M73 (usa solo `flags` libre).
+- **Test:** `test_mercado_estacion_ferias.gd` (23 checks) cubre RF9/RF11/RF13-rep/RF14. Ambos tests de M38 en 0 fallos.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **RF13 completo:** la persistencia de **inventarios de tienda** queda en M39 (`ShopManager` aún no es un autoload en este repo; no implementé lo ajeno para no romperlo). saldo + historial + reputación SÍ persisten.
+- No cableé físicamente la señal de amanecer de M31 a `recalcular_tabla_dia()` (el calendario no expone una señal estable documentada en este momento); el método existe y es llamable; la UI/calendar pueden invocarlo.
+
+### Recomendaciones para el próximo agente
+- M39: al implementar `ShopManager`, persistir stock bajo la sección "economy" (o propia) para cerrar RF13.
+- M53/M55: suscribirse a `tabla_precios_actualizada` y a `reputacion_cambiada` para refrescar la pizarra del mercado y el indicador de reputación.
+- M73: para activar ferias con precios especiales, basta poner `flags = {"precio_compra": 0.9, "precio_venta": 1.15}` en la `EventDefinition` del evento tipo feria.
+- M31: al amanecer, llamar `EconomyManager.precios.recalcular_tabla_dia()` para refrescar ajustes estacionales.

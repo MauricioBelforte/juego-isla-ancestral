@@ -20,11 +20,11 @@
 
 ## A. Estructura de la Biblia
 
-- [ ] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S]
-- [ ] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M]
+- [x] Definir índice de la biblia (`00-indice.md`) con reglas editoriales [S]
+- [x] Definir línea de tiempo canónica (`01-linea-de-tiempo.md`) [M]
 - [ ] Definir reglas de formato de datos `## DATA { }` [M]
-- [ ] Definir `world_data.json` generado desde los MD [M]
-- [ ] Definir `world_bible/CHANGELOG.md` para cambios de canon [S]
+- [x] Definir `world_data.json` generado desde los MD [M]
+- [x] Definir `world_bible/CHANGELOG.md` para cambios de canon [S]
 
 ## B. Historia de Aurora (RF2)
 
@@ -72,7 +72,7 @@
 - [ ] Definir capas de revelación de Elysia por Sello [C]
 - [ ] Definir la verdad de Elysia (capa 4) sin spoilers tempranos [C]
 - [ ] Definir su rol en la Era del Alba (post-final) [C]
-- [ ] Definir qué NO es Elysia (evita derivas de canon) [S]
+- [x] Definir qué NO es Elysia (evita derivas de canon) [S]
 
 ## H. Personajes Principales (RF8-RF12)
 
@@ -85,7 +85,7 @@
 ## I. Otros NPC (RF13)
 
 - [ ] Definir regla 1-5-25 de detalle por personaje [S]
-- [ ] Definir personajes de fondo con 1 párrafo de canon [S]
+- [x] Definir personajes de fondo con 1 párrafo de canon [S]
 - [ ] Definir secundarios con misión (M23) con 5 párrafos [M]
 - [ ] Definir comerciantes con historia ligada a M39 [M]
 - [ ] Definir niños NPC con capa 0 (nunca spoilers) [S]
@@ -196,15 +196,15 @@
 
 ## W. Sincronización y Versionado
 
-- [ ] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C]
-- [ ] Definir hash MD↔JSON (detecta desincronización) [M]
+- [x] Definir `sync_world_data.gd` que regenera el JSON desde los MD [C]
+- [x] Definir hash MD↔JSON (detecta desincronización) [M]
 - [x] Implementar `canon_version` bump por cambio (1.0.0, señal canon_changed, version()) [S]
-- [ ] Definir CHANGELOG con motivo de cada cambio [S]
+- [x] Definir CHANGELOG con motivo de cada cambio [S]
 - [ ] Definir gate CI (M118) por PR a `world_bible/` [M]
 
 ## X. Integración con Módulos
 
-- [ ] Definir consumo de `world_data.json` por M21 (diálogos) [M]
+- [x] Definir consumo de `world_data.json` por M21 (diálogos) [M]
 - [ ] Definir consumo por M25 (ruinas) y M24/M26 (templos) [M]
 - [ ] Definir consumo por M27 (islas) [M]
 - [ ] Definir consumo por M73 (coleccionables canónicos) [M]
@@ -213,18 +213,18 @@
 ## Y. Calidad y Coherencia
 
 - [ ] Definir que el jugador no lector pierda máx 10% de la historia [M]
-- [ ] Definir que ningún diálogo explique más del 30% del canon [M]
+- [x] Definir que ningún diálogo explique más del 30% del canon [M]
 - [ ] Definir que los NPC conozcan solo sus capas (M64) [M]
 - [ ] Definir prueba de consistencia durante playtest (M114) [M]
-- [ ] Definir que el canon no contradiga mecánicas (regla mar/pesca) [M]
+- [x] Definir que el canon no contradiga mecánicas (regla mar/pesca) [M]
 
 ## Z. Cierre y Trazabilidad
 
 - [ ] Definir trazabilidad bloque de lore → módulos consumidores [M]
-- [ ] Definir revisión del canon contra M152 (principios) [M]
+- [x] Definir revisión del canon contra M152 (principios) [M]
 - [ ] Definir revisión contra M153 (contrato O1-O19) [M]
 - [ ] Definir coordinación con M149 (nomenclatura) para ids definitivos [M]
-- [ ] Definir revisión periódica de la biblia con el usuario (dueño del canon) [S]
+- [x] Definir revisión periódica de la biblia con el usuario (dueño del canon) [S]
 ## Verificación (2026-09-02 05:30 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] WorldBible cargado: canon 1.0.0 (6 personajes, 8 lugares, 4 símbolos, 4 capas por sello, 5 eventos de línea de tiempo)

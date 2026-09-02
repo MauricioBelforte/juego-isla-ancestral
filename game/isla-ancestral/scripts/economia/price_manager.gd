@@ -14,6 +14,14 @@
 class_name PriceManager
 extends RefCounted
 
+## ── Señales (contrato §5: UI mercado, feedback) ──
+signal tabla_precios_actualizada(tabla: Dictionary)
+signal precio_rebajado(item_id: String, antes: int, despues: int)
+
+## Bonos/penalizaciones estacionales (RF9, diseño §2.4, tope ±10%)
+const TEMPORADA_BONUS_COMPRA: float = 0.05      # +5% en temporada del ítem
+const TEMPORADA_PENALIZACION: float = 0.10      # -10% fuera de temporada
+
 ## Tope de venta como fracción de la compra (regla §8: 50-60%)
 const TOPE_VENTA_SOBRE_COMPRA: float = 0.6
 
@@ -58,6 +66,12 @@ var _ventas_hoy: Dictionary = {}          # item_id -> cantidad vendida hoy
 var _ventas_ventana: Array[Dictionary] = []  # {item_id, cantidad, dia}
 var _dia_actual: int = 0
 
+## Estado de mercado (RF9 estación, RF14 ferias) — duck-typed, no acopla módulos vecinos
+var _estacion_forzado: String = ""          # override de estación (test/control externo)
+var _multiplicador_feria_compra: float = 1.0
+var _multiplicador_feria_venta: float = 1.0
+var _feria_activa: bool = false
+
 func _db_get():
 	if _db == null:
 		_db = Engine.get_main_loop().root.get_node_or_null("/root/ItemDatabase")
@@ -81,10 +95,12 @@ func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int =
 	var base := _precio_base_compra(item_id)
 	if base <= 0:
 		return 0
+	var mercado := _ajuste_estacional(item_id, base)
+	mercado = int(round(float(mercado) * _multiplicador_feria_compra))
 	var desc_amistad := _descuento_amistad(npc_id)
 	var desc_volumen := _descuento_volumen(cantidad)
 	var desc_total := minf(desc_amistad + desc_volumen, DESCUENTO_TOTAL_MAX)
-	var final := int(round(float(base) * (1.0 - desc_total)))
+	var final := int(round(float(mercado) * (1.0 - desc_total)))
 	return maxi(1, final)
 
 func precio_venta_vigente(item_id: String) -> int:
@@ -92,8 +108,15 @@ func precio_venta_vigente(item_id: String) -> int:
 	if compra <= 0:
 		return 0
 	var base := int(round(float(compra) * TOPE_VENTA_SOBRE_COMPRA))
+	base = _ajuste_estacional(item_id, base)
+	base = int(round(float(base) * _multiplicador_feria_venta))
 	base = _ajuste_por_oferta(item_id, base)
-	return maxi(1, base)
+	var final := maxi(1, base)
+	# RF11 (anti-grind): la venta NUNCA supera la compra vigente (reventa no rentable).
+	var tope := precio_compra_vigente(item_id)
+	if final > tope:
+		final = tope
+	return final
 
 ## Límite diario de ventas del ítem (anti-grind).
 ## Resuelve la banda de rareza: primero del catálogo central (PriceDefinition.rareza),
@@ -214,6 +237,118 @@ func deserializar(d: Dictionary) -> void:
 	for e in d.get("ventana", []):
 		_ventas_ventana.append({"item_id": str(e.get("item_id", "")), "cantidad": int(e.get("cantidad", 0)), "dia": int(e.get("dia", 0))})
 	_dia_actual = int(d.get("dia", 0))
+
+# ── Mercado: estación (RF9) y ferias (RF14) ──
+
+## Fuerza la estación activa (override para test o control externo). Vacío → lee del calendario.
+func forzar_estacion(nombre: String) -> void:
+	_estacion_forzado = "" if nombre == null else str(nombre)
+
+## Ajuste estacional (RF9, diseño §2.4): +5% en temporada del ítem, -10% fuera. Sin temporada → sin cambio.
+func _ajuste_estacional(item_id: String, base: int) -> int:
+	var temporada_item := _temporada_item(item_id)
+	if temporada_item.is_empty():
+		return base
+	var actual := _nombre_estacion_actual()
+	if actual.is_empty():
+		return base
+	if temporada_item == actual:
+		return int(round(float(base) * (1.0 + TEMPORADA_BONUS_COMPRA)))
+	return int(round(float(base) * (1.0 - TEMPORADA_PENALIZACION)))
+
+## Resuelve la temporada del ítem desde el catálogo central (PriceDefinition.temporada_bonus).
+func _temporada_item(item_id: String) -> String:
+	var cat = _catalog_get()
+	if cat != null and cat.has_method("get_price_def"):
+		var def = cat.get_price_def(item_id)
+		if def != null:
+			var tb = def.get("temporada_bonus")
+			if tb != null:
+				return str(tb)
+	return ""
+
+## Nombre de la estación actual (intenta autoload /root/TimeCalendar o ServiceRegistry).
+func _nombre_estacion_actual() -> String:
+	if not _estacion_forzado.is_empty():
+		return _estacion_forzado
+	var tc = _resolver_calendario()
+	if tc != null and tc.has_method("get_estacion") and tc.has_method("get_nombre_estacion"):
+		return str(tc.get_nombre_estacion(int(tc.get_estacion())))
+	return ""
+
+func _resolver_calendario():
+	var root = Engine.get_main_loop().root
+	var tc = root.get_node_or_null("/root/TimeCalendar")
+	if tc != null:
+		return tc
+	var sr = root.get_node_or_null("/root/ServiceRegistry")
+	if sr != null and sr.has_method("get_service"):
+		return sr.get_service("time_calendar")
+	return null
+
+## Aplica precios especiales de feria (RF14) leídos de EventDefinition.flags.
+func aplicar_precios_feria(multiplicador_compra: float, multiplicador_venta: float) -> void:
+	_multiplicador_feria_compra = clampf(float(multiplicador_compra), 0.1, 5.0)
+	_multiplicador_feria_venta = clampf(float(multiplicador_venta), 0.1, 5.0)
+	_feria_activa = true
+	_emitir_tabla()
+
+func limpiar_precios_feria() -> void:
+	_multiplicador_feria_compra = 1.0
+	_multiplicador_feria_venta = 1.0
+	_feria_activa = false
+	_emitir_tabla()
+
+func esta_feria_activa() -> bool:
+	return _feria_activa
+
+## Recálculo diario (RF9): refresca estación y avisa a la UI. Llamado al amanecer (M31) o manualmente.
+func recalcular_tabla_dia() -> void:
+	_emitir_tabla()
+
+func _emitir_tabla() -> void:
+	tabla_precios_actualizada.emit(tabla_del_dia())
+
+## Vincula EventManager (M73) para ferias (duck-typing; no acopla si no existe).
+func vincular_eventos() -> void:
+	var em = _resolver_event_manager()
+	if em == null:
+		return
+	if em.has_signal("evento_iniciado") and not em.is_connected("evento_iniciado", Callable(self, "_on_evento_iniciado")):
+		em.connect("evento_iniciado", Callable(self, "_on_evento_iniciado"))
+	if em.has_signal("evento_terminado") and not em.is_connected("evento_terminado", Callable(self, "_on_evento_terminado")):
+		em.connect("evento_terminado", Callable(self, "_on_evento_terminado"))
+
+func _on_evento_iniciado(evento_id) -> void:
+	var ev = _evento_def(evento_id)
+	if ev == null:
+		return
+	var flags = ev.get("flags")
+	if typeof(flags) != TYPE_DICTIONARY:
+		return
+	var mc = float(flags.get("precio_compra", 1.0))
+	var mv = float(flags.get("precio_venta", 1.0))
+	if mc != 1.0 or mv != 1.0:
+		aplicar_precios_feria(mc, mv)
+
+func _on_evento_terminado(evento_id) -> void:
+	limpiar_precios_feria()
+
+func _resolver_event_manager():
+	var root = Engine.get_main_loop().root
+	var em = root.get_node_or_null("/root/EventManager")
+	if em != null:
+		return em
+	var sr = root.get_node_or_null("/root/ServiceRegistry")
+	if sr != null and sr.has_method("get_service"):
+		return sr.get_service("event_manager")
+	return null
+
+func _evento_def(evento_id):
+	var em = _resolver_event_manager()
+	if em == null or not em.has_method("get_evento_by_id"):
+		return null
+	return em.get_evento_by_id(str(evento_id))
 
 # ── Internos ──────────────────────────────────────────────
 

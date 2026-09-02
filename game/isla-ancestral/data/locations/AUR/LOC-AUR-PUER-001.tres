@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_nma3j"]
+
+[resource]
+script = ExtResource("1_nma3j")
+location_id = "LOC-AUR-PUER-001"
+nombre = "Cielo de la Aurora"
+tipo = 8
+isla = 3
+descripcion = "Puerto celestial al borde de las auroras. Casa del sello aurora."
+conexiones = ["LOC-AUR-TEM-001"]
+tags = ["isla_aurora", "sello"]

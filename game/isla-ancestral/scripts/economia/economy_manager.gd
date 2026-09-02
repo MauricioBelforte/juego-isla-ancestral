@@ -15,6 +15,7 @@ const PRICE_MANAGER_SCRIPT := preload("res://scripts/economia/price_manager.gd")
 ## Señales del contrato §5
 signal saldo_cambiado(saldo: int)
 signal transaccion_registrada(tx: Dictionary)
+signal reputacion_cambiada(reputacion: int)
 
 ## Saldo inicial cozy: el jugador nunca arranca en bancarrota
 const SALDO_INICIAL: int = 100
@@ -26,12 +27,21 @@ const MAX_SALDO: int = 999999
 ## Anillo acotado: se conservan las últimas HISTORIAL_MAX (memoria constante).
 const HISTORIAL_MAX: int = 200
 
+## RF13 (parcial): reputación del jugador con el pueblo (0-100). Cozy: solo crece
+## con el comercio honesto, nunca castiga. Se persiste junto al resto de la partida.
+const REPUTACION_INICIAL: int = 50
+const REPUTACION_MAX: int = 100
+
 var saldo: int = SALDO_INICIAL
 var precios: RefCounted = null  # PriceManager (vía preload, sin race de autoloads)
 var _historial: Array = []      # [{tipo, monto, saldo, dia, ts}] — RF15
+var reputacion: int = REPUTACION_INICIAL  # RF13
 
 func _ready() -> void:
 	_asegurar_precios()
+	if precios != null:
+		precios.recalcular_tabla_dia()
+		precios.vincular_eventos()
 	_registrar_como_proveedor_guardado()
 
 ## Inicializacion perezosa defensiva: garantiza PriceManager aunque _ready
@@ -75,6 +85,8 @@ func depositar_monedas(total: int) -> bool:
 	saldo = mini(saldo + total, MAX_SALDO)
 	saldo_cambiado.emit(saldo)
 	_registrar_tx("deposito", total)
+	# RF13 (cozy): cada ingreso honesto suma confianza con el pueblo (tope REPUTACION_MAX).
+	ajustar_reputacion(1)
 	return true
 
 ## ── RF15: historial de transacciones ─────────────────────
@@ -106,6 +118,17 @@ func obtener_historial(limite: int = -1) -> Array:
 		return _historial.slice(_historial.size() - limite).duplicate(true)
 	return _historial.duplicate(true)
 
+## ── RF13 (parcial): reputación del jugador con el pueblo ──
+func get_reputacion() -> int:
+	return reputacion
+
+## Ajusta la reputación (clamp 0..REPUTACION_MAX). Emitida en cada cambio.
+func ajustar_reputacion(delta: int) -> void:
+	var nueva := clampi(reputacion + int(delta), 0, REPUTACION_MAX)
+	if nueva != reputacion:
+		reputacion = nueva
+		reputacion_cambiada.emit(reputacion)
+
 ## ── RF10: tabla de precios del día (delega en PriceManager) ──
 func tabla_del_dia(item_ids: Array = []) -> Dictionary:
 	_asegurar_precios()
@@ -126,6 +149,7 @@ func get_save_data() -> Dictionary:
 		d["precios"] = precios.serializar()
 	# RF13 (parcial): el historial persiste acotado (máx. HISTORIAL_MAX entradas).
 	d["historial"] = _historial.duplicate(true)
+	d["reputacion"] = reputacion
 	return d
 
 func restore_save_data(data: Dictionary) -> void:
@@ -147,4 +171,7 @@ func restore_save_data(data: Dictionary) -> void:
 			})
 	while _historial.size() > HISTORIAL_MAX:
 		_historial.pop_front()
+	# RF13 (parcial): restaurar reputación (clamp 0..REPUTACION_MAX).
+	if data.has("reputacion"):
+		reputacion = clampi(int(data["reputacion"]), 0, REPUTACION_MAX)
 	saldo_cambiado.emit(saldo)

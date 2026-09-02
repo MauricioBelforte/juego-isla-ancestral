@@ -31,7 +31,7 @@
 - [x] RF5: el checklist frena la integración si la licencia no está documentada [M]
 - [x] RF5: el checklist verifica uso comercial, derivados y compatibilidad [M]
 - [ ] RF6: procedimiento de re-verificación de licencias trimestral [M]
-- [ ] RF6: re-verificación obligatoria antes de cada build de release [M]
+- [x] RF6: re-verificación obligatoria antes de cada build de release [M]
 - [ ] RF11: listado inicial de activos propios del proyecto con declaración de autoría [M]
 - [x] RF12: regla de compatibilidad documentada (evitar CC-BY-SA y GPL en contenido integrado) [M]
 

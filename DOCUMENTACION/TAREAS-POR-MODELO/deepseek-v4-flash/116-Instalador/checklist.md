@@ -29,14 +29,14 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [x] T-025 Diseñar Binary/export_embedded_pck: Yes
 - [x] T-026 Diseñar Binary/export_filter: include/exclude patterns
 - [x] T-027 Diseñar Binary/export_path: builds/windows/
-- [ ] T-028 Diseñar Binary/file_format: exe
-- [ ] T-029 Diseñar Binary/icon: icon.ico
-- [ ] T-030 Diseñar Binary/name: Isla Ancestral
-- [ ] T-031 Definir Inno Setup (recomendado)
-- [ ] T-032 Definir WiX Toolset (alternativa)
-- [ ] T-033 Definir NSIS (alternativa)
+- [x] T-028 Diseñar Binary/file_format: exe
+- [x] T-029 Diseñar Binary/icon: icon.ico
+- [x] T-030 Diseñar Binary/name: Isla Ancestral
+- [x] T-031 Definir Inno Setup (recomendado)
+- [x] T-032 Definir WiX Toolset (alternativa)
+- [x] T-033 Definir NSIS (alternativa)
 - [x] T-034 Diseñar script de Inno Setup (.iss)
-- [ ] T-035 Diseñar wizard step-by-step (Bienvenida → Directorio → Shortcuts → Instalación → Finalización)
+- [x] T-035 Diseñar wizard step-by-step (Bienvenida → Directorio → Shortcuts → Instalación → Finalización)
 - [ ] T-036 Diseñar directorio de instalación predeterminado
 - [ ] T-037 Diseñar opciones: desktop shortcut, start menu shortcut, association de files
 - [ ] T-038 Diseñar validación de espacio en disco

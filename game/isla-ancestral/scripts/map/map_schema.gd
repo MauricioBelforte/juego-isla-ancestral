@@ -6,7 +6,7 @@
 class_name MapSchema
 extends RefCounted
 
-const CATEGORIAS := ["punto", "hogar", "ruina", "taller", "hito", "templo", "playa", "pueblo", "montana"]
+const CATEGORIAS := ["punto", "hogar", "ruina", "taller", "hito", "templo", "playa", "pueblo", "montana", "laguna"]
 
 ## Devuelve Array[String] con los problemas (vacía si es válido).
 static func validar_pois(map_data: Dictionary) -> Array[String]:
@@ -32,6 +32,6 @@ static func validar_pois(map_data: Dictionary) -> Array[String]:
 			errores.append("POI %s categoría inválida: %s" % [id, poi.get("categoria", "")])
 		var x := float(poi.get("x", -1))
 		var z := float(poi.get("z", -1))
-		if x < 0 or x > 512 or z < 0 or z > 512:
+		if x < 0 or x > 2000 or z < 0 or z > 2000:
 			errores.append("POI %s coordenadas fuera de rango (x=%s z=%s)" % [id, x, z])
 	return errores

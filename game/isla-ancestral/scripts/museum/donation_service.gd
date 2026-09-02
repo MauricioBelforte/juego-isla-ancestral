@@ -1,6 +1,6 @@
 # Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
-# Fecha: 2026-09-01
+# Fecha: 2026-09-01 (iter. 1-2) / 2026-09-02 (iter. 3)
 #
 # M37: Museos y Colecciones — DonationService (autoload "DonationService")
 # Valida y ejecuta donaciones (03-Diseno §2.4, §4.1-§4.3):
@@ -10,6 +10,10 @@
 #    (§4.3.3: rechazo = inventario intacto).
 #  - Recompensa de exposición al completarse: única e idempotente (§4.2).
 #  - Señales tipadas para M55/UI: donation_accepted/donation_rejected/reward_granted.
+# Iter. 3 (glm-5.3-flash 2026-09-02, Log 542):
+#  - Estadística "donaciones_museo" en el perfil M71 al aceptar (duck-typed)
+#    — el evaluador M71 puede condicionar hitos/logros sobre ella.
+#  - Registro en el diario M55 vía EventBus.diary.entrada_nueva (duck-typed).
 # ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
 extends Node
 
@@ -41,6 +45,14 @@ func donate(exhibition_id: String, item_id: String) -> DonationResult:
 	registry.register_item(exhibition_id, item_id)
 	donation_accepted.emit(exhibition_id, item_id)
 	print("[M37] Donación aceptada: %s → %s" % [item_id, exhibition_id])
+	# Iter. 3: estadística para M71 (evaluador de hitos/logros la consume)
+	var profile := get_node_or_null("/root/PlayerProfile")
+	if profile != null and profile.has_method("incrementar"):
+		profile.incrementar("donaciones_museo", 1)
+	# Iter. 3: registro en el diario M55 (duck-typed, no interrumpe el flujo)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null and bus.diary != null and bus.diary.has_signal("entrada_nueva"):
+		bus.diary.entrada_nueva.emit("donacion_" + item_id, "museo")
 	# §4.2: si la exposición quedó completa, recompensa única idempotente
 	if bool(registry.is_exhibition_completed(exhibition_id)) and not bool(registry.is_reward_claimed(exhibition_id)):
 		var reward: String = registry.otorgar_recompensa(exhibition_id)

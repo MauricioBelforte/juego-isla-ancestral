@@ -57,7 +57,13 @@ func obtener_def(def_id: StringName) -> ResourceDefinition:
 	return _definiciones.get(def_id, null)
 
 func obtener_todas() -> Array[ResourceDefinition]:
-	return _definiciones.values().duplicate()
+	# Fix (glm-5.3-flash/Cline 2026-09-02): .values() devuelve Array sin tipar y
+	# el runtime falla con "Trying to return an array of type Array where
+	# expected return type is Array[ResourceDefinition]". Se tipa explícito.
+	var res: Array[ResourceDefinition] = []
+	for d in _definiciones.values():
+		res.append(d)
+	return res
 
 func cantidad_de(def_id: StringName) -> int:
 	# Consulta para M16 (crafting): cantidad disponible en inventario

@@ -30,6 +30,20 @@ En la raíz de `DOCUMENTACION/` están los 5 documentos generales que reflejan e
 | `06-GUIA-DE-CONEXION-VISION.md` | Guía maestra de visión del agente (M154): vías V1–V5, cómo conectarse, cómo documentar descubrimientos (reforzado en AGENTS.md §26) |
 | `07-GUIA-GODOT.md` | Guía de codificación en Godot 4.x: errores comunes, convenciones, checklist, registro de errores (obligatorio leer antes de codificar — AGENTS.md §26) |
 | `08-GUIA-ORDEN-DE-IMPLEMENTACION.md` | Referencia principal de orden real, puertas, dificultad, necesidad de visión y reserva paralela de módulos |
+| `11-BUGS.md` | Registro central de bugs: checklist de problemas/fallas (usuario + LLMs) con el mayor detalle posible, delegación de bugs no resueltos a otros agentes y firma obligatoria de quien registra (ver sección 11-BUGS abajo) |
+
+### DOCUMENTACION/11-BUGS.md — Registro Central de Bugs (usuario + LLMs)
+
+El archivo **`DOCUMENTACION/11-BUGS.md`** es el **registro central de problemas y fallas** del proyecto, pensado para que el **usuario** y **cualquier LLM acompañante** anoten bugs en formato checklist con el mayor detalle posible. Reglas obligatorias:
+
+1. **Registro:** ante cualquier bug detectado (crash, glitch visual, error de lógica, rendimiento, softlock, etc.), se agrega una entrada en `11-BUGS.md` usando la plantilla de la sección 4 del archivo (estado, módulo, severidad, pasos para reproducir, evidencia, contexto).
+2. **Firma obligatoria:** quien registra el bug firma la entrada con `**Modelo:**`, `**Plataforma:**` y `**Fecha:** YYYY-MM-DD HH:MM`. Si el bug lo reporta el usuario, se indica `**Reportado por:** Usuario`.
+3. **Delegación de bugs no resueltos:** si un modelo LLM anota un bug que **no puede resolver** (le falta visión, contexto, complejidad o herramientas), debe:
+   - Dejar el bug con estado `[?] Delegado` en su entrada original.
+   - Agregarlo además en la **sección 8 "Bugs Delegados"** del archivo (al final), con su firma y una breve explicación de por qué no pudo.
+   - El siguiente agente más capacitado podrá tomarlo (cambiar a `[→] En progreso` + indicar agente), resolverlo y moverlo a la sección 7 "Bugs Resueltos".
+4. **Resolución:** al corregir un bug, documentar cómo se resolvió (causa, solución, archivos, log del proyecto) y firmar.
+5. **Complementariedad:** `11-BUGS.md` es el registro operativo diario; NO reemplaza al módulo `102-Bug-Tracking/` (sistema de issues planificado) ni al registro de errores de Godot (`07-GUIA-GODOT.md` §8). Si el bug es de Godot, referenciarlo también en la guía 07 §8.
 
 ### DOCUMENTACION/00-PLAN-INICIAL/ — Solo el origen del proyecto
 

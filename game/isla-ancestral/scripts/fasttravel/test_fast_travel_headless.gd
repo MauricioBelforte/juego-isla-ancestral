@@ -34,7 +34,7 @@ func _run() -> void:
 	# solicitud de viaje
 	var solicitud = [false]
 	svc.viaje_solicitado.connect(_on_viaje.bind(solicitud))
-	var ok_viaje = svc.solicitar_viaje("ancla_faro")
+	var ok_viaje = svc.solicitar_viaje("LOC-RIZ-CASA-001")
 	_check("Service: viaje solicitable (ancla desbloqueada)", ok_viaje)
 	_check("Service: señal viaje emitida", solicitud[0])
 	var ok_invalido = svc.solicitar_viaje("ancla_inexistente")

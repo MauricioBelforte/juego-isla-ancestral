@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_jd071"]
+
+[resource]
+script = ExtResource("1_jd071")
+location_id = "LOC-COR-SEL-001"
+nombre = "Laguna Coral"
+tipo = 10
+isla = 1
+descripcion = "Laguna turquesa de la Isla Coral. Casa del sello coral."
+conexiones = ["LOC-COR-TEM-001"]
+tags = ["isla_coral", "sello"]

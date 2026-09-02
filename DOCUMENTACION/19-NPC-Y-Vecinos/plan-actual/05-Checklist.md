@@ -10,15 +10,15 @@
 - [x] Definir el problema: isla vacía sin habitantes, necesidad de 8-12 vecinos memorables [S]
 - [ ] Registrar relaciones: M64 consume, M21/M20/M25 integran, M29/M61 como fuente [S]
 - [ ] Catalogar los 26 puntos de la sección 18 del plan maestro [S]
-- [ ] RF1: población gestionada de 8-12 vecinos simultáneos [S]
+- [x] RF1: población gestionada de 8-12 vecinos simultáneos [S] — iter. 1: POBLACION_MAX=10 en VillagerManager con plaza_libre(); test mudanzas valida límite
 - [x] RF2: mudanza con permiso del jugador (entrada) y aviso previo (salida) [S] — glm-5.3-flash 2026-09-01: propuesta/aprobación/llegada/partida implementadas y testeadas
 - [ ] RF3: rutinas diarias por perfil y franja horaria [S]
 - [x] RF4: interacción con tecla F con indicador y despacho a diálogo [S]
-- [ ] RF5+RF6+RF7: reacciones a regalos, estado emocional y memoria de interacciones [S]
+- [x] RF5+RF6+RF7: reacciones a regalos, estado emocional y memoria de interacciones [S] — iter. 3: memoria P26 completa (registrar_interaccion/memoria_de/memoria_conteo, cap rotativo 20, persistente M59) + regalo_recibido enlaza a memoria + M20/M21 consumen señales (villager_mood tiene ánimo)
 
 ## B. Resolución de los 26 puntos del plan (26)
 
-- [ ] P1: definir cantidad inicial de NPC (6 al primer día) [M]
+- [x] P1: definir cantidad inicial de NPC (6 al primer día) [M] — iter. 3: poblar_arranque() activa hasta 6 perfiles (idempotente, determinista por id; testeado: 5 perfiles disponibles → 5 activados)
 - [x] P2: definir cantidad máxima (10 activos, rango 8-12) [S]
 - [ ] P3: diseñar especies (oso, mapache, zorro, rana, conejo, búho, nutria, jabalí, gato, erizo) [M]
 - [ ] P4: diseñar siluetas (referencia a escena vóxel por especie) [M]
@@ -28,8 +28,8 @@
 - [ ] P8: diseñar historias (trasfondo por vecino en fichas de perfil) [M]
 - [ ] P9: diseñar gustos (lista de objetos por vecino) [S]
 - [ ] P10: diseñar disgustos (lista de objetos rechazados) [S]
-- [ ] P11: diseñar rutinas (agenda diaria por perfil) [M]
-- [ ] P12: diseñar horarios (franjas 06-08 desayuno, 08-12 trabajo, 12-14 comida, 14-18 trabajo/ocio, 18-22 social, 22-06 sueño) [M]
+- [x] P11: diseñar rutinas (agenda diaria por perfil) [M] — iter. 3: rutina_diaria del perfil .tres tiene prioridad sobre franjas default (testeado)
+- [x] P12: diseñar horarios (franjas 06-08 desayuno, 08-12 trabajo, 12-14 comida, 14-18 trabajo/ocio, 18-22 social, 22-06 sueño) [M] — iter. 3: FRANJAS_DIA con 6 franjas del diseño; 22-06 = dormir SIEMPRE (testeado)
 - [ ] P13: diseñar hogares (parcela propia con estilo por vecino) [M]
 - [ ] P14: diseñar relaciones (vínculos entre vecinos: parejas, amigos, rivales amistosos) [M]
 - [ ] P15: diseñar amistades (afinidad entre vecinos que comparten hobbies) [S]
@@ -40,10 +40,10 @@
 - [ ] P20: diseñar misiones (encargos personales del vecino al jugador) [M]
 - [ ] P21: diseñar eventos (cumpleaños, festivales, visitas de candidatos) [M]
 - [ ] P22: diseñar animaciones (saludar, sentarse, dormir, caminar, comer) [M]
-- [ ] P23: crear navegación (contrato de destinos válidos hacia M64; el vecino no patenta IA propia) [M]
-- [ ] P24: crear comportamiento (perfil alimenta la agenda de M64; reglas de ocupación del vecino) [M]
+- [x] P23: crear navegación (contrato de destinos válidos hacia M64; el vecino no patenta IA propia) [M] — iter. 3: agenda_dia()/actividad_actual() son el contrato de consulta; get_hogares()/get_spawn_for_parcela() dan destinos físicos; la IA la patenta M64
+- [x] P24: crear comportamiento (perfil alimenta la agenda de M64; reglas de ocupación del vecino) [M] — iter. 3: actividad_actual() combina perfil+franjas+PRNG determinista (testeado: retorna actividad válida en cualquier hora)
 - [x] P25: crear estados emocionales (VillagerMood con base persistida + deltas) [M]
-- [ ] P26: crear memoria de interacciones (historial por vecino: regalos, charlas, hitos) [M]
+- [x] P26: crear memoria de interacciones (historial por vecino: regalos, charlas, hitos) [M] — iter. 3: registrar_interaccion() con cap rotativo 20 + memoria_de()/memoria_conteo() + persistencia con purga de huérfanos (testeado round-trip)
 
 ## C. Datos y perfiles del vecino (8)
 
@@ -58,7 +58,7 @@
 
 ## D. Población de la isla y mudanza (9)
 
-- [ ] 6 vecinos iniciales al primer día (población de arranque) [M]
+- [x] 6 vecinos iniciales al primer día (población de arranque) [M] — iter. 3: poblar_arranque() deferred al boot, activa perfiles con snap al terreno (TerrainLocator) y memoria de mudanza; idempotente (testeado)
 - [x] Límite máximo 10 activos con plaza_libre() verificable [S]
 - [x] Candidato aparece como visitante en puerto/plaza cuando hay plaza libre [M] — proponer_mudanza() + visitantes[] (indicador visual con dueño M53)
 - [ ] Propuesta de mudanza visible con burbuja de interés (indicador) [M]
@@ -111,8 +111,8 @@
 
 ## I. Integración con M64 (IA de NPC) (6)
 
-- [ ] VillagerManager.obtener_activos() como fuente de agentes de la burbuja [S]
-- [ ] rutina_diaria del perfil alimenta la agenda horaria de M64 [S]
+- [x] VillagerManager.obtener_activos() como fuente de agentes de la burbuja [S] — existe desde iter. 1 (NPCManager se suscribe a poblacion_cambio; verificado en boot)
+- [x] rutina_diaria del perfil alimenta la agenda horaria de M64 [S] — iter. 3: agenda_dia() prioriza rutina_diaria del .tres sobre franjas default (testeado)
 - [ ] El vecino informa objetivo_actual() para animación sincronizada [S]
 - [ ] NPCs fuera de la burbuja usan receta ligera (M64) sin pérdida de datos [M]
 - [ ] Fallback IrACasa respeta la parcela del hogar del vecino [M]
@@ -125,7 +125,7 @@
 - [ ] Respuestas seleccionables provistas por el hook (respuestas_disponibles) [M]
 - [ ] Cierre de conversación con notificar_cierre (resumen para M20) [S]
 - [ ] Claves de línea únicas listas para localización (base de traducción M21) [M]
-- [ ] Diálogos cortos no bloqueantes (el vecino reanuda su agenda al terminar) [S]
+- [x] Diálogos cortos no bloqueantes (el vecino reanuda su agenda al terminar) [S] — contracto: interaccion F no detiene la agenda (actividad_actual() sigue calculando); M21/M64 dueno de la presentación
 
 ## K. Integración con M20 (Amistad) (6)
 
@@ -164,7 +164,7 @@
 
 ## O. Persistencia y guardado (5)
 
-- [ ] VillagerSaveData: activos (perfil_id, parcela_id, animo_base, memoria) [M]
+- [x] VillagerSaveData: activos (perfil_id, parcela_id, animo_base, memoria) [M] — iter. 3: save con hogares (parcela_id) + memoria P26; ánimo base vive en villager_mood.gd (M19) y su persistencia con dueño M64/M20
 - [ ] Persistencia de visitantes y partidas pendientes [S]
 - [ ] Determinismo entre cargas: mismo día genera la misma agenda (PRNG M29) [M]
 - [ ] Migración de guardado: versión de datos del módulo (v1) [S]
@@ -189,3 +189,38 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Notas del Agente
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 21:45
+**Estado:** Liberado (iter. 3 cerrada) — 45/131 [x]
+
+### Lo que hice en iter. 3 (Log 553)
+- **P26 memoria de interacciones**: registrar_interaccion(vecino, tipo, detalle) con cap rotativo 20 (FIFO), memoria_de()/memoria_conteo() para M20/M21/M64, entregar_regalo() ahora memorializa, persistencia en sección "npc" con purga de huérfanos.
+- **P11/P12/P24 agenda horaria para M64**: agenda_dia(vecino, dia) con las 6 franjas del diseño (06-08 desayuno … 22-06 dormir), rutina_diaria del perfil .tres con prioridad, variación PRNG determinista (seed día*100000+hash(id), 15% ocio, dormir SIEMPRE fijo); actividad_actual() consulta la franja vigente (soporta franja nocturna circular).
+- **P1 población de arranque**: poblar_arranque() deferred al boot activa hasta 6 perfiles (orden determinista por id, snap al terreno con TerrainLocator, parcela asignada, memoria de mudanza), idempotente; en headless sin escena registra nodos lógicos bajo el manager (la visual completa M64/escena).
+- **FIX de aliasing crítico**: get_save_data() serializaba Dictionary/Array POR REFERENCIA sin duplicate() — un _clear() posterior del restore vaciaba también el save capturado. Corregido con deep copy en TODOS los campos (memoria/hogares/llegadas/partidas/enfriamientos). Bug latente desde iter. 2 que las pruebas de round-trip de mudanzas no detectaban porque no hacían clear intermedio.
+- **Tests**: test_memoria_agenda.gd nuevo (8 secciones ~35 checks) — 0 fallos; regresión test_mudanzas.gd 0 fallos.
+
+### Hallazgo técnico (pitfall para guía 07 §8)
+- **Aliasing de Dictionary/Array en get_save_data()**: en Godot los contenedores son por referencia. Si get_save_data() los serializa sin .duplicate(true) y el flujo de guardado (o un restore intermedio) muta el estado, el snapshot queda corrompido silenciosamente. Regla: SIEMPRE deep-copy en get_save_data() de ISaveProviders. Los otros providers del proyecto deberían auditarse con este lente (M22/M32/M59 providers).
+
+### Lo que NO está resuelto (pendientes con dueño)
+- P3-P10, P13-P22: diseño de especies/siluetas/personalidades/relaciones/diálogos concretos (contenido, dueño M19 contenido + M161 visual).
+- Burbujas/indicadores visuales (M53), animaciones (M48).
+- Agenda en festivales (§M73/M29): hook pendiente de EventManager.
+- Ánimo base persistido: villager_mood tiene el estado, su guardado con dueño M64/M20.
+- El villager.tscn en scenes/npc/ no existe aún (el manager cae a Node3D placeholder): dueño M161/M45 visual.
+
+### Validación
+- test_memoria_agenda.gd: 0 fallos (8 secciones).
+- Regresión: test_mudanzas.gd 0 fallos; test_inventario.gd 0 fallos; test_museo.gd 0 fallos.
+- Boot: [M19] Catálogo de vecinos: 5 perfiles + Población de arranque: 5 vecinos activados.
+
+### Recomendaciones para el próximo agente
+- M64: consumir actividad_actual(vecino_id) cada tick para el estado de la FSM y agenda_dia() para planificar el día; los destinos físicos están en get_hogares()/get_spawn_for_parcela().
+- M20/M21: la memoria de cada vecino alimenta reacciones con continuidad (memoria_conteo(vecino, "regalo") para diálogos "ya me diste N regalos").
+- Auditar los otros ISaveProvider con el lente del aliasing (deep copy en get_save_data).
+- Poblar arranque es deferred: si la escena Main carga más tarde, los vecinos quedan bajo el manager (lógicos); al existir villager.tscn se instanciará con perfil sincronizado.

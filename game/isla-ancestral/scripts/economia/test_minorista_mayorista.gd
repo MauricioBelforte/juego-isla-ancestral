@@ -39,27 +39,27 @@ func _ejecutar() -> void:
 	if _pm == null:
 		quit(1); return
 
-	# Fijar un ítem de prueba con precio_compra base conocido.
-	_asegurar_item("OBJ-PLA-001", 200, 100)
+	# Fijar ítem de prueba: "tela_lino" (override en econ_prices.tres, compra=60).
+	# Minorista=60 · 5 und=57 (5%) · 10=54 (10%) · 20=51 (15%, tope).
 
 	# ── Minorista vs mayorista (vía EconomyManager → PriceManager) ──
-	var pu := 200
-	var p1 := int(_eco.precio_compra_vigente("OBJ-PLA-001", "", 1))
-	_check("minorista (1 und) == base (200)", p1 == pu)
-	var p5 := int(_eco.precio_compra_vigente("OBJ-PLA-001", "", 5))
+	var pu := 60
+	var p1 := int(_eco.precio_compra_vigente("tela_lino", "", 1))
+	_check("minorista (1 und) == base (60)", p1 == pu)
+	var p5 := int(_eco.precio_compra_vigente("tela_lino", "", 5))
 	_check("mayorista (5 und) tiene descuento (< base)", p5 < pu)
-	_check("mayorista (5 und) ~ 5% (190)", p5 == 190)
-	var p10 := int(_eco.precio_compra_vigente("OBJ-PLA-001", "", 10))
-	_check("mayorista (10 und) ~ 10% (180)", p10 == 180)
-	var p20 := int(_eco.precio_compra_vigente("OBJ-PLA-001", "", 20))
-	_check("mayorista (20 und) ~ 15% (170)", p20 == 170)
+	_check("mayorista (5 und) ~ 5% (57)", p5 == 57)
+	var p10 := int(_eco.precio_compra_vigente("tela_lino", "", 10))
+	_check("mayorista (10 und) ~ 10% (54)", p10 == 54)
+	var p20 := int(_eco.precio_compra_vigente("tela_lino", "", 20))
+	_check("mayorista (20 und) ~ 15% (51)", p20 == 51)
 
 	# Tope volumen (40 und debería seguir en 15%, no más)
-	var p40 := int(_eco.precio_compra_vigente("OBJ-PLA-001", "", 40))
-	_check("tope volumen a 15% (170)", p40 == 170)
+	var p40 := int(_eco.precio_compra_vigente("tela_lino", "", 40))
+	_check("tope volumen a 15% (51)", p40 == 51)
 
 	# Venta del jugador estable: cantidad no cambia el precio de venta.
-	var v1 := int(_eco.precio_venta_vigente("OBJ-PLA-001"))
+	var v1 := int(_eco.precio_venta_vigente("tela_lino"))
 	_check("venta unitaria definida (>0)", v1 > 0)
 
 	# ── Cierre por festival (M39 consulta M29) ──
@@ -72,7 +72,7 @@ func _ejecutar() -> void:
 	var franjas: Array[Vector2i] = [Vector2i(0, 24)]
 	def.franjas_horarias = franjas
 	def.cierra_en_festivales = true
-	var entry = load("res://scripts/shops/shop_data.gd").StockEntry.new("OBJ-PLA-001", 1, 10)
+	var entry = load("res://scripts/shops/shop_data.gd").StockEntry.new("tela_lino", 1, 10)
 	def.catalogo_venta.append(entry)
 	_sm.registrar_tienda(def)
 
@@ -85,7 +85,7 @@ func _ejecutar() -> void:
 	var franjas2: Array[Vector2i] = [Vector2i(0, 24)]
 	def2.franjas_horarias = franjas2
 	def2.cierra_en_festivales = false
-	def2.catalogo_venta.append(load("res://scripts/shops/shop_data.gd").StockEntry.new("OBJ-PLA-001", 1, 10))
+	def2.catalogo_venta.append(load("res://scripts/shops/shop_data.gd").StockEntry.new("tela_lino", 1, 10))
 	_sm.registrar_tienda(def2)
 
 	# Sincronizar a un día SIN festival (día 1 mes 1): ambas abiertas.

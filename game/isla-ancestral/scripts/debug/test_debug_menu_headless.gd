@@ -56,6 +56,13 @@ func _run() -> void:
 	_menu.call("_weather_soleado")
 	_checks += 1
 	print("  [INFO] RF1-RF6 llamados sin erre-parse (teleport/hora/clima)")
+
+	# Atajo F12 (fix 2026-09-02): _unhandled_input alterna el menu
+	var ev := InputEventKey.new()
+	ev.keycode = KEY_F12
+	ev.pressed = true
+	_menu._unhandled_input(ev)
+	_check("F12 maneja la alternancia del menu", _menu.visible == true)
 	if _menu:
 		_menu.free()
 	print("=== Resumen M110: %d checks, %d fallos ===" % [_checks, _fallos])

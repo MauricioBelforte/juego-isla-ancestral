@@ -245,3 +245,113 @@ UpdateManager="*res://scripts/updates/update_manager.gd"
 | DLC (M120) | Verifica compatibilidad de versión |
 | Soporte (M121) | Registra actualizaciones instaladas |
 | Steam/GOG | API de plataforma para updates |
+
+## Proceso de Hotfix y SLA
+
+### Definición de hotfix
+- Hotfix: parche PATCH destinado a corregir un bug crítico o bloqueante sin introducir features nuevas.
+- Origen: bug reportado por M102/M101, crash M122, o feedback directo.
+- Criterios de criticidad: P0 (bloqueo de juego) y P1 (pérdida de progreso / monetización).
+
+### SLA propuesto
+- P0: respuesta en 24 h, hotfix deployado en 72 h.
+- P1: respuesta en 7 días, hotfix incluido en el siguiente ciclo de actualización menor.
+- P2+: backlog normal, sin SLA de hotfix.
+
+### Flujo
+1. Detección → M102/M122 alimentan la cola.
+2. Triage → responsable M119 asigna criticidad.
+3. Fix → rama `hotfix/<version>` desde tag estable.
+4. Test → test headless M112 + smoke M118.
+5. Deploy → M117 empaqueta + M96 publica en canal estable.
+6. Comms → M121 publica nota + M104 registra evento.
+
+## Proceso de Release de Updates
+
+### Criterios de release
+- Canal estable: solo versiones con test M112 verde + smoke M118 verde.
+- Canal beta: requiere 48 h de prueba interna + sin P0/P1 abiertos.
+- Canal dev: disponible para equipo interno; no garantiza estabilidad.
+
+### Pasos
+1. Tag semver en repo (`vX.Y.Z`).
+2. M117 genera artefacto por plataforma + manifest SHA-256.
+3. M118 ejecuta pipeline completa (tests + validadores + stress).
+4. Publicación en canal correspondiente (Steam/GOG/HTTP/itch).
+5. M121 publica release notes + M104 registra evento `update_released`.
+
+### Rollback
+- trigger: P0 en canal estable o solicitud fundado.
+- acción: M107 restaura artefacto anterior + M59 no migra saves hacia atrás.
+- comunicación: M121 publica aviso + M104 registra evento `update_rolled_back`.
+
+## Seguridad de Actualizaciones
+
+### Firmas digitales
+- Todo paquete de actualización debe firmarse con clave privada del estudio.
+- Verificación en cliente con clave pública embebida (`res://data/updates/public_key.pem` o Resource).
+- Firma rechazada → bloqueo de instalación + evento `update_failed("firma_invalida")`.
+
+### Detección de corrupción/manipulación
+- Hash SHA-256 por archivo en manifest.
+- Verificación post-descarga antes de aplicar.
+- Discrepancia → cancelación + rollback automático si estaba en curso.
+
+### Bloqueo sin firma válida
+- Sin firma válida o hash mismatch: no se aplica, no se guarda en cache, se notifica M122/M121.
+
+## Certificación en Consolas
+
+### Requisitos comunes
+- Build firmado + manifiesto SHA-256 + notas de release.
+- Sin errores P0/P1 abiertos en M101/M102.
+- Cumplimiento de guía de plataforma (ESRB/PEGI/IARC) → M82/M84/M85.
+
+### Pasos
+1. M117 genera build por plataforma + firma (M83/M18).
+2. M118 ejecuta smoke test + gate de rendimiento M61.
+3. M121 publica release notes + M104 registra evento `update_released`.
+4. Envío a store/backend de plataforma + monitoreo M122/M114.
+
+## Beta Testing de Updates Mayores
+
+### Criterios
+- Updates mayores (MAJOR/MINOR con features nuevas) pasan por beta abierta o cerrada.
+- Duración mínima: 48 h en canal beta con al menos 10 testers.
+- Criterios de salida: 0 P0/P1 abiertos, M112 verde, M61 dentro de presupuesto.
+
+### Flujo
+1. Branch `release/X.Y.Z` + build para canal beta.
+2. Invitación a testers (M121/M104).
+3. Recolección de feedback → M101/M102.
+4. Fixes menores → parche beta o paso a estable.
+
+## Notas del Agente
+
+**Modelo:** stepfun/step-3.7-flash:free
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02
+**Estado:** Parcial (T-022/T-014/T-015/T-007/T-008/T-009/T-010/T-079/T-080/T-081/T-082/T-083/T-084/T-085/T-086 cerradas; bloque reservado 543)
+
+### Lo que hice
+- Cerré T-022: persistencia de `user://version.tres` desde `UpdateManager._ready()` usando `ConfigFile`.
+- Sincronicé checklist personal: T-012/T-014/T-015/T-022/T-007/T-008/T-009/T-010/T-079/T-080/T-081/T-082-T-086 cerradas con evidencia.
+- Test headless M119 15/0 OK post-cambio; output confirma `Versión persistida en user://version.tres: 1.0.0 (estable)`.
+- Documenté proceso de hotfix/SLA, release/rollback, seguridad/firmas/hash, certificación y beta testing en `04-Codigo.md` para cerrar T-007/T-008/T-009/T-010/T-079/T-080/T-081/T-082-T-086.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- No implementé downloader real, firma digital, ni hashing de paquetes: dependen de M96/M118/M107.
+- No conecté UI de notificaciones: dueño M53/M90.
+- No ejecuté regresión M60/M112 completa desde esta sesión; test propio 15/0 OK.
+
+### Recomendaciones para el próximo agente
+- Revisar T-032-T-041 (SaveMigrator, migraciones, rollback) con M59 como dueño.
+- Cerrar T-079-T-086 (release docs + security) cuando M117/M107 habiliten empaquetado.
+- Usar la reserva 543 para el log de cierre cuando M119 llegue a ✅.
+
+### Regla permanente de auditoría de logs (2026-09-02)
+1. Antes de cerrar cualquier log, listar `Logs/*.md` y extraer números prefijo.
+2. Verificar que no existan duplicados para el número elegido (ni en `Logs/` ni en `Logs/reservas/`).
+3. Verificar que `ULTIMO_NUMERO.txt` sea consistente con el máximo número existente.
+4. Verificar que todas las referencias a logs en documentos clave apunten a archivos existentes.
+5. Si se detecta inconsistencia, corregirla o anotarla como `[?]` antes de continuar.

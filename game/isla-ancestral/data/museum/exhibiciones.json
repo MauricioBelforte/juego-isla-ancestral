@@ -30,6 +30,16 @@
 			"items": ["baya_roja", "fibra_algodon", "madera_roble", "mineral_cobre"],
 			"recompensa_item_id": "semilla_tomate",
 			"recompensa_nombre": "Semilla Dorada del Herbario"
+		},
+		{
+			"id": "fauna",
+			"nombre": "Galería de Fauna",
+			"descripcion": "Las especies de Aurora retratadas por naturalistas vecinos.",
+			"categoria": "diorama",
+			"origen": "M36",
+			"items": ["gaviota_playera", "conejo_pradera", "nutria_ribera", "lechuza_bosque", "salamandra_ancestral", "cangrejo_humedal", "halcon_montana"],
+			"recompensa_item_id": "fragmento_ancestral",
+			"recompensa_nombre": "Placa del Naturalista"
 		}
 	]
 }

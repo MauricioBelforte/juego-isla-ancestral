@@ -11,6 +11,7 @@
 extends Node
 
 const RUTA_VERSIONS := "res://data/updates/versions.json"
+const RUTA_VERSION_USUARIO := "user://version.tres"
 
 var config: Dictionary = {}
 var canal_actual: String = "estable"
@@ -18,6 +19,7 @@ var version_juego: String = "1.0.0"
 
 func _ready() -> void:
 	_cargar_versions()
+	_guardar_version()
 	_registrar_servicio()
 	print("[M119] UpdateManager listo (canal %s, versión %s)" % [canal_actual, version_juego])
 
@@ -77,3 +79,14 @@ func set_canal(canal: String) -> bool:
 
 func politica() -> Dictionary:
 	return config.get("politica", {})
+
+func _guardar_version() -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("updates", "version_juego", version_juego)
+	cfg.set_value("updates", "canal_actual", canal_actual)
+	cfg.set_value("updates", "fecha", Time.get_date_string_from_system())
+	var err := cfg.save(RUTA_VERSION_USUARIO)
+	if err != OK:
+		push_warning("[M119] No se pudo guardar %s (error %d)" % [RUTA_VERSION_USUARIO, err])
+	else:
+		print("[M119] Versión persistida en %s: %s (%s)" % [RUTA_VERSION_USUARIO, version_juego, canal_actual])

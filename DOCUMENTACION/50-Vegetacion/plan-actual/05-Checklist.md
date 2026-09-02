@@ -195,3 +195,9 @@
 - [x] Verificación VISUAL de vegetación representativa (preview_assets extendido): palmera ✓, helecho gigante ✓, hongo luminoso ✓, arbusto floral ✓ — siluetas claras, escala uniforme, colores cozy, sin artefactos (captura analizada en tools/mcp/godot-mcp/capturas/50-Vegetacion/)
 - [x] Cross-referencia: los assets de vegetación pertenecen al módulo M50 (prefijo 50-Vegetacion) y a la paleta Maldivas/M166
 - [?] VegetationManager (spawn por bioma/estación, pooling, densidad) — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere M08/M10 en producción)
+## Iteración 2 (2026-09-02 21:35 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/vegetacion/vegetacion_config.json` — tipos por bioma (playa/pradera/bosque/montaña/ribera/humedal → GLBs de M166) + densidad
+- [x] `scripts/vegetacion/vegetation_manager.gd` — VegetationManager: cargar_config, tipos_para_bioma, densidad, posiciones() deterministas (PRNG semilla = mundo + bioma)
+- [x] Test 7/7 OK (6 biomas, tipos, densidades, determinismo por semilla)
+- [?] Instanciación en el mundo (M08 poblar) — iter 3 (dueño: deepseek-v4-flash-vision-exp)

@@ -122,7 +122,7 @@
 - [x] Crear FAQ de licencias de audio en juegos
 - [ ] Tabla de comparación de tipos de licencia
 - [ ] Ejemplos de uso de cada nodo
-- [ ] Proceso de auditoría de licencias pre-launch
+- [x] Proceso de auditoría de licencias pre-launch
 - [ ] Contacto de abogado especializado en entertainment law
 - [x] Registro de cambios del módulo
 - [ ] Proceso de actualización de créditos

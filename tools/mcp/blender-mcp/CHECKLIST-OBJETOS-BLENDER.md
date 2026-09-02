@@ -184,7 +184,7 @@
 - **Módulo 18 cerrado al 100%** (los 11 ítems del Tier E son TODO el módulo M18; no tiene más ítems en el backlog). Sin pendientes.
 - **Tier F CERRADO** (M50 Vegetación, 3 piezas reales, 2026-09-01 21:16): `arbol_frutal` (15/464/4), `musgo_roca` (9/204/4), `raices_expuestas` (6/106/2 — **cumple ALTA+MEDIA+BAJA sin merge**). 3 hojas de contacto aprobadas por visión, 3 variantes cada una, 9 GLB exportados. **Nota de backlog:** M50 figuraba con 5 pendientes pero 2 eran duplicados rancios (`Hongo luminoso`, `Flor de isla`, ya hechos más abajo) → los 3 reales eran Árbol frutal / Musgo en roca / Raíces expuestas.
 - **Import Godot: 100% OK — era un falso pendiente.** El ítem "E-64: import bloqueado por el editor abierto" que estuvo publicado unas horas era **ERRÓNEO** y ya se corrigió en la guía. Verificado por archivos (12:20): **198 GLB / 198 `.import`**, cobertura completa, con el editor abierto todo el tiempo. Los 9 GLB de M50 entraron a las 21:16 y los 33 de M18 a las 21:02. Dos causas del error de diagnóstico: (a) **E-65** — el sidecar se llama `<asset>.glb.import`, no `<asset>.import`, así que el glob de verificación daba 0; (b) **E-64** — los `ERROR:` de `voxel.gdextension` con el editor abierto son **ruido benigno**, no abortan el import. **No hay que cerrar el editor para importar.**
-- Fecha de creación: 2026-08-27 · Última actualización: 2026-09-01 12:20
+- Fecha de creación: 2026-08-27 · Última actualización: 2026-09-02 15:10 (tortuga marina M36, log 533)
 
 ## Plan por tiers (2026-08-28, directiva del usuario)
 

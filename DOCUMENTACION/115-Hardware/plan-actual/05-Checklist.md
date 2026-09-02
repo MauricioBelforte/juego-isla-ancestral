@@ -52,14 +52,14 @@
 
 - [x] Aplicar render scale al viewport [S] *(pendiente — M90 Configuración Gráfica)*
 - [x] Aplicar configuración de sombras [S] *(M90)*
-- [ ] Aplicar SSAO on/off [S] *(M90)*
-- [ ] Aplicar SSR on/off [S] *(M90)*
+- [x] Aplicar SSAO on/off [S] *(M90)*
+- [x] Aplicar SSR on/off [S] *(M90)*
 - [x] Aplicar V-Sync [S] *(M90)*
 - [x] Aplicar max FPS [S] *(M90 + M61 BudgetProfile)*
-- [ ] Aplicar texture quality [S] *(M90)*
+- [x] Aplicar texture quality [S] *(M90)*
 - [x] Aplicar antialiasing (None/FXAA/MSAA2/MSAA4) [S] *(M90)*
 - [x] Crear Resource QualitySettings con campos: preset, render_scale, shadow_quality, ssao, ssr, lod_bias, max_fps, vsync, texture_quality, antialiasing, volumetric_fog, grass_distance [S] *(M90 — fuera de alcance M115)*
-- [ ] Implementar QualityApplier.apply_preset() [S] *(M90)*
+- [x] Implementar QualityApplier.apply_preset() [S] *(M90)*
 - [x] Very Low: render_scale 0.5, shadows off, 30 FPS target [S] *(M90 aplica; M115 expone el preset)*
 - [x] Low: render_scale 0.7, shadows low, 30 FPS target [S] *(M90)*
 - [x] Medium: render_scale 0.85, shadows medium, 60 FPS target [S] *(M90)*

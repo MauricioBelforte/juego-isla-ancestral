@@ -1,6 +1,6 @@
 # Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
-# Fecha: 2026-09-01
+# Fecha: 2026-09-01 (iter. 1-2) / 2026-09-02 (iter. 3)
 #
 # M37: Museos y Colecciones — CollectionRegistry (autoload "CollectionRegistry")
 # Única autoridad de progreso (03-Diseno §2.1):
@@ -9,6 +9,12 @@
 #  - Persistencia ISaveProvider M59: sección "collections".
 #  - Exposiciones data-driven en data/museum/exhibiciones.json (M34 pesca
 #    capturada, M25 fósiles, M15/M33 flora — piezas físicas del inventario).
+# Iter. 3 (glm-5.3-flash 2026-09-02, Log 542):
+#  - Toast no bloqueante al completar exposición vía EventBus.notify (RF6).
+#  - validar_catalogo() con errores accionables (headless-friendly, RF14).
+#  - API panel M53: get_resumen_para_ui() (cartel de entrada §7) +
+#    exposiciones_completas_count().
+#  - RF2: exposición fauna con especies reales de M36 (data-driven).
 # ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
 extends Node
 
@@ -26,6 +32,10 @@ var _recompensas: Dictionary = {}
 func _ready() -> void:
 	_cargar_exposiciones()
 	_registrar_proveedor_guardado()
+	# RF14: validación accionable en arranque
+	var problemas := validar_catalogo()
+	if problemas > 0:
+		push_warning("[M37][RF14] Catálogo con %d problema(s)" % problemas)
 
 
 func _cargar_exposiciones() -> void:
@@ -84,7 +94,24 @@ func register_item(exhibition_id: String, item_id: String) -> bool:
 	# §4.2: exposición completa → una sola vez (marca guardada)
 	if is_exhibition_completed(exhibition_id) and not is_reward_claimed(exhibition_id):
 		exhibition_completed.emit(exhibition_id)
+		# RF6 iter. 3: toast no bloqueante (cola/presentación dueño M53)
+		_emitir_toast_completada(exhibition_id)
 	return true
+
+
+func _emitir_toast_completada(exhibition_id: String) -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	# La señal notify vive en el dominio interno UIEvents (bus.ui), no en la raíz
+	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
+		return
+	var nombre := String(_exposiciones.get(exhibition_id, {}).get("nombre", exhibition_id))
+	var recompensa := String(_exposiciones.get(exhibition_id, {}).get("recompensa_nombre", ""))
+	bus.ui.notify.emit({
+		"tipo": "museo",
+		"id": exhibition_id,
+		"titulo": "Exposición completa: " + nombre,
+		"texto": "Recompensa disponible: " + (recompensa if recompensa != "" else "especial del museo"),
+	})
 
 
 func is_registered(exhibition_id: String, item_id: String) -> bool:
@@ -127,6 +154,72 @@ func get_total_progress() -> float:
 	if total == 0:
 		return 0.0
 	return float(reg) / float(total)
+
+
+## ── Iter. 3: API panel M53 (cartel de entrada §7) ───────
+
+func exposiciones_completas_count() -> int:
+	var n := 0
+	for id in _exposiciones:
+		if is_exhibition_completed(String(id)):
+			n += 1
+	return n
+
+
+## Resumen para el cartel de entrada y el panel del museo (M53)
+func get_resumen_para_ui() -> Dictionary:
+	var lista: Array[Dictionary] = []
+	for id in _exposiciones:
+		var exp: Dictionary = _exposiciones[id]
+		var p := get_exhibition_progress(String(id))
+		lista.append({
+			"id": String(id),
+			"nombre": String(exp.get("nombre", "")),
+			"descripcion": String(exp.get("descripcion", "")),
+			"hecha": is_exhibition_completed(String(id)),
+			"progreso": "%d de %d" % [int(p.get("registered", 0)), int(p.get("total", 0))],
+			"percent": float(p.get("percent", 0.0)),
+			"recompensa": String(exp.get("recompensa_nombre", "")),
+			"recompensa_entregada": is_reward_claimed(String(id)),
+		})
+	return {
+		"percent_global": get_total_progress(),
+		"completas": exposiciones_completas_count(),
+		"total_exposiciones": _exposiciones.size(),
+		"exposiciones": lista,
+	}
+
+
+## ── RF14: Validación de catálogo (errores accionables) ──
+
+func validar_catalogo() -> int:
+	"""RF14: devuelve cantidad de problemas; imprime cada uno accionable."""
+	var problemas := 0
+	var vistos := {}
+	var texto := FileAccess.get_file_as_string("res://data/museum/exhibiciones.json")
+	var parseado: Variant = JSON.parse_string(texto)
+	var entradas: Array = parseado.get("exposiciones", []) if typeof(parseado) == TYPE_DICTIONARY else []
+	for exp in entradas:
+		var id := String(exp.get("id", ""))
+		if id.is_empty():
+			problemas += 1
+			print("[M37][RF14] Problema: exposición sin 'id'")
+			continue
+		if vistos.has(id):
+			problemas += 1
+			print("[M37][RF14] Problema: id duplicado '%s' — renombrar" % id)
+		vistos[id] = true
+		var items: Array = exp.get("items", [])
+		if items.is_empty():
+			problemas += 1
+			print("[M37][RF14] Problema: '%s' sin items — agregar piezas" % id)
+		var recompensa := String(exp.get("recompensa_item_id", ""))
+		if recompensa == "" and String(exp.get("recompensa_nombre", "")) != "":
+			problemas += 1
+			print("[M37][RF14] Problema: '%s' recompensa sin recompensa_item_id" % id)
+	if problemas == 0:
+		print("[M37][RF14] Catálogo OK: %d exposiciones, 0 problemas" % _exposiciones.size())
+	return problemas
 
 
 ## Recompensa única (idempotente): marca y devuelve el ítem de recompensa

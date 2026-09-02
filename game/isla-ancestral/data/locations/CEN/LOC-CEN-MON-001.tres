@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_iafnq"]
+
+[resource]
+script = ExtResource("1_iafnq")
+location_id = "LOC-CEN-MON-001"
+nombre = "Volcan de la Ceniza"
+tipo = 9
+isla = 2
+descripcion = "Volcan activo que domina la Isla Ceniza. Casa del sello ceniza."
+conexiones = ["LOC-CEN-TEM-001"]
+tags = ["isla_ceniza", "sello"]

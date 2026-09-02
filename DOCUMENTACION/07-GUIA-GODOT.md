@@ -1,4 +1,4 @@
-**Modelo:** glm-5.3-flash (último modificador 2026-09-01: §9.56 lambdas por valor, §9.57 clase interna de autoload, §9.58 GestorConfig claves raíz, §9.59 proveedores Node, §9.60 Curve dominio 0-1. Historial: deepseek-v4-flash §9.54/§9.55, glm-5.3 §9.53, MiMo V2.5 creó la guía; múltiples agentes §9.x)
+**Modelo:** GLM 5.3 (z-ai) (último modificador 2026-09-02: §11 flujo completo Blender→Godot→movimiento, caso tortuga M36. Historial: glm-5.3-flash 2026-09-01 §9.56-9.60, deepseek-v4-flash §9.54/§9.55, glm-5.3 §9.53, MiMo V2.5 creó la guía; múltiples agentes §9.x)
 **Plataforma:** Kilo Code
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
@@ -2037,3 +2037,141 @@ func posicionar_sobre_terreno(nodo: Node3D, x: float, z: float) -> bool:
 
 **Beneficio:** un solo punto de verdad → ningún NPC puede flotar; si el radio del mundo
 cambia, todos los objetos se adaptan automáticamente.
+## 11. Flujo completo: traer un objeto animado de Blender a Godot (2026-09-02 — glm-5.3/Kilo Code, caso tortuga M36)
+
+> Esta seccion documenta el flujo VERIFICADO end-to-end para que cualquier agente
+> aporte sus modelos: modelar en Blender -> exportar GLB -> importar en Godot ->
+> instanciarlo -> MOVERLO (deambular + animar cuerpo por codigo). Fuente: la
+> tortuga marina M36 (log 533 asset, log 545 NPC), aprobada por el usuario tras
+> iterar en vivo. Lee esto ANTES de intentar animar un asset importado.
+
+### 11.1 Arquitectura del flujo (que se anima y donde)
+
+```
+Blender (scripts bpy)                Godot (GDScript)
+----------------------              -------------------------------------------
+SM_* piezas SEPARADAS      --GLB-->  nodos hijos con los MISMOS nombres
+(sin armature,                     -> el script los busca por nombre
+ sin acciones)                     -> los rota/mueve por codigo cada frame
+```
+
+**Decision de arquitectura del proyecto:** los GLB se exportan SIN huesos ni
+animaciones (`export_animations=False`, ver 09-GUIA-BLENDER E-45). La animacion
+es **procedural en Godot**: rotar nodos hijos por codigo. Para fauna/NPCs
+lowpoly estilo Animal Crossing alcanza y sobra, y mantiene el pipeline LOD
+(que funde piezas en las variantes media/baja).
+
+### 11.2 Requisito del asset en Blender (para que sea animable)
+
+1. **Piezas moviles = objetos SEPARADOS con prefijo `SM_`** (aletas, cabeza,
+   cola). El exportador GLB conserva cada `SM_*` como nodo hijo con su nombre
+   (minusculizado a `sm_*` en algunos casos).
+2. **La pieza que mas se mueve debe pivotar desde su RAIZ logica** (el hombro
+   de la aleta, la base del cuello), no desde el centro de la malla: las
+   rotaciones en Godot pivotan sobre el origen del nodo.
+3. Contar piezas ANTES (E-70): tope ALTA <=16 SM_. Las que se quieran animar
+   individualmente NO deben fundirse en la variante ALTA (el merge de
+   `generar_variante.py` agrupa; en MEDIA/BAJA puede fusionar y el script de
+   Godot debe tolerarlo con busqueda por sufijo).
+4. z_min 0.045 asentado (E-12): en Godot el origin del CharacterBody3D queda a
+   los "pies"; el script compensa el offset del asset (ver 11.4 paso 3).
+
+### 11.3 Procedimiento paso a paso (el que funciono)
+
+1. **Modelar:** `crear_<objeto>_lowpoly.py` siguiendo 09-GUIA-BLENDER 6.1-6.3
+   (helpers, asentar, guardar en la carpeta del modulo).
+2. **Exportar:** `generar_variante.py <Modulo> <objeto> --media --baja` y
+   `exportar_godot.py` (recuerda agregar el modulo a la whitelist `MODULOS`,
+   E-63). Verificar 3 GLB + 3 `.import` + 3 `.scn` (E-64/E-65: contar
+   sidecars, no confiar en el log del editor abierto).
+3. **Script NPC en Godot:** `scripts/fauna/<objeto>_npc.gd` extends
+   `CharacterBody3D` con el patron villager (M19):
+   - `_instanciar_modelo()`: `load("res://assets/3d/alta/<Modulo>_<objeto>.glb")`
+     -> `instantiate()` -> `add_child()`. Compensar el asentado:
+     `modelo.position.y = -0.045` (la malla nace 4.5 cm arriba del origin).
+   - **Snap al terreno:** `TerrainLocator.get_height(x, z)` + reintentos
+     diferidos (0.5 s, max 6) — NUNCA un IslandGenerator propio (§10.16).
+   - **Deambular FSM:** elegir destino aleatorio en un anillo alrededor del
+     spawn -> `move_and_slide()` -> al llegar, pausa 2-6 s -> repetir. Girar el
+     cuerpo con `lerp_angle` hacia la direccion de marcha.
+4. **Nodo en la escena:** agregar al `.tscn` principal (ej. `main_island.tscn`)
+   un `CharacterBody3D` con el script, posicion cerca del spawn del jugador.
+5. **Animacion procedural (el corazon):** ver 11.4.
+
+### 11.4 Animar el cuerpo por codigo (plantilla verificada)
+
+```gdscript
+# 1) RESOLVER REFERENCIAS DESPUES de instanciar el GLB (ver 11.5 error #1)
+var _aleta_izq: Node3D = null
+var _cabeza: Node3D = null
+
+func _ready() -> void:
+    _instanciar_modelo()        # add_child(modelo) aca dentro
+    _resolver_nodos()           # buscar hijas por sufijo recien AHORA
+    _guardar_rotaciones_base()  # snapshot de rotaciones para animar encima
+
+func _resolver_nodos() -> void:
+    _aleta_izq = _buscar_hijo("Aleta_D_0")   # busqueda por sufijo tolerante
+
+# 2) ANIMAR: siempre ROTAR SUMANDO sobre la base guardada, nunca asignar
+#    valores absolutos sin base (si no, pierdes la pose de origen del GLB)
+func _animar(delta: float) -> void:
+    _t += delta * frecuencia
+    if _aleta_izq:
+        _aleta_izq.rotation.z = _base_rot[_aleta_izq].z + sin(_t) * amplitud
+        # la aleta espejo lleva + PI (fase invertida)
+    # cuerpo: roll + pitch + bobbing (el NODO Modelo, no el CharacterBody3D
+    # — el body NO se toca, move_and_slide lo usa)
+```
+
+**Reglas de oro de la animacion procedural:**
+- Guardar las rotaciones base de cada nodo animable al inicio y animar como
+  `base + seno(t) * amp` — el GLB viene con pose (aletas a 35/150 grados) y
+  hay que PRESERVARLA.
+- Fases: piezas espejadas (aleta izq/der) llevan `+ PI` invertido; el cuerpo
+  mece `sin(t) * 0.10` (roll) y `sin(t + 0.6) * 0.08` (pitch) — amplitudes
+  MENORES a 0.03 rad son invisibles; usar >= 0.08 para que se lea.
+- Amplitudes @export para que el usuario las ajuste sin tocar codigo.
+- La cabeza puede mirar alrededor en las pausas (`sin(t * 0.7) * 0.35` en
+  rotation.y) y volver suave con `lerp` al caminar.
+
+### 11.5 ERRORES FATALES (pisados y verificados — no repetirlos)
+
+1. **`@onready` en nodos que se instancian en `_ready()` = SIEMPRE null.**
+   Sintoma: el objeto camina por el terreno pero su cuerpo esta PARALIZADO
+   (cero aletas, cero cabeza). Causa: `@onready` se evalua ANTES de que
+   `_ready()` corra, y el GLB se instancia DENTRO de `_ready()` — la busqueda
+   encuentra nada y todos los `if nodo:` fallan en silencio (ni error tira).
+   Fix: declarar `var x: Node3D = null` y resolver con una funcion propia
+   DESPUES del `add_child(modelo)`. Verificar con un print de conteo
+   (`[X] nodos animables: 5/5`).
+2. **Amplitudes de animacion demasiado sutiles.** 0.045 rad de roll es
+   invisible en un asset de 40 cm. Minimo visible: ~0.08-0.10 rad en cuerpo,
+   ~0.30 en aletas. Si el usuario reporta "esta tieso", subir amplitud ANTES
+   de buscar bugs.
+3. **No animar el CharacterBody3D (roll/pitch).** `move_and_slide()` usa la
+   velocity en frame del body; rotarlo mientras camina introduce deriva.
+   Animar el nodo `Modelo` (hijo), el body queda vertical siempre.
+4. **No usar IslandGenerator propio para el snap** (§10.16): radios
+   hardcodeados => NPC flotando o hundido. SIEMPRE `TerrainLocator`.
+5. **Olvidar el offset -0.045** => el asset flota 4.5 cm (el z_min de Blender
+   era asentado a la arena del set, no al origin del body).
+6. **Parser errors ajenos bloquean el arranque** (§12.1): si el juego no bootea
+   por un script de OTRO modulo (ej. `credits_manager.gd` con un `:=` que no
+   infiere), arreglarlo con tipo explicito para poder verificar el propio.
+7. **Variable duplicada al editar un script ya cargado**: Godot cachea; si el
+   editor no recarga, el error aparece al correr. Revisar declaraciones
+   duplicadas tras editar.
+
+### 11.6 Verificacion (DoD del objeto animado)
+
+- [ ] Boot limpio: `run_project` sin parser errors del script nuevo.
+- [ ] Log de nodo: `[X] nodos animables: N/N` (todas las refs resueltas).
+- [ ] Log de vida: `[X] deambulando por la isla (spawn x, z)`.
+- [ ] 60+ segundos corriendo sin errores propios.
+- [ ] Captura guardada en `capturas/{ID-Modulo}/` (aunque el agente no vea
+      imagenes, E-10: el usuario o un modelo multimodal valida).
+- [ ] El usuario confirma V1: camina, rema/mueve piezas, se mece, respira.
+
+**Caso de referencia completo:** `game/isla-ancestral/scripts/fauna/tortuga_npc.gd`
+(tortuga marina M36, log 545 v3) — copiar de ahi el patron completo.

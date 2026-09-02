@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "biomas": {
+    "playa": {"tipos": ["50-Vegetacion_palmera", "50-Vegetacion_palmera_inclinada"], "densidad": 8},
+    "pradera": {"tipos": ["50-Vegetacion_hierba_alta", "50-Vegetacion_arbusto_redondo", "50-Vegetacion_flor_isla"], "densidad": 12},
+    "bosque": {"tipos": ["50-Vegetacion_arbol_frutal", "50-Vegetacion_helecho_gigante", "50-Vegetacion_hongo_luminoso", "50-Vegetacion_liana_colgante"], "densidad": 10},
+    "montana": {"tipos": ["50-Vegetacion_musgo_roca", "50-Vegetacion_raices_expuestas"], "densidad": 6},
+    "ribera": {"tipos": ["50-Vegetacion_canas_bambu", "50-Vegetacion_arbusto_floral"], "densidad": 9},
+    "humedal": {"tipos": ["50-Vegetacion_helecho_chico"], "densidad": 7}
+  }
+}

@@ -3,11 +3,12 @@
 
 # 05-Checklist.md — Módulo 38: Economía
 
-> **Reserva actual (iter. 2 mercado día + transacciones)**
-> **Agente:** glm-5.3-flash · **Plataforma:** Cline · **Fecha:** 2026-09-02 15:25 · **Estado:** 🔵 En curso
-> **Entrada:** núcleo ✅ (logs 171-235) + BarterSystem ✅ (Log 311) + M14 ✅ + M20 ✅ + M29 ✅ · **Salida:** RF10 tabla_del_dia() expuesta para UI + RF15 historial de transacciones (cap 200, M104) + persistencia del historial (RF13 parcial) + test headless 0 fallos
-> **Archivos afectados:** `game/isla-ancestral/scripts/economia/price_manager.gd`, `economy_manager.gd`, `test_tabla_dia_transacciones.gd`
-> **Log reservado:** 538
+> **Reserva actual — iter. 2 (tabla del día + transacciones) + iter. 3 (estación, anti-grind, reputación, ferias)**
+> **Agentes:** glm-5.3-flash (Cline) iter.2 · Hy3 (Kilo Code) iter.3 · **Fecha cierre:** 2026-09-02 20:35 · **Estado:** ✅ Iter.2 + Iter.3 completadas
+> **Iter.2 (log 538):** RF10 tabla_del_dia() expuesta para UI + RF15 historial de transacciones (cap 200, M104) + persistencia del historial (RF13 parcial) + test headless 29/0. Bootstrap reparado por glm-5.3-flash (regresión economía 5/5 tests verdes, 74 checks).
+> **Iter.3 (log 544):** RF9 ajuste estacional + recálculo diario + RF11 anti-grind formalizado + RF13 reputación (estado+persistencia) + RF14 precios de ferias vía M73 (duck-typing). test headless 23/0. Sin regresión: test_tabla_dia 29/0.
+> **Pendiente:** RF13 completo (inventarios de tienda → M39, ShopManager aún sin autoload) + RF1-RF8 restantes de núcleo de comercio/UI.
+> **Archivos afectados:** `game/isla-ancestral/scripts/economia/price_manager.gd`, `economy_manager.gd`, `test_tabla_dia_transacciones.gd`, `test_mercado_estacion_ferias.gd`
 
 ## A. Problema y objetivos
 
@@ -32,12 +33,12 @@
 - [ ] RF6: horarios de atención declarativos por tienda con señal de cierre [M]
 - [x] RF7: trueque objeto por objeto sin moneda, dependiente de amistad y temporada [M] — glm-5.3-flash 2026-08-31: BarterSystem implementado + testeado (saldo jamás tocado)
 - [x] RF8: factor amistad que otorga descuentos y ofertas únicas de trueque [M] — ofertas con amistad_minima gating propuestas_disponibles (testeado: nivel bajo oculta, alto muestra)
-- [ ] RF9: mercado del pueblo con ajuste suave por oferta y estación (tope ±10%) [M]
-- [ ] RF10: tabla de precios del día expuesta como dato para la UI [S]
-- [ ] RF11: anti-grind con límite diario por ítem y reventa nunca rentable [M]
+- [x] RF9: mercado del pueblo con ajuste suave por oferta y estación (tope ±10%) [M] — PriceManager._ajuste_estacional (+5% en temporada del ítem, -10% fuera) + recalcular_tabla_dia() al amanecer; duck-typing con TimeCalendar. Testeado 23/0 (log 544)
+- [x] RF10: tabla de precios del día expuesta como dato para la UI [S] — EconomyManager.tabla_del_dia() delega en PriceManager; estructura {compra, venta, limite, vendidas_hoy, rebajado}; testeada 29/0 (log 538)
+- [x] RF11: anti-grind con límite diario por ítem y reventa nunca rentable [M] — limite_ventas_dia por banda (log 191) + precio_venta_vigente siempre <= precio_compra_vigente aunque haya feria (anti-arbitraje). Testeado 23/0 (log 544)
 - [x] RF12: salvavidas cozy: con 0 monedas siempre hay trueque de partida disponible [M] — oferta es_salvavidas siempre en propuestas y no consume límite (testeado)
-- [ ] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M]
-- [ ] RF14: ferias y eventos con precios especiales temporales (M73) [M]
+- [ ] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M] — PARCIAL: saldo (núcleo) + historial (iter.2, log 538) + reputación (iter.3, log 544) persisten; inventarios de tienda pendientes (M39, ShopManager aún sin autoload)
+- [x] RF14: ferias y eventos con precios especiales temporales (M73) [M] — PriceManager.vincular_eventos() conecta evento_iniciado/evento_terminado de EventManager; lee multiplicadores de EventDefinition.flags (precio_compra/precio_venta) y aplica/limpia con clamp. Duck-typing, sin acoplar M73. Testeado 23/0 (log 544)
 - [ ] RF15: registro de transacciones para log y analytics (M104) [S]
 
 ## C. Requisitos no funcionales
@@ -210,4 +211,6 @@
 - [ ] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 - [x] Implementar limite_ventas_dia por banda de rareza: comun=3, poco_comun=3, raro=2, epico=1, con resolucion desde catalogo (PriceDefinition.rareza) y fallback al enum ItemData.Rareza [M] (log 191)
 - [x] Crear test_edge_cases_precio.gd (headless, M38): cantidad 0/negativa = minorista, tope volumen 15%, venta estable anti-arbitraje, clamp >=1 en base minima, reseteo por dia, limite por banda. 20/20 checks OK [M] (log 235)
+- [x] Crear test_tabla_dia_transacciones.gd (headless, M38 iter.2): RF10 tabla_del_dia + RF15 historial de transacciones + RF13 parcial (persistencia de historial). 29/29 checks OK [M] (log 538)
+- [x] Crear test_mercado_estacion_ferias.gd (headless, M38 iter.3): RF9 estación + RF11 anti-grind + RF13 reputación + RF14 ferias. 23/23 checks OK [M] (log 544)
 - [x] Verificar headless Godot 4.7.2 que M38/M39/M29 mantienen 0 fallos tras el nuevo test (regresion completa) [S] (log 235)

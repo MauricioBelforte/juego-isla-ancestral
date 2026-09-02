@@ -32,6 +32,10 @@ const HORA_LLEGADA: int = 8
 const ENFRIAMIENTO_PARTIDA: int = 30
 ## Día absoluto de partida pendiente por vecino (aviso → partida efectiva)
 const DIA_PARTIDA_DEFAULT: int = 1
+## P1: población de arranque al primer día (diseño P1: 6 vecinos)
+const POBLACION_ARRANQUE: int = 6
+## P26: memoria máxima de interacciones por vecino (rotativa, cap suave)
+const MEMORIA_MAX: int = 20
 
 var _activos: Array[Node] = []
 var _target_actual: Node = null
@@ -52,12 +56,30 @@ var _enfriamiento_partida: Dictionary = {}
 ## Hogares asignados: vecino_id/candidato_id -> parcela_id (índice)
 var _hogares: Dictionary = {}
 
+## ── P26: memoria de interacciones (iter. 3) ─────────────
+## vecino_id -> Array[Dictionary {dia, tipo, detalle}] (rotativa, MEMORIA_MAX)
+var _memoria: Dictionary = {}
+
+## ── P11/P12/P24: agenda horaria para M64 (iter. 3) ─────
+## Franjas del diseño P12 (cozy, sin grindeo)
+const FRANJAS_DIA := [
+	{"desde": 6, "hasta": 8, "actividad": "desayuno"},
+	{"desde": 8, "hasta": 12, "actividad": "trabajo"},
+	{"desde": 12, "hasta": 14, "actividad": "comida"},
+	{"desde": 14, "hasta": 18, "actividad": "trabajo_ocio"},
+	{"desde": 18, "hasta": 22, "actividad": "social"},
+	{"desde": 22, "hasta": 6, "actividad": "dormir"},
+]
+
 
 func _ready() -> void:
 	print("[VillagerManager] Inicializado (población max: %d)" % POBLACION_MAX)
 	_cargar_catalogo()
 	_registrar_proveedor_guardado()
 	_suscribir_tiempo()
+	# P1 iter. 3: población de arranque (deferred: la escena Main aún no existe
+	# durante el bootstrap de autoloads; diferimos un frame al árbol listo)
+	call_deferred("poblar_arranque")
 
 
 ## ── Catálogo (data/villagers/) ─────────────────────────
@@ -385,9 +407,186 @@ func entregar_regalo(vecino_id: String, objeto_id: String) -> void:
 	if vecino and vecino.has_method("recibir_regalo"):
 		vecino.recibir_regalo(objeto_id)
 		regalo_recibido.emit(vecino, objeto_id)
+		# P26 iter. 3: registrar en la memoria del vecino
+		registrar_interaccion(vecino_id, "regalo", objeto_id)
 
 
 ## ── Utilidades ─────────────────────────────────────────
+
+## ── P26: memoria de interacciones (iter. 3) ────────────
+
+## Registra una interacción en la memoria del vecino (rotativa, MEMORIA_MAX).
+## tipo: "regalo" | "charla" | "hito" | "mudanza" | ...
+func registrar_interaccion(vecino_id: String, tipo: String, detalle: String) -> bool:
+	if not _memoria.has(vecino_id):
+		_memoria[vecino_id] = []
+	var lista: Array = _memoria[vecino_id]
+	lista.append({
+		"dia": _dia_absoluto_actual(),
+		"tipo": tipo,
+		"detalle": detalle,
+	})
+	while lista.size() > MEMORIA_MAX:
+		lista.pop_front()
+	return true
+
+
+## Memoria completa de un vecino (para M20/M21/M64: reacciones y continuidad)
+func memoria_de(vecino_id: String) -> Array:
+	return (_memoria.get(vecino_id, []) as Array).duplicate()
+
+
+## Resumen consultable: cuántas veces por tipo (p. ej. regalos recibidos)
+func memoria_conteo(vecino_id: String, tipo: String) -> int:
+	var n := 0
+	for m in _memoria.get(vecino_id, []):
+		if String(m.get("tipo", "")) == tipo:
+			n += 1
+	return n
+
+
+## Hook del ciclo existente: regalo recibido → memoria (P26 + RF5)
+func _memorizar_regalo(vecino: Node, objeto_id: String) -> void:
+	var id := vecino_id_de(vecino)
+	if id != "":
+		registrar_interaccion(id, "regalo", objeto_id)
+
+
+## Resuelve el id del vecino desde el nodo (por nombre de escena)
+func vecino_id_de(vecino: Node) -> String:
+	if vecino == null:
+		return ""
+	return String(vecino.name)
+
+
+## ── P11/P12/P24: agenda horaria determinista (iter. 3) ──
+
+## Agenda completa del día para un vecino (contrato hacia M64, P23/P24):
+## franja → actividad, combinando rutina_diaria del perfil con variación
+## PRNG determinista (seed día+id, M29): mismo día → misma agenda.
+func agenda_dia(vecino_id: String, dia_absoluto: int = -1) -> Dictionary:
+	var perfil: Resource = _catalogo.get(vecino_id, null)
+	if perfil == null:
+		return {}
+	var dia := dia_absoluto if dia_absoluto >= 0 else _dia_absoluto_actual()
+	# PRNG determinista estilo M29: seed = dia_absoluto + hash(id)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = dia * 100000 + int(abs(hash(vecino_id)) % 100000)
+	var rutina: Dictionary = perfil.get("rutina_diaria") if "rutina_diaria" in perfil else {}
+	var agenda := {}
+	for franja in FRANJAS_DIA:
+		var clave := "%02d:00" % int(franja.get("desde", 0))
+		var actividad := "libre"
+		if rutina.has(clave):
+			actividad = String(rutina[clave])
+		else:
+			actividad = String(franja.get("actividad", "libre"))
+		# Variación suave (15% de las franjas cambian a "ocio" — cozy, sin caos)
+		if rng.randf() < 0.15 and actividad != "dormir":
+			actividad = "ocio"
+		agenda[clave] = actividad
+	return agenda
+
+
+## Actividad ACTUAL del vecino según la hora de juego (M64 la consulta cada tick)
+func actividad_actual(vecino_id: String) -> String:
+	var agenda := agenda_dia(vecino_id)
+	if agenda.is_empty():
+		return "libre"
+	var hora := _hora_actual()
+	for franja in FRANJAS_DIA:
+		var desde := int(franja.get("desde", 0))
+		var hasta := int(franja.get("hasta", 0))
+		var en_franja: bool
+		if desde <= hasta:
+			en_franja = hora >= desde and hora < hasta
+		else:
+			en_franja = hora >= desde or hora < hasta  # franja nocturna 22-6
+		if en_franja:
+			var clave := "%02d:00" % desde
+			return String(agenda.get(clave, "libre"))
+	return "libre"
+
+
+func _hora_actual() -> int:
+	var gt := get_node_or_null("/root/GameTime")
+	if gt != null and gt.has_method("get_hora"):
+		return int(gt.get_hora())
+	var cal := get_node_or_null("/root/TimeCalendar")
+	if cal != null and cal.has_method("get_hora"):
+		return int(cal.get_hora())
+	return 12
+
+
+## ── P1: población de arranque (iter. 3) ────────────────
+
+## Activa los primeros POBLACION_ARRANQUE perfiles del catálogo (día 1).
+## Idempotente: solo rellena hasta completar el arranque si hay plaza.
+func poblar_arranque() -> Array:
+	var activados: Array = []
+	if _activos.size() >= POBLACION_ARRANQUE:
+		return activados
+	# Orden determinista por id del catálogo
+	var ids := _catalogo.keys()
+	ids.sort()
+	for id in ids:
+		if _activos.size() >= POBLACION_ARRANQUE:
+			break
+		if _visitantes.has(id) or _llegadas_pendientes.has(id):
+			continue
+		if obtener_vecino(String(id)) != null:
+			continue  # ya activo
+		var perfil: Resource = _catalogo[id]
+		var villager := _spawn_vecino_de_perfil(String(id), perfil)
+		if villager != null:
+			activados.append(String(id))
+			registrar_interaccion(String(id), "mudanza", "vecino inicial (arranque P1)")
+	if activados.size() > 0:
+		print("[M19] Población de arranque: %d vecinos activados (P1)" % activados.size())
+	return activados
+
+
+## Instancia un villager desde el perfil (reutiliza villager.tscn si existe,
+## sino crea un Node3D con nombre del id para que el manager lo gestione).
+## En headless sin escena raíz (bootstrap de autoloads con --script), registra
+## un nodo lógico huérfano del manager: la población lógica queda coherente y
+## la visual la completará M64/escena cuando exista árbol.
+func _spawn_vecino_de_perfil(id: String, perfil: Resource) -> Node:
+	var escena := load("res://scenes/npc/villager.tscn") if ResourceLoader.exists("res://scenes/npc/villager.tscn") else null
+	var nodo: Node = null
+	if escena != null:
+		nodo = escena.instantiate()
+	else:
+		nodo = Node3D.new()
+	nodo.name = id
+	# Posición sobre terreno según su parcela asignada (P13: hogares)
+	if _activos.size() < POBLACION_MAX:
+		var parcela := _activos.size()
+		_asignar_hogar_directo(id, parcela)
+	# Snap al terreno con TerrainLocator (nunca flotar — regla 167/07 §10.15)
+	if nodo is Node3D:
+		var pos := _calcular_posicion_parcela(int(_hogares.get(id, 0)), get_node_or_null("/root/TerrainLocator"))
+		nodo.global_position = pos + Vector3(0, 1, 0)
+	# Sincronizar con el perfil (el villager.tscn tomará colores/rutinas)
+	if "profile" in nodo:
+		nodo.profile = perfil
+	# Agregar a la escena actual si hay árbol (bootstrap puede no tenerla aún)
+	var root_scene := get_tree().current_scene
+	if root_scene != null:
+		root_scene.add_child(nodo)
+		registrar_villager(nodo)
+		return nodo
+	# Headless sin escena: registrar lógicamente con el manager como padre
+	add_child(nodo)
+	registrar_villager(nodo)
+	return nodo
+
+
+func _asignar_hogar_directo(vecino_id: String, parcela: int) -> void:
+	_hogares[vecino_id] = parcela
+
+
+## ── Altura del terreno (ya existente) ───────────────────
 
 ## Obtiene la altura del suelo en una posición XZ usando el generador de mundo.
 ## Retorna la coordenada Y de la superficie, o -1.0 si no encontró nada.
@@ -424,13 +623,20 @@ func get_section_name() -> String:
 
 
 func get_save_data() -> Dictionary:
+	# ⚠️ Deep copy de TODOS los Dictionary/Array: son por referencia en Godot,
+	# sin duplicate() un _clear() posterior vaciaría también el save capturado
+	# (bug de aliasing detectado en test iter. 3).
+	var memoria_copy := {}
+	for k in _memoria:
+		memoria_copy[String(k)] = (_memoria[k] as Array).duplicate(true)
 	return {
-		"visitantes": _visitantes.keys(),
-		"llegadas": _llegadas_pendientes,
-		"partidas": _partidas_pendientes,
-		"avisos": _avisos_partida.keys(),
-		"enfriamientos": _enfriamiento_partida,
-		"hogares": _hogares,
+		"visitantes": _visitantes.keys().duplicate(),
+		"llegadas": _llegadas_pendientes.duplicate(true),
+		"partidas": _partidas_pendientes.duplicate(true),
+		"avisos": _avisos_partida.keys().duplicate(),
+		"enfriamientos": _enfriamiento_partida.duplicate(true),
+		"hogares": _hogares.duplicate(true),
+		"memoria": memoria_copy,
 	}
 
 
@@ -464,6 +670,22 @@ func restore_save_data(data: Dictionary) -> void:
 	var hog: Dictionary = data.get("hogares", {})
 	for k in hog:
 		_hogares[String(k)] = int(hog[k])
+	# P26 iter. 3: memoria (ids de catálogo o históricos válidos; cap MEMORIA_MAX)
+	_memoria.clear()
+	var mem: Dictionary = data.get("memoria", {})
+	for k in mem:
+		var vid := String(k)
+		if _catalogo.has(vid) or _hogares.has(vid) or _visitantes.has(vid):
+			var lista: Array = []
+			for m in mem[k]:
+				lista.append({
+					"dia": int(m.get("dia", 0)),
+					"tipo": String(m.get("tipo", "")),
+					"detalle": String(m.get("detalle", "")),
+				})
+			while lista.size() > MEMORIA_MAX:
+				lista.pop_front()
+			_memoria[vid] = lista
 
 
 ## ── Línea de visión (raycast vóxel, checklist ítem 86) ──

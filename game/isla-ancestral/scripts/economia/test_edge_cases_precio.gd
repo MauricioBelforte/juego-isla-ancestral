@@ -12,9 +12,11 @@
 #  - Límite diario por banda de rareza resuelto desde el catálogo central (econ_prices.tres).
 #  - registrar_venta: exceder el límite diario → precio_rebajado_hoy.
 #
-# Para la parte de PREZIOS afecta el item REAL OBJ-PLA-001 (existe en ItemDatabase, M159),
+# Para la parte de PRECIOS afecta un item REAL del catálogo (ItemDatabase, M159),
 # inyectando un valor controlado y restaurándolo al final. Para las bandas NO toca la base:
 # usa un catálogo falso (get_price_def -> PriceDefinition.rareza), igual que EconomyPriceCatalog.
+# Fix (glm-5.3-flash/Cline 2026-09-02): OBJ-PLA-001 ya no existe en el catálogo;
+# se usa OBJ-COC-001 (item_obj_coc_001.tres, id verificado).
 extends SceneTree
 
 var _fallos := 0
@@ -22,7 +24,7 @@ var _checks := 0
 var _pm = null
 var _db = null
 
-const ITEM := "OBJ-PLA-001"
+const ITEM := "OBJ-COC-001"
 
 func _initialize() -> void:
 	print("=== TEST EDGE CASES DE PRECIOS (M38) ===")
@@ -39,7 +41,7 @@ func _ejecutar() -> void:
 	# Precio controlado sobre un item REAL. Guardamos el valor original.
 	var item = _db.get_item(ITEM)
 	if item == null:
-		print("[FAIL] item OBJ-PLA-001 no existe en ItemDatabase"); quit(1); return
+		print("[FAIL] item %s no existe en ItemDatabase" % ITEM); quit(1); return
 	var pc_orig := int(item.precio_compra)
 	var pv_orig := int(item.precio_venta)
 	item.set("precio_compra", 100)

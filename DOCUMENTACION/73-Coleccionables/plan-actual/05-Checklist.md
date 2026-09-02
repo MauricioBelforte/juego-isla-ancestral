@@ -8,7 +8,7 @@
 ## A. Catálogo Central
 
 - [x] Definir collectible_item.gd (id, categoria, nombre i18n, icono, fuente, recompensa) [M]
-- [ ] Definir collectible_category.gd (id, nombre i18n, total, recompensa) [S]
+- [x] Definir collectible_category.gd (id, nombre i18n, total, recompensa) [S]
 - [x] Crear collectibles_catalog.tres como única fuente de verdad [M]
 - [x] Ids univocos con prefijo de categoria (CATEGORIA_001) [M]
 - [x] Validar ids unicos con validate_collectibles.gd [M]

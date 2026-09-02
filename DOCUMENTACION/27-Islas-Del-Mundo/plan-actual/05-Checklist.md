@@ -227,3 +227,7 @@
 - [x] `scripts/islas/islas_schema.gd` — IslasSchema: valida codigos (RIZ/COR/CEN/AUR), centro 2D, radio>0, nombre, biomas>0, color_agua #RRGGBB
 - [x] Test headless: 5/5 checks OK (config válida, radio 256 de RIZ, 3 biomas Aurora, detección de color inválido e isla faltante)
 - [?] Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 2 (2026-09-02 21:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/islas/sincronizar_islas_mapa.gd` — verificador de coherencia Islas (islas.json) ↔ Mapa (map_data.json): 4/4 islas coherentes, 9/9 POIs asignados a islas válidas (exit 0)
+- [x] El ecosistema de coordenadas del mundo queda verificado: islas ↔ mapa ↔ ubicaciones (LOC-*) ↔ viajes

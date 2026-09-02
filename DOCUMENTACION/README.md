@@ -1,8 +1,8 @@
 # DOCUMENTACION — Sistema de Documentación de Isla Ancestral
 
-**Modelo:** glm-5.3-flash (último modificador 2026-09-01: 12 filas de módulos implementados en sprint glm-5.3-flash + 6 nuevas M19/M28/M33/M34/M37/M93)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-08-15 (actualizado 2026-09-01)
+**Modelo:** Claude (último modificador 2026-09-02: registro de bugs 11-BUGS.md agregado)
+**Plataforma:** Cline
+**Fecha:** 2026-08-15 (actualizado 2026-09-02)
 
 ## Estructura
 
@@ -16,6 +16,7 @@ DOCUMENTACION/
 ├── 06-GUIA-DE-CONEXION-VISION.md               ← Guía maestra de "ojos" del agente (M154): vías de visión + cómo conectarse (V1-V5)
 ├── 07-GUIA-GODOT.md                              ← Guía de codificación en Godot 4.x: errores, convenciones, checklist, registro de errores (AGENTS.md §26)
 ├── 08-GUIA-ORDEN-DE-IMPLEMENTACION.md            ← Orden principal de codificación, fases, puertas, dificultad, visión y delegación paralela
+├── 11-BUGS.md                                    ← Registro central de bugs: checklist de problemas/fallas con máximo detalle, delegación entre LLMs y firma obligatoria (usuario + agentes)
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
 ├── 01-Fundamentos-Del-Proyecto/                ← Portal/índice: 152 módulos, 68 documentados [x]
 ├── 02-Vision-Y-Concepto/                ← M01: visión, pitch, pilares, alcance v1.0 (162/172)

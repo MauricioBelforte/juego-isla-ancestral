@@ -244,3 +244,8 @@ otros módulos, verificados como legítimos en QA cruzado).
 - [x] **3 datos del catálogo corregidos** (detectados por la auditoría): conejo_pradera radio_curiosidad 3.0→6.0 (alarma>curiosidad era inconsistente); nutria_ribera y lechuza_bosque con 1 solo color → 2 variantes añadidas (2-3 requeridos)
 - [x] Verificación VISUAL del catálogo (swatch analizado con visión): paleta coherente por especie/biotopo (gaviota blanca, conejo camuflaje, nutria chocolate, lechuza crema+beige, cangrejo barro, halcón gris-marrón, salamandra ancestral roja = rareza destacada), 2-3 variantes cada una, contraste entre especies suficiente, estética cozy
 - [?] Verificación de criaturas IN-GAME (aparición/behavior en el mundo) — requiere M64 IA de NPC (dueño: agnes; iter con IA completa)
+## Verificación adicional — tortuga NPC (2026-09-02 20:50 — deepseek-v4-flash-vision-exp)
+
+- [x] Tortuga NPC verificada en runtime (log): '[Tortuga] deambulando por la isla (spawn 268, 250)' — la adición de fauna del día está operativa (spawn + deambulación)
+- [x] QA visual del mundo (captura analizada): FPS 60, perfil de la isla correcto, HUD/calendario intactos
+- [!] B-001 (watchdog 'NPC atascado') sigue activo — sigue siendo defecto ALTA del dueño M64/M19

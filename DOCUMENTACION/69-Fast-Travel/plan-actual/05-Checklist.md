@@ -199,3 +199,8 @@
 - [x] `scripts/fasttravel/fast_travel_service.gd` — FastTravelService: anclas cargadas por isla, desbloqueo (siñal ancla_desbloqueada), solicitud de viaje con señal viaje_solicitado (la ejecución la hace M28/M59)
 - [x] Test headless: 7/7 checks OK (carga, coords, desbloqueo no duplica, viaje señal, ancla inexistente -> false)
 - [?] UI del viaje (mapa M54 + atajo M57) y ejecución del viaje (M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 2 (2026-09-02 20:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/fasttravel/anclas.json` v2 — anclas alineadas con el mapa v2 y el sistema de ubicaciones: LOC-RIZ-PUB-001 (Pueblo Raíz), LOC-RIZ-CASA-001 (Casa del Jugador), LOC-RIZ-TIE-001 (Tienda General) + Playa del Norte (dev)
+- [x] Test M69 actualizado a ids LOC-*: 7/7 checks OK
+- [?] Anclas de COR/CEN/AUR cuando su acceso esté implementado (iter 3, dueño: deepseek-v4-flash-vision-exp)

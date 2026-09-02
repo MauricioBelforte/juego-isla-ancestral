@@ -190,3 +190,14 @@
 - [x] `scripts/ubicaciones/ubicaciones_schema.gd` — UbicacionesSchema (islas válidas, tipos, sello coherente con la isla, coordenadas, ids únicos)
 - [x] Test headless: 5/5 checks OK, exit 0
 - [?] El servicio UbicacionesService existente carga 3 (fallback/ruta previa): acoplar al nuevo JSON de 10 y conectar puntos M54 (iter 2, dueño: deepseek-v4-flash-vision-exp)
+## Iteración 2 (2026-09-02 18:15 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/data/generar_seeds_islas.gd` — generador de seeds .tres de ubicaciones (patrón _save_riz del sistema): **6 seeds creados** (COR: laguna + templo coral; CEN: volcán + templo ceniza; AUR: puerto celestial + templo aurora — lugares del canon M147)
+- [x] El sistema cargará 9 ubicaciones (3 RIZ + 6 nuevas) en el próximo arranque
+- [?] Conexiones con M28 (viajes) y mapa M54 — iter 3 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 3 — Coherencia Ubicaciones <-> Mapa (2026-09-02 18:20 — deepseek-v4-flash-vision-exp)
+
+- [x] `scripts/data/sincronizar_ubicaciones_mapa.gd` — verificador de coherencia (seeds .tres ↔ POIs del mapa por nombre): detectó la divergencia y quedó como herramienta permanente (reporte tools/reportes/ubicaciones_mapa_coherencia.txt)
+- [x] `data/map/map_data.json` v2 — sincronizado: 9 POIs con los IDs LOC-* de las ubicaciones (índice el mundo completo: RIZ (pueblo/casa/tienda), COR (laguna/templo), CEN (volcán/templo), AUR (cielo/templo)) con coordenadas por isla
+- [x] Verificado: 9 ubicaciones = 9 POIs (0 divergencias)
+- [?] Conexión con viajes (M28): la solicitud de viaje usa los mismos IDs LOC-* — iter 4 (dueño: deepseek-v4-flash-vision-exp)

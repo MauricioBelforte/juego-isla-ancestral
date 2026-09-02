@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_54i72"]
+
+[resource]
+script = ExtResource("1_54i72")
+location_id = "LOC-CEN-TEM-001"
+nombre = "Templo de la Ceniza"
+tipo = 11
+isla = 2
+descripcion = "Templo tallado en la roca volcanica. Guardián de hilos de piedra."
+conexiones = ["LOC-CEN-MON-001"]
+tags = ["templo", "sello"]

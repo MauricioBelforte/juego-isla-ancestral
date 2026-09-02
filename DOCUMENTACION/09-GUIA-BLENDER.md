@@ -1,8 +1,8 @@
 # 09 — Guía Blender
 
-**Modelo:** Claude
-**Plataforma:** Cline
-**Fecha:** 2026-08-28
+**Modelo:** GLM 5.3 (z-ai)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 (última actualización: §8 requisitos de assets animables, caso tortuga M36; E-74 espejo de piezas pareadas; original de Claude/Cline 2026-08-28)
 
 > **Propósito:** Guía de referencia obligatoria para modelar assets con Blender vía scripting (bpy), análoga a `07-GUIA-GODOT.md`. Documenta errores comunes, convenciones, la conexión MCP (V5) y el registro de errores. **Todo agente que modele assets DEBE leerla antes de empezar** y agregar aquí cada descubrimiento nuevo (regla AGENTS.md §26 aplicada a Blender).
 
@@ -1255,3 +1255,84 @@ tiene que ser un asset con más cuerpo — `cofre_ancestral` o `monolito_glifos`
 **Cambios 22:50 (primer QA visual M166 — módulo 13-Herramientas, visión destrabada):** se destrabó E-10 al re-abrir Blender y se corrió el circuito completo sobre `13-Herramientas`: `qa_variantes.py 13-Herramientas --angulos 6` → 6 variantes / 0 fallos / 36 PNGs orbitales / 2 min 17 s, + 6 contact sheets con `contact_sheet.py`. Las 3 herramientas (`antorcha_mano`, `pico_hierro`, `pico_piedra`) tienen MEDIA y BAJA **bit-perfect** o casi: 3 obj / 74-83 tris / 3 mats, dentro del presupuesto M166 con margen. **Lección:** para assets tan simples el pipeline M166 no tiene con qué trabajar (la poda no encuentra piezas bajo el umbral y el decimate 0.7 sobre mallas de ~30 tris no reduce). Es correcto y esperado — el módulo preserva lo que no se puede reducir. Las reducciones reales del módulo (cofre 33→6, palanca 5→3, hongo 9→5) son sobre assets más grandes. Implicación para la pasada ALTA: los 3 del 13 tienen techo bajo (~80→~250 tris) y conviene arrancar la ALTA por `cofre_ancestral` o `monolito_glifos`. Log 275.
 
 **Cambios de la sesión de mejora del cofre (20:20–20:30):** descubierto que **Eevee Next sin SSR muestra materiales metálicos/coat planos** — diagnosticado en `scripts-reutilizables/_diag_eevee.py` (borrado tras verificar). Para que un material con metallic 0.85 + coat 1.0 se vea brillante en el set de captura, **activar `eevee.use_ssr = True`, `eevee.use_ssr_refraction = True`, `eevee.use_raytracing = True` ANTES de `bpy.ops.render.render()`**. La activación puede vivir en el script de captura (no en el del asset) para no contaminar el .blend. Con SSR activo, los highlights de oro/bronce son nítidos incluso con un set de luces plano (SOL 3.4 + mundo 0.55). Lección general: **sin HDRI, la única forma de que metallic+coat se vean pulidos es vía SSR + emisión suave en el color del metal** (oro emis 0.6–0.8, bronce 0.4). El cofre pasó de 25 objetos opacos a 33 piezas con 7 materiales brillantes (madera barnizada, hierro pulido, bronce pulido, oro con emis, gema cyan emis 4.5).
+
+### E-74 — Espejo de piezas pareadas: NEGAR el angulo, nunca `pi - ang`
+
+- **Sintoma (2026-09-02, tortuga marina v4, M36):** el usuario reporta
+  "solo le pusiste una pata izquierda". La aleta trasera izquierda no se
+  veia: la derecha si. El conteo de objetos daba 14/14 correcto.
+- **Causa:** para espejar una pieza rotada en Z entre el lado izquierdo
+  y el derecho, el codigo usaba `ang_z = 150 deg` para lado +1 y
+  `pi - 150 deg = 30 deg` para lado -1. Pero `pi - ang` NO es el espejo:
+  es la direccion complementaria (30 deg apunta adelante-derecha). La
+  aleta "izquierda" cruzaba por DEBAJO del cuerpo y quedaba oculta junto
+  a la derecha. El `z_min` no lo detecta (sigue tocando la arena) y el
+  conteo de objetos tampoco (existe, solo que invisible).
+- **Solucion:** el espejo correcto en 2D es NEGAR el angulo:
+  `ang_z = radians(150.0) * lado   # +150 y -150, simetricos`
+  Regla general para piezas pareadas (aletas, orejas, brazos): lado
+  izquierdo = angulo negado, NO `pi - angulo`. `pi - ang` sirve para
+  espejar la DIRECCION de avance de una pieza que nace en el centro,
+  no para espejar lados.
+- **Deteccion:** comparar el centro X/Y de cada pieza espejada: si las
+  dos caen del MISMO lado del eje de simetria, el espejo esta mal.
+- **Fecha:** 2026-09-02 (tortuga v5, aprobada por el usuario; log 533)
+
+## 8. Requisitos del asset para ser ANIMADO en Godot (2026-09-02 — glm-5.3/Kilo Code, directiva del usuario tras el caso tortuga M36)
+
+> El flujo completo (Blender -> GLB -> Godot -> moverlo) esta en
+> `07-GUIA-GODOT.md` §11. Esta seccion cubre el LADO BLENDER: que debe
+> cumplir un asset para que despues otro agente pueda animarlo en Godot.
+
+### 8.1 Reglas del asset animable
+
+1. **Pieza movil = objeto SEPARADO `SM_`** con nombre descriptivo y sufijo de
+   lado SI aplica: `SM_Tortuga_Aleta_D_0` / `_1` (izq/der), `SM_Tortuga_Cabeza`,
+   `SM_Tortuga_Cola`. El GLB conserva cada pieza como nodo hijo y el script de
+   Godot la encuentra por sufijo (minuscula/merge tolerant).
+2. **Espejo de piezas pareadas (E-74): NEGAR el angulo, nunca `pi - ang`.**
+   Con `pi - ang` la pieza izquierda apunta al lado contrario, cruza por
+   debajo del cuerpo y queda invisible ("una sola pata").
+3. **Pivot logico:** la rotacion en Godot pivota sobre el ORIGEN del nodo.
+   Una aleta debe modelarse con el origen en el HOMBRO (donde nace del
+   caparazon), no en el centro de la pala: modelar la pala extendida desde
+   el origen (loft con t*LARGO desde 0) deja el pivot correcto gratis.
+4. **NO fundir las piezas animables en la ALTA:** el merge de
+   `generar_variante.py` (umbral volumetrico) puede agrupar piezas chicas
+   en la media/baja — aceptable (el script de Godot debe tolerar refs null),
+   pero la ALTA debe conservarlas separadas para que la animacion se vea.
+5. **z_min 0.045 (E-12):** obligatorio igual que siempre. El script de Godot
+   compensa el asentado con `modelo.position.y = -0.045`; si el asset nace
+   a otra altura, esa constante hay que ajustarla y el agente de Godot no
+   lo sabra — mantener 0.045 EXACTO.
+6. **Contar piezas (E-70) contando las animables de mas:** cada pieza que se
+   quiera mover es un SM_ que suma al tope ALTA de <=16. La tortuga quedo en
+   14 con 5 piezas animables (2 aletas D + 2 aletas T + cabeza).
+
+### 8.2 ERRORES FATALES del lado Blender (no repetir)
+
+1. **Modelar la pieza animada pegada al cuerpo (1 malla):** imposible de
+   animar en Godot sin rig. Si la pieza se debe mover, es OTRO objeto.
+2. **Origen/pivot en el centro geometrico de la pala:** en Godot la rotacion
+   pivota ahi y la aleta "orbita" en vez de remar. Modelar con el origen en
+   la raiz articular (E-09 mide z del bounding: ojo con piezas loftadas).
+3. **Espejo con `pi - ang` (E-74):** pieza invisible del lado contrario.
+4. **Exceder 16 SM_ por agregar piezas animadas:** recortar decorativas antes
+   que las articulares (ej: 9 escudos de la tortuga = 1 sola malla multi-pad
+   bmesh, no 9 objetos).
+5. **Asentar cada pieza animable por separado:** el asentado es del GRUPO
+   (todas las SM_ del script) — las aletas nacen tocando 0.045 en su pose de
+   GLB, y Godot preserva esa pose (el script anima SUMANDO sobre la base,
+   nunca reemplazando — ver 07 §11.4).
+
+### 8.3 Checklist Blender del asset animable (ademas del §4 existente)
+
+- [ ] Cada pieza que Godot deba mover es `SM_` separado con nombre claro.
+- [ ] Pares espejados: angulo negado entre lados (E-74), verificado con la
+      Y de cada pieza cayendo a su lado del eje de simetria.
+- [ ] Origen de cada pieza articular en su raiz (hombro/base del cuello).
+- [ ] ALTA conserva las piezas separadas; MEDIA/BAJA pueden fusionar (Godot
+      tolera nulls con contador `N/M nodos animables`).
+- [ ] z_min 0.045 EXACTO del grupo (Godot usa la constante -0.045).
+- [ ] Capturas 6 azimuts E-13 + hoja: las piezas animables deben verse en su
+      pose de GLB (esa es la base que Godot preserva al animar).

@@ -5,12 +5,12 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de VFX el feedback visual es inconsistente y caro [S]
-- [ ] Definir el objetivo: VFX baratos, deterministas y armónicos con el estilo cozy [S]
-- [ ] Registrar dependencias: M04 (GPUParticles), M45/M47 (materiales), M49 (glow/luz), M61/M62 (presupuestos), M58 (accesibilidad) [M]
-- [ ] Mapear la sección 51 "PARTÍCULAS Y VFX" del plan maestro al ID 52 de la tabla global [M]
+- [x] Definir el problema: sin sistema de VFX el feedback visual es inconsistente y caro [S]
+- [x] Definir el objetivo: VFX baratos, deterministas y armónicos con el estilo cozy [S]
+- [x] Registrar dependencias: M04 (GPUParticles), M45/M47 (materiales), M49 (glow/luz), M61/M62 (presupuestos), M58 (accesibilidad) [M]
+- [x] Mapear la sección 51 "PARTÍCULAS Y VFX" del plan maestro al ID 52 de la tabla global [M]
 - [ ] Separar dentro/fuera de alcance: luz de fuego → M49, sonido → M43/M44, sprites → M45/M47 [S]
-- [ ] Documentar restricciones: GPUParticles, sin RNG, sin luz por partícula, presupuesto verificable [M]
+- [x] Documentar restricciones: GPUParticles, sin RNG, sin luz por partícula, presupuesto verificable [M]
 - [ ] Definir criterios de aceptación verificables (8 criterios) [S]
 
 ## B. RF1 — Catálogo de VFX
@@ -36,7 +36,7 @@
 
 ## C. RF2 — Pool central
 
-- [ ] Definir VfxManager (autoload) [M]
+- [x] Definir VfxManager (autoload) [M]
 - [ ] Definir pool de emisores one-shot prestados/liberados [M]
 - [ ] Definir loops registrados con culling [M]
 - [ ] Definir precalentamiento del pool (8 emisores) [M]
@@ -46,7 +46,7 @@
 - [ ] Definir máx emisores activos (12 preset medio) [M]
 - [ ] Definir máx partículas vivas (4.000 preset medio) [M]
 - [ ] Definir presupuesto por preset (M90) [M]
-- [ ] Definir log VFX-SKIP cuando se excede [M]
+- [x] Definir log VFX-SKIP cuando se excede [M]
 
 ## E. RF4 — Determinismo
 
@@ -59,7 +59,7 @@
 
 - [ ] Definir triggers en timelines (M48) [M]
 - [ ] Minado, cosecha, pesca, construcción desde animación [M]
-- [ ] Definir trigger centralizado VFX+SFX+feedback [M]
+- [x] Definir trigger centralizado VFX+SFX+feedback [M]
 
 ## G. RF6 — Eventos de juego
 
@@ -104,12 +104,12 @@
 
 ## M. RF12 — Cambio estacional
 
-- [ ] Definir transición de VFX por estación (M29) [M]
+- [x] Definir transición de VFX por estación (M29) [M]
 - [ ] Definir pétalos ↔ hojas ↔ nieve [M]
 
 ## N. RF13 — Teletransporte
 
-- [ ] Definir estela de entrada/salida (si se implementa M28) [S]
+- [x] Definir estela de entrada/salida (si se implementa M28) [S]
 
 ## O. RF14 — Optimización
 
@@ -120,7 +120,7 @@
 
 ## P. RF15 — Validación
 
-- [ ] Definir validate_vfx.gd [M]
+- [x] Definir validate_vfx.gd [M]
 - [ ] Verificar presupuesto por escena [M]
 - [ ] Verificar naming [S]
 - [ ] Verificar determinismo (semillas) [M]
@@ -129,7 +129,7 @@
 
 ## Q. RF16 — Naming y organización
 
-- [ ] Definir prefijos vfx_, part_ [S]
+- [x] Definir prefijos vfx_, part_ [S]
 - [ ] Alinear con M108 [M]
 
 ## R. Requisitos no funcionales
@@ -138,17 +138,17 @@
 - [ ] Memoria: pool precalentado (M62) [M]
 - [ ] Determinismo: semillas + fases fijas [M]
 - [ ] Cozy: amplitudes suaves, sin humo denso negro [M]
-- [ ] Accesible: vfx_quality 3 niveles (M58) [M]
+- [x] Accesible: vfx_quality 3 niveles (M58) [M]
 - [ ] Mantenible: catálogo central único [M]
 
 ## S. Alternativas consideradas
 
-- [ ] Descartar CPUParticles para todo [M]
+- [x] Descartar CPUParticles para todo [M]
 - [ ] Descartar emisores sin pool (GC/stutter) [M]
 - [ ] Descartar luz integrada en partículas [M]
 - [ ] Descartar RNG en runtime [S]
 - [ ] Descartar sin límite de partículas [S]
-- [ ] Descartar VFX 100% procedural por shaders [M]
+- [x] Descartar VFX 100% procedural por shaders [M]
 
 ## T. Riesgos y mitigaciones
 
@@ -156,12 +156,12 @@
 - [ ] Riesgo de desincronía → trigger centralizado [M]
 - [ ] Riesgo de determinismo roto → semillas + validador [M]
 - [ ] Riesgo de stutter → pool precalentado [M]
-- [ ] Riesgo de molestias (fotosensibilidad) → vfx_quality (M58) [M]
+- [x] Riesgo de molestias (fotosensibilidad) → vfx_quality (M58) [M]
 - [ ] Riesgo de efectos fuera de estilo → guía de amplitudes + review [M]
 
 ## U. Integraciones
 
-- [ ] Documentar integración con M04 (GPUParticles) [S]
+- [x] Documentar integración con M04 (GPUParticles) [S]
 - [ ] Documentar integración con M13/M17/M22/M24/M33/M34/M71 (eventos) [S]
 - [ ] Documentar integración con M48 (timelines) [S]
 - [ ] Documentar integración con M43/M44 (audio/feedback) [S]
@@ -185,15 +185,15 @@
 - [ ] One-shots deterministas (misma semilla, misma distribución) [M]
 - [ ] Triggers sincronizados con animación/sonido/feedback [M]
 - [ ] Fuego/lava sin luz (solo M49) [M]
-- [ ] Reduce Motion atenúa/desactiva VFX [M]
+- [x] Reduce Motion atenúa/desactiva VFX [M]
 - [ ] Atmosféricos responden a clima/estación sin lag [M]
 - [ ] Catálogo y validación integrados con CI (M118) [M]
 
 ## X. Notas finales
 
-- [ ] Documentar el desfase de numeración del plan maestro (51=PARTÍCULAS Y VFX → ID 52) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Documentar el desfase de numeración del plan maestro (51=PARTÍCULAS Y VFX → ID 52) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -219,3 +219,12 @@
 - [x] **Rendimiento visual: FPS 59** en la escena (sin degradación con 150+ partículas — presupuesto OK)
 - [x] GPUParticles3D (recomendado por M52) confirmado como vía correcta en D3D12 (no CPU)
 - [?] Catálogo de VFX por evento (M44 feedback + M92 tutorial): iter 2 — catálogo data-driven (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 3 (2026-09-02 20:20 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/particles/vfx_factory.gd` — VfxFactory: cargar_catalogo(), parametros(vfx) (color hex manual parseado, cantidad, emisión, tipo) y crear() (GPUParticles3D one_shot con material particle)
+- [x] Test 8/8 OK (catálogo 8, parámetros de polen/crafteo, defaults seguros, color #F4E04D validado)
+- [!] Nota de la tarde: la función hex_to_int() NO existe en Godot 4 y float("0xF4") tampoco parsea — parseo manual implementado (_hex_byte) — lección para futuros scripts con colores hex
+## Iteración 4 (2026-09-02 21:25 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/particles/vfx_director.gd` — VfxDirector: carga el catálogo (8 eventos), registra el bus genérico si existe, disparar(evento_id, pos) → VfxFactory y estado (último disparo)
+- [x] Test 4/4 OK (8 eventos, dispatch conocido, fallo para evento inexistente)

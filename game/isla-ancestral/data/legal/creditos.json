@@ -1,8 +1,54 @@
 {
   "secciones": [
-    {"id": "desarrollo", "titulo": "Desarrollo", "rol": "equipo", "entradas": ["Diseñador", "Programador", "Artista"]},
-    {"id": "musica", "titulo": "Música y sonido", "rol": "equipo", "entradas": ["Compositor", "Diseñador de sonido"]},
-    {"id": "agradecimientos", "titulo": "Agradecimientos", "rol": "comunidad", "entradas": ["Testers", "Beta"]}
+    {
+      "id": "desarrollo",
+      "titulo": "Desarrollo",
+      "rol": "equipo",
+      "entradas": ["Diseñador", "Programador", "Artista", "Productor", "QA Lead"]
+    },
+    {
+      "id": "musica",
+      "titulo": "Música y Sonido",
+      "rol": "equipo",
+      "entradas": ["Compositor", "Diseñador de sonido"]
+    },
+    {
+      "id": "arte",
+      "titulo": "Arte y Animación",
+      "rol": "equipo",
+      "entradas": ["Artista 2D", "Artista 3D", "Animador"]
+    },
+    {
+      "id": "qa",
+      "titulo": "QA y Testing",
+      "rol": "equipo",
+      "entradas": ["QA Manual", "QA Automático", "Playtest Coordinator"]
+    },
+    {
+      "id": "comunidad",
+      "titulo": "Comunidad",
+      "rol": "equipo",
+      "entradas": ["Community Manager", "Traductores", "Soporte"]
+    },
+    {
+      "id": "agradecimientos",
+      "titulo": "Agradecimientos",
+      "rol": "comunidad",
+      "entradas": ["Testers Beta", "Discord Regulares", "Familias de los Desarrolladores"]
+    },
+    {
+      "id": "assets_terceros",
+      "titulo": "Assets de Terceros",
+      "rol": "licencias",
+      "entradas": ["Font Awesome (CC BY 4.0)", "Kenney.nl Assets (CC0)", "OpenGameArt Contributors"]
+    }
   ],
-  "politicas": {"credit_obligatorio_para_contribuidores": true, "verificacion_nombres": true}
+  "politicas": {
+    "credit_obligatorio_para_contribuidores": true,
+    "verificacion_nombres": true,
+    "orden_alfabetico_por_seccion": true,
+    "year_display": "auto"
+  },
+  "idiomas": ["es", "en"],
+  "version": 2
 }

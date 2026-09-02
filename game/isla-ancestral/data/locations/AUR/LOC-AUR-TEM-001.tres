@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/location_data.gd" id="1_7l6or"]
+
+[resource]
+script = ExtResource("1_7l6or")
+location_id = "LOC-AUR-TEM-001"
+nombre = "Templo de la Aurora"
+tipo = 11
+isla = 3
+descripcion = "Templo flotante rodeado de luces ancestrales. Final del viaje."
+conexiones = ["LOC-AUR-PUER-001"]
+tags = ["templo", "sello"]

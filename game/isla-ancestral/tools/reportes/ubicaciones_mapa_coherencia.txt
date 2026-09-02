@@ -1,0 +1,5 @@
+Ubicaciones (9): Cielo de la Aurora Templo de la Aurora Volcan de la Ceniza Templo de la Ceniza Laguna Coral Templo Coral Casa del Jugador Pueblo Raiz Tienda General
+POIs (9)
+
+Ubicaciones sin POI en mapa: (ninguno)
+POIs sin ubicacion: (ninguno)
