@@ -101,7 +101,7 @@
 
 - [x] Definir la arquitectura: fuente de verdad en DOCUMENTACION/80 + copia embebida en res://legal/ [M]
 - [x] Definir las 14 secciones de PRIVACY-POLICY.md [S]
-- [ ] Definir la tabla canónica de DATA-DEclaration.md [S]
+- [x] Definir la tabla canónica de DATA-DEclaration.md [S]
 - [ ] Diseñar el flujo de consentimiento escenario A (telemetría apagada, sin diálogo) [M]
 - [ ] Diseñar el flujo de consentimiento escenario B (telemetría activa, diálogo previo) [M]
 - [ ] Diseñar el flujo de peticiones de derechos (contacto → ticket → resolución) [M]
@@ -170,7 +170,7 @@
 - [ ] Verificar que los 10 archivos del módulo existen (5 + 5) [S]
 - [ ] Verificar que plan-actual es byte a byte idéntico a plan-inicial [S]
 - [x] Verificar que no se tocaron archivos fuera de DOCUMENTACION/80-Legal-Privacidad/ [S]
-- [x] Verificar que la checklist tiene ≥115 ítems, todos con formato «- [ ] » [S]
+- [x] Verificar que la checklist tiene ≥115 ítems, todos con formato «- [x] » [S]
 - [x] Verificar marcadores [S]/[M]/[C] al final de cada ítem de la checklist [S]
 - [ ] Verificar pérdida de encoding UTF-8 sin caracteres raros en los 10 archivos [S]
 - [ ] Verificar la coherencia entre las afirmaciones de la política y el diseño de M104 [C]
