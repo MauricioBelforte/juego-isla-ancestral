@@ -292,7 +292,7 @@
 - [ ] Crear 04-Codigo.md [M]
 - [ ] Crear 05-Checklist.md [M]
 - [ ] Documentar arquitectura del sistema [M]
-- [ ] Documentar contratos de integracion [M]
+- [x] Documentar contratos de integracion [M] — iter. 2: puente M155 documentado en terrain_modifiers.gd (NOMBRES_TERRENO id→nombre §4.1, get_terrain_bonus(String) tipado); contratos M11/M155 vívios en el código fuente con ejemplos de integración
 - [ ] Documentar flujo de ejecucion [S]
 - [x] Documentar configuracion de Layers [S]
 - [x] Documentar TerrainData resources [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
@@ -314,13 +314,13 @@
 
 ## P. Compatibilidad y Robustez
 
-- [ ] Funcionar sin M155 (equipacion opcional) [M]
+- [x] Funcionar sin M155 (equipacion opcional) [M] — iter. 2: get_equipment_bonus retorna 0.0 si M155 ausente (testeado); con M155 real sin equipación también 0.0
 - [x] Funcionar sin TerrainDataProvider (fallback) [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
 - [x] Manejar terrain_id no encontrado [S]
 - [x] Manejar audio_config vacio [S]
 - [x] Manejar visual_config vacio [S]
 - [x] Manejar terrain_resources array vacio [S]
-- [ ] No romper movimiento existente de M11 [C]
+- [x] No romper movimiento existente de M11 [C] — iter. 2: el suavizado es un cálculo estático SIN estado global que M11 consume opcionalmente (calcular_suavizado comódin); el movimiento base de M11 intacto (regresiones M14/M19/M37 pasando)
 - [ ] Mantener backwards compatibility [M]
 - [ ] Null checks en todas las referencias [M]
 - [ ] Graceful degradation sin errores [M]
@@ -373,7 +373,7 @@
 - [ ] Ajustar colores de debug por terreno [S]
 - [ ] Agregar tooltips informativos [S]
 - [ ] Animar transiciones de terreno [M]
-- [ ] Suavizar cambios de velocidad [M]
+- [x] Suavizar cambios de velocidad [M] — iter. 2 (Log 554): TerrainModifiers.suavizar_velocidad (exp-decay, umbral anti-flicker) + calcular_suavizado() para el loop de M11; testeado progresivo/converge/end-to-end
 - [ ] Verificar coherencia visual total [M]
 - [ ] Verificar coherencia audio total [M]
 
