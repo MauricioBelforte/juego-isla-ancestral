@@ -225,3 +225,9 @@
 - [ ] Definir revisión contra M153 (contrato O1-O19) [M]
 - [ ] Definir coordinación con M149 (nomenclatura) para ids definitivos [M]
 - [ ] Definir revisión periódica de la biblia con el usuario (dueño del canon) [S]
+## Verificación (2026-09-02 05:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] WorldBible cargado: canon 1.0.0 (6 personajes, 8 lugares, 4 símbolos, 4 capas por sello, 5 eventos de línea de tiempo)
+- [x] Verificación headless del canon: 7/7 checks OK (estructura y conteos de world_data.json + servicio)
+- [x] Cross-referencia M54: los 8 lugares del canon se usan como base de los POIs del mapa (map_data.json)
+- [?] Aplicación del canon en gameplay (M22 historia/sellos — dueño: Hy3/WorkBuddy)

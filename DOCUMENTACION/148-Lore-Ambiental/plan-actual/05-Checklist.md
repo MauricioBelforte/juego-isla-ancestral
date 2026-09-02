@@ -199,3 +199,8 @@
 **Total de ítems:** 114
 **Ítems resueltos por documentación:** 114 (0 pendientes, 0 dudas — DoD cubierto)
 **Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+## Verificación cruzada (2026-09-02 05:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] Los 15 diálogos de ambiente (riz/cor/cen/aur_00X_capX_ambiente) fueron validados en la auditoría masiva de grafos (M109, 268 grafos OK — incluida la variante ambiente)
+- [x] El canon (M147) es la fuente de los símbolos/ecos referenciados; los diálogos ambiente no tienen referencias rotas
+- [?] Contenido narrativo por lugares nuevos (iter 2 — dueño: deepseek-v4-flash-vision-exp)
