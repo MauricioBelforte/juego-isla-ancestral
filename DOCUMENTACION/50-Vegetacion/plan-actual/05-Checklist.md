@@ -201,3 +201,8 @@
 - [x] `scripts/vegetacion/vegetation_manager.gd` — VegetationManager: cargar_config, tipos_para_bioma, densidad, posiciones() deterministas (PRNG semilla = mundo + bioma)
 - [x] Test 7/7 OK (6 biomas, tipos, densidades, determinismo por semilla)
 - [?] Instanciación en el mundo (M08 poblar) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 3 (2026-09-02 22:40 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/vegetacion/vegetation_plan.gd` — VegetationPlan: plan determinista (45 ítems, 5 biomas por zonas anulares, rotaciones + seed por ítem) para que el mundo pueble
+- [x] Test 5/5 OK (determinismo semilla 42, dentro del radio 256, 5 biomas, sin tipos vacíos)
+- [x] `scripts/vegetacion/test_vegetation_plan_headless.gd` · Plan listo para consumo de M08 (poblar)

@@ -333,6 +333,7 @@ func _rotate_to_direction() -> void:
 
 var _inventory_open: bool = false
 var _inventory_panel: Control = null
+var _inventory_backdrop: ColorRect = null
 var _hotbar_hud: Control = null
 var _active_category: int = -1  # -1 = Todos
 var _tooltip: Control = null
@@ -380,6 +381,8 @@ func _open_inventory() -> void:
 	if _inventory_panel == null:
 		_create_inventory_panel()
 	_inventory_panel.visible = true
+	if _inventory_backdrop != null:
+		_inventory_backdrop.visible = true
 	_active_category = -1
 	_refresh_inventory_ui()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -387,6 +390,8 @@ func _open_inventory() -> void:
 func _close_inventory() -> void:
 	if _inventory_panel != null:
 		_inventory_panel.visible = false
+	if _inventory_backdrop != null:
+		_inventory_backdrop.visible = false
 	_hide_tooltip()
 	_hide_context_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -403,6 +408,7 @@ func _create_inventory_panel() -> void:
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.mouse_filter = Control.MOUSE_FILTER_STOP
 	canvas.add_child(bg)
+	_inventory_backdrop = bg
 
 	var panel := PanelContainer.new()
 	panel.name = "InventoryPanel"

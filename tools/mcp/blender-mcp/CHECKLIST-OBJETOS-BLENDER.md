@@ -99,7 +99,7 @@
 
 ## Módulo 36 — Fauna (modelos base, IA aparte) 🦀
 
-- [ ] Cangrejo de playa
+- [x] Cangrejo de playa — `crear_cangrejo_playa_lowpoly.py` v3 (2026-09-02, log 551, glm-5.3/Kilo Code) + 6 capturas orbitales (hoja `_hoja_cap_36_cangrejo_playa_v1.jpg`). **APROBADO por el usuario** (v1 a la primera, sin iteraciones). Composición: caparazón elipse naranja-rojiza con frente caído + 2 pinzas levantadas (loft 1-malla con V integrada: brazo→quela bulbosa→2 mandíbulas) + 8 patitas cono-tronco loftadas (punta PLANA, pivote en cadera) + 2 ojos en pedúnculos (tallo+casquete en 1 pieza). **13 SM_ / 656 tris / 4 mats** · z_min 0.0450 · huella 16 verts 0.53×1.12. Variantes MEDIA (4 obj/656) y BAJA (4 obj/456) + 3 GLB (47/39/30 KB) + 3 `.import` + 3 `.scn` (E-65). **NPC en Godot:** `cangrejo_npc.gd` — camina DE LADO (yaw −90° de la marcha), 8 patitas en secuencia (fase por índice), pinzas alternadas, ojos curiosos en pausa. Log 551. **Lecciones v1→v3:** patitas de cono con punta de 1 vert = rechazo E-50 (huella 0.04×0.04) → loft con punta plana de 4+ verts; conteo E-70 mal hecho de memoria (19 vs 16) → fundir mandíbulas al loft de la pinza y ojo al pedúnculo.
 - [ ] Gaviota (posada, para animar)
 - [ ] Pez tropical (2 variantes de color)
 - [ ] Lagarto de isla
