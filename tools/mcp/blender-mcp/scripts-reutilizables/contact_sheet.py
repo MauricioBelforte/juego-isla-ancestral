@@ -60,7 +60,15 @@ def main():
     # E-30: la shell ya expande el glob, así que llegan N rutas sueltas. Había
     # un bug que tomaba solo argv[1] y generaba hojas de UNA captura en vez de
     # 6 -> una hoja así parece "aprobada" pero no cumple E-13 (multi-ángulo).
-    if '*' in sys.argv[1] or os.path.isfile(sys.argv[1]):
+    if '*' in sys.argv[1]:
+        # E-57: el shell NO expande globos entre comillas dobles. Si el literal
+        # con '*' llega intacto, habia dos salidas malas: (a) crashear con
+        # OSError "Invalid argument" al abrir el literal como archivo, o (b)
+        # generar una hoja de UNA sola captura que PARECIA aprobada sin cumplir
+        # E-13. Expandir aca cubre las dos.
+        import glob as _g
+        pngs = sorted(_g.glob(sys.argv[1]))
+    elif os.path.isfile(sys.argv[1]):
         pngs = sys.argv[1:-1]
     else:
         # Prefijo: buscar en cwd
