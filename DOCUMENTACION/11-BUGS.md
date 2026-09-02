@@ -92,18 +92,18 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 **Fecha:** YYYY-MM-DD HH:MM
 
 **Resolución (completar cuando se resuelva):**
-- [ ] Cómo se corrigió:
-- [ ] Archivos/commits modificados:
+- [→] Cómo se corrigió: en `game/isla-ancestral/scripts/player/player.gd` se añadió la variable `_inventory_backdrop` (ColorRect) asignada al `Backdrop` en `_create_inventory_panel`. En `_open_inventory` se fuerza `_inventory_backdrop.visible = true` y en `_close_inventory` se fuerza `_inventory_backdrop.visible = false`, de modo que el velo negro se oculta junto con el panel al cerrar (antes solo se ocultaba el `InventoryPanel`, dejando el `Backdrop` pegado). Nota: el doble binding de la tecla B (player.gd + ui_manager.gd/M53) se mantiene porque el usuario confirmó que el overlay debe aparecer al abrir; el único defecto era el overlay remanente al cerrar.
+- [→] Archivos/commits modificados: `game/isla-ancestral/scripts/player/player.gd` (player.gd:335 declara `_inventory_backdrop`; :405 asigna; :382-392 abre/cierra). Pendiente de commit.
 - [ ] Log del proyecto:
-- [ ] Verificado por:
-```
+- [ ] Verificado por: (pendiente — requiere ejecutar el juego; Godot no está en este entorno)
+
 ---
 
 ## 5. Tabla Resumen de Bugs
 
 | ID | Título | Módulo | Severidad | Estado | Reportado por | Fecha |
 |----|--------|--------|-----------|--------|---------------|-------|
-| BUG-001 | Overlay de inventario queda pegado en pantalla al cerrar la ventana | M53/M14 | 🟡 Menor | [→] En progreso (fix aplicado, verificar) | Usuario | 2026-09-02 17:55 |
+| BUG-001 | Overlay de inventario queda pegado en pantalla al cerrar la ventana | M53/M14 | 🟡 Menor | [→] En progreso (fix aplicado en código, falta verificación runtime) | Usuario | 2026-09-02 17:55 |
 | BUG-002 | [placeholder] | | | | | |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
@@ -186,7 +186,7 @@ La numeración de logs del proyecto presenta múltiples inconsistencias: número
 - **Módulo(s) afectado(s):** M53 (UI-UX) — `InventoryLayer` / `inventory_layer.gd`; M14 (Inventario) — panel del jugador `player.gd`
 - **Severidad:** 🟡 Menor
 - **Prioridad sugerida:** Media
-- **Estado:** [ ] Abierto
+- **Estado:** [→] En progreso (fix aplicado en código 2026-09-02; verificación runtime pendiente del usuario — no hay binario Godot en este entorno)
 - **Reportado por:** Usuario
 
 **Descripción del problema (aclarado por el usuario el 2026-09-02):**

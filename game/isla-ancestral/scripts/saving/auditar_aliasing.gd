@@ -27,7 +27,10 @@ func _run() -> void:
 			continue
 		if not child.has_method("get_section_name"):
 			continue
-		var nombre := String(child.get_script().resource_path.get_file()) if child.get_script() != null else child.name
+		var nombre: String = child.name
+		var script_obj: Variant = child.get_script()
+		if script_obj != null and script_obj.resource_path != "":
+			nombre = String(script_obj.resource_path.get_file())
 		# 1) Snapshot ANTES (referencia viva si hay aliasing)
 		var snapshot: Dictionary = child.get_save_data()
 		var tenia_datos := _tiene_datos(snapshot)
