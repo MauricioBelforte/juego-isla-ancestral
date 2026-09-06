@@ -9,12 +9,10 @@
 @tool
 extends EditorPlugin
 
-const RECIPE_TOOL = preload("res://scripts/editor/tools/recipe_tool.gd")
-
 var _dock: PanelContainer
 
 func _enter_tree() -> void:
-	_dock = RECIPE_TOOL.new()
+	_dock = load("res://scripts/editor/tools/recipe_tool.gd").new()
 	_dock.name = "HerramientasInternas"
 	add_control_to_dock(DOCK_SLOT_BOTTOM_LEFT, _dock)
 	print("[M109] Plugin de herramientas internas activado (Editor de Recetas)")

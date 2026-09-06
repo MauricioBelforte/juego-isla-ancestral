@@ -138,17 +138,93 @@ func _setup_terrain() -> void:
 	generator.max_height = 40
 	terrain.generator = generator
 	
+	# BUG-021/019 fix: view_distance alto para que los chunks se vean desde lejos
+	# (BUILD 2026-09-03 05:35, deepseek-v4-flash-vision-exp): 512 + LOD del
+	# terreno (cubos 2x lejos) — el horizonte doble con carga de meshes menor.
+	var voxel_viewer_node = get_node_or_null("VoxelViewer")
+	if voxel_viewer_node:
+		voxel_viewer_node.view_distance = 512.0
+		# Diferido: evita ERROR "!is_inside_tree()" de get_global_transform si el
+		# viewer no está listo en este punto del _ready (BUG-024).
+		voxel_viewer_node.set_deferred("global_position", Vector3(256, 30, 256))
+		# LOD del terreno: chunks lejanos con cubos de DOBLE tamaño (1/4 de la
+		# geometría lejana) — "cubos con otra forma a lo lejos" como propuso el
+		# usuario. Cerca (dentro de lod_distance) el detalle completo.
+		var terrain_node = get_node_or_null("VoxelTerrain")
+		if terrain_node:
+			if terrain_node.get("lod_split") != null:
+				terrain_node.lod_split = 2
+			if terrain_node.get("lod_distance") != null:
+				terrain_node.lod_distance = 200.0
+		var mesher_node = terrain_node
+		if mesher_node and mesher_node.mesher != null:
+			# full_load_distance NO existe en VoxelMesherBlocky (rompía el boot
+			# con Debugger Break — quitado 2026-09-03, deepseek-v4-flash-vision-exp);
+			# el LOD del terreno lo controla VoxelTerrain.lod_distance/lod_split.
+			pass
+	
+	_crear_oceano()
+	_crear_base_verde_isla()
+
 	# Spawn del jugador: sobre la superficie de la isla (cae y aterriza en la cresta,
 	# nunca en el agua del océano que está a nivel de mar)
 	var player = get_node_or_null("Player")
 	if player:
-		player.global_position = Vector3(256, 16, 256)
-	var voxel_viewer_node = get_node_or_null("VoxelViewer")
-	if voxel_viewer_node:
-		voxel_viewer_node.global_position = Vector3(256, 30, 256)
+		player.set_deferred("global_position", Vector3(256, 16, 256))
 	_ajustar_spawn_superficie.call_deferred()
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
+
+## Superficie de océano lisa (2026-09-03, deepseek-v4-flash-vision-exp):
+## el mar lejano se veía como fondo marrón (lecho/rocas sin superficie aguada
+## apreciable). Un plano azul a y=2.8 cubre el océano con superficie lisa
+## (la banda costera turquesa —agua en y=3— se mantiene visible por encima).
+func _crear_oceano() -> void:
+	var oceano := MeshInstance3D.new()
+	oceano.name = "Oceano"
+	var plano := PlaneMesh.new()
+	# 4096: el borde del plano queda muy fuera del view (512) — nunca se ve el
+	# final del océano (el 2048 dejaba un borde marrón visible).
+	plano.size = Vector2(4096, 4096)
+	oceano.mesh = plano
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.08, 0.35, 0.62)
+	mat.roughness = 0.5
+	oceano.material_override = mat
+	oceano.position = Vector3(256, 1.2, 256)
+	# PlaneMesh en Godot 4 ya es horizontal (normal +Y): NO rotar (la rotación
+	# -90 lo dejaba VERTICAL / pared azul — fix 2026-09-03).
+	add_child(oceano)
+	# Niebla marina: el borde del océano se funde con el cielo (adiós línea
+	# marrón del horizonte) — color azul-mar, densidad baja.
+	var env_node := get_node_or_null("WorldEnvironment")
+	if env_node and env_node.environment:
+		env_node.environment.fog_enabled = true
+		env_node.environment.fog_light_color = Color(0.55, 0.72, 0.85)
+		env_node.environment.fog_density = 0.0009
+		env_node.environment.fog_sky_affect = 0.25
+		env_node.environment.fog_aerial_perspective = 0.4
+
+## Disco de arena blanca de la isla (idea del usuario, 2026-09-03): un
+## cilindro-disco de radio 266 (costa 240 + margen 2) en y=2.95 con color de
+## arena blanca — por arriba del océano (2.8) y por debajo de la playa (3-4).
+## Refuerza la isla en la distancia (el agua no "entra" visualmente por los
+## valles bajos) y se funde con la playa real.
+func _crear_base_verde_isla() -> void:
+	var disco := MeshInstance3D.new()
+	disco.name = "BaseArenaBlancaIsla"
+	var cilindro := CylinderMesh.new()
+	cilindro.top_radius = 242.0
+	cilindro.bottom_radius = 242.0
+	cilindro.height = 0.02
+	disco.mesh = cilindro
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.96, 0.94, 0.88)   # arena blanca (paleta Maldivas)
+	mat.roughness = 1.0
+	mat.metallic = 0.0
+	disco.material_override = mat
+	disco.position = Vector3(256, 2.95, 256)
+	add_child(disco)
 
 func _add_block(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void:
 	var cube := VoxelBlockyModelCube.new()

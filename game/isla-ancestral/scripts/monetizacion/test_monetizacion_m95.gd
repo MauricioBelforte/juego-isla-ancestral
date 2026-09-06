@@ -56,13 +56,13 @@ func _test_dlc() -> void:
 	var d = _SC_DLC.new()
 	d.cargar()
 	_check("2 DLC planificados", d.cantidad() == 2, "count=%d" % d.cantidad())
-	_check("DLC-1 expansión", d.obtener("dlc_expansion").get("tipo", "") == "expansion")
-	_check("DLC-2 cosmético", d.obtener("dlc_cosmetico").get("tipo", "") == "cosmetico")
-	_check("DLC-2 no es cosmético? no", d.es_cosmetico("dlc_cosmetico"))
-	_check("DLC-1 no es cosmético (es expansión)", not d.es_cosmetico("dlc_expansion"))
+	_check("DLC-1 expansión", d.obtener("isla_hielo").get("tipo", "") == "expansion")
+	_check("DLC-2 cosmético", d.obtener("pack_aurora").get("tipo", "") == "cosmetico")
+	_check("DLC-2 no es cosmético? no", d.es_cosmetico("pack_aurora"))
+	_check("DLC-1 no es cosmético (es expansión)", not d.es_cosmetico("isla_hielo"))
 	var ruta = d.roadmap()
 	_check("roadmap ordenado (2 items)", ruta.size() == 2)
-	_check("roadmap orden: expansión primero", String(ruta[0].get("id", "")) == "dlc_expansion")
+	_check("roadmap orden: expansión primero", String(ruta[0].get("id", "")) == "isla_hielo")
 
 func _test_antip2w() -> void:
 	print("--- AntiP2W: detección de ítems que alteran progresión ---")

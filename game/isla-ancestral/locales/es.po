@@ -112,6 +112,18 @@ msgstr "Slot libre"
 msgid "SETTINGS.SLOTS"
 msgstr "Slots"
 
+msgid "SETTINGS.INVENTARIO"
+msgstr "Inventario"
+
+msgid "SETTINGS.BUSCAR"
+msgstr "Buscar"
+
+msgid "SETTINGS.ORDENAR"
+msgstr "Ordenar"
+
+msgid "SETTINGS.APLICAR"
+msgstr "Aplicar"
+
 msgid "npc.catalina"
 msgstr "Catalina"
 

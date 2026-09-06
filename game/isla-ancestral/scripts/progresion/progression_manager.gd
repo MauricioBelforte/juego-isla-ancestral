@@ -21,6 +21,10 @@ signal progreso_hito_alcanzado(id: String, nombre: String, recompensas: Array)
 signal progreso_desbloqueado(id_unlock: String, tipo: String, valor: String)
 signal progreso_primera_vez(actividad_id: String)
 signal progreso_resumen_cargado(hitos_total: int, desbloqueos_total: int)
+## RF12 (re-implementación Log 605, glm-5.3-flash): título social cosmético
+## otorgado (sin poder ni bloqueo — M152). La primera versión (Log 518) fue
+## revertida por agente concurrente; esta es aditiva y retro-compatible.
+signal progreso_titulo_obtenido(titulo_id: String, nombre: String)
 
 const RUTA_CATALOGO: String = "res://data/progresion/hitos.json"
 const SECCION_VERSION: int = 1
@@ -39,6 +43,8 @@ var _condiciones_por_hito: Dictionary = {}
 ## Condición evaluada → resultado congelado (caché)
 var _evaluacion_cache: Dictionary = {}
 const CACHE_MAX_SIZE: int = 64
+## RF12: títulos sociales cosméticos obtenidos: titulo_nombre -> hito_origen
+var _titulos: Dictionary = {}
 
 
 func _ready() -> void:
@@ -124,34 +130,56 @@ func hitos_count() -> int:
 
 ## ── Registro de eventos de dominio (§1, §5) ─────────────
 
+var _conexiones: Array = []
+
+## BUG-015/018 (2026-09-02): conexiones guardadas para desconectar en _exit_tree
+func _conectar(src: Signal, callable: Callable) -> void:
+	if not src.is_connected(callable):
+		src.connect(callable)
+	_conexiones.append([src, callable])
+
+func _exit_tree() -> void:
+	for c in _conexiones:
+		if c[0].is_connected(c[1]):
+			c[0].disconnect(c[1])
+	_conexiones.clear()
+
 func _conectar_eventos() -> void:
 	var bus := get_node_or_null("/root/EventBus")
 	if bus == null:
 		push_warning("[M71] EventBus ausente; solo evaluación manual")
 		return
 	if bus.inventory != null and bus.inventory.has_signal("item_added"):
-		bus.inventory.item_added.connect(func(_i: String, q: int): _stat("+", "items_recolectados", q))
+		_conectar(bus.inventory.item_added, func(_i: String, q: int): _stat("+", "items_recolectados", q))
 	if bus.economy != null and bus.economy.has_signal("purchase_done"):
-		bus.economy.purchase_done.connect(func(_i: String, cost: int): _stat("+", "monedas_gastadas", cost))
+		_conectar(bus.economy.purchase_done, func(_i: String, cost: int): _stat("+", "monedas_gastadas", cost))
 	if bus.npc != null and bus.npc.has_signal("gift_given"):
-		bus.npc.gift_given.connect(func(_n: String, _i: String, _c: int): _stat("+", "regalos_dados", 1))
+		_conectar(bus.npc.gift_given, func(_n: String, _i: String, _c: int): _stat("+", "regalos_dados", 1))
 	if bus.quest != null and bus.quest.has_signal("prereq_met"):
-		bus.quest.prereq_met.connect(func(seal_id: String):
+		_conectar(bus.quest.prereq_met, func(seal_id: String):
 			_reflejar_hito_narrativo("sello_" + seal_id)
 			_stat("+", "sellos_obtenidos", 1)
 		)
 	if bus.quest != null and bus.quest.has_signal("quest_completed"):
-		bus.quest.quest_completed.connect(func(_q: String): _stat("+", "misiones_completadas", 1))
+		_conectar(bus.quest.quest_completed, func(_q: String): _stat("+", "misiones_completadas", 1))
 	if bus.npc != null and bus.npc.has_signal("friendship_level_up"):
-		bus.npc.friendship_level_up.connect(func(_n: String, _lv: int): _stat("+", "amistades_subidas", 1))
+		_conectar(bus.npc.friendship_level_up, func(_n: String, _lv: int): _stat("+", "amistades_subidas", 1))
 	if bus.travel != null and bus.travel.has_signal("travel_started"):
-		bus.travel.travel_started.connect(func(_f: String, _t: String): _stat("+", "viajes_realizados", 1))
+		_conectar(bus.travel.travel_started, func(_f: String, _t: String): _stat("+", "viajes_realizados", 1))
 	# RF7: reset de estadísticas del día al empezar un día laborable (M29)
 	if bus.calendar != null and bus.calendar.has_signal("day_started"):
-		bus.calendar.day_started.connect(func(_d: int, _s: String):
+		_conectar(bus.calendar.day_started, func(_d: int, _s: String):
 			if profile != null and profile.has_method("reset_dia"):
 				profile.reset_dia()
 		)
+	# M38 iter. 4 (agnes-2.5-flash): monetarias + trueques → estadísticas de progresión.
+	# EconomyManager y Barter son autoloads; no pasan por EventBus.
+	var eco := get_node_or_null("/root/EconomyManager")
+	if eco != null and eco.has_signal("transaccion_registrada"):
+		eco.transaccion_registrada.connect(_on_transaccion_registrada)
+	var barter := get_node_or_null("/root/Barter")
+	if barter != null and barter.has_signal("trueque_exitoso"):
+		barter.trueque_exitoso.connect(_on_trueque_exitoso)
 	# M13 iter. 5 (glm-5.3-flash): nivel_herramienta_cambio (§3.6 nivel_modulo).
 	# El ToolController (M13) es un nodo de escena (no autoload): la escena lo
 	# conecta llamando conectar_tool_controller(tc) — helper público. En
@@ -189,6 +217,23 @@ func _on_herramienta_equipada(tool: Resource) -> void:
 	var prev := int(profile.get_stat(stat)) if profile != null else 0
 	if nivel > prev and profile != null:
 		profile.incrementar(stat, nivel - prev)
+
+
+## M38 iter. 4 (agnes-2.5-flash): consumir transacciones monetarias y trueques.
+## RF1: depósitos suman a monedas_ganadas; retiros no cuentan como ganancia.
+func _on_transaccion_registrada(tx: Dictionary) -> void:
+	var tipo := String(tx.get("tipo", ""))
+	var monto := int(tx.get("monto", 0))
+	if tipo == "deposito" and monto > 0:
+		_stat("+", "monedas_ganadas", monto)
+	elif tipo == "trueque_ingreso" and monto > 0:
+		_stat("+", "monedas_ganadas", monto)
+
+
+## M38 iter. 4 (agnes-2.5-flash): trueque_exitoso → estadística de trueques realizados.
+func _on_trueque_exitoso(_npc_id: String, _oferta_id: StringName,
+		_entregado: Dictionary, _recibido: Dictionary) -> void:
+	_stat("+", "trueques_realizados", 1)
 
 
 func _stat(oper: String, stat_id: String, cantidad: int) -> void:
@@ -474,7 +519,8 @@ func _stats_validos_conocidos() -> Array[String]:
 			"amistades_subidas", "viajes_realizados",
 			"nivel_pico", "nivel_azada", "nivel_hacha", "nivel_pala",
 			"nivel_regadera", "nivel_cana", "nivel_martillo", "nivel_tijeras",
-			"nivel_lupa"]
+			"nivel_lupa", "peces_capturados", "trueques_realizados",
+			"donaciones_museo"]
 
 
 ## ── Validación de catálogo (RF16, T-001) ────────────────────────
@@ -606,6 +652,49 @@ func _validar_catalogo_en_ruta() -> void:
 			_log_info("Catálogo warning: " + err)
 
 
+## ── Validación bloqueante en editor (iter. 5, agnes-2.5-flash) ────
+## Detecta condiciones estáticamente imposibles y estadísticas desconocidas
+## como ERROR de editor (no warning). Solo se ejecuta en el editor.
+## Nota: no usa 'tool' para evitar incompatibilidades con autoloads;
+##       se llama explícitamente desde _ready cuando el editor lo permite.
+
+func validar_catalogo_bloqueante() -> Array[String]:
+	"""Retorna errores bloqueantes del catálogo (condiciones imposibles,
+	stats desconocidas). Empty = catálogo 100% válido para producción."""
+	var bloqueantes: Array[String] = []
+	var stats_conocidas := _stats_validos_conocidos()
+	for hito_id in _hitost:
+		var cond: Dictionary = _hitost[hito_id].get("condicion", {})
+		_detectar_problemas_bloqueantes(cond, hito_id, bloqueantes, stats_conocidas)
+	return bloqueantes
+
+
+func _detectar_problemas_bloqueantes(cond: Dictionary, hito_id: String,
+		bloqueantes: Array[String], stats: Array[String]) -> void:
+	if cond.is_empty():
+		return
+	var tipo := String(cond.get("tipo", ""))
+	match tipo:
+		"stat_min", "riqueza_acumulada":
+			var sid := String(cond.get("stat_id", ""))
+			if sid != "" and not stats.has(sid):
+				bloqueantes.append(
+					"BLOQUEANTE: hito '%s' referencia stat desconocida '%s'" % [hito_id, sid])
+			if int(cond.get("umbral", 0)) < 0:
+				bloqueantes.append(
+					"BLOQUEANTE: hito '%s' umbral negativo (%d)" % [hito_id, cond.get("umbral")])
+		"dias_jugados":
+			if int(cond.get("umbral", 0)) < 0:
+				bloqueantes.append(
+					"BLOQUEANTE: hito '%s' dias_jugados umbral negativo" % hito_id)
+		"compuesta":
+			var hijos: Array = cond.get("hijos", [])
+			for hijo in hijos:
+				_detectar_problemas_bloqueantes(hijo, hito_id, bloqueantes, stats)
+		_:
+			pass
+
+
 ## ── Evaluador de condiciones (11 tipos, §3.6) ───────────
 
 func evaluar_condicion(cond: Dictionary) -> bool:
@@ -711,7 +800,40 @@ func marcar_hito(milestone_id: String) -> bool:
 		var r: Dictionary = rec
 		if String(r.get("tipo", "")) == "unlock":
 			activar_desbloqueo(String(r.get("unlock_id", "")), String(r.get("tipo_unlock", "info")), String(r.get("valor", "")))
+		elif String(r.get("tipo", "")) == "titulo":
+			# RF12: título social cosmético (sin poder ni bloqueo)
+			_otorgar_titulo(String(r.get("valor", "")), milestone_id)
 	return true
+
+
+## ── RF12: Títulos sociales cosméticos (re-implementación Log 605) ──
+
+func _otorgar_titulo(titulo_nombre: String, hito_origen: String) -> void:
+	if titulo_nombre.is_empty() or _titulos.has(titulo_nombre):
+		return  # Ya obtenido o nombre vacío
+	_titulos[titulo_nombre] = hito_origen
+	progreso_titulo_obtenido.emit(titulo_nombre, titulo_nombre)
+	_log_info("Título otorgado: " + titulo_nombre + " (desde " + hito_origen + ")")
+
+
+## Método público para que M53/M72 otorguen títulos directamente.
+func otorgar_titulo_directo(titulo_id: String, nombre: String) -> void:
+	_otorgar_titulo(nombre, titulo_id)
+
+
+func titulos_obtenidos() -> Array[String]:
+	var lista: Array[String] = []
+	for k in _titulos:
+		lista.append(String(k))
+	return lista
+
+
+func tiene_titulo(titulo_id: String) -> bool:
+	return _titulos.has(titulo_id)
+
+
+func titulo_count() -> int:
+	return _titulos.size()
 
 
 func hito_alcanzado(milestone_id: String) -> bool:
@@ -720,6 +842,30 @@ func hito_alcanzado(milestone_id: String) -> bool:
 
 func hitos_alcanzados() -> Array:
 	return _hitos_alcanzados.duplicate()
+
+
+## RF8 (Log 678, glm-5.3-flash): hitos próximos no alcanzados — sugeridor de metas M53.
+## Devuelve hasta `limite` hitos pendientes ordenados por orden de catálogo.
+## Ignora hitos ocultos (visible=false) para no spoilear (M72/M94).
+func hitos_proximos(limite: int = 3) -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for id in _hitost:
+		var hito: Dictionary = _hitost[id]
+		if hito_alcanzado(String(id)):
+			continue
+		var cond: Dictionary = hito.get("condicion", {})
+		var tipo := String(cond.get("tipo", ""))
+		# Solo tipos cuantificables para el sugeridor (no compuesta/sello/capítulo)
+		if tipo in ["stat_min", "dias_jugados", "riqueza_acumulada", "primera_vez"]:
+			resultado.append({
+				"id": String(id),
+				"nombre": String(hito.get("nombre", "")),
+				"dominio": String(hito.get("dominio", "")),
+				"condicion": cond,
+			})
+			if resultado.size() >= limite:
+				break
+	return resultado
 
 
 ## Progreso parcial de un hito (para la UI M53, evaluación perezosa §7)
@@ -776,6 +922,9 @@ func get_save_data() -> Dictionary:
 		"estadisticas_dia": profile.guardar().get("estadisticas_dia", {}) if profile != null else {},
 		"primeras_veces": profile.guardar().get("primeras_veces", []) if profile != null else [],
 		"contribucion": profile.contribucion_actual() if profile != null else 0.0,
+		# RF12 (Log 605): títulos cosméticos (deep-copy del Dictionary — lección
+		# de aliasing Log 553: los contenedores son por referencia)
+		"titulos": _titulos.duplicate(true),
 	}
 
 
@@ -798,6 +947,11 @@ func restore_save_data(data: Dictionary) -> void:
 			"primeras_veces": data.get("primeras_veces", []),
 			"contribucion": data.get("contribucion", 0.0),
 		})
+	# RF12: restaurar títulos (clave ausente en saves v1 → dict vacío)
+	_titulos.clear()
+	var tit: Dictionary = data.get("titulos", {})
+	for k in tit:
+		_titulos[String(k)] = String(tit[k])
 	progreso_resumen_cargado.emit(_hitos_alcanzados.size(), _desbloqueos.size())
-	_log_info("Progreso restaurado: " + str(_hitos_alcanzados.size()) + " hitos, " + str(_desbloqueos.size()) + " desbloqueos")
+	_log_info("Progreso restaurado: " + str(_hitos_alcanzados.size()) + " hitos, " + str(_desbloqueos.size()) + " desbloqueos, " + str(_titulos.size()) + " títulos")
 	# §2.3: NUNCA re-emitir señales de hitos restaurados (idempotencia)

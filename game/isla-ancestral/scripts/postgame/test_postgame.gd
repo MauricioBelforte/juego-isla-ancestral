@@ -138,6 +138,7 @@ func _test_persistencia() -> void:
 	var data: Dictionary = _pg.get_save_data()
 	_check(int(data.get("version", 0)) == 1, "save_data versionado")
 	_check(bool(data.get("activo", false)), "estado activo persistido")
+	_check(bool(data.get("postgame_unlocked", false)), "postgame_unlocked persistido (U del checklist)")
 	_check(bool(data.get("epilogo_visto", false)), "epílogo persistido")
 	var hechas: Dictionary = data.get("actividades_hechas", {})
 	_check(int(hechas.get("postgame_vecinos_nuevos", 0)) == 2, "contadores persistidos")

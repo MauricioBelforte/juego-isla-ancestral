@@ -13,12 +13,14 @@ config_version=5
 [application]
 
 config/name="isla-ancestral"
+config/version="0.0.2"
 run/main_scene="res://scenes/main_island.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
+VegetationSpawner="*res://scripts/vegetacion/vegetation_spawner.gd"
 EventBus="*res://scripts/core/event_bus.gd"
 WorldState="*res://scripts/dialogos/world_state_service.gd"
 DialogueManager="*res://scripts/dialogos/dialogue_manager.gd"
@@ -78,9 +80,13 @@ ProgressionManager="*res://scripts/progresion/progression_manager.gd"
 Achievements="*res://scripts/logros/achievement_service.gd"
 Vehiculos="*res://scripts/vehiculos/vehicle_manager.gd"
 Postgame="*res://scripts/postgame/postgame_manager.gd"
+EscalasGlobales="*res://scripts/core/escalas_globales.gd"
+AccesibilityManager="*res://scripts/accesibilidad/accesibilidad_manager.gd"
+PhotoService="*res://scripts/foto/photo_service.gd"
 Tiers="*res://scripts/herramientas158/tool_tier_system.gd"
 AudioConfig="*res://scripts/audio/audio_config_service.gd"
 StreamManager="*res://scripts/stream/stream_manager.gd"
+PantallaCarga="*res://scripts/stream/pantalla_carga.gd"
 TerrainProvider="*res://scripts/terrenos/terrain_provider.gd"
 GameFlowManager="*res://scripts/core/game_flow_manager.gd"
 SceneManager="*res://scripts/core/scene_manager.gd"
@@ -122,10 +128,6 @@ EnchantmentSystem="*res://scripts/enchantment/enchantment_system.gd"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://scripts/editor/plugin_herramientas.gd")
 
 [gdscript]
 

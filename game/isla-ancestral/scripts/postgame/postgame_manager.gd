@@ -155,7 +155,7 @@ func registrar_actividad(id: String) -> bool:
 	print("[M75] Actividad postgame: %s (%d)" % [id, int(_hechas[id])])
 	var sm := get_node_or_null("/root/SaveManager")
 	if sm != null and sm.has_method("mark_dirty"):
-		sm.mark_dirty()
+		sm.mark_dirty()  # U del checklist: guardado automático al desbloquear/registrar
 	return true
 
 
@@ -184,6 +184,10 @@ func get_section_name() -> String:
 func get_save_data() -> Dictionary:
 	return {
 		"version": 1,
+		# U del checklist: flag canónico de postgame desbloqueado (el estado
+		# derivado de M22 sigue siendo la verdad §2.2; esto es persistencia
+		# explícita para migraciones y consultas sin M22 cargada)
+		"postgame_unlocked": activo,
 		"activo": activo,
 		"epilogo_visto": epilogo_visto,
 		"actividades_hechas": _hechas.duplicate(),
@@ -199,6 +203,6 @@ func restore_save_data(data: Dictionary) -> void:
 	epilogo_visto = bool(data.get("epilogo_visto", false))
 	# NUNCA re-emitir postgame_activado al restaurar (§2.3 estilo M71)
 	var estaba := activo
-	activo = bool(data.get("activo", false))
+	activo = bool(data.get("activo", false)) or bool(data.get("postgame_unlocked", false))
 	if not estaba and activo:
 		print("[M75] Postgame restaurado desde guardado (sin re-emisión de señal)")

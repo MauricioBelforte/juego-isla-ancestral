@@ -1,3 +1,8 @@
+# Modelo: agnes-2.5-flash
+# Plataforma: Kilo Code
+# Fecha: 2026-09-04
+#
+# M71: Debug ToolController — verifica autoloader disponibles.
 extends SceneTree
 
 func _init() -> void:

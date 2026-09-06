@@ -62,7 +62,9 @@ func guardar(valores: Dictionary) -> String:
 	if f:
 		var old := f.get_as_text()
 		f.close()
-		FileAccess.open(RUTA_DATOS + ".bak", FileAccess.WRITE).store_string(old)
+		var bak := FileAccess.open(RUTA_DATOS + ".bak", FileAccess.WRITE)
+	if bak:
+		bak.store_string(old)
 	var doc := {"schema_version": 1, "recetas": _recetas}
 	doc["recetas"][id] = receta
 	var ok := FileAccess.store_json(RUTA_DATOS, doc)

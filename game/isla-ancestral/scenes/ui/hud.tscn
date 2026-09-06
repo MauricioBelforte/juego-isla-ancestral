@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ui/widgets/hotbar_widget.gd" id="6_hotbar"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/interact_prompt.gd" id="7_interact"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/action_prompt_overlay.gd" id="8_action"]
+[ext_resource type="Script" path="res://scripts/ui/widgets/minimap_widget.gd" id="9_minimap"]
 
 [node name="HUDScreen" type="CanvasLayer"]
 layer = 100
@@ -117,3 +118,21 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_action")
+
+[node name="BottomRight" type="MarginContainer" parent="."]
+anchors_preset = 7
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -160.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+
+[node name="MinimapWidget" type="Control" parent="BottomRight"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("9_minimap")

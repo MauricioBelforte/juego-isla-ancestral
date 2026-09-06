@@ -35,6 +35,8 @@ const VERSION_ESTADO: int = 2  # v2: desbloqueados con fechas
 
 signal logro_desbloqueado(logro_id: String, nombre: String)
 signal logro_progreso(logro_id: String, logrado: float, requerido: float)
+## RF7 (agnes-2.5-flash): señal pública para que M53/M71/UI abran el panel de logros
+signal panel_solicitado(panel_id: String)
 
 ## logro_id -> {nombre, descripcion, condicion, oculto, progreso_parcial: bool}
 var _logros: Dictionary = {}
@@ -42,12 +44,18 @@ var _logros: Dictionary = {}
 var _desbloqueados: Array[String] = []
 ## RF4: fecha de desbloqueo por logro: logro_id -> {"dia": int, "hora": int}
 var _fechas: Dictionary = {}
+## RF6/RN7: toggles de accesibilidad — consume configuración de M58 si existe
+var _toasts_disabled: bool = false
+## Memoización de lecturas: compuesta_hash -> bool (evita re-evaluar mismo estado)
+var _compuesta_cache: Dictionary = {}
+const COMPUESTA_CACHE_TTL: int = 32
 
 
 func _ready() -> void:
 	_cargar_catalogo()
 	_registrar_proveedor_guardado()
 	_conectar_eventos()
+	_conectar_accesibilidad()
 
 
 func _cargar_catalogo() -> void:
@@ -67,6 +75,7 @@ func _cargar_catalogo() -> void:
 			"condicion": logro.get("condicion", {}),
 			"oculto": bool(logro.get("oculto", false)),
 			"progreso_parcial": bool(logro.get("progreso_parcial", false)),
+			"orden": int(logro.get("orden", 999)),
 		}
 	print("[M72] Logros cargados: %d" % _logros.size())
 	# RF14: validación accionable en arranque (headless-friendly)
@@ -83,25 +92,101 @@ func _registrar_proveedor_guardado() -> void:
 
 ## Evaluación event-driven (§7 estilo M71): señales de progreso y EventBus
 ## re-evalúan los logros aún no desbloqueados. NUNCA por frame.
+var _conexiones: Array = []
+
+## BUG-015/018 (2026-09-02): conexiones guardadas para desconectar en _exit_tree
+func _conectar(src: Signal, callable: Callable) -> void:
+	if not src.is_connected(callable):
+		src.connect(callable)
+	_conexiones.append([src, callable])
+
+func _exit_tree() -> void:
+	for c in _conexiones:
+		if c[0].is_connected(c[1]):
+			c[0].disconnect(c[1])
+	_conexiones.clear()
+
 func _conectar_eventos() -> void:
 	var pm := get_node_or_null("/root/ProgressionManager")
 	if pm == null:
 		push_warning("[M72] ProgressionManager ausente; logros no evaluables")
 	else:
-		pm.progreso_hito_alcanzado.connect(func(_id: String, _n: String, _r: Array): evaluar_todos())
-		pm.progreso_desbloqueado.connect(func(_id: String, _t: String, _v: String): evaluar_todos())
+		_conectar(pm.progreso_hito_alcanzado, func(_id: String, _n: String, _r: Array): evaluar_todos())
+		_conectar(pm.progreso_desbloqueado, func(_id: String, _t: String, _v: String): evaluar_todos())
 	# RF3: eventos de dominio en EventBus (evaluación por evento, nunca frame)
 	var bus := get_node_or_null("/root/EventBus")
 	if bus == null:
 		return
 	if bus.inventory != null and bus.inventory.has_signal("item_added"):
-		bus.inventory.item_added.connect(func(_i: String, _q: int): evaluar_todos())
+		_conectar(bus.inventory.item_added, func(_i: String, _q: int): evaluar_todos())
 	if bus.economy != null and bus.economy.has_signal("purchase_done"):
-		bus.economy.purchase_done.connect(func(_i: String, _c: int): evaluar_todos())
+		_conectar(bus.economy.purchase_done, func(_i: String, _c: int): evaluar_todos())
 	if bus.npc != null and bus.npc.has_signal("gift_given"):
-		bus.npc.gift_given.connect(func(_n: String, _i: String, _c: int): evaluar_todos())
+		_conectar(bus.npc.gift_given, func(_n: String, _i: String, _c: int): evaluar_todos())
 	if bus.quest != null and bus.quest.has_signal("quest_completed"):
-		bus.quest.quest_completed.connect(func(_q: String): evaluar_todos())
+		_conectar(bus.quest.quest_completed, func(_q: String): evaluar_todos())
+	# RF2 iter. 4: amistad — friendship_level_up (M20, señal real NPCEvents)
+	if bus.npc != null and bus.npc.has_signal("friendship_level_up"):
+		_conectar(bus.npc.friendship_level_up, _on_nivel_amistad)
+	# RF2 iter. 6: pesca — captura_exitosa (M34) alimenta estadísticas
+	var fishing := get_node_or_null("/root/Fishing")
+	if fishing != null and fishing.has_signal("captura_exitosa"):
+		_conectar(fishing.captura_exitosa, _on_captura_pesca)
+	# RF2 iter. 7 (agnes-2.5-flash): colecciones — categoria_completed (M37)
+	var colecciones := get_node_or_null("/root/ColeccionablesManager")
+	if colecciones != null and colecciones.has_signal("categoria_completed"):
+		_conectar(colecciones.categoria_completed, func(_cat, _rec, _cant): evaluar_todos())
+
+
+## RN7/R6: conexión con M58 accesibilidad — desactivar toasts si el jugador lo exige
+func _conectar_accesibilidad() -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	# M58 emite una señal 'accesibilidad_cambiada(config)' si existe; fallback duck-typed.
+	if bus.has_signal("accesibilidad_cambiada"):
+		_conectar(bus.accesibilidad_cambiada, func(_cfg: Dictionary):
+			_toasts_disabled = bool(_cfg.get("toasts_disabled", false)))
+	# También revisar GameSettings si está disponible (fallback)
+	var gs := get_node_or_null("/root/GameSettings")
+	if gs != null and gs.has_method("get_accessibility_config"):
+		var cfg: Dictionary = gs.get_accessibility_config()
+		_toasts_disabled = bool(cfg.get("toasts_disabled", false))
+	print("[M72] Accesibilidad conectada: toasts_disabled=%s" % _toasts_disabled)
+
+
+## RF2 (CondicionPesca): captura_exitosa(pez, tamano) de M34 alimenta stats:
+##  - peces_capturados: total de capturas (stat_min usable para logros de volumen)
+##  - pescar_<pez.id>: monótona por especie (primera vez / específica)
+## Los peces son objetos Resource con campo id (catálogo M34).
+func _on_captura_pesca(pez: Resource, _tamano: float) -> void:
+	var pm := get_node_or_null("/root/ProgressionManager")
+	if pm == null or pm.profile == null or pez == null:
+		return
+	pm.profile.incrementar("peces_capturados", 1)
+	# fix 2026-09-03 (glm-5.3): Object.get() en Godot 4 no acepta default
+	# como 2do arg (parser error). Obtener y validar por separado.
+	var pez_id = pez.get("id")
+	var stat_especie := "pescar_" + (String(pez_id) if pez_id != null else "")
+	var prev: int = int(pm.profile.get_stat(stat_especie))
+	if prev == 0:
+		pm.profile.set_stat(stat_especie, 1)
+	evaluar_todos()
+
+
+## RF2 (CondicionAmistad): registra el nivel máximo de amistad alcanzado con
+## un vecino como estadística monótona del perfil (amistad_max_<npc_id>).
+## La condición del logro usa {"tipo":"stat_min","stat_id":"amistad_max_catalina_oso",...}
+## — mismo vocabulario M71 §3.6, sin duplicar evaluador.
+func _on_nivel_amistad(npc_id: String, nivel: int) -> void:
+	var pm := get_node_or_null("/root/ProgressionManager")
+	if pm == null or pm.profile == null:
+		return
+	var stat_id := "amistad_max_" + String(npc_id)
+	var prev: int = int(pm.profile.get_stat(stat_id))
+	if nivel > prev:
+		pm.profile.set_stat(stat_id, nivel)
+		evaluar_todos()
 
 
 ## Evalúa todos los logros pendientes (idempotente por desbloqueo).
@@ -161,6 +246,9 @@ func _fecha_actual() -> Dictionary:
 
 
 func _emitir_toast(logro_id: String, nombre: String) -> void:
+	# RN7: respetar configuración de accesibilidad (M58)
+	if _toasts_disabled:
+		return
 	var bus := get_node_or_null("/root/EventBus")
 	# La señal notify vive en el dominio interno UIEvents (bus.ui), no en la raíz
 	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
@@ -175,6 +263,8 @@ func _emitir_toast(logro_id: String, nombre: String) -> void:
 		"titulo": nombre,
 		"texto": texto,
 	})
+	# RF7: emitir señal pública para que UI de M53/M71 pueda abrir el panel
+	panel_solicitado.emit("logros")
 
 
 func esta_desbloqueado(logro_id: String) -> bool:
@@ -231,6 +321,8 @@ func get_todos() -> Array[Dictionary]:
 	var lista: Array[Dictionary] = []
 	for id in _logros:
 		lista.append(_estado_de(String(id)))
+	# Ordenar por campo orden (RF1 iter. 7, agnes-2.5-flash)
+	lista.sort_custom(func(a, b): return int(a.get("orden", 999)) < int(b.get("orden", 999)))
 	return lista
 
 
