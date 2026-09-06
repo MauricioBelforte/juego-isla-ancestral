@@ -1,4 +1,4 @@
-**Modelo:** GLM 5.3 (z-ai) (último modificador 2026-09-02: §11 flujo completo Blender→Godot→movimiento, caso tortuga M36. Historial: glm-5.3-flash 2026-09-01 §9.56-9.60, deepseek-v4-flash §9.54/§9.55, glm-5.3 §9.53, MiMo V2.5 creó la guía; múltiples agentes §9.x)
+**Modelo:** glm-5.3-free (Kilo Code) (último modificador 2026-09-05: §12 animales bimodo — playbook gaviota vuelo/tierra, dump GLB antes de animar, quaternion de patas, asentado por medición, hop de escalón; E-11/E-12. Historial: glm-5.3 (Cline) 2026-09-04 §9.64 C56; GLM 5.3 (z-ai) 2026-09-02: §11 flujo Blender→Godot, caso tortuga M36; glm-5.3-flash 2026-09-01 §9.56-9.60; deepseek-v4-flash §9.54/§9.55; glm-5.3 §9.53; MiMo V2.5 creó la guía; múltiples agentes §9.x)
 **Plataforma:** Kilo Code
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
@@ -306,6 +306,24 @@ Cuando se encuentre un error nuevo, agregarlo a esta guía:
 **Solución:** Cómo solucionarlo
 **Fecha:** YYYY-MM-DD
 ```
+
+---
+
+### E-11: Rotar piezas de un GLB con ejes adivinados (plegado de alas)
+
+**Error:** Sin error de consola: las alas de la gaviota "salían por la nuca/garganta" al plegarlas (v11/v12, reporte del usuario).
+**Causa:** Setear `rotation.x/y/z` asumiendo ejes que no son los del GLB real. Tras el export, la gaviota queda con pico +X, span de alas en **±Z** (no en Y). Godot compone Euler `R = Ry·Rx·Rz` (Z primero): un "roll" en X (eje de la cuerda) verticaliza el span antes del yaw → ala izq arriba (nuca), der abajo (garganta).
+**Solución:** 1) Volcar el GLB con `dump_glb.py` y LEER los bounds reales de cada nodo antes de animar. 2) Plegado de ave = roll `rotation.z` (eje del span, MISMO signo en ambas alas) + yaw `rotation.y` (negado por lado) + pitch `rotation.x` (negado por lado). 3) Cuando la interacción de los 3 ejes vuelve frágil el resultado (una sube y la otra baja), NO adivinar signos: buscar el ángulo por MEDICIÓN (probar 41 valores contra un objetivo geométrico con `global_transform`). 4) Patas: quaternion `Quaternion(eje_mundo, objetivo)` — rotación más corta referida al MUNDO, inmune al pitch del cuerpo.
+**Fecha:** 2026-09-05 (glm-5.3-free / Kilo Code, Logs 694-695)
+
+---
+
+### E-12: Sintaxis Python en GDScript rompe el BOOT de todo el proyecto
+
+**Error:** `Parser Error: Expected "]" after subscription index` / `Cannot find member "encode" in base "String"` / `Too many arguments for "get()" call` / `Static function "get_dynamic_memory_usage()" not found`.
+**Causa:** Un módulo escrito con Python-isms: slicing `arr[-200:]`, `String.encode("utf-8")`, `ProjectSettings.get(clave, default)` con 2 args, `OS.get_dynamic_memory_usage()`, docstrings `"""..."""`. Cualquier ERROR DE PARSER en UN solo script impide el arranque de TODO el proyecto (Godot aborta el boot completo).
+**Solución:** Equivalencias Godot 4: `arr.slice(-200)`, `texto.to_utf8_buffer()`, `ProjectSettings.get_setting(clave, default)` (Dictionary SÍ acepta `.get(k, default)`, ProjectSettings NO), `Performance.get_monitor(Performance.MEMORY_STATIC)` para memoria, comentarios `##` en vez de docstrings. LECCIÓN DE PROCESO: un agente dejó el proyecto sin bootear; validar con `godot_run_project` antes de dar por terminada cualquier edición de scripts.
+**Fecha:** 2026-09-05 (glm-5.3-free / Kilo Code, fix de emergencia en M110 debug_menu.gd)
 
 ---
 
@@ -1022,6 +1040,7 @@ var current_value = int(_terrain.get_voxel(pos, VoxelBuffer.CHANNEL_TYPE))
 | 2026-08-26 | MiMo V2.5 | OpenCode | Agregadas §9.29 (múltiples handlers ESC se anulan) y §9.30 (movimiento relativo a cámara). M12 completado |
 | 2026-08-26 | MiMo V2.5 | OpenCode | Agregadas §9.31 (VoxelBoxMover lee voxel directo), §9.32 (right vector invertido), §9.33 (GameSettings autoload pattern), §9.34 (look_at + lerp drift). M08/M11/M12 completados, M13 desbloqueado |
 | 2026-08-27 | MiMo V2.5 | OpenCode | Agregada §9.35 (VoxelTool retorna Variant, no usar `:=`). M13 implementado: tool_controller integrado con VoxelTerrain |
+| 2026-09-04 | glm-5.3 | Cline | Agregada §9.64 (gameplay nunca lee el reloj del SO: ticks de motor + has() explícito; criterio de whitelist del scan M30). Re-auditoría C56, Log 429 |
 
 ---
 
@@ -1630,7 +1649,7 @@ var cb := func(_i: float) -> void:
 
 **Solución:** duck-typing en collect/restore (sin tipo estricto): `var provider = _providers[section]` + llamada directa a `get_save_data()/restore_save_data()`. El contrato `ISaveProvider` queda como DOCUMENTACIÓN del contrato (qué métodos debe implementar un proveedor), no como tipo de anotación.
 
-**Aplicación en el proyecto:** `scripts/saving/save_snapshot.gd` (M59 iter., Log 307). Regla general: los Node-providers son el patrón real del proyecto — NO reintroducir typing ISaveProvider en el snapshot.
+**Aplicación en el proyecto:** `scripts/saving/save_snapshot.gd` (M59 iter., Log 368). Regla general: los Node-providers son el patrón real del proyecto — NO reintroducir typing ISaveProvider en el snapshot.
 
 **Fecha:** 2026-09-01 · **Agente:** glm-5.3-flash (Kilo Code)
 
@@ -1692,6 +1711,54 @@ print("[X] listo (%d DLC, %d bundles)" % [a.size(), b.size()])
 **Aplicado en el proyecto:** `scripts/dlc/dlc_manager.gd:24` (M120, 2026-09-01 — detectado en la sesión QA #01; el juego estaba freenable por este print). Fix por deepseek-v4-flash-vision-exp (Log 395), verificado con suite completa ÉXITO + boot con el DlcManager cargando: "[M120] DlcManager listo (2 DLC, 1 bundles)" + mundo FPS 60 (captura 101-QA-General postfix).
 
 **Fecha:** 2026-09-01 · **Agente:** deepseek-v4-flash-vision-exp (Kilo Code)
+
+---
+
+### 9.63 `full_load_distance` no existe en VoxelTerrain/VoxelMesherBlocky
+
+**Error:** `SCRIPT ERROR: Invalid assignment of property or key 'full_load_distance' with value of type 'float' on a base object of type 'VoxelMesherBlocky'.`
+
+**Causa:** En el plugin zylann.voxel para Godot 4.7, `full_load_distance` NO es una propiedad expuesta en `VoxelTerrain` ni en `VoxelMesherBlocky`. La distancia de carga completa se controla mediante `VoxelViewer.view_distance`.
+
+**Solución:** No intentar asignar `full_load_distance`. Usar `VoxelViewer.view_distance` para controlar qué tan lejos se renderizan los chunks:
+```gdscript
+var viewer = get_node_or_null("VoxelViewer")
+if viewer:
+    viewer.view_distance = 320.0  # Controla la distancia de renderizado
+```
+
+**Fecha:** 2026-09-02 · **Agente:** MiMo V2.5 (OpenCode)
+
+---
+
+### 9.64 Gameplay NUNCA lee el reloj del SO — `Time.get_ticks_msec()` + `has()` explícito (regla de oro M30)
+
+**Error:** el check C56 del scan anti-reloj-SO (`caso_reloj_tests.gd`, módulo 30) falla: `[VIOLA] ruta -> Time.get_unix_time_from_system`. Vuelve a aparecer en MÓDULOS NUEVOS aunque ya se haya corregido antes (M36 fauna 2026-09-01; M14 inventario 2026-09-04).
+
+**Causa:** el patrón `_dedupe.get(id, 0.0)` + `Time.get_unix_time_from_system()` se copia entre módulos como "patrón correcto". Dos problemas: (1) la regla de oro del M30 prohíbe leer el reloj del SO en gameplay (anti-exploit: manipular el reloj del SO no debe dar ninguna ventaja); (2) el default `0.0` de `get()` combinado con tiempo de motor BLOQUEA el primer uso de cada entidad (0.0 + ventana de gracia). Con unix-time el bug (2) era invisible porque unix-epoch es enorme.
+
+**Solución:**
+```gdscript
+# ❌ Reloj del SO en gameplay + default 0.0 que bloquea el primer uso:
+if ahora_s - _dedupe.get(id, 0.0) < VENTANA_S:
+    return
+
+# ✅ Ticks del motor (segundos reales de sesión) + has() explícito:
+var ahora_s := float(Time.get_ticks_msec()) / 1000.0
+if _dedupe.has(id) and ahora_s - float(_dedupe[id]) < VENTANA_S:
+    return
+_dedupe[id] = ahora_s
+```
+
+**Criterio de whitelist del scan (`WHITELIST_RELOJ_SO`):** solo DIAGNÓSTICO/INFRA/CONTENIDO-REAL (logging, analytics, telemetry, performance, saving, editor, tests, datos, hardware, crash, debug, stress, legal — año de copyright, updates — fecha de versión instalada). El gameplay NUNCA. Toda ampliación debe documentarse con módulo, motivo y log.
+
+**Vigilancia continua:** cada módulo nuevo puede reintroducir el uso. El scan es el guardián: si C56 falla, clasificar el uso (gameplay → corregir a ticks; infra real → whitelist documentada). NUNCA silenciar el scan sin clasificar.
+
+**Aplicado en el proyecto:** `fauna_registry.gd` (M36) y `hotbar_state.gd`/`inventario_iter4.gd`/`inventario_iter5.gd` (M14) corregidos a ticks (Log 429); whitelist: legal/ (M84 RF6) y updates/ (M119).
+
+**Fecha:** 2026-09-04 · **Agente:** glm-5.3 (Cline)
+
+---
 
 ## 10. Mundo voxel: errores y aprendizajes (2026-08-29 — Hy3/Kilo, criterio interno para islas nuevas)
 
@@ -2037,6 +2104,53 @@ func posicionar_sobre_terreno(nodo: Node3D, x: float, z: float) -> bool:
 
 **Beneficio:** un solo punto de verdad → ningún NPC puede flotar; si el radio del mundo
 cambia, todos los objetos se adaptan automáticamente.
+
+### 10.17 CÓMO MODIFICAR ANCHURA DEL AGUA (orilla, banda clara/profunda) — REGLAS
+
+> Fecha: 2026-09-03. Agente: MiMo V2.5. Caso real: expandir banda de agua clara
+> hacia el mar (no hacia la arena) y duplicar su ancho ×3.
+
+**Archivo a modificar:** `scripts/world/island_generator.gd`
+
+**Zonas del perfil (orden de afuera hacia adentro):**
+
+| Zona | Distancia | Height | Descripción |
+|------|-----------|--------|-------------|
+| Agua profunda | `> LIMITE_PROFUNDO` | 0 | El jugador se hunde |
+| Agua clara | `LIMITE_AGUA_CLARA < dist <= LIMITE_PROFUNDO` | 2 | Camina sumergido hasta la cintura |
+| Arena/playa | `dist <= LIMITE_AGUA_CLARA` | 3+ | Terreno sólido |
+
+**REGLAS para modificar:**
+
+1. **NUNCA mover el límite de la arena hacia el mar** (hacia afuera) para "agrandar" el agua — eso QUITA arena y achica la playa.
+2. **Para hacer el agua más ancha: mover el `LIMITE_PROFUNDO` hacia afuera** (mayor valor de dist). Así se amplía la banda de agua clara sin tocar la arena.
+3. **Ambos archivos deben mantenerse sincronizados:** la función `get_height()` Y la función `get_block_at()` usan las MISMAS distancias. Si cambiás uno, cambiá el otro.
+4. **Actualizar el validador** (`scripts/terreno/validador_isla_raiz.gd`) — los comentarios referencian las distancias exactas.
+5. **La vegetación** (`vegetation_plan.gd`) usa su propio rango de playa (0.85-0.93) que es INDEPENDIENTE del agua. Verificar que no se superponga.
+
+**Ejemplo de cambio correcto (agua ×3 hacia el mar):**
+
+```gdscript
+# ❌ INCORRECTO: mover arena de 0.94 a 0.86 (quita playa)
+if dist <= 0.86:        # ← ACHICA la arena
+    height = 3 + ...
+elif dist <= 0.98:      # ← agua se "agrandó" pero COMIENDO arena
+    height = 2
+
+# ✅ CORRECTO: mover agua profunda de 0.97 a 1.03 (expande hacia el mar)
+if dist <= 0.94:        # ← arena INTACTA
+    height = 3 + ...
+elif dist <= 1.03:      # ← agua clara MÁS ANCHA hacia el mar
+    height = 2
+```
+
+**Sincronización obligatoria (3 lugares):**
+
+1. `get_height()` — lógica de altura del terreno
+2. `get_block_at()` — colocación de bloques SHALLOW_WATER / WATER
+3. `validador_isla_raiz.gd` — comentarios de referencia
+
+**Nota sobre el radio:** el radio de la isla es 1.0 (normalizado). Si `LIMITE_PROFUNDO > 1.0`, el agua profunda queda fuera del mapa y toda el agua visible es clara. Esto es válido para islas donde se quiere una orilla amplia y caminable.
 ## 11. Flujo completo: traer un objeto animado de Blender a Godot (2026-09-02 — glm-5.3/Kilo Code, caso tortuga M36)
 
 > Esta seccion documenta el flujo VERIFICADO end-to-end para que cualquier agente
@@ -2175,3 +2289,286 @@ func _animar(delta: float) -> void:
 
 **Caso de referencia completo:** `game/isla-ancestral/scripts/fauna/tortuga_npc.gd`
 (tortuga marina M36, log 545 v3) — copiar de ahi el patron completo.
+
+---
+
+## 12. ANIMALES CON DOS MODOS: vuelo→tierra (y cualquier bimodo) — caso gaviota M36 (2026-09-05, glm-5.3-free / Kilo Code)
+
+> **PARA QUIEN ES ESTA SECCION:** cualquier agente que anime un animal
+> bimodo (vuela/posea, nada/camina: paloma, loro, pato, tortuga marina).
+> La gaviota (Logs 694-695, sesiones v11→v16) es el CASO DE REFERENCIA:
+> 6 iteraciones de error destiladas en reglas. El LADO BLENDER esta en
+> `09-GUIA-BLENDER.md` §10 (leerlo primero: el asset llega en pose de
+> reposo del MODO PRIMARIO y todo lo demas se compone aca).
+> Script de referencia: `game/isla-ancestral/scripts/fauna/gaviota_npc.gd`
+> (v16) y la demo de poses `gaviota_demo.gd` (v15c).
+
+### 12.1 Arquitectura del bimodo (maquina de estados + pose por estado)
+
+```
+ESTADO (machine)              POSE DEL ASSET (que rota)
+─────────────────────────    ─────────────────────────────────────────
+VOLANDO/ORBITA   → aleteo: rot.x = base + sin(t*f)*amp*-lado (por ala)
+ATERRIZAJE       → caida vertical: alas frenando (semi-ext), patas DESPLEGANDO
+CAMINANDO/PAUSA  → alas PLEGADAS (roll+yaw+pitch), patas VERTICALES,
+                   cuerpo pose secundaria (erguida), head-bob
+DESPEGUE         → patas REPLIEGAN a base, alas despliegan, pitch sube
+```
+
+Tres capas que NO se mezclan (regla de la v13):
+1. **El CharacterBody3D NUNCA se rota** (§11.5 regla 3): solo el `Modelo`.
+2. **La pose del cuerpo** (pitch del modo secundario) es UNA rotacion del
+   `Modelo`, referida al eje del CUERPO en el GLB (gaviota: `rotation.z`
+   — ver 12.2). No tocar rotation.x del modelo salvo aleteo.
+3. **Las piezas** (alas/patas) se rotan en su nodo propio, guardando la
+   BASE capturada en `_ready` para volver a reposo (vuelo) al despegar.
+
+### 12.2 El GIRO DE LAS ALAS: modo vuelo vs modo tierra — anatomía completa de la confusión (LEER TODO ANTES DE TOCAR UN ALA)
+
+> **NUNCA se adivinan los ejes de un GLB exportado.** Antes de animar:
+> correr `dump_glb.py` y anotar por pieza que eje ocupa el span (alas),
+> cual es el eje del cono (patas) y donde queda el origen. La gaviota
+> llego con: pico +X, cola −X, arriba +Y, span alas ±Z (L +Z, R −Z),
+> eje del cono de patas en Y local, panza ~+0.25 del origen (pose vuelo).
+> Esta subseccion destila CINCO iteraciones fallidas (v11→v13d) y la
+> solucion verificada (v13e/v15). Es la parte donde TODO agente se
+> confunde: pieza espejada + varias rotaciones compuestas.
+
+#### 12.2.1 Por qué el aleteo de VUELO es fácil y el PLEGADO de tierra es difícil
+
+- **VUELO:** UNA sola rotacion oscilante alrededor de un eje fijo, cerca
+  de la pose base (el GLB YA viene en vuelo):
+  `rotation.x = base.x + sin(t*f) * amp * -lado`. Un eje equivocado se
+  detecta rapido: el ala "remolina" en vez de subir/bajar.
+- **TIERRA (plegado de ave):** hay que llevar el ala DESDE extendida
+  lateral HASTA una pose concreta lejana: span barrido hacia atras +
+  superficie vertical contra el flanco + punta a la altura del dorso.
+  Son TRES rotaciones compuestas (roll+yaw+pitch) que interactuan entre
+  si. Ahi adivinar ejes/signos falla de formas raras ("alas por la
+  nuca", "una si una no").
+
+#### 12.2.2 Los cinco errores puntuales (síntoma exacto → causa exacta)
+
+| Versión | Qué se hizo | Síntoma (reporte del usuario) | Causa raíz |
+|---|---|---|---|
+| v11 | roll tipo "tuerca" en `rotation.z` + signo de yaw invertido | el ala cruzaba por DELANTE de la cabeza | yaw con signo mal: giraba hacia adelante en vez de atras |
+| v12 | yaw `rotation.y` (bien) + "roll" en `rotation.x` | "ala derecha por la nuca, izquierda desde la garganta" | X es el eje de la CUERDA (pico→cola): aplicado antes del yaw, verticaliza el span — el lado +Z sube y el −Z baja (espejo) |
+| v13a | roll `rotation.z` con signo NEGADO por lado | "una ala la plegó, la otra quedó apuntando para arriba" | el roll va con MISMO signo: negado, una superficie cae al flanco y la otra gira hacia arriba |
+| v13c | pitch `rotation.x` con MISMO signo | puntas asimétricas (una −0.67 bajo el hombro, la otra +0.12 arriba) | rot X mueve el span +Z y el −Z en direcciones verticales OPUESTAS |
+| v13d | pitch con signo NEGADO por lado | invirtió el ala que estaba bien | con roll+yaw ya aplicados la interaccion deja de ser "pura": el signo teorico depende del estado |
+| v13e | pitch ELEGIDO POR BÚSQUEDA (41 valores contra un objetivo geométrico) | ✅ aprobado por el usuario | la MEDICIÓN reemplaza el razonamiento de signos |
+
+**Lección transversal:** con piezas ESPEJADAS y varias rotaciones
+compuestas, razonar signos "en la cabeza" falla. Para rotaciones puras
+usar la regla del espejo (12.2.4); para poses compuestas, MEDIR
+(12.2.6/12.2.7).
+
+#### 12.2.3 Los ejes locales del ala tras el export (lo que dice el dump)
+
+Cada ala llega como nodo con ORIGEN en el hombro y la malla extendida
+hacia SU lado. En local del nodo:
+
+```
+        Y (grosor del ala / arriba)
+        |
+        |______ Z (SPAN: la malla se extiende por aquí — L en +Z, R en −Z)
+       /
+      X (CUERDA: borde de ataque → fuga ≈ dirección pico→cola)
+```
+
+- **SPAN** = el largo del ala (0.60 en gaviota v14).
+- **CUERDA** = el ancho (pico→cola, ~0.07 en la base).
+- El dump lo revela en 10 s: `Ala_L` con bounds Z 0→+0.60 = span en +Z.
+- NO asumir que el span esta en Y "porque en Blender era ±Y": el export
+  Y-up LO CAMBIA (guia 09 §10.2). Esta asuncion equivocada fue el
+  origen de v11/v12.
+
+#### 12.2.4 LA REGLA DEL ESPEJO (qué signos se niegan y cuáles no — MEMORIZAR)
+
+Las alas L y R comparten el MISMO código pero sus mallas se extienden
+en direcciones OPUESTAS (+Z vs −Z). Regla general para CUALQUIER pieza
+pareada (alas, pinzas, orejas, aletas de pez):
+
+> **La rotación alrededor del EJE PROPIO DE LA PIEZA (su eje largo, el
+> span) lleva el MISMO signo en ambas. Las rotaciones alrededor de los
+> otros dos ejes (perpendiculares al span) se NIEGAN por lado.**
+
+Por qué: girar alrededor del span (Z) rota la SUPERFICIE (la cuerda) —
+el giro físico es idéntico en ambos lados porque el espejo ya vive en
+la geometría. Girar alrededor de X o Y mueve los spans +Z y −Z hacia
+direcciones del mundo OPUESTAS — para que ambas vayan al mismo lado
+(hacia la cola, hacia arriba) los signos deben compensarse.
+
+Tabla VERIFICADA para un ala tipo gaviota (span en Z local):
+
+| Rotación | Es en realidad | Signo L vs R | Qué hace |
+|---|---|---|---|
+| `rotation.z` | ROLL alrededor del eje del span | MISMO (−1.50 ambas) | verticaliza la superficie contra el flanco |
+| `rotation.y` | YAW vertical | NEGADO (±1.45) | barre el span extendido hacia la cola (−X) |
+| `rotation.x` | PITCH alrededor de la cuerda | NEGADO (±0.05) | sube/baja la PUNTA del ala plegada |
+| aleteo en vuelo (`rotation.x`) | PITCH con span horizontal | NEGADO (`amp * -lado`) | bate arriba/abajo |
+
+Valores finales aprobados por el usuario (gaviota v15): roll −1.50,
+yaw ±1.45, pitch ±0.05, con cuerpo erguido 0.42 rad.
+
+#### 12.2.5 El ORDEN de composición: por qué el roll va en Z y no en X
+
+Godot compone `R = Ry·Rx·Rz`: al vector del span se le aplica PRIMERO
+`rotation.z`, después `rotation.x`, al final `rotation.y`.
+
+- **Roll en Z** (correcto): se ejecuta con el span TODAVÍA horizontal —
+  rota la superficie alrededor del ala extendida (el pliegue del
+  "antebrazo" del ave). DESPUÉS el yaw (Y) barre el ala ya vertical
+  hacia atras. Es el orden fisico natural del pliegue. ✅
+- **"Roll" en X** (bug v12): X es la cuerda — no puede rodar la
+  superficie; con el span horizontal, LEVANTA el span (un lado sube, el
+  otro baja por el espejo). Eso era "alas por nuca/garganta".
+- **Pitch X** (última capa): con roll+yaw ya aplicados, rota la cuerda
+  barrida para afinar la altura de la punta. ✅
+
+#### 12.2.6 Verificar con PUNTOS, no con imaginación (el DIAG)
+
+Cada pose nueva se verifica transformando la PUNTA del span por el
+`global_transform` REAL y leyendo sus números:
+
+```gdscript
+var punta_mundo: Vector3 = ala.global_transform * Vector3(0, 0, span * signo_lado)
+var rel: Vector3 = punta_mundo - ala.global_transform.origin
+# rel.x < 0        → punta hacia ATRÁS (la cola) ✓ plegado
+# rel.y ≈ objetivo → altura de la punta ✓
+```
+
+Si `rel.x > 0` el ala apunta al pico (yaw con signo mal). Si `rel.y` se
+dispara, el roll/pitch estan mal. Un print detecta en 1 frame lo que el
+ojo tarda 3 iteraciones en ver.
+
+#### 12.2.7 Cuando la composición es intratable: BUSCAR por medición
+
+El pitch final NO se razonó: se BUSCÓ. Al converger el plegado, cada ala
+prueba 41 valores de `rotation.x` en [−1, +1] transformando la punta y
+se elige el de menor error contra la altura objetivo
+(`REL_Y_OBJETIVO = −0.20` en la gaviota aprobada — puntas 20 cm bajo el
+hombro, pegadas al flanco):
+
+```gdscript
+for s in PITCH_BUSQ_PASOS:  # 41
+    var p: float = lerpf(PITCH_BUSQ_MIN, PITCH_BUSQ_MAX, float(s) / (PITCH_BUSQ_PASOS - 1))
+    ala.rotation.x = p
+    var rel_y: float = (ala.global_transform * punta_local).y - hombro_mundo.y
+    var err: float = absf(rel_y - REL_Y_OBJETIVO)
+    # guardar el p con err mínimo; restaurar la rotación y lerp al elegido
+```
+
+Ventajas: cero signos a mano, simetría GARANTIZADA (cada ala satisface
+su objetivo por separado), inmune al estado roll+yaw. Usarlo SIEMPRE
+que la pose final exija 3+ rotaciones compuestas con espejo.
+
+#### 12.2.8 El PUNTO DE GIRO (pivot) se decide en BLENDER, no en Godot
+
+Toda esta tabla pivota sobre el ORIGEN del nodo = el HOMBRO. Si el ala
+se modeló con origen en el centro de la pala (guia 09 §8.1 regla 3), el
+roll la hace ORBITAR alrededor del medio y nada cierra. Eso NO se
+arregla con código: se re-modela en Blender con el loft naciendo del
+origen. "Los giros salían en distintos puntos" = pivot mal ubicado →
+volver a la guia 09, no pelear con Euler en Godot.
+
+
+### 12.3 Despliegue de patas por QUATERNION (nunca Euler a mano)
+
+Las patas del GLB estan EN REPOSO apuntando atras-abajo (dir del cono).
+Para verticalizarlas en tierra, NO setear ejes de Euler adivinados:
+
+```gdscript
+# eje del cono en LOCAL del nodo (dump: Y en la gaviota)
+var eje_mundo: Vector3 = (pata.global_basis * Vector3(0, 1, 0)).normalized()
+var q_giro := Quaternion(eje_mundo, Vector3(0, -1, 0))  # rot mas corta a vertical
+var q_final: Quaternion = q_giro * pata.global_transform.basis.get_rotation_quaternion()
+# bajar a local del padre y slerp
+pata.quaternion = pata.quaternion.slerp(
+    (pata.get_parent() as Node3D).global_transform.basis.get_rotation_quaternion().inverse() * q_final, factor)
+```
+
+Ventajas verificadas: inmune al pitch del cuerpo (v15: cuerpo erguido y
+las patas siguen clavadas al suelo), sin casos "un ala si una no", y el
+`factor` da transicion suave (3*delta caminando) o instantanea (1.0 al
+aterrizar, para poder medir el bounding ya desplegado). Replegado al
+despegar: restaurar `rotation` base capturada en `_ready` (guia 09 §10
+lo prepara: eje del cono = direccion de reposo primario).
+
+### 12.4 Re-parentar pies a patas en runtime
+
+Si el asset tiene pies como nodos hermanos, re-parentarlos a su pata en
+`_resolver_nodos()` (offset local preservado con
+`pata.global_transform.affine_inverse() * pie.global_transform.origin`)
+para que acompanen el despliegue, y aplanarlos contra el suelo con el
+mismo metodo quaternion (eje largo del pad → plano horizontal).
+
+### 12.5 Asentado por MEDICION del bounding (nunca constantes magicas)
+
+La altura del modo secundario NO se adivina (`ALTURA_TIERRA = -0.28`
+flotaba 20 cm; v13e). Al aterrizar:
+
+1. Desplegar patas instantaneo (`factor 1.0`).
+2. Medir el punto mas bajo de patas/pies en mundo: recorrer TODOS los
+   descendientes del modelo RECURSIVAMENTE (los pies ya son hijos de
+   las patas tras el re-parenting — v13f solo media hijos directos y
+   los pies quedaban 1 cm enterrados), esquinas del `get_aabb()`
+   transformadas por `global_transform`.
+3. Ajustar `modelo.position.y` para que ese minimo quede a +0.005.
+
+Print obligatorio (`[Gaviota] patas asentadas: min_y X → ajuste +Y`) —
+es la evidencia del asentado en el log de runtime.
+
+### 12.6 Pitch del cuerpo: probar ANTES si la geometria lo permite
+
+Un pitch alto del cuerpo baja TODO lo que apunta atras (cola, puntas
+plegadas). Antes de prometerlo al usuario, medir la diferencia entre el
+minimo de patas/pies y el minimo del resto: si la cola queda POR DEBAJO
+de las patas, o se entierra (asentar por minimo global) o las patas
+flotan (asentar por patas) — no hay tercera opcion. Solucion real: PATAS
+MAS LARGAS en Blender (guia 09 §10.4 regla 5). Gaviota: con patas 0.09
+la cola quedaba 0.20 m bajo las patas (v13f); con 0.18 quedo a +0.05 y
+el cuerpo erguido 0.42 fue posible (v15).
+
+### 12.7 Ajustes iterativos con el usuario (como pedir feedback util)
+
+Presentar SIEMPRE los numeros con la captura ("puntas a −0.20 del
+hombro, cola a 4 cm del suelo") — el usuario decide sobre informacion,
+no sobre fe. Para cada pedido ("mas erguida", "alas mas bajas") hay UNA
+constante y un SNAPSHOT del valor anterior anotado en comentario del
+codigo (`SNAPSHOT v15: 0.10 — volver aca si sale mal`): iterar es
+cambiar un numero y relanzar, no reescribir la logica.
+
+### 12.8 Hop de escalon (modo terrestre en terreno voxel)
+
+Un CharacterBody3D con velocidad 0.8 no sube escalones de 1 m: el hop
+manual tras 0.3 s de muro (`is_on_wall()`) debe tener **apex > escalon
+con margen** y **empuje frontal durante el arco** (sin el, llega a la
+altura del borde y cae antes de cruzar el labio):
+
+```gdscript
+_v_salto = 6.5              # apex ~1.51 m con g manual 14 (escalon 1 m)
+_v_salto -= 14.0 * delta    # gravedad manual del arco
+velocity = dir * vel_caminata * 2.5   # empuje frontal DURANTE el hop
+velocity.y = _v_salto
+# aterrizo el hop: _v_salto < 0 and is_on_floor() → _salto_pendiente=false
+```
+
+Anti-bloqueo: 3 hops sin avanzar → nueva direccion; 3 direcciones →
+despegue. Un solo contador acumulando por FRAME (v8) despegaba al
+instante contra cualquier escalon.
+
+### 12.9 DoD del animal bimodo (verificacion completa)
+
+- [ ] Boot limpio sin parser errors (propios Y ajenos — E-12).
+- [ ] Log de nodos: `2 alas, 2 puntas, 2 patas, 2 pies` resueltos.
+- [ ] DIAG geometrico: puntas de alas detras del cuerpo (rel.x<0) y a la
+      altura objetivo (rel.y); patas verticales (min_y = base del cono,
+      no su centro — si el min_y es el CENTRO la pata quedo acostada).
+- [ ] Asentado medido en runtime (`patas asentadas: min_y → ajuste`).
+- [ ] Ciclo completo EN VIVO 60+ s: vuelo → aterrizaje → caminata
+      plegada (pose secundaria + head-bob) → hops de escalon → despegue.
+- [ ] CERO eventos de bloqueo en terreno razonable (hop sirve).
+- [ ] Captura + aprobacion V1 del usuario de AMBOS modos.
+- [ ] Log en `Logs/` con los valores finales (snapshot) firmado.
+

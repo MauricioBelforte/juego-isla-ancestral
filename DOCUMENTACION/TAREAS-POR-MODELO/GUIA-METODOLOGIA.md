@@ -39,3 +39,10 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 4. Trabajar en bucle con el protocolo estándar (AGENTS.md §6/§21).
 
 **Creadores:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-02 (primero en usar la metodología, con 37 módulos asignados).
+
+## Modelos registrados
+
+| Modelo | Plataforma | Fecha registro | Módulos | Tareas |
+|--------|------------|----------------|---------|--------|
+| deepseek-v4-flash-vision-exp | Kilo Code | 2026-09-02 | 37 | 3.474 |
+| MiMo V2.5 | OpenCode | 2026-09-02 | 8 | 312 |

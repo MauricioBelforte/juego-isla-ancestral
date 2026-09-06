@@ -32,6 +32,20 @@
 
 ---
 
+## Ideas del usuario — 2026-09-03
+
+### 🔴 Alta
+
+- [ ] **Animales con sexo para reproducción.** Los animales del juego deben tener sexo (macho/hembra) para poder reproducirse. La reproducción requiere pareja de distinto sexo. Definir mecánica: tiempo de gestación, crías, si las crías heredan características, límite de población, interactions con el ecosistema. Coherente con M65 (Animales IA) y M36 (Fauna). **Fecha:** 2026-09-03.
+
+- [ ] **Animales dan objetos o habilidades.** Los animales deben dejar objetos al ser criados/interactuados (huevos, leche, pelo, plumas, etc.) o tener habilidades especiales que ayuden al jugador. Estos objetos sirven para misiones, intercambios con NPCs, o crafting. Definir qué animal da qué objeto/frecuencia. Coherente con M15 (catálogo de recursos), M73 (coleccionables), M39 (tiendas). **Fecha:** 2026-09-03.
+
+### 🟡 Media
+
+- [ ] **Jaulas para atrapar animales.** Crear jaulas/contenedores para atrapar animales vivos. Los animales atrapados pueden: (1) intercambiarse con NPCs por objetos valiosos, (2) tenerlos enjaulados en casa del jugador como decoración/mascota, (3) soltarlos para reproducción. Definir: cómo se fabrica la jaula, qué animales se pueden atrapar, si hay límite, interacción con M155 (vestimenta/accesorios) y M19 (NPCs). **Fecha:** 2026-09-03.
+
+---
+
 ## Descubrimientos de auditoría — 2026-08-23
 
 > Revisión exhaustiva de ~30 módulos clave. Los ítems marcados con 🔴 bloquean codificación.
@@ -133,3 +147,61 @@ Los encantamientos son **permanent por herramienta** y se pueden **vender** (dis
 - Si la gente llega a este punto, es porque quiere la posibilidad de luchar
 
 **Fecha:** 2026-08-23. **Acción:** crear módulo dedicado para isla de combate + sistema de gemas + chamán.
+
+---
+
+## Ideas del usuario — 2026-09-03 (continuación)
+
+### 🔴 Alta
+
+- [ ] **Más animales funcionales.** Agregar más especies de animales al juego, cada uno con utilidad única. Ejemplo: el **topo** puede cavar el terreno para el jugador (abrir cuevas, desenterrar recursos). Definir lista completa de animales y sus habilidades/objetos. **Cada isla tendrá animales únicos de su bioma**, lo que incentiva la exploración y viaje entre islas. Los animales tienen sexo (macho/hembra) y se pueden **atrapar con jaulas** en una isla para trasladarlos y reproducirlos en otra isla (ej: atrapar un topo macho en Isla Raíz y una hembra en Isla Ceniza para criar topos en tu granja). Coherente con M65 (Animales IA), M36 (Fauna), M08 (Mundo Voxel). **Fecha:** 2026-09-03.
+
+**Distribución de animales por isla:**
+
+| Isla | Animales exclusivos | Bioma |
+|------|---------------------|-------|
+| Raíz | Topo, Abeja, Lombriz | Tropical/templado |
+| Ceniza | Cuervo, Zorro, Puercoespín | Volcánico/rocoso |
+| Coral | Tortuga marina, Pato, Cangrejo | Costero/marino |
+| Aurora | Venado, Búho, Lobo | Bosque frío/nevado |
+
+**Lista propuesta de animales y utilidades:**
+
+| Animal | Utilidad | Objeto que deja | Isla | Notas |
+|--------|----------|-----------------|------|-------|
+| Topo | Cava terreno (abre cuevas, desenterrar recursos) | Tierra rica, minerales | Raíz | Requiere tier de herramienta alto para desbloquear |
+| Abeja | Polinización (aumenta rendimiento de cultivos cercanos) | Miel, cera | Raíz | Colmena colocable, necesita flores |
+| Lombriz | Aeración de suelo (mejora calidad de tierra de cultivo) | Humus, fertilizante | Raíz | Aparece al cavar tierra |
+| Cuervo | Exploración (muestra mapa temporal de zona cercana) | Plumas, objetos perdidos | Ceniza | Se le da maíz como alimento |
+| Zorro | Rastreo (encuentra objetos ocultos en el suelo) | Pieles, colas | Ceniza | Atraído por comida específica |
+| Puercoespín | Defensa (espanta NPCs hostiles cercanos) | Púas, cerdas | Ceniza | Útil en zonas peligrosas |
+| Tortuga marina | Transporte ligero (porta 1-2 objetos entre orillas) | Caparazón decorativo, huevos | Coral | Ya existe en M36, expandir utilidad |
+| Pato | Pesca auxiliar (atrae peces a la zona) | Plumas, huevos | Coral | Colocable en agua |
+| Cangrejo | Recoge objetos del fondo del mar | Caparazón, pinzas | Coral | Sumergible |
+| Venado | Tiro con arco (dropea carne y cuero al ser cazado con arco) | Cuero, carne, astas | Aurora | Cacería estilo peaceful |
+| Búho | Vigilancia nocturna (detecta eventos nocturnos raros) | Plumas, plumones | Aurora | Activo de noche |
+| Lobo | Guardia (protege granja de depredadores) | Pieles, dientes | Aurora | Necesita domesticación |
+
+- [ ] **Dificultad alta para modificar terreno.** El sistema de modificación de terreno (cavar, construir, moldear) debe tener dificultad MUY ALTA al inicio. El jugador debe subir de tier de herramientas y explorar bastante antes de poder modificar la isla libremente. Esto previene bugs tempranos (modificaciones accidentales del mundo,Softlocks, destrucción de zonas clave). Coherente con M13 (herramientas, tiers T1-T4), M156 (terrenos), M08 (mundo voxel). **Fecha:** 2026-09-03.
+
+### 🟡 Media
+
+- [ ] **Aviso al alejarse nadando.** Cuando el jugador se aleje demasiado de la isla nadando, mostrar un cartel/aviso tipo "¡No puedes alejarte de la isla! Es demasiado peligroso" con efecto visual (niebla, pantalla que se oscurece, oceano profundo). Definir radio de alejamiento máximo y qué pasa si insiste (daño gradual, teletransporte al spawn). Coherente con M08 (mundo voxel), M51 (agua), M11 (personaje). **Fecha:** 2026-09-03.
+
+- [ ] **Identidad visual y ambiental por isla.** Cada isla podría tener sus propios bloques, colores, animales e iluminación o clima diferenciados. Definir si cada isla tiene: paleta propia de bloques/biomas, fauna exclusiva adicional a la distribución actual, iluminación ambiental distinta (hora dorada, neblina, auroras) o clima local opcional a M32. Objetivo: que el jugador perciba claramente que llegó a un lugar diferente sin depender solo de texto. Coherente con M09 (terreno), M27 (islas), M32 (clima), M36/M65 (fauna), M45/M50 (arte/vegetación). **Fecha:** 2026-09-04.
+
+- [ ] **Estandarizar tamaños de objetos.** Buscar un parámetro de medida coherente para todos los objetos del juego. Problemas actuales: las palmeras y árboles se ven chicos, el cangrejo es casi del tamaño de la tortuga. Definir escala de referencia (ej: personaje = 1.8m, palmera = 4-6m, tortuga = 0.8m, cangrejo = 0.2m). Aplicable a M45 (tabla de polígonos/Assets 3D), M36 (Fauna), M50 (Vegetación), M08 (Mundo Voxel). **Fecha:** 2026-09-03.
+
+  - [x] **Implementar tabla EscalasGlobales (M45/M50/M36/M19).** Autoload con tabla data-driven de 43 tipos (vegetación 15, fauna 9, NPCs 8, props 11) en `data/escalas/escalas.json`. Cualquier módulo consulta `EscalasGlobales.escala_de(tipo)`. **Decisión de rendimiento:** exportar GLBs con tamaño correcto desde Blender es lo ideal (normales correctas, colisiones match, física sin bugs); la tabla runtime es el parche pragmático para GLBs existentes. Transición: cuando M166 re-exporte con tamaños correctos → poner entrada a 1.0 → la tabla queda solo para objetos dinámicos. **Fecha:** 2026-09-04. **Log:** 645.
+
+### 🟢 Baja
+
+- [ ] **Cuevas solo accesibles por aberturas naturales.** El terreno será tan duro al inicio que la única forma de entrar en una cueva sea por una abertura natural visible en el mapa. No se podrá cavar libremente para llegar a cuevas. Esto refuerza la mecánica de dificultad alta de terreno y hace que explorar cuevas sea un hallazgo especial. Coherente con M08 (mundo voxel), M156 (terrenos), M13 (herramientas). **Fecha:** 2026-09-03.
+
+- [ ] **Jaulas con datos del animal atrapado.** Las jaulas deben almacenar internamente qué animal contienen (especie, sexo, stats). El jugador puede inspeccionar la jaula para ver qué tiene dentro antes de intercambiar. Esto permite decidir strategicamente qué animales vale la pena atrapar y trasladar. Coherente con M65 (Animales IA), M14 (inventario), M39 (tiendas/intercambios). **Fecha:** 2026-09-03.
+
+- [ ] **Objetos sólidos (árboles, rocas, edificios).** Los árboles, rocas grandes y edificios deben tener colisión sólida para que el jugador no pueda atravesarlos. Refuerza la inmersión y evita bugs de clipping. Coherente con M08 (mundo voxel), M45 (Assets 3D), M11 (personaje). **Fecha:** 2026-09-03.
+
+- [ ] **Bordes suaves en cubos del terreno.** Para diferenciarse de Minecraft, investigar una lógica de "borde suave" (smooth edge) en los cubos visibles del terreno, especialmente en las esquinas donde se notan las caras cuadradas. Opciones: redondear vértices, usar shaders de blending entre bloques, o meshes con esquinas redondeadas. Objetivo: terreno voxel que se vea natural y fluido, no bloqueado. Coherente con M08 (mundo voxel), M156 (terrenos). **Fecha:** 2026-09-03.
+
+- [ ] **Agregar un cerro más alto al terreno.** Añadir una elevación/cerro más alto en el mapa para dar variedad al relieve y crear un punto de referencia visual. Puede servir como zona de desafío o punto de observación. Coherente con M08 (mundo voxel), M156 (terrenos), M160 (ubicaciones). **Fecha:** 2026-09-03.

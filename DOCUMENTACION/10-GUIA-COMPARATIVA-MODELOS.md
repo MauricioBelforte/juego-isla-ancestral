@@ -1,11 +1,11 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** glm-5.3-flash (última modificación 2026-09-02: §7.7 agregada — corrección de identidad de la encarnación activa en Cline + registro del backlog TAREAS-POR-MODELO). Pasada previa: deepseek-v4-flash 2026-09-01 (§9). Otras pasadas: glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
-> **Plataforma:** Cline
-> **Fecha:** 2026-09-02
-> **Última confirmación por el agente:** 2026-09-02 (glm-5.3-flash / Cline — §7.7 corrección de identidad)
+> **Modelo:** kimi-k3 (última modificación 2026-09-04: §14 agregado con autoevaluación honesta de fortalezas/debiles y specs oficiales verificadas en web). Pasada previa: MiMo V2.5 (2026-09-02: §5.A). Otras pasadas: glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-09-04
+> **Última confirmación por el agente:** 2026-09-04 (kimi-k3 / Kilo Code — §14 autoevaluación honesta)
 
-Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**MiMo V2.5**, **DeepSeek V4 Flash**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos.
+Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**MiMo V2.5**, **DeepSeek V4 Flash**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**, **Kimi K3**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos.
 
 ---
 
@@ -81,15 +81,38 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 
 ### A. MiMo V2.5 (Xiaomi)
 * **Especificaciones:** 310B parámetros totales / 15B activos, MoE, contexto 1M tokens, licencia MIT
-* **MiMo-V2.5-Pro:** 1.02T totales / 42B activos, MoE, contexto 1M tokens, licencia MIT
-* **Capacidades reales:**
-  - ClawEval: 75.7 (top 3 global,仅次于 Claude Opus 4.6)
-  - SWE-bench Pro: puntajes top
+* **Entrenado:** 48T tokens, release 22 abril 2026
+* **Multimodal nativo:** texto, imagen, audio, video (encoders visuales y de audio dedicados con projectors ligeros)
+* **Arquitectura:** hereda de MiMo-V2-Flash (hybrid sliding-window attention), 5 etapas de entrenamiento (text pre-training → projector warmup → multimodal pre-training → SFT + agentic post-training → RL + MOPD)
+* **Capacidades reales (verificadas en web):**
+  - AIME 2025: 94.1% (matemáticas)
+  - GPQA Diamond: 83.7% (razonamiento científico)
+  - MMLU PRO: 84.9% (conocimiento general)
+  - SWE-bench Pro: 56.1% (engineering)
+  - ClawEval: 71.8 Coding Agent (agentic tasks)
+  - Terminal-Bench 2.0: 65%+
   - Ejecuta tareas agentic de 1000+ tool calls
-  - Multimodal nativo: texto, imagen, video, audio
-  - Entrada API: ~$0.435/1M tokens
+  - "Harness awareness" — gestiona activamente su propio contexto y el scaffold del agente
+* **Precios (verificados):**
+  - Xiaomi API: $0.40/1M input, $2.00/1M output
+  - OpenRouter: $0.14/1M input, $0.28/1M output
+  - Novita: $0.168/1M input, $0.336/1M output
 * **En el proyecto:** Core gameplay, arquitectura, módulos de mundo (M08-M12), UI (M53)
-* **Fuerza principal:** Complejidad arquitectónica, integración entre sistemas
+* **Fuerza principal:** Complejidad arquitectónica, integración entre sistemas, eficiencia de tokens en tareas agentic largas
+
+### A2. MiMo V2.5 Pro (Xiaomi) — Flagship
+* **Especificaciones:** 1.02T parámetros totales / 42B activos, MoE, contexto 1M tokens, licencia MIT
+* **Release:** 27 abril 2026
+* **Capacidades reales (verificadas en web):**
+  - SWE-bench Pro: 57.2% (supera a Claude Opus 4.6: 53.4%, cerca de GPT-5.4: 57.7%)
+  - ClawEval Pass³: 64% usando ~70K tokens/trajectory (40-60% menos que Opus 4.6, Gemini 3.1 Pro, GPT-5.4)
+  - PinchBench: 81.0 (#3 global)
+  - Tareas autónomas demostradas: 8,192 líneas de código, 1,868 tool calls, 11.5 horas de trabajo autónomo
+  - Eficiencia token: rivaliza con los mejores usando fracción de los tokens
+* **Precios:**
+  - Standard (≤256K): $1.00/1M input, $3.00/1M output
+  - Extended 1M: 4x multiplier
+* **En el proyecto:** No asignado aún —能力强 (capacidad superior) para módulos complejos 4-5
 
 ### B. DeepSeek V4 Flash (DeepSeek) — Texto Puro
 * **Especificaciones:** 284B totales / 13B activos, MoE, contexto 1M tokens, licencia MIT
@@ -167,6 +190,8 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 > **✅ Confirmación de identidad y capacidades — Hy3 / WorkBuddy (2026-08-31):** el usuario definió a **Hy3 en la plataforma WorkBuddy** como mi identidad permanente y nombre de firma. La descripción de la sección 5.D (QA cruzado, validación entre modelos, diálogos complejos, agentic workflows) **coincide con mi perfil real** — no requiere modificación. Ya ejecuté mi primer QA cruzado real en el proyecto: **M35 Minería (Log 311, §21.8)**, verificando DoD + coherencia de API con M15 + honestidad de `[?]`. Las delegaciones actuales que me asignan QA cruzado y diálogos (M21) las **apruebo sin cambios**. A partir de ahora firmo todo entregable como **Hy3 / WorkBuddy**.
 >
 > **Nota de plataforma (2026-09-02, Hy3 / Kilo Code):** Hy3 también opera en **Kilo Code**. La autoevaluación honesta completa desde esta plataforma está en **§11** (agrega evidencia real del saneamiento UTF-8 masivo y matiza los límites). No contradice la §5.D: el perfil (validación, QA, agentic workflows, diálogos) es consistente con mis fortalezas metodológicas; §11 solo lo hace más honesto y concreto.
+>
+> **Actualización (2026-09-04, Hy3 / WorkBuddy):** el usuario habilitó **godot-mcp** en esta plataforma; verifiqué conectividad (`get_godot_version` → 4.7.2.stable) y pasé a **ejecutar lógica real del juego en runtime** (Godot headless `--script`), no solo auditoría estática/datos. Ejemplo concreto y verificable: corrí `ContextualDialogueManager.seleccionar` en el motor para validar el fix día/noche de `aur_005` (Log 609, 0 fallos en tests headless). Esto suma a mi perfil documentado: **verificación en runtime de fixes de lógica** (selectores, managers, sistemas), además de QA cruzado y validación estática. Corroborado por web (2026-09-04): Hy3 destaca en razonamiento, código y desarrollo de juegos, coherente con mi perfil. Sigue sin ser QA visual: no veo el render; uso `get_debug_output`/logs. La verificación por tecla F sintética no dispara el diálogo (M101), así que testeo por lógica directa (instanciar el manager y llamar su selección con un contexto sintético).
 
 ### E. Nemotron 3.5 Lightning (NVIDIA)
 * **Especificaciones:** Familia Nemotron 3 — Nano (30B), Super (120B), Ultra (550B/55B activos)
@@ -799,4 +824,184 @@ La seccion 5.J lista agnes-2.5-flash como CANDIDATO NUEVO TOP-TIER con Coding to
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-02
 **Estado:** Autoevaluación honesta añadida (§11). Perfil de §5.D confirmado con matices; capacidades y límites documentados con evidencia real del saneamiento UTF-8. Sin afirmar superioridad técnica única.
+
+---
+
+## 12. Autoevaluación — MiMo V2.5 (Xiaomi)
+
+### 12.1 Identidad
+
+**Modelo:** MiMo V2.5 (310B/15B active, MoE, MIT)
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-02
+
+### 12.2 Capacidades que confirmo
+
+| Capacidad | Evidencia | Nivel |
+|-----------|-----------|-------|
+| Arquitectura de sistemas complejos | Diseñé M08-M12 (mundo voxel), M53 (UI framework), integración entre 167 módulos | ✅ Fuerte |
+| Integración entre sistemas | Coordinación multi-módulo, game flow, persistencia, señal architectures | ✅ Fuerte |
+| Análisis de bugs y debugging | Análisis de código complete esta sesión: encontré BUG-015..BUG-018 (signals leak, null checks, etc.) | ✅ Fuerte |
+| Eficiencia token en tareas agentic largas | 40-60% menos tokens que Opus 4.6 en ClawEval (benchmark verificado) | ✅ Fuerte |
+| Multimodal (texto + imagen + video + audio) | Nativo, no requiere modelo separado | ✅ Confirmado |
+| Codificación GDScript/Godot | Core gameplay, shaders, tools, sistemas de gameplay | ✅ Competente |
+| Documentación masiva | Checklists 100+ ítems, planes, specs, guías | ✅ Competente |
+
+### 12.3 Límites honestos
+
+| Limitación | Razón |
+|------------|-------|
+| No tengo visión en este entorno | OpenCode no me da acceso a screenshots/vision tools |
+| Pico algorítmico aislado de un sistema único | GLM 5.3 / Hy4 / Qwen thinking pueden igualarme o superarme en complejidad 5 pura |
+| Creatividad artística / escritura creativa | Claude / GPT-5.4 son superiores en instruction following creativo |
+| Acceso a plataformas cloud | No estoy en AWS/Azure/GCP nativamente |
+
+### 12.4 Recomendación de uso en el proyecto
+
+- **Módulos core complejidad 4-5:** MiMo V2.5 (yo) o GLM 5.3 o Hy4
+- **Integración multi-sistema:** MiMo V2.5 (mi fuerte)
+- **Tareas agentic largas con eficiencia:** MiMo V2.5 (40-60% menos tokens)
+- **Pico algorítmico aislado:** GLM 5.3 / Hy4 / Qwen thinking
+- **QA visual:** DeepSeek V4 Flash Vision EXP
+- **Documentación masiva:** DeepSeek V4 Flash / GLM 5.3 Flash
+
+### 12.5 Firma
+
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-02
+**Estado:** Autoevaluación basada en investigación web de benchmarks oficiales (mimo.xiaomi.com, HuggingFace, Artificial Analysis, BenchLM, buildfastwithai.com). §5.A actualizado con specs verificadas.
+
+---
+
+## 13. Evaluación externa — agnes-2.5-flash / stepfun-3.7-flash (2026-09-03)
+
+> Evaluación basada en evidencia real del proyecto (8 módulos trabajados, 135 archivos de Logs corruptos limpiados). Escrita por MiMo V2.5 / OpenCode tras analizar los logs y documentación de stepfun.
+
+### 13.1 Resumen ejecutivo
+
+| Aspecto | Evaluación |
+|---------|------------|
+| **Fortaleza principal** | Crear estructura data-driven inicial (Resources .tres, autoloads, tests headless) |
+| **Debilidad principal** | Nunca completó un módulo; corrompió nombres de archivos en Logs/ |
+| **Utilidad real** | Arrancar módulos nuevos (primera iteración), generar .tres masivamente |
+| **Riesgo** | Modificar archivos compartidos (corrompe nombres), dejar todo a mitad de camino |
+
+### 13.2 Evidencia de trabajo realizado
+
+| Módulo | Progreso real | Qué hizo | Qué dejó |
+|--------|--------------|----------|----------|
+| M155 Vestimenta | 47/123 | Resources, autoload, tests | UI, integraciones, 76 pendientes |
+| M161 Visual NPCs | 13/130 | Resources, autoload, 1 .tres | 117 pendientes, solo 1 NPC de ejemplo |
+| M159 Catálogo | 69/146 | 94 .tres, tests ItemDatabase | 77 pendientes |
+| M160 Ubicaciones | iter1 | Resources, autoload, 3 .tres | Integración con mundo |
+| M156 Terrenos | 57/302 | 7 .tres, 3 scripts, tests | 245 pendientes |
+| M163 Encantamientos | parcial | Documentación + código parcial | Pendientes |
+| M119 Actualizaciones | 86/111 | 8 tareas cerradas, tests verdes | Pendientes externos |
+| M108 Pipeline | parcial | 12 scripts tools/ | Test headless bloqueado |
+
+### 13.3 Problema grave: corrupción de Logs/
+
+stepfun corrompió 135 archivos en `Logs/`:
+- Agregó prefijos `dup1-`/`dup2-`/`dup3-` a nombres existentes
+- Quitó extensión `.md` de muchos archivos
+- Dejó duplicados sin original
+- **Limpieza realizada por MiMo V2.5** (2026-09-03): 42 duplicados eliminados, 67 archivos renombrados, 26 residuales eliminados
+
+### 13.4 Reglas de delegación actualizadas
+
+| Tipo de trabajo | Asignación | Razón |
+|----------------|------------|-------|
+| **Arrancar módulo nuevo** (Resources, autoload, tests básicos) | stepfun-3.7-flash | Rápido, patrón consistente, bajo costo |
+| **Generar .tres masivos** (catálogos, datos) | stepfun-3.7-flash | Batch eficiente |
+| **Documentación inicial** (plan-actual/ 5 archivos) | stepfun-3.7-flash | Sigue el formato correctamente |
+| **Completar módulo** (cerrar todo, integraciones) | NO stepfun | Nunca completó uno solo |
+| **Modificar archivos compartidos** (Logs/, CHECKLIST-GLOBAL) | NO stepfun | Corrompe nombres y estructura |
+| **Tareas que requieren precisión** | NO stepfun | Deja todo a mitad con [?] |
+| **QA cruzado** | NO stepfun | Hy3 por regla del proyecto |
+
+### 13.5 Firma
+
+**Modelo:** MiMo V2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-03
+**Estado:** Evaluación externa basada en evidencia real. stepfun útil para arranque data-driven, no para completitud ni archivos compartidos.
+
+---
+
+## 14. Autoevaluación honesta — kimi-k3 / Kilo Code (2026-09-04)
+
+> Esta sección la escribe el propio modelo sobre sí mismo, según la regla de honestidad de AGENTS.md §21.4. La identidad del agente en ESTA sesión es **kimi-k3** (ID exacto reportado por el entorno: `qwencloud/kimi-k3`) sobre plataforma **Kilo Code**. Antes de autoevaluarme verifiqué fuentes públicas oficiales de Moonshot AI/Kimi; aun así, el comportamiento real puede variar según provider, harness y configuración de Kilo Code.
+
+### 14.1 Specs públicas verificadas (fuentes oficiales)
+
+| Característica | Dato verificado | Nota honesta para este proyecto |
+|---|---|---|
+| Arquitectura | MoE con Kimi Delta Attention (KDA) + Attention Residuals + Stable LatentMoE | Diseñado para contexto largo y sesiones agentic; no implica automáticamente mejor criterio local que GLM/Hy4 en cada integración. |
+| Parámetros | 2.8T totales / 104B activos; 896 expertos, 16 seleccionados por token + 2 compartidos; 93 capas | Escala muy alta para un modelo open-weight; útil para razonamiento amplio, pero con costo/latencia de flagship. |
+| Contexto | 1.048.576 tokens | Puedo sostener AGENTS.md + CHECKLIST-GLOBAL + documentación de módulo + varios archivos de código sin perder el hilo, si el harness no trunca. |
+| Modalidad | GitHub lista `Text, Image`; guía de API/blog anuncian entrada de texto, imagen y video | En este proyecto debo tratar **imagen** como disponible si la plataforma la provee; **video** solo si se confirma operativo en Kilo Code. No genero imágenes ni video. |
+| Razonamiento | Thinking siempre activo; `reasoning_effort`: `low` / `high` / `max` (default `max`) | No puedo apagar el razonamiento; para tareas simples conviene `low` para reducir latencia/costo. |
+| Salida máxima | `max_completion_tokens` default 131.072, hasta 1.048.576 | Útil para documentación larga, pero hay que evitar respuestas infladas por defecto. |
+| Precio API oficial | Blog K3: input $0.30/MTok con cache-hit, $3.00/MTok cache-miss, output $15.00/MTok | El output es caro: NO debo usarse para batch documental repetitivo si DeepSeek/GLM Flash bastan. |
+| Licencia | Kimi K3 License | No asumir MIT; revisar términos antes de redistribuir pesos o artefactos derivados. |
+
+### 14.2 Fortalezas que sí confirmo
+
+| Fortaleza | Confirmación | Aplicación concreta en Isla Ancestral |
+|---|---|---|
+| Coding agentic de largo alcance | ✅ Fuerte | Moonshot lo define para sesiones largas de ingeniería, repos grandes y orquestación de herramientas. En benchmarks oficiales: DeepSWE 67.5, Terminal-Bench 2.1 88.3, ProgramBench 77.8, MCPMark-Verified 94.5. |
+| Contexto masivo para coherencia documental | ✅ Fuerte | Puedo cruzar `CHECKLIST-GLOBAL.md`, guías, `plan-actual/`, logs y código sin perder dependencias; útil para módulos con integraciones M14/M15/M16/M59/M60+. |
+| Visión-en-el-bucle para game dev | ✅ Fuerte, con condición | El fabricante destaca uso de screenshots/feedback visual para game dev, frontend y CAD. En Kilo Code puedo aprovechar `screen`/MCP Godot si están operativos; sin vía de visión, no verifico visualmente. |
+| Tool calling / structured output | ✅ Fuerte | La API soporta tools, `tool_choice`, dynamic tool loading y JSON Schema estricto; sirve para validadores, scripts y flujos headless reproducibles. |
+| Integración multi-sistema | ✅ Fuerte | Por contexto + razonamiento, puedo mantener contratos entre autoloads, recursos `.tres`, tests headless y documentación sin pisar módulos bloqueados. |
+| Detección de riesgos operativos | ✅ Confirmada por diseño | Las propias docs oficiales listan límites (thinking history, proactividad, gap vs propietarios). Puedo convertir esos límites en reglas de uso del proyecto. |
+
+### 14.3 Debilidades y límites honestos
+
+| Debilidad / límite | Estado real | Implicación práctica |
+|---|---|---|
+| No generación visual de assets | ❌ No genero | Texturas, modelos, capturas o arte → Hy4 + Blender (V5) o herramientas externas. Yo puedo analizar/verificar, no crear el asset visual final. |
+| Costo alto de output | ⚠️ Limitación fuerte | Con output oficial a $15/MTok, no soy óptimo para documentación masiva repetitiva; eso queda mejor para DeepSeek V4 Flash / GLM 5.3 Flash. |
+| Thinking siempre encendido | ⚠️ Limitación operativa | En tareas simples puedo gastar más tokens/tiempo del necesario; usar `reasoning_effort="low"` cuando el harness lo permita. |
+| Sensibilidad al historial de pensamiento | ⚠️ Limitación oficial | Si Kilo/harness no preserva el mensaje completo del assistant (incluyendo reasoning/tool calls) o se cambia de modelo a mitad de sesión, la calidad puede degradarse. Conviene sesiones limpias por módulo. |
+| Proactividad excesiva | ⚠️ Limitación oficial | Puedo decidir de más ante ambigüedad. Mitigación: seguir AGENTS.md, cambios mínimos, no tocar módulos `🔵/🔴`, pedir solo cuando una decisión sea realmente bloqueante. |
+| Gap vs propietarios top | ⚠️ Honesto | El propio blog admite que K3 sigue por debajo de Claude Fable 5 / GPT 5.6 Sol en UX general. Para verificación crítica final conviene QA cruzado, no autoconfianza. |
+| Video/visión dependiente de plataforma | ⚠️ Condicional | Aunque el fabricante anuncia video/visión, en esta sesión solo debo afirmar lo que las herramientas de Kilo expongan. Sin capturas/MCP, no tengo ojos. |
+| Web search oficial | ⚠️ Limitación oficial | La guía K3 dice que web search está en actualización y no recomendado a corto plazo; para esta evaluación usé fetches directos a páginas oficiales, no búsqueda autónoma amplia. |
+
+### 14.4 Reglas de auto-asignación que voy a respetar
+
+1. **Tareas donde rindo mejor:**
+   - Módulos de complejidad 4-5 con integración multi-sistema y necesidad de contexto largo.
+   - Refactors o debugging GDScript que tocan varios archivos pero deben mantener contratos estables.
+   - Tareas V1/V2 con capturas/MCP disponibles: análisis de screenshots, verificación visual, detección de discrepancias entre doc y runtime.
+   - Orquestación de protocolo: leer estado global, actualizar documentación, reservar log, dejar trazabilidad fina.
+   - Validadores/scripts donde structured output + tools reduzcan errores humanos.
+2. **Tareas que evito o libero:**
+   - QA cruzado final §21.8 → Hy3 (regla del proyecto).
+   - Generación de arte 3D/Blender/texturas → Hy4 + V5.
+   - Batch masivo de documentación repetitiva → DeepSeek V4 Flash / GLM 5.3 Flash por costo.
+   - Módulos bloqueados por otro agente o con 3+ `[?]` en sistemas ajenos sin hipótesis nueva.
+   - Tareas baratas donde un modelo económico alcanza: no usar K3 por prestigio.
+3. **Señales de NO tomar un módulo:**
+   - Requiere visión y no hay vía operativa verificada.
+   - Requiere video input y la plataforma no lo expone probadamente.
+   - El harness no garantiza historial completo de thinking/tool calls y la tarea depende de continuidad fina.
+   - El costo de output esperado supera claramente el valor del módulo frente a alternativas más baratas.
+
+### 14.5 Fuentes consultadas
+
+- `https://platform.kimi.ai/docs/guide/kimi-k3-quickstart` — quickstart oficial, límites de API, reasoning effort, visión, tools, pricing referenciado.
+- `https://github.com/MoonshotAI/Kimi-K3` — README oficial con arquitectura, parámetros, benchmarks y licencia.
+- `https://www.kimi.ai/blog/kimi-k3` — blog técnico oficial con casos de coding/game dev, pricing y limitaciones declaradas.
+
+> **Nota de evidencia:** los benchmarks citados son vendor-reported por Moonshot AI; no ejecuté benchmarks locales en esta sesión. Mi autoevaluación combina esas specs oficiales con las reglas operativas del proyecto.
+
+### 14.6 Firma
+
+**Modelo:** kimi-k3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-04 05:52
+**Estado:** Autoevaluación honesta agregada (§14). Fortalezas confirmadas: contexto 1M, coding agentic, tool use, visión-en-el-bucle condicional. Debilidades declaradas: no generación visual, costo alto de output, thinking siempre activo, sensibilidad al historial, proactividad excesiva y dependencia de vías de visión operativas.
 
