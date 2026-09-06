@@ -48,5 +48,16 @@ func _run() -> void:
 	_check("Aplicador: factor texto grande = 1.25", absf(aplicador.factor_texto(config_grande) - 1.25) < 0.001)
 	_check("Aplicador: config válida", aplicador.config_valida(config))
 
+
+	# aplicacion real a un Label (M58 iter 3)
+	var label := Label.new()
+	label.add_theme_font_size_override("font_size", 16)
+	var aplicador_ui = load("res://scripts/accesibilidad/aplicador_accesibilidad.gd")
+	var ok_aplicado: bool = aplicador_ui.aplicar_texto(label, config, 16)
+	_check("Aplicacion UI: label con factor (16 -> 16)", ok_aplicado and label.get_theme_font_size("font_size") == 16)
+	var config_grande2: Dictionary = config.duplicate()
+	config_grande2["tamano_texto"] = "grande"
+	aplicador_ui.aplicar_texto(label, config_grande2, 16)
+	_check("Aplicacion UI: grande (16 -> 20)", label.get_theme_font_size("font_size") == 20)
 	print("=== Resumen M58: %d checks, %d fallos ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)

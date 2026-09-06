@@ -34,6 +34,10 @@ func _run() -> void:
 	_test_copyright_year()
 	_test_validacion()
 	_test_senales()
+	_test_busqueda()
+	_test_scroll_automatico()
+	_test_accesibilidad()
+	_test_traducir_titulo()
 	_summary()
 
 func _check(cond: bool, nombre: String, detalle: String = "") -> void:
@@ -127,6 +131,67 @@ func _test_senales() -> void:
 	_mgr.cambiar_idioma("es")
 	_check(n_cambios_seccion[0] >= 2, "seccion_cambiada emitida >= 2 veces (got %d)" % n_cambios_seccion[0])
 	_check(n_cambios_idioma[0] >= 2, "idioma_cambiado emitida >= 2 veces (got %d)" % n_cambios_idioma[0])
+
+## ── Tests M131 iter 2 (minimax-m3) ─────────────────────────
+
+func _test_busqueda() -> void:
+	# Busqueda vacia: 0 matches
+	_check(_mgr.buscar("").size() == 0, "buscar('') = 0 matches")
+	# Busqueda por entrada: "Desarrollo" en seccion desarrollo
+	var matches_d: Array = _mgr.buscar("desarrollo")
+	_check(matches_d.size() > 0, "buscar('desarrollo') encuentra matches (got %d)" % matches_d.size())
+	# El primer match tiene seccion_id = 'desarrollo'
+	if matches_d.size() > 0:
+		_check(String(matches_d[0].get("seccion_id", "")) == "desarrollo", "primer match = 'desarrollo'")
+	# Busqueda por titulo: "musica" matchea seccion musica
+	var matches_m: Array = _mgr.buscar("musica")
+	_check(matches_m.size() > 0, "buscar('musica') encuentra matches (got %d)" % matches_m.size())
+	# Busqueda case-insensitive
+	var matches_caps: Array = _mgr.buscar("QA")
+	_check(matches_caps.size() > 0, "buscar('QA') case-insensitive encuentra matches")
+	# Sin matches
+	var matches_none: Array = _mgr.buscar("xyznoexiste123")
+	_check(matches_none.size() == 0, "buscar('xyznoexiste123') = 0 matches")
+	# Matches ordenados por score
+	if matches_d.size() >= 2:
+		var first_score: int = int(matches_d[0].get("matches", 0))
+		var last_score: int = int(matches_d[-1].get("matches", 0))
+		_check(first_score >= last_score, "resultados ordenados por score (primero %d >= ultimo %d)" % [first_score, last_score])
+
+func _test_scroll_automatico() -> void:
+	_mgr.ir_a_seccion(0)
+	# Velocidad > 0 y no estamos al final
+	var ok: bool = _mgr.scroll_automatico(1.0)
+	_check(ok, "scroll_automatico(1.0) retorna true")
+	_check(_mgr.obtener_seccion_actual().get("id", "") == "musica", "scroll avanzo a 'musica' (got '%s')" % String(_mgr.obtener_seccion_actual().get("id", "")))
+	# Velocidad <= 0: false
+	var no_ok: bool = not _mgr.scroll_automatico(0.0)
+	_check(no_ok, "scroll_automatico(0.0) = false")
+
+func _test_accesibilidad() -> void:
+	# color_contraste_accesible: fondo oscuro -> texto blanco
+	var c_oscuro: Color = _mgr.color_contraste_accesible(Color(0.1, 0.1, 0.1))
+	_check(c_oscuro.r > 0.8, "fondo oscuro: texto claro (r=%.2f)" % c_oscuro.r)
+	# Fondo claro -> texto oscuro
+	var c_claro: Color = _mgr.color_contraste_accesible(Color(0.9, 0.9, 0.9))
+	_check(c_claro.r < 0.2, "fondo claro: texto oscuro (r=%.2f)" % c_claro.r)
+	# Tamano de fuente base: minimo 12
+	_check(_mgr.tamano_fuente_base(1.0) >= 12, "tamano_fuente_base(1.0) >= 12")
+	_check(_mgr.tamano_fuente_base(1.5) == 24, "tamano_fuente_base(1.5) = 24 (got %d)" % _mgr.tamano_fuente_base(1.5))
+	# Minimo 12 incluso con escala baja
+	_check(_mgr.tamano_fuente_base(0.5) >= 12, "tamano_fuente_base(0.5) >= 12 (minimo)")
+
+func _test_traducir_titulo() -> void:
+	# Helper interno (pero accesible)
+	var titulo_es: String = _mgr._traducir_titulo("desarrollo")
+	_check(titulo_es == "Desarrollo", "_traducir_titulo('desarrollo') en es = 'Desarrollo'")
+	_mgr.cambiar_idioma("en")
+	var titulo_en: String = _mgr._traducir_titulo("desarrollo")
+	_check(titulo_en == "Development", "_traducir_titulo('desarrollo') en en = 'Development'")
+	_mgr.cambiar_idioma("es")
+	# ID no existente: fallback
+	var titulo_fallback: String = _mgr._traducir_titulo("id_inexistente")
+	_check(titulo_fallback == "", "_traducir_titulo('id_inexistente') = vacio")
 
 func _summary() -> void:
 	print("=== Resumen M131 iter 2: %d checks, %d fallos ===" % [_checks, _fallos])

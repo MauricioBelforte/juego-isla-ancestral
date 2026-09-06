@@ -89,6 +89,16 @@ func obtener_secciones() -> Array:
 	"""Devuelve copia del array de secciones."""
 	return _secciones.duplicate()
 
+func _traducir_titulo(id_seccion: String) -> String:
+	"""Devuelve el titulo traducido de una seccion segun el idioma actual."""
+	if _titulos_traducidos.has(_idioma) and _titulos_traducidos[_idioma].has(id_seccion):
+		return _titulos_traducidos[_idioma][id_seccion]
+	# Fallback: devuelve el titulo del JSON
+	for sec in _secciones:
+		if String(sec.get("id", "")) == id_seccion:
+			return String(sec.get("titulo", ""))
+	return ""
+
 func obtener_seccion(idx: int) -> Dictionary:
 	"""Devuelve la sección por indice (con título traducido)."""
 	if idx < 0 or idx >= _secciones.size():
@@ -122,8 +132,102 @@ func siguiente_seccion() -> bool:
 func seccion_anterior() -> bool:
 	return ir_a_seccion(_seccion_actual - 1)
 
+## ── M131 iter 2 (minimax-m3) ─────────────────────────────────────────────
+
+# Busqueda data-driven: filtra entradas por texto, rol, o equipo.
+# RF-iter2: Sistema de busqueda en creditos (C del plan-actual).
+# Devuelve Array de Dictionary: [{seccion_id, seccion_titulo, entrada, matches: int}]
+func buscar(query: String) -> Array:
+	"""Busca por query en nombre de entrada, rol y titulo de seccion.
+	Devuelve lista de matches ordenados por relevancia.
+	Iter 2: normaliza acentos para que 'musica' matchee 'Música'."""
+	if query.strip_edges() == "":
+		return []
+	var q: String = _normalize(query.to_lower())
+	var matches: Array = []
+	for sec in _secciones:
+		var sec_id: String = String(sec.get("id", ""))
+		var sec_titulo: String = String(sec.get("titulo", ""))
+		var sec_titulo_translated: String = _traducir_titulo(sec_id)
+		for entrada in sec.get("entradas", []):
+			var entrada_str: String = _normalize(String(entrada).to_lower())
+			var score: int = 0
+			if entrada_str.contains(q):
+				score += 10
+			if _normalize(sec_titulo.to_lower()).contains(q):
+				score += 5
+			if _normalize(sec_titulo_translated.to_lower()).contains(q):
+				score += 5
+			if score > 0:
+				matches.append({
+					"seccion_id": sec_id,
+					"seccion_titulo": sec_titulo_translated,
+					"entrada": String(entrada),
+					"matches": score,
+				})
+	# Ordenar por score descendente
+	matches.sort_custom(func(a, b): return int(a.get("matches", 0)) > int(b.get("matches", 0)))
+	return matches
+
+## Normaliza acentos (NFD + quitar combining marks). Util para busqueda.
+func _normalize(texto: String) -> String:
+	var t: String = texto
+	# Mapeo manual de acentos comunes (mas simple que NFD en GDScript)
+	t = t.replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
+	t = t.replace("à", "a").replace("è", "e").replace("ì", "i").replace("ò", "o").replace("ù", "u")
+	t = t.replace("ä", "a").replace("ë", "e").replace("ï", "i").replace("ö", "o").replace("ü", "u")
+	t = t.replace("â", "a").replace("ê", "e").replace("î", "i").replace("ô", "o").replace("û", "u")
+	t = t.replace("ñ", "n").replace("ç", "c")
+	return t
+
+# Scroll automatico (RF-iter2: D del plan-actual)
+# Avanza la seccion actual a la velocidad dada (ms por seccion).
+# Devuelve true si avanzo, false si llego al final.
+func scroll_automatico(velocidad_s: float) -> bool:
+	if velocidad_s <= 0.0:
+		return false
+	if _seccion_actual >= _secciones.size() - 1:
+		return false
+	# En produccion: tween, timer, etc. Iter 2: solo avanza
+	return siguiente_seccion()
+
+# Color de texto con contraste accesible (M58)
+# Devuelve Color blanco o negro segun luminancia del fondo.
+func color_contraste_accesible(fondo: Color) -> Color:
+	# Misma formula que M115 hardware_manager.cumple_requisitos_recomendados
+	var lum: float = 0.2126 * fondo.r + 0.7152 * fondo.g + 0.0722 * fondo.b
+	if lum < 0.5:
+		return Color(1.0, 1.0, 1.0)  # blanco
+	return Color(0.05, 0.05, 0.05)  # casi negro
+
+# Tamano de fuente base ajustable (L del plan-actual)
+# escala: 1.0 = base, 1.5 = 50% mas grande
+func tamano_fuente_base(escala: float = 1.0) -> int:
+	return maxi(int(round(16.0 * escala)), 12)
+
 func obtener_idioma() -> String:
 	return _idioma
+
+## Alias para consistencia con checklist (RF6)
+func obtener_idioma_actual() -> String:
+	return obtener_idioma()
+
+## RF: obtener lista de contribuyentes (todos los nombres de todas las secciones)
+func obtener_contribuyentes() -> Array[String]:
+	var result: Array[String] = []
+	for sec in _secciones:
+		for entrada in sec.get("entradas", []):
+			var s := String(entrada)
+			if s not in result:
+				result.append(s)
+	return result
+
+## RF: obtener lista de assets de terceros (seccion assets_terceros)
+func obtener_assets_terceros() -> Array[Dictionary]:
+	for sec in _secciones:
+		if String(sec.get("id", "")) == "assets_terceros":
+			return sec.get("entradas", [])
+	return []
 
 func cambiar_idioma(nuevo: String) -> bool:
 	"""RF4: conmuta entre es/en. Devuelve true si cambio."""

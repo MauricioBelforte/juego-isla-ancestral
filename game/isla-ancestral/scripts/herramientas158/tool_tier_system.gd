@@ -43,11 +43,45 @@ var _cursos_aprendidos: Dictionary = {}
 ## conteo de forjas realizadas
 var _forjas_count: int = 0
 
+## ── Iter. 2 (Log 610): ShopVisitorManager + JarManager ──
+var _shop_visitor: Node = null
+var _jar_manager: RefCounted = null
+
 
 func _ready() -> void:
 	_cargar_config()
 	_registrar_proveedor_guardado()
+	_setup_iter2()
 	print("[M158] ToolTierSystem listo: %d tiers, %d gates, %d forjas, %d cursos" % [_tiers.size(), _gates.size(), _forjas.size(), _cursos.size()])
+
+
+func _setup_iter2() -> void:
+	# ShopVisitorManager (Node interno, no autoload — mismo proceso)
+	var sv_script := load("res://scripts/herramientas158/shop_visitor.gd")
+	if sv_script != null:
+		_shop_visitor = Node.new()
+		_shop_visitor.set_script(sv_script)
+		_shop_visitor.name = "ShopVisitor"
+		add_child(_shop_visitor)
+	# JarManager (RefCounted puro)
+	var jar_script := load("res://scripts/herramientas158/jar_manager.gd")
+	if jar_script != null:
+		_jar_manager = jar_script.new()
+	# Hook de visitas diarias vía day_started (M29)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null and bus.calendar != null and bus.calendar.has_signal("day_started"):
+		bus.calendar.day_started.connect(func(dia: int, _estacion: String):
+			if _shop_visitor != null and _shop_visitor.has_method("intentar_visita_diaria"):
+				_shop_visitor.intentar_visita_diaria(dia))
+
+
+## API de delegación para M53/M57 (visitante de hoy)
+func shop_visitor() -> Node:
+	return _shop_visitor
+
+
+func jar_manager() -> RefCounted:
+	return _jar_manager
 
 
 func _cargar_config() -> void:
@@ -279,13 +313,19 @@ func get_section_name() -> String:
 
 
 func get_save_data() -> Dictionary:
-	return {
+	var data := {
 		"version": 1,
 		"tier_max": _tier_max.duplicate(),
 		"gates_abiertos": _gates_abiertos.keys(),
 		"cursos": _cursos_aprendidos.keys(),
 		"forjas_count": _forjas_count,
 	}
+	# Iter. 2 (Log 610): persistencia de visitante y jarrones
+	if _jar_manager != null and _jar_manager.has_method("get_save_data"):
+		data["jarrones"] = _jar_manager.get_save_data()
+	if _shop_visitor != null:
+		data["ultimo_dia_visita"] = int(_shop_visitor.get("_ultimo_dia_visita"))
+	return data
 
 
 func restore_save_data(data: Dictionary) -> void:
@@ -312,4 +352,9 @@ func restore_save_data(data: Dictionary) -> void:
 		else:
 			print("[M158] Curso de catálogo viejo ignorado: %s" % cid)
 	_forjas_count = int(data.get("forjas_count", 0))
+	# Iter. 2 (Log 610): restaurar jarrones y visitante
+	if _jar_manager != null and _jar_manager.has_method("restore_save_data"):
+		_jar_manager.restore_save_data(data.get("jarrones", {}))
+	if _shop_visitor != null and data.has("ultimo_dia_visita"):
+		_shop_visitor.set("_ultimo_dia_visita", int(data.get("ultimo_dia_visita", -1)))
 	# NUNCA re-emitir señales de estado restaurado (§2.3 estilo M71)

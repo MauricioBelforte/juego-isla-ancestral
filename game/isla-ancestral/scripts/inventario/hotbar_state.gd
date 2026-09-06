@@ -19,7 +19,8 @@ var slots: Array = [-1, -1, -1, -1, -1, -1]
 var slot_activo: int = -1
 ## Contador de esporas de luz (RF H6: "contador global consultable por M55")
 var esporas_contador: int = 0
-## Ultima vez que se uso el item activo (timestamp unix, para feedback UI)
+## Ultima vez que se uso el item activo (segundos de motor, para feedback UI)
+## Fix C56 (M30 re-auditoría, Log 429): reloj del SO prohibido en gameplay.
 var ultimo_uso_timestamp: float = 0.0
 
 func _ready() -> void:
@@ -52,7 +53,7 @@ func seleccionar(hotbar_idx: int) -> bool:
 	if slot_activo == hotbar_idx:
 		return false
 	slot_activo = hotbar_idx
-	ultimo_uso_timestamp = _tiempo_unix()
+	ultimo_uso_timestamp = _tiempo_actual_s()
 	return true
 
 ## Cicla al siguiente slot (tecla tab o rueda del mouse).
@@ -61,12 +62,12 @@ func ciclar(delta: int) -> int:
 		slot_activo = 0
 	else:
 		slot_activo = ((slot_activo + delta) % HOTBAR_SIZE + HOTBAR_SIZE) % HOTBAR_SIZE
-	ultimo_uso_timestamp = _tiempo_unix()
+	ultimo_uso_timestamp = _tiempo_actual_s()
 	return slot_activo
 
 ## Registra uso del item activo (decrementar durabilidad via InventarioService).
 func registrar_uso() -> void:
-	ultimo_uso_timestamp = _tiempo_unix()
+	ultimo_uso_timestamp = _tiempo_actual_s()
 
 ## Incrementa el contador de esporas (RF H6).
 ## Devuelve el nuevo total.
@@ -104,9 +105,13 @@ func restore_save_data(data: Dictionary) -> void:
 
 ## ── Helpers ────────────────────────────────────────────────
 
-func _tiempo_unix() -> float:
-	# Mismo patron que M36: unix time real (no ticks del motor)
-	return Time.get_unix_time_from_system()
+func _tiempo_actual_s() -> float:
+	# Fix C56 (M30 re-auditoría, Log 429): el reloj del SO está PROHIBIDO en
+	# gameplay (regla de oro del módulo 30; el scan caso_reloj_tests.gd lo
+	# detecta y hacía fallar el check). El valor no se persiste ni alimenta
+	# lógica (solo feedback UI de sesión), así que ticks del motor preservan
+	# el comportamiento observable. Ver 07-GUIA-GODOT §9.64.
+	return float(Time.get_ticks_msec()) / 1000.0
 
 func _get_save_manager() -> Node:
 	return Engine.get_main_loop().root.get_node_or_null("SaveManager")

@@ -126,9 +126,10 @@ func _tr_clave(clave: String, params: Dictionary = {}, n: int = -1) -> String:
 	if _cache.has(cache_key):
 		return _cache[cache_key]
 	var texto := _buscar_texto(clave, n)
-	# Inyectar {n} del plural si no viene en params
+	# Inyectar {n} del plural si no viene en params. n=-1 significa "sin plural";
+	# cualquier otro valor (0, 1, 2, -3...) activa la rama plural.
 	var params_final := params.duplicate()
-	if n >= 0 and not params_final.has("n"):
+	if n != -1 and not params_final.has("n"):
 		params_final["n"] = n
 	var resuelto := format_text(texto, params_final)
 	_cache[cache_key] = resuelto
@@ -142,7 +143,7 @@ func traducir_clave(clave: String, params: Dictionary = {}, n: int = -1) -> Stri
 ## Busca en el catálogo activo; si falta, en español; si falta, la clave literal.
 func _buscar_texto(clave: String, n: int) -> String:
 	# Plurales primero: las claves plural viven en _plural_forms, no en mensajes.
-	if n >= 0:
+	if n != -1:
 		var plural_data = _plural_forms.get(_locale_actual, {})
 		if plural_data.has(clave):
 			var formas: Array = plural_data[clave]
@@ -168,8 +169,14 @@ func _buscar_texto(clave: String, n: int) -> String:
 	return str(texto)
 
 ## Reemplaza {param} por su valor; claves sin valor quedan literales (warning dev).
+## Robusto ante placeholder mal formado (T-085): "{sin_cierre" no rompe la UI.
 func format_text(texto: String, params: Dictionary) -> String:
 	var resultado := texto
+	# Detección de cierres fantasma: si hay "{" sin "}" la línea queda literal
+	# (no se intenta reemplazar para no generar basura). Advertencia dev.
+	if texto.count("{") != texto.count("}"):
+		push_warning("[M87] Placeholder mal formado en: " + texto)
+		return resultado
 	for clave in params:
 		resultado = resultado.replace("{" + clave + "}", str(params[clave]))
 	return resultado
@@ -187,7 +194,7 @@ func format_hora(hora: int, minuto: int) -> String:
 
 ## ── Validación de catálogos (RF21) ───────────────────────
 
-## Devuelve lista de claves faltantes entre idiomas (activio vs español).
+## Devuelve lista de claves faltantes entre idiomas (activo vs español).
 func validar_catalogos() -> Array:
 	var faltantes: Array = []
 	var es: Dictionary = _catalogs.get(LOCALE_DEFECTO, {})
@@ -200,7 +207,33 @@ func validar_catalogos() -> Array:
 				faltantes.append(locale + ":" + str(clave))
 	return faltantes
 
+## Estado completo de los catálogos (RF21 ampliado): por idioma devuelve
+## {total, faltantes (vs español), vacias (msgstr ""), ok}. Útil para dev/CI
+## y para el 07-Resultados-Testings: valida cobertura real de traducción.
+func obtener_estado_catalogos() -> Dictionary:
+	var estado := {}
+	var es: Dictionary = _catalogs.get(LOCALE_DEFECTO, {})
+	for locale in LOCALES_SOPORTADOS:
+		var cat: Dictionary = _catalogs.get(locale, {})
+		var faltantes: Array = []
+		var vacias: Array = []
+		for clave in es:
+			if not cat.has(clave):
+				faltantes.append(str(clave))
+			elif str(cat[clave]).strip_edges().is_empty():
+				vacias.append(str(clave))
+		estado[locale] = {
+			"total": cat.size(),
+			"faltantes": faltantes,
+			"vacias": vacias,
+			"ok": faltantes.is_empty() and vacias.is_empty(),
+		}
+	return estado
+
 ## ── Parseo .po (RF5, RF10, RN10) ─────────────────────────
+## Robusto ante catálogos corruptos (T-084): un .po con msgstr[ sin índice,
+## sin cierre o con índices absurdos NO debe tumbar el arranque; el parseo
+## degrada con gracia (línea omitida + warning) conservando el resto.
 
 ## Devuelve {mensajes: {clave: texto}, plural_func: {clave: [formas]}}
 func _parse_po(path: String) -> Dictionary:
@@ -232,8 +265,11 @@ func _parse_po(path: String) -> Dictionary:
 			clave_actual = _quitar_comillas(resto)
 			en_plural = false
 		elif linea.begins_with("msgstr["):
-			var idx := int(linea.substr(7, 1))
-			var resto := linea.split("]", 1)[1].strip_edges()
+			var idx := _indice_msgstr(linea)
+			if idx < 0:
+				push_warning("[M87] .po corrupto: msgstr[ malformado omitido -> " + linea)
+				continue
+			var resto := _resto_msgstr(linea)
 			var valor := _quitar_comillas(resto)
 			while idx >= formas_actuales.size():
 				formas_actuales.append("")
@@ -253,6 +289,27 @@ func _parse_po(path: String) -> Dictionary:
 	if clave_actual != "" and en_plural and not formas_actuales.is_empty():
 		plurales[clave_actual] = formas_actuales
 	return {"mensajes": mensajes, "plural_func": plurales}
+
+## Extrae el índice numérico de "msgstr[N]"; -1 si es inválido (sin N, N no
+## numérico, sin cierre ']'). Tope defensivo de 8 formas (nplurals realistas).
+func _indice_msgstr(linea: String) -> int:
+	var resto := linea.substr(7)   # tras "msgstr[" (7 chars: m s g s t r [)
+	var cierre := resto.find("]")
+	if cierre <= 0:
+		return -1
+	var idx_txt := resto.substr(0, cierre).strip_edges()
+	if not idx_txt.is_valid_int():
+		return -1
+	var idx := int(idx_txt)
+	return idx if idx >= 0 and idx < 8 else -1
+
+## Devuelve el texto (con o sin comillas) tras "msgstr[N]" o vacío.
+func _resto_msgstr(linea: String) -> String:
+	var resto := linea.substr(7)   # tras "msgstr["
+	var cierre := resto.find("]")
+	if cierre == -1:
+		return ""
+	return resto.substr(cierre + 1).strip_edges()
 
 func _quitar_comillas(s: String) -> String:
 	var t := s.strip_edges()

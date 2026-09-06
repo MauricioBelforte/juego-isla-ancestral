@@ -69,7 +69,10 @@ func crear_cofre(tipo: String, posicion: Vector3) -> StringName:
 		"size": COFRE_TAMANOS[tipo],
 		"tipo": tipo,
 		"contenido": [],  # Array de {item_id, cantidad}
-		"creado": Time.get_unix_time_from_system(),
+		# Fix C56 (M30 re-auditoría, Log 429): reloj del SO prohibido en gameplay
+		# (regla de oro M30). "creado" no se persiste ni se consume -> segundos
+		# de motor. Ver 07-GUIA-GODOT §9.64.
+		"creado": Time.get_ticks_msec() / 1000.0,
 	}
 	# Duck-typing a M17: si existe ChestManager, registrar alli tambien
 	var m17 := _get_node_or_null("/root/ChestManager")
