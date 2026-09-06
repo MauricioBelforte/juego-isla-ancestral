@@ -1,6 +1,0 @@
-workbuddy · M16 (solo assets 3D) · 2026-09-04
-Herramientas en mano: hacha de hierro, martillo, azada, machete.
-Misc representable: gema tallada, frasco de agua, bowl de barro.
-NOTA: reserva solo sobre AUTORÍA 3D en tools/mcp/blender-mcp. El código de
-crafting (M16 lógica) NO está incluido; la reserva 513 de step-3.7-flash se
-considera obsoleta (contador en 678, sin flag "Reclamado" en la fila).

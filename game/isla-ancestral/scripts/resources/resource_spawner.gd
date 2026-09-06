@@ -63,10 +63,10 @@ func instanciar_nodo(def_id: StringName, x: float, z: float, _terreno: Node = nu
 	if def == null:
 		return -1
 	var node := ResourceNode.new()
-	node.configurar(def)
 	node.name = "Recurso_" + str(def_id) + "_" + str(_next_id)
 	node.agotado.connect(_on_nodo_agotado)
-	add_child(node)  # primero al árbol, luego posicionar (global_position necesita tree)
+	add_child(node)  # primero al árbol: configurar() usa get_tree() para M47
+	node.configurar(def)
 	# Posicionar con TerrainLocator (anti-flotamiento) si existe
 	var locator = _buscar_terreno_locator()
 	var y: float = 30.0

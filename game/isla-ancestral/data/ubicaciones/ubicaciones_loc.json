@@ -1,0 +1,528 @@
+{
+  "version": 2,
+  "descripcion": "Catalogo LOC-* data-driven (M160 iter. 5). Los .tres en data/locations/ tienen prioridad; este JSON agrega las ubicaciones faltantes y sus conexiones. Objetos con id del catalogo M159 (data/items/). regeneracion_seg aplica a recolectables; herramienta/tier_minimo por objeto (tiers M158: T1_COBRE..T4_CRISTAL).",
+  "ubicaciones": [
+    {
+      "id": "LOC-RIZ-TAL-001", "nombre": "Carpinteria", "isla": "RIZ", "tipo": "tal",
+      "descripcion": "Taller del carpintero de la Isla Raiz. Aqui se recibe el hacha T1 de regalo.",
+      "tags": ["taller", "economia"], "npcs": ["NPC-CARPINTERO-001"], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-TAL-001", "recolectable": false},
+        {"id_objeto": "OBJ-TAL-002", "recolectable": false},
+        {"id_objeto": "OBJ-TAL-003", "recolectable": false},
+        {"id_objeto": "OBJ-HER-001", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-PUER-001", "nombre": "Puerto", "isla": "RIZ", "tipo": "puer",
+      "descripcion": "Embarcadero de la Isla Raiz. Punto de partida de los viajes (M28).",
+      "tags": ["puerto", "viaje"], "npcs": ["NPC-PATRON-001"], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PUB-001", "LOC-RIZ-PLA-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-001", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-002", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-003", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-004", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-BOS-001", "nombre": "Bosque Principal", "isla": "RIZ", "tipo": "bos",
+      "descripcion": "Bosque denso al norte del pueblo. Primer lugar de recoleccion de madera.",
+      "tags": ["naturaleza", "recoleccion"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PUB-001", "LOC-RIZ-BOS-002", "LOC-RIZ-RUI-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "grass", "recolectable": true, "regeneracion_seg": 120},
+        {"id_objeto": "clay", "recolectable": true, "regeneracion_seg": 180},
+        {"id_objeto": "mud", "recolectable": true, "regeneracion_seg": 180},
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "OBJ-EXT-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-BOS-002", "nombre": "Claros del Bosque", "isla": "RIZ", "tipo": "bos",
+      "descripcion": "Claros soleados entre los arboles. Hierbas y musgo abundantes.",
+      "tags": ["naturaleza", "recoleccion"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-BOS-001", "LOC-RIZ-BOS-003"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "grass", "recolectable": true, "regeneracion_seg": 120},
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "OBJ-NAT-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-BOS-003", "nombre": "Arbol Grande", "isla": "RIZ", "tipo": "bos",
+      "descripcion": "Arbol milenario al fondo del bosque. Sus ramas gruesas exigen un hacha mejorada.",
+      "tags": ["naturaleza", "hito"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-BOS-002"],
+      "requisitos": {"herramienta_minima": "hacha", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Hacha en mano para talar ramas gruesas"},
+      "objetos": [
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 480, "herramienta": "hacha", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "OBJ-NAT-003", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-PLA-001", "nombre": "Playa Principal", "isla": "RIZ", "tipo": "pla",
+      "descripcion": "Playa de arena blanca al sur del pueblo. Bordes del muelle del puerto.",
+      "tags": ["naturaleza", "recoleccion"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PUER-001", "LOC-RIZ-PLA-002"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "sand", "recolectable": true, "regeneracion_seg": 120},
+        {"id_objeto": "clay", "recolectable": true, "regeneracion_seg": 180},
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-PLA-002", "nombre": "Cueva de la Playa", "isla": "RIZ", "tipo": "cue",
+      "descripcion": "Gruta abierta en el acantilado de la playa. Refugio y trampas de arena.",
+      "tags": ["naturaleza", "cueva"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PLA-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "copper_ore", "recolectable": true, "regeneracion_seg": 360, "herramienta": "pico", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-CUE-001", "nombre": "Cueva de Tutorial", "isla": "RIZ", "tipo": "cue",
+      "descripcion": "Cueva guiada cerca del pueblo. El jugador aprende a minar aqui.",
+      "tags": ["tutorial", "cueva", "recoleccion"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre (tutorial)"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "copper_ore", "recolectable": true, "regeneracion_seg": 360, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "gravel", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-RIZ-RUI-001", "nombre": "Ruinas Antiguas", "isla": "RIZ", "tipo": "rui",
+      "descripcion": "Restos de una plaza ancestral al fondo del bosque. Guarda un cristal antiguo.",
+      "tags": ["ruinas", "puzzle"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-RIZ-BOS-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre (puzzle M25 dentro)"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "mud", "recolectable": true, "regeneracion_seg": 180},
+        {"id_objeto": "ancient_crystal", "recolectable": true, "regeneracion_seg": 1800, "herramienta": "pico", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-COR-PUB-001", "nombre": "Plaza del Puerto", "isla": "COR", "tipo": "pub",
+      "descripcion": "Plaza elevada sobre el puerto tropical. Corazon comercial de la Isla Coral.",
+      "tags": ["pueblo", "isla_coral"], "npcs": ["NPC-GUIA-COR-001"], "ampliable": false,
+      "conexiones": ["LOC-COR-PUER-001", "LOC-COR-TIE-001", "LOC-COR-TIE-002", "LOC-COR-TAL-001", "LOC-COR-CASA-001", "LOC-COR-SEL-001", "LOC-COR-PLA-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Viaje desbloqueado (M28)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-002", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-003", "recolectable": false},
+        {"id_objeto": "OBJ-PLA-002", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-004", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-005", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-004", "recolectable": false},
+        {"id_objeto": "OBJ-PLA-003", "recolectable": false},
+        {"id_objeto": "OBJ-CUA-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-TIE-001", "nombre": "Ferreteria", "isla": "COR", "tipo": "tie",
+      "descripcion": "Herramientas y materiales de construccion del arrecife.",
+      "tags": ["tienda", "isla_coral"], "npcs": ["NPC-FERRETERO-001"], "ampliable": false,
+      "conexiones": ["LOC-COR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-HER-002", "recolectable": false},
+        {"id_objeto": "OBJ-HER-003", "recolectable": false},
+        {"id_objeto": "OBJ-HER-004", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-001", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-TIE-002", "nombre": "Pescaderia", "isla": "COR", "tipo": "tie",
+      "descripcion": "Pescado fresco del arrecife y equipo de pesca avanzada.",
+      "tags": ["tienda", "isla_coral"], "npcs": ["NPC-PESCADERO-001"], "ampliable": false,
+      "conexiones": ["LOC-COR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-ITE-003", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-004", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-005", "recolectable": false},
+        {"id_objeto": "OBJ-COC-001", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-TAL-001", "nombre": "Herreria", "isla": "COR", "tipo": "tal",
+      "descripcion": "Taller del herrero del arrecife. Forja de tier T3_ORO.",
+      "tags": ["taller", "isla_coral"], "npcs": ["NPC-HERRERO-001"], "ampliable": false,
+      "conexiones": ["LOC-COR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-TAL-004", "recolectable": false},
+        {"id_objeto": "OBJ-TAL-005", "recolectable": false},
+        {"id_objeto": "OBJ-HER-005", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-003", "recolectable": false},
+        {"id_objeto": "OBJ-CON-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-CASA-001", "nombre": "Casa del Herrero", "isla": "COR", "tipo": "casa",
+      "descripcion": "Vivienda junto a la herreria, abierta al mar.",
+      "tags": ["casa", "isla_coral"], "npcs": [], "ampliable": true,
+      "conexiones": ["LOC-COR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-MES-002", "recolectable": false},
+        {"id_objeto": "OBJ-MES-003", "recolectable": false},
+        {"id_objeto": "OBJ-COC-002", "recolectable": false},
+        {"id_objeto": "OBJ-PLA-003", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-004", "recolectable": false},
+        {"id_objeto": "OBJ-CUA-001", "recolectable": false},
+        {"id_objeto": "OBJ-ALF-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-PUER-001", "nombre": "Puerto Tropical", "isla": "COR", "tipo": "puer",
+      "descripcion": "Embarcadero entre palmeras. Conecta la Isla Coral con el archipielago (M28).",
+      "tags": ["puerto", "viaje", "isla_coral"], "npcs": ["NPC-PATRON-COR-001"], "ampliable": false,
+      "conexiones": ["LOC-COR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Viaje desbloqueado (M28)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-001", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-003", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-004", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-SEL-002", "nombre": "Cataratas", "isla": "COR", "tipo": "sel",
+      "descripcion": "Cascadas que caen del monte vigia hacia la laguna. Cristales en la niebla.",
+      "tags": ["naturaleza", "recoleccion", "isla_coral"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-COR-SEL-001", "LOC-COR-MON-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "OBJ-NAT-004", "recolectable": false},
+        {"id_objeto": "OBJ-NAT-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-PLA-001", "nombre": "Playa de Coral", "isla": "COR", "tipo": "pla",
+      "descripcion": "Playa de arena rosa al pie de la plaza del puerto.",
+      "tags": ["naturaleza", "isla_coral"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-COR-PUB-001", "LOC-COR-PLA-002"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "sand", "recolectable": true, "regeneracion_seg": 120},
+        {"id_objeto": "glass", "recolectable": true, "regeneracion_seg": 300},
+        {"id_objeto": "OBJ-EXT-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-COR-PLA-002", "nombre": "Arrecife", "isla": "COR", "tipo": "pla",
+      "descripcion": "Arrecife visible con marea baja. Cristales marinos y gemas.",
+      "tags": ["naturaleza", "recoleccion", "isla_coral"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-COR-PLA-001", "LOC-COR-CUE-001"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico para extraer del arrecife"},
+      "objetos": [
+        {"id_objeto": "sand", "recolectable": true, "regeneracion_seg": 120},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "gemstone", "recolectable": true, "regeneracion_seg": 900, "herramienta": "pico", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-COR-CUE-001", "nombre": "Cueva del Coral", "isla": "COR", "tipo": "cue",
+      "descripcion": "Galeria inundada bajo el arrecife. Cristales fosforescentes.",
+      "tags": ["cueva", "recoleccion", "isla_coral"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-COR-PLA-002"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico para excavar la entrada"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "gemstone", "recolectable": true, "regeneracion_seg": 900, "herramienta": "pico", "tier_minimo": "T1_COBRE"}
+      ]
+    },
+    {
+      "id": "LOC-COR-MON-001", "nombre": "Monte Vigia", "isla": "COR", "tipo": "mon",
+      "descripcion": "Mirador natural sobre las cataratas. Ve toda la Isla Coral.",
+      "tags": ["naturaleza", "hito", "isla_coral"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-COR-SEL-002"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "iron_ore", "recolectable": true, "regeneracion_seg": 480, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "OBJ-NAT-003", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-PUB-001", "nombre": "Plaza de la Forja", "isla": "CEN", "tipo": "pub",
+      "descripcion": "Plaza dominada por chimeneas de piedra volcánica.",
+      "tags": ["pueblo", "isla_ceniza"], "npcs": ["NPC-GUIA-CEN-001"], "ampliable": false,
+      "conexiones": ["LOC-CEN-PUER-001", "LOC-CEN-TIE-001", "LOC-CEN-TAL-001", "LOC-CEN-CASA-001", "LOC-CEN-BOS-001", "LOC-CEN-MON-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Viaje desbloqueado (M28)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-002", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-005", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-003", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-004", "recolectable": false},
+        {"id_objeto": "OBJ-CON-001", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-006", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-TIE-001", "nombre": "Tienda de Minerales", "isla": "CEN", "tipo": "tie",
+      "descripcion": "Compraventa de menas y gemas extraidas de la montana.",
+      "tags": ["tienda", "isla_ceniza"], "npcs": ["NPC-MINERO-001"], "ampliable": false,
+      "conexiones": ["LOC-CEN-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-ITE-020", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-021", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-022", "recolectable": false},
+        {"id_objeto": "OBJ-HER-001", "recolectable": false},
+        {"id_objeto": "OBJ-HER-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-TAL-001", "nombre": "Herreria Avanzada", "isla": "CEN", "tipo": "tal",
+      "descripcion": "Forja de hierro T2_HIERRO. Mejores herramientas del archipielago temprano.",
+      "tags": ["taller", "isla_ceniza"], "npcs": ["NPC-HERRERO-CEN-001"], "ampliable": false,
+      "conexiones": ["LOC-CEN-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-TAL-001", "recolectable": false},
+        {"id_objeto": "OBJ-TAL-002", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-005", "recolectable": false},
+        {"id_objeto": "OBJ-CON-002", "recolectable": false},
+        {"id_objeto": "OBJ-HER-003", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-CASA-001", "nombre": "Casa del Herrero Avanzado", "isla": "CEN", "tipo": "casa",
+      "descripcion": "Vivienda de piedra negra junto a la herreria avanzada.",
+      "tags": ["casa", "isla_ceniza"], "npcs": [], "ampliable": true,
+      "conexiones": ["LOC-CEN-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-MES-004", "recolectable": false},
+        {"id_objeto": "OBJ-MES-005", "recolectable": false},
+        {"id_objeto": "OBJ-COC-003", "recolectable": false},
+        {"id_objeto": "OBJ-PLA-004", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-006", "recolectable": false},
+        {"id_objeto": "OBJ-CUA-002", "recolectable": false},
+        {"id_objeto": "OBJ-ALF-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-PUER-001", "nombre": "Puerto Minero", "isla": "CEN", "tipo": "puer",
+      "descripcion": "Embarcadero de troncos oscuros. Carga y descarga de mineral.",
+      "tags": ["puerto", "viaje", "isla_ceniza"], "npcs": ["NPC-PATRON-CEN-001"], "ampliable": false,
+      "conexiones": ["LOC-CEN-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Viaje desbloqueado (M28)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-002", "recolectable": false},
+        {"id_objeto": "OBJ-EXT-003", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-003", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-MON-002", "nombre": "Mina Abandonada", "isla": "CEN", "tipo": "cue",
+      "descripcion": "Galeria antigua en las faldas del volcan. Vetas de hierro ricas.",
+      "tags": ["mina", "recoleccion", "isla_ceniza"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-CEN-MON-001"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico en mano (tier T2 recomendado)"},
+      "objetos": [
+        {"id_objeto": "iron_ore", "recolectable": true, "regeneracion_seg": 480, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "copper_ore", "recolectable": true, "regeneracion_seg": 360, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "gravel", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "gemstone", "recolectable": true, "regeneracion_seg": 900, "herramienta": "pico", "tier_minimo": "T2_HIERRO"}
+      ]
+    },
+    {
+      "id": "LOC-CEN-BOS-001", "nombre": "Bosque de Cenizas", "isla": "CEN", "tipo": "bos",
+      "descripcion": "Arboles petrificados cubiertos de ceniza fértil.",
+      "tags": ["naturaleza", "recoleccion", "isla_ceniza"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-CEN-PUB-001", "LOC-CEN-CUE-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "mud", "recolectable": true, "regeneracion_seg": 180},
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "OBJ-NAT-001", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-CEN-CUE-001", "nombre": "Cueva de Minerales", "isla": "CEN", "tipo": "cue",
+      "descripcion": "Cueva fria entre la ceniza. Menas de hierro en las paredes.",
+      "tags": ["cueva", "recoleccion", "isla_ceniza"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-CEN-BOS-001", "LOC-CEN-CUE-002"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico en mano"},
+      "objetos": [
+        {"id_objeto": "iron_ore", "recolectable": true, "regeneracion_seg": 480, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "gravel", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T1_COBRE"},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T2_HIERRO"}
+      ]
+    },
+    {
+      "id": "LOC-CEN-CUE-002", "nombre": "Cueva Profunda", "isla": "CEN", "tipo": "cue",
+      "descripcion": "El nivel mas profundo de la mina. Gemas y hielo volcanico.",
+      "tags": ["cueva", "recoleccion", "isla_ceniza"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-CEN-CUE-001", "LOC-CEN-RUI-001"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico tier T2 requerido"},
+      "objetos": [
+        {"id_objeto": "gemstone", "recolectable": true, "regeneracion_seg": 900, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "ice", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T2_HIERRO"}
+      ]
+    },
+    {
+      "id": "LOC-CEN-RUI-001", "nombre": "Ruinas de la Forja", "isla": "CEN", "tipo": "rui",
+      "descripcion": "Herreros antiguos forjaban aqui. Sus hornos guardan un cristal antiguo.",
+      "tags": ["ruinas", "puzzle", "isla_ceniza"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-CEN-CUE-002"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico para abrir el acceso"},
+      "objetos": [
+        {"id_objeto": "stone", "recolectable": true, "regeneracion_seg": 240, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "ancient_crystal", "recolectable": true, "regeneracion_seg": 1800, "herramienta": "pico", "tier_minimo": "T2_HIERRO"},
+        {"id_objeto": "OBJ-SEC-004", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-PUB-001", "nombre": "Plaza Ancestral", "isla": "AUR", "tipo": "pub",
+      "descripcion": "Plaza flotante de piedra luminosa. Ultimo pueblo del viaje.",
+      "tags": ["pueblo", "isla_aurora"], "npcs": ["NPC-GUIA-AUR-001"], "ampliable": false,
+      "conexiones": ["LOC-AUR-PUER-001", "LOC-AUR-TIE-001", "LOC-AUR-TAL-001", "LOC-AUR-CASA-001", "LOC-AUR-SEL-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Viaje desbloqueado (M28)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EXT-002", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-006", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-003", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-004", "recolectable": false},
+        {"id_objeto": "OBJ-CON-005", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-TIE-001", "nombre": "Tienda de Encantamientos", "isla": "AUR", "tipo": "tie",
+      "descripcion": "Reactivos raros y ropas encantadas del archipielago celestial.",
+      "tags": ["tienda", "isla_aurora"], "npcs": ["NPC-ENCANTADOR-001"], "ampliable": false,
+      "conexiones": ["LOC-AUR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-ITE-023", "recolectable": false},
+        {"id_objeto": "OBJ-ITE-024", "recolectable": false},
+        {"id_objeto": "OBJ-ROP-001", "recolectable": false},
+        {"id_objeto": "OBJ-ROP-002", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-TAL-001", "nombre": "Taller del Encantador", "isla": "AUR", "tipo": "tal",
+      "descripcion": "Cristaleria T4_CRISTAL. Ultima forja del juego.",
+      "tags": ["taller", "isla_aurora"], "npcs": ["NPC-CRISTALERO-001"], "ampliable": false,
+      "conexiones": ["LOC-AUR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-EVE-003", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-004", "recolectable": false},
+        {"id_objeto": "OBJ-EVE-005", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-006", "recolectable": false},
+        {"id_objeto": "OBJ-CON-003", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-CASA-001", "nombre": "Casa del Encantador", "isla": "AUR", "tipo": "casa",
+      "descripcion": "Vivienda de cristal suspendida sobre las auroras.",
+      "tags": ["casa", "isla_aurora"], "npcs": [], "ampliable": true,
+      "conexiones": ["LOC-AUR-PUB-001"],
+      "requisitos": {"herramienta_minima": "", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Acceso libre"},
+      "objetos": [
+        {"id_objeto": "OBJ-MES-006", "recolectable": false},
+        {"id_objeto": "OBJ-MES-007", "recolectable": false},
+        {"id_objeto": "OBJ-COC-004", "recolectable": false},
+        {"id_objeto": "OBJ-PLA-003", "recolectable": false},
+        {"id_objeto": "OBJ-CUA-003", "recolectable": false},
+        {"id_objeto": "OBJ-ALF-001", "recolectable": false},
+        {"id_objeto": "OBJ-LUZ-002", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-SEL-001", "nombre": "Selva Ancestral", "isla": "AUR", "tipo": "sel",
+      "descripcion": "Bosque luminoso que rodea el templo de la aurora.",
+      "tags": ["naturaleza", "recoleccion", "isla_aurora"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-AUR-PUB-001", "LOC-AUR-TEM-001", "LOC-AUR-CUE-001"],
+      "requisitos": {"herramienta_minima": "hacha", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Hacha para abrirse paso"},
+      "objetos": [
+        {"id_objeto": "wood", "recolectable": true, "regeneracion_seg": 300, "herramienta": "hacha", "tier_minimo": "T3_ORO"},
+        {"id_objeto": "moss", "recolectable": true, "regeneracion_seg": 240},
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T3_ORO"},
+        {"id_objeto": "OBJ-NAT-002", "recolectable": false},
+        {"id_objeto": "OBJ-NAT-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-TEM-002", "nombre": "Templo del Sol", "isla": "AUR", "tipo": "tem",
+      "descripcion": "Primer templo del circuito ancestral. Su sello abre el camino a la luna.",
+      "tags": ["templo", "puzzle", "isla_aurora"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-AUR-CUE-001", "LOC-AUR-TEM-003"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico tier T3 (sello ancestral M25)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EVE-001", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-001", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-002", "recolectable": false},
+        {"id_objeto": "OBJ-CON-004", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-TEM-003", "nombre": "Templo de la Luna", "isla": "AUR", "tipo": "tem",
+      "descripcion": "Segundo templo del circuito. Refleja la luz del sol hacia el archivo.",
+      "tags": ["templo", "puzzle", "isla_aurora"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-AUR-TEM-002", "LOC-AUR-RUI-001"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico tier T3 (requiere sello del sol)"},
+      "objetos": [
+        {"id_objeto": "OBJ-EVE-002", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-003", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-004", "recolectable": false},
+        {"id_objeto": "OBJ-CON-005", "recolectable": false}
+      ]
+    },
+    {
+      "id": "LOC-AUR-CUE-001", "nombre": "Cueva de las Estrellas", "isla": "AUR", "tipo": "cue",
+      "descripcion": "Cueva con cristales que replican el cielo nocturno.",
+      "tags": ["cueva", "recoleccion", "isla_aurora"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-AUR-SEL-001", "LOC-AUR-TEM-002"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Pico tier T3 requerido"},
+      "objetos": [
+        {"id_objeto": "crystal", "recolectable": true, "regeneracion_seg": 600, "herramienta": "pico", "tier_minimo": "T3_ORO"},
+        {"id_objeto": "gemstone", "recolectable": true, "regeneracion_seg": 900, "herramienta": "pico", "tier_minimo": "T3_ORO"},
+        {"id_objeto": "ancient_crystal", "recolectable": true, "regeneracion_seg": 1800, "herramienta": "pico", "tier_minimo": "T3_ORO"}
+      ]
+    },
+    {
+      "id": "LOC-AUR-RUI-001", "nombre": "Ruinas del Archivo", "isla": "AUR", "tipo": "rui",
+      "descripcion": "Biblioteca ancestral en ruinas. Relata el origen de los cuatro sellos.",
+      "tags": ["ruinas", "lore", "isla_aurora"], "npcs": [], "ampliable": false,
+      "conexiones": ["LOC-AUR-TEM-003"],
+      "requisitos": {"herramienta_minima": "pico", "costo_entrada": 0, "items_requeridos": [], "descripcion": "Requiere sellos del sol y la luna (M25)"},
+      "objetos": [
+        {"id_objeto": "OBJ-CUA-004", "recolectable": false},
+        {"id_objeto": "OBJ-SEC-005", "recolectable": false},
+        {"id_objeto": "ancient_crystal", "recolectable": true, "regeneracion_seg": 1800, "herramienta": "pico", "tier_minimo": "T3_ORO"}
+      ]
+    }
+  ]
+}

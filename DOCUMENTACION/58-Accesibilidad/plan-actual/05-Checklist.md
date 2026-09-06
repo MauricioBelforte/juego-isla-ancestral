@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 58: Accesibilidad
@@ -39,7 +39,7 @@
 
 ## C. RF — Área auditiva (13)
 
-- [ ] RF8: subtítulos activos por defecto en diálogos y eventos ambientales [S]
+- [x] RF8: subtítulos activos por defecto en diálogos y eventos ambientales [S] — Log 727: SUBTITULOS_DEFECTO en AccesibilityManager (true/mediano/fondo) + get_subtitulos()
 - [x] RF8: definir opciones de tamaño, fondo y velocidad de subtítulos (integra M91) [M]
 - [ ] RF9: definir indicadores visuales (rizos/anillos) para sonidos no visualizables [M]
 - [ ] RF9: cubrir insectos, agua, cofres y cantos de NPC con indicador visual [M]
@@ -56,15 +56,15 @@
 ## D. RF — Área motora (17)
 
 - [x] RF13: consumir la capa de acciones remapeables de M57 (nunca scancodes) [S]
-- [ ] RF13: definir perfiles de control accesibles: single_hand y low_mobility [M]
+- [x] RF13: definir perfiles de control accesibles: single_hand y low_mobility [M] — Log 727: PERFILES_CONTROL data-driven (remap + mantener automático + multiplicador de tiempos) + aplicar_perfil_control()/get_remap_control()
 - [x] RF14: definir modo retención/alternancia por acción (correr, agachar, mirar) [M]
 - [x] RF15: definir asistencia de puntería 0–100 % (pesca, minería, combate) [C]
 - [x] RF15: garantizar 0 % = experiencia clásica sin ninguna corrección [M]
 - [x] RF15: definir magnetismo solo hacia el blanco más cercano dentro de amortiguador [M]
 - [x] RF16: permitir desactivar vibración y feedback háptico por completo [S]
 - [ ] RF17: exponer dead zones, sensibilidad por eje e inversión como accesos directos (M57) [M]
-- [ ] RF18: pausa inmediata con un único botón desde cualquier estado [M]
-- [ ] RF18: garantizar pausa sin diálogos intermedios durante gameplay [S]
+- [x] RF18: pausa inmediata con un único botón desde cualquier estado [M] — Log 727: pausar_instantaneo() (get_tree().paused, idempotente) + pausa_instantanea_activada() para overlay M53
+- [x] RF18: garantizar pausa sin diálogos intermedios durante gameplay [S] — Log 727: la pausa congela el árbol directamente (sin menús); reanudar() + esta_pausado()
 - [ ] Definir que los presets de control se carguen y persistan por jugador [M]
 - [ ] Definir que el remapeo respete los conflictos detectados por M57 [M]
 - [x] Garantizar que los inputs alternados no penalicen la precisión de puntería [M]
@@ -233,3 +233,26 @@
 - [x] `scripts/accesibilidad/aplicador_accesibilidad.gd` — AplicadorAccesibilidad: aplicar_texto(label, config, base) y aplicar_contraste(factor a Color)
 - [x] Test 13/13 (incluye aplicación real a un Label: medio 16→16, grande 16→20)
 - [x] La config de accesibilidad queda conectada al render de texto (los consumidores M53 pueden llamar `aplicar_texto` en sus labels)
+
+## Notas del Agente — iter. 2 (2026-09-06 04:10, RF8 + RF13 + RF18)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 04:10
+**Estado:** Parcial (131/183 — RF1/RF8/RF13/RF18/RF19/RF21 cerrados en manager)
+
+### Lo que hice
+- **RF8 subtítulos por defecto:** SUBTITULOS_DEFECTO (activado/mediano/fondo) aplicado al cargar y por defecto en _cargar_perfil; set_subtitulos()/set_subtitulos_tamano()/get_subtitulos() + señal subtitulos_changed para M53/M150.
+- **RF13 perfiles de control:** PERFILES_CONTROL data-driven con 3 presets (estandar/single_hand/low_mobility) con remap de acciones, mantener automático y multiplicador de tiempos (1.0/1.5/2.0); aplicar_perfil_control()/get_remap_control()/mantener_automatico()/tiempo_mantener_multiplicador() + señal control_changed.
+- **RF18 pausa instantánea:** pausar_instantaneo() (congela el árbol, idempotente, sin menús intermedios), reanudar(), esta_pausado(), señal pausa_instantanea_activada para el overlay de M53.
+- Test extendido: test_accesibilidad_manager.gd con 14 checks nuevos de iter. 2 → **0 fallos** (total iter1+iter2). Regresión test_accesibilidad_headless.gd: 13/13 OK.
+- Checklist: 127 → 131 [x].
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- El remap de control aún no reescribe InputMap en runtime (los presets definen el mapeo data-driven; la reasignación de teclas físicas toca M57 y su InputMap — siguiente iteración con dueño M57).
+- El overlay visual de la pausa instantánea es de M53 (la señal ya existe para conectarlo).
+
+### Recomendaciones para el próximo agente
+- Conectar subtitulos_changed al DialogLayer (M53) para que muestre/oculte subtítulos según el perfil.
+- Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
+- El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.

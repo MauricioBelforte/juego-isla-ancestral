@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 45: Arte 3D
@@ -241,3 +241,38 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Iteración 1 — Jugador voxel (2026-09-06 15:30, glm-5.3-flash / Kilo Code)
+
+- [x] Script generador tools/mcp/blender-mcp/scripts-reutilizables/crear_jugador_voxel.py (bpy, voxels 0.1m, 18 de alto = 1.8m) [M]
+- [x] Diseño Stardew cozy: cabeza 6×6×6 (piel+pelo marrón con flequillo), torso 8×4×6 (camisa verde pastel), brazos 2×2×5 con manos en piel, piernas 3×3×5 (pantalón azul), zapatos marrones, 2 ojos oscuros [M]
+- [x] GLB exportado: assets/3d/media/45-Arte3D_jugador_voxel.glb (altura verificada 1.800m al reimportar) [S]
+- [x] Render de verificación CYCLES-CPU (render_jugador_voxel.py): render_jugador_voxel_v1.png — estilo cozy confirmado [S]
+- [x] Integración Godot: Player.tscn usa ModeloVoxel (instancia GLB) + BodyCollision cápsula; respaldo del tscn anterior en Obsoletos/2026-09-06_15-25-00_Player.tscn [S]
+- [x] main_island.gd _setup_player_visual: override azul omitido si existe ModeloVoxel (log confirma "[M08] Jugador voxel M45 en uso") [S]
+- [x] Verificación en juego: capturas/45/cap_45_2026-09-06_15-25-34_jugador_voxel_en_juego.png — voxel visible con colores correctos [M]
+- [x] Regresión: TEST M31 0 fallos + boot completo sin SCRIPT ERROR [S]
+- [ ] Animaciones (idle/caminar) sobre el modelo voxel — M48 AnimationService, siguiente iteración [M]
+- [x] Confirmación estética final del usuario (propongo captura + render v1) [S] — ✅ usuario 2026-09-06 20:46: 'el pelo está bien' (válido para el modelo voxel con pelo v2)
+
+### Notas del Agente — iter. 1
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 15:30
+**Estado:** Iteración completada (jugador voxel reemplaza a la cápsula azul)
+
+#### Lo que hice
+- Modelo voxel por cajas (no voxel a voxel: cajas de N voxels = 1 mesh por parte, 17 meshes totales, shade_flat). E-68 respetado: cube(size) con scale = dimensiones finales.
+- Base 0.8m × 0.4m (misma huella que la cápsula 0.8m), altura 1.8m = 18 voxels, origen en la base.
+- El GLB se importa con +Y arriba (yup) y Godot lo rota a Z-up automáticamente — el modelo queda de pie sin rotación manual.
+- El override azul de M08 ahora es condicional (retro-compatible si alguien revierte al BodyMesh).
+
+#### Recomendaciones para el próximo agente
+- Para animar: los 17 meshes tienen nombres (pierna_izq, brazo_der...) — usables como huesos dummy para rotación de partes sin rig completo.
+- El script crear_jugador_voxel.py es la plantilla para NPCs voxel (mismos materiales, cambiar camisa/pelo/altura).
+## Fix usuario 1 — pelo del jugador (2026-09-06 17:43, glm-5.3-flash / Kilo Code)
+
+- [x] El pelo interfería con la cabeza (solapes pelo_top/cabeza z 1.7-1.8 + laterales 1×6×3 envolviendo media cara) — rediseñado: gorro fino 7×7×1 POR ENCIMA (z 1.8-1.9, sin solapar), nuca 7×1×2 atrás, patillas 1×1×2 solo mitad trasera [S] — Log 736
+- [x] GLB regenerado + reimport con pipeline de cache (.scn + .import borrados → --import) [S] — Log 736
+- [x] Verificación: render CYCLES + captura en juego tercera persona — cara limpia [S] — capturas/45/

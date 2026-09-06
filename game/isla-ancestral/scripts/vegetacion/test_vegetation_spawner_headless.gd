@@ -25,7 +25,7 @@ func _check(nombre: String, cond: bool) -> void:
 func _run() -> void:
 	print("=== [M50] Test del spawner (GLB del plan) ===")
 	var plan: Array = PLAN.generar_plan(Vector2(256, 256), 256.0, 42)
-	_check("Plan de 45 ítems", plan.size() == 45)
+	_check("Plan de 45+ ítems (109 con cercanias_spawn, Log 644)", plan.size() >= 45)
 	var existentes := 0
 	var faltantes := 0
 	for item in plan:

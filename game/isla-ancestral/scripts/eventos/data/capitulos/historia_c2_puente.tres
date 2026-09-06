@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c2_puente"
+tipo = 5
+nombre_clave = &"eventos.historia_c2_nombre"
+descripcion_clave = &"eventos.historia_c2_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 6 * 60
+hora_fin = 20 * 60
+dias_aviso = 1
+prioridad = 200
+flags = {"capitulo": 2, "historia": true, "gatillo": "puente_mar"}

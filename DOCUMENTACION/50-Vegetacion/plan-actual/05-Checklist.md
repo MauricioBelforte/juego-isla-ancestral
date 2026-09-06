@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 50: Vegetación
@@ -243,3 +243,32 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - Respaldos en Obsoletos/ para rollback
 - **Iter. 9 (Log 715, glm-5.3-flash/Kilo Code):** feedback usuario — flor x3 (2.4m), hierba baja (0.15m runtime), lianas x2 (4m), helecho_gigante 0.8m, helecho_chico 0.35m. 4 GLBs horneados en Blender + escalas.json ajustado. Boot sin errores.
 
+
+## Iteración 10 — Verificación visual de escalas + horneado GLBs (2026-09-06 15:15, glm-5.3-flash / Kilo Code)
+
+- [x] Capturas de verificación en juego cerca de 6 tipos (autoload temporal teleport + viewport PNG, eliminado al finalizar) [M]
+- [x] Medición Blender headless de 10 GLBs: arbol_frutal=10.9m, arbusto_redondo=12.2m (¡gigante!), arbusto_floral=5.2m, flor_isla=1.4m, hierba_alta=1.0m, helecho_chico=2.1m, helecho_gigante=1.9m, palmera_joven=5.5m, palmera=9.6m, palmera_inclinada=9.6m [M]
+- [x] Script reutilizable tools/mcp/blender-mcp/scripts-reutilizables/reescalar_v5.py: hornea altura objetivo (respaldo Obsoletos/ + asentar base Z=0 + verificación reimport) [C]
+- [x] 10/10 GLBs horneados a su altura objetivo (arbol_frutal 6.0, flor_isla 1.2 aprobados por usuario; resto normalizado a proporciones del plan) [C]
+- [x] Verificación visual post-horneado: arbol_frutal 6m exacto, arbusto_redondo ~1m, flor_isla ~1.2m — capturas verif3_* en capturas/50/ [M]
+- [x] FIX de pipeline: al reemplazar GLBs hay que borrar .godot/imported/*.scn + los .glb.import (hash viejo) y reimportar con --import antes de relanzar [M]
+- [x] Tests actualizados al diseño real (Log 644): plan >=45 ítems + 6 biomas (7 checks 0 fallos), plan determinista (5/0), spawner (5/0) [S]
+- [ ] escalas.json a 1.0 definitivo para los 10 tipos horneados (dejar 1.0 evita doble escala; pendiente edición fina por usuario) [S]
+- [ ] Revisión visual final del usuario (propongo capturas verif3_*) [S]
+
+### Notas del Agente — iter. 10
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 15:15
+**Estado:** Iteración completada (escala base normalizada; ajuste fino por usuario pendiente)
+
+#### Lo que hice
+- Verifiqué en juego con capturas (teleport cerca de cada tipo) y medí con Blender headless los 10 GLBs: 6 de 10 estaban fuera de proporción (el peor: arbusto_redondo a 12.2m — 7× el jugador).
+- Creé reescalar_v5.py (reutilizable, patrón E-45 headless) que hornea la altura objetivo: respaldo automático a Obsoletos/, escala con factor objetivo/alto, transform_apply, base asentada en Z=0, export GLB y re-verificación midiendo el archivo. 10/10 OK.
+- Descubrí el pipeline de cache: reemplazar un GLB no basta — Godot sirve el .scn viejo de .godot/imported si el hash del .import coincide mal; hay que borrar .scn + .import y pasar --import. Lo aprendí tras 1 captura "idéntica" post-cambio.
+- Los 3 tests de vegetación estaban desactualizados vs el diseño del Log 644 (45→109 ítems, 5→7 biomas): actualizados, 3/3 en verde.
+
+#### Recomendaciones para el próximo agente
+- Cualquier reemplazo de GLB: borrar .godot/imported/*nombre*.scn + *.glb.import → godot --headless --import → relanzar.
+- El patrón del autoload temporal de verificación (teleport + viewport PNG) es el mejor método para verificar escala con visión; reutilizarlo para NPCs/props.

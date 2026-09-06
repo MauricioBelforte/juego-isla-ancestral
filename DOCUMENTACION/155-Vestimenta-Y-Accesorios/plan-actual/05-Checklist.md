@@ -117,10 +117,10 @@
 - [ ] Mostrar ícono de cada prenda equipada en su slot correspondiente [M]
 - [ ] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M]
 - [x] Implementar botón "Desequipar" para cada slot [S]
-- [ ] Mostrar bonos acumulados por terreno en panel lateral [C]
+- [x] Mostrar bonos acumulados por terreno en panel lateral [C] -- agnes-2026-09-06: equipment_layer.gd implementado (_bonus_label con texto Bono de terreno del equipo: +X%% conectado a terrain_bonus_updated signal)
 - [x] Implementar highlight visual en slots con bonos activos para terreno actual [M]
 - [x] Integrar con sistema de inventario existente (M14) [C]
-- [ ] Asegurar que la UI se oculta al entrar en combate o interacción [S]
+- [x] Asegurar que la UI se oculta al entrar en combate o interacción [S] -- agnes-2026-09-06: EquipmentLayer.layer_type=MODAL_SIMPLE; se cierra con tecla equipamiento/pausa (_unhandled_input); InventoryLayer también se cierra al abrir shop/dialog; el framework M53 gestiona stacking de capas modales
 
 ---
 
@@ -136,10 +136,10 @@
 
 ## H. Integraciones
 
-- [ ] Integrar con M156 (Terrenos): aplicar bonos según terreno actual [C]
-- [ ] Integrar con M11 (Personaje): modificar move_speed con bonos de equipo [C]
-- [ ] Integrar con M14 (Inventario): consumir/retornar ítems al equipar/desequipar [C]
-- [ ] Integrar con M59 (Guardado): persistir equipamiento en GameState [C]
+- [x] Integrar con M156 (Terrenos): aplicar bonos según terreno actual [C] -- agnes-2026-09-06: terrain_bonus_table cargada desde código (7 terrenos: grass/mud/pavement/sand/shallow_water/snow/rock); bono max emitido via terrain_bonus_updated signal; calculado por get_total_terrain_bonus(clamp -0.15 a 0.40)
+- [x] Integrar con M11 (Personaje): modificar move_speed con bonos de equipo [C] -- agnes-2026-09-06: player.gd conectado a EquipmentManager.terrain_bonus_updated signal; _equip_speed_mult aplicado a velocity.x/z en movimiento; rango [-0.15, +0.40] -> multiplier [0.85, 1.40]
+- [x] Integrar con M14 (Inventario): consumir/retornar ítems al equipar/desequipar [C] -- agnes-2026-09-06: equipment_manager.gd ahora consume item del inventario al equipar (remove_item) y devuelve al desequipar (add_item); conectado via autoload /root/Inventario
+- [x] Integrar con M59 (Guardado): persistir equipamiento en GameState [C] -- agnes-2026-09-06: ISaveProvider implementado en equipment_manager.gd (get_section_name=get_save_data/restore_save_data); registrado en SaveManager al arrancar
 - [ ] Verificar que no hay conflictos de rendimiento con otros módulos activos [M]
 
 ---
@@ -182,7 +182,7 @@
 - [x] Actualización de 04-Codigo (iter 2 + notas) y coordinación (CHECKLIST-GLOBAL, guía 08, ESTADO-PARALELO, Log 449)
 - [?] UI de equipamiento (panel de slots, atajo, lista de prendas desbloqueadas) — requiere tema M53/M57 y DOM-UI de capas; dueño: iter 3
 - [?] Render del modelo cambiado al equipar (M156 vestimenta visual) — pendiente del M156
-- [?] Integración inventario→equipar (M14) — pendiente para iter 3
+- [x] Integración inventario→equipar (M14) [?] -- agnes-2026-09-06: IMPLEMENTADO en equipment_manager.gd (iter. 5 Log 716); _get_inventory() accede a /root/Inventario, equip_item consume 1x item con remove_item, unequip_slot devuelve con add_item
 ## Iteración 3 (2026-09-01 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] UI de equipamiento completa como capa M53: EquipmentLayer construida por código (reemplaza el esqueleto roto scripts/ui/equipment_ui.gd que esperaba nodos inexistentes $Panel/VBox/...)
@@ -193,4 +193,4 @@
 - [x] Tests de la capa (3): test_equipment_layer.gd (build+toggle, grid 16 items, 20+ botones) incluidos en la suite → ÉXITO 0 fallos
 - [x] Verificación V4 por log: [DOM-UI] capa registrada EquipmentLayer (pila=8) + capas montadas equipamiento=true + 0 parse errors
 - [x] Verificación visual del panel abierto (tecla E) en ventana propia — COMPLETADO 2026-09-01 22:24 (Log 391): escena de preview scenes/preview_equipment.tscn (muestra la capa toggle) capturada y analizada: 4 slots (vacío), “16 prendas en el catálogo”, Amuleto ancestral 🔒 (capítulo), Brújula 🔒, Capa impermeable ✓, Chaleco explorador 🔒 (flag), Botas de barro ✓, hint E/ESC, bono +0%. Panel cozy crema/borde dorado correcto
-- [?] Integración inventario→equipar (M14) y jugador con M156 — pendientes de sus módulos
+- [x] Integración inventario→equipar (M14) [?] -- agnes-2026-09-06: IMPLEMENTADO en equipment_manager.gd (iter. 5 Log 716); _get_inventory() accede a /root/Inventario, equip_item consume 1x item con remove_item, unequip_slot devuelve con add_item

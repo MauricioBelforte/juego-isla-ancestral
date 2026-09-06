@@ -236,6 +236,11 @@ func _setup_player_visual() -> void:
 	var player = get_node_or_null("Player")
 	if not player:
 		return
+	# M45 iter. 1: el jugador voxel tiene colores propios (piel/camisa/pantalón)
+	# — el override azul legacy solo aplica si aún usa la cápsula BodyMesh.
+	if player.get_node_or_null("ModeloVoxel"):
+		print("[M08] Jugador voxel M45 en uso — override azul omitido")
+		return
 	var mesh_inst: MeshInstance3D = player.get_node_or_null("BodyMesh")
 	if mesh_inst:
 		var mat := StandardMaterial3D.new()

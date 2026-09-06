@@ -27,9 +27,10 @@ var respawn_dia_absoluto: int = 0
 ## Estación en que respawnea (0..3) o -1 para "cualquiera".
 var respawn_estacion: int = -1
 
-var _mesh_intacto: MeshInstance3D
-var _mesh_daniado: MeshInstance3D
-var _mesh_agotado: MeshInstance3D
+## M47: visuales pueden ser Node3D (lowpoly multi-mesh) o MeshInstance3D (legacy)
+var _mesh_intacto: Node3D
+var _mesh_daniado: Node3D
+var _mesh_agotado: Node3D
 var _area: Area3D
 
 ## Configura el nodo a partir de una ResourceDefinition.
@@ -89,9 +90,30 @@ func evaluar_respawn(dia_actual: int, estacion_actual: int) -> bool:
 	respawn_completado.emit(def_id)
 	return true
 
-## ── Presentación (placeholder hasta assets del arte) ─────
+## ── Presentación (M47 iter. 1: visuales lowpoly por TIPO de recurso) ─────
 
 func _crear_presentacion(categoria: int, rareza: int) -> void:
+	# M47: si el autoload de materiales tiene visual para este def_id,
+	# clona 3 copias (intacto/daniado/agotado) con escalas de estado.
+	var m47 := _buscar_autoload_m47()
+	if m47 != null:
+		var intacto: Node3D = m47.crear_visual(def_id)
+		var daniado: Node3D = m47.crear_visual(def_id)
+		daniado.scale = Vector3(0.85, 0.85, 0.85)
+		daniado.rotation_degrees.y = 25.0
+		var agotado: Node3D = m47.crear_visual(def_id)
+		agotado.scale = Vector3(0.5, 0.5, 0.5)
+		agotado.rotation_degrees.y = 130.0
+		add_child(intacto)
+		add_child(daniado)
+		add_child(agotado)
+		_mesh_intacto = intacto
+		_mesh_daniado = daniado
+		_mesh_agotado = agotado
+		_crear_area()
+		_actualizar_mesh()
+		return
+	# Fallback legacy (cajas por categoría) si M47 no está disponible
 	_mesh_intacto = _crear_mesh(categoria, rareza)
 	_mesh_daniado = _crear_mesh(categoria, rareza)
 	_mesh_agotado = _crear_mesh(categoria, rareza)
@@ -101,6 +123,12 @@ func _crear_presentacion(categoria: int, rareza: int) -> void:
 	_mesh_agotado.scale = Vector3(0.5, 0.5, 0.5)
 	_crear_area()
 	_actualizar_mesh()
+
+func _buscar_autoload_m47() -> Node:
+	var tree := get_tree()
+	if tree == null:
+		return null
+	return tree.root.get_node_or_null("MaterialesRecursos")
 
 func _crear_mesh(categoria: int, _rareza: int) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()

@@ -23,6 +23,9 @@ var _gt: Node = null
 var _day_curve: Curve = null
 var _sky_curve: Curve = null
 var _moon_curve: Curve = null
+## M49 iter. 3 (glm-5.3-flash): ramps de COLOR por franja (diseño M49 §P1-P4)
+var _sun_color_ramp: Gradient = null
+var _sky_color_ramp: Gradient = null
 
 
 func _ready() -> void:
@@ -49,10 +52,15 @@ func _cargar_curvas() -> void:
 	_day_curve = load("res://data/light/day_curve.tres") as Curve
 	_sky_curve = load("res://data/light/sky_curve.tres") as Curve
 	_moon_curve = load("res://data/light/moon_curve.tres") as Curve
+	# M49 iter. 3: ramps de color por franja (amanecer/mediodía/atardecer/noche)
+	_sun_color_ramp = load("res://data/light/sun_color_ramp.tres") as Gradient
+	_sky_color_ramp = load("res://data/light/sky_color_ramp.tres") as Gradient
 	if _day_curve != null:
 		print("[DayNightCycle] Curvas data-driven cargadas (data/light/)")
 	else:
 		push_warning("[DayNightCycle] day_curve.tres ausente; fallback a valores del núcleo")
+	if _sun_color_ramp != null:
+		print("[DayNightCycle] Ramps de color cargados (sun/sky) — M49 iter. 3")
 
 
 func _on_hora_cambio(hora: int) -> void:
@@ -102,10 +110,15 @@ func _aplicar_iluminacion(hora: int, tween: bool) -> void:
 		sun_energy = _day_curve.sample(t)
 		ambient_energy = _sky_curve.sample(t)
 		moon_energy = _moon_curve.sample(t)
-		if sun_energy > 0.0 and hora <= 8:
+		# M49 iter. 3: color por ramp data-driven; fallback al hardcode anterior
+		if _sun_color_ramp != null and sun_energy > 0.0:
+			sun_color = _sun_color_ramp.sample(t)
+		elif sun_energy > 0.0 and hora <= 8:
 			sun_color = Color(1.0, 0.7, 0.5, 1)  # amanecer cálido
 		elif sun_energy > 0.0 and hora >= 17:
 			sun_color = Color(0.9, 0.5, 0.3, 1)  # atardecer
+		if _sky_color_ramp != null:
+			env.environment.ambient_light_color = _sky_color_ramp.sample(t)
 	elif hora >= 7 and hora <= 17:
 		sun_energy = 1.0
 		ambient_energy = 1.0
@@ -127,6 +140,10 @@ func _aplicar_iluminacion(hora: int, tween: bool) -> void:
 		ambient_energy = 0.15
 
 	var duracion: float = 1.0 if tween else 0.0
+	# M49 iter. 3: color ambiente por ramp también se anima
+	var ambient_color: Color = env.environment.ambient_light_color
+	if _sky_color_ramp != null:
+		ambient_color = _sky_color_ramp.sample(float(clampi(hora, 0, 24)) / 24.0)
 
 	if _tween != null and _tween.is_valid():
 		_tween.kill()
@@ -135,6 +152,7 @@ func _aplicar_iluminacion(hora: int, tween: bool) -> void:
 		_tween.tween_property(sun, "light_energy", sun_energy, duracion)
 		_tween.parallel().tween_property(moon, "light_energy", moon_energy, duracion)
 		_tween.parallel().tween_property(env.environment, "ambient_light_energy", ambient_energy, duracion)
+		_tween.parallel().tween_property(env.environment, "ambient_light_color", ambient_color, duracion)
 		if sun_energy > 0.0:
 			_tween.parallel().tween_property(sun, "light_color", sun_color, duracion)
 		if moon_energy > 0.0:
@@ -143,6 +161,7 @@ func _aplicar_iluminacion(hora: int, tween: bool) -> void:
 		sun.light_energy = sun_energy
 		moon.light_energy = moon_energy
 		env.environment.ambient_light_energy = ambient_energy
+		env.environment.ambient_light_color = ambient_color
 		if sun_energy > 0.0:
 			sun.light_color = sun_color
 		if moon_energy > 0.0:

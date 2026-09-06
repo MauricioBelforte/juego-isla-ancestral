@@ -29,6 +29,7 @@ const ISLAND_AUR = 3
 func _ready() -> void:
     _bootstrap_riz_if_needed()
     _load_all_locations()
+    cargar_catalogo_json()
     print("[M160] Ubicaciones cargadas: %d" % locations.size())
 
 ## Genera .tres seed para RIZ si la carpeta esta vacia.
@@ -215,3 +216,128 @@ func can_access(location_id: String, inventory, tools: Array) -> bool:
         if not tiene_herramienta:
             return false
     return true
+
+# ═══════════ M160 iter. 5 (glm-5.3-flash): catálogo JSON + conexiones ═══════════
+
+const RUTA_CATALOGO := "res://data/ubicaciones/ubicaciones_loc.json"
+
+const ISLA_POR_CODIGO := {"RIZ": ISLAND_RIZ, "COR": ISLAND_COR, "CEN": ISLAND_CEN, "AUR": ISLAND_AUR}
+const TIPO_POR_CODIGO := {
+    "pub": LOC_TYPE_PUB, "casa": LOC_TYPE_CASA, "tie": LOC_TYPE_TIE, "tal": LOC_TYPE_TAL,
+    "cue": LOC_TYPE_CUE, "bos": LOC_TYPE_BOS, "pla": LOC_TYPE_PLA, "rui": LOC_TYPE_RUI,
+    "puer": LOC_TYPE_PUER, "mon": LOC_TYPE_MON, "sel": LOC_TYPE_SEL, "tem": LOC_TYPE_TEM,
+}
+
+## Carga el catálogo JSON (data-driven) y registra las ubicaciones que no
+## existan como .tres. Retorna {cargadas, omitidas, errores}.
+func cargar_catalogo_json() -> Dictionary:
+    var res := {"cargadas": 0, "omitidas": 0, "errores": 0}
+    if not FileAccess.file_exists(RUTA_CATALOGO):
+        print("[M160] catálogo JSON no encontrado: %s" % RUTA_CATALOGO)
+        res["errores"] = 1
+        return res
+    var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_CATALOGO))
+    if typeof(parsed) != TYPE_DICTIONARY or not parsed.has("ubicaciones"):
+        print("[M160] catálogo JSON inválido")
+        res["errores"] = 1
+        return res
+    var LD = load("res://scripts/data/location_data.gd")
+    var LR = load("res://scripts/data/location_requirements.gd")
+    if not LD or not LR:
+        res["errores"] = 1
+        return res
+    for ub in parsed["ubicaciones"]:
+        if typeof(ub) != TYPE_DICTIONARY or not ub.has("id"):
+            res["errores"] += 1
+            continue
+        var id: String = ub["id"]
+        if locations.has(id):
+            res["omitidas"] += 1
+            continue
+        var loc = LD.new()
+        loc.location_id = id
+        loc.nombre = String(ub.get("nombre", id))
+        loc.tipo = int(TIPO_POR_CODIGO.get(String(ub.get("tipo", "")), 0))
+        loc.isla = int(ISLA_POR_CODIGO.get(String(ub.get("isla", "")), 0))
+        loc.descripcion = String(ub.get("descripcion", ""))
+        loc.ampliable = bool(ub.get("ampliable", false))
+        loc.tags = ub.get("tags", [])
+        loc.npcs = ub.get("npcs", [])
+        loc.conexiones = ub.get("conexiones", [])
+        var objetos_res: Array = []
+        for o in ub.get("objetos", []):
+            var LO = load("res://scripts/data/location_object.gd")
+            var obj = LO.new()
+            obj.item_id = String(o.get("id_objeto", ""))
+            obj.recolectable = bool(o.get("recolectable", false))
+            obj.tiempo_regeneracion = float(o.get("regeneracion_seg", 0.0))
+            if o.has("herramienta"):
+                obj.tipo_interaccion = String(o["herramienta"])
+            if o.has("tier_minimo"):
+                obj.notas = String(o["tier_minimo"])
+            obj.interactuable = not obj.recolectable
+            objetos_res.append(obj)
+        loc.objetos = objetos_res
+        var req_d: Dictionary = ub.get("requisitos", {})
+        var req = LR.new()
+        req.herramienta_minima = String(req_d.get("herramienta_minima", ""))
+        req.costo_entrada = int(req_d.get("costo_entrada", 0))
+        req.items_requeridos = req_d.get("items_requeridos", [])
+        req.npcs_requeridos = req_d.get("npcs_requeridos", [])
+        req.descripcion_requisitos = String(req_d.get("descripcion", "Acceso libre"))
+        loc.requisitos = req
+        locations[id] = loc
+        res["cargadas"] += 1
+    _reflejar_conexiones()
+    print("[M160] catálogo JSON: %d cargadas, %d omitidas (.tres), %d errores" % [res["cargadas"], res["omitidas"], res["errores"]])
+    return res
+
+## Hace el grafo bidireccional EN MEMORIA (los .tres no se modifican):
+## toda conexión A->B agrega B->A si falta.
+func _reflejar_conexiones() -> void:
+    var agregadas := 0
+    for id in locations:
+        var loc = locations[id]
+        for destino_v in loc.conexiones:
+            var destino_s := String(destino_v)
+            if not locations.has(destino_s):
+                continue
+            var dest_conex: Array = locations[destino_s].conexiones
+            if not dest_conex.has(id):
+                dest_conex.append(id)
+                agregadas += 1
+    if agregadas > 0:
+        print("[M160] conexiones bidireccionales reflejadas: %d" % agregadas)
+
+## Verifica que todas las conexiones apunten a ubicaciones registradas y que
+## sean bidireccionales. Retorna {totales, faltantes: Array, unidireccionales: Array}.
+func validar_conexiones() -> Dictionary:
+    var res := {"totales": 0, "faltantes": [], "unidireccionales": []}
+    for id in locations:
+        var loc = locations[id]
+        for destino in loc.conexiones:
+            res["totales"] += 1
+            var destino_s := String(destino)
+            if not locations.has(destino_s):
+                res["faltantes"].append("%s -> %s" % [id, destino_s])
+            elif not (locations[destino_s].conexiones as Array).has(id):
+                res["unidireccionales"].append("%s <-> %s" % [id, destino_s])
+    return res
+
+## Devuelve las conexiones de una ubicación (IDs) para navegación/mapa.
+func get_conexiones(location_id: String) -> Array:
+    var loc = get_location(location_id)
+    if loc == null:
+        return []
+    return loc.conexiones
+
+## Objetos recolectables de una ubicación (Array de LocationObject).
+func get_recolectables(location_id: String) -> Array:
+    var loc = get_location(location_id)
+    if loc == null:
+        return []
+    var res: Array = []
+    for o in loc.objetos:
+        if o.recolectable:
+            res.append(o)
+    return res

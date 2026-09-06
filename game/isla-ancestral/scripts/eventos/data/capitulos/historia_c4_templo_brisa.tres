@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c4_templo_brisa"
+tipo = 3
+nombre_clave = &"eventos.historia_c4_nombre"
+descripcion_clave = &"eventos.historia_c4_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 0
+hora_fin = 1440
+dias_aviso = 2
+prioridad = 300
+flags = {"capitulo": 4, "historia": true, "gatillo": "templo_brisa_abierto", "sellos_requeridos": 7}

@@ -1,0 +1,18 @@
+{
+	"_nota": "M95 Monetización — precios en USD. Referencias: Steam fee 30%, EGS 12%. Sin P2W (M94/M152).",
+	"ediciones": {
+		"standard": {"nombre": "Isla Ancestral — Standard", "precio": 24.99, "contenido": ["juego_completo"], "p2w": false},
+		"deluxe": {"nombre": "Isla Ancestral — Deluxe", "precio": 34.99, "contenido": ["juego_completo", "banda_sonora", "arte_digital"], "p2w": false},
+		"coleccionista": {"nombre": "Isla Ancestral — Coleccionista", "precio": 49.99, "contenido": ["juego_completo", "banda_sonora", "arte_digital", "figura_fisica", "libro_arte"], "p2w": false}
+	},
+	"dlc": {
+		"expansion_corales": {"nombre": "DLC: Islas Corales Profundas", "precio": 14.99, "tipo": "expansion", "p2w": false},
+		"cosmetico_primavera": {"nombre": "DLC: Pack Cosmético Primavera", "precio": 4.99, "tipo": "cosmetico", "p2w": false}
+	},
+	"impuestos": {
+		"steam": 0.30,
+		"egs": 0.12,
+		"gog": 0.30,
+		"itch": 0.10
+	}
+}

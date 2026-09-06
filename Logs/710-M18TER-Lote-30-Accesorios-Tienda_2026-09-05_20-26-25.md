@@ -119,3 +119,64 @@ bandas que rodean algo en el plano del suelo: SIN rotación. Para asas
 laterales de ollas (plano XZ): rot Z 90. El aro parado fue la causa de
 "órbitas atómicas" en alfombra/fuente/vasija y de la manija gigante.
 Revalidado: soportes 0 piezas al aire, 30/30. Capturas regeneradas.
+
+## Addenda v6-v8 (ronda de feedback visual del usuario, 6 correcciones)
+1. **farol_mesa v6:** manija subida a 0.475 (tope del poste dentro del aro).
+2. **jarron_agua v7:** asa era un aro en diagonal flotando en cualquier
+   lado → arco vertical en plano XZ pegado al costado -X, extremos
+   embebidos hombro→labio (E-94 asas laterales).
+3. **concha_decor v6 REDESÑO:** era un disco vertical ilegible → vieira
+   real: 9 costillas radiales desde la bisagra (umbo), abanico curvo
+   (centrales más largas), inclinadas hacia atrás (to_track_quat 'X'),
+   2 orejitas laterales, montículo de arena.
+4. **maceta_palmera v7 REDESÑO 2:** tronco ALTO único con taper fuerte
+   y curva + 7 frondas DOBLES (pecíolo sale 28° arriba-fuente, lámina
+   cae 34°) + 3 cocos. Helper nuevo ronda_doble() (2 segmentos
+   encadenados con dirección por quaternion — arcos legibles).
+5. **maceta_helecho v7 REDESÑO 2:** matillo parado (4 hojas) + faldón
+   denso de 12 frondas dobles naciendo del borde, arqueando afuera y
+   cayendo por fuera de la maceta. Colgado de horca.
+6. **maceta_flor v8:** hojas separadas del tallo (z fijo en tallo
+   inclinado) → hojas ANCLADAS al tallo con fronda_doble a z 0.25/0.32.
+
+**Helper ronda_doble() (v7):** estandarizado para TODA vegetación —
+dos cajas encadenadas (pecíolo + lámina) con dir1/dir2 calculadas y
+to_track_quat('X','Y') cada una. Reemplaza las cajas con rot Euler que
+no leían como planta. Verificado: soportes 0 al aire 30/30, capturas
+regeneradas (30/30).
+
+## Addenda v9 (farol_coral — feedback usuario: esferitas mal ubicadas)
+**Problema:** las puntas esféricas estaban a offset fijo (0.10, z 0.34)
+ignorando la inclinación real de cada rama — flotaban al costado de las
+ramas que sí se inclinaban. **Fix:** dirección de rama calculada como
+vector (radial 20° afuera), la rama se orienta con to_track_quat y la
+esfera va en ase + dir*H (el extremo REAL de la rama).
+**Patrón repetido del lote (lección consolidada E-95):** NUNCA posicionar
+la pieza terminal de un miembro inclinado con offsets fijos — calcular el
+extremo como base + dir*L (v. E-94/E-95: frondas, puntas de coral, asas).
+
+## Addenda v10 — CORRECCIÓN CRÍTICA de proceso (el usuario detectó que los fixes no llegaban)
+**Síntoma:** el usuario veía los ítems VIEJOS tras mis "correcciones" (y él
+mismo corrigió el farol a mano en Blender).
+**Causa raíz (E-96, nuevo):** los scripts de fix temporal ejecutaban el
+framework del batch vía exec() desde AppData\Temp — OUT_DIR se resolvía
+desde __file__ del script TEMPORAL, y los .blend corregidos se guardaban
+en Temp en vez del proyecto. Las "regeneraciones" reportadas (v6-v9 con
+prints de OK) nunca tocaron los archivos del proyecto.
+**Fix:** relanzado el batch COMPLETO directamente
+(lender -b --python crear_decoracion_tienda_batch.py desde su carpeta
+real), verificando después el CONTENIDO de los .blend del proyecto
+(asas/umbo/frondas presentes), no solo el print. El fix del farol del
+USUARIO (manija 0.435) fue sincronizado al script como fuente de verdad.
+Validador: 0 piezas al aire 30/30 (gancho del helecho subido a 0.785 para
+colgar de la viga de la horca de verdad). Capturas regeneradas 30/30.
+**Regla nueva:** NUNCA verificar un fix solo por el print del script —
+verificar el CONTENIDO del archivo destino después. Y los scripts de fix
+deben correr desde su ubicación en el proyecto (nunca desde Temp).
+
+## Addenda v11 (estatuilla_ave — feedback usuario: pico y cola)
+Pico: era un cono de eje vertical atravesando la cara → ahora orientado
+con to_track_quat hacia adelante-abajo (-Y), naciendo de la cara. Cola:
+era una caja con rotación rara → abanico de 3 plumas escalonadas (zigzag
+±0.45 rad) naciendo del lomo trasero, + alas talladas diagonales y ojos.
+Verificado en .blend del proyecto: 11 SM_, soportes OK.

@@ -15,10 +15,19 @@ var terrain_bonus_table: Dictionary = {}
 signal equipment_changed(slot_type: int, new_item_id: String)
 signal terrain_bonus_updated(total_bonus: float)
 
+## Helper para obtener referencia al inventario (M14).
+func _get_inventory() -> Node:
+	return get_node_or_null("/root/Inventario")
+
 func _ready() -> void:
 	player_equipment = PlayerEquipment.new()
 	_load_catalog()
 	_load_terrain_bonus_table()
+	# M59: registrarse como ISaveProvider para persistencia de equipamiento
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("register_provider"):
+		sm.register_provider(self)
+		print("[EquipmentManager] Registrado en SaveManager (M59)")
 
 ## Carga el catálogo de prendas definido en código (16 prendas iniciales).
 func _load_catalog() -> void:
@@ -197,6 +206,15 @@ func equip_item(item_id: String, slot_type: EquipmentSlot.SlotType) -> bool:
 	if not _is_item_in_catalog(item_id):
 		print("[EquipmentManager] ERROR: item_id %s no está en el catálogo" % item_id)
 		return false
+	# M14: verificar que el jugador tiene el ítem en inventario y consumirlo
+	var inv := _get_inventory()
+	if inv != null and inv.has_method("count_item"):
+		var count: int = inv.count_item(item_id)
+		if count <= 0:
+			print("[EquipmentManager] ERROR: %s no está en el inventario" % item_id)
+			return false
+		inv.remove_item(item_id, 1)
+		print("[EquipmentManager] Consumido 1x %s del inventario" % item_id)
 
 	var item_data: Dictionary = catalog[item_id]
 	var required_slot: EquipmentSlot.SlotType = _get_slot_type_from_id(item_id)
@@ -231,7 +249,12 @@ func unequip_slot(slot_type: EquipmentSlot.SlotType) -> String:
 	slot.clear()
 	equipment_changed.emit(slot_type, "")
 	_emit_terrain_bonus_update()
-	print("[EquipmentManager] Desequipado slot %s, item %s devuelto al inventario" % [slot_type, previous_item_id])
+	# M14: devolver el ítem al inventario
+	var inv := _get_inventory()
+	if inv != null and inv.has_method("add_item"):
+		inv.add_item(previous_item_id, 1)
+		print("[EquipmentManager] Devuelto 1x %s al inventario" % previous_item_id)
+	print("[EquipmentManager] Desequipado slot %s, item %s" % [slot_type, previous_item_id])
 	return previous_item_id
 
 ## Obtiene el item equipado en un slot.
@@ -255,11 +278,16 @@ func get_comfort_penalty(terrain_type: String) -> float:
 	return player_equipment.get_comfort_penalty(terrain_type)
 
 ## Emite la señal de actualización de bonus de terreno.
+## Calcula el bono total máximo entre todos los terrenos (para aplicar al movimiento).
 func _emit_terrain_bonus_update() -> void:
-	var total_bonus: float = 0.0
+	var max_bonus: float = 0.0
 	if player_equipment:
-		total_bonus = player_equipment.get_total_terrain_bonus("current")
-	terrain_bonus_updated.emit(total_bonus)
+		# Calcular bono máximo entre todos los tipos de terreno conocidos
+		for terrain_key in terrain_bonus_table.keys():
+			var b := player_equipment.get_total_terrain_bonus(terrain_key)
+			if b > max_bonus:
+				max_bonus = b
+	terrain_bonus_updated.emit(max_bonus)
 
 ## Verifica si un item está en el catálogo.
 func _is_item_in_catalog(item_id: String) -> bool:
@@ -313,3 +341,14 @@ func get_unlocked_items(player_state: Dictionary) -> Array[String]:
 		if is_item_unlocked(item_id, player_state):
 			result.append(item_id)
 	return result
+
+## ── ISaveProvider (M59) ───────────────────────────────────
+
+func get_section_name() -> String:
+	return "equipment"
+
+func get_save_data() -> Dictionary:
+	return to_dict()
+
+func restore_save_data(data: Dictionary) -> void:
+	from_dict(data)

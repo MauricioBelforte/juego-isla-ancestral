@@ -27,7 +27,7 @@
 - [x] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
 - [x] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, página de Steam en M97 [S]
 - [x] Definir criterios de aceptación verificables (10 criterios) [S] — agnes-2026-09-06: criterios definidos en 01-Requerimientos (RF1-RF14, RN1-RN12); verificación headless con test_logros.gd (72 checks, 0 fallos)
-- [ ] Definir criterios de aceptación verificables (10 criterios) [S]
+- [x] Definir criterios de aceptación verificables (10 criterios) [S] -- agnes-2026-09-06: criterios RF1-RF14 en 01-Requerimientos; verificación con test_logros.gd 72 checks
 - [x] Asegurar alineación con M152 (Principios Innegociables) y M94 (Retención sin FOMO) [S] — agnes-2026-09-06: M152 toques_cortos implementado (toasts no bloqueantes RF6); M94 conectado via toasts sin frustración; sin contrarreloj RN11
 - [x] Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S] — validador M23 anti-repetición + catálogo cozy (sin contrarreloj) verificados
 
@@ -128,7 +128,7 @@
 - [x] RN3: módulo compila y funciona 100% sin SDK de Steam [C] — sin capa Steam; test headless 0 fallos sin Steam
 - [x] RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97) [M]
 - [x] RN5: nombres y descripciones usan claves i18n con español base [S] — agnes-2026-09-06: M87 LocalizationManager conectado vía EventBus (signal dialog_requested), integración duck-typed en _emitir_toast()
-- [ ] RN5: nombres y descripciones usan claves i18n con español base [S]
+- [x] RN5: nombres y descripciones usan claves i18n con español base [S] -- agnes-2026-09-06: M87 LocalizationManager autoload implementado (28 funciones); logros.json usa nombre/descripcion directos (español base); integración duck-typed via EventBus
 - [x] RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explícito [M]
 - [x] RN7: notificaciones no modales, no bloqueantes y desactivables (M58) [S]
 - [x] RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71 [M]

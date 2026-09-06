@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 51: Agua
@@ -231,3 +231,60 @@
 - [x] Verificación visual (evidencia M167): captura de costa mostrando plato de arena + franja turquesa + azul profundo (cap_167 costa) — el agua clara pisable y el océano azul se renderizan correctamente tras el fix
 - [x] Validación programática: get_block_at(503,3,256)=SHALLOW_WATER(30) y get_block_at(530,1,256)=WATER(17) — verificado en runtime y en el validador M167 (28/28)
 - [?] Animación de superficie de agua (ondas, transparencia, reflejos) y materiales — iter 2 (dueño: deepseek-v4-flash-vision-exp; requiere shaders/M49)
+
+## Iteración 2 — Agua animada (2026-09-06 16:30, glm-5.3-flash / Kilo Code)
+
+- [x] Shader propio agua_olas.gdshader: olas de 3 ondas cruzadas en vertex (desplazamiento Y + normal por derivadas) [M]
+- [x] Fresnel de vista rasante (potencia 3.0) que aclara el horizonte [S]
+- [x] Espuma en crestas (smoothstep) con emisión leve [S]
+- [x] Transparencia (blend_mix) que deja ver el océano voxel turquesa debajo [S]
+- [x] PlaneMesh 1400×1400 con 80×80 subdivisiones en y=4.05 (sobre water_level=2) [S]
+- [x] Sombras OFF del plano (no proyecta sobre la isla) [S]
+- [x] Integración en main_island.tscn (nodo AguaAnimada + script) [S]
+- [x] Verificación visual: espuma en crestas + fresnel + turquesa en juego (capturas/51/) [M]
+- [x] Regresión: M31 0 fallos, M47 17/0, M50 5/0; FPS 51-60 [S]
+- [ ] Reflejo de escena real (SSR/planos reflejo) — necesita presupuesto de rendering, próxima iteración [C]
+- [ ] Sonido de olas (M42/M43) [S]
+- [ ] Interacción de olas con la fauna (barcos/estaciones) [M]
+- [ ] Confirmación estética del usuario [S]
+
+### Notas del Agente — iter. 2
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 16:30
+**Estado:** Iteración completada (agua visible como agua viva, no plano estático)
+
+#### Lo que hice
+- El agua voxel es bloques LIQUID de la VoxelBlockyLibrary (nada que shader-ear sin tocar el material_override del terreno completo). La solución: plano independiente con shader propio sobre el nivel del mar — olas + fresnel + espuma + transparencia. El agua voxel turquesa queda debajo y se ve a través.
+- El plano no proyecta sombras y su superficie (y=4.05) queda apenas sobre el bloque de agua (top y=4).
+
+#### Recomendaciones para el próximo agente
+- El shader expone uniforms ajustables (amplitud, velocidad, frecuencia, borde_espuma) para calibrar estética sin tocar código.
+- Si se quiere reflejo real de escena: evaluado y descartado por presupuesto de rendering (integrado Forward+ móvil integrada); el fresnel+specular da 90% del look.
+- El plano a y=4.05 NO toca las arenas (orilla y≥5): si se ve un borde raro en alguna costa, ajustar Y_SUPERFICIE en agua_animada.gd.
+## Fixes usuario 2/3 — olas y arena (2026-09-06 17:43, glm-5.3-flash / Kilo Code)
+
+- [x] FIX: el efecto de olas aparecía sobre la arena seca (cresta 4.21 > arena 4.0) — máscara radial costa en vertex: el plano se hunde 1.2m cerca del borde y las olas se atenúan; y_base 4.05 → 3.7 (cresta máx 3.86 < arena) [M] — Log 736
+- [x] AJUSTE usuario: olas plenas hasta el agua clara — transición de hundimiento movida de r 240→300 a r 255→285 (agua clara r 241-264 queda con olas) [S] — Log 736
+- [x] Espuma reconvertida en borde de marea: SOLO en la franja costera (costa_mask), ya no en mar abierto [S] — Log 736
+- [x] Verificación visual: orilla seca + olas en agua clara (capturas/51/olas_hasta_agua_clara.png) [S] — Log 736
+## Iteración 3 — agua premium de cerca (2026-09-06 17:57, glm-5.3-flash / Kilo Code)
+
+- [x] FIX: olas invisibles de cerca — el plano a y 3.7 quedaba bajo el top de los bloques de agua voxel opacos (4.0): al cargar el suelo real lo ocultaban. Plano devuelto a y 4.05 (encima del agua voxel) [M] — Log 749
+- [x] Hundimiento de costa desplazado a la franja de arena (r 262-292; antes 255-285 pisaba el agua clara) [S] — Log 749
+- [x] Efecto premium orilla: tinte turquesa claro según costa_mask + alpha reducido (marea somera) [S] — Log 749
+- [x] Línea de marea: anillo de espuma pulsante (sin TIME) en el borde arena-agua [S] — Log 749
+- [x] Confirmación usuario: pelo del jugador OK (fix Log 736 validado) [S]
+- [x] Verificación visual en juego: línea de marea + agua clara + olas de fondo, FPS 60 (capturas/51/olas_cerca_premium.png) [S] — Log 749
+## Iteración 4-5 — vaivén de marea con shore-fade (2026-09-06 18:23, glm-5.3-flash / Kilo Code)
+
+- [x] Petición usuario: "las olas lleguen hasta la arena porque el efecto está bueno" [S] — Log 750
+- [x] Iter. 4 (vaivén radial con wavefront 190±10): DESCARTADA — la medición real (medir_costa_m51.gd, 24 rayos TerrainLocator) mostró que la costa está en r≈180-204 (mediana 184), no en 262 como asumía el shader [M] — Log 750
+- [x] Iter. 5 (FINAL): shore-fade por profundidad de pantalla — hint_depth_texture + INV_PROJECTION_MATRIX → profundidad de agua por píxel → fade de alpha + espuma EXACTAMENTE en la línea de costa real, sin radios hardcodeados [C] — Log 750
+- [x] Marea somera: tinte turquesa suave cerca de la orilla (0.28/0.68/0.78 al 28% — primer intento lechoso corregido) [S] — Log 750
+- [x] Banda de espuma pulsante en la orilla (sin TIME*1.6 + olas) = vaivén natural de marea [S] — Log 750
+- [x] Arena seca: alpha 0 sobre arena (desaparece el plano — ya no hay efecto raro) [S] — Log 750
+- [x] Verificación visual: orilla limpia + espuma pegada a la arena + mar azul (capturas/51/shorefade_azul.png), FPS 60 [S] — Log 750
+- [x] Herramienta reutilizable: medir_costa_m51.gd (escaneo radial de costa con TerrainLocator) [S] — Log 750
+- [ ] Confirmación estética final del usuario [S]

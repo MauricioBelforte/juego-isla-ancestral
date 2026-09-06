@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c6_geoda"
+tipo = 5
+nombre_clave = &"eventos.historia_c6_nombre"
+descripcion_clave = &"eventos.historia_c6_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 0
+hora_fin = 1440
+dias_aviso = 1
+prioridad = 200
+flags = {"capitulo": 6, "historia": true, "gatillo": "geoda_volcanica"}

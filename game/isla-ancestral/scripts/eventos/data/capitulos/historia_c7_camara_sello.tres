@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c7_camara_sello"
+tipo = 3
+nombre_clave = &"eventos.historia_c7_nombre"
+descripcion_clave = &"eventos.historia_c7_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 0
+hora_fin = 1440
+dias_aviso = 2
+prioridad = 400
+flags = {"capitulo": 7, "historia": true, "gatillo": "camara_sello", "sellos_requeridos": 7, "eleccion_final": true}

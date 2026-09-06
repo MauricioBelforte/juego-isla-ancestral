@@ -58,13 +58,13 @@
 - [x] catálogo créditos.tres (estructura por categorías) [S]
 - [x] API: cargar_creditos() [S]
 - [x] API: obtener_contribuyentes() [S] — agnes-2026-09-05: implementada en credits_manager.gd (iter. 4); devuelve Array[String] con todos los nombres de todas las secciones
-- [x] API: obtener_assets_terceros() [S] — agnes-2026-09-05: implementada en credits_manager.gd (iter. 4); devuelve Array[Dictionary] de la sección assets_terceros
-- [ ] API: obtener_assets_terceros() [S]
+- [x] API: obtener_contribuyentes() [S] — agnes-2026-09-06: implementada en credits_manager.gd (iter. 4); devuelve Array[String] con todos los nombres de todas las secciones
+- [x] API: obtener_assets_terceros() [S] — agnes-2026-09-06: implementada en credits_manager.gd (iter. 4); devuelve Array[Dictionary] de la sección assets_terceros
 - [x] API: obtener_creditos_idioma(idioma) [S]
 - [x] API: siguiente_seccion() [S]
 - [x] API: detener_animacion() [S]
-- [x] API: obtener_idioma_actual() [S] — agnes-2026-09-05: alias de obtener_idioma() implementado en credits_manager.gd (iter. 4)
-- [ ] API: obtener_idioma_actual() [S]
+- [x] API: obtener_idioma_actual() [S] — agnes-2026-09-06: alias de obtener_idioma() implementado en credits_manager.gd (iter. 4)
+- [x] API: obtener_idioma_actual() [S] -- agnes-2026-09-06: implementada en credits_manager.gd como alias de obtener_idioma()
 
 ## G2. Pruebas (8)
 
@@ -79,13 +79,13 @@
 
 ## H. Delegación y cierre (8)
 
-- [x] API estable definida [S] — agnes-2026-09-05: credits_manager.gd expone 22 funciones publicas (obtener_secciones, buscar, scroll_automatico, color_contraste_accesible, tamano_fuente_base, obtener_idioma/obtener_idioma_actual, obtener_contribuyentes, obtener_assets_terceros, etc.)
-- [ ] API estable definida [S]
+- [x] API estable definida [S] — agnes-2026-09-06: credits_manager.gd expone 22 funciones publicas (obtener_secciones, buscar, scroll_automatico, color_contraste_accesible, tamano_fuente_base, obtener_idioma/obtener_idioma_actual, obtener_contribuyentes, obtener_assets_terceros, etc.)
+- [x] API estable definida [S] -- agnes-2026-09-06: credits_manager.gd expone 22 funciones publicas (obtener_secciones, buscar, scroll_automatico, color_contraste_accesible, tamano_fuente_base, obtener_idioma/obtener_idioma_actual, obtener_contribuyentes, obtener_assets_terceros, etc.)
 - [x] Implementación ? AGENTE DELEGADO [S]
 - [x] 01-Requerimientos creado y firmado [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma modelo/plataforma; cubre problema, objetivo, alcance, RF1-RF10, RN1-RN8
 - [x] 02-Analisis creado y firmado [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma; análisis de dominio créditos, alternativas, riesgos
 - [x] 03-Diseno creado y firmado [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma; arquitectura data-driven, JSON catalog, señales UI
-- [x] 04-Codigo creado y firmado (Notas del Agente) [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma; notas del agente documentan iter. 1-2 (minimax-m3)
+- [x] 04-Codigo creado y firmado (Notas del Agente) [S] — agnes-2026-09-06: archivo existe en plan-actual/ con firma; notas del agente documentan iter. 1-4 (minimax-m3 + agnes APIs)
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 

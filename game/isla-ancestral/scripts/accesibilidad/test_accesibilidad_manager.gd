@@ -1,9 +1,10 @@
 # Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
-# Fecha: 2026-09-05
+# Fecha: 2026-09-06
 #
-# M58: Test headless del AccesibilityManager (RF1 daltonismo, RF19 presets,
-# señales profile_loaded/changed/reset, persistencia M59/M57 pattern).
+# M58: Test headless del AccesibilityManager.
+# iter 1: RF1 daltonismo, RF19 presets, señales, persistencia M59/M57 pattern.
+# iter 2: RF8 subtítulos por defecto, RF13 perfiles de control, RF18 pausa instantánea.
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/accesibilidad/test_accesibilidad_manager.gd
 
 extends SceneTree
@@ -48,6 +49,40 @@ func _run() -> void:
 	# Reset
 	am.reset_perfil()
 	_check(String(am.get_campo("dificultad")) == "estandar", "reset restaura estandar")
+	# ═══ Iter. 2 ═══
+	# RF8: subtítulos por defecto (activados, mediano, con fondo)
+	var sub: Dictionary = am.get_subtitulos()
+	_check(bool(sub.get("activado", false)), "RF8 subtítulos activados por defecto")
+	_check(String(sub.get("tamano", "")) == "mediano", "RF8 tamaño mediano por defecto")
+	_check(bool(sub.get("fondo", false)), "RF8 fondo activado por defecto")
+	var sub_signal: Array = [false]
+	am.subtitulos_changed.connect(func(_a: bool, _t: String, _f: bool): sub_signal[0] = true)
+	_check(bool(am.set_subtitulos_tamano("grande")), "RF8 set_subtitulos_tamano(grande) OK")
+	_check(String(am.get_subtitulos().get("tamano", "")) == "grande", "RF8 tamaño aplicado")
+	_check(sub_signal[0], "RF8 subtitulos_changed emitida")
+	_check(not bool(am.set_subtitulos_tamano("gigante")), "RF8 tamaño inválido rechazado")
+	am.set_subtitulos(false, "pequeno", false)
+	_check(not bool(am.get_subtitulos().get("activado", true)), "RF8 set_subtitulos(false) aplicado")
+	am.reset_perfil()
+	# RF13: perfiles de control
+	_check(not bool(am.aplicar_perfil_control("inexistente")), "RF13 preset inexistente rechazado")
+	_check(bool(am.aplicar_perfil_control("single_hand")), "RF13 aplicar single_hand OK")
+	_check(not am.get_remap_control().is_empty(), "RF13 single_hand tiene remap")
+	_check(bool(am.mantener_automatico()), "RF13 single_hand mantiene automático")
+	_check(is_equal_approx(am.tiempo_mantener_multiplicador(), 1.5), "RF13 single_hand multiplicador 1.5")
+	_check(bool(am.aplicar_perfil_control("low_mobility")), "RF13 aplicar low_mobility OK")
+	_check(is_equal_approx(am.tiempo_mantener_multiplicador(), 2.0), "RF13 low_mobility multiplicador 2.0")
+	_check(bool(am.aplicar_perfil_control("estandar")), "RF13 volver a estandar OK")
+	_check(am.get_remap_control().is_empty(), "RF13 estandar sin remap")
+	_check(not am.mantener_automatico(), "RF13 estandar sin mantener automático")
+	_check(is_equal_approx(am.tiempo_mantener_multiplicador(), 1.0), "RF13 estandar multiplicador 1.0")
+	# RF18: pausa instantánea
+	_check(not bool(am.esta_pausado()), "RF18 juego no pausado al inicio")
+	_check(bool(am.pausar_instantaneo()), "RF18 pausar_instantaneo OK")
+	_check(bool(am.esta_pausado()), "RF18 árbol pausado")
+	_check(bool(am.pausar_instantaneo()), "RF18 pausa idempotente")
+	_check(bool(am.reanudar()), "RF18 reanudar OK")
+	_check(not bool(am.esta_pausado()), "RF18 árbol reanudado")
 	print("=== TEST M58 MANAGER: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 

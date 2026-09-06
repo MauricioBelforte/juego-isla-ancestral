@@ -212,6 +212,116 @@ def loft(nombre, anillos, material, lados=12, tapar_arriba=True,
     return o
 
 
+# ---------- 2d) Helper de REVOLUCION (piezas HUECAS: bowls, vasijas, anforas) ----------
+def revolucion(nombre, perfil, materiales, lados=12, idx_mat=None, fase=0.0,
+               cerrar_inicio=True, cerrar_final=True):
+    """Superficie de revolucion alrededor de Z a partir de un perfil 2D (r, z).
+
+    MOTIVO: `loft()` sirve para solidos que CRECEN en Z (cuerpos, troncos,
+    mangos), pero NO puede hacer una pieza HUECA como un bowl o una vasija:
+    el perfil de un bowl SUBE por la pared exterior y VUELVE A BAJAR por la
+    interior, y `loft()` exige z crecientes (guard de E-77). Una alternativa
+    era apilar dos lofts (exterior + interior) y tapar el disco del borde, pero
+    ese disco tapa la boca y el bowl pasa a ser un bloque macizo.
+
+    `perfil`: lista de (r, z) recorrida en el orden en que se quiere la
+    superficie. Para un bowl: fondo -> pie -> pared exterior -> labio -> pared
+    interior -> fondo interior. El ultimo punto puede volver al eje (r=0) para
+    cerrar la cavidad.
+
+    `materiales`: lista de materiales. `idx_mat` (opcional) es una lista de
+    `len(perfil) - 1` enteros que dice que material lleva CADA TRAMO (el
+    segmento entre el punto k y el k+1). Sirve para franjas pintadas o para
+    vidriar el interior sin gastar ni un triangulo mas: un bowl de 1 objeto
+    con barro / franja / vidriado se resuelve aca, no con 3 piezas.
+
+    ORIENTACION (es lo que hace que se vea bien sin tocar normales a mano):
+    el winding de las caras laterales apunta hacia AFUERA cuando el perfil
+    sube en Z, y se INVIERTE solo cuando el perfil baja. Por eso en un bowl
+    la pared exterior mira hacia afuera y la interior mira hacia la cavidad,
+    con la misma linea de codigo y sin `flip_normals`.
+
+    E-72: cuando un punto del perfil cae en el eje (r ~ 0) se crea UN solo
+    vertice y se abanica, en lugar de `lados` vertices coincidentes. Esos
+    vertices degenerados son los que dejaban 72 verts en el origen en
+    `cristal_ancestral` MEDIA y hacian explotar el decimate.
+
+    Devuelve el objeto (ya linkado) para poder rotarlo/escalarlo.
+    """
+    EPS = 1e-6
+    assert len(perfil) >= 2, 'revolucion() necesita al menos 2 puntos de perfil'
+    if not isinstance(materiales, (list, tuple)):
+        materiales = [materiales]
+    tramos = len(perfil) - 1
+    if idx_mat is None:
+        idx_mat = [0] * tramos
+    assert len(idx_mat) == tramos, (
+        'idx_mat tiene %d tramos pero el perfil define %d' % (len(idx_mat), tramos))
+    for _k, _mi in enumerate(idx_mat):
+        assert 0 <= _mi < len(materiales), (
+            'idx_mat[%d]=%d fuera de rango (hay %d materiales)'
+            % (_k, _mi, len(materiales)))
+    for _r, _z in perfil:
+        assert _r >= -EPS, 'radio negativo r=%.4f en el perfil' % _r
+
+    bm = bmesh.new()
+    capas = []
+    for (_r, _z) in perfil:
+        if _r <= EPS:
+            # E-72: un UNICO vertice en el eje (no `lados` coincidentes).
+            capas.append(('apice', [bm.verts.new((0.0, 0.0, _z))]))
+        else:
+            _vs = []
+            for _i in range(lados):
+                _a = fase + 2.0 * pi * _i / lados
+                _vs.append(bm.verts.new((_r * cos(_a), _r * sin(_a), _z)))
+            capas.append(('anillo', _vs))
+
+    def _abanico(c, vs, invertido, mi):
+        for _i in range(len(vs)):
+            _j = (_i + 1) % len(vs)
+            _f = (bm.faces.new((c, vs[_j], vs[_i])) if invertido
+                  else bm.faces.new((c, vs[_i], vs[_j])))
+            _f.material_index = mi
+
+    for _k in range(tramos):
+        _ta, _a = capas[_k]
+        _tb, _b = capas[_k + 1]
+        _mi = idx_mat[_k]
+        if _ta == 'apice' and _tb == 'apice':
+            raise AssertionError(
+                'tramo %d: dos apices consecutivos (r~0) no generan superficie' % _k)
+        elif _ta == 'apice':
+            _abanico(_a[0], _b, True, _mi)      # apice inicial -> normal -Z
+        elif _tb == 'apice':
+            _abanico(_b[0], _a, False, _mi)     # apice final   -> normal +Z
+        else:
+            for _i in range(lados):             # (a[i], a[j], b[j], b[i])
+                _j = (_i + 1) % lados           # = afuera si el perfil sube
+                _f = bm.faces.new((_a[_i], _a[_j], _b[_j], _b[_i]))
+                _f.material_index = _mi
+
+    # Tapas para los extremos que NO caen en el eje (ej. un cuello abierto).
+    if cerrar_inicio and capas[0][0] == 'anillo':
+        _vs = capas[0][1]
+        _c = bm.verts.new((0.0, 0.0, sum(v.co.z for v in _vs) / lados))
+        _abanico(_c, _vs, True, idx_mat[0])
+    if cerrar_final and capas[-1][0] == 'anillo':
+        _vs = capas[-1][1]
+        _c = bm.verts.new((0.0, 0.0, sum(v.co.z for v in _vs) / lados))
+        _abanico(_c, _vs, False, idx_mat[-1])
+
+    bm.normal_update()
+    malla = bpy.data.meshes.new(nombre)
+    bm.to_mesh(malla)
+    bm.free()
+    o = bpy.data.objects.new(nombre, malla)
+    bpy.context.scene.collection.objects.link(o)
+    for _m in materiales:
+        o.data.materials.append(_m)
+    return o
+
+
 def polilinea(pts, ts):
     """Muestrea una polilinea 3D en las fracciones `ts` (0..1 del largo total).
 

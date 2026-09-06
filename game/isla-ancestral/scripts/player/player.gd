@@ -41,6 +41,9 @@ var _q_prev_mano: bool = false
 var _inventario: Node = null
 var _item_database: Node = null
 
+## M155: Multiplicador de velocidad por bonos de equipo equipados
+var _equip_speed_mult: float = 1.0
+
 # M57 iter. 2 (glm-5.3-flash): helper de migración — accion_justa por
 # ControlInput (capa única de acciones RF2) con fallback a Input directo
 # si ControlInput no está disponible (headless/test).
@@ -57,6 +60,14 @@ func _ready() -> void:
 	_inventario = get_node_or_null("/root/Inventario")
 	_item_database = get_node_or_null("/root/ItemDatabase")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	# M155: conectar bonos de equipo al movimiento (item 140)
+	var em := get_node_or_null("/root/EquipmentManager")
+	if em != null and em.has_signal("terrain_bonus_updated"):
+		em.terrain_bonus_updated.connect(_on_terrain_bonus_changed)
+		print("[Player] Conectado a EquipmentManager.terrain_bonus_updated")
+	else:
+		print("[Player] WARNING: EquipmentManager no encontrado para bonos de terreno")
 	
 	# Setup VoxelBoxMover
 	_box_mover = VoxelBoxMover.new()
@@ -92,6 +103,13 @@ func _find_terrain() -> VoxelTerrain:
 	if root:
 		return root.get_node_or_null("VoxelTerrain")
 	return null
+
+## M155: Callback cuando cambian los bonos de equipo equipados.
+## Aplica el multiplicador a move_speed para movimiento con bonos de terreno.
+func _on_terrain_bonus_changed(bonus: float) -> void:
+	# bonus is in [-0.15, +0.40]; convert to multiplier [0.85, 1.40]
+	_equip_speed_mult = 1.0 + bonus
+	print("[Player] Bonus de equipo: %.2f → multiplier %.2f" % [bonus, _equip_speed_mult])
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Teclas de UI/inventario (no requieren voxel_tool)
@@ -263,8 +281,8 @@ func _physics_process(delta: float) -> void:
 	_update_move_direction()
 	
 	# Movimiento horizontal
-	velocity.x = _move_direction.x * move_speed
-	velocity.z = _move_direction.z * move_speed
+	velocity.x = _move_direction.x * move_speed * _equip_speed_mult
+	velocity.z = _move_direction.z * move_speed * _equip_speed_mult
 	
 	if _box_mover and _terrain:
 		var motion: Vector3 = velocity * delta

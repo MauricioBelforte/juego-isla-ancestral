@@ -1,4 +1,4 @@
-**Modelo:** Deepseek V4 Flash
+﻿**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 47: Texturas y Materiales
@@ -182,3 +182,31 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+## Iteración 1 — Materiales distintivos por tipo (2026-09-06 16:12, glm-5.3-flash / Kilo Code)
+
+- [x] Tabla data-driven data/arte3d/materiales_recursos.json: 24 tipos con color+forma+emisión (match por substring sobre def_id) [M]
+- [x] Autoload MaterialesRecursos: carga tabla, cachea materiales, construye visuales lowpoly por forma [M]
+- [x] 6 formas lowpoly: roca_mineral (prisma+pepitas), tronco (cilindro 6 lados), mata (3 cajas cruzadas), esfera_baya (esfera+tallo), cristal (prismas facetados emisivos), roca (2 prismas) [M]
+- [x] Colores distintivos: cobre=naranja, hierro=gris, oro=amarillo, cristal=cian, gemstone=violeta, madera=marrón, baya=rojo [S]
+- [x] Emisión para raros (ancient_crystal, fragmento, cristal) [S]
+- [x] Integración resource_node.gd: visual M47 con 3 estados (intacto/daniado/agotado por escala+rotación) [M]
+- [x] FIX resource_spawner.gd: orden add_child → configurar (get_tree() null si configurar va primero — bug silencioso que dejaba el visual legacy) [M]
+- [x] Test headless test_materiales_m47.gd: 17 checks 0 fallos [S]
+- [x] Verificación visual en juego: vetas cobre/oro/hierro distinguibles (capturas/47/) [M]
+- [ ] Texturas procedurales UV (beyond flat colors) — próxima iteración [M]
+- [ ] Confirmación estética del usuario [S]
+
+### Notas del Agente — iter. 1
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 16:12
+**Estado:** Iteración completada (recursos distinguibles por color y forma)
+
+#### Hallazgo técnico importante
+- El bug del orden (configurar antes de add_child) era SILENCIOSO: el error "Parameter data.tree is null" aparecía en consola pero el juego seguía funcionando con el visual legacy. Cualquier código de _ready/configurar que dependa de get_tree() requiere estar DENTRO del árbol primero.
+
+#### Recomendaciones
+- Agregar nuevos recursos al JSON (no al código): match por substring permite cubrir variantes (veta_*, mineral_*, madera_*).
+- Para texturas UV procedurales (siguiente iteración), extender material_para() con un campo "textura" en el JSON.

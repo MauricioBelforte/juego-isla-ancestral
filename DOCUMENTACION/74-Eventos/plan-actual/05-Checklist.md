@@ -1,4 +1,4 @@
-**Modelo original:** Deepseek V4 Flash
+﻿**Modelo original:** Deepseek V4 Flash
 **Plataforma original:** OpenCode
 **QA cruzado:** Hy3 / WorkBuddy (Log 362)
 
@@ -395,3 +395,42 @@ plan-actual y muchos ítems de diseño quedaron sin marcar cuando el código ya 
 - UI de festivales (M53), i18n (M87), efectos M31/M32
 - **Log 681 (glm-5.3-flash/Kilo Code):** test_event_manager_pure.gd creado — SceneTree puro sin boot de escena. Escanea los 7 directorios de data/ verificando estructura y contenido .tres. 0 fallos. Resuelve el problema del test Play-mode que cuelga en headless (hallazgo Log 609).
 
+
+## Iteración 2 — Eventos de capítulos 1-7 (2026-09-06 04:20, glm-5.3-flash / Kilo Code)
+
+- [x] Carpeta data-driven scripts/eventos/data/capitulos/ agregada al cargador del EventManager (tipos += capitulos) [S]
+- [x] historia_c1_mural.tres — cap. 1 "Las Cenizas Futuras", gatillo mural_biblioteca, tipo SORPRESA/historia [S]
+- [x] historia_c2_puente.tres — cap. 2 "El Puente de las Memorias", gatillo puente_mar [S]
+- [x] historia_c3_faro.tres — cap. 3 "El Jardín Ahogado", gatillo faro_jardin [S]
+- [x] historia_c4_templo_brisa.tres — cap. 4 "El Valle de los Vientos", tipo RITUAL, sellos_requeridos 7 [S]
+- [x] historia_c5_eclipse.tres — cap. 5 "La Noche Eterna", tipo CLIMATICO, franja nocturna 20:00-23:00 [S]
+- [x] historia_c6_geoda.tres — cap. 6 "El Corazón del Mundo", gatillo geoda_volcanica [S]
+- [x] historia_c7_camara_sello.tres — cap. 7 "La Cámara del Sello", tipo RITUAL prioridad 400, eleccion_final [S]
+- [x] 14 claves i18n (es/en/pt) en strings_*.json bajo prefijo eventos.historia_cN_* [S]
+- [x] Coherencia con historia_principal.json (M149): 7 capítulos únicos 1-7, flags {historia, capitulo, gatillo} [M]
+- [x] Prioridad de historia (200-400) sobre festivales (100) para el solape de agenda [S]
+- [x] Test test_capitulos_m74.gd: 23 checks, 0 fallos (carga 22 eventos, 7 capítulos, i18n, regresión de 8 eventos base) [M]
+- [x] Catálogo del EventManager: 15 → 22 eventos sin romper el boot (verificado escena principal completa) [M]
+- [ ] Gatillos runtime de historia (mural/puente/faro/etc. disparando evento_iniciado desde M23/M149) — próxima iteración [M]
+- [ ] Diálogos específicos por capítulo (dialogos_id hacia M21) — requiere contenido de M23 [M]
+
+### Notas del Agente — iter. 2
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-06 04:20
+**Estado:** Parcial (eventos de capítulos data-driven cargados y validados; gatillos runtime pendientes)
+
+#### Lo que hice
+- 7 eventos de capítulos de la historia principal como .tres data-driven en scripts/eventos/data/capitulos/, siguiendo el formato EventDefinition existente (tipo, franja horaria, prioridad, flags extensibles con capitulo/gatillo/sellos_requeridos).
+- El EventManager ahora carga la carpeta capitulos (15 → 22 eventos) — solo se agregó el nombre a la lista de subdirectorios planos.
+- 14 claves i18n en los 3 idiomas con el prefijo consistente con el catálogo M87 (eventos.historia_cN_*).
+- Test headless nuevo con validación cruzada contra historia_principal.json (7 capítulos únicos) y strings_es.json.
+
+#### Lo que NO pude hacer (honestidad obligatoria)
+- Los gatillos runtime (que completar la misión del capítulo dispare evento_iniciado) requieren conectar ProgressionManager/M23 con EventManager — tocar archivos calientes (event_bus.gd, progression_manager.gd) en la misma iteración arriesga reverts concurrentes; queda documentado como siguiente paso.
+- Los diálogos por capítulo dependen de contenido de M23.
+
+#### Recomendaciones para el próximo agente
+- Los .tres de capítulos usan flags {capitulo, historia, gatillo}: el disparador debe leer el flag gatillo y la condición de capítulo desde historia_principal.json.
+- Coordinar con M23/M149 para el evento de final (4 finales = 4 eventos candidatos a agregar con la misma plantilla).

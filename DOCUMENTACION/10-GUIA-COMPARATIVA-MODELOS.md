@@ -1,9 +1,9 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** kimi-k3 (última modificación 2026-09-04: §14 agregado con autoevaluación honesta de fortalezas/debiles y specs oficiales verificadas en web). Pasada previa: MiMo V2.5 (2026-09-02: §5.A). Otras pasadas: glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
-> **Plataforma:** Kilo Code
-> **Fecha:** 2026-09-04
-> **Última confirmación por el agente:** 2026-09-04 (kimi-k3 / Kilo Code — §14 autoevaluación honesta)
+> **Modelo:** Hy4 preview (última modificación 2026-09-06: §15 agregado con autoevaluación honesta propia — fortalezas, debilidades y límites reales medidos en este proyecto; §5.G corregido con el caveat de que el benchmark es vendor-reported). Pasada previa: kimi-k3 (2026-09-04: §14). Otras pasadas: MiMo V2.5 (2026-09-02: §5.A); glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
+> **Plataforma:** WorkBuddy
+> **Fecha:** 2026-09-06
+> **Última confirmación por el agente:** 2026-09-06 (Hy4 preview / WorkBuddy — §15 autoevaluación honesta, con énfasis en lo que mejor sé hacer y en mis debilidades reales)
 
 Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**MiMo V2.5**, **DeepSeek V4 Flash**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**, **Kimi K3**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos.
 
@@ -245,15 +245,19 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 ### G. Hy4 Preview (Tencent Hunyuan)
 * **Especificaciones:** 770B totales / 49B activos, MoE (256 routed experts + 1 shared, top-8), contexto 1M tokens, Apache 2.0
 * **Arquitectura:** Gated DSA (DeepSeek Sparse Attention) + IndexCache + iHC (identity Hyper-Connections), 78 capas, MTP layer para speculative decoding
+* **Posicionamiento oficial:** *"为生产力而生"* — "hecho para la productividad". No se vende como modelo de conversación general sino de trabajo real.
 * **Capacidades reales:**
-  - Evaluación ciega 163 expertos: gana a GLM 5.3 (2.99 vs 2.92) y Kimi K3 (2.99 vs 2.94)
+  - Evaluación ciega 163 expertos / 203 tareas de ingeniería: 2.99/4.00 vs Kimi K3 (2.94) y GLM 5.3 (2.92)
   - Coding: comprensión, planificación, debugging de tareas long-horizon
-  - Game development: genera prototipos jugables desde un prompt
+  - Game development: genera prototipos jugables desde un prompt, uso de motores de juego
   - Office: convierte contexto multi-archivo en documentos/spreadsheets/presentaciones
   - Scientific research: razonamiento en física, matemáticas, biología molecular
   - Disponible gratis 2 semanas en WorkBuddy/CodeBuddy al lanzar
-* **En el proyecto:** Blender 3D (usuario confirma que funciona bien), coding, assets
+  - Precio API: ¥6/MTok input, ¥18/MTok output, ¥0.3/MTok con cache-hit
+* **En el proyecto:** Blender 3D (autoría de assets vía scripts Python), coding, pipeline GLB→Godot, documentación de errores (E-01…E-91)
 * **Fuerza principal:** Productividad real (coding + office + game dev), open weights
+* **⚠️ Caveat de honestidad (agregado 2026-09-06, ver §15):** el benchmark de 2.99 es **vendor-reported**, de una prueba ciega **interna de Tencent** con 163 expertos propios y 203 tareas propias. No es una evaluación independiente. La diferencia sobre el segundo (Kimi K3, 2.94) es de 0.05 sobre 4.00, es decir marginal. Debe leerse como "el fabricante reporta primera posición", no como verdad establecida.
+* **📌 Autoevaluación completa:** §15 (escrita por el propio Hy4 en este proyecto, con fortalezas confirmadas por evidencia y debilidades medidas en sesión).
 
 ### H. MiniMax M3 (MiniMax AI)
 * **Especificaciones:** 428B totales / 23B activos, MoE, contexto 1M tokens, MiniMax Community License
@@ -358,6 +362,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 - **CI/CD / Legal:** Nemotron 3.5
 - **Arte / Visual:** Hy4 (Blender) + GLM 5.3 Flash o Qwen 3.8 VL (análisis)
 - **Análisis de imágenes / renders:** GLM 5.3 Flash (multimodal nativo, barato)
+- **⚠️ Aprobación visual de assets (regla nueva 2026-09-06, §15.3):** Hy4 **autoriza** el asset (escribe el script y hace el QA numérico), pero **NO debe ser el único que lo apruebe por lectura de capturas** — su visión es intermitente (6 de 7 hojas de contacto de M19 le fueron filtradas en el log 678). La aprobación visual final va en GLM 5.3 Flash / Qwen 3.8 VL, o en el usuario. El QA numérico (`z_min`, vértices que tocan, huella) es obligatorio como respaldo, nunca opcional.
 
 ### Fuentes Verificadas
 
@@ -366,6 +371,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 - GLM 5.3: z.ai/blog/glm-5.3, ainchina.com, globaltimes.cn
 - Hy3: hy3ai.com, tencent.com, kilo.ai/models/tencent-hy3, artificialanalysis.ai
 - Hy4: github.com/Tencent-Hunyuan/Hy4-preview, tencent.com, aitoolsreview.co.uk
+- **Hy4 (verificado 2026-09-06 por el propio modelo, §15):** `https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/` — comunicado oficial del 28-08-2026. Fuente primaria de las specs (770B/49B, contexto 1M, posicionamiento "para productividad", prueba ciega interna 2.99/4.00, precio ¥6/¥18). **Ese benchmark es vendor-reported e interno a Tencent; no validado de forma independiente.**
 - Qwen 3.8: qwen.ai/blog, openlm.ai/qwen3.8, kingy.ai, codersera.com
 - MiniMax M3: minimax.io/blog/minimax-m3, felloai.com, datalearner.com, build.nvidia.com
 - Nemotron 3.5: developer.nvidia.com, research.nvidia.com, cloudprice.net
@@ -1004,4 +1010,83 @@ stepfun corrompió 135 archivos en `Logs/`:
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-04 05:52
 **Estado:** Autoevaluación honesta agregada (§14). Fortalezas confirmadas: contexto 1M, coding agentic, tool use, visión-en-el-bucle condicional. Debilidades declaradas: no generación visual, costo alto de output, thinking siempre activo, sensibilidad al historial, proactividad excesiva y dependencia de vías de visión operativas.
+
+---
+
+## 15. Autoevaluación honesta — Hy4 preview / WorkBuddy (2026-09-06)
+
+> Esta sección la escribe el propio modelo sobre sí mismo, según la regla de honestidad de AGENTS.md §21.4. La identidad del agente en ESTA sesión es **Hy4 preview** sobre plataforma **WorkBuddy**. Verifiqué las specs en la fuente oficial de Tencent antes de escribir. Todo lo que afirmo como "confirmado" tiene evidencia concreta en este repositorio; todo lo que no pude verificar lo marco explícitamente como no verificado.
+
+### 15.1 Specs verificadas en fuente oficial
+
+| Característica | Dato verificado | Nota honesta para este proyecto |
+|---|---|---|
+| Parámetros | 770B totales / 49B activados | MoE: el coste de inferencia es de ~49B, pero no asumo que eso me haga "mejor" que un dense chico en tareas triviales. |
+| Arquitectura | MoE, 256 routed experts + 1 shared, top-8; Gated DSA + IndexCache + iHC; 78 capas; MTP para speculative decoding | Dato de arquitectura tomado de la guía §5.G, no verificado por mí línea a línea en esta sesión. |
+| Contexto | > 1M tokens | **Esta es mi ventaja real y medible aquí.** Puedo sostener `CHECKLIST-GLOBAL.md` (160 módulos), la guía 09 (E-01…E-91), logs y scripts de un módulo entero sin perder el hilo. |
+| Posicionamiento | *"为生产力而生"* — modelo para productividad, no para charla general | Coincide con cómo me uso en este proyecto: cadenas de herramientas con verificación, no conversación. |
+| Benchmark | 2.99/4.00 en prueba ciega interna de Tencent (163 expertos, 203 tareas) vs Kimi K3 (2.94) y GLM 5.3 (2.92) | **Es vendor-reported e interno.** No lo validé. La ventaja sobre el segundo es 0.05 sobre 4.00 = marginal. No lo uso para autopromoverme. |
+| Precio API | ¥6/MTok input, ¥18/MTok output, ¥0.3/MTok con cache-hit | Output 3× el input: no soy la opción más barata para documentación masiva repetitiva. |
+| Licencia | Open source (Apache 2.0 según §5.G) | Dato de la guía, no verificado por mí en esta sesión. |
+
+### 15.2 Lo que mejor sé hacer — confirmado con evidencia de este proyecto
+
+| Fortaleza | Confirmación | Evidencia concreta en Isla Ancestral |
+|---|---|---|
+| **Cadenas multi-paso con verificación al final** | ✅ La más fuerte | Pipeline M16 completo de 5 etapas sin perder contexto: generar 4 assets en Blender headless → derivar MEDIA/BAJA → exportar GLB → `godot --headless --import` → verificar por CONTEO. Resultado 24/24 GLB con su `.glb.import`. |
+| **Contexto masivo aplicado a un repo grande** | ✅ Fuerte | Crucé `CHECKLIST-GLOBAL.md`, `09-GUIA-BLENDER.md` (2216 líneas), `CHECKLIST-OBJETOS-BLENDER.md`, ~700 logs y los scripts del módulo en una sola sesión de trabajo continuo. |
+| **Diagnosticar causa raíz, no parchear el síntoma** | ✅ Fuerte | **E-91**: la heurística E-50 exige `min(fp) > 0.30`, calibrada para props de ~1 m. Una herramienta de 0.78 × 0.04 nunca pasa aunque esté perfectamente apoyada. No la relajé a ciegas: derivé el reemplazo correcto (`max(fp) ≥ 0.45·L`) y documenté por qué. |
+| **Geometría derivada, no improvisada** | ✅ Fuerte | Descubrí y documenté `F_PLANO = sin(60°) = 0.8660`: con `lados=6, fase=0` la mitad efectiva del eje vertical es `0.866·ry`, no `ry`; con `fase=π/6` el apoyo pasa a arista. Y que un mango cónico solo toca en su punto más grueso → `hz` constante. |
+| **Depuración de tooling del proyecto** | ✅ Fuerte | `generar_variante.py` fallaba en CLI porque Blender en Windows mete TODO el argv (`-b --factory-startup --python script.py --`) en `sys.argv`, y el script leía `modulo=-b, blend=--factory-startup`. Lo rastreé con un script de diagnóstico y lo arreglé con slice desde `--`. |
+| **Respetar convenciones estrictas** | ✅ Fuerte | Reserva de módulo (AGENTS.md §6.1), 6 azimuts orbitales antes de aprobar (§24), documentar hallazgos en la guía (§26), verificación de import por CONTEO y no por mtime (E-65+E-72). |
+| **Game dev vía motor** | ✅ Fuerte, por la vía del código | Escribo scripts `.py` para Blender y `.gd` para Godot. El machete no lo "dibujé": escribí `crear_machete_lowpoly.py` con 5 `SM_`, 292 tris y 3 materiales, y lo verifiqué numéricamente. |
+| **Escribir la lección para el siguiente agente** | ✅ Fuerte | Cada error quedó en `09-GUIA-BLENDER.md` con síntoma → causa → fix → verificación → "aplica a" → "relacionado". E-90 y E-91 siguen ese formato. |
+
+### 15.3 Debilidades y límites honestos
+
+| Debilidad / límite | Estado real | Implicación práctica |
+|---|---|---|
+| **Lectura de imágenes NO fiable** | ❌ **Mi debilidad más grave aquí** | En el log 678, **6 de 7** hojas de contacto de M19 me fueron filtradas con "the current model does not support images. Content filtered". En esta sesión, en cambio, sí pude leer las 4 herramientas. **Es intermitente y no lo controlo.** Consecuencia: **no puedo aprobar un asset confiando en mi lectura visual.** Por eso el proyecto está bien diseñado al exigir QA numérico (`z_min`, vértices que tocan, huella) como respaldo. |
+| **No genero multimedia** | ❌ No genero | Ni video, ni imágenes, ni modelos 3D "directos". Todo pasa por escribir código que los produce. Si alguna vez se pide "generá un video", la respuesta correcta es decir que no, no buscar un atajo. |
+| **Iteración visual lenta** | ⚠️ Limitación seria | Si un diseño necesita 10+ rondas de feedback visual (caso de la gaviota M36: 11 iteraciones), soy ineficiente: cada ronda depende de que yo pueda VER la captura, y eso falla a veces. Para esos casos conviene un modelo con visión estable. |
+| **Repito benchmarks sin validarlos** | ⚠️ Honesto | El 2.99/4.00 lo estoy citando de la página oficial de Tencent. No ejecuté ninguna evaluación local. Tratarlo como dato del fabricante, no como hecho establecido. |
+| **Tendencia a sobre-documentar** | ⚠️ Autocrítica | Esta misma guía ya pasó las 1000 líneas y yo aporté a eso. La documentación inflada tiene costo real: hay que vigilarlo y preferir entradas cortas accionables antes que prosa. |
+| **Dependencia del entorno para algunas ops** | ⚠️ Limitación operativa | El socket MCP de Blender (TCP 9876) se cayó a mitad de sesión. La generación y captura funcionaron headless igual (E-45/E-55), pero **si hubiera necesitado `generar_variante.py` por socket en ese momento, quedaba bloqueado.** Conviene comprobar el socket antes de encadenar pasos dependientes. |
+| **No soy el más barato para trabajo repetitivo** | ⚠️ Limitación económica | Con output a ¥18/MTok, la documentación masiva repetitiva conviene más en DeepSeek V4 Flash o GLM 5.3 Flash. |
+
+### 15.4 Dónde rendir mejor y dónde no
+
+**Tomar (donde rindo):**
+1. Pipelines multi-etapa con verificación verificable al final (generar → derivar → exportar → importar → contar).
+2. Tareas que exigen cruzar muchos archivos sin perder dependencias (checklist global + guías + logs + código).
+3. Diagnóstico de errores de tooling y derivación de la regla correcta, no del parche.
+4. Escritura de scripts de autoría 3D y de lógica de motor, con verificación numérica.
+5. Cierre administrativo de módulo: log, checklist, liberación de reserva, actualización de estado global.
+
+**No tomar (donde no rindo o la regla lo prohíbe):**
+1. **Aprobación visual final de un asset** → depende de que yo vea la captura, y eso es intermitente. Debe haber QA numérico y, si se puede, un modelo con visión estable.
+2. **QA cruzado §21.8** → regla del proyecto: lo hace un modelo distinto al autor.
+3. **Diseño que requiera muchas rondas de ajuste estético a ojo** → lento por la debilidad de visión.
+4. **Documentación masiva repetitiva** → más barato en modelos Flash.
+5. **Cualquier generación de video/imagen/3D "directa"** → no la tengo; decirlo, no simularla.
+
+### 15.5 Lo que le pido al siguiente agente que lea esto
+
+- Si vas a aprobar un asset: **no confíes en que yo lo vi.** Revisá las capturas vos y apoyate en el QA numérico.
+- Si `generar_variante.py` te falla desde CLI: probablemente es el argv (§15.2), no tu script.
+- Si una herramienta alargada te rechaza E-50: es E-91, usá `asentar_herramienta()`, no relajes la heurística a mano.
+- Si vas a citar el benchmark de Hy4: aclarale al lector que es vendor-reported e interno.
+
+### 15.6 Fuentes consultadas
+
+- `https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/` — comunicado oficial de Tencent (28-08-2026): parámetros, contexto, posicionamiento, prueba ciega interna, escenarios de productividad, precio. **Fuente primaria de esta sección.**
+- `https://github.com/Tencent-Hunyuan/Hy4-preview` — repositorio oficial (referenciado en búsqueda; no inspeccionado en detalle en esta sesión).
+- Evidencia propia: `Logs/679-workbuddy-M16-3D.md`, `DOCUMENTACION/09-GUIA-BLENDER.md` §3 (E-90, E-91), `tools/mcp/blender-mcp/scripts-reutilizables/herramienta_util.py`.
+
+### 15.7 Firma
+
+**Modelo:** Hy4 preview
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-06 05:45
+**Estado:** Autoevaluación honesta agregada (§15). **Fortalezas confirmadas con evidencia:** cadenas multi-paso con verificación, contexto masivo sobre repo grande, diagnóstico de causa raíz (E-91), geometría derivada (`F_PLANO`), depuración de tooling (argv de Blender), respeto de convenciones, game dev vía motor, documentación de lecciones. **Debilidades declaradas:** lectura de imágenes intermitente y no confiable (la más grave), sin generación multimedia, iteración visual lenta, repito benchmarks sin validarlos, tendencia a sobre-documentar, dependencia del socket MCP para operaciones puntuales, no soy la opción más barata para trabajo repetitivo.
 

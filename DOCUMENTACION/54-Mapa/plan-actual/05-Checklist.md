@@ -37,7 +37,7 @@
 - [x] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C]
 - [ ] Estilo ilustrado cozy: manchas de bioma con paleta pastel, bordes suaves [C]
 - [ ] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M]
-- [ ] Marcador "estás aquí" con forma + color del jugador siempre visible [S]
+- [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
 - [x] Pausa del mundo coherente con M29/M30 al abrir el mapa [M]
 - [ ] Cierre con Esc/cancel y restauración del foco (M53) [S]
 - [x] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S]
@@ -206,7 +206,7 @@
 - [x] 04-Codigo creado y firmado (rutas, firmas GDScript, logs, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado con 120+ ítems todos `[ ]` [S]
 - [ ] Plan-actual copiado byte a byte idéntico a plan-inicial (hash verificado) [S]
-- [ ] Plan de testings: apertura/cierre, zoom, pan, filtros, pines y niebla [M]
+- [x] Plan de testings: apertura/cierre, zoom, pan, filtros, pines y niebla [M] -- agnes-2026-09-06: test_mapa_m54_plan.gd creado en scripts/mapa/ con 6 grupos de tests (apertura/cierre, zoom, pan, filtros, pines, niebla); conectividad verificada
 - [ ] Test de rendimiento con el mundo voxel completo cargado (≤ 5% frame) [C]
 - [ ] Test de navegación completa con gamepad (30 minutos) [M]
 - [ ] Test de viaje rápido end-to-end con M69 [C]

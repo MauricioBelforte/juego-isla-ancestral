@@ -276,8 +276,8 @@ menos.
 ## Contadores
 
 - Total ítems: **165** (135 previos + 30 M18-TER tienda 2026-09-05)
-- Completados: **95** (81 previos + 14 muebles M18-BIS integrados en casa_mediana v7 como primer lote aprobado pendiente de checkeo + 30 M18-TER en revisión [/])
-- Pendientes: **53** (34 previos del backlog original + 19 M18-BIS: casas grandes 4 restantes y muebles sueltos por exportar; los 30 M18-TER quedan [/] hasta revisión visual del usuario)
+- Completados: **99** (95 previos + 4 herramientas M16: hacha_hierro + martillo + azada + machete)
+- Pendientes: **49** (53 previos − 4 M16 cerrados; quedan M33 11 · M16 3 (gema/frasco/bowl) · M25 6 · M36 5 · M34/35 4 · M40 1 · M18-BIS 19). **M16 herramientas cerrado (4/4)** — log 679.
 - Pendientes de captura: **0**
 - Aprobados visualmente: 84 + 11 M18 (4 vision ✓ 2026-08-31 04:15 + 7 vision ✓ turno previo) + 3 M50 Tier F (vision ✓ 2026-09-01 21:15-21:16) + 10 M45+M27 (vision ✓ 2026-09-02 03:20, re-verificados post E-67) + 3 arco M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:00, post E-68) + 3 estatua M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:15) + 3 puente colgante M40 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:24) + 3 carretilla M35 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:46) + 3 espantapájaros M33 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:50)
 - **Pendientes de Tier D: 0** (Tier D cerrado 7/7)

@@ -190,10 +190,9 @@ def item_farol_mesa():
     # poste 0.085..0.385
     cilindro('SM_FarolMesa_Campana', m['vidrio'], 0.10, 0.28, 0, 0, 0.225, verts=14)
     # campana 0.085..0.365 (apoya en el pie, abraza el poste)
-    # v6 (usuario: "subilo un poco mas"): manija a 0.475 — el tope del
-    # poste (0.385) queda DENTRO del aro (baja hasta 0.425), manija bien
-    # clara sobre el vidrio.
-    toro('SM_FarolMesa_Aro', m['bronce'], 0.05, 0.010, 0, 0, 0.475, rot=(math.pi / 2, 0, 0))
+    # v8-DEFINITIVO (fix del USUARIO en el .blend: manija a 0.435, el
+    # tope del poste 0.385 queda justo dentro del aro 0.385..0.485).
+    toro('SM_FarolMesa_Aro', m['bronce'], 0.05, 0.010, 0, 0, 0.435, rot=(math.pi / 2, 0, 0))
     # v4 FIX (usuario): el aro era R 0.10 centrado a 0.375 — un aro gigante
     # ATRAVESANDO el farol. Ahora manija compacta (R 0.05) SOBRE el tope del
     # vidrio (0.365): ancla en el poste y sube como asa vertical.
@@ -370,7 +369,10 @@ def item_maceta_helecho():
         a = i * 2 * math.pi / 3 + math.pi / 6
         cilindro('SM_MacHel_Cuerda', m['cuerda'], 0.008, 0.585,
                  0.09 * math.cos(a), 0.09 * math.sin(a), BORDE + 0.293, verts=5)
-    toro('SM_MacHel_Gancho', m['bronce'], 0.045, 0.010, 0, 0, 0.76)
+    toro('SM_MacHel_Gancho', m['bronce'], 0.045, 0.010, 0, 0, 0.785)
+    # v8: gancho a 0.785 — la viga de la horca (z 0.80, bottom 0.76) pasa
+    # por dentro del aro (0.740..0.830): el gancho cuelga de la viga de
+    # verdad (validador E-93 exigió el solape).
     asentar_y_guardar('maceta_helecho', '(matillo + faldón de 12 frondas)')
 
 def item_maceta_flor():
@@ -565,18 +567,27 @@ def item_concha_decor():
     asentar_y_guardar('concha_decor', '(vieira: abanico radial curvo + umbo)')
 
 def item_farol_coral():
+    """v9 FIX (usuario: 'esferitas mal ubicadas'): las puntas estaban a
+    offset fijo (0.10, 0.34) ignorando la inclinacion de las ramas —
+    flotaban al costado. Ahora cada rama tiene DIRECCION calculada
+    (radial 20°) y la esfera va en el EXTREMO REAL de esa direccion."""
     m = mats()
     base_arena(1.0)
     caja('SM_FarolCor_Base', m['piedra'], 0.24, 0.24, 0.06, 0, 0, 0.075)
     for i in range(5):
         a = i * 2 * math.pi / 5
-        rama = cilindro('SM_FarolCor_Rama', m['coral'], 0.025, 0.24,
-                        0.06 * math.cos(a), 0.06 * math.sin(a), 0.22, verts=6, r2=0.012)
-        rama.rotation_euler = (math.radians(20 * math.sin(a)), math.radians(20 * math.cos(a)), 0)
-        esfera('SM_FarolCor_Punta', m['coral'], 0.028,
-               0.10 * math.cos(a), 0.10 * math.sin(a), 0.34, sub=1)
+        radial = Vector((math.cos(a), math.sin(a), 0.0))
+        dirv = (radial * 0.34 + Vector((0, 0, 0.94))).normalized()  # 20° afuera
+        H = 0.24
+        base = Vector((radial.x * 0.05, radial.y * 0.05, 0.105))
+        rama = cilindro('SM_FarolCor_Rama', m['coral'], 0.025, H,
+                        base.x + dirv.x * H / 2, base.y + dirv.y * H / 2,
+                        base.z + dirv.z * H / 2, verts=6, r2=0.012)
+        rama.rotation_euler = dirv.to_track_quat('Z', 'Y').to_euler()
+        punta = Vector((base.x + dirv.x * H, base.y + dirv.y * H, base.z + dirv.z * H))
+        esfera('SM_FarolCor_Punta', m['coral'], 0.028, punta.x, punta.y, punta.z, sub=1)
     esfera('SM_FarolCor_Luz', m['llama'], 0.045, 0, 0, 0.18, sub=1)
-    asentar_y_guardar('farol_coral', '')
+    asentar_y_guardar('farol_coral', '(puntas en el extremo real de las ramas)')
 
 def item_cofre_perlas():
     """v2 FIX: perla alta flotaba 5 cm sobre la tapa — las 3 ahora
@@ -659,14 +670,43 @@ def item_mecedora():
     asentar_y_guardar('mecedora', '(brazos con postes)')
 
 def item_estatuilla_ave():
+    """v11 REDESÑO (usuario: 'el pico apunta a cualquier parte, la cola es
+    un cuadrado raro'). Ave mirando a -Y con to_track_quat: cabeza al
+    frente, pico cono APUNTANDO a -Y (afuera de la cara), cola = abanico
+    de 3 plumas escalonadas + 2 alas talladas al costado del cuerpo."""
     m = mats()
     base_arena(0.9)
-    caja('SM_Ave_Base', m['madera_oscura'], 0.26, 0.18, 0.05, 0, 0, 0.07)
-    esfera('SM_Ave_Cuerpo', m['madera_clara'], 0.10, 0, 0, 0.19, sub=2)
-    esfera('SM_Ave_Cabeza', m['madera_clara'], 0.055, 0, -0.10, 0.27, sub=2)
-    cono('SM_Ave_Pico', m['flor_amar'], 0.02, 0.06, 0, -0.17, 0.26, verts=6)
-    caja('SM_Ave_Cola', m['madera_oscura'], 0.14, 0.04, 0.08, 0.06, 0.12, 0.24, rot=(0, 0, -0.3))
-    asentar_y_guardar('estatuilla_ave', '')
+    # base de madera
+    caja('SM_Ave_Base', m['madera_oscura'], 0.20, 0.32, 0.05, 0, 0, 0.07)
+    # cuerpo: esfera estirada en Y (eje del ave)
+    cuerpo = esfera('SM_Ave_Cuerpo', m['madera_clara'], 0.10, 0, 0.02, 0.20, sub=2)
+    cuerpo.scale = (0.85, 1.35, 0.95)
+    # cabeza al frente-arriba del cuerpo
+    cabeza = esfera('SM_Ave_Cabeza', m['madera_clara'], 0.055, 0, -0.115, 0.30, sub=2)
+    # pico: cono con eje -Y apuntando hacia adelante-abajo (to_track_quat)
+    dir_pico = Vector((0.0, -1.0, -0.25)).normalized()
+    base_p = Vector((0, -0.16, 0.295))
+    pico = cono('SM_Ave_Pico', m['flor_amar'], 0.022, 0.07,
+                base_p.x + dir_pico.x * 0.035, base_p.y + dir_pico.y * 0.035,
+                base_p.z + dir_pico.z * 0.035, verts=6)
+    pico.rotation_euler = dir_pico.to_track_quat('Z', 'Y').to_euler()
+    # cola: abanico de 3 plumas escalonadas hacia atras (+Y), zigzag
+    for i, ang in enumerate((-0.45, 0.0, 0.45)):
+        dir_c = Vector((math.sin(ang), math.cos(ang), 0.35)).normalized()
+        L = 0.14
+        bc = Vector((0, 0.10, 0.225))   # nace del lomo trasero del cuerpo
+        pluma = caja('SM_Ave_Pluma', m['madera_oscura'], 0.030, L, 0.020,
+                     bc.x + dir_c.x * L / 2, bc.y + dir_c.y * L / 2, bc.z + dir_c.z * L / 2)
+        pluma.rotation_euler = dir_c.to_track_quat('Y', 'Z').to_euler()
+    # alas talladas: 2 placas diagonales pegadas a los costados
+    for sx in (-1, 1):
+        ala = caja('SM_Ave_Ala', m['madera_oscura'], 0.018, 0.13, 0.06,
+                   sx * 0.082, 0.02, 0.20)
+        ala.rotation_euler = (0, 0, sx * 0.35)
+    # ojos
+    for sx in (-1, 1):
+        esfera('SM_Ave_Ojo', m['madera_oscura'], 0.012, sx * 0.035, -0.135, 0.325, sub=1)
+    asentar_y_guardar('estatuilla_ave', '(ave mira a -Y: pico dirigido, cola abanico)')
 
 def item_lampara_techo():
     """v2: campana apoyada en el suelo como campana (el asentado natural);

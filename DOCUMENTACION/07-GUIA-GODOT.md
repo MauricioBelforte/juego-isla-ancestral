@@ -1,4 +1,4 @@
-**Modelo:** glm-5.3-free (Kilo Code) (último modificador 2026-09-05: §12 animales bimodo — playbook gaviota vuelo/tierra, dump GLB antes de animar, quaternion de patas, asentado por medición, hop de escalón; E-11/E-12. Historial: glm-5.3 (Cline) 2026-09-04 §9.64 C56; GLM 5.3 (z-ai) 2026-09-02: §11 flujo Blender→Godot, caso tortuga M36; glm-5.3-flash 2026-09-01 §9.56-9.60; deepseek-v4-flash §9.54/§9.55; glm-5.3 §9.53; MiMo V2.5 creó la guía; múltiples agentes §9.x)
+**Modelo:** glm-5.3-flash (Kilo Code) (último modificador 2026-09-06: §8 E-13/E-14/E-15 — ZIPPacker sin finish_file, ternario C-like inválido, Godot stub bloqueado. Historial: glm-5.3-free 2026-09-05 §12 animales bimodo, E-11/E-12; glm-5.3 (Cline) 2026-09-04 §9.64 C56; GLM 5.3 (z-ai) 2026-09-02: §11 flujo Blender→Godot, caso tortuga M36; glm-5.3-flash 2026-09-01 §9.56-9.60; deepseek-v4-flash §9.54/§9.55; glm-5.3 §9.53; MiMo V2.5 creó la guía; múltiples agentes §9.x)
 **Plataforma:** Kilo Code
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
@@ -324,6 +324,30 @@ Cuando se encuentre un error nuevo, agregarlo a esta guía:
 **Causa:** Un módulo escrito con Python-isms: slicing `arr[-200:]`, `String.encode("utf-8")`, `ProjectSettings.get(clave, default)` con 2 args, `OS.get_dynamic_memory_usage()`, docstrings `"""..."""`. Cualquier ERROR DE PARSER en UN solo script impide el arranque de TODO el proyecto (Godot aborta el boot completo).
 **Solución:** Equivalencias Godot 4: `arr.slice(-200)`, `texto.to_utf8_buffer()`, `ProjectSettings.get_setting(clave, default)` (Dictionary SÍ acepta `.get(k, default)`, ProjectSettings NO), `Performance.get_monitor(Performance.MEMORY_STATIC)` para memoria, comentarios `##` en vez de docstrings. LECCIÓN DE PROCESO: un agente dejó el proyecto sin bootear; validar con `godot_run_project` antes de dar por terminada cualquier edición de scripts.
 **Fecha:** 2026-09-05 (glm-5.3-free / Kilo Code, fix de emergencia en M110 debug_menu.gd)
+
+---
+
+### E-13: ZIPPacker sin finish_file() en Godot 4.7.2
+**Error:** `Invalid call. Nonexistent function 'finish_file' in base 'ZIPPacker'.`
+**Causa:** En 4.7.2 la API de ZIPPacker no incluye `finish_file()` (existe en builds más nuevos). Llamarla aborta el script con el ZIP sin cerrar.
+**Solución:** Patrón correcto 4.7.2: `open(path)` → por cada archivo `start_file(nombre)` + `write_file(bytes)` (start_file cierra el archivo anterior automáticamente) → `close()` al final. Verificado headless en M118 (Log 724).
+**Fecha:** 2026-09-06 (glm-5.3-flash / Kilo Code)
+
+---
+
+### E-14: El ternario `cond ? a : b` de otros lenguajes no compila en GDScript
+**Error:** `Parse Error: Unexpected "?" in source. If you want a ternary ...`
+**Causa:** GDScript usa la sintaxis Python-like, no la C-like: el ternario es `a if cond else b`. Escribir `cond ? a : b` (hábito de JS/C#) rompe el parse del script entero y, con autoloads, el boot del proyecto.
+**Solución:** Usar `valor = a if cond else b`. Detectado en cicd_manager.gd (M118, Log 724); corregido y testeado 0 fallos.
+**Fecha:** 2026-09-06 (glm-5.3-flash / Kilo Code)
+
+---
+
+### E-15: Ejecutable de Godot con Mark-of-the-Web/stub bloqueado ("Acceso denegado")
+**Error:** Ejecutar el .exe suelto en `D:\ISLA ANCESTRAL\` da `WinError 5 Acceso denegado` (subprocess) o el binario pesa 1 byte (stub).
+**Causa:** El archivo quedó bloqueado por SmartScreen/AV (no es un ejecutable válido).
+**Solución:** Extraer el binario real desde `Godot_v4.7.2-stable_win64.exe.zip` (86 MB, mismo directorio) a una carpeta aprobada (ej: `%TEMP%\kilo\`) con `System.IO.Compression.ZipFile` y usar `Godot_v4.7.2-stable_win64_console.exe` (imprime stdout parseable en scripts headless).
+**Fecha:** 2026-09-06 (glm-5.3-flash / Kilo Code)
 
 ---
 

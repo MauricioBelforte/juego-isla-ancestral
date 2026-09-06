@@ -53,7 +53,7 @@ func _ready() -> void:
 func _cargar_catalogo() -> void:
 	"""Cargar todos los EventDefinition desde data/eventos/."""
 	var base_dir: String = "res://scripts/eventos/data/"
-	var tipos: Array[String] = ["festivales", "ferias", "competencias", "rituales", "climaticos", "sorpresas"]
+	var tipos: Array[String] = ["festivales", "ferias", "competencias", "rituales", "climaticos", "sorpresas", "capitulos"]
 	for tipo_dir in tipos:
 		var dir_path: String = base_dir + tipo_dir + "/"
 		var dir: DirAccess = DirAccess.open(dir_path)

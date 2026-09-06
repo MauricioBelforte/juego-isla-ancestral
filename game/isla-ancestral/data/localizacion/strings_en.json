@@ -11,6 +11,20 @@
     "msg.no_materiales": "Not enough materials",
     "msg.nuevo_dia": "New day",
     "npc.hola": "Hello",
-    "npc.adios": "Goodbye"
+    "npc.adios": "Goodbye",
+    "eventos.historia_c1_nombre": "The Ashes to Come",
+    "eventos.historia_c1_desc": "The mural of the burned library reveals the first twist.",
+    "eventos.historia_c2_nombre": "The Bridge of Memories",
+    "eventos.historia_c2_desc": "The temple tool opens the bridge to Mar island.",
+    "eventos.historia_c3_nombre": "The Drowned Garden",
+    "eventos.historia_c3_desc": "The blind lighthouse guards the entrance to the garden waters.",
+    "eventos.historia_c4_nombre": "The Valley of Winds",
+    "eventos.historia_c4_desc": "The Temple of the Breeze demands the seven seals to open.",
+    "eventos.historia_c5_nombre": "The Eternal Night",
+    "eventos.historia_c5_desc": "The temple eclipse lights the Breeze theme.",
+    "eventos.historia_c6_nombre": "The Heart of the World",
+    "eventos.historia_c6_desc": "The volcanic geode confirms who hid the Seal.",
+    "eventos.historia_c7_nombre": "The Seal Chamber",
+    "eventos.historia_c7_desc": "The chamber beneath the Temple of the Breeze awaits the choice."
   }
 }

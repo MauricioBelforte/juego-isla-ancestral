@@ -214,3 +214,5 @@
 - [x] **Fix de coherencia:** el manifest M120 (isla_hielo/pack_aurora) y la monetización M95 (dlc_expansion/dlc_cosmetico) usaban IDs distintos → unificados al manifest (fuente de verdad de carga)
 - [x] `scripts/dlc/sincronizar_dlc.gd` — verificador de coherencia DLC (manifest ↔ monetización): 2/2 OK
 - [x] Bug BUG-013 registrado en 11-BUGS.md (resuelto)
+- **Log 748 (glm-5.3-flash/Kilo Code, heredando deepseek-vision):** MonetizacionManager autoload con catálogo data-driven (3 ediciones + 2 DLC), auditar_p2w() (M94/M152), impuestos por plataforma (M96), persistencia M57/M59. 11 checks 0 fallos. Pendientes: bridges M96, UI M53, Steam SDK.
+

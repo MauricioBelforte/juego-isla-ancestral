@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "modulo": "M47",
+  "descripcion": "Colores y formas lowpoly por tipo de recurso (M15/M35). Coincidencia por substring sobre def_id (primer match). forma: roca_mineral (prismas facetados), tronco (cilindro 6 lados), mata (3 cajas cruzadas), esfera_baya (esfera+tallo), cristal (prisma alto emisivo), roca (prismas grises).",
+  "default": {"color": [0.8, 0.8, 0.8], "forma": "roca"},
+  "tipos": [
+    {"match": "cobre", "color": [0.85, 0.45, 0.2], "forma": "roca_mineral"},
+    {"match": "hierro", "color": [0.6, 0.62, 0.66], "forma": "roca_mineral"},
+    {"match": "oro", "color": [0.95, 0.8, 0.25], "forma": "roca_mineral"},
+    {"match": "cristal", "color": [0.5, 0.85, 0.95], "forma": "cristal"},
+    {"match": "gemstone", "color": [0.7, 0.45, 0.9], "forma": "cristal"},
+    {"match": "ancient_crystal", "color": [0.4, 0.9, 0.9], "forma": "cristal", "emision": [0.2, 0.6, 0.6]},
+    {"match": "fragmento", "color": [0.55, 0.85, 0.85], "forma": "cristal", "emision": [0.15, 0.5, 0.5]},
+    {"match": "madera", "color": [0.45, 0.27, 0.11], "forma": "tronco"},
+    {"match": "piedra", "color": [0.72, 0.72, 0.7], "forma": "roca"},
+    {"match": "roble", "color": [0.45, 0.27, 0.11], "forma": "tronco"},
+    {"match": "fibra", "color": [0.7, 0.8, 0.4], "forma": "mata"},
+    {"match": "algodon", "color": [0.88, 0.88, 0.8], "forma": "mata"},
+    {"match": "baya", "color": [0.85, 0.25, 0.25], "forma": "esfera_baya"},
+    {"match": "veta_cobre", "color": [0.85, 0.45, 0.2], "forma": "roca_mineral"},
+    {"match": "veta_hierro", "color": [0.6, 0.62, 0.66], "forma": "roca_mineral"},
+    {"match": "veta_oro", "color": [0.95, 0.8, 0.25], "forma": "roca_mineral"},
+    {"match": "veta_cristal", "color": [0.5, 0.85, 0.95], "forma": "cristal"},
+    {"match": "clay", "color": [0.72, 0.55, 0.45], "forma": "mata"},
+    {"match": "mud", "color": [0.5, 0.38, 0.3], "forma": "mata"},
+    {"match": "sand", "color": [0.9, 0.85, 0.6], "forma": "mata"},
+    {"match": "gravel", "color": [0.6, 0.58, 0.55], "forma": "roca"},
+    {"match": "moss", "color": [0.4, 0.7, 0.35], "forma": "mata"},
+    {"match": "snow", "color": [0.95, 0.95, 1.0], "forma": "mata"},
+    {"match": "ice", "color": [0.75, 0.9, 1.0], "forma": "cristal"}
+  ]
+}

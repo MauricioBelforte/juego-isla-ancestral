@@ -11,6 +11,20 @@
     "msg.no_materiales": "Faltan materiales",
     "msg.nuevo_dia": "Nuevo día",
     "npc.hola": "Hola",
-    "npc.adios": "Adiós"
+    "npc.adios": "Adiós",
+    "eventos.historia_c1_nombre": "Las Cenizas Futuras",
+    "eventos.historia_c1_desc": "El mural de la biblioteca quemada revela el primer giro.",
+    "eventos.historia_c2_nombre": "El Puente de las Memorias",
+    "eventos.historia_c2_desc": "La herramienta del templo abre el puente hacia la isla Mar.",
+    "eventos.historia_c3_nombre": "El Jardín Ahogado",
+    "eventos.historia_c3_desc": "El faro ciego guarda la entrada al agua del jardín.",
+    "eventos.historia_c4_nombre": "El Valle de los Vientos",
+    "eventos.historia_c4_desc": "El Templo de la Brisa exige los siete sellos para abrirse.",
+    "eventos.historia_c5_nombre": "La Noche Eterna",
+    "eventos.historia_c5_desc": "El eclipse del Templo enciende el tema de la Brisa.",
+    "eventos.historia_c6_nombre": "El Corazón del Mundo",
+    "eventos.historia_c6_desc": "La geoda volcánica confirma quién escondió el Sello.",
+    "eventos.historia_c7_nombre": "La Cámara del Sello",
+    "eventos.historia_c7_desc": "La Cámara bajo el Templo de la Brisa espera la elección."
   }
 }

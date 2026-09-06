@@ -1,115 +1,17 @@
-# Checklist de Tareas — M155 155-Vestimenta-Y-Accesorios
+# Tareas módulo 155 155-Vestimenta-Y-Accesorios
 
-**Modelo:** agnes-2.5-flash
-**Plataforma:** Kilo Code
-**Fecha inicio:** 2026-09-04
-**Fuente:** DOCUMENTACION/155-Vestimenta-Y-Accesorios/plan-actual/05-Checklist.md
+**Estado:** 🟡 Liberado (iter. 6 integracion)
 
-- [x] T-001 Definir el alcance del sistema de vestimenta y accesorios [M]
-- [x] T-002 Establecer que el sistema opera en tiempo de ejecución sin reinicios de escena [C]
-- [x] T-003 Confirmar compatibilidad con el sistema de terrenos (M156) [M]
-- [x] T-004 Validar que el sistema no interfiere con el guardado de progreso (M59) [M]
-- [ ] T-005 Asegurar que los accesorios se renderizan correctamente en el jugador [M]
-- [x] T-006 Establecer que los bonos son acumulativos y se aplican en tiempo real [S]
-- [x] T-007 Definir que cada prenda pertenece a un único slot de equipamiento [S]
-- [x] T-008 Confirmar que el jugador puede portar máximo 4 accesorios simultáneamente [S]
-- [x] T-009 Establecer que el catálogo se carga al iniciar el juego [M]
-- [ ] T-010 Validar que los requisitos de desbloqueo verifican progreso del jugador [M]
-- [x] T-011 Crear enum `EquipmentSlot.SlotType` con valores: HEAD, BODY, FEET, ACCESSORY [S]
-- [ ] T-012 Crear enum `TerrainType` con valores: grass, mud, pavement, sand, shallow_water, snow, rock [S]
-- [x] T-013 Crear Resource `EquipmentSlot` con campos: slot_type, item_id, item_name, terrain_bonuses, comfort_penalty [C]
-- [x] T-014 Crear Resource `PlayerEquipment` con slots: head, body, feet, accessory + to_dict/from_dict [M]
-- [x] T-015 Implementar serialización JSON de `PlayerEquipment` para guardado [M]
-- [x] T-016 Implementar deserialización de `PlayerEquipment` desde datos guardados [M]
-- [x] T-017 Crear catálogo de 16 prendas en EquipmentManager._load_catalog() [M]
-- [x] T-018 Crear tabla de 7 terrenos en EquipmentManager._load_terrain_bonus_table() [M]
-- [x] T-019 Definir constantes para bonos base por defecto (sin equipamiento) [S]
-- [x] T-020 Crear estructura `UnlockCondition` con campos: tipoCondición, valorRequerido [S]
-- [x] T-021 Asociar `UnlockCondition` a cada `ClothingItemData` [S]
-- [x] T-022 Crear pool de datos estático del catálogo completo (16 prendas) [M]
-- [x] T-023 Documentar esquema de serialización en 04-Codigo.md [S]
-- [x] T-024 Crear script `EquipmentManager` como autoload/singleton persistente [M]
-- [x] T-025 Implementar método `equip_item(item_id, slot_type)` que valida slot y catálogo [C]
-- [x] T-026 Implementar método `unequip_slot(slot_type)` que devuelve el item_id anterior [M]
-- [x] T-027 Implementar método `unequip_accessory(index)` para accesorios individuales [S]
-- [x] T-028 Implementar método `get_terrain_bonus(terrain_type)` que calcula bono acumulado [C]
-- [x] T-029 Implementar método `get_total_bonus()` que suma bonos de todos los terrenos [M]
-- [x] T-030 Implementar verificación de límite de accesorios (máximo 4) [S]
-- [x] T-031 Implementar verificación de requisitos de desbloqueo antes de equipar [M]
-- [x] T-032 Emitir señal `equipment_changed(slot_type, new_item_id)` al modificar equipamiento [M]
-- [x] T-033 Implementar método `get_equipped_item(slot_type)` para consulta [S]
-- [x] T-034 Implementar método `is_item_equipped(item_id)` de verificación [S]
-- [x] T-035 Integrar con sistema de persistencia M59 (to_dict/from_dict) [C]
-- [x] T-036 feet_boots_mud: Botas de barro, bono +35% barro [S]
-- [x] T-037 feet_skates: Patines, +30% pavimento, -60% barro, -70% arena [M]
-- [x] T-038 feet_bike: Bicicleta, +20% camino, +40% pavimento, -50% barro [M]
-- [x] T-039 feet_boots_water: Botas de agua, +30% agua poco profunda, +10% barro [M]
-- [x] T-040 feet_sandals: Sandalias, +20% arena, +5% césped, -15% nieve [S]
-- [x] T-041 feet_boots_winter: Botas de invierno, +20% nieve, +15% hielo, +5% barro [M]
-- [x] T-042 head_hat_fisher: Sombrero de pescador, -10% comodidad lluvia [S]
-- [x] T-043 head_helm_explorer: Casco de explorador, sin bonos [M]
-- [x] T-044 head_scarf_warm: Bufanda de lana, +15% comodidad frío [M]
-- [x] T-045 body_shirt_casual: Camisa casual, sin bonos [S]
-- [x] T-046 body_coat_rain: Capa impermeable, +25% comodidad lluvia [M]
-- [x] T-047 body_vest_explorer: Chaleco explorador, sin bonos [C]
-- [x] T-048 acc_backpack: Mochila, sin bonos [S]
-- [x] T-049 acc_lantern: Linterna, sin bonos [S]
-- [x] T-050 acc_compass: Brújula, sin bonos [S]
-- [x] T-051 acc_amulet_ancestral: Amuleto ancestral, +10% grass/mountain/snow [C]
-- [x] T-052 Definir bonos para 7 terrenos: grass, mud, pavement, sand, shallow_water, snow, rock [M]
-- [x] T-053 Implementar función `get_terrain_bonus(terrain_type)` en EquipmentManager [C]
-- [x] T-054 Verificar que bonos negativos se aplican correctamente (desventajas) [M]
-- [x] T-055 Verificar que bonos de accesorios se suman correctamente a los de ropa [M]
-- [ ] T-056 Testear combinaciones de 3+ prendas en mismo terreno [M]
-- [x] T-057 Documentar tabla completa en 03-Diseno.md [S]
-- [x] T-058 Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M]
-- [x] T-059 Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
-- [x] T-060 Implementar slots visuales para 4 Accesorios [M]
-- [ ] T-061 Mostrar ícono de cada prenda equipada en su slot correspondiente [M]
-- [ ] T-062 Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M]
-- [x] T-063 Implementar botón "Desequipar" para cada slot [S]
-- [ ] T-064 Mostrar bonos acumulados por terreno en panel lateral [C]
-- [x] T-065 Implementar highlight visual en slots con bonos activos para terreno actual [M]
-- [x] T-066 Integrar con sistema de inventario existente (M14) [C]
-- [ ] T-067 Asegurar que la UI se oculta al entrar en combate o interacción [S]
-- [x] T-068 Botas de cuero: desbloqueadas al inicio del juego [S]
-- [x] T-069 Implementar función `is_item_unlocked(item_id)` en EquipmentManager [M]
-- [ ] T-070 Mostrar indicador visual de "bloqueado" en UI para prendas no desbloqueadas [M]
-- [x] T-071 Integrar con sistema de progreso del jugador (M14/M20) [C]
-- [ ] T-072 Guardar estado de desbloqueo en datos de guardado [M]
-- [ ] T-073 Integrar con M156 (Terrenos): aplicar bonos según terreno actual [C]
-- [ ] T-074 Integrar con M11 (Personaje): modificar move_speed con bonos de equipo [C]
-- [ ] T-075 Integrar con M14 (Inventario): consumir/retornar ítems al equipar/desequipar [C]
-- [ ] T-076 Integrar con M59 (Guardado): persistir equipamiento en GameState [C]
-- [ ] T-077 Verificar que no hay conflictos de rendimiento con otros módulos activos [M]
-- [x] T-078 Test: equipar prenda en slot vacío funciona correctamente [S]
-- [x] T-079 Test: equipar prenda en slot ocupado reemplaza la anterior [S]
-- [x] T-080 Test: desequipar prenda devuelve item_id anterior [S]
-- [x] T-081 Test: bonos se acumulan correctamente con múltiples prendas [M]
-- [ ] T-082 Test: límite de 4 accesorios se respeta [S]
-- [x] T-083 Test: bonos se aplican según terreno actual del jugador [M]
-- [ ] T-084 Test: prendas bloqueadas no se pueden equipar [S]
-- [x] T-085 Test: guardado y carga de equipamiento preserva estado [M]
-- [ ] T-086 Test: UI muestra correctamente slots ocupados y vacíos [M]
-- [x] T-087 Test: integración con sistema de combate aplica bonos de defensa [M]
-- [x] T-088 Actualizar 04-Codigo.md con archivos y funciones implementadas [M]
-- [ ] T-089 Generar log de cierre en Logs/ [S]
-- [x] T-090 Verificar M154 operativo antes de trabajo visual [S]
-- [x] T-091 Fix crítico: catálogo con claves duplicadas (body_vest_explorer y acc_backpack repetidos: versión sin unlock + versión con unlock) → eliminadas las versiones antiguas sin unlock. Catálogo cargado: 16 prendas verificado (parse OK)
-- [x] T-092 Fix boot global en equipment_manager.gd (indent espacios→tabs, 35 líneas, ver guía 07 §9.60)
-- [x] T-093 Tests ampliados (17 en total): test_flag_unlock_vest_explorer (unlock por flag mochila_mejorada), test_catalog_no_duplicates (16 únicas, regresión del fix), test_equip_replaces_same_slot (reemplazo en mismo slot)
-- [x] T-094 Suite completa del proyecto vía res://tests/run_tests.gd → ÉXITO (0 fallos, exit 0)
-- [x] T-095 Verificación visual V4: juego ejecutado, boot sin errores, FPS 60, HUD/player intactos, captura en tools/mcp/godot-mcp/capturas/155-Vestimenta-Y-Accesorios/
-- [x] T-096 Actualización de 04-Codigo (iter 2 + notas) y coordinación (CHECKLIST-GLOBAL, guía 08, ESTADO-PARALELO, Log 449)
-- [?] T-097 UI de equipamiento (panel de slots, atajo, lista de prendas desbloqueadas) — requiere tema M53/M57 y DOM-UI de capas; dueño: iter 3
-- [?] T-098 Render del modelo cambiado al equipar (M156 vestimenta visual) — pendiente del M156
-- [?] T-099 Integración inventario→equipar (M14) — pendiente para iter 3
-- [x] T-100 UI de equipamiento completa como capa M53: EquipmentLayer construida por código (reemplaza el esqueleto roto scripts/ui/equipment_ui.gd que esperaba nodos inexistentes $Panel/VBox/...)
-- [x] T-101 4 slots (head/body/feet/accessory) con nombre y rareza de la prenda equipada; click en slot ocupado = desequipar
-- [x] T-102 Grid con las 16 prendas del catálogo + estado de desbloqueo (🔒 por capítulo/flag vía UnlockCondition, botón disabled)
-- [x] T-103 Bono de terreno del equipo visible (player_equipment.get_total_terrain_bonus) + refresco por señales equipment_changed/terrain_bonus_updated
-- [x] T-104 Montaje en UIRoot (capa 8) + toggle global con acción “equipamiento” (E) en UIManager + acción en InputMap (project.godot, KEY_E física 69)
-- [x] T-105 Tests de la capa (3): test_equipment_layer.gd (build+toggle, grid 16 items, 20+ botones) incluidos en la suite → ÉXITO 0 fallos
-- [x] T-106 Verificación V4 por log: [DOM-UI] capa registrada EquipmentLayer (pila=8) + capas montadas equipamiento=true + 0 parse errors
-- [x] T-107 Verificación visual del panel abierto (tecla E) en ventana propia — COMPLETADO 2026-09-01 22:24 (Log 391): escena de preview scenes/preview_equipment.tscn (muestra la capa toggle) capturada y analizada: 4 slots (vacío), “16 prendas en el catálogo”, Amuleto ancestral 🔒 (capítulo), Brújula 🔒, Capa impermeable ✓, Chaleco explorador 🔒 (flag), Botas de barro ✓, hint E/ESC, bono +0%. Panel cozy crema/borde dorado correcto
-- [?] T-108 Integración inventario→equipar (M14) y jugador con M156 — pendientes de sus módulos
+**Items pendientes:** 11
+
+[ ] T-155-001: Asegurar que los accesorios se renderizan correctamente en el jugador
+[ ] T-155-002: Validar que los requisitos de desbloqueo verifican progreso del jugador
+[ ] T-155-003: Testear combinaciones de 3+ prendas en mismo terreno
+[ ] T-155-004: Mostrar ícono de cada prenda equipada en su slot correspondiente
+[ ] T-155-005: Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda
+[ ] T-155-006: Mostrar indicador visual de "bloqueado" en UI para prendas no desbloqueadas
+[ ] T-155-007: Guardar estado de desbloqueo en datos de guardado
+[ ] T-155-008: Verificar que no hay conflictos de rendimiento con otros módulos activos
+[ ] T-155-009: Test: UI muestra correctamente slots ocupados y vacíos
+[ ] T-155-010: UI de equipamiento (panel de slots, atajo, lista de prendas desbloqueadas) — requiere tema M53/M57 y DOM-UI de capas; dueño: iter 3
+[ ] T-155-011: Render del modelo cambiado al equipar (M156 vestimenta visual) — pendiente del M156

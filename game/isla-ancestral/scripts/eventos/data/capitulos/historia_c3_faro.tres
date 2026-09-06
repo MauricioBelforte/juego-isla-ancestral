@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c3_faro"
+tipo = 5
+nombre_clave = &"eventos.historia_c3_nombre"
+descripcion_clave = &"eventos.historia_c3_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 5 * 60
+hora_fin = 22 * 60
+dias_aviso = 1
+prioridad = 200
+flags = {"capitulo": 3, "historia": true, "gatillo": "faro_jardin"}

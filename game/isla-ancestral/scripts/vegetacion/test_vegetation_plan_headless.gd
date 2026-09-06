@@ -24,7 +24,7 @@ func _check(nombre: String, cond: bool) -> void:
 func _run() -> void:
 	print("=== [M50] Test del plan de vegetación ===")
 	var plan: Array = PLAN.generar_plan(Vector2(256, 256), 256.0, 42)
-	_check("Plan generado (biomas, 45+ ítems)", plan.size() == 45)
+	_check("Plan generado (biomas, 45+ ítems)", plan.size() >= 45)
 	var plan2: Array = PLAN.generar_plan(Vector2(256, 256), 256.0, 42)
 	var mismo: bool = plan.size() == plan2.size() and plan[0]["tipo"] == plan2[0]["tipo"] and plan[20]["posicion"]["x"] == plan2[20]["posicion"]["x"]
 	_check("Determinismo (semilla 42)", mismo)
@@ -39,7 +39,7 @@ func _run() -> void:
 	var biomas := {}
 	for item in plan:
 		biomas[String(item["bioma"])] = true
-	_check("5 biomas presentes", biomas.size() == 5)
+	_check(">= 5 biomas presentes (5 anillos + cercanias_spawn, Log 644)", biomas.size() >= 5)
 	var con_tipo_vacio := false
 	for item in plan:
 		if String(item["tipo"]).is_empty():

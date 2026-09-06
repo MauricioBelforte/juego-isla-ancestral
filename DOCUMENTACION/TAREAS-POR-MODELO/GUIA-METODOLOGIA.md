@@ -46,3 +46,4 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 |--------|------------|----------------|---------|--------|
 | deepseek-v4-flash-vision-exp | Kilo Code | 2026-09-02 | 37 | 3.474 |
 | MiMo V2.5 | OpenCode | 2026-09-02 | 8 | 312 |
+| glm-5.3-flash | Kilo Code | 2026-09-02 | 22+ | ~330 |

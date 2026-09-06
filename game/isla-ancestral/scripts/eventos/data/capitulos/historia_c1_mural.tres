@@ -1,0 +1,18 @@
+﻿[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/eventos/event_definition.gd" id="1_evdef"]
+
+[resource]
+script = ExtResource("1_evdef")
+id = "historia_c1_mural"
+tipo = 5
+nombre_clave = &"eventos.historia_c1_nombre"
+descripcion_clave = &"eventos.historia_c1_desc"
+dia = 0
+mes = -1
+estacion = -1
+hora_inicio = 0
+hora_fin = 1440
+dias_aviso = 1
+prioridad = 200
+flags = {"capitulo": 1, "historia": true, "gatillo": "mural_biblioteca"}
