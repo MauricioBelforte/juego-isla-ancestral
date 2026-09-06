@@ -1,0 +1,68 @@
+﻿
+Number Name                                                   
+------ ----                                                   
+   401 401-dup1-Protocolo-Comando-Bucle_2026-09-02_04-00-00.md
+   401 401-M116-Instalador-Iter1_2026-09-02_02-05-00.md       
+
+
+
+
+Number Name                                                      
+------ ----                                                      
+   407 407-dup1-M94-Retencion-Verificacion_2026-09-02_03-00-00.md
+   407 407-M63-Streaming-Verificacion_2026-09-02_03-20-00.md     
+
+
+
+
+Number Name                                                        
+------ ----                                                        
+   413 413-Implementacion-M160-Ubicaciones_2026-09-02_00-10.md     
+   413 413-M147-M148-CanonyLore-Verificacion_2026-09-02_05-30-00.md
+   413 413-M73-Coleccionables-Iter2_2026-09-02_05-30-00.md         
+
+
+
+
+Number Name                                                 
+------ ----                                                 
+   414 414-dup1-QA-CRUZADO-M36-FAUNA_2026-09-02_00-30.md    
+   414 414-dup2-M69-Fast-Travel-Iter1_2026-09-02_05-40-00.md
+   414 414-M115-Hardware-Iter2_2026-09-02_06-00-00.md       
+
+
+
+
+Number Name                                                                  
+------ ----                                                                  
+   415 415-dup1-M50-Vegetacion-Iter1-Inventario-Visual_2026-09-02_05-50-00.md
+   415 415-dup2-QA-CRUZADO-M65-ANIMALES-IA_2026-09-02_00-50.md               
+   415 415-M96-Plataformas-Iter2_2026-09-02_06-30-00.md                      
+
+
+
+
+Number Name                                                        
+------ ----                                                        
+   418 418-dup1-M27-Islas-Iter1-Config4Islas_2026-09-02_06-20-00.md
+   418 418-M117-Build-System-Nucleo-Iter1_2026-09-02.md            
+
+
+
+
+Number Name                                                       
+------ ----                                                       
+   437 437-AGNES-BUCLE-CONTINUACION_2026-09-02.md                 
+   437 437-dup1-M130-Artbook-Nucleo-Iter1_2026-09-02_04-20-00.md  
+   437 437-Recuperacion-v3-Asignacion-Recom_2026-09-02_04-25-00.md
+
+
+
+
+Number Name                                                                      
+------ ----                                                                      
+   564 564-fix-bug021-bug022-chunks-vegetacion_2026-09-02_20-40.md               
+   564 564-M162-Dialogos-ITER-CONTENIDO2-Cobertura-Amistad_2026-09-02_23-59-00.md
+
+
+
