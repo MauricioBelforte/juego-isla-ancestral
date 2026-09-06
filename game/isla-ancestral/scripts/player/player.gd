@@ -229,14 +229,22 @@ func _physics_process(delta: float) -> void:
 				_place_block()
 			_q_prev_mano = q_presionado
 	
-	# Salto (ESPACIO) — solo cuando hay suelo
+	# Salto (ESPACIO) — solo cuando hay suelo; adentro del agua nada hacia arriba
 	if _on_ground and Input.is_key_pressed(KEY_SPACE):
 		velocity.y = 7.0
 		_on_ground = false
+	elif _en_agua() and Input.is_key_pressed(KEY_SPACE):
+		velocity.y = 4.0   # nadar: subir con espacio dentro del agua
 
 	# DEV: descender al suelo (C) — el salto en dev flota; con C vuelve a tierra
 	if Input.is_key_pressed(KEY_C):
 		_descender_al_suelo()
+	# DEV: bajar a la superficie y caminar (V) — aterriza la dev-flight
+	if Input.is_key_pressed(KEY_V):
+		_descender_al_suelo()
+	# DEV: nadar a la superficie (N) — desde el fondo del mar
+	if Input.is_key_pressed(KEY_N):
+		_subir_a_superficie()
 
 	# DEV: teleport junto a Catalina (T) — para probar el diálogo de M21
 	var t_presionado := Input.is_key_pressed(KEY_T)
@@ -309,15 +317,58 @@ func _descender_al_suelo() -> void:
 		return
 	vt.channel = VoxelBuffer.CHANNEL_TYPE
 	var p := global_position
+	# Baja hasta el primer bloque SOLIDO real (excluye agua 17/30 — el C ya no
+	# se detiene sobre la superficie del mar; en agua baja al fondo = sumergido).
 	for y in range(int(p.y), -1, -1):
-		if int(vt.get_voxel(Vector3i(int(p.x), y, int(p.z)))) != 0:
-			global_position = Vector3(p.x, float(y) + 2.0, p.z)
+		var v: int = int(vt.get_voxel(Vector3i(int(p.x), y, int(p.z))))
+		if v != 0 and v != 17 and v != 30:
+			global_position = Vector3(p.x, float(y) + 1.0, p.z)  # fix C: los pies al bloque (antes +2.0 flotaba)
 			velocity.y = 0.0
 			_on_ground = true
 			return
-	global_position = Vector3(p.x, 2.0, p.z)
+	global_position = Vector3(p.x, 1.0, p.z)  # fix C fallback
 	velocity.y = 0.0
 	_on_ground = true
+
+## DEV: nadar hacia la superficie (tecla N) — sube desde el fondo del agua
+## hasta el primer aire encima del último bloque de agua (flota en superficie).
+func _subir_a_superficie() -> void:
+	if _terrain == null:
+		return
+	var vt = _terrain.get_voxel_tool()
+	if vt == null:
+		return
+	vt.channel = VoxelBuffer.CHANNEL_TYPE
+	var p := global_position
+	for y in range(int(p.y), int(p.y) + 80):
+		var v: int = int(vt.get_voxel(Vector3i(int(p.x), y, int(p.z))))
+		if v == 0:
+			# aire: si el bloque de abajo es agua → superficie del mar
+			var v_abajo: int = int(vt.get_voxel(Vector3i(int(p.x), y - 1, int(p.z))))
+			if v_abajo == 17 or v_abajo == 30:
+				global_position = Vector3(p.x, float(y) + 0.5, p.z)
+				velocity.y = 0.0
+				_on_ground = false
+				print("[DEV] Nadando a la superficie (N)")
+				return
+			# aire con terreno debajo: ya está fuera del agua
+			if v_abajo != 17 and v_abajo != 30:
+				global_position = Vector3(p.x, float(y), p.z)
+				velocity.y = 0.0
+				_on_ground = false
+				return
+		# agua o sólido: seguir subiendo
+
+func _en_agua() -> bool:
+	if _terrain == null:
+		return false
+	var vt = _terrain.get_voxel_tool()
+	if vt == null:
+		return false
+	vt.channel = VoxelBuffer.CHANNEL_TYPE
+	var p := global_position
+	var v = int(vt.get_voxel(Vector3i(int(p.x), int(p.y) + 1, int(p.z))))
+	return v == 17 or v == 30
 
 func _rotate_to_direction() -> void:
 	if _move_direction.length() < 0.1:

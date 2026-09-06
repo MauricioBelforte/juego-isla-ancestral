@@ -26,7 +26,38 @@ enum ToastType { ITEM, EVENT, QUEST }
 ## ── Ciclo de vida ──────────────────────────────────────
 
 func _ready() -> void:
-	pass
+	_conectar_event_bus()
+
+
+## ── Puente EventBus (iter. M53/M72/M37, glm-5.3-flash Log 563) ──
+## Consume EventBus.ui.notify {tipo, titulo, texto, id} de los servicios
+## (M72 logros, M37 museo) y lo convierte a toasts de la cola propia.
+## Duck-typed: si el EventBus o la señal no existen, el servicio funciona igual.
+
+func _conectar_event_bus() -> void:
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null or bus.ui == null or not bus.ui.has_signal("notify"):
+		return
+	bus.ui.notify.connect(_on_event_notify)
+
+
+func _on_event_notify(toast_data: Dictionary) -> void:
+	var tipo := String(toast_data.get("tipo", "event"))
+	var titulo := String(toast_data.get("titulo", ""))
+	var texto := String(toast_data.get("texto", ""))
+	# Mapeo de tipo de servicio → ToastType local
+	var toast_type: ToastType = ToastType.EVENT
+	match tipo:
+		"logro":
+			toast_type = ToastType.ITEM
+		"museo":
+			toast_type = ToastType.EVENT
+		"quest", "mision":
+			toast_type = ToastType.QUEST
+	var text := titulo
+	if texto != "" and texto != titulo:
+		text = titulo + " — " + texto
+	push({"text": text, "type": toast_type, "icon": tipo})
 
 
 ## ── API pública ─────────────────────────────────────────

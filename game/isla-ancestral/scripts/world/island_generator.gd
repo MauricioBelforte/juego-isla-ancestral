@@ -91,12 +91,14 @@ func get_height(x: int, z: int) -> int:
 	# 2) ANILLO CIRCULAR: centro hasta 98% -> arena plana/playa (height 3-4, SAND).
 	# 3) MONTANAS DE PIEDRA: dentro del 55%, picos escarpados de roca gris (STONE
 	#    via bioma mountain, height > max_height*0.65) con selva/bosque en la base.
-	# AGUAS EN DOS NIVELES (spec usuario): 0.94-0.98 = agua CLARA (fondo a
-	# altura 2: el jugador camina de pie sumergido hasta la cintura); >0.98 =
-	# agua PROFUNDA (fondo a 0: se hunde).
+	# AGUAS EN DOS NIVELES (spec usuario): 0.94-1.03 = agua CLARA (fondo a
+	# altura 2: el jugador camina de pie sumergido hasta la cintura) — banda
+	# 3x más ancha hacia el MAR (fix 2026-09-03: 0.97→1.03, ~77 bloques
+	# de orilla pisable, solo se redujo agua profunda, arena intacta);
+	# >1.03 = agua PROFUNDA (fondo a 0: se hunde).
 	if dist <= 0.94:
 		height = 3 + int(maxf(0.0, terrain_noise) * 1.5)
-	elif dist <= 0.98:
+	elif dist <= 1.03:
 		height = 2
 	else:
 		height = 0
@@ -129,14 +131,14 @@ func get_block_at(x: int, y: int, z: int) -> int:
 	var dist := sqrt(pow(float(x - island_radius), 2.0) + pow(float(z - island_radius), 2.0)) / float(island_radius)
 	
 	# Fuera del terreno: agua en dos niveles (spec M167). Banda costera
-	# 0.94-0.98 = agua CLARA turquesa (SHALLOW_WATER) pisable sobre el fondo de
-	# arena; >0.98 = agua PROFUNDA azul. La capa de agua clara se coloca en
+	# 0.94-1.03 = agua CLARA turquesa (SHALLOW_WATER) pisable sobre el fondo de
+	# arena; >1.03 = agua PROFUNDA azul. La capa de agua clara se coloca en
 	# y = height+1 (=3) para que el jugador camine sumergido hasta la cintura
 	# (fix 2026-09-01, deepseek-v4-flash-vision-exp: antes y <= water_level
 	# dejaba esa celda como AIR -> el agua turquesa nunca se generaba).
 	if y > height:
 		if y <= water_level + 1:
-			if dist > 0.94 and dist <= 0.98:
+			if dist > 0.94 and dist <= 1.03:
 				return BlockType.SHALLOW_WATER
 			return BlockType.WATER
 		return BlockType.AIR

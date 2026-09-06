@@ -5,6 +5,7 @@
 # M53: PauseLayer — menú de pausa (modal completo).
 # Muestra opciones de pausa (Continuar, Ajustes, Guardar, Volver al título).
 # Registrada en UIManager; navegable por teclado y gamepad (MenuNavigator).
+# T-053-066: deep-linking entre capas (ajustes → pausa, settings → volver).
 
 class_name PauseLayer
 extends UILayer
@@ -15,6 +16,7 @@ signal guardar_pedido
 signal salir_pedido
 
 var _buttons: Array[Button] = []
+var _layer_stack_backup: Array[Node] = []
 
 func _ready() -> void:
 	layer_type = UILayerType.Type.MODAL_FULL
@@ -64,7 +66,7 @@ func _crear_ui() -> void:
 	vbox.add_child(sep_small)
 
 	_agregar_boton(vbox, "SETTINGS.CONTINUAR", func(): continuar_pedido.emit())
-	_agregar_boton(vbox, "SETTINGS.AJUSTES", func(): ajustes_pedido.emit())
+	_agregar_boton(vbox, "SETTINGS.AJUSTES", func(): _navegar_a_ajustes())
 	_agregar_boton(vbox, "SETTINGS.GUARDAR", func(): guardar_pedido.emit())
 	_agregar_boton(vbox, "SETTINGS.SALIR", func(): salir_pedido.emit())
 
@@ -82,6 +84,20 @@ func _t(clave: String) -> String:
 		if res != clave:
 			return res
 	return clave
+
+## T-053-066: deep-linking — navegar a ajustes y volver aquí
+func _navegar_a_ajustes() -> void:
+	var ui_mgr = get_node_or_null("/root/UIManager")
+	if ui_mgr == null:
+		return
+	# Guardar referencia para volver después
+	_layer_stack_backup = ui_mgr._stack.duplicate()
+	# Abrir ajustes (capa separada que vuelve a pausa)
+	ajustes_pedido.emit()
+
+## T-053-066: restaurar estado anterior después de ajustes
+func restaurar_desde_ajustes() -> void:
+	_layer_stack_backup.clear()
 
 ## ── UILayer virtual ──────────────────────────────────────
 

@@ -43,14 +43,24 @@ func _refresh_slot(slot_control: Control, slot_type: EquipmentSlot.SlotType) -> 
     if not equipment_manager or not slot_control:
         return
     var slot: EquipmentSlot = equipment_manager.get_equipped_item(slot_type)
+    # BUG-016 (2026-09-02): get_node con null-check — el layout puede variar
+    # (nodos Icon/Label/Rarity ausentes no deben crashear).
+    var icon: TextureRect = slot_control.get_node_or_null("Icon")
+    var label: Label = slot_control.get_node_or_null("Label")
+    var rarity: Label = slot_control.get_node_or_null("Rarity")
     if slot and slot.is_equipped():
-        slot_control.get_node("Icon").texture = null
-        slot_control.get_node("Label").text = slot.item_name
-        slot_control.get_node("Rarity").visible = true
-        slot_control.get_node("Rarity").text = slot.rarity
+        if icon:
+            icon.texture = null
+        if label:
+            label.text = slot.item_name
+        if rarity:
+            rarity.visible = true
+            rarity.text = slot.rarity
     else:
-        slot_control.get_node("Label").text = "Vacío"
-        slot_control.get_node("Rarity").visible = false
+        if label:
+            label.text = "Vacío"
+        if rarity:
+            rarity.visible = false
 
 func _on_equipment_changed(slot_type: int, new_item_id: String) -> void:
     var slot_control: Control = _get_slot_control(slot_type)

@@ -103,6 +103,23 @@ func catalogo_count() -> int:
 	return _catalogo.size()
 
 
+## BUG-011 fix (iter. 3): obtiene el perfil de un vecino por id.
+## El NPCAgent (M64) lo consume en _get_profile(); antes retornaba null
+## siempre ("not yet implemented") → perfil=unknown → sin rutina → watchdog
+## en bucle. Fallback case-insensitive: el nodo se llama "CatalinaOso" pero
+## el catálogo usa "catalina_oso" (ids del JSON/perfiles).
+func obtener_perfil(vecino_id: String) -> Resource:
+	if _catalogo.has(vecino_id):
+		return _catalogo[vecino_id]
+	# Fallback case-insensitive + sin separadores (CatalinaOso vs catalina_oso)
+	var objetivo := vecino_id.to_lower().replace("_", "").replace("-", "").replace(" ", "")
+	for id in _catalogo:
+		var normalizado := String(id).to_lower().replace("_", "").replace("-", "").replace(" ", "")
+		if normalizado == objetivo:
+			return _catalogo[id]
+	return null
+
+
 ## ── Tiempo (M29/M30): llegada 08:00 y partidas ─────────
 
 func _suscribir_tiempo() -> void:
@@ -276,13 +293,17 @@ func get_spawn_for_parcela(parcela_idx: int) -> Vector3:
 
 
 ## Calcula la posición mundo de una parcela a partir de su índice.
-## Grid circular: radio 48, separación 16, centrado en isla.
+## Anillo circular de hogares SOBRE la Isla Raíz (centro en island_radius=256,
+## NO en el origen 0,0 que cae en pleno océano — bug de aldeanos a Y=1.0).
+## Radio 160 => anillo en la llanura/playa (dist ~0.62 del centro, tierra
+## habitable), lejos del pico central y fuera del agua.
+const CENTRO_ISLA := Vector2(256.0, 256.0)
 func _calcular_posicion_parcela(idx: int, locator: Node) -> Vector3:
-	var radio := 48.0
+	var radio := 160.0
 	var separacion := 16.0
 	var angulo := (idx * 2.0 * PI) / POBLACION_MAX
-	var x := radio * cos(angulo)
-	var z := radio * sin(angulo)
+	var x := CENTRO_ISLA.x + radio * cos(angulo)
+	var z := CENTRO_ISLA.y + radio * sin(angulo)
 	var y := 1.0
 	if locator:
 		var h: int = locator.get_height(int(x), int(z))
@@ -563,10 +584,6 @@ func _spawn_vecino_de_perfil(id: String, perfil: Resource) -> Node:
 	if _activos.size() < POBLACION_MAX:
 		var parcela := _activos.size()
 		_asignar_hogar_directo(id, parcela)
-	# Snap al terreno con TerrainLocator (nunca flotar — regla 167/07 §10.15)
-	if nodo is Node3D:
-		var pos := _calcular_posicion_parcela(int(_hogares.get(id, 0)), get_node_or_null("/root/TerrainLocator"))
-		nodo.global_position = pos + Vector3(0, 1, 0)
 	# Sincronizar con el perfil (el villager.tscn tomará colores/rutinas)
 	if "profile" in nodo:
 		nodo.profile = perfil
@@ -574,10 +591,15 @@ func _spawn_vecino_de_perfil(id: String, perfil: Resource) -> Node:
 	var root_scene := get_tree().current_scene
 	if root_scene != null:
 		root_scene.add_child(nodo)
-		registrar_villager(nodo)
-		return nodo
-	# Headless sin escena: registrar lógicamente con el manager como padre
-	add_child(nodo)
+	else:
+		# Headless sin escena: registrar lógicamente con el manager como padre
+		add_child(nodo)
+	# Snap al terreno con TerrainLocator (nunca flotar — regla 167/07 §10.15).
+	# Se hace DESPUÉS de add_child para que global_position sea válido y no
+	# dispare ERROR "!is_inside_tree()" en get_global_transform (BUG-024).
+	if nodo is Node3D:
+		var pos := _calcular_posicion_parcela(int(_hogares.get(id, 0)), get_node_or_null("/root/TerrainLocator"))
+		nodo.global_position = pos + Vector3(0, 1, 0)
 	registrar_villager(nodo)
 	return nodo
 

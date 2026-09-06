@@ -5,6 +5,7 @@ class_name ActionPromptOverlay
 ## Muestra prompts contextuales que cambian según el dispositivo
 ## de entrada activo (teclado, gamepad genérico, Xbox, PlayStation).
 ## Se actualiza desde M57 (Interfaz de Control).
+## T-053-060: re-lee etiquetas de prompts automáticamente al remapear.
 
 ## ── Configuración ───────────────────────────────────────
 const COLOR_TEXT := Color(0.25, 0.18, 0.12)
@@ -39,21 +40,30 @@ const DEVICE_MAP := {
 	},
 }
 
+## Mapeo de acciones de gameplay a acciones de prompt
+const ACTION_TO_PROMPT := {
+	"interactuar": "interact",
+	"inventario": "inventory",
+	"pausa": "pause",
+}
+
 ## ── Ciclo de vida ──────────────────────────────────────
 
 func _ready() -> void:
 	anchors_preset = Control.PRESET_FULL_RECT
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_detect_device()
+	# T-053-060: conectarse a UIManager.device_changed para actualizar prompts
+	var ui_mgr = get_node_or_null("/root/UIManager")
+	if ui_mgr and ui_mgr.has_signal("device_changed"):
+		ui_mgr.device_changed.connect(_on_device_changed)
 
 
 ## ── API pública ─────────────────────────────────────────
 
 ## Muestra un prompt en una posición específica
 func show_prompt(action: String, at_position: Vector2) -> void:
-	var device_map: Dictionary = DEVICE_MAP.get(_current_device, DEVICE_MAP.keyboard)
-	var key_text: String = device_map.get(action, "?")
-
+	var key_text := _get_key_text_for_action(action)
 	var prompt_node := _create_prompt_node(key_text, action)
 	prompt_node.position = at_position
 	add_child(prompt_node)
@@ -71,14 +81,68 @@ func hide_all() -> void:
 ## Actualiza el dispositivo activo (llamar desde M57)
 func set_device(device: String) -> void:
 	_current_device = device
-	# Re-crear todos los prompts con el nuevo dispositivo
-	var saved_actions: Array[String] = []
+	_refresh_all_prompts()
+
+
+## ── T-053-060: Métodos de actualización automática ─────
+
+## Obtiene el texto de tecla para una acción, considerando remapeos de M57
+func _get_key_text_for_action(action: String) -> String:
+	# Primero intentar obtener del InputMap (M57 remapea ahí)
+	var gameplay_action: String = ACTION_TO_PROMPT.get(action, action)
+	var eventos: Array = InputMap.action_get_events(gameplay_action)
+	if eventos.size() > 0:
+		return _event_to_display_text(eventos[0])
+	# Fallback al DEVICE_MAP estático
+	var device_map: Dictionary = DEVICE_MAP.get(_current_device, DEVICE_MAP.keyboard)
+	return device_map.get(action, "?")
+
+
+## Convierte un InputEvent a texto legible para el prompt
+func _event_to_display_text(evento: InputEvent) -> String:
+	if evento is InputEventKey:
+		return OS.get_keycode_string(evento.keycode)
+	elif evento is InputEventJoypadButton:
+		return Input.get_joy_button_string(evento.button_index)
+	elif evento is InputEventJoypadMotion:
+		var axis_name := ""
+		if evento.axis == JOY_AXIS_LEFT_X or evento.axis == JOY_AXIS_RIGHT_X:
+			axis_name = "Palanca" if evento.axis == JOY_AXIS_LEFT_X else "Palanca D"
+		else:
+			axis_name = "Gatillo" if evento.axis == JOY_AXIS_TRIGGER_LEFT or evento.axis == JOY_AXIS_TRIGGER_RIGHT else "Palanca"
+		return axis_name
+	elif evento is InputEventMouseButton:
+		match evento.button_index:
+			MOUSE_BUTTON_LEFT: return "Click"
+			MOUSE_BUTTON_RIGHT: return "Derecho"
+			MOUSE_BUTTON_MIDDLE: return "Medio"
+	return "?"
+
+
+## Refresca todos los prompts visibles con el dispositivo actual
+func _refresh_all_prompts() -> void:
+	var saved: Array[Dictionary] = []
 	for p in _visible_prompts:
 		if is_instance_valid(p) and p.has_meta("action"):
-			saved_actions.append(p.get_meta("action"))
+			saved.append({"action": p.get_meta("action"), "pos": p.position})
 	hide_all()
-	for action in saved_actions:
-		show_prompt(action, Vector2.ZERO)
+	for item in saved:
+		var key_text := _get_key_text_for_action(item["action"])
+		var prompt_node := _create_prompt_node(key_text, item["action"])
+		prompt_node.position = item["pos"]
+		add_child(prompt_node)
+		_visible_prompts.append(prompt_node)
+
+
+## Callback de cambio de dispositivo desde UIManager
+func _on_device_changed(mode: String) -> void:
+	var device: String
+	match mode:
+		"teclado": device = "keyboard"
+		"xbox": device = "gamepad_xbox"
+		"playstation": device = "gamepad_ps"
+		_: device = "keyboard"
+	set_device(device)
 
 
 ## ── Métodos privados ────────────────────────────────────

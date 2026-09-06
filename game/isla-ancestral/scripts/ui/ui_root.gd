@@ -27,6 +27,8 @@ var crafting_ui: Node = null
 var inventory_layer: Node = null
 var shop_ui: Node = null
 var equipment_ui: Node = null
+var diary_layer: Node = null
+var loading_layer: Node = null
 
 func _ready() -> void:
 	layer = 100
@@ -53,6 +55,8 @@ func _build_layers() -> void:
 		menus_layer = ml_load.new()
 		menus_layer.name = "MenusLayer"
 		add_child(menus_layer)
+		# T-053-065: conectar señales del menú principal a GameFlowManager
+		_conectar_menu_señales()
 
 	# Popup de confirmación
 	var cp_load := load("res://scripts/ui/layers/confirm_popup.gd")
@@ -90,9 +94,24 @@ func _build_layers() -> void:
 		equipment_ui.name = "EquipmentLayer"
 		add_child(equipment_ui)
 
-	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s)" % [
+	# T-053-067 M55: Diario del jugador
+	var dl2_load := load("res://scripts/ui/layers/diary_layer.gd")
+	if dl2_load:
+		diary_layer = dl2_load.new()
+		diary_layer.name = "DiaryLayer"
+		add_child(diary_layer)
+
+	# T-053-068 M63: Pantalla de carga
+	var ll_load := load("res://scripts/ui/layers/loading_layer.gd")
+	if ll_load:
+		loading_layer = ll_load.new()
+		loading_layer.name = "LoadingLayer"
+		add_child(loading_layer)
+
+	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s diario=%s carga=%s)" % [
 		dialog_layer != null, pause_layer != null, menus_layer != null,
-		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null, equipment_ui != null])
+		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null, equipment_ui != null,
+		diary_layer != null, loading_layer != null])
 
 func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> void:
 	if script == null:
@@ -103,3 +122,44 @@ func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> voi
 	if widget is Control:
 		widget.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	parent.add_child(widget)
+
+## T-053-065: conectar señales del MenusLayer (M89) a GameFlowManager
+func _conectar_menu_señales() -> void:
+	if menus_layer == null:
+		return
+	var gfm = get_node_or_null("/root/GameFlowManager")
+	if gfm == null:
+		return
+	# Jugar → cambiar a CARGANDO (GameState crearía nueva partida)
+	if menus_layer.has_signal("jugar_pedido"):
+		menus_layer.jugar_pedido.connect(func():
+			if gfm.has_method("cambiar_estado"):
+				gfm.cambiar_estado(gfm.Estado.CARGANDO)
+				print("[M89] Jugar → CARGANDO")
+		)
+	# Continuar → cambiar a CARGANDO (GameState cargaría último save)
+	if menus_layer.has_signal("continuar_pedido"):
+		menus_layer.continuar_pedido.connect(func():
+			if gfm.has_method("cambiar_estado"):
+				gfm.cambiar_estado(gfm.Estado.CARGANDO)
+				print("[M89] Continuar → CARGANDO")
+		)
+	# Ajustes → abrir PauseLayer (capa de ajustes compartida)
+	if menus_layer.has_signal("ajustes_pedido"):
+		menus_layer.ajustes_pedido.connect(func():
+			var ui_mgr = get_node_or_null("/root/UIManager")
+			if ui_mgr and pause_layer:
+				ui_mgr.push_layer(pause_layer)
+				print("[M89] Ajustes → PauseLayer")
+		)
+	# Créditos → print por ahora (M89 pendiente)
+	if menus_layer.has_signal("creditos_pedido"):
+		menus_layer.creditos_pedido.connect(func():
+			print("[M89] Créditos → pendiente de implementar")
+		)
+	# Salir → get_tree().quit()
+	if menus_layer.has_signal("salir_pedido"):
+		menus_layer.salir_pedido.connect(func():
+			get_tree().quit()
+			print("[M89] Salir")
+		)

@@ -35,6 +35,9 @@ var _current_modal_full: Node = null
 
 ## ── Ciclo de vida ──────────────────────────────────────
 
+## Señal emitida cuando cambia el dispositivo de entrada (M57 → M53)
+signal device_changed(mode: String)
+
 func _ready() -> void:
 	# Suscribir eventos de UI del EventBus
 	if has_node("/root/EventBus"):
@@ -45,6 +48,14 @@ func _ready() -> void:
 				ui_events.hud_request.connect(_on_hud_request)
 			if ui_events != null and ui_events.has_signal("dialog_requested"):
 				ui_events.dialog_requested.connect(_on_dialog_requested)
+	# T-053-058: suscribirse a ControlInput (M57) para prompts dinámicos
+	var ctrl = get_node_or_null("/root/ControlInput")
+	if ctrl and ctrl.has_signal("dispositivo_cambiado"):
+		ctrl.dispositivo_cambiado.connect(_on_device_changed)
+	# T-053-061: suscribirse a GameSettings para reaplicar tema
+	var gs = get_node_or_null("/root/GameSettings")
+	if gs and gs.has_signal("settings_changed"):
+		gs.settings_changed.connect(_on_settings_changed)
 	# M53 RF6: tooltip por foco (accesible por teclado/gamepad)
 	ui_focus_moved.connect(_on_focus_moved_tooltip)
 
@@ -100,6 +111,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			eq_layer.toggle()
 			get_viewport().set_input_as_handled()
 			return
+	# T-053-067 M56: toggle de visibilidad del HUD con acción `ocultar_hud` (H)
+	if event.is_action_pressed("ocultar_hud"):
+		set_hud_visible(not (_hud != null and _hud.visible))
+		get_viewport().set_input_as_handled()
+		return
 	# Navegación direccional con acciones del InputMap (M57)
 	var nav: Vector2i = Vector2i.ZERO
 	if event.is_action_pressed("mover_norte"):
@@ -368,6 +384,23 @@ func _buscar_nodo(node: Node, nombre: String) -> Node:
 		if result:
 			return result
 	return null
+
+
+## ── T-053-058 / T-053-059: Integración con M57 (input) ───────────────────────
+
+## Cuando ControlInput detecta cambio de dispositivo, UIManager propaga la señal
+## para que todos los widgets actualicen sus prompts (T-053-059).
+func _on_device_changed(mode: String) -> void:
+	device_changed.emit(mode)
+
+
+## ── T-053-061: Integración con M58 (settings → tema) ─────────────────────────
+
+## Cuando GameSettings emite settings_changed, ThemeService reaplica el tema.
+func _on_settings_changed() -> void:
+	var ts = get_node_or_null("/root/ThemeService")
+	if ts and ts.has_method("aplicar_tema_global"):
+		ts.aplicar_tema_global(ts.get_ui_scale() if ts.has_method("get_ui_scale") else 1.0)
 
 
 ## ── Logging ─────────────────────────────────────────────

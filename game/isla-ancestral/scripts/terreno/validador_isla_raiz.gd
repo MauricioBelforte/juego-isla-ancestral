@@ -8,7 +8,7 @@
 # Verifica (a) la config REAL usada por main_island.gd (no copia del doc),
 # (b) el perfil del get_height en grillas radiales, (c) determinismo con
 # semilla, (d) ausencia de muros verticales, (e) batimetria: el agua clara
-# turquesa (SHALLOW_WATER id 30) debe generarse en la banda 0.94-0.98.
+# turquesa (SHALLOW_WATER id 30) debe generarse en la banda 0.94-1.03.
 #
 # Ejecutar:
 #   godot --headless --path game/isla-ancestral --script res://scripts/terreno/validador_isla_raiz.gd
@@ -111,13 +111,13 @@ func _verificar_perfil_dinamico() -> void:
 	_check(h0 <= ALTURA_MAX_EXPECTADA,
 		"centro: never supera max_height (%d <= 40)" % h0)
 	# D2: playa/plato (dist ~0.94): arena height 3-4
-	var h_playa := g.get_height(c + 240, c)
+	var h_playa := g.get_height(c + 215, c)
 	_check(h_playa >= 3 and h_playa <= 4,
-		"plato de arena dist=0.9375: get_height=%d (esperado 3-4)" % h_playa)
-	# D3: banda agua clara (0.94-0.98): fondo a 2
+		"plato de arena dist=0.8398: get_height=%d (esperado 3-4)" % h_playa)
+	# D3: banda agua clara (0.94-1.03): fondo a 2
 	var h_claro := g.get_height(c + 247, c)
 	_check(h_claro == 2, "banda agua clara dist=0.9648: fondo altura 2 (get=%d)" % h_claro)
-	# D4: agua profunda (>0.98): fondo a 0
+	# D4: agua profunda (>1.03): fondo a 0
 	var h_prof := g.get_height(c + 265, c)
 	_check(h_prof == 0, "agua profunda dist=1.035: fondo altura 0 (get=%d)" % h_prof)
 	# D5: simetria global del perfil (las 4 direcciones cardinales dan el mismo
@@ -131,7 +131,7 @@ func _verificar_perfil_dinamico() -> void:
 func _verificar_batimetria() -> void:
 	var g := _gen()
 	var c := RADIO_EXPECTADO
-	# Banda 0.94-0.98 (dist = 0.9648): columna con fondo arena en y=2 y la capa
+	# Banda 0.94-1.03 (dist = 0.9648): columna con fondo arena en y=2 y la capa
 	# de agua clara turquesa debe estar en y=3 (jugador camina sumergido).
 	var x = c + 247
 	var z = c
@@ -141,12 +141,12 @@ func _verificar_batimetria() -> void:
 	# Apoyo: el fondo es arena (beach)
 	var fondo := g.get_block_at(x, h, z)
 	_check(fondo == 5, "agua clara: fondo en y=%d es arena (SAND=5, got %d)" % [h, fondo])
-	# Profunda (>0.98): capa de agua azul por encima del fondo
+	# Profunda (>1.03): capa de agua azul por encima del fondo
 	var xp = c + 265
 	var hp := g.get_block_at(xp, 1, c)
 	_check(hp == 17, "agua profunda: voxel y=1 es WATER (17, got %d)" % hp)
 	# Playera (plato): superficie arena
-	var xpl = c + 240
+	var xpl = c + 215
 	var hpl := g.get_height(xpl, c)
 	var sup_playa := g.get_block_at(xpl, hpl, c)
 	_check(sup_playa == 5, "plato: superficie arena (SAND=5, got %d)" % sup_playa)

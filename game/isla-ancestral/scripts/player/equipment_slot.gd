@@ -4,6 +4,9 @@ extends Resource
 
 enum SlotType { HEAD, BODY, FEET, ACCESSORY }
 
+## Terrenos del juego usados en bonos de equipamiento (M155 + M156).
+enum TerrainType { GRASS, MUD, PAVEMENT, SAND, SHALLOW_WATER, SNOW, ROCK }
+
 ## Tipo de slot (cabeza, cuerpo, pies, accesorio).
 @export var slot_type: SlotType = SlotType.ACCESSORY
 
