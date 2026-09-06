@@ -9,6 +9,12 @@
       },
       "enabled": true,
       "timeout": 30000
+    },
+    "blender": {
+      "type": "local",
+      "command": ["C:\\Users\\Maury-New\\AppData\\Local\\hermes\\bin\\uvx.exe", "blender-mcp"],
+      "enabled": true,
+      "timeout": 30000
     }
   }
 }
