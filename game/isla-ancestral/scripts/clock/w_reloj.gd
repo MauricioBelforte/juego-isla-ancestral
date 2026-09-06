@@ -39,6 +39,10 @@ var _lbl_fecha: Label = null
 var _fila_chip: HBoxContainer = null
 var _chip_estacion: PanelContainer = null
 var _lbl_estacion: Label = null
+## D74: badge de evento/festival activo (M64 TimeCalendar)
+var _badge_evento: PanelContainer = null
+var _lbl_evento: Label = null
+var _evento_activo: bool = false
 
 func _ready() -> void:
 	_config = _cargar_config()  # F100: data-driven · F107: fallback a defaults
@@ -56,6 +60,11 @@ func _ready() -> void:
 		_game_time.hora_cambio.connect(_on_hora_cambio)
 		_game_time.dia_cambio.connect(_on_dia_cambio)
 		_game_time.estacion_cambio.connect(_on_estacion_cambio)
+
+	_conectar_time_calendar()
+
+	# D74: desconectar TimeCalendar
+	_desconectar_time_calendar()
 
 func _exit_tree() -> void:
 	# D70: nunca dejar un tooltip huérfano al salir del árbol.
@@ -139,6 +148,10 @@ func _construir_ui() -> void:
 	vbox.add_child(fila_chip)
 	_fila_chip = fila_chip
 	fila_chip.visible = _config.mostrar_chip_estacion
+	# D74: badge de evento activo
+	_badge_evento = _crear_badge_evento()
+	_badge_evento.visible = false
+	vbox.add_child(_badge_evento)
 
 ## ── Refresco ────────────────────────────────────────────────────────────────
 func _refrescar() -> void:
@@ -254,3 +267,81 @@ func _texto_tooltip() -> String:
 	else:
 		cuerpo += "\n(Sin GameTime: modo preview)"
 	return "Fecha y hora|%s" % cuerpo
+## D74: Badge de evento/festival activo
+const COLOR_EVENTO := Color(0.95, 0.65, 0.20, 0.40)
+
+func _crear_badge_evento() -> PanelContainer:
+	var badge := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = COLOR_EVENTO
+	style.set_corner_radius_all(8)
+	style.content_margin_left = 10
+	style.content_margin_right = 10
+	style.content_margin_top = 2
+	style.content_margin_bottom = 2
+	badge.add_theme_stylebox_override("panel", style)
+	badge.visible = false
+	var center := CenterContainer.new()
+	_lbl_evento = Label.new()
+	_lbl_evento.add_theme_font_size_override("font_size", 12)
+	_lbl_evento.add_theme_color_override("font_color", Color(0.97, 0.95, 0.88))
+	center.add_child(_lbl_evento)
+	badge.add_child(center)
+	return badge
+
+func _conectar_time_calendar() -> void:
+	var tc := get_node_or_null("/root/TimeCalendar")
+	if tc == null:
+		push_warning("[M30] TimeCalendar ausente")
+		return
+	if tc.has_signal("evento_activado"):
+		tc.evento_activado.connect(_on_evento_activado)
+	if tc.has_signal("evento_proximo"):
+		tc.evento_proximo.connect(_on_evento_proximo)
+	_verificar_badge_evento(tc)
+
+func _desconectar_time_calendar() -> void:
+	var tc := get_node_or_null("/root/TimeCalendar")
+	if tc == null: return
+	if tc.has_signal("evento_activado") and tc.evento_activado.is_connected(_on_evento_activado):
+		tc.evento_activado.disconnect(_on_evento_activado)
+	if tc.has_signal("evento_proximo") and tc.evento_proximo.is_connected(_on_evento_proximo):
+		tc.evento_proximo.disconnect(_on_evento_proximo)
+
+func _verificar_badge_evento(tc) -> void:
+	if not tc.has_method("hay_evento_hoy"): return
+	if bool(tc.hay_evento_hoy()):
+		_mostrar_badge_evento(tc)
+	else:
+		_ocultar_badge_evento()
+
+func _on_evento_activado(evento: Dictionary) -> void:
+	_mostrar_badge_evento(evento)
+
+func _on_evento_proximo(_evento: Dictionary, _horas: int) -> void:
+	var tc := get_node_or_null("/root/TimeCalendar")
+	if tc != null and tc.has_method("hay_evento_hoy") and bool(tc.hay_evento_hoy()):
+		_mostrar_badge_evento(tc)
+
+func _mostrar_badge_evento(evento_or_tc) -> void:
+	if _badge_evento == null: return
+	var nombre := "!Festival!"
+	if evento_or_tc is Dictionary and evento_or_tc.has("nombre"):
+		nombre = String(evento_or_tc.get("nombre", "Evento"))
+	elif evento_or_tc is Node and evento_or_tc.has_method("obtener_festival_actual"):
+		var fest: Dictionary = evento_or_tc.obtener_festival_actual()
+		if fest != null and not fest.is_empty():
+			nombre = String(fest.get("nombre", "Festival"))
+	var style := _badge_evento.get_theme_stylebox("panel") as StyleBoxFlat
+	if style != null:
+		style.bg_color = COLOR_EVENTO
+	_lbl_evento.text = nombre
+	_badge_evento.visible = true
+	_evento_activo = true
+	_refrescar()
+
+func _ocultar_badge_evento() -> void:
+	if _badge_evento == null: return
+	_badge_evento.visible = false
+	_evento_activo = false
+	_refrescar()

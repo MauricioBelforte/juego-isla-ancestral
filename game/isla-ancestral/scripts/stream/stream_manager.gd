@@ -49,6 +49,9 @@ var _chunks: Dictionary = {}
 var _max_chunks: int = MAX_CHUNKS_DEFAULT
 ## estadísticas LRU (persistidas como métrica)
 var _descargas_total: int = 0
+## RF Pausa (iter. 2, Log 603): pausa del procesamiento de la cola
+## (mundo congelado/menús/pantallas modales no deben consumir presupuesto)
+var _cargas_pausadas: bool = false
 
 
 func _ready() -> void:
@@ -59,12 +62,21 @@ func _ready() -> void:
 
 ## Encola una operación de carga. prioridad: menor = antes (§3: anillos).
 ## El callable es el trabajo real (diferido — nunca síncrono en gameplay §8).
-func encolar(op_id: String, tipo: String, prioridad: int, callable: Callable) -> bool:
+## RF2 (iter. 3, Log 622): si la operación es de RECURSO (textura_atlas/
+## banco_audio/escena), se usa ResourceLoader.load_threaded_request REAL
+## (thread del engine); el callable queda como callback de notificación.
+func encolar(op_id: String, tipo: String, prioridad: int, callable: Callable, ruta_recurso: String = "") -> bool:
 	if not PESOS.has(tipo):
 		push_warning("[M63] tipo de operación desconocido: %s" % tipo)
 		return false
 	var peso := float(PESOS.get(tipo, 1.0))
-	_cola.append({"op_id": op_id, "tipo": tipo, "peso": peso, "prioridad": prioridad, "callable": callable})
+	var usa_thread := ruta_recurso != "" and ResourceLoader.exists(ruta_recurso)
+	if usa_thread:
+		var err := ResourceLoader.load_threaded_request(ruta_recurso)
+		if err != OK:
+			push_warning("[M63] load_threaded falló para %s (%d); cae a callable" % [ruta_recurso, err])
+			usa_thread = false
+	_cola.append({"op_id": op_id, "tipo": tipo, "peso": peso, "prioridad": prioridad, "callable": callable, "ruta": ruta_recurso, "threaded": usa_thread})
 	_pesos_encolados += peso
 	_ordenar_cola()
 	return true
@@ -76,6 +88,29 @@ func _ordenar_cola() -> void:
 
 func cola_size() -> int:
 	return _cola.size()
+
+
+## ── RF Pausa de cargas (iter. 2, Log 603) ───────────────
+
+## Pausa el procesamiento de la cola (menús/pausa del juego/mundos congelados).
+## La cola queda intacta: al reanudar continúa donde quedó.
+func pausar_cargas() -> void:
+	if _cargas_pausadas:
+		return
+	_cargas_pausadas = true
+	print("[M63] Cargas PAUSADAS (cola intacta: %d operaciones)" % _cola.size())
+
+
+## Reanuda el procesamiento de la cola.
+func reanudar_cargas() -> void:
+	if not _cargas_pausadas:
+		return
+	_cargas_pausadas = false
+	print("[M63] Cargas REANUDADAS (cola: %d operaciones)" % _cola.size())
+
+
+func cargas_pausadas() -> bool:
+	return _cargas_pausadas
 
 
 func pesos_encolados() -> float:
@@ -98,14 +133,40 @@ func progreso() -> float:
 
 ## Procesamiento asíncrono con presupuesto de ms (§8: sin congelar el frame)
 func _process(delta: float) -> void:
+	# RF Pausa (iter. 2): con cargas pausadas el progreso NO avanza y la cola
+	# queda intacta (se reanuda donde quedó — sin descartar operaciones).
+	if _cargas_pausadas:
+		return
 	if _cola.is_empty():
 		return
 	var inicio := Time.get_ticks_usec()
 	while not _cola.is_empty():
 		var op: Dictionary = _cola.pop_front()
 		var callable: Callable = op.get("callable", Callable())
-		if callable.is_valid():
-			callable.call()
+		# RF2 (iter. 3): si la op es threaded, recolectar el resultado del
+		# thread del engine; si aún no está listo, RE-ENCOLAR al final
+		# (no bloquea el frame — §8) y continuar con la siguiente.
+		if bool(op.get("threaded", false)):
+			var ruta := String(op.get("ruta", ""))
+			var estado := ResourceLoader.load_threaded_get_status(ruta)
+			if estado == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+				_cola.append(op)  # re-encolar sin reclamar peso
+				_ordenar_cola()
+				if (Time.get_ticks_usec() - inicio) / 1000.0 >= 2.0:
+					break  # pequeño chequeo por frame
+				continue
+			if estado == ResourceLoader.THREAD_LOAD_LOADED:
+				var rec: Resource = ResourceLoader.load_threaded_get(ruta)
+				if callable.is_valid():
+					callable.call(rec)
+			else:
+				# THREAD_LOAD_FAILED / INVALID_RESOURCE: fallback al callable
+				if callable.is_valid():
+					callable.call()
+				push_warning("[M63] thread load falló para %s" % ruta)
+		else:
+			if callable.is_valid():
+				callable.call()
 		var op_id := String(op.get("op_id", ""))
 		var tipo := String(op.get("tipo", ""))
 		operacion_completada.emit(op_id, tipo)

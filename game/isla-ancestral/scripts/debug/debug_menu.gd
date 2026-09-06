@@ -1,4 +1,4 @@
-# Modelo: deepseek-v4-flash
+﻿# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
@@ -127,6 +127,114 @@ func metricas_sistema() -> Dictionary:
 		"marcadores_explorados": mm.contar_exploradas() if mm else 0,
 		"comandos_ejecutados": _comandos_ejecutados,
 	}
+
+
+
+## RF20 iter. agnes-2.5-flash: Export diagnóstico completo como ZIP
+## Incluye: metadata (versión, fecha, plataforma), logs actuales, screenshot del viewport.
+## Ruta: user://diagnostics/diag_YYYYMMDD_HHMMSS.zip
+
+func _export_diagnostic_zip() -> Dictionary:
+	## Crea un ZIP con metadata + logs + screenshot. Retorna {ok, path, error}.
+	var result := {"ok": false, "path": "", "error": ""}
+	var timestamp := Time.get_datetime_string_from_system().replace(":", "").replace("-", "").replace(" ", "_")
+	var filename := "diag_%s.zip" % timestamp
+	var dir_path := "user://diagnostics"
+	var zip_path := dir_path + "/" + filename
+
+	# Crear directorio si no existe
+	var dir := DirAccess.open("user://")
+	if dir == null:
+		result.error = "no se puede abrir user://"
+		return result
+	if dir.dir_exists("diagnostics") == false:
+		dir.make_dir("diagnostics")
+
+	# Preparar ZIP
+	var zip := ZIPPacker.new()
+	var err := zip.open(zip_path)
+	if err != OK:
+		result.error = "no se pudo crear ZIP: error %d" % err
+		return result
+
+	# 1. Metadata
+	var meta := _build_metadata()
+	var meta_text := JSON.stringify(meta, "  ")
+	zip.start_file("metadata.json")
+	zip.write_file(meta_text.to_utf8_buffer())
+	zip.finish_file()
+
+	# 2. Logs del proyecto (últimas 200 líneas de output.txt si existe)
+	var log_path := "user://output.txt"
+	if FileAccess.file_exists(log_path):
+		var log_lines := FileAccess.get_file_as_string(log_path).split("\n")
+		# FIX glm-5.3-free 2026-09-05: `log_lines[-200:]` es slicing de Python,
+		# invalido en GDScript (rompia el BOOT de todo el proyecto). Godot 4
+		# usa Array.slice(), que acepta indices negativos (ultimos 200).
+		var tail := "".join(log_lines.slice(-200))
+		zip.start_file("logs.txt")
+		zip.write_file(tail.to_utf8_buffer())
+		zip.finish_file()
+	else:
+		zip.start_file("logs.txt")
+		zip.write_file("[M110] No output.txt disponible\n".to_utf8_buffer())
+		zip.finish_file()
+
+	# 3. Screenshot del viewport actual
+	var vp := get_viewport()
+	if vp != null:
+		var img := vp.get_texture().get_image()
+		var png_path := dir_path + "/_diag_screenshot.png"
+		var save_err := img.save_png(png_path)
+		if save_err == OK:
+			var png_data := FileAccess.get_file_as_bytes(png_path)
+			zip.start_file("screenshot.png")
+			zip.write_file(png_data)
+			zip.finish_file()
+			# Limpiar PNG temporal
+			DirAccess.remove_absolute(png_path)
+
+	zip.close()
+	result.ok = true
+	result.path = zip_path
+	return result
+
+
+func _build_metadata() -> Dictionary:
+	## Construye diccionario de metadata del diagnostico.
+	var meta: Dictionary = {
+		"version_juego": "Isla Ancestral v0.1",
+		"fecha": Time.get_datetime_string_from_system(),
+		"plataforma": OS.get_name(),
+		"usuario": OS.get_user_data_dir(),
+		"comandos_ejecutados": _comandos_ejecutados,
+		"fps_actual": Performance.get_monitor(Performance.TIME_FPS),
+		"memoria_mb": _get_memoria_mb(),
+		"nodos_activos": Performance.get_monitor(Performance.OBJECT_NODE_COUNT),
+	}
+	# Agregar info del proyecto si disponible
+	# FIX glm-5.3-free 2026-09-05: ProjectSettings.get() NO acepta default
+	# (2 args) — es has_setting()/get_setting() en Godot 4.
+	var proj := ProjectSettings
+	if proj != null:
+		var ancho: int = proj.get_setting("display/window/size/viewport_width", 1152)
+		var alto: int = proj.get_setting("display/window/size/viewport_height", 648)
+		meta["resolucion"] = "%dx%d" % [ancho, alto]
+	return meta
+
+
+func _get_memoria_mb() -> float:
+	# FIX glm-5.3-free 2026-09-05: OS.get_dynamic_memory_usage() y
+	# Performance.MEMORY_DYNAMIC no existen en Godot 4.7 — el monitor
+	# disponible de memoria es MEMORY_STATIC (bytes).
+	var mem := Performance.get_monitor(Performance.MEMORY_STATIC)
+	return float(mem) / 1048576.0
+
+
+## RF20: alias compatible con el test headless existente
+func _export_diag() -> Dictionary:
+	## Alias para _export_diagnostic_zip — mantiene compatibilidad con test existente.
+	return _export_diagnostic_zip()
 
 func pestanas_ids() -> Array:
 	var ids: Array = []

@@ -283,17 +283,26 @@ const WHITELIST_RELOJ_SO := [
 	# positivos y el check C56 fallaba con 296 archivos (antes 240).
 	"res://scripts/datos/",
 	"res://scripts/hardware/",
-	# Re-auditoría M30 post-iter. 3 (2026-09-01, glm-5.3/Cline, Log 406): M122
+	# Re-auditoría M30 post-iter. 3 (2026-09-01, glm-5.3/Cline, Log 429): M122
 	# (crash_reporter: dumps con timestamp ISO), M109 (debug_menu: export RF20
 	# de diagnóstico) y M113 (stress_runner: reportes de performance) agregaron
 	# scripts de DIAGNÓSTICO con timestamps del SO. Mismo criterio: infra,
 	# nunca gameplay. Sin esto el check C56 fallaba (407 archivos escaneados).
 	# ⚠️ fauna_registry.gd de M36 NO entró a la whitelist: su uso era GAMEPLAY
 	# real (dedupe de avistamientos) y se corrigió el código a
-	# Time.get_ticks_msec() — ver 07-GUIA-GODOT §9.63 y Log 406.
+	# Time.get_ticks_msec() — ver 07-GUIA-GODOT §9.64 y Log 429.
 	"res://scripts/crash/",
 	"res://scripts/debug/",
 	"res://scripts/stress/",
+	# Re-auditoría M30 (2026-09-04, glm-5.3/Cline, Log 429): M84 (credits_manager:
+	# año de copyright RF6 — dato del mundo real por definición legal, jamás
+	# gameplay) y M119 (update_manager: fecha de la versión instalada en
+	# user:// — metadata de plataforma, mismo criterio que saving/). Sin esto
+	# el check C56 volvía a fallar con 619 archivos escaneados. Inventario
+	# (hotbar_state/inventario_iter4/iter5) NO entró a la whitelist: sus usos
+	# eran gameplay y se corrigieron a Time.get_ticks_msec() (§9.64).
+	"res://scripts/legal/",
+	"res://scripts/updates/",
 ]
 
 func _scan_anti_reloj_so() -> void:

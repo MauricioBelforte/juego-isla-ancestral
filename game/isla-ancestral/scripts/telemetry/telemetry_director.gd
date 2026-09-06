@@ -105,6 +105,8 @@ var _zone_check_timer: Timer
 var _puzzle_inicio: Dictionary = {}     # puzzle_id -> timestamp inicio
 var _zona_entrada: Dictionary = {}      # zone_id -> timestamp entrada
 var _zona_duracion: Dictionary = {}     # zone_id -> acumulado (visitas <1min)
+## Zonas ya reportadas como "ignoradas" en esta sesión (deduplicación 1 vez/zona).
+var _zona_ignorada_reportada: Dictionary = {}
 ## Referencia al servicio Analytics (M104). Resuelta lazy; inyectable en tests.
 var analytics_service: Node = null
 ## Path de settings (seteable en tests para aislar user://).
@@ -208,6 +210,7 @@ func _iniciar_sesion() -> void:
 	_tracked.clear()
 	_zona_entrada.clear()
 	_zona_duracion.clear()
+	_zona_ignorada_reportada.clear()
 	_puzzle_inicio.clear()
 	enviar_evento("session_started", {})
 	var ads := _resolve_analytics()
@@ -375,8 +378,13 @@ func exit_zone(zone_id: String) -> void:
 		_zone_check_timer.stop()
 
 func _on_zone_check() -> void:
-	# Zonas visitadas < 1 minuto → "ignorada".
+	# Zonas visitadas < 1 minuto → "ignorada". Se reporta UNA vez por zona por
+	# sesión (deduplicación vía _zona_ignorada_reportada); luego se limpia el
+	# acumulado para no re-emitir en cada tick del timer.
 	for id in _zona_duracion.keys():
 		var acumulado: int = _zona_duracion[id]
 		if acumulado < int(ZONA_IGNORADA_SEGUNDOS):
-			enviar_evento("zone_ignored", {"zone_id": id, "tiempo_acumulado_seg": acumulado})
+			if not _zona_ignorada_reportada.has(id):
+				_zona_ignorada_reportada[id] = true
+				enviar_evento("zone_ignored", {"zone_id": id, "tiempo_acumulado_seg": acumulado})
+			_zona_duracion.erase(id)

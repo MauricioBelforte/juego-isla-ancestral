@@ -59,6 +59,7 @@ func _autoregistrar_dominios() -> void:
 	var dominios := {
 		"economy_manager": "EconomyManager",
 		"shop_manager": "ShopManager",
+		"event_manager": "eventos",
 		"inventario": "Inventario",
 		"balance": "Balance",
 		"time_calendar": "TimeCalendar",
