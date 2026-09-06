@@ -1,8 +1,6 @@
 # 09 — Guía Blender
 
-**Modelo:** GLM 5.3 (z-ai)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-09-02 (última actualización: §8 requisitos de assets animables, caso tortuga M36; E-74 espejo de piezas pareadas; original de Claude/Cline 2026-08-28)
+**Modelo:** glm-5.3-free (Kilo Code) (último modificador 2026-09-05: §10 animales bimodo — playbook gaviota, patas en reposo primario, errores E-22/race-MCP; MiMo V2.5 (OpenCode) 2026-09-05 §9.6 directiva de guardado; GLM 5.3 (z-ai) 2026-09-02: §9 nivel mínimo de detalle orgánico; §8 assets animables; E-74 espejo; original Claude/Cline 2026-08-28)
 
 > **Propósito:** Guía de referencia obligatoria para modelar assets con Blender vía scripting (bpy), análoga a `07-GUIA-GODOT.md`. Documenta errores comunes, convenciones, la conexión MCP (V5) y el registro de errores. **Todo agente que modele assets DEBE leerla antes de empezar** y agregar aquí cada descubrimiento nuevo (regla AGENTS.md §26 aplicada a Blender).
 
@@ -50,6 +48,66 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - **Escena de prueba:** incluir `CAM_<Asset>` encuadrada + sol rasante para validar sombras en cada captura.
 - **Idempotencia:** el script debe limpiar la escena para poder re-ejecutarse sin duplicar.
 - **Guardado:** terminar con `bpy.ops.wm.save_as_mainfile(filepath=...)` a la carpeta del módulo (ruta absoluta — ver §6.3 y E-04).
+
+
+---
+
+## 2.5 — Patrón de referencia de ALTURAS por tipo de objeto (obligatorio)
+
+> **Fuente:** feedback directo del usuario (2026-09-04, iter. 5-10 de M50 con visión).
+> **Referencia aprobada:** `arbol_frutal = 6.0 m` (el usuario lo validó como "tamaño más acorde").
+> **Referencia de mundo:** personaje = 1.8 m, voxel = 1 m.
+
+### Regla
+Todo asset nuevo (vegetación, fauna, NPC, prop) se modela para alcanzar una **altura objetivo en metros** de esta tabla. El multiplicador se calcula como `altura_objetivo / altura_GLB_actual` y se **hornea en Blender** (`transform_apply(scale=True)`) — NO se escala en runtime. Después de hornear, la entrada en `data/escalas/escalas.json` pasa a `1.0`.
+
+### Tabla validada (2026-09-04)
+
+| Categoría | Objeto | Altura objetivo | Notas del usuario |
+|---|---|---|---|
+| **Vegetación** | arbol_frutal | **6.0 m** | **REFERENCIA APROBADA** |
+| Vegetación | palmera / palmera_inclinada | 8.0 m | ×1.6 sobre frutal (copa arriba, tronco visible menor) |
+| Vegetación | liana_colgante | 8.0 m | colgante — alcanza el suelo |
+| Vegetación | palmera_joven | 4.5 m | entre frutal y arbusto |
+| Vegetación | helecho_gigante | 0.8 m | el usuario los quería MÁS BAJOS |
+| Vegetación | helecho_chico | 0.35 m | |
+| Vegetación | arbusto_redondo/floral | 0.5 m | el usuario los quería MÁS CHICOS |
+| Vegetación | musgo_roca | 0.3 m | |
+| Vegetación | hongo_luminoso | 0.5 m | |
+| Vegetación | canas_bambu | 2.5 m | |
+| Vegetación | flor_isla | **1.2 m** | ⚠️ iterativo: 0.8 "no la vi" → 2.4 "muy grande" → 1.2 ✓ |
+| Vegetación | hierba_alta | ~0.1 m (runtime 1.5x) | GLB plano en XZ — escala runtime |
+| Vegetación | raices_expuestas | ~0.3 m (runtime) | GLB plano en XZ — escala runtime |
+| **Fauna** | jabalí adulto | 1.1 m | |
+| Fauna | tortuga_marina | 0.8 m | |
+| Fauna | gaviota | 0.5 m | |
+| Fauna | conejo | 0.35 m | ✅ aprobado por usuario (v5) |
+| Fauna | nutria | 0.7 m | |
+| Fauna | cangrejo | 0.25 m | |
+| Fauna | lechuza | 0.5 m | |
+| Fauna | abeja | 0.1 m | |
+| **NPC** | todos los vecinos | 1.0 (GLB) = 1.8 m | igual al personaje |
+
+### Errores de esta tabla documentados (NO repetir)
+- **E-58 — Alturas objetivo sin medir el GLB actual:** la iter. 9 (Log 715) usó multiplicadores fijos de la tabla asumiendo GLBs de ~1m, pero los GLB tenían alturas originales variadas (0.05m a 3.86m). Palmera ×5 = 19.3m gigante. **Fix:** multiplicador dinámico = `altura_objetivo / altura_actual` (medir con `altura_maxima(objs)` en bpy ANTES de escalar).
+- **E-59 — flor iterativa:** 0.25m "no la vi" → 0.8m "no la vi" → 2.4m "muy grande" → 1.2m ✓. Lección: los cambios de tamaño requieren confirmación visual del usuario en cada paso; no ajustar de más.
+
+### Pipeline de escalado (scripts reutilizables)
+1. Medir altura actual del GLB con bpy (`altura_maxima(objs)`).
+2. `multiplicador = altura_objetivo / altura_actual`.
+3. `bpy.ops.transform.resize(value=(m, m, m))` + `transform_apply(scale=True)` (horneado — normales y colisiones correctas).
+4. Re-exportar GLB a la misma ruta.
+5. Actualizar `data/escalas/escalas.json` → entrada a `1.0` (horneado).
+6. **Verificación E-13:** render orbital (6 azimuts) + confirmación del usuario.
+
+Scripts: `reescalar_vegetacion_v2.py` (v2, multiplicador dinámico), `reescalar_v4_feedback.py` (v4 ajustes puntuales), `reescalar_v5.py` (v5 palmeras/arbustos/lianas), `reescalar_fauna_v1.py` (fauna).
+
+### Fuente única de verdad en runtime
+`data/escalas/escalas.json` + autoload `EscalasGlobales` (scripts/core/escalas_globales.gd): `EscalasGlobales.escala_de(tipo)` con match exacto + substring. GLBs horneados = entrada 1.0. GLBs planos (hierba, raíces) = escala runtime.
+
+**Fecha:** 2026-09-04 (glm-5.3-flash / Kilo Code, con feedback directo del usuario en M50 iter. 5-10)
+
+---
 
 ## 3. Registro de Errores
 
@@ -1066,6 +1124,638 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - **Lección:** no perseguir mtimes. Verificar por **existencia y conteo de archivos**.
   El mtime solo sirve cuando el contenido realmente cambió.
 
+### E-73 — Un travesaño horizontal a la altura del pecho/torso LEE COMO FALO. Cortarlo y angulizarlo
+
+- **Síntoma (2026-09-02, M33 espantapájaros v1):** el espantapájaros tenía un único
+  palo horizontal `SM_Espanta_Brazo` de `1.30 × 0.07 × 0.07` clavado a `z=1.65`
+  cruzando el cuerpo de hombro a hombro. La intención era "brazos en cruz de palo",
+  pero el usuario lo rechazó de inmediato: *"ese tronco que tiene en el pecho
+  atravesado quitaselo, parece la pinga"*. La forma larga + delgada + horizontal +
+  centrada en el torso = silueta fálica inequívoca. El cerebro lee genitales antes
+  que ropa.
+- **Regla de silueta:** si una pieza es **larga, delgada y horizontal** y queda
+  alineada con la **altura de la cadera o el torso** de una figura humanoide, **no la
+  uses como elemento estructural único**. Rompela en dos y angulá cada mitad (en
+  este caso, dos brazos que nacen en cada hombro y bajan ~40° hacia afuera y abajo).
+- **Fix aplicado (espantapájaros v2):** reemplazo del travesaño único por dos cajas
+  `0.50 × 0.07 × 0.07`, una por hombro, rotadas `40°` y `140°` sobre `Y` para que
+  cada brazo salga **desde adentro del torso** (x = ±0.16, 3 cm por debajo del
+  semiancho 0.19) y baje en diagonal hasta la mano. El pecho queda limpio y la
+  silueta sigue siendo la "cruz" del espantapájaros.
+- **Coste de budget (E-70):** la v1 tenía 15 `SM_`. La v2 necesita 2 brazos en vez
+  de 1 → 16 `SM_`, que es exactamente el **techo ALTA** (≤16). Las variantes
+  MEDIA/BAJA **no se resienten** porque `generar_variante.py` agrupa por **lista de
+  materiales** y los dos brazos comparten `MAT_madera` con el poste → siguen siendo
+  1 objeto fusionado. **Lección de presupuesto:** agregar una pieza en el mismo
+  material que otra no siempre cuesta un objeto en MEDIA/BAJA; siempre chequear
+  antes de rechazar un diseño por budget.
+- **Verificación:** capturar 6 azimuts y mirar especialmente las **vistas 3/4
+  frontales y 3/4 traseras** (az 60°, 120°, 240°, 300°). Ahí es donde un travesaño
+  horizontal lee inequívocamente como genitales; con brazos angulados se ve la
+  "cruz diagonal" del espantapájaros desde todos los azimuts sin ambigüedad.
+- **Aplicabilidad:** misma regla aplica a maniquíes, cruces, siluetas de NPCs
+  humanoides, cualquier "cruz" de un cuerpo vertical. Si la pieza horizontal mide
+  más que el ancho del torso, casi siempre conviene angulizar.
+
+### E-74 — Cosa cilíndrica que sobresale horizontalmente de un cuerpo a la altura del pecho/torso también LEE COMO PICO (extensión de E-73)
+
+- **Síntoma (2026-09-02, M33 espantapájaros v2):** después de matar el travesaño
+  (E-73), el pecho seguía "teniendo algo que le atraviesa". Era un par de cilindros
+  cortos `SM_Espanta_Paja_{0,1}` con **eje en Y** asomando del pecho y la espalda a
+  `z=1.40` (la paja "rellenando" la camisa). En las vistas 3/4 frontales el cilindro
+  del pecho sobresalía hacia el observador como un pico puntiagudo, no como paja
+  asomando.
+- **Regla de E-73 generalizada:** no solo los palos horizontales largos leen mal.
+  **Cualquier cosa que sobresalga horizontalmente de un torso/cuerpo** (cilindro,
+  cono, caja corta) lee como pico, pezón, genital o protuberancia anatómica,
+  **incluso si su intención es "paja asomando", "ala rota", "brazo de repuesto"**.
+  El cerebro busca primero anatomía y solo después lee el decorado.
+- **Regla práctica:** las cosas que sobresalen de un cuerpo deben ir por las
+  **extremidades** (cabeza, dobladillo, sisa, cuello) o en **dirección coherente**
+  con la anatomía (paja colgando hacia abajo por el dobladillo, alas en los
+  hombros, etc.). Nunca perpendiculares al pecho.
+- **Fix aplicado (espantapájaros v3):** las dos pajas se cambiaron de **cilindros
+  horizontales con eje en Y** a `r=0.05, h=0.18` con **eje Z** (verticales),
+  posicionadas en `(±0.14, 0, 1.10)`, sobresaliendo del **dobladillo** de la camisa
+  (no del pecho). La mitad superior del cilindro queda dentro del torso (anclaje
+  invisible) y la inferior cuelga como flecos. Mismo material `MAT_paja` (E-37
+  preservado), mismas 16 SM_ totales, ningún cambio en MEDIA/BAJA.
+- **Verificación:** capturar 6 azimuts y mirar las **vistas frontales** (az 60° y
+  120°). Ahí es donde un cilindro horizontal saliendo del pecho se ve sin
+  ambigüedad como pico. Con las pajas en el dobladillo, las frontales muestran
+  torso plano y un pequeño escalón vertical bajo la camisa — silueta limpia.
+- **Aplicabilidad:** espantapájaros, momias, maniquíes con adornos, cualquier
+  silueta humanoide. Si hay algo "rellenando" la camisa, **debe salir por las
+  costuras naturales** (cuello, dobladillo, sisa), no por el medio del pecho.
+
+### E-75 — `bpy.ops.object.join()` aplica la `inverse_matrix` del activo: aplicar transformadas ANTES de unir
+
+- **Síntoma (2026-09-02, NPC base M19):** al unir la nariz y las orejas
+  (`SM_NPC_Nariz`, `SM_NPC_Oreja_I/D`) a la cabeza, el join se ejecutó sin
+  error pero el resultado quedó irreconocible: la nariz salió como un cono
+  gigantesco, las orejas como discos deformes.
+- **Por qué:** `join()` fusiona las mallas pasando cada vértice de las piezas
+  secundarias por `active.matrix_world.inverted() @ obj.matrix_world`. Si el
+  activo tiene **escala no uniforme** — y la cabeza tenía
+  `scale = (0.130, 0.118, 0.155)` para dar la proporción correcta —, las
+  piezas que se le unen se multiplican por el **inverso** de esa escala:
+  `(1/0.130, 1/0.118, 1/0.155) ≈ (7.7, 8.5, 6.5)`. Un cono de nariz de
+  escala 1 termina con vértices 7 veces más anchos.
+- **Regla:** aplicar transformadas con `bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)`
+  en CADA pieza ANTES del join. Así la escala queda horneada en los vértices
+  y el join no tiene que aplicar el inverso. Blender NO avisa de esto; es
+  una transformación silenciosa.
+- **Importante también con la rotación:** si una pieza tiene rotación Euler
+  aplicada (no identidad) y la unes sin aplicar, también se reorienta. La
+  aplicación conjunta de loc+rot+scale es la regla segura.
+- **Verificación:** después de unir, `bpy.context.object.scale` debe ser
+  `(1.0, 1.0, 1.0)` en todas las piezas. Si alguna pieza tiene scale ≠ 1
+  tras el join, todavía no se aplicó.
+- **Caso general:** cualquier vez que un objeto con `scale ≠ 1` o rotación
+  no-identidad se vaya a unir como secundario en un `bpy.ops.object.join()`,
+  primero `transform_apply`. Aplica a: cabeza, pies rotados, cilindros
+  reorientados (orejas, ojos), todo lo que use la técnica "crear en 0,0,0
+  con `rotation_euler` o `scale` no triviales, después mover".
+
+### E-76 — API 4.x: `IDMaterials.pop(index, update_data=True)` ya no existe
+
+- **Síntoma (2026-09-02, NPC base M19):** `TypeError: IDMaterials.pop(): takes
+  at most 1 arguments, got 2` al intentar deduplicar slots de material tras un
+  join.
+- **Causa:** en Blender 4.x el parámetro `update_data` se removió de
+  `bpy.types.IDMaterials.pop()`. Ahora es `pop(index=-1)` y nada más.
+- **Fix:** reemplazar el patrón viejo
+  ```python
+  while len(o.data.materials) > 0:
+      o.data.materials.pop(index=0, update_data=True)
+  ```
+  por
+  ```python
+  o.data.materials.clear()
+  ```
+  (clear() sí está disponible y funciona igual: vacía la lista sin
+  reasignar los `material_index` de las caras si no se reaplican materiales
+  nuevos con append. Si reaplicás, el `material_index` queda apuntando al
+  slot 0, que es lo que querés cuando todos los slots antiguos eran la misma
+  material.)
+- **Aplica a:** cualquier script que venga de Blender 3.x o de tutoriales
+  viejos. Si ves un TypeError con pop() y update_data, es este.
+
+### E-77 — `loft()` recibe anillos como `(z, cx, cy, rx, ry)`: Z PRIMERO, no `(x, y, z, ...)`
+
+- **Síntoma (2026-09-02, NPC base M19):** al pasar las polilíneas de brazos
+  y piernas al helper `loft()`, la malla resultante salió DEFORMADA sin
+  ningún error en consola. Los brazos aparecían a la altura de la cadera
+  (z negativo) y las piernas crecían hacia arriba. El assert E-77 posterior
+  lo cazó.
+- **Causa:** el formato de anillo en el helper es
+  `anillos = [(z, cx, cy, rx, ry), ...]`, con **Z PRIMERO** (porque la
+  operación de loft apila anillos en el eje Z, de abajo hacia arriba).
+  Si pasás coordenadas en el orden natural de un vector 3D `(x, y, z, rx, ry)`,
+  el helper interpreta tu X como Z, tu Y como cx, tu Z como cy, y la malla
+  queda en cualquier parte menos donde la pensaste. SIN ERROR EN CONSOLA.
+- **Fix en el helper:** agregado un guard al inicio de `loft()` en
+  `plantilla_asset.py`:
+  ```python
+  for i in range(len(anillos) - 1):
+      assert anillos[i][0] <= anillos[i+1][0] + 1e-9, (
+          'E-77: anillo %d tiene z=%.4f y el siguiente z=%.4f. Los anillos '
+          'van de ABAJO hacia ARRIBA y el PRIMER campo es Z, no X.' % (...))
+  ```
+  Si los "z" que está leyendo son realmente tus X, las z resultantes
+  (X de los puntos) NO estarán en orden ascendente, y el assert te lo dice
+  con el mensaje exacto.
+- **Patrón correcto al pasar polilíneas:**
+  ```python
+  muestras = polilinea(pts, ts)          # devuelve (x, y, z)
+  anillos = [(p[2], p[0], p[1], r, r)    # (z, x, y, rx, ry) ← reordenás
+             for p in muestras]
+  ```
+- **Aplica a:** todos los generadores que usen `loft()` o cualquier helper
+  de mallas que tome coordenadas en orden no-vectorial. La regla
+  nemotécnica: **Z primero, XY después**.
+
+### E-78 — Huella E-50 sobre anillos elípticos: el vértice que toca está en el CENTRO, no en el borde
+
+- **Síntoma (2026-09-02, NPC base M19):** pies con suela loftada
+  (anillos elípticos) pasaban el `asentar()` con `z_min 0.045` pero
+  FALLABAN el `assert min(fp_x, fp_y) > 0.30` con
+  `footprint 0.20 x 0.22` — menor que el mínimo de 0.30 de E-50. La
+  figura estaba perfectamente apoyada pero la métrica decía "puntual".
+- **Por qué:** el guard de E-50 mide la huella como el **bounding box
+  de los vértices que están a menos de 5 mm del piso**. En un anillo
+  elíptico, el vértice más bajo es el de `local y = +ry` (o `-ry`
+  según la orientación) — que está en el **CENTRO** del anillo
+  (`local x = 0`), no en sus bordes. Así que aunque el pie mide
+  11 cm de ancho y 26 cm de largo, los vértices que tocan el piso
+  caen todos sobre la línea media del pie, y la huella se colapsa a
+  la línea media.
+- **Opciones de fix (probadas):**
+  1. ~~Ensanchar la postura~~ — los pies a `x=±0.15` pasan el guard
+     pero la figura queda patizamba (no es lo que queremos).
+  2. ~~Bajar el `min_fp`~~ — silencio un guard que existe por algo;
+     el día que tengamos un apoyo REALMENTE puntual, no lo cazaría.
+  3. **✅ Suela plana:** agregar una **caja** debajo de cada pie que
+     SÍ tenga 4 vértices de esquina tocando el piso. Aporta la
+     huella real del pie y además es mejor modelado (un zapato tiene
+     suela). El pie loft y la suela se unen en un solo objeto con
+     `bpy.ops.object.join()` (previa E-75: aplicar transformadas).
+- **Costo:** 2 cajas = 24 tris. 0 objetos extra si se unen al objeto
+  `SM_NPC_Pies`. Aceptable.
+- **Aplica a:** todo asset con pies/patas/base loftados en el suelo
+  (humanoides, animales, muebles con patas torneadas, ruedas). Si el
+  guard E-50 falla y la pieza está visualmente apoyada, es esto. La
+  regla de oro: **una superficie que toca el piso debería tener
+  al menos 4 vértices en sus esquinas, no 1 en el centro**.
+
+### E-79 — Assets MONTADOS (sombreros, mochilas, armas en mano) NO se asientan en Z_APOYO
+
+- **Síntoma:** después de `generar_variante.py`, el sombrero de paja de un
+  NPC apareció enterrado al nivel de la arena con la copa en `z = 0.045` (en
+  vez de `z = 1.548`).
+- **Causa:** E-62 sólo protege del re-asentado cuando el asset está a más
+  de 25 cm de Z_APOYO. Un sombrero a 13 cm de Z_APOYO cae dentro del
+  umbral y `generar_variante.py` lo aplasta contra el suelo.
+  Adicionalmente, `asentar()` de `plantilla_asset` se invoca con
+  presupuesto "este objeto se apoya en la arena" — algo que es **falso**
+  para un accesorio que va en la cabeza, mochila, etc.
+- **Fix:** el script generador del asset MONTADO marca el `.blend` con un
+  Empty llamado `_MONTADO` (sin geometría, sin prefijo SM_). El script
+  `generar_variante.py` lo detecta y omite el re-asentado (E-80).
+  Adicionalmente el script del asset NO llama a `asentar()` — usa un
+  **guard de encaje** propio: que no tape la cara, que contenga el pelo,
+  que no flote, que no sea una sombrilla, que no atraviese orejas.
+- **Convención para el guard de encaje:**
+  - El **origen local** del `.blend` es el **punto de montaje**, no el
+    centro geométrico. El GLB sale con el pivote en el hueso de la
+    cabeza, mano, espalda, etc., y se puede colocar sin más en Godot.
+  - La **escena de verificación** se arma moviendo el MANIQUÍ (cabeza
+    con las cotas exactas del NPC base) y la cámara, **nunca** el asset.
+  - La **rotación del asset** se aplica a los VÉRTICES (con bmesh), no
+    con `rotation_euler` del objeto: las piezas con su propio origen
+    (ej. el lazo del sombrero) rotan sobre sí mismas y se despegan del
+    resto si se rota el objeto.
+- **Aplica a:** sombreros, mochilas, alas, armas, herramientas en mano,
+  colas, aletas, antenas, joyas. Todo lo que se monte sobre otro objeto.
+- **Patrón mínimo (sombrero de paja M19, ver también `crear_sombrero_paja_lowpoly.py`):**
+  ```python
+  # 1) construir todo centrado en (0,0,0)
+  bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0, 0, 0))
+  bpy.context.object.name = '_MONTADO'   # E-80
+
+  # 2) maniquí: cabeza y cuerpo EXACTOS del asset anfitrión, con z
+  #    locales = z_abs - Z_REF y y_locales = y_abs - Y_MONTAR. Sin SM_:
+  #    no se exportan (E-44).
+  ```
+
+### E-80 — `generar_variante.py` re-asienta assets al suelo: marcar MONTADOS con un Empty `_MONTADO`
+
+- **Síntoma:** sombreros, mochilas, armas en mano — assets que viven a
+  otra altura y NO se apoyan en la arena — terminan al nivel del suelo
+  en las variantes MEDIA y BAJA.
+- **Causa:** `generar_variante.py` re-asienta cada `.blend` con el guard
+  E-62, que sólo omite el re-asentado para assets a **más de 25 cm** de
+  Z_APOYO. Un sombrero a 13 cm de Z_APOYO cae dentro del umbral.
+- **Fix (2026-09-02, sombrero de paja M19):** el script generador del
+  asset MONTADO crea un **Empty llamado `_MONTADO`** (sin geometría, sin
+  prefijo SM_, así que E-44 lo filtra del export). `generar_variante.py`
+  detecta ese empty y omite el re-asentado sin importar el delta, antes
+  incluso del chequeo de E-62. Log esperado:
+  ```
+  RE-ASENTADO OMITIDO (E-80): el .blend contiene un Empty `_MONTADO`.
+  Este asset se monta sobre otro ..., NO se apoya en la arena.
+  z_min -0.081 se preserva.
+  ```
+- **Aplica a:** todos los generadores de assets montados (sombreros,
+  mochilas, armas, herramientas en mano, colas, alas, etc.). El contrato
+  es: el .blend tiene un Empty `_MONTADO` ⟹ el script `asentar()` no se
+  llama y `generar_variante.py` no re-asienta.
+
+### E-81 — Torso humano estilizado: el hombro NO es un anillo más ancho, es un CAP elipsoidal separado
+
+- **Síntoma:** el torso lee "raro" desde los hombros para abajo. La
+  silueta de perfil (az 180) tiene un pecho plano (ratio ancho:profundo
+  1.7:1, perfil de tabla) y un crash angular del hombro al cuello en 5.5 cm
+  (de `rx=0.202` a `rx=0.112`). El feedback fue: *"de la cabeza para arriba
+  está muy bien pero el diseño de los hombros para abajo esta raro el torso
+  mejoralo"*.
+- **Causa:** un loft de elipses con lados=12 y `rx/ry > 1.5:1` produce una
+  silueta LENS (extremos puntiagudos) en X, no una CAP. Ensanchar el anillo
+  del hombro (rx 0.196 → 0.220) sólo empeora: hace el lens más puntiagudo,
+  no añade un CAP de deltoides. Adicionalmente, `ry ≈ 0.10` da un pecho
+  de tablero.
+- **Fix (2026-09-02, NPC base M19 v5):** tres cambios:
+  1. **Profundizar el pecho.** Llevar `ry` a 0.128–0.132 en los anillos
+     del pecho (ratio 1.4–1.6:1, anatómicamente correcto).
+  2. **Caps de deltoides como elipsoides separados.** Una ico-esfera
+     `subdiv=2` (320 caras), centrada en `(dx(z) ± 0.140, 0.006, z)`,
+     radios `(0.084, 0.070, 0.052)`, **unida al torso** (E-75: aplicar
+     transform primero). Protruye ~3.4 cm del borde del torso a la altura
+     del hombro. **Asimétrica en Z** (der 1.175, izq 1.158) → el hombro
+     del lado que carga peso queda más bajo, lectura natural del
+     contrapposto.
+  3. **Trapecio más largo.** Pasar de 1.220→1.270 (5.5 cm de pendiente)
+     a 1.205→1.245→1.290 (8.5 cm de pendiente) → rampa en vez de cono.
+- **Verificación numérica (cuando la visión está bloqueada):** muestrear
+  la silueta a 5-6 alturas clave (cadera, cintura, pecho, hombro, deltoide)
+  con `(o.matrix_world @ v.co).x` filtrando por `z` con tolerancia ±1.2 cm.
+  Calcular ancho y profundidad y ratio. Para el NPC v5:
+  ```
+  z=0.790 (cadera):    ancho=0.388  profundidad=0.256  ratio=1.52
+  z=0.960 (cintura):   ancho=0.302  profundidad=0.216  ratio=1.40
+  z=1.110 (pecho):     ancho=0.369  profundidad=0.256  ratio=1.44
+  z=1.165 (pecho alto): ancho=0.439  profundidad=0.264  ratio=1.66
+  z=1.205 (hombro):    ancho=0.402  profundidad=0.256  ratio=1.57
+  z=1.175 (deltoide D): ancho=0.431  profundidad=0.264  ratio=1.63
+  ```
+  Cintura ratio 1.40 confirma que NO es un cilindro (un cilindro sería
+  ratio 1.0). El crecimiento del ancho cadera→cintura→pecho→deltoide
+  (0.39→0.30→0.37→0.43) confirma la silueta S del torso humano. Sin esto,
+  la única verificación es visual — y si el modelo no acepta imágenes
+  (Read tool devuelve error de filtro), uno aprueba un diseño geométrico-
+  mente roto.
+- **Aplica a:** todo torso humanoide de NPC con budget M166: la única forma
+  de tener un cap de hombro real con un loft de elipses es uniendo un
+  elipsoide separado al final. Anillos solos dan lens, no cap.
+
+
+### E-82 — Construcción de paths desde `dirname(__file__)`: el `..` cuenta desde el DIRECTORIO DEL SCRIPT, no desde la raíz del repo
+
+- **Síntoma:** `RuntimeError: Cannot read file "...\juego-isla-ancestral\tools\
+  tools\mcp\blender-mcp\19-NPCs\npc_base_lowpoly.blend"`. Note el `tools\tools`
+  duplicado.
+- **Causa:** patrón inseguro al construir la ruta del módulo desde el script.
+  El script vive en `<raiz>/tools/mcp/blender-mcp/<NN-Modulo>/scripts/<x>.py`.
+  Calcular `RAIZ = abspath(join(dirname(__file__), '..', '..', '..', '..'))`
+  da `<raiz>/tools` (un nivel corto) si los `..` no alcanzan. Después
+  `DIR_MOD = join(RAIZ, 'tools', 'mcp', 'blender-mcp', '<NN>')` añade `tools\`
+  otra vez → `tools\tools\...`.
+- **Fix:** construir **directamente** desde `DIR_SCRIPTS = dirname(abspath(
+  __file__))` sin pasar por `RAIZ`+re-armar el path:
+  ```python
+  DIR_SCRIPTS = os.path.dirname(os.path.abspath(__file__))
+  DIR_MOD    = os.path.abspath(os.path.join(DIR_SCRIPTS, '..'))
+  DIR_REUTIL = os.path.abspath(os.path.join(DIR_SCRIPTS, '..', '..',
+                                            'scripts-reutilizables'))
+  RAIZ       = os.path.abspath(os.path.join(DIR_MOD, '..', '..', '..'))
+  assert os.path.basename(DIR_MOD) == '<NN-Modulo>', 'DIR_MOD mal: %s' % DIR_MOD
+  ```
+  El `assert` mata el bug la próxima vez con un mensaje claro en lugar de un
+  `FileNotFoundError` raro.
+- **Verificación (log 568):** composición M19 NPC + sombrero de paja
+  `componer_npc_sombrero.py` ahora lee `npc_base_lowpoly.blend` y
+  `sombrero_paja_lowpoly.blend` correctamente, hace append de las 6 piezas y
+  guarda `npc_con_sombrero_VERIF.blend` en `19-NPCs/capturas/`.
+- **Aplica a:** todo script nuevo en `<NN-Modulo>/scripts/`. Si ves un
+  `tools\tools\...` en un error de Blender, es E-82.
+
+
+### E-83 — `Mesh.materials.clear()` resetea `material_index` de TODAS las caras a 0; respaldar y reasignar
+
+- **Síntoma:** tras `unir()` con E-76 (que dice "usá `clear()`"), el objeto
+  exportado tiene un solo material ranckrando todas las caras. Caso real
+  (2026-09-03, NPC base M19): `SM_NPC_RopaBase` con 2 slots
+  (`MAT_NPC_Ropa`,`MAT_NPC_Botas`) terminó con 120/120 caras en el slot 0 →
+  el cinturón de cuero se renderiza como LINO.
+- **Causa:** `E-35` ya advertía que `clear()` resetea el `material_index` a
+  0. Pero la regla "`clear()` NUNCA" es demasiado cruda cuando se quieren
+  DEDUPLICAR slots (varias instancias de la misma). El `clear()` correcto es:
+  1. copiar la lista de materiales y los `material_index` por cara;
+  2. `clear()`;
+  3. volver a añadir los materiales únicos;
+  4. reasignar cada `material_index` por cara a través del mapa
+     viejo→nuevo.
+- **Fix:** `unir()` y `montado_util.unir()` reescritos con:
+  ```python
+  idx_caras = [p.material_index for p in o.data.polygons]
+  o.data.materials.clear()
+  for m in vistos: o.data.materials.append(m)
+  for p, mi in zip(o.data.polygons, idx_caras):
+      p.material_index = mapa[mi] if mi < len(mapa) else 0
+  ```
+  Solo ejecuta el clear si la cantidad de materiales ÚNICOS difiere de la
+  cantidad de slots actuales (sino no hace falta). Verificado en
+  `crear_npc_base_lowpoly.py`: `SM_NPC_RopaBase slots=2 por_slot={0: 72,
+  1: 48}` (antes `{0: 120}`).
+- **Aplica a:** todo `unir()` que deduplique materiales.
+
+
+### E-84 — `clearance_cuerpo()` debe incluir los DELTOIDES; sin ellos las mangas atraviesan el hombro
+
+- **Síntoma:** `E-79(a)` falla con 30.9 % de los vértices dentro del cuerpo
+  (peor −0.152 m), aunque las mangas están geométricamente +22 mm fuera del
+  brazo. Caso real (2026-09-03, campesina v1).
+- **Causa:** `clearance_cuerpo()` restaba distancia al torso (elipse) y a
+  los brazos (tubos), pero NO a los deltoides (caps de hombro, E-81). Las
+  mangas pasaban entre el torso y el deltoide y el guard las aprobaba.
+- **Fix:** añadir el término `DELTOIDES` (elipsoides en `montado_util.py`)
+  al `min(...)` de `clearance_cuerpo()`:
+  ```python
+  for (cx, cy, cz, rx, ry, rz) in DELTOIDES:
+      s = (((p[0]-cx)/rx)**2 + ((p[1]-cy)/ry)**2 + ((p[2]-cz)/rz)**2)
+      r_eff = (rx*ry*rz) ** (1.0/3.0)
+      d_del = min(d_del, r_eff * (max(s, 0.0)**0.5 - 1.0))
+  ```
+  Después de E-84, campesina v1 pasa a 28.3 % y el siguiente culpable
+  aparece (E-85).
+- **Aplica a:** todo `clearance_cuerpo()` y todo modelo con hombros
+  (E-81 caps).
+
+
+### E-85 — `primitive_torus_add()` ya tiene el agujero en +Z: NO rotar 90° si va horizontal
+
+- **Síntoma:** un torus que debería envolver la cintura aparece
+  atravesando el torso (28.3 % adentro, peor −0.152 m). Caso real
+  (campesina v1).
+- **Causa:** la intuición "el torus tiene el agujero en Z, hay que rotarlo"
+  es FALSA: `bpy.ops.mesh.primitive_torus_add(major_radius=R, ...)` ya
+  produce un torus HORIZONTAL con el eje del agujero en +Z (paralelo a
+  Z). Rotarlo `rotation_euler = (radians(90), 0, 0)` lo pone en plano XZ y
+  PENETRA el torso.
+- **Fix:** NO rotar. Documentar el error en el script con un comentario que
+  cite el caso real (la rotación incorrecta del cordón hundió 118/417 verts):
+  ```python
+  # primitive_torus_add() ya tiene el agujero en +Z — sin rotacion queda
+  # horizontal. Si se rota 90° queda en plano XZ y ATRAVIESA el torso (E-85).
+  bpy.ops.mesh.primitive_torus_add(..., location=(0.0, 0.004, 0.965))
+  cordon = bpy.context.object
+  cordon.name = 'SM_Camp_Cordon'
+  # SIN rotacion — el cordon queda horizontal.
+  ```
+- **Aplica a:** todo torus orientado horizontalmente (cinturones, aros,
+  sábanas).
+
+
+### E-86 — Mangas excluidas del check por diseño (su mitad interior va DENTRO del torso): mejor usar `partes=` (E-89)
+
+- **Síntoma histórico (campesina v2):** tras E-84/E-85, las mangas quedan
+  con `clearance=-0.1128` en `(0.042, 0.012, 1.168)`: el centro de la manga
+  a la altura del hombro está dentro del torso. Era un falso positivo: la
+  manga está PEGADA al brazo, y el brazo está dentro de la envolvente del
+  torso a la altura del hombro.
+- **Causa:** `clearance_cuerpo()` siempre restaba las cuatro partes del
+  cuerpo (torso, brazos, piernas, deltoides) y el `min(...)` tomaba la peor.
+  La manga tiene que estar fuera del BRAZO y del DELTOIDE; estar dentro del
+  TORSO es inevitable.
+- **Fix original:** parámetro `excluir=` en `verificar_ropa`. Mantenido
+  para exclusiones globales.
+- **Fix superior (E-89):** cada pieza declara contra qué partes se audita.
+  Las mangas declan `('brazos','deltoides')`, no hace falta excluirlas.
+  Documentado en E-89.
+- **Aplica a:** todo asset montado con mangas o cualquier pieza pegada al
+  brazo.
+
+
+### E-87 — Los vértices de TAPA de un tubo cerrado quedan DENTRO del cuerpo por construcción; marcarlos OCULTO
+
+- **Síntoma:** `E-79(a)` falla con −0.0824 m en el centro de la tapa
+  superior de un tubo cerrado alrededor de una extremidad. Caso real
+  (campesina v1): el centro de la tapa superior de `SM_Camp_Pantalones`
+  está sobre el eje de la pierna a z=0.685, distancia 0, menos radio de la
+  pierna 0.085 → clearance −0.085. Es estructuralmente inevitable: `loft()`
+  con `tapar_arriba=True` añade un vértice central en el centro del anillo.
+- **Causa:** cualquier tubo cerrado que envuelve una extremidad tiene su
+  vértice central de tapa sobre el eje de la extremidad → dentro del cuerpo.
+  Si se audita contra esa extremidad, el clearance da negativo.
+- **Fix:** marcar esos vértices en un **vertex group** llamado `OCULTO`.
+  El guard los salta. Mecanismo:
+  - `marcar_ocultos(obj, pred)` marca los vértices que cumplen
+    `pred(matrix_world @ co)`.
+  - `indices_ocultos(obj)` devuelve el conjunto de índices.
+  - `verificar_ropa(escena, ...)` salta vértices en `OCULTO` y los reporta:
+    `E-79(a) ... (N marcados OCULTO, E-87)`.
+  - El generador llama `marcar_ocultos` para cada centro de tapa conocido
+    (hombro de manga, tobillo de pernera, cintura de cadera). Se pasa el
+    PUNTO EXACTO en vez de "cerca de cualquier eje": con un tolerance
+    genérico, la muñeca de la manga derecha (0.123, 0.024, 0.791) caía a
+    25 mm del primer punto de la pierna derecha y se marcaba sin ser tapa
+    (falso positivo, 2026-09-03). Usar `centro_de_tapa(punto, tol=0.010)`.
+  - El grupo `OCULTO` sobrevive a `unir()` (Blender preserva grupos con el
+    mismo nombre al hacer `bpy.ops.object.join()`).
+- **Aplica a:** todo tubo cerrado (con `tapar_arriba=True` o
+  `tapar_abajo=True`) que envuelva una extremidad o quede enterrado en el
+  torso.
+
+
+### E-89 — Cada pieza de ropa declara contra qué PARTES del cuerpo se audita
+
+- **Síntoma:** con E-84 el guard exige clearance contra torso+brazos+
+piernas+deltoides. La ropa de tronco (camisa, cinturón, delantal, chaquetón)
+choca contra los brazos: la manga de la camisa a la altura del hombro
+tiene 30 mm de clearance contra el brazo (E-86, falso positivo), pero la
+SISA de la camisa, a z=0.95..1.10, tiene −0.04 m de clearance contra el
+brazo. No es un defecto: el brazo cuelga por fuera de la prenda y la
+oculta. Y en este rig los brazos van PEGADOS al torso (la envolvente
+torácica los contiene hasta la axila), de modo que exigirles clearance a
+las prendas de tronco es IMPOSIBLE.
+- **Causa:** mismo problema que E-86 pero generalizado: la auditoría
+  conservadora de `clearance_cuerpo` (tomar el `min` entre todas las partes)
+  sirve para mangas y perneras, pero NO para la ropa de tronco.
+- **Fix:** `clearance_cuerpo(p, partes=None)` admite un subconjunto de
+  `('torso','brazos','piernas','deltoides')`. `verificar_ropa(escena,
+  partes={'SM_X': (...), ...})` mapea pieza → partes. Defaults a todas (E-89
+  es backwards-compatible con las ropas ya aprobadas). Asignación típica:
+  ```python
+  PARTES = {
+      'SM_Camp_Camisa':     ('torso', 'deltoides'),
+      'SM_Camp_Cordon':     ('torso',),
+      'SM_Camp_Delantal':   ('torso', 'piernas'),
+      'SM_Camp_Panuelo':    ('torso', 'deltoides'),
+      'SM_Camp_Cadera':     ('torso', 'piernas'),
+      'SM_Camp_Pantalones': ('piernas',),     # no 'torso': la cadera lo tapa
+      'SM_Camp_Mangas':     ('brazos', 'deltoides'),
+  }
+  ```
+  **Caso real de aprobación previa:** el propio `SM_NPC_RopaBase` del NPC
+  base (short de lino a la cadera, rx=0.224) pasa a 3 cm de clearance
+  contra los brazos a la altura del codo y se aprobó visualmente; el
+  pantalón corto y el brazo son irreducibles.
+- **Aplica a:** todo asset montado tipo prenda. La asignación por defecto
+  (todas las partes) sigue siendo válida si no se pasa `partes`.
+
+
+### E-90 — `construir_cabeza()` devuelve la cabeza en el FRAME LOCAL del punto de montaje (z_local 0 = base del cuello); los assets STANDALONE la deben subir a mano
+
+- **Síntoma:** se genera un asset con cabeza (NPC sentado) y la silueta sale
+  **descabezada**: el pelo se ve arriba pero el cráneo no. `generar_variante.py`
+  reporta `RE-ASENTADO: z_min -0.020 -> 0.045 (delta +0.065)`, es decir que
+  algo del asset estaba 6,5 cm POR DEBAJO de la arena. Diagnóstico con
+  `_diag_z.py`:
+  ```
+  SM_Sent_Cuello  z -0.0200 .. 0.1300   <== DEBAJO DEL SUELO
+  SM_Sent_Cabeza  z  0.0595 .. 0.4950
+  SM_Sent_Cabello z  1.1000 .. 1.4000   (bien)
+  ```
+  La cabeza nacía a la altura de la cadera y solo el cabello —autorado en
+  cotas absolutas— aparecía en lo alto. **Fallo silencioso: ningún assert
+  saltó, ningún error de Blender.**
+- **Causa:** `construir_cabeza()` construye todas las piezas en el **frame
+  local del punto de montaje**, donde `z_local = 0` es la BASE DEL CUELLO.
+  En un asset **MONTADO** (E-79) eso es correcto: el padre aporta el offset
+  al instanciarlo. En un asset **STANDALONE** (que tiene su propio cuerpo,
+  como el NPC sentado) no hay padre, así que el offset hay que aplicarlo
+  explícitamente.
+- **Trampa secundaria (mismo bug, otra cara):** la clave del diccionario de
+  parámetros es **`'Z_CRANEo'`** — con la "o" FINAL EN MINÚSCULA. Pasar
+  `'Z_CRANEO'` (todo mayúsculas) **no da error**: cae silenciosamente en el
+  default `P.get('Z_CRANEo', 1.440)` y la cabeza se ubica a 1,44 m en lugar
+  de la cota pedida.
+- **Fix:** dos cosas, las dos obligatorias:
+  1. Escribir la clave con la "o" minúscula: `P = {'Z_CRANEo': 1.250, ...}`.
+  2. Tras `construir_cabeza()`, subir TODAS las piezas devueltas:
+     ```python
+     from montado_util import Z_REF_CABEZA
+     import montado_util
+     montado_util.Z_REF_CABEZA = 1.100      # cota real del cuello del asset
+
+     OFFSET_CABEZA = 1.100                  # = montado_util.Z_REF_CABEZA
+     for _k, p in piezas_cabeza.items():    # ojo: es un DICT, no una lista
+         p.location.z += OFFSET_CABEZA
+     bpy.context.view_layer.update()
+     ```
+  3. Y un **guard que mate el fallo silencioso**:
+     ```python
+     _z_cab = min((piezas_cabeza['cabeza'].matrix_world @ v.co).z
+                  for v in piezas_cabeza['cabeza'].data.vertices)
+     assert _z_cab > 1.05, (
+         'E-90: la cabeza arranca en z=%.4f, por debajo del cuello (1.10). '
+         'Falta el OFFSET_CABEZA que pasa el frame local de montaje a mundo.'
+         % _z_cab)
+     ```
+     Con el fix aplicado: `CABEZA ubicada: z_min 1.1028 (offset +1.100
+     aplicado)` y `RE-ASENTADO: z_min 0.045 -> 0.045 (delta -0.000)`.
+- **Verificación:** el `delta` de `generar_variante.py` debe ser ≈ 0.000
+  (no ±0.05). Si no, revisar primero la Z de la cabeza: es el síntoma
+  clásico de E-90.
+- **Aplica a:** TODO asset con cabeza construida con `construir_cabeza()`
+  que NO sea MONTADO (NPC completos, estatuas, maniquíes de pie). Los
+  MONTADOS (cabezas sueltas intercambiables, sombreros) NO deben aplicar
+  el offset: el padre ya lo aporta y sumarlo dos veces hunde la pieza.
+- **Relacionado:** E-79 (contrato de montados), E-80 (Empty `_MONTADO`).
+
+
+### E-91 — `asentar()` rechaza herramientas alargadas: usar `asentar_herramienta()` (E-91)
+
+**Síntoma:** al pasar el guard E-50 (`huella min > 0.30`) sobre una herramienta
+larga y delgada (hacha, martillo, azada, machete) salta
+`AssertionError: huella demasiado chica 0.68 x 0.04 (E-50)` aunque el objeto
+**claramente** esté apoyado de costado y la flotación sea 0. El culprit es la
+heurística: `plantilla_asset.asentar` exige `min(fp_x, fp_y) > 0.30`, calibrada
+para props de ~1 m. Una herramienta de 0.7 × 0.04 nunca pasa.
+
+**Causa raíz (dos efectos combinados):**
+1. La heurística E-50 fue derivada para props "centradas" (un cubo de 1 m
+   tiene `fp = 1.0 × 1.0` y `min = 1.0 > 0.30` ✅). Para objetos alargados
+   como herramientas, el `min` cae al grueso del soporte (3–6 cm), que es
+   ruido, no geometría significativa.
+2. El apoyo es por arista/generatriz larga (no por un disco). Lo que importa
+   es que el contacto **recorra** el eje largo, no que el eje corto sea gordo.
+
+**Fix — usar `asentar_herramienta()`:**
+- Vive en `scripts-reutilizables/herramienta_util.py`.
+- Sus tres condiciones, en orden:
+  1. `len(verts que tocan) >= 8` (igual que E-50).
+  2. `min(fp_x, fp_y) >= 0.02` — descarta el caso "apoyo en arista viva
+     finísima" (un vértice único pegado al suelo).
+  3. `max(fp_x, fp_y) >= 0.45 · L`, donde `L` es el eje horizontal más largo
+     del bounding box del objeto. **Esta es la regla que sustituye al `0.30`**
+     para herramientas: el contacto tiene que cubrir al menos el 45 % del
+     largo del objeto. Si no, el objeto está "de punta" o apoyado en un solo
+     extremo.
+- Nunca delegar a `plantilla_asset.asentar` para herramientas; el wrapper
+  `cerrar_herramienta()` ya invoca `asentar_herramienta()` con los defaults.
+
+**Insighst de geometría asociados (descubiertos en este fix):**
+- `F_PLANO = sin(60°) = 0.8660` — para `lados=6, fase=0` la mitad EFECTIVA
+  del eje vertical NO es `ry`, sino `0.866·ry`. Hay que dividir el espesor
+  solicitado por `F_PLANO` en la tabla de estaciones para que el grosor
+  físico coincida con el grosor pedido.
+- Con `lados=6, fase=0`, los **dos vértices inferiores** del prisma quedan a
+  240° y 300° (mismo `z = -0.866·ry`) → la cara de abajo es PLANA, no de
+  cuchillo. Con `fase=pi/6` el vértice más bajo queda solo a 270° → apoyo
+  en arista. **Para piezas que descansan: `lados=6, fase=0`.**
+- Con `lados=4` (sección romboidal) **todos** los vértices inferiores quedan
+  a la misma `y = 0` (la arista horizontal del rombo). El resultado es un
+  apoyo en una línea única (`fp_y = 0`). Útil para mangos romboidales que se
+  quieren afilados (mango del machete); destructivo para una hoja (que
+  debe tener grosor real). Usar `lados=4` solo donde se quiera filo.
+
+**Mangos cónicos:**
+- Un mango de grosor variable (e.g. `hz` decreciente hacia el pomo) solo
+  toca en su punto más grueso → `toca = 1..6` → E-50 falla.
+- Solución: **mantener `hz` CONSTANTE** a lo largo del mango (e.g. `0.030`)
+  y aplicar el "swell" ergonómico solo en `hy`. Así la generatriz inferior
+  completa es horizontal y todos sus vértices tocan.
+
+**Aplica a:** toda herramienta creada con `herramienta_util.prisma()`
+(actualmente: hacha_hierro, martillo, azada, machete — y futuros: pico,
+azuela, guadaña, pala, serpeta, horca).
+
+**No aplica a:** props "anchos" (lingotes, tablones, cestas, vasijas) — esos
+siguen usando `plantilla_asset.asentar` con la heurística original.
+
+**Relacionado:** E-12 (asentado), E-50 (huella ≥ 8 verts), E-50bis
+(F_PLANO), E-78 (suela plana en anillos), E-83 (slots de material tras
+`unir()` — los remaches se unen para economizar SM_).
+
+**Uso:**
+```python
+from herramienta_util import prisma, asentar_herramienta, cerrar_herramienta
+
+# En vez de plantilla_asset.asentar(...):
+asentar_herramienta(escena, min_toca=8, min_fp=0.02, frac_largo=0.45,
+                    z_apoyo=0.045)
+
+# O usar el wrapper que ya hace todo (asentar + iluminar + cámara + shade_flat
+# + auditar + guardar):
+cerrar_herramienta(escena, modulo='16-Crafting', asset='machete',
+                   loc_cam=(1.0, -1.5, 0.8), mira_cam=(0.0, 0.0, 0.05))
+```
+
+**Evidencia:** Log 678 (cierre M19) y los logs parciales del batch M16 3D
+(hierro/martillo/azada/machete, sept-2026).
+
+
 ## 4. Checklist antes de dar por terminado un asset
 
 - [ ] Script idempotente (re-ejecutable sin duplicar)
@@ -1082,6 +1772,18 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - [ ] **Conteo de `SM_` hecho ANTES de ejecutar**: `≤16` ALTA. Ojo con los bucles anidados (lado × repetición), que crecen multiplicativo (E-70)
 - [ ] **Curva correcta según dónde esté la carga**: cuerda suelta → `cosh`; tablero con carga uniforme → parábola (E-69)
 - [ ] **Verificación de import por CONTEO de archivos**, no por mtime: `glb == .glb.import == .scn` (E-65 + E-72)
+- [ ] **Path del script desde `dirname(__file__)`**: NO calcular `RAIZ` con
+  varios `..` y después re-encadenar `tools/mcp/...` — eso duplica `tools` si
+  los `..` no alcanzan. Construir `DIR_MOD = abspath(join(dirname(__file__),
+  '..'))` directamente. `assert basename(DIR_MOD) == '<NN>'` mata el bug
+  (E-82)
+- [ ] **Ninguna pieza larga, delgada y horizontal a la altura de cadera/torso** de figuras humanoides (E-73): un travesaño único lee como genital. Romper y angulizar si es estructural.
+- [ ] **Ninguna pieza cilíndrica/caja corta sobresaliendo horizontalmente del pecho** de figuras humanoides (E-74): también lee como pico. Las "pajas" / "rellenos" deben asomar por las costuras naturales (dobladillo, cuello, sisa), nunca perpendiculares al pecho.
+- [ ] **Asentado en la base** (E-12): `z_min` del elemento que toca el suelo ≤ 0.05 (verificable con `auditar_apoyos.py`); **auditar TODOS los obj** (E-36), no solo el primero
+- [ ] **Guard de ropa con `partes=` por pieza** (E-89): camisa/cinturón/chaquetón NO contra brazos; perneras NO contra torso; mangas solo contra brazos+deltoides
+- [ ] **Tapas de tubos cerrados marcadas OCULTO** (E-87): hombros de mangas, tobillos de perneras, cinturas de caderas. pasar el PUNTO EXACTO, no un "cerca del eje" genérico
+- [ ] **Materiales tras `unir()`** (E-83): si hay deduplicación de slots, respaldar `material_index` por cara, `clear()`, re-asignar. Nunca `clear()` a secas (resetea a 0)
+- [ ] **Torus horizontal** (E-85): `primitive_torus_add()` ya es horizontal (eje del agujero en +Z). NO rotar 90° para "horizontalizarlo"
 - [ ] **Cobertura total del apoyo** (E-12): el elemento sobre el que se asienta el asset cubre TODA su planta (anillos/abanicos completos, no parciales)
 - [ ] **Asentado en la base** (E-12): `z_min` del elemento que toca el suelo ≤ 0.05 (verificable con `auditar_apoyos.py`)
 - [ ] **Verificación multi-ángulo** (E-13, directiva del usuario 2026-08-28): correr `capturar_angulos.py SM_<asset> ruta.png 4` y revisar TODAS las capturas. Si UNA sola muestra luz/aire entre el objeto y su base, corregir y volver a correr. **Una sola captura frontal no alcanza.**
@@ -1090,9 +1792,19 @@ La vía V5 usa Blender en modo servidor + un cliente Python de la venv del proye
 - [ ] **Saneo de slots** (E-34, E-35): tras un `generar_variante.py --baja` con una versión de `generar_variante.py` previa al fix de E-35, correr `python scripts-reutilizables/saneo_bajas_e34.py`. NUNCA usar `Mesh.materials.clear()` como "limpieza": resetea a 0 el `material_index` de todas las caras (E-35). `saneo_bajas_e34.py` usa `pop()` que no lo hace.
 - [ ] **Optimización por lote** (cuando hay varios assets pendientes): `python procesar_lote.py` procesa todos los módulos; `python procesar_lote.py 50-Vegetacion --media` restringe a un módulo y a una sola variante. Es **idempotente**: saltea los assets que ya tienen `_media`. Referencia: 41 assets en 168 s.
 - [ ] **Módulo registrado en el export** (E-63): si el módulo es NUEVO, agregarlo a la tupla `MODULOS` de `exportar_godot.py`. Si no, el export devuelve `{"exportados": 0}` **sin ningún error**.
+- [ ] **Cabeza en su sitio** (E-90): si el asset usa `construir_cabeza()` y es STANDALONE (no montado), aplicar `p.location.z += Z_REF_CABEZA` a TODAS las piezas devueltas y dejar el `assert z_min_cabeza > cuello - 0.05`. La clave del dict es `'Z_CRANEo'` con la **o minúscula**. Control final: el `delta` de `generar_variante.py` debe ser ≈ 0.000.
+- [ ] **Herramientas alargadas usan `asentar_herramienta()`** (E-91): NUNCA delegar a `plantilla_asset.asentar()` para herramientas (hacha, martillo, azada, machete, pico, azuela, guadaña, pala, serpeta, horca). Tres condiciones: `toca ≥ 8`, `min(fp) ≥ 0.02`, **`max(fp) ≥ 0.45 × L`**. Si la pieza es "ancha" (lingote, tablón, cesta, vasija) sí va el E-50 original. **Geometría:** mangos con `hz` constante a lo largo (swell solo en `hy`); para `lados=6, fase=0` dividir el espesor por `F_PLANO = 0.8660` para que el grosor efectivo coincida con el pedido.
 - [ ] **Dry-run antes del export real** (E-63): `EXPORT_DRY=1 EXPORT_MODULOS=<mod> blender -b --factory-startup --python exportar_godot.py` y confirmar que el número sea `assets × 3 variantes`. Recién entonces correr con `EXPORT_FORZAR=1` (E-49) y terminar con el `--headless --import` de Godot.
 - [ ] **Import verificado por ARCHIVOS, no por log** (E-64/E-65): por variante, `glb == import` (alta 66/66, media 66/66, baja 66/66) y el mtime del `.import` posterior al del `.glb`. El glob correcto es `*.import` (el sidecar es `<asset>.glb.import`, **no** `<asset>.import`). Los `ERROR:` de `voxel.gdextension` con el editor abierto son ruido benigno: **no** hay que cerrar el editor.
 - [ ] **Variantes a la misma altura** (E-48 + E-62): el `z_min` de alta/media/baja tiene que coincidir. Si difiere, el objeto salta al cambiar de LOD o quedó enterrado. `chk_asset.py` lo reporta sin necesitar socket.
+- [ ] **Aplicar transformadas ANTES de todo `join()`** (E-75): si el objeto activo tiene escala NO uniforme, cada pieza unida queda deformada en silencio por `active.matrix_world.inverted() @ obj.matrix_world`. Correr `bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)` sobre TODAS las piezas antes de `bpy.ops.object.join()`.
+- [ ] **Limpieza de slots con `clear()`, no con `pop(update_data=)`** (E-76): en Blender 4.x `IDMaterials.pop()` ya no acepta `update_data` y tira `TypeError`. Para deduplicar materiales tras un join: leer `list(o.data.materials)`, deduplicar, `o.data.materials.clear()` y volver a hacer `append()`.
+- [ ] **Torso humanoide NO se modela sólo con anillos** (E-81): un loft de elipses con `rx/ry > 1.5:1` da silueta LENS (extremos puntiagudos), no cap de hombro. Hay que **profundizar el pecho** (`ry ≥ 0.13` en los anillos del pecho), añadir **caps de deltoides como elipsoides separados** (ico sphere `subdiv=2`, radios `(0.084, 0.070, 0.052)`, **asimétricos en Z** para el hombro del lado que carga peso) **unidos al torso** después de `aplicar()`, y alargar el **trapecio a 8+ cm de pendiente** (no 5.5 cm).
+- [ ] **Formato de anillo del loft: `(z, cx, cy, rx, ry)`, Z PRIMERO** (E-77): pasar `(x, y, z, ...)` deforma la malla sin tirar error. `plantilla_asset.loft()` ya tiene un assert que exige z no decreciente — si salta, es esto.
+- [ ] **Suela plana cuando el apoyo es un loft elíptico** (E-78): el vértice más bajo de un anillo elíptico está en su CENTRO, así que el guard E-50 colapsa la huella a la línea media. Agregar una caja plana debajo que aporte 4 vértices de esquina. Regla de oro: **toda superficie que toca el piso necesita ≥4 vértices en sus esquinas, no 1 en el centro**.
+- [ ] **Si el asset es MONTADO (sombrero, mochila, arma en mano)**: el `.blend` debe incluir un Empty llamado `_MONTADO` (E-80) y el script **no** debe llamar a `asentar()` (E-79). En su lugar, un **guard de encaje** propio: que no tape la cara, contenga el pelo, no flote, no sea una sombrilla, no atraviese orejas. La rotación se aplica a los VÉRTICES (con bmesh), no con `rotation_euler` del objeto.
+- [ ] **Pivote del asset montado en el PUNTO DE MONTAJE** (E-79): el origen local del `.blend` es donde se cuelga del anfitrión (centro de la base de la copa para un sombrero, centro de la empuñadura para un arma, etc.). El GLB sale con el pivote listo para colgarse del hueso en Godot, sin más transformaciones.
+- [ ] **Materiales con `use_backface_culling=False` para superficies visibles desde abajo** (E-79): un ala de sombrero es un loft sin tapas; sin doble lado, el ALA se vuelve invisible desde abajo. Costo: 0 tris, 0 mats extra. glTF `doubleSided: true` lo respeta.
 - [ ] Hallazgos nuevos en §3 con fecha
 - [ ] Log en `Logs/`
 
@@ -1336,3 +2048,252 @@ tiene que ser un asset con más cuerpo — `cofre_ancestral` o `monolito_glifos`
 - [ ] z_min 0.045 EXACTO del grupo (Godot usa la constante -0.045).
 - [ ] Capturas 6 azimuts E-13 + hoja: las piezas animables deben verse en su
       pose de GLB (esa es la base que Godot preserva al animar).
+
+## 9. Nivel minimo de detalle en el modelado (2026-09-02 — glm-5.3/Kilo Code, directiva del usuario tras el caso jabali M36)
+
+> El usuario fijo el ESTANDAR: "este es el nivel de detalle minimo que
+> tenes que aportar a los disenos". Todo asset nuevo (fauna, NPCs, props
+> organicos) debe llegar a este piso. Lo que sigue sale de iterar el
+> jabali de v1 (tubo rigido) a v12b (aprobado) en 8 rondas de feedback.
+
+### 9.1 La regla de oro: NADA de tapas planas ni tubos uniformes
+
+El sintoma de "rigido" que el usuario rechaza viene de DOS habitos:
+
+1. **Tapa en abanico plana** (el abanico de triangulos que cierra un loft):
+   produce el "corte recto" (el culo del jabali v8: rechazado). Cualquier
+   extremo visible del cuerpo debe cerrar con ANILLOS QUE SE CONTRAEN
+   (r decreciente en 2-3 anillos hasta casi un punto) — nunca el anillo
+   final tapado de golpe.
+2. **Loft de anillos iguales espaciados uniformemente** (tubo): el cuerpo
+   v1 del jabali era eso. La vida organica viene de VARIAR el anillo:
+   radios distintos por anillo, centros desplazados (la linea del lomo
+   que se HUNDE a media espalda y remonta en la cruz), secciones
+   elipticas (mas anchas que altas, o al reves segun la masa).
+
+### 9.2 Checklist del nivel de detalle (lo que marco la diferencia v1 -> v12b)
+
+- [ ] Extremos cerrados con 2-3 anillos de contraccion (grupa redondeada,
+      punta de hocico) — PROHIBIDO el abanico plano visible.
+- [ ] Silueta ASIMETRICA en el eje del cuerpo: masa adelante vs atras
+      (cruz alta + grupa estrecha del jabali; pecho caido de la paloma).
+      Un cuerpo simetrico de adelante a atras lee como "salchicha".
+- [ ] Linea dorsal variada: el lomo sube/baja entre anillos (el hump de
+      la cruz), no es una recta.
+- [ ] Miembros con PROPORCIONES DISTINTAS entre pares (delanteras cortas
+      vs traseras largas del jabali) cuando la especie lo pide.
+- [ ] Colas/cuerdas curvas: loft multi-punto con DIRECCION CAMBIANTE por
+      tramo (base -> codo -> punta con tangentes distintas) y radio
+      decreciente — jamas un cono recto unico.
+- [ ] Detalles anclados con matrix_world del padre YA transformado (ver
+      9.3) — posicion "a mano" = piezas flotando.
+- [ ] Anillos: 6-10 lados para cuerpo (8 en jabali), 5-7 para miembros
+      finos. Elipses (ry != rz) SIEMPRE que la pieza no sea un cilindro
+      puro.
+
+### 9.3 Anclar detalles al padre transformado (la leccion dura del jabali)
+
+El jabali v5 puso la rotacion de la cabeza con el SIGNO INVERTIDO (rot Y
+negativa creia inclinar abajo y LEVANTA el hocico — E-19) y todos los
+detalles posicionados "a mano" segun donde DEBERIA estar la boca quedaron
+flotando en el aire. El patron que lo arreglo (v6+):
+
+```python
+cabeza.rotation_euler = (...)  # definir pose PRIMERO
+cabeza.location = (...)
+bpy.context.view_layer.update()          # recien ahora es verdad
+MW = cabeza.matrix_world
+
+def punto_cabeza(lx, ly, lz):             # local -> mundo REAL
+    return MW @ Vector((lx, ly, lz))
+```
+
+Y con assert anti-regresion del signo:
+```python
+_punta = punto_cabeza(PUNTA_X, 0, PUNTA_Z)
+_craneo = punto_cabeza(CRANEO_X, 0, 0)
+assert _punta.z < _craneo.z, "el hocico apunta ARRIBA: signo invertido"
+```
+
+REGLA: ningun detalle se posiciona con numeros a mano si su padre esta
+rotado. Todo via matrix_world. Y todo signo de rotacion que "deberia"
+dar una pose se VERIFICA con un assert sobre la geometria resultante.
+
+### 9.4 Curvas tipo cuerda (colas, lianas, tendones): loft con tangentes
+
+La cola del jabali v12b (aprobada) es el patron a copiar: NO dos conos
+encadenados (ademas rompe E-70), NO un cono recto. Una linea central de
+4-5 PUNTOS con direccion cambiante + anillos ortonormales por tramo:
+
+```python
+PTOS = [base, base + dir1*0.055, base + dir1*0.10,          # curva 1
+        base + dir1*0.10 + dir2*0.06, ... ]                  # curva 2
+RADIOS = [0.016, 0.014, 0.011, 0.008, 0.003]                 # se afina
+# tangente central por anillo (promedio de tramos), n1 = tang x Y,
+# n2 = tang x n1 -> anillo de 10 verts alrededor del punto.
+```
+
+Bonus: la malla unica queda como 1 pieza animable con 1 pivote (Godot la
+menea entera).
+
+### 9.5 Caso de referencia
+
+`tools/mcp/blender-mcp/36-Fauna/scripts/crear_jabali_lowpoly.py` v12b
+(log 555): tronco de 10 anillos con hump y grupa redonda por contraccion,
+cabeza en cuna con perfil concavo, cola-cuerda curva de 5 puntos. Leer
+sus comentarios v5->v12b antes de modelar el proximo animal — cada fix
+esta documentado inline.
+
+### 9.6 Directiva de guardado: .blend primero, GLB después (2026-09-05, MiMo V2.5)
+
+> **Regla obligatoria:** cuando se guarda un asset de Blender, **SIEMPRE** se guarda
+> primero el `.blend` en `tools/mcp/blender-mcp/{ID-Modulo}/` (ej: `36-Fauna/`).
+> **NO se exporta GLB** a `game/isla-ancestral/assets/3d/` sin aprobación explícita
+> del usuario.
+
+**Flujo correcto:**
+
+```
+1. Ejecutar script en Blender → screenshot + stats (tris, objs, mats)
+2. Guardar .blend en tools/mcp/blender-mcp/{ID-Modulo}/
+3. Presentar resultado al usuario para aprobación
+4. Solo si el usuario aprueba → exportar GLB a game/...
+```
+
+**Razón:** el usuario quiere revisar los modelos antes de integrarlos al juego.
+Las pruebas y iteraciones van primero en la carpeta del módulo, no en la
+carpeta de assets finales.
+
+---
+
+## 10. ANIMALES CON DOS MODOS DE COMPORTAMIENTO (2026-09-05 — glm-5.3-free / Kilo Code, caso gaviota M36)
+
+> **PARA QUIEN ES ESTA SECCION:** cualquier agente que deba modelar un animal
+> con DOS poses (vuelo/tierra, nadar/tierra, etc.) — paloma, loro, pato, una
+> tortuga marina, lo que sea. La gaviota (Log 694/695) es el CASO DE
+> REFERENCIA: 2 sesiones de iteracion dolorosa destiladas en reglas duras.
+> El lado Godot esta en `07-GUIA-GODOT.md` §12. LEER AMBAS ANTES DE EMPEZAR.
+> Scripts de referencia: `36-Fauna/scripts/crear_gaviota_lowpoly.py` (v14d,
+> blender) y `game/isla-ancestral/scripts/fauna/gaviota_npc.gd` (v16, godot).
+
+### 10.1 PRINCIPIO FUNDAMENTAL: el .blend guarda UNA sola pose — la PRIMARIA
+
+El asset viaja a Godot en UNA pose (la del GLB) y **el segundo modo se
+compone EN GODOT por rotacion de piezas**, nunca modelando dos assets.
+
+- La pose del GLB debe ser el **MODO PRIMARIO** (el de reposo natural):
+  gaviota = VUELO (patas recogidas, alas extendidas). Un animal acuatico
+  = NADO (aletas en posicion de remo). Una paloma tambien = vuelo.
+- El modo secundario (tierra) NO se modela: Godot rota las piezas hacia
+  la pose secundaria con QUATERNIONES medidos (ver guia Godot §12.3).
+- Si modelas los dos modos como assets separados, te van a desincronizar
+  en cada ajuste (la gaviota v14 tenia 2 GLB y se descarto el approach).
+
+### 10.2 Anatomia minima del ave bimodo (o animal bimodo en general)
+
+```
+SM_<Animal>_Cuerpo        (tronco, ojos, pico/hocico — todo lo estatico)
+SM_<Animal>_Ala_L / _R    (o aletas/patas delanteras: LA pieza del modo 1)
+SM_<Animal>_Pata_0 / _1   (o patas traseras: LA pieza del modo 2)
+SM_<Animal>_Pie_0 / _1    (opcional: apoyo terminal pegado al extremo)
+SM_<Animal>_Cola          (estetica + tope de escala del modo secundario)
+SM_<Animal>_Punta_0 / _1  (detalles de la punta del ala — NEGRO en gaviota)
+```
+
+Reglas por pieza (aprendidas de 5 iteraciones fallidas):
+
+1. **ALAS: loft por ANILLOS desde el hombro (seccion 9.4), NO cubos.**
+   Perfil decreciente con N=8: cuerda gruesa en el hombro (rc 0.045),
+   afinandose a la punta (rc 0.028). El ORIGEN del objeto en el HOMBRO
+   (rotation pivot de Godot) con la malla extendida hacia su lado
+   (loft con t*LARGO desde 0, §8.1 regla 3).
+   **VOCABULARIO DEL ALA (usado en toda la documentacion de giros —
+   ver 07-GUIA-GODOT §12.2):** SPAN = el largo del ala (lo que se
+   extiende desde el hombro, 0.60 en gaviota v14); CUERDA = el ancho
+   pico→cola de la superficie (~0.07 en el hombro); el ala se modela
+   con la CUERDA alineada al eje X del objeto y el SPAN naciendo del
+   origen. El rollo de giros en Godot entero (que eje es el span, que
+   signos se niegan por lado, el orden de composicion R=Ry·Rx·Rz) esta
+   documentado en `07-GUIA-GODOT.md` §12.2 — el LADO BLENDER de esa
+   anatomia es: origen en hombro + cuerda en X + span desde 0. Si el
+   pivot queda en el centro de la pala, TODA la tabla de giros falla
+   ("el ala orbita") y no hay codigo que lo arregle.
+2. **ALAS: el lado L sale hacia -Y y el R hacia +Y en Blender (Z-up).**
+   Tras el export Y-up quedan: span L en +Z, R en -Z (dump_glb.py lo
+   confirma). El hombro L se ubica en y=-0.05*lado — ojo v14b: hombro
+   en `-0.05*lado` invierte el ala y sale por el costado opuesto.
+3. **PATAS del modo secundario: CONOS con el ORIGEN en la CADERA y el
+   eje del cono apuntando en la DIRECCION DE REPOSO del modo primario.**
+   Gaviota: dir (-0.85, 0, -0.45) (atras-abajo bajo la cola) via
+   `dir.to_track_quat('Z', 'Y').to_euler()`. La razon: Godot rota DESDE
+   esa direccion hacia la vertical con un quaternion — si el origen no
+   esta en la cadera o el eje no es el real, el despliegue falla.
+   TAPER: radius1 (cadera) GRUESO, radius2 (tobillo) fino — v14c lo
+   invirtio y las patas parecian al reves.
+4. **PIES: cubos chicos pegados al EXTREMO de la pata en reposo** (el
+   apex del cono en pose de vuelo). Se re-parentan a la pata EN GODOT
+   (§12.4 guia Godot) para acompanar el despliegue. NO modelarlos en
+   pose desplegada: en reposo quedarian flotando.
+5. **Longitud de patas = hasta donde llega el APOYO del modo secundario.**
+   Regla practica gaviota: patas 0.18 permiten cuerpo erguido 0.42 rad
+   sin enterrar la cola. Si el usuario pide "mas erguida" y la cola se
+   entierra, la solucion es PATAS MAS LARGAS (cambio en Blender), no
+   pitch infinito en Godot (v13f lo demostro: patas 0.09 + pitch 0.45
+   = cola 0.20 m por debajo de las patas, imposible de asentar).
+6. **Materiales por pieza:** PATAS/PIEOS con material propio (gaviota:
+   naranja), manto superior del ala con SU material (gris) por
+   `p.normal.z > 0.3` en Blender Z-up (tras export queda normal +Y
+   hacia arriba en Godot — el criterio z>0.3 se evalua ANTES de export).
+
+### 10.3 FLUJO OBLIGATORIO de creacion (bimodo)
+
+```
+0. BACKUP del asset anterior si existe (Obsoletos/, §5 AGENTS.md)
+   — ANTES de tocar el .blend. La gaviota se rescato del .blend1.
+1. Modelar modo primario completo (patas EN reposo, no desplegadas).
+2. Verificar en BLENDER: captura + `dimensión` de patas/alas — el
+   eje del cono de la pata en local Y (dump), taper correcto.
+3. Guardar .blend (§9.6) — JAMAS exportar sin aprobacion del usuario.
+4. Exportar GLB alta (exportar_godot.py con EXPORT_ONLY={ID-Modulo}).
+5. DUMPEAR el GLB (dump_glb.py) y LEER los bounds de CADA pieza:
+   que eje ocupa el span del ala, que eje el cono de la pata, donde
+   quedo el origen de cada nodo. SIN ESTE PASO NO SE ANIMA NADA (E-11).
+6. Recien ahi: animar en Godot siguiendo §12 de la guia Godot.
+```
+
+### 10.4 ERRORES FATALES del bimodo (cada uno costó iteraciones)
+
+1. **bpy.ops por el socket MCP (E-22):** `primitive_cone_add` y cia
+   FALLAN SILENCIOSOS en contexto restringido. La gaviota v14 se creo
+   "OK" y las patas/pies/puntas NUNCA EXISTIERON. Siempre `bmesh.ops`
+   puro (`create_cone`, `create_cube`) + `objects.new()`.
+2. **Crear en la instancia MCP compartida:** otra sesion (la nutria)
+   abrio su .blend en el MISMO Blender MCP y guardo encima del blend de
+   la gaviota. Perdimos la escena. REGLA: modificaciones serias via
+   BLENDER HEADLESS (`blender -b --python script.py`) — no toca la
+   instancia interactiva y es reproducible.
+3. **Modelar el modo secundario en el .blend** (patas desplegadas):
+   rompe el reposo del modo primario y el despliegue en Godot no tiene
+   direccion de partida clara. El GLB SIEMPRE en reposo del primario.
+4. **Patas con eje/taper/origen mal:** eje en Z en vez de Y tras el
+   export, taper invertido, origen fuera de la cadera — cualquiera de
+   los tres tumba la pata en vez de desplegarla (v14c/v14d).
+5. **Adivinar la altura del modo secundario con constantes:** la altura
+   de la pose parada NO se calcula en Blender — se MIDE en Godot con
+   el bounding real plegado (§12.5 guia Godot). El -0.28 de la gaviota
+   v13 era una constante adivinada que flotaba 20 cm.
+
+### 10.5 Checklist final del asset bimodo (Blender)
+
+- [ ] Piezas animables separadas como SM_ con nombre de lado/indice
+- [ ] Alas: loft por anillos, origen en hombro, span L en -Y / R en +Y
+- [ ] Patas: cono, origen en cadera, eje = direccion de reposo primario,
+      taper cadera-grueso→tobillo-fino, longitud alcanza el apoyo
+- [ ] Pies: pegados al apex de la pata EN REPOSO
+- [ ] Materiales asignados por pieza (manto por normal.z > 0.3)
+- [ ] z_min 0.045 del GRUPO (§8.1 regla 5) — el asentado es del grupo
+- [ ] .blend guardado en {ID-Modulo}/ ANTES de exportar (§9.6)
+- [ ] GLB alta exportada y DUMPEADA — bounds de cada pieza anotados
+- [ ] Backup previo en Obsoletos/ con timestamp
+
+**Naming de .blend:** `{nombre}_{variante}.blend` (ej: `nutria_ribera_v2_alta.blend`).

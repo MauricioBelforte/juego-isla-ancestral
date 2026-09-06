@@ -5,7 +5,7 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de vegetación el mundo se siente vacío o el frame explota [S]
+- [x] Definir el problema: sin sistema de vegetación el mundo se siente vacío o el frame explota [S]
 - [ ] Definir el objetivo: vegetación densa pero barata, viva y determinista por bioma [S]
 - [ ] Registrar dependencias: M09 (biomas), M10 (PRNG), M08 (tala), M45 (mallas), M04 (MultiMesh), M61/M62 (presupuestos) [M]
 - [ ] Mapear la sección 49 "VEGETACIÓN" del plan maestro al ID 50 de la tabla global [M]
@@ -97,7 +97,7 @@
 
 ## L. RF11 — LOD y culling
 
-- [ ] Definir LOD 2 niveles por especie [M]
+- [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora Definir LOD 2 niveles por especie [M]
 - [ ] Definir distancia de LOD (24 m) y cull (40 m) [M]
 - [ ] Definir culling por frustum + distancia [M]
 - [ ] Definir presupuesto contra M61 [M]
@@ -107,14 +107,14 @@
 - [ ] Definir draw calls por chunk ≤ umbral [M]
 - [ ] Definir pooling de instancias (M62) [M]
 - [ ] Definir liberación de memoria al descargar chunk [M]
-- [ ] Definir registro vegetation_budget.json [M]
+- [x] Definir registro vegetation_budget.json [M]
 
 ## N. RF13 — Validación
 
 - [ ] Definir validate_vegetation.gd [M]
 - [ ] Verificar densidad real vs tabla [M]
-- [ ] Verificar instancias fuera de agua/cueva (arte sucio) [M]
-- [ ] Verificar LOD presente [S]
+- [x] Verificar instancias fuera de agua/cueva (arte sucio) [M] — iter. 6 (Log 646): BUG-022 fix (h<3 omitidas), test_distribucion.gd confirma distribución por bioma correcta, 109 instancias pobladas
+- [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora (GLB media) Verificar LOD presente [S]
 - [ ] Verificar presupuesto (instancias/draw calls/VRAM) [M]
 - [ ] Verificar naming [S]
 
@@ -174,7 +174,7 @@
 - [ ] Cada bioma muestra su vegetación característica verificada [M]
 - [ ] Escena pivote sin caída de frame (M61) [M]
 - [ ] Viento determinista con amplitud por bioma/clima [M]
-- [ ] Tala funcional (M08) y decorativo no destructible [M]
+- [x] Tala funcional (M08) y decorativo no destructible [M]
 - [ ] Estaciones cambian color visualmente en ≤ X s [M]
 - [ ] Densidad respeta clamps de terreno [M]
 - [ ] Costo MultiMesh dentro del presupuesto [M]
@@ -183,12 +183,12 @@
 ## V. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (49=VEGETACIÓN → ID 50) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 ## Iteración 1 — Inventario + verificación visual (2026-09-02 05:50, deepseek-v4-flash-vision-exp)
 
 - [x] Inventario de vegetación del proyecto: **15 tipos × 3 variantes (media/baja/alta) = 45 GLB** en assets/3d (árbol frutal, arbustos ×2, cañas bambú, flor isla, helechos ×2, hierba alta, hongo luminoso, liana, musgo roca, palmeras ×3, raíces); los 45 ya validados por el pipeline M108 (198 GLB OK)
@@ -206,3 +206,40 @@
 - [x] `scripts/vegetacion/vegetation_plan.gd` — VegetationPlan: plan determinista (45 ítems, 5 biomas por zonas anulares, rotaciones + seed por ítem) para que el mundo pueble
 - [x] Test 5/5 OK (determinismo semilla 42, dentro del radio 256, 5 biomas, sin tipos vacíos)
 - [x] `scripts/vegetacion/test_vegetation_plan_headless.gd` · Plan listo para consumo de M08 (poblar)
+## Iteración 4 — Poblado del mundo (2026-09-02 23:25 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `scripts/vegetacion/vegetation_spawner.gd` — Spawner autoload: espera 2 frames (terreno listo), genera el plan (semilla 42, radio 256), carga los GLB media del plan y los instancia con snap de altura (TerrainLocator) y rotación determinista
+- [x] Autoload `VegetationSpawner` registrado en project.godot
+- [x] **VERIFICADO EN RUNTIME: [M50] Vegetación poblada: 45 instancias, 0 omitidas** — el mundo quedó poblado (árboles, palmeras, helechos, hongos, arbustos, flores)
+- [x] Test 4/4 (plan 45 ítems, todo GLB existe, spawner instanciable) + limpieza de warnings
+
+## Notas del Agente (iter. 8 — feedback del usuario, Log 664, glm-5.3-flash)
+
+### Feedback del usuario (2026-09-04 09:26)
+> "Hay árboles que son gigantes, parecen piedras verdes, esos deberían cambiar el diseño no sé qué son... muchos problemas de tamaños que arreglar todavía."
+
+### Diagnóstico
+Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
+- **arbol_frutal**: a 6m se ve como "piedra verde gigante" — el mesh no tiene forma de árbol (tronco+copa), es un blob
+- **palmera**: las grandes (5m) están bien de tamaño pero pueden tener el mismo problema de forma
+- **flor_isla**: re-escalada a 0.8m (era invisible a 0.25m) — el usuario ya no la vio pero no confirmó si se ve bien
+- Los GLBs son placeholders del pipeline M166 que priorizaba cantidad sobre calidad
+
+### Lo que SÍ está funcionando
+- Escalas relativas coherentes (árbol > arbusto > hierba > flor)
+- Distribución por biomas correcta (114→134 instancias, cercanías del spawn)
+- Iluminación M49 (sombras, tono cálido) ✓
+- Sistema EscalasGlobales (tabla data-driven de 43 tipos) ✓
+
+### Acciones requeridas (dueño M45/M50 contenido)
+1. **Rediseñar los meshes GLB** en Blender: árboles con tronco+copa (no blobs), palmeras con hojas, arbustos con ramas
+2. Definir tabla de alturas definitiva por especie en M45 (colisión con la tabla EscalasGlobales actual)
+3. Texturas/materials para cada especie (no color plano)
+4. Colisiones: árboles/rocas sólidos (5-FUTURAS-MEJORAS "Objetos sólidos")
+
+### Cómo ayuda la infraestructura ya implementada
+- `reescalar_vegetacion_v2.py` reutilizable: se re-ejecuta cuando los meshes nuevos estén listos (solo cambiar la tabla de alturas objetivo)
+- `EscalasGlobales.escala_de()` para ajustes finos por tipo sin re-exportar
+- Respaldos en Obsoletos/ para rollback
+- **Iter. 9 (Log 715, glm-5.3-flash/Kilo Code):** feedback usuario — flor x3 (2.4m), hierba baja (0.15m runtime), lianas x2 (4m), helecho_gigante 0.8m, helecho_chico 0.35m. 4 GLBs horneados en Blender + escalas.json ajustado. Boot sin errores.
+
