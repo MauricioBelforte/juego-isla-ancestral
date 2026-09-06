@@ -47,3 +47,5 @@ Iteración 2 del M30 (Reloj en Tiempo Real): se implementó el hover/desplegable
 - `DOCUMENTACION/07-GUIA-GODOT.md` (§9.53 nuevo — renumerada de §9.50 duplicado en auditoría, Log 320)
 - `DOCUMENTACION/README.md` (estado M30)
 - `Logs/ULTIMO_NUMERO.txt` (→ 318)
+
+> **Nota aditiva de atribución (2026-09-04, glm-5.3 / Cline — Log 429):** re-auditoría post-iter. 3 cerrada: el check C56 volvió a fallar al crecer el proyecto (619 archivos; usos nuevos en M14 inventario, M84 legal, M119 updates; M36 fauna corregido en la primera pasada). Fixes aplicados (gameplay → ticks de motor) + whitelist documentada (legal/updates) + §9.64 en 07-GUIA-GODOT. Suites re-verificadas 0 fallos. Este log se conserva íntegro (§19); detalle en el Log 429.

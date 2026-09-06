@@ -37,3 +37,5 @@ Durante la iter. 2, la sesión de glm-5.3 (Cline) quedó truncada por falta de v
 
 ## Estado final de M30
 🟡 Liberado — **98/104** (1 `[?]` D67 dueño M45/M46; 5 `[ ]` con dueño externo: D74 M64, C58/G113 M74/M28/M36, F105 M59, F106 M57). Sin `[?]` nuevos generados por la auditoría. Módulo **listo para QA cruzado** (§21.8) por un modelo distinto a los intervinientes.
+
+> **Nota aditiva de atribución (2026-09-04, glm-5.3 / Cline — Log 429):** re-auditoría post-iter. 3 cerrada tras el hallazgo de que el scan C56 volvió a fallar (proyecto crecido a 619 archivos; usos nuevos de reloj-SO en M14/M84/M119; M36 fauna corregido en la primera pasada). Fixes (gameplay → ticks de motor), whitelist documentada y §9.64 en 07-GUIA-GODOT. Suites re-verificadas 0 fallos. Este log se conserva íntegro; detalle en el Log 429.

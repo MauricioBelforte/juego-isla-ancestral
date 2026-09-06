@@ -295,95 +295,111 @@ def item_repisa_pared():
     esfera('SM_Repisa_Concha', m['blanco_hueso'], 0.03, 0.30, 0.035, ZT + 0.01, sub=1)
     asentar_y_guardar('repisa_pared', montado=True)
 
+def fronda_doble(nombre, mat, base, dir1, L1, dir2, L2, ancho=0.05, grosor=0.014):
+    """v7: fronda de DOS segmentos encadenados con to_track_quat — el
+    peciolo sale en dir1 y la lamina CAE en dir2 (arco real, leible).
+    Devuelve los 2 objetos (join quien quiera)."""
+    o1 = caja(nombre + '_Pe', mat, L1, ancho, grosor,
+              base.x + dir1.x * L1 / 2, base.y + dir1.y * L1 / 2, base.z + dir1.z * L1 / 2)
+    o1.rotation_euler = dir1.to_track_quat('X', 'Y').to_euler()
+    p2 = Vector((base.x + dir1.x * L1, base.y + dir1.y * L1, base.z + dir1.z * L1))
+    o2 = caja(nombre + '_La', mat, L2, ancho * 0.8, grosor,
+              p2.x + dir2.x * L2 / 2, p2.y + dir2.y * L2 / 2, p2.z + dir2.z * L2 / 2)
+    o2.rotation_euler = dir2.to_track_quat('X', 'Y').to_euler()
+    return o1, o2
+
 def item_maceta_palmera():
-    """v5 REDESÑO (usuario: "no tiene forma alguna"). Palmera de verdad:
-    maceta troncocónica de barro → tronco con 5 segmentos que se curvan,
-    corona de 6 hojas ARCADAS (arcos, no palitos rectos) + 2 cocos."""
+    """v7 REDESÑO 2 (usuario: 'todavía no les encuentro forma'). Silueta
+    ARQUETÍPICA de palmera: maceta troncocónica + TRONCO ALTO único con
+    taper fuerte (0.035→0.018) ligeramente curvado (2 segmentos) + corona
+    de 7 frondas DOBLES (peciolo 28° arriba-fuera + lámina cayendo 55°)
+    + 3 cocos bajo la corona. El tronco alto es lo que lee 'palmera'."""
     m = mats()
-    base_arena(1.2)
-    # maceta: cono truncado invertido clásico (r arriba > r abajo)
+    base_arena(1.3)
+    # maceta troncocónica invertida: base r 0.13, boca r 0.17
     cilindro('SM_MacPal_Maceta', m['barro'], 0.13, 0.16, 0, 0, 0.125, verts=12, r2=0.17)
-    # maceta 0.045..0.205, boca r 0.17
-    caja('SM_MacPal_Tierra', m['piedra_oscura'], 0.30, 0.30, 0.02, 0, 0, 0.20)
-    # tierra al ras de la boca (0.19..0.21)
-    # tronco curvado: 5 cilindros cortos apilados con drift en X
-    x = 0.0
-    z = 0.21
-    for i in range(5):
-        h = 0.13
-        x += 0.012 * (i - 2) * -0.5      # curva suave
-        cilindro('SM_MacPal_Tronco', m['madera_oscura'], 0.030 - i * 0.002, h, x, 0, z + h / 2, verts=6)
-        z += h * 0.9
-    TOP = z + 0.02   # ~0.79: corona
-    # corona: 6 hojas ARCADAS — cilindro horizontal girado para caer en
-    # arco (tallo corto hacia arriba-fuera + caida de la punta)
-    for i in range(6):
-        a = i * math.pi / 3
-        # tallo: caja diagonal hacia arriba-fuera
-        dirx, diry = math.cos(a), math.sin(a)
-        # hoja arco: caja larga rotada Y para el arco + rot Z para el angulo radial
-        caja('SM_MacPal_Hoja', m['hoja'], 0.44, 0.06, 0.015,
-             x + dirx * 0.16, diry * 0.16, TOP + 0.045,
-             rot=(0, math.radians(-24), -a))
-        # hoja par opuesta levemente mas alta (volumen de corona)
-        if i % 2 == 0:
-            caja('SM_MacPal_Hoja', m['hoja_oscura'], 0.36, 0.05, 0.015,
-                 x + dirx * 0.13, diry * 0.13, TOP + 0.10,
-                 rot=(0, math.radians(-38), -a))
-    # 2 cocos bajo la corona
-    esfera('SM_MacPal_Coco', m['madera_oscura'], 0.045, x - 0.05, 0.05, TOP - 0.06, sub=1)
-    esfera('SM_MacPal_Coco', m['madera_oscura'], 0.045, x + 0.05, -0.05, TOP - 0.06, sub=1)
-    asentar_y_guardar('maceta_palmera', '(palmera real: tronco curvo + corona arcada)')
+    caja('SM_MacPal_Tierra', m['piedra_oscura'], 0.30, 0.30, 0.02, 0, 0, 0.205)
+    # tronco: 2 segmentos con drift (curva suave), taper 0.034→0.020
+    t1 = cilindro('SM_MacPal_Tronco', m['madera_oscura'], 0.034, 0.26, 0, 0, 0.335, verts=7)
+    t2 = cilindro('SM_MacPal_TroncoT', m['madera_oscura'], 0.026, 0.30, 0.025, 0, 0.60, verts=7, r2=0.018)
+    TOP = Vector((0.055, 0.0, 0.755))   # tope de la corona
+    # corona: 7 frondas dobles radiales
+    for i in range(7):
+        a = i * 2 * math.pi / 7
+        radial = Vector((math.cos(a), math.sin(a), 0.0))
+        dir1 = (radial * 0.88 + Vector((0, 0, 0.47))).normalized()   # sale 28° arriba
+        dir2 = (radial * 0.83 - Vector((0, 0, 0.56))).normalized()   # cae 34° abajo
+        fronda_doble('SM_MacPal_Fr_%d' % i, m['hoja'], TOP, dir1, 0.11, dir2, 0.26)
+    # 3 cocos colgando bajo la corona
+    for i in range(3):
+        a = i * 2 * math.pi / 3 + 0.5
+        esfera('SM_MacPal_Coco', m['madera_oscura'], 0.042,
+               TOP.x + 0.07 * math.cos(a), 0.07 * math.sin(a), 0.695, sub=1)
+    asentar_y_guardar('maceta_palmera', '(palmera: tronco alto + frondas dobles)')
 
 def item_maceta_helecho():
-    """v5 REDESÑO (usuario: "no tiene forma alguna"). Helecho colgante de
-    verdad: maceta cónica + racimos de FRONDAS ARCADAS que nacen del
-    borde y caen por los costados (arcos, no palitos radiales), colgado
-    de la horca con 3 cuerdas al gancho."""
+    """v7 REDESÑO 2 (usuario: 'todavía no les encuentro forma'). Helecho
+    colgante ARQUETÍPICO: matillo parado arriba (4 hojas) + FALDÓN denso
+    de 12 frondas dobles que nacen del borde, arquean afuera y CAEN por
+    fuera de la maceta (hasta z 0.06). Colgado de la horca."""
     m = mats()
     base_arena(1.3)
     horca_set()
-    # maceta conica clasica de jardin colgante
-    cilindro('SM_MacHel_Maceta', m['barro_osc'], 0.14, 0.13, 0, 0, 0.11, verts=10, r2=0.10)
-    # maceta 0.045..0.175, boca r 0.10
-    # frondas: 8 arcos que nacen del BORDE (0.175) y caen por fuera
-    for i in range(8):
-        a = i * math.pi / 4
-        dirx, diry = math.cos(a), math.sin(a)
-        # fronda arco: caja diagonal que sale y cae (rot Y para el arco,
-        # rot Z para el angulo)
-        caja('SM_MacHel_Fronda', m['hoja'], 0.34, 0.045, 0.012,
-             dirx * 0.14, diry * 0.14, 0.20,
-             rot=(0, math.radians(30), -a))
-        # segunda capa mas corta hacia abajo (cascada)
-        if i % 2 == 0:
-            caja('SM_MacHel_Fronda', m['hoja_oscura'], 0.26, 0.04, 0.012,
-                 dirx * 0.17, diry * 0.17, 0.145,
-                 rot=(0, math.radians(52), -a))
-    # cuerdas del borde de la maceta (0.175) al gancho (0.715)
+    # maceta cónica: base 0.13, boca 0.10, top 0.175
+    cilindro('SM_MacHel_Maceta', m['barro_osc'], 0.13, 0.13, 0, 0, 0.11, verts=10, r2=0.10)
+    BORDE = 0.175
+    # matillo central: 4 hojas paradas que arquean
+    for i in range(4):
+        a = i * math.pi / 2 + 0.4
+        radial = Vector((math.cos(a), math.sin(a), 0.0))
+        dir1 = (radial * 0.35 + Vector((0, 0, 0.94))).normalized()
+        dir2 = (radial * 0.85 - Vector((0, 0, 0.53))).normalized()
+        fronda_doble('SM_MacHel_Centro_%d' % i, m['hoja_oscura'],
+                     Vector((0.03 * math.cos(a), 0.03 * math.sin(a), BORDE - 0.01)),
+                     dir1, 0.10, dir2, 0.13, ancho=0.045)
+    # faldón: 12 frondas desde el borde, arco afuera-abajo cruzando el borde
+    for i in range(12):
+        a = i * math.pi / 6
+        radial = Vector((math.cos(a), math.sin(a), 0.0))
+        base = Vector((radial.x * 0.095, radial.y * 0.095, BORDE + 0.005))
+        dir1 = (radial * 0.80 + Vector((0, 0, 0.60))).normalized()   # sube saliendo
+        dir2 = (radial * 0.45 - Vector((0, 0, 0.89))).normalized()   # cae casi vertical
+        fronda_doble('SM_MacHel_Fr_%d' % i, m['hoja'], base, dir1, 0.09, dir2, 0.16, ancho=0.035)
+    # cuerdas del borde al gancho + gancho de la viga
     for i in range(3):
         a = i * 2 * math.pi / 3 + math.pi / 6
-        cilindro('SM_MacHel_Cuerda', m['cuerda'], 0.008, 0.55,
-                 0.09 * math.cos(a), 0.09 * math.sin(a), 0.44, verts=5)
+        cilindro('SM_MacHel_Cuerda', m['cuerda'], 0.008, 0.585,
+                 0.09 * math.cos(a), 0.09 * math.sin(a), BORDE + 0.293, verts=5)
     toro('SM_MacHel_Gancho', m['bronce'], 0.045, 0.010, 0, 0, 0.76)
-    asentar_y_guardar('maceta_helecho', '(helecho en cascada, colgado de horca)')
+    asentar_y_guardar('maceta_helecho', '(matillo + faldón de 12 frondas)')
 
 def item_maceta_flor():
-    """v2 FIX: tierra flotaba 3 cm (0.165 vs maceta top 0.135)."""
+    """v8 FIX (usuario: 'hojas separadas del tallo'): las hojas estaban a
+    z fijo (0.20/0.24) flotando a media altura del tallo inclinado. Ahora
+    ancladas AL TALLO con fronda_doble: nacen del tallo a z 0.25/0.32,
+    horizontales-afuera con caida leve — hojas reales de maceta."""
     m = mats()
     base_arena(0.9)
     cilindro('SM_MacFlor_Maceta', m['blanco_hueso'], 0.11, 0.09, 0, 0, 0.09, verts=10, r2=0.08)
-    # 0.045..0.135
+    # maceta 0.045..0.135
     caja('SM_MacFlor_Tierra', m['piedra_oscura'], 0.17, 0.17, 0.02, 0, 0, 0.13)
-    cilindro('SM_MacFlor_Tallo', m['hoja'], 0.012, 0.30, 0, 0, 0.29, verts=6)
-    esfera('SM_MacFlor_Centro', m['flor_amar'], 0.035, 0, 0, 0.46, sub=1)
+    # tallo leve curvado (2 segmentos, drift X)
+    t1 = cilindro('SM_MacFlor_Tallo', m['hoja'], 0.012, 0.18, 0, 0, 0.225, verts=6)
+    t2 = cilindro('SM_MacFlor_TalloT', m['hoja'], 0.010, 0.18, 0.016, 0, 0.40, verts=6)
+    # 2 hojas ANCLADAS al tallo: z 0.25 y 0.32, lado ±X con caida
+    for i, (z_n, sx) in enumerate(((0.25, -1), (0.33, 1))):
+        base = Vector((0.008 * sx * z_n / 0.29, 0, z_n))   # sobre el tallo
+        dir1 = Vector((0.85 * sx, 0, 0.53)).normalized()    # sale arriba-afuera
+        dir2 = Vector((0.95 * sx, 0, -0.31)).normalized()   # cae al borde
+        fronda_doble('SM_MacFlor_Hoja%d' % i, m['hoja'], base, dir1, 0.08, dir2, 0.10, ancho=0.045)
+    # flor al tope del tallo (0.49): centro + 5 petalos radiales
+    FLOR = Vector((0.032, 0, 0.50))
+    esfera('SM_MacFlor_Centro', m['flor_amar'], 0.035, FLOR.x, FLOR.y, FLOR.z, sub=1)
     for i in range(5):
         a = i * 2 * math.pi / 5
         caja('SM_MacFlor_Petalo', m['flor_rosa'], 0.09, 0.05, 0.012,
-             0.085 * math.cos(a), 0.085 * math.sin(a), 0.46, rot=(0, 0, -a))
-    caja('SM_MacFlor_Hoja', m['hoja'], 0.16, 0.05, 0.01, 0.10, 0, 0.20, rot=(0, 0, -0.4))
-    caja('SM_MacFlor_Hoja', m['hoja'], 0.16, 0.05, 0.01, -0.10, 0, 0.24, rot=(0, 0, 0.4))
-    asentar_y_guardar('maceta_flor', '')
+             FLOR.x + 0.085 * math.cos(a), FLOR.y + 0.085 * math.sin(a), FLOR.z, rot=(0, 0, -a))
+    asentar_y_guardar('maceta_flor', '(hojas ancladas al tallo)')
 
 def item_alfombra_floral():
     """v4 FIX (usuario: "parece un modelo atómico con órbitas"): el anillo
