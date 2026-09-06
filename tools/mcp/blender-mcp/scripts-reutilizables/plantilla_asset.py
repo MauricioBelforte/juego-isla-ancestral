@@ -22,7 +22,9 @@
 #   1 limpiar()  2 mat()s  3 geometria  4 arena()  5 iluminar()
 #   6 asentar()  7 camara()  8 shade_flat()  9 guardar()
 import bpy
+import bmesh
 import os
+from math import pi, cos, sin
 from mathutils import Vector, Euler
 
 # Raiz del repo: este archivo vive en <repo>/tools/mcp/blender-mcp/scripts-reutilizables/
@@ -95,6 +97,145 @@ def caja(nombre, x, y, z, sx, sy, sz, material, rot_euler=None):
         o.rotation_euler = rot_euler
     o.data.materials.append(material)
     return o
+
+
+# ---------- 2c) Helper de LOFT (forma premium: afilada y con curvatura) ----------
+def loft(nombre, anillos, material, lados=12, tapar_arriba=True,
+         tapar_abajo=True, fase=0.0, ondas=None, ondas_z=None):
+    """Malla generada apilando anillos elipticos — la alternativa premium a caja().
+
+    MOTIVO (2026-09-02, NPC base M19): apilar cajas da figuras de "muñeco de
+    palo" — hombros del mismo ancho que la cintura, brazos de seccion constante.
+    Un loft permite AFINAR (cintura mas angosta que cadera y pecho) y CURVAR
+    (desplazar el centro de cada anillo), que es lo que hace que una silueta lea
+    como un cuerpo y no como un mueble.
+
+    `anillos`: lista de (z, cx, cy, rx, ry), de ABAJO hacia ARRIBA.
+      z   = altura del anillo
+      cx  = desplazamiento del centro en X   (para inclinar / contrapposto)
+      cy  = desplazamiento del centro en Y   (para curva frontal: pecho, panza)
+      rx  = semieje en X  (la dimension FINAL, no el radio/2 — ver E-68)
+      ry  = semieje en Y
+
+    Los anillos pueden tener distinto rx/ry entre si: ahi esta el afilado.
+    No hace falta que tengan el mismo "lados": todos usan el mismo.
+
+    `tapar_abajo=False` deja el extremo inferior ABIERTO (util para mangas,
+    short, cuellos: se ve el interior pero no aparece un disco plano visible
+    desde abajo). `fase` rota todos los anillos para alinear costuras.
+
+    ONDULACION (2026-09-02, sombrero de paja M19) — lo que separa un "cono de
+    plastico" de una pieza tejida:
+      `ondas`  = (amp_relativa, k)  -> r *= 1 + amp_relativa * cos(k * angulo)
+      `ondas_z`= (amplitud_m,   k)  -> z += amplitud_m       * cos(k * angulo)
+    Con `lados` multiplo de `2k` se obtiene un lobulo regular; si no, queda un
+    salto en la costura. Ejemplo: ala de paja tejida `lados=24, ondas=(0.018,
+    12), ondas_z=(0.006, 12)`.
+    Se aplican a TODOS los anillos por igual (son modulaciones angulares, no
+    de altura). El vertice central de las tapas usa el z PROMEDIO del anillo,
+    no el del vertice 0 (con `ondas_z` el vertice 0 es arbitrario).
+
+    E-79: `ondas_z` puede romper el guard de z crecientes si dos anillos estan
+    mas cerca que `2 * ondas_z[0]`. En ese caso el guard salta y esta BIEN que
+    salte: hay que separar los anillos o bajar la amplitud.
+
+    Devuelve el objeto (ya linkado a la escena) para poder rotarlo/escalarlo.
+
+    E-32: las normales se calculan con bm.normal_update(), y el orden de los
+    vertices de cada cara esta verificado para que apunten hacia AFUERA.
+    """
+    assert len(anillos) >= 2, 'loft() necesita al menos 2 anillos'
+    # E-77 (2026-09-02, NPC base M19): el formato de anillo es (z, cx, cy, ...)
+    # con Z PRIMERO, no (x, y, z, ...). Pasar las coordenadas en orden de
+    # vector produce una malla SILENCIOSAMENTE deformada: loft() interpreta x
+    # como altura y z como desplazamiento en Y, y el objeto nace cualquier
+    # cosa (un brazo deberia ir de z=0.68 a 1.14 y nacia de -0.22 a -0.16) sin
+    # tirar ningun error. Como los anillos van de ABAJO hacia ARRIBA, las z
+    # tienen que ser crecientes: eso da un guard barato y confiable.
+    for _i in range(len(anillos) - 1):
+        assert anillos[_i][0] <= anillos[_i + 1][0] + 1e-9, (
+            'E-77: anillo %d tiene z=%.4f y el siguiente z=%.4f. Los anillos '
+            'van de ABAJO hacia ARRIBA y el PRIMER campo es Z, no X. '
+            '¿Pasaste (x, y, z, rx, ry) en vez de (z, cx, cy, rx, ry)?'
+            % (_i, anillos[_i][0], anillos[_i + 1][0]))
+    if ondas:
+        assert float(ondas[1]).is_integer(), \
+            'ondas k=%.3f no es entero: la onda no cierra en la costura' % ondas[1]
+    if ondas_z:
+        assert float(ondas_z[1]).is_integer(), \
+            'ondas_z k=%.3f no es entero: la onda no cierra en la costura' % ondas_z[1]
+    bm = bmesh.new()
+    capas = []
+    for (_z, _cx, _cy, _rx, _ry) in anillos:
+        vs = []
+        for _i in range(lados):
+            _a = fase + 2.0 * pi * _i / lados
+            _m = 1.0 + (ondas[0] * cos(ondas[1] * _a) if ondas else 0.0)
+            _dz = ondas_z[0] * cos(ondas_z[1] * _a) if ondas_z else 0.0
+            vs.append(bm.verts.new((_cx + _rx * _m * cos(_a),
+                                    _cy + _ry * _m * sin(_a),
+                                    _z + _dz)))
+        capas.append(vs)
+
+    # Costados: (a[i], a[j], b[j], b[i]) -> normal hacia AFUERA (verificado).
+    for _k in range(len(capas) - 1):
+        _a, _b = capas[_k], capas[_k + 1]
+        for _i in range(lados):
+            _j = (_i + 1) % lados
+            bm.faces.new((_a[_i], _a[_j], _b[_j], _b[_i]))
+
+    # Tapas por abanico a un vertice central.
+    for _vs, _arriba in ((capas[0], False), (capas[-1], True)):
+        if _arriba and not tapar_arriba:
+            continue
+        if (not _arriba) and not tapar_abajo:
+            continue
+        _n = len(_vs)
+        # E-79: promedio de z, no _vs[0].co.z — con ondas_z el vertice 0 es
+        # arbitrario y el centro de la tapa nace torcido.
+        _c = bm.verts.new((sum(v.co.x for v in _vs) / _n,
+                           sum(v.co.y for v in _vs) / _n,
+                           sum(v.co.z for v in _vs) / _n))
+        for _i in range(_n):
+            _j = (_i + 1) % _n
+            # arriba -> (c, i, j) da normal +Z ; abajo -> (c, j, i) da -Z
+            bm.faces.new((_c, _vs[_i], _vs[_j]) if _arriba
+                         else (_c, _vs[_j], _vs[_i]))
+
+    bm.normal_update()
+    malla = bpy.data.meshes.new(nombre)
+    bm.to_mesh(malla)
+    bm.free()
+    o = bpy.data.objects.new(nombre, malla)
+    bpy.context.scene.collection.objects.link(o)
+    o.data.materials.append(material)
+    return o
+
+
+def polilinea(pts, ts):
+    """Muestrea una polilinea 3D en las fracciones `ts` (0..1 del largo total).
+
+    Para brazos/piernas: pasas [hombro, codo, muñeca] y las fracciones donde
+    quieres cada anillo del loft. Devuelve lista de (x, y, z).
+    """
+    import math
+    segs, acum = [], [0.0]
+    for _i in range(len(pts) - 1):
+        _d = math.sqrt(sum((pts[_i + 1][_k] - pts[_i][_k]) ** 2 for _k in range(3)))
+        segs.append(_d)
+        acum.append(acum[-1] + _d)
+    total = acum[-1]
+    assert total > 1e-9, 'polilinea de largo 0'
+    out = []
+    for _t in ts:
+        _obj = _t * total
+        _k = 0
+        while _k < len(segs) - 1 and acum[_k + 1] < _obj:
+            _k += 1
+        _f = (_obj - acum[_k]) / segs[_k] if segs[_k] > 1e-9 else 0.0
+        out.append(tuple(pts[_k][_m] + _f * (pts[_k + 1][_m] - pts[_k][_m])
+                         for _m in range(3)))
+    return out
 
 
 # ---------- 3) Disco de arena de referencia (para las capturas) ----------

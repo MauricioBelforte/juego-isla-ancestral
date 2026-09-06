@@ -383,6 +383,17 @@ def zmin_real(o):
 z_min = min(zmin_real(o) for o in piezas)
 delta = Z_APOYO - z_min
 
+# E-80 (2026-09-02, sombrero de paja M19): los assets MONTADOS (sombreros,
+# mochilas, armas en mano) viven a la altura de su punto de montaje, no del
+# suelo. Re-asentarlos los HUNDE al piso. E-62 los cubre SOLO cuando estan a
+# mas de 25 cm del suelo; un sombrero a 13 cm cae dentro del umbral y se
+# hundiria.
+#   Marcar el .blend con un objeto llamado `_MONTADO` (un Empty, sin geometria)
+#   indica que el asset es montado. Si esta presente, OMITIMOS el re-asentado
+#   sin importar el delta. El objeto se filtra antes del export (sin prefijo
+#   SM_ no se exporta, E-44).
+montado = any(o.name == '_MONTADO' for o in escena.objects)
+
 # E-62: NO todo asset se apoya en la arena. Las piezas de construccion que se
 # montan SOBRE otras piezas (techos sobre paredes, aleros, cornisas) tienen su
 # z_min legitimo muy por encima de Z_APOYO (ej. techo_dos_aguas z_min 2.645).
@@ -395,7 +406,16 @@ delta = Z_APOYO - z_min
 # de rango en vez de re-asentado); aca es la contrapartida del lado derivador.
 UMBRAL_REASENTADO = 0.25   # 25 cm: generoso para un mal apoyo, muy lejos de 2.6 m
 
-if abs(delta) > UMBRAL_REASENTADO:
+if montado:
+    # E-80: asset MONTADO (sombreros, mochilas, armas, etc.). El .blend
+    # incluye un Empty `_MONTADO` que lo declara. NO se re-asienta, ni
+    # siquiera dentro del umbral de E-62: un sombrero a 13 cm del suelo es
+    # legitimo (su pivote de montaje esta a 1.55 m, el ala cuelga 6 cm por
+    # debajo de la base de la copa).
+    print('RE-ASENTADO OMITIDO (E-80): el .blend contiene un Empty `_MONTADO`. '
+          'Este asset se monta sobre otro (pivote en la cabeza, mano, etc.), '
+          'NO se apoya en la arena. z_min %.3f se preserva.' % z_min)
+elif abs(delta) > UMBRAL_REASENTADO:
     # No tocar: es un asset que se apoya sobre otro (E-60). Solo informar.
     print('RE-ASENTADO OMITIDO (E-62): z_min %.3f esta a %.3f m de Z_APOYO, '
           'fuera del umbral de %.2f m. Se asume que este asset NO se apoya en '
@@ -479,29 +499,39 @@ def generar(modulo, blend_alta, modo, ratio=None, decima_media=False,
 
 
 def main():
-    if len(sys.argv) < 4:
+    # E-91-argv: cuando se invoca con `blender -b --factory-startup --python
+    # script.py -- <args>`, Blender pasa TODO el argv al script en Windows
+    # (incluido `-b --factory-startup --python script.py --`). Sliceamos a
+    # partir del primer `--` para que el script reciba sus propios args.
+    # En la invocación por MCP socket el argv ya viene limpio (sin `-b`),
+    # pero el slice funciona idéntico si no encuentra `--`.
+    if '--' in sys.argv:
+        argv = sys.argv[sys.argv.index('--') + 1:]
+    else:
+        argv = sys.argv[1:]
+    if len(argv) < 3:
         print(__doc__)
         sys.exit(1)
-    modulo = sys.argv[1]
-    blend = sys.argv[2]
-    modos = [a.lstrip('-') for a in sys.argv[3:] if a.lstrip('-') in ('media', 'baja')]
+    modulo = argv[0]
+    blend = argv[1]
+    modos = [a.lstrip('-') for a in argv[2:] if a.lstrip('-') in ('media', 'baja')]
     if not modos:
         print('Indicá --media y/o --baja')
         sys.exit(1)
     ratio = None
-    if '--ratio' in sys.argv:
-        i = sys.argv.index('--ratio')
+    if '--ratio' in argv:
+        i = argv.index('--ratio')
         try:
-            ratio = float(sys.argv[i + 1])
+            ratio = float(argv[i + 1])
         except (IndexError, ValueError):
             print('--ratio requiere un número, ej: --ratio 0.5')
             sys.exit(1)
-    decima_media = '--decima-media' in sys.argv
+    decima_media = '--decima-media' in argv
     max_mats = None
-    if '--max-mats' in sys.argv:
-        i = sys.argv.index('--max-mats')
+    if '--max-mats' in argv:
+        i = argv.index('--max-mats')
         try:
-            max_mats = int(sys.argv[i + 1])
+            max_mats = int(argv[i + 1])
         except (IndexError, ValueError):
             print('--max-mats requiere un entero, ej: --max-mats 4')
             sys.exit(1)

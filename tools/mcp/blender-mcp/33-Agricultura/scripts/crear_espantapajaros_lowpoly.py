@@ -28,10 +28,11 @@
 # 12 verts en la base, y el poste aporta 1-2 mas -> 13-14 >= 8.
 # Huella 0.80 x 0.80, min 0.80 > 0.30.
 #
-# E-70 (contar ANTES de generar): 16 SM_. Tope ALTA <= 16 -> ESTAMOS EN EL
-#   TECHO, no entra ni una pieza mas.
+# E-70 (contar ANTES de generar): 15 SM_. Tope ALTA <= 16.
 #   1 base + 1 poste + 2 brazos + 2 manos + 1 cuerpo + 1 cabeza + 1 cuerda
-#   + 1 sombrero copa + 1 sombrero ala + 2 ojos + 1 boca + 2 pajas = 16.
+#   + 1 sombrero copa + 1 sombrero ala + 2 ojos + 1 boca + 1 FLECOS = 15.
+#   Los 4 flecos van JUNTOS en un solo objeto (bpy.ops.object.join). Si se
+#   crearan como 4 objetos sueltos serian 18 SM_ -> EXCEDE el tope ALTA.
 #   MEDIA/BAJA NO suben: generar_variante.py fusiona por LISTA DE MATERIALES,
 #   y los 2 brazos comparten MAT_madera con el poste -> siguen siendo 1 objeto
 #   fusionado. MEDIA se queda en 7 obj, BAJA en 6.
@@ -50,10 +51,13 @@
 #   11) Sombrero Ala    cil 12 lados r=0.32 h=0.04   z=2.00
 #   12-13) Ojos x2      caja 0.06 x 0.02 x 0.04      y=+0.115 x=+-0.05 z=1.86
 #   14) Boca            caja 0.08 x 0.02 x 0.03      y=+0.115 x=0 z=1.79
-#   15-16) Pajas x2     cil 6 lados r=0.10 h=0.20    eje en Y, y=+-0.23 z=1.40
+#   15) Flecos x4       cil 6 lados r=0.03 h=0.36    EJE Z, en las 4 esquinas
+#                       del dobladillo: (+-0.11, +-0.07, z=0.92).
+#                       Cuelgan 33.5 cm (5x los 6.5 cm de v3).
+#                       Los 4 van JUNTOS en 1 objeto (join) por E-70.
 #
 # Presupuesto M166 ALTA: <=16 obj / <=6000 tris / <=12 mats.
-#   16 obj · ~282 tris · 7 mats -> OK (objetos en el techo exacto).
+#   15 obj · ~330 tris · 7 mats -> OK.
 #
 # E-68: caja() NO multiplica por 2.
 import bpy, os, sys
@@ -126,7 +130,10 @@ for i, sx in enumerate((-1, +1)):
 # --- 7) Cuerpo (la camisa, ancha y rellena) ---
 # El torso mide 0.38 en X -> semiancho 0.19. El hombro del brazo entra en
 # x=0.16, o sea 3 cm ADENTRO de la superficie: el brazo nunca flota (E-24).
-caja('SM_Espanta_Cuerpo', 0.0, 0.0, 1.40, 0.38, 0.26, 0.65, MAT_paja)
+Z_TORSO = 1.40                    # centro del torso
+H_TORSO = 0.65                    # alto de la camisa
+Z_BASE_TORSO = Z_TORSO - H_TORSO / 2.0   # 1.075 = dobladillo (de donde cuelgan los flecos)
+caja('SM_Espanta_Cuerpo', 0.0, 0.0, Z_TORSO, 0.38, 0.26, H_TORSO, MAT_paja)
 
 # --- 8) Cabeza (el saco) ---
 caja('SM_Espanta_Cabeza', 0.0, 0.0, 1.85, 0.24, 0.22, 0.24, MAT_cara)
@@ -154,9 +161,42 @@ for i, sx in enumerate((-1, +1)):
 # --- 14) Boca ---
 caja('SM_Espanta_Boca', 0.0, 0.115, 1.79, 0.08, 0.02, 0.03, MAT_rasgos)
 
-# --- 15-16) Pajas de los costados (cilindros con eje en Y) ---
-cil_y('SM_Espanta_Paja_0', 0.0, -0.23, 1.40, 0.10, 0.20, 6, MAT_paja)
-cil_y('SM_Espanta_Paja_1', 0.0, +0.23, 1.40, 0.10, 0.20, 6, MAT_paja)
+# --- 15) Flecos de paja colgando del DOBLADILLO de la camisa (eje Z, verticales) ---
+# E-74: en v2 las pajas asomaban del PECHO (cilindros con eje en Y) y leian
+# como pico. La paja debe asomar por el DOBLADILLO, nunca perpendicular al
+# pecho. E-70: los 4 flecos van JUNTOS en un solo objeto (join) para no
+# exceder las 16 piezas de ALTA (serian 18 si fuesen sueltos).
+#
+# Geometria (v4, pedido del usuario 2026-09-02 20:09: "4 flecos, mas largos y
+# finos, 5 veces mas de largo hacia abajo"):
+#   v3 colgaba 6.5 cm  ->  v4 cuelga 33.5 cm  (5.15x)
+#   v3 r=0.05 h=0.18   ->  v4 r=0.03 h=0.36   (mas fino y mas largo)
+R_FLECO = 0.03
+H_FLECO = 0.36
+ANCLA = 0.025                     # cuanto entra al torso (anclaje invisible)
+Z_FLECO = Z_BASE_TORSO + ANCLA - H_FLECO / 2.0   # 1.075 + 0.025 - 0.18 = 0.92
+# La punta inferior queda en z = 0.92 - 0.18 = 0.74, a 69 cm del suelo (0.05):
+# no toca la base (E-24/E-60) aunque vuele con el viento.
+# Esquinas del dobladillo. El torso mide 0.38 x 0.26 -> semiejes 0.19 y 0.13.
+# El poste central (r=0.05) queda libre: distancia al poste = 0.130 > 0.05+0.03.
+FLECOS_XY = ((-0.11, -0.07), (+0.11, -0.07), (-0.11, +0.07), (+0.11, +0.07))
+
+_flecos = []
+for _fx, _fy in FLECOS_XY:
+    bpy.ops.mesh.primitive_cylinder_add(
+        vertices=6, radius=R_FLECO, depth=H_FLECO,
+        location=(_fx, _fy, Z_FLECO))
+    _flecos.append(bpy.context.object)
+
+# E-70: unir los 4 en un solo objeto. Ojo: join() necesita el activo
+# seleccionado y todos del mismo tipo (MESH) -> se cumple.
+bpy.ops.object.select_all(action='DESELECT')
+for _o in _flecos:
+    _o.select_set(True)
+bpy.context.view_layer.objects.active = _flecos[0]
+bpy.ops.object.join()
+bpy.context.object.name = 'SM_Espanta_Flecos'
+bpy.context.object.data.materials.append(MAT_paja)
 
 arena(radio=2.0)
 iluminar(escena)

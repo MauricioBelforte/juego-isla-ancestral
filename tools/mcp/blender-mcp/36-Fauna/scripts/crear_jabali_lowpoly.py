@@ -1,37 +1,30 @@
 # crear_jabali_lowpoly.py - Jabalí (M36 Fauna, checklist linea 106)
 #
-# DISENO (E-37 — la silueta debe leer JABALI en los 6 azimuts):
-#   cuerpo macizo pardo-gris (mas alto adelante: la cruz del jabali),
-#   HOCICO TUBULAR al frente (la senal #1) con 2 COLMILLOS curvos
-#   saliendo de la boca (la senal #2), CRESTA de cerdas erizadas sobre
-#   el lomo (senal #3, "navaja de afeitar"), 2 OREJAS en pie, cola
-#   recta corta, 4 PATAS con pezuñas. Ojos pequenos arriba del hocico.
+# v5 (2026-09-02, usuario: "muy rigida, que se parezca mas a un jabali"):
+#   - SILUETA EN CUJA (lo que faltaba): masa frontal pesada + grupa
+#     estrecha. 7 anillos asimetricos: la linea del lomo SE HUNDE a
+#     media espalda y SUBE en la cruz (hump), el vientre cae.
+#   - CABEZA GRANDE en cuna (~1/3 del cuerpo, como el jabali real):
+#     craneo alto -> perfil CONCAVO (frente) -> hocico largo, rotada
+#     -12 grados en actitud de husmeo. Nuca enterrada en el cuello.
+#   - CRESTA LOFTADA DE ROMBOS que SIGUE la curva del lomo (v4 era una
+#     caja recta): crece desde la grupa, maximo sobre los hombros,
+#     muere sobre la cabeza — mohawk barrido hacia atras.
+#   - PATAS: delanteras y traseras DE DISTINTA LONGITUD (traseras mas
+#     largas -> grupa elevada, pose tipica). Canna mas fina.
+#   - Cola con mechon, orejas en hoja, ojos altos (junto a la cresta).
 #
-# CONTEO E-70 (LISTA EXPLICITA ANTES DE ESCRIBIR — leccion cangrejo):
-#   1 cuerpo + 1 hocico + 2 colmillos + 1 cresta + 2 orejas + 2 ojos
-#   + 4 patas + 1 cola = 14 SM_ <= 16 tope ALTA. Margen 2. OK.
-#   (Las 4 pezuñas van FUNDIDAS al loft de cada pata: 1 pata = 1 SM_.)
+# CONTEO E-70 (lista explicita): 1 tronco + 1 cabeza + 1 cresta
+#   + 2 orejas + 2 ojos + 2 colmillos + 1 trompa + 4 patas + 1 cola
+#   = 15 SM_ <= 16. OK.
 #
-# ANIMABLE EN GODOT (09-GUIA-BLENDER §8 / 07-GUIA-GODOT §11):
-#   - 4 patas separadas con pivote en la CADERA (origen = anillo alto):
-#     trote cuadrupedo clasico (diagonal: FL+BR vs FR+BL).
-#   - Cabeza+hocico+colmillos: FUNDIDOS al cuerpo (el jabali lowpoly
-#     no gira la cabeza; la vida la dan patas, orejas y cresta).
-#     PERO para que la cabeza pueda bajarse a pastar: SM_Jabali_Cabeza
-#     separada (cuerpo+hocico+colmillos+ojos en 1 malla, pivote en el
-#     cuello). Recuento: 1 tronco + 1 cabeza + 1 cresta + 2 orejas
-#     + 4 patas + 1 cola = 10 SM_. Ojos y colmillos fundidos a cabeza.
+# APOYO (E-50): 4 pezuñas (anillo 6 verts c/u, base a z 0.045 exacto
+#   por construccion). 24 verts de huella. El resto vuela.
 #
-# APOYO (E-12/E-50): z_min 0.045 aportado por las 4 pezuñas PLANAS
-#   (anillo inferior del loft de cada pata, 5 verts c/u = 20 verts).
-#   El cuerpo vuela sobre las patas: nunca define el asentado.
-#
-# E-68: caja() dimension final. E-74: colmillos/orejas con angulo
-#   negado entre lados. E-32 v2: islas bmesh con volumen firmado.
-# E-27: cero parenting. Escala: jabali real ~1.2 m de largo de cuerpo.
+# E-74 (espejos: negar angulo), E-32 v2 (islas con volumen firmado),
+# E-27 (cero parenting), E-24 (asentar mide vertices reales).
 import bpy, os, sys, bmesh
 from math import radians, cos, sin, pi
-from mathutils import Vector
 
 try:
     _AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -45,17 +38,13 @@ from plantilla_asset import (limpiar, mat, arena, iluminar, asentar, camara,
 
 escena = limpiar()
 
-# ---------------- Paleta (5 mats) ----------------
-MAT_pelo = mat('MAT_Jabali_Pelo', (0.42, 0.34, 0.26), rough=0.95)        # pardo-gris
-MAT_pelo_oscuro = mat('MAT_Jabali_Pelo_Oscuro', (0.28, 0.22, 0.16), rough=0.95)  # cerdas
-MAT_cresta = mat('MAT_Jabali_Cresta', (0.22, 0.17, 0.12), rough=0.90)   # cresta oscura
-MAT_colmillo = mat('MAT_Jabali_Colmillo', (0.88, 0.84, 0.74), rough=0.45)  # marfil
+# ---------------- Paleta ----------------
+MAT_pelo = mat('MAT_Jabali_Pelo', (0.48, 0.38, 0.28), rough=0.95)          # pardo calido
+MAT_pelo_oscuro = mat('MAT_Jabali_Pelo_Oscuro', (0.30, 0.24, 0.18), rough=0.95)  # patas/oscuro
+MAT_cresta = mat('MAT_Jabali_Cresta', (0.16, 0.12, 0.09), rough=0.90)     # cerda casi negra
+MAT_colmillo = mat('MAT_Jabali_Colmillo', (0.90, 0.86, 0.76), rough=0.40) # marfil pulido
 MAT_ojos = mat('MAT_Jabali_Ojos', (0.05, 0.04, 0.03), rough=0.30, spec=0.60)
-MAT_hocico = mat('MAT_Jabali_Hocico', (0.50, 0.40, 0.32), rough=0.90)
-
-
-def caja_rot(nombre, x, y, z, sx, sy, sz, material, rot=(0, 0, 0)):
-    return caja(nombre, x, y, z, sx, sy, sz, material, rot_euler=rot)
+MAT_hocico = mat('MAT_Jabali_Hocico', (0.52, 0.42, 0.34), rough=0.85)
 
 
 # ---------------- bmesh helpers (E-32 v2) ----------------
@@ -84,10 +73,9 @@ def _obj(nombre, bm, material):
     return ob
 
 
-def loft(nombre, anillos, material, cerrar_ini=True, cerrar_fin=True):
-    """Loft de anillos [(x, y, z), ...] de N verts cada uno. anillos[k]
-    es una LISTA de N verts ya generados. Une k->k+1 y tapa los extremos
-    si hay >=3 verts. Devuelve el objeto."""
+def loft(nombre, anillos, material):
+    """anillos: lista de listas de verts (x,y,z) — todos con igual N.
+    Une consecutivos y tapa extremos con abanico."""
     bm = bmesh.new()
     rings = [[bm.verts.new(v) for v in ring] for ring in anillos]
     N = len(rings[0])
@@ -97,170 +85,233 @@ def loft(nombre, anillos, material, cerrar_ini=True, cerrar_fin=True):
             b = (a + 1) % N
             caras.append(bm.faces.new((rings[k][a], rings[k][b],
                                        rings[k + 1][b], rings[k + 1][a])))
-    if cerrar_ini and N >= 3:
-        for a in range(1, N - 1):
-            caras.append(bm.faces.new((rings[0][0], rings[0][a], rings[0][a + 1])))
-    if cerrar_fin and N >= 3:
-        for a in range(1, N - 1):
-            caras.append(bm.faces.new((rings[-1][0], rings[-1][a + 1], rings[-1][a])))
+    for a in range(1, N - 1):
+        caras.append(bm.faces.new((rings[0][0], rings[0][a], rings[0][a + 1])))
+        caras.append(bm.faces.new((rings[-1][0], rings[-1][a + 1], rings[-1][a])))
     _isla(bm, caras)
     return _obj(nombre, bm, material)
 
 
-def anillo(cx, cy, cz, ry, rz, N=8, y_shear=0.0):
-    """Anillo de N verts en el plano YZ centrado en (cx, cy, cz) con
-    radios ry (Y) y rz (Z). y_shear desplaza el centro Y con la altura
-    (para inclinar cuerpos)."""
-    return [(cx, cy + ry * cos(2 * pi * a / N) + y_shear * sin(2 * pi * a / N),
-             cz + rz * sin(2 * pi * a / N)) for a in range(N)]
+def anillo(cx, cz, ry, rz, N=8):
+    """Anillo eliptico en el plano YZ (seccion transversal del cuerpo)."""
+    return [(cx, ry * cos(2 * pi * a / N), cz + rz * sin(2 * pi * a / N))
+            for a in range(N)]
 
 
-# ===================== 1) TRONCO (cuerpo, mas alto adelante) =====================
-# Elipse alargada en X: cruz alta (z 0.52) sobre las patas, grupa mas baja
-# (z 0.46). Longitud 0.95, ancho 0.42.
+def rombo(cx, cz_base, w, h):
+    """Seccion diamante de 4 verts para la cresta (pico arriba/abajo)."""
+    return [(cx, 0.0, cz_base - h * 0.35), (cx, +w, cz_base),
+            (cx, 0.0, cz_base + h), (cx, -w, cz_base)]
+
+
+# ===================== 1) TRONCO (cuña: pesado adelante) =====================
+# (x, cz, ry, rz): cz alto = lomo elevado. La espalda se HUNDE en el
+# medio (x -0.15, cz 0.50) y remonta en la cruz (x +0.28, cz 0.525).
 AN_TRONCO = [
-    anillo(-0.45, 0.0, 0.50, 0.13, 0.13, N=8),   # grupa (trasera, mas baja)
-    anillo(-0.20, 0.0, 0.53, 0.19, 0.17, N=8),   # lomo trasero
-    anillo(+0.05, 0.0, 0.55, 0.20, 0.18, N=8),   # centro (panza ancha)
-    anillo(+0.28, 0.0, 0.54, 0.16, 0.15, N=8),   # hombros (cruz)
-    anillo(+0.48, 0.0, 0.50, 0.10, 0.10, N=8),   # cuello
+    anillo(-0.47, 0.508, 0.012, 0.020),  # punta (justo detras de la grupa)
+    anillo(-0.455, 0.508, 0.045, 0.060),  # contraccion inmediata
+    anillo(-0.43, 0.510, 0.090, 0.100),  # esfera trasera chica
+    anillo(-0.38, 0.515, 0.150, 0.135),  # grupa (estrecha, elevada)
+    anillo(-0.15, 0.500, 0.185, 0.150),   # media espalda: el HUNDIMIENTO
+    anillo(+0.05, 0.495, 0.205, 0.165),   # vientre (maximo ancho, bajo)
+    anillo(+0.28, 0.525, 0.200, 0.180),   # CRUZ: hombros masivos y altos
+    anillo(+0.42, 0.520, 0.160, 0.160),   # pecho
+    anillo(+0.55, 0.505, 0.115, 0.115),   # cuello (inserta cabeza)
 ]
-tronco = loft('SM_Jabali_Tronco', AN_TRONCO, MAT_pelo)
-tronco.rotation_euler = (0.0, 0.0, 0.0)
+# v11: TRASERO CORTO a pedido del usuario — la punta queda a -0.47, SOLO
+# 9 cm detras del anillo de la grupa (-0.38). El rabo del jabali es una
+# esfera compacta pegada a la grupa (v10 sobresalia 22 cm).
+loft('SM_Jabali_Tronco', AN_TRONCO, MAT_pelo)
 
-# ===================== 2) CABEZA (hocico + colmillos + ojos, 1 malla) =====================
-# Pivote en el cuello (origen del objeto) para que Godot pueda bajarla a
-# pastar. Geometria local: cabeza esferica + hocico tubular al frente +X
-# + 2 colmillos curvos + 2 ojos. Todo en 1 malla bmesh (las piezas se
-# tocan/solapan: es 1 isla visual).
-bm = bmesh.new()
-caras = []
-# Cabeza: esfera escalada (icosphere manual: 2 anillos + polos no — caja
-# redondeada con loft de 3 anillos octogonales en X)
-for (cx, ry, rz) in ((0.00, 0.085, 0.085), (0.09, 0.105, 0.100), (0.18, 0.070, 0.070)):
-    pass  # placeholder — la cabeza se arma con loft abajo
-# Arma la cabeza + hocico como UN loft continuo (cabeza -> hocico afinandose):
+# ===================== 2) CABEZA GRANDE (cuna + hocico) =====================
+# v8: AGRANDADA a pedido del usuario — el cuello del tronco mide r 0.115
+# y el craneo de la v7 era 0.105 (mas chico que el cuello: se leia
+# "cabeza de gato en cuerpo de jabali"). Ahora el craneo es r 0.135x0.130,
+# claramente MAS ANCHO que el cuello, con hocico proporcional.
+# Loft local +X: nuca enterrada -> craneo alto -> perfil CONCAVO -> hocico.
 AN_CABEZA = [
-    anillo(0.00, 0.0, 0.0, 0.085, 0.085, N=8),   # nuca
-    anillo(0.09, 0.0, 0.0, 0.105, 0.100, N=8),    # craneo
-    anillo(0.17, 0.0, -0.01, 0.078, 0.075, N=8),  # frente
-    anillo(0.26, 0.0, -0.025, 0.040, 0.038, N=8), # hocico medio
-    anillo(0.33, 0.0, -0.03, 0.030, 0.028, N=8),  # punta del hocico (trompa)
+    anillo(-0.13, 0.00, 0.100, 0.100),   # nuca (r = cuello 0.115, enterrada)
+    anillo(-0.02, +0.005, 0.135, 0.130),  # craneo ANCHO (domina al cuello)
+    anillo(+0.10, 0.000, 0.130, 0.125),  # craneo alto
+    anillo(+0.20, -0.010, 0.085, 0.080),  # frente (quiebre concavo)
+    anillo(+0.30, -0.030, 0.058, 0.055),  # hocico medio
+    anillo(+0.40, -0.035, 0.044, 0.042),  # punta
 ]
-# (Reemplaza el bm placeholder: usa loft con la misma utilidad)
 cabeza = loft('SM_Jabali_Cabeza', AN_CABEZA, MAT_pelo)
-# Ojos: 2 esferas pequenas (SM separados: son 10+2... el conteo decia ojos
-# fundidos — pero fundirlos a la malla loft requiere bmesh extra. Son 2 SM_
-# mas = 12 total, dentro de 16. OK.)
+# v7: cabeza MAS ALTA y husmeo SUAVE. El eje del cuello del tronco esta
+# en cz 0.505: el centro del craneo va a 0.50 (v6: 0.46, colgaba bajo el
+# cuello) y el pitch baja de 12 a 8 grados — la punta del hocico queda
+# a z ~0.36 (oliendo el piso sin arrastrarse).
+cabeza.rotation_euler = (0.0, radians(8.0), 0.0)
+cabeza.location = (0.56, 0.0, 0.50)
+
+# ---- v6: TODOS los detalles de la cabeza en coords de MUNDO calculadas
+# con matrix_world de la cabeza YA rotada (nunca a mano — leccion v5).
+bpy.context.view_layer.update()
+MW = cabeza.matrix_world
+from mathutils import Vector as _V
+_Vec = _V  # alias para las direcciones to_track_quat (colmillos y orejas)
+
+
+def punto_cabeza(lx, ly, lz):
+    return MW @ _V((lx, ly, lz))
+
+
+# Sanity check del signo: la punta del hocico debe quedar DEBAJO del
+# centro del craneo (husmeo). Si falla, el signo vuelve a estar invertido.
+_punta = punto_cabeza(0.36, 0.0, -0.03)
+_craneo = punto_cabeza(0.09, 0.0, 0.0)
+assert _punta.z < _craneo.z, 'v6: el hocico apunta ARRIBA — signo de rot Y invertido de nuevo'
+
+# Ojos: sobre el craneo, altos (junto a la cresta), levemente hacia adelante
 for i, sy in enumerate((-1, +1)):
+    p = punto_cabeza(0.05, sy * 0.098, 0.062)
     bpy.ops.mesh.primitive_uv_sphere_add(
-        segments=10, ring_count=6, radius=0.020,
-        location=(0.13, sy * 0.092, 0.045))
+        segments=10, ring_count=6, radius=0.019, location=p)
     ojo = bpy.context.object
     ojo.name = 'SM_Jabali_Ojo_%d' % i
     ojo.data.materials.append(MAT_ojos)
-# Colmillos: 2 conos curvos (rot Y +90 apunta a +X con inclinacion Z):
-# E-74 angulo negado entre lados; marfil claro.
+
+# Colmillos: v9 — anclaje REAL sobre la superficie. El bug restante de la
+# v8: el cono mide 14 cm y su TAPA DE BASE queda a center - (depth/2)*dir;
+# con dir apuntando arriba, esa tapa cae 5.4 cm DEBAJO del centro -> la
+# base quedaba colgando en el aire bajo la mandibula aunque el centro
+# estuviera "dentro" del hocico. Fix: la BASE se planta sobre la cara
+# inferior del hocico (superficie local z = -0.075 del anillo x=0.30) y
+# el cono se crea con el CENTRO desplazado +dir*(depth/2) desde esa base
+# -> la tapa queda ENTERRADA 1 cm en la boca y la punta sube afuera.
 for i, sy in enumerate((-1, +1)):
+    base = punto_cabeza(0.30, sy * 0.042, -0.072)   # sobre la mandibula
+    direccion = _Vec((0.55, 0.28 * sy, 0.75)).normalized()
+    centro = base + direccion * (0.14 / 2.0 - 0.012)  # tapa 1.2 cm dentro
     bpy.ops.mesh.primitive_cone_add(
-        vertices=8, radius1=0.016, radius2=0.0, depth=0.11,
-        location=(0.30, sy * 0.045, -0.055))
+        vertices=8, radius1=0.017, radius2=0.0, depth=0.14, location=centro)
     col = bpy.context.object
     col.name = 'SM_Jabali_Colmillo_%d' % i
-    # Apunta al frente-abajo-afuera: rot Z leve por lado + rot Y 90.
-    col.rotation_euler = (0.0, radians(75.0), radians(18.0) * sy)
+    col.rotation_euler = direccion.to_track_quat('Z', 'Y').to_euler()
     col.data.materials.append(MAT_colmillo)
-# Hocico: anillo nasal (trompa humeda) — pequeña esfera achatada al frente.
+
+# Trompa: en la punta misma del hocico
+p = punto_cabeza(0.365, 0.0, -0.032)
 bpy.ops.mesh.primitive_uv_sphere_add(
-    segments=10, ring_count=6, radius=0.026,
-    location=(0.345, 0.0, -0.032))
-    # (pertenece visualmente a la cabeza; pieza chica sumada al conteo: 13)
+    segments=10, ring_count=6, radius=0.027, location=p)
 trompa = bpy.context.object
 trompa.name = 'SM_Jabali_Trompa'
-trompa.scale = (0.8, 1.0, 0.7)
+trompa.scale = (0.7, 1.0, 0.8)
 trompa.data.materials.append(MAT_hocico)
 
-# La cabeza se rota levemente hacia abajo (pastoreo) y se ubica al frente:
-cabeza.rotation_euler = (0.0, radians(-8.0), 0.0)
-cabeza.location = (0.52, 0.0, 0.50)
-
-# Ojos/colmillos/trompa acompanan a la cabeza en su pose (coordenadas de
-# mundo aproximadas, la cabeza rota poco — el error de acompanamiento es
-# < 1 cm, aceptable en lowpoly; los detalles se ubican respecto a la cabeza
-# SIN rotar para no arrastrar el error).
-
-# ===================== 3) CRESTA DE CERDAS (navaja del lomo) =====================
-# peine de cerdas erizadas: caja delgada alta a lo largo del lomo, color
-# muy oscuro (contraste con el pardo).
-caja_rot('SM_Jabali_Cresta', 0.02, 0.0, 0.72, 0.46, 0.035, 0.14, MAT_cresta,
-         rot=(0.0, radians(4.0), 0.0))  # levemente inclinada al frente
-
-# ===================== 4) OREJAS (2, en pie) =====================
-# Triangulos erectos: conos achatados rotados para apuntar arriba-atras.
-# E-74: angulo negado entre lados.
+# Orejas: v7 con to_track_quat (E-58) — direccion EXPLICITA arriba-atras-
+# afuera, sin rotaciones compuestas a mano (v6 las ponia raras: quedaban
+# volcadas hacia adelante por heredar la rotacion mental del husmeo).
+# Nacen del tope posterior del craneo, senalales de jabali alerta.
 for i, sy in enumerate((-1, +1)):
+    p = punto_cabeza(-0.05, sy * 0.088, 0.096)
     bpy.ops.mesh.primitive_cone_add(
-        vertices=6, radius1=0.035, radius2=0.008, depth=0.11,
-        location=(0.62, sy * 0.075, 0.62))
+        vertices=6, radius1=0.038, radius2=0.006, depth=0.13, location=p)
     oreja = bpy.context.object
     oreja.name = 'SM_Jabali_Oreja_%d' % i
-    oreja.rotation_euler = (radians(-16.0), radians(-14.0), radians(24.0) * sy)
-    oreja.scale = (0.5, 1.0, 1.0)  # achatada en X (oreja de lamina)
+    direccion = _Vec((-0.35, 0.18 * sy, 1.0)).normalized()
+    oreja.rotation_euler = direccion.to_track_quat('Z', 'Y').to_euler()
+    oreja.scale = (0.45, 1.0, 1.0)  # lamina
     oreja.data.materials.append(MAT_pelo_oscuro)
 
-# ===================== 5) PATAS (4, con pezuñas planas) =====================
-# Cada pata: 1 loft (cadera gorda -> caña -> pezuña mas ancha) con la
-# BASE PLANA a z_local 0. Pivote en la cadera. Posicion: las delanteras
-# bajo los hombros (x +0.28), las traseras bajo la grupa (x -0.38).
-# Longitud de pata ~0.33 para que el tronco vuele 0.20 sobre el suelo.
-def pata(nombre, px, py):
-    AN = [
-        anillo(0.00, 0.0, -0.33, 0.052, 0.052, N=6),  # cadera (tope, arriba)
-        anillo(0.00, 0.0, -0.18, 0.038, 0.038, N=6),  # caña
-        anillo(0.00, 0.0, -0.05, 0.042, 0.042, N=6),  # menudillo
-        anillo(0.00, 0.0, 0.00, 0.046, 0.046, N=6),   # pezuña (base ancha)
-    ]
-    # El loft une en X... los anillos estan en columna (todos x=0): el loft
-    # con un solo eje no funciona — los anillos se apilan en Z. Rehacer con
-    # verticales: usar anillos en el plano XY girado: la pata es vertical,
-    # el loft va bajando en Z. CAMBIO: anillos en el plano XZ centrados en
-    # (0, 0, z_k) con radio en XZ... el loft() une por index — sirve con
-    # cualquier orientacion mientras los anillos sean paralelos.
-    # Verticales: anillo horizontal (plano XY) a distintas z.
+# ===================== 3) CRESTA (rombos que siguen el lomo) =====================
+# Linea del lomo medida de AN_TRONCO (cz + rz): grupa 0.65, hundimiento
+# 0.65, vientre 0.66, cruz 0.705. La cresta crece hacia adelante.
+AN_CRESTA = [
+    rombo(-0.30, 0.640, 0.016, 0.050),   # nace en la grupa (chica)
+    rombo(-0.10, 0.645, 0.018, 0.080),   # media espalda
+    rombo(+0.10, 0.650, 0.018, 0.105),   # sube
+    rombo(+0.28, 0.690, 0.016, 0.130),   # MAXIMO sobre la cruz
+    rombo(+0.42, 0.665, 0.014, 0.055),   # muere hacia la cabeza
+]
+loft('SM_Jabali_Cresta', AN_CRESTA, MAT_cresta)
+
+# ===================== 4) PATAS (delanteras cortas, traseras largas) =====================
+# Origin en la CADERA (pivote Godot). Pezuña engrosada al piso (z 0.045
+# exacto). Traseras mas largas -> grupa elevada (pose del jabali real).
+def pata(nombre, px, py, largo, cadera_z):
     def an_xy(r, z, N=6):
         return [(r * cos(2 * pi * a / N), r * sin(2 * pi * a / N), z) for a in range(N)]
-    ANILLOS = [an_xy(0.052, -0.33), an_xy(0.038, -0.18),
-               an_xy(0.042, -0.05), an_xy(0.046, 0.00)]
+    ANILLOS = [an_xy(0.048, 0.00),        # cadera (origen/pivote)
+               an_xy(0.030, -largo * 0.33),  # canna fina
+               an_xy(0.034, -largo * 0.75),  # menudillo
+               an_xy(0.042, -largo)]         # pezuña engrosada, base plana
     p = loft(nombre, ANILLOS, MAT_pelo_oscuro)
-    # La pezuña: pieza mas ancha y oscura al fondo — como el loft es 1 mat,
-    # la pezuña se marca con un anillo engrosado (hecho: 0.046 > 0.042).
-    p.location = (px, py, 0.50)
+    p.location = (px, py, cadera_z)
     return p
 
 
-pata('SM_Jabali_Pata_FL', 0.30, -0.13)
-pata('SM_Jabali_Pata_FR', 0.30, +0.13)
-pata('SM_Jabali_Pata_BL', -0.38, -0.13)
-pata('SM_Jabali_Pata_BR', -0.38, +0.13)
+pata('SM_Jabali_Pata_FL', 0.32, -0.12, 0.42, 0.465)   # delantera izq
+pata('SM_Jabali_Pata_FR', 0.32, +0.12, 0.42, 0.465)
+pata('SM_Jabali_Pata_BL', -0.36, -0.11, 0.46, 0.505)  # trasera MAS LARGA
+pata('SM_Jabali_Pata_BR', -0.36, +0.11, 0.46, 0.505)
 
-# ===================== 6) COLA (látigo corto) =====================
-# Cono fino horizontal apuntando a -X (rot Y -90, E-19), colgando de la grupa.
-bpy.ops.mesh.primitive_cone_add(
-    vertices=7, radius1=0.020, radius2=0.004, depth=0.16,
-    location=(-0.52, 0.0, 0.44))
-cola = bpy.context.object
-cola.name = 'SM_Jabali_Cola'
-cola.rotation_euler = (0.0, radians(-90), 0.0)  # punta a -X
-cola.data.materials.append(MAT_pelo_oscuro)
+# ===================== 8) COLA (larga, caida natural, 1 malla) =====================
+# v12b (E-70: los 2 conos sumaban 17 SM_): UNA sola malla bmesh — loft de
+# 5 anillos decagonales siguiendo la curva de caida, del nacimiento en la
+# grupa alta hasta la punta. Pivote en el origen (la base, para que Godot
+# pueda menearla rotando desde ahi).
+from mathutils import Vector as _VCol
+base_cola = _VCol((-0.40, 0.0, 0.615))
+dir1 = _VCol((-0.85, 0.0, -0.45)).normalized()
+dir2 = _VCol((-0.25, 0.0, -0.95)).normalized()
+# Puntos de la linea central (base -> codo -> punta), radios decrecientes
+PTOS = [base_cola,
+        base_cola + dir1 * 0.055,
+        base_cola + dir1 * 0.10,          # codo
+        base_cola + dir1 * 0.10 + dir2 * 0.06,
+        base_cola + dir1 * 0.10 + dir2 * 0.115]  # punta (~21 cm total)
+RADIOS = [0.016, 0.014, 0.011, 0.008, 0.003]
+# Anillos perpendiculares al tramo: eje de referencia Y (la curva vive en XZ)
+bm_cola = bmesh.new()
+caras_cola = []
+rings_cola = []
+for k, (p, r) in enumerate(zip(PTOS, RADIOS)):
+    if k == 0:
+        tang = (PTOS[1] - PTOS[0]).normalized()
+    elif k == len(PTOS) - 1:
+        tang = (PTOS[k] - PTOS[k - 1]).normalized()
+    else:
+        tang = (PTOS[k + 1] - PTOS[k - 1]).normalized()
+    # Base ortonormal: y fijo (0,1,0), n = tang x y (en XZ)
+    n1 = tang.cross(_VCol((0, 1, 0))).normalized()
+    n2 = tang.cross(n1).normalized()
+    ring = [bm_cola.verts.new(tuple(p + n1 * r * cos(2 * pi * a / 10)
+                                    + n2 * r * sin(2 * pi * a / 10)))
+            for a in range(10)]
+    rings_cola.append(ring)
+for k in range(len(rings_cola) - 1):
+    for a in range(10):
+        b = (a + 1) % 10
+        caras_cola.append(bm_cola.faces.new((rings_cola[k][a], rings_cola[k][b],
+                                            rings_cola[k + 1][b], rings_cola[k + 1][a])))
+# tapa base (dentro de la grupa) y punta (casi punto)
+for a in range(1, 9):
+    caras_cola.append(bm_cola.faces.new((rings_cola[0][0], rings_cola[0][a], rings_cola[0][a + 1])))
+    caras_cola.append(bm_cola.faces.new((rings_cola[4][0], rings_cola[4][a + 1], rings_cola[4][a])))
+_isla(bm_cola, caras_cola)
+cola = _obj('SM_Jabali_Cola', bm_cola, MAT_pelo_oscuro)
+# El objeto se creo con los verts ya en su lugar de mundo: pivote 0.
+# Para que Godot pueda menearla desde la base, el origen queda en 0 y los
+# verts van tal cual (alternativa simple: pivot en el centro de la isla).
+# Mechon en la punta (matematico)
+p_mechon = PTOS[4] + dir2 * 0.006
+bpy.ops.mesh.primitive_uv_sphere_add(
+    segments=8, ring_count=5, radius=0.020, location=tuple(p_mechon))
+mechon = bpy.context.object
+mechon.name = 'SM_Jabali_Cola_Mechon'
+mechon.scale = (1.3, 1.0, 1.0)
+mechon.data.materials.append(MAT_cresta)
 
 arena(radio=1.4)
 iluminar(escena)
 asentar(escena)
-camara(escena, 'CAM_Jabali', (1.5, -1.4, 0.9), (0.0, 0.0, 0.30))
+camara(escena, 'CAM_Jabali', (1.6, -1.5, 0.95), (0.0, 0.0, 0.35))
 shade_flat(escena)
 guardar(escena, '36-Fauna', 'jabali')
 
-# -------- QA numerico en caliente (E-33/E-40/E-70) --------
+# -------- QA en caliente (E-33/E-40/E-70) --------
 bpy.context.view_layer.update()
 ps = [o for o in escena.objects if o.type == 'MESH' and o.name.startswith('SM_')]
 tris = 0

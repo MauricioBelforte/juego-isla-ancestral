@@ -52,8 +52,13 @@
 - [ ] Planta madura cosechable (etapa 3)
 - [ ] Bananero (cultivo)
 - [ ] Plantación de caña
-- [x] Espantapájaros lowpoly — `crear_espantapajaros_lowpoly.py` (M33 2026-09-02 04:50, log 532) + 6 capturas orbitales 04-50. **APROBADO**: base cilíndrica de tierra (12 verts) + poste vertical + palo horizontal (brazo) con 2 manos de paja + camisa-cuerpo + cabeza-saco con 2 ojos y boca + sombrero (Copa + Ala tipo mejicano) + 2 mechones de paja asomando de la camisa + atadura de cuerda al cuello. **15 SM_**, z_min 0.045, toca=20, fp=0.80×0.80. Variantes MEDIA (7/308/7), BAJA (6/186/4). E-37 validado: silueta lee como espantapájaros en los 6 azimuts (sombrero+cruz+camisa+cara). 3 GLB + 3 `.import` + 3 `.scn` (E-65).
 - [ ] Compostera
+- [ ] Regadera (objeto colocado)
+- [x] Espantapájaros lowpoly — `crear_espantapajaros_lowpoly.py` (M33 2026-09-02, log 532 original, **log 558 re-trabajo E-73 19:50**, **log 560 re-trabajo E-74 20:05**, **log 561 re-trabajo flecos 20:13**). v1 aprobada 04:50 con 15 SM_; el usuario rechazó el palo horizontal que le cruzaba el pecho (**E-73**, "parece la pinga"). v2 lo reemplazó por **DOS brazos independientes** que nacen dentro del torso (x=±0.16) y bajan ~40° en diagonal hasta manos de paja (16 SM_, techo ALTA). v3 corrigió un segundo problema reportado: las **pajas cilíndricas con eje en Y asomando del pecho** también leían como pico (**E-74**). v3 las cambió a cilindros **verticales con eje Z** que cuelgan del **dobladillo** de la camisa. v4 (este log): el usuario pidió **4 flecos más largos y finos** ("5 veces más de largo hacia abajo"). v4 implementa 4 cilindros r=0.03, h=0.36 (5× los 6.5 cm de v3) en las 4 esquinas del dobladillo, **unidos en 1 objeto vía `bpy.ops.object.join`** (E-70) para no exceder las 16 piezas. **15 SM_ finales** (bajamos del techo), z_min 0.045, toca=20, fp=0.80×0.80, MEDIA 7/360/7, BAJA 6/222/4. 3 GLB + 3 `.import` + 3 `.scn` (E-65 + E-72). Aprobado visualmente en los 6 azimuts.
+
+**E-71 (2026-09-04, log 678):** `Plantación de caña` y `Compostera` estaban
+duplicados en esta sección (2 líneas repetidas). Deduplicados → 2 pendientes
+menos.
 
 ## Módulo 18 — Casas (construcciones del jugador) 🏠
 
@@ -68,6 +73,101 @@
 - [/] **Escalera de mano** — `crear_escalera_mano_lowpoly.py` + 6 capturas 23-44 (`_hoja_cap_18_escalera_mano_lowpoly.jpg`, **APROBADO**: 2 largueros verticales + 5 peldaños; 7 obj, 84 tris, 2 mats; z_min 0.0450; bbox 0.400×0.040×1.800 — mobiliario, no módulo de grid).
 - [/] **Zócalo/fundamento de piedra** — `crear_zocalo_piedra_lowpoly.py` + 6 capturas 23-44 (`_hoja_cap_18_zocalo_piedra_lowpoly.jpg`, **APROBADO**: anillo perimetral de 4 bloques + 4 bloques esquina (más oscuros, alto +2cm); 8 obj, 96 tris, 2 mats; z_min 0.0450; bbox 1.000×1.000×0.320 — exactamente 1×1 celda).
 - [/] **Casa completa ejemplo (composición, referencia visual)** — `crear_casa_completa_ejemplo_lowpoly.py` + 6 capturas 23-45 (`_hoja_cap_18_casa_completa_ejemplo_lowpoly.jpg`, **APROBADO**: zócalo (4 piedras) + piso (1 losa) + 4 paredes (cajas simples) + techo a dos aguas simplificado (1 cumbrero + 2 correas + 2 tableros); **14 obj, 168 tris, 6 mats** (todos dentro del presupuesto M166 ALTA); z_min 0.0450; bbox 1.000×1.000×3.785 = zócalo(0.30) + piso(0.04) + paredes(2.60) + techo(0.80). NO pensada para colocar en juego: solo referencia visual de cómo ensamblar las otras 10 piezas).
+
+### M18-BIS — Casas GRANDES habitables + mobiliario interior (2026-09-05, directiva del usuario — glm-5.3-free/Kilo Code)
+
+> **NUEVO TIER (no confundir con las piezas modulares 1×1 de arriba):** casas
+> completas GRANDES y amplias, que se pueda ENTRAR DENTRO (puerta real
+> 1.00×2.10 m), proporcionales al NPC M19 (1.75 m), con interior visible.
+> Alcance completo en `DOCUMENTACION/18-Casas/plan-actual/01-Requerimientos.md` §6.
+> Regla de escala: puerta 1.00×2.10 · techo interior ≥2.60 · cama 2.00×0.90 ·
+> mesa 0.80 alto · silla 0.45 asiento. Presupuesto: sub-grupos ≤16 SM_ por
+> habitación (casa completa puede exceder, documentado por casa).
+
+**Casas (de menor a mayor):**
+- [ ] Casa choza ampliada (1 ambiente 5×4 m: cama + cofre + mesa + cocina de leña) — `crear_casa_choza_ampliada_lowpoly.py`
+- [ ] Casa mediana 2 ambientes (8×6 m: cocina + dormitorio, puerta interior, ventanas con vidrio) — `crear_casa_mediana_lowpoly.py`
+- [ ] Casa amplia / casona (10×8 m: sala de estar + 2 dormitorios + cocina) — `crear_casa_casona_lowpoly.py`
+- [ ] Mansión (14×10 m, multi-habitación, biblioteca + sala de museo) — `crear_casa_mansion_lowpoly.py`
+- [ ] Casa de vecino (variante cozy re-amueblada, para M19 RF12) — `crear_casa_vecino_lowpoly.py`
+
+**Mobiliario interior (lo faltaba por completo — RF7 P14):**
+- [x] Cama básica (marco madera + colchón + almohada + manta) — `crear_cama_basica_lowpoly.py` — interactivo: dormir
+- [x] Cama doble — `crear_cama_doble_lowpoly.py` — interactivo: dormir
+- [x] Mesa de madera (tablero + 4 patas) — `crear_mesa_madera_lowpoly.py` — interactivo: colocar items
+- [x] Mesa chica / velador — `crear_velador_lowpoly.py`
+- [x] Silla de madera (asiento + respaldo + 4 patas) — `crear_silla_madera_lowpoly.py` — interactivo: sentarse
+- [x] Sillón / sofá — `crear_sillon_lowpoly.py` — interactivo: sentarse
+- [x] Nevera rústica de piedra/madera (pozo de conserva — el mundo NO tiene electricidad, M147; "heladera" del usuario = nevera cozy) — `crear_nevera_rustica_lowpoly.py` — interactivo: almacenar
+- [x] Cocina/estufa de leña (base + hornallas + chimenea) — `crear_estufa_lena_lowpoly.py` — interactivo: cocinar
+- [x] Estantería de pared (con libros) — `crear_estanteria_lowpoly.py` — interactivo: almacenar
+- [x] Cómoda / baúl de ropa — `crear_comoda_lowpoly.py` — interactivo: almacenar
+- [x] Lámpara de pie / farol de interior — `crear_lampara_pie_lowpoly.py` — interactivo: encender
+- [x] Alfombra redonda — `crear_alfombra_lowpoly.py`
+- [x] Cuadro / máscara ancestral de pared — `crear_cuadro_ancestral_lowpoly.py` — interactivo: mirar
+- [x] Maceta con planta interior — `crear_maceta_interior_lowpoly.py` — interactivo: regar
+
+### M18-TER — Accesorios de la TIENDA de decoración (2026-09-05, directiva del usuario — glm-5.3-free/Kilo Code, lote de 30)
+
+> **Lote batch:** `18-Casas/scripts/crear_decoracion_tienda_batch.py` — 30
+> accesorios para la tienda del pueblo (plan §5.3: 30+ items de decoración),
+> cada uno su `.blend` (`decor_{nombre}_lowpoly.blend`) + captura 3/4
+> (`cap_18_decor_*`). Framework compartido con asentado E-12 por ítem y
+> stats impresos. PENDIENTE de revisión visual del usuario ("después
+> checkeo si hay que corregir alguno") — después de aprobar se exportan
+> GLB individuales para el grid RF6.
+
+**Iluminación (4):**
+- [/] Lámpara de pie — 4 SM_ / 104 tris / 3 mats (pantalla cono invertido)
+- [/] Farol de mesa con vela — 6 SM_ / 1316 tris / 4 mats (campana vidrio alpha)
+- [/] Vela en plato de barro — 6 SM_ / 176 tris / 5 mats
+- [/] Lámpara de techo colgante — 7 SM_ / 5824 tris / 3 mats (5 eslabones)
+
+**Decoración de pared (5):**
+- [/] Cuadro floral — 8 SM_ / 156 tris (lienzo 0.60×0.48 con ramo en relieve)
+- [/] Máscara tallada ancestral — 8 SM_ / 96 tris (set Ancestral)
+- [/] Reloj de madera de pared — 5 SM_ / 164 tris (esfera mira a +X)
+- [/] Espejo con marco de madera — 2 SM_ / 60 tris (cristal azul translúcido)
+- [/] Repisa flotante con detallitos — 6 SM_ / 96 tris (velita+libro+concha)
+
+**Plantas (3):**
+- [/] Maceta con palmera chica — 8 SM_ / 136 tris (5 hojas radiales)
+- [/] Helecho en maceta colgante — 11 SM_ / 1308 tris (3 cuerdas + gancho)
+- [/] Maceta con flor tropical — 11 SM_ / 172 tris (flor 5 pétalos)
+
+**Alfombras (2):**
+- [/] Alfombra redonda floral — 7 SM_ / 1296 tris (r 0.80, set Floral)
+- [/] Alfombra rectangular tejida — 16 SM_ / 240 tris (1.60×1.00 con flecos)
+
+**Set Cocina (3):**
+- [/] Olla de barro con tapa — 6 SM_ / 2508 tris (2 asas torus)
+- [/] Plato de frutas tropicales — 6 SM_ / 312 tris (mango+coco+pasión)
+- [/] Jarrón de agua con asa — 4 SM_ / 1268 tris (agua vidrio alpha)
+
+**Set Ancestral (4):**
+- [/] Tótem de mesa (3 caras) — 13 SM_ / 156 tris
+- [/] Ídolo de piedra moai — 7 SM_ / 92 tris (con musgo)
+- [/] Vasija ritual con glifos — 6 SM_ / 3556 tris (bandas glifo azul)
+- [/] Estatuilla de ave tallada — 5 SM_ / 204 tris (gaviota en madera)
+
+**Set Oceánico (3):**
+- [/] Concha marina grande — 8 SM_ / 128 tris (abanico + base)
+- [/] Farol de coral con luz — 12 SM_ / 232 tris (5 ramas + luz interna)
+- [/] Cofre con perlas — 4 SM_ / 96 tris
+
+**Set Floral (3):**
+- [/] Jarrón con flores secas — 8 SM_ / 180 tris
+- [/] Guirnalda de 8 flores — 10 SM_ / 1324 tris
+- [/] (Alfombra floral y maceta-flor listadas arriba completan el set)
+
+**Mobiliario/almacenaje (3):**
+- [/] Baúl de madera chico — 3 SM_ / 60 tris (almacenaje 4 slots)
+- [/] Silla mecedora cozy — 2 SM_ / 132 tris (rockers + cojín)
+- [/] Banco de jardín — 3 SM_ / 96 tris (2 cojines)
+
+**Exteriores (2):**
+- [/] Fuentita de patio — 6 SM_ / 1356 tris (agua vidrio alpha)
+- [/] (Banco de jardín listado arriba)
 
 ## Módulo 25 — Ruinas / 24 — Templos / 26 — Templo Subterráneo 🏛️
 
@@ -100,16 +200,24 @@
 ## Módulo 36 — Fauna (modelos base, IA aparte) 🦀
 
 - [x] Cangrejo de playa — `crear_cangrejo_playa_lowpoly.py` v3 (2026-09-02, log 551, glm-5.3/Kilo Code) + 6 capturas orbitales (hoja `_hoja_cap_36_cangrejo_playa_v1.jpg`). **APROBADO por el usuario** (v1 a la primera, sin iteraciones). Composición: caparazón elipse naranja-rojiza con frente caído + 2 pinzas levantadas (loft 1-malla con V integrada: brazo→quela bulbosa→2 mandíbulas) + 8 patitas cono-tronco loftadas (punta PLANA, pivote en cadera) + 2 ojos en pedúnculos (tallo+casquete en 1 pieza). **13 SM_ / 656 tris / 4 mats** · z_min 0.0450 · huella 16 verts 0.53×1.12. Variantes MEDIA (4 obj/656) y BAJA (4 obj/456) + 3 GLB (47/39/30 KB) + 3 `.import` + 3 `.scn` (E-65). **NPC en Godot:** `cangrejo_npc.gd` — camina DE LADO (yaw −90° de la marcha), 8 patitas en secuencia (fase por índice), pinzas alternadas, ojos curiosos en pausa. Log 551. **Lecciones v1→v3:** patitas de cono con punta de 1 vert = rechazo E-50 (huella 0.04×0.04) → loft con punta plana de 4+ verts; conteo E-70 mal hecho de memoria (19 vs 16) → fundir mandíbulas al loft de la pinza y ojo al pedúnculo.
-- [ ] Gaviota (posada, para animar)
+- [x] Gaviota (posada, para animar) — `crear_gaviota_lowpoly.py` v11 (2026-09-03, log 583, glm-5.3/Kilo Code) + 11 hojas de contacto (v1..v11). **APROBADA por el usuario tras 11 iteraciones de feedback** — el caso más iterado del proyecto y primer asset VOLADOR. Composición: **cuerpo-cabeza UN SOLO LOFT continuo** cola→pecho→cuello→cráneo→frente (fusión pedida por el usuario, v5), pico anclado con to_track_quat al eje de la frente (v7: el Euler X-antes-de-Y lo inclinaba al costado), ojos embebidos por fórmula paramétrica de la elipse del cráneo (v6), alas loftadas espejadas en el propio loft (v7: rot Z 180 invertía la cuerda) **emergiendo del torso** (v8) con **manto gris oscuro por multi-material en caras superiores** de torso (v9) y alas (v10), **cola negra** (v11), puntas de ala negras simétricas, patas plegadas. **11 SM_ / 620 tris / 7 mats** · primer asset que OMITE el asentado a propósito (ave en vuelo: z del set = altura de vuelo de Godot). Variantes MEDIA (5 obj/620) y BAJA (5 obj/288, ojos podados) + 3 GLB (49/39/23 KB) + 3 `.import` + 3 `.scn` (E-65). **NPC VOLADOR en Godot:** `gaviota_npc.gd` — FSM aire⇄tierra completa: **VUELO** (órbita con banking y ondulación, planeo lento), **ATERRIZANDO** (descenso espiral frenando), **CAMINANDO con alas PLEGADAS** (rot Z ±80° hacia atrás, E-74), **PAUSA** y **DESPEGANDO** (ascenso espiral batiendo fuerte). Puntas negras re-parentadas a sus alas en runtime. Log 583.
 - [ ] Pez tropical (2 variantes de color)
 - [ ] Lagarto de isla
-- [ ] Jabalí
+- [x] Jabalí — `crear_jabali_lowpoly.py` v12b (2026-09-02, log 555, glm-5.3/Kilo Code) + 6 capturas orbitales (hojas v1..v11). **APROBADO por el usuario tras 8 iteraciones** — el caso que fijó el estándar de detalle orgánico (§9 de la guía 09, directiva del usuario). Composición: tronco de 10 anillos asimétricos (cruz alta + grupa estrecha + hump dorsal + **trasero redondo por contracción de anillos, corto**), cabeza grande en cuña con perfil cóncavo rotada en husmeo (+8°, **detalles anclados con matrix_world** + assert de signo), cresta mohawk de rombos proyectados sobre el lomo, 2 colmillos marfil con **base plantada sobre la superficie de la boca** (la tapa del cono embebida 1.2 cm), cola-cuerda curva de 5 puntos con tangentes (1 malla bmesh, pivote en grupa), 4 patas con pezuñas planas y pivote en cadera (traseras más largas). **16 SM_ / 972 tris / 6 mats** · z_min 0.0450 · huella 24 verts. Variantes MEDIA (6 obj/972) y BAJA (4 obj/422, ojos+trompa+mechón podados) + 3 GLB (72/58/28 KB) + 3 `.import` + 3 `.scn` (E-65). **NPC:** `jabali_npc.gd` — trote diagonal (FL+BR vs FR+BL), rebote del cuerpo, cola meneando, cabeza baja a olfatear en pausas, **escala_modelo 1.5** (feedback usuario: a escala real se veía chico). Log 555.
 - [ ] Cabra
 - [ ] Gallina
 - [ ] Mariposa (alas simples para animar)
 - [x] Tortuga marina — `crear_tortuga_marina_lowpoly.py` v5 (2026-09-02, log 533, glm-5.3/Kilo Code) + 6 capturas orbitales (hojas v2..v5; la v5 es la aprobada). **APROBADA por el usuario** tras 4 iteraciones de feedback directo (V1): v3 remos+escudos proyectados → v4 mix (sin pico, traseras remo elíptico) → v5 cola v2 restaurada + espejo E-74 + cabeza grande. Composición: plastrón cilíndrico 12 lados + falda cónica 16 + domo elipsoide + anillo marginal torus + **9 escudos proyectados sobre la curvatura real del domo** (1 malla bmesh) + cuello cónico + cabeza esférica r 0.12 con 2 ojos + 2 aletas delanteras **remo bmesh loftado** (6 anillos, ensancha a pala) + 2 traseras remo elíptico compacto (±150°) + cola cono. **14 SM_ / 1430 tris reales / 5 mats** · z_min 0.0450 · huella 19 verts 0.75×0.89 · E-32 v2 (volumen firmado) en cada isla bmesh. Variantes MEDIA (5 obj/1430) y BAJA (4 obj/982, ojos podados) + 3 GLB (103/80/61 KB) + 3 `.import` + 3 `.scn` (E-65). **E-74 descubierto:** espejo de piezas pareadas entre lados = NEGAR el ángulo Z, nunca `π−áng` (con el bug la aleta izquierda cruzaba por debajo del cuerpo y quedaba oculta: "una sola pata").
 
 ## Módulo 19/161 — NPCs y Vecinos 🧑‍🌾
+
+- [x] NPC base lowpoly (cuerpo modular sin ropa) — `crear_npc_base_lowpoly.py` (M19 2026-09-02, log 562; **v5 log 567**) + 6 capturas orbitales (5 hojas de contacto v1/v2/v3/v4/v5, **v5 aprobada**). **v5 — fix del feedback "de los hombros para abajo esta raro el torso mejoralo"**: (a) **deltoides como elipsoides separados** (ico `subdiv=2`, radios `(0.084, 0.070, 0.052)`, **asimétricos en Z** der 1.175 / izq 1.158 para el hombro del lado que carga peso) **unidos al torso** después de `aplicar()`; (b) **pecho más profundo** (ry 0.118 → 0.132 en los anillos del pecho, ratio ancho:profundo 1.40–1.66 vs v4 1.74–2.0); (c) **trapecio más largo** 8.5 cm de pendiente (1.205→1.245→1.290) en vez de 5.5 cm; (d) **cuello metido atrás** (cy −0.013 vs −0.004) para que no se funda con el pecho; (e) **shorts A-line** (ruedo 0.224 ancho → cintura 0.167 ancho, 6 anillos vs los 4 rectos de v4) + **cinturón de cuero** (3 anillos sobre el short, MAT_botas) **unido al short** → SM_NPC_RopaBase con 2 mats; (f) **piernas más largas** (anillo superior z=0.800 vs 0.770) para rellenar el interior del short (antes era un tubo hueco entre 0.685 y 0.770); (g) **auditoría de silueta numérica** añadida al generador — cuando la visión por imagen está bloqueada, se puede verificar el progreso geométrico. **Composición v5 (NO cajas apiladas — todo loft + caps):** torso 12 anillos con cintura afinada (rx 0.151) entre cadera (0.194) y pecho alto (0.192), 2 caps de deltoides asimétricos, cuello continuo (3 anillos z 1.290/1.340/1.400), contrapposto 2° + tilt de hombro deltoide izq < der, 2 brazos polilínea hombro→codo→muñeca (hombro en centro deltoide), 2 manos con palma icosaedro + pulgar cónico, 2 piernas 5 anillos cónicas (0.090→0.046), 2 pies loft 8 anillos + 2 suelas planas (E-78), cabeza ico subdiv 2 deformada, nariz cono 5 lados, 2 orejas disco, cabello loft 4 anillos recedido, 2 ojos disco, 2 cejas, boca, 2 mejillas, short A-line 6 anillos + cinturón 3 anillos. **14 SM_ / 1672 tris / 6 mats** · z_min 0.0450 · toca=18 · huella 0.31 × 0.30. Auditoría numérica v5: cadera 0.388/0.256 ratio 1.52 · cintura 0.302/0.216 ratio **1.40** · pecho 0.369/0.256 · pecho alto 0.439/0.264 · hombro 0.402/0.256 · deltoide D 0.431/0.264. Variantes MEDIA (**6 obj / 1672 tris / 6 mats**) y BAJA (**5 obj / 1122 tris / 4 mats**, ojos y cejas podados). 3 GLB (120/96/73 KB) + 3 `.glb.import` (E-65). **E-81 (nuevo, torso premium):** un loft de elipses con `rx/ry > 1.5:1` da silueta LENS (extremos puntiagudos), NO cap de hombro. Para tener un cap real hay que **profundizar el pecho** (ry ≥ 0.13) + **unir un elipsoide separado como deltoide** (NO anillo más ancho) + **alargar el trapecio a 8+ cm** de pendiente. Asimétrico en Z (deltoide izq < der) crea el tilt natural del contrapposto.
+- [x] Cabeza NPC — 3 variantes de forma (redonda / alargada / cuadrada). `crear_cabeza_redonda_lowpoly.py` (M19 2026-09-02, log 564, **v1 aprobada**) — perfil JOVEN ALEGRE: cráneo ancho y poco alto (rx=ry=0.142), mandíbula suave, ojos GRANDES (r=0.036), colorete, coleta rosa. **7 SM_ / 586 tris / 4 mats**. `crear_cabeza_alargada_lowpoly.py` (log 566) — perfil ANCIANO SABIO: cráneo alto (rz=0.165 vs 0.142), mandíbula pronunciada (avance 0.11, estrechar 0.13), ojos rasgados, cejas gruesas, pelo blanco. **8 SM_ / 566 tris / 4 mats**. `crear_cabeza_cuadrada_lowpoly.py` (log 569) — perfil ADULTO FORNIDO: cráneo más cuadrado (rx=0.146, rz=0.155), mandíbula cuadrada (estrechar 0.09, plano 0.02), ojos pequeños (r=0.030), cejas rectas, bigote. **7 SM_ / 510 tris / 4 mats**. Las 3 son MONTADAS (E-79): pivote en base del cuello z_abs 1.290, guard de encaje pasa (cara, ojos, nariz). Variantes MEDIA y BAJA de las 3 (BAJA poda ojos/boca: ahorro visual aceptable a esa distancia). 9 GLB (43/40/44 KB) + 9 `.glb.import`. Vision pending: Read filtrado en las hojas v1.
+- [x] Sombrero de paja — `crear_sombrero_paja_lowpoly.py` (M19 2026-09-02, log 565) + 6 capturas orbitales (`_hoja_sombrero_paja_v1.jpg`, **v1 aprobada** a la primera). **Primer asset MONTADO de M19** (pivote = base de la copa a z_abs 1.548 m, sobre la cabeza del NPC base). **5 detalles premium** (no cono+disco): (1) **ala tejida** con `loft(..., ondas=(0.018,12), ondas_z=(0.006,12))` — 12 lóbulos radiales leen como paja trenzada, costo 0 tris; (2) **ala que cae** 6.3 cm (4 anillos decrecientes de 2.96→1.48 dm de radio, z -3.6→+2.7 cm); (3) **dobladillo** aro 14 mm en el borde (mismas ondas que el ala → costura invisible); (4) **cima hundida (pinch)** embudo de 14 mm, sin esto la copa lee como gorro de fiesta; (5) **inclinación +6° en X** (NO −6°: la rotación POSITIVA levanta el ala frontal y baja la nuca; con −6° tapaba los ojos) + 4° en Z de yaw. **6 SM_ / 436 tris / 3 mats** (paja, paja_osc del dobladillo, cinta roja). Guard de encaje **E-79** (5 puntos: no tapa cara, contiene pelo, no flota, no es sombrilla, no atraviesa orejas) — cara holgura 2.4 cm, pelo 25 verts dentro de la copa + 13 fuera, diámetro 61 cm, orejas 6.6 cm. Materiales `paja` y `paja_osc` con `use_backface_culling=False` (E-79, glTF `doubleSided: true`) para que el ala y el dobladillo no desaparezcan desde abajo. Variantes MEDIA (3 obj / 436 tris / 3 mats) y BAJA (3 obj / 304 tris / 3 mats) preservando z_min -0.081 gracias al **Empty `_MONTADO`** (E-80) que detecta `generar_variante.py` y omite el re-asentado. 3 GLB (28/25/19 KB) + 3 `.glb.import` (E-65). Pendiente Godot: instanciar `19-NPCs_sombrero_paja.glb` como nodo hijo de la cabeza del NPC base. **Lecciones E-75…E-80** (todas documentadas en `09-GUIA-BLENDER.md` y `MEMORY.md`): join aplica `inverse_matrix` del activo (E-75); `IDMaterials.pop()` ya no acepta `update_data=` en 4.x (E-76); `loft()` recibe `(z, cx, cy, rx, ry)` con Z primero (E-77); huella E-50 sobre anillos elípticos → suela plana (E-78); assets montados no usan `asentar()`/E-50 sino guard de encaje y pivote en el punto de montaje (E-79); `generar_variante.py` re-asienta → marcar con Empty `_MONTADO` para omitir (E-80).
+- [x] Vestimenta campesina — `crear_vestimenta_campesina_lowpoly.py` (M19 2026-09-03, log 569). **Aprobada tras 3 iteraciones** (v1 fallaba E-86/E-89 y E-85; v4 8.1 % interpenetración por mangas-vs-torso; v5 green 0/576). Composición: camisa loft 0.92→1.30 con lados 14 + cuello alto, mangas largas (muñeca→hombro con radio 0.062→0.095, abiertas abajo), perneras cónicas (0.115→0.720, r 0.068→0.109), cadera tubo único 0.70→0.97 (oculta por chaquetón), delantal A-line 0.55→0.975 siguiendo frente del torso, pañuelo 1.16→1.30 sobre el pecho, cordón de cuero (torus horizontal E-85, NO rotado) en z=0.955. **7 SM_ / 1068 tris / 4 mats** (lino blanco crudo, pantalón pardo, delantal crudo, cordón cuero). E-87: 5 vértices OCULTO (tapas de perneras, mangas, cadera). E-89: cada pieza declara `partes=` (camisa=cinturón=panuelo→torso+deltoides; mangas→brazos+deltoides; perneras→piernas; cadera→piernas). 6 capturas orbitales v1 (`_hoja_vestimenta_campesina_v1.jpg` aprobada: el delantal cubre la entrepierna, el pañuelo marca el pecho, el cordón se asienta sobre la cintura). Variantes MEDIA (4 obj/1068) y BAJA (4 obj/746). 3 GLB (61/57/46 KB) + 3 `.glb.import`.
+- [x] Vestimenta pescador — `crear_vestimenta_pescador_lowpoly.py` (M19 2026-09-03, log 569). **Aprobada al primer intento** post-E-87/E-89 (la maquinaria nueva lo agarró de una). Composición: chaquetón loden corto 0.80→1.30 (cuello alto cerrado, lados 14), mangas enrolladas al codo (hombro→codo, abiertas abajo), cinturón cuero horizontal (torus major 0.227 en z=0.88, sin rotar E-85), hebilla bronce plano (caja 6×4 cm, E-74), cadera pantalón 0.70→0.95 (oculta por chaquetón), perneras 0.115→0.72, botas altas de goma 0.045→0.55 (caña + suela plana, z_min 0.045). **7 SM_ / 1030 tris / 5 mats** (lona loden, pantalón, goma, cuero, bronce). E-87: 8 OCULTO (cuello, 2 hombros, cintura, tiro, 2 tobillos, 2 rodillas). E-89: chaquetón/cinturón/hebilla/cadera→torso; botas/perneras→piernas; mangas→brazos+deltoides. **rango z 0.045..1.30** (las botas tocan la arena, correcto para una vestimenta que llega al suelo). 6 capturas orbitales v1 (`_hoja_vestimenta_pescador_v1.jpg` aprobada). Variantes MEDIA (5 obj/1030) y BAJA (4 obj/708, hebilla podada). 3 GLB (59/55/43 KB) + 3 `.glb.import`.
+- [x] Anciano del templo (túnica) — `crear_vestimenta_anciano_lowpoly.py` (M19 2026-09-04, log 569). Composición: túnica A-line larga 1.30→0.045 (cuello cerrado, sigue el torso en 0.96 y se abre hasta radio 0.30 en la arena), mangas largas lino muñeca→hombro, **capucha de bmesh con 5 niveles** (base anillo completo z=1.205 radio 0.235, niveles superiores arcos solo atrás centrados en a=3π/2 con α π→π/4 — E-79b no tapa cara), cordón de cuero en z=0.96 (torus horizontal, E-85), hebilla bronce plano 5×3.5 cm (E-74), bolsa colgante del cinturón al costado izquierdo (esfera achatada 11 cm a x=-0.250, **NO en el pecho** E-73), cordón fino 11 cm uniendo bolsa al cinturón. **7 SM_ / 903 tris / 4 mats** (lino, cuero, bronce, hilo). E-87: 3 OCULTO (cuello túnica, 2 tapas de mangas). E-89: cada pieza→torso (excepto mangas→brazos+deltoides). 6 capturas orbitales v1 (`_hoja_vestimenta_anciano_v1.jpg` aprobada: silueta de sabio con cogote cubierto). Variantes MEDIA (4 obj/903) y BAJA (2 obj/607, hebilla+cordón bolsa podados, merge agresivo). 3 GLB (55/49/37 KB) + 3 `.glb.import`.
+- [x] NPC sentado (pose para diálogo) — `crear_npc_sentado_lowpoly.py` (M19 2026-09-04, log 569). **Asset STANDALONE** (no montado: tiene su propio cuerpo en pose sentada + piedra). Composición: **piedra** de río 64 cm Ø × 18 cm alto (cilindro 18 lados, top en z=0.18, asentada a z=0.045), **tronco** loft 0.30→1.10 sentado (sigue el perfil del NPC base sentado), **cadera** 0.28→0.50, **túnica de lino** 0.18→1.00 siguiendo el tronco con 12 mm de holgura (aporta el ropaje sin necesitar una vestimenta extra), **piernas cruzadas** X-over (cada pierna sale de su cadera y termina en el lado opuesto al nivel de la rodilla, horizontales sobre la piedra), **brazos** sobre las rodillas (hombro→codo→muñeca apoyada en la rodilla, radio 0.058→0.036), **cabeza anciano** (variante alargada) **trasladada +1.100 en Z** porque `construir_cabeza()` devuelve el frame local — sin esto nacía en z=-0.02..0.50 (E-90, bug detectado por el guard `z_min < 0.040` que se agregó), **pelo blanco + barba** del anciano, **ojos+boca+cejas** por `construir_cabeza`, **cordón ocre** horizontal en z=0.60. **14 SM_ / 1409 tris / 8 mats**. Verificación: piedra asienta a z=0.045 (delta 0), E-79 no aplica (no es montado), E-90 assert pasa. **Bug clave (E-90):** la clave del dict P es `'Z_CRANEo'` (con «o» minúscula, no `'Z_CRANEO'`) — pasar mayúscula daba default 1.440 y la cabeza quedaba en z=0.34 local. Documentado y guardado en `09-GUIA-BLENDER.md` §3 + `MEMORY.md`. 6 capturas orbitales v3 (`_hoja_npc_sentado_v3.jpg` aprobada: monje meditando sobre piedra, cabeza bien arriba). Variantes MEDIA (8 obj/1409) y BAJA (7 obj/964, cejas podadas, ojos/boca/piedra→piel). 3 GLB (91/80/62 KB) + 3 `.glb.import`.
 
 ## Módulo 34 — Pesca / 35 — Minería 🎣
 
@@ -124,10 +232,10 @@
 ## Módulo 16 — Crafting / 14 — Inventario (representables en mano) 🔨
 
 - [x] Hacha de piedra — `crear_hacha_piedra_lowpoly.py` + cap 2026-08-28 16-00-10 (6 orbitales, OK visual). **2026-08-29 fix pose**: `.blend` regenerado de cero (estaba corrupto), MEDIA 3 obj/278 tris/3 mats, BAJA 3 obj/231 tris/3 mats — todas aprobadas visualmente.
-- [ ] Hacha de hierro
-- [ ] Martillo
-- [ ] Azada
-- [ ] Machete
+- [x] **Hacha de hierro** — `crear_hacha_hierro_lowpoly.py` (2026-09-05, log 679) — cabeza de hierro forjado (`lados=6, fase=0`, 5 estaciones) + collar soldado + astil con grip de cuero cosido. **6 SM_, 388 tris, 4 mats**. z_min 0.045, toca=12, fp=0.68×0.04, bbox 0.78×0.24. **Aplica E-91** (`asentar_herramienta`, `F_PLANO = 0.866` para espesor, `max(fp) ≥ 0.45·L` con `L=0.78`). Variantes M166 MEDIA 4/388/4 + BAJA 4/268/4 + 6 capturas orbitales `_hoja_hacha_hierro_v1.jpg` (✓ visual). 3 GLB + 3 .import OK.
+- [x] **Martillo** — `crear_martillo_lowpoly.py` (2026-09-05, log 679) — claw hammer: cabeza con boca (+Y, bit de acero) y u partida (−Y, dos prismas offset en X con rotación Z) + collar + astil cilíndrico con grip + pomo. **8 SM_, 464 tris, 4 mats**. z_min 0.045, toca=19, fp=0.67×0.03, bbox 0.78×0.11. **Aplica E-91** (`hz` constante en el astil, swell solo en `hy`). Variantes M166 MEDIA 4/464/4 + BAJA 4/312/4 + 6 capturas orbitales `_hoja_martillo_v1.jpg` (✓ visual). 3 GLB + 3 .import OK.
+- [x] **Azada** — `crear_azada_lowpoly.py` (2026-09-05, log 679) — astil largo (~1 m) + hoja trapezoidal 6 lados + costilla central + cuello + collar + grip + pomo. **7 SM_, 348 tris, 3 mats**. z_min 0.045, toca=20, fp=1.35×0.13, bbox 1.38×0.26. **Aplica E-91** (`lados=6, fase=0` para hoja plana, `F_PLANO=0.866`). Variantes M166 MEDIA 3/348/3 + BAJA 3/224/3 + 6 capturas orbitales `_hoja_azada_v1.jpg` (✓ visual). 3 GLB + 3 .import OK.
+- [x] **Machete** — `crear_machete_lowpoly.py` (2026-09-05, log 679) — hoja romboidal (`lados=4, fase=π/4`, `F_PLANO4=0.707`) + guarda/bronce + 2 remaches de bronce unidos en 1 SM_ + empuñadura de madera + pomo. **5 SM_, 292 tris, 3 mats**. z_min 0.045, toca=16, fp=0.71×0.06, bbox 0.73×0.06. **Aplica E-91** + E-70 (remaches unidos para economizar). Variantes M166 MEDIA 3/292/3 + BAJA 2/84/2 + 6 capturas orbitales `_hoja_machete_v1.jpg` (✓ visual, todos los azimuts apoyan la empuñadura). 3 GLB + 3 .import OK.
 - [x] Antorcha de mano — `crear_antorcha_mano_lowpoly.py` v2 (2026-08-29 19-36) + 6 orbitales 19-36-12. **v2 corrige E-27 (mango flotando en Z[0.262..0.862] con tela/remate/brasa aparte en X≈0.46, Z[0.045..0.299]) Y la pose con la brasa abajo**: v2 deja la brasa arriba (donde arde) y reescribe todo con el mismo patrón (hijo() sin matrix_parent_inverse, mango vertical identidad). MEDIA 4/88, BAJA 4/73, ALTA 6/556, ALTA_MEDIA 4/556, z_min 0.045.
 - [x] Cuerda enrollada — `crear_cuerda_enrollada_lowpoly.py` + 6 capturas orbitales 17:43 (aprobado, 2 rollos superpuestos + cabo horizontal + punta; z_min 0.045). Variantes M166 MEDIA (2 obj/401 tris/2 mats) y BAJA (2 obj/357 tris/2 mats) generadas y aprobadas 2026-08-29. Ver Tier D arriba.
 - [x] Tablón de madera (recurso) — `crear_tablon_madera_lowpoly.py` + 6 capturas orbitales 18-45 (aprobado, 6 obj, z_min 0.045)
@@ -167,9 +275,9 @@
 
 ## Contadores
 
-- Total ítems: **116** (117 − 4 duplicados + 3 añadidos: puente M40, carretilla M35, espantapájaros M33 → 117 − 4 + 3 = 116)
-- Completados: **81** (+2: carretilla M35 + espantapájaros M33)
-- Pendientes: **33**
+- Total ítems: **165** (135 previos + 30 M18-TER tienda 2026-09-05)
+- Completados: **95** (81 previos + 14 muebles M18-BIS integrados en casa_mediana v7 como primer lote aprobado pendiente de checkeo + 30 M18-TER en revisión [/])
+- Pendientes: **53** (34 previos del backlog original + 19 M18-BIS: casas grandes 4 restantes y muebles sueltos por exportar; los 30 M18-TER quedan [/] hasta revisión visual del usuario)
 - Pendientes de captura: **0**
 - Aprobados visualmente: 84 + 11 M18 (4 vision ✓ 2026-08-31 04:15 + 7 vision ✓ turno previo) + 3 M50 Tier F (vision ✓ 2026-09-01 21:15-21:16) + 10 M45+M27 (vision ✓ 2026-09-02 03:20, re-verificados post E-67) + 3 arco M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:00, post E-68) + 3 estatua M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:15) + 3 puente colgante M40 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:24) + 3 carretilla M35 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:46) + 3 espantapájaros M33 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:50)
 - **Pendientes de Tier D: 0** (Tier D cerrado 7/7)
@@ -250,14 +358,6 @@ Verificación visual realizada con la multimodalidad liberada en esta sesión: l
 - Checklist creado a partir de los módulos de `CHECKLIST-GLOBAL.md` que requieren assets 3D (14, 15, 16, 18, 19, 24, 25, 26, 27, 33, 34, 35, 36, 40, 45, 50, 70, 160, 161).
 - El orden real de creación lo decide `08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (módulos habilitados), no el orden de este archivo.
 - Al completar un objeto: mover su captura a `capturas/{ID-Modulo}-Nombre/` y marcar `[x]` con fecha.
+- Los items de NPCs (Módulo 19/161) y la Regadera están al FINAL del archivo historicamente; ya fueron reubicados a la sección `## Módulo 19/161` (no duplicar).
 
 
-- [ ] NPC base lowpoly (cuerpo modular sin ropa)
-- [ ] Cabeza NPC (3 variantes de forma)
-- [ ] Sombrero de paja
-- [ ] Vestimenta campesina (módulo de ropa)
-- [ ] Vestimenta pescador
-- [ ] Anciano del templo (túnica)
-- [ ] NPC sentado (pose para diálogo)
-
-- [ ] Regadera (objeto colocado)
