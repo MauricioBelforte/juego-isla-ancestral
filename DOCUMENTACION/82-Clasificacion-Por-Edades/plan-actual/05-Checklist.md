@@ -20,25 +20,25 @@
 - [x] Documentar proceso ACB (Australia): submission, evaluación, costos
 - [x] Documentar proceso USK (Alemania): submission, evaluación, costos
 - [x] Documentar proceso ClassInd (Brasil): submission, evaluación, costos
-- [ ] Comparar plazos de cada sistema (semanas/meses)
-- [ ] Comparar costos de cada sistema (USD)
-- [ ] Identificar qué sistemas aceptan auto-evaluación vs. requieren revisión humana
+- [x] Comparar plazos de cada sistema (semanas/meses)
+- [x] Comparar costos de cada sistema (USD)
+- [x] Identificar qué sistemas aceptan auto-evaluación vs. requieren revisión humana
 - [x] Documentar requisitos de representante local para cada sistema
-- [ ] Crear matriz de compatibilidad: plataforma × sistema de clasificación
-- [ ] Identificar sistemas obligatorios vs. opcionales por región
+- [x] Crear matriz de compatibilidad: plataforma × sistema de clasificación
+- [x] Identificar sistemas obligatorios vs. opcionales por región
 - [x] Documentar proceso de renovación/recertificación periódica
 
 ## B. Descriptores de Contenido (15 ítems)
 
 - [x] Definir lista completa de descriptores de contenido aplicables al juego
-- [ ] Evaluar violencia: ¿hay combate? ¿hay daño a personajes? ¿hay sangre?
+- [x] Evaluar violencia: ¿hay combate? ¿hay daño a personajes? ¿hay sangre?
 - [ ] Evaluar lenguaje: ¿hay lenguaje ofensivo? ¿hay groserías?
 - [ ] Evaluar miedo: ¿hay atmósfera tensa en templos? ¿hay jumpscares?
 - [ ] Evaluar contenido sugestivo: ¿hay romance? ¿hay desnudez?
-- [ ] Evaluar drogas: ¿hay referencias a sustancias?
+- [x] Evaluar drogas: ¿hay referencias a sustancias?
 - [ ] Evaluar gambling: ¿hay mecánicas de azar real?
-- [ ] Evaluar interacción: ¿hay chat? ¿hay interacción con otros jugadores?
-- [ ] Evaluar compras: ¿hay DLC? ¿hay microtransacciones?
+- [x] Evaluar interacción: ¿hay chat? ¿hay interacción con otros jugadores?
+- [x] Evaluar compras: ¿hay DLC? ¿hay microtransacciones?
 - [x] Documentar cada descriptor con justificación y nivel
 - [x] Verificar descriptores contra checklist de M81 (Legal Menores)
 - [x] Documentar descriptores que podrían cambiar durante desarrollo
@@ -61,10 +61,10 @@
 
 ## D. Proceso de Submission (10 ítems)
 
-- [ ] Crear timeline de submissions (cuándo submitir a cada sistema)
+- [x] Crear timeline de submissions (cuándo submitir a cada sistema)
 - [ ] Definir quién realiza cada submission (responsable)
 - [x] Documentar documentación requerida para cada submission
-- [ ] Definir proceso de actualización si el contenido cambia
+- [x] Definir proceso de actualización si el contenido cambia
 - [x] Definir proceso de appeal si el rating no es el esperado
 - [x] Documentar plazos de respuesta de cada sistema
 - [x] Definir proceso de emergencia si rating es rechazado
@@ -90,12 +90,12 @@
 - [x] Diseñar ContentValidator que verifique contenido vs. rating
 - [x] Definir reglas de validación por rating (qué contenido está permitido)
 - [x] Implementar gate en build pipeline: build falla si contenido inconsistente
-- [ ] Definir proceso de revisión manual cuando validación automática falla
+- [x] Definir proceso de revisión manual cuando validación automática falla
 - [x] Documentar excepciones permitidas (ej: templos con tensión leve en "Everyone")
 - [x] Verificar que validación funciona para todos los ratings objetivo
 - [x] Crear test automatizado de validación de contenido
 - [x] Integrar con M112 (Testing Automático) para CI
-- [ ] Definir sensibilidad de la validación (false positives vs. false negatives)
+- [x] Definir sensibilidad de la validación (false positives vs. false negatives)
 - [x] Documentar cómo actualizar reglas de validación cuando el contenido cambia
 
 ## G. Integración con Marketing y Store (8 ítems)
@@ -114,15 +114,15 @@
 - [x] Documentar proceso completo en CHECKLIST-GLOBAL.md
 - [x] Actualizar CHECKLIST-GLOBAL.md con estado del módulo
 - [x] Actualizar README.md de DOCUMENTACION/
-- [ ] Generar log de creación del módulo en Logs/
-- [ ] Verificar que no hay inconsistencias entre archivos del módulo
+- [x] Generar log de creación del módulo en Logs/
+- [x] Verificar que no hay inconsistencias entre archivos del módulo
 - [ ] Crear resumen ejecutivo para stakeholders
 - [x] Documentar lecciones aprendidas para futuros proyectos
-- [ ] Archivar versiones anteriores de clasificaciones
+- [x] Archivar versiones anteriores de clasificaciones
 
 ## I. Entrega y Hitos (8 ítems)
 
-- [ ] Completar análisis de sistemas antes de M138 Vertical Slice
+- [x] Completar análisis de sistemas antes de M138 Vertical Slice
 - [x] Completar definición de rating objetivo antes de M139 Pre-Alpha
 - [x] Completar primer submission IARC antes de M140 Alpha
 - [ ] Completar submissions a plataformas antes de M141 Beta
@@ -133,11 +133,11 @@
 
 ## J. Integración con Otros Módulos (6 ítems)
 
-- [ ] Verificar coherencia con M81 (Legal Menores): age gating y clasificación
-- [ ] Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
-- [ ] Verificar coherencia con M86 (IA Generativa): contenido generado y clasificación
-- [ ] Verificar coherencia con M97 (Steam Store): metadata de clasificación en store
-- [ ] Verificar coherencia con M98 (Trailer): contenido del tráiler vs. clasificación
+- [x] Verificar coherencia con M81 (Legal Menores): age gating y clasificación
+- [x] Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
+- [x] Verificar coherencia con M86 (IA Generativa): contenido generado y clasificación
+- [x] Verificar coherencia con M97 (Steam Store): metadata de clasificación en store
+- [x] Verificar coherencia con M98 (Trailer): contenido del tráiler vs. clasificación
 - [x] Documentar impacto de cada clasificación en el mercado objetivo
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)

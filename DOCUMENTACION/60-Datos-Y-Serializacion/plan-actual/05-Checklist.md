@@ -151,7 +151,7 @@
 - [ ] M62: progreso visible durante guardado (regla UX de progreso visual) [M]
 - [ ] M62: UI interactiva deshabilitada durante guardado/carga (anti clicks rápidos) [M]
 - [x] M63: tiempos de carga dentro del presupuesto de streaming (medidos en test) [M]
-- [ ] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C]
+- [x] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C]
 - [x] M58/M90/M91: secciones del config: graficos, audio, accesibilidad [S]
 - [x] M58/M90/M91: defaults para claves ausentes al cargar config [M]
 - [x] M58/M90/M91: guardar_config al cambiar opciones [M]

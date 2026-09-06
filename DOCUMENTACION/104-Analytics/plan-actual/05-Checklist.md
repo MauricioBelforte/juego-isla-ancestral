@@ -21,7 +21,7 @@
 
 - [ ] Definir el problema: recolección de datos de comportamiento no intrusiva [S]
 - [ ] Registrar dependencias: M103, M61, M91 [S]
-- [ ] Catalogar los 7 requisitos funcionales [S]
+- [x] Catalogar los 7 requisitos funcionales [S]
 - [x] RF1: eventos de sesión (inicio, pausa, reanudación, fin) [S]
 - [ ] RF2: patrones de movimiento y áreas visitadas [S]
 - [ ] RF3: frecuencia de features (fast travel, crafting, etc.) [S]
@@ -58,9 +58,9 @@
 - [ ] Opción para borrar datos locales acumulados [S]
 - [ ] Información de qué datos se recogen y por qué [S]
 - [ ] Acceso rápido a política de privacidad [S]
-- [ ] Configuración de frecuencia de envío (30 min / al cierre) [S]
+- [x] Configuración de frecuencia de envío (30 min / al cierre) [S]
 - [ ] Consentimiento informado al primer ingreso [S]
-- [ ] Respetar configuración M91 persiste entre sesiones [S]
+- [x] Respetar configuración M91 persiste entre sesiones [S]
 
 ## E. Data y formato (8)
 
@@ -114,7 +114,7 @@
 - [x] Batching cada 5 min o 50 eventos [S]
 - [ ] Compresión gzip antes de envio [S]
 - [ ] Cola persistente con límite de 10 MB [S]
-- [ ] Funciona offline sin perder datos [S]
+- [x] Funciona offline sin perder datos [S]
 - [ ] Subproceso en background con Thread [S]
 - [ ] Sin allocaciones en frame [S]
 - [ ] EventBus con ring buffer [S]
@@ -139,14 +139,14 @@
 
 ## K. Configuración y control (10)
 
-- [ ] Configuración primera ejecución: opt-out por defecto [S]
+- [x] Configuración primera ejecución: opt-out por defecto [S]
 - [ ] Pantalla de consentimiento (GDPR) [S]
 - [x] Toggle accesible desde M90 [S]
 - [ ] Confirmación del usuario al opt-in [S]
-- [ ] Botón "borrar mis datos" en configuración [S]
+- [x] Botón "borrar mis datos" en configuración [S]
 - [ ] Sin re-pedir consentimiento en cada arranque [S]
 - [ ] Reset de IDs al opt-out [S]
-- [ ] Solo envío en Wi-Fi (configurable) [S]
+- [x] Solo envío en Wi-Fi (configurable) [S]
 - [x] Indicador visual de envio en curso [S]
 - [ ] Histórico de consentimientos del usuario [S]
 

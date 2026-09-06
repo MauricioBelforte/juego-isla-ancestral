@@ -134,6 +134,8 @@
 - [x] Bloquear actualizaciones sin firma válida
 - [x] Logging de intentos de actualización inválidos
 
+> **Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429):** `updates/update_manager.gd` (fecha de la versión instalada en user://, metadata de plataforma) quedó incluido en la whitelist del scan anti-reloj-SO de M30 (mismo criterio que saving/). El código de este módulo NO fue modificado. Detalle: 07-GUIA-GODOT §9.64.
+
 ## Evidencia M119 (2026-09-02 20:43)
 
 - [x] Núcleo V0 verificado: `UpdateManager` autoload presente + `data/updates/versions.json` con 3 canales [M]

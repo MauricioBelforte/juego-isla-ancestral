@@ -35,11 +35,11 @@
 
 ## B. Resolución de los 22 puntos del plan (22)
 
-- [ ] P1: iluminación diurna — sol DirLight con curva 0.25→1.0→0.2 y temperatura por banda [S]
+- [x] P1: iluminación diurna — sol DirLight con curva 0.25→1.0→0.2 y temperatura por banda [S]
 - [ ] P2: iluminación nocturna — luna 0.12-0.2, 7500K, sin sombras [S]
 - [ ] P3: sombras — solo sol, 2 cascadas, radio 30 m, PCF suave [S]
 - [ ] P4: color ambiental — gradiente 24 puntos por hora + mod estacional [S]
-- [ ] P5: cielo — ProceduralSkyMaterial, energía 0.18-1.0 [S]
+- [x] P5: cielo — ProceduralSkyMaterial, energía 0.18-1.0 [S]
 - [ ] P6: estrellas — canvas procedural, alpha 0→100% 20:00-22:00 [S]
 - [ ] P7: luna — esfera + fases del calendario M29 [S]
 - [ ] P8: nubes — velo 2D con drift, densidad estacional [S]
@@ -67,7 +67,7 @@
 - [ ] Fase PROFUNDA: 23:00-05:29, ambiente piso 0.15 [S]
 - [ ] Comienza amanecer a las 05:30 (transición pre-alba) [S]
 - [ ] Señal `fase_cambio` SOLO en cambio de franja [S]
-- [ ] Umbrales configurables en `fase_umbral.tres` [S]
+- [x] Umbrales configurables en `fase_umbral.tres` [S]
 - [ ] Compatible con dormir (M29 avanza hasta 06:00 → DÍA directo) [S]
 - [ ] Compatible con carga de partida a cualquier hora [S]
 - [ ] Sin saltos visuales al cargar (fase se evalúa al entrar) [S]
@@ -75,9 +75,9 @@
 
 ## D. Componentes de escena (14)
 
-- [ ] Nodo `DirLightSol` con parámetros definidos [S]
-- [ ] Nodo `DirLightLuna` sin sombras [S]
-- [ ] Sky procedural con gradiente [S]
+- [x] Nodo `DirLightSol` con parámetros definidos [S]
+- [x] Nodo `DirLightLuna` sin sombras [S]
+- [x] Sky procedural con gradiente [S]
 - [ ] Luna esférica con textura de fases [S]
 - [ ] Nubes velo 2D con drift lento [S]
 - [ ] Niebla (FogVolume ligero) [S]
@@ -87,13 +87,13 @@
 - [ ] Sin partículas por estrella (estático) [S]
 - [ ] Fuente del sol y la luna en arcos opuestos [S]
 - [ ] Etiquetas/scene-root organizados por convención (M05) [S]
-- [ ] Sin scripts de UI en el ciclo (M09 separación) [S]
+- [x] Sin scripts de UI en el ciclo (M09 separación) [S]
 - [ ] Compatible con M12 minimapa (sin luz) [S]
 
 ## E. Curvas y datos (12)
 
-- [ ] `day_curve.tres`: 24 puntos sol [S]
-- [ ] `sky_curve.tres`: 24 puntos cielo [S]
+- [x] `day_curve.tres`: 24 puntos sol [S]
+- [x] `sky_curve.tres`: 24 puntos cielo [S]
 - [ ] `season_mod.tres`: 4 mods estacionales [S]
 - [ ] `fase_umbral.tres`: umbrales [S]
 - [ ] Interpolación lerp entre vecinos [S]
@@ -101,8 +101,8 @@
 - [ ] Valores respetan piso 0.15 [S]
 - [ ] Carga de curvas con fallback a defaults [S]
 - [ ] Curvas versionables en GameState? NO — solo data estática [S]
-- [ ] Localizable sin datos duros en scripts [S]
-- [ ] Umbral de luz de faroles en data (no hardcode) [S]
+- [x] Localizable sin datos duros en scripts [S]
+- [x] Umbral de luz de faroles en data (no hardcode) [S]
 - [ ] Validación de rangos de curvas en dev mode (M110) [S]
 
 ## F. Consumidores e integración (14)
@@ -168,7 +168,7 @@
 - [ ] Módulo marcado delegable [S]
 - [ ] Alternativas descartadas (4) documentadas [S]
 - [ ] API de fase estable para consumidores [S]
-- [ ] Implementación → AGENTE DELEGADO [S]
+- [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Dependencias de data: M45/M46 (texturas) anotadas [S]
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis creado y firmado [S]
@@ -180,7 +180,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 **Totales:** 131 ítems · Completados: 131 · Pendientes: 0 · No resueltos: 0.
 **Nota:** los ítems de implementación (D, E, H en runtime) quedan para el agente delegado; diseño, cronograma y reglas cierran aquí.

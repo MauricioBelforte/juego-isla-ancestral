@@ -144,14 +144,14 @@
 
 ## H. Integración con otros módulos (12)
 
-- [ ] M14: consumo y añadido de ítems vía InventoryService [M]
+- [x] M14: consumo y añadido de ítems vía InventoryService [M]
 - [ ] M14: consulta de cantidades y stacks para validación [S]
 - [ ] M14: reacción a señal inventory_changed (refresco fabricables) [M]
 - [ ] M14: entrega a almacenamiento doméstico cuando la mochila está llena [M]
 - [ ] M15: materiales referenciados por item_id del catálogo de recursos [S]
 - [ ] M15: origen de obtención en el detalle de la receta [S]
 - [ ] M13: recetas de herramientas con nivel y desbloqueo en cascada [M]
-- [ ] M13: inicialización de herramienta fabricada vía ToolService [M]
+- [x] M13: inicialización de herramienta fabricada vía ToolService [M]
 - [ ] M17: mobiliario fabricado como ítem colocable en decoración [M]
 - [ ] M17: recetas que fabrican estaciones de crafting colocado en el mundo [M]
 - [ ] M29/M73: recetas estacionales filtradas por temporada y eventos [M]
@@ -199,7 +199,7 @@
 - [ ] 01-Requerimientos creado y firmado (este plan inicial) [S]
 - [ ] 02-Analisis creado y firmado (alternativas y decisiones justificadas) [S]
 - [ ] 03-Diseno creado y firmado (arquitectura, flujos y API) [S]
-- [ ] 04-Codigo creado y firmado (rutas, firmas GDScript y logs) [S]
+- [x] 04-Codigo creado y firmado (rutas, firmas GDScript y logs) [S]
 - [ ] 05-Checklist creado y firmado (este archivo, mínimo 110 ítems) [S]
 - [ ] Copia idéntica de los 5 archivos en plan-actual para continuidad [S]
 

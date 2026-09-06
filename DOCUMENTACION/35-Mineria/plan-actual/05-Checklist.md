@@ -171,7 +171,7 @@
 - [ ] Chispa de anuncio dorada al recuperarse [S]
 - [ ] Texto flotante con la cantidad obtenida [S]
 - [ ] Vibracion ligera opcional al extraer [S]
-- [ ] Interaccion consistente con el sistema de recursos M15 [S]
+- [x] Interaccion consistente con el sistema de recursos M15 [S]
 
 ## M. Documentacion y QA (8)
 

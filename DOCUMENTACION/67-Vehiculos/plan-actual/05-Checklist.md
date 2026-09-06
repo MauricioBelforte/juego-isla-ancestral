@@ -184,7 +184,7 @@
 ## U. Accesibilidad (M58)
 
 - [ ] HUD legible con alto contraste opcional [M]
-- [ ] Tamaño de texto configurable [M]
+- [x] Tamaño de texto configurable [M]
 - [ ] Reduce Motion: cámara y animaciones reducidas [M]
 - [ ] Subtítulos en avisos del vehículo [S]
 - [ ] Controles completos con gamepad (sin mouse) [M]
@@ -199,7 +199,7 @@
 
 ## W. Documentación
 
-- [ ] Documentar la API de VehicleManager [M]
+- [x] Documentar la API de VehicleManager [M]
 - [ ] Documentar los presets en 04-Codigo.md [M]
 - [ ] Documentar el flujo de streaming (chunk_target) [M]
 - [ ] Documentar la condición de la locomotora [S]
@@ -231,7 +231,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 ## Notas del Agente
 

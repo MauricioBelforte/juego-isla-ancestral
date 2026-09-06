@@ -92,7 +92,7 @@
 - [ ] Definir límite 2048×2048 por atlas [S]
 - [ ] Definir padding ≥ 2 px [S]
 - [ ] Definir sin rotaciones en empaquetado [S]
-- [ ] Definir regeneración por script (pack_atlas.gd) [M]
+- [x] Definir regeneración por script (pack_atlas.gd) [M]
 
 ## N. RF13 — Convenciones de formato
 
@@ -103,7 +103,7 @@
 
 ## O. RF14 — Validación de pieza
 
-- [ ] Definir script validate_2d.gd en Assets/_Project/Editor/ [M]
+- [x] Definir script validate_2d.gd en Assets/_Project/Editor/ [M]
 - [ ] Verificar formato y tamaño cuadrado permitido [S]
 - [ ] Verificar resolución múltiplo de 4 [S]
 - [ ] Verificar alfa sin halos en bordes [M]
@@ -128,7 +128,7 @@
 - [ ] Consistencia: un solo set de iconos en todas las superficies [M]
 - [ ] Rendimiento: atlas únicos, carga diferida (M63), sin duplicados (M62) [M]
 - [ ] Cozy: colores amables, sin parpadeos, insignias que celebran [M]
-- [ ] Mantenible: SVG editable, regeneración por script [M]
+- [x] Mantenible: SVG editable, regeneración por script [M]
 - [ ] Accesibilidad: variantes de alto contraste separadas [M]
 
 ## S. Alternativas consideradas
@@ -181,9 +181,9 @@
 ## X. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (45=ARTE 2D → ID 46) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

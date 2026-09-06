@@ -142,12 +142,49 @@ La lógica de selección fue validada por simulación en Python (8/8 OK).
   `registry.json`.
 - Contenido completado: capítulos 1-7 (SALUDO/HISTORIA/MISION/AMBIENTE según diseño) para
   los 20 NPCs secundarios, más HISTORIA/MISION/AMBIENTE cap 0 donde el diseño los define.
-  Total módulo: 98 [x] / 22 [?] de 120 (plan-actual/05-Checklist.md).
+  Total módulo: 58 [x] / 62 [?] de 120 (reconciliado 2026-09-02 con el body de 05-Checklist y el global 58/120; el claim 98/22 del iter 2 estaba obsoleto).
 - **Validación:** réplica de `DialogGraphValidator` en Python (mismos criterios: start existe,
   `fin` alcanzable, sin huérfanos) → 264/264 grafos OK, 0 fallos; `registry.json` 263 entries,
   0 claves de mundo desconocidas (todas `flag_capitulo`/`estacion`/`es_noche`/`flag_*` válidas).
 - `test_contextual_dialogue_m162.gd` actualizado: COR-001 ya tiene HISTORIA cap0 (antes era
   pendiente); el fallback ahora verifica que no hay variante de amistad aún.
 - **Pendiente ([?]):** dimensiones de variación (amistad/estación-restantes/hora/ubicación) y
-  checks de coherencia cruzada con M158/M160/M22. Ejecución runtime del test en Godot pendiente
+  checks de coherencia cruzada con M158/M160/M22.   Ejecución runtime del test en Godot pendiente
   (el MCP disponible solo corre el juego principal, no `--script`).
+
+## Notas del Agente
+
+**Modelo:** Hy3
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-02 20:28
+**Estado:** En curso (iter 3)
+
+### Lo que hice
+- Retomé M162 (ya hice iters 1-2 el 2026-09-01). Verifiqué que M162 figuraba como
+  `🟢 Disponible` en CHECKLIST-GLOBAL (NO ✅; un reporte previo de "✅ por deepseek"
+  fue un misparse de columnas). Marcado `🔵 En curso` + Agente `Hy3 / WorkBuddy` en
+  CHECKLIST-GLOBAL y ESTADO-PARALELO.
+- Validación read-only headless del data layer: 279 grafos M21 (0 parse/schema
+  errors, 0 orphan nodes, 0 unreachable `fin`, 0 missing start) y `registry.json`
+  (278 entries, 23 npcs, 0 missing graph, 0 npc inválido, 0 clave de condición
+  inválida vs `estado_vars`). Hallazgo menor: 2 grafos huérfanos sin entry
+  (`aur_005_cap0_saludo_dia.json`, `riz_001_cap0_saludo_repeat.json`) — variantes
+  preservadas del iter 1, inofensivas.
+- Reconciliación de documentación: header de 05-Checklist y conteo de 04-Codigo
+  corregidos de 98/22 → 58/62 para coincidir con el body y el global 58/120
+  (honestidad: subestimar es preferible a sobreestimar).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Ejecutar `test_contextual_dialogue_m162.gd` en Godot (env sin Godot; el MCP solo
+  corre el juego principal). La lógica de selección fue validada por simulación en
+  iter 1 y la integridad de grafos/registry por validación Python en este iter.
+- Cerrar los `[?]` de coherencia cruzada que dependen de otros módulos (M158 forja,
+  M160 ubicaciones, M22 historia, M20 amistad): quedan para sus dueños.
+
+### Recomendaciones para el próximo agente
+- Los 62 `[?]` restantes son en su mayoría "Documentar diálogos de X NPC — 8
+  capítulos" y "Verificar que X refleje Y de Mzz". Muchos JSON ya existen; conviene
+  verificar coverage cap-a-cap y voltear a [x] los que el generador ya cubre.
+- Decidir si los 2 grafos huérfanos se registran o se borran.
+- Re-ejecutar `scripts/gen_m162_dialogues.py` para extender variantes
+  (amistad/estación-restantes/hora/ubicación) cuando esos módulos estén listos.

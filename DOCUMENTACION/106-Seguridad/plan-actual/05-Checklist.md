@@ -9,36 +9,36 @@
 - [x] Proteger APIs
 - [x] Proteger claves
 - [x] No incluir secrets en builds
-- [ ] Separar desarrollo y producción
+- [x] Separar desarrollo y producción
 - [x] Proteger servidores
 - [x] Proteger bases de datos
 - [x] Validar entradas
 - [x] Validar datos online
-- [ ] Prevenir manipulación
-- [ ] Prevenir duplicación
+- [x] Prevenir manipulación
+- [x] Prevenir duplicación
 - [ ] Prevenir economía adulterada
 - [ ] Prevenir bots
 - [ ] Registrar accesos importantes
 - [x] Implementar backups
-- [ ] Rotar credenciales
-- [ ] Auditar dependencias
+- [x] Rotar credenciales
+- [x] Auditar dependencias
 
 ### [S] Protección de APIs
 - [x] Definir autenticación (API keys, JWT, OAuth 2.0)
 - [ ] Definir rate limiting (por IP, por usuario, por endpoint)
-- [ ] Diseñar middleware de autenticación en servidor
+- [x] Diseñar middleware de autenticación en servidor
 - [ ] Diseñar middleware de rate limiting en servidor
-- [ ] Diseñar headers de autenticación en cliente
-- [ ] Diseñar manejo de errores de autenticación y rate limiting
+- [x] Diseñar headers de autenticación en cliente
+- [x] Diseñar manejo de errores de autenticación y rate limiting
 
 ### [S] Protección de claves
 - [x] Definir almacenamiento seguro (environment variables, secret managers)
 - [ ] Definir no almacenar claves en código fuente
 - [x] Definir no almacenar claves en archivos de configuración en repositorio
 - [ ] Diseñar archivo .env.local para desarrollo (en .gitignore)
-- [ ] Diseñar archivo .env.production para producción (en .gitignore)
-- [ ] Diseñar carga de variables de entorno al inicio del juego
-- [ ] Diseñar validación de que todas las claves requeridas están presentes
+- [x] Diseñar archivo .env.production para producción (en .gitignore)
+- [x] Diseñar carga de variables de entorno al inicio del juego
+- [x] Diseñar validación de que todas las claves requeridas están presentes
 
 ### [S] No incluir secrets en builds
 - [x] Definir secrets en .gitignore
@@ -53,25 +53,25 @@
 - [x] Definir staging: entorno intermedio, datos simulados, keys de staging
 - [x] Definir producción: entorno real, datos reales, keys de producción
 - [x] Diseñar configuración por entorno (dev/staging/prod)
-- [ ] Diseñar variables de entorno para diferenciar entornos
+- [x] Diseñar variables de entorno para diferenciar entornos
 - [ ] Diseñar bases de datos separadas por entorno
 - [x] Diseñar APIs separadas por entorno (dev-api, staging-api, prod-api)
 
 ### [S] Proteger servidores
 - [ ] Definir firewalls (solo puertos necesarios)
-- [ ] Definir reglas de firewall específicas por servicio
-- [ ] Definir bloqueo de IPs maliciosas (si aplica)
-- [ ] Definir actualizaciones automáticas de seguridad del sistema operativo
-- [ ] Definir actualizaciones automáticas de dependencias de seguridad
+- [x] Definir reglas de firewall específicas por servicio
+- [x] Definir bloqueo de IPs maliciosas (si aplica)
+- [x] Definir actualizaciones automáticas de seguridad del sistema operativo
+- [x] Definir actualizaciones automáticas de dependencias de seguridad
 - [ ] Definir monitoreo de vulnerabilidades
 - [ ] Diseñar monitoreo de logs de acceso
 - [ ] Diseñar monitoreo de métricas de seguridad
 - [ ] Diseñar alertas por anomalías de seguridad
 
 ### [S] Proteger bases de datos
-- [ ] Definir autenticación fuerte para acceso a base de datos
+- [x] Definir autenticación fuerte para acceso a base de datos
 - [ ] Definir usuarios de base de datos con permisos mínimos necesarios
-- [ ] Definir no usar root/superuser en aplicaciones
+- [x] Definir no usar root/superuser en aplicaciones
 - [x] Definir encriptación en reposo (encryption at rest)
 - [x] Definir encriptación en tránsito (TLS/SSL)
 - [x] Definir encriptación de campos sensibles (si aplica)
@@ -80,68 +80,68 @@
 - [x] Diseñar backups fuera del servidor (off-site)
 
 ### [S] Validar entradas
-- [ ] Definir validación de todas las entradas de usuario
-- [ ] Definir validación de tipos (string, int, float, etc.)
-- [ ] Definir validación de rangos (longitud, valor mínimo/máximo)
-- [ ] Definir validación de formato (email, URL, etc.)
-- [ ] Definir sanitización de entradas (prevenir XSS, SQL injection)
-- [ ] Diseñar funciones de validación reutilizables
-- [ ] Diseñar validación en frontend (Godot)
-- [ ] Diseñar validación en backend (si aplica)
-- [ ] Diseñar validación en capas de servicios
+- [x] Definir validación de todas las entradas de usuario
+- [x] Definir validación de tipos (string, int, float, etc.)
+- [x] Definir validación de rangos (longitud, valor mínimo/máximo)
+- [x] Definir validación de formato (email, URL, etc.)
+- [x] Definir sanitización de entradas (prevenir XSS, SQL injection)
+- [x] Diseñar funciones de validación reutilizables
+- [x] Diseñar validación en frontend (Godot)
+- [x] Diseñar validación en backend (si aplica)
+- [x] Diseñar validación en capas de servicios
 
 ### [S] Validar datos online
-- [ ] Definir validación de datos recibidos de servicios online
+- [x] Definir validación de datos recibidos de servicios online
 - [x] Definir validación de esquema (JSON schema validation)
-- [ ] Definir validación de tipos y rangos
-- [ ] Definir validación de integridad (checksums, firmas digitales)
+- [x] Definir validación de tipos y rangos
+- [x] Definir validación de integridad (checksums, firmas digitales)
 - [x] Diseñar funciones de validación de respuestas de APIs
 - [x] Diseñar validación de JSON schema
-- [ ] Diseñar validación de checksums
-- [ ] Diseñar manejo de errores de validación
+- [x] Diseñar validación de checksums
+- [x] Diseñar manejo de errores de validación
 
 ### [S] Prevenir manipulación
-- [ ] Definir prevención de manipulación de savegame
+- [x] Definir prevención de manipulación de savegame
 - [x] Definir prevención de manipulación de configuración
-- [ ] Definir prevención de manipulación de datos de jugador
+- [x] Definir prevención de manipulación de datos de jugador
 - [ ] Diseñar checksums de savegame (SHA-256)
 - [x] Diseñar firma digital de savegame (HMAC con secret del servidor)
-- [ ] Diseñar validación de savegame al cargar
+- [x] Diseñar validación de savegame al cargar
 - [x] Diseñar validación de configuración al cargar
 
 ### [S] Prevenir duplicación
-- [ ] Definir operaciones idempotentes
-- [ ] Definir IDs únicos para transacciones (UUID)
-- [ ] Definir prevención de reenvío de formularios (replay attack)
-- [ ] Diseñar IDs únicos para operaciones (request_id)
-- [ ] Diseñar verificación de que la operación no se ejecutó previamente
-- [ ] Diseñar timeout de operaciones pendientes
+- [x] Definir operaciones idempotentes
+- [x] Definir IDs únicos para transacciones (UUID)
+- [x] Definir prevención de reenvío de formularios (replay attack)
+- [x] Diseñar IDs únicos para operaciones (request_id)
+- [x] Diseñar verificación de que la operación no se ejecutó previamente
+- [x] Diseñar timeout de operaciones pendientes
 
 ### [S] Prevenir economía adulterada
-- [ ] Definir validación de economía del cliente en servidor
+- [x] Definir validación de economía del cliente en servidor
 - [ ] Definir checksums de datos de economía
 - [ ] Definir límites de economía (max gold, max items)
-- [ ] Diseñar validación de economía al guardar savegame
-- [ ] Diseñar validación de economía al cargar savegame
-- [ ] Diseñar validación de economía en servidor (si hay online components)
+- [x] Diseñar validación de economía al guardar savegame
+- [x] Diseñar validación de economía al cargar savegame
+- [x] Diseñar validación de economía en servidor (si hay online components)
 
 ### [S] Prevenir bots
-- [ ] Definir CAPTCHA para operaciones sensibles
+- [x] Definir CAPTCHA para operaciones sensibles
 - [x] Definir CAPTCHA para registro (si aplica)
 - [ ] Definir CAPTCHA para rate limiting excedido
 - [ ] Definir rate limiting por IP
 - [ ] Definir rate limiting por usuario
 - [ ] Definir rate limiting por endpoint
-- [ ] Diseñar detección de patrones de bots
-- [ ] Diseñar detección de comportamientos anómalos
+- [x] Diseñar detección de patrones de bots
+- [x] Diseñar detección de comportamientos anómalos
 - [ ] Diseñar bloqueo de IPs sospechosas
 
 ### [S] Registrar accesos importantes
 - [x] Definir registro de accesos importantes (login, admin, cambios críticos)
 - [x] Definir registro con timestamp, usuario, acción, resultado
 - [x] Definir logs seguros (no exponer secrets)
-- [ ] Definir logs inmutables (no modificables)
-- [ ] Diseñar sistema de audit logs
+- [x] Definir logs inmutables (no modificables)
+- [x] Diseñar sistema de audit logs
 - [ ] Diseñar logs almacenados en servidor
 - [ ] Diseñar logs monitoreados regularmente
 - [ ] Diseñar alertas por anomalías en logs
@@ -158,22 +158,22 @@
 
 ### [S] Rotar credenciales
 - [x] Definir rotación de API keys periódica (cada 90 días)
-- [ ] Definir rotación de contraseñas periódica (cada 90 días)
-- [ ] Definir rotación de certificados SSL/TLS periódica
+- [x] Definir rotación de contraseñas periódica (cada 90 días)
+- [x] Definir rotación de certificados SSL/TLS periódica
 - [x] Definir rotación de secrets cuando se sospecha compromiso
-- [ ] Diseñar sistema de rotación de credenciales
-- [ ] Diseñar automatización de rotación cuando sea posible
-- [ ] Diseñar notificación de rotación de credenciales
-- [ ] Diseñar documentación de rotación de credenciales
+- [x] Diseñar sistema de rotación de credenciales
+- [x] Diseñar automatización de rotación cuando sea posible
+- [x] Diseñar notificación de rotación de credenciales
+- [x] Diseñar documentación de rotación de credenciales
 
 ### [S] Auditar dependencias
-- [ ] Definir auditoría de dependencias por vulnerabilidades de seguridad
-- [ ] Definir integración con CI/CD (scanners de seguridad)
-- [ ] Definir actualización de dependencias vulnerables
+- [x] Definir auditoría de dependencias por vulnerabilidades de seguridad
+- [x] Definir integración con CI/CD (scanners de seguridad)
+- [x] Definir actualización de dependencias vulnerables
 - [ ] Definir monitoreo de nuevas vulnerabilidades
 - [x] Diseñar script de auditoría de dependencias (npm audit, cargo audit)
-- [ ] Diseñar integración con CI/CD (GitHub Dependabot)
-- [ ] Diseñar actualización automática de dependencias (cuando sea seguro)
+- [x] Diseñar integración con CI/CD (GitHub Dependabot)
+- [x] Diseñar actualización automática de dependencias (cuando sea seguro)
 - [x] Diseñar monitoreo de nuevas vulnerabilidades (security advisories)
 
 ### [S] APISecurity (servicio)
@@ -182,7 +182,7 @@
 - [ ] Diseñar signal rate_limit_exceeded()
 - [x] Diseñar método load_api_key()
 - [ ] Diseñar método setup_rate_limiting()
-- [ ] Diseñar método authenticate_request(headers)
+- [x] Diseñar método authenticate_request(headers)
 - [ ] Diseñar método check_rate_limit()
 - [x] Diseñar variable api_key
 - [ ] Diseñar variable rate_limit
@@ -258,14 +258,14 @@
 - [x] Diseñar scripts/security_check.sh
 
 ### [S] Pruebas de seguridad
-- [ ] Diseñar prueba de validación de entradas
-- [ ] Diseñar prueba de validación de datos online
-- [ ] Diseñar prueba de prevención de manipulación
-- [ ] Diseñar prueba de prevención de duplicación
-- [ ] Diseñar prueba de prevención de economía adulterada
+- [x] Diseñar prueba de validación de entradas
+- [x] Diseñar prueba de validación de datos online
+- [x] Diseñar prueba de prevención de manipulación
+- [x] Diseñar prueba de prevención de duplicación
+- [x] Diseñar prueba de prevención de economía adulterada
 - [ ] Diseñar prueba de rate limiting
 - [x] Diseñar prueba de autenticación de APIs
-- [ ] Diseñar prueba de auditoría de dependencias
+- [x] Diseñar prueba de auditoría de dependencias
 
 ## Totales
 

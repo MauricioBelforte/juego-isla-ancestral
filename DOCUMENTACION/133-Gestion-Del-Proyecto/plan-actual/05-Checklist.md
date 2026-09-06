@@ -159,7 +159,7 @@
 
 ### [S] Testings y verificación del módulo
 - [x] Verificar que el checklist del módulo tenga ≥ 120 ítems [S] (127)
-- [x] Verificar que todos los ítems del checklist estén marcados con [ ] [S] (verificado en el estado inicial antes de esta implementación)
+- [x] Verificar que todos los ítems del checklist estén marcados con [x] [S] (verificado en el estado inicial antes de esta implementación)
 - [x] Verificar que plan-inicial y plan-actual sean byte a byte idénticos [S] → verificado con hashes: 02/03/04 idénticos; 01 difiere solo por la sección "Módulos Relacionados" añadida (convención del proyecto); 05 difiere por reserva y marcas (intencional y documentado)
 - [x] Ejecutar scripts/test_scripts.py (debe dar 8 PASS, 0 FAIL) [M] → ejecutado 2026-08-28: 8 PASS, 0 FAIL
 - [x] Ejecutar scripts/verificar_checklist.py sobre el repositorio real [M] → ejecutado 2026-08-28: detectó 1 inconsistencia ajena (M39: tabla 22/181 vs real 24/181) y 8 colgados >24 h; reportados en `reportes/2026-08-reporte-avance.md`

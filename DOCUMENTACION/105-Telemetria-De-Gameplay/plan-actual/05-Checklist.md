@@ -5,16 +5,16 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — núcleo implementado (sin bloqueo)
-- Agente: ox-alpha (Cline) — liberado 2026-08-29 20:30
+- Estado: 🔵 En curso — iteración 5 (fix zone_ignored + robustez)
+- Agente: deepseek-v4-flash (Kilo Code)
 - Fase: F0/transversal (infraestructura V0)
 - Dificultad: 2
 - Vision: V0
 - Entrada: M104 (Analytics) ✅ completado 2026-08-29
-- Salida: Autoload `TelemetryDirector` + 17 eventos + opt-in persistente + test headless, regresión 0 fallos
-- Archivos: `scripts/telemetry/telemetry_director.gd`; autoload en project.godot; servicio `\"telemetry\"` en ServiceRegistry
-- Nota: reescritura sobre arquitectura REAL. El plan original de DEVIN (SWE-1.6) usó `ServiceLocator`/`GameState`/`AnalyticsService.record_event` que no existen; se corrigió a `ServiceRegistry.get_service(\"analytics\")` + `AnalyticsDirector.registrar_evento(tipo, datos)`.
-- Fecha: 2026-08-29
+- Salida: Autoload `TelemetryDirector` + fix bug zone_ignored + test iter5 0 fallos + regresiones
+- Archivos: `scripts/telemetry/telemetry_director.gd`; autoload en project.godot; servicio `"telemetry"` en ServiceRegistry
+- Fecha reserva: 2026-09-04 06:10
+- Log reservado: 643
 
 ## Checklist de implementación del módulo
 
@@ -80,7 +80,7 @@
 
 ### [S] Dificultad percibida
 - [x] Definir encuesta post-puzzle
-- [ ] Definir rating 1-5 (1: muy fácil, 5: muy difícil)
+- [x] Definir rating 1-5 (1: muy fácil, 5: muy difícil)
 - [x] Diseñar pregunta: "¿Qué tan difícil te pareció este puzzle?"
 - [x] Diseñar registro de difficulty_perceived con puzzle_id y rating
 - [x] Diseñar encuesta opcional después de completar puzzle
@@ -94,20 +94,20 @@
 
 ### [S] Opt-in y GDPR
 - [x] Definir opt-in explícito
-- [ ] Definir prompt en primer inicio del juego
-- [ ] Definir opción de opt-out en settings
+- [x] Definir prompt en primer inicio del juego
+- [x] Definir opción de opt-out en settings
 - [ ] Definir datos anonimizados (sin identificadores personales)
 - [ ] Definir no recolectar nombres, emails, IPs
 - [ ] Definir solo recolectar datos de gameplay y comportamiento
-- [ ] Definir posibilidad de solicitar eliminación de datos
-- [ ] Definir política de privacidad documentada
+- [x] Definir posibilidad de solicitar eliminación de datos
+- [x] Definir política de privacidad documentada
 
 ### [S] Integración con M104 (Analytics)
 - [x] Diseñar integración con M104 para envío de eventos
 - [x] Diseñar GameplayTelemetry emitir eventos a AnalyticsService
-- [ ] Diseñar AnalyticsService batching y envío
-- [ ] Diseñar AnalyticsService anonimización y GDPR compliance
-- [ ] Diseñar AnalyticsService caché local y envío batch
+- [x] Diseñar AnalyticsService batching y envío
+- [x] Diseñar AnalyticsService anonimización y GDPR compliance
+- [x] Diseñar AnalyticsService caché local y envío batch
 
 ### [S] Integración con M71 (Progresión)
 - [x] Diseñar integración con M71 para observación de eventos
@@ -119,11 +119,11 @@
 ### [S] Integración con M22 (Historia Principal)
 - [x] Diseñar integración con M22 para observación de eventos
 - [ ] Diseñar M22 notificar a M105 cuando se completan capítulos
-- [ ] Diseñar M105 registrar progreso de historia principal
+- [x] Diseñar M105 registrar progreso de historia principal
 - [ ] Diseñar M105 identificar capítulos donde muchos jugadores se atascans
 
 ### [S] Integración con M102 (Bug Tracking)
-- [ ] Diseñar integración con M102 para generación de issues
+- [x] Diseñar integración con M102 para generación de issues
 - [ ] Diseñar datos de telemetría identificar bugs emergentes
 - [x] Diseñar alta tasa de abandono en puzzle → posible bug
 - [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento
@@ -186,7 +186,7 @@
 - [x] Diseñar método show_difficulty_survey(puzzle_id)
 - [x] Diseñar método submit_difficulty_rating(puzzle_id, rating)
 - [x] Diseñar UI de encuesta post-puzzle
-- [ ] Diseñar encuesta opcional (no forzar)
+- [x] Diseñar encuesta opcional (no forzar)
 
 ### [S] Almacenamiento local
 - [x] Diseñar archivo user://telemetry/gameplay_events.json
@@ -203,12 +203,12 @@
 ### [S] GameplayTelemetryLoader
 - [x] Diseñar GameplayTelemetryLoader
 - [ ] Diseñar método load_opt_in_status()
-- [ ] Diseñar integración con al inicio del juego
+- [x] Diseñar integración con al inicio del juego
 
 ### [S] GameplayTelemetrySaver
 - [x] Diseñar GameplayTelemetrySaver
 - [ ] Diseñar método save_opt_in_status()
-- [ ] Diseñar integración al cerrar el juego
+- [x] Diseñar integración al cerrar el juego
 
 ### [S] Archivos de implementación
 - [x] Diseñar res://telemetry/gameplay_telemetry.gd
@@ -221,9 +221,9 @@
 - [x] Diseñar prueba de cálculo de métricas de tiempo
 - [x] Diseñar prueba de detección de puzzles abandonados
 - [x] Diseñar prueba de detección de zonas ignoradas
-- [ ] Diseñar prueba de encuesta de dificultad percibida
-- [ ] Diseñar prueba de integración con M104 (Analytics)
-- [ ] Diseñar prueba de anonimización de datos
+- [x] Diseñar prueba de encuesta de dificultad percibida
+- [x] Diseñar prueba de integración con M104 (Analytics)
+- [x] Diseñar prueba de anonimización de datos
 
 ## Totales
 

@@ -9,7 +9,7 @@
 
 ## 1. Freeze de features (RF1)
 
-- [ ] Definir comité de release (producción, QA, plataformas) con voto para hotfixes [S]
+- [x] Definir comité de release (producción, QA, plataformas) con voto para hotfixes [S]
 - [ ] Definir minutas firmadas de cada decisión del comité [S]
 - [ ] Definir freeze firmado de features al inicio de RC [S]
 - [ ] Definir política: solo hotfixes P0/P1 aprobados entran al RC [S]
@@ -18,12 +18,12 @@
 - [ ] Definir DiffAudit en CI (contra `beta-rc-candidate`) [M]
 - [ ] Definir fallo de CI si hay diffs no autorizados [S]
 - [ ] Definir ventana de 4 semanas máx. para la fase [S]
-- [ ] Definir replanificación de fecha si el gate no se cierra a las 4 semanas [S]
+- [x] Definir replanificación de fecha si el gate no se cierra a las 4 semanas [S]
 
 ## 2. Freeze de contenido (RF1)
 
 - [ ] Definir manifest de contenido inamovible (hash del inventario Beta) [M]
-- [ ] Definir verificación de hash en cada build RC [S]
+- [x] Definir verificación de hash en cada build RC [S]
 - [ ] Definir prohibición de nuevo contenido (misiones, ítems, eventos) [S]
 - [ ] Definir excepción de contenido solo si es bug crítico de progresión [S]
 - [ ] Definir registro de cambios de contenido en el manifest [S]
@@ -42,14 +42,14 @@
 
 ## 4. Build limpia (RF2/M104/M105)
 
-- [ ] Definir build final sin asserts/debug en Release [M]
-- [ ] Definir eliminación de logs de desarrollo en la build final [S]
+- [x] Definir build final sin asserts/debug en Release [M]
+- [x] Definir eliminación de logs de desarrollo en la build final [S]
 - [ ] Definir símbolos de crash accesibles al handler (M105) [M]
-- [ ] Definir telemetría de sesión activa en la build RC (M104) [M]
-- [ ] Definir versionado visible (buildId) en la pantalla de título [S]
-- [ ] Definir verificación de cero scripts de editor en el player [S]
+- [x] Definir telemetría de sesión activa en la build RC (M104) [M]
+- [x] Definir versionado visible (buildId) en la pantalla de título [S]
+- [x] Definir verificación de cero scripts de editor en el player [S]
 - [ ] Definir comprobación de assets de desarrollo (texturas/audio placeholder) fuera [S]
-- [ ] Definir build real (no Development Build) para G4 en adelante [S]
+- [x] Definir build real (no Development Build) para G4 en adelante [S]
 
 ## 5. Instalación limpia (RF3/M149)
 
@@ -57,8 +57,8 @@
 - [ ] Definir verificación de arranque sin errores tras instalación limpia [M]
 - [ ] Definir prueba de desinstalación/reinstalación sin residuos [M]
 - [ ] Definir verificación de carpetas de datos correctas por plataforma [S]
-- [ ] Definir verificación de firmas de build (hash contra manifest) [S]
-- [ ] Definir prueba de instalación sobre sistema con idioma por defecto no-EN [M]
+- [x] Definir verificación de firmas de build (hash contra manifest) [S]
+- [x] Definir prueba de instalación sobre sistema con idioma por defecto no-EN [M]
 - [ ] Definir prueba de instalación en disco con sín caracteres especiales [S]
 
 ## 6. Actualización funcional (RF3)
@@ -69,12 +69,12 @@
 - [ ] Definir registro de logs de actualización (éxito/fallo) [S]
 - [ ] Definir rollback seguro si la actualización falla [M]
 - [ ] Definir prueba de actualización con red cortada a mitad [M]
-- [ ] Definir prueba de actualización de la build pública Beta a la RC [M]
+- [x] Definir prueba de actualización de la build pública Beta a la RC [M]
 
 ## 7. Saves compatibles (RF4/M59)
 
 - [ ] Definir migración de save v3.x a versión RC sin pérdidas [M]
-- [ ] Definir 30 ciclos de guardar/cargar en la build RC [M]
+- [x] Definir 30 ciclos de guardar/cargar en la build RC [M]
 - [ ] Definir carga de saves de todas las fases previas (pre-Alpha a Beta) [M]
 - [ ] Definir prueba de save corrupto → backup y recuperación (M66) [M]
 - [ ] Definir reporte de versión de save en el manifiesto del usuario [S]
@@ -83,7 +83,7 @@
 
 ## 8. Cloud saves (RF5/M60)
 
-- [ ] Definir sincronización cloud activa en la build RC [M]
+- [x] Definir sincronización cloud activa en la build RC [M]
 - [ ] Definir 30 ciclos de sincronización con latencia simulada [M]
 - [ ] Definir resolución de conflicto "último ganador + backup" [M]
 - [ ] Definir validación de integridad antes de aplicar el save cloud [M]
@@ -105,13 +105,13 @@
 ## 10. Idiomas (RF7/M87)
 
 - [ ] Definir matriz de 6 idiomas × pantallas clave [M]
-- [ ] Definir gate CI de claves sin huecos por idioma [M]
-- [ ] Definir playtest de 30 min por idioma en la build RC [M]
+- [x] Definir gate CI de claves sin huecos por idioma [M]
+- [x] Definir playtest de 30 min por idioma en la build RC [M]
 - [ ] Definir verificación de desbordes de texto por idioma (UI) [M]
 - [ ] Definir verificación de traducción de logros y store (M149) [S]
 - [ ] Definir verificación de fechas/números por idioma [S]
 - [ ] Definir fallback a EN sin claves rotas [S]
-- [ ] Definir identificación de idioma del sistema correcta [S]
+- [x] Definir identificación de idioma del sistema correcta [S]
 
 ## 11. Rendimiento (RF8/M61-M63)
 
@@ -122,7 +122,7 @@
 - [ ] Definir FPS p99 ≥ objetivo en sesiones largas (60+ min) [M]
 - [ ] Definir batching/draw calls finales por zona [M]
 - [ ] Definir informe de rendimiento del piloto (percentiles reales) [M]
-- [ ] Definir gate CI de rendimiento en la build RC [M]
+- [x] Definir gate CI de rendimiento en la build RC [M]
 - [ ] Definir comparativa final mínima vs recomendada [S]
 
 ## 12. Crash rate (RF9/M105)
@@ -130,7 +130,7 @@
 - [ ] Definir objetivo crash rate < 0.5% de sesiones [S]
 - [ ] Definir piloto de 1000 sesiones con invitados [M]
 - [ ] Definir handler de crashes con stacktrace y símbolos (M105) [M]
-- [ ] Definir dashboard de crashes por zona/build [M]
+- [x] Definir dashboard de crashes por zona/build [M]
 - [ ] Definir triaje de crash stacks conocidos vs nuevos [M]
 - [ ] Definir hotfix dirigido si crash rate no baja a objetivo [M]
 - [ ] Definir reporte final de crash rate del piloto [S]
@@ -138,9 +138,9 @@
 
 ## 13. Certificación (RF10/M149)
 
-- [ ] Definir checklist de certificación por plataforma (build, contenido, cloud, edad) [M]
+- [x] Definir checklist de certificación por plataforma (build, contenido, cloud, edad) [M]
 - [ ] Definir revisión de políticas de contenido (violencia/edad) [S]
-- [ ] Definir capturas de la build final para certificación [S]
+- [x] Definir capturas de la build final para certificación [S]
 - [ ] Definir prueba de certificación: instalación, actualización, saves [M]
 - [ ] Definir aprobación firmada por responsable de plataforma [S]
 - [ ] Definir registro de desvíos y excepciones aprobadas [S]
@@ -170,7 +170,7 @@
 
 - [ ] Definir canales de soporte (foros, Discord, correo) activos [M]
 - [ ] Definir FAQ publicada (instalación, saves, plataformas, idiomas) [M]
-- [ ] Definir proceso de reportes versionados por buildId (M101) [M]
+- [x] Definir proceso de reportes versionados por buildId (M101) [M]
 - [ ] Definir SLA de respuesta definido (24 h hábiles) [S]
 - [ ] Definir triaje diario de soporte en lanzamiento [S]
 - [ ] Definir camino de escalado de bugs de soporte a tracker [S]
@@ -180,7 +180,7 @@
 
 - [ ] Definir cronograma día 0 con horas locales por región [M]
 - [ ] Definir responsables de cada tarea del día 0 [S]
-- [ ] Definir runbook: publicar página, publicar build, publicar tráiler, comunicado [M]
+- [x] Definir runbook: publicar página, publicar build, publicar tráiler, comunicado [M]
 - [ ] Definir runbook de incidentes (crash masivo, store caída, cloud) [M]
 - [ ] Definir holgura de 48 h ante imprevistos [S]
 - [ ] Definir aprobación final del plan por el equipo [S]

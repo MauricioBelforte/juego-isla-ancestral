@@ -8,22 +8,22 @@
 ### [S] Especificación de instalador
 - [x] Crear build release
 - [ ] Crear instalador
-- [ ] Definir directorio de instalación
+- [x] Definir directorio de instalación
 - [x] Crear desinstalador
 - [x] Configurar shortcuts si corresponde
 - [x] Configurar asociación de archivos si corresponde
 - [ ] Validar permisos
 - [ ] Validar antivirus
-- [ ] Validar actualizaciones
-- [ ] Validar reparación
-- [ ] Validar desinstalación
-- [ ] Validar instalación limpia
-- [ ] Validar actualización
+- [x] Validar actualizaciones
+- [x] Validar reparación
+- [x] Validar desinstalación
+- [x] Validar instalación limpia
+- [x] Validar actualización
 - [ ] Validar rollback
 
 ### [S] Build release de Godot
 - [ ] Definir Godot 4.x export para Windows Desktop
-- [ ] Definir optimizaciones (optimización de código, compresión de assets)
+- [x] Definir optimizaciones (optimización de código, compresión de assets)
 - [x] Definir preset: Release (no Debug)
 - [ ] Definir arquitectura: x64 (Windows 64-bit)
 - [x] Definir code signing del ejecutable
@@ -44,17 +44,17 @@
 - [ ] Definir WiX Toolset (alternativa)
 - [ ] Definir NSIS (alternativa)
 - [x] Diseñar script de Inno Setup (.iss)
-- [ ] Diseñar wizard step-by-step (Bienvenida → Directorio → Shortcuts → Instalación → Finalización)
-- [ ] Diseñar directorio de instalación predeterminado
-- [ ] Diseñar opciones: desktop shortcut, start menu shortcut, association de files
-- [ ] Diseñar validación de espacio en disco
+- [x] Diseñar wizard step-by-step (Bienvenida → Directorio → Shortcuts → Instalación → Finalización)
+- [x] Diseñar directorio de instalación predeterminado
+- [x] Diseñar opciones: desktop shortcut, start menu shortcut, association de files
+- [x] Diseñar validación de espacio en disco
 - [x] Diseñar validación de requisitos de sistema
 
 ### [S] Directorio de instalación
 - [ ] Definir C:\Program Files\Isla Ancestral (requiere permisos)
 - [ ] Definir C:\Users\Usuario\AppData\Local\Isla Ancestral (sin permisos)
 - [x] Diseñar Inno Setup permite elegir directorio de instalación
-- [ ] Diseñar validación de espacio en disco
+- [x] Diseñar validación de espacio en disco
 - [x] Diseñar validación de requisitos de sistema
 
 ### [S] Desinstalador
@@ -68,26 +68,26 @@
 - [x] Diseñar desinstalador accesible desde Start Menu
 
 ### [S] Shortcuts
-- [ ] Definir shortcut en escritorio (opcional)
-- [ ] Definir shortcut en menú de inicio (carpeta Isla Ancestral)
+- [x] Definir shortcut en escritorio (opcional)
+- [x] Definir shortcut en menú de inicio (carpeta Isla Ancestral)
 - [x] Definir shortcut de desinstalador en menú de inicio
 - [x] Diseñar Inno Setup crea shortcuts automáticamente
 - [ ] Diseñar usuario puede elegir si crear shortcut en escritorio
 - [ ] Diseñar shortcuts tienen icono del juego
 
 ### [S] Asociación de archivos
-- [ ] Definir asociación para savegames (.island)
+- [x] Definir asociación para savegames (.island)
 - [x] Definir asociación para configuración (.config)
 - [x] Diseñar Inno Setup permite asociación de archivos
 - [x] Diseñar asociación escrita en registro de Windows
-- [ ] Diseñar asociación con icono específico
+- [x] Diseñar asociación con icono específico
 
 ### [S] Validación de permisos
-- [ ] Definir instalación en C:\Program Files requiere permisos de administrador
-- [ ] Definir instalación en AppData no requiere permisos de administrador
+- [x] Definir instalación en C:\Program Files requiere permisos de administrador
+- [x] Definir instalación en AppData no requiere permisos de administrador
 - [x] Diseñar Inno Setup solicita permisos de administrador automáticamente
-- [ ] Diseñar UAC de Windows solicita confirmación al usuario
-- [ ] Diseñar validación de permisos antes de iniciar instalación
+- [x] Diseñar UAC de Windows solicita confirmación al usuario
+- [x] Diseñar validación de permisos antes de iniciar instalación
 
 ### [S] Validación de antivirus
 - [ ] Definir firma digital del ejecutable del juego (.exe)
@@ -106,18 +106,18 @@
 - [x] Definir instalador conserva savegames y configuración
 - [x] Diseñar Inno Setup soporta actualizaciones
 - [x] Diseñar detección de versión instalada (registro de Windows)
-- [ ] Diseñar actualización incremental (solo archivos modificados)
+- [x] Diseñar actualización incremental (solo archivos modificados)
 - [x] Diseñar conservación de datos del usuario (savegames, configuración)
 
 ### [S] Validación de reparación
-- [ ] Definir instalador puede reparar instalación corrupta
-- [ ] Definir reparación reinstala archivos corruptos
+- [x] Definir instalador puede reparar instalación corrupta
+- [x] Definir reparación reinstala archivos corruptos
 - [x] Definir reparación conserva savegames y configuración
-- [ ] Definir reparación accesible desde Panel de Control
+- [x] Definir reparación accesible desde Panel de Control
 - [x] Diseñar Inno Setup soporta reparación
-- [ ] Diseñar validación de integridad de archivos
-- [ ] Diseñar reinstalación de archivos corruptos
-- [ ] Diseñar conservación de datos del usuario
+- [x] Diseñar validación de integridad de archivos
+- [x] Diseñar reinstalación de archivos corruptos
+- [x] Diseñar conservación de datos del usuario
 
 ### [S] Validación de desinstalación
 - [x] Definir desinstalador elimina todos los archivos del juego
@@ -131,34 +131,34 @@
 - [x] Diseñar desinstalador puede conservar savegames y configuración (opcional)
 
 ### [S] Validación de instalación limpia
-- [ ] Definir instalación funciona en máquina sin el juego
-- [ ] Definir instalación no requiere dependencias externas
+- [x] Definir instalación funciona en máquina sin el juego
+- [x] Definir instalación no requiere dependencias externas
 - [x] Definir instalación valida requisitos de sistema (Windows 10/11, GPU, RAM)
 - [x] Definir instalación muestra error si requisitos no se cumplen
-- [ ] Diseñar validación de sistema operativo (Windows 10/11)
-- [ ] Diseñar validación de GPU (DirectX 11 compatible)
-- [ ] Diseñar validación de RAM (mínimo 8GB)
-- [ ] Diseñar validación de espacio en disco (mínimo 5GB)
+- [x] Diseñar validación de sistema operativo (Windows 10/11)
+- [x] Diseñar validación de GPU (DirectX 11 compatible)
+- [x] Diseñar validación de RAM (mínimo 8GB)
+- [x] Diseñar validación de espacio en disco (mínimo 5GB)
 
 ### [S] Validación de actualización
-- [ ] Definir actualización desde versión X a versión Y funciona
+- [x] Definir actualización desde versión X a versión Y funciona
 - [x] Definir actualización conserva savegames y configuración
-- [ ] Definir actualización actualiza shortcuts y asociación de archivos
+- [x] Definir actualización actualiza shortcuts y asociación de archivos
 - [x] Definir actualización actualiza entradas de registro
 - [x] Diseñar detección de versión instalada (registro de Windows)
-- [ ] Diseñar actualización incremental (solo archivos modificados)
-- [ ] Diseñar conservación de datos del usuario
-- [ ] Diseñar actualización de shortcuts y asociación de archivos
+- [x] Diseñar actualización incremental (solo archivos modificados)
+- [x] Diseñar conservación de datos del usuario
+- [x] Diseñar actualización de shortcuts y asociación de archivos
 
 ### [S] Validación de rollback
-- [ ] Definir rollback a versión anterior funciona si actualización falla
+- [x] Definir rollback a versión anterior funciona si actualización falla
 - [ ] Definir rollback restaura versión anterior del juego
 - [x] Definir rollback conserva savegames y configuración
 - [ ] Definir rollback accesible desde Panel de Control
 - [x] Diseñar backup de versión anterior antes de actualizar
-- [ ] Diseñar rollback automático si actualización falla
-- [ ] Diseñar restauración de versión anterior
-- [ ] Diseñar conservación de datos del usuario
+- [x] Diseñar rollback automático si actualización falla
+- [x] Diseñar restauración de versión anterior
+- [x] Diseñar conservación de datos del usuario
 
 ### [S] Script de Inno Setup
 - [x] Diseñar [Setup] con AppName, AppVersion, DefaultDirName, etc.
@@ -170,39 +170,39 @@
 - [x] Diseñar [UninstallDelete] con Type, Name
 
 ### [S] Validación de requisitos de sistema
-- [ ] Diseñar función IsWindows10Or11()
-- [ ] Diseñar función IsDirectX11Available()
-- [ ] Diseñar función HasEnoughRAM()
-- [ ] Diseñar función HasEnoughDiskSpace()
+- [x] Diseñar función IsWindows10Or11()
+- [x] Diseñar función IsDirectX11Available()
+- [x] Diseñar función HasEnoughRAM()
+- [x] Diseñar función HasEnoughDiskSpace()
 - [x] Diseñar función InitializeSetup()
-- [ ] Diseñar validación de Windows 10/11
-- [ ] Diseñar validación de DirectX 11 compatible
-- [ ] Diseñar validación de RAM (mínimo 8GB)
-- [ ] Diseñar validación de espacio en disco (mínimo 5GB)
+- [x] Diseñar validación de Windows 10/11
+- [x] Diseñar validación de DirectX 11 compatible
+- [x] Diseñar validación de RAM (mínimo 8GB)
+- [x] Diseñar validación de espacio en disco (mínimo 5GB)
 
 ### [S] Actualización incremental
 - [x] Diseñar función GetInstalledVersion()
-- [ ] Diseñar función IsUpdate()
+- [x] Diseñar función IsUpdate()
 - [ ] Diseñar procedimiento CurStepChanged()
 - [x] Diseñar detección de versión instalada (registro de Windows)
-- [ ] Diseñar actualización incremental (solo archivos modificados)
-- [ ] Diseñar conservación de datos del usuario
-- [ ] Diseñar actualización de shortcuts y asociación de archivos
+- [x] Diseñar actualización incremental (solo archivos modificados)
+- [x] Diseñar conservación de datos del usuario
+- [x] Diseñar actualización de shortcuts y asociación de archivos
 
 ### [S] Reparación de instalación corrupta
 - [x] Diseñar función ValidateFileIntegrity()
 - [x] Diseñar procedimiento RepairInstallation()
-- [ ] Diseñar validación de integridad de archivos
-- [ ] Diseñar reinstalación de archivos corruptos
-- [ ] Diseñar conservación de datos del usuario
+- [x] Diseñar validación de integridad de archivos
+- [x] Diseñar reinstalación de archivos corruptos
+- [x] Diseñar conservación de datos del usuario
 
 ### [S] Rollback a versión anterior
 - [x] Diseñar procedimiento BackupPreviousVersion()
 - [ ] Diseñar procedimiento RollbackToPreviousVersion()
 - [x] Diseñar backup de versión anterior antes de actualizar
-- [ ] Diseñar rollback automático si actualización falla
-- [ ] Diseñar restauración de versión anterior
-- [ ] Diseñar conservación de datos del usuario
+- [x] Diseñar rollback automático si actualización falla
+- [x] Diseñar restauración de versión anterior
+- [x] Diseñar conservación de datos del usuario
 
 ### [S] Code signing
 - [x] Diseñar script code_signing.bat
@@ -223,7 +223,7 @@
 - [ ] Diseñar icono para el ejecutable
 - [ ] Diseñar icono para el instalador
 - [ ] Diseñar icono para shortcuts
-- [ ] Diseñar resoluciones: 16x16, 32x32, 48x48, 64x64, 256x256
+- [x] Diseñar resoluciones: 16x16, 32x32, 48x48, 64x64, 256x256
 
 ### [S] Archivos de implementación
 - [x] Diseñar installer/IslaAncestral.iss
@@ -237,12 +237,12 @@
 - [ ] Diseñar license.txt
 
 ### [S] Pruebas de instalación
-- [ ] Diseñar prueba de instalación limpia en máquina sin el juego
-- [ ] Diseñar prueba de actualización desde versión anterior
-- [ ] Diseñar prueba de reparación de instalación corrupta
+- [x] Diseñar prueba de instalación limpia en máquina sin el juego
+- [x] Diseñar prueba de actualización desde versión anterior
+- [x] Diseñar prueba de reparación de instalación corrupta
 - [x] Diseñar prueba de desinstalación completa
-- [ ] Diseñar prueba de shortcuts (escritorio, menú de inicio)
-- [ ] Diseñar prueba de asociación de archivos
+- [x] Diseñar prueba de shortcuts (escritorio, menú de inicio)
+- [x] Diseñar prueba de asociación de archivos
 - [x] Diseñar prueba de validación de requisitos de sistema
 - [x] Diseñar prueba de validación de antivirus (code signing)
 - [ ] Diseñar prueba de rollback a versión anterior

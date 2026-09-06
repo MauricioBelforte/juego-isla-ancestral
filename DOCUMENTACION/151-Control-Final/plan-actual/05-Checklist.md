@@ -18,7 +18,7 @@
 - [ ] Definir acta firmada por producción y QA [S]
 - [ ] Definir índice de documentos administrativos en el acta [S]
 - [ ] Definir traspaso de ⚠ a la hoja de ruta de M144 [S]
-- [ ] Definir auditoría sin implementación (solo certificación) [S]
+- [x] Definir auditoría sin implementación (solo certificación) [S]
 
 ## 2. Identidad propia (P1)
 
@@ -130,7 +130,7 @@
 - [ ] Definir verificación de estilo unificado entre islas [M]
 - [ ] Definir screenshot por zona para el acta (6+1) [S]
 - [ ] Definir verificación de contraste de UI coherente (M58) [S]
-- [ ] Definir verificación de no assets placeholder en build final [S]
+- [x] Definir verificación de no assets placeholder en build final [S]
 
 ## 16. Voxels técnicamente eficientes (P15)
 
@@ -158,7 +158,7 @@
 
 ## 19. Accesibilidad contemplada (P18)
 
-- [ ] Definir checklist M58 100% verificado en build final [M]
+- [x] Definir checklist M58 100% verificado en build final [M]
 - [ ] Definir verificación de remapeo, subtítulos y modos de color [M]
 - [ ] Definir verificación de reduce motion/flashing [S]
 - [ ] Definir verificación de tamaño de texto 150% [S]
@@ -166,7 +166,7 @@
 
 ## 20. Localización contemplada (P19)
 
-- [ ] Definir checklist M87 100% verificado en build final [M]
+- [x] Definir checklist M87 100% verificado en build final [M]
 - [ ] Definir verificación de 6 idiomas sin claves rotas [M]
 - [ ] Definir verificación de subtítulos y textos UI por idioma [M]
 - [ ] Definir verificación de fechas/formatos por idioma [S]
@@ -202,7 +202,7 @@
 - [ ] Definir verificación de capturas finales cargadas [S]
 - [ ] Definir verificación de requisitos correctos [S]
 - [ ] Definir verificación de enlaces a soporte/canales en la página [S]
-- [ ] Definir verificación de descuento/pre-venta configurados (si aplica) [S]
+- [x] Definir verificación de descuento/pre-venta configurados (si aplica) [S]
 
 ## 25. Soporte preparado (P24)
 

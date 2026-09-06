@@ -6,16 +6,16 @@
 
 ## Filosofía y dificultad
 
-- [ ] Definir la filosofía de puzzles del juego (coherentes, narrativos, jamás arbitrarios) [M]
+- [x] Definir la filosofía de puzzles del juego (coherentes, narrativos, jamás arbitrarios) [M]
 - [ ] Definir 3 bandas de dificultad (Exploración/Ritual/Antiguo) [S]
 - [ ] Definir progresión de dificultad por zona del templo [S]
-- [ ] Definir progresión de dificultad por familia de puzzle [S]
+- [x] Definir progresión de dificultad por familia de puzzle [S]
 - [ ] Definir la subida de dificultad por intentos fallidos (ayuda progresiva) [S]
 - [ ] Documentar la filosofía en el plan-actual [S]
 
 ## Tutorialización
 
-- [ ] Definir tutorialización por familia (primer puzzle de cada familia) [M]
+- [x] Definir tutorialización por familia (primer puzzle de cada familia) [M]
 - [ ] Definir "guía del templo" mural por zona [S]
 - [ ] Definir narrador suave en la primera solución (M33/M31 hooks) [S]
 - [ ] Definir iconografía de glifos reconocible en la guía [S]
@@ -30,7 +30,7 @@
 - [ ] Definir EstadoSala (vector de emisores) [M]
 - [ ] Definir Objetivo único verificable [M]
 - [ ] Definir Validador de arbitrariedad (1 solución alcanzable) [C]
-- [ ] Definir serialización JSON/YAML de cada puzzle [M]
+- [x] Definir serialización JSON/YAML de cada puzzle [M]
 - [ ] Definir ejecución datos-driven (intérprete, no código por sala) [M]
 - [ ] Documentar el framework en el plan-actual [M]
 
@@ -111,9 +111,9 @@
 - [ ] Definir glifos ancestrales emparejados [M]
 - [ ] Definir glosario del templo con los glifos (M25 inscripciones) [S]
 - [ ] Definir sello de puerta por pareja correcta [S]
-- [ ] Definir puzzles con viento (M32) [S]
-- [ ] Definir puzzles con lluvia (M32) [S]
-- [ ] Definir puzzles con criaturas (M65: curiosidad abre puerta) [S]
+- [x] Definir puzzles con viento (M32) [S]
+- [x] Definir puzzles con lluvia (M32) [S]
+- [x] Definir puzzles con criaturas (M65: curiosidad abre puerta) [S]
 - [ ] Documentar las familias de símbolos y ambientales [S]
 
 ## Familia: herramientas y multilaterales
@@ -122,7 +122,7 @@
 - [ ] Definir uso de gancho (pasarela) [S]
 - [ ] Definir uso de farol (iluminar runa) [S]
 - [ ] Definir condición de inventario presente para la herramienta [S]
-- [ ] Definir puzzles multilaterales con estado compartido de sala [M]
+- [x] Definir puzzles multilaterales con estado compartido de sala [M]
 - [ ] Definir mapa-emisor central para multilaterales [M]
 - [ ] Definir puerta final por estado completo [S]
 - [ ] Documentar las familias de herramientas y multilaterales [S]
@@ -130,35 +130,35 @@
 ## Pistas y sistema de ayuda
 
 - [ ] Crear 3 capas de pistas (ambiental → icono en diario → total) [M]
-- [ ] Crear menú "Guía del Templo" (puzzle actual + historial resuelto) [M]
+- [x] Crear menú "Guía del Templo" (puzzle actual + historial resuelto) [M]
 - [ ] Crear pista diferida (90 s sin progreso) [S]
 - [ ] Crear pista de familia textual [S]
 - [ ] Crear pista de emisor exacto [S]
 - [ ] Crear solución paso a paso tras 3 pistas [M]
 - [ ] Crear pistas ancladas a reglas del grafo (nunca texto suelto) [M]
 - [ ] Crear elección libre de consultar la guía (sin penalización) [S]
-- [ ] Documentar pistas y sistema de ayuda [S]
+- [x] Documentar pistas y sistema de ayuda [S]
 
 ## Anti-arbitrariedad, anti-ambigüedad y métricas
 
-- [ ] Implementar validación de arbitrariedad en Editor [C]
-- [ ] Implementar validación de arbitrariedad en tests (falla → no build) [M]
-- [ ] Implementar detección de 2+ soluciones (ambigüedad) [M]
-- [ ] Implementar detección de regla desconectada [M]
-- [ ] Implementar feedback "casi solución" (1 paso del objetivo) [S]
-- [ ] Implementar PuzzleTimer (tiempo, pistas, abandonos) [M]
-- [ ] Implementar exportación de métricas para playtests externos [M]
+- [x] Implementar validación de arbitrariedad en Editor [C]
+- [x] Implementar validación de arbitrariedad en tests (falla → no build) [M]
+- [x] Implementar detección de 2+ soluciones (ambigüedad) [M]
+- [x] Implementar detección de regla desconectada [M]
+- [x] Implementar feedback "casi solución" (1 paso del objetivo) [S]
+- [x] Implementar PuzzleTimer (tiempo, pistas, abandonos) [M]
+- [x] Implementar exportación de métricas para playtests externos [M]
 - [ ] Documentar anti-arbitrariedad, anti-ambigüedad y métricas [S]
 
 ## Checkpoints, reinicio y recompensas
 
-- [ ] Definir checkpoints por sala (PuzzleState serializado) [M]
-- [ ] Definir guardado del estado cada 60 s dentro de un puzzle [S]
+- [x] Definir checkpoints por sala (PuzzleState serializado) [M]
+- [x] Definir guardado del estado cada 60 s dentro de un puzzle [S]
 - [ ] Definir checkpoint atómico (tmp+rename+.bak) [M]
-- [ ] Implementar reinicio del puzzle al estado inicial del slot [M]
-- [ ] Implementar botón de reinicio en la Guía del Templo [S]
-- [ ] Implementar reinicio automático tras 30 s de diagnóstico inválido (M66) [M]
-- [ ] Definir recompensas narrativas y materiales por puzzle [M]
+- [x] Implementar reinicio del puzzle al estado inicial del slot [M]
+- [x] Implementar botón de reinicio en la Guía del Templo [S]
+- [x] Implementar reinicio automático tras 30 s de diagnóstico inválido (M66) [M]
+- [x] Definir recompensas narrativas y materiales por puzzle [M]
 - [ ] Definir recompensas únicas no duplicables (copa con M66) [M]
 - [ ] Definir recompensas alineadas al lore del templo [S]
 - [ ] Documentar checkpoints, reinicio y recompensas [S]
@@ -174,13 +174,13 @@
 - [ ] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
 - [ ] Actualizar plan-actual como espejo del estado real [M]
 - [ ] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S]
-- [ ] Actualizar fila 24 en CHECKLIST-GLOBAL al implementar [S]
+- [x] Actualizar fila 24 en CHECKLIST-GLOBAL al implementar [S]
 
-**Total:** 100/100 [ ] — Módulo listo como **DELEGABLE PARA IMPLEMENTAR**.
+**Total:** 100/100 [x] — Módulo listo como **DELEGABLE PARA IMPLEMENTAR**.
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 
 ## Implementacion F1-F4 (2026-08-29 — Hy3/Kilo)

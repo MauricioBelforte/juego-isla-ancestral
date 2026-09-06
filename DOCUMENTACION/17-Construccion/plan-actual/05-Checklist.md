@@ -37,8 +37,8 @@
 
 ## B. Resolución de los 28 puntos de la sección 16 del plan maestro (28)
 
-- [ ] P1: modo construcción — estado de jugador + BuildManager, mundo vivo sin pausa dura [S]
-- [ ] P2: modo decoración — mismo sistema con catálogo filtrado a muebles y decoración [S]
+- [x] P1: modo construcción — estado de jugador + BuildManager, mundo vivo sin pausa dura [S]
+- [x] P2: modo decoración — mismo sistema con catálogo filtrado a muebles y decoración [S]
 - [ ] P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S]
 - [ ] P4: snapping — ajuste de posición y rotación (90°) a la celda más cercana [S]
 - [ ] P5: rotación — pasos de 90° en Y persistidos como entero 0-3 [S]
@@ -48,8 +48,8 @@
 - [ ] P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S]
 - [ ] P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S]
 - [ ] P11: demolición — confirmación suave y retiro de la pieza del mundo [S]
-- [ ] P12: devolución de materiales — fracción configurable por receta (default 50%) [S]
-- [ ] P13: vista previa — BuildGhost con color de estado, costo y motivos de error en HUD [S]
+- [x] P12: devolución de materiales — fracción configurable por receta (default 50%) [S]
+- [x] P13: vista previa — BuildGhost con color de estado, costo y motivos de error en HUD [S]
 - [ ] P14: objetos inválidos — toda regla fallida bloquea la colocación con motivo [S]
 - [ ] P15: colisiones — piezas con colisión estática real; puertas con hueco navegable [S]
 - [ ] P16: restricciones — reglas por pieza, topes por zona, alturas y parcelas ajenas [S]
@@ -116,7 +116,7 @@
 - [ ] Al mover, los recursos no se re-cobran (solo se reubican) [M]
 - [ ] Almacenar requiere inventario con espacio libre (M14) [M]
 - [ ] Demolición con ventana de confirmación y preview de lo que se devuelve [M]
-- [ ] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C]
+- [x] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C]
 
 ## G. Validación y reglas de colocación (BuildValidator) (12)
 
@@ -149,7 +149,7 @@
 - [ ] Costo declarado por receta como diccionario item_id → cantidad [S]
 - [ ] Verificación de recursos durante la preview: fantasma rojo con motivo al fallar [M]
 - [ ] Descuento atómico al confirmar (nunca descuenta sin colocar) [M]
-- [ ] Devolución parcial configurable por receta al demoler (default 50%) [M]
+- [x] Devolución parcial configurable por receta al demoler (default 50%) [M]
 - [ ] Devolución exacta al deshacer (undo restaura todos los recursos consumidos) [M]
 - [ ] El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M]
 - [ ] Los stacks de M14 se agrupan al devolver materiales sobrantes [S]
@@ -204,11 +204,11 @@
 
 - [ ] Dirty flags por chunk: solo se regeneran los chunks tocados por la pieza [C]
 - [ ] Sin regeneración global de mesh del mundo al construir [C]
-- [ ] BuildGhost con pooling: cero alocaciones en el tick de preview [M]
+- [x] BuildGhost con pooling: cero alocaciones en el tick de preview [M]
 - [ ] Raycast de colocación limitado a 1 por frame con cache de celda [M]
 - [ ] Ocupación consultada en mapa de celdas en memoria (diccionario) [M]
 - [ ] Materiales de pieza compartidos entre instancias (static batching de Godot) [M]
-- [ ] Límite suave de piezas por zona (configurable) con aviso al jugador [M]
+- [x] Límite suave de piezas por zona (configurable) con aviso al jugador [M]
 - [ ] Presupuesto medido con profiler: preview <= 1 ms por frame (M113) [C]
 
 ## N. Documentación (6)
@@ -216,7 +216,7 @@
 - [ ] 01-Requerimientos.md creado con problema, RF, NFR y criterios de aceptación [S]
 - [ ] 02-Analisis.md creado con resolución de los 28 puntos y decisiones justificadas [S]
 - [ ] 03-Diseno.md creado con arquitectura, flujos, contratos API e integraciones [S]
-- [ ] 04-Codigo.md creado con archivos propuestos, firmas GDScript y logs [S]
+- [x] 04-Codigo.md creado con archivos propuestos, firmas GDScript y logs [S]
 - [ ] 05-Checklist.md creado con 110+ ítems firmados (este archivo) [S]
 - [ ] Copias idénticas de los 5 archivos en plan-actual/ para seguimiento futuro [S]
 
@@ -233,7 +233,7 @@
 
 ## P. Testings y QA (8)
 
-- [ ] Unit tests de BuildValidator: ocupación, soporte, zonas, reglas por pieza [C]
+- [x] Unit tests de BuildValidator: ocupación, soporte, zonas, reglas por pieza [C]
 - [ ] Unit tests de costos: descuento, devolución y undo con recursos exactos [C]
 - [ ] Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C]
 - [ ] Tests de integración: la navmesh se actualiza con puertas y obras (M64) [C]
@@ -244,4 +244,4 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

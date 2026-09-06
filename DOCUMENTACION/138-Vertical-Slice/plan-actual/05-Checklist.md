@@ -159,9 +159,9 @@
 
 ## T. Arquitectura y Modularidad (M07)
 
-- [ ] Definir que el slice use autoloads centrales (game_state_vs, save_v2, audio_manager) [M]
-- [ ] Definir separación de scripts UI / gameplay [M]
-- [ ] Definir que los sistemas del slice sean enmarcables al juego completo [C]
+- [x] Definir que el slice use autoloads centrales (game_state_vs, save_v2, audio_manager) [M]
+- [x] Definir separación de scripts UI / gameplay [M]
+- [x] Definir que los sistemas del slice sean enmarcables al juego completo [C]
 - [ ] Definir convenciones de nombres (`*_vs.gd`, `vslice_*`) [S]
 - [ ] Definir que la deuda técnica se registre sin silenciarla [S]
 
@@ -175,7 +175,7 @@
 
 ## V. Feedback de la Dema (feedback externo)
 
-- [ ] Definir demo interna (Steam/itch/build M116) [M]
+- [x] Definir demo interna (Steam/itch/build M116) [M]
 - [ ] Definir guía de feedback para testers externos [S]
 - [ ] Definir registro de primeras reacciones (video) [S]
 - [ ] Definir recolectar métricas opcionales de la demo (M105 esbozo) [M]
@@ -191,16 +191,16 @@
 
 ## X. Calidad de Código (M111)
 
-- [ ] Definir que los scripts pasen análisis estático [M]
+- [x] Definir que los scripts pasen análisis estático [M]
 - [ ] Definir const/export para valores repetidos [S]
-- [ ] Definir comentarios XML de clases públicas [S]
-- [ ] Definir sin warnings de GDScript en el slice [M]
-- [ ] Definir revisión de código del slice (code review M111) [M]
+- [x] Definir comentarios XML de clases públicas [S]
+- [x] Definir sin warnings de GDScript en el slice [M]
+- [x] Definir revisión de código del slice (code review M111) [M]
 
 ## Y. Documentación del Slice
 
 - [ ] Definir `docs/vslice/` con PLAYTEST, REPORTE-FPS, GONOGO-M139, IDEAS-DESCARTADAS [S]
-- [ ] Definir actualización del 04-Codigo.md del módulo tras implementar [M]
+- [x] Definir actualización del 04-Codigo.md del módulo tras implementar [M]
 - [ ] Definir actualización de CHECKLIST-GLOBAL al cerrar [S]
 - [ ] Definir log de cierre del hito en Logs/ [S]
 - [ ] Definir firma de cierre por todos los agentes que intervinieron [S]
@@ -210,9 +210,9 @@
 - [ ] Definir tag git `vslice-v1` [S]
 - [ ] Definir empaquetado de la demo (M116/M117) [M]
 - [ ] Definir actualización del presupuesto con datos reales (M134) [M]
-- [ ] Definir lista de sistemas a escalar en Pre-Alpha (M139) [M]
+- [x] Definir lista de sistemas a escalar en Pre-Alpha (M139) [M]
 - [ ] Definir comunicar al usuario la decisión y próximo hito [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

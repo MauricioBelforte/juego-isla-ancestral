@@ -95,13 +95,13 @@
 - [ ] Servir localmente con python -m http.server 8080 [S]
 - [ ] Navegar con skill webapp-testing a localhost:8080 [S]
 - [ ] Esperar carga WASM correctamente (networkidle + timeout) [M]
-- [ ] Capturar primer screenshot del juego en navegador [S]
-- [ ] Verificar similitud visual razonable vs build desktop [M]
+- [x] Capturar primer screenshot del juego en navegador [S]
+- [x] Verificar similitud visual razonable vs build desktop [M]
 - [ ] Probar interacción: click/tecla mueve al personaje [M]
 - [x] Crear carpeta Logs/screenshots/ con .gitkeep [S]
 - [ ] Guardar captura con convención YYYY-MM-DD_HH-MM-SS_via_descripcion.png [S]
 - [ ] Documentar diferencias conocidas WebGL vs desktop [S]
-- [ ] Preparar script reutilizable del pipeline completo [M]
+- [x] Preparar script reutilizable del pipeline completo [M]
 - [ ] Conectar pipeline con job de CI (M118) para regresión visual [C]
 
 ## G. Escena de preview de personaje (8)
@@ -111,7 +111,7 @@
 - [ ] Luz de 3 puntos key/fill/rim estandarizada [M]
 - [ ] Cámara fija con encuadre documentado [S]
 - [ ] Slot para modelo voxel intercambiable [M]
-- [ ] Botón/tecla de captura directa a Logs/screenshots/ [M]
+- [x] Botón/tecla de captura directa a Logs/screenshots/ [M]
 - [ ] Integrar escena con Debug Menu (M110) si aplica [S]
 - [ ] Documentar uso de la escena en este módulo [S]
 
@@ -167,11 +167,11 @@
 - [x] Test get_scene_info: devuelve estructura real de escena (success, 3 objetos, 2 materiales — 2026-08-24) [S]
 - [x] Crear guía maestra de conexión de visión: `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (archivo 06 global, referenciada desde AGENTS.md sección 25) [S]
 - [x] Test get_viewport_screenshot: imagen legible con colores reales (verificada 2026-08-24 — requiere parámetro `filepath`; esfera naranja vista y validada por el agente) [M]
-- [ ] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M]
-- [ ] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M]
-- [ ] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C]
+- [x] Crear scripts/blender/setup_estudio.py (luz 3 puntos + cámara + fondo) [M]
+- [x] Crear scripts/blender/personaje_voxel.py (generador paramétrico) [M]
+- [x] Iterar primer NPC completo end-to-end con screenshots hasta aprobación del usuario [C]
 - [ ] Exportar personaje aprobado a .glb e importarlo en Godot [M]
-- [ ] Documentar versiones exactas instaladas (Blender, blender-mcp, commit) [S]
+- [x] Documentar versiones exactas instaladas (Blender, blender-mcp, commit) [S]
 
 ## J. Documentación y cierre (10)
 

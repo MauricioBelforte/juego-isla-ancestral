@@ -114,7 +114,7 @@
 - [ ] Definir carpeta characters/ (jugador) [S]
 - [ ] Definir carpeta npc/ (aldeanos M19) [S]
 - [ ] Definir carpeta animals/ (fauna M36) [S]
-- [ ] Definir carpeta buildings/ (casas M18) [S]
+- [x] Definir carpeta buildings/ (casas M18) [S]
 - [ ] Definir carpeta furniture/ (muebles) [S]
 - [ ] Definir carpeta tools/ (herramientas M13) [S]
 - [ ] Definir carpeta vehicles/ (barcos M67, carretas) [S]
@@ -127,14 +127,14 @@
 
 ## N. RF13 — Catálogo de assets
 
-- [ ] Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]
+- [x] Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]
 - [ ] Definir estados: planned → made → reviewed → imported [S]
 - [ ] Definir consultas por categoría y bioma [S]
 - [ ] Documentar que el runtime usa el catálogo, nunca paths directos [M]
 
 ## O. RF14 — Validación automática
 
-- [ ] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
+- [x] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
 - [ ] Verificar escala 1:1 (< 1e-3) [S]
 - [ ] Verificar techos de tris por categoría [S]
 - [ ] Verificar topología (n-gons, vértices duplicados) [S]
@@ -171,7 +171,7 @@
 ## T. Requisitos no funcionales
 
 - [ ] Coherencia visual entre islas y artistas (guía única + review) [M]
-- [ ] Rendimiento: techos verificados por script, LOD por distancia [M]
+- [x] Rendimiento: techos verificados por script, LOD por distancia [M]
 - [ ] Mantenibilidad: kit modular, variantes, catálogo central [M]
 - [ ] Herramienta gratuita: Blender sin costos de licencia [S]
 - [ ] Compatibilidad Godot: glTF 2.0 bien formado [M]
@@ -219,7 +219,7 @@
 - [ ] Documentar flujo del validador (check acumulado de errores) [M]
 - [ ] Documentar uso de blender-mcp y IA como base con review humana [M]
 - [ ] Documentar convención de no embeker texturas en .glb [M]
-- [ ] Documentar configuración de PBR Metallic-Roughness y resolución 2K máx [M]
+- [x] Documentar configuración de PBR Metallic-Roughness y resolución 2K máx [M]
 
 ## Y. Criterios de aceptación verificados
 
@@ -227,17 +227,17 @@
 - [ ] Personaje 1.8 m con punto de apoyo en grilla voxel [M]
 - [ ] Conteo de tris por categoría menor o igual a la tabla RF4 [M]
 - [ ] Prop con UVs fuera de padding o n-gons rechazado con mensaje accionable [M]
-- [ ] Edificio >500 tris con LOD1/LOD2 configurados [M]
-- [ ] Variantes de color implementadas como material (no malla duplicada) [M]
+- [x] Edificio >500 tris con LOD1/LOD2 configurados [M]
+- [x] Variantes de color implementadas como material (no malla duplicada) [M]
 - [ ] Kit modular arma una casa M17 sin piezas nuevas [M]
 - [ ] Assets del catálogo cumplen M108 y Git LFS [M]
 
 ## Z. Notas finales
 
 - [ ] Documentar el desfase de numeración entre plan maestro (44=ARTE 3D) y tabla global (45=Arte 3D) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

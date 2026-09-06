@@ -7,62 +7,62 @@
 
 ### [S] Especificación de community management
 - [ ] Crear reglas comunitarias
-- [ ] Crear moderación
+- [x] Crear moderación
 - [x] Crear sistema de reportes
 - [x] Crear canales de feedback
 - [ ] Crear roadmap público si conviene
 - [ ] Crear changelog público
 - [ ] Responder dudas
 - [ ] Identificar bugs reportados
-- [ ] Recopilar sugerencias
+- [x] Recopilar sugerencias
 - [ ] Evitar promesas imposibles
 - [ ] Gestionar expectativas
 - [ ] Gestionar críticas
 - [ ] Gestionar contenido tóxico
 - [ ] Gestionar spoilers
-- [ ] Gestionar filtraciones
-- [ ] Gestionar impersonación
+- [x] Gestionar filtraciones
+- [x] Gestionar impersonación
 - [ ] Gestionar copyright claims
 
 ### [S] Reglas comunitarias
-- [ ] Definir principios fundamentales (respeto, inclusividad, comunicación constructiva)
-- [ ] Definir regla 1: sin contenido tóxico, discriminación o acoso
+- [x] Definir principios fundamentales (respeto, inclusividad, comunicación constructiva)
+- [x] Definir regla 1: sin contenido tóxico, discriminación o acoso
 - [ ] Definir regla 2: spoilers deben etiquetarse correctamente
 - [ ] Definir regla 3: contenido NSFW está prohibido
-- [ ] Definir regla 4: no spam ni autopromoción excesiva
+- [x] Definir regla 4: no spam ni autopromoción excesiva
 - [ ] Definir regla 5: respetar derechos de autor
-- [ ] Definir regla 6: no impersonar desarrolladores oficiales
+- [x] Definir regla 6: no impersonar desarrolladores oficiales
 - [ ] Definir regla 7: expectativas realistas sobre el desarrollo
 - [ ] Definir regla 8: feedback constructivo es bienvenido
-- [ ] Definir consecuencias (advertencia, mute, ban)
-- [ ] Definir sistema de apelación para bans injustificados
+- [x] Definir consecuencias (advertencia, mute, ban)
+- [x] Definir sistema de apelación para bans injustificados
 - [ ] Diseñar documento de reglas (rules.md)
-- [ ] Diseñar publicación de reglas en Discord
+- [x] Diseñar publicación de reglas en Discord
 - [x] Diseñar publicación de reglas en Steam Community Hub
-- [ ] Diseñar publicación de reglas en redes sociales
+- [x] Diseñar publicación de reglas en redes sociales
 
 ### [S] Sistema de moderación
 - [ ] Definir rol Admin (control total, puede banear, gestionar roles)
 - [x] Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)
-- [ ] Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)
+- [x] Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)
 - [x] Definir rol Usuario (puede reportar contenido, participar en canales)
 - [ ] Definir permisos por rol
-- [ ] Diseñar sistema de logs de acciones (ban, mute, kick)
-- [ ] Diseñar sistema de apelación para bans injustificados
+- [x] Diseñar sistema de logs de acciones (ban, mute, kick)
+- [x] Diseñar sistema de apelación para bans injustificados
 - [x] Diseñar configuración de roles en Discord (roles.json)
 - [x] Diseñar implementación de roles en Steam (moderators)
 
 ### [S] Sistema de reportes
-- [ ] Definir categoría: contenido tóxico (acoso, discriminación, spam)
+- [x] Definir categoría: contenido tóxico (acoso, discriminación, spam)
 - [ ] Definir categoría: spoilers no etiquetados
 - [ ] Definir categoría: NSFW inapropiado
-- [ ] Definir categoría: impersonación
+- [x] Definir categoría: impersonación
 - [ ] Definir categoría: copyright infringement
-- [ ] Definir categoría: otro (con descripción)
+- [x] Definir categoría: otro (con descripción)
 - [x] Diseñar workflow de reportes (usuario reporta → moderador revisa → acción)
-- [ ] Diseñar notificación a moderadores
-- [ ] Diseñar notificación al usuario que reportó
-- [ ] Diseñar notificación al usuario reportado (si aplica acción)
+- [x] Diseñar notificación a moderadores
+- [x] Diseñar notificación al usuario que reportó
+- [x] Diseñar notificación al usuario reportado (si aplica acción)
 - [x] Diseñar dashboard de reportes para moderadores
 - [x] Diseñar logs de reportes y acciones
 - [x] Diseñar configuración de categorías (report_categories.json)
@@ -79,13 +79,13 @@
 - [x] Diseñar sección de Discusiones en Steam Community Hub
 - [x] Diseñar sección de Bugs y Problemas en Steam Community Hub
 - [x] Diseñar sección de Sugerencias en Steam Community Hub
-- [ ] Diseñar cuenta oficial en Twitter/X
+- [x] Diseñar cuenta oficial en Twitter/X
 - [ ] Diseñar subreddit r/IslaAncestral en Reddit
 - [x] Diseñar pines con directrices en cada canal
 - [x] Diseñar bots para redirigir contenido a canales correctos
 
 ### [S] Roadmap público
-- [ ] Definir roadmap público (opcional)
+- [x] Definir roadmap público (opcional)
 - [ ] Definir hitos generales sin fechas irreales
 - [ ] Definir categorías (Core Gameplay, Content, Technical, Polish)
 - [ ] Definir estados (Completado, En desarrollo, Planeado, Futuro)
@@ -93,7 +93,7 @@
 - [ ] Diseñar roadmap en sitio web
 - [x] Diseñar roadmap en Steam Community Hub
 - [x] Diseñar roadmap en Discord (canal #roadmap)
-- [ ] Diseñar actualización periódica (mensual o cuando haya cambios)
+- [x] Diseñar actualización periódica (mensual o cuando haya cambios)
 - [x] Diseñar configuración de roadmap (roadmap.json)
 
 ### [S] Changelog público
@@ -105,88 +105,88 @@
 - [x] Diseñar changelog en Steam (announcements)
 - [x] Diseñar changelog en Discord (canal #changelog)
 - [ ] Diseñar changelog en sitio web
-- [ ] Diseñar actualización con cada actualización del juego
-- [ ] Diseñar integración con M102 (Bug Tracking) para issues resueltos
+- [x] Diseñar actualización con cada actualización del juego
+- [x] Diseñar integración con M102 (Bug Tracking) para issues resueltos
 
 ### [S] Respuesta a dudas
 - [ ] Definir SLA de 48 horas para respuestas
 - [ ] Definir SLA de 24 horas para dudas simples
 - [ ] Definir triaje de dudas (técnicas, de diseño, generales)
-- [ ] Diseñar base de conocimiento (FAQ)
+- [x] Diseñar base de conocimiento (FAQ)
 - [ ] Diseñar FAQ general (¿cuándo sale?, ¿plataformas?, ¿multijugador?)
-- [ ] Diseñar FAQ técnica (requisitos de sistema, controladores)
+- [x] Diseñar FAQ técnica (requisitos de sistema, controladores)
 - [ ] Diseñar FAQ de gameplay (¿combate?, ¿permadeath?)
 - [ ] Diseñar FAQ en sitio web
 - [x] Diseñar FAQ en Steam Community Hub
 - [x] Diseñar FAQ en Discord (canal #faq)
-- [ ] Diseñar sistema de etiquetas para dudas frecuentes
-- [ ] Diseñar respuestas documentadas para reutilización
+- [x] Diseñar sistema de etiquetas para dudas frecuentes
+- [x] Diseñar respuestas documentadas para reutilización
 - [x] Diseñar configuración de FAQ (faq.json)
 
 ### [S] Identificación de bugs reportados
-- [ ] Definir sistema de triage de bugs
+- [x] Definir sistema de triage de bugs
 - [ ] Definir categorías (crítico, mayor, menor, trivial)
-- [ ] Definir verificación (reproducible, no reproducible)
-- [ ] Diseñar integración con M102 (Bug Tracking)
+- [x] Definir verificación (reproducible, no reproducible)
+- [x] Diseñar integración con M102 (Bug Tracking)
 - [ ] Diseñar workflow (usuario reporta → triage → issue en M102)
 - [x] Diseñar plantilla de reporte de bug
-- [ ] Diseñar sistema de etiquetas para categorías
-- [ ] Diseñar respuesta automática de confirmación
-- [ ] Diseñar explicación al usuario si no es bug
+- [x] Diseñar sistema de etiquetas para categorías
+- [x] Diseñar respuesta automática de confirmación
+- [x] Diseñar explicación al usuario si no es bug
 
 ### [S] Recopilación de sugerencias
-- [ ] Definir categorización (gameplay, UI, contenido, técnica, performance)
-- [ ] Definir evaluación (alineado con visión, factible, out of scope)
-- [ ] Diseñar integración con M102 (Bug Tracking) para tracking
-- [ ] Diseñar workflow (usuario sugiere → evaluación → documentación)
-- [ ] Diseñar plantilla de sugerencia
-- [ ] Diseñar sistema de etiquetas para categorías
-- [ ] Diseñar tablero de sugerencias (Trello, GitHub Projects)
-- [ ] Diseñar respuesta documentada para cada sugerencia
+- [x] Definir categorización (gameplay, UI, contenido, técnica, performance)
+- [x] Definir evaluación (alineado con visión, factible, out of scope)
+- [x] Diseñar integración con M102 (Bug Tracking) para tracking
+- [x] Diseñar workflow (usuario sugiere → evaluación → documentación)
+- [x] Diseñar plantilla de sugerencia
+- [x] Diseñar sistema de etiquetas para categorías
+- [x] Diseñar tablero de sugerencias (Trello, GitHub Projects)
+- [x] Diseñar respuesta documentada para cada sugerencia
 - [ ] Diseñar respuesta constructiva siempre
 
 ### [S] Gestión de expectativas
 - [ ] Definir directriz: no prometer fechas irreales
 - [ ] Definir directriz: comunicar hitos genéricos en lugar de fechas específicas
 - [ ] Definir directriz: ser transparente sobre retrasos cuando ocurran
-- [ ] Definir directriz: establecer expectativas realistas desde el inicio
-- [ ] Definir directriz: comunicar cambios de dirección cuando sean necesarios
-- [ ] Diseñar comunicación honesta sobre estado del desarrollo
+- [x] Definir directriz: establecer expectativas realistas desde el inicio
+- [x] Definir directriz: comunicar cambios de dirección cuando sean necesarios
+- [x] Diseñar comunicación honesta sobre estado del desarrollo
 - [ ] Diseñar roadmap con hitos genéricos (sin fechas)
-- [ ] Diseñar anuncios cuando haya cambios significativos
+- [x] Diseñar anuncios cuando haya cambios significativos
 - [ ] Diseñar respuestas a preguntas sobre fechas ("cuando esté listo")
-- [ ] Diseñar documentación de directrices (communication_guidelines.md)
+- [x] Diseñar documentación de directrices (communication_guidelines.md)
 
 ### [S] Gestión de críticas
-- [ ] Definir distinción entre críticas constructivas y destructivas
-- [ ] Definir respuesta a críticas constructivas con agradecimiento
-- [ ] Definir ignorar o moderar críticas destructivas
+- [x] Definir distinción entre críticas constructivas y destructivas
+- [x] Definir respuesta a críticas constructivas con agradecimiento
+- [x] Definir ignorar o moderar críticas destructivas
 - [ ] Definir aprender de críticas válidas
-- [ ] Definir documentación de feedback recurrente para mejora
-- [ ] Diseñar directrices para moderadores sobre cómo responder
-- [ ] Diseñar documentación de feedback recurrente
+- [x] Definir documentación de feedback recurrente para mejora
+- [x] Diseñar directrices para moderadores sobre cómo responder
+- [x] Diseñar documentación de feedback recurrente
 - [ ] Diseñar respuestas ejemplares para críticas comunes
-- [ ] Diseñar sistema de escalado para críticas serias
+- [x] Diseñar sistema de escalado para críticas serias
 
 ### [S] Gestión de contenido tóxico
-- [ ] Definir contenido tóxico (acoso, discriminación, odio, spam)
+- [x] Definir contenido tóxico (acoso, discriminación, odio, spam)
 - [ ] Definir NSFW inapropiado
 - [ ] Definir lenguaje excesivamente vulgar
-- [ ] Definir acciones (advertencia, mute temporal, ban temporal, ban permanente)
-- [ ] Definir primera ofensa: advertencia
+- [x] Definir acciones (advertencia, mute temporal, ban temporal, ban permanente)
+- [x] Definir primera ofensa: advertencia
 - [ ] Definir segunda ofensa: mute temporal (24-48 horas)
 - [ ] Definir tercera ofensa: ban temporal (7 días)
 - [ ] Definir cuarta ofensa: ban permanente
-- [ ] Diseñar bots de moderación automática (Discord mod bots)
-- [ ] Diseñar logs de advertencias y acciones
-- [ ] Diseñar sistema de apelación para bans injustificados
+- [x] Diseñar bots de moderación automática (Discord mod bots)
+- [x] Diseñar logs de advertencias y acciones
+- [x] Diseñar sistema de apelación para bans injustificados
 - [ ] Diseñar directrices claras sobre qué constituye contenido tóxico
 
 ### [S] Gestión de spoilers
 - [ ] Definir etiquetado obligatorio de spoilers
-- [ ] Definir etiquetado en Discord (||texto||)
+- [x] Definir etiquetado en Discord (||texto||)
 - [x] Definir etiquetado en Steam ([SPOILER] en título)
-- [ ] Definir etiquetado en redes sociales (#spoiler)
+- [x] Definir etiquetado en redes sociales (#spoiler)
 - [x] Diseñar canales específicos para contenido de historia (#story-spoilers)
 - [x] Diseñar secciones separadas para spoilers en Steam
 - [ ] Definir temporales para contenido nuevo (30 días post-lanzamiento)
@@ -198,56 +198,56 @@
 - [x] Definir filtraciones (contenido no público, assets, builds, código)
 - [ ] Definir protocolo: eliminar contenido inmediatamente
 - [ ] Definir protocolo: contactar plataforma para takedown
-- [ ] Definir protocolo: investigar fuente de filtración (si es posible)
-- [ ] Definir protocolo: comunicar con comunidad que contenido no es oficial
-- [ ] Diseñar protocolo documentado para filtraciones
+- [x] Definir protocolo: investigar fuente de filtración (si es posible)
+- [x] Definir protocolo: comunicar con comunidad que contenido no es oficial
+- [x] Diseñar protocolo documentado para filtraciones
 - [x] Diseñar contactos de plataformas (Steam, Discord, Reddit)
 - [ ] Diseñar plantillas de DMCA/takedown
-- [ ] Diseñar comunicación con comunidad sobre contenido filtrado
+- [x] Diseñar comunicación con comunidad sobre contenido filtrado
 
 ### [S] Gestión de impersonación
-- [ ] Definir impersonación (usuarios que pretenden ser desarrolladores oficiales)
-- [ ] Definir cuentas falsas que prometen contenido no oficial
+- [x] Definir impersonación (usuarios que pretenden ser desarrolladores oficiales)
+- [x] Definir cuentas falsas que prometen contenido no oficial
 - [ ] Definir scams utilizando nombre del juego
-- [ ] Definir verificación oficial de desarrolladores (etiquetas de verified dev)
+- [x] Definir verificación oficial de desarrolladores (etiquetas de verified dev)
 - [x] Definir reporte de cuentas de impersonación a plataformas
-- [ ] Definir comunicación con comunidad sobre cuentas oficiales
+- [x] Definir comunicación con comunidad sobre cuentas oficiales
 - [x] Definir ban inmediato de impersonadores en canales oficiales
-- [ ] Diseñar etiquetas de verified dev en Discord
+- [x] Diseñar etiquetas de verified dev en Discord
 - [x] Diseñar cuentas oficiales verificadas en Steam (developer badge)
-- [ ] Diseñar listado de cuentas oficiales en sitio web
+- [x] Diseñar listado de cuentas oficiales en sitio web
 - [x] Diseñar protocolo de reporte de impersonación
 
 ### [S] Gestión de copyright claims
-- [ ] Definir copyright claims en contenido de fans (fan art, fan music, fan fiction)
+- [x] Definir copyright claims en contenido de fans (fan art, fan music, fan fiction)
 - [ ] Definir copyright claims en videos (let's plays, streams)
-- [ ] Definir copyright claims en mods y contenido generado por usuarios
+- [x] Definir copyright claims en mods y contenido generado por usuarios
 - [ ] Definir directrices: fair use para contenido transformador
 - [ ] Definir directrices: política de contenido de fans en sitio web
-- [ ] Definir directrices: atribución requerida para contenido de fans
+- [x] Definir directrices: atribución requerida para contenido de fans
 - [ ] Definir directrices: respeto a copyright de terceros
 - [ ] Diseñar política de contenido de fans documentada
-- [ ] Diseñar directrices de atribución
+- [x] Diseñar directrices de atribución
 - [x] Diseñar sistema de reporte de infracción de copyright
 - [ ] Diseñar respuesta a claims de terceros
 
 ### [S] Comunicación proactiva
-- [ ] Definir actualizaciones periódicas sobre estado del desarrollo
-- [ ] Definir anuncios de hitos importantes
-- [ ] Definir comunicación de retrasos cuando sean significativos
+- [x] Definir actualizaciones periódicas sobre estado del desarrollo
+- [x] Definir anuncios de hitos importantes
+- [x] Definir comunicación de retrasos cuando sean significativos
 - [ ] Definir AMAs ocasionales (Ask Me Anything)
 - [ ] Definir showcases de contenido en desarrollo
-- [ ] Diseñar cadencia de actualizaciones (mensual o cuando haya hitos)
+- [x] Diseñar cadencia de actualizaciones (mensual o cuando haya hitos)
 - [x] Diseñar canal #anuncios en Discord
 - [x] Diseñar anuncios en Steam Community Hub
-- [ ] Diseñar anuncios en Twitter/X
+- [x] Diseñar anuncios en Twitter/X
 - [ ] Diseñar sitio web (blog/updates)
 - [ ] Diseñar AMAs cada 3-6 meses
-- [ ] Diseñar AMAs en Discord o Reddit
-- [ ] Diseñar duración de AMAs (1-2 horas)
+- [x] Diseñar AMAs en Discord o Reddit
+- [x] Diseñar duración de AMAs (1-2 horas)
 - [ ] Diseñar reglas de AMAs (preguntas respetuosas, sin spoilers)
 - [ ] Diseñar showcases cada 1-2 meses
-- [ ] Diseñar plataformas para showcases (Twitter/X, YouTube, Discord)
+- [x] Diseñar plataformas para showcases (Twitter/X, YouTube, Discord)
 - [ ] Diseñar contenido de showcases (features, arte, música, efectos)
 
 ### [S] Archivos de configuración

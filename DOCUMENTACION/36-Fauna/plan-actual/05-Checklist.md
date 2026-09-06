@@ -61,7 +61,7 @@
 - [x] señal diario_cambio emitida [S]
 - [x] enum EstadoEspecie (3 estados) [S]
 - [x] registrar_avistamiento ignora id vacío [S]
-- [x] Dedupe por instancia_id con has() explícito (fix Log 406) [S]
+- [x] Dedupe por instancia_id con has() explícito (fix Log 429) [S]
 - [x] Dedupe ventana 30s (DEDUPE_TIEMPO_S) [S]
 - [x] Tolerancia pantalla 0.5s mínima [S]
 - [x] Distancia máxima 24m (DISTANCIA_AVISTAMIENTO_M) [S]
@@ -201,7 +201,7 @@
 - [x] Registry sin SaveManager no rompe [S]
 - [x] Behavior sin animal_ai corre en stub [S]
 - [x] Registry sin TimeCalendar no rompe [S]
-- [x] dedup de avistamiento no bloquea primer avistamiento (fix Log 406) [S]
+- [x] dedup de avistamiento no bloquea primer avistamiento (fix Log 429) [S]
 - [x] Restore de save con version antigua no sobreescribe [S]
 - [ ] [M09] Spawner real con burbuja 72m y filtros bioma/hora [C] — dueño M09
 - [ ] [M09] Caches de spawn por bioma [M] — dueño M09
@@ -249,3 +249,22 @@ otros módulos, verificados como legítimos en QA cruzado).
 - [x] Tortuga NPC verificada en runtime (log): '[Tortuga] deambulando por la isla (spawn 268, 250)' — la adición de fauna del día está operativa (spawn + deambulación)
 - [x] QA visual del mundo (captura analizada): FPS 60, perfil de la isla correcto, HUD/calendario intactos
 - [!] B-001 (watchdog 'NPC atascado') sigue activo — sigue siendo defecto ALTA del dueño M64/M19
+## Jabalí — etapas de vida (2026-09-03 — hy3 / Kilo Code)
+
+- [x] `jabali_npc.gd` define etapa `@export_enum("joven","adulto")` [S]
+- [x] `_CFG_ETAPA` contiene parámetros diferenciados para joven y adulto (escala/velocidad/rebote/pausas) [S]
+- [x] `_aplicar_etapa()` propaga los parámetros a las `@export` en `_ready()` [S]
+- [x] Etapa `joven`: escala 1.5, velocidad 1.7, rebote 0.022, pausa 1.5–5.0 s (trote liviano) [S]
+- [x] Etapa `adulto`: escala 2.3, velocidad 1.2, rebote 0.030, pausa 3.0–8.0 s (bruto pesado, pausado) [S]
+- [x] Fallback a `joven` si la etapa no está en `_CFG_ETAPA` [S]
+- [x] Trote diagonal FL+BR / FR+BL en contrafase (gait cuadrúpedo) [S]
+- [x] Rebote de trote sincronizado con el caminado + cabeceo de husmeo [S]
+- [x] Cola-cuerda (menéo lateral) y cabeza que baja a olfatear en pausa [S]
+- [x] Escala del GLB desde los pies (crece hacia arriba, huella estable) [S]
+- [x] Snap al terreno vía `TerrainLocator` (get_height + 1) [S]
+- [x] `main_island.tscn` instancia `JabaliNPC` (etapa=joven) [S]
+- [x] `main_island.tscn` instancia `JabaliAdultoNPC` (etapa=adulto) [S]
+- [x] Runtime verificado: ambos jabalíes spawnean con 4 patas, cola y cabeza (`[Jabali joven]` / `[Jabali adulto]`) [S]
+- [x] Proyecto corre sin errores nuevos (warnings globales preexistentes, no de M36) [S]
+- **Iter. conejo Hy4 (Logs 664-678, glm-5.3-flash/Kilo Code):** cuerpo y cabeza reconstruidos con bmesh lofting (anillos YZ variando X — metodología Hy4 de crear_jabali_lowpoly.py). 3D real logrado. Pendiente: ajuste fino de detalles (ojos/orejas dentro de cabeza), registro en FaunaManager, nutria/lechuza/abeja/pez/erizo/rana con mismo pipeline. Respaldo en Obsoletos/.
+

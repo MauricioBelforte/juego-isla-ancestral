@@ -9,12 +9,12 @@
 
 ## 1. Framework de editor (RF1-RF5)
 
-- [ ] Definir EditorToolBase con undo, guardado y validación [C]
+- [x] Definir EditorToolBase con undo, guardado y validación [C]
 - [ ] Definir guardado directo en SO/mods de M108 [M]
-- [ ] Definir búsqueda por id/nombre/tag en cada editor [M]
+- [x] Definir búsqueda por id/nombre/tag en cada editor [M]
 - [ ] Definir colores de validación (rojo bloqueante / amarillo aviso) [S]
-- [ ] Definir shortcuts por editor (Ctrl+1..14) [S]
-- [ ] Definir export/import JSON/CSV en cada editor [M]
+- [x] Definir shortcuts por editor (Ctrl+1..14) [S]
+- [x] Definir export/import JSON/CSV en cada editor [M]
 - [ ] Definir reutilización de lista vista/detalle en todos [M]
 - [ ] Definir Undo de Unity en edición de SO [M]
 - [ ] Definir validación incremental al guardar [M]
@@ -47,11 +47,11 @@
 
 ## 5. Editor de diálogos (RF1)
 
-- [ ] Definir editor de árbol de nodos (M21) [C]
+- [x] Definir editor de árbol de nodos (M21) [C]
 - [ ] Definir edición de condiciones por flag [M]
 - [ ] Definir edición de efectos (objetos, amistad, misiones) [M]
 - [ ] Definir validación: referencias a flags/objetos/misiones existentes [M]
-- [ ] Definir simulación de conversación en editor [M]
+- [x] Definir simulación de conversación en editor [M]
 - [ ] Definir export de diálogos para localización (M87) [M]
 
 ## 6. Editor de misiones (RF1)
@@ -135,7 +135,7 @@
 - [ ] Definir teleport a coordenadas exactas [S]
 - [ ] Definir teleport a isla/POI/sello [M]
 - [ ] Definir teleport con guardado del punto anterior [S]
-- [ ] Definir integración con Debug Menu (M110) [S]
+- [x] Definir integración con Debug Menu (M110) [S]
 
 ## 17. Herramienta de spawn (RF7)
 
@@ -146,7 +146,7 @@
 
 ## 18. Herramienta de debug (RF7)
 
-- [ ] Definir menú de debug (M110): flags e invincibilidad [M]
+- [x] Definir menú de debug (M110): flags e invincibilidad [M]
 - [ ] Definir dar objetos/dinero al jugador [S]
 - [ ] Definir completar misión / desbloquear herramienta [S]
 - [ ] Definir cambiar hora/estación/clima [S]
@@ -161,28 +161,28 @@
 
 - [ ] Definir inspector de entidad (componentes) [M]
 - [ ] Definir navegación por árbol de objetos [S]
-- [ ] Definir edición inline de variables en editor [M]
+- [x] Definir edición inline de variables en editor [M]
 - [ ] Definir copia de estado al portapapeles [S]
 
 ## 20. Herramienta de profiling (RF9)
 
-- [ ] Definir stats del editor: FPS, memoria, draw calls (M61/62) [M]
+- [x] Definir stats del editor: FPS, memoria, draw calls (M61/62) [M]
 - [ ] Definir stats por chunk/NPC/AI [M]
 - [ ] Definir export de muestras a CSV [S]
-- [ ] Definir visual en overlay del editor [S]
+- [x] Definir visual en overlay del editor [S]
 
 ## 21. Herramienta de validación (RF10)
 
-- [ ] Definir DataValidator global con cross-checks [C]
+- [x] Definir DataValidator global con cross-checks [C]
 - [ ] Definir análisis de recetas→objetos inexistentes [M]
 - [ ] Definir análisis de misiones→diálogos/objetivos [M]
 - [ ] Definir análisis de tiendas→items [M]
 - [ ] Definir análisis de economía→NPC [M]
 - [ ] Definir análisis de rutinas→POI [M]
 - [ ] Definir análisis de loot→objetos [M]
-- [ ] Definir reporte JSON por dominio con flag bloqueante [M]
-- [ ] Definir integración del validator como gate en CI (M112) [M]
-- [ ] Definir reutilización del validator en M151 [S]
+- [x] Definir reporte JSON por dominio con flag bloqueante [M]
+- [x] Definir integración del validator como gate en CI (M112) [M]
+- [x] Definir reutilización del validator en M151 [S]
 
 ## 22. Herramienta de generación (RF11)
 
@@ -194,14 +194,14 @@
 
 ## 23. Calidad y cierre (RF12)
 
-- [ ] Definir aislamiento asmdef Editor (nada en build de jugador) [C]
-- [ ] Definir verificación por script de exclusión en build [M]
-- [ ] Definir compatibilidad con M110 (Debug Menu) [M]
+- [x] Definir aislamiento asmdef Editor (nada en build de jugador) [C]
+- [x] Definir verificación por script de exclusión en build [M]
+- [x] Definir compatibilidad con M110 (Debug Menu) [M]
 - [ ] Definir compatibilidad con M108 (mods) [M]
 - [ ] Definir soporte de herramientas para QA (M102) [S]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
-- [ ] Definir feed a M112 (tests de editor) y M151 (validator) [S]
+- [x] Definir feed a M112 (tests de editor) y M151 (validator) [S]
 
 ## Totales
 

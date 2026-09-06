@@ -117,14 +117,14 @@
 - [x] Backup .bak previo [S]
 - [x] Recovery: JSON inválido → defaults + advertencia [S]
 - [x] Carga al boot (M29) sin pausar el juego [S]
-- [ ] Guardar configuración no bloquea el hilo principal (M61) [S]
+- [x] Guardar configuración no bloquea el hilo principal (M61) [S]
 - [x] Registro en logs de inicio/carga de configuración [S]
 
 ## H. UI y navegación (6)
 
 - [ ] Focus system: Tab/Shift+Tab/Enter/Esc en todos los menús [S]
 - [ ] D-pad/palanca mueven el foco [S]
-- [ ] gui_focus_neighbor configurado por pantalla [S]
+- [x] gui_focus_neighbor configurado por pantalla [S]
 - [ ] Hover mouse con tooltip del atajo (M46) [S]
 - [ ] Spinner de remapeo bloquea clics rápidos (UX sección 8 AGENTS) [S]
 - [ ] Prompts de UI nunca muestran icono de otro dispositivo [S]
@@ -144,7 +144,7 @@
 - [x] M13/M17 usan "interactuar"/"usar herramienta" [M] — glm-5.3-flash 2026-09-01: player.gd (cierre inventario) y simple_walk.gd (movimiento+salto) migrados a ControlInput con fallback headless; acción saltar agregada al InputMap; test_migracion_m57 0 fallos
 - [ ] M46 hostea el menú de opciones de control [S]
 - [ ] M58 remapeo completo (accesibilidad) [S]
-- [ ] M91 vibración global desde el mismo JSON [S]
+- [x] M91 vibración global desde el mismo JSON [S]
 - [x] Lectura de input en _unhandled_input/_physics_process [S]
 - [x] Sin polling en _process innecesario (M61) [S]
 - [x] Latencia de entrada < 16 ms [S]

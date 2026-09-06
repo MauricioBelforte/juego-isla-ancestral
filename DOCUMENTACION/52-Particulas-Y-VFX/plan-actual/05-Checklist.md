@@ -11,7 +11,7 @@
 - [x] Mapear la sección 51 "PARTÍCULAS Y VFX" del plan maestro al ID 52 de la tabla global [M]
 - [ ] Separar dentro/fuera de alcance: luz de fuego → M49, sonido → M43/M44, sprites → M45/M47 [S]
 - [x] Documentar restricciones: GPUParticles, sin RNG, sin luz por partícula, presupuesto verificable [M]
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S]
+- [x] Definir criterios de aceptación verificables (8 criterios) [S]
 
 ## B. RF1 — Catálogo de VFX
 
@@ -23,13 +23,13 @@
 - [ ] Lluvia y nieve [S]
 - [ ] Fuego y lava [S]
 - [ ] Luz y magia tecnológica [S]
-- [ ] Resonancia y activación de runas [S]
+- [x] Resonancia y activación de runas [S]
 - [ ] Teletransporte (si existe) [S]
-- [ ] Obtención de Sello [S]
-- [ ] Resolución de puzzle [S]
-- [ ] Construcción, cosecha y pesca [S]
+- [x] Obtención de Sello [S]
+- [x] Resolución de puzzle [S]
+- [x] Construcción, cosecha y pesca [S]
 - [ ] Descubrimiento [S]
-- [ ] Cambio estacional [S]
+- [x] Cambio estacional [S]
 - [ ] Efectos de interfaz [S]
 - [ ] Efectos atmosféricos [S]
 - [ ] Definir parámetros por efecto (tipo, material, emisor, presupuesto) [M]
@@ -53,18 +53,18 @@
 - [ ] Definir semillas de contexto (M10) en one-shots [M]
 - [ ] Definir loops con fase fija [M]
 - [ ] Definir sin RNG por frame [M]
-- [ ] Definir verificación de determinismo en validador [M]
+- [x] Definir verificación de determinismo en validador [M]
 
 ## F. RF5 — Sincronía con animación
 
 - [ ] Definir triggers en timelines (M48) [M]
-- [ ] Minado, cosecha, pesca, construcción desde animación [M]
+- [x] Minado, cosecha, pesca, construcción desde animación [M]
 - [x] Definir trigger centralizado VFX+SFX+feedback [M]
 
 ## G. RF6 — Eventos de juego
 
-- [ ] Definir obtención de Sello (M22) [M]
-- [ ] Definir resolución de puzzle (M24) [M]
+- [x] Definir obtención de Sello (M22) [M]
+- [x] Definir resolución de puzzle (M24) [M]
 - [ ] Definir descubrimiento (M71) [M]
 - [ ] Definir festivales (M74) [M]
 
@@ -83,7 +83,7 @@
 ## J. RF9 — Atmosféricos
 
 - [ ] Definir lluvia por clima (M32) [M]
-- [ ] Definir nieve por clima/estación (M32/M29) [M]
+- [x] Definir nieve por clima/estación (M32/M29) [M]
 - [ ] Definir polvo del desierto [M]
 - [ ] Definir hojas al viento (M50) [M]
 - [ ] Definir pétalos primaverales (M29) [M]
@@ -91,8 +91,8 @@
 
 ## K. RF10 — Magia y ancestral
 
-- [ ] Definir resonancia de runas (M24/M26) [M]
-- [ ] Definir activación de glifos [M]
+- [x] Definir resonancia de runas (M24/M26) [M]
+- [x] Definir activación de glifos [M]
 - [ ] Definir estelas de luz (M47) [M]
 - [ ] Definir magia tecnológica (M86) [S]
 
@@ -114,7 +114,7 @@
 ## O. RF14 — Optimización
 
 - [ ] Definir tope de partículas vivas [M]
-- [ ] Definir culling por distancia (40 m pausa) [M]
+- [x] Definir culling por distancia (40 m pausa) [M]
 - [ ] Definir LOD de emisores (25% lejos) [M]
 - [ ] Definir pooling (M62) [M]
 
@@ -162,32 +162,32 @@
 ## U. Integraciones
 
 - [x] Documentar integración con M04 (GPUParticles) [S]
-- [ ] Documentar integración con M13/M17/M22/M24/M33/M34/M71 (eventos) [S]
-- [ ] Documentar integración con M48 (timelines) [S]
-- [ ] Documentar integración con M43/M44 (audio/feedback) [S]
-- [ ] Documentar integración con M32/M29 (clima/estaciones) [S]
-- [ ] Documentar integración con M50/M51 (hojas/salpicaduras) [S]
-- [ ] Documentar integración con M47/M49 (materiales/luz) [S]
-- [ ] Documentar integración con M53/M58 (UI/accesibilidad) [S]
-- [ ] Documentar integración con M61/M62 (presupuestos) [S]
-- [ ] Documentar integración con M108/M118 (import/CI) [S]
+- [x] Documentar integración con M13/M17/M22/M24/M33/M34/M71 (eventos) [S]
+- [x] Documentar integración con M48 (timelines) [S]
+- [x] Documentar integración con M43/M44 (audio/feedback) [S]
+- [x] Documentar integración con M32/M29 (clima/estaciones) [S]
+- [x] Documentar integración con M50/M51 (hojas/salpicaduras) [S]
+- [x] Documentar integración con M47/M49 (materiales/luz) [S]
+- [x] Documentar integración con M53/M58 (UI/accesibilidad) [S]
+- [x] Documentar integración con M61/M62 (presupuestos) [S]
+- [x] Documentar integración con M108/M118 (import/CI) [S]
 
 ## V. Herramientas y flujos
 
 - [ ] Documentar flujo de emisión one-shot [M]
 - [ ] Documentar flujo de loop ambiental (humo) [M]
-- [ ] Documentar flujo de atmosféricos por clima/estación [M]
+- [x] Documentar flujo de atmosféricos por clima/estación [M]
 
 ## W. Criterios de aceptación verificados
 
 - [ ] Todos los efectos del plan maestro en el catálogo [M]
 - [ ] Escena pivote sin exceder límites y sin caída de fps [M]
-- [ ] One-shots deterministas (misma semilla, misma distribución) [M]
-- [ ] Triggers sincronizados con animación/sonido/feedback [M]
+- [x] One-shots deterministas (misma semilla, misma distribución) [M]
+- [x] Triggers sincronizados con animación/sonido/feedback [M]
 - [ ] Fuego/lava sin luz (solo M49) [M]
 - [x] Reduce Motion atenúa/desactiva VFX [M]
-- [ ] Atmosféricos responden a clima/estación sin lag [M]
-- [ ] Catálogo y validación integrados con CI (M118) [M]
+- [x] Atmosféricos responden a clima/estación sin lag [M]
+- [x] Catálogo y validación integrados con CI (M118) [M]
 
 ## X. Notas finales
 

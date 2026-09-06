@@ -38,10 +38,10 @@
 - [ ] Definir música base (12 tracks base)
 - [ ] Definir 30 NPCs base con amistad y diálogos
 - [x] Definir sistema de transporte y navegación
-- [ ] Definir sistema de viajes entre islas
-- [ ] Definir sistema de sellos (7 sellos base)
-- [ ] Definir sistema de puzzles y templos
-- [ ] Definir sistema de festivales y eventos
+- [x] Definir sistema de viajes entre islas
+- [x] Definir sistema de sellos (7 sellos base)
+- [x] Definir sistema de puzzles y templos
+- [x] Definir sistema de festivales y eventos
 - [x] Definir NO DLC obligatorio
 
 ### [S] Nuevas islas DLC
@@ -54,7 +54,7 @@
 - [ ] Diseñar 5-7 NPCs nuevos por isla
 - [ ] Diseñar historia secundaria por isla
 - [ ] Diseñar 1 templo nuevo por isla
-- [ ] Diseñar sistema nuevo por isla
+- [x] Diseñar sistema nuevo por isla
 - [x] Diseñar colecciones por isla
 
 ### [S] Nuevas historias DLC
@@ -154,17 +154,17 @@
 - [ ] Diseñar descuento ~40% para Bundle Completo
 - [x] Diseñar Bundle actualizado con cada nuevo DLC
 - [x] Diseñar Bundle incluye DLC pasados y futuros
-- [ ] Diseñar Bundles temáticos (islas, sistemas, historias)
+- [x] Diseñar Bundles temáticos (islas, sistemas, historias)
 
 ### [S] Marketing DLC
 - [x] Diseñar trailer específico por DLC
 - [x] Diseñar 1-2 minutos de duración
-- [ ] Diseñar mostrar contenido nuevo (islas, NPCs, sistemas)
+- [x] Diseñar mostrar contenido nuevo (islas, NPCs, sistemas)
 - [ ] Diseñar coherente con estilo del juego (cozy, relajante)
 - [ ] Diseñar screenshots de contenido nuevo
 - [ ] Diseñar screenshots de islas nuevas
 - [ ] Diseñar screenshots de NPCs nuevos
-- [ ] Diseñar screenshots de sistemas nuevos
+- [x] Diseñar screenshots de sistemas nuevos
 - [x] Diseñar anuncios en Steam Store
 - [x] Diseñar anuncios en Steam Community Hub
 - [x] Diseñar anuncios en Steam Discovery Queue
@@ -192,7 +192,7 @@
 - [ ] Diseñar estructura de archivos de biomas
 - [ ] Diseñar estructura de archivos de NPCs
 - [ ] Diseñar estructura de archivos de historias
-- [ ] Diseñar estructura de archivos de sistemas
+- [x] Diseñar estructura de archivos de sistemas
 - [ ] Diseñar estructura de archivos de ruinas
 - [ ] Diseñar estructura de archivos de música
 - [x] Diseñar estructura de archivos de colecciones
@@ -224,7 +224,7 @@
 - [ ] Diseñar método load_biome(biome_id)
 - [ ] Diseñar método load_npc(npc_id)
 - [ ] Diseñar método load_historia(historia_id)
-- [ ] Diseñar método load_sistema(sistema_id)
+- [x] Diseñar método load_sistema(sistema_id)
 - [ ] Diseñar método load_ruin(ruin_id)
 - [ ] Diseñar método load_music(track_id)
 - [x] Diseñar método load_coleccion(coleccion_id)

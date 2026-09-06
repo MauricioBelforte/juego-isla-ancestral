@@ -76,7 +76,7 @@
 - [ ] Densidad = intensidad × densidad_clima — API expuesta (`get_intensidad`); partículas con dueño M52 (V2) [S]
 - [ ] Dos buffers para entrada/salida de partículas — dueño M52 [S]
 - [ ] Audio crossfade en la misma ventana — volumen interpolado expuesto (`get_volumen_audio`); buses con dueño M42 [S]
-- [ ] 1 sistema GPU compartido (lluvia/nieve/hojas) — dueño M52 [S]
+- [x] 1 sistema GPU compartido (lluvia/nieve/hojas) — dueño M52 [S]
 - [ ] Densidad por calidad gráfica (M90) [S]
 - [ ] Partículas pausan con GameClock (M29) — la transición ya se congela con el reloj; partículas con dueño M52 [S]
 - [ ] Sin overhead de partículas con sol — dueño M52/M61 [S]
@@ -163,7 +163,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 **Totales:** 121 ítems · Completados: 82 · Pendientes: 39 · No resueltos: 0.
 **Nota iter. 1 (glm-5.3-flash, 2026-08-31):** A/B cerrados por documentación existente (Deepseek); C/H completos; D/E/F/G/I pendientes CON DUEÑO (M52/M42/M30/M31/M49/M58/M112/M29, mayoría V2). Núcleo determinista verificado: test headless 0 fallos + regresiones M29/M31/M21 OK + boot runtime OK (godot-mcp, Godot 4.7.2).

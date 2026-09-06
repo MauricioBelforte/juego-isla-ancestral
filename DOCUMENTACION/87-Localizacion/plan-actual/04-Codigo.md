@@ -261,6 +261,36 @@ msgstr[1] "Se ofrecen {n} objetos"
 
 ---
 
+## Notas del Agente — Iteración 4 robustez determinista + testings (historial, no borra las anteriores)
+
+**Modelo:** deepseek-v4-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-04 05:45:00
+**Estado:** Parcial (robustez de edge cases + testings implementados y verificados; módulo liberado 🟡)
+
+### Lo que hice
+- **Parseo .po corrupto (T-084):** `_parse_po` ahora degrada con gracia ante `msgstr[ sin índice` o `msgstr[99]` (fuera de rango): la línea se omite con warning y el resto del catálogo parsea. Nuevos helpers `_indice_msgstr` / `_resto_msgstr` con tope defensivo de 8 formas. Antes `linea.split("]", 1)[1]` crasheaba con `msgstr[sin_indice]`.
+- **Placeholders mal formados (T-085/086/087):** `format_text` detecta `{` sin `}` (conteo) y deja el texto literal con warning dev; params sin valor quedan literales; params extra no usados se ignoran.
+- **RF21 ampliado:** nuevo `obtener_estado_catalogos()` con `{total, faltantes, vacias, ok}` por idioma — evidencia objetiva de cobertura (es 64 / en 64, 0 faltantes) para dev/CI y este documento.
+- **Fix de contrato plural (bug real):** `_tr_clave`/`_buscar_texto` usaban `n >= 0`, excluyendo negativos; ahora `n != -1` (default sin plural). Detectado por el test: `tr_key(..., -3)` devolvía clave literal.
+- **06-Plan-Testings.md + 07-Resultados-Testings.md creados** (plan-actual): 15 casos CP-01..CP-15, criterios de éxito, límites del plan.
+- **test_localizacion_iter4.gd nuevo:** parseo corrupto, placeholders edge, estado catálogos, plurales n=0/1/2/-3, formatos 0/negativos/1e6/mediodía/fecha relleno, contexto gettext. **0 fallos**.
+- **Regresiones:** test_localization (núcleo) 0 fallos, test_localizacion_iter2 0 fallos, test_localizacion_iter3 0 fallos → **4/4 suites en verde (exit 0)**.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Selector de idioma visual en configuración (M53/M90): la API está lista; la UI es V2 y pertenece a otro módulo.
+- Desbordes de texto inglés +30% (T-039/T-088/C): requiere QA visual con capturas (V1/V4), no es verificable en headless.
+- Traducción humana del catálogo de producción en crecimiento: el contenido nuevo debe seguir usando tr_key + entrada en es/en.po (validar_catalogos lo controla).
+
+### Recomendaciones para el próximo agente
+- M53: el selector usa `set_locale_persistente() + locales_disponibles() + get_locale_display_name()`; la señal `locale_changed` ya existe para re-traducción.
+- QA visual (V1/V4): verificar anchos de labels en inglés y la fuente por idioma (M88 `fuente_para_idioma`).
+- TODO texto nuevo del juego: `tr_key("modulo","seccion","clave")` + entrada en es.po y en.po; `obtener_estado_catalogos()` reporta faltantes/vacías.
+- Notificar a M60: las secciones nuevas de GestorConfig SIEMPRE deben ir en SECCIONES+DEFAULTS_BASE (pitfall del iter. 2).
+- Documentar el **conflicto de autoloads duplicados**: existe `Localization` (canónico .po, este módulo) y `LocalizationManager` (scripts/localizacion/, JSON, API `get_texto`/`set_idioma` creado 2026-09-02). Ambos registrados en project.godot. Decisión conservadora: NO se tocó el duplicado (núcleo de otro agente). Un agente dueño de M87 o el QA debe unificarlos (migrar a .po o a JSON) a futuro.
+
+---
+
 ## Notas del Agente — Iteración 3 integración M88 (historial, no borra las anteriores)
 
 **Modelo:** glm-5.3-flash

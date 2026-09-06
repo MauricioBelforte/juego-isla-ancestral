@@ -9,15 +9,15 @@
 
 ## 1. Shell y arquitectura (RF1/RF12)
 
-- [ ] Definir ShellManager como singleton central de pantallas [M]
+- [x] Definir ShellManager como singleton central de pantallas [M]
 - [ ] Definir 21 pantallas identificadas por enum IdPantalla [M]
 - [ ] Definir grafo de navegación por pantalla (áreas/adyacencias) [M]
-- [ ] Definir reutilización de la arquitectura UGUI/Canvas de M53 [S]
-- [ ] Definir principio MVC: Views solo llaman managers (AGENTS.md §9) [S]
+- [x] Definir reutilización de la arquitectura UGUI/Canvas de M53 [S]
+- [x] Definir principio MVC: Views solo llaman managers (AGENTS.md §9) [S]
 - [ ] Definir reapertura de la última pantalla tras pausa [M]
 - [ ] Definir pantallas con plantilla Header/Cuerpo/Footer común [M]
-- [ ] Definir sin lógica de gameplay dentro de scripts de UI [S]
-- [ ] Definir boot que engancha ShellManager al inicio [M]
+- [x] Definir sin lógica de gameplay dentro de scripts de UI [S]
+- [x] Definir boot que engancha ShellManager al inicio [M]
 - [ ] Definir cierre limpio de la app desde el shell [S]
 
 ## 2. Menú principal (P1)
@@ -35,7 +35,7 @@
 - [ ] Definir manejo de múltiples perfiles (primero el selector) [M]
 - [ ] Definir mensaje de "sin partida" si no hay saves [S]
 - [ ] Definir validación de integridad del save antes de cargar (M59/M66) [M]
-- [ ] Definir reintento guiado ante save corrupto (backup M66) [M]
+- [x] Definir reintento guiado ante save corrupto (backup M66) [M]
 
 ## 4. Nueva partida (P3)
 
@@ -58,7 +58,7 @@
 
 - [ ] Definir acceso a ajustes desde menú principal y pausa [S]
 - [ ] Definir categorías: Controles, Accesibilidad, Audio, Gráfica [M]
-- [ ] Definir persistencia local `settings.json` (fuera del save) [M]
+- [x] Definir persistencia local `settings.json` (fuera del save) [M]
 - [ ] Definir aplicación en vivo de cambios [M]
 - [ ] Definir botón "Restablecer por defecto" por categoría [S]
 - [ ] Definir indicación de cambios no guardados [S]
@@ -108,8 +108,8 @@
 - [ ] Definir grid paginado de ítems (12-20 por página) [M]
 - [ ] Definir pestañas: Items, Herramientas, Recetas [M]
 - [ ] Definir detalle del ítem (descripción, stack, lore opcional) [M]
-- [ ] Definir uso/equipar con confirmación cuando aplica [M]
-- [ ] Definir sin lógica de inventario en la View (manager M16) [S]
+- [x] Definir uso/equipar con confirmación cuando aplica [M]
+- [x] Definir sin lógica de inventario en la View (manager M16) [S]
 
 ## 13. Pantalla de mapa (P12/M28)
 
@@ -117,14 +117,14 @@
 - [ ] Definir marcadores de progreso (sellos, colecciones por zona) [M]
 - [ ] Definir viaje rápido desde el mapa (confirmación) [M]
 - [ ] Definir leyenda de símbolos del mapa [S]
-- [ ] Definir datos del mapa desde TravelManager [S]
+- [x] Definir datos del mapa desde TravelManager [S]
 
 ## 14. Pantalla de diario (P13/M55)
 
 - [ ] Definir pestañas: Misiones, Lore Ambiental (M148), Sellos, Estación [M]
 - [ ] Definir misiones activas con objetivo y estado [M]
 - [ ] Definir lore con contador por isla (M148) [M]
-- [ ] Definir sellos con prerequisitos visibles [M]
+- [x] Definir sellos con prerequisitos visibles [M]
 - [ ] Definir info de estación/clima (M32/M74) [S]
 
 ## 15. Pantalla de colección (P14/M73)
@@ -140,7 +140,7 @@
 - [ ] Definir lista/árbol de habilidades con coste y efecto [M]
 - [ ] Definir desbloqueo desde la pantalla (XP/viento disponible) [M]
 - [ ] Definir visual de nivel por habilidad [S]
-- [ ] Definir sin lógica en View (ProgressionManager) [S]
+- [x] Definir sin lógica en View (ProgressionManager) [S]
 
 ## 17. Pantalla de relación (P16/M20)
 
@@ -148,14 +148,14 @@
 - [ ] Definir regalo del día sugerido por NPC [M]
 - [ ] Definir hitos de amistad visibles [M]
 - [ ] Definir avatar/retrato de cada NPC [S]
-- [ ] Definir sin lógica en View (FriendManager) [S]
+- [x] Definir sin lógica en View (FriendManager) [S]
 
 ## 18. Pantalla de configuración (P17)
 
 - [ ] Definir sub-pantalla general con idioma, región, unidad [M]
 - [ ] Definir idioma aplicado en vivo (M87) [M]
 - [ ] Definir tiempo: formato 12/24 h [S]
-- [ ] Definir guardar al salir de configuración [S]
+- [x] Definir guardar al salir de configuración [S]
 
 ## 19. Pantalla de controles (P18/M58)
 
@@ -170,15 +170,15 @@
 - [ ] Definir modos de color alternativos [M]
 - [ ] Definir reduce motion / flashing [M]
 - [ ] Definir tamaño de texto 100-150% [M]
-- [ ] Definir subtítulos configurables [M]
+- [x] Definir subtítulos configurables [M]
 - [ ] Definir retraso de diálogos [S]
-- [ ] Definir visor de foco (anillo) configurable [S]
+- [x] Definir visor de foco (anillo) configurable [S]
 
 ## 21. Pantalla de audio (P20/M41-M44)
 
 - [ ] Definir buses: Master, Música, SFX, Ambient, Voces [M]
 - [ ] Definir slider con prueba de sonido [S]
-- [ ] Definir config de subtítulos de voces [S]
+- [x] Definir config de subtítulos de voces [S]
 - [ ] Definir mono/estéreo para accesibilidad auditiva [M]
 
 ## 22. Pantalla gráfica (P21)
@@ -186,16 +186,16 @@
 - [ ] Definir resolución (lista + custom) [M]
 - [ ] Definir calidad (baja/media/alta/personalizada) [M]
 - [ ] Definir vsync y límite de fps [S]
-- [ ] Definir fullscreen/windowed/borderless [S]
-- [ ] Definir escala de UI [S]
+- [x] Definir fullscreen/windowed/borderless [S]
+- [x] Definir escala de UI [S]
 - [ ] Definir aplicar con opción de revertir (10 s) [M]
 
 ## 23. Tests y calidad (RF2/RF8/M112)
 
-- [ ] Definir suite Navigator: recorre 21 pantallas sin atascos [M]
-- [ ] Definir suite de perfiles/slots 30 ciclos [M]
-- [ ] Definir suite de pausa: congelar/reanudar [M]
-- [ ] Definir suite de settings ida y vuelta [M]
+- [x] Definir suite Navigator: recorre 21 pantallas sin atascos [M]
+- [x] Definir suite de perfiles/slots 30 ciclos [M]
+- [x] Definir suite de pausa: congelar/reanudar [M]
+- [x] Definir suite de settings ida y vuelta [M]
 - [ ] Definir metric de apertura < 300 ms sin picos de memoria [M]
 - [ ] Definir foco visible en todas las pantallas (M58) [S]
 - [ ] Definir playtest de 5 usuarios en continuar/nueva/cargar [M]
@@ -208,4 +208,4 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

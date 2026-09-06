@@ -154,7 +154,7 @@
 - [ ] Definir prohibición de contenido exclusivo temporal [S]
 - [ ] Definir prohibición de "¡vuelve o lo pierdes!" [S]
 - [ ] Definir prohibición de penalización de ausencia [S]
-- [ ] Definir auditor de scan en build (falla la build si viola) [M]
+- [x] Definir auditor de scan en build (falla la build si viola) [M]
 - [x] Definir revisión de nuevas mecánicas contra el manifiesto anti-FOMO [M]
 
 ## 17. Tablero y diario (M55)
@@ -204,3 +204,8 @@
 - [x] AntiFomoAuditor: 6/6 checks OK — 7 objetivos sin violaciones (retención cozy) + detección de las normas R2 (recompensas expiran), R3 (castigo por ausencia) y R5 (tiempo real penaliza) + reporte generable
 - [x] Test headless permanente: scripts/motivacion/test_antifomo_headless.gd (exit 0)
 - [!] Nota: el escanear no analiza timelimit por objetivo (solo flags de config) — suficiente para las 5 normas R1-R5 (documentado)
+## Iteración 2 (2026-09-02 22:50 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/motivacion/objetivos.json` v2 — los 7 objetivos completados (tipo, cadencia diario_suave, target_min 5-20 min, recompensas, expiracion=false, descripciones cozy)
+- [x] Verificada la data (7/7 campos completos) y re-ejecutado el auditor anti-FOMO: 6/6 OK, 0 violaciones
+- [x] Retención sin presión confirmada en la data (todos diario_suave + sin expiración)

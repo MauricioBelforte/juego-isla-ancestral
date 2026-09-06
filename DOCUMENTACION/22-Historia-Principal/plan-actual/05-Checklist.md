@@ -5,7 +5,7 @@
 **Fecha:** 2026-08-31
 
 > **Reserva actual (LIBERADA 🟡)**
-> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 22:20 · **Estado:** 🟡 Liberado (iter. 1 núcleo data verificado, Log 308)
+> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 22:20 · **Estado:** 🟡 Liberado (iter. 1 núcleo data verificado, Log 369)
 > **Entrada:** M21 🟡 núcleo robusto (contrato aprobado) · **Salida:** grafo data-driven JSON + HistoriaService + gating Sellos + flags WorldState + validador de grafo + test headless 0 fallos
 > **Archivos afectados:** `data/historia/historia_principal.json` (nuevo), `scripts/historia/story_manager.gd` (nuevo autoload Historia), `scripts/historia/validar_historia.gd` (nuevo), `scripts/historia/test_historia.gd` (nuevo), `project.godot` (autoload)
 
@@ -35,23 +35,23 @@
 
 - [ ] Definir 14 escenas nodo principales [M]
 - [ ] Definir los tipos de escena (diálogo, descubrimiento, puzzle, cutscene-hook) [M]
-- [ ] Definir el grafo de escenas serializado (JSON) [M]
+- [x] Definir el grafo de escenas serializado (JSON) [M]
 - [ ] Definir el giro narrativo 1 (ceniza = biblioteca quemada) [M]
 - [ ] Definir el giro narrativo 2 (sombra = sombra del templo) [M]
-- [ ] Definir el giro narrativo 3 (el Sello fue escondido, no roto) [M]
-- [ ] Implementar la validación del grafo en Editor [M]
-- [ ] Implementar la validación en tests (sin nodos huérfanos) [M]
+- [x] Definir el giro narrativo 3 (el Sello fue escondido, no roto) [M]
+- [x] Implementar la validación del grafo en Editor [M]
+- [x] Implementar la validación en tests (sin nodos huérfanos) [M]
 - [ ] Documentar escenas y giros en el plan-actual [S]
 
 ## Pistas, foreshadowing y revelaciones
 
 - [ ] Definir 30 pistas distribuidas por el mundo (murales, inscripciones, objetos, diálogos) [M]
 - [ ] Definir 10 foreshadows explícitos [M]
-- [ ] Definir los 3 pagos de los foreshadows (Cámara del Sello) [S]
+- [x] Definir los 3 pagos de los foreshadows (Cámara del Sello) [S]
 - [ ] Definir las 6 revelaciones con desbloqueo contextual [M]
 - [ ] Definir los 5 caches de lore oculto [M]
-- [ ] Implementar formato de pista (único, no duplicable) [M]
-- [ ] Implementar el test de leak de pistas (sin pista sin pagar) [M]
+- [x] Implementar formato de pista (único, no duplicable) [M]
+- [x] Implementar el test de leak de pistas (sin pista sin pagar) [M]
 - [ ] Documentar pistas, foreshadowing y revelaciones [S]
 
 ## Ritmo y momentos
@@ -76,7 +76,7 @@
 
 ## Misterio e información oculta
 
-- [ ] Definir el misterio en 4 capas (qué cayó, quién era el guardián, por qué la brisa, qué es el Sello) [M]
+- [x] Definir el misterio en 4 capas (qué cayó, quién era el guardián, por qué la brisa, qué es el Sello) [M]
 - [ ] Definir el desarrollo del misterio por capítulo [M]
 - [ ] Definir la información oculta (5 caches) [M]
 - [ ] Definir la entrega de lore por contexto (mural/inscripción/objeto) [M]
@@ -88,13 +88,13 @@
 - [ ] Definir la regla de máx 4 líneas expositivas por escena [S]
 - [ ] Definir la regla de ≤ 140 palabras por diálogo [M]
 - [ ] Definir la entrega de lore por objetos/murales [M]
-- [ ] Implementar el test de exposición (guion) [M]
-- [ ] Implementar el test de palabras por escena [M]
+- [x] Implementar el test de exposición (guion) [M]
+- [x] Implementar el test de palabras por escena [M]
 - [ ] Documentar anti-exposición en el plan-actual [S]
 
 ## Integración
 
-- [ ] Integrar con M21 (misiones: requisitos verificables) [M] — *parcial: flags WorldState + EventBus.quest consumidos; misiones reales M22/M23 con dueño*
+- [x] Integrar con M21 (misiones: requisitos verificables) [M] — *parcial: flags WorldState + EventBus.quest consumidos; misiones reales M22/M23 con dueño*
 - [ ] Integrar con M23 (secundarias: comentarios hook) [M]
 - [ ] Integrar con M24/M25/M26 (templos y puzzles) [M]
 - [ ] Integrar con M28 (caminos: capítulo 2) [M]
@@ -117,11 +117,11 @@
 
 ## Rendimiento y robustez
 
-- [ ] Implementar carga diferida de los datos del capítulo actual [M]
-- [ ] Implementar cero allocations en el tick de historia (eventos) [M]
+- [x] Implementar carga diferida de los datos del capítulo actual [M]
+- [x] Implementar cero allocations en el tick de historia (eventos) [M]
 - [x] Implementar manejo de datos corruptos (guardado atómico + fallback) [M] — restore tolerante (probado con {} y campos faltantes); JSON inválido → grafo vacío + push_error
 - [x] Implementar sin excepciones ante datos faltantes [M] — get_nodo devuelve {}; puede_entrar lista motivo; testeaado
-- [ ] Implementar el tick de historia ≤ 0.1 ms [S]
+- [x] Implementar el tick de historia ≤ 0.1 ms [S]
 - [ ] Documentar rendimiento y robustez en el plan-actual [S]
 
 ## Testings y documentación
@@ -136,7 +136,7 @@
 - [ ] Crear 07-Resultados-Testings.md [S]
 - [ ] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
 - [ ] Actualizar plan-actual como espejo del estado real [M]
-- [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — Log 308
+- [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — Log 369
 - [x] Actualizar fila 22 en CHECKLIST-GLOBAL al implementar [S] — hecho (reserva y liberación)
 
 ## Mantenimiento y Evolución (6 ítems)
@@ -148,7 +148,7 @@
 - [ ] Documentar lecciones de narrativa para futuros proyectos
 - [ ] Revisar integridad del grafo de escenas antes de cada release
 
-**Total:** 100 ítems — 37/100 [x] (iter. 1 núcleo data, glm-5.3-flash 2026-08-31) · 63/100 [ ] con dueño (contenido narrativo, cutscenes, música, tests de guion, mantenimiento). Ver Log 308.
+**Total:** 100 ítems — 37/100 [x] (iter. 1 núcleo data, glm-5.3-flash 2026-08-31) · 63/100 [ ] con dueño (contenido narrativo, cutscenes, música, tests de guion, mantenimiento). Ver Log 369.
 
 ## QA Cruzado — Hy3 / WorkBuddy (2026-08-31, Log 313)
 

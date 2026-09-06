@@ -5,7 +5,7 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de texturas/materiales las superficies lucen dispares y el presupuesto se rompe [S]
+- [x] Definir el problema: sin sistema de texturas/materiales las superficies lucen dispares y el presupuesto se rompe [S]
 - [ ] Definir el objetivo: "material kit" central con atlas eficientes, variantes por bioma y presupuesto verificado [S]
 - [ ] Registrar dependencias: M08 (voxel), M45 (slots), M46 (paleta), M04 (Godot), M61/M62 (presupuestos), M108 [S]
 - [ ] Mapear la sección 46 "TEXTURAS Y MATERIALES" del plan maestro al ID 47 de la tabla global [M]
@@ -90,7 +90,7 @@
 
 ## M. RF12 — Validación automática
 
-- [ ] Definir script validate_material.gd [M]
+- [x] Definir script validate_material.gd [M]
 - [ ] Verificar resolución múltiplo de 4 y ≤ 2K [S]
 - [ ] Verificar alineación de tiles al atlas [M]
 - [ ] Verificar overlap de UVs entre tiles [M]
@@ -106,13 +106,13 @@
 
 ## O. RF14 — Registro de presupuesto
 
-- [ ] Definir texture_budget.json por textura (resolución, formato, VRAM) [C]
+- [x] Definir texture_budget.json por textura (resolución, formato, VRAM) [C]
 - [ ] Definir suma por escena contra presupuesto M62 [M]
 - [ ] Definir alerta de excedente en editor [S]
 
 ## P. RF15 — Determinismo procedural
 
-- [ ] Definir script generate_textures.gd con seed = hash(semilla, superficie, bioma, variante) [C]
+- [x] Definir script generate_textures.gd con seed = hash(semilla, superficie, bioma, variante) [C]
 - [ ] Definir reproducción exacta entre partidas [M]
 - [ ] Prohibir RNG en runtime [S]
 
@@ -140,7 +140,7 @@
 - [ ] Riesgo de tiling visible → variantes + barajado + normalmap [M]
 - [ ] Riesgo de shaders costosos → whitelist + conteo por escena [M]
 - [ ] Riesgo de atlas desalineado → validador de alineación [M]
-- [ ] Riesgo de memoria creciente → texture_budget.json en cada PR [M]
+- [x] Riesgo de memoria creciente → texture_budget.json en cada PR [M]
 
 ## T. Integraciones
 
@@ -159,7 +159,7 @@
 - [ ] Documentar flujo de generación procedural (base → paleta → ruido → variantes) [M]
 - [ ] Documentar flujo de asignación de material a prop (slots → kit → variante) [M]
 - [ ] Documentar flujo de validación al importar [M]
-- [ ] Documentar herramientas: Godot NoiseTexture2D, scripts de editor [S]
+- [x] Documentar herramientas: Godot NoiseTexture2D, scripts de editor [S]
 - [ ] Documentar uso de IA como apoyo de paleta (M86) [S]
 
 ## V. Criterios de aceptación verificados
@@ -176,9 +176,9 @@
 ## W. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (46=TEXTURAS → ID 47) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

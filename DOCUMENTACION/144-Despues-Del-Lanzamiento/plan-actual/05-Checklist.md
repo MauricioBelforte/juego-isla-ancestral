@@ -48,7 +48,7 @@
 
 ## 5. Revisar dificultad (5º)
 
-- [ ] Definir metrica de abandono por sistema (M105) [M]
+- [x] Definir metrica de abandono por sistema (M105) [M]
 - [ ] Definir análisis de curvas de dificultad reales (M93) [M]
 - [ ] Definir decisiones de cambio con condiciones de diseño [M]
 - [ ] Definir simulación de ajustes antes de parchear (M113) [M]
@@ -81,8 +81,8 @@
 
 ## 9. Revisar contenido más jugado (9º)
 
-- [ ] Definir ranking de sistemas por uso (M105) [M]
-- [ ] Definir horas por sistema (pesca, construcción, templos) [M]
+- [x] Definir ranking de sistemas por uso (M105) [M]
+- [x] Definir horas por sistema (pesca, construcción, templos) [M]
 - [ ] Definir cruce con reviews (qué se pide) [M]
 - [ ] Definir priorización de mejoras a lo más jugado [S]
 - [ ] Definir contenido de DLC alineado a lo más jugado (M120) [M]
@@ -130,7 +130,7 @@
 - [ ] Definir backup de bases de datos trimestrales [S]
 - [ ] Definir restauración probada trimestral [S]
 - [ ] Definir retención de backups 90 días [S]
-- [ ] Definir respaldo de builds de lanzamiento (M143) [S]
+- [x] Definir respaldo de builds de lanzamiento (M143) [S]
 - [ ] Definir disaster recovery plan post-lanzamiento [M]
 
 ## 15. Mantener soporte (15º)

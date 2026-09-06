@@ -9,14 +9,14 @@
 - [ ] Documentar servidor como autoridad total [S]
 - [ ] Documentar API Gateway (auth, rate limit) [M]
 - [ ] Documentar World Sim con snapshots @ 10 Hz [M]
-- [ ] Verificar coherencia con mp_contract.json (M76) [S]
+- [x] Verificar coherencia con mp_contract.json (M76) [S]
 
 ## B. Evaluar P2P (RF2)
 
 - [ ] Evaluar P2P (NAT, host offline, trampas) [M]
 - [ ] Descartar P2P para online con argumentos [M]
 - [ ] Documentar P2P válido SOLO en local (M76) [S]
-- [ ] Registrar p2p=false en net_contract.json [S]
+- [x] Registrar p2p=false en net_contract.json [S]
 - [ ] Verificar que el local no usa red [S]
 
 ## C. Servidores Dedicados (RF3)
@@ -189,7 +189,7 @@
 
 ## X. Coherencia con M76
 
-- [ ] Respetar mp_contract.json como fuente de producto [S]
+- [x] Respetar mp_contract.json como fuente de producto [S]
 - [ ] Respetar chat sin texto libre [S]
 - [ ] Respetar progreso individual [S]
 - [ ] Respetar economía protegida [S]
@@ -197,7 +197,7 @@
 
 ## Y. Validación y Cierre Técnico
 
-- [ ] Entregar net_contract.json (manifiesto técnico) [M]
+- [x] Entregar net_contract.json (manifiesto técnico) [M]
 - [ ] Entregar validate_net_contract.gd [M]
 - [ ] Verificar que v1 no abre puertos (grep) [S]
 - [ ] Documentar reconciliación offline→online futura [M]

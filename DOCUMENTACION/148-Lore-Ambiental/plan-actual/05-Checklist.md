@@ -183,12 +183,12 @@
 
 ## 20. Integración y calidad
 
-- [ ] Definir integración con sistema de interacción (IInteractable) [M]
+- [x] Definir integración con sistema de interacción (IInteractable) [M]
 - [ ] Definir grafo de pistas auditado (30 pistas, 3 por misterio crítico) [M]
 - [ ] Definir puente de descubrimiento por rumores (no lore invisible) [M]
 - [x] Definir tests de catálogo en headless (test_lore_m148.gd, 23/0 OK) [M]
 - [ ] Definir tests de trigger/persistencia en PlayMode [M]
-- [ ] Definir CI: LoreGate en build [M]
+- [x] Definir CI: LoreGate en build [M]
 - [ ] Definir revisión narrativa de todas las piezas contra M147 [C]
 - [ ] Definir 0 contradicciones detectables con la biblia [M]
 - [x] Definir documentación plan-actual actualizada y firmada [S]

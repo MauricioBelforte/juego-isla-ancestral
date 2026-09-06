@@ -22,8 +22,8 @@
 
 - [x] P1: pasos — 6 superficies × 4+ variaciones, pitch ±4% [S]
 - [ ] P2: correr — ritmo doble +3 dB (M34) [S]
-- [ ] P3: saltar — despegue suave por superficie [S]
-- [ ] P4: caer — 3 rangos de altura, sin violencia [S]
+- [x] P3: saltar — despegue suave por superficie [S]
+- [x] P4: caer — 3 rangos de altura, sin violencia [S]
 - [ ] P5: nadar — entrada/avance/salida (M34) [S]
 - [ ] P6: recoger — click + nota aguda positiva [S]
 - [x] P7: abrir — 3 variaciones (madera/cerrojo) [S]
@@ -41,15 +41,15 @@
 - [ ] P19: venta — monedas + nota media, distinto [S]
 - [ ] P20: diálogo — click de UI (M21) [S]
 - [ ] P21: menú — papel/pergamino suave [S]
-- [ ] P22: selección — clic corto muy suave [S]
-- [ ] P23: confirmación — 2 notas ascendentes 5ª [S]
+- [x] P22: selección — clic corto muy suave [S]
+- [x] P23: confirmación — 2 notas ascendentes 5ª [S]
 - [ ] P24: error — triada menor descendente 0.4 s [S]
 - [ ] P25: logro — arpegio triada mayor 3 notas [S]
 
 ## C. Familia tonal (8)
 
 - [x] SFX comparten escala y timbres con M41 [S]
-- [ ] Confirmación: 5ª justa ascendente [S]
+- [x] Confirmación: 5ª justa ascendente [S]
 - [ ] Logro: triada mayor brillante [S]
 - [ ] Error: triada menor suave (nunca buzz) [S]
 - [ ] Recoger: nota aguda positiva [S]
@@ -66,8 +66,8 @@
 - [x] Pool de 24 voces prealocadas estáticas [S]
 - [x] ≤ 6 simultáneos del mismo tipo [S]
 - [x] Sin allocs por frame (PRNG M29) [S]
-- [ ] 3D: pasos/interacciones; 2D: UI/diálogo [S]
-- [ ] Distancias: pasos 15 m, rotura 20 m, mundo 30 m [S]
+- [x] 3D: pasos/interacciones; 2D: UI/diálogo [S]
+- [x] Distancias: pasos 15 m, rotura 20 m, mundo 30 m [S]
 - [x] Excesos se cortan, jamás se apilan [S]
 
 ## E. Mapa de variaciones (14)
@@ -85,7 +85,7 @@
 - [ ] Romper metal: 4 golpe metálico [S]
 - [ ] Colocar: misma familia del material [S]
 - [ ] Herramientas: 4 por tipo [S]
-- [ ] Pesca/craft/comercio: etapas diferenciadas [S]
+- [x] Pesca/craft/comercio: etapas diferenciadas [S]
 
 ## F. Ducking y volumetría (8)
 
@@ -104,9 +104,9 @@
 - [x] sfx_surfaces.tres (materiales) [S]
 - [x] sfx_tones.tres (familia tonal) [S]
 - [x] API: reproducir(efecto, pos) [S]
-- [ ] API: reproducir_localizado(tipo, material, pos) [S]
+- [x] API: reproducir_localizado(tipo, material, pos) [S]
 - [x] API: configurar_volumen() [S]
-- [ ] Suscripciones M34/M13/M17/M35/M20/M45/M21 listadas [S]
+- [x] Suscripciones M34/M13/M17/M35/M20/M45/M21 listadas [S]
 - [x] Sin hardcode de paths [S]
 
 ## G2. Pruebas (4)

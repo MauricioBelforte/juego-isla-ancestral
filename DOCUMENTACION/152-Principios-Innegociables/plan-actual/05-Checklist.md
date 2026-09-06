@@ -6,7 +6,7 @@
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de principios innegociables
-- [ ] No agregar combate simplemente porque "todo juego necesita combate"
+- [x] No agregar combate simplemente porque "todo juego necesita combate"
 - [ ] No convertir el juego en un survival de hambre si contradice la visión
 - [ ] No castigar al jugador por jugar poco
 - [ ] No obligar al jugador a optimizar constantemente
@@ -16,7 +16,7 @@
 - [ ] No esconder información esencial detrás de una sola acción fácilmente perdible
 - [ ] No diseñar la economía alrededor del grind
 - [ ] No sacrificar rendimiento por una pequeña mejora visual
-- [ ] No añadir sistemas sin comprobar que aporten algo
+- [x] No añadir sistemas sin comprobar que aporten algo
 - [ ] No ampliar el mapa solamente para hacerlo grande
 - [ ] No confundir cantidad con profundidad
 - [ ] No introducir monetización que destruya la experiencia
@@ -26,52 +26,52 @@
 
 ### [S] Filosofía cozy
 - [ ] Definir filosofía cozy (sin FOMO, sin castigos irreversibles, eventos repetibles)
-- [ ] Definir principio: herramientas que no desaparecen
-- [ ] Definir principio: guardados y backups confiables
-- [ ] Definir principio: progresión accesible a cualquier ritmo
-- [ ] Definir principio: no penalización por inactividad
-- [ ] Definir principio: ambiente relajante y acogedor
-- [ ] Diseñar implementación de sin FOMO (autosave, múltiples slots, eventos repetibles)
-- [ ] Diseñar implementación de sin castigos irreversibles (herramientas reparables, recursos recuperables)
-- [ ] Diseñar implementación de eventos repetibles (NPCs no desaparecen, recursos no degradan)
-- [ ] Diseñar implementación de herramientas que no desaparecen (durabilidad pero reparables)
-- [ ] Diseñar implementación de guardados confiables (autosave, múltiples slots, backups)
+- [x] Definir principio: herramientas que no desaparecen
+- [x] Definir principio: guardados y backups confiables
+- [x] Definir principio: progresión accesible a cualquier ritmo
+- [x] Definir principio: no penalización por inactividad
+- [x] Definir principio: ambiente relajante y acogedor
+- [x] Diseñar implementación de sin FOMO (autosave, múltiples slots, eventos repetibles)
+- [x] Diseñar implementación de sin castigos irreversibles (herramientas reparables, recursos recuperables)
+- [x] Diseñar implementación de eventos repetibles (NPCs no desaparecen, recursos no degradan)
+- [x] Diseñar implementación de herramientas que no desaparecen (durabilidad pero reparables)
+- [x] Diseñar implementación de guardados confiables (autosave, múltiples slots, backups)
 
 ### [S] Principios de diseño de juego
-- [ ] Definir principio: combate opcional
-- [ ] Definir principio: sistema de hambre no castigador
-- [ ] Definir principio: ritmo de juego accesible
-- [ ] Definir principio: sin metagaming forzado
-- [ ] Definir principio: variedad de NPCs
-- [ ] Definir principio: balance procedural vs curado
-- [ ] Definir principio: puzzles lógicos
-- [ ] Definir principio: información accesible
-- [ ] Definir principio: economía cozy
-- [ ] Diseñar implementación de combate opcional (cooperativo, no letal, propósito narrativo)
-- [ ] Diseñar implementación de sistema de hambre no castigador (reduce stamina, no mata, comida abundante)
-- [ ] Diseñar implementación de ritmo de juego accesible (autosave, progresión no depende de tiempo real)
-- [ ] Diseñar implementación de sin metagaming forzado (no builds óptimos obligatorios, no min-maxing)
-- [ ] Diseñar implementación de variedad de NPCs (personalidades, historias, roles, apariencias)
-- [ ] Diseñar implementación de balance procedural vs curado (procedural para base, curado para momentos memorables)
-- [ ] Diseñar implementación de puzzles lógicos (basados en mecánicas, pistas claras, múltiples soluciones)
-- [ ] Diseñar implementación de información accesible (múltiples lugares, redundancia, accesible sin condiciones difíciles)
-- [ ] Diseñar implementación de economía cozy (sin grind, sin pay-to-win, basada en cooperación)
+- [x] Definir principio: combate opcional
+- [x] Definir principio: sistema de hambre no castigador
+- [x] Definir principio: ritmo de juego accesible
+- [x] Definir principio: sin metagaming forzado
+- [x] Definir principio: variedad de NPCs
+- [x] Definir principio: balance procedural vs curado
+- [x] Definir principio: puzzles lógicos
+- [x] Definir principio: información accesible
+- [x] Definir principio: economía cozy
+- [x] Diseñar implementación de combate opcional (cooperativo, no letal, propósito narrativo)
+- [x] Diseñar implementación de sistema de hambre no castigador (reduce stamina, no mata, comida abundante)
+- [x] Diseñar implementación de ritmo de juego accesible (autosave, progresión no depende de tiempo real)
+- [x] Diseñar implementación de sin metagaming forzado (no builds óptimos obligatorios, no min-maxing)
+- [x] Diseñar implementación de variedad de NPCs (personalidades, historias, roles, apariencias)
+- [x] Diseñar implementación de balance procedural vs curado (procedural para base, curado para momentos memorables)
+- [x] Diseñar implementación de puzzles lógicos (basados en mecánicas, pistas claras, múltiples soluciones)
+- [x] Diseñar implementación de información accesible (múltiples lugares, redundancia, accesible sin condiciones difíciles)
+- [x] Diseñar implementación de economía cozy (sin grind, sin pay-to-win, basada en cooperación)
 
 ### [S] Principios técnicos
-- [ ] Definir principio: performance prioridad sobre visuals
-- [ ] Definir principio: sistemas con propósito
-- [ ] Definir principio: calidad > cantidad
-- [ ] Definir principio: profundidad > cantidad
-- [ ] Definir principio: offline-first
-- [ ] Definir principio: licencias claras de assets
-- [ ] Definir principio: knowledge sharing
-- [ ] Diseñar implementación de performance prioridad sobre visuals (60 FPS en hardware medio, settings gráficos, LODs)
-- [ ] Diseñar implementación de sistemas con propósito (justificación obligatoria, revisión de diseño, pruebas de usabilidad)
-- [ ] Diseñar implementación de calidad > cantidad (mundo denso y significativo, áreas con propósito)
-- [ ] Diseñar implementación de profundidad > cantidad (sistemas interconectados, mecánicas con profundidad)
-- [ ] Diseñar implementación de offline-first (offline mode, fallbacks para servicios externos)
-- [ ] Diseñar implementación de licencias claras de assets (documento de licencias, archivo de licencia por asset, verificación)
-- [ ] Diseñar implementación de knowledge sharing (documentación, code reviews, pair programming, knowledge sharing sessions)
+- [x] Definir principio: performance prioridad sobre visuals
+- [x] Definir principio: sistemas con propósito
+- [x] Definir principio: calidad > cantidad
+- [x] Definir principio: profundidad > cantidad
+- [x] Definir principio: offline-first
+- [x] Definir principio: licencias claras de assets
+- [x] Definir principio: knowledge sharing
+- [x] Diseñar implementación de performance prioridad sobre visuals (60 FPS en hardware medio, settings gráficos, LODs)
+- [x] Diseñar implementación de sistemas con propósito (justificación obligatoria, revisión de diseño, pruebas de usabilidad)
+- [x] Diseñar implementación de calidad > cantidad (mundo denso y significativo, áreas con propósito)
+- [x] Diseñar implementación de profundidad > cantidad (sistemas interconectados, mecánicas con profundidad)
+- [x] Diseñar implementación de offline-first (offline mode, fallbacks para servicios externos)
+- [x] Diseñar implementación de licencias claras de assets (documento de licencias, archivo de licencia por asset, verificación)
+- [x] Diseñar implementación de knowledge sharing (documentación, code reviews, pair programming, knowledge sharing sessions)
 
 ### [S] Proceso de revisión
 - [x] Diseñar checklist de revisión contra principios (8 ítems)
@@ -112,7 +112,7 @@
 - [ ] Especificar integración con M59 (Guardado)
 - [ ] Especificar integración con M61 (Rendimiento)
 - [ ] Especificar integración con M64 (NPC)
-- [ ] Especificar integración con M90 (Configuración Gráfica)
+- [x] Especificar integración con M90 (Configuración Gráfica)
 - [ ] Especificar integración con M107 (Backups)
 - [ ] Especificar integración con M111 (Código de Calidad)
 - [ ] Especificar integración con M131 (Créditos)
@@ -127,7 +127,7 @@
 
 ### [S] Ejemplos de aplicación
 - [ ] Diseñar ejemplo 1: decisión de agregar combate
-- [ ] Diseñar ejemplo 2: decisión de agregar sistema de hambre
+- [x] Diseñar ejemplo 2: decisión de agregar sistema de hambre
 - [ ] Diseñar ejemplo 3: decisión de ampliar mapa
 - [ ] Documentar resultado de ejemplo 1 (aprobado)
 - [ ] Documentar resultado de ejemplo 2 (aprobado con modificación)
@@ -135,52 +135,52 @@
 
 ### [S] Documentación de filosofia_cozy.md
 - [ ] Diseñar definición de cozy
-- [ ] Diseñar principio: sin FOMO
-- [ ] Diseñar implementación de sin FOMO
-- [ ] Diseñar principio: sin castigos irreversibles
-- [ ] Diseñar implementación de sin castigos irreversibles
-- [ ] Diseñar principio: eventos repetibles
-- [ ] Diseñar implementación de eventos repetibles
-- [ ] Diseñar principio: herramientas que no desaparecen
-- [ ] Diseñar implementación de herramientas que no desaparecen
-- [ ] Diseñar principio: guardados confiables
-- [ ] Diseñar implementación de guardados confiables
+- [x] Diseñar principio: sin FOMO
+- [x] Diseñar implementación de sin FOMO
+- [x] Diseñar principio: sin castigos irreversibles
+- [x] Diseñar implementación de sin castigos irreversibles
+- [x] Diseñar principio: eventos repetibles
+- [x] Diseñar implementación de eventos repetibles
+- [x] Diseñar principio: herramientas que no desaparecen
+- [x] Diseñar implementación de herramientas que no desaparecen
+- [x] Diseñar principio: guardados confiables
+- [x] Diseñar implementación de guardados confiables
 
 ### [S] Documentación de diseno_juego.md
-- [ ] Diseñar principio: combate opcional
-- [ ] Diseñar implementación de combate opcional
-- [ ] Diseñar principio: sistema de hambre no castigador
-- [ ] Diseñar implementación de sistema de hambre no castigador
-- [ ] Diseñar principio: ritmo de juego accesible
-- [ ] Diseñar implementación de ritmo de juego accesible
-- [ ] Diseñar principio: sin metagaming forzado
-- [ ] Diseñar implementación de sin metagaming forzado
-- [ ] Diseñar principio: variedad de NPCs
-- [ ] Diseñar implementación de variedad de NPCs
-- [ ] Diseñar principio: balance procedural vs curado
-- [ ] Diseñar implementación de balance procedural vs curado
-- [ ] Diseñar principio: puzzles lógicos
-- [ ] Diseñar implementación de puzzles lógicos
-- [ ] Diseñar principio: información accesible
-- [ ] Diseñar implementación de información accesible
-- [ ] Diseñar principio: economía cozy
-- [ ] Diseñar implementación de economía cozy
+- [x] Diseñar principio: combate opcional
+- [x] Diseñar implementación de combate opcional
+- [x] Diseñar principio: sistema de hambre no castigador
+- [x] Diseñar implementación de sistema de hambre no castigador
+- [x] Diseñar principio: ritmo de juego accesible
+- [x] Diseñar implementación de ritmo de juego accesible
+- [x] Diseñar principio: sin metagaming forzado
+- [x] Diseñar implementación de sin metagaming forzado
+- [x] Diseñar principio: variedad de NPCs
+- [x] Diseñar implementación de variedad de NPCs
+- [x] Diseñar principio: balance procedural vs curado
+- [x] Diseñar implementación de balance procedural vs curado
+- [x] Diseñar principio: puzzles lógicos
+- [x] Diseñar implementación de puzzles lógicos
+- [x] Diseñar principio: información accesible
+- [x] Diseñar implementación de información accesible
+- [x] Diseñar principio: economía cozy
+- [x] Diseñar implementación de economía cozy
 
 ### [S] Documentación de tecnicos.md
-- [ ] Diseñar principio: performance prioridad sobre visuals
-- [ ] Diseñar implementación de performance prioridad sobre visuals
-- [ ] Diseñar principio: sistemas con propósito
-- [ ] Diseñar implementación de sistemas con propósito
-- [ ] Diseñar principio: calidad > cantidad
-- [ ] Diseñar implementación de calidad > cantidad
-- [ ] Diseñar principio: profundidad > cantidad
-- [ ] Diseñar implementación de profundidad > cantidad
-- [ ] Diseñar principio: offline-first
-- [ ] Diseñar implementación de offline-first
-- [ ] Diseñar principio: licencias claras de assets
-- [ ] Diseñar implementación de licencias claras de assets
-- [ ] Diseñar principio: knowledge sharing
-- [ ] Diseñar implementación de knowledge sharing
+- [x] Diseñar principio: performance prioridad sobre visuals
+- [x] Diseñar implementación de performance prioridad sobre visuals
+- [x] Diseñar principio: sistemas con propósito
+- [x] Diseñar implementación de sistemas con propósito
+- [x] Diseñar principio: calidad > cantidad
+- [x] Diseñar implementación de calidad > cantidad
+- [x] Diseñar principio: profundidad > cantidad
+- [x] Diseñar implementación de profundidad > cantidad
+- [x] Diseñar principio: offline-first
+- [x] Diseñar implementación de offline-first
+- [x] Diseñar principio: licencias claras de assets
+- [x] Diseñar implementación de licencias claras de assets
+- [x] Diseñar principio: knowledge sharing
+- [x] Diseñar implementación de knowledge sharing
 
 ### [S] Documentación de proceso_revision.md
 - [ ] Diseñar formato de revisión de decisión
@@ -192,7 +192,7 @@
 
 ### [S] Documentación de desviaciones_justificadas.md
 - [ ] Diseñar tabla de desviaciones justificadas
-- [ ] Diseñar campos: ID, decisión, principio desviado, justificación, aprobado por, fecha
+- [x] Diseñar campos: ID, decisión, principio desviado, justificación, aprobado por, fecha
 - [ ] Diseñar ejemplo de desviación justificada
 
 ### [S] Documentación de licencias_assets.md
@@ -206,13 +206,13 @@
 
 ### [S] Documentación de knowledge_sharing.md
 - [ ] Diseñar prácticas de documentation
-- [ ] Diseñar prácticas de code reviews
+- [x] Diseñar prácticas de code reviews
 - [ ] Diseñar prácticas de pair programming
 - [ ] Diseñar prácticas de knowledge sharing sessions
 - [ ] Diseñar herramientas de knowledge sharing
 - [ ] Diseñar proceso de documentación de arquitectura
-- [ ] Diseñar proceso de documentación de sistemas
-- [ ] Diseñar proceso de code reviews
+- [x] Diseñar proceso de documentación de sistemas
+- [x] Diseñar proceso de code reviews
 - [ ] Diseñar proceso de pair programming
 - [ ] Diseñar proceso de knowledge sharing sessions
 

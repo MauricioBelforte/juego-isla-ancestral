@@ -27,8 +27,8 @@
 - [ ] Definir nombres de archivos del modulo [S]
 - [ ] Documentar dependencias con M11 [S]
 - [ ] Documentar dependencias con M155 [S]
-- [ ] Definir interfaz publica del sistema [M]
-- [ ] Definir senales del sistema [M]
+- [x] Definir interfaz publica del sistema [M]
+- [x] Definir senales del sistema [M]
 - [ ] Definir eventos de comunicacion entre modulos [M]
 - [ ] Crear diagrama de componentes [S]
 - [ ] Crear diagrama de secuencia [S]
@@ -36,7 +36,7 @@
 - [ ] Documentar flujo principal de ejecucion [M]
 - [ ] Documentar flujo de audio [S]
 - [ ] Documentar flujo de efectos visuales [S]
-- [ ] Definir constantes del sistema [S]
+- [x] Definir constantes del sistema [S]
 - [x] Definir variables de configuracion [S]
 - [ ] Documentar edge cases conocidos [M]
 
@@ -170,11 +170,11 @@
 - [x] Consultar item.get_terrain_bonus() [M]
 - [ ] Sumar bonificaciones de multiples items [M]
 - [ ] Documentar contrato de interfaz [S]
-- [ ] Verificar compatibilidad con sistema de equipacion [M]
+- [x] Verificar compatibilidad con sistema de equipacion [M]
 
 ## I. Feedback Visual
 
-- [ ] Crear sistema de huellas por terreno [M]
+- [x] Crear sistema de huellas por terreno [M]
 - [ ] Crear escena huella_ceped.tscn [S]
 - [x] Crear escena huella_barro.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear escena huella_pavimento.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
@@ -182,7 +182,7 @@
 - [x] Crear escena huella_agua.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear escena huella_nieve.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [ ] Crear sistema de particulas por terreno [M]
+- [x] Crear sistema de particulas por terreno [M]
 - [ ] Crear particulas_ceped.gd [S]
 - [x] Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear particulas_arena.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
@@ -291,7 +291,7 @@
 - [ ] Crear 03-Diseno.md [C]
 - [ ] Crear 04-Codigo.md [M]
 - [ ] Crear 05-Checklist.md [M]
-- [ ] Documentar arquitectura del sistema [M]
+- [x] Documentar arquitectura del sistema [M]
 - [x] Documentar contratos de integracion [M] — iter. 2: puente M155 documentado en terrain_modifiers.gd (NOMBRES_TERRENO id→nombre §4.1, get_terrain_bonus(String) tipado); contratos M11/M155 vívios en el código fuente con ejemplos de integración
 - [ ] Documentar flujo de ejecucion [S]
 - [x] Documentar configuracion de Layers [S]

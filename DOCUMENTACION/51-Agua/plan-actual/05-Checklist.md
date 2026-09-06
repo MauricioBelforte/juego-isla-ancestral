@@ -5,7 +5,7 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de agua el océano es caro e inconsistente [S]
+- [x] Definir el problema: sin sistema de agua el océano es caro e inconsistente [S]
 - [ ] Definir el objetivo: agua determinista, cozy y barata con física coherente [S]
 - [ ] Registrar dependencias: M09 (nivel de mar), M10 (splines), M47 (shader), M08 (bloques), M04 (Godot), M61/M62 (presupuestos) [M]
 - [ ] Mapear la sección 50 "AGUA" del plan maestro al ID 51 de la tabla global [M]
@@ -212,19 +212,19 @@
 - [ ] Corrientes mueven objetos y barcos [M]
 - [ ] Hielo solo estacional y sin softlock [M]
 - [ ] Cascadas con sonido + partículas sincronizados [M]
-- [ ] Puzzles de compuertas/canales funcionan (M24) [M]
+- [x] Puzzles de compuertas/canales funcionan (M24) [M]
 - [ ] Natación suave sin clipping con chapoteo [M]
 - [ ] Presupuesto verificado por validador [M]
 
 ## AD. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (50=AGUA → ID 51) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 ## Verificación (2026-09-02 06:00 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Parámetros de la batimetría verificados en código (island_generator): water_level=2, banda 0.94-0.98 = agua CLARA (fondo 2, capa turquesa en y=3 con el fix M167), >0.98 = océano profundo (height 0); paleta Maldivas: water #1A73BF (0.10,0.45,0.75) y shallow_water #40D1C7 (0.25,0.82,0.78)

@@ -5,10 +5,10 @@
 
 ## A. Requisitos y alcance (12)
 
-- [ ] Definir el problema: HUD mínimo, menús navegables, diálogos, inventario, minimapa, tooltips, feedback visual/audio/táctil, consistencia cozy, sin barreras [S]
+- [x] Definir el problema: HUD mínimo, menús navegables, diálogos, inventario, minimapa, tooltips, feedback visual/audio/táctil, consistencia cozy, sin barreras [S]
 - [ ] Registrar dependencias M11 y M14 y relaciones M21, M30, M54, M55, M57, M58, M87, M88, M89, M90, M91 [S]
 - [ ] Catalogar los 25 puntos de la sección 52 del plan maestro (Plan-inicial-minimo) [S]
-- [ ] Definir RF1: composición del HUD mínimo y su jerarquía de importancia [S]
+- [x] Definir RF1: composición del HUD mínimo y su jerarquía de importancia [S]
 - [ ] Definir RF2: menús navegables al 100% con gamepad, teclado y ratón [S]
 - [ ] Definir RF3: ventana de diálogo con nombre, retrato, opciones y pausa [S]
 - [ ] Definir RF4: inventario con grid, drag & drop y hotbar sincronizada [S]
@@ -47,11 +47,11 @@
 - [x] Implementar force_refresh puntual y refresh a baja frecuencia (2 Hz) sin polling por frame [M]
 - [x] Implementar set_hud_visible(false) para M56 Fotografía y capturas [S]
 - [x] Verificar que el HUD no tape el centro de la pantalla (regla de layout) [S]
-- [ ] Verificar que el HUD siga coherente con pausa abierta en modo congelado [M]
+- [x] Verificar que el HUD siga coherente con pausa abierta en modo congelado [M]
 
 ## C. Navegación y foco (12)
 
-- [ ] Configurar focus_neighbor y focus_next/focus_prev en todas las pantallas del editor [M]
+- [x] Configurar focus_neighbor y focus_next/focus_prev en todas las pantallas del editor [M]
 - [x] Implementar MenuNavigator con focus_first y focus_last [S]
 - [x] Implementar wrap-around circular de foco en grids y listas [M]
 - [x] Soporte completo de navegación direccional con gamepad (4 direcciones) [M]
@@ -92,10 +92,10 @@
 
 ## F. Minimapa (8)
 
-- [ ] Crear MinimapWidget con textura caché generada por M54 [M]
+- [x] Crear MinimapWidget con textura caché generada por M54 [M]
 - [ ] Ícono del jugador centrado con rotación fija (menos cinetosis, M58) [S]
 - [ ] Mostrar POIs relevantes (pueblo, templos, accesos a islas) [S]
-- [ ] Ocultable con una acción y desde configuración [S]
+- [x] Ocultable con una acción y desde configuración [S]
 - [ ] Sin re-render por frame: solo al cambiar chunk, POI o ratio [M]
 - [ ] Diferenciación por forma y color para daltonismo (M58) [S]
 - [ ] Test de rendimiento del minimapa con el mundo voxel cargado [M]
@@ -114,14 +114,14 @@
 
 ## H. Feedback visual, audio y táctil (10)
 
-- [ ] Confirmar tonalidad de interacciones positivas (SFX en bus UI de M91) [S]
+- [x] Confirmar tonalidad de interacciones positivas (SFX en bus UI de M91) [S]
 - [ ] Hover de botones con cambio suave de color y sonido leve [S]
 - [ ] Click y confirm con sonido de confirmación corto [S]
 - [ ] Acción inválida con sonido suave no alarmante y texto amable [S]
 - [x] Toasts con icono y SFX por tipo (obtención, evento, misión) [M]
 - [ ] Feedback visual de colocación, cosecha y compra (Tween 120 ms) [M]
 - [ ] Vibración háptica leve opcional en gamepad (M57, ajustable en M58) [M]
-- [ ] Ajuste global del feedback (volumen UI en M91, háptica en M58) [S]
+- [x] Ajuste global del feedback (volumen UI en M91, háptica en M58) [S]
 - [ ] Ningún flash ni parpadeo por defecto (modo sin flashes de M58) [S]
 - [ ] Test de no redundancia: nunca sonido + visual + toast para la misma acción [M]
 
@@ -141,7 +141,7 @@
 ## J. Accesibilidad M58 (10)
 
 - [x] Integrar ui_scale 0.8-1.5 aplicado por ThemeUx en runtime [M]
-- [ ] Integrar text_scale independiente del escala de UI [M]
+- [x] Integrar text_scale independiente del escala de UI [M]
 - [ ] Integrar high_contrast con contraste AA y bordes reforzados [M]
 - [ ] Integrar modo daltonismo con formas y texturas además del color [M]
 - [ ] Integrar reduce_motion desactivando tweens y transiciones [M]
@@ -153,43 +153,43 @@
 
 ## K. Integración con módulos (12)
 
-- [ ] UIManager suscrito al Action Layer de M57 (acciones transversales) [M]
+- [x] UIManager suscrito al Action Layer de M57 (acciones transversales) [M]
 - [ ] Prompts dinámicos por dispositivo (keyboard, xbox, playstation, generic) [M]
 - [ ] Remapeo de M57 re-lee las etiquetas de prompts automáticamente [M]
 - [ ] M58 settings_changed re-aplica el tema sin reiniciar [M]
 - [ ] M87 cambio de idioma recarga fuentes y textos en vivo [M]
-- [ ] M90 resolution_changed re-aplica ThemeUx y guardas de layout [M]
-- [ ] M91: todos los SFX de interfaz en el bus UI dedicado [S]
+- [x] M90 resolution_changed re-aplica ThemeUx y guardas de layout [M]
+- [x] M91: todos los SFX de interfaz en el bus UI dedicado [S]
 - [ ] M89: menú principal, continuar, cargar, ajustes y créditos registrados [M]
 - [ ] M89: pausa con deep-linking entre capas (inventario, diario, mapa, ajustes) [M]
-- [ ] M54 minimapa, M55 diario y M56 ocultar HUD consumen el framework UI [M]
-- [ ] M63 progreso visual de carga en LoadingLayer (seccion 8 de AGENTS) [M]
-- [ ] M30/M29 widgets de reloj y estación respetan la pausa [S]
+- [x] M54 minimapa, M55 diario y M56 ocultar HUD consumen el framework UI [M]
+- [x] M63 progreso visual de carga en LoadingLayer (seccion 8 de AGENTS) [M]
+- [x] M30/M29 widgets de reloj y estación respetan la pausa [S]
 
 ## L. Edge cases (12)
 
 - [ ] Inventario abierto + evento de diálogo: la capa se encola y espera [M]
 - [ ] Diálogo abierto + request de inventario: modal simple no compite, se encola [M]
 - [ ] Cierre rápido de capas (doble pulsación) no rompe la pila [M]
-- [ ] Foco perdido por control eliminado: focus_first de respaldo + log DOM-UI [M]
+- [x] Foco perdido por control eliminado: focus_first de respaldo + log DOM-UI [M]
 - [ ] Alt-tab y pérdida de foco de ventana: al volver, focus_first de la capa visible [M]
 - [ ] Cambio de resolución M90 con capas abiertas: sin cortes ni controles fuera de pantalla [C]
 - [ ] Ratios 16:9 y 16:10 verificados en todas las pantallas [M]
-- [ ] Escala de UI extrema (1.5) sin solapamientos entre widgets [M]
+- [x] Escala de UI extrema (1.5) sin solapamientos entre widgets [M]
 - [ ] Listas largas (500 items) con scroll por foco sin glitches [M]
-- [ ] Notificaciones encadenadas (10 seguidas) sin desbordes de cola [S]
-- [ ] Abrir configuración desde pausa y volver sin perder el foco de pausa [M]
+- [x] Notificaciones encadenadas (10 seguidas) sin desbordes de cola [S]
+- [x] Abrir configuración desde pausa y volver sin perder el foco de pausa [M]
 - [ ] Pausa durante transición de escena (M63) sin capas colgadas [C]
 
 ## M. Optimización y rendimiento (8)
 
 - [ ] Canvas merge por capa para minimizar draw calls [M]
-- [ ] Labels con caché de texto en refresh de widgets [M]
+- [x] Labels con caché de texto en refresh de widgets [M]
 - [ ] Minimapa con textura caché sin regeneración por frame [M]
 - [ ] Tooltips con pool sin allocaciones en el flujo caliente [M]
-- [ ] Capas modales en pausa no repintan el HUD por frame [M]
-- [ ] Presupuesto UI menor o igual a 8% del frame medido con Profiler (M61) [C]
-- [ ] Verificación de draw calls en escena poblada (pueblo + HUD completo) [M]
+- [x] Capas modales en pausa no repintan el HUD por frame [M]
+- [x] Presupuesto UI menor o igual a 8% del frame medido con Profiler (M61) [C]
+- [x] Verificación de draw calls en escena poblada (pueblo + HUD completo) [M]
 - [ ] Font subsetting por idioma (M88) para evitar desperdicio de memoria [M]
 
 ## N. Documentación, QA y cierre (10)
@@ -202,9 +202,9 @@
 - [x] Plan-actual copiado idéntico desde plan-inicial [S]
 - [ ] Plan de testings sugerido: navegación por 3 métodos, edge cases y rendimiento [M]
 - [x] Módulo marcado delegable para implementación (tras M07, M11 y M57) [S]
-- [ ] Acoplamiento verificado: gameplay, mundo y AI no importan res://ui [M]
+- [x] Acoplamiento verificado: gameplay, mundo y AI no importan res://ui [M]
 - [x] Checklist completo con mas de 110 items [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

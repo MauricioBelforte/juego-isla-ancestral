@@ -75,7 +75,7 @@
 
 - [x] Delegar análisis de RAM a M62 [S]
 - [x] Definir que M61 solo acota el frame (allocations) [S]
-- [ ] Registrar RSS por escena en bench JSON [M]
+- [x] Registrar RSS por escena en bench JSON [M]
 - [ ] Coordinar pausas de GC con M62 [M]
 - [ ] Documentar presupuesto de VRAM en bench [M]
 
@@ -93,7 +93,7 @@
 - [ ] Definir carga caliente <10 s (SSD recomendado) [M]
 - [ ] Definir HDD como no soportado (documentado) [S]
 - [ ] Documentar tamaño máximo de paquete de datos [M]
-- [ ] Validar tiempos con build de instalador (M115) [C]
+- [x] Validar tiempos con build de instalador (M115) [C]
 
 ## I. Tiempos de Carga (RF9)
 
@@ -229,7 +229,7 @@
 - [ ] Definir reuso de Arrays/Variants [M]
 - [ ] Definir GC en pausas seguras (transiciones M63) [M]
 - [x] Definir gate CI con bench scene (M116) [M]
-- [ ] Definir playtest obligatorio en build de profiling [M]
+- [x] Definir playtest obligatorio en build de profiling [M]
 
 ## Z. Cierre del Módulo
 

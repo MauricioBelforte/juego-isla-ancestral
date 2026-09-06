@@ -11,12 +11,12 @@
 - [x] Definir enum LicenseScope: EXCLUSIVE, NON_EXCLUSIVE, SOLE
 - [x] Crear Resource AudioCredit con campos: person_name, role, contribution, track_list, contract_reference, payment_status
 - [x] Documentar diferencias entre Work-for-Hire y License Agreement
-- [ ] Definir regla: composiciones core = Work-for-Hire, DLC = Licencia con regalías
+- [x] Definir regla: composiciones core = Work-for-Hire, DLC = Licencia con regalías
 - [x] Definir regla: audio de IA siempre con composer humano como autor final
 - [ ] Crear template de contrato Work-for-Hire para compositores
 - [ ] Crear template de contrato de sesión para músicos
 - [ ] Crear template de contrato para voice actors
-- [ ] Crear template de licencia para librerías de stock
+- [x] Crear template de licencia para librerías de stock
 - [x] Definir proceso de clearances para muestras musicales
 - [x] Definir política de atribución obligatoria para todos los audios
 - [x] Crear checklist de verificación pre-build para audio
@@ -25,41 +25,41 @@
 ## B. Contratos de Compositor (10 ítems)
 
 - [ ] Template Work-for-Hire con cesión total de PI
-- [ ] Cláusula de credito obligatorio en todos los builds
+- [x] Cláusula de credito obligatorio en todos los builds
 - [ ] Cláusula de pago upfront (flat fee)
-- [ ] Cláusula de regalías opcionales para secuelas/DLC
-- [ ] Cláusula de confidencialidad
+- [x] Cláusula de regalías opcionales para secuelas/DLC
+- [x] Cláusula de confidencialidad
 - [ ] Cláusula de garantía de originalidad
-- [ ] Cláusula de release de grabación
+- [x] Cláusula de release de grabación
 - [ ] Cláusula de jurisdiction y ley aplicable
-- [ ] Template de anexo para especificaciones de entrega
-- [ ] Template de acta de entrega y aceptación
+- [x] Template de anexo para especificaciones de entrega
+- [x] Template de acta de entrega y aceptación
 
 ## C. Contratos de Artistas (10 ítems)
 
 - [ ] Template de contrato de sesión (flat fee)
 - [ ] Cláusula de credito obligatorio
-- [ ] Cláusula de release de interpretación
+- [x] Cláusula de release de interpretación
 - [ ] Cláusula de pago completo al finalizar
 - [ ] Cláusula de que no hay regalías en juego base
-- [ ] Cláusula de opciones para DLC (renegociación)
-- [ ] Cláusula de confidencialidad
+- [x] Cláusula de opciones para DLC (renegociación)
+- [x] Cláusula de confidencialidad
 - [ ] Template de hoja de sesión (session sheet)
 - [ ] Template de firma de release
-- [ ] Proceso de verificación de pagamento
+- [x] Proceso de verificación de pagamento
 
 ## D. Licencias de Stock (10 ítems)
 
 - [x] Verificar perpetual license (no subscription)
-- [ ] Verificar uso comercial permitido
+- [x] Verificar uso comercial permitido
 - [ ] Verificar attribution requirements
-- [ ] Guardar copia de licencia en repositorio
+- [x] Guardar copia de licencia en repositorio
 - [x] Documentar?? de uso (ej: no redistribuir el sample)
 - [ ] Verificar si requiere credito en credits del juego
 - [ ] Verificar si hay restriction de territorio
 - [ ] Verificar si hay restriction de plataforma
 - [ ] Crear inventario de todas las librerías de stock
-- [ ] Proceso de renovación/re-verificación anual
+- [x] Proceso de renovación/re-verificación anual
 
 ## E. Créditos de Audio (10 ítems)
 
@@ -68,9 +68,9 @@
 - [x] Implementar generate_game_credits() (formato compacto)
 - [x] Implementar generate_web_credits() (formato detallado)
 - [x] Implementar save_build_credits() para builds
-- [ ] Agrupar créditos por rol (Composer, Musician, Sound Designer)
+- [x] Agrupar créditos por rol (Composer, Musician, Sound Designer)
 - [ ] Incluir pistas específicas por artista
-- [ ] Referenciar contrato en cada crédito
+- [x] Referenciar contrato en cada crédito
 - [ ] Incluir estado de pago en cada crédito
 - [x] Generar archivo AUDIO_CREDITS.txt en cada build
 
@@ -79,12 +79,12 @@
 - [ ] Definir regla: AI es herramienta, no autor
 - [ ] Definir regla: composer humano es autor final
 - [x] Requerir disclosure en créditos de audio con IA
-- [ ] Verificar que la herramienta de IA permita uso comercial
+- [x] Verificar que la herramienta de IA permita uso comercial
 - [x] Documentar qué herramientas de IA se usaron
 - [x] Guardar logs de generación de audio por IA
 - [x] Validar que audio de IA no infrinja copyrights existentes
 - [x] Definir proceso de review humano para audio de IA
-- [ ] Incluir advertencia en créditos: "Incluye elementos generados por IA"
+- [x] Incluir advertencia en créditos: "Incluye elementos generados por IA"
 - [x] Verificar compatibilidad con ESRB/PEGI (sin contenido ofensivo)
 
 ## G. Validación y Testing (10 ítems)
@@ -105,11 +105,11 @@
 - [x] Agregar paso de validación de audio en build_script.gd
 - [x] Build falla si hay licencia de audio inválida
 - [x] Build incluye AUDIO_CREDITS.txt automáticamente
-- [ ] Integración con M117 (Build Pipeline)
-- [ ] Integración con M83 (Licencias de Software)
+- [x] Integración con M117 (Build Pipeline)
+- [x] Integración con M83 (Licencias de Software)
 - [x] Logging de validación de audio en build log
-- [ ] Modo dry-run para verificar sin generar outputs
-- [ ] Skip de validación en builds de desarrollo
+- [x] Modo dry-run para verificar sin generar outputs
+- [x] Skip de validación en builds de desarrollo
 - [x] Verificar que todos los audios del build tengan licencia
 - [x] Generar reporte de licencias de audio por build
 
@@ -120,16 +120,18 @@
 - [x] Documentar cómo registrar nuevas licencias
 - [x] Documentar cómo agregar nuevos créditos
 - [x] Crear FAQ de licencias de audio en juegos
-- [ ] Tabla de comparación de tipos de licencia
+- [x] Tabla de comparación de tipos de licencia
 - [ ] Ejemplos de uso de cada nodo
 - [x] Proceso de auditoría de licencias pre-launch
-- [ ] Contacto de abogado especializado en entertainment law
+- [x] Contacto de abogado especializado en entertainment law
 - [x] Registro de cambios del módulo
-- [ ] Proceso de actualización de créditos
-- [ ] Template de email para solicitar clearances
+- [x] Proceso de actualización de créditos
+- [x] Template de email para solicitar clearances
 - [x] Checklist pre-release de audio legal
 - [ ] Proceso de handling de claims de copyright
 - [x] Documentar casos de uso edge (audio de dominio público)
+
+> **Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429):** `legal/credits_manager.gd` (año de copyright, RF6) quedó incluido en la whitelist del scan anti-reloj-SO de M30 (criterio: contenido legal del mundo real, jamás gameplay). El código de este módulo NO fue modificado. Detalle: 07-GUIA-GODOT §9.64.
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 

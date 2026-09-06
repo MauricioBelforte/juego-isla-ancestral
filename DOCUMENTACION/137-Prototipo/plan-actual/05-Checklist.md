@@ -8,7 +8,7 @@
 ## A. Setup del Proyecto
 
 - [ ] Definir escena `prototipo_isla.tscn` como escena principal [M]
-- [ ] Definir carpeta `scenes/prototipo/` para todos los scripts del hito [S]
+- [x] Definir carpeta `scenes/prototipo/` para todos los scripts del hito [S]
 - [ ] Definir autoload `game_state_proto.gd` (M59) [M]
 - [ ] Definir autoload `world_seed.gd` con seed fija 20260819 [S]
 - [ ] Definir carpeta `docs/prototipo/` para los reportes del hito [S]
@@ -75,7 +75,7 @@
 - [ ] Definir guardado delta solo de chunks modificados [C]
 - [ ] Definir carga con seed mismatch → aviso (no crash) [M]
 - [ ] Definir test guardar→salir→cargar con 0 pérdidas [C]
-- [ ] Definir corrupción de JSON → estado seguro (sin pérdida total) [M]
+- [x] Definir corrupción de JSON → estado seguro (sin pérdida total) [M]
 
 ## J. Mapa Pequeño (M10, RF10)
 
@@ -119,7 +119,7 @@
 
 ## O. Playtest (M114, RF13)
 
-- [ ] Definir `playtest_runner.gd` que loguea eventos y FPS [C]
+- [x] Definir `playtest_runner.gd` que loguea eventos y FPS [C]
 - [ ] Definir sesión de 15 min por tester [S]
 - [ ] Definir mínimo 3 testers [S]
 - [ ] Definir encuesta de 5 preguntas (RF14) [S]
@@ -144,7 +144,7 @@
 ## R. Rendimiento (M61, RF16)
 
 - [ ] Definir medición FPS cada 5 s durante sesión [S]
-- [ ] Definir criterio ≥ 60 FPS en config media [M]
+- [x] Definir criterio ≥ 60 FPS en config media [M]
 - [ ] Definir escena densa de prueba (zona de 64³ llena) [M]
 - [ ] Definir profiling con CPU/GPU (M61) si FPS < 60 [M]
 - [ ] Definir reporte de rendimiento en `PLAYTEST.md` [M]
@@ -154,7 +154,7 @@
 - [ ] Definir input provisional teclado/mouse [S]
 - [ ] Definir acciones: izq, der, adel, atras, saltar, usar [S]
 - [ ] Definir que no haya conflicto con debug (F1/F2) [S]
-- [ ] Definir test: input funciona sin foco de ventana perdida [S]
+- [x] Definir test: input funciona sin foco de ventana perdida [S]
 - [ ] Definir nota: input real se diseña en M57 [S]
 
 ## T. Decisión GO/NO-GO (RF17)
@@ -191,18 +191,18 @@
 
 ## X. Arquitectura del Prototipo
 
-- [ ] Definir separación escena/sistemas (modularidad, M07) [M]
+- [x] Definir separación escena/sistemas (modularidad, M07) [M]
 - [ ] Definir autoloads como singletons claros [M]
-- [ ] Definir que ningún script de UI contenga lógica de gameplay (M07) [M]
+- [x] Definir que ningún script de UI contenga lógica de gameplay (M07) [M]
 - [ ] Definir nombres de archivos consistentes (`*_proto.gd`) [S]
 - [ ] Definir que el código del prototipo se pueda descartar sin afectar M138 [M]
 
 ## Y. Calidad de Código (M111)
 
-- [ ] Definir que los scripts pasen el análisis estático (M111) [M]
+- [x] Definir que los scripts pasen el análisis estático (M111) [M]
 - [ ] Definir `const` para números mágicos (SPEED, RADIOS) [S]
 - [ ] Definir `@export` para valores tunables [S]
-- [ ] Definir comentarios XML de clase en cada script [S]
+- [x] Definir comentarios XML de clase en cada script [S]
 - [ ] Definir registro de deuda técnica del prototipo (M111) [S]
 
 ## Z. Documentación y Cierre
@@ -215,4 +215,4 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

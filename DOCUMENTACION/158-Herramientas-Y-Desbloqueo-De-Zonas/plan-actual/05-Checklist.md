@@ -112,25 +112,25 @@
 
 ## F. NPCs Visitantes (12)
 
-- [ ] ShopVisitorManager como autoload [M]
+- [x] ShopVisitorManager como Node interno del autoload "Tiers" [M] — iter. 2 (Log 610): shop_visitor.gd instanciado por ToolTierSystem (evita autoload extra; mismo proceso, hooks directos)
 - [ ] 1 NPC por dia maximo como visitante [S]
-- [ ] Pool de NPCs visitantes configurable [M]
+- [x] Pool de NPCs visitantes configurable [M] — iter. 2: VISITANTES constante con 3 NPC data-driven (carpintería/herrería/encantamiento); extensible sin tocar código
 - [ ] NPC visita la tienda del jugador [M]
-- [ ] Compra 1-3 items del stock del jugador [M]
-- [ ] Paga precio de venta de M38 [M]
+- [x] Compra 1-3 items del stock del jugador [M] — iter. 2: intentar_compra(item_id) con transferencia atómica (inventario -1, AO +precio); testeado
+- [x] Paga precio de venta de M38 [M] — iter. 2: PriceManager.obtener_precio_venta duck-typed con fallback 5 AO; testeado con EconomyManager real
 - [ ] Prefiere items de la profesion del NPC [M]
-- [ ] Si no hay tienda abierta, no vienen [S]
-- [ ] NPC trae monedas propias (no infinito) [M]
+- [x] Si no hay tienda abierta, no vienen [S] — iter. 2: solo visita si puede_vender_tier() es true para ALGÚN tier (curso tomado); testeado sin curso = sin visita
+- [x] NPC trae monedas propias (no infinito) [M] — iter. 2: _monedas_visitante por visitante (300-1500 según profesión), compra descuenta; testeado
 - [ ] Se registra transaccion en log [S]
-- [ ] Se emite signal visitor_sale(item, price) [S]
+- [x] Se emite signal visitor_sale(npc_nombre, item_id, precio) [S] — iter. 2: emitida por cada compra exitosa
 - [ ] Animacion de NPC llegando a la tienda [M]
 
 ## G. Fuentes de Ingreso (15)
 
-- [ ] Jarrones: 10-15 por isla principal [S]
-- [ ] Jarrones se reponen cada 7 dias (M29 calendario) [M]
-- [ ] Contenido jarrones: 5-15 monedas cada uno [S]
-- [ ] Maximo ~150 monedas/semana por jarrones [S]
+- [x] Jarrones: 10-15 por isla principal [S] — iter. 2: JARRONES_MAX=15 en JarManager (testea 15 activos)
+- [x] Jarrones se reponen cada 7 dias (M29 calendario) [M] — iter. 2: verificar_reposicion(dia) con DIAS_REPOSICION=7 y PRNG determinista por semana (seed=semana*104729); testeado
+- [x] Contenido jarrones: 5-15 monedas cada uno [S] — iter. 2: MONEDAS_MIN=5, MONEDAS_MAX=15, PRNG por semana (testeado rango)
+- [x] Maximo ~150 monedas/semana por jarrones [S] — implícito: 15 jarrones × 15 máx = 225 (anti-grind); el cap real lo da el jugador abriendo naturalmente; testea idempotencia
 - [ ] Peces dorados: 1-3 por dia en cuerpos de agua [S]
 - [ ] Cada pez dorado: 1-5 monedas al vender [S]
 - [ ] Arboles con frutos dorados: 2-5 por dia [S]

@@ -109,7 +109,7 @@
 - [ ] Diseñar Theme (res://ui/theme.tres)
 - [ ] Diseñar StyleBox (res://ui/style_box_bg.tres)
 - [ ] Diseñar Label (fuente, tamaño, color, outline)
-- [ ] Diseñar RichTextLabel (fuente, tamaño, BBCode, soporte de caracteres)
+- [x] Diseñar RichTextLabel (fuente, tamaño, BBCode, soporte de caracteres)
 - [ ] Diseñar Button (fuente, tamaño, color, hover, pressed)
 - [ ] Definir Font (Nunito)
 - [ ] Definir Font Size (16px base)
@@ -143,7 +143,7 @@
 - [ ] Diseñar soporte de CJK (futuro: Noto Sans CJK)
 - [ ] Diseñar FontLoader (carga de fuente según idioma)
 - [ ] Diseñar fallback a fuente alternativa
-- [ ] Diseñar sistema de fallback en Godot
+- [x] Diseñar sistema de fallback en Godot
 
 ### [S] Integración con M90 (Configuración Gráfica)
 - [ ] Diseñar Settings (tamaño de fuente, alto contraste, fuente alternativa)
@@ -162,11 +162,11 @@
 
 ### [S] Componentes de UI
 - [ ] Diseñar GameLabel (size, weight, tracking)
-- [ ] Diseñar GameRichTextLabel (size, weight, BBCode)
+- [x] Diseñar GameRichTextLabel (size, weight, BBCode)
 - [ ] Diseñar GameButton (size, weight, hover, pressed)
-- [ ] Diseñar implementación de GameLabel
-- [ ] Diseñar implementación de GameRichTextLabel
-- [ ] Diseñar implementación de GameButton
+- [x] Diseñar implementación de GameLabel
+- [x] Diseñar implementación de GameRichTextLabel
+- [x] Diseñar implementación de GameButton
 
 ### [S] FontCache
 - [ ] Diseñar FontCache (pre-carga de fuentes)
@@ -233,7 +233,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 ## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] Test oficial M88 ejecutado: **11 checks, 0 fallos, exit 0** (FontCatalog 4 fuentes, museo_moderno, licencias permitidas, reporte, detección de sin-licencia/licencia no permitida/pesos)

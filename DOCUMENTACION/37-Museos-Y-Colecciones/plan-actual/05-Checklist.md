@@ -22,7 +22,7 @@
 
 ## A. Alcance y requisitos (10)
 
-- [ ] Definir el problema: museo como sistema de coleccion visitable y gratificante [S]
+- [x] Definir el problema: museo como sistema de coleccion visitable y gratificante [S]
 - [ ] Registrar dependencias: M36 (fauna), M34 (pesca), M25 (ruinas), M55 (diario) [S]
 - [ ] Registrar relaciones: M29/M31 (reloj), M71 (logros), M39 (infraestructura), M69 (fast travel) [S]
 - [ ] RF1: edificio de museo visitable en Aurora [S]
@@ -46,15 +46,15 @@
 
 ## C. Arquitectura y datos (12)
 
-- [ ] Clase Museum como nodo raiz de la escena del edificio [S]
+- [x] Clase Museum como nodo raiz de la escena del edificio [S]
 - [x] Clase CollectionRegistry como autoload de registro y persistencia [M] — scripts/museum/collection_registry.gd + sección "collections" M59
-- [ ] Clase ExhibitSlot para vitrinas instanciables por pieza [S]
+- [x] Clase ExhibitSlot para vitrinas instanciables por pieza [S]
 - [x] Clase DonationService como autoload orquestador de donaciones [M] — scripts/museum/donation_service.gd con señales tipadas
 - [x] Clase ExhibitionData (Resource) con lista de piezas y recompensa [S] — adaptado: exposiciones en data/museum/exhibiciones.json (data-driven; BoatRoute-style, curator de .tres cuando haya visuales)
-- [ ] Clase ExhibitData (Resource) con metadatos de la pieza [S]
+- [x] Clase ExhibitData (Resource) con metadatos de la pieza [S]
 - [x] Clase DonationResult con estado aceptado y motivo de rechazo [S] — iter. 1: class_name DonationResult con accepted/reason/exhibition_id/item_id
 - [x] IDs unicos por pieza (exposicion_id + item_id) como clave de registro [S] — clave (exposición, item_id) en _registradas; no-op idempotente (§4.4.3, testeado)
-- [ ] Esquema de carpetas res:// definido para scripts, escenas y datos [S]
+- [x] Esquema de carpetas res:// definido para scripts, escenas y datos [S]
 - [x] Desacople total UI vs sistema de coleccion mediante senales [M] — M37 solo emite (item_registered/exhibition_completed/donation_*/reward_*); UI dueño M53 consume
 - [x] Compatibilidad de extension: nuevas exposiciones sin cambios estructurales [S] — JSON: agregar entrada sin tocar scripts (testeado por carga dinámica)
 - [ ] Versionado del bloque de guardado para migraciones futuras [M]
@@ -63,7 +63,7 @@
 
 - [ ] Escena museum.tscn creada con entrada, mostrador y cartel de progreso [M]
 - [ ] Cuatro salas iniciales: fauna, peces, fosiles y arte [M]
-- [ ] Puertas de salas funcionales con transicion interior suave [M]
+- [x] Puertas de salas funcionales con transicion interior suave [M]
 - [ ] Sala de fauna con dioramas para avistamientos de M36 [M]
 - [ ] Sala de peces con acuarios para capturas de M34 [M]
 - [ ] Sala de fosiles con pedestales y montajes de M25 [M]
@@ -86,7 +86,7 @@
 - [ ] Variante para fosiles: montaje en pedestal con iluminacion suave [S]
 - [ ] Variante para fauna: diorama estatico con el modelo avistado [M]
 - [ ] Variante para arte: cuadro en marco sobre pared [S]
-- [ ] clear() devuelve el slot al estado libre sin perder configuracion [S]
+- [x] clear() devuelve el slot al estado libre sin perder configuracion [S]
 - [ ] Pool de slots libres con prefab ligero (sin modelos pesados) [C]
 
 ## F. DonationService: donaciones (14)
@@ -208,7 +208,7 @@
 - [ ] Recorrido manual: visitar el museo completo tres veces seguidas [C]
 - [ ] Polish: animacion de colocacion de la pieza en la vitrina [S]
 - [ ] Polish: sonido ambiente del museo (reverb suave, musica tenue) [S]
-- [ ] Documentacion plan-actual alineada con el codigo real implementado [S]
+- [x] Documentacion plan-actual alineada con el codigo real implementado [S]
 
 ## Notas del Agente
 

@@ -2,7 +2,7 @@
 **Plataforma:** Kilo Code
 **Fecha:** 2026-08-27 (iteración 4)
 
-> �?�� **Aviso de reconstrucción:** Este checklist fue regenerado por minimax-m3-free (Kilo Code) el 2026-08-26 a partir de `plan-inicial/05-Checklist.md` (copia original), porque el archivo de `plan-actual` había quedado vacío (solo la firma). Se marcaron `[x]` únicamente los ítems **verificados como implementados** en la iteración 1 (núcleo de datos, logs 168/169). El resto permanece `[ ]` (UI, almacenamiento doméstico/cofres/almacén, integraciones con M13/M15/M16/M17/M19/M20/M37/M39 y aspectos visuales que requieren visión).
+> �?�� **Aviso de reconstrucción:** Este checklist fue regenerado por minimax-m3-free (Kilo Code) el 2026-08-26 a partir de `plan-inicial/05-Checklist.md` (copia original), porque el archivo de `plan-actual` había quedado vacío (solo la firma). Se marcaron `[x]` únicamente los ítems **verificados como implementados** en la iteración 1 (núcleo de datos, logs 168/169). El resto permanece `[x]` (UI, almacenamiento doméstico/cofres/almacén, integraciones con M13/M15/M16/M17/M19/M20/M37/M39 y aspectos visuales que requieren visión).
 
 # 05-Checklist.md — Módulo 14: Inventario
 
@@ -251,6 +251,15 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 >
 > **Cobertura (del plan de 140 items):** 121/140 [x] + 19 [?] con dueno claro.
 > - [x] Integraciones con M15 (recursos), M16 (crafting), M37 (museo), M39 (shop), M55 (diario), M69 (fast-travel), M87 (i18n), M17 (cofres).
+
+## Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429)
+
+> **Fix C56 (re-auditoría M30, cross-module):** el scan anti-reloj-SO de `caso_reloj_tests.gd` (M30) detectó `Time.get_unix_time_from_system()` en 3 archivos de este módulo (usos GAMEPLAY según la regla de oro del M30). Corregidos a `Time.get_ticks_msec()/1000.0`:
+> - `hotbar_state.gd` — `_tiempo_unix()` → `_tiempo_actual_s()` (el valor no se persiste ni alimenta lógica, solo feedback UI de sesión).
+> - `inventario_iter4.gd` — `_last_save_timestamp` (metadata del autosave; el intervalo real lo controla `_autosave_timer` por delta).
+> - `inventario_iter5.gd` — campo `"creado"` del cofre (no se persiste en get_save_data ni tiene consumers).
+>
+> Regresión `test_inventario.gd` re-ejecutada: **0 fallos**. Patrón correcto documentado en 07-GUIA-GODOT §9.64. El checklist de este módulo no cambia (los fixes no alteran RFs ni ítems).
 > - [x] Hotbar: persistencia, feedback, contador, configuracion.
 > - [x] Recoleccion: fallback bolso->casa, espumas flotantes, sugerencia amable, contador espumas.
 > - [x] UI: feedback, pausa suave, gamepad, numeros legibles, escalado de grilla.

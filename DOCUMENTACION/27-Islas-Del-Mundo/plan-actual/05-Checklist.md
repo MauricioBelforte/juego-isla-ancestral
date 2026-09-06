@@ -9,7 +9,7 @@
 - [ ] Catalogar los 24 puntos de la sección 26 del plan maestro (isla principal a relevancia narrativa) [S]
 - [ ] Registrar dependencias: M28, M29; relaciones M08, M09, M10, M51, M61, M63, M54, M59 [S]
 - [ ] Resolver cada punto de la sección 26 (diseño, distancia, navegación, clima, flora, fauna, recursos, NPC, arquitectura, música, puzzles, recompensa, narrativa) [C]
-- [ ] Declarar que el módulo es delegable para implementación tras M08/M10 base y presupuestos M61 [S]
+- [x] Declarar que el módulo es delegable para implementación tras M08/M10 base y presupuestos M61 [S]
 - [ ] Mantener el alcance separado de M28 (barco/viaje), M51 (agua), M63 (streaming general) [S]
 - [ ] Definir criterios de aceptación verificables (catálogo 13 islas, anclas válidas, viaje ida y vuelta, contenido exclusivo) [S]
 - [ ] Asegurar coherencia cozy: sin contenido crítico exclusivo e inaccesible, regreso siempre gratis [S]
@@ -41,7 +41,7 @@
 
 ## C. IslandRegistry — catálogo del archipiélago
 
-- [ ] Create autoload IslandRegistry como servicio tipo Service Locator (M07) [S]
+- [x] Create autoload IslandRegistry como servicio tipo Service Locator (M07) [S]
 - [ ] init(anclas: Dictionary) que construye el catálogo desde M10 [M]
 - [ ] get_isla(id) -> IslandDefinition con manejo de id inexistente (null + log WARN) [S]
 - [ ] todas_las_islas() -> Array ordenada determinista por id (nunca por orden de carga) [M]
@@ -175,7 +175,7 @@
 - [ ] Máximo 2 islas completas en memoria a la vez [C]
 - [ ] Aurora siempre cargada pero con streaming fino de chunks lejanos [M]
 - [ ] Metadatos (definiciones) livianos: sin cargar voxel de islas lejanas [S]
-- [ ] LRU con tope de memoria configurado por M62 [C]
+- [x] LRU con tope de memoria configurado por M62 [C]
 - [ ] Sin allocs grandes en el hot path de búsqueda de vecinas [M]
 - [ ] Búsquedas de vecinas con índice espacial (grid por anillo) [M]
 - [ ] Carga de props por etapas (sin picos) [M]
@@ -192,7 +192,7 @@
 - [ ] 03-Diseno.md: arquitectura, 4 flujos en texto, contratos API, integraciones [C]
 - [ ] 04-Codigo.md: rutas res://, firmas clave, pesos de carga, subs, logs [M]
 - [ ] 05-Checklist.md con 100+ ítems verificables [M]
-- [ ] Logs en Logs/ tras implementación (formato estándar, sección 6 de AGENTS.md) [S]
+- [x] Logs en Logs/ tras implementación (formato estándar, sección 6 de AGENTS.md) [S]
 
 ## N. Polish y UX cozy
 
@@ -220,7 +220,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 ## Iteración 1 — Config de islas data-driven (2026-09-02 06:20, deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] `data/islas/islas.json` — config de las 4 islas (RIZ 256/256/256 Raíz, COR 1024/256/220 Coral, CEN 256/1024/220 Ceniza, AUR 1024/1024/200 Aurora) con biomas y color de agua por isla

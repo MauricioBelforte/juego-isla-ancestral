@@ -30,7 +30,7 @@
 - [ ] Registrar relaciones: M29/M32 (calendario/estaciones), M73 (eventos), M17 (construcción), M61 (rendimiento) [S]
 - [ ] Separar dentro/fuera de alcance: recetas y UI quedan en M16/M14 [S]
 - [ ] RF1-RF12 cubiertos y documentados en 01-Requerimientos [S]
-- [ ] NFR: cozy, rendimiento, determinismo PRNG y data-driven definidos [S]
+- [x] NFR: cozy, rendimiento, determinismo PRNG y data-driven definidos [S]
 - [ ] Criterios de aceptación con validación jugable (QA 3 días, M114) [S]
 - [ ] Definir los 6 tipos de recurso: madera, piedra, fibras, comida, minerales, raros [S]
 - [ ] Definir recursos estacionales y regionales del plan maestro [S]
@@ -83,7 +83,7 @@
 
 - [ ] Clase `ResourceDrops` con generación por DropEntry [S]
 - [ ] Cálculo determinista de cantidades con PRNG M29 [S]
-- [ ] Drops físicos RigidBody3D con dispersión circular configurable [M]
+- [x] Drops físicos RigidBody3D con dispersión circular configurable [M]
 - [ ] Pooling de drops físicos (máx 60 activos, sin allocs en caliente) [C]
 - [ ] Imán de recogida: radio 1.5 m, deslizamiento suave al jugador [M]
 - [ ] Auto-recogida al contacto: `Inventario.agregar_items(entrega)` [S]
@@ -156,7 +156,7 @@
 ## K. Integración con M16 Crafting (6)
 
 - [ ] Las recetas referencian item_id de recursos del catálogo [S]
-- [ ] `ResourceManager.cantidad_de(def_id)` para consulta de stock [S]
+- [x] `ResourceManager.cantidad_de(def_id)` para consulta de stock [S]
 - [ ] Balance de cantidades centralizado en la definición, no por receta [S]
 - [ ] Los materiales raros tienen recetas raras/ancestrales (plan maestro) [S]
 - [ ] Sin recetas redundantes: cada material tiene utilidad real [S]
@@ -235,7 +235,7 @@
 - [ ] Módulo marcado delegable (tras M08/M13) [S]
 - [ ] 6 alternativas descartadas documentadas con justificación [S]
 - [ ] API estable en 03-Diseno (contratos de señales) [S]
-- [ ] Implementación → AGENTE DELEGADO [S]
+- [x] Implementación → AGENTE DELEGADO [S]
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis creado y firmado [S]
 - [ ] 03-Diseno creado y firmado [S]

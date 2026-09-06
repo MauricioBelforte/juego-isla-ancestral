@@ -77,7 +77,7 @@
 - [x] Definir semver de mods contra build (M117) [M]
 - [x] Definir mod con minBuild mayor → bloqueado [M]
 - [x] Definir mod con versión baja → warning [S]
-- [ ] Definir incompatibilidad por funciones inexistentes → advertencia en gate [M]
+- [x] Definir incompatibilidad por funciones inexistentes → advertencia en gate [M]
 - [ ] Definir regla de compatibilidad con updates (M118) [S]
 
 ## 8. Definir herramientas (8º)
@@ -98,17 +98,17 @@
 
 ## 10. Definir distribución (10º)
 
-- [ ] Definir solo Steam Workshop para distribución oficial [M]
+- [x] Definir solo Steam Workshop para distribución oficial [M]
 - [x] Definir no tienda propia de mods en V2 [S]
 - [x] Definir actualización de mods por Workshop [M]
 - [ ] Definir integración con M97 (Steamworks) [M]
 - [x] Definir moderación de mods (reportes → M100) [M]
-- [ ] Definir límite de tamaños del Workshop (100 MB) [S]
+- [x] Definir límite de tamaños del Workshop (100 MB) [S]
 
 ## 11. Definir workshop si corresponde (11º)
 
 - [x] Definir soporte Workshop vía Steamworks API [C]
-- [ ] Definir appid y región del Workshop [S]
+- [x] Definir appid y región del Workshop [S]
 - [ ] Definir telemetría de subscripciones (M104) sin datos personales [M]
 - [x] Definir lista negra de mods retirados [M]
 - [x] Definir notificación de actualización de mods [S]
@@ -145,10 +145,10 @@
 
 - [x] Definir estimación: ModLoader+manifiesto+conflictos (80-120 h) [M]
 - [x] Definir estimación: validación de mods (30-50 h) [M]
-- [ ] Definir estimación: exportadores M109 (40-60 h) [M]
+- [x] Definir estimación: exportadores M109 (40-60 h) [M]
 - [x] Definir estimación: saves con mods (20-30 h) [M]
-- [ ] Definir estimación: Workshop+telemetría (40-60 h) [M]
-- [ ] Definir estimación: docs+ejemplo+soporte (30-40 h) [M]
+- [x] Definir estimación: Workshop+telemetría (40-60 h) [M]
+- [x] Definir estimación: docs+ejemplo+soporte (30-40 h) [M]
 - [ ] Definir total estimado 240-360 h (< 10% presupuesto) [M]
 - [x] Definir tracking de horas reales en V2 contra la estimación [S]
 - [ ] Definir re-evaluación del GATE tras el tracking [S]

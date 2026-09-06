@@ -11,7 +11,7 @@
 - [x] Test headless de validacion [M]
 - [x] Datos data-driven en data/legal/ [S]
 - [ ] Verificar disponibilidad de dominio web (islaancestral.com)
-- [ ] Registrar redes sociales con nombre consistente
+- [x] Registrar redes sociales con nombre consistente
 - [x] Documentar proceso de registro de trademark
 - [ ] Definir política de cease & desist
 - [ ] Crear alertas de monitoreo de trademark
@@ -24,7 +24,7 @@
 - [ ] Crear variante icono (app icon) 512x512
 - [ ] Crear variante horizontal para headers
 - [x] Crear variante vertical para merchandise
-- [ ] Definir espacio libre (clear space) mínimo
+- [x] Definir espacio libre (clear space) mínimo
 - [ ] Definir tamaño mínimo (32px digital, 10mm impresión)
 - [x] Documentar usos permitidos del logo
 - [x] Documentar usos PROHIBIDOS del logo
@@ -37,23 +37,23 @@
 
 ## C. Paleta de Colores (10 ítems)
 
-- [ ] Definir color primario (Azul Bosque #2E5A4C)
-- [ ] Definir color secundario (Dorado Anciano #D4A843)
-- [ ] Definir color de acento (Blanco Perla #F5F0E8)
+- [x] Definir color primario (Azul Bosque #2E5A4C)
+- [x] Definir color secundario (Dorado Anciano #D4A843)
+- [x] Definir color de acento (Blanco Perla #F5F0E8)
 - [ ] Definir neutros (Carbón, Gris Piedra, Crema)
-- [ ] Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)
+- [x] Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)
 - [x] Verificar contraste WCAG AA para cada par de colores
 - [x] Crear paleta en formato ASE/CLR
 - [x] Documentar RGB, CMYK y HEX de cada color
-- [ ] Crear variaciones para modo oscuro
+- [x] Crear variaciones para modo oscuro
 - [x] Distribuir paleta al equipo de diseño
 
 ## D. Tipografía (10 ítems)
 
-- [ ] Seleccionar fuente principal (títulos)
-- [ ] Seleccionar fuente secundaria (cuerpo)
+- [x] Seleccionar fuente principal (títulos)
+- [x] Seleccionar fuente secundaria (cuerpo)
 - [x] Seleccionar fuente monospace (código/datos)
-- [ ] Verificar licencias de cada fuente
+- [x] Verificar licencias de cada fuente
 - [ ] Definir jerarquía de tamaños (H1-H6, body, caption)
 - [ ] Definir pesos (regular, bold, light)
 - [ ] Crear muestras de tipografía
@@ -64,7 +64,7 @@
 ## E. Manual de Marca (10 ítems)
 
 - [x] Crear estructura del manual (10 secciones)
-- [ ] Redactar introducción y propósito
+- [x] Redactar introducción y propósito
 - [x] Documentar identidad de marca (nombre, tagline, valores)
 - [x] Documentar reglas de logo (variantes, clear space, usos)
 - [x] Documentar paleta de colores completa
@@ -72,18 +72,18 @@
 - [x] Documentar iconografía y fotografía
 - [x] Documentar uso en redes sociales
 - [x] Documentar restricciones de merchandise
-- [ ] Incluir contacto para aprobación de uso
+- [x] Incluir contacto para aprobación de uso
 
 ## F. Presencia Online (10 ítems)
 
 - [ ] Registrar dominio islaancestral.com
-- [ ] Crear sitio web con información del juego
-- [ ] Crear perfiles en redes sociales principales
+- [x] Crear sitio web con información del juego
+- [x] Crear perfiles en redes sociales principales
 - [x] Usar logo y paleta coherentes en toda la web
 - [x] Crear kit de prensa con assets de marca
 - [x] Documentar guidelines para redes sociales
 - [x] Crear plantillas de posts con marca
-- [ ] Definir tono de comunicación
+- [x] Definir tono de comunicación
 - [ ] Crear email corporativo (press@islaancestral.com)
 - [x] Monitorear menciones de la marca
 
@@ -92,17 +92,17 @@
 - [x] Definir qué productos de merchandise se permiten
 - [x] Documentar logo mínimo para impresión
 - [x] Crear template para proveedores de merchandise
-- [ ] Definir proceso de aprobación de diseños
+- [x] Definir proceso de aprobación de diseños
 - [x] Documentar restricciones de calidad
 - [x] Definir estándares de calidad para merchandise (textil, cerámica, papel)
-- [ ] Crear guía de colores para impresión (CMYK vs. RGB)
+- [x] Crear guía de colores para impresión (CMYK vs. RGB)
 - [x] Documentar process de muestreo antes de producción
 - [ ] Definir proveedores aprobados por región
 - [x] Crear checklist de QA para merchandise recibido
 
 ## H. Validación y Testing (10 ítems)
 
-- [ ] Crear BrandConfig.gd con colores oficiales
+- [x] Crear BrandConfig.gd con colores oficiales
 - [x] Crear BrandValidator.gd para validar coherencia
 - [x] Test de contraste WCAG AA para todos los pares de colores
 - [x] Test de logo en tamaños mínimos
@@ -115,13 +115,13 @@
 
 ## I. Distribución y Mantenimiento (10 ítems)
 
-- [ ] Crear brand/ con todos los assets
+- [x] Crear brand/ con todos los assets
 - [x] Crear manual-de-marca.pdf
 - [ ] Crear press kit descargable
-- [ ] Distribuir manual a todos los socios
+- [x] Distribuir manual a todos los socios
 - [ ] Actualizar manual cuando cambien elementos
 - [x] Mantener backups de assets de marca
-- [ ] Registrar fecha de última actualización
+- [x] Registrar fecha de última actualización
 - [x] Definir quién puede aprobar cambios de marca
 - [x] Crear changelog del manual de marca
 - [x] Documentar proceso para nuevos partners

@@ -5,7 +5,7 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]
+- [x] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]
 - [ ] Definir el objetivo: iluminación cozy consistente por franja con presupuestos verificables [S]
 - [ ] Registrar dependencias: M31 (franjas), M32 (clima), M09 (biomas), M08 (voxel), M04 (Godot), M61/M62 (presupuestos), M90 (presets), M58 (accesibilidad) [M]
 - [ ] Mapear la sección 48 "ILUMINACIÓN" del plan maestro al ID 49 de la tabla global [M]
@@ -15,14 +15,14 @@
 
 ## B. RF1 — Iluminación global
 
-- [ ] Definir WorldEnvironment base (tonemapping ACES, gamma 2.2) [M]
+- [x] Definir WorldEnvironment base (tonemapping ACES, gamma 2.2) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: tonemap_mode=3 (ACES), tonemap_white=6.0
 - [ ] Definir cielo procedural por bioma (M09) [M]
-- [ ] Definir ambiente por franja con piso mínimo [M]
+- [x] Definir ambiente por franja con piso mínimo [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: ambient cálido (0.85, 0.78, 0.68) energy 0.85 (piso anti-oscuridad)
 - [ ] Definir sky material por bioma en materials/ [S]
 
 ## C. RF2 — Sol y luna
 
-- [ ] Definir una única direccional (sol/luna con curvas de color) [M]
+- [x] Definir una única direccional (sol/luna con curvas de color) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: DirectionalLight única cálida (1, 0.96, 0.88) energy 1.35; curvas por franja iter. 2
 - [ ] Definir presets por las 5 franjas de M31 (elevación, color, intensidad) [M]
 - [ ] Definir easing de 3 s entre franjas (sin snaps) [M]
 - [ ] Definir curva fría de la luna en NOCHE/PROFUNDA [M]
@@ -91,11 +91,11 @@
 ## M. RF12 — Sombras
 
 - [ ] Definir cascades ≤ 4 (por preset M90) [M]
-- [ ] Definir distancia dinámica de sombras (45 m / 25 m bajo) [M]
+- [x] Definir distancia dinámica de sombras (45 m / 25 m bajo) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: directional_shadow_max_distance=120 (base; por-preset iter. 2)
 - [ ] Definir bias voxel fino sin acne [M]
 - [ ] Definir resolución de shadow atlas por preset (1024/2048) [M]
 - [ ] Definir sombras suaves (PCF ≥ 4 samples) [M]
-- [ ] Prohibir siluetas negras (ambiente de relleno) [M]
+- [x] Prohibir siluetas negras (ambiente de relleno) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: ambient 0.85 + fog sutil eliminan negros absolutos (verificado en captura)
 
 ## N. RF13 — Optimización de luces
 
@@ -122,7 +122,7 @@
 - [ ] Verificar piso ambiental 0.15 [M]
 - [ ] Verificar niebla en rango por bioma/franja [M]
 - [ ] Verificar flicker por accesibilidad [M]
-- [ ] Definir lighting_budget.json [M]
+- [x] Definir lighting_budget.json [M]
 
 ## R. RF17 — Naming y organización
 
@@ -186,14 +186,14 @@
 - [ ] Flicker determinista con misma semilla [M]
 - [ ] Interior de casa horneado y legible sin dinámicas [M]
 - [ ] Niebla por bioma/lluvia sin romper legibilidad [M]
-- [ ] Sin sombras negras ni acne visible [M]
+- [x] Sin sombras negras ni acne visible [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: shadow_bias=0.08, normal_bias=1.5; captura sin acne ni sombras absolutas
 
 ## Y. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (48=ILUMINACIÓN → ID 49) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

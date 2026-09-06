@@ -9,7 +9,7 @@
 - [ ] Documentar la decisión con argumentos de género (AC/Stardew/CozyGrove) [M]
 - [ ] Documentar la decisión con argumentos de coste [M]
 - [ ] Verificar que el postgame (M75) cubre la vida de la isla sin red [M]
-- [ ] Registrar la decisión en el manifiesto mp_contract.json [S]
+- [x] Registrar la decisión en el manifiesto mp_contract.json [S]
 
 ## B. Modo Local (RF2)
 
@@ -112,7 +112,7 @@
 - [ ] Definir sin chat en v1 [S]
 - [ ] Definir frases rápidas (T-chat moderado) [M]
 - [ ] Definir sin texto libre en el cozy [S]
-- [ ] Definir sistema de reporte si hay texto libre futuro [M]
+- [x] Definir sistema de reporte si hay texto libre futuro [M]
 - [ ] Registrar chat=frases rapidas en el manifiesto [S]
 
 ## O. Emotes (RF15)
@@ -136,7 +136,7 @@
 - [ ] Definir construcción cooperativa futura solo en zona permitida [M]
 - [ ] Definir catálogo de muebles compartido de solo lectura [M]
 - [ ] Definir undo/redo del invitado para evitar errores [M]
-- [ ] Documentar sin tocar el sistema de construcción single (M15) [S]
+- [x] Documentar sin tocar el sistema de construcción single (M15) [S]
 - [ ] Verificar permisos de construcción en el manifiesto [S]
 
 ## R. Puzzles Cooperativos (RF18)
@@ -201,7 +201,7 @@
 - [ ] Documentar el flujo de apertura de FASE LOCAL [M]
 - [ ] Documentar el flujo de apertura de FASE ONLINE (M77) [M]
 - [ ] Entregar validate_mp_contract.gd (grep + manifiesto) [M]
-- [ ] Entregar mp_contract.json [S]
+- [x] Entregar mp_contract.json [S]
 
 ## Z. Cierre del Módulo
 

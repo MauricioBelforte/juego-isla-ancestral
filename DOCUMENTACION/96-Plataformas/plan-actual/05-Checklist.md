@@ -17,19 +17,19 @@
 - Fecha cierre: 2026-09-01 19:00 (102 ítems)
 
 ## Convención
-- `[ ]` = completado por documentación (fase documentada y validable). `[ ]` = pendiente. `[?]` = no resuelto.
+- `[x]` = completado por documentación (fase documentada y validable). `[ ]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple (minutos) · `[M]` medio (horas) · `[C]` complejo (días).
 
 ## 1. Matriz de plataformas (RF1)
 
 - [x] Implementar matriz data-driven (plataformas.json: 10 plataformas, 20 pts c/u) [C]
 - [x] Definir fuente de datos verificable por celda (precio, SDK, requisitos) [M]
-- [ ] Definir actualización trimestral de la matriz (M144) [S]
+- [x] Definir actualización trimestral de la matriz (M144) [S]
 - [ ] Definir formato único de la matriz (tabla markdown en plan-actual) [S]
 
 ## 2. PC (P1)
 
-- [ ] Definir PC como plataforma principal (ventana base) [M]
+- [x] Definir PC como plataforma principal (ventana base) [M]
 - [x] Definir targets de PC: Windows x64 (P0), macOS (P1), Linux-Proton (P1) [M]
 - [ ] Definir requisitos mínimos y recomendados probados (M61) [M]
 - [x] Definir build Steam Deck compatible desde el target PC [M]
@@ -46,31 +46,31 @@
 
 ## 4. Epic Games Store (P3)
 
-- [ ] Definir EGS como P1 (decisión en Beta por coste/beneficio) [M]
+- [x] Definir EGS como P1 (decisión en Beta por coste/beneficio) [M]
 - [x] Definir SDK EOS integrado vía bridge (si se aprueba) [M]
 - [x] Definir logros EOS mapeados [M]
 - [x] Definir cloud EOS (opcional) [M]
 - [x] Definir revisión de contenido y build EGS en M142 [M]
-- [ ] Definir exclusividad temporal decidida explícitamente (NO por defecto) [S]
+- [x] Definir exclusividad temporal decidida explícitamente (NO por defecto) [S]
 
 ## 5. GOG (P4)
 
-- [ ] Definir GOG como opcional P1 (DRM-free) [M]
-- [ ] Definir requisitos de distribución GOG sin logros obligatorios [M]
-- [ ] Definir cloud GOG Galaxy (opcional) [S]
-- [ ] Definir decisión final de GOG en fase Beta [S]
+- [x] Definir GOG como opcional P1 (DRM-free) [M]
+- [x] Definir requisitos de distribución GOG sin logros obligatorios [M]
+- [x] Definir cloud GOG Galaxy (opcional) [S]
+- [x] Definir decisión final de GOG en fase Beta [S]
 
 ## 6. Microsoft Store (P5)
 
 - [ ] Definir Microsoft Store como P3 (GATE de infraestructura) [M]
 - [ ] Definir requisitos UWP/MSIX documentados [M]
-- [ ] Definir evaluación de Xbox Game Pass (solo con contrato) [S]
+- [x] Definir evaluación de Xbox Game Pass (solo con contrato) [S]
 - [ ] Definir sin compromiso de fecha para MS Store [S]
 
 ## 7. PlayStation (P6)
 
 - [ ] Definir PlayStation como P2 (GATE por presupuesto/NDA) [M]
-- [ ] Definir requisitos de certificación PS documentados [M]
+- [x] Definir requisitos de certificación PS documentados [M]
 - [ ] Definir devkit PS estimado en costes [M]
 - [ ] Definir logros/cloud PS mapeados si hay GATE [M]
 - [ ] Definir diseño console-ready lo hace barato (M57/M58/M63) [S]
@@ -100,16 +100,16 @@
 
 ## 11. Linux si corresponde (P10)
 
-- [ ] Definir decisión: Linux vía Proton verificado (no nativo) [M]
+- [x] Definir decisión: Linux vía Proton verificado (no nativo) [M]
 - [x] Definir test de Proton mensual (build actual) [M]
-- [ ] Definir comunicación del soporte de Linux en FAQ/Store [S]
+- [x] Definir comunicación del soporte de Linux en FAQ/Store [S]
 - [ ] Definir nativo Linux solo si telemetría lo demanda [S]
 
 ## 12. macOS si corresponde (P11)
 
 - [x] Definir decisión: build nativa Apple Silicon [M]
-- [ ] Definir Intel macOS condicional a telemetría de usuarios [M]
-- [ ] Definir notarización/requisitos de macOS documentados [M]
+- [x] Definir Intel macOS condicional a telemetría de usuarios [M]
+- [x] Definir notarización/requisitos de macOS documentados [M]
 - [x] Definir CI de build macOS en pipeline [M]
 
 ## 13. Definir prioridad (P12)
@@ -122,10 +122,10 @@
 ## 14. Analizar certificación (P13)
 
 - [x] Definir checklist de certificación Steam (revisión de contenido) [M]
-- [ ] Definir checklist de certificación EGS y GOG [M]
+- [x] Definir checklist de certificación EGS y GOG [M]
 - [ ] Definir checklist de consolas (TRC/XR/LOTC) si GATE [M]
-- [ ] Definir revisión temprana de certificación 2 meses antes del RC [M]
-- [ ] Definir Cero sorpresas de certificación en P0 (objetivo medible) [S]
+- [x] Definir revisión temprana de certificación 2 meses antes del RC [M]
+- [x] Definir Cero sorpresas de certificación en P0 (objetivo medible) [S]
 
 ## 15. Analizar costes (P14)
 
@@ -148,22 +148,22 @@
 - [ ] Definir mapeo de logros por plataforma (M59) [M]
 - [ ] Definir logros desbloqueables sin red (progresión local) [M]
 - [ ] Definir catch-up de logros con saves existentes [M]
-- [ ] Definir prueba de logros por plataforma en CI mock [M]
+- [x] Definir prueba de logros por plataforma en CI mock [M]
 
 ## 18. Analizar cloud saves (P17)
 
 - [x] Implementar cloud por plataforma vía bridge (SteamBridge mock, NullBridge fallback) [M]
 - [ ] Definir portabilidad del save v3.x entre plataformas [M]
-- [ ] Definir resolución de conflictos (último ganador + backup, M60) [S]
-- [ ] Definir 30 ciclos de cloud por plataforma (M112) [M]
+- [x] Definir resolución de conflictos (último ganador + backup, M60) [S]
+- [x] Definir 30 ciclos de cloud por plataforma (M112) [M]
 
 ## 19. Analizar controller support (P18)
 
-- [ ] Definir gamepad tratamiento ciudadano de primer orden (M57) [M]
+- [x] Definir gamepad tratamiento ciudadano de primer orden (M57) [M]
 - [x] Definir perfiles de gamepad por plataforma (deck/ps/xb/nx) [M]
 - [ ] Definir UI 100% navegable con gamepad (M57/M89) [M]
 - [ ] Definir remapeo completo (M58) [C]
-- [ ] Definir notificación de cambio de input (gamepad↔teclado) [S]
+- [x] Definir notificación de cambio de input (gamepad↔teclado) [S]
 
 ## 20. Analizar cross-save (P19)
 
@@ -171,13 +171,13 @@
 - [x] Definir Steam↔Steam Deck automático (documentado) [S]
 - [ ] Definir consolas con cloud de plataforma (si GATE) [M]
 - [ ] Definir sin infraestructura cross-save propia nueva [S]
-- [ ] Definir prueba de cross-save 30 ciclos (M112) [M]
+- [x] Definir prueba de cross-save 30 ciclos (M112) [M]
 
 ## 21. Analizar cross-play (P20)
 
-- [ ] Definir decisión: NO aplica (single-player) [S]
+- [x] Definir decisión: NO aplica (single-player) [S]
 - [ ] Definir cláusula documentada del porqué (sin servidores) [S]
-- [ ] Definir re-evaluación si un DLC agrega cooperación local (M144) [S]
+- [x] Definir re-evaluación si un DLC agrega cooperación local (M144) [S]
 
 ## 22. Calidad y cierre
 
@@ -185,7 +185,7 @@
 - [x] Tests de plataforma: NullBridge, SteamBridge mock, cross-save, matriz (test_plataformas_m96.gd, 23/0 OK) [M]
 - [x] Documentación plan-actual actualizada y firmada [S]
 - [x] Log del módulo en Logs/ [S]
-- [ ] Definir acta de decisiones de plataformas (resumen P0-P3) [S]
+- [x] Definir acta de decisiones de plataformas (resumen P0-P3) [S]
 - [ ] Definir feed del módulo a M149/M142/M143 (checklist y prioridades) [S]
 
 ## Totales

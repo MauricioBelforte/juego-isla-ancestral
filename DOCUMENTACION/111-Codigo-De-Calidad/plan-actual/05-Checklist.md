@@ -74,7 +74,7 @@
 ### [S] Patrones de diseño
 - [ ] Diseñar patrón State Machine
 - [ ] Diseñar patrón Observer (EventBus)
-- [ ] Diseñar patrón Service Locator
+- [x] Diseñar patrón Service Locator
 - [ ] Diseñar patrón Factory
 - [ ] Diseñar patrón Command
 - [ ] Diseñar patrón Strategy

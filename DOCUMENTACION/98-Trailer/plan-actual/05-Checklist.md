@@ -58,7 +58,7 @@
 
 ## 7. Seleccionar escenas
 
-- [ ] Definir selección de escenas solo del build real [M]
+- [x] Definir selección de escenas solo del build real [M]
 - [ ] Definir captura 4K/60 real (sin pre-render) [M]
 - [ ] Definir 6-8 planos coreografiados [M]
 - [ ] Definir escenas sin UI/HUD [S]
@@ -164,7 +164,7 @@
 
 ## 21. Calidad y cierre
 
-- [ ] Definir comparación con la experiencia real del build (honestidad) [M]
+- [x] Definir comparación con la experiencia real del build (honestidad) [M]
 - [x] Definir presentación del gameplay a un test de jugadores (M114) [M]
 - [ ] Definir iteración del tráiler según feedback [M]
 - [ ] Definir documentación plan-actual actualizada y firmada [S]
@@ -178,7 +178,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 

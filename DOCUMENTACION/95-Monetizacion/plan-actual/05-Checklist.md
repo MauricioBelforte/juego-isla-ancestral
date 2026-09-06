@@ -181,7 +181,7 @@
 
 - [ ] Definir integración de la API de la tienda para versiones DLC (M149) [M]
 - [ ] Definir validación de propiedad de DLC (sin piratería) en runtime [M]
-- [ ] Definir odificción de ediciones en el build (version flag) [M]
+- [x] Definir odificción de ediciones en el build (version flag) [M]
 - [ ] Definir que la tienda no toque el gameplay loop (M38) [S]
 - [ ] Definir log de compras/activaciones auditables (M104) [M]
 
@@ -209,3 +209,8 @@
 
 - [x] test_monetizacion_m95.gd: 17/17 checks OK (3 ediciones standard/deluxe/coleccionista con historia completa, precios correctos (standard 24.99), 2 DLC planificados (expansión + cosmético), roadmap ordenado, catálogo vacío OK)
 - [x] Módulo operativo: ediciones y roadmap verificados
+## Iteración 2 (2026-09-02 22:45 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] **Fix de coherencia:** el manifest M120 (isla_hielo/pack_aurora) y la monetización M95 (dlc_expansion/dlc_cosmetico) usaban IDs distintos → unificados al manifest (fuente de verdad de carga)
+- [x] `scripts/dlc/sincronizar_dlc.gd` — verificador de coherencia DLC (manifest ↔ monetización): 2/2 OK
+- [x] Bug BUG-013 registrado en 11-BUGS.md (resuelto)

@@ -35,11 +35,11 @@
 - [x] Diseñar configuración de Twitter/X con respuestas a preguntas frecuentes
 
 ### [S] FAQ
-- [ ] Definir preguntas técnicas (requisitos de sistema, controladores, errores comunes)
+- [x] Definir preguntas técnicas (requisitos de sistema, controladores, errores comunes)
 - [ ] Definir preguntas de gameplay (cómo hacer X, dónde encontrar Y, mecánicas de Z)
 - [x] Definir preguntas de historia (historia principal, finales, sellos)
 - [x] Definir preguntas de DLC (cómo instalar DLC, compatibilidad, precios)
-- [ ] Definir preguntas de soporte (cómo reportar bugs, cómo contactar soporte)
+- [x] Definir preguntas de soporte (cómo reportar bugs, cómo contactar soporte)
 - [ ] Diseñar FAQ en sitio web
 - [ ] Diseñar FAQ en Steam Community Hub
 - [ ] Diseñar FAQ en Discord (canal #faq, solo lectura)
@@ -260,7 +260,7 @@
 ### [S] Pruebas de soporte
 - [ ] Diseñar prueba de canal de soporte (email, Discord, Steam)
 - [ ] Diseñar prueba de búsqueda de FAQ
-- [ ] Diseñar prueba de sistema de tickets
+- [x] Diseñar prueba de sistema de tickets
 - [ ] Diseñar prueba de proceso de hotfixes
 - [ ] Diseñar prueba de proceso de parches
 - [x] Diseñar prueba de recuperación de saves

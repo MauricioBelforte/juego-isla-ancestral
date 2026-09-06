@@ -8,7 +8,7 @@
 - [ ] Definir el problema: relaciones significativas con vecinos sin castigo por ausencia [S]
 - [ ] Registrar dependencias: M19, M14, M29; relaciones M21, M23, M26, M31, M32, M73 [S]
 - [ ] Catalogar los 26 puntos de la seccion 19 del plan maestro [S]
-- [ ] Stack confirmado: Godot 4.x (>= 4.4.1) + Voxel Tools + GDScript [S]
+- [x] Stack confirmado: Godot 4.x (>= 4.4.1) + Voxel Tools + GDScript [S]
 - [ ] RF1: niveles de amistad 0-10 con umbrales [S]
 - [ ] RF2: puntos de amistad acumulativos sin fuente de decaimiento [S]
 - [ ] RF3: limite de un regalo efectivo por vecino y dia [S]
@@ -28,7 +28,7 @@
 ## C. Niveles y desbloqueos (9)
 
 - [ ] Capacidad para definir nombres de nivel: Conocido, Amigo, Confidente, Mejor amigo [S]
-- [ ] Recompensas por nivel configuradas en data (objetos, recetas, frases) [S]
+- [x] Recompensas por nivel configuradas en data (objetos, recetas, frases) [S]
 - [ ] Acceso a eventos por nivel minimo [S]
 - [ ] Desbloqueo de historias de amistad al nivel requerido (M23) [S]
 - [ ] Excedente de puntos conservado al subir de nivel [S]
@@ -170,7 +170,7 @@
 
 - [ ] Evaluador sin allocations relevantes (diccionarios reutilizados) [S]
 - [ ] Indice de vecinos por id para consultas O(1) [S]
-- [ ] Sin suscriptores colgados al destruir UI [S]
+- [x] Sin suscriptores colgados al destruir UI [S]
 - [ ] Bandeja de recompensas bajo demanda (no refresco continuo) [S]
 - [ ] Logs de debug desactivados en release (conditional symbols) [S]
 

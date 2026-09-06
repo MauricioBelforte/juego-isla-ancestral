@@ -15,19 +15,19 @@
 - [ ] Definir ventana de publicación < 30 min entre plataformas [S]
 - [ ] Definir detener publicación si una plataforma falla (runbook) [S]
 - [ ] Definir página con requisitos, FAQ y descripciones sin errores [M]
-- [ ] Definir página con configuración de idiomas completa (M87/M149) [M]
+- [x] Definir página con configuración de idiomas completa (M87/M149) [M]
 - [ ] Definir verificación de fecha de lanzamiento correcta por región [S]
 
 ## 2. Publicar build (RF1/RF2/M142)
 
-- [ ] Definir liberación de la build `rc-final` en las plataformas [M]
-- [ ] Definir verificación de hash de build = manifest RC [S]
+- [x] Definir liberación de la build `rc-final` en las plataformas [M]
+- [x] Definir verificación de hash de build = manifest RC [S]
 - [ ] Definir confirmación de "visible para descarga" tras publicar [S]
-- [ ] Definir prueba de descarga/instalación de la build publicada (1 dispositivo) [M]
-- [ ] Definir registro del buildId publicado en la bitácora [S]
-- [ ] Definir no cambiar la build salvo hotfix aprobado [S]
-- [ ] Definir etiquetado del repo con `release-1.0.0` [S]
-- [ ] Definir verificación de ausencia de contenido de dev en la build publicada [S]
+- [x] Definir prueba de descarga/instalación de la build publicada (1 dispositivo) [M]
+- [x] Definir registro del buildId publicado en la bitácora [S]
+- [x] Definir no cambiar la build salvo hotfix aprobado [S]
+- [x] Definir etiquetado del repo con `release-1.0.0` [S]
+- [x] Definir verificación de ausencia de contenido de dev en la build publicada [S]
 
 ## 3. Publicar tráiler (RF1/M149)
 
@@ -53,7 +53,7 @@
 - [ ] Definir guardias de soporte por turnos (runbook M142) [S]
 - [ ] Definir plantillas de respuesta (comunes, bugs, reembolsos) [M]
 - [ ] Definir canal de estado (incidentes) para comunicación oficial [S]
-- [ ] Definir triaje de soporte → tickets M101 con buildId [M]
+- [x] Definir triaje de soporte → tickets M101 con buildId [M]
 - [ ] Definir métrica de tiempo de respuesta por día [S]
 
 ## 6. Monitorizar crashes (RF4/M105)
@@ -64,14 +64,14 @@
 - [ ] Definir triaje de crashes conocidos vs nuevos [S]
 - [ ] Definir plan de comité < 4 h ante alerta [S]
 - [ ] Definir registro diario de crash rate [S]
-- [ ] Definir correlación de crashes con versión de build [S]
+- [x] Definir correlación de crashes con versión de build [S]
 
 ## 7. Monitorizar reviews (RF5/M106)
 
 - [ ] Definir ingesta de reviews de todas las plataformas [M]
 - [ ] Definir triaje diario: positivas (resp. 48 h), negativas (24 h), urgentes (P0/P1) [M]
 - [ ] Definir respuesta pública a negativas con plan de acción [M]
-- [ ] Definir escalado de reviews urgentes al comité de release [S]
+- [x] Definir escalado de reviews urgentes al comité de release [S]
 - [ ] Definir métrica de reviews por día y por plataforma [S]
 - [ ] Definir registro de temas recurrentes (para M144) [S]
 
@@ -97,7 +97,7 @@
 
 - [ ] Definir dashboard de errores de guardado/cloud [M]
 - [ ] Definir alerta ante ≥ 5 reportes de save perdido [S]
-- [ ] Definir correlación de errores con versiones/builds [S]
+- [x] Definir correlación de errores con versiones/builds [S]
 - [ ] Definir verificación de backup/reintento automático (M60) [M]
 - [ ] Definir triaje de saves como P1 (pérdida de progreso) [S]
 - [ ] Definir registro diario de métricas de save [S]
@@ -106,10 +106,10 @@
 
 - [ ] Definir triaje diario de todos los reportes (telemetría/reviews/soporte) [M]
 - [ ] Definir severidad P0/P1/P2 en < 24 h [M]
-- [ ] Definir P0/P1 → comité de release en < 12 h [S]
+- [x] Definir P0/P1 → comité de release en < 12 h [S]
 - [ ] Definir trabajo sobre P0/P1 sin reintroducir regresiones (M112) [M]
 - [ ] Definir respuesta pública cuando el bug afecta a muchos usuarios [S]
-- [ ] Definir registro de todo bug con buildId y reproducción [S]
+- [x] Definir registro de todo bug con buildId y reproducción [S]
 
 ## 12. Preparar hotfix (RF10/M142)
 
@@ -152,12 +152,12 @@
 
 ## 16. Preservar builds (RF14/M142)
 
-- [ ] Definir archivo de la build RC final con manifest en backup [M]
+- [x] Definir archivo de la build RC final con manifest en backup [M]
 - [ ] Definir archivo de hotfixes publicados con manifests [M]
 - [ ] Definir bucket/carpeta de backups con accesos documentados [S]
-- [ ] Definir prueba de recuperación de una build archivada [M]
+- [x] Definir prueba de recuperación de una build archivada [M]
 - [ ] Definir registro de credenciales de recuperación (sin secretos en repo) [S]
-- [ ] Definir histórico de versiones publicadas (tabla buildId→fecha→hash) [S]
+- [x] Definir histórico de versiones publicadas (tabla buildId→fecha→hash) [S]
 
 ## 17. Cierre de fase y traspaso a M144
 
@@ -165,7 +165,7 @@
 - [ ] Definir entrega del informe 72 h a M144 [S]
 - [ ] Definir entrega de la cola de bugs/hotfix a M144 [S]
 - [ ] Definir entrega de la cola de contenido de comunidad a M144 [S]
-- [ ] Definir estado de builds preservadas documentado [S]
+- [x] Definir estado de builds preservadas documentado [S]
 - [ ] Definir lecciones aprendidas registradas (M101/M102) [S]
 - [ ] Definir responsabilidades de guardia post-lanzamiento (M144) [S]
 

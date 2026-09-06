@@ -156,7 +156,7 @@
 ## N. Optimización y rendimiento (6)
 
 - [ ] Catálogo cargado bajo demanda (no instanciar los 14 candidatos) [M]
-- [ ] VillagerManager sin procesamiento por frame (solo eventos y ticks de M29) [S]
+- [x] VillagerManager sin procesamiento por frame (solo eventos y ticks de M29) [S]
 - [ ] Detección de objetivo F con barrido barato (distancia + raycast único) [M]
 - [ ] Indicador "F" instanciado por pool (un solo nodo reutilizado) [M]
 - [ ] Meshes vóxel por silueta con pooling de instancias (Voxel Tools) [C]
@@ -183,12 +183,12 @@
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis creado y firmado (alternativas documentadas) [S]
 - [ ] 03-Diseno creado y firmado (arquitectura + contratos API) [S]
-- [ ] 04-Codigo creado y firmado (rutas, firmas GDScript, Notas del Agente) [S]
+- [x] 04-Codigo creado y firmado (rutas, firmas GDScript, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo, 130 ítems) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
 ## Notas del Agente
 

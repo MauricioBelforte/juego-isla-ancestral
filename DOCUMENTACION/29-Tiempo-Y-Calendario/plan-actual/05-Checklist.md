@@ -13,13 +13,13 @@
 - [ ] Catalogar los 24 puntos del plan maestro (sección 28) [S]
 - [ ] Definir criterios de aceptación verificables [S]
 - [ ] RF1: reloj de juego comprimido [S]
-- [ ] RF2: calendario completo (día, semana, mes, estación, año) [S]
+- [x] RF2: calendario completo (día, semana, mes, estación, año) [S]
 - [ ] RF3: 4 estaciones con efectos [S]
-- [ ] RF4: eventos periódicos (festivales, cumpleaños, visitas) [S]
-- [ ] RF5: calendario visible en UI [S]
+- [x] RF4: eventos periódicos (festivales, cumpleaños, visitas) [S]
+- [x] RF5: calendario visible en UI [S]
 - [ ] RF6: rutinas por hora para NPC/tiendas [S]
 - [ ] RF7: regla cozy roja — contenido repetible [S]
-- [ ] Criterio: módulo delegable hoy (sin voxel funcional) [S]
+- [x] Criterio: módulo delegable hoy (sin voxel funcional) [S]
 
 ## B. Duraciones y conversiones (12)
 
@@ -39,7 +39,7 @@
 - [x] Día 336 → transición limpia a año 2 (sin bug de año nuevo) [M]
 - [x] Estación inicial de partida: Primavera (calibrada para tutorial) [S]
 - [ ] Duración ajustable por knobs sin recompilar [S]
-- [ ] Formato de hora 12h/24h configurable en settings [S]
+- [x] Formato de hora 12h/24h configurable en settings [S]
 - [x] El tick usa delta real (no frame-dependent) [M]
 - [x] Pausa de menú también pausa el tick [S]
 - [x] Sin drift acumulado por fps bajos (acumulador de tiempo) [C]
@@ -49,24 +49,24 @@
 - [ ] Eventos diarios: tiendas, rutinas, cultivos, pesca [M]
 - [ ] Eventos semanales: visitante nuevo en el Gran Vapor [M]
 - [ ] Eventos mensuales: mercado especial + luna de cosecha [M]
-- [ ] Festival de Primavera (Flores) [M]
-- [ ] Festival de Verano (Cosecha) [M]
-- [ ] Festival de Otoño (Viento) [M]
-- [ ] Festival de Invierno (Nieve) [M]
-- [ ] Festival de las Luces (anual, fin de año) [M]
+- [x] Festival de Primavera (Flores) [M]
+- [x] Festival de Verano (Cosecha) [M]
+- [x] Festival de Otoño (Viento) [M]
+- [x] Festival de Invierno (Nieve) [M]
+- [x] Festival de las Luces (anual, fin de año) [M]
 - [ ] Cumpleaños por vecino (M19 puebla) [M]
 - [ ] Visitas semanales con llegada en barco [M]
 - [ ] Todos los eventos repetibles (regla cozy) [M]
 - [ ] Contenido de evento nunca se destruye [M]
-- [ ] Festival de las Luces dispara iluminación especial (M31 consume) [M]
-- [ ] Día del festival: tiendas cierran y plaza se decora (hook M74) [M]
+- [x] Festival de las Luces dispara iluminación especial (M31 consume) [M]
+- [x] Día del festival: tiendas cierran y plaza se decora (hook M74) [M]
 - [ ] Cumpleaños del jugador también registrado [S]
 - [ ] Vendimia (Verano) anuncia recompensas de agricultura [M]
 
 ## D. Calendario y reloj UI (8)
 
-- [ ] Calendario de mes con día actual [M]
-- [ ] Íconos por evento (festival, cumpleaños, mercado, visita) [M]
+- [x] Calendario de mes con día actual [M]
+- [x] Íconos por evento (festival, cumpleaños, mercado, visita) [M]
 - [ ] Lista de próximos 7 días en el diario (M55) [M]
 - [ ] Aviso 24 h antes del evento (en juego) [M]
 - [ ] Flecha indicadora en el HUD [M]
@@ -85,7 +85,7 @@
 - [x] Sin castigo por no jugar (no pierde tiempo) [M]
 - [x] Persistencia: retoma donde quedó al recargar [M]
 - [x] Sin días fantasma entre sesiones [M]
-- [ ] Configurable en data/time/*.tres (knobs) [S]
+- [x] Configurable en data/time/*.tres (knobs) [S]
 
 ## F. Rutinas NPC y consumo (8)
 
@@ -114,8 +114,8 @@
 ## H. Persistencia y data (8)
 
 - [x] GameState.M29: fecha, hora, eventos_visitados, proximo_evento [M]
-- [ ] data/time/time_config.tres (duraciones) [M]
-- [ ] data/time/festivals.tres (contenido) [M]
+- [x] data/time/time_config.tres (duraciones) [M]
+- [x] data/time/festivals.tres (contenido) [M]
 - [ ] Nombres de meses/días en data (localizable M57) [M]
 - [ ] Semilla de tiempo por partida [M]
 - [x] Compatibilidad con guardado M59 (versionado) [M]
@@ -126,7 +126,7 @@
 
 - [ ] Módulo marcado como delegable en CHECKLIST-GLOBAL [S]
 - [ ] API pública estable (no cambia para consumidores) [M]
-- [ ] Implementación → agente delegado (ARROW) [S]
+- [x] Implementación → agente delegado (ARROW) [S]
 - [ ] Dependencias solo de 07 (documentado) [S]
 - [ ] Sin dependencia de voxel/assets/física [S]
 - [ ] 01-Requerimientos creado y firmado [S]

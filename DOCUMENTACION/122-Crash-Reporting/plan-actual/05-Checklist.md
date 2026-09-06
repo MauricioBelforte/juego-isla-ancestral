@@ -250,7 +250,7 @@
 - [x] Diseñar send_crash()
 - [x] Diseñar send_cached_crashes()
 - [ ] Diseñar has_connection()
-- [ ] Diseñar service_url
+- [x] Diseñar service_url
 - [ ] Diseñar api_key
 - [ ] Diseñar headers HTTP
 - [ ] Diseñar manejo de respuesta HTTP
@@ -268,7 +268,7 @@
 ### [S] CrashLogging (integración M103)
 - [x] Diseñar CrashLogging.gd
 - [x] Diseñar log_crash()
-- [ ] Diseñar uso de Logger service
+- [x] Diseñar uso de Logger service
 - [ ] Diseñar nivel CRITICAL
 - [x] Diseñar categoría CRASH
 - [ ] Diseñar contenido de log (error, stack trace, metadata, contexto)
@@ -291,7 +291,7 @@
 - [ ] Diseñar _format_metadata()
 - [x] Diseñar botón "Test Crash"
 - [x] Diseñar botón "Send Crash Report"
-- [ ] Diseñar label de metadata del sistema
+- [x] Diseñar label de metadata del sistema
 
 ### [S] CrashAlerts
 - [x] Diseñar CrashAlerts.gd
@@ -335,6 +335,6 @@
 - [x] Núcleo V0 verificado: `CrashReporter` autoload presente + dump JSON a `user://crash/` + reintentos + cola pendiente [M]
 - [x] Test headless M122 ejecutado: `=== TEST M122: 12 checks, 0 fallos ===` (Log 518) [C]
 - [x] Tareas locales cerradas: núcleo, cache, logging, alertas, testing y contratos documentados [S]
-- [ ] Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
+- [x] Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
 - [ ] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
 - [ ] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]

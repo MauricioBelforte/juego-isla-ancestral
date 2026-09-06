@@ -1,19 +1,20 @@
-**Modelo:** MiMo V2.5
-**Plataforma:** OpenCode
+**Modelo:** step-3.7-flash (último modificador; documentación base por Deepseek V4 Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-02 23:31
 
 # 05-Checklist.md — Modulo 163: Sistema de Encantamientos
 
 > **Modelo:** stepfun-3.7-flash
 > **Plataforma:** Kilo Code
-> **Fecha:** 2026-09-02 02:10
-> **Estado:** 🔵 En curso — iter. 1 núcleo data-driven + chamán integrado en escena
+> **Fecha:** 2026-09-02
+> **Estado:** 🟡 Con dudas — liberado 2026-09-02 23:31
 
 ## Reserva actual
 
 | Campo | Valor |
 |-------|-------|
 | Módulo | M163 Sistema De Encantamientos |
-| Agente | stepfun-3.7-flash (Kilo Code) |
+| Agente | step-3.7-flash (Kilo Code) |
 | Fase | F5 |
 | Dificultad | 3 |
 | Visión | V0 |
@@ -167,7 +168,7 @@
 - [x] Sección A completada (15/15): sistema data-driven con 4 encantamientos .tres, EnchantmentSystem autoload, EnchantmentData Resource, API de lectura en inventario_service.gd
 - [x] Sección B en progreso (4/20): shaman_npc.gd como InteractableBase, posición en Isla Raíz (320, 11, 300), shaman_ui.gd como Control básico, NPC spawneado en main_island.gd y registrado en escena
 - [x] Errores corregidos: class_name EnchantmentSystem en autoload eliminado, tipo EnchantmentData cambiado a Resource, rutas .tres ajustadas a res://, inferencia de tipo en TerrainLocator.get_height() corregida, posición del NPC reordenada antes de add_child()
-- [ ] Siguientes pasos: probar interacción real con chamán en runtime, crear diálogo shaman_intro en data/dialogues/, implementar sección C (Incienso) y D (Encantamientos por Tier), integrar con tiendas M39 y economía M38
+- [x] Siguientes pasos: probar interacción real con chamán en runtime, crear diálogo shaman_intro en data/dialogues/, implementar sección C (Incienso) y D (Encantamientos por Tier), integrar con tiendas M39 y economía M38
 
 **Notas del Agente**
 

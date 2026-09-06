@@ -7,7 +7,7 @@
 
 ## A. TransportManager (autoload)
 
-- [ ] Definir TransportManager como autoload único de transporte [M]
+- [x] Definir TransportManager como autoload único de transporte [M]
 - [ ] Cargar el grafo de paradas/rutas desde transport_network.tres [M]
 - [ ] Exponer API list_routes/buy_ticket a la UI (M53) [S]
 - [ ] Registrar logs TRIP-START y TRIP-END [S]
@@ -152,7 +152,7 @@
 ## S. IP Pasantes y Accesibilidad (M58)
 
 - [ ] HUD del viaje legible con alto contraste [M]
-- [ ] Tamaño de texto configurable en el panel [M]
+- [x] Tamaño de texto configurable en el panel [M]
 - [ ] Reduce Motion: transiciones cortas sin zoom [M]
 - [ ] Subtítulos en mensajes de viaje [S]
 - [ ] Panel de transporte accesible con gamepad (M57) [M]
@@ -215,4 +215,4 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

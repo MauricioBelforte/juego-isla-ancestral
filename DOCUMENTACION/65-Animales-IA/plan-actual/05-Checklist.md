@@ -106,7 +106,7 @@
 - [ ] [M61] Pool de nodos para evitar alloc/free [C] — dueño M61
 
 ## K. Organización / documentación
-- [ ] Mover pack_logic/school_logic a scripts/animales_ia/ (hoy en scripts/fauna/) [M]
+- [x] Mover pack_logic/school_logic a scripts/animales_ia/ (hoy en scripts/fauna/) [M] — iter. cierre (Log 595): movidos con .uid, sin referencias cruzadas rotas (scan de repo sin hits); test_m65 0 fallos + regresión fauna 0 fallos
 - [x] DOCUMENTACION/65-Animales-IA/plan-actual creada en QA (Log 415) [S]
 - [x] 05-Checklist >= 100 ítems [S]
 - [x] Log 415 de QA cruzado firmado [S]

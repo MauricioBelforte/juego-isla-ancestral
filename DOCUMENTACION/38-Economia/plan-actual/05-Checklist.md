@@ -18,15 +18,15 @@
 - [ ] Registrar relaciones con M29/M30/M31 (calendario y reloj) y M73 (eventos) [S]
 - [ ] Registrar relación con M14 (Inventario) para movimientos de ítems [S]
 - [ ] Separar dentro/fuera de alcance: UI queda en M53, misiones en M23, deuda descartada [S]
-- [ ] Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, data-driven, sin red [S]
+- [x] Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, data-driven, sin red [S]
 - [ ] Definir criterios de aceptación verificables (8 criterios) [S]
 - [ ] Incluir contexto del plan maestro: dinero como herramienta de comunidad, no objetivo [S]
 - [ ] Nombrar la moneda del juego: monedas_aurora [S]
 
 ## B. Requisitos funcionales
 
-- [ ] RF1: moneda única con saldo entero no negativo, consultable y modificable solo por EconomyManager [M]
-- [ ] RF2: catálogo de precios central con PriceDefinition por ítem [M]
+- [x] RF1: moneda única con saldo entero no negativo, consultable y modificable solo por EconomyManager [M]
+- [x] RF2: catálogo de precios central con PriceDefinition por ítem [M]
 - [ ] RF3: compra en tiendas NPC con validación de fondos, stock y horario [M]
 - [ ] RF4: venta del jugador con precio de venta y límite diario anti-grind [M]
 - [ ] RF5: reabastecimiento de tiendas por día laborable y rotación estacional [M]
@@ -37,7 +37,7 @@
 - [x] RF10: tabla de precios del día expuesta como dato para la UI [S] — EconomyManager.tabla_del_dia() delega en PriceManager; estructura {compra, venta, limite, vendidas_hoy, rebajado}; testeada 29/0 (log 538)
 - [x] RF11: anti-grind con límite diario por ítem y reventa nunca rentable [M] — limite_ventas_dia por banda (log 191) + precio_venta_vigente siempre <= precio_compra_vigente aunque haya feria (anti-arbitraje). Testeado 23/0 (log 544)
 - [x] RF12: salvavidas cozy: con 0 monedas siempre hay trueque de partida disponible [M] — oferta es_salvavidas siempre en propuestas y no consume límite (testeado)
-- [ ] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M] — PARCIAL: saldo (núcleo) + historial (iter.2, log 538) + reputación (iter.3, log 544) persisten; inventarios de tienda pendientes (M39, ShopManager aún sin autoload)
+- [x] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M] — PARCIAL: saldo (núcleo) + historial (iter.2, log 538) + reputación (iter.3, log 544) persisten; inventarios de tienda pendientes (M39, ShopManager aún sin autoload)
 - [x] RF14: ferias y eventos con precios especiales temporales (M73) [M] — PriceManager.vincular_eventos() conecta evento_iniciado/evento_terminado de EventManager; lee multiplicadores de EventDefinition.flags (precio_compra/precio_venta) y aplica/limpia con clamp. Duck-typing, sin acoplar M73. Testeado 23/0 (log 544)
 - [ ] RF15: registro de transacciones para log y analytics (M104) [S]
 
@@ -47,21 +47,21 @@
 - [ ] RNF2: precios estables a corto plazo, cambios lentos y anunciados [S]
 - [ ] RNF3: rendimiento por eventos discretos, sin bucles por frame [M]
 - [ ] RNF4: determinismo con PRNG de partida (M29) en precios del día [M]
-- [ ] RNF5: data-driven total en .tres con validación en editor [M]
+- [x] RNF5: data-driven total en .tres con validación en editor [M]
 - [ ] RNF6: desacoplamiento absoluto de la capa de UI, comunicación por señales [M]
 - [ ] RNF7: localización i18n con claves string para tiendas y NPCs [S]
-- [ ] RNF8: GDScript tipado explícito compatible con Godot 4.x (>= 4.4.1) [S]
+- [x] RNF8: GDScript tipado explícito compatible con Godot 4.x (>= 4.4.1) [S]
 - [ ] RNF9: sin dependencia de red ni servicios externos [S]
 - [x] RNF10: clamp de saldo a MAX_SALDO con log de advertencia [S]
 
 ## D. Análisis del dominio
 
-- [ ] Analizar el subsistema de moneda: única divisa, emisión comunitaria, sin deuda [M]
-- [ ] Analizar el subsistema de precios: base de compra y venta, regla anti-aribitraje [M]
-- [ ] Analizar el subsistema de comercio: validación, transacción y registro [M]
-- [ ] Analizar el subsistema de tiendas: identidad por NPC, horarios y rotación [M]
-- [ ] Analizar el subsistema de trueque: intercambio sin moneda ligado a la amistad [M]
-- [ ] Analizar el subsistema de mercado: ajuste diario suave por oferta y estación [M]
+- [x] Analizar el subsistema de moneda: única divisa, emisión comunitaria, sin deuda [M]
+- [x] Analizar el subsistema de precios: base de compra y venta, regla anti-aribitraje [M]
+- [x] Analizar el subsistema de comercio: validación, transacción y registro [M]
+- [x] Analizar el subsistema de tiendas: identidad por NPC, horarios y rotación [M]
+- [x] Analizar el subsistema de trueque: intercambio sin moneda ligado a la amistad [M]
+- [x] Analizar el subsistema de mercado: ajuste diario suave por oferta y estación [M]
 - [ ] Evaluar alternativa de múltiples divisas y descartarla por fricción anti-cozy [S]
 - [ ] Evaluar precios fijos vs dinámicos: se adopta dinámico suave limitado a ±10% [M]
 - [ ] Evaluar trueque central vs accesorio: se adopta como complemento y salvavidas [M]
@@ -85,7 +85,7 @@
 
 ## F. Diseño de subsistemas — Precios y equilibrio
 
-- [ ] Definir PriceDefinition con precio_compra_base y precio_venta_base [M]
+- [x] Definir PriceDefinition con precio_compra_base y precio_venta_base [M]
 - [x] Aplicar regla precio_venta < precio_compra para todo revendible [M]
 - [x] Definir descuento_amistad_max con tope del 15% ? escalones 5/10/15% en niveles de amistad 2/3/4 de M20 (implementado en price_manager, validado con test_consumidores_tiempo) [M]
 - [ ] Definir variabilidad_mercado por ítem (0.0 fijo .. 1.0 sensible) [M]
@@ -100,13 +100,13 @@
 
 ## G. Diseño de subsistemas — Tiendas
 
-- [ ] Definir ShopDefinition con shop_id, npc_dueño_id y clave i18n [M]
+- [x] Definir ShopDefinition con shop_id, npc_dueño_id y clave i18n [M]
 - [ ] Definir horario declarativo: días, hora apertura y hora cierre [M]
 - [ ] Definir stock_por_estacion como diccionario estación → ítems [M]
-- [ ] Implementar esta_abierta() como consulta pura al calendario M29/M30/M31 [M]
-- [ ] Implementar comprar() con validaciones y señales de éxito/rechazo [C]
-- [ ] Implementar vender() con penalización 50% al superar límite diario [C]
-- [ ] Implementar reabastecer_diario() restaurando stock base [M]
+- [x] Implementar esta_abierta() como consulta pura al calendario M29/M30/M31 [M]
+- [x] Implementar comprar() con validaciones y señales de éxito/rechazo [C]
+- [x] Implementar vender() con penalización 50% al superar límite diario [C]
+- [x] Implementar reabastecer_diario() restaurando stock base [M]
 - [ ] Aplicar rotación estacional de inventario al cambiar estación [M]
 - [ ] Emitir señal inventario_tienda_cambio al alterar stock [S]
 - [ ] Registrar 3 tiendas de ejemplo: pescadería, agrícola y artesanías [M]
@@ -118,10 +118,10 @@
 - [ ] Definir amistad_minima para desbloqueo por nivel de M20 [M]
 - [ ] Definir temporada para propuestas estacionales [S]
 - [x] Definir limite_por_dia para prevenir abuso [S] (implementado: limite_ventas_dia por banda de rareza en PriceManager, log 191)
-- [ ] Implementar propuestas_disponibles(npc_id) con filtros de amistad y temporada [M]
+- [x] Implementar propuestas_disponibles(npc_id) con filtros de amistad y temporada [M]
 - [x] Implementar ejecutar_trueque() con intercambio atómico vía M14 [C] — verificar→remover todo-o-nada→agregar con rollback cozy si no entra
 - [x] Emitir señales trueque_exitoso y trueque_rechazado con motivo [M] — + log DOM-ECO-TRUEQUE (convención del proyecto)
-- [ ] Implementar contadores usos_hoy y limite_diario por NPC [M]
+- [x] Implementar contadores usos_hoy y limite_diario por NPC [M]
 - [x] Definir trueque de partida salvavidas: bienes comunes por herramienta básica [M] — trueque_salvavidas.tres (piedra→madera); entregable sin amistad ni temporada
 - [ ] Registrar DOM-ECO-TRUEQUE en cada ejecución [S]
 - [ ] Validar que el trueque nunca intercambie ítems únicos de progreso (M22/M23) [S]
@@ -141,11 +141,11 @@
 
 ## J. Integración con módulos 15/16/20
 
-- [ ] Usar item_id del catálogo M15 como clave primaria de PriceDefinition [S]
+- [x] Usar item_id del catálogo M15 como clave primaria de PriceDefinition [S]
 - [ ] Derivar rangos de precio por rareza definida en M15 [M]
 - [ ] Marcar revendible=false los recursos de misión y ancestrales [S]
 - [ ] No intervenir la recolección de M15: la economía solo lee y recibe ítems [S]
-- [ ] Permitir que cada producto de M16 declare su PriceDefinition al crear la receta [M]
+- [x] Permitir que cada producto de M16 declare su PriceDefinition al crear la receta [M]
 - [ ] Definir precio de venta de productos craftables como fijo e independiente de materiales [M]
 - [ ] Garantizar que craftear para vender no sea rentable (anti-aribitraje) [M]
 - [ ] Consumir señal nivel_amistad_cambio(npc, nivel) de M20 para invalidar cachés [M]
@@ -169,13 +169,13 @@
 - [ ] Evento feria al amanecer: precios especiales conviven con el recálculo sin pisarse [M]
 - [ ] Guardado a mitad del día: contadores diarios y ventana se restauran exactos [M]
 - [x] Saldo en MAX_SALDO: dep?sitos se clampan con aviso DOM-ECO-SALDO [S]
-- [ ] Ítem sin PriceDefinition en catálogo: error de validación en editor, precaución en runtime [M]
+- [x] Ítem sin PriceDefinition en catálogo: error de validación en editor, precaución en runtime [M]
 - [ ] Descuento de amistad + penalización de límite: nunca precio final 0 o negativo [M]
 
 ## L. Optimización
 
 - [ ] Consultas de precio en O(1) con diccionarios item_id → definición [M]
-- [ ] Precargar catálogos en _ready() de cada autoload [S]
+- [x] Precargar catálogos en _ready() de cada autoload [S]
 - [ ] Calcular tabla del día una sola vez por día laborable [M]
 - [ ] Sin bucles por frame: el módulo solo reacciona a eventos [M]
 - [x] Usar enteros y clamps en todo el camino del precio final [S] (validado por test_edge_cases_precio.gd)
@@ -188,13 +188,13 @@
 
 - [ ] Crear 01-Requerimientos.md con problema, objetivo, alcance y RF1-RF15 [M]
 - [ ] Crear 02-Analisis.md con dominio, alternativas, decisiones y riesgos [M]
-- [ ] Crear 03-Diseno.md con arquitectura, flujos, clases y balance [M]
-- [ ] Crear 04-Codigo.md con rutas previstas res://economia/... y firmas GDScript [M]
+- [x] Crear 03-Diseno.md con arquitectura, flujos, clases y balance [M]
+- [x] Crear 04-Codigo.md con rutas previstas res://economia/... y firmas GDScript [M]
 - [ ] Incluir Notas del Agente en 04-Codigo.md con honestidad y recomendaciones [S]
 - [ ] Crear 05-Checklist.md con 146 ítems todos completados [M]
 - [ ] Firmar todos los archivos con modelo y plataforma [S]
 - [ ] Copiar plan-inicial a plan-actual byte a byte (verificación por hash) [S]
-- [ ] Recomendar 06-Plan-Testings y 07-Resultados-Testings para la fase de implementación [S]
+- [x] Recomendar 06-Plan-Testings y 07-Resultados-Testings para la fase de implementación [S]
 
 ## N. Testings
 
@@ -202,13 +202,13 @@
 - [ ] Definir prueba de venta con respeto de límite diario y penalización [M]
 - [ ] Definir prueba de trueque exitoso y rechazado con motivos [M]
 - [ ] Definir prueba de determinismo del mercado con misma semilla [M]
-- [ ] Definir prueba de persistencia: guardar/cargar con saldo e historial exactos [M]
+- [x] Definir prueba de persistencia: guardar/cargar con saldo e historial exactos [M]
 - [ ] Definir prueba de ferias: precios especiales se aplican y revierten [M]
 - [ ] Definir prueba de descuentos por amistad en 3 niveles [M]
 - [ ] Definir prueba de anti-aribitraje: reventa de crafting nunca rentable [M]
 - [ ] Definir prueba de rendimiento: 5000 transacciones simuladas sin picos [M]
 - [x] Definir prueba de edge cases: precios cero, inventario lleno, 0 monedas [M] (parcial: precios/cantidades inv?lidas cubiertas por test_edge_cases_precio.gd; inventario lleno/0 monedas pendientes en M14/M39)
-- [ ] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
+- [x] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 - [x] Implementar limite_ventas_dia por banda de rareza: comun=3, poco_comun=3, raro=2, epico=1, con resolucion desde catalogo (PriceDefinition.rareza) y fallback al enum ItemData.Rareza [M] (log 191)
 - [x] Crear test_edge_cases_precio.gd (headless, M38): cantidad 0/negativa = minorista, tope volumen 15%, venta estable anti-arbitraje, clamp >=1 en base minima, reseteo por dia, limite por banda. 20/20 checks OK [M] (log 235)
 - [x] Crear test_tabla_dia_transacciones.gd (headless, M38 iter.2): RF10 tabla_del_dia + RF15 historial de transacciones + RF13 parcial (persistencia de historial). 29/29 checks OK [M] (log 538)

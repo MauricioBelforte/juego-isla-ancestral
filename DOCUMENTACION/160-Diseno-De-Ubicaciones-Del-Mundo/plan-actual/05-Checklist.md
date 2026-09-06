@@ -118,7 +118,7 @@
 - [ ] Validar objetos M159
 - [ ] Documentar minerales exclusivos
 - [ ] Definir puzzle de ruinas
-- [ ] Definir sistema de minas
+- [x] Definir sistema de minas
 
 ### Isla Aurora (20 ítems)
 
@@ -201,3 +201,8 @@
 - [x] `data/map/map_data.json` v2 — sincronizado: 9 POIs con los IDs LOC-* de las ubicaciones (índice el mundo completo: RIZ (pueblo/casa/tienda), COR (laguna/templo), CEN (volcán/templo), AUR (cielo/templo)) con coordenadas por isla
 - [x] Verificado: 9 ubicaciones = 9 POIs (0 divergencias)
 - [?] Conexión con viajes (M28): la solicitud de viaje usa los mismos IDs LOC-* — iter 4 (dueño: deepseek-v4-flash-vision-exp)
+## Iteración 4 — Puertos de viaje (2026-09-02 23:30 — deepseek-v4-flash-vision-exp / Kilo Code)
+
+- [x] `data/ubicaciones/puertos.json` — 4 embarcaderos LOC-* (uno por isla del canon, con costa y coords)
+- [x] `scripts/ubicaciones/verificar_puertos.gd` — verificador puertos ↔ rutas: 4 puertos LOC-* OK + hallazgo de vocabulario
+- [!] **Hallazgo (para M28/GLM):** las rutas del M28 usan isla_sur/norte/brisa/espejo — no coinciden con el canon RIZ/COR/CEN/AUR (salvo isla_raiz→RIZ); el mapa de vocabulario a las 4 islas del canon corresponde al dueño de M28

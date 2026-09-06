@@ -1,9 +1,17 @@
-Log reservado: 510
-# 05 — Checklist — M23: Historias Secundarias (22/100)
+> **Estado:** 🟡 Liberado — 2026-09-02 (Log 510)
 
-**Modelo:** step-3.7-flash (último modificador; documentación base por Deepseek V4 Flash)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-09-02
+## Reserva actual
+
+| Campo | Valor |
+|-------|-------|
+| Módulo | M23 Historias Secundarias |
+| Agente | step-3.7-flash (Kilo Code) |
+| Fase | F7 |
+| Dificultad | 3 |
+| Visión | V0 |
+| Entrada | M22✅ |
+| Salida | Núcleo data-driven + test headless 0 fallos |
+| Archivos afectados | `game/isla-ancestral/data/historias/`, `game/isla-ancestral/scripts/historias/`, `project.godot` |
 
 ## Historias de vecinos
 
@@ -99,7 +107,7 @@ Log reservado: 510
 - [ ] Crear la consecuencia "taller abierto" [S]
 - [x] Crear la consecuencia "plaza decorada" [S] — flag WorldState aplicado al completar cadena-epilogo-plaza (postgame)
 - [ ] Crear la consecuencia "cofradía activa" [S]
-- [ ] Crear la consecuencia "molino funcionando" [S]
+- [x] Crear la consecuencia "molino funcionando" [S]
 - [ ] Definir el cambio visual del mundo por consecuencia [M]
 - [ ] Definir diálogos posteriores por estado de mundo [M]
 - [ ] Documentar consecuencias y diálogos posteriores [S]
@@ -129,7 +137,7 @@ Log reservado: 510
 - [x] Definir el guardado por cadena (paso, completada, consecuencias) [M] — get_save_data/restore: activas (paso_actual) + completadas
 - [x] Implementar guardado atómico + `.bak` [M] — vía SaveManager M59 (escritura atómica central)
 - [x] Implementar el validador de referencias (NPC/lugares/objetos reales) [M] — tipos + evidencia con _slug (testeado); NPCs/lugares reales cuando existan (M36/M25 con dueño)
-- [ ] Implementar el validador de alcanzabilidad (M66) [M]
+- [x] Implementar el validador de alcanzabilidad (M66) [M]
 - [x] Implementar el validador de recompensas únicas [M] — validador: recompensa/consecuencia presentes + título único
 - [x] Documentar la persistencia y el validador [S] — 04-Codigo Notas iter. 1
 

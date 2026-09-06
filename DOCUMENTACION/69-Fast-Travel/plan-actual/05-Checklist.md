@@ -25,7 +25,7 @@
 
 ## B. Resolución de los 13 puntos del plan (13)
 
-- [ ] P1: fast travel disponible con restricciones progresivas [S]
+- [x] P1: fast travel disponible con restricciones progresivas [S]
 - [ ] P2: puntos de viaje desbloqueados al descubrir ubicaciones [S]
 - [ ] P3: costo en recursos o tiempo por viaje [S]
 - [ ] P4: transición visual suave (bruma/desvanecimiento) [S]
@@ -37,7 +37,7 @@
 - [ ] P10: evitación de bypass de eventos críticos [S]
 - [ ] P11: evitación de ruptura de misiones activas [S]
 - [ ] P12: prueba de navegación a todos los destinos [S]
-- [ ] P13: delegable para implementación [S]
+- [x] P13: delegable para implementación [S]
 
 ## C. Familia tonal y coherencia (5)
 
@@ -45,7 +45,7 @@
 - [ ] Confirmación de viaje: tono ascendente cálido [S]
 - [ ] Error en viaje: tono descendente suave, no agresivo [S]
 - [ ] Interfaz con family tones M45 [S]
-- [ ] Volumen configurable por bus (M91) [S]
+- [x] Volumen configurable por bus (M91) [S]
 
 ## D. Prioridades y rendimiento (10)
 
@@ -80,12 +80,12 @@
 ## F. Ducking y volumetría (8)
 
 - [ ] SFX -6 dB durante diálogos (M21) si se cancela viaje [S]
-- [ ] Música -6 dB durante logros si se usa fast travel [S]
+- [x] Música -6 dB durante logros si se usa fast travel [S]
 - [ ] Correr +3 dB sobre paso normal [S]
 - [ ] SFX por debajo de diálogo en jerarquía [S]
 - [ ] Error 0.4 s no punitivo [S]
 - [ ] Ningún SFX estridente (cozy) [S]
-- [ ] Volumen configurable por bus (M91) [S]
+- [x] Volumen configurable por bus (M91) [S]
 - [ ] Pausa con GameClock sin residuos (M29) [S]
 
 ## G. Data y configuración (10)
@@ -97,15 +97,15 @@
 - [ ] API: obtener_puntos_disponibles() [S]
 - [ ] API: establecer_ultimo_punto(nombre) [S]
 - [ ] API: obtener_ultimo_punto() [S]
-- [ ] Sin hardcode de paths de destino [S]
-- [ ] Configuración de costo por defecto [S]
+- [x] Sin hardcode de paths de destino [S]
+- [x] Configuración de costo por defecto [S]
 - [ ] Cooldown real: 1 uso cada 2 horas [S]
 
 ## G2. Pruebas (10)
 
 - [ ] Test: menú accesible desde mapa y atajo M [M]
-- [ ] Test: fast travel bloqueado durante combate [M]
-- [ ] Test: fast travel bloqueado durante diálogos críticos [M]
+- [x] Test: fast travel bloqueado durante combate [M]
+- [x] Test: fast travel bloqueado durante diálogos críticos [M]
 - [ ] Test: verificación de costo de recursos [M]
 - [ ] Test: cooldown real de 1 cada 2 horas [M]
 - [ ] Test: animación suave sin jumps visuales [M]
@@ -119,7 +119,7 @@
 - [ ] Módulo marcado delegable [S]
 - [ ] 3 alternativas descartadas documentadas [S]
 - [ ] API estable definida [S]
-- [ ] Implementación ? AGENTE DELEGADO [S]
+- [x] Implementación ? AGENTE DELEGADO [S]
 - [ ] Assets ? specs con family tonal [S]
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis creado y firmado [S]
@@ -154,7 +154,7 @@
 
 - [ ] Subtitulos de feedback de acción [S]
 - [ ] Tamaño de texto escalable para menu (M62) [S]
-- [ ] Lectura por screen reader de menu (verbal descriptions) [S]
+- [x] Lectura por screen reader de menu (verbal descriptions) [S]
 - [ ] Confirmación háptica opcional [S]
 - [ ] Contraste alto para menu de selección [S]
 - [ ] Iconos de apoyo visual al nombre del destino [S]
@@ -166,9 +166,9 @@
 ## L. Integración ecosistema (10)
 
 - [ ] M28: integración con waypoints descubiertos [S]
-- [ ] M63: consulta de logros asociados a first-travel [S]
+- [x] M63: consulta de logros asociados a first-travel [S]
 - [ ] M29-M31: restricción temporal (noche, tormenta) [S]
-- [ ] M104: evento analytics fast_travel_used [S]
+- [x] M104: evento analytics fast_travel_used [S]
 - [ ] M110: debug menu con listado de anchors [S]
 - [ ] M122: captura de crash si portal falla [S]
 - [ ] M124: balance económico según distancia [S]

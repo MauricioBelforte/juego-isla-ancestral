@@ -20,22 +20,22 @@
 - [x] Definir contrato para programadores externos [M]
 - [ ] Definir cesión del código al estudio [M]
 - [x] Definir documentación del código como entregable [M]
-- [ ] Definir pruebas/smoke como criterio de aceptación [M]
+- [x] Definir pruebas/smoke como criterio de aceptación [M]
 - [x] Definir confidencialidad aplicable [S]
 
 ## 3. Contratos con músicos (3º)
 
 - [x] Definir contrato para músicos [M]
-- [ ] Definir cesión del master musical al estudio [M]
-- [ ] Definir royalties opcionales (≤ X%) [M]
-- [ ] Definir crédito musical en M131 [S]
+- [x] Definir cesión del master musical al estudio [M]
+- [x] Definir royalties opcionales (≤ X%) [M]
+- [x] Definir crédito musical en M131 [S]
 - [ ] Definir derechos de uso en tráilers/DLC (M98/M120) [M]
 
 ## 4. Contratos con compositores (4º)
 
 - [x] Definir contrato para compositores del OST [M]
 - [ ] Definir propiedad del OST al estudio [M]
-- [ ] Definir royalties opcionales y tope [M]
+- [x] Definir royalties opcionales y tope [M]
 - [ ] Definir entrega de stems/partitura [M]
 - [x] Definir licenciamiento a servicios (Spotify) si aplica [S]
 
@@ -50,7 +50,7 @@
 
 - [x] Definir contrato para escritores de lore/diálogos [M]
 - [ ] Definir cesión de los textos al estudio [M]
-- [ ] Definir royalties opcionales para textos extensos [M]
+- [x] Definir royalties opcionales para textos extensos [M]
 - [ ] Definir entregable de textos (formato, extensión) [M]
 - [ ] Definir crédito de escritor en M131 [S]
 - [x] Definir no spoilers del lore por confidencialidad [S]
@@ -60,7 +60,7 @@
 - [x] Definir contrato para actores de voz [M]
 - [x] Definir licencia de uso de la voz en el juego y DLC [M]
 - [ ] Definir uso de la voz en tráilers (M98) [M]
-- [ ] Definir no cesión de imagen/reputación [S]
+- [x] Definir no cesión de imagen/reputación [S]
 - [ ] Definir crédito de actor de voz en M131 [S]
 
 ## 8. Contratos con freelancers (8º)
@@ -75,9 +75,9 @@
 
 - [ ] Definir titularidad de la PI del estudio (M78) [M]
 - [ ] Definir cesión de la obra incorporada al juego [M]
-- [ ] Definir conservación de la autoría por el colaborador [M]
-- [ ] Definir PI del juego no diluida por colaboraciones [M]
-- [ ] Definir retención de derechos por el estudio tras terminación [M]
+- [x] Definir conservación de la autoría por el colaborador [M]
+- [x] Definir PI del juego no diluida por colaboraciones [M]
+- [x] Definir retención de derechos por el estudio tras terminación [M]
 
 ## 10. Definir cesión o licencia (10º)
 
@@ -85,36 +85,36 @@
 - [x] Definir licencia de uso (voz) donde aplica [M]
 - [ ] Definir alcance de la cesión (juego completo + DLC) [M]
 - [ ] Definir no cesión de marcas del colaborador [S]
-- [ ] Definir reversión NO en caso de terminación [M]
+- [x] Definir reversión NO en caso de terminación [M]
 
 ## 11. Definir remuneración (11º)
 
 - [ ] Definir pago fijo por entregable [M]
 - [x] Definir monto/fecha en cada contrato [M]
-- [ ] Definir opción de royalties (música/escritura) [M]
+- [x] Definir opción de royalties (música/escritura) [M]
 - [ ] Definir tope y límite temporal de royalties [M]
-- [ ] Definir no royalty sobre el 100% de M95 sin aprobación [M]
+- [x] Definir no royalty sobre el 100% de M95 sin aprobación [M]
 
 ## 12. Definir entregables (12º)
 
 - [ ] Definir formato exacto por rol [M]
 - [ ] Definir cantidad y plazos [M]
-- [ ] Definir criterio de aceptación por el estudio [M]
-- [ ] Definir artefactos de entrega (color, resolución) [M]
+- [x] Definir criterio de aceptación por el estudio [M]
+- [x] Definir artefactos de entrega (color, resolución) [M]
 
 ## 13. Definir revisiones (13º)
 
 - [ ] Definir número de rondas de revisión (2-3) [S]
 - [ ] Definir revisiones incluidas en el pago [S]
 - [ ] Definir costo de rondas extra [S]
-- [ ] Definir criterio de aprobación final [M]
+- [x] Definir criterio de aprobación final [M]
 
 ## 14. Definir confidencialidad (14º)
 
 - [x] Definir cláusula NDA en el contrato [M]
 - [ ] Definir NDA separado para accesos a lore avanzado (M148) [M]
-- [ ] Definir NDA separado para builds tempranos (M140) [M]
-- [ ] Definir excepción de información pública [S]
+- [x] Definir NDA separado para builds tempranos (M140) [M]
+- [x] Definir excepción de información pública [S]
 - [x] Definir duración de la confidencialidad [S]
 
 ## 15. Definir terminación (15º)
@@ -122,37 +122,37 @@
 - [x] Definir causas de terminación (plazo/calidad/confidencialidad) [M]
 - [ ] Definir pago de entregables completados al terminar [M]
 - [ ] Definir que la cesión de obras entregadas permanece [M]
-- [ ] Definir no reversión de derechos por terminación [M]
+- [x] Definir no reversión de derechos por terminación [M]
 
 ## 16. Definir uso de portfolio (16º)
 
 - [ ] Definir permiso de mostrar la obra (portfolio/reel) [M]
 - [ ] Definir crédito obligatorio al juego [S]
-- [ ] Definir prohibición de spoilers (sellos/final/epílogo) [M]
-- [ ] Definir prohibición de entregar builds jugables [S]
-- [ ] Definir cláusula explícita de portfolio [S]
+- [x] Definir prohibición de spoilers (sellos/final/epílogo) [M]
+- [x] Definir prohibición de entregar builds jugables [S]
+- [x] Definir cláusula explícita de portfolio [S]
 
 ## 17. Definir garantías (17º)
 
 - [ ] Definir garantía de originalidad del colaborador [M]
-- [ ] Definir garantía de no violación de derechos de terceros [M]
+- [x] Definir garantía de no violación de derechos de terceros [M]
 - [x] Definir cláusula de IA no declarada (M86) [M]
-- [ ] Definir indemnización por violaciones [M]
+- [x] Definir indemnización por violaciones [M]
 
 ## 18. Definir responsabilidad (18º)
 
-- [ ] Definir límite de la obligación del estudio (pagos hechos) [M]
+- [x] Definir límite de la obligación del estudio (pagos hechos) [M]
 - [ ] Definir responsabilidad del colaborador por daños [M]
-- [ ] Definir exención de daños indirectos [S]
+- [x] Definir exención de daños indirectos [S]
 - [ ] Definir seguro/cobertura si aplica [S]
 
 ## 19. Revisar legislación aplicable (19º)
 
-- [ ] Definir jurisdicción del estudio (Argentina u otra según M78) [M]
+- [x] Definir jurisdicción del estudio (Argentina u otra según M78) [M]
 - [ ] Definir foro designado [M]
 - [x] Definir ley aplicable al contrato [M]
 - [x] Definir registros/constancia legales [S]
-- [ ] Definir actualización de legislación periódica [S]
+- [x] Definir actualización de legislación periódica [S]
 
 ## 20. Consultar abogado antes de contratos relevantes (20º)
 
@@ -168,7 +168,7 @@
 - [x] Definir registro en índice de contratos (M151) [M]
 - [x] Definir distinción con colaboraciones comunitarias (M100) [M]
 - [ ] Definir créditos en M131 obligatorios [S]
-- [ ] Definir archivo de la obra aprobada en pipeline (M108) [S]
+- [x] Definir archivo de la obra aprobada en pipeline (M108) [S]
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
 - [x] Definir feed del índice a M151 (auditoría legal) [S]

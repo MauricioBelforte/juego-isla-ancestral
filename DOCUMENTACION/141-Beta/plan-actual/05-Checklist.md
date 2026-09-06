@@ -16,7 +16,7 @@
 - [ ] Definir inventario maestro de misiones secundarias (M23) [M]
 - [ ] Definir herramienta Editor `ContentRegister` para detectar gaps [C]
 - [ ] Definir reporte de gaps en CSV para tickets [M]
-- [ ] Definir gate CI: build falla si gaps > 0 [M]
+- [x] Definir gate CI: build falla si gaps > 0 [M]
 - [ ] Definir contenido reutilizable desde pipeline M108 para cerrar faltantes [M]
 - [ ] Definir verificación semanal de inventario (W1-W6) [S]
 - [ ] Definir 6 islas finales con todos los ítems de M50 [C]
@@ -27,7 +27,7 @@
 - [ ] Definir 100% de coleccionables localizables sin guía (pistas en diario) [M]
 - [ ] Definir evento de cierre: festival con todos los NPC (M74) [M]
 - [ ] Definir sin ítems placeholder o provisionales en inventarios [S]
-- [ ] Definir reutilización de scripts de M140 sin modificación (estables) [S]
+- [x] Definir reutilización de scripts de M140 sin modificación (estables) [S]
 
 ## 2. Historia completa (RF2/M153)
 
@@ -89,14 +89,14 @@
 - [ ] Definir voces en hitos de historia (EN + ES) [M]
 - [ ] Definir mezcla dentro de presupuesto de audio (M61) [S]
 - [ ] Definir ducking de música con diálogos [S]
-- [ ] Definir buses de audio funcionando en Beta pública [S]
+- [x] Definir buses de audio funcionando en Beta pública [S]
 - [ ] Definir verificación de audio en las 3 rutas de sellos [S]
 
 ## 6. Localización completa (RF6/M87)
 
 - [ ] Definir los 6 idiomas objetivo de M87 [M]
 - [ ] Definir glosario centralizado por término clave [M]
-- [ ] Definir archivo JSON por idioma [M]
+- [x] Definir archivo JSON por idioma [M]
 - [ ] Definir export/import CSV para traductores [M]
 - [ ] Definir revisión humana por idioma con checklist [M]
 - [ ] Definir subtítulos completos (UI, diálogos, eventos) [M]
@@ -111,7 +111,7 @@
 ## 7. Accesibilidad implementada (RF7/M58)
 
 - [ ] Definir remapeo completo de controles (teclado/gamepad) [M]
-- [ ] Definir subtítulos configurables (tamaño/opacidad/fondo) [M]
+- [x] Definir subtítulos configurables (tamaño/opacidad/fondo) [M]
 - [ ] Definir modos de color alternativos (puzzles y UI) [M]
 - [ ] Definir reducción de efectos visuales y sacudidas [M]
 - [ ] Definir Reduce Motion en pantallas de carga [S]
@@ -120,8 +120,8 @@
 - [ ] Definir dificultad de puzzles opcional (M58) [M]
 - [ ] Definir navegación completa con gamepad (M57) [M]
 - [ ] Definir soporte de lectura de diálogos (velocidad, pausa) [S]
-- [ ] Definir feedback háptico configurable [M]
-- [ ] Definir verificación de M58 en build final con checklist [M]
+- [x] Definir feedback háptico configurable [M]
+- [x] Definir verificación de M58 en build final con checklist [M]
 
 ## 8. Rendimiento objetivo (RF8/M61-M63)
 
@@ -131,7 +131,7 @@
 - [ ] Definir gate CI de rendimiento (mínimo y recomendado) [M]
 - [ ] Definir memoria dentro de M62 en las 6 islas [M]
 - [ ] Definir tiempos de carga/streaming dentro de M63 [M]
-- [ ] Definir telemetría de sesión en la build Beta pública (M104) [M]
+- [x] Definir telemetría de sesión en la build Beta pública (M104) [M]
 - [ ] Definir FPS p99 ≥ objetivo en partida larga (60+ min) [M]
 - [ ] Definir draw calls/batching finales por zona [M]
 - [ ] Definir profilado de picos de memoria en transiciones [M]
@@ -157,9 +157,9 @@
 - [ ] Definir abstracción `PlatformBridge` común [M]
 - [ ] Definir logros mapeados a hitos (M59) [M]
 - [ ] Definir cloud saves con manejo de conflictos (M60) [M]
-- [ ] Definir overlay de plataforma (invitados, capturas) funcionando [M]
-- [ ] Definir build de muestra por plataforma sin contenido de dev [M]
-- [ ] Definir compatibilidad de saves entre builds [M]
+- [x] Definir overlay de plataforma (invitados, capturas) funcionando [M]
+- [x] Definir build de muestra por plataforma sin contenido de dev [M]
+- [x] Definir compatibilidad de saves entre builds [M]
 - [ ] Definir telemetría por plataforma (M104) [S]
 - [ ] Definir documentación de desvíos por plataforma [S]
 - [ ] Definir prueba de instalación limpia por plataforma [M]
@@ -167,10 +167,10 @@
 ## 11. Store page final (RF11/M149)
 
 - [ ] Definir textos de store (descripción corta/larga, características) [M]
-- [ ] Definir 10 capturas finales de build real [M]
+- [x] Definir 10 capturas finales de build real [M]
 - [ ] Definir tags y géneros correctos para descubrimiento [S]
 - [ ] Definir requisitos mínimos/recomendados verificados [S]
-- [ ] Definir caja de puntuación y configuraciones de la tienda [S]
+- [x] Definir caja de puntuación y configuraciones de la tienda [S]
 - [ ] Definir página en los idiomas de M87 [M]
 - [ ] Definir historial de notas de parche para el lanzamiento [S]
 - [ ] Definir material de prensa (kit de medios, 3 capturas HQ) [S]
@@ -188,9 +188,9 @@
 ## 13. Preparación para certificación (RF13/M149/M142)
 
 - [ ] Definir checklist de plataforma completo (users, políticas, contenido) [M]
-- [ ] Definir build estable final de W6 como candidato [M]
+- [x] Definir build estable final de W6 como candidato [M]
 - [ ] Definir manifest de contenido del candidato (hash/git tag) [S]
-- [ ] Definir verificación de instalación limpia y actualización funcional [M]
+- [x] Definir verificación de instalación limpia y actualización funcional [M]
 - [ ] Definir guardado de logs de certificación (M149) [S]
 - [ ] Definir etiquetado `beta-rc-candidate` en el repositorio [S]
 - [ ] Definir acta de cierre Beta firmada [S]

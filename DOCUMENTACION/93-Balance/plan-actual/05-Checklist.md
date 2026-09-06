@@ -105,7 +105,7 @@
 
 ## K. Tiempo y Rutina Diaria
 
-- [ ] Definir `timing.json`: duración estimada por actividad diaria [M]
+- [x] Definir `timing.json`: duración estimada por actividad diaria [M]
 - [ ] Definir rutina óptima ≤ 30 min reales [M]
 - [ ] Definir sesión libre 1-2 h con progreso garantizado [M]
 - [ ] Definir que cultivos no mueran por ausencia (M33, M94) [M]
@@ -113,7 +113,7 @@
 
 ## L. Curvas de Progresión
 
-- [ ] Definir `progression.json`: curva de AO por día de juego [M]
+- [x] Definir `progression.json`: curva de AO por día de juego [M]
 - [ ] Definir curva de recursos acumulados [M]
 - [ ] Definir curva de amistad total [M]
 - [ ] Definir curva de colecciones completadas (M73) [M]
@@ -132,7 +132,7 @@
 - [ ] Identificar bucles de ganancia sin costo (regar+vender, pescar+vender, minar+craftear) [C]
 - [ ] Definir test de simulación: ningún bucle produce AO > 115% del diseño [C]
 - [ ] Definir que el reloj interno (M30) no dependa del reloj real para progresión [M]
-- [ ] Definir que avanzar el reloj del sistema no duplique eventos [M]
+- [x] Definir que avanzar el reloj del sistema no duplique eventos [M]
 - [ ] Definir límite de items vendidos por día por categoría [M]
 
 ## O. Simulación Económica
@@ -140,20 +140,20 @@
 - [ ] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) [C]
 - [ ] Definir simulación de 60/180/365 días [C]
 - [ ] Definir salida: AO total, recursos por pipeline, desvío vs. diseño [M]
-- [ ] Definir exit code != 0 si se detecta exploit o desvío > umbral [M]
+- [x] Definir exit code != 0 si se detecta exploit o desvío > umbral [M]
 - [ ] Definir que la simulación corra en CI (M118) [M]
 
 ## P. Validación Automática
 
-- [ ] Definir `validate_balance.gd` con regla de márgenes (venta 55-70% de compra) [M]
+- [x] Definir `validate_balance.gd` con regla de márgenes (venta 55-70% de compra) [M]
 - [ ] Definir regla de curvas no exponenciales [M]
 - [ ] Definir regla de rutina ≤ 30 min [S]
 - [ ] Definir regla de sellos sin grind [S]
-- [ ] Definir que el gate se ejecute en cada PR que toque `data/balance/` [M]
+- [x] Definir que el gate se ejecute en cada PR que toque `data/balance/` [M]
 
 ## Q. Integración con Gameplay
 
-- [ ] Definir autoload `balance.gd` de solo lectura [M]
+- [x] Definir autoload `balance.gd` de solo lectura [M]
 - [ ] Definir API de precios consumida por M39 (tiendas) [M]
 - [ ] Definir API de recetas consumida por M16 (crafting) [M]
 - [ ] Definir API de cultivos consumida por M33 (agricultura) [M]
@@ -181,15 +181,15 @@
 - [ ] Definir encuesta de percepción de precios (barato/justo/caro) [S]
 - [ ] Definir comparación percepción vs. simulación [M]
 - [ ] Definir plan de ajuste post-playtest (quién decide y cuándo) [M]
-- [ ] Definir registro de ajustes con motivo (CHANGELOG de balance) [S]
+- [x] Definir registro de ajustes con motivo (CHANGELOG de balance) [S]
 
 ## U. Documentación y Mantenimiento
 
-- [ ] Definir `balance_report.gd` que genera reporte markdown legible [M]
-- [ ] Definir que el reporte se actualice en cada cambio de balance [S]
-- [ ] Definir bump de `balance_version` en cada cambio [S]
-- [ ] Definir CHANGELOG de balance en `docs/balance/CHANGELOG.md` [S]
-- [ ] Definir guía de edición de balance para diseñadores (sin tocar código) [M]
+- [x] Definir `balance_report.gd` que genera reporte markdown legible [M]
+- [x] Definir que el reporte se actualice en cada cambio de balance [S]
+- [x] Definir bump de `balance_version` en cada cambio [S]
+- [x] Definir CHANGELOG de balance en `docs/balance/CHANGELOG.md` [S]
+- [x] Definir guía de edición de balance para diseñadores (sin tocar código) [M]
 
 ## V. Edge Cases
 
@@ -197,19 +197,19 @@
 - [ ] Probar jugador que no vende nada (almacenamiento M14 sin penalización) [M]
 - [ ] Probar ausencia de 30 días (nada empeora, M94) [M]
 - [ ] Probar rareza mínima 0.5% con pity [M]
-- [ ] Probar balance con solo rutina mínima (jugador casual) [M]
+- [x] Probar balance con solo rutina mínima (jugador casual) [M]
 
 ## W. Rendimiento y Persistencia
 
-- [ ] Definir carga única de JSON en `_ready()` [S]
-- [ ] Definir que balance no se guarde en GameState (M59) [S]
+- [x] Definir carga única de JSON en `_ready()` [S]
+- [x] Definir que balance no se guarde en GameState (M59) [S]
 - [ ] Definir que ningún lookup ocurra por frame (cache dict) [M]
-- [ ] Definir tamaño de JSONs (< 200 KB total) [S]
+- [x] Definir tamaño de JSONs (< 200 KB total) [S]
 - [ ] Definir test de tiempo de carga < 50 ms [M]
 
 ## X. Calidad y Tests (M112/M111)
 
-- [ ] Definir suite `test_balance.gd` con casos por categoría [C]
+- [x] Definir suite `test_balance.gd` con casos por categoría [C]
 - [ ] Definir test de márgenes con ítems de ejemplo [S]
 - [ ] Definir test de curvas no exponenciales [M]
 - [ ] Definir test de sellos sin grind [S]
@@ -229,4 +229,4 @@
 - [ ] Definir coordinación con M20 (amistad) para umbrales [M]
 - [ ] Definir coordinación con M153 (Sellos) para bloques de progreso [M]
 - [ ] Definir coordinación con M94 (retención) para ausencia benigna [M]
-- [ ] Definir revisión periódica del balance (cada 3 meses post-lanzamiento) [M]
+- [x] Definir revisión periódica del balance (cada 3 meses post-lanzamiento) [M]

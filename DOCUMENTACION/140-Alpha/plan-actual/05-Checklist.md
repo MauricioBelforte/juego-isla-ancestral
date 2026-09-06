@@ -60,7 +60,7 @@
 - [ ] Definir curvas Alpha para: precios, drops, XP, amistad, dificultad de puzzles, cultivos [C]
 - [ ] Definir la simulación M93 en CI con escenarios: productivo, completista, administrador [M]
 - [ ] Definir umbral: 40 h simuladas sin alertas críticas [M]
-- [ ] Definir ajuste en tiempo de dato (JSON re-cargable) sin recompilar [M]
+- [x] Definir ajuste en tiempo de dato (JSON re-cargable) sin recompilar [M]
 - [ ] Definir playtest dirigido mensual con data de oro/hora [M]
 - [ ] Definir feature freeze de balance 2 semanas antes del GONOGO [S]
 - [ ] Definir márgenes por categoría (55-70%) [S]
@@ -87,14 +87,14 @@
 
 ## 6. Rendimiento medible (RF6/M61-M63)
 
-- [ ] Definir la build semanal de referencia [M]
+- [x] Definir la build semanal de referencia [M]
 - [ ] Definir dashboard: FPS/p99, memoria, tiempos de carga, draw calls [M]
 - [ ] Definir gate CI de presupuestos por zona (M61) [M]
 - [ ] Definir presupuesto de memoria global Alpha (M62) [M]
 - [ ] Definir presupuesto de tiempos de carga/streaming (M63) [M]
-- [ ] Definir telemetría de sesión en builds de playtest (M104/M105) [M]
-- [ ] Definir profiling periódico por sistema nuevo [M]
-- [ ] Definir escenario de referencia (ruta fija de 20 min por build) [M]
+- [x] Definir telemetría de sesión en builds de playtest (M104/M105) [M]
+- [x] Definir profiling periódico por sistema nuevo [M]
+- [x] Definir escenario de referencia (ruta fija de 20 min por build) [M]
 - [ ] Definir reporte semanal de rendimiento con tendencia [S]
 - [ ] Definir plan de acción ante regresiones (rollback de zona) [S]
 
@@ -104,7 +104,7 @@
 - [ ] Definir triaje diario con severidades P0-P2 [M]
 - [ ] Definir la política de duplicados en el backlog [S]
 - [ ] Definir fix con test de regresión adjunto (M112) [M]
-- [ ] Definir build semanal de playtest con 5+ jugadores (M114) [M]
+- [x] Definir build semanal de playtest con 5+ jugadores (M114) [M]
 - [ ] Definir encuesta de diversión y confusión (M152/M114) [S]
 - [ ] Definir métricas de bugs por semana (abiertos/cerrados/regresión) [S]
 - [ ] Definir cierre con 0 bugs P0/P1 y P2 documentados [S]
@@ -113,18 +113,18 @@
 
 ## 8. Corrección de arquitectura (M07/M111)
 
-- [ ] Definir inventario de TODO/FIXME por script CI [M]
+- [x] Definir inventario de TODO/FIXME por script CI [M]
 - [ ] Definir sprint de deuda de 2 semanas [M]
 - [ ] Definir objetivo: 0 TODO/FIXME al cierre [S]
-- [ ] Definir revisiones de diseño por sistema integrado [M]
-- [ ] Definir la verificación de interfaz entre managers (M07) [M]
+- [x] Definir revisiones de diseño por sistema integrado [M]
+- [x] Definir la verificación de interfaz entre managers (M07) [M]
 - [ ] Definir eliminación de código muerto de fases previas [S]
 - [ ] Definir refactor de hot spots de rendimiento detectados [M]
-- [ ] Definir metrica de complejidad ciclomática por sistema (M111) [S]
+- [x] Definir metrica de complejidad ciclomática por sistema (M111) [S]
 
 ## 9. Reducción de deuda técnica (M135)
 
-- [ ] Re-metricar la deuda de M135 por sistema [M]
+- [x] Re-metricar la deuda de M135 por sistema [M]
 - [ ] Definir objetivo de reducción ≥ 50% [S]
 - [ ] Definir informe de deuda post-sprint [S]
 - [ ] Definir registro de qué deuda queda deliberadamente (con dueño y plazo) [S]
@@ -151,8 +151,8 @@
 
 ## 12. Accesibilidad y UX (M58/M53/M57)
 
-- [ ] Validar M58 en sistemas nuevos (subtítulos, remapeo, reducción de efectos) [M]
-- [ ] Definir config de dificultad de puzzles (M58) [S]
+- [x] Validar M58 en sistemas nuevos (subtítulos, remapeo, reducción de efectos) [M]
+- [x] Definir config de dificultad de puzzles (M58) [S]
 - [ ] Definir modos de color para puzzles de espejos/sombras (M58) [M]
 - [ ] Definir navegación del diario con gamepad (M57) [M]
 - [ ] Definir estados vacíos de colecciones con texto claro (M53) [S]
@@ -162,7 +162,7 @@
 ## 13. Cierre de fase (GONOGO-BETA)
 
 - [ ] Definir el checklist de verificación DoD antes de declarar Alpha cerrada [S]
-- [ ] Definir 0 errores en consola al entrar en Play Mode en builds finales [M]
+- [x] Definir 0 errores en consola al entrar en Play Mode en builds finales [M]
 - [ ] Definir flujo completo verificado en Play Mode en las 4 islas [M]
 - [ ] Definir el registro de learning de la fase (qué se corrigió) [S]
 - [ ] Definir la evaluación de fechas reales vs plan (roadmap M136) [S]

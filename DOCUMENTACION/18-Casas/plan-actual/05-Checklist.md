@@ -18,7 +18,7 @@
 
 ## B. Resolución de los 25 puntos del plan maestro (25)
 
-- [ ] P1: sistema de parcelas — parcelas únicas por jugador, registradas por HouseManager [S]
+- [x] P1: sistema de parcelas — parcelas únicas por jugador, registradas por HouseManager [S]
 - [ ] P2: casas de vecinos — parcelas del pueblo gestionadas junto con M19 [S]
 - [ ] P3: casa del jugador — nodo exterior con puerta e interior instanciado [S]
 - [ ] P4: ampliaciones — etapas 1 a 5 definidas en HouseUpgradeData [S]
@@ -49,7 +49,7 @@
 - [ ] Validación de parcela despejada (sin voxels ni objetos encima) [M]
 - [ ] Cimientos visibles con la huella de la casa en el modo construcción [M]
 - [ ] Puerta exterior interactiva con prompt contextual [S]
-- [ ] Registro de la casa en HouseManager al crearse [S]
+- [x] Registro de la casa en HouseManager al crearse [S]
 - [ ] Reubicación de la casa con coste y confirmación [M]
 - [ ] Reubicación con interior intacto (no se pierde decoración) [M]
 - [ ] Costes iniciales equilibrados (madera, piedra) con M14 [S]
@@ -69,7 +69,7 @@
 ## E. Almacenamiento doméstico (8)
 
 - [ ] Cofres y estanterías reutilizables con slots [M]
-- [ ] Capacidad por mueble configurable en FurnitureData [S]
+- [x] Capacidad por mueble configurable en FurnitureData [S]
 - [ ] Stacks y categorías respetando el contrato de M14 [S]
 - [ ] Panel de transferencia sin acoplar UI-logica [M]
 - [ ] Transferencia rápida de un click y por lotes [M]
@@ -169,4 +169,4 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

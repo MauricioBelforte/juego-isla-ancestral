@@ -60,7 +60,7 @@
 ## D. FishingSpot y mundo voxel M51 (15)
 
 - [ ] FishingSpot como Node3D creado por chunk de agua [S]
-- [ ] Autorregistro en FishingManager al entrar el chunk [S]
+- [x] Autorregistro en FishingManager al entrar el chunk [S]
 - [ ] Desregistro y limpieza al liberar el chunk (streaming) [S]
 - [ ] Validacion de agua por voxels (tipo AGUA) con VoxelTool de M51 [C]
 - [ ] Validacion de aire encima del voxel de agua [M]
@@ -129,7 +129,7 @@
 - [ ] Zoom de captura con nombre y tamano del pez [M]
 - [ ] Notificacion de nueva especie al catalogo [S]
 - [ ] Notificacion de pieza de museo disponible [S]
-- [ ] UI desacoplada: solo consume senales del manager [M]
+- [x] UI desacoplada: solo consume senales del manager [M]
 - [ ] Textos localizables (M86) en todos los nombres y mensajes [S]
 
 ## I. Audio y VFX (8)
@@ -165,7 +165,7 @@
 - [ ] UI del minijuego con pocos nodos y sin allocs por frame [M]
 - [ ] Data .tres compartida: sin duplicacion de definiciones en memoria [S]
 - [ ] Sesiones fuera de pantalla/lejas: sin UI hasta acercarse [S]
-- [ ] Frame budget del sistema de pesca por debajo de 1 ms en profiler [C]
+- [x] Frame budget del sistema de pesca por debajo de 1 ms en profiler [C]
 
 ## L. Guardado, accesibilidad y polish (12)
 
@@ -186,11 +186,11 @@
 
 - [ ] 01-Requerimientos.md escrito en plan-inicial [S]
 - [ ] 02-Analisis.md con alternativas y decisiones justificadas [S]
-- [ ] 03-Diseno.md con arquitectura, flujos y contratos API GDScript [M]
+- [x] 03-Diseno.md con arquitectura, flujos y contratos API GDScript [M]
 - [ ] 04-Codigo.md con rutas res://, firmas clave y formato de logs [M]
 - [ ] 05-Checklist.md con mas de 110 items de cobertura [M]
 - [ ] Copia identica de los 5 archivos en plan-actual [S]
 - [ ] Logs con prefijo [PESCA] en flujos normales [S]
 - [ ] push_warning para condiciones inesperadas, push_error solo errores reales [S]
 - [ ] Registro de capturas para telemetria de balance (sin afectar determinismo) [M]
-- [ ] Preparado el plan de testings (06) para implementacion del modulo [M]
+- [x] Preparado el plan de testings (06) para implementacion del modulo [M]

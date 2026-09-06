@@ -9,15 +9,15 @@
 
 ## 1. Arquitectura de la fase (M07)
 
-- [ ] Definir capas de la fase: UI → Managers → World Services → Infra (desacople M07) [S]
+- [x] Definir capas de la fase: UI → Managers → World Services → Infra (desacople M07) [S]
 - [ ] Definir contratos de interfaces entre capas: `IInteractable`, `ITienda`, `ITemplo`, `IViajable` [M]
-- [ ] Asegurar que ningún manager de gameplay toca la UI directamente (regla M07) [M]
+- [x] Asegurar que ningún manager de gameplay toca la UI directamente (regla M07) [M]
 - [ ] Definir `SesionMaster` como único orquestador de arranque (bootstrapping) [M]
 - [ ] Documentar el flujo de sesión: menú → continuar/nuevo → carga de zona [M]
-- [ ] Definir ciclo de vida de los managers (init, tick, shutdown) [M]
-- [ ] Definir la comunicación entre managers por señales/servicios (sin referencias cruzadas) [M]
+- [x] Definir ciclo de vida de los managers (init, tick, shutdown) [M]
+- [x] Definir la comunicación entre managers por señales/servicios (sin referencias cruzadas) [M]
 - [ ] Documentar el modo "degradación" si un servicio falla al arrancar (M66) [S]
-- [ ] Mantener el desacople al agregar un sistema nuevo sin re-trabajo estructural [C]
+- [x] Mantener el desacople al agregar un sistema nuevo sin re-trabajo estructural [C]
 
 ## 2. Primer bioma — Aurora (M10/M09/M27)
 
@@ -57,7 +57,7 @@
 - [ ] Diseñar Cole: banco local con oficina de 2 h al día [M]
 - [ ] Definir 10+ líneas de diálogo por NPC (M21) [M]
 - [ ] Definir variantes de diálogo por estación/día (M29) [M]
-- [ ] Implementar anti-stuck con teleport a waypoint previo (M66) [M]
+- [x] Implementar anti-stuck con teleport a waypoint previo (M66) [M]
 - [ ] Definir pronombres/nombres canónicos del elenco (M147) [S]
 - [ ] Definir rangos de horarios de rutina sin solapamiento catastrófico [M]
 
@@ -65,7 +65,7 @@
 
 - [ ] Definir la moneda AO como única divisa de fase [S]
 - [ ] Definir las 2 tiendas de Aurora + 1 de Coral [M]
-- [ ] Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M]
+- [x] Integrar precios desde `curvas.json` (M93: lineal clave/suave logarítmica metas) [M]
 - [ ] Aplicar márgenes de venta 55-70% sobre compra (M93) [S]
 - [ ] Definir el stock regenerativo diario de cada tienda [M]
 - [ ] Documentar los 60+ ítems del mundo con precio base (M15) [C]
@@ -75,8 +75,8 @@
 - [ ] Definir la simulación económica en CI (M93/M118) [M]
 - [ ] Definir el umbral de fallo de la simulación (< 30 h sin romper curva) [S]
 - [ ] Definir anti-grind: precios de compra suben levemente con stock bajo [M]
-- [ ] Definir anti-exploit: techo de oro diario por sistemas cruzados [M]
-- [ ] Definir trueque conceptual (no implementado) para islas futuras [S]
+- [x] Definir anti-exploit: techo de oro diario por sistemas cruzados [M]
+- [x] Definir trueque conceptual (no implementado) para islas futuras [S]
 
 ## 6. Primer sistema de construcción (M17/M16/M18)
 
@@ -137,7 +137,7 @@
 
 ## 10. Primer save completo (M59/M60) + menú (M53/M92)
 
-- [ ] Definir save v3: manifest.json + zonas + voxel delta + meta [M]
+- [x] Definir save v3: manifest.json + zonas + voxel delta + meta [M]
 - [ ] Definir versionado de schema (M60) [M]
 - [ ] Definir escritura transaccional (temp + rename) [M]
 - [ ] Definir verificación de integridad al continuar (M66) [M]
@@ -159,12 +159,12 @@
 - [ ] Definir eventos ASMR de recolección y venta (M44) [S]
 - [ ] Definir el audio UI (menús, confirmaciones) [S]
 - [ ] Definir la música del templo con tensión suave [S]
-- [ ] Definir la mezcla con config de audio (M91) [M]
+- [x] Definir la mezcla con config de audio (M91) [M]
 - [ ] Definir la persistencia de niveles de volumen [S]
 
 ## 12. Métricas y rendimiento (M61/M62/M63/M104/M105)
 
-- [ ] Definir metricas de fase: FPS/p99, memoria, tiempos de carga, uso por sistema [M]
+- [x] Definir metricas de fase: FPS/p99, memoria, tiempos de carga, uso por sistema [M]
 - [ ] Definir dashboards locales para playtest (M114) [M]
 - [ ] Aplicar frame budget por categoría a cada zona nueva [C]
 - [ ] Definir presupuesto de memoria 1.5 GB con streaming (M62) [M]

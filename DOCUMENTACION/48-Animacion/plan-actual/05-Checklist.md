@@ -5,7 +5,7 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin sistema de animación los actores se ven robóticos o sin animación [S]
+- [x] Definir el problema: sin sistema de animación los actores se ven robóticos o sin animación [S]
 - [ ] Definir el objetivo: kit de animación central con producción coherente, FSM espejo y presupuesto verificado [S]
 - [ ] Registrar dependencias: M45 (rigs), M11/M19/M36 (FSM), M64/M65 (IA), M04 (Godot), M61/M62 (presupuestos), M43/M44/M52 (eventos) [M]
 - [ ] Mapear la sección 47 "ANIMACIÓN" del plan maestro al ID 48 de la tabla global [M]
@@ -103,13 +103,13 @@
 
 ## M. RF12 — Validación automática
 
-- [ ] Definir script validate_animation.gd [M]
+- [x] Definir script validate_animation.gd [M]
 - [ ] Verificar naming anim_[actor]_[estado] [S]
 - [ ] Verificar fps 30 base / UI 60 [S]
 - [ ] Verificar duración dentro de máximos por categoría [S]
 - [ ] Verificar T-pose única y bones subset [M]
 - [ ] Verificar keyframes de evento requeridos [M]
-- [ ] Verificar coste por actor en animation_budget.json [M]
+- [x] Verificar coste por actor en animation_budget.json [M]
 
 ## N. RF13 — Naming y organización
 
@@ -118,13 +118,13 @@
 
 ## O. RF14 — Registro de presupuesto
 
-- [ ] Definir animation_budget.json por actor/animación [C]
+- [x] Definir animation_budget.json por actor/animación [C]
 - [ ] Definir suma por escena pivote contra presupuesto M61 [M]
 - [ ] Definir alerta de excedente en editor [S]
 
 ## P. RF15 — API de reproducción
 
-- [ ] Definir AnimationService con play(actor, estado, blend_time) [C]
+- [x] Definir AnimationService con play(actor, estado, blend_time) [C]
 - [ ] La gameplay llama por ESTADO, no por clip [M]
 - [ ] Definir fallback idle ante estado sin clip (log WARN) [M]
 - [ ] Definir señales animation_started/finished/missing [M]
@@ -172,7 +172,7 @@
 
 ## U. Herramientas y flujos
 
-- [ ] Documentar flujo estado→clip (AnimationService) [M]
+- [x] Documentar flujo estado→clip (AnimationService) [M]
 - [ ] Documentar flujo de producción de un clip [M]
 - [ ] Documentar flujo de validación al importar [M]
 - [ ] Documentar plantilla de import FBX [M]
@@ -191,9 +191,9 @@
 ## W. Notas finales
 
 - [ ] Documentar el desfase de numeración del plan maestro (47=ANIMACIÓN → ID 48) [S]
-- [ ] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
-- [ ] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
+- [x] Marcar el módulo como DELEGABLE PARA IMPLEMENTAR [S]
+- [x] Registrar dependencia de implementación con el hito M1 (proyecto Godot) [S]
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

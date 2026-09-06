@@ -151,8 +151,8 @@
 
 - [ ] Jardín acuático (FASE 2, M16) [M]
 - [ ] Criadero de peces (FASE 2, M34) [M]
-- [ ] Sistemas marcados `hidden` hasta lanzamiento [S]
-- [ ] Ningún sistema opcional bloquea el 100% de FASE 1 [S]
+- [x] Sistemas marcados `hidden` hasta lanzamiento [S]
+- [x] Ningún sistema opcional bloquea el 100% de FASE 1 [S]
 - [ ] Validar que la FASE 2 no prometa UI al jugador [S]
 
 ## R. Objetivos de 100% (RF18)
@@ -181,11 +181,11 @@
 
 ## U. Persistencia y Migración
 
-- [ ] `postgame_unlocked` en save global (M59) [M]
+- [x] `postgame_unlocked` en save global (M59) [M] — iter. 2 (Log 617): clave postgame_unlocked + activo en get_save_data; restore acepta ambas (migración); testeado
 - [ ] Hoja de ruta sin duplicación de estado [S]
 - [ ] Migración v1.4 del flag (M60) [M]
 - [ ] Catálogo como Resource embebido (no serializado) [S]
-- [ ] Guardado automático al desbloquear (M59) [S]
+- [x] Guardado automático al desbloquear (M59) [S] — iter. 1-2: mark_dirty en activar_postgame() y registrar_actividad() (write-through de M59)
 
 ## V. Reglas Cozy (Diseño)
 
@@ -205,8 +205,8 @@
 
 ## X. Edge Cases y Rendimiento
 
-- [ ] Desbloquear postgame con save sin final (no aplica) [S]
-- [ ] Hoja de ruta con sistemas vacíos (0/0) [S]
+- [x] Desbloquear postgame con save sin final (no aplica) [S] — testeado: restore con activo=false queda inactivo; la activación exige sellos M22 (fuente de verdad)
+- [x] Hoja de ruta con sistemas vacíos (0/0) [S]
 - [ ] Evento postgame durante viaje (M68) [M]
 - [ ] Expansión con módulo ausente en CHECKLIST [S]
 - [ ] Probar con profiler: hoja de ruta bajo demanda (M61/M116) [C]

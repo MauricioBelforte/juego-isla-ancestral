@@ -11,7 +11,7 @@
 - [ ] RF1: tierra cultivable y arada con pala (M13) [S]
 - [x] RF2: parcelas con límite de cultivos activos (M17) [S]
 - [ ] RF3: semillas como ítem de inventario (M14/M15) [S]
-- [ ] RF4: etapas de crecimiento por CropDefinition [S]
+- [x] RF4: etapas de crecimiento por CropDefinition [S]
 - [ ] RF5: ciclos por día del GameClock (M29) [S]
 - [x] RF6: riego manual y por lluvia (M32) sin muerte por sequía [S] — water() manual + lluvia automática vía EventBus.weather; sin pérdida cozy
 - [x] RF7 a RF12: estaciones, cosecha, comida opcional, cultivos especiales, fertilizante y persistencia [S]
@@ -22,16 +22,16 @@
 - [ ] P2: tierra cultivable — bloque TIERRA_ARADA del catálogo M08 [S]
 - [ ] P3: semillas — catálogo M15 con consumo en M14 [S]
 - [x] P4: crecimiento — avance por días acumulados [S]
-- [ ] P5: etapas de crecimiento — enum GrowthStage de 7 estados [S]
+- [x] P5: etapas de crecimiento — enum GrowthStage de 7 estados [S]
 - [x] P6: riego — nivel de agua 0..2, regadera y lluvia [S] — regar() manual (1/llamada) + apply_rain() (a 2, idempotente)
 - [ ] P7: fertilizantes — bono benigno que reduce días o mejora calidad [S]
 - [x] P8: cosecha — event crop_harvested y entrega a M14 [S]
-- [ ] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
+- [x] P9: herramientas — pala y regadera integradas vía ToolService (M13) [S]
 - [x] P10: estaciones — ventana por cultivo; fuera de ventana DORMANTE [S]
 - [ ] P11: cultivos especiales — trigo invernal, higos, ancestrales de desbloqueo M22 [M]
 - [x] P12: árboles frutales — perennes con cooldown frutal, sin replantar [M]
 - [ ] P13: flores — decorativas y sujetas a cruce [M]
-- [ ] P14: plantas ancestrales — lumina_ancestral con requisito narrativo [M]
+- [x] P14: plantas ancestrales — lumina_ancestral con requisito narrativo [M]
 - [ ] P15: híbridos — cruce de flores con reglas legibles (sin RNG oculto) [M]
 - [ ] P16: calidad — 3 niveles (COMUN/BUENA/EXCELENTE) [M]
 - [ ] P17: rendimiento — yields por cultivo con bonificación de calidad [S]
@@ -46,24 +46,24 @@
 
 ## C. CropDefinition y catálogo (10)
 
-- [ ] Crear clase CropDefinition extends Resource con campos exportados [S]
-- [ ] Definir crop_id y display_name únicos por cultivo [S]
-- [ ] Definir seasons por cultivo contra enum de GameClock (M29) [S]
-- [ ] Definir grow_days y stage_count por cultivo [S]
+- [x] Crear clase CropDefinition extends Resource con campos exportados [S]
+- [x] Definir crop_id y display_name únicos por cultivo [S]
+- [x] Definir seasons por cultivo contra enum de GameClock (M29) [S]
+- [x] Definir grow_days y stage_count por cultivo [S]
 - [x] Definir water_need (1 o 2) por cultivo [S]
 - [ ] Definir yields y yield_seeds como diccionarios de ítems [S]
 - [ ] Definir flags is_tree, is_flower, is_ancestral, decorative_only [S]
-- [ ] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
-- [ ] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
-- [ ] Implementar is_season_allowed y get_stage_visual_key [S]
+- [x] Crear catálogo base de 16 .tres en res://data/farm/crops [S]
+- [x] Implementar CropCatalog.load_all con validación de IDs duplicados [M]
+- [x] Implementar is_season_allowed y get_stage_visual_key [S]
 
 ## D. CropTile y estados (9)
 
 - [x] Crear CropTile extends RefCounted (estado puro por voxel) [S]
 - [x] Campos: voxel_pos, crop_def, stage, grown_days, water_level, fertilized, quality, planted_at_day [S]
-- [ ] Implementar is_ready(), is_paused(), current_stage_index() [S]
+- [x] Implementar is_ready(), is_paused(), current_stage_index() [S]
 - [x] Implementar can_advance_today(season, rain) con reglas de estación y agua [S]
-- [ ] Implementar apply_daily_tick(season, rain) sin retroceder etapas [S]
+- [x] Implementar apply_daily_tick(season, rain) sin retroceder etapas [S]
 - [ ] Estado SEMILLA inicial con water 0 [S]
 - [x] Estados DORMANTE y SIN_AGUA sin consumo de días [S]
 - [ ] Estado LISTA estable sin requerir agua [S]
@@ -71,29 +71,29 @@
 
 ## E. FarmService y API (11)
 
-- [ ] Crear autoload FarmService con registro en Service Locator (M07) [M]
+- [x] Crear autoload FarmService con registro en Service Locator (M07) [M]
 - [x] Diccionario _tiles Vector3i→CropTile [S]
-- [ ] Constante MAX_ACTIVE_CROPS = 400 [S]
-- [ ] Implementar till_tile con validación de bloque y parcela [M]
-- [ ] Implementar plant con consumo de semilla y cupo máximo [M]
-- [ ] Implementar water con tope de nivel 2 [S]
+- [x] Constante MAX_ACTIVE_CROPS = 400 [S]
+- [x] Implementar till_tile con validación de bloque y parcela [M]
+- [x] Implementar plant con consumo de semilla y cupo máximo [M]
+- [x] Implementar water con tope de nivel 2 [S]
 - [x] Implementar apply_rain (puente M32) [S] — glm-5.3-flash 2026-08-31: apply_rain de Deepseek + suscripción EventBus.weather.clima_cambio (LLUVIA/TORMENTA/TROPICAL), test_farm_clima.gd 0 fallos
-- [ ] Implementar can_harvest y harvest con cálculo de calidad [M]
-- [ ] Implementar get_tile y get_growth_hint (tooltips amables) [S]
-- [ ] Implementar get_active_farm_stats para M113/M104 [M]
+- [x] Implementar can_harvest y harvest con cálculo de calidad [M]
+- [x] Implementar get_tile y get_growth_hint (tooltips amables) [S]
+- [x] Implementar get_active_farm_stats para M113/M104 [M]
 - [ ] Emitir las 8 señales del contrato en los puntos correctos [M]
 
 ## F. Crecimiento y calendario M29 (9)
 
-- [ ] Suscribir FarmService a GameClock.day_advanced [S]
-- [ ] Implementar advance_day() iterando solo tiles activos [S]
+- [x] Suscribir FarmService a GameClock.day_advanced [S]
+- [x] Implementar advance_day() iterando solo tiles activos [S]
 - [ ] Aplicar -1 de agua por día a cada cultivo [S]
 - [ ] Detectar SIN_AGUA cuando water_level < water_need [S]
 - [ ] Detectar DORMANTE cuando la estación no es apta [S]
-- [ ] Incrementar grown_days y recalcular etapa solo si procede [S]
-- [ ] Emitir crop_ready solo en la transición a LISTA [S]
-- [ ] Guardar planted_at_day para determinismo entre cargas [S]
-- [ ] No usar tiempo real ni reloj del sistema (regla anti-exploit, M30) [S]
+- [x] Incrementar grown_days y recalcular etapa solo si procede [S]
+- [x] Emitir crop_ready solo en la transición a LISTA [S]
+- [x] Guardar planted_at_day para determinismo entre cargas [S]
+- [x] No usar tiempo real ni reloj del sistema (regla anti-exploit, M30) [S]
 
 ## G. Riego y agua (8)
 
@@ -115,7 +115,7 @@
 - [ ] Animación de la herramienta sincronizada con el evento (M44) [M]
 - [ ] Cancelación segura del selector sin consumir semillas [S]
 - [ ] Rango de uso limitado al alcance del jugador (M11) [S]
-- [ ] Debounce de interacción para evitar dobles plantas [M]
+- [x] Debounce de interacción para evitar dobles plantas [M]
 
 ## I. Integración mundo voxel M08 (9)
 
@@ -123,34 +123,34 @@
 - [ ] Añadir variante húmeda de tierra arada [S]
 - [ ] Aplicar dif de chunk al convertir tierra [M]
 - [ ] Colisión correcta de la tierra arada (no es un hueco) [M]
-- [ ] Registrar instancias de planta vía VoxelInstanceModifier [C]
-- [ ] Consistencia entre diccionario FarmService y mundo voxel al cargar [C]
+- [x] Registrar instancias de planta vía VoxelInstanceModifier [C]
+- [x] Consistencia entre diccionario FarmService y mundo voxel al cargar [C]
 - [ ] Actualización parcial del chunk al cosechar (vuelve a tierra arada) [M]
 - [ ] Nieve (M32/M08) sobre tierra arada no borra el estado [C]
-- [ ] Evitar plantar sobre bloques no expuestos (validación de cara superior) [M]
+- [x] Evitar plantar sobre bloques no expuestos (validación de cara superior) [M]
 
 ## J. Integración M14/M15/M16 (8)
 
-- [ ] Consumo de semilla vía InventoryService.try_remove [S]
-- [ ] Entrega de cosecha vía InventoryService.try_add con sobrante [S]
-- [ ] Referencia de item_id del catálogo M15 en CropDefinition [S]
-- [ ] Recetas M16 consumen cultivos ya cosechados (sin tocar CropTile) [S]
+- [x] Consumo de semilla vía InventoryService.try_remove [S]
+- [x] Entrega de cosecha vía InventoryService.try_add con sobrante [S]
+- [x] Referencia de item_id del catálogo M15 en CropDefinition [S]
+- [x] Recetas M16 consumen cultivos ya cosechados (sin tocar CropTile) [S]
 - [ ] Notificación de objetos obtenidos al cosechar (M53) [S]
 - [ ] Iconos de cultivos y semillas definidos en M45/M46 [M]
 - [ ] Venta de cosechas con precios por calidad (M38/M39) [M]
-- [ ] Sin acoplamiento inverso: M14/M15 nunca escriben estado de FarmService [S]
+- [x] Sin acoplamiento inverso: M14/M15 nunca escriben estado de FarmService [S]
 
 ## K. Edge cases (12)
 
-- [ ] Cultivo plantado el último día de la estación apta [S]
+- [x] Cultivo plantado el último día de la estación apta [S]
 - [ ] Cultivo en DORMANTE al pasar a estación apta: retoma sin pérdida [S]
 - [ ] Sequía prolongada: pausa indefinida sin muerte [S]
 - [ ] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
 - [ ] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C]
-- [ ] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
+- [x] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
 - [ ] Cosecha con inventario lleno: sobrante devuelto con notificación [M]
 - [ ] Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S]
-- [ ] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
+- [x] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
 - [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
 - [ ] Guardado a mitad del avance de día: el tick es idempotente [C]
 - [x] Lluvia sobre cultivo ya regado: no excede el máximo [S] — apply_rain idempotente (no excede 2 y no emite señal redundante), testeado
@@ -160,10 +160,10 @@
 - [ ] Evaluación diaria ≤ 2 ms con 400 cultivos [C]
 - [ ] Visual por MultiMesh agrupado por especie/etapa [C]
 - [ ] LOD de 2 niveles para instancias [M]
-- [ ] Sway por shader de instancing sin nodos por planta [C]
+- [x] Sway por shader de instancing sin nodos por planta [C]
 - [ ] Sin procesamiento por frame en estados pausados [S]
-- [ ] CropTile como RefCounted (cero nodos por cultivo) [S]
-- [ ] Estadísticas de farm en el profiler de M113 [M]
+- [x] CropTile como RefCounted (cero nodos por cultivo) [S]
+- [x] Estadísticas de farm en el profiler de M113 [M]
 - [ ] Prueba de stress: 400 cultivos + lluvia global en 1 tick [C]
 
 ## M. UI, audio y polish cozy (10)
@@ -177,25 +177,25 @@
 - [ ] Sonido de cosecha satisfactoria [S]
 - [ ] VFX de polvo al arar y brillo al madurar (M52) [M]
 - [ ] Animación de sway según el viento del clima (M31/M32) [M]
-- [ ] Cambios estacionales visibles en el campo (tono de plantas) [M]
+- [x] Cambios estacionales visibles en el campo (tono de plantas) [M]
 
 ## N. Pruebas y QA (8)
 
-- [ ] Test: ciclo completo arar/plantar/regar/cosechar en una sesión [M]
+- [x] Test: ciclo completo arar/plantar/regar/cosechar en una sesión [M]
 - [ ] Test: determinismo entre guardado y recarga (mismo día, mismo estado) [M]
 - [ ] Test: 4 estaciones con cultivo de ventana parcial [M]
 - [ ] Test: 30 días sin agua: pausa, nunca muerte [M]
 - [ ] Test: pisoteo de NPC sobre campo con ruta y sin ruta [C]
 - [ ] Test: invierno con nieve sobre tierra arada [C]
 - [ ] Test: inventario lleno al cosechar [S]
-- [ ] Recorrido M114: 3 días de juego con granja funcional [C]
+- [x] Recorrido M114: 3 días de juego con granja funcional [C]
 
 ## O. Delegación y cierre (8)
 
-- [ ] Módulo marcado delegable (requiere M08, M14, M29 implementados) [S]
+- [x] Módulo marcado delegable (requiere M08, M14, M29 implementados) [S]
 - [ ] 5 alternativas descartadas documentadas en 02-Analisis [S]
-- [ ] API estable del FarmService definida en 03-Diseno [S]
-- [ ] Implementación → AGENTE DELEGADO [S]
+- [x] API estable del FarmService definida en 03-Diseno [S]
+- [x] Implementación → AGENTE DELEGADO [S]
 - [ ] Prototipo sugerido: 3 cultivos + riego manual + avance diario [S]
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]

@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** glm-5.3-free (Kilo Code) (último modificador 2026-09-05: §6 assets 3D de casas grandes habitables + mobiliario interior — directiva del usuario. Original: Deepseek V4 Flash/OpenCode)
+**Plataforma:** Kilo Code
 
 # 01-Requerimientos.md — Módulo 18: Casas
 
@@ -162,12 +162,85 @@ Cada set tiene una temática y un bono social al completarlo:
 ### 5.9 Anti-Frustración
 
 | Principio | Implementación |
-|-----------|---------------|
+|-----------|----------------|
 | Sin penalización por no decorar | La casa es funcional sin decoración |
 | Sin límite de tiempo | Decorar se puede hacer en cualquier momento |
 | Sin costo por recolocar | Los muebles se mueven gratis |
 | Sin bloqueo de contenido | Todo accesible sin decorar |
 | Sin presión de completar sets | Los sets son cosméticos
+
+---
+
+## 6. ASSETS 3D DE CASAS GRANDES HABITABLES + MOBILIARIO (2026-09-05, directiva del usuario — glm-5.3-free/Kilo Code)
+
+> **Gap detectado:** el sistema lógico de muebles (RF5-RF7, grid, FurnitureData)
+> estaba contemplado, pero los **assets 3D** NO: la checklist Blender solo tenía
+> las 11 piezas modulares de 1×1 celda (paredes/pisos/techos, Tier E cerrado)
+> y la `casa_completa_ejemplo` que NO es habitable (solo referencia visual).
+> Esta sección define el alcance nuevo pedido por el usuario.
+
+### 6.1 Casas grandes ENTRABLES (nuevo tier de assets)
+
+- **Requisito del usuario:** casas **grandes y amplias, que se pueda entrar
+  DENTRO**, proporcionales a los personajes. No módulos sueltos: casas
+  completas con interior visible/habitable.
+- **Escala de referencia (M19 NPC base v5):** altura NPC ≈ 1.75 m. Regla
+  de proporciones para interiores:
+  - Puerta: 1.00 m ancho × 2.10 m alto (mínimo; el NPC entra sin agacharse)
+  - Altura de techo interior: ≥ 2.60 m (coincide con las paredes modulares
+    M18 de 2.60 m ya aprobadas)
+  - Paso libre mínimo: 0.90 m entre muebles
+- **Estructura por casa:** cada casa es UN asset con:
+  - **Exterior completo** (muros, techo, ventanas con vidrio, puerta con
+    hueco REAL de 1.00×2.10 para entrar caminando — no puerta pintada)
+  - **Interior amueblado o amueblable** (piso interior, paredes por dentro,
+    hueco de puerta communicating, sin techos cerrados que oculten el interior
+    en vista aérea — evaluación de techo removible/removible-de-farbe en M17)
+  - **Muebles propios** (ver 6.2) ya colocados como parte del set de captura
+    o como GLB separados para el grid de RF6
+- **Familia de casas (progresión RF3):**
+  1. **Casa choza ampliada** (etapa 0-1): 1 ambiente 5×4 m, cama + cofre + mesa
+  2. **Casa mediana** (etapa 2): 2 ambientes 8×6 m, cocina + dormitorio
+  3. **Casa amplia / casona** (etapa 3): 3-4 ambientes 10×8 m, sala de estar
+  4. **Mansión** (etapa 4): multi-habitación 14×10 m, biblioteca/sala de museo
+- **Presupuesto:** las casas grandes exceden el tope 16 SM_ de un asset
+  normal — se construyen como **grupos jerárquicos** (cada habitación un
+  sub-grupo ≤16 SM_) o como composición de módulos M18 existentes + piezas
+  nuevas. Decisión por casa, documentada en su hoja de contacto.
+
+### 6.2 Mobiliario interior (assets 3D nuevos — lo que faltaba en la checklist)
+
+| Mueble | Etapa | Grid | ¿Interactivo (RF7)? |
+|---|---|---|---|
+| Cama básica (marco + colchón + almohada) | 0 | Suelo 1×2 | Sí — dormir |
+| Cama doble | 2+ | Suelo 2×2 | Sí — dormir |
+| Mesa de madera (4 patas + tablero) | 0 | Suelo 2×2 | Sí — colocar items |
+| Mesa chica / velador | 1 | Suelo 1×1 | Sí |
+| Silla de madera | 0 | Suelo 1×1 | Sí — sentarse |
+| Sillón / sofá | 2 | Suelo 2×1 | Sí — sentarse |
+| Heladera / alacena de conserva (anacronismo controlado: isla con lore de "conservas frescas en pozo/nevera de piedra" — la heladera moderna NO aplica al estilo cozy ancestral; SI la nevera rústica) | 2 | Suelo 1×1 | Sí — almacenar |
+| Cocina/estufa de leña | 1 | Suelo 2×1 | Sí — cocinar |
+| Estantería | 1 | Pared 2×1 | Sí — almacenar |
+| Cómoda/baúl de ropa | 1 | Suelo 2×1 | Sí — almacenar |
+| Lámpara de pie / farol de interior | 1 | Suelo 1×1 | Sí — encender |
+| Alfombra redonda | 1 | Suelo 2×2 | No |
+| Cuadro/máscara ancestral de pared | 1 | Pared 1×1 | Sí — mirar |
+| Maceta con planta interior | 1 | Suelo 1×1 | Sí — regar |
+| Bañera/letrina rústica | 2 | Suelo 1×1 | No |
+
+> Nota de lore: "heladera" del usuario → interpretada como **nevera rústica
+> de piedra/madera** (el mundo NO tiene electricidad; M147 WorldBible canon).
+> Confirmado el criterio: electrodomésticos = NO; equivalentes rústicos = SÍ.
+
+### 6.3 Reglas técnicas para los assets nuevos
+
+- Escala NPC real (1.75 m): cama 2.00×0.90 m, mesa 0.80 alto, silla 0.45
+  asiento/0.90 respaldo, puerta interior 1.00×2.10.
+- z_min 0.045 del grupo, asentado del GRUPO (no por pieza) — igual que M18.
+- Los muebles interactivos son SM_ separados (el script Godot los busca
+  por sufijo, igual que fauna §8.1 regla 1 de la guía 09).
+- Cada casa/mueble: script `crear_{nombre}_lowpoly.py` + .blend + 6 capturas
+  orbitales + variantes MEDIA/BAJA + GLB — pipeline estándar de la guía 09.
 
 ---
 

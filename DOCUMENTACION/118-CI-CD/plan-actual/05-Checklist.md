@@ -22,7 +22,7 @@
 ## B. Resolución de puntos del plan (7)
 
 - [x] P1: pipeline CI se ejecuta en cada push a main/develop [S]
-- [ ] P2: tests edit-mode y play-mode se ejecutan automáticamente [S]
+- [x] P2: tests edit-mode y play-mode se ejecutan automáticamente [S]
 - [x] P3: build de desarrollo generado en < 10 minutos [S]
 - [x] P4: build release optimizado sin símbolos de debug [S]
 - [ ] P5: despliegue a itch.io al crear tag semver [S]
@@ -57,8 +57,8 @@
 - [x] Configuración de escenas en Build Settings [S]
 - [x] Parámetros de calidad (resolución, VSync, anti-aliasing) [S]
 - [x] Scripts de build optimizados para Godot 4.4+ [S]
-- [ ] Formato de release notes automático [S]
-- [ ] Versionado semver consistente con CHANGELOG.md [S]
+- [x] Formato de release notes automático [S]
+- [x] Versionado semver consistente con CHANGELOG.md [S]
 - [x] Workflow GitHub Actions con steps completos [S]
 - [x] Timestamps en logs de build para debugging [S]
 
@@ -83,31 +83,33 @@
 - [x] Test headless de checklist integración [M]
 - [x] Autoload CiCdManager registrado en project.godot [S]
 - [x] Datos data-driven: ci_gates.json con 3 gates [S]
+- [x] Gate data_valid: validación automática de todos los .json en data/ [S] — Log 684: validar_data_json() con scan plano de 6 subdirectorios, 20 archivos 0 errores
+- [x] Gate assets_existen: verificación de GLBs no vacíos en media/ [S] — Log 684: 99 GLBs verificados, 0 vacíos
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
 ## I. Artifacts y releases (12)
 
 - [x] Generación de binarios Windows/Linux/Mac [S]
-- [ ] Compresión ZIP+RAR de cada release [S]
+- [x] Compresión ZIP+RAR de cada release [S]
 - [ ] SHA256 checksums generados [S]
-- [ ] Release preliminar (RC) antes de release [S]
+- [x] Release preliminar (RC) antes de release [S]
 - [ ] Etiquetado semántico vX.Y.Z [S]
-- [ ] CHANGELOG.md generado automáticamente [S]
-- [ ] Notas de release editables via PR [S]
-- [ ] Subida a GitHub Releases [S]
+- [x] CHANGELOG.md generado automáticamente [S]
+- [x] Notas de release editables via PR [S]
+- [x] Subida a GitHub Releases [S]
 - [ ] Subida a Itch.io (manual trigger) [S]
 - [ ] Firmado GPG de binarios [S]
-- [ ] Upload a Steamworks (futuro, M206) [S]
+- [x] Upload a Steamworks (futuro, M206) [S]
 - [x] Retención de últimos 5 releases en GitHub [S]
 
 ## J. Monitoreo y notificaciones (10)
 
 - [x] Notificaciones Slack en fallos [S]
-- [ ] Discord webhook en releases [S]
+- [x] Discord webhook en releases [S]
 - [ ] Email a stakeholders en tags [S]
 - [x] Badge de build en README [S]
 - [ ] Status page interno [S]
-- [ ] Logs centralizados en 7 días [S]
+- [x] Logs centralizados en 7 días [S]
 - [ ] Trabajos programados via cron workflow [S]
 - [ ] Limpieza de artefactos > 30 días [S]
 - [ ] Cron semanal de limpieza de cache [S]

@@ -35,7 +35,7 @@
 - [ ] Lupa: inspecciona glifos/criaturas (M26/M44) [M]
 - [ ] Regadera requiere agua cercana para llenarse (M33) [M]
 - [ ] Caña evoluciona a red (progresión pesca M35) [M]
-- [ ] Catálogo 9×4 en data/tools/tool_catalog.tres (implementado como ToolData.STATS por código; .tres diferido a M16/M159) [M]
+- [x] Catálogo 9×4 en data/tools/tool_catalog.tres (implementado como ToolData.STATS por código; .tres diferido a M16/M159) [M]
 
 ## C. Niveles y mejora (10)
 

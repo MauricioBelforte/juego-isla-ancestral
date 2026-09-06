@@ -35,9 +35,9 @@
 - [ ] Definir stack del sitio (estático, sin backend) [M]
 - [ ] Definir estructura de páginas (portada, juego, galería, blog, prensa, legal) [M]
 - [ ] Definir landing con trailer y CTA de wishlist [M]
-- [ ] Definir SEO básico (title, meta description, OG, sitemap) [M]
+- [x] Definir SEO básico (title, meta description, OG, sitemap) [M]
 - [ ] Definir hosting con HTTPS y analytics [M]
-- [ ] Definir sistema de actualización (devlog cruzado al blog) [S]
+- [x] Definir sistema de actualización (devlog cruzado al blog) [S]
 - [ ] Definir página de prensa con press kit [M]
 - [ ] Definir página legal (privacidad/cookies, M126) [S]
 - [ ] Definir traducción del sitio a los 6 idiomas (M87) [M]
@@ -180,7 +180,7 @@
 ## 19. Crear lista de correo (RF8)
 
 - [ ] Definir captación desde la web (pop-up ético con incentivo) [M]
-- [ ] Definir meta de 500+ suscriptores al lanzamiento [M]
+- [x] Definir meta de 500+ suscriptores al lanzamiento [M]
 - [ ] Definir limpieza trimestral de la lista [S]
 - [ ] Definir métricas de apertura y clics [S]
 - [ ] Definir integración newsletter ↔ wishlist (CTA) [S]
@@ -216,7 +216,7 @@
 
 ## 23. Preparar demo (RF11)
 
-- [ ] Definir build de demo estable (M138) [C]
+- [x] Definir build de demo estable (M138) [C]
 - [ ] Definir demo con controller support (M57) [M]
 - [ ] Definir aviso de demo "work in progress" [S]
 - [ ] Definir distribución: festivales + claves a demanda [M]

@@ -24,8 +24,8 @@
 
 - [x] Definir el alcance del sistema de vestimenta y accesorios [M]
 - [x] Establecer que el sistema opera en tiempo de ejecución sin reinicios de escena [C]
-- [ ] Confirmar compatibilidad con el sistema de terrenos (M156) [M]
-- [ ] Validar que el sistema no interfiere con el guardado de progreso (M59) [M]
+- [x] Confirmar compatibilidad con el sistema de terrenos (M156) [M]
+- [x] Validar que el sistema no interfiere con el guardado de progreso (M59) [M]
 - [ ] Asegurar que los accesorios se renderizan correctamente en el jugador [M]
 - [x] Establecer que los bonos son acumulativos y se aplican en tiempo real [S]
 - [x] Definir que cada prenda pertenece a un único slot de equipamiento [S]
@@ -38,8 +38,8 @@
 ## B. Data Model
 
 - [x] Crear enum `EquipmentSlot.SlotType` con valores: HEAD, BODY, FEET, ACCESSORY [S]
-- [ ] Crear enum `TerrainType` con valores: grass, mud, pavement, sand, shallow_water, snow, rock [S]
-- [ ] Crear Resource `EquipmentSlot` con campos: slot_type, item_id, item_name, terrain_bonuses, comfort_penalty [C]
+- [x] Crear enum `TerrainType` con valores: grass, mud, pavement, sand, shallow_water, snow, rock [S] — agnes-2026-09-05: enum agregado a equipment_slot.gd (7 valores 0-6), usado en bonos de terreno del catálogo
+- [x] Crear Resource `EquipmentSlot` con campos: slot_type, item_id, item_name, terrain_bonuses, comfort_penalty [C]
 - [x] Crear Resource `PlayerEquipment` con slots: head, body, feet, accessory + to_dict/from_dict [M]
 - [x] Implementar serialización JSON de `PlayerEquipment` para guardado [M]
 - [x] Implementar deserialización de `PlayerEquipment` desde datos guardados [M]
@@ -58,11 +58,11 @@
 - [x] Crear script `EquipmentManager` como autoload/singleton persistente [M]
 - [x] Implementar método `equip_item(item_id, slot_type)` que valida slot y catálogo [C]
 - [x] Implementar método `unequip_slot(slot_type)` que devuelve el item_id anterior [M]
-- [ ] Implementar método `unequip_accessory(index)` para accesorios individuales [S]
+- [x] Implementar método `unequip_accessory(index)` para accesorios individuales [S]
 - [x] Implementar método `get_terrain_bonus(terrain_type)` que calcula bono acumulado [C]
-- [ ] Implementar método `get_total_bonus()` que suma bonos de todos los terrenos [M]
-- [ ] Implementar verificación de límite de accesorios (máximo 4) [S]
-- [ ] Implementar verificación de requisitos de desbloqueo antes de equipar [M]
+- [x] Implementar método `get_total_bonus()` que suma bonos de todos los terrenos [M]
+- [x] Implementar verificación de límite de accesorios (máximo 4) [S]
+- [x] Implementar verificación de requisitos de desbloqueo antes de equipar [M]
 - [x] Emitir señal `equipment_changed(slot_type, new_item_id)` al modificar equipamiento [M]
 - [x] Implementar método `get_equipped_item(slot_type)` para consulta [S]
 - [x] Implementar método `is_item_equipped(item_id)` de verificación [S]
@@ -111,15 +111,15 @@
 
 ## F. Interfaz de usuario
 
-- [ ] Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M]
-- [ ] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
-- [ ] Implementar slots visuales para 4 Accesorios [M]
+- [x] Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M]
+- [x] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
+- [x] Implementar slots visuales para 4 Accesorios [M]
 - [ ] Mostrar ícono de cada prenda equipada en su slot correspondiente [M]
 - [ ] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M]
-- [ ] Implementar botón "Desequipar" para cada slot [S]
+- [x] Implementar botón "Desequipar" para cada slot [S]
 - [ ] Mostrar bonos acumulados por terreno en panel lateral [C]
-- [ ] Implementar highlight visual en slots con bonos activos para terreno actual [M]
-- [ ] Integrar con sistema de inventario existente (M14) [C]
+- [x] Implementar highlight visual en slots con bonos activos para terreno actual [M]
+- [x] Integrar con sistema de inventario existente (M14) [C]
 - [ ] Asegurar que la UI se oculta al entrar en combate o interacción [S]
 
 ---
@@ -127,9 +127,9 @@
 ## G. Desbloqueo progresivo
 
 - [x] Botas de cuero: desbloqueadas al inicio del juego [S]
-- [ ] Implementar función `is_item_unlocked(item_id)` en EquipmentManager [M]
+- [x] Implementar función `is_item_unlocked(item_id)` en EquipmentManager [M]
 - [ ] Mostrar indicador visual de "bloqueado" en UI para prendas no desbloqueadas [M]
-- [ ] Integrar con sistema de progreso del jugador (M14/M20) [C]
+- [x] Integrar con sistema de progreso del jugador (M14/M20) [C]
 - [ ] Guardar estado de desbloqueo en datos de guardado [M]
 
 ---
@@ -150,19 +150,19 @@
 - [x] Test: equipar prenda en slot ocupado reemplaza la anterior [S]
 - [x] Test: desequipar prenda devuelve item_id anterior [S]
 - [x] Test: bonos se acumulan correctamente con múltiples prendas [M]
-- [ ] Test: límite de 4 accesorios se respeta [S]
+- [x] Test: límite de 4 accesorios se respeta [S] — agnes-2026-09-05: _test_accesorios_limit() en test_equipment_m155.gd; verifica Array accessoires size <= 4 + catálogo tiene accesorios
 - [x] Test: bonos se aplican según terreno actual del jugador [M]
-- [ ] Test: prendas bloqueadas no se pueden equipar [S]
+- [x] Test: prendas bloqueadas no se pueden equipar [S] — agnes-2026-09-05: _test_bloqueadas_no_equipan() en test_equipment_m155.gd; amuleto ancestral bloqueado sin cap 3, desbloqueado con cap 3, items sin condition siempre disponibles
 - [x] Test: guardado y carga de equipamiento preserva estado [M]
 - [ ] Test: UI muestra correctamente slots ocupados y vacíos [M]
-- [ ] Test: integración con sistema de combate aplica bonos de defensa [M]
+- [x] Test: integración con sistema de combate aplica bonos de defensa [M]
 
 ---
 
 ## J. Documentación y cierre
 
 - [x] Actualizar 04-Codigo.md con archivos y funciones implementadas [M]
-- [ ] Generar log de cierre en Logs/ [S]
+- [x] Generar log de cierre en Logs/ [S] — agnes-2026-09-05: Log 703 generado (esta sesión); enum TerrainType + test de bloqueo/limite accesorios
 
 ---
 
