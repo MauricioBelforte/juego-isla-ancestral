@@ -336,7 +336,7 @@ func _on_evento_terminado(evento_id) -> void:
 
 func _resolver_event_manager():
 	var root = Engine.get_main_loop().root
-	var em = root.get_node_or_null("/root/EventManager")
+	var em = root.get_node_or_null("/root/eventos")
 	if em != null:
 		return em
 	var sr = root.get_node_or_null("/root/ServiceRegistry")

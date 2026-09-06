@@ -128,6 +128,18 @@ func _update_stuck_detection(delta: float) -> void:
 		return
 	var pos = p.global_position
 	var dist = pos.distance_to(_last_position)
+	# BUG-011 fix (iter. 3, glm-5.3-flash): los estados ESTÁTICOS están quietos
+	# POR DISEÑO (Idle/Sleep/Eat/Social/React/Interact no procesan navegación).
+	# Contarlos como "atasco" causaba el bucle infinito del watchdog: el timer
+	# crecía en Idle → _force_new_target() que Idle ignora → respawn → otra vez.
+	# La detección solo aplica a estados que deberían moverse (Movement/Work).
+	var sn := ""
+	if current_state != null and current_state.has_method("get_state_name_raw"):
+		sn = str(current_state.get_state_name_raw())
+	if sn in ["Idle", "Sleep", "Eat", "Social", "React", "Interact"]:
+		_stuck_timer = 0.0
+		_last_position = pos
+		return
 	if dist < 0.05:
 		_stuck_timer += delta
 		if _stuck_timer >= STUCK_THRESHOLD and _stuck_timer < STUCK_THRESHOLD + delta:

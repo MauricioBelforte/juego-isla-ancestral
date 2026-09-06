@@ -66,6 +66,13 @@ func get_snapshot(claves: Array) -> Dictionary:
 		snap[str(clave)] = get_value(str(clave))
 	return snap
 
+## M21 (Hy3 / T-M162-003): devuelve copia de TODAS las banderas persistibles del
+## mundo. Permite a los consumidores de M162 (ContextualDialogueManager) construir
+## un contexto completo (flag_capitulo / ubicacion / quest / visitado) en una sola
+## lectura, en vez de N llamadas get_value.
+func get_all_flags() -> Dictionary:
+	return _banderas.duplicate(true)
+
 ## ── Banderas propias (persistibles via M59) ─────────────
 
 func set_flag(clave: String, valor: Variant) -> void:

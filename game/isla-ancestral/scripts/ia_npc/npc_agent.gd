@@ -194,9 +194,14 @@ func _load_routine_from_profile() -> void:
 
 
 func _get_profile() -> Resource:
+	# BUG-011 fix (iter. 3, glm-5.3-flash): M19 ya implementa obtener_perfil().
+	# Antes retornaba null SIEMPRE → perfil=unknown → sin rutina → Idle eterno
+	# → watchdog de atascos en bucle (BUG-011).
 	var vm = get_node_or_null("/root/VillagerManager")
-	if vm != null:
-		return null  # obtener_perfil not yet implemented in M19
+	if vm != null and vm.has_method("obtener_perfil"):
+		var p: Resource = vm.obtener_perfil(_npc_id)
+		if p != null:
+			return p
 	return null
 
 

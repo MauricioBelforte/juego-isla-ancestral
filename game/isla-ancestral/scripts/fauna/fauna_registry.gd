@@ -60,7 +60,7 @@ func registrar_avistamiento(especie_id: StringName, contexto: Dictionary) -> voi
 	var instancia_id: String = String(contexto.get("instancia_id", ""))
 	# Dedupe por instancia
 	if instancia_id != "":
-		# Fix Log 406: has() explícito — el default 0.0 de _dedupe.get()
+		# Fix Log 429: has() explícito — el default 0.0 de _dedupe.get()
 		# combinado con tiempo de motor bloqueaba el PRIMER avistamiento de
 		# cada instancia durante los primeros 30s de sesión (regresión
 		# detectada por test_fauna). Con unix-time el bug era invisible.
@@ -186,7 +186,7 @@ func cargar_local() -> bool:
 ## ── Internos ───────────────────────────────────────────────
 
 func _tiempo_actual_s() -> float:
-	# Fix C56 (M30 re-auditoría, Log 406): el reloj del SO está PROHIBIDO en
+	# Fix C56 (M30 re-auditoría, Log 429): el reloj del SO está PROHIBIDO en
 	# gameplay (regla de oro del módulo 30; el scan caso_reloj_tests.gd lo
 	# detecta y hacía fallar el check). El dedupe es POR SESIÓN: _dedupe NO se
 	# persiste en get_save_data() (se resetea en cada arranque y con
@@ -194,7 +194,7 @@ func _tiempo_actual_s() -> float:
 	# práctica. Time.get_ticks_msec() (tiempo de motor: segundos reales de
 	# pared desde el arranque) preserva el comportamiento observable —
 	# 30s reales entre re-registros del mismo individuo en la sesión.
-	# Ver 07-GUIA-GODOT §9.63.
+	# Ver 07-GUIA-GODOT §9.64.
 	return float(Time.get_ticks_msec()) / 1000.0
 
 func _on_dia_cambio(_info: Dictionary) -> void:

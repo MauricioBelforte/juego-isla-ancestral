@@ -69,7 +69,7 @@ func _grafo_con_condicion(clave: String) -> DialogueGraph:
 ## F.11 [?]: el validador debe ACEPTAR "clima" como clave conocida (no desconocida).
 func _test_validador_acepta_clima() -> void:
 	var grafo := _grafo_con_condicion("clima")
-	var problemas := _validator.validar(grafo, _validator.CLAVES_MUNDO_BASE)
+	var problemas: Array = _validator.validar(grafo, _validator.CLAVES_MUNDO_BASE)
 	var hay_clave_desconocida := false
 	for p in problemas:
 		if "clave de mundo desconocida" in str(p) and "clima" in str(p):
@@ -79,7 +79,7 @@ func _test_validador_acepta_clima() -> void:
 ## Contra-prueba: una clave inventada debe ser rechazada (detecta typos en runtime/CI).
 func _test_validador_rechaza_clima_inexistente() -> void:
 	var grafo := _grafo_con_condicion("climaX")
-	var problemas := _validator.validar(grafo, _validator.CLAVES_MUNDO_BASE)
+	var problemas: Array = _validator.validar(grafo, _validator.CLAVES_MUNDO_BASE)
 	var hay_clave_desconocida := false
 	for p in problemas:
 		if "clave de mundo desconocida" in str(p):

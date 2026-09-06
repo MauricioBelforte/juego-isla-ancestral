@@ -198,6 +198,13 @@ func _cargar_grafo(dialogue_id: String) -> DialogueGraph:
 	if _grafos_cache.has(dialogue_id):
 		return _grafos_cache[dialogue_id]
 	var grafo := DialogueGraph.load_from_json(CARPETA_DIALOGOS + dialogue_id + ".json")
+	if grafo.nodes.is_empty():
+		# M162 (Hy3 / T-M162-003): los grafos contextuales viven en
+		# data/dialogues/contextual/. Reintentar ahi antes de fallar (no destructivo:
+		# solo se usa si el grafo principal no cargo nada).
+		var alt := DialogueGraph.load_from_json(CARPETA_DIALOGOS + "contextual/" + dialogue_id + ".json")
+		if not alt.nodes.is_empty():
+			grafo = alt
 	if not grafo.nodes.is_empty():
 		_grafos_cache[dialogue_id] = grafo
 	return grafo

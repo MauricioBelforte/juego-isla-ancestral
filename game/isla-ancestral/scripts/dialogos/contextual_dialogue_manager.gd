@@ -31,6 +31,9 @@ const DIR_GRAFOS := "res://data/dialogues/contextual/"
 ## contexto: Dictionary con variables de mundo (claves M21 arriba).
 ## Devuelve {ok, graph, entry, error}.
 static func seleccionar(npc_id: String, tipo: String, contexto: Dictionary) -> Dictionary:
+	# T-M162-003 (Log 665): defensa ante contexto nulo/no-Dictionary (refactor futuro
+	# o caller negligente) -> tratar como {} y aplicar fallback en vez de crashear en _cumple.
+	var ctx: Dictionary = contexto if (contexto is Dictionary) else {}
 	var reg := _cargar_registry()
 	if reg.is_empty():
 		return {"ok": false, "error": "registry no encontrado", "graph": {}, "entry": {}}
@@ -45,7 +48,7 @@ static func seleccionar(npc_id: String, tipo: String, contexto: Dictionary) -> D
 			continue
 		if e.get("tipo") != tipo:
 			continue
-		if not _cumple(e.get("condiciones", []), contexto):
+		if not _cumple(e.get("condiciones", []), ctx):
 			continue
 		var p: int = int(e.get("prioridad", 0))
 		if p > mejor_prio:
@@ -119,9 +122,21 @@ static func _slug_de(reg: Dictionary, npc_id: String) -> String:
 	var npcs: Dictionary = reg.get("npcs", {})
 	if npcs.has(npc_id):
 		return npc_id
+	# Coincidencia exacta de npc_id en los valores del registry
 	for s in npcs.keys():
 		if str(npcs[s].get("npc_id", "")) == npc_id:
 			return s
+	# BUG-012 fix (Log 560): el registry usa "NPC-RIZ_001" (guion bajo) pero
+	# las señales/tests usan "NPC-RIZ-001" (guion). Normalizar separadores
+	# _ - y espacios + case-insensitive para el slug y el npc_id.
+	var objetivo := npc_id.to_lower().replace("_", "").replace("-", "").replace(" ", "")
+	for s2 in npcs.keys():
+		var slug_norm := String(s2).to_lower().replace("_", "").replace("-", "").replace(" ", "")
+		if slug_norm == objetivo:
+			return String(s2)
+		var id_norm := str(npcs[s2].get("npc_id", "")).to_lower().replace("_", "").replace("-", "").replace(" ", "")
+		if id_norm == objetivo:
+			return String(s2)
 	return ""
 
 
