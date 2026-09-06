@@ -1,0 +1,256 @@
+# Checklist de Tareas — M90 90-Configuracion-Grafica
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/90-Configuracion-Grafica/plan-actual/05-Checklist.md
+
+- [ ] T-001 Resolución
+- [ ] T-002 Pantalla completa
+- [ ] T-003 Ventana
+- [ ] T-004 Borderless
+- [ ] T-005 VSync
+- [ ] T-006 FPS
+- [ ] T-007 Calidad de sombras
+- [ ] T-008 Calidad de texturas
+- [ ] T-009 Distancia de dibujado
+- [ ] T-010 Calidad de efectos
+- [ ] T-011 Calidad de vegetación
+- [ ] T-012 Calidad de agua
+- [ ] T-013 Calidad de partículas
+- [ ] T-014 Anti-aliasing
+- [ ] T-015 Anisotropic filtering
+- [ ] T-016 Post-processing
+- [ ] T-017 Bloom
+- [ ] T-018 Motion blur
+- [ ] T-019 Depth of field
+- [ ] T-020 FSR/DLSS/XeSS si corresponde
+- [ ] T-021 Escala de resolución
+- [x] T-022 Presets gráficos
+- [ ] T-023 Detección automática
+- [ ] T-024 Definir 720p (1280x720)
+- [ ] T-025 Definir 1080p (1920x1080)
+- [ ] T-026 Definir 1440p (2560x1440)
+- [ ] T-027 Definir 4K (3840x2160)
+- [ ] T-028 Definir nativa (resolución del monitor)
+- [ ] T-029 Definir aspect ratio 16:9
+- [ ] T-030 Definir soporte para 16:10
+- [ ] T-031 Definir soporte para 21:9
+- [ ] T-032 Definir pantalla completa (fullscreen)
+- [ ] T-033 Definir ventana (windowed)
+- [ ] T-034 Definir borderless (borderless windowed)
+- [ ] T-035 Definir toggle de pantalla completa (F11 o botón)
+- [ ] T-036 Definir modo ventana para multitasking
+- [ ] T-037 Definir borderless para pantalla completa sin bloquear otros monitores
+- [ ] T-038 Definir VSync 0 (off)
+- [ ] T-039 Definir VSync 1 (on)
+- [ ] T-040 Definir VSync 2 (adaptive)
+- [x] T-041 Definir recomendación por preset (bajo: 0, medio: 1, alto: 2, ultra: 2)
+- [ ] T-042 Definir 30 FPS (hardware muy bajo)
+- [ ] T-043 Definir 60 FPS (hardware medio, recomendado)
+- [ ] T-044 Definir 120 FPS (hardware alto)
+- [ ] T-045 Definir ilimitado (hardware ultra)
+- [x] T-046 Definir recomendación por preset (bajo: 30, medio: 60, alto: 120, ultra: ilimitado)
+- [ ] T-047 Definir baja (cascada simple, 1 shadow map, 512x512)
+- [ ] T-048 Definir media (cascada suave, 2 shadow maps, 1024x1024)
+- [ ] T-049 Definir alta (PCSS, 4 shadow maps, 2048x2048)
+- [ ] T-050 Definir ultra (cascada soft shadows, 4 shadow maps, 4096x4096)
+- [x] T-051 Definir implementación (DirectionalLight, OmnidirectionalLight, SpotLight)
+- [ ] T-052 Definir soft shadows para calidad alta/ultra
+- [ ] T-053 Definir baja (0.5x, mipmap 0)
+- [ ] T-054 Definir media (1x, mipmap 1)
+- [ ] T-055 Definir alta (2x, mipmap 2)
+- [ ] T-056 Definir ultra (4x, mipmap 3)
+- [ ] T-057 Definir filtering (trilinear)
+- [ ] T-058 Definir anisotropic filtering por calidad (2x, 4x, 8x, 16x)
+- [ ] T-059 Definir mipmaps habilitados
+- [ ] T-060 Definir cercana (50 unidades, 100m)
+- [ ] T-061 Definir media (100 unidades, 200m)
+- [ ] T-062 Definir lejana (200 unidades, 400m)
+- [ ] T-063 Definir culling de objetos fuera de distancia
+- [ ] T-064 Definir LODs para objetos lejanos (M50)
+- [ ] T-065 Definir fog para ocultar transición
+- [ ] T-066 Definir baja (partículas básicas, sin post-processing)
+- [ ] T-067 Definir media (partículas estándar, post-processing básico)
+- [ ] T-068 Definir alta (partículas avanzadas, post-processing completo)
+- [ ] T-069 Definir ultra (partículas máximas, post-processing cinemático)
+- [ ] T-070 Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad)
+- [ ] T-071 Definir baja (sin animación, LOD 0 solo)
+- [ ] T-072 Definir media (animación básica, LOD 0-1)
+- [ ] T-073 Definir alta (animación completa, LOD 0-2)
+- [ ] T-074 Definir ultra (animación + wind procedural + interacción, LOD 0-3)
+- [ ] T-075 Definir animación por wind shader
+- [ ] T-076 Definir interacción con jugador
+- [ ] T-077 Definir baja (sin reflexiones, textura simple)
+- [ ] T-078 Definir media (reflexiones básicas, textura normal)
+- [ ] T-079 Definir alta (reflexiones completas, textura normal + parallax)
+- [ ] T-080 Definir ultra (reflexiones + caustics, textura normal + parallax + caustics)
+- [ ] T-081 Definir shader de agua con reflexiones
+- [ ] T-082 Definir normal map para olas
+- [ ] T-083 Definir parallax para profundidad
+- [ ] T-084 Definir caustics para ultra
+- [x] T-085 Definir baja (100 partículas máximas por sistema)
+- [x] T-086 Definir media (500 partículas máximas por sistema)
+- [x] T-087 Definir alta (1000 partículas máximas por sistema)
+- [x] T-088 Definir ultra (2000 partículas máximas por sistema)
+- [ ] T-089 Definir GPU particles para rendimiento
+- [ ] T-090 Definir colisión de partículas con world
+- [ ] T-091 Definir partículas para fuego, humo, agua, magia, polvo
+- [ ] T-092 Definir off (sin anti-aliasing)
+- [ ] T-093 Definir FXAA (Fast Approximate Anti-Aliasing)
+- [ ] T-094 Definir MSAA 2x (Multi-Sample Anti-Aliasing 2x)
+- [ ] T-095 Definir MSAA 4x (Multi-Sample Anti-Aliasing 4x)
+- [ ] T-096 Definir TAA (Temporal Anti-Aliasing)
+- [x] T-097 Definir recomendación por preset (bajo: off/FXAA, medio: FXAA, alto: MSAA 2x, ultra: TAA)
+- [ ] T-098 Definir off (sin anisotropic filtering)
+- [ ] T-099 Definir 2x (calidad baja)
+- [ ] T-100 Definir 4x (calidad media)
+- [ ] T-101 Definir 8x (calidad alta)
+- [ ] T-102 Definir 16x (calidad ultra)
+- [x] T-103 Definir recomendación por preset (bajo: off/2x, medio: 4x, alto: 8x, ultra: 16x)
+- [ ] T-104 Definir toggle de post-processing
+- [ ] T-105 Definir efectos (bloom, motion blur, depth of field, color grading, tonemapping)
+- [ ] T-106 Definir activación/desactivación de todos los efectos
+- [ ] T-107 Definir toggle de bloom
+- [ ] T-108 Definir intensidad (slider 0-1)
+- [ ] T-109 Definir threshold (slider 0-1)
+- [ ] T-110 Definir radius (slider 0-1)
+- [ ] T-111 Definir bloom shader para glow
+- [ ] T-112 Definir threshold para fuentes de luz brillantes
+- [ ] T-113 Definir toggle de motion blur
+- [ ] T-114 Definir intensidad (slider 0-1)
+- [ ] T-115 Definir sample count (slider 4-16)
+- [ ] T-116 Definir motion blur basado en velocidad de cámara
+- [ ] T-117 Definir más blur cuando la cámara se mueve más rápido
+- [ ] T-118 Definir desactivado por defecto (causa mareo)
+- [ ] T-119 Definir toggle de depth of field
+- [ ] T-120 Definir intensidad (slider 0-1)
+- [ ] T-121 Definir distancia (slider 0-100)
+- [ ] T-122 Definir aperture (slider 0-1)
+- [ ] T-123 Definir depth of field basado en distancia de la cámara
+- [ ] T-124 Definir blur para objetos fuera de foco
+- [ ] T-125 Definir aperture controla cuánto blur
+- [ ] T-126 Definir FSR 1.0 (AMD)
+- [ ] T-127 Definir FSR 2.0 (AMD mejorado)
+- [ ] T-128 Definir DLSS (NVIDIA)
+- [ ] T-129 Definir XeSS (Intel)
+- [ ] T-130 Definir detección de GPU y habilitación correspondiente
+- [x] T-131 Definir recomendación por preset (bajo: FSR 1.0, medio: FSR 2.0, alto: DLSS, ultra: DLSS ultra)
+- [x] T-132 Definir 50% (render mitad, escalar a completa)
+- [x] T-133 Definir 75% (render 3/4, escalar a completa)
+- [x] T-134 Definir 100% (render completo)
+- [ ] T-135 Definir 125% (oversampling 1.25x)
+- [ ] T-136 Definir 150% (oversampling 1.5x)
+- [x] T-137 Definir recomendación por preset (bajo: 50%, medio: 75%, alto: 100%, ultra: 100% o 125%)
+- [x] T-138 Definir preset bajo (720p, calidad baja, VSync 0, 30 FPS, escala 50%)
+- [x] T-139 Definir preset medio (1080p, calidad media, VSync 1, 60 FPS, escala 75%)
+- [x] T-140 Definir preset alto (1440p, calidad alta, VSync 2, 120 FPS, escala 100%)
+- [x] T-141 Definir preset ultra (4K, calidad ultra, VSync 2, ilimitado FPS, escala 100%)
+- [x] T-142 Definir preset personalizado
+- [x] T-143 Definir botones de preset en settings
+- [x] T-144 Definir aplicación automática al seleccionar preset
+- [x] T-145 Definir guardado de preset personalizado en settings
+- [x] T-146 Definir detección de GPU (RenderingServer.get_video_adapter_name())
+- [ ] T-147 Definir detección de RAM (OS.get_static_memory_usage())
+- [ ] T-148 Definir detección de CPU (OS.get_processor_name())
+- [x] T-149 Definir lógica de recomendación de preset según hardware
+- [x] T-150 Definir GPU baja + RAM baja + CPU baja → preset bajo
+- [x] T-151 Definir GPU media + RAM media + CPU media → preset medio
+- [x] T-152 Definir GPU alta + RAM alta + CPU alta → preset alto
+- [x] T-153 Definir GPU ultra + RAM ultra + CPU ultra → preset ultra
+- [ ] T-154 Diseñar tamaño de fuente (slider 0.5x a 2x)
+- [ ] T-155 Diseñar alto contraste (toggle)
+- [ ] T-156 Diseñar reducción de motion blur (opción para reducir mareo)
+- [ ] T-157 Diseñar reducción de bloom (opción para reducir distracción visual)
+- [x] T-158 Diseñar ajustes en menú de configuración gráfica
+- [x] T-159 Diseñar guardado en settings (M90)
+- [ ] T-160 Diseñar aplicación en tiempo real
+- [ ] T-161 Diseñar FPS counter (opcional, en debug)
+- [ ] T-162 Diseñar profiling de GPU (opcional, en debug)
+- [ ] T-163 Diseñar monitoreo de uso de GPU y RAM (opcional, en debug)
+- [ ] T-164 Diseñar FPS counter visible en debug (M110)
+- [ ] T-165 Diseñar profiling visible en debug (M110)
+- [ ] T-166 Diseñar monitoreo visible en debug (M110)
+- [ ] T-167 Diseñar tamaño de fuente (slider 0.5x a 2x)
+- [ ] T-168 Diseñar alto contraste (toggle)
+- [x] T-169 Diseñar ajustes de fuentes en menú de configuración gráfica
+- [x] T-170 Diseñar guardado en settings (M90)
+- [ ] T-171 Diseñar aplicación en tiempo real
+- [x] T-172 Diseñar GraphicsSettingsMenu
+- [ ] T-173 Diseñar controles para resolución (dropdown)
+- [ ] T-174 Diseñar controles para pantalla completa (toggle)
+- [ ] T-175 Diseñar controles para ventana (toggle)
+- [ ] T-176 Diseñar controles para borderless (toggle)
+- [ ] T-177 Diseñar controles para VSync (dropdown)
+- [ ] T-178 Diseñar controles para FPS cap (dropdown)
+- [ ] T-179 Diseñar controles para escala de resolución (slider)
+- [ ] T-180 Diseñar controles para upscaling (dropdown)
+- [ ] T-181 Diseñar controles para calidad de sombras (dropdown)
+- [ ] T-182 Diseñar controles para calidad de texturas (dropdown)
+- [ ] T-183 Diseñar controles para distancia de dibujado (slider)
+- [ ] T-184 Diseñar controles para calidad de efectos (dropdown)
+- [ ] T-185 Diseñar controles para calidad de vegetación (dropdown)
+- [ ] T-186 Diseñar controles para calidad de agua (x] Diseñar controles para calidad de partículas (dropdown)
+- [ ] T-187 Diseñar controles para anti-aliasing (dropdown)
+- [ ] T-188 Diseñar controles para anisotropic filtering (dropdown)
+- [ ] T-189 Diseñar controles para post-processing (toggle)
+- [ ] T-190 Diseñar controles para bloom (toggle + slider)
+- [ ] T-191 Diseñar controles para motion blur (toggle + slider)
+- [ ] T-192 Diseñar controles para depth of field (toggle + slider)
+- [x] T-193 Diseñar botones de preset (bajo, medio, alto, ultra)
+- [x] T-194 Diseñar etiqueta de preset actual
+- [ ] T-195 Diseñar botón de detección automática
+- [x] T-196 Diseñar GraphicsSettings (Resource)
+- [x] T-197 Diseñar campos: resolution, fullscreen, borderless, vsync, fps_cap, resolution_scale, upscaling, shadows_quality, textures_quality, draw_distance, effects_quality, vegetation_quality, water_quality, particles_quality, anti_aliasing, anisotropic_filtering, post_processing, bloom, bloom_intensity, motion_blur, motion_blur_intensity, depth_of_field, depth_of_field_intensity, preset
+- [x] T-198 Diseñar método apply_settings()
+- [x] T-199 Diseñar GraphicsPresets
+- [x] T-200 Diseñar diccionario PRESETS con 4 presets (bajo, medio, alto, ultra)
+- [x] T-201 Diseñar método apply_preset()
+- [x] T-202 Diseñar aplicación automática de preset al GraphicsSettings
+- [x] T-203 Diseñar actualización de preset en GraphicsSettings.preset
+- [ ] T-204 Diseñar HardwareDetector
+- [ ] T-205 Diseñar método detect_hardware()
+- [x] T-206 Diseñar método recommend_preset()
+- [ ] T-207 Diseñar lógica de recomendación según GPU, RAM, CPU
+- [x] T-208 Diseñar GraphicsApplier
+- [ ] T-209 Diseñar método apply_resolution()
+- [ ] T-210 Diseñar método apply_vsync()
+- [ ] T-211 Diseñar método apply_fps_cap()
+- [x] T-212 Diseñar método apply_shadows_quality()
+- [x] T-213 Diseñar método apply_textures_quality()
+- [ ] T-214 Diseñar método apply_anti_aliasing()
+- [x] T-215 Diseñar GraphicsSettingsLoader
+- [x] T-216 Diseñar método load_settings()
+- [x] T-217 Diseñar carga desde user://settings/graphics_settings.json
+- [x] T-218 Diseñar parseo de JSON
+- [x] T-219 Diseñar aplicación de configuración al inicio
+- [x] T-220 Diseñar fallback a preset medio si no existe configuración
+- [x] T-221 Diseñar GraphicsSettingsSaver
+- [x] T-222 Diseñar método save_settings()
+- [x] T-223 Diseñar guardado en user://settings/graphics_settings.json
+- [x] T-224 Diseñar serialización de settings a JSON
+- [x] T-225 Diseñar trigger de guardado al cerrar settings
+- [x] T-226 Diseñar formato de graphics_settings.json
+- [x] T-227 Incluir todos los campos de GraphicsSettings
+- [ ] T-228 Incluir resolución como objeto {x, y}
+- [x] T-229 Incluir preset como string
+- [x] T-230 Diseñar diagrama de flujo de configuración
+- [x] T-231 Diseñar flujo: Usuario abre settings → Menú de configuración gráfica → Usuario selecciona preset o ajusta opciones → GraphicsSettings se actualiza → GraphicsApplier aplica configuración → Configuración guardada → Usuario cierra settings → Configuración aplicada
+- [x] T-232 Diseñar pruebas manuales (presets en diferentes hardware, ajustes individuales, aplicación en tiempo real, guardado y carga, detección automática)
+- [x] T-233 Diseñar pruebas automáticas (carga de configuración, aplicación de configuración, detección de hardware)
+- [ ] T-234 Diseñar pruebas de legibilidad en 720p
+- [ ] T-235 Diseñar pruebas de legibilidad en 1080p
+- [ ] T-236 Diseñar pruebas de legibilidad en 4K
+- [ ] T-237 Diseñar pruebas de soporte de tildes
+- [ ] T-238 Diseñar pruebas de soporte de ñ
+- [ ] T-239 Diseñar pruebas de soporte de símbolos
+- [ ] T-240 Diseñar pruebas de localización (español, portugués, francés, alemán, italiano, ruso)
+- [ ] T-241 Diseñar pruebas de ajustes de accesibilidad
+- [ ] T-242 Diseñar pruebas de rendimiento (tiempo de carga)
+- [ ] T-243 Diseñar 06-Plan-Testings.md (APLICA)
+- [x] T-244 Diseñar tests de presets gráficos
+- [ ] T-245 Diseñar tests de ajustes individuales
+- [ ] T-246 Diseñar tests de aplicación en tiempo real
+- [x] T-247 Diseñar tests de guardado y carga de configuración
+- [ ] T-248 Diseñar tests de detección automática de hardware
+- [x] T-249 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]

@@ -1,0 +1,107 @@
+# Checklist de Tareas — M84 84-Musica-Y-Audio-Legal
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/84-Musica-Y-Audio-Legal/plan-actual/05-Checklist.md
+
+- [x] T-001 Definir Resource AudioLicense con todos los campos: audio_name, audio_type, license_type, licensor, license_scope, perpetual, commercial_use, attribution_required, attribution_text, royalty_required, royalty_rate, territory, duration, license_document_path, notes
+- [x] T-002 Definir enum AudioType: ORIGINAL_COMPOSITION, STOCK_LIBRARY, AI_GENERATED, SAMPLE, SOUND_DESIGN, VOICE_ACTING
+- [x] T-003 Definir enum LicenseScope: EXCLUSIVE, NON_EXCLUSIVE, SOLE
+- [x] T-004 Crear Resource AudioCredit con campos: person_name, role, contribution, track_list, contract_reference, payment_status
+- [x] T-005 Documentar diferencias entre Work-for-Hire y License Agreement
+- [x] T-006 Definir regla: composiciones core = Work-for-Hire, DLC = Licencia con regalías
+- [x] T-007 Definir regla: audio de IA siempre con composer humano como autor final
+- [ ] T-008 Crear template de contrato Work-for-Hire para compositores
+- [ ] T-009 Crear template de contrato de sesión para músicos
+- [ ] T-010 Crear template de contrato para voice actors
+- [x] T-011 Crear template de licencia para librerías de stock
+- [x] T-012 Definir proceso de clearances para muestras musicales
+- [x] T-013 Definir política de atribución obligatoria para todos los audios
+- [x] T-014 Crear checklist de verificación pre-build para audio
+- [x] T-015 Documentar leyes relevantes por territorio (US, EU, LATAM)
+- [ ] T-016 Template Work-for-Hire con cesión total de PI
+- [x] T-017 Cláusula de credito obligatorio en todos los builds
+- [ ] T-018 Cláusula de pago upfront (flat fee)
+- [x] T-019 Cláusula de regalías opcionales para secuelas/DLC
+- [x] T-020 Cláusula de confidencialidad
+- [ ] T-021 Cláusula de garantía de originalidad
+- [x] T-022 Cláusula de release de grabación
+- [ ] T-023 Cláusula de jurisdiction y ley aplicable
+- [x] T-024 Template de anexo para especificaciones de entrega
+- [x] T-025 Template de acta de entrega y aceptación
+- [ ] T-026 Template de contrato de sesión (flat fee)
+- [ ] T-027 Cláusula de credito obligatorio
+- [x] T-028 Cláusula de release de interpretación
+- [ ] T-029 Cláusula de pago completo al finalizar
+- [ ] T-030 Cláusula de que no hay regalías en juego base
+- [x] T-031 Cláusula de opciones para DLC (renegociación)
+- [x] T-032 Cláusula de confidencialidad
+- [ ] T-033 Template de hoja de sesión (session sheet)
+- [ ] T-034 Template de firma de release
+- [x] T-035 Proceso de verificación de pagamento
+- [x] T-036 Verificar perpetual license (no subscription)
+- [x] T-037 Verificar uso comercial permitido
+- [ ] T-038 Verificar attribution requirements
+- [x] T-039 Guardar copia de licencia en repositorio
+- [x] T-040 Documentar?? de uso (ej: no redistribuir el sample)
+- [ ] T-041 Verificar si requiere credito en credits del juego
+- [ ] T-042 Verificar si hay restriction de territorio
+- [ ] T-043 Verificar si hay restriction de plataforma
+- [ ] T-044 Crear inventario de todas las librerías de stock
+- [x] T-045 Proceso de renovación/re-verificación anual
+- [x] T-046 Crear AudioLegalManager con validate_all_audio()
+- [x] T-047 Implementar add_license() y add_credit()
+- [x] T-048 Implementar generate_game_credits() (formato compacto)
+- [x] T-049 Implementar generate_web_credits() (formato detallado)
+- [x] T-050 Implementar save_build_credits() para builds
+- [x] T-051 Agrupar créditos por rol (Composer, Musician, Sound Designer)
+- [ ] T-052 Incluir pistas específicas por artista
+- [x] T-053 Referenciar contrato en cada crédito
+- [ ] T-054 Incluir estado de pago en cada crédito
+- [x] T-055 Generar archivo AUDIO_CREDITS.txt en cada build
+- [ ] T-056 Definir regla: AI es herramienta, no autor
+- [ ] T-057 Definir regla: composer humano es autor final
+- [x] T-058 Requerir disclosure en créditos de audio con IA
+- [x] T-059 Verificar que la herramienta de IA permita uso comercial
+- [x] T-060 Documentar qué herramientas de IA se usaron
+- [x] T-061 Guardar logs de generación de audio por IA
+- [x] T-062 Validar que audio de IA no infrinja copyrights existentes
+- [x] T-063 Definir proceso de review humano para audio de IA
+- [x] T-064 Incluir advertencia en créditos: "Incluye elementos generados por IA"
+- [x] T-065 Verificar compatibilidad con ESRB/PEGI (sin contenido ofensivo)
+- [x] T-066 Test de AudioLicenseValidator con licencia completa
+- [x] T-067 Test de AudioLicenseValidator con licencia sin attribution
+- [x] T-068 Test de AudioLicenseValidator con licencia no-perpetual
+- [x] T-069 Test de AudioLegalManager con inventario vacío
+- [x] T-070 Test de AudioLegalManager con inventario completo
+- [x] T-071 Test de generación de créditos compactos
+- [x] T-072 Test de generación de créditos web
+- [x] T-073 Test de verificación de uso comercial
+- [x] T-074 Test de edge case: artista con múltiples roles
+- [x] T-075 Test de edge case: audio con múltiples licencias
+- [x] T-076 Agregar paso de validación de audio en build_script.gd
+- [x] T-077 Build falla si hay licencia de audio inválida
+- [x] T-078 Build incluye AUDIO_CREDITS.txt automáticamente
+- [x] T-079 Integración con M117 (Build Pipeline)
+- [x] T-080 Integración con M83 (Licencias de Software)
+- [x] T-081 Logging de validación de audio en build log
+- [x] T-082 Modo dry-run para verificar sin generar outputs
+- [x] T-083 Skip de validación en builds de desarrollo
+- [x] T-084 Verificar que todos los audios del build tengan licencia
+- [x] T-085 Generar reporte de licencias de audio por build
+- [x] T-086 Documentar cada función pública con XML docs
+- [x] T-087 Crear guía de uso para el equipo de audio
+- [x] T-088 Documentar cómo registrar nuevas licencias
+- [x] T-089 Documentar cómo agregar nuevos créditos
+- [x] T-090 Crear FAQ de licencias de audio en juegos
+- [x] T-091 Tabla de comparación de tipos de licencia
+- [ ] T-092 Ejemplos de uso de cada nodo
+- [x] T-093 Proceso de auditoría de licencias pre-launch
+- [x] T-094 Contacto de abogado especializado en entertainment law
+- [x] T-095 Registro de cambios del módulo
+- [x] T-096 Proceso de actualización de créditos
+- [x] T-097 Template de email para solicitar clearances
+- [x] T-098 Checklist pre-release de audio legal
+- [ ] T-099 Proceso de handling de claims de copyright
+- [x] T-100 Documentar casos de uso edge (audio de dominio público)

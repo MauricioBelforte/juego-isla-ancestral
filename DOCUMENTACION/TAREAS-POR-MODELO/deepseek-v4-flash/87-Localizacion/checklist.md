@@ -85,21 +85,21 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [ ] T-081 Manejar catálogo del idioma seleccionado inexistente (fallback español) [M]
 - [ ] T-082 Manejar clave ausente en todos los catálogos (clave literal visible) [M]
 - [ ] T-083 Manejar clave ausente solo en inglés (fallback automático a español) [M]
-- [ ] T-084 Manejar archivo .po con error de sintaxis sin impedir el arranque [M]
-- [ ] T-085 Manejar placeholder mal formado ({sin_cierre) sin romper la UI [S]
-- [ ] T-086 Manejar placeholder sin valor en params (se muestra literal + warning dev) [S]
-- [ ] T-087 Manejar params con claves extra no usadas por el texto [S]
+- [x] T-084 Manejar archivo .po con error de sintaxis sin impedir el arranque [M] — iter. 4 (Log 639): _parse_po degrada con gracia (msgstr[ sin índice/índice>7 omitidos + warning); test_localizacion_iter4 CP-01..03 0 fallos
+- [x] T-085 Manejar placeholder mal formado ({sin_cierre) sin romper la UI [S] — iter. 4: format_text detecta { sin } y deja literal + warning; test iter4 CP-04
+- [x] T-086 Manejar placeholder sin valor en params (se muestra literal + warning dev) [S] — iter. 4: test iter4 CP-05
+- [x] T-087 Manejar params con claves extra no usadas por el texto [S] — iter. 4: test iter4 CP-06
 - [ ] T-088 Manejar texto largo en inglés que desborda botones y labels [C]
 - [ ] T-089 Manejar palabras largas sin espacios en textos localizados [M]
 - [ ] T-090 Manejar plurales con n = 0, 1, 2, números negativos y decimales [M]
-- [ ] T-091 Manejar fechas con orden distinto (d/m/Y vs m/d/Y) sin ambigüedad [M]
-- [ ] T-092 Manejar números con separadores distintos sin pérdida de precisión [M]
+- [x] T-091 Manejar fechas con orden distinto (d/m/Y vs m/d/Y) sin ambigüedad [M] — iter. 4: format_date relleno 07/03/0026 (es) / 08/17/2026 (en); test iter4 CP-14
+- [x] T-092 Manejar números con separadores distintos sin pérdida de precisión [M] — iter. 4: format_number 0/-1234.5/1e6; test iter4 CP-12
 - [ ] T-093 Manejar acentos y caracteres especiales en nombres de catálogos [S]
 - [ ] T-094 Manejar el cambio de idioma durante un diálogo activo [M]
 - [ ] T-095 Manejar el cambio de idioma durante un subtítulo en curso [S]
 - [ ] T-096 Manejar un valor de idioma corrupto en el guardado (default español) [M]
-- [ ] T-097 Cache de traducciones de claves calientes (HUD, menús) [M]
-- [ ] T-098 Evitar el parseo repetido de los .po en runtime [S]
+- [x] T-097 Cache de traducciones de claves calientes (HUD, menús) [M] — iter. 2 (glm, Log 488): _cache "clave|n" verificado 200 traducciones < 20 ms; ítem del módulo marcado con evidencia 2026-09-04
+- [x] T-098 Evitar el parseo repetido de los .po en runtime [S] — núcleo: _parse_po solo en _cargar_catalogos (boot una vez)
 - [ ] T-099 Precargar catálogos durante la pantalla de carga en vez de al primer uso [M]
 - [ ] T-100 Evitar allocaciones en los paths calientes de UI al traducir [M]
 - [ ] T-101 Usar StringName para las claves frecuentes [S]
@@ -120,20 +120,20 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [ ] T-116 Crear 04-Codigo.md con archivos previstos marcados pendientes de implementación [M]
 - [ ] T-117 Firmar los 5 archivos con la firma estándar (Modelo/Plataforma) [S]
 - [ ] T-118 Crear el checklist con 120+ ítems todos completados [M]
-- [ ] T-119 Diseñar el plan de testings del módulo (06-Plan-Testings.md) [M]
+- [x] T-119 Diseñar el plan de testings del módulo (06-Plan-Testings.md) [M] — iter. 4 (Log 639): plan-actual/06-Plan-Testings.md creado con 15 casos CP-01..CP-15
 - [ ] T-120 Probar arranque en español por defecto en el primer inicio [S]
 - [ ] T-121 Probar el cambio a inglés en vivo con UI abierta [M]
 - [ ] T-122 Probar la persistencia del idioma tras reiniciar el juego [M]
-- [ ] T-123 Probar que todas las claves del código existen en es.po [M]
-- [ ] T-124 Probar que todas las claves del código existen en en.po [M]
+- [x] T-123 Probar que todas las claves del código existen en es.po [M] — evidencia: es.po 64 claves fuente, validar_catalogos 0 faltantes (CP-09/10)
+- [x] T-124 Probar que todas las claves del código existen en en.po [M] — evidencia: en.po 64 claves, 0 faltantes vs es (CP-09/10)
 - [ ] T-125 Probar el fallback de claves sin traducción al español [M]
-- [ ] T-126 Probar placeholders reemplazados correctamente en diálogos y UI [M]
-- [ ] T-127 Probar que un placeholder mal usado no rompe la UI [S]
+- [x] T-126 Probar placeholders reemplazados correctamente en diálogos y UI [M] — iter. 4: format_text placeholders repetidos/múltiples/extra (CP-06/07)
+- [x] T-127 Probar que un placeholder mal usado no rompe la UI [S] — iter. 4: CP-04/CP-05 0 fallos
 - [ ] T-128 Probar plurales en español e inglés con distintos valores de n [M]
 - [ ] T-129 Probar números formateados según el idioma activo [M]
-- [ ] T-130 Probar fechas formateadas según el idioma activo [M]
+- [x] T-130 Probar fechas formateadas según el idioma activo [M] — iter. 4: CP-14 (07/03/0026 es / 08/17/2026 en)
 - [ ] T-131 Probar visualmente textos largos en inglés sin desbordes [C]
-- [ ] T-132 Probar que un catálogo corrompido no impide arrancar el juego [M]
+- [x] T-132 Probar que un catálogo corrompido no impide arrancar el juego [M] — iter. 4: CP-01/02 .po corrupto omitido sin crash (0 fallos)
 - [ ] T-133 Probar que un catálogo faltante no impide arrancar el juego [M]
 - [ ] T-134 Probar el cambio de idioma con un diálogo activo (M21) [M]
 - [ ] T-135 Probar la cobertura de caracteres de es/en en las fuentes (M88) [M]

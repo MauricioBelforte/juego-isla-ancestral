@@ -55,12 +55,18 @@ Iter 1: tomar **M118 CI-CD**, reservar en 4 registros, implementar el nucleo dat
 
 **Nota sobre el conteo "0 pendientes" en 05-Checklist.md**: los planes estan al 100% de items `[x]` por diseno, pero la implementacion real esta pendiente. Mis tareas reales son implementar los modulos siguiendo el plan, no cerrar items de diseno. Por eso la metodologia me asigna 4 modulos con check de 100+ items cada uno: ese conteo refleja el plan completo a implementar/iterar.
 
-## Estado de iter (2026-09-02)
+## Estado de iter (2026-09-02/03)
 
 - **M118 CI-CD iter 1**: 4 scripts Python en tools/ci/ (pipeline.py + build_dev.py + build_release.py + run_tests.py + lint_check.py). 17 items del checklist personal cerrados. log 541.
 - **M131 Creditos iter 2**: credits_manager autoload + creditos.json 7 secciones + i18n es/en. test 26/26 OK. log 542.
 - **M127 Copyright iter 1**: tools/legal/generate_copyright_docs.py + copyright.json ampliado a 7 elementos. test 13/13 OK. log 543.
 - **M144 Post-Lanzamiento iter 1**: tools/postlaunch/generate_postlaunch_checklist.py + postlaunch_checks.json 30 checks en 9 categorias. test 14/14 OK. log 544.
+- **M118 CI-CD iter 2**: 2 GitHub Actions workflows (dev-build.yml + release-build.yml) + coverage.py (197 tests en 98 modulos) + cron-cleanup.py. log 545.
+- **M131 Creditos iter 3**: buscar() con normalizacion de acentos + scroll_automatico + color_contraste_accesible (WCAG) + tamano_fuente_base + _traducir_titulo. test 44/44 OK. log 546.
+- **M127 Copyright iter 2**: tools/legal/generate_authors.py produce AUTHORS.md (1 contribuidor, 324 commits) y CONTRIBUTING.md data-driven desde git log. log 547.
+- **M144 Post-Lanzamiento iter 2**: tools/postlaunch/dashboard.py genera dashboard.html (CSS inline, sin CDN) + dashboard.json + alerts.json. test 8/8 OK. log 548.
+- **M118 CI-CD iter 3 (minimax-3)**: 3 tests faltantes (test_generate_postlaunch_checklist 14/14 OK, test_generate_authors 10/10 OK, test_lint_check 6/6 OK) + generador CHANGELOG.md data-driven (changelog.py + test_changelog 6/6 OK) desde git log. 5 archivos + 1 mod. log 601.
+- **M118 CI-CD iter 4 (minimax-3)**: fix encoding en generate_authors.py (utf-8 → latin-1 fallback) + validate_pipeline.py (8/8 OK test) con fix Windows (forward-slashes) + tools/README.md documenta el ecosistema. 3 archivos. log 607.
 
 ## Pendientes por iter futura
 

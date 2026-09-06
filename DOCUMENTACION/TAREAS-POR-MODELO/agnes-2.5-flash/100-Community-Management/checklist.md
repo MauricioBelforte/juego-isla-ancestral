@@ -1,1 +1,229 @@
-# Tareas M100 — Community-Management\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/100-Community-Management/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Crear reglas comunitarias\n[ ] T-002 Crear moderación\n[ ] T-003 Crear sistema de reportes\n[ ] T-004 Crear canales de feedback\n[ ] T-005 Crear roadmap público si conviene\n[ ] T-006 Crear changelog público\n[ ] T-007 Responder dudas\n[ ] T-008 Identificar bugs reportados\n[ ] T-009 Recopilar sugerencias\n[ ] T-010 Evitar promesas imposibles\n[ ] T-011 Gestionar expectativas\n[ ] T-012 Gestionar críticas\n[ ] T-013 Gestionar contenido tóxico\n[ ] T-014 Gestionar spoilers\n[ ] T-015 Gestionar filtraciones\n[ ] T-016 Gestionar impersonación\n[ ] T-017 Gestionar copyright claims\n[ ] T-018 Definir principios fundamentales (respeto, inclusividad, comunicación constructiva)\n[ ] T-019 Definir regla 1: sin contenido tóxico, discriminación o acoso\n[ ] T-020 Definir regla 2: spoilers deben etiquetarse correctamente\n[ ] T-021 Definir regla 3: contenido NSFW está prohibido\n[ ] T-022 Definir regla 4: no spam ni autopromoción excesiva\n[ ] T-023 Definir regla 5: respetar derechos de autor\n[ ] T-024 Definir regla 6: no impersonar desarrolladores oficiales\n[ ] T-025 Definir regla 7: expectativas realistas sobre el desarrollo\n[ ] T-026 Definir regla 8: feedback constructivo es bienvenido\n[ ] T-027 Definir consecuencias (advertencia, mute, ban)\n[ ] T-028 Definir sistema de apelación para bans injustificados\n[ ] T-029 Diseñar documento de reglas (rules.md)\n[ ] T-030 Diseñar publicación de reglas en Discord\n[ ] T-031 Diseñar publicación de reglas en Steam Community Hub\n[ ] T-032 Diseñar publicación de reglas en redes sociales\n[ ] T-033 Definir rol Admin (control total, puede banear, gestionar roles)\n[ ] T-034 Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)\n[ ] T-035 Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)\n[ ] T-036 Definir rol Usuario (puede reportar contenido, participar en canales)\n[ ] T-037 Definir permisos por rol\n[ ] T-038 Diseñar sistema de logs de acciones (ban, mute, kick)\n[ ] T-039 Diseñar sistema de apelación para bans injustificados\n[ ] T-040 Diseñar implementación de roles en Steam (moderators)\n[ ] T-041 Definir categoría: contenido tóxico (acoso, discriminación, spam)\n[ ] T-042 Definir categoría: spoilers no etiquetados\n[ ] T-043 Definir categoría: NSFW inapropiado\n[ ] T-044 Definir categoría: impersonación\n[ ] T-045 Definir categoría: copyright infringement\n[ ] T-046 Definir categoría: otro (con descripción)\n[ ] T-047 Diseñar workflow de reportes (usuario reporta → moderador revisa → acción)\n[ ] T-048 Diseñar notificación a moderadores\n[ ] T-049 Diseñar notificación al usuario que reportó\n[ ] T-050 Diseñar notificación al usuario reportado (si aplica acción)\n[ ] T-051 Diseñar dashboard de reportes para moderadores\n[ ] T-052 Diseñar logs de reportes y acciones\n[ ] T-053 Diseñar canal #bugs en Discord\n[ ] T-054 Diseñar canal #sugerencias en Discord\n[ ] T-055 Diseñar canal #preguntas en Discord\n[ ] T-056 Diseñar canal #off-topic en Discord\n[ ] T-057 Diseñar canal #anuncios en Discord\n[ ] T-058 Diseñar canal #faq en Discord (solo lectura)\n[ ] T-059 Diseñar canal #changelog en Discord (solo lectura)\n[ ] T-060 Diseñar canal #roadmap en Discord (solo lectura)\n[ ] T-061 Diseñar sección de Discusiones en Steam Community Hub\n[ ] T-062 Diseñar sección de Bugs y Problemas en Steam Community Hub\n[ ] T-063 Diseñar sección de Sugerencias en Steam Community Hub\n[ ] T-064 Diseñar cuenta oficial en Twitter/X\n[ ] T-065 Diseñar subreddit r/IslaAncestral en Reddit\n[ ] T-066 Diseñar pines con directrices en cada canal\n[ ] T-067 Diseñar bots para redirigir contenido a canales correctos\n[ ] T-068 Definir roadmap público (opcional)\n[ ] T-069 Definir hitos generales sin fechas irreales\n[ ] T-070 Definir categorías (Core Gameplay, Content, Technical, Polish)\n[ ] T-071 Definir estados (Completado, En desarrollo, Planeado, Futuro)\n[ ] T-072 Definir notas contextuales por hito\n[ ] T-073 Diseñar roadmap en sitio web\n[ ] T-074 Diseñar roadmap en Steam Community Hub\n[ ] T-075 Diseñar roadmap en Discord (canal #roadmap)\n[ ] T-076 Diseñar actualización periódica (mensual o cuando haya cambios)\n[ ] T-077 Definir formato de changelog (Keep a Changelog)\n[ ] T-078 Definir versiones con fechas\n[ ] T-079 Definir categorías (Added, Changed, Fixed, Removed)\n[ ] T-080 Definir notas importantes por cambio\n[ ] T-081 Definir links a issues resueltos\n[ ] T-082 Diseñar changelog en Steam (announcements)\n[ ] T-083 Diseñar changelog en Discord (canal #changelog)\n[ ] T-084 Diseñar changelog en sitio web\n[ ] T-085 Diseñar actualización con cada actualización del juego\n[ ] T-086 Diseñar integración con M102 (Bug Tracking) para issues resueltos\n[ ] T-087 Definir SLA de 48 horas para respuestas\n[ ] T-088 Definir SLA de 24 horas para dudas simples\n[ ] T-089 Definir triaje de dudas (técnicas, de diseño, generales)\n[ ] T-090 Diseñar base de conocimiento (FAQ)\n[ ] T-091 Diseñar FAQ general (¿cuándo sale?, ¿plataformas?, ¿multijugador?)\n[ ] T-092 Diseñar FAQ técnica (requisitos de sistema, controladores)\n[ ] T-093 Diseñar FAQ de gameplay (¿combate?, ¿permadeath?)\n[ ] T-094 Diseñar FAQ en sitio web\n[ ] T-095 Diseñar FAQ en Steam Community Hub\n[ ] T-096 Diseñar FAQ en Discord (canal #faq)\n[ ] T-097 Diseñar sistema de etiquetas para dudas frecuentes\n[ ] T-098 Diseñar respuestas documentadas para reutilización\n[ ] T-099 Definir sistema de triage de bugs\n[ ] T-100 Definir categorías (crítico, mayor, menor, trivial)\n[ ] T-101 Definir verificación (reproducible, no reproducible)\n[ ] T-102 Diseñar integración con M102 (Bug Tracking)\n[ ] T-103 Diseñar workflow (usuario reporta → triage → issue en M102)\n[ ] T-104 Diseñar plantilla de reporte de bug\n[ ] T-105 Diseñar sistema de etiquetas para categorías\n[ ] T-106 Diseñar respuesta automática de confirmación\n[ ] T-107 Diseñar explicación al usuario si no es bug\n[ ] T-108 Definir categorización (gameplay, UI, contenido, técnica, performance)\n[ ] T-109 Definir evaluación (alineado con visión, factible, out of scope)\n[ ] T-110 Diseñar integración con M102 (Bug Tracking) para tracking\n[ ] T-111 Diseñar workflow (usuario sugiere → evaluación → documentación)\n[ ] T-112 Diseñar plantilla de sugerencia\n[ ] T-113 Diseñar sistema de etiquetas para categorías\n[ ] T-114 Diseñar tablero de sugerencias (Trello, GitHub Projects)\n[ ] T-115 Diseñar respuesta documentada para cada sugerencia\n[ ] T-116 Diseñar respuesta constructiva siempre\n[ ] T-117 Definir directriz: no prometer fechas irreales\n[ ] T-118 Definir directriz: comunicar hitos genéricos en lugar de fechas específicas\n[ ] T-119 Definir directriz: ser transparente sobre retrasos cuando ocurran\n[ ] T-120 Definir directriz: establecer expectativas realistas desde el inicio\n[ ] T-121 Definir directriz: comunicar cambios de dirección cuando sean necesarios\n[ ] T-122 Diseñar comunicación honesta sobre estado del desarrollo\n[ ] T-123 Diseñar roadmap con hitos genéricos (sin fechas)\n[ ] T-124 Diseñar anuncios cuando haya cambios significativos\n[ ] T-125 Diseñar respuestas a preguntas sobre fechas ("cuando esté listo")\n[ ] T-126 Diseñar documentación de directrices (communication_guidelines.md)\n[ ] T-127 Definir distinción entre críticas constructivas y destructivas\n[ ] T-128 Definir respuesta a críticas constructivas con agradecimiento\n[ ] T-129 Definir ignorar o moderar críticas destructivas\n[ ] T-130 Definir aprender de críticas válidas\n[ ] T-131 Definir documentación de feedback recurrente para mejora\n[ ] T-132 Diseñar directrices para moderadores sobre cómo responder\n[ ] T-133 Diseñar documentación de feedback recurrente\n[ ] T-134 Diseñar respuestas ejemplares para críticas comunes\n[ ] T-135 Diseñar sistema de escalado para críticas serias\n[ ] T-136 Definir contenido tóxico (acoso, discriminación, odio, spam)\n[ ] T-137 Definir NSFW inapropiado\n[ ] T-138 Definir lenguaje excesivamente vulgar\n[ ] T-139 Definir acciones (advertencia, mute temporal, ban temporal, ban permanente)\n[ ] T-140 Definir primera ofensa: advertencia\n[ ] T-141 Definir segunda ofensa: mute temporal (24-48 horas)\n[ ] T-142 Definir tercera ofensa: ban temporal (7 días)\n[ ] T-143 Definir cuarta ofensa: ban permanente\n[ ] T-144 Diseñar bots de moderación automática (Discord mod bots)\n[ ] T-145 Diseñar logs de advertencias y acciones\n[ ] T-146 Diseñar sistema de apelación para bans injustificados\n[ ] T-147 Diseñar directrices claras sobre qué constituye contenido tóxico\n[ ] T-148 Definir etiquetado obligatorio de spoilers\n[ ] T-149 Definir etiquetado en Discord (||texto||)\n[ ] T-150 Definir etiquetado en Steam ([SPOILER] en título)\n[ ] T-151 Definir etiquetado en redes sociales (#spoiler)\n[ ] T-152 Diseñar canales específicos para contenido de historia (#story-spoilers)\n[ ] T-153 Diseñar secciones separadas para spoilers en Steam\n[ ] T-154 Definir temporales para contenido nuevo (30 días post-lanzamiento)\n[ ] T-155 Definir reglas sobre spoilers en Steam y redes sociales\n[ ] T-156 Diseñar recordatorios temporales después de lanzamiento\n[ ] T-157 Diseñar canales ocultos para contenido muy sensible\n[ ] T-158 Definir filtraciones (contenido no público, assets, builds, código)\n[ ] T-159 Definir protocolo: eliminar contenido inmediatamente\n[ ] T-160 Definir protocolo: contactar plataforma para takedown\n[ ] T-161 Definir protocolo: investigar fuente de filtración (si es posible)\n[ ] T-162 Definir protocolo: comunicar con comunidad que contenido no es oficial\n[ ] T-163 Diseñar protocolo documentado para filtraciones\n[ ] T-164 Diseñar contactos de plataformas (Steam, Discord, Reddit)\n[ ] T-165 Diseñar plantillas de DMCA/takedown\n[ ] T-166 Diseñar comunicación con comunidad sobre contenido filtrado\n[ ] T-167 Definir impersonación (usuarios que pretenden ser desarrolladores oficiales)\n[ ] T-168 Definir cuentas falsas que prometen contenido no oficial\n[ ] T-169 Definir scams utilizando nombre del juego\n[ ] T-170 Definir verificación oficial de desarrolladores (etiquetas de verified dev)\n[ ] T-171 Definir reporte de cuentas de impersonación a plataformas\n[ ] T-172 Definir comunicación con comunidad sobre cuentas oficiales\n[ ] T-173 Definir ban inmediato de impersonadores en canales oficiales\n[ ] T-174 Diseñar etiquetas de verified dev en Discord\n[ ] T-175 Diseñar cuentas oficiales verificadas en Steam (developer badge)\n[ ] T-176 Diseñar listado de cuentas oficiales en sitio web\n[ ] T-177 Diseñar protocolo de reporte de impersonación\n[ ] T-178 Definir copyright claims en contenido de fans (fan art, fan music, fan fiction)\n[ ] T-179 Definir copyright claims en videos (let's plays, streams)\n[ ] T-180 Definir copyright claims en mods y contenido generado por usuarios\n[ ] T-181 Definir directrices: fair use para contenido transformador\n[ ] T-182 Definir directrices: política de contenido de fans en sitio web\n[ ] T-183 Definir directrices: atribución requerida para contenido de fans\n[ ] T-184 Definir directrices: respeto a copyright de terceros\n[ ] T-185 Diseñar política de contenido de fans documentada\n[ ] T-186 Diseñar directrices de atribución\n[ ] T-187 Diseñar sistema de reporte de infracción de copyright\n[ ] T-188 Diseñar respuesta a claims de terceros\n[ ] T-189 Definir actualizaciones periódicas sobre estado del desarrollo\n[ ] T-190 Definir anuncios de hitos importantes\n[ ] T-191 Definir comunicación de retrasos cuando sean significativos\n[ ] T-192 Definir AMAs ocasionales (Ask Me Anything)\n[ ] T-193 Definir showcases de contenido en desarrollo\n[ ] T-194 Diseñar cadencia de actualizaciones (mensual o cuando haya hitos)\n[ ] T-195 Diseñar canal #anuncios en Discord\n[ ] T-196 Diseñar anuncios en Steam Community Hub\n[ ] T-197 Diseñar anuncios en Twitter/X\n[ ] T-198 Diseñar sitio web (blog/updates)\n[ ] T-199 Diseñar AMAs cada 3-6 meses\n[ ] T-200 Diseñar AMAs en Discord o Reddit\n[ ] T-201 Diseñar duración de AMAs (1-2 horas)\n[ ] T-202 Diseñar reglas de AMAs (preguntas respetuosas, sin spoilers)\n[ ] T-203 Diseñar showcases cada 1-2 meses\n[ ] T-204 Diseñar plataformas para showcases (Twitter/X, YouTube, Discord)\n[ ] T-205 Diseñar contenido de showcases (features, arte, música, efectos)\n[ ] T-206 Diseñar community/rules.md\n[ ] T-207 Diseñar community/changelog.md\n[ ] T-208 Diseñar community/communication_guidelines.md\n[ ] T-209 Diseñar community/moderation_protocol.md\n[ ] T-210 Diseñar community/dmca_template.txt\n[ ] T-211 Diseñar community/official_accounts.md
+# Checklist de Tareas — M100 100-Community-Management
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/100-Community-Management/plan-actual/05-Checklist.md
+
+- [ ] T-001 Crear reglas comunitarias
+- [x] T-002 Crear moderación
+- [x] T-003 Crear sistema de reportes
+- [x] T-004 Crear canales de feedback
+- [ ] T-005 Crear roadmap público si conviene
+- [ ] T-006 Crear changelog público
+- [ ] T-007 Responder dudas
+- [ ] T-008 Identificar bugs reportados
+- [x] T-009 Recopilar sugerencias
+- [ ] T-010 Evitar promesas imposibles
+- [ ] T-011 Gestionar expectativas
+- [ ] T-012 Gestionar críticas
+- [ ] T-013 Gestionar contenido tóxico
+- [ ] T-014 Gestionar spoilers
+- [x] T-015 Gestionar filtraciones
+- [x] T-016 Gestionar impersonación
+- [ ] T-017 Gestionar copyright claims
+- [x] T-018 Definir principios fundamentales (respeto, inclusividad, comunicación constructiva)
+- [x] T-019 Definir regla 1: sin contenido tóxico, discriminación o acoso
+- [ ] T-020 Definir regla 2: spoilers deben etiquetarse correctamente
+- [ ] T-021 Definir regla 3: contenido NSFW está prohibido
+- [x] T-022 Definir regla 4: no spam ni autopromoción excesiva
+- [ ] T-023 Definir regla 5: respetar derechos de autor
+- [x] T-024 Definir regla 6: no impersonar desarrolladores oficiales
+- [ ] T-025 Definir regla 7: expectativas realistas sobre el desarrollo
+- [ ] T-026 Definir regla 8: feedback constructivo es bienvenido
+- [x] T-027 Definir consecuencias (advertencia, mute, ban)
+- [x] T-028 Definir sistema de apelación para bans injustificados
+- [ ] T-029 Diseñar documento de reglas (rules.md)
+- [x] T-030 Diseñar publicación de reglas en Discord
+- [x] T-031 Diseñar publicación de reglas en Steam Community Hub
+- [x] T-032 Diseñar publicación de reglas en redes sociales
+- [ ] T-033 Definir rol Admin (control total, puede banear, gestionar roles)
+- [x] T-034 Definir rol Mod (puede mutear, kickear, banear temporalmente, gestionar reportes)
+- [x] T-035 Definir rol Helper (puede responder dudas, reportar contenido, moderar básico)
+- [x] T-036 Definir rol Usuario (puede reportar contenido, participar en canales)
+- [ ] T-037 Definir permisos por rol
+- [x] T-038 Diseñar sistema de logs de acciones (ban, mute, kick)
+- [x] T-039 Diseñar sistema de apelación para bans injustificados
+- [x] T-040 Diseñar configuración de roles en Discord (roles.json)
+- [x] T-041 Diseñar implementación de roles en Steam (moderators)
+- [x] T-042 Definir categoría: contenido tóxico (acoso, discriminación, spam)
+- [ ] T-043 Definir categoría: spoilers no etiquetados
+- [ ] T-044 Definir categoría: NSFW inapropiado
+- [x] T-045 Definir categoría: impersonación
+- [ ] T-046 Definir categoría: copyright infringement
+- [x] T-047 Definir categoría: otro (con descripción)
+- [x] T-048 Diseñar workflow de reportes (usuario reporta → moderador revisa → acción)
+- [x] T-049 Diseñar notificación a moderadores
+- [x] T-050 Diseñar notificación al usuario que reportó
+- [x] T-051 Diseñar notificación al usuario reportado (si aplica acción)
+- [x] T-052 Diseñar dashboard de reportes para moderadores
+- [x] T-053 Diseñar logs de reportes y acciones
+- [x] T-054 Diseñar configuración de categorías (report_categories.json)
+- [x] T-055 Diseñar canal #bugs en Discord
+- [x] T-056 Diseñar canal #sugerencias en Discord
+- [x] T-057 Diseñar canal #preguntas en Discord
+- [x] T-058 Diseñar canal #off-topic en Discord
+- [x] T-059 Diseñar canal #anuncios en Discord
+- [x] T-060 Diseñar canal #faq en Discord (solo lectura)
+- [x] T-061 Diseñar canal #changelog en Discord (solo lectura)
+- [x] T-062 Diseñar canal #roadmap en Discord (solo lectura)
+- [x] T-063 Diseñar sección de Discusiones en Steam Community Hub
+- [x] T-064 Diseñar sección de Bugs y Problemas en Steam Community Hub
+- [x] T-065 Diseñar sección de Sugerencias en Steam Community Hub
+- [x] T-066 Diseñar cuenta oficial en Twitter/X
+- [ ] T-067 Diseñar subreddit r/IslaAncestral en Reddit
+- [x] T-068 Diseñar pines con directrices en cada canal
+- [x] T-069 Diseñar bots para redirigir contenido a canales correctos
+- [x] T-070 Definir roadmap público (opcional)
+- [ ] T-071 Definir hitos generales sin fechas irreales
+- [ ] T-072 Definir categorías (Core Gameplay, Content, Technical, Polish)
+- [ ] T-073 Definir estados (Completado, En desarrollo, Planeado, Futuro)
+- [ ] T-074 Definir notas contextuales por hito
+- [ ] T-075 Diseñar roadmap en sitio web
+- [x] T-076 Diseñar roadmap en Steam Community Hub
+- [x] T-077 Diseñar roadmap en Discord (canal #roadmap)
+- [x] T-078 Diseñar actualización periódica (mensual o cuando haya cambios)
+- [x] T-079 Diseñar configuración de roadmap (roadmap.json)
+- [ ] T-080 Definir formato de changelog (Keep a Changelog)
+- [ ] T-081 Definir versiones con fechas
+- [ ] T-082 Definir categorías (Added, Changed, Fixed, Removed)
+- [ ] T-083 Definir notas importantes por cambio
+- [ ] T-084 Definir links a issues resueltos
+- [x] T-085 Diseñar changelog en Steam (announcements)
+- [x] T-086 Diseñar changelog en Discord (canal #changelog)
+- [ ] T-087 Diseñar changelog en sitio web
+- [x] T-088 Diseñar actualización con cada actualización del juego
+- [x] T-089 Diseñar integración con M102 (Bug Tracking) para issues resueltos
+- [ ] T-090 Definir SLA de 48 horas para respuestas
+- [ ] T-091 Definir SLA de 24 horas para dudas simples
+- [ ] T-092 Definir triaje de dudas (técnicas, de diseño, generales)
+- [x] T-093 Diseñar base de conocimiento (FAQ)
+- [ ] T-094 Diseñar FAQ general (¿cuándo sale?, ¿plataformas?, ¿multijugador?)
+- [x] T-095 Diseñar FAQ técnica (requisitos de sistema, controladores)
+- [ ] T-096 Diseñar FAQ de gameplay (¿combate?, ¿permadeath?)
+- [ ] T-097 Diseñar FAQ en sitio web
+- [x] T-098 Diseñar FAQ en Steam Community Hub
+- [x] T-099 Diseñar FAQ en Discord (canal #faq)
+- [x] T-100 Diseñar sistema de etiquetas para dudas frecuentes
+- [x] T-101 Diseñar respuestas documentadas para reutilización
+- [x] T-102 Diseñar configuración de FAQ (faq.json)
+- [x] T-103 Definir sistema de triage de bugs
+- [ ] T-104 Definir categorías (crítico, mayor, menor, trivial)
+- [x] T-105 Definir verificación (reproducible, no reproducible)
+- [x] T-106 Diseñar integración con M102 (Bug Tracking)
+- [ ] T-107 Diseñar workflow (usuario reporta → triage → issue en M102)
+- [x] T-108 Diseñar plantilla de reporte de bug
+- [x] T-109 Diseñar sistema de etiquetas para categorías
+- [x] T-110 Diseñar respuesta automática de confirmación
+- [x] T-111 Diseñar explicación al usuario si no es bug
+- [x] T-112 Definir categorización (gameplay, UI, contenido, técnica, performance)
+- [x] T-113 Definir evaluación (alineado con visión, factible, out of scope)
+- [x] T-114 Diseñar integración con M102 (Bug Tracking) para tracking
+- [x] T-115 Diseñar workflow (usuario sugiere → evaluación → documentación)
+- [x] T-116 Diseñar plantilla de sugerencia
+- [x] T-117 Diseñar sistema de etiquetas para categorías
+- [x] T-118 Diseñar tablero de sugerencias (Trello, GitHub Projects)
+- [x] T-119 Diseñar respuesta documentada para cada sugerencia
+- [ ] T-120 Diseñar respuesta constructiva siempre
+- [ ] T-121 Definir directriz: no prometer fechas irreales
+- [ ] T-122 Definir directriz: comunicar hitos genéricos en lugar de fechas específicas
+- [ ] T-123 Definir directriz: ser transparente sobre retrasos cuando ocurran
+- [x] T-124 Definir directriz: establecer expectativas realistas desde el inicio
+- [x] T-125 Definir directriz: comunicar cambios de dirección cuando sean necesarios
+- [x] T-126 Diseñar comunicación honesta sobre estado del desarrollo
+- [ ] T-127 Diseñar roadmap con hitos genéricos (sin fechas)
+- [x] T-128 Diseñar anuncios cuando haya cambios significativos
+- [ ] T-129 Diseñar respuestas a preguntas sobre fechas ("cuando esté listo")
+- [x] T-130 Diseñar documentación de directrices (communication_guidelines.md)
+- [x] T-131 Definir distinción entre críticas constructivas y destructivas
+- [x] T-132 Definir respuesta a críticas constructivas con agradecimiento
+- [x] T-133 Definir ignorar o moderar críticas destructivas
+- [ ] T-134 Definir aprender de críticas válidas
+- [x] T-135 Definir documentación de feedback recurrente para mejora
+- [x] T-136 Diseñar directrices para moderadores sobre cómo responder
+- [x] T-137 Diseñar documentación de feedback recurrente
+- [ ] T-138 Diseñar respuestas ejemplares para críticas comunes
+- [x] T-139 Diseñar sistema de escalado para críticas serias
+- [x] T-140 Definir contenido tóxico (acoso, discriminación, odio, spam)
+- [ ] T-141 Definir NSFW inapropiado
+- [ ] T-142 Definir lenguaje excesivamente vulgar
+- [x] T-143 Definir acciones (advertencia, mute temporal, ban temporal, ban permanente)
+- [x] T-144 Definir primera ofensa: advertencia
+- [ ] T-145 Definir segunda ofensa: mute temporal (24-48 horas)
+- [ ] T-146 Definir tercera ofensa: ban temporal (7 días)
+- [ ] T-147 Definir cuarta ofensa: ban permanente
+- [x] T-148 Diseñar bots de moderación automática (Discord mod bots)
+- [x] T-149 Diseñar logs de advertencias y acciones
+- [x] T-150 Diseñar sistema de apelación para bans injustificados
+- [ ] T-151 Diseñar directrices claras sobre qué constituye contenido tóxico
+- [ ] T-152 Definir etiquetado obligatorio de spoilers
+- [x] T-153 Definir etiquetado en Discord (||texto||)
+- [x] T-154 Definir etiquetado en Steam ([SPOILER] en título)
+- [x] T-155 Definir etiquetado en redes sociales (#spoiler)
+- [x] T-156 Diseñar canales específicos para contenido de historia (#story-spoilers)
+- [x] T-157 Diseñar secciones separadas para spoilers en Steam
+- [ ] T-158 Definir temporales para contenido nuevo (30 días post-lanzamiento)
+- [x] T-159 Definir reglas sobre spoilers en Steam y redes sociales
+- [ ] T-160 Diseñar recordatorios temporales después de lanzamiento
+- [x] T-161 Diseñar canales ocultos para contenido muy sensible
+- [x] T-162 Definir filtraciones (contenido no público, assets, builds, código)
+- [ ] T-163 Definir protocolo: eliminar contenido inmediatamente
+- [ ] T-164 Definir protocolo: contactar plataforma para takedown
+- [x] T-165 Definir protocolo: investigar fuente de filtración (si es posible)
+- [x] T-166 Definir protocolo: comunicar con comunidad que contenido no es oficial
+- [x] T-167 Diseñar protocolo documentado para filtraciones
+- [x] T-168 Diseñar contactos de plataformas (Steam, Discord, Reddit)
+- [ ] T-169 Diseñar plantillas de DMCA/takedown
+- [x] T-170 Diseñar comunicación con comunidad sobre contenido filtrado
+- [x] T-171 Definir impersonación (usuarios que pretenden ser desarrolladores oficiales)
+- [x] T-172 Definir cuentas falsas que prometen contenido no oficial
+- [ ] T-173 Definir scams utilizando nombre del juego
+- [x] T-174 Definir verificación oficial de desarrolladores (etiquetas de verified dev)
+- [x] T-175 Definir reporte de cuentas de impersonación a plataformas
+- [x] T-176 Definir comunicación con comunidad sobre cuentas oficiales
+- [x] T-177 Definir ban inmediato de impersonadores en canales oficiales
+- [x] T-178 Diseñar etiquetas de verified dev en Discord
+- [x] T-179 Diseñar cuentas oficiales verificadas en Steam (developer badge)
+- [x] T-180 Diseñar listado de cuentas oficiales en sitio web
+- [x] T-181 Diseñar protocolo de reporte de impersonación
+- [x] T-182 Definir copyright claims en contenido de fans (fan art, fan music, fan fiction)
+- [ ] T-183 Definir copyright claims en videos (let's plays, streams)
+- [x] T-184 Definir copyright claims en mods y contenido generado por usuarios
+- [ ] T-185 Definir directrices: fair use para contenido transformador
+- [ ] T-186 Definir directrices: política de contenido de fans en sitio web
+- [x] T-187 Definir directrices: atribución requerida para contenido de fans
+- [ ] T-188 Definir directrices: respeto a copyright de terceros
+- [ ] T-189 Diseñar política de contenido de fans documentada
+- [x] T-190 Diseñar directrices de atribución
+- [x] T-191 Diseñar sistema de reporte de infracción de copyright
+- [ ] T-192 Diseñar respuesta a claims de terceros
+- [x] T-193 Definir actualizaciones periódicas sobre estado del desarrollo
+- [x] T-194 Definir anuncios de hitos importantes
+- [x] T-195 Definir comunicación de retrasos cuando sean significativos
+- [ ] T-196 Definir AMAs ocasionales (Ask Me Anything)
+- [ ] T-197 Definir showcases de contenido en desarrollo
+- [x] T-198 Diseñar cadencia de actualizaciones (mensual o cuando haya hitos)
+- [x] T-199 Diseñar canal #anuncios en Discord
+- [x] T-200 Diseñar anuncios en Steam Community Hub
+- [x] T-201 Diseñar anuncios en Twitter/X
+- [ ] T-202 Diseñar sitio web (blog/updates)
+- [ ] T-203 Diseñar AMAs cada 3-6 meses
+- [x] T-204 Diseñar AMAs en Discord o Reddit
+- [x] T-205 Diseñar duración de AMAs (1-2 horas)
+- [ ] T-206 Diseñar reglas de AMAs (preguntas respetuosas, sin spoilers)
+- [ ] T-207 Diseñar showcases cada 1-2 meses
+- [x] T-208 Diseñar plataformas para showcases (Twitter/X, YouTube, Discord)
+- [ ] T-209 Diseñar contenido de showcases (features, arte, música, efectos)
+- [x] T-210 Diseñar community/rules.md
+- [x] T-211 Diseñar community/roles.json
+- [x] T-212 Diseñar community/report_categories.json
+- [x] T-213 Diseñar community/faq.json
+- [x] T-214 Diseñar community/roadmap.json
+- [x] T-215 Diseñar community/changelog.md
+- [x] T-216 Diseñar community/communication_guidelines.md
+- [x] T-217 Diseñar community/moderation_protocol.md
+- [x] T-218 Diseñar community/dmca_template.txt
+- [x] T-219 Diseñar community/official_accounts.md
+- [x] T-220 Diseñar scripts/discord_setup.py
+- [x] T-221 Diseñar scripts/steam_announcement.py
+- [x] T-222 Diseñar scripts/report_analyzer.py

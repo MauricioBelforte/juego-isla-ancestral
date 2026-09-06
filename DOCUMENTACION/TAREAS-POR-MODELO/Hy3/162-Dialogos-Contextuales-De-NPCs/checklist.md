@@ -67,6 +67,24 @@
 [ ] T-057 110. Verificar que la Sanadora tenga remedios de hierbas de AUR
 [ ] T-058 111. Verificar coherencia de AUR con eventos de M22
 [ ] T-059 112. Verificar que el Guardia Ancestral proteja templo consistentemente
+
+## Auditoría cross-module (T-AUDIT-001 → Log 665, 2026-09-04, Hy3/WorkBuddy)
+- [x] Ejecutada `audit_crossmodule_coherence.py` sobre M162 + red de módulos.
+- [ALTO] M162 NO está integrado en producción: `villager_dialogue_hook.gd` (M19)
+  usa `dialogue_id` fijo; 0 llamadas a `ContextualDialogueManager.seleccionar()`
+  fuera de tests. → Coordinar integración con M19 (T-M162-003).
+- [MEDIO] 1 grafo huérfano: `riz_001_cap0_saludo_repeat.json` (sin entry en registry).
+- [MEDIO] `flag_capitulo` / `flag_ubicacion_` / `flag_quest_` sin productor externo
+  a WorldState detectado (M22/M160). Verificar exposición antes de integrar M162.
+- Entregable: `.workbuddy-ai/audit_crossmodule_coherence.py` (reutilizable, apto CI).
+
+## T-M162-003 — Hardening de `seleccionar` (2026-09-04, Hy3/WorkBuddy)
+- [x] Defensa ante `contexto` nulo/no-Dictionary en `seleccionar` (usa `ctx` saneado).
+- [x] `test_m162_robustez.gd` (8 checks): contexto vacío→fallback, claves faltantes,
+  NPC inexistente, tipo inexistente, regresión aur_005 día/noche. **Runtime: 0 fallos**
+  (engine 4.5 local headless).
+- [ ] Pendiente: integrar M162 en `villager_dialogue_hook.gd` (M19) — requiere
+  coordinar con dueño de M19 (ver finding ALTO de Log 665).
 [ ] T-060 114. Verificar que las condiciones de amistad filtran correctamente (0-29, 30-69, 70-100) — mecanismo listo, contenido por nivel de amistad pendiente
 [ ] T-061 116. Verificar que las franjas horarias generan diálogos diferentes — mecanismo listo, contenido por hora pendiente
 [ ] T-062 120. Verificar que el sistema no genera errores en runtime (null checks, validación) — pendiente ejecutar `test_contextual_dialogue_m162.gd` en entorno con Godot

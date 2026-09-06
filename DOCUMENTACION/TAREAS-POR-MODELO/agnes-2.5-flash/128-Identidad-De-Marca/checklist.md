@@ -1,1 +1,107 @@
-# Tareas M128 — Identidad-De-Marca\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/128-Identidad-De-Marca/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Verificar disponibilidad de dominio web (islaancestral.com)\n[ ] T-002 Registrar redes sociales con nombre consistente\n[ ] T-003 Definir política de cease & desist\n[ ] T-004 Crear alertas de monitoreo de trademark\n[ ] T-005 Documentar territorios registrados y pendientes\n[ ] T-006 Diseñar logo principal del juego\n[ ] T-007 Crear variante mono (B/N) del logo\n[ ] T-008 Crear variante icono (app icon) 512x512\n[ ] T-009 Crear variante horizontal para headers\n[ ] T-010 Crear variante vertical para merchandise\n[ ] T-011 Definir espacio libre (clear space) mínimo\n[ ] T-012 Definir tamaño mínimo (32px digital, 10mm impresión)\n[ ] T-013 Documentar usos permitidos del logo\n[ ] T-014 Documentar usos PROHIBIDOS del logo\n[ ] T-015 Exportar en formatos: PNG, SVG, AI\n[ ] T-016 Crear versiones para fondo claro y oscuro\n[ ] T-017 Test de legibilidad en tamaños pequeños\n[ ] T-018 Test de impresión en merchandise\n[ ] T-019 Aprobar logo final con equipo\n[ ] T-020 Distribuir logo a partners y prensa\n[ ] T-021 Definir color primario (Azul Bosque #2E5A4C)\n[ ] T-022 Definir color secundario (Dorado Anciano #D4A843)\n[ ] T-023 Definir color de acento (Blanco Perla #F5F0E8)\n[ ] T-024 Definir neutros (Carbón, Gris Piedra, Crema)\n[ ] T-025 Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)\n[ ] T-026 Verificar contraste WCAG AA para cada par de colores\n[ ] T-027 Crear paleta en formato ASE/CLR\n[ ] T-028 Documentar RGB, CMYK y HEX de cada color\n[ ] T-029 Crear variaciones para modo oscuro\n[ ] T-030 Distribuir paleta al equipo de diseño\n[ ] T-031 Seleccionar fuente principal (títulos)\n[ ] T-032 Seleccionar fuente secundaria (cuerpo)\n[ ] T-033 Verificar licencias de cada fuente\n[ ] T-034 Definir jerarquía de tamaños (H1-H6, body, caption)\n[ ] T-035 Definir pesos (regular, bold, light)\n[ ] T-036 Crear muestras de tipografía\n[ ] T-037 Documentar uso en interfaces\n[ ] T-038 Distribuir fuentes al equipo\n[ ] T-039 Verificar que fuentes son incluidas en builds\n[ ] T-040 Redactar introducción y propósito\n[ ] T-041 Documentar identidad de marca (nombre, tagline, valores)\n[ ] T-042 Documentar reglas de logo (variantes, clear space, usos)\n[ ] T-043 Documentar paleta de colores completa\n[ ] T-044 Documentar tipografía y jerarquía\n[ ] T-045 Documentar iconografía y fotografía\n[ ] T-046 Documentar uso en redes sociales\n[ ] T-047 Documentar restricciones de merchandise\n[ ] T-048 Incluir contacto para aprobación de uso\n[ ] T-049 Registrar dominio islaancestral.com\n[ ] T-050 Crear sitio web con información del juego\n[ ] T-051 Crear perfiles en redes sociales principales\n[ ] T-052 Usar logo y paleta coherentes en toda la web\n[ ] T-053 Crear kit de prensa con assets de marca\n[ ] T-054 Documentar guidelines para redes sociales\n[ ] T-055 Crear plantillas de posts con marca\n[ ] T-056 Definir tono de comunicación\n[ ] T-057 Crear email corporativo (press@islaancestral.com)\n[ ] T-058 Monitorear menciones de la marca\n[ ] T-059 Definir qué productos de merchandise se permiten\n[ ] T-060 Documentar logo mínimo para impresión\n[ ] T-061 Crear template para proveedores de merchandise\n[ ] T-062 Definir proceso de aprobación de diseños\n[ ] T-063 Documentar restricciones de calidad\n[ ] T-064 Definir estándares de calidad para merchandise (textil, cerámica, papel)\n[ ] T-065 Crear guía de colores para impresión (CMYK vs. RGB)\n[ ] T-066 Documentar process de muestreo antes de producción\n[ ] T-067 Definir proveedores aprobados por región\n[ ] T-068 Crear checklist de QA para merchandise recibido\n[ ] T-069 Crear BrandConfig.gd con colores oficiales\n[ ] T-070 Test de contraste WCAG AA para todos los pares de colores\n[ ] T-071 Test de logo en tamaños mínimos\n[ ] T-072 Test de legibilidad de tipografía\n[ ] T-073 Validar que UI del juego usa paleta de marca\n[ ] T-074 Validar que builds incluyen fuentes correctas\n[ ] T-075 Test de impresión de logo en merchandise\n[ ] T-076 Auditoría visual pre-lanzamiento\n[ ] T-077 Documentar hallazgos y correcciones\n[ ] T-078 Crear brand/ con todos los assets\n[ ] T-079 Crear manual-de-marca.pdf\n[ ] T-080 Crear press kit descargable\n[ ] T-081 Distribuir manual a todos los socios\n[ ] T-082 Actualizar manual cuando cambien elementos\n[ ] T-083 Mantener backups de assets de marca\n[ ] T-084 Registrar fecha de última actualización\n[ ] T-085 Definir quién puede aprobar cambios de marca\n[ ] T-086 Crear changelog del manual de marca\n[ ] T-087 Documentar proceso para nuevos partners\n[ ] T-088 Verificar que M97 (Steam Store Page) usa identidad de marca correcta\n[ ] T-089 Verificar que M98 (Trailer) usa logo y colores de marca\n[ ] T-090 Verificar que M99 (Marketing) sigue manual de marca\n[ ] T-091 Verificar que M53 (UI/UX) usa paleta y tipografía de marca\n[ ] T-092 Verificar que M131 (Créditos) usa formato de marca
+# Checklist de Tareas — M128 128-Identidad-De-Marca
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/128-Identidad-De-Marca/plan-actual/05-Checklist.md
+
+- [x] T-001 Cargar datos desde JSON (secciones/politicas/elementos) [S]
+- [x] T-002 Detectar errores estructurales (id, nombre, etc) [S]
+- [x] T-003 Test headless de validacion [M]
+- [x] T-004 Datos data-driven en data/legal/ [S]
+- [ ] T-005 Verificar disponibilidad de dominio web (islaancestral.com)
+- [x] T-006 Registrar redes sociales con nombre consistente
+- [x] T-007 Documentar proceso de registro de trademark
+- [ ] T-008 Definir política de cease & desist
+- [ ] T-009 Crear alertas de monitoreo de trademark
+- [x] T-010 Documentar territorios registrados y pendientes
+- [x] T-011 Diseñar logo principal del juego
+- [x] T-012 Crear variante mono (B/N) del logo
+- [ ] T-013 Crear variante icono (app icon) 512x512
+- [ ] T-014 Crear variante horizontal para headers
+- [x] T-015 Crear variante vertical para merchandise
+- [x] T-016 Definir espacio libre (clear space) mínimo
+- [ ] T-017 Definir tamaño mínimo (32px digital, 10mm impresión)
+- [x] T-018 Documentar usos permitidos del logo
+- [x] T-019 Documentar usos PROHIBIDOS del logo
+- [ ] T-020 Exportar en formatos: PNG, SVG, AI
+- [ ] T-021 Crear versiones para fondo claro y oscuro
+- [ ] T-022 Test de legibilidad en tamaños pequeños
+- [x] T-023 Test de impresión en merchandise
+- [x] T-024 Aprobar logo final con equipo
+- [x] T-025 Distribuir logo a partners y prensa
+- [x] T-026 Definir color primario (Azul Bosque #2E5A4C)
+- [x] T-027 Definir color secundario (Dorado Anciano #D4A843)
+- [x] T-028 Definir color de acento (Blanco Perla #F5F0E8)
+- [ ] T-029 Definir neutros (Carbón, Gris Piedra, Crema)
+- [x] T-030 Definir colores secundarios (Verde Hoja, Terracota, Cielo Claro)
+- [x] T-031 Verificar contraste WCAG AA para cada par de colores
+- [x] T-032 Crear paleta en formato ASE/CLR
+- [x] T-033 Documentar RGB, CMYK y HEX de cada color
+- [x] T-034 Crear variaciones para modo oscuro
+- [x] T-035 Distribuir paleta al equipo de diseño
+- [x] T-036 Seleccionar fuente principal (títulos)
+- [x] T-037 Seleccionar fuente secundaria (cuerpo)
+- [x] T-038 Seleccionar fuente monospace (código/datos)
+- [x] T-039 Verificar licencias de cada fuente
+- [ ] T-040 Definir jerarquía de tamaños (H1-H6, body, caption)
+- [ ] T-041 Definir pesos (regular, bold, light)
+- [ ] T-042 Crear muestras de tipografía
+- [x] T-043 Documentar uso en interfaces
+- [ ] T-044 Distribuir fuentes al equipo
+- [x] T-045 Verificar que fuentes son incluidas en builds
+- [x] T-046 Crear estructura del manual (10 secciones)
+- [x] T-047 Redactar introducción y propósito
+- [x] T-048 Documentar identidad de marca (nombre, tagline, valores)
+- [x] T-049 Documentar reglas de logo (variantes, clear space, usos)
+- [x] T-050 Documentar paleta de colores completa
+- [x] T-051 Documentar tipografía y jerarquía
+- [x] T-052 Documentar iconografía y fotografía
+- [x] T-053 Documentar uso en redes sociales
+- [x] T-054 Documentar restricciones de merchandise
+- [x] T-055 Incluir contacto para aprobación de uso
+- [ ] T-056 Registrar dominio islaancestral.com
+- [x] T-057 Crear sitio web con información del juego
+- [x] T-058 Crear perfiles en redes sociales principales
+- [x] T-059 Usar logo y paleta coherentes en toda la web
+- [x] T-060 Crear kit de prensa con assets de marca
+- [x] T-061 Documentar guidelines para redes sociales
+- [x] T-062 Crear plantillas de posts con marca
+- [x] T-063 Definir tono de comunicación
+- [ ] T-064 Crear email corporativo (press@islaancestral.com)
+- [x] T-065 Monitorear menciones de la marca
+- [x] T-066 Definir qué productos de merchandise se permiten
+- [x] T-067 Documentar logo mínimo para impresión
+- [x] T-068 Crear template para proveedores de merchandise
+- [x] T-069 Definir proceso de aprobación de diseños
+- [x] T-070 Documentar restricciones de calidad
+- [x] T-071 Definir estándares de calidad para merchandise (textil, cerámica, papel)
+- [x] T-072 Crear guía de colores para impresión (CMYK vs. RGB)
+- [x] T-073 Documentar process de muestreo antes de producción
+- [ ] T-074 Definir proveedores aprobados por región
+- [x] T-075 Crear checklist de QA para merchandise recibido
+- [x] T-076 Crear BrandConfig.gd con colores oficiales
+- [x] T-077 Crear BrandValidator.gd para validar coherencia
+- [x] T-078 Test de contraste WCAG AA para todos los pares de colores
+- [x] T-079 Test de logo en tamaños mínimos
+- [ ] T-080 Test de legibilidad de tipografía
+- [x] T-081 Validar que UI del juego usa paleta de marca
+- [x] T-082 Validar que builds incluyen fuentes correctas
+- [x] T-083 Test de impresión de logo en merchandise
+- [x] T-084 Auditoría visual pre-lanzamiento
+- [x] T-085 Documentar hallazgos y correcciones
+- [x] T-086 Crear brand/ con todos los assets
+- [x] T-087 Crear manual-de-marca.pdf
+- [ ] T-088 Crear press kit descargable
+- [x] T-089 Distribuir manual a todos los socios
+- [ ] T-090 Actualizar manual cuando cambien elementos
+- [x] T-091 Mantener backups de assets de marca
+- [x] T-092 Registrar fecha de última actualización
+- [x] T-093 Definir quién puede aprobar cambios de marca
+- [x] T-094 Crear changelog del manual de marca
+- [x] T-095 Documentar proceso para nuevos partners
+- [x] T-096 Verificar que M97 (Steam Store Page) usa identidad de marca correcta
+- [x] T-097 Verificar que M98 (Trailer) usa logo y colores de marca
+- [x] T-098 Verificar que M99 (Marketing) sigue manual de marca
+- [x] T-099 Verificar que M53 (UI/UX) usa paleta y tipografía de marca
+- [x] T-100 Verificar que M131 (Créditos) usa formato de marca

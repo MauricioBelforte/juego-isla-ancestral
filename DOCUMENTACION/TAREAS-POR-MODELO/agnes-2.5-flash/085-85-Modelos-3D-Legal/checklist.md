@@ -1,0 +1,107 @@
+# Checklist de Tareas — M85 85-Modelos-3D-Legal
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/85-Modelos-3D-Legal/plan-actual/05-Checklist.md
+
+- [x] T-001 Definir Resource ModelLicense con campos: model_name, model_type, license_type, licensor, license_scope, perpetual, commercial_use, attribution_required, attribution_text, redistribution_allowed, modification_allowed, territory, license_document_path, notes
+- [x] T-002 Definir enum ModelType: ORIGINAL, STOCK, OPEN_SOURCE, AI_GENERATED, MODIFIED
+- [x] T-003 Definir enum LicenseScope: EXCLUSIVE, NON_EXCLUSIVE, SOLE
+- [x] T-004 Crear Resource ModelCredit con campos: artist_name, role, contribution, model_list, contract_reference, payment_status
+- [x] T-005 Documentar diferencias entre Work-for-Hire y License para modelos
+- [x] T-006 Definir regla: modelos core = Work-for-Hire, props secundarios = License
+- [x] T-007 Definir regla: modelos de IA siempre con artista humano como autor final
+- [x] T-008 Crear template de contrato Work-for-Hire para artistas 3D
+- [x] T-009 Crear template de licencia para modelos de stock
+- [x] T-010 Crear template de attribution para modelos CC
+- [x] T-011 Definir proceso de verificación de licencias pre-import
+- [x] T-012 Definir política de uso de modelos editoriales (NO permitidos)
+- [x] T-013 Documentar leyes relevantes por territorio
+- [x] T-014 Crear checklist de verificación pre-build para modelos
+- [x] T-015 Definir proceso de handling de modelos sin licencia
+- [ ] T-016 Template Work-for-Hire con cesión total de PI
+- [x] T-017 Cláusula de credito obligatorio en todos los builds
+- [ ] T-018 Cláusula de pago upfront (flat fee)
+- [x] T-019 Cláusula de regalías opcionales para DLC/merchandise
+- [x] T-020 Cláusula de confidencialidad
+- [ ] T-021 Cláusula de garantía de originalidad
+- [x] T-022 Cláusula de release de modelos
+- [ ] T-023 Cláusula de jurisdiction y ley aplicable
+- [x] T-024 Template de anexo para especificaciones de entrega
+- [x] T-025 Template de acta de entrega y aceptación
+- [x] T-026 Verificar perpetual license (no subscription)
+- [x] T-027 Verificar uso comercial permitido
+- [ ] T-028 Verificar attribution requirements
+- [x] T-029 Guardar copia de licencia en repositorio
+- [x] T-030 Documentar restricciones de redistribución
+- [ ] T-031 Verificar si requiere credito en credits
+- [ ] T-032 Verificar restriction de territorio
+- [ ] T-033 Verificar restriction de plataforma
+- [ ] T-034 Crear inventario de todas las librerías de stock
+- [x] T-035 Proceso de verificación anual de licencias
+- [x] T-036 Verificar licencia CC (BY, BY-SA, BY-NC)
+- [x] T-037 Cumplir con attribution en TODOS los builds
+- [x] T-038 Verificar si SA requiere relicenciar el juego
+- [x] T-039 Documentar attribution en créditos
+- [x] T-040 Verificar si el modelo fue modificado (SA aplica)
+- [x] T-041 Crear lista de modelos CC utilizados
+- [x] T-042 Verificar que no hay NC en uso comercial
+- [x] T-043 Documentar fuente de cada modelo CC
+- [x] T-044 Proceso de actualización cuando modelo se actualiza
+- [x] T-045 Verificar compatibilidad entre licencias CC
+- [x] T-046 Crear ModelLegalManager con validate_all_models()
+- [x] T-047 Implementar add_license() y add_credit()
+- [x] T-048 Implementar generate_credits_text() (formato compacto)
+- [x] T-049 Implementar generate_credits_web() (formato detallado)
+- [x] T-050 Implementar save_build_credits() para builds
+- [x] T-051 Agrupar créditos por rol (3D Artist, Modeler, Sculptor)
+- [x] T-052 Incluir modelos específicos por artista
+- [x] T-053 Referenciar contrato en cada crédito
+- [ ] T-054 Incluir estado de pago en cada crédito
+- [x] T-055 Generar archivo MODEL_CREDITS.txt en cada build
+- [ ] T-056 Definir regla: AI es herramienta, no autor
+- [ ] T-057 Definir regla: artista humano es autor final
+- [x] T-058 Requerir disclosure en créditos de modelos con IA
+- [x] T-059 Verificar que la herramienta de IA permita uso comercial
+- [x] T-060 Documentar qué herramientas de IA se usaron
+- [x] T-061 Guardar logs de generación de modelos por IA
+- [x] T-062 Validar que modelos de IA no infringan copyrights
+- [x] T-063 Definir proceso de review humano para modelos de IA
+- [x] T-064 Incluir advertencia en créditos si aplica
+- [x] T-065 Verificar que modelos de IA son originales
+- [x] T-066 Test de ModelLicenseValidator con licencia completa
+- [x] T-067 Test de ModelLicenseValidator con licencia sin attribution
+- [x] T-068 Test de ModelLicenseValidator con licencia no-perpetual
+- [x] T-069 Test de ModelLegalManager con inventario vacío
+- [x] T-070 Test de ModelLegalManager con inventario completo
+- [x] T-071 Test de generación de créditos compactos
+- [x] T-072 Test de generación de créditos web
+- [x] T-073 Test de verificación de uso comercial
+- [x] T-074 Test de edge case: artista con múltiples roles
+- [x] T-075 Test de edge case: modelo con múltiples licencias
+- [x] T-076 Agregar paso de validación de modelos en build_script.gd
+- [x] T-077 Build falla si hay licencia de modelo inválida
+- [x] T-078 Build incluye MODEL_CREDITS.txt automáticamente
+- [x] T-079 Integración con M117 (Build Pipeline)
+- [x] T-080 Integración con M72 (Validación de Builds)
+- [x] T-081 Integración con M71 (Gestión de Assets)
+- [x] T-082 Logging de validación de modelos en build log
+- [x] T-083 Modo dry-run para verificar sin generar outputs
+- [x] T-084 Skip de validación en builds de desarrollo
+- [x] T-085 Generar reporte de licencias de modelos por build
+- [x] T-086 Documentar cada función pública con XML docs
+- [ ] T-087 Crear guía de uso para el equipo de arte
+- [x] T-088 Documentar cómo registrar nuevas licencias
+- [x] T-089 Documentar cómo agregar nuevos créditos
+- [x] T-090 Crear FAQ de licencias de modelos 3D
+- [x] T-091 Tabla de comparación de tipos de licencia
+- [ ] T-092 Ejemplos de uso de cada nodo
+- [x] T-093 Proceso de auditoría de licencias pre-launch
+- [x] T-094 Contacto de abogado especializado
+- [x] T-095 Registro de cambios del módulo
+- [x] T-096 Proceso de actualización de créditos
+- [x] T-097 Template de email para solicitar licencias
+- [x] T-098 Checklist pre-release de modelos legales
+- [ ] T-099 Proceso de handling de claims de copyright
+- [x] T-100 Documentar casos de uso edge (modelos de dominio público)

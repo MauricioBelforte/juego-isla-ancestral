@@ -1,0 +1,184 @@
+# Checklist de Tareas — M88 88-Fuentes-Tipograficas
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/88-Fuentes-Tipograficas/plan-actual/05-Checklist.md
+
+- [ ] T-001 Elegir fuente principal
+- [ ] T-002 Elegir fuente secundaria
+- [ ] T-003 Revisar licencia
+- [ ] T-004 Revisar caracteres
+- [ ] T-005 Revisar tildes
+- [ ] T-006 Revisar ñ
+- [ ] T-007 Revisar símbolos
+- [ ] T-008 Revisar cirílico si corresponde
+- [ ] T-009 Revisar CJK si corresponde
+- [ ] T-010 Revisar legibilidad
+- [ ] T-011 Definir tamaños
+- [ ] T-012 Definir pesos
+- [ ] T-013 Definir tracking
+- [ ] T-014 Definir line height
+- [ ] T-015 Crear jerarquía visual
+- [ ] T-016 Crear estilos de UI
+- [ ] T-017 Optimizar archivos de fuente
+- [ ] T-018 Evaluar Nunito + Fredoka One
+- [ ] T-019 Evaluar Open Sans + Nunito
+- [ ] T-020 Evaluar Quicksand + Baloo
+- [ ] T-021 Seleccionar Nunito + Fredoka One
+- [ ] T-022 Documentar ventajas de Nunito + Fredoka One
+- [ ] T-023 Documentar desventajas de Nunito + Fredoka One
+- [ ] T-024 Documentar ventajas de Open Sans + Nunito
+- [ ] T-025 Documentar desventajas de Open Sans + Nunito
+- [ ] T-026 Documentar ventajas de Quicksand + Baloo
+- [ ] T-027 Documentar desventajas de Quicksand + Baloo
+- [ ] T-028 Revisar SIL Open Font License 1.1
+- [ ] T-029 Definir atribución en créditos (M131)
+- [ ] T-030 Definir atribución para Nunito (Vernon Adams)
+- [ ] T-031 Definir atribución para Fredoka One (Fontfolk)
+- [ ] T-032 Documentar términos de la licencia (uso comercial, modificación, distribución, sublicencia, atribución)
+- [ ] T-033 Definir soporte de tildes (á, é, í, ó, ú, Á, É, Í, Ó, Ú)
+- [ ] T-034 Definir soporte de diéresis (ä, ë, ï, ö, ü)
+- [ ] T-035 Definir soporte de acento grave (à, è, ì, ò, ù)
+- [ ] T-036 Definir soporte de ñ (minúscula y mayúscula)
+- [ ] T-037 Definir soporte de símbolos de puntuación (¡, ¿, ., ,, ;, :, !, ?, (, ), [, ], {, })
+- [ ] T-038 Definir soporte de símbolos matemáticos (+, -, *, /, =, <, >, ≤, ≥)
+- [ ] T-039 Definir soporte de símbolos de moneda ($, €, £, ¥)
+- [ ] T-040 Definir soporte de otros símbolos (@, #, %, &, *, |, ^, ~, `)
+- [ ] T-041 Definir soporte de flechas (→, ←, ↑, ↓)
+- [ ] T-042 Definir soporte de cirílico (alfabeto básico)
+- [ ] T-043 Definir soporte de CJK (no planeado para MVP)
+- [ ] T-044 Definir factores de legibilidad (tamaño, contraste, line height, tracking, peso, espaciado)
+- [ ] T-045 Definir tamaño mínimo (12px para cuerpo)
+- [ ] T-046 Definir contraste (texto oscuro sobre fondo claro, WCAG AA 4.5:1)
+- [ ] T-047 Definir line height (1.2 para cuerpo, 1.0 para títulos)
+- [ ] T-048 Definir tracking (normal 0 para cuerpo, tight -1 para títulos)
+- [ ] T-049 Definir peso (regular 400 para cuerpo, bold 700 para títulos)
+- [ ] T-050 Definir espaciado entre palabras (normal)
+- [ ] T-051 Diseñar pruebas de legibilidad (720p, 1080p, 4K)
+- [ ] T-052 Diseñar pruebas de legibilidad en diferentes dispositivos
+- [ ] T-053 Definir H1 (32px, Bold, título principal)
+- [ ] T-054 Definir H2 (24px, Medium, subtítulo)
+- [ ] T-055 Definir H3 (20px, Regular, título terciario)
+- [ ] T-056 Definir Cuerpo (16px, Regular, texto de UI)
+- [ ] T-057 Definir Pequeño (12px, Regular, texto secundario)
+- [ ] T-058 Definir Micro (10px, Light, texto técnico)
+- [ ] T-059 Definir uso de cada tamaño
+- [ ] T-060 Definir tamaños responsive (720p -20%, 1080p base, 4K +20%)
+- [ ] T-061 Definir Light (300, texto técnico, metadata)
+- [ ] T-062 Definir Regular (400, cuerpo de texto)
+- [ ] T-063 Definir Medium (500, subtítulos, énfasis suave)
+- [ ] T-064 Definir Bold (700, títulos, énfasis fuerte)
+- [ ] T-065 Definir uso de cada peso
+- [ ] T-066 Definir Normal (0, cuerpo de texto)
+- [ ] T-067 Definir Tight (-1, títulos)
+- [ ] T-068 Definir Loose (1, texto técnico)
+- [ ] T-069 Definir uso de cada tracking
+- [ ] T-070 Definir 1.0 (títulos, compacto)
+- [ ] T-071 Definir 1.2 (cuerpo de texto, legible)
+- [ ] T-072 Definir 1.4 (párrafos largos, muy legible)
+- [ ] T-073 Definir uso de cada line height
+- [ ] T-074 Definir jerarquía (H1 > H2 > H3 > cuerpo > pequeño > micro)
+- [ ] T-075 Definir aplicación en menú principal (H1 para título del juego)
+- [ ] T-076 Definir aplicación en menús (H2 para títulos de menú, cuerpo para opciones)
+- [ ] T-077 Definir aplicación en diálogos (H3 para nombre de NPC, cuerpo para texto de diálogo)
+- [ ] T-078 Definir aplicación en misiones (H2 para título de misión, cuerpo para descripción)
+- [ ] T-079 Definir aplicación en HUD (Pequeño para información secundaria)
+- [ ] T-080 Definir aplicación en debug (Micro para información técnica)
+- [ ] T-081 Diseñar Theme (res://ui/theme.tres)
+- [ ] T-082 Diseñar StyleBox (res://ui/style_box_bg.tres)
+- [ ] T-083 Diseñar Label (fuente, tamaño, color, outline)
+- [x] T-084 Diseñar RichTextLabel (fuente, tamaño, BBCode, soporte de caracteres)
+- [ ] T-085 Diseñar Button (fuente, tamaño, color, hover, pressed)
+- [ ] T-086 Definir Font (Nunito)
+- [ ] T-087 Definir Font Size (16px base)
+- [ ] T-088 Definir Font Color (blanco)
+- [ ] T-089 Definir Outline Color (negro)
+- [ ] T-090 Definir Background (gris oscuro)
+- [ ] T-091 Definir Border (2px, blanco)
+- [ ] T-092 Definir Corner Radius (4px)
+- [ ] T-093 Diseñar subsetting (extraer caracteres necesarios)
+- [ ] T-094 Diseñar compresión (WOFF2)
+- [ ] T-095 Diseñar caching (pre-carga)
+- [ ] T-096 Definir reducción de tamaño (500KB a 100KB con subsetting)
+- [ ] T-097 Definir reducción de tamaño (100KB a 50KB con compresión)
+- [ ] T-098 Diseñar FontSubsetter (pyftsubset)
+- [ ] T-099 Diseñar FontCompressor (woff2_compress)
+- [ ] T-100 Diseñar FontCache (pre-carga)
+- [ ] T-101 Diseñar ajustes de tamaño (slider 0.5x a 2x)
+- [ ] T-102 Diseñar ajustes de contraste (toggle alto contraste)
+- [ ] T-103 Diseñar soporte para lectores de pantalla (futuro)
+- [ ] T-104 Diseñar zoom de UI (futuro)
+- [ ] T-105 Diseñar FontSettings (font_scale, high_contrast)
+- [ ] T-106 Diseñar aplicación de ajustes en tiempo real
+- [ ] T-107 Diseñar soporte de latín extendido (español, portugués, francés, alemán, italiano)
+- [ ] T-108 Diseñar soporte de cirílico (ruso, ucraniano)
+- [ ] T-109 Diseñar soporte de CJK (futuro: Noto Sans CJK)
+- [ ] T-110 Diseñar FontLoader (carga de fuente según idioma)
+- [ ] T-111 Diseñar fallback a fuente alternativa
+- [x] T-112 Diseñar sistema de fallback en Godot
+- [ ] T-113 Diseñar Settings (tamaño de fuente, alto contraste, fuente alternativa)
+- [ ] T-114 Diseñar FontSettingsMenu (slider de tamaño, toggle de contraste)
+- [ ] T-115 Diseñar guardado de ajustes en settings
+- [ ] T-116 Diseñar aplicación de ajustes en tiempo real
+- [ ] T-117 Diseñar acceso a ajustes desde menú de settings
+- [ ] T-118 Diseñar theme.tres (default_font, default_font_size, Label, Button, RichTextLabel)
+- [ ] T-119 Diseñar style_box_bg.tres (bg_color, border, corner_radius)
+- [ ] T-120 Diseñar font_sizes.gd (H1, H2, H3, BODY, SMALL, MICRO)
+- [ ] T-121 Diseñar font_weights.gd (LIGHT, REGULAR, MEDIUM, BOLD)
+- [ ] T-122 Diseñar font_tracking.gd (NORMAL, TIGHT, LOOSE)
+- [ ] T-123 Diseñar line_height.gd (TITLE, BODY, PARAGRAPH)
+- [ ] T-124 Diseñar GameLabel (size, weight, tracking)
+- [x] T-125 Diseñar GameRichTextLabel (size, weight, BBCode)
+- [ ] T-126 Diseñar GameButton (size, weight, hover, pressed)
+- [x] T-127 Diseñar implementación de GameLabel
+- [x] T-128 Diseñar implementación de GameRichTextLabel
+- [x] T-129 Diseñar implementación de GameButton
+- [ ] T-130 Diseñar FontCache (pre-carga de fuentes)
+- [ ] T-131 Diseñar preload_fonts()
+- [ ] T-132 Diseñar get_font()
+- [ ] T-133 Diseñar cache de nunito_regular, nunito_bold, nunito_medium, nunito_light
+- [ ] T-134 Diseñar cache de fredoka_one
+- [ ] T-135 Diseñar FontSettings (font_scale, high_contrast)
+- [ ] T-136 Diseñar apply_settings()
+- [ ] T-137 Diseñar aplicación de font_scale
+- [ ] T-138 Diseñar aplicación de high_contrast
+- [ ] T-139 Diseñar FontLoader (carga de fuente según idioma)
+- [ ] T-140 Diseñar load_font_for_language()
+- [ ] T-141 Diseñar soporte para español, portugués, francés, alemán, italiano
+- [ ] T-142 Diseñar soporte para ruso, ucraniano
+- [ ] T-143 Diseñar soporte para chino, japonés, coreano (futuro)
+- [ ] T-144 Diseñar FontSettingsMenu (slider de tamaño, toggle de contraste)
+- [ ] T-145 Diseñar _on_font_scale_slider_value_changed()
+- [ ] T-146 Diseñar _on_high_contrast_toggle_toggled()
+- [ ] T-147 Diseñar apply_font_scale()
+- [ ] T-148 Diseñar apply_high_contrast()
+- [ ] T-149 Diseñar ruta assets/fonts/nunito/
+- [ ] T-150 Diseñar ruta assets/fonts/fredoka_one/
+- [ ] T-151 Diseñar Nunito-Regular.ttf
+- [ ] T-152 Diseñar Nunito-Bold.ttf
+- [ ] T-153 Diseñar Nunito-Medium.ttf
+- [ ] T-154 Diseñar Nunito-Light.ttf
+- [ ] T-155 Diseñar FredokaOne-Regular.ttf
+- [ ] T-156 Diseñar pruebas manuales (legibilidad en resoluciones, dispositivos, caracteres especiales, localización, ajustes de accesibilidad, rendimiento)
+- [ ] T-157 Diseñar pruebas automáticas (carga de fuentes, renderizado de caracteres, performance)
+- [ ] T-158 Diseñar pruebas de legibilidad en 720p
+- [ ] T-159 Diseñar pruebas de legibilidad en 1080p
+- [ ] T-160 Diseñar pruebas de legibilidad en 4K
+- [ ] T-161 Diseñar pruebas de soporte de tildes
+- [ ] T-162 Diseñar pruebas de soporte de ñ
+- [ ] T-163 Diseñar pruebas de soporte de símbolos
+- [ ] T-164 Diseñar pruebas de localización (español, portugués, francés, alemán, italiano, ruso)
+- [ ] T-165 Diseñar pruebas de ajustes de accesibilidad
+- [ ] T-166 Diseñar pruebas de rendimiento (tiempo de carga)
+- [ ] T-167 Diseñar 06-Plan-Testings.md (APLICA)
+- [ ] T-168 Diseñar tests de legibilidad
+- [ ] T-169 Diseñar tests de soporte de caracteres
+- [ ] T-170 Diseñar tests de localización
+- [ ] T-171 Diseñar tests de ajustes de accesibilidad
+- [ ] T-172 Diseñar tests de performance
+- [x] T-173 Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] T-174 Test oficial M88 ejecutado: **11 checks, 0 fallos, exit 0** (FontCatalog 4 fuentes, museo_moderno, licencias permitidas, reporte, detección de sin-licencia/licencia no permitida/pesos)
+- [x] T-175 **Verificación VISUAL de legibilidad** (análisis con visión sobre captura en vivo del juego, 1600x900): textos de UI completos y correctos — 'Lunes, 1 de Primavera, Año 1', 'Pico de Cobre (150/150)', widget 'Fecha y hora (Sesión: Mañana / Estación: Primavera / Próximos eventos: día 2, día 3)', controles (WASD/Scroll/Escape/F) — **acentos españoles correctos, sin tofu ni glifos rotos, contraste adecuado**
+- [x] T-176 Matiz registrado: texts de hotbar en fuente pequeña (~17px) legibles en 1600x900 — se revalida en 720p en accesibilidad (M58, dueño)
+- [?] T-177 Prueba en 1280x720 y 1366x768 (escalado de UI): pendiente (dueño: M58 accesibilidad / M53 UI)

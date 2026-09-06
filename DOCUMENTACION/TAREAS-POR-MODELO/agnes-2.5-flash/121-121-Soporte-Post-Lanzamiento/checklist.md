@@ -1,0 +1,218 @@
+# Checklist de Tareas — M121 121-Soporte-Post-Lanzamiento
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/121-Soporte-Post-Lanzamiento/plan-actual/05-Checklist.md
+
+- [x] T-001 Categorías de soporte (instalación, cuenta, juego, técnica) [S]
+- [x] T-002 Canales de contacto: email, chat, comunidad [S]
+- [x] T-003 Política de respuesta (SLA por tipo) [S]
+- [x] T-004 Búsqueda de FAQ por categoría y texto [S]
+- [x] T-005 Test headless de soporte post-lanzamiento [M]
+- [x] T-006 Datos data-driven: faq.json con 4 FAQ, 3 canales, 6 categorías [S]
+- [ ] T-007 Seguimiento de reviews
+- [ ] T-008 Hotfixes
+- [ ] T-009 Parches
+- [x] T-010 Actualizaciones
+- [x] T-011 Recuperación de saves
+- [x] T-012 Comunicación de incidencias
+- [ ] T-013 Roadmap
+- [x] T-014 Community updates
+- [ ] T-015 Backups
+- [x] T-016 Monitorización
+- [x] T-017 Plan de abandono del servicio si existe online
+- [x] T-018 Definir email (support@islaancestral.com)
+- [ ] T-019 Definir Discord (canal #soporte)
+- [ ] T-020 Definir Steam Community Hub (Discussions, Bugs y Problemas)
+- [ ] T-021 Definir Twitter/X (@IslaAncestral)
+- [x] T-022 Diseñar configuración de email con respuesta automática
+- [x] T-023 Diseñar configuración de Discord con canales estructurados
+- [x] T-024 Diseñar configuración de Steam Community Hub moderado
+- [x] T-025 Diseñar configuración de Twitter/X con respuestas a preguntas frecuentes
+- [x] T-026 Definir preguntas técnicas (requisitos de sistema, controladores, errores comunes)
+- [ ] T-027 Definir preguntas de gameplay (cómo hacer X, dónde encontrar Y, mecánicas de Z)
+- [x] T-028 Definir preguntas de historia (historia principal, finales, sellos)
+- [x] T-029 Definir preguntas de DLC (cómo instalar DLC, compatibilidad, precios)
+- [x] T-030 Definir preguntas de soporte (cómo reportar bugs, cómo contactar soporte)
+- [ ] T-031 Diseñar FAQ en sitio web
+- [ ] T-032 Diseñar FAQ en Steam Community Hub
+- [ ] T-033 Diseñar FAQ en Discord (canal #faq, solo lectura)
+- [ ] T-034 Diseñar FAQ en PDF para descargar
+- [ ] T-035 Diseñar búsqueda de FAQ (sitio web, Discord)
+- [x] T-036 Definir Steam Support (integrado)
+- [x] T-037 Definir sistema propio (opcional)
+- [x] T-038 Definir categorías (bugs, crashes, rendimiento, dudas, sugerencias)
+- [ ] T-039 Definir prioridades (crítica, alta, media, baja)
+- [x] T-040 Diseñar triage de tickets (categoría, prioridad, asignación)
+- [ ] T-041 Diseñar SLA de respuesta (24-48 horas prioritarios, 72 horas no prioritarios)
+- [x] T-042 Definir integración con M102 (Bug Tracking)
+- [x] T-043 Diseñar errores reportados por comunidad → triage → asignación → corrección → testing → deployment
+- [ ] T-044 Diseñar errores críticos → hotfix en 24-48 horas
+- [ ] T-045 Diseñar errores no críticos → parches regulares
+- [x] T-046 Diseñar errores reportados en Steam → creación de issue en M102
+- [x] T-047 Diseñar errores reportados en Discord → creación de issue en M102
+- [x] T-048 Diseñar errores reportados por email → creación de issue en M102
+- [x] T-049 Diseñar priorización según severidad y frecuencia
+- [x] T-050 Definir integración con M122 (Crash Reporting)
+- [x] T-051 Diseñar crashes reportados automáticamente → análisis → priorización → corrección → testing → deployment
+- [x] T-052 Diseñar crashes críticos → hotfix en 24-48 horas
+- [x] T-053 Diseñar crashes no críticos → parches regulares
+- [x] T-054 Diseñar crashes reportados en M122 → creación de issue en M102
+- [x] T-055 Diseñar análisis de crashes (metadatos, stack traces, frecuencia)
+- [x] T-056 Diseñar priorización según matriz de frecuencia, severidad, impacto
+- [x] T-057 Definir integración con M61 (Rendimiento)
+- [x] T-058 Diseñar problemas de rendimiento reportados → análisis → optimización → testing → deployment
+- [ ] T-059 Diseñar problemas de rendimiento críticos → hotfix en 24-48 horas
+- [ ] T-060 Diseñar problemas de rendimiento no críticos → parches regulares
+- [x] T-061 Diseñar problemas de rendimiento reportados en Steam → creación de issue en M61
+- [ ] T-062 Diseñar análisis de rendimiento (profiling, benchmarks)
+- [x] T-063 Diseñar optimización según presupuestos de M61
+- [ ] T-064 Definir Steam reviews (positivas, negativas, mixtas)
+- [ ] T-065 Definir Reddit reviews (r/IndieGaming, r/Games)
+- [ ] T-066 Definir Twitter/X reviews
+- [ ] T-067 Definir Metacritic reviews (si se publica en consolas)
+- [ ] T-068 Diseñar monitoreo de reviews en Steam (notifications)
+- [ ] T-069 Diseñar respuesta a reviews negativas (constructivas)
+- [x] T-070 Diseñar documentación de feedback recurrente para mejora
+- [ ] T-071 Diseñar no responder a reviews constructivas (política de no alimentar trolls)
+- [x] T-072 Definir bugs críticos (crash, savegame corrupto, performance severa, exploit)
+- [ ] T-073 Definir tiempo de hotfix (24-48 horas)
+- [x] T-074 Diseñar proceso (identificación → reproducción → corrección → testing → deployment → changelog)
+- [ ] T-075 Diseñar deployment automático en Steam
+- [ ] T-076 Diseñar email a usuarios afectados
+- [x] T-077 Diseñar priorización de bugs críticos
+- [x] T-078 Diseñar build de hotfix (optimizado, solo fixes necesarios)
+- [ ] T-079 Diseñar testing intensivo de hotfix
+- [x] T-080 Diseñar comunicación a comunidad (Steam announcements, Twitter/X, Discord)
+- [ ] T-081 Definir bugs no críticos (cosméticos, menores, QoL)
+- [ ] T-082 Definir tiempo de parches (mensual/trimestral)
+- [x] T-083 Diseñar proceso (acumulación → corrección → testing → deployment → changelog)
+- [ ] T-084 Diseñar deployment automático en Steam
+- [ ] T-085 Diseñar changelog visible
+- [x] T-086 Diseñar acumulación de bugs no críticos en sprint
+- [x] T-087 Diseñar corrección de bugs en sprint
+- [ ] T-088 Diseñar testing de parches
+- [ ] T-089 Diseñar deployment mensual/trimestral
+- [ ] T-090 Diseñar changelog visible en Steam announcements
+- [x] T-091 Definir new features (DLC, contenido nuevo, mecánicas nuevas)
+- [x] T-092 Definir tiempo de actualizaciones (trimestral/semestral)
+- [ ] T-093 Diseñar proceso (desarrollo → testing → deployment → changelog → marketing)
+- [ ] T-094 Diseñar deployment automático en Steam
+- [ ] T-095 Diseñar trailers y screenshots
+- [ ] T-096 Diseñar desarrollo de new features según roadmap
+- [x] T-097 Diseñar testing de actualizaciones
+- [ ] T-098 Diseñar deployment trimestral/semestral
+- [ ] T-099 Diseñar changelog visible en Steam announcements
+- [x] T-100 Diseñar marketing de actualizaciones (trailers, screenshots, social media)
+- [x] T-101 Definir savegames corruptos → recuperación de backup automático
+- [x] T-102 Definir savegames perdidos → recuperación de backup manual (si aplica)
+- [x] T-103 Definir backup automático de savegames (integración con M107)
+- [x] T-104 Definir recuperación por solicitud del usuario (enviar savegame a soporte)
+- [x] T-105 Diseñar backup automático de savegames (cada 5 minutos, cada cierre del juego)
+- [x] T-106 Diseñar backup en nube (opcional, integración con Steam Cloud)
+- [x] T-107 Diseñar recuperación de savegame corrupto → restaurar backup más reciente
+- [x] T-108 Diseñar recuperación de savegame perdido → enviar backup a soporte (manual)
+- [x] T-109 Definir incidencias críticas → comunicación inmediata
+- [x] T-110 Definir incidencias no críticas → comunicación regular
+- [x] T-111 Definir comunicación transparente (qué está pasando, cuándo se espera solución)
+- [x] T-112 Definir comunicación oportuna (dentro de 24 horas de incidencia crítica)
+- [x] T-113 Diseñar Steam announcements para incidencias críticas
+- [x] T-114 Diseñar Twitter/X para incidencias críticas
+- [x] T-115 Diseñar Discord para incidencias críticas y no críticas
+- [ ] T-116 Diseñar email para usuarios afectados (si aplica)
+- [x] T-117 Diseñar postmortem de incidencias importantes
+- [ ] T-118 Definir roadmap público actualizado regularmente (mensual/trimestral)
+- [ ] T-119 Definir hitos genéricos sin fechas irreales
+- [ ] T-120 Definir categorías (Core Gameplay, Content, Technical, Polish)
+- [ ] T-121 Definir estados (Completado, En desarrollo, Planeado, Futuro)
+- [ ] T-122 Diseñar roadmap en sitio web
+- [ ] T-123 Diseñar roadmap en Steam Community Hub
+- [ ] T-124 Diseñar roadmap en Discord (canal #roadmap)
+- [x] T-125 Diseñar actualización mensual/trimestral
+- [x] T-126 Definir actualizaciones regulares sobre estado del desarrollo
+- [x] T-127 Definir Twitter/X: actualizaciones semanales
+- [x] T-128 Definir Discord: actualizaciones semanales en #anuncios
+- [x] T-129 Definir Reddit: actualizaciones mensuales en r/IslaAncestral
+- [ ] T-130 Definir AMAs ocasionales en Discord o Reddit
+- [x] T-131 Diseñar Twitter/X: actualizaciones semanales (progreso, hits, etc.)
+- [x] T-132 Diseñar Discord: actualizaciones semanales en #anuncios
+- [x] T-133 Diseñar Reddit: actualizaciones mensuales en r/IslaAncestral
+- [ ] T-134 Diseñar AMAs cada 3-6 meses en Discord o Reddit
+- [x] T-135 Definir backups automáticos de datos críticos (integración con M107)
+- [ ] T-136 Definir backups regulares (diario, semanal, mensual)
+- [x] T-137 Definir backups en nube (opcional, integración con Steam Cloud)
+- [ ] T-138 Definir backups encriptados
+- [ ] T-139 Definir backups off-site
+- [x] T-140 Diseñar integración con M107 (Backups)
+- [ ] T-141 Diseñar backups de savegames
+- [x] T-142 Diseñar backups de configuración
+- [ ] T-143 Diseñar backups de datos de comunidad (si aplica)
+- [x] T-144 Diseñar verificación de integridad de backups
+- [x] T-145 Definir monitorización 24/7 de servicios online (si aplica)
+- [x] T-146 Definir monitorización de uptime (ping, health checks)
+- [x] T-147 Definir monitorización de logs (errores, crashes, performance)
+- [ ] T-148 Definir alertas por anomalías (uptime baja, errores altos, performance degradado)
+- [x] T-149 Diseñar servicio de monitorización (UptimeRobot, Pingdom, etc.)
+- [ ] T-150 Diseñar health checks de APIs
+- [x] T-151 Diseñar análisis de logs (M103 Logging, M122 Crash Reporting)
+- [ ] T-152 Diseñar alertas por email/Discord/SMS
+- [x] T-153 Definir notificación con 6 meses de antelación
+- [x] T-154 Definir exportación de datos del usuario
+- [x] T-155 Definir apagado de servicios online
+- [x] T-156 Definir retención de logs por período legal (90 días)
+- [x] T-157 Diseñar notificación a usuarios con 6 meses de antelación
+- [x] T-158 Diseñar exportación de datos del usuario (savegames, configuración)
+- [x] T-159 Diseñar apagado de servicios online (analytics, crash reporting, etc.)
+- [x] T-160 Diseñar retención de logs por 90 días (cumplimiento GDPR)
+- [x] T-161 Diseñar documentación de proceso de abandono en sitio web
+- [x] T-162 Diseñar SupportManager como autoload
+- [ ] T-163 Diseñar signal ticket_created(ticket_id)
+- [ ] T-164 Diseñar signal ticket_resolved(ticket_id)
+- [ ] T-165 Diseñar método setup_email_autoresponder()
+- [ ] T-166 Diseñar método setup_discord_channels()
+- [x] T-167 Diseñar método create_ticket(category, priority, description)
+- [ ] T-168 Diseñar método generate_ticket_id()
+- [ ] T-169 Diseñar método resolve_ticket(ticket_id)
+- [x] T-170 Diseñar variable support_email
+- [x] T-171 Diseñar variable support_discord_channel
+- [x] T-172 Diseñar variable support_steam_url
+- [x] T-173 Diseñar FAQManager como autoload
+- [ ] T-174 Diseñar método load_faq()
+- [ ] T-175 Diseñar método search_faq(query)
+- [ ] T-176 Diseñar variable faq_data (Dictionary)
+- [x] T-177 Diseñar TicketManager como autoload
+- [x] T-178 Diseñar método create_ticket(category, priority, description, user_info)
+- [x] T-179 Diseñar método update_ticket_status(ticket_id, status)
+- [ ] T-180 Diseñar método get_ticket(ticket_id)
+- [ ] T-181 Diseñar método generate_ticket_id()
+- [ ] T-182 Diseñar variable tickets (Dictionary)
+- [x] T-183 Diseñar HotfixManager como autoload
+- [ ] T-184 Diseñar método trigger_hotfix(bug_id)
+- [ ] T-185 Diseñar método deploy_hotfix(hotfix_version)
+- [x] T-186 Diseñar método communicate_hotfix(hotfix_version, bug_description)
+- [x] T-187 Diseñar PatchManager como autoload
+- [ ] T-188 Diseñar método create_patch(patch_version, bug_ids)
+- [ ] T-189 Diseñar método deploy_patch(patch_version)
+- [x] T-190 Diseñar método update_changelog(patch_version, bug_ids)
+- [x] T-191 Diseñar res://support/faq.json
+- [ ] T-192 Diseñar preguntas técnicas
+- [ ] T-193 Diseñar preguntas de gameplay
+- [ ] T-194 Diseñar preguntas de historia
+- [x] T-195 Diseñar preguntas de DLC
+- [ ] T-196 Diseñar preguntas de soporte
+- [x] T-197 Diseñar res://support/support_manager.gd
+- [x] T-198 Diseñar res://support/faq_manager.gd
+- [x] T-199 Diseñar res://support/ticket_manager.gd
+- [x] T-200 Diseñar res://support/hotfix_manager.gd
+- [x] T-201 Diseñar res://support/patch_manager.gd
+- [x] T-202 Diseñar res://support/faq.json
+- [ ] T-203 Diseñar prueba de canal de soporte (email, Discord, Steam)
+- [ ] T-204 Diseñar prueba de búsqueda de FAQ
+- [x] T-205 Diseñar prueba de sistema de tickets
+- [ ] T-206 Diseñar prueba de proceso de hotfixes
+- [ ] T-207 Diseñar prueba de proceso de parches
+- [x] T-208 Diseñar prueba de recuperación de saves
+- [x] T-209 Diseñar prueba de comunicación de incidencias
+- [ ] T-210 Diseñar prueba de roadmap público
+- [x] T-211 Diseñar prueba de community updates

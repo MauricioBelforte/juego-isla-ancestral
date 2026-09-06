@@ -1,0 +1,107 @@
+# Checklist de Tareas — M22 22-Historia-Principal
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/22-Historia-Principal/plan-actual/05-Checklist.md
+
+- [x] T-001 Definir el prólogo (llegada del navegante tras la tormenta) [M] — 03-Diseno §Arcos + nodo "prologo" en data/historia
+- [x] T-002 Definir el capítulo 1 "Las Cenizas Futuras" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-003 Definir el capítulo 2 "El Puente de las Memorias" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-004 Definir el capítulo 3 "El Jardín Ahogado" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-005 Definir el capítulo 4 "El Valle de los Vientos" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-006 Definir el capítulo 5 "La Noche Eterna" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-007 Definir el capítulo 6 "El Corazón del Mundo" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-008 Definir el capítulo final "La Brisa y el Sello" [M] — 03-Diseno §Arcos + nodo en data/historia
+- [x] T-009 Definir el gating narrativo por 7 sellos [M] — IMPLEMENTADO + testeado (HistoriaService.gating "sellos", 7/7 en test)
+- [x] T-010 Documentar prólogo y capítulos en el plan-actual [S] — 04-Codigo Notas iter. 1
+- [x] T-011 Definir el final principal (la Brisa regresa) [M] — 03-Diseno + nodo final_principal (nota: data lo define como "florece")
+- [x] T-012 Definir 3 finales alternativos (quedarse, regresar, guardián) [M] — nodos final_regresar/final_guardian + diseño (regresar/guardián; "quedarse" no está en 03-Diseno)
+- [x] T-013 Definir el final secreto "El Primer Guardián" [M] — nodo final_secreto
+- [x] T-014 Definir condiciones del final secreto (sello perfecto + salas secretas) [M] — IMPLEMENTADO: flag "pistas_secreto_completas" (M25/M147 lo alimentan)
+- [x] T-015 Definir condiciones de los finales alternativos [M] — capítulo 7 completado + 7 sellos
+- [x] T-016 Documentar los finales en el plan-actual [S] — 04-Codigo Notas iter. 1
+- [ ] T-017 Definir 14 escenas nodo principales [M]
+- [ ] T-018 Definir los tipos de escena (diálogo, descubrimiento, puzzle, cutscene-hook) [M]
+- [x] T-019 Definir el grafo de escenas serializado (JSON) [M]
+- [ ] T-020 Definir el giro narrativo 1 (ceniza = biblioteca quemada) [M]
+- [ ] T-021 Definir el giro narrativo 2 (sombra = sombra del templo) [M]
+- [x] T-022 Definir el giro narrativo 3 (el Sello fue escondido, no roto) [M]
+- [x] T-023 Implementar la validación del grafo en Editor [M]
+- [x] T-024 Implementar la validación en tests (sin nodos huérfanos) [M]
+- [ ] T-025 Documentar escenas y giros en el plan-actual [S]
+- [ ] T-026 Definir 30 pistas distribuidas por el mundo (murales, inscripciones, objetos, diálogos) [M]
+- [ ] T-027 Definir 10 foreshadows explícitos [M]
+- [x] T-028 Definir los 3 pagos de los foreshadows (Cámara del Sello) [S]
+- [ ] T-029 Definir las 6 revelaciones con desbloqueo contextual [M]
+- [ ] T-030 Definir los 5 caches de lore oculto [M]
+- [x] T-031 Implementar formato de pista (único, no duplicable) [M]
+- [x] T-032 Implementar el test de leak de pistas (sin pista sin pagar) [M]
+- [ ] T-033 Documentar pistas, foreshadowing y revelaciones [S]
+- [ ] T-034 Definir la curva de tensión por capítulo [M]
+- [ ] T-035 Definir los picos álgidos (capítulos 3 y 5) [S]
+- [ ] T-036 Definir los 4 momentos emotivos [M]
+- [ ] T-037 Definir los 6 momentos de calma [M]
+- [ ] T-038 Definir los 8 momentos de descubrimiento [M]
+- [ ] T-039 Definir hooks a M33 (cutscenes) para los emotivos [M]
+- [ ] T-040 Definir hooks a M41/M44 (música) para los emotivos [M]
+- [ ] T-041 Documentar ritmo y momentos en el plan-actual [S]
+- [ ] T-042 Definir la secuencia de templos (Ceniza → Mar → Brisa) [M]
+- [ ] T-043 Definir el orden no lineal sugerido [S]
+- [x] T-044 Definir los 7 sellos como gating real [M] — IMPLEMENTADO + testeado (catálogo sellos + req "sellos" cantidad 7)
+- [x] T-045 Definir la salida del templo abierta solo con el sello restaurado [M] — flag "templo_brisa_abierto" en req C4 (M26 la activa)
+- [x] T-046 Definir la Cámara del Sello como nodo final [S] — nodo c7 (Cámara) → 4 finales
+- [x] T-047 Documentar la secuencia de templos y sellos [S] — data/historia/historia_principal.json sellos[] + 04-Codigo
+- [x] T-048 Definir el misterio en 4 capas (qué cayó, quién era el guardián, por qué la brisa, qué es el Sello) [M]
+- [ ] T-049 Definir el desarrollo del misterio por capítulo [M]
+- [ ] T-050 Definir la información oculta (5 caches) [M]
+- [ ] T-051 Definir la entrega de lore por contexto (mural/inscripción/objeto) [M]
+- [ ] T-052 Definir el cierre del misterio en el final [S]
+- [ ] T-053 Documentar el misterio y la información oculta [S]
+- [ ] T-054 Definir la regla de máx 4 líneas expositivas por escena [S]
+- [ ] T-055 Definir la regla de ≤ 140 palabras por diálogo [M]
+- [ ] T-056 Definir la entrega de lore por objetos/murales [M]
+- [x] T-057 Implementar el test de exposición (guion) [M]
+- [x] T-058 Implementar el test de palabras por escena [M]
+- [ ] T-059 Documentar anti-exposición en el plan-actual [S]
+- [x] T-060 Integrar con M21 (misiones: requisitos verificables) [M] — *parcial: flags WorldState + EventBus.quest consumidos; misiones reales M22/M23 con dueño*
+- [ ] T-061 Integrar con M23 (secundarias: comentarios hook) [M]
+- [ ] T-062 Integrar con M24/M25/M26 (templos y puzzles) [M]
+- [ ] T-063 Integrar con M28 (caminos: capítulo 2) [M]
+- [ ] T-064 Integrar con M31 (eclipse) [S]
+- [ ] T-065 Integrar con M33 (cutscenes) [M]
+- [ ] T-066 Integrar con M41/M44 (música) [M]
+- [x] T-067 Integrar con M66 (sin softlocks de trama) [M] — requisitos verificables + validador (motivos explicativos, sin estados imposibles en v1)
+- [ ] T-068 Documentar la integración en el plan-actual [M]
+- [x] T-069 Definir el formato JSON de la Historia Principal [M] — data/historia/historia_principal.json v1
+- [x] T-070 Definir los campos de Escena (id, tipo, requisitos, siguiente) [M] — nodos del JSON
+- [x] T-071 Definir los campos de Capitulo [M] — campo "capitulo" 0-7 + títulos 03-Diseno
+- [x] T-072 Definir los campos de Final [M] — tipo "final" + final_id
+- [x] T-073 Implementar la carga de datos con validación al inicio [M] — HistoriaService._cargar_grafo + validar_historia.gd 0 fallos
+- [x] T-074 Implementar verificación de requisitos contra el mundo (M21) [M] — puede_entrar: capitulos/sellos/flag WorldState/objeto M14; testeado
+- [x] T-075 Implementar sin referencias rotas (Editor) [M] — validador: sin huérfanos/ciclos, 0 fallos
+- [x] T-076 Documentar datos y validación en el plan-actual [S] — 04-Codigo Notas iter. 1
+- [x] T-077 Implementar carga diferida de los datos del capítulo actual [M]
+- [x] T-078 Implementar cero allocations en el tick de historia (eventos) [M]
+- [x] T-079 Implementar manejo de datos corruptos (guardado atómico + fallback) [M] — restore tolerante (probado con {} y campos faltantes); JSON inválido → grafo vacío + push_error
+- [x] T-080 Implementar sin excepciones ante datos faltantes [M] — get_nodo devuelve {}; puede_entrar lista motivo; testeaado
+- [x] T-081 Implementar el tick de historia ≤ 0.1 ms [S]
+- [ ] T-082 Documentar rendimiento y robustez en el plan-actual [S]
+- [x] T-083 Definir el test de grafo (nodos, requisitos, finales alcanzables) [M] — scripts/historia/validar_historia.gd (0 fallos)
+- [ ] T-084 Definir el test de anti-exposición [M]
+- [ ] T-085 Definir el test de leak de pistas [M]
+- [x] T-086 Definir el test de caminos a finales (principal + 3 alternativos + secreto) [M] — test_historia.gd _test_finales/_test_flags (4 finales alcanzables)
+- [x] T-087 Definir el test de persistencia (guardar/recargar en cada capítulo) [M] — test_historia.gd _test_persistencia (round-trip); "cada capítulo" simplificado a estado final v1
+- [x] T-088 Definir el test de integración con M26 (sellos) [M] — marcar_sello emite EventBus.quest.prereq_met (contrato M07/M26)
+- [ ] T-089 Diseñar 06-Plan-Testings.md (unitarias + integración) [M]
+- [ ] T-090 Crear 07-Resultados-Testings.md [S]
+- [ ] T-091 Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
+- [ ] T-092 Actualizar plan-actual como espejo del estado real [M]
+- [x] T-093 Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — Log 369
+- [x] T-094 Actualizar fila 22 en CHECKLIST-GLOBAL al implementar [S] — hecho (reserva y liberación)
+- [ ] T-095 Revisar coherencia narrativa entre capítulos cada milestone
+- [ ] T-096 Verificar que giros narrativos no generan plot holes
+- [ ] T-097 Actualizar pistas/foreshadowing cuando cambien templos (M24-M26)
+- [ ] T-098 Verificar que finales alternativos son alcanzables sin exploits
+- [ ] T-099 Documentar lecciones de narrativa para futuros proyectos
+- [ ] T-100 Revisar integridad del grafo de escenas antes de cada release

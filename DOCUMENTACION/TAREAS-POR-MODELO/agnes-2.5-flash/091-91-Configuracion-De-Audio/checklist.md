@@ -1,0 +1,246 @@
+# Checklist de Tareas — M91 91-Configuracion-De-Audio
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md
+
+- [x] T-001 Volumen maestro — glm-5.3-flash 2026-09-01: núcleo implementado (buses + set/get + persistencia M60), UI M53 con dueño
+- [ ] T-002 Música
+- [ ] T-003 Efectos
+- [ ] T-004 Ambiente
+- [ ] T-005 Voces
+- [ ] T-006 UI
+- [ ] T-007 Cinemáticas
+- [x] T-008 Audio 3D
+- [ ] T-009 Subtítulos
+- [ ] T-010 Sonidos de interfaz
+- [ ] T-011 Rango dinámico
+- [ ] T-012 Compresión
+- [ ] T-013 Dispositivo de salida
+- [ ] T-014 Pruebas con auriculares
+- [ ] T-015 Pruebas con altavoces
+- [x] T-016 Definir volumen maestro (slider 0-100%) — set_volumen("Master", v) linear→db (testeado)
+- [x] T-017 Definir volumen de música (slider 0-100%) — Music 0.7 default, testeado
+- [x] T-018 Definir volumen de efectos (slider 0-100%) — SFX 0.8 default, testeado
+- [x] T-019 Definir volumen de ambiente (slider 0-100%) — Ambient 0.6 default, testeado
+- [x] T-020 Definir volumen de voces (slider 0-100%) — Voice 0.9 default, testeado
+- [x] T-021 Definir volumen de UI (slider 0-100%) — UI 0.5 default, testeado
+- [x] T-022 Definir volumen de cinemáticas (slider 0-100%) — Cinematic 0.8 default, testeado
+- [ ] T-023 Definir valores por defecto (maestro 80%, música 70%, efectos 80%, ambiente 60%, voces 90%, UI 50%, cinemáticas 80%)
+- [ ] T-024 Definir conversión de slider 0-100 a dB (linear2db)
+- [x] T-025 Definir buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic) — 7 buses creados en runtime enrutados a Master (testeado)
+- [ ] T-026 Definir slider de volumen maestro (0-100%)
+- [x] T-027 Definir control de todos los canales de audio
+- [ ] T-028 Definir valor por defecto 80%
+- [x] T-029 Definir aplicación a AudioServer.set_bus_volume_db() — linear_to_db aplicado y verificado en AudioServer (testeado)
+- [ ] T-030 Definir conversión de slider 0-100 a dB
+- [ ] T-031 Definir slider de volumen de música (0-100%)
+- [ ] T-032 Definir control de música de fondo y cinemáticas
+- [ ] T-033 Definir valor por defecto 70%
+- [ ] T-034 Definir aplicación al bus de música
+- [ ] T-035 Definir conversión de slider 0-100 a dB
+- [ ] T-036 Definir slider de volumen de efectos (0-100%)
+- [ ] T-037 Definir control de efectos de juego (herramientas, craft, interacción)
+- [ ] T-038 Definir valor por defecto 80%
+- [ ] T-039 Definir aplicación al bus de efectos
+- [ ] T-040 Definir conversión de slider 0-100 a dB
+- [ ] T-041 Definir slider de volumen de ambiente (0-100%)
+- [ ] T-042 Definir control de sonidos ambientales (viento, agua, pájaros)
+- [ ] T-043 Definir valor por defecto 60%
+- [ ] T-044 Definir aplicación al bus de ambiente
+- [ ] T-045 Definir conversión de slider 0-100 a dB
+- [ ] T-046 Definir slider de volumen de voces (0-100%)
+- [ ] T-047 Definir control de voces de NPCs y cinemáticas
+- [ ] T-048 Definir valor por defecto 90%
+- [ ] T-049 Definir aplicación al bus de voces
+- [ ] T-050 Definir conversión de slider 0-100 a dB
+- [ ] T-051 Definir slider de volumen de UI (0-100%)
+- [ ] T-052 Definir control de sonidos de interfaz (hover, click, notificaciones)
+- [ ] T-053 Definir valor por defecto 50%
+- [ ] T-054 Definir aplicación al bus de UI
+- [ ] T-055 Definir conversión de slider 0-100 a dB
+- [ ] T-056 Definir slider de volumen de cinemáticas (0-100%)
+- [x] T-057 Definir control de audio de cinemáticas (música, voces, efectos)
+- [ ] T-058 Definir valor por defecto 80%
+- [ ] T-059 Definir aplicación al bus de cinemáticas
+- [ ] T-060 Definir conversión de slider 0-100 a dB
+- [x] T-061 Definir toggle de audio 3D (on/off)
+- [ ] T-062 Definir espacialización (HRTF para auriculares)
+- [ ] T-063 Definir oclusión (bloqueo de sonido por objetos)
+- [ ] T-064 Definir Doppler effect (cambio de frecuencia por movimiento)
+- [ ] T-065 Definir distancia de atenuación (rolloff)
+- [x] T-066 Definir Audio3D nodes para sonidos espaciales
+- [x] T-067 Definir AudioServer.set_bus_effect() para espacialización
+- [ ] T-068 Definir raycast para oclusión de sonido
+- [ ] T-069 Definir PhysicsBody3D para bloqueo de sonido
+- [ ] T-070 Definir toggle de subtítulos (on/off)
+- [ ] T-071 Definir tamaño de subtítulos (slider 0.5x a 2x)
+- [ ] T-072 Definir opacidad de subtítulos (slider 0.2 a 1.0)
+- [ ] T-073 Definir fondo de subtítulos (toggle + color)
+- [ ] T-074 Definir color de texto (selector)
+- [x] T-075 Definir sincronización con audio
+- [ ] T-076 Definir RichTextLabel para subtítulos
+- [x] T-077 Definir SubtitleManager para mostrar subtítulos
+- [x] T-078 Definir sincronización con AudioPlayer para cinemáticas
+- [ ] T-079 Definir accesibilidad (M58) para ajustes de tamaño y contraste
+- [ ] T-080 Definir toggle de sonidos de interfaz (on/off)
+- [ ] T-081 Definir sonidos de hover (cursor sobre botón)
+- [ ] T-082 Definir sonidos de click (click en botón)
+- [ ] T-083 Definir sonidos de notificaciones (notificaciones de logros, misiones)
+- [ ] T-084 Definir sonidos de errores (error en acción)
+- [x] T-085 Definir AudioPlayer para sonidos de interfaz
+- [ ] T-086 Definir eventos de UI para trigger de sonidos
+- [x] T-087 Definir AudioBus para control de volumen
+- [ ] T-088 Definir quiet (compresión alta)
+- [ ] T-089 Definir medio (compresión media)
+- [ ] T-090 Definir dinámico (sin compresión)
+- [x] T-091 Definir CompressorEffect en AudioServer
+- [ ] T-092 Definir threshold (umbral de compresión)
+- [ ] T-093 Definir ratio (proporción de compresión)
+- [ ] T-094 Definir attack (tiempo de ataque)
+- [ ] T-095 Definir release (tiempo de liberación)
+- [ ] T-096 Definir toggle de compresión (on/off)
+- [ ] T-097 Definir limitar picos de volumen para evitar clipping
+- [ ] T-098 Definir threshold (umbral de limitación)
+- [ ] T-099 Definir ratio (proporción de limitación)
+- [x] T-100 Definir LimiterEffect en AudioServer
+- [ ] T-101 Definir threshold (umbral de limitación)
+- [ ] T-102 Definir ceil (límite máximo de dB)
+- [ ] T-103 Definir soft clip (soft clipping para evitar clipping duro)
+- [x] T-104 Definir predeterminado del sistema
+- [ ] T-105 Definir auriculares
+- [ ] T-106 Definir altavoces
+- [ ] T-107 Definir HDMI
+- [ ] T-108 Definir Bluetooth
+- [x] T-109 Definir AudioServer.get_device_list() para lista de dispositivos
+- [x] T-110 Definir AudioServer.set_device() para cambiar dispositivo
+- [ ] T-111 Definir dropdown en settings para seleccionar dispositivo
+- [ ] T-112 Definir estéreo (izquierda/derecha)
+- [ ] T-113 Definir espacial 3D (HRTF)
+- [ ] T-114 Definir balance de canales (izquierda/derecha)
+- [x] T-115 Definir test de audio (sonido de prueba en cada canal)
+- [x] T-116 Definir AudioPlayer2D para estero
+- [x] T-117 Definir AudioPlayer3D para espacial 3D
+- [x] T-118 Definir AudioServer.set_bus_volume() para balance de canales
+- [ ] T-119 Definir test button en settings
+- [ ] T-120 Definir estéreo (izquierda/derecha)
+- [ ] T-121 Definir 5.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera)
+- [ ] T-122 Definir 7.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera, izquierda lateral, derecha lateral)
+- [ ] T-123 Definir balance de canales
+- [x] T-124 Definir test de audio (sonido de prueba en cada canal)
+- [x] T-125 Definir AudioServer.get_channel_count() para detectar canales
+- [x] T-126 Definir AudioServer.set_bus_channel_count() para configurar canales
+- [ ] T-127 Definir test button en settings
+- [ ] T-128 Diseñar tamaño de subtítulos (slider 0.5x a 2x)
+- [ ] T-129 Diseñar alto contraste (toggle)
+- [x] T-130 Diseñar reducción de audio complejo (opción para simplificar audio)
+- [x] T-131 Diseñar audio descriptivo (opción para descripción visual en audio)
+- [x] T-132 Diseñar ajustes en menú de configuración de audio
+- [ ] T-133 Diseñar guardado en settings (M91)
+- [ ] T-134 Diseñar aplicación en tiempo real
+- [ ] T-135 Diseñar subtítulos en diferentes idiomas (español, portugués, francés, alemán, italiano, ruso)
+- [x] T-136 Diseñar audio de voces en diferentes idiomas (si disponible)
+- [ ] T-137 Diseñar localización de nombres de dispositivos de salida
+- [x] T-138 Diseñar SubtitleManager con soporte multiidioma
+- [x] T-139 Diseñar AudioPlayer con soporte multiidioma
+- [x] T-140 Diseñar LocalizationManager para traducción
+- [x] T-141 Diseñar audio en streaming (para archivos grandes)
+- [x] T-142 Diseñar audio en memoria (para archivos pequeños)
+- [x] T-143 Diseñar pool de AudioPlayers para evitar GC
+- [x] T-144 Diseñar audio comprimido (OGG, MP3) para reducir tamaño
+- [x] T-145 Diseñar AudioStreamPlayer para streaming
+- [x] T-146 Diseñar AudioStreamPlayer2D/3D para memoria
+- [x] T-147 Diseñar ObjectPool para AudioPlayers
+- [x] T-148 Diseñar compresión de audio en import settings
+- [x] T-149 Diseñar AudioSettingsMenu
+- [ ] T-150 Diseñar controles para volumen maestro (slider)
+- [ ] T-151 Diseñar controles para volumen de música (slider)
+- [ ] T-152 Diseñar controles para volumen de efectos (slider)
+- [ ] T-153 Diseñar controles para volumen de ambiente (slider)
+- [ ] T-154 Diseñar controles para volumen de voces (slider)
+- [ ] T-155 Diseñar controles para volumen de UI (slider)
+- [ ] T-156 Diseñar controles para volumen de cinemáticas (slider)
+- [x] T-157 Diseñar controles para audio 3D (toggle)
+- [ ] T-158 Diseñar controles para subtítulos (toggle + sliders + color picker)
+- [ ] T-159 Diseñar controles para sonidos de interfaz (toggle)
+- [ ] T-160 Diseñar controles para rango dinámico (dropdown)
+- [ ] T-161 Diseñar controles para compresión (toggle)
+- [ ] T-162 Diseñar controles para dispositivo de salida (dropdown)
+- [ ] T-163 Diseñar botones de prueba (auriculares, altavoces)
+- [x] T-164 Diseñar AudioSettings (Resource)
+- [x] T-165 Diseñar campos: master_volume, music_volume, sfx_volume, ambient_volume, voice_volume, ui_volume, cinematic_volume, audio_3d, subtitles, subtitle_size, subtitle_opacity, subtitle_background, subtitle_color, ui_sounds, dynamic_range, compression, output_device
+- [ ] T-166 Diseñar método apply_settings()
+- [x] T-167 Diseñar AudioBusSetup
+- [x] T-168 Diseñar setup de buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic)
+- [x] T-169 Diseñar AudioServer.add_bus() para crear buses
+- [x] T-170 Diseñar AudioServer.set_bus_name() para nombrar buses
+- [x] T-171 Diseñar AudioServer.set_bus_send() para anidar buses
+- [x] T-172 Diseñar Audio3DSetup
+- [x] T-173 Diseñar espacialización con AudioEffectEQ
+- [x] T-174 Diseñar oclusión con AudioEffectLowPassFilter
+- [x] T-175 Diseñar AudioServer.add_bus_effect() para agregar efectos
+- [x] T-176 Diseñar SubtitleManager
+- [ ] T-177 Diseñar método show_subtitle(text, duration)
+- [ ] T-178 Diseñar método hide_subtitle()
+- [ ] T-179 Diseñar RichTextLabel para subtítulos
+- [x] T-180 Diseñar aplicación de tamaño y opacidad desde AudioSettings
+- [x] T-181 Diseñar UISoundManager
+- [ ] T-182 Diseñar método play_hover_sound()
+- [ ] T-183 Diseñar método play_click_sound()
+- [ ] T-184 Diseñar método play_notification_sound()
+- [ ] T-185 Diseñar método play_error_sound()
+- [x] T-186 Diseñar AudioPlayers para cada sonido
+- [x] T-187 Diseñar DynamicRangeManager
+- [ ] T-188 Diseñar método apply_dynamic_range(range)
+- [ ] T-189 Diseñar método apply_compression(bus_index, threshold, ratio, attack, release)
+- [ ] T-190 Diseñar método remove_compression(bus_index)
+- [x] T-191 Diseñar AudioEffectCompressor para compresión
+- [x] T-192 Diseñar CompressionManager
+- [ ] T-193 Diseñar método apply_compression(enabled)
+- [ ] T-194 Diseñar método remove_limiter(bus_index)
+- [x] T-195 Diseñar AudioEffectLimiter para limitación
+- [x] T-196 Diseñar OutputDeviceManager
+- [ ] T-197 Diseñar método get_output_devices()
+- [ ] T-198 Diseñar método set_output_device(device_name)
+- [ ] T-199 Diseñar método get_current_device()
+- [x] T-200 Diseñar AudioServer.get_device_list() para lista de dispositivos
+- [x] T-201 Diseñar AudioServer.set_device() para cambiar dispositivo
+- [x] T-202 Diseñar AudioTestManager
+- [x] T-203 Diseñar método test_headphones()
+- [x] T-204 Diseñar método test_speakers()
+- [ ] T-205 Diseñar test estéreo
+- [ ] T-206 Diseñar test espacial 3D
+- [ ] T-207 Diseñar test balance de canales
+- [x] T-208 Diseñar AudioSettingsLoader
+- [ ] T-209 Diseñar método load_settings()
+- [x] T-210 Diseñar carga desde user://settings/audio_settings.json
+- [x] T-211 Diseñar parseo de JSON
+- [x] T-212 Diseñar aplicación de configuración al inicio
+- [x] T-213 Diseñar fallback a configuración por defecto si no existe
+- [x] T-214 Diseñar AudioSettingsSaver
+- [ ] T-215 Diseñar método save_settings()
+- [x] T-216 Diseñar guardado en user://settings/audio_settings.json
+- [x] T-217 Diseñar serialización de settings a JSON
+- [ ] T-218 Diseñar trigger de guardado al cerrar settings
+- [x] T-219 Diseñar formato de audio_settings.json
+- [x] T-220 Incluir todos los campos de AudioSettings
+- [ ] T-221 Incluir subtítulo_size y subtítulo_opacity como float
+- [ ] T-222 Incluir subtítulo_color como objeto {r, g, b, a}
+- [x] T-223 Diseñar diagrama de flujo de configuración
+- [x] T-224 Diseñar flujo: Usuario abre settings → Menú de configuración de audio → Usuario ajusta volúmenes y opciones → AudioSettings se actualiza → AudioBusSetup aplica configuración → Configuración guardada → Usuario cierra settings → Configuración aplicada
+- [x] T-225 Diseñar pruebas manuales (volúmenes, audio 3D, subtítulos, rango dinámico, compresión, dispositivo de salida, pruebas de audio)
+- [x] T-226 Diseñar pruebas automáticas (carga de configuración, aplicación de configuración, cambio de dispositivo de salida)
+- [ ] T-227 Diseñar pruebas de balance de canales
+- [ ] T-228 Diseñar pruebas de sincronización de subtítulos
+- [ ] T-229 Diseñar pruebas de espacialización 3D
+- [x] T-230 Diseñar pruebas de compresión de audio
+- [ ] T-231 Diseñar pruebas de cambio de dispositivo de salida
+- [ ] T-232 Diseñar 06-Plan-Testings.md (APLICA)
+- [ ] T-233 Diseñar tests de volúmenes
+- [x] T-234 Diseñar tests de audio 3D
+- [ ] T-235 Diseñar tests de subtítulos
+- [ ] T-236 Diseñar tests de rango dinámico
+- [ ] T-237 Diseñar tests de compresión
+- [ ] T-238 Diseñar tests de dispositivo de salida
+- [x] T-239 Diseñar tests de pruebas de audio

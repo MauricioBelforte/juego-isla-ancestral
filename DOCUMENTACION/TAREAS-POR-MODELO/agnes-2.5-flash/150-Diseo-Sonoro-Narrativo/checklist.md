@@ -1,1 +1,158 @@
-# Tareas M150 — Diseo-Sonoro-Narrativo\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/150-Diseo-Sonoro-Narrativo/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Sonido distintivo de Aurora\n[ ] T-002 Sonido distintivo de Resonancia\n[ ] T-003 Sonido distintivo de cada Sello\n[ ] T-004 Sonido distintivo de Elysia\n[ ] T-005 Sonido distintivo de cada templo\n[ ] T-006 Sonido distintivo de descubrimientos\n[ ] T-007 Sonido de misterios\n[ ] T-008 Sonido de puertas antiguas\n[ ] T-009 Sonido de máquinas\n[ ] T-010 Sonido de telemetría ancestral\n[ ] T-011 Diseñar leitmotifs sonoros\n[ ] T-012 Variar intensidad\n[ ] T-013 Usar silencio narrativamente\n[ ] T-014 Definir sonido suave y acogedor\n[ ] T-015 Definir tema: naturaleza (aves, viento, agua)\n[ ] T-016 Definir instrumentos: flauta, piano suave, cuerdas\n[ ] T-017 Diseñar frecuencia: aparición en historia, interacciones importantes\n[ ] T-018 Diseñar leitmotif: repetición con variación según contexto\n[ ] T-019 Diseñar trigger: Aurora aparece → leitmotif de Aurora\n[ ] T-020 Diseñar trigger: Aurora habla → diálogo con leitmotif\n[ ] T-021 Diseñar trigger: Aurora en peligro → leitmotif tensa\n[ ] T-022 Definir sonido místico y vibrante\n[ ] T-023 Definir tema: energía (resonancia, campanas)\n[ ] T-024 Definir instrumentos: campanas, sintetizadores, bajo\n[ ] T-025 Diseñar frecuencia: uso de Resonancia, descubrimiento de tecnología\n[ ] T-026 Diseñar leitmotif: repetición con variación según intensidad\n[ ] T-027 Diseñar trigger: jugador usa Resonancia → sonido de Resonancia\n[ ] T-028 Diseñar trigger: Resonancia se carga → sonido de carga\n[ ] T-029 Diseñar trigger: Resonancia se activa → sonido de activación\n[ ] T-030 Definir cada Sello tiene sonido único\n[ ] T-031 Definir tema: instrumento distintivo por Sello\n[ ] T-032 Definir instrumentos: cello, piano, flauta, etc.\n[ ] T-033 Diseñar frecuencia: elección de Sello por el jugador\n[ ] T-034 Diseñar leitmotif: repetición al recordar Sello\n[ ] T-035 Diseñar trigger: jugador elige Sello → sonido del Sello\n[ ] T-036 Diseñar trigger: jugador recuerda Sello → leitmotif del Sello\n[ ] T-037 Diseñar trigger: jugador completa Sello → variación del leitmotif\n[ ] T-038 Definir sonido tenso y misterioso\n[ ] T-039 Definir tema: oscuro (campanas distantes, bajo)\n[ ] T-040 Definir instrumentos: bajo, campanas distantes, eco\n[ ] T-041 Diseñar frecuencia: aparición de Elysia, cinemáticas\n[ ] T-042 Diseñar leitmotif: repetición con variación según contexto\n[ ] T-043 Diseñar trigger: Elysia aparece → leitmotif de Elysia\n[ ] T-044 Diseñar trigger: Elysia habla → diálogo con leitmotif\n[ ] T-045 Diseñar trigger: Elysia ataca → leitmotif tensa\n[ ] T-046 Definir cada templo tiene sonido único\n[ ] T-047 Definir tema: bioma (hielo, volcán, bosque)\n[ ] T-048 Definir instrumentos: cello, bajo, flauta\n[ ] T-049 Diseñar frecuencia: entrada a templo, puzzles\n[ ] T-050 Diseñar leitmotif: repetición en templo específico\n[ ] T-051 Diseñar trigger: jugador entra a templo → leitmotif del templo\n[ ] T-052 Diseñar trigger: jugador resuelve puzzle → variación del leitmotif\n[ ] T-053 Diseñar trigger: jugador completa templo → variación final del leitmotif\n[ ] T-054 Definir sonido de brillo y satisfacción\n[ ] T-055 Definir tema: descubrimiento (campana, swoosh)\n[ ] T-056 Definir instrumentos: campana, sintetizador brillante\n[ ] T-057 Diseñar frecuencia: descubrimiento de nueva isla, item, mecánica\n[ ] T-058 Diseñar trigger: jugador descubre nueva isla → sonido de descubrimiento\n[ ] T-059 Diseñar trigger: jugador descubre nuevo item → sonido de descubrimiento\n[ ] T-060 Diseñar trigger: jugador desbloquea nueva mecánica → sonido de descubrimiento\n[ ] T-061 Definir sonido tenso y misterioso\n[ ] T-062 Definir tema: secreto (susurro, eco)\n[ ] T-063 Definir instrumentos: susurro, eco, sintetizador tenso\n[ ] T-064 Diseñar frecuencia: descubrimiento de secreto, lore oculto\n[ ] T-065 Diseñar trigger: jugador descubre secreto → sonido de misterio\n[ ] T-066 Diseñar trigger: jugador encuentra lore oculto → sonido de misterio\n[ ] T-067 Diseñar trigger: jugador entra a área misteriosa → ambiente tenso\n[ ] T-068 Definir sonido de mecanismo antiguo\n[ ] T-069 Definir tema: antiguo (engranaje, rocas)\n[ ] T-070 Definir instrumentos: engranaje, rocas, eco\n[ ] T-071 Diseñar frecuencia: apertura de puerta antigua, mecanismo de templo\n[ ] T-072 Diseñar trigger: jugador interactúa con puerta antigua → sonido de mecanismo\n[ ] T-073 Diseñar trigger: puerta se abre → sonido de apertura\n[ ] T-074 Diseñar trigger: puerta se cierra → sonido de cierre\n[ ] T-075 Definir sonido de tecnología ancestral\n[ ] T-076 Definir tema: tecnología (zumbido, chisporroteo)\n[ ] T-077 Definir instrumentos: zumbido, chisporroteo, energía\n[ ] T-078 Diseñar frecuencia: interacción con máquina ancestral, uso de tecnología\n[ ] T-079 Diseñar trigger: jugador interactúa con máquina → sonido de máquina\n[ ] T-080 Diseñar trigger: máquina se activa → sonido de activación\n[ ] T-081 Diseñar trigger: máquina se desactiva → sonido de desactivación\n[ ] T-082 Definir sonido de UI suave\n[ ] T-083 Definir tema: tecnología ancestral (beep, chirp)\n[ ] T-084 Definir instrumentos: beep, chirp, tono suave\n[ ] T-085 Diseñar frecuencia: UI feedback, telemetría ancestral\n[ ] T-086 Diseñar trigger: UI feedback → sonido de telemetría\n[ ] T-087 Diseñar trigger: telemetría se actualiza → sonido de actualización\n[ ] T-088 Diseñar trigger: telemetría se completa → sonido de completado\n[ ] T-089 Definir repetición con variación\n[ ] T-090 Definir leitmotifs de personajes (Aurora, Elysia, NPCs)\n[ ] T-091 Definir leitmotifs de islas (cada isla tiene leitmotif)\n[ ] T-092 Definir leitmotifs de temas (cozy, tensión, peligro, misterio)\n[ ] T-093 Diseñar leitmotif de Aurora: repetición con variación según contexto\n[ ] T-094 Diseñar leitmotif de Elysia: repetición con variación según contexto\n[ ] T-095 Diseñar leitmotif de cada isla: repetición en isla específica\n[ ] T-096 Diseñar leitmotif de cada templo: repetición en templo específico\n[ ] T-097 Definir contexto calma (leitmotifs suaves)\n[ ] T-098 Definir contexto tensión (leitmotifs tensos)\n[ ] T-099 Definir contexto peligro (leitmotifs peligrosos)\n[ ] T-100 Diseñar contexto calma → leitmotifs suaves (piano, flauta)\n[ ] T-101 Diseñar contexto tensión → leitmotifs tensos (bajo, campanas)\n[ ] T-102 Diseñar contexto peligro → leitmotifs peligrosos (sintetizador, percusión)\n[ ] T-103 Definir pausas para énfasis\n[ ] T-104 Definir silencio para tensión\n[ ] T-105 Definir silencio para impacto\n[ ] T-106 Diseñar pausa después de evento importante → silencio narrativo\n[ ] T-107 Diseñar silencio antes de revelación → tensión\n[ ] T-108 Diseñar silencio después de música → impacto\n[ ] T-109 Diseñar signal leitmotif_started(leitmotif_id)\n[ ] T-110 Diseñar signal leitmotif_ended(leitmotif_id)\n[ ] T-111 Diseñar método setup_audio_context()\n[ ] T-112 Diseñar método play_leitmotif(leitmotif_id, context)\n[ ] T-113 Diseñar método stop_leitmotif()\n[ ] T-114 Diseñar método play_discovery_sound()\n[ ] T-115 Diseñar método play_mystery_sound()\n[ ] T-116 Diseñar método play_ancient_door_sound()\n[ ] T-117 Diseñar método play_machine_sound()\n[ ] T-118 Diseñar método play_telemetry_sound()\n[ ] T-119 Diseñar método set_audio_context(context)\n[ ] T-120 Diseñar método play_narrative_silence(duration)\n[ ] T-121 Diseñar variable current_leitmotif\n[ ] T-122 Diseñar variable audio_context\n[ ] T-123 Diseñar LeitmotifConfig como Resource\n[ ] T-124 Diseñar propiedad aurora_leitmotif\n[ ] T-125 Diseñar propiedad resonance_leitmotif\n[ ] T-126 Diseñar propiedad elysia_leitmotif\n[ ] T-127 Diseñar propiedad sello_1_leitmotif\n[ ] T-128 Diseñar propiedad sello_2_leitmotif\n[ ] T-129 Diseñar propiedad sello_3_leitmotif\n[ ] T-130 Diseñar propiedad sello_4_leitmotif\n[ ] T-131 Diseñar propiedad sello_5_leitmotif\n[ ] T-132 Diseñar propiedad sello_6_leitmotif\n[ ] T-133 Diseñar propiedad sello_7_leitmotif\n[ ] T-134 Diseñar propiedad temple_hielo_leitmotif\n[ ] T-135 Diseñar propiedad temple_volcan_leitmotif\n[ ] T-136 Diseñar propiedad temple_bosque_leitmotif\n[ ] T-137 Diseñar res://audio/leitmotif_config.gd\n[ ] T-138 Diseñar prueba de leitmotif de Aurora (calma, tensión, peligro)\n[ ] T-139 Diseñar prueba de leitmotif de Resonancia (calma, tensión, peligro)\n[ ] T-140 Diseñar prueba de leitmotif de cada Sello\n[ ] T-141 Diseñar prueba de leitmotif de Elysia (misterio, peligro)\n[ ] T-142 Diseñar prueba de leitmotif de cada templo\n[ ] T-143 Diseñar prueba de sonido de descubrimientos\n[ ] T-144 Diseñar prueba de sonido de misterios\n[ ] T-145 Diseñar prueba de sonido de puertas antiguas\n[ ] T-146 Diseñar prueba de sonido de máquinas\n[ ] T-147 Diseñar prueba de sonido de telemetría ancestral\n[ ] T-148 Diseñar prueba de variación de intensidad\n[ ] T-149 Diseñar prueba de silencio narrativo
+# Checklist de Tareas — M150 150-Diseo-Sonoro-Narrativo
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/150-Diseo-Sonoro-Narrativo/plan-actual/05-Checklist.md
+
+- [ ] T-001 Sonido distintivo de Aurora
+- [x] T-002 Sonido distintivo de Resonancia
+- [ ] T-003 Sonido distintivo de cada Sello
+- [ ] T-004 Sonido distintivo de Elysia
+- [ ] T-005 Sonido distintivo de cada templo
+- [ ] T-006 Sonido distintivo de descubrimientos
+- [ ] T-007 Sonido de misterios
+- [ ] T-008 Sonido de puertas antiguas
+- [ ] T-009 Sonido de máquinas
+- [ ] T-010 Sonido de telemetría ancestral
+- [x] T-011 Diseñar leitmotifs sonoros
+- [ ] T-012 Variar intensidad
+- [x] T-013 Usar silencio narrativamente
+- [ ] T-014 Definir sonido suave y acogedor
+- [ ] T-015 Definir tema: naturaleza (aves, viento, agua)
+- [ ] T-016 Definir instrumentos: flauta, piano suave, cuerdas
+- [x] T-017 Diseñar frecuencia: aparición en historia, interacciones importantes
+- [x] T-018 Diseñar leitmotif: repetición con variación según contexto
+- [x] T-019 Diseñar trigger: Aurora aparece → leitmotif de Aurora
+- [x] T-020 Diseñar trigger: Aurora habla → diálogo con leitmotif
+- [x] T-021 Diseñar trigger: Aurora en peligro → leitmotif tensa
+- [ ] T-022 Definir sonido místico y vibrante
+- [x] T-023 Definir tema: energía (resonancia, campanas)
+- [ ] T-024 Definir instrumentos: campanas, sintetizadores, bajo
+- [x] T-025 Diseñar frecuencia: uso de Resonancia, descubrimiento de tecnología
+- [x] T-026 Diseñar leitmotif: repetición con variación según intensidad
+- [x] T-027 Diseñar trigger: jugador usa Resonancia → sonido de Resonancia
+- [x] T-028 Diseñar trigger: Resonancia se carga → sonido de carga
+- [x] T-029 Diseñar trigger: Resonancia se activa → sonido de activación
+- [ ] T-030 Definir cada Sello tiene sonido único
+- [ ] T-031 Definir tema: instrumento distintivo por Sello
+- [ ] T-032 Definir instrumentos: cello, piano, flauta, etc.
+- [x] T-033 Diseñar frecuencia: elección de Sello por el jugador
+- [x] T-034 Diseñar leitmotif: repetición al recordar Sello
+- [ ] T-035 Diseñar trigger: jugador elige Sello → sonido del Sello
+- [x] T-036 Diseñar trigger: jugador recuerda Sello → leitmotif del Sello
+- [x] T-037 Diseñar trigger: jugador completa Sello → variación del leitmotif
+- [ ] T-038 Definir sonido tenso y misterioso
+- [ ] T-039 Definir tema: oscuro (campanas distantes, bajo)
+- [ ] T-040 Definir instrumentos: bajo, campanas distantes, eco
+- [x] T-041 Diseñar frecuencia: aparición de Elysia, cinemáticas
+- [x] T-042 Diseñar leitmotif: repetición con variación según contexto
+- [x] T-043 Diseñar trigger: Elysia aparece → leitmotif de Elysia
+- [x] T-044 Diseñar trigger: Elysia habla → diálogo con leitmotif
+- [x] T-045 Diseñar trigger: Elysia ataca → leitmotif tensa
+- [ ] T-046 Definir cada templo tiene sonido único
+- [x] T-047 Definir tema: bioma (hielo, volcán, bosque)
+- [ ] T-048 Definir instrumentos: cello, bajo, flauta
+- [x] T-049 Diseñar frecuencia: entrada a templo, puzzles
+- [x] T-050 Diseñar leitmotif: repetición en templo específico
+- [x] T-051 Diseñar trigger: jugador entra a templo → leitmotif del templo
+- [x] T-052 Diseñar trigger: jugador resuelve puzzle → variación del leitmotif
+- [x] T-053 Diseñar trigger: jugador completa templo → variación final del leitmotif
+- [x] T-054 Definir sonido de brillo y satisfacción
+- [ ] T-055 Definir tema: descubrimiento (campana, swoosh)
+- [ ] T-056 Definir instrumentos: campana, sintetizador brillante
+- [x] T-057 Diseñar frecuencia: descubrimiento de nueva isla, item, mecánica
+- [ ] T-058 Diseñar trigger: jugador descubre nueva isla → sonido de descubrimiento
+- [ ] T-059 Diseñar trigger: jugador descubre nuevo item → sonido de descubrimiento
+- [ ] T-060 Diseñar trigger: jugador desbloquea nueva mecánica → sonido de descubrimiento
+- [ ] T-061 Definir sonido tenso y misterioso
+- [ ] T-062 Definir tema: secreto (susurro, eco)
+- [ ] T-063 Definir instrumentos: susurro, eco, sintetizador tenso
+- [x] T-064 Diseñar frecuencia: descubrimiento de secreto, lore oculto
+- [ ] T-065 Diseñar trigger: jugador descubre secreto → sonido de misterio
+- [ ] T-066 Diseñar trigger: jugador encuentra lore oculto → sonido de misterio
+- [x] T-067 Diseñar trigger: jugador entra a área misteriosa → ambiente tenso
+- [ ] T-068 Definir sonido de mecanismo antiguo
+- [ ] T-069 Definir tema: antiguo (engranaje, rocas)
+- [ ] T-070 Definir instrumentos: engranaje, rocas, eco
+- [x] T-071 Diseñar frecuencia: apertura de puerta antigua, mecanismo de templo
+- [ ] T-072 Diseñar trigger: jugador interactúa con puerta antigua → sonido de mecanismo
+- [ ] T-073 Diseñar trigger: puerta se abre → sonido de apertura
+- [x] T-074 Diseñar trigger: puerta se cierra → sonido de cierre
+- [ ] T-075 Definir sonido de tecnología ancestral
+- [ ] T-076 Definir tema: tecnología (zumbido, chisporroteo)
+- [ ] T-077 Definir instrumentos: zumbido, chisporroteo, energía
+- [x] T-078 Diseñar frecuencia: interacción con máquina ancestral, uso de tecnología
+- [ ] T-079 Diseñar trigger: jugador interactúa con máquina → sonido de máquina
+- [x] T-080 Diseñar trigger: máquina se activa → sonido de activación
+- [x] T-081 Diseñar trigger: máquina se desactiva → sonido de desactivación
+- [ ] T-082 Definir sonido de UI suave
+- [ ] T-083 Definir tema: tecnología ancestral (beep, chirp)
+- [ ] T-084 Definir instrumentos: beep, chirp, tono suave
+- [x] T-085 Diseñar frecuencia: UI feedback, telemetría ancestral
+- [x] T-086 Diseñar trigger: UI feedback → sonido de telemetría
+- [x] T-087 Diseñar trigger: telemetría se actualiza → sonido de actualización
+- [ ] T-088 Diseñar trigger: telemetría se completa → sonido de completado
+- [x] T-089 Definir repetición con variación
+- [x] T-090 Definir leitmotifs de personajes (Aurora, Elysia, NPCs)
+- [x] T-091 Definir leitmotifs de islas (cada isla tiene leitmotif)
+- [x] T-092 Definir leitmotifs de temas (cozy, tensión, peligro, misterio)
+- [x] T-093 Diseñar leitmotif de Aurora: repetición con variación según contexto
+- [x] T-094 Diseñar leitmotif de Elysia: repetición con variación según contexto
+- [x] T-095 Diseñar leitmotif de cada isla: repetición en isla específica
+- [x] T-096 Diseñar leitmotif de cada templo: repetición en templo específico
+- [x] T-097 Definir contexto calma (leitmotifs suaves)
+- [x] T-098 Definir contexto tensión (leitmotifs tensos)
+- [x] T-099 Definir contexto peligro (leitmotifs peligrosos)
+- [x] T-100 Diseñar contexto calma → leitmotifs suaves (piano, flauta)
+- [x] T-101 Diseñar contexto tensión → leitmotifs tensos (bajo, campanas)
+- [x] T-102 Diseñar contexto peligro → leitmotifs peligrosos (sintetizador, percusión)
+- [ ] T-103 Definir pausas para énfasis
+- [x] T-104 Definir silencio para tensión
+- [x] T-105 Definir silencio para impacto
+- [x] T-106 Diseñar pausa después de evento importante → silencio narrativo
+- [x] T-107 Diseñar silencio antes de revelación → tensión
+- [x] T-108 Diseñar silencio después de música → impacto
+- [x] T-109 Diseñar NarrativeAudioManager como autoload
+- [x] T-110 Diseñar signal leitmotif_started(leitmotif_id)
+- [x] T-111 Diseñar signal leitmotif_ended(leitmotif_id)
+- [x] T-112 Diseñar método setup_audio_context()
+- [x] T-113 Diseñar método play_leitmotif(leitmotif_id, context)
+- [x] T-114 Diseñar método stop_leitmotif()
+- [x] T-115 Diseñar método play_discovery_sound()
+- [x] T-116 Diseñar método play_mystery_sound()
+- [x] T-117 Diseñar método play_ancient_door_sound()
+- [x] T-118 Diseñar método play_machine_sound()
+- [x] T-119 Diseñar método play_telemetry_sound()
+- [x] T-120 Diseñar método set_audio_context(context)
+- [x] T-121 Diseñar método play_narrative_silence(duration)
+- [x] T-122 Diseñar variable current_leitmotif
+- [x] T-123 Diseñar variable audio_context
+- [x] T-124 Diseñar LeitmotifConfig como Resource
+- [x] T-125 Diseñar propiedad aurora_leitmotif
+- [x] T-126 Diseñar propiedad resonance_leitmotif
+- [x] T-127 Diseñar propiedad elysia_leitmotif
+- [x] T-128 Diseñar propiedad sello_1_leitmotif
+- [x] T-129 Diseñar propiedad sello_2_leitmotif
+- [x] T-130 Diseñar propiedad sello_3_leitmotif
+- [x] T-131 Diseñar propiedad sello_4_leitmotif
+- [x] T-132 Diseñar propiedad sello_5_leitmotif
+- [x] T-133 Diseñar propiedad sello_6_leitmotif
+- [x] T-134 Diseñar propiedad sello_7_leitmotif
+- [x] T-135 Diseñar propiedad temple_hielo_leitmotif
+- [x] T-136 Diseñar propiedad temple_volcan_leitmotif
+- [x] T-137 Diseñar propiedad temple_bosque_leitmotif
+- [x] T-138 Diseñar res://audio/narrative_audio_manager.gd
+- [x] T-139 Diseñar res://audio/leitmotif_config.gd
+- [x] T-140 Diseñar prueba de leitmotif de Aurora (calma, tensión, peligro)
+- [x] T-141 Diseñar prueba de leitmotif de Resonancia (calma, tensión, peligro)
+- [x] T-142 Diseñar prueba de leitmotif de cada Sello
+- [x] T-143 Diseñar prueba de leitmotif de Elysia (misterio, peligro)
+- [x] T-144 Diseñar prueba de leitmotif de cada templo
+- [ ] T-145 Diseñar prueba de sonido de descubrimientos
+- [ ] T-146 Diseñar prueba de sonido de misterios
+- [ ] T-147 Diseñar prueba de sonido de puertas antiguas
+- [ ] T-148 Diseñar prueba de sonido de máquinas
+- [ ] T-149 Diseñar prueba de sonido de telemetría ancestral
+- [x] T-150 Diseñar prueba de variación de intensidad
+- [x] T-151 Diseñar prueba de silencio narrativo

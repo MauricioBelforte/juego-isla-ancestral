@@ -1,0 +1,107 @@
+# Checklist de Tareas — M83 83-Licencias-De-Software
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/83-Licencias-De-Software/plan-actual/05-Checklist.md
+
+- [x] T-001 Crear Resource LicenseProfile con campos: dependency_name, version, license_type, license_text, license_url, commercial_use, modifications_required, attribution_required, source_offer_required, notes
+- [x] T-002 Definir enum LicenseType con todos los tipos: MIT, BSD_2, BSD_3, APACHE_2, GPL_2, GPL_3, LGPL, MPL_2, AGPL, CC0, CC_BY, CC_BY_NC, PROPRIETARY, UNKNOWN, DUAL
+- [x] T-003 Implementar función scan_project() que escanea core, addons y dependencias externas
+- [x] T-004 Implementar función scan_addon() que lee plugin.cfg y busca LICENSE
+- [x] T-005 Implementar función scan_directory() recursiva para buscar archivos de licencia
+- [x] T-006 Crear detección automática de archivos LICENSE, LICENSE.txt, LICENSE.md, COPYING, COPYING.txt
+- [x] T-007 Implementar clasificador de licencias basado en contenido de texto (_classify_license)
+- [x] T-008 Soporte para detección de MIT, Apache 2.0, GPL-2, GPL-3, LGPL, MPL-2, AGPL, BSD-2, BSD-3, CC-BY, CC-BY-NC, CC0
+- [x] T-009 Fallback a UNKNOWN cuando la licencia no puede clasificarse
+- [x] T-010 Crear inventario persistente (Resource) que almacena resultados del escaneo
+- [ ] T-011 Cache de resultados de escaneo para evitar re-escaneos innecesarios
+- [x] T-012 Función refresh_inventory() para forzar re-escaneo completo
+- [x] T-013 Soporte para exclusiones: marcar dependencias que no requieren escaneo
+- [x] T-014 Logging de todas las licencias encontradas
+- [x] T-015 Exportar inventario a formato JSON para auditoría externa
+- [x] T-016 Crear Resource LicensePolicy con campos: policy_name, allowed_licenses, prohibited_licenses, copyleft_mode, require_attribution, require_source_offer
+- [x] T-017 Definir enum CopyleftMode: ALLOW, ISOLATE, DENY
+- [x] T-018 Implementar función validate(inventory) que retorna LicenseValidationResult
+- [x] T-019 Verificar cada licencia contra lista de prohibidas en policy
+- [x] T-020 Verificar cada licencia contra lista de permitidas (si está definida)
+- [x] T-021 Detectar incompatibilidades entre licencias del mismo proyecto
+- [x] T-022 Verificar obligaciones de atribución (attribution_required)
+- [x] T-023 Verificar si alguna licencia requiere source code offer
+- [x] T-024 Verificar si alguna licencia prohíbe uso comercial
+- [x] T-025 Crear Resource LicenseValidationResult con: errors, warnings, infos
+- [x] T-026 Función check_compatibility(license_a, license_b) para verificar compatibilidad entre dos licencias
+- [x] T-027 Función requires_source_offer(inventory) que retorna true si GPL/AGPL detectado
+- [x] T-028 Reglas de compatibilidad: GPL-3 puede incluir MIT, pero MIT no puede ser relicenciado como GPL-3
+- [x] T-029 Soporte para licencias duales (elegir una de dos opciones)
+- [x] T-030 Generación de reporte de validación legible por humanos
+- [x] T-031 Implementar generate_notice(inventory) que genera THIRD_PARTY_LICENSES.txt
+- [x] T-032 Formato estándar: separadores visuales, metadata completa por dependencia
+- [x] T-033 Función save_notices(inventory, output_dir) que guarda archivo principal + copias individuales
+- [x] T-034 Crear subdirectorio licenses/ con copies de licencias originales por dependencia
+- [x] T-035 Función include_in_build(inventory, build_dir) para builds de distribución
+- [x] T-036 Header del archivo con fecha de generación y versión del build
+- [ ] T-037 Soporte para formato Markdown (.md) y texto plano (.txt)
+- [x] T-038 Incluir URL de cada licencia para referencia
+- [x] T-039 Numeración secuencial de dependencias en el archivo
+- [ ] T-040 Cleanup automático de notices obsoletos al regenerar
+- [x] T-041 Agregar paso de licencias en build_script.gd después de validación de builds
+- [x] T-042 Build falla si LicenseValidator encuentra errores (licencia prohibida)
+- [x] T-043 Build genera warning si licencia no verificada (UNKNOWN)
+- [x] T-044 LicenseNoticeGenerator ejecuta después de validación exitosa
+- [x] T-045 Notices incluidos automáticamente en cada build de distribución
+- [x] T-046 Integración con M72 (Validación de Builds): agregar checks de licencia
+- [x] T-047 Integración con M117 (Build Pipeline): flujo completo de licencias
+- [x] T-048 Logging de resultados de validación en build log
+- [x] T-049 Modo dry-run para verificar licencias sin generar notices
+- [x] T-050 Skip de validación de licencias en builds de desarrollo (solo release)
+- [x] T-051 Conexión con M55 (Gestión de Dependencias): leer inventario de dependencias
+- [x] T-052 Al detectar dependencia nueva, escanear licencia automáticamente
+- [x] T-053 Actualizar LicenseProfile cuando dependencia cambia de versión
+- [x] T-054 Sincronizar inventario de licencias con package_manager
+- [x] T-055 Soporte para dependencias Git (submodules, subdirectories)
+- [x] T-056 Detectar dependencias huérfanas (instaladas pero no referenciadas)
+- [x] T-057 Alerta al agregar dependencia con licencia incompatible
+- [x] T-058 Verificar licencias de dependencias transitivas
+- [ ] T-059 Soporte para lock files (godot.lock o equivalente)
+- [x] T-060 Generar reporte de dependencias × licencias para revisión
+- [x] T-061 Verificar licencias de assets de terceros (modelos, texturas, audio)
+- [x] T-062 Asset con licencia NO许可 incompatible con rating del juego → error
+- [x] T-063 AssetCreativeCommons con cláusula NC + juego commercial = error
+- [x] T-064 Generar attribución de assets en build output
+- [x] T-065 Integración con M71 (Gestión de Assets): verificar licencias al importar
+- [x] T-066 Alerta al importar asset con licencia no verificada
+- [x] T-067 Soporte para assets con múltiples licencias (dual licensing)
+- [x] T-068 Tracking de atribución requerida por cada asset
+- [x] T-069 Generación de CREDITS.txt complementario a THIRD_PARTY_LICENSES.txt
+- [x] T-070 Validación de licencias de assets en exportación a plataformas
+- [x] T-071 Crear build_licenses.py para uso fuera de Godot
+- [x] T-072 Script escanea directorio del proyecto y genera notices
+- [x] T-073 Soporte para modo verbose (logging detallado)
+- [x] T-074 Soporte para modo silencioso (solo errores)
+- [x] T-075 Integración con CI/CD pipeline
+- [x] T-076 Soporte para output en múltiples formatos (txt, md, json)
+- [x] T-077 Filtrado por tipo de licencia (solo mostrar comercial, solo mostrar copyleft)
+- [ ] T-078 Resumen ejecutivo al final del reporte
+- [x] T-079 Verificación de integridad de archivos de licencia
+- [x] T-080 Modo compare: detectar cambios desde última ejecución
+- [x] T-081 Test de escaneo de proyecto vacío (solo Godot core)
+- [x] T-082 Test de escaneo con addons con licencia conocida (MIT)
+- [x] T-083 Test de escaneo con addon sin archivo de licencia (UNKNOWN)
+- [x] T-084 Test de validación con policy permisiva (todo permitido)
+- [x] T-085 Test de validación con policy restrictiva (GPL denegado)
+- [x] T-086 Test de generación de notices con inventario vacío
+- [x] T-087 Test de generación de notices con inventario completo
+- [x] T-088 Test de compatibilidad entre licencias conocidas
+- [x] T-089 Test de integración con build pipeline (flujo completo)
+- [x] T-090 Test de edge case: dependencia circular
+- [x] T-091 Documentar cada función pública con XML docs
+- [ ] T-092 Crear guía de uso para el equipo de desarrollo
+- [x] T-093 Documentar cómo agregar nuevas licencias al clasificador
+- [x] T-094 Documentar cómo personalizar LicensePolicy para cada proyecto
+- [x] T-095 FAQ de licencias comunes en juegos Godot
+- [ ] T-096 Ejemplos de uso de cada nodo del módulo
+- [x] T-097 Tabla de compatibilidad de licencias (referencia rápida)
+- [x] T-098 Registro de cambios del módulo
+- [x] T-099 Procedimiento para auditar licencias periódicamente
+- [ ] T-100 Contacto de asesoría legal para casos edge

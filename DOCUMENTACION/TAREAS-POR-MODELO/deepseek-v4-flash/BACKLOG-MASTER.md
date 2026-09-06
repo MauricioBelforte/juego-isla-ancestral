@@ -1,12 +1,13 @@
 # BACKLOG-MASTER.md — deepseek-v4-flash (Kilo Code)
 
 **Creado:** 2026-09-02
+**Actualizado:** 2026-09-04 (iter. 4 M87 — 15 tareas cerradas con evidencia, Log 639)
 **Total módulos:** 8
 
 | Módulo | Pendientes | Completadas | Dudas | Total |
 |---|---|---|---|---|
 | 54-Mapa | 171 | 4 | 1 | 176 |
-| 87-Localizacion | 108 | 27 | 1 | 136 |
+| 87-Localizacion | 74 | 61 | 1 | 136 |
 | 101-QA-General | 0 | 209 | 0 | 209 |
 | 103-Logging | 157 | 21 | 0 | 178 |
 | 105-Telemetria-De-Gameplay | 130 | 33 | 0 | 163 |
@@ -14,7 +15,7 @@
 | 115-Hardware | 15 | 72 | 17 | 104 |
 | 116-Instalador | 166 | 30 | 2 | 198 |
 
-**Total tareas: 1386** (pendientes 945, completadas 420, dudas 21)
+**Total tareas: 1386** (pendientes 911, completadas 454, dudas 21)
 
 ## Orden de prioridad (regla §5 de la guía)
 1. Módulos con núcleo existente (verificación rápida): 103, 105, 87

@@ -1,1 +1,112 @@
-# Tareas M132 — Produccion-De-Equipo\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Documentar diagrama organizativo\n[ ] T-002 Definir roles principales: Game Director, Lead Programmer, Lead Artist, Game Designer, Producer\n[ ] T-003 Documentar líneas de reporte\n[ ] T-004 Definir roles flexibles para equipo pequeño\n[ ] T-005 Crear tabla RACI de decisiones\n[ ] T-006 Documentar responsabilidades de cada rol\n[ ] T-007 Definir proceso de cambio de roles\n[ ] T-008 Documentar proceso de incorporación de nuevos roles\n[ ] T-009 Game Director: visión del juego, decisiones finales, prioridades\n[ ] T-010 Lead Programmer: arquitectura, código core, revisión de PRs\n[ ] T-011 Lead Artist: dirección artística, pipeline de assets, calidad visual\n[ ] T-012 Game Designer: mecánicas, niveles, balance, documentación de diseño\n[ ] T-013 Producer: schedule, presupuesto, coordinación, removal de blockers\n[ ] T-014 3D Artists: modelado, texturizado, animación\n[ ] T-015 2D Artists: UI, iconos, concept art, ilustraciones\n[ ] T-016 Audio Lead: dirección de audio, implementación, mixing\n[ ] T-017 Documentar Habilidades requeridas por rol\n[ ] T-018 Documentar Herramientas requeridas por rol\n[ ] T-019 Definir proceso de evaluación de desempeño\n[ ] T-020 Crear perfil de rol para cada posición\n[ ] T-021 Definir canales de Discord por área (general, dev, art, design, production)\n[ ] T-022 Establecer horarios de trabajo y overlaps\n[ ] T-023 Definir reunión Daily Standup (15 min, diaria)\n[ ] T-024 Definir reunión Sprint Review (1 hora, semanal)\n[ ] T-025 Definir reunión Retrospective (1 hora, quincenal)\n[ ] T-026 Definir reunión Planning (2 horas, mensual)\n[ ] T-027 Definir reunión 1:1 (30 min, quincenal)\n[ ] T-028 Definir reunión All Hands (1 hora, mensual)\n[ ] T-029 Crear template de reunión\n[ ] T-030 Definir reglas de comunicación asíncrona\n[ ] T-031 Definir reglas de respuesta a mensajes urgentes\n[ ] T-032 Documentar herramientas de comunicación (Discord, Notion, Linear)\n[ ] T-033 Crear guía de estilo para comunicación escrita\n[ ] T-034 Definir proceso de documentar decisiones\n[ ] T-035 Definir pipeline de tareas: Backlog ? To Do ? In Progress ? Review ? Done\n[ ] T-036 Definir estado Blocked con causa\n[ ] T-037 Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)\n[ ] T-038 Definir WIP limits por columna\n[ ] T-039 Crear template de tarea completa\n[ ] T-040 Definir Definition of Ready (tiene contexto, estimación, dependencias)\n[ ] T-041 Seleccionar herramienta de gestión (Linear, Notion, GitHub Projects)\n[ ] T-042 Crear tablero Kanban inicial\n[ ] T-043 Definir proceso de estimation (story points o horas)\n[ ] T-044 Definir proceso de daily update de tareas\n[ ] T-045 Crear dashboard de progreso\n[ ] T-046 Definir proceso de cierre de sprint/review\n[ ] T-047 Definir proceso de retrospective\n[ ] T-048 Crear template de retrospective\n[ ] T-049 Documentar modelo RACI para decisiones clave\n[ ] T-050 Definir quién decide: arquitectura (Lead Programmer), arte (Lead Artist), producto (Game Director)\n[ ] T-051 Crear proceso de change request para cambios de alcance\n[ ] T-052 Definir proceso de escalación (3 niveles)\n[ ] T-053 Definir cuándo se necesita consenso vs. decide el líder\n[ ] T-054 Definir proceso de evaluación de riesgos en decisiones\n[ ] T-055 Crear template de documentación de decisión\n[ ] T-056 Definir proceso de reversión de decisiones\n[ ] T-057 Documentar proceso de escalación (3 niveles)\n[ ] T-058 Nivel 1: discusión directa entre involucrados\n[ ] T-059 Nivel 2: media el Lead del área\n[ ] T-060 Nivel 3: decide el Game Director\n[ ] T-061 Crear template de mediación\n[ ] T-062 Definir proceso de mediación formal\n[ ] T-063 Definir política de tolerancia cero a acoso\n[ ] T-064 Documentar proceso de feedback constructivo\n[ ] T-065 Definir proceso de evaluación post-conflicto\n[ ] T-066 Crear checklist de onboarding (semana 1)\n[ ] T-067 Documentar accesos necesarios (GitHub, Discord, herramientas)\n[ ] T-068 Crear guía de revisión de documentación del proyecto\n[ ] T-069 Asignar mentor para cada nuevo miembro\n[ ] T-070 Definir primera tarea simple para familiarizarse\n[ ] T-071 Crear reunión de bienvenida con Game Director\n[ ] T-072 Crear reunión de bienvenida con Lead del área\n[ ] T-073 Documentar proceso de evaluación de onboarding\n[ ] T-074 Crear FAQ para nuevos miembros\n[ ] T-075 Definir período de prueba (30-90 días)\n[ ] T-076 Definir horarios de trabajo flexibles\n[ ] T-077 Establecer límite de horas extras\n[ ] T-078 Definir política de días libres\n[ ] T-079 Crear proceso de prevención de burnout\n[ ] T-080 Definir política de trabajo remoto\n[ ] T-081 Crear espacio para socialización del equipo\n[ ] T-082 Definir proceso de feedback regular\n[ ] T-083 Crear encuesta de satisfacción del equipo\n[ ] T-084 Definir proceso de mejora continua\n[ ] T-085 Documentar política de feriados y vacaciones\n[ ] T-086 Revisar procesos trimestralmente\n[ ] T-087 Documentar cambios en procesos\n[ ] T-088 Crear changelog de procesos\n[ ] T-089 Distribuir documentación a todo el equipo\n[ ] T-090 Entrenar al equipo en los procesos\n[ ] T-091 Evaluar efectividad de procesos\n[ ] T-092 Ajustar según feedback del equipo\n[ ] T-093 Archivar procesos obsoletos
+# Checklist de Tareas — M132 132-Produccion-De-Equipo
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/05-Checklist.md
+
+- [x] T-001 Definir estructura jerárquica del equipo
+- [x] T-002 Documentar diagrama organizativo
+- [x] T-003 Definir roles principales: Game Director, Lead Programmer, Lead Artist, Game Designer, Producer
+- [x] T-004 Definir roles de soporte: QA, Community Manager
+- [x] T-005 Documentar líneas de reporte
+- [ ] T-006 Definir roles flexibles para equipo pequeño
+- [x] T-007 Crear tabla RACI de decisiones
+- [x] T-008 Documentar responsabilidades de cada rol
+- [ ] T-009 Definir proceso de cambio de roles
+- [x] T-010 Documentar proceso de incorporación de nuevos roles
+- [x] T-011 Game Director: visión del juego, decisiones finales, prioridades
+- [ ] T-012 Lead Programmer: arquitectura, código core, revisión de PRs
+- [x] T-013 Lead Artist: dirección artística, pipeline de assets, calidad visual
+- [x] T-014 Game Designer: mecánicas, niveles, balance, documentación de diseño
+- [x] T-015 Producer: schedule, presupuesto, coordinación, removal de blockers
+- [x] T-016 Programadores: implementación de features, bug fixes, testing
+- [x] T-017 3D Artists: modelado, texturizado, animación
+- [x] T-018 2D Artists: UI, iconos, concept art, ilustraciones
+- [x] T-019 Audio Lead: dirección de audio, implementación, mixing
+- [x] T-020 QA: testing manual, automatizado, reportes de bugs
+- [x] T-021 Community Manager: redes sociales, comunicación, feedback
+- [x] T-022 Documentar Habilidades requeridas por rol
+- [x] T-023 Documentar Herramientas requeridas por rol
+- [x] T-024 Definir proceso de evaluación de desempeño
+- [x] T-025 Crear perfil de rol para cada posición
+- [ ] T-026 Definir canales de Discord por área (general, dev, art, design, production)
+- [ ] T-027 Establecer horarios de trabajo y overlaps
+- [ ] T-028 Definir reunión Daily Standup (15 min, diaria)
+- [ ] T-029 Definir reunión Sprint Review (1 hora, semanal)
+- [ ] T-030 Definir reunión Retrospective (1 hora, quincenal)
+- [ ] T-031 Definir reunión Planning (2 horas, mensual)
+- [ ] T-032 Definir reunión 1:1 (30 min, quincenal)
+- [ ] T-033 Definir reunión All Hands (1 hora, mensual)
+- [ ] T-034 Crear template de reunión
+- [x] T-035 Definir reglas de comunicación asíncrona
+- [ ] T-036 Definir reglas de respuesta a mensajes urgentes
+- [x] T-037 Documentar herramientas de comunicación (Discord, Notion, Linear)
+- [x] T-038 Crear guía de estilo para comunicación escrita
+- [x] T-039 Definir proceso de documentar decisiones
+- [x] T-040 Crear registro de decisiones tomadas
+- [x] T-041 Definir pipeline de tareas: Backlog ? To Do ? In Progress ? Review ? Done
+- [ ] T-042 Definir estado Blocked con causa
+- [x] T-043 Crear sistema de priorización: P0 (Crítico, 24h), P1 (Alto, 3d), P2 (Medio, 1sem), P3 (Bajo, flexible)
+- [ ] T-044 Definir WIP limits por columna
+- [ ] T-045 Crear template de tarea completa
+- [x] T-046 Definir Definition of Done (código revisado, tests pasan, documentada)
+- [x] T-047 Definir Definition of Ready (tiene contexto, estimación, dependencias)
+- [x] T-048 Seleccionar herramienta de gestión (Linear, Notion, GitHub Projects)
+- [x] T-049 Crear tablero Kanban inicial
+- [ ] T-050 Definir proceso de estimation (story points o horas)
+- [ ] T-051 Definir proceso de daily update de tareas
+- [ ] T-052 Crear dashboard de progreso
+- [x] T-053 Definir proceso de cierre de sprint/review
+- [ ] T-054 Definir proceso de retrospective
+- [ ] T-055 Crear template de retrospective
+- [x] T-056 Documentar modelo RACI para decisiones clave
+- [x] T-057 Definir quién decide: arquitectura (Lead Programmer), arte (Lead Artist), producto (Game Director)
+- [ ] T-058 Crear proceso de change request para cambios de alcance
+- [x] T-059 Definir proceso de escalación (3 niveles)
+- [x] T-060 Crear registro de decisiones tomadas
+- [x] T-061 Definir cuándo se necesita consenso vs. decide el líder
+- [x] T-062 Documentar proceso de A/B testing para decisiones de diseño
+- [x] T-063 Definir proceso de evaluación de riesgos en decisiones
+- [x] T-064 Crear template de documentación de decisión
+- [x] T-065 Definir proceso de reversión de decisiones
+- [x] T-066 Documentar proceso de escalación (3 niveles)
+- [ ] T-067 Nivel 1: discusión directa entre involucrados
+- [ ] T-068 Nivel 2: media el Lead del área
+- [x] T-069 Nivel 3: decide el Game Director
+- [x] T-070 Crear template de mediación
+- [x] T-071 Definir proceso de mediación formal
+- [x] T-072 Crear registro de conflictos resueltos
+- [x] T-073 Definir política de tolerancia cero a acoso
+- [x] T-074 Documentar proceso de feedback constructivo
+- [x] T-075 Definir proceso de evaluación post-conflicto
+- [x] T-076 Crear checklist de onboarding (semana 1)
+- [x] T-077 Documentar accesos necesarios (GitHub, Discord, herramientas)
+- [x] T-078 Crear guía de revisión de documentación del proyecto
+- [ ] T-079 Asignar mentor para cada nuevo miembro
+- [ ] T-080 Definir primera tarea simple para familiarizarse
+- [ ] T-081 Crear reunión de bienvenida con Game Director
+- [ ] T-082 Crear reunión de bienvenida con Lead del área
+- [x] T-083 Documentar proceso de evaluación de onboarding
+- [ ] T-084 Crear FAQ para nuevos miembros
+- [ ] T-085 Definir período de prueba (30-90 días)
+- [ ] T-086 Definir horarios de trabajo flexibles
+- [ ] T-087 Establecer límite de horas extras
+- [ ] T-088 Definir política de días libres
+- [x] T-089 Crear proceso de prevención de burnout
+- [ ] T-090 Definir política de trabajo remoto
+- [x] T-091 Crear espacio para socialización del equipo
+- [ ] T-092 Definir proceso de feedback regular
+- [x] T-093 Crear encuesta de satisfacción del equipo
+- [ ] T-094 Definir proceso de mejora continua
+- [x] T-095 Documentar política de feriados y vacaciones
+- [x] T-096 Crear directorio docs/production/ con todos los documentos
+- [x] T-097 Mantener documentos actualizados
+- [ ] T-098 Revisar procesos trimestralmente
+- [x] T-099 Documentar cambios en procesos
+- [ ] T-100 Crear changelog de procesos
+- [x] T-101 Distribuir documentación a todo el equipo
+- [ ] T-102 Entrenar al equipo en los procesos
+- [ ] T-103 Evaluar efectividad de procesos
+- [ ] T-104 Ajustar según feedback del equipo
+- [ ] T-105 Archivar procesos obsoletos

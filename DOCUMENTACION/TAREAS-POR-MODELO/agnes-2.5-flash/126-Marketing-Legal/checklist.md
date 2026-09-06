@@ -1,1 +1,108 @@
-# Tareas M126 — Marketing-Legal\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/126-Marketing-Legal/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Revisar influencers\n[ ] T-002 Revisar contratos promocionales\n[ ] T-003 Revisar giveaways\n[ ] T-004 Definir screenshots creados in-house\n[ ] T-005 Definir propiedad del desarrollador\n[ ] T-006 Definir legal para usar en marketing\n[ ] T-007 Diseñar excepciones (mods, UGC, plataformas)\n[ ] T-008 Definir música original (propiedad del desarrollador)\n[ ] T-009 Definir música de terceros (licencias específicas)\n[ ] T-010 Definir licencias de uso comercial\n[ ] T-011 Definir atribución requerida\n[ ] T-012 Diseñar excepciones (dominio público, stock)\n[ ] T-013 Definir assets originales (propiedad del desarrollador)\n[ ] T-014 Definir fonts (licencias de uso comercial)\n[ ] T-015 Definir software (Godot, Blender, GIMP)\n[ ] T-016 Definir assets de stock (licencias específicas)\n[ ] T-017 Diseñar excepciones (dominio público)\n[ ] T-018 Definir nombre (verificar marcas registradas)\n[ ] T-019 Definir logos (creados in-house)\n[ ] T-020 Diseñar excepciones (logos de plataformas)\n[ ] T-021 Definir contratos con influencers\n[ ] T-022 Definir disclosure (FTC Guidelines)\n[ ] T-023 Definir pagos documentados\n[ ] T-024 Definir uso de assets autorizado\n[ ] T-025 Diseñar hashtags (#ad, #sponsored)\n[ ] T-026 Diseñar contratos (servicios, pagos, exclusividad)\n[ ] T-027 Definir contratos con prensa\n[ ] T-028 Definir contratos con plataformas\n[ ] T-029 Definir exclusividad (opcional)\n[ ] T-030 Definir licencias de uso de contenido\n[ ] T-031 Diseñar contratos con PR agencies (opcional)\n[ ] T-032 Definir normativas locales (FTC, GDPR, CAP)\n[ ] T-033 Definir restricciones (edad, jurisdicción, impuestos)\n[ ] T-034 Definir reglas claras\n[ ] T-035 Definir exención de responsabilidad\n[ ] T-036 Diseñar giveaways de DLC (keys válidas)\n[ ] T-037 Diseñar giveaways de merchandise (envío internacional)\n[ ] T-038 Diseñar legal/marketing_legal_review.md\n[ ] T-039 Diseñar prueba de que screenshots sean legales para usar\n[ ] T-040 Diseñar prueba de que música sea legal para usar en trailers\n[ ] T-041 Diseñar prueba de que branding no infrinja marcas registradas\n[ ] T-042 Diseñar prueba de que influencers disclosure cumpla FTC Guidelines\n[ ] T-043 Diseñar prueba de que giveaways cumplan normativas locales\n[ ] T-044 Implementar plantilla estandarizada de contrato para acuerdos con creadores de contenido e influencers [M]\n[ ] T-045 Crear sistema de verificación automatizada de disclaimers publicitarios (#ad, #sponsored) en contenidos promocionales [M]\n[ ] T-046 Diseñar matriz de verificación de licencias comerciales para tipografías usadas en banners y tráilers [S]\n[ ] T-047 Implementar flujo formal de aprobación legal previa para todo material gráfico y audiovisual de marketing [M]\n[ ] T-048 Crear formulario digital de consentimiento y cesión de derechos de imagen para eventos y ferias [S]\n[ ] T-049 Implementar checklist de compliance legal específico para la página de la tienda en Steam (Steamworks Guidelines) [S]\n[ ] T-050 Diseñar calendario y sistema de seguimiento de embargos y acuerdos de confidencialidad con prensa [M]\n[ ] T-051 Integrar con M100 (Community Management) para validar bases legales de concursos y dinámicas en Discord y redes [M]\n[ ] T-052 Integrar con M97 (Steam Store Page) para revisión legal de capturas de pantalla, vídeos y descripciones comerciales [S]\n[ ] T-053 Integrar con M41 (Música) para verificar derechos de sincronización de pistas musicales en tráilers y teasers [M]\n[ ] T-054 Integrar con M88 (Fuentes Tipográficas) para auditar licencias comerciales de fuentes en material promocional [S]\n[ ] T-055 Integrar con M78 (Propiedad Intelectual) para verificar uso correcto de marcas registradas, logos y nombres [M]\n[ ] T-056 Integrar con M80 (Privacidad) para el tratamiento y eliminación de correos recolectados en giveaways [S]\n[ ] T-057 Integrar con M125 (Términos de Servicio) para asegurar coherencia entre promociones comerciales y el EULA [S]\n[ ] T-058 Integrar con M120 (DLC y Expansiones) para la gestión legal de sorteos y promociones de pases o contenidos extra [S]\n[ ] T-059 Integrar con M104 (Analytics) para asegurar que el tracking publicitario cuente con consentimiento previo de cookies [M]\n[ ] T-060 Definir protocolo ante influencers que omitan o retiren el disclosure (#ad) tras la publicación remunerada [M]\n[ ] T-061 Diseñar procedimiento legal ante reclamos indebidos de Content ID o DMCA en videos promocionales de gameplay [M]\n[ ] T-062 Establecer mecanismo de verificación y descalificación ante participantes menores de edad en sorteos internacionales [S]\n[ ] T-063 Diseñar plan de contingencia legal ante disputas por marcas similares al nombre "Isla Ancestral" en territorios clave [M]\n[ ] T-064 Definir procedimiento de cancelación o reprogramación de giveaways por fuerza mayor o fallos técnicos [S]\n[ ] T-065 Establecer protocolo de respuesta ante filtraciones de material publicitario bajo embargo o acuerdos de confidencialidad [M]\n[ ] T-066 Diseñar gestión de premios físicos en sorteos hacia países con restricciones aduaneras o aranceles prohibitivos [M]\n[ ] T-067 Establecer procedimiento de retirada urgente de material promocional ante revocación imprevista de licencias de terceros [M]\n[ ] T-068 Diseñar pipeline de revisión ágil de material publicitario para reducir tiempos de aprobación legal [S]\n[ ] T-069 Crear plantillas modulares de contratos parametrizables según el nivel del influencer (micro, mid o macro) [S]\n[ ] T-070 Automatizar la validación de requisitos legales y términos en plataformas de giveaways de terceros [M]\n[ ] T-071 Centralizar el archivo digital de contratos y licencias de marketing con alertas automáticas de caducidad [M]\n[ ] T-072 Estandarizar cláusulas de exención de responsabilidad para campañas de marketing globales [S]\n[ ] T-073 Redactar guías de auto-revisión rápida para que el equipo creativo detecte alertas legales antes de enviar a revisión [S]\n[ ] T-074 Implementar auditoría trimestral de cumplimiento normativo en publicaciones de redes sociales [S]\n[ ] T-075 Optimizar el almacenamiento y cifrado de consentimientos de marketing para facilitar auditorías legales [M]\n[ ] T-076 Redactar manual interno de marketing legal y directrices de transparencia publicitaria para el equipo [M]\n[ ] T-077 Documentar guía comparativa de normativas publicitarias: FTC (EE.UU.), CAP Code (Reino Unido) y directivas UE [M]\n[ ] T-078 Publicar bases y condiciones generales de sorteos y promociones en el sitio web oficial del juego [S]\n[ ] T-079 Elaborar Brand Guidelines oficiales con pautas de uso de marca y logos para medios de comunicación [M]\n[ ] T-080 Redactar protocolo de actuación frente a campañas publicitarias difamatorias o suplantación de identidad [M]\n[ ] T-081 Elaborar FAQ legal de marketing para dar respuesta rápida a dudas frecuentes de prensa y streamers [S]\n[ ] T-082 Redactar bases y condiciones de promociones con lenguaje claro, transparente y accesible sin tecnicismos excesivos [S]\n[ ] T-083 Diseñar placas y badges de atribución visualmente integrados y estéticos para tráilers y piezas de video [S]\n[ ] T-084 Crear comunicados amigables para creadores de contenido explicando pautas de embargo y buenas prácticas [S]\n[ ] T-085 Diseñar banners de avisos legales de promociones alineados con la identidad visual cozy del juego [S]\n[ ] T-086 Crear mensajes de confirmación de participación en sorteos con diseño corporativo impecable [S]\n[ ] T-087 Revisar el tono de las comunicaciones legales para mantener cercanía y confianza con la comunidad [S]\n[ ] T-088 Elaborar kit de prensa digital con lineamientos de uso de marca en formato interactivo y visual [M]\n[ ] T-089 Diseñar verificación de disclosure (#ad/#sponsored) en streams multilingües aplicando la normativa del idioma del streamer, no el del juego [S]\n[ ] T-090 Diseñar cláusula de confidencialidad específica para beta-testers que compartan material promocional con prensa sin autorización previa [S]\n[ ] T-091 Diseñar protocolo de retirada de trailers y material promocional obsoleto para evitar expectativas incumplidas en la comunidad [M]
+# Checklist de Tareas — M126 126-Marketing-Legal
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/126-Marketing-Legal/plan-actual/05-Checklist.md
+
+- [x] T-001 Cargar datos desde JSON (secciones/politicas/elementos) [S]
+- [x] T-002 Detectar errores estructurales (id, nombre, etc) [S]
+- [x] T-003 Test headless de validacion [M]
+- [x] T-004 Datos data-driven en data/legal/ [S]
+- [ ] T-005 Revisar influencers
+- [x] T-006 Revisar contratos promocionales
+- [ ] T-007 Revisar giveaways
+- [x] T-008 Definir screenshots creados in-house
+- [x] T-009 Definir propiedad del desarrollador
+- [x] T-010 Definir legal para usar en marketing
+- [x] T-011 Diseñar excepciones (mods, UGC, plataformas)
+- [x] T-012 Definir música original (propiedad del desarrollador)
+- [x] T-013 Definir música de terceros (licencias específicas)
+- [x] T-014 Definir licencias de uso comercial
+- [x] T-015 Definir atribución requerida
+- [x] T-016 Diseñar excepciones (dominio público, stock)
+- [x] T-017 Definir assets originales (propiedad del desarrollador)
+- [x] T-018 Definir fonts (licencias de uso comercial)
+- [ ] T-019 Definir software (Godot, Blender, GIMP)
+- [x] T-020 Definir assets de stock (licencias específicas)
+- [x] T-021 Diseñar excepciones (dominio público)
+- [x] T-022 Definir nombre (verificar marcas registradas)
+- [x] T-023 Definir logos (creados in-house)
+- [x] T-024 Definir registro de marca (opcional)
+- [x] T-025 Diseñar excepciones (logos de plataformas)
+- [ ] T-026 Definir contratos con influencers
+- [ ] T-027 Definir disclosure (FTC Guidelines)
+- [x] T-028 Definir pagos documentados
+- [x] T-029 Definir uso de assets autorizado
+- [x] T-030 Diseñar hashtags (#ad, #sponsored)
+- [x] T-031 Diseñar contratos (servicios, pagos, exclusividad)
+- [ ] T-032 Definir contratos con prensa
+- [ ] T-033 Definir contratos con plataformas
+- [x] T-034 Definir exclusividad (opcional)
+- [x] T-035 Definir licencias de uso de contenido
+- [x] T-036 Diseñar contratos con PR agencies (opcional)
+- [x] T-037 Definir normativas locales (FTC, GDPR, CAP)
+- [x] T-038 Definir restricciones (edad, jurisdicción, impuestos)
+- [ ] T-039 Definir reglas claras
+- [x] T-040 Definir exención de responsabilidad
+- [ ] T-041 Diseñar giveaways de DLC (keys válidas)
+- [x] T-042 Diseñar giveaways de merchandise (envío internacional)
+- [x] T-043 Diseñar legal/marketing_legal_review.md
+- [ ] T-044 Diseñar prueba de que screenshots sean legales para usar
+- [ ] T-045 Diseñar prueba de que música sea legal para usar en trailers
+- [x] T-046 Diseñar prueba de que branding no infrinja marcas registradas
+- [ ] T-047 Diseñar prueba de que influencers disclosure cumpla FTC Guidelines
+- [x] T-048 Diseñar prueba de que giveaways cumplan normativas locales
+- [x] T-049 Implementar plantilla estandarizada de contrato para acuerdos con creadores de contenido e influencers [M]
+- [x] T-050 Crear sistema de verificación automatizada de disclaimers publicitarios (#ad, #sponsored) en contenidos promocionales [M]
+- [x] T-051 Diseñar matriz de verificación de licencias comerciales para tipografías usadas en banners y tráilers [S]
+- [x] T-052 Implementar flujo formal de aprobación legal previa para todo material gráfico y audiovisual de marketing [M]
+- [ ] T-053 Crear formulario digital de consentimiento y cesión de derechos de imagen para eventos y ferias [S]
+- [x] T-054 Diseñar sistema de registro y custodia de bases de datos de participantes en sorteos bajo normativas GDPR/CCPA [M]
+- [x] T-055 Implementar checklist de compliance legal específico para la página de la tienda en Steam (Steamworks Guidelines) [S]
+- [x] T-056 Crear protocolo de distribución y revocación segura de claves promocionales (Steam keys) con registro de seriales [S]
+- [x] T-057 Diseñar calendario y sistema de seguimiento de embargos y acuerdos de confidencialidad con prensa [M]
+- [ ] T-058 Integrar con M100 (Community Management) para validar bases legales de concursos y dinámicas en Discord y redes [M]
+- [x] T-059 Integrar con M97 (Steam Store Page) para revisión legal de capturas de pantalla, vídeos y descripciones comerciales [S]
+- [x] T-060 Integrar con M41 (Música) para verificar derechos de sincronización de pistas musicales en tráilers y teasers [M]
+- [x] T-061 Integrar con M88 (Fuentes Tipográficas) para auditar licencias comerciales de fuentes en material promocional [S]
+- [x] T-062 Integrar con M78 (Propiedad Intelectual) para verificar uso correcto de marcas registradas, logos y nombres [M]
+- [x] T-063 Integrar con M80 (Privacidad) para el tratamiento y eliminación de correos recolectados en giveaways [S]
+- [x] T-064 Integrar con M125 (Términos de Servicio) para asegurar coherencia entre promociones comerciales y el EULA [S]
+- [x] T-065 Integrar con M120 (DLC y Expansiones) para la gestión legal de sorteos y promociones de pases o contenidos extra [S]
+- [x] T-066 Integrar con M104 (Analytics) para asegurar que el tracking publicitario cuente con consentimiento previo de cookies [M]
+- [x] T-067 Definir protocolo ante influencers que omitan o retiren el disclosure (#ad) tras la publicación remunerada [M]
+- [x] T-068 Diseñar procedimiento legal ante reclamos indebidos de Content ID o DMCA en videos promocionales de gameplay [M]
+- [x] T-069 Establecer mecanismo de verificación y descalificación ante participantes menores de edad en sorteos internacionales [S]
+- [x] T-070 Diseñar plan de contingencia legal ante disputas por marcas similares al nombre "Isla Ancestral" en territorios clave [M]
+- [x] T-071 Definir procedimiento de cancelación o reprogramación de giveaways por fuerza mayor o fallos técnicos [S]
+- [x] T-072 Establecer protocolo de respuesta ante filtraciones de material publicitario bajo embargo o acuerdos de confidencialidad [M]
+- [x] T-073 Diseñar gestión de premios físicos en sorteos hacia países con restricciones aduaneras o aranceles prohibitivos [M]
+- [x] T-074 Establecer procedimiento de retirada urgente de material promocional ante revocación imprevista de licencias de terceros [M]
+- [x] T-075 Diseñar pipeline de revisión ágil de material publicitario para reducir tiempos de aprobación legal [S]
+- [x] T-076 Crear plantillas modulares de contratos parametrizables según el nivel del influencer (micro, mid o macro) [S]
+- [x] T-077 Automatizar la validación de requisitos legales y términos en plataformas de giveaways de terceros [M]
+- [x] T-078 Centralizar el archivo digital de contratos y licencias de marketing con alertas automáticas de caducidad [M]
+- [x] T-079 Estandarizar cláusulas de exención de responsabilidad para campañas de marketing globales [S]
+- [ ] T-080 Redactar guías de auto-revisión rápida para que el equipo creativo detecte alertas legales antes de enviar a revisión [S]
+- [x] T-081 Implementar auditoría trimestral de cumplimiento normativo en publicaciones de redes sociales [S]
+- [x] T-082 Optimizar el almacenamiento y cifrado de consentimientos de marketing para facilitar auditorías legales [M]
+- [x] T-083 Redactar manual interno de marketing legal y directrices de transparencia publicitaria para el equipo [M]
+- [x] T-084 Documentar guía comparativa de normativas publicitarias: FTC (EE.UU.), CAP Code (Reino Unido) y directivas UE [M]
+- [x] T-085 Mantener registro histórico exhaustivo de acuerdos, contratos y facturas con agencias de prensa y creadores [S]
+- [x] T-086 Publicar bases y condiciones generales de sorteos y promociones en el sitio web oficial del juego [S]
+- [x] T-087 Elaborar Brand Guidelines oficiales con pautas de uso de marca y logos para medios de comunicación [M]
+- [x] T-088 Redactar protocolo de actuación frente a campañas publicitarias difamatorias o suplantación de identidad [M]
+- [x] T-089 Documentar registro de licencias de software de diseño y edición audiovisual utilizado en las campañas [S]
+- [x] T-090 Elaborar FAQ legal de marketing para dar respuesta rápida a dudas frecuentes de prensa y streamers [S]
+- [x] T-091 Redactar bases y condiciones de promociones con lenguaje claro, transparente y accesible sin tecnicismos excesivos [S]
+- [x] T-092 Diseñar placas y badges de atribución visualmente integrados y estéticos para tráilers y piezas de video [S]
+- [x] T-093 Crear comunicados amigables para creadores de contenido explicando pautas de embargo y buenas prácticas [S]
+- [x] T-094 Homogeneizar el estilo visual y tipográfico de todos los anexos y documentos legales de marketing [S]
+- [x] T-095 Diseñar banners de avisos legales de promociones alineados con la identidad visual cozy del juego [S]
+- [x] T-096 Crear mensajes de confirmación de participación en sorteos con diseño corporativo impecable [S]
+- [x] T-097 Revisar el tono de las comunicaciones legales para mantener cercanía y confianza con la comunidad [S]
+- [x] T-098 Elaborar kit de prensa digital con lineamientos de uso de marca en formato interactivo y visual [M]
+- [x] T-099 Diseñar verificación de disclosure (#ad/#sponsored) en streams multilingües aplicando la normativa del idioma del streamer, no el del juego [S]
+- [x] T-100 Diseñar cláusula de confidencialidad específica para beta-testers que compartan material promocional con prensa sin autorización previa [S]
+- [x] T-101 Diseñar protocolo de retirada de trailers y material promocional obsoleto para evitar expectativas incumplidas en la comunidad [M]

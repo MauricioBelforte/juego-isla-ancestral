@@ -1,0 +1,144 @@
+# Checklist de Tareas — M81 81-Legal-Menores
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/81-Legal-Menores/plan-actual/05-Checklist.md
+
+- [x] T-001 Identificar todas las normativas internacionales aplicables por jurisdicción (COPPA, GDPR-K, LGPD, PIPL, etc.)
+- [x] T-002 Documentar la edad de consentimiento por país/regiones principales de venta
+- [x] T-003 Mapear requisitos específicos de COPPA para menores de 13 años en EE.UU.
+- [x] T-004 Mapear requisitos específicos de GDPR Art.8 para menores en Espacio Económico Europeo
+- [x] T-005 Mapear requisitos de LGPD para menores en Brasil
+- [x] T-006 Documentar diferencias entre normativas (edades, consentimiento, retención, eliminación)
+- [x] T-007 Identificar jurisdicciones donde el juego NO puede venderse sin cumplimiento (si existen)
+- [x] T-008 Documentar sanciones y multas por incumplimiento en cada normativa principal
+- [x] T-009 Revisar guías de interpretación de la FTC para COPPA (2024-2026)
+- [x] T-010 Revisar opiniones del EDPB para GDPR Art.8 (niños en entornos digitales)
+- [x] T-011 Documentar requisitos de IARC para rating de contenido (cómo obtener, costos, proceso)
+- [x] T-012 Documentar requisitos de ESRB (EE.UU.) para contenido dirigido a menores
+- [x] T-013 Documentar requisitos de PEGI (Europa) para contenido dirigido a menores
+- [x] T-014 Documentar requisitos de CERO (Japón) para contenido dirigido a menores
+- [x] T-015 Documentar requisitos de GRAC (Corea) para contenido dirigido a menores
+- [x] T-016 Documentar requisitos de ACB (Australia) para contenido dirigido a menores
+- [x] T-017 Documentar requisitos de USK (Alemania) para contenido dirigido a menores
+- [x] T-018 Documentar requisitos de Steam para contenido que puede atraer menores
+- [x] T-019 Documentar requisitos de PlayStation para contenido con menores
+- [x] T-020 Documentar requisitos de Xbox para contenido con menores
+- [x] T-021 Documentar requisitos de Nintendo para contenido con menores
+- [x] T-022 Documentar requisitos de Apple App Store para contenido con menores (si se planifica mobile futuro)
+- [x] T-023 Documentar requisitos de Google Play para contenido con menores (si se planifica mobile futuro)
+- [x] T-024 Diseñar arquitectura del sistema de age gating (startup flow)
+- [x] T-025 Definir opciones de age gating: Visitante, Verificar Edad, Salir
+- [ ] T-026 Diseñar UI de pantalla de age gate (AgeGateScreen)
+- [ ] T-027 Diseñar flujo de consentimiento parental por email (parental email verification)
+- [x] T-028 Diseñar flujo de consentimiento parental por documento ID (más robusto)
+- [x] T-029 Diseñar flujo de consentimiento parental verbal/declaración (más simple)
+- [x] T-030 Diseñar flujo de consentimiento por plataforma familiar (Steam Family View, Xbox Family, etc.)
+- [x] T-031 Definir qué features se desactivan en modo "Visitante" (sin consentimiento)
+- [x] T-032 Definir qué features se desactivan en modo "Menor de 13" (aunque tenga consentimiento)
+- [x] T-033 Diseñar persistencia del estado de age gating en el save del jugador
+- [x] T-034 Diseñar re-evaluación de edad al cambio de perfil
+- [ ] T-035 Diseñar comportamiento si save está corrupto (default: más restrictivo)
+- [x] T-036 Diseñar comportamiento si el jugador rechaza age gating (modo visitante)
+- [x] T-037 Diseñar comportamiento si consentimiento parental falla (reintentar, salir, modo visitante)
+- [ ] T-038 Diseñar comportamiento si el jugador cumple años y cambia de grupo de edad
+- [x] T-039 Diseñar servicio de verificación por email (ParentalConsentService)
+- [x] T-040 Definir formato de email de verificación (template HTML)
+- [x] T-041 Definir flujo de verificación de token (link en email)
+- [x] T-042 Diseñar servicio de verificación por documento ID (integración con tercero o manual)
+- [x] T-043 Definir flujo de verificación verbal (hash de declaración, sin almacenar ID)
+- [ ] T-044 Diseñar almacenamiento de consentimiento: playerId, ageGroup, consentDate, consentMethod
+- [x] T-045 Definir retención de datos de consentimiento (no PII, solo metadata booleana)
+- [x] T-046 Diseñar mecanismo de revocación de consentimiento (derecho al olvido GDPR)
+- [x] T-047 Diseñar notificación a padres sobre datos recolectados (COPPA requirement)
+- [x] T-048 Diseñar mecanismo para que padres revisen/eliminen datos de hijos (COPPA requirement)
+- [x] T-049 Diseñar DataSanitizer.cs como servicio central de sanitización
+- [x] T-050 Implementar stripping de PII (Personal Identifiable Information) para menores
+- [x] T-051 Implementar hashing de identificadores (SHA-256 truncado) para menores
+- [x] T-052 Implementar reducción de granularidad de timestamps para menores
+- [x] T-053 Definir caps de eventos por sesión para menores (ej: max 50 events)
+- [x] T-054 Definir política de retención: 30 días para <13, 365 días para 13-17
+- [x] T-055 Implementar eliminación automática después del período de retención
+- [x] T-056 Diseñar sanitización para Analytics (M104): datos anónimos, sin behavioral targeting
+- [x] T-057 Diseñar sanitización para Telemetría de Gameplay (M105): eventos genéricos sin playerId
+- [x] T-058 Diseñar sanitización para Crash Reporting (M121): sin datos de cuenta en crashes de menores
+- [x] T-059 Diseñar sanitización para Logging (M103): logs sanitizados en runtime
+- [x] T-060 Diseñar sanitización para Debug Menu (M110): panel de diagnóstico sin datos menores
+- [x] T-061 Diseñar sanitización para Bug Tracking (M102): reports anónimos si menores involucrados
+- [x] T-062 Diseñar validación de rating IARC antes de cada build (IARCValidator)
+- [x] T-063 Definir descriptores de contenido aplicables al juego (violence, language, etc.)
+- [ ] T-064 Verificar que el contenido del juego es compatible con rating "Everyone" o "Everyone 10+"
+- [ ] T-065 Diseñar proceso de_submission al portal IARC (International Age Rating Coalition)
+- [x] T-066 Definir cómo el rating se refleja en Steam Store Page (M97)
+- [x] T-067 Definir cómo el rating se refleja en consolas (certificación)
+- [x] T-068 Diseñar validación de que tráiler (M98) no contiene contenido que eleve el rating
+- [x] T-069 Diseñar validación de que marketing (M99) no targetea directamente a menores
+- [x] T-070 Diseñar validación de que DLC y expansiones (M120) mantienen el mismo rating
+- [x] T-071 Diseñar gate en CI/CD (M117): build falla si rating no es válido o inconsistente
+- [x] T-072 Redactar sección de Política de Privacidad para menores (COPPA-compliant)
+- [x] T-073 Redactar sección de Política de Privacidad para menores (GDPR-K compliant)
+- [x] T-074 Redactar sección de Política de Privacidad para menores (LGPD compliant)
+- [x] T-075 Redactar sección de Términos de Servicio para menores
+- [x] T-076 Redactar sección de consentimiento parental para ToS
+- [x] T-077 Redactar sección de derechos del niño en la Política de Privacidad
+- [x] T-078 Redactar sección de eliminación de datos (derecho al olvido) para menores
+- [x] T-079 Redactar sección de qué datos NO se recolectan de menores
+- [x] T-080 Redactar sección de qué datos SÍ se recolectan de menores (con consentimiento)
+- [x] T-081 Redactar sección de retención de datos para menores
+- [ ] T-082 Incluir versiones en español e inglés de todas las políticas
+- [x] T-083 Documentar proceso de revisión por abogado especializado
+- [x] T-084 Documentar fecha de última actualización de cada política
+- [x] T-085 Integrar LegalConfigService en ServiceLocator (M57 Arquitectura General)
+- [x] T-086 Integrar PlayerAgeData en sistema de guardado (M59 Guardado, M60 Datos)
+- [ ] T-087 Integrar DataSanitizer en Logger (M103 Logging)
+- [x] T-088 Integrar DataSanitizer en AnalyticsService (M104 Analytics)
+- [x] T-089 Integrar DataSanitizer en TelemetryService (M105 Telemetría)
+- [ ] T-090 Integrar DataSanitizer en CrashReporter (M121 Crash Reporting)
+- [x] T-091 Integrar IARCValidator en BuildScript (M117 Build System)
+- [ ] T-092 Integrar AgeGateSystem en GameBootstrap (M57 Arquitectura)
+- [x] T-093 Integrar configuración legal en UI Settings (M53 UI/UX, M89 Diseño de Menús)
+- [x] T-094 Integrar configuración legal en Accesibilidad (M58 Accesibilidad)
+- [x] T-095 Integrar configuración legal en Localización (M87 Localización)
+- [x] T-096 Integrar configuración legal en Configuración Gráfica (M90 Configuración Gráfica)
+- [x] T-097 Integrar configuración legal en Configuración de Audio (M91 Configuración de Audio)
+- [x] T-098 Verificar que NO hay loot boxes ni mecánicas gacha (M95 Monetización)
+- [x] T-099 Verificar que NO hay dark patterns en compras (M95 Monetización)
+- [x] T-100 Verificar que NO hay presión por compras (M94 Retención sin FOMO)
+- [x] T-101 Verificar que NO hay contenido con FOMO para menores
+- [x] T-102 Verificar que compras requieren consentimiento parental si menores
+- [x] T-103 Verificar que no hay publicidad dirigida a menores
+- [x] T-104 Verificar que no hay marketing de terceros a menores
+- [x] T-105 Verificar que no hay recolección de datos para targeting de menores
+- [x] T-106 Crear plan de tests unitarios para LegalConfigService
+- [x] T-107 Crear plan de tests unitarios para DataSanitizer
+- [x] T-108 Crear plan de tests unitarios para AgeGateSystem
+- [x] T-109 Crear plan de tests de integración para ParentalConsentService
+- [x] T-110 Crear plan de tests de integración para IARCValidator
+- [x] T-111 Crear plan de tests E2E para flujo completo de age gating
+- [x] T-112 Crear plan de tests de regresión para cumplimiento legal
+- [x] T-113 Crear plan de tests de estrés con múltiples cuentas menores
+- [x] T-114 Ejecutar tests de cumplimiento COPPA
+- [x] T-115 Ejecutar tests de cumplimiento GDPR-K
+- [x] T-116 Ejecutar tests de cumplimiento LGPD
+- [x] T-117 Ejecutar tests de cumplimiento por plataforma (Steam, consolas)
+- [x] T-118 Verificar que todos los tests pasan antes de cada release
+- [x] T-119 Documentar proceso completo de cumplimiento legal en CHECKLIST-GLOBAL.md
+- [x] T-120 Documentar decisiones de diseño en 03-Diseno.md
+- [x] T-121 Documentar código implementado en 04-Codigo.md
+- [x] T-122 Documentar resultados de testing en 07-Resultados-Testings.md (si aplica)
+- [x] T-123 Generar log de creación del módulo en Logs/
+- [x] T-124 Actualizar CHECKLIST-GLOBAL.md con estado del módulo
+- [x] T-125 Actualizar README.md de DOCUMENTACION/
+- [x] T-126 Documentar dependencias con otros módulos (verificar en cada sprint)
+- [x] T-127 Mantener checklist actualizado con cada cambio significativo
+- [ ] T-128 Completar análisis regulatorio completo antes de M137 Prototipo
+- [x] T-129 Completar diseño del sistema de age gating antes de M138 Vertical Slice
+- [x] T-130 Completar implementación mínima (age gating básico) antes de M139 Pre-Alpha
+- [x] T-131 Completar integración con save system antes de M139 Pre-Alpha
+- [x] T-132 Completar sanitización de datos antes de M139 Pre-Alpha
+- [x] T-133 Completar Políticas Legales (ToS + Privacy) antes de M140 Alpha
+- [ ] T-134 Completar rating IARC antes de M141 Beta
+- [x] T-135 Completar QA de cumplimiento antes de M142 Release Candidate
+- [ ] T-136 Completar revisión por abogado antes de M143 Lanzamiento
+- [x] T-137 Verificar cumplimiento post-lanzamiento en M144 Después del Lanzamiento

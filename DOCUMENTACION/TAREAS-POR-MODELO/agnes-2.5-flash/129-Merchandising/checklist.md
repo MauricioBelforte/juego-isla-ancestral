@@ -1,1 +1,115 @@
-# Tareas M129 — Merchandising\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/129-Merchandising/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Soundtrack\n[ ] T-002 Peluches\n[ ] T-003 Figuras\n[ ] T-004 Definir diseño (logo, personajes, escenas)\n[ ] T-005 Definir materiales (algodón 100%)\n[ ] T-006 Definir tallas (XS, S, M, L, XL, XXL)\n[ ] T-007 Definir colores (blanco, negro, gris, azul)\n[ ] T-008 Diseñar producción (print on demand)\n[ ] T-009 Diseñar precios (USD 20-25)\n[ ] T-010 Diseñar margen (40-50%)\n[ ] T-011 Definir diseño (logo, personajes, escenas)\n[ ] T-012 Definir materiales (cerámica)\n[ ] T-013 Definir tamaño (11oz, 15oz)\n[ ] T-014 Definir colores (blanco, negro, azul)\n[ ] T-015 Diseñar producción (print on demand)\n[ ] T-016 Diseñar precios (USD 15-20)\n[ ] T-017 Diseñar margen (40-50%)\n[ ] T-018 Definir diseño (logos, personajes, escenas)\n[ ] T-019 Definir materiales (papel, CMYK)\n[ ] T-020 Definir tamaños (11x17, 18x24, 24x36)\n[ ] T-021 Diseñar producción (print on demand)\n[ ] T-022 Diseñar precios (USD 15-25)\n[ ] T-023 Diseñar margen (40-50%)\n[ ] T-024 Definir diseño (concept art, sketches, renders)\n[ ] T-025 Definir materiales (pasta dura, CMYK)\n[ ] T-026 Definir tamaño (8x10, 9x12)\n[ ] T-027 Definir páginas (100-200)\n[ ] T-028 Diseñar producción (lote mediano)\n[ ] T-029 Diseñar precios (USD 30-50)\n[ ] T-030 Diseñar margen (40-50%)\n[ ] T-031 Definir diseño (tracks originales, remasters)\n[ ] T-032 Definir formatos (digital, CD, vinyl)\n[ ] T-033 Diseñar producción (digital + físico)\n[ ] T-034 Diseñar precios (USD 10-40)\n[ ] T-035 Diseñar margen (40-50%)\n[ ] T-036 Definir diseño (personajes, cute/cozy)\n[ ] T-037 Definir materiales (peluche suave, algodón)\n[ ] T-038 Definir tamaños (8, 12, 18 pulgadas)\n[ ] T-039 Diseñar producción (prototipos + lote)\n[ ] T-040 Diseñar precios (USD 20-50)\n[ ] T-041 Diseñar margen (40-50%)\n[ ] T-042 Definir diseño (personajes, chibi/detallado)\n[ ] T-043 Definir materiales (PVC, ABS)\n[ ] T-044 Definir tamaños (4, 6, 8 pulgadas)\n[ ] T-045 Diseñar producción (prototipos + lote)\n[ ] T-046 Diseñar precios (USD 15-40)\n[ ] T-047 Diseñar margen (40-50%)\n[ ] T-048 Diseñar merch/merch_catalog.md\n[ ] T-049 Diseñar prueba de calidad de camisetas (material, impresión)\n[ ] T-050 Diseñar prueba de calidad de tazas (material, impresión)\n[ ] T-051 Diseñar prueba de calidad de posters (papel, impresión)\n[ ] T-052 Diseñar prueba de calidad de artbook (papel, encuadernación)\n[ ] T-053 Diseñar prueba de calidad de soundtrack (audio, masterización)\n[ ] T-054 Diseñar prueba de calidad de peluches (material, costura)\n[ ] T-055 Diseñar prueba de calidad de figuras (material, pintura)\n[ ] T-056 Crear manual técnico de especificaciones y resoluciones requeridas para productos Print on Demand (POD) [S]\n[ ] T-057 Establecer perfiles de color CMYK estandarizados para impresión de camisetas, tazas, láminas y artbook [S]\n[ ] T-058 Diseñar protocolo de validación y control de calidad de prototipos físicos (peluches y figuras) antes de producción [M]\n[ ] T-059 Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M]\n[ ] T-060 Definir estándares de packaging ecológico, biodegradable y protección reforzada para envíos frágiles [S]\n[ ] T-061 Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]\n[ ] T-062 Diseñar matriz automatizada de cálculo de costos, aranceles, margen objetivo (40-50%) y precio de venta al público [M]\n[ ] T-063 Establecer marco contractual de licencias de fabricación y distribución para socios comerciales externos [M]\n[ ] T-064 Diseñar packaging y libreto de coleccionista para la edición física del soundtrack en formato vinilo y CD [M]\n[ ] T-065 Integrar con M45 (Arte 3D) para la preparación y optimización de mallas de personajes para impresión 3D y modelado [M]\n[ ] T-066 Integrar con M46 (Arte 2D) para la provisión de ilustraciones originales en alta resolución para posters y artbook [M]\n[ ] T-067 Integrar con M41 (Música) para el proceso de remasterización y autoría de pistas para formatos físicos de audio [M]\n[ ] T-068 Integrar con M100 (Community Management) para sondeos y encuestas comunitarias sobre demanda de productos [S]\n[ ] T-069 Integrar con M126 (Marketing Legal) para la revisión de normativas de etiquetado y venta internacional de productos [M]\n[ ] T-070 Integrar con M125 (Términos de Servicio) para alinear políticas de compra, devoluciones y garantías en la tienda [S]\n[ ] T-071 Integrar con M120 (DLC y Expansiones) para la creación de bundles físicos que incluyan códigos de contenido digital [S]\n[ ] T-072 Diseñar protocolo de reposición y reembolso ante productos extraviados o dañados durante transporte internacional [S]\n[ ] T-073 Establecer procedimiento ante retenciones aduaneras o liquidación imprevista de aranceles de importación [M]\n[ ] T-074 Definir política de gestión de devoluciones por defectos de fabricación o taras en productos Print on Demand [S]\n[ ] T-075 Establecer procedimiento legal y operativo ante detección de merchandising pirata o copias no autorizadas [M]\n[ ] T-076 Diseñar protocolo de retirada urgente de producto (recall) en caso de detectarse riesgos de seguridad en juguetes [M]\n[ ] T-077 Establecer plan de contingencia ante escasez de materias primas o quiebra de proveedores de tiradas físicas [M]\n[ ] T-078 Definir política de exclusión o ajuste de tarifas para envíos a regiones remotas con costos logísticos deficitarios [S]\n[ ] T-079 Establecer procedimiento para cancelaciones y reembolsos de preventas en campañas de productos de edición limitada [S]\n[ ] T-080 Seleccionar proveedores de Print on Demand con centros logísticos multirregionales para reducir tiempos y costes de envío [M]\n[ ] T-081 Optimizar archivos gráficos vectoriales y rasterizados para minimizar tiempos de procesamiento en imprenta [S]\n[ ] T-082 Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]\n[ ] T-083 Implementar modelo de preventa (pre-orders) para financiar tiradas físicas sin asumir riesgos de sobrestock [M]\n[ ] T-084 Automatizar el cálculo de impuestos y gastos de aduana en el checkout de la tienda online [M]\n[ ] T-085 Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M]\n[ ] T-086 Realizar auditorías de homologación de proveedores para certificar condiciones de trabajo ético (fair labor) [M]\n[ ] T-087 Diseñar sistema de consolidación de paquetes para pedidos combinados con múltiples artículos [S]\n[ ] T-088 Redactar guía de estándares de calidad y acabados para fabricantes y talleres textiles [M]\n[ ] T-089 Elaborar Brand Guidelines específicas para la aplicación de personajes y logotipos en merchandising físico [M]\n[ ] T-090 Recopilar y archivar certificados de conformidad de seguridad para juguetes y productos textiles (normas CE, ASTM) [M]\n[ ] T-091 Elaborar guía de cuidado, lavado y mantenimiento de prendas y cerámicas para el comprador final [S]\n[ ] T-092 Crear fichas técnicas por producto con desglose de dimensiones, pesos, materiales y advertencias de edad [S]\n[ ] T-093 Redactar FAQ de soporte post-venta y resolución de incidencias para clientes de la tienda oficial [S]\n[ ] T-094 Diseñar etiquetas colgantes y precintos de embalaje personalizados con la estética cozy y mística de Isla Ancestral [S]\n[ ] T-095 Incluir tarjetas de agradecimiento coleccionables firmadas por el equipo de desarrollo en cada pedido [S]\n[ ] T-096 Incorporar acabados de lujo en el artbook y vinilo (estampado foil en caliente, barniz UVI selectivo, papel gofrado) [S]\n[ ] T-097 Seleccionar texturas ultrasuaves y materiales premium para lograr una experiencia táctil excepcional en peluches [S]\n[ ] T-098 Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M]\n[ ] T-099 Diseñar una experiencia de unboxing memorable con papel de seda temático y pegatinas exclusivas [S]\n[ ] T-100 Emitir certificados de autenticidad numerados para tiradas limitadas de figuras de resina y vinilos [S]\n[ ] T-101 Producir fotografías de producto profesionales con luz natural y ambientación isleña para la tienda online [M]
+# Checklist de Tareas — M129 129-Merchandising
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/129-Merchandising/plan-actual/05-Checklist.md
+
+- [x] T-001 Cargar merchandising.json (productos, tipos, politicas) [S]
+- [x] T-002 Detectar errores estructurales (id, nombre, tipo) [S]
+- [x] T-003 Test headless de validacion de merch [M]
+- [x] T-004 Datos data-driven: merchandising.json con 4 productos [S]
+- [x] T-005 Soundtrack
+- [ ] T-006 Peluches
+- [ ] T-007 Figuras
+- [x] T-008 Definir diseño (logo, personajes, escenas)
+- [ ] T-009 Definir materiales (algodón 100%)
+- [ ] T-010 Definir tallas (XS, S, M, L, XL, XXL)
+- [ ] T-011 Definir colores (blanco, negro, gris, azul)
+- [x] T-012 Diseñar producción (print on demand)
+- [x] T-013 Diseñar precios (USD 20-25)
+- [ ] T-014 Diseñar margen (40-50%)
+- [x] T-015 Definir diseño (logo, personajes, escenas)
+- [ ] T-016 Definir materiales (cerámica)
+- [ ] T-017 Definir tamaño (11oz, 15oz)
+- [ ] T-018 Definir colores (blanco, negro, azul)
+- [x] T-019 Diseñar producción (print on demand)
+- [x] T-020 Diseñar precios (USD 15-20)
+- [ ] T-021 Diseñar margen (40-50%)
+- [x] T-022 Definir diseño (logos, personajes, escenas)
+- [ ] T-023 Definir materiales (papel, CMYK)
+- [ ] T-024 Definir tamaños (11x17, 18x24, 24x36)
+- [x] T-025 Diseñar producción (print on demand)
+- [x] T-026 Diseñar precios (USD 15-25)
+- [ ] T-027 Diseñar margen (40-50%)
+- [ ] T-028 Definir diseño (concept art, sketches, renders)
+- [ ] T-029 Definir materiales (pasta dura, CMYK)
+- [ ] T-030 Definir tamaño (8x10, 9x12)
+- [ ] T-031 Definir páginas (100-200)
+- [x] T-032 Diseñar producción (lote mediano)
+- [x] T-033 Diseñar precios (USD 30-50)
+- [ ] T-034 Diseñar margen (40-50%)
+- [ ] T-035 Definir diseño (tracks originales, remasters)
+- [ ] T-036 Definir formatos (digital, CD, vinyl)
+- [x] T-037 Diseñar producción (digital + físico)
+- [x] T-038 Diseñar precios (USD 10-40)
+- [ ] T-039 Diseñar margen (40-50%)
+- [ ] T-040 Definir diseño (personajes, cute/cozy)
+- [ ] T-041 Definir materiales (peluche suave, algodón)
+- [ ] T-042 Definir tamaños (8, 12, 18 pulgadas)
+- [x] T-043 Diseñar producción (prototipos + lote)
+- [x] T-044 Diseñar precios (USD 20-50)
+- [ ] T-045 Diseñar margen (40-50%)
+- [ ] T-046 Definir diseño (personajes, chibi/detallado)
+- [ ] T-047 Definir materiales (PVC, ABS)
+- [ ] T-048 Definir tamaños (4, 6, 8 pulgadas)
+- [x] T-049 Diseñar producción (prototipos + lote)
+- [x] T-050 Diseñar precios (USD 15-40)
+- [ ] T-051 Diseñar margen (40-50%)
+- [x] T-052 Diseñar merch/merch_catalog.md
+- [ ] T-053 Diseñar prueba de calidad de camisetas (material, impresión)
+- [ ] T-054 Diseñar prueba de calidad de tazas (material, impresión)
+- [ ] T-055 Diseñar prueba de calidad de posters (papel, impresión)
+- [x] T-056 Diseñar prueba de calidad de artbook (papel, encuadernación)
+- [x] T-057 Diseñar prueba de calidad de soundtrack (audio, masterización)
+- [ ] T-058 Diseñar prueba de calidad de peluches (material, costura)
+- [ ] T-059 Diseñar prueba de calidad de figuras (material, pintura)
+- [x] T-060 Crear manual técnico de especificaciones y resoluciones requeridas para productos Print on Demand (POD) [S]
+- [x] T-061 Establecer perfiles de color CMYK estandarizados para impresión de camisetas, tazas, láminas y artbook [S]
+- [x] T-062 Diseñar protocolo de validación y control de calidad de prototipos físicos (peluches y figuras) antes de producción [M]
+- [x] T-063 Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M]
+- [x] T-064 Definir estándares de packaging ecológico, biodegradable y protección reforzada para envíos frágiles [S]
+- [ ] T-065 Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]
+- [x] T-066 Diseñar matriz automatizada de cálculo de costos, aranceles, margen objetivo (40-50%) y precio de venta al público [M]
+- [x] T-067 Establecer marco contractual de licencias de fabricación y distribución para socios comerciales externos [M]
+- [x] T-068 Diseñar packaging y libreto de coleccionista para la edición física del soundtrack en formato vinilo y CD [M]
+- [x] T-069 Integrar con M45 (Arte 3D) para la preparación y optimización de mallas de personajes para impresión 3D y modelado [M]
+- [x] T-070 Integrar con M46 (Arte 2D) para la provisión de ilustraciones originales en alta resolución para posters y artbook [M]
+- [x] T-071 Integrar con M41 (Música) para el proceso de remasterización y autoría de pistas para formatos físicos de audio [M]
+- [x] T-072 Integrar con M100 (Community Management) para sondeos y encuestas comunitarias sobre demanda de productos [S]
+- [x] T-073 Integrar con M126 (Marketing Legal) para la revisión de normativas de etiquetado y venta internacional de productos [M]
+- [x] T-074 Integrar con M127 (Copyright del Juego) para asegurar el correcto registro de diseños aplicados a productos físicos [S]
+- [x] T-075 Integrar con M125 (Términos de Servicio) para alinear políticas de compra, devoluciones y garantías en la tienda [S]
+- [x] T-076 Integrar con M120 (DLC y Expansiones) para la creación de bundles físicos que incluyan códigos de contenido digital [S]
+- [x] T-077 Diseñar protocolo de reposición y reembolso ante productos extraviados o dañados durante transporte internacional [S]
+- [x] T-078 Establecer procedimiento ante retenciones aduaneras o liquidación imprevista de aranceles de importación [M]
+- [x] T-079 Definir política de gestión de devoluciones por defectos de fabricación o taras en productos Print on Demand [S]
+- [x] T-080 Establecer procedimiento legal y operativo ante detección de merchandising pirata o copias no autorizadas [M]
+- [x] T-081 Diseñar protocolo de retirada urgente de producto (recall) en caso de detectarse riesgos de seguridad en juguetes [M]
+- [x] T-082 Establecer plan de contingencia ante escasez de materias primas o quiebra de proveedores de tiradas físicas [M]
+- [x] T-083 Definir política de exclusión o ajuste de tarifas para envíos a regiones remotas con costos logísticos deficitarios [S]
+- [x] T-084 Establecer procedimiento para cancelaciones y reembolsos de preventas en campañas de productos de edición limitada [S]
+- [x] T-085 Seleccionar proveedores de Print on Demand con centros logísticos multirregionales para reducir tiempos y costes de envío [M]
+- [ ] T-086 Optimizar archivos gráficos vectoriales y rasterizados para minimizar tiempos de procesamiento en imprenta [S]
+- [ ] T-087 Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]
+- [x] T-088 Implementar modelo de preventa (pre-orders) para financiar tiradas físicas sin asumir riesgos de sobrestock [M]
+- [x] T-089 Automatizar el cálculo de impuestos y gastos de aduana en el checkout de la tienda online [M]
+- [x] T-090 Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M]
+- [x] T-091 Realizar auditorías de homologación de proveedores para certificar condiciones de trabajo ético (fair labor) [M]
+- [x] T-092 Diseñar sistema de consolidación de paquetes para pedidos combinados con múltiples artículos [S]
+- [ ] T-093 Redactar guía de estándares de calidad y acabados para fabricantes y talleres textiles [M]
+- [x] T-094 Elaborar Brand Guidelines específicas para la aplicación de personajes y logotipos en merchandising físico [M]
+- [x] T-095 Publicar documento formal de políticas de envío, devoluciones, cambios y derecho de desistimiento [S]
+- [x] T-096 Recopilar y archivar certificados de conformidad de seguridad para juguetes y productos textiles (normas CE, ASTM) [M]
+- [x] T-097 Mantener registro de acuerdos de licencia y distribución con plataformas de e-commerce y partners [S]
+- [ ] T-098 Elaborar guía de cuidado, lavado y mantenimiento de prendas y cerámicas para el comprador final [S]
+- [x] T-099 Crear fichas técnicas por producto con desglose de dimensiones, pesos, materiales y advertencias de edad [S]
+- [x] T-100 Redactar FAQ de soporte post-venta y resolución de incidencias para clientes de la tienda oficial [S]
+- [x] T-101 Diseñar etiquetas colgantes y precintos de embalaje personalizados con la estética cozy y mística de Isla Ancestral [S]
+- [x] T-102 Incluir tarjetas de agradecimiento coleccionables firmadas por el equipo de desarrollo en cada pedido [S]
+- [x] T-103 Incorporar acabados de lujo en el artbook y vinilo (estampado foil en caliente, barniz UVI selectivo, papel gofrado) [S]
+- [x] T-104 Seleccionar texturas ultrasuaves y materiales premium para lograr una experiencia táctil excepcional en peluches [S]
+- [ ] T-105 Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M]
+- [x] T-106 Diseñar una experiencia de unboxing memorable con papel de seda temático y pegatinas exclusivas [S]
+- [x] T-107 Emitir certificados de autenticidad numerados para tiradas limitadas de figuras de resina y vinilos [S]
+- [x] T-108 Producir fotografías de producto profesionales con luz natural y ambientación isleña para la tienda online [M]

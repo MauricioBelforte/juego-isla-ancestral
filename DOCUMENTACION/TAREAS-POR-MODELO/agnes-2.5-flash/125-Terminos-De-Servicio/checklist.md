@@ -1,1 +1,112 @@
-# Tareas M125 — Terminos-De-Servicio\n\n**Modelo:** agnes-2.5-flash\n**Fecha inicio:** 2026-09-02\n**Fuente:** DOCUMENTACION/125-Terminos-De-Servicio/plan-actual/05-Checklist.md\n\n## Tareas pendientes\n\n[ ] T-001 Definir contenido de usuarios\n[ ] T-002 Definir cancelaciones\n[ ] T-003 Definir reembolsos\n[ ] T-004 Definir responsabilidad\n[ ] T-005 Definir cambios del servicio\n[ ] T-006 Definir terminación\n[ ] T-007 Definir jurisdicción aplicable\n[ ] T-008 Revisar con abogado\n[ ] T-009 Definir estilo de redacción (claro y comprensible)\n[ ] T-010 Definir tono cozy y amigable\n[ ] T-011 Definir resumen ejecutivo al inicio (TL;DR)\n[ ] T-012 Diseñar introducción y aceptación\n[ ] T-013 Diseñar licencia de uso\n[ ] T-014 Diseñar cuentas de usuario (si aplica)\n[ ] T-015 Diseñar conductas prohibidas\n[ ] T-016 Diseñar contenido de usuarios (si aplica)\n[ ] T-017 Diseñar cancelación y reembolsos\n[ ] T-018 Diseñar responsabilidad\n[ ] T-019 Diseñar cambios del servicio\n[ ] T-020 Diseñar terminación\n[ ] T-021 Diseñar jurisdicción aplicable\n[ ] T-022 Diseñar contacto\n[ ] T-023 Definir licencia personal\n[ ] T-024 Definir no comercial\n[ ] T-025 Definir revocable\n[ ] T-026 Definir no transferible\n[ ] T-027 Definir permanente (mientras no se viole términos)\n[ ] T-028 Diseñar excepciones (streaming/YouTube, capturas de pantalla, modding)\n[ ] T-029 Definir solo si hay componentes online\n[ ] T-030 Definir autenticación (email/password o login social)\n[ ] T-031 Definir seguridad (usuario responsable de seguridad)\n[ ] T-032 Diseñar excepciones para v1.0 (offline-first, no cuentas obligatorias)\n[ ] T-033 Definir cheating (exploits, hacks, trainers, cheats)\n[ ] T-034 Definir explotación (bugs para ventaja injusta)\n[ ] T-035 Definir acoso (discriminación, odio, lenguaje ofensivo)\n[ ] T-036 Definir contenido inapropiado (NSFW, político, religioso ofensivo)\n[ ] T-037 Definir violación de copyright (assets protegidos sin permiso)\n[ ] T-038 Diseñar consecuencias (primer aviso, segunda violación, tercera violación)\n[ ] T-039 Definir solo si hay UGC\n[ ] T-040 Definir propiedad (usuario mantiene propiedad)\n[ ] T-041 Definir licencia (usuario otorga licencia al desarrollador)\n[ ] T-042 Definir moderación (desarrollador puede moderar)\n[ ] T-043 Definir responsabilidad (usuario responsable de su contenido)\n[ ] T-044 Diseñar excepciones para v1.0 (no hay UGC)\n[ ] T-045 Definir cancelación de cuentas (usuario puede cancelar en cualquier momento)\n[ ] T-046 Definir política de reembolsos (según política de Steam)\n[ ] T-047 Definir excepciones (desarrollador puede hacer excepciones)\n[ ] T-048 Diseñar proceso de solicitud de reembolso (Steam)\n[ ] T-049 Definir limitación de responsabilidad\n[ ] T-050 Definir daños directos (limitados al precio del juego)\n[ ] T-051 Definir daños indirectos (no responsabilidad)\n[ ] T-052 Definir fuerza mayor (no responsabilidad por eventos fuera de control)\n[ ] T-053 Definir viruses/malware (no responsabilidad por viruses/malware en equipo del usuario)\n[ ] T-054 Diseñar excepciones (negligencia grave, violación de leyes)\n[ ] T-055 Definir notificación (30 días de antelación)\n[ ] T-056 Definir actualizaciones automáticas (Steam)\n[ ] T-057 Definir EOL (notificación con 6 meses de antelación)\n[ ] T-058 Definir descarga offline (usuario puede descargar antes de EOL)\n[ ] T-059 Diseñar excepciones (hotfixes, parches)\n[ ] T-060 Definir terminación por violación de términos\n[ ] T-061 Definir notificación (30 días de antelación)\n[ ] T-062 Definir sin reembolso (por terminación por violación)\n[ ] T-063 Diseñar excepciones (violación grave, terminación inmediata)\n[ ] T-064 Definir leyes del país del desarrollador\n[ ] T-065 Definir tribunales del país del desarrollador\n[ ] T-066 Definir idioma (español)\n[ ] T-067 Diseñar excepciones (GDPR para usuarios de la UE, CCPA para usuarios de California)\n[ ] T-068 Definir revisión obligatoria antes de publicación\n[ ] T-069 Definir revisión de cumplimiento legal (GDPR, CCPA)\n[ ] T-070 Definir revisión de lenguaje legal (claridad, validez)\n[ ] T-071 Definir revisión de políticas específicas (reembolsos, responsabilidad)\n[ ] T-072 Diseñar proceso (enviar borrador, recibir feedback, ajustar, aprobar)\n[ ] T-073 Diseñar signal terms_accepted()\n[ ] T-074 Diseñar signal terms_declined()\n[ ] T-075 Diseñar método check_terms_acceptance()\n[ ] T-076 Diseñar método show_terms()\n[ ] T-077 Diseñar método accept_terms()\n[ ] T-078 Diseñar método decline_terms()\n[ ] T-079 Diseñar variable terms_accepted\n[ ] T-080 Diseñar variable terms_version\n[ ] T-081 Diseñar TermsConfig como Resource\n[ ] T-082 Diseñar propiedad terms_version\n[ ] T-083 Diseñar propiedad terms_date\n[ ] T-084 Diseñar propiedad terms_file\n[ ] T-085 Diseñar propiedad accept_required\n[ ] T-086 Diseñar propiedad show_on_launch\n[ ] T-087 Diseñar legal/terms_of_service.md\n[ ] T-088 Diseñar legal/terms_policy.md\n[ ] T-089 Diseñar res://legal/terms_config.gd\n[ ] T-090 Diseñar prueba de aceptación de términos en primer lanzamiento\n[ ] T-091 Diseñar prueba de que no se muestren términos si ya fueron aceptados\n[ ] T-092 Diseñar prueba de rechazo de términos (cierre del juego)\n[ ] T-093 Diseñar prueba de actualización de términos (versión nueva → re-aceptación)
+# Checklist de Tareas — M125 125-Terminos-De-Servicio
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/125-Terminos-De-Servicio/plan-actual/05-Checklist.md
+
+- [x] T-001 Cargar datos desde JSON (secciones/politicas/elementos) [S]
+- [x] T-002 Detectar errores estructurales (id, nombre, etc) [S]
+- [x] T-003 Test headless de validacion [M]
+- [x] T-004 Datos data-driven en data/legal/ [S]
+- [ ] T-005 Definir contenido de usuarios
+- [x] T-006 Definir cancelaciones
+- [ ] T-007 Definir reembolsos
+- [ ] T-008 Definir responsabilidad
+- [x] T-009 Definir cambios del servicio
+- [x] T-010 Definir terminación
+- [x] T-011 Definir jurisdicción aplicable
+- [ ] T-012 Revisar con abogado
+- [x] T-013 Definir estilo de redacción (claro y comprensible)
+- [ ] T-014 Definir tono cozy y amigable
+- [x] T-015 Definir estructura clara con secciones numeradas
+- [x] T-016 Definir resumen ejecutivo al inicio (TL;DR)
+- [x] T-017 Diseñar introducción y aceptación
+- [x] T-018 Diseñar licencia de uso
+- [ ] T-019 Diseñar cuentas de usuario (si aplica)
+- [ ] T-020 Diseñar conductas prohibidas
+- [ ] T-021 Diseñar contenido de usuarios (si aplica)
+- [x] T-022 Diseñar cancelación y reembolsos
+- [ ] T-023 Diseñar responsabilidad
+- [x] T-024 Diseñar cambios del servicio
+- [x] T-025 Diseñar terminación
+- [x] T-026 Diseñar jurisdicción aplicable
+- [ ] T-027 Diseñar contacto
+- [x] T-028 Definir licencia personal
+- [x] T-029 Definir no comercial
+- [ ] T-030 Definir revocable
+- [ ] T-031 Definir no transferible
+- [ ] T-032 Definir permanente (mientras no se viole términos)
+- [x] T-033 Diseñar excepciones (streaming/YouTube, capturas de pantalla, modding)
+- [ ] T-034 Definir solo si hay componentes online
+- [x] T-035 Definir registro (nombre de usuario, email opcional)
+- [x] T-036 Definir autenticación (email/password o login social)
+- [ ] T-037 Definir seguridad (usuario responsable de seguridad)
+- [x] T-038 Definir datos (aceptación de recopilación según política de privacidad)
+- [x] T-039 Diseñar excepciones para v1.0 (offline-first, no cuentas obligatorias)
+- [ ] T-040 Definir cheating (exploits, hacks, trainers, cheats)
+- [x] T-041 Definir explotación (bugs para ventaja injusta)
+- [x] T-042 Definir acoso (discriminación, odio, lenguaje ofensivo)
+- [ ] T-043 Definir contenido inapropiado (NSFW, político, religioso ofensivo)
+- [x] T-044 Definir violación de copyright (assets protegidos sin permiso)
+- [x] T-045 Definir violación de privacidad (datos personales de otros usuarios)
+- [x] T-046 Diseñar consecuencias (primer aviso, segunda violación, tercera violación)
+- [x] T-047 Definir solo si hay UGC
+- [ ] T-048 Definir propiedad (usuario mantiene propiedad)
+- [x] T-049 Definir licencia (usuario otorga licencia al desarrollador)
+- [x] T-050 Definir moderación (desarrollador puede moderar)
+- [ ] T-051 Definir responsabilidad (usuario responsable de su contenido)
+- [x] T-052 Diseñar excepciones para v1.0 (no hay UGC)
+- [x] T-053 Definir cancelación de cuentas (usuario puede cancelar en cualquier momento)
+- [x] T-054 Definir eliminación de datos (solicitud por email, eliminación en 30 días)
+- [x] T-055 Definir política de reembolsos (según política de Steam)
+- [x] T-056 Definir excepciones (desarrollador puede hacer excepciones)
+- [x] T-057 Diseñar proceso de solicitud de reembolso (Steam)
+- [x] T-058 Definir limitación de responsabilidad
+- [x] T-059 Definir daños directos (limitados al precio del juego)
+- [ ] T-060 Definir daños indirectos (no responsabilidad)
+- [ ] T-061 Definir fuerza mayor (no responsabilidad por eventos fuera de control)
+- [ ] T-062 Definir viruses/malware (no responsabilidad por viruses/malware en equipo del usuario)
+- [x] T-063 Diseñar excepciones (negligencia grave, violación de leyes)
+- [x] T-064 Definir notificación (30 días de antelación)
+- [x] T-065 Definir actualizaciones automáticas (Steam)
+- [x] T-066 Definir EOL (notificación con 6 meses de antelación)
+- [ ] T-067 Definir descarga offline (usuario puede descargar antes de EOL)
+- [x] T-068 Diseñar excepciones (hotfixes, parches)
+- [x] T-069 Definir terminación por violación de términos
+- [x] T-070 Definir notificación (30 días de antelación)
+- [x] T-071 Definir eliminación de datos (usuario puede solicitar)
+- [x] T-072 Definir sin reembolso (por terminación por violación)
+- [x] T-073 Diseñar excepciones (violación grave, terminación inmediata)
+- [ ] T-074 Definir leyes del país del desarrollador
+- [ ] T-075 Definir tribunales del país del desarrollador
+- [ ] T-076 Definir idioma (español)
+- [x] T-077 Diseñar excepciones (GDPR para usuarios de la UE, CCPA para usuarios de California)
+- [x] T-078 Definir revisión obligatoria antes de publicación
+- [x] T-079 Definir revisión de cumplimiento legal (GDPR, CCPA)
+- [x] T-080 Definir revisión de lenguaje legal (claridad, validez)
+- [ ] T-081 Definir revisión de políticas específicas (reembolsos, responsabilidad)
+- [x] T-082 Diseñar proceso (enviar borrador, recibir feedback, ajustar, aprobar)
+- [x] T-083 Diseñar TermsManager como autoload
+- [x] T-084 Diseñar signal terms_accepted()
+- [x] T-085 Diseñar signal terms_declined()
+- [x] T-086 Diseñar método check_terms_acceptance()
+- [x] T-087 Diseñar método show_terms()
+- [x] T-088 Diseñar método accept_terms()
+- [x] T-089 Diseñar método decline_terms()
+- [x] T-090 Diseñar variable terms_accepted
+- [x] T-091 Diseñar variable terms_version
+- [x] T-092 Diseñar TermsConfig como Resource
+- [x] T-093 Diseñar propiedad terms_version
+- [x] T-094 Diseñar propiedad terms_date
+- [x] T-095 Diseñar propiedad terms_file
+- [ ] T-096 Diseñar propiedad accept_required
+- [ ] T-097 Diseñar propiedad show_on_launch
+- [x] T-098 Diseñar legal/terms_of_service.md
+- [x] T-099 Diseñar legal/terms_policy.md
+- [x] T-100 Diseñar res://legal/terms_manager.gd
+- [x] T-101 Diseñar res://legal/terms_config.gd
+- [x] T-102 Diseñar prueba de aceptación de términos en primer lanzamiento
+- [ ] T-103 Diseñar prueba de que no se muestren términos si ya fueron aceptados
+- [x] T-104 Diseñar prueba de rechazo de términos (cierre del juego)
+- [x] T-105 Diseñar prueba de actualización de términos (versión nueva → re-aceptación)

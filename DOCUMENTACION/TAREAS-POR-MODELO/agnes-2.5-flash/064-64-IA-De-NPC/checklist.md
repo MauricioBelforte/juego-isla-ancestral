@@ -1,0 +1,117 @@
+# Checklist de Tareas — M64 64-IA-De-NPC
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/64-IA-De-NPC/plan-actual/05-Checklist.md
+
+- [x] T-001 Crear clase base State.gd con enter/update/exit/check_transitions
+- [x] T-002 Implementar StateMachine.gd con update y transition_to
+- [x] T-003 Implementar IdleState con sub-estados (Wait, Look, Fidget)
+- [?] T-004 Implementar MovementState con sub-estados (WalkTo, RunTo, Avoid, Wander)
+- [x] T-005 Implementar WorkState con sub-estados (WorkAnimate, WorkPause, WorkComplete)
+- [x] T-006 Implementar SocialState con sub-estados (Greet, Chat, GroupChat)
+- [x] T-007 Implementar EatState con sub-estados (GoToEat, Eating, LeaveEat)
+- [x] T-008 Implementar SleepState con sub-estados (GoToSleep, Sleeping, WakeUp)
+- [x] T-009 Implementar ReactState con sub-estados (ReactRain, ReactEvent, ReactPlayer, ReactDanger)
+- [?] T-010 Implementar InteractState con sub-estados (TalkToPlayer, GiveGift, Trade)
+- [x] T-011 Definir reglas de transición para cada par de estados
+- [x] T-012 Implementar prioridad de transiciones (urgente > alta > media > baja)
+- [x] T-013 Implementar historial de estados (para debugging)
+- [?] T-014 Crear tests unitarios de transiciones de estado
+- [x] T-015 Verificar que ningún estado queda bloqueado permanentemente
+- [x] T-016 Implementar transición suave (no teletransporte entre estados)
+- [?] T-017 Verificar que las transiciones respetan la animación actual
+- [x] T-018 Implementar fallback a Idle si un estado falla
+- [?] T-019 Verificar que el FSM funciona con 60+ NPCs simultáneos
+- [?] T-020 Documentar estados y transiciones en 03-Diseno.md
+- [?] T-021 Crear RoutineDefinition.gd como Resource
+- [?] T-022 Crear RoutineSlot.gd con hour, minute, action, location
+- [x] T-023 Implementar RoutinePlayer.get_next_action()
+- [x] T-024 Implementar RoutinePlayer.is_action_due()
+- [x] T-025 Crear rutina de ejemplo para Luna (pintora)
+- [x] T-026 Crear rutina de ejemplo para Rocky (herrero)
+- [x] T-027 Crear rutina de ejemplo para Coral (exploradora)
+- [x] T-028 Crear rutina de ejemplo para Chef (cocinero)
+- [x] T-029 Crear rutina de ejemplo para Fin (pescador)
+- [x] T-030 Crear rutina de ejemplo para Flora (jardinera)
+- [x] T-031 Crear rutina de ejemplo para Sage (bibliotecario)
+- [x] T-032 Crear rutina de ejemplo para Merc (mercader)
+- [?] T-033 Verificar que las rutinas se resetean al cambio de día (M29)
+- [?] T-034 Implementar variación aleatoria en rutinas (±15 min)
+- [?] T-035 Documentar rutinas en 03-Diseno.md
+- [x] T-036 Crear NPCNeeds.gd con hunger, energy, social, mood
+- [x] T-037 Implementar decremento de necesidades por delta time
+- [x] T-038 Implementar recuperación de necesidades (comer, dormir, socializar)
+- [x] T-039 Implementar umbrales de necesidad (hunger < 20 → need_eat)
+- [x] T-040 Implementar prioridad de necesidades (hunger > energy > social)
+- [x] T-041 Integrar necesidades con FSM (necesidad → transición)
+- [?] T-042 Verificar que las necesidades no causan comportamiento errático
+- [x] T-043 Implementar persistencia de necesidades (guardado M59)
+- [?] T-044 Crear config de necesidades (.tres) para ajustar velocidades
+- [?] T-045 Documentar sistema de necesidades en 03-Diseno.md
+- [x] T-046 Configurar NavigationAgent3D en NPCAgent.tscn
+- [x] T-047 Implementar navigate_to() con NavigationServer3D
+- [x] T-048 Implementar _physics_process() con pathfinding
+- [x] T-049 Configurar path_desired_distance y target_desired_distance
+- [x] T-050 Configurar radius del NPC
+- [x] T-051 Implementar anti-atasco (stuck detection > 2 s)
+- [x] T-052 Implementar desvío de obstáculos
+- [?] T-053 Implementar separación entre NPCs (fuerza de separación)
+- [x] T-054 Implementar respawn de emergencia (> 10 s atascado)
+- [x] T-055 Limitar paths simultáneos a 60
+- [?] T-056 Implementar navmesh del mundo (M08)
+- [?] T-057 Verificar pathfinding en terreno irregular
+- [?] T-058 Verificar pathfinding con obstáculos dinámicos (otros NPCs)
+- [?] T-059 Medir rendimiento de pathfinding con 60 NPCs
+- [?] T-060 Documentar configuración de navegación en 03-Diseno.md
+- [x] T-061 Implementar detección de NPCs cercanos (proximity)
+- [x] T-062 Implementar saludo breve (2-3 s) al cruzarse
+- [x] T-063 Implementar charla (> 30 s cerca)
+- [x] T-064 Implementar conversación grupal (3+ NPCs)
+- [?] T-065 Implementar selectividad social (mismo trabajo, vecinos, amistad)
+- [?] T-066 Integrar con M20 (amistad afecta socialización)
+- [?] T-067 Integrar con M21 (diálogos de socialización)
+- [?] T-068 Verificar que las socializaciones no bloquean la rutina
+- [?] T-069 Implementar límite de socializaciones simultáneas
+- [?] T-070 Documentar reglas sociales en 03-Diseno.md
+- [x] T-071 Implementar reacción a lluvia (buscar refugio)
+- [x] T-072 Implementar reacción a tormenta (volver a casa)
+- [x] T-073 Implementar reacción a noche (> 22:00 → dormir)
+- [x] T-074 Implementar reacción a eventos/festivals (ir al lugar)
+- [?] T-075 Implementar reacción a construcciones del jugador (M17)
+- [x] T-076 Implementar reacción al jugador (mirar, comentario)
+- [?] T-077 Implementar reacción a recursos agotados (comentario)
+- [x] T-078 Integrar con M31 (clima) y M32 (estaciones)
+- [?] T-079 Verificar que las reacciones interrumpen correctamente
+- [?] T-080 Documentar reacciones en 03-Diseno.md
+- [x] T-081 Crear NPCManager.gd como autoload
+- [x] T-082 Implementar registro y desregistro de NPCs
+- [x] T-083 Implementar niveles de simulación (full/medium/light/sleep)
+- [x] T-084 Implementar actualización por distancia al jugador
+- [?] T-085 Verificar que NPCs lejanos no consumen pathfinding
+- [x] T-086 Implementar métricas de rendimiento (tiempo de tick)
+- [x] T-087 Implementar logging de estado (DOM-IA)
+- [?] T-088 Verificar presupuesto de agentes (M61: 60 NPCs máx)
+- [?] T-089 Implementar pausa con GameClock (M29)
+- [?] T-090 Documentar NPCManager en 04-Codigo.md
+- [x] T-091 Integrar con M19 (datos de NPCs: position, home, job)
+- [x] T-092 Integrar con M29/M30 (hora/día para rutinas)
+- [x] T-093 Integrar con M31/M32 (clima/estaciones)
+- [?] T-094 Integrar con M21 (diálogos según estado)
+- [x] T-095 Integrar con M61 (rendimiento)
+- [?] T-096 Integrar con M65 (animales IA)
+- [?] T-097 Integrar con M08 (navmesh del mundo voxel)
+- [x] T-098 Integrar con M59 (guardado de estado de NPCs)
+- [?] T-099 Integrar con M20 (amistad afecta socialización)
+- [?] T-100 Verificar integración completa con todos los módulos
+- [?] T-101 Crear test de FSM: transiciones entre todos los estados
+- [?] T-102 Crear test de rutinas: ejecución correcta de agenda diaria
+- [?] T-103 Crear test de necesidades: decremento y recuperación
+- [?] T-104 Crear test de navegación: llegada a destino sin atascos
+- [?] T-105 Crear test de social: interacciones entre NPCs
+- [?] T-106 Crear test de rendimiento: 60 NPCs con IA completa
+- [?] T-107 Crear test de rendimiento: 100+ NPCs con simulación parcial
+- [?] T-108 Crear test de persistencia: guardar/cargar estado de IA
+- [?] T-109 Crear test de edge case: NPC sin rutina definida
+- [?] T-110 Crear test de edge case: todos los NPCs durmiendo simultáneamente

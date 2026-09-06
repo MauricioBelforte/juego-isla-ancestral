@@ -1,0 +1,107 @@
+# Checklist de Tareas — M82 82-Clasificacion-Por-Edades
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/82-Clasificacion-Por-Edades/plan-actual/05-Checklist.md
+
+- [x] T-001 Documentar proceso IARC (International Age Rating Coalition): cómo funciona, costos, plataforma de submission
+- [x] T-002 Documentar proceso ESRB (EE.UU./Canadá): submission, evaluación, costos, plazos
+- [x] T-003 Documentar proceso PEGI (Europa): cuestionario, evaluación, costos
+- [x] T-004 Documentar proceso CERO (Japón): submission, evaluación, representante local
+- [x] T-005 Documentar proceso GRAC (Corea): submission, evaluación, costos
+- [x] T-006 Documentar proceso ACB (Australia): submission, evaluación, costos
+- [x] T-007 Documentar proceso USK (Alemania): submission, evaluación, costos
+- [x] T-008 Documentar proceso ClassInd (Brasil): submission, evaluación, costos
+- [x] T-009 Comparar plazos de cada sistema (semanas/meses)
+- [x] T-010 Comparar costos de cada sistema (USD)
+- [x] T-011 Identificar qué sistemas aceptan auto-evaluación vs. requieren revisión humana
+- [x] T-012 Documentar requisitos de representante local para cada sistema
+- [x] T-013 Crear matriz de compatibilidad: plataforma × sistema de clasificación
+- [x] T-014 Identificar sistemas obligatorios vs. opcionales por región
+- [x] T-015 Documentar proceso de renovación/recertificación periódica
+- [x] T-016 Definir lista completa de descriptores de contenido aplicables al juego
+- [x] T-017 Evaluar violencia: ¿hay combate? ¿hay daño a personajes? ¿hay sangre?
+- [ ] T-018 Evaluar lenguaje: ¿hay lenguaje ofensivo? ¿hay groserías?
+- [ ] T-019 Evaluar miedo: ¿hay atmósfera tensa en templos? ¿hay jumpscares?
+- [ ] T-020 Evaluar contenido sugestivo: ¿hay romance? ¿hay desnudez?
+- [x] T-021 Evaluar drogas: ¿hay referencias a sustancias?
+- [ ] T-022 Evaluar gambling: ¿hay mecánicas de azar real?
+- [x] T-023 Evaluar interacción: ¿hay chat? ¿hay interacción con otros jugadores?
+- [x] T-024 Evaluar compras: ¿hay DLC? ¿hay microtransacciones?
+- [x] T-025 Documentar cada descriptor con justificación y nivel
+- [x] T-026 Verificar descriptores contra checklist de M81 (Legal Menores)
+- [x] T-027 Documentar descriptores que podrían cambiar durante desarrollo
+- [x] T-028 Crear tabla de descriptores × clasificación (qué está permitido en cada una)
+- [x] T-029 Identificar descriptores ambiguos que requieren interpretación
+- [x] T-030 Documentar precedentes de juegos similares con su clasificación
+- [x] T-031 Definir rating objetivo para cada plataforma
+- [ ] T-032 Verificar que contenido actual es compatible con "Everyone" / "PEGI 3"
+- [x] T-033 Identificar contenido que pueda elevar el rating (templos, enemies, etc.)
+- [x] T-034 Definir estrategia para mantener rating bajo (si es objetivo)
+- [x] T-035 Documentar trade-offs entre contenido y rating
+- [x] T-036 Validar con M81 (Legal — Menores) que rating objetivo es consistente
+- [x] T-037 Definir plan B si contenido forzado sube el rating
+- [x] T-038 Documentar cómo el rating afecta el alcance del mercado
+- [x] T-039 Verificar que rating objetivo es realista para el contenido planificado
+- [ ] T-040 Crear escenario de "peor caso" (qué pasa si sube a Teen/PEGI 7)
+- [x] T-041 Crear timeline de submissions (cuándo submitir a cada sistema)
+- [ ] T-042 Definir quién realiza cada submission (responsable)
+- [x] T-043 Documentar documentación requerida para cada submission
+- [x] T-044 Definir proceso de actualización si el contenido cambia
+- [x] T-045 Definir proceso de appeal si el rating no es el esperado
+- [x] T-046 Documentar plazos de respuesta de cada sistema
+- [x] T-047 Definir proceso de emergencia si rating es rechazado
+- [x] T-048 Crear checklist de pre-submission para cada sistema
+- [ ] T-049 Definir proceso de QA interno antes de cada submission
+- [x] T-050 Documentar costo total estimado de submissions globales
+- [x] T-051 Verificar que Steam acepta IARC para todas las regiones
+- [x] T-052 Verificar que PlayStation acepta ESRB (EE.UU.) y PEGI (Europa)
+- [x] T-053 Verificar que Xbox acepta IARC y/o ESRB/PEGI
+- [x] T-054 Verificar que Nintendo acepta IARC y/o CERO/GRAC
+- [x] T-055 Documentar qué plataforma requiere submission separada
+- [ ] T-056 Definir proceso para cada plataforma que requiere submission propia
+- [x] T-057 Verificar compatibilidad de ratings entre regiones
+- [x] T-058 Documentar restricciones de contenido por plataforma
+- [x] T-059 Verificar que builds de plataformas mantienen mismo rating
+- [ ] T-060 Definir proceso para versiones de consola vs. PC
+- [x] T-061 Diseñar ContentValidator que verifique contenido vs. rating
+- [x] T-062 Definir reglas de validación por rating (qué contenido está permitido)
+- [x] T-063 Implementar gate en build pipeline: build falla si contenido inconsistente
+- [x] T-064 Definir proceso de revisión manual cuando validación automática falla
+- [x] T-065 Documentar excepciones permitidas (ej: templos con tensión leve en "Everyone")
+- [x] T-066 Verificar que validación funciona para todos los ratings objetivo
+- [x] T-067 Crear test automatizado de validación de contenido
+- [x] T-068 Integrar con M112 (Testing Automático) para CI
+- [x] T-069 Definir sensibilidad de la validación (false positives vs. false negatives)
+- [x] T-070 Documentar cómo actualizar reglas de validación cuando el contenido cambia
+- [x] T-071 Verificar que M97 (Steam Store Page) muestra rating correcto
+- [x] T-072 Verificar que M98 (Trailer) es compatible con rating objetivo
+- [x] T-073 Verificar que M99 (Marketing) usa rating correcto en materials
+- [x] T-074 Definir proceso de actualización de rating en store si contenido cambia
+- [x] T-075 Documentar cómo el rating afecta la visibilidad en stores
+- [x] T-076 Verificar que rating es visible en todas las plataformas objetivo
+- [x] T-077 Definir proceso de comunicación si rating cambia post-lanzamiento
+- [x] T-078 Verificar que screenshots y capturas son compatibles con rating
+- [x] T-079 Documentar proceso completo en CHECKLIST-GLOBAL.md
+- [x] T-080 Actualizar CHECKLIST-GLOBAL.md con estado del módulo
+- [x] T-081 Actualizar README.md de DOCUMENTACION/
+- [x] T-082 Generar log de creación del módulo en Logs/
+- [x] T-083 Verificar que no hay inconsistencias entre archivos del módulo
+- [ ] T-084 Crear resumen ejecutivo para stakeholders
+- [x] T-085 Documentar lecciones aprendidas para futuros proyectos
+- [x] T-086 Archivar versiones anteriores de clasificaciones
+- [x] T-087 Completar análisis de sistemas antes de M138 Vertical Slice
+- [x] T-088 Completar definición de rating objetivo antes de M139 Pre-Alpha
+- [x] T-089 Completar primer submission IARC antes de M140 Alpha
+- [ ] T-090 Completar submissions a plataformas antes de M141 Beta
+- [x] T-091 Verificar consistencia de ratings antes de M142 Release Candidate
+- [x] T-092 Verificar ratings visibles en stores antes de M143 Lanzamiento
+- [x] T-093 Documentar timeline de submissions para el equipo
+- [x] T-094 Crear recordatorio de recertificación anual
+- [x] T-095 Verificar coherencia con M81 (Legal Menores): age gating y clasificación
+- [x] T-096 Verificar coherencia con M83 (Licencias): licencias de herramientas de submission
+- [x] T-097 Verificar coherencia con M86 (IA Generativa): contenido generado y clasificación
+- [x] T-098 Verificar coherencia con M97 (Steam Store): metadata de clasificación en store
+- [x] T-099 Verificar coherencia con M98 (Trailer): contenido del tráiler vs. clasificación
+- [x] T-100 Documentar impacto de cada clasificación en el mercado objetivo

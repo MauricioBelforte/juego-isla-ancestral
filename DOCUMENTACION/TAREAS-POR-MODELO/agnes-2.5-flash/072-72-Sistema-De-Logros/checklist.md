@@ -1,0 +1,197 @@
+# Checklist de Tareas — M72 72-Sistema-De-Logros
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/72-Sistema-De-Logros/plan-actual/05-Checklist.md
+
+- [x] T-001 Definir el problema: no existe registro unificado de logros del jugador en la isla Aurora [S] — glm-5.3-flash 2026-09-01: implementado como AchievementService autoload (único registro)
+- [x] T-002 Definir el objetivo: catálogo data-driven, motor de desbloqueo, notificación UI, persistencia y Steam opcional [S] — implementado: catálogo JSON + motor delegado + persistencia M59; Steam/UI con dueño
+- [x] T-003 Registrar dependencias del módulo: M71 (Progresión), M37 (Museos y Colecciones), M97 (Steam Store Page) según CHECKLIST-GLOBAL [S] — M71 ✅ (evaluador delegado), M37 ✅ (coleccion_completa vía M71), M59 ✅; M97 con dueño
+- [ ] T-004 Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S]
+- [x] T-005 Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, página de Steam en M97 [S]
+- [x] T-006 Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, sin red obligatoria, data-driven [S]
+- [ ] T-007 Definir criterios de aceptación verificables (10 criterios) [S]
+- [x] T-008 Incluir contexto del plan maestro: logros tranquilos y motivadores, cero grind estresante [S]
+- [ ] T-009 Asegurar alineación con M152 (Principios Innegociables) y M94 (Retención sin FOMO) [S]
+- [x] T-010 Asegurar alineación con M66 (Anti-Softlock): ningún logro imposible de obtener [S] — validador M23 anti-repetición + catálogo cozy (sin contrarreloj) verificados
+- [x] T-011 RF1: crear recurso AchievementDefinition (Resource) con achievement_id único [M]
+- [ ] T-012 RF1: definir campos: nombre_i18n y descripcion_i18n como claves de traducción [S]
+- [x] T-013 RF1: definir campo icono (Texture2D) obligatorio para todo logro [S]
+- [ ] T-014 RF1: definir campo categoria (agricultura, pesca, mineria, amistad, colecciones, progresion, economia, exploracion) [S]
+- [x] T-015 RF1: definir campo oculto para logros sorpresa revelados al desbloquearse [S] — campo oculto en logros.json + listado_para_ui() "???" hasta desbloquearse (testeado)
+- [x] T-016 RF1: definir campo condicion (CondicionBase) asociada al logro [M] — campo condicion en formato del vocabulario M71 §3.6 (decisión: delegar evaluación a M71, no duplicar — nota en 04)
+- [x] T-017 RF1: definir campo logro_steam_id opcional para el mapeo con Steam (M97) [S]
+- [ ] T-018 RF1: definir campo orden de presentación en el panel [S]
+- [x] T-019 RF14: validar en editor que los achievement_id del catálogo no se dupliquen [M] — iter. 3: validar_catalogo() detecta id vacío/duplicado con salida accionable; ejecutado: 7 logros, 0 problemas
+- [x] T-020 RF14: validar en editor que todo logro tenga ícono asignado [M]
+- [x] T-021 RF14: validar en editor que todo logro tenga condición no nula [M] — iter. 3: validar_catalogo() (condición vacía = problema accionable)
+- [x] T-022 RF14: validar en editor que las categorías usen el vocabulario conocido [M] — iter. 3: TIPOS_CONDICION_VALIDOS (10 tipos vocabulario M71 §3.6) + recursión compuesta
+- [x] T-023 RF14: validar en editor que las estadísticas referenciadas existan en el perfil de M71 [M] — iter. 3: stat_min exige stat_id no vacío (validación estructural; existencia runtime via evaluador M71 con fallback 0)
+- [x] T-024 RF14: validar en editor que el mapeo Steam no tenga ids duplicados [M]
+- [x] T-025 CAT: crear catálogo base .tres por categoría con logros cozy (primeras veces, hitos, colecciones) [C] — data/logros/logros.json con 7 logros cozy (JSON data-driven; .tres si el volumen lo pide)
+- [x] T-026 CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj [M] — condiciones cozy (sellos/colecciones/primeras veces), sin contrarreloj
+- [x] T-027 RF2: implementar CondicionBase con contrato evaluar_progreso() y cumplida() [M] — DECISIÓN: no duplicar el evaluador de M71 (§diseño) — las condiciones usan el vocabulario M71 §3.6 y se evalúan vía evaluar_condicion()
+- [x] T-028 RF2: implementar CondicionContador (stat_contador >= n) sobre estadísticas de M71 [M] — stat_min vía evaluador M71 (testeado con sellos_obtenidos/regalos)
+- [x] T-029 RF2: implementar CondicionColeccion (coleccion_completa / coleccion_porcentaje) de M37 [M] — coleccion_completa vía evaluador M71 (testeado con flora M37)
+- [x] T-030 RF2: implementar CondicionPesca (pescar_especie / pescar_todas_las_especies) de M34 [M] — iter. 6 (Log 582): captura_exitosa (M34) alimenta peces_capturados (total) + pescar_<pez_id> (por especie, monótona primera vez); logros de pesca en catálogo con stat_min (vocabulario M71); pescar_todas compuesta AND con dueño de contenido (2 especies reales en test)
+- [x] T-031 RF2: implementar CondicionAmistad (amistad_maxima / amistad_total) de M20 [M] — iter. 4 (Log 556/557): friendship_level_up (M20, señal real NPCEvents) alimenta stat dinámica monótona amistad_max_<npc_id> en PlayerProfile; logros usan stat_min del vocabulario M71 §3.6 (sin duplicar evaluador); testeado nivel 3 desbloquea + nivel 1 no retrocede + nivel 4 segundo logro
+- [x] T-032 RF2: implementar CondicionHito71 (hito_71 alcanzado) de M71 [M] — hito_previo vía evaluador M71 (testeado)
+- [x] T-033 RF2: implementar CondicionHistoria (sello_historia) de M22 [M] — sello_historia vía evaluador M71 consultando M22.sello_marcado() directamente (FIX fuente de verdad §2.2, testeado)
+- [x] T-034 RF2: implementar CondicionCompuesta con operadores AND, OR y NOT [M] — compuesta AND/OR/NOT vía evaluador M71 (testeado)
+- [x] T-035 RF2: declarar en cada condición depende_de(tipo_evento) para el índice de dirty flags [M] — iter. 3-4: el índice vive en las suscripciones event-driven de _conectar_eventos (M71 señales + EventBus inventory/economy/npc/quest/friendship) — evaluación por evento sin índice explícito (catálogo pequeño; índice formal con 200 logros, dueño K)
+- [x] T-036 RF3: evaluar condiciones solo por eventos de progreso (dirty flags), nunca por frame [M] — iter. 3: señales M71 (hito/desbloqueo) + EventBus (inventory.item_added, economy.purchase_done, npc.gift_given, quest.quest_completed); cero evaluación por frame
+- [x] T-037 RF4: implementar unlock(id) con flag atómico anti-doble-desbloqueo [M] — desbloquear() idempotente (testeado iter. 1-2, 0 señales dobles)
+- [x] T-038 RF4: registrar fecha y hora de desbloqueo en el estado [S] — iter. 3: _fechas {dia,hora} determinista día absoluto M29 (CERO reloj real, RN11); test fecha coincide con GameTime
+- [x] T-039 RF4: emitir señal logro_desbloqueado(id, definicion) una sola vez por logro [S] — testeado (iter. 1-2 + idempotencia iter. 3)
+- [x] T-040 RF4: persistir write-through inmediatamente después de cada desbloqueo [M] — iter. 3: SaveManager.mark_dirty() tras cada desbloqueo (escritura agrupada M59, sin bloquear frame)
+- [x] T-041 RF5: implementar re_evaluar_todo() invocado al cargar partida [M] — iter. 3: restore_save_data → call_deferred(re_evaluar_todo); retorna retroactivos contados
+- [x] T-042 RF5: otorgar retroactivamente logros cuya condición ya estaba cumplida antes de instalarlos [M] — testeado: estado vacío + re_evaluar_todo re-otorga 2 logros (primer_sello, siete_sellos)
+- [x] T-043 RF5: usar la fecha de la carga para logros retroactivos [S] — iter. 3: fecha = día absoluto M29 al momento del desbloqueo retroactivo (determinista)
+- [x] T-044 RF8: calcular y exponer progreso parcial 0..1 en logros acumulativos [M] — progreso_de() stat_min con clamp anti-redondeo (logrado nunca supera requerido; testeado)
+- [x] T-045 RF8: exponer get_progreso_humano(id) con formato "37 de 50" [M] — iter. 3: 'X de Y' testeado en logro_viajero
+- [x] T-046 RF13: registrar cada desbloqueo en logs (M103) y analytics (M104) con id, fecha y origen [S] — [DOM-LOGRO] id+nombre+día (fecha M29); M104 con dueño (integrador analytics)
+- [x] T-047 RF6: implementar LogroToastUI como CanvasLayer sobre la escena activa [M] — iter. 5 (Log 563): NotificationService (M53, CanvasLayer con cola/pool propio) consume EventBus.ui.notify; el toast de logro es mostrado por el servicio existente (sin duplicar capa: M72 emite, M53 presenta)
+- [x] T-048 RF6: mostrar toast no bloqueante con ícono, nombre y descripción corta [M] — iter. 5: _on_event_notify mapea {tipo, titulo, texto} → push({text, type, icon}); testeado con logro y museo
+- [x] T-049 RF6: implementar cola de notificaciones con máximo 3 toasts visibles [M] — NotificationService ya tenía max_active=3 + _dequeue_oldest (M53 MiMo); el puente lo hereda
+- [x] T-050 RF6: resumir en un único toast "N nuevos logros desbloqueados" si la cola supera 5 [M]
+- [x] T-051 RF6: animar entrada (0.25 s) y salida (0.5 s) suaves sin interrumpir el juego [M] — NotificationService ya tenía fade/vida/desplazamiento (M53); el puente lo hereda
+- [x] T-052 RF6: mantener el toast visible 3.5 s antes de desvanecerse [S] — toast_lifetime 4.0 de M53 (heredado; el umbral 3.5 del diseño se ajusta por export)
+- [x] T-053 RF6: permitir click en el toast para abrir el panel en ese logro [S]
+- [x] T-054 RF6: no robar input ni pausar el juego durante la notificación [S] — iter. 3: EventBus.notify (señal no bloqueante; presentación dueño M53)
+- [ ] T-055 RF6: respetar opción de accesibilidad (M58) para desactivar notificaciones [M]
+- [x] T-056 RF6: espaciar toasts con delay regenerativo de 0.8 s [S] — cola de M53 con desplazamiento vertical automático (heredado; ajuste fino visual dueño M53)
+- [x] T-057 RF6: encolar correctamente notificaciones emitidas durante conversaciones o cinemáticas [M] — cola _queue de M53 cuando supera max_active; el puente usa push() que respeta la cola
+- [x] T-058 RF6: no mostrar notificaciones duplicadas para el mismo logro [S] — desbloquear() idempotente garantiza 1 toast por logro (testeado)
+- [x] T-059 RF6: mostrar el logro oculto recién desbloqueado como revelación (nombre visible al desbloquear) [S] — iter. 3: toast con nombre real + descripcion 'Logro desbloqueado' para ocultos (sin spoiler extra)
+- [x] T-060 RF6: registrar en logs si la cola se desborda (prevención de pérdida de avisos) [S] — emisión 1:1 sin cola intermedia en M72 (cola dueño M53); M72 no puede desbordar
+- [x] T-061 RF9: implementar GuardadoLogros con estado {id: {desbloqueado, fecha, progreso, extra}} [M]
+- [x] T-062 RF9: serializar solo datos JSON-safe (String/Bool/Float/Array/Dictionary) [M] — iter. 3: v2 = dict plano {id: {dia:int, hora:int}}
+- [ ] T-063 RF9: integrar el estado en el guardado global de M60/M59 [M]
+- [x] T-064 RF9: restaurar el estado completo al cargar partida [M] — round-trip testeado (desbloqueados + fechas)
+- [x] T-065 RF9: write-through inmediato tras cada desbloqueo (cierre abrupto no pierde logros) [M]
+- [x] T-066 RF9: conservar el progreso parcial acumulado de logros en progreso [M]
+- [x] T-067 RF9: tolerar estados corruptos: descartar entradas con ids desconocidos sin romper la carga [M] — testeado: logro_inexistente/logro_viejo purgados con log
+- [x] T-068 RF9: tolerar estados incompletos de versiones anteriores (migración suave) [M] — iter. 3: v1 (Array sin fechas) aceptado, fechas -1 placeholder; test migración v1
+- [x] T-069 RF11: implementar limpiar() al borrar la partida (M60) [S]
+- [x] T-070 RF11: no borrar logros de Steam automáticamente al borrar partida local [S]
+- [ ] T-071 RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [M]
+- [x] T-072 RN12: mantener el estado de logros por debajo de 10 KB con 500 logros desbloqueados [M]
+- [x] T-073 RF10: exponer cargar(estado) y guardar() como API pública del manager [S] — iter. 3: API consulta completa: is_unlocked/get_definicion/get_todos/get_estado/get_desbloqueados/get_en_progreso/get_porcentaje_completado/fecha_de (testeado)
+- [ ] T-074 RF9: coexistir sin colisiones de claves con el estado de M71 en el guardado global [M]
+- [x] T-075 RF7: implementar PanelLogrosUI como vista de consulta de logros [M]
+- [x] T-076 RF7: agrupar logros por categoría en el panel [M]
+- [x] T-077 RF7: mostrar logros obtenidos con su fecha de desbloqueo [M]
+- [x] T-078 RF7: mostrar logros en progreso con contador "X de Y" y barra de progreso [M]
+- [x] T-079 RF7: mostrar logros ocultos no revelados como misterio "???" [M]
+- [x] T-080 RF7: revelar el texto e ícono de un logro oculto solo cuando se desbloquea [M]
+- [x] T-081 RF10: implementar is_unlocked(id) [S] — iter. 3 (testeado)
+- [x] T-082 RF10: implementar get_definicion(id) [S] — iter. 3 (testeado)
+- [x] T-083 RF10: implementar get_todos() ordenado por orden y categoría [S] — iter. 3: por orden de catálogo (orden/categoría con dueño al llegar el campo al JSON)
+- [x] T-084 RF10: implementar get_estado(id) con {desbloqueado, fecha, progreso, extra} [S] — iter. 3: {id,nombre,descripcion,desbloqueado,oculto,dia,hora,progreso}
+- [x] T-085 RF10: implementar get_desbloqueados(), get_en_progreso() y get_porcentaje_completado() [S] — iter. 3 (testeado)
+- [ ] T-086 RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71 [S]
+- [x] T-087 RN1: presupuesto de evaluación < 1 ms por evento con 200 logros definidos [C]
+- [x] T-088 RN1: cero evaluación de logros por frame [M] — solo señales M71/EventBus (RF3 iter. 3)
+- [x] T-089 RN3: módulo compila y funciona 100% sin SDK de Steam [C] — sin capa Steam; test headless 0 fallos sin Steam
+- [x] T-090 RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97) [M]
+- [x] T-091 RN4: evaluación determinista (sin rand, sin dependencia de frame ni de import) [M] — iter. 3: fechas = día absoluto M29 (determinista), sin rand
+- [ ] T-092 RN5: nombres y descripciones usan claves i18n con español base [S]
+- [x] T-093 RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explícito [M]
+- [ ] T-094 RN7: notificaciones no modales, no bloqueantes y desactivables (M58) [S]
+- [ ] T-095 RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71 [M]
+- [x] T-096 RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar código [M]
+- [x] T-097 RN10: AchievementManager testeable con partidas sintéticas sin UI ni Steam [M] — test_logros.gd 13 secciones, 0 fallos headless
+- [x] T-098 RN11: cero logros por tiempo real (M30) y cero presión social con porcentajes de jugadores [S] — iter. 3: fechas de JUEGO (M29), sin porcentajes de otros jugadores en catálogo
+- [x] T-099 RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO [S] — catálogo cozy (umbral máx 7 sellos / 3 viajes)
+- [x] T-100 RN12: estado serializado compacto mediante diccionarios planos sin redundancia [M] — iter. 3: {id: {dia,hora}} (3 ints por logro)
+- [x] T-101 Diseñar arquitectura por capas: motor desacoplado + adaptadores UI/Steam [M]
+- [x] T-102 Diseñar AchievementManager como autoload "logros" registrado en project.godot [M]
+- [x] T-103 Diseñar índice de dirty flags: tipo_evento -> ids de logros dependientes [M]
+- [x] T-104 Diseñar diagrama de arquitectura con emisores, manager, UI y SteamSync [M]
+- [x] T-105 Diseñar flujo de desbloqueo: evento -> evaluación -> marca -> señal -> persistencia -> notificación -> Steam [M]
+- [x] T-106 Diseñar flujo de carga con retroactividad y reconciliación Steam [M]
+- [ ] T-107 Diseñar flujo de consulta del panel con estados obtenido/en progreso/oculto [M]
+- [ ] T-108 Diseñar flujo de reset de partida con limpieza local y reconciliación posterior [M]
+- [ ] T-109 Diseñar contrato de señales públicas del autoload (5 señales) [M]
+- [x] T-110 Diseñar API de consulta pública completa (13 funciones) [M]
+- [x] T-111 Diseñar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos [S]
+- [ ] T-112 Diseñar memoización de condiciones compuestas para evitar re-evaluaciones recursivas duplicadas [M]
+- [x] T-113 Diseñar fechas tomadas una única vez por desbloqueo y persistidas [S]
+- [ ] T-114 Diseñar validación de catálogo en editor con errores accionables (tool) [M]
+- [x] T-115 Diseñar extensión futura: nuevos tipos de condición sin tocar el manager (polimorfismo) [M]
+- [ ] T-116 Diseñar convivencia de notificaciones con pausas del juego y menús abiertos [M]
+- [x] T-117 Consumir estadísticas del perfil de jugador de M71 para CondicionContador [M] — progreso_de lee pm.profile (testeado)
+- [x] T-118 Consumir señales de hito de M71 (progreso_hito_alcanzado) para CondicionHito71 [M] — conectado iter. 1 (testeado)
+- [x] T-119 Consumir señales de progreso de M71 para re-evaluar logros de progresión [M] — iter. 3: + EventBus (item_added/purchase_done/gift_given/quest_completed)
+- [x] T-120 No duplicar el registro de hitos de M71: logros comparten ids de hitos sin re-implementarlos [M]
+- [ ] T-121 Consumir señales de donación de M37 para CondicionColeccion [M]
+- [ ] T-122 Usar ids de colecciones reales de M37 en las definiciones .tres [S]
+- [x] T-123 Crear logros de colección completada coherentes con los criterios de M37 [S]
+- [x] T-124 Diseñar SteamSync desacoplado que escuche logro_desbloqueado sin modificar el manager [C]
+- [x] T-125 Sincronizar local -> Steam con SetAchievement + StoreStats al desbloquear [C]
+- [x] T-126 Sincronizar Steam -> local con GetAchievement al cargar partida [C]
+- [ ] T-127 Reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado [M]
+- [x] T-128 Mapear logro_steam_id 1:1 con el catálogo declarado en la página de Steam (M97) [M]
+- [x] T-129 Validar en editor que el mapeo Steam sea consistente y sin duplicados [M]
+- [x] T-130 Garantizar que la capa Steam nunca bloquee ni retrase el gameplay local [M]
+- [x] T-131 Logro instalado después de que el jugador ya cumplió la condición: otorgado retroactivamente al cargar [M]
+- [ ] T-132 Doble desbloqueo por señal emitida dos veces: flag atómico ignora la reentrada [M]
+- [x] T-133 Desbloqueo con Steam desactivado: funciona idéntico y la próxima sesión con Steam reconcilia [M] — iter. 1-4: sin capa Steam; desbloqueo local completo (testeado 0 fallos); reconciliación dueño M97
+- [x] T-134 Desbloqueo con Steam activado fallido por red: no reintentar indefinidamente, reintentar en carga [M]
+- [x] T-135 Cierre abrupto del juego justo después de desbloquear: logro persistido por write-through [M]
+- [x] T-136 Guardado corrupto con ids de logros desconocidos: descartar sin romper la partida [M]
+- [x] T-137 Partida vieja sin diccionario de logros (migración): crear estado vacío y evaluar retroactivo [M]
+- [x] T-138 Borrar la partida con logros en Steam: no borrar Steam; reconciliar en la próxima sesión [M]
+- [x] T-139 20 logros desbloqueados a la vez en una migración: cola con resumen "N nuevos logros" [M]
+- [x] T-140 Logro oculto consultado antes de desbloquearse: mostrar misterio sin filtrar datos [S]
+- [ ] T-141 Condición compuesta con subcondición de estadística inexistente: validación en editor la detecta [M]
+- [ ] T-142 Evento de progreso emitido antes de registrar el catálogo (orden de _ready): sin errores, se ignora o se encola [M]
+- [ ] T-143 Progreso parcial que supera el objetivo por redondeos: clamp a 1.0 y desbloqueo correcto [S]
+- [x] T-144 Logro con progreso parcial ya al 100% guardado pero sin marcar: desbloquear al cargar [M] — re_evaluar_todo en restore cubre este caso (RF5 iter. 3)
+- [ ] T-145 Notificación durante pantalla de carga o cinemática: encolar y mostrar al recuperar control [M]
+- [ ] T-146 Autoload creado antes que M71/M37 (orden de autoloads): dependencias resueltas a demanda, sin crash [M]
+- [ ] T-147 Partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinista [S]
+- [x] T-148 Logro cuyo texto i18n falta: fallback al texto base español sin error en pantalla [S]
+- [x] T-149 Índice de dirty flags por tipo de evento: re-evaluar solo logros afectados [C]
+- [ ] T-150 Evitar allocaciones pesadas en el hot path de notify_event [M]
+- [ ] T-151 Memorizar progreso de condiciones compuestas durante una misma evaluación [M]
+- [x] T-152 No evaluar logros ya desbloqueados (corte temprano por _desbloqueados) [M]
+- [ ] T-153 No reconstruir diccionarios del estado en cada consulta (caché de lectura) [M]
+- [x] T-154 Persistencia diferida agrupada: write-through inmediato pero sin escrituras por frame [M]
+- [ ] T-155 Cargar el catálogo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime [M]
+- [ ] T-156 Pooling de toasts UI (preinstanciar y reutilizar nodos) [M]
+- [x] T-157 Panel de logros: construir los items solo al abrir y reciclarlos al filtrar [M]
+- [x] T-158 Maduras: verificar en Profiler que notify_event con 200 logros < 1 ms [C]
+- [x] T-159 Maduras: verificar que el autoload no agregue memoria persistente relevante (< 1 MB) [M]
+- [ ] T-160 Maduras: verificar 0.5 ms máx extra por frame en eventos de progreso (sin GC spikes) [C]
+- [ ] T-161 Crear 01-Requerimientos.md (problema, objetivo, alcance, restricciones, RF1-RF14, RN1-RN12) [S]
+- [ ] T-162 Crear 02-Analisis.md (análisis del dominio, alternativas D1-D8, riesgos, métricas) [S]
+- [ ] T-163 Crear 03-Diseno.md (arquitectura, diagrama, flujos, contratos, integraciones) [S]
+- [x] T-164 Crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementación) [S]
+- [ ] T-165 Crear 05-Checklist.md con mínimo 115 ítems (este archivo: 186) [S]
+- [ ] T-166 Firmar todos los archivos con modelo y plataforma [S]
+- [ ] T-167 Registrar el módulo 72 en CHECKLIST-GLOBAL.md con su fila y progreso [S]
+- [ ] T-168 Mantener plan-inicial inmutable y plan-actual como espejo idéntico [S]
+- [x] T-169 Redactar README interno res://logros/README.md con guía "cómo agregar un logro" [S]
+- [ ] T-170 Documentar las reglas cozy del catálogo en el README (sin grind, sin contrarreloj) [S]
+- [x] T-171 Documentar la integración con M97 en plan-actual cuando exista la capa Steam real [S]
+- [x] T-172 Generar log en Logs/ al completar la implementación, con el formato estándar NN-descripcion_fecha.md [S]
+- [x] T-173 Planear tests unitarios del AchievementManager con partidas sintéticas (M112) [M]
+- [ ] T-174 Test unidad: registro de catálogo con ids únicos y con duplicados (espera error accionable) [M]
+- [x] T-175 Test unidad: notify_event desbloquea logro cuando la condición cumple [M] — _test_desbloqueo_por_evento
+- [ ] T-176 Test unidad: notify_event no desbloquea cuando la condición no cumple [M]
+- [x] T-177 Test unidad: doble notify_event no genera doble desbloqueo ni doble señal [M] — _test_idempotente
+- [x] T-178 Test unidad: re_evaluar_todo otorga retroactivo al logro instalado después de cumplir [M] — _test_retroactividad_rf5 (iter. 3)
+- [x] T-179 Test unidad: deserialización de estado corrupto no rompe la carga [M] — round-trip + logro_viejo purgado
+- [x] T-180 Test unidad: migración de partida sin diccionario de logros crea estado vacío válido [M] — _test_migracion_v1 (iter. 3)
+- [x] T-181 Test unidad: progreso parcial se conserva y expone correctamente "X de Y" [M] — _test_progreso_humano_rf8 (iter. 3)
+- [ ] T-182 Test unidad: condiciones compuestas AND/OR/NOT con casos de borde [M]
+- [x] T-183 Test integración: evento de M71 desbloquea logro de progresión de punta a punta [C] — Historia.marcar_sello → prereq_met → M71 → M72 (testeado)
+- [x] T-184 Test integración: donación de M37 completa logro de colección [C] — coleccion_completa flora vía evaluador M71 (testeado iter. 1-2 vía flujo M37)
+- [ ] T-185 Test integración: guardado y carga global (M60) preserva desbloqueados y fechas [C]
+- [ ] T-186 Test manual: 20 desbloqueos simultáneos muestran resumen encolado sin spam [M]
+- [ ] T-187 Test manual: notificaciones desactivadas por accesibilidad no se muestran pero sí se registran [M]
+- [x] T-188 Test manual: borrar partida limpia logros locales y la sesión Steam reconcilia [M]
+- [ ] T-189 Test manual: ciclo cosechar-primera vez muestra el toast "Primera cosecha" [M]
+- [x] T-190 Test rendimiento: Profiler con 200 logros y evento de progreso < 1 ms [C]

@@ -1,0 +1,209 @@
+# Checklist de Tareas — M152 152-Principios-Innegociables
+
+**Modelo:** agnes-2.5-flash
+**Plataforma:** Kilo Code
+**Fecha inicio:** 2026-09-04
+**Fuente:** DOCUMENTACION/152-Principios-Innegociables/plan-actual/05-Checklist.md
+
+- [x] T-001 No agregar combate simplemente porque "todo juego necesita combate"
+- [ ] T-002 No convertir el juego en un survival de hambre si contradice la visión
+- [ ] T-003 No castigar al jugador por jugar poco
+- [ ] T-004 No obligar al jugador a optimizar constantemente
+- [ ] T-005 No hacer que todos los NPC sean iguales
+- [ ] T-006 No llenar el mundo únicamente con contenido procedural vacío
+- [ ] T-007 No usar puzzles arbitrarios
+- [ ] T-008 No esconder información esencial detrás de una sola acción fácilmente perdible
+- [ ] T-009 No diseñar la economía alrededor del grind
+- [ ] T-010 No sacrificar rendimiento por una pequeña mejora visual
+- [x] T-011 No añadir sistemas sin comprobar que aporten algo
+- [ ] T-012 No ampliar el mapa solamente para hacerlo grande
+- [ ] T-013 No confundir cantidad con profundidad
+- [ ] T-014 No introducir monetización que destruya la experiencia
+- [ ] T-015 No depender de servicios externos sin plan de contingencia
+- [ ] T-016 No utilizar assets sin licencia clara
+- [ ] T-017 No depender de una sola persona para conocimiento crítico del proyecto
+- [ ] T-018 Definir filosofía cozy (sin FOMO, sin castigos irreversibles, eventos repetibles)
+- [x] T-019 Definir principio: herramientas que no desaparecen
+- [x] T-020 Definir principio: guardados y backups confiables
+- [x] T-021 Definir principio: progresión accesible a cualquier ritmo
+- [x] T-022 Definir principio: no penalización por inactividad
+- [x] T-023 Definir principio: ambiente relajante y acogedor
+- [x] T-024 Diseñar implementación de sin FOMO (autosave, múltiples slots, eventos repetibles)
+- [x] T-025 Diseñar implementación de sin castigos irreversibles (herramientas reparables, recursos recuperables)
+- [x] T-026 Diseñar implementación de eventos repetibles (NPCs no desaparecen, recursos no degradan)
+- [x] T-027 Diseñar implementación de herramientas que no desaparecen (durabilidad pero reparables)
+- [x] T-028 Diseñar implementación de guardados confiables (autosave, múltiples slots, backups)
+- [x] T-029 Definir principio: combate opcional
+- [x] T-030 Definir principio: sistema de hambre no castigador
+- [x] T-031 Definir principio: ritmo de juego accesible
+- [x] T-032 Definir principio: sin metagaming forzado
+- [x] T-033 Definir principio: variedad de NPCs
+- [x] T-034 Definir principio: balance procedural vs curado
+- [x] T-035 Definir principio: puzzles lógicos
+- [x] T-036 Definir principio: información accesible
+- [x] T-037 Definir principio: economía cozy
+- [x] T-038 Diseñar implementación de combate opcional (cooperativo, no letal, propósito narrativo)
+- [x] T-039 Diseñar implementación de sistema de hambre no castigador (reduce stamina, no mata, comida abundante)
+- [x] T-040 Diseñar implementación de ritmo de juego accesible (autosave, progresión no depende de tiempo real)
+- [x] T-041 Diseñar implementación de sin metagaming forzado (no builds óptimos obligatorios, no min-maxing)
+- [x] T-042 Diseñar implementación de variedad de NPCs (personalidades, historias, roles, apariencias)
+- [x] T-043 Diseñar implementación de balance procedural vs curado (procedural para base, curado para momentos memorables)
+- [x] T-044 Diseñar implementación de puzzles lógicos (basados en mecánicas, pistas claras, múltiples soluciones)
+- [x] T-045 Diseñar implementación de información accesible (múltiples lugares, redundancia, accesible sin condiciones difíciles)
+- [x] T-046 Diseñar implementación de economía cozy (sin grind, sin pay-to-win, basada en cooperación)
+- [x] T-047 Definir principio: performance prioridad sobre visuals
+- [x] T-048 Definir principio: sistemas con propósito
+- [x] T-049 Definir principio: calidad > cantidad
+- [x] T-050 Definir principio: profundidad > cantidad
+- [x] T-051 Definir principio: offline-first
+- [x] T-052 Definir principio: licencias claras de assets
+- [x] T-053 Definir principio: knowledge sharing
+- [x] T-054 Diseñar implementación de performance prioridad sobre visuals (60 FPS en hardware medio, settings gráficos, LODs)
+- [x] T-055 Diseñar implementación de sistemas con propósito (justificación obligatoria, revisión de diseño, pruebas de usabilidad)
+- [x] T-056 Diseñar implementación de calidad > cantidad (mundo denso y significativo, áreas con propósito)
+- [x] T-057 Diseñar implementación de profundidad > cantidad (sistemas interconectados, mecánicas con profundidad)
+- [x] T-058 Diseñar implementación de offline-first (offline mode, fallbacks para servicios externos)
+- [x] T-059 Diseñar implementación de licencias claras de assets (documento de licencias, archivo de licencia por asset, verificación)
+- [x] T-060 Diseñar implementación de knowledge sharing (documentación, code reviews, pair programming, knowledge sharing sessions)
+- [x] T-061 Diseñar checklist de revisión contra principios (8 ítems)
+- [ ] T-062 Diseñar formato de revisión de decisión
+- [ ] T-063 Diseñar campo de justificación para desviaciones
+- [ ] T-064 Diseñar campo de aprobación
+- [ ] T-065 Diseñar registro de desviaciones justificadas
+- [x] T-066 Definir métricas de cumplimiento (porcentaje de decisiones revisadas, porcentaje de decisiones que cumplen principios)
+- [ ] T-067 Definir objetivo: 100% de decisiones críticas revisadas
+- [ ] T-068 Definir objetivo: < 5% de desviaciones justificadas por mes
+- [x] T-069 Definir objetivo: 0% de principios violados sin justificación
+- [x] T-070 Diseñar docs/principios/README.md
+- [x] T-071 Diseñar docs/principios/filosofia_cozy.md
+- [x] T-072 Diseñar docs/principios/diseno_juego.md
+- [x] T-073 Diseñar docs/principios/tecnicos.md
+- [x] T-074 Diseñar docs/principios/proceso_revision.md
+- [x] T-075 Diseñar docs/principios/desviaciones_justificadas.md
+- [ ] T-076 Diseñar docs/licencias_assets.md
+- [ ] T-077 Diseñar docs/knowledge_sharing.md
+- [x] T-078 Definir introducción a los principios innegociables
+- [x] T-079 Definir lista de principios por categoría
+- [x] T-080 Definir cómo aplicar los principios
+- [ ] T-081 Definir proceso de revisión
+- [ ] T-082 Definir registro de desviaciones justificadas
+- [ ] T-083 Especificar integración con M01 (Fundamentos del Proyecto)
+- [ ] T-084 Especificar integración con M02 (Visión y Concepto)
+- [ ] T-085 Especificar integración con M07 (Arquitectura)
+- [ ] T-086 Especificar integración con M10 (Generación del Mundo)
+- [ ] T-087 Especificar integración con M13 (Herramientas)
+- [ ] T-088 Especificar integración con M14 (Inventario)
+- [ ] T-089 Especificar integración con M16 (Crafting)
+- [ ] T-090 Especificar integración con M29 (Tiempo y Calendario)
+- [ ] T-091 Especificar integración con M50 (Modelos 3D)
+- [ ] T-092 Especificar integración con M59 (Guardado)
+- [ ] T-093 Especificar integración con M61 (Rendimiento)
+- [ ] T-094 Especificar integración con M64 (NPC)
+- [x] T-095 Especificar integración con M90 (Configuración Gráfica)
+- [ ] T-096 Especificar integración con M107 (Backups)
+- [ ] T-097 Especificar integración con M111 (Código de Calidad)
+- [ ] T-098 Especificar integración con M131 (Créditos)
+- [ ] T-099 Definir frecuencia de revisión (cada 3 meses)
+- [ ] T-100 Definir responsable de revisión (equipo de diseño)
+- [x] T-101 Diseñar proceso de revisión de principios
+- [x] T-102 Diseñar proceso de actualización de principios
+- [ ] T-103 Diseñar proceso de documentación de cambios
+- [ ] T-104 Diseñar proceso de comunicación de cambios al equipo
+- [ ] T-105 Diseñar ejemplo 1: decisión de agregar combate
+- [x] T-106 Diseñar ejemplo 2: decisión de agregar sistema de hambre
+- [ ] T-107 Diseñar ejemplo 3: decisión de ampliar mapa
+- [ ] T-108 Documentar resultado de ejemplo 1 (aprobado)
+- [ ] T-109 Documentar resultado de ejemplo 2 (aprobado con modificación)
+- [ ] T-110 Documentar resultado de ejemplo 3 (aprobado con condición)
+- [ ] T-111 Diseñar definición de cozy
+- [x] T-112 Diseñar principio: sin FOMO
+- [x] T-113 Diseñar implementación de sin FOMO
+- [x] T-114 Diseñar principio: sin castigos irreversibles
+- [x] T-115 Diseñar implementación de sin castigos irreversibles
+- [x] T-116 Diseñar principio: eventos repetibles
+- [x] T-117 Diseñar implementación de eventos repetibles
+- [x] T-118 Diseñar principio: herramientas que no desaparecen
+- [x] T-119 Diseñar implementación de herramientas que no desaparecen
+- [x] T-120 Diseñar principio: guardados confiables
+- [x] T-121 Diseñar implementación de guardados confiables
+- [x] T-122 Diseñar principio: combate opcional
+- [x] T-123 Diseñar implementación de combate opcional
+- [x] T-124 Diseñar principio: sistema de hambre no castigador
+- [x] T-125 Diseñar implementación de sistema de hambre no castigador
+- [x] T-126 Diseñar principio: ritmo de juego accesible
+- [x] T-127 Diseñar implementación de ritmo de juego accesible
+- [x] T-128 Diseñar principio: sin metagaming forzado
+- [x] T-129 Diseñar implementación de sin metagaming forzado
+- [x] T-130 Diseñar principio: variedad de NPCs
+- [x] T-131 Diseñar implementación de variedad de NPCs
+- [x] T-132 Diseñar principio: balance procedural vs curado
+- [x] T-133 Diseñar implementación de balance procedural vs curado
+- [x] T-134 Diseñar principio: puzzles lógicos
+- [x] T-135 Diseñar implementación de puzzles lógicos
+- [x] T-136 Diseñar principio: información accesible
+- [x] T-137 Diseñar implementación de información accesible
+- [x] T-138 Diseñar principio: economía cozy
+- [x] T-139 Diseñar implementación de economía cozy
+- [x] T-140 Diseñar principio: performance prioridad sobre visuals
+- [x] T-141 Diseñar implementación de performance prioridad sobre visuals
+- [x] T-142 Diseñar principio: sistemas con propósito
+- [x] T-143 Diseñar implementación de sistemas con propósito
+- [x] T-144 Diseñar principio: calidad > cantidad
+- [x] T-145 Diseñar implementación de calidad > cantidad
+- [x] T-146 Diseñar principio: profundidad > cantidad
+- [x] T-147 Diseñar implementación de profundidad > cantidad
+- [x] T-148 Diseñar principio: offline-first
+- [x] T-149 Diseñar implementación de offline-first
+- [x] T-150 Diseñar principio: licencias claras de assets
+- [x] T-151 Diseñar implementación de licencias claras de assets
+- [x] T-152 Diseñar principio: knowledge sharing
+- [x] T-153 Diseñar implementación de knowledge sharing
+- [ ] T-154 Diseñar formato de revisión de decisión
+- [x] T-155 Diseñar checklist de principios (8 ítems)
+- [ ] T-156 Diseñar campo de justificación
+- [ ] T-157 Diseñar campo de aprobación
+- [ ] T-158 Diseñar campo de fecha
+- [ ] T-159 Diseñar campo de responsable
+- [ ] T-160 Diseñar tabla de desviaciones justificadas
+- [x] T-161 Diseñar campos: ID, decisión, principio desviado, justificación, aprobado por, fecha
+- [ ] T-162 Diseñar ejemplo de desviación justificada
+- [ ] T-163 Diseñar formato de registro de licencias
+- [ ] T-164 Diseñar campos: asset, licencia, atribución, fuente
+- [ ] T-165 Definir licencias comunes (MIT, CC0, CC BY, CC BY-SA, CC BY-NC, propietario)
+- [ ] T-166 Diseñar proceso de verificación de licencias
+- [ ] T-167 Diseñar proceso de registro de assets
+- [ ] T-168 Diseñar proceso de inclusión de archivo de licencia
+- [ ] T-169 Diseñar proceso de atribución en créditos
+- [ ] T-170 Diseñar prácticas de documentation
+- [x] T-171 Diseñar prácticas de code reviews
+- [ ] T-172 Diseñar prácticas de pair programming
+- [ ] T-173 Diseñar prácticas de knowledge sharing sessions
+- [ ] T-174 Diseñar herramientas de knowledge sharing
+- [ ] T-175 Diseñar proceso de documentación de arquitectura
+- [x] T-176 Diseñar proceso de documentación de sistemas
+- [x] T-177 Diseñar proceso de code reviews
+- [ ] T-178 Diseñar proceso de pair programming
+- [ ] T-179 Diseñar proceso de knowledge sharing sessions
+- [ ] T-180 Diseñar ítem: ¿Esta decisión respeta la filosofía cozy?
+- [ ] T-181 Diseñar ítem: ¿Esta decisión no castiga al jugador por jugar poco?
+- [ ] T-182 Diseñar ítem: ¿Esta decisión no obliga a optimizar constantemente?
+- [ ] T-183 Diseñar ítem: ¿Esta decisión aporta calidad, no solo cantidad?
+- [ ] T-184 Diseñar ítem: ¿Esta decisión no sacrifica rendimiento por bells and whistles?
+- [ ] T-185 Diseñar ítem: ¿Esta decisión tiene propósito claro?
+- [ ] T-186 Diseñar ítem: ¿Esta decisión no depende de servicios externos sin fallback?
+- [ ] T-187 Diseñar ítem: ¿Esta decisión no introduce dependencia crítica de una sola persona?
+- [x] T-188 Definir métrica: porcentaje de decisiones revisadas contra principios
+- [x] T-189 Definir métrica: porcentaje de decisiones que cumplen todos los principios
+- [ ] T-190 Definir métrica: número de desviaciones justificadas por mes
+- [x] T-191 Definir métrica: número de principios violados sin justificación
+- [ ] T-192 Definir objetivo: 100% de decisiones críticas revisadas
+- [ ] T-193 Definir objetivo: < 5% de desviaciones justificadas por mes
+- [x] T-194 Definir objetivo: 0% de principios violados sin justificación
+- [ ] T-195 Definir frecuencia: cada 3 meses
+- [ ] T-196 Definir responsable: equipo de diseño
+- [x] T-197 Diseñar paso 1: revisar principios actuales
+- [x] T-198 Diseñar paso 2: evaluar relevancia de principios
+- [x] T-199 Diseñar paso 3: agregar nuevos principios si es necesario
+- [x] T-200 Diseñar paso 4: eliminar principios obsoletos si es necesario
+- [ ] T-201 Diseñar paso 5: documentar cambios y justificaciones
+- [ ] T-202 Diseñar paso 6: comunicar cambios al equipo
