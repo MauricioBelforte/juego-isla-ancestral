@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_002-CAP0-HISTORIA-VERANO",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_002",
+			"text_key": "El sol de verano calienta la laguna justo bien. Perfecta para nadar y soñar.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_002"
+		}
+	}
+}

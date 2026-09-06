@@ -1,74 +1,11 @@
 {
   "objetivos": [
-    {
-      "id": "recolectar_madera",
-      "nombre": "Recolectar madera",
-      "descripcion": "Corta 10 troncos de madera",
-      "plazo": "diario",
-      "condicion": "recolectar_madera",
-      "cantidad_requerida": 10,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 50
-    },
-    {
-      "id": "hablar_con_vecinos",
-      "nombre": "Charlar con vecinos",
-      "descripcion": "Habla con 3 vecinos diferentes",
-      "plazo": "diario",
-      "condicion": "hablar_npc",
-      "cantidad_requerida": 3,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 30
-    },
-    {
-      "id": "regalar_regalo",
-      "nombre": "Hacer un regalo",
-      "descripcion": "Regala un objeto a un vecino",
-      "plazo": "diario",
-      "condicion": "regalar_npc",
-      "cantidad_requerida": 1,
-      "recompensa_id": "punto_amistad",
-      "recompensa_cantidad": 2
-    },
-    {
-      "id": "pescar_tres",
-      "nombre": "Ir a pescar",
-      "descripcion": "Pesca 3 peces",
-      "plazo": "semanal",
-      "condicion": "pescar",
-      "cantidad_requerida": 3,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 200
-    },
-    {
-      "id": "minerales",
-      "nombre": "Recolectar minerales",
-      "descripcion": "Extrae 5 minerales de la mina",
-      "plazo": "semanal",
-      "condicion": "mineria",
-      "cantidad_requerida": 5,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 150
-    },
-    {
-      "id": "construir_mueble",
-      "nombre": "Construir un mueble",
-      "descripcion": "Fabrica un mueble o decoración",
-      "plazo": "mensual",
-      "condicion": "construir",
-      "cantidad_requerida": 1,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 500
-    },
-    {
-      "id": "explorar_isla",
-      "nombre": "Explorar una isla nueva",
-      "descripcion": "Visita una isla que no hayas explorado",
-      "plazo": "mensual",
-      "condicion": "viajar",
-      "cantidad_requerida": 1,
-      "recompensa_id": "moneda",
-      "recompensa_cantidad": 1000
-    }
+    {"id": "recolectar_madera", "nombre": "Recolectar madera", "tipo": "recoleccion", "cadencia": "diario_suave", "target_min": 15, "recompensa": "moneda_ancestral, 20", "expiracion": false, "descripcion": "Recolecta madera un rato — sin apuro, el bosque no se va."},
+    {"id": "hablar_con_vecinos", "nombre": "Hablar con vecinos", "tipo": "social", "cadencia": "diario_suave", "target_min": 8, "recompensa": "amistad +2", "expiracion": false, "descripcion": "Un saludo al día a dos vecinos"},
+    {"id": "regalar_regalo", "nombre": "Regalar un regalo", "tipo": "social", "cadencia": "diario_suave", "target_min": 5, "recompensa": "moneda_ancestral, 15", "expiracion": false, "descripcion": "Un regalo a quien más quieras hoy"},
+    {"id": "pescar_tres", "nombre": "Pescar tres", "tipo": "minijuego", "cadencia": "diario_suave", "target_min": 10, "recompensa": "moneda_ancestral, 25", "expiracion": false, "descripcion": "La pesca escucha al clima: bono si llueve"},
+    {"id": "minerales", "nombre": "Minerales", "tipo": "recoleccion", "cadencia": "diario_suave", "target_min": 12, "recompensa": "moneda_ancestral, 20", "expiracion": false, "descripcion": "La mina guarda 12 cosechas por zona"},
+    {"id": "construir_mueble", "nombre": "Construir un mueble", "tipo": "creacion", "cadencia": "diario_suave", "target_min": 15, "recompensa": "moneda_ancestral, 30", "expiracion": false, "descripcion": "Haz la casa más hogar"},
+    {"id": "explorar_isla", "nombre": "Explorar la isla", "tipo": "exploracion", "cadencia": "diario_suave", "target_min": 20, "recompensa": "moneda_ancestral, 25", "expiracion": false, "descripcion": "Afuera siempre hay un rincón nuevo"}
   ]
 }

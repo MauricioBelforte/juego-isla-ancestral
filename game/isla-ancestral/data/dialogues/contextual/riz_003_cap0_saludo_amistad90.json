@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_003-CAP0-SALUDO-AMISTAD90",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_003",
+			"text_key": "¡El bosque y yo te consideramos parte de él! Eso no se le dice a cualquiera.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_003"
+		}
+	}
+}

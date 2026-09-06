@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "puertos": [
+    {"id": "LOC-RIZ-PUER-001", "nombre": "Embarcadero de la Raíz", "isla": "RIZ", "x": 256, "z": 120, "costa": "norte"},
+    {"id": "LOC-COR-PUER-001", "nombre": "Embarcadero del Arrecife", "isla": "COR", "x": 1024, "z": 180, "costa": "norte"},
+    {"id": "LOC-CEN-PUER-001", "nombre": "Embarcadero de la Ceniza", "isla": "CEN", "x": 180, "z": 1024, "costa": "oeste"},
+    {"id": "LOC-AUR-PUER-001", "nombre": "Embarcadero Aurora", "isla": "AUR", "x": 1080, "z": 1080, "costa": "sur"}
+  ]
+}

@@ -1,0 +1,55 @@
+{
+	"version": 1,
+	"_nota": "5-FUTURAS-MEJORAS: Estandarizar tamaños de objetos. Referencia: personaje=1.8m, voxel=1m. La escala multiplicador = altura_objetivo / altura_GLB(~1m). Ajustar con capturas visuales (M154: capturar→analizar→ajustar).",
+	"vegetacion": {
+		"palmera": 1.0,
+		"palmera_inclinada": 1.0,
+		"palmera_joven": 1.0,
+		"arbol_frutal": 1.0,
+		"arbusto_redondo": 1.0,
+		"arbusto_floral": 1.0,
+		"helecho_gigante": 1.0,
+		"helecho_chico": 1.0,
+		"raices_expuestas": 2.0,
+		"hierba_alta": 1.5,
+		"flor_isla": 1.0,
+		"hongo_luminoso": 1.0,
+		"liana_colgante": 1.0,
+		"musgo_roca": 1.0,
+		"canas_bambu": 1.0
+	},
+	"fauna": {
+		"gaviota": 1.0,
+		"tortuga": 1.0,
+		"cangrejo": 1.0,
+		"jabali_joven": 1.0,
+		"jabali_adulto": 1.0,
+		"conejo": 0.3,
+		"nutria": 0.7,
+		"abeja": 0.1,
+		"lechuza": 0.5
+	},
+	"npcs": {
+		"catalina_oso": 1.0,
+		"finneas_zorro": 1.0,
+		"luna_zorra": 1.0,
+		"mateo_mapache": 1.0,
+		"bruno_sapo": 1.0,
+		"shaman": 1.05,
+		"mercader_ambulante": 1.0,
+		"villager_default": 1.0
+	},
+	"props_totems": {
+		"totem_ancestral": 3.5,
+		"totem_pequeno": 1.5,
+		"mesa_trabajo": 1.0,
+		"cofre": 0.8,
+		"roca_grande": 2.0,
+		"roca_chica": 0.6,
+		"veta_cobre": 1.2,
+		"veta_hierro": 1.2,
+		"veta_oro": 1.2,
+		"choza": 3.0,
+		"puerta": 1.2
+	}
+}

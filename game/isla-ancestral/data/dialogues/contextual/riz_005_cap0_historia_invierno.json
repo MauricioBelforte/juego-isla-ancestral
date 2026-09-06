@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_005-CAP0-HISTORIA-INVIERNO",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_005",
+			"text_key": "El puerto de invierno es duro pero honesto. Los pescadores de verdad no nos quejamos.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_005"
+		}
+	}
+}

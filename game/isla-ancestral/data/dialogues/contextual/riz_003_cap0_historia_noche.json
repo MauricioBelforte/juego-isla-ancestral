@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_003-CAP0-HISTORIA-NOCHE",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_003",
+			"text_key": "El bosque de noche tiene otra voz. Las hojas no duermen, solo bajan el volumen para quien sabe escuchar.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_003"
+		}
+	}
+}

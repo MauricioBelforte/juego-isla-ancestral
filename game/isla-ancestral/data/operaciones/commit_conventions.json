@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "descripcion": "Convenciones de commits para el proyecto Isla Ancestral (Conventional Commits + extensiones).",
+  "categorias": {
+    "feat": "Added",
+    "fix": "Fixed",
+    "docs": "Documentation",
+    "style": "Changed",
+    "refactor": "Changed",
+    "perf": "Changed",
+    "test": "Changed",
+    "chore": "Changed",
+    "revert": "Removed",
+    "build": "Changed",
+    "ci": "Changed"
+  },
+  "breaking": "Breaking",
+  "scopes_permitidos": [
+    "core", "ui", "audio", "video", "network", "data", "tools",
+    "mineria", "fauna", "flora", "templo", "islas", "ruina", "museo",
+    "creditos", "copyright", "legal", "postlaunch", "ci", "release",
+    "i18n", "a11y", "perf", "save", "load", "ui-credits",
+    "test", "docs", "build", "chore"
+  ],
+  "ejemplos": [
+    "feat(mineria): anadir vetas de oro",
+    "fix(creditos): resolver busqueda case-insensitive",
+    "docs(legal): actualizar NOTICE con licencias CC-BY",
+    "chore(ci): actualizar godot_version a 4.7.2",
+    "feat!: cambiar API de inventario (breaking)",
+    "feat(copyright): add AUTHORS.md generator"
+  ]
+}

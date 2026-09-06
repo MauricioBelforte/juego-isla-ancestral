@@ -1,7 +1,7 @@
 {
   "dlcs": [
     {
-      "id": "dlc_expansion",
+      "id": "isla_hielo",
       "nombre": "Expansión: Isla de los Cielos",
       "tipo": "expansion",
       "precio_usd": 14.99,
@@ -10,7 +10,7 @@
       "descripcion": "Nueva isla con 15+ horas de contenido, historia, fauna y secretos"
     },
     {
-      "id": "dlc_cosmetico",
+      "id": "pack_aurora",
       "nombre": "Pack Decoración Aurora",
       "tipo": "cosmetico",
       "precio_usd": 4.99,

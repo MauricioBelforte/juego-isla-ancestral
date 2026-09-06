@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_002-CAP0-HISTORIA-INVIERNO",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_002",
+			"text_key": "La laguna se congela en invierno. Bajo el hielo, el agua espera paciencia. Como yo.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_002"
+		}
+	}
+}

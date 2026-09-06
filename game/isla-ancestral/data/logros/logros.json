@@ -44,6 +44,32 @@
 			"descripcion": "???",
 			"condicion": { "tipo": "hito_previo", "milestone_id": "hito_sello_ceniza_sala1" },
 			"oculto": true
+		},
+		{
+			"id": "logro_amigo_cercano",
+			"nombre": "Amigo Cercano",
+			"descripcion": "Alcanzaste nivel 3 de amistad con Catalina.",
+			"condicion": { "tipo": "stat_min", "stat_id": "amistad_max_catalina_oso", "umbral": 3 }
+		},
+		{
+			"id": "logro_alma_de_la_isla",
+			"nombre": "Alma de la Isla",
+			"descripcion": "Alcanzaste nivel 4 (máximo) de amistad con cualquier vecino.",
+			"condicion": { "tipo": "stat_min", "stat_id": "amistad_max_catalina_oso", "umbral": 4 }
+		},
+		{
+			"id": "logro_pescador_principiante",
+			"nombre": "Pescador Principiante",
+			"descripcion": "Capturaste tu primer pez en las aguas de Aurora.",
+			"condicion": { "tipo": "stat_min", "stat_id": "peces_capturados", "umbral": 1 },
+			"progreso_parcial": true
+		},
+		{
+			"id": "logro_mar_adentro_10",
+			"nombre": "Diez en el Anzuelo",
+			"descripcion": "Capturaste 10 peces.",
+			"condicion": { "tipo": "stat_min", "stat_id": "peces_capturados", "umbral": 10 },
+			"progreso_parcial": true
 		}
 	]
 }

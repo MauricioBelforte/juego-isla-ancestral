@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_004-CAP0-HISTORIA-INVIERNO",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_004",
+			"text_key": "La huerta descansa en invierno bajo el manto blanco. Hasta la tierra necesita dormir.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_004"
+		}
+	}
+}

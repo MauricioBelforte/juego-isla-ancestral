@@ -1,0 +1,20 @@
+{
+	"id": "DLG-CEN_002-CAP0-SALUDO-AMISTAD60",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.cen_002",
+			"text_key": "¡Minero! Qué gusto verte. Entre vecinos no hace falta ceremonia: ¿en qué te ayudo hoy?",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.cen_002"
+		}
+	}
+}

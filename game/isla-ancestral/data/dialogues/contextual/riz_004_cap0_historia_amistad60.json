@@ -1,0 +1,20 @@
+{
+	"id": "DLG-RIZ_004-CAP0-HISTORIA-AMISTAD60",
+	"start": "n0",
+	"nodes": {
+		"n0": {
+			"tipo": 0,
+			"speaker_key": "npc.riz_004",
+			"text_key": "Con la confianza de siempre: las mejores cosechas nacen de manos amigas como las tuyas.",
+			"next_id": "fin",
+			"tipo_fin": false,
+			"placeholders": {
+				"nombre": "viajero"
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.riz_004"
+		}
+	}
+}
