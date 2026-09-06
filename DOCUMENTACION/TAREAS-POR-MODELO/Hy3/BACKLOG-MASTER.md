@@ -6,7 +6,7 @@
 **Identidad:** Hy3 / Kilo Code (ver DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md §5.D y §11)
 **Rol en el proyecto:** QA cruzado (AGENTS.md §21.8), validación entre modelos, detección de bugs, sistemas de diálogo y narrativa complejos.
 
-## Total de tareas asignadas: 916 + QA cruzado nuevo (2026-09-05): M14, M119, M165, M168, M66
+## Total de tareas asignadas: 916 + QA cruzado nuevo (2026-09-03/05): M14, M119, M165, M168, M66, M08, M09, M10, M11, M12
 
 ## Nuevas asignaciones QA cruzado (2026-09-05, Hy3 / Kilo Code)
 
@@ -22,6 +22,7 @@
 | 119-Actualizaciones | QA cruzado Hy3 (✅ Step 3.7 Flash, QA pendiente) | 4 | checklist.md creado |
 | 165-Voxel-Tools-Guia | Re-QA cruzado Hy3 (self-verif MiMo inválida §21.8) | 4 | checklist.md creado |
 | 168-Plantilla-De-Isla | Re-QA cruzado Hy3 (self-verif MiMo inválida §21.8) | 4 | checklist.md creado |
+| 08-Mundo-Voxel | QA cruzado Hy3 (✅ MiMo V2.5, OpenCode) | 0 | ✅ VERIFICADO por hy3/WorkBuddy 2026-09-03 (Log 720, §21.8) — checklist 105/105 [x], 0 [?]; código nuclear (block_type/block_catalog/world_manager) presente; entregable de diseño pre-M1 |
 
 ## Índice por módulo
 
