@@ -21,7 +21,7 @@ var _puerta: PuzzlePuerta = null
 var _placa: Area3D = null
 var _sello_pos: Array = []
 
-@export var base: Vector3 = Vector3(320, 9, 320)  # dentro de la isla (radio 256), ladera
+@export var base: Vector3 = Vector3(2260, 9, 2760)  # M09 iter.: bosque remoto a 360m del spawn (antes 320,320)
 
 func _ready() -> void:
 	_terreno = _buscar_terreno()

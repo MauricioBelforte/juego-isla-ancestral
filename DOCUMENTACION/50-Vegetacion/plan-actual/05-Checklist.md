@@ -137,7 +137,7 @@
 - [ ] Descartar vegetación procedural con RNG en runtime [M]
 - [ ] Descartar árboles 100% malla 3D (tala voxel) [M]
 - [ ] Descartar viento con bones por instancia [M]
-- [ ] Descartar un MultiMesh gigante mundial [S]
+- [x] Descartar un MultiMesh gigante mundial [S] -- agnes-2026-09-07: vegetation_spawner.gd usa instanciacion directa (res.instantiate()) no MultiMesh; 109 instancias gestionadas individualmente
 - [ ] Descartar viento con RNG por frame [S]
 
 ## R. Riesgos y mitigaciones
@@ -241,7 +241,7 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - `reescalar_vegetacion_v2.py` reutilizable: se re-ejecuta cuando los meshes nuevos estén listos (solo cambiar la tabla de alturas objetivo)
 - `EscalasGlobales.escala_de()` para ajustes finos por tipo sin re-exportar
 - Respaldos en Obsoletos/ para rollback
-- **Iter. 9 (Log 715, glm-5.3-flash/Kilo Code):** feedback usuario — flor x3 (2.4m), hierba baja (0.15m runtime), lianas x2 (4m), helecho_gigante 0.8m, helecho_chico 0.35m. 4 GLBs horneados en Blender + escalas.json ajustado. Boot sin errores.
+- **Iter. 9 (Log 742, glm-5.3-flash/Kilo Code):** feedback usuario — flor x3 (2.4m), hierba baja (0.15m runtime), lianas x2 (4m), helecho_gigante 0.8m, helecho_chico 0.35m. 4 GLBs horneados en Blender + escalas.json ajustado. Boot sin errores.
 
 
 ## Iteración 10 — Verificación visual de escalas + horneado GLBs (2026-09-06 15:15, glm-5.3-flash / Kilo Code)

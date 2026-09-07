@@ -297,9 +297,9 @@ func get_spawn_for_parcela(parcela_idx: int) -> Vector3:
 ## NO en el origen 0,0 que cae en pleno océano — bug de aldeanos a Y=1.0).
 ## Radio 160 => anillo en la llanura/playa (dist ~0.62 del centro, tierra
 ## habitable), lejos del pico central y fuera del agua.
-const CENTRO_ISLA := Vector2(256.0, 256.0)
+const CENTRO_ISLA := Vector2(3860.0, 3860.0)
 func _calcular_posicion_parcela(idx: int, locator: Node) -> Vector3:
-	var radio := 160.0
+	var radio := 600.0
 	var separacion := 16.0
 	var angulo := (idx * 2.0 * PI) / POBLACION_MAX
 	var x := CENTRO_ISLA.x + radio * cos(angulo)

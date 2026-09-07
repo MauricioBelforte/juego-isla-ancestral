@@ -18,7 +18,7 @@ extends CharacterBody3D
 ## E-50 offset: el GLB nace asentado a z_min 0.045 (arena del set), se
 ## compensa con -0.045 (igual que la tortuga).
 
-@export var centro_isla: Vector2 = Vector2(256.0, 256.0)
+@export var centro_isla: Vector2 = Vector2(3860.0, 3860.0)
 @export var radio_paseo_min: float = 6.0
 @export var radio_paseo_max: float = 20.0
 @export var velocidad: float = 1.3        # cangrejos esprintan mas que tortugas

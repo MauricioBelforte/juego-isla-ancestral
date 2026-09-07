@@ -240,9 +240,9 @@ menos.
 - [x] Cuerda enrollada — `crear_cuerda_enrollada_lowpoly.py` + 6 capturas orbitales 17:43 (aprobado, 2 rollos superpuestos + cabo horizontal + punta; z_min 0.045). Variantes M166 MEDIA (2 obj/401 tris/2 mats) y BAJA (2 obj/357 tris/2 mats) generadas y aprobadas 2026-08-29. Ver Tier D arriba.
 - [x] Tablón de madera (recurso) — `crear_tablon_madera_lowpoly.py` + 6 capturas orbitales 18-45 (aprobado, 6 obj, z_min 0.045)
 - [x] Lingote de cobre/hierro/oro — `crear_lingote_metal_lowpoly.py` + 6 capturas orbitales 18-43 (aprobado, variante cobre, z_min 0.045)
-- [ ] Gema tallada
-- [ ] Frasco de agua
-- [ ] Bowl/plato de barro
+- [x] **Gema tallada** — `crear_gema_tallada_lowpoly.py` (2026-09-06, log 730) — talla escalonada de 6 anillos, sección octogonal (`lados=8`), culete TRUNCADO a propósito (un pabellón en punta apoyaría sobre 1 vértice y violaría E-50/E-91). **1 SM_, 96 tris, 3 mats** en un solo objeto gracias a `material_index` por altura del centro de cara (pabellón oscuro / filetin medio / corona clara) — las 3 zonas no cuestan ni un triángulo. z_min 0.0450, toca=9, fp=0.15×0.15, bbox 0.30×0.30. **Aplica E-91** (objeto pequeño: `asentar()` exigiría huella de 0.30 = el diámetro de la gema). Variantes M166 MEDIA 1/96/3 + BAJA 1/66/3 + 6 capturas orbitales `_hoja_gema_tallada_v1.jpg` (✓ visual). 3 GLB + 3 .import + 3 .scn OK.
+- [x] **Frasco de agua** — `crear_frasco_agua_lowpoly.py` (2026-09-06, log 730) — vidrio panzudo (`lados=12`, panza Ø 0.18) con `blend_method='BLEND'` + alpha 0.45, **agua como malla independiente** (arranca 14 mm sobre el fondo para no entrar en el radio de tolerancia del guard de apoyo, tol=5 mm), corcho semihundido y cuerda torus en el cuello (E-85: el torus ya nace horizontal, NO rotar). **4 SM_, 420 tris, 4 mats**. z_min 0.0450, toca=13, fp=0.12×0.12, bbox 0.18×0.18. **Aplica E-91**. Variantes MEDIA 4/420/4 + BAJA 4/292/4 + 6 capturas `_hoja_frasco_agua_v1.jpg` (✓ visual: se ve el agua a través del vidrio). 3 GLB + 3 .import + 3 .scn OK.
+- [x] **Bowl/plato de barro** — `crear_bowl_barro_lowpoly.py` (2026-09-06, log 730) — cuenco HUECO (Ø 0.208 × 0.094) construido con el nuevo **`revolucion()`** de `plantilla_asset.py`: el perfil sube por la pared exterior y vuelve a bajar por la interior, algo que `loft()` no puede hacer (E-77 exige z crecientes). Pie marcado, 2 franjas pintadas e interior vidriado, todo en **1 SM_, 280 tris, 3 mats** asignados por TRAMO del perfil. z_min 0.0450, toca=15, fp=0.11×0.11, bbox 0.21×0.20. **Aplica E-91**. Verificado con **volumen firmado +488 cm³** (positivo ⇒ normales hacia afuera, E-92). Variantes MEDIA 1/280/3 + BAJA 1/196/3 + 6 capturas `_hoja_bowl_barro_v1.jpg` (✓ visual). 3 GLB + 3 .import + 3 .scn OK.
 
 ## Módulo 45 — Arte 3D (props de ambientación) 🗿
 
@@ -276,8 +276,8 @@ menos.
 ## Contadores
 
 - Total ítems: **165** (135 previos + 30 M18-TER tienda 2026-09-05)
-- Completados: **99** (95 previos + 4 herramientas M16: hacha_hierro + martillo + azada + machete)
-- Pendientes: **49** (53 previos − 4 M16 cerrados; quedan M33 11 · M16 3 (gema/frasco/bowl) · M25 6 · M36 5 · M34/35 4 · M40 1 · M18-BIS 19). **M16 herramientas cerrado (4/4)** — log 679.
+- Completados: **102** (99 previos + 3 M16: gema_tallada + frasco_agua + bowl_barro)
+- Pendientes: **46** (49 previos − 3 M16 cerrados; quedan M33 11 · M25 6 · M36 5 · M34/35 4 · M40 1 · M18-BIS 19). **M16 3D cerrado al 100% (7/7)** — logs 679 + 730.
 - Pendientes de captura: **0**
 - Aprobados visualmente: 84 + 11 M18 (4 vision ✓ 2026-08-31 04:15 + 7 vision ✓ turno previo) + 3 M50 Tier F (vision ✓ 2026-09-01 21:15-21:16) + 10 M45+M27 (vision ✓ 2026-09-02 03:20, re-verificados post E-67) + 3 arco M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:00, post E-68) + 3 estatua M25 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:15) + 3 puente colgante M40 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:24) + 3 carretilla M35 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:46) + 3 espantapájaros M33 ALTA/MEDIA/BAJA (vision ✓ 2026-09-02 04:50)
 - **Pendientes de Tier D: 0** (Tier D cerrado 7/7)

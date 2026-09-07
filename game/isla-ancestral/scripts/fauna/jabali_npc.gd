@@ -16,7 +16,7 @@ extends CharacterBody3D
 ##   - Al caminar es MAS rapido que la tortuga (trote) y hace pausas
 ##     mas cortas: el jabali es desconfiado.
 
-@export var centro_isla: Vector2 = Vector2(256.0, 256.0)
+@export var centro_isla: Vector2 = Vector2(3860.0, 3860.0)
 @export var radio_paseo_min: float = 10.0
 @export var radio_paseo_max: float = 34.0
 @export var velocidad: float = 1.7        # trote tranquilo

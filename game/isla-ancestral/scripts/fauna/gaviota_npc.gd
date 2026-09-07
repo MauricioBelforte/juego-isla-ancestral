@@ -25,7 +25,7 @@ extends CharacterBody3D
 ## piso real (is_on_floor) → CAMINA con alas PLEGADAS y pose parada →
 ## posada larga → DESPEGUE vertical → VUELO. Todo random.
 
-@export var centro_isla: Vector2 = Vector2(256.0, 256.0)
+@export var centro_isla: Vector2 = Vector2(3860.0, 3860.0)
 @export var radio_vuelo: float = 30.0
 @export var altura_vuelo: float = 9.0
 @export var velocidad_vuelo: float = 6.0

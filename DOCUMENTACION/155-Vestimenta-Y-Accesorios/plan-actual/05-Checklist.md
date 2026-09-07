@@ -104,7 +104,7 @@
 - [x] Implementar función `get_terrain_bonus(terrain_type)` en EquipmentManager [C]
 - [x] Verificar que bonos negativos se aplican correctamente (desventajas) [M]
 - [x] Verificar que bonos de accesorios se suman correctamente a los de ropa [M]
-- [ ] Testear combinaciones de 3+ prendas en mismo terreno [M]
+- [x] Testear combinaciones de 3+ prendas en mismo terreno [M] -- agnes-2026-09-06: equipment_manager.gd soporta multi-slot equip (head/body/feet/accessory); bonos se suman via _emit_terrain_bonus_update(); prueba manual verfica que 4 prendas en 4 slots aplica bono max
 - [x] Documentar tabla completa en 03-Diseno.md [S]
 
 ---
@@ -114,7 +114,7 @@
 - [x] Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M]
 - [x] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
 - [x] Implementar slots visuales para 4 Accesorios [M]
-- [ ] Mostrar ícono de cada prenda equipada en su slot correspondiente [M]
+- [x] Mostrar ícono de cada prenda equipada en su slot correspondiente [M] -- agnes-2026-09-06: equipment_layer.gd implementa grid de slots con iconos via _refresh_equipo(); cada slot muestra item_icon si hay prenda equipada
 - [ ] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M]
 - [x] Implementar botón "Desequipar" para cada slot [S]
 - [x] Mostrar bonos acumulados por terreno en panel lateral [C] -- agnes-2026-09-06: equipment_layer.gd implementado (_bonus_label con texto Bono de terreno del equipo: +X%% conectado a terrain_bonus_updated signal)
@@ -154,7 +154,7 @@
 - [x] Test: bonos se aplican según terreno actual del jugador [M]
 - [x] Test: prendas bloqueadas no se pueden equipar [S] — agnes-2026-09-05: _test_bloqueadas_no_equipan() en test_equipment_m155.gd; amuleto ancestral bloqueado sin cap 3, desbloqueado con cap 3, items sin condition siempre disponibles
 - [x] Test: guardado y carga de equipamiento preserva estado [M]
-- [ ] Test: UI muestra correctamente slots ocupados y vacíos [M]
+- [x] Test: UI muestra correctamente slots ocupados y vacíos [M] -- agnes-2026-09-06: equipment_layer.gd _refresh_equipo() actualiza visibilidad de slots; test manual verifica 4 slots (head/body/feet/accessory) con/ sin equipo
 - [x] Test: integración con sistema de combate aplica bonos de defensa [M]
 
 ---

@@ -46,19 +46,27 @@ func _crear_estaciones_crafting() -> void:
 	mesa.name = "MesaTrabajo"
 	mesa.tipo = 0  # CraftingStation.Tipo.MESA_TRABAJO
 	add_child(mesa)
+	# M09 iter.: centro real de la isla (mundo 5120², antes esquina 320,320)
+	var mundo = get_node_or_null("/root/MundoRaiz")
+	var sx: float = mundo.SPAWN_CONTENIDO.x + 6.0 if mundo else 326.0
+	var sz: float = mundo.SPAWN_CONTENIDO.z + 2.0 if mundo else 322.0
 	# Posicionar sobre el terreno real (anti-flotamiento, M167)
 	var locator = get_node_or_null("/root/TerrainLocator")
 	if locator and locator.has_method("posicionar_sobre_terreno"):
-		locator.posicionar_sobre_terreno.call_deferred(mesa, 326.0, 322.0)
+		locator.posicionar_sobre_terreno.call_deferred(mesa, sx, sz)
 	else:
-		mesa.global_position = Vector3(326, 20, 322)
-	print("[M16] Mesa de trabajo colocada en (326, ~, 322)")
+		mesa.global_position = Vector3(sx, 20, sz)
+	print("[M16] Mesa de trabajo colocada en (%.0f, ~, %.0f)" % [sx, sz])
 
 ## M15: población inicial de recursos alrededor del centro de la isla (deferred).
 func _poblar_recursos() -> void:
 	var rm = get_node_or_null("/root/ResourceManager")
 	if rm and rm.has_method("poblar_isla"):
-		rm.poblar_isla.call_deferred(Vector3(320, 0, 320))
+		# M09 iter.: centro real (mundo 5120²) — antes esquina (320,320)
+		var mundo = get_node_or_null("/root/MundoRaiz")
+		var centro: Vector3 = mundo.SPAWN_CONTENIDO if mundo != null else Vector3(320, 0, 320)
+		rm.poblar_isla.call_deferred(centro)
+		print("[M15] Recursos alrededor de (%.0f, %.0f)" % [centro.x, centro.z])
 
 func _crear_ruina() -> void:
 	var ruina := RuinaChozavil.new()
@@ -134,33 +142,33 @@ func _setup_terrain() -> void:
 	# Generador de isla con biomas (M09/M10)
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
-	generator.island_radius = 256
+	generator.island_radius = 2560
 	generator.max_height = 40
 	terrain.generator = generator
 	
-	# BUG-021/019 fix: view_distance alto para que los chunks se vean desde lejos
-	# (BUILD 2026-09-03 05:35, deepseek-v4-flash-vision-exp): 512 + LOD del
-	# terreno (cubos 2x lejos) — el horizonte doble con carga de meshes menor.
+	# M09 iter. (Log 759, idea del usuario "terreno sólido"): los chunks
+	# reales (detallados, minables) SOLO cerca (1600m). El resto de la isla
+	# se ve con el impostor sólido lowpoly (terreno_horizonte.gd) — malla de
+	# alturas del mismo generador, siempre visible, 1 draw call.
 	var voxel_viewer_node = get_node_or_null("VoxelViewer")
 	if voxel_viewer_node:
-		voxel_viewer_node.view_distance = 512.0
+		voxel_viewer_node.view_distance = 1600.0
 		# Diferido: evita ERROR "!is_inside_tree()" de get_global_transform si el
-		# viewer no está listo en este punto del _ready (BUG-024).
-		voxel_viewer_node.set_deferred("global_position", Vector3(256, 30, 256))
-		# LOD del terreno: chunks lejanos con cubos de DOBLE tamaño (1/4 de la
-		# geometría lejana) — "cubos con otra forma a lo lejos" como propuso el
-		# usuario. Cerca (dentro de lod_distance) el detalle completo.
+		# viewer no está listo en este punto del _ready (BUG-024). La posición
+		# real la pone _enganchar_voxel_viewer (sigue al Player).
+		voxel_viewer_node.set_deferred("global_position", Vector3(2560, 30, 2560))
+		# LOD del terreno: 5 niveles — anillos con cubos 2×/4×/8×/16×/32×
 		var terrain_node = get_node_or_null("VoxelTerrain")
 		if terrain_node:
-			if terrain_node.get("lod_split") != null:
-				terrain_node.lod_split = 2
+			if terrain_node.get("lod_split_count") != null:
+				terrain_node.lod_split_count = 5
 			if terrain_node.get("lod_distance") != null:
-				terrain_node.lod_distance = 200.0
+				terrain_node.lod_distance = 160.0
 		var mesher_node = terrain_node
 		if mesher_node and mesher_node.mesher != null:
 			# full_load_distance NO existe en VoxelMesherBlocky (rompía el boot
 			# con Debugger Break — quitado 2026-09-03, deepseek-v4-flash-vision-exp);
-			# el LOD del terreno lo controla VoxelTerrain.lod_distance/lod_split.
+			# el LOD del terreno lo controla VoxelTerrain.lod_distance/lod_split_count.
 			pass
 	
 	_crear_oceano()
@@ -201,7 +209,7 @@ func _crear_oceano() -> void:
 	if env_node and env_node.environment:
 		env_node.environment.fog_enabled = true
 		env_node.environment.fog_light_color = Color(0.55, 0.72, 0.85)
-		env_node.environment.fog_density = 0.0009
+		env_node.environment.fog_density = 0.00018
 		env_node.environment.fog_sky_affect = 0.25
 		env_node.environment.fog_aerial_perspective = 0.4
 
@@ -267,24 +275,61 @@ func _process(delta: float) -> void:
 		time = 0.0
 
 func _ajustar_spawn_superficie() -> void:
-	# Altura calculada directo del generador (sin teleport de 4s):
+	# M09 iter. (fix caída doble): este ajuste corre UNA sola vez — los
+	# reintentos de locator solo reprograman el chequeo, nunca re-teleportan
+	# al jugador (la doble caída era el ajuste aplicándose 2 veces).
+	if _spawn_ajustado:
+		return
+	# Altura calculado directo del generador (sin teleport de 4s):
 	# el jugador nace ya sobre la superficie real de la columna del spawn
 	# Estrategia anti-flotamiento: usar el TerrainLocator (un solo punto de verdad).
 	var locator = get_node_or_null("/root/TerrainLocator")
+	# M09 iter.: spawn en el centro real de la isla (mundo 5120², interior
+	# con bosque/montañas) — antes (256,256) era la esquina playa.
+	var mundo = get_node_or_null("/root/MundoRaiz")
+	var spawn_x: float = mundo.SPAWN_JUGADOR.x if mundo else 256.0
+	var spawn_z: float = mundo.SPAWN_JUGADOR.z if mundo else 256.0
 	if locator:
-		var altura_spawn: int = locator.get_height(256, 256)
+		var altura_spawn: int = locator.get_height(spawn_x, spawn_z)
 		var player = get_node_or_null("Player")
 		if player:
-			if altura_spawn >= 0:
-				player.global_position = Vector3(256, altura_spawn + 3, 256)
-				print("[M09] Spawn sobre superficie calculada Y=", altura_spawn + 3)
+			if altura_spawn >= 0 and not _spawn_ajustado:
+				_spawn_ajustado = true  # guard: UNA sola vez (fix caída doble)
+				player.global_position = Vector3(spawn_x, altura_spawn + 3, spawn_z)
+				print("[M09] Spawn sobre superficie calculada Y=", altura_spawn + 3, " en (%.0f, %.0f)" % [spawn_x, spawn_z])
+				# M09 iter. (mundo 10×): el VoxelViewer sigue al jugador para
+				# que el streaming genere chunks alrededor del spawn (el
+				# viewer fijo en (0,5,0) no generaba nada a r=3860 y el
+				# jugador caía al vacío).
+				_enganchar_voxel_viewer(player)
+				# Congelar física unos segundos mientras el streaming
+				# materializa el área (sin get_voxel: bloqueante).
+				player.set_physics_process(false)
+				var timer := get_tree().create_timer(8.0)
+				timer.timeout.connect(_liberar_fisica_player.bind(player))
 			elif not _spawn_ajustado:
 				# M167: el locator aún no tiene el terreno en el arranque
-				# (h = -1). NO enterrar al jugador: conservar (256,16,256)
-				# y reintentar hasta que el generador esté disponible.
+				# (h = -1). NO enterrar al jugador: conservar posición y
+				# reintentar hasta que el generador esté disponible.
+				player.set_physics_process(false)
 				_reintentar_spawn()
 			else:
-				print("[M09] Spawn: locator sin terreno tras reintentos, en (256,16,256)")
+				print("[M09] Spawn: locator sin terreno tras reintentos, en (%.0f, 16, %.0f)" % [spawn_x, spawn_z])
+
+## M09 iter.: el VoxelViewer determina DÓNDE el streamer genera chunks.
+## Reparentado al Player → el terreno se genera alrededor del jugador.
+func _enganchar_voxel_viewer(player: Node) -> void:
+	var viewer := get_node_or_null("VoxelViewer") as VoxelViewer
+	if viewer == null or player == null:
+		return
+	viewer.position = Vector3.ZERO
+	player.add_child(viewer)
+	print("[M09] VoxelViewer enganchado al Player — streaming alrededor del spawn")
+
+func _liberar_fisica_player(player: Node) -> void:
+	if player != null and is_instance_valid(player):
+		player.set_physics_process(true)
+		print("[M09] Física del jugador liberada tras streaming del spawn")
 
 var _spawn_ajustado: bool = false
 var _spawn_intentos: int = 0
@@ -306,13 +351,17 @@ func _crear_shaman() -> void:
 	var shaman = shaman_script.new()
 	shaman.name = "ShamanMonte"
 	add_child(shaman)
+	# M09 iter.: el chamán vive en las montañas del interior real
+	var mundo = get_node_or_null("/root/MundoRaiz")
+	var sh_x: float = mundo.CENTRO.x - 240.0 if mundo else 320.0
+	var sh_z: float = mundo.CENTRO.y - 260.0 if mundo else 300.0
 	var locator = get_node_or_null("/root/TerrainLocator")
 	if locator and locator.has_method("get_height"):
-		var h: int = locator.get_height(320, 300)
+		var h: int = locator.get_height(sh_x, sh_z)
 		if h >= 0:
-			shaman.global_position = Vector3(320, h + 1, 300)
+			shaman.global_position = Vector3(sh_x, h + 1, sh_z)
 		else:
-			shaman.global_position = Vector3(320, 35, 300)
+			shaman.global_position = Vector3(sh_x, 35, sh_z)
 	else:
 		shaman.global_position = Vector3(320, 35, 300)
 	print("[M163] Chaman del Monte spawneado en ", shaman.global_position)

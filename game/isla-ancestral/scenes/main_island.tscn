@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/main_island.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/world/day_night_cycle.gd" id="17_dnc"]
 [ext_resource type="Script" path="res://scripts/world/agua_animada.gd" id="18_agua"]
+[ext_resource type="Script" path="res://scripts/world/terreno_horizonte.gd" id="20_horizonte"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="2_cam"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="3_ff3n1"]
 [ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="3_player"]
@@ -155,8 +156,13 @@ dialogue_id = "catalina_hola"
 script = ExtResource("17_dnc")
 
 [node name="AguaAnimada" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 4.05, 256)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2560, 4.05, 2560)
 script = ExtResource("18_agua")
+
+[node name="TerrenoHorizonte" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2560, 0, 2560)
+script = ExtResource("20_horizonte")
+
 
 [node name="TortugaNPC" type="CharacterBody3D" parent="." unique_id=884620771]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 268, 16, 250)

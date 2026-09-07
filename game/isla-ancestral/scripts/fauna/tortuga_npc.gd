@@ -18,7 +18,7 @@ extends CharacterBody3D
 ## huye: la tortuga real es tranquila).
 
 ## ── Configuración ─────────────────────────────────────
-@export var centro_isla: Vector2 = Vector2(256.0, 256.0)
+@export var centro_isla: Vector2 = Vector2(3860.0, 3860.0)
 @export var radio_paseo_min: float = 8.0    # anillo alrededor del spawn
 @export var radio_paseo_max: float = 26.0
 @export var velocidad: float = 0.9          # m/s: paso de tortuga tranquila

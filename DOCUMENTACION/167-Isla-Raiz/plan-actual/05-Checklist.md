@@ -1,4 +1,4 @@
-**Modelo:** Hy3
+﻿**Modelo:** Hy3
 **Plataforma:** Kilo
 
 # 05-Checklist.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento
@@ -165,3 +165,16 @@
 - [x] Documentar como crear una isla nueva con la plantilla [M]
 - [?] Crear el primer modulo de isla futura (cuando aplique) [M] — M168 es la plantilla; el primer módulo de isla nueva se crea cuando el roadmap lo ordene (dueño: producto/M160 en implementación; no aplica aún)
 - [x] Validar que el modulo 167 sea usable por otro agente [M] — validado por deepseek-v4-flash-vision-exp (este agente) leyendo la doc y ejecutando la iteración sin ayuda externa
+
+## Iteración — isla 10×: contenido centrado (2026-09-06 19:53, glm-5.3-flash / Kilo Code)
+
+- [x] Redescubrimiento: WorldGenerator ya soportaba island_radius 2560 (mundo 5120²) pero main_island.gd lo pisaba a 256 — restaurado [C] — Log 751
+- [x] Autoload MundoRaiz (scripts/world/mundo_raiz.gd): centro real (2560,2560) + SPAWN_JUGADOR (3860,3860 llanura de césped) + SPAWN_CONTENIDO — punto único de verdad del layout [M] — Log 751
+- [x] VoxelViewer móvil (reparent al Player): el streaming genera chunks alrededor del jugador (antes fijo en 0,5,0 → el interior nunca se generaba) [C] — Log 751
+- [x] Congelación de física 8s en el spawn (anti-caída al vacío durante el streaming; sin get_voxel bloqueante) [M] — Log 751
+- [x] Contenido migrado al interior real: M15 recursos, M16 mesa, M50 vegetación (r 1200 en el spawn), M25 ruina (2260,2760 bosque), M163 chamán (montaña 2320,2300), M19 vecinos (anillo r 600), M36 fauna [M] — Log 751
+- [x] Plano de agua 6200×6200 centrado en (2560,2560); shore-fade se adapta solo [S] — Log 751
+- [x] Verificación visual: jugador voxel en llanura de césped + montañas al fondo + mar en horizonte + recursos M47 (capturas/9/isla_10x_final.png), FPS 60 [M] — Log 751
+- [ ] Densidad de contenido en la isla completa (109 vegetales en r 1800 + recursos M15 solo cerca del spawn — repoblar por biomas) [C]
+- [ ] M160 ubicaciones: migrar coords del spawn viejo (314-330, 320) al interior real [M]
+- [ ] Ajuste olas en arena: el shore-fade cubre demasiada arena (profundidad_min/max a calibrar) [S]

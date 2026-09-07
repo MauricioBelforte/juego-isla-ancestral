@@ -27,10 +27,15 @@ func _process(_delta: float) -> void:
 		_poblado = true
 		_poblar()
 
-## Genera el plan de la Isla Raíz (semilla 42, radio 256) e instancia los GLB.
+## Genera el plan de la Isla Raíz (semilla 42, centro real M09 iter.) e instancia los GLB.
 func _poblar() -> void:
 	print("[M50] VegetationSpawner: poblando isla...")
-	var plan: Array = PLAN.generar_plan(Vector2(256, 256), 256.0, 42)
+	# M09 iter.: centro real de la isla (mundo 5120², radio interior 1800) —
+	# antes (256,256) r=256, la esquina playa del mundo.
+	var mundo = get_node_or_null("/root/MundoRaiz")
+	var centro: Vector2 = Vector2(mundo.SPAWN_CONTENIDO.x, mundo.SPAWN_CONTENIDO.z) if mundo else Vector2(256, 256)
+	var radio: float = 1200.0
+	var plan: Array = PLAN.generar_plan(centro, radio, 42)
 	print("[M50] Plan generado: %d items" % plan.size())
 	var instanciadas: int = 0
 	var omitidas: int = 0

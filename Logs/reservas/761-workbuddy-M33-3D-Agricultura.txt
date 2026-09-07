@@ -1,0 +1,19 @@
+Reserva de sub-pista 3D (AGENTS.md §6.1)
+
+Numero:      761
+Agente:      workbuddy (Hy4 / WorkBuddy)
+Modulo:      33-Agricultura
+Sub-pista:   3D (autoría de assets en Blender MCP) — ORTOGONAL al trabajo de
+             código del módulo. El agente de código de M33 es agnes-2.5-flash;
+             esta reserva NO toca código Godot, ni .gd, ni documentación de
+             diseño del módulo. Solo tools/mcp/blender-mcp/33-Agricultura/ y
+             el consumo en game/isla-ancestral/assets/3d/.
+
+Alcance:     Lote 1 — etapas de crecimiento de cultivo:
+               - Semillero brotando (etapa 1)
+               - Planta creciendo (etapa 2)
+               - Planta madura cosechable (etapa 3)
+
+Fecha:       2026-09-06
+Estado:      ACTIVA
+Liberar:     al escribir Logs/761-*.md

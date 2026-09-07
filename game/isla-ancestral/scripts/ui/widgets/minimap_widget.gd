@@ -26,6 +26,9 @@ const MAP_SIZE := Vector2(140, 140)
 const PLAYER_SIZE := 6.0
 const MARKER_SIZE := 5.0
 const WORLD_SIZE := 640.0  # Mundo 0..640 en X y Z
+const ZOOM_MIN := 0.6
+const ZOOM_MAX := 3.0
+const ZOOM_STEP := 0.1
 
 ## ── Nodos ────────────────────────────────────────────────
 var _bg_rect: ColorRect
@@ -37,18 +40,44 @@ var _markers: Array[ColorRect] = []
 var _player_pos: Vector2 = Vector2(0.5, 0.5)
 var _explorados: Dictionary = {}
 var _regiones_exploradas: Dictionary = {}
+var _zoom: float = 1.0
+var _pan_offset: Vector2 = Vector2.ZERO
+var _is_dragging: bool = false
+var _drag_start: Vector2 = Vector2.ZERO
 
 ## ── Ciclo de vida ───────────────────────────────────────
 
 func _ready() -> void:
 	_build_ui()
 	_refresh_from_map_manager()
+	_update_transform()
 	# Conectar al MapManager si existe
 	var mm := _get_map_manager()
 	if mm != null:
 		mm.exploration_changed.connect(_on_exploracion_cambiada)
 		mm.pines_changed.connect(_on_pines_cambiados)
 		print("[MinimapWidget] Conectado a MapManager")
+
+## ── Input handling ───────────────────────────────────────
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Zoom con rueda del ratón
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+		_zoom = clampf(_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+		_update_transform()
+		get_viewport().set_input_as_handled()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		_zoom = clampf(_zoom - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+		_update_transform()
+		get_viewport().set_input_as_handled()
+	# Pan con arrastre
+	elif event is InputEventMouseMotion and _is_dragging:
+		_pan_offset += event.relative
+		_update_transform()
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
+		_is_dragging = event.pressed
+		if event.pressed:
+			_drag_start = event.position
 
 ## ── API pública ─────────────────────────────────────────
 
@@ -80,12 +109,7 @@ func _update_player_position() -> void:
 			clampf(wp.x / WORLD_SIZE, 0.0, 1.0),
 			clampf(wp.z / WORLD_SIZE, 0.0, 1.0)
 		)
-	if _player_dot != null:
-		var map_area := MAP_SIZE - Vector2(8, 8)
-		_player_dot.position = Vector2(
-			4.0 + _player_pos.x * map_area.x - PLAYER_SIZE / 2.0,
-			4.0 + _player_pos.y * map_area.y - PLAYER_SIZE / 2.0
-		)
+	_update_transform()
 
 func _update_markers() -> void:
 	# Limpiar marcadores previos
@@ -116,13 +140,36 @@ func _update_markers() -> void:
 		dot.set_meta("marker_id", m_id)
 		# Posición normalizada
 		var pos_2d := Vector2(float(m_coords[0]) / WORLD_SIZE, float(m_coords[2]) / WORLD_SIZE)
-		var map_area := MAP_SIZE - Vector2(8, 8)
-		dot.position = Vector2(
-			4.0 + pos_2d.x * map_area.x - MARKER_SIZE / 2.0,
-			4.0 + pos_2d.y * map_area.y - MARKER_SIZE / 2.0
-		)
+		dot.set_meta("base_pos", pos_2d)
+		_update_marker_position(dot)
 		add_child(dot)
 		_markers.append(dot)
+
+func _update_transform() -> void:
+	# Aplicar zoom y pan al fondo
+	if _bg_rect != null:
+		_bg_rect.scale = Vector2(_zoom, _zoom)
+		_bg_rect.position = _pan_offset
+	# Actualizar posición del jugador y marcadores
+	if _player_dot != null:
+		var map_area := MAP_SIZE * _zoom
+		_player_dot.position = Vector2(
+			4.0 * _zoom + _player_pos.x * map_area.x - PLAYER_SIZE / 2.0 + _pan_offset.x,
+			4.0 * _zoom + _player_pos.y * map_area.y - PLAYER_SIZE / 2.0 + _pan_offset.y
+		)
+	for m in _markers:
+		if is_instance_valid(m):
+			_update_marker_position(m)
+
+func _update_marker_position(marker: ColorRect) -> void:
+	if not marker.has_meta("base_pos"):
+		return
+	var base_pos: Vector2 = marker.get_meta("base_pos")
+	var map_area := MAP_SIZE * _zoom
+	marker.position = Vector2(
+		4.0 * _zoom + base_pos.x * map_area.x - MARKER_SIZE / 2.0 + _pan_offset.x,
+		4.0 * _zoom + base_pos.y * map_area.y - MARKER_SIZE / 2.0 + _pan_offset.y
+	)
 
 func _color_por_tipo(tipo: String) -> Color:
 	match tipo:

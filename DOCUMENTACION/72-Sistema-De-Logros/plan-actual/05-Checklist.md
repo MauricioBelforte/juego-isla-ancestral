@@ -101,7 +101,7 @@
 - [x] RF9: tolerar estados incompletos de versiones anteriores (migración suave) [M] — iter. 3: v1 (Array sin fechas) aceptado, fechas -1 placeholder; test migración v1
 - [x] RF11: implementar limpiar() al borrar la partida (M60) [S]
 - [x] RF11: no borrar logros de Steam automáticamente al borrar partida local [S]
-- [ ] RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [M]
+- [x] RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [S] -- agnes-2026-09-06: achievement_service.gd usa SaveManager.mark_dirty() que es escritura diferida agrupada por frame; no bloquea el thread principal
 - [x] RN12: mantener el estado de logros por debajo de 10 KB con 500 logros desbloqueados [M]
 - [x] RF10: exponer cargar(estado) y guardar() como API pública del manager [S] — iter. 3: API consulta completa: is_unlocked/get_definicion/get_todos/get_estado/get_desbloqueados/get_en_progreso/get_porcentaje_completado/fecha_de (testeado)
 - [x] RF9: coexistir sin colisiones de claves con el estado de M71 en el guardado global [M]

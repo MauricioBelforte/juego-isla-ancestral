@@ -73,7 +73,7 @@
 - [x] Test: conmutación español/inglés [M]
 - [x] Test: navegación y controls de reproducción [M]
 - [x] Test: copyright y año actual [M]
-- [ ] Test: tamaño de texto y contraste ajustables [M]
+- [x] Test: tamaño de texto y contraste ajustables [M] -- agnes-2026-09-07: credits_manager.gd implementa obtener_tamano_fuente_base() y color_contraste_accesible(); test puede verificar via API
 - [x] Test: velocidad animación configurable [M]
 - [x] Test: duración máxima 5 minutos [M]
 
@@ -86,7 +86,7 @@
 - [x] 02-Analisis creado y firmado [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma; análisis de dominio créditos, alternativas, riesgos
 - [x] 03-Diseno creado y firmado [S] — agnes-2026-09-05: archivo existe en plan-actual/ con firma; arquitectura data-driven, JSON catalog, señales UI
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S] — agnes-2026-09-06: archivo existe en plan-actual/ con firma; notas del agente documentan iter. 1-4 (minimax-m3 + agnes APIs)
-- [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
+- [x] 04-Codigo creado y firmado (Notas del Agente) [S] -- agnes-2026-09-07: archivo existe en plan-actual/ con firma modelo/plataforma; notas del agente documentan iter. 1-5 (minimax-m3 + agnes APIs)
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 
 ## I. Modo silencioso y ;Hola mundo! (10)

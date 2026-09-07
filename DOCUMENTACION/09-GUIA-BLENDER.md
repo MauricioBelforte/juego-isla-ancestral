@@ -89,7 +89,7 @@ Todo asset nuevo (vegetación, fauna, NPC, prop) se modela para alcanzar una **a
 | **NPC** | todos los vecinos | 1.0 (GLB) = 1.8 m | igual al personaje |
 
 ### Errores de esta tabla documentados (NO repetir)
-- **E-58 — Alturas objetivo sin medir el GLB actual:** la iter. 9 (Log 715) usó multiplicadores fijos de la tabla asumiendo GLBs de ~1m, pero los GLB tenían alturas originales variadas (0.05m a 3.86m). Palmera ×5 = 19.3m gigante. **Fix:** multiplicador dinámico = `altura_objetivo / altura_actual` (medir con `altura_maxima(objs)` en bpy ANTES de escalar).
+- **E-58 — Alturas objetivo sin medir el GLB actual:** la iter. 9 (Log 742) usó multiplicadores fijos de la tabla asumiendo GLBs de ~1m, pero los GLB tenían alturas originales variadas (0.05m a 3.86m). Palmera ×5 = 19.3m gigante. **Fix:** multiplicador dinámico = `altura_objetivo / altura_actual` (medir con `altura_maxima(objs)` en bpy ANTES de escalar).
 - **E-59 — flor iterativa:** 0.25m "no la vi" → 0.8m "no la vi" → 2.4m "muy grande" → 1.2m ✓. Lección: los cambios de tamaño requieren confirmación visual del usuario en cada paso; no ajustar de más.
 
 ### Pipeline de escalado (scripts reutilizables)
@@ -1756,6 +1756,80 @@ cerrar_herramienta(escena, modulo='16-Crafting', asset='machete',
 (hierro/martillo/azada/machete, sept-2026).
 
 
+### E-92 — `loft()` NO puede hacer piezas HUECAS (bowl, vasija, ánfora): usar `revolucion()`; el volumen firmado es el test de orientación
+
+**Síntoma:** necesito un cuenco / vasija / ánfora: una pieza cuya pared
+exterior SUBE y cuya pared interior VUELVE A BAJAR. `loft()` salta con el
+guard de E-77 ("los anillos van de abajo hacia arriba y el primer campo es Z"),
+y no es un error de tipeo: el perfil realmente no es monótono en Z.
+
+**Causa:** `loft()` apila anillos y exige `z[k] <= z[k+1]`. Construir el bowl
+como "dos lofts (exterior + interior) + un disco tapando el borde" tampoco
+sirve: ese disco tapa la boca y el cuenco pasa a ser un bloque macizo.
+
+**Fix:** `revolucion()` en `plantilla_asset.py` (agregada 2026-09-06, log 730).
+Revoluciona un **perfil 2D `(r, z)`** alrededor de Z y acepta que el perfil
+suba y baje. Dos claves de diseño:
+
+1. **Orientación automática.** Las caras laterales se generan con el mismo
+   winding que `loft()` — `(a[i], a[j], b[j], b[i])` — que apunta hacia
+   AFUERA cuando el perfil sube. Cuando el perfil baja (el tramo de la pared
+   interior), ese mismo winding se invierte solo: la normal pasa a mirar hacia
+   el eje, es decir hacia la cavidad. **No hace falta `flip_normals()` ni
+   duplicar geometría.** Un bowl de 1 objeto con exterior + cavidad sale de una
+   sola llamada.
+2. **Material por TRAMO.** `idx_mat` es una lista de `len(perfil)-1` enteros,
+   uno por segmento del perfil. Permite franjas pintadas o interior vidriado
+   **sin agregar ni un triángulo ni un objeto**: el bowl quedó en
+   1 objeto / 280 tris / 3 materiales.
+
+**Los extremos en el eje:** si un punto del perfil tiene `r ≈ 0`,
+`revolucion()` crea **UN** vértice y abanica, no `lados` vértices coincidentes.
+Esos vértices degenerados son los que dejaron 72 vértices en el origen en
+`cristal_ancestral` MEDIA y hacían explotar el decimate (E-72).
+
+**Cómo verificar la orientación sin mirar una captura — VOLUMEN FIRMADO:**
+si el perfil arranca y termina en el eje, la superficie es **cerrada** y
+encierra el volumen de material. Por el teorema de la divergencia,
+
+```
+V = (1/6) · Σ_triángulos  (v0 × v1) · v2
+```
+
+da **> 0 si y solo si las normales apuntan hacia afuera**. Es un assert de una
+línea que atrapa un bowl "del revés" (se ve el interior y no el exterior) en
+autoría, sin depender de visión:
+
+```python
+vol = 0.0
+for f in bm.faces:
+    vs = [v.co for v in f.verts]
+    for k in range(1, len(vs) - 1):
+        a, b, c = vs[0], vs[k], vs[k + 1]
+        vol += (a.x * (b.y * c.z - b.z * c.y)
+                - a.y * (b.x * c.z - b.z * c.x)
+                + a.z * (b.x * c.y - b.y * c.x))
+vol /= 6.0
+assert vol > 0, 'normales hacia adentro: el perfil está recorrido al revés'
+```
+Caso real: `bowl_barro` dio **+488 cm³** → orientación correcta, confirmada
+después en las 6 capturas orbitales.
+
+**Aplica a:** bowls, platos, cuencos, vasijas, ánforas, jarras, tinajas,
+copas, cualquier sólido de revolución con cavidad.
+**No aplica a:** piezas cuya sección no es circular (prismas, mangos, hojas —
+seguir con `prisma()` / `herramienta_util`).
+
+**Relacionado:** E-77 (formato de anillo de `loft()`, z primero), E-72
+(vértices degenerados en el eje), E-91 (estos objetos suelen ser pequeños →
+`asentar_herramienta()`, no `asentar()`), E-45 (`exportar_godot.py` importa
+`bpy`: se corre con `blender -b`, **no** con el Python del venv, y sus opciones
+van por variables de entorno: `EXPORT_DRY` / `EXPORT_FORZAR` / `EXPORT_MODULOS`).
+
+**Evidencia:** Log 730 (cierre M16 3D: gema tallada + frasco de agua + bowl de
+barro).
+
+
 ## 4. Checklist antes de dar por terminado un asset
 
 - [ ] Script idempotente (re-ejecutable sin duplicar)
@@ -1793,7 +1867,8 @@ cerrar_herramienta(escena, modulo='16-Crafting', asset='machete',
 - [ ] **Optimización por lote** (cuando hay varios assets pendientes): `python procesar_lote.py` procesa todos los módulos; `python procesar_lote.py 50-Vegetacion --media` restringe a un módulo y a una sola variante. Es **idempotente**: saltea los assets que ya tienen `_media`. Referencia: 41 assets en 168 s.
 - [ ] **Módulo registrado en el export** (E-63): si el módulo es NUEVO, agregarlo a la tupla `MODULOS` de `exportar_godot.py`. Si no, el export devuelve `{"exportados": 0}` **sin ningún error**.
 - [ ] **Cabeza en su sitio** (E-90): si el asset usa `construir_cabeza()` y es STANDALONE (no montado), aplicar `p.location.z += Z_REF_CABEZA` a TODAS las piezas devueltas y dejar el `assert z_min_cabeza > cuello - 0.05`. La clave del dict es `'Z_CRANEo'` con la **o minúscula**. Control final: el `delta` de `generar_variante.py` debe ser ≈ 0.000.
-- [ ] **Herramientas alargadas usan `asentar_herramienta()`** (E-91): NUNCA delegar a `plantilla_asset.asentar()` para herramientas (hacha, martillo, azada, machete, pico, azuela, guadaña, pala, serpeta, horca). Tres condiciones: `toca ≥ 8`, `min(fp) ≥ 0.02`, **`max(fp) ≥ 0.45 × L`**. Si la pieza es "ancha" (lingote, tablón, cesta, vasija) sí va el E-50 original. **Geometría:** mangos con `hz` constante a lo largo (swell solo en `hy`); para `lados=6, fase=0` dividir el espesor por `F_PLANO = 0.8660` para que el grosor efectivo coincida con el pedido.
+- [ ] **Herramientas alargadas usan `asentar_herramienta()`** (E-91): NUNCA delegar a `plantilla_asset.asentar()` para herramientas (hacha, martillo, azada, machete, pico, azuela, guadaña, pala, serpeta, horca). Tres condiciones: `toca ≥ 8`, `min(fp) ≥ 0.02`, **`max(fp) ≥ 0.45 × L`**. **CUIDADO (corregido 2026-09-06, log 730):** el criterio NO es "alargado vs ancho", es **tamaño**. E-50 exige `min(fp) > 0.30`, así que rechaza a **todo objeto cuyo diámetro sea menor a ~0.7 m**, sea alargado o ancho. Un bowl de 0.21 m y un frasco de 0.18 m son "anchos" pero chicos: van con `asentar_herramienta()`. E-50 original solo para props de ~1 m o más (muebles, rocas, lingotes grandes, tablones). **Geometría:** mangos con `hz` constante a lo largo (swell solo en `hy`); para `lados=6, fase=0` dividir el espesor por `F_PLANO = 0.8660` para que el grosor efectivo coincida con el pedido.
+- [ ] **Piezas HUECAS van con `revolucion()`, no con `loft()`** (E-92): bowls, platos, cuencos, vasijas, ánforas, jarras, copas. `loft()` exige z crecientes (E-77) y no puede subir por fuera y bajar por dentro. `revolucion(perfil, materiales, lados, idx_mat)` asigna material por TRAMO (franjas pintadas / interior vidriado sin sumar triángulos). Si el perfil empieza y termina en el eje, **verificar con el volumen firmado**: `V = (1/6)·Σ(v0×v1)·v2` debe dar **> 0** (normales hacia afuera). Si da negativo, el perfil está recorrido al revés.
 - [ ] **Dry-run antes del export real** (E-63): `EXPORT_DRY=1 EXPORT_MODULOS=<mod> blender -b --factory-startup --python exportar_godot.py` y confirmar que el número sea `assets × 3 variantes`. Recién entonces correr con `EXPORT_FORZAR=1` (E-49) y terminar con el `--headless --import` de Godot.
 - [ ] **Import verificado por ARCHIVOS, no por log** (E-64/E-65): por variante, `glb == import` (alta 66/66, media 66/66, baja 66/66) y el mtime del `.import` posterior al del `.glb`. El glob correcto es `*.import` (el sidecar es `<asset>.glb.import`, **no** `<asset>.import`). Los `ERROR:` de `voxel.gdextension` con el editor abierto son ruido benigno: **no** hay que cerrar el editor.
 - [ ] **Variantes a la misma altura** (E-48 + E-62): el `z_min` de alta/media/baja tiene que coincidir. Si difiere, el objeto salta al cambiar de LOD o quedó enterrado. `chk_asset.py` lo reporta sin necesitar socket.

@@ -22,6 +22,18 @@
 | 119-Actualizaciones | QA cruzado Hy3 (✅ Step 3.7 Flash, QA pendiente) | 4 | checklist.md creado |
 | 165-Voxel-Tools-Guia | Re-QA cruzado Hy3 (self-verif MiMo inválida §21.8) | 4 | checklist.md creado |
 | 168-Plantilla-De-Isla | Re-QA cruzado Hy3 (self-verif MiMo inválida §21.8) | 4 | checklist.md creado |
+
+## Nuevas asignaciones QA cruzado (2026-09-07, Hy3 / Kilo Code) — Lote 2
+
+> Módulos `✅` completados por **MiMo V2.5 (OpenCode)** (2026-08-26) sin verificación
+> independiente por modelo distinto (requisito §21.8 de ser verificado por modelo distinto).
+> Se asignan a Hy3 para QA cruzado. Logs reservados: 763 (M09), 764 (M10), 765 (M11).
+
+| Módulo | Rol de Hy3 | Tareas | Estado |
+|--------|-----------|--------|--------|
+| 09-Terreno-Y-Geografia | QA cruzado Hy3 (✅ MiMo, sin QA distinto) | 4 | checklist.md creado |
+| 10-Generacion-Del-Mundo | QA cruzado Hy3 (✅ MiMo, sin QA distinto) | 4 | checklist.md creado |
+| 11-Personaje-Del-Jugador | QA cruzado Hy3 (✅ MiMo, sin QA distinto) | 4 | checklist.md creado |
 | 08-Mundo-Voxel | QA cruzado Hy3 (✅ MiMo V2.5, OpenCode) | 0 | ✅ VERIFICADO por hy3/WorkBuddy 2026-09-03 (Log 747, §21.8) — checklist 105/105 [x], 0 [?]; código nuclear (block_type/block_catalog/world_manager) presente; entregable de diseño pre-M1 |
 
 ## Índice por módulo
@@ -50,6 +62,9 @@
 | 119-Actualizaciones | QA cruzado Hy3 (nuevo 2026-09-05) | 4 | checklist.md creado |
 | 165-Voxel-Tools-Guia | Re-QA cruzado Hy3 (nuevo 2026-09-05) | 4 | checklist.md creado |
 | 168-Plantilla-De-Isla | Re-QA cruzado Hy3 (nuevo 2026-09-05) | 4 | checklist.md creado |
+| 09-Terreno-Y-Geografia | QA cruzado Hy3 (nuevo 2026-09-07) | 4 | checklist.md creado |
+| 10-Generacion-Del-Mundo | QA cruzado Hy3 (nuevo 2026-09-07) | 4 | checklist.md creado |
+| 11-Personaje-Del-Jugador | QA cruzado Hy3 (nuevo 2026-09-07) | 4 | checklist.md creado |
 
 ## Reglas de trabajo (de GUIA-METODOLOGIA.md)
 - Al completar T-###, marcar también el `05-Checklist.md` del módulo y la fila de CHECKLIST-GLOBAL.
@@ -69,4 +84,4 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | T-M162-003 | M162 | Hardening + integración M19 de `ContextualDialogueManager.seleccionar` | [x] (robustez 8/8 + integración M19 7/7; Log 702) | Parte 1: defensa contexto nulo + test `test_m162_robustez.gd` (8/8). Parte 2: cableado en `villager_dialogue_hook.gd` (M19) + fallback ruta `contextual/` en DialogueManager + `get_all_flags()` en WorldState. Test `test_m162_integracion_m19.gd` 7/7. Cierra hallazgo ALTO de T-AUDIT-001 (M162 conectado a producción). |
 | T-ECO-002 | M38 | RF13 economía (precios/stock) | [x] (verificada; Log 702) | Bloqueo original ("M39 ShopManager") **obsoleto**: M39 implementado Y M38 EconomyManager existe (tests gdUnit4). Hy3 verificó vía `test_m38_economia_smoke.gd` (7/7). RF13 es dominio de M38 (dueño glm-5.3-flash) → no se tocó código de M38. Reclasificada: no-bloqueada/verificada. |
 | T-LOCK-004 | M64 | IA-De-NPC | `[→]`/EXCLUDED | **Lock respetado** (AGENTS.md §08): `Agente actual` = agnes-2.5-flash / GLM-5.3 Flash. No tocada. Exclusión confirmada en Log 702. |
-| T-M66-QA | M66 | QA cruzado §21.8 de Anti-Softlock | [x] (Log 717) | Autor original **agnes-2.5-flash** (Kilo Code, Log 701); verificador **hy3 / WorkBuddy** (modelo + plataforma distinto → cumple §21.8.4). 117/117 [x], 0 [?]; todos los scripts en `scripts/core/` presentes; `test_anti_softlock_m66.gd` 0 fallos + `test_fallbacks_m66.gd` 0 fallos (ejecutados headless Godot 4.5); logs 165+701 firmados. Veredicto ✅; lock liberado en CHECKLIST-GLOBAL + ESTADO-PARALELO. Obs. no bloqueantes: `04-Codigo.md` tabla "Pendientes" obsoleta (cofre/checkpoint ya implementados); etiquetas PT-01…PT-05 de `07-Resultados-Testings.md` no mapean 1:1 a los scripts de test. |
+| T-M66-QA | M66 | QA cruzado §21.8 de Anti-Softlock | [x] (Log 744) | Autor original **agnes-2.5-flash** (Kilo Code, Log 701); verificador **hy3 / WorkBuddy** (modelo + plataforma distinto → cumple §21.8.4). 117/117 [x], 0 [?]; todos los scripts en `scripts/core/` presentes; `test_anti_softlock_m66.gd` 0 fallos + `test_fallbacks_m66.gd` 0 fallos (ejecutados headless Godot 4.5); logs 165+701 firmados. Veredicto ✅; lock liberado en CHECKLIST-GLOBAL + ESTADO-PARALELO. Obs. no bloqueantes: `04-Codigo.md` tabla "Pendientes" obsoleta (cofre/checkpoint ya implementados); etiquetas PT-01…PT-05 de `07-Resultados-Testings.md` no mapean 1:1 a los scripts de test. |

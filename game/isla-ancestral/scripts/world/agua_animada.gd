@@ -9,14 +9,14 @@
 extends MeshInstance3D
 
 const RUTA_SHADER := "res://shaders/agua_olas.gdshader"
-## Radio del mundo isla (512) + margen mar abierto
-const TAMANO_PLANO := 1400.0
+## M09 iter.: mundo 5120×5120 — el plano cubre todo + margen de mar abierto.
+## El shore-fade (depth texture) dibuja la orilla real donde corresponda.
+const TAMANO_PLANO := 6200.0
 ## Superficie base del plano: ENCIMA del top del agua voxel (4.0) para que
-## las olas se vean de cerca aunque el terreno real esté cargado. El shader
-## hunde el plano solo en la franja de arena (r 262-292).
+## las olas se vean de cerca aunque el terreno real esté cargado.
 const Y_SUPERFICIE := 4.05
-## Centro del mundo isla (regla M167: centro = island_radius)
-const CENTRO := Vector3(256.0, Y_SUPERFICIE, 256.0)
+## Centro real de la isla (island_generator: island_radius=2560, mundo 5120²)
+const CENTRO := Vector3(2560.0, Y_SUPERFICIE, 2560.0)
 
 
 func _ready() -> void:

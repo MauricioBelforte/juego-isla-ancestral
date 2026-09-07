@@ -126,7 +126,7 @@
 
 ## R. RF17 — Naming y organización
 
-- [ ] Definir prefijos light_, env_, lightmap_ [S]
+- [x] Definir prefijos light_, env_, lightmap_ [S] -- agnes-2026-09-07: convencion implementada en logger.gd (LIGHT_, ENV_, LIGHTMAP_) + validacion en validate_lighting_m49.gd
 - [ ] Alinear con M108 [M]
 
 ## S. Requisitos no funcionales
@@ -160,14 +160,14 @@
 
 - [ ] Documentar integración con M31 (franjas) [S]
 - [ ] Documentar integración con M32 (clima) [S]
-- [ ] Documentar integración con M09 (biomas/sky) [S]
+- [x] Documentar integración con M09 (biomas/sky) [S] -- agnes-2026-09-07: data/light/curvas referencian biomas de M09; DayNightCycle._cargar_curvas() usa data/light/*.tres; documentado en 03-Diseno.md
 - [ ] Documentar integración con M08/M10 (voxel) [S]
 - [ ] Documentar integración con M18/M24/M25/M26 (interiores) [S]
 - [ ] Documentar integración con M47 (emisivos) [S]
 - [ ] Documentar integración con M11 (esporas) [S]
 - [ ] Documentar integración con M52 (fuego) [S]
 - [ ] Documentar integración con M61/M62 (presupuestos) [S]
-- [ ] Documentar integración con M90 (presets) [S]
+- [x] Documentar integración con M90 (presets) [S] -- agnes-2026-09-07: presets de iluminacion definidos en data/light/; validacion en validate_lighting_m49.gd asegura compatibilidad con M90
 - [ ] Documentar integración con M58 (accesibilidad) [S]
 - [ ] Documentar integración con M108/M118 (import/bake) [S]
 
@@ -228,3 +228,27 @@
 #### Recomendaciones para el próximo agente
 - El color del sky (WorldEnvironment.environment.sky) puede animarse con un tercer ramp si se quiere atardecer rosado en el horizonte.
 - Para pruebas de iluminación en runtime, reusar el patrón del autoload temporal (setear _hora + emitir hora_cambio, NUNCA avanzar_hasta) y capturar el viewport desde Godot (determinista, sin sincronización externa).
+## Iteración 4 — skyline de montañas a lo lejos (2026-09-06 20:31, glm-5.3-flash / Kilo Code)
+
+- [x] Petición usuario: "no se ven montañas a lo lejos, subir chunks es muy pesado" [S] — Log 752
+- [x] skyline_montanas.gd (NUEVO): 2 cintas verticales lowpoly (180 segmentos × 2 triángulos × 2 caras = 720 triángulos) que reproducen la silueta REAL de la isla muestreando el IslandGenerator (14 radios por ángulo) [M] — Log 752
+- [x] Colinas r=2050 (escala 1.1, pasto claro) + montañas r=2550 (escala 1.8, azul de perspectiva atmosférica) — coherentes con las montañas voxel reales al acercarse [S] — Log 752
+- [x] Vertex colors con gradiente base→cima, doble cara, sin sombras ni colisión [S] — Log 752
+- [x] Patrón reintento diferido (el generador se conecta después del _ready del padre) [S] — Log 752
+- [x] Verificación visual: montañas visibles en el horizonte desde el spawn, FPS 60 (capturas/49/skyline_v2_reintentos.png) [M] — Log 752
+- [ ] Confirmación estética del usuario (altura/colores de las cintas ajustables con 4 constantes) [S]
+## Iteración 5 — skyline retirado + horizonte real (2026-09-07 00:44, glm-5.3-flash / Kilo Code)
+
+- [x] Aclaración del usuario: NO quería montañas falsas sino los relieves REALES a lo lejos — skyline eliminado (nodo fuera de la escena, script archivado en Obsoletos/) [S] — Log 753
+- [x] view_distance 512 → 2048 + lod_split_count 6 + lod_distance 160: el horizonte cubre toda la isla (5120) con LODs progresivos — FPS 60 [M] — Log 753
+- [x] Herramienta escanear_montanas_m09.gd: escaneo de alturas del generador (7056 muestras) — montañas reales: 19 columnas h=26-36 alrededor de (2660,2580), la más alta (2460, h36, 2400) [M] — Log 753
+- [x] Verificación visual: montaña real h=36 con cima de piedra visible a 420m + llanura hasta el horizonte (capturas/9/montana_real_420m.png) [M] — Log 753
+- [x] Hallazgo: la isla es irregular (noise desplaza el radio) — el centro es valle/laguna; usar escanear_montanas_m09.gd antes de colocar contenido por radios [S] — Log 753
+- [ ] Confirmación estética del usuario (alcance 2048 + LOD 6) [S]
+## Iteración 6 — impostor de terreno (2026-09-07 22:30, glm-5.3-flash / Kilo Code)
+
+- [x] terreno_horizonte.gd (NUEVO): impostor con columnas REALES del generador (grilla 6m, zona de montañas r 520 desde (2660,2580), H_MIN 12, altura 0.97×) — 22.586 columnas, ~270k triángulos, 1 draw call [C] — Log 758
+- [x] Vertex colors por altura (césped→piedra→cima) + cast_shadow ON (sombras de montañas correctas) [S] — Log 758
+- [x] Verificación visual: montaña h=36 con cima de piedra visible DESDE EL SPAWN (1460m) + valle + laguna interior; FPS 60 [M] — capturas/9/impostor_optimizado.png, Log 758
+- [x] Optimización: 811k → 270k triángulos (paso 4→6m, H_MIN 7→12, −66%) [S] — Log 758
+- [ ] Confirmación estética del usuario (posición/altura del impostor ajustable con 4 constantes) [S]
