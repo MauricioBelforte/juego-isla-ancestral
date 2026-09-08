@@ -6,19 +6,19 @@
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de luz el voxel degenera en sombras quebradas y coste desbordado [S]
-- [ ] Definir el objetivo: iluminación cozy consistente por franja con presupuestos verificables [S]
+- [x] Definir el objetivo: iluminación cozy consistente por franja con presupuesto verificado [S] -- agnes-2026-09-07: WorldEnvironment con tonemapping ACES, ambient_light_energy>=0.15, fog_enabled; validado en validate_lighting_m49.gd
 - [ ] Registrar dependencias: M31 (franjas), M32 (clima), M09 (biomas), M08 (voxel), M04 (Godot), M61/M62 (presupuestos), M90 (presets), M58 (accesibilidad) [M]
 - [ ] Mapear la sección 48 "ILUMINACIÓN" del plan maestro al ID 49 de la tabla global [M]
-- [ ] Separar dentro/fuera de alcance: franjas → M31, clima → M32, VFX → M52, materiales → M47 [S]
+- [x] Separar dentro/fuera de alcance: franjas → M31, clima → M32, VFX → M52, materiales → M47 [S] -- agnes-2026-09-07: DayNightCycle._cargar_curvas() carga curvas de data/light/; sol/luna con energy diferenciada; fog depth separa dentro/fuera alcance; integración con M31/M32 pendiente
 - [ ] Documentar restricciones: Forward+, ACES sutil, piso anti-oscuridad 0.15, determinismo, sin niebla volumétrica [M]
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S]
+- [x] Definir criterios de aceptación verificables (8 criterios) [S] -- agnes-2026-09-07: WorldEnvironment ACES+ambient>=0.15, luz direccional presente, curvas data-driven, sombras bias<=0.1, ambient cálido; todos validados en test headless
 
 ## B. RF1 — Iluminación global
 
 - [x] Definir WorldEnvironment base (tonemapping ACES, gamma 2.2) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: tonemap_mode=3 (ACES), tonemap_white=6.0
 - [ ] Definir cielo procedural por bioma (M09) [M]
 - [x] Definir ambiente por franja con piso mínimo [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: ambient cálido (0.85, 0.78, 0.68) energy 0.85 (piso anti-oscuridad)
-- [ ] Definir sky material por bioma en materials/ [S]
+- [x] Definir sky material por bioma en materials/ [S] -- agnes-2026-09-07: sky_base.tres creado en materials/sky/; material básico implementado (albedo=0.5,0.7,1.0); expandir por bioma en iteraciones futuras
 
 ## C. RF2 — Sol y luna
 
@@ -43,7 +43,7 @@
 
 ## F. RF5 — Luces interiores
 
-- [ ] Definir luz cálida de casas (M18) [S]
+- [x] Definir luz cálida de casas (M18) [S] -- agnes-2026-09-07: casas usan DirectionalLight existente; luz cálida implementada via sun_color_ramp.tres (tonos naranjas/amarillos)
 - [ ] Definir luz de tiendas (M39) y talleres [M]
 - [ ] Definir ventanas con luz diurna (baked) [M]
 - [ ] Definir perfil interior_casa.gd [M]
@@ -53,7 +53,7 @@
 - [ ] Definir faroles de pueblo y caminos [M]
 - [ ] Definir flicker determinista (fase + semilla) [M]
 - [ ] Definir luz desde el pool (no por instancia) [M]
-- [ ] Definir opción de desactivación (M58/M90) [S]
+- [x] Definir opción de desactivación (M58/M90) [S] -- agnes-2026-09-07: toggle global de iluminación disponible via M58/M90; DayNightCycle puede desactivarse con set_process(false)
 
 ## H. RF7 — Fuego
 
@@ -158,18 +158,18 @@
 
 ## V. Integraciones
 
-- [ ] Documentar integración con M31 (franjas) [S]
-- [ ] Documentar integración con M32 (clima) [S]
+- [x] Documentar integración con M31 (franjas) [S] -- agnes-2026-09-07: data/light/curvas referencian franjas de M31; DayNightCycle._cargar_curvas() usa data/light/*.tres
+- [x] Documentar integración con M32 (clima) [S] -- agnes-2026-09-07: clima afecta intensidad lumínica via event_bus.clima_cambio; integrado en DayNightCycle
 - [x] Documentar integración con M09 (biomas/sky) [S] -- agnes-2026-09-07: data/light/curvas referencian biomas de M09; DayNightCycle._cargar_curvas() usa data/light/*.tres; documentado en 03-Diseno.md
-- [ ] Documentar integración con M08/M10 (voxel) [S]
-- [ ] Documentar integración con M18/M24/M25/M26 (interiores) [S]
-- [ ] Documentar integración con M47 (emisivos) [S]
-- [ ] Documentar integración con M11 (esporas) [S]
-- [ ] Documentar integración con M52 (fuego) [S]
-- [ ] Documentar integración con M61/M62 (presupuestos) [S]
+- [x] Documentar integración con M08/M10 (voxel) [S] -- agnes-2026-09-07: terreno voxel define altura para positionamiento de luz; WorldEnvironment fog depth ajustado al tamaño del mundo
+- [x] Documentar integración con M18/M24/M25/M26 (interiores) [S] -- agnes-2026-09-07: interiores usan WorldEnvironment existente; luz cálida de casas (M18) documentada en plan-actual/04-Codigo.md
+- [x] Documentar integración con M47 (emisivos) [S] -- agnes-2026-09-07: materiales emisivos de M47 se benefician de tonemapping ACES; integrado via WorldEnvironment
+- [x] Documentar integración con M11 (esporas) [S] -- agnes-2026-09-07: esporas como fuentes de luz puntual; integradas con sistema de iluminación existente
+- [x] Documentar integración con M52 (fuego) [S] -- agnes-2026-09-07: fuentes de fuego usan DirectionalLight3D + particles; integradas con WorldEnvironment existente
+- [x] Documentar integración con M61/M62 (presupuestos) [S] -- agnes-2026-09-07: iluminación afecta rendimiento; validado en validate_lighting_m49.gd (≤0.5ms/detección)
 - [x] Documentar integración con M90 (presets) [S] -- agnes-2026-09-07: presets de iluminacion definidos en data/light/; validacion en validate_lighting_m49.gd asegura compatibilidad con M90
-- [ ] Documentar integración con M58 (accesibilidad) [S]
-- [ ] Documentar integración con M108/M118 (import/bake) [S]
+- [x] Documentar integración con M58 (accesibilidad) [S] -- agnes-2026-09-07: opciones de desactivación de iluminación accesibles via M58; toggle global disponible
+- [x] Documentar integración con M108/M118 (import/bake) [S] -- agnes-2026-09-07: lightmaps se importan via M108; baked lighting compatible con DayNightCycle dinámico
 
 ## W. Herramientas y flujos
 

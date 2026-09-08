@@ -146,8 +146,31 @@ func _refresh_equipo() -> void:
 		var desbloqueada: bool = _manager.is_item_unlocked(item_id, player_state)
 		var btn := Button.new()
 		btn.custom_minimum_size = Vector2(220, 40)
-		btn.text = ("%s — %s (%s)" % [data.get("name", item_id), data.get("rarity", "?"), item_id]) if desbloqueada else "🔒 %s (%s)" % [data.get("name", item_id), item_id]
-		btn.tooltip_text = "Tipo: %s — %s" % [data.get("slot", "?"), data.get("description", "")]
+		var nombre: String = String(data.get("name", item_id))
+		var rareza: String = String(data.get("rarity", "?"))
+		var slot_tipo: String = String(data.get("slot", "?"))
+		var desc: String = String(data.get("description", ""))
+		var unlock_data: Dictionary = data.get("unlock", {}) as Dictionary
+		var req_text := ""
+		if not desbloqueada and unlock_data.size() > 0:
+			var tipo_req: String = String(unlock_data.get("tipo", ""))
+			var valor_req: String = String(unlock_data.get("valor", ""))
+			match tipo_req:
+				"chapter": req_text = "Requiere cap. %s" % valor_req
+				"flag": req_text = "Requiere flag: %s" % valor_req
+				_: req_text = "Requiere: %s" % valor_req
+		btn.text = ("%s — %s (%s)" % [nombre, rareza, item_id]) if desbloqueada else ("🔒 %s (%s)" % [nombre, item_id])
+		# Tooltip detallado: nombre, rareza, slot, descripcion, bonos terreno, requisito
+		var tooltip_lines := PackedStringArray([nombre, "Rareza: %s" % rareza, "Slot: %s" % slot_tipo, desc])
+		var bps: Dictionary = data.get("terrain_bonuses", {}) as Dictionary
+		if bps.size() > 0:
+			var bonos_txt := "Bonos terreno: "
+			for k in bps:
+				bonos_txt += "%s+%d%% " % [k, int(bps[k] * 100.0)]
+			tooltip_lines.append(bonos_txt)
+		if not desbloqueada and req_text != "":
+			tooltip_lines.append(req_text)
+		btn.tooltip_text = "\n".join(tooltip_lines)
 		btn.disabled = not desbloqueada
 		btn.pressed.connect(_on_item_pressed.bind(item_id))
 		_grid.add_child(btn)

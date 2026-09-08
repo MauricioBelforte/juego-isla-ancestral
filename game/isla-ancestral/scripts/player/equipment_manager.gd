@@ -14,6 +14,11 @@ var terrain_bonus_table: Dictionary = {}
 ## Señales.
 signal equipment_changed(slot_type: int, new_item_id: String)
 signal terrain_bonus_updated(total_bonus: float)
+## RF-desbloqueo: senal emitida cuando un item se desbloquea permanentemente
+signal item_unlocked(item_id: String)
+
+## Items desbloqueados permanentemente (persisten entre partidas).
+var _unlocked_items: Array[String] = []
 
 ## Helper para obtener referencia al inventario (M14).
 func _get_inventory() -> Node:
@@ -310,7 +315,11 @@ func _get_slot_type_from_id(item_id: String) -> EquipmentSlot.SlotType:
 			return EquipmentSlot.SlotType.ACCESSORY
 
 ## Verifica si un item está desbloqueado para el jugador.
+## Los items se desbloquean por condition del catalogo O por registro persistente.
 func is_item_unlocked(item_id: String, player_state: Dictionary) -> bool:
+	# Check persistent unlocks first
+	if item_id in _unlocked_items:
+		return true
 	if not catalog.has(item_id):
 		return false
 	var item_data: Dictionary = catalog[item_id]
@@ -321,6 +330,25 @@ func is_item_unlocked(item_id: String, player_state: Dictionary) -> bool:
 	condition.tipo = unlock_data.get("tipo", "none")
 	condition.valor = unlock_data.get("valor", "")
 	return condition.is_unlocked(player_state)
+
+## Marca un item como desbloqueado persistentemente (se guarda con M59).
+func unlock_item(item_id: String) -> bool:
+	if not catalog.has(item_id):
+		return false
+	if item_id in _unlocked_items:
+		return false
+	_unlocked_items.append(item_id)
+	item_unlocked.emit(item_id)
+	# Write-through inmediato
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("mark_dirty"):
+		sm.mark_dirty()
+	print("[EquipmentManager] Item desbloqueado persistentemente: %s" % item_id)
+	return true
+
+## Devuelve la lista de items desbloqueados persistentemente.
+func get_unlocked_items_list() -> Array[String]:
+	return _unlocked_items.duplicate()
 
 ## Serializa el equipamiento a Dictionary para guardado (M59).
 func to_dict() -> Dictionary:
@@ -348,7 +376,17 @@ func get_section_name() -> String:
 	return "equipment"
 
 func get_save_data() -> Dictionary:
-	return to_dict()
+	# Incluye equipamiento + items desbloqueados persistentes
+	var d := to_dict()
+	d["unlocked_items"] = _unlocked_items.duplicate()
+	return d
 
 func restore_save_data(data: Dictionary) -> void:
 	from_dict(data)
+	# Restaurar items desbloqueados persistentes
+	var raw: Array = data.get("unlocked_items", []) as Array
+	_unlocked_items.clear()
+	for id in raw:
+		if typeof(id) == TYPE_STRING and not _unlocked_items.has(String(id)):
+			_unlocked_items.append(String(id))
+	print("[EquipmentManager] Restore: equip + %d items desbloqueados" % _unlocked_items.size())

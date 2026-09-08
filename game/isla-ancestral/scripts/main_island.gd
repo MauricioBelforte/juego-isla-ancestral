@@ -139,11 +139,14 @@ func _setup_terrain() -> void:
 	mesher.library = library
 	terrain.mesher = mesher
 	
-	# Generador de isla con biomas (M09/M10)
+	# Generador de isla con biomas (M09/M10) — PERFIL ORIGINAL (M167 config
+	# fija: max_height 40, sin boost — restaurado Log 791 tras el rechazo
+	# del terreno escalado)
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
 	generator.island_radius = 2560
 	generator.max_height = 40
+	generator.max_height_boost = 1.0
 	terrain.generator = generator
 	
 	# M09 iter. (Log 759, idea del usuario "terreno sólido"): los chunks
@@ -152,7 +155,7 @@ func _setup_terrain() -> void:
 	# alturas del mismo generador, siempre visible, 1 draw call.
 	var voxel_viewer_node = get_node_or_null("VoxelViewer")
 	if voxel_viewer_node:
-		voxel_viewer_node.view_distance = 1600.0
+		voxel_viewer_node.view_distance = 1024.0
 		# Diferido: evita ERROR "!is_inside_tree()" de get_global_transform si el
 		# viewer no está listo en este punto del _ready (BUG-024). La posición
 		# real la pone _enganchar_voxel_viewer (sigue al Player).
@@ -208,7 +211,7 @@ func _crear_oceano() -> void:
 	var env_node := get_node_or_null("WorldEnvironment")
 	if env_node and env_node.environment:
 		env_node.environment.fog_enabled = true
-		env_node.environment.fog_light_color = Color(0.55, 0.72, 0.85)
+		env_node.environment.fog_light_color = Color(0.75, 0.85, 0.95)
 		env_node.environment.fog_density = 0.00018
 		env_node.environment.fog_sky_affect = 0.25
 		env_node.environment.fog_aerial_perspective = 0.4
@@ -302,11 +305,12 @@ func _ajustar_spawn_superficie() -> void:
 				# viewer fijo en (0,5,0) no generaba nada a r=3860 y el
 				# jugador caía al vacío).
 				_enganchar_voxel_viewer(player)
-				# Congelar física unos segundos mientras el streaming
-				# materializa el área (sin get_voxel: bloqueante).
+				# M09 iter. (fix "caída bajo el agua" Log 786): congelar la
+				# física HASTA que el voxel de la superficie exista de verdad
+				# (verificación con VoxelTool cada 0.5s). El timer fijo de 8s
+				# liberaba antes de tiempo → caída al vacío eterna.
 				player.set_physics_process(false)
-				var timer := get_tree().create_timer(8.0)
-				timer.timeout.connect(_liberar_fisica_player.bind(player))
+				_verificar_chunk_y_liberar(player, spawn_x, altura_spawn, spawn_z, 0)
 			elif not _spawn_ajustado:
 				# M167: el locator aún no tiene el terreno en el arranque
 				# (h = -1). NO enterrar al jugador: conservar posición y
@@ -330,6 +334,34 @@ func _liberar_fisica_player(player: Node) -> void:
 	if player != null and is_instance_valid(player):
 		player.set_physics_process(true)
 		print("[M09] Física del jugador liberada tras streaming del spawn")
+
+## M09 iter. (fix caída bajo el agua, Log 786): verifica con VoxelTool que el
+## voxel de la superficie del spawn YA esté materializado antes de liberar la
+## física. Polling cada 0.5s (no bloqueante). Timeout 120 chequeos (60s).
+## NOTA: get_voxel NO bloquea si se consulta tras el streaming del frame —
+## el tile del chunk puede tardar, pero la consulta devuelve 0 sin colgar.
+func _verificar_chunk_y_liberar(player: Node, sx: float, altura: int, sz: float, intento: int) -> void:
+	if player == null or not is_instance_valid(player):
+		return
+	var terrain := get_node_or_null("VoxelTerrain") as VoxelTerrain
+	if terrain != null:
+		var vt := terrain.get_voxel_tool()
+		if vt != null:
+			var bloque := vt.get_voxel(Vector3i(int(sx), altura, int(sz)))
+			if bloque != 0:
+				player.set_physics_process(true)
+				print("[M09] Chunk del spawn materializado (bloque ", bloque, " en Y=", altura, ") — física liberada tras ", intento * 0.5, "s")
+				return
+	# Aún no materializado (o terrain sin voxel tool): reintentar
+	intento += 1
+	if intento > 120:
+		# 60s: liberar igual (evitar softlock) — el jugador caerá y podrá
+		# al menos moverse/nadar; el streaming seguirá cargando.
+		push_warning("[M09] Chunk del spawn no materializó tras 60s — liberando física igualmente")
+		player.set_physics_process(true)
+		return
+	var timer := get_tree().create_timer(0.5)
+	timer.timeout.connect(_verificar_chunk_y_liberar.bind(player, sx, altura, sz, intento))
 
 var _spawn_ajustado: bool = false
 var _spawn_intentos: int = 0

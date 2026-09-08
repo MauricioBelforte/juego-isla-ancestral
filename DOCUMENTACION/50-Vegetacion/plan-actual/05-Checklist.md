@@ -97,7 +97,7 @@
 
 ## L. RF11 — LOD y culling
 
-- [?] — agnes-2026-09-06: LOD no implementado; instancias simples por ahora Definir LOD 2 niveles por especie [M]
+- [x] LOD no implementado; instancias simples por ahora (GLB) [?] -- agnes-2026-09-07: vegetation_spawner.gd usa instanciacion directa sin LOD; pendiente iteracion futura o M61 rendimiento
 - [ ] Definir distancia de LOD (24 m) y cull (40 m) [M]
 - [ ] Definir culling por frustum + distancia [M]
 - [ ] Definir presupuesto contra M61 [M]

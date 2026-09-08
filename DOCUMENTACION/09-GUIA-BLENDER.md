@@ -1830,6 +1830,231 @@ van por variables de entorno: `EXPORT_DRY` / `EXPORT_FORZAR` / `EXPORT_MODULOS`)
 barro).
 
 
+### E-93 — El volumen firmado SÓLO vale en caras PLANAS: una hoja alabeada da negativo aunque la malla esté bien
+
+**Síntoma:** al construir una hoja fina como prisma (tapa + contratapa
+desplazadas ±h a lo largo de la **normal media** + faldón), el volumen firmado
+`V = (1/6)·Σ(v0×v1)·v2` daba **negativo**. Lo desconcertante: con hojas chicas
+daba positivo y con hojas grandes negativo, sin cambiar la forma (sólo la
+escala).
+
+**Causa — son DOS errores distintos y se confunden:**
+
+1. **Geométrico.** El pandeo (una espina con caída cuadrática
+   `z = L·(sin(incl)·t − droop·t²)`) saca la hoja del plano. La normal media
+   (Newell) deja de representar la superficie, y desplazar el contorno ±h por
+   esa normal produce un sólido **auto-intersectado** en cuanto la hoja se
+   curva más de ~90°. En los primeros valores (`droop = 0.95`) la punta además
+   caía 4.3 cm por debajo del punto de inserción en una hoja de 8.6 cm: se
+   clavaba en el suelo.
+2. **Del test.** El volumen firmado se triangula en **ABANICO** desde
+   `f.verts[0]`. El abanico sólo es una descomposición válida si la cara es
+   **plana y convexa**. En una cara alabeada el abanico devuelve un número sin
+   significado: puede dar negativo aunque la mienta esté perfecta.
+   (Medido: `solo tapas = −7.5e-05` con `grosor = 0.006`, pero `+6.0e-05` con
+   `grosor = 0.030`. Las tapas no escalan lineal con el espesor → el abanico
+   está mintiendo.)
+
+**Fix:** hacer la hoja **PLANA**. Pandeo y planaridad son mutuamente
+excluyentes: una hoja plana sólo puede curvarse DENTRO de su plano, y curvarse
+dentro del plano significa desviarse de costado, no caer. Se descartan el
+pandeo y el pliegue en V. La variedad la dan tres cosas que NO rompen la
+planaridad:
+
+- `incl` 18° → 48° según la altura de inserción (abajo casi horizontales,
+  arriba más erguidas: es lo que da la silueta de "mata").
+- azimut por **ángulo áureo** (2.39996 rad), que es el que usan las plantas
+  reales para que ninguna hoja tape a la de arriba y de paso evita el aspecto
+  de hélice de un reparto simétrico.
+- `roll` ±22°: giro de la hoja sobre su propio nervio (Rodrigues sobre `d`).
+
+**Cómo verificarlo sin mirar una captura — DESVIACIÓN DE PLANITUD:**
+
+```python
+n = newell(contorno); c = centroide(contorno)
+desv = max(abs(dot(p - c, n)) for p in contorno)   # plano -> ~1e-17
+```
+
+Si da ~1e-16 o menos, el contorno es plano y el abanico es válido. En los 4
+cultivos de M33 dio entre 3.8e-18 y 6.5e-17.
+
+**Control obligatorio antes de culpar a la forma:** construí un cubo 2×2×1 con
+el MISMO algoritmo `prisma_contorno`. Dio **+4.0**, el volumen exacto. Si el
+control da negativo, el bug es del algoritmo; si da +4.0 y tu pieza da
+negativo, el problema es la forma.
+
+**Aplica a:** hojas, pétalos, alas, aletas, banderas, lonas — cualquier
+superficie fina a la que se le dé espesor por extrusión.
+**Relacionado:** E-92 (volumen firmado como test de orientación), E-72
+(vértices degenerados), E-77 (`loft`).
+**Evidencia:** log 761, `33-Agricultura/scripts/crear_cultivo_etapa_lowpoly.py`.
+
+### E-94 — `zmin_real()` mide con `matrix_world`, que queda VIEJO hasta llamar a `view_layer.update()`
+
+**Síntoma:** un guard que verificaba "el montículo es la pieza más baja de la
+escena" fallaba con `SM_Cultivo_Fruto_0 z = −0.017`, un valor imposible para un
+fruto colocado en z = 0.194.
+
+**Causa:** los frutos se colocan con `o.location = (x, y, z)`. `zmin_real()`
+hace `(o.matrix_world @ v.co).z`, y `matrix_world` **no se recalcula solo**:
+conserva el valor del último `update()`. Como el guard corría ANTES de
+`cerrar_herramienta()` (que internamente sí llama a `view_layer.update()`), los
+objetos recién movidos se medían como si todavía estuvieran en el origen.
+
+**Fix:** llamar a `bpy.context.view_layer.update()` **antes** de medir.
+
+**Regla general:** cualquier medición en coordenadas de mundo (`zmin_real`,
+footprints, bounding boxes, encajes) necesita un `view_layer.update()` previo
+si hubo movimientos (`location`, `rotation_*`, `scale`), cambios de parentado
+o evaluación de modificadores desde el último update.
+
+**Aplica a:** guards propios, auditorías, `verificar_bounds.py`, cualquier
+script que mide justo después de mover.
+**Por qué importa:** sin el update el guard miente y te hace perseguir un
+problema de geometría que no existe. Con el update, el mismo guard pasó limpio.
+**Evidencia:** log 761.
+
+### E-95 — `tubo_arco()` para asas curvas: ni `loft()` ni `prisma()` pueden hacerlas
+
+**Síntoma:** querés hacer un asa en arco (regadera, canasta, palangana, varilla
+de paraguas, asa de cofre) y no sabés con qué función. `loft()` apila anillos
+HORIZONTALES con z creciente (E-77) → si el arco sube y vuelve a bajar, salta
+el guard o queda un bulto raro. `prisma()` (`herramienta_util.py`) avanza
+RECTO por un eje (`X`/`Y`/`Z`) → un asa en D tampoco entra (es una curva
+plana pero no recta).
+
+**Causa:** los dos helpers están pensados para trayectorias 1D con monotonía
+en un eje. Una curva 3D cualquiera no encaja en ninguno.
+
+**Fix:** nueva función `tubo_arco(nombre, pts, radios, lados, material, ref)`
+en `herramienta_util.py`. En cada estación:
+
+```python
+t = normalize(p[i+1] - p[i-1])      # tangente
+u = normalize(t × ref)               # ref FUERA del plano de la curva
+v = t × u                            # v ya unitario
+verts[k] = c + u * rx * cos(a) + v * ry * sin(a)   # para k=0..lados-1
+```
+
+`u × v = t` (porque `t × ref` y `t × (t × ref)` son ortonormales) → misma
+mano que `prisma()` → `cerrar_prisma(bm, anillos)` deja las normales hacia
+**afuera** sin tocar nada.
+
+**Cuidado de la degeneración:** si la tangente se vuelve paralela a `ref`, el
+frame degenera y el tubo sale torcido. Para cada asa, pasar un `ref` que NO
+esté en su plano:
+
+- arco en plano **YZ** → `ref = (1, 0, 0)` (X)
+- asa en plano **XZ** → `ref = (0, 1, 0)` (Y)
+- arco en plano **XY** → `ref = (0, 0, 1)` (Z)
+
+El script detecta la degeneración y la desempantana con un fallback a
+`(0, 0, 1)`, pero es mejor pasarlo bien de entrada.
+
+**Aplica a:** cualquier asa / arco / varilla curva, presente o futura.
+**Por qué importa:** sin esto no había forma de hacer la mitad de los
+detalles que pide la dirección de arte (regaderas, canastas, palanganas,
+asas de cofres, varillas de paraguas, mangos curvos). Es una clase
+reutilizable del mismo calibre que `revolucion()` o `prisma()`.
+**Evidencia:** log 790 (regadera con 3 asas: arco metal + empuñadura
+madera + trasera en D).
+
+### E-70b — `prisma_contorno_en(bm, contorno, grosor, mi)` para inyectar piezas en un bmesh existente
+
+**Síntoma:** tenés un presupuesto de ≤16 objetos en ALTA pero querés "planta
+con muchas hojas" (caña, maíz, palmera, banano con varias hojas). Las hojas
+como objetos separados revientan el presupuesto: 6 cañas × 3 hojas = 18 objetos
+de hoja, que solos ya pasan ALTA.
+
+**Causa:** hasta ahora `prisma_contorno()` siempre creaba un objeto nuevo.
+
+**Fix:** nuevo helper en `hoja_util.py` que escribe el prisma **dentro de un
+bmesh existente**, conservando el `material_index` que se le pasa:
+
+```python
+bm = bmesh.new(); bm.from_mesh(o.data)         # bm del tallo
+for hoja in hojas:
+    cont = hoja_plana_arqueada(...)
+    prisma_contorno_en(bm, cont, grosor=0.006, mi=IDX_HOJA)
+bm.to_mesh(o.data); bm.free()
+```
+
+La caña queda como **un solo `SM_`** con sus 3 hojas dentro, y el conteo de
+objetos no se dispara. Lo único que se duplica por hoja es el `verts.new()`
+interno (no es un objeto, son vértices de la misma malla — sí cuentan para
+el tris total pero no para el conteo de SM_).
+
+**Aplica a:** cualquier "planta con varias hojas" o "ramillete de piezas
+pequeñas en una sola entidad lógica".
+**Cuidado:** todas las hojas inyectadas comparten el `material_slot` que
+corresponde a `mi`. Asegurarse de que el objeto ya tenga ese material
+*antes* de inyectar (E-83: si no, `face.material_index` queda fuera de
+rango y Blender lo ignora silenciosamente o lo pinta con el slot 0).
+**Evidencia:** log 795 (caña de azúcar: 7 SM_ ALTA con 6 cañas × 3 hojas
+= 18 hojas inyectadas en 6 bmesh, todas como material `hoja`).
+
+### E-96 — El podador de BAJA elige por CARAS, no por importancia
+
+**Síntoma:** tu BAJA pierde el color que más te importa. Te queda un montículo
+violeta, o un tallo que debería ser pajizo y se vuelve verde, sin aviso.
+
+**Causa:** `generar_variante_headless.py` con `--baja` reduce los `max_mats`
+a 4. Si tenías 5 materiales, **reasigna la pieza con menos caras a la
+siguiente disponible** y la elimina del slot. La decisión es puramente
+topológica: no mira nombre, ni uso, ni tamaño en pantalla.
+
+**Fix:** controlá el **recuento de caras** del material que querés proteger.
+Reglas empíricas (al cierre del log 795):
+
+- Si tenés 5 materiales y querés que los 4 sobrevivientes sean A, B, C, D
+  (sacrificando E), asegurate de que `caras(E) > caras(todos los demás) + 10 %`.
+- Las `revolucion()` con `lados=12` chiquito (montículos Ø 1 m, botones, etc.)
+  tienen ~48 caras — son candidatas naturales a ser sacrificadas. Subir a
+  `lados=20` (≈ 80 caras) suele bastar para sacarlas del podio de los más
+  chicos.
+- El decimate de BAJA escala las caras ~linealmente con el ratio, así que
+  las proporciones se mantienen (los rankings no cambian).
+- Si no podés engordar el material a proteger (sería perder tris), **bajá
+  la cantidad de materiales en ALTA** a 4 directamente y rediseñá los
+  colores para que entren en 4 slots. Esto es lo que hicieron varios
+  assets previos (regadera: 5 mats ALTA → 5 mats BAJA porque mantuvo el
+  merge dentro del techo).
+
+**Aplicabilidad:** todo asset con `> 4 materiales` en ALTA. M166 §3.3 fija
+BAJA en ≤4 materiales (verificable en `scripts-reutilizables/generar_variante.py`).
+
+**Evidencia:** log 795. Primera pasada: cama `lados=12` (48 caras) < tallo
+seco (72 caras) → el podador sacrificó la `MAT_Tierra` (color marrón
+perdido). Fix: cama `lados=20` (80 caras) > seco (72) → el podador pasó
+a sacrificar `MAT_Nudo` (50 caras post-decimate, el más chico ahora);
+`Tierra` y `Seco` se conservan.
+
+### E-97 — `hoja_util.py` es la nueva casa canónica de las hojas planas-arqueadas
+
+**Síntoma:** `hoja_plana_arqueada()` + `prisma_contorno()` + `vol_firmado()` +
+`newell()` aparecían copiadas en `crear_cultivo_etapa_lowpoly.py` y
+`crear_bananero_lowpoly.py`. Una tercera copia (caña) iba a ser peor.
+
+**Causa:** la función de hoja se pensó originalmente como auxiliar del
+bananero y nadie la promovió a módulo reutilizable.
+
+**Fix:** nuevo módulo `scripts-reutilizables/hoja_util.py` que reúne:
+- `cruz(a, b)` — producto cruz de tuplas 3D
+- `newell(pts)` — normal de un contorno poligonal
+- `desvio_planar(pts)` — max |dot(p − p0, n)| para verificar planitud (E-93)
+- `vol_firmado(bm)` — volumen firmado de una malla cerrada (E-92)
+- `prisma_contorno(nombre, contorno, grosor, material, escena)` — objeto nuevo
+- `prisma_contorno_en(bm, contorno, grosor, mi)` — dentro de un bmesh (E-70b)
+- `hoja_plana_arqueada(...)` — contorno de una hoja plana-arqueada
+
+**Pendiente (deuda menor):** refactorizar `crear_cultivo_etapa_lowpoly.py` y
+`crear_bananero_lowpoly.py` para importar de `hoja_util.py`. Bajo riesgo
+(la geometría es idéntica) y la verificación es trivial: re-correr los
+generadores y comparar el `V_TALLO` (debe coincidir a ±0.1 cm³).
+
+**Aplica a:** cualquier futura "lámina plana-arqueada" (palmera, maíz,
+lirio, totora, etc.). **No reescribir el helper en cada generador nuevo.**
+
 ## 4. Checklist antes de dar por terminado un asset
 
 - [ ] Script idempotente (re-ejecutable sin duplicar)
@@ -1869,6 +2094,9 @@ barro).
 - [ ] **Cabeza en su sitio** (E-90): si el asset usa `construir_cabeza()` y es STANDALONE (no montado), aplicar `p.location.z += Z_REF_CABEZA` a TODAS las piezas devueltas y dejar el `assert z_min_cabeza > cuello - 0.05`. La clave del dict es `'Z_CRANEo'` con la **o minúscula**. Control final: el `delta` de `generar_variante.py` debe ser ≈ 0.000.
 - [ ] **Herramientas alargadas usan `asentar_herramienta()`** (E-91): NUNCA delegar a `plantilla_asset.asentar()` para herramientas (hacha, martillo, azada, machete, pico, azuela, guadaña, pala, serpeta, horca). Tres condiciones: `toca ≥ 8`, `min(fp) ≥ 0.02`, **`max(fp) ≥ 0.45 × L`**. **CUIDADO (corregido 2026-09-06, log 730):** el criterio NO es "alargado vs ancho", es **tamaño**. E-50 exige `min(fp) > 0.30`, así que rechaza a **todo objeto cuyo diámetro sea menor a ~0.7 m**, sea alargado o ancho. Un bowl de 0.21 m y un frasco de 0.18 m son "anchos" pero chicos: van con `asentar_herramienta()`. E-50 original solo para props de ~1 m o más (muebles, rocas, lingotes grandes, tablones). **Geometría:** mangos con `hz` constante a lo largo (swell solo en `hy`); para `lados=6, fase=0` dividir el espesor por `F_PLANO = 0.8660` para que el grosor efectivo coincida con el pedido.
 - [ ] **Piezas HUECAS van con `revolucion()`, no con `loft()`** (E-92): bowls, platos, cuencos, vasijas, ánforas, jarras, copas. `loft()` exige z crecientes (E-77) y no puede subir por fuera y bajar por dentro. `revolucion(perfil, materiales, lados, idx_mat)` asigna material por TRAMO (franjas pintadas / interior vidriado sin sumar triángulos). Si el perfil empieza y termina en el eje, **verificar con el volumen firmado**: `V = (1/6)·Σ(v0×v1)·v2` debe dar **> 0** (normales hacia afuera). Si da negativo, el perfil está recorrido al revés.
+- [ ] **Hojas y superficies finas: PLANAS** (E-93). Si usás extrusión a lo largo de una normal media (`prisma_contorno` o similar), medí la desviación de planitud (~1e-16). Un volumen firmado negativo puede ser falla del TEST (abanico sobre cara alabeada), no de la malla: hacé el control con un cubo antes de tocar la forma.
+- [ ] **`view_layer.update()` ANTES de medir** (E-94): si moviste objetos con `location`, `matrix_world` está viejo y `zmin_real()` devuelve cualquier cosa (midió −0.017 en un objeto que estaba en +0.194).
+- [ ] **Variantes sin GUI:** si el socket 9876 está caído (Blender cerrado), usá `generar_variante_headless.py` — ejecuta el MISMO payload canónico de `generar_variante.py`, pero sin red. No hace falta abrir Blender con el addon.
 - [ ] **Dry-run antes del export real** (E-63): `EXPORT_DRY=1 EXPORT_MODULOS=<mod> blender -b --factory-startup --python exportar_godot.py` y confirmar que el número sea `assets × 3 variantes`. Recién entonces correr con `EXPORT_FORZAR=1` (E-49) y terminar con el `--headless --import` de Godot.
 - [ ] **Import verificado por ARCHIVOS, no por log** (E-64/E-65): por variante, `glb == import` (alta 66/66, media 66/66, baja 66/66) y el mtime del `.import` posterior al del `.glb`. El glob correcto es `*.import` (el sidecar es `<asset>.glb.import`, **no** `<asset>.import`). Los `ERROR:` de `voxel.gdextension` con el editor abierto son ruido benigno: **no** hay que cerrar el editor.
 - [ ] **Variantes a la misma altura** (E-48 + E-62): el `z_min` de alta/media/baja tiene que coincidir. Si difiere, el objeto salta al cambiar de LOD o quedó enterrado. `chk_asset.py` lo reporta sin necesitar socket.

@@ -12,6 +12,9 @@ var island_radius: int = 2560
 
 ## Altura máxima de la isla
 var max_height: int = 40
+## Multiplicador del perfil de montaña (Log 785: 2.0 en isla 10× — los
+## picos deben verse desde el otro lado del mundo)
+var max_height_boost: float = 1.0
 
 ## Profundidad del agua alrededor
 var water_level: int = 2
@@ -115,7 +118,10 @@ func get_height(x: int, z: int) -> int:
 	# formas distintas. Se mezclan con la planicie mediante lerp suave
 	# (sin muros verticales de torta) y la costa (0.94-1.0) queda intacta:
 	# arena -> agua clara -> agua profunda.
-	var pico_original := pow(maxf(island_shape, 0.0), 1.5) * max_height
+	# M09 (Log 785): boost de montañas — en mundos grandes (r 2560) el noise
+	# de forma rara vez supera 0.5, dejando picos de ~36m que no se ven de
+	# lejos. Multiplicador exponencial: boost 2.0 → picos ~4× más altos.
+	var pico_original := pow(maxf(island_shape, 0.0), 1.5) * max_height * max_height_boost
 	var pendiente := clampf((0.85 - dist) / 0.85, 0.0, 1.0)
 	var altura_suave := 3.0 + pow(pendiente, 1.3) * 10.0
 	var alturas := maxf(pico_original, altura_suave)

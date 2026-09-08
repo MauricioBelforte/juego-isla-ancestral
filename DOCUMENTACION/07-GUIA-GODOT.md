@@ -1,4 +1,4 @@
-**Modelo:** glm-5.3-flash (Kilo Code) (último modificador 2026-09-06: §8 E-13/E-14/E-15 — ZIPPacker sin finish_file, ternario C-like inválido, Godot stub bloqueado. Historial: glm-5.3-free 2026-09-05 §12 animales bimodo, E-11/E-12; glm-5.3 (Cline) 2026-09-04 §9.64 C56; GLM 5.3 (z-ai) 2026-09-02: §11 flujo Blender→Godot, caso tortuga M36; glm-5.3-flash 2026-09-01 §9.56-9.60; deepseek-v4-flash §9.54/§9.55; glm-5.3 §9.53; MiMo V2.5 creó la guía; múltiples agentes §9.x)
+﻿**Modelo:** glm-5.3-flash (Kilo Code) (último modificador 2026-09-07: §8 E-16 BOM en .tres + E-17 streaming spawn + E-18 suelo fantasma; 2026-09-06: E-13/E-14/E-15 — ZIPPacker sin finish_file, ternario C-like inválido, Godot stub bloqueado. Historial: glm-5.3-free 2026-09-05 §12 animales bimodo, E-11/E-12; glm-5.3 (Cline) 2026-09-04 §9.64 C56; GLM 5.3 (z-ai) 2026-09-02: §11 flujo Blender→Godot, caso tortuga M36; glm-5.3-flash 2026-09-01 §9.56-9.60; deepseek-v4-flash §9.54/§9.55; glm-5.3 §9.53; MiMo V2.5 creó la guía; múltiples agentes §9.x)
 **Plataforma:** Kilo Code
 
 # 07-GUIA-GODOT.md — Guía de Codificación en Godot 4.x
@@ -343,7 +343,25 @@ Cuando se encuentre un error nuevo, agregarlo a esta guía:
 
 ---
 
-### E-15: Ejecutable de Godot con Mark-of-the-Web/stub bloqueado ("Acceso denegado")
+### E-18: Caminar más rápido que el streaming = caída al vacío continua
+**Error:** Además del spawn (E-17), al CAMINAR fuera de los chunks materializados el jugador cae al vacío sin poder moverse (el box mover no encuentra colisión y la gravedad acumula).
+**Solución:** Suelo fantasma en el _physics_process del jugador: si está cayendo rápido (velocity.y < -5) y global_position.y < get_height(x,z) del generador real, apoyarlo en esa altura. Cuando el chunk materializa, los bloques reales toman el mando. Acceder al generador con _terrain.generator._get_island_gen() (misma instancia — sin costos).
+**Fecha:** 2026-09-07 (glm-5.3-flash / Kilo Code, Log 787)
+
+---### E-17: Esperar streaming de chunks con timer fijo = caída al vacío intermitente
+**Error:** El jugador spawnea en el aire y cae eternamente bajo el plano de agua ("aparezco arriba y luego debajo del agua, no me puedo mover") en mundos grandes.
+**Causa:** La física se liberaba con un timer fijo (8s) pero la materialización del chunk del spawn depende de la distancia al origen del mundo y de la carga del streamer — a r=3860 con streaming móvil puede tardar más de 8s.
+**Solución:** Polling con VoxelTool: 	errain.get_voxel_tool().get_voxel(Vector3i(x, y, z)) != 0 cada 0.5s (timeout 60s) antes de liberar set_physics_process(true). No usar get_voxel dentro de un Thread (no thread-safe) ni en loop apretado. **Al caminar fuera de los chunks:** suelo fantasma — si el generador dice tierra (h>=4), apoyar en h; si dice AGUA (h<4), apoyar en y=4.45 (superficie, nadando — nunca en el fondo de una laguna sin chunks). Ver Logs 787/788.
+**Nota de firma:** get_voxel(position: Vector3i) -> int — un solo argumento Vector3i.
+**Fecha:** 2026-09-07 (glm-5.3-flash / Kilo Code, Log 786)
+
+---### E-16: Recursos .tres/.tscn con BOM UTF-8 no parsean ("Parse Error: Expected '['")
+**Error:** ERROR: scene/resources/resource_format_text.cpp:41 - Parse Error: Expected '[', - res://...mi_recurso.tres:1 (repetido en cada carga).
+**Causa:** El archivo fue escrito con BOM UTF-8 (bytes EF BB BF al inicio). El parser de recursos de texto de Godot exige '[' como primer byte.
+**Solución:** Quitar los 3 bytes de BOM (leer como bytes, escribir sin los primeros 3). Prevención: después de crear .tres/.tscn por código, verificar los primeros 3 bytes; si son 239,187,191, recortar. Verificado en M74 (7 recursos de capítulos, Log 776/B-077).
+**Fecha:** 2026-09-07 (glm-5.3-flash / Kilo Code)
+
+---### E-15: Ejecutable de Godot con Mark-of-the-Web/stub bloqueado ("Acceso denegado")
 **Error:** Ejecutar el .exe suelto en `D:\ISLA ANCESTRAL\` da `WinError 5 Acceso denegado` (subprocess) o el binario pesa 1 byte (stub).
 **Causa:** El archivo quedó bloqueado por SmartScreen/AV (no es un ejecutable válido).
 **Solución:** Extraer el binario real desde `Godot_v4.7.2-stable_win64.exe.zip` (86 MB, mismo directorio) a una carpeta aprobada (ej: `%TEMP%\kilo\`) con `System.IO.Compression.ZipFile` y usar `Godot_v4.7.2-stable_win64_console.exe` (imprime stdout parseable en scripts headless).
@@ -2596,3 +2614,111 @@ instante contra cualquier escalon.
 - [ ] Captura + aprobacion V1 del usuario de AMBOS modos.
 - [ ] Log en `Logs/` con los valores finales (snapshot) firmado.
 
+
+---
+
+## 13. HORIZONTE EN MUNDOS VOXEL GRANDES: impostores + anti-caída (2026-09-08, glm-5.3-flash / Kilo Code — Logs 758-798)
+
+> Sistema completo y VERIFICADO por el usuario ("ya no se traba ni se buguea,
+> paseo mucho tiempo sin tildarse" + "el impostor de las montañas funciona").
+> Isla 10× (5120×5120), GPU integrada AMD Radeon, Godot 4.7.2.
+
+### 13.1 Los 4 problemas y sus soluciones (en orden de descubrimiento)
+
+| Problema | Causa raíz | Solución definitiva |
+|---|---|---|
+| El impostor "no se ve" | Un plano horizontal visto de canto = una línea de subpíxeles | Impostor HEIGHTMAP con relieve vertical (prismas escalonados con paredes) |
+| El impostor "se ve como niebla gris" sobre el terreno | El impostor INTERPOLABA entre esquinas de 16m → flotaba por encima de los escalones voxel | Escalera voxel: quad PLANO por celda a la altura del centro, sin interpolar |
+| El impostor "no coincide con la isla" (lóbulo separado, sobre el agua) | DOS generadores competían: world_manager pisaba el WorldGenerator real con VoxelGeneratorNoise2D | UN SOLO dueño de terrain.generator (main_island.gd); world_manager solo aplica material |
+| El juego "se tilda" al mover el impostor | TRANSPARENCY_ALPHA en un disco de 6200×6200 + sorting de anillos concéntricos tilda la GPU integrada | Materiales OPACOS + fade BINARIO por tile (visible/oculto), métrica = distancia al punto MÁS CERCANO del AABB |
+
+### 13.2 Arquitectura del impostor (terreno_horizonte.gd)
+
+`
+Player spawnea/camina
+  ├─ VoxelViewer enganchado al Player (streaming sigue al jugador)
+  ├─ Chunks voxel reales: detallados a 1024m alrededor del player
+  └─ Impostor heightmap (44 tiles de 640m, paso 64m):
+       ├─ PRISMA por celda de tierra (h>=4): top + 4 paredes dobles
+       ├─ Altura = h × 0.85 (anti z-fighting; los chunks reales lo cubren cerca)
+       ├─ Cimas EXAGERADAS ×4 en el impostor (visible de lejos; cerca el
+       │   impostor se funde antes de que se note el cambio de escala)
+       ├─ Colores por bioma de altura (arena→césped→piedra→cima)
+       └─ Ocultamiento: tile invisible si el player está a <1024m del
+           PUNTO MÁS CERCANO del AABB del tile (clamp — métrica correcta
+           para tiles alargados; el centro del AABB mide mal)
+`
+
+### 13.3 Las reglas de oro (orden de aplicación)
+
+1. **UN SOLO generador**: 	errain.generator debe tener UN ÚNICO escritor
+   (main_island.gd). Dos scripts que lo configuran = estado dependiente del
+   orden de _ready = bug intermitente indeterminista (B-076).
+2. **Anti-caída al spawn**: física congelada hasta oxel_tool.get_voxel(
+   Vector3i(x, h, z)) != 0 (el voxel de la superficie existe) — polling
+   0.5s, timeout 60s. El timer fijo NO funciona (E-17).
+3. **Suelo fantasma al caminar**: si el player cae rápido (velocity.y < -5)
+   y global_position.y < get_height(x,z) del generador → apoyarlo ahí.
+   En celdas de AGUA (h<4): sostener en la SUPERFICIE (y=4.45, nadando),
+   nunca en el fondo de una laguna sin chunks (E-18).
+4. **Impostor sin Thread**: get_height() NO es thread-safe mientras el
+   streamer genera con el mismo generador. Construcción incremental por
+   filas en el main thread (N filas/frame).
+5. **Sin shader discard en meshes gigantes**: tilda la GPU integrada.
+   Ocultamiento por tile con mi.visible (gratuito: el tile fuera del
+   frustum ni se envía).
+6. **El perfil del terreno es contenido aprobado**: NO escalar max_height/
+   boost sin aprobación explícita del usuario (Log 791). El impostor puede
+   exagerar las cimas — el terreno real NO.
+7. **Verificación de impostor**: teleport al aire lejos de la isla +
+   física congelada + orientar al centro + captura. Debe verse: relieve
+   escalonado verde/arena + montañas grises en el horizonte.
+
+### 13.4 Parámetros finales del sistema (terreno_horizonte.gd)
+
+| Constante | Valor | Nota |
+|---|---|---|
+| PASO | 64m | 4× menos geometría que 16m; de lejos indistinguible |
+| FACTOR_ALTURA | 0.85 | anti z-fighting; los chunks reales lo cubren cerca |
+| MONT_EXAG | 4.0 | cimas del impostor ×4 (montañas visibles de lejos) |
+| TAMANO_TILE | 640m | 44 tiles en el mundo 10× |
+| TILE_OCULTAR_UMBRAL | 1024m | match con view_distance de chunks |
+| FILAS_POR_FRAME | 6 | muestreo incremental sin hitch |
+| H_MIN | 4.0 | debajo = agua/orilla, la cubre el agua |
+
+### 13.5 El bot de paseo (bot_paseo_m09.gd — herramienta de verificación con SWITCH)
+
+**El bot tiene un SWITCH bot/humano**: SOLO corre si el juego se lanza con
+el flag -- paseo (user args). Sin el flag, se auto-desactiva y el jugador
+mueve el personaje con WASD normalmente.
+
+`
+# Modo BOT (paseo automático + capturas + monitoreo):
+Godot.exe --path game/isla-ancestral -- paseo
+
+# Modo HUMANO (el jugador mueve el personaje — default):
+Godot.exe --path game/isla-ancestral
+`
+
+En el boot, el log muestra cuál modo quedó:
+- [BOT] Desactivado (modo humano — lanza con -- paseo para activar) → bot inactivo.
+- [BOT] Paseo realista: 17 waypoints caminando/volando → bot activo.
+
+Teleport por tramos de 200m + monitoreo continuo:
+- **CAÍDA AL VACÍO**: pos.y < gen_height - 3 y pos.y < 3 → rescate (subir a
+  gen_height+1). Se registró el motivo, posición y tramo.
+- **ATRAPADO BAJO AGUA**: pos.y < 3.5 en celda de agua → rescate a y=4.6.
+- **TILDE**: frame congelado >2s → registrado en el reporte.
+- Captura del viewport en cada waypoint. Reporte final:
+  PASEO TERMINADO: 17/17 waypoints — PASEO EXITOSO: 0 bugs (Log 798).
+- El bot queda DESACTIVADO del autoload; reactivarlo solo para tests.
+
+### 13.6 Qué NO hacer (lecciones de esta iteración)
+
+- **No escalar el perfil del terreno** para "ver las montañas de lejos":
+  el usuario lo detectó de inmediato ("este era el terreno viejo") y lo
+  rechazó (Log 791). El impostor exagera, el terreno no.
+- **No usar plano verde plano** como horizonte: de canto es invisible.
+- **No usar Thread con el generador** ni get_voxel en chunks no cargados
+  (Log 774): ambos producen freezes o datos corruptos.
+- **No confiar en timer fijo** para el streaming: depende de la carga.

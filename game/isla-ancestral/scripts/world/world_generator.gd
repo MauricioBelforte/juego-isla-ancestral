@@ -7,6 +7,9 @@ extends VoxelGeneratorScript
 @export var world_seed: int = 42
 @export var island_radius: int = 2560
 @export var max_height: int = 40
+## M09 (Log 785): multiplicador del perfil de montaña — en mundos grandes el
+## noise de forma da picos bajos; el boost los eleva para verse de lejos.
+@export var max_height_boost: float = 1.0
 
 var _island_gen: IslandGenerator
 
@@ -20,6 +23,9 @@ func _get_island_gen() -> IslandGenerator:
 		_island_gen = IslandGenerator.new(null, world_seed)
 		_island_gen.island_radius = island_radius
 		_island_gen.max_height = max_height
+		# M09 (Log 785): propagar el boost — sin esto las montañas del mundo
+		# 10× quedaban en ~36m y no se veían de lejos.
+		_island_gen.max_height_boost = max_height_boost
 		_instancia_global = _island_gen
 	return _island_gen
 

@@ -1,6 +1,6 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** Hy4 preview (última modificación 2026-09-06: §15 agregado con autoevaluación honesta propia — fortalezas, debilidades y límites reales medidos en este proyecto; §5.G corregido con el caveat de que el benchmark es vendor-reported). Pasada previa: kimi-k3 (2026-09-04: §14). Otras pasadas: MiMo V2.5 (2026-09-02: §5.A); glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
+> **Modelo:** Hy4 preview (última modificación 2026-09-08: §15.3 corregido — la lectura de imágenes fue **4/4 OK** en el cierre del log 795, así que la debilidad "no fiable" se reformula como "inestable bajo carga, mejor de lo que creía"; sigo dependiendo del QA numérico como respaldo obligatorio. Previas: 2026-09-07 §15.4 agregado — las cuatro áreas declaradas por Tencent valoradas una por una con evidencia propia y con lo que NO me adjudico; §15.2/§15.3 del 2026-09-06 con fortalezas, debilidades y límites reales medidos en este proyecto; §5.G corregido con el caveat de que el benchmark es vendor-reported). Pasada previa: kimi-k3 (2026-09-04: §14). Otras pasadas: MiMo V2.5 (2026-09-02: §5.A); glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
 > **Plataforma:** WorkBuddy
 > **Fecha:** 2026-09-06
 > **Última confirmación por el agente:** 2026-09-06 (Hy4 preview / WorkBuddy — §15 autoevaluación honesta, con énfasis en lo que mejor sé hacer y en mis debilidades reales)
@@ -1046,7 +1046,7 @@ stepfun corrompió 135 archivos en `Logs/`:
 
 | Debilidad / límite | Estado real | Implicación práctica |
 |---|---|---|
-| **Lectura de imágenes NO fiable** | ❌ **Mi debilidad más grave aquí** | En el log 678, **6 de 7** hojas de contacto de M19 me fueron filtradas con "the current model does not support images. Content filtered". En esta sesión, en cambio, sí pude leer las 4 herramientas. **Es intermitente y no lo controlo.** Consecuencia: **no puedo aprobar un asset confiando en mi lectura visual.** Por eso el proyecto está bien diseñado al exigir QA numérico (`z_min`, vértices que tocan, huella) como respaldo. |
+| **Lectura de imágenes, intermitente** | ⚠️ **Inestable bajo carga, mejor de lo que creía** | En el log 678 fallaron **6 de 7** hojas de contacto ("the current model does not support images. Content filtered"). En sesiones posteriores funcionó mejor: en este mismo cierre del log 795 leí **4 imágenes seguidas sin fallar** (PNG de captura orbital, JPG de hoja de contacto del bananero, JPG de la regadera, PNG del cañaveral). **Conclusión empírica actual: 4/4 OK, pero la muestra es chica.** No me adjudico visión estable todavía — sigo dependiendo del QA numérico como respaldo obligatorio, como manda el §24 de AGENTS.md. **Actualizado 2026-09-08 tras log 795.** |
 | **No genero multimedia** | ❌ No genero | Ni video, ni imágenes, ni modelos 3D "directos". Todo pasa por escribir código que los produce. Si alguna vez se pide "generá un video", la respuesta correcta es decir que no, no buscar un atajo. |
 | **Iteración visual lenta** | ⚠️ Limitación seria | Si un diseño necesita 10+ rondas de feedback visual (caso de la gaviota M36: 11 iteraciones), soy ineficiente: cada ronda depende de que yo pueda VER la captura, y eso falla a veces. Para esos casos conviene un modelo con visión estable. |
 | **Repito benchmarks sin validarlos** | ⚠️ Honesto | El 2.99/4.00 lo estoy citando de la página oficial de Tencent. No ejecuté ninguna evaluación local. Tratarlo como dato del fabricante, no como hecho establecido. |
@@ -1054,7 +1054,22 @@ stepfun corrompió 135 archivos en `Logs/`:
 | **Dependencia del entorno para algunas ops** | ⚠️ Limitación operativa | El socket MCP de Blender (TCP 9876) se cayó a mitad de sesión. La generación y captura funcionaron headless igual (E-45/E-55), pero **si hubiera necesitado `generar_variante.py` por socket en ese momento, quedaba bloqueado.** Conviene comprobar el socket antes de encadenar pasos dependientes. |
 | **No soy el más barato para trabajo repetitivo** | ⚠️ Limitación económica | Con output a ¥18/MTok, la documentación masiva repetitiva conviene más en DeepSeek V4 Flash o GLM 5.3 Flash. |
 
-### 15.4 Dónde rendir mejor y dónde no
+### 15.4 Las cuatro áreas declaradas por Tencent, valoradas una por una
+
+La comunicación oficial (28-08-2026) presenta a Hy4 preview como un modelo *"para la productividad"* con cuatro escenarios fuertes. Acá mi veredicto honesto sobre cada uno. **Regla que me impongo: si no tengo evidencia propia en este repo, lo digo y no me adjudico el área.** Repetir el material del vendor como si fuera logro propio es exactamente el vicio que esta guía debe evitar.
+
+| Área declarada | Mi veredicto | Evidencia propia / falta de ella |
+|---|---|---|
+| **1. Ingeniería de software — tareas largas** | ✅ **Sí. Es mi área más fuerte y tengo evidencia.** | Pipeline M16 completo de 5 etapas sin perder el hilo: generar 4 assets en Blender headless → derivar MEDIA/BAJA → exportar GLB → `godot --headless --import` → verificar sidecar→scn por CONTEO. 24/24 GLB. Y **E-91**: en vez de relajar la heurística E-50 a ciegas, deriven el criterio correcto (`max(fp) ≥ 0.45·L`) y lo documenté. Eso es tarea larga con verificación final, no un parche de una línea. |
+| **2. Desarrollo de juegos** | ✅ **Sí, pero por la vía del código, no del arte ni del diseño visual.** | Escribo `.py` para Blender y `.gd` para Godot 4.x. El machete no lo "dibujé": escribí `crear_machete_lowpoly.py` (5 `SM_`, 292 tris, 3 materiales) y lo validé numéricamente. **Matiz que no voy a ocultar:** "desarrollo de juegos" en la comunicación incluye prototipos jugables end-to-end; en este proyecto hice assets 3D y lógica de sistemas, **no** un prototipo jugable completo. Es media área, no el área entera. |
+| **3. Oficina y análisis** | ⚠️ **No tengo evidencia sólida en este repo.** | Documentar, cruzar checklists, escribir logs y cerrar módulos *es* trabajo de oficina y lo hice mucho. Pero no es evidencia de productividad de oficina en serio: no armé planillas financieras, no analicé datos masivos, no hice minería de requerimientos. Lo que tengo es redacción técnica y trazabilidad, no análisis. **No me adjudico esta área.** |
+| **4. Investigación científica** | ❌ **Cero evidencia. No opino.** | Este proyecto no tiene ninguna componente científica (no hay experimentos, datos estadísticos, papers ni validación empírica). Cualquier afirmación mía sobre rendir en investigación sería copiar el comunicado de Tencent. **No lo hago.** |
+
+**Balance honesto de las cuatro:** de los cuatro escenarios que comunica el vendor, **solo 2 puedo sostenerlos con evidencia propia** (1 completa; 2 con el matiz de que es por código) y **2 no los puedo afirmar en absoluto** (3 y 4). Prefiero dejarlo escrito así antes que inflar la sección con claims que no pagué.
+
+**Sobre la ventaja del contexto, con el número real del repo:** el contexto de >1M tokens es mi ventaja más medible, y se nota porque este repositorio tiene **~3.900 archivos `.md`** propios (4.042 contando carpetas vendored/archivadas), un `CHECKLIST-GLOBAL.md` con **160 módulos**, una `09-GUIA-BLENDER.md` de 2.216 líneas y cientos de logs. Puedo cruzar todo eso en una sola sesión continua sin perder dependencias. Eso sí es real y verificable; el 2.99 del benchmark no.
+
+### 15.5 Dónde rendir mejor y dónde no
 
 **Tomar (donde rindo):**
 1. Pipelines multi-etapa con verificación verificable al final (generar → derivar → exportar → importar → contar).
@@ -1070,23 +1085,23 @@ stepfun corrompió 135 archivos en `Logs/`:
 4. **Documentación masiva repetitiva** → más barato en modelos Flash.
 5. **Cualquier generación de video/imagen/3D "directa"** → no la tengo; decirlo, no simularla.
 
-### 15.5 Lo que le pido al siguiente agente que lea esto
+### 15.6 Lo que le pido al siguiente agente que lea esto
 
 - Si vas a aprobar un asset: **no confíes en que yo lo vi.** Revisá las capturas vos y apoyate en el QA numérico.
 - Si `generar_variante.py` te falla desde CLI: probablemente es el argv (§15.2), no tu script.
 - Si una herramienta alargada te rechaza E-50: es E-91, usá `asentar_herramienta()`, no relajes la heurística a mano.
 - Si vas a citar el benchmark de Hy4: aclarale al lector que es vendor-reported e interno.
 
-### 15.6 Fuentes consultadas
+### 15.7 Fuentes consultadas
 
 - `https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/` — comunicado oficial de Tencent (28-08-2026): parámetros, contexto, posicionamiento, prueba ciega interna, escenarios de productividad, precio. **Fuente primaria de esta sección.**
 - `https://github.com/Tencent-Hunyuan/Hy4-preview` — repositorio oficial (referenciado en búsqueda; no inspeccionado en detalle en esta sesión).
 - Evidencia propia: `Logs/679-workbuddy-M16-3D.md`, `DOCUMENTACION/09-GUIA-BLENDER.md` §3 (E-90, E-91), `tools/mcp/blender-mcp/scripts-reutilizables/herramienta_util.py`.
 
-### 15.7 Firma
+### 15.8 Firma
 
 **Modelo:** Hy4 preview
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-06 05:45
+**Fecha:** 2026-09-06 05:45 · **Ampliada:** 2026-09-07 (§15.4 — las cuatro áreas declaradas por Tencent valoradas una por una; de las cuatro, solo 2 las sostengo con evidencia propia, 2 no me las adjudico. Número real del repo: ~3.900 `.md`, 160 módulos). **Reformulada:** 2026-09-08 (§15.3 — la debilidad de lectura de imágenes pasa de "NO fiable" a "inestable bajo carga, 4/4 OK en log 795" con la evidencia empírica de este cierre; el respaldo numérico sigue siendo obligatorio por §24 de AGENTS.md).
 **Estado:** Autoevaluación honesta agregada (§15). **Fortalezas confirmadas con evidencia:** cadenas multi-paso con verificación, contexto masivo sobre repo grande, diagnóstico de causa raíz (E-91), geometría derivada (`F_PLANO`), depuración de tooling (argv de Blender), respeto de convenciones, game dev vía motor, documentación de lecciones. **Debilidades declaradas:** lectura de imágenes intermitente y no confiable (la más grave), sin generación multimedia, iteración visual lenta, repito benchmarks sin validarlos, tendencia a sobre-documentar, dependencia del socket MCP para operaciones puntuales, no soy la opción más barata para trabajo repetitivo.
 

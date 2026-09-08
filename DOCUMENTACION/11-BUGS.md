@@ -1,4 +1,4 @@
-# 11 — BUGS: Registro Central de Problemas y Fallas
+﻿# 11 — BUGS: Registro Central de Problemas y Fallas
 
 **Modelo:** hy3 (último modificador)
 **Plataforma:** WorkBuddy
@@ -690,3 +690,53 @@ Deep-copy explícito en `get_save_data()`: `_memoria[k].duplicate(true)` por vec
 
 | 2026-09-03 08:10 | hy3 | Kilo Code | Registro BUG-024: ERROR "!is_inside_tree()" al spawnear vecinos — causa raíz en `villager_manager.gd:586` (`global_position` antes de `add_child`); un 2º ERROR en `main_island.gd:12` (`_setup_terrain`, quirk VoxelTerrain). Detectado al revisar runtime post M36 jabalí (Log 596). No es del jabalí. |
 | 2026-09-03 08:35 | hy3 | Kilo Code | BUG-024 [x] Resuelto: reordenado add_child antes de global_position en `villager_manager.gd` y `set_deferred` para viewer/player en `main_island.gd`. Runtime verificado: 0 errores `!is_inside_tree()` (antes 5). |
+
+## B-076: Dos generadores competían por VoxelTerrain.generator (terreno no coincidía con spawns/impostor)
+
+**Estado:** [x] Resuelto
+**Módulo:** M09 (Generador de Mapa) / M167 (Isla Raíz)
+**Severidad:** Crítica
+**Reportado por:** Usuario (feedback visual: "llegué a las montañas impostoras y ahí hay solo agua, están sobre el agua" + "cruzar arena, agua clara y agua profunda para llegar")
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-07 04:55
+
+### Síntomas
+- El impostor de terreno (M09) mostraba montañas donde el terreno voxel real era agua.
+- El spawn del jugador caía en un lóbulo de tierra SEPARADO de las montañas por un brazo de mar (forma de cruasán).
+- Caída doble del personaje al iniciar.
+
+### Causa raíz
+world_manager.gd creaba VoxelGeneratorNoise2D (ruido plano, sin isla) + BlockyLibrary de 2 modelos y los asignaba a 	errain.generator/	errain.mesher, pisando (según orden de _ready) el WorldGenerator real (isla 10×, biomas, montañas) que instala main_island.gd. Dos escritores para el mismo recurso del motor.
+
+### Solución
+- world_manager.gd reescrito: SOLO aplica el material de vertex color. El generador (WorldGenerator island 10× max_height 90) y la BlockyLibrary de 26 bloques los instala únicamente main_island.gd.
+- Verificación: el chamán (M163) spawnea ahora a Y=37 sobre la montaña real (antes Y=17); el impostor y el terreno voxel comparten fuente de verdad.
+
+### Lección
+Un solo dueño por recurso del motor. Dos scripts que configuran VoxelTerrain.generator = estado dependiente del orden de _ready (bug intermitente indeterminista).
+
+---
+## B-077: .tres de capítulos M74 con BOM UTF-8 — Parse Error en el editor de Godot
+
+**Estado:** [x] Resuelto
+**Módulo:** M74 (Eventos)
+**Severidad:** Media (errores visibles en el depurador del editor)
+**Reportado por:** Usuario ("hay muchos errores en el depurador" — captura del editor mostrando Parse Error: Expected '[' en historia_c3_faro.tres:1, historia_c4_templo_brisa.tres:1, historia_c5_eclipse.tres:1...)
+**Modelo:** glm-5.3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-07 05:00
+
+### Síntomas
+Panel de depurador del editor lleno de ERROR: scene/resources/resource_format_text.cpp:41 - Parse Error: Expected '[', - res://scripts/eventos/data/capitulos/historia_cN_*.tres:1 (un error por archivo, repetido en cada reload).
+
+### Causa
+Los 7 .tres creados por el agente (Log 728, sesión previa) fueron escritos con **BOM UTF-8** (bytes EF BB BF al inicio). El parser de recursos de texto de Godot NO tolera BOM: espera '[' como primer byte.
+
+### Solución
+Quitar los 3 bytes de BOM de cada archivo (lectura de bytes, escritura sin los primeros 3). Verificación: escaneo de BOM en TODOS los .tres/.tscn/.import del proyecto → 0 restantes.
+
+### Lección (para AGENTS.md §28)
+Los archivos de texto de Godot (.tres, .tscn) deben guardarse en UTF-8 **SIN BOM** — el Write tool de algunos agentes agrega BOM según la codificación del entorno. Regla de verificación antes de commit: escanear los primeros 3 bytes de los recursos de Godot.
+
+---

@@ -1,4 +1,4 @@
-﻿extends CharacterBody3D
+extends CharacterBody3D
 
 ## Módulo 06: Jugador — Movimiento estilo Animal Crossing
 ## Usa VoxelBoxMover para colisión voxel (Minecraft-like)
@@ -220,6 +220,13 @@ func _on_bloque_extraido(_pos: Vector3i, block_id: int, drops: Array) -> void:
 					print("[M14] Inventario lleno — %d x %s no caben" % [sobrante, item_id])
 	print("[Player] Extraído bloque %d → inventario" % block_id)
 
+## M09 (Log 787): acceso al IslandGenerator real (misma instancia que el
+## terrain) para el suelo fantasma anti-caída al vacío.
+func _generador_isla():
+	if _terrain != null and _terrain.generator != null and _terrain.generator.has_method("_get_island_gen"):
+		return _terrain.generator._get_island_gen()
+	return null
+
 func _on_bloque_colocado(_pos: Vector3i, block_id: int) -> void:
 	print("[Player] Colocado bloque %d" % block_id)
 
@@ -292,6 +299,30 @@ func _physics_process(delta: float) -> void:
 		_on_ground = abs(motion.y) < 0.001 and velocity.y <= 0.0
 		if _on_ground:
 			velocity.y = 0.0
+		# M09 (Log 787 — fix "me volví a buguear, caigo sin poder moverme"):
+		# ANTI-CAÍDA AL VACÍO. Si el chunk bajo los pies aún no materializó
+		# (streaming lento en mundo 10×), el jugador cae sin fondo. El suelo
+		# fantasma lo sostiene en la altura PRECALCULADA del generador
+		# (get_height — el mismo perfil que dibuja el impostor): imperceptible
+		# al caminar (coincide con el terreno real al materializarse).
+		# M09 (Log 788 — fix "me voy al fondo del mapa"): en celdas de AGUA
+		# (h<4), el suelo fantasma sostiene en la SUPERFICIE del agua (y=4.45)
+		# — nadando sobre el plano, no en el fondo de la laguna.
+		if not _on_ground and velocity.y < -5.0:
+			var gen = _generador_isla()
+			if gen != null:
+				var h_piso := float(gen.get_height(int(global_position.x), int(global_position.z)))
+				if h_piso < 4.0:
+					# Agua: sostener en la superficie (como nadando)
+					if global_position.y < 4.45:
+						global_position.y = 4.45
+						velocity.y = 0.0
+						_on_ground = true
+				elif global_position.y < h_piso - 1.0:
+					global_position.y = h_piso
+					velocity.y = 0.0
+					_on_ground = true
+					print("[M09] Suelo fantasma: sostenido en Y=%.0f (chunk sin materializar)" % h_piso)
 	else:
 		# Fallback: move_and_slide estándar
 		move_and_slide()
