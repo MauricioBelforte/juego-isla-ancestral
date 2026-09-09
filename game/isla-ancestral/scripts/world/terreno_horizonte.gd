@@ -3,7 +3,7 @@
 # Fecha: 2026-09-08
 #
 # M09 iter. DEFINITIVA (feedback usuario: "el plano verde se ve de canto/no
-# se ve; el impostor de montañas vertical SÍ se ve"): UN SOLO impostor
+# se ve; el impos tor de montañas vertical SÍ se ve"): UN SOLO impostor
 # HEIGHTMAP de TODA la isla con relieve vertical real:
 #   - Grilla de 32m sobre toda la isla (r 2600), celdas de tierra h>=4.
 #   - Escalera voxel: cada celda un PRISMA desde y=0 hasta h×0.85 (tops +
@@ -30,6 +30,9 @@ const FACTOR_ALTURA := 0.85
 const MONT_EXAG := 4.0
 ## Altura mínima para incluir la celda (debajo = agua/orilla, la cubre el agua)
 const H_MIN := 4.0
+## Disco que SIGUE al player (petición usuario): altura = terreno local
+const DISCO_BASE_Y := 4.3
+const COLOR_DISCO_BASE := Color(0.60, 0.74, 0.38)
 ## Tiles de 640m con ocultamiento independiente
 const TAMANO_TILE := 640.0
 ## El impostor se oculta cuando el player está a menos de esto del tile
@@ -187,6 +190,78 @@ func _crear_tiles() -> void:
 		if t != null:
 			activos += 1
 	print("[M09-IMP] impostor heightmap completo: %d tiles activos — ocultos <%.0fm (chunks reales mandan cerca)" % [activos, TILE_OCULTAR_UMBRAL])
+	_crear_disco_base()
+
+
+## Disco base de fondo marino (petición usuario, Log 800): círculo OPACO a
+## y=0.2 (debajo del agua voxel) que cubre TODA la isla hasta r 2100 —
+## donde los chunks no cargaron, a través del agua semitransparente se ve
+## este fondo (color arena/fondo marino) en vez del vacío del cielo.
+## Visible SIEMPRE (no participa del ocultamiento: es la base del mundo).
+func _crear_disco_base() -> void:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var r_max := 1801.0
+	var segs := 64
+	for i in range(segs):
+		var a0 := TAU * float(i) / float(segs)
+		var a1 := TAU * float(i + 1) / float(segs)
+		var p00 := Vector3(CENTRO_ISLA.x + cos(a0) * 0.0, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0) * 0.0)
+		var p01 := Vector3(CENTRO_ISLA.x + cos(a1) * 0.0, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1) * 0.0)
+		var p10 := Vector3(CENTRO_ISLA.x + cos(a0) * r_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0) * r_max)
+		var p11 := Vector3(CENTRO_ISLA.x + cos(a1) * r_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1) * r_max)
+		# FIX Log 792 v2 (aro sin superficie): el abanico dibujaba DOS triángulos
+		# por segmento, pero p00 y p01 son el MISMO punto (r=0) → triángulo 1
+		# degenerado (área cero, GPU lo descarta) y triángulo 2 con normal
+		# invertida (cull desde arriba). El abanico correcto es UN triángulo
+		# por segmento: (centro, borde_a0, borde_a1) con orden antihorario
+		# visto desde arriba → normal hacia arriba.
+		_tri(st, p00, COLOR_DISCO_BASE, p10, COLOR_DISCO_BASE, p11, COLOR_DISCO_BASE)
+	# Pared perimetral: el disco plano de canto es una linea de subpixeles.
+	# El muro vertical hace que desde lejos se vea el borde verde-tierra
+	# de la isla sobre el mar (petición usuario).
+	for i in range(segs):
+		var a0b := TAU * float(i) / float(segs)
+		var a1b := TAU * float(i + 1) / float(segs)
+		var w00 := Vector3(CENTRO_ISLA.x + cos(a0b) * (r_max - 4.0), 0.0, CENTRO_ISLA.y + sin(a0b) * (r_max - 4.0))
+		var w01 := Vector3(CENTRO_ISLA.x + cos(a1b) * (r_max - 4.0), 0.0, CENTRO_ISLA.y + sin(a1b) * (r_max - 4.0))
+		var w10 := Vector3(CENTRO_ISLA.x + cos(a0b) * (r_max - 4.0), DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0b) * (r_max - 4.0))
+		var w11 := Vector3(CENTRO_ISLA.x + cos(a1b) * (r_max - 4.0), DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1b) * (r_max - 4.0))
+		_tri(st, w00, COLOR_DISCO_BASE, w01, COLOR_DISCO_BASE, w11, COLOR_DISCO_BASE)
+		_tri(st, w00, COLOR_DISCO_BASE, w11, COLOR_DISCO_BASE, w10, COLOR_DISCO_BASE)
+		# cara interna
+		_tri(st, w00, COLOR_DISCO_BASE, w11, COLOR_DISCO_BASE, w01, COLOR_DISCO_BASE)
+		_tri(st, w00, COLOR_DISCO_BASE, w10, COLOR_DISCO_BASE, w11, COLOR_DISCO_BASE)
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.name = "DiscoBase"
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = COLOR_DISCO_BASE
+	mat.roughness = 1.0
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mi.material_override = mat
+	mi.position = Vector3.ZERO  # vértices ya mundiales
+	add_child(mi)
+	# ── Anillo de ARENA (Log 803): franja entre el disco verde y el agua
+	# — color arena blanca, misma altura y=4.3, visible desde lejos como
+	# playa continua alrededor de la isla (petición usuario).
+	var r_arena_min := r_max
+	var r_arena_max := r_max + 500.0
+	var segs_a := 64
+	for i in range(segs_a):
+		var a0a := TAU * float(i) / float(segs_a)
+		var a1a := TAU * float(i + 1) / float(segs_a)
+		var q00 := Vector3(CENTRO_ISLA.x + cos(a0a) * r_arena_min, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * r_arena_min)
+		var q01 := Vector3(CENTRO_ISLA.x + cos(a1a) * r_arena_min, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * r_arena_min)
+		var q10 := Vector3(CENTRO_ISLA.x + cos(a0a) * r_arena_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * r_arena_max)
+		var q11 := Vector3(CENTRO_ISLA.x + cos(a1a) * r_arena_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * r_arena_max)
+		# FIX Log 804 (winding del anillo): mismo bug que el abanico — el orden
+		# (q00, q01, q11) da normal hacia abajo con cull_back → invisible desde
+		# arriba. Orden correcto: (q00, q11, q01) + (q00, q10, q11).
+		_tri(st, q00, COLOR_ARENA, q11, COLOR_ARENA, q01, COLOR_ARENA)
+		_tri(st, q00, COLOR_ARENA, q10, COLOR_ARENA, q11, COLOR_ARENA)
+	print("[M09-Horizonte] disco base de fondo marino: r %.0fm a y=%.2f (opaco, siempre visible)" % [r_max, DISCO_BASE_Y])
 
 
 func _color_por_altura(h: float) -> Color:
