@@ -201,7 +201,7 @@ func _crear_tiles() -> void:
 func _crear_disco_base() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var r_max := 1801.0
+	var r_max := 1800.0
 	var segs := 64
 	for i in range(segs):
 		var a0 := TAU * float(i) / float(segs)
