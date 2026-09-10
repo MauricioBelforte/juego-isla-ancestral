@@ -8,6 +8,12 @@ Antes de ejecutar cualquier tarea en un repositorio o proyecto:
 1. Verificar siempre si existe un archivo `AGENTS.md` en la **raíz del proyecto**.
 2. Si existe, leerlo completo y **priorizar sus instrucciones** sobre cualquier regla global.
 
+## 2b. Carpeta GUIA-GODOT (documentación temática)
+La documentación detallada de temas de Godot está en **`DOCUMENTACION/GUIA-GODOT/`** — archivos temáticos individuales con recetas completas probadas y errores documentados. La guía principal (`DOCUMENTACION/07-GUIA-GODOT.md`) queda como respaldo/índice general.
+- **Zoom de cámara**: [`GUIA-GODOT/01-zoom-camara-personaje.md`](DOCUMENTACION/GUIA-GODOT/01-zoom-camara-personaje.md)
+- **Disco plano sólido**: [`GUIA-GODOT/02-disco-plano-verde.md`](DOCUMENTACION/GUIA-GODOT/02-disco-plano-verde.md)
+- **Impostores del terreno**: [`GUIA-GODOT/03-impostores-terreno.md`](DOCUMENTACION/GUIA-GODOT/03-impostores-terreno.md)
+
 ## 3. Estructura de Documentación del Proyecto
 
 La documentación vive dentro de `DOCUMENTACION/`. La raíz del proyecto solo contiene `AGENTS.md`, `README.md`, `CHECKLIST-GLOBAL.md`, y configuraciones generales.
