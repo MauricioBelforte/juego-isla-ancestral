@@ -124,7 +124,7 @@ Capturas de QA: `tools/mcp/blender-mcp/25-Ruinas-Templos/capturas/cap_25_cofre_{
 
 ## Logs relacionados
 
-- `Logs/225-M166-Modulo-Variantes-Perfil-Rendimiento-2026-08-28_21-30-00.md` — Creación del módulo + iteración correctiva.
+- `Logs/273-M166-Modulo-Variantes-Perfil-Rendimiento-2026-08-28_21-30-00.md` — Creación del módulo + iteración correctiva.
 - `Logs/207-M25-Cofre-Ancestral-v2-Detalles-Brillo-2026-08-28_20-30-00.md` — Iteración del cofre v2.0→v2.2 (33 piezas con materiales emisivos), fuente del asset piloto.
 
 ## E-22 — `bpy.ops.object.modifier_apply.poll()` falla por socket MCP

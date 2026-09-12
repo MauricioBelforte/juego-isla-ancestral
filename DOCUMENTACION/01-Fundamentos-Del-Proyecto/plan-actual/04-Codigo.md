@@ -163,7 +163,7 @@ Application Start
 
 | Log | Descripción |
 |-----|-------------|
-| `Logs/04-CREACION_COMPONENTE_01-FUNDAMENTOS_2026-08-15_*.md` | Creación del componente base (este log) |
+| `Logs/04-CREACION_COMPONENTE_01-FUNDAMENTOS_2026-08-15_23-16-30.md` | Creación del componente base (este log) |
 | `Logs/02-ADAPTACION_AGENTS_UNITY_2026-08-15_22-46-00.md` | Adaptación del AGENTS.md |
 | `Logs/03-NUEVAS_DIRECTIVAS_AGENTS_2026-08-15_22-58-00.md` | Nuevas directivas del AGENTS.md |
 
