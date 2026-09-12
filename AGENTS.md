@@ -1123,10 +1123,23 @@ El proyecto cuenta con una biblioteca de **skills procedimentales** instalada en
 ## 28. Codificación de Archivos (UTF-8 Obligatorio)
 
 > **Agregado:** 2026-09-02 · **Fuente:** iniciativa del usuario (directiva de codificación de archivos)
+> **Reforzado:** 2026-09-12 · **Fuente:** directiva del usuario — impacto comprobado en productividad
+
+> ⛔ **PROHIBIDO EL USO DE SÍMBOLOS RAROS / MOJIBAKE.**
+> Los caracteres corruptos (`Ã³`, `Ã±`, `â€"`, `ðŸŸ¢`, `Ã©`, `Â§`, etc.)
+> **RETRASAN EL TRABAJO, ROMPEN EL FLUJO y CAUSAN PÉRDIDA DE TIEMPO E INFORMACIÓN.**
+> Cada símbolo roto obliga a:
+> 1. Detener lo que se estaba haciendo para investigar la corrupción.
+> 2. Ejecutar scripts de reparación o hacer fixes manuales.
+> 3. Verificar que no se perdieron datos durante la corrección.
+> 4. Releer archivos que ya se habían leído (porque la primera lectura produjo basura).
+> **ESTO ES INACEPTABLE.** Un agente que genera mojibake está **perjudicando al proyecto**
+> tanto como uno que borra código. Si tu plataforma escribe en cp1252, **NO TOQUES EL
+> REPOSITORIO** hasta que configures UTF-8. Sin excepciones.
 
 ### Problema detectado
 Varias plataformas de agentes (p. ej. OpenCode/uagent en Windows) escriben los archivos del proyecto usando la **página de códigos 1252 (cp1252 / ANSI)** en lugar de **UTF-8**. Esto corrompe todos los caracteres no ASCII:
-- Acentos y eñes (`á`, `é`, `í`, `ó`, `ú`, `ñ`, `Ñ`) → aparecen como mojibake doble (`Ã¡`, `Ã©`, `â€`, `Ã±`).
+- Acentos y eñes (`á`, `é`, `í`, `ó`, `ú`, `ñ`, `Ñ`) → aparecen como mojibake doble (`á`, `é`, `â€`, `ñ`).
 - Emojis de estado del protocolo (`✅`, `🔵`, `🟡`, `🟢`, `⬜`, `🔴`) → se rompen en secuencias ilegibles.
 - El archivo `AGENTS.md` y otros documentos quedan parcialmente ilegibles para agentes y humanos, y el diff de git se ensucia con cambios de codificación.
 
@@ -1141,7 +1154,7 @@ Varias plataformas de agentes (p. ej. OpenCode/uagent en Windows) escriben los a
    $c = [System.IO.File]::ReadAllText('ruta\archivo.md', [System.Text.Encoding]::GetEncoding(1252))
    [System.IO.File]::WriteAllText('ruta\archivo.md', $c, [System.Text.Encoding]::UTF8)
    ```
-5. **Detección temprana:** los caracteres `Ã`, `â€` o `Â` en un diff son señal segura de archivo guardado en cp1252. Corregir inmediatamente.
+5. **Detección temprana:** los caracteres `Á`, `â€` o `Â` en un diff son señal segura de archivo guardado en cp1252. Corregir inmediatamente.
 6. **Firma de documentos:** las firmas (`**Modelo:**`, `**Plataforma:**`) y los emojis de estado deben quedar legibles; si aparecen corruptos tras una edición, el agente debe reescribir el archivo en UTF-8.
 
 > **Nota de operación:** si se detecta una corrupción masiva de codificación en archivos ya versionados, aplicar una pasada de saneamiento que **decodifique cp1252 → re-encode UTF-8** solo a los archivos afectados, verificando con `git diff` que no se introduzcan cambios semánticos. No aplicar conversión ciega a binarios (`.png`, `.res`, `.import`, etc.).

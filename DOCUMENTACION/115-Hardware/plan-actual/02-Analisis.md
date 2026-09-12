@@ -96,12 +96,12 @@
 |------------|--------|-------|
 | Windows 10/11 | ✅ Principal | Primary target |
 | Linux | ✅ Soportado | Proton/SteamOS compatibility |
-| macOS | �?�� Limitado | Metal support, sin optimización nativa |
+| macOS | ? Limitado | Metal support, sin optimización nativa |
 | Steam Deck | ✅ Soportado | Optimización específica |
-| PlayStation | �Œ No soportado | v2+ |
-| Xbox | �Œ No soportado | v2+ |
-| Nintendo Switch | �Œ No soportado | v2+ |
-| Mobile | �Œ No soportado | v2+ |
+| PlayStation | Œ No soportado | v2+ |
+| Xbox | Œ No soportado | v2+ |
+| Nintendo Switch | Œ No soportado | v2+ |
+| Mobile | Œ No soportado | v2+ |
 
 ### Dispositivos de Entrada
 
@@ -111,5 +111,5 @@
 | Xbox Controller | ✅ Soportado | XInput nativo |
 | PlayStation Controller | ✅ Soportado | DualShock/DualSense |
 | Switch Pro Controller | ✅ Soportado | DirectInput |
-| Touch Screen | �Œ No soportado | v2+ |
-| VR | �Œ No soportado | Nunca |
+| Touch Screen | Œ No soportado | v2+ |
+| VR | Œ No soportado | Nunca |

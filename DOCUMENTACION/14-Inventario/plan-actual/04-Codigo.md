@@ -127,11 +127,11 @@ signal storage_closed
 
 > Fase de documentación de hallazgos previa a codificar (directiva del usuario). Cruce del diseño vigente contra los módulos YA implementados en `game/isla-ancestral/` (M59 Guardado, M159 Catálogo, M13 Herramientas, M39 Tiendas) y la skill `godot-inventory-system`.
 
-### H1 ? Colisi�n de `class_name ItemData` �?�� CRÍTICO
+### H1 ? Colisin de `class_name ItemData` ? CRÍTICO
 El diseño prevé un `ItemData.gd` propio del módulo en `res://src/inventario/`, pero **M159 ya creó `class_name ItemData extends Resource`** en `scripts/data/item_data.gd` (con id, stack_max, rareza, precio_compra/venta, categoria, apilable — gran solapamiento).
 **Decisión:** NO duplicar la clase. Extender el `ItemData` de M159 con los campos faltantes del diseño (`display_name_key`, `description_key`, `protected_from_discard`, `item_type`, `tags`). Duplicarlo rompería el catálogo y la preview de M13.
 
-### H2 ? Nombre del autoload fijado por M39 �?�� CRÍTICO
+### H2 ? Nombre del autoload fijado por M39 ? CRÍTICO
 ShopManager (implementado, log 167) resuelve dependencias vía `get_node_or_null("/root/Inventario")` esperando los métodos `agregar_items({item_id: cantidad}) -> bool` y `remover_items({...}) -> bool`.
 El diseño llama al autoload `InventoryService` con otra API (`add_item(id, amount, container) -> int`).
 **Decisión:** el autoload se registra como **`Inventario`** (nombre que M39 ya espera) y expone adaptadores `agregar_items()`/`remover_items()` encima de la API rica del servicio. No se toca M39.

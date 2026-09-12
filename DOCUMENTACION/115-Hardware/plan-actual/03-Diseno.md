@@ -245,9 +245,9 @@ func _get_settings_for_preset(preset: QualityPreset) -> QualitySettings:
 ### Perfiles de Hardware Guardados
 
 ```
-user://hardware_profile.tres     �? Perfil detectado
-user://quality_settings.tres     �? Configuración de calidad
-user://input_mapping.tres        �? Mapeo de dispositivos
+user://hardware_profile.tres     ? Perfil detectado
+user://quality_settings.tres     ? Configuración de calidad
+user://input_mapping.tres        ? Mapeo de dispositivos
 ```
 
 ## 6. Perfiles de Rendimiento
