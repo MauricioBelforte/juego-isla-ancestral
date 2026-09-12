@@ -1,6 +1,6 @@
 # Tareas módulo 88 88-Fuentes-Tipograficas
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 167
 

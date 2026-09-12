@@ -1,6 +1,6 @@
 # Tareas módulo 40 40-Infraestructura
 
-**Estado:** ðŸ”µ En curso
+**Estado:** 🔵 En curso
 
 **Items pendientes:** 116
 

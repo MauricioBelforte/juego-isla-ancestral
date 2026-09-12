@@ -1,6 +1,6 @@
 # Tareas módulo 121 121-Soporte-Post-Lanzamiento
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 88
 

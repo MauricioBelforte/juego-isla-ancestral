@@ -1,6 +1,6 @@
 # Tareas módulo 100 100-Community-Management
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 76
 

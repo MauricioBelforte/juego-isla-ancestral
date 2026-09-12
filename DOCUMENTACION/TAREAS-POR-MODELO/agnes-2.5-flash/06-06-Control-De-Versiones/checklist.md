@@ -1,6 +1,6 @@
 # Tareas módulo 06 06-Control-De-Versiones
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 100
 

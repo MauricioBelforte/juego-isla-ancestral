@@ -1,6 +1,6 @@
 # Tareas módulo 80 80-Legal-Privacidad
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 26
 

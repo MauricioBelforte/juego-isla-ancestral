@@ -1,6 +1,6 @@
 # Tareas módulo 139 139-Pre-Alpha
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 130
 

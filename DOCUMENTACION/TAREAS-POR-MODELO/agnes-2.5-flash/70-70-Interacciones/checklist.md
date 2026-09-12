@@ -1,6 +1,6 @@
 # Tareas módulo 70 70-Interacciones
 
-**Estado:** ðŸ”µ En curso
+**Estado:** 🔵 En curso
 
 **Items pendientes:** 121
 

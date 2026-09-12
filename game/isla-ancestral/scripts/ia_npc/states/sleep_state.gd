@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Sleep State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â va a dormir, duerme, despierta
+## M64: Sleep State — va a dormir, duerme, despierta
 
 const PRIORITY: int = 40
 const MIN_SLEEP: float = 180.0
@@ -30,7 +30,7 @@ func update(delta: float) -> void:
 			if controller.is_at_destination():
 				_phase = 1
 				_sleep_timer = 0.0
-				print("[Sleep] LlegÃƒÆ’Ã‚Â³ a casa")
+				print("[Sleep] Llegó a casa")
 	elif _phase == 1:
 		if controller != null and controller.has_method("set_ocupado"):
 			controller.set_ocupado(true)
@@ -60,7 +60,7 @@ func update(delta: float) -> void:
 		if bb != null:
 			bb.set_value("needs_urgent", &"")
 		controller.get_state_machine().transition_to(&"Idle")
-		print("[Sleep] DespertÃƒÆ’Ã‚Â³, energÃƒÆ’Ã‚Â­a restaurada")
+		print("[Sleep] Despertó, energía restaurada")
 
 
 func tick(delta: float) -> void:
@@ -69,7 +69,7 @@ func tick(delta: float) -> void:
 		if needs != null and needs.energy < 5.0 and _phase == 0:
 			_phase = 1
 			_sleep_timer = 0.0
-			print("[Sleep] Urgencia de energÃƒÆ’Ã‚Â­a, durmiendo inmediatamente")
+			print("[Sleep] Urgencia de energía, durmiendo inmediatamente")
 
 
 func exit() -> void:

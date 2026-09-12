@@ -1,6 +1,6 @@
 # Tareas módulo 59 59-Guardado
 
-**Estado:** ðŸŸ¡ Con dudas (nÃºcleo + auto-save)
+**Estado:** 🟡 Con dudas (núcleo + auto-save)
 
 **Items pendientes:** 75
 

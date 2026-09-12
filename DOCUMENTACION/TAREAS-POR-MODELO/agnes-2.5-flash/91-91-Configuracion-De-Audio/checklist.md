@@ -1,6 +1,6 @@
 # Tareas módulo 91 91-Configuracion-De-Audio
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 147
 

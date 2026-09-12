@@ -1,6 +1,6 @@
 # Tareas módulo 113 113-Pruebas-De-Stress
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 31
 

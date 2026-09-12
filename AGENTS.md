@@ -9,10 +9,44 @@ Antes de ejecutar cualquier tarea en un repositorio o proyecto:
 2. Si existe, leerlo completo y **priorizar sus instrucciones** sobre cualquier regla global.
 
 ## 2b. Carpeta GUIA-GODOT (documentación temática)
-La documentación detallada de temas de Godot está en **`DOCUMENTACION/GUIA-GODOT/`** — archivos temáticos individuales con recetas completas probadas y errores documentados. La guía principal (`DOCUMENTACION/07-GUIA-GODOT.md`) queda como respaldo/índice general.
-- **Zoom de cámara**: [`GUIA-GODOT/01-zoom-camara-personaje.md`](DOCUMENTACION/GUIA-GODOT/01-zoom-camara-personaje.md)
-- **Disco plano sólido**: [`GUIA-GODOT/02-disco-plano-verde.md`](DOCUMENTACION/GUIA-GODOT/02-disco-plano-verde.md)
-- **Impostores del terreno**: [`GUIA-GODOT/03-impostores-terreno.md`](DOCUMENTACION/GUIA-GODOT/03-impostores-terreno.md)
+La documentación detallada de temas de Godot está en **`DOCUMENTACION/GUIA-GODOT/`** — archivos temáticos individuales con recetas completas probadas y errores documentados. El índice de navegación es [`GUIA-GODOT/INDICE.md`](DOCUMENTACION/GUIA-GODOT/INDICE.md). La guía original completa se conserva en [`OBSOLETOS/07-GUIA-GODOT.md`](DOCUMENTACION/OBSOLETOS/07-GUIA-GODOT.md) como respaldo histórico.
+
+### Fundamentales (01-12)
+- **GDScript errores comunes**: [`GUIA-GODOT/01-gdscript-errores-comunes.md`](DOCUMENTACION/GUIA-GODOT/01-gdscript-errores-comunes.md)
+- **Voxel Tools**: [`GUIA-GODOT/02-voxel-tools.md`](DOCUMENTACION/GUIA-GODOT/02-voxel-tools.md)
+- **Escenas .tscn**: [`GUIA-GODOT/03-escenas-tscn.md`](DOCUMENTACION/GUIA-GODOT/03-escenas-tscn.md)
+- **Arquitectura del proyecto**: [`GUIA-GODOT/04-arquitectura-proyecto.md`](DOCUMENTACION/GUIA-GODOT/04-arquitectura-proyecto.md)
+- **Checklist y referencias**: [`GUIA-GODOT/05-checklist-referencias.md`](DOCUMENTACION/GUIA-GODOT/05-checklist-referencias.md)
+- **Registro de errores E-11 a E-19**: [`GUIA-GODOT/06-registro-errores.md`](DOCUMENTACION/GUIA-GODOT/06-registro-errores.md)
+- **Cámara y input**: [`GUIA-GODOT/07-camera-input.md`](DOCUMENTACION/GUIA-GODOT/07-camera-input.md)
+- **Terreno voxel**: [`GUIA-GODOT/08-terreno-voxel.md`](DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md)
+- **Godot 4.x migración**: [`GUIA-GODOT/09-godot4-migracion.md`](DOCUMENTACION/GUIA-GODOT/09-godot4-migracion.md)
+- **UI y HUD**: [`GUIA-GODOT/10-ui-hud.md`](DOCUMENTACION/GUIA-GODOT/10-ui-hud.md)
+- **Blender → Godot**: [`GUIA-GODOT/11-blender-godot.md`](DOCUMENTACION/GUIA-GODOT/11-blender-godot.md)
+- **Animales bimodo**: [`GUIA-GODOT/12-animales-bimodo.md`](DOCUMENTACION/GUIA-GODOT/12-animales-bimodo.md)
+
+### Avanzados / Específicos del juego (16-18)
+- **Zoom de cámara**: [`GUIA-GODOT/16-zoom-camara-personaje.md`](DOCUMENTACION/GUIA-GODOT/16-zoom-camara-personaje.md)
+- **Disco plano sólido**: [`GUIA-GODOT/17-disco-plano-verde.md`](DOCUMENTACION/GUIA-GODOT/17-disco-plano-verde.md)
+- **Impostores del terreno**: [`GUIA-GODOT/18-impostores-terreno.md`](DOCUMENTACION/GUIA-GODOT/18-impostores-terreno.md)
+- **Diagnóstico de tildes (freeze)**: [`GUIA-GODOT/19-diagnostico-tildes.md`](DOCUMENTACION/GUIA-GODOT/19-diagnostico-tildes.md) — protocolo paso a paso ante un tildo, causas C-01 a C-11 y checklist. **Leerlo ANTES de tocar código cuando el juego se tilda.**
+
+## 2c. Carpeta GUIA-BLENDER (documentación temática de Blender)
+La documentación detallada de temas de Blender (bpy, modelado, exportación) está en **`DOCUMENTACION/GUIA-BLENDER/`** — archivos temáticos individuales con recetas completas probadas y 105 errores documentados (E-01 en adelante). El índice de navegación es [`GUIA-BLENDER/INDICE.md`](DOCUMENTACION/GUIA-BLENDER/INDICE.md). La guía original completa se conserva en [`OBSOLETOS/09-GUIA-BLENDER.md`](DOCUMENTACION/OBSOLETOS/09-GUIA-BLENDER.md) como respaldo histórico.
+
+### Fundamentales (01-05)
+- **Conexión MCP y convenciones**: [`GUIA-BLENDER/01-conexion-mcp-convenciones.md`](DOCUMENTACION/GUIA-BLENDER/01-conexion-mcp-convenciones.md)
+- **Errores comunes E-01 a E-35**: [`GUIA-BLENDER/02-errores-comunes-e01-e35.md`](DOCUMENTACION/GUIA-BLENDER/02-errores-comunes-e01-e35.md)
+- **Scripts reutilizables y helpers**: [`GUIA-BLENDER/03-scripts-reutilizables-helpers.md`](DOCUMENTACION/GUIA-BLENDER/03-scripts-reutilizables-helpers.md)
+- **Errores avanzados E-36 en adelante**: [`GUIA-BLENDER/04-errores-avanzados.md`](DOCUMENTACION/GUIA-BLENDER/04-errores-avanzados.md)
+- **Checklist de asset**: [`GUIA-BLENDER/05-checklist-asset.md`](DOCUMENTACION/GUIA-BLENDER/05-checklist-asset.md)
+
+### Específicos del juego (06-10)
+- **Capturas y órdenes de creación**: [`GUIA-BLENDER/06-capturas-ordenes.md`](DOCUMENTACION/GUIA-BLENDER/06-capturas-ordenes.md)
+- **Set de captura vs. Asset**: [`GUIA-BLENDER/07-set-captura-vs-asset.md`](DOCUMENTACION/GUIA-BLENDER/07-set-captura-vs-asset.md)
+- **Asset animable para Godot**: [`GUIA-BLENDER/08-asset-animable-godot.md`](DOCUMENTACION/GUIA-BLENDER/08-asset-animable-godot.md)
+- **Nivel mínimo de detalle**: [`GUIA-BLENDER/09-nivel-detalle-modelado.md`](DOCUMENTACION/GUIA-BLENDER/09-nivel-detalle-modelado.md)
+- **Animales bimodo (Blender)**: [`GUIA-BLENDER/10-animales-bimodo.md`](DOCUMENTACION/GUIA-BLENDER/10-animales-bimodo.md)
 
 ## 3. Estructura de Documentación del Proyecto
 
@@ -34,7 +68,7 @@ En la raíz de `DOCUMENTACION/` están los 5 documentos generales que reflejan e
 | `4-DOCUMENTO-EJECUCION-ACTUAL.md` | Código de ejecución vigente |
 | `5-FUTURAS-MEJORAS.md` | Checklist de ideas y mejoras pendientes del usuario (directivas propias, no propuestas del agente) |
 | `06-GUIA-DE-CONEXION-VISION.md` | Guía maestra de visión del agente (M154): vías V1–V5, cómo conectarse, cómo documentar descubrimientos (reforzado en AGENTS.md §26) |
-| `07-GUIA-GODOT.md` | Guía de codificación en Godot 4.x: errores comunes, convenciones, checklist, registro de errores (obligatorio leer antes de codificar — AGENTS.md §26) |
+| `GUIA-GODOT/INDICE.md` | Guía de codificación en Godot 4.x: errores comunes, convenciones, checklist, registro de errores (obligatorio leer antes de codificar — AGENTS.md §26) |
 | `08-GUIA-ORDEN-DE-IMPLEMENTACION.md` | Referencia principal de orden real, puertas, dificultad, necesidad de visión y reserva paralela de módulos |
 | `11-BUGS.md` | Registro central de bugs: checklist de problemas/fallas (usuario + LLMs) con el mayor detalle posible, delegación de bugs no resueltos a otros agentes y firma obligatoria de quien registra (ver sección 11-BUGS abajo) |
 
@@ -49,7 +83,7 @@ El archivo **`DOCUMENTACION/11-BUGS.md`** es el **registro central de problemas 
    - Agregarlo además en la **sección 8 "Bugs Delegados"** del archivo (al final), con su firma y una breve explicación de por qué no pudo.
    - El siguiente agente más capacitado podrá tomarlo (cambiar a `[→] En progreso` + indicar agente), resolverlo y moverlo a la sección 7 "Bugs Resueltos".
 4. **Resolución:** al corregir un bug, documentar cómo se resolvió (causa, solución, archivos, log del proyecto) y firmar.
-5. **Complementariedad:** `11-BUGS.md` es el registro operativo diario; NO reemplaza al módulo `102-Bug-Tracking/` (sistema de issues planificado) ni al registro de errores de Godot (`07-GUIA-GODOT.md` §8). Si el bug es de Godot, referenciarlo también en la guía 07 §8.
+5. **Complementariedad:** `11-BUGS.md` es el registro operativo diario; NO reemplaza al módulo `102-Bug-Tracking/` (sistema de issues planificado) ni al registro de errores de Godot (`GUIA-GODOT/06-registro-errores.md`). Si el bug es de Godot, referenciarlo también en esa guía.
 
 ### DOCUMENTACION/00-PLAN-INICIAL/ — Solo el origen del proyecto
 
@@ -96,7 +130,7 @@ DOCUMENTACION/
 > - `DOCUMENTACION/168-Plantilla-De-Isla/` — **MAQUETA** para crear módulos de islas NUEVAS:
 >   copiar a `<ID>-Isla-<Nombre>`, renombrar y completar. **Cada isla = su propio módulo**
 >   (para que un agente no rompa las demás).
-> - `DOCUMENTACION/07-GUIA-GODOT.md` §10.8-10.15: receta del terreno, lecciones de la jornada.
+> - `DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md`: receta del terreno, lecciones de la jornada.
 
 ## Archivos obligatorios
 └── 102-Bug-Tracking/                  ← Ejemplo real: prefijo 102 = ID del módulo
@@ -308,7 +342,21 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 ## 7. Seguimiento de Progreso (Checklist)
 
-### 6.4 Comando /bucle — Automatización del bucle multiagente (2026-09-02, glm-5.3-flash/Kilo Code)
+### Flujo de trabajo: Backlog Personal → Módulo → CHECKLIST-GLOBAL
+
+> ⚠️ **IMPORTANTE:** Cada modelo debe trabajar desde su **backlog personal** (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`). La CHECKLIST-GLOBAL es solo un tablero de resumen para el usuario — **NO** es la fuente de trabajo del agente.
+
+**Flujo obligatorio:**
+1. **Leer tu backlog personal** → buscar tareas pendientes (`[ ]`) en tu carpeta
+2. **Elegir una tarea** de tus módulos asignados (columna `Recom` de CHECKLIST-GLOBAL)
+3. **Bloquear** → marcar `[→]` en tu backlog personal + `🔵` en CHECKLIST-GLOBAL
+4. **Ejecutar** la tarea (leer `plan-actual/` del módulo, implementar, documentar)
+5. **Completar** → marcar `[x]` en los 3 lugares (backlog personal, `05-Checklist.md`, CHECKLIST-GLOBAL)
+6. **Repetir** hasta agotar tokens
+
+**NO ir directo a la CHECKLIST-GLOBAL a buscar trabajo.** Tu backlog es tu fuente de verdad.
+
+### Comando /bucle — Automatización del bucle multiagente (2026-09-02, glm-5.3-flash/Kilo Code)
 
 El bucle reservar → leer → implementar → testear → documentar → liberar está automatizado en Kilo Code:
 
@@ -321,8 +369,8 @@ El bucle reservar → leer → implementar → testear → documentar → libera
 TODO agente que abra una sesión de este proyecto debe arrancar su trabajo con `/bucle` (o seguir el ciclo manual si su plataforma no tiene el comando).
 
 Cada vez que completes una tarea:
-1. Leer `DOCUMENTACION/3-DOCUMENTO-TAREAS-ACTUAL.md` (o el equivalente local).
-2. Marcar como completado cambiando `[ ]` por `[x]`.
+1. Leer tu backlog personal (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`)
+2. Marcar como completado cambiando `[ ]` por `[x]` en los 3 lugares.
 
 > **Para tareas masivas (múltiples módulos):** el seguimiento de estado global se realiza mediante **`CHECKLIST-GLOBAL.md`** (sección 21), que resume el progreso de todos los módulos. Los subitems detallados viven en el `05-Checklist.md` de cada módulo.
 
@@ -398,12 +446,12 @@ Al crear un nuevo componente o sistema del juego:
 2. **Ejecutar `get_debug_output`** vía godot-mcp → leer errores/warnings.
 3. **Si hay errores:**
    - Leer el mensaje de error exacto.
-   - Consultar `07-GUIA-GODOT.md` §8 (Registro de Errores) para ver si ya se conoce la solución.
+   - Consultar `GUIA-GODOT/06-registro-errores.md` (Registro de Errores) para ver si ya se conoce la solución.
    - Si no se conoce, buscar la solución (docs, web, etc.).
    - **Corregir el código** directamente.
    - Volver al paso 2.
 4. **Repetir hasta 3 intentos** de auto-corrección.
-5. **Si no se resuelve en 3 intentos:** documentar el error en `07-GUIA-GODOT.md` §8 y notificar al usuario con el error completo y los intentos realizados.
+5. **Si no se resuelve en 3 intentos:** documentar el error en `GUIA-GODOT/06-registro-errores.md` y notificar al usuario con el error completo y los intentos realizados.
 
 **Herramientas MCP disponibles (V4):**
 - `get_debug_output` → Lee logs, errores y warnings de Godot en tiempo real.
@@ -998,12 +1046,13 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
 
 > ⚠️ **Regla obligatoria (agregada 2026-08-24):** Antes de que cualquier agente tome un módulo y empiece a codificar o implementar, **DEBE** leer y consultar durante el desarrollo las siguientes guías. El objetivo es que **ningún agente arranque de cero** y repita errores ya documentados. Estas guías son la **memoria colectiva del conocimiento adquirido**.
 
-### Guía de Codificación en Godot — `DOCUMENTACION/07-GUIA-GODOT.md`
+### Guía de Codificación en Godot — `DOCUMENTACION/GUIA-GODOT/`
 
-- **Propósito:** Documenta errores comunes, soluciones, convenciones y mejores prácticas para escribir código GDScript en Godot 4.x.
-- **Uso obligatorio:** Cualquier agente que codifique en Godot **DEBE** leer esta guía **antes** de escribir código y consultarla cuando surja cualquier duda. La sección 6 ("Checklist al Escribir Código") debe verificarse antes de finalizar cualquier implementación.
-- **Documentación de nuevos descubrimientos:** Cada vez que un agente descubra un nuevo error, una mejor práctica, o el modo correcto/incorrecto de hacer algo en Godot, **DEBE** agregarlo a la sección 8 ("Registro de Errores") de esta guía, con: mensaje de error exacto, causa, solución y fecha. No se permite dejar un error nuevo sin documentarlo.
-- **Firmado:** Esta guía lleva el modelo y plataforma del último agente que la modificó. Al agregar contenido, actualizar la firma.
+- **Propósito:** Documenta errores comunes, soluciones, convenciones y mejores prácticas para escribir código GDScript en Godot 4.x. Compuesta por archivos temáticos individuales en `GUIA-GODOT/`.
+- **Índice de navegación:** [`GUIA-GODOT/INDICE.md`](DOCUMENTACION/GUIA-GODOT/INDICE.md) — mapea cada tema al archivo correspondiente.
+- **Uso obligatorio:** Cualquier agente que codifique en Godot **DEBE** leer el índice y consultar los archivos temáticos cuando surja cualquier duda. La sección de checklist debe verificarse antes de finalizar cualquier implementación.
+- **Documentación de nuevos descubrimientos:** Cada vez que un agente descubra un nuevo error, una mejor práctica, o el modo correcto/incorrecto de hacer algo en Godot, **DEBE** agregarlo al archivo correspondiente en `GUIA-GODOT/` (sección de errores comunes, registro de errores, etc.), con: mensaje de error exacto, causa, solución y fecha. No se permite dejar un error nuevo sin documentarlo.
+- **Firmado:** Cada archivo lleva el modelo y plataforma del último agente que lo modificó. Al agregar contenido, actualizar la firma.
 
 ### Guía de Conexión de Visión — `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md`
 
@@ -1097,18 +1146,90 @@ Varias plataformas de agentes (p. ej. OpenCode/uagent en Windows) escriben los a
 
 > **Nota de operación:** si se detecta una corrupción masiva de codificación en archivos ya versionados, aplicar una pasada de saneamiento que **decodifique cp1252 → re-encode UTF-8** solo a los archivos afectados, verificando con `git diff` que no se introduzcan cambios semánticos. No aplicar conversión ciega a binarios (`.png`, `.res`, `.import`, etc.).
 
+### 28.1 Herramientas del proyecto y lecciones duras (Log 852, 2026-09-12)
+
+**Herramientas** (ya depuradas — usarlas, no reescribirlas):
+
+| Herramienta | Uso |
+|---|---|
+| `python scripts/fix_encoding.py --dry-run` | Informa sin escribir. |
+| `python scripts/fix_encoding.py` | **Repara** mojibake en todo el repo. Respaldos automáticos en `Obsoletos/encoding-backup-<timestamp>/`. |
+| `python scripts/diagnosticar_mojibake.py` | **Verifica** (estricto). Sale con código 1 si queda mojibake. |
+
+Están separadas a propósito: si una sola herramienta detecta *y* repara, un
+falso positivo de detección se convierte en una escritura destructiva
+silenciosa.
+
+**Cuatro errores que ya costaron caro — no repetir:**
+
+1. **Nunca usar `errors="replace"` al decodificar.** El `encode("latin-1","replace")`
+   fue el que *creó* los U+FFFD que el Log 507 declara irrecuperables. Si un
+   tramo no decodifica, es texto legítimo (portugués `você`, español `diseño`):
+   dejarlo intacto, no adivinar.
+2. **Los caracteres de control C1 (`U+0080`–`U+009F`) son PARTE de un token
+   mojibake**, no ruido. `ch.encode("cp1252")` los rechaza y eso partía el token
+   por la mitad, dejándolo irrevertible.
+3. **El mojibake puede estar aplicado 2, 3 o más veces.** Una o dos pasadas no
+   alcanzan: hay que iterar mientras cada pasada siga limpiando.
+4. **Un U+FFFD puede venir disfrazado como `ï¿½`.** Antes de asumir que una
+   reparación "crea" caracteres de reemplazo, contar las secuencias camufladas
+   en el original.
+
+**Exclusiones deliberadas** (NO "arreglar"): `AGENTS.md` (documenta el síntoma
+con ejemplos), `scripts/verify_final.py`, `scripts/fix_coordinacion.py` y
+`scripts/fix_emoji3.py` (tienen literales mojibake en sus tablas de
+reemplazo), y `Logs/` (registro histórico).
+
+> **Aviso:** la fuga continúa. Siguen apareciendo archivos nuevos ya corruptos,
+> porque cada agente escribe con la codificación de su plataforma. Ejecutar el
+> verificador periódicamente; no esperar a que sea una emergencia.
+
 ---
 
 ## 29. Tareas por Modelo — Checklists Personales (metodología multiagente)
 
 > **Agregado:** 2026-09-02 · **Fuente:** directiva del usuario · **Primero en usar:** deepseek-v4-flash-vision-exp / Kilo Code
+> **Actualizado:** 2026-09-11 · **Fuente:** directiva del usuario — cada modelo trabaja desde su propio backlog
 
-La CHECKLIST-GLOBAL.md es el **tablero de resumen** (una fila por módulo). El trabajo granular (≈18.000 subítems) vive en las **checklists personales de cada modelo**:
+### Flujo de trabajo obligatorio para TODO modelo
+
+> ⚠️ **IMPORTANTE:** La CHECKLIST-GLOBAL.md es solo un **tablero de resumen** para el usuario. Cada modelo **DEBE** trabajar desde su **propio backlog personal** en `TAREAS-POR-MODELO/<MODELO>/`.
+
+**Flujo al iniciar sesión:**
+1. **Leer tu backlog personal** → `TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`
+2. **Buscar tareas pendientes** en los `plan-actual/` de los módulos que te corresponden (por tu `Recom`)
+3. **Elegir una tarea** de tu backlog que puedas hacer ahora
+4. **Bloquearla** → marcar `[→]` en tu checklist personal
+5. **Ejecutar** la tarea
+6. **Completarla** → marcar `[x]` en tu checklist personal + `05-Checklist.md` del módulo + CHECKLIST-GLOBAL
+
+**NO ir directo a la CHECKLIST-GLOBAL** a buscar trabajo. Tu backlog es tu fuente de verdad.
+
+### Estructura del backlog personal
 
 - **Ubicación:** `DOCUMENTACION/TAREAS-POR-MODELO/`
-- **Guía obligatoria para todo modelo:** `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md` — reglas de estructura, marcado (`[ ]`/`[x]`/`[?]`/`[→]` con IDs T-###), extracción desde los `05-Checklist.md` de cada módulo, priorización y ciclo de trabajo.
-- **Estructura:** `TAREAS-POR-MODELO/<MODELO>/` con `BACKLOG-MASTER.md` (índice) y `<ID-Modulo>-<Nombre>/checklist.md` (tareas granulares).
-- **Regla de oro:** al completar una tarea T-###, marcar los TRES lugares: la checklist personal del modelo, el `05-Checklist.md` del módulo y la fila de CHECKLIST-GLOBAL (progreso).
-- **Mínimo obligatorio:** todo modelo que se une a la metodología debe asignarse **no menos de 100 tareas** en su backlog (se extraen de los módulos con su Recom; 2000+ es válido — ejemplo: deepseek-v4-flash-vision-exp arrancó con 3.474).
-- **Nuevos modelos:** al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar su backlog con el extractor por módulos con su Recom.
+- **Guía obligatoria:** `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`
+- **Tu carpeta:** `TAREAS-POR-MODELO/<MODELO>/` con:
+  - `BACKLOG-MASTER.md` — índice general de todas tus tareas
+  - `<ID-Modulo>-<Nombre>/checklist.md` — tareas granulares por módulo
+
+### Reglas de marcado
+
+- **`[ ]`** = pendiente
+- **`[→]`** = en progreso (bloqueada por vos)
+- **`[x]`** = completada
+- **`[?]`** = no resuelta (honestidad)
+
+**Regla de oro:** al completar una tarea T-###, marcar los **TRES lugares**:
+1. Tu checklist personal (`TAREAS-POR-MODELO/<MODELO>/...`)
+2. El `05-Checklist.md` del módulo
+3. La fila de CHECKLIST-GLOBAL (progreso)
+
+### Mínimo obligatorio
+
+Todo modelo que se une a la metodología debe asignarse **no menos de 100 tareas** en su backlog (se extraen de los módulos con su `Recom`; 2000+ es válido — ejemplo: deepseek-v4-flash-vision-exp arrancó con 3.474).
+
+### Nuevos modelos
+
+Al entrar a trabajar, crear su carpeta (identidad = modelo/plataforma) y generar su backlog con el extractor por módulos con su `Recom`.
 

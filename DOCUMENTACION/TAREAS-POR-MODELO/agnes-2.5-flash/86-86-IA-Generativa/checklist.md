@@ -1,6 +1,6 @@
 # Tareas módulo 86 86-IA-Generativa
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 24
 

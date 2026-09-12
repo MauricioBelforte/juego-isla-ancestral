@@ -1,6 +1,6 @@
 # Tareas módulo 76 76-Multijugador
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 126
 

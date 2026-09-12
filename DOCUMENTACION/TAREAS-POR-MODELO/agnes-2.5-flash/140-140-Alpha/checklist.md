@@ -1,6 +1,6 @@
 # Tareas módulo 140 140-Alpha
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 110
 

@@ -1,6 +1,6 @@
 # Tareas módulo 142 142-Release-Candidate
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 106
 

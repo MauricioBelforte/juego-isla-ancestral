@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Interact State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â habla con jugador
+## M64: Interact State — habla con jugador
 
 const PRIORITY: int = 45
 const TALK_DUR: float = 10.0
@@ -30,7 +30,7 @@ func update(delta: float) -> void:
 
 func tick(_delta: float) -> void:
 	if _interact_timer <= 0:
-		print("[Interact] InteracciÃƒÆ’Ã‚Â³n terminada")
+		print("[Interact] Interacción terminada")
 		if controller != null:
 			controller.set_ocupado(false)
 		controller.get_state_machine().transition_to(&"Idle")
@@ -40,7 +40,7 @@ func tick(_delta: float) -> void:
 		if players.size() > 0:
 			var dist = controller.global_position.distance_to(players[0].global_position)
 			if dist > 5.0:
-				print("[Interact] Jugador se alejÃƒÆ’Ã‚Â³")
+				print("[Interact] Jugador se alejó")
 				if controller != null:
 					controller.set_ocupado(false)
 				controller.get_state_machine().transition_to(&"Idle")

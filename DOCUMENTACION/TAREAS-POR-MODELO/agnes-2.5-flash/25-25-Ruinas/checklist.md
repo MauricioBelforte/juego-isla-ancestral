@@ -1,6 +1,6 @@
 # Tareas módulo 25 25-Ruinas
 
-**Estado:** ðŸŸ¡ Nucleo + validacion visual
+**Estado:** 🟡 Nucleo + validacion visual
 
 **Items pendientes:** 84
 

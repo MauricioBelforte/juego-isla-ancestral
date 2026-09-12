@@ -1,6 +1,6 @@
 # Tareas módulo 128 128-Identidad-De-Marca
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 20
 

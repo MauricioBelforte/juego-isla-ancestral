@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Eat State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â va a comer, come, regresa
+## M64: Eat State — va a comer, come, regresa
 
 const PRIORITY: int = 35
 const EAT_DUR: float = 30.0
@@ -30,7 +30,7 @@ func update(delta: float) -> void:
 			if controller.is_at_destination():
 				_phase = 1
 				_eat_timer = 0.0
-				print("[Eat] LlegÃƒÆ’Ã‚Â³ al comedor")
+				print("[Eat] Llegó al comedor")
 	elif _phase == 1:
 		if controller != null and controller.has_method("stop_movement"):
 			controller.stop_movement()
@@ -43,7 +43,7 @@ func update(delta: float) -> void:
 			if bb != null:
 				bb.set_value("needs_urgent", &"")
 			_phase = 2
-			print("[Eat] TerminÃƒÆ’Ã‚Â³ de comer")
+			print("[Eat] Terminó de comer")
 	elif _phase == 2:
 		if controller != null and controller.has_method("get_location_position"):
 			var home = controller.get_location_position("casa")

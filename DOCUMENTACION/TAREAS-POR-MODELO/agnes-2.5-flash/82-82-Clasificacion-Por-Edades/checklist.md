@@ -1,6 +1,6 @@
 # Tareas módulo 82 82-Clasificacion-Por-Edades
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 12
 

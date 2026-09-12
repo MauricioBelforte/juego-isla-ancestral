@@ -1,6 +1,6 @@
 # Tareas módulo 44 44-ASMR-Y-Feedback
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 37
 

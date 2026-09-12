@@ -1,6 +1,6 @@
 # Tareas módulo 130 130-Artbook
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 50
 

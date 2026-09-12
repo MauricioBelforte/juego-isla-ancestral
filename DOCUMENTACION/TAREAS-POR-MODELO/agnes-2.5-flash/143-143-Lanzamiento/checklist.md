@@ -1,6 +1,6 @@
 # Tareas módulo 143 143-Lanzamiento
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 93
 

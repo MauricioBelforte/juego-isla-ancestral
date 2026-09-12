@@ -1,6 +1,6 @@
 # Tareas módulo 89 89-Diseno-De-Menus
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 101
 

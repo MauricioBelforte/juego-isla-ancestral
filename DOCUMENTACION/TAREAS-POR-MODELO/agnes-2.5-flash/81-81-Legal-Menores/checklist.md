@@ -1,6 +1,6 @@
 # Tareas módulo 81 81-Legal-Menores
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 14
 

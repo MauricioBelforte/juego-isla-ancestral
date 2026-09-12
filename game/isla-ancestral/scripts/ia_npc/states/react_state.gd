@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: React State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â reacciona a clima/eventos
+## M64: React State — reacciona a clima/eventos
 
 const PRIORITY: int = 50
 const REACT_DUR: float = 15.0
@@ -69,7 +69,7 @@ func tick(_delta: float) -> void:
 
 
 func exit() -> void:
-	print("[React] ReacciÃƒÆ’Ã‚Â³n terminada (tipo=%d)" % _react_type)
+	print("[React] Reacción terminada (tipo=%d)" % _react_type)
 	if controller != null:
 		var bb = controller.get_blackboard()
 		if bb != null:

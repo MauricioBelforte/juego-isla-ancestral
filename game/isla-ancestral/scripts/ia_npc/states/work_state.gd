@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Work State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â trabaja durante duracion
+## M64: Work State — trabaja durante duracion
 
 const PRIORITY: int = 25
 

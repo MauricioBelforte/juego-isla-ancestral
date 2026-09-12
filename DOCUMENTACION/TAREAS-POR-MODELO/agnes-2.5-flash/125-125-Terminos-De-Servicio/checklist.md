@@ -1,6 +1,6 @@
 # Tareas módulo 125 125-Terminos-De-Servicio
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 30
 

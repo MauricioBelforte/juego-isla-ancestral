@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Movement State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â navega a destino
+## M64: Movement State — navega a destino
 
 const PRIORITY: int = 30
 

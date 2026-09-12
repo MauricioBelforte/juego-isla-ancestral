@@ -1,6 +1,6 @@
 # Tareas módulo 138 138-Vertical-Slice
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 120
 

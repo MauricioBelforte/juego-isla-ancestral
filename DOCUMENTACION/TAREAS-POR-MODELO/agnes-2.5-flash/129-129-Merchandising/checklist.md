@@ -1,6 +1,6 @@
 # Tareas módulo 129 129-Merchandising
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 40
 

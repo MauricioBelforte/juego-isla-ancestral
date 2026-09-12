@@ -1,6 +1,6 @@
 # Tareas módulo 107 107-Backups
 
-**Estado:** ðŸ”µ En curso
+**Estado:** 🔵 En curso
 
 **Items pendientes:** 48
 

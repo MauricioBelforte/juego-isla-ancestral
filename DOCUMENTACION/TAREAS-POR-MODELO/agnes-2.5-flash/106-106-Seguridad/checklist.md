@@ -1,6 +1,6 @@
 # Tareas módulo 106 106-Seguridad
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 66
 

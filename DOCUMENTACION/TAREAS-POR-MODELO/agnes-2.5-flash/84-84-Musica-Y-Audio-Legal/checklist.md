@@ -1,6 +1,6 @@
 # Tareas módulo 84 84-Musica-Y-Audio-Legal
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 24
 

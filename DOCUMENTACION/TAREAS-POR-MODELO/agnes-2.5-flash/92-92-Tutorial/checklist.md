@@ -1,6 +1,6 @@
 # Tareas módulo 92 92-Tutorial
 
-**Estado:** ðŸŸ¡ Con dudas
+**Estado:** 🟡 Con dudas
 
 **Items pendientes:** 143
 

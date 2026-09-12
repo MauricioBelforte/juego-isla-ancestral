@@ -1,6 +1,6 @@
 # Tareas módulo 17 17-Construccion
 
-**Estado:** ðŸ”µ En curso
+**Estado:** 🔵 En curso
 
 **Items pendientes:** 164
 

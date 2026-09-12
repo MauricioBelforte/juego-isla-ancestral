@@ -1,6 +1,6 @@
 # Tareas módulo 85 85-Modelos-3D-Legal
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 15
 

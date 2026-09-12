@@ -1,6 +1,6 @@
 # Tareas módulo 33 33-Agricultura
 
-**Estado:** ðŸŸ¡ Con dudas (nÃºcleo + lluvia)
+**Estado:** 🟡 Con dudas (núcleo + lluvia)
 
 **Items pendientes:** 86
 

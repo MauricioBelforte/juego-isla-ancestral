@@ -1,6 +1,6 @@
 # Tareas módulo 39 39-Tiendas
 
-**Estado:** ðŸŸ¡ Con dudas
+**Estado:** 🟡 Con dudas
 
 **Items pendientes:** 100
 

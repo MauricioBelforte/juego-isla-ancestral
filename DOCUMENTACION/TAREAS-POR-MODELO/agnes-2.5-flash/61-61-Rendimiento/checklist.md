@@ -1,6 +1,6 @@
 # Tareas módulo 61 61-Rendimiento
 
-**Estado:** ðŸŸ¡ Con dudas
+**Estado:** 🟡 Con dudas
 
 **Items pendientes:** 106
 

@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Idle State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â espera, mira,idget
+## M64: Idle State — espera, mira,idget
 
 const PRIORITY: int = 10
 const SUB_MIN: float = 2.0

@@ -122,8 +122,13 @@ renombrados_logs.json
 tmp_orig_guide.md
 tmp_orig_s6.txt
 fix_*.py
+!scripts/fix_encoding.py
 verify_*.py
 gen_*.py
+
+# Excepcion: scripts/fix_encoding.py NO es un script desechable. Es la
+# herramienta permanente de saneamiento de codificacion del proyecto
+# (documentada en AGENTS.md 28.1 y Logs 507 / 852). Debe versionarse.
 
 # Temporales de agentes (raíz del proyecto)
 _tmp_*.txt

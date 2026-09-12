@@ -1,6 +1,6 @@
 # Tareas módulo 79 79-Legal-Contratos
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 43
 

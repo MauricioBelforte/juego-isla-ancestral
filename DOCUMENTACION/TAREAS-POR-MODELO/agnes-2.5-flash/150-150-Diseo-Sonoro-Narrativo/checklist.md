@@ -1,6 +1,6 @@
 # Tareas módulo 150 150-Diseo-Sonoro-Narrativo
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 53
 

@@ -1,6 +1,6 @@
 # Tareas módulo 132 132-Produccion-De-Equipo
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 42
 

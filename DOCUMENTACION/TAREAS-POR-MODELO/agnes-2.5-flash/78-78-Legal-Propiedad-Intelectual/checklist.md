@@ -1,6 +1,6 @@
 # Tareas módulo 78 78-Legal-Propiedad-Intelectual
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 23
 

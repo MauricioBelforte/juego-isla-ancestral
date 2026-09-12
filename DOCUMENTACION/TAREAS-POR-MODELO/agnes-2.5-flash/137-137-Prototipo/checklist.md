@@ -1,6 +1,6 @@
 # Tareas módulo 137 137-Prototipo
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 121
 

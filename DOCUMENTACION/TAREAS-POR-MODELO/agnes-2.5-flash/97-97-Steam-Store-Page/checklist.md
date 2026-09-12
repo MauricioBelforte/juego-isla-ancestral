@@ -1,6 +1,6 @@
 # Tareas módulo 97 97-Steam-Store-Page
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 66
 

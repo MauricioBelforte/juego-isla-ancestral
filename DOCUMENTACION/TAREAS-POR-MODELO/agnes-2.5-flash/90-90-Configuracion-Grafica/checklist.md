@@ -1,6 +1,6 @@
 # Tareas módulo 90 90-Configuracion-Grafica
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 180
 

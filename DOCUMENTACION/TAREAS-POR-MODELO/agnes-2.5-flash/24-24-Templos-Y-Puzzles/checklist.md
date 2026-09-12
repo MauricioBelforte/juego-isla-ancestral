@@ -1,6 +1,6 @@
 # Tareas módulo 24 24-Templos-Y-Puzzles
 
-**Estado:** ðŸŸ¡ Nucleo framework (QA Hy3/WorkBuddy)
+**Estado:** 🟡 Nucleo framework (QA Hy3/WorkBuddy)
 
 **Items pendientes:** 97
 

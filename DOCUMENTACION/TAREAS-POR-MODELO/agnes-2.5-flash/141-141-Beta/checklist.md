@@ -1,6 +1,6 @@
 # Tareas módulo 141 141-Beta
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 136
 

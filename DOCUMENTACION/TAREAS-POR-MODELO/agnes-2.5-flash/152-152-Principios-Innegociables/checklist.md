@@ -1,6 +1,6 @@
 # Tareas módulo 152 152-Principios-Innegociables
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 87
 

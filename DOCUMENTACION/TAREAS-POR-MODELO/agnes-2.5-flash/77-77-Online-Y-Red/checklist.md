@@ -1,6 +1,6 @@
 # Tareas módulo 77 77-Online-Y-Red
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 126
 

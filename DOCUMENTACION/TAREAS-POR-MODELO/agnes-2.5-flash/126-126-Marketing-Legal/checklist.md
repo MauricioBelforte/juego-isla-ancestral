@@ -1,6 +1,6 @@
 # Tareas módulo 126 126-Marketing-Legal
 
-**Estado:** ðŸŸ¢ Disponible
+**Estado:** 🟢 Disponible
 
 **Items pendientes:** 15
 

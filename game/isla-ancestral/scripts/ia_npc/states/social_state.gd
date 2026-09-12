@@ -1,5 +1,5 @@
 extends "res://scripts/ia_npc/states/base_state.gd"
-## M64: Social State ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â charla con otro NPC
+## M64: Social State — charla con otro NPC
 
 const PRIORITY: int = 20
 const GREET_DUR: float = 3.0
@@ -43,7 +43,7 @@ func tick(delta: float) -> void:
 		if vm != null:
 			var partner = vm.obtener_vecino(str(_social_partner))
 			if partner == null or not is_instance_valid(partner):
-				print("[Social] Partner desapareciÃƒÆ’Ã‚Â³")
+				print("[Social] Partner desapareció")
 				controller.get_state_machine().transition_to(&"Idle")
 				return
 	if controller != null:
@@ -55,6 +55,6 @@ func tick(delta: float) -> void:
 
 func exit() -> void:
 	if _social_partner != &"":
-		print("[Social] TerminÃƒÆ’Ã‚Â³ con %s" % _social_partner)
+		print("[Social] Terminó con %s" % _social_partner)
 	_social_partner = &""
 	print("[Social] Saliendo")
