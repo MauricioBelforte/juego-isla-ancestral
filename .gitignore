@@ -107,7 +107,9 @@ isla-modelo.jpg
 isla-modelo-2.jpg
 isla-modelo-3.jpg
 paleta-propuesta-isla.png
-docs/
+# `docs/` (raíz) SÍ se versiona: material complementario de M98/M101/M102/M111/M114.
+# Ver política en AGENTS.md §3. Solo se ignora el docs/ interno del proyecto Godot.
+game/isla-ancestral/docs/
 .github/
 tmp_*.py
 tmp_*.txt
