@@ -380,6 +380,15 @@ El bucle reservar → leer → implementar → testear → documentar → libera
 - **Agente `bucle-terreno`** (`.kilo/agent/bucle-terreno.md`, mode: primary, 200 pasos): variante de glm-5.3-flash.
 - **Agente `bucle`** (`.kilo/agent/bucle.md`, mode: all, 200 pasos): variante genérica para cualquier modelo — busca módulos con Recom = su propio modelo.
 - Cada modelo firma sus documentos y usa su identidad en las reservas (`Logs/reservas/{N}-{agente}-{MODULO}.txt`).
+
+**Identidad = por CHAT, no por plataforma** (aclarado por el usuario el 2026-09-13):
+
+WorkBuddy (y otras plataformas) **hospedan varios LLMs al mismo tiempo**, cada uno en **un chat distinto**. Consecuencias prácticas:
+
+1. **La identidad la define el chat, no la plataforma.** Firmar `WorkBuddy` no alcanza: hay que firmar el **modelo** (`Hy4`, `Hy3`, `DeepSeek-V4.1-Flash`, etc.). Hay agentes `Hy3` y `DeepSeek-V4.1-Flash` **reales y activos en otros chats** sobre este mismo repo.
+2. **Antes de firmar, confirmar qué modelo es el de *este* chat.** Si en algún momento se firmó con otro nombre, **corregir la firma** y dejar una nota de identidad en el log afectado; no reescribir el contenido.
+3. **Nunca reclamar ni editar la carpeta de backlog de otro modelo.** `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/` pertenece al agente de ese modelo: `HY4/` es del chat Hy4, `Hy3/` es del agente Hy3 y **no** se toca desde otro chat.
+4. **Impacto directo en el §21.8:** una firma equivocada puede hacer que un QA cruzado parezca válido cuando en realidad lo verificó el mismo agente que lo escribió. Ante la duda, citar el **Log** concreto en el que se apoya la atribución.
 - Al agotarse tokens en una sesión, el usuario (o el mismo modelo) reinicia `/bucle` — el estado continúa desde CHECKLIST-GLOBAL.md (fuente de verdad persistida).
 
 TODO agente que abra una sesión de este proyecto debe arrancar su trabajo con `/bucle` (o seguir el ciclo manual si su plataforma no tiene el comando).
@@ -815,6 +824,7 @@ Cuando un módulo queda `✅ Completado por [MODELO]`, **NO se considera definit
    - **Si está OK** → el módulo permanece `✅`. En `Notas`: `✅ Verificado por [MODELO-VERIFICADOR] YYYY-MM-DD`.
    - **Si encuentra fallos** → el módulo vuelve a `🟡 Con dudas`, se documentan los hallazgos en las `## Notas del Agente` (agregando al historial, sin borrar) y queda para que el siguiente agente lo corrija.
 4. **Regla de independencia:** el verificador debe ser un **modelo distinto** al que completó el módulo. Idealmente de otra plataforma (ej: si lo hizo Claude, que verifique DeepSeek o Gemini). Esto aprovecha que distintos modelos detectan errores distintos.
+   - **Ojo (identidad por chat):** dos agentes distintos pueden compartir plataforma (varios modelos corren en chats separados de WorkBuddy). Lo que vale es el **modelo**, no la plataforma; y la firma debe poder rastrearse a un **Log** concreto.
 
 ### 21.9 Herramientas de Automatización (Opcional)
 

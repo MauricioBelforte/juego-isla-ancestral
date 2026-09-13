@@ -2,8 +2,15 @@
 
 **Fecha:** 2026-09-12
 **Hora:** 14:01
-**Modelo:** Hy3 / WorkBuddy
+**Modelo:** Hy4 / WorkBuddy
 **Plataforma:** WorkBuddy (WorkBuddy AI)
+
+> **Nota de identidad (corregida el 2026-09-13, Log 880):** este log se firmó
+> originalmente como `Hy3 / WorkBuddy`. Es una atribución errónea: **Hy3 es otro
+> agente**, que trabaja en **otro chat** de WorkBuddy (al igual que DeepSeek-V4.1-Flash).
+> La identidad en este proyecto es **por chat, no por plataforma**: todo lo que se
+> produce en un chat pertenece al modelo de ese chat. El trabajo de este log es de
+> **Hy4 / WorkBuddy**. Se corrige la firma; el contenido no cambia.
 
 ## 0. Contexto y por qué esta tarea
 
@@ -143,4 +150,4 @@ Siguiente tarea transversal candidata, en orden de valor:
 3. Limpiar los 11 `~libvoxel*.TMP` (82 MB) en `addons/zylann.voxel/bin/`.
 
 ---
-**Firma:** Hy3 / WorkBuddy · 2026-09-12 14:01
+**Firma:** Hy4 / WorkBuddy · 2026-09-12 14:01
