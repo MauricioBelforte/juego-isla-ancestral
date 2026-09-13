@@ -144,79 +144,79 @@ jobs:
           # Generar Markdown
           md = f'''# Bug Metrics Dashboard — Isla Ancestral
 
-**Generado:** {now.strftime('%Y-%m-%d %H:%M:%S')} UTC
-**Workflow:** `.github/workflows/bug_metrics.yml`
-**Repo:** {os.environ['REPO']}
+          **Generado:** {now.strftime('%Y-%m-%d %H:%M:%S')} UTC
+          **Workflow:** `.github/workflows/bug_metrics.yml`
+          **Repo:** {os.environ['REPO']}
 
----
+          ---
 
-## Resumen General
+          ## Resumen General
 
-| Métrica | Valor |
-|---|---|
-| Bugs abiertos | {total_open} |
-| Bugs cerrados (total) | {total_closed} |
-| Críticos abiertos | {critical_open} 🔴 |
-| Mayores abiertos | {major_open} 🟠 |
-| Cerrados esta semana | {closed_this_week} |
-| Reabiertos esta semana | {reopened_this_week} |
-| Tasa de reapertura | {reopen_rate:.1f}% |
-| Bugs >30 días abiertos | {aging_bugs} |
+          | Métrica | Valor |
+          |---|---|
+          | Bugs abiertos | {total_open} |
+          | Bugs cerrados (total) | {total_closed} |
+          | Críticos abiertos | {critical_open} 🔴 |
+          | Mayores abiertos | {major_open} 🟠 |
+          | Cerrados esta semana | {closed_this_week} |
+          | Reabiertos esta semana | {reopened_this_week} |
+          | Tasa de reapertura | {reopen_rate:.1f}% |
+          | Bugs >30 días abiertos | {aging_bugs} |
 
----
+          ---
 
-## Por Severidad
+          ## Por Severidad
 
-| Severidad | Abiertos | Cerrados (total) | Tiempo promedio fix |
-|---|---|---|---|
-| Crítico 🔴 | {by_severity['critical']} | - | {avg_fix_critical:.1f}h |
-| Mayor 🟠 | {by_severity['major']} | - | {avg_fix_major:.1f}h |
-| Menor 🟡 | {by_severity['minor']} | - | - |
-| Trivial ⚪ | {by_severity['trivial']} | - | - |
+          | Severidad | Abiertos | Cerrados (total) | Tiempo promedio fix |
+          |---|---|---|---|
+          | Crítico 🔴 | {by_severity['critical']} | - | {avg_fix_critical:.1f}h |
+          | Mayor 🟠 | {by_severity['major']} | - | {avg_fix_major:.1f}h |
+          | Menor 🟡 | {by_severity['minor']} | - | - |
+          | Trivial ⚪ | {by_severity['trivial']} | - | - |
 
----
+          ---
 
-## Por Prioridad
+          ## Por Prioridad
 
-| Prioridad | Cuenta |
-|---|---|
-| Inmediata 🔥 | {by_priority['immediate']} |
-| Alta ⚡ | {by_priority['high']} |
-| Media 📌 | {by_priority['medium']} |
-| Baja 📝 | {by_priority['low']} |
+          | Prioridad | Cuenta |
+          |---|---|
+          | Inmediata 🔥 | {by_priority['immediate']} |
+          | Alta ⚡ | {by_priority['high']} |
+          | Media 📌 | {by_priority['medium']} |
+          | Baja 📝 | {by_priority['low']} |
 
----
+          ---
 
-## Por Categoría
+          ## Por Categoría
 
-| Categoría | Cuenta |
-|---|---|
-'''
+          | Categoría | Cuenta |
+          |---|---|
+          '''
 
           for cat, count in sorted(by_category.items(), key=lambda x: x[1], reverse=True):
               md += f'| {cat} | {count} |\n'
 
           md += f'''
----
+          ---
 
-## Por Estado
+          ## Por Estado
 
-| Estado | Cuenta |
-|---|---|
-| Nuevo | {by_status.get('new', 0)} |
-| En Progreso | {by_status.get('in-progress', 0)} |
-| Verificado | {by_status.get('verified', 0)} |
-| Cerrado | {by_status.get('closed', 0)} |
-| Wontfix | {by_status.get('wontfix', 0)} |
-| Duplicate | {by_status.get('duplicate', 0)} |
+          | Estado | Cuenta |
+          |---|---|
+          | Nuevo | {by_status.get('new', 0)} |
+          | En Progreso | {by_status.get('in-progress', 0)} |
+          | Verificado | {by_status.get('verified', 0)} |
+          | Cerrado | {by_status.get('closed', 0)} |
+          | Wontfix | {by_status.get('wontfix', 0)} |
+          | Duplicate | {by_status.get('duplicate', 0)} |
 
----
+          ---
 
-## Top 5 Módulos con más bugs
+          ## Top 5 Módulos con más bugs
 
-| Módulo | Bugs |
-|---|---
-'''
+          | Módulo | Bugs |
+          |---|---
+          '''
 
           for module, count in top_modules:
               md += f'| {module} | {count} |\n'
@@ -225,24 +225,24 @@ jobs:
               md += '| (sin datos) | 0 |\n'
 
           md += f'''
----
+          ---
 
-## Métricas de Calidad (KPIs)
+          ## Métricas de Calidad (KPIs)
 
-| KPI | Valor | Objetivo | Estado |
-|---|---|---|---|
-| Bug Rate (por 1K LOC) | *Calcular manualmente* | < 5 | - |
-| Fix Rate (bugs/semana) | {closed_this_week} | > 10 | {'✅' if closed_this_week >= 10 else '❌'} |
-| Reopen Rate | {reopen_rate:.1f}% | < 10% | {'✅' if reopen_rate < 10 else '❌'} |
-| Time to Fix (Crítico) | {avg_fix_critical:.1f}h | < 24h | {'✅' if avg_fix_critical < 24 else '❌'} |
-| Time to Fix (Mayor) | {avg_fix_major:.1f}h | < 72h | {'✅' if avg_fix_major < 72 else '❌'} |
-| Backlog Aging (>30d) | {aging_bugs} | < 5 | {'✅' if aging_bugs < 5 else '❌'} |
+          | KPI | Valor | Objetivo | Estado |
+          |---|---|---|---|
+          | Bug Rate (por 1K LOC) | *Calcular manualmente* | < 5 | - |
+          | Fix Rate (bugs/semana) | {closed_this_week} | > 10 | {'✅' if closed_this_week >= 10 else '❌'} |
+          | Reopen Rate | {reopen_rate:.1f}% | < 10% | {'✅' if reopen_rate < 10 else '❌'} |
+          | Time to Fix (Crítico) | {avg_fix_critical:.1f}h | < 24h | {'✅' if avg_fix_critical < 24 else '❌'} |
+          | Time to Fix (Mayor) | {avg_fix_major:.1f}h | < 72h | {'✅' if avg_fix_major < 72 else '❌'} |
+          | Backlog Aging (>30d) | {aging_bugs} | < 5 | {'✅' if aging_bugs < 5 else '❌'} |
 
----
+          ---
 
-## Alertas
+          ## Alertas
 
-'''
+          '''
 
           alerts = []
           if critical_open > 0:
@@ -261,10 +261,10 @@ jobs:
               md += '- ✅ Sin alertas activas\n'
 
           md += f'''
----
+          ---
 
-*Generado automáticamente por GitHub Actions. Próxima ejecución: próximo lunes 9:00 AM UTC.*
-'''
+          *Generado automáticamente por GitHub Actions. Próxima ejecución: próximo lunes 9:00 AM UTC.*
+          '''
 
           # Escribir archivo
           with open('docs/bug_metrics.md', 'w', encoding='utf-8') as f:
