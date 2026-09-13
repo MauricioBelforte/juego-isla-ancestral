@@ -26,6 +26,11 @@ docs/bug_metrics.md                       ← Dashboard de métricas (generado p
 > `DOCUMENTACION/`**, así que hoy son la única fuente de ese contenido.
 > La documentación nueva del proyecto se escribe en `DOCUMENTACION/` (AGENTS.md
 > §3), no en `docs/`.
+>
+> **Artefactos de CI:** `.github/ISSUE_TEMPLATE/bug_report.md`,
+> `.github/create_labels.sh` y `.github/workflows/bug_metrics.yml` **también
+> están versionados** desde 2026-09-13 (antes quedaban fuera de git por un
+> `.github/` genérico en `.gitignore`).
 
 ## 3. Contratos de integración
 

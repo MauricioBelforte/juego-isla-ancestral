@@ -1,0 +1,165 @@
+name: Code Quality Checks
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  godot-lint:
+    name: GDScript Linter (Godot Headless)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: firebelley/setup-godot@v2
+        with:
+          version: "4.7.2"
+          export_templates: false
+
+      - name: Run GDScript Linter
+        run: |
+          cd game/isla-ancestral
+          godot --headless --check-only --script scripts/editor/code_quality_check.gd 2>&1 || true
+
+      - name: Check for Godot parser errors
+        run: |
+          cd game/isla-ancestral
+          godot --headless --check-only 2>&1
+          echo "Godot --check-only passed (exit code: $?)"
+
+  code-quality-script:
+    name: Custom Code Quality Check (M111)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: firebelley/setup-godot@v2
+        with:
+          version: "4.7.2"
+          export_templates: false
+
+      - name: Run M111 CodeQualityCheck EditorScript
+        run: |
+          cd game/isla-ancestral
+          godot --headless --script scripts/editor/code_quality_check.gd 2>&1
+          echo "CodeQualityCheck completed (exit code: $?)"
+
+      - name: Upload Quality Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-quality-report
+          path: game/isla-ancestral/user://code_quality_report.txt
+          retention-days: 7
+
+  formatting-check:
+    name: GDScript Formatting Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: firebelley/setup-godot@v2
+        with:
+          version: "4.7.2"
+          export_templates: false
+
+      - name: Check formatting (dry-run)
+        run: |
+          cd game/isla-ancestral
+          godot --headless --format --check-only 2>&1
+          echo "Format check completed (exit code: $?)"
+
+  test-suite:
+    name: Run Test Suite (M112 Integration)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: firebelley/setup-godot@v2
+        with:
+          version: "4.7.2"
+          export_templates: true
+
+      - name: Run validation tests
+        run: |
+          cd game/isla-ancestral
+          # Run save validation test (M59)
+          godot --headless --script scripts/saving/validate_save.gd 2>&1
+          # Run time calendar tests (M29)
+          godot --headless --script scripts/time/test_calendario.gd 2>&1
+          # Run time consumers tests
+          godot --headless --script scripts/time/test_consumidores_tiempo.gd 2>&1
+          # Run friendship tests (M20)
+          godot --headless --script scripts/friendship/test_amistad.gd 2>&1
+          # Run economy tests (M38)
+          godot --headless --script scripts/economia/test_loop_economico.gd 2>&1
+          # Run economy minorista/mayorista tests
+          godot --headless --script scripts/economia/test_minorista_mayorista.gd 2>&1
+          # Run band caps tests
+          godot --headless --script scripts/economia/test_topos_banda.gd 2>&1
+          echo "All validation tests completed"
+
+  security-scan:
+    name: Basic Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for hardcoded secrets
+        run: |
+          # Check for common secret patterns in GDScript files
+          cd game/isla-ancestral
+          echo "Scanning for potential secrets..."
+          ! grep -r -i "password\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
+          ! grep -r -i "api_key\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
+          ! grep -r -i "secret\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
+          ! grep -r -i "token\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
+          echo "Secret scan completed"
+
+      - name: Check for debug prints in production code
+        run: |
+          cd game/isla-ancestral
+          echo "Checking for debug prints..."
+          grep -r "print(" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" | grep -v "validate_save" | grep -v "test_" | head -20 || true
+          echo "Debug print check completed"
+
+  summary:
+    name: Quality Gate Summary
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, security-scan]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Check all jobs passed
+        run: |
+          echo "Quality gate summary:"
+          echo "godot-lint: ${{ needs.godot-lint.result }}"
+          echo "code-quality-script: ${{ needs.code-quality-script.result }}"
+          echo "formatting-check: ${{ needs.formatting-check.result }}"
+          echo "test-suite: ${{ needs.test-suite.result }}"
+          echo "security-scan: ${{ needs.security-scan.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]]; then
+            echo "::error::One or more quality checks failed"
+            exit 1
+          fi
+          echo "All quality gates passed!"

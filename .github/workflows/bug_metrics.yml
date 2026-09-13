@@ -1,0 +1,284 @@
+name: Bug Metrics Dashboard
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Cada lunes a las 9:00 AM
+  workflow_dispatch:     # Permitir ejecución manual
+
+permissions:
+  contents: write        # Para hacer commit del archivo generado
+  issues: read           # Para leer issues
+
+jobs:
+  generate-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml github3.py
+
+      - name: Generate bug metrics
+        id: metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          python << 'EOF'
+          import os
+          import json
+          from datetime import datetime, timedelta
+          from github import Github
+
+          g = Github(os.environ['GITHUB_TOKEN'])
+          repo = g.get_repo(os.environ['REPO'])
+
+          # Obtener issues con label "bug"
+          bugs = list(repo.get_issues(labels=['bug'], state='all'))
+
+          now = datetime.now()
+          thirty_days_ago = now - timedelta(days=30)
+          seven_days_ago = now - timedelta(days=7)
+
+          # Contadores
+          total_open = 0
+          total_closed = 0
+          by_severity = {'critical': 0, 'major': 0, 'minor': 0, 'trivial': 0}
+          by_priority = {'immediate': 0, 'high': 0, 'medium': 0, 'low': 0}
+          by_category = {}
+          by_status = {'new': 0, 'in-progress': 0, 'verified': 0, 'closed': 0, 'wontfix': 0, 'duplicate': 0}
+          by_module = {}
+          critical_open = 0
+          major_open = 0
+
+          closed_this_week = 0
+          reopened_this_week = 0
+          fix_times_critical = []
+          fix_times_major = []
+
+          for issue in bugs:
+              labels = [l.name for l in issue.labels]
+
+              # Estado
+              status_labels = [l for l in labels if l.startswith('status:')]
+              status = status_labels[0].replace('status:', '') if status_labels else 'new'
+              by_status[status] = by_status.get(status, 0) + 1
+
+              if issue.state == 'open':
+                  total_open += 1
+              else:
+                  total_closed += 1
+                  # Tiempo de fix para cerrados recientes
+                  if issue.closed_at and issue.closed_at > seven_days_ago:
+                      closed_this_week += 1
+                      # Verificar si se reabrió (buscar eventos)
+                      try:
+                          events = list(issue.get_events())
+                          for event in events:
+                              if event.event == 'reopened' and event.created_at > seven_days_ago:
+                                  reopened_this_week += 1
+                      except:
+                          pass
+
+              # Severidad
+              for sev in ['critical', 'major', 'minor', 'trivial']:
+                  if f'severity:{sev}' in labels:
+                      by_severity[sev] += 1
+                      if issue.state == 'open':
+                          if sev == 'critical':
+                              critical_open += 1
+                          elif sev == 'major':
+                              major_open += 1
+
+              # Prioridad
+              for pri in ['immediate', 'high', 'medium', 'low']:
+                  if f'priority:{pri}' in labels:
+                      by_priority[pri] += 1
+
+              # Categoría
+              for label in labels:
+                  if label.startswith('category:'):
+                      cat = label.replace('category:', '')
+                      by_category[cat] = by_category.get(cat, 0) + 1
+
+              # Módulos (desde referencias en el body)
+              if issue.body:
+                  import re
+                  modules = re.findall(r'M\d+', issue.body)
+                  for m in modules:
+                      by_module[m] = by_module.get(m, 0) + 1
+
+              # Tiempo de fix para críticos y mayores cerrados
+              if issue.state == 'closed' and issue.closed_at and issue.created_at:
+                  fix_time = (issue.closed_at - issue.created_at).total_seconds() / 3600  # horas
+                  for sev in ['critical', 'major']:
+                      if f'severity:{sev}' in labels:
+                          if sev == 'critical':
+                              fix_times_critical.append(fix_time)
+                          else:
+                              fix_times_major.append(fix_time)
+
+          # Calcular promedios
+          avg_fix_critical = sum(fix_times_critical) / len(fix_times_critical) if fix_times_critical else 0
+          avg_fix_major = sum(fix_times_major) / len(fix_times_major) if fix_times_major else 0
+          reopen_rate = (reopened_this_week / closed_this_week * 100) if closed_this_week > 0 else 0
+
+          # Top 5 módulos
+          top_modules = sorted(by_module.items(), key=lambda x: x[1], reverse=True)[:5]
+
+          # Bugs aging (>30 días abiertos)
+          aging_bugs = 0
+          for issue in bugs:
+              if issue.state == 'open' and issue.created_at < thirty_days_ago:
+                  aging_bugs += 1
+
+          # Generar Markdown
+          md = f'''# Bug Metrics Dashboard — Isla Ancestral
+
+**Generado:** {now.strftime('%Y-%m-%d %H:%M:%S')} UTC
+**Workflow:** `.github/workflows/bug_metrics.yml`
+**Repo:** {os.environ['REPO']}
+
+---
+
+## Resumen General
+
+| Métrica | Valor |
+|---|---|
+| Bugs abiertos | {total_open} |
+| Bugs cerrados (total) | {total_closed} |
+| Críticos abiertos | {critical_open} 🔴 |
+| Mayores abiertos | {major_open} 🟠 |
+| Cerrados esta semana | {closed_this_week} |
+| Reabiertos esta semana | {reopened_this_week} |
+| Tasa de reapertura | {reopen_rate:.1f}% |
+| Bugs >30 días abiertos | {aging_bugs} |
+
+---
+
+## Por Severidad
+
+| Severidad | Abiertos | Cerrados (total) | Tiempo promedio fix |
+|---|---|---|---|
+| Crítico 🔴 | {by_severity['critical']} | - | {avg_fix_critical:.1f}h |
+| Mayor 🟠 | {by_severity['major']} | - | {avg_fix_major:.1f}h |
+| Menor 🟡 | {by_severity['minor']} | - | - |
+| Trivial ⚪ | {by_severity['trivial']} | - | - |
+
+---
+
+## Por Prioridad
+
+| Prioridad | Cuenta |
+|---|---|
+| Inmediata 🔥 | {by_priority['immediate']} |
+| Alta ⚡ | {by_priority['high']} |
+| Media 📌 | {by_priority['medium']} |
+| Baja 📝 | {by_priority['low']} |
+
+---
+
+## Por Categoría
+
+| Categoría | Cuenta |
+|---|---|
+'''
+
+          for cat, count in sorted(by_category.items(), key=lambda x: x[1], reverse=True):
+              md += f'| {cat} | {count} |\n'
+
+          md += f'''
+---
+
+## Por Estado
+
+| Estado | Cuenta |
+|---|---|
+| Nuevo | {by_status.get('new', 0)} |
+| En Progreso | {by_status.get('in-progress', 0)} |
+| Verificado | {by_status.get('verified', 0)} |
+| Cerrado | {by_status.get('closed', 0)} |
+| Wontfix | {by_status.get('wontfix', 0)} |
+| Duplicate | {by_status.get('duplicate', 0)} |
+
+---
+
+## Top 5 Módulos con más bugs
+
+| Módulo | Bugs |
+|---|---
+'''
+
+          for module, count in top_modules:
+              md += f'| {module} | {count} |\n'
+
+          if not top_modules:
+              md += '| (sin datos) | 0 |\n'
+
+          md += f'''
+---
+
+## Métricas de Calidad (KPIs)
+
+| KPI | Valor | Objetivo | Estado |
+|---|---|---|---|
+| Bug Rate (por 1K LOC) | *Calcular manualmente* | < 5 | - |
+| Fix Rate (bugs/semana) | {closed_this_week} | > 10 | {'✅' if closed_this_week >= 10 else '❌'} |
+| Reopen Rate | {reopen_rate:.1f}% | < 10% | {'✅' if reopen_rate < 10 else '❌'} |
+| Time to Fix (Crítico) | {avg_fix_critical:.1f}h | < 24h | {'✅' if avg_fix_critical < 24 else '❌'} |
+| Time to Fix (Mayor) | {avg_fix_major:.1f}h | < 72h | {'✅' if avg_fix_major < 72 else '❌'} |
+| Backlog Aging (>30d) | {aging_bugs} | < 5 | {'✅' if aging_bugs < 5 else '❌'} |
+
+---
+
+## Alertas
+
+'''
+
+          alerts = []
+          if critical_open > 0:
+              alerts.append(f'🔴 **{critical_open} bugs CRÍTICOS abiertos** — Requieren atención inmediata')
+          if major_open > 5:
+              alerts.append(f'🟠 **{major_open} bugs MAYORES abiertos** — Revisar capacidad del sprint')
+          if reopen_rate > 10:
+              alerts.append(f'⚠️ **Tasa de reapertura {reopen_rate:.1f}%** — Supera objetivo 10%')
+          if aging_bugs > 5:
+              alerts.append(f'📅 **{aging_bugs} bugs con >30 días abiertos** — Revisar backlog')
+
+          if alerts:
+              for alert in alerts:
+                  md += f'- {alert}\n'
+          else:
+              md += '- ✅ Sin alertas activas\n'
+
+          md += f'''
+---
+
+*Generado automáticamente por GitHub Actions. Próxima ejecución: próximo lunes 9:00 AM UTC.*
+'''
+
+          # Escribir archivo
+          with open('docs/bug_metrics.md', 'w', encoding='utf-8') as f:
+              f.write(md)
+
+          print("Métricas generadas en docs/bug_metrics.md")
+          print(f"Total bugs: {len(bugs)}")
+          print(f"Abiertos: {total_open}, Cerrados: {total_closed}")
+          EOF
+
+      - name: Commit and push metrics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/bug_metrics.md
+          git diff --staged --quiet || git commit -m "docs: actualizar bug metrics dashboard [skip ci]"
+          git push

@@ -1,0 +1,94 @@
+name: Testing Suite
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Godot Tests (GdUnit4)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_version: 4.7.2  # Fix 2026-09-02 (deepseek-v4-flash-vision-exp): el proyecto es 4.7.2
+          template_version: 4.3
+          relative_project_path: game/isla-ancestral
+
+      - name: Cache GdUnit4 addon
+        uses: actions/cache@v4
+        with:
+          path: game/isla-ancestral/addons/gdUnit4
+          key: gdunit4-${{ hashFiles('game/isla-ancestral/addons/gdUnit4/**') }}
+          restore-keys: |
+            gdunit4-
+
+      - name: Run tests
+        run: |
+          cd game/isla-ancestral
+          godot --headless -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd --path res://tests --verbose
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            game/isla-ancestral/user://gdunit-*.xml
+            game/isla-ancestral/tests/output/
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: game/isla-ancestral/user://coverage/
+
+  lint:
+    name: GDScript Lint & Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_version: 4.7.2  # Fix 2026-09-02 (deepseek-v4-flash-vision-exp): el proyecto es 4.7.2
+          template_version: 4.3
+          relative_project_path: game/isla-ancestral
+
+      - name: Check formatting
+        run: |
+          cd game/isla-ancestral
+          godot --headless --check-only --format-check
+
+      - name: Run static analysis (CodeQualityCheck)
+        run: |
+          cd game/isla-ancestral
+          godot --headless --script res://scripts/editor/code_quality_check.gd
+
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [test, lint]
+    if: always()
+    steps:
+      - name: Check test results
+        run: |
+          echo "All quality checks passed!"
+          echo "Tests: ${{ needs.test.result }}"
+          echo "Lint: ${{ needs.lint.result }}"
+          if [ "${{ needs.test.result }}" != "success" ] || [ "${{ needs.lint.result }}" != "success" ]; then
+            exit 1
+          fi

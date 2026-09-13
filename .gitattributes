@@ -1,0 +1,5 @@
+# Forzar LF en el script de labels de M102: con CRLF se rompe al ejecutarlo
+# en CI/Linux o en Git Bash ("\r: command not found").
+# Alcance deliberadamente mínimo (un solo archivo): no se normaliza el resto
+# del repo para no generar ruido a los agentes que trabajan en paralelo.
+.github/create_labels.sh text eol=lf

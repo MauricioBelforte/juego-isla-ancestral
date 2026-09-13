@@ -1,0 +1,109 @@
+# Backup externo del repositorio — Módulo M107
+# Estrategia 3-2-1: GitHub (copia 1) + backup tar.gz subido a Google Drive (copia 2, offsite).
+# Copia 3 (física) la hace backup_local.ps1 vía Task Scheduler en la máquina dev.
+#
+# GUARD DE SECRETS: si GDRIVE_TOKEN / GDRIVE_CLIENT_ID / GDRIVE_CLIENT_SECRET no están
+# configurados, el workflow NO falla — genera el artefacto y salta la subida, dejando
+# el aviso en el resumen. Así el pipeline nunca se rompe mientras el usuario configura
+# Google Drive (checklist sección M).
+#
+# Artefacto: backup_YYYYMMDD.tar.gz (retención en GitHub: 30 días por la política del
+# artefacto; los .tar.gz de AppData de saves NO se incluyen aquí — solo el repo).
+
+name: Backup Externo
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Diario a las 2 AM UTC
+  workflow_dispatch:      # Ejecución manual
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0   # historial completo (backup de todos los branches)
+
+      - name: Detectar secrets de Google Drive
+        id: secrets_check
+        env:
+          GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+        run: |
+          if [ -n "$GDRIVE_TOKEN" ] && [ -n "$GDRIVE_CLIENT_ID" ] && [ -n "$GDRIVE_CLIENT_SECRET" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+            echo "Secrets de Google Drive detectados."
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Secrets GDRIVE_* no configurados. Se genera el backup como artefacto y se SALTA la subida a Drive."
+          fi
+
+      - name: Crear backup tar.gz del repositorio
+        run: |
+          STAMP=$(date +%Y%m%d)
+          tar -czf "backup_${STAMP}.tar.gz" \
+            --exclude-vcs-ignores \
+            --exclude='.godot' \
+            --exclude='tools/mcp/.venv' \
+            --exclude='tools/mcp/blender-mcp' \
+            --exclude='tools/mcp/godot-mcp/capturas' \
+            .
+          ls -lh "backup_${STAMP}.tar.gz"
+          sha256sum "backup_${STAMP}.tar.gz" > "backup_${STAMP}.tar.gz.sha256"
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+
+      - name: Subir artefacto del backup (retención GitHub 30 días)
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup_${{ env.STAMP }}
+          path: |
+            backup_${{ env.STAMP }}.tar.gz
+            backup_${{ env.STAMP }}.tar.gz.sha256
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Setup rclone
+        if: steps.secrets_check.outputs.available == 'true'
+        run: |
+          curl https://rclone.org/install.sh | sudo bash
+
+      - name: Configurar rclone con secrets
+        if: steps.secrets_check.outputs.available == 'true'
+        run: |
+          # rclone config create con pares clave=valor (config pass es solo para passwords)
+          rclone config create gdrive drive \
+            token="$GDRIVE_TOKEN" \
+            client_id="$GDRIVE_CLIENT_ID" \
+            client_secret="$GDRIVE_CLIENT_SECRET"
+          rclone listremotes | grep -q '^gdrive:' && echo 'rclone gdrive configurado.'
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_TOKEN: ${{ secrets.GDRIVE_TOKEN }}
+
+      - name: Subir a Google Drive (isla-ancestral-backups/diario)
+        if: steps.secrets_check.outputs.available == 'true'
+        run: |
+          rclone mkdir gdrive:isla-ancestral-backups/diario
+          rclone copy "backup_${STAMP}.tar.gz" gdrive:isla-ancestral-backups/diario/
+          rclone copy "backup_${STAMP}.tar.gz.sha256" gdrive:isla-ancestral-backups/diario/
+          # Retención en Drive: mantener últimos 30 diarios
+          rclone delete gdrive:isla-ancestral-backups/diario --min-age 30d 2>/dev/null || true
+
+      - name: Resumen
+        if: always()
+        run: |
+          echo "### Backup M107 — Resumen" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Artefacto: \`backup_${STAMP}.tar.gz\` (retención GitHub: 30 días)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.secrets_check.outputs.available }}" = "true" ]; then
+            echo "- Subido a Google Drive: isla-ancestral-backups/diario/" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- ⚠️ Subida a Drive **saltada** (secrets GDRIVE_* no configurados). Ver docs/backup_gdrive_setup.md" >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -1,0 +1,150 @@
+name: Release Build (M118 CI-CD)
+
+# M118 iter 2 (minimax-m3): pipeline de release.
+# Trigger: tag push vX.Y.Z (semver) o manual workflow_dispatch.
+# Steps: checkout, setup Godot 4.7.2, run tests, lint, build release por plataforma,
+# generar SHA256, crear release zip, opcionalmente subir a GitHub Releases.
+# Salida: binarios release + checksums + draft release.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version semver (default: extraer del tag o usar "0.0.0-dev")'
+        required: false
+        type: string
+        default: '0.0.0-dev'
+      platforms:
+        description: 'Plataformas a compilar (Linux,Windows,Mac,All)'
+        required: false
+        type: choice
+        default: 'Linux'
+        options:
+          - Linux
+          - Windows
+          - Mac
+          - All
+
+jobs:
+  test:
+    name: Pre-release Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_version: 4.7.2
+          template_version: 4.3
+          relative_project_path: game/isla-ancestral
+      - name: Run tests
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          python tools/ci/run_tests.py --out out/ci-report-release.json
+      - name: Run lint
+        run: |
+          python tools/ci/lint_check.py
+
+  build:
+    name: Build Release (${{ matrix.label }})
+    runs-on: ubuntu-latest
+    needs: [test]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { label: 'Linux/X11', export: 'Linux/X11', ext: 'x86_64' }
+          - { label: 'Windows Desktop', export: 'Windows Desktop', ext: 'exe' }
+          - { label: 'macOS', export: 'macOS', ext: 'app' }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_version: 4.7.2
+          template_version: 4.3
+          relative_project_path: game/isla-ancestral
+      - name: Build release binary
+        run: |
+          cd game/isla-ancestral
+          mkdir -p build/release
+          VERSION="${{ github.event.inputs.version || github.ref_name || '0.0.0-dev' }}"
+          godot --headless --path . --export-release "${{ matrix.export }}" "build/release/IslaAncestral-$VERSION.${{ matrix.ext }}" || \
+            godot --headless --path . --export-debug "${{ matrix.export }}" "build/release/IslaAncestral-$VERSION.${{ matrix.ext }}"
+          ls -la build/release/
+      - name: Generate SHA256 checksum
+        run: |
+          cd game/isla-ancestral/build/release
+          sha256sum * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+      - name: Upload release artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.label }}
+          path: |
+            game/isla-ancestral/build/release/
+          retention-days: 14
+
+  checksum:
+    name: Combined Checksums
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all release artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Generate combined checksums
+        if: always()
+        run: |
+          cd artifacts || exit 0
+          find . -name 'SHA256SUMS.txt' -exec cat {} \;
+          if find . -name '*.x86_64' -o -name '*.exe' -o -name '*.app' | head -1 > /dev/null; then
+            find . \( -name '*.x86_64' -o -name '*.exe' -o -name '*.app' -o -name '*.zip' \) -exec sha256sum {} \; > combined_sha256.txt
+            cat combined_sha256.txt
+          fi
+      - name: Upload combined checksums
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-checksums
+          path: combined_sha256.txt
+          retention-days: 30
+
+  release-notes:
+    name: Generate Release Notes
+    runs-on: ubuntu-latest
+    needs: [build, checksum]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate changelog
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          # Genera notas simples con los commits desde el tag anterior
+          PREV_TAG=$(git tag --sort=-v:refname | grep -B1 "$(git rev-list -n 1 $GITHUB_REF_NAME)" | head -1 || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            NOTES=$(git log "$PREV_TAG..$GITHUB_REF_NAME" --pretty=format:"- %s")
+          else
+            NOTES=$(git log --pretty=format:"- %s" -n 20)
+          fi
+          cat > RELEASE_NOTES.md <<EOF
+          # Release $VERSION
+          
+          $NOTES
+          EOF
+          cat RELEASE_NOTES.md
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Isla Ancestral ${{ github.ref_name }}"
+          body_path: RELEASE_NOTES.md
+          draft: true
+          generate_release_notes: false
