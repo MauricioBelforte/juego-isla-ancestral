@@ -1,4 +1,4 @@
-﻿# CHECKLIST — Objetos a Crear en Blender (por Módulo)
+# CHECKLIST — Objetos a Crear en Blender (por Módulo)
 
 **Modelo:** GLM
 **Plataforma:** Cline
