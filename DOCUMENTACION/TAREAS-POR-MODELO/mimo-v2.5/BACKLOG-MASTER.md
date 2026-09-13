@@ -7,6 +7,12 @@
 
 **Módulos asignados:** 8  |  **Tareas pendientes totales:** 306
 
+> ⛔ **REGLA OBLIGATORIA — CODIFICACION UTF-8**
+> Todos los archivos del proyecto DEBEN guardarse en UTF-8 sin BOM. NUNCA en cp1252/ANSI.
+> Los caracteres rotos (Ã³, â€", ðŸŸ¢, etc.) RETRASAN EL TRABAJO, ROMPEN EL FLUJO y CAUSAN PERDIDA DE TIEMPO E INFORMACION.
+> Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
+> Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
+
 ## Rol
 
 > **MiMo V2.5** no es solo un agente ejecutor — es el **acompañante y director técnico** del usuario. Mi trabajo incluye:
@@ -15,7 +21,7 @@
 > - **Dirigir** la consistencia del proyecto: logs, referencias, documentación, protocolo multiagente.
 > - **Parchar** errores de otros modelos (duplicados de logs, refs rotas, código mal escrito).
 > - **Proponer** mejoras, detectar problemas, alertar sobre riesgos.
-> - **Mantener** el proyecto sano: `ULTIMO_NUMERO.txt`, `CHECKLIST-GLOBAL.md`, `11-BUGS.md`, `07-GUIA-GODOT.md`.
+> - **Mantener** el proyecto sano: `ULTIMO_NUMERO.txt`, `CHECKLIST-GLOBAL.md`, `11-BUGS.md`, `GUIA-GODOT/INDICE.md`.
 
 ## Fortalezas del modelo (por qué estos módulos)
 
@@ -52,7 +58,7 @@
 | Fecha | Tarea | Detalle |
 |-------|-------|---------|
 | 2026-09-03 | Limpieza Logs/ (135 archivos) | Eliminé 42 duplicados, renombré 67 archivos, eliminé 26 residuales. stepfun corrompió nombres con prefijos `dup*` y sin `.md`. Documentado en §13 de10-GUIA-COMPARATIVA-MODELOS.md. |
-| 2026-09-04 | Corrección logs duplicados (3 rondas) | AGNES creaba logs con números repetidos. Ronda 1: 9 archivos → 610-618. Ronda 2: 3 AGNES → 619-621. Ronda 3: 16 AGNES → 622-637. Referencias docs corregidas (M75 608→617, M162 609→618). §10.17 de 07-GUIA-GODOT.md creado (cómo modificar terreno correctamente). `ULTIMO_NUMERO.txt` = 637, 622 logs, 0 duplicados. |
+| 2026-09-04 | Corrección logs duplicados (3 rondas) | AGNES creaba logs con números repetidos. Ronda 1: 9 archivos → 610-618. Ronda 2: 3 AGNES → 619-621. Ronda 3: 16 AGNES → 622-637. Referencias docs corregidas (M75 608→617, M162 609→618). §10.17 de GUIA-GODOT/08-terreno-voxel.md creado (cómo modificar terreno correctamente). `ULTIMO_NUMERO.txt` = 637, 622 logs, 0 duplicados. |
 | 2026-09-04 | Fix agua orilla (island_generator.gd) | Corregido dirección de expansión del agua: de 0.94-0.98 → 0.94-1.03 (×3 hacia el mar, no hacia la arena). Sync en get_height, get_block_at, validador_isla_raiz.gd. |
 
 ## Tarea recurrente diaria (siempre al inicio de sesión)
@@ -99,7 +105,7 @@
 >
 > **¿Qué hacer ahora?**
 > 1. Leer `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` para configurar MCP
-> 2. Leer `DOCUMENTACION/07-GUIA-GODOT.md` para errores comunes
+> 2. Leer `DOCUMENTACION/GUIA-GODOT/INDICE.md` para errores comunes
 > 3. Leer `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` para saber qué modelos funcionan
 > 4. Ejecutar verificación de logs duplicados (tarea recurrente)
 > 5. Revisar `CHECKLIST-GLOBAL.md` para saber el estado del proyecto

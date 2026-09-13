@@ -6,6 +6,12 @@
 
 > Metodologia TAREAS-POR-MODELO (ver GUIA-METODOLOGIA.md). Total de tareas iniciales: **305** en 4 modulos. Modelo data-driven V0 complejidad 1-3, sin vision.
 
+> ⛔ **REGLA OBLIGATORIA — CODIFICACION UTF-8**
+> Todos los archivos del proyecto DEBEN guardarse en UTF-8 sin BOM. NUNCA en cp1252/ANSI.
+> Los caracteres rotos (Ã³, â€", ðŸŸ¢, etc.) RETRASAN EL TRABAJO, ROMPEN EL FLUJO y CAUSAN PERDIDA DE TIEMPO E INFORMACION.
+> Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
+> Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
+
 ## Identidad
 
 **minimax-m3-free** sobre **Kilo Code** (autoevaluacion en DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md §6).

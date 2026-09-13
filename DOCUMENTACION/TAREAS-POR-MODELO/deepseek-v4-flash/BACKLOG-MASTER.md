@@ -17,6 +17,12 @@
 
 **Total tareas: 1386** (pendientes 911, completadas 454, dudas 21)
 
+> ⛔ **REGLA OBLIGATORIA — CODIFICACION UTF-8**
+> Todos los archivos del proyecto DEBEN guardarse en UTF-8 sin BOM. NUNCA en cp1252/ANSI.
+> Los caracteres rotos (Ã³, â€", ðŸŸ¢, etc.) RETRASAN EL TRABAJO, ROMPEN EL FLUJO y CAUSAN PERDIDA DE TIEMPO E INFORMACION.
+> Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
+> Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
+
 ## Orden de prioridad (regla §5 de la guía)
 1. Módulos con núcleo existente (verificación rápida): 103, 105, 87
 2. Dependencia resuelta: 110 (dep 109✅), 115 (dep 61✅), 116 (dep 117✅), 54 (dep 08✅), 101 (dep 110/112/114)
