@@ -19,6 +19,14 @@ docs/bug_tracking_guide.md                ← Guía para testers y desarrollador
 docs/bug_metrics.md                       ← Dashboard de métricas (generado por workflow)
 ```
 
+> **Nota de ubicación (`docs/`).** `docs/bug_tracking_guide.md` y
+> `docs/bug_metrics.md` **existen y están versionados** desde 2026-09-13 (antes
+> quedaban fuera de git por un `docs/` genérico en `.gitignore`). Son material
+> **complementario** de consulta para quien trabaje en M102; **no hay copia en
+> `DOCUMENTACION/`**, así que hoy son la única fuente de ese contenido.
+> La documentación nueva del proyecto se escribe en `DOCUMENTACION/` (AGENTS.md
+> §3), no en `docs/`.
+
 ## 3. Contratos de integración
 
 ### Entrada (desde otros módulos)

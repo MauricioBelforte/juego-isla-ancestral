@@ -13,6 +13,13 @@
 | `marketing/trailer/lanzamiento/*` | Idem + llaves de fecha |
 | `marketing/trailer/licencias/*` | Actas de derechos por track (M84) |
 | `marketing/trailer/thumbnails/*` | Miniaturas por tráiler |
+| `docs/marketing/guion-trailer.md` | **Guion del tráiler (material complementario versionado)** — entrega del Log 421 |
+
+> **Nota de ubicación (`docs/`).** `docs/marketing/guion-trailer.md` **existe y
+> está versionado** desde 2026-09-13. Es material **complementario** de consulta
+> para quien trabaje en M98; **no hay copia en `DOCUMENTACION/`**. La
+> documentación nueva del proyecto se escribe en
+> `DOCUMENTACION/98-Trailer/plan-actual/` (AGENTS.md §3), no en `docs/`.
 
 ### 1.2 Herramientas para capturar gameplay
 | Herramienta | Uso |

@@ -53,6 +53,16 @@ scripts/data/
 .github/workflows/code_quality.yml      → CI para calidad de código
 ```
 
+> **Nota de ubicación (`docs/`).** `docs/codigo_de_calidad/` **existe y está
+> versionado** desde 2026-09-13, pero hoy contiene únicamente
+> `checklist_commit.md` y `deuda_tecnica.md` (faltan `guia_estilo_gdscript.md` y
+> `proceso_code_review.md`). La guía de desarrolladores vive en
+> **`docs/developers/guia_desarrolladores.md`**, no dentro de
+> `docs/codigo_de_calidad/`. Es material **complementario** de consulta para
+> quien trabaje en M111; **no hay copia en `DOCUMENTACION/`**.
+> La documentación nueva del proyecto se escribe en `DOCUMENTACION/` (AGENTS.md
+> §3), no en `docs/`.
+
 ## 3. Contratos de integración
 
 ### Salida (hacia otros módulos)

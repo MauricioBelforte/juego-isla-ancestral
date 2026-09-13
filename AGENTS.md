@@ -52,6 +52,22 @@ La documentación detallada de temas de Blender (bpy, modelado, exportación) es
 
 La documentación vive dentro de `DOCUMENTACION/`. La raíz del proyecto solo contiene `AGENTS.md`, `README.md`, `CHECKLIST-GLOBAL.md`, y configuraciones generales.
 
+### `docs/` (raíz) — Material complementario, NO es la metodología oficial
+
+Existe además una carpeta **`docs/`** en la raíz, creada por agentes en iteraciones anteriores (2026-08-28 → 2026-09-02) y **versionada desde 2026-09-13** (antes quedaba fuera de git por un patrón `docs/` genérico en `.gitignore`). Reglas:
+
+1. **NO es el destino de documentación nueva.** La documentación del proyecto se escribe en `DOCUMENTACION/`, siguiendo la metodología de esta sección 3. Ningún agente debe crear documentación nueva dentro de `docs/`.
+2. **SÍ se puede consultar.** `docs/` es material **complementario** válido de apoyo si trabajas en un módulo relacionado:
+   | Ruta | Módulo | Origen |
+   |------|--------|--------|
+   | `docs/qa/` | M101 QA-General | Log 509 — ⚠️ **hay copia canónica** en `DOCUMENTACION/101-QA-General/plan-actual/` (más extensa); la de `docs/` queda como histórico |
+   | `docs/bug_tracking_guide.md`, `docs/bug_metrics.md` | M102 Bug-Tracking | M102 — única copia |
+   | `docs/codigo_de_calidad/`, `docs/developers/` | M111 Código de Calidad | Log 26 — única copia |
+   | `docs/playtest/` | M114 Playtest | Log 481 — única copia |
+   | `docs/marketing/guion-trailer.md` | M98 Trailer | Log 421 — única copia |
+3. **NO duplicar trabajo.** Antes de redactar algo que ya exista en `docs/`, compruébalo. Si el contenido ya está: amplíalo en el plan del módulo (`DOCUMENTACION/{ID-Módulo}-{Nombre}/plan-actual/`) y referencia `docs/` como apoyo. Si `docs/` es la única copia de ese contenido, indícalo explícitamente en el plan del módulo para que el siguiente agente sepa dónde encontrarlo.
+4. **No confundir:** `docs/` NO es `DOCUMENTACION/GUIA-GODOT/` ni `DOCUMENTACION/GUIA-BLENDER/` (esas sí son canónicas y de lectura obligatoria, ver §2b y §2c).
+
 ### CHECKLIST-GLOBAL.md — Orquestador Multiagente (raíz del proyecto)
 
 La **`CHECKLIST-GLOBAL.md`** es el archivo coordinador central del protocolo multiagente. Contiene la **tabla resumen de todos los módulos** del proyecto (una fila por módulo) y es la única fuente de verdad sobre el estado global de cada uno. Ver sección 21 para la especificación completa.

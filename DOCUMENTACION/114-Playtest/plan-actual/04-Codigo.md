@@ -23,6 +23,15 @@ docs/playtest/
     └── AAAA-MM-DD_{ronda}_{aliasTester}/   → Nomenclatura estandarizada de respaldo
 ```
 
+> **Nota de ubicación (`docs/`).** `docs/playtest/` **existe y está versionado**
+> desde 2026-09-13 con las 4 plantillas (`PLAYTEST-GUIA.md`,
+> `PLAYTEST-ENCUESTA.md`, `PLAYTEST-INFORME.md`, `README.md`) — entrega original
+> del Log 481. Es material **complementario** de consulta para quien trabaje en
+> M114; **no hay copia en `DOCUMENTACION/`**, así que hoy es la única fuente de
+> esas plantillas. Si vas a redactar o ampliar documentación de playtest,
+> hazlo en `DOCUMENTACION/114-Playtest/plan-actual/` (AGENTS.md §3) y no
+> dupliques el contenido.
+
 ## 3. Esqueleto de las plantillas
 
 ### 3.1 `PLAYTEST-GUIA.md` (esqueleto — pendiente de implementación)

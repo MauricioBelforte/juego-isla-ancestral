@@ -24,6 +24,20 @@ DOCUMENTACION/101-QA-General/plan-actual/
     └── M137-PROTOTIPO/            → Resultados de sesiones reales (una carpeta por hito; se crean al ejecutar QA). PENDIENTE DE IMPLEMENTACIÓN
 ```
 
+### 2.1 Material complementario en `docs/qa/` (versionado)
+
+Las 7 plantillas de QA también existen en **`docs/qa/`** — es la entrega original
+del módulo (Log 509, deepseek-v4-flash) y desde 2026-09-13 está versionada en el
+repositorio. **La copia canónica es la de este plan**
+(`DOCUMENTACION/101-QA-General/plan-actual/`): es la más extensa y la que se
+amplía y corrige a partir de ahora.
+
+| Regla | Detalle |
+|-------|---------|
+| Consultar | Sí — `docs/qa/` es material de apoyo válido si trabajas en M101 |
+| Modificar | **Aquí, no en `docs/`** — la documentación viva del proyecto va en `DOCUMENTACION/` (AGENTS.md §3) |
+| Duplicar | No — si amplías una plantilla, hazlo en el plan del módulo y deja `docs/qa/` como histórico |
+
 **Plantilla de issue de bug:** NO se crea aquí (pertenece a M102, ya documentada por Devin). El flujo solo la referencia.
 
 ## 3. Ejemplos de entrada (plantillas base)
