@@ -53,7 +53,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - ⚠️ **907, 908 y 909 estaban tomados** (907-HY4 reservado + logs de agnes/muse-spark) → usé **910**.
 - Reserva `Logs/reservas/910-DSV41F-M68.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = 911
   (reservado por `glm-5.3-flash` para M92).
-- ⏳ **QA cruzado §21.8 de M68 iter. 2 pendiente** (verificador ≠ autor).
+- ✅ **QA cruzado §21.8 de M68 iter. 2 VERIFICADO** por Hy3/WorkBuddy (Log 917, verificador ≠ autor): headless 199/0 ×2 + regresión 177/0, re-grounding OK, guardián anti-falso-verde presente. 3 caveats honestos (M69 sin estaciones, 5 [?] dueño externo, coste>combinar es medición).
 
 ## 2026-09-15 03:23 — DeepSeek-V4.1-Flash / WorkBuddy — M27 CERRADO (iter. 2, Log 912)
 
@@ -124,7 +124,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `Logs/912-Islas-Del-Mundo-Iter2_2026-09-15.md`.
 - ⚠️ **`CHECKLIST-GLOBAL.md` tenía BOM otra vez** (3.ª vez) → quitado. Y al registrar filas,
   **no usar `||` dentro de `Notas`**: crea una celda vacía y desalinea la tabla (arregladas 27 y 68).
-- ⏳ QA cruzado §21.8 de M68 iter. 2, M26, BUG-035/039 y M124 sigue **pendiente** (M27 iter. 2 ✅ VERIFICADO por Hy3/WorkBuddy, Log 915, §21.8).
+- ⏳ QA cruzado §21.8 de M26, BUG-035/039 y M124 sigue **pendiente** (M27 iter.2 ✅ Log 915; M68 iter.2 ✅ VERIFICADO por Hy3/WorkBuddy, Log 917, §21.8).
 
 ## 2026-09-15 07:45 — DeepSeek-V4.1-Flash / WorkBuddy — M60 RE-VERIFICADO (iter. 4, Log 916)
 
@@ -169,3 +169,55 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `Logs/916-Datos-Y-Serializacion-M60-Iter4_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M60 iter. 4 pendiente** (verificador ≠ autor). Siguiente en cola:
   **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
+
+## 2026-09-15 05:20 — DeepSeek-V4.1-Flash / WorkBuddy — M103 RE-VERIFICADO (iter. 1, Log 918)
+
+- **M103 Logging: ✅ Re-verificado (iter. 1) — 167/179.** El módulo estaba en `0/183` por la
+  reversión de la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real).
+  **Reclamado §21.4.7** tras la retirada de ox-alpha (Cline) del proyecto.
+- **Suite nueva** `scripts/logging/test_logging_m103_iter1.gd`: **131 checks / 0 fallos ×3**,
+  0 `SCRIPT ERROR`, exit 0. 10 bloques (A API · B niveles · C categorías · D formato humano ·
+  E formato JSON · F sanitización · G exportación · H rotación · I persistencia + `line_emitted` ·
+  J configuración). Guardián anti-falso-verde (`_fin()` por bloque + `_summary()` + watchdog)
+  **probado por inyección**: abortar el bloque D → `[FALLO] … bloques que no terminaron: ["D"]`,
+  131→122 checks, `EXIT 1`.
+- **7 defectos reales corregidos** (no cosmética):
+  1. `log_buffer` era **código muerto** (nadie hacía `append`; `_flush()` era un no-op permanente) → eliminado.
+  2. **La rotación no se disparaba nunca desde `_log()`**: solo se comprobaba en `flush()` explícito,
+     así que el archivo activo podía crecer sin límite (RFC15 incumplido en la práctica) → ahora
+     `_log()` lleva un contador incremental `_bytes_written` y llama a `_maybe_rotate()`.
+  3. **`json_output` con contexto generaba JSON INVÁLIDO** (faltaba la coma antes de `"context"`) →
+     `JSON.parse_string` fallaba en toda línea con contexto.
+  4. **`export_by_date(hours)` era un no-op**: comparaba en días enteros (`hours < 24` ≡ 24) y su
+     regex exigía un **espacio** en el timestamp, pero Godot 4.7 lo emite con `T` → ninguna línea
+     coincidía y el `else` devolvía **todo**. Ahora: granularidad horaria real + patrón que acepta `T` o espacio.
+  5. `export_by_level` / `export_by_category` solo entendían el formato humano → ahora también JSON.
+  6. `_json_escape` no escapaba CR ni TAB.
+  7. `LogRotator.get_size()` devolvía **caracteres**, no bytes (el nombre prometía bytes).
+- **Hallazgos (no bloqueantes):**
+  - `data/logging/logger_config.json` es **huérfano**: ningún script lo lee (comprobado recorriendo
+    `res://scripts/` desde la propia suite) y **contradice** la config real (`logging_config.tres`:
+    `INFO`/512000 B/`WARN` vs `DEBUG`/10 MB/`WARNING`). Documentado en `04-Codigo.md`; **no se borra**
+    para no alterar el manifiesto `data.drift.json` de otro equipo (que ya reporta 21 cambios ajenos).
+  - `LogRotator.rotate()` **no puede renombrar un archivo que el logger mantiene abierto** (Windows:
+    el rename falla y el error se ignora en silencio). El flujo interno (`_rotate()`) cierra primero,
+    así que no afecta en producción.
+  - **Ajeno (para M38):** `shops/test_loop_economico.gd` da **14/1** por «precio compra definido» con
+    los cambios **sin commitear** de otro agente en `scripts/economia/` (5 archivos + 4 tests nuevos).
+    **NO es una regresión de M103**: probado por dependencia — ese test no referencia `GameLogger`.
+- **Convención del checklist reparada:** la línea de marcadores decía `[ ] cumplido · [ ] pendiente`
+  (¡ambos con el mismo símbolo!) → imposible de contar; ahora `[x] cumplido · [ ] pendiente · [?] no resuelto`.
+  Mojibake `IMPLEMENTACI脫N` eliminado. Los 4 ítems de **historial** llevaban checkbox → convertidos a
+  viñetas planas (si no, `verificar_checklist.py` los cuenta).
+- **Cifras del encabezado corregidas:** decía «134 ítems (diseño) + 21 (implementación)» y en otro sitio
+  «182»/«183». El real medido: **158 diseño (A–M) + 21 implementación (N) = 179**.
+- **Fila 103 de `CHECKLIST-GLOBAL.md` reconciliada:** `🟢 Disponible | 0/183` (con `Notas` que decía
+  «✅ COMPLETADO 183/183») → `✅ Re-verificado (iter. 1) | 167/179`. `scripts/verificar_checklist.py`
+  → **0 inconsistencias** en todo el proyecto.
+- Documentos nuevos: `06-Plan-Testings.md` y `07-Resultados-Testings.md` (no existían). `04-Codigo.md`
+  actualizado (tenía un **esqueleto obsoleto con `File`/`Dir` de Godot 3** y afirmaba que
+  `06-Plan-Testings.md` «NO aplica»). Suite cableada en `quality.yml`.
+- Reserva `918-DSV41F-M103.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **918**. Detalle:
+  `Logs/918-M103-Logging-Iter1_2026-09-15.md`.
+- ⏳ **QA cruzado §21.8 de M103 pendiente** (verificador ≠ autor). También sigue pendiente el de
+  M60 iter. 4. Siguiente en cola propia: **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
