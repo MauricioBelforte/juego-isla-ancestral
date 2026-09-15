@@ -148,13 +148,16 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   rama de migración se ejecutaba nunca) → partido en `migrar_con_cadena(datos, cadena, objetivo)`
   **inyectable** + 3 patrones puros (`renombrar_campo`/`eliminar_campo`/`transformar_valor`); no
   existía `CatalogosEstaticos.validar_ids()`.
-- 🔴 **BUG-041 descubierto (M103 `GameLogger`, abierto y delegado):** el logger **no registra
-  NADA** — `log_buffer` se lee y se limpia pero **nunca se escribe** (`logger.gd:39`), y
-  `categories_enabled` arranca `{}` con lo que `_log()` **retorna temprano para toda categoría**
-  (`logger.gd:100-103`). Todos los `export_*` devuelven vacío. Afecta a cualquier módulo que
-  dependa del logger. Detectado aquí porque M60 es el primer módulo que **verifica** sus logs en
-  vez de asumirlos. Workaround en la suite (habilitar la categoría + capturar por `line_emitted`);
-  **no se tocó M103** (módulo ajeno).
+- ✅ **BUG-041 RECLASIFICADO A FALSO POSITIVO (verificado con sonda aislada, 2026-09-15):**
+  se había reportado que `GameLogger` (M103) **no registra nada**; la sonda demuestra lo contrario:
+  `categories_enabled` **sí** se puebla en `_ready()` (desde `logging_config.tres`, o TODAS como
+  fallback; ya está poblado en el **frame 1**), `_log()` emite y **escribe a disco** (el archivo
+  contiene las líneas), y `export_all()` / `export_last_lines()` leen el **archivo**, no el buffer.
+  Retirando el "workaround" del suite, el bloque F pasa **15/15** y la suite **152/0 ×3** → el forzado
+  era un **no-op** y el fallo original era **de la propia suite** (diagnóstico mal aislado).
+  **Residuo real (Baja, sí de M103):** `log_buffer` es **código muerto** (nadie hace `append`;
+  `_flush()` es un no-op permanente) — **no afecta al logging**. Detalle y evidencia:
+  `DOCUMENTACION/11-BUGS.md` → BUG-041.
 - ⚠️ **La fila 60 de `CHECKLIST-GLOBAL.md` se contradiciía a sí misma:** `Estado = 🟢 Disponible`
   + `Progreso = 0/196` + `Notas = "✅ COMPLETADO 196/196"`. Reconciliada a
   `🟡 Liberado (iter. 4 ✅) | 188/196`; `scripts/verificar_checklist.py` → **0 inconsistencias**

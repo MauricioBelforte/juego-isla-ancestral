@@ -16,7 +16,7 @@
 - Alcance iter. 4: (a) re-verificar con evidencia ejecutable todo lo que la auditoría revirtió; (b) cerrar los huecos que quedaban sin prueba; (c) reconciliar la fila 60 de `CHECKLIST-GLOBAL.md`.
 - Salida: **`188 [x] · 4 [ ] · 4 [?]`** (196). Suites: base **94/0**, iter. 3 **132/0**, iter. 4 **152/0** — las tres ×3, `SCRIPT ERROR` = 0.
 - Huecos **reales** cerrados: `borrar_slot` (mentía y dejaba `.deflate` + copias `.bak` huérfanas), `.bak` del binario voxel (ítem 120), regeneración de `meta.json` (ítem 155), log de migración origen→destino (ítem 56) y del resultado de validación (ítem 69), validación temprana al guardar **no bloqueante** (ítem 66), `Versionador.migrar_con_cadena` (motor inyectable) + patrones `renombrar_campo`/`eliminar_campo`/`transformar_valor` (ítems 51/52/53), `CatalogosEstaticos.validar_ids` (ítem 143).
-- Hallazgo colateral: **BUG-041** (M103 `GameLogger` no registra nada: `log_buffer` nunca se escribe y `categories_enabled` arranca vacío).
+- Hallazgo colateral: **BUG-041** (M103) → **FALSO POSITIVO** verificado con sonda aislada: `GameLogger` **sí registra**. Residuo real: `log_buffer` es código muerto (Baja). Ver `11-BUGS.md`.
 - Archivos: `scripts/datos/{versionador,data_store,gestor_slot,catalogos_estaticos,test_datos_m60_iter4}.gd`
 - Tests: **iter. 4 152 checks / 0 fallos** (nuevo) · regresión iter. 3 **132/0** · regresión base **94/0**
 - Log: 916
@@ -112,7 +112,7 @@
 - [x] Transformación de valores (ej: unidades de energía a otra escala) migrable [M] -- iter. 4: `Versionador.transformar_valor()` + check (bloque B).
 - [x] Migración idempotente: aplicar dos veces no altera el resultado [S]
 - [x] Migración fallida -> no tocar el archivo y restaurar .bak [M]
-- [x] Migración registrada en logs (M103) con versión origen y destino [S] -- iter. 4: `_log_m60` + log `migrado vX -> vY` en `cargar_partida`; verificado (bloque F). La rama se activará sola cuando `MIGRACIONES` tenga entradas. OJO: M103 descarta las líneas (BUG-041).
+- [x] Migración registrada en logs (M103) con versión origen y destino [S] -- iter. 4: `_log_m60` + log `migrado vX -> vY` en `cargar_partida`; verificado (bloque F). La rama se activará sola cuando `MIGRACIONES` tenga entradas. (BUG-041 quedó en falso positivo: el logger registra correctamente.)
 - [x] Fixture de save viejo creado para probar la cadena de migraciones [M]
 - [x] Post-migración validada contra el contrato de la versión destino [M]
 - [x] Migración sin pérdida de datos verificable contra fixture (test) [S]

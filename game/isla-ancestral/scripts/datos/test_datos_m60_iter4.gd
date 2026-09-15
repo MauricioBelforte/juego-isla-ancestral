@@ -48,9 +48,11 @@ var _gl: Node = null
 var _config_original: PackedByteArray = PackedByteArray()
 var _config_existia: bool = false
 
-## Líneas capturadas del GameLogger. NO se usa `log_buffer` porque el logger
-## nunca lo escribe (defecto de M103, reportado como BUG-041); la vía fiable es
-## la señal `line_emitted`.
+## Líneas capturadas del GameLogger, por la señal `line_emitted` (la vía fiable:
+## captura exactamente lo que el logger emite en ESTE proceso, sin depender de
+## leer el archivo). Nota: `log_buffer` de M103 es una variable MUERTA (nunca se
+## escribe; sólo la recorre `_flush()` vacía) — eso es real, pero NO impide
+## registrar: `_log()` emite y escribe a disco. Ver `07-Resultados-Testings.md` §8.
 var _capturadas: Array[String] = []
 
 
@@ -213,11 +215,13 @@ func _run() -> void:
 	_gl = root.get_node_or_null("GameLogger")
 	if _gl != null:
 		_gl.line_emitted.connect(_on_line)
-		# ⚠️ BUG-041: el logger arranca con `categories_enabled` VACÍO y `_log()`
-		# descarta toda línea cuya categoría no esté habilitada -> en la práctica
-		# no registra NADA. Para verificar el contrato de M60 con un logger
-		# CONFIGURADO se habilita SYSTEM (1), que es la categoría que usa M60.
-		_gl.categories_enabled[1] = true
+		# El logger se usa TAL CUAL, sin forzar categorías.
+		# Verificado con sonda aislada el 2026-09-15: `_load_config()` puebla
+		# `categories_enabled` en `_ready()` (desde `logging_config.tres`, o TODAS
+		# como fallback) y `_log()` escribe a disco línea a línea. El bloque F pasa
+		# igual con o sin el forzado -> el forzado que hubo aquí era un no-op
+		# basado en un diagnóstico erróneo (ver BUG-041, reclasificado a falso
+		# positivo, y `07-Resultados-Testings.md` §8).
 
 	# Preservar la config real del usuario (los tests la pisan a propósito).
 	var ruta_cfg := GestorConfig.RUTA_CONFIG

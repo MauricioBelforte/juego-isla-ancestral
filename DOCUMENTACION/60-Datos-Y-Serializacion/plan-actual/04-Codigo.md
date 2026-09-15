@@ -306,12 +306,18 @@ Ventana de copias de seguridad coordinada con M107 (T-075). **No** referencia `W
 - **[ ] 168** — "reutilización de dicts y buffers en bucles de guardado" no está implementada.
 - **[?] 131/133/145/172** — dependen de otros módulos o de un build con GUI.
 
-### Hallazgo colateral: BUG-041 (M103, no es de M60)
-Al verificar el registro en M103 descubrí que **`GameLogger` no registra nada**:
-1. `log_buffer` se **lee** en `_flush()` y se limpia, pero **nunca se escribe** → `export_all()`/`export_by_*` devuelven vacío.
-2. `categories_enabled` arranca `{}` y `_load_config()` solo carga `min_level` → el guardián `if not categories_enabled.has(category): return` descarta **toda** línea, de cualquier categoría.
+### Hallazgo colateral: BUG-041 (M103) → **FALSO POSITIVO** (verificado con sonda)
+Se había reportado que **`GameLogger` no registra nada** (dos defectos: `log_buffer` nunca escrito y `categories_enabled` arrancando `{}`). **La sonda aislada demostró lo contrario** y el bug quedó reclasificado:
 
-La suite iter. 4 lo esquiva habilitando `categories_enabled[SYSTEM] = true` y capturando por la señal `line_emitted` (la vía fiable), de modo que **verifica el contrato de M60 con un logger configurado**. Los ítems 32/56/69/194 quedan `[x]` por el lado de M60 (las llamadas son correctas y están probadas) con la nota de que M103 las descarta hasta que se arregle BUG-041.
+- `categories_enabled` **sí** se puebla en `_ready()`: `_load_config()` lo llena desde `logging_config.tres` (líneas 66-70) o **habilita TODAS** las categorías como fallback (71-73). Está poblado ya en el **frame 1**.
+- `_log()` **sí emite y sí escribe a disco** (`line_emitted.emit()` + `print()` + `store_line()` + `flush()`, líneas 127-136). El archivo contiene las líneas.
+- `export_all()` y `export_last_lines()` leen el **archivo**, no el buffer → devuelven contenido real.
+
+El fallo original del bloque F era **de la propia suite** (diagnóstico mal aislado): al retirar el forzado `categories_enabled[1] = true`, el bloque F pasa **15/15** y la suite **152/0 ×3** — el forzado era un **no-op**. Ya se retiró del suite y de los comentarios.
+
+**Residuo real (Baja, sí de M103):** `log_buffer` es **código muerto** — se declara y `_flush()` lo recorre/limpia, pero nadie hace `append`, así que `_flush()` es un no-op permanente. **No afecta al logging.** Detalle y evidencia en `DOCUMENTACION/11-BUGS.md` → BUG-041.
+
+Los ítems 32/56/69/194 quedan `[x]` por el lado de M60: las llamadas son correctas y están **verificadas contra el logger real, tal cual** (sin forzar nada).
 
 ### Intentos fallidos / decisiones
 - **Error resuelto:** `var x := ds.metodo()` con `ds` tipado `Node` → *"Cannot infer the type of ... variable"* (~37 sitios). Se anota explícitamente. Misma lección que la iter. 3, ahora con la causa exacta: **un `Node` no expone los tipos de retorno de su script**.
@@ -322,7 +328,7 @@ La suite iter. 4 lo esquiva habilitando `categories_enabled[SYSTEM] = true` y ca
 - **Decisión D-ventana-de-backups:** el test necesitaba 4 guardados para ver 3 copias (el 1.º no crea `.bak`). El fallo inicial del test era del test, no del código.
 
 ### Recomendaciones para el próximo agente
-- **Arreglar BUG-041** (M103): `log_buffer.append(line)` en `_log()` y habilitar categorías desde `logging_config.tres`. Sin eso, ningún módulo puede verificar logs por buffer.
+- **BUG-041 (M103) quedó en falso positivo** — no hay nada roto en el logging. Queda como **limpieza opcional de M103**: eliminar `log_buffer`/`_flush()` o alimentarlos de verdad.
 - **M08:** al implementar el contrato de `edits`, cerrar los ítems 115/117 y agregar el log de chunks cargados (122).
 - **Si `VERSION_ACTUAL` sube:** registrar la migración en `MIGRACIONES` usando los patrones nuevos; jamás editar las existentes. La rama de log `migrado vX -> vY` se activará sola.
 - **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (132) · `test_datos_m60_iter4.gd` (152). Los tres deben correr ×3 y con `grep "SCRIPT ERROR"` = 0.

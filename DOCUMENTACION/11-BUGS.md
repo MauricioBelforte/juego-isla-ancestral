@@ -129,7 +129,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-035 | Test headless de M107 (Backups) falla: 1/9 checks | M107 | 🟠 Mayor | [x] Resuelto (2026-09-14, Log 902 — causa: `DirAccess.new()` en el autoload `BackupManager`) | hy3 | 2026-09-14 04:50 |
 | BUG-039 | `scripts/generar_checklist_global.py` reescribe el archivo desde una plantilla fija: borra el encabezado y desplaza columnas | Transversal | 🔴 Alta | [x] Resuelto (2026-09-15, generador corregido y verificado) | DeepSeek-V4.1-Flash | 2026-09-15 01:11 |
 | BUG-040 | `inventory_layer.gd` captura ERROR de señal `item_added` (handler 2 args vs emisión 3 args) | M53 UI Inventario (`inventory_layer.gd`) | 🟠 Mayor | [x] Resuelto (2026-09-15, hy3 — verificación headless M110 22/0, EXIT 0; error de señal ausente) | hy3 | 2026-09-15 01:25 |
-| BUG-041 | `logger.gd` (autoload `GameLogger`) no registra NADA: `log_buffer` nunca se escribe y `categories_enabled` arranca vacío | M103 Logging (`scripts/logging/logger.gd`) | 🔴 Alta | [ ] Abierto (reportado por DeepSeek-V4.1-Flash al verificar M60 iter. 4) | DeepSeek-V4.1-Flash | 2026-09-15 07:20 |
+| BUG-041 | ~~`logger.gd` (autoload `GameLogger`) no registra NADA~~ **FALSO POSITIVO (verificado con sonda)**: `GameLogger` **sí registra** (`categories_enabled` se puebla en `_ready()`, `_log()` escribe a disco y emite). Residuo real: `log_buffer` es **código muerto** (nadie hace `append`) y `_flush()` es un no-op permanente | M103 Logging (`scripts/logging/logger.gd`) | 🟢 Baja (limpieza) | [x] Cerrado — falso positivo (reclasificado 2026-09-15) | DeepSeek-V4.1-Flash | 2026-09-15 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -1511,32 +1511,59 @@ Durante el QA cruzado (Lotes E-G, Logs 866-886), un agente paralelo reescribe co
 
 **Resolucion (implementada 2026-09-14, hy3/WorkBuddy):** creado `CHECKLIST-QA-SEALS.md` como registro protegido de sellos §21.8, fuera del alcance de la regeneracion de CHECKLIST-GLOBAL. Si la carrera borra un sello ahi, re-aplicarlo desde este archivo. El agente de reestructuracion AUN debe congelar CHECKLIST-GLOBAL durante el sellado para evitar la perdida visible de la trazabilidad.
 
-### BUG-041 — `GameLogger` (M103) descarta todas las líneas: `log_buffer` nunca se escribe y `categories_enabled` arranca vacío
+### BUG-041 — FALSO POSITIVO (verificado): `GameLogger` (M103) SÍ registra; el residuo real es `log_buffer` como código muerto
 
-**Estado:** [ ] Abierto
-**Reportado por:** DeepSeek-V4.1-Flash / WorkBuddy
-**Fecha:** 2026-09-15 07:20
-**Severidad:** Alta (deja sin efecto TODO el logging del proyecto; afecta a cualquier módulo que verifique por logs)
+**Estado:** [x] Cerrado — **falso positivo** (no era un bug)
+**Reportado por:** DeepSeek-V4.1-Flash / WorkBuddy (2026-09-15, al verificar M60 iter. 4)
+**Reclasificado por:** DeepSeek-V4.1-Flash / WorkBuddy (2026-09-15, sonda aislada)
+**Severidad original:** Alta · **Severidad real del residuo:** Baja (limpieza)
 
-**Descripcion:**
-Verificando el registro en M103 de las operaciones de M60 (iter. 4, Log 916) detecté que el autoload `GameLogger` (`game/isla-ancestral/scripts/logging/logger.gd`) **no registra ninguna línea**, por dos defectos independientes:
+**Qué se afirmó (y era incorrecto):** que `GameLogger` **no registraba nada**, por dos defectos
+independientes: (1) `log_buffer` nunca se escribe, y (2) `categories_enabled` arranca `{}` con lo
+que `_log()` descarta toda categoría.
 
-1. **`log_buffer` nunca se escribe.** `_log()` hace `line_emitted.emit(...)`, `print(line)` y `_file.store_line(line)`, pero **jamás** `log_buffer.append(...)`. Sin embargo `_flush()` itera `log_buffer` y lo limpia, y `export_all()` / `export_last_lines()` / `export_by_level()` / `export_by_category()` / `export_by_date()` leen de ahí. Resultado: las exportaciones devuelven **siempre vacío**. La variable está declarada (`var log_buffer: PackedStringArray`) y sólo se lee/limpia — nunca se alimenta.
-2. **`categories_enabled` arranca `{}`.** `_log()` corta con `if not categories_enabled.has(category): return` para **cualquier** categoría. El diccionario se declara vacío (`var categories_enabled: Dictionary = {}`) y `_load_config()` sólo carga `min_level` desde `res://data/logging/logging_config.tres`; nunca llama a `get_categories_enabled()` (que existe en `logging_config.gd` y devuelve `[0,1,2,3,4,5,6]`). Resultado: **ni siquiera `print(line)` se ejecuta** — el logger es un no-op silencioso.
+**Qué dice la medición.** Sonda aislada (`--script`, 2 corridas, sin tocar el repo):
 
-**Como se detecto:** el bloque F de `test_datos_m60_iter4.gd` llamaba a `DataStore.guardar_partida()`/`cargar_partida()` y comprobaba el registro leyendo `GameLogger.log_buffer` → 6 checks en rojo con el buffer vacío. Al investigar: el buffer nunca se alimenta; y aun alimentándolo, el guardián de categorías descarta todo antes de llegar.
+```
+categories_enabled = { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true }   <-- NO arranca vacío
+min_level          = 0
+json_output        = false
+gl.info("PROBE_A_DEFAULT_SYSTEM") / gl.info("PROBE_B_CAT_1", 1) / gl.error("PROBE_C_ERROR_SYSTEM")
+   -> las 3 líneas salieron por stdout
+export_all().length()           = 685        (contiene PROBE_)
+export_last_lines(5).length()   = 332        (contiene PROBE_)
+archivo en disco: contiene PROBE_A / PROBE_B / PROBE_C = true
+```
 
-**Impacto:** el QA por logs (M103/M101), la consola in-game de M110 y cualquier verificación que dependa de `line_emitted`/`log_buffer` están **ciegas**. El `print()` a stdout sigue funcionando, por eso el defecto no se notó.
+- **`categories_enabled` NO arranca vacío:** `_load_config()` lo puebla en `_ready()` — desde
+  `logging_config.tres` si existe (líneas 66-70) o **habilitando TODAS** las categorías como
+  fallback (líneas 71-73). Verificado: ya está poblado en el **frame 1**.
+- **`_log()` SÍ emite y SÍ escribe:** `line_emitted.emit()` + `print()` + `_file.store_line()` +
+  `_file.flush()` (líneas 127-136). El archivo en disco contiene las líneas.
+- **`export_all()` y `export_last_lines()` leen el ARCHIVO** (no el buffer) → devuelven contenido real.
 
-**Evidencia (headless):** `logger.gd` línea 39 (`var log_buffer`), 100-103 (guard de `categories_enabled`), 132-136 (`line_emitted`/`print`/`store_line`), 236-239 (`_flush` lee y limpia el buffer). `grep -rn "categories_enabled" game/isla-ancestral/scripts/` sólo lo encuentra en `logger.gd` (declaración + guard) y en `logging_config.gd` (que nadie consume).
+**Por qué se reportó como bug (error de diagnóstico propio).** En la primera corrida de
+`test_datos_m60_iter4.gd` el bloque F falló 6 checks y **se atribuyó la causa al logger sin
+aislarla**. No era el logger. Prueba decisiva: al retirar el forzado `categories_enabled[1] = true`
+que se había añadido como "workaround", el bloque F pasa **15/15** y la suite **152/0 ×3**. Es decir,
+el workaround era un **no-op** y el fallo original tenía otra causa (de la propia suite, ya corregida).
 
-**Workaround usado por M60 iter. 4 (no lo tapa):** la suite habilita `GameLogger.categories_enabled[Category.SYSTEM] = true` y captura las líneas por la señal `line_emitted` (que sí se emite cuando la categoría está habilitada). Así se verifica el contrato de M60 con un logger **configurado**, sin modificar M103.
+**Residuo REAL (Baja, limpieza — sí es de M103):** `log_buffer` es **código muerto**. Se declara
+(línea 39), `_flush()` lo recorre y lo limpia (líneas 236-239), pero **nadie hace `append`**:
+`grep -rn "log_buffer" game/isla-ancestral/scripts/` sólo lo encuentra en esas 3 líneas de
+`logger.gd`. Consecuencia: **`_flush()` es un no-op permanente**. **No afecta al logging** (la
+escritura es inmediata línea a línea desde el fix del 2026-09-02), pero es una variable y una función
+que prometen algo que no hacen. Fix sugerido (dueño M103): **o** eliminar `log_buffer`/`_flush()`,
+**o** alimentar el buffer y usarlo de verdad (p. ej. para `export_last_lines` sin tocar disco).
 
-**Resolucion (propuesta, dueño M103):**
-1. En `_log()`, tras construir `line`: `log_buffer.append(line)` y acotar el crecimiento (p. ej. conservar las últimas 1000 líneas) — o llamar a `_flush()` cada N líneas como parecía indicar el diseño original.
-2. En `_load_config()`, poblar `categories_enabled` desde `cfg.get_categories_enabled()` cuando el `.tres` exista; y si no hay config, **habilitar todas** las categorías por defecto en vez de dejarlas en `{}` (o invertir el guardián a una lista de deshabilitadas).
-3. Agregar un check de regresión en `test_logging_m103.gd`: emitir un `info` y verificar que aparece en `log_buffer` y en `line_emitted`.
+**Acción tomada en M60 iter. 4:** se retiró el forzado de categoría del suite y se corrigieron los
+comentarios que afirmaban el no-op. El suite usa el logger **tal cual**.
 
-**Referencias cruzadas:** Log 916 (M60 iter. 4), `game/isla-ancestral/scripts/datos/test_datos_m60_iter4.gd` bloque F, `DOCUMENTACION/60-Datos-Y-Serializacion/plan-actual/04-Codigo.md` (Notas del Agente iter. 4).
+**Lección:** un bug sobre un módulo ajeno se **reproduce con una sonda aislada** antes de registrarlo.
+Que un test falle *dentro de mi suite* no es prueba de que el componente ajeno esté roto.
 
-**Firma:** DeepSeek-V4.1-Flash / WorkBuddy, 2026-09-15 07:20
+**Referencias cruzadas:** Log 916 (M60 iter. 4) · `test_datos_m60_iter4.gd` bloque F ·
+`DOCUMENTACION/60-Datos-Y-Serializacion/plan-actual/07-Resultados-Testings.md` §8 ·
+`Mensajes entre modelos/ESTADO-PARALELO.md` (bloque de corrección).
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — reportado 2026-09-15 (07:20) · **reclasificado 2026-09-15 (04:50)**

@@ -62,7 +62,7 @@ Sin el guardián, el paso 1 habría dejado la suite en "0 fallos" (falso verde) 
 
 ## 5. Hallazgos de la iter. 4
 
-1. **BUG-041 (M103, abierto)** — `GameLogger` **no registra nada**: `log_buffer` nunca se escribe y `categories_enabled` arranca vacío (el guardián de `_log()` descarta todas las categorías). Detectado por el bloque F (6 checks en rojo). Workaround en la suite: habilitar `categories_enabled[SYSTEM]` y capturar por `line_emitted`. **No se modificó M103** (módulo ajeno): queda documentado y delegado.
+1. **BUG-041 (M103) → FALSO POSITIVO (verificado).** Se había reportado que `GameLogger` no registraba nada. La sonda aislada demuestra lo contrario (ver **§8**). El fallo original del bloque F era **de la propia suite**: al retirar el forzado `categories_enabled[1] = true` el bloque F pasa **15/15** y la suite **152/0 ×3**. **Residuo real (Baja):** `log_buffer` es código muerto (nadie hace `append`), así que `_flush()` es un no-op permanente — no afecta al logging.
 2. **`GestorSlot.borrar_slot` mentía** — devolvía `true` para un slot in-range sin ningún archivo. Corregido: ahora devuelve `false`.
 3. **Fuga de disco en `borrar_slot`** — no borraba `mundo_voxel.bin.deflate` ni las copias `.bak`/`.bak.1`/`.bak.2` del save ni del voxel → el directorio del slot no se podía eliminar. Corregido.
 4. **`mundo_voxel.bin` sin backup** — era el único archivo de slot sin `.bak`. Implementado con la misma ventana de 3 copias.
@@ -79,3 +79,39 @@ Sin el guardián, el paso 1 habría dejado la suite en "0 fallos" (falso verde) 
 ## 7. Reproducibilidad
 
 Los 3 comandos de §1, corridos 3 veces cada uno el 2026-09-15 (hora local GMT-3), dieron siempre `0 fallos` y `exit 0` con `SCRIPT ERROR = 0`. Las suites limpian `user://saves/slot_1..3` al inicio y al final, y **preservan y restauran** `user://config.cfg` del usuario (la suite iter. 4 guarda los bytes originales y los reescribe al terminar).
+
+## 8. Corrección posterior: BUG-041 era un falso positivo (verificado con sonda)
+
+Durante la verificación final se auditó el código de `GameLogger` (M103) y se corrió una **sonda
+aislada** (`--script`, 2 corridas, sin tocar el repo). Resultado medido:
+
+```
+categories_enabled = { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true }   <-- NO arranca vacío
+min_level = 0
+gl.info("PROBE_A_DEFAULT_SYSTEM") / gl.info("PROBE_B_CAT_1", 1) / gl.error("PROBE_C_ERROR_SYSTEM")
+   -> las 3 líneas salieron por stdout
+export_all().length()         = 685   (contiene PROBE_)
+export_last_lines(5).length() = 332   (contiene PROBE_)
+archivo en disco: contiene PROBE_A / PROBE_B / PROBE_C = true
+```
+
+- `categories_enabled` **sí** se puebla: `_load_config()` lo llena desde `logging_config.tres`
+  (líneas 66-70) o **habilita TODAS** las categorías como fallback (71-73); ya está poblado en el
+  **frame 1**.
+- `_log()` **sí emite y sí escribe** (`line_emitted` + `print` + `store_line` + `flush`, líneas 127-136).
+- `export_all()` / `export_last_lines()` leen el **archivo**, no el buffer.
+
+**Prueba decisiva:** retirando del suite el forzado `categories_enabled[1] = true` (que se había
+añadido como "workaround"), el bloque F pasa **15/15** y la suite **152/0 ×3**. El forzado era un
+**no-op**; el fallo original era **de la propia suite**, no del logger.
+
+**Residuo real (Baja, sí de M103):** `log_buffer` es **código muerto** — declarado (línea 39),
+recorrido y limpiado por `_flush()` (236-239), pero **nadie hace `append`** (`grep` sólo lo encuentra
+en esas 3 líneas). `_flush()` es un no-op permanente. **No afecta al logging.**
+
+**Lección:** un bug sobre un módulo ajeno se **reproduce con una sonda aislada** antes de
+registrarlo. Que un test falle *dentro de mi suite* no prueba que el componente ajeno esté roto.
+
+Corregido en: `11-BUGS.md` (BUG-041 reclasificado), `04-Codigo.md`, `05-Checklist.md`,
+`06-Plan-Testings.md`, este archivo, el Log 916, `ESTADO-PARALELO.md`, `BACKLOG-MASTER.md`,
+`CHECKLIST-GLOBAL.md` y el código/comentarios del suite.

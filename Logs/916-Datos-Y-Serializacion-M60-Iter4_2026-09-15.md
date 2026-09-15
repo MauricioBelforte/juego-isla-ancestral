@@ -70,7 +70,7 @@ más los casos patológicos `_mig_estancada`, `_mig_sin_version`.
 
 ## 3. Causa raíz — hallazgos medidos
 
-### 3.1 El `GameLogger` (M103) no registra NADA — BUG-041 (crítico)
+### 3.1 ~~El `GameLogger` (M103) no registra NADA~~ → **FALSO POSITIVO** (corregido el mismo día; ver §11)
 
 Al escribir el bloque F (verificación de los ítems de logging de M60) los 6 checks
 salieron **en rojo**. La causa no era M60:
@@ -137,7 +137,7 @@ WriterAtomico.construir_con_checksum(Serializer.a_json(Serializer.a_plano(futuro
 
 | Hallazgo | Fix | Evidencia |
 |---|---|---|
-| 3.1 logger mudo (M103) | **no se toca M103**: la suite habilita `categories_enabled[1]` y captura por `line_emitted`; BUG-041 documentado y delegado | bloque F en verde (15/15) sin modificar `logger.gd` |
+| 3.1 ~~logger mudo (M103)~~ | **falso positivo**: no había nada que arreglar. El forzado `categories_enabled[1]` se retiró del suite y el bloque F sigue **15/15** | bloque F 15/15 **con y sin** el forzado · suite 152/0 ×3 |
 | 3.2 aborto silencioso | (a) cada bloque registra su letra en `_fin()`; `_summary()` **falla** si falta alguna; (b) watchdog `quit(1)` a 1800 frames | sonda inyectada en D → `[FALLO] los 8 bloques se completaron … bloques que no terminaron: ["D"]` · **128 checks, 1 fallo** · `EXIT 1` |
 | 3.4 motor inalcanzable | `migrar_con_cadena(datos, cadena, objetivo)`; producción sigue llamando `migrar()` (sin cambios de comportamiento) | 29 checks del bloque A |
 | 3.5 `borrar_slot` | devuelve `false` si el slot no tenía archivos; borra `.deflate` + `.bak*` de save y voxel | bloque D |
@@ -193,9 +193,8 @@ menos: falso verde puro.
 - **`CHECKLIST-GLOBAL.md`**: fila 60 → `🟡 Liberado (iter. 4 ✅) | 188/196`
   (CRLF conservado, 12 pipes = 11 celdas). `scripts/verificar_checklist.py` reporta
   **0 inconsistencias** para M60.
-- **`11-BUGS.md`**: **BUG-041** registrado (fila de resumen + sección completa con
-  líneas de evidencia `logger.gd` 39/100-103/132-136/236-239, propuesta de fix y
-  firma).
+- **`11-BUGS.md`**: **BUG-041** registrado y luego **reclasificado a falso positivo** (fila de
+  resumen + sección completa con la evidencia de la sonda; ver §11).
 - **Checklist personal** (`TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/60-…/checklist.md`):
   sincronizada in-place (6 marcadores cambiados + nota de iter. 4). Confirmado que
   `T-nnn` mapea 1:1 con el índice del módulo.
@@ -206,12 +205,9 @@ menos: falso verde puro.
 
 ## 7. Hallazgo secundario (no resuelto, es de otros)
 
-- **BUG-041 → M103 `GameLogger`**: `log_buffer` nunca se escribe y
-  `categories_enabled` arranca vacío → **todo el logging del proyecto es un no-op**.
-  Impacta a cualquier módulo que *dependa* de `GameLogger` (M60, M124, M68…). Dueño:
-  M103. Propuesta: `append` a `log_buffer` en `_log()` + poblar
-  `categories_enabled` desde `logging_config.tres` (o *todas* por defecto) + test de
-  regresión.
+- ~~**BUG-041 → M103 `GameLogger`**~~ → **FALSO POSITIVO (ver §11).** El logger **sí registra**.
+  **Residuo real (Baja, sí de M103):** `log_buffer` es **código muerto** (nadie hace `append`;
+  `_flush()` es un no-op permanente). No afecta al logging. Limpieza opcional de M103.
 - **`GestorSlot.borrar_slot` cambió de contrato** (devuelve `false` en slot vacío):
   si M59/M107 dependían del `true`, deben ajustarse.
 - Los **4 `[ ]` restantes** son de M08/Voxel Tools (115, 117, 122) y reúso de buffer
@@ -250,7 +246,7 @@ menos: falso verde puro.
 - **QA cruzado §21.8 de M60 iter. 4** por otro agente (verificador ≠ autor). El
   material está listo: `06-Plan-Testings.md` (cómo correr), `07-Resultados-Testings.md`
   (qué salió) y los 4 archivos de código en `04-Codigo.md` §3.13.
-- **BUG-041** (M103) abierto y delegado.
+- ~~**BUG-041** (M103) abierto y delegado.~~ → **cerrado como falso positivo** (ver §11).
 - **4 `[ ]` propios** bloqueados por M08/Voxel Tools (115, 117, 122, 168).
 - **Cola:** siguiente módulo propio = **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline
   i18n).
@@ -258,3 +254,39 @@ menos: falso verde puro.
 ---
 
 **Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-15
+
+## 11. Corrección posterior: BUG-041 era un FALSO POSITIVO (verificado con sonda)
+
+Al auditar el código de `GameLogger` (M103) para el QA cruzado se vio que **la afirmación de §3.1
+no se sostenía**. Se corrió una **sonda aislada** (`--script`, 2 corridas, sin tocar el repo):
+
+```
+categories_enabled = { 0: true, 1: true, 2: true, 3: true, 4: true, 5: true, 6: true }   <-- NO arranca vacío
+min_level = 0
+gl.info("PROBE_A_DEFAULT_SYSTEM") / gl.info("PROBE_B_CAT_1", 1) / gl.error("PROBE_C_ERROR_SYSTEM")
+   -> las 3 líneas salieron por stdout
+export_all().length()         = 685   (contiene PROBE_)
+export_last_lines(5).length() = 332   (contiene PROBE_)
+archivo en disco: contiene PROBE_A / PROBE_B / PROBE_C = true
+```
+
+- `categories_enabled` **sí** se puebla en `_ready()`: `_load_config()` lo llena desde
+  `logging_config.tres` (líneas 66-70) o **habilita TODAS** las categorías como fallback (71-73).
+  Ya está poblado en el **frame 1**.
+- `_log()` **sí emite y sí escribe a disco** (`line_emitted.emit()` + `print()` + `store_line()` +
+  `flush()`, líneas 127-136).
+- `export_all()` y `export_last_lines()` leen el **archivo**, no el buffer → devuelven contenido real.
+
+**Por qué se reportó como bug:** en la primera corrida del suite el bloque F falló 6 checks y se
+atribuyó la causa al logger **sin aislarla**. Prueba decisiva: retirando el forzado
+`categories_enabled[1] = true` que se había añadido como "workaround", el bloque F pasa **15/15** y
+la suite **152/0 ×3** → el forzado era un **no-op** y el fallo original era **de la propia suite**.
+
+**Residuo REAL (Baja, sí de M103):** `log_buffer` es **código muerto** — declarado (línea 39),
+recorrido y limpiado por `_flush()` (236-239), pero **nadie hace `append`**. `_flush()` es un no-op
+permanente. **No afecta al logging.**
+
+**Lección:** un bug sobre un módulo ajeno se **reproduce con una sonda aislada** antes de
+registrarlo. Que un test falle *dentro de mi suite* no prueba que el componente ajeno esté roto.
+
+**Firma de la corrección:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-15

@@ -60,4 +60,4 @@ En GDScript un error de script **aborta la función en silencio**: la suite segu
 - **Corte de energía / quit real a mitad del guardado**: se verifica el **invariante** (un `.tmp` cortado deja el save vigente intacto y cargable), no el corte físico.
 - **Profiler de Godot**: no corre en headless. Los presupuestos RN se miden con `Time.get_ticks_msec()`.
 - **Regeneración procedural del mundo (M08/M10)**: fuera del alcance de M60. Se verifica que la **semilla viaja y vuelve** del save.
-- **Registro en M103**: verificado con un logger **configurado** (la categoría `SYSTEM` habilitada y captura por la señal `line_emitted`), porque el `GameLogger` real **descarta todo** (BUG-041).
+- **Registro en M103**: verificado contra el `GameLogger` real **tal cual** (sin forzar categorías), capturando por la señal `line_emitted`. ⚠️ **Corrección (2026-09-15):** BUG-041 quedó en **falso positivo** — el logger **sí registra**; el fallo original era de la propia suite (ver `07-Resultados-Testings.md` §8).
