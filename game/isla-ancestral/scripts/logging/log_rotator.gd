@@ -56,4 +56,4 @@ static func _rotated_path(file_path: String, i: int, compress: bool) -> String:
 static func get_size(file_path: String) -> int:
 	if not FileAccess.file_exists(file_path):
 		return 0
-	return FileAccess.get_file_as_string(file_path).length()
+	return FileAccess.get_file_as_bytes(file_path).size()

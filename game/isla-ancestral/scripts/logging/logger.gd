@@ -10,7 +10,21 @@
 #   export_all / export_last_lines / export_by_level / export_by_category / export_by_date
 #   flush / get_log_file_path / is_level_enabled
 # Godot 4.7: usa FileAccess/DirAccess (no File/Dir antiguos).
-# Se registra como autoload "Logger" en project.godot y en ServiceRegistry ("logger").
+# Se registra como autoload "GameLogger" en project.godot y en ServiceRegistry ("logger").
+#
+# iter. 1 (2026-09-15, DeepSeek-V4.1-Flash / WorkBuddy — reclamo §21.4.7):
+#   - Eliminado `log_buffer` (código muerto: nadie hacía append; `_flush()` era un no-op).
+#   - La rotación ahora SÍ se dispara desde `_log()` vía contador incremental
+#     `_bytes_written` + `_maybe_rotate()` (antes sólo se comprobaba en `flush()`
+#     explícito, así que el archivo podía crecer sin límite).
+#   - `export_by_level` / `export_by_category` ahora entienden también `json_output`.
+#   - `_json_escape` escapa `\r` y `\t`.
+#   - `json_output` con contexto generaba JSON INVÁLIDO (faltaba la coma antes de
+#     "context") → corregido.
+#   - `export_by_date` comparaba en días enteros (`hours < 24` ≡ 24) y su regex
+#     exigía un espacio en el timestamp, que Godot emite con 'T' → el filtro
+#     devolvía TODO. Corregido: granularidad horaria real + patrón que acepta 'T'
+#     o espacio.
 
 extends Node
 
@@ -36,7 +50,9 @@ var compress_old_logs: bool = true
 var json_output: bool = false
 var sanitize_sensitive: bool = true
 
-var log_buffer: PackedStringArray = PackedStringArray()
+## Bytes escritos en el archivo activo (contador incremental para decidir la
+## rotación sin releer el archivo en cada línea — ver _maybe_rotate()).
+var _bytes_written: int = 0
 var _log_path: String = "user://logs/game.log"
 
 ## Directorio y archivo creados en _ready (FileAccess abierto)
@@ -76,8 +92,9 @@ func _load_config() -> void:
 func _open_log_file() -> void:
 	var dir: String = _log_path.get_base_dir()
 	DirAccess.make_dir_recursive_absolute(dir)
-	# Modo texto en append; crea si no existe.
+	# Modo texto; WRITE trunca y crea si no existe (log nuevo por ejecución).
 	_file = FileAccess.open(_log_path, FileAccess.WRITE)
+	_bytes_written = 0
 	if _file == null:
 		push_warning("Logger: no se pudo abrir archivo de log %s (err %d)" % [_log_path, FileAccess.get_open_error()])
 ## ── API pública de log ──────────────────────────────────
@@ -117,7 +134,9 @@ func _log(level: int, message: String, category: int, context: Dictionary) -> vo
 	if json_output:
 		var ctx_json := ""
 		if context.size() > 0:
-			ctx_json = " \"context\": %s" % JSON.stringify(context)
+			# ⚠️ iter. 1: faltaba la coma antes de "context" → el JSON con contexto
+			# era INVÁLIDO ("Expected '}' or ','"). Detectado por la suite iter. 1.
+			ctx_json = ",\"context\": %s" % JSON.stringify(context)
 		line = "{\"timestamp\":\"%s\",\"level\":\"%s\",\"category\":\"%s\",\"message\":\"%s\"%s}" % [ts, level_str, cat_str, _json_escape(final_message), ctx_json]
 	else:
 		line = "[%s] [%s] [%s] %s" % [ts, level_str, cat_str, final_message]
@@ -128,16 +147,19 @@ func _log(level: int, message: String, category: int, context: Dictionary) -> vo
 	print(line)
 
 	# Escritura INMEDIATA + flush línea a línea (fix 2026-09-02,
-	# deepseek-v4-flash-vision-exp): el buffer de 100 líneas retrasaba la
+	# deepseek-v4-flash-vision-exp): un buffer de 100 líneas retrasaba la
 	# lectura del archivo — el QA por logs (M103/M101) y el crash-proof
-	# necesitan las líneas en disco al momento. Mantiene rotación y _flush.
+	# necesitan las líneas en disco al momento. La rotación se comprueba aquí
+	# mismo con el contador _bytes_written (iter. 1, 2026-09-15).
 	if _file != null:
 		_file.store_line(line)
 		_file.flush()
+		_bytes_written += line.length() + 1  # +1 por el salto de línea
+		_maybe_rotate()
 
 ## Escapa caracteres para JSON payload.
 func _json_escape(s: String) -> String:
-	return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n")
+	return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
 
 ## ── Configuración dinámica ──────────────────────────────
 func set_min_level(level: int) -> void:
@@ -190,29 +212,58 @@ func export_by_category(category: int) -> String:
 	var out := PackedStringArray()
 	var tag: String = CATEGORY_TAG.get(category, "")
 	for line in _read_file(_log_path).split("\n", false):
-		if tag != "" and line.contains("] [" + tag + "]"):
+		if _line_has_category(line, tag):
 			out.append(line)
 	return "\n".join(out)
 
+## Exporta las líneas de las últimas `hours` horas (granularidad horaria REAL;
+## iter. 1: antes se comparaba en días enteros, así que `hours < 24` era
+## equivalente a `hours = 24`).
 func export_by_date(hours: int) -> String:
 	var out := PackedStringArray()
-	var now := Time.get_datetime_dict_from_system()
+	# Base local coherente: ambos lados se construyen desde componentes locales,
+	# de modo que el offset del SO se cancela al restar.
+	var ahora: int = int(Time.get_unix_time_from_datetime_dict(Time.get_datetime_dict_from_system()))
+	var limite: int = hours * 3600
+	var m := RegEx.new()
+	# ⚠️ iter. 1: Godot 4.7 devuelve el timestamp como ISO 8601 con 'T'
+	# ("2026-09-15T05:07:20"), no con espacio. El patrón anterior exigía un
+	# espacio, así que NINGUNA línea real coincidía y el filtro devolvía todo.
+	# Ahora se aceptan ambas formas (T o espacio).
+	m.compile("^\\[(\\d{4})-(\\d{2})-(\\d{2})[T ](\\d{2}):(\\d{2}):(\\d{2})\\]")
 	for line in _read_file(_log_path).split("\n", false):
-		var m := RegEx.new()
-		m.compile("^\\[(\\d{4})-(\\d{2})-(\\d{2}) ")
 		var res := m.search(line)
 		if res:
-			var y := int(res.get_string(1)); var mo := int(res.get_string(2)); var d := int(res.get_string(3))
-			var dias := (int(now["year"]) - y) * 360 + (int(now["month"]) - mo) * 30 + (int(now["day"]) - d)
-			if dias * 24 <= hours:
+			var d := {
+				"year": int(res.get_string(1)), "month": int(res.get_string(2)), "day": int(res.get_string(3)),
+				"hour": int(res.get_string(4)), "minute": int(res.get_string(5)), "second": int(res.get_string(6)),
+			}
+			var t: int = int(Time.get_unix_time_from_datetime_dict(d))
+			if ahora - t <= limite:
 				out.append(line)
 		else:
 			out.append(line)
 	return "\n".join(out)
 
+## ¿La línea corresponde a este nivel? Soporta formato humano y JSON.
+func _line_has_level(line: String, tag: String) -> bool:
+	if tag == "":
+		return false
+	if line.contains("] [" + tag + "] "):
+		return true
+	return line.contains("\"level\":\"" + tag + "\"")
+
+## ¿La línea corresponde a esta categoría? Soporta formato humano y JSON.
+func _line_has_category(line: String, tag: String) -> bool:
+	if tag == "":
+		return false
+	if line.contains("] [" + tag + "]"):
+		return true
+	return line.contains("\"category\":\"" + tag + "\"")
+
 func _append_if_level(arr: PackedStringArray, line: String, min_level: int) -> void:
 	for tag in LEVEL_TAG:
-		if int(tag) >= min_level and line.contains("] [" + LEVEL_TAG[tag] + "] "):
+		if int(tag) >= min_level and _line_has_level(line, LEVEL_TAG[tag]):
 			arr.append(line)
 			return
 
@@ -233,13 +284,17 @@ func flush() -> void:
 func _flush() -> void:
 	if _file == null:
 		return
-	for line in log_buffer:
-		_file.store_line(line)
 	_file.flush()
-	log_buffer.clear()
-	# Verificar rotación tras escribir.
-	if _file != null and FileAccess.file_exists(_log_path) and FileAccess.get_file_as_string(_log_path).length() > int(max_file_size_mb * 1024 * 1024):
-		_rotate()
+	_maybe_rotate()
+
+## Rota si el archivo activo supera max_file_size_mb. Usa el contador incremental
+## _bytes_written para no releer el archivo entero en cada línea.
+func _maybe_rotate() -> void:
+	if _file == null:
+		return
+	if _bytes_written <= int(max_file_size_mb * 1024.0 * 1024.0):
+		return
+	_rotate()
 
 func _rotate() -> void:
 	if _file != null:

@@ -200,6 +200,15 @@ jobs:
           # _fin() y guarda anti-falso-verde probada en vivo (un aborto silencioso
           # en un bloque hace FALLAR la suite y nombra el bloque).
           godot --headless --script scripts/datos/test_datos_m60_iter4.gd 2>&1
+          # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
+          # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
+          # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/
+          # bearer/ruta/contexto anidado), exportacion humana y JSON, rotacion
+          # disparada desde _log() (no solo en flush()) y persistencia inmediata +
+          # senal line_emitted — 131 checks, 10 bloques con marcador _fin() y
+          # guarda anti-falso-verde probada por INYECCION (un aborto silencioso en
+          # un bloque hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
+          godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1
           echo "All validation tests completed"
 
   security-scan:
