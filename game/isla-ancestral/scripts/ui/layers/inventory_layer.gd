@@ -340,7 +340,7 @@ func _cancel_drag() -> void:
 
 ## ── Callbacks ────────────────────────────────────────────
 
-func _on_inv_changed(_item_id: String, _cantidad: int) -> void:
+func _on_inv_changed(_item_id: String = "", _cantidad: int = 0, _container: int = -1) -> void:
 	if visible:
 		_refrescar_contenido()
 
