@@ -6,6 +6,14 @@
 # Versionado de esquema + migraciones automáticas (RF6/RF7/RF11).
 # Cada migración es una función pura (dict -> dict), aplicada en orden estricto.
 # RN4: todo campo nuevo debe tener default o migración.
+#
+# ── iter. 4 ───────────────────────────────────────────────────────────────
+# Modelo: DeepSeek-V4.1-Flash · Plataforma: WorkBuddy · Fecha: 2026-09-15
+# `migrar()` se partió en `migrar_con_cadena()` (motor con cadena y objetivo
+# INYECTABLES) para poder probar en headless los caminos que la producción aún
+# no alcanza con MIGRACIONES vacío: N saltos, fallo de migración, no-avance de
+# versión, cadena incompleta e idempotencia. Se agregaron los patrones puros
+# `renombrar_campo` / `eliminar_campo` / `transformar_valor`.
 
 class_name Versionador
 extends RefCounted
@@ -37,13 +45,25 @@ static func migrar_v1_a_v2(datos: Dictionary) -> Dictionary:
 ## Si la versión es >= VERSION_ACTUAL, devuelve sin cambios.
 ## Si es futura (usa Cargar() para eso), migrar no la toca: ok=true, datos=original.
 static func migrar(datos: Dictionary) -> Dictionary:
+	return migrar_con_cadena(datos, MIGRACIONES, VERSION_ACTUAL)
+
+## ── iter. 4: motor de migración inyectable (testeable en aislamiento) ──────
+## Misma semántica que `migrar()`, pero la cadena y la versión objetivo se
+## pasan como parámetros. Permite PROBAR los caminos que la producción todavía
+## no alcanza (MIGRACIONES está vacío mientras VERSION_ACTUAL == 1):
+## N saltos reales, migración que falla, migración que no avanza versión,
+## cadena incompleta, idempotencia. `migrar()` delega aquí sin cambiar nada.
+##
+## `cadena[i]` lleva de la versión i+1 a la i+2 (igual que MIGRACIONES).
+## Devuelve {ok, datos} o {ok:false, error}. Nunca muta `datos`.
+static func migrar_con_cadena(datos: Dictionary, cadena: Array, objetivo: int) -> Dictionary:
 	var version: int = int(datos.get("version", 0))
-	if version >= VERSION_ACTUAL:
+	if version >= objetivo:
 		return {"ok": true, "datos": datos.duplicate(true)}
 	var copia := datos.duplicate(true)
 	var v := version
-	while v < VERSION_ACTUAL:
-		# MIGRACIONES[v - 1] lleva de v a v+1
+	while v < objetivo:
+		# cadena[v - 1] lleva de v a v+1
 		var idx := v - 1
 		if idx < 0:
 			# Un save sin versión (v0 original) no tiene migración de partida:
@@ -51,9 +71,9 @@ static func migrar(datos: Dictionary) -> Dictionary:
 			copia["version"] = 1
 			v = 1
 			continue
-		if idx >= MIGRACIONES.size():
+		if idx >= cadena.size():
 			return {"ok": false, "error": "Falta migración v%d -> v%d" % [v, v + 1]}
-		var migracion: Callable = MIGRACIONES[idx]
+		var migracion: Callable = cadena[idx]
 		var antes: int = int(copia.get("version", 0))
 		copia = migracion.call(copia)
 		var despues: int = int(copia.get("version", antes))
@@ -61,6 +81,36 @@ static func migrar(datos: Dictionary) -> Dictionary:
 			return {"ok": false, "error": "Migración no avanzó versión (%d -> %d)" % [antes, despues]}
 		v = despues
 	return {"ok": true, "datos": copia}
+
+## ── iter. 4: patrones reutilizables de migración (funciones puras) ─────────
+## Los tres cambios de esquema que más se repiten. Son puras (no mutan la
+## entrada) y se combinan dentro de una migración registrada en MIGRACIONES.
+
+## Patrón "campo renombrado": mueve `viejo` -> `nuevo`. Si `viejo` no está y
+## `nuevo` tampoco, aplica `por_defecto` (o no toca nada si es null).
+static func renombrar_campo(datos: Dictionary, viejo: String, nuevo: String, por_defecto: Variant = null) -> Dictionary:
+	var r := datos.duplicate(true)
+	if r.has(viejo):
+		r[nuevo] = r[viejo]
+		r.erase(viejo)
+	elif not r.has(nuevo) and por_defecto != null:
+		r[nuevo] = por_defecto
+	return r
+
+## Patrón "campo eliminado": limpia el dato sin romper a los consumidores
+## (los consumidores deben tolerar la ausencia vía default del contrato).
+static func eliminar_campo(datos: Dictionary, campo: String) -> Dictionary:
+	var r := datos.duplicate(true)
+	r.erase(campo)
+	return r
+
+## Patrón "transformación de valores" (ej: energía de kcal a J): aplica `fn`
+## al valor del campo. Si el campo no existe, no inventa nada.
+static func transformar_valor(datos: Dictionary, campo: String, fn: Callable) -> Dictionary:
+	var r := datos.duplicate(true)
+	if r.has(campo):
+		r[campo] = fn.call(r[campo])
+	return r
 
 ## true si el save es de una versión más nueva que este juego (rechazar carga).
 static func version_futura(datos: Dictionary) -> bool:

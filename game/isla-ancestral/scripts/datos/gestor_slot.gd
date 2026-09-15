@@ -58,14 +58,37 @@ static func existe_slot(slot: int) -> bool:
 	var r := rutas_slot(slot)
 	return FileAccess.file_exists(r["save"])
 
+## Sufijos de backup que puede dejar GestorBackups (ventana MAX_BACKUPS = 3).
+## Se escriben como literales a propósito: GestorBackups referencia a
+## GestorSlot, así que la referencia inversa crearía una dependencia cíclica.
+const _SUFIJOS_BAK: Array[String] = [".bak", ".bak.1", ".bak.2"]
+
 ## Borra el slot completo (confirmación del llamador). Devuelve bool.
+## iter. 4: además de save/voxel/meta, borra `mundo_voxel.bin.deflate` (la
+## variante comprimida de T-145) y las copias de backup del save Y del voxel.
+## Antes quedaban huérfanas: el directorio del slot no se podía eliminar y el
+## espacio no se recuperaba.
 static func borrar_slot(slot: int) -> bool:
 	if slot < 1 or slot > SLOT_COUNT:
 		return false
 	var r := rutas_slot(slot)
+	var save: String = String(r["save"])
+	var voxel: String = String(r["voxel"])
+	var rutas: Array[String] = [save, voxel, String(r["meta"]), voxel + ".deflate"]
+	for sufijo in _SUFIJOS_BAK:
+		rutas.append(save + sufijo)
+		rutas.append(voxel + sufijo)
+	# iter. 4: si el slot no tenía NINGÚN archivo, no existía -> false sin error
+	# (antes devolvía true aunque no hubiera borrado nada: mentía al llamador).
+	var habia_algo := false
+	for path in rutas:
+		if FileAccess.file_exists(path):
+			habia_algo = true
+			break
+	if not habia_algo:
+		return false
 	var ok := true
-	for clave in ["save", "voxel", "meta", "bak"]:
-		var path: String = r[clave]
+	for path in rutas:
 		if FileAccess.file_exists(path):
 			if DirAccess.remove_absolute(path) != OK:
 				ok = false

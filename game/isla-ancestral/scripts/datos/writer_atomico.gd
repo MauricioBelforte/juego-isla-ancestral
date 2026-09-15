@@ -27,9 +27,10 @@ static func escribir_atomicamente(ruta: String, contenido: String) -> Error:
 	var ruta_bak := ruta + BAK_SUFFIX
 
 	# 1) Backup del archivo actual (RN3: el .bak sobrevive a cambios de versión)
+	#    iter. 3: se ROTA la cadena (`.bak` -> `.bak.1` -> `.bak.2`) en vez de
+	#    borrar la copia anterior; se conservan MAX_BACKUPS por slot (T-109).
 	if FileAccess.file_exists(ruta):
-		if FileAccess.file_exists(ruta_bak):
-			DirAccess.remove_absolute(ruta_bak)
+		GestorBackups.rotar(ruta)
 		var err_copy := DirAccess.copy_absolute(ruta, ruta_bak)
 		if err_copy != OK:
 			push_warning("[M60] No se pudo crear backup %s (err=%d)" % [ruta_bak, err_copy])
@@ -67,13 +68,16 @@ static func escribir_atomicamente(ruta: String, contenido: String) -> Error:
 ## Restaura el .bak sobre el archivo principal (recuperación manual, M107).
 ## Devuelve Error.
 static func restaurar_backup(ruta: String) -> Error:
-	var ruta_bak := ruta + BAK_SUFFIX
-	if not FileAccess.file_exists(ruta_bak):
-		return ERR_FILE_NOT_FOUND
-	var err := DirAccess.copy_absolute(ruta_bak, ruta)
-	if err == OK:
-		print("[M60] Backup restaurado: %s" % ruta)
-	return err
+	return GestorBackups.restaurar(ruta, 0)
+
+## iter. 3 (T-109): restaura una copia concreta de la ventana (0 = `.bak`).
+## Permite a M107 ofrecer "recuperar la versión anterior" con historial.
+static func restaurar_backup_indice(ruta: String, indice: int) -> Error:
+	return GestorBackups.restaurar(ruta, indice)
+
+## iter. 3 (T-109): copias de backup disponibles para un archivo.
+static func copias_backup(ruta: String) -> Array[String]:
+	return GestorBackups.listar(ruta)
 
 ## Construye el contenido del archivo: checksum\npayload_str (patrón §9.11).
 static func construir_con_checksum(payload_str: String) -> String:
@@ -124,8 +128,7 @@ static func escribir_atomicamente_crudo(ruta: String, texto: String) -> Error:
 	var ruta_tmp := ruta + TMP_SUFFIX
 	var ruta_bak := ruta + BAK_SUFFIX
 	if FileAccess.file_exists(ruta):
-		if FileAccess.file_exists(ruta_bak):
-			DirAccess.remove_absolute(ruta_bak)
+		GestorBackups.rotar(ruta)  # iter. 3: ventana de MAX_BACKUPS (T-109)
 		DirAccess.copy_absolute(ruta, ruta_bak)
 	var contenido := construir_con_checksum_crudo(texto)
 	var file := FileAccess.open(ruta_tmp, FileAccess.WRITE)

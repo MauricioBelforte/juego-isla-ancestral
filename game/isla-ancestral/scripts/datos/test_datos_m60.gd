@@ -2,17 +2,31 @@
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
+# ── iter. 2: test del guardado asincrónico (RF10) ─────────────────
+# Modelo: DeepSeek-V4.1-Flash
+# Plataforma: WorkBuddy
+# Fecha: 2026-09-11
+# Se agregó `_test_datastore_async`: prueba que `guardar_partida_async` NO
+# bloquea el hilo principal, que el doble guardado concurrente se ENCOLA
+# (profundidad 1, "la última gana") y que el resultado se entrega por señal
+# desde el hilo principal. Es el test que cubre el checklist "test de hilo:
+# guardado asincrónico sin bloquear el frame".
+#
 # M60: Datos y Serialización — Test headless end-to-end.
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60.gd
 # Valida: Serializer (JSON/voxel/plano), Validador (CRC32/contrato),
 # Versionador (migraciones), WriterAtomico (atómico + backup), GestorSlot,
 # GestorConfig (defaults), CatalogosEstaticos (fallback limpio), DataStore
-# end-to-end (guardar -> cargar -> igualdad). Exit code != 0 si falla.
+# end-to-end (guardar -> cargar -> igualdad) y DataStore async (RF10).
+# Exit code != 0 si falla.
 
 extends SceneTree
 
 var _fallos: int = 0
 var _checks: int = 0
+## Traza ordenada de los eventos de RF10 (señales del DataStore) para
+## verificar la secuencia arranque -> fin -> arranque de cola -> fin.
+var _eventos_async: Array = []
 
 func _init() -> void:
 	call_deferred("_run")
@@ -32,6 +46,7 @@ func _run() -> void:
 	_test_gestor_config()
 	_test_catalogos()
 	_test_datastore_end_to_end()
+	await _test_datastore_async()
 	_summary()
 
 ## ── Helpers ─────────────────────────────────────────────
@@ -325,6 +340,145 @@ func _test_datastore_end_to_end() -> void:
 	# borrar slot
 	_check("borrar via DataStore", ds.borrar_slot(1))
 	_check("tras borrar no existe", not GestorSlot.existe_slot(1))
+
+## ── DataStore async (RF10) ──────────────────────────────────
+
+## Prueba el guardado fuera del hilo principal:
+##  1) la llamada vuelve de inmediato y el hilo queda en curso;
+##  2) el doble guardado concurrente se ENCOLA (profundidad 1, "la última gana");
+##  3) los eventos llegan en orden arranque -> fin -> arranque-cola -> fin;
+##  4) el disco queda con el contenido de la ÚLTIMA petición;
+##  5) el slot fuera de rango se rechaza sin arrancar hilo.
+func _test_datastore_async() -> void:
+	print("--- DataStore: guardado asincrónico RF10 (hilo secundario) ---")
+	var ds := root.get_node_or_null("DataStore")
+	if ds == null:
+		_check("autoload DataStore presente (async)", false)
+		return
+	_check("API async presente",
+		ds.has_method("guardar_partida_async") and ds.has_method("guardado_en_curso")
+		and ds.has_method("slot_en_curso") and ds.has_method("ultimo_resultado_async"))
+
+	# Conectar la traza de señales ANTES de disparar nada.
+	_eventos_async.clear()
+	ds.guardado_async_iniciado.connect(_on_async_iniciado)
+	ds.guardado_async_encolado.connect(_on_async_encolado)
+	ds.guardado_slot.connect(_on_guardado_slot)
+
+	# 1) Arranque: la llamada NO bloquea y el hilo queda vivo.
+	var t0 := Time.get_ticks_msec()
+	var r1: Dictionary = ds.guardar_partida_async(2, _datos_partida("Async-A", 11.0))
+	var t_llamada := Time.get_ticks_msec() - t0
+	_check("petición inicial aceptada", r1.get("ok", false) == true and r1.get("aceptado", false) == true)
+	_check("no encolada (primer guardado)", r1.get("encolado", true) == false)
+	_check("llamada no bloquea (< 50 ms)", t_llamada < 50, "t=%d ms" % t_llamada)
+	_check("hilo en curso tras la llamada", ds.guardado_en_curso() == true)
+	_check("slot en curso == 2", ds.slot_en_curso() == 2)
+	_check("señal guardado_async_iniciado(2)", _contar_evento("iniciado", 2) == 1)
+
+	# 2) Doble guardado concurrente -> se ENCOLA (no reescribe en paralelo).
+	var r2: Dictionary = ds.guardar_partida_async(3, _datos_partida("Async-B", 22.0))
+	_check("segundo guardado encolado", r2.get("encolado", false) == true)
+	_check("primer encolado no es reemplazo", r2.get("reemplazo", true) == false)
+	_check("señal guardado_async_encolado(3, reemplazo=false)", _contar_evento("encolado", 3, false) == 1)
+
+	# 3) Tercer guardado REEMPLAZA al encolado (profundidad 1, "la última gana").
+	var r3: Dictionary = ds.guardar_partida_async(2, _datos_partida("Async-C", 33.0))
+	_check("tercer guardado encolado", r3.get("encolado", false) == true)
+	_check("tercer guardado ES reemplazo", r3.get("reemplazo", false) == true)
+	_check("señal guardado_async_encolado(2, reemplazo=true)", _contar_evento("encolado", 2, true) == 1)
+	_check("el hilo en curso NO se pisó (sigue slot 2)", ds.slot_en_curso() == 2)
+
+	# 4) Esperar a que se drenen las 2 escrituras (la inicial + la encolada).
+	var ok_drenaje := await _esperar_eventos(ds, 2, 900)
+	_check("ambos guardados terminaron (2 señales guardado_slot)", ok_drenaje)
+	_check("sin hilo en curso al drenar", ds.guardado_en_curso() == false)
+	_check("slot en curso -1 al drenar", ds.slot_en_curso() == -1)
+
+	# 5) Secuencia esperada: iniciado(2) -> fin(2) -> iniciado(2) -> fin(2).
+	var secuencia := _secuencia_eventos()
+	_check("secuencia iniciado/fin correcta",
+		secuencia == ["iniciado:2", "fin:2", "iniciado:2", "fin:2"],
+		"secuencia=%s" % str(secuencia))
+
+	# 6) El resultado final es el de la cola y viene del hilo (no del fallback sync).
+	var ult: Dictionary = ds.ultimo_resultado_async()
+	_check("resultado async final ok", ult.get("ok", false) == true)
+	_check("resultado marcado como hilo (no fallback sync)", ult.get("hilo", false) == true)
+	_check("checksum del resultado no vacío", String(ult.get("checksum", "")).length() > 0)
+	_check("dos señales guardado_slot ok", _contar_evento("fin", 2) == 2)
+
+	# 7) En disco quedó el contenido de la ÚLTIMA petición (Async-C).
+	var res: Dictionary = ds.cargar_partida(2)
+	_check("slot 2 cargable", res.get("ok", false) == true)
+	var cargado: Dictionary = res.get("datos", {})
+	var nombre: String = String(cargado.get("meta", {}).get("nombre", ""))
+	_check("slot 2 = última petición (Async-C)", nombre == "Async-C", "nombre=%s" % nombre)
+	_check("slot 2 NO quedó con la petición descartada (Async-B)", nombre != "Async-B")
+	_check("el encolado descartado NO escribió el slot 3", not GestorSlot.existe_slot(3))
+
+	# 8) Slot fuera de rango -> rechazo limpio, sin arrancar hilo.
+	var r_bad: Dictionary = ds.guardar_partida_async(99, {})
+	_check("slot fuera de rango rechazado",
+		r_bad.get("ok", true) == false and r_bad.get("aceptado", true) == false)
+	_check("rechazo no arranca hilo", ds.guardado_en_curso() == false)
+
+	ds.guardado_async_iniciado.disconnect(_on_async_iniciado)
+	ds.guardado_async_encolado.disconnect(_on_async_encolado)
+	ds.guardado_slot.disconnect(_on_guardado_slot)
+
+	ds.borrar_slot(2)
+
+## Payload de partida mínimo y válido para los tests de guardado.
+func _datos_partida(nombre: String, x: float) -> Dictionary:
+	return {
+		"meta": {"nombre": nombre},
+		"jugador": {"pos": [x, 2.0, 3.0], "rot": 0.0, "vida": 100, "energia": 100},
+		"inventario": {"slots": [{"id": "wood", "n": 5}, {"id": "stone", "n": 2}]},
+		"tiempo": {"dia_anio": 3, "hora": 9.0, "estacion": "verano"},
+		"mundo_voxel": {"semilla": 777, "chunks_editados": 1, "chunks": [
+			{"coord": Vector3i(0, 0, 0), "voxeles": PackedInt32Array([1, 1, 1])},
+		]},
+	}
+
+func _on_async_iniciado(slot: int) -> void:
+	_eventos_async.append({"tipo": "iniciado", "slot": slot})
+
+func _on_async_encolado(slot: int, reemplazo: bool) -> void:
+	_eventos_async.append({"tipo": "encolado", "slot": slot, "reemplazo": reemplazo})
+
+func _on_guardado_slot(slot: int, ok: bool, _dur: int, _bytes: int) -> void:
+	_eventos_async.append({"tipo": "fin", "slot": slot, "ok": ok})
+
+## Cuenta eventos del tipo/slot dados (reemplazo opcional: -1 = no filtrar).
+func _contar_evento(tipo: String, slot: int, reemplazo: int = -1) -> int:
+	var n := 0
+	for e in _eventos_async:
+		if e.get("tipo", "") != tipo or int(e.get("slot", -1)) != slot:
+			continue
+		if reemplazo >= 0 and bool(e.get("reemplazo", false)) != (reemplazo == 1):
+			continue
+		n += 1
+	return n
+
+## Secuencia compacta "tipo:slot" del ciclo arranque/fin (ignora los encolados).
+func _secuencia_eventos() -> Array:
+	var s: Array = []
+	for e in _eventos_async:
+		if e.get("tipo", "") == "encolado":
+			continue
+		s.append("%s:%d" % [e.get("tipo", "?"), int(e.get("slot", -1))])
+	return s
+
+## Cede frames hasta juntar `objetivo` señales de fin (o agotar el timeout).
+## NO bloquea: `await process_frame` devuelve el control al bucle principal,
+## que es donde el DataStore drena el hilo en su `_process`.
+func _esperar_eventos(ds: Node, objetivo: int, max_frames: int) -> bool:
+	var frames := 0
+	while _contar_evento("fin", 2) + _contar_evento("fin", 3) < objetivo and frames < max_frames:
+		await process_frame
+		frames += 1
+	return not ds.guardado_en_curso()
 
 ## ── Summary ──────────────────────────────────────────────
 
