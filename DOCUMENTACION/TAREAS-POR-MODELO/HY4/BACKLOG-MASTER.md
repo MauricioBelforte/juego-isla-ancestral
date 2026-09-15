@@ -235,3 +235,52 @@ Usa la paleta estandar del proyecto:
 5. **Completar M25 Ruinas** restante (columnas, dintel, palanca, estructura sumergida)
 6. **Completar M35 Mineria** restante (caña pesca, pez, cangrejo, carrito)
 7. **Revision visual M18-TER** — 30 accesorios de tienda pendientes de aprobar
+
+---
+
+## Opción B — "parchar huecos" (encargada por el usuario 2026-09-14)
+
+Rol asignado explicitamente: *"te necesito en este tipo de tareas parchando
+huecos"*. Cuatro frentes transversales. Estado al 2026-09-14:
+
+| # | Frente | Estado | Log | Commits |
+|---|--------|--------|-----|---------|
+| B1 | Mojibake real | **CERRADO** | 903 | `f308b7c`, `c952bdf` |
+| B2 | 14 módulos sobre-cerrados | **CERRADO** (ninguno lo estaba) | 904 | `d35d458` |
+| B3 | Log 723 inexistente | **CERRADO** | 904 | `a50b061` |
+| B3b | 296 rutas `.cs` fantasma | **PENDIENTE** (decidir alcance) | — | — |
+| B4 | Vigilar primer push de CI | **PENDIENTE** | — | — |
+
+### B1 — Mojibake
+Los 22 marcadores que quedaban eran **documentación** del síntoma, no
+corrupción. Se añadió filtro por contenido de línea (`PAT_LINEA_DOC`) y
+`scripts/test_diagnosticar_mojibake.py` como guarda contra falso verde.
+Verificador: **SUCIO 0 / IRREVERSIBLE 0**.
+
+### B2 — Auditoría de sobre-cierre
+**Ninguno de los 14 está sobre-cerrado.** Los 7 revertidos por agnes sí estaban
+bien reflejados (fila global 0/N). Trampas corregidas: contar `[x]` a secas
+cuenta el propio banner de reversión; `head`/`grep` muestran falso mojibake por
+la consola.
+Desajustes reales (cierre no propagado): **M145** 105/105 vs fila 90/105,
+**M146** 100/100 vs 90/100, **M119** 118 vs 100, **M136** 199 vs 200.
+→ M145/M146 derivados a Hy3 (QA §21.8); el perfil Hy4 excluye el sello.
+
+### B2b — BOM (hallazgo mayor, §28)
+`scripts/fix_encoding.py` **detecta el BOM y lo descarta**: líneas 195-196 lo
+quitan en memoria y la 260 solo reescribe cp1252/mojibake. Por eso sobrevivían.
+Alcance medido: **509 archivos** (`scripts/verificar_bom.py`).
+Corregidos los 7 del alcance auditado; **5 de ellos eran regresiones recién
+introducidas** (HEAD limpio, BOM solo en working tree) → hay agentes escribiendo
+BOM ahora mismo. Quedan 502 por decidir (362 en `Logs/`, histórico).
+
+### B3 — Log 723
+`CHECKLIST-GLOBAL.md` citaba 2 veces el "Log 723" como QA de M11, pero no
+existe (salta 722→724). El QA real es el **Log 835**
+(`Logs/835-HY3-M11-QA-CRUZADO.md`). Sustituido.
+
+### B3b — Rutas `.cs` (pendiente)
+296 rutas distintas, 561 ocurrencias; 531 en `DOCUMENTACION`, de las que
+**238 están en `plan-actual`** (documentación viva), no solo en el diseño
+histórico de Unity. Concentradas en M01 (55), M113 (22×3), M109 (21×4),
+M141 (13×2). No se tocan sin decidir: renombrar `.cs`→`.gd` sería ficción.
