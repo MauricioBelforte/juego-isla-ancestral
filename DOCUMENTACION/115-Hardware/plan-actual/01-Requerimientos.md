@@ -1,4 +1,4 @@
-﻿# Módulo 115: Hardware — Requerimientos
+# Módulo 115: Hardware — Requerimientos
 
 **Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code
