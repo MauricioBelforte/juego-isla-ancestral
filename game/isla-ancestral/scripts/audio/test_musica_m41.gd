@@ -1,4 +1,4 @@
-﻿# Modelo: agnes-2.5-flash
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #

@@ -1,4 +1,4 @@
-﻿# 36-Fauna — Checklist (plan-actual)
+# 36-Fauna — Checklist (plan-actual)
 
 **Modelo:** Hy3
 **Plataforma:** Kilo Code

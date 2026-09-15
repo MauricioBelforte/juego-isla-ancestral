@@ -1,1 +1,1 @@
-﻿# juego-isla-ancestral
+# juego-isla-ancestral

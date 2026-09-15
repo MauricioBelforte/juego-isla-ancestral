@@ -1,4 +1,4 @@
-﻿**Modelo:** agnes-2.5-flash (implementación) / MiMo V2.5 (coordinación)
+**Modelo:** agnes-2.5-flash (implementación) / MiMo V2.5 (coordinación)
 **Plataforma:** Kilo Code / OpenCode
 **Última actualización:** 2026-09-01
 

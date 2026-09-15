@@ -1,4 +1,4 @@
-﻿# Modelo: deepseek-v4-flash
+# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #

@@ -1,4 +1,4 @@
-﻿# 65-Animales-IA — Checklist (plan-actual)
+# 65-Animales-IA — Checklist (plan-actual)
 
 **Modelo:** Hy3
 **Plataforma:** Kilo Code

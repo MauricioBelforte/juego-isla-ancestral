@@ -1,4 +1,4 @@
-﻿# capturar_decor_batch.py — recorre los .blend de decoracion y captura
+# capturar_decor_batch.py — recorre los .blend de decoracion y captura
 # cada item (vista 3/4 frontal). HEADLESS.
 # E-92: tras open_mainfile, las referencias Python a la camara/luz de la
 # escena previa quedan invalidas ("StructRNA removed") — se RE-CREAN

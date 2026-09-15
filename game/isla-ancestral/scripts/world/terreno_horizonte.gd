@@ -1,4 +1,4 @@
-﻿# Modelo: glm-5.3-flash
+# Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-08
 #

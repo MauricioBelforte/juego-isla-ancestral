@@ -1,4 +1,4 @@
-﻿**Modelo:** step-3.7-flash
+**Modelo:** step-3.7-flash
 **Plataforma:** Kilo Code
 **Modulo:** 122-Crash-Reporting (122)
 

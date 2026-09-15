@@ -1,4 +1,4 @@
-﻿**Modelo:** deepseek-v4-flash (último modificador)
+**Modelo:** deepseek-v4-flash (último modificador)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01 (reserva + iter. 1 núcleo)
 

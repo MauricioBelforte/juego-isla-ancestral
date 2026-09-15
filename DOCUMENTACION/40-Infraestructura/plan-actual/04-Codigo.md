@@ -1,4 +1,4 @@
-﻿**Modelo:** deepseek-v4-flash (último modificador)
+**Modelo:** deepseek-v4-flash (último modificador)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01 (iter. 2 — Log 328; historial: Deepseek V4 Flash/Kilo iter. 1 Log 298; doc original 2026-08-17)
 

@@ -1,4 +1,4 @@
-﻿**Modelo:** Nemotron 3.5 Lightning
+**Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
 # 02-Analisis.md — Módulo 118: CI/CD

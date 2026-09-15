@@ -1,4 +1,4 @@
-﻿**Modelo:** Nemotron 3.5 Lightning
+**Modelo:** Nemotron 3.5 Lightning
 **Plataforma:** Cline
 
 # 04-Codigo.md — Módulo 131: Créditos

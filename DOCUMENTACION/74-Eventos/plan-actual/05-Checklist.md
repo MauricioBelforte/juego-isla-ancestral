@@ -1,4 +1,4 @@
-﻿**Modelo original:** Deepseek V4 Flash
+**Modelo original:** Deepseek V4 Flash
 **Plataforma original:** OpenCode
 **QA cruzado:** Hy3 / WorkBuddy (Log 362)
 

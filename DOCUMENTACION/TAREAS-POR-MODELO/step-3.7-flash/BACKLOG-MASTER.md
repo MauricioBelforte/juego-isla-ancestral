@@ -1,4 +1,4 @@
-﻿**Modelo:** step-3.7-flash
+**Modelo:** step-3.7-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-02
 **Última actualización:** 2026-09-02 — avance M119 cerrado 100/100 Log 549; M108 núcleo V0 creado; headless bloqueado Log 532

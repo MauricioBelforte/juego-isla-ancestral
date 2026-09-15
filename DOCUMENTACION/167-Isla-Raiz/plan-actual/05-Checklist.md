@@ -1,4 +1,4 @@
-﻿**Modelo:** Hy3
+**Modelo:** Hy3
 **Plataforma:** Kilo
 
 # 05-Checklist.md — Módulo 167: Isla Raíz — Isla Raíz — Registro del Terreno y Posicionamiento

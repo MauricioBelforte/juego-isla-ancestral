@@ -1,4 +1,4 @@
-﻿**Modelo:** minimax-m3-free (Kilo Code)
+**Modelo:** minimax-m3-free (Kilo Code)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-08-27 (iteración 4)
 

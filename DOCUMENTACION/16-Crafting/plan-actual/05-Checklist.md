@@ -1,4 +1,4 @@
-﻿Log reservado: 512
+Log reservado: 512
 ## Reserva actual
 
 - Estado: 🔵 En curso

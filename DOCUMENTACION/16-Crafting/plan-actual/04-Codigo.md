@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 04-Codigo.md — Módulo 16: Crafting

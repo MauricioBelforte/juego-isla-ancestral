@@ -1,4 +1,4 @@
-﻿**Modelo:** ox-alpha (Cline)
+**Modelo:** ox-alpha (Cline)
 **Plataforma:** Cline
 
 

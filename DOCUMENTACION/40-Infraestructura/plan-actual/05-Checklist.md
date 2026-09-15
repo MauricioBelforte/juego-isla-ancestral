@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** Kilo
 
 # 05-Checklist.md — Módulo 40: Infraestructura

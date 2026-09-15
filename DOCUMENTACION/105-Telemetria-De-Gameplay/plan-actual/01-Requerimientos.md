@@ -1,4 +1,4 @@
-﻿**Modelo:** ox-alpha
+**Modelo:** ox-alpha
 **Plataforma:** Cline
 
 # 01-Requerimientos.md — Módulo 105: Telemetría de Gameplay
