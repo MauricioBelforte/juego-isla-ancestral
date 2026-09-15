@@ -8,21 +8,21 @@
 ### 1.1 Nuevos
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/World/Lore/PiezaDeLore.cs` | SO | Modelo de datos de la pieza (Id, CanonRef, Tipo, Texto, ConsumidorId) |
-| `Assets/_Project/Scripts/World/Lore/LoreCatalogo.cs` | Manager | Catálogo central con índice por isla/tipo; lookup por Id |
-| `Assets/_Project/Scripts/World/Lore/TriggerLore.cs` | MonoBehaviour | Trigger de inspección reutilizable (IInteractable) |
-| `Assets/_Project/Scripts/World/Lore/TerrenoLoreService.cs` | Servicio | Activa secretos por temporada (M74/M50) |
-| `Assets/_Project/Scripts/UI/DiarioLoreSeccion.cs` | UI (M55) | Sección "Lore Ambiental" con contadores y filtros |
-| `Assets/Editor/Lore/LoreAuditor.cs` | Editor | Valida canonRef, IDs únicos, grafo de pistas, cobertura por isla |
+| `Assets/_Project/Scripts/World/Lore/PiezaDeLore.cs` _(diseno heredado)_ | SO | Modelo de datos de la pieza (Id, CanonRef, Tipo, Texto, ConsumidorId) |
+| `scripts/lore/lore_catalogo.gd` | Manager | Catálogo central con índice por isla/tipo; lookup por Id |
+| `Assets/_Project/Scripts/World/Lore/TriggerLore.cs` _(diseno heredado)_ | MonoBehaviour | Trigger de inspección reutilizable (IInteractable) |
+| `scripts/lore/terreno_lore_service.gd` | Servicio | Activa secretos por temporada (M74/M50) |
+| `Assets/_Project/Scripts/UI/DiarioLoreSeccion.cs` _(diseno heredado)_ | UI (M55) | Sección "Lore Ambiental" con contadores y filtros |
+| `scripts/lore/lore_auditor.gd` | Editor | Valida canonRef, IDs únicos, grafo de pistas, cobertura por isla |
 
 ### 1.2 Modificados
 | Archivo | Cambio |
 |---------|--------|
-| `DiarioManager.cs` (M55) | Sección Lore Ambiental; notificación de nuevo lore |
-| `SaveManager.cs` (M59) | Campo `loreExplorado` + migración v3.1 |
-| `ColeccionManager.cs` (M73) | Lore en fichas de pez/planta/mineral |
-| `NPCAmistad.cs` (M20/M21) | Rumores locativos (nivel ≥ 4) |
-| `CalendarioManager.cs` (M74) | Hook de nueva temporada → TerrenoLoreService |
+| `DiarioManager.cs` _(diseno heredado)_ (M55) | Sección Lore Ambiental; notificación de nuevo lore |
+| `scripts/saving/save_manager.gd` (M59) | Campo `loreExplorado` + migración v3.1 |
+| `ColeccionManager.cs` _(diseno heredado)_ (M73) | Lore en fichas de pez/planta/mineral |
+| `NPCAmistad.cs` _(diseno heredado)_ (M20/M21) | Rumores locativos (nivel ≥ 4) |
+| `CalendarioManager.cs` _(diseno heredado)_ (M74) | Hook de nueva temporada → TerrenoLoreService |
 
 ## 2. Funciones clave
 ```csharp

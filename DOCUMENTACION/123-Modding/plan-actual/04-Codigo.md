@@ -8,11 +8,11 @@
 ### 1.1 Nuevos (post-V2, para referencia de diseño)
 | Archivo | Propósito |
 |---------|-----------|
-| `Assets/_Project/Scripts/Core/Modding/ModManifest.cs` | Modelo del manifiesto (id, versión, minBuild, override[]) |
-| `Assets/_Project/Scripts/Core/Modding/ModLoader.cs` | Carga/orden/validación/conflictos |
-| `Assets/_Project/Scripts/Core/Modding/ModValidator.cs` | Wrapper de M109 para mods |
-| `Assets/_Project/Scripts/Core/Modding/ModContext.cs` | Runtime: dominios modables + flags |
-| `Assets/_Project/Scripts/UI/ModsScreen.cs` | Pantalla de mods (M89): lista, errores, prioridad |
+| `Assets/_Project/Scripts/Core/Modding/ModManifest.cs` _(diseno heredado)_ | Modelo del manifiesto (id, versión, minBuild, override[]) |
+| `Assets/_Project/Scripts/Core/Modding/ModLoader.cs` _(diseno heredado)_ | Carga/orden/validación/conflictos |
+| `scripts/modding/mod_validator.gd` | Wrapper de M109 para mods |
+| `Assets/_Project/Scripts/Core/Modding/ModContext.cs` _(diseno heredado)_ | Runtime: dominios modables + flags |
+| `Assets/_Project/Scripts/UI/ModsScreen.cs` _(diseno heredado)_ | Pantalla de mods (M89): lista, errores, prioridad |
 | `scripts/mods/modchecker.py` | CLI validate (CI + modo local) |
 | `docs/mods/README.md` | Guía de modding + ejemplo |
 

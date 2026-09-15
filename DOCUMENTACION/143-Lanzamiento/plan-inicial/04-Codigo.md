@@ -8,8 +8,8 @@ El lanzamiento es operativo: usa piezas ya existentes (M104/M105/M106/M101/M149/
 
 | Archivo | Función |
 |---------|---------|
-| `Assets/Editor/Launch/PublicarBuild.cs` | Verifica hash `rc-final` y publica en plataforma (solo con credenciales de CI) |
-| `Assets/Editor/Launch/VerificarPublicacion.cs` | Chequea "visible" de la página tras publicar (todas las plataformas) |
+| `Assets/Editor/Launch/PublicarBuild.cs` _(diseno heredado)_ | Verifica hash `rc-final` y publica en plataforma (solo con credenciales de CI) |
+| `Assets/Editor/Launch/VerificarPublicacion.cs` _(diseno heredado)_ | Chequea "visible" de la página tras publicar (todas las plataformas) |
 | `scripts/ops/dashboard_crashes.py` | Lee crash de M105 → tablero + alerta si ≥ 0.5% |
 | `scripts/ops/dashboard_reviews.py` | Ingesta de reviews (M106) → triaje y respuestas |
 | `scripts/ops/dashboard_backend.py` | Latencia/errores del backend (M104) |

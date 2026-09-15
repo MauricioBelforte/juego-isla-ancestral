@@ -22,9 +22,9 @@
 | `project.godot` | Autoload `PlatformManager="*res://scripts/plataformas/platform_manager.gd"` |
 
 ### 1.3 Diferencias vs diseño original (Unity/C#)
-- `IPlatformBridge.cs` → `iplatform_bridge.gd` (RefCounted base, métodos virtuales)
-- `NullBridge.cs` / `SteamBridge.cs` → `null_bridge.gd` / `steam_bridge.gd` (GDScript)
-- `PlatformManager.cs` → `platform_manager.gd` (autoload, sin class_name §9.17)
+- `scripts/plataformas/iplatform_bridge.gd` → `iplatform_bridge.gd` (RefCounted base, métodos virtuales)
+- `scripts/plataformas/null_bridge.gd` / `scripts/plataformas/steam_bridge.gd` → `null_bridge.gd` / `steam_bridge.gd` (GDScript)
+- `scripts/plataformas/platform_manager.gd` → `platform_manager.gd` (autoload, sin class_name §9.17)
 - `plataformas.json` de M96 → implementado como data-driven en `data/plataformas/`
 - `steamdeck_check.py`, `build_targets.ps1` → pendientes (CI, M149)
 

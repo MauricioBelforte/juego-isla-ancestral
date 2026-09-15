@@ -8,12 +8,12 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/Core/SoftlockGuard.cs` | Singleton detector + recuperador (tick 60 s + eventos) |
+| `scripts/core/softlock_guard.gd` | Singleton detector + recuperador (tick 60 s + eventos) |
 | `Assets/_Project/Scripts/Core/Invariants/*.cs` | Invariantes por categoría (objeto, NPC, misión, puzzle, vehículo, jugador) |
-| `Assets/_Project/Scripts/Core/Recovery/CofreRecuperacion.cs` | Catálogo de objetos únicos recuperados (1 copia inmutable) |
-| `Assets/_Project/Scripts/Core/Recovery/CheckpointManager.cs` | 3 slots/bioma + emergencia; escritura atómica |
-| `Assets/_Project/Scripts/Core/Recovery/MisionFallbacks.cs` | Registro declarativo de rutas alternativas por objetivo |
-| `Assets/_Project/Scripts/Core/Recovery/NpcRestore.cs`, `VehiculoRestore.cs`, `JugadorRestore.cs` | Recuperaciones por categoría |
+| `scripts/core/recovery/cofre_recuperacion.gd` | Catálogo de objetos únicos recuperados (1 copia inmutable) |
+| `scripts/core/recovery/checkpoint_manager.gd` | 3 slots/bioma + emergencia; escritura atómica |
+| `Assets/_Project/Scripts/Core/Recovery/MisionFallbacks.cs` _(diseno heredado)_ | Registro declarativo de rutas alternativas por objetivo |
+| `Assets/_Project/Scripts/Core/Recovery/NpcRestore.cs` _(diseno heredado)_, `VehiculoRestore.cs` _(diseno heredado)_, `JugadorRestore.cs` _(diseno heredado)_ | Recuperaciones por categoría |
 | `Assets/_Project/Scripts/Data/SoftlockRules.asset` | Config (tiempos, radios, cantidades de slots) |
 
 ## API clave (borrador)

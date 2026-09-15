@@ -8,12 +8,12 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/Story/HistoriaPrincipal.cs` | Nodo raíz del grafo; resolver estado y puertas |
-| `Assets/_Project/Scripts/Story/Capitulo.cs` | Subgrafo por capítulo (requisitos, siguiente) |
-| `Assets/_Project/Scripts/Story/Escena.cs` | Nodo: tipo, requisitos, ramas, hooks (M33/M41) |
-| `Assets/_Project/Scripts/Story/Finales.cs` | Finales (principal, 3 alternativos, secreto) y condiciones |
-| `Assets/_Project/Scripts/Story/Misterio.cs` | Revelaciones, pistas, foreshadowing (pagos únicos) |
-| `Assets/_Project/Scripts/Story/ValidadorGuion.cs` | Editor + tests: grafo, anti-exposición, leaks |
+| `Assets/_Project/Scripts/Story/HistoriaPrincipal.cs` _(diseno heredado)_ | Nodo raíz del grafo; resolver estado y puertas |
+| `Assets/_Project/Scripts/Story/Capitulo.cs` _(diseno heredado)_ | Subgrafo por capítulo (requisitos, siguiente) |
+| `Assets/_Project/Scripts/Story/Escena.cs` _(diseno heredado)_ | Nodo: tipo, requisitos, ramas, hooks (M33/M41) |
+| `Assets/_Project/Scripts/Story/Finales.cs` _(diseno heredado)_ | Finales (principal, 3 alternativos, secreto) y condiciones |
+| `Assets/_Project/Scripts/Story/Misterio.cs` _(diseno heredado)_ | Revelaciones, pistas, foreshadowing (pagos únicos) |
+| `Assets/_Project/Scripts/Story/ValidadorGuion.cs` _(diseno heredado)_ | Editor + tests: grafo, anti-exposición, leaks |
 | `Assets/_Project/Scripts/Data/Historia/*.json` | Todo el contenido del arco serializado |
 
 ## API clave (borrador)

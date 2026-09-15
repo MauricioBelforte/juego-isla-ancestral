@@ -8,28 +8,28 @@
 ### 1.1 Nuevos (`Assets/_Project/Scripts/Testing/` — asmdef IslaAncestral.Stress)
 | Archivo | Propósito |
 |---------|-----------|
-| `Core/StressRunner.cs` | Orquestador headless (batch mode) |
-| `Core/StressScenario.cs` | Clase base: Setup/Execute/Teardown |
-| `Core/StressReport.cs` | Métricas p50/p95, memoria, tiempos, status |
-| `Escenarios/BlockStress.cs` | Miles de bloques modificados |
-| `Escenarios/NpcStress.cs` | Muchos NPC |
-| `Escenarios/FaunaStress.cs` | Muchos animales |
-| `Escenarios/VegetationStress.cs` | Mucha vegetación |
-| `Escenarios/ObjectStress.cs` | Muchos objetos |
-| `Escenarios/WorldStress.cs` | Mundo muy grande |
-| `Escenarios/InventoryStress.cs` | Inventario enorme |
-| `Escenarios/BuildingStress.cs` | Muchas construcciones |
-| `Escenarios/LongSessionStress.cs` | Sesión de muchas horas |
-| `Escenarios/TravelStress.cs` | Viajes repetidos |
-| `Escenarios/DoorStress.cs` | Entradas y salidas repetidas |
-| `Escenarios/SaveLoadStress.cs` | Guardados y cargas repetidos |
-| `Escenarios/WeatherStress.cs` | Clima cambiante |
-| `Escenarios/SeasonStress.cs` | Estaciones cambiantes |
-| `Escenarios/ParticleStress.cs` | Multitud de partículas |
-| `Escenarios/LightStress.cs` | Muchas luces |
-| `Escenarios/WaterStress.cs` | Mucha agua |
-| `Escenarios/CaveStress.cs` | Muchas cuevas |
-| `Escenarios/ChunkStress.cs` | Muchos chunks activos |
+| `scripts/stress/stress_runner.gd` | Orquestador headless (batch mode) |
+| `scripts/stress/stress_scenario.gd` | Clase base: Setup/Execute/Teardown |
+| `Core/StressReport.cs` _(diseno heredado)_ | Métricas p50/p95, memoria, tiempos, status |
+| `Escenarios/BlockStress.cs` _(diseno heredado)_ | Miles de bloques modificados |
+| `Escenarios/NpcStress.cs` _(diseno heredado)_ | Muchos NPC |
+| `Escenarios/FaunaStress.cs` _(diseno heredado)_ | Muchos animales |
+| `Escenarios/VegetationStress.cs` _(diseno heredado)_ | Mucha vegetación |
+| `Escenarios/ObjectStress.cs` _(diseno heredado)_ | Muchos objetos |
+| `Escenarios/WorldStress.cs` _(diseno heredado)_ | Mundo muy grande |
+| `scripts/stress/escenarios/inventory_stress.gd` | Inventario enorme |
+| `Escenarios/BuildingStress.cs` _(diseno heredado)_ | Muchas construcciones |
+| `Escenarios/LongSessionStress.cs` _(diseno heredado)_ | Sesión de muchas horas |
+| `Escenarios/TravelStress.cs` _(diseno heredado)_ | Viajes repetidos |
+| `Escenarios/DoorStress.cs` _(diseno heredado)_ | Entradas y salidas repetidas |
+| `scripts/stress/escenarios/save_load_stress.gd` | Guardados y cargas repetidos |
+| `Escenarios/WeatherStress.cs` _(diseno heredado)_ | Clima cambiante |
+| `Escenarios/SeasonStress.cs` _(diseno heredado)_ | Estaciones cambiantes |
+| `Escenarios/ParticleStress.cs` _(diseno heredado)_ | Multitud de partículas |
+| `Escenarios/LightStress.cs` _(diseno heredado)_ | Muchas luces |
+| `Escenarios/WaterStress.cs` _(diseno heredado)_ | Mucha agua |
+| `Escenarios/CaveStress.cs` _(diseno heredado)_ | Muchas cuevas |
+| `Escenarios/ChunkStress.cs` _(diseno heredado)_ | Muchos chunks activos |
 | `CI/stress_report.json` | Salida de cada corrida (artifact) |
 
 ### 1.2 Modificados

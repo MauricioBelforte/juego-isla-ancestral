@@ -8,14 +8,14 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Emisor.cs` | Emisor de señal (acción del jugador o del mundo) |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Receptor.cs` | Receptor de señal (efecto visible) |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Regla.cs` | Conector declarativo emisor→receptor con condiciones |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/EstadoSala.cs` | Vector de estado S, objetivo T, validación de solución |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/PuzzleManager.cs` | Orquestador por sala; serialización JSON/YAML |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/ValidadorArbitrariedad.cs` | Editor + tests: 1 solución única alcanzable |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/GuiaTemplo.cs` | Sistema de ayuda por capas (pista → solución) |
-| `Assets/_Project/Scripts/Gameplay/Puzzles/PuzzleTimer.cs` | Métricas: tiempo, pistas, abandonos |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Emisor.cs` _(diseno heredado)_ | Emisor de señal (acción del jugador o del mundo) |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Receptor.cs` _(diseno heredado)_ | Receptor de señal (efecto visible) |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/Regla.cs` _(diseno heredado)_ | Conector declarativo emisor→receptor con condiciones |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/EstadoSala.cs` _(diseno heredado)_ | Vector de estado S, objetivo T, validación de solución |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/PuzzleManager.cs` _(diseno heredado)_ | Orquestador por sala; serialización JSON/YAML |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/Framework/ValidadorArbitrariedad.cs` _(diseno heredado)_ | Editor + tests: 1 solución única alcanzable |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/GuiaTemplo.cs` _(diseno heredado)_ | Sistema de ayuda por capas (pista → solución) |
+| `Assets/_Project/Scripts/Gameplay/Puzzles/PuzzleTimer.cs` _(diseno heredado)_ | Métricas: tiempo, pistas, abandonos |
 | `Assets/_Project/Scripts/Data/Puzzles/*.json` | Datos por familia (15 carpetas con archivos por sala) |
 
 ## API clave (borrador)

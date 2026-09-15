@@ -24,12 +24,12 @@
 | `project.godot` | Autoload `MotivacionManager="*res://scripts/motivacion/motivacion_manager.gd"` |
 
 ### 1.3 Diferencias vs diseño original (Unity/C#)
-- `MotivacionManager.cs` → `motivacion_manager.gd` (autoload GDScript, sin class_name)
-- `ObjetivoDiario.cs` → `objetivo_data.gd` (Resource) + `objetivo_activo.gd` (RefCounted, separado en estado vivo)
-- `RecompensaAcumulada.cs` → `recompensa_acumulada.gd` (con límite 50, sin expiración)
-- `MotorEventosVariantes.cs` → `motor_variantes.gd` (ciclo 3+, participaciones)
-- `AntiFomoAuditor.cs` → `antifomo_auditor.gd` (helper estático, 5 reglas, reporte)
-- `PostgameManager.cs` y `Editor/...` → pendientes (dependen de M22/M55/M74)
+- `scripts/motivacion/motivacion_manager.gd` → `motivacion_manager.gd` (autoload GDScript, sin class_name)
+- `ObjetivoDiario.cs` _(diseno heredado)_ → `objetivo_data.gd` (Resource) + `objetivo_activo.gd` (RefCounted, separado en estado vivo)
+- `scripts/motivacion/recompensa_acumulada.gd` → `recompensa_acumulada.gd` (con límite 50, sin expiración)
+- `MotorEventosVariantes.cs` _(diseno heredado)_ → `motor_variantes.gd` (ciclo 3+, participaciones)
+- `AntiFomoAuditor.cs` _(diseno heredado)_ → `antifomo_auditor.gd` (helper estático, 5 reglas, reporte)
+- `scripts/postgame/postgame_manager.gd` y `Editor/...` → pendientes (dependen de M22/M55/M74)
 
 ## 2. API pública
 

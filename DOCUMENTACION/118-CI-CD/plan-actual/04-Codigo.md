@@ -7,7 +7,7 @@
 
 | Archivo | Descripción | Estado |
 |---|---|---|
-| `assets/editor/BuildScript.cs` | Godot Editor script: BuildPipeline.BuildPlayer configurado | Pendiente de implementación |
+| `assets/editor/BuildScript.cs` _(diseno heredado)_ | Godot Editor script: BuildPipeline.BuildPlayer configurado | Pendiente de implementación |
 | `.github/workflows/ci-cd.yml` | GitHub Actions workflow: CI/CD pipeline completo | Pendiente de implementación |
 | `scripts/build_dev.ps1` | Script PowerShell: build de desarrollo Godot | Pendiente de implementación |
 | `scripts/build_release.ps1` | Script PowerShell: build release Godot | Pendiente de implementación |

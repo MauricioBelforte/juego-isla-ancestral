@@ -8,27 +8,27 @@
 ### 1.1 Nuevos (`Assets/_Project/Editor/` — asmdef IslaAncestral.EditorTools)
 | Archivo | Propósito |
 |---------|-----------|
-| `Core/EditorToolBase.cs` | Base EditorWindow: undo, guardado SO, validación con colores |
-| `Core/DataValidator.cs` | Checker global (Editor menu + CI) |
-| `Editores/BlockEditorWindow.cs` | Editor de bloques voxel (M08/M47) |
-| `Editores/BiomeEditorWindow.cs` | Editor de biomas (M09) |
-| `Editores/NpcEditorWindow.cs` | Editor de NPC (M19) |
-| `Editores/DialogEditorWindow.cs` | Editor de árboles de diálogo (M21) |
-| `Editores/QuestEditorWindow.cs` | Editor de misiones (M22/23) |
-| `Editores/RecipeEditorWindow.cs` | Editor de recetas (M16/17) |
-| `Editores/EconomyEditorWindow.cs` | Editor de economía (M38) |
-| `Editores/ShopEditorWindow.cs` | Editor de tiendas (M39) |
-| `Editores/WeatherEditorWindow.cs` | Editor de clima (M32) |
-| `Editores/SeasonEditorWindow.cs` | Editor de estaciones (M31) |
-| `Editores/PuzzleEditorWindow.cs` | Editor de puzzles (M24) |
-| `Editores/RuinEditorWindow.cs` | Editor de ruinas (M25) |
-| `Editores/SpawnEditorWindow.cs` | Editor de spawns (M36/65) |
-| `Editores/MapEditorWindow.cs` | Editor de mapas/islas (M54) |
-| `RuntimeTools/TeleportTool.cs` | Teleport por coords/isla/POI |
-| `RuntimeTools/SpawnTool.cs` | Spawn bajo cursor |
-| `RuntimeTools/InspectorTool.cs` | Inspección de entidad |
-| `RuntimeTools/ProfilingTool.cs` | Stats de editor (M61/62) |
-| `Generador/ContentGenerator.cs` | Regen seed-driven (M10/25) |
+| `Core/EditorToolBase.cs` _(diseno heredado)_ | Base EditorWindow: undo, guardado SO, validación con colores |
+| `Core/DataValidator.cs` _(diseno heredado)_ | Checker global (Editor menu + CI) |
+| `Editores/BlockEditorWindow.cs` _(diseno heredado)_ | Editor de bloques voxel (M08/M47) |
+| `Editores/BiomeEditorWindow.cs` _(diseno heredado)_ | Editor de biomas (M09) |
+| `Editores/NpcEditorWindow.cs` _(diseno heredado)_ | Editor de NPC (M19) |
+| `Editores/DialogEditorWindow.cs` _(diseno heredado)_ | Editor de árboles de diálogo (M21) |
+| `Editores/QuestEditorWindow.cs` _(diseno heredado)_ | Editor de misiones (M22/23) |
+| `Editores/RecipeEditorWindow.cs` _(diseno heredado)_ | Editor de recetas (M16/17) |
+| `Editores/EconomyEditorWindow.cs` _(diseno heredado)_ | Editor de economía (M38) |
+| `Editores/ShopEditorWindow.cs` _(diseno heredado)_ | Editor de tiendas (M39) |
+| `Editores/WeatherEditorWindow.cs` _(diseno heredado)_ | Editor de clima (M32) |
+| `Editores/SeasonEditorWindow.cs` _(diseno heredado)_ | Editor de estaciones (M31) |
+| `Editores/PuzzleEditorWindow.cs` _(diseno heredado)_ | Editor de puzzles (M24) |
+| `Editores/RuinEditorWindow.cs` _(diseno heredado)_ | Editor de ruinas (M25) |
+| `Editores/SpawnEditorWindow.cs` _(diseno heredado)_ | Editor de spawns (M36/65) |
+| `Editores/MapEditorWindow.cs` _(diseno heredado)_ | Editor de mapas/islas (M54) |
+| `RuntimeTools/TeleportTool.cs` _(diseno heredado)_ | Teleport por coords/isla/POI |
+| `RuntimeTools/SpawnTool.cs` _(diseno heredado)_ | Spawn bajo cursor |
+| `RuntimeTools/InspectorTool.cs` _(diseno heredado)_ | Inspección de entidad |
+| `RuntimeTools/ProfilingTool.cs` _(diseno heredado)_ | Stats de editor (M61/62) |
+| `Generador/ContentGenerator.cs` _(diseno heredado)_ | Regen seed-driven (M10/25) |
 
 ### 1.2 Modificados
 | Archivo | Cambio |

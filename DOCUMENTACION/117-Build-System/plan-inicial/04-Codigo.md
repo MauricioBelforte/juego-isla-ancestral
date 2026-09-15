@@ -8,9 +8,9 @@
 ### 1.1 Nuevos
 | Archivo | Propósito |
 |---------|-----------|
-| `Assets/Editor/BuildScript.cs` | Punto único: ejecuta builds por tipo/plataforma |
-| `Assets/Editor/BuildInfo.cs` | Escribe versión/changelog en el build |
-| `Assets/_Project/Scripts/Core/BuildInfo.cs` | Runtime: versión y canal expuestos (M104) |
+| `Assets/Editor/BuildScript.cs` _(diseno heredado)_ | Punto único: ejecuta builds por tipo/plataforma |
+| `scripts/core/build_info.gd` | Escribe versión/changelog en el build |
+| `scripts/core/build_info.gd` | Runtime: versión y canal expuestos (M104) |
 | `scripts/build/package.ps1` | Packaging Windows/macOS + manifest |
 | `scripts/build/sign.ps1` | Firmado (signtool/notarytool) |
 | `scripts/build/smoke_test.py` | Smoke del artifact (boot+play+exit) |
@@ -47,7 +47,7 @@ boot → menú → nuevo mundo → 1 día → save/load → quit(0)
 ## 3. Datos / config
 | Dato | Ubicación | Sistema |
 |------|-----------|---------|
-| Versión y canal | `BuildInfo.cs` (runtime) | M104/telemetría |
+| Versión y canal | `scripts/core/build_info.gd` (runtime) | M104/telemetría |
 | Changelog | Generado en CI desde git log → artifact | Conventional Commits |
 | Manifest SHA-256 | `manifest.json` dentro del artifact | RF10 |
 | Política de retención | Config de scripts/build | Tabla sección 8 |

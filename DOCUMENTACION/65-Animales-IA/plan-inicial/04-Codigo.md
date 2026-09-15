@@ -8,12 +8,12 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/AI/FaunaManager.cs` | Orquestador de fauna; delega del NPCManager (M64); burbuja 64 m, tick 1 s lejanos, presupuesto |
-| `Assets/_Project/Scripts/AI/FaunaBrain.cs` | FSM datos-driven: estados del perfil + agenda (hambre, energía, etapa) |
-| `Assets/_Project/Scripts/AI/FaunaProfile.cs` (ScriptableObject) | Perfil por especie: biomas, horarios, radios (huida/curiosidad/alarma), comida, velocidad, manada |
-| `Assets/_Project/Scripts/AI/FaunaBody.cs` | Pool: cuerpo + animación instanciada + anclado (reciclado fuera de burbuja) |
-| `Assets/_Project/Scripts/AI/PackLogic.cs` / `SchoolLogic.cs` | Manada/banco: delta ≤ 1.2 m, líder rotativo, sincronización leve |
-| `Assets/_Project/Scripts/AI/FaunaSpawner.cs` | Sorteo por slot (pesos por bioma), densidad, validación de navegación, despawn/rehidratación |
+| `scripts/fauna/fauna_manager.gd` | Orquestador de fauna; delega del NPCManager (M64); burbuja 64 m, tick 1 s lejanos, presupuesto |
+| `Assets/_Project/Scripts/AI/FaunaBrain.cs` _(diseno heredado)_ | FSM datos-driven: estados del perfil + agenda (hambre, energía, etapa) |
+| `Assets/_Project/Scripts/AI/FaunaProfile.cs` _(diseno heredado)_ (ScriptableObject) | Perfil por especie: biomas, horarios, radios (huida/curiosidad/alarma), comida, velocidad, manada |
+| `Assets/_Project/Scripts/AI/FaunaBody.cs` _(diseno heredado)_ | Pool: cuerpo + animación instanciada + anclado (reciclado fuera de burbuja) |
+| `scripts/animales_ia/pack_logic.gd` / `scripts/animales_ia/school_logic.gd` | Manada/banco: delta ≤ 1.2 m, líder rotativo, sincronización leve |
+| `Assets/_Project/Scripts/AI/FaunaSpawner.cs` _(diseno heredado)_ | Sorteo por slot (pesos por bioma), densidad, validación de navegación, despawn/rehidratación |
 | `Assets/_Project/Scripts/Data/FaunaCatalog.asset` | Catálogo de especies (15-25 perfiles) |
 | M42/M43 (audio) | Timestamps por evento con cooldowns (tabla del diseño) |
 

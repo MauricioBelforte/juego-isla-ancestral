@@ -8,22 +8,22 @@
 ### 1.1 Nuevos
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/Gameplay/Motivacion/MotivacionManager.cs` | Manager | Tablero de objetivos + sobremesa + postgame |
-| `Assets/_Project/Scripts/Gameplay/Motivacion/ObjetivoDiario.cs` | SO | Definición de objetivo (plazo, condición, recompensa) |
-| `Assets/_Project/Scripts/Gameplay/Motivacion/ObjetivoActivo.cs` | Modelo | Estado vivo de un objetivo (progreso, cobrado) |
-| `Assets/_Project/Scripts/Gameplay/Motivacion/MotorEventosVariantes.cs` | Motor | Variantes de festividades (M74 extendido) |
-| `Assets/_Project/Scripts/Gameplay/Motivacion/RecompensaAcumulada.cs` | Motor | Cola de recompensas sin expiración |
-| `Assets/_Project/Scripts/Gameplay/Motivacion/PostgameManager.cs` | Postgame | 3 bloques: desafíos, misterio final, isla perfecta |
-| `Assets/Editor/Motivacion/AntiFomoAuditor.cs` | Editor/CI | Scan de mecánicas prohibidas |
+| `scripts/motivacion/motivacion_manager.gd` | Manager | Tablero de objetivos + sobremesa + postgame |
+| `Assets/_Project/Scripts/Gameplay/Motivacion/ObjetivoDiario.cs` _(diseno heredado)_ | SO | Definición de objetivo (plazo, condición, recompensa) |
+| `scripts/motivacion/objetivo_activo.gd` | Modelo | Estado vivo de un objetivo (progreso, cobrado) |
+| `Assets/_Project/Scripts/Gameplay/Motivacion/MotorEventosVariantes.cs` _(diseno heredado)_ | Motor | Variantes de festividades (M74 extendido) |
+| `scripts/motivacion/recompensa_acumulada.gd` | Motor | Cola de recompensas sin expiración |
+| `scripts/postgame/postgame_manager.gd` | Postgame | 3 bloques: desafíos, misterio final, isla perfecta |
+| `Assets/Editor/Motivacion/AntiFomoAuditor.cs` _(diseno heredado)_ | Editor/CI | Scan de mecánicas prohibidas |
 
 ### 1.2 Modificados
 | Archivo | Cambio |
 |---------|--------|
-| `DiarioManager.cs` (M55) | Sección "Objetivos" + "Sobremesa" |
-| `CalendarioManager.cs` (M74) | Hook de variante activa (M29) |
-| `RelojDeJuego.cs` (M29) | Día de juego como única fuente tempor la |
-| `SaveManager.cs` (M59) | Campo motivación v3.2 + migración |
-| `HistoriaManager.cs` (M22) | Desbloqueo de postgame tras epílogo |
+| `DiarioManager.cs` _(diseno heredado)_ (M55) | Sección "Objetivos" + "Sobremesa" |
+| `CalendarioManager.cs` _(diseno heredado)_ (M74) | Hook de variante activa (M29) |
+| `RelojDeJuego.cs` _(diseno heredado)_ (M29) | Día de juego como única fuente tempor la |
+| `scripts/saving/save_manager.gd` (M59) | Campo motivación v3.2 + migración |
+| `HistoriaManager.cs` _(diseno heredado)_ (M22) | Desbloqueo de postgame tras epílogo |
 
 ## 2. Funciones clave
 ```csharp

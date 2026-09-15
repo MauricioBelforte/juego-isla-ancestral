@@ -8,12 +8,12 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/World/Templo/TempleFlow.cs` | Orquestador de gating (estado del templo: sellos, anillos, salida) |
+| `Assets/_Project/Scripts/World/Templo/TempleFlow.cs` _(diseno heredado)_ | Orquestador de gating (estado del templo: sellos, anillos, salida) |
 | `Assets/_Project/Scripts/World/Templo/TempleVoxelBlueprint.asset` | Blueprint voxel-compatible del templo (metría 4x4x4) para M08 |
-| `Assets/_Project/Scripts/World/Templo/AnilloViento.cs` | Mecanismo de 7 anillos (M24 símbolos + multilateral) |
-| `Assets/_Project/Scripts/World/Templo/PuzzleFinalFases.cs` | 3 fases (luz+sonido+agua) |
-| `Assets/_Project/Scripts/World/Templo/TempleCheckpoint.cs` | 5 CP atómicos + telemetría early-exit |
-| `Assets/_Project/Scripts/World/Templo/TempleTelemetry.cs` | Telemetría de puzzles (JSON → M24) |
+| `Assets/_Project/Scripts/World/Templo/AnilloViento.cs` _(diseno heredado)_ | Mecanismo de 7 anillos (M24 símbolos + multilateral) |
+| `Assets/_Project/Scripts/World/Templo/PuzzleFinalFases.cs` _(diseno heredado)_ | 3 fases (luz+sonido+agua) |
+| `Assets/_Project/Scripts/World/Templo/TempleCheckpoint.cs` _(diseno heredado)_ | 5 CP atómicos + telemetría early-exit |
+| `Assets/_Project/Scripts/World/Templo/TempleTelemetry.cs` _(diseno heredado)_ | Telemetría de puzzles (JSON → M24) |
 | `Assets/_Project/Scripts/Data/Templo/*.json` | Salas, gating, sellos, glifos |
 
 ## API clave (borrador)

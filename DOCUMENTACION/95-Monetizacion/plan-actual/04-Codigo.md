@@ -19,9 +19,9 @@
 | `data/monetizacion/impuestos.json` | Tabla de impuestos por plataforma/región |
 
 ### 1.2 Diferencias vs diseño original (Unity/C#)
-- `EdicionesDelJuego.cs` (SO) → `edicion_catalogo.gd` (RefCounted + JSON data-driven)
-- `DlcCatalogo.cs` (SO) → `dlc_catalogo.gd` (RefCounted + JSON)
-- `AntiP2WScanner.cs` / `AntiLootboxScanner.cs` (Editor) → `scanner_antip2w.gd` / `scanner_antilootbox.gd` (helpers estáticos GDScript, ejecutables en test headless)
+- `EdicionesDelJuego.cs` _(diseno heredado)_ (SO) → `edicion_catalogo.gd` (RefCounted + JSON data-driven)
+- `scripts/monetizacion/dlc_catalogo.gd` (SO) → `dlc_catalogo.gd` (RefCounted + JSON)
+- `AntiP2WScanner.cs` _(diseno heredado)_ / `AntiLootboxScanner.cs` _(diseno heredado)_ (Editor) → `scanner_antip2w.gd` / `scanner_antilootbox.gd` (helpers estáticos GDScript, ejecutables en test headless)
 - `tabla-impuestos.md` → `data/monetizacion/impuestos.json` (data-driven)
 
 ## 2. API pública

@@ -8,13 +8,13 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/Story2/CadenaSecundaria.cs` | Modelo de cadena (pasos, recompensa, consecuencia) |
-| `Assets/_Project/Scripts/Story2/CatalogoCadenas.cs` | Registro de las 60 cadenas (JSON) |
-| `Assets/_Project/Scripts/Story2/ValidadorCadenas.cs` | Editor/CI: contexto, referencias, alcanzabilidad |
-| `Assets/_Project/Scripts/Story2/Consecuencias.cs` | 12 consecuencias persistentes en estado de mundo |
-| `Assets/_Project/Scripts/Story2/RecompensasNarrativas.cs` | Capítulos de diario + recetas de conversación |
-| `Assets/_Project/Scripts/Story2/MisionesOcultas.cs` | Descubrimiento sin marcador |
-| `Assets/_Project/Scripts/Story2/Postgame.cs` | 4 cadenas post-final |
+| `Assets/_Project/Scripts/Story2/CadenaSecundaria.cs` _(diseno heredado)_ | Modelo de cadena (pasos, recompensa, consecuencia) |
+| `Assets/_Project/Scripts/Story2/CatalogoCadenas.cs` _(diseno heredado)_ | Registro de las 60 cadenas (JSON) |
+| `Assets/_Project/Scripts/Story2/ValidadorCadenas.cs` _(diseno heredado)_ | Editor/CI: contexto, referencias, alcanzabilidad |
+| `Assets/_Project/Scripts/Story2/Consecuencias.cs` _(diseno heredado)_ | 12 consecuencias persistentes en estado de mundo |
+| `Assets/_Project/Scripts/Story2/RecompensasNarrativas.cs` _(diseno heredado)_ | Capítulos de diario + recetas de conversación |
+| `Assets/_Project/Scripts/Story2/MisionesOcultas.cs` _(diseno heredado)_ | Descubrimiento sin marcador |
+| `Assets/_Project/Scripts/Story2/Postgame.cs` _(diseno heredado)_ | 4 cadenas post-final |
 | `Assets/_Project/Scripts/Data/HistoriaSec/*.json` | Contenido de todas las cadenas |
 
 ## API clave (borrador)

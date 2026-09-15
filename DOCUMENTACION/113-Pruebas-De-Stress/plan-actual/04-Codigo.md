@@ -16,7 +16,7 @@
 | `test_stress_m113.gd` | Test headless: base StressScenario (p50/p95), BlockEdit (100k ops), SaveLoad (100 ciclos) |
 
 ### 1.2 Diferencias vs diseño original (Unity/C#)
-- El diseño original (04-Codigo.md previo) proponía C# con `StressRunner.cs`, `StressScenario.cs`, `StressReport.cs` y 19 escenarios `.cs` en asmdef `IslaAncestral.Stress`. Se adaptó a Godot 4.7/GDScript con preloads (pitfall §9.50/§9.52).
+- El diseño original (04-Codigo.md previo) proponía C# con `scripts/stress/stress_runner.gd`, `scripts/stress/stress_scenario.gd`, `StressReport.cs` _(diseno heredado)_ y 19 escenarios `.cs` en asmdef `IslaAncestral.Stress`. Se adaptó a Godot 4.7/GDScript con preloads (pitfall §9.50/§9.52).
 - `StressReport` se integró dentro del runner como salida JSON directa (sin clase separada).
 - 2 escenarios implementados (SaveLoadStress, BlockEditStress); los otros 17 escenarios quedan documentados con su diseño original para implementación futura con los módulos reales (M08/M19/M50/M65/M14/M17/M28/M32/M31/M52/M49/M51/M25).
 - El reporte se escribe en `user://stress_report.json` (no en artifact de CI aún).

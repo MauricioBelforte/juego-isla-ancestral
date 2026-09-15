@@ -8,19 +8,19 @@
 ### 1.1 Nuevos (capa RC)
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/Release/ReleaseGate.cs` | Validación CI | Orquesta los 7 tests de G2 en la build final |
-| `Assets/_Project/Scripts/Release/VersionManifest.cs` | Auditoría | Genera/valida `version-manifest.json` (buildId, sha, hash) |
-| `Assets/_Project/Scripts/Release/CrashHandler256.cs` | Telemetría (M105) | Captura crashes, sube stacktrace con símbolos |
-| `Assets/_Project/Scripts/Release/ComiteRelease.cs` | Gobernanza | Workflow de aprobación de hotfixes (meta) |
-| `Assets/_Project/Scripts/Release/CertificationChecklist.cs` | Certificación (M149) | Checklist por plataforma con firma |
-| `Assets/_Project/Scripts/Release/LegalChecklist.cs` | Legal (M149) | Términos, privacidad, atribuciones, clasificación |
+| `Assets/_Project/Scripts/Release/ReleaseGate.cs` _(diseno heredado)_ | Validación CI | Orquesta los 7 tests de G2 en la build final |
+| `Assets/_Project/Scripts/Release/VersionManifest.cs` _(diseno heredado)_ | Auditoría | Genera/valida `version-manifest.json` (buildId, sha, hash) |
+| `Assets/_Project/Scripts/Release/CrashHandler256.cs` _(diseno heredado)_ | Telemetría (M105) | Captura crashes, sube stacktrace con símbolos |
+| `Assets/_Project/Scripts/Release/ComiteRelease.cs` _(diseno heredado)_ | Gobernanza | Workflow de aprobación de hotfixes (meta) |
+| `Assets/_Project/Scripts/Release/CertificationChecklist.cs` _(diseno heredado)_ | Certificación (M149) | Checklist por plataforma con firma |
+| `Assets/_Project/Scripts/Release/LegalChecklist.cs` _(diseno heredado)_ | Legal (M149) | Términos, privacidad, atribuciones, clasificación |
 
 ### 1.2 Modificados (validación sobre Beta)
 | Archivo | Cambio |
 |---------|--------|
-| `PlatformBridge.cs` | Modo validación: logros/saves mock vs real; telemetría de versión |
-| `SaveManager.cs` | Reporte de versión de save; backup automático pre-migración |
-| `LocalizationManager.cs` | Modo auditoría: dump de claves sin resolver |
+| `PlatformBridge.cs` _(diseno heredado)_ | Modo validación: logros/saves mock vs real; telemetría de versión |
+| `scripts/saving/save_manager.gd` | Reporte de versión de save; backup automático pre-migración |
+| `scripts/localizacion/localization_manager.gd` | Modo auditoría: dump de claves sin resolver |
 | `BugTracker` (M101) | Campo `buildId` obligatorio en reportes |
 | `ProfilerGate` (M61) | Umbrales finales de RC (legacy `enableAssert` OFF) |
 

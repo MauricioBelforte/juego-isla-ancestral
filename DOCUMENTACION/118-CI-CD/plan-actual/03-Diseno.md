@@ -27,7 +27,7 @@ M117 (Build System) ──► Configuración de Godot (scenes, settings)
 
 1. **Commit push:** Agente o desarrollador hace push a rama main o feature branch
 2. **Pipeline CI se desencadena:** GitHub Actions lee el workflow `.github/workflows/ci-cd.yml`
-3. **Build Godot:** Script `BuildScript.cs` compila Godot en modo headless
+3. **Build Godot:** Script `BuildScript.cs` _(diseno heredado)_ compila Godot en modo headless
    - Build dev: incluye símbolos, logs, configuración de debug
    - Build release: quita símbolos, optimización máxima, sin logs de Debug
 4. **Tests automáticos:**

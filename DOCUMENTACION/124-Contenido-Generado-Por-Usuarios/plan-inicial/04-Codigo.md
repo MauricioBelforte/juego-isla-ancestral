@@ -8,12 +8,12 @@
 ### 1.1 Nuevos
 | Archivo | Propósito |
 |---------|-----------|
-| `Assets/_Project/Scripts/Online/UgcManager.cs` | Publicar/listar/descargar ítems UGC |
-| `Assets/_Project/Scripts/Online/UgcItem.cs` | Modelo: foto (url) o blueprint (data) |
-| `Assets/_Project/Scripts/Moderacion/ModerationPipeline.cs` | Hash → IA → cola humana |
-| `Assets/_Project/Scripts/Moderacion/Apelaciones.cs` | Flujo de apelación |
-| `Assets/_Project/Scripts/UI/GaleriaView.cs` | Galería pública (M89 views) |
-| `Assets/_Project/Scripts/UI/CompartirView.cs` | Confirmación de licencia al compartir |
+| `scripts/ugc/ugc_manager.gd` | Publicar/listar/descargar ítems UGC |
+| `Assets/_Project/Scripts/Online/UgcItem.cs` _(diseno heredado)_ | Modelo: foto (url) o blueprint (data) |
+| `Assets/_Project/Scripts/Moderacion/ModerationPipeline.cs` _(diseno heredado)_ | Hash → IA → cola humana |
+| `Assets/_Project/Scripts/Moderacion/Apelaciones.cs` _(diseno heredado)_ | Flujo de apelación |
+| `Assets/_Project/Scripts/UI/GaleriaView.cs` _(diseno heredado)_ | Galería pública (M89 views) |
+| `Assets/_Project/Scripts/UI/CompartirView.cs` _(diseno heredado)_ | Confirmación de licencia al compartir |
 | `services/ugc/` (backend) | API de subida/descarga/moderación (lógica separada) |
 | `services/ugc/db.sql` | Esquemas: items, moderación, reportes, backups |
 

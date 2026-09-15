@@ -8,21 +8,21 @@
 ### 1.1 Nuevos
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/UI/Shell/ShellManager.cs` | Shell | Abre/cierra pantallas; estados; reapertura tras pausa |
-| `Assets/_Project/Scripts/UI/Shell/NavigatorManager.cs` | Navegación | Grafo de adyacencia + atajos; foco visible |
-| `Assets/_Project/Scripts/UI/Shell/SettingsManager.cs` | Ajustes | settings.json local; aplicación en vivo |
-| `Assets/_Project/Scripts/UI/Shell/ProfileManager.cs` | Perfiles | perfiles 1-3, slots 3-6 (M59) |
+| `Assets/_Project/Scripts/UI/Shell/ShellManager.cs` _(diseno heredado)_ | Shell | Abre/cierra pantallas; estados; reapertura tras pausa |
+| `Assets/_Project/Scripts/UI/Shell/NavigatorManager.cs` _(diseno heredado)_ | Navegación | Grafo de adyacencia + atajos; foco visible |
+| `Assets/_Project/Scripts/UI/Shell/SettingsManager.cs` _(diseno heredado)_ | Ajustes | settings.json local; aplicación en vivo |
+| `Assets/_Project/Scripts/UI/Shell/ProfileManager.cs` _(diseno heredado)_ | Perfiles | perfiles 1-3, slots 3-6 (M59) |
 | `Assets/_Project/Scripts/UI/Shell/Views/*.cs` | Vistas | PrincipalView, NuevaView, CargarView, CreditosView, PausaView, InventarioView, MapaView, DiarioView, ColeccionView, HabilidadesView, RelacionView, ConfigView |
 | `Assets/_Project/UI/Prefabs/Menus/*.prefab` | Prefabs | 21 pantallas (plantilla Header/Cuerpo/Footer) |
-| `Assets/_Project/Data/Settings/AjustesGlobales.cs` | SO/MODELO | Modelo de settings.json |
+| `Assets/_Project/Data/Settings/AjustesGlobales.cs` _(diseno heredado)_ | SO/MODELO | Modelo de settings.json |
 
 ### 1.2 Modificados
 | Archivo | Cambio |
 |---------|--------|
 | `Bootstrapper` (Core) | Llama a ShellManager al inicio |
 | `GameManager` (M07) | Enganches de pausa/reapertura |
-| `SaveManager.cs` (M59) | API de perfiles/slots (Listar, UltimoValido, CrearPerfil) |
-| `WorldTime.cs` (M29/reloj) | Pausar()/Reanudar() para Pausa |
+| `scripts/saving/save_manager.gd` (M59) | API de perfiles/slots (Listar, UltimoValido, CrearPerfil) |
+| `WorldTime.cs` _(diseno heredado)_ (M29/reloj) | Pausar()/Reanudar() para Pausa |
 
 ## 2. Funciones clave
 ```csharp

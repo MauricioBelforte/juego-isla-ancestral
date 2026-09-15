@@ -29,7 +29,7 @@ Git commit/tag
 | Versión | `MAJOR.MINOR.PATCH` de tag git + `-build.<n>` del contador CI |
 | Ejemplo | `1.0.0-build.142` en RC (M142); `1.0.0` en release final (M143) |
 | Changelog | Generado de Conventional Commits desde el tag anterior |
-| Metadata | Se escribe en `BuildInfo.cs` al inicio del build |
+| Metadata | Se escribe en `scripts/core/build_info.gd` al inicio del build |
 
 ## 4. Gates por tipo
 | Tipo | Tests M112 | Validador M109 | Stress M113 (rápido) |

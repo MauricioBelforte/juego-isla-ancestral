@@ -30,104 +30,104 @@
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Core/GameBootstrap.cs` | Orquestación del arranque: servicios, managers, carga del GameState |
-| `IslaAncestral/Core/ServiceLocator.cs` | Registro y acceso a servicios desacoplado |
-| `IslaAncestral/Core/EventBus.cs` | Bus de eventos global (time tick, weather change, quest update) |
-| `IslaAncestral/Core/GameSession.cs` | Estado de sesión entre escenas |
+| `IslaAncestral/Core/GameBootstrap.cs` _(diseno heredado)_ | Orquestación del arranque: servicios, managers, carga del GameState |
+| `IslaAncestral/Core/ServiceLocator.cs` _(diseno heredado)_ | Registro y acceso a servicios desacoplado |
+| `scripts/core/event_bus.gd` | Bus de eventos global (time tick, weather change, quest update) |
+| `IslaAncestral/Core/GameSession.cs` _(diseno heredado)_ | Estado de sesión entre escenas |
 
 ### 2.2 Mundo Voxel (World)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/World/VoxelGrid.cs` | Grilla 3D de bloques por chunk; lectura/escritura de bloques |
-| `IslaAncestral/World/Chunk.cs` | Datos de un chunk (16³/32³), estado de malla, modificaciones |
-| `IslaAncestral/World/ChunkMesher.cs` | Face culling + greedy meshing (candidato a hilo secundario) |
-| `IslaAncestral/World/ChunkManager.cs` | Streaming, orden de generación por distancia, pooling de meshes |
-| `IslaAncestral/World/VoxelRaycaster.cs` | Raycast preciso contra la grilla para herramientas |
-| `IslaAncestral/World/TerrainGenerator.cs` | Ruido (Perlin/Simplex), biomas, transiciones |
-| `IslaAncestral/World/BlockDatabase.cs` | ScriptableObject/catálogo de bloques (propiedades, materiales) |
-| `IslaAncestral/World/WorldDiffStore.cs` | Persistencia incremental de bloques modificados |
+| `IslaAncestral/World/VoxelGrid.cs` _(diseno heredado)_ | Grilla 3D de bloques por chunk; lectura/escritura de bloques |
+| `IslaAncestral/World/Chunk.cs` _(diseno heredado)_ | Datos de un chunk (16³/32³), estado de malla, modificaciones |
+| `IslaAncestral/World/ChunkMesher.cs` _(diseno heredado)_ | Face culling + greedy meshing (candidato a hilo secundario) |
+| `IslaAncestral/World/ChunkManager.cs` _(diseno heredado)_ | Streaming, orden de generación por distancia, pooling de meshes |
+| `IslaAncestral/World/VoxelRaycaster.cs` _(diseno heredado)_ | Raycast preciso contra la grilla para herramientas |
+| `IslaAncestral/World/TerrainGenerator.cs` _(diseno heredado)_ | Ruido (Perlin/Simplex), biomas, transiciones |
+| `IslaAncestral/World/BlockDatabase.cs` _(diseno heredado)_ | ScriptableObject/catálogo de bloques (propiedades, materiales) |
+| `IslaAncestral/World/WorldDiffStore.cs` _(diseno heredado)_ | Persistencia incremental de bloques modificados |
 
 ### 2.3 Puzzles (Puzzle)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Puzzle/SignalType.cs` | Enum de señales: Luz, Peso, Agua, Viento, Semilla, Frio, Calor |
-| `IslaAncestral/Puzzle/ISignalEmitter.cs` | Contrato: emite señal |
-| `IslaAncestral/Puzzle/ISignalReceiver.cs` | Contrato: recibe señal y dispara acción |
-| `IslaAncestral/Puzzle/SignalEmitter.cs` / `SignalReceiver.cs` | Implementaciones base |
-| `IslaAncestral/Puzzle/SignalHub.cs` | Ruteo de señales entre emisores y receptores |
-| `IslaAncestral/Puzzle/PuzzleManager.cs` | Estado de puzzles activos, checkpoints, reinicios |
-| `IslaAncestral/Puzzle/TempleDoor.cs` | Receptor típico: abre/cierra puerta |
-| `IslaAncestral/Puzzle/MirrorBeam.cs` | Puzzle de luz: espejos rotatorios y receptores de haz |
+| `IslaAncestral/Puzzle/SignalType.cs` _(diseno heredado)_ | Enum de señales: Luz, Peso, Agua, Viento, Semilla, Frio, Calor |
+| `IslaAncestral/Puzzle/ISignalEmitter.cs` _(diseno heredado)_ | Contrato: emite señal |
+| `IslaAncestral/Puzzle/ISignalReceiver.cs` _(diseno heredado)_ | Contrato: recibe señal y dispara acción |
+| `IslaAncestral/Puzzle/SignalEmitter.cs` _(diseno heredado)_ / `SignalReceiver.cs` _(diseno heredado)_ | Implementaciones base |
+| `IslaAncestral/Puzzle/SignalHub.cs` _(diseno heredado)_ | Ruteo de señales entre emisores y receptores |
+| `IslaAncestral/Puzzle/PuzzleManager.cs` _(diseno heredado)_ | Estado de puzzles activos, checkpoints, reinicios |
+| `IslaAncestral/Puzzle/TempleDoor.cs` _(diseno heredado)_ | Receptor típico: abre/cierra puerta |
+| `IslaAncestral/Puzzle/MirrorBeam.cs` _(diseno heredado)_ | Puzzle de luz: espejos rotatorios y receptores de haz |
 
 ### 2.4 Jugador y Herramientas (Gameplay)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Gameplay/PlayerController.cs` | Movimiento, cámara en tercera persona, estados |
-| `IslaAncestral/Gameplay/ToolController.cs` | Uso de herramientas: pala, pico, hacha, gancho, vara, lanza |
-| `IslaAncestral/Gameplay/ITool.cs` | Contrato de herramienta (eficacia de recolección, alcance de acertijo) |
-| `IslaAncestral/Gameplay/InteractionSystem.cs` | Detección de interactuables, indicador, prioridad |
-| `IslaAncestral/Gameplay/Inventory.cs` | Slots, stacks, categorías, hotbar |
-| `IslaAncestral/Gameplay/CraftingSystem.cs` | Recetas, estaciones, preview |
-| `IslaAncestral/Gameplay/BuildingSystem.cs` | Colocación de bloques/objetos, validación, snapping |
-| `IslaAncestral/Gameplay/WaterTool.cs` | Vara de Flujo: congelar/evaporar agua |
+| `IslaAncestral/Gameplay/PlayerController.cs` _(diseno heredado)_ | Movimiento, cámara en tercera persona, estados |
+| `scripts/tools/tool_controller.gd` | Uso de herramientas: pala, pico, hacha, gancho, vara, lanza |
+| `IslaAncestral/Gameplay/ITool.cs` _(diseno heredado)_ | Contrato de herramienta (eficacia de recolección, alcance de acertijo) |
+| `IslaAncestral/Gameplay/InteractionSystem.cs` _(diseno heredado)_ | Detección de interactuables, indicador, prioridad |
+| `IslaAncestral/Gameplay/Inventory.cs` _(diseno heredado)_ | Slots, stacks, categorías, hotbar |
+| `IslaAncestral/Gameplay/CraftingSystem.cs` _(diseno heredado)_ | Recetas, estaciones, preview |
+| `IslaAncestral/Gameplay/BuildingSystem.cs` _(diseno heredado)_ | Colocación de bloques/objetos, validación, snapping |
+| `IslaAncestral/Gameplay/WaterTool.cs` _(diseno heredado)_ | Vara de Flujo: congelar/evaporar agua |
 
 ### 2.5 Economía y Comunidad (Economy)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Economy/Wallet.cs` | Doble moneda: Gemas de Ámbar y Pases de Mérito |
-| `IslaAncestral/Economy/ShopSystem.cs` | Tiendas, stock, rotación, precios |
-| `IslaAncestral/Economy/InfrastructureProject.cs` | Obras de Finneas: requisitos, costos, estados |
-| `IslaAncestral/Economy/VillagerEconomy.cs` | Compras/ventas de vecinos |
+| `IslaAncestral/Economy/Wallet.cs` _(diseno heredado)_ | Doble moneda: Gemas de Ámbar y Pases de Mérito |
+| `IslaAncestral/Economy/ShopSystem.cs` _(diseno heredado)_ | Tiendas, stock, rotación, precios |
+| `IslaAncestral/Economy/InfrastructureProject.cs` _(diseno heredado)_ | Obras de Finneas: requisitos, costos, estados |
+| `IslaAncestral/Economy/VillagerEconomy.cs` _(diseno heredado)_ | Compras/ventas de vecinos |
 
 ### 2.6 Narrativa (Narrative)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Narrative/DialogueSystem.cs` | Motor de diálogo por nodos (carga de árboles externos) |
-| `IslaAncestral/Narrative/NarrativeFlags.cs` | Flags consultables: sellos, grabaciones, estado del mundo |
-| `IslaAncestral/Narrative/QuestSystem.cs` | Misiones, prerequisitos, estados |
-| `IslaAncestral/Narrative/FriendshipData.cs` | Puntos de amistad por NPC, umbrales, regalos |
+| `IslaAncestral/Narrative/DialogueSystem.cs` _(diseno heredado)_ | Motor de diálogo por nodos (carga de árboles externos) |
+| `IslaAncestral/Narrative/NarrativeFlags.cs` _(diseno heredado)_ | Flags consultables: sellos, grabaciones, estado del mundo |
+| `IslaAncestral/Narrative/QuestSystem.cs` _(diseno heredado)_ | Misiones, prerequisitos, estados |
+| `IslaAncestral/Narrative/FriendshipData.cs` _(diseno heredado)_ | Puntos de amistad por NPC, umbrales, regalos |
 
 ### 2.7 Sistemas de Mundo (Systems)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Systems/TimeSystem.cs` | Reloj del juego: hora, día, estación, año; eventos |
-| `IslaAncestral/Systems/SeasonSystem.cs` | Estaciones y contenido estacional |
-| `IslaAncestral/Systems/WeatherSystem.cs` | Clima con transiciones y efectos |
-| `IslaAncestral/Systems/TravelSystem.cs` | Gran Vapor, boletos, carga diegética, islas |
-| `IslaAncestral/Systems/EventCalendar.cs` | Festivales, cumpleaños, eventos mensuales |
+| `IslaAncestral/Systems/TimeSystem.cs` _(diseno heredado)_ | Reloj del juego: hora, día, estación, año; eventos |
+| `IslaAncestral/Systems/SeasonSystem.cs` _(diseno heredado)_ | Estaciones y contenido estacional |
+| `IslaAncestral/Systems/WeatherSystem.cs` _(diseno heredado)_ | Clima con transiciones y efectos |
+| `IslaAncestral/Systems/TravelSystem.cs` _(diseno heredado)_ | Gran Vapor, boletos, carga diegética, islas |
+| `IslaAncestral/Systems/EventCalendar.cs` _(diseno heredado)_ | Festivales, cumpleaños, eventos mensuales |
 
 ### 2.8 IA (AI)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/AI/NpcAgent.cs` | Máquina de estados: rutina diaria, social, contextual |
-| `IslaAncestral/AI/NpcSchedule.cs` | Horarios por hora/día/clima/estación |
-| `IslaAncestral/AI/NpcNavigation.cs` | Pathfinding sobre terreno modificable + fallbacks |
-| `IslaAncestral/AI/AnimalAgent.cs` | Comportamiento no hostil de fauna |
+| `scripts/ia_npc/npc_agent.gd` | Máquina de estados: rutina diaria, social, contextual |
+| `IslaAncestral/AI/NpcSchedule.cs` _(diseno heredado)_ | Horarios por hora/día/clima/estación |
+| `IslaAncestral/AI/NpcNavigation.cs` _(diseno heredado)_ | Pathfinding sobre terreno modificable + fallbacks |
+| `IslaAncestral/AI/AnimalAgent.cs` _(diseno heredado)_ | Comportamiento no hostil de fauna |
 
 ### 2.9 Persistencia (Persistence)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Persistence/GameState.cs` | Estado serializable versionado (ver `03-Diseno.md` §7) |
-| `IslaAncestral/Persistence/SaveManager.cs` | Slots, autosave, copias de seguridad |
-| `IslaAncestral/Persistence/SaveMigrator.cs` | Migraciones entre versiones de schema |
-| `IslaAncestral/Persistence/ChunkSerializer.cs` | Diffs de chunks a disco |
+| `IslaAncestral/Persistence/GameState.cs` _(diseno heredado)_ | Estado serializable versionado (ver `03-Diseno.md` §7) |
+| `scripts/saving/save_manager.gd` | Slots, autosave, copias de seguridad |
+| `IslaAncestral/Persistence/SaveMigrator.cs` _(diseno heredado)_ | Migraciones entre versiones de schema |
+| `IslaAncestral/Persistence/ChunkSerializer.cs` _(diseno heredado)_ | Diffs de chunks a disco |
 
 ### 2.10 Datos (Data)
 
 | Archivo | Responsabilidad |
 |---------|-----------------|
-| `IslaAncestral/Data/BlockType.cs` / `ItemType.cs` | Definiciones de bloques/objetos (SO) |
-| `IslaAncestral/Data/CraftingRecipe.cs` | Recetas (SO) |
-| `IslaAncestral/Data/VillagerProfile.cs` | Personalidad, gustos, diálogos (SO) |
-| `IslaAncestral/Data/QuestDefinition.cs` | Misiones (SO) |
+| `scripts/world/block_type.gd` / `ItemType.cs` _(diseno heredado)_ | Definiciones de bloques/objetos (SO) |
+| `scripts/crafting/crafting_recipe.gd` | Recetas (SO) |
+| `scripts/npc/villager_profile.gd` | Personalidad, gustos, diálogos (SO) |
+| `IslaAncestral/Data/QuestDefinition.cs` _(diseno heredado)_ | Misiones (SO) |
 
 ---
 

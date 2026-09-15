@@ -8,11 +8,11 @@
 
 | Archivo | Contenido |
 |---|---|
-| `Assets/_Project/Scripts/World/Ruins/RuinPiece.cs` | Pieza base del kit: pivote, snaps, lod, validación |
-| `Assets/_Project/Scripts/World/Ruins/RuinAssembler.cs` | Editor: ensamblaje de los 13 tipos desde el kit |
+| `Assets/_Project/Scripts/World/Ruins/RuinPiece.cs` _(diseno heredado)_ | Pieza base del kit: pivote, snaps, lod, validación |
+| `Assets/_Project/Scripts/World/Ruins/RuinAssembler.cs` _(diseno heredado)_ | Editor: ensamblaje de los 13 tipos desde el kit |
 | `Assets/_Project/Scripts/World/Ruins/RuinPieceCatalog.asset` | Catálogo de ≤ 40 piezas |
-| `Assets/_Project/Scripts/World/Ruins/RuinRuinProfile.cs` (ScriptableObject) | Perfil por ruina tipo |
-| `Assets/_Project/Scripts/World/Ruins/RuinProgression.cs` | 4 estados + transiciones + eventos |
+| `Assets/_Project/Scripts/World/Ruins/RuinRuinProfile.cs` _(diseno heredado)_ (ScriptableObject) | Perfil por ruina tipo |
+| `Assets/_Project/Scripts/World/Ruins/RuinProgression.cs` _(diseno heredado)_ | 4 estados + transiciones + eventos |
 | `Assets/_Project/Scripts/World/Ruins/RuinActivators/` (8 scripts) | Sistemas de activación reutilizables |
 | `Assets/_Project/Scripts/Data/Ruins/*.json` | Datos de cada ruina (tipo, puzzles, conexiones) |
 

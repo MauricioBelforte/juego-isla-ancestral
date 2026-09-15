@@ -8,23 +8,23 @@
 ### 1.1 Nuevos (capas de cierre)
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/Beta/ContentRegister.cs` | Cierre de contenido | Inventario maestro por SO; genera reporte de gaps; tool Editor |
-| `Assets/_Project/Scripts/Beta/Acto3Manager.cs` | Historia | Orquesta epílogo del faro, post-Sello 6 |
-| `Assets/_Project/Scripts/Beta/RutasDeSellosVerifier.cs` | FF/M66 | Verifica 3 rutas sin softlock (PlayMode test) |
-| `Assets/_Project/Scripts/Beta/StorePageData.cs` | Marketing (M149) | SO con textos, capturas, tags, requisitos |
-| `Assets/_Project/Scripts/Beta/CertificationChecklist.cs` | Certificación | Checklist por plataforma (M149) |
+| `Assets/_Project/Scripts/Beta/ContentRegister.cs` _(diseno heredado)_ | Cierre de contenido | Inventario maestro por SO; genera reporte de gaps; tool Editor |
+| `Assets/_Project/Scripts/Beta/Acto3Manager.cs` _(diseno heredado)_ | Historia | Orquesta epílogo del faro, post-Sello 6 |
+| `Assets/_Project/Scripts/Beta/RutasDeSellosVerifier.cs` _(diseno heredado)_ | FF/M66 | Verifica 3 rutas sin softlock (PlayMode test) |
+| `Assets/_Project/Scripts/Beta/StorePageData.cs` _(diseno heredado)_ | Marketing (M149) | SO con textos, capturas, tags, requisitos |
+| `Assets/_Project/Scripts/Beta/CertificationChecklist.cs` _(diseno heredado)_ | Certificación | Checklist por plataforma (M149) |
 
 ### 1.2 Modificados (cierre sobre Alpha)
 | Archivo | Cambio |
 |---------|--------|
-| `HistoriaMaster.cs` | Hooks de Acto 3 y epílogo; estado `EpílogoDisponible` |
-| `SelloManager.cs` | Registro de cierre: `Sello6` → activa Acto 3 |
-| `LocalizationManager.cs` | Modo multi-archivo por idioma; export/import CSV (M87) |
-| `AccessibilityService.cs` | Completa M58: modos de color, reduce motion/flashing |
-| `MusicDirector.cs` | Playlists por acto/zona; transición por Sello |
-| `AmbientSystem.cs` | Biomas finales 6 islas + estación |
-| `PlatformBridge.cs` | Logros, cloud saves, overlay, certificación |
-| `SaveManager.cs` | Migración final v3.x; backup pre-certificación |
+| `HistoriaMaster.cs` _(diseno heredado)_ | Hooks de Acto 3 y epílogo; estado `EpílogoDisponible` |
+| `SelloManager.cs` _(diseno heredado)_ | Registro de cierre: `Sello6` → activa Acto 3 |
+| `scripts/localizacion/localization_manager.gd` | Modo multi-archivo por idioma; export/import CSV (M87) |
+| `AccessibilityService.cs` _(diseno heredado)_ | Completa M58: modos de color, reduce motion/flashing |
+| `scripts/audio/music_director.gd` | Playlists por acto/zona; transición por Sello |
+| `AmbientSystem.cs` _(diseno heredado)_ | Biomas finales 6 islas + estación |
+| `PlatformBridge.cs` _(diseno heredado)_ | Logros, cloud saves, overlay, certificación |
+| `scripts/saving/save_manager.gd` | Migración final v3.x; backup pre-certificación |
 | `BugTrackerHook` (M101) | Severidades P0-P2; export para reporte |
 
 ## 2. Funciones clave

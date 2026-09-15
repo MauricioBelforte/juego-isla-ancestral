@@ -8,21 +8,21 @@
 ### 1.1 Nuevos
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/Core/Platform/IPlatformBridge.cs` | Abstracción | Interfaz común: logros, cloud, overlay, store (impl por plataforma) |
-| `Assets/_Project/Scripts/Core/Platform/SteamBridge.cs` | Steamworks | Implementación Steam (logros, cloud, overlay, deck) |
-| `Assets/_Project/Scripts/Core/Platform/EosBridge.cs` | EGS/EOS | Implementación EGS (logros, cloud, overlay) |
-| `Assets/_Project/Scripts/Core/Platform/GogBridge.cs` | GOG (opcional) | Implementación GOG Galaxy |
-| `Assets/_Project/Scripts/Core/Platform/NullBridge.cs` | Fallback | Sin plataforma (dev/standalone) |
-| `Assets/_Project/Scripts/Core/Platform/PlatformManager.cs` | Manager | Selecciona el bridge activo; expone servicios |
+| `scripts/plataformas/iplatform_bridge.gd` | Abstracción | Interfaz común: logros, cloud, overlay, store (impl por plataforma) |
+| `scripts/plataformas/steam_bridge.gd` | Steamworks | Implementación Steam (logros, cloud, overlay, deck) |
+| `Assets/_Project/Scripts/Core/Platform/EosBridge.cs` _(diseno heredado)_ | EGS/EOS | Implementación EGS (logros, cloud, overlay) |
+| `Assets/_Project/Scripts/Core/Platform/GogBridge.cs` _(diseno heredado)_ | GOG (opcional) | Implementación GOG Galaxy |
+| `scripts/plataformas/null_bridge.gd` | Fallback | Sin plataforma (dev/standalone) |
+| `scripts/plataformas/platform_manager.gd` | Manager | Selecciona el bridge activo; expone servicios |
 | `scripts/ci/build_targets.ps1` / `.sh` | CI | Builds por target: Windows, macOS(AS), Linux(Proton), SteamDeck settings |
 | `scripts/ci/steamdeck_check.py` | CI | Simula 800p + gamepad para el check Deck Verified |
 
 ### 1.2 Modificados
 | Archivo | Cambio |
 |---------|--------|
-| `SaveManager.cs` (M59/M60) | Cloud detrás de IPlatformBridge; save portable |
-| `InputManager.cs` (M57) | Perfiles de control por plataforma (deck/steam/console) |
-| `SettingsManager.cs` (M89) | Safe area y escalado de UI por resolución (M58) |
+| `scripts/saving/save_manager.gd` (M59/M60) | Cloud detrás de IPlatformBridge; save portable |
+| `InputManager.cs` _(diseno heredado)_ (M57) | Perfiles de control por plataforma (deck/steam/console) |
+| `SettingsManager.cs` _(diseno heredado)_ (M89) | Safe area y escalado de UI por resolución (M58) |
 | `Bootstrapper` | Inicializa PlatformManager |
 
 ## 2. Funciones clave

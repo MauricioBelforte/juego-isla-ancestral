@@ -8,10 +8,10 @@ La monetización es un **documento de estrategia + config** (no hay gameplay de 
 
 | Archivo | Sistema | Propósito |
 |---------|---------|-----------|
-| `Assets/_Project/Scripts/Data/EdicionesDelJuego.cs` | SO | Catálogo de ediciones (id, nombre, contenido, precio referencia) |
-| `Assets/_Project/Scripts/Data/DlcCatalogo.cs` | SO | DLC planificados (id, tipo, contenido, precio) |
-| `Assets/Editor/Monetizacion/AntiP2WScanner.cs` | Editor/CI | Scan: 0 ítems de pago que alteren M38/M71 |
-| `Assets/Editor/Monetizacion/AntiLootboxScanner.cs` | Editor/CI | Scan: 0 UI/систем de cajas de azar |
+| `Assets/_Project/Scripts/Data/EdicionesDelJuego.cs` _(diseno heredado)_ | SO | Catálogo de ediciones (id, nombre, contenido, precio referencia) |
+| `scripts/monetizacion/dlc_catalogo.gd` | SO | DLC planificados (id, tipo, contenido, precio) |
+| `Assets/Editor/Monetizacion/AntiP2WScanner.cs` _(diseno heredado)_ | Editor/CI | Scan: 0 ítems de pago que alteren M38/M71 |
+| `Assets/Editor/Monetizacion/AntiLootboxScanner.cs` _(diseno heredado)_ | Editor/CI | Scan: 0 UI/систем de cajas de azar |
 | `assets/ops/tabla-impuestos.md` | Documento | Tabla de impuestos por tienda/región (mutable por contabilidad) |
 
 ## 2. Funciones clave
