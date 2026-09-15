@@ -49,16 +49,34 @@ PAT = re.compile(
 
 FFFD = '\ufffd'
 
+# Una linea puede contener literales corruptos A PROPOSITO: el banner de
+# advertencia de los BACKLOG-MASTER, las tablas de busqueda/reemplazo de los
+# reparadores, las guias que citan el sintoma. "Repararlas" destruiria la
+# documentacion. Se filtran POR CONTENIDO y no por archivo para que siga
+# funcionando con backlogs y guias nuevos (Hy4, Log 903).
+PAT_LINEA_DOC = re.compile(
+    'caracteres rotos'                 # banner de los BACKLOG-MASTER
+    '|doble (encoding|codificacion)'   # banner de CHECKLIST-GLOBAL y guias
+    '|mojibake'
+    '|U\\+00F0|U\\+0178|U\\+FFFD'      # tablas de los reparadores
+    '|F0 9F 9F|F0 9F 94|0x94'          # ejemplos de bytes de emoji corruptos
+    '|C3 B0|C5 B8|C2 A1|Bytes crudos'  # volcados de bytes en las guias
+    '|interpretado como UTF-8'
+    , re.IGNORECASE)
+
 # AGENTS.md documenta el sintoma con ejemplos: "repararlo" destruiria la guia.
 # Literales mojibake INTENCIONALES: tablas de busqueda/reemplazo de los
 # reparadores y la guia que documenta el sintoma. "Repararlos" los romperia.
 EXCLUIDOS_ARCH = ('./AGENTS.md', './scripts/verify_final.py',
                   './scripts/fix_coordinacion.py', './scripts/fix_emoji3.py',
-                  './scripts/fix_emoji2.py', './scripts/fix_encoding.py')
+                  './scripts/fix_emoji2.py', './scripts/fix_encoding.py',
+                  './scripts/fix_emoji.py', './scripts/saneamiento_utf8.py',
+                  './scripts/fix_final3.py', './scripts/fix_final4.py')
 EXCLUIDOS_DIR = ('./Obsoletos', './scripts/backups', './out',
                  './.workbuddy-ai', './.git', './node_modules', './.godot',
                  './addons', './bin', './Logs')
-EXCLUIDOS_SUELTOS = ('.venv',)   # dependencias de terceros, fuera de alcance
+# Dependencias de terceros: no son codigo del proyecto y no se deben "reparar".
+EXCLUIDOS_SUELTOS = ('.venv', 'node_modules', 'site-packages')
 
 EXT = ('.md', '.gd', '.txt', '.json', '.cfg', '.py')
 
@@ -98,15 +116,23 @@ def main():
                 continue
             if not PAT.search(s):
                 continue
+            # Se descartan las lineas que DOCUMENTAN el mojibake; el resto es
+            # contenido real del archivo y lo que se debe reparar.
+            lineas = [l for l in s.split('\n') if not PAT_LINEA_DOC.search(l)]
+            util = '\n'.join(lineas)
+            n = len(PAT.findall(util))
+            if n == 0:
+                continue
             if (p in EXCLUIDOS_ARCH
                     or p.startswith(tuple(d + '/' for d in EXCLUIDOS_DIR))
                     or p.startswith(tuple(d[2:] for d in EXCLUIDOS_DIR))
-                    or any('/' + s + '/' in '/' + p for s in EXCLUIDOS_SUELTOS)):
-                cats['EXCLUIDO'].append((p, len(PAT.findall(s))))
-            elif FFFD in s:
-                cats['IRREVERSIBLE'].append((p, len(PAT.findall(s))))
+                    or any('/' + x + '/' in '/' + p
+                           for x in EXCLUIDOS_SUELTOS)):
+                cats['EXCLUIDO'].append((p, n))
+            elif FFFD in util:
+                cats['IRREVERSIBLE'].append((p, n))
             else:
-                cats['SUCIO'].append((p, len(PAT.findall(s))))
+                cats['SUCIO'].append((p, n))
 
     for c in cats:
         cats[c].sort(key=lambda x: -x[1])
