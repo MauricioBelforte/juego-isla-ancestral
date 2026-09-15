@@ -55,7 +55,14 @@ Antes de escribir una línea se leyeron las fuentes reales para no inventar nada
 |---|---:|---|
 | `scripts/datos/test_datos_m60_iter4.gd` | ~30 000 | **152 checks** en 8 bloques (A–H), marcador `_fin()` por bloque + watchdog `quit(1)` a 1800 frames. Preserva y restaura `user://config.cfg` del usuario (por bytes) y limpia `user://saves/slot_1..3` al inicio y al final |
 
-Bloques medidos (no estimados): **A 29 · B 18 · C 27 · D 18 · E 15 · F 15 · G 21 · H 12 = 152**.
+Bloques medidos (no estimados, 3 corridas idénticas): **A 27 · B 18 · C 25 · D 18 ·
+E 15 · F 15 · G 21 · H 12 = 151**, más el check del guardián de bloques = **152**.
+
+> ⚠️ **Corregido el mismo 2026-09-15:** una versión previa de este párrafo decía
+> `A 29 · C 27 = 152` — cifras arrastradas de una versión anterior de la suite, cuya
+> suma daba 155 ≠ 152. Los valores de arriba son los que **imprime** el suite
+> (`[FIN] … (+N checks)`), reconfirmados en 3 corridas. Es exactamente el tipo de
+> cifra que el proyecto exige **medir y no copiar**.
 
 Fixture de contrato válido v1 (`jugador/inventario/tiempo/mundo_voxel/meta`) y fixture
 con voxel (2 chunks). Callables de migración de prueba: `_mig_1a2/_mig_2a3/_mig_3a4`,

@@ -32,14 +32,18 @@ GODOT="D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64
 
 | Bloque | Checks | Qué prueba |
 |---|---|---|
-| **A** | 29 | `Versionador.migrar_con_cadena` (motor **inyectable**): 1 salto, N=3 saltos, no mutación del original, cadena incompleta, migración que no avanza versión, migración que devuelve dict sin `version`, save sin versión (v0), versión ≥ objetivo (copia, no alias), idempotencia, post-validación contra el contrato destino, delegación de `migrar()` de producción |
+| **A** | 27 | `Versionador.migrar_con_cadena` (motor **inyectable**): 1 salto, N=3 saltos, no mutación del original, cadena incompleta, migración que no avanza versión, migración que devuelve dict sin `version`, save sin versión (v0), versión ≥ objetivo (copia, no alias), idempotencia, post-validación contra el contrato destino, delegación de `migrar()` de producción |
 | **B** | 18 | Patrones puros `renombrar_campo` / `eliminar_campo` / `transformar_valor` (valor, default, no mutación, no invención) + los tres combinados en una cadena real de 3 saltos |
-| **C** | 27 | Atomicidad y backups: `.bak` al 2.º guardado, `.bak.1` al 3.º, ventana = 3 (no crece), `.tmp` residual inocuo, tamaños RN2 (save < 1 MB, meta < 10 KB, config < 50 KB), config con `.bak` + atómica + corrupta → defaults, escritura imposible → `Error` sin crash, escritura interrumpida → save intacto |
+| **C** | 25 | Atomicidad y backups: `.bak` al 2.º guardado, `.bak.1` al 3.º, ventana = 3 (no crece), `.tmp` residual inocuo, tamaños RN2 (save < 1 MB, meta < 10 KB, config < 50 KB), config con `.bak` + atómica + corrupta → defaults, escritura imposible → `Error` sin crash, escritura interrumpida → save intacto |
 | **D** | 18 | Slots: slot vacío, slot fuera de rango, borrado de slot inexistente → `false`, **regeneración de `meta.json`**, `listar_slots()` sólo meta, `borrar_slot` limpia `.deflate` + copias + directorio |
 | **E** | 15 | Catálogo: `contar_items() > 100`, `tiene_item` sin cargar, `obtener_item` con caché, `validar_ids` (faltantes, orden, vacíos, sin cargar Resources) |
 | **F** | 15 | Log M103: guardado/carga registran, rechazo por versión futura, contrato inválido con detalle, **detección temprana al guardar (no bloqueante)**, payload válido sin aviso, helper del log de migración |
 | **G** | 21 | Integración: `ServiceRegistry.get_service("datos")`, `SaveManager.snapshot.collect()` (>30 secciones: player/npc/buildings), provider `buildings` registrado, orden de carga del voxel (save válido primero), semilla del mundo ida y vuelta, `_voxel_payload` |
 | **H** | 12 | Formato: pretty de 2 espacios, canónico determinista, **una sola serialización** (checksum del archivo == CRC del `payload_str`), sin BOM, UTF-8 válido, checksum excluye el campo `checksum` |
+
+> Suma de bloques: 27 + 18 + 25 + 18 + 15 + 15 + 21 + 12 = **151**, más el check del
+> guardián de bloques (§4) = **152**. Valores **medidos** con `[FIN] … (+N checks)`, no
+> estimados.
 
 ## 4. Guardián anti-falso-verde (obligatorio)
 

@@ -18,9 +18,9 @@ Invocación: `--headless --path game/isla-ancestral --script res://scripts/datos
 ## 2. Desglose de la suite iter. 4 (152 checks)
 
 ```
-[FIN] A. migrar_con_cadena (motor inyectable)                        (+29 checks)
+[FIN] A. migrar_con_cadena (motor inyectable)                        (+27 checks)
 [FIN] B. patrones renombrar / eliminar / transformar                 (+18 checks)
-[FIN] C. atomicidad, rotación de backups y tamaños RN                (+27 checks)
+[FIN] C. atomicidad, rotación de backups y tamaños RN                (+25 checks)
 [FIN] D. slots: meta regenerada, slot vacío, borrado                 (+18 checks)
 [FIN] E. catálogo estático: validar_ids y carga perezosa             (+15 checks)
 [FIN] F. log M103 (GameLogger real)                                  (+15 checks)
@@ -29,6 +29,14 @@ Invocación: `--headless --path game/isla-ancestral --script res://scripts/datos
 === Resumen M60 iter. 4: 152 checks, 0 fallos ===
 TEST M60 iter. 4 OK — todos los checks pasaron
 ```
+
+**Suma verificada:** A 27 + B 18 + C 25 + D 18 + E 15 + F 15 + G 21 + H 12 = **151**, más el
+check del guardián de bloques = **152**. Medido en 3 corridas consecutivas con el mismo
+resultado (no estimado, no copiado de una iteración anterior).
+
+> ⚠️ **Corregido 2026-09-15:** este desglose decía `A 29 · C 27` (suma 155 ≠ 152) — cifras
+> arrastradas de una versión previa de la suite, no medidas. Los valores de arriba son los
+> que **imprime** el suite (`[FIN] … (+N checks)`), reconfirmados 3 veces.
 
 ## 3. Prueba del guardián anti-falso-verde (evidencia de que el guardián funciona)
 
