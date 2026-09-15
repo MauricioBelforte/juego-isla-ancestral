@@ -1,4 +1,4 @@
-﻿# 248 — M166: Rediseño de la palanca de madera (M70, diseño de horquilla)
+# 248 — M166: Rediseño de la palanca de madera (M70, diseño de horquilla)
 
 **Fecha:** 2026-08-29
 **Hora:** 23:05

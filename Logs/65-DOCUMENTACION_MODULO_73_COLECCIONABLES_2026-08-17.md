@@ -1,4 +1,4 @@
-﻿# Log 65 — Documentación Módulo 73 (Coleccionables)
+# Log 65 — Documentación Módulo 73 (Coleccionables)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

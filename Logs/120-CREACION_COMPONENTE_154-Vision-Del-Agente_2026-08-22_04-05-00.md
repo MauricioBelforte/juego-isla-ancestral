@@ -1,4 +1,4 @@
-﻿# Log 120 — Creación del Componente 154-Vision-Del-Agente
+# Log 120 — Creación del Componente 154-Vision-Del-Agente
 
 **Modelo:** stealth/ox-alpha
 **Plataforma:** Cline

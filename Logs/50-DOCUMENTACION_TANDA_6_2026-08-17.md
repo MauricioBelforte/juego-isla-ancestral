@@ -1,4 +1,4 @@
-﻿# Log 50 — Documentación Tanda 6 (60, 97, 101, 108, 114, 136)
+# Log 50 — Documentación Tanda 6 (60, 97, 101, 108, 114, 136)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

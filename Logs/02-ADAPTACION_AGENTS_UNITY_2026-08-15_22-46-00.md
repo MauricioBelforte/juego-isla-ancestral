@@ -1,4 +1,4 @@
-﻿**Modelo:** Claude Opus 4.6 (Thinking)
+**Modelo:** Claude Opus 4.6 (Thinking)
 **Plataforma:** Antigravity
 
 # Log 02 — Adaptación del AGENTS.md a Unity/C#

@@ -1,4 +1,4 @@
-﻿# Log 234 — M166 · Promoción de la frontera + verificación visual
+# Log 234 — M166 · Promoción de la frontera + verificación visual
 
 **Fecha:** 2026-08-29 (continuación del log 233)
 **Hora:** 15:50

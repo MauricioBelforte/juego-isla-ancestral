@@ -1,4 +1,4 @@
-﻿# Log 377: M64 IA-NPC + M74 Eventos — Implementación agnes-2.5-flash
+# Log 377: M64 IA-NPC + M74 Eventos — Implementación agnes-2.5-flash
 
 **Fecha:** 2026-09-01
 **Hora:** 05:06

@@ -1,4 +1,4 @@
-﻿# Log 183: M13 Herramientas — Integración VoxelTerrain + Fix Spawn
+# Log 183: M13 Herramientas — Integración VoxelTerrain + Fix Spawn
 
 **Fecha:** 2026-08-27
 **Hora:** 00:30

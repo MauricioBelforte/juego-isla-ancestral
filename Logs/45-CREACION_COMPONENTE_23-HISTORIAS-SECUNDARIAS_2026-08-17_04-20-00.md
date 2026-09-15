@@ -1,4 +1,4 @@
-﻿# Log 45 — Creación del Componente 23: Historias Secundarias (delegable)
+# Log 45 — Creación del Componente 23: Historias Secundarias (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # Log 119: Expansion M69 - Fast Travel con Experiencia de Viaje

@@ -1,4 +1,4 @@
-﻿# 380 — Cierre administrativo Tier E (M18), cierre Tier F (M50), y corrección del falso E-64
+# 380 — Cierre administrativo Tier E (M18), cierre Tier F (M50), y corrección del falso E-64
 
 - **Fecha:** 2026-09-01 12:20 (hora local real del sistema)
 - **Agente:** MiniMax-M3 · WorkBuddy AI · Windows

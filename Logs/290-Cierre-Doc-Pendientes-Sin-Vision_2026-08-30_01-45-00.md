@@ -1,4 +1,4 @@
-﻿# Log 290 — Cierre de pendientes documentales (sin visión)
+# Log 290 — Cierre de pendientes documentales (sin visión)
 
 **Fecha:** 2026-08-30
 **Hora:** 01:45

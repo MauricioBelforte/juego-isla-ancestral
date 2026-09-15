@@ -1,4 +1,4 @@
-﻿# Log 517: M119 Actualizaciones núcleo V0 verificado 0 fallos
+# Log 517: M119 Actualizaciones núcleo V0 verificado 0 fallos
 
 **Fecha:** 2026-09-02
 **Hora:** 05:49

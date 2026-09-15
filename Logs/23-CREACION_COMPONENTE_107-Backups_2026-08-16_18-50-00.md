@@ -1,4 +1,4 @@
-﻿# Log 23 — Creación del Componente 107: Backups
+# Log 23 — Creación del Componente 107: Backups
 
 **Modelo:** Devin
 **Plataforma:** Antigravity

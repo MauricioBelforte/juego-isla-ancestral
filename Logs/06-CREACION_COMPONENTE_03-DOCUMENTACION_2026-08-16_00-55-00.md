@@ -1,4 +1,4 @@
-﻿# Log 06 — Creación del Componente 03: Documentación del Proyecto (M02)
+# Log 06 — Creación del Componente 03: Documentación del Proyecto (M02)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

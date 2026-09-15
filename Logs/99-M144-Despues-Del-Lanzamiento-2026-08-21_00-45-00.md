@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # Log 99 — M144-Despues-Del-Lanzamiento: Documentación completa

@@ -1,4 +1,4 @@
-﻿# Log 24 — Creación del Componente 110: Debug Menu
+# Log 24 — Creación del Componente 110: Debug Menu
 
 **Modelo:** Devin
 **Plataforma:** Antigravity

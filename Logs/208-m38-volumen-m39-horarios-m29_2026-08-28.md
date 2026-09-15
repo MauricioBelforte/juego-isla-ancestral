@@ -1,4 +1,4 @@
-﻿# Log 208: M38 precio por volumen + M39 esta_abierta conectada a M29
+# Log 208: M38 precio por volumen + M39 esta_abierta conectada a M29
 
 **Fecha:** 2026-08-28
 **Hora:** 20:22

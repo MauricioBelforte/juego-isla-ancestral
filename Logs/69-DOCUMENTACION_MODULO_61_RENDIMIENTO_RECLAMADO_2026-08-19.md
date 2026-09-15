@@ -1,4 +1,4 @@
-﻿# Log 69 — Documentación Módulo 61 (Rendimiento) — RECLAMADO
+# Log 69 — Documentación Módulo 61 (Rendimiento) — RECLAMADO
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

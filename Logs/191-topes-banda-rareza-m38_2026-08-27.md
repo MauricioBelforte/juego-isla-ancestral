@@ -1,4 +1,4 @@
-﻿# Log 191: Topes por banda de rareza en M38 (anti-grind)
+# Log 191: Topes por banda de rareza en M38 (anti-grind)
 
 **Fecha:** 2026-08-27
 **Hora:** 13:14

@@ -1,4 +1,4 @@
-﻿# Log 174: Implementación del GameClock (M29 Tiempo y Calendario)
+# Log 174: Implementación del GameClock (M29 Tiempo y Calendario)
 
 **Fecha:** 2026-08-26
 **Hora:** 21:25

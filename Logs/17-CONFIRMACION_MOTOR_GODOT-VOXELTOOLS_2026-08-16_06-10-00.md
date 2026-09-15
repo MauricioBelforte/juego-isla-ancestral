@@ -1,4 +1,4 @@
-﻿# Log 17 — Confirmación del Motor: Godot 4.x + Voxel Tools + GDScript
+# Log 17 — Confirmación del Motor: Godot 4.x + Voxel Tools + GDScript
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿# Log 12 — Creación del Componente 09: Terreno y Geografía
+# Log 12 — Creación del Componente 09: Terreno y Geografía
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

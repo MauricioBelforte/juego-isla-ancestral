@@ -1,4 +1,4 @@
-﻿# Log 198: Implementación M136 Roadmap (hoja de ruta + 7 checklists de hito)
+# Log 198: Implementación M136 Roadmap (hoja de ruta + 7 checklists de hito)
 
 **Fecha:** 2026-08-28
 **Hora:** 21:30

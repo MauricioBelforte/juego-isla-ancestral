@@ -1,4 +1,4 @@
-﻿# Log 409: M120 DLC y Expansiones — Núcleo Iter. 1
+# Log 409: M120 DLC y Expansiones — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:50

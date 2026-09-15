@@ -1,4 +1,4 @@
-﻿# Log 179: M10 Generación del Mundo completado + M08 avances
+# Log 179: M10 Generación del Mundo completado + M08 avances
 
 **Fecha:** 2026-08-26
 **Hora:** 17:35

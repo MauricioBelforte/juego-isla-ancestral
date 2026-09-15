@@ -1,4 +1,4 @@
-﻿# Log 423: M78 Legal Propiedad Intelectual — Núcleo Iter. 1
+# Log 423: M78 Legal Propiedad Intelectual — Núcleo Iter. 1
 
 **Fecha:** 2026-09-02
 **Hora:** 02:00

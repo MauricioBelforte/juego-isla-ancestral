@@ -1,4 +1,4 @@
-﻿# Log 51 — Integración Tanda 7 (39, 40, 54, 72, 74, 87)
+# Log 51 — Integración Tanda 7 (39, 40, 54, 72, 74, 87)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

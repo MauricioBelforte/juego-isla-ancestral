@@ -1,4 +1,4 @@
-﻿# Log 230: Paleta Maldivas, aguas de dos niveles, montañas cónicas y velocidad dev
+# Log 230: Paleta Maldivas, aguas de dos niveles, montañas cónicas y velocidad dev
 
 **Fecha:** 2026-08-29
 **Hora:** 09:40

@@ -1,4 +1,4 @@
-﻿# Log 516: M87 Localización — Núcleo Iter. 1
+# Log 516: M87 Localización — Núcleo Iter. 1
 
 ## Resumen
 

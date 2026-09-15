@@ -1,4 +1,4 @@
-﻿# Log 166: Conexion MCP GitHub Copilot
+# Log 166: Conexion MCP GitHub Copilot
 
 **Fecha:** 2026-08-25
 **Hora:** 21:25

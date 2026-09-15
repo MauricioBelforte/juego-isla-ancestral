@@ -1,4 +1,4 @@
-﻿# Log 518: M122 Crash Reporting núcleo V0 verificado 0 fallos
+# Log 518: M122 Crash Reporting núcleo V0 verificado 0 fallos
 
 **Fecha:** 2026-09-02
 **Hora:** 05:52

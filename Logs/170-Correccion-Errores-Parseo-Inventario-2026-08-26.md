@@ -1,4 +1,4 @@
-﻿# Log 170: Corrección de Errores de Parseo en Inventario + Validación Visual MCP
+# Log 170: Corrección de Errores de Parseo en Inventario + Validación Visual MCP
 
 **Fecha:** 2026-08-26
 **Hora:** 21:25

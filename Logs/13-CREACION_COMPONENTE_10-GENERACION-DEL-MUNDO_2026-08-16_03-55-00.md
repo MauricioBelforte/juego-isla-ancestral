@@ -1,4 +1,4 @@
-﻿# Log 13 — Creación del Componente 10: Generación del Mundo
+# Log 13 — Creación del Componente 10: Generación del Mundo
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿# Log 43 — Creación del Componente 26: Templo Subterráneo (delegable)
+# Log 43 — Creación del Componente 26: Templo Subterráneo (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

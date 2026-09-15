@@ -1,4 +1,4 @@
-﻿# Log 396: M152 Principios Innegociables — Núcleo Iter. 1
+# Log 396: M152 Principios Innegociables — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 21:00

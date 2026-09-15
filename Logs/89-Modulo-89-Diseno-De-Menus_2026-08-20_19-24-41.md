@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # Log 89 — Módulo 89 Diseño de Menús documentado (124/124)

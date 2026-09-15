@@ -1,4 +1,4 @@
-﻿# Log 425: M80 Legal Privacidad — Núcleo Iter. 1
+# Log 425: M80 Legal Privacidad — Núcleo Iter. 1
 
 **Fecha:** 2026-09-02
 **Hora:** 02:20

@@ -1,4 +1,4 @@
-﻿# Log 41 — Creación del Componente 24: Templos y Puzzles (delegable)
+# Log 41 — Creación del Componente 24: Templos y Puzzles (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

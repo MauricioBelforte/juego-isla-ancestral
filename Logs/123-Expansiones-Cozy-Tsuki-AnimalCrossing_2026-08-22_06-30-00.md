@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # Log 123: Expansiones Cozy (Tsuki's Odyssey y otros)

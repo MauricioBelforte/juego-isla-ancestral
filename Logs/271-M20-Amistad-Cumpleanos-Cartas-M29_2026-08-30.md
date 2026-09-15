@@ -1,4 +1,4 @@
-﻿# Log 271: M20 Amistad — Cumpleaños de NPCs + cartas con M29
+# Log 271: M20 Amistad — Cumpleaños de NPCs + cartas con M29
 
 **Fecha:** 2026-08-30
 **Hora:** 19:43

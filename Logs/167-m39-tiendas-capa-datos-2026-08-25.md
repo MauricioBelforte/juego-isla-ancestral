@@ -1,4 +1,4 @@
-﻿# Log 167: M39 Tiendas — implementación de capa de datos
+# Log 167: M39 Tiendas — implementación de capa de datos
 
 **Fecha:** 2026-08-25
 **Hora:** 21:25

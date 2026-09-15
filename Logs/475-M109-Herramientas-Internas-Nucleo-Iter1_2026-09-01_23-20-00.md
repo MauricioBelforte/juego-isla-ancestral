@@ -1,4 +1,4 @@
-﻿# Log 402: M109 Herramientas Internas — Núcleo Iter. 1
+# Log 402: M109 Herramientas Internas — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:20

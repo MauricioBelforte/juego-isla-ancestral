@@ -1,4 +1,4 @@
-﻿# Log 299 — M21: retrato gráfico del hablante con expresión (M53/M87)
+# Log 299 — M21: retrato gráfico del hablante con expresión (M53/M87)
 
 **Fecha:** 2026-08-30
 **Hora:** 21:34

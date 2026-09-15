@@ -1,4 +1,4 @@
-﻿# Log 163: Implementación núcleo M59 Guardado (Godot 4.7)
+# Log 163: Implementación núcleo M59 Guardado (Godot 4.7)
 
 **Fecha:** 2026-08-25
 **Hora:** 15:45

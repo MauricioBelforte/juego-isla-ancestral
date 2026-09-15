@@ -1,4 +1,4 @@
-﻿# Log 221: Implementación M134 Presupuesto (operativa financiera)
+# Log 221: Implementación M134 Presupuesto (operativa financiera)
 
 **Fecha:** 2026-08-28
 **Hora:** 20:00

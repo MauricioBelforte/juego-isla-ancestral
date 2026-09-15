@@ -1,4 +1,4 @@
-﻿# Log 146: Guías de referencia obligatoria antes de codificar o usar herramientas
+# Log 146: Guías de referencia obligatoria antes de codificar o usar herramientas
 
 **Fecha:** 2026-08-24
 **Hora:** 20:39

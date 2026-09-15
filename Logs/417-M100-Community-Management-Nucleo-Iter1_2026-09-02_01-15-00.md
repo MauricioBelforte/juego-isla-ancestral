@@ -1,4 +1,4 @@
-﻿# Log 417: M100 Community Management — Núcleo Iter. 1
+# Log 417: M100 Community Management — Núcleo Iter. 1
 
 **Fecha:** 2026-09-02
 **Hora:** 01:15

@@ -1,4 +1,4 @@
-﻿**Modelo:** MiniMax-M3
+**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 195 — Auditoría de apoyos (E-12, directiva del usuario 2026-08-28)

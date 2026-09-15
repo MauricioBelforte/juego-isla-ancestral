@@ -1,4 +1,4 @@
-﻿**Modelo:** MiniMax-M3
+**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 196 — Verificación multi-ángulo obligatoria (E-13, directiva del usuario)

@@ -1,4 +1,4 @@
-﻿# Log 40 — Creación del Componente 66: Anti-Softlock (delegable)
+# Log 40 — Creación del Componente 66: Anti-Softlock (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿# Log 705: M18-BIS — Casas grandes habitables: documentación + primera casa
+# Log 705: M18-BIS — Casas grandes habitables: documentación + primera casa
 
 **Fecha:** 2026-09-05
 **Hora:** 13:56

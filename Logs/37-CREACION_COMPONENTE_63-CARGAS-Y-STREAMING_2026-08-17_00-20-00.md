@@ -1,4 +1,4 @@
-﻿# Log 37 — Creación del Componente 63: Cargas y Streaming (delegable)
+# Log 37 — Creación del Componente 63: Cargas y Streaming (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

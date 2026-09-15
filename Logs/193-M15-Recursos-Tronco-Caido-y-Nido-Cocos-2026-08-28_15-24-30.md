@@ -1,4 +1,4 @@
-﻿**Modelo:** MiniMax-M3
+**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 193 — M15-Recursos: Tronco caído + Nido de cocos (tier 1)

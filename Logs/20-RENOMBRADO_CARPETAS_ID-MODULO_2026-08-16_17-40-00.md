@@ -1,4 +1,4 @@
-﻿# Log 20 — Renombrado de carpetas al estándar {ID-Módulo}-{Nombre}
+# Log 20 — Renombrado de carpetas al estándar {ID-Módulo}-{Nombre}
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

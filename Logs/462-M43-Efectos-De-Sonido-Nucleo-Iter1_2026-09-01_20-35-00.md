@@ -1,4 +1,4 @@
-﻿# Log 394: M43 Efectos de Sonido — Núcleo Iter. 1
+# Log 394: M43 Efectos de Sonido — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 20:35

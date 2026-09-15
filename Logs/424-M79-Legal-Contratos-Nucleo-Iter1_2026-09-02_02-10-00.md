@@ -1,4 +1,4 @@
-﻿# Log 424: M79 Legal Contratos — Núcleo Iter. 1
+# Log 424: M79 Legal Contratos — Núcleo Iter. 1
 
 **Fecha:** 2026-09-02
 **Hora:** 02:10

@@ -1,4 +1,4 @@
-﻿# Log 401: M119 Actualizaciones — Núcleo Iter. 1
+# Log 401: M119 Actualizaciones — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:10

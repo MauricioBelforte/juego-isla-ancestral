@@ -1,4 +1,4 @@
-﻿**Modelo:** MiniMax-M3
+**Modelo:** MiniMax-M3
 **Plataforma:** WorkBuddy AI
 
 # Log 194 — M15-Recursos: Nido de cocos, corrección de apoyo + E-11

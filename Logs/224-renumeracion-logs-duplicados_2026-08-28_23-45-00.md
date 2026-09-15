@@ -1,4 +1,4 @@
-﻿**Fecha:** (sin fecha)
+**Fecha:** (sin fecha)
 **Hora:** 23:45
 
 

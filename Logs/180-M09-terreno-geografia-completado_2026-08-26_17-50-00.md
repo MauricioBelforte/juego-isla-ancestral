@@ -1,4 +1,4 @@
-﻿# Log 180: M09 Terreno y Geografía completado — Isla Aurora visible
+# Log 180: M09 Terreno y Geografía completado — Isla Aurora visible
 
 **Fecha:** 2026-08-26
 **Hora:** 17:50

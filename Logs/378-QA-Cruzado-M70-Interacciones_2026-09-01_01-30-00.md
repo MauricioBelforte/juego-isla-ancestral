@@ -1,4 +1,4 @@
-﻿**Modelo:** Hy3
+**Modelo:** Hy3
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-01
 **Tipo:** QA cruzado §21.8 (verificación entre modelos)

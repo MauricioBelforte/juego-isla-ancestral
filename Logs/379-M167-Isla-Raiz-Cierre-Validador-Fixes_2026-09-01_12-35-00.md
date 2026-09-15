@@ -1,4 +1,4 @@
-﻿# Log 379: M167 Isla Raíz — Cierre iter 1: validador del terreno + 3 fixes (batimetría/spawn/snap) + verificación visual V4
+# Log 379: M167 Isla Raíz — Cierre iter 1: validador del terreno + 3 fixes (batimetría/spawn/snap) + verificación visual V4
 
 **Fecha:** 2026-09-01
 **Hora:** 12:35

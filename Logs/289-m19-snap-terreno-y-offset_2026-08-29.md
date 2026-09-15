@@ -1,4 +1,4 @@
-﻿# Log 289: M19 — Snap al terreno y offset de NPC
+# Log 289: M19 — Snap al terreno y offset de NPC
 
 **Fecha:** 2026-08-29
 **Hora:** 22:43

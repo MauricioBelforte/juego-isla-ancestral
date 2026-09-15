@@ -1,4 +1,4 @@
-﻿# Log 524: M104 Analytics — Verificación y liberación
+# Log 524: M104 Analytics — Verificación y liberación
 
 ## Resumen
 

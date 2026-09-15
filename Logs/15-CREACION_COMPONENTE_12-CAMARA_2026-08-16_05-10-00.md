@@ -1,4 +1,4 @@
-﻿# Log 15 — Creación del Componente 12: Cámara
+# Log 15 — Creación del Componente 12: Cámara
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

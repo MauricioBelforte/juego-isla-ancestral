@@ -1,4 +1,4 @@
-﻿# Log 19 — Creación del Componente 30: Reloj en Tiempo Real (delegable)
+# Log 19 — Creación del Componente 30: Reloj en Tiempo Real (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

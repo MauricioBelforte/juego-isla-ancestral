@@ -1,4 +1,4 @@
-﻿# Log 188: Estructura de carpetas por modulo en blender-mcp y fix de ruta de .blend
+# Log 188: Estructura de carpetas por modulo en blender-mcp y fix de ruta de .blend
 
 **Fecha:** 2026-08-27
 **Hora:** 23:25

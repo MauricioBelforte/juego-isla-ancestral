@@ -1,4 +1,4 @@
-﻿# Log 433: M126 Marketing Legal — Núcleo Iter. 1
+# Log 433: M126 Marketing Legal — Núcleo Iter. 1
 
 ## Resumen
 

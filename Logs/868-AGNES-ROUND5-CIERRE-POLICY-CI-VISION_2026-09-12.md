@@ -1,4 +1,4 @@
-﻿# Log 868: Round 5 cierre modulos policy/legal/CI — agnes-2.5-flash
+# Log 868: Round 5 cierre modulos policy/legal/CI — agnes-2.5-flash
 
 **Fecha:** 2026-09-12
 **Hora:** 23:10

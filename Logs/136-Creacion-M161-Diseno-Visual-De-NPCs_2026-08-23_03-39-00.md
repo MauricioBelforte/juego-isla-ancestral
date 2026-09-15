@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-23
 **Hora:** 03:39

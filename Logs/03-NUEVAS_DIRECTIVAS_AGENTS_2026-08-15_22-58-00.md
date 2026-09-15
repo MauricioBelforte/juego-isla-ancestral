@@ -1,4 +1,4 @@
-﻿**Modelo:** Claude Opus 4.6 (Thinking)
+**Modelo:** Claude Opus 4.6 (Thinking)
 **Plataforma:** Antigravity
 
 # Log 03 — Nuevas Directivas en AGENTS.md (Checklist 100+, Optimización, Testing Opcional)

@@ -1,4 +1,4 @@
-﻿# Log 39 — Creación del Componente 65: Animales IA (delegable)
+# Log 39 — Creación del Componente 65: Animales IA (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

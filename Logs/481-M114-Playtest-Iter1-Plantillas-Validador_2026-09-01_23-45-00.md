@@ -1,4 +1,4 @@
-﻿# Log 407: M114 Playtest — Iter. 1 (plantillas + validador)
+# Log 407: M114 Playtest — Iter. 1 (plantillas + validador)
 
 **Fecha:** 2026-09-01
 **Hora:** 23:45

@@ -1,4 +1,4 @@
-﻿# Log 57 — Documentación Módulo 50 (Vegetación)
+# Log 57 — Documentación Módulo 50 (Vegetación)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

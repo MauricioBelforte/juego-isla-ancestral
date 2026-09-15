@@ -1,4 +1,4 @@
-﻿# Log 261: M61 Rendimiento (iter. 2) — BenchRecorder (runner de benchmark)
+# Log 261: M61 Rendimiento (iter. 2) — BenchRecorder (runner de benchmark)
 
 **Fecha:** 2026-08-30
 **Hora:** 04:00

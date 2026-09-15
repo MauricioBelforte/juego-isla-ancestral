@@ -1,4 +1,4 @@
-﻿# Log 122 — M154 declarado Prerrequisito Fundamental para Trabajo Visual
+# Log 122 — M154 declarado Prerrequisito Fundamental para Trabajo Visual
 
 **Modelo:** stealth/ox-alpha
 **Plataforma:** Cline

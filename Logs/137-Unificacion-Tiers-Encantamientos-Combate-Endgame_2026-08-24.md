@@ -1,4 +1,4 @@
-﻿# Log 137: Unificacion de Tiers + Encantamientos + Combate Endgame + ItemData
+# Log 137: Unificacion de Tiers + Encantamientos + Combate Endgame + ItemData
 
 **Fecha:** 2026-08-24
 **Hora:** 21:25

@@ -1,4 +1,4 @@
-﻿# Log 68 — Documentación Módulo 77 (Online y Red)
+# Log 68 — Documentación Módulo 77 (Online y Red)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

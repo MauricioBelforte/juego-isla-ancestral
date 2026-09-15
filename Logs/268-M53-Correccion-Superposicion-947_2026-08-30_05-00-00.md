@@ -1,4 +1,4 @@
-﻿# Log 268: M53 — Corrección de superposición reintroducida (violación §9.47)
+# Log 268: M53 — Corrección de superposición reintroducida (violación §9.47)
 
 **Fecha:** 2026-08-30
 **Hora:** 05:00

@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # Log 130 — Creación de M162: Diálogos Contextuales de NPCs

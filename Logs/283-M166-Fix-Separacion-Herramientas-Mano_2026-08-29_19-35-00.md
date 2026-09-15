@@ -1,4 +1,4 @@
-﻿# $1283 — M166 Fix de separación E-27 en las 3 herramientas de mano
+# $1283 — M166 Fix de separación E-27 en las 3 herramientas de mano
 
 **Fecha:** 2026-08-29
 **Hora:** 19:35

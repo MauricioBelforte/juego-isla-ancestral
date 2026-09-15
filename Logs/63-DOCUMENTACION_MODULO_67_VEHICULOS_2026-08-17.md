@@ -1,4 +1,4 @@
-﻿# Log 63 — Documentación Módulo 67 (Vehículos)
+# Log 63 — Documentación Módulo 67 (Vehículos)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

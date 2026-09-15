@@ -1,4 +1,4 @@
-﻿# Log 18 — Creación del Componente 29: Tiempo y Calendario (delegable)
+# Log 18 — Creación del Componente 29: Tiempo y Calendario (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

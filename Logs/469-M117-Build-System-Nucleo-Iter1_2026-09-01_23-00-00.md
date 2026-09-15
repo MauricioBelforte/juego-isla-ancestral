@@ -1,4 +1,4 @@
-﻿# Log 399: M117 Build System — Núcleo Iter. 1
+# Log 399: M117 Build System — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:00

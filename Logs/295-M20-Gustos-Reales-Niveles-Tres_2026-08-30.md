@@ -1,4 +1,4 @@
-﻿# Log 295: M20 Amistad — Gustos reales desde M19 + niveles en .tres
+# Log 295: M20 Amistad — Gustos reales desde M19 + niveles en .tres
 
 **Fecha:** 2026-08-30
 **Hora:** 20:26

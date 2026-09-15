@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # Log 98 — M124-Contenido-Generado-Por-Usuarios: Documentación completa

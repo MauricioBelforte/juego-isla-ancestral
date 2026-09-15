@@ -1,4 +1,4 @@
-﻿# Log 867: Round 4 cierre modulos legales/marca — agnes-2.5-flash
+# Log 867: Round 4 cierre modulos legales/marca — agnes-2.5-flash
 
 **Fecha:** 2026-09-12
 **Hora:** 22:35

@@ -1,4 +1,4 @@
-﻿# Log 56 — Documentación Módulo 49 (Iluminación)
+# Log 56 — Documentación Módulo 49 (Iluminación)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

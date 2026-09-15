@@ -1,4 +1,4 @@
-﻿# Log 296 — M20 (Amistad): Reacción M21 + DOM-AMISTAD
+# Log 296 — M20 (Amistad): Reacción M21 + DOM-AMISTAD
 
 **Fecha:** 2026-08-30
 **Hora:** 20:52

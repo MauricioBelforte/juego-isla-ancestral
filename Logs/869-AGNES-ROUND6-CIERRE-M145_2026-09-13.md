@@ -1,4 +1,4 @@
-﻿# Log 869: Round 6 cierre M145 + partial M81/M80 — agnes-2.5-flash
+# Log 869: Round 6 cierre M145 + partial M81/M80 — agnes-2.5-flash
 
 **Fecha:** 2026-09-13
 **Hora:** 00:10

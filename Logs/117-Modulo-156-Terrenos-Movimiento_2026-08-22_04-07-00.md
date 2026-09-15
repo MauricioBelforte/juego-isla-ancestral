@@ -1,4 +1,4 @@
-﻿**Modelo:** MiMo V2.5
+**Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
 
 # Log 117: Creación M156 — Terrenos y Movimiento Diferenciado

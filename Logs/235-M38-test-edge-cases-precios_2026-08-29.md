@@ -1,4 +1,4 @@
-﻿# Log 235: M38 test headless de edge cases de precios + sincronización plan-actual
+# Log 235: M38 test headless de edge cases de precios + sincronización plan-actual
 
 **Fecha:** 2026-08-29
 **Hora:** 14:41

@@ -1,4 +1,4 @@
-﻿# Log 08 — Creación del Componente 05: Lenguaje y Programación
+# Log 08 — Creación del Componente 05: Lenguaje y Programación
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿# Log 04 — Creación del Componente 01-Fundamentos-Del-Proyecto
+# Log 04 — Creación del Componente 01-Fundamentos-Del-Proyecto
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

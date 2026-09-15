@@ -1,4 +1,4 @@
-﻿# Log 11 — Creación del Componente 08: Mundo Voxel
+# Log 11 — Creación del Componente 08: Mundo Voxel
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

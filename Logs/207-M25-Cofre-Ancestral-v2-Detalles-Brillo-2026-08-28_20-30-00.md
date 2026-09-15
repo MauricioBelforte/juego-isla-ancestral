@@ -1,4 +1,4 @@
-﻿# Log 207 — Cofre ancestral v2: más detalles y materiales brillantes (directiva "muy simple / opaco")
+# Log 207 — Cofre ancestral v2: más detalles y materiales brillantes (directiva "muy simple / opaco")
 
 **Módulo:** M25 (Ruinas/Templos)
 **Fecha:** 2026-08-28 20:30

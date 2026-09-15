@@ -1,4 +1,4 @@
-﻿# Log 114 — Documentación Módulo 149: Nombres y Nomenclatura
+# Log 114 — Documentación Módulo 149: Nombres y Nomenclatura
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode

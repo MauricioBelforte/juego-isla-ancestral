@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # Log 81 — Módulo 150 Diseño Sonoro Narrativo completado por DEVIN, revisado e integrado

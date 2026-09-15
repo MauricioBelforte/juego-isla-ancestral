@@ -1,4 +1,4 @@
-﻿# Log 147: Validacion visual de particulas M52 y documentacion pendiente
+# Log 147: Validacion visual de particulas M52 y documentacion pendiente
 
 **Fecha:** 2026-08-24
 **Hora:** 21:25

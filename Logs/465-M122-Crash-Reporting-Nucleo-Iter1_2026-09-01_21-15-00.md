@@ -1,4 +1,4 @@
-﻿# Log 397: M122 Crash Reporting — Núcleo Iter. 1
+# Log 397: M122 Crash Reporting — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 21:15

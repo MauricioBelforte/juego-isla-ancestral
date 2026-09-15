@@ -1,4 +1,4 @@
-﻿# Log 66 — Documentación Módulo 75 (Postgame)
+# Log 66 — Documentación Módulo 75 (Postgame)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

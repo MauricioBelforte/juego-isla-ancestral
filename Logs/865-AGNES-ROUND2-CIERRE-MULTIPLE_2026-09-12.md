@@ -1,4 +1,4 @@
-﻿# Log 865: Round 2 cierre multiple modulos — agnes-2.5-flash
+# Log 865: Round 2 cierre multiple modulos — agnes-2.5-flash
 
 **Fecha:** 2026-09-12
 **Hora:** 20:55

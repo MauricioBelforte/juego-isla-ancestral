@@ -1,4 +1,4 @@
-﻿# Log 05 — Creación del Componente 02: Visión y Concepto (M01)
+# Log 05 — Creación del Componente 02: Visión y Concepto (M01)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

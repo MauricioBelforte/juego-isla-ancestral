@@ -1,4 +1,4 @@
-﻿# Log 441: M01 Fundamentos del Proyecto — Núcleo Iter. 1
+# Log 441: M01 Fundamentos del Proyecto — Núcleo Iter. 1
 
 ## Resumen
 

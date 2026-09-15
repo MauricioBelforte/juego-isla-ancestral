@@ -1,4 +1,4 @@
-﻿# Log 242: Estrategia anti-flotamiento — TerrainLocator (servicio central de posicionamiento)
+# Log 242: Estrategia anti-flotamiento — TerrainLocator (servicio central de posicionamiento)
 
 **Fecha:** 2026-08-30
 **Hora:** 00:20

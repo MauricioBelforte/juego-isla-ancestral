@@ -1,4 +1,4 @@
-﻿# Log 872: Round 9 cierre M114+M86 — agnes-2.5-flash
+# Log 872: Round 9 cierre M114+M86 — agnes-2.5-flash
 
 **Fecha:** 2026-09-13
 **Hora:** 03:10

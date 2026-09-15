@@ -1,4 +1,4 @@
-﻿# Log 695: M36 Gaviota — Rediseño Blender + plegado v15 + pose erguida + ciclo vivo
+# Log 695: M36 Gaviota — Rediseño Blender + plegado v15 + pose erguida + ciclo vivo
 
 **Fecha:** 2026-09-05
 **Hora:** 12:05

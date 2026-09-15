@@ -1,4 +1,4 @@
-﻿# Log 393: M42 Sonido Ambiental — Núcleo Iter. 1
+# Log 393: M42 Sonido Ambiental — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 20:25

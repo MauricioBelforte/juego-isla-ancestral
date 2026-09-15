@@ -1,4 +1,4 @@
-﻿# Log 61 — Documentación Módulo 56 (Fotografía)
+# Log 61 — Documentación Módulo 56 (Fotografía)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

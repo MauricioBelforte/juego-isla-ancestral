@@ -1,4 +1,4 @@
-﻿# Log 405: M88 Fuentes Tipográficas — Núcleo Iter. 1
+# Log 405: M88 Fuentes Tipográficas — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:55

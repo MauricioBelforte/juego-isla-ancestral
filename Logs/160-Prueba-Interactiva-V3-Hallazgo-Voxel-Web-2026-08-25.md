@@ -1,4 +1,4 @@
-﻿# Log 160: Prueba interactiva V3 — hallazgo voxel sin soporte web
+# Log 160: Prueba interactiva V3 — hallazgo voxel sin soporte web
 
 **Fecha:** 2026-08-25
 **Hora:** 21:25

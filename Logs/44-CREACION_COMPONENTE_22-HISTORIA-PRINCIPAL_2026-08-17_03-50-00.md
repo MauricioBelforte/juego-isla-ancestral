@@ -1,4 +1,4 @@
-﻿# Log 44 — Creación del Componente 22: Historia Principal (delegable)
+# Log 44 — Creación del Componente 22: Historia Principal (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

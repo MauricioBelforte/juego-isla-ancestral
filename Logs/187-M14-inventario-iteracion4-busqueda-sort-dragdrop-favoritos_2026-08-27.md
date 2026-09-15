@@ -1,4 +1,4 @@
-﻿# Log 187: M14 Inventario — iteración 4 (búsqueda, sort, drag-drop, favoritos)
+# Log 187: M14 Inventario — iteración 4 (búsqueda, sort, drag-drop, favoritos)
 
 **Fecha:** 2026-08-27
 **Hora:** 23:13

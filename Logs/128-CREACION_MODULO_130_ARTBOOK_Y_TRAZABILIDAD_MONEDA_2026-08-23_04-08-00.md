@@ -1,4 +1,4 @@
-﻿# Log 128 — Creación del módulo 130-Artbook y trazabilidad de la moneda (Pases de Mérito)
+# Log 128 — Creación del módulo 130-Artbook y trazabilidad de la moneda (Pases de Mérito)
 
 **Modelo:** ox-alpha
 **Plataforma:** Cline

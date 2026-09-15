@@ -1,4 +1,4 @@
-﻿# Log 410: M121 Soporte Post-Lanzamiento — Núcleo Iter. 1
+# Log 410: M121 Soporte Post-Lanzamiento — Núcleo Iter. 1
 
 **Fecha:** 2026-09-02
 **Hora:** 00:30

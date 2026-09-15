@@ -1,4 +1,4 @@
-﻿# Log 404: M150 Diseño Sonoro Narrativo — Núcleo Iter. 1
+# Log 404: M150 Diseño Sonoro Narrativo — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 23:50

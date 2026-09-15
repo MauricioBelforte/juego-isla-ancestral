@@ -1,4 +1,4 @@
-﻿# Log 09 — Creación del Componente 06: Control de Versiones
+# Log 09 — Creación del Componente 06: Control de Versiones
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

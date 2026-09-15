@@ -1,4 +1,4 @@
-﻿# Log 515: M117 Build System núcleo V0 cerrado 0 fallos
+# Log 515: M117 Build System núcleo V0 cerrado 0 fallos
 
 **Fecha:** 2026-09-02
 **Hora:** 05:35

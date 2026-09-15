@@ -1,4 +1,4 @@
-﻿# 231 — M166 QA Visual: Correcciones post-fix + 2 defectos nuevos encontrados (z_min pitfall #3)
+# 231 — M166 QA Visual: Correcciones post-fix + 2 defectos nuevos encontrados (z_min pitfall #3)
 
 **Fecha:** 2026-08-29 06:30 (GMT-3)
 **Hora:** 06:30

@@ -1,4 +1,4 @@
-﻿# Log 519: M108 Pipeline-De-Assets reserva liberada sin núcleo
+# Log 519: M108 Pipeline-De-Assets reserva liberada sin núcleo
 
 **Fecha:** 2026-09-02
 **Hora:** 05:53

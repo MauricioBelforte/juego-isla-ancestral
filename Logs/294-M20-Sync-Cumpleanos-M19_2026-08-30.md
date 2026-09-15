@@ -1,4 +1,4 @@
-﻿# Log 294: M20 Amistad — Sincronización de cumpleaños desde M19 (VillagerProfile)
+# Log 294: M20 Amistad — Sincronización de cumpleaños desde M19 (VillagerProfile)
 
 **Fecha:** 2026-08-30
 **Hora:** 20:11

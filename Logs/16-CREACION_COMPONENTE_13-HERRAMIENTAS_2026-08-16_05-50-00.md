@@ -1,4 +1,4 @@
-﻿# Log 16 — Creación del Componente 13: Herramientas
+# Log 16 — Creación del Componente 13: Herramientas
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

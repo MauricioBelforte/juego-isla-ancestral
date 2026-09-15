@@ -1,4 +1,4 @@
-﻿# Log 186: M14 Inventario — iteración 3 (categorías, tooltip, acciones, .tres items)
+# Log 186: M14 Inventario — iteración 3 (categorías, tooltip, acciones, .tres items)
 
 **Fecha:** 2026-08-27
 **Hora:** 21:12

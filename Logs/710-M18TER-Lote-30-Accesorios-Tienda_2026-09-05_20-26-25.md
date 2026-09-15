@@ -1,4 +1,4 @@
-﻿# Log 710: M18-TER — Lote de 30 accesorios de decoración para la tienda
+# Log 710: M18-TER — Lote de 30 accesorios de decoración para la tienda
 
 **Fecha:** 2026-09-05
 **Hora:** 20:26

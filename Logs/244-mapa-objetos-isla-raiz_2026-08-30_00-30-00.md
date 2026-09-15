@@ -1,4 +1,4 @@
-﻿# Log 244: Mapa de objetos de la isla raíz (posiciones del arranque) + plantilla
+# Log 244: Mapa de objetos de la isla raíz (posiciones del arranque) + plantilla
 
 **Fecha:** 2026-08-30
 **Hora:** 00:30

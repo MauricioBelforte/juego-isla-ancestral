@@ -1,4 +1,4 @@
-﻿# Log 395: M44 ASMR y Feedback — Núcleo Iter. 1
+# Log 395: M44 ASMR y Feedback — Núcleo Iter. 1
 
 **Fecha:** 2026-09-01
 **Hora:** 20:45

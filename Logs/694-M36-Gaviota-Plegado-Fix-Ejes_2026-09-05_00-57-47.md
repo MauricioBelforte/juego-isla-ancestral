@@ -1,4 +1,4 @@
-﻿# Log 694: M36 Gaviota — Fix del plegado de alas (ejes equivocados v11/v12)
+# Log 694: M36 Gaviota — Fix del plegado de alas (ejes equivocados v11/v12)
 
 **Fecha:** 2026-09-05
 **Hora:** 00:57

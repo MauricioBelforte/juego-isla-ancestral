@@ -1,4 +1,4 @@
-﻿# Log 49 — Documentación Tanda 5 (62, 71, 92, 112, 133, 135)
+# Log 49 — Documentación Tanda 5 (62, 71, 92, 112, 133, 135)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

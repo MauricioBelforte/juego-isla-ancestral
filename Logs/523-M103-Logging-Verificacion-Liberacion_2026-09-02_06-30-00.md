@@ -1,4 +1,4 @@
-﻿# Log 523: M103 Logging — Verificación y liberación
+# Log 523: M103 Logging — Verificación y liberación
 
 ## Resumen
 

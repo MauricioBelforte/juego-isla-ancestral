@@ -1,4 +1,4 @@
-﻿# Log 154: Entorno virtual para dependencias Python de tools/mcp
+# Log 154: Entorno virtual para dependencias Python de tools/mcp
 
 **Fecha:** 2026-08-25
 **Hora:** 21:25

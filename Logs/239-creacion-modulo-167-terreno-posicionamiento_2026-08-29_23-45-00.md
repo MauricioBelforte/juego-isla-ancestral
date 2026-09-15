@@ -1,4 +1,4 @@
-﻿# Log 239: Creación del módulo 167 — Registro del Terreno y Posicionamiento
+# Log 239: Creación del módulo 167 — Registro del Terreno y Posicionamiento
 
 **Fecha:** 2026-08-29
 **Hora:** 23:45

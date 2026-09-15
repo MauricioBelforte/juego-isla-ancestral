@@ -1,4 +1,4 @@
-﻿# Log 60 — Documentación Módulo 55 (Diario del Jugador)
+# Log 60 — Documentación Módulo 55 (Diario del Jugador)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

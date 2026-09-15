@@ -1,4 +1,4 @@
-﻿# Log 149: Correccion captura erronea (imagen de Blender etiquetada como Godot)
+# Log 149: Correccion captura erronea (imagen de Blender etiquetada como Godot)
 
 **Fecha:** 2026-08-25
 **Hora:** 21:25

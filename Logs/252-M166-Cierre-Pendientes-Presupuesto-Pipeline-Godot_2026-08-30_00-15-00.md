@@ -1,4 +1,4 @@
-﻿# 252 - Cierre de pendientes: presupuesto + pipeline Godot
+# 252 - Cierre de pendientes: presupuesto + pipeline Godot
 **Fecha:** (sin fecha)
 **Hora:** 00:15
 

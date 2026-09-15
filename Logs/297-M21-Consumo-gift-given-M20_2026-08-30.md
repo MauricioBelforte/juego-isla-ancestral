@@ -1,4 +1,4 @@
-﻿# Log 297 — M21 consume gift_given de M20 por clase exacta
+# Log 297 — M21 consume gift_given de M20 por clase exacta
 
 **Fecha:** 2026-08-30
 **Hora:** 21:13

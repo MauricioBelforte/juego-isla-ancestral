@@ -1,4 +1,4 @@
-﻿# Log 178: Fix bootstrap escena CLI + altura negativa widget reloj — verificación in-engine M30
+# Log 178: Fix bootstrap escena CLI + altura negativa widget reloj — verificación in-engine M30
 
 **Fecha:** 2026-08-26
 **Hora:** 20:15

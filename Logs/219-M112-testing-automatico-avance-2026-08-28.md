@@ -1,4 +1,4 @@
-﻿# Log 219 — M112 Testing Automático: Avance significativo implementación
+# Log 219 — M112 Testing Automático: Avance significativo implementación
 
 **Fecha:** 2026-08-28 19:30
 **Hora:** 19:45

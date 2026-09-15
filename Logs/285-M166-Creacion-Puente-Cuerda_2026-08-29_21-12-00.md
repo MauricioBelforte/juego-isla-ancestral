@@ -1,4 +1,4 @@
-﻿# 245 — M166 · Creación del puente de cuerda (Tier D-2)
+# 245 — M166 · Creación del puente de cuerda (Tier D-2)
 
 **Fecha:** 2026-08-29
 **Hora:** 21:12

@@ -1,4 +1,4 @@
-﻿# Log 298 — M21: escenas breves de evento (L82) + UI M53 consume la reacción
+# Log 298 — M21: escenas breves de evento (L82) + UI M53 consume la reacción
 
 **Fecha:** 2026-08-30
 **Hora:** 21:24

@@ -1,4 +1,4 @@
-﻿# Log 249: Corrección completa de tests y addons
+# Log 249: Corrección completa de tests y addons
 
 **Fecha:** 2026-08-29
 **Hora:** 23:19

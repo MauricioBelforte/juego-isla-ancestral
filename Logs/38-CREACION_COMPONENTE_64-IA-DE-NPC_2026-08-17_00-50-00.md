@@ -1,4 +1,4 @@
-﻿# Log 38 — Creación del Componente 64: IA de NPC (delegable)
+# Log 38 — Creación del Componente 64: IA de NPC (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

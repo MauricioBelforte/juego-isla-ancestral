@@ -1,4 +1,4 @@
-﻿# Log 55 — Documentación Módulo 48 (Animación)
+# Log 55 — Documentación Módulo 48 (Animación)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

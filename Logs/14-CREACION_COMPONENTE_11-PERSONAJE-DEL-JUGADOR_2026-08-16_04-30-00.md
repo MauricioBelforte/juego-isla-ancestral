@@ -1,4 +1,4 @@
-﻿# Log 14 — Creación del Componente 11: Personaje del Jugador
+# Log 14 — Creación del Componente 11: Personaje del Jugador
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

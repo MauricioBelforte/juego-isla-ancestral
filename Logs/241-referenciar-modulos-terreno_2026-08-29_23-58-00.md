@@ -1,4 +1,4 @@
-﻿# Log 241: Referenciar los módulos de terreno (167/168) en checklist, AGENTS y guía
+# Log 241: Referenciar los módulos de terreno (167/168) en checklist, AGENTS y guía
 
 **Fecha:** 2026-08-29
 **Hora:** 23:58

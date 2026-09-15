@@ -1,4 +1,4 @@
-﻿# Log 129 — Corrección de la última inconsistencia pendiente: M81 (Legal — Menores)
+# Log 129 — Corrección de la última inconsistencia pendiente: M81 (Legal — Menores)
 
 **Modelo:** ox-alpha
 **Plataforma:** Cline

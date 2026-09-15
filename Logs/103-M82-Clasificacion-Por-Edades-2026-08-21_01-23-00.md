@@ -1,4 +1,4 @@
-﻿# Log 103 — Documentación Módulo 82: Clasificación por Edades
+# Log 103 — Documentación Módulo 82: Clasificación por Edades
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode

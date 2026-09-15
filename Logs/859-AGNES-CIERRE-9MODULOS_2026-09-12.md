@@ -1,4 +1,4 @@
-﻿# Log 859: Cierre multiple modulos — agnes-2.5-flash
+# Log 859: Cierre multiple modulos — agnes-2.5-flash
 
 **Fecha:** 2026-09-12
 **Hora:** 17:40

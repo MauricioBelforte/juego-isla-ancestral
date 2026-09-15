@@ -1,4 +1,4 @@
-﻿# Log 42 — Creación del Componente 25: Ruinas (delegable)
+# Log 42 — Creación del Componente 25: Ruinas (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

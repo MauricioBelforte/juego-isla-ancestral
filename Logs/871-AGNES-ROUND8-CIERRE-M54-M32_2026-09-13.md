@@ -1,4 +1,4 @@
-﻿# Log 871: Round 8 cierre M54+M32 — agnes-2.5-flash
+# Log 871: Round 8 cierre M54+M32 — agnes-2.5-flash
 
 **Fecha:** 2026-09-13
 **Hora:** 00:35

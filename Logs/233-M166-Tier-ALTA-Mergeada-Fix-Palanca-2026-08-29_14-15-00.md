@@ -1,4 +1,4 @@
-﻿# 233 — M166: Tier ALTA mergeada + fix de palanca (E-24)
+# 233 — M166: Tier ALTA mergeada + fix de palanca (E-24)
 
 **Fecha:** 2026-08-29 14:15 (GMT-3)
 **Hora:** 14:15

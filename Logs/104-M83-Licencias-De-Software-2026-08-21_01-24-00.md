@@ -1,4 +1,4 @@
-﻿# Log 104 — Documentación Módulo 83: Licencias de Software
+# Log 104 — Documentación Módulo 83: Licencias de Software
 
 **Modelo:** Nemotron 3 Ultra
 **Plataforma:** OpenCode

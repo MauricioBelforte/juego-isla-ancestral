@@ -1,4 +1,4 @@
-﻿# Log 36 — Creación del Componente 57: Interfaz de Control (delegable)
+# Log 36 — Creación del Componente 57: Interfaz de Control (delegable)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
