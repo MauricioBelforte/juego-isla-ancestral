@@ -284,3 +284,54 @@ existe (salta 722→724). El QA real es el **Log 835**
 **238 están en `plan-actual`** (documentación viva), no solo en el diseño
 histórico de Unity. Concentradas en M01 (55), M113 (22×3), M109 (21×4),
 M141 (13×2). No se tocan sin decidir: renombrar `.cs`→`.gd` sería ficción.
+
+---
+
+## Cierres del 2026-09-16 (Log 925)
+
+### B2 — BOM: CERRADO (decisión del usuario: "los 502, en dos commits")
+
+| Commit | Contenido |
+|---|---|
+| `eb98614` | 83 archivos vivos con BOM en HEAD (por blob: 44 `.gd` con ediciones ajenas en vuelo quedaron intactos) |
+| `b929ba0` | 361 logs históricos. Verificado antes: **0 de 361** con ediciones sin commitear → `git add` directo |
+
+**Estado:** 509 → **3** archivos con BOM, los 3 fuera de versionado
+(`app_userdata/…m87_val_bom.po`, `_probe_col.gd`, `scripts/backups/`).
+⚠️ **El BOM se regenera**: ese mismo día aparecieron 5 archivos nuevos con BOM
+y luego una regresión más en `08-GUIA-ORDEN-DE-IMPLEMENTACION.md`. Sigue
+pendiente meter `scripts/verificar_bom.py` en CI (tarea B4).
+
+### B3b — Rutas `.cs`: CERRADO (decisión: "corregir las reales + marcar el resto")
+
+El grueso lo hizo **otro agente** en `53edd1b` (34 reemplazos + 175 marcas en
+44 archivos, `plan-actual` y `plan-inicial`). **No se duplicó**: se auditó y se
+cerró lo que faltaba.
+
+| Commit | Contenido |
+|---|---|
+| `5df6e55` | 61 menciones en 12 archivos: **6** con `.gd` real reemplazadas, **55** marcadas `_ (diseno heredado) _` |
+
+Reemplazos reales: `StressRunner`, `StressScenario`, `InventoryStress`,
+`SaveLoadStress`, `BuildInfo` ×2.
+Método: 9 archivos limpios por disco; 3 con ediciones ajenas
+(M26, M118, M81) **por blob** para no pisarlas.
+
+**Hecho verificado:** 0 `.cs` propios (el único es del addon gdUnit4),
+0 `.csproj`/`.sln`/`.unity`/`.prefab`, **800 `.gd`** en `game/isla-ancestral/`.
+
+### ⚠️ Trampa nueva (60) — regex de ruta con prefijo opcional sin anclar
+
+`(?:[A-Za-z0-9_./\-]*/)?([A-Za-z0-9_]+)\.cs\b` **captura solo la última letra**:
+el prefijo se come el nombre porque su clase incluye `_` y alfanuméricos.
+Produjo 205 reemplazos con rutas inventadas. Se detectó por guardas
+(`20 <= con_gd <= 40`, `os.path.isfile`) y se revirtió con
+`git reset -q HEAD -- <paths>` (worktree intacto).
+**Regla:** en sustituciones masivas, guarda que falle fuerte ANTES de escribir.
+
+### Hueco nuevo detectado (no tocado)
+
+**Dos autoloads de localización duplicados** en `project.godot`:
+`Localization` → `res://scripts/localization/localization_manager.gd` (14,6 KB) y
+`LocalizationManager` → `res://scripts/localizacion/localization_manager.gd` (2,7 KB).
+Conocido como H-1. Requiere dueño de módulo; no mergear de paso.
