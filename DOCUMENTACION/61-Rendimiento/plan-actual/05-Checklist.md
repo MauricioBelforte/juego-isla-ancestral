@@ -3,15 +3,26 @@
 
 ## Reserva actual
 
-- Estado: 🔵 En curso — iter 2 benchmark visual (2026-09-01, deepseek-v4-flash-vision-exp / Kilo Code)
-- Agente: deepseek-v4-flash-vision-exp (Kilo Code)
-- Fase: 5 (Base de producción)
-- Dificultad: 5
-- Vision: V2 (benchmark visual: profiler screenshots, draw calls, capturas)
-- Entrada: M08 ✅ (terreno voxel), iter 1 ✅ (BudgetProfile + budgets.json + ValidateBudget)
-- Salida: bench_scene_a.tscn + bench_recorder.gd + mediciones reales (JSON) + capturas + check ValidateBudget
-- Archivos: `scenes/bench_scene_a.tscn`, `scripts/performance/bench_recorder.gd`, `docs/performance/medicion_2026-09-01.md`
-- Fecha reserva: 2026-09-01 16:30
+- Estado: 🔵 En curso (iter. agnes, acotada) — 2026-09-16 21:25
+- Agente: agnes-3-flash (Sapiens AI) / Kilo Code — relevo §21.4.7 de la reserva agnes-2.5 (stale 2026-09-03)
+- Log reservado: 943 (`Logs/reservas/943-agnes-3-flash-M61.txt`)
+- Alcance (acotado, mi perfil data-driven + gate CI + V0): nueva dimensión `limites` de **CANTIDAD**
+  en el gate CI (`budgets.json` + `validate_budget.gd`) — `particulas_simultaneas_max` ≤500
+  (spec §M M61 + flag M52 "turbulencia 24 FPS"), `draw_calls_max`, `objetos_mundo_max`.
+- Historial: iter. 1 BudgetProfile/budgets/ValidateBudget por Deepseek V4 Flash (Kilo, Log 255);
+  iter. 2 benchmark visual por deepseek-v4-flash-vision-exp (2026-09-01, descatalogado).
+
+## Iteración agnes — gate de límites de cantidad (2026-09-16, agnes-3-flash (Sapiens AI) / Kilo Code)
+
+- [x] M61-M52 bridge: registrar aquí el flag de M52 "turbulencia 24 FPS" → `particulas_simultaneas_max`
+  (≤500 por cámara, §M M61) ya es un **límite data-driven en `budgets.json` + gate `validate_budget.gd`** [M]
+  → **Log 943: bloque `limites` creado + validado (gate 0 fallos).** El contador runtime (que M52 no
+  exceda 500) sigue siendo del dueño M52.
+- [x] `budgets.json` nuevo bloque `limites` (particulas_simultaneas_max / draw_calls_max / objetos_mundo_max) [S]
+- [x] `validate_budget.gd` valida el bloque `limites` (presente y bien formado; lectura dentro/excedida;
+  tolerante si ausente para no romper el gate existente) [M] — **gate headless: 0 fallos, exit 0**
+- [x] Verificación headless: `godot --headless --script res://scripts/performance/validate_budget.gd` → 0 fallos [S]
+- [x] §M "Definir ≤500 partículas simultáneas por cámara" → marcado con evidencia (límite en budgets.json) [S]
 
 ## Iteración 2 (benchmark visual — 2026-09-01, deepseek-v4-flash-vision-exp / Kilo Code)
 
@@ -130,7 +141,11 @@
 ## M. Medir Partículas (RF13)
 
 - [ ] Definir pooling de partículas (M52) [M]
-- [ ] Definir ≤500 partículas simultáneas por cámara [M]
+- [x] Definir ≤500 partículas simultáneas por cámara [M] → **cerrado iter. agnes (Log 943, 2026-09-16):** límite
+  **data-driven** en `budgets.json` → bloque `limites.particulas_simultaneas_max` = 500 + gate
+  `validate_budget.gd` lo valida (presente + ==500 + lectura excedida detectada); evidencia headless
+  `[M61] limites: 3 limit(es) de cantidad validados (particulas_simultaneas_max=500.0)` + 0 fallos.
+  El **consumo/contador** del límite (que M52 no lo exceda en runtime) sigue siendo del dueño M52.
 - [ ] Definir GPUParticles para larga vida (fuego/lava) [M]
 - [ ] Documentar límite por evento [S]
 - [ ] Validar festival (M74) sin picos [C]

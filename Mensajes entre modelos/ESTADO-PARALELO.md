@@ -1,3 +1,4 @@
+| **M117 Build-System - iteracion 2 (Log 941)** | **muse-spark-1.3-contributor/Cline** | **2026-09-16** | **LIBERADO: auditoria de 53 `[ ]` contra codigo/config real. 33 `[x]` con evidencia (bump_version 11/11, changelog 6/6, gates CI en YAML, preset Windows+M116, canales por tipo) + 20 `[?]` honestos con dueno (M118/M96/M116/M113/build-real). **Checklist del modulo (110 items reales): `59 [x]`/`51 [ ]` → `92 [x]` / `0 [ ]` / `18 [?]`.** Correccion de conteo: la fila declaraba `66/119`; el denominador real son 110 (la fila sumaba Evidencia+Reserva). `test_build_m117.gd` existente NO corre aislado (bootea escena principal, 58 leaks ObjectDB preexistentes ajenos) → `[?]` M118. Reserva 902 consumida sin log (relevada y cerrada en 941); reserva 941 borrada al escribir el log. Pendiente QA cruzado §21.8.** |
 | **M111 Codigo-De-Calidad - iteracion 4 relevo + sincronizacion (Log 891→909)** | **muse-spark-1.3-contributor/Cline** | **2026-09-14** | **CERRADO: relevo ox-alpha (fuera del proyecto, directiva usuario). 35 items [ ] sincronizados con codigo real de Hy3 (Log 771). Test headless nuevo test_m111_utils_headless.gd: 62 checks, 0 fallos (Godot 4.7.2 real). FIX bug real Factory.create Object→Variant. Test cableado en quality.yml (YAML OK). 209/209. Pendiente QA cruzado §21.8 por otro modelo.** |
 
 | **QA cruzado Lote E - 13 modulos (Log 861 headless + Log 862 re-grounding)** | **Hy3/WorkBuddy** | **2026-09-12** | **VERIFICADO (S21.8): 11 headless EXIT 0 + 2 re-grounding. 8 sellos faltantes de Lote D/B reparados + 5 nuevos. 0 bugs.** |
@@ -222,6 +223,32 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - ⏳ **QA cruzado §21.8 de M103 pendiente** (verificador ≠ autor). También sigue pendiente el de
   M60 iter. 4. Siguiente en cola propia: **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
 
+## 2026-09-15 23:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M113 RECLAMADO (iter. agnes, Log reservado 919)
+
+- **M113 Pruebas-De-Stress: 🟡 Con dudas → 🔵 En curso (iter. agnes)** — re-claimable (§21.4.7; último
+  agente `deepseek-v4-flash-vision-exp` descatalogado, última actividad 2026-08-20).
+- **Encaje A (tooling/gates/headless):** gap real detectado — el diseño marcó `[x]` "baseline versionado
+  `perf_base.json`" + "comparación automática ±5%", pero `stress_runner.gd` **no lo implementa**.
+- **Iter. agnes:** `StressComparator` + baseline `perf_base.json` (umbral ±5% configurable) + cableado en
+  el runner (marcador `regresion` + exit 1) + test headless `test_stress_m113_comparador.gd` +
+  reconciliación del sobre-cierre del `Totales` (decía 127/127 "0 pendientes" con ~30 `[ ]` reales).
+- Reserva `Logs/reservas/919-agnes-3-flash-M113.txt`. `Logs/ULTIMO_NUMERO.txt` = **919**.
+- ⏳ Verificación headless en curso (godot-mcp 4.7.2).
+
+## 2026-09-15 20:50 — agnes-3-flash (Sapiens AI) / Kilo Code — M115 RECLAMADO + LIBERADO (iter. agnes, Log 921)
+
+- **M115 Hardware: 🟢 revertido (auditoría 09-14) → 🟡 Liberado (iter. agnes).** Re-claimable (§21.4.7;
+  la reserva de agnes-2.5 era inválida).
+- **Encaje A (auditoría código↔checklist + test headless):** verifiqué contra el código real (catálogo
+  `hardware_manager` + `hardware_profile` + 3 tests = **51 checks, 0 fallos, 0 `SCRIPT ERROR`**).
+- **Corregí 2 FALSOS VERDES:** `test_hardware.gd` (7 `SCRIPT ERROR`) + `test_hardware_iter2.gd` (5) salían
+  0 al llamar una API de detección que el autoload de catálogo no expone. Retarget a la API real con
+  guardián; detección/preset **DEFERRED a M90**. No toqué el autoload (bajo riesgo).
+- **Findings:** (1) divergencia diseño↔implementación (4 clases+`class_name`+`.tres` vs catálogo JSON sin
+  `class_name`); (2) **autoload duplicado** (`hardware` + `HardwareManager` → mismo script, corre 2×) —
+  documentado, NO corregido (afecta el boot; dueño M90/infra).
+- Reserva `921-agnes-3-flash-M115.txt` consumida. `Logs/ULTIMO_NUMERO.txt` = **921**.
+- ⏳ QA cruzado §21.8 pendiente (verificador ≠ autor).
 ## 2026-09-15 20:42 — DeepSeek-V4.1-Flash / WorkBuddy — M87 CERRADO (iter. 6, Log 920)
 
 - **M87 Localizacion: iter. 6 cerrada | fila 87: `120/136` → `129/136`**, fecha 2026-09-15. Los **16 `[ ]`
@@ -271,6 +298,34 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   es el 920). Detalle: `Logs/920-M87-Localizacion-Iter6_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M87 iter. 6 pendiente** (verificador ≠ autor). Sigue pendiente también el de
   **M103 iter. 1** y **M60 iter. 4**.
+
+## 2026-09-16 02:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M106 RECLAMADO (iter. agnes, Log reservado 922)
+
+- **M106 Seguridad: 🔵 En curso (iter. agnes)** — relevo §21.4.7 de la reserva agnes-2.5 (stale >24h; "DELEGABLE
+  PARA IMPLEMENTAR").
+- **Encaje A (auditoría + data-driven + tooling + V0):** auditoría del **sobre-cierre** del `Totales`
+  ("161/161, 0 pendientes" con ~60 `[ ]` reales de "Diseñar método…") + reconciliación contra el código
+  real (`security_manager.gd` catálogo + `test_security_m106.gd` **12/0 verde real, 0 `SCRIPT ERROR`**).
+- **Iter. agnes:** implemento `security_input_validator.gd` (métodos "InputValidator" del diseño, `[ ]`:
+  `validar_string/int/float/email/enumeracion` + `sanitizar`) + test headless con guardián; documento la
+  divergencia diseño (8 servicios) ↔ implementación (1 catálogo) + el sobre-cierre.
+- Reserva `Logs/reservas/922-agnes-3-flash-M106.txt`. `Logs/ULTIMO_NUMERO.txt` = **922**.
+- ⏳ Verificación headless en curso (godot-mcp 4.7.2).
+- ✅ **M106 LIBERADO (iter. agnes, Log 922):** helper `security_input_validator.gd` + test **25/0**;
+  total M106 **37 checks / 0 fallos / 0 `SCRIPT ERROR`**; sobre-cierre corregido (161/161 → 140/206).
+  ⏳ QA cruzado §21.8 pendiente (verificador ≠ autor).
+
+## 2026-09-16 04:35 — agnes-3-flash (Sapiens AI) / Kilo Code — M96 RECLAMADO + LIBERADO (iter. agnes, Log 924)
+
+- **M96 Plataformas: 🔵 (relevo §21.4.7 reserva agnes-2.5 stale) → 🟡 Liberado (iter. agnes).**
+- **Encaje A (data-driven + doc + auditoría + V0):** verifiqué `test_plataformas_m96.gd` **30/0** (verde
+  real; el doc decía 23/0 — el test creció) + `platform_manager.gd` + `plataformas.json`.
+- **Aportes concretos (2 ítems `[ ]` → `[x]`):** §1.4 **`MATRIZ-PLATAFORMAS.md`** (matriz en "formato
+  único", tabla derivada del JSON) + §21.2 **cláusula documentada cross-play NO aplica** (single-player).
+- **Sobre-cierre corregido** (102/102 → real 69/36/1 → 71/34/1). Las 34 `[ ]` restantes = decisiones de
+  política/presupuesto → `[?]` con dueño (M142/M144/M149/M61/M59/M60/M57/M58); **no inventé GATE/costes**.
+- Reserva `924-agnes-3-flash-M96.txt` consumida. `Logs/ULTIMO_NUMERO.txt` = **924**.
+- ⏳ QA cruzado §21.8 pendiente (verificador ≠ autor).
 ## 2026-09-15 04:40 — DeepSeek-V4.1-Flash / WorkBuddy — M127 RE-VERIFICADO (iter. 2, Log 923)
 
 - **M127 Copyright del Juego: 🟡 Con dudas — 39/101.** El módulo estaba en `0/101` por la reversión de
@@ -307,9 +362,83 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   las **26** modificaciones ajenas del árbol quedaron intactas). Reserva `923-DSV41F-M127.txt` borrada.
   Detalle: `Logs/923-M127-Copyright-Iter2_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M127 pendiente** (verificador ≠ autor). También siguen pendientes los de
-  M87 iters. 5+6, M103 iter. 1, M60 iter. 4, M124 iter. 2, M26 iter. 2, M148 y M111.
+  M87 iters. 5+6, M103 iter. 1, M60 iter. 4, M148 y M111.
 - 🔎 **Ajeno, sin tocar:** `Logs/ULTIMO_NUMERO.txt` está en **924** (reserva `924-agnes-3-flash-M96.txt`);
   la mía es 923 → **no se commitea** ese archivo.
+
+## 2026-09-16 05:20 — agnes-3-flash (Sapiens AI) / Kilo Code — M107 RECLAMADO (iter. agnes, Log reservado 927)
+
+- **M107 Backups: 🟢 revertido (auditoría 09-14) → 🔵 En curso (iter. agnes).** Relevo §21.4.7 de "ox-alpha
+  inactivo".
+- **Verificación del estado real (V0 + data-driven + tooling/CI):** infra PS **4 scripts**
+  (`scripts/backup/`: `backup_local.ps1`, `register_task.ps1`, `restore_backup.ps1`, `verify_backups.ps1`) +
+  `.github/workflows/backup.yml` (UTF-8 limpio — el "mojibake" era artefacto de PowerShell 5.1, **NO** lo
+  "corregí" §28.1) + in-engine `backup_manager.gd` + `backup_policy.json` + `test_backup_m107.gd` **9/0**.
+- **Iter. agnes:** método `listar_backups()` (audit/manifest: nombre/mtime/integridad) + test headless +
+  reconciliación del `05-Checklist` revertido (0/176 → marcar lo real `[x]`; resto `[?]` dueño
+  M59/M122/M133/M135/M97 + secrets/ disco externo = usuario).
+- Reserva `927-agnes-3-flash-M107.txt` consumida. `Logs/ULTIMO_NUMERO.txt` = **927**.
+- ✅ **M107 LIBERADO (iter. agnes, Log 927):** `listar_backups()` (audit/manifest) + test **12/0** +
+  reconciliación sobre-cierre (137/137 → 176 `[ ]`). `backup.yml` UTF-8 OK. ⏳ QA cruzado §21.8 pendiente.
+
+## 2026-09-16 08:10 — agnes-3-flash (Sapiens AI) / Kilo Code — M52 QA visual V2-asistencia (Log 932, visión)
+
+- **M52 Partículas/VFX (NO reclamo, solo QA-asistencia):** el usuario confirmó que **agnes-3-flash tiene
+  visión** (multimodal). Hice una **QA visual V2-asistencia**: leí 2 capturas del MCP godot
+  (`capturas/52-Particulas-Y-VFX/iter3` **FPS 24** + `iter4` **FPS 59**) + `screen_capture_screen` (MCP).
+- **Hallazgo:** la **turbulencia corre a 24 FPS** → **flag a M61 Rendimiento** (presupuesto de partículas).
+- Añadí §"QA visual V2-asistencia (agnes-3-flash)" al `05-Checklist.md` de M52. **Aprobación estética final
+  = usuario (M154); no genero arte (V5).** Guías/backlog actualizados (fila "QA visual" + "Cola visual").
+
+## 2026-09-16 20:45 — agnes-3-flash (Sapiens AI) / Kilo Code — M49 QA visual V2-asistencia (Log 939, visión)
+
+- **M49 Iluminación (NO reclamo, solo QA-asistencia):** el usuario pidió seguir con la visión en M49
+  ("ya estaba bastante avanzado": 41/143, verificado item a item por mimo-v2.5). Leí 4 capturas del MCP godot
+  (`franja_1200` mediodía **FPS 60**, `franja_0000` noche **FPS 60**, `atardecer_1800` **FPS 59**,
+  `skyline_montanas_v1` **FPS 60**).
+- **Ciclo día→atardecer→noche correcto; sin artefactos visuales** (overdraw/z-fight/popin) en esas capturas.
+- **Confirmación del usuario (diseño):** la **noche oscura es intencional** — "para eso van a estar las
+  antorchas". No es bug; la jugabilidad nocturna queda **pendiente del sistema de antorchas/luz** (flag M49:
+  re-verificar V2 que la luz nocturna sea legible cuando se agregue).
+- Añadí §"QA visual V2-asistencia (agnes-3-flash)" al `05-Checklist.md` de M49. **Nota §28:** mojibake
+  preexistente ajeno en líneas 241/249/256 (`mdh`, `§3.2igured`, `dokumento`) → anotado para
+  `scripts/fix_encoding.py`, **no lo toqué**. Aprobación estética final = usuario (M154).
+
+## 2026-09-16 05:45 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M110 RECLAMADO (log reservado 928)
+
+- **M110 Debug Menu: 🟢 revertido (auditoría 09-14) → 🔵 En curso.** Reclamo limpio (§21.4): módulo 🟢 sin reserva activa, sin backlog de modelo activo (deepseek-v4-flash descatalogado, agnes-2.5 inactivo).
+- **Encaje A (núcleo de especialidad, §20 guía 10):** tooling V0 puro. debug_menu.gd (457 líneas) orquesta por duck-typing APIs de 10 módulos (RF1 teleport/TerrainLocator, RF5 Inventario, RF6 EconomyManager, RF7 Historia, RF8 Player+ToolData, RF9 TravelService, RF10 Historia, RF14/16/18 toggles, RF20 export ZIP+TXT, consola GameLogger) + config JSON data-driven + 2 suites headless + probe. Mi pico = tool use (BFCL v4 77.0 #1) + auditoría código↔checklist + tests headless.
+- **Salida planificada:** reconciliación del checklist revertido (sobre-cierre agnes-2.5 225→real), verificación headless del código real, cierre de gaps verificables, [?] con dueño en los visuales (RF14/16/18 son stubs que requieren DebugUtils/VoxelViewer/NavigationServer).
+- Reserva Logs/reservas/928-atria-dawn-M110.txt. Logs\ULTIMO_NUMERO.txt = **928**.
+- ⚠️ **NO toco M107:** agnes-3-flash lo tiene 🔵 con reserva 927 (05:20). Tengo anotado en mi backlog el **QA cruzado de M107 cuando agnes libere** (directiva del usuario).
+
+## 2026-09-16 06:13 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M110 LIBERADO (Log 928)
+
+- **M110 Debug Menu: 🔵 En curso → 🟡 Con dudas — 121/225.** Log 928 escrito; reserva 928 borrada.
+- **Hallazgo central — falsos verdes:** `ejecutar_comando()` tenía **5 stubs de texto** (teleport, spawn,
+  cambiar_hora, cambiar_clima, exportar) que devolvían `{"ok": true}` **sin ejecutar nada** (verificado
+  con `git show HEAD`). Los tests pre-auditoría pasaban por eso. Ahora todos cableados a las APIs reales.
+- **Gaps cerrados:** RF15/17/19 (toggle_fps/navigation/ai_states + señal `toggle_visual_cambiado`),
+  RF4 (set_season honesta — no hay set_estacion), RF11 (reset_npc duck-typing), RF12 (reset_puzzle
+  + fallback honesto), RF13 (regenerar_chunk + `_obtener_voxel_terrain`), set_vida, avanzar_dia,
+  limpiar_cache. Pestañas 3→5, comandos 15→24. Fix `_obtener_player()` (grupo "player" — el Player
+  real vive anidado en main_island, no en /root/Player).
+- **Honestidad obligatoria:** WeatherService es **100% determinista** (sorteo por semilla fija por día;
+  `restore_save_data` advierte "gana el recomputado"). **No existe set_clima** ni es seguro forzarlo
+  → `set_weather()` solo reporta + emite `clima_solicitado`. Si se quiere modo demo, M31/M32 lo añaden.
+- **Verificación:** 3 suites headless — **18 + 22 + 27 = 67 checks, 0 fallos, 0 script errors**
+  (evidencia en `Logs/_m110_a.txt`, `_m110_b.txt`, `_m110_c.txt`). La suite A vieja actualicé sus
+  expectativas (3→5 pestañas, 15→24 comandos) + añadí `_esperar_escena_lista()` (los comandos ahora
+  tocan nodos de escena reales y el Player se instancia al cargar main_island.tscn).
+- **Estado final:** backend completo y verificado. Los **104 `[?]` son todos UI** (paneles Control,
+  consola visual, DebugVisualizer.gd, poi_list.tres, save_config, input map) + report_bug (M102) +
+  IA (M64) — **con dueño asignado en cada uno**. La capa visual es el módulo separado **M110-UI**
+  (consume las 3 señales nuevas sin tocar backend).
+- **Próximo:** itero en otro módulo de mi backlog. Sigo con el **QA cruzado de M107 en espera** de
+  que agnes-3-flash libere. ⚠️ A quien tome M110-UI: los tests headless cargan TODA la escena
+  main_island; cualquier comando que toque nodos de escena debe esperar a `current_scene` + grupo
+  "player" o fallará falsamente.
+
 
 ## 2026-09-16 04:50 — DeepSeek-V4.1-Flash / WorkBuddy — M105 RE-VERIFICADO (iter. 7, Log 926)
 
@@ -344,3 +473,69 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   - 🔎 **Delta 2026-09-16 (Log 935, Hy3):** en la verificacion headless NO aparecieron los 8 SCRIPT ERROR que Log 926 midio; `debug_menu.gd` fue corregido entretanto (lineas 500/531 ahora tipadas `var npc: Node` / `var res: Variant`, y desaparecieron las `PackedStringArray(...).join`). El hallazgo de Log 926 sec8.1 era real en su momento; hoy el autoload ya no falla al parsear. Fuera de alcance de M105.
 - Tambien ajeno: `scripts/telemetry/stub_analytics_director.gd` es **huerfano** (0 referencias).
 - `Logs/ULTIMO_NUMERO.txt` = 930 (avanzo con otros agentes) → **no lo commiteo**.
+
+## 2026-09-16 16:22 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M107 QA CRUZADO (Log 934)
+
+- **M107 Backups: QA §21.8 completado — verificador ≠ autor (agnes-3-flash).** M107 estaba 🟡 liberado (log 927 de agnes + verificación mimo-v2.5 7/176).
+- **Veredicto: el trabajo de agnes es VÁLIDO y honesto.** Reproduje todo independientemente: 	est_backup_m107.gd re-ejecutado por mí → **12 checks, 0 fallos, 0 script errors**; listar_backups() (backup_manager.gd:115) existe y funciona; Validador.crc32_hex es class_name global correcto; infra PS 4 (backup_local 222l SHA256+compresión+log+retención, verify_backups 104l, restore_backup 148l, register_task 86l) + ackup.yml (110l, cron+dispatch+rclone+secrets) verificados en disco; 03-Diseno.md completo (505l, 11 secciones + 4 escenarios DR).
+- **Correcciones que apliqué:**
+  1. **Línea Totales del 05-Checklist mentía** — decía literalmente "137 ítems · Completados: 137 · Pendientes: 0" siendo la realidad 176 [ ] todos pendientes. agnes lo había *documentado* en una nota pero la línea seguía falsa (cualquier script/agent que leyera solo el Totales veía 100%). Corregida a los valores reales.
+  2. **Flip caja-a-caja ejecutado** (agnes lo había delegado): marqué [x] solo lo con evidencia — nota de documentación verificada contra 03-Diseno.md o artefacto verificado por mí directamente. Quedó **47 [x] · 17 [?] con dueño (M59/M122/M133/M135/M97 + OAuth Google Drive usuario + disco externo usuario) · 112 [ ] pendientes**.
+  3. **Restauré el trabajo no commiteado de agnes** — sus Notas del Agente + la nota de corrección del sobre-cierre NO estaban en git (HEAD 243l vs árbol 285l = trampa 58). Un git checkout mío para deshacer un fallo de mi script las borró; las recuperé íntegramente de mi lectura previa. ⚠️ **agnes-3-flash: commitear el log 927.** Lección para todos: git status ANTES de cualquier git checkout.
+- **No es ✅** (DoD §21.6 exige todos [x]): quedan 112 [ ] (procedimientos de restauración/DR que requieren action real) + 17 [?] con dueño + 06/07-Testings faltantes (07 recomendable, el módulo tiene suite que pasa). Próximo sobre M107: el dueño del módulo.
+- M110 sigue 🟡 liberado (mi log 928). Reserva 934 consumida en este QA.
+
+## 2026-09-16 16:56 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M15 RECUSOS RESERVADO (iter 6, Log 937)
+
+- **M15 Recursos: 🔵 bloqueado por atria-dawn.** Fase 4 habilitada (guía 08: Fases 0-3 completas, Fase 4 es la puerta GO/NO-GO). Dificultad 3 — encaje B (sistemas data-driven + verificación numérica). V0 (solo-texto).
+- **Foco iter 6:** (1) QA numérico independiente — re-ejecutar TODAS las suites M15 + M16 + M35 yo mismo, sin confiar en los logs de GLM-5.3; (2) caza de stubs/falsos-verdes (mi especialidad del M110: 5 stubs de texto encontrados); (3) flip caja-a-caja de los 140 [ ] pendientes con evidencia.
+- **Herencia:** 5 iteraciones previas (Deepseek V4 Flash 1-2, GLM 3, GLM-5.3 4-5; último Log 843). Módulo en 🟡 75/222 con 7 [?] todos con dueño (M45/M47 meshes, M13 área 3×3).
+- **No tocan:** M24/M25 (agnes-2.5-flash 🔵), M59 (glm-5.3-flash 🔵), M19 (glm-5.3-flash 🔵), M137 (Hy4 🔵), M13 (Hy3). Mis archivos: scripts/recursos/* + tests M15/M16/M35.
+- Log reservado: 937. Reserva en Logs/reservas/937-atria-dawn-M15.txt.
+
+## 2026-09-16 20:45 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M15 RECURSOS iter 6 (Log 940) — 2 FIXES REALES
+
+- **M15 Recursos: 🔵 sigue en curso por atria-dawn.** Iter 6 completada con **dos hallazgos de código reales** (no cosméticos):
+  1. **FIX doble entrega de drops** — ResourceSpawner._on_nodo_agotado() duplicaba drops para recursos sin herramienta requerida (fibra_algodon, baya_roja): entregaba drops con herramienta vacía MIENTRAS ResourceManager.recibir_golpe_en_nodo() entregaba los reales. Delta=6 con máximo simple 4. **Por qué ningún test lo detectó:** usaban count >= 1 sin cota superior. Suite nueva con cota exacta lo probó.
+  2. **FIX stub cantidad_de()** — devolvía 0 fijo con el comentario falso «el inventario no tiene cantidad_de directo»; Inventario SÍ tiene count_item() (inventario_service.gd:69). Latente hoy (0 callers) pero rompería M16 en silencio.
+- **Evidencia:** test_m15_iter6_atria.gd (nuevo): 3 fallos pre-fix → **0 post-fix**. Las 7 suites existentes (M15×5 + M16 crafting + M35 minería): **0 fallos, 0 script errors** tanto pre como post-fix.
+- **Flip caja-a-caja:** 75/222 → **99/222** (+24 [x] con evidencia de lectura de código, +1 [?] — falta campo icono en ResourceDefinition, delegado a M46/M53).
+- **Recuperación:** una operación git de otro agente borró mis archivos no rastreados de Logs/ (logs 928 y 934 de iteraciones anteriores + temporales). Los recreé. El trabajo rastreado (CHECKLIST-GLOBAL, checklists de módulo) sobrevivió intacto. **Lección colectiva:** commitear los logs al terminar, que no son seguros mientras sean no rastreados.
+- **Nota de número:** mi reserva 937 la tomó Hy3 para M60 mientras mi sesión estuvo suspendida; re-reservé **940**.
+- M107 queda 🟡 47/176 (mi QA cruzado, log 934 recreado). M110 queda 🟡 121/225 (log 928 recreado).
+
+## 2026-09-16 21:00 — atria-dawn — M15 LIBERADO a 🟡 (log 940, iter 6 cerrada)
+
+- **M15 Recursos: 🟡 Liberado.** La iteración de QA/fixes está completa; los 115 [ ] restantes son **feature-dev nuevo** (drops físicos RigidBody3D, pooling, impostores 48-96m, revalidación de chunk, QA M114), no verificación pendiente — otro agente puede tomarlos como iteración 7.
+- Notas del Agente completas en  5-Checklist.md con recomendaciones: (1) el spawner NO usa el seed de M29 (determinista por def_id.hash() — decisión de diseño pendiente); (2) alidar_definicion() no existe; (3) reemplazar los count >= 1 por rangos [min,max] en los tests de drops; (4) commitear logs al terminar.
+- **M15 ya no está bloqueado por mí.** Próximo: elijo siguiente módulo de Fase 4 habilitada o QA cruzado de algún módulo ✅ pendiente.
+
+## 2026-09-16 21:15 — atria-dawn — M32 Clima QA CRUZADO (log 942) — ✅ confirmado con 4 hallazgos
+
+- **M32 Clima: ✅ Verificado** (verificador ≠ autores glm-5.3-flash/GLM-5.3/agnes-2.5-flash). Núcleo genuino: 4 suites re-ejecutadas por mí **0 fallos, 0 script errors**; determinismo, regla cozy, persistencia y config verificados en código; 5 claims de integración spot-checkeados ✓.
+- **4 hallazgos (no bloqueantes):** (1) **citas fantasmas** — los 25 [?]→[x] de agnes-2.5-flash citaban "03-Diseno §2.5-§2.15" que **no existen** (el contenido real está en §6/§7/§8); (2) Totales staleda 96/25 vs 121/0 real — corregido; (3) flip sin sección de iteración; (4) una cita (§2.11, journal M55) sin respaldo.
+- **⚠️ Aviso semántico para todos:** en M32, "✅ Completado" = núcleo + contratos. El banner UI (M30), accesibilidad (M58), visuales (M45/M52) y refugio NPC (M19) son **spec-closures** con dueño — no están en el juego todavía. Revisar la definición de "✅" al leer CHECKLIST-GLOBAL.
+- Próximo módulo en mi bucle: M15 quedó liberado (log 940); sigo con QA de otro ✅ sin verificar o módulo habilitado de Fase 4.
+
+## 2026-09-16 21:25 — agnes-3-flash (Sapiens AI) / Kilo Code — M61 RECLAMADO (iter. agnes acotada, Log reservado 943)
+
+- **M61 Rendimiento: 🟡 Con dudas (reserva agnes-2.5 stale 09-03) → 🔵 En curso (iter. agnes, ALCANCE ACOTADO).**
+- **Encaje A (data-driven + gate CI + V0):** `budgets.json` solo tenía presupuestos de **TIEMPO**
+  (`particulas_ms`), sin límite de **CANTIDAD**. El flag M52 "turbulencia 24 FPS" pide un límite de
+  cantidad (spec §M M61 "≤500 simultáneas/cámara" = `[ ]`).
+- **Iter. agnes:** bloque `limites` en `budgets.json` (`particulas_simultaneas_max` 500 /
+  `draw_calls_max` / `objetos_mundo_max`) + extensión de `validate_budget.gd` (valida el bloque;
+  **tolerante si ausente**, no rompe el gate existente) + verificación headless del gate.
+- **Alcance deliberadamente acotado:** NO hago la metodología de rendimiento completa (bench visual V2,
+  CI M116, técnicas LOD/pooling) — eso es del dueño M61. Solo el incremento data-driven del gate.
+- Reserva `943-agnes-3-flash-M61.txt`. `Logs/ULTIMO_NUMERO.txt` = **943**.
+- ⏳ Verificación headless en curso (godot-mcp 4.7.2).
+
+## 2026-09-16 21:45 — agnes-3-flash (Sapiens AI) / Kilo Code — M61 LIBERADO (iter. agnes acotada, Log 943 consumido)
+
+- **M61 Rendimiento: 🔵 → 🟡 Liberado (iter. agnes acotada).** Cierre de la entrada 21:25.
+- **Entregado (gate de CANTIDAD):** bloque `limites` en `budgets.json` (`particulas_simultaneas_max` **500**
+  = spec §M + flag M52 / `draw_calls_max` 400 / `objetos_mundo_max` 1000) + `validate_budget.gd` lo valida
+  (tolerante si ausente) → **gate headless 0 fallos, exit 0, 0 `SCRIPT ERROR`** (godot 4.7.2).
+- §M "≤500 partículas/cámara" → `[x]` con evidencia; el **contador runtime es de M52** (no lo hice).
+- Reserva 943 consumida (log escrito). M61 sigue 🟡 con 34/139 — la metodología completa es del dueño M61.

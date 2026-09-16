@@ -60,6 +60,8 @@ func _cargar_y_validar_tabla() -> void:
 	# Medicion excedida -> debe detectarse
 	var mala := {"gameplay_ms": 20.0, "mundo_voxel_ms": 20.0, "ia_npc_ms": 20.0, "particulas_ms": 20.0, "culling_ms": 20.0, "render_ms": 20.0, "ui_ms": 20.0}
 	_check(not _validar_medicion(data, mala), "medicion excedida detectada")
+	# iter. agnes (Log 943): dimension de limites de CANTIDAD (spec M61 sec.M + flag M52)
+	_validar_limites(data)
 
 func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 	var cats: Dictionary = data.get("categorias", {})
@@ -78,3 +80,48 @@ func _validar_medicion(data: Dictionary, medicion: Dictionary) -> bool:
 		suma += float(medicion[clave])
 	var total := float(data.get("presupuesto_total_ms", 0.0))
 	return (not fallo_individual) and suma <= total * (1.0 + tolerancia)
+
+
+## iter. agnes (Log 943): valida el bloque "limites" (cantidad) si existe.
+## Tolera su ausencia (no rompe el gate temporal previo); si esta, exige bien formado
+## + los 3 limites canonicos + particulas_simultaneas_max == 500 (spec M61 sec.M / RF13).
+func _validar_limites(data: Dictionary) -> void:
+	if not data.has("limites"):
+		return
+	var limites: Variant = data.get("limites", {})
+	_check(limites is Dictionary, "bloque limitas es un Dictionary")
+	if not (limites is Dictionary):
+		return
+	var limes: Dictionary = limites
+	_check(limes.size() >= 3, "limites: >=3 limites declarados (%d)" % limes.size())
+	for clave in limes:
+		var valor: Variant = limes[clave]
+		if clave == "nota":
+			continue
+		_check(typeof(valor) == TYPE_INT or typeof(valor) == TYPE_FLOAT,
+			"limite %s es numerico" % clave)
+		if (typeof(valor) == TYPE_INT or typeof(valor) == TYPE_FLOAT) and float(valor) <= 0.0:
+			_check(false, "limite %s > 0 (%s)" % [clave, str(valor)])
+	_check(int(limes.get("particulas_simultaneas_max", 0)) == 500,
+		"particulas_simultaneas_max == 500 (spec M61 sec.M / flag M52)")
+	_check(limes.has("draw_calls_max"), "draw_calls_max declarado")
+	_check(limes.has("objetos_mundo_max"), "objetos_mundo_max declarado")
+	# Lectura dentro de limites -> OK; excedida -> debe detectarse
+	_check(_medicion_dentro_limites(limes, {"particulas_simultaneas": 480, "draw_calls": 390, "objetos_mundo": 900}),
+		"medicion de cantidad dentro de limites OK")
+	_check(not _medicion_dentro_limites(limes, {"particulas_simultaneas": 600, "draw_calls": 390, "objetos_mundo": 900}),
+		"particulas excediendo 500 detectada")
+	print("[M61] limites: %d limit(es) de cantidad validados (particulas_simultaneas_max=%s)" % [
+		limes.size() - (1 if limes.has("nota") else 0),
+		str(limes.get("particulas_simultaneas_max", "?")),
+	])
+
+## Devuelve true si cada clave de la medicion (si existe en limites) no excede su limite.
+func _medicion_dentro_limites(limites: Dictionary, medicion: Dictionary) -> bool:
+	for clave in medicion:
+		var clave_s: String = String(clave)
+		var clave_limite: String = clave_s + "_max"
+		if limites.has(clave_limite):
+			if float(medicion[clave_s]) > float(limites[clave_limite]):
+				return false
+	return true

@@ -14,5 +14,11 @@
 		"culling_ms": 0.5,
 		"render_ms": 5.0,
 		"ui_ms": 1.5
+	},
+	"limites": {
+		"particulas_simultaneas_max": 500,
+		"draw_calls_max": 400,
+		"objetos_mundo_max": 1000,
+		"nota": "Limites de CANTIDAD (complemento a los presupuestos de tiempo 'categorias'). particulas_simultaneas_max <=500/camara = spec M61 sec.M (RF13) + flag M52 turbulencia 24 FPS. Fuente de diseño: 03-Diseno.md M61. Agregado por agnes-3-flash (Kilo Code, 2026-09-16, Log 943)."
 	}
 }

@@ -240,3 +240,24 @@ Recorrido completo de 90 s (6 waypoints) con bench_scene_a + bench_recorder (bui
 - Evidencia visual: 	ools/mcp/godot-mcp/capturas/61-Rendimiento/cap_61_..._bench_mid2.png (FPS 60 + draw calls 343 + objetos 447, waypoint 3/6) y ..._bench_final.png (veredicto WARN, vista cenital isla completa).
 - Draw calls del terreno de isla 256 completo: ~343-471 según ángulo — valor base para M07/M50 (batching/LOD) y para el objetivo E.59 (<= 400).
 
+## Iteración agnes — gate de límites de CANTIDAD (2026-09-16, agnes-3-flash (Sapiens AI) / Kilo Code, Log 943)
+
+> Alcance acotado (data-driven + gate CI + V0): el gate `validate_budget.gd` solo validaba presupuestos de
+> **TIEMPO** (`categorias`); el límite de **CANTIDAD** de partículas (spec §M "≤500 simultáneas/cámara",
+> disparado por el flag M52 "turbulencia 24 FPS") no estaba modelado.
+
+- **`data/performance/budgets.json`**: nuevo bloque `limites` → `particulas_simultaneas_max` (500),
+  `draw_calls_max` (400, = objetivo E.59), `objetos_mundo_max` (1000), + `nota` de trazabilidad.
+- **`scripts/performance/validate_budget.gd`**: ` _validar_limites()` + `_medicion_dentro_limites()` — valida el
+  bloque (presente, bien formado, ==500 en partículas, lectura excedida detectada) y es **tolerante si el
+  bloque falta** (no rompe el gate temporal para ramas anteriores). Print de evidencia
+  `[M61] limites: 3 limit(es) de cantidad validados` al pasar.
+- **Verificación headless:** `godot --headless --script res://scripts/performance/validate_budget.gd` →
+  **0 fallos, exit 0**, 0 `SCRIPT ERROR`.
+- **Dónde rindo / dónde no:** ejecuto el incremento data-driven del gate; **NO** hago la metodología
+  completa de M61 (bench visual V2, CI M116, técnicas LOD/pooling = dueños M07/M50/M52/M116). El **contador
+  runtime** de partículas (que M52 no exceda 500 en ejecución) es de M52; aquí solo queda el límite + gate.
+- **Nota §28:** línea 240 de este archivo trae un typo preexistente ajeno ("ools/mcp" por "tools/mcp");
+  verificado con lectura UTF-8 (no es mojibake), **no lo toco** (fuera de mi alcance, registrar en
+  próxima pasada de saneamiento si se corre).
+
