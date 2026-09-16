@@ -124,7 +124,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `Logs/912-Islas-Del-Mundo-Iter2_2026-09-15.md`.
 - ⚠️ **`CHECKLIST-GLOBAL.md` tenía BOM otra vez** (3.ª vez) → quitado. Y al registrar filas,
   **no usar `||` dentro de `Notas`**: crea una celda vacía y desalinea la tabla (arregladas 27 y 68).
-- ⏳ QA cruzado §21.8 de M26, BUG-035/039 y M124 sigue **pendiente** (M27 iter.2 ✅ Log 915; M68 iter.2 ✅ VERIFICADO por Hy3/WorkBuddy, Log 917, §21.8).
+- ⏳ QA cruzado §21.8 de M124 ✅ **VERIFICADO por Hy3/WorkBuddy (Log 936, §21.8)** (M27 iter.2 ✅ Log 915; M68 iter.2 ✅ Log 917; M26 iter.2 ✅ Log 930; **BUG-035/039 ✅ VERIFICADOS por Hy3/WorkBuddy, Log 931, §21.8**).
 
 ## 2026-09-15 07:45 — DeepSeek-V4.1-Flash / WorkBuddy — M60 RE-VERIFICADO (iter. 4, Log 916)
 
@@ -335,11 +335,12 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   existen** (ese doc solo tiene 1-6). Mismo patron que la causa raiz de M127.
 - Suites: `test_telemetry` 16/0 · `iter5` 10/0 · `iter6` 11/0 · `iter7` 27/0 (x3, EXIT 0).
   Marcado: **120 `[x]` / 45 `[?]` con dueno / 0 `[ ]`**.
-- ⏳ **QA cruzado 21.8 PENDIENTE** (verificador ≠ autor; el usuario indico que lo hara Hy3).
+  - ✅ **QA cruzado sec21.8 VERIFICADO por Hy3/WorkBuddy (Log 935):** re-grounding OK, 4 suites x3 EXIT 0 (16/0, 10/0, 11/0, 27/0), 0 SCRIPT ERROR en scripts/telemetry/, guardian anti-falso-verde presente (CHECKS_MINIMOS 16/10/11 + _fin() iter7); quality.yml cablea los 4 suites; verificar_checklist.py 120/0/45. Cumple sec21.8.
 - ⚠️ **AJENO, NO TOCADO:** `res://scripts/debug/debug_menu.gd` (AUTOLOAD `DebugMenu`) tiene un
   **Parse Error activo** en el arbol (mtime 09-16 03:19; atria-dawn lo tiene 🔵 con reserva 928):
   linea 483 ternario sin tipo inferible + lineas 493/583 `PackedStringArray(...).join()`, que no existe
   en Godot 4. Consecuencia: **8 `SCRIPT ERROR` en TODO run headless del proyecto**. Medido: 8/8 apuntan
   a ese archivo, **0** a `scripts/telemetry/`.
+  - 🔎 **Delta 2026-09-16 (Log 935, Hy3):** en la verificacion headless NO aparecieron los 8 SCRIPT ERROR que Log 926 midio; `debug_menu.gd` fue corregido entretanto (lineas 500/531 ahora tipadas `var npc: Node` / `var res: Variant`, y desaparecieron las `PackedStringArray(...).join`). El hallazgo de Log 926 sec8.1 era real en su momento; hoy el autoload ya no falla al parsear. Fuera de alcance de M105.
 - Tambien ajeno: `scripts/telemetry/stub_analytics_director.gd` es **huerfano** (0 referencias).
 - `Logs/ULTIMO_NUMERO.txt` = 930 (avanzo con otros agentes) → **no lo commiteo**.
