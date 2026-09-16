@@ -1,6 +1,0 @@
-numero: 846
-agente: Hy3 (WorkBuddy)
-plataforma: WorkBuddy
-modulo: M21-Dialogos
-fecha: 2026-09-12 02:31
-motivo: Cierre tecnico QA cruzado §21.8 + correccion de regresion del validador

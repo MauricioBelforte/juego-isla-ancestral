@@ -1,6 +1,0 @@
-Reserva: 837
-Agente: Hy3 (WorkBuddy)
-Modulo: 162-Dialogos-Contextuales-De-NPCs
-Tipo: Cierre tecnico E2E (selector + M19) + delegacion narrativa
-Fecha: 2026-09-12
-Estado: usado (Log 837 creado)
