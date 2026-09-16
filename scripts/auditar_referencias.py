@@ -34,7 +34,13 @@ MENCION = re.compile(r'\b[Ll]ogs?\s+(?:[Nn]?[°º]?\s*)?([0-9]{1,4})\b')
 # al leer y luego se reescribe sin los CR -> cambio masivo de fin de
 # linea camuflado de reparacion).
 EXCLUIDOS = ('Obsoletos', '.git', 'node_modules', '.venv', '__pycache__',
-             '.godot', 'addons', '.workbuddy-ai')
+             '.godot', 'addons', '.workbuddy-ai',
+             # .kilo/ guarda git worktrees del MISMO repo (p.ej.
+             # .kilo/worktrees/phase-judge, congelado en un commit viejo).
+             # Sin excluirlo se audita esa copia y TODAS sus referencias
+             # salen rotas: medido el 2026-09-16, 158 rutas rotas con
+             # .kilo/ contra 1 real sin el.
+             '.kilo')
 
 
 def raiz_repo():
