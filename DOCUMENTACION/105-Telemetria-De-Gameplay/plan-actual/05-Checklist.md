@@ -1,4 +1,4 @@
-> **RE-MARCADO HONESTO (2026-09-15, iter. 7).** El 2026-09-14 la auditoria agnes
+> **RE-MARCADO HONESTO (2026-09-16, iter. 7).** El 2026-09-14 la auditoria agnes
 > revirtio todos los `[x]` a `[ ]` porque estaban marcados "sin verificacion real".
 > Eso fue correcto en el hecho. Esta iteracion re-marca **con criterio explicito y
 > evidencia**, no con el diseno:
@@ -19,14 +19,14 @@
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-15 (último modificador)
+**Fecha:** 2026-09-16 (último modificador)
 **Historial:** diseño por SWE-1.6 (DEVIN) · núcleo + iters 1-5 por ox-alpha (Cline) y deepseek-v4-flash (Kilo Code) · iter. 6-7 por DeepSeek-V4.1-Flash (WorkBuddy)
 
 # 05-Checklist.md — Módulo 105: Telemetría de Gameplay
 
 ## Reserva actual
 
-- Estado: 🟡 Con dudas — re-verificacion selectiva cerrada 2026-09-15 (Log 926). Retomable.
+- Estado: 🟡 Con dudas — re-verificacion selectiva cerrada 2026-09-16 (Log 926). Retomable.
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Resultado: **120 `[x]` · 45 `[?]` · 0 `[ ]`** (total 165)
 - Salida: 3 metricas `time_to_first_*` que faltaban · bug de `session_ended`/`session_duration`

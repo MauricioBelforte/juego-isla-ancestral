@@ -17,7 +17,7 @@
 # ── iter. 7: métricas time_to_first_* faltantes ────────────────────
 # Modelo: DeepSeek-V4.1-Flash
 # Plataforma: WorkBuddy
-# Fecha: 2026-09-15
+# Fecha: 2026-09-16
 # El diseño (02-Analisis.md, métricas) exige 5 métricas `time_to_first_*`
 # (RF12/RF13 + house/puzzle/seal) pero solo existían 2 (+ session_duration).
 # Se añaden METRIC_TIME_TO_FIRST_HOUSE/PUZZLE/SEAL y se cablean en los sitios

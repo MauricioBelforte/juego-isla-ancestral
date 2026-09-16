@@ -8,7 +8,7 @@
 
 ## 1. Archivos involucrados
 
-> **Actualizado 2026-09-15 (iter. 7).** La tabla original (iter. 1) listaba 3
+> **Actualizado 2026-09-16 (iter. 7).** La tabla original (iter. 1) listaba 3
 > archivos y ocultaba las iteraciones 5, 6 y 7. Inventario REAL verificado en
 > disco (no citado de memoria):
 
@@ -108,7 +108,7 @@ Resultados en verde: `16/0`, `10/0`, `11/0`, `22/0` — **0 fallos, EXIT 0, x3 c
 
 - `Logs/243-M105-Telemetria-Gameplay-Implementacion_2026-08-29_20-30-00.md` — implementacion y verificacion (iter. 1, ox-alpha).
 - `Logs/826-M105-Iter6-Auditoria-33-Fix-Zone-Ignored_2026-09-11_20-10-00.md` — iter. 6 (fix de integracion de `zone_ignored`).
-- `Logs/926-M105-Telemetria-Iter7_2026-09-15.md` — iter. 7 (metricas faltantes, bug de sesion, guardianes, CI).
+- `Logs/926-M105-Telemetria-Iter7_2026-09-16.md` — iter. 7 (metricas faltantes, bug de sesion, guardianes, CI).
 
 ## Notas del Agente — iter. 1 (núcleo, 2026-08-29)
 
@@ -167,11 +167,11 @@ Resultados en verde: `16/0`, `10/0`, `11/0`, `22/0` — **0 fallos, EXIT 0, x3 c
 - Si se re-define "zona ignorada" como **acumulado entre visitas** (en vez de por visita), el lugar a cambiar es `_evaluar_zona_ignorada()`; el contrato de limpieza está fijado por `test_telemetria_iter5` (líneas 108-109) y `test_telemetria_iter6`.
 - Antes de tocar un módulo con tests que llaman métodos privados a mano (`_on_zone_check`), **reproducir el camino real** — un test que salta el timer puede esconder bugs de integración.
 
-## Notas del Agente — iter. 7 (2026-09-15)
+## Notas del Agente — iter. 7 (2026-09-16)
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-15
+**Fecha:** 2026-09-16
 **Estado:** 🟡 Con dudas — re-verificacion selectiva tras la reversion de la auditoria agnes
 **Log:** 926
 

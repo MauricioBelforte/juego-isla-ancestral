@@ -8,7 +8,7 @@
 > Extraídas del `05-Checklist.md` del módulo (**120 `[x]` / 45 `[?]` / 0 `[ ]`** de 165 ítems).
 > Fuente de verdad del ítem: el `05-Checklist.md`. Este archivo se **regenera** desde él; no se edita a mano.
 >
-> **iter. 7 (2026-09-15, Log 926):** re-verificación selectiva tras la reversión de la auditoría del
+> **iter. 7 (2026-09-16, Log 926):** re-verificación selectiva tras la reversión de la auditoría del
 > 2026-09-14. La reversión era correcta en el hecho, pero el trabajo de iter. 6 seguía **sin commitear**
 > en el árbol (trampa 58). Criterio de marcado: **[x]** = implementado **y** cubierto por una aserción de
 > un suite corrido ×3 con 0 fallos (ningún `[x]` se apoya en el diseño); **[?]** = diseñado pero **no
