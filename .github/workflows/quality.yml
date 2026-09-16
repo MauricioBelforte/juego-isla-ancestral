@@ -239,7 +239,7 @@ jobs:
           # y solo existian 2 + session_duration) + fix de `establecer_opt_in`
           # (apagaba `opt_in` ANTES de `_finalizar_sesion()`, y esa ruta filtra
           # con `if not opt_in: return` -> `session_ended`/`session_duration`
-          # NUNCA salian al cerrar sesion). iter7 = 22 checks, 10 bloques con
+          # NUNCA salian al cerrar sesion). iter7 = 27 checks, 10 bloques con
           # marcador _fin() y guardian anti-falso-verde probado por INYECCION con
           # 4 sondas (aborto de bloque, aborto de _ejecutar sin cuelgue, aborto
           # dentro de un helper y aborto inline).
