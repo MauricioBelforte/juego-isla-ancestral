@@ -297,9 +297,45 @@ jobs:
           grep -r "print(" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" | grep -v "validate_save" | grep -v "test_" | head -20 || true
           echo "Debug print check completed"
 
+  encoding-guard:
+    name: UTF-8 sin BOM (AGENTS §28)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # §28 exige UTF-8 SIN BOM. Ojo: scripts/fix_encoding.py DETECTA el BOM y
+      # lo descarta en memoria (lineas 195-196 + 260), asi que NO sirve como
+      # guarda. La herramienta que si reescribe es scripts/verificar_bom.py,
+      # que aqui corre en modo diagnostico: sale con 1 si encuentra BOM.
+      # Excluye directorios ocultos (worktrees de otros agentes, p. ej.
+      # .kilo/worktrees/), Obsoletos/ (respaldo historico, se preserva tal cual)
+      # y Godot/ (user:// runtime; ademas m87_val_bom.po es el BOM legitimo, es
+      # el fixture con el que se prueba el validador .po).
+      - name: Verify no UTF-8 BOM
+        run: |
+          python3 scripts/verificar_bom.py
+          echo "Sin BOM: ningun archivo versionado empieza con EF BB BF"
+
+      # Informativo, NO bloquea: el mojibake documentado (banners, tablas de
+      # reparacion, volcados de bytes) no es corrupcion, y el verificador ya
+      # los filtra. Se deja visible para que una regresion real se vea en el log
+      # sin romper el build por un falso positivo.
+      - name: Mojibake scan (informativo)
+        continue-on-error: true
+        run: |
+          python3 scripts/diagnosticar_mojibake.py 2>&1 | tail -25 || true
+
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -312,7 +348,8 @@ jobs:
           echo "test-suite: ${{ needs.test-suite.result }}"
           echo "legal-tools: ${{ needs.legal-tools.result }}"
           echo "security-scan: ${{ needs.security-scan.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]]; then
+          echo "encoding-guard: ${{ needs.encoding-guard.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi

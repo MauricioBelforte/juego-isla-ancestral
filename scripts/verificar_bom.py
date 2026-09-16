@@ -26,8 +26,27 @@ BOM = b'\xef\xbb\xbf'
 EXT = ('.md', '.gd', '.txt', '.json', '.cfg', '.py', '.tres', '.tscn',
        '.yml', '.yaml', '.po', '.iss', '.godot', '.shader', '.import')
 # Respaldos y dependencias: no son texto versionado "vivo", no se tocan.
+# (Se comparan en minusculas: en el repo conviven `Obsoletos/` y `OBSOLETOS/`.)
 EXCLUIDOS_DIR = ('.git', 'node_modules', '__pycache__', '.godot', 'bin',
-                 'out', 'Obsoletos', 'addons', '.workbuddy-ai')
+                 'out', 'obsoletos', 'addons', '.workbuddy-ai', 'build',
+                 'dist', '.venv', 'venv',
+                 # `game/isla-ancestral/Godot/` = user:// (runtime). Ademas
+                 # m87_val_bom.po es el BOM LEGITIMO: es el fixture con el que
+                 # se prueba el validador de .po. No se debe "arreglar".
+                 'godot')
+# Todo directorio oculto se salta salvo `.github` (workflows) y `.gitea`.
+# Motivo real: `.kilo/worktrees/<nombre>/` es un worktree de otro agente y
+# metia 463 "BOM" que no son del repo versionado.
+OCULTOS_PERMITIDOS = ('.github', '.gitea')
+
+
+def salta_dir(nombre):
+    n = nombre.lower()
+    if n in EXCLUIDOS_DIR:
+        return True
+    if nombre.startswith('.') and n not in OCULTOS_PERMITIDOS:
+        return True
+    return False
 
 
 def raiz_repo():
@@ -45,7 +64,7 @@ def raiz_repo():
 def escanear(raiz, prefijos):
     hallados = []
     for dirpath, dirnames, filenames in os.walk(raiz):
-        dirnames[:] = [d for d in dirnames if d not in EXCLUIDOS_DIR]
+        dirnames[:] = [d for d in dirnames if not salta_dir(d)]
         for fn in filenames:
             if not fn.endswith(EXT):
                 continue
