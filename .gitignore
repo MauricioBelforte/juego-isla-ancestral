@@ -132,6 +132,17 @@ gen_*.py
 # herramienta permanente de saneamiento de codificacion del proyecto
 # (documentada en AGENTS.md 28.1 y Logs 507 / 852). Debe versionarse.
 
+# Excepcion: el mismo caso, pero por movimiento de archivos. El Log 933
+# (MiMo, 2026-09-16) movio estas herramientas de la raiz a scripts/ por
+# considerarlas utiles. Los patrones de arriba NO tienen barra inicial, asi
+# que las siguen ignorando en su nueva ubicacion: git add las salta en
+# silencio y no se pueden versionar. Deben versionarse, como fix_encoding.py.
+!scripts/analizar_logs.py
+!scripts/check_godot.bat
+!scripts/validate_m13.bat
+!scripts/validate_m39.bat
+!scripts/validate_tscn.bat
+
 # Temporales de agentes (raíz del proyecto)
 _tmp_*.txt
 _tmp_*.py
