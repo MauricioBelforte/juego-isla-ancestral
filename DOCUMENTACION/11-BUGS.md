@@ -130,6 +130,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-039 | `scripts/generar_checklist_global.py` reescribe el archivo desde una plantilla fija: borra el encabezado y desplaza columnas | Transversal | 🔴 Alta | [x] Resuelto (2026-09-15, generador corregido y verificado) | DeepSeek-V4.1-Flash | 2026-09-15 01:11 |
 | BUG-040 | `inventory_layer.gd` captura ERROR de señal `item_added` (handler 2 args vs emisión 3 args) | M53 UI Inventario (`inventory_layer.gd`) | 🟠 Mayor | [x] Resuelto (2026-09-15, hy3 — verificación headless M110 22/0, EXIT 0; error de señal ausente) | hy3 | 2026-09-15 01:25 |
 | BUG-041 | ~~`logger.gd` (autoload `GameLogger`) no registra NADA~~ **FALSO POSITIVO (verificado con sonda)**: `GameLogger` **sí registra** (`categories_enabled` se puebla en `_ready()`, `_log()` escribe a disco y emite). Residuo real: `log_buffer` es **código muerto** (nadie hace `append`) y `_flush()` es un no-op permanente | M103 Logging (`scripts/logging/logger.gd`) | 🟢 Baja (limpieza) | [x] Cerrado — falso positivo (reclasificado 2026-09-15) | DeepSeek-V4.1-Flash | 2026-09-15 |
+| BUG-042 | Tres de los cuatro `.ttf` de `assets/fonts/` no son fuentes sino páginas HTML «Page not found · GitHub» (descargas 404 guardadas con extensión `.ttf`). `load()` devuelve un `FontFile` NO nulo con datos vacíos: FreeType «Error loading font: ''» y métricas 0.0 px, así que el fallo es silencioso | M46/M88 (fuentes) — afecta a M53 (UI) y M87 (tipografía) | 🟠 Mayor | [ ] Abierto — reportado por M87 iter. 6 (Log 920) | DeepSeek-V4.1-Flash | 2026-09-15 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -1567,3 +1568,76 @@ Que un test falle *dentro de mi suite* no es prueba de que el componente ajeno e
 `Mensajes entre modelos/ESTADO-PARALELO.md` (bloque de corrección).
 
 **Firma:** DeepSeek-V4.1-Flash / WorkBuddy — reportado 2026-09-15 (07:20) · **reclasificado 2026-09-15 (04:50)**
+
+---
+
+## BUG-042: las fuentes de `assets/fonts/` son páginas HTML 404, no fuentes
+
+**Severidad:** 🟠 Mayor · **Módulo dueño:** M46/M88 (fuentes) · **Afecta a:** M53 (UI), M87 (tipografía)
+**Estado:** Abierto — reportado por **DeepSeek-V4.1-Flash / WorkBuddy** (M87 iter. 6, Log 920, 2026-09-15)
+
+### Qué se observó
+
+Al construir el analizador de encaje de texto de M87 (medición real con las métricas de la fuente),
+las medidas salían **0.0 px** para la fuente del juego, mientras que la fuente por defecto del tema
+medía con normalidad. La causa no era la API ni el modo headless.
+
+### Qué dice la medición
+
+```
+Nunito-Regular.ttf       bytes= 304727  imprimibles= 99.8%  magic= 0a0a0a0a
+Nunito-Bold.ttf          bytes= 304688  imprimibles= 99.8%  magic= 0a0a0a0a
+FredokaOne-Regular.ttf   bytes= 304724  imprimibles= 99.8%  magic= 0a0a0a0a
+Nunito-Variable.ttf      bytes= 276932  imprimibles= 26.7%  magic= 00010000   <- única VÁLIDA
+
+head -c 300 assets/fonts/Nunito-Regular.ttf
+  \n\n\n\n\n\n\n\n<!DOCTYPE html>\n<html\n  lang="en"\n  data-color-mode="auto" ...
+
+grep -oE "<title>[^<]*</title>" assets/fonts/Nunito-Regular.ttf
+  <title>Page not found · GitHub · GitHub</title>
+```
+
+- Un TTF real empieza con el magic `00 01 00 00` (sfnt) o `OTTO`. Los tres archivos corruptos
+  empiezan con **`0a 0a 0a 0a`** (saltos de línea) y son **99,8 % texto imprimible**: son
+  **páginas HTML de GitHub**, concretamente la pantalla **«Page not found»**. Se intentó descargar
+  las fuentes desde URLs de GitHub que devolvían 404 y se guardó la respuesta con extensión `.ttf`.
+- `Nunito-Variable.ttf` **sí es una fuente válida** (`00 01 00 00`) y mide correctamente
+  (`Jugar`@16 = 37×23 px). No figura en `data/fonts/fonts.json`.
+
+### Por qué es grave (fallo silencioso)
+
+`load("res://assets/fonts/Nunito-Regular.ttf")` **no devuelve `null`**: devuelve un `FontFile`
+no nulo pero **sin datos**. Las consecuencias se propagan sin ruido:
+
+- FreeType emite `Error loading font: '' (face_index=0)` y
+  `Condition "!_ensure_cache_for_size(fd, size, ffsd)" is true. Returning: 0.0`.
+- **Todas las métricas son 0.0** → cualquier medición de texto (encaje, desborde, expansión) da
+  «cabe», y el texto se renderiza con la fuente de reserva del motor.
+- Un `if fuente != null` **no detecta el problema**: el objeto existe. La comprobación correcta es
+  **medir** (`get_string_size(...).x > 0`), no comprobar la referencia.
+
+### Estado en el resto del proyecto
+
+`data/fonts/fonts.json` (M88) declara **`tiene_archivo: false` en las CUATRO fuentes**
+(`museo_moderno`, `texto_cozy`, `script_isla`, `mono_debug`), así que la **metadata es honesta**:
+el módulo sabe que no hay archivos. El problema es que **los archivos físicos existen y engañan**
+a quien haga `load()` directo, y que `Nunito-Variable.ttf` (la única fuente real) **no está
+declarada** en ese catálogo.
+
+### Fix sugerido (dueño M46/M88)
+
+1. **Borrar o reemplazar** los tres `.ttf` corruptos por los binarios reales de Nunito/Fredoka
+   (OFL), verificando el magic `00 01 00 00` **antes** de commitear.
+2. **Declarar** `Nunito-Variable.ttf` en `data/fonts/fonts.json` con `tiene_archivo: true` y su ruta,
+   o descartarlo si no es la fuente elegida.
+3. **Guardar la puerta**: al cargar una fuente, exigir `get_string_size("A").x > 0` y avisar si no
+   (una fuente que carga pero no mide es peor que una ausente).
+4. Chequeo de CI sugerido: ningún `.ttf` del repo debe empezar con `<!DOCTYPE` ni con `0a`.
+
+### Referencias cruzadas
+
+`Logs/920-M87-Localizacion-Iter6_2026-09-15.md` · `scripts/localization/analizador_layout.gd`
+(`medir()` documenta la trampa de medición) · `test_localizacion_iter6.gd` bloques A6/A7 (dejan la
+evidencia en cada corrida) · `Mensajes entre modelos/ESTADO-PARALELO.md`.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — reportado 2026-09-15 (Log 920)

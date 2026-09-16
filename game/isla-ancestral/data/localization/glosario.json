@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "descripcion": "Glosario de terminologia canonica de Isla Ancestral (M87). Fija la forma espanola de cada termino y su traduccion inglesa obligatoria, para que los catalogos no mezclen sinonimos (p.ej. Wood / Timber para 'Madera'). Lo consume scripts/localization/glosario.gd, que coteja sin distinguir mayusculas ni acentos.",
+  "idiomas": ["es", "en"],
+  "terminos": [
+    {"id": "ISLA", "es": "Isla", "en": "Island", "variantes_en": [], "nota": "Sustantivo central del juego"},
+    {"id": "MADERA", "es": "Madera", "en": "Wood", "variantes_en": [], "nota": "Material base; nunca 'Timber' ni 'Lumber'"},
+    {"id": "VIDA", "es": "Vida", "en": "Health", "variantes_en": [], "nota": "Estadistica del HUD"},
+    {"id": "ENERGIA", "es": "Energía", "en": "Energy", "variantes_en": [], "nota": "Estadistica del HUD"},
+    {"id": "INVENTARIO", "es": "Inventario", "en": "Inventory", "variantes_en": [], "nota": "Contenedor de objetos del jugador"},
+    {"id": "TIENDA", "es": "Tienda", "en": "Shop", "variantes_en": ["Store"], "nota": "Puesto de comercio"},
+    {"id": "HERRERIA", "es": "Herrería", "en": "Smithy", "variantes_en": ["Forge", "Blacksmith"], "nota": "Tienda de metal. Forma canonica 'Smithy': es la que ya usa el catalogo (verificado en iter. 6); 'Forge' queda como variante aceptada"},
+    {"id": "CATALOGO", "es": "Catálogo", "en": "Catalog", "variantes_en": ["Catalogue"], "nota": "Lista de objetos de una tienda"},
+    {"id": "FOGATA", "es": "Fogata", "en": "Campfire", "variantes_en": [], "nota": "Estacion de crafteo"},
+    {"id": "TELAR", "es": "Telar", "en": "Loom", "variantes_en": [], "nota": "Estacion de crafteo"},
+    {"id": "GUARDAR", "es": "Guardar", "en": "Save", "variantes_en": [], "nota": "Accion de persistencia (M60)"},
+    {"id": "SALIR", "es": "Salir", "en": "Quit", "variantes_en": ["Exit"], "nota": "Abandonar la partida o el juego"},
+    {"id": "IDIOMA", "es": "Idioma", "en": "Language", "variantes_en": [], "nota": "Opcion de configuracion de este modulo"},
+    {"id": "CREDITOS", "es": "Créditos", "en": "Credits", "variantes_en": [], "nota": "Pantalla de creditos"},
+    {"id": "SALDO", "es": "Saldo", "en": "Balance", "variantes_en": [], "nota": "Dinero disponible (AO)"},
+    {"id": "PAUSA", "es": "Pausa", "en": "Pause", "variantes_en": [], "nota": "Menu de pausa"},
+    {"id": "OPCIONES", "es": "Opciones", "en": "Options", "variantes_en": [], "nota": "Menu de opciones"}
+  ]
+}

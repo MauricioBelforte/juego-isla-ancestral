@@ -135,6 +135,31 @@ jobs:
           # conteo comparan contra el JSON fuente (fix BUG-032: estaban fijadas a
           # 11 claves con el catálogo en 25 -> false-red).
           godot --headless --script scripts/localizacion/test_localizacion_m87.gd 2>&1
+          # M87 núcleo (iter. 1): carga de catalogos, traduccion es/en,
+          # placeholders, plurales, formatos, fallback y validar_catalogos.
+          godot --headless --script scripts/localization/test_localization.gd 2>&1
+          # M87 iter. 2-4: persistencia M60 + sugerencia de idioma del SO + contexto
+          # gettext + cache; cobertura de fuentes por idioma (M88); y robustez
+          # determinista (parseo .po corrupto, placeholders mal formados, estados
+          # de catalogo RF21, plurales n=0/negativos y formatos edge).
+          godot --headless --script scripts/localization/test_localizacion_iter2.gd 2>&1
+          godot --headless --script scripts/localization/test_localizacion_iter3.gd 2>&1
+          godot --headless --script scripts/localization/test_localizacion_iter4.gd 2>&1
+          # M87 iter. 5 + bloque I de iter. 6: validador de catalogos .po (reglas
+          # R1-R13 por archivo y P1-P5 por par es<->en) + auditoria de claves
+          # codigo<->catalogo. Incluye la exencion P5 declarada EN EL PROPIO
+          # catalogo con `#. no-traducir: <motivo>` (plantillas sin palabras,
+          # codigos de divisa, unidades): la clave exenta se lista aparte en
+          # `exentas_p5`, asi que la exencion es auditable y no un agujero negro.
+          godot --headless --script scripts/localization/test_validador_po_m87.gd 2>&1
+          # M87 iter. 6: encaje de texto MEDIDO en headless (expansion es->en,
+          # desborde del contenedor de referencia 220x40, palabras sin espacios y
+          # truncado), glosario de terminos canonicos, re-traduccion selectiva de
+          # UI y coste del HUD de 120 labels a 60 fps. 11 bloques (A-K) con marcador
+          # _fin() + guardian anti-falso-verde: un error de script aborta la funcion
+          # en SILENCIO, y con extends SceneTree ademas cuelga el arbol (el watchdog
+          # lo convierte en EXIT 1). 82 checks.
+          godot --headless --script scripts/localization/test_localizacion_iter6.gd 2>&1
           # Run copyright test (M127): copyright.json + CopyrightValidator.
           # Mínimos en vez de números fijos + ids únicos (fix BUG-033: fijaba
           # 5 elementos / 2 políticas con el catálogo en 7 / 5 -> false-red).

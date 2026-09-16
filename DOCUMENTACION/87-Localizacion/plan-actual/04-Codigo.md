@@ -1,5 +1,5 @@
-**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
-**Plataforma:** Kilo Code
+**Modelo:** DeepSeek-V4.1-Flash (último modificador, iter. 6; núcleo/iter. 1 por Deepseek V4 Flash, iters 2-4 por glm-5.3-flash y deepseek-v4-flash)
+**Plataforma:** WorkBuddy
 
 # 04-Codigo.md — Módulo 87: Localización
 
@@ -9,25 +9,36 @@ Módulo de **internacionalización y localización** de todos los textos del jue
 
 **06-Plan-Testings.md:** APLICA (sistema transversal a toda la UI; requiere pruebas de catálogos, placeholders, plurales, formatos, fallback y cambio de idioma en vivo).
 
-## 2. Archivos previstos (Pendiente de implementación)
+## 2. Archivos reales (implementados)
+
+> **Corregido en la iter. 6 (2026-09-15):** esta sección listaba archivos *previstos* bajo `res://localizacion/`
+> con la nota "Pendiente de implementación" para cada uno, cuando el módulo lleva implementado desde la
+> iter. 1. Ninguno de los nombres previstos (`localization_settings.gd`, `translation_validator.gd`,
+> `language_selector.tscn`, `tools/check_translations.gd`) existe: la implementación los resolvió de otra
+> forma. Los nombres y rutas reales son estos.
 
 ```
-res://localizacion/
-├── localization_manager.gd      → LocalizationManager (autoload "Localization") — Pendiente de implementación
-├── locale_utils.gd              → LocaleUtils (números, fechas, nombres nativos de idioma) — Pendiente de implementación
-├── localization_settings.gd     → Ajustes de idioma (leer/guardar en configuración M60) — Pendiente de implementación
-└── translation_validator.gd     → TranslationValidator (validación de catálogos dev/test) — Pendiente de implementación
-
-res://locales/
-├── es.po                        → Catálogo español (fuente de verdad) — Pendiente de implementación
-└── en.po                        → Catálogo inglés — Pendiente de implementación
-
-res://_Project/Scenes/UI/Settings/          (carpeta de M53/M90)
-└── language_selector.tscn + .gd           → Selector de idioma de configuración — Pendiente de implementación
-
-tools/
-└── check_translations.gd                  → Script CLI de validación de claves faltantes — Pendiente de implementación
+game/isla-ancestral/
+├── scripts/localization/
+│   ├── localization_manager.gd   → LocalizationManager (autoload "Localization", project.godot:60)
+│   ├── locale_utils.gd           → LocaleUtils (números, fechas, nombres nativos de idioma)
+│   ├── validador_po.gd           → ValidadorPO (iter. 5; reemplaza al previsto translation_validator.gd)
+│   ├── auditor_claves.gd         → AuditorClaves (iter. 5; reemplaza al previsto tools/check_translations.gd)
+│   ├── analizador_layout.gd      → AnalizadorLayout (iter. 6; medición real de texto)
+│   ├── glosario.gd               → Glosario (iter. 6; consistencia terminológica)
+│   └── retraductor_ui.gd         → RetraductorUI (iter. 6; re-traducción selectiva, consume locale_changed)
+├── locales/
+│   ├── es.po                     → catálogo español (fuente de verdad), 171 entradas
+│   └── en.po                     → catálogo inglés, 171 entradas
+├── data/localization/
+│   └── glosario.json             → 17 términos canónicos es/en con variantes aceptadas (iter. 6)
+└── scripts/localization/test_*.gd → 6 suites headless (ver 06-Plan-Testings.md)
 ```
+
+**No existe y no hace falta:** los ajustes de idioma no tienen script propio (viven en la configuración de
+M90/M53) y el selector de idioma es UI de M53. El autoload duplicado `LocalizationManager`
+(`scripts/localizacion/localization_manager.gd`, project.godot:108, catálogos JSON) sigue registrado y **sin
+consumidores de producción**: es el hallazgo H-1, pendiente de decisión del usuario.
 
 ## 3. Convenciones de claves (resumen operativo)
 
@@ -50,11 +61,11 @@ Ejemplos:
 - Textos que necesitan traducciones distintas según contexto se desambiguan con contexto gettext o secciones distintas.
 - Prohibido el texto visible hardcodeado fuera de los catálogos.
 
-## 4. Esquema de LocalizationManager (Pendiente de implementación)
+## 4. Esquema de LocalizationManager (implementado)
 
 ```gdscript
-# res://localizacion/localization_manager.gd
-# Autoload registrado como "Localization" en project.godot
+# scripts/localization/localization_manager.gd
+# Autoload registrado como "Localization" en project.godot (línea 60)
 extends Node
 
 signal locale_changed(locale: String)
@@ -123,10 +134,10 @@ Notas de diseño del esquema:
 - `format_text` usa `String.replace` por clave (determinista y barato para textos cortos de UI).
 - `TranslationServer.translate()` ya devuelve el texto del catálogo del locale activo; el fallback explícito a español cubre los casos de clave ausente en el idioma activo.
 
-## 5. Esquema de LocaleUtils (Pendiente de implementación)
+## 5. Esquema de LocaleUtils (implementado)
 
 ```gdscript
-# res://localizacion/locale_utils.gd
+# scripts/localization/locale_utils.gd
 class_name LocaleUtils
 extends RefCounted
 
@@ -183,18 +194,27 @@ msgstr[1] "Se ofrecen {n} objetos"
 
 ## 8. Pendientes del módulo (con dueño)
 
-| Pendiente | Dueño |
-|---|---|
-| Implementar `localization_manager.gd` (autoload) | IMPLEMENTACIÓN INMEDIATA |
-| Implementar `locale_utils.gd` | IMPLEMENTACIÓN INMEDIATA |
-| Implementar `localization_settings.gd` (M60) | IMPLEMENTACIÓN INMEDIATA |
-| Implementar `translation_validator.gd` | IMPLEMENTACIÓN INMEDIATA |
-| Crear `res://locales/es.po` (fuente de verdad) | IMPLEMENTACIÓN INMEDIATA |
-| Crear `res://locales/en.po` (traducción al inglés) | TRADUCTOR HUMANO (revisión) |
-| Crear escena `language_selector.tscn` (M53/M90) | IMPLEMENTACIÓN INMEDIATA |
-| Implementar `tools/check_translations.gd` | IMPLEMENTACIÓN INMEDIATA |
-| Ejecutar 06-Plan-Testings.md | IMPLEMENTACIÓN INMEDIATA |
-| Ejecutar 07-Resultados-Testings.md | QA LOCALIZACIÓN |
+> **Corregido en la iter. 6 (2026-09-15):** la tabla anterior listaba nueve "IMPLEMENTACIÓN INMEDIATA"
+> para archivos que llevan implementados desde la iter. 1 y con nombres que no existen. Estado real:
+
+| Pendiente | Dueño | Estado |
+|---|---|---|
+| `scripts/localization/localization_manager.gd` (autoload) | M87 | **Implementado** (iter. 1; ampliado en iter. 6 con `catalogo()`/`claves_catalogo()`) |
+| `scripts/localization/locale_utils.gd` | M87 | **Implementado** (iter. 1) |
+| Validación de catálogos (`validador_po.gd`) | M87 | **Implementado** (iter. 5; marcador `#. no-traducir:` en iter. 6) |
+| Auditoría código↔catálogo (`auditor_claves.gd`) | M87 | **Implementado** (iter. 5) |
+| Medición de encaje de texto (`analizador_layout.gd`) | M87 | **Implementado** (iter. 6) |
+| Consistencia terminológica (`glosario.gd` + `glosario.json`) | M87 | **Implementado** (iter. 6) |
+| Re-traducción selectiva (`retraductor_ui.gd`) | M87 | **Implementado** (iter. 6) |
+| `locales/es.po` (fuente de verdad) | M87 | **Implementado** (171 entradas) |
+| `locales/en.po` (traducción al inglés) | TRADUCTOR HUMANO | **Provisional** — textos generados, revisión humana pendiente (RN9) |
+| Ajustes de idioma y selector de idioma | **M53/M90** | No es de M87: es UI de configuración |
+| Absorber el desborde de texto medido (63/170 a 16 px) | **M53** | Pendiente — la medición la aporta M87 |
+| Adoptar el metadato `text_key` / `tooltip_text_key` en la UI | **M53** | Pendiente — el mecanismo está provisto y probado |
+| Usar `LocaleUtils.format_date/format_hora` en reloj y calendario | **M29/M30** | Pendiente — la API está lista y probada |
+| Migrar 26 módulos de contenido a claves M87 | **M14-M39** | Pendiente — el catálogo y el auditor lo permiten módulo a módulo |
+| Eliminar el autoload duplicado `LocalizationManager` | **decisión del usuario** | Pendiente (hallazgo H-1) |
+| `06-Plan-Testings.md` / `07-Resultados-Testings.md` | M87 | **Ejecutados** (6 suites, 0 fallos) |
 
 ## 9. Notas del Agente
 
@@ -312,3 +332,77 @@ msgstr[1] "Se ofrecen {n} objetos"
 ### Recomendaciones para el próximo agente
 - M46: al entregar los .ttf, marcar tiene_archivo: true en fonts.json y agregar el campo "ruta" por fuente — FontCatalog.fuente(id) ya lo expone.
 - M53: setear el theme default font según fuente_para_idioma(locale) al cambiar idioma (señal locale_changed de M87).
+
+---
+
+## Notas del Agente — Iteración 5 validador .po + auditoría código↔catálogo (historial, no borra las anteriores)
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-13
+**Estado:** Cerrada — 5/5 suites en verde, 0 fallos, 0 errores de script
+
+### Lo que hice
+- **`scripts/localization/validador_po.gd` (nuevo, `class_name ValidadorPO`)** — validador determinista de catálogos gettext. Reglas **R1-R13** por archivo (BOM §28, CRLF RN10, UTF-8 válido, cabecera Content-Type/Language/Plural-Forms, `msgid`↔`msgstr`, plurales contiguos desde 0, `msgid` duplicados, convención `MODULO.SECCION.CLAVE` RF20 con excepciones documentadas, mezcla de convenciones de placeholder) y **P1-P5** por par de idiomas (claves faltantes, huérfanas, placeholders desalineados, entradas sin traducir). `formatear_informe()` para consola/CI.
+- **`scripts/localization/auditor_claves.gd` (nuevo, `class_name AuditorClaves`)** — inventario claves código↔catálogo. Reconoce `_t()`, `traducir_clave()`, `tr_key()` y `tr_ctx()`; detecta prefijos dinámicos (`DIARY.CAT_`), separa los probes que solo aparecen en archivos de test y emite veredicto sobre el **código de producción**. `auditar_texto()` permite auditar un diff sin tocar el disco.
+- **`scripts/localization/test_validador_po_m87.gd` (nuevo)** — 8 bloques con fixtures sintéticos (BOM, CRLF, sin cabecera, `msgstr` vacío, duplicado, plural sin `msgstr[0]`, clave en minúscula, mezcla de placeholders, par desalineado) más los catálogos reales. **0 fallos.**
+- **Defecto real corregido en el núcleo — tormenta de avisos:** `_avisar_faltante()` deduplica el aviso por clave. Medición: 200 llamadas con clave ausente costaban **16.774 µs** (≈16 ms de un solo `push_warning` con backtrace completo) frente a **333 µs** con clave existente. Ahora 50 llamadas a la misma clave ausente generan **1** aviso. Se expone `claves_faltantes()` para dev/CI.
+- **7 claves que la UI invocaba y no existían** agregadas a `es.po`/`en.po` — la UI mostraba la clave cruda en pantalla (confirmado en el log de arranque): `DIARY.CATEGORIAS`, `DIARY.ENTRADAS`, `DIARY.SIN_ENTRADAS`, `LOADING.TITULO`, `LOADING.CARGANDO`, `LOADING.TIP`, `SETTINGS.FUERA_TEMPORADA`, más las **14** `DIARY.CAT_<CATEGORÍA>` dinámicas. Textos **provisionales** (revisión humana RN9).
+- **AGENTS.md §28 corregido:** BOM quitado de `localization_manager.gd` y `test_localization.gd`. El módulo entero queda **UTF-8 sin BOM y con saltos LF**.
+- **Regresión reparada:** `test_localizacion_iter2._test_cache` medía la cache con una clave **ausente**, así que el umbral de 20 ms lo incumplía el aviso y no la cache. Ahora mide con clave existente y verifica el dedup. También se reemplazó `_cache.size() >= 0` (aserción que no podía fallar) por `>= 1`.
+- **Documentación sincronizada:** `02-Analisis.md` (§1.4, §1.5, §1.8 corregidos + §4 nuevo con hallazgos), `03-Diseno.md` (§2.1, §2.3, §2.5, §3.3, §3.4 corregidos + nota de autoload duplicado), firmas normalizadas en `01/02/03`.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No eliminé el autoload duplicado `LocalizationManager`** (`scripts/localizacion/localization_manager.gd`, catálogos JSON): ningún módulo de producción lo consume, pero quitarlo es un cambio transversal que puede afectar a otro módulo. Queda como hallazgo para decisión (ver `02-Analisis.md` §4.2).
+- **No parseé `Plural-Forms`:** la regla plural sigue hardcodeada para es/en; un idioma con 3+ formas plurales exige tocar código (incumple RN3).
+- **No unifiqué la lista de idiomas**, duplicada en `LocalizationManager.LOCALES_SOPORTADOS`, `LocaleUtils.TABLAS` y `LocaleUtils.NOMBRES_NATIVOS`.
+- **No traduje contenido narrativo:** los textos nuevos son provisionales.
+- **No verifiqué visualmente** los desbordes de texto en inglés (ítem C, requiere QA visual).
+
+### Recomendaciones para el próximo agente
+- Antes de cerrar cualquier módulo que toque textos, correr `ValidadorPO.validar_par("res://locales/es.po", "res://locales/en.po")` y `AuditorClaves.auditar("res://scripts", "res://locales/es.po")`: hoy dan **0 errores** y **OK**.
+- Al agregar claves, hacerlo en **ambos** `.po`; la regla P1 lo detecta si se olvida.
+- Pendiente de decisión: el autoload duplicado y la unificación de la lista de idiomas.
+- ⚠️ Al escribir tests en GDScript, recordar que un error de script **aborta la función en silencio**: un bloque puede no ejecutarse y el test reportar "0 fallos". Por eso `test_validador_po_m87.gd` exige que cada bloque deje una marca final (`_fin()`).
+## Notas del Agente — Iteración 6 encaje de texto, glosario y re-traducción selectiva (historial, no borra las anteriores)
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-15
+**Estado:** Cerrada — 6/6 suites en verde, 0 fallos, 0 errores de script
+
+### Lo que hice
+- **`scripts/localization/analizador_layout.gd` (nuevo, `class_name AnalizadorLayout`)** — medición REAL de texto con las métricas de la fuente, sin depender del ojo. API: `medir`, `medir_linea`, `altura_linea`, `cabe`, `razon_expansion`, `palabras_largas`, `partir_palabra` (cortes de ancho cero U+200B), `truncar_con_puntos`, `tamano_minimo_que_cabe`, `estrategia`, `analizar`, `formatear_informe`.
+- **`scripts/localization/glosario.gd` (nuevo, `class_name Glosario`)** + **`data/localization/glosario.json`** — 17 términos canónicos es/en con variantes inglesas aceptadas. `verificar()` recorre el catálogo español, encuentra las claves que usan cada término y exige la forma inglesa canónica. Rechaza prosa (no confunde un término con una frase narrativa que contiene ese verbo) y compara por palabra completa.
+- **`scripts/localization/retraductor_ui.gd` (nuevo, `class_name RetraductorUI`)** — re-traducción selectiva. `debe_retraducir()` es una decisión PURA y testeada (descarta nodos invisibles, fuera del árbol y fuera del rectángulo visible); `retraducir()` recorre el árbol de forma iterativa. Es el **primer consumidor real** de la señal `locale_changed`.
+- **`scripts/localization/localization_manager.gd` (modificado)** — añadidos `catalogo(locale)` y `claves_catalogo(locale)`: acceso de SOLO LECTURA al catálogo cargado (devuelve un `duplicate()`). Lo necesitaban las tres herramientas nuevas.
+- **`scripts/localization/test_localizacion_iter6.gd` (nuevo)** — 11 bloques (A–K) + guardián anti-falso-verde. **82 checks, 0 fallos ×3**, EXIT 0, 0 `SCRIPT ERROR`.
+- **`scripts/localization/validador_po.gd` (modificado)** — nueva exención P5 declarada en el propio `.po` con el comentario de traductor gettext `#. no-traducir: <motivo>`. Las claves exentas se listan aparte en `exentas_p5` para que la exención sea auditable. Ver el apartado de la regresión.
+- **`scripts/localization/test_validador_po_m87.gd` (modificado)** — bloque I nuevo (14 checks) que prueba la exención en las dos direcciones con fixtures sintéticos y la contrasta con los catálogos reales.
+- **Documentación corregida (no solo ampliada):** las §2, §4, §5 y §8 describían archivos *previstos* bajo `res://localizacion/` y los daban por "Pendiente de implementación" cuando el módulo lleva implementado desde la iter. 1; ninguno de esos nombres existe. Reescritas con las rutas y los nombres reales.
+
+### Hallazgo técnico que habilitó la iteración
+**La medición de texto SÍ funciona en headless.** `TextServerAdvanced` está registrado y `ThemeDB.fallback_font` mide correctamente (`"Jugar"` a 16 px = 41×23 px; altura 23,0 a 16 px y 34,0 a 24 px). Eso convirtió tres ítems marcados como "QA visual" en verificables y repetibles en CI. Medición sin motor gráfico, sí; aprobación estética, no.
+
+### Defecto real corregido — 13 claves rotas en P5
+Al empezar la iteración, `test_validador_po_m87.gd` (iter. 5) **estaba en rojo**: 13 claves `M68.*` que la iter. 2 de M68 (Log 910) añadió a los catálogos tienen el `msgstr` idéntico entre español e inglés, y la regla P5 lo reporta como "sin traducir". No son un olvido: son textos **sin palabras que traducir** (la plantilla de cartel `→ {destino} · {metros} m`, el código de divisa `AO`, las unidades `{h} h {m} min`).
+
+**Arreglo, sin debilitar la prueba:** marcador `#. no-traducir:` en `ValidadorPO` + `exentas_p5` auditable + las 13 entradas marcadas en `es.po` y `en.po`. Probado por inyección en las dos direcciones: quitando el marcador de `M68.TRIP.CURRENCY` en ambos archivos el test vuelve a rojo (`["M68.TRIP.CURRENCY"]`); rompiendo la constante del marcador, 9 fallos.
+
+### Trampas nuevas medidas (van al skill del proyecto)
+1. **`Font.get_string_size(texto, align, ancho, size)` con ancho POSITIVO trunca a ese ancho y devuelve la altura de UNA sola línea.** Para texto con salto de línea el API correcto es `get_multiline_string_size()`. Medido: `"Settings of the island game"` a 60 px da `(55, 23)` con `get_string_size` (parece que "cabe") frente a `(67, 92)` con `get_multiline_string_size`; una palabra sin cortes da `(56, 23)` (recortada) frente a `(427, 23)` (real). Una comprobación de encaje escrita con `get_string_size` informa **"todo cabe"**: es la misma forma de falso verde que la trampa 51.
+2. **`FileAccess` en Godot 4 no tiene `.eof()`**: usar `get_length()` + `get_position()`. El `SCRIPT ERROR` aborta la función en silencio y, con `extends SceneTree`, **cuelga el árbol para siempre** (se mató a los 2 m 7 s) porque `quit()` nunca se alcanza. El watchdog `_process` convierte ese cuelgue en un `EXIT=1` limpio.
+3. **`load()` de una fuente corrupta NO devuelve `null`**: devuelve un `FontFile` con las métricas en cero, así que `if fuente != null` no detecta nada — hay que **medir**.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No verifiqué visualmente nada.** 3 de las 4 fuentes del proyecto son páginas HTML 404 con extensión `.ttf` (**BUG-042**, dueño M46/M88), así que la QA visual está bloqueada de hecho, no por comodidad. Donde no se puede mirar, se mide: 63 de 170 claves desbordan el contenedor de referencia 220×40 a 16 px.
+- **No arreglé los layouts.** El desborde medido es trabajo de **M53**; M87 aporta la medición y la lista.
+- **No traduje contenido narrativo:** los textos siguen siendo provisionales hasta la revisión humana (RN9).
+- **No eliminé el autoload duplicado `LocalizationManager`** (hallazgo H-1): es una decisión transversal, no mía.
+- **No toqué M68** para "arreglar" sus 13 claves: el defecto era de la heurística de validación, no del contenido. La exención se declara donde corresponde.
+
+### Recomendaciones para el próximo agente
+- Antes de cerrar cualquier módulo que toque textos: `ValidadorPO.validar_par("res://locales/es.po", "res://locales/en.po")` y `AuditorClaves.auditar("res://scripts", "res://locales/es.po")`. Hoy dan **0 errores** y **OK**.
+- Si un `msgstr` debe ser idéntico entre idiomas **por diseño**, NO lo saques de la regla P5 en silencio: pon `#. no-traducir: <motivo>` en la entrada. Así el traductor lo ve en Poedit y la exención queda listada en `exentas_p5`.
+- ⚠️ Al agregar un `class_name` nuevo hay que regenerar la caché con `--headless --path game/isla-ancestral --editor --quit`, o el script no resuelve el tipo y el test falla por una razón que no tiene nada que ver con el código.
+- ⚠️ Un error de script **aborta la función en silencio**: por eso ambos suites de M87 exigen que cada bloque deje una marca final (`_fin()`), y el suite de iter. 6 añade además un watchdog que convierte el cuelgue en `EXIT=1`.

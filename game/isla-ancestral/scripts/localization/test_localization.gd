@@ -1,4 +1,4 @@
-﻿# Modelo: Deepseek V4 Flash
+# Modelo: Deepseek V4 Flash
 # Plataforma: Kilo
 # Fecha: 2026-08-30
 #

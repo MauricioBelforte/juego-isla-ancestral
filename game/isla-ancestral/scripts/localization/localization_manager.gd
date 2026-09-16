@@ -6,7 +6,7 @@
 # Capa central de gestión de idioma (RF1-RF24): carga catálogos .po en
 # TranslationServer, cambia idioma en vivo, traduce con placeholders/plurales,
 # formatea números/fechas, fallback a español y valida catálogos (RF21).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 
@@ -20,6 +20,11 @@ var _locale_actual: String = LOCALE_DEFECTO
 var _cache: Dictionary = {}          # "clave|n" -> texto (RF cache)
 var _catalogs: Dictionary = {}       # locale -> Dictionary(clave -> texto)
 var _plural_forms: Dictionary = {}   # locale -> func_n identidad
+## Claves ya avisadas como ausentes. Medido en la iteración 5: un push_warning
+## con backtrace completo cuesta ~16 ms en headless; repetirlo en un path
+## caliente era un hitch perceptible y además falseaba el benchmark de cache
+## del test de iteración 2. Se avisa UNA vez por clave y sesión.
+var _avisadas: Dictionary = {}
 
 func _ready() -> void:
 	_cargar_catalogos()
@@ -107,6 +112,20 @@ func get_locale_display_name() -> String:
 func locales_disponibles() -> Array:
 	return LOCALES_SOPORTADOS
 
+## Acceso de SOLO LECTURA al catálogo cargado de un idioma (clave → texto).
+## Devuelve una copia para que el llamador no pueda mutar el estado interno.
+## Lo consumen AnalizadorLayout (encaje de texto) y Glosario (consistencia).
+func catalogo(locale: String) -> Dictionary:
+	var cat: Dictionary = _catalogs.get(locale, {})
+	return cat.duplicate()
+
+## Claves de un catálogo, ordenadas alfabéticamente (informes deterministas).
+func claves_catalogo(locale: String) -> Array:
+	var cat: Dictionary = _catalogs.get(locale, {})
+	var salida: Array = cat.keys()
+	salida.sort()
+	return salida
+
 func _aplicar_locale(locale: String) -> void:
 	_locale_actual = locale
 	_cache.clear()
@@ -164,9 +183,27 @@ func _buscar_texto(clave: String, n: int) -> String:
 		var es: Dictionary = _catalogs.get(LOCALE_DEFECTO, {})
 		texto = es.get(clave, null)
 	if texto == null:
-		push_warning("[M87] Clave sin traducción: " + clave)
+		_avisar_faltante(clave)
 		return clave
 	return str(texto)
+
+
+## Avisa UNA sola vez por clave ausente (iter. 5). Repetir el warning en un path
+## caliente costaba ~16 ms por llamada (push_warning con backtrace) y además
+## contaminaba el benchmark de cache del test de iteración 2.
+func _avisar_faltante(clave: String) -> void:
+	if _avisadas.has(clave):
+		return
+	_avisadas[clave] = true
+	push_warning("[M87] Clave sin traducción: " + clave)
+
+
+## Claves ausentes detectadas en esta sesión (dev/CI — RF21). Ordenadas y sin
+## duplicados; complementa a validar_catalogos() con lo que el juego pidió de verdad.
+func claves_faltantes() -> Array:
+	var out: Array = _avisadas.keys()
+	out.sort()
+	return out
 
 ## Reemplaza {param} por su valor; claves sin valor quedan literales (warning dev).
 ## Robusto ante placeholder mal formado (T-085): "{sin_cierre" no rompe la UI.

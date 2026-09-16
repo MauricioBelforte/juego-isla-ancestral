@@ -1,5 +1,6 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-13 (firma normalizada en la iter. 5; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)
 
 # 01-Requerimientos.md — Módulo 87: Localización
 

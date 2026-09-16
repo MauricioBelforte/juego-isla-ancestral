@@ -78,14 +78,28 @@ func _test_contexto_gettext() -> void:
 
 func _test_cache() -> void:
 	# Checklist: traducción sin penalización perceptible (cache del núcleo)
+	# ⚠️ iter. 5 (DeepSeek-V4.1-Flash): se mide con una clave EXISTENTE. Antes se
+	# medía con "MENUS.SALUDOS.HOLA", que NO está en el catálogo: el resultado
+	# incluía el push_warning del núcleo (~16 ms con backtrace) y el umbral fallaba
+	# por el aviso, no por la cache. Diagnóstico: sonda de 200 llamadas con clave
+	# existente (333 µs) vs ausente (16.774 µs).
 	_loc.set_locale("es")
+	_loc.tr_key("settings", "pausa", "")   # precalentar la cache
 	var t0 := Time.get_ticks_usec()
 	for i in range(200):
-		_loc.tr_key("menus", "saludos", "hola")
+		_loc.tr_key("settings", "pausa", "")
 	var dt_cached: int = Time.get_ticks_usec() - t0
 	# 200 traducciones cacheadas deben ser < 20 ms total (0.1 ms c/u, holgado)
 	_check(dt_cached < 20000, "200 traducciones cacheadas en %d µs (< 20 ms)" % dt_cached)
-	_check(_loc._cache.size() >= 0, "cache del núcleo activa")
+	# La cache debe tener al menos la clave medida (antes `>= 0`: nunca fallaba)
+	_check(_loc._cache.size() >= 1, "cache del núcleo activa (%d entradas)" % _loc._cache.size())
+	# Un aviso por clave ausente, no uno por llamada (iter. 5)
+	var antes: int = _loc.claves_faltantes().size()
+	for i in range(50):
+		_loc.tr_key("menus", "saludos", "hola")
+	var faltantes: Array = _loc.claves_faltantes()
+	_check(faltantes.has("MENUS.SALUDOS.HOLA"), "claves_faltantes() registra la clave ausente")
+	_check(faltantes.size() == antes + 1, "50 llamadas a la misma clave ausente = 1 sola entrada (dedup), no 50")
 
 func _test_sugerencias_debug() -> void:
 	# Checklist: idioma activo visible (para menú de debug M110)

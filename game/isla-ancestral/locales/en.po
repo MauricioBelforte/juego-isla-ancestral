@@ -197,3 +197,357 @@ msgstr "Autumn"
 
 msgid "CLOCK.ESTACIONES.3"
 msgstr "Winter"
+
+# ── 2026-09-13 · DeepSeek-V4.1-Flash (M87 iter. 5) ──────────────────────────
+# Mirror de las claves agregadas a es.po (la UI las invocaba sin traducción).
+# Textos provisionales: revisión humana pendiente (RN9).
+
+msgid "DIARY.CATEGORIAS"
+msgstr "Categories"
+
+msgid "DIARY.ENTRADAS"
+msgstr "Entries"
+
+msgid "DIARY.SIN_ENTRADAS"
+msgstr "There are no entries in this category yet."
+
+msgid "DIARY.CAT_PERSONAJES"
+msgstr "Characters"
+
+msgid "DIARY.CAT_LUGARES"
+msgstr "Places"
+
+msgid "DIARY.CAT_CRIATURAS"
+msgstr "Creatures"
+
+msgid "DIARY.CAT_PLANTAS"
+msgstr "Plants"
+
+msgid "DIARY.CAT_MINERALES"
+msgstr "Minerals"
+
+msgid "DIARY.CAT_RECETAS"
+msgstr "Recipes"
+
+msgid "DIARY.CAT_PISTAS"
+msgstr "Clues"
+
+msgid "DIARY.CAT_SELLOS"
+msgstr "Stamps"
+
+msgid "DIARY.CAT_RUINAS"
+msgstr "Ruins"
+
+msgid "DIARY.CAT_CARTAS"
+msgstr "Letters"
+
+msgid "DIARY.CAT_DESCUBRIMIENTOS"
+msgstr "Discoveries"
+
+msgid "DIARY.CAT_MISIONES"
+msgstr "Quests"
+
+msgid "DIARY.CAT_EVENTOS"
+msgstr "Events"
+
+msgid "DIARY.CAT_FOTOGRAFIAS"
+msgstr "Photos"
+
+msgid "LOADING.TITULO"
+msgstr "Ancestral Island"
+
+msgid "LOADING.CARGANDO"
+msgstr "Loading..."
+
+msgid "LOADING.TIP"
+msgstr "Tip:"
+
+msgid "SETTINGS.FUERA_TEMPORADA"
+msgstr "Out of season"
+
+# M68: Transporte y Navegación (iter. 2)
+msgid "M68.EVENT.DIRIGIBLE_LUNA"
+msgstr "Luna rides along"
+
+msgid "M68.EVENT.DIRIGIBLE_LUNA.SENAL"
+msgstr "Luna points out the islands from above."
+
+msgid "M68.EVENT.FESTIVAL_CATALINA"
+msgstr "Catalina at the festival"
+
+msgid "M68.EVENT.FESTIVAL_CATALINA.SENAL"
+msgstr "Catalina calls you among the lanterns."
+
+msgid "M68.EVENT.LLEGADA_FINNEAS"
+msgstr "Finneas is waiting"
+
+msgid "M68.EVENT.LLEGADA_FINNEAS.SENAL"
+msgstr "Finneas raises a hand as you arrive."
+
+msgid "M68.EVENT.MUELLE_MATEO"
+msgstr "Mateo chats on the dock"
+
+msgid "M68.EVENT.MUELLE_MATEO.SENAL"
+msgstr "You see Mateo waving from the dock."
+
+msgid "M68.EVENT.PUERTO_BRUNO"
+msgstr "Bruno sees you off"
+
+msgid "M68.EVENT.PUERTO_BRUNO.SENAL"
+msgstr "Bruno shouts a tip from the jetty."
+
+msgid "M68.NARR.C4.01"
+msgstr "The wind shifts as you leave the harbour."
+
+msgid "M68.NARR.C4.02"
+msgstr "Finneas points to the temple on the horizon."
+
+msgid "M68.NARR.C4_BRIS"
+msgstr "Crossing to the Breeze Temple"
+
+msgid "M68.NARR.C7.01"
+msgstr "The sea is far too still."
+
+msgid "M68.NARR.C7.02"
+msgstr "The seven seals weigh on your pack."
+
+msgid "M68.NARR.C7.03"
+msgstr "The Chamber waits beneath the temple."
+
+msgid "M68.NARR.C7_CAMARA"
+msgstr "Crossing to the Seal Chamber"
+
+msgid "M68.NARR.FINAL_SECRETO"
+msgstr "Crossing to the Mirror secret"
+
+msgid "M68.NARR.SECRETO.01"
+msgstr "The paid clues finally fit together."
+
+msgid "M68.ROUTE.r_aurora_brisa"
+msgstr "Aurora Harbour → Breeze Island Harbour"
+
+msgid "M68.ROUTE.r_aurora_espejo"
+msgstr "Aurora Harbour → Mirror Island Harbour"
+
+msgid "M68.ROUTE.r_aurora_estacion"
+msgstr "Aurora Harbour → Central Station"
+
+msgid "M68.ROUTE.r_aurora_este"
+msgstr "Aurora Harbour → East Island Harbour"
+
+msgid "M68.ROUTE.r_aurora_muelle"
+msgstr "Aurora Harbour → Aurora South Dock"
+
+msgid "M68.ROUTE.r_aurora_plataforma"
+msgstr "Aurora Harbour → Northern Platform"
+
+msgid "M68.ROUTE.r_aurora_sur"
+msgstr "Aurora Harbour → South Island Harbour"
+
+msgid "M68.ROUTE.r_estacion_aurora"
+msgstr "Central Station → Aurora Harbour"
+
+msgid "M68.ROUTE.r_este_aurora"
+msgstr "East Island Harbour → Aurora Harbour"
+
+msgid "M68.ROUTE.r_este_muelle"
+msgstr "East Island Harbour → Aurora South Dock"
+
+msgid "M68.ROUTE.r_festival_muelle"
+msgstr "Festival Harbour → Aurora South Dock"
+
+msgid "M68.ROUTE.r_muelle_aurora"
+msgstr "Aurora South Dock → Aurora Harbour"
+
+msgid "M68.ROUTE.r_muelle_este"
+msgstr "Aurora South Dock → East Island Harbour"
+
+msgid "M68.ROUTE.r_muelle_festival"
+msgstr "Aurora South Dock → Festival Harbour"
+
+msgid "M68.ROUTE.r_muelle_sur"
+msgstr "Aurora South Dock → South Island Harbour"
+
+msgid "M68.ROUTE.r_norte_plataforma"
+msgstr "North Island Harbour → Northern Platform"
+
+msgid "M68.ROUTE.r_plataforma_aurora"
+msgstr "Northern Platform → Aurora Harbour"
+
+msgid "M68.ROUTE.r_plataforma_norte"
+msgstr "Northern Platform → North Island Harbour"
+
+msgid "M68.ROUTE.r_sur_aurora"
+msgstr "South Island Harbour → Aurora Harbour"
+
+msgid "M68.ROUTE.r_sur_muelle"
+msgstr "South Island Harbour → Aurora South Dock"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.GENERICO"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.estacion_central"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.muelle_raiz_sur"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.plataforma_norte"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_aurora"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_brisa"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_espejo"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_este"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_festival"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_norte"
+msgstr "→ {destino} · {metros} m"
+
+#. no-traducir: plantilla sin palabras (flecha + distancia + unidad)
+msgid "M68.SIGN.puerto_sur"
+msgstr "→ {destino} · {metros} m"
+
+msgid "M68.SPECIAL.FESTIVAL_INVIERNO"
+msgstr "Trip to the Winter Festival"
+
+msgid "M68.SPECIAL.FESTIVAL_INVIERNO_DESC"
+msgstr "Temporary stop at Festival Harbour."
+
+msgid "M68.SPECIAL.FESTIVAL_LUCES"
+msgstr "Trip to the Festival of Lights"
+
+msgid "M68.SPECIAL.FESTIVAL_LUCES_DESC"
+msgstr "Night crossing to the lanterns."
+
+msgid "M68.SPECIAL.FESTIVAL_OTONO"
+msgstr "Trip to the Autumn Festival"
+
+msgid "M68.SPECIAL.FESTIVAL_OTONO_DESC"
+msgstr "Temporary stop at Festival Harbour."
+
+msgid "M68.SPECIAL.FESTIVAL_PRIMAVERA"
+msgstr "Trip to the Spring Festival"
+
+msgid "M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC"
+msgstr "Temporary stop at Festival Harbour."
+
+msgid "M68.SPECIAL.FESTIVAL_VERANO"
+msgstr "Trip to the Summer Festival"
+
+msgid "M68.SPECIAL.FESTIVAL_VERANO_DESC"
+msgstr "Temporary stop at Festival Harbour."
+
+msgid "M68.SPECIAL.LUNA_LLENA"
+msgstr "Full moon tour"
+
+msgid "M68.SPECIAL.LUNA_LLENA_DESC"
+msgstr "Night crossing to Mirror Island, at a premium."
+
+msgid "M68.SPECIAL.TOUR_DIRIGIBLE"
+msgstr "Airship sightseeing tour"
+
+msgid "M68.SPECIAL.TOUR_DIRIGIBLE_DESC"
+msgstr "Weekend flight over North Island."
+
+msgid "M68.STOP.estacion_central"
+msgstr "Central Station"
+
+msgid "M68.STOP.muelle_raiz_sur"
+msgstr "Aurora South Dock"
+
+msgid "M68.STOP.plataforma_norte"
+msgstr "Northern Platform"
+
+msgid "M68.STOP.puerto_aurora"
+msgstr "Aurora Harbour"
+
+msgid "M68.STOP.puerto_brisa"
+msgstr "Breeze Island Harbour"
+
+msgid "M68.STOP.puerto_espejo"
+msgstr "Mirror Island Harbour"
+
+msgid "M68.STOP.puerto_este"
+msgstr "East Island Harbour"
+
+msgid "M68.STOP.puerto_festival"
+msgstr "Festival Harbour"
+
+msgid "M68.STOP.puerto_norte"
+msgstr "North Island Harbour"
+
+msgid "M68.STOP.puerto_sur"
+msgstr "South Island Harbour"
+
+msgid "M68.TRIP.ARRIVED_AT"
+msgstr "You have arrived at {destino}."
+
+#. no-traducir: codigo de divisa (AO), no se traduce
+msgid "M68.TRIP.CURRENCY"
+msgstr "AO"
+
+msgid "M68.TRIP.DURATION"
+msgstr "Duration: {duracion}"
+
+#. no-traducir: solo unidades de tiempo (h/min)
+msgid "M68.TRIP.HORAS_MINUTOS"
+msgstr "{h} h {m} min"
+
+msgid "M68.TRIP.LOADING"
+msgstr "Preparing your trip..."
+
+msgid "M68.TRIP.LOCKED"
+msgstr "Destination locked"
+
+msgid "M68.TRIP.NO_MONEY"
+msgstr "Not enough coins: it costs {precio}"
+
+msgid "M68.TRIP.OUT_OF_SCHEDULE"
+msgstr "Outside opening hours ({horario}). Wait?"
+
+msgid "M68.TRIP.PRICE"
+msgstr "Price: {precio}"
+
+msgid "M68.TRIP.SCHEDULE"
+msgstr "Opening hours: {horario}"
+
+msgid "M68.TRIP.SPECIAL_ONLY"
+msgstr "Only available during {evento}"
+
+msgid "M68.TRIP.TRAVELING_TO"
+msgstr "Travelling to {destino}..."
+
+msgid "M68.TRIP.HORAS"
+msgid_plural "M68.TRIP.HORAS"
+msgstr[0] "{n} hour"
+msgstr[1] "{n} hours"
+
+msgid "M68.TRIP.MINUTOS"
+msgid_plural "M68.TRIP.MINUTOS"
+msgstr[0] "{n} minute"
+msgstr[1] "{n} minutes"
+
+msgid "M68.TRIP.SEGUNDOS"
+msgid_plural "M68.TRIP.SEGUNDOS"
+msgstr[0] "{n} second"
+msgstr[1] "{n} seconds"
