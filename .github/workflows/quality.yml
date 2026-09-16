@@ -236,6 +236,40 @@ jobs:
           godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1
           echo "All validation tests completed"
 
+  legal-tools:
+    name: Legal Tooling Tests (M127)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # M127: las 4 suites de herramientas legales usan solo la stdlib, asi que no
+      # hace falta `pip install`. Cubren el generador de NOTICE.md/LICENSE, el de
+      # AUTHORS.md/CONTRIBUTING.md (que lee el git log real), el generador del
+      # registro de copyright y el validador pre-release.
+      - name: Run legal tooling tests
+        run: |
+          python3 tools/legal/test_generate_copyright.py 2>&1
+          python3 tools/legal/test_generate_authors.py 2>&1
+          python3 tools/legal/test_generate_register.py 2>&1
+          python3 tools/legal/test_signoff_check.py 2>&1
+          echo "Legal tooling tests completed"
+
+      # El generador es DETERMINISTA (sin fecha de generacion), asi que el
+      # artefacto commiteado debe coincidir byte a byte con su fuente. Si alguien
+      # toca copyright.json y no regenera, este paso falla y lo delata.
+      - name: Verify legal/copyright_register.md is in sync
+        run: |
+          python3 tools/legal/generate_copyright_register.py --check 2>&1
+          echo "copyright_register.md is in sync with copyright.json"
+
   security-scan:
     name: Basic Security Scan
     runs-on: ubuntu-latest
@@ -265,7 +299,7 @@ jobs:
 
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, security-scan]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -276,8 +310,9 @@ jobs:
           echo "code-quality-script: ${{ needs.code-quality-script.result }}"
           echo "formatting-check: ${{ needs.formatting-check.result }}"
           echo "test-suite: ${{ needs.test-suite.result }}"
+          echo "legal-tools: ${{ needs.legal-tools.result }}"
           echo "security-scan: ${{ needs.security-scan.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]]; then
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi

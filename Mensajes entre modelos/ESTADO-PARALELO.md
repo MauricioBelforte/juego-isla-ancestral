@@ -271,3 +271,42 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   es el 920). Detalle: `Logs/920-M87-Localizacion-Iter6_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M87 iter. 6 pendiente** (verificador ≠ autor). Sigue pendiente también el de
   **M103 iter. 1** y **M60 iter. 4**.
+## 2026-09-15 04:40 — DeepSeek-V4.1-Flash / WorkBuddy — M127 RE-VERIFICADO (iter. 2, Log 923)
+
+- **M127 Copyright del Juego: 🟡 Con dudas — 39/101.** El módulo estaba en `0/101` por la reversión de
+  la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real). La **causa raíz** quedó
+  identificada: sus 18 notas «KnownIssue no bloqueante DoD» citaban `03-Diseno.md` §2.3, §3.1, §3.2,
+  §4.2 y §4.3 — **esas secciones no existen**; el documento tiene sólo §1, §2 y §3.
+- **Colisión con MiMo V2.5 (minimax-m3-free), resuelta sin revertir:** MiMo había marcado 4 ítems `[x]`
+  con evidencia real (`copyright.json` + `copyright_validator.gd` + test) y corregido la fila global de
+  `🟢 Disponible | 0/101` a `🟡 Con dudas | 4/101`. **Esas marcas se PRESERVAN** (no se revierte el
+  trabajo de un par) y su nota de test se refresca: decía «9 checks», la suite tiene **13**. Mi script
+  de marcado abortó dos veces antes de escribir (anclas ausentes) — el guardián evitó pisar su trabajo.
+- **Criterio del re-marcado (auditable):** **[x]** cita un artefacto real o una sección **existente** de
+  `03-Diseno.md`; **[?]** nombra el dueño externo o la acción humana requerida; **[ ]** es trabajo
+  pendiente real del módulo. Resultado medido por script: **39 [x] · 25 [?] · 37 [ ]**.
+- **Entregable colgante resuelto:** `legal/copyright_register.md` era el entregable declarado en
+  `04-Codigo.md` §2 y en `03-Diseno.md` §2, pero **no existía ningún archivo en esa ruta**. Ahora existe
+  (3030 B, LF, sin BOM), generado de forma **determinista** desde `copyright.json` por
+  `tools/legal/generate_copyright_register.py`, con modo `--check` (sale 1 si está desactualizado) para CI.
+- **Guardián anti-falso-verde** añadido a `test_copyright_m127.gd`: antes, un `SCRIPT ERROR` dentro de una
+  función abortaba el resto **en silencio** y el resumen imprimía «0 fallos». Ahora `_fin()` por bloque +
+  `_summary()` diferido que nombra los bloques faltantes y sale 1. **Probado por inyección**:
+  `no terminaron: ["validator"]`, `11 checks, 1 fallos`, EXIT 1.
+- ⚠️ **Trampa nueva medida (60):** `quit(1)` llamado desde `_process` **no termina el proceso** en esta
+  build — el bucle se detiene pero el proceso queda vivo hasta el timeout externo (`EXIT 124`), incluso
+  devolviendo `true`. Aislado con una sonda mínima. Defensa efectiva: el `_summary()` en su **propio**
+  `call_deferred` (el watchdog queda como diagnóstico). Medido: aborto en `_run()` → **EXIT 1 en 8,8 s**.
+- **Corrupción reparada en la sección QA de Hy3:** el texto original escribió `\v` y `\r` literales, que
+  quedaron como caracteres de control → `validar()` se leía `alidar()` y `reporte()` se leía `eporte()`
+  partiendo la línea. Restituido a nivel de bytes (VT 0x0B y CR sueltos eliminados).
+- **Documentación corregida:** `04-Codigo.md` afirmaba «06-Plan-Testings.md: NO APLICA» y su §2 sólo
+  listaba `legal/copyright_register.md`; ahora declara los 10 artefactos reales (JSON, validador, suite,
+  4 herramientas Python, 4 documentos generados) y su §6 documenta la causa raíz y las correcciones.
+- **Registros:** fila 127 de `CHECKLIST-GLOBAL.md` → `🟡 Con dudas | 39/101` (índice con **1 sola línea**;
+  las **26** modificaciones ajenas del árbol quedaron intactas). Reserva `923-DSV41F-M127.txt` borrada.
+  Detalle: `Logs/923-M127-Copyright-Iter2_2026-09-15.md`.
+- ⏳ **QA cruzado §21.8 de M127 pendiente** (verificador ≠ autor). También siguen pendientes los de
+  M87 iters. 5+6, M103 iter. 1, M60 iter. 4, M124 iter. 2, M26 iter. 2, M148 y M111.
+- 🔎 **Ajeno, sin tocar:** `Logs/ULTIMO_NUMERO.txt` está en **924** (reserva `924-agnes-3-flash-M96.txt`);
+  la mía es 923 → **no se commitea** ese archivo.
