@@ -2,6 +2,35 @@
 # Plataforma: Cline
 # Fecha: 2026-08-29
 #
+# ── iter. 6: fix de integración de zone_ignored ───────────────────
+# Modelo: DeepSeek-V4.1-Flash
+# Plataforma: WorkBuddy
+# Fecha: 2026-09-11
+# El fix de iter. 5 (dedup `_zona_ignorada_reportada`) dejó la emisión de
+# `zone_ignored` dependiendo SOLO de `_on_zone_check`, pero `exit_zone` detiene
+# `_zone_check_timer` al salir de la última zona → en runtime el evento NUNCA se
+# emitía (el test lo enmascaraba llamando `_on_zone_check()` a mano). Se extrajo
+# `_evaluar_zona_ignorada(zone_id)` y se la invoca también desde `exit_zone`
+# (punto natural de decisión). Contrato preservado: se limpia el acumulado solo
+# al reportar; las zonas con acumulado >= umbral permanecen.
+#
+# ── iter. 7: métricas time_to_first_* faltantes ────────────────────
+# Modelo: DeepSeek-V4.1-Flash
+# Plataforma: WorkBuddy
+# Fecha: 2026-09-15
+# El diseño (02-Analisis.md, métricas) exige 5 métricas `time_to_first_*`
+# (RF12/RF13 + house/puzzle/seal) pero solo existían 2 (+ session_duration).
+# Se añaden METRIC_TIME_TO_FIRST_HOUSE/PUZZLE/SEAL y se cablean en los sitios
+# donde YA se emiten los eventos correspondientes. `track_travel_first_completed`
+# pasa a registrar la métrica DENTRO del guard `_track_first` (antes se
+# re-intentaba en cada llamada; inocuo por el memo `__metrica__*`, pero sucio).
+# `complete_puzzle` (ruta de gameplay, bypassa `_track_first`) ahora también
+# registra discovery+puzzle, para no depender de que el caller use el track_*.
+# BUG extra corregido: `establecer_opt_in(false)` apagaba `opt_in` ANTES de
+# `_finalizar_sesion()`, y esa ruta filtra con `if not opt_in: return` → al
+# apagar la telemetría NUNCA se emitían `session_ended` ni `session_duration`.
+# Ahora se finaliza la sesión mientras `opt_in` sigue en true.
+#
 # M105: Telemetría de Gameplay — TelemetryDirector (autoload).
 #
 # Responsabilidad: capturar eventos de comportamiento de jugador (RF1-RF17),
@@ -15,7 +44,7 @@
 #       * GameState.get_setting → ConfigFile user://settings/telemetry.cfg
 #       * AnalyticsService.record_event → AnalyticsDirector.registrar_evento(tipo, datos)
 #   - Autoload registrado como "TelemetryDirector" SIN class_name (ver §9.41 y
-#     §9.17 de 07-GUIA-GODOT.md: un autoload con class_name == nombre del
+#     §9.17 de GUIA-GODOT/09-godot4-migracion.md: un autoload con class_name == nombre del
 #     autoload colisiona; y Godot 4.7 reservea "Telemetry").
 #
 # Patrón V0: lógica pura, testable headless (Godot 4.7 --headless).
@@ -76,6 +105,9 @@ const EVT := {
 ## Keys de métrica (enviadas a M104 como tipo "metrica" con datos estructurado).
 const METRIC_TIME_TO_FIRST_DISCOVERY := "time_to_first_discovery"
 const METRIC_TIME_TO_FIRST_TRAVEL := "time_to_first_travel"
+const METRIC_TIME_TO_FIRST_HOUSE := "time_to_first_house"
+const METRIC_TIME_TO_FIRST_PUZZLE := "time_to_first_puzzle"
+const METRIC_TIME_TO_FIRST_SEAL := "time_to_first_seal"
 const METRIC_SESSION_DURATION := "session_duration"
 
 ## Tipos que Telemetry envía a M104 (mantiene la agregación de M104 limpia).
@@ -149,12 +181,17 @@ func esta_opt_in() -> bool:
 func establecer_opt_in(estado: bool) -> void:
 	if estado == opt_in:
 		return
+	# iter. 7 — BUG corregido: `_finalizar_sesion()` debe correr MIENTRAS opt_in
+	# sigue en true. `_duracion_sesion_seg()`, `enviar_evento()` y
+	# `_registrar_metrica()` filtran con `if not opt_in: return`; con el orden
+	# anterior (opt_in = false primero) `session_ended` y `session_duration`
+	# NUNCA se registraban al apagar la telemetria.
+	if not estado:
+		_finalizar_sesion()
 	opt_in = estado
 	_persistir_opt_in()
 	if estado:
 		_iniciar_sesion()
-	else:
-		_finalizar_sesion()
 	_emitir_opt_out_a_analytics()
 	cambio_opt_in.emit(opt_in)
 	GameLogger.info("Telemetry: opt-in = %s" % estado, GameLogger.Category.ANALYTICS)
@@ -277,6 +314,7 @@ func track_resource_first_collected(recurso: String) -> void:
 func track_house_first_built() -> void:
 	if _track_first(&"casa", EVT.HOUSE_FIRST_BUILT):
 		_registrar_metrica_hasta(&"discovery", METRIC_TIME_TO_FIRST_DISCOVERY)
+		_registrar_metrica_hasta(&"casa", METRIC_TIME_TO_FIRST_HOUSE)
 
 func track_npc_first_interaction(npc_id: String) -> void:
 	if _track_first(&"npc", EVT.NPC_FIRST_INTERACTION, {"npc_id": npc_id}):
@@ -285,14 +323,16 @@ func track_npc_first_interaction(npc_id: String) -> void:
 func track_puzzle_first_completed(puzzle_id: String) -> void:
 	if _track_first(&"puzzle", EVT.PUZZLE_FIRST_COMPLETED, {"puzzle_id": puzzle_id}):
 		_registrar_metrica_hasta(&"discovery", METRIC_TIME_TO_FIRST_DISCOVERY)
+		_registrar_metrica_hasta(&"puzzle", METRIC_TIME_TO_FIRST_PUZZLE)
 
 func track_seal_first_obtained(sello_id: String) -> void:
 	if _track_first(&"sello", EVT.SEAL_FIRST_OBTAINED, {"sello_id": sello_id}):
 		_registrar_metrica_hasta(&"discovery", METRIC_TIME_TO_FIRST_DISCOVERY)
+		_registrar_metrica_hasta(&"sello", METRIC_TIME_TO_FIRST_SEAL)
 
 func track_travel_first_completed(origen: String, destino: String) -> void:
-	_track_first(&"viaje", EVT.TRAVEL_FIRST_COMPLETED, {"origen": origen, "destino": destino})
-	_registrar_metrica_hasta(&"travel", METRIC_TIME_TO_FIRST_TRAVEL)
+	if _track_first(&"viaje", EVT.TRAVEL_FIRST_COMPLETED, {"origen": origen, "destino": destino}):
+		_registrar_metrica_hasta(&"travel", METRIC_TIME_TO_FIRST_TRAVEL)
 
 func track_island_first_discovered(isla_id: String) -> void:
 	if _track_first(&"isla", EVT.ISLAND_FIRST_DISCOVERED, {"isla_id": isla_id}):
@@ -342,6 +382,13 @@ func complete_puzzle(puzzle_id: String) -> void:
 	if inicio != -1:
 		var tiempo_seg := int((Time.get_ticks_msec() - inicio) / 1000.0)
 		enviar_evento(EVT.PUZZLE_FIRST_COMPLETED, {"puzzle_id": puzzle_id, "tiempo_seg": tiempo_seg})
+		_registrar_metrica_hasta(&"discovery", METRIC_TIME_TO_FIRST_DISCOVERY)
+		_registrar_metrica_hasta(&"puzzle", METRIC_TIME_TO_FIRST_PUZZLE)
+	# iter. 7 — `solicitar_encuesta` estaba DECLARADA pero NUNCA se emitia: la UI
+	# de M53 no tenia forma de enterarse de que debia mostrar la encuesta de
+	# dificultad. Se emite al COMPLETAR (no solo el primer puzzle: la encuesta es
+	# por puzzle, y `track_difficulty_perceived` es el lado que la recibe).
+	solicitar_encuesta.emit(puzzle_id)
 	_puzzle_inicio.erase(puzzle_id)
 	if _puzzle_inicio.is_empty():
 		_puzzle_check_timer.stop()
@@ -374,17 +421,28 @@ func exit_zone(zone_id: String) -> void:
 		var tiempo_seg := int((Time.get_ticks_msec() - inicio) / 1000.0)
 		enviar_evento(EVT.ZONE_EXITED, {"zone_id": zone_id, "tiempo_seg": tiempo_seg})
 		_zona_duracion[zone_id] = _zona_duracion.get(zone_id, 0) + tiempo_seg
+		# iter. 6 — El punto natural de decisión es la SALIDA. Sin esta llamada,
+		# al salir de la última zona se detiene `_zone_check_timer` y
+		# `_on_zone_check` deja de correr → `zone_ignored` NUNCA se emitía en
+		# runtime (el test lo enmascaraba llamando `_on_zone_check()` a mano).
+		_evaluar_zona_ignorada(zone_id)
 	if _zona_entrada.is_empty():
 		_zone_check_timer.stop()
 
 func _on_zone_check() -> void:
-	# Zonas visitadas < 1 minuto → "ignorada". Se reporta UNA vez por zona por
-	# sesión (deduplicación vía _zona_ignorada_reportada); luego se limpia el
-	# acumulado para no re-emitir en cada tick del timer.
 	for id in _zona_duracion.keys():
-		var acumulado: int = _zona_duracion[id]
-		if acumulado < int(ZONA_IGNORADA_SEGUNDOS):
-			if not _zona_ignorada_reportada.has(id):
-				_zona_ignorada_reportada[id] = true
-				enviar_evento("zone_ignored", {"zone_id": id, "tiempo_acumulado_seg": acumulado})
-			_zona_duracion.erase(id)
+		_evaluar_zona_ignorada(id)
+
+## Evalúa si una zona debe reportarse como "ignorada" (< 1 min de exploración).
+## Reporta UNA vez por zona por sesión (dedup `_zona_ignorada_reportada`) y limpia
+## el acumulado al reportar; las zonas con acumulado >= umbral NO se limpian
+## (contrato verificado por test_telemetria_iter5).
+func _evaluar_zona_ignorada(zone_id: String) -> void:
+	if not _zona_duracion.has(zone_id):
+		return
+	var acumulado: int = _zona_duracion[zone_id]
+	if acumulado < int(ZONA_IGNORADA_SEGUNDOS):
+		if not _zona_ignorada_reportada.has(zone_id):
+			_zona_ignorada_reportada[zone_id] = true
+			enviar_evento(EVT.ZONE_IGNORED, {"zone_id": zone_id, "tiempo_acumulado_seg": acumulado})
+		_zona_duracion.erase(zone_id)

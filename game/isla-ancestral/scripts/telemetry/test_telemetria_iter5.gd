@@ -15,10 +15,18 @@
 # Ejecutar: godot --headless --path game/isla-ancestral --script res://scripts/telemetry/test_telemetria_iter5.gd
 extends SceneTree
 
+## Piso de chequeos: si un SCRIPT ERROR aborta parte de la suite, el
+## conteo real cae por debajo y `_resumen()` lo denuncia (fail-safe).
+const CHECKS_MINIMOS := 10
 var _fallos := 0
 var _checks := 0
 var _ad = null
 var _stub = null
+## iter. 7 — guardian anti-falso-verde: `_ejecutar` marca `_terminado` al
+## llegar al final. Si un SCRIPT ERROR lo aborta, `_terminado` queda en
+## false y `_resumen()` (encolado APARTE, no al final de `_ejecutar`) lo
+## denuncia con EXIT 1 en vez de imprimir un "0 fallos" falso.
+var _terminado := false
 
 ## Stub de Analytics que cuenta llamadas (no escribe disco).
 class _AnalyticsStub:
@@ -32,7 +40,9 @@ class _AnalyticsStub:
 
 func _initialize() -> void:
 	print("=== TEST TELEMETRIA M105 ITER5 ===")
+	# Dos deferred INDEPENDIENTES: si `_ejecutar` aborta, `_resumen` igual corre.
 	call_deferred("_ejecutar")
+	call_deferred("_resumen")
 
 func _ejecutar() -> void:
 	_ad = root.get_node_or_null("TelemetryDirector")
@@ -49,6 +59,16 @@ func _ejecutar() -> void:
 	_test_metricas_dedup()
 	_test_optin_persistente()
 
+	_terminado = true
+
+## Unico punto de terminacion. Detecta el aborto silencioso de `_ejecutar`.
+func _resumen() -> void:
+	if not _terminado:
+		_fallos += 1
+		print("[FAIL] la suite NO llego al final (aborto silencioso)")
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d): aborto silencioso dentro de un bloque" % [_checks, CHECKS_MINIMOS])
 	print("=== TEST TELEMETRIA M105 ITER5: %d fallo(s) de %d cheque(s) ===" % [_fallos, _checks])
 	quit(1 if _fallos > 0 else 0)
 

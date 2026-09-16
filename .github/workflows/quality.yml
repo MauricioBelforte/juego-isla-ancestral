@@ -234,6 +234,24 @@ jobs:
           # guarda anti-falso-verde probada por INYECCION (un aborto silencioso en
           # un bloque hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
           godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1
+          # M105 Telemetria de gameplay. iter. 7: las 3 metricas
+          # `time_to_first_*` que faltaban (house/puzzle/seal — el diseno pide 5
+          # y solo existian 2 + session_duration) + fix de `establecer_opt_in`
+          # (apagaba `opt_in` ANTES de `_finalizar_sesion()`, y esa ruta filtra
+          # con `if not opt_in: return` -> `session_ended`/`session_duration`
+          # NUNCA salian al cerrar sesion). iter7 = 22 checks, 10 bloques con
+          # marcador _fin() y guardian anti-falso-verde probado por INYECCION con
+          # 4 sondas (aborto de bloque, aborto de _ejecutar sin cuelgue, aborto
+          # dentro de un helper y aborto inline).
+          # Se cablean los 4 suites del modulo. OJO: un SCRIPT ERROR dentro de un
+          # helper NO detiene `_ejecutar` (medido en la sonda C), asi que el flag
+          # `_terminado` no basta -> base/iter5/iter6 llevan ademas un PISO de
+          # chequeos (CHECKS_MINIMOS) que hace fallar la suite si un aborto se
+          # come checks. Los pisos son: base 16, iter5 10, iter6 11.
+          godot --headless --script scripts/telemetry/test_telemetry.gd 2>&1
+          godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1
+          godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1
+          godot --headless --script scripts/telemetry/test_telemetria_iter7.gd 2>&1
           echo "All validation tests completed"
 
   legal-tools:

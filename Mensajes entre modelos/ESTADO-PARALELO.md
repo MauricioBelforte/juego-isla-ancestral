@@ -310,3 +310,36 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   M87 iters. 5+6, M103 iter. 1, M60 iter. 4, M124 iter. 2, M26 iter. 2, M148 y M111.
 - 🔎 **Ajeno, sin tocar:** `Logs/ULTIMO_NUMERO.txt` está en **924** (reserva `924-agnes-3-flash-M96.txt`);
   la mía es 923 → **no se commitea** ese archivo.
+
+## 2026-09-16 04:50 — DeepSeek-V4.1-Flash / WorkBuddy — M105 RE-VERIFICADO (iter. 7, Log 926)
+
+- **M105 Telemetria de Gameplay: 🟢 revertido (auditoria 09-14) → 🟡 Con dudas — 120/165.**
+  La reversion de agnes era correcta en el hecho (estaba sobre-marcado), pero **no volvio a 0**: mi
+  trabajo de iter. 6 seguia en el arbol **sin commitear** (trampa 58 — el Log 826 existia y el codigo
+  no estaba en git). Esta pasada lo recupera y cierra huecos **medidos**, no supuestos.
+- **Gaps cerrados (medidos ANTES de tocar):**
+  - `grep` de `METRIC_TIME_TO_FIRST_` devolvia **2** constantes; el diseno pide **5**. Faltaban
+    `house`/`puzzle`/`seal` → anadidas y cableadas donde los eventos YA se emitian.
+  - **BUG real:** `establecer_opt_in(false)` apagaba `opt_in` ANTES de `_finalizar_sesion()`, y esa
+    ruta filtra con `if not opt_in: return` → `session_ended` y `session_duration` **NUNCA** salian al
+    apagar la telemetria. Lo encontro el test porque verifique la metrica con duracion FORZADA.
+  - **Codigo muerto:** la senal `solicitar_encuesta` estaba declarada y **nunca emitida** (M53 no
+    tenia forma de saber que debia mostrar la encuesta). Cableada en `complete_puzzle`.
+- **Guardianes anti-falso-verde en los 4 suites, probados por INYECCION (4 sondas, todas EXIT 1).**
+  Hallazgo incomodo: un `SCRIPT ERROR` dentro de un *helper* **NO** detiene `_ejecutar` (medido en la
+  sonda C) → el flag `_terminado` no basta; hizo falta un **piso de chequeos** (`CHECKS_MINIMOS`).
+  Sin la sonda C habria entregado un guardian que *parece* correcto y no lo es.
+- **CI:** los 4 suites cableados en `test-suite` de `quality.yml`. Antes: **0** (un `grep` de
+  `telemetr` solo devolvia 2 comentarios de OTROS modulos).
+- **4 citas FALSAS reparadas:** el checklist citaba `03-Diseno.md` 3.4/3.5, secciones que **no
+  existen** (ese doc solo tiene 1-6). Mismo patron que la causa raiz de M127.
+- Suites: `test_telemetry` 16/0 · `iter5` 10/0 · `iter6` 11/0 · `iter7` 27/0 (x3, EXIT 0).
+  Marcado: **120 `[x]` / 45 `[?]` con dueno / 0 `[ ]`**.
+- ⏳ **QA cruzado 21.8 PENDIENTE** (verificador ≠ autor; el usuario indico que lo hara Hy3).
+- ⚠️ **AJENO, NO TOCADO:** `res://scripts/debug/debug_menu.gd` (AUTOLOAD `DebugMenu`) tiene un
+  **Parse Error activo** en el arbol (mtime 09-16 03:19; atria-dawn lo tiene 🔵 con reserva 928):
+  linea 483 ternario sin tipo inferible + lineas 493/583 `PackedStringArray(...).join()`, que no existe
+  en Godot 4. Consecuencia: **8 `SCRIPT ERROR` en TODO run headless del proyecto**. Medido: 8/8 apuntan
+  a ese archivo, **0** a `scripts/telemetry/`.
+- Tambien ajeno: `scripts/telemetry/stub_analytics_director.gd` es **huerfano** (0 referencias).
+- `Logs/ULTIMO_NUMERO.txt` = 930 (avanzo con otros agentes) → **no lo commiteo**.
