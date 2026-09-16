@@ -1,0 +1,147 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 87-Localizacion (87)
+
+# Checklist personal tareas — 87-Localizacion
+
+> Extraídas del `05-Checklist.md` del módulo (0 pendientes / 7 dudas de 136 ítems, iter. 6 Log 920). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [x] T-001 Documentar el problema de los textos hardcodeados en español en todo el juego [S]
+- [x] T-002 Documentar el problema de los textos dinámicos (cantidades, fechas, números) [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-003 Definir el objetivo de internacionalización (i18n) del proyecto [S]
+- [x] T-004 Definir el objetivo de localización (l10n) del proyecto [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-005 Definir los idiomas iniciales: español (nativo) e inglés [S]
+- [x] T-006 Definir el alcance del módulo: UI (M53), diálogos (M21), subtítulos (M44) [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-007 Definir el alcance del módulo: fechas, números, plurales y placeholders [M]
+- [x] T-008 Definir las exclusiones del módulo (assets con texto, servicios online, CJK) [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-009 Definir las restricciones (Godot 4.x, GDScript, offline, sin hardcodeo) [S]
+- [x] T-010 Definir los criterios de aceptación del módulo [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-011 Definir el idioma por defecto español al primer inicio [S]
+- [x] T-012 Diseñar el selector de idioma (español, inglés) en configuración [S] — API lista: set_locale_persistente/locales_disponibles/get_locale_display_name (UI M53)
+- [x] T-013 Implementar el cambio de idioma en vivo sin reiniciar el juego [M]
+- [x] T-014 Persistir la elección de idioma entre sesiones (M60) [M] — glm-5.3-flash 2026-09-01: _persistir_locale vía DataStore M60 (sección "general" nueva en GestorConfig); testeado round-trip
+- [x] T-015 Cargar el catálogo del idioma activo al iniciar el juego [M]
+- [x] T-016 Precargar los catálogos de todos los idiomas soportados [M]
+- [x] T-017 Implementar tr de clave con fallback a español [M]
+- [x] T-018 Implementar la función de conveniencia tr_key(module, section, key, params) [S]
+- [x] T-019 Implementar placeholders {clave} con format_text [M]
+- [x] T-020 Implementar plurales con msgid_plural y tr(..., plural) [M]
+- [x] T-021 Implementar formato de fecha por idioma (d/m/Y vs m/d/Y) [M]
+- [x] T-022 Implementar formato de número por idioma (1.234,56 vs 1,234.56) [M]
+- [x] T-023 Implementar la sugerencia del idioma del SO en el primer arranque con confirmación [M] — _sugerir_locale_so() aplica y persiste la sugerencia en primer arranque; confirmación UI con M53
+- [x] T-024 Crear es.po completo como fuente de verdad (msgid = clave, msgstr = texto español) [M]
+- [x] T-025 Crear en.po con todas las claves traducidas al inglés [C] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-026 Mostrar los nombres de idiomas en su propio idioma ("Español", "English") [S]
+- [x] T-027 Emitir la señal locale_changed para re-traducción de UI [M]
+- [x] T-028 Implementar la validación de catálogos (claves faltantes, sobrantes, formato) [M]
+- [x] T-029 Soportar entradas con contexto gettext para desambiguar términos [S] — tr_ctx(contexto, ...) con clave compuesta "contexto|key" (testeado == tr_key compuesta)
+- [x] T-030 Mostrar el idioma activo en el menú de debug (M110) [S] — get_locale_display_name() expuesto (M110 lo consume)
+- [x] T-031 Definir el fallback por clave: idioma activo -> es.po -> clave literal [M]
+- [x] T-032 Evitar texto vacío en la UI ante cualquier fallo de traducción [S]
+- [x] T-033 Garantizar traducción sin penalización perceptible de rendimiento (cache) [M] — cache del núcleo verificada: 200 traducciones < 20 ms (testeado)
+- [x] T-034 Garantizar funcionamiento 100% offline sin servicios externos [S] — todo local (TranslationServer + .po + config local), sin servicios
+- [x] T-035 Garantizar escalabilidad: idioma nuevo = .po nuevo + entrada en selector [S] — LOCALES_SOPORTADOS + .po en res://locales/ + entrada en selector (sin tocar lógica)
+- [x] T-036 Agrupar y documentar las claves por módulo del juego [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-037 Verificar compatibilidad de caracteres de es/en con las fuentes de M88 [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [?] T-038 Respetar los ajustes de accesibilidad de texto de M58 sin romper layouts [M] — iter. 6 (Log 920): [?] con dueño M53 — ver 05-Checklist
+- [x] T-039 Tolerar textos +30% más largos en inglés dentro de los layouts [C] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-040 Mantener consistencia de términos con un glosario de traducción [M] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [?] T-041 Garantizar revisión humana de las traducciones antes del lanzamiento [C] — iter. 6 (Log 920): [?] con dueño revisión humana (usuario) — ver 05-Checklist
+- [x] T-042 Mantener los .po en UTF-8 sin BOM y saltos LF [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-043 Prohibir texto visible hardcodeado fuera de los catálogos [M]
+- [x] T-044 Garantizar compatibilidad de los .po con Poedit y herramientas gettext [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-045 Diseñar la arquitectura con LocalizationManager como autoload [M]
+- [x] T-046 Diseñar la capa LocaleUtils para fechas, números y nombres de idiomas [M]
+- [x] T-047 Diseñar el TranslationValidator para validación de catálogos [M]
+- [x] T-048 Diseñar la ubicación de catálogos en res://locales/ [S]
+- [x] T-049 Diseñar el selector de idioma dentro de la pantalla de configuración [M]
+- [x] T-050 Definir la convención de claves MODULO.SECCION.CLAVE [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-051 Definir la nomenclatura UPPER_SNAKE para las claves [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-052 Definir prefijos de módulo según CHECKLIST-GLOBAL [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-053 Definir el flujo de arranque del juego con el idioma activo [M] — _restaurar_locale_guardado: M60 → sugerencia SO → es (testeado arranque simulado)
+- [x] T-054 Definir el flujo de cambio de idioma en vivo [M]
+- [x] T-055 Definir el flujo de texto con placeholders [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-056 Definir el flujo de plurales con msgid_plural [M]
+- [x] T-057 Definir el flujo de agregar un idioma nuevo sin tocar código [M]
+- [x] T-058 Diseñar la cache de traducciones frecuentes [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-059 Diseñar la separación de responsabilidades: LocalizationManager desacoplado de la UI [S]
+- [x] T-060 Diseñar el contrato de la señal locale_changed [S]
+- [x] T-061 Definir la estrategia de precarga de catálogos en la pantalla de carga (M63) [M]
+- [x] T-062 Documentar los contratos de integración de entrada y salida del módulo [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-063 Integrar M21: líneas de diálogo traducidas por claves [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-064 Integrar M21: opciones de diálogo traducidas por claves [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-065 Integrar M21: placeholders de diálogos (nombres, cantidades) resueltos [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-066 Integrar M21: manejar el cambio de idioma con un diálogo activo [M]
+- [x] T-067 Integrar M44: subtítulos mostrados en el idioma activo [M]
+- [x] T-068 Integrar M44: subtítulos independientes del idioma (atributo aparte en settings) [S]
+- [?] T-069 Integrar M53: labels de UI usando tr_key en vez de texto estático [M] — iter. 6 (Log 920): [?] con dueño M53 — ver 05-Checklist
+- [x] T-070 Integrar M53: dropdown de idioma en la pantalla de configuración [M]
+- [x] T-071 Integrar M53: re-traducción de la UI completa al emitir locale_changed [M]
+- [?] T-072 Integrar M53: tooltips y descripciones traducidos [S] — iter. 6 (Log 920): [?] con dueño M53 — ver 05-Checklist
+- [x] T-073 Integrar M88: verificar cobertura de caracteres es/en en las fuentes [M] — glm-5.3-flash 2026-09-02 (iter. 3, Log 488): validar_cobertura_idiomas() en FontCatalog (testeado es/en/ru)
+- [x] T-074 Integrar M88: FontLoader selecciona fuente según el idioma activo [S] — fuente_para_idioma(locale) en FontCatalog (testeado es→texto_cozy)
+- [?] T-075 Integrar M58: el tamaño de texto ajustable no rompe la traducción [M] — iter. 6 (Log 920): [?] con dueño M53 — ver 05-Checklist
+- [x] T-076 Integrar M60: el idioma se lee y guarda en la configuración del jugador [M]
+- [x] T-077 Integrar M63: catálogos precargados durante la pantalla de carga [M]
+- [x] T-078 Integrar M110: comando de debug para forzar el idioma en desarrollo [S]
+- [?] T-079 Integrar módulos de contenido (M14-M39): items, misiones, tiendas y diarios con claves M87 [C] — iter. 6 (Log 920): [?] con dueño M14-M39 (26 módulos de contenido) — ver 05-Checklist
+- [?] T-080 Integrar M29/M30: fechas y horas mostradas en formato localizado [M] — iter. 6 (Log 920): [?] con dueño M29/M30 — ver 05-Checklist
+- [x] T-081 Manejar catálogo del idioma seleccionado inexistente (fallback español) [M]
+- [x] T-082 Manejar clave ausente en todos los catálogos (clave literal visible) [M]
+- [x] T-083 Manejar clave ausente solo en inglés (fallback automático a español) [M]
+- [x] T-084 Manejar archivo .po con error de sintaxis sin impedir el arranque [M] — iter. 4 (deepseek-v4-flash, Log 639): _parse_po degrada con gracia (msgstr[ sin índice / índice > 7 omitidos + warning, resto del catálogo parsea); test_localizacion_iter4 CP-01..03 0 fallos
+- [x] T-085 Manejar placeholder mal formado ({sin_cierre) sin romper la UI [S] — iter. 4: format_text cuenta { vs } y deja literal + warning dev; test iter4 CP-04 0 fallos
+- [x] T-086 Manejar placeholder sin valor en params (se muestra literal + warning dev) [S] — iter. 4: test iter4 CP-05 0 fallos
+- [x] T-087 Manejar params con claves extra no usadas por el texto [S] — iter. 4: test iter4 CP-06 0 fallos
+- [x] T-088 Manejar texto largo en inglés que desborda botones y labels [C] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-089 Manejar palabras largas sin espacios en textos localizados [M] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-090 Manejar plurales con n = 0, 1, 2, números negativos y decimales [M]
+- [x] T-091 Manejar fechas con orden distinto (d/m/Y vs m/d/Y) sin ambigüedad [M] — iter. 4: format_date con relleno (07/03/0026 es / 08/17/2026 en) testeado CP-14
+- [x] T-092 Manejar números con separadores distintos sin pérdida de precisión [M] — iter. 4: format_number 0 / negativos / 1e6 (1.234,56 es / 1,234.56 en) testeado CP-12
+- [x] T-093 Manejar acentos y caracteres especiales en nombres de catálogos [S]
+- [x] T-094 Manejar el cambio de idioma durante un diálogo activo [M]
+- [x] T-095 Manejar el cambio de idioma durante un subtítulo en curso [S]
+- [x] T-096 Manejar un valor de idioma corrupto en el guardado (default español) [M]
+- [x] T-097 Cache de traducciones de claves calientes (HUD, menús) [M] — iter. 2 (glm): _cache "clave|n"; 200 traducciones < 20 ms testeado
+- [x] T-098 Evitar el parseo repetido de los .po en runtime [S] — núcleo: _parse_po solo en _cargar_catalogos (boot); cache posterior
+- [x] T-099 Precargar catálogos durante la pantalla de carga en vez de al primer uso [M]
+- [x] T-100 Evitar allocaciones en los paths calientes de UI al traducir [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-101 Usar StringName para las claves frecuentes [S]
+- [x] T-102 Cargar los catálogos de idiomas no usados de forma lazy si pesan mucho [S]
+- [x] T-103 Limitar la re-traducción a los nodos visibles al cambiar de idioma [M]
+- [x] T-104 Reusar labels existentes sin crear nodos al cambiar de idioma [M]
+- [x] T-105 Verificar el frame budget con catálogos grandes en el profiler [M]
+- [x] T-106 Evitar re-traducir nodos desactivados o fuera de pantalla [S] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-107 Crear 01-Requerimientos.md con problema, objetivo, alcance y restricciones [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-108 Crear 01-Requerimientos.md con RF1-RF24 y RN1-RN12 [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-109 Crear 02-Analisis.md con el análisis de idiomas del juego [S]
+- [x] T-110 Crear 02-Analisis.md con el flujo de traducción de contenido [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-111 Crear 02-Analisis.md con el análisis claves vs strings literales [M]
+- [x] T-112 Crear 02-Analisis.md con placeholders, plurales, fechas y números [M]
+- [x] T-113 Crear 02-Analisis.md con pruebas de localización y herramientas Godot [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-114 Crear 02-Analisis.md con alternativas y decisiones documentadas [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-115 Crear 03-Diseno.md con arquitectura, componentes y flujos [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-116 Crear 04-Codigo.md con archivos previstos marcados pendientes de implementación [M]
+- [x] T-117 Firmar los 5 archivos con la firma estándar (Modelo/Plataforma) [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-118 Crear el checklist con 120+ ítems todos completados [M] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-119 Diseñar el plan de testings del módulo (06-Plan-Testings.md) [M] — iter. 4 (deepseek-v4-flash, Log 639): 06-Plan-Testings.md creado (5 secciones, 15 casos CP-01..CP-15)
+- [x] T-120 Probar arranque en español por defecto en el primer inicio [S] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-121 Probar el cambio a inglés en vivo con UI abierta [M] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-122 Probar la persistencia del idioma tras reiniciar el juego [M]
+- [x] T-123 Probar que todas las claves del código existen en es.po [M] — evidencia iter. 4: es.po 64 claves (fuente), validar_catalogos 0 faltantes (CP-09/CP-10)
+- [x] T-124 Probar que todas las claves del código existen en en.po [M] — evidencia iter. 4: en.po 64 claves, 0 faltantes vs es (CP-09/CP-10)
+- [x] T-125 Probar el fallback de claves sin traducción al español [M]
+- [x] T-126 Probar placeholders reemplazados correctamente en diálogos y UI [M] — iter. 4: format_text con placeholders repetidos/múltiples/extra (CP-06/CP-07 0 fallos)
+- [x] T-127 Probar que un placeholder mal usado no rompe la UI [S] — iter. 4: CP-04/CP-05 0 fallos
+- [x] T-128 Probar plurales en español e inglés con distintos valores de n [M]
+- [x] T-129 Probar números formateados según el idioma activo [M]
+- [x] T-130 Probar fechas formateadas según el idioma activo [M]
+- [x] T-131 Probar visualmente textos largos en inglés sin desbordes [C] — iter. 6 (Log 920): sincronizado con 05-Checklist
+- [x] T-132 Probar que un catálogo corrompido no impide arrancar el juego [M]
+- [x] T-133 Probar que un catálogo faltante no impide arrancar el juego [M]
+- [x] T-134 Probar el cambio de idioma con un diálogo activo (M21) [M]
+- [x] T-135 Probar la cobertura de caracteres de es/en en las fuentes (M88) [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
+- [x] T-136 Probar el rendimiento de re-traducción del HUD completo en 60 fps [C] — iter. 6 (Log 920): sincronizado con 05-Checklist

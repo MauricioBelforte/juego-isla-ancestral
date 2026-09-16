@@ -221,3 +221,53 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `Logs/918-M103-Logging-Iter1_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M103 pendiente** (verificador ≠ autor). También sigue pendiente el de
   M60 iter. 4. Siguiente en cola propia: **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
+
+## 2026-09-15 20:42 — DeepSeek-V4.1-Flash / WorkBuddy — M87 CERRADO (iter. 6, Log 920)
+
+- **M87 Localizacion: iter. 6 cerrada | fila 87: `120/136` → `129/136`**, fecha 2026-09-15. Los **16 `[ ]`
+  propios** quedaron resueltos: 9 `[x]` con evidencia medida y 7 `[?]` con dueño nombrado. **`0 [ ]`.**
+- **El hallazgo que habilitó la iteración:** la medición de texto **funciona en headless**
+  (`TextServerAdvanced` + `ThemeDB.fallback_font`; `"Jugar"` a 16 px = 41×23). Eso convirtió tres ítems
+  marcados "requiere QA visual" en verificables y repetibles en CI. Medición sin motor gráfico: sí;
+  aprobación estética: no, y no se pretende.
+- **3 herramientas nuevas:** `AnalizadorLayout` (medición real: `medir`, `cabe`, `razon_expansion`,
+  `palabras_largas`, `partir_palabra` con cortes de ancho cero, `truncar_con_puntos`, `estrategia`,
+  `analizar`), `Glosario` + `data/localization/glosario.json` (17 términos canónicos es/en con variantes)
+  y `RetraductorUI` (re-traducción selectiva: decisión PURA `debe_retraducir()` + recorrido del árbol).
+  `RetraductorUI` es el **primer consumidor real** de la señal `locale_changed`. `localization_manager.gd`
+  ganó `catalogo()` y `claves_catalogo()` (solo lectura).
+- **Cifras medidas (no estimadas):** expansión es→en media **0,934** / máx **1,529** (5 de 170 claves sobre
+  el +30 %); desborde del contenedor de referencia 220×40 → **63 de 170** a 16 px, **0** a 12 px, **97** a
+  24 px; palabra sin espacios 237 px → **219 px** con `partir_palabra`; HUD de 120 labels re-traducido en
+  **1,4-2,0 ms** (presupuesto 16,67 ms/frame); glosario **0 inconsistencias**.
+- **Suite nueva `test_localizacion_iter6.gd`:** 11 bloques (A-K) + guardián anti-falso-verde con watchdog,
+  **82 checks / 0 fallos ×3**, EXIT 0, 0 `SCRIPT ERROR`. Desglose MEDIDO: A9+B5+C8+D9+E5+F6+G6+H6+I12+J9+K6
+  = 81, +1 del guardián = **82**. **Guardián probado por inyección** (abortar K → `no terminaron: ["K"]`,
+  82→76, **EXIT 1**).
+- **REGRESIÓN REAL encontrada y reparada:** `test_validador_po_m87.gd` (iter. 5) **estaba en rojo** al
+  empezar. 13 claves `M68.*` que la iter. 2 de M68 (Log 910) añadió tienen el `msgstr` **idéntico** es/en y
+  la regla P5 lo reporta como "sin traducir". No son un olvido: son textos **sin palabras que traducir**
+  (plantilla de cartel `→ {destino} · {metros} m` ×11, código de divisa `AO`, `{h} h {m} min`).
+  **Arreglo sin debilitar la regla:** marcador estándar de traductor gettext `#. no-traducir: <motivo>` en
+  `ValidadorPO`, con las claves exentas listadas aparte en **`exentas_p5`** (auditable, no agujero negro).
+  13 entradas marcadas en ambos catálogos. Probado por inyección en las dos direcciones. **No se tocó M68.**
+- **BUG-042 registrado (dueño M46/M88):** 3 de las 4 fuentes de `assets/fonts/` son **páginas HTML 404**
+  guardadas con extensión `.ttf` (`magic 0a0a0a0a`, 99,8 % bytes imprimibles). El fallo es **silencioso**
+  porque `load()` no devuelve `null` sino un `FontFile` con métricas en cero. Detalle en `11-BUGS.md`.
+- **Doc corregida, no solo ampliada:** §2, §4, §5 y §8 de `04-Codigo.md` describían archivos *previstos*
+  bajo `res://localizacion/` marcados "Pendiente de implementación" cuando el módulo lleva implementado
+  desde la iter. 1; ninguno de esos nombres existe. Reescritas con las rutas reales.
+- **6/6 suites en verde** (0 fallos, 0 `SCRIPT ERROR`) y **cableadas en `quality.yml`**: antes solo estaba
+  `scripts/localizacion/test_localizacion_m87.gd`; ninguna suite de `scripts/localization/` estaba en CI.
+  YAML validado (6 jobs).
+- **Trampas nuevas (55-57, al skill `isla-ancestral-ciclo-modulo`):** (55) `Font.get_string_size(t, align,
+  ancho, size)` con ancho POSITIVO **trunca y devuelve la altura de UNA línea** → para texto con salto usar
+  `get_multiline_string_size()`; medido `"Settings of the island game"` a 60 px: `(55,23)` vs `(67,92)`
+  — este error **se cometió y se corrigió** en esta misma iteración (la primera versión de `medir()`
+  reportaba 0 desbordes: falso verde, misma forma que la trampa 51). (56) `FileAccess` **no** tiene `.eof()`
+  en Godot 4 → `get_length()`+`get_position()`; el aborto silencioso con `extends SceneTree` **cuelga el
+  árbol** (se mató a los 2 m 7 s). (57) `load()` de una fuente corrupta **no** devuelve `null`.
+- Reserva `920-DSV41F-M87.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **921** (tomado por otro agente; mi Log
+  es el 920). Detalle: `Logs/920-M87-Localizacion-Iter6_2026-09-15.md`.
+- ⏳ **QA cruzado §21.8 de M87 iter. 6 pendiente** (verificador ≠ autor). Sigue pendiente también el de
+  **M103 iter. 1** y **M60 iter. 4**.
