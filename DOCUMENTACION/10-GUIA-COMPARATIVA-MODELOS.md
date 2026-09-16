@@ -1096,7 +1096,7 @@ La comunicación oficial (28-08-2026) presenta a Hy4 preview como un modelo *"pa
 
 - `https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/` — comunicado oficial de Tencent (28-08-2026): parámetros, contexto, posicionamiento, prueba ciega interna, escenarios de productividad, precio. **Fuente primaria de esta sección.**
 - `https://github.com/Tencent-Hunyuan/Hy4-preview` — repositorio oficial (referenciado en búsqueda; no inspeccionado en detalle en esta sesión).
-- Evidencia propia: `Logs/679-workbuddy-M16-3D.md`, `DOCUMENTACION/09-GUIA-BLENDER.md` §3 (E-90, E-91), `tools/mcp/blender-mcp/scripts-reutilizables/herramienta_util.py`.
+- Evidencia propia: `Logs/737-workbuddy-M16-3D.md`, `DOCUMENTACION/09-GUIA-BLENDER.md` §3 (E-90, E-91), `tools/mcp/blender-mcp/scripts-reutilizables/herramienta_util.py`.
 
 ### 15.8 Firma
 
