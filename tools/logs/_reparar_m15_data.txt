@@ -1,0 +1,37 @@
+47	- [x] Definir herramientas requeridas para cada recurso (hacha, pico, manos, hoz) [S] *(QA iter 6 — resource_manager.gd:82-156: hacha/pico/manos (`&""`) implementados; la hoz no existe todavía como dato — el mecanismo es 100% data-driven, agregarla es solo datos)*
+48	- [x] Definir golpes requeridos por dureza (madera 2-3, roca 3-4, mineral 4-6) [S] *(QA iter 6 — madera_roble 3, piedra_caliza 2, fibra 1, baya 1, mineral_cobre 4, fragmento_ancestral 6; coherente con la dureza declarada)*
+49	- [ ] Definir iconos de cada recurso para inventario (carpeta `UI/Resources/`) [M]
+55	- [x] Clase `ResourceDefinition` extendida de Resource con `class_name` [S] *(QA iter 6 — resource_definition.gd:9-10)*
+56	- [?] Campos exportados: def_id, display_name, categoría, rareza, icono [S] *(QA iter 6 — 4 de 5 implementados, resource_definition.gd:14-17; FALTA `icono` — delegado a M46/M53 arte+UI)*
+57	- [x] Campos exportados: herramienta_requerida, golpes_requeridos [S] *(QA iter 6 — resource_definition.gd:18-19)*
+58	- [x] Lista de DropEntry exportada (item_id, cant_min, cant_max, probabilidad) [M] *(QA iter 6 — resource_definition.gd:20 + resource_drop_entry.gd:12-15)*
+59	- [x] Campos de respawn: temporada_respawn, evento_respawn [S] *(QA iter 6 — resource_definition.gd:21-22)*
+60	- [x] Campo de región requerida para spawn natural [S] *(QA iter 6 — resource_definition.gd:23 `region`, usada por mining_manager para la zona)*
+61	- [x] Meshes por estado: intacto, dañado, agotado [M] *(QA iter 6 — resource_node.gd:95-125 `_crear_presentacion` crea los 3 meshes con escala/rotación por estado + M47 lowpoly si el autoload está; placeholders procedurales, assets finales M45/M47)*
+62	- [x] `es_herramienta_valida(herr_id)` para validación de golpe [S] *(QA iter 6 — implementada como `es_accesible_con(herramienta_id, manos_ok)` resource_definition.gd:49-52; usada por ResourceManager.recibir_golpe_en_nodo y mining_manager)*
+63	- [x] `es_estacional_de(nueva_estacion)` para respawn [S] *(QA iter 6 — implementada como `get_respawn_estacion_int()` resource_definition.gd:29-37 + filtrado en `ResourceNode.evaluar_respawn(dia, estacion)`; manifiesto "otono"/"otoño")*
+64	- [ ] `validar_definicion()` con errores accionables en editor [S]
+88	- [x] Auto-recogida al contacto: `Inventario.agregar_items(entrega)` [S] *(QA iter 6 — `entregar_drops()` resource_manager.gd:189-201 entrega vía agregar_items; verificado por test_m15_iter6: count_item sube tras agotar el nodo)*
+89	- [x] Señal `drop_recogido(item_id, cantidad)` para UI/logs [S] *(QA iter 6 — resource_manager.gd:13 declarada + emit en línea 196 dentro de entregar_drops)*
+90	- [x] Drops de calidad: herramienta mejorada aumenta cant máx (drop mejorado) [M] *(QA iter 6 — `requiere_herramienta_mejorada` en ResourceDropEntry + filtrado `drops_para_herramienta(mejorada)` resource_definition.gd:41-47; el multiplicador RF6 (x2) vive en M35 `_calcular_drops_con_rf6`)*
+91	- [ ] Saqueo múltiple: liena de drops animada sin solapamiento visual [S]
+98	- [x] Generación de candidatos determinista por seed de partida [M] *(QA iter 6 — `_offsets_candidatos()` resource_spawner.gd:69-76 es determinista por `def_id.hash()`; LIMITACIÓN honesta: no usa el seed global de M29 — los mismos nodos salen en cada partida)*
+99	- [ ] Validación de candidato: caminable, sin superposición, dentro de límites [M]
+115	- [x] Sin agotamiento irreparable: todo recurso tiene fecha de reaparición [S] *(QA iter 6 — `recibir_golpe_en_nodo()` siempre llama `programar_respawn()` al agotar, resource_manager.gd:287-289; los 6 tipos tienen `dias_para_respawn` >= 1)*
+116	- [ ] Fuentes alternativas registradas por recurso (anti-bloqueo QA) [S]
+124	- [x] Consumo de señal `golpe_aplicado(pos, herramienta_id, fuerza)` [S] *(QA iter 6 — ver D.71: cableado directo M13→ResourceManager; la señal existe en resource_node.gd:16 y se emite en aplicar_golpe:52)*
+125	- [x] Validación de herramienta por definición (manos si campo vacío) [S] *(QA iter 6 — `es_accesible_con(&"", true) == true` resource_definition.gd:49-51; verificado por test_m15_iter6 "fibra con herramienta vacía aceptada")*
+126	- [ ] Multiplicador de daño por fuerza (pico mejorado rompe más rápido) [S]
+128	- [x] Feedback de herramienta incorrecta sin penalización [S] *(QA iter 6 — `aplicar_golpe` devuelve false sin consumir durabilidad; mining_manager emite `mina_extraccion_fallida` con la razón; test_recursos_persistencia:111 "golpe con hacha en piedra falla")*
+129	- [x] Durabilidad de la herramienta no afecta drop (decisión cozy) [S] *(QA iter 6 — `generar_drops()` resource_manager.gd:171-186 no consulta durabilidad; solo herramienta_id + mejorada)*
+130	- [ ] Recolección a dos manos posible con herramientas distintas [S]
+146	- [x] Los drops se entregan con `Inventario.agregar_items(entrega)` [S] *(QA iter 6 — resource_manager.gd:193; verificado por test_m15_iter6 con count_item real del inventario)*
+147	- [x] Mapping ítem = recurso: item_id == def_id en el catálogo de ítems [S] *(QA iter 6 — las definiciones usan `_de("madera_roble", ...)` etc. con item_id == def_id, resource_manager.gd:91-155)*
+148	- [ ] Inventario lleno: excedente redirigido a caja de almacenamiento [M]
+152	- [x] Recursos consumibles (comida) entran al inventario como ítem normal [S] *(QA iter 6 — baya_roja drop item_id "baya_roja"; test_m15_iter6 verifica count_item("baya_roja") sube)*
+153	- [ ] Test: recoger 100 drops con inventario 60% lleno no pierde nada [M]
+158	- [x] `ResourceManager.cantidad_de(def_id)` para consulta de stock [S] *(FIX iter 6 — atria-dawn log 937: ERA UN STUB que devolvía 0 fijo con el comentario falso "el inventario no tiene cantidad_de directo"; Inventario SÍ tiene `count_item()`. Ahora cableado; verificado por test_m15_iter6)*
+159	- [ ] Balance de cantidades centralizado en la definición, no por receta [S]
+175	- [x] Recurso agotado golpeado de nuevo: sin errores, sin drops [S] *(QA iter 6 — `aplicar_golpe` resource_node.gd:47-48 devuelve false si AGOTADO; `recibir_golpe_en_nodo` idem)*
+176	- [x] Golpe en nodo con herramienta incorrecta: feedback, cero daño [S] *(QA iter 6 — resource_node.gd:49-50 + mining_manager.gd:73-75 `razon: herramienta_invalida`)*
+177	- [ ] Spawn fuera de límites de región: rechazado en validación [S]
