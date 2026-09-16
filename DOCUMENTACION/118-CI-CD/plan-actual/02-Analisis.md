@@ -17,7 +17,7 @@
 
 ## 2. Decisiones clave
 
-1. **Godot Build Pipeline personalizado:** En lugar de usar herramientas genéricas, se crearán scripts en Godot Editor (Assets/Editor/BuildScript.cs) que aprovechan la API BuildPipeline.BuildPlayer() con configuraciones específicas del proyecto (resolución, calidad, splash screen cozy).
+1. **Godot Build Pipeline personalizado:** En lugar de usar herramientas genéricas, se crearán scripts en Godot Editor (Assets/Editor/BuildScript.cs _(diseno heredado)_) que aprovechan la API BuildPipeline.BuildPlayer() con configuraciones específicas del proyecto (resolución, calidad, splash screen cozy).
 
 2. **Tests en Edit Mode y Play Mode:** Se ejecutarán tests unitarios en Edit Mode (verificación de funciones puras sin necesidad de entrar en juego) y Play Mode (tests de sistemas integrados). Coverage mínimo del 80% para considerar el build exitoso.
 

@@ -13,7 +13,7 @@
 | `scripts/build_release.ps1` | Script PowerShell: build release Godot | Pendiente de implementación |
 | `tests/run_tests.gd` | Godot script: runners de tests edit-mode y play-mode | Pendiente de implementación |
 
-## 2. API pública prevista (BuildScript.cs)
+## 2. API pública prevista (BuildScript.cs _(diseno heredado)_)
 
 ```csharp
 // Godot Editor script para builds CI/CD
@@ -48,7 +48,7 @@ func _test_save_load() -> void:
 
 ## 3. Pendientes de implementación
 
-- Godot Editor script BuildScript.cs con configuración completa
+- Godot Editor script BuildScript.cs _(diseno heredado)_ con configuración completa
 - GitHub Actions workflow con todos los steps necesarios
 - Scripts PowerShell para builds optimizados
 - Tests unitarios y de integración completos
@@ -69,12 +69,12 @@ func _test_save_load() -> void:
 - Definí la API pública y archivos previstos
 
 ### Lo que NO pude hacer (honestidad obligatoria)
-- No implementé el Godot Editor script BuildScript.cs (pending)
+- No implementé el Godot Editor script BuildScript.cs _(diseno heredado)_ (pending)
 - No creé el GitHub Actions workflow (pending)
 - No creé los scripts de build optimizados (pending)
 
 ### Recomendaciones para el próximo agente
-- Implementar BuildScript.cs en assets/editor/ con BuildPipeline.BuildPlayer
+- Implementar BuildScript.cs _(diseno heredado)_ en assets/editor/ con BuildPipeline.BuildPlayer
 - Crear .github/workflows/ci-cd.yml con steps completos
 - Implementar tests run_tests.gd con coverage mínimo 80%
 - Conectar con M111 para verificación automática de quality

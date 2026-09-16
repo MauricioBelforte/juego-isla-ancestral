@@ -9,7 +9,7 @@
 M117 (Build System) ──► Configuración de Godot (scenes, settings)
                       │
                       ▼
-                      BuildScript (Assets/Editor/BuildScript.cs)
+                      BuildScript (Assets/Editor/BuildScript.cs _(diseno heredado)_)
                       │
               ──► Pipeline CI (GitHub Actions o GitLab CI)
                       │

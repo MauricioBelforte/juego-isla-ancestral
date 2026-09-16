@@ -61,7 +61,7 @@
 
 - [x] BuildValidator con validacion de estructura [M]
 - [x] Datos data-driven: build_targets.json con 4 targets [S]
-- [x] Definir escritura automática en BuildInfo.cs [M]
+- [x] Definir escritura automática en scripts/core/build_info.gd [M]
 - [x] Definir coherencia con M142 (RC) y M143 (release) [M]
 - [x] Definir exposición runtime de versión/canal (M104) [S]
 - [x] Definir verificación de coherencia versión ↔ manifest [S]
@@ -148,7 +148,7 @@
 ## 16. Calidad y cierre
 
 - [x] Definir exclusión de M109/M110/M113 del build release [M]
-- [x] Definir BuildInfo.cs runtime coherente [S]
+- [x] Definir scripts/core/build_info.gd runtime coherente [S]
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [ ] Definir log del módulo en Logs/ [S]
 - [x] Definir feed a M118 (CI) y M142/M143 (release) [S]

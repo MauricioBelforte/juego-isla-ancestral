@@ -31,7 +31,7 @@
 
 ## C. Configuración y Workflow (8)
 
-- [x] Godot Editor script BuildScript.cs configurado [S]
+- [x] Godot Editor script BuildScript.cs _(diseno heredado)_ configurado [S]
 - [ ] Workflow GitHub Actions con steps completos [S]
 - [x] Scripts PowerShell build_dev.ps1 y build_release.ps1 [S]
 - [x] Tests run_tests.gd con cobertura mínima 80% [S]

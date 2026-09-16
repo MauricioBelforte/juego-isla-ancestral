@@ -26,7 +26,7 @@
 
 ## 2. Funciones clave
 ```csharp
-// BuildScript.cs
+// BuildScript.cs _(diseno heredado)_
 public static void DevBuild()      // dev, plataforma actual
 public static void QaBuild()       // qa + símbolos + telemetría
 public static void StagingBuild()  // release channel + firmado

@@ -7,30 +7,30 @@
 ```
 Assets/_Project/Editor/  (asmdef: IslaAncestral.EditorTools)
 ├── Core/
-│   ├── EditorToolBase.cs        ← base de ventanas (undo, save, validación)
-│   └── DataValidator.cs         ← checker global (opción de menú + CI)
+│   ├── EditorToolBase.cs _(diseno heredado)_        ← base de ventanas (undo, save, validación)
+│   └── DataValidator.cs _(diseno heredado)_         ← checker global (opción de menú + CI)
 ├── Editores/
-│   ├── BlockEditorWindow.cs     ← bloques voxel (M08)
-│   ├── BiomeEditorWindow.cs     ← biomas (M09/M10)
-│   ├── NpcEditorWindow.cs       ← NPC (M19)
-│   ├── DialogEditorWindow.cs    ← diálogos (M21)
-│   ├── QuestEditorWindow.cs     ← misiones (M22/23)
-│   ├── RecipeEditorWindow.cs    ← recetas (M16/17)
-│   ├── EconomyEditorWindow.cs   ← precios/moneda (M38)
-│   ├── ShopEditorWindow.cs      ← tiendas (M39)
-│   ├── WeatherEditorWindow.cs   ← clima (M32)
-│   ├── SeasonEditorWindow.cs    ← estaciones (M31)
-│   ├── PuzzleEditorWindow.cs    ← puzzles (M24/25/26)
-│   ├── RuinEditorWindow.cs      ← ruinas (M25)
-│   ├── SpawnEditorWindow.cs     ← spawns (M36/65)
-│   └── MapEditorWindow.cs       ← mapas/islas (M54)
+│   ├── BlockEditorWindow.cs _(diseno heredado)_     ← bloques voxel (M08)
+│   ├── BiomeEditorWindow.cs _(diseno heredado)_     ← biomas (M09/M10)
+│   ├── NpcEditorWindow.cs _(diseno heredado)_       ← NPC (M19)
+│   ├── DialogEditorWindow.cs _(diseno heredado)_    ← diálogos (M21)
+│   ├── QuestEditorWindow.cs _(diseno heredado)_     ← misiones (M22/23)
+│   ├── RecipeEditorWindow.cs _(diseno heredado)_    ← recetas (M16/17)
+│   ├── EconomyEditorWindow.cs _(diseno heredado)_   ← precios/moneda (M38)
+│   ├── ShopEditorWindow.cs _(diseno heredado)_      ← tiendas (M39)
+│   ├── WeatherEditorWindow.cs _(diseno heredado)_   ← clima (M32)
+│   ├── SeasonEditorWindow.cs _(diseno heredado)_    ← estaciones (M31)
+│   ├── PuzzleEditorWindow.cs _(diseno heredado)_    ← puzzles (M24/25/26)
+│   ├── RuinEditorWindow.cs _(diseno heredado)_      ← ruinas (M25)
+│   ├── SpawnEditorWindow.cs _(diseno heredado)_     ← spawns (M36/65)
+│   └── MapEditorWindow.cs _(diseno heredado)_       ← mapas/islas (M54)
 ├── RuntimeTools/                ← (Editor + Runtime, condicional)
-│   ├── TeleportTool.cs          ← teleport por coords/isla/POI
-│   ├── SpawnTool.cs             ← instanciar bajo cursor
-│   ├── InspectorTool.cs         ← inspección de entidad
-│   └── ProfilingTool.cs         ← stats de editor (M61/62)
+│   ├── TeleportTool.cs _(diseno heredado)_          ← teleport por coords/isla/POI
+│   ├── SpawnTool.cs _(diseno heredado)_             ← instanciar bajo cursor
+│   ├── InspectorTool.cs _(diseno heredado)_         ← inspección de entidad
+│   └── ProfilingTool.cs _(diseno heredado)_         ← stats de editor (M61/62)
 └── Generador/
-    └── ContentGenerator.cs      ← seed-driven (M10/25)
+    └── ContentGenerator.cs _(diseno heredado)_      ← seed-driven (M10/25)
 ```
 
 ## 2. Framework de editor (EditorToolBase)

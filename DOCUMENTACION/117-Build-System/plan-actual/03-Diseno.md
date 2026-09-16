@@ -7,7 +7,7 @@
 ```
 Git commit/tag
    → CI (M118) invoca: unity -batchmode -executeMethod BuildScript.Build tipo=... plataforma=... version=...
-   → BuildScript.cs: prepara escenas, define symbols, versión, genera changelog
+   → BuildScript.cs _(diseno heredado)_: prepara escenas, define symbols, versión, genera changelog
    → Tests (M112) + Validators (M109/M113) por tipo de build
    → Packaging (M96 + M116) + Manifest SHA-256
    → Firmado (Windows/macOS) en staging/release

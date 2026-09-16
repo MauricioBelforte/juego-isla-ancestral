@@ -10,7 +10,7 @@ Proyecto Unity single-player con CI (M118), test automático (M112) y gates de c
 
 ### D1: Motor de automatización
 - **A1 (scripts Unity Editor + CI por separado)**: duplicación de lógica.
-- **A2 (BuildScript.cs en Assets/Editor + CI llama Unity CLI)**: un solo lugar de verdad; CI (M118) solo orquesta.
+- **A2 (BuildScript.cs _(diseno heredado)_ en Assets/Editor + CI llama Unity CLI)**: un solo lugar de verdad; CI (M118) solo orquesta.
 - **Decisión:** **A2** — `BuildScript.cs` _(diseno heredado)_ (Assets/Editor) con `-executeMethod` para cada tipo; CI de M118 ejecuta con parámetros (tipo, plataforma, versión).
 
 ### D2: Versionado

@@ -72,7 +72,7 @@
 
 ## E. Diseño de Minimización y Anonimización de Datos
 
-- [x] Diseñar DataSanitizer.cs como servicio central de sanitización
+- [x] Diseñar DataSanitizer.cs _(diseno heredado)_ como servicio central de sanitización
 - [x] Implementar stripping de PII (Personal Identifiable Information) para menores
 - [x] Implementar hashing de identificadores (SHA-256 truncado) para menores
 - [x] Implementar reducción de granularidad de timestamps para menores
