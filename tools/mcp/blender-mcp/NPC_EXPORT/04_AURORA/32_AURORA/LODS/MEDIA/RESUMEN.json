@@ -1,0 +1,163 @@
+{
+  "npc": "SM_NPC_AURORA",
+  "nivel": "MEDIA",
+  "triangulos": 1452,
+  "objetos_mesh": 4,
+  "objetos_con_empty": 5,
+  "materiales_usados": 4,
+  "nombres_materiales": [
+    "MAT_NPC_AURORA_MEDIA_OJOS",
+    "MAT_NPC_AURORA_MEDIA_PELO",
+    "MAT_NPC_AURORA_MEDIA_PIEL",
+    "MAT_NPC_AURORA_MEDIA_ROPA"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.693703830242157,
+    0.4543933868408203,
+    1.8135809898376465
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 1500,
+    "meshes": 4,
+    "materiales": 4
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_AURORA_BODY: 114 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_AURORA_HEAD: 16 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_AURORA_BODY",
+      "triangulos": 534,
+      "vertices": 347,
+      "slots_material": 2,
+      "aristas_frontera": 114,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_AURORA_HEAD",
+      "triangulos": 662,
+      "vertices": 368,
+      "slots_material": 4,
+      "aristas_frontera": 16,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_AURORA_ARM_L",
+      "triangulos": 110,
+      "vertices": 63,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_AURORA_ARM_R",
+      "triangulos": 146,
+      "vertices": 85,
+      "slots_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\SM_NPC_AURORA.blend",
+  "historial_triangulos": [
+    4058,
+    1452
+  ],
+  "ajuste_vertical_m": -0.00014573335647583008,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.005235535619322595,
+    0.0036935496054611525,
+    0.0003992148795953851
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\LODS\\MEDIA\\SM_NPC_AURORA_MEDIA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\LODS\\MEDIA\\SM_NPC_AURORA_MEDIA.glb"
+}

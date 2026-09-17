@@ -1,0 +1,34 @@
+{
+  "npc": "HORNO",
+  "isla": "02_CENIZA",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\SM_NPC_HORNO.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Manchas planas de comida en delantal"
+  ],
+  "triangulos_antes": 3468,
+  "triangulos_despues": 3472,
+  "triangulos_anadidos": 4,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6007753610610962,
+    0.358246773481369,
+    1.863116979598999
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_03\\cap_NPC_HORNO_v3_2026-09-11_20-40-31_5.png"
+  ]
+}

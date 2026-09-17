@@ -1,0 +1,163 @@
+{
+  "npc": "SM_NPC_CORAL",
+  "nivel": "MEDIA",
+  "triangulos": 1452,
+  "objetos_mesh": 4,
+  "objetos_con_empty": 5,
+  "materiales_usados": 4,
+  "nombres_materiales": [
+    "MAT_NPC_CORAL_MEDIA_OJOS",
+    "MAT_NPC_CORAL_MEDIA_PELO",
+    "MAT_NPC_CORAL_MEDIA_PIEL",
+    "MAT_NPC_CORAL_MEDIA_ROPA"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.598081648349762,
+    0.4182136654853821,
+    1.8135809898376465
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 1500,
+    "meshes": 4,
+    "materiales": 4
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_CORAL_BODY: 60 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CORAL_HEAD: 16 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_CORAL_BODY",
+      "triangulos": 530,
+      "vertices": 315,
+      "slots_material": 2,
+      "aristas_frontera": 60,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CORAL_HEAD",
+      "triangulos": 656,
+      "vertices": 373,
+      "slots_material": 3,
+      "aristas_frontera": 16,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CORAL_ARM_L",
+      "triangulos": 140,
+      "vertices": 79,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CORAL_ARM_R",
+      "triangulos": 126,
+      "vertices": 72,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.blend",
+  "historial_triangulos": [
+    3914,
+    1452
+  ],
+  "ajuste_vertical_m": -0.00014573335647583008,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.003697011104437635,
+    0.016774370622368202,
+    0.0003992148795953851
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\LODS\\MEDIA\\SM_NPC_CORAL_MEDIA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\LODS\\MEDIA\\SM_NPC_CORAL_MEDIA.glb"
+}

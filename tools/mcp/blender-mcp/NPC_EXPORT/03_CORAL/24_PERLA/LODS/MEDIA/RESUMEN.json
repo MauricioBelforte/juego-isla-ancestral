@@ -1,0 +1,163 @@
+{
+  "npc": "SM_NPC_PERLA",
+  "nivel": "MEDIA",
+  "triangulos": 1452,
+  "objetos_mesh": 4,
+  "objetos_con_empty": 5,
+  "materiales_usados": 4,
+  "nombres_materiales": [
+    "MAT_NPC_PERLA_MEDIA_OJOS",
+    "MAT_NPC_PERLA_MEDIA_PELO",
+    "MAT_NPC_PERLA_MEDIA_PIEL",
+    "MAT_NPC_PERLA_MEDIA_ROPA"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6045623421669006,
+    0.38786423206329346,
+    2.014925003051758
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 1500,
+    "meshes": 4,
+    "materiales": 4
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_PERLA_BODY: 90 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_PERLA_HEAD: 62 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_PERLA_BODY",
+      "triangulos": 518,
+      "vertices": 324,
+      "slots_material": 2,
+      "aristas_frontera": 90,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_PERLA_HEAD",
+      "triangulos": 676,
+      "vertices": 410,
+      "slots_material": 4,
+      "aristas_frontera": 62,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_PERLA_ARM_L",
+      "triangulos": 98,
+      "vertices": 57,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_PERLA_ARM_R",
+      "triangulos": 160,
+      "vertices": 91,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\SM_NPC_PERLA.blend",
+  "historial_triangulos": [
+    4540,
+    1452
+  ],
+  "ajuste_vertical_m": -0.00014573335647583008,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.00630348937598878,
+    0.011877027514958245,
+    0.0005108387190414274
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\LODS\\MEDIA\\SM_NPC_PERLA_MEDIA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\LODS\\MEDIA\\SM_NPC_PERLA_MEDIA.glb"
+}

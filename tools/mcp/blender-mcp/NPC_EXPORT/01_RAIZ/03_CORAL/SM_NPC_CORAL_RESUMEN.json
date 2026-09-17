@@ -1,0 +1,144 @@
+{
+  "npc": "CORAL",
+  "isla": "RAIZ",
+  "version": 1,
+  "triangulos_total": 3914,
+  "objetos_mesh": 8,
+  "objetos_incluyendo_empty": 9,
+  "materiales_unicos": 6,
+  "altura_anatomia_m": 1.8000000715255737,
+  "dimensiones_con_herramientas_m": [
+    0.6003009676933289,
+    0.41131412982940674,
+    1.8128572702407837
+  ],
+  "factor_horneado": 1.1688311977840076,
+  "pivotes_escalados": true,
+  "doble_cara": true,
+  "animaciones": false,
+  "rig": false,
+  "validacion_visual_manual": "PENDIENTE",
+  "prueba_importacion_godot": "PENDIENTE",
+  "notas_topologia": [
+    "Anatomia, ropa y accesorios contienen islas superpuestas.",
+    "Falda, delantal y casquete tienen fronteras abiertas.",
+    "Recalcular normales no demuestra ausencia de intersecciones."
+  ],
+  "meshes": [
+    {
+      "mesh": "SM_NPC_CORAL_BODY",
+      "triangulos": 898,
+      "vertices": 489,
+      "superficies_material": 3,
+      "aristas_frontera": 56,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_HAIR",
+      "triangulos": 708,
+      "vertices": 379,
+      "superficies_material": 1,
+      "aristas_frontera": 20,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_ARM_L",
+      "triangulos": 380,
+      "vertices": 199,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_ARM_R",
+      "triangulos": 340,
+      "vertices": 179,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_LEG_L",
+      "triangulos": 264,
+      "vertices": 148,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_LEG_R",
+      "triangulos": 264,
+      "vertices": 148,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CORAL_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "superficies_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    }
+  ],
+  "capturas": [],
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.glb",
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.blend"
+}

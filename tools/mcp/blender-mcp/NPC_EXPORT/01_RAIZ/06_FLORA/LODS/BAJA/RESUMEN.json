@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_FLORA",
+  "nivel": "BAJA",
+  "triangulos": 676,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_FLORA_BAJA_GENERAL",
+    "MAT_NPC_FLORA_BAJA_OJOS",
+    "MAT_NPC_FLORA_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6861984729766846,
+    0.4114784598350525,
+    1.8815630674362183
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_FLORA_BODY: 44 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_FLORA_HEAD: 26 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_FLORA_BODY",
+      "triangulos": 190,
+      "vertices": 134,
+      "slots_material": 2,
+      "aristas_frontera": 44,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_FLORA_HEAD",
+      "triangulos": 358,
+      "vertices": 233,
+      "slots_material": 3,
+      "aristas_frontera": 26,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_FLORA_ARMS",
+      "triangulos": 128,
+      "vertices": 92,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\SM_NPC_FLORA.blend",
+  "historial_triangulos": [
+    4016,
+    676
+  ],
+  "ajuste_vertical_m": 0.002458810806274414,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.009084787050898106,
+    0.023881416686733044,
+    0.0026135770144242784
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\LODS\\BAJA\\SM_NPC_FLORA_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\LODS\\BAJA\\SM_NPC_FLORA_BAJA.glb"
+}

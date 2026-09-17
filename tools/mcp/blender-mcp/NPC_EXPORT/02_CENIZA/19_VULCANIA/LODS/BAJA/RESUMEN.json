@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_VULCANIA",
+  "nivel": "BAJA",
+  "triangulos": 676,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_VULCANIA_BAJA_GENERAL",
+    "MAT_NPC_VULCANIA_BAJA_OJOS",
+    "MAT_NPC_VULCANIA_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6133850812911987,
+    0.3957579433917999,
+    1.8136231899261475
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_VULCANIA_BODY: 56 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_VULCANIA_HEAD: 10 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_VULCANIA_BODY",
+      "triangulos": 264,
+      "vertices": 180,
+      "slots_material": 2,
+      "aristas_frontera": 56,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_VULCANIA_HEAD",
+      "triangulos": 300,
+      "vertices": 184,
+      "slots_material": 3,
+      "aristas_frontera": 10,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_VULCANIA_ARMS",
+      "triangulos": 112,
+      "vertices": 78,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\SM_NPC_VULCANIA.blend",
+  "historial_triangulos": [
+    4158,
+    676
+  ],
+  "ajuste_vertical_m": -0.0001304149627685547,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.0053384794897505415,
+    0.00996230688035495,
+    0.0004224930985670152
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\LODS\\BAJA\\SM_NPC_VULCANIA_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\LODS\\BAJA\\SM_NPC_VULCANIA_BAJA.glb"
+}

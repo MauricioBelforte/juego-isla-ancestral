@@ -1,0 +1,31 @@
+{
+  "npc": "GLACIAR",
+  "revision": 2,
+  "isla": "04_AURORA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\SM_NPC_GLACIAR.blend",
+  "detalles_anadidos": [
+    "Hebilla de cinturón",
+    "Refuerzos de herramientas"
+  ],
+  "triangulos_antes": 3720,
+  "triangulos_despues": 3864,
+  "triangulos_anadidos": 144,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.7367453575134277,
+    0.3848327696323395,
+    1.870129942893982
+  ],
+  "dimensiones_despues_m": [
+    0.7367453575134277,
+    0.3848327696323395,
+    1.870129942893982
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

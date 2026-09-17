@@ -1,0 +1,31 @@
+{
+  "npc": "TUFA",
+  "revision": 2,
+  "isla": "02_CENIZA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\SM_NPC_TUFA.blend",
+  "detalles_anadidos": [
+    "Cinturón de frascos",
+    "Bolsillo del delantal"
+  ],
+  "triangulos_antes": 4036,
+  "triangulos_despues": 4340,
+  "triangulos_anadidos": 304,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6007753610610962,
+    0.4294680953025818,
+    1.863116979598999
+  ],
+  "dimensiones_despues_m": [
+    0.6007753610610962,
+    0.4294680953025818,
+    1.863116979598999
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

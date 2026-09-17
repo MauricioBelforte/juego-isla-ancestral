@@ -1,0 +1,144 @@
+{
+  "npc": "ALGA",
+  "isla": "CORAL",
+  "version": 1,
+  "triangulos_total": 4140,
+  "objetos_mesh": 8,
+  "objetos_incluyendo_empty": 9,
+  "materiales_unicos": 6,
+  "altura_anatomia_m": 1.7000000476837158,
+  "dimensiones_con_herramientas_m": [
+    0.5877788066864014,
+    0.4227921962738037,
+    1.7121429443359375
+  ],
+  "factor_horneado": 1.1038961312404516,
+  "pivotes_escalados": true,
+  "doble_cara": true,
+  "animaciones": false,
+  "rig": false,
+  "validacion_visual_manual": "PENDIENTE",
+  "prueba_importacion_godot": "PENDIENTE",
+  "notas_topologia": [
+    "Anatomia, ropa y accesorios contienen islas superpuestas.",
+    "Falda, delantal y casquete tienen fronteras abiertas.",
+    "Recalcular normales no demuestra ausencia de intersecciones."
+  ],
+  "meshes": [
+    {
+      "mesh": "SM_NPC_ALGA_BODY",
+      "triangulos": 770,
+      "vertices": 451,
+      "superficies_material": 4,
+      "aristas_frontera": 120,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_HAIR",
+      "triangulos": 708,
+      "vertices": 379,
+      "superficies_material": 1,
+      "aristas_frontera": 20,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_ARM_L",
+      "triangulos": 718,
+      "vertices": 376,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_ARM_R",
+      "triangulos": 308,
+      "vertices": 162,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_LEG_L",
+      "triangulos": 288,
+      "vertices": 164,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_LEG_R",
+      "triangulos": 288,
+      "vertices": 164,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_ALGA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "superficies_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    }
+  ],
+  "capturas": [],
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\SM_NPC_ALGA.glb",
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\SM_NPC_ALGA.blend"
+}

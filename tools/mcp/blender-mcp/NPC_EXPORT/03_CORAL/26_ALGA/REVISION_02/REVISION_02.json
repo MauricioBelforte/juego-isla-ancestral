@@ -1,0 +1,32 @@
+{
+  "npc": "ALGA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\SM_NPC_ALGA.blend",
+  "detalles_anadidos": [
+    "Collar de conchas",
+    "Pulsera de algas",
+    "Cesta de algas"
+  ],
+  "triangulos_antes": 4140,
+  "triangulos_despues": 4496,
+  "triangulos_anadidos": 356,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1038961348595557,
+  "dimensiones_antes_m": [
+    0.5877788066864014,
+    0.4227921962738037,
+    1.7121429443359375
+  ],
+  "dimensiones_despues_m": [
+    0.5877788066864014,
+    0.4227921962738037,
+    1.7121429443359375
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

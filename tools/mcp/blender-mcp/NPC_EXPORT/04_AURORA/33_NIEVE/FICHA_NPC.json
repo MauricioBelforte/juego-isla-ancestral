@@ -1,0 +1,28 @@
+{
+  "id": 33,
+  "nombre": "Nieve",
+  "slug": "NIEVE",
+  "isla": "AURORA",
+  "sk": 5,
+  "hr": 6,
+  "ey": 2,
+  "altura": 1.7,
+  "camisa": "#EEE9DF",
+  "pantalon": "#EEE9DF",
+  "pelo": "largo",
+  "sombrero": "sanador",
+  "prendas": [
+    "falda",
+    "delantal:verde"
+  ],
+  "herramienta": "pocion",
+  "extras": [
+    "collar",
+    "cruz",
+    "frascos"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

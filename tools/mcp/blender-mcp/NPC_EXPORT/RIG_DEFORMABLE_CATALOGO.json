@@ -1,0 +1,2449 @@
+{
+  "correctos": [
+    {
+      "npc": "LUNA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.blend",
+      "triangulos": 4780,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1605415251347926,
+      "clips": [
+        "IDLE",
+        "CAMINAR",
+        "SALUDO"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 14,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "ROCKY",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\SM_NPC_ROCKY.blend",
+      "triangulos": 3104,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.001",
+        "CAMINAR.001",
+        "SALUDO.001"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 1,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.blend",
+      "triangulos": 3914,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.002",
+        "CAMINAR.002",
+        "SALUDO.002"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CHEF",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\SM_NPC_CHEF.blend",
+      "triangulos": 3828,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.003",
+        "CAMINAR.003",
+        "SALUDO.003"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "FIN",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN\\SM_NPC_FIN.blend",
+      "triangulos": 3670,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.004",
+        "CAMINAR.004"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "FLORA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\SM_NPC_FLORA.blend",
+      "triangulos": 4016,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.005",
+        "CAMINAR.005",
+        "SALUDO.004"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "SAGE",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE\\SM_NPC_SAGE.blend",
+      "triangulos": 4130,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.006",
+        "CAMINAR.006",
+        "SALUDO.005"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "MERC",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC\\SM_NPC_MERC.blend",
+      "triangulos": 3908,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.007",
+        "CAMINAR.007",
+        "SALUDO.006"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "NANA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\SM_NPC_NANA.blend",
+      "triangulos": 4162,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.008",
+        "CAMINAR.008",
+        "SALUDO.007"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 17,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CARP",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\SM_NPC_CARP.blend",
+      "triangulos": 3464,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.009",
+        "CAMINAR.009",
+        "SALUDO.008"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "MELODIA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\SM_NPC_MELODIA.blend",
+      "triangulos": 4306,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.010",
+        "CAMINAR.010",
+        "SALUDO.009"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 13,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "ROCA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\SM_NPC_ROCA.blend",
+      "triangulos": 3710,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.2337662956931374,
+      "clips": [
+        "IDLE.011",
+        "CAMINAR.011"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "BRASA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA\\SM_NPC_BRASA.blend",
+      "triangulos": 4076,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.012",
+        "CAMINAR.012",
+        "SALUDO.010"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "OBSIDIANA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\SM_NPC_OBSIDIANA.blend",
+      "triangulos": 4648,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.013",
+        "CAMINAR.013",
+        "SALUDO.011"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 13,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "TUFA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\SM_NPC_TUFA.blend",
+      "triangulos": 4036,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.014",
+        "CAMINAR.014",
+        "SALUDO.012"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 16,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "HORNO",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\SM_NPC_HORNO.blend",
+      "triangulos": 3468,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.015",
+        "CAMINAR.015",
+        "SALUDO.013"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CENIZA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\SM_NPC_CENIZA.blend",
+      "triangulos": 3604,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.016",
+        "CAMINAR.016",
+        "SALUDO.014"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "PEDRO",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\SM_NPC_PEDRO.blend",
+      "triangulos": 3780,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.017",
+        "CAMINAR.017",
+        "SALUDO.015"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "VULCANIA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\SM_NPC_VULCANIA.blend",
+      "triangulos": 4158,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.018",
+        "CAMINAR.018",
+        "SALUDO.016"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CHISPA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\SM_NPC_CHISPA.blend",
+      "triangulos": 4698,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.019",
+        "CAMINAR.019",
+        "SALUDO.017"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 15,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CALDERA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\SM_NPC_CALDERA.blend",
+      "triangulos": 3914,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.2337662956931374,
+      "clips": [
+        "IDLE.020",
+        "CAMINAR.020"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "HUMO",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO\\SM_NPC_HUMO.blend",
+      "triangulos": 3850,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.021",
+        "CAMINAR.021",
+        "SALUDO.018"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "OLA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\SM_NPC_OLA.blend",
+      "triangulos": 4136,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.022",
+        "CAMINAR.022",
+        "SALUDO.019"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "PERLA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\SM_NPC_PERLA.blend",
+      "triangulos": 4540,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.023",
+        "CAMINAR.023",
+        "SALUDO.020"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 13,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CONCHA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.blend",
+      "triangulos": 3772,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.024",
+        "CAMINAR.024",
+        "SALUDO.021"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "ALGA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\SM_NPC_ALGA.blend",
+      "triangulos": 4140,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.025",
+        "CAMINAR.025",
+        "SALUDO.022"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 9,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "TIBURON",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\SM_NPC_TIBURON.blend",
+      "triangulos": 3766,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.2337662956931374,
+      "clips": [
+        "IDLE.026",
+        "CAMINAR.026"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 8,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+      "triangulos": 3698,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.027",
+        "CAMINAR.027",
+        "SALUDO.023"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "NACAR",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\SM_NPC_NACAR.blend",
+      "triangulos": 3300,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.028",
+        "CAMINAR.028",
+        "SALUDO.024"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 1,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL_ROSA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\SM_NPC_CORAL_ROSA.blend",
+      "triangulos": 3666,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.029",
+        "CAMINAR.029",
+        "SALUDO.025"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 5,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "HIELO",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\SM_NPC_HIELO.blend",
+      "triangulos": 3902,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.030",
+        "CAMINAR.030"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "AURORA",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\SM_NPC_AURORA.blend",
+      "triangulos": 4058,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.031",
+        "CAMINAR.031",
+        "SALUDO.026"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 10,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 11,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "NIEVE",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\SM_NPC_NIEVE.blend",
+      "triangulos": 4162,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1038961348595557,
+      "clips": [
+        "IDLE.032",
+        "CAMINAR.032",
+        "SALUDO.027"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 17,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "GLACIAR",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\SM_NPC_GLACIAR.blend",
+      "triangulos": 3720,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.033",
+        "CAMINAR.033",
+        "SALUDO.028"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 6,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA_FUGAZ",
+      "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\SM_NPC_ESTRELLA_FUGAZ.blend",
+      "triangulos": 3632,
+      "meshes": 8,
+      "huesos": 16,
+      "objetos_con_raiz_y_armature": 10,
+      "factor_anatomico": 1.1688312152763465,
+      "clips": [
+        "IDLE.034",
+        "CAMINAR.034"
+      ],
+      "pesos": {
+        "LEG_R": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "LEG_L": {
+          "islas": 3,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.384185791015625e-07,
+          "influencias_maximas": 2
+        },
+        "HEAD": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "HAIR": {
+          "islas": 2,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "EYES": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 0.0,
+          "influencias_maximas": 1
+        },
+        "BODY": {
+          "islas": 7,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_R": {
+          "islas": 12,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        },
+        "ARM_L": {
+          "islas": 4,
+          "vertices_sin_peso": 0,
+          "error_maximo_normalizacion": 2.9802322387695312e-08,
+          "influencias_maximas": 2
+        }
+      },
+      "root_motion": false,
+      "ik_pies": false,
+      "falda_deformacion_especifica": false,
+      "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+      "aprobacion_visual": "PENDIENTE",
+      "prueba_godot": "PENDIENTE"
+    }
+  ],
+  "errores": []
+}

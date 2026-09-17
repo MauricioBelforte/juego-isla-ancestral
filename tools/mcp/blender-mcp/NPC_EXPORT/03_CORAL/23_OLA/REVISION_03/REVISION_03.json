@@ -1,0 +1,37 @@
+{
+  "npc": "OLA",
+  "isla": "03_CORAL",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\SM_NPC_OLA.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Cuentas añadidas a collar existente: BLANCO",
+    "Pendiente L",
+    "Pendiente R",
+    "Pulsera L: ROSA"
+  ],
+  "triangulos_antes": 4136,
+  "triangulos_despues": 4660,
+  "triangulos_anadidos": 524,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6811167001724243,
+    0.48342859745025635,
+    1.8864935636520386
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_03\\cap_NPC_OLA_v3_2026-09-11_20-41-04_5.png"
+  ]
+}

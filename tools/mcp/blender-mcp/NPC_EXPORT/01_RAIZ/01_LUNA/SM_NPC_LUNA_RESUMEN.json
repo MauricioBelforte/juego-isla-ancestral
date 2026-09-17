@@ -1,0 +1,144 @@
+{
+  "npc": "LUNA",
+  "isla": "RAIZ",
+  "version": 1,
+  "triangulos_total": 4780,
+  "objetos_mesh": 8,
+  "objetos_incluyendo_empty": 9,
+  "materiales_unicos": 6,
+  "altura_anatomia_m": 1.7999999523162842,
+  "dimensiones_con_herramientas_m": [
+    0.6348142623901367,
+    0.5257253050804138,
+    1.7999999523162842
+  ],
+  "factor_horneado": 1.1605415867870914,
+  "pivotes_escalados": true,
+  "doble_cara": true,
+  "animaciones": false,
+  "rig": false,
+  "validacion_visual_manual": "PENDIENTE",
+  "prueba_importacion_godot": "PENDIENTE",
+  "notas_topologia": [
+    "Anatomia, ropa y accesorios contienen islas superpuestas.",
+    "Falda, delantal y casquete tienen fronteras abiertas.",
+    "Recalcular normales no demuestra ausencia de intersecciones."
+  ],
+  "meshes": [
+    {
+      "mesh": "SM_NPC_LUNA_BODY",
+      "triangulos": 1232,
+      "vertices": 759,
+      "superficies_material": 3,
+      "aristas_frontera": 252,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        0.9516440629959106
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4970985651016235
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_HAIR",
+      "triangulos": 744,
+      "vertices": 397,
+      "superficies_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4970985651016235
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_ARM_L",
+      "triangulos": 708,
+      "vertices": 374,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.22050288319587708,
+        0.0,
+        1.3926498889923096
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_ARM_R",
+      "triangulos": 532,
+      "vertices": 284,
+      "superficies_material": 4,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.22050288319587708,
+        0.0,
+        1.3926498889923096
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_LEG_L",
+      "triangulos": 252,
+      "vertices": 147,
+      "superficies_material": 2,
+      "aristas_frontera": 36,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.10212765634059906,
+        0.0,
+        0.9516440629959106
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_LEG_R",
+      "triangulos": 252,
+      "vertices": 147,
+      "superficies_material": 2,
+      "aristas_frontera": 36,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.10212765634059906,
+        0.0,
+        0.9516440629959106
+      ]
+    },
+    {
+      "mesh": "SM_NPC_LUNA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "superficies_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4970985651016235
+      ]
+    }
+  ],
+  "capturas": [],
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.glb",
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.blend"
+}

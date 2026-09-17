@@ -1,0 +1,638 @@
+{
+  "blender": "4.2.23 LTS",
+  "estado": "GENERACION_LOD_PENDIENTE_APROBACION_VISUAL",
+  "archivos_alta_encontrados": 35,
+  "correctos": [
+    {
+      "npc": "LUNA",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "LUNA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ROCKY",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ROCKY",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CHEF",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CHEF",
+      "nivel": "BAJA",
+      "triangulos": 675,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "FIN",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "FIN",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "FLORA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "FLORA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "SAGE",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "SAGE",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "MERC",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "MERC",
+      "nivel": "BAJA",
+      "triangulos": 675,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NANA",
+      "nivel": "MEDIA",
+      "triangulos": 1448,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NANA",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CARP",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CARP",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "MELODIA",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "MELODIA",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ROCA",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ROCA",
+      "nivel": "BAJA",
+      "triangulos": 675,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "BRASA",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "BRASA",
+      "nivel": "BAJA",
+      "triangulos": 674,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "OBSIDIANA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "OBSIDIANA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "TUFA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "TUFA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HORNO",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HORNO",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CENIZA",
+      "nivel": "MEDIA",
+      "triangulos": 1449,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CENIZA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "PEDRO",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "PEDRO",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "VULCANIA",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "VULCANIA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CHISPA",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CHISPA",
+      "nivel": "BAJA",
+      "triangulos": 675,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CALDERA",
+      "nivel": "MEDIA",
+      "triangulos": 1453,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CALDERA",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HUMO",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HUMO",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "OLA",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "OLA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "PERLA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "PERLA",
+      "nivel": "BAJA",
+      "triangulos": 674,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CONCHA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CONCHA",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ALGA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ALGA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "TIBURON",
+      "nivel": "MEDIA",
+      "triangulos": 1451,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "TIBURON",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NACAR",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NACAR",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL_ROSA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "CORAL_ROSA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HIELO",
+      "nivel": "MEDIA",
+      "triangulos": 1453,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "HIELO",
+      "nivel": "BAJA",
+      "triangulos": 674,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "AURORA",
+      "nivel": "MEDIA",
+      "triangulos": 1452,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "AURORA",
+      "nivel": "BAJA",
+      "triangulos": 676,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NIEVE",
+      "nivel": "MEDIA",
+      "triangulos": 1448,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "NIEVE",
+      "nivel": "BAJA",
+      "triangulos": 677,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "GLACIAR",
+      "nivel": "MEDIA",
+      "triangulos": 1453,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "GLACIAR",
+      "nivel": "BAJA",
+      "triangulos": 674,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA_FUGAZ",
+      "nivel": "MEDIA",
+      "triangulos": 1450,
+      "meshes": 4,
+      "materiales": 4,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\LODS\\MEDIA",
+      "aprobacion_visual": "PENDIENTE"
+    },
+    {
+      "npc": "ESTRELLA_FUGAZ",
+      "nivel": "BAJA",
+      "triangulos": 675,
+      "meshes": 3,
+      "materiales": 3,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\LODS\\BAJA",
+      "aprobacion_visual": "PENDIENTE"
+    }
+  ],
+  "errores": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": 15,
+  "nombre": "Tufa",
+  "slug": "TUFA",
+  "isla": "CENIZA",
+  "sk": 2,
+  "hr": 3,
+  "ey": 2,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#758565",
+  "pelo": "mono",
+  "sombrero": "cofia",
+  "prendas": [
+    "falda",
+    "delantal:crema"
+  ],
+  "herramienta": "pocion",
+  "extras": [
+    "bolsillo",
+    "frascos"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

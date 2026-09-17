@@ -1,0 +1,31 @@
+{
+  "npc": "NACAR",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\SM_NPC_NACAR.blend",
+  "detalles_anadidos": [
+    "Cinturón de herramientas",
+    "Guantes de trabajo"
+  ],
+  "triangulos_antes": 3300,
+  "triangulos_despues": 3468,
+  "triangulos_anadidos": 168,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6391115188598633,
+    0.4264475703239441,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6391115188598633,
+    0.4264475703239441,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

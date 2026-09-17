@@ -1,0 +1,31 @@
+{
+  "npc": "HORNO",
+  "revision": 2,
+  "isla": "02_CENIZA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\SM_NPC_HORNO.blend",
+  "detalles_anadidos": [
+    "Bolsillo del delantal",
+    "Manchas de comida"
+  ],
+  "triangulos_antes": 3468,
+  "triangulos_despues": 3624,
+  "triangulos_anadidos": 156,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6007753610610962,
+    0.358246773481369,
+    1.863116979598999
+  ],
+  "dimensiones_despues_m": [
+    0.6007753610610962,
+    0.358246773481369,
+    1.863116979598999
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

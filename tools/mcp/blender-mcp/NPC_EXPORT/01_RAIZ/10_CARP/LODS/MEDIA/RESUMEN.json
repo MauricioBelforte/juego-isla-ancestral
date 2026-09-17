@@ -1,0 +1,163 @@
+{
+  "npc": "SM_NPC_CARP",
+  "nivel": "MEDIA",
+  "triangulos": 1450,
+  "objetos_mesh": 4,
+  "objetos_con_empty": 5,
+  "materiales_usados": 4,
+  "nombres_materiales": [
+    "MAT_NPC_CARP_MEDIA_OJOS",
+    "MAT_NPC_CARP_MEDIA_PELO",
+    "MAT_NPC_CARP_MEDIA_PIEL",
+    "MAT_NPC_CARP_MEDIA_ROPA"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.687995433807373,
+    0.4017273187637329,
+    1.8866393566131592
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 1500,
+    "meshes": 4,
+    "materiales": 4
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_CARP_BODY: 82 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CARP_HEAD: 48 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_CARP_BODY",
+      "triangulos": 472,
+      "vertices": 294,
+      "slots_material": 2,
+      "aristas_frontera": 82,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CARP_HEAD",
+      "triangulos": 704,
+      "vertices": 403,
+      "slots_material": 4,
+      "aristas_frontera": 48,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CARP_ARM_L",
+      "triangulos": 128,
+      "vertices": 72,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CARP_ARM_R",
+      "triangulos": 146,
+      "vertices": 85,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\SM_NPC_CARP.blend",
+  "historial_triangulos": [
+    3464,
+    1450
+  ],
+  "ajuste_vertical_m": -0.00014573335647583008,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.002759736635275788,
+    0.008652984138867828,
+    7.728251181433493e-05
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\LODS\\MEDIA\\SM_NPC_CARP_MEDIA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\LODS\\MEDIA\\SM_NPC_CARP_MEDIA.glb"
+}

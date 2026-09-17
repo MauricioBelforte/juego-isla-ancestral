@@ -1,0 +1,257 @@
+{
+  "npc": "SM_NPC_OLA",
+  "nivel": "ALTA",
+  "triangulos": 4136,
+  "objetos_mesh": 8,
+  "objetos_con_empty": 9,
+  "materiales_usados": 6,
+  "nombres_materiales": [
+    "MAT_NPC_OLA_BOTAS",
+    "MAT_NPC_OLA_CAMISA",
+    "MAT_NPC_OLA_OJOS",
+    "MAT_NPC_OLA_PANTALON",
+    "MAT_NPC_OLA_PELO",
+    "MAT_NPC_OLA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6811167001724243,
+    0.48342859745025635,
+    1.8864935636520386
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 6000,
+    "meshes": 8,
+    "materiales": 6
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_OLA_LEG_R: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_OLA_LEG_L: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_OLA_HAIR: 52 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_OLA_BODY: 120 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_OLA_LEG_R",
+      "triangulos": 288,
+      "vertices": 164,
+      "slots_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_LEG_L",
+      "triangulos": 288,
+      "vertices": 164,
+      "slots_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_HAIR",
+      "triangulos": 788,
+      "vertices": 427,
+      "slots_material": 2,
+      "aristas_frontera": 52,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "slots_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_BODY",
+      "triangulos": 770,
+      "vertices": 451,
+      "slots_material": 4,
+      "aristas_frontera": 120,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_ARM_R",
+      "triangulos": 642,
+      "vertices": 341,
+      "slots_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_ARM_L",
+      "triangulos": 300,
+      "vertices": 157,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ]
+}

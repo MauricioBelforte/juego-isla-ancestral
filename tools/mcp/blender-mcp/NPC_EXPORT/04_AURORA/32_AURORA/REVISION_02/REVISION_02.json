@@ -1,0 +1,32 @@
+{
+  "npc": "AURORA",
+  "revision": 2,
+  "isla": "04_AURORA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\SM_NPC_AURORA.blend",
+  "detalles_anadidos": [
+    "Medalla/brazaletes dorados",
+    "Gafas de latón",
+    "Constelaciones"
+  ],
+  "triangulos_antes": 4058,
+  "triangulos_despues": 4598,
+  "triangulos_anadidos": 540,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6900908350944519,
+    0.4560779333114624,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6900908350944519,
+    0.4560779333114624,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

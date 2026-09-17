@@ -1,0 +1,184 @@
+{
+  "casa": {
+    "id": 5,
+    "nombre": "CASA_VECINO",
+    "L": 7.0,
+    "W": 5.0,
+    "base": 0.15,
+    "pared": 0.12,
+    "altura": 2.6,
+    "cumbrera": 3.2,
+    "puerta_x": 2.5,
+    "puerta_w": 1.0,
+    "puerta_h": 2.1,
+    "alero": 0.3,
+    "max_obj": 14
+  },
+  "piso_z": 0.195,
+  "huecos": [
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "PUERTA",
+      "ancho": 1.0,
+      "alto": 2.1
+    },
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "VENTANA",
+      "ancho": 0.5999999999999996,
+      "alto": 0.5999999999999999
+    },
+    {
+      "grupo": "SM_Pared_Este",
+      "tipo": "VENTANA",
+      "ancho": 0.6000000000000001,
+      "alto": 0.5999999999999999
+    },
+    {
+      "grupo": "SM_Pared_Oeste",
+      "tipo": "VENTANA",
+      "ancho": 0.5999999999999996,
+      "alto": 0.5999999999999999
+    }
+  ],
+  "interacciones": [
+    {
+      "id": "CAMA_0",
+      "mesh": "SM_Cama",
+      "tipo": "CAMA",
+      "posicion_blender": [
+        1.45,
+        1.45,
+        0.195
+      ],
+      "posicion_godot": [
+        1.45,
+        0.195,
+        -1.45
+      ]
+    },
+    {
+      "id": "MESA_1",
+      "mesh": "SM_Mesa_Sillas",
+      "tipo": "MESA",
+      "posicion_blender": [
+        3.8,
+        3.25,
+        0.195
+      ],
+      "posicion_godot": [
+        3.8,
+        0.195,
+        -3.25
+      ]
+    },
+    {
+      "id": "SILLA_2",
+      "mesh": "SM_Mesa_Sillas",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        2.9299999999999997,
+        3.25,
+        0.195
+      ],
+      "posicion_godot": [
+        2.9299999999999997,
+        0.195,
+        -3.25
+      ]
+    },
+    {
+      "id": "SILLA_3",
+      "mesh": "SM_Mesa_Sillas",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        4.67,
+        3.25,
+        0.195
+      ],
+      "posicion_godot": [
+        4.67,
+        0.195,
+        -3.25
+      ]
+    },
+    {
+      "id": "COCINA",
+      "mesh": "SM_Cocina",
+      "tipo": "COCINA",
+      "posicion_blender": [
+        5.9,
+        0.75,
+        0.195
+      ],
+      "posicion_godot": [
+        5.9,
+        0.195,
+        -0.75
+      ]
+    },
+    {
+      "id": "ESTANTE_5",
+      "mesh": "SM_Cocina",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        4.8,
+        0.3,
+        0.195
+      ],
+      "posicion_godot": [
+        4.8,
+        0.195,
+        -0.3
+      ]
+    }
+  ],
+  "avisos": [
+    "Accesorios pequeños y tallas elaboradas pendientes.",
+    "No se ha certificado automaticamente la holgura entre todos los muebles.",
+    "Los conjuntos de muebles comparten mesh; interacciones en JSON.",
+    "LOD reducido destinado al exterior lejano; interior requiere ALTA."
+  ],
+  "niveles": {
+    "ALTA": {
+      "triangulos": 2746,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 8,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        7.600000381469727,
+        7.095000267028809,
+        3.5249998569488525
+      ]
+    },
+    "MEDIA": {
+      "triangulos": 1428,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 6,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        7.600000858306885,
+        7.095000267028809,
+        3.5249998569488525
+      ]
+    },
+    "BAJA": {
+      "triangulos": 660,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 4,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        7.600000858306885,
+        7.095000267028809,
+        3.522855520248413
+      ]
+    }
+  },
+  "capturas": [],
+  "errores": [],
+  "aprobacion_visual": "PENDIENTE",
+  "colisiones": "NO_GENERADAS"
+}

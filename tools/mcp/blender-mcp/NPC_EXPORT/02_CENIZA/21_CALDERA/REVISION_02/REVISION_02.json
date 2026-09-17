@@ -1,0 +1,32 @@
+{
+  "npc": "CALDERA",
+  "revision": 2,
+  "isla": "02_CENIZA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\SM_NPC_CALDERA.blend",
+  "detalles_anadidos": [
+    "Linterna de cinturón",
+    "Silbato",
+    "Refuerzos de guardia"
+  ],
+  "triangulos_antes": 3914,
+  "triangulos_despues": 4014,
+  "triangulos_anadidos": 100,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.2337662956931374,
+  "dimensiones_antes_m": [
+    0.7035403251647949,
+    0.40621235966682434,
+    2.071493625640869
+  ],
+  "dimensiones_despues_m": [
+    0.7035403251647949,
+    0.40621235966682434,
+    2.071493625640869
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

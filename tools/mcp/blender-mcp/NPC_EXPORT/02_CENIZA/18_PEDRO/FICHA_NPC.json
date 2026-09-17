@@ -1,0 +1,27 @@
+{
+  "id": 18,
+  "nombre": "Pedro",
+  "slug": "PEDRO",
+  "isla": "CENIZA",
+  "sk": 5,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#465057",
+  "pantalon": "#465057",
+  "pelo": "corto",
+  "sombrero": "minero",
+  "prendas": [
+    "chaleco:hierro"
+  ],
+  "herramienta": "pico",
+  "extras": [
+    "bolsillo",
+    "guantes",
+    "lampara_cinto"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

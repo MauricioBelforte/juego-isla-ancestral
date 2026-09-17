@@ -1,0 +1,36 @@
+{
+  "npc": "CENIZA",
+  "isla": "02_CENIZA",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\SM_NPC_CENIZA.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Hebilla frontal",
+    "Pulsera L: CUERO",
+    "Pulsera R: CUERO"
+  ],
+  "triangulos_antes": 3604,
+  "triangulos_despues": 3916,
+  "triangulos_anadidos": 312,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6157349348068237,
+    0.3699350953102112,
+    1.8771430253982544
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_03\\cap_NPC_CENIZA_v3_2026-09-11_20-40-35_5.png"
+  ]
+}

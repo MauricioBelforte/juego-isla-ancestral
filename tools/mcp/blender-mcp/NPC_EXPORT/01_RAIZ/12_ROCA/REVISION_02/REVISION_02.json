@@ -1,0 +1,30 @@
+{
+  "npc": "ROCA",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\SM_NPC_ROCA.blend",
+  "detalles_anadidos": [
+    "Silbato",
+    "Refuerzos de botas"
+  ],
+  "triangulos_antes": 3710,
+  "triangulos_despues": 3758,
+  "triangulos_anadidos": 48,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.2337662956931374,
+  "dimensiones_antes_m": [
+    0.7195792198181152,
+    0.40621235966682434,
+    1.974026083946228
+  ],
+  "dimensiones_despues_m": [
+    0.7195792198181152,
+    0.40621235966682434,
+    1.974026083946228
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

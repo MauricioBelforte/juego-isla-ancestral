@@ -1,0 +1,30 @@
+{
+  "npc": "NANA",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\SM_NPC_NANA.blend",
+  "detalles_anadidos": [
+    "Hierbas secas",
+    "Bolsillo mandil"
+  ],
+  "triangulos_antes": 4162,
+  "triangulos_despues": 4346,
+  "triangulos_anadidos": 184,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1038961348595557,
+  "dimensiones_antes_m": [
+    0.557817280292511,
+    0.3829299807548523,
+    1.7596104145050049
+  ],
+  "dimensiones_despues_m": [
+    0.557817280292511,
+    0.3829299807548523,
+    1.7596104145050049
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

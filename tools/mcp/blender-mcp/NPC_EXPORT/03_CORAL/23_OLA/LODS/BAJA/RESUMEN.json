@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_OLA",
+  "nivel": "BAJA",
+  "triangulos": 676,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_OLA_BAJA_GENERAL",
+    "MAT_NPC_OLA_BAJA_OJOS",
+    "MAT_NPC_OLA_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6815428137779236,
+    0.4724566638469696,
+    1.8841522932052612
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_OLA_BODY: 54 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_OLA_HEAD: 26 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_OLA_BODY",
+      "triangulos": 220,
+      "vertices": 159,
+      "slots_material": 2,
+      "aristas_frontera": 54,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_HEAD",
+      "triangulos": 302,
+      "vertices": 193,
+      "slots_material": 3,
+      "aristas_frontera": 26,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OLA_ARMS",
+      "triangulos": 154,
+      "vertices": 104,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\SM_NPC_OLA.blend",
+  "historial_triangulos": [
+    4136,
+    676
+  ],
+  "ajuste_vertical_m": -0.0001304149627685547,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.0006256102741151365,
+    0.022696078926972726,
+    0.0012410699362498266
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\LODS\\BAJA\\SM_NPC_OLA_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\LODS\\BAJA\\SM_NPC_OLA_BAJA.glb"
+}

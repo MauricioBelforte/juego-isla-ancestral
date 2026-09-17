@@ -1,0 +1,257 @@
+{
+  "npc": "SM_NPC_CALDERA",
+  "nivel": "ALTA",
+  "triangulos": 3914,
+  "objetos_mesh": 8,
+  "objetos_con_empty": 9,
+  "materiales_usados": 6,
+  "nombres_materiales": [
+    "MAT_NPC_CALDERA_BOTAS",
+    "MAT_NPC_CALDERA_CAMISA",
+    "MAT_NPC_CALDERA_OJOS",
+    "MAT_NPC_CALDERA_PANTALON",
+    "MAT_NPC_CALDERA_PELO",
+    "MAT_NPC_CALDERA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.7035403251647949,
+    0.40621235966682434,
+    2.071493625640869
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 6000,
+    "meshes": 8,
+    "materiales": 6
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_CALDERA_LEG_R: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CALDERA_LEG_L: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CALDERA_HAIR: 20 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CALDERA_BODY: 56 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_CALDERA_LEG_R",
+      "triangulos": 264,
+      "vertices": 148,
+      "slots_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.10857143253087997,
+        0.0,
+        1.0116883516311646
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_LEG_L",
+      "triangulos": 264,
+      "vertices": 148,
+      "slots_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.10857143253087997,
+        0.0,
+        1.0116883516311646
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5915584564208984
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_HAIR",
+      "triangulos": 624,
+      "vertices": 329,
+      "slots_material": 3,
+      "aristas_frontera": 20,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5915584564208984
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "slots_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5915584564208984
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_BODY",
+      "triangulos": 958,
+      "vertices": 523,
+      "slots_material": 4,
+      "aristas_frontera": 56,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.0116883516311646
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_ARM_R",
+      "triangulos": 436,
+      "vertices": 230,
+      "slots_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.26254546642303467,
+        0.0,
+        1.4805196523666382
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CALDERA_ARM_L",
+      "triangulos": 308,
+      "vertices": 162,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.26254546642303467,
+        0.0,
+        1.4805196523666382
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": 11,
+  "nombre": "Melodía",
+  "slug": "MELODIA",
+  "isla": "RAIZ",
+  "sk": 2,
+  "hr": 4,
+  "ey": 4,
+  "altura": 1.8,
+  "camisa": "#A9564D",
+  "pantalon": "#302E2C",
+  "pelo": "crespo",
+  "sombrero": "copa",
+  "prendas": [
+    "chaleco:negro"
+  ],
+  "herramienta": "cencerro",
+  "extras": [
+    "guantes",
+    "pan"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

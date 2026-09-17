@@ -1,0 +1,27 @@
+{
+  "id": 28,
+  "nombre": "Estrella",
+  "slug": "ESTRELLA",
+  "isla": "CORAL",
+  "sk": 2,
+  "hr": 7,
+  "ey": 5,
+  "altura": 1.8,
+  "camisa": "#39486F",
+  "pantalon": "#39486F",
+  "pelo": "largo",
+  "sombrero": "ninguno",
+  "prendas": [
+    "tunica",
+    "capa:oro"
+  ],
+  "herramienta": "telescopio",
+  "extras": [
+    "collar",
+    "constelaciones"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

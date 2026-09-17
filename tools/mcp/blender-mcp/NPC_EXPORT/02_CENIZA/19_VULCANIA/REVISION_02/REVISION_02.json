@@ -1,0 +1,31 @@
+{
+  "npc": "VULCANIA",
+  "revision": 2,
+  "isla": "02_CENIZA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\SM_NPC_VULCANIA.blend",
+  "detalles_anadidos": [
+    "Broche plateado",
+    "Libros/pergamino con cierres"
+  ],
+  "triangulos_antes": 4158,
+  "triangulos_despues": 4398,
+  "triangulos_anadidos": 240,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6101279258728027,
+    0.3997402787208557,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6545454263687134,
+    0.440022736787796,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

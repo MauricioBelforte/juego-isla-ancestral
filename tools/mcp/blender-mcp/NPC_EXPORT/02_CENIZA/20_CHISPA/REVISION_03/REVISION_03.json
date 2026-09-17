@@ -1,0 +1,37 @@
+{
+  "npc": "CHISPA",
+  "isla": "02_CENIZA",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\SM_NPC_CHISPA.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Monedas de cinturon",
+    "Pulsera L: COBRE",
+    "Pulsera R: COBRE",
+    "Anillo sugerido en mano R"
+  ],
+  "triangulos_antes": 4698,
+  "triangulos_despues": 5310,
+  "triangulos_anadidos": 612,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6323357224464417,
+    0.447662353515625,
+    2.0138962268829346
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_03\\cap_NPC_CHISPA_v3_2026-09-11_20-40-50_5.png"
+  ]
+}

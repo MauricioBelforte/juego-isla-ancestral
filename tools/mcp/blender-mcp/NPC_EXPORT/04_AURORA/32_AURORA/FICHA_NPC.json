@@ -1,0 +1,28 @@
+{
+  "id": 32,
+  "nombre": "Aurora",
+  "slug": "AURORA",
+  "isla": "AURORA",
+  "sk": 1,
+  "hr": 7,
+  "ey": 3,
+  "altura": 1.8,
+  "camisa": "#39486F",
+  "pantalon": "#465057",
+  "pelo": "largo",
+  "sombrero": "ninguno",
+  "prendas": [
+    "tunica",
+    "capa:oro"
+  ],
+  "herramienta": "telescopio",
+  "extras": [
+    "collar",
+    "constelaciones",
+    "lentes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

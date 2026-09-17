@@ -1,0 +1,36 @@
+{
+  "npc": "CORAL_ROSA",
+  "isla": "03_CORAL",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\SM_NPC_CORAL_ROSA.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Cuentas añadidas a collar existente: CREMA",
+    "Pulsera L: ROSA",
+    "Motivo sencillo de coral en vestido"
+  ],
+  "triangulos_antes": 3666,
+  "triangulos_despues": 4104,
+  "triangulos_anadidos": 438,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6555755138397217,
+    0.4242857098579407,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_03\\cap_NPC_CORAL_ROSA_v3_2026-09-11_20-41-37_5.png"
+  ]
+}

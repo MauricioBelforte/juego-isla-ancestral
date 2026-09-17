@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_OBSIDIANA",
+  "nivel": "BAJA",
+  "triangulos": 676,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_OBSIDIANA_BAJA_GENERAL",
+    "MAT_NPC_OBSIDIANA_BAJA_OJOS",
+    "MAT_NPC_OBSIDIANA_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.5567106604576111,
+    0.4528965950012207,
+    1.7767635583877563
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_OBSIDIANA_BODY: 54 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_OBSIDIANA_HEAD: 26 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_OBSIDIANA_BODY",
+      "triangulos": 240,
+      "vertices": 175,
+      "slots_material": 2,
+      "aristas_frontera": 54,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OBSIDIANA_HEAD",
+      "triangulos": 340,
+      "vertices": 218,
+      "slots_material": 3,
+      "aristas_frontera": 26,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "nombre": "SM_NPC_OBSIDIANA_ARMS",
+      "triangulos": 96,
+      "vertices": 66,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\SM_NPC_OBSIDIANA.blend",
+  "historial_triangulos": [
+    4648,
+    676
+  ],
+  "ajuste_vertical_m": 0.0037566423416137695,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.0019838392857238264,
+    0.026439653811054176,
+    0.0027641053039013748
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\LODS\\BAJA\\SM_NPC_OBSIDIANA_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\LODS\\BAJA\\SM_NPC_OBSIDIANA_BAJA.glb"
+}

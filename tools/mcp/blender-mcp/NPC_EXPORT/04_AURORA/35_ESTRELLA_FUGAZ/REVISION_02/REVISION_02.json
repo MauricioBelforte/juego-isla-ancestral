@@ -1,0 +1,32 @@
+{
+  "npc": "ESTRELLA_FUGAZ",
+  "revision": 2,
+  "isla": "04_AURORA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\SM_NPC_ESTRELLA_FUGAZ.blend",
+  "detalles_anadidos": [
+    "Collar oscuro",
+    "Anillo de gema",
+    "Detalles del farol"
+  ],
+  "triangulos_antes": 3632,
+  "triangulos_despues": 3908,
+  "triangulos_anadidos": 276,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6007753610610962,
+    0.45935070514678955,
+    1.8467533588409424
+  ],
+  "dimensiones_despues_m": [
+    0.6007753610610962,
+    0.4909091293811798,
+    1.8467533588409424
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

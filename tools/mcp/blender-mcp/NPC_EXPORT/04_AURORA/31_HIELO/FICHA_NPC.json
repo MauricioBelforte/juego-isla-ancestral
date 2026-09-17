@@ -1,0 +1,28 @@
+{
+  "id": 31,
+  "nombre": "Hielo",
+  "slug": "HIELO",
+  "isla": "AURORA",
+  "sk": 4,
+  "hr": 7,
+  "ey": 3,
+  "altura": 1.7,
+  "camisa": "#39486F",
+  "pantalon": "#39486F",
+  "pelo": "largo",
+  "sombrero": "mago",
+  "prendas": [
+    "tunica",
+    "capa:oro"
+  ],
+  "herramienta": "baculo",
+  "extras": [
+    "collar",
+    "constelaciones",
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

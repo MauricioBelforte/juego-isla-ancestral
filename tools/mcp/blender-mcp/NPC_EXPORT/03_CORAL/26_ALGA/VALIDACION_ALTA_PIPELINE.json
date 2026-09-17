@@ -1,0 +1,257 @@
+{
+  "npc": "SM_NPC_ALGA",
+  "nivel": "ALTA",
+  "triangulos": 4140,
+  "objetos_mesh": 8,
+  "objetos_con_empty": 9,
+  "materiales_usados": 6,
+  "nombres_materiales": [
+    "MAT_NPC_ALGA_BOTAS",
+    "MAT_NPC_ALGA_CAMISA",
+    "MAT_NPC_ALGA_OJOS",
+    "MAT_NPC_ALGA_PANTALON",
+    "MAT_NPC_ALGA_PELO",
+    "MAT_NPC_ALGA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.5877788066864014,
+    0.4227921962738037,
+    1.7121429443359375
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 6000,
+    "meshes": 8,
+    "materiales": 6
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_ALGA_LEG_R: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_ALGA_LEG_L: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_ALGA_HAIR: 20 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_ALGA_BODY: 120 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_ALGA_LEG_R",
+      "triangulos": 288,
+      "vertices": 164,
+      "slots_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_LEG_L",
+      "triangulos": 288,
+      "vertices": 164,
+      "slots_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_HAIR",
+      "triangulos": 708,
+      "vertices": 379,
+      "slots_material": 1,
+      "aristas_frontera": 20,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "slots_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_BODY",
+      "triangulos": 770,
+      "vertices": 451,
+      "slots_material": 4,
+      "aristas_frontera": 120,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_ARM_R",
+      "triangulos": 308,
+      "vertices": 162,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ALGA_ARM_L",
+      "triangulos": 718,
+      "vertices": 376,
+      "slots_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    }
+  ]
+}

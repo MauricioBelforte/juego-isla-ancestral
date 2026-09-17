@@ -1,0 +1,27 @@
+{
+  "npc": "OLA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_02\\SM_NPC_OLA.blend",
+  "triangulos": 4432,
+  "meshes": 8,
+  "huesos": 18,
+  "factor": 1.1688312152763465,
+  "anciano_aprox": false,
+  "animaciones": [
+    "SM_NPC_OLA_ARM_IDLE",
+    "SM_NPC_OLA_ARM_SALUDO"
+  ],
+  "parentesco": {
+    "BODY": "CHEST",
+    "HEAD": "HEAD",
+    "HAIR": "HEAD",
+    "EYES": "HEAD",
+    "ARM_L": "UPPER_ARM.L",
+    "ARM_R": "UPPER_ARM.R",
+    "LEG_L": "THIGH.L",
+    "LEG_R": "THIGH.R"
+  },
+  "nota": "Parentesco rígido a hueso. Sin pesos. Herramientas siguen a la mano.",
+  "intersecciones": "NO_COMPROBADAS",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

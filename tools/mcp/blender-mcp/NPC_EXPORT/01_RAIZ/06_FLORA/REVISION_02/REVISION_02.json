@@ -1,0 +1,31 @@
+{
+  "npc": "FLORA",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\SM_NPC_FLORA.blend",
+  "detalles_anadidos": [
+    "Cesta de semillas",
+    "Semillas",
+    "Tierra en mandil"
+  ],
+  "triangulos_antes": 4016,
+  "triangulos_despues": 4302,
+  "triangulos_anadidos": 286,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6800206303596497,
+    0.4215455651283264,
+    1.8864935636520386
+  ],
+  "dimensiones_despues_m": [
+    0.6800206303596497,
+    0.4215455651283264,
+    1.8864935636520386
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

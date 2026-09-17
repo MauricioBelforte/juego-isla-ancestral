@@ -1,0 +1,70 @@
+{
+  "npc": "ESTRELLA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+  "triangulos": 3698,
+  "meshes": 8,
+  "huesos": 16,
+  "objetos_con_raiz_y_armature": 10,
+  "factor_anatomico": 1.1688312152763465,
+  "clips": [
+    "IDLE.027",
+    "CAMINAR.027",
+    "SALUDO.023"
+  ],
+  "pesos": {
+    "LEG_R": {
+      "islas": 3,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.384185791015625e-07,
+      "influencias_maximas": 2
+    },
+    "LEG_L": {
+      "islas": 3,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.384185791015625e-07,
+      "influencias_maximas": 2
+    },
+    "HEAD": {
+      "islas": 7,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "HAIR": {
+      "islas": 2,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "EYES": {
+      "islas": 4,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "BODY": {
+      "islas": 11,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_R": {
+      "islas": 6,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_L": {
+      "islas": 4,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    }
+  },
+  "root_motion": false,
+  "ik_pies": false,
+  "falda_deformacion_especifica": false,
+  "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+  "aprobacion_visual": "PENDIENTE",
+  "prueba_godot": "PENDIENTE"
+}

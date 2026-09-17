@@ -1,0 +1,604 @@
+{
+  "fecha": "2026-09-11_20-37-52",
+  "blender": "4.2.23 LTS",
+  "fuente": "ALTA_ORIGINAL",
+  "escala_comun": true,
+  "azimut_grados": 30.0,
+  "elevacion_grados": 12.0,
+  "npc": [
+    {
+      "id": "01",
+      "nombre": "LUNA",
+      "etiqueta": "Luna",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6348142623901367,
+        0.5257253050804138,
+        1.7999999523162842
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\01_LUNA.png"
+    },
+    {
+      "id": "02",
+      "nombre": "ROCKY",
+      "etiqueta": "Rocky",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\SM_NPC_ROCKY.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6861019730567932,
+        0.3510579764842987,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\02_ROCKY.png"
+    },
+    {
+      "id": "03",
+      "nombre": "CORAL",
+      "etiqueta": "Coral",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6003009676933289,
+        0.41131412982940674,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\03_CORAL.png"
+    },
+    {
+      "id": "04",
+      "nombre": "CHEF",
+      "etiqueta": "Chef",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\SM_NPC_CHEF.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.4213636517524719,
+        1.863116979598999
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\04_CHEF.png"
+    },
+    {
+      "id": "05",
+      "nombre": "FIN",
+      "etiqueta": "Fin",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN\\SM_NPC_FIN.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6057998538017273,
+        0.5231999158859253,
+        1.8864935636520386
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\05_FIN.png"
+    },
+    {
+      "id": "06",
+      "nombre": "FLORA",
+      "etiqueta": "Flora",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\SM_NPC_FLORA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6800206303596497,
+        0.4215455651283264,
+        1.8864935636520386
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\06_FLORA.png"
+    },
+    {
+      "id": "07",
+      "nombre": "SAGE",
+      "etiqueta": "Sage",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE\\SM_NPC_SAGE.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.5938501954078674,
+        0.4488674998283386,
+        1.7121429443359375
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\07_SAGE.png"
+    },
+    {
+      "id": "08",
+      "nombre": "MERC",
+      "etiqueta": "Merc",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC\\SM_NPC_MERC.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6323357224464417,
+        0.4827272891998291,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\08_MERC.png"
+    },
+    {
+      "id": "09",
+      "nombre": "NANA",
+      "etiqueta": "Nana",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\SM_NPC_NANA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.557817280292511,
+        0.3829299807548523,
+        1.7596104145050049
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\09_NANA.png"
+    },
+    {
+      "id": "10",
+      "nombre": "CARP",
+      "etiqueta": "Carp",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\SM_NPC_CARP.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6861019730567932,
+        0.40523380041122437,
+        1.8864935636520386
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\10_CARP.png"
+    },
+    {
+      "id": "11",
+      "nombre": "MELODIA",
+      "etiqueta": "Melodia",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\SM_NPC_MELODIA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.40601080656051636,
+        1.977662444114685
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\11_MELODIA.png"
+    },
+    {
+      "id": "12",
+      "nombre": "ROCA",
+      "etiqueta": "Roca",
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\SM_NPC_ROCA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7195792198181152,
+        0.40621235966682434,
+        1.974026083946228
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\12_ROCA.png"
+    },
+    {
+      "id": "13",
+      "nombre": "BRASA",
+      "etiqueta": "Brasa",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA\\SM_NPC_BRASA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7365081310272217,
+        0.3655298948287964,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\13_BRASA.png"
+    },
+    {
+      "id": "14",
+      "nombre": "OBSIDIANA",
+      "etiqueta": "Obsidiana",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\SM_NPC_OBSIDIANA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.557817280292511,
+        0.4651962220668793,
+        1.7816883325576782
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\14_OBSIDIANA.png"
+    },
+    {
+      "id": "15",
+      "nombre": "TUFA",
+      "etiqueta": "Tufa",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\SM_NPC_TUFA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.4294680953025818,
+        1.863116979598999
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\15_TUFA.png"
+    },
+    {
+      "id": "16",
+      "nombre": "HORNO",
+      "etiqueta": "Horno",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\SM_NPC_HORNO.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.358246773481369,
+        1.863116979598999
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\16_HORNO.png"
+    },
+    {
+      "id": "17",
+      "nombre": "CENIZA",
+      "etiqueta": "Ceniza",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\SM_NPC_CENIZA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6157349348068237,
+        0.3699350953102112,
+        1.8771430253982544
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\17_CENIZA.png"
+    },
+    {
+      "id": "18",
+      "nombre": "PEDRO",
+      "etiqueta": "Pedro",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\SM_NPC_PEDRO.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7367453575134277,
+        0.3848327696323395,
+        1.870129942893982
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\18_PEDRO.png"
+    },
+    {
+      "id": "19",
+      "nombre": "VULCANIA",
+      "etiqueta": "Vulcania",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\SM_NPC_VULCANIA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6101279258728027,
+        0.3997402787208557,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\19_VULCANIA.png"
+    },
+    {
+      "id": "20",
+      "nombre": "CHISPA",
+      "etiqueta": "Chispa",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\SM_NPC_CHISPA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6323357224464417,
+        0.447662353515625,
+        2.0138962268829346
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\20_CHISPA.png"
+    },
+    {
+      "id": "21",
+      "nombre": "CALDERA",
+      "etiqueta": "Caldera",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\SM_NPC_CALDERA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7035403251647949,
+        0.40621235966682434,
+        2.071493625640869
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\21_CALDERA.png"
+    },
+    {
+      "id": "22",
+      "nombre": "HUMO",
+      "etiqueta": "Humo",
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO\\SM_NPC_HUMO.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6765612363815308,
+        0.38664937019348145,
+        1.8771430253982544
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\22_HUMO.png"
+    },
+    {
+      "id": "23",
+      "nombre": "OLA",
+      "etiqueta": "Ola",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\SM_NPC_OLA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6811167001724243,
+        0.48342859745025635,
+        1.8864935636520386
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\23_OLA.png"
+    },
+    {
+      "id": "24",
+      "nombre": "PERLA",
+      "etiqueta": "Perla",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\SM_NPC_PERLA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.3833116292953491,
+        2.0138962268829346
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\24_PERLA.png"
+    },
+    {
+      "id": "25",
+      "nombre": "CONCHA",
+      "etiqueta": "Concha",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6320985555648804,
+        0.46659740805625916,
+        1.8864935636520386
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\25_CONCHA.png"
+    },
+    {
+      "id": "26",
+      "nombre": "ALGA",
+      "etiqueta": "Alga",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\SM_NPC_ALGA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.5877788066864014,
+        0.4227921962738037,
+        1.7121429443359375
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\26_ALGA.png"
+    },
+    {
+      "id": "27",
+      "nombre": "TIBURON",
+      "etiqueta": "Tiburon",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\SM_NPC_TIBURON.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7035403251647949,
+        0.40621235966682434,
+        2.071493625640869
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\27_TIBURON.png"
+    },
+    {
+      "id": "28",
+      "nombre": "ESTRELLA",
+      "etiqueta": "Estrella",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6900908350944519,
+        0.4560779333114624,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\28_ESTRELLA.png"
+    },
+    {
+      "id": "29",
+      "nombre": "NACAR",
+      "etiqueta": "Nacar",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\SM_NPC_NACAR.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6391115188598633,
+        0.4264475703239441,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\29_NACAR.png"
+    },
+    {
+      "id": "30",
+      "nombre": "CORAL_ROSA",
+      "etiqueta": "Coral Rosa",
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\SM_NPC_CORAL_ROSA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6555755138397217,
+        0.4242857098579407,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\30_CORAL_ROSA.png"
+    },
+    {
+      "id": "31",
+      "nombre": "HIELO",
+      "etiqueta": "Hielo",
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\SM_NPC_HIELO.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.5822592973709106,
+        0.4530884921550751,
+        2.044992446899414
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\31_HIELO.png"
+    },
+    {
+      "id": "32",
+      "nombre": "AURORA",
+      "etiqueta": "Aurora",
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\SM_NPC_AURORA.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6900908350944519,
+        0.4560779333114624,
+        1.8128572702407837
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\32_AURORA.png"
+    },
+    {
+      "id": "33",
+      "nombre": "NIEVE",
+      "etiqueta": "Nieve",
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\SM_NPC_NIEVE.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.557817280292511,
+        0.3829299807548523,
+        1.7596104145050049
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\33_NIEVE.png"
+    },
+    {
+      "id": "34",
+      "nombre": "GLACIAR",
+      "etiqueta": "Glaciar",
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\SM_NPC_GLACIAR.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.7367453575134277,
+        0.3848327696323395,
+        1.870129942893982
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\34_GLACIAR.png"
+    },
+    {
+      "id": "35",
+      "nombre": "ESTRELLA_FUGAZ",
+      "etiqueta": "Estrella Fugaz",
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\SM_NPC_ESTRELLA_FUGAZ.blend",
+      "estado": "RENDERIZADO",
+      "dimensiones_con_accesorios_m": [
+        0.6007753610610962,
+        0.45935070514678955,
+        1.8467533588409424
+      ],
+      "z_minimo_m": 0.0,
+      "meshes": 8,
+      "imagen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\INDIVIDUALES\\35_ESTRELLA_FUGAZ.png"
+    }
+  ],
+  "laminas": [
+    {
+      "isla": "RAIZ",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\CONTACT_RAIZ.png",
+      "personajes": 12,
+      "columnas": 4
+    },
+    {
+      "isla": "CENIZA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\CONTACT_CENIZA.png",
+      "personajes": 10,
+      "columnas": 4
+    },
+    {
+      "isla": "CORAL",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\CONTACT_CORAL.png",
+      "personajes": 8,
+      "columnas": 4
+    },
+    {
+      "isla": "AURORA",
+      "archivo": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\APROBACION\\CONTACT_SHEETS_2026-09-11_20-37-52\\CONTACT_AURORA.png",
+      "personajes": 5,
+      "columnas": 4
+    }
+  ],
+  "errores": [],
+  "aprobacion_visual": "PENDIENTE",
+  "escala_ortografica_m": 2.829556643135018,
+  "objetivo_comun": [
+    -0.1157899871468544,
+    -0.12988734245300293,
+    0.8015782237052917
+  ]
+}

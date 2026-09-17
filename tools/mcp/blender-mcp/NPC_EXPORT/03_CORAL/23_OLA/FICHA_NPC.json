@@ -1,0 +1,26 @@
+{
+  "id": 23,
+  "nombre": "Ola",
+  "slug": "OLA",
+  "isla": "CORAL",
+  "sk": 3,
+  "hr": 1,
+  "ey": 3,
+  "altura": 1.8,
+  "camisa": "#739D9A",
+  "pantalon": "#E9DDC5",
+  "pelo": "largo",
+  "sombrero": "paja_ancho",
+  "prendas": [
+    "falda_larga"
+  ],
+  "herramienta": "red",
+  "extras": [
+    "collar",
+    "sandalias"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

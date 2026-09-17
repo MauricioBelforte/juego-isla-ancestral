@@ -1,0 +1,36 @@
+{
+  "npc": "ESTRELLA_FUGAZ",
+  "isla": "04_AURORA",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\SM_NPC_ESTRELLA_FUGAZ.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Anillo sugerido en mano L",
+    "Dos cuentas oseas de collar",
+    "Remaches del farol existente"
+  ],
+  "triangulos_antes": 3632,
+  "triangulos_despues": 3860,
+  "triangulos_anadidos": 228,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6007753610610962,
+    0.46254396438598633,
+    1.8467533588409424
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_03\\cap_NPC_ESTRELLA_FUGAZ_v3_2026-09-11_20-42-01_5.png"
+  ]
+}

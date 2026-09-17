@@ -1,0 +1,32 @@
+{
+  "npc": "PEDRO",
+  "revision": 2,
+  "isla": "02_CENIZA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\SM_NPC_PEDRO.blend",
+  "detalles_anadidos": [
+    "Linterna de casco/cinturón",
+    "Planos de bolsillo",
+    "Refuerzos"
+  ],
+  "triangulos_antes": 3780,
+  "triangulos_despues": 3908,
+  "triangulos_anadidos": 128,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.7367453575134277,
+    0.3848327696323395,
+    1.870129942893982
+  ],
+  "dimensiones_despues_m": [
+    0.7367453575134277,
+    0.3848327696323395,
+    1.870129942893982
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

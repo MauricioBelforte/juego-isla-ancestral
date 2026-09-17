@@ -1,0 +1,277 @@
+{
+  "casa": {
+    "id": 2,
+    "nombre": "CASA_MEDIANA",
+    "L": 8.0,
+    "W": 6.0,
+    "base": 0.25,
+    "pared": 0.12,
+    "altura": 2.6,
+    "cumbrera": 3.4,
+    "puerta_x": 5.5,
+    "puerta_w": 1.0,
+    "puerta_h": 2.1,
+    "alero": 0.3,
+    "max_obj": 18
+  },
+  "piso_z": 0.295,
+  "huecos": [
+    {
+      "grupo": "SM_Pared_Norte",
+      "tipo": "VENTANA",
+      "ancho": 0.5999999999999999,
+      "alto": 0.6000000000000001
+    },
+    {
+      "grupo": "SM_Pared_Norte",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000007,
+      "alto": 0.6000000000000001
+    },
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "PUERTA",
+      "ancho": 1.0,
+      "alto": 2.1
+    },
+    {
+      "grupo": "SM_Pared_Este",
+      "tipo": "VENTANA",
+      "ancho": 0.5999999999999996,
+      "alto": 0.6000000000000001
+    },
+    {
+      "grupo": "SM_Pared_Oeste",
+      "tipo": "VENTANA",
+      "ancho": 0.5999999999999996,
+      "alto": 0.6000000000000001
+    },
+    {
+      "grupo": "SM_Pared_Interior",
+      "tipo": "PUERTA_INTERIOR",
+      "ancho": 0.9000000000000004,
+      "alto": 2.1
+    }
+  ],
+  "interacciones": [
+    {
+      "id": "MESA_0",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "MESA",
+      "posicion_blender": [
+        2.0,
+        3.45,
+        0.295
+      ],
+      "posicion_godot": [
+        2.0,
+        0.295,
+        -3.45
+      ]
+    },
+    {
+      "id": "SILLA_1",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        0.8800000000000001,
+        3.45,
+        0.295
+      ],
+      "posicion_godot": [
+        0.8800000000000001,
+        0.295,
+        -3.45
+      ]
+    },
+    {
+      "id": "SILLA_2",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        3.12,
+        3.45,
+        0.295
+      ],
+      "posicion_godot": [
+        3.12,
+        0.295,
+        -3.45
+      ]
+    },
+    {
+      "id": "SILLA_3",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        2.0,
+        2.6300000000000003,
+        0.295
+      ],
+      "posicion_godot": [
+        2.0,
+        0.295,
+        -2.6300000000000003
+      ]
+    },
+    {
+      "id": "SILLA_4",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        2.0,
+        4.2700000000000005,
+        0.295
+      ],
+      "posicion_godot": [
+        2.0,
+        0.295,
+        -4.2700000000000005
+      ]
+    },
+    {
+      "id": "COCINA",
+      "mesh": "SM_Cocina_Lena",
+      "tipo": "COCINA",
+      "posicion_blender": [
+        1.2,
+        0.66,
+        0.295
+      ],
+      "posicion_godot": [
+        1.2,
+        0.295,
+        -0.66
+      ]
+    },
+    {
+      "id": "NEVERA",
+      "mesh": "SM_Nevera_Rustica",
+      "tipo": "NEVERA_RUSTICA",
+      "posicion_blender": [
+        3.2,
+        0.58,
+        0.295
+      ],
+      "posicion_godot": [
+        3.2,
+        0.295,
+        -0.58
+      ]
+    },
+    {
+      "id": "ESTANTE_7",
+      "mesh": "SM_Cocina_Lena",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        2.45,
+        0.3,
+        0.295
+      ],
+      "posicion_godot": [
+        2.45,
+        0.295,
+        -0.3
+      ]
+    },
+    {
+      "id": "CAMA_8",
+      "mesh": "SM_Cama_Doble",
+      "tipo": "CAMA",
+      "posicion_blender": [
+        6.45,
+        1.55,
+        0.295
+      ],
+      "posicion_godot": [
+        6.45,
+        0.295,
+        -1.55
+      ]
+    },
+    {
+      "id": "MESA_9",
+      "mesh": "SM_Cama_Doble",
+      "tipo": "MESA",
+      "posicion_blender": [
+        7.55,
+        0.75,
+        0.295
+      ],
+      "posicion_godot": [
+        7.55,
+        0.295,
+        -0.75
+      ]
+    },
+    {
+      "id": "COMODA_10",
+      "mesh": "SM_Comoda",
+      "tipo": "COMODA",
+      "posicion_blender": [
+        7.3,
+        4.65,
+        0.295
+      ],
+      "posicion_godot": [
+        7.3,
+        0.295,
+        -4.65
+      ]
+    }
+  ],
+  "avisos": [
+    "Accesorios pequeños y tallas elaboradas pendientes.",
+    "No se ha certificado automaticamente la holgura entre todos los muebles.",
+    "Los conjuntos de muebles comparten mesh; interacciones en JSON.",
+    "LOD reducido destinado al exterior lejano; interior requiere ALTA."
+  ],
+  "niveles": {
+    "ALTA": {
+      "triangulos": 4300,
+      "meshes": 17,
+      "objetos_con_empty": 18,
+      "materiales": 8,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        8.600000381469727,
+        7.092380523681641,
+        3.825000047683716
+      ]
+    },
+    "MEDIA": {
+      "triangulos": 1420,
+      "meshes": 17,
+      "objetos_con_empty": 18,
+      "materiales": 6,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        8.600001335144043,
+        7.092380523681641,
+        3.8247103691101074
+      ]
+    }
+  },
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_000.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_060.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_120.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_180.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_240.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_EXTERIOR_2026-09-11_19-31-09_300.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_000.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_060.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_120.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_180.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_240.jpg",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA\\CAPTURAS\\CASA_02_INTERIOR_2026-09-11_19-31-09_300.jpg"
+  ],
+  "errores": [
+    {
+      "nivel": "BAJA",
+      "error": "El LOD altero el apoyo de la casa."
+    }
+  ],
+  "aprobacion_visual": "PENDIENTE",
+  "colisiones": "NO_GENERADAS"
+}

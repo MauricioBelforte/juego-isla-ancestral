@@ -1,0 +1,35 @@
+{
+  "npc": "ESTRELLA",
+  "isla": "03_CORAL",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+  "factor_referencia": 1.1688312152763465,
+  "ancho_arquetipo": 1.0,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Runas decorativas de cinturon",
+    "Anillo sugerido en mano L"
+  ],
+  "triangulos_antes": 3698,
+  "triangulos_despues": 3886,
+  "triangulos_anadidos": 188,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.6900908350944519,
+    0.4560779333114624,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_03\\cap_NPC_ESTRELLA_v3_2026-09-11_20-41-27_5.png"
+  ]
+}

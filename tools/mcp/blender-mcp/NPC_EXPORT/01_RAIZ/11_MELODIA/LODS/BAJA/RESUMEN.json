@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_MELODIA",
+  "nivel": "BAJA",
+  "triangulos": 677,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_MELODIA_BAJA_GENERAL",
+    "MAT_NPC_MELODIA_BAJA_OJOS",
+    "MAT_NPC_MELODIA_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6072895526885986,
+    0.4004606604576111,
+    1.9751960039138794
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_MELODIA_BODY: 38 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_MELODIA_HEAD: 17 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_MELODIA_BODY",
+      "triangulos": 222,
+      "vertices": 150,
+      "slots_material": 2,
+      "aristas_frontera": 38,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_MELODIA_HEAD",
+      "triangulos": 333,
+      "vertices": 220,
+      "slots_material": 3,
+      "aristas_frontera": 17,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_MELODIA_ARMS",
+      "triangulos": 122,
+      "vertices": 80,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\SM_NPC_MELODIA.blend",
+  "historial_triangulos": [
+    4306,
+    677
+  ],
+  "ajuste_vertical_m": 0.002458810806274414,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.010842974012777427,
+    0.013669946743346147,
+    0.0012471492332503608
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\LODS\\BAJA\\SM_NPC_MELODIA_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\LODS\\BAJA\\SM_NPC_MELODIA_BAJA.glb"
+}

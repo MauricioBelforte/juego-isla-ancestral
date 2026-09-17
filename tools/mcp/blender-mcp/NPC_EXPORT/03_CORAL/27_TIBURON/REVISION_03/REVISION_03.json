@@ -1,0 +1,36 @@
+{
+  "npc": "TIBURON",
+  "isla": "03_CORAL",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\SM_NPC_TIBURON.blend",
+  "factor_referencia": 1.2337662956931374,
+  "ancho_arquetipo": 1.12,
+  "postura_encorvada": false,
+  "detalles_anadidos": [
+    "Silbato sobre collar existente",
+    "Hebilla frontal",
+    "Dos llaves de cinturon"
+  ],
+  "triangulos_antes": 3766,
+  "triangulos_despues": 3878,
+  "triangulos_anadidos": 112,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.7035403251647949,
+    0.40621235966682434,
+    2.071493625640869
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_03\\cap_NPC_TIBURON_v3_2026-09-11_20-41-22_5.png"
+  ]
+}

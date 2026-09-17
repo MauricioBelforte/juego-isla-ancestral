@@ -1,0 +1,70 @@
+{
+  "npc": "CONCHA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.blend",
+  "triangulos": 3772,
+  "meshes": 8,
+  "huesos": 16,
+  "objetos_con_raiz_y_armature": 10,
+  "factor_anatomico": 1.1688312152763465,
+  "clips": [
+    "IDLE.024",
+    "CAMINAR.024",
+    "SALUDO.021"
+  ],
+  "pesos": {
+    "LEG_R": {
+      "islas": 5,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.384185791015625e-07,
+      "influencias_maximas": 2
+    },
+    "LEG_L": {
+      "islas": 5,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.384185791015625e-07,
+      "influencias_maximas": 2
+    },
+    "HEAD": {
+      "islas": 7,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "HAIR": {
+      "islas": 4,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "EYES": {
+      "islas": 4,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "BODY": {
+      "islas": 5,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_R": {
+      "islas": 3,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_L": {
+      "islas": 5,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    }
+  },
+  "root_motion": false,
+  "ik_pies": false,
+  "falda_deformacion_especifica": false,
+  "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+  "aprobacion_visual": "PENDIENTE",
+  "prueba_godot": "PENDIENTE"
+}

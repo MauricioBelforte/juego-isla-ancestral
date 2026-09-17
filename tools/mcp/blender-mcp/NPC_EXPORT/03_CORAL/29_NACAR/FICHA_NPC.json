@@ -1,0 +1,27 @@
+{
+  "id": 29,
+  "nombre": "Nácar",
+  "slug": "NACAR",
+  "isla": "CORAL",
+  "sk": 3,
+  "hr": 1,
+  "ey": 3,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#E9DDC5",
+  "pelo": "corto",
+  "sombrero": "ninguno",
+  "prendas": [
+    "shorts",
+    "chaleco:cuero"
+  ],
+  "herramienta": "martillo",
+  "extras": [
+    "bolsillo",
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

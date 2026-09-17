@@ -1,0 +1,28 @@
+{
+  "id": 19,
+  "nombre": "Vulcania",
+  "slug": "VULCANIA",
+  "isla": "CENIZA",
+  "sk": 4,
+  "hr": 7,
+  "ey": 4,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#465057",
+  "pelo": "largo",
+  "sombrero": "ninguno",
+  "prendas": [
+    "falda",
+    "chaleco:carbon"
+  ],
+  "herramienta": "pergamino",
+  "extras": [
+    "collar",
+    "guantes",
+    "lentes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

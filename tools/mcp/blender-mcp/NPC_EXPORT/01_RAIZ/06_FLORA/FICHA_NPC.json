@@ -1,0 +1,27 @@
+{
+  "id": 6,
+  "nombre": "Flora",
+  "slug": "FLORA",
+  "isla": "RAIZ",
+  "sk": 2,
+  "hr": 8,
+  "ey": 2,
+  "altura": 1.8,
+  "camisa": "#BC8984",
+  "pantalon": "#758565",
+  "pelo": "trenza",
+  "sombrero": "paja",
+  "prendas": [
+    "delantal:crema"
+  ],
+  "herramienta": "rastrillo",
+  "extras": [
+    "bolsillo",
+    "cinta",
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

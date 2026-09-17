@@ -1,0 +1,31 @@
+{
+  "npc": "CONCHA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.blend",
+  "detalles_anadidos": [
+    "Collar de caracoles",
+    "Pulsera de coral"
+  ],
+  "triangulos_antes": 3772,
+  "triangulos_despues": 3904,
+  "triangulos_anadidos": 132,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6320985555648804,
+    0.46659740805625916,
+    1.8864935636520386
+  ],
+  "dimensiones_despues_m": [
+    0.6320985555648804,
+    0.46659740805625916,
+    1.8864935636520386
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

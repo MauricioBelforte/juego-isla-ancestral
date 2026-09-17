@@ -1,0 +1,27 @@
+{
+  "id": 20,
+  "nombre": "Chispa",
+  "slug": "CHISPA",
+  "isla": "CENIZA",
+  "sk": 2,
+  "hr": 4,
+  "ey": 5,
+  "altura": 1.8,
+  "camisa": "#BD9F59",
+  "pantalon": "#E9DDC5",
+  "pelo": "crespo",
+  "sombrero": "turbante",
+  "prendas": [
+    "tunica",
+    "bombacho",
+    "chaleco:cobre"
+  ],
+  "herramienta": "bolsa",
+  "extras": [
+    "pluma"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

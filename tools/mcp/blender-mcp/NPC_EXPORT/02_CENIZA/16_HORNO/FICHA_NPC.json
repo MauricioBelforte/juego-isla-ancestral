@@ -1,0 +1,26 @@
+{
+  "id": 16,
+  "nombre": "Horno",
+  "slug": "HORNO",
+  "isla": "CENIZA",
+  "sk": 4,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#EEE9DF",
+  "pantalon": "#A7664E",
+  "pelo": "corto",
+  "sombrero": "cofia",
+  "prendas": [
+    "delantal:terracota"
+  ],
+  "herramienta": "cuchara",
+  "extras": [
+    "bolsillo",
+    "pan"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

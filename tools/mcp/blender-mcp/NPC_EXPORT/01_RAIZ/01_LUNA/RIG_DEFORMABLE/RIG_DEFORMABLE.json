@@ -1,0 +1,70 @@
+{
+  "npc": "LUNA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.blend",
+  "triangulos": 4780,
+  "meshes": 8,
+  "huesos": 16,
+  "objetos_con_raiz_y_armature": 10,
+  "factor_anatomico": 1.1605415251347926,
+  "clips": [
+    "IDLE",
+    "CAMINAR",
+    "SALUDO"
+  ],
+  "pesos": {
+    "LEG_R": {
+      "islas": 3,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "LEG_L": {
+      "islas": 3,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "HEAD": {
+      "islas": 7,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "HAIR": {
+      "islas": 7,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "EYES": {
+      "islas": 4,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 0.0,
+      "influencias_maximas": 1
+    },
+    "BODY": {
+      "islas": 14,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_R": {
+      "islas": 9,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    },
+    "ARM_L": {
+      "islas": 10,
+      "vertices_sin_peso": 0,
+      "error_maximo_normalizacion": 2.9802322387695312e-08,
+      "influencias_maximas": 2
+    }
+  },
+  "root_motion": false,
+  "ik_pies": false,
+  "falda_deformacion_especifica": false,
+  "herramientas_pesos": "HEURISTICA_POR_ISLAS",
+  "aprobacion_visual": "PENDIENTE",
+  "prueba_godot": "PENDIENTE"
+}

@@ -1,0 +1,295 @@
+{
+  "tipo": "PRIMERA_PASADA_PROCEDURAL",
+  "blender": "4.2.23 LTS",
+  "capturas_activadas": false,
+  "correctos": [
+    {
+      "id": 1,
+      "nombre": "Luna",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA",
+      "triangulos": 4780,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 2,
+      "nombre": "Rocky",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY",
+      "triangulos": 3104,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 3,
+      "nombre": "Coral",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL",
+      "triangulos": 3914,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 4,
+      "nombre": "Chef",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF",
+      "triangulos": 3828,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 5,
+      "nombre": "Fin",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN",
+      "triangulos": 3670,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 6,
+      "nombre": "Flora",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA",
+      "triangulos": 4016,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 7,
+      "nombre": "Sage",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE",
+      "triangulos": 4130,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 8,
+      "nombre": "Merc",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC",
+      "triangulos": 3908,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 9,
+      "nombre": "Nana",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA",
+      "triangulos": 4162,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 10,
+      "nombre": "Carp",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP",
+      "triangulos": 3464,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 11,
+      "nombre": "Melodía",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA",
+      "triangulos": 4306,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 12,
+      "nombre": "Roca",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA",
+      "triangulos": 3710,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 13,
+      "nombre": "Brasa",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA",
+      "triangulos": 4076,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 14,
+      "nombre": "Obsidiana",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA",
+      "triangulos": 4648,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 15,
+      "nombre": "Tufa",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA",
+      "triangulos": 4036,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 16,
+      "nombre": "Horno",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO",
+      "triangulos": 3468,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 17,
+      "nombre": "Ceniza",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA",
+      "triangulos": 3604,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 18,
+      "nombre": "Pedro",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO",
+      "triangulos": 3780,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 19,
+      "nombre": "Vulcania",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA",
+      "triangulos": 4158,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 20,
+      "nombre": "Chispa",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA",
+      "triangulos": 4698,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 21,
+      "nombre": "Caldera",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA",
+      "triangulos": 3914,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 22,
+      "nombre": "Humo",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO",
+      "triangulos": 3850,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 23,
+      "nombre": "Ola",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA",
+      "triangulos": 4136,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 24,
+      "nombre": "Perla",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA",
+      "triangulos": 4540,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 25,
+      "nombre": "Concha",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA",
+      "triangulos": 3772,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 26,
+      "nombre": "Alga",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA",
+      "triangulos": 4140,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 27,
+      "nombre": "Tiburón",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON",
+      "triangulos": 3766,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 28,
+      "nombre": "Estrella",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA",
+      "triangulos": 3698,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 29,
+      "nombre": "Nácar",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR",
+      "triangulos": 3300,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 30,
+      "nombre": "Coral Rosa",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA",
+      "triangulos": 3666,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 31,
+      "nombre": "Hielo",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO",
+      "triangulos": 3902,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 32,
+      "nombre": "Aurora",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA",
+      "triangulos": 4058,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 33,
+      "nombre": "Nieve",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE",
+      "triangulos": 4162,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 34,
+      "nombre": "Glaciar",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR",
+      "triangulos": 3720,
+      "meshes": 8,
+      "materiales": 6
+    },
+    {
+      "id": 35,
+      "nombre": "Estrella Fugaz",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ",
+      "triangulos": 3632,
+      "meshes": 8,
+      "materiales": 6
+    }
+  ],
+  "errores": [],
+  "pendientes_comunes": [
+    "Aprobacion visual de cada NPC.",
+    "Prueba de importacion en Godot 4.7.2.",
+    "Microaccesorios y bordados particulares.",
+    "Revision de intersecciones y agarres de herramientas.",
+    "Rig, pesos, animaciones y variantes LOD."
+  ]
+}

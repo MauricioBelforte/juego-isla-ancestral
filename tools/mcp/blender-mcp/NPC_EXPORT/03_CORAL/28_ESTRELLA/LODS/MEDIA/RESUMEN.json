@@ -1,0 +1,163 @@
+{
+  "npc": "SM_NPC_ESTRELLA",
+  "nivel": "MEDIA",
+  "triangulos": 1452,
+  "objetos_mesh": 4,
+  "objetos_con_empty": 5,
+  "materiales_usados": 4,
+  "nombres_materiales": [
+    "MAT_NPC_ESTRELLA_MEDIA_OJOS",
+    "MAT_NPC_ESTRELLA_MEDIA_PELO",
+    "MAT_NPC_ESTRELLA_MEDIA_PIEL",
+    "MAT_NPC_ESTRELLA_MEDIA_ROPA"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.693703830242157,
+    0.4543933868408203,
+    1.813492774963379
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 1500,
+    "meshes": 4,
+    "materiales": 4
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_ESTRELLA_BODY: 128 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_ESTRELLA_HEAD: 16 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_ESTRELLA_BODY",
+      "triangulos": 586,
+      "vertices": 380,
+      "slots_material": 2,
+      "aristas_frontera": 128,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ESTRELLA_HEAD",
+      "triangulos": 584,
+      "vertices": 325,
+      "slots_material": 3,
+      "aristas_frontera": 16,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ESTRELLA_ARM_L",
+      "triangulos": 120,
+      "vertices": 68,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_ESTRELLA_ARM_R",
+      "triangulos": 162,
+      "vertices": 93,
+      "slots_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+  "historial_triangulos": [
+    3698,
+    1452
+  ],
+  "ajuste_vertical_m": -5.739927291870117e-05,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.005235535619322595,
+    0.0036935496054611525,
+    0.0003505541958693787
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\LODS\\MEDIA\\SM_NPC_ESTRELLA_MEDIA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\LODS\\MEDIA\\SM_NPC_ESTRELLA_MEDIA.glb"
+}

@@ -1,0 +1,26 @@
+{
+  "id": 25,
+  "nombre": "Concha",
+  "slug": "CONCHA",
+  "isla": "CORAL",
+  "sk": 3,
+  "hr": 2,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#E9DDC5",
+  "pelo": "corto",
+  "sombrero": "paja",
+  "prendas": [
+    "shorts"
+  ],
+  "herramienta": "bolsa",
+  "extras": [
+    "collar",
+    "sandalias"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

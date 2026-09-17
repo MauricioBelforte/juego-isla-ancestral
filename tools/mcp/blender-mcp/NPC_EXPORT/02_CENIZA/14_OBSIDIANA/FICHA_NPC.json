@@ -1,0 +1,28 @@
+{
+  "id": 14,
+  "nombre": "Obsidiana",
+  "slug": "OBSIDIANA",
+  "isla": "CENIZA",
+  "sk": 5,
+  "hr": 7,
+  "ey": 3,
+  "altura": 1.7,
+  "camisa": "#465057",
+  "pantalon": "#858783",
+  "pelo": "largo",
+  "sombrero": "ancho",
+  "prendas": [
+    "tunica"
+  ],
+  "herramienta": "baston",
+  "extras": [
+    "barba",
+    "frascos",
+    "lentes",
+    "mochila"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

@@ -1,0 +1,32 @@
+{
+  "npc": "PERLA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\SM_NPC_PERLA.blend",
+  "detalles_anadidos": [
+    "Collar de perlas",
+    "Anillos sugeridos",
+    "Bordados dorados"
+  ],
+  "triangulos_antes": 4540,
+  "triangulos_despues": 4944,
+  "triangulos_anadidos": 404,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6007753610610962,
+    0.3833116292953491,
+    2.0138962268829346
+  ],
+  "dimensiones_despues_m": [
+    0.6007753610610962,
+    0.3833116292953491,
+    2.0138962268829346
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

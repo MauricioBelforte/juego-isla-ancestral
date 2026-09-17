@@ -1,0 +1,144 @@
+{
+  "npc": "CONCHA",
+  "isla": "CORAL",
+  "version": 1,
+  "triangulos_total": 3772,
+  "objetos_mesh": 8,
+  "objetos_incluyendo_empty": 9,
+  "materiales_unicos": 6,
+  "altura_anatomia_m": 1.8000000715255737,
+  "dimensiones_con_herramientas_m": [
+    0.6320985555648804,
+    0.46659740805625916,
+    1.8864935636520386
+  ],
+  "factor_horneado": 1.1688311977840076,
+  "pivotes_escalados": true,
+  "doble_cara": true,
+  "animaciones": false,
+  "rig": false,
+  "validacion_visual_manual": "PENDIENTE",
+  "prueba_importacion_godot": "PENDIENTE",
+  "notas_topologia": [
+    "Anatomia, ropa y accesorios contienen islas superpuestas.",
+    "Falda, delantal y casquete tienen fronteras abiertas.",
+    "Recalcular normales no demuestra ausencia de intersecciones."
+  ],
+  "meshes": [
+    {
+      "mesh": "SM_NPC_CONCHA_BODY",
+      "triangulos": 578,
+      "vertices": 323,
+      "superficies_material": 3,
+      "aristas_frontera": 56,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_HAIR",
+      "triangulos": 620,
+      "vertices": 341,
+      "superficies_material": 2,
+      "aristas_frontera": 52,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_ARM_L",
+      "triangulos": 638,
+      "vertices": 329,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_ARM_R",
+      "triangulos": 300,
+      "vertices": 157,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_LEG_L",
+      "triangulos": 288,
+      "vertices": 164,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_LEG_R",
+      "triangulos": 288,
+      "vertices": 164,
+      "superficies_material": 3,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "mesh": "SM_NPC_CONCHA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "superficies_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    }
+  ],
+  "capturas": [],
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.glb",
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\SM_NPC_CONCHA.blend"
+}

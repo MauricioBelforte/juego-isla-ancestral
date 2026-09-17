@@ -1,0 +1,26 @@
+{
+  "id": 22,
+  "nombre": "Humo",
+  "slug": "HUMO",
+  "isla": "CENIZA",
+  "sk": 5,
+  "hr": 5,
+  "ey": 5,
+  "altura": 1.8,
+  "camisa": "#465057",
+  "pantalon": "#302E2C",
+  "pelo": "largo",
+  "sombrero": "turbante_oscuro",
+  "prendas": [
+    "tunica",
+    "bombacho"
+  ],
+  "herramienta": "flauta",
+  "extras": [
+    "collar"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

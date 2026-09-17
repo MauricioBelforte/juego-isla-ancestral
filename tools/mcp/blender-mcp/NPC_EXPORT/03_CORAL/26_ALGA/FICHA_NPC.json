@@ -1,0 +1,26 @@
+{
+  "id": 26,
+  "nombre": "Alga",
+  "slug": "ALGA",
+  "isla": "CORAL",
+  "sk": 5,
+  "hr": 6,
+  "ey": 2,
+  "altura": 1.7,
+  "camisa": "#758565",
+  "pantalon": "#758565",
+  "pelo": "trenza",
+  "sombrero": "ninguno",
+  "prendas": [
+    "tunica"
+  ],
+  "herramienta": "canasto",
+  "extras": [
+    "collar",
+    "sandalias"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

@@ -1,0 +1,182 @@
+{
+  "fuente": "ALTA",
+  "huesos": 20,
+  "correctos": [],
+  "errores": [
+    {
+      "npc": "LUNA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "ROCKY",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CORAL",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CHEF",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "FIN",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "FLORA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "SAGE",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "MERC",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "NANA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CARP",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "MELODIA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "ROCA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "BRASA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "OBSIDIANA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "TUFA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "HORNO",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CENIZA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "PEDRO",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "VULCANIA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CHISPA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CALDERA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "HUMO",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "OLA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "PERLA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CONCHA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "ALGA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "TIBURON",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "ESTRELLA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "NACAR",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "CORAL_ROSA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "HIELO",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "AURORA",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "NIEVE",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "GLACIAR",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    },
+    {
+      "npc": "ESTRELLA_FUGAZ",
+      "error": "Error: Vertex not in group\n",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 652, in <module>\n    if not any(\n           ^^^^\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_SCRIPTS\\07-Rig-Op2.py\", line 653, in <genexpr>\n    vg.weight(v.index) > 0\n    ^^^^^^^^^^^^^^^^^^\nRuntimeError: Error: Vertex not in group\n\n"
+    }
+  ]
+}

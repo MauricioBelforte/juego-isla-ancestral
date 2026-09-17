@@ -1,0 +1,27 @@
+{
+  "id": 21,
+  "nombre": "Caldera",
+  "slug": "CALDERA",
+  "isla": "CENIZA",
+  "sk": 4,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.9,
+  "camisa": "#465057",
+  "pantalon": "#465057",
+  "pelo": "corto",
+  "sombrero": "minero",
+  "prendas": [
+    "chaleco:hierro"
+  ],
+  "herramienta": "lanza",
+  "extras": [
+    "collar",
+    "guantes",
+    "lampara_cinto"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

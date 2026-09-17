@@ -1,0 +1,25 @@
+{
+  "id": 17,
+  "nombre": "Ceniza",
+  "slug": "CENIZA",
+  "isla": "CENIZA",
+  "sk": 3,
+  "hr": 2,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#858783",
+  "pantalon": "#858783",
+  "pelo": "corto",
+  "sombrero": "lana",
+  "prendas": [
+    "chaleco:cuero"
+  ],
+  "herramienta": "antorcha",
+  "extras": [
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

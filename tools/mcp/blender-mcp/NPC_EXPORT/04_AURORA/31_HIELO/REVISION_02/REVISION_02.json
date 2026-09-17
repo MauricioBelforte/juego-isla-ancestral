@@ -1,0 +1,33 @@
+{
+  "npc": "HIELO",
+  "revision": 2,
+  "isla": "04_AURORA",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\SM_NPC_HIELO.blend",
+  "detalles_anadidos": [
+    "Collar de runas",
+    "Anillo sugerido",
+    "Guantes abiertos",
+    "Cristal del báculo"
+  ],
+  "triangulos_antes": 3902,
+  "triangulos_despues": 4242,
+  "triangulos_anadidos": 340,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1038961348595557,
+  "dimensiones_antes_m": [
+    0.5822592973709106,
+    0.4530884921550751,
+    2.044992446899414
+  ],
+  "dimensiones_despues_m": [
+    0.5822592973709106,
+    0.4530884921550751,
+    2.044992446899414
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

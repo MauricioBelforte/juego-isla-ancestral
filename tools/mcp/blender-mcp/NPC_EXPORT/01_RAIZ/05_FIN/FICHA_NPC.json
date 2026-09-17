@@ -1,0 +1,26 @@
+{
+  "id": 5,
+  "nombre": "Fin",
+  "slug": "FIN",
+  "isla": "RAIZ",
+  "sk": 3,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#8DAEB8",
+  "pantalon": "#E9DDC5",
+  "pelo": "corto",
+  "sombrero": "pescador",
+  "prendas": [
+    "shorts",
+    "chaleco:naranja"
+  ],
+  "herramienta": "cana",
+  "extras": [
+    "rayas"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

@@ -1,0 +1,32 @@
+{
+  "npc": "OLA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\SM_NPC_OLA.blend",
+  "detalles_anadidos": [
+    "Collar de perlas",
+    "Aretes de concha",
+    "Pulsera de coral"
+  ],
+  "triangulos_antes": 4136,
+  "triangulos_despues": 4432,
+  "triangulos_anadidos": 296,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6811167001724243,
+    0.48342859745025635,
+    1.8864935636520386
+  ],
+  "dimensiones_despues_m": [
+    0.6811167001724243,
+    0.48342859745025635,
+    1.8864935636520386
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

@@ -1,0 +1,30 @@
+{
+  "npc": "ROCKY",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\SM_NPC_ROCKY.blend",
+  "detalles_anadidos": [
+    "Cinta metrica",
+    "Lapiz"
+  ],
+  "triangulos_antes": 3104,
+  "triangulos_despues": 3292,
+  "triangulos_anadidos": 188,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6861019730567932,
+    0.3510579764842987,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6861019730567932,
+    0.3510579764842987,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

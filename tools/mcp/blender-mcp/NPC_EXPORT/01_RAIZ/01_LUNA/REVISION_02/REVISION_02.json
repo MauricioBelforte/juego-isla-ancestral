@@ -1,0 +1,30 @@
+{
+  "npc": "LUNA",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\SM_NPC_LUNA.blend",
+  "detalles_anadidos": [
+    "Remates de bolsillo",
+    "Pintura adicional en paleta"
+  ],
+  "triangulos_antes": 4780,
+  "triangulos_despues": 4868,
+  "triangulos_anadidos": 88,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1605415251347926,
+  "dimensiones_antes_m": [
+    0.6348142623901367,
+    0.5257253050804138,
+    1.7999999523162842
+  ],
+  "dimensiones_despues_m": [
+    0.6348142623901367,
+    0.5257253050804138,
+    1.7999999523162842
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

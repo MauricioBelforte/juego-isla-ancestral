@@ -1,0 +1,59 @@
+{
+  "correctos": [
+    {
+      "id": 2,
+      "nombre": "CASA_MEDIANA",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_02_CASA_MEDIANA",
+      "alta": {
+        "triangulos": 4300,
+        "meshes": 17,
+        "objetos_con_empty": 18,
+        "materiales": 8,
+        "z_min": 0.04500000178813934,
+        "dimensiones_totales": [
+          8.600000381469727,
+          7.092380523681641,
+          3.825000047683716
+        ]
+      },
+      "errores_lod": [
+        {
+          "nivel": "BAJA",
+          "error": "El LOD altero el apoyo de la casa."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "CASA_VECINO",
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\18-BIS-Casas-Grandes\\CASA_05_CASA_VECINO",
+      "alta": {
+        "triangulos": 2746,
+        "meshes": 14,
+        "objetos_con_empty": 15,
+        "materiales": 8,
+        "z_min": 0.04500000178813934,
+        "dimensiones_totales": [
+          7.600000381469727,
+          7.095000267028809,
+          3.5249998569488525
+        ]
+      },
+      "errores_lod": []
+    }
+  ],
+  "errores": [
+    {
+      "id": 3,
+      "nombre": "CASONA",
+      "error": "ALTA supera presupuesto: 6826 tris. No se exporta como modelo valido.",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\CASAS_SCRIPTS\\01-Casa2_modified.py\", line 1291, in <module>\n    raise RuntimeError(\nRuntimeError: ALTA supera presupuesto: 6826 tris. No se exporta como modelo valido.\n"
+    },
+    {
+      "id": 4,
+      "nombre": "MANSION",
+      "error": "ALTA supera presupuesto: 8779 tris. No se exporta como modelo valido.",
+      "traceback": "Traceback (most recent call last):\n  File \"D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\CASAS_SCRIPTS\\01-Casa2_modified.py\", line 1291, in <module>\n    raise RuntimeError(\nRuntimeError: ALTA supera presupuesto: 8779 tris. No se exporta como modelo valido.\n"
+    }
+  ]
+}

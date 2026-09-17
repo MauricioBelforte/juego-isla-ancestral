@@ -1,0 +1,26 @@
+{
+  "id": 12,
+  "nombre": "Roca",
+  "slug": "ROCA",
+  "isla": "RAIZ",
+  "sk": 4,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.9,
+  "camisa": "#39486F",
+  "pantalon": "#39486F",
+  "pelo": "corto",
+  "sombrero": "guardia",
+  "prendas": [
+    "chaleco:carbon"
+  ],
+  "herramienta": "espada",
+  "extras": [
+    "collar",
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

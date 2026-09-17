@@ -1,0 +1,32 @@
+{
+  "npc": "ESTRELLA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\SM_NPC_ESTRELLA.blend",
+  "detalles_anadidos": [
+    "Collar de runas",
+    "Adornos estrellados",
+    "Detalles dorados"
+  ],
+  "triangulos_antes": 3698,
+  "triangulos_despues": 4038,
+  "triangulos_anadidos": 340,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6900908350944519,
+    0.4560779333114624,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6900908350944519,
+    0.4560779333114624,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

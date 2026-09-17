@@ -1,0 +1,28 @@
+{
+  "id": 24,
+  "nombre": "Perla",
+  "slug": "PERLA",
+  "isla": "CORAL",
+  "sk": 1,
+  "hr": 7,
+  "ey": 3,
+  "altura": 1.8,
+  "camisa": "#BD9F59",
+  "pantalon": "#E9DDC5",
+  "pelo": "trenza",
+  "sombrero": "turbante",
+  "prendas": [
+    "tunica",
+    "bombacho",
+    "chaleco:cobre"
+  ],
+  "herramienta": "joya",
+  "extras": [
+    "collar",
+    "pluma"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

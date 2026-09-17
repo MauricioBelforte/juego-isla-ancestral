@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "nombre": "Luna",
+  "slug": "LUNA",
+  "isla": "RAIZ",
+  "sk": 2,
+  "hr": 2,
+  "ey": 2,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#E9DDC5",
+  "pelo": "mono",
+  "sombrero": "ninguno",
+  "prendas": [
+    "falda",
+    "delantal:lino"
+  ],
+  "herramienta": "pintura",
+  "extras": [
+    "cinta"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": true,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

@@ -1,0 +1,518 @@
+{
+  "casa": {
+    "id": 4,
+    "nombre": "MANSION",
+    "L": 14.0,
+    "W": 10.0,
+    "base": 0.4,
+    "pared": 0.15,
+    "altura": 2.8,
+    "cumbrera": 3.8,
+    "puerta_x": 7.0,
+    "puerta_w": 1.2,
+    "puerta_h": 2.2,
+    "alero": 0.5,
+    "max_obj": 24
+  },
+  "piso_z": 0.445,
+  "huecos": [
+    {
+      "grupo": "SM_Pared_Norte",
+      "tipo": "VENTANA",
+      "ancho": 0.7999999999999998,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Norte",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000007,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "PUERTA",
+      "ancho": 1.1999999999999993,
+      "alto": 2.2
+    },
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "VENTANA",
+      "ancho": 0.7999999999999998,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Sur",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000007,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Este",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000003,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Este",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000007,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Oeste",
+      "tipo": "VENTANA",
+      "ancho": 0.7999999999999998,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Oeste",
+      "tipo": "VENTANA",
+      "ancho": 0.8000000000000007,
+      "alto": 0.7
+    },
+    {
+      "grupo": "SM_Pared_Interior_1",
+      "tipo": "PUERTA_INTERIOR",
+      "ancho": 0.9000000000000001,
+      "alto": 2.1
+    },
+    {
+      "grupo": "SM_Pared_Interior_1",
+      "tipo": "PUERTA_INTERIOR",
+      "ancho": 0.9000000000000004,
+      "alto": 2.1
+    },
+    {
+      "grupo": "SM_Pared_Interior_2",
+      "tipo": "PUERTA_INTERIOR",
+      "ancho": 0.9000000000000001,
+      "alto": 2.1
+    },
+    {
+      "grupo": "SM_Pared_Interior_2",
+      "tipo": "PUERTA_INTERIOR",
+      "ancho": 0.9000000000000004,
+      "alto": 2.1
+    }
+  ],
+  "interacciones": [
+    {
+      "id": "SOFA_0",
+      "mesh": "SM_Sillon_Grande",
+      "tipo": "SOFA",
+      "posicion_blender": [
+        2.3,
+        5.25,
+        0.445
+      ],
+      "posicion_godot": [
+        2.3,
+        0.445,
+        -5.25
+      ]
+    },
+    {
+      "id": "MESA_1",
+      "mesh": "SM_Sillon_Grande",
+      "tipo": "MESA",
+      "posicion_blender": [
+        2.3,
+        6.6,
+        0.445
+      ],
+      "posicion_godot": [
+        2.3,
+        0.445,
+        -6.6
+      ]
+    },
+    {
+      "id": "ESTANTE_2",
+      "mesh": "SM_Estanteria_Monumental",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        2.45,
+        4.78,
+        0.445
+      ],
+      "posicion_godot": [
+        2.45,
+        0.445,
+        -4.78
+      ]
+    },
+    {
+      "id": "MESA_3",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "MESA",
+      "posicion_blender": [
+        7.0,
+        5.0,
+        0.445
+      ],
+      "posicion_godot": [
+        7.0,
+        0.445,
+        -5.0
+      ]
+    },
+    {
+      "id": "SILLA_4",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        5.58,
+        5.0,
+        0.445
+      ],
+      "posicion_godot": [
+        5.58,
+        0.445,
+        -5.0
+      ]
+    },
+    {
+      "id": "SILLA_5",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        8.42,
+        5.0,
+        0.445
+      ],
+      "posicion_godot": [
+        8.42,
+        0.445,
+        -5.0
+      ]
+    },
+    {
+      "id": "SILLA_6",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        6.5,
+        4.08,
+        0.445
+      ],
+      "posicion_godot": [
+        6.5,
+        0.445,
+        -4.08
+      ]
+    },
+    {
+      "id": "SILLA_7",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        6.5,
+        5.92,
+        0.445
+      ],
+      "posicion_godot": [
+        6.5,
+        0.445,
+        -5.92
+      ]
+    },
+    {
+      "id": "SILLA_8",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        7.0,
+        4.08,
+        0.445
+      ],
+      "posicion_godot": [
+        7.0,
+        0.445,
+        -4.08
+      ]
+    },
+    {
+      "id": "SILLA_9",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        7.0,
+        5.92,
+        0.445
+      ],
+      "posicion_godot": [
+        7.0,
+        0.445,
+        -5.92
+      ]
+    },
+    {
+      "id": "SILLA_10",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        7.5,
+        4.08,
+        0.445
+      ],
+      "posicion_godot": [
+        7.5,
+        0.445,
+        -4.08
+      ]
+    },
+    {
+      "id": "SILLA_11",
+      "mesh": "SM_Mesa_Comedor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        7.5,
+        5.92,
+        0.445
+      ],
+      "posicion_godot": [
+        7.5,
+        0.445,
+        -5.92
+      ]
+    },
+    {
+      "id": "COCINA",
+      "mesh": "SM_Cocina_Completa",
+      "tipo": "COCINA",
+      "posicion_blender": [
+        12.65,
+        5.65,
+        0.445
+      ],
+      "posicion_godot": [
+        12.65,
+        0.445,
+        -5.65
+      ]
+    },
+    {
+      "id": "MESA_13",
+      "mesh": "SM_Cocina_Completa",
+      "tipo": "MESA",
+      "posicion_blender": [
+        11.7,
+        7.8,
+        0.445
+      ],
+      "posicion_godot": [
+        11.7,
+        0.445,
+        -7.8
+      ]
+    },
+    {
+      "id": "NEVERA",
+      "mesh": "SM_Cocina_Completa",
+      "tipo": "NEVERA_RUSTICA",
+      "posicion_blender": [
+        9.85,
+        5.7,
+        0.445
+      ],
+      "posicion_godot": [
+        9.85,
+        0.445,
+        -5.7
+      ]
+    },
+    {
+      "id": "ESTANTE_15",
+      "mesh": "SM_Cocina_Completa",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        12.0,
+        5.3,
+        0.445
+      ],
+      "posicion_godot": [
+        12.0,
+        0.445,
+        -5.3
+      ]
+    },
+    {
+      "id": "ESTANTE_16",
+      "mesh": "SM_Biblioteca",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        2.4,
+        0.35,
+        0.445
+      ],
+      "posicion_godot": [
+        2.4,
+        0.445,
+        -0.35
+      ]
+    },
+    {
+      "id": "SOFA_17",
+      "mesh": "SM_Biblioteca",
+      "tipo": "SOFA",
+      "posicion_blender": [
+        1.0,
+        1.6,
+        0.445
+      ],
+      "posicion_godot": [
+        1.0,
+        0.445,
+        -1.6
+      ]
+    },
+    {
+      "id": "MESA_18",
+      "mesh": "SM_Biblioteca",
+      "tipo": "MESA",
+      "posicion_blender": [
+        2.4,
+        2.5,
+        0.445
+      ],
+      "posicion_godot": [
+        2.4,
+        0.445,
+        -2.5
+      ]
+    },
+    {
+      "id": "CAMA_19",
+      "mesh": "SM_Cama_King",
+      "tipo": "CAMA",
+      "posicion_blender": [
+        10.2,
+        3.5,
+        0.445
+      ],
+      "posicion_godot": [
+        10.2,
+        0.445,
+        -3.5
+      ]
+    },
+    {
+      "id": "MESA_20",
+      "mesh": "SM_Cama_King",
+      "tipo": "MESA",
+      "posicion_blender": [
+        9.2,
+        2.55,
+        0.445
+      ],
+      "posicion_godot": [
+        9.2,
+        0.445,
+        -2.55
+      ]
+    },
+    {
+      "id": "MESA_21",
+      "mesh": "SM_Cama_King",
+      "tipo": "MESA",
+      "posicion_blender": [
+        11.3,
+        2.55,
+        0.445
+      ],
+      "posicion_godot": [
+        11.3,
+        0.445,
+        -2.55
+      ]
+    },
+    {
+      "id": "ESTANTE_22",
+      "mesh": "SM_Vestidor",
+      "tipo": "ESTANTE",
+      "posicion_blender": [
+        9.7,
+        0.32,
+        0.445
+      ],
+      "posicion_godot": [
+        9.7,
+        0.445,
+        -0.32
+      ]
+    },
+    {
+      "id": "SILLA_23",
+      "mesh": "SM_Vestidor",
+      "tipo": "SILLA",
+      "posicion_blender": [
+        13.0,
+        4.25,
+        0.445
+      ],
+      "posicion_godot": [
+        13.0,
+        0.445,
+        -4.25
+      ]
+    },
+    {
+      "id": "MESA_24",
+      "mesh": "SM_Terraza",
+      "tipo": "MESA",
+      "posicion_blender": [
+        15.5,
+        6.5,
+        0.445
+      ],
+      "posicion_godot": [
+        15.5,
+        0.445,
+        -6.5
+      ]
+    }
+  ],
+  "avisos": [
+    "Vestidor: estante abierto y asiento base; ropa colgada y mecedora detallada pendientes.",
+    "Torre: escalera y plataforma son prototipo visual. Faltan barandilla, colisiones y validacion de paso/altura libre.",
+    "Accesorios pequeños y tallas elaboradas pendientes.",
+    "No se ha certificado automaticamente la holgura entre todos los muebles.",
+    "Los conjuntos de muebles comparten mesh; interacciones en JSON.",
+    "LOD reducido destinado al exterior lejano; interior requiere ALTA."
+  ],
+  "niveles": {
+    "ALTA": {
+      "triangulos": 8779,
+      "meshes": 27,
+      "objetos_con_empty": 28,
+      "materiales": 8,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        17.5,
+        12.319999694824219,
+        4.900000095367432
+      ]
+    },
+    "MEDIA": {
+      "triangulos": 1433,
+      "meshes": 27,
+      "objetos_con_empty": 28,
+      "materiales": 6,
+      "z_min": 0.04500000178813934,
+      "dimensiones_totales": [
+        17.5,
+        12.319999694824219,
+        4.7300004959106445
+      ]
+    }
+  },
+  "capturas": [],
+  "errores": [
+    {
+      "nivel": "BAJA",
+      "error": "No se alcanzo el presupuesto del LOD."
+    }
+  ],
+  "aprobacion_visual": "PENDIENTE",
+  "colisiones": "NO_GENERADAS"
+}

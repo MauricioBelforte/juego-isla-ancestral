@@ -1,0 +1,27 @@
+{
+  "id": 35,
+  "nombre": "Estrella Fugaz",
+  "slug": "ESTRELLA_FUGAZ",
+  "isla": "AURORA",
+  "sk": 2,
+  "hr": 1,
+  "ey": 5,
+  "altura": 1.8,
+  "camisa": "#465057",
+  "pantalon": "#465057",
+  "pelo": "corto",
+  "sombrero": "capucha",
+  "prendas": [
+    "tunica",
+    "capa:negro"
+  ],
+  "herramienta": "farol",
+  "extras": [
+    "collar",
+    "guantes"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

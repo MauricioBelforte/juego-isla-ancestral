@@ -1,0 +1,67 @@
+{
+  "revision": 2,
+  "estado": "PENDIENTE_APROBACION_VISUAL",
+  "correctos": [
+    {
+      "npc": "LUNA",
+      "triangulos": 4868,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\01_LUNA\\REVISION_02"
+    },
+    {
+      "npc": "ROCKY",
+      "triangulos": 3292,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\02_ROCKY\\REVISION_02"
+    },
+    {
+      "npc": "CORAL",
+      "triangulos": 4054,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\REVISION_02"
+    },
+    {
+      "npc": "CHEF",
+      "triangulos": 3883,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\REVISION_02"
+    },
+    {
+      "npc": "FIN",
+      "triangulos": 3974,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\05_FIN\\REVISION_02"
+    },
+    {
+      "npc": "FLORA",
+      "triangulos": 4302,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\06_FLORA\\REVISION_02"
+    },
+    {
+      "npc": "SAGE",
+      "triangulos": 4338,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\07_SAGE\\REVISION_02"
+    },
+    {
+      "npc": "MERC",
+      "triangulos": 4484,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\08_MERC\\REVISION_02"
+    },
+    {
+      "npc": "NANA",
+      "triangulos": 4346,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\09_NANA\\REVISION_02"
+    },
+    {
+      "npc": "CARP",
+      "triangulos": 3652,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\10_CARP\\REVISION_02"
+    },
+    {
+      "npc": "MELODIA",
+      "triangulos": 4446,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\11_MELODIA\\REVISION_02"
+    },
+    {
+      "npc": "ROCA",
+      "triangulos": 3758,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\12_ROCA\\REVISION_02"
+    }
+  ],
+  "errores": []
+}

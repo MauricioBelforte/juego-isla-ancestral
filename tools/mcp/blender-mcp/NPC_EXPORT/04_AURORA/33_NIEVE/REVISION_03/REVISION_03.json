@@ -1,0 +1,35 @@
+{
+  "npc": "NIEVE",
+  "isla": "04_AURORA",
+  "revision": 3,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\SM_NPC_NIEVE.blend",
+  "factor_referencia": 1.1038961348595557,
+  "ancho_arquetipo": 0.98,
+  "postura_encorvada": true,
+  "detalles_anadidos": [
+    "Pulsera L: HIERBA",
+    "Ramito de hierbas sobre collar"
+  ],
+  "triangulos_antes": 4162,
+  "triangulos_despues": 4462,
+  "triangulos_anadidos": 300,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "dimensiones_con_accesorios_m": [
+    0.557817280292511,
+    0.3829299807548523,
+    1.7596104145050049
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "microaccesorios_completos": false,
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": [
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_0.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_1.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_2.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_3.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_4.png",
+    "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_03\\cap_NPC_NIEVE_v3_2026-09-11_20-41-51_5.png"
+  ]
+}

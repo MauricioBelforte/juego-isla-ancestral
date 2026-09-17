@@ -1,0 +1,144 @@
+{
+  "npc": "OBSIDIANA",
+  "isla": "CENIZA",
+  "version": 1,
+  "triangulos_total": 4648,
+  "objetos_mesh": 8,
+  "objetos_incluyendo_empty": 9,
+  "materiales_unicos": 6,
+  "altura_anatomia_m": 1.7000000476837158,
+  "dimensiones_con_herramientas_m": [
+    0.557817280292511,
+    0.4651962220668793,
+    1.7816883325576782
+  ],
+  "factor_horneado": 1.1038961312404516,
+  "pivotes_escalados": true,
+  "doble_cara": true,
+  "animaciones": false,
+  "rig": false,
+  "validacion_visual_manual": "PENDIENTE",
+  "prueba_importacion_godot": "PENDIENTE",
+  "notas_topologia": [
+    "Anatomia, ropa y accesorios contienen islas superpuestas.",
+    "Falda, delantal y casquete tienen fronteras abiertas.",
+    "Recalcular normales no demuestra ausencia de intersecciones."
+  ],
+  "meshes": [
+    {
+      "mesh": "SM_NPC_OBSIDIANA_BODY",
+      "triangulos": 1128,
+      "vertices": 644,
+      "superficies_material": 4,
+      "aristas_frontera": 120,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_HEAD",
+      "triangulos": 1244,
+      "vertices": 642,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_HAIR",
+      "triangulos": 788,
+      "vertices": 427,
+      "superficies_material": 2,
+      "aristas_frontera": 52,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_ARM_L",
+      "triangulos": 308,
+      "vertices": 162,
+      "superficies_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_ARM_R",
+      "triangulos": 356,
+      "vertices": 188,
+      "superficies_material": 3,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.20554545521736145,
+        0.0,
+        1.324675440788269
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_LEG_L",
+      "triangulos": 264,
+      "vertices": 148,
+      "superficies_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        -0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_LEG_R",
+      "triangulos": 264,
+      "vertices": 148,
+      "superficies_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.09714286029338837,
+        0.0,
+        0.9051948189735413
+      ]
+    },
+    {
+      "mesh": "SM_NPC_OBSIDIANA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "superficies_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "pivote_metros": [
+        0.0,
+        0.0,
+        1.4240260124206543
+      ]
+    }
+  ],
+  "capturas": [],
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\SM_NPC_OBSIDIANA.glb",
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\SM_NPC_OBSIDIANA.blend"
+}

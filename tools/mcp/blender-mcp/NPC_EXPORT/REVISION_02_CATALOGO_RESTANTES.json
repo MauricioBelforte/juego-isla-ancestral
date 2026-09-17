@@ -1,0 +1,149 @@
+{
+  "revision": 2,
+  "islas": [
+    "CENIZA",
+    "CORAL",
+    "AURORA"
+  ],
+  "correctos": [
+    {
+      "npc": "BRASA",
+      "isla": "02_CENIZA",
+      "triangulos": 4164,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\13_BRASA\\REVISION_02"
+    },
+    {
+      "npc": "OBSIDIANA",
+      "isla": "02_CENIZA",
+      "triangulos": 5092,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\14_OBSIDIANA\\REVISION_02"
+    },
+    {
+      "npc": "TUFA",
+      "isla": "02_CENIZA",
+      "triangulos": 4340,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\15_TUFA\\REVISION_02"
+    },
+    {
+      "npc": "HORNO",
+      "isla": "02_CENIZA",
+      "triangulos": 3624,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\16_HORNO\\REVISION_02"
+    },
+    {
+      "npc": "CENIZA",
+      "isla": "02_CENIZA",
+      "triangulos": 3628,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\17_CENIZA\\REVISION_02"
+    },
+    {
+      "npc": "PEDRO",
+      "isla": "02_CENIZA",
+      "triangulos": 3908,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\18_PEDRO\\REVISION_02"
+    },
+    {
+      "npc": "VULCANIA",
+      "isla": "02_CENIZA",
+      "triangulos": 4398,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\19_VULCANIA\\REVISION_02"
+    },
+    {
+      "npc": "CHISPA",
+      "isla": "02_CENIZA",
+      "triangulos": 5186,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\20_CHISPA\\REVISION_02"
+    },
+    {
+      "npc": "CALDERA",
+      "isla": "02_CENIZA",
+      "triangulos": 4014,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\21_CALDERA\\REVISION_02"
+    },
+    {
+      "npc": "HUMO",
+      "isla": "02_CENIZA",
+      "triangulos": 4050,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\02_CENIZA\\22_HUMO\\REVISION_02"
+    },
+    {
+      "npc": "OLA",
+      "isla": "03_CORAL",
+      "triangulos": 4432,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\23_OLA\\REVISION_02"
+    },
+    {
+      "npc": "PERLA",
+      "isla": "03_CORAL",
+      "triangulos": 4944,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\24_PERLA\\REVISION_02"
+    },
+    {
+      "npc": "CONCHA",
+      "isla": "03_CORAL",
+      "triangulos": 3904,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\25_CONCHA\\REVISION_02"
+    },
+    {
+      "npc": "ALGA",
+      "isla": "03_CORAL",
+      "triangulos": 4496,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\26_ALGA\\REVISION_02"
+    },
+    {
+      "npc": "TIBURON",
+      "isla": "03_CORAL",
+      "triangulos": 3790,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_02"
+    },
+    {
+      "npc": "ESTRELLA",
+      "isla": "03_CORAL",
+      "triangulos": 4038,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\28_ESTRELLA\\REVISION_02"
+    },
+    {
+      "npc": "NACAR",
+      "isla": "03_CORAL",
+      "triangulos": 3468,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\29_NACAR\\REVISION_02"
+    },
+    {
+      "npc": "CORAL_ROSA",
+      "isla": "03_CORAL",
+      "triangulos": 3870,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\REVISION_02"
+    },
+    {
+      "npc": "HIELO",
+      "isla": "04_AURORA",
+      "triangulos": 4242,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\31_HIELO\\REVISION_02"
+    },
+    {
+      "npc": "AURORA",
+      "isla": "04_AURORA",
+      "triangulos": 4598,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\32_AURORA\\REVISION_02"
+    },
+    {
+      "npc": "NIEVE",
+      "isla": "04_AURORA",
+      "triangulos": 4714,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\33_NIEVE\\REVISION_02"
+    },
+    {
+      "npc": "GLACIAR",
+      "isla": "04_AURORA",
+      "triangulos": 3864,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\34_GLACIAR\\REVISION_02"
+    },
+    {
+      "npc": "ESTRELLA_FUGAZ",
+      "isla": "04_AURORA",
+      "triangulos": 3908,
+      "carpeta": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\04_AURORA\\35_ESTRELLA_FUGAZ\\REVISION_02"
+    }
+  ],
+  "errores": []
+}

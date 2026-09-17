@@ -1,0 +1,27 @@
+{
+  "npc": "TIBURON",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\REVISION_02\\SM_NPC_TIBURON.blend",
+  "triangulos": 3790,
+  "meshes": 8,
+  "huesos": 18,
+  "factor": 1.2337662956931374,
+  "anciano_aprox": false,
+  "animaciones": [
+    "SM_NPC_TIBURON_ARM_IDLE",
+    "SM_NPC_TIBURON_ARM_SALUDO"
+  ],
+  "parentesco": {
+    "BODY": "CHEST",
+    "HEAD": "HEAD",
+    "HAIR": "HEAD",
+    "EYES": "HEAD",
+    "ARM_L": "UPPER_ARM.L",
+    "ARM_R": "UPPER_ARM.R",
+    "LEG_L": "THIGH.L",
+    "LEG_R": "THIGH.R"
+  },
+  "nota": "Parentesco rígido a hueso. Sin pesos. Herramientas siguen a la mano.",
+  "intersecciones": "NO_COMPROBADAS",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

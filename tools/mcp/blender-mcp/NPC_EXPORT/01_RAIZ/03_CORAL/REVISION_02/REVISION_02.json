@@ -1,0 +1,30 @@
+{
+  "npc": "CORAL",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\03_CORAL\\SM_NPC_CORAL.blend",
+  "detalles_anadidos": [
+    "Colgante concha",
+    "Bolsillo salvavidas"
+  ],
+  "triangulos_antes": 3914,
+  "triangulos_despues": 4054,
+  "triangulos_anadidos": 140,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6003009676933289,
+    0.41131412982940674,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6003009676933289,
+    0.41131412982940674,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

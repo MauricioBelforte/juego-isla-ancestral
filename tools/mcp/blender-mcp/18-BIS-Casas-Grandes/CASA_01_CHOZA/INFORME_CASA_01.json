@@ -1,0 +1,106 @@
+{
+  "casa": "CHOZA_AMPLIADA",
+  "version": 1,
+  "niveles": {
+    "ALTA": {
+      "triangulos": 4100,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 8,
+      "z_min": 0.04500000178813934,
+      "dimensiones_exteriores": [
+        5.600000381469727,
+        4.600000381469727,
+        3.879999876022339
+      ],
+      "por_mesh": {
+        "SM_Cimiento_Piedra": 1008,
+        "SM_Pared_Norte": 308,
+        "SM_Pared_Sur": 368,
+        "SM_Pared_Este": 364,
+        "SM_Pared_Oeste": 364,
+        "SM_Techo_Izq": 204,
+        "SM_Techo_Der": 272,
+        "SM_Cumbrera": 36,
+        "SM_Suelo": 60,
+        "SM_Cama": 252,
+        "SM_Mesa": 140,
+        "SM_Estanteria": 252,
+        "SM_Hogar": 252,
+        "SM_Silla": 220
+      }
+    },
+    "MEDIA": {
+      "triangulos": 1426,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 6,
+      "z_min": 0.04500000178813934,
+      "dimensiones_exteriores": [
+        5.600000381469727,
+        4.600000381469727,
+        3.879999876022339
+      ],
+      "por_mesh": {
+        "SM_Cimiento_Piedra": 354,
+        "SM_Pared_Norte": 108,
+        "SM_Pared_Sur": 128,
+        "SM_Pared_Este": 126,
+        "SM_Pared_Oeste": 126,
+        "SM_Techo_Izq": 70,
+        "SM_Techo_Der": 94,
+        "SM_Cumbrera": 12,
+        "SM_Suelo": 20,
+        "SM_Cama": 88,
+        "SM_Mesa": 48,
+        "SM_Estanteria": 88,
+        "SM_Hogar": 88,
+        "SM_Silla": 76
+      },
+      "aprobacion_visual": "PENDIENTE",
+      "ajuste_vertical": 1.7881393449270533e-09
+    },
+    "BAJA": {
+      "triangulos": 665,
+      "meshes": 14,
+      "objetos_con_empty": 15,
+      "materiales": 4,
+      "z_min": 0.04500000178813934,
+      "dimensiones_exteriores": [
+        5.600000381469727,
+        4.600000381469727,
+        3.879999876022339
+      ],
+      "por_mesh": {
+        "SM_Cimiento_Piedra": 164,
+        "SM_Pared_Norte": 52,
+        "SM_Pared_Sur": 62,
+        "SM_Pared_Este": 59,
+        "SM_Pared_Oeste": 59,
+        "SM_Techo_Izq": 32,
+        "SM_Techo_Der": 44,
+        "SM_Cumbrera": 4,
+        "SM_Suelo": 10,
+        "SM_Cama": 40,
+        "SM_Mesa": 22,
+        "SM_Estanteria": 40,
+        "SM_Hogar": 41,
+        "SM_Silla": 36
+      },
+      "aprobacion_visual": "PENDIENTE",
+      "ajuste_vertical": 1.7881393449270533e-09
+    }
+  },
+  "capturas": [],
+  "errores": [],
+  "validacion_visual": "PENDIENTE",
+  "colisiones": "NO_GENERADAS",
+  "notas": [
+    "Alturas interiores medidas desde el piso terminado.",
+    "Puerta abierta, sin hoja.",
+    "Techo desmontable por objetos para inspeccion.",
+    "La chimenea tiene abertura real en la cubierta.",
+    "No se certifican intersecciones mediante este informe.",
+    "LOD lejanos requieren revision visual de muebles y marcos."
+  ]
+}

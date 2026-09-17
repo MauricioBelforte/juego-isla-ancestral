@@ -1,0 +1,27 @@
+{
+  "id": 13,
+  "nombre": "Brasa",
+  "slug": "BRASA",
+  "isla": "CENIZA",
+  "sk": 4,
+  "hr": 5,
+  "ey": 1,
+  "altura": 1.8,
+  "camisa": "#A17A58",
+  "pantalon": "#465057",
+  "pelo": "crespo",
+  "sombrero": "ninguno",
+  "prendas": [
+    "chaleco:carbon"
+  ],
+  "herramienta": "pico",
+  "extras": [
+    "bolsillo",
+    "casco_cinto",
+    "lampara_cinto"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

@@ -1,0 +1,30 @@
+{
+  "npc": "CHEF",
+  "revision": 2,
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\01_RAIZ\\04_CHEF\\SM_NPC_CHEF.blend",
+  "detalles_anadidos": [
+    "Bolsillo delantal",
+    "Manchas de comida"
+  ],
+  "triangulos_antes": 3828,
+  "triangulos_despues": 3883,
+  "triangulos_anadidos": 55,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6007753610610962,
+    0.4213636517524719,
+    1.863116979598999
+  ],
+  "dimensiones_despues_m": [
+    0.6007753610610962,
+    0.4213636517524719,
+    1.863116979598999
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

@@ -1,0 +1,32 @@
+{
+  "npc": "CORAL_ROSA",
+  "revision": 2,
+  "isla": "03_CORAL",
+  "origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\30_CORAL_ROSA\\SM_NPC_CORAL_ROSA.blend",
+  "detalles_anadidos": [
+    "Collar de conchas",
+    "Pulsera de coral",
+    "Adornos del vestido"
+  ],
+  "triangulos_antes": 3666,
+  "triangulos_despues": 3870,
+  "triangulos_anadidos": 204,
+  "meshes": 8,
+  "objetos_con_empty": 9,
+  "materiales": 6,
+  "factor_referencia": 1.1688312152763465,
+  "dimensiones_antes_m": [
+    0.6555755138397217,
+    0.4242857098579407,
+    1.8128572702407837
+  ],
+  "dimensiones_despues_m": [
+    0.6555755138397217,
+    0.4242857098579407,
+    1.8128572702407837
+  ],
+  "intersecciones": "NO_COMPROBADAS",
+  "agarres": "PENDIENTES_REVISION",
+  "aprobacion_visual": "PENDIENTE",
+  "capturas": []
+}

@@ -1,0 +1,257 @@
+{
+  "npc": "SM_NPC_CENIZA",
+  "nivel": "ALTA",
+  "triangulos": 3604,
+  "objetos_mesh": 8,
+  "objetos_con_empty": 9,
+  "materiales_usados": 6,
+  "nombres_materiales": [
+    "MAT_NPC_CENIZA_BOTAS",
+    "MAT_NPC_CENIZA_CAMISA",
+    "MAT_NPC_CENIZA_OJOS",
+    "MAT_NPC_CENIZA_PANTALON",
+    "MAT_NPC_CENIZA_PELO",
+    "MAT_NPC_CENIZA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6157349348068237,
+    0.3699350953102112,
+    1.8771430253982544
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 6000,
+    "meshes": 8,
+    "materiales": 6
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_CENIZA_LEG_R: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CENIZA_LEG_L: 24 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CENIZA_HAIR: 116 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_CENIZA_BODY: 56 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_CENIZA_LEG_R",
+      "triangulos": 264,
+      "vertices": 148,
+      "slots_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_LEG_L",
+      "triangulos": 264,
+      "vertices": 148,
+      "slots_material": 2,
+      "aristas_frontera": 24,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.10285715013742447,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_HEAD",
+      "triangulos": 764,
+      "vertices": 396,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_HAIR",
+      "triangulos": 524,
+      "vertices": 323,
+      "slots_material": 2,
+      "aristas_frontera": 116,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_EYES",
+      "triangulos": 296,
+      "vertices": 156,
+      "slots_material": 1,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5077922344207764
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_BODY",
+      "triangulos": 784,
+      "vertices": 428,
+      "slots_material": 3,
+      "aristas_frontera": 56,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.9584416151046753
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_ARM_R",
+      "triangulos": 396,
+      "vertices": 209,
+      "slots_material": 4,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    },
+    {
+      "nombre": "SM_NPC_CENIZA_ARM_L",
+      "triangulos": 312,
+      "vertices": 165,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        -0.22207793593406677,
+        0.0,
+        1.4025975465774536
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "npc": "SM_NPC_TIBURON",
+  "nivel": "BAJA",
+  "triangulos": 677,
+  "objetos_mesh": 3,
+  "objetos_con_empty": 4,
+  "materiales_usados": 3,
+  "nombres_materiales": [
+    "MAT_NPC_TIBURON_BAJA_GENERAL",
+    "MAT_NPC_TIBURON_BAJA_OJOS",
+    "MAT_NPC_TIBURON_BAJA_PIEL"
+  ],
+  "dimensiones_con_accesorios_m": [
+    0.6945706605911255,
+    0.40799450874328613,
+    2.0759363174438477
+  ],
+  "z_minimo_m": 0.0,
+  "presupuesto": {
+    "tris": 700,
+    "meshes": 3,
+    "materiales": 3
+  },
+  "comprobaciones": {
+    "triangulos": true,
+    "meshes": true,
+    "materiales": true,
+    "escala_uno": true,
+    "rotacion_cero": true,
+    "suelo_z_cero": true,
+    "color_0": true
+  },
+  "cumple_comprobaciones_automaticas": true,
+  "aprobacion_visual": "PENDIENTE",
+  "importacion_godot": "PENDIENTE",
+  "intersecciones": "NO_COMPROBADAS",
+  "normales_exteriores": "RECALCULADAS; NO CERTIFICA ORIENTACION DE SUPERFICIES ABIERTAS",
+  "advertencias": [
+    "SM_NPC_TIBURON_BODY: 35 aristas de frontera; pueden corresponder a prendas abiertas.",
+    "SM_NPC_TIBURON_HEAD: 10 aristas de frontera; pueden corresponder a prendas abiertas."
+  ],
+  "meshes": [
+    {
+      "nombre": "SM_NPC_TIBURON_BODY",
+      "triangulos": 257,
+      "vertices": 166,
+      "slots_material": 2,
+      "aristas_frontera": 35,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.0116883516311646
+      ]
+    },
+    {
+      "nombre": "SM_NPC_TIBURON_HEAD",
+      "triangulos": 286,
+      "vertices": 177,
+      "slots_material": 3,
+      "aristas_frontera": 10,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        1.5915584564208984
+      ]
+    },
+    {
+      "nombre": "SM_NPC_TIBURON_ARMS",
+      "triangulos": 134,
+      "vertices": 87,
+      "slots_material": 2,
+      "aristas_frontera": 0,
+      "aristas_con_mas_de_2_caras": 0,
+      "vertices_sueltos": 0,
+      "caras_area_casi_cero": 0,
+      "color_0": true,
+      "escala": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "rotacion": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pivote": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "archivo_origen": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\SM_NPC_TIBURON.blend",
+  "historial_triangulos": [
+    3766,
+    677
+  ],
+  "ajuste_vertical_m": -4.565715789794922e-05,
+  "capturas": [],
+  "variacion_relativa_dimensiones": [
+    0.012749325451342693,
+    0.004387234986949959,
+    0.0021446804122334947
+  ],
+  "archivo_blend": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\LODS\\BAJA\\SM_NPC_TIBURON_BAJA.blend",
+  "archivo_glb": "D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\NPC_EXPORT\\03_CORAL\\27_TIBURON\\LODS\\BAJA\\SM_NPC_TIBURON_BAJA.glb"
+}

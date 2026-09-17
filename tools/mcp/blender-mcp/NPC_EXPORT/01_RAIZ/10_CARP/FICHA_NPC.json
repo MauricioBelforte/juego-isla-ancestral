@@ -1,0 +1,25 @@
+{
+  "id": 10,
+  "nombre": "Carp",
+  "slug": "CARP",
+  "isla": "RAIZ",
+  "sk": 3,
+  "hr": 3,
+  "ey": 4,
+  "altura": 1.8,
+  "camisa": "#D8C8AA",
+  "pantalon": "#65513E",
+  "pelo": "corto",
+  "sombrero": "paja",
+  "prendas": [
+    "delantal:cuero"
+  ],
+  "herramienta": "hacha",
+  "extras": [
+    "bolsillo"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}

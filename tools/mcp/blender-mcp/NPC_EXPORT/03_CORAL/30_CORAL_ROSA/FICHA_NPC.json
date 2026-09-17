@@ -1,0 +1,26 @@
+{
+  "id": 30,
+  "nombre": "Coral Rosa",
+  "slug": "CORAL_ROSA",
+  "isla": "CORAL",
+  "sk": 1,
+  "hr": 8,
+  "ey": 2,
+  "altura": 1.8,
+  "camisa": "#E9DDC5",
+  "pantalon": "#E9DDC5",
+  "pelo": "largo",
+  "sombrero": "ninguno",
+  "prendas": [
+    "falda_larga"
+  ],
+  "herramienta": "caracola",
+  "extras": [
+    "collar",
+    "sandalias"
+  ],
+  "estado": "GENERADO_PENDIENTE_APROBACION",
+  "altura_incluye_sombrero": false,
+  "herramienta_separable": false,
+  "microaccesorios_completos": false
+}
