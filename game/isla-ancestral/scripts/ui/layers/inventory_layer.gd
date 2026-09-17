@@ -29,6 +29,8 @@ var _titulo_label: Label
 var _info_label: Label
 var _slots: Array = []          # Botones del grid (índice = slot del contenedor)
 var _drag_source: int = -1      # Slot origen para swap por dos clicks
+var _discard_button: Button     # M53 E: botón de descarte
+var _selected_slot: int = -1    # M53 E: slot seleccionado actualmente
 
 # Features portadas del legacy M14 (E3/E4/sección E)
 var _categoria_activa: int = -1
@@ -110,6 +112,17 @@ func _crear_ui() -> void:
 	hint.text = _t("SETTINGS.INVENTARIO_HINT")
 	hint.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_SMALL)
 	vbox.add_child(hint)
+
+	# M53 E: fila de descarte con confirmación
+	var discard_row := HBoxContainer.new()
+	discard_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(discard_row)
+	_discard_button = Button.new()
+	_discard_button.text = _t("SETTINGS.DESCARTAR")
+	_discard_button.custom_minimum_size = Vector2(120, 0)
+	_discard_button.disabled = true
+	_discard_button.pressed.connect(_on_discard_pressed)
+	discard_row.add_child(_discard_button)
 ## Pestañas de categoría (portado del legacy M14 — E-categorías).
 func _construir_tabs(parent: Control) -> void:
 	var tabs := HBoxContainer.new()
@@ -278,7 +291,11 @@ func _on_slot_pressed(indice: int) -> void:
 	if _drag_source < 0:
 		# Primer click: seleccionar origen
 		_drag_source = indice
+		_selected_slot = indice
 		_resaltar_slot(indice, true)
+		# M53 E: habilitar botón de descarte si el slot tiene ítem
+		if _discard_button:
+			_discard_button.disabled = false
 	elif _drag_source == indice:
 		# Segundo click en mismo slot: toggle favorito
 		slot.favorito = not slot.favorito
@@ -337,6 +354,38 @@ func _cancel_drag() -> void:
 	if _drag_source >= 0:
 		_resaltar_slot(_drag_source, false)
 	_drag_source = -1
+	_selected_slot = -1
+	if _discard_button:
+		_discard_button.disabled = true
+
+## M53 E: Descarte con confirmación (ConfirmPopup).
+func _on_discard_pressed() -> void:
+	if _selected_slot < 0:
+		return
+	var inv = get_node_or_null("/root/Inventario")
+	if inv == null:
+		return
+	var slot = _leer_slot(inv, _selected_slot)
+	if slot == null or slot.esta_libre():
+		return
+	var item_name := _nombre_item(str(slot.item_id))
+	var ui_mgr = get_node_or_null("/root/UIManager")
+	if ui_mgr and ui_mgr.has_method("open_confirm"):
+		ui_mgr.open_confirm(
+			"SETTINGS.DESCARTAR_TITULO",
+			"SETTINGS.DESCARTAR_MENSAJE" % item_name,
+			_ejecutar_descarte.bind(_selected_slot),
+		 Callable()
+		)
+	else:
+		_ejecutar_descarte(_selected_slot)
+
+func _ejecutar_descarte(indice: int) -> void:
+	var inv = get_node_or_null("/root/Inventario")
+	if inv and inv.has_method("remove_item"):
+		inv.remove_item(0, indice)
+		_cancel_drag()
+		_refrescar_contenido()
 
 ## ── Callbacks ────────────────────────────────────────────
 

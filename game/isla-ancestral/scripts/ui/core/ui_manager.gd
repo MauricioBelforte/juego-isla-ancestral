@@ -32,6 +32,8 @@ var _focus_backup: Dictionary = {}
 var _hud: Node = null
 ## Capa modal completa actual (solo una a la vez)
 var _current_modal_full: Node = null
+## M53 L: Guard para cierre rápido (previene doble pulsación)
+var _closing: bool = false
 
 ## ── Ciclo de vida ──────────────────────────────────────
 
@@ -58,6 +60,12 @@ func _ready() -> void:
 		gs.settings_changed.connect(_on_settings_changed)
 	# M53 RF6: tooltip por foco (accesible por teclado/gamepad)
 	ui_focus_moved.connect(_on_focus_moved_tooltip)
+	# M53 H: conectar señales de foco para hover sounds
+	ui_focus_moved.connect(_on_focus_hover_sound)
+	# M53 L: al volver de alt-tab, restaurar foco de la capa visible
+	var win := get_window()
+	if win and win.has_signal("focus_entered"):
+		win.focus_entered.connect(_on_window_focus_restored)
 
 ## §9.50 — Congela el mundo mientras haya una capa MODAL_FULL visible.
 ## Las capas UI van en PROCESS_MODE_ALWAYS (siguen recibiendo input); el resto
@@ -217,7 +225,12 @@ func pop_layer(layer: Node) -> void:
 func close_top() -> void:
 	if _stack.is_empty():
 		return
+	# M53 L: guard contra cierre rápido (doble pulsación)
+	if _closing:
+		return
+	_closing = true
 	pop_layer(_stack[_stack.size() - 1])
+	_closing = false
 
 
 ## Devuelve la capa en el tope de la pila
@@ -407,3 +420,53 @@ func _on_settings_changed() -> void:
 
 func _log(msg: String) -> void:
 	print("[DOM-UI] %s" % msg)
+
+## ── M53 H: Feedback sonoro (hover y click) ──────────────
+
+## Reproduce sonido de hover cuando el foco se mueve a un botón
+func _on_focus_hover_sound(node: Node) -> void:
+	if node is Button:
+		var fb = get_node_or_null("/root/UIFeedback")
+		if fb and fb.has_method("play_hover"):
+			fb.play_hover()
+
+## Conectar click sounds a todos los botones de una capa
+func _conectar_click_sounds(layer: Node) -> void:
+	if layer == null:
+		return
+	for child in _get_all_buttons(layer):
+		if child.pressed.is_connected(_on_button_click_sound):
+			continue
+		child.pressed.connect(_on_button_click_sound)
+
+func _on_button_click_sound() -> void:
+	var fb = get_node_or_null("/root/UIFeedback")
+	if fb and fb.has_method("play_click"):
+		fb.play_click()
+
+func _get_all_buttons(node: Node) -> Array[Button]:
+	var result: Array[Button] = []
+	if node is Button:
+		result.append(node)
+	for child in node.get_children():
+		result.append_array(_get_all_buttons(child))
+	return result
+
+## M53 L: al volver de alt-tab, restaurar foco de la capa visible
+func _on_window_focus_restored() -> void:
+	if _stack.is_empty():
+		return
+	# Verificar si hay un control con foco válido
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused and focused.is_inside_tree():
+		return  # ya hay foco válido
+	# Restaurar foco a la capa visible del tope
+	for i in range(_stack.size() - 1, -1, -1):
+		var layer := _stack[i]
+		if layer.visible and layer.has_method("focus_first"):
+			var first: Node = layer.focus_first()
+			if first and first is Control:
+				first.grab_focus()
+				ui_focus_moved.emit(first)
+				_log("foco restaurado tras alt-tab: %s" % layer.name)
+				return

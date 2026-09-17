@@ -21,6 +21,16 @@ const COLOR_MARKER_VIAJE := Color(0.3, 0.8, 0.9)
 const COLOR_FOG := Color(0.1, 0.1, 0.1, 0.9)
 const COLOR_EXPLORED := Color(0.3, 0.5, 0.3, 0.5)
 
+## M53 F / M58: Formas por tipo para daltonismo (no solo color)
+## Cada tipo usa una forma diferente: cuadrado=lugar, diamante=templo,
+## triángulo=tienda, círculo=viaje. Así se distinguen sin depender del color.
+const SHAPES := {
+	"lugar": "square",
+	"templo": "diamond",
+	"tienda": "triangle",
+	"viaje": "circle",
+}
+
 ## ── Configuración ────────────────────────────────────────
 const MAP_SIZE := Vector2(140, 140)
 const PLAYER_SIZE := 6.0
@@ -130,6 +140,7 @@ func _update_markers() -> void:
 	for marker_data in mm.config.get("marcadores", []):
 		var m_id := String(marker_data.get("id", ""))
 		var m_tipo := String(marker_data.get("tipo", ""))
+		var m_nombre := String(marker_data.get("nombre", m_id))
 		var m_coords: Array = marker_data.get("coords", [0, 0, 0])
 		if m_coords.size() < 2:
 			continue
@@ -139,17 +150,61 @@ func _update_markers() -> void:
 			explored = bool(marker_data.get("visible_inicial", false))
 		if not explored:
 			continue
-		var dot := ColorRect.new()
-		dot.size = Vector2(MARKER_SIZE, MARKER_SIZE)
-		dot.color = _color_por_tipo(m_tipo)
-		dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		dot.set_meta("marker_id", m_id)
+		# M53 F: crear marcador con forma diferenciada (daltonismo M58)
+		var marker := _crear_marcador_forma(m_tipo, m_id)
 		# Posición normalizada
 		var pos_2d := Vector2(float(m_coords[0]) / WORLD_SIZE, float(m_coords[2]) / WORLD_SIZE)
-		dot.set_meta("base_pos", pos_2d)
-		_update_marker_position(dot)
-		add_child(dot)
-		_markers.append(dot)
+		marker.set_meta("base_pos", pos_2d)
+		marker.set_meta("marker_nombre", m_nombre)
+		_update_marker_position(marker)
+		add_child(marker)
+		_markers.append(marker)
+
+## M53 F: Crea un marcador con forma diferenciada por tipo (accesibilidad daltonismo).
+## Usa Polygon2D con formas distintas: cuadrado, diamante, triángulo, círculo.
+func _crear_marcador_forma(tipo: String, id: String) -> Node:
+	var shape: String = SHAPES.get(tipo, "square")
+	var color: Color = _color_por_tipo(tipo)
+	var s: float = MARKER_SIZE
+
+	match shape:
+		"diamond":
+			# Diamante: cuadrado rotado 45°
+			var poly := Polygon2D.new()
+			poly.polygon = PackedVector2Array([
+				Vector2(0, -s), Vector2(s, 0),
+				Vector2(0, s), Vector2(-s, 0)
+			])
+			poly.color = color
+			poly.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			return poly
+		"triangle":
+			# Triángulo hacia arriba
+			var poly := Polygon2D.new()
+			poly.polygon = PackedVector2Array([
+				Vector2(0, -s), Vector2(s, s), Vector2(-s, s)
+			])
+			poly.color = color
+			poly.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			return poly
+		"circle":
+			# Círculo (aproximación con polígono de 8 lados)
+			var poly := Polygon2D.new()
+			var verts := PackedVector2Array()
+			for i in range(8):
+				var angle := TAU * i / 8.0
+				verts.append(Vector2(cos(angle) * s, sin(angle) * s))
+			poly.polygon = verts
+			poly.color = color
+			poly.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			return poly
+		_:
+			# Cuadrado (default: lugar)
+			var rect := ColorRect.new()
+			rect.size = Vector2(s * 2, s * 2)
+			rect.color = color
+			rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			return rect
 
 func _update_transform() -> void:
 	# Aplicar zoom y pan al fondo
@@ -167,15 +222,18 @@ func _update_transform() -> void:
 		if is_instance_valid(m):
 			_update_marker_position(m)
 
-func _update_marker_position(marker: ColorRect) -> void:
+func _update_marker_position(marker: Node) -> void:
 	if not marker.has_meta("base_pos"):
 		return
 	var base_pos: Vector2 = marker.get_meta("base_pos")
 	var map_area := MAP_SIZE * _zoom
-	marker.position = Vector2(
-		4.0 * _zoom + base_pos.x * map_area.x - MARKER_SIZE / 2.0 + _pan_offset.x,
-		4.0 * _zoom + base_pos.y * map_area.y - MARKER_SIZE / 2.0 + _pan_offset.y
-	)
+	var cx: float = 4.0 * _zoom + base_pos.x * map_area.x + _pan_offset.x
+	var cy: float = 4.0 * _zoom + base_pos.y * map_area.y + _pan_offset.y
+	# M53 F: manejar Polygon2D (position) y ColorRect (position)
+	if marker is Polygon2D:
+		marker.position = Vector2(cx, cy)
+	elif marker is ColorRect:
+		marker.position = Vector2(cx - MARKER_SIZE, cy - MARKER_SIZE)
 
 func _color_por_tipo(tipo: String) -> Color:
 	match tipo:

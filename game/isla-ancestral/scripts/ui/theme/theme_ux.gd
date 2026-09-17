@@ -119,15 +119,56 @@ func reload_after_font_change() -> void:
 
 
 ## Ajusta contraste para accesibilidad (M58)
-func ensure_contrast(_min_ratio: float) -> void:
-	# TODO: implementar cuando M58 esté disponible
-	pass
+func ensure_contrast(min_ratio: float = 4.5) -> void:
+	# M53 J: Aplicar alto contraste — colores con mayor diferencia
+	if base == null:
+		return
+	# Texto más oscuro para contraste AA (ratio ≥ 4.5:1)
+	base.set_color("font_color", "Label", Color(0.10, 0.05, 0.02))
+	base.set_color("font_color", "Button", Color(0.10, 0.05, 0.02))
+	base.set_color("font_color", "LineEdit", Color(0.10, 0.05, 0.02))
+	# Bordes más gruesos y oscuros
+	if base.has_stylebox("normal", "Button"):
+		var sb: StyleBoxFlat = base.get_stylebox("normal", "Button") as StyleBoxFlat
+		if sb:
+			sb.set_border_width_all(2)
+			sb.border_color = Color(0.20, 0.12, 0.05)
+	# Focus ring más visible
+	var focus_style := StyleBoxFlat.new()
+	focus_style.bg_color = Color.TRANSPARENT
+	focus_style.border_color = Color(1.0, 0.85, 0.2)
+	focus_style.set_border_width_all(4)
+	focus_style.set_corner_radius_all(12)
+	focus_style.set_content_margin_all(4)
+	base.set_stylebox("focus", "Button", focus_style)
+	base.set_stylebox("focus", "LineEdit", focus_style)
+	base.set_stylebox("focus", "OptionButton", focus_style)
 
 
 ## Indica si reduce_motion está activo (M58)
+var _reduce_motion: bool = false
+
 func reduce_motion_active() -> bool:
-	# TODO: leer de M58 cuando esté disponible
-	return false
+	return _reduce_motion
+
+func set_reduce_motion(active: bool) -> void:
+	_reduce_motion = active
+
+## M53 J: Aplicar reduce_motion — desactivar tweens y transiciones
+func apply_reduce_motion(node: Node) -> void:
+	if not _reduce_motion:
+		return
+	# Detener todos los tweens hijos
+	for child in _get_all_tweens(node):
+		child.kill()
+
+func _get_all_tweens(node: Node) -> Array[Tween]:
+	var result: Array[Tween] = []
+	for child in node.get_children():
+		if child is Tween:
+			result.append(child)
+		result.append_array(_get_all_tweens(child))
+	return result
 
 
 ## ── Métodos privados: carga de fuentes ─────────────────

@@ -661,3 +661,21 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - 6 de 7 scripts previstos y los 3 .tres no existen (data/player/ ausente); contratos
   §3 (PlayerState, player_fatigue, light_collected, terrain_changed) nunca publicados.
 - Reserva 950 consumida. Detalle: `Logs/977-QA-M11-Personaje_2026-09-17_08-32.md`.
+
+## 2026-09-17 22:55→23:15 — agnes-3-flash (Sapiens AI) / Kilo Code — M83 RECLAMADO → LIBERADO (iter. scanner, Log 974)
+
+- **M83 Licencias-De-Software: 🟡 Con dudas (revertido por auditoría, 7/100) → 🔵 → 🟡 Liberado (iter. agnes
+  scanner).** Relevo del `Revertido por auditoría` de agnes-2.5 (que lo había marcado "completado" sin
+  verificar). Alcance acotado: tooling/data-driven V0.
+- **Implementé la capa scanner que faltaba del diseño §A:** `scripts/licensing/license_scanner.gd`
+  (`TYPES` + `classificar()` por contenido con fallback UNKNOWN + `detectar_archivo_licencia` +
+  `scan_addon`/`scan_addons` recursivo) + `test_license_scanner_m83.gd` **24/0**.
+- **Hallazgos:** (1) `DirAccess.iterate_subdirs`/`iterate_directories` no existen en Godot 4.7.2 → usar
+  `get_directories()`; (2) el clasificador por substring corto daba falsos positivos ("implied"→"mpl") →
+  frases de alta señal; (3) el `Totales` del checklist estaba stale (decía 7, eran 9) → corregido a 16.
+- **Cableado CI:** `quality.yml` test-suite ahora corre `test_licenses_m83.gd` + `test_license_scanner_m83.gd`
+  (gate duro). (Nota: mi gate M117/M116 de Log 946 fue suavizado a `|| true` por otro agente — lo dejé.)
+- **No toqué:** §A.1/A.3/A.5/A.10 (Resources `LicenseProfile`/`LicensePolicy`, `scan_project` completo,
+  `scan_directory` recursivo, inventario-Resource) = decisión del dueño M83; usé Dictionary+JSON.
+- Reserva 974 consumida (log escrito, reserva borrada). M83 queda 🟡 16/100; QA cruzado §21.8 pendiente
+  (verificador ≠ agnes-3-flash).
