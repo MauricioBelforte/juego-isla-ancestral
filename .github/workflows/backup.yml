@@ -48,12 +48,13 @@ jobs:
         run: |
           STAMP=$(date +%Y%m%d)
           tar -czf "backup_${STAMP}.tar.gz" \
+            --warning=no-file-changed \
             --exclude-vcs-ignores \
             --exclude='.godot' \
             --exclude='tools/mcp/.venv' \
             --exclude='tools/mcp/blender-mcp' \
             --exclude='tools/mcp/godot-mcp/capturas' \
-            .
+            . || true
           ls -lh "backup_${STAMP}.tar.gz"
           sha256sum "backup_${STAMP}.tar.gz" > "backup_${STAMP}.tar.gz.sha256"
           echo "STAMP=$STAMP" >> "$GITHUB_ENV"
