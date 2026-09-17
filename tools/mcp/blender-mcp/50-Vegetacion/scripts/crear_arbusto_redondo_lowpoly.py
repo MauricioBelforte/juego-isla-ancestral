@@ -4,7 +4,7 @@
 # Composición: 3 bolas escalonadas (arbusto principal + 2 lóbulos) y
 # un parche de pasto en la base para dar variedad.
 #
-# Lecciones aplicadas (09-GUIA-BLENDER.md):
+# Lecciones aplicadas (DOCUMENTACION/GUIA-BLENDER/):
 #   E-01: bmesh única (no apilar primitivas)
 #   E-03: cámara + shading para captura
 #   E-04: ruta absoluta al .blend

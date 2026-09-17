@@ -3,7 +3,7 @@
 # corona pequeña y frondas cortas. Checklist: "Palmera joven (sin cocos, más baja)".
 #
 # Se envía vía execute_code del socket BlenderMCP (9876); NO es standalone.
-# Lecciones aplicadas de 09-GUIA-BLENDER.md:
+# Lecciones aplicadas de DOCUMENTACION/GUIA-BLENDER/:
 #   E-01: tronco como UNA sola malla bmesh (nada de cilindros apilados)
 #   E-02: importar todo lo de math que se use
 #   E-03: cámara propia + shading forzado para la captura

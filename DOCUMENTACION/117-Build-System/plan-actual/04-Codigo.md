@@ -167,3 +167,48 @@ boot → menú → nuevo mundo → 1 día → save/load → quit(0)
   runners Windows/macOS y presets que hoy no existen. No marcarlos `[x]` sin eso.
 - Antes de dar por verde el smoke test, migrar `test_build_m117.gd` a un harness `SceneTree`
   aislado (modelo: `game/isla-ancestral/tests/test_m111_utils_headless.gd`, Log 909).
+
+---
+
+## Notas del Agente — Iteración agnes (2026-09-17, agnes-3-flash (Sapiens AI) / Kilo Code, Log 946)
+
+**Estado:** Liberado (iter. agnes acotada). Alcance = tooling/CI + data-driven (mi encaje A).
+
+### Lo que hice
+- **Root-cause del V3 de M116:** `tools/ci/bump_version.py` no actualizaba `#define AppVersion`
+  de `installer/*.iss`; cada bump desalineaba `.iss` (quedó en `0.0.2`) vs `project.godot`
+  (`0.0.6`) → el check V3 del validador M116 (`test_instalador_m116.gd`) quedó rojo. M116 `✅`
+  era **falso-verde**. Lo detecté al cablear M117 al gate CI (run_tests.py --module build).
+- **Fix sistemático en `bump_version.py`:** nueva función `_set_version_in_installer_iss()` +
+  constante `INSTALLER_DIR` (module-level y bloque cwd-first) + entrada al loop principal.
+  Reescribe solo el valor numérico (`re.subn` sobre `#define\s+AppVersion\s+"[\w.-]+"`),
+  conserva comentario/whitespace, es **tolerante si `installer/` no existe**. Documentada en el
+  header (nuevo archivo tocado).
+- **Fix inmediato:** `installer/IslaAncestral.iss` `AppVersion` `0.0.2` → `0.0.6`.
+- **Anti-regresión:** `tools/ci/test_bump_version.py` +3 casos (real sincroniza `.iss` a la nueva
+  versión; conserva comentario; DRY no toca el `.iss`) → **14/14 OK**.
+- **Cierre del `[?]` "test_build_m117.gd no corre aislado":** cableé `test_build_m117.gd` y
+  `test_instalador_m116.gd` al **gate duro** de `.github/workflows/quality.yml` (job test-suite).
+
+### Verificación (godot 4.7.2 headless + python)
+- `python tools/ci/test_bump_version.py` → **14/14 OK, exit 0**.
+- `python tools/ci/run_tests.py --module build` → **test-build_m117 OK + test-instalador_m116 OK
+  (2 OK, 0 FAIL, exit 0)**. M116 V3 ahora verde.
+- Sintaxis: `bump_version.py` / `test_bump_version.py` OK; `quality.yml` YAML OK.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Aislación real del test:** imposible con `godot --script` — el modo **siempre** inicializa los
+  autoloads del proyecto (el harness de referencia M111 también bootea el juego completo; los 58
+  leaks de ObjectDB son preexistentes y ajenos a M117/M111). No lo resuelvo "haciendo por hacer":
+  lo documento como **limitación de Godot** y cierro el `[?]` vía gate duro + runner, que es el
+  cierre correcto.
+- Los **18 `[?]` externos** (M118/M96/M116-infra/M113/build-real) siguen sin cerrar: requieren
+  certificados, runners multiplataforma, presets y builds reales. No los toco.
+
+### Recomendaciones para el próximo agente
+- El gate duro ahora **bloquea el release** si `.iss` y `project.godot` se desalinean: cualquier
+  futuro bump que se haga **a mano** (sin `bump_version.py`) volverá a romper V3. Usar SIEMPRE
+  `python tools/ci/bump_version.py` para mover la versión.
+- Si se agrega una plataforma más al instalador (macOS/Linux, M96), revisar que su `.iss` lleve
+  `#define AppVersion` (la función ya lo cubre por glob `installer/*.iss`).
+- QA cruzado §21.8 del Log 946 lo hace un verificador ≠ agnes-3-flash.

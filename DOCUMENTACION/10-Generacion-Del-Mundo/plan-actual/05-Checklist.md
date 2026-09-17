@@ -137,7 +137,45 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 106 ítems · Completados: 90 · Pendientes: 0 · No resueltos: 16.
+
+---
+
+## I. QA Cruzado (atria-dawn, 2026-09-17 — Log 945)
+
+**Veredicto:** 🟡 El módulo era `✅ Completado por MiMo V2.5` (verificado por hy3 Log 722 + re-QA Hy3 Log 848 — **mismo modelo en ambos**) y vuelve a `🟡 Con dudas`.
+
+**Lo que SÍ está bien (verificado en código y con test nuevo):**
+- `world_generator.gd` es un `VoxelGeneratorScript` legítimo (47 l.) que delega en `IslandGenerator.get_block_at`; la referencia estática `_instancia_global` mantiene vivo el generador durante la generación multithread (fix "previously freed", guía Godot 10.14).
+- **Determinismo estructural real**: todas las fuentes de ruido se siembran desde `seed_value`. `test_generacion_m10_atria.gd` (nuevo): **misma semilla → mismos bloques en orden distinto (0 diffs de 300)**; sensibilidad a la semilla ✓; banda de agua pisable (SHALLOW_WATER en anillo 0.97) ✓; rango de alturas ✓ (min 2, máx 30).
+- Perfil en capas del usuario intacto: agua clara 0.94–1.03, profunda >1.03, montañas en el 55% interior, meseta 3-4, bedrock en y≤0 (spec M167).
+- El fix de `main_island.gd` (Log 776): el generador y la librería los instala **un solo** nodo — antes había un VoxelGeneratorNoise2D competidor.
+
+**Lo que NO se sostiene (16 flips a [?]):**
+1. **Sección C (pipeline de 8 capas):** las capas 3 (formaciones), 4 (roca/cuevas) y 8 (estructuras) **no existen en absoluto** — `island_generator.gd` no genera ríos, lagos, cascadas, cañones, la Gran Grieta, ni cuevas (búsqueda de `cueva|tunel|grieta|canyon` en scripts/world → 0). La capa 2 es solo altura + un ruido (sin eje humedad, umbrales hardcodeados, 5 biomas no los 13 de M09). Los knobs en `data/*.tres` no existen (`data/generation/` ausente). Tampoco es autoload (es instanciado por `main_island.gd:144`).
+2. **Sección E:** no hay reintento/fallback de chunks caídos ni `LOG_GENERATION` en el generador.
+3. **Sección F:** no existe catálogo de prefabs ni colocación de estructuras por el generador (faro/puerto/plaza viven como datos del canon M147, no como placement).
+4. **Minerales:** solo cobre/hierro/cristal; **carbón y oro no existen** como bloques (constantes ausentes en BlockType) pese a listarse.
+5. **Test A de determinismo (§37):** no existía hasta ahora; el nuevo cubre 2 órdenes de muestreo puntual, no "3 órdenes de regen → mismos bytes" de chunks completos.
+6. **Contradicción con M09 confirmada** (cadena del Log 944): el consumidor directo de las recetas de M09 nunca las consumió — implementó su propia lógica.
+
+**Bug real encontrado — bioma "snow" inalcanzable (registrado como BUG-043):**
+`_get_biome` (island_generator.gd:198-203) comprueba `mountain` (h > 0.65×max = 26) **antes** que `snow` (h > 0.8×max = 32). El muestreo de 2000 posiciones da **mountain=80, snow=0**, con altura máx real 38 > 32: hay posiciones que *deberían* ser nieve y se clasifican como montaña. El bloque SNOW (id 26) existe en BlockType y en la library de `main_island.gd:131`, pero el generador **nunca lo produce**. No se fixeó en esta iter: el perfil del terreno (max_height 40, boost 1.0) fue restaurado por el usuario (Log 791) y alterar la generación es decisión visual — el fix (reordenar 2 checks) queda para el dueño del módulo con visto bueno del usuario.
+
+**Código muerto / desviaciones menores:**
+- `BlockCatalog` (block_catalog.gd, 140 l.) **no tiene ningún usuario en runtime** — ni `BlockCatalog.new()` ni `get_library()` se llaman en ningún lado. Su library de 20 modelos tiene un **orden que no coincide** con los ids de BlockType (ICE=16→modelo 16 es GRAVEL; WATER=17→MOSS; SNOW/26, GRAVEL/27, MOSS/28, MUD/29 y SHALLOW_WATER/30 fuera de rango). Es inofensivo porque la library real la construye `main_island.gd:96-139` inline con el orden correcto (31 modelos, ids 0–30 ✓), pero el archivo engaña.
+- `IslandGenerator.get_debug_color` usa `_catalog` sin null-check y `world_generator.gd:23` pasa `null` → sería null-deref; no tiene llamadores (código muerto latente).
+- `_has_ore` crea un `FastNoiseLite.new()` **en cada llamada** (island_generator.gd:213) — churn de allocaciones en el camino caliente del generador (cada bloque bajo y<height-10). Debería preconstruirse en `_setup_noises()` como los otros ruidos. (Rendimiento — M61.)
+- `BlockCatalog.get_model_index` tampoco tiene llamadores.
+
+**Corrección a claims previos:** la fila de CHECKLIST-GLOBAL decía "21 bloques con colores" — la library real de `main_island.gd` tiene **31 modelos** (0–30). La nota de MiMo decía "30+ bloques" (aproximado correcto).
+
+**Recomendaciones para el próximo agente:**
+1. **Decidir el alcance real de M10:** o bien implementar las capas 3/4/8 (formaciones, cuevas, estructuras) y los knobs, o reescribir esos items como "contrato propuesto para M1/otros módulos" (como en M09).
+2. Fix del bioma snow (reordenar checks en `_get_biome`) — con visto bueno del usuario sobre el perfil visual.
+3. `_has_ore`: mover el `FastNoiseLite.new()` a `_setup_noises()`.
+4. Borrar `BlockCatalog` muerto o cablearlo de verdad (que `main_island.gd` lo use en vez de la library inline, que es la que funciona).
+5. Escribir el test A completo (3 órdenes de chunks completos → mismos bytes) usando VoxelBuffer.
 **Nota:** la implementación (ruido, asincronía, medición) es del prototipo M1 y M61; la especificación queda cerrada aquí.
 
 - [x] Agua clara pisable (SHALLOW_WATER 30) y agua profunda en el borde [M] (2026-08-29)

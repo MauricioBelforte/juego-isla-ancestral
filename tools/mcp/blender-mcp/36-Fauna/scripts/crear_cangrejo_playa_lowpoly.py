@@ -11,7 +11,7 @@
 #   con punta plana. Paleta: caparazon naranja-rojizo, patas rojo oscuro,
 #   pinzas naranja claro con punta crema, ojos negro humedo.
 #
-# ANIMABLE EN GODOT (09-GUIA-BLENDER §8 / 07-GUIA-GODOT §11):
+# ANIMABLE EN GODOT (OBSOLETOS/09-GUIA-BLENDER.md §8 / GUIA-GODOT/11-blender-godot.md §11):
 #   - SM_Cangrejo_Pinza_{L,R}: 1 pieza por pinza COMPLETA (brazo+quela+
 #     mandibulas en 1 malla bmesh), origen en el HOMBRO -> Godot la agita
 #     entera rotando desde ahi. La V de la mandibula va FUSA (estatica):

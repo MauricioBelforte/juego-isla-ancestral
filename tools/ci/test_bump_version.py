@@ -64,6 +64,33 @@ def main() -> int:
         with open(proj, "r", encoding="utf-8") as f:
             content = f.read()
         tests.append(('config/version="0.0.1"' in content, "real actualiza project.godot a 0.0.1"))
+    # M117 iter. 3 (Log 946): el bump sincroniza #define AppVersion de installer/*.iss
+    with tempfile.TemporaryDirectory() as tmp:
+        proj = os.path.join(tmp, "game", "isla-ancestral", "project.godot")
+        os.makedirs(os.path.dirname(proj), exist_ok=True)
+        with open(proj, "w", encoding="utf-8") as f:
+            f.write('config/version="0.0.0-dev"\n')
+        os.makedirs(os.path.join(tmp, "installer"), exist_ok=True)
+        with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "w", encoding="utf-8") as f:
+            f.write('#define AppVersion   "0.0.2"          ; DEBE coincidir\n')
+        r = subprocess.run(["python", script, "patch"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "r", encoding="utf-8") as f:
+            iss = f.read()
+        tests.append(('#define AppVersion   "0.0.1"' in iss, "real: el bump sincroniza el .iss a 0.0.1"))
+        tests.append(("; DEBE coincidir" in iss, "real: conserva el comentario del .iss"))
+    # DRY no modifica el .iss
+    with tempfile.TemporaryDirectory() as tmp:
+        proj = os.path.join(tmp, "game", "isla-ancestral", "project.godot")
+        os.makedirs(os.path.dirname(proj), exist_ok=True)
+        with open(proj, "w", encoding="utf-8") as f:
+            f.write('config/version="0.0.0-dev"\n')
+        os.makedirs(os.path.join(tmp, "installer"), exist_ok=True)
+        with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "w", encoding="utf-8") as f:
+            f.write('#define AppVersion   "0.0.2"          ; DEBE coincidir\n')
+        r = subprocess.run(["python", script, "patch", "--dry-run"], capture_output=True, text=True, timeout=10, cwd=tmp)
+        with open(os.path.join(tmp, "installer", "IslaAncestral.iss"), "r", encoding="utf-8") as f:
+            iss = f.read()
+        tests.append(('#define AppVersion   "0.0.2"' in iss, "DRY no modifica el .iss"))
     # Kind invalido
     r5 = subprocess.run(["python", script, "invalid"], capture_output=True, text=True, timeout=10)
     tests.append((r5.returncode != 0, f"kind invalido: exit != 0"))

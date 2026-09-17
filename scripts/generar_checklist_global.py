@@ -7,9 +7,18 @@ la tabla resumen de la CHECKLIST-GLOBAL.md automáticamente.
 
 PROTECCIONES INCLUIDAS:
 - Crea un backup automático en scripts/backups/ antes de sobrescribir.
+- **Preserva TODO el contenido fuera de la tabla** (aviso de codificación UTF-8,
+  "Flujo para modelos nuevos", simbología, resumen del proyecto). Antes el script
+  reescribía el archivo desde una plantilla fija y borraba esas secciones
+  (BUG-039: pérdida medida de 38,9 KB en la corrida del 2026-09-15 01:11).
+- **Preserva el esquema de columnas del archivo existente** (encabezado + separador
+  tal cual). Antes forzaba una tabla de 10 columnas y eliminaba la columna `Recom`.
 - Preserva Todas las columnas manuales (Prioridad, Complejidad, Dependencias,
-  Agente actual, Última actividad, Notas) si el módulo ya existía.
+  Recom, Agente actual, Última actividad, Notas) si el módulo ya existía.
 - Solo actualiza Estado (según reglas de inferencia) y Progreso (conteo real).
+- **Conserva la anotación manual del Estado** cuando el emoji calculado coincide
+  (p. ej. `🟡 Liberado (Log 831)` no se degrada a `🟡 Con dudas`): esa anotación es
+  la traza de qué agente y qué log liberaron el módulo.
 - No pisa la firma "✅ Verificado por" en Notas.
 
 Uso:
@@ -46,10 +55,31 @@ COLUMNAS_MANUALES = {
     "prioridad",
     "complejidad",
     "dependencias",
+    "recom",
     "agenteactual",
     "ultimaactividad",
     "notas",
 }
+
+# Encabezado/separador por defecto (solo si el archivo destino no existe todavía)
+ENCABEZADO_DEFECTO = (
+    "| ID | Módulo | Estado | Progreso | Prioridad | Complejidad | Dependencias | "
+    "Recom | Agente actual | Última actividad | Notas |"
+)
+SEPARADOR_DEFECTO = (
+    "|----|--------|--------|----------|-----------|-------------|--------------|"
+    "-------|---------------|------------------|-------|"
+)
+PREFIJO_DEFECTO = """# CHECKLIST-GLOBAL.md — Orquestador Multiagente
+
+> **Modelo:** [Nombre del modelo]
+> **Plataforma:** [Nombre de la plataforma]
+> **Última generación automática:** —
+
+Este archivo es la **única fuente de verdad** sobre el estado global del proyecto. Contiene la **tabla resumen** con UNA fila por módulo. Los subitems detallados viven en `DOCUMENTACION/{NN}-Modulo/plan-actual/05-Checklist.md` de cada módulo.
+
+## Tabla Resumen de Módulos
+""".split("\n")
 
 
 # ---------------------------------------------------------------------------
@@ -107,12 +137,102 @@ def normalizar_nombre(nombre: str):
     return re.sub(r"[^a-z0-9]", "", nombre)
 
 
+def leer_estructura_existente(archivo: Path):
+    """Devuelve (prefijo, encabezado, separador, cuerpo, sufijo) del existente.
+
+    ``prefijo`` = todo lo anterior a la tabla · ``sufijo`` = todo lo posterior.
+    El generador NO debe tocar ese contenido (aviso ⛔ de codificación, "Flujo
+    para modelos nuevos", simbología, resumen del proyecto).
+
+    El fin de la tabla se detecta por el **siguiente encabezado markdown**
+    (``#``), NO por la primera línea que no empiece con ``|``: hay filas cuyo
+    campo Notas continuó en una línea huérfana y eso cortaba la tabla a mitad
+    (BUG-039: el resto de la tabla se anexaba como "sufijo" → filas duplicadas).
+
+    Devuelve ``(None, None, None, None, None)`` si no hay tabla reconocible.
+    """
+    if not archivo.exists():
+        return None, None, None, None, None
+
+    lineas = archivo.read_text(encoding="utf-8").splitlines()
+
+    inicio = None
+    for i, linea in enumerate(lineas):
+        if linea.strip().startswith("| ID |"):
+            inicio = i
+            break
+
+    if inicio is None or inicio + 1 >= len(lineas):
+        return None, None, None, None, None
+
+    fin = len(lineas)
+    for j in range(inicio + 2, len(lineas)):
+        if lineas[j].startswith("#"):
+            fin = j
+            break
+
+    return (
+        lineas[:inicio],
+        lineas[inicio],
+        lineas[inicio + 1],
+        lineas[inicio + 2 : fin],
+        lineas[fin:],
+    )
+
+
+def parsear_filas(cuerpo, encabezados_norm):
+    """Convierte el cuerpo de la tabla en ``{id_modulo: {columna: valor}}``.
+
+    - Usa ``maxsplit`` = nº de columnas - 1 para que una `|` dentro de las Notas
+      no desplace las celdas (antes lo hacía y corrompía la fila).
+    - Las líneas huérfanas (que no empiezan con ``|``) se reenganchan a las Notas
+      de la fila anterior en lugar de perderse.
+    """
+    ncols = len(encabezados_norm)
+    filas = {}
+    ultimo_id = None
+
+    for linea in cuerpo:
+        s = linea.strip()
+        if not s:
+            continue
+
+        if s.startswith("|"):
+            celdas = [c.strip() for c in s.strip("|").split("|", ncols - 1)]
+            if len(celdas) < 2 or not celdas[0].isdigit():
+                continue
+            datos = {}
+            for idx, col in enumerate(encabezados_norm):
+                if idx < len(celdas):
+                    datos[col] = celdas[idx]
+            filas[celdas[0]] = datos
+            ultimo_id = celdas[0]
+        elif ultimo_id is not None:
+            filas[ultimo_id]["notas"] = (
+                filas[ultimo_id].get("notas", "").rstrip() + " " + s
+            ).strip()
+
+    return filas
+
+
 def leer_tabla_existente(archivo: Path):
     """Lee la tabla existente de CHECKLIST-GLOBAL.md.
 
     Devuelve (encabezados_normalizados, filas) donde filas es un dict
     {id_modulo: {columna_normalizada: valor}}.
     """
+    prefijo, encabezado, _sep, cuerpo, _sufijo = leer_estructura_existente(archivo)
+    if encabezado is None:
+        return [], {}
+
+    encabezados_raw = [c.strip() for c in encabezado.strip().strip("|").split("|")]
+    encabezados_norm = [normalizar_nombre(h) for h in encabezados_raw]
+
+    return encabezados_norm, parsear_filas(cuerpo, encabezados_norm)
+
+
+def _leer_tabla_legacy(archivo: Path):
+    """(obsoleto) Parseo posicional original. Se conserva como referencia."""
     if not archivo.exists():
         return [], {}
 
@@ -131,12 +251,14 @@ def leer_tabla_existente(archivo: Path):
 
     encabezados_raw = [c.strip() for c in lineas[inicio].strip().strip("|").split("|")]
     encabezados_norm = [normalizar_nombre(h) for h in encabezados_raw]
+    ncols = len(encabezados_norm)
 
     filas = {}
     for linea in lineas[inicio + 2 :]:
         if not linea.strip().startswith("|"):
             continue
-        celdas = [c.strip() for c in linea.strip().strip("|").split("|")]
+        # maxsplit: la última columna (Notas) absorbe cualquier `|` interna
+        celdas = [c.strip() for c in linea.strip().strip("|").split("|", ncols - 1)]
         if len(celdas) < 2:
             continue
         id_modulo = celdas[0].strip()
@@ -167,18 +289,30 @@ def generar_tabla(salida: Path, dry_run: bool = False):
         print("⚠️ No se encontraron checklists en DOCUMENTACION/*/plan-actual/")
         return 1
 
+    # Leer la estructura existente: prefijo/sufijo (intocables) + esquema de columnas
+    prefijo, encabezado, separador, cuerpo, sufijo = leer_estructura_existente(salida)
+    if encabezado is None:
+        prefijo = list(PREFIJO_DEFECTO)
+        encabezado = ENCABEZADO_DEFECTO
+        separador = SEPARADOR_DEFECTO
+        cuerpo = []
+        sufijo = []
+    columnas = [normalizar_nombre(c) for c in encabezado.strip().strip("|").split("|")]
+
     # Leer tabla existente (si existe) para preservar columnas manuales
-    _, filas_existente = leer_tabla_existente(salida)
+    filas_existente = parsear_filas(cuerpo, columnas)
 
     filas_output = []
     total_x = 0
     total_items = 0
     cambios = []
+    ids_generados = set()
 
     for cl in checklists:
         modulo_dir = cl.parent.parent
         nombre_modulo = modulo_dir.name
         id_modulo = nombre_modulo.split("-")[0] if "-" in nombre_modulo else nombre_modulo
+        ids_generados.add(id_modulo)
 
         x, pendientes, dudas = contar_checklist(cl)
         total_items_modulo = x + pendientes + dudas
@@ -193,18 +327,24 @@ def generar_tabla(salida: Path, dry_run: bool = False):
         estado = inferir_estado(x, pendientes, dudas, estado_previo)
         progreso = f"{x}/{total_items_modulo}" if total_items_modulo > 0 else "0/0"
 
-        # Preservar columnas manuales (prioridad, complejidad, dependencias,
-        # agente actual, última actividad, notas)
-        prioridad = previo.get("prioridad", "—")
-        complejidad = previo.get("complejidad", "—")
-        dependencias = previo.get("dependencias", "—")
-        agente = previo.get("agenteactual", "—")
-        ultima_act = previo.get("ultimaactividad", "—")
-        notas = previo.get("notas", "—")
+        # Conservar la anotación manual del Estado si el emoji coincide
+        # (p. ej. "🟡 Liberado (Log 831)" no se degrada a "🟡 Con dudas").
+        prev_txt = (estado_previo or "").strip()
+        if prev_txt and prev_txt[:1] == estado[:1] and prev_txt != estado:
+            estado = prev_txt
+
+        # Reconstruir la fila con el esquema de columnas del archivo existente:
+        # se recalculan id/módulo/estado/progreso, el resto se preserva.
+        fila = {}
+        for col in columnas:
+            fila[col] = previo.get(col, "—")
+        fila["id"] = id_modulo
+        fila["modulo"] = nombre_modulo
+        fila["estado"] = estado
+        fila["progreso"] = progreso
 
         filas_output.append(
-            f"| {id_modulo} | {nombre_modulo} | {estado} | {progreso} | "
-            f"{prioridad} | {complejidad} | {dependencias} | {agente} | {ultima_act} | {notas} |"
+            "| " + " | ".join(fila.get(col, "—") for col in columnas) + " |"
         )
 
         # Registrar cambios de estado/progreso para el resumen
@@ -212,6 +352,17 @@ def generar_tabla(salida: Path, dry_run: bool = False):
             cambios.append(f"  • Módulo {id_modulo} ({nombre_modulo}): estado '{previo.get('estado', '—')}' → '{estado}'")
         if previo.get("progreso") != progreso:
             cambios.append(f"  • Módulo {id_modulo} ({nombre_modulo}): progreso '{previo.get('progreso', '—')}' → '{progreso}'")
+
+    # Filas que estaban en la tabla pero NO tienen `05-Checklist.md` detectable:
+    # se conservan tal cual (nunca borrar información por un glob que no matchea).
+    huerfanas = [mid for mid in filas_existente if mid not in ids_generados]
+    for mid in sorted(huerfanas, key=lambda s: int(s) if s.isdigit() else 10**9):
+        datos = filas_existente[mid]
+        filas_output.append(
+            "| " + " | ".join(datos.get(col, "—") for col in columnas) + " |"
+        )
+    if huerfanas:
+        print(f"ℹ️  Filas conservadas sin checklist detectable: {len(huerfanas)} ({', '.join(huerfanas[:10])}…)")
 
     # Contar estados
     conteo_estados = {"⬜": 0, "🟢": 0, "🔵": 0, "🔴": 0, "🟡": 0, "✅": 0}
@@ -226,23 +377,7 @@ def generar_tabla(salida: Path, dry_run: bool = False):
 
     porcentaje = round(total_x * 100 / total_items, 1) if total_items > 0 else 0
 
-    contenido = f"""# CHECKLIST-GLOBAL.md — Orquestador Multiagente
-
-> **Modelo:** [Nombre del modelo]
-> **Plataforma:** [Nombre de la plataforma]
-> **Última generación automática:** {ahora}
-
-Este archivo es la **única fuente de verdad** sobre el estado global del proyecto. Contiene la **tabla resumen** con UNA fila por módulo. Los subitems detallados viven en `DOCUMENTACION/{{NN}}-Modulo/plan-actual/05-Checklist.md` de cada módulo.
-
-> ⚠️ **Generado por script.** Las columnas `Estado` y `Progreso` se recalculan automáticamente según los `05-Checklist.md`. Las columnas manuales (`Prioridad`, `Complejidad`, `Dependencias`, `Agente actual`, `Última actividad`, `Notas`) se **preservan** de la versión anterior si el módulo ya existía.
-
-## Tabla Resumen de Módulos
-
-| ID | Módulo | Estado | Progreso | Prioridad | Complejidad | Dependencias | Agente actual | Última actividad | Notas |
-|----|--------|--------|----------|-----------|-------------|--------------|---------------|------------------|-------|
-{chr(10).join(filas_output)}
-
-## Simbología de Estados
+    contenido = f"""## Simbología de Estados
 
 | Estado | Significado |
 |--------|-------------|
@@ -265,6 +400,54 @@ Este archivo es la **única fuente de verdad** sobre el estado global del proyec
 - **Progreso total de subitems:** {total_x}/{total_items} ({porcentaje}%)
 """
 
+    # --- Actualizar el prefijo (sin borrarlo) -------------------------------
+    for i, linea in enumerate(prefijo):
+        if "Última generación automática" in linea:
+            # reemplazar solo el datetime, conservando anotaciones tipo
+            # "(recontado a mano 2026-08-31 23:53)"
+            prefijo[i] = re.sub(
+                r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}(?::\d{2})?", ahora, linea, count=1
+            )
+            break
+    else:
+        # No había línea de timestamp: insertarla tras el bloque de título
+        prefijo = list(prefijo)
+        prefijo.insert(1, f"> **Última generación automática:** {ahora}")
+
+    # --- Actualizar el resumen del sufijo (si existe) -----------------------
+    def _rep_resumen(texto: str) -> str:
+        pares = [
+            (r"(?m)^(- \*\*Total de módulos:\*\*) .*$", rf"\1 {len(filas_output)}"),
+            (r"(?m)^(- \*\*Completados \(`✅`\):\*\*) .*$", rf"\1 {conteo_estados['✅']}"),
+            (r"(?m)^(- \*\*En curso \(`🔵`\):\*\*) .*$", rf"\1 {conteo_estados['🔵']}"),
+            (r"(?m)^(- \*\*En riesgo \(`🔴`\):\*\*) .*$", rf"\1 {conteo_estados['🔴']}"),
+            (r"(?m)^(- \*\*Con dudas \(`🟡`\):\*\*) .*$", rf"\1 {conteo_estados['🟡']}"),
+            (r"(?m)^(- \*\*Disponibles \(`🟢`\):\*\*) .*$", rf"\1 {conteo_estados['🟢']}"),
+            (r"(?m)^(- \*\*Sin iniciar \(`⬜`\):\*\*) .*$", rf"\1 {conteo_estados['⬜']}"),
+            (
+                r"(?m)^(- \*\*Progreso total de subitems:\*\*) .*$",
+                rf"\1 {total_x}/{total_items} ({porcentaje}%)",
+            ),
+        ]
+        for patron, repl in pares:
+            texto = re.sub(patron, repl, texto)
+        return texto
+
+    if sufijo:
+        # Quedarse solo con el bloque "Resumen del Proyecto" si ya existía, para
+        # no duplicar la simbología; el resto del sufijo se conserva tal cual.
+        tiene_resumen = any("Resumen del Proyecto" in ln for ln in sufijo)
+        tiene_simbologia = any("Simbología de Estados" in ln for ln in sufijo)
+        if tiene_resumen and tiene_simbologia:
+            contenido = _rep_resumen("\n".join(sufijo)).lstrip("\n")
+        else:
+            contenido = "\n".join(sufijo).strip("\n") + "\n\n" + contenido
+
+    tabla = "\n".join([encabezado, separador] + filas_output)
+
+    partes = ["\n".join(prefijo).rstrip("\n"), "", tabla, "", contenido.strip("\n")]
+    contenido = "\n".join(partes).rstrip("\n") + "\n"
+
     if dry_run:
         print("🔍 MODO DRY-RUN: no se escribió nada. Cambios que se aplicarían:")
         if cambios:
@@ -282,9 +465,19 @@ Este archivo es la **única fuente de verdad** sobre el estado global del proyec
         shutil.copy2(salida, backup_path)
         print(f"💾 Backup creado: {backup_path}")
 
-    salida.write_text(contenido, encoding="utf-8")
+    # Conservar el estilo de fin de línea del archivo existente (no imponer uno).
+    # Path.write_text con newline=None traduce "\n" a os.linesep (CRLF en Windows)
+    # y eso convertía en silencio un archivo LF en CRLF.
+    salto = "\n"
+    if salida.exists():
+        crudo = salida.read_bytes()
+        if crudo.count(b"\r\n") > (crudo.count(b"\n") - crudo.count(b"\r\n")):
+            salto = "\r\n"
+
+    salida.write_text(contenido, encoding="utf-8", newline=salto)
     print(f"✅ CHECKLIST-GLOBAL.md generado en {salida}")
-    print(f"   Módulos: {len(filas_output)} | Subitems completados: {total_x}/{total_items} ({porcentaje}%)")
+    print(f"   Módulos: {len(filas_output)} | Columnas: {len(columnas)} | Salto de línea: {salto!r}")
+    print(f"   Subitems completados: {total_x}/{total_items} ({porcentaje}%)")
 
     if cambios:
         print("\n📋 Cambios aplicados:")

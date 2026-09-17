@@ -1641,3 +1641,52 @@ declarada** en ese catálogo.
 evidencia en cada corrida) · `Mensajes entre modelos/ESTADO-PARALELO.md`.
 
 **Firma:** DeepSeek-V4.1-Flash / WorkBuddy — reportado 2026-09-15 (Log 920)
+
+## BUG-043: bioma "snow" inalcanzable en el generador de la isla (checks en orden incorrecto)
+
+- **Fecha de reporte:** 2026-09-17 04:55
+- **Modulo(s) afectado(s):** M10 (Generación del Mundo) — `scripts/world/island_generator.gd:188-209`; efecto visible en M09/M167 (terreno de la Isla Raíz)
+- **Severidad:** 🟡 Menor (visual — la nieve nunca aparece pese a existir el bloque)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado (requiere visto bueno del usuario sobre el perfil visual del terreno — Log 791 restauró max_height 40 / boost 1.0 tras rechazar el terreno escalado)
+- **Reportado por:** atria-dawn (Shanghai AI Laboratory) / Kilo Code — QA M10, Log 945
+
+**Descripcion del problema:**
+`_get_biome(x, z)` clasifica los biomas por altitud con dos umbrales calculados sobre
+`max_height` (40 nominal): mountain cuando `h > 0.65*40 = 26` y snow cuando
+`h > 0.8*40 = 32`. El check de **mountain se evalúa primero** (línea 198) y el de snow
+después (línea 202), así que toda posición alta vuelve "mountain" y el bioma "snow"
+es **código muerto**. El bloque SNOW (BlockType.SNOW = 26) existe y está registrado en
+la VoxelBlockyLibrary de `main_island.gd:131`, pero el generador nunca lo produce.
+
+**Evidencia (test nuevo, `scripts/world/test_generacion_m10_atria.gd`):**
+muestreo de 2000 posiciones en espiral dentro del 55% interior con el config de
+runtime (semilla 42, radio 2560, max_height 40, boost 1.0):
+`mountain=80, snow=0`, **altura máxima real = 38 > 32**. Es decir, existen posiciones
+que deberían clasificarse como nieve y se clasifican como montaña.
+
+**Pasos para reproducir:**
+1. `Godot --headless --path game/isla-ancestral --script res://scripts/world/test_generacion_m10_atria.gd`
+2. El test falla con: "bioma snow alcanzable: snow=0/2000 — causa única: el check de
+   mountain (26) va ANTES que el de snow (32)".
+
+**Comportamiento esperado:**
+Posiciones con `h > 32` deberían ser bioma "snow" (superficie BlockType.SNOW).
+
+**Solucion propuesta:**
+En `island_generator.gd:188-209`, invertir el orden de los checks (snow antes que
+mountain) para que el umbral más alto gane:
+```gdscript
+if height > max_height * 0.8:
+    return "snow"
+if height > max_height * 0.65:
+    return "mountain"
+```
+**Caveat:** esto hace que nieve aparezca en las cumbres — cambio visual que el usuario
+debe aprobar, porque el perfil del terreno se congeló deliberadamente (Log 791).
+
+**Notas:**
+- No es un crash ni afecta al gameplay; es contenido (nieve) que nunca se genera.
+- Cadenas relacionadas: M09 (Log 944) documentó que el generador no consume las recetas
+  de biomas de M09; este bug es otra consecuencia de que la lógica de biomas es
+  ad-hoc del generador en vez de data-driven.

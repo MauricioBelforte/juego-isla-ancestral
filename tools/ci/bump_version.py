@@ -5,6 +5,7 @@
 #   - data/legal/copyright.json (year de cada elemento)
 #   - CHANGELOG.md (entrada nueva con la version)
 #   - data/operaciones/postlaunch_checks.json (si tiene campo version)
+#   - installer/*.iss (#define AppVersion "..." — M117 iter. 3, Log 946; V3 de M116)
 # Tipos de bump: major, minor, patch.
 # Uso: python tools/ci/bump_version.py [major|minor|patch] [--dry-run]
 #
@@ -31,6 +32,7 @@ PROJECT_GODOT = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "project.go
 COPYRIGHT_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "legal", "copyright.json")
 CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
 POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
+INSTALLER_DIR = os.path.join(PROJECT_ROOT, "installer")
 
 
 def _root_desde_cwd() -> Optional[str]:
@@ -56,6 +58,7 @@ if _CWD_ROOT:
     COPYRIGHT_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "legal", "copyright.json")
     CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
     POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
+    INSTALLER_DIR = os.path.join(PROJECT_ROOT, "installer")
 
 
 
@@ -184,6 +187,41 @@ def _add_changelog_entry(new_version: str, new_year: int, dry_run: bool) -> Tupl
     return True, "CHANGELOG.md actualizado"
 
 
+def _set_version_in_installer_iss(new_version: str, dry_run: bool) -> Tuple[bool, str]:
+    """Actualiza #define AppVersion "..." en installer/*.iss para que coincida con
+    config/version de project.godot (V3 del validador M116). Solo reescribe el valor
+    numerico (conserva comentario/whitespace). Ausente = skip tolerante: un repo sin
+    installer/ no rompe el bump de version.
+
+    FIX M117 iter. 3 (agnes-3-flash, Log 946): el bump no sincronizaba AppVersion del
+    instalador, asi que cada bump desalineaba .iss vs project.godot y el check V3 de
+    M116 quedaba rojo (falso-verde del modulo)."""
+    if not os.path.isdir(INSTALLER_DIR):
+        return True, "installer/ ausente — skip"
+    total = 0
+    archivos = 0
+    for name in sorted(os.listdir(INSTALLER_DIR)):
+        if not name.endswith(".iss"):
+            continue
+        path = os.path.join(INSTALLER_DIR, name)
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read()
+        new_content, k = re.subn(
+            r'(#define\s+AppVersion\s+")[\w.-]+(")',
+            lambda m: m.group(1) + new_version + m.group(2),
+            content,
+        )
+        if k > 0:
+            archivos += 1
+            total += k
+            if not dry_run:
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(new_content)
+    if total == 0:
+        return True, "installer/*.iss: sin #define AppVersion para actualizar"
+    return True, f"installer: {total} AppVersion en {archivos} archivo(s)"
+
+
 def bump_semver(current: Tuple[int, int, int], kind: str) -> Tuple[int, int, int]:
     """Incrementa la version segun kind."""
     major, minor, patch = current
@@ -219,6 +257,7 @@ def main() -> int:
         (_set_version_in_project_godot, (new_version, args.dry_run)),
         (_set_version_in_copyright_json, (new_version, new_year, args.dry_run)),
         (_add_changelog_entry, (new_version, new_year, args.dry_run)),
+        (_set_version_in_installer_iss, (new_version, args.dry_run)),
     ]:
         ok, msg = func(*args_)
         status = "OK" if ok else "FAIL"

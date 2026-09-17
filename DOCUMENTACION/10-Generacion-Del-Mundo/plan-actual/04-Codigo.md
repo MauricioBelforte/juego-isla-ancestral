@@ -97,3 +97,35 @@ El IslandGenerator se perdia mientras los threads del VoxelTerrain generaban chu
 (error "get_block_at in previously freed" en world_generator.gd:34). FIX: referencia
 estatica global `_instancia_global` en world_generator.gd que mantiene vivo el
 generador. Validado: run completo sin errores. Detalle en guia Godot 10.14.
+
+## 6. QA Cruzado — Notas del Agente (atria-dawn)
+
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-17 04:55
+**Estado:** QA realizado — módulo revierte `✅` → `🟡` (16 ítems a `[?]`)
+
+### Lo que verifiqué
+- **Tests:** escribí `scripts/world/test_generacion_m10_atria.gd` (no existía NINGÚN test de generación). Resultado: **4 checks pass + 1 fallo documentado**. Pasados: determinismo (misma semilla → mismos bloques en orden distinto, 0 diffs de 300 muestras), sensibilidad a la semilla, banda de agua pisable (SHALLOW_WATER en anillo 0.97), rango de alturas (min 2, máx 30).
+- **Código:** `world_generator.gd` (47 l.) es un `VoxelGeneratorScript` legítimo que delega en `IslandGenerator.get_block_at`. La referencia estática `_instancia_global` (fix "previously freed", §5 de este archivo) sigue siendo necesaria y correcta. La library de bloques la construye `main_island.gd:96-139` inline con **31 modelos en el orden correcto de ids (0–30)**.
+- **Boot headless:** proyecto arranca limpio; mismo ERROR benigno de teardown ("9 resources still in use at exit").
+
+### Hallazgos
+1. **Pipeline de 8 capas: faltan 3 capas enteras.** Las capas 3 (Formaciones), 4 (Roca y cuevas) y 8 (Estructuras) **no existen**: búsqueda de `cueva|tunel|grieta|canyon` en `scripts/world/` → 0 coincidencias de código; no hay catálogo de prefabs ni placement de estructuras (faro/puerto/plaza viven como datos del canon M147, no los coloca el generador). La capa 2 es altura + un solo ruido (sin eje humedad), con umbrales hardcodeados (0.65/0.8) y **5 biomas, no los 13 de M09**.
+2. **Cadena M09 → M10 confirmada** (viene del Log 944): el generador **no consume nada de M09**. Es lógica ad-hoc. M27 también tuvo que crear su propio catálogo de biomas. La sección F del checklist de M09 ("consumido por M10") era falsa por los dos lados.
+3. **Minerales:** solo cobre (y<5), hierro (y<15) y cristal. **Carbón y oro no existen** como constantes en BlockType pese a listarse en el checklist.
+4. **Claims de infraestructura falsas:** no es autoload (lo instancia `main_island.gd:144`), no hay `data/generation/` con knobs, no hay reintento/fallback de chunks ni `LOG_GENERATION`.
+5. **Bug real → BUG-043:** bioma "snow" inalcanzable. `_get_biome` comprueba mountain (h>26) antes que snow (h>32); muestreo de 2000 posiciones: `mountain=80, snow=0`, con altura máx real 38. El bloque SNOW existe en BlockType y en la library pero el generador nunca lo produce. **No se fixeó:** el perfil del terreno se congeló por el usuario (Log 791); el fix (reordenar 2 checks) requiere su visto bueno.
+6. **Código muerto:** `BlockCatalog` (140 l.) **no tiene usuarios en runtime** — ni `.new()` ni `get_library()` se llaman nunca. Su library de 20 modelos tiene orden incompatible con los ids de BlockType (ICE=16→modelo 16 es GRAVEL; WATER=17→MOSS; SNOW/GRAVEL/MOSS/MUD/SHALLOW_WATER fuera de rango). Inofensivo porque la library real es la inline de `main_island.gd`, pero el archivo engaña a quien lo lea. `get_model_index` y `get_debug_color` tampoco tienen llamadores (este último haría null-deref: `world_generator.gd:23` pasa `null` como catalog).
+7. **Performance (M61):** `_has_ore` (island_generator.gd:213) hace `FastNoiseLite.new()` **en cada llamada** — una allocación por cada bloque subterráneo del camino caliente del generador. Debería construirse una vez en `_setup_noises()`.
+
+### Corrección a claims previos
+- La fila de CHECKLIST-GLOBAL decía "21 bloques con colores" — la library real tiene **31 modelos** (ids 0–30). La nota de MiMo ("30+ bloques") era la aproximada correcta.
+- La nota de MiMo sobre `world_manager.gd` como orquestador del VoxelTerrain quedó superada por el fix del Log 776 (ver §5 del header de este archivo): hoy `world_manager.gd` (32 l.) **solo aplica el material**; generador/mesher/library los instala `main_island.gd`. Queda como historial.
+
+### Recomendaciones para el próximo agente
+1. **Decidir el alcance real de M10:** implementar las capas 3/4/8 (formaciones, cuevas, estructuras) y los knobs, o reescribir esos items como "contrato propuesto para M1/otros módulos" (como se recomendó en M09).
+2. Fix BUG-043 (reordenar checks de `_get_biome`) — con visto bueno del usuario.
+3. `_has_ore`: mover el `FastNoiseLite.new()` a `_setup_noises()`.
+4. Borrar `BlockCatalog` muerto, o cablearlo de verdad (que `main_island.gd` consuma `get_library()` en vez de la inline — pero sin romper el orden correcto que hoy funciona).
+5. Escribir el test A completo del contrato §3: 3 órdenes de regen de chunks completos → mismos bytes (VoxelBuffer).

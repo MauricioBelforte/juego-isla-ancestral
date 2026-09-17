@@ -7,6 +7,11 @@
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Log: 876
 - Salida: setup/uninstall/verificar_requisitos .ps1 + IslaAncestral.iss (+4 includes) + code_signing.bat + build_installer.bat + license.txt + preset Windows + ValidadorInstalador + test (15 checks/0 fallos)
+- **Nota de cruce (M117 iter. 3, Log 946, agnes-3-flash):** el cierre 15/0 era **falso-verde**: el check V3
+  (AppVersion `.iss` == `project.godot`) quedó **rojo** porque `bump_version.py` no sincronizaba
+  `#define AppVersion` del `.iss` (`.iss`=0.0.2 vs `project.godot`=0.0.6). Detectado al cablear M117 al
+  gate CI. **Corregido** en M117 iter. 3: sync sistemática en `bump_version.py` + `.iss`→0.0.6 → V3 y el
+  test M116 vuelven **verde genuino** (15/15, 0 fallos). El estado ✅ de M116 ahora es honesto.
 
 # 05-Checklist.md — Módulo 116: Instalador
 

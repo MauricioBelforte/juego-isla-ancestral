@@ -49,7 +49,7 @@ escena = bpy.context.scene
 #   2) Metallic medio-alto (0.85-0.90) para que conserve el tinte del metal.
 #   3) Emission suave en oro/bronce -> garantiza que el color se lea siempre.
 # El set de luces (SOL 3.4 / mundo 0.55) NO se toca: es el mismo de todos los
-# assets (§7.3 regla 3 de 09-GUIA-BLENDER.md). El brillo sale de los materiales.
+# assets (§7.3 de GUIA-BLENDER/07-set-captura-vs-asset.md). El brillo sale de los materiales.
 def set_input(bsdf, nombre, valor):
     """Escribe un input del Principled tolerando cambios de nombre entre
     versiones de Blender (Coat Weight vs Clearcoat, Specular IOR Level vs Specular)."""

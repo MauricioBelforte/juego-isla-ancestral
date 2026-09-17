@@ -252,6 +252,13 @@ jobs:
           godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1
           godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1
           godot --headless --script scripts/telemetry/test_telemetria_iter7.gd 2>&1
+          # M117 Build System (Log 946 agnes-3): test de build al gate duro.
+          # Nota: --script bootea los autoloads del proyecto (58 leaks ObjectDB
+          # preexistentes ajenos a M117); el exit code 0/1 sigue siendo el gate.
+          godot --headless --script scripts/build/test_build_m117.gd 2>&1
+          # M116 validador del instalador (V3 AppVersion sync, Log 946): evita
+          # que .iss y project.godot se desalineen en el futuro.
+          godot --headless --script scripts/build/test_instalador_m116.gd 2>&1
           echo "All validation tests completed"
 
   legal-tools:

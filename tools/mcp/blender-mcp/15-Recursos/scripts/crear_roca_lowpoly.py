@@ -1,5 +1,5 @@
 # crear_roca_lowpoly.py — Roca común recolectable (M15-Recursos)
-# Asset lowpoly reutilizable. Ver DOCUMENTACION/09-GUIA-BLENDER.md
+# Asset lowpoly reutilizable. Ver DOCUMENTACION/GUIA-BLENDER/INDICE.md
 #
 # Lecciones aplicadas (guía 09):
 #   E-01: bmesh sobre apilado de primitivas (superficie lisa)

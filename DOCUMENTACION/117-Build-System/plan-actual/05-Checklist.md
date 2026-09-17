@@ -184,8 +184,37 @@
 - **Verificado:** Canales por tipo verificados: BuildInfo.canal_por_tipo + debug_menu gate OS.is_debug_build + TelemetryDirector opt_in=false GDPR (T-001/T-002/T-004/T-009/T-011/T-013/T-014) [M]
 - **Resumen:** 33 items cerrados con evidencia, 20 [?] honestos con dueno (M96/M113/M116/M118/infra/build-real) [M]
 
+## Evidencia M117 iter. 3 (2026-09-17, Log 946 agnes-3-flash (Sapiens AI)/Kilo Code)
+
+> Iter. 3 acotada (tooling/CI + data-driven). No toca los 18 `[?]` externos; agrega
+> capacidad nueva y cierra el `[?]` sin contar "test_build_m117.gd no corre aislado".
+
+- **Root-cause V3 M116:** `bump_version.py` no sincronizaba `#define AppVersion` de
+  `installer/*.iss` → `.iss`=0.0.2 vs `project.godot`=0.0.6 (4 bumps de desfase). El check
+  V3 del validador M116 quedó rojo y M116 `✅` era **falso-verde** (detectado al cablear M117
+  al gate CI). [M]
+- **Fix sistemático:** `bump_version.py` nuevo `_set_version_in_installer_iss()` — cada bump
+  reescribe `#define AppVersion` en todos `installer/*.iss` (conserva comentario/whitespace,
+  tolerante si `installer/` ausente) + `INSTALLER_DIR` cwd-first + entrada al loop principal.
+  Header documentado. [M]
+- **Fix inmediato:** `installer/IslaAncestral.iss` `AppVersion` `0.0.2` → `0.0.6` (alineado con
+  `project.godot`). [S]
+- **Test anti-regresión:** `test_bump_version.py` +3 casos (bump real sincroniza `.iss`;
+  conserva comentario; DRY no toca el `.iss`) → **14/14 OK**. [M]
+- **Verificación headless (godot 4.7.2):** `run_tests.py --module build` → **test-build_m117 OK +
+  test-instalador_m116 OK (2 OK, 0 FAIL, exit 0)**; M116 V3 ahora verde. [M]
+- **Cierre `[?]` "test_build_m117.gd NO corre aislado":** cableado al **gate duro** `quality.yml`
+  (test-suite: `test_build_m117.gd` + `test_instalador_m116.gd`). Aislación real **imposible** con
+  `--script` (bootea los autoloads del proyecto — el harness de referencia M111 también; los 58 leaks
+  de ObjectDB son preexistentes y ajenos a M117/M111). El gate duro + runner `run_tests.py` es el
+  cierre correcto; el "aislamiento" queda documentado como limitación de Godot, no defecto de M117. [M]
+
 ## Reserva actual
 
+- **Liberada:** Reserva Log 946 agnes-3-flash/Kilo Code (2026-09-17 04:58) — M117 Build-System iter. 3
+  (tooling/CI): sync `installer/*.iss` en `bump_version.py` + fix desync `.iss`→0.0.6 + cierre `[?]`
+  "test_build_m117.gd no corre aislado" vía gate duro `quality.yml`. Cerrada 2026-09-17 05:15 (Log 946
+  escrito, reserva consumida). `test_bump_version.py` 14/14 + `run_tests.py --module build` 2 OK [M]
 - **Historial:** Reserva Log 514 step-3.7-flash/Kilo Code (2026-09-02 05:34) — M117 Build-System en curso [M]
 - **Historial:** Bloqueo en CHECKLIST-GLOBAL, 08-GUIA, ESTADO-PARALELO y este checklist activo [S]
 - **Historial:** Definir núcleo BuildConfigManager + pipeline export cfg headless 0 fallos [M]
