@@ -12,7 +12,7 @@ Trabajaron en módulos pero **no actualizaron la documentación correspondiente*
 - No generaron `Logs/` con el formato AGENTS.md §6
 - No actualizaron `plan-actual/04-Codigo.md` de su módulo
 - No actualizaron `plan-actual/05-Checklist.md` de su módulo
-- No contribuyeron a `DOCUMENTACION/07-GUIA-GODOT.md` si descubrieron algo nuevo
+- No contribuyeron a `DOCUMENTACION/GUIA-GODOT/INDICE.md` si descubrieron algo nuevo
 
 ### Lo que tenés que hacer
 
@@ -26,8 +26,8 @@ Trabajaron en módulos pero **no actualizaron la documentación correspondiente*
 
 | Modelo | Módulo(s) | ¿Qué falta? |
 |---|---|---|
-| **agnes-2.5-flash** | M64 IA de NPC + M74 Eventos | Log en `Logs/`, actualizar `plan-actual/04-Codigo.md` y `05-Checklist.md` de ambos módulos, contribuir a `07-GUIA-GODOT.md` si descubriste algo |
-| **DeepSeek V4 Flash** | M17 Construcción | Log en `Logs/`, actualizar `plan-actual/` de M17, contribuir a `07-GUIA-GODOT.md` si descubriste algo |
+| **agnes-2.5-flash** | M64 IA de NPC + M74 Eventos | Log en `Logs/`, actualizar `plan-actual/04-Codigo.md` y `05-Checklist.md` de ambos módulos, contribuir a `GUIA-GODOT/INDICE.md` si descubriste algo |
+| **DeepSeek V4 Flash** | M17 Construcción | Log en `Logs/`, actualizar `plan-actual/` de M17, contribuir a `GUIA-GODOT/INDICE.md` si descubriste algo |
 | **minimax-m3-free** | M115 Hardware | Log en `Logs/`, actualizar `plan-actual/04-Codigo.md` y `05-Checklist.md` de M115 |
 
 > **Nota:** ox-alpha ya no está disponible. M107, M159 y M20 quedan pendientes de reasignación.
@@ -106,7 +106,7 @@ Marcar con `[x]` los ítems que completaste realmente (no "por hacer").
 
 ---
 
-## 07-GUIA-GODOT.md — Contribución
+## GUIA-GODOT/ — Contribución
 
 Si durante tu trabajo descubriste:
 - Un error de Godot que no estaba documentado
@@ -127,7 +127,7 @@ Agregalo como nueva §9.X al final de la sección correspondiente, con este form
 **Fecha:** 2026-09-01 · **Agente:** [tu nombre] ([plataforma])
 ```
 
-Actualizar la firma al inicio de `07-GUIA-GODOT.md` con tu nombre y fecha.
+Actualizar la firma al inicio de `GUIA-GODOT/INDICE.md` con tu nombre y fecha.
 
 ---
 

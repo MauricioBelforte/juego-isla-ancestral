@@ -100,7 +100,7 @@ Tu plataforma es **Kilo Code**. Siempre firmá así:
 1. **Firmá SIEMPRE** como `**Modelo:** Hy3` / `**Plataforma:** Kilo Code`
 2. **Leé CHECKLIST-GLOBAL.md** primero para entender el estado del proyecto
 3. **Leé `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`** para verificar que los módulos estén habilitados
-4. **Leé `DOCUMENTACION/07-GUIA-GODOT.md`** antes de codificar
+4. **Leé `DOCUMENTACION/GUIA-GODOT/INDICE.md`** antes de codificar
 5. **No toques código de otros módulos** que no te correspondan
 6. **Si un módulo no está habilitado** (fase, dependencias), NO lo toques
 7. **Actualizá los 4 registros** al reservar o liberar:

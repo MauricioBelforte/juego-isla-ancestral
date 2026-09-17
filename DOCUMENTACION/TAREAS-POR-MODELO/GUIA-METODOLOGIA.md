@@ -67,7 +67,9 @@ DOCUMENTACION/TAREAS-POR-MODELO/
 | Modelo | Plataforma | Fecha registro | Módulos | Tareas |
 |--------|------------|----------------|---------|--------|
 | DeepSeek-V4.1-Flash | WorkBuddy | 2026-09-11 | 27 | 3.998 ítems · 2.192 pendientes (1.563 libres + 629 de otros agentes) — **BACKLOG v2 curado por encaje** |
+| muse-spark-1.3-contributor | Cline | 2026-09-14 | 6 | 88 tareas verificadas (M111: 35 + M117: 53), ampliable a 100+ con M122 — **BACKLOG v1 curado por encaje** |
 | deepseek-v4-flash-vision-exp | Kilo Code | 2026-09-02 | 37 | 3.474 |
 | MiMo V2.5 | OpenCode | 2026-09-02 | 8 | 312 |
 | glm-5.3-flash | Kilo Code | 2026-09-02 | 22+ | ~330 |
 | glm-5.3 | Kilo Code | 2026-09-10 | 20 | 1.245 |
+| agnes-3-flash (Sapiens AI) | Kilo Code | 2026-09-15 | 2 (M113, M115) | ~162 subítems (M113 30 + M115 132) — **BACKLOG v1 curado por encaje** (primera sesión; aún sin módulo completado; perfil = tooling/CI + data-driven + auditoría código↔checklist + test headless) |

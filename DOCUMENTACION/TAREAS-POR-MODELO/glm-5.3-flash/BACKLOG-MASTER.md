@@ -13,32 +13,29 @@
 > Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
 > Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
 
-## Orden de trabajo
+## Orden de trabajo (v2 — curado 2026-09-15, glm-5.3-flash / Cline)
 
-| # | ID | Módulo | Estado global | Progreso | Prioridad | Pendientes | Subcarpeta |
-|---|----|--------|---------------|----------|-----------|------------|------------|
-| 1 | 19 | 19-NPC-Y-Vecinos | 🟡 Con dudas (núcleo + muda | 32/131 | Alta | 99 | `19-NPC-Y-Vecinos/checklist.md` |
-| 2 | 38 | 38-Economia | 🟡 Con dudas (núcleo + true | 26/160 | Alta | 134 | `38-Economia/checklist.md` |
-| 3 | 66 | 66-Anti-Softlock | 🟡 Con dudas (núcleo implem | 23/117 | Alta | 94 | `66-Anti-Softlock/checklist.md` |
-| 4 | 92 | 92-Tutorial | 🟡 Con dudas | 12/186 | Alta | 173 | `92-Tutorial/checklist.md` |
-| 5 | 93 | 93-Balance | 🟡 Con dudas | 47/130 | Alta | 83 | `93-Balance/checklist.md` |
-| 6 | 153 | 153-Objetivo-Final | 🟡 Con dudas | 120/130 | Alta | 10 | `153-Objetivo-Final/checklist.md` |
-| 7 | 31 | 31-Ciclo-Dia-Noche | 🟡 Con dudas | 16/161 | Media | 145 | `31-Ciclo-Dia-Noche/checklist.md` |
-| 8 | 32 | 32-Clima | 🟡 Con dudas (núcleo implem | 82/121 | Media | 39 | `32-Clima/checklist.md` |
-| 9 | 33 | 33-Agricultura | 🟡 Con dudas (núcleo + lluv | 19/153 | Media | 134 | `33-Agricultura/checklist.md` |
-| 10 | 34 | 34-Pesca | 🟡 Con dudas (núcleo + clim | 4/153 | Media | 149 | `34-Pesca/checklist.md` |
-| 11 | 39 | 39-Tiendas | 🟡 Con dudas | 24/181 | Media | 157 | `39-Tiendas/checklist.md` |
-| 12 | 145 | 145-Diseno-De-Experiencia | 🟡 Con dudas | 90/105 | Media | 15 | `145-Diseno-De-Experiencia/checklist.md` |
-| 13 | 146 | 146-Diseno-Emocional | 🟡 Con dudas | 90/100 | Media | 10 | `146-Diseno-Emocional/checklist.md` |
-| 14 | 149 | 149-Nombres-Y-Nomenclatura | 🟡 Con dudas | 97/100 | Media | 3 | `149-Nombres-Y-Nomenclatura/checklist.md` |
-| 15 | 25 | 25-Ruinas | 🟡 Nucleo + validacion visua | 5/122 | Media | 117 | `25-Ruinas/checklist.md` |
-| 16 | 35 | 35-Mineria | 🟡 Liberado (iter 1, núcleo | 59/142 | Media | 83 | `35-Mineria/checklist.md` |
-| 17 | 28 | 28-Viajes | 🟢 Disponible | 10/130 | glm-5.3-flash | 105 | `28-Viajes/checklist.md` |
-| 18 | 37 | 37-Museos-Y-Colecciones | 🟢 Disponible | 14/148 | glm-5.3-flash | 134 | `37-Museos-Y-Colecciones/checklist.md` |
-| 19 | 64 | 64-IA-De-NPC | 🟢 Disponible | 61/110 | glm-5.3-flash | 49 | `64-IA-De-NPC/checklist.md` |
-| 20 | 65 | 65-Animales-IA | 🟢 Disponible | 83/89 | glm-5.3-flash | 6 | `65-Animales-IA/checklist.md` |
-| 21 | 77 | 77-Online-Y-Red | 🟢 Disponible | 0/130 | glm-5.3-flash | 130 | `77-Online-Y-Red/checklist.md` |
-| 22 | 158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | 🟢 Disponible | 0/140 | glm-5.3-flash | 140 | `158-Herramientas-Y-Desbloqueo-De-Zonas/checklist.md` |
+> **Curación v2:** conteos re-verificados contra los `05-Checklist.md` reales (regex `^- \[ \]` / `^- \[\?\]`) tras la auditoría global que revirtió varios módulos y el regenerado de CHECKLIST-GLOBAL (`generar_checklist_global.py`, con backup). **Resueltos y cerrados por otros agentes:** 32-Clima (0/0, auditoría agnes 13/09), 38-Economia (0/0), 93-Balance (134/134), 145 (0/0), 146 (0/0), 65-Animales-IA (0/0). **149-Nombres:** reservado por otro agente (checklist regenerado) — fuera de mi cola. **Conflictos:** 66-Anti-Softlock (Log 701 declara 117/117 pero el checklist real tiene 117 `[ ]` post-reversión) → tareas en `[→]` pendiente de reconciliación. **31/34/64:** re-clasificados a `[?]` con dueño por otros — no accionables ahora.
+
+| # | ID | Módulo | Pendientes reales (05-Checklist) | Notas | Subcarpeta |
+|---|----|--------|----------------------------------|-------|------------|
+| 1 | 92 | 92-Tutorial | 143 (142 ab + 1 ?) | Alta · núcleo TutorialManager (Log 259) · deps 53✅/70 | `92-Tutorial/checklist.md` |
+| 2 | 39 | 39-Tiendas | 100 | Media · núcleo datos | `39-Tiendas/checklist.md` |
+| 3 | 158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | 87 | 🟢 0→87 hecho por otro; núcleo a retomar | `158-Herramientas-Y-Desbloqueo-De-Zonas/checklist.md` |
+| 4 | 19 | 19-NPC-Y-Vecinos | 83 | Alta · núcleo iter. 3 (Log 553) | `19-NPC-Y-Vecinos/checklist.md` |
+| 5 | 25 | 25-Ruinas | 84 | Media · kit modular | `25-Ruinas/checklist.md` |
+| 6 | 33 | 33-Agricultura | 86 | Media · núcleo + clima | `33-Agricultura/checklist.md` |
+| 7 | 37 | 37-Museos-Y-Colecciones | 112 | 🟢 Media | `37-Museos-Y-Colecciones/checklist.md` |
+| 8 | 28 | 28-Viajes | 80 | 🟢 Media · núcleo V0 (Log 371) | `28-Viajes/checklist.md` |
+| 9 | 35 | 35-Mineria | 82 (69 ab + 13 ?) | Media · núcleo + QA | `35-Mineria/checklist.md` |
+| 10 | 77 | 77-Online-Y-Red | 126 | 🟢 Media · sin núcleo aún | `77-Online-Y-Red/checklist.md` |
+| 11 | 153 | 153-Objetivo-Final | ~130 (regenerado) | Alta · mis 10 tareas vuelven a estar abiertas | `153-Objetivo-Final/checklist.md` |
+| — | 31 | 31-Ciclo-Dia-Noche | 54 `[?]` | no accionable ahora (dueños) | `31-Ciclo-Dia-Noche/checklist.md` |
+| — | 34 | 34-Pesca | 69 `[?]` | no accionable ahora | `34-Pesca/checklist.md` |
+| — | 64 | 64-IA-De-NPC | 49 `[?]` | no accionable ahora | `64-IA-De-NPC/checklist.md` |
+| — | 66 | 66-Anti-Softlock | 7 `[?]` (87 `[x]`) | ✅ RECONCILIADO 2026-09-15 (Log 913): restauración verificada 110/117; los 7 `[ ]` restantes tienen dueño externo (M27/M64/M22/M26) | `66-Anti-Softlock/checklist.md` |
+
+**Pendiente real accionable: ~921** (de 2.007 al inicio de la curación; baja 110 al reconciliar M66). Resueltos/conflictos/no-accionables documentados arriba y en los checklists personales.
 
 ## Reglas de sincronización (al completar una T-###)
 

@@ -83,7 +83,7 @@ juego-isla-ancestral/
 ├── CHECKLIST-GLOBAL.md          ← Estado global de módulos
 ├── DOCUMENTACION/               ← Toda la documentación
 │   ├── 06-GUIA-DE-CONEXION-VISION.md  ← Guía MCP detallada
-│   ├── 07-GUIA-GODOT.md        ← Errores y soluciones Godot
+│   ├── GUIA-GODOT/              ← Guía de errores Godot (INDICE.md)
 │   ├── TAREAS-POR-MODELO/       ← Backlogs personales
 │   │   └── mimo-v2.5/          ← MiMo (este agente)
 │   │       └── BACKLOG-MASTER.md
@@ -132,7 +132,7 @@ juego-isla-ancestral/
 ## 6. Referencias
 
 - `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` — Guía completa de MCP (V1-V5)
-- `DOCUMENTACION/07-GUIA-GODOT.md` — Errores comunes de Godot
+- `DOCUMENTACION/GUIA-GODOT/INDICE.md` — Errores comunes de Godot
 - `AGENTS.md` — Reglas globales del proyecto
 - `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.5/BACKLOG-MASTER.md` — Backlog de MiMo
 

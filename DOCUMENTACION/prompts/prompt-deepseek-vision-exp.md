@@ -103,5 +103,5 @@ Tu plataforma es **Kilo Code**. Siempre firmá así:
 - Guía 10 §B2: DeepSeek V4 Flash Vision EXP
 - AGENTS.md §21: Protocolo multiagente
 - AGENTS.md §12.1: Auto-corrección con MCP
-- `DOCUMENTACION/07-GUIA-GODOT.md`: Errores comunes Godot
+- `DOCUMENTACION/GUIA-GODOT/INDICE.md`: Errores comunes Godot
 - `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md`: Cómo usar visión

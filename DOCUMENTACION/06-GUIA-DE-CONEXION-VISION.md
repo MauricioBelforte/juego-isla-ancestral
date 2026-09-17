@@ -515,7 +515,7 @@ func _generate_block(pos: Vector3i, out_buffer: VoxelBuffer) -> void:
 
 **O alternativa manual** (funcional pero menos eficiente):
 ```gdscript
-# do_point() devuelve VOID (corregido 2026-08-25, ver 07-GUIA-GODOT §9.12)
+# do_point() devuelve VOID (corregido 2026-08-25, ver GUIA-GODOT/09-godot4-migracion.md)
 var tool = terrain.get_voxel_tool()
 tool.value = 1
 tool.do_point(pos)
@@ -607,7 +607,7 @@ Root (Node3D)
 - ✅ **Método confiable #1 (recomendado, in-engine):** desde GDScript, `get_viewport().get_texture().get_image().save_png(ruta)` — captura el frame real renderizado a resolución del proyecto (1152×648), independiente de la ventana del SO. Con esto se validó M30 (reloj 08:00 → 09:00 en vivo, `cap_30_*_inengine.png`).
 - ✅ **Método confiable #2 (SO):** `PrintWindow(hwnd, dc, PW_RENDERFULLCONTENT)` vía ctypes — captura el HWND aunque esté tapado. Script: `tools/mcp/godot-mcp/scripts-reutilizables/cap_printwindow.py` (uso: `python cap_printwindow.py "(DEBUG)" salida.png`).
 - ⚠️ **Ventana SO ≠ viewport lógico (DPI 125%):** `--resolution 1152x648` por CLI NO redimensionó la ventana; `SetWindowPos` sí, pero el render interno queda a la resolución del proyecto. Para capturas fiel al render, usar el método #1.
-- ⚠️ **Previews por CLI:** los autoloads con `change_scene_to_file` pueden pisar la escena pedida (ver 07-GUIA-GODOT §9.25). Bootstrap corregido para respetar la escena CLI.
+- ⚠️ **Previews por CLI:** los autoloads con `change_scene_to_file` pueden pisar la escena pedida (ver GUIA-GODOT/07-camera-input.md). Bootstrap corregido para respetar la escena CLI.
 - ⚠️ **Confirmado 2026-08-28 (Hy3, Kilo — caso M13):** `cap_printwindow.py` (método #2) puede devolver el frame del mundo 3D **sin las capas de UI creadas por código** (hotbar HUD invisible en 4 capturas del SO mientras la captura in-engine lo mostraba completo). Regla práctica: para validar **UI** usar SIEMPRE el método #1 (in-engine); reservar #2 para el mundo 3D.
 
 ## Conexión desde WorkBuddy AI (2026-08-28)

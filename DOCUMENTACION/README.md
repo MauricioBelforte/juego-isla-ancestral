@@ -14,7 +14,8 @@ DOCUMENTACION/
 ├── 4-DOCUMENTO-EJECUCION-ACTUAL.md             ← (pendiente) Código de ejecución vigente
 ├── 5-FUTURAS-MEJORAS.md                        ← (pendiente) Ideas y mejoras del usuario
 ├── 06-GUIA-DE-CONEXION-VISION.md               ← Guía maestra de "ojos" del agente (M154): vías de visión + cómo conectarse (V1-V5)
-├── 07-GUIA-GODOT.md                              ← Guía de codificación en Godot 4.x: errores, convenciones, checklist, registro de errores (AGENTS.md §26)
+├── GUIA-GODOT/                                   ← Guía de codificación en Godot 4.x: errores, convenciones, checklist (AGENTS.md §26) + INDICE.md
+│   ├── INDICE.md                                 ← Índice de navegación de la guía temática Godot
 ├── 08-GUIA-ORDEN-DE-IMPLEMENTACION.md            ← Orden principal de codificación, fases, puertas, dificultad, visión y delegación paralela
 ├── 11-BUGS.md                                    ← Registro central de bugs: checklist de problemas/fallas con máximo detalle, delegación entre LLMs y firma obligatoria (usuario + agentes)
 ├── 00-PLAN-INICIAL/                            ← Origen del proyecto (NO MODIFICAR)
@@ -87,7 +88,7 @@ DOCUMENTACION/
 ├── 81-Legal-Menores/                         ← 🔵 EN CURSO: cumplimiento COPPA/GDPR-K/LGPD, age gating, data sanitization, parental consent, IARC, políticas legales menores (110/110)
 ├── 82-Clasificacion-Por-Edades/              ← 🔵 EN CURSO: sistemas IARC/ESRB/PEGI/CERO/GRAC/ACB/USK/ClassInd, descriptores, rating objetivo, validación automática (100/100)
 ├── 83-Licencias-De-Software/                 ← 🔵 EN CURSO: inventario de licencias, validación de compatibilidad, generación automática de notices, integración build pipeline (100/100)
-├── 84-Musica-Y-Audio-Legal/                  ← 🔵 EN CURSO: contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA (100/100)
+├── 84-Musica-Y-Audio-Legal/                  ← 🔵 EN CURSO: validator + manager + credits + generator implementados (21/100)
 ├── 85-Modelos-3D-Legal/                      ← 🔵 EN CURSO: contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA (100/100)
 ├── 115-Hardware/                             ← 🔵 EN CURSO: detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads (100/100)
 ├── 119-Actualizaciones/                      ← 🔵 EN CURSO: sistema de updates, notificación, compatibilidad de saves, rollback, integración plataformas (100/100)
@@ -213,7 +214,7 @@ Cada componente (`NN-Nombre/`) contiene dos carpetas:
 | 81-Legal-Menores | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Cumplimiento COPPA/GDPR-K/LGPD, age gating, data sanitization, parental consent, IARC rating, políticas legales menores (110/110) |
 | 82-Clasificacion-Por-Edades | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistemas IARC/ESRB/PEGI/CERO/GRAC/ACB/USK/ClassInd, descriptores de contenido, rating objetivo Everyone, validación automática, submissions (100/100) |
 | 83-Licencias-De-Software | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Inventario de licencias, validación de compatibilidad, generación automática de notices, integración build pipeline, testing (100/100) |
-| 84-Musica-Y-Audio-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de compositor/artistas, licencias de stock, créditos de audio, validación de audio IA, clearances (100/100) |
+| 84-Musica-Y-Audio-Legal | 🔵 En curso por mimo-v2.5 (OpenCode) — Validator, manager, credits, generator implementados. Pendiente: tests, autoload, build (21/100) |
 | 85-Modelos-3D-Legal | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA, verificación pre-build (100/100) |
 | 115-Hardware | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Detección de hardware, ajuste automático de calidad, perfiles de rendimiento, soporte gamepads, dispositivos de entrada (100/100) |
 | 119-Actualizaciones | 🔵 En curso por Nemotron 3 Ultra (OpenCode) — Sistema de updates, notificación, compatibilidad de saves, rollback, integración con plataformas (100/100) |
