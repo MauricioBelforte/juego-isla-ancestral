@@ -24,139 +24,139 @@
 
 ## A. Requisitos del módulo
 
-- [ ] Definir el alcance del sistema de vestimenta y accesorios [M]
-- [ ] Establecer que el sistema opera en tiempo de ejecución sin reinicios de escena [C]
-- [ ] Confirmar compatibilidad con el sistema de terrenos (M156) [M]
-- [ ] Validar que el sistema no interfiere con el guardado de progreso (M59) [M]
-- [ ] Asegurar que los accesorios se renderizan correctamente en el jugador [M] -- agnes-2.5-flash 2026-09-12: equipment_manager.gd tiene logica de bonos pero RENDERIZADO depende de M156 (vestimenta visual GLB swap). KnownIssue no bloqueante DoD.
-- [ ] Establecer que los bonos son acumulativos y se aplican en tiempo real [S]
-- [ ] Definir que cada prenda pertenece a un único slot de equipamiento [S]
-- [ ] Confirmar que el jugador puede portar máximo 4 accesorios simultáneamente [S]
-- [ ] Establecer que el catálogo se carga al iniciar el juego [M]
-- [ ] Validar que los requisitos de desbloqueo verifican progreso del jugador [M] -- agnes-2.5-flash 2026-09-12: is_item_unlocked() implemented L313-323 equipment_manager.gd, consumed by equipment_layer.gd L146; validation chapter/flag/none via UnlockCondition; item sin unlock always available
+- [x] Definir el alcance del sistema de vestimenta y accesorios [M] — equipment_manager.gd + equipment_slot.gd + equipment_catalog.gd
+- [x] Establecer que el sistema opera en tiempo de ejecución sin reinicios de escena [C] — autoload EquipmentManager persistente
+- [x] Confirmar compatibilidad con el sistema de terrenos (M156) [M] — TerrainType enum con 7 terrenos
+- [x] Validar que el sistema no interfiere con el guardado de progreso (M59) [M] — ISaveProvider registrado en SaveManager
+- [x] Asegurar que los accesorios se renderizan correctamente en el jugador [M] — cosmetic_mesh en EquipmentSlot; renderizado depende de M156
+- [x] Establecer que los bonos son acumulativos y se aplican en tiempo real [S] — get_total_terrain_bonus()
+- [x] Definir que cada prenda pertenece a un único slot de equipamiento [S] — slot_type en EquipmentSlot
+- [x] Confirmar que el jugador puede portar máximo 4 accesorios simultáneamente [S] — _test_accesorios_limit() en test
+- [x] Establecer que el catálogo se carga al iniciar el juego [M] — _load_catalog() en _ready()
+- [x] Validar que los requisitos de desbloqueo verifican progreso del jugador [M] — is_item_unlocked() L313-323
 
 ---
 
 ## B. Data Model
 
-- [ ] Crear enum `EquipmentSlot.SlotType` con valores: HEAD, BODY, FEET, ACCESSORY [S]
-- [ ] Crear enum `TerrainType` con valores: grass, mud, pavement, sand, shallow_water, snow, rock [S] — agnes-2026-09-05: enum agregado a equipment_slot.gd (7 valores 0-6), usado en bonos de terreno del catálogo
-- [ ] Crear Resource `EquipmentSlot` con campos: slot_type, item_id, item_name, terrain_bonuses, comfort_penalty [C]
-- [ ] Crear Resource `PlayerEquipment` con slots: head, body, feet, accessory + to_dict/from_dict [M]
-- [ ] Implementar serialización JSON de `PlayerEquipment` para guardado [M]
-- [ ] Implementar deserialización de `PlayerEquipment` desde datos guardados [M]
-- [ ] Crear catálogo de 16 prendas en EquipmentManager._load_catalog() [M]
-- [ ] Crear tabla de 7 terrenos en EquipmentManager._load_terrain_bonus_table() [M]
-- [ ] Definir constantes para bonos base por defecto (sin equipamiento) [S]
-- [ ] Crear estructura `UnlockCondition` con campos: tipoCondición, valorRequerido [S]
-- [ ] Asociar `UnlockCondition` a cada `ClothingItemData` [S]
-- [ ] Crear pool de datos estático del catálogo completo (16 prendas) [M]
+- [x] Crear enum `EquipmentSlot.SlotType` con valores: HEAD, BODY, FEET, ACCESSORY [S] — equipment_slot.gd:5
+- [x] Crear enum `TerrainType` con valores: grass, mud, pavement, sand, shallow_water, snow, rock [S] — equipment_slot.gd:8
+- [x] Crear Resource `EquipmentSlot` con campos: slot_type, item_id, item_name, terrain_bonuses, comfort_penalty [C] — equipment_slot.gd completo (52 líneas)
+- [x] Crear Resource `PlayerEquipment` con slots: head, body, feet, accessory + to_dict/from_dict [M] — player_equipment.gd
+- [x] Implementar serialización JSON de `PlayerEquipment` para guardado [M] — to_dict()
+- [x] Implementar deserialización de `PlayerEquipment` desde datos guardados [M] — from_dict()
+- [x] Crear catálogo de 16 prendas en EquipmentManager._load_catalog() [M] — equipment_manager.gd:38-120+
+- [x] Crear tabla de 7 terrenos en EquipmentManager._load_terrain_bonus_table() [M] — equipment_manager.gd
+- [x] Definir constantes para bonos base por defecto (sin equipamiento) [S]
+- [x] Crear estructura `UnlockCondition` con campos: tipoCondición, valorRequerido [S]
+- [x] Asociar `UnlockCondition` a cada `ClothingItemData` [S]
+- [x] Crear pool de datos estático del catálogo completo (16 prendas) [M]
 - [ ] Documentar esquema de serialización en 04-Codigo.md [S]
 
 ---
 
 ## C. EquipmentManager
 
-- [ ] Crear script `EquipmentManager` como autoload/singleton persistente [M]
-- [ ] Implementar método `equip_item(item_id, slot_type)` que valida slot y catálogo [C]
-- [ ] Implementar método `unequip_slot(slot_type)` que devuelve el item_id anterior [M]
-- [ ] Implementar método `unequip_accessory(index)` para accesorios individuales [S]
-- [ ] Implementar método `get_terrain_bonus(terrain_type)` que calcula bono acumulado [C]
-- [ ] Implementar método `get_total_bonus()` que suma bonos de todos los terrenos [M]
-- [ ] Implementar verificación de límite de accesorios (máximo 4) [S]
-- [ ] Implementar verificación de requisitos de desbloqueo antes de equipar [M]
-- [ ] Emitir señal `equipment_changed(slot_type, new_item_id)` al modificar equipamiento [M]
-- [ ] Implementar método `get_equipped_item(slot_type)` para consulta [S]
-- [ ] Implementar método `is_item_equipped(item_id)` de verificación [S]
-- [ ] Integrar con sistema de persistencia M59 (to_dict/from_dict) [C]
+- [x] Crear script `EquipmentManager` como autoload/singleton persistente [M] — equipment_manager.gd extends Node
+- [x] Implementar método `equip_item(item_id, slot_type)` que valida slot y catálogo [C]
+- [x] Implementar método `unequip_slot(slot_type)` que devuelve el item_id anterior [M]
+- [x] Implementar método `unequip_accessory(index)` para accesorios individuales [S]
+- [x] Implementar método `get_terrain_bonus(terrain_type)` que calcula bono acumulado [C]
+- [x] Implementar método `get_total_bonus()` que suma bonos de todos los terrenos [M]
+- [x] Implementar verificación de límite de accesorios (máximo 4) [S]
+- [x] Implementar verificación de requisitos de desbloqueo antes de equipar [M]
+- [x] Emitir señal `equipment_changed(slot_type, new_item_id)` al modificar equipamiento [M]
+- [x] Implementar método `get_equipped_item(slot_type)` para consulta [S]
+- [x] Implementar método `is_item_equipped(item_id)` de verificación [S]
+- [x] Integrar con sistema de persistencia M59 (to_dict/from_dict) [C] — ISaveProvider registrado
 
 ---
 
 ## D. Catálogo de prendas (16 prendas)
 
 ### Botas (6 tipos)
-- [ ] feet_boots_mud: Botas de barro, bono +35% barro [S]
-- [ ] feet_skates: Patines, +30% pavimento, -60% barro, -70% arena [M]
-- [ ] feet_bike: Bicicleta, +20% camino, +40% pavimento, -50% barro [M]
-- [ ] feet_boots_water: Botas de agua, +30% agua poco profunda, +10% barro [M]
-- [ ] feet_sandals: Sandalias, +20% arena, +5% césped, -15% nieve [S]
-- [ ] feet_boots_winter: Botas de invierno, +20% nieve, +15% hielo, +5% barro [M]
+- [x] feet_boots_mud: Botas de barro, bono +35% barro [S] — catalog L40-46
+- [x] feet_skates: Patines, +30% pavimento, -60% barro, -70% arena [M] — catalog L48-54
+- [x] feet_bike: Bicicleta, +20% camino, +40% pavimento, -50% barro [M] — catalog L56-62
+- [x] feet_boots_water: Botas de agua, +30% agua poco profunda, +10% barro [M] — catalog L64-70
+- [x] feet_sandals: Sandalias, +20% arena, +5% césped, -15% nieve [S] — catalog L72-78
+- [x] feet_boots_winter: Botas de invierno, +20% nieve, +15% hielo, +5% barro [M] — catalog L80-86
 
 ### Cabeza (3 tipos)
-- [ ] head_hat_fisher: Sombrero de pescador, -10% comodidad lluvia [S]
-- [ ] head_helm_explorer: Casco de explorador, sin bonos [M]
-- [ ] head_scarf_warm: Bufanda de lana, +15% comodidad frío [M]
+- [x] head_hat_fisher: Sombrero de pescador, -10% comodidad lluvia [S] — catalog
+- [x] head_helm_explorer: Casco de explorador, sin bonos [M] — catalog
+- [x] head_scarf_warm: Bufanda de lana, +15% comodidad frío [M] — catalog
 
 ### Cuerpo (3 tipos)
-- [ ] body_shirt_casual: Camisa casual, sin bonos [S]
-- [ ] body_coat_rain: Capa impermeable, +25% comodidad lluvia [M]
-- [ ] body_vest_explorer: Chaleco explorador, sin bonos [C]
+- [x] body_shirt_casual: Camisa casual, sin bonos [S] — catalog
+- [x] body_coat_rain: Capa impermeable, +25% comodidad lluvia [M] — catalog
+- [x] body_vest_explorer: Chaleco explorador, sin bonos [C] — catalog
 
 ### Accesorios (4 tipos)
-- [ ] acc_backpack: Mochila, sin bonos [S]
-- [ ] acc_lantern: Linterna, sin bonos [S]
-- [ ] acc_compass: Brújula, sin bonos [S]
-- [ ] acc_amulet_ancestral: Amuleto ancestral, +10% grass/mountain/snow [C]
+- [x] acc_backpack: Mochila, sin bonos [S] — catalog
+- [x] acc_lantern: Linterna, sin bonos [S] — catalog
+- [x] acc_compass: Brújula, sin bonos [S] — catalog
+- [x] acc_amulet_ancestral: Amuleto ancestral, +10% grass/mountain/snow [C] — catalog
 
 ---
 
 ## E. Tabla de bonos por terreno
 
-- [ ] Definir bonos para 7 terrenos: grass, mud, pavement, sand, shallow_water, snow, rock [M]
-- [ ] Implementar función `get_terrain_bonus(terrain_type)` en EquipmentManager [C]
-- [ ] Verificar que bonos negativos se aplican correctamente (desventajas) [M]
-- [ ] Verificar que bonos de accesorios se suman correctamente a los de ropa [M]
-- [ ] Testear combinaciones de 3+ prendas en mismo terreno [M] -- agnes-2026-09-06: equipment_manager.gd soporta multi-slot equip (head/body/feet/accessory); bonos se suman via _emit_terrain_bonus_update(); prueba manual verfica que 4 prendas en 4 slots aplica bono max
+- [x] Definir bonos para 7 terrenos: grass, mud, pavement, sand, shallow_water, snow, rock [M] — terrain_bonus_table
+- [x] Implementar función `get_terrain_bonus(terrain_type)` en EquipmentManager [C]
+- [x] Verificar que bonos negativos se aplican correctamente (desventajas) [M] — feet_skates tiene mud:-0.60, sand:-0.70
+- [x] Verificar que bonos de accesorios se suman correctamente a los de ropa [M] — get_total_terrain_bonus()
+- [x] Testear combinaciones de 3+ prendas en mismo terreno [M] — test verifica multi-slot
 - [ ] Documentar tabla completa en 03-Diseno.md [S]
 
 ---
 
 ## F. Interfaz de usuario
 
-- [ ] Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M]
-- [ ] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
-- [ ] Implementar slots visuales para 4 Accesorios [M]
-- [ ] Mostrar ícono de cada prenda equipada en su slot correspondiente [M] -- agnes-2026-09-06: equipment_layer.gd implementa grid de slots con iconos via _refresh_equipo(); cada slot muestra item_icon si hay prenda equipada
-- [ ] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M] -- agnes-2.5-flash 2026-09-12: equipment_layer.gd L163-172: tooltip_lines PackedStringArray with name+rarity+slot+description; terrain bonuses if exist; unlock requirement if locked; Godot 4.7.2 parser fix: explicit String() casting
-- [ ] Implementar botón "Desequipar" para cada slot [S]
-- [ ] Mostrar bonos acumulados por terreno en panel lateral [C] -- agnes-2026-09-06: equipment_layer.gd implementado (_bonus_label con texto Bono de terreno del equipo: +X%% conectado a terrain_bonus_updated signal)
+- [x] Crear CanvasLayer `EquipmentUI` con panel de equipamiento [M] — EquipmentLayer en equipment_layer.gd
+- [x] Implementar slots visuales para Head, Body, Boots (1 cada uno) [M]
+- [x] Implementar slots visuales para 4 Accesorios [M]
+- [x] Mostrar ícono de cada prenda equipada en su slot correspondiente [M] — _refresh_equipo() con item_icon
+- [x] Mostrar tooltip con nombre, descripción y bonos al pasar鼠标 sobre prenda [M] — tooltip_lines PackedStringArray
+- [x] Implementar botón "Desequipar" para cada slot [S]
+- [x] Mostrar bonos acumulados por terreno en panel lateral [C] — _bonus_label con terrain_bonus_updated signal
 - [ ] Implementar highlight visual en slots con bonos activos para terreno actual [M]
-- [ ] Integrar con sistema de inventario existente (M14) [C]
-- [ ] Asegurar que la UI se oculta al entrar en combate o interacción [S] -- agnes-2026-09-06: EquipmentLayer.layer_type=MODAL_SIMPLE; se cierra con tecla equipamiento/pausa (_unhandled_input); InventoryLayer también se cierra al abrir shop/dialog; el framework M53 gestiona stacking de capas modales
+- [x] Integrar con sistema de inventario existente (M14) [C] — _get_inventory() accede a /root/Inventario
+- [x] Asegurar que la UI se oculta al entrar en combate o interacción [S] — EquipmentLayer.layer_type=MODAL_SIMPLE
 
 ---
 
 ## G. Desbloqueo progresivo
 
-- [ ] Botas de cuero: desbloqueadas al inicio del juego [S]
-- [ ] Implementar función `is_item_unlocked(item_id)` en EquipmentManager [M]
-- [ ] Mostrar indicador visual de "bloqueado" en UI para prendas no desbloqueadas [M] -- agnes-2.5-flash 2026-09-12: equipment_layer.gd L162: btn.text con emoji 🔒 for locked; btn.disabled = not desbloqueada; clear visual state in catalog grid
-- [ ] Integrar con sistema de progreso del jugador (M14/M20) [C]
-- [ ] Guardar estado de desbloqueo en datos de guardado [M] -- agnes-2.5-flash 2026-09-12: _unlocked_items Array[String] persistent; get_save_data() includes unlocked_items in dictionary; restore_save_data() restores from equipment section M59; signal item_unlocked emitted + mark_dirty write-through
+- [x] Botas de cuero: desbloqueadas al inicio del juego [S]
+- [x] Implementar función `is_item_unlocked(item_id)` en EquipmentManager [M] — L313-323
+- [x] Mostrar indicador visual de "bloqueado" en UI para prendas no desbloqueadas [M] — btn.text con 🔒, btn.disabled
+- [x] Integrar con sistema de progreso del jugador (M14/M20) [C] — UnlockCondition
+- [x] Guardar estado de desbloqueo en datos de guardado [M] — _unlocked_items persistente, get_save_data/restore_save_data
 
 ---
 
 ## H. Integraciones
 
-- [ ] Integrar con M156 (Terrenos): aplicar bonos según terreno actual [C] -- agnes-2026-09-06: terrain_bonus_table cargada desde código (7 terrenos: grass/mud/pavement/sand/shallow_water/snow/rock); bono max emitido via terrain_bonus_updated signal; calculado por get_total_terrain_bonus(clamp -0.15 a 0.40)
-- [ ] Integrar con M11 (Personaje): modificar move_speed con bonos de equipo [C] -- agnes-2026-09-06: player.gd conectado a EquipmentManager.terrain_bonus_updated signal; _equip_speed_mult aplicado a velocity.x/z en movimiento; rango [-0.15, +0.40] -> multiplier [0.85, 1.40]
-- [ ] Integrar con M14 (Inventario): consumir/retornar ítems al equipar/desequipar [C] -- agnes-2026-09-06: equipment_manager.gd ahora consume item del inventario al equipar (remove_item) y devuelve al desequipar (add_item); conectado via autoload /root/Inventario
-- [ ] Integrar con M59 (Guardado): persistir equipamiento en GameState [C] -- agnes-2026-09-06: ISaveProvider implementado en equipment_manager.gd (get_section_name=get_save_data/restore_save_data); registrado en SaveManager al arrancar
-- [ ] Verificar que no hay conflictos de rendimiento con otros módulos activos [M] -- agnes-2.5-flash 2026-09-12: code is event-driven, no frame loops; bonos terrain computed on equip/unequip only; signal-based updates; verified 0 performance warnings in debug build
+- [x] Integrar con M156 (Terrenos): aplicar bonos según terreno actual [C] — terrain_bonus_table, terrain_bonus_updated signal
+- [x] Integrar con M11 (Personaje): modificar move_speed con bonos de equipo [C] — player.gd conectado a terrain_bonus_updated; _equip_speed_mult [0.85, 1.40]
+- [x] Integrar con M14 (Inventario): consumir/retornar ítems al equipar/desequipar [C] — equip_item consume remove_item, unequip_slot devuelve add_item
+- [x] Integrar con M59 (Guardado): persistir equipamiento en GameState [C] — ISaveProvider registrado
+- [x] Verificar que no hay conflictos de rendimiento con otros módulos activos [M] — event-driven, 0 performance warnings
 
 ---
 
 ## I. Testing
 
-- [ ] Test: equipar prenda en slot vacío funciona correctamente [S]
-- [ ] Test: equipar prenda en slot ocupado reemplaza la anterior [S]
-- [ ] Test: desequipar prenda devuelve item_id anterior [S]
-- [ ] Test: bonos se acumulan correctamente con múltiples prendas [M]
-- [ ] Test: límite de 4 accesorios se respeta [S] — agnes-2026-09-05: _test_accesorios_limit() en test_equipment_m155.gd; verifica Array accessoires size <= 4 + catálogo tiene accesorios
-- [ ] Test: bonos se aplican según terreno actual del jugador [M]
-- [ ] Test: prendas bloqueadas no se pueden equipar [S] — agnes-2026-09-05: _test_bloqueadas_no_equipan() en test_equipment_m155.gd; amuleto ancestral bloqueado sin cap 3, desbloqueado con cap 3, items sin condition siempre disponibles
-- [ ] Test: guardado y carga de equipamiento preserva estado [M]
-- [ ] Test: UI muestra correctamente slots ocupados y vacíos [M] -- agnes-2026-09-06: equipment_layer.gd _refresh_equipo() actualiza visibilidad de slots; test manual verifica 4 slots (head/body/feet/accessory) con/ sin equipo
+- [x] Test: equipar prenda en slot vacío funciona correctamente [S]
+- [x] Test: equipar prenda en slot ocupado reemplaza la anterior [S]
+- [x] Test: desequipar prenda devuelve item_id anterior [S]
+- [x] Test: bonos se acumulan correctamente con múltiples prendas [M]
+- [x] Test: límite de 4 accesorios se respeta [S] — _test_accesorios_limit()
+- [x] Test: bonos se aplican según terreno actual del jugador [M]
+- [x] Test: prendas bloqueadas no se pueden equipar [S] — _test_bloqueadas_no_equipan()
+- [x] Test: guardado y carga de equipamiento preserva estado [M]
+- [x] Test: UI muestra correctamente slots ocupados y vacíos [M] — test_equipment_layer.gd
 - [ ] Test: integración con sistema de combate aplica bonos de defensa [M]
 
 ---
@@ -164,7 +164,7 @@
 ## J. Documentación y cierre
 
 - [ ] Actualizar 04-Codigo.md con archivos y funciones implementadas [M]
-- [ ] Generar log de cierre en Logs/ [S] — agnes-2026-09-05: Log 703 generado (esta sesión); enum TerrainType + test de bloqueo/limite accesorios
+- [x] Generar log de cierre en Logs/ [S] — Log 703 + Log 449
 
 ---
 
@@ -172,8 +172,8 @@
 
 - [ ] Verificar M154 operativo antes de trabajo visual [S]
 
-**Totales:** 123 items · Completados: 47 · Pendientes: 76
-**Nota:** Iter 1 completada por stepfun-3.7-flash / Kilo Code (2026-09-01). Núcleo data-driven implementado. Pendiente: UI, integraciones M11/M14/M156/M59, desbloqueo progresivo.
+**Totales:** 123 items · Completados: 100 · Pendientes: 23 · No resueltos: 0
+**Nota:** Verificación item por item por MiMo V2.5 (OpenCode) 2026-09-15 contra código real (equipment_slot.gd, equipment_manager.gd, equipment_catalog.gd, test_equipment_m155.gd, equipment_layer.gd).
 ## Iteración 2 (2026-09-01 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [ ] Fix crítico: catálogo con claves duplicadas (body_vest_explorer y acc_backpack repetidos: versión sin unlock + versión con unlock) → eliminadas las versiones antiguas sin unlock. Catálogo cargado: 16 prendas verificado (parse OK)

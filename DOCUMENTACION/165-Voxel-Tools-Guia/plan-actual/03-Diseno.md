@@ -93,7 +93,7 @@ func colocar_bloque(terrain: VoxelTerrain, pos: Vector3, block_id: int) -> void:
 
 # ⚠️ PITFALL: VoxelTool.raycast() NO funciona al inicio del juego
 # Los chunks cercanos al spawn no están cargados aún.
-# Usar IslandGenerator.get_height() + offset en su lugar (ver 07-GUIA-GODOT §9.44)
+# Usar IslandGenerator.get_height() + offset en su lugar (ver GUIA-GODOT/02-voxel-tools.md §9.44)
 ```
 
 ## Recipe: Texturas reales (reemplazar vertex colors)

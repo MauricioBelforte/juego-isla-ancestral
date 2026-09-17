@@ -62,7 +62,7 @@ El merge por material se aplica a **las tres** como etapa de exportación, no co
 
 - **Terreno voxel.** El coste del terreno (M08/M09/M10, ya completados) es de un orden de magnitud superior al de cualquier prop y se resuelve con `VoxelViewer.view_distance` y LOD del propio Voxel Tools. M166 no lo toca.
 - **Vegetación repetida en masa.** Hierba alta, árboles y cañas se resuelven con `MultiMeshInstance3D`, no con variantes por asset. M166 documenta la regla pero la implementación vive en M50/M09.
-- **Texturas.** El estilo vigente es **color plano sin texturas** (`09-GUIA-BLENDER.md` §7.3 regla 4). M166 no introduce atlases ni PBR. Si algún día se migrara a texturas, el presupuesto de memoria tendría que revisarse.
+- **Texturas.** El estilo vigente es **color plano sin texturas** (`GUIA-BLENDER/07-set-captura-vs-asset.md`). M166 no introduce atlases ni PBR. Si algún día se migrara a texturas, el presupuesto de memoria tendría que revisarse.
 - **Audio, UI, partículas.** Fuera de alcance.
 
 ## 4. Restricciones
@@ -71,7 +71,7 @@ El merge por material se aplica a **las tres** como etapa de exportación, no co
 |---|---|---|
 | R1 | Estilo lowpoly flat se mantiene en MEDIA y BAJA | Decisión de diseño vigente (§7.3 regla 4), no una carencia. La ALTA puede biselar y subdividir, pero sin salirse del estilo |
 | R2 | **Nada de modelado a mano duplicado** | MEDIA y BAJA se derivan por script. La ALTA es modelado nuevo, no una segunda copia del mismo modelo |
-| R3 | El set de captura (`Base_Arena`, `SOL`, `Mundo`, `CAM_*`) nunca se exporta | §7 de `09-GUIA-BLENDER.md` |
+| R3 | El set de captura (`Base_Arena`, `SOL`, `Mundo`, `CAM_*`) nunca se exporta | `GUIA-BLENDER/07-set-captura-vs-asset.md` |
 | R4 | Godot 4.7.2, GDScript | M04/M05 ya cerrados |
 | R5 | Las variantes derivadas no se versionan a mano | Se regeneran con un comando; el `.gitignore` las excluye |
 | R6 | Nomenclatura `SM_*` / `MAT_*` intacta | Todo el pipeline y `CHECKLIST-OBJETOS-BLENDER.md` dependen de ella |

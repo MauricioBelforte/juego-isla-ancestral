@@ -56,7 +56,7 @@
 
 ### Documentación
 - [x] Guía creada en DOCUMENTACION/165-Voxel-Tools-Guia/
-- [x] Errores documentados en 07-GUIA-GODOT.md
+- [x] Errores documentados en GUIA-GODOT/06-registro-errores.md
 - [x] Recipe de configuración mínima
 - [x] Referencias a documentación oficial
 

@@ -194,4 +194,4 @@
 - Revisar CHECKLIST-GLOBAL.md y ESTADO-PARALELO.md para coordinar.
 - Priorizar interacción real chamán-jugador antes de ampliar secciones C/D.
 - Usar V4 (godot-mcp) para capturas de prueba de la UI de encantamientos.
-- Consultar DOCUMENTACION/07-GUIA-GODOT.md §9 para pitfalls conocidos de Godot 4.x.
+- Consultar DOCUMENTACION/GUIA-GODOT/INDICE.md para pitfalls conocidos de Godot 4.x.

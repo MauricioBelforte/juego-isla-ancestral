@@ -20,7 +20,7 @@
 
 ## 2. Estructura de Datos Implementada
 
-**Nota:** A diferencia del diseño original de MiMo (que usaba `String` para `categoria`/`rareza`), la implementación real usa **enums tipados** (`ItemData.Categoria`, `ItemData.Rareza`, `ItemData.Interaccion`) — más seguro en tiempo de compilación y acorde a `07-GUIA-GODOT.md` §2 (convención `PascalCase` → `CamelCase` para enums).
+**Nota:** A diferencia del diseño original de MiMo (que usaba `String` para `categoria`/`rareza`), la implementación real usa **enums tipados** (`ItemData.Categoria`, `ItemData.Rareza`, `ItemData.Interaccion`) — más seguro en tiempo de compilación y acorde a `GUIA-GODOT/INDICE.md` (convención `PascalCase` → `CamelCase` para enums).
 
 ### ItemData.gd (Resource)
 
