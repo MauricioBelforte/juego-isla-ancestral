@@ -56,7 +56,7 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           mkdir -p out
-          python tools/ci/run_tests.py --out out/ci-report-dev.json || echo "Some tests failed"
+          python tools/ci/run_tests.py --out out/ci-report-dev.json 2>&1 || echo "Some tests failed"
 
       - name: Upload test report
         if: always()
@@ -87,8 +87,8 @@ jobs:
         run: |
           cd game/isla-ancestral
           mkdir -p build/dev
-          godot --headless --path . --export-release "Linux/X11" build/dev/IslaAncestral.x86_64 || \
-            godot --headless --path . --export-debug "Linux/X11" build/dev/IslaAncestral.x86_64
+          godot --headless --path . --export-release "Windows" build/dev/IslaAncestral.exe || \
+            godot --headless --path . --export-debug "Windows" build/dev/IslaAncestral.exe
           ls -la build/dev/
 
       - name: Upload dev binary
