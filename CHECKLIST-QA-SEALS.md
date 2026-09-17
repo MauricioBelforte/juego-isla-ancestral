@@ -40,6 +40,7 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | BUG-035 | M107-Backups (fix DirAccess) | 931 | 2026-09-16 | headless | test_backup_m107.gd 12 checks / 0 fallos (EXIT 0, 0 SCRIPT ERROR de backup_manager; DirAccess.new() abstracto eliminado, API absoluta en uso) |
 | BUG-039 | Generador-Checklist (fix estructura) | 931 | 2026-09-16 | code+funcional | generar_checklist_global.py: run --output temp = 11 cols (Recom heredada), 167 filas, sin duplicados, prefijo/sufijo conservados; caveat: no reinyecta Notas en regen -> BUG-034/QA-SEALS |
 
+| 66 | Anti-Softlock | 953 | 2026-09-17 | headless | re-verif sec21.8 (Log 701, agnes-2.5-flash/Kilo Code): test_anti_softlock_m66.gd 0 fallos (EXIT 0, 0 SCRIPT ERROR); re-grounding softlock_guard/softlock_rules/irecoverable presentes; 05-Checklist 110/0/7 (0 [ ] real -> cumple sec24). Caveat: test usa _check(true) tautologicos + ERROR benigno RefCounted/Node en handler IRecoverable (no aborta, superficial). |
 ## Notas QA (sin sello limpio §21.8)
 
 | MID | Módulo | Log | Motivo |
@@ -48,4 +49,4 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 127 | Copyright-Del-Juego | 950 | test_copyright_m127.gd 13/0 green post-BUG-033, PERO 37 `[ ]` reales (procedimiento legal USCO/DMCA futuro) -> no cumple sec24, sin sello limpio. Autor DeepSeek-V4.1-Flash (Log 923). |
 | 148 | Lore-Ambiental | 886 | 92 `[ ]` reales (data-only) → sin sello; delegado a modelo de creatividad (§11.3) |
 
-**Total sellos limpios:** 24 · **Notas:** 3 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) + M87 (2026-09-17, Log 949) + M14 (2026-09-17, Log 951) = 24/24.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
+**Total sellos limpios:** 25 · **Notas:** 3 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) + M87 (2026-09-17, Log 949) + M14 (2026-09-17, Log 951)  + M66 (2026-09-17, Log 953) = 25/25.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
