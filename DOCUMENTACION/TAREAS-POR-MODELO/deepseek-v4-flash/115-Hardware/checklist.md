@@ -99,7 +99,7 @@ Tareas extraídas del 05-Checklist.md del módulo. IDs T-001 en adelante.
 - [?] T-095 Tabla de requisitos de hardware para la página de Steam [S] *(M97 — fuera de M115)*
 - [?] T-096 FAQ de problemas de hardware comunes [S] *(M97)*
 - [x] T-097 Documentar soporte de gamepads [S] *(este checklist, sección F + 04-Codigo.md comments)*
-- [x] T-098 Registro de cambios del módulo [S] *(Logs/308, 320, 327 — uno por iteración)*
+- [x] T-098 Registro de cambios del módulo [S] *(Logs/327, 414, 526, 921 — uno por iteración)*
 - [?] T-099 Proceso de testing en hardware diverso [S] *(M113 stress test cubre algunos; bench M61 pendiente)*
 - [?] T-100 Contacto de soporte técnico para issues de hardware [S] *(M97 marketing)*
 - [x] T-101 Verificar que M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de cualquier trabajo visual. En iter 1 no hay UI visual; el prompt del jugador (M90) sí requerirá M154 V2. Documentado para iter futura.

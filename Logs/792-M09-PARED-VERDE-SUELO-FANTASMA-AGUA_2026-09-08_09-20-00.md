@@ -1,4 +1,10 @@
-# Log 797: M09 — pared perimetral del impostor verde + suelo fantasma agua/tierra
+# Log 792: M09 — pared perimetral del impostor verde + suelo fantasma agua/tierra
+> **Nota de procedencia (2026-09-17, Log 974):** el titulo original de este
+> archivo decia "Log 797", que colisiona con el log real
+> `Logs/797-M09-VERIFICACION-IMPOSTOR-PASO64_2026-09-08_08-25-00.md` (contenido
+> distinto). El nombre del archivo es la identidad (792) y el codigo de juego lo
+> cita como "Log 792" en `terreno_horizonte.gd:255`; se corrigio el titulo para
+> eliminar la colision silenciosa (trampa 67).
 
 **Fecha:** 2026-09-08
 **Hora:** 09:20

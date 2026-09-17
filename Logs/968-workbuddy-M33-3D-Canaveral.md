@@ -1,4 +1,8 @@
-# 795 — workbuddy / Hy4 preview — M33 Plantación de caña de azúcar (3D) — CERRADO
+# 968 — workbuddy / Hy4 preview — M33 Plantación de caña de azúcar (3D) — CERRADO
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 795** a **Log 968** porque el 795 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 > ⚠️ **Colisión de numeración (concurrencia):** el 795 también lo usaron otros
 > dos agentes el mismo día (`795-M09-IMPOSTOR-HEIGHTMAP-COMPLETO`,

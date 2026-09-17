@@ -85,7 +85,7 @@ func _get_offset() -> Vector3:
 
 ### Pieza 2 — El minimapa solo consume el scroll SI el mouse está encima
 
-**Este es el fix del bug real** (Log 803). El minimapa debe chequear si el
+**Este es el fix del bug real** (Log 958). El minimapa debe chequear si el
 mouse está sobre su rectángulo Y que el mouse no esté capturado:
 
 ```gdscript

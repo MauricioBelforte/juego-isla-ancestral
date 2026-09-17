@@ -1,4 +1,8 @@
-# Log 806: M09 — cierre de sesión: sistema de horizonte definitivo
+# Log 971: M09 — cierre de sesión: sistema de horizonte definitivo
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 806** a **Log 971** porque el 806 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 **Fecha:** 2026-09-08
 **Hora:** 01:15

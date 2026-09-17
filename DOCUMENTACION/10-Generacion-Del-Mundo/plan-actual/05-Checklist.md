@@ -143,7 +143,7 @@
 
 ## I. QA Cruzado (atria-dawn, 2026-09-17 — Log 945)
 
-**Veredicto:** 🟡 El módulo era `✅ Completado por MiMo V2.5` (verificado por hy3 Log 722 + re-QA Hy3 Log 848 — **mismo modelo en ambos**) y vuelve a `🟡 Con dudas`.
+**Veredicto:** 🟡 El módulo era `✅ Completado por MiMo V2.5` (verificado por hy3 Log 961 + re-QA Hy3 Log 848 — **mismo modelo en ambos**) y vuelve a `🟡 Con dudas`.
 
 **Lo que SÍ está bien (verificado en código y con test nuevo):**
 - `world_generator.gd` es un `VoxelGeneratorScript` legítimo (47 l.) que delega en `IslandGenerator.get_block_at`; la referencia estática `_instancia_global` mantiene vivo el generador durante la generación multithread (fix "previously freed", guía Godot 10.14).

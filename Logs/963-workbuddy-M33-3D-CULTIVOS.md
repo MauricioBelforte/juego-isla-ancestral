@@ -1,4 +1,8 @@
-# Log 761 — M33 Agricultura · Sub-pista 3D · Cultivos (4 etapas)
+# Log 963 — M33 Agricultura · Sub-pista 3D · Cultivos (4 etapas)
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 761** a **Log 963** porque el 761 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 **Agente:** WorkBuddy (Hy4)
 **Fecha:** 2026-09-07

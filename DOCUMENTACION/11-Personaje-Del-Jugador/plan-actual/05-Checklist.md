@@ -166,7 +166,7 @@
 
 ---
 
-## K. QA Cruzado (atria-dawn, 2026-09-17 — Log 950)
+## K. QA Cruzado (atria-dawn, 2026-09-17 — Log 977)
 
 **Veredicto:** 🔴 El módulo era `✅ Completado` (verificado por hy3 Log 835 + re-QA Hy3
 Log 848 — mismo modelo, "player.gd + player_equipment.gd **presentes**", puro chequeo

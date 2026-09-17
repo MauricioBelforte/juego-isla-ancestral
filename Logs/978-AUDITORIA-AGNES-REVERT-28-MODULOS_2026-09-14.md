@@ -1,4 +1,9 @@
-# Log 875: Auditoria completa agnes-2.5-flash - 28 modulos revertidos
+# Log 978: Auditoria completa agnes-2.5-flash - 28 modulos revertidos
+> **Nota de procedencia (2026-09-17, Log 975):** este log se renumeró de
+> **Log 875** a **Log 978** porque el 875 ya lo había usado
+> ``Logs/875-WorkBuddy-Docs-Versionado-Y-Politica.md` (2026-09-13 17:29)` (escrito antes). Dos logs con el mismo número hacen que las citas
+> "Log 875" resuelvan al log equivocado en silencio (trampa 67).
+> Este log no tenía citas vivas, por eso se renumeró a él y no al otro.
 
 **Fecha:** 2026-09-14
 **Hora:** 04:45

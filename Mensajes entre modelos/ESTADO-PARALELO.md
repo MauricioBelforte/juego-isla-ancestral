@@ -477,7 +477,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 ## 2026-09-16 16:22 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M107 QA CRUZADO (Log 934)
 
 - **M107 Backups: QA §21.8 completado — verificador ≠ autor (agnes-3-flash).** M107 estaba 🟡 liberado (log 927 de agnes + verificación mimo-v2.5 7/176).
-- **Veredicto: el trabajo de agnes es VÁLIDO y honesto.** Reproduje todo independientemente: 	est_backup_m107.gd re-ejecutado por mí → **12 checks, 0 fallos, 0 script errors**; listar_backups() (backup_manager.gd:115) existe y funciona; Validador.crc32_hex es class_name global correcto; infra PS 4 (backup_local 222l SHA256+compresión+log+retención, verify_backups 104l, restore_backup 148l, register_task 86l) + ackup.yml (110l, cron+dispatch+rclone+secrets) verificados en disco; 03-Diseno.md completo (505l, 11 secciones + 4 escenarios DR).
+- **Veredicto: el trabajo de agnes es VÁLIDO y honesto.** Reproduje todo independientemente: 	est_backup_m107.gd re-ejecutado por mí → **12 checks, 0 fallos, 0 script errors**; listar_backups() (backup_manager.gd:115) existe y funciona; Validador.crc32_hex es class_name global correcto; infra PS 4 (backup_local 222l SHA256+compresión+log+retención, verify_backups 104l, restore_backup 148l, register_task 86l) + backup.yml (110l, cron+dispatch+rclone+secrets) verificados en disco; 03-Diseno.md completo (505l, 11 secciones + 4 escenarios DR).
 - **Correcciones que apliqué:**
   1. **Línea Totales del 05-Checklist mentía** — decía literalmente "137 ítems · Completados: 137 · Pendientes: 0" siendo la realidad 176 [ ] todos pendientes. agnes lo había *documentado* en una nota pero la línea seguía falsa (cualquier script/agent que leyera solo el Totales veía 100%). Corregida a los valores reales.
   2. **Flip caja-a-caja ejecutado** (agnes lo había delegado): marqué [x] solo lo con evidencia — nota de documentación verificada contra 03-Diseno.md o artefacto verificado por mí directamente. Quedó **47 [x] · 17 [?] con dueño (M59/M122/M133/M135/M97 + OAuth Google Drive usuario + disco externo usuario) · 112 [ ] pendientes**.
@@ -507,7 +507,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 ## 2026-09-16 21:00 — atria-dawn — M15 LIBERADO a 🟡 (log 940, iter 6 cerrada)
 
 - **M15 Recursos: 🟡 Liberado.** La iteración de QA/fixes está completa; los 115 [ ] restantes son **feature-dev nuevo** (drops físicos RigidBody3D, pooling, impostores 48-96m, revalidación de chunk, QA M114), no verificación pendiente — otro agente puede tomarlos como iteración 7.
-- Notas del Agente completas en  5-Checklist.md con recomendaciones: (1) el spawner NO usa el seed de M29 (determinista por def_id.hash() — decisión de diseño pendiente); (2) alidar_definicion() no existe; (3) reemplazar los count >= 1 por rangos [min,max] en los tests de drops; (4) commitear logs al terminar.
+- Notas del Agente completas en 05-Checklist.md con recomendaciones: (1) el spawner NO usa el seed de M29 (determinista por def_id.hash() — decisión de diseño pendiente); (2) alidar_definicion() no existe; (3) reemplazar los count >= 1 por rangos [min,max] en los tests de drops; (4) commitear logs al terminar.
 - **M15 ya no está bloqueado por mí.** Próximo: elijo siguiente módulo de Fase 4 habilitada o QA cruzado de algún módulo ✅ pendiente.
 
 ## 2026-09-16 21:15 — atria-dawn — M32 Clima QA CRUZADO (log 942) — ✅ confirmado con 4 hallazgos
@@ -566,7 +566,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 ## 2026-09-17 04:58 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M10 QA CRUZADO (Log 945)
 
 - **M10 Generacion del Mundo: ✅ Completado → 🟡 Con dudas — 90/106** (16 items a [?]).
-  Tercer QA: los dos previos (Log 722 + Log 848) eran del **mismo modelo** (hy3/Hy3) y
+  Tercer QA: los dos previos (Log 961 + Log 848) eran del **mismo modelo** (hy3/Hy3) y
   solo verificaron presencia de archivos — nunca leyeron la logica del generador.
 - **Test nuevo** `test_generacion_m10_atria.gd` (no existia NINGUN test de generacion):
   4 pass (determinismo 2 ordenes 0 diffs, semilla, agua pisable, rango alturas) +
@@ -603,7 +603,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - Reserva 946 consumida (log escrito, reserva borrada). M117 queda 🟡 Liberado; QA cruzado §21.8 ✅ VERIFICADO por Hy3/WorkBuddy (Log 947, §21.8).
   pendiente (verificador ≠ agnes-3-flash).
 
-## 2026-09-17 05:38 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M08 QA CRUZADO (Log 949) — MANTIENE ✅
+## 2026-09-17 05:38 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M08 QA CRUZADO (Log 976) — MANTIENE ✅
 
 - **M08 Mundo Voxel: mantiene ✅ — 0 flips, 105/105 [x] se sostienen.** Veredicto
   **diferenciado** frente a M09/M10 (Logs 944/945): el checklist de M08 es honesto en
@@ -621,7 +621,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   main_island.gd tiene **31 modelos** (ids 0-30).
 - **Pendiente real nuevo:** `has_gravity` (arena/grava sueltas) definido en BlockType
   pero **sin ningún código que lo consuma**.
-- Reserva 949 consumida. Detalle: `Logs/949-QA-M08-Mundo-Voxel_2026-09-17_05-38.md`.
+- Reserva 949 consumida. Detalle: `Logs/976-QA-M08-Mundo-Voxel_2026-09-17_05-38.md`.
   (Nota: 946-948 fueron tomados por otros agentes mientras tanto — el bucle
   anti-colisión de §6.1.a saltó correctamente al 949.)
 
@@ -639,7 +639,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   (anti-colisión §6.1.d). Reserva 954 consumida (log escrito, reserva borrada). M46 queda 🟡 para
   reconciliación del dueño M46 / M45/M108. QA cruzado §21.8 pendiente (verificador ≠ agnes-3-flash).
 
-## 2026-09-17 08:32 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M11 QA CRUZADO (Log 950) — 🔴 sobre-cierre profundo
+## 2026-09-17 08:32 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M11 QA CRUZADO (Log 977) — 🔴 sobre-cierre profundo
 
 - **M11 Personaje del Jugador: ✅ → 🟡 Con dudas — 49/122 (73 flips a [?]).** El
   sobre-cierre más profundo del ciclo (M09: 7 flips; M10: 16; M08: 0). Los dos QAs
@@ -660,4 +660,4 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   M155 live).
 - 6 de 7 scripts previstos y los 3 .tres no existen (data/player/ ausente); contratos
   §3 (PlayerState, player_fatigue, light_collected, terrain_changed) nunca publicados.
-- Reserva 950 consumida. Detalle: `Logs/950-QA-M11-Personaje_2026-09-17_08-32.md`.
+- Reserva 950 consumida. Detalle: `Logs/977-QA-M11-Personaje_2026-09-17_08-32.md`.

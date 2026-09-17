@@ -1,4 +1,9 @@
-# Log 932: Verificación item por item de 8 módulos revertidos por auditoría agnes
+# Log 979: Verificación item por item de 8 módulos revertidos por auditoría agnes
+> **Nota de procedencia (2026-09-17, Log 975):** este log se renumeró de
+> **Log 932** a **Log 979** porque el 932 ya lo había usado
+> ``Logs/932-M52-VFX-QA-Visual-V2-asistencia_2026-09-16_08-10-00.md` (08:10)` (escrito antes). Dos logs con el mismo número hacen que las citas
+> "Log 932" resuelvan al log equivocado en silencio (trampa 67).
+> Este log no tenía citas vivas, por eso se renumeró a él y no al otro.
 
 **Fecha:** 2026-09-16
 **Hora:** 18:00

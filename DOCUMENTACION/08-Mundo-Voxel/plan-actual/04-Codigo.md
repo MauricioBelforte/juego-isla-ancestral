@@ -19,7 +19,7 @@ scripts/world/
 └── generators/             ← (M10)
 ```
 
-> ⚠️ **QA atria-dawn (Log 949, 2026-09-17): la lista de arriba era la arquitectura
+> ⚠️ **QA atria-dawn (Log 976, 2026-09-17): la lista de arriba era la arquitectura
 > PREVISTA. Estado real al 2026-09-17:**
 > - `voxel_world.gd` — **NO EXISTE**. No hay fachada VoxelWorld ni registro en
 >   ServiceRegistry. La edición de bloques la implementan otros módulos:
@@ -43,7 +43,7 @@ scripts/world/
 - `world.get_block(pos) -> BlockData`, `world.set_block_puzzle(pos, state)` (M24)
 - Eventos: `block_placed/removed/modified` (payload tipado) — consumidos por NPC reactividad (M19/M64), quests (M22), economía (M38), sonido (M43).
 
-> ⚠️ **QA atria-dawn (Log 949): los contratos de arriba son los DISEÑADOS. La
+> ⚠️ **QA atria-dawn (Log 976): los contratos de arriba son los DISEÑADOS. La
 > implementación real difiere — usar las firmas reales:**
 > - No existe el objeto `world`. La edición se hace contra el controlador de
 >   herramientas: `tool_controller.try_extract() -> Dictionary` (sin args de

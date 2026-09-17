@@ -1,4 +1,8 @@
-# Log 804: M18-BIS — Casa mediana 2 ambientes (CERRADA funcionalmente)
+# Log 970: M18-BIS — Casa mediana 2 ambientes (CERRADA funcionalmente)
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 804** a **Log 970** porque el 804 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 **Fecha:** 2026-09-08
 **Hora:** 22:48 ART

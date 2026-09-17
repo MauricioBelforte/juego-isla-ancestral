@@ -138,7 +138,7 @@
 - [ ] Tabla de requisitos de hardware para la página de Steam [S] -- agnes-2.5-flash 2026-09-13: M97 — fuera de M115. Tabla base documentada en 03-Diseno.md §2.6. Spec defined.
 - [ ] FAQ de problemas de hardware comunes → KnownIssue no bloqueante DoD: M97. FAQ disenada en 03-Diseno.md §3.3. Spec defined.
 - [ ] Documentar soporte de gamepads [S] *(este checklist, sección F + 04-Codigo.md comments)*
-- [ ] Registro de cambios del módulo [S] *(Logs/308, 320, 327 — uno por iteración)*
+- [ ] Registro de cambios del módulo [S] *(Logs/327, 414, 526, 921 — uno por iteración)*
 - [ ] Proceso de testing en hardware diverso → KnownIssue no bloqueante DoD: M113 stress test cubre algunos; bench M61 pendiente. Proceso documentado en 03-Diseno.md §3.4. Spec defined.
 - [ ] Contacto de soporte tecnico para issues de hardware [S] -- agnes-2.5-flash 2026-09-13: M97 marketing. Politica documentada en 03-Diseno.md §3.5. Spec defined.
 

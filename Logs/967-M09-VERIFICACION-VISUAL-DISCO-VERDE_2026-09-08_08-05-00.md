@@ -1,4 +1,8 @@
-# Log 795: M09 — impostor verde sobre el agua VERIFICADO VISUALMENTE (Log 793-795)
+# Log 967: M09 — impostor verde sobre el agua VERIFICADO VISUALMENTE (Log 793-795)
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 795** a **Log 967** porque el 795 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 **Fecha:** 2026-09-08
 **Hora:** 08:05

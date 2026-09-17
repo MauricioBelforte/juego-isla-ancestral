@@ -1,4 +1,8 @@
-# Log 803 — WorkBuddy (hy3) — M33-3D-TIERRA (arada + regada)
+# Log 960 — WorkBuddy (hy3) — M33-3D-TIERRA (arada + regada)
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 803** a **Log 960** porque el 803 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 - **Fecha:** 2026-09-08 22:25 ART
 - **Módulo:** 33-Agricultura (objetos 3D)

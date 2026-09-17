@@ -1,4 +1,8 @@
-# Log 801: M09 — disco de terreno incremental funcionando (fix del parse)
+# Log 956: M09 — disco de terreno incremental funcionando (fix del parse)
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 801** a **Log 956** porque el 801 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 **Fecha:** 2026-09-09
 **Hora:** 00:05

@@ -1,4 +1,8 @@
-# Log 793 — Hy4 preview / WorkBuddy — M33 3D Bananero
+# Log 966 — Hy4 preview / WorkBuddy — M33 3D Bananero
+> **Recuperado 2026-09-17** (ver `Logs/974-...md`, trampa 67).
+> Este log vivía sólo en la cuarentena del dedup del 2026-09-16. Se renumeró de
+> **Log 793** a **Log 966** porque el 793 quedó ocupado por OTRO log distinto.
+> Mapa completo: `PAPELERA/logs-recuperados-2026-09-16/MAPA-RENUMERACION.md`.
 
 ## 1. Contexto
 Módulo **33-Agricultura**, sub-track 3D. Sigo el orden natural del backlog de M33 tras los cultivos (log 761) y la regadera (log 790). Próximo item: bananero.

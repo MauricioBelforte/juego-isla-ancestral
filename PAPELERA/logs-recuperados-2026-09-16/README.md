@@ -4,10 +4,32 @@ Material **unico** rescatado del borrado masivo de `Logs/` del 2026-09-16 (tramp
 Se conserva aqui (versionado) porque la cuarentena original vive en `.workbuddy-ai/`
 que esta **gitignoreado** -> mismo punto unico de fallo que causo la perdida.
 
-**NO se restauraron en `Logs/`**: en varios casos el numero esta ocupado por OTRO log
-distinto, y en otros (801/802/803) hay 2-3 logs distintos con el mismo numero.
-Restaurar tal cual recrearia la colision (trampa 67). La reparacion correcta es
-renumerar a slots libres + actualizar las citas, y eso es decision del dueno de cada log.
+> ## ESTADO 2026-09-17 — CUARENTENA VACIADA (restauracion aplicada)
+>
+> El dueno delego la reparacion ("arregla los problemas") y se ejecuto el
+> **2026-09-17** (DeepSeek-V4.1-Flash, Log 975):
+>
+> - Los **25 huerfanos** se movieron a `Logs/`: los 7 numeros vacios
+>   (`723, 792, 800, 801, 802, 803, 805`) recuperaron su numero original, y los
+>   otros 18 se renumeraron a slots libres (`956`-`973`).
+> - El duplicado byte-identico `152-…AAAA-MM-DD…` se descarto (el log vivo es
+>   `Logs/152-…_2026-08-25_00-00-00.md`).
+> - Se actualizaron las citas vivas (codigo de juego, guias, registros, M115).
+> - **Mapa completo old→new + citas: `MAPA-RENUMERACION.md`** (en esta carpeta).
+>
+> Esta carpeta queda como **lapida forense**: la tabla de abajo es el registro de
+> lo que el dedup borro. Los bytes originales de cada archivo siguen recuperables
+> desde git (`git show <commit>:PAPELERA/logs-recuperados-2026-09-16/<archivo>`),
+> commit en que entraron: `a466ab3`.
+>
+> **Regla que esto dejo:** deduplicar **por numero** es destructivo. Antes de citar
+> `Log NNN`, verificar con `ls Logs/NNN-*`.
+
+**Historicamente NO se restauraron en `Logs/`** (situacion previa al 2026-09-17): en
+varios casos el numero esta ocupado por OTRO log distinto, y en otros (801/802/803)
+hay 2-3 logs distintos con el mismo numero. Restaurar tal cual recrearia la colision
+(trampa 67). La reparacion correcta es renumerar a slots libres + actualizar las
+citas, y eso es decision del dueno de cada log.
 
 ## Procedencia
 
