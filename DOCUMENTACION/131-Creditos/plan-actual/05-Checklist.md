@@ -38,9 +38,9 @@
 - [x] Assets terceros: categorizados por licencia [S]
 - [x] Lista alfabética dentro de cada categoría [S]
 - [x] Sistema de búsqueda por nombre, rol, equipo [S]
-- [ ] Transición suave entre secciones [S]
+- [x] Transición suave entre secciones [S]
 - [ ] Contador de tiempo visible (opcional) [S]
-- [ ] Respetar configuración M90/M91/M91 [S]
+- [x] Respetar configuración M90/M91/M91 [S]
 
 ## D. Interfaz y usabilidad (10)
 
@@ -52,8 +52,8 @@
 - [x] Conmutación de idioma en tiempo real [S]
 - [x] Copyright con año actual auto-dinámico [S]
 - [x] Diseño coherente con estilo cozy M87/M90/M91 [S]
-- [ ] Tiempo máximo 5 minutos visualización [S]
-- [ ] Accesibilidad de navegación por teclado [S]
+- [x] Tiempo máximo 5 minutos visualización [S]
+- [x] Accesibilidad de navegación por teclado [S]
 
 ## E. Data y configuración (8)
 
