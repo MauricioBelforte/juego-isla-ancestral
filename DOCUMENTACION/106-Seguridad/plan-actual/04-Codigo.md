@@ -1,5 +1,7 @@
-**Modelo:** SWE-1.6
-**Plataforma:** DEVIN
+**Modelo:** agnes-3-flash (Sapiens AI) (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-16 (iter. agnes: helper `security_input_validator` + test + reconciliación del sobre-cierre)
+**Historial:** especificación original por SWE-1.6 / DEVIN (2026-08-19); implementación de `security_manager.gd` (catálogo) por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-16, Log 922)
 
 # 04-Codigo.md — Módulo 106: Seguridad
 
@@ -480,3 +482,35 @@ TAMPER_SECRET_KEY=your_tamper_secret_key_here
 - Probar rate limiting.
 - Probar autenticación de APIs.
 - Probar auditoría de dependencias.
+
+## 17. Iteración agnes — helper reutilizable + reconciliación (2026-09-16, agnes-3-flash (Sapiens AI) / Kilo Code)
+
+> **Contexto:** el `05-Checklist.md` decía "161/161, 0 pendientes" (sobre-cierre); el real es
+> **140 `[x]` / 66 `[ ]`** (206). La implementación real es el **catálogo** `security_manager.gd`
+> (no los 8 servicios `class_name` de este diseño) + `test_security_m106.gd` (12/0, verde real).
+
+### Divergencia diseño ↔ implementación
+- **Diseño (secciones 4-12):** 8 servicios con `class_name` + `extends Node` (APISecurity, KeyManager,
+  InputValidator, OutputValidator, TamperProtection, DuplicationPrevention, EconomyValidation,
+  AuditLogger) → en `--script` headless, `class_name` globales no se registran (pitfall §9.41) y los
+  autoloads se duplican si se usan dos nombres.
+- **Implementado (real):** `security_manager.gd` = **catálogo data-driven** (`data/security/
+  security_policies.json`, 4 políticas + restricciones) + `validar_max()` + `validar_save()` (CRC32 vía
+  `Validador.crc32_hex`) + `registrar_alerta()`. Verificado por `test_security_m106.gd` (12/0).
+
+### Aporte de iter. agnes
+- **NUEVO `scripts/security/security_input_validator.gd`** (RefCounted, sin `class_name`, vía `preload`)
+  = el helper "InputValidator" del diseño hecho **headless-safe y reutilizable**: `sanitizar` (control
+  chars + truncado), `validar_string/int/float/email/enumeracion`. **No toca** `security_manager.gd`
+  (autoload que funciona). Tipos explícitos (el proyecto trata warnings GDScript como errores: sin
+  inferencia `Variant`).
+- **NUEVO `scripts/security/test_security_m106_input.gd`** → **25 checks, 0 fallos**, 0 `SCRIPT ERROR`,
+  3 guardianes anti-falso-verde.
+- **Verificación total M106:** `test_security_m106.gd` 12/0 + `test_security_m106_input.gd` 25/0 =
+  **37 checks, 0 fallos, 0 `SCRIPT ERROR`** (godot 4.7.2 headless).
+
+### Dónde rindo / dónde no (reglas de asignación)
+- **Ejecuto:** tooling/validadores/headless, data-driven, auditoría código↔checklist, entrega
+  anti-hallucinatoria. **No soy aprobador visual.** Los servicios online (rate limiting/bots/CI secrets/
+  HMAC-SHA) son de M77/CI/external → `[?]` con dueño; el núcleo local (catálogo + InputValidator +
+  `validar_save`) lo cubro.

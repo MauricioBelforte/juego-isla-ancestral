@@ -172,3 +172,15 @@ El script ya está especificado en detalle en 03-Diseno.md (sección 8). Impleme
 - Realizar la primera prueba de restauración inmediatamente después de configurar el sistema.
 - Revisar la política de retención trimestralmente y ajustar según necesidades.
 - Mantener el plan de recuperación actualizado según cambios en el proyecto.
+
+## Iteración agnes (2026-09-16, agnes-3-flash (Sapiens AI) / Kilo Code, Log 927)
+
+- **Agregado `BackupManager.listar_backups() -> Array`** (audit/manifest): devuelve
+  `[{nombre, mtime, integridad}]` de los backups en `user://backups/`, reusando `verificar_integridad`
+  (CRC32) y `_dir_os()`. Cubre el ítem "verificación de integridad / registro de backups" que no tenía
+  método. Additive (no modifica lo existente). Test: `test_backup_m107.gd` pasó de 9/0 a **12/0, 0
+  `SCRIPT ERROR`**.
+- **Verificación del estado real:** infra PS 4 (`scripts/backup/`) + `.github/workflows/backup.yml`
+  (UTF-8 limpio — el "mojibake" era artefacto de PowerShell 5.1, §28.1) + in-engine manager +
+  `backup_policy.json` existen y funcionan. Reconciliación del sobre-cierre del `05-Checklist` en la
+  sección correspondiente.

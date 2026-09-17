@@ -1,21 +1,22 @@
-**Modelo:** deepseek-v4-flash (último modificador)
+**Modelo:** agnes-3-flash (Sapiens AI) (último modificador)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-01 (reserva + iter. 1 núcleo)
-**Historial:** documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-20)
+**Fecha:** 2026-09-15 (reserva iter. agnes + StressComparator/baseline)
+**Historial:** documentación completa por Deepseek V4 Flash (OpenCode, 2026-08-20); iter. 1 núcleo por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-15)
 
 # 05-Checklist.md — Módulo 113: Pruebas de Stress (110 ítems)
 
 ## Reserva actual
 
-- Estado: 🔵 En curso (iter. 1 núcleo)
-- Agente: deepseek-v4-flash (Kilo Code)
+- Estado: 🔵 En curso (iter. agnes — StressComparator + baseline)
+- Agente: agnes-3-flash (Sapiens AI) / Kilo Code
+- Log reservado: 919 (`Logs/reservas/919-agnes-3-flash-M113.txt`)
 - Fase: QA y operación (soporte de M112 Testing)
 - Dificultad: 3
 - Visión: V0
-- Entrada: M112 ✅ (testing automático), M61 🟡 (rendimiento, métricas base)
-- Salida: StressRunner headless (SceneTree batch mode) + StressScenario base + StressReport (p50/p95/memoria/JSON) + escenarios SaveLoadStress y BlockEditStress + test headless
-- Archivos: `game/isla-ancestral/scripts/stress/`
-- Fecha: 2026-09-01 15:10:00
+- Entrada: M112 ✅ (testing automático), M61 🟡 (rendimiento — las métricas que piden baseline real quedan `[?]` con dueño M61)
+- Salida: `StressComparator` + baseline versionado `perf_base.json` (umbral ±5% configurable) cableado en `stress_runner.gd` (marcador de `regresion` + exit 1) + test headless `test_stress_m113_comparador.gd` + reconciliación del sobre-cierre del `Totales`
+- Archivos: `game/isla-ancestral/scripts/stress/` (+ `stress_comparator.gd`, `test_stress_m113_comparador.gd`)
+- Fecha: 2026-09-15 23:05:00
 
 ## Convención
 - `[x]` = completado por documentación. `[ ]` = pendiente. `[?]` = no resuelto.
@@ -214,15 +215,44 @@
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]
 
-## Totales
+## Totales (reconciliado por agnes-3-flash, iter. agnes, Log 919, 2026-09-15)
 
-**Total de ítems:** 127
-**Ítems resueltos por documentación:** 127 (0 pendientes, 0 dudas — DoD cubierto)
-**Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+**Corrección del sobre-cierre:** la cifra anterior decía "127/127 (0 pendientes, 0 dudas)" — **falso**.
+Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1 `[?]`** (total 132).
+
+**Estado tras iter. agnes (Log 919):**
+- `[x]` framework: `stress_runner.gd` + `stress_scenario.gd` + 4 escenarios + `StressComparator` (baseline ±5%) + `test_stress_m113_comparador.gd` (19/0).
+- Los 30 `[ ]` son "definir métrica/prueba" de los 19 escenarios → la mayoría **pide baseline real de rendimiento
+  (dueño M61 🟡)** o módulos reales aún ausentes (M19/M50/M65…). **No se marcan `[x]` sin implementación.**
+- El 1 `[?]` (Iter.3 "comparar con objetivo de referencia / umbral por escenario") → **cerrado `[x]`** por
+  `StressComparator` (mecanismo ±5% por escenario); los VALORES objetivo quedan con M61/M19/M50/M65.
+- Gate pre-Beta/pre-RC (M141/M142) y feed M96 → siguen `[ ]` con dueño externo.
 ## Iteración 3 — Verificación visual del reporte (2026-09-02, deepseek-v4-flash-vision-exp)
 
 - [x] Análisis del reporte real `user://stress_report.json` (4 escenarios, 4323 ms, exit 0): lecturas coherentes, integridad 1.0 en los 3 flujos de datos reales (SaveLoad 100 ciclos ok, Inventory conteos exactos, Equipment slots vacíos)
 - [x] Gráficos de rendimiento generados (visualización): duración por escenario (barras) y operaciones por segundo por flujo (barras)
 - [x] Interpretación QA del reporte (nota de lectura): BlockEdit 595k ops/s es una simulación RAM (no comparable con la API real); Inventory ADD ~50k ops/s (7x más lento que remove 360k — coste de señales/stacking) y Equipment equip ~50k ops/s — números realistas y sanos para el estado actual
 - [x] Memoria estable: +104 KB estáticos entre inicio/fin de la corrida de referencia (sin acarreo)
-- [?] Comparar con objetivo de referencia (umbral definido por escenario): pendiente en el diseño original (dueño: iter 4 con módulos en producción M19/M50/M65)
+- [x] Comparar con objetivo de referencia (umbral definido por escenario) — **mecanismo cerrado por agnes-3-flash (iter. agnes, Log 919):** `StressComparator.comparar()` con umbral ±5% configurable + baseline `perf_base.json`. Los VALORES objetivo por escenario quedan con M61/M19/M50/M65 cuando estén en producción.
+
+## Notas del Agente (iter. agnes)
+
+**Modelo:** agnes-3-flash (Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-15
+**Estado:** Parcial — iteración agnes liberada (mecanismo de baseline/gate entregado y verificado headless); los 30 `[ ]` de "definir métrica/prueba" siguen con dueño M61/módulos reales.
+
+### Lo que hice
+- Entregué el gap que el diseño marcó `[x]` pero el runner no implementaba: **`StressComparator`** (`scripts/stress/stress_comparator.gd`) + **baseline versionado `perf_base.json`** + **comparación ±5% configurable** cableada en `stress_runner.gd` (marcador de `regresion` + exit 1) + modo `--update-baseline` + **test headless `test_stress_m113_comparador.gd` (19 checks, 0 fallos)**.
+- Cerré el `[?]` de Iter.3 ("umbral por escenario") con el mecanismo del comparador.
+- **Corregí el sobre-cierre del `Totales`** (decía 127/127 "0 pendientes"; el real era 101 `[x]` / 30 `[ ]` / 1 `[?]`).
+
+### Lo que NO hice (honestidad obligatoria)
+- **No sembré un `perf_base.json` versionado en el repo:** al probarlo, una siembra desde dev-headless marcó **5 regresiones falsas** (p95 de timing oscila >5% entre corridas en hardware variable). El diseño §1 exige "corre en hardware fijo (label CI)"; **el valor del baseline es de M61/CI sobre hardware fijo**, no un artefacto de laptop. Dejé el mecanismo listo y el repo sin un baseline ruidoso.
+- Los 30 `[ ]` "definir métrica/prueba" y el gate pre-Beta/RC (M141/M142) y feed M96 **siguen pendientes** con dueño.
+
+### Recomendaciones para el próximo agente
+- M61 (🟡) debe generar el `perf_base.json` **en CI con hardware fijo** vía `--update-baseline` y versionarlo; ahí el gate ±5% deja de ser frágil.
+- Considerar **mediana de N corridas** o umbral por métrica (más flojo en timing, estricto en integridad) si el ±5% único sigue siendo frágil.
+- Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
+

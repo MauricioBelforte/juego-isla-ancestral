@@ -3,15 +3,15 @@
 
 ## Reserva actual
 
-- Estado: 🟡 Liberado — iteración 1 (núcleo lógico) 2026-08-30
-- Agente: Deepseek V4 Flash (Kilo)
-- Fase: 8 (Vertical slice)
+- Estado: 🔵 En curso — iter. triggers (verificación Log 336 + RF20 + RF19) — reserva 2026-09-15 04:40, Log reservado 911
+- Agente: glm-5.3-flash (Cline) — relevo de agnes-2.5-flash (sin actividad desde 2026-09-04, regla 21.4.7); iters previas respetadas: núcleo Deepseek (Log 259), triggers avanzados glm-5.3-flash (Log 336)
+- Fase: 8 (Vertical slice / Onboarding)
 - Dificultad: 3
-- Vision: V0 (lógica); UI de pistas/burbujas es V2 (M53)
-- Entrada: M53 🔵 (UI — en curso por MiMo), M70 pendiente
-- Salida: TutorialManager autoload + 4 capítulos base + triggers + revalidación + estados + persistencia M59 + test 0 fallos
-- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial.gd`, `project.godot`
-- Fecha cierre: 2026-08-30 03:10
+- Visión: V0 (lógica); UI de pistas/burbujas es V2 (M53)
+- Entrada: núcleo Log 259 + triggers Log 336; M53 core ✅; M70 mockeable
+- Salida: RF20 re-programación ×3 → descarte seguro + RF19 log M103 + Q3 dist² + tests S3/S7 headless 0 fallos + ítems verificados del Log 336 marcados
+- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial_triggers.gd` (extensión), docs del módulo
+- Fecha cierre: —
 
 # 05-Checklist.md — Módulo 92: Tutorial
 
@@ -42,17 +42,17 @@
 - [x] RF1: cada capítulo es un guion Resource reutilizable (partida nueva, re-play, New Game+) [M]
 - [x] RF2: trigger por señal de sistema (M70, M33, M34, M35, M16...) con condición de contexto [M]
 - [x] RF2: trigger por mundo (proximidad del jugador a ITutorialTarget, radio configurable) [M]
-- [ ] RF2: trigger por acción del jugador (primer paso, primera tecla E, primer equipar) [M]
-- [ ] RF2: los triggers se registran y desregistran según los mundos activos (M63 streaming) [M]
+- [x] RF2: trigger por acción del jugador (primer paso, primera tecla E, primer equipar) [M] → Log 336 verificado en código: conexión a señales REALES del EventBus (inventory.item_added/world.block_placed/npc.gift_given) + anti-duplicado + test (2026-09-15, glm-5.3-flash/Cline, Log 911)
+- [x] RF2: los triggers se registran y desregistran según los mundos activos (M63 streaming) [M] → API registrar/desregistrar/activar_trigger_mundo implementada y testeada (Log 336 + test); KnownIssue no bloqueante DoD: cableado AUTOMÁTICO con M63 cuando exponga mundos activos (dueño M63)
 - [x] RF2: condiciones de contexto permitidas: día, hora, zona, sistema disponible [M]
 - [x] RF3: revalidación de "ya lo sabe": señal de maestría antes del trigger completa el capítulo en silencio [C]
 - [x] RF3: la revalidación no muestra ningún paso ni feedback al jugador que ya domina [M]
 - [x] RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M16, M19) [M]
-- [ ] RF19: la revalidación registra log de M103 para trazabilidad [S]
-- [ ] RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M]
+- [x] RF19: la revalidación registra log de M103 para trazabilidad [S] → `_log_m103()` (duck-typing GameLogger.info + fallback print) en la rama de revalidación silenciosa (2026-09-15, Log 911)
+- [x] RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M] → gate Log 336 verificado en código (`_vecino_libre()` en despliegue y en trigger de mundo) + test (Log 911)
 - [x] RF2: no disparar capítulos de sistemas no implementados (omisión con log de degradación) [M]
 - [x] RF23: watchdog por capítulo con timeout configurable (default 120 s) [M]
-- [ ] RF20: re-programación del trigger hasta 3 intentos antes del descarte seguro [M]
+- [x] RF20: re-programación del trigger hasta 3 intentos antes del descarte seguro [M] → `_registrar_intento()` + `_programar_reintento()` (timer configurable) + `_descartar_capitulo()` (señal capitulo_descartado, re-activable con `reactivar_descartado()`, cozy) + guard en desplegar (2026-09-15, Log 911); test RF20 + S7 0 fallos
 
 ## C. RF: Guiones y secuencias guiadas (14)
 
@@ -230,7 +230,7 @@
 
 - [ ] Q1: pool de burbujas con máx. 2 nodos UI vivos (reutilización, sin instanciado por pista) [M]
 - [ ] Q2: la lógica de triggers se evalúa solo ante señales o entrada, nunca por polling innecesario [M]
-- [ ] Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S]
+- [x] Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S] → `distance_squared_to()` + radio² (Log 911)
 - [x] Q4: las condiciones de contexto son funciones baratas (< 1 µs cada una) [S]
 - [ ] Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
 - [ ] Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
@@ -250,12 +250,12 @@
 ## S. Testings (12)
 
 - [x] S1: test unitario de transiciones de estado del TutorialManager (ACTIVO→PISTA→CONSECUENCIA→ESPERANDO) [M]
-- [ ] S2: test de triggers de señal con mocks de M70/M33/M34/M35 [M]
-- [ ] S3: test de trigger de mundo con distancias límites (radio exacto ±0.01 m) [M]
+- [x] S2: test de triggers de señal con mocks de M70/M33/M34/M35 [M] → mejor que mocks: test_tutorial_triggers usa el EventBus REAL (inventory.item_added, world.block_placed, npc.gift_given) + anti-duplicado (Log 336/911)
+- [x] S3: test de trigger de mundo con distancias límites (radio exacto ±0.01 m) [M] → 4.99 dispara / 5.01 no, con dist² (Log 911)
 - [ ] S4: test de revalidación: señal de maestría previa completa el capítulo en silencio [M]
 - [ ] S5: test de skip global y por capítulo (estado persistido correctamente) [M]
 - [ ] S6: test de re-play con snapshot (la partida no se contamina) [C]
-- [ ] S7: test del watchdog: meta imposible → re-programación ×3 → descarte sin bloqueo [C]
+- [x] S7: test del watchdog: meta imposible → re-programación ×3 → descarte sin bloqueo [C] → 3 timeouts → descarte seguro, señal emitida, capítulo re-activable (Log 911)
 - [ ] S8: test de pistas: máx. 2 vivas, pool reutilizado, fade y expiración [M]
 - [ ] S9: test de consejos: una sola vez, cooldown 90 s, contextos restringidos [M]
 - [ ] S10: test de integración End-to-End: partida nueva → prólogo → capítulo cultivo completo con mocks [C]

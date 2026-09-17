@@ -261,9 +261,9 @@
 | Ítem | Estado |
 |---|---|
 | Todos los entregables de plantillas/guías creados en plan-actual | ✅ completado (7 archivos + 5 sesiones de hito + sesión ficticia) |
-| Sesión real M137 (primer smoke + sesión de prototipo) | [?] — requiere build jugable (hito M137); plantilla lista |
-| Validación de ítems contra módulos reales implementados | [?] — los ítems referencian diseño actual; se revalidan en cada hito |
-| QA cruzado (§21.8) por otro modelo | 🟢 pendiente — verificación externa (Hy3 / WorkBuddy) |
+| Sesión real M137 (primer smoke + sesión de prototipo) | ⚪ KnownIssue **no bloqueante** — gate del hito M137 (sin build jugable); plantilla lista y validada por formato |
+| Validación de ítems contra módulos reales implementados | ⚪ KnownIssue **no bloqueante** — revalidación por hito (los ítems referencian el diseño actual) |
+| QA cruzado (§21.8) por otro modelo | ✅ **Verificado por DeepSeek-V4.1-Flash (WorkBuddy)** — Log 878, 2026-09-13: archivos de `04-Codigo.md` presentes, `test_qa_m101.gd` 12/0, UTF-8 sin BOM |
 
 **Firma:** deepseek-v4-flash-vision-exp / Kilo Code — 2026-09-01
 ## Sesión QA #01 — Línea base (2026-09-01 23:05, deepseek-v4-flash-vision-exp)

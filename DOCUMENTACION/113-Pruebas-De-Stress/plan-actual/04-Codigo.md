@@ -1,6 +1,7 @@
-**Modelo:** deepseek-v4-flash (último modificador)
+**Modelo:** agnes-3-flash (Sapiens AI) (último modificador)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-01 (implementación iter. 1 núcleo; diseño original Unity/C# por Deepseek V4 Flash / OpenCode 2026-08-20)
+**Fecha:** 2026-09-15 (iter. agnes: StressComparator + baseline ±5% + gate de regresión + test)
+**Historial:** iter. 1 núcleo + iter. 2 escenarios por deepseek-v4-flash(-vision-exp) / Kilo Code (2026-09-01); diseño original Unity/C# por Deepseek V4 Flash / OpenCode 2026-08-20
 
 # 04-Codigo.md — Módulo 113: Pruebas de Stress
 
@@ -103,3 +104,38 @@ extends SceneTree
   - escenarios/equipment_stress.gd — EquipmentStress: 500 ciclos de equipar las 16 prendas + desequipar (M155). Resultado: equip_ms p50=160, unequip_ms p50=2, integridad_ok=1.0 (slots vacíos al cierre).
 - **stress_runner.gd**: 2 escenarios más registrados → **4 escenarios, status ok, exit 0** (duración total 4.323 ms)
 - Reporte: user://stress_report.json (2286 bytes, 4 escenarios, 2286 B) + smoke visual del mundo: FPS 60, sin regresiones (captura 167).
+
+## 5. Iteración agnes — StressComparator + baseline ±5% (2026-09-15, agnes-3-flash (Sapiens AI) / Kilo Code)
+
+> Cierra el pendiente honesto de §4 ("Baseline versionado `perf_base.json` + comparación automática ±5%") y la
+> recomendación de iter. 1 ("solo falta un script que compare contra baseline y decida el gate"). Log 919.
+
+### Archivos
+- **NUEVO `scripts/stress/stress_comparator.gd`** — `StressComparator` (RefCounted, sin `class_name`, vía
+  `preload` §9.52). Lógica pura + headless-safe:
+  - `derivar_baseline(escenarios)` → dict `{escenario:{metrica:{p95,max}}}` (semilla del baseline).
+  - `comparar(escenarios, baseline, umbral=0.05)` → `{regresion, hay_baseline, umbral, regresiones[], sin_dato[]}`.
+    Regresión si `p95 actual > p95 base * (1 + umbral)`; omite métricas con `p95 base = 0` (sin ÷0).
+  - `cargar(ruta=RUTA_BASELINE)` → `{}` si no existe o es inválido (**no aborta**).
+  - `guardar(ruta, datos)` + `ruta_baseline()`. `RUTA_BASELINE = res://scripts/stress/perf_base.json`.
+- **MOD `scripts/stress/stress_runner.gd`** — cablea el comparador:
+  - `--update-baseline` → siembra/actualiza `perf_base.json` desde la corrida y sale.
+  - corrida normal → compara contra `perf_base.json` (si existe); si hay **regresión** el exit code pasa a 1.
+  - Sin baseline → "primera corrida", sin regresión que medir, exit 0 (gate inactivo hasta que CI lo siembre).
+- **NUEVO `scripts/stress/test_stress_m113_comparador.gd`** — 19 checks, 3 bloques con guardián anti-falso-verde:
+  `derivar_baseline`, `comparar` (sin base / delta 0 / 4% ok / 6% regresión / p95 base 0 / umbral configurable),
+  round-trip `guardar`/`cargar` en `user://`.
+
+### Verificación (godot 4.7.2 headless, 2026-09-15)
+- `test_stress_m113_comparador.gd` → **19 checks, 0 fallos**, `SCRIPT ERROR: 0`, 3 guardianes OK.
+- `test_stress_m113.gd` (regresión del framework) → **19 checks, 0 fallos** (iter. 2 intacta).
+- `stress_runner.gd` sin baseline → "sin baseline (primera corrida)", **exit 0**.
+- `--update-baseline` → siembra `perf_base.json` (4 escenarios).
+- Corrida normal **con baseline excedido** → "REGRESIÓN (n métricas > umbral 5%)", **exit 1** (el gate dispara).
+
+### Hallazgo honesto (NO versionar baseline sembrado en dev)
+Con `perf_base.json` sembrado desde una corrida **headless en máquina de dev**, una corrida normal marcó
+**5 regresiones falsas (exit 1)**: el p95 de *timing* (ops/s, add_ms, …) oscila >5% entre corridas en hardware
+variable. El ±5% del diseño §1 asume **"corre en hardware fijo (label CI)"**. Por eso **NO dejo versionado el
+baseline de dev** (dejaría el gate en rojo para quien lo corra en laptop): **el mecanismo es mío (comparador +
+`--update-baseline` + test), el VALOR del baseline lo genera M61/CI sobre hardware fijo** (dueño M61 🟡).

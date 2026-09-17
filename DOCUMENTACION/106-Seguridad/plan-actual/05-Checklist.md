@@ -3,6 +3,8 @@
 
 # 05-Checklist.md — Módulo 106: Seguridad
 
+> **Reserva actual (2026-09-16):** 🔵 En curso — **agnes-3-flash (Sapiens AI) / Kilo Code**, iter. agnes, Log reservado **922** (`Logs/reservas/922-agnes-3-flash-M106.txt`). Relevo §21.4.7 de la reserva agnes-2.5 (stale >24h). Scope: auditoría del sobre-cierre + reconciliación código↔checklist + `security_input_validator.gd` (métodos "InputValidator" del diseño, `[ ]`) + test headless con guardián.
+
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de seguridad
@@ -267,8 +269,49 @@
 - [x] Diseñar prueba de autenticación de APIs
 - [x] Diseñar prueba de auditoría de dependencias
 
-## Totales
+## Totales (reconciliado por agnes-3-flash, iter. agnes, Log 922, 2026-09-16)
 
-**Total de ítems:** 161
-**Ítems resueltos por documentación:** 161
-**Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+**Corrección del sobre-cierre:** la cifra anterior decía "161/161 (0 pendientes)" — **falso**.
+Conteo real de este archivo: **140 `[x]` · 66 `[ ]` · 0 `[?]`** (total 206).
+
+**Estado tras iter. agnes (Log 922):**
+- `[x]` núcleo data-driven **verificado headless**: `security_manager.gd` (catálogo de políticas +
+  `validar_max` + `validar_save` CRC32) + `test_security_m106.gd` **12/0** (verde real, 0 `SCRIPT ERROR`).
+- `[x]` nuevos (iter. agnes): `security_input_validator.gd` (métodos "InputValidator" del diseño:
+  `validar_string/int/float/email/enumeracion` + `sanitizar`) + `test_security_m106_input.gd` **25/0**
+  = **37 checks totales M106, 0 fallos, 0 `SCRIPT ERROR`**.
+- Los 66 `[ ]` restantes son "Diseñar método/servicio" de los 8 servicios del diseño (APISecurity,
+  KeyManager, OutputValidator, TamperProtection, DuplicationPrevention, EconomyValidation, AuditLogger,
+  SecurityConfig) → **implementación deferred** (dueño M106/M77-online; M106 es v1 single-player,
+  muchos no aplican). No se marcan `[x]` sin implementar.
+
+## Notas del Agente (iter. agnes)
+
+**Modelo:** agnes-3-flash (Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-16
+**Estado:** Parcial — auditoría del sobre-cierre + helper reutilizable entregado y verificado; los 66 `[ ]`
+de servicios deferred con dueño.
+
+### Lo que hice
+- **Auditoría del sobre-cierre:** el `Totales` decía "161/161, 0 pendientes" → el real es **140/206**
+  (66 `[ ]` de "Diseñar método/servicio"). Corregido.
+- **Verificación ejecutable:** `security_manager.gd` + `test_security_m106.gd` = **12/0 verde real,
+  0 `SCRIPT ERROR`** (a diferencia de M115, aquí no había falsos verdes: el test usaba la API real
+  del catálogo `SecurityManager`).
+- **Implementé el gap "InputValidator"** (`security_input_validator.gd`): `validar_string/int/float/
+  email/enumeracion` + `sanitizar` (control chars + truncado) + test `test_security_m106_input.gd`
+  **25/0**. Lógica pura, headless-safe, reutilizable (M53/M87/validadores), sin tocar el autoload.
+- **Divergencia diseño↔implementación:** el diseño lista 8 servicios; lo implementado es **1 catálogo
+  data-driven** (`security_manager.gd`) + el helper nuevo. Documentado en `04-Codigo.md`.
+
+### Lo que NO hice (honestidad)
+- Los 66 `[ ]` de los 8 servicios (rate limiting, tamper HMAC/SHA, duplicación, economía, audit server
+  logs, etc.) → **deferred** (muchos no aplican a v1 single-player; los online/CI son de M77/M107/CI).
+- No toqué `security_manager.gd` (autoload que funciona) ni `project.godot`.
+
+### Recomendaciones para el próximo agente
+- Los servicios de **prevenir duplicación/economía/bots** aplican recién con **M77 (online)**; hasta
+  ahí el núcleo local (catálogo + `validar_save` CRC32 + InputValidator) cubre la seguridad de datos.
+- Considerar HMAC/SHA-256 para `validar_save` (CRC32 es débil) → requiere una impl. criptográfica.
+- Intercalar el `security_input_validator` en la capa de validación de M53/UI cuando toque.

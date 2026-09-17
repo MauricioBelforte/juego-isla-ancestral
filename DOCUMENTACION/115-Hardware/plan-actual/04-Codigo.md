@@ -286,3 +286,38 @@ HardwareManager="*res://scripts/hardware/hardware_manager.gd"
 | Rendimiento (M61) | Monitorea FPS, ajusta calidad |
 | Interfaz de Control (M57) | Detecta gamepads, mapea botones |
 | Build Pipeline (M117) | Incluye perfiles en build |
+
+## Iteración agnes — retarget de tests falsos-verdes + reconciliación (2026-09-15, agnes-3-flash (Sapiens AI) / Kilo Code)
+
+> **Contexto:** la auditoría del 2026-09-14 revirtió el `05-Checklist.md` a todos `[ ]` porque
+> agnes-2.5-flash lo cerró sin verificación. Esta iteración **verifica contra el código real** y **corrige
+> 2 tests de falso verde**. Log 921.
+
+### Hallazgo 1 — divergencia diseño ↔ implementación
+- **Diseño (este 04-Codigo original):** 4 clases con `class_name` (`HardwareDetector`,
+  `QualityPresetSelector`, `QualityApplier`, `HardwareManager`) + persistencia `.tres`.
+- **Implementado (real, headless):** el autoload `hardware_manager.gd` es un **catálogo** (3 perfiles
+  `baja/media/alta` de `data/hardware/hardware_profiles.json`, **sin `class_name`** — pitfall §9.41 de
+  headless `--script`), con `perfil()/set_perfil_actual()/render_scale()/antialiasing()/...`.
+  `hardware_profile.gd` (Resource: enum + compliance + M59) y `hardware_detector.gd` existen **pero no están
+  cableados al autoload** (la wiring de detección al autoload es de **M90**).
+
+### Hallazgo 2 — falsos verdes corregidos (el aporte de esta iteración)
+- `test_hardware.gd` y `test_hardware_iter2.gd` (minimax) llamaban APIs que el autoload de catálogo **no
+  expone** (`profile`, `get_active_preset`, `set_preset`, `apply_deadzone`, `_detector`, `preset_changed`)
+  → **7 y 5 `SCRIPT ERROR`** tragados → salida 0 = **falso verde** (verificado headless 4.7.2).
+- **Fix:** re-apunté ambos tests a la API REAL (HardwareProfile standalone vía `preload` + manager de
+  catálogo vía autoload `hardware`), con **guardián anti-falso-verde** (`_fin()` por bloque) y las piezas de
+  detección `preset_changed`/`set_preset` marcadas **DEFERRED a M90** (no se asumen → no false-green).
+- **Resultado:** `test_hardware.gd` **21/0** · `test_hardware_iter2.gd` **13/0** · `test_hardware_m115.gd`
+  (original, verde real) **17/0** = **51 checks, 0 fallos, 0 `SCRIPT ERROR`**.
+
+### Hallazgo 3 — autoload duplicado (bug infra, fuera de alcance, NO lo rompo)
+`project.godot` registra el autoload **dos veces**: `hardware` y `HardwareManager` (ambos →
+`hardware_manager.gd`). El manager `_ready`/`_registrar_servicio` corren 2× (logs duplicados
+"[M115] HardwareManager listo"). **Lo documento y NO lo toco** (afecta a todo el boot; dueño M90/infra).
+
+### Dónde rindo / dónde no (reglas de asignación)
+- **Ejecuto:** tooling/gates/headless, data-driven (autoload + JSON/.tres + test), auditoría código↔checklist.
+- **NO soy aprobador visual.** La aplicación de calidad al viewport (M90) y la wiring de detección al
+  autoload son de M90; el mapeo de gamepads de M57; lo editorial de M97. Lo dejo `[?]` con dueño.

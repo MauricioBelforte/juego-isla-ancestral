@@ -1,6 +1,6 @@
-**Modelo:** glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)
+**Modelo:** GLM-5.3 (último modificador — iter. 4 relevo §21.4.7; iter. 3 glm-5.3-flash materializada sin log; núcleo iters. 1-2 Deepseek V4 Flash)
 
-**Plataforma:**Kilo Code
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 93: Balance
 
@@ -224,3 +224,48 @@ func _init() -> void:
 - Integración consumo: M20 debe leer beneficios_por_nivel (nivel 4 → oferta_trueque_especial) y M39 el descuento_tienda_5.
 - M61/M35: respetar nodos_activos_max_por_chunk=8.
 - M28: al implementar viajes, pagar recompensa_descubrir_ruta_ao al descubrir ruta nueva.
+
+---
+
+## Notas del Agente — Iteración 4 por relevo §21.4.7 (GLM-5.3)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-12 04:10
+**Estado:** Parcial-liberado (auditoría + 5 brechas de data cerradas; módulo queda 🟡 112/134 con 22 [?] con dueño)
+
+### Lo que hice
+1. **Relevo §21.4.7:** reserva de glm-5.3-flash del 2026-09-01 (iter. 3: tablas friendship/quests/puzzles/unlocks/meta-rareza) sin log ni liberación por 11 días. Re-verifiqué antes de reclamar: sin logs M93 nuevos desde el 333 (2026-09-01), sin reserva activa, CHECKLIST-GLOBAL última actividad 2026-08-30.
+2. **Hallazgo del reclamo — iter. 3 fantasma MATERIALIZADA:** el trabajo de flash SÍ aterrizó en disco sin log: `data/balance/{friendship,quests,puzzles,unlocks}.json` v2 + `meta.json` rareza/rendimiento/viajes + `scripts/balance/test_balance_m93_iter3.gd` (6 bloques, 0 fallos). ~20 ítems del checklist ya estaban cubiertos por estas tablas sin marcar (gap de marcado clásico). La iter. 3 quedó asimilada en esta auditoría.
+3. **Auditoría de los 64 [ ] contra código/tablas reales:** 66 → **112 [x]** / 22 [?] / 0 [ ]. Cierres por gap de marcado (ya existía): H items exclusivos (quests v2), P.2/P.3/P.4 reglas de validate (R7/R8/R8b), X.1/X.3 márgenes/sellos (validate cobertura total), W.3/W.5 (arquitectura O(1) + medición de facto), Q.2/Q.3 (grep REAL: crafting_service L67-69 y farm_service L67-69 consumen /root/Balance), Z.1-Z.4 coordinaciones (evidencia: T7 amistad M38 usa umbrales M93, test iter3 ejecuta el servicio M20 real, M94 consume las 3 reglas de ausencia).
+4. **5 brechas V0 de DATA cerradas** (con test nuevo, no solo reglas):
+   - **D.4 tiempo de minado:** mining.json v2 — `golpes_para_extraer` por mineral (3/5/8), `reglas_minado` (dureza, 1.5 s/golpe, máx 2 min por veta, coherencia con M35 documentada).
+   - **L.2-L.4 curvas:** progression.json v2 — `curvas_recursos_acumulados` (día 1/7/28/90 con tope soft), `curva_amistad_total` (semana 1/4/12), `curva_colecciones` (10%/35%/70%).
+   - **L.5 no-exponencial:** `reglas_curvas.no_exponencial` + verificación MATEMÁTICA en el test (pendientes por tramo decrecientes en las 3 curvas).
+   - **M anti-grind:** meta.json v3 `reglas_anti_grind` — repetición máx 4, tope ventas 600 AO/día, temporada cíclica, colección sin día único, bonus_retorno (+5 AO/día ausente, tope 150).
+   - **N anti-exploit:** meta.json v3 `reglas_anti_exploit` — 3 bucles identificados con contramedidas, techo 115%, reloj interno independiente (coherente con C56 29/29), límite 20 ventas/día/categoría.
+   - **K rutinas:** timing.json v2 `rutinas` — rutina óptima 30 min con pasos, sesión libre [60,120] min, cultivos sin muerte, estaciones rotativas 28 días.
+5. **Test nuevo `test_balance_m93_iter4.gd`:** 7 bloques (minado, curvas, anti-grind, anti-exploit, rutinas, versión 1.2.0, integraciones Q) — **0 fallos**.
+6. **Bump de versión 1.1.0 → 1.2.0** (regla U.3) con desacople del test iter3 (ahora acepta >=1.1.0 semántico para no romper en cada bump).
+
+### Tests (QA numérico, Godot 4.7.2 headless)
+- `test_balance.gd` 0 fallos · `test_balance_m93_iter3.gd` 0 fallos · `test_balance_m93_iter4.gd` 0 fallos · `validate_balance.gd` 0 fallos
+- Consumidores: `test_crafting.gd` 0 · `test_pergaminos_tienda.gd` 0 (M16) · `test_farm.gd` 0 · `test_farm_clima.gd` 0 (M33) · `test_mineria.gd` 0 (M35) · `test_fishing.gd` 0 · `test_fishing_clima.gd` 0 (M34, post-auditoría M34)
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **O.1-O.3 + X.5 (simulación económica):** la brecha grande restante del módulo. `simulate_economy.gd` NO existe (a pesar de figurar en §1 del 04-Codigo — era aspiracional del diseño). Escribirlo con 3 perfiles (rutinario/diligente/minimalista) × 60/180/365 días contra las tablas reales es la **próxima iter natural de M93** — ahora tiene TODO el input: curvas, topes, reglas anti-exploit, techo 115%. No lo hice en esta iter por presupuesto de sesión (la auditoría + data + tests consumieron el ciclo) — prefiero una iter dedicada con margen para iterar el simulador contra desvíos.
+- **O.5 (CI):** depende de O.1 + M118.
+- **S (telemetría):** eventos de balance → M105 (WorkBuddy activo, Log 826) — propuse el contrato en el checklist: "balance_ao_dia" {ao, dia_absoluto}, "compra"/"venta" {item_id, precio}.
+- **T/V.1/V.2:** fase jugable (M114) / simulación (O).
+- **Y.1-Y.5:** polish UI → M53/M74/M94/M88/M43.
+- **Q.1:** M38/M39 usan EconomyPriceCatalog propio (decisión de arquitectura M38); la fusión de fuentes es una decisión de M38.
+
+### Decisiones
+- **P.1/P.2/P.3 no duplicadas en validate_balance:** la regla de curvas vive en progression.json + test iter4 (con exit code, ejecutable en CI igual que validate) — duplicarla en validate sería redundancia de tests.
+- **El fishing.json sigue con 2 peces:** M34-documentado (23 peces + cebos + cañas = data de M93). La próxima iter de M93 debería completarlo JUNTO con el simulador (el simulador de pesca necesita el catálogo real para simular el pipeline pescar+vender).
+- **Tip del JSON:** progression.json v2 sufría un `}` extra (línea 40) que Godot rechazaba con "Expected 'EOF' at line 39" — el parser de PowerShell 5.1 (ConvertFrom-Json) lo reportaba mal (falso "Primitivo JSON no válido"). LECCIÓN: validar JSON de data con el parser REAL de Godot (script headless de 5 líneas), no confiar en PowerShell.
+
+### Recomendaciones para el próximo agente
+- **Próxima iter M93 (iter. 5):** simulate_economy.gd con 3 perfiles + completar catálogo de pesca (25 peces/4 cebos/3 cañas — formato documentado en 04-Codigo M34 §0b) + techo 115% como aserción del simulador.
+- **QA cruzado §21.8 (verificador: Hy3, NO auto-verificar):** puntos rápidos → test_balance_m93_iter4.gd 0 fallos (7 bloques), validate_balance 0 fallos, version 1.2.0 en meta.json, mining.json reglas_minado, progression.json 3 curvas + reglas, meta.json v3 reglas_anti_grind/anti_exploit, timing.json rutinas.
+- **M38 (si lo tomás):** EconomyPriceCatalog podría SOURCEAR de BalanceService.get_tabla("prices") para una sola fuente de verdad — hoy hay 2 fuentes (prices.json + catálogo M38) con los mismos márgenes 55-70%.
