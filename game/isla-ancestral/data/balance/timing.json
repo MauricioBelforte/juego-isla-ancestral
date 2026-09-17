@@ -1,5 +1,5 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"timing": {
 		"recoleccion_diaria_min": 10,
 		"charla_diaria_min": 5,
@@ -7,5 +7,29 @@
 		"mineria_diaria_min": 5,
 		"viaje_diario_min": 3,
 		"sesion_rutina_total_min": 30
+	},
+	"rutinas": {
+		"descripcion": "Rutinas de referencia (checklist M93 sección K). La rutina óptima es ≤30 min REALES y cubre el día-a-día completo; la sesión larga es OPCIONAL (progreso garantizado sin ella).",
+		"rutina_optima": {
+			"min_reales": 30,
+			"pasos": ["regar cultivos", "charlar 3-5 vecinos", "cosechar/recolectar respawn diario", "pesca 1-2 sesiones", "vender excedente"],
+			"progreso_diario_garantizado": true
+		},
+		"sesion_libre_1_2h": {
+			"descripcion": "Sesión larga opcional (1-2 h): templos/puzzles (20-45 min), exploración de rutas M28, eventos de temporada M74, museo M37. Progreso garantizado SIN grind: cada bloque de sesión avanza un objetivo legítimo (sello/misión/colección).",
+			"min_reales": [60, 120],
+			"progreso_garantido": true,
+			"bloques_sugeridos": ["puzzle de templo (≤45 min con diseño M93)", "ruta nueva (recompensa 25 AO)", "misión secundaria (15-20 min)"]
+		},
+		"cultivos_sin_muerte": {
+			"descripcion": "Los cultivos NUNCA mueren por ausencia (K.4, M33/M94): pausan crecimiento sin riego y retoman al regar. Coincide con farm_service (estado pausado, sin penalización).",
+			"mueren_por_ausencia": false
+		},
+		"estaciones_rotativas": {
+			"descripcion": "Calendario de estaciones con contenido rotativo (K.5, M29): 4 estaciones × 28 días (336/año) repetibles — cada estación reintroduce sus recursos (resources.json temporadas), cultivos (farming.json temporada), peces (fishing.json temporadas) y eventos (quests.json bonus temporada).",
+			"modelo": "M29 (TimeCalendar ESTACION_POR_MES cíclico)",
+			"dias_por_estacion": 28,
+			"contenido_rotativo": ["recursos por estación", "cultivos por temporada", "peces por temporada", "bonus festivales", "clima M32"]
+		}
 	}
 }

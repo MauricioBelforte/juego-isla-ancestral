@@ -1,5 +1,5 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"curvas": {
 		"dinero_diario_promedio_ao": 80,
 		"sello_1_umbral_ao": 1200,
@@ -8,5 +8,32 @@
 		"amistad_umbral_nivel_2": 30,
 		"amistad_umbral_nivel_3": 70,
 		"amistad_umbral_nivel_5": 150
+	},
+	"curvas_recursos_acumulados": {
+		"descripcion": "Recursos acumulados por día de juego (checklist M93 L.2). Pendiente DECRECIENTE (anti-exponencial): el día a día suma más al inicio; late-game se estabiliza por caps de rutina.",
+		"dia_1": {"madera_roble": 12, "piedra_caliza": 8, "baya_roja": 6},
+		"dia_7": {"madera_roble": 30, "piedra_caliza": 20, "baya_roja": 15},
+		"dia_28": {"madera_roble": 45, "piedra_caliza": 30, "baya_roja": 20},
+		"dia_90": {"madera_roble": 45, "piedra_caliza": 30, "baya_roja": 20},
+		"tope_soft": "día 28+: la rutina diaria satura (caps de ventas diarias anti-inflación, tabla meta.reglas)"
+	},
+	"curva_amistad_total": {
+		"descripcion": "Amistad total (suma de niveles de todos los vecinos) por semana de juego (checklist M93 L.3). Con charla diaria (5 pts) + regalo ocasional: ~1 nivel nuevo cada 2-3 días por vecino activo.",
+		"semana_1_niveles_totales": 6,
+		"semana_4_niveles_totales": 20,
+		"semana_12_niveles_totales": 45,
+		"tope_naturales": "sin grind: la charla diaria ES la vía principal; regalos favoritos aceleran pero no son necesarios (M20/M152)"
+	},
+	"curva_colecciones": {
+		"descripcion": "Colecciones completadas % (M73) por semana (checklist M93 L.4). Cozy: la colección nunca exige ítems de un solo día (regla M); las estaciones rotan (M29) y todo vuelve.",
+		"semana_1_pct": 10,
+		"semana_4_pct": 35,
+		"semana_12_pct": 70,
+		"tope_diseño": 100,
+		"nota": "el 100% es alcanzable en un año de juego sin FOMO (estaciones repetibles + pity de raros)"
+	},
+	"reglas_curvas": {
+		"no_exponencial": true,
+		"descripcion": "TODA curva de este archivo debe tener pendiente NO creciente entre tramos consecutivos (checklist M93 L.5). Verificada por test_balance_m93_iter4: dia_7→dia_28 crece 50%, dia_28→dia_90 crece 0% (decreciente OK)."
 	}
 }

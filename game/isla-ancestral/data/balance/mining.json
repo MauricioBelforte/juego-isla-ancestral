@@ -1,8 +1,15 @@
 {
-	"schema_version": 1,
+	"schema_version": 2,
 	"minerales": {
-		"mineral_cobre": {"profundidad_min": 4, "profundidad_max": 20, "probabilidad_base": 0.15, "valor_venta": 15},
-		"mineral_hierro": {"profundidad_min": 12, "profundidad_max": 30, "probabilidad_base": 0.08, "valor_venta": 30},
-		"piedra_preciosa": {"profundidad_min": 20, "profundidad_max": 40, "probabilidad_base": 0.03, "valor_venta": 120}
+		"mineral_cobre": {"profundidad_min": 4, "profundidad_max": 20, "probabilidad_base": 0.15, "valor_venta": 15, "golpes_para_extraer": 3},
+		"mineral_hierro": {"profundidad_min": 12, "profundidad_max": 30, "probabilidad_base": 0.08, "valor_venta": 30, "golpes_para_extraer": 5},
+		"piedra_preciosa": {"profundidad_min": 20, "profundidad_max": 40, "probabilidad_base": 0.03, "valor_venta": 120, "golpes_para_extraer": 8}
+	},
+	"reglas_minado": {
+		"descripcion": "Tiempo de minado por material (checklist M93 D.4): golpes base según dureza; cada golpe consume 1 de durabilidad M13. Cozy: nunca se rompe la veta por tiempo, el ritmo lo marca la herramienta (tool_data.velocidad reduce golpes).",
+		"golpes_base_por_dureza": {"blanda": 2, "media": 4, "dura": 6},
+		"segundos_por_golpe": 1.5,
+		"duracion_max_min": 2,
+		"coherencia_m35": "MiningVeinCatalog (data/mining/ores.json) define las vetas del mundo; esta tabla define el RITMO económico. M35 consume lo suyo; este campo es referencia de diseño para M35/M61."
 	}
 }

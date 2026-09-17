@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_bd7kj"]
+
+[resource]
+script = ExtResource("1_bd7kj")
+id = &"misteriosa"
+nombre_clave = "M27.ISLA.MISTERIOSA.NOMBRE"
+nombre_display = "Isla Misteriosa"
+descripcion = "Ruinas que no recuerdan su nombre; un enigma narrativo por resolver."
+radio = 200
+altura_min = 0
+altura_max = 110
+bioma_base = 11
+biomas_mezcla = Array[int]([2, 5])
+proporciones_mezcla = Array[float]([0.5, 0.5])
+clima_tendencia = 6
+musica_clave = &"mus_misteriosa"
+recursos_exclusivos = PackedStringArray("reliquia_antigua", "moneda_olvidada")
+flora_endemica = PackedStringArray("hongo_luminoso")
+fauna_endemica = PackedStringArray("espiritu_bosque")
+puzzles = PackedStringArray("enigma_tres_piedras")
+npc_residentes = PackedStringArray("ermitano")
+punto_llegada = Vector3i(168, 3, 0)
+punto_partida = Vector3i(168, 3, 12)
+anillo = 3
+desbloqueo_flag = &"progreso_lejano"
+orden_anillo = 11

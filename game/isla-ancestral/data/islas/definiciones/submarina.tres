@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_bfecn"]
+
+[resource]
+script = ExtResource("1_bfecn")
+id = &"submarina"
+nombre_clave = "M27.ISLA.SUBMARINA.NOMBRE"
+nombre_display = "Isla Submarina"
+descripcion = "Un atolón que apenas asoma; el resto vive bajo el agua."
+radio = 170
+altura_min = 0
+altura_max = 20
+playa_ancho = 16
+biomas_mezcla = Array[int]([12])
+proporciones_mezcla = Array[float]([1.0])
+clima_tendencia = 6
+musica_clave = &"mus_submarina"
+recursos_exclusivos = PackedStringArray("perla_negra", "cristal_abismo")
+flora_endemica = PackedStringArray("coral_luminoso")
+fauna_endemica = PackedStringArray("raya_abismo", "caballito_abisal")
+puzzles = PackedStringArray("ruinas_sumergidas")
+npc_residentes = PackedStringArray("sirena_guardiana")
+punto_llegada = Vector3i(130, 3, 0)
+punto_partida = Vector3i(130, 3, 12)
+anillo = 3
+desbloqueo_flag = &"progreso_lejano"
+orden_anillo = 10

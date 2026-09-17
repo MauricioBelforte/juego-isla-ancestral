@@ -1,13 +1,13 @@
 {
-	"schema_version": 2,
-	"balance_version": "1.1.0",
-	"fecha": "2026-09-01",
+	"schema_version": 3,
+	"balance_version": "1.2.0",
+	"fecha": "2026-09-12",
 	"afecta": ["M38", "M20", "M15", "M16", "M17", "M13", "M33", "M34", "M35", "M28", "M22", "M23", "M24", "M71", "M153"],
 	"rareza": {
 		"descripcion": "Rareza base con tope 5% para ítems raros + pity (checklist M93 ítems 41-42)",
 		"probabilidad_raro_max": 0.05,
 		"pity": {
-			"descripcion": "Intentos sin éxito que suben la chance del ítem raro (+10% de la base por intento, cap 2x)",
+			"descripcion": "Intentos sin éxito que suben la chance del ítem raro (+10% de la base por intento, cap 2x). M34 ya lo implementa en pesca (pity ×10 al umbral).",
 			"incremento_por_fallo": 0.1,
 			"multiplicador_max": 2.0,
 			"reset_al_conseguir": true
@@ -21,5 +21,31 @@
 		"descripcion": "Recompensa por descubrir rutas nuevas (checklist ítem 66)",
 		"recompensa_descubrir_ruta_ao": 25,
 		"items": {"baya_roja": 2}
+	},
+	"reglas_anti_grind": {
+		"descripcion": "Reglas anti-grind M152 (checklist M93 sección M). Son REGLAS DE DISEÑO verificables por validate_balance y tests.",
+		"repeticion_max_sin_progreso": 4,
+		"repeticion_descripcion": "Ningún objetivo legítimo exige repetir la misma acción >4 veces seguidas sin progreso (M.1)",
+		"tope_ventas_diarias_ao": 600,
+		"tope_ventas_descripcion": "Anti-inflación: tope de ventas diarias (M.2). Con dinero_diario 80 AO y margen 55-70%, 600 AO/día es el techo económico (~7.5x la rutina diaria). Validado por validate (regla M.2).",
+		"temporada_ciclica_sin_fomo": true,
+		"temporada_descripcion": "Las recompensas de temporada regresan en ciclos (M.3): 4 estaciones repetibles M29, sin contenido de un solo día",
+		"coleccion_sin_dia_unico": true,
+		"coleccion_descripcion": "La colección (M73) no requiere ítems de un solo día (M.4): estaciones rotan, pity cubre raros, museo acepta duplicados tardíos",
+		"bonus_retorno": {"ao_x_dia_ausente": 5, "tope_ao": 150},
+		"bonus_descripcion": "Multiplicador de progreso al volver (M.5): +5 AO por día ausente (tope 150 = 30 días), regalo de bienvenida M94; jamás penaliza la ausencia"
+	},
+	"reglas_anti_exploit": {
+		"descripcion": "Reglas anti-exploit (checklist M93 sección N). El reloj interno M30 jamás usa el reloj real (regla C56 del proyecto, E89/E90 de la guía).",
+		"bucles_identificados": [
+			{"bucle": "regar+vender", "contramedida": "cultivo vende a 55-70% de compra + tope ventas diarias", "estado": "cubierto por reglas margen+tope"},
+			{"bucle": "pescar+vender", "contramedida": "espera 2-8s por pez + tope ventas diarias + rareza/pity", "estado": "cubierto"},
+			{"bucle": "minar+craftear", "contramedida": "receta nunca genera más del recurso que consume (R3 validate) + límite 12/día por zona (M35)", "estado": "cubierto"}
+		],
+		"techo_bucle_vs_diseño_pct": 115,
+		"reloj_interno_independiente": true,
+		"reloj_descripcion": "El reloj interno (M30) no depende del reloj real para progresión (N.3): regla C56 — gameplay jamás consume Time del SO; avance del sistema no duplica eventos (N.4 ya [x], caso_reloj 29/29)",
+		"limite_items_vendidos_dia_categoria": 20,
+		"limite_descripcion": "Máx 20 ítems vendidos por día por categoría (N.5) — con margen 55-70% y precio medio ~15 AO ≈ 300 AO/día por categoría, bajo el tope global"
 	}
 }

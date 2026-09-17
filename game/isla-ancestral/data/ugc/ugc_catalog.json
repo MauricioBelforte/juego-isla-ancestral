@@ -9,5 +9,42 @@
   "politica": {
     "requiere_revision": true,
     "max_creaciones_por_usuario": 50
-  }
+  },
+  "limites": {
+    "items_activos_por_usuario": 200,
+    "fotos_por_dia": 50,
+    "blueprints_por_dia": 20,
+    "bytes_subida_por_dia": 10485760,
+    "peso_max_bytes": {
+      "foto": 3145728,
+      "blueprint": 262144,
+      "construccion": 524288
+    },
+    "formatos_foto": ["jpg", "webp"],
+    "lado_max_foto_px": 2048,
+    "sla_reporte_horas": {
+      "nsfw": 24,
+      "violencia": 24,
+      "odio": 24,
+      "copyright": 48,
+      "privacidad": 48,
+      "spam": 72
+    }
+  },
+  "claves_prohibidas_blueprint": [
+    "coords",
+    "coordenadas",
+    "posicion",
+    "posicion_jugador",
+    "player_pos",
+    "save_id",
+    "slot",
+    "save_slot",
+    "uuid",
+    "device_id",
+    "ip",
+    "email",
+    "steam_id",
+    "platform_id"
+  ]
 }

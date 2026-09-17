@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "descripcion": "Registro de consumidores validos para el grafo de pistas de lore ambiental (M148/RF3). Cada pieza tipo pista (MURAL/ESTATUA/MAPA/CANCION) apunta a un consumidor_id que DEBE existir aqui; el LoreGate de CI falla si no existe.",
+  "consumidores": [
+    { "id": "puzzle_templo_raiz",      "tipo": "puzzle",      "modulo": "M24" },
+    { "id": "puzzle_templo_coral",     "tipo": "puzzle",      "modulo": "M24" },
+    { "id": "puzzle_templo_ceniza",    "tipo": "puzzle",      "modulo": "M24" },
+    { "id": "puzzle_templo_aurora",    "tipo": "puzzle",      "modulo": "M24" },
+    { "id": "sello_llama",             "tipo": "sello",       "modulo": "M22" },
+    { "id": "sello_marea",             "tipo": "sello",       "modulo": "M22" },
+    { "id": "sello_profundidades",     "tipo": "sello",       "modulo": "M22" },
+    { "id": "sello_aurora",            "tipo": "sello",       "modulo": "M22" },
+    { "id": "coleccion_mapas",         "tipo": "coleccion",   "modulo": "M73" },
+    { "id": "coleccion_peces",         "tipo": "coleccion",   "modulo": "M73" },
+    { "id": "coleccion_plantas",       "tipo": "coleccion",   "modulo": "M73" },
+    { "id": "rumor_cancion",           "tipo": "rumor",       "modulo": "M21" },
+    { "id": "npc_herrero",             "tipo": "npc",         "modulo": "M21" },
+    { "id": "npc_luna",                "tipo": "npc",         "modulo": "M21" },
+    { "id": "npc_marinero",            "tipo": "npc",         "modulo": "M21" },
+    { "id": "npc_pintor",              "tipo": "npc",         "modulo": "M21" },
+    { "id": "altar_templo",            "tipo": "altar",       "modulo": "M24" },
+    { "id": "altar_volcan",            "tipo": "altar",       "modulo": "M24" }
+  ]
+}

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_rm6b8"]
+
+[resource]
+script = ExtResource("1_rm6b8")
+id = &"flotante"
+nombre_clave = "M27.ISLA.FLOTANTE.NOMBRE"
+nombre_display = "Isla Flotante"
+descripcion = "Una isla que flota sobre el mar; saltar de nube en nube es el juego."
+radio = 140
+altura_min = 40
+altura_max = 90
+playa_ancho = 6
+bioma_base = 1
+biomas_mezcla = Array[int]([2])
+proporciones_mezcla = Array[float]([1.0])
+clima_tendencia = 5
+musica_clave = &"mus_flotante"
+recursos_exclusivos = PackedStringArray("cristal_cielo", "pluma_eter")
+flora_endemica = PackedStringArray("lotus_aereo")
+fauna_endemica = PackedStringArray("ave_flotante")
+puzzles = PackedStringArray("plataformas_nubes")
+npc_residentes = PackedStringArray("guardian_nubes")
+punto_llegada = Vector3i(110, 96, 0)
+punto_partida = Vector3i(110, 96, 12)
+anillo = 2
+es_flotante = true
+desbloqueo_flag = &"progreso_medio"
+orden_anillo = 6

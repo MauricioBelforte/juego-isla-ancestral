@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_5y4mr"]
+
+[resource]
+script = ExtResource("1_5y4mr")
+id = &"cielo"
+nombre_clave = "M27.ISLA.CIELO.NOMBRE"
+nombre_display = "Islas del Cielo"
+descripcion = "Cumbres suspendidas; desde aquí se ve todo el archipiélago."
+altura_min = 60
+altura_max = 130
+playa_ancho = 6
+bioma_base = 6
+biomas_mezcla = Array[int]([5])
+proporciones_mezcla = Array[float]([1.0])
+clima_tendencia = 5
+musica_clave = &"mus_cielo"
+recursos_exclusivos = PackedStringArray("esencia_nube", "cristal_viento")
+flora_endemica = PackedStringArray("pino_alpino")
+fauna_endemica = PackedStringArray("aguila_real")
+puzzles = PackedStringArray("ascenso_cielo")
+npc_residentes = PackedStringArray("astronoma")
+punto_llegada = Vector3i(130, 136, 0)
+punto_partida = Vector3i(130, 136, 12)
+anillo = 3
+es_flotante = true
+desbloqueo_flag = &"progreso_lejano"
+orden_anillo = 7

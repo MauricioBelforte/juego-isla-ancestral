@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_r2th5"]
+
+[resource]
+script = ExtResource("1_r2th5")
+id = &"coral"
+nombre_clave = "M27.ISLA.CORAL.NOMBRE"
+nombre_display = "Isla de Coral"
+descripcion = "Arrecifes someros y lagunas tibias; el mar es el camino."
+radio = 200
+altura_min = 0
+altura_max = 40
+playa_ancho = 12
+bioma_base = 10
+biomas_mezcla = Array[int]([0, 3])
+proporciones_mezcla = Array[float]([0.6, 0.4])
+clima_tendencia = 1
+musica_clave = &"mus_coral"
+recursos_exclusivos = PackedStringArray("coral_rojo", "concha_nacar", "perla")
+flora_endemica = PackedStringArray("alga_coral", "palma_coral")
+fauna_endemica = PackedStringArray("pez_loro", "tortuga_marina", "medusa_lunar")
+puzzles = PackedStringArray("buceo_arrecife")
+npc_residentes = PackedStringArray("buzo_viejo")
+punto_llegada = Vector3i(164, 3, 0)
+punto_partida = Vector3i(164, 3, 12)
+orden_anillo = 1

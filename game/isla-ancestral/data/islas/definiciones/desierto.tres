@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_jws5s"]
+
+[resource]
+script = ExtResource("1_jws5s")
+id = &"desierto"
+nombre_clave = "M27.ISLA.DESIERTO.NOMBRE"
+nombre_display = "Isla del Desierto"
+descripcion = "Dunas interminables y un oasis que sólo aparece al mediodía."
+radio = 180
+altura_min = 0
+altura_max = 50
+playa_ancho = 14
+bioma_base = 7
+biomas_mezcla = Array[int]([0])
+proporciones_mezcla = Array[float]([1.0])
+clima_tendencia = 2
+musica_clave = &"mus_desierto"
+recursos_exclusivos = PackedStringArray("arena_vidrio", "cobre", "sal")
+flora_endemica = PackedStringArray("cactus_barril", "flor_desierto")
+fauna_endemica = PackedStringArray("lagarto_cola", "escarabajo")
+puzzles = PackedStringArray("oasis_perdido")
+npc_residentes = PackedStringArray("nomada")
+punto_llegada = Vector3i(142, 3, 0)
+punto_partida = Vector3i(142, 3, 12)
+anillo = 2
+desbloqueo_flag = &"progreso_medio"
+orden_anillo = 5

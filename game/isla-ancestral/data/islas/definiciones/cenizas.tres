@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_73ybt"]
+
+[resource]
+script = ExtResource("1_73ybt")
+id = &"cenizas"
+nombre_clave = "M27.ISLA.CENIZAS.NOMBRE"
+nombre_display = "Isla de las Cenizas"
+descripcion = "La caldera duerme; el suelo aún recuerda el fuego."
+radio = 200
+altura_min = 0
+altura_max = 120
+bioma_base = 9
+biomas_mezcla = Array[int]([5, 6])
+proporciones_mezcla = Array[float]([0.7, 0.3])
+clima_tendencia = 4
+musica_clave = &"mus_cenizas"
+recursos_exclusivos = PackedStringArray("obsidiana", "azufre", "hierro_volcanico")
+flora_endemica = PackedStringArray("planta_fuego", "helecho_ceniza")
+fauna_endemica = PackedStringArray("salamandra_brasa")
+puzzles = PackedStringArray("forja_antigua")
+npc_residentes = PackedStringArray("herrero_exiliado")
+punto_llegada = Vector3i(168, 3, 0)
+punto_partida = Vector3i(168, 3, 12)
+anillo = 2
+desbloqueo_flag = &"progreso_medio"
+orden_anillo = 4

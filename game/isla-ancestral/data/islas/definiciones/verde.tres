@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_sswo7"]
+
+[resource]
+script = ExtResource("1_sswo7")
+id = &"verde"
+nombre_clave = "M27.ISLA.VERDE.NOMBRE"
+nombre_display = "Isla Verde"
+descripcion = "Selva densa y rumor de hojas; la flora más rara del archipiélago."
+radio = 190
+altura_min = 0
+altura_max = 70
+playa_ancho = 10
+bioma_base = 10
+biomas_mezcla = Array[int]([2, 1])
+proporciones_mezcla = Array[float]([0.6, 0.4])
+clima_tendencia = 1
+musica_clave = &"mus_verde"
+recursos_exclusivos = PackedStringArray("bambu", "fruta_tropical", "resina")
+flora_endemica = PackedStringArray("arbol_copal", "helecho_gigante", "orquidea")
+fauna_endemica = PackedStringArray("mono_titi", "rana_dardo")
+puzzles = PackedStringArray("sendero_canopia")
+npc_residentes = PackedStringArray("botanica")
+punto_llegada = Vector3i(156, 3, 0)
+punto_partida = Vector3i(156, 3, 12)
+orden_anillo = 2

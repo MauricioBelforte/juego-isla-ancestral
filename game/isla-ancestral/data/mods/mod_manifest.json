@@ -1,21 +1,38 @@
 {
+  "schema_version": "1.0",
+  "carpeta_mods": "user://mods",
+  "limite_mod_mb": 100,
+  "limite_assets_mb": 10,
+  "max_mods": 100,
   "mods": [
     {
       "id": "mod_aurora_items",
       "nombre": "Aurora Items",
       "version": "1.0.0",
       "min_build": "1.0.0",
+      "author": "ejemplo",
+      "prioridad": 10,
       "override": [],
-      "ruta": "user://mods/mod_aurora_items"
+      "readme": true,
+      "ruta": "user://mods/mod_aurora_items",
+      "assets": [
+        {"nombre": "mdl_item_espada_01", "ruta": "assets/mdl_item_espada_01.glb", "mb": 2.4},
+        {"nombre": "tex_item_espada_01", "ruta": "assets/tex_item_espada_01.png", "mb": 0.8}
+      ]
     },
     {
       "id": "mod_aurora_qol",
       "nombre": "Aurora QoL",
       "version": "0.9.0",
       "min_build": "1.0.0",
+      "author": "ejemplo",
+      "prioridad": 5,
       "override": ["mod_aurora_items"],
-      "ruta": "user://mods/mod_aurora_qol"
+      "readme": true,
+      "ruta": "user://mods/mod_aurora_qol",
+      "assets": [
+        {"nombre": "ui_qol_hud_01", "ruta": "assets/ui_qol_hud_01.png", "mb": 0.3}
+      ]
     }
-  ],
-  "carpeta_mods": "user://mods"
+  ]
 }

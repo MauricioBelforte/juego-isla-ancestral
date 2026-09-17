@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_76itp"]
+
+[resource]
+script = ExtResource("1_76itp")
+id = &"aurora"
+nombre_clave = "M27.ISLA.AURORA.NOMBRE"
+nombre_display = "Isla Aurora"
+descripcion = "El hogar. Puerto central del archipiélago y única isla siempre cargada."
+radio = 256
+altura_min = 0
+altura_max = 140
+playa_ancho = 10
+bioma_base = 2
+biomas_mezcla = Array[int]([0, 1, 4, 3])
+proporciones_mezcla = Array[float]([0.2, 0.3, 0.3, 0.2])
+musica_clave = &"mus_aurora"
+recursos_exclusivos = PackedStringArray("madera", "piedra", "fibra")
+flora_endemica = PackedStringArray("flor_aurora", "pino_comun")
+fauna_endemica = PackedStringArray("conejo", "gaviota")
+puzzles = PackedStringArray("tutorial_puerto")
+npc_residentes = PackedStringArray("alcalde", "ferrera")
+punto_llegada = Vector3i(222, 3, 0)
+punto_partida = Vector3i(222, 3, 12)
+anillo = 0

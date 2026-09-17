@@ -1,13 +1,273 @@
 {
+  "version": "1.0.0",
+  "last_updated": "2026-09-15",
+  "game_title": "Isla Ancestral",
+  "game_title_alt": "Isla Aurora",
+  "copyright_holder": "Estudio Isla Ancestral",
+  "copyright_year": 2026,
+  "jurisdicciones": ["global", "AR", "EU", "US"],
+
   "ips": [
-    {"id": "marca_isla_ancestral", "tipo": "marca", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
-    {"id": "codigo_juego", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
-    {"id": "arte_2d", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
-    {"id": "musica_ost", "tipo": "copyright", "titular": "Estudio", "registro": "pendiente", "jurisdiccion": "global"},
-    {"id": "voxel_engine", "tipo": "licencia_tercero", "titular": "Tercero", "licencia": "MIT", "registro": "ok", "jurisdiccion": "global"}
+    {
+      "id": "IP-001",
+      "nombre": "Isla Ancestral (título del juego)",
+      "tipo": "marca",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "pendiente",
+      "jurisdiccion": "global",
+      "clase_niza": "9 (software), 41 (entretenimiento)",
+      "estado": "activo",
+      "busqueda_colision": "2026-09-15 — web/Steam/itch.io: sin colisión en videojuegos. Requiere revisión WIPO/EUIPO antes de release.",
+      "riesgo": "bajo",
+      "notas": "Nombre compuesto original. Verificar antes de Steam/itch.io."
+    },
+    {
+      "id": "IP-002",
+      "nombre": "Código fuente GDScript",
+      "tipo": "copyright",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "automático (Convenio de Berna)",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "fecha_creacion": "2026-08-15",
+      "notas": "Todos los scripts GDScript del proyecto son obra original."
+    },
+    {
+      "id": "IP-003",
+      "nombre": "Arte 2D y diseños",
+      "tipo": "copyright",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "automático",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "notas": "UI, sprites, texturas propias."
+    },
+    {
+      "id": "IP-004",
+      "nombre": "Música original (OST)",
+      "tipo": "copyright",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "automático",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "notas": "Composiciones propias o con contrato de cesión (M84)."
+    },
+    {
+      "id": "IP-005",
+      "nombre": "Diseño de personajes NPCs",
+      "tipo": "copyright",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "automático",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "notas": "Diseños de personajes 35+ NPCs."
+    },
+    {
+      "id": "IP-006",
+      "nombre": "Narrativa y guión",
+      "tipo": "copyright",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "automático",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "notas": "Historia, diálogos, lore."
+    },
+    {
+      "id": "IP-007",
+      "nombre": "Nombre \"Isla Aurora\"",
+      "tipo": "marca",
+      "titular": "Estudio Isla Ancestral",
+      "registro": "pendiente",
+      "jurisdiccion": "global",
+      "estado": "activo",
+      "riesgo": "medio",
+      "notas": "Nombre de isla principal. Puede colisionar con otros productos. Verificar."
+    }
   ],
+
+  "assets_terceros": [
+    {
+      "id": "A001",
+      "nombre": "Godot Engine",
+      "tipo": "motor",
+      "autor": "Juan Linietsky, Ariel Manzur y colaboradores",
+      "fuente": "https://godotengine.org",
+      "licencia": "MIT",
+      "url_licencia": "https://godotengine.org/license/",
+      "uso_comercial": true,
+      "atribucion_requerida": true,
+      "atribucion_texto": "Godot Engine — Copyright (c) 2007-2024 Juan Linietsky, Ariel Manzur y colaboradores. MIT License.",
+      "estado": "activo",
+      "fecha_ingreso": "2026-08-15",
+      "notas": "Motor del juego. MIT exige conservar aviso de copyright."
+    },
+    {
+      "id": "A002",
+      "nombre": "Voxel Tools (godot-voxel)",
+      "tipo": "plugin",
+      "autor": "Zylann",
+      "fuente": "https://github.com/Zylann/godot_voxel",
+      "licencia": "MIT",
+      "url_licencia": "https://github.com/Zylann/godot_voxel/blob/master/LICENSE",
+      "uso_comercial": true,
+      "atribucion_requerida": true,
+      "atribucion_texto": "Voxel Tools — Copyright (c) Zylann. MIT License.",
+      "estado": "activo",
+      "fecha_ingreso": "2026-08-15",
+      "notas": "Addon de terreno voxel. Crítico para el juego."
+    },
+    {
+      "id": "A003",
+      "nombre": "Nunito (tipografía)",
+      "tipo": "fuente",
+      "autor": "Vernon Adams",
+      "fuente": "https://fonts.google.com/specimen/Nunito",
+      "licencia": "SIL OFL 1.1",
+      "url_licencia": "https://scripts.sil.org/OFL",
+      "uso_comercial": true,
+      "atribucion_requerida": true,
+      "condicion": "Solo si se redistribuye la fuente (no el texto renderizado)",
+      "atribucion_texto": "Nunito — Copyright (c) Vernon Adams. SIL Open Font License 1.1.",
+      "estado": "activo",
+      "fecha_ingreso": "2026-08-15",
+      "archivos": ["Nunito-Regular.ttf", "Nunito-Bold.ttf", "Nunito-Variable.ttf"],
+      "notas": "Fuente principal del juego. OFL: redistribuir solo si se incluyen los .ttf."
+    },
+    {
+      "id": "A004",
+      "nombre": "Fredoka One (tipografía)",
+      "tipo": "fuente",
+      "autor": "Milena Brandão",
+      "fuente": "https://fonts.google.com/specimen/Fredoka+One",
+      "licencia": "SIL OFL 1.1",
+      "url_licencia": "https://scripts.sil.org/OFL",
+      "uso_comercial": true,
+      "atribucion_requerida": true,
+      "condicion": "Solo si se redistribuye la fuente",
+      "atribucion_texto": "Fredoka One — Copyright (c) Milena Brandão. SIL Open Font License 1.1.",
+      "estado": "activo",
+      "fecha_ingreso": "2026-08-15",
+      "archivos": ["FredokaOne-Regular.ttf"],
+      "notas": "Fuente secundaria (títulos, UI amigable)."
+    },
+    {
+      "id": "A005",
+      "nombre": "gdUnit4",
+      "tipo": "herramienta_testing",
+      "autor": "Mike Schulze",
+      "fuente": "https://github.com/MikeSchulze/gdUnit4",
+      "licencia": "MIT",
+      "url_licencia": "https://github.com/MikeSchulze/gdUnit4/blob/master/LICENSE",
+      "uso_comercial": true,
+      "atribucion_requerida": true,
+      "atribucion_texto": "gdUnit4 — Copyright (c) Mike Schulze. MIT License.",
+      "estado": "activo",
+      "fecha_ingreso": "2026-08-15",
+      "notas": "Framework de tests. Solo en entorno de desarrollo, no se distribuye con el juego."
+    }
+  ],
+
+  "assets_propios": [
+    {
+      "id": "P001",
+      "nombre": "Scripts GDScript (50+ archivos)",
+      "tipo": "codigo",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P002",
+      "nombre": "Terreno voxel procedural",
+      "tipo": "arte_3d",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P003",
+      "nombre": "NPCs 35+ (modelos voxel)",
+      "tipo": "arte_3d",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P004",
+      "nombre": "Casas 5 (modelos voxel)",
+      "tipo": "arte_3d",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P005",
+      "nombre": "Sistema de combate",
+      "tipo": "codigo",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P006",
+      "nombre": "Sistema de guardado",
+      "tipo": "codigo",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    },
+    {
+      "id": "P007",
+      "nombre": "UI/HUD",
+      "tipo": "arte_2d",
+      "autor": "Estudio Isla Ancestral",
+      "licencia": "Propietaria",
+      "estado": "activo"
+    }
+  ],
+
   "politicas": {
     "registro_marcas_previo_lanzamiento": true,
-    "revision_legal_anual": true
+    "revision_legal_anual": true,
+    "checklist_atribucion_obligatorio": true,
+    "prohibido_nc_nd": true,
+    "prohibido_sin_licencia": true,
+    "prohibido_plagio": true,
+    "escala_preferencia_licencias": [
+      "propio",
+      "dominio_publico",
+      "CC0",
+      "CC-BY",
+      "MIT",
+      "BSD",
+      "Apache",
+      "SIL OFL",
+      "CC-BY-SA (aislado, con evaluacion)",
+      "RECHAZADO (CC-BY-NC, CC-BY-ND, GPL contenido, sin licencia)"
+    ],
+    "licencias_rechazadas": ["CC-BY-NC", "CC-BY-ND", "GPL (contenido integrado)", "sin licencia", "plagiado"],
+    "revision_trimestral": true,
+    "antes_de_release": true
+  },
+
+  "marcas": {
+    "Isla Ancestral": {
+      "busquedas": [
+        {"fecha": "2026-09-15", "fuente": "web", "resultado": "sin colision en videojuegos"},
+        {"fecha": "2026-09-15", "fuente": "Steam", "resultado": "sin colision"},
+        {"fecha": "2026-09-15", "fuente": "itch.io", "resultado": "sin colision"},
+        {"fecha": "2026-09-15", "fuente": "Google Play", "resultado": "sin colision"},
+        {"fecha": "2026-09-15", "fuente": "App Store", "resultado": "sin colision"}
+      ],
+      "decision": "continuar con el nombre, revisar antes de release",
+      "riesgo": "bajo"
+    },
+    "Isla Aurora": {
+      "busquedas": [
+        {"fecha": "2026-09-15", "fuente": "web", "resultado": "existen referencias a islas reales, no videojuegos"}
+      ],
+      "decision": "continuar, riesgo bajo (nombre genérico geográfico)",
+      "riesgo": "bajo"
+    }
   }
 }

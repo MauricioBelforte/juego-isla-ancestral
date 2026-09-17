@@ -1,0 +1,41 @@
+{
+  "templo_id": "templo_subterraneo",
+  "nombre": "Templo Subterraneo (Templo de la Brisa)",
+  "version": 2,
+  "nota": "Metria voxel-compatible y presupuestos del M26 segun 03-Diseno.md. Consumido por TemploValidadores (suites voxel/accesibilidad/orientacion/anti-exploit) y por M08 para la generacion volumetrica.",
+  "voxel": {
+    "unidad_m": 1.0,
+    "corredor": {"ancho": 4, "alto": 4, "largo": 4},
+    "puerta": {"ancho": 2, "alto": 3},
+    "techo": {"ancho": 3, "alto": 3},
+    "transiciones_grados": 45,
+    "rampa_grados_max": 20,
+    "teleports": false,
+    "barreras_en_huecos": true
+  },
+  "accesibilidad": {
+    "contraste_min": 4.5,
+    "icono_px_min": 16,
+    "presion_temporal": false,
+    "subtitulos": true,
+    "reduccion_particulas": true,
+    "reduccion_parpadeo": true
+  },
+  "orientacion": {
+    "mojon_metros_max": 40,
+    "mapa_de_zona": true,
+    "deriva_max_s": 120
+  },
+  "gating": {
+    "anillos": 7,
+    "sellos_unicos": true,
+    "salida_requiere": "sello_restaurado"
+  },
+  "checkpoints": ["porte", "vestibulo", "vientos", "central", "sello"],
+  "checkpoint_respaldo_bak": true,
+  "presupuesto": {
+    "rotonda_poligonos_max": 500000,
+    "particulas_por_escena_max": 256,
+    "luz_volumetrica_salas": 2
+  }
+}

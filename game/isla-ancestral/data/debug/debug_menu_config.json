@@ -17,8 +17,29 @@
       "comandos": [
         "cambiar_hora",
         "cambiar_clima",
-        "regenerar_chunks",
-        "avanzar_dia"
+        "cambiar_estacion",
+        "avanzar_dia",
+        "regenerar_chunks"
+      ]
+    },
+    {
+      "id": "entidades",
+      "nombre": "Entidades",
+      "comandos": [
+        "reset_npc",
+        "reset_puzzle"
+      ]
+    },
+    {
+      "id": "visualizacion",
+      "nombre": "Visualización",
+      "comandos": [
+        "toggle_colliders",
+        "toggle_fps",
+        "toggle_chunks",
+        "toggle_navigation",
+        "toggle_hitboxes",
+        "toggle_ai_states"
       ]
     },
     {
@@ -75,6 +96,48 @@
       "parametros": {
         "clima": 0
       }
+    },
+    "cambiar_estacion": {
+      "accion": "cambiar_estacion",
+      "parametros": {
+        "estacion": 0
+      }
+    },
+    "reset_npc": {
+      "accion": "reset_npc",
+      "parametros": {
+        "npc_id": "catalina_oso"
+      }
+    },
+    "reset_puzzle": {
+      "accion": "reset_puzzle",
+      "parametros": {
+        "puzzle_id": "templo"
+      }
+    },
+    "toggle_colliders": {
+      "accion": "toggle_colliders",
+      "parametros": { "enabled": true }
+    },
+    "toggle_fps": {
+      "accion": "toggle_fps",
+      "parametros": { "enabled": true }
+    },
+    "toggle_chunks": {
+      "accion": "toggle_chunks",
+      "parametros": { "enabled": true }
+    },
+    "toggle_navigation": {
+      "accion": "toggle_navigation",
+      "parametros": { "enabled": true }
+    },
+    "toggle_hitboxes": {
+      "accion": "toggle_hitboxes",
+      "parametros": { "enabled": true }
+    },
+    "toggle_ai_states": {
+      "accion": "toggle_ai_states",
+      "parametros": { "enabled": true }
     },
     "regenerar_chunks": {
       "accion": "regenerar_chunks",

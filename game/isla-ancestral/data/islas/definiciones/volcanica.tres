@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_o5ggp"]
+
+[resource]
+script = ExtResource("1_o5ggp")
+id = &"volcanica"
+nombre_clave = "M27.ISLA.VOLCANICA.NOMBRE"
+nombre_display = "Isla Volcánica"
+descripcion = "El cráter activo: la recompensa de la expedición más larga."
+radio = 210
+altura_min = 0
+altura_max = 150
+bioma_base = 9
+biomas_mezcla = Array[int]([5])
+proporciones_mezcla = Array[float]([1.0])
+clima_tendencia = 4
+musica_clave = &"mus_volcanica"
+recursos_exclusivos = PackedStringArray("nucleo_magma", "basalto_duro", "rubi")
+flora_endemica = PackedStringArray("flor_lava")
+fauna_endemica = PackedStringArray("fenix_joven")
+puzzles = PackedStringArray("ascenso_crater")
+npc_residentes = PackedStringArray("cartografa")
+punto_llegada = Vector3i(178, 3, 0)
+punto_partida = Vector3i(178, 3, 12)
+anillo = 3
+desbloqueo_flag = &"progreso_lejano"
+orden_anillo = 9

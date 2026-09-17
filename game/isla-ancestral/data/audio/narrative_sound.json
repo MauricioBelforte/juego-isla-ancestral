@@ -1,20 +1,96 @@
 {
   "momentos": {
-    "sello_obtenido": {"sonido": "sello_obtenido", "intensidad": 1.0, "duracion_s": 3.0, "leitmotif": "aurora_motivo"},
-    "templo_entrada": {"sonido": "templo_entrada", "intensidad": 0.6, "duracion_s": 5.0, "leitmotif": "templo_motivo"},
-    "resonancia_activada": {"sonido": "resonancia", "intensidad": 0.8, "duracion_s": 4.0, "leitmotif": "resonancia_motivo"},
-    "elysia_avistada": {"sonido": "elysia_revelacion", "intensidad": 1.0, "duracion_s": 8.0, "leitmotif": "elysia_motivo"},
-    "misterio_pista": {"sonido": "pista_descubierta", "intensidad": 0.5, "duracion_s": 2.0, "leitmotif": ""},
-    "postgame_inicio": {"sonido": "postgame_intro", "intensidad": 0.9, "duracion_s": 6.0, "leitmotif": "aurora_motivo"}
+    "sello_obtenido": {
+      "nombre": "Sello Obtenido",
+      "descripcion": "Sonido distintivo al obtener un Sello ancestral",
+      "intensidad": 1.0,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 3.0,
+      "categoria": "logro"
+    },
+    "elysia_avistada": {
+      "nombre": "Elysia Avistada",
+      "descripcion": "Sonido distintivo al avistar Elysia por primera vez",
+      "intensidad": 1.0,
+      "leitmotif": "elysia_motivo",
+      "duracion_s": 4.0,
+      "categoria": "descubrimiento"
+    },
+    "templo_descubierto": {
+      "nombre": "Templo Descubierto",
+      "descripcion": "Sonido al entrar a un templo ancestral",
+      "intensidad": 0.8,
+      "leitmotif": "templo_motivo",
+      "duracion_s": 2.5,
+      "categoria": "descubrimiento"
+    },
+    "resonancia_activada": {
+      "nombre": "Resonancia Activada",
+      "descripcion": "Sonido al activar un mecanismo de resonancia",
+      "intensidad": 0.9,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 2.0,
+      "categoria": "interaccion"
+    },
+    "misterio_detectado": {
+      "nombre": "Misterio Detectado",
+      "descripcion": "Sonido ambiental de misterio en ruinas",
+      "intensidad": 0.5,
+      "leitmotif": "",
+      "duracion_s": 5.0,
+      "categoria": "ambiental"
+    },
+    "puerta_ancestral": {
+      "nombre": "Puerta Ancestral",
+      "descripcion": "Sonido al interactuar con puertas antiguas",
+      "intensidad": 0.7,
+      "leitmotif": "",
+      "duracion_s": 1.5,
+      "categoria": "interaccion"
+    }
   },
   "leitmotifs": {
-    "aurora_motivo": {"nombre": "Motivo de Aurora", "peso": 1},
-    "templo_motivo": {"nombre": "Motivo de Templo", "peso": 1},
-    "resonancia_motivo": {"nombre": "Motivo de Resonancia", "peso": 1},
-    "elysia_motivo": {"nombre": "Motivo de Elysia", "peso": 1}
+    "aurora_motivo": {
+      "nombre": "Motivo de Aurora",
+      "descripcion": "Tema principal de Aurora, protagonists del juego",
+      "instrumentos": ["piano", "cuerdas", "vientos"],
+      "tonalidad": "Mayor",
+      "tempo_bpm": 72,
+      "variantes": ["calm", "tension", "triumph"]
+    },
+    "elysia_motivo": {
+      "nombre": "Motivo de Elysia",
+      "descripcion": "Tema de Elysia, isla misteriosa y etérea",
+      "instrumentos": ["cristal", "sintetizador", "coro"],
+      "tonalidad": "Menor",
+      "tempo_bpm": 60,
+      "variantes": ["mystery", "wonder", "danger"]
+    },
+    "templo_motivo": {
+      "nombre": "Motivo de Templos",
+      "descripcion": "Tema recurrente de los templos ancestrales",
+      "instrumentos": ["percusión grave", "gongs", "flauta"],
+      "tonalidad": "Menor",
+      "tempo_bpm": 50,
+      "variantes": ["exploration", "puzzle", "completion"]
+    },
+    "resonancia_motivo": {
+      "nombre": "Motivo de Resonancia",
+      "descripcion": "Tema de los mecanismos de resonancia ancestral",
+      "instrumentos": ["cuerdas armónicas", "vibración", "eco"],
+      "tonalidad": "Mixolidio",
+      "tempo_bpm": 66,
+      "variantes": ["activate", "idle", "break"]
+    }
   },
   "reglas": {
     "silencio_narrativo_tras_sello": true,
-    "intensidad_max_45s_tension": true
+    "fade_out_leitmotif_al_cambiar_zona": true
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "creado_por": "deepseek-v4-flash",
+    "fecha": "2026-09-01",
+    "notas": "Data-driven: cualquier momento/leitmotif agregado al JSON aparece en el juego sin tocar código"
   }
 }

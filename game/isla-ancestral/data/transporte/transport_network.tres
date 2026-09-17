@@ -1,0 +1,293 @@
+[gd_resource type="Resource" script_class="TransportNetwork" format=3]
+
+[ext_resource type="Script" path="res://scripts/transporte/transport_route.gd" id="1_u2hoy"]
+[ext_resource type="Script" path="res://scripts/transporte/transport_network.gd" id="2_2w3bo"]
+[ext_resource type="Script" path="res://scripts/transporte/transport_stop.gd" id="3_qq4db"]
+
+[sub_resource type="Resource" id="Resource_u2hoy"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_muelle"
+from_id = &"puerto_aurora"
+to_id = &"muelle_raiz_sur"
+duracion_seg = 5.0
+base_cost = 8
+medio = "muelle"
+
+[sub_resource type="Resource" id="Resource_2w3bo"]
+script = ExtResource("1_u2hoy")
+id = &"r_muelle_aurora"
+from_id = &"muelle_raiz_sur"
+to_id = &"puerto_aurora"
+duracion_seg = 5.0
+base_cost = 8
+medio = "muelle"
+
+[sub_resource type="Resource" id="Resource_qq4db"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_estacion"
+from_id = &"puerto_aurora"
+to_id = &"estacion_central"
+duracion_seg = 6.0
+base_cost = 12
+medio = "tren"
+
+[sub_resource type="Resource" id="Resource_je3ab"]
+script = ExtResource("1_u2hoy")
+id = &"r_estacion_aurora"
+from_id = &"estacion_central"
+to_id = &"puerto_aurora"
+duracion_seg = 6.0
+base_cost = 12
+medio = "tren"
+
+[sub_resource type="Resource" id="Resource_3h12k"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_plataforma"
+from_id = &"puerto_aurora"
+to_id = &"plataforma_norte"
+duracion_seg = 10.0
+base_cost = 20
+medio = "dirigible"
+
+[sub_resource type="Resource" id="Resource_k0d2r"]
+script = ExtResource("1_u2hoy")
+id = &"r_plataforma_aurora"
+from_id = &"plataforma_norte"
+to_id = &"puerto_aurora"
+duracion_seg = 10.0
+base_cost = 20
+medio = "dirigible"
+
+[sub_resource type="Resource" id="Resource_tvj4g"]
+script = ExtResource("1_u2hoy")
+id = &"r_muelle_festival"
+from_id = &"muelle_raiz_sur"
+to_id = &"puerto_festival"
+duracion_seg = 8.0
+base_cost = 10
+
+[sub_resource type="Resource" id="Resource_455ue"]
+script = ExtResource("1_u2hoy")
+id = &"r_festival_muelle"
+from_id = &"puerto_festival"
+to_id = &"muelle_raiz_sur"
+duracion_seg = 8.0
+base_cost = 10
+
+[sub_resource type="Resource" id="Resource_bqywo"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_sur"
+from_id = &"puerto_aurora"
+to_id = &"puerto_sur"
+duracion_seg = 60.0
+base_cost = 80
+
+[sub_resource type="Resource" id="Resource_johe8"]
+script = ExtResource("1_u2hoy")
+id = &"r_sur_aurora"
+from_id = &"puerto_sur"
+to_id = &"puerto_aurora"
+duracion_seg = 60.0
+base_cost = 80
+
+[sub_resource type="Resource" id="Resource_qf35q"]
+script = ExtResource("1_u2hoy")
+id = &"r_muelle_sur"
+from_id = &"muelle_raiz_sur"
+to_id = &"puerto_sur"
+duracion_seg = 55.0
+base_cost = 60
+
+[sub_resource type="Resource" id="Resource_bjlmt"]
+script = ExtResource("1_u2hoy")
+id = &"r_sur_muelle"
+from_id = &"puerto_sur"
+to_id = &"muelle_raiz_sur"
+duracion_seg = 55.0
+base_cost = 60
+
+[sub_resource type="Resource" id="Resource_02aow"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_este"
+from_id = &"puerto_aurora"
+to_id = &"puerto_este"
+duracion_seg = 70.0
+base_cost = 90
+
+[sub_resource type="Resource" id="Resource_l785n"]
+script = ExtResource("1_u2hoy")
+id = &"r_este_aurora"
+from_id = &"puerto_este"
+to_id = &"puerto_aurora"
+duracion_seg = 70.0
+base_cost = 90
+
+[sub_resource type="Resource" id="Resource_j1b4u"]
+script = ExtResource("1_u2hoy")
+id = &"r_muelle_este"
+from_id = &"muelle_raiz_sur"
+to_id = &"puerto_este"
+duracion_seg = 65.0
+base_cost = 70
+
+[sub_resource type="Resource" id="Resource_hfh1d"]
+script = ExtResource("1_u2hoy")
+id = &"r_este_muelle"
+from_id = &"puerto_este"
+to_id = &"muelle_raiz_sur"
+duracion_seg = 65.0
+base_cost = 70
+
+[sub_resource type="Resource" id="Resource_urt8b"]
+script = ExtResource("1_u2hoy")
+id = &"r_plataforma_norte"
+from_id = &"plataforma_norte"
+to_id = &"puerto_norte"
+duracion_seg = 50.0
+base_cost = 100
+medio = "dirigible"
+
+[sub_resource type="Resource" id="Resource_oxwg8"]
+script = ExtResource("1_u2hoy")
+id = &"r_norte_plataforma"
+from_id = &"puerto_norte"
+to_id = &"plataforma_norte"
+duracion_seg = 50.0
+base_cost = 100
+medio = "dirigible"
+
+[sub_resource type="Resource" id="Resource_cf4aw"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_brisa"
+from_id = &"puerto_aurora"
+to_id = &"puerto_brisa"
+duracion_seg = 90.0
+base_cost = 150
+es_secreta = true
+temporada = "verano"
+
+[sub_resource type="Resource" id="Resource_dg6rt"]
+script = ExtResource("1_u2hoy")
+id = &"r_aurora_espejo"
+from_id = &"puerto_aurora"
+to_id = &"puerto_espejo"
+duracion_seg = 110.0
+base_cost = 220
+requiere_flag = &"pistas_secreto_completas"
+es_secreta = true
+
+[sub_resource type="Resource" id="Resource_4prs6"]
+script = ExtResource("3_qq4db")
+id = &"puerto_aurora"
+nombre_clave = "M68.STOP.puerto_aurora"
+nombre_fallback = "Puerto de Aurora"
+isla_id = "isla_raiz"
+poi_id = "poi_puerto_aurora"
+
+[sub_resource type="Resource" id="Resource_n04ud"]
+script = ExtResource("3_qq4db")
+id = &"muelle_raiz_sur"
+nombre_clave = "M68.STOP.muelle_raiz_sur"
+nombre_fallback = "Muelle Sur de Aurora"
+tipo = "muelle"
+isla_id = "isla_raiz"
+pos = Vector3(0, 0, 40)
+poi_id = "poi_muelle_sur"
+
+[sub_resource type="Resource" id="Resource_wdk8u"]
+script = ExtResource("3_qq4db")
+id = &"plataforma_norte"
+nombre_clave = "M68.STOP.plataforma_norte"
+nombre_fallback = "Plataforma del Norte"
+tipo = "dirigible"
+isla_id = "isla_raiz"
+pos = Vector3(0, 60, -30)
+horario_apertura = 8
+horario_cierre = 19
+poi_id = "poi_plataforma_norte"
+
+[sub_resource type="Resource" id="Resource_m8p4g"]
+script = ExtResource("3_qq4db")
+id = &"estacion_central"
+nombre_clave = "M68.STOP.estacion_central"
+nombre_fallback = "Estación Central"
+tipo = "tren"
+isla_id = "isla_raiz"
+pos = Vector3(20, 0, -10)
+horario_cierre = 21
+poi_id = "poi_estacion_central"
+
+[sub_resource type="Resource" id="Resource_278js"]
+script = ExtResource("3_qq4db")
+id = &"puerto_sur"
+nombre_clave = "M68.STOP.puerto_sur"
+nombre_fallback = "Puerto de la Isla del Sur"
+isla_id = "isla_sur"
+pos = Vector3(0, 0, 180)
+horario_apertura = 7
+horario_cierre = 21
+poi_id = "poi_puerto_sur"
+
+[sub_resource type="Resource" id="Resource_uwqju"]
+script = ExtResource("3_qq4db")
+id = &"puerto_este"
+nombre_clave = "M68.STOP.puerto_este"
+nombre_fallback = "Puerto de la Isla del Este"
+isla_id = "isla_este"
+pos = Vector3(200, 0, 0)
+horario_apertura = 7
+horario_cierre = 21
+poi_id = "poi_puerto_este"
+
+[sub_resource type="Resource" id="Resource_0udjr"]
+script = ExtResource("3_qq4db")
+id = &"puerto_norte"
+nombre_clave = "M68.STOP.puerto_norte"
+nombre_fallback = "Puerto de la Isla del Norte"
+isla_id = "isla_norte"
+pos = Vector3(0, 0, -200)
+horario_apertura = 7
+horario_cierre = 20
+poi_id = "poi_puerto_norte"
+
+[sub_resource type="Resource" id="Resource_4pdfd"]
+script = ExtResource("3_qq4db")
+id = &"puerto_brisa"
+nombre_clave = "M68.STOP.puerto_brisa"
+nombre_fallback = "Puerto de la Isla Brisa"
+isla_id = "isla_brisa"
+pos = Vector3(150, 0, 150)
+horario_apertura = 8
+horario_cierre = 20
+desbloqueada_inicial = false
+desbloquea_flag = &"templo_brisa_abierto"
+poi_id = "poi_puerto_brisa"
+
+[sub_resource type="Resource" id="Resource_mwmu1"]
+script = ExtResource("3_qq4db")
+id = &"puerto_espejo"
+nombre_clave = "M68.STOP.puerto_espejo"
+nombre_fallback = "Puerto de la Isla Espejo"
+isla_id = "isla_espejo"
+pos = Vector3(-200, 0, 0)
+horario_apertura = 9
+horario_cierre = 19
+poi_id = "poi_puerto_espejo"
+
+[sub_resource type="Resource" id="Resource_6eouc"]
+script = ExtResource("3_qq4db")
+id = &"puerto_festival"
+nombre_clave = "M68.STOP.puerto_festival"
+nombre_fallback = "Puerto del Festival"
+isla_id = "isla_raiz"
+pos = Vector3(0, 0, 60)
+horario_apertura = 10
+horario_cierre = 23
+desbloqueada_inicial = false
+desbloquea_flag = &"festival_activo"
+poi_id = "poi_puerto_festival"
+
+[resource]
+script = ExtResource("2_2w3bo")
+stops = Array[ExtResource("3_qq4db")]([SubResource("Resource_4prs6"), SubResource("Resource_n04ud"), SubResource("Resource_wdk8u"), SubResource("Resource_m8p4g"), SubResource("Resource_278js"), SubResource("Resource_uwqju"), SubResource("Resource_0udjr"), SubResource("Resource_4pdfd"), SubResource("Resource_mwmu1"), SubResource("Resource_6eouc")])
+routes = Array[ExtResource("1_u2hoy")]([SubResource("Resource_u2hoy"), SubResource("Resource_2w3bo"), SubResource("Resource_qq4db"), SubResource("Resource_je3ab"), SubResource("Resource_3h12k"), SubResource("Resource_k0d2r"), SubResource("Resource_tvj4g"), SubResource("Resource_455ue"), SubResource("Resource_bqywo"), SubResource("Resource_johe8"), SubResource("Resource_qf35q"), SubResource("Resource_bjlmt"), SubResource("Resource_02aow"), SubResource("Resource_l785n"), SubResource("Resource_j1b4u"), SubResource("Resource_hfh1d"), SubResource("Resource_urt8b"), SubResource("Resource_oxwg8"), SubResource("Resource_cf4aw"), SubResource("Resource_dg6rt")])

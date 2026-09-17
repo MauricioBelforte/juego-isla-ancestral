@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_mcqgx"]
+
+[resource]
+script = ExtResource("1_mcqgx")
+id = &"pequena"
+nombre_clave = "M27.ISLA.PEQUENA.NOMBRE"
+nombre_display = "Isla Pequeña"
+descripcion = "Una cala mínima para una tarde tranquila."
+radio = 96
+altura_min = 0
+altura_max = 30
+playa_ancho = 10
+biomas_mezcla = Array[int]([1])
+proporciones_mezcla = Array[float]([1.0])
+musica_clave = &"mus_pequena"
+recursos_exclusivos = PackedStringArray("coco", "arena_fina")
+flora_endemica = PackedStringArray("palma_enana")
+fauna_endemica = PackedStringArray("cangrejo_ermitano")
+puzzles = PackedStringArray("tesoro_mini")
+npc_residentes = PackedStringArray("pescador_retirado")
+punto_llegada = Vector3i(62, 3, 0)
+punto_partida = Vector3i(62, 3, 12)
+orden_anillo = 3

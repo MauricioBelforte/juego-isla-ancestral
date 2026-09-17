@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="IslandDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/islas/island_definition.gd" id="1_bpb78"]
+
+[resource]
+script = ExtResource("1_bpb78")
+id = &"nieve"
+nombre_clave = "M27.ISLA.NIEVE.NOMBRE"
+nombre_display = "Isla de Nieve"
+descripcion = "Silencio blanco y huellas que el viento borra."
+radio = 190
+altura_min = 0
+altura_max = 130
+playa_ancho = 10
+bioma_base = 8
+biomas_mezcla = Array[int]([5, 6])
+proporciones_mezcla = Array[float]([0.5, 0.5])
+clima_tendencia = 3
+musica_clave = &"mus_nieve"
+recursos_exclusivos = PackedStringArray("hielo_perpetuo", "plata_fria")
+flora_endemica = PackedStringArray("pino_nival", "musgo_glacial")
+fauna_endemica = PackedStringArray("zorro_artico", "reno")
+puzzles = PackedStringArray("cueva_hielo")
+npc_residentes = PackedStringArray("explorador")
+punto_llegada = Vector3i(156, 3, 0)
+punto_partida = Vector3i(156, 3, 12)
+anillo = 3
+desbloqueo_flag = &"progreso_lejano"
+orden_anillo = 8
