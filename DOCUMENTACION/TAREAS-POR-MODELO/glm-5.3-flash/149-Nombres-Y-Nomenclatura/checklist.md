@@ -3,7 +3,10 @@
 
 **Módulo:** 149-Nombres-Y-Nomenclatura (149)
 
-# Checklist personal tareas — 149-Nombres-Y-Nomenclatura
+# Checklist personal tareas
+
+> Nota (2026-09-15, curación v2): el módulo está RESERVADO por otro agente y su 05-Checklist fue regenerado (100 ítems [ ]); las 3 tareas [?] de este archivo quedan como estaban (honestidad).
+ — 149-Nombres-Y-Nomenclatura
 
 > Extraídas del `05-Checklist.md` del módulo (3 pendientes de 100 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
 

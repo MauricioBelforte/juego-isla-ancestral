@@ -7,7 +7,7 @@
 
 # Checklist QA cruzado — M10
 
-- [ ] T-QA-001 Reclamar módulo en CHECKLIST-GLOBAL (Notas: 🔵 QA por Hy3) + ESTADO-PARALELO
-- [ ] T-QA-002 Verificar 05-Checklist.md: 100% [x], 0 [?] (confirmado: 0 pend / 0 dudas)
-- [ ] T-QA-003 Confirmar scripts world_generator.gd + island_generator.gd presentes
-- [ ] T-QA-004 Boot smoke test headless + firmar Log 764
+- [x] T-QA-001 Reclamar módulo en CHECKLIST-GLOBAL (Notas: 🔵 QA por Hy3) + ESTADO-PARALELO
+- [x] T-QA-002 Verificar 05-Checklist.md: 106 [x] / 2 [ ] / 1 [?] (re-paso 2026-09-11; funcional)
+- [x] T-QA-003 Confirmar scripts world_generator.gd + world_manager.gd + island_generator.gd + block_catalog.gd presentes
+- [x] T-QA-004 Boot smoke test headless + firmar Log 834

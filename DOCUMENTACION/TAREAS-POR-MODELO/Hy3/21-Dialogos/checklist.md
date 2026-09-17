@@ -69,3 +69,18 @@
 [ ] T-059 Ritmo de tipeo calibrado para lectura cozy (sin prisa) [S]
 [ ] T-060 Dialogo de ejemplo localizado en espanol e ingles como muestra [M]
 [ ] T-061 Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]
+
+## Cierre técnico §21.8 (2026-09-12, Log 846 — Hy3/WorkBuddy)
+
+**Verificación E2E (Godot 4.7.2 headless):** 13/13 tests de `scripts/dialogos/` en 0 fallos + `validate_all_dialogues.gd` 0 problemas (CI verde).
+
+**Bugs corregidos durante la verificación cruzada:**
+- **BUG-026 (🔴 Crítico, RESUELTO):** regresión de iter 7/8 — el gate `[VAL-DGV]` de `dialogue_manager.gd::start_dialogue` rechazaba el grafo si el validador reportaba algún problema. Las claves inyectadas por M21 en runtime (payload de evento `new_level`/`reaccion_id`/`npc_id`/`item_id` y session-var de amistad `<npc_id>_amistad`) no estaban en `CLAVES_MUNDO_BASE` -> `reaccion_regalo.json`/`reaccion_nivel.json` NO arrancaban en producción. Allowlist ampliada + reconocimiento de sufijo `_amistad`.
+- **BUG-027 (🟠 Mayor, RESUELTO):** `DialogGraphValidator` no detectaba `next_id`/`goto_id` inexistentes (arista colgante). Detección añadida en `validar()`.
+
+**Contenido creativo — DELEGADO (§11.3):** los diálogos narrativos de M23/M148/M150 están fuera de la fortaleza de Hy3 (no generación creatividad libre). Se delegan a un modelo de creatividad; el motor M21 ya está listo para consumirlos.
+
+**Items fuera de dominio (§21.4, NO tocados):** los 7 `[?]` de la checklist del módulo son de dueño M22/M23/M53/M87/M29/M31 (RF10-RF12/traducción M87, reporte JSON con línea/columna, IDs duplicados, filtro de opciones M53, navegación teclado M53, diálogos por clima M29/M31, test E2E play mode).
+
+**Veredicto:** ✅ CIERRE TÉCNICO VERIFICADO. El núcleo de M21 funciona en runtime; el módulo queda 🟡 Con dudas solo por los 7 `[?]` de dueño ajeno.
+

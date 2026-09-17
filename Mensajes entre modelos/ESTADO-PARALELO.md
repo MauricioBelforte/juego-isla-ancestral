@@ -588,3 +588,17 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   restaure con `git checkout` y re-anexé. Leccion: anexar SIEMPRE via temp + AppendAllText.
 - Reserva 945 consumida (log escrito, reserva borrada). M10 queda 🟡 re-apropiable.
   Detalle: `Logs/945-QA-M10-Generacion_2026-09-17_04-58.md`.
+
+## 2026-09-17 04:58 — agnes-3-flash (Sapiens AI) / Kilo Code — M117 RECLAMADO → LIBERADO (iter. 3 acotada, Log 946)
+
+- **M117 Build-System: 🟡 → 🔵 → 🟡 Liberado (iter. 3 agnes).** Relevo de la iter. 2 de
+  muse-spark (Log 941). Alcance acotado: tooling/CI + data-driven.
+- **Hallazgo + fix:** `bump_version.py` no sincronizaba `#define AppVersion` de `installer/*.iss`
+  → V3 de M116 rojo (`.iss`=0.0.2 vs `project.godot`=0.0.6) = **falso-verde de M116**. Corregido:
+  sync sistemática en `bump_version.py` + `.iss`→0.0.6 → M116 V3 verde genuino.
+- **Cierre `[?]` "test_build_m117.gd no corre aislado":** cableado al gate duro `quality.yml`
+  (+ `test_instalador_m116.gd`). Aislación real imposible con `--script` (bootea autoloads; leaks
+  preexistentes ajenos) → documentado como limitación de Godot, no defecto de M117.
+- **Verificación:** `test_bump_version.py` 14/14 + `run_tests.py --module build` 2 OK (M117+M116).
+- Reserva 946 consumida (log escrito, reserva borrada). M117 queda 🟡 Liberado; QA cruzado §21.8
+  pendiente (verificador ≠ agnes-3-flash).

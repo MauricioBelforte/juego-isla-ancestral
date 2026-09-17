@@ -5,6 +5,8 @@
 
 # Checklist personal tareas — 153-Objetivo-Final
 
+> Nota (2026-09-15, curación v2): el 05-Checklist del módulo fue regenerado por otro agente (130 ítems, la mayoría [ ]); las 10 tareas de este archivo siguen PENDIENTES reales (el módulo vuelve a estar abierto tras la auditoría de reversión).
+
 > Extraídas del `05-Checklist.md` del módulo (10 pendientes de 130 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
 
 ## Tareas

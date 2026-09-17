@@ -22,14 +22,14 @@
 - [ ] T-011 Establecer restricción de rendimiento: presupuesto ≤ 0.2 ms por frame [M]
 - [ ] T-012 Documentar la persistencia mínima de GameState.M92 (< 1 KB) [S]
 - [ ] T-013 RF2: trigger por mundo (proximidad del jugador a ITutorialTarget, radio configurable) [M]
-- [ ] T-014 RF2: trigger por acción del jugador (primer paso, primera tecla E, primer equipar) [M]
-- [ ] T-015 RF2: los triggers se registran y desregistran según los mundos activos (M63 streaming) [M]
+- [x] T-014 RF2: trigger por acción del jugador (primer paso, primera tecla E, primer equipar) [M] → Log 336 verificado + test EventBus real (Log 911)
+- [x] T-015 RF2: los triggers se registran y desregistran según los mundos activos (M63 streaming) [M] → API testeada (Log 336/911); cableado automático KnownIssue dueño M63
 - [ ] T-016 RF2: condiciones de contexto permitidas: día, hora, zona, sistema disponible [M]
-- [ ] T-017 RF19: la revalidación registra log de M103 para trazabilidad [S]
-- [ ] T-018 RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M]
+- [x] T-017 RF19: la revalidación registra log de M103 para trazabilidad [S] → `_log_m103()` (Log 911)
+- [x] T-018 RF2: nunca disparar lecciones sobre NPCs dormidos u ocupados (estado M19 `set_ocupado`) [M] → gate Log 336 verificado + test (Log 911)
 - [ ] T-019 RF2: no disparar capítulos de sistemas no implementados (omisión con log de degradación) [M]
-- [ ] T-020 RF23: watchdog por capítulo con timeout configurable (default 120 s) [M]
-- [ ] T-021 RF20: re-programación del trigger hasta 3 intentos antes del descarte seguro [M]
+- [x] T-020 RF23: watchdog por capítulo con timeout configurable (default 120 s) [M] → Log 336 verificado + test (Log 911)
+- [x] T-021 RF20: re-programación del trigger hasta 3 intentos antes del descarte seguro [M] → implementado (Log 911): `_registrar_intento`/`_programar_reintento`/`_descartar_capitulo`/`reactivar_descartado` + test
 - [ ] T-022 RF5: prólogo guiado suave (Llegada + Moverse) con marcador de objetivo en HUD [C]
 - [ ] T-023 RF5: el prólogo tiene máximo 2-4 pasos y no bloquea sistemas del juego [M]
 - [ ] T-024 RF11: capítulo Moverse: guía de WASD/joystick con celebración de llegada al punto [M]
@@ -156,7 +156,7 @@
 - [ ] T-145 P15: el jugador cierra el juego en el instante del feedback de capítulo: el estado ya está persistido (orden write antes del feedback) [M]
 - [ ] T-146 Q1: pool de burbujas con máx. 2 nodos UI vivos (reutilización, sin instanciado por pista) [M]
 - [ ] T-147 Q2: la lógica de triggers se evalúa solo ante señales o entrada, nunca por polling innecesario [M]
-- [ ] T-148 Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S]
+- [x] T-148 Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S] → `distance_squared_to()` + radio² (Log 911)
 - [ ] T-149 Q4: las condiciones de contexto son funciones baratas (< 1 µs cada una) [S]
 - [ ] T-150 Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
 - [ ] T-151 Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
@@ -169,13 +169,13 @@
 - [ ] T-158 R5: 05-Checklist.md con ítems numerables y marcadores de esfuerzo [S]
 - [ ] T-159 R6: plan-actual creado como espejo idéntico de plan-inicial [S]
 - [ ] T-160 R7: al implementar: log en Logs/, plan-actual actualizado y CHECKLIST-GLOBAL.md con progreso del 92 [M]
-- [ ] T-161 S1: test unitario de transiciones de estado del TutorialManager (ACTIVO→PISTA→CONSECUENCIA→ESPERANDO) [M]
-- [ ] T-162 S2: test de triggers de señal con mocks de M70/M33/M34/M35 [M]
-- [ ] T-163 S3: test de trigger de mundo con distancias límites (radio exacto ±0.01 m) [M]
+- [x] T-161 S1: test unitario de transiciones de estado del TutorialManager (ACTIVO→PISTA→CONSECUENCIA→ESPERANDO) [M] → cubierto por test_tutorial (núcleo, Log 259)
+- [x] T-162 S2: test de triggers de señal con mocks de M70/M33/M34/M35 [M] → cubierto por test_tutorial_triggers con EventBus REAL (Log 336/911)
+- [x] T-163 S3: test de trigger de mundo con distancias límites (radio exacto ±0.01 m) [M] → `_test_distancias_limite_s3` (Log 911)
 - [ ] T-164 S4: test de revalidación: señal de maestría previa completa el capítulo en silencio [M]
 - [ ] T-165 S5: test de skip global y por capítulo (estado persistido correctamente) [M]
 - [ ] T-166 S6: test de re-play con snapshot (la partida no se contamina) [C]
-- [ ] T-167 S7: test del watchdog: meta imposible → re-programación ×3 → descarte sin bloqueo [C]
+- [x] T-167 S7: test del watchdog: meta imposible → re-programación ×3 → descarte sin bloqueo [C] → `_test_watchdog_descarte_s7` (Log 911)
 - [ ] T-168 S8: test de pistas: máx. 2 vivas, pool reutilizado, fade y expiración [M]
 - [ ] T-169 S9: test de consejos: una sola vez, cooldown 90 s, contextos restringidos [M]
 - [ ] T-170 S10: test de integración End-to-End: partida nueva → prólogo → capítulo cultivo completo con mocks [C]
