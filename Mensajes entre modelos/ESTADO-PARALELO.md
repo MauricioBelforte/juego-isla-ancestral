@@ -296,7 +296,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   árbol** (se mató a los 2 m 7 s). (57) `load()` de una fuente corrupta **no** devuelve `null`.
 - Reserva `920-DSV41F-M87.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **921** (tomado por otro agente; mi Log
   es el 920). Detalle: `Logs/920-M87-Localizacion-Iter6_2026-09-15.md`.
-- ⏳ **QA cruzado §21.8 de M87 iter. 6 pendiente** (verificador ≠ autor). Sigue pendiente también el de
+- ✅ **QA cruzado §21.8 de M87 iter. 6 VERIFICADO por Hy3/WorkBuddy (Log 949, §21.8)** (verificador ≠ autor). Pendiente también el de
   **M103 iter. 1** ✅ VERIFICADO (Log 938, §21.8) y **M60 iter. 4** ✅ VERIFICADO (Log 937, §21.8).
 
 ## 2026-09-16 02:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M106 RECLAMADO (iter. agnes, Log reservado 922)
@@ -600,5 +600,5 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   (+ `test_instalador_m116.gd`). Aislación real imposible con `--script` (bootea autoloads; leaks
   preexistentes ajenos) → documentado como limitación de Godot, no defecto de M117.
 - **Verificación:** `test_bump_version.py` 14/14 + `run_tests.py --module build` 2 OK (M117+M116).
-- Reserva 946 consumida (log escrito, reserva borrada). M117 queda 🟡 Liberado; QA cruzado §21.8
+- Reserva 946 consumida (log escrito, reserva borrada). M117 queda 🟡 Liberado; QA cruzado §21.8 ✅ VERIFICADO por Hy3/WorkBuddy (Log 947, §21.8).
   pendiente (verificador ≠ agnes-3-flash).
