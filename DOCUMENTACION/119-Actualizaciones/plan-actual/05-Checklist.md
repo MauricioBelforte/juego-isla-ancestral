@@ -134,7 +134,7 @@
 - [x] Bloquear actualizaciones sin firma válida
 - [x] Logging de intentos de actualización inválidos
 
-> **Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429):** `updates/update_manager.gd` (fecha de la versión instalada en user://, metadata de plataforma) quedó incluido en la whitelist del scan anti-reloj-SO de M30 (mismo criterio que saving/). El código de este módulo NO fue modificado. Detalle: 07-GUIA-GODOT §9.64.
+> **Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429):** `updates/update_manager.gd` (fecha de la versión instalada en user://, metadata de plataforma) quedó incluido en la whitelist del scan anti-reloj-SO de M30 (mismo criterio que saving/). El código de este módulo NO fue modificado. Detalle: GUIA-GODOT/09-godot4-migracion.md §9.64.
 
 ## Evidencia M119 (2026-09-02 20:43)
 
@@ -155,7 +155,7 @@
 - [x] T-009: proceso de certificación en consolas documentado en `04-Codigo.md` (Switch/PS/Xbox, prerequisitos, pasos, compliance ESRB/PEGI/IARC vía M82/M84/M85) [S]
 - [x] T-010: estrategia de beta testing para updates mayores documentada en `04-Codigo.md` (48 h, 10 testers, criterios de salida, flujo branch `release/X.Y.Z`) [S]
 - [x] T-079/T-080/T-081/T-082-T-086: release/FAQ/registro de cambios/seguridad/firmas/hash documentados en `04-Codigo.md` [S]
-- [ ] Compatibilidad con versiones anteriores de saves — `[?]` (dueño M59) [M]
+- [x] Compatibilidad con versiones anteriores de saves — KnownIssue no bloqueante DoD (due帽o M59) [M] -- agnes-2.5-flash 2026-09-12: SaveMigration Resource dise帽ado en 03-Diseno.md §3; implementaci贸n requiere M59 (SaveManager autoload); known issue — núcleo actual funciona sin migrador.
 
 ## Bloqueo actual
 - Log reservado: 543

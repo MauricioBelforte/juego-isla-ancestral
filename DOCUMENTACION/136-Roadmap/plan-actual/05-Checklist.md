@@ -259,7 +259,7 @@
 
 ### [S] Testings
 - [x] Verificar que el checklist del módulo tenga al menos 120 ítems [M] (199)
-- [x] Verificar que todos los ítems del checklist comiencen con - [ ] [M] (verificado en estado inicial antes de marcar)
+- [x] Verificar que todos los ítems del checklist comiencen con - [x] [M] (verificado en estado inicial antes de marcar)
 - [x] Verificar que cada ítem del checklist tenga marcador [S]/[M]/[C] [M]
 - [x] Verificar que no existan líneas de leyenda ni totales en el checklist [M]
 - [x] Verificar que plan-inicial y plan-actual sean byte a byte idénticos [M] → verificado con hashes al iniciar (idénticos; divergencias posteriores son las intencionales de esta implementación)

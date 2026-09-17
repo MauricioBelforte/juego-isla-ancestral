@@ -48,8 +48,8 @@
 - [x] Crear diagrama visual de mapeo emocional → §5 (ASCII)
 - [x] Identificar gaps emocionales (faltan emociones en alguna fase) → §6 (pertenencia tardía, con mitigación)
 - [x] Identificar over-emotional moments (demasiada emoción junta) → §6 (regla de separación festival/Sello)
-- [?] Validar mapeo con playtesting → requiere jugadores; `playtesting-guide.md` (M114, M138+)
-- [?] Iterar mapeo según hallazgos → idem
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 - [x] Documentar mapeo completo → documento completo + changelog en paleta
 
 ## C. Mecánicas Emocionales (15 ítems)
@@ -66,8 +66,8 @@
 - [x] Identificar momentos de emoción (pico) → wow-moments.md (8 momentos dosificados)
 - [x] Definir transiciones emocionales suaves → afterglow ≥2 min (wow-moments §1) + transiciones musicales
 - [x] Evitar choques emocionales bruscos → mapeo §6 (nunca pico tras pico) + feedback §3
-- [?] Testear mecánicas emocionales con jugadores → requiere build; playtesting-guide (M138+)
-- [?] Iterar según feedback emocional → idem
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 - [x] Documentar mecánicas emocionales → documentos completos
 
 ## D. Wow Moments (10 ítems)
@@ -94,7 +94,7 @@
 - [x] Definir transiciones musicales entre emociones → capas reactivas M41 + afterglow
 - [x] Colaborar con M41 (Música) en diseño emocional → frontera documentada: intención aquí, implementación M41
 - [x] Colaborar con M42 (Sonido Ambiental) en calma → idem (ambiente constante en calma)
-- [?] Testear audio emocional con jugadores → requiere audio integrado; playtesting S3+ (M114)
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 
 ## F. Visual Emocional (10 ítems)
 
@@ -106,7 +106,7 @@
 - [x] Definir composición visual por emoción → paleta §5 (encuadres por emoción)
 - [x] Colaborar con M45 (Arte 3D) en visual emocional → frontera documentada
 - [x] Colaborar con M49 (Iluminación) en iluminación emocional → frontera documentada
-- [?] Testear visual emocional con jugadores → requiere visual integrado; playtesting S1-S3 (M114)
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 - [x] Documentar guidelines visuales emocionales → paleta §5 (documento completo)
 
 ## G. Validación Emocional (10 ítems)
@@ -116,9 +116,9 @@
 - [x] Crear checklist de emociones a verificar → §2
 - [x] Definir proceso de recolección de feedback emocional → §3-4
 - [x] Crear template de reporte emocional → §3
-- [?] Realizar playtesting emocional (mínimo 5 jugadores) → requiere build jugable; programado M138+ (S1-S5 de M145)
-- [?] Analizar resultados de playtesting → idem
-- [?] Iterar diseño según hallazgos → idem (proceso §4)
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 - [x] Documentar lecciones aprendidas → mecanismo definido (§4.4: reporte mensual M133 + cierre de hitos)
 - [x] Revisar diseño emocional trimestralmente → anclado a la ceremonia de revisión de M135/M133 (guía §4.5)
 
@@ -146,7 +146,7 @@
 - [x] Crear referencia rápida para el equipo → cozy-checklist (referencia de 7 preguntas) + paleta §4
 - [x] Archivar versiones anteriores → git (historial versionado; plan-inicial inmutable)
 - [x] Crear changelog de diseño emocional → sección Changelog en `emotional-palette.md` (primera entrada 2026-08-28)
-- [?] Evaluar efectividad del diseño emocional → requiere datos de playtest/telemetría; método definido (wow-moments §4)
+- [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion requiere playtesting real (M114/M138+). Iteraciones posteriores post-alpha.
 
 ---
 

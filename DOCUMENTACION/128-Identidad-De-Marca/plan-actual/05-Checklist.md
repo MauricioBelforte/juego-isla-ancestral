@@ -8,10 +8,10 @@
 
 ## A. Nombre y Trademark (10 ítems)
 
-- [ ] Cargar datos desde JSON (secciones/politicas/elementos) [S]
-- [ ] Detectar errores estructurales (id, nombre, etc) [S]
-- [ ] Test headless de validacion [M]
-- [ ] Datos data-driven en data/legal/ [S]
+- [x] Cargar datos desde JSON (secciones/politicas/elementos) [S] — identidad_marca.json + brand_validator.gd
+- [x] Detectar errores estructurales (id, nombre, etc) [S] — validar() detecta IDs vacíos, duplicados, sin nombre, sin uso
+- [x] Test headless de validacion [M] — test_brand_m128.gd
+- [x] Datos data-driven en data/legal/ [S] — data/legal/identidad_marca.json
 - [ ] Verificar disponibilidad de dominio web (islaancestral.com) → KnownIssue no bloqueante DoD: verificacion requiere accion humana (whois + purchase); politica documentada en 03-Diseno.md §1. Deferred a fase lanzamiento.
 - [ ] Registrar redes sociales con nombre consistente
 - [ ] Documentar proceso de registro de trademark
@@ -105,7 +105,7 @@
 ## H. Validación y Testing (10 ítems)
 
 - [ ] Crear BrandConfig.gd con colores oficiales
-- [ ] Crear BrandValidator.gd para validar coherencia
+- [x] Crear BrandValidator.gd para validar coherencia — brand_validator.gd existe (37 líneas, class_name BrandValidator)
 - [ ] Test de contraste WCAG AA para todos los pares de colores
 - [ ] Test de logo en tamaños mínimos
 - [ ] Test de legibilidad de tipografia → KnownIssue no bloqueante DoD: testing criteria documentado en 03-Diseno.md §1.8; requiere实物 assets para testing visual. Deferred.
@@ -135,6 +135,12 @@
 - [ ] Verificar que M99 (Marketing) sigue manual de marca
 - [ ] Verificar que M53 (UI/UX) usa paleta y tipografía de marca
 - [ ] Verificar que M131 (Créditos) usa formato de marca
+
+## Totales
+
+**Total de ítems:** 100
+**Ítems completados (verificados):** 5 (identidad_marca.json + brand_validator.gd + test)
+**Ítems pendientes:** 95
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 

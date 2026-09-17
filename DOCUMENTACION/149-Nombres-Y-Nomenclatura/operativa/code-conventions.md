@@ -8,15 +8,15 @@
 
 # Convenciones de Código (`code-conventions`) — Módulo 149
 
-> **Autoridad:** las convenciones de GDScript del proyecto son de **M05** y **`07-GUIA-GODOT.md`** (§1.1 y tabla de naming). Este documento las resume como referencia de naming y añade las convenciones de **IDs de datos** y **tags**, que no estaban cubiertas. Si hay conflicto, manda 07-GUIA-GODOT.
+> **Autoridad:** las convenciones de GDScript del proyecto son de **M05** y **`GUIA-GODOT/INDICE.md`** (§1.1 y tabla de naming). Este documento las resume como referencia de naming y añade las convenciones de **IDs de datos** y **tags**, que no estaban cubiertas. Si hay conflicto, manda GUIA-GODOT.
 
-## 1. Tabla de naming GDScript (resumen de 07-GUIA-GODOT)
+## 1. Tabla de naming GDScript (resumen de GUIA-GODOT/INDICE.md)
 
 | Elemento | Convención | Ejemplos reales del proyecto |
 |---|---|---|
 | Clase (`class_name`) | PascalCase | `CameraRig`, `PlayerController` |
 | Script (archivo) | snake_case.gd | `camera_rig.gd`, `item_database.gd`, `event_bus.gd` |
-| Señal | **snake_case** (corregido: el checklist original decía PascalCase; 07-GUIA-GODOT §1.1 manda snake_case) | `mode_changed`, `settings_changed` |
+| Señal | **snake_case** (corregido: el checklist original decía PascalCase; GUIA-GODOT/01-gdscript-errores-comunes.md §1.1 manda snake_case) | `mode_changed`, `settings_changed` |
 | Variable | snake_case | `speed`, `current_block` |
 | Variable privada | `_snake_case` | `_current_mode`, `_zoom_level` |
 | Constante | UPPER_SNAKE_CASE | `MAX_SALDO`, `TICK_SECONDS` |

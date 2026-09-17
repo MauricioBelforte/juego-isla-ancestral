@@ -65,7 +65,7 @@
 | Nivel | 12 — Naranja |
 | Estado | Mitigándose |
 | Dueño | M111 (Código de Calidad, 🔵 en curso) + M112 (Testing) |
-| Mitigación | M111 como filtro (lint, pre-commit, CI); M112 testing automático; QA cruzado multi-modelo; registro de errores en 07-GUIA-GODOT §8 |
+| Mitigación | M111 como filtro (lint, pre-commit, CI); M112 testing automático; QA cruzado multi-modelo; registro de errores en GUIA-GODOT/06-registro-errores.md §8 |
 | Contingencia | Congelar integración de código nuevo hasta pasar el gate de calidad |
 | Próxima revisión | 2026-11-28 |
 | Historial | 2026-08-17: identificado. 2026-08-28: M111 reservado/en curso por ox-alpha (log 219); mitigación avanzando |

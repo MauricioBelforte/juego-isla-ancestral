@@ -33,7 +33,7 @@ No hay archivos de código a modificar. Este módulo es documentación de conven
 | Mundo (M27/M160) | Nombres de lugares (islas canon; Mirador del Alba propuesta) |
 | Localización (M87) | Reglas multiidioma y tabla de equivalencias |
 | Audio (M41-44/M150) | Pronunciación y patrón de nombres de pistas/efectos |
-| Código (todos) | Convenciones de naming; autoridad técnica: 07-GUIA-GODOT |
+| Código (todos) | Convenciones de naming; autoridad técnica: GUIA-GODOT/INDICE.md |
 | Código de Calidad (M111) | Recibe las reglas para su linter/pre-commit (en curso) |
 
 ## Notas del Agente
@@ -45,7 +45,7 @@ No hay archivos de código a modificar. Este módulo es documentación de conven
 
 ### Lo que hice
 - Implementé los 5 documentos del spec + validador ejecutable (`validar_nombres.py`), verificado sobre el árbol real del juego (detecta 1 violación legacy: `villager.tscn`).
-- Formalicé convenciones con **evidencia real**: señales = snake_case (corregido vs checklist original, autoridad 07-GUIA-GODOT §1.1), escenas entidad = PascalCase (formaliza Player.tscn/CameraRig.tscn existentes), patrón de IDs de ítems M159 (`item_<cat3>_<sub3>_<NNN>`), patrón de tests/previews (`test_*`/`preview_*`).
+- Formalicé convenciones con **evidencia real**: señales = snake_case (corregido vs checklist original, autoridad GUIA-GODOT/01-gdscript-errores-comunes.md §1.1), escenas entidad = PascalCase (formaliza Player.tscn/CameraRig.tscn existentes), patrón de IDs de ítems M159 (`item_<cat3>_<sub3>_<NNN>`), patrón de tests/previews (`test_*`/`preview_*`).
 - Construí el sistema de nombres artísticos alineado al canon real (Catalina Oso, Finneas, Aurora, islas, Templo de la Brisa, Gran Vapor) con 15 nombres NPC (canon vs PROPUESTA) y 11 lugares, con pronunciación y validación multilingüe documentada.
 - Hallazgos documentados: backups con fecha correcta en Obsoletos/ (validador los excluye), `villager.tscn` legacy (deuda M19/M04), integraciones del spec con IDs corregidos.
 - Marqué el checklist 97/100 `[x]` + 3 `[?]` (hablantes nativos, hook pre-commit = M111, evaluación de efectividad con uso acumulado).

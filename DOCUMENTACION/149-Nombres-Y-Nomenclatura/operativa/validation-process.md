@@ -45,7 +45,7 @@ Aprobación: agentes proponen; el **fundador confirma la adopción al canon** (n
 
 ## 4. Herramientas y aprobación
 
-- **Herramientas:** Python 3 (validador), git (historial de decisiones), 07-GUIA-GODOT (autoridad GDScript), buscador (chequeo de colisiones).
+- **Herramientas:** Python 3 (validador), git (historial de decisiones), GUIA-GODOT/INDICE.md (autoridad GDScript), buscador (chequeo de colisiones).
 - **Aprobación de nombres artísticos:** fundador (con propuesta del agente y ficha completa).
 - **Aprobación de convenciones técnicas:** consenso agente dueño (M05/M111) + registro aquí.
 
@@ -53,7 +53,7 @@ Aprobación: agentes proponen; el **fundador confirma la adopción al canon** (n
 
 - **Entrenamiento:** adaptado a 1 persona + agentes — leer `quick-reference.md` es parte del onboarding de M133; los agentes ejecutan el validador antes de marcar.
 - **Revisión trimestral:** junto a la revisión de M135/M147 (¿ surgieron convenciones nuevas? ¿el validador necesita reglas?).
-- **Historial de decisiones:** changelog por documento (sección Changelog) + logs numerados. Primera decisión: señal = snake_case (confirma 07-GUIA-GODOT §1.1), escenas entidad = PascalCase (formaliza lo existente), IDs de ítems = patrón M159 formalizado.
+- **Historial de decisiones:** changelog por documento (sección Changelog) + logs numerados. Primera decisión: señal = snake_case (confirma GUIA-GODOT/01-gdscript-errores-comunes.md §1.1), escenas entidad = PascalCase (formaliza lo existente), IDs de ítems = patrón M159 formalizado.
 
 ## Changelog
 
