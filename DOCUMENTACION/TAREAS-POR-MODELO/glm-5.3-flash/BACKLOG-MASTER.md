@@ -19,7 +19,7 @@
 
 | # | ID | Módulo | Pendientes reales (05-Checklist) | Notas | Subcarpeta |
 |---|----|--------|----------------------------------|-------|------------|
-| 1 | 92 | 92-Tutorial | 143 (142 ab + 1 ?) | Alta · núcleo TutorialManager (Log 259) · deps 53✅/70 | `92-Tutorial/checklist.md` |
+| 1 | 92 | 92-Tutorial | 83 (82 ab + 1 ?) | Alta · iter.3 lógica completa (Log 914, 90/185): interruptores/consejos/P2-P15/S5-S9 · falta UI M53 + guiones .tres + RF11-RF18 | `92-Tutorial/checklist.md` |
 | 2 | 39 | 39-Tiendas | 100 | Media · núcleo datos | `39-Tiendas/checklist.md` |
 | 3 | 158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | 87 | 🟢 0→87 hecho por otro; núcleo a retomar | `158-Herramientas-Y-Desbloqueo-De-Zonas/checklist.md` |
 | 4 | 19 | 19-NPC-Y-Vecinos | 83 | Alta · núcleo iter. 3 (Log 553) | `19-NPC-Y-Vecinos/checklist.md` |
@@ -35,7 +35,7 @@
 | — | 64 | 64-IA-De-NPC | 49 `[?]` | no accionable ahora | `64-IA-De-NPC/checklist.md` |
 | — | 66 | 66-Anti-Softlock | 7 `[?]` (87 `[x]`) | ✅ RECONCILIADO 2026-09-15 (Log 913): restauración verificada 110/117; los 7 `[ ]` restantes tienen dueño externo (M27/M64/M22/M26) | `66-Anti-Softlock/checklist.md` |
 
-**Pendiente real accionable: ~921** (de 2.007 al inicio de la curación; baja 110 al reconciliar M66). Resueltos/conflictos/no-accionables documentados arriba y en los checklists personales.
+**Pendiente real accionable: ~860** (de 2.007 al inicio de la curación; baja 110 al reconciliar M66 y ~51 en la iter. 3 de M92). Resueltos/conflictos/no-accionables documentados arriba y en los checklists personales.
 
 ## Reglas de sincronización (al completar una T-###)
 

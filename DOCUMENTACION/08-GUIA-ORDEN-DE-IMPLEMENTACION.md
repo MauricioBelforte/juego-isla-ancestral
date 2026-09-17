@@ -1126,7 +1126,7 @@ Esta tabla indica rapidamente que modulo esta disponible, bloqueado o reservado.
 | — | M107 Backups | 1 | V0 | 🔵 En curso — reservado | Deepseek V4 Flash | ox-alpha (Cline) | M59 🟡 (núcleo OK) | Scripts PS backup/verify/restore/registro de tarea + backup.yml (guard secrets) + docs retención/restauración/desastres. Adaptación a rutas reales (sin disco E:, destino D:\Backups) | 2026-08-31 |
 
 | — | M63 Cargas y Streaming | 2 | V1 | 🟡 Liberado — iter. 4 (Log 746) | GLM 5.3 Flash | glm-5.3-flash (Cline) | M08 ✅ M61 🟡 (núcleo) | P1 pantalla de carga hecha (Log 746, 16/101); pendiente arte cozy M53, P9, P12-14 | 2026-09-06 03:35 |
-| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado — iter. triggers (Log 911) | Deepseek V4 Flash | glm-5.3-flash (Cline) | M53 🟡 (core UI), M70 mockeable | Verificación Log 336 marcada + RF20 re-programación + RF19 log M103 + Q3 dist² + tests S2/S3/S7 headless 0 fallos | 2026-09-15 05:00 |
+| — | M92 Tutorial | 3 | V0/V2 | 🟡 Liberado — iter. 3 lógica completa (Log 914) | Deepseek V4 Flash | glm-5.3-flash (Cline) | M53 🟡 (core UI), M70 mockeable | Interruptores RF9 + consejos RF6 + contexto T-016 + P4/P5/P6/P7 + skip/re-play RF7-RF8 (S5/S6) + feedback RF24/P15 + pistas máx.2 (P2/P13/P14) + P8/P9. test_tutorial_iter3 nuevo 103 checks; 3 suites 0 fallos (196). 90/185 | 2026-09-17 02:43 |
 
 
 

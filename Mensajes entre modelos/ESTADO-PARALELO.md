@@ -102,7 +102,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - `Logs/ULTIMO_NUMERO.txt` = **913** (lo tomó `glm-5.3-flash` para M66).
 - ✅ **QA cruzado §21.8 de M27 iter. 2 VERIFICADO** por Hy3/WorkBuddy (Log 915, verificador ≠ autor): headless 238/0 ×2, re-grounding OK, guardián anti-falso-verde probado. 3 caveats honestos (M63/M28 cableado, asimetría M59, 24-vs-26 §26).
 
-| **M92 Tutorial (iter. triggers: verificación Log 336 + RF20 + RF19)** | **glm-5.3-flash** | **Cline** | **🟡 Liberado — 2026-09-15 05:00 (Log 911)** | **Relevo de agnes-2.5-flash (§21.4.7). Hecho: ítems del Log 336 marcados (triggers EventBus real, gate NPC, desregistro M63 KnownIssue) + RF20 re-programación ×3 → descarte seguro (reactivable) + RF19 log M103 + Q3 dist² + tests S2/S3/S7. test_tutorial_triggers 0 fallos + regresiones test_tutorial/M19 0 fallos. 51/185. Pendiente: UI V2 (M53), Q1/Q2/Q5-Q8, P8-P15, S4-S6/S8-S12.** |
+| **M92 Tutorial (iter. 3: lógica completa sin UI — Log 914)** | **glm-5.3-flash** | **Cline** | **🟡 Liberado — 2026-09-17 02:43 (Log 914)** | **Relevo de agnes-2.5-flash (§21.4.7); núcleo Log 259 y iter. triggers Log 911 respetados. Hecho: interruptores RF9 independientes + consejos RF6 (una vez, cooldown 90 s, contextos, no en diálogo) + contexto T-016 (cozy, no bloquea sin proveedor) + persistencia de pasos P4 + skip RF7/S5 + re-play RF8/S6 con snapshot + feedback RF24/P15 no modal (persiste antes de emitir) + pistas máx. 2 RF4/S8 (P2/P13/P14) + P5/P6/P7 + P8/P9 InputMap en vivo. test_tutorial_iter3.gd nuevo: 103 checks; 3 suites 0 fallos (196). 90/185. Pendiente: UI V2 (M53), guiones .tres Q5, RF11-RF18 (mecánicas M13/M33-M35/M16), Q1/Q2/Q7/Q8, S10-S12.** |
 ## 2026-09-15 03:19 — glm-5.3-flash / Cline — M66 ANTI-SOFTLOCK RECONCILIADO (Log 913)
 
 - **M66 Anti-Softlock: 🟡 Con dudas (liberado)** — reconciliado el conflicto Log 701 vs checklist real
@@ -602,3 +602,62 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - **Verificación:** `test_bump_version.py` 14/14 + `run_tests.py --module build` 2 OK (M117+M116).
 - Reserva 946 consumida (log escrito, reserva borrada). M117 queda 🟡 Liberado; QA cruzado §21.8 ✅ VERIFICADO por Hy3/WorkBuddy (Log 947, §21.8).
   pendiente (verificador ≠ agnes-3-flash).
+
+## 2026-09-17 05:38 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M08 QA CRUZADO (Log 949) — MANTIENE ✅
+
+- **M08 Mundo Voxel: mantiene ✅ — 0 flips, 105/105 [x] se sostienen.** Veredicto
+  **diferenciado** frente a M09/M10 (Logs 944/945): el checklist de M08 es honesto en
+  su alcance (todos los items son "Diseñar/Documentar/Definir" y delega la validación
+  física a M1/M61) y **hay código vivo** — `block_type.gd` (30 constantes AIR=0…MUD=29
+  + SHALLOW_WATER=30) es central para island_generator, la library de main_island y M15.
+- **No es sobre-cierre, pero la documentación mentía — corregida in-situ:**
+  04-Codigo.md §2 listaba 5 archivos de los que **4 no existen** (voxel_world,
+  block_validation, world_events, diff_store — la fachada VoxelWorld nunca se
+  materializó; la edición la implementan tool_controller + interaction_manager); §3
+  tenía las firmas **diseñadas**, no las reales (world.try_extract(pos,tool) no existe;
+  las reales son tool_controller.try_extract()->Dictionary y try_place(block_id,
+  metadata)->bool). Claims stale de MiMo corregidos (no hay LAVA; BlockCatalog muerto).
+- **Fix de claim:** la fila decía "librería 21 bloques" → la library real de
+  main_island.gd tiene **31 modelos** (ids 0-30).
+- **Pendiente real nuevo:** `has_gravity` (arena/grava sueltas) definido en BlockType
+  pero **sin ningún código que lo consuma**.
+- Reserva 949 consumida. Detalle: `Logs/949-QA-M08-Mundo-Voxel_2026-09-17_05-38.md`.
+  (Nota: 946-948 fueron tomados por otros agentes mientras tanto — el bucle
+  anti-colisión de §6.1.a saltó correctamente al 949.)
+
+## 2026-09-17 05:55→08:30 — agnes-3-flash (Sapiens AI) / Kilo Code — M46 RECLAMADO → LIBERADO (iter. V1-QA, Log 954)
+
+- **M46 Arte-2D: 🟢 → 🔵 → 🟡 Liberado (V1-QA agnes).** QA acotado V1 (confirmar estado real +
+  dejar dueños; NO genero arte ni apruebo estético — V5 = M45/Hy4/usuario M154).
+- **Verificado V1:** `inventario_2d.json` define **48 assets** pero **0 en disco** (0 PNG/SVG/WebP en
+  `assets/`); validador `validar_arte_2d.gd` **headless 0 fallos exit 0**; `ART_STYLE_2D.md` completo.
+  → el trabajo 2D está **bloqueado por M45 (plantillas 3D) + M108 (pipeline) + artes**, no es bug de M46.
+- **Flag doc↔archivo:** `05-Checklist.md` M46 está **0/110 `[x]`** pero iter.1/2 declaran **103–104/110**
+  cerrados por diseño+tooling (cierre no reflejado). **No re-marqué los ~103** (es del dueño M46);
+  documenté en `05-Checklist.md` §"QA visual V1 — agnes-3-flash" con tabla de dueños.
+- Colisión de reserva: había reservado 953 pero **hy3 reservó 953 (M66)** → renumerizo al **954**
+  (anti-colisión §6.1.d). Reserva 954 consumida (log escrito, reserva borrada). M46 queda 🟡 para
+  reconciliación del dueño M46 / M45/M108. QA cruzado §21.8 pendiente (verificador ≠ agnes-3-flash).
+
+## 2026-09-17 08:32 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M11 QA CRUZADO (Log 950) — 🔴 sobre-cierre profundo
+
+- **M11 Personaje del Jugador: ✅ → 🟡 Con dudas — 49/122 (73 flips a [?]).** El
+  sobre-cierre más profundo del ciclo (M09: 7 flips; M10: 16; M08: 0). Los dos QAs
+  previos (hy3 Log 835 + Hy3 Log 848 — **mismo modelo**) verificaron "player.gd +
+  player_equipment.gd **presentes**": puro chequeo de presencia.
+- **Diagnóstico:** las secciones B–F del checklist afirman sistemas **implementados**
+  (FSM de 10 estados, stamina 100/12s/8s, InteractionService raycast 4 m, nado/buceo,
+  esporas de luz, 10 clips de animación) y **ninguno existe** — player.gd (1160 l.)
+  tiene **0 menciones** de stamina, StateMachine, IInteractable, luz, nado, sprint,
+  selección de personaje, AnimationPlayer/audio de pasos y guardado de posición.
+- **Lo único live:** movimiento VoxelBoxMover + salto (jump 8 / gravity 20) + terreno↔M155
+  (conectado en boot) + edición de bloques + hotbar M13 + modelo voxel visual.
+- **Constantes contradichas por código/escena:** hitbox 0.6×1.8→capsule 0.4r×1.5;
+  caminar 4.2→5.0 m/s; gravedad 12→20; salto 1.2 m→1.6 m; nado/buceo/stamina inexistentes.
+- **No es diseño honesto (distinto de M08):** M08 mantiene ✅ porque sus ítems usan
+  verbo "Definir/Documentar"; M11 dice "Estado RUN hace X" — runtime afirmado sin
+  código. Secciones I y J de M11 SÍ se mantienen [x] (verbos "Definir" + integración
+  M155 live).
+- 6 de 7 scripts previstos y los 3 .tres no existen (data/player/ ausente); contratos
+  §3 (PlayerState, player_fatigue, light_collected, terrain_changed) nunca publicados.
+- Reserva 950 consumida. Detalle: `Logs/950-QA-M11-Personaje_2026-09-17_08-32.md`.

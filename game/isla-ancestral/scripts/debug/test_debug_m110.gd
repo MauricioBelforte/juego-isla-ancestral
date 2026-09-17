@@ -16,10 +16,25 @@ func _init() -> void:
 
 func _run() -> void:
 	print("=== [M110] Test de Debug Menu ===")
+	# iter. atria-dawn (log 928): los comandos ahora ejecutan de verdad (antes
+	# eran stubs de texto ok:true). RF1 teleport necesita el Player de escena,
+	# que se instancia al cargar main_island.tscn → esperar antes de testear.
+	await _esperar_escena_lista()
 	_test_config()
 	_test_comandos()
 	_test_metricas()
 	_summary()
+
+func _esperar_escena_lista() -> void:
+	var frames: int = 0
+	while frames < 600:
+		var escena: Node = current_scene
+		if escena != null and not get_nodes_in_group("player").is_empty():
+			print("[M110] escena + Player listos tras %d frames" % frames)
+			return
+		await process_frame
+		frames += 1
+	print("[M110] WARN: timeout esperando la escena (frames=%d)" % frames)
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1
@@ -38,8 +53,10 @@ func _test_config() -> void:
 		quit(1)
 		return
 	_check("DebugMenu autoload presente", true)
-	_check("3 pestañas", dm.pestanas().size() == 3, "size=%d" % dm.pestanas().size())
-	_check("15 comandos", dm.config.get("comandos", {}).size() == 15, "size=%d" % dm.config.get("comandos", {}).size())
+	# iter. atria-dawn (log 928): pestañas 3 → 5 (añadidas "entidades" y
+	# "visualizacion"), comandos 15 → 24 (RF4/11/12/13/15/17/19 + set_vida).
+	_check("5 pestañas", dm.pestanas().size() == 5, "size=%d" % dm.pestanas().size())
+	_check("24 comandos", dm.config.get("comandos", {}).size() == 24, "size=%d" % dm.config.get("comandos", {}).size())
 
 func _test_comandos() -> void:
 	print("--- Comandos: teleport/spawn/time/flags/exportar ---")
@@ -67,7 +84,7 @@ func _test_metricas() -> void:
 	_check("memoria definida", m.has("memoria_mb"))
 	_check("nodos definidos", m.has("nodos"))
 	_check("marcadores explorados definido", m.has("marcadores_explorados"))
-	_check("pestanas_ids = 3", dm.pestanas_ids().size() == 3, "size=%d" % dm.pestanas_ids().size())
+	_check("pestanas_ids = 5", dm.pestanas_ids().size() == 5, "size=%d" % dm.pestanas_ids().size())
 	var jugador = dm.comandos_por_pestana("jugador")
 	_check("pestana jugador tiene 5 comandos", jugador.size() == 5, "size=%d" % jugador.size())
 	_check("pestana inexistente vacía", dm.comandos_por_pestana("no_existe").is_empty())
