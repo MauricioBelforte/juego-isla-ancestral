@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** GLM-5.3 (última actualización: iter 4 — 2026-09-10)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 15: Recursos
 
@@ -399,9 +399,96 @@ Formato de línea de ejemplo: `[DOM-REC] recolectado def=madera_roble cant=4 her
 - **Persistencia de ResourceSpawner** (regiones + presupuesto).
 
 ### Intento fallido
-- Primera versión del test usaba `ResourceNode.new()` sin añadir al árbol. `global_position` en nodo suelto emite `ERR_FAIL_COND_V_MSG` y devuelve `(0,0,0)`, así que la save tenía pos=[0,0,0] y el `consumir_estado_guardado_para` no encontraba match. **Fix:** helper `_crear_nodo_registrado()` que hace `root.add_child(nodo)` antes de setear posición. Candidato a 07-GUIA-GODOT §9.
+- Primera versión del test usaba `ResourceNode.new()` sin añadir al árbol. `global_position` en nodo suelto emite `ERR_FAIL_COND_V_MSG` y devuelve `(0,0,0)`, así que la save tenía pos=[0,0,0] y el `consumir_estado_guardado_para` no encontraba match. **Fix:** helper `_crear_nodo_registrado()` que hace `root.add_child(nodo)` antes de setear posición. Candidato a GUIA-GODOT/09-godot4-migracion.md §9.
 
 ### Recomendaciones para el próximo agente
 - Resolver el cableado M13→M15 (Hy3) o añadir un RayCast3D en M13 que atraviese tanto el buffer voxel como las colisiones Node3D.
 - Cuando M45 provea los meshes, reemplazar los placeholders en `ResourceNode._crear_mesh`.
 - Considerar pooling de `ResourceNode` cuando el presupuesto se acerque a MAX_NODOS_ACTIVOS.
+
+## Notas del Agente (iteración 4 — 2026-09-10)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-10 23:35
+**Estado:** Parcial (iter 4 cerrada). Módulo liberado a 🟡.
+
+### Lo que hice
+- **Persistencia del ResourceSpawner (cerré el [?] de iter 3):**
+  - `planificar_region()` ahora registra la estructura completa (`_regiones[region_id] = {centro, nodos[{def_id, x, z}]}`) y es **idempotente** (región ya planificada no se duplica).
+  - `get_save_data()` versionado (`{"version": 1, "regiones": ...}`) serializa **solo nodos no-intactos** (AGOTADO/DANIADO con estado, golpes, respawn_dia) — los intactos se regeneran por la planificación determinista (guardado chico, ítems O.3/O.4).
+  - `restore_save_data()` re-instancia los nodos guardados con su estado aplicado y marca la región como restaurada (no duplica al poblar).
+  - El spawner se registra como **proveedor M59 propio** (sección "resource_spawner") vía `ResourceManager._registrar_proveedor_guardado_spawner()` — verificado contra el contrato duck-typing real de `save_snapshot.register_provider` (que rechaza secciones duplicadas con warning, no crash).
+- **Test runtime del [?] respawn vía señal real (T-153):** `test_recursos_spawner_runtime.gd` test 3 crea un nodo AGOTADO vencido y usa `GameTime.avanzar_hasta(0,10)` para cruzar la medianoche REAL de M29 → la señal `dia_cambio` del motor dispara `_evaluar_respawn_global()` → el nodo vuelve a INTACTO. Sin mocks: es la cadena real de señales.
+- **Nuevo test completo** (`test_recursos_spawner_runtime.gd`): round-trip del spawner + idempotencia + respawn runtime — 0 fallos.
+- **Saneamiento §28:** removí el BOM UTF-8 preexistente de `resource_manager.gd` (sin cambio semántico, re-testeado 0 fallos).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Cableado M13→M15** (heredado de iter 3): sigue requiriendo cambio en M13 (Hy3 es el dueño del `tool_controller.gd`). No lo toqué (regla §21.4.2).
+- **`estacion_cambio` handler** ([?] nuevo que identifico honestamente): el respawn estacional funciona en `evaluar_respawn` pero el manager solo escucha `dia_cambio`. Un respawn MASIVO al cambiar de estación (sin esperar al día) necesitaría conectarse también a `estacion_cambio` — lo dejo como [?] P.2 porque no estaba en el alcance de los [?] que tomé y prefiero no ampliar el alcance sin verificación completa.
+- **Meshes del arte** (M45/M47) y **área 3×3** (M13): heredados, sin cambios.
+
+### Intentos fallidos / decisiones
+- `_buscar_nodo_por_def_y_pos()` busca por def_id + XY ±0.5 m en vez de node_id: los node_id no son estables entre sesiones (dependen del orden de planificación), así que el save del spawner ancla por posición. Decisión documentada en el código.
+- El `restore_save_data` re-instancia con `instanciar_nodo()`, lo que pasa por `consumir_estado_guardado_para` del manager — al restaurar el SPAWNER los nodos del MANAGER ya se consumieron antes, así que no hay doble aplicación. Verificado en el round-trip del test (estado AGOTADO queda exacto).
+
+### Recomendaciones para el próximo agente
+- **Prioridad de integración:** el cableado M13→M15 es EL bloqueador para que el jugador realmente golpee recursos (el helper `recibir_golpe_en_nodo` está testeado y esperando). Coordinar con Hy3 (dueño de M13).
+- El handler de `estacion_cambio` es un [?] de ~10 líneas cuando se tome (conectar señal + llamar `_evaluar_respawn_global` con la estación del argumento).
+- El spawner NO persiste `_next_id` ni los intactos — es intencional (regeneración determinista); si se añade aleatoriedad real al spawn (PRNG de partida, ítem L.4), habrá que persistir el seed también.
+
+### Verificación (QA numérico)
+- `test_recursos_spawner_runtime.gd`: **0 fallos** (17 checks)
+- Regresiones: `test_recursos` 0 · `test_recurso_nodo` 0 · `test_recursos_persistencia` 0 · `test_mineria` (M35) 0 · `test_crafting` (M16) 0
+- Godot 4.7.2.stable headless. Sin errores de parseo. Sin BOM, UTF-8 OK.
+
+### Actualización 2026-09-10 (post-Log 813): cableado M13→M15 RESUELTO por GLM-5.3 en M13 iter 4 (Log 815)
+
+El `[?]` bloqueador más importante de la iter 4 ya no existe: **GLM-5.3 (Kilo Code) cerró el cableado desde el lado de M13** (módulo liberado, así que pudo tocarlo):
+- `ToolController.try_extract()` ahora intenta primero `_intentar_golpe_recurso_m15()`: busca un ResourceNode activo ≤1.5 m del punto de mira y deriva el golpe a `ResourceManager.recibir_golpe_en_nodo(nodo, tool.nombre_id())`.
+- Regla cozy preservada: si la herramienta es equivocada para el recurso, el golpe NO cae al voxel de detrás (feedback de fallo y listo).
+- Nuevo `ToolData.nombre_id()` (`pico`/`hacha`/...) hace de puente de contratos: M15 valida contra `ResourceDefinition.herramienta_requerida` (`&"pico"`, `&"hacha"` — coinciden).
+- Validado por `test_herramientas_iter4.gd` (0 fallos): golpe pico agota nodo → drops al inventario M14; hacha rechazada sin romper nada.
+- **El jugador ya puede talar el árbol de `madera_roble` con el hacha y recibir drops de verdad.** Queda pendiente solo la verificación visual in-game por el usuario (V1).
+
+## Notas del Agente — Iteración 5 (estacion_cambio)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-11 17:20 → 18:05
+**Estado:** Completado
+**Log:** 821
+
+### Lo que hice
+
+- Cerré el último `[?]` lógico barato de la familia M13/M15: la suscripción a `estacion_cambio` ([?] P.2/L.1 heredado de iter 3-4).
+- `resource_manager.gd`:
+  - `_conectar_estacion_cambio()`: conexión idempotente a `GameTime.estacion_cambio` (bandera `_gt_estacion_conectada`, patrón del `dia_cambio` existente). Se llama desde `_registrar_proveedor_guardado()` — mismo punto de arranque que el handler diario.
+  - `_on_estacion_cambio_m29(_estacion)`: dispara `_evaluar_respawn_global()` (respawn masivo de estación — la estacionalidad ya filtra dentro de `evaluar_respawn()`) + aviso suave `[M15] estación cambió — recursos estacionales re-evaluados (respawns disponibles: N)` (ítem L.2, cozy: print no intrusivo, la UI de aviso es decisión de M53).
+  - `_contar_respawns_disponibles()`: cuenta nodos AGOTADOS con ciclo vencido y estación compatible — usado solo para el aviso.
+- `test_estacion_iter5.gd` (NUEVO, 12 checks): conexión real verificada con `estacion_cambio.get_connections()`, idempotencia (re-llamar no duplica), nodo estacional de PRIMAVERA respawnea SOLO con estación correcta (señal REAL: `_mes` coherente + `emit_signal`, patrón del test oficial de M16), nodo "todas las estaciones" respawnea en cualquier cambio.
+- Ítems L.1 y L.2 del checklist base marcados [x] con evidencia.
+
+### Lección de la iter (candidata a GUIA-GODOT)
+
+- **Al testear handlers de señales estacionales: la señal emitida debe ser COHERENTE con el estado del reloj.** Mi primer test emitía `estacion_cambio(1)` sin tocar `_mes`, y fallaba porque `_evaluar_respawn_global()` lee la estación con `gt.get_estacion()` (derivada de `_mes`). En runtime real señal y reloj siempre coinciden (el propio reloj los emite); un test que los desincroniza valida un estado imposible. Patrón correcto: setear `_mes` Y emitir la señal (igual que `test_crafting.gd` L229).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- Ítems visuales del aviso L.2 (toast/banner en pantalla): soy solo-texto (§16 guía 10); la UI del aviso es de M53. Implementé el print con conteo como aviso suave funcional.
+- Verificación in-game del flujo completo (cambio real de mes jugando): QA numérico headless solamente.
+
+### Regresiones (todas 0 fallos)
+
+- `test_estacion_iter5.gd` (nuevo): 0 fallos (12 checks)
+- `test_recursos_spawner_runtime.gd` (iter 4): 0 fallos
+- `test_recursos.gd` (iter 1) · `test_recurso_nodo.gd` (iter 2) · `test_recursos_persistencia.gd` (iter 3): 0 fallos
+- `test_crafting.gd` (M16, también consume `estacion_cambio`): 0 fallos
+- `test_mineria.gd` (M35, depende de ResourceManager): 0 fallos
+- Godot 4.7.2.stable headless. Sin errores de parseo. UTF-8 sin BOM verificado (§28).
+
+### Recomendaciones para el próximo agente
+
+- M15 quedó con solo 2 [?] externos: meshes (M45/M47) y área 3×3 (M13). Todo lo lógico del módulo está cerrado y testeado.
+- Próximo paso natural de mi línea: **M38 secciones J-N** (iter 4 quedó PARCIAL — ver CONTEXTO-PROXIMO-AGENTE/01 y sección J del checklist de M38).
+- Si QA cruzado (§21.8): verificar la conexión con `GameTime.estacion_cambio.get_connections()` en runtime — está testeada pero nunca está de más.

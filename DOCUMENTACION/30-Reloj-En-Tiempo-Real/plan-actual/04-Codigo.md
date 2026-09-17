@@ -1,5 +1,5 @@
-**Modelo:** glm-5.3 (último modificador; re-auditoría post-iter. 3, Log 429)
-**Plataforma:** Cline
+**Modelo:** GLM-5.3 (último modificador; iter. 4 fix C56, Log 845)
+**Plataforma:** Kilo Code
 
 # 04-Codigo.md — Módulo 30: Reloj en Tiempo Real
 
@@ -12,7 +12,7 @@
 | `scripts/clock/reloj_hud.gd` | HUD Reloj — capa de DISPLAY + POLÍTICA. Consumidor de GameClock (M29). Traduce estado interno a strings para Label. Formato 12h/24h, sesión del día (MAÑANA/DÍA/TARDE/NOCHE), helpers de estilo visual para UI | ✅ Implementado |
 | `scripts/clock/w_reloj_config.gd` | `WRelojConfig` (Resource): usar_formato_12h, margen_borde, ancho_min, mostrar_chip_estacion, color_fondo. Defaults = comportamiento previo | ✅ Implementado (iter. 2) |
 | `scripts/clock/caso_reloj.gd` | Escenario del test: fondo neutro + WReloj en CanvasLayer layer 0 (bajo el TooltipService, que es layer 1) | ✅ Implementado (iter. 2) |
-| `scripts/clock/caso_reloj_tests.gd` | Suite headless del bloque E: 10 casos de límites + widget en escena (E93) + hover D70 + config F100/F107 + formato F101 + scan anti-reloj-SO (C56/E89/E90). **29 checks, 0 fallos.** Re-auditoría Log 429: whitelist ampliada (crash/debug/stress, legal/updates — 619 archivos) | ✅ Implementado (iter. 2 + re-auditoría) |
+| `scripts/clock/caso_reloj_tests.gd` | Suite headless del bloque E: 10 casos de límites + widget en escena (E93) + hover D70 + config F100/F107 + formato F101 + scan anti-reloj-SO (C56/E89/E90). **29 checks, 0 fallos.** Re-auditoría Log 429: whitelist ampliada (crash/debug/stress, legal/updates — 619 archivos). Iter. 4 (Log 845): whitelist + `res://scripts/ci/` (cicd_manager M117/M118, retención de artefactos = metadata de archivos, jamás gameplay) — 685 archivos, 0 violaciones; bug resuelto en 11-BUGS.md | ✅ Implementado (iter. 2 + re-auditoría + iter. 4) |
 | `scripts/clock/preview_reloj.gd` | Preview visual (V2). Iter. 2: 3.ª captura con tooltip del hover forzado (`demo_cursor_dentro`) | ✅ Actualizado (iter. 2) |
 
 ### Escenas y datos
@@ -110,7 +110,7 @@
 - Bloque E completo: `caso_reloj_tests.gd` (29 checks, 0 fallos; incluye scan anti-reloj-SO de 240 archivos) + escenario `caso_reloj.tscn`.
 - Backup §5 del w_reloj.gd previo (`Obsoletos/2026-08-31_23-05-00_w_reloj.gd`).
 - Contrato §2 corregido a la API real de M29 (señales de GameClock + EventBus.calendar).
-- ⚠️ Hallazgo cross-module reportado (dueño M53/M88): la fuente del theme global está ausente (`FreeType: Error loading font: ''`) y TODOS los Labels del juego renderizan sin texto (comparar captura iter. 1 del 26/08 vs iter. 2). El tooltip del hover se ve porque TooltipService no usa el theme. Documentado también en 07-GUIA-GODOT §8.
+- ⚠️ Hallazgo cross-module reportado (dueño M53/M88): la fuente del theme global está ausente (`FreeType: Error loading font: ''`) y TODOS los Labels del juego renderizan sin texto (comparar captura iter. 1 del 26/08 vs iter. 2). El tooltip del hover se ve porque TooltipService no usa el theme. Documentado también en GUIA-GODOT/06-registro-errores.md §8.
 
 ### Recomendaciones para el próximo agente
 - Fix URGENTE en M53/M88: fuente del theme global (fallback condicional o instalar Nunito/Fredoka One).
@@ -131,7 +131,7 @@
 - Catálogos .po ampliados: CLOCK.ESTACIONES.0-3 en es.po (Primavera/Verano/Otoño/Invierno) y en.po (Spring/Summer/Autumn/Winter).
 - Test test_reloj_localizacion.gd: es/en/retorno a es → **0 fallos**.
 
-### Hallazgo documentado (para 07-GUIA-GODOT en próxima pasada de guía)
+### Hallazgo documentado (para GUIA-GODOT/INDICE.md en próxima pasada de guía)
 - Nodos instanciados con `new()` SIN agregar al árbol: `get_node_or_null("/root/X")` devuelve null (no hay ruta absoluta fuera del árbol). El test del widget tenía que hacer `root.add_child(widget)` antes de llamar métodos que consultan autoloads. (Pitfall conocido §9.51 — confirmado en el caso widget+Localization.)
 
 ### Lo que NO pude hacer (honestidad obligatoria)
@@ -156,7 +156,7 @@
 - Re-verificación con el binario real: el scan C56 había vuelto a fallar — módulos nuevos (proyecto crecido de 407 a 619 archivos) reintrodujeron lecturas de reloj-SO en gameplay (M36 fauna ×1 — corregida en la pasada anterior de esta re-auditoría —, M14 inventario ×3, M84 legal ×1, M119 updates ×1).
 - Clasifiqué cada uso con el criterio de la regla de oro: GAMEPLAY (fauna, inventario ×3) → corregido a `Time.get_ticks_msec()` verificando que el valor no se persiste ni alimenta lógica; DIAGNÓSTICO/INFRA/CONTENIDO-REAL (legal: año de copyright RF6; updates: fecha de versión instalada) → whitelist documentada en `WHITELIST_RELOJ_SO` con módulo, motivo y log.
 - Corregí las referencias de código §9.63→§9.64 (apuntaban a una sección ajena: la §9.63 real es `full_load_distance`) y las menciones "Log 406"→"Log 429" (colisión de numeración, §6.1.b).
-- Creé §9.64 en 07-GUIA-GODOT ("Gameplay NUNCA lee el reloj del SO") con el patrón correcto (ticks + `has()` explícito), el criterio de whitelist y la regla de vigilancia continua + fila en el histórico + header re-firmado.
+- Creé §9.64 en GUIA-GODOT/INDICE.md ("Gameplay NUNCA lee el reloj del SO") con el patrón correcto (ticks + `has()` explícito), el criterio de whitelist y la regla de vigilancia continua + fila en el histórico + header re-firmado.
 - Re-ejecuté las suites con el binario real: caso_reloj_tests 29/0 (exit 0), test_fauna 0, test_coleccionables 0, test_reloj_localizacion 0, test_inventario 0 (regresión del fix M14).
 - Actualicé los 4 registros de liberación (CHECKLIST-GLOBAL fila 30, ESTADO-PARALELO, guía 08 — M30 sin reserva activa — y Log 429) y las notas aditivas de atribución en Logs 318/320.
 
@@ -167,3 +167,30 @@
 - La regla de oro exige VIGILANCIA CONTINUA: cada módulo nuevo puede reintroducir lecturas de reloj-SO. Si C56 falla: clasificar (gameplay → ticks; infra real → whitelist documentada con módulo/motivo/log). Nunca silenciar el scan sin clasificar.
 - El patrón a copiar entre módulos es el de §9.64 (ticks + `has()` explícito), NO el de unix-time.
 - Ojo: el default 0.0 de `get()` con ticks de motor bloquea el primer uso de cada entidad — usar `has()` antes de comparar.
+
+---
+
+## Notas del Agente — Iteración 4 (fix C56 whitelist ci/, Log 845)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-12 00:20
+**Estado:** Cerrada — check C56 verde de nuevo (29 checks, 0 fallos, 685 archivos). Módulo sigue 🟡 98/104 (contador sin cambios; el fix restaura la señal de regresión del proyecto).
+
+### Lo que hice
+- Ejecuté la vigilancia continua que la re-auditoría post-iter. 3 dejó como recomendación: el check C56 volvió a fallar (caso_reloj 28/29) con UNA única violación: `res://scripts/ci/cicd_manager.gd → Time.get_unix_time_from_system`.
+- El propio bug había sido registrado por esta misma línea (GLM-5.3/Kilo Code, Log 824, sesión del 2026-09-11) en `11-BUGS.md` con verificación A/B (preexistente) — esta iteración lo resolvió como dueño de M30 por historial.
+- Clasifiqué el uso con el criterio de la regla de oro: `limpiar_artefactos()` (retención J de M117/M118) compara `FileAccess.get_modified_time` contra la hora del SO para borrar ZIPs viejos de build → **metadata del sistema de archivos, infra, jamás gameplay** → whitelist documentada con módulo/motivo/log, mismo patrón de legal/updates del Log 429.
+- Fix: `res://scripts/ci/` agregada a `WHITELIST_RELOJ_SO` con comentario de criterio en `caso_reloj_tests.gd`. CERO cambios en `cicd_manager.gd` (su uso es legítimo de infra).
+- Nota de verificación: la auto-exclusión del propio test (línea de `if ruta == "res://scripts/clock/caso_reloj_tests.gd"`) y el print de positivos `[VIOLA]` YA existían del código original de iter. 2 — el fix real era solo la whitelist (los 3 pasos del fix sugerido original resultaron 1 solo).
+- Saneamiento §28: el archivo `caso_reloj_tests.gd` tenía BOM UTF-8 preexistente (heredado, NO introducido por esta edición — detectado en la verificación de encoding post-fix) → removido + re-testeado 29/29 tras el saneamiento.
+- Re-ejecuté las suites con el binario real: **caso_reloj_tests 29/0** · test_calendario 13/0 · test_consumidores_tiempo 12/0 · test_semilla_iter1 25/0 (M29 H120) · test_reloj_localizacion 0 · test_fauna 0 · test_inventario 0 — 7 suites, 0 fallos.
+- Bug resuelto y firmado en `11-BUGS.md` (estado → ✅ Resuelto con causa/fix/verificación).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Nada pendiente de esta iteración: C56 verde. Los pendientes históricos del módulo siguen con dueño externo: D67 ícono (M45/M46), D74 badge (M64), C58/G113 consumidores (M74/M28/M36), F105 versionado (M59), F106 claves .po completas (M57).
+
+### Recomendaciones para el próximo agente
+- El scan crece con el proyecto (240 → 407 → 619 → 685 archivos en 3 re-auditorías): la vigilancia continua sigue siendo obligatoria en CADA corrida de regresión — un fallo de C56 no es "ruido conocido", es una señal a clasificar.
+- Patrón de clasificación (probado 3 veces por esta línea): (1) correr el test y leer el `[VIOLA]` exacto; (2) abrir el archivo y clasificar el uso: ¿alimenta lógica de juego/persistencia? → gameplay, corregir a `Time.get_ticks_msec()` + `has()`; ¿es diagnóstico/metadata/infra? → whitelist con comentario de módulo+motivo+log; (3) re-verificar 29/29.
+- Si M111/M112 absorben este scan algún día: mantener la auto-exclusión del propio archivo de test y la whitelist comentada (son parte del contrato del check).

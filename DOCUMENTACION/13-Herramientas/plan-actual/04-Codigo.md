@@ -1,4 +1,4 @@
-**Modelo:** Hy3
+**Modelo:** GLM-5.3 (última actualización: iter 4 — 2026-09-10)
 **Plataforma:** Kilo
 
 # 04-Codigo.md — Módulo 13: Herramientas
@@ -85,7 +85,7 @@ señales `bloque_extraido/bloque_colocado/golpe_conectado/golpe_fallido/herramie
 
 ## 7. Notas del Agente (cierre Fase 3)
 
-**Modelo:** Hy3
+**Modelo:** GLM-5.3 (última actualización: iter 4 — 2026-09-10)
 **Plataforma:** Kilo
 **Fecha:** 2026-08-28 22:55:00
 **Estado:** Fase 3 completada (guía 08); núcleo jugable + feedback operativo
@@ -142,3 +142,37 @@ señales `bloque_extraido/bloque_colocado/golpe_conectado/golpe_fallido/herramie
 - Bootstrap/escena principal: llamar ProgressionManager.conectar_tool_controller($ToolController) en _ready de la escena (1 línea, cierra el puente en runtime real).
 - M71: las condiciones nivel_modulo(picota, 2) del §3.6 usan stat "nivel_pico" >= 2 — el formato del stat_id es "nivel_" + tool_id legible.
 - M18 (casas): replicar el patrón exacto con nivel_casa_cambio.
+
+## Notas del Agente (iteración 4 — 2026-09-10)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-11 00:55
+**Estado:** Parcial (iter 4 cerrada). Módulo liberado a 🟡.
+
+### Lo que hice
+- **T-019 Persistencia del hotbar en M59 (ítem D.12):** nuevo ToolsSaveProvider (scripts/tools/tools_save_provider.gd), sección M59 "herramientas_m13". Serializa el hotbar completo del player vía ToolData.serializar() (tipo/nivel/durabilidad/mejoras) + índice activo, formato versionado. player.gd lo registra con accessors duck-typing (_restaurar_hotbar, _get/_set_hotbar_index) — cero cambios al flujo existente (§15).
+- **Cableado M13→M15 (cerró el [?] bloqueador de M15 iter 4):** ToolController.try_extract() consulta primero nodos ResourceNode de M15 a ≤1.5 m del punto de mira (_intentar_golpe_recurso_m15()) y deriva el golpe a ResourceManager.recibir_golpe_en_nodo(). Nuevo ToolData.nombre_id() + ToolData.IDS puentean el contrato con ResourceDefinition.herramienta_requerida ("pico"/"hacha"/...).
+- **Regla cozy:** herramienta equivocada contra recurso → feedback sin romper el voxel de detrás. Nodo AGOTADO excluido del lookup.
+- **Tests:** 	est_herramientas_iter4.gd (nuevo, 24 checks, 0 fallos) + 6 regresiones 0 fallos (Fase 3, M15 iter 3/4, M35, M71 niveles, M59 autosave).
+- Saneamiento §28: BOM preexistente removido de 	ool_controller.gd.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Verificación in-game de la puntería contra recursos visibles (V1 — soy solo-texto; el test headless valida la cadena lógica completa, pero la mano del usuario debe confirmar el feel con E).
+- El lookup del nodo usa el hit del voxel como punto de mira: si el recurso flota sin voxel detrás, usa la posición del controller como referencia. Refinamiento fino pendiente [?] J.2.
+- Pendientes con dueños externos intactos: regadera/caña/lupa/tijeras (M33/M35/M26/M50), mejoras en mesa (M16), reparación herrero (M19), cámara M12, animación M45, logros M71 (los de herramientas), prompt F (M53).
+
+### Intentos fallidos / decisiones
+- Primer test falló en "drops entregados": di 1 golpe contra piedra_caliza que requiere 2 (golpes_requeridos). **Lección (GUIA-GODOT):** al testear agotamiento de recursos M15, usar 
+odo.golpes_restantes como límite del bucle, no un golpe fijo.
+- El provider es RefCounted con Callables al player (no Node): el SaveManager M59 acepta cualquier objeto con el contrato duck-typing, y así evito un nodo huérfano por player.
+
+### Recomendaciones para el próximo agente
+- **El jugador ya puede golpear recursos M15 con E** — pero falta el sello visual del usuario. Sugerirle probar: equipar hacha (tecla 2), mirar un árbol de madera_roble, golpear con E → drops al inventario.
+- Si M45/M47 proveen meshes reales, el radio de 1.5 m del lookup puede necesitar ajuste por tamaño de mesh.
+- El handler de estacion_cambio en M15 sigue pendiente (M15 [?] P.2) — es el último [?] lógico barato de la familia M13/M15.
+
+### Verificación (QA numérico)
+- 	est_herramientas_iter4.gd: **0 fallos** (24 checks)
+- Regresiones: test_herramientas 0 · test_recursos_spawner_runtime 0 · test_recursos_persistencia 0 · test_mineria 0 · test_nivel_herramienta 0 · test_autosave_m59 0
+- Godot 4.7.2.stable headless. UTF-8 sin BOM en todos los archivos tocados.

@@ -84,3 +84,34 @@ FormationRecipe:
 ### Recomendaciones del agente anterior
 - M10 (Generación): implementar consumiendo las recetas de este componente.
 - Mantener el volcán PACÍFICO (sin destrucción) — coherencia con la filosofía del juego.
+
+---
+
+## 6. QA Cruzado — Notas del Agente (atria-dawn)
+
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-16 22:50:00
+**Estado:** QA realizado — módulo revierte `✅` → `🟡` (7 ítems a `[?]`)
+
+### Lo que verifiqué
+- **Alcance:** M09 es un módulo de **diseño de contenido geográfico** (01-Requerimientos criterios 1–4 usan verbos de diseño). 03-Diseno.md es genuino y está completo: 16 formaciones con parámetros, tabla de 13 biomas con altura/material/decoración/islas, 5 reglas de transición, erosión, legibilidad y anti-softlock. Las secciones A–E y G–H del checklist se respaldan en ese documento.
+- **Tests:** `test_terrenos.gd` (M156) ejecuta headless con **0 fallos**. `test_terrain.gd` no es ejecutable headless (extiende Node3D y carga la escena completa).
+- **Boot headless del proyecto:** arranca completo; el único ERROR es "9 resources still in use at exit" (teardown, no de carga).
+
+### Hallazgos
+1. **`§2` de ESTE archivo miente sobre el filesystem.** Lista `data/biomes/biome_resonance.tres`, `data/formations/formation_gran_grieta.tres` y `data/poi/poi_faro.tres` — **ninguno existe**. No hay `data/biomes/`, `data/formations/` ni `data/poi/`; no hay ningún `.tres`/`.json` de bioma, formación o POI; la clase `FormationRecipe` no existe. Búsqueda en todo `scripts/` de `data/biomes|data/formations|formation_|biome_resonance|poi_faro` → **0 coincidencias**. Esto es lo que obligó a M27 a crear su propio mapeo (`island_definition.gd:21-23`: "M09 documenta 13 biomas por NOMBRE pero todavía no expone ids numéricos").
+2. **Sección F del checklist = claims de integración falsas.** "Consumido por M10/M50/M61/M71/M74/M66" no puede cumplirse: no hay artifact consumible. La mezcla bosque/pradera real la hace M10 con su propio ruido (`island_generator.gd:205`); el catálogo de biomas que carga el juego es `IslandDefinition.BIOMAS` de M27.
+3. **H.8 "8 POI" sin respaldo** — 03-Diseno §5 lista 7.
+4. **A17 stale (BUG-030)** — el checklist afirma "solo diseño de contenido, sin scripts propios", pero `terreno_horizonte.gd` (360 líneas, glm-5.3-flash) es un script de M09. La nota de MiMo V2.5 sobre `ISLAND_RADIUS=50` hardcodeado también es historial superado (ver §6 abajo).
+5. **`class_name TerrainData` duplicado** (transversal M09/M156): `scripts/terrain/terrain_data.gd` (legacy, enum-based) y `scripts/terrenos/terrain_data.gd` (M156, int-based) declaran la misma clase. La carpeta `terrain/` es legacy pero `terrain_data.gd` nunca fue renombrado. El boot no emitió error visible, pero la resolución es orden-dependiente y `terrain_data_provider.gd` hace `... as TerrainData` sobre resources de `res://resources/terrain/` → cast ambiguo.
+
+### Lo que NO se sostiene de la nota de MiMo (historial superado)
+- La nota de MiMo V2.5 (2026-08-25) describe `ISLAND_RADIUS=50` hardcodeado y 5 biomas por umbral. **El código actual ya no es eso**: `island_generator.gd` tiene `island_radius: int = 2560`, `BlockCatalog` y referencia al Log 785. Además, la regla anti-clon de AGENTS.md **se cumple y está verificada automáticamente**: `world_generator.gd:23` crea la instancia única (`IslandGenerator.new(null, world_seed)`, guardada en static var), `TerrainLocator` (Hy3) posiciona todo contra el VoxelTerrain real, y `validador_isla_raiz.gd:87-88` comprueba que `villager.gd`/`villager_manager.gd` no instancian su propio generador. Queda como historial, no como estado actual.
+
+### Recomendaciones para el próximo agente
+1. **Decidir el destino de M09:** (a) crear de verdad los `.tres` de recetas + clase `FormationRecipe` y cablear consumo en M10/M50/M61/M71/M74/M66, o (b) aceptar formalmente que es diseño puro y reescribir los items de F como "contrato propuesto para" (no "consumido por"), con una DoD de diseño explícita.
+2. Corregir `§2` de este archivo para que no liste paths inexistentes.
+3. Renombrar `scripts/terrain/terrain_data.gd` → `LegacyTerrainData` (o borrar la carpeta `terrain/` si no se usa) para eliminar el `class_name` duplicado.
+4. Aclarar si el mapa de Aurora tiene 7 u 8 POI.
+5. Convertir `test_terrain.gd` (M156) en headless o moverlo a SceneTree para que entre en la suite.

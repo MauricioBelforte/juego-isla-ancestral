@@ -64,3 +64,40 @@ Módulo **totalmente delegable para implementación** por otro agente: es un ser
 - Usar la API pública del 03-Diseno sin modificarla (los consumidores están diseñados contra ella).
 - El reloj NO debe correr offline ni retroceder; solo avanza en sesión con pausas explícitas.
 - Incluir tests: cambio de día/semana/mes/estación/año y eventos (día 336 → año 2).
+## Notas del Agente — Iteración 1 (auditoría 47 pendientes + semilla H120)
+
+**Modelo:** GLM-5.3
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-11 21:20 → 22:30
+**Estado:** Completado (194/195, 1 [?] dueño M53)
+**Log:** 824
+
+### Lo que hice
+
+- **Auditoría de los 47 [ ]** que Hy3 detectó como "gap de marcado" en su QA del 2026-09-01: cada ítem verificado contra el código real (línea/test) y marcado con evidencia. La sección "Estado real de implementación" del propio checklist (2026-08-28) ya documentaba la mayoría — mi trabajo fue tender el puente formal entre template base y estado real.
+- **Cerré la ÚNICA brecha real encontrada:** H120 semilla de tiempo por partida (`usar_semilla_tiempo` era una flag muerta en config).
+  - `GameClock._semilla_partida` + `_asegurar_semilla_partida()` (randi() del motor — C56-safe).
+  - `valor_diario(ns_consumidor, minimo, maximo)` — entero determinista del día por namespace.
+  - `rng_diario(ns_consumidor)` — RandomNumberGenerator reproducible del día.
+  - Hash FNV-1a 32 bits: semilla_partida + dia_absoluto + namespace (estable entre sesiones).
+  - Persistencia: `"semilla_partida"` en el save sección "time" (get_save_data/restore_save_data).
+  - Flag `usar_semilla_tiempo` del config: true = por partida (default), false = 0 = determinista global para tests/QA.
+- `test_semilla_iter1.gd` NUEVO: 25 checks (determinismo, namespaces independientes, secuencias reproducibles, semilla en save, día-dependencia, señales G, API 17 métodos, nombres, formatos, ventana aviso).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **[?] Flecha indicadora en el HUD (ítem D):** widget visual de M53 — M29 expone `evento_proximo` y `formatear_hora()`, pero la flecha no existe y soy solo-texto (§16 guía 10).
+- **El bug C56 del caso_reloj es PREEXISTENTE** (A/B git stash: falla igual sin mis cambios): el scan anti-reloj-SO marca falsos positivos de scripts de infra nuevos (`scripts/ci/cicd_manager.gd` usa Time.get_unix_time_from_system y `ci/` no está en la whitelist; el propio test contiene los strings-patrón). Registrado en 11-BUGS.md con fix sugerido para el dueño de M30. Mi semilla NO dispara el scan (usa randi()).
+
+### Decisiones
+
+1. **Entropía vía randi() global del motor, no Time.* :** la primera versión usaba `Time.get_unix_time_from_system()` y el escáner C56 la marcó — regla de oro del módulo: el gameplay NUNCA lee el reloj del SO, ni siquiera una vez por partida. randi() es la fuente idiomática de Godot 4.
+2. **FNV-1a 32 bits con módulo 2^31:** hash determinista entre sesiones (el hash() de Godot puede cambiar entre versiones del motor); 31 bits evita overflows en multiplicaciones de consumidores.
+3. **API aditiva:** valor_diario/rng_diario se AÑADEN al contrato estable G — cero rupturas para consumidores (verificado por regresiones).
+4. **Los ítems F (consumo) se marcan por el HOOK, no por el contenido:** M29 entrega señales/consultas; la rutina/cultivo/pesca es contenido de M19/M33/M34 — cada ítem documenta quién consume qué.
+
+### Recomendaciones para el próximo agente
+
+- El dueño de M30 debería aplicar el fix del bug C56 (whitelist `scripts/ci/` + excluir el propio test del scan + print de positivos) — 15 min de trabajo, desbloquea la señal limpia de la regresión de tiempo.
+- M29 está listo para QA cruzado §21.8 (Hy3): reproducir con test_semilla_iter1 (25/25) + test_calendario (13/13) + verificar el [?] único con el equipo de UI.
+- Consumidores futuros de la semilla: usar `GameTime.valor_diario("<tu_modulo>", min, max)` para variación diaria determinista (respawn de peces M34, eventos ambientales M74, etc.).

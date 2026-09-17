@@ -102,7 +102,7 @@ DayNightCycle (autoload/único, M07):
 - Malla de luna y canvas de estrellas (M45/M46 🟢 sin implementar).
 - Pulido de transición 90 s amanecer/atardecer.
 - Opción M58 "Noche clara" (M58 🟢 sin implementar).
-- Lección a documentar en 07-GUIA-GODOT §9: nunca referenciar autoloads directos por global en scripts cargados vía `--script`; usar `get_node_or_null("/root/Nombre")`.
+- Lección a documentar en GUIA-GODOT/INDICE.md §9: nunca referenciar autoloads directos por global en scripts cargados vía `--script`; usar `get_node_or_null("/root/Nombre")`.
 
 ### Intentos fallidos / decisiones
 - Referenciar `GameTime` directo → "Identifier not found" en parse. Resuelto con `get_node_or_null("/root/GameTime")`.
@@ -132,7 +132,7 @@ DayNightCycle (autoload/único, M07):
 - Test test_curvas_luz.gd: curvas cargables, valores del diseño (mediodía/noche/profundidad), rampa de amanecer, umbrales JSON, núcleo data-driven con estructura real (sun 1.0/0, cielo 1.0/0.15, luna 0/0.12), reset_dia → **0 fallos**.
 - Regresión: test_ciclo_dia_noche (núcleo Log 302) 12 checks/0 fallos.
 
-### Hallazgo documentado (07-GUIA-GODOT §9.60 — pendiente de copiar en la próxima pasada de guía)
+### Hallazgo documentado (GUIA-GODOT/09-godot4-migracion.md §9.60 — pendiente de copiar en la próxima pasada de guía)
 - `Curve.add_point` espera Vector2 y el DOMINIO de posición es 0-1 (curva normalizada). Intentar guardar horas 0-24 como posiciones clampa silenciosamente todos los puntos a ≤1 y sample(hora) devuelve 0. El consumidor debe samplear con hora/24.0. (Anotado en Log 452; copiar a §9 en la próxima edición de la guía.)
 
 ### Lo que NO pude hacer (honestidad obligatoria)
@@ -144,3 +144,33 @@ DayNightCycle (autoload/único, M07):
 - M49: la iluminación global puede consultar directamente las mismas curvas de data/light/ (fuente única).
 - M52/M58: los parámetros de luces nocturnas y opciones de accesibilidad leen fase_umbral.json.
 - Los valores de curva son tuning fino: editar gen_curvas.gd y regenerar (nunca editar el .tres a mano).
+
+---
+
+## Notas del Agente — Iteración 3 auditoría A-J + test del contrato (2026-09-12)
+
+**Modelo:** GLM-5.3 (flagship de Z.ai, 743B)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-12 02:15
+**Estado:** Cerrada — 115 [x] / 0 [ ] / 54 [?] con dueño (de 16/161). Módulo queda 🟡.
+
+### Lo que hice
+- **Auditoría doc↔código de las secciones A-J** (mi especialidad, patrón M29): el header del checklist decía "131 completados" pero las secciones estaban mayormente [ ] contra el núcleo (iter. 1), las curvas data-driven (iter. 2) y los ramps M49 (iter. 3 de M49, Log 731) ya implementados. 92 ítems marcados [x] con evidencia por ítem: número de línea de day_night_cycle.gd, archivo .tres/.json de data, check de test, o sección del 03-Diseno.
+- **Test del CONTRATO central (EventBus.time.fase_cambio)** — antes NUNCA testeado: el test solo validaba get_fase() interno. Ahora test_ciclo_dia_noche.gd valida con el bus REAL: sin señal en misma franja (23→23), exactamente 1 señal al cambiar (23→5), payload == FASE_ALBA correcto, 1 señal (5→7), desconexión limpia. Suite 12 → **16 checks, 0 fallos**.
+- **Código muerto activado:** la variable _fases_recibidas estaba declarada sin uso desde la iter. 1 — ahora es el receiver del test del contrato.
+- **Clasificación honesta de los 54 [?]:** escénicos V2 (luna/nubes/estrellas/faroles/FogVolume — M45/M18), contenido de dueños (M15 flora nocturna, M52 partículas, M74 eventos, M25/M148, M55, M58, M110, M114, M12), cables de dueños 🔵 activos (M41/M42 de agnes-2.5-flash — respetados por regla §21.4.6, no tocados).
+- **Consumidores F verificados con grep REAL:** M19 consume hora_cambio propia (villager_manager L127), M36 candidatas_para(hora,bioma) (fauna_manager L46), M34 FRANJAS propias (fishing_manager L20), M39 esta_abierta(dia,hora) (shop.gd L45), M41 variante _noche (music_director L48), M42 set_fase() (ambient_director L52). El ítem F.13 "Contrato solo por señales" verificado: 0 imports de day_night_cycle fuera de tests.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Los 54 [?]: soy solo-texto (§16 guía 10) — los escénicos V2 requieren visión (V1/V4) y los de contenido son de sus dueños. M41/M42 🔵 de agnes-2.5-flash: el cableado fase→set_fase/variante es de ese agente, NO mío.
+- QA visual M114 y capturas V4: fuera de mi alcance.
+
+### Intentos fallidos / decisiones
+- Decisión: marcar F (consumidores) por ESTADO REAL del consumidor (grep), no por deseo del diseño — M19 funciona por hora_cambio propia y está bien (desacople); no "corregí" lo que funciona para forzar fase.
+- Decisión: los ítems I de rendimiento (2ms GPU, draw calls de nubes) se marcan por diseño+tween estructural; el profiling real es M61/M114.
+
+### Recomendaciones para el próximo agente
+- El test del contrato usa BUS.new() con root.add_child(bus) porque el autoload no está en --script headless; en runtime el autoload real se reutiliza (get_node_or_null primero).
+- M41/M42 (al liberar): EventBus.time.fase_cambio.connect(...) → set_fase(fase) / selección variante _noche — el contrato ya está testeado de este lado.
+- M18/M45 (faroles): fase_umbral.json §luces_artificiales tiene umbral 0.35 / 3200K / r 8 m listos para consumir.
+- M93/M15 (flora nocturna): hook futuro es_de_dia()/fase_cambio para el bono x2 — la decisión cozy está documentada en diseño §6.

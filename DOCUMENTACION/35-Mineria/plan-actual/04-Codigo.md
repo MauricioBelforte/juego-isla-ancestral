@@ -310,6 +310,6 @@ Los logs se emiten con la convención del sistema `DOM-` (dominio) y rotación s
 
 ### Pitfalls de Godot documentados en este turno
 
-- **Mine_extraccion_fallida → mina_extraccion_fallida (typo de 信号)**: las señales NO se llaman como funciones; se emiten con `.emit(args)`. El linter de Godot 4.7 lo detecta correctamente. Documentado en 07-GUIA-GODOT §1.1 (ya estaba).
-- **Sin `class_name` en autoloads**: respetado (`MiningManager` extiende `Node`, registrado por path en project.godot, no por class_name). Ver 07-GUIA-GODOT §9.17/§9.41.
+- **Mine_extraccion_fallida → mina_extraccion_fallida (typo de 信号)**: las señales NO se llaman como funciones; se emiten con `.emit(args)`. El linter de Godot 4.7 lo detecta correctamente. Documentado en GUIA-GODOT/01-gdscript-errores-comunes.md §1.1 (ya estaba).
+- **Sin `class_name` en autoloads**: respetado (`MiningManager` extiende `Node`, registrado por path en project.godot, no por class_name). Ver GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41.
 - **Variables inferidas con `:=` y Dictionary/Array heterogéneos**: forzar tipo explícito (`var zona: String = ...`, `var tool_id: StringName = ...`) para evitar `Cannot infer the type` en parse.

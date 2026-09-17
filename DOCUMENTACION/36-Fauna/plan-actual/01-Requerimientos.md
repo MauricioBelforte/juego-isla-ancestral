@@ -25,7 +25,7 @@ acoplarse a otros sistemas (biomas M09, clima M32, IA M65, guardado M59).
 - Autoloads `fauna` y `fauna_registry`.
 
 ## Restricciones
-- Sin class_name en autoloads (07-GUIA-GODOT §9.17).
+- Sin class_name en autoloads (GUIA-GODOT/09-godot4-migracion.md §9.17).
 - Duck-typing con M29/M59/M65 (no romper si faltan).
 - No generar assets visuales (M45).
 - Tests headless 59/0 OK (Log 376).

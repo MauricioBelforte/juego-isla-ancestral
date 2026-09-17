@@ -112,7 +112,7 @@ func set_ocupado(ocupado: bool) -> void         # bloquea interacción (dormido/
 - Snap al terreno con IslandGenerator.get_height() directo (VoxelTool.raycast no funciona al inicio — chunks no cargados)
 - Offset +1.0 para pies sobre bloque (confirmado por usuario)
 - NPC movido de (5,8,5) a (30,10,64) — dentro de la isla (centro 64,64, radio 64)
-- Documentados errores §9.44 (VoxelTool raycast sin chunks) y §9.45 (offset NPC +1.0) en 07-GUIA-GODOT.md
+- Documentados errores §9.44 (VoxelTool raycast sin chunks) y §9.45 (offset NPC +1.0) en GUIA-GODOT/02-voxel-tools.md
 
 ### Lo que NO pude hacer (honestidad obligatoria)
 - class_name no funciona en este proyecto (razón desconocida) — se usa preload() + duck-typing

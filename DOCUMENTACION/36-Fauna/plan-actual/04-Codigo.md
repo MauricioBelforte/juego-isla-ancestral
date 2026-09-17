@@ -27,7 +27,7 @@
 
 ## Jabalí — etapas de vida (feedback usuario 2026-09-03)
 
-Tercer animal del pipeline Blender→Godot→movimiento (ver 07-GUIA-GODOT §11, guía 09 §9).
+Tercer animal del pipeline Blender→Godot→movimiento (ver GUIA-GODOT/11-blender-godot.md §11, guía 09 §9).
 `jabali_npc.gd` implementa un sistema de **etapas** (`@export_enum("joven","adulto") etapa`)
 que ajusta automáticamente escala/velocidad/rebote/pausas al setearse en el inspector:
 

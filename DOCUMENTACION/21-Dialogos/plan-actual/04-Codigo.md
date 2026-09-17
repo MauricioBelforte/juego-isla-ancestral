@@ -222,7 +222,7 @@ Registrado en `project.godot` como autoload `DialogueManager`. La UI se instanci
   `ERROR: [VAL-DGT] nodo OPCIONES 'pregunta' sin opciones` → no iniciaba.
   - Fix en `scripts/dialogos/ui/dialogue_ui.gd`: `_opciones_activas = options.duplicate()` y
     `_limpiar_opciones()` usa `_opciones_activas = []` (reasignación, no `clear()`).
-  - Lección general documentada en `07-GUIA-GODOT.md` §9.46 (Arrays por referencia).
+  - Lección general documentada en `GUIA-GODOT/09-godot4-migracion.md` (Arrays por referencia).
   - Verificado: `test_dialogos.gd` headless 0 fallos; `--check-only` de `dialogue_ui.gd` sin errores.
 
 ### Lo que NO hice (honestidad)
@@ -242,7 +242,7 @@ Registrado en `project.godot` como autoload `DialogueManager`. La UI se instanci
 ### Recomendaciones para el próximo agente
 
 - Al conectar la UI con cualquier sistema que cache grafos/datos: SIEMPRE `duplicate()` antes de
-  guardar una copia mutable (ver 07-GUIA-GODOT §9.46).
+  guardar una copia mutable (ver GUIA-GODOT/09-godot4-migracion.md §9.46).
 - Relevar el checklist plan-actual contra el código real (manager + grafo + UI ya existen).
 - Integrar la UI M21 con M53 (UIManager/pila de capas) cuando corresponda; hoy es autocontenida.
 

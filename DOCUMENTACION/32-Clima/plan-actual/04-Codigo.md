@@ -137,3 +137,17 @@ clima_config.tres:
 - Partículas (M52): consumir `get_intensidad()` + densidades de `clima_config.tres`; presupuesto ≤1 ms (M61); pausa ya garantizada por diseño (transición por señales de minuto).
 - Banner (M30/M53): usar `clima_de_manana()` para el aviso de 1 día y `get_nombre_clima()` para el texto (nunca solo ícono — accesibilidad M58).
 - Eventos especiales (F): aurora/estrellas requieren leer el calendario de festivales (M29 `festivals.tres`) y el cielo despejado (`get_clima() == SOLEADO` o NUBLADO según regla).
+---
+
+## Notas del Agente — Iteración 2 auditoría D/E/F/G/I (2026-09-12)
+
+**Modelo:** GLM-5.3 (flagship de Z.ai, 743B) · **Plataforma:** Kilo Code
+**Estado:** Cerrada — 96 [x] / 0 [ ] / 25 [?] con dueño (de 82/121). Módulo queda 🟡. Log 830.
+
+### Lo que hice
+- Auditoría grep REAL de los 12 consumidores de la sección E: 5 implementados por sus dueños y sin marcar quedaron [x] con evidencia de línea (M33 farm_service L35/L37-42 · M34 fishing_manager L57-59/L82-84 · M41 music_director L44/L49 · M42 ambient_director L48-49 · M28 travel_service L12/L35/L140-141 + su test de retraso-sin-bloqueo). 6 verificados por AUSENCIA → [?] con dueño.
+- D/H/I auditados por mitad de proveedor (API/decisión = [x]; visual/específico = [?] con dueño). H.8 get_atenuacion_sol() verificado L87-89.
+- Suite re-ejecutada: test_clima 0 fallos + test_fishing_clima (M34) 0 fallos + regresiones M29/M31 del ciclo anterior.
+
+### Lo que NO pude hacer
+- Los 25 [?] son de dueños V2 (M52/M58/M30/M53/M29/M74/M45/M50/M51/M61/M112/M19/M36/M90) — nada cerrable sin visión ni pisando módulos ajenos.

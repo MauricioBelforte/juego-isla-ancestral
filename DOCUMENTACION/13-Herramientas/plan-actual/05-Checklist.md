@@ -1,9 +1,9 @@
-**Modelo:** Hy3
-**Plataforma:** Kilo
+**Modelo:** GLM-5.3 (último actualizador — iter 4, 2026-09-10)
+**Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 13: Herramientas
 
-> **Reserva actual (2026-08-28 22:10):** 🔵 En curso — **Hy3 (Kilo)** tomó el módulo con **autorización explícita del usuario** (relevo de MiMo V2.5/OpenCode, sin actividad desde 2026-08-27). Cierre de Fase 3 completado 2026-08-28 (ver Notas del Agente al final). Firma: Hy3 · Kilo · 2026-08-28.
+> **Reserva actual (2026-09-10 23:50):** 🟡 Liberado — iter 4 cerrada 2026-09-11 00:55 (**GLM-5.3 (Kilo Code)**, Log 815: persistencia hotbar M59 + cableado M13→M15). Fase 3 previa cerrada por Hy3 (Kilo) 2026-08-28 (relevo autorizado del usuario).
 
 > Marcadores: [S] simple · [M] medio · [C] complejo. Estados: [x] cumplido · [ ] pendiente (con dueño entre paréntesis cuando aplica) · [?] no resuelto.
 
@@ -63,7 +63,7 @@
 - [x] Martillo y lupa con durabilidad infinita [M]
 - [x] Aviso al 20%: icono de reparación + parpadeo (HUD, no castigo) [M]
 - [ ] Regla: siempre hay camino de reparación cerca (mesa del pueblo → M16/M27) [M]
-- [ ] Persistencia durabilidad/nivel en GameState.M13 (M59; ToolData.serializar listo) [M]
+- [x] Persistencia durabilidad/nivel en GameState.M13 (M59; ToolData.serializar listo) [M] *(iter 4 — Log 815: ToolsSaveProvider sección "herramientas_m13" registrado desde player.gd; serializa hotbar completo: tipo/nivel/durabilidad/mejoras + índice activo; test 0 fallos)*
 
 ## E. Contratos con el mundo (8)
 
@@ -119,7 +119,7 @@
 - [x] 04-Codigo.md creado y firmado [S]
 - [x] 05-Checklist.md creado y firmado (este archivo) [S]
 - [x] Tabla de durabilidad y tiempos en el componente [M]
-- [x] Sin contradicciones con M08 (contrato voxel; fix get_voxel documentado en 07-GUIA-GODOT §9.40) [M]
+- [x] Sin contradicciones con M08 (contrato voxel; fix get_voxel documentado en GUIA-GODOT/02-voxel-tools.md §9.40) [M]
 - [x] Sin contradicciones con M14 (inventario de bolsillo) [M]
 - [x] Sin contradicciones con M16 (mesa de trabajo) [M]
 - [x] DoD cumplida: 5 archivos + firma + log [M]
@@ -139,6 +139,36 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — V4 godot-mcp nativa en Kilo verificada 2026-08-28 + V2 capturas por script [S]
 
+## J. Iteración 4 — Persistencia hotbar M59 + cableado M13→M15 (GLM-5.3 Kilo Code 2026-09-10) — Log 815
+
+> T-019 del backlog personal (persistencia durabilidad/nivel, ítem D.12) + cierre del [?] bloqueador de M15 iter 4 (Log 813). QA numérico: todos los tests headless 0 fallos (agente solo-texto — §16 guía 10).
+
+### J.1 Implementado y verificado (test_herramientas_iter4.gd 0 fallos)
+
+- [x] `ToolsSaveProvider` (nuevo, `scripts/tools/tools_save_provider.gd`): sección M59 "herramientas_m13"; serializa hotbar completo vía `ToolData.serializar()` (tipo, nivel, durabilidad, mejoras afilada/templada/potenciada) + índice activo; formato versionado {"version": 1}; slots null preservados [M]
+- [x] `ToolData.nombre_id() -> StringName` + `ToolData.IDS`: IDs cortos de contrato ("pico", "hacha", "pala"...) para integración con M15/M33/M35 (M15 compara contra `herramienta_requerida` de ResourceDefinition) [S]
+- [x] `player.gd`: `_registrar_provider_herramientas()` registra el provider en SaveManager con accessors duck-typing (`_get_hotbar_index`, `_set_hotbar_index`, `_restaurar_hotbar`); flujo existente intacto (§15: provider separado, no refactor) [M]
+- [x] Cableado M13→M15: `ToolController.try_extract()` intenta primero `_intentar_golpe_recurso_m15()` — busca ResourceNode activo ≤1.5 m del punto de mira (voxel hit o rayo) vía `spawner.obtener_nodos()` y deriva a `ResourceManager.recibir_golpe_en_nodo(nodo, nombre_id())` [M]
+- [x] Regla cozy del cableado: herramienta equivocada contra recurso → feedback `golpe_fallido` y NO cae al voxel de detrás (no se rompe el mundo por accidente); nodo AGOTADO no es objetivo [S]
+- [x] Test: provider round-trip (PICO HIERRO dur 137 + afilada, MARTILLO infinita, slot null, índice activo 2 → restore → verificación campo a campo) [M]
+- [x] Test: restore con herramientas vacías NO pisa el hotbar por defecto [S]
+- [x] Test: contrato nombre_id ↔ M15 (hacha→madera_roble OK, pico→piedra_caliza OK, hacha→piedra_caliza RECHAZADA) [M]
+- [x] Test: cableado end-to-end (pico agota nodo M15 en 2 golpes → drops al inventario M14 → respawn programado; hacha no daña) [M]
+- [x] Regresión test_herramientas (Fase 3, 36 combos): 0 fallos [S]
+- [x] Regresión test_recursos_spawner_runtime (M15 iter 4): 0 fallos [S]
+- [x] Regresión test_recursos_persistencia (M15 iter 3): 0 fallos [S]
+- [x] Regresión test_mineria (M35): 0 fallos [S]
+- [x] Regresión test_nivel_herramienta (M71/M13): 0 fallos [S]
+- [x] Regresión test_autosave_m59 (SaveManager): 0 fallos [S]
+- [x] Saneamiento §28: BOM preexistente removido de `tool_controller.gd` (sin cambio semántico; re-test 0 fallos) [S]
+
+### J.2 Pendientes con dueño (no resueltos en iter 4)
+
+- [?] Verificación in-game del cableado por el usuario (V1): el test headless valida la cadena completa, falta la prueba de mano con E contra un árbol/recurso visible
+- [?] `_intentar_golpe_recurso_m15` usa el hit del voxel como punto de mira: si el recurso M15 flota sin voxel detrás, el lookup usa la posición del controller — refinamiento fino de puntería para el próximo agente [S]
+
+**Iteración 4 — 17 ítems [x], 2 ítems [?] honestos. Módulo liberado a 🟡.**
+
 **Totales:** 102 ítems · Completados: 5 · Pendientes: 97 · No resueltos: 0.
 ## Notas del Agente (Cierre Fase 3 - 2026-08-28)
 
@@ -155,7 +185,7 @@
 - Feedback: tool_feedback.gd con sonidos sintetizados por material (AudioStreamWAV runtime; M65 reemplazará por assets) y pool de partículas GPUParticles3D con color por material.
 - Herramientas iniciales de cobre auto-equipadas (5) hasta que M14/M16 den la adquisición real.
 - Fix de IDs: library de main_island.gd alineada a BlockType (IDs 18-25 placeholder) → nieve/grava/musgo/barro ahora renderizan y extraen con ID correcto.
-- Fix de API: VoxelTerrain NO tiene get_voxel → lectura por VoxelTool.get_voxel(pos) (documentado en 07-GUIA-GODOT §9.40).
+- Fix de API: VoxelTerrain NO tiene get_voxel → lectura por VoxelTool.get_voxel(pos) (documentado en GUIA-GODOT/02-voxel-tools.md §9.40).
 - Test headless test_herramientas.gd (0 fallos): 36 combos del catálogo, durabilidad cozy, reparación 20%, serialización, acciones por tipo, mapeo block→item, tabla de golpes.
 - Autotest in-engine end-to-end verificado con V4: golpes con cooldown, extracción de dirt a los 2 golpes, drops al inventario M14 (1/24 slots), durabilidad 110→107, 0 errores de script.
 - Evidencia visual: captura in-engine oficial del HUD (cap_13_2026-08-28_19-45-00_fase3-hud-inengine-oficial.png).
