@@ -35,11 +35,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - uses: firebelley/godot-export@v5.2.1
+      - uses: solarlabyrinth/action-setup-godot@v3
         with:
-          godot_version: 4.7.2
-          template_version: 4.3
-          relative_project_path: game/isla-ancestral
+          version: "4.7-stable"
       - name: Run tests
         run: |
           cd "$GITHUB_WORKSPACE"
@@ -61,11 +59,9 @@ jobs:
           - { label: 'macOS', export: 'macOS', ext: 'app' }
     steps:
       - uses: actions/checkout@v4
-      - uses: firebelley/godot-export@v5.2.1
+      - uses: solarlabyrinth/action-setup-godot@v3
         with:
-          godot_version: 4.7.2
-          template_version: 4.3
-          relative_project_path: game/isla-ancestral
+          version: "4.7-stable"
       - name: Build release binary
         run: |
           cd game/isla-ancestral

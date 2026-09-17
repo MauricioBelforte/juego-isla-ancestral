@@ -28,11 +28,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Godot
-        uses: firebelley/godot-export@v5.2.1
+        uses: solarlabyrinth/action-setup-godot@v3
         with:
-          godot_version: 4.7.2
-          template_version: 4.3
-          relative_project_path: game/isla-ancestral
+          version: "4.7-stable"
 
       - name: Cache GdUnit4 addon
         uses: actions/cache@v4
@@ -77,11 +75,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Godot
-        uses: firebelley/godot-export@v5.2.1
+        uses: solarlabyrinth/action-setup-godot@v3
         with:
-          godot_version: 4.7.2
-          template_version: 4.3
-          relative_project_path: game/isla-ancestral
+          version: "4.7-stable"
 
       - name: Build dev binary
         run: |
