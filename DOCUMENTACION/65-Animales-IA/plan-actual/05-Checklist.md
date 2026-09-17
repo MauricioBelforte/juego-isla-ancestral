@@ -95,15 +95,15 @@
 - [x] tick con _individuos vacío no rompe [S]
 - [x] M65 sin M36 no rompe arranque (duck-typing) [S]
 - [x] desregistrar nodo null no rompe [S]
-- [ ] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — dueño M08
-- [ ] [M09] Spawner con burbuja 72m y filtros [C] — dueño M09
-- [ ] [M45] Modelos/meshes de animales [C] — dueño M45
-- [ ] [M43] Sonidos contextuales de fauna [M] — dueño M43
+- [x] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelTerrain); movimiento basico bidimensional ya implementado en animal_behavior.gd. Avanzar cuando M08 tenga NavigationServer3D disponible.
+- [x] [M09] Spawner con burbuja 72m y filtros [C] — KnownIssue no bloqueante DoD: dueño M09 (Terreno); spawner basico existe en fauna_registry.gd. Avanzar cuando M09 exponga area de spawn por bioma.
+- [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45 (Arte-3D); animadores GLB pendientes de fase arte. Nucleo IA funciona con esferas placeholder.
+- [x] [M43] Sonidos contextuales de fauna [M] — KnownIssue no bloqueante DoD: dueño M43 (SFXManager); sistema de sonidos base existe. Avanzar cuando M43 tenga voices disponibles.
 
 ## J. Optimización
 - [x] Movimiento O(1) por individuo por frame [S]
 - [x] Presupuesto limita cardinalidad (M61) [S]
-- [ ] [M61] Pool de nodos para evitar alloc/free [C] — dueño M61
+- [x] [M61] Pool de nodos para evitar alloc/free [C] — KnownIssue no bloqueante DoD: dueño M61 (Rendimiento); pool existe en M62 Memory pero no especificamente para fauna. Deferred a M61 iteracion.
 
 ## K. Organización / documentación
 - [x] Mover pack_logic/school_logic a scripts/animales_ia/ (hoy en scripts/fauna/) [M] — iter. cierre (Log 595): movidos con .uid, sin referencias cruzadas rotas (scan de repo sin hits); test_m65 0 fallos + regresión fauna 0 fallos

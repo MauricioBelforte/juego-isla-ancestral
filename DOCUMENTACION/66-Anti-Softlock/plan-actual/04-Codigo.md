@@ -89,7 +89,7 @@ Implementé el **núcleo funcional** del detector anti-softlock en Godot 4.7.2 (
 4. **API DirAccess 4.x**: métodos estáticos correctos son `dir_exists_absolute()` / `make_dir_absolute()` / `rename_absolute()`. `folder_exists()` y `dir_exists()` estático NO existen.
 5. **Inferencia de tipos**: `var x := dict.get(k)` falla (Variant) → envolver con `int(...)`.
 
-(Ítems 1-4 complementan lo ya registrado en `07-GUIA-GODOT.md` §8/§9.)
+(Ítems 1-4 complementan lo ya registrado en `GUIA-GODOT/06-registro-errores.md` y `GUIA-GODOT/09-godot4-migracion.md`.)
 
 ### Lo que NO pude hacer (pendiente, honestidad)
 

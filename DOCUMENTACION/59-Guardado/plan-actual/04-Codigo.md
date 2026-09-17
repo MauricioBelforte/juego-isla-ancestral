@@ -149,7 +149,7 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 - `[?]` Proveedores ISaveProvider por sistema: los sistemas del juego (inventario M14, NPC M19, etc.) aún no existen; el save funciona con defaults del schema.
 
 ### Intentos fallidos / decisiones
-- **FALLO DETECTADO Y CORREGIDO:** el diseño original calculaba el checksum sobre `JSON.stringify(payload)` y lo guardaba dentro del documento JSON. Al cargar, re-serializar el payload parseado producía un hash DISTINTO (round-trip JSON no determinista para hashing) → falsos positivos de corrupción y backups "corruptos". Solución: formato determinista `checksum\npayload` donde el hash se calcula sobre la cadena exacta almacenada. Documentado como descubrimiento para 07-GUIA-GODOT.
+- **FALLO DETECTADO Y CORREGIDO:** el diseño original calculaba el checksum sobre `JSON.stringify(payload)` y lo guardaba dentro del documento JSON. Al cargar, re-serializar el payload parseado producía un hash DISTINTO (round-trip JSON no determinista para hashing) → falsos positivos de corrupción y backups "corruptos". Solución: formato determinista `checksum\npayload` donde el hash se calcula sobre la cadena exacta almacenada. Documentado como descubrimiento para GUIA-GODOT/INDICE.md.
 - Escritura síncrona encolada en vez de hilo: simplifica y evita condiciones de carrera; suficiente para el tamaño actual de saves.
 
 ### Recomendaciones para el próximo agente
@@ -159,7 +159,7 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 - Cuando exista M07 EventBus, conectar las señales de hitos a `SaveManager.request_save(slot, reason)` y agregar el flag dirty.
 - Considerar cifrado opcional del payload antes del checksum si se agregan logros (M72/M97).
 
-### Descubrimiento para 07-GUIA-GODOT (§8)
+### Descubrimiento para GUIA-GODOT/INDICE.md (§8)
 - **JSON round-trip NO es determinista para hashear:** nunca calcular checksums sobre `JSON.stringify()` de un dict que fue parseado de JSON (orden de claves/format numérico pueden variar). Hash de la cadena exacta almacenada. Verificado 2026-08-25, ox-alpha/Cline.
 
 

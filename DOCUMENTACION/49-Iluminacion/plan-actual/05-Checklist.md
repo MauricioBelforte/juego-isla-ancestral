@@ -254,3 +254,28 @@
 - [ ] Verificación visual: montaña h=36 con cima de piedra visible DESDE EL SPAWN (1460m) + valle + laguna interior; FPS 60 [M] — capturas/9/impostor_optimizado.png, Log 758
 - [ ] Optimización: 811k → 270k triángulos (paso 4→6m, H_MIN 7→12, −66%) [S] — Log 758
 - [ ] Confirmación estética del usuario (posición/altura del impostor ajustable con 4 constantes) [S] -- agnes-2.5-flash 2026-09-12: impostor parameters parameterizados con 4 constantes; ajuste visual pendiente aprobacion usuario; dokumentado en 03-Diseno.md 2026-09-12: impostor parameters parameterized with 4 constants; requires user visual approval
+
+## QA visual V2-asistencia (agnes-3-flash / Sapiens AI / Kilo Code, 2026-09-16, Log 939 — visión nativa)
+
+> **Alcance:** V2-**asistencia** (leo/describo las capturas del MCP godot y opino; **no** apruebo estéticamente
+> — eso es del usuario, M154). Fuentes: `capturas/49/*.png` + `capturas/49-Iluminacion/*.png` (leídas con visión).
+
+- **`franja_1200_final` (mediodía 12:01, FPS 60):** terreno voxel bien iluminado, luz pareja, cielo azul claro,
+  HUD completo (reloj M30 "1 de Primavera, ¡Festivo!", hotbar, barras). Sanos, sin quemaduras de exposición.
+- **`franja_0000_final` (noche 00:01, FPS 60):** escena **muy oscura**, el terreno queda casi negro (silueta
+  azul tenue). **Confirmado por el usuario (2026-09-16) como DISEÑO:** la noche se espera oscura **para que
+  funcionen las antorchas** como fuente de luz. → **NO es bug.** Dependencia: la jugabilidad nocturna depende
+  del sistema de **antorchas/luz del jugador** (M45/M52 o módulo de antorchas); sin él, la noche es injugable.
+- **`atardecer_1800` (FPS 59):** luz cálida/anaranjada sobre el terreno voxel, cielo azul→cálido. Color grading
+  de atardecer correcto.
+- **`skyline_montanas_v1` (horizonte, FPS 60):** playa/isla + mar + colinas/montañas low-poly (impostor) +
+  personaje sobre la arena. Coherente con las iter. 5/6 (skyline falso retirado → relieves reales + impostor).
+- **Lectura global del ciclo:** día brillante → atardecer cálido → noche oscura (por diseño). **FPS ~60 en las 4
+  franjas** → sin penalización visible de la iluminación. **No detecté artefactos** (overdraw, z-fighting,
+  pop-in, banding del cielo) en estas capturas.
+- **Flags:** (1) noche-oscura = diseño, cubierto por antorchas (usuario); (2) si en el futuro se agregan antorchas,
+  re-verificar V2 que la luz nocturna no queme/sea legible. La **aprobación estética final es del usuario**.
+
+> ⚠️ **Nota §28 (codificación):** las líneas 241/249/256 de este archivo traen fragmentos corruptos preexistentes
+> ("`03-Diseno.mdh`", "`§3.2igured`", "`dokumento`") de escrituras cp1252 ajenas. **No los toqué** (fuera de mi
+> alcance); quedan para la pasada de `scripts/fix_encoding.py`.

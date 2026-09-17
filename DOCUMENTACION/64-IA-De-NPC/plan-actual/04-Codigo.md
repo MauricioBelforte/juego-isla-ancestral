@@ -124,7 +124,7 @@ func set_simulation_level(level: String) -> void
 
 ### Lo que NO pude hacer
 - No actualicé el plan-actual de documentación (pendiente)
-- No agregué nada a la guía 07-GUIA-GODOT.md (pendiente)
+- No agregué nada a la guía GUIA-GODOT/ (pendiente)
 - No generé log en Logs/ (pendiente)
 
 ### Fix aplicado por MiMo V2.5

@@ -129,7 +129,7 @@ remapeo, la detección de dispositivo y la persistencia.
   `ControlInput.ejes_camara(...)` para que el remapeo tenga efecto real.
 - Conectar la señal `dispositivo_cambiado` con la UI de prompts (M53) para actualizar iconos
   sin recargar.
-- Documentar un descubrimiento de GDScript en 07-GUIA-GODOT: `b.button_index = int(...)`
+- Documentar un descubrimiento de GDScript en GUIA-GODOT/INDICE.md: `b.button_index = int(...)`
   dispara "Integer used when an enum value is expected" → usar cast `as JoyButton`/`MouseButton`/`JoyAxis`.
 
 ---

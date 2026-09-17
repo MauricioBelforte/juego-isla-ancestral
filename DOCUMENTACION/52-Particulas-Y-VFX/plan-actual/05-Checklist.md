@@ -1,7 +1,14 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** Deepseek V4 Flash (diseño) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 5)
+**Plataforma:** OpenCode (diseño) · WorkBuddy (iter. 5)
 
 # 05-Checklist.md — Módulo 52: Partículas y VFX
+
+## Convención
+- `[x]` = completado (existe el artefacto y es verificable). `[ ]` = pendiente. `[?]` = no resuelto / parcial.
+- Esfuerzo: `[S]` simple (minutos) · `[M]` medio (horas) · `[C]` complejo (días).
+- **Auditoría (iter. 5, Log 882):** varias casillas `[x]` de diseño no tenían
+  artefacto de runtime. Donde pude lo implementé (pool, precalentamiento,
+  límites, determinismo, `VFX-SKIP`); donde no, queda en `[?]` con la razón.
 
 ## A. Problema y objetivos
 
@@ -23,13 +30,13 @@
 - [ ] Lluvia y nieve [S]
 - [ ] Fuego y lava [S]
 - [ ] Luz y magia tecnológica [S]
-- [x] Resonancia y activación de runas [S]
+- [?] Resonancia y activación de runas [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
 - [ ] Teletransporte (si existe) [S]
-- [x] Obtención de Sello [S]
-- [x] Resolución de puzzle [S]
-- [x] Construcción, cosecha y pesca [S]
+- [?] Obtención de Sello [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
+- [?] Resolución de puzzle [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
+- [?] Construcción, cosecha y pesca [S] — auditoría iter. 5: cosecha y pesca sí; construcción NO
 - [ ] Descubrimiento [S]
-- [x] Cambio estacional [S]
+- [?] Cambio estacional [S] — auditoría iter. 5: solo primavera (`vfx_polen`)
 - [ ] Efectos de interfaz [S]
 - [ ] Efectos atmosféricos [S]
 - [ ] Definir parámetros por efecto (tipo, material, emisor, presupuesto) [M]
@@ -37,22 +44,22 @@
 ## C. RF2 — Pool central
 
 - [x] Definir VfxManager (autoload) [M]
-- [ ] Definir pool de emisores one-shot prestados/liberados [M]
+- [x] Definir pool de emisores one-shot prestados/liberados [M] — iter. 5: `vfx_pool.gd` (`prestar`/`liberar`/`liberar_todos`)
 - [ ] Definir loops registrados con culling [M]
-- [ ] Definir precalentamiento del pool (8 emisores) [M]
+- [x] Definir precalentamiento del pool (8 emisores) [M] — iter. 5: `precalentar()` / `precalentar_catalogo()`
 
 ## D. RF3 — Presupuesto por escena
 
-- [ ] Definir máx emisores activos (12 preset medio) [M]
-- [ ] Definir máx partículas vivas (4.000 preset medio) [M]
+- [x] Definir máx emisores activos (12 preset medio) [M] — iter. 5: `max_emisores` (def. 32, configurable)
+- [x] Definir máx partículas vivas (4.000 preset medio) [M] — iter. 5: `max_particulas` (def. 1200, configurable)
 - [ ] Definir presupuesto por preset (M90) [M]
-- [x] Definir log VFX-SKIP cuando se excede [M]
+- [x] Definir log VFX-SKIP cuando se excede [M] — iter. 5: implementado de verdad (`emision_descartada` → `GameLogger`); antes estaba `[x]` sin existir
 
 ## E. RF4 — Determinismo
 
-- [ ] Definir semillas de contexto (M10) en one-shots [M]
+- [x] Definir semillas de contexto (M10) en one-shots [M] — iter. 5: `semilla_de()` FNV-1a 32
 - [ ] Definir loops con fase fija [M]
-- [ ] Definir sin RNG por frame [M]
+- [x] Definir sin RNG por frame [M] — iter. 5: sin RNG; `seed` fijada después de `restart()`
 - [x] Definir verificación de determinismo en validador [M]
 
 ## F. RF5 — Sincronía con animación
@@ -113,17 +120,17 @@
 
 ## O. RF14 — Optimización
 
-- [ ] Definir tope de partículas vivas [M]
+- [x] Definir tope de partículas vivas [M] — iter. 5: `max_particulas` + reciclado de los más antiguos
 - [x] Definir culling por distancia (40 m pausa) [M]
 - [ ] Definir LOD de emisores (25% lejos) [M]
-- [ ] Definir pooling (M62) [M]
+- [x] Definir pooling (M62) [M] — iter. 5: `vfx_pool.gd`
 
 ## P. RF15 — Validación
 
 - [x] Definir validate_vfx.gd [M]
-- [ ] Verificar presupuesto por escena [M]
+- [x] Verificar presupuesto por escena [M] — iter. 5: `stats()` del pool + bloque D del test
 - [ ] Verificar naming [S]
-- [ ] Verificar determinismo (semillas) [M]
+- [x] Verificar determinismo (semillas) [M] — iter. 5: `validar_semillas()` + bloque B del test
 - [ ] Verificar sin luz por partícula [M]
 - [ ] Verificar mapeo completo de eventos de juego [M]
 
@@ -134,9 +141,9 @@
 
 ## R. Requisitos no funcionales
 
-- [ ] Rendimiento: límites + LOD + pooling (M61) [M]
-- [ ] Memoria: pool precalentado (M62) [M]
-- [ ] Determinismo: semillas + fases fijas [M]
+- [?] Rendimiento: límites + LOD + pooling (M61) [M] — iter. 5: límites y pooling SÍ; LOD por distancia NO
+- [x] Memoria: pool precalentado (M62) [M] — iter. 5
+- [?] Determinismo: semillas + fases fijas [M] — iter. 5: semillas SÍ; fases fijas de loops NO (no hay loops)
 - [ ] Cozy: amplitudes suaves, sin humo denso negro [M]
 - [x] Accesible: vfx_quality 3 niveles (M58) [M]
 - [ ] Mantenible: catálogo central único [M]
@@ -144,18 +151,18 @@
 ## S. Alternativas consideradas
 
 - [x] Descartar CPUParticles para todo [M]
-- [ ] Descartar emisores sin pool (GC/stutter) [M]
+- [x] Descartar emisores sin pool (GC/stutter) [M] — iter. 5: el pool evita allocar por disparo (verificado: `creados` no sube al reusar)
 - [ ] Descartar luz integrada en partículas [M]
-- [ ] Descartar RNG en runtime [S]
-- [ ] Descartar sin límite de partículas [S]
+- [x] Descartar RNG en runtime [S] — iter. 5: semillas deterministas
+- [x] Descartar sin límite de partículas [S] — iter. 5: `max_particulas` + reciclado
 - [x] Descartar VFX 100% procedural por shaders [M]
 
 ## T. Riesgos y mitigaciones
 
 - [ ] Riesgo de overdraw → presupuesto + tope + LOD [M]
 - [ ] Riesgo de desincronía → trigger centralizado [M]
-- [ ] Riesgo de determinismo roto → semillas + validador [M]
-- [ ] Riesgo de stutter → pool precalentado [M]
+- [x] Riesgo de determinismo roto → semillas + validador [M] — iter. 5
+- [x] Riesgo de stutter → pool precalentado [M] — iter. 5
 - [x] Riesgo de molestias (fotosensibilidad) → vfx_quality (M58) [M]
 - [ ] Riesgo de efectos fuera de estilo → guía de amplitudes + review [M]
 
@@ -174,7 +181,7 @@
 
 ## V. Herramientas y flujos
 
-- [ ] Documentar flujo de emisión one-shot [M]
+- [x] Documentar flujo de emisión one-shot [M] — iter. 5: 04-Codigo.md §2 + bloque E del test
 - [ ] Documentar flujo de loop ambiental (humo) [M]
 - [x] Documentar flujo de atmosféricos por clima/estación [M]
 
@@ -182,7 +189,7 @@
 
 - [ ] Todos los efectos del plan maestro en el catálogo [M]
 - [ ] Escena pivote sin exceder límites y sin caída de fps [M]
-- [x] One-shots deterministas (misma semilla, misma distribución) [M]
+- [x] One-shots deterministas (misma semilla, misma distribución) [M] — verificado iter. 5 (bloque B + `seed` tras `restart()`)
 - [x] Triggers sincronizados con animación/sonido/feedback [M]
 - [ ] Fuego/lava sin luz (solo M49) [M]
 - [x] Reduce Motion atenúa/desactiva VFX [M]
@@ -228,3 +235,71 @@
 
 - [x] `scripts/particles/vfx_director.gd` — VfxDirector: carga el catálogo (8 eventos), registra el bus genérico si existe, disparar(evento_id, pos) → VfxFactory y estado (último disparo)
 - [x] Test 4/4 OK (8 eventos, dispatch conocido, fallo para evento inexistente)
+
+## Iteración 5 (2026-09-13 — DeepSeek-V4.1-Flash / WorkBuddy, Log 882)
+
+Parte **NO visual** del módulo: pooling, precalentamiento, determinismo por
+semilla, límites de rendimiento y log `VFX-SKIP`. Todo verificado en headless.
+
+- [x] **Bug real preexistente**: `VfxFactory.crear()` asignaba `GPUParticles3D.mesh`
+      (propiedad ELIMINADA en Godot 4.3 → hoy `draw_pass_1`). El error abortaba la
+      función en silencio, `crear()` devolvía `null` y **no se instanciaba ningún
+      VFX** pese a que los 3 tests previos daban verde (solo probaban funciones puras)
+- [x] `vfx_factory.gd`: `nuevo_emisor()` (configura sin añadir al árbol, para el pool)
+      y `redisparar()` (reuso determinista). `String(` → `str(` en todo el archivo
+- [x] `vfx_pool.gd` (nuevo): `VfxPool` — préstamo/liberación por `id`, precalentamiento,
+      `max_emisores`/`max_particulas`, reciclado del más antiguo y métricas
+- [x] `vfx_director.gd` (reescrito): consume el pool; `precalentar()`, `actualizar()`
+      devuelve al pool los agotados y `finalizar()` libera los nodos
+- [x] **Determinismo**: `restart()` **re-aleatoriza** `seed` (medido 2694543342 →
+      2659173778) → la semilla se asigna DESPUÉS de `restart()`
+- [x] **Log `VFX-SKIP` implementado de verdad** (antes `[x]` sin existir): señal
+      `emision_descartada(id, motivo)` del pool + escritura en `GameLogger` (categoría
+      `WORLD`) desde el director
+- [x] `test_vfx_pool_m52.gd` (nuevo): 6 bloques, **89 checks** — ejercita la **ruta de
+      runtime** que los 3 tests puros nunca tocaban (instancia nodos reales)
+- [x] Anti-falso-verde: marcador `_fin()` por bloque, verificado en `_run()`
+- [x] 4 tests de M52 añadidos al job `test-suite` de `.github/workflows/quality.yml`
+- [x] `04-Codigo.md` reescrito: rutas reales de Godot (el anterior listaba rutas de
+      Unity `Assets/_Project/VFX/...` inexistentes y decía "pendiente de implementación")
+
+### Auditoría de sobre-cierre (iter. 5)
+
+Casillas que estaban `[x]` **sin artefacto verificable**; reclasificadas a `[?]`
+con la razón al lado (ver secciones B y R):
+
+| Ítem | Estado previo | Realidad medida |
+|---|---|---|
+| Resonancia y activación de runas | `[x]` | Sin entrada en `vfx_catalog.json` |
+| Obtención de Sello | `[x]` | Sin entrada en `vfx_catalog.json` |
+| Resolución de puzzle | `[x]` | Sin entrada en `vfx_catalog.json` |
+| Construcción, cosecha y pesca | `[x]` | Cosecha y pesca sí; construcción no |
+| Cambio estacional | `[x]` | Solo primavera (`vfx_polen`) |
+| Log `VFX-SKIP` | `[x]` | No existía → **implementado** en iter. 5 (queda `[x]` legítimo) |
+
+El catálogo real tiene **8 de los 25** efectos del plan maestro.
+
+### Recuento tras la iteración 5
+
+- Checklist original: **139** ítems → `[x]` 78 · `[?]` 8 · `[ ]` 52 · `[!]` 1
+- Ítems nuevos de esta sección: **10** (todos `[x]`)
+- **Total del archivo: 149 ítems → `[x]` 88 · `[?]` 8 · `[ ]` 52 · `[!]` 1**
+
+## QA visual V2-asistencia (agnes-3-flash / Sapiens AI / Kilo Code, 2026-09-16 — visión nativa)
+
+> **Alcance:** V2-**asistencia** (leo/describo las capturas del MCP godot y opino). La **aprobación estética
+> final sigue siendo del usuario (M154)** y **no genero arte (V5)**; soy el "ojo barato y rápido" para
+> detectar bugs visuales. Fuentes: `capturas/52-Particulas-Y-VFX/*.png` (leídas con visión).
+
+- **`cap_52_iter3-turbulencia-flotante.png`:** cielo azul (gradiente) + plano oscuro. Chorro diagonal de
+  partículas amarillas (quads/puntos) — coherente con "turbulencia flotante". **⚠️ `FPS: 24`** → señal de
+  rendimiento para la turbulencia (más interacción/partículas que iter4); **flag a M61 (Rendimiento)**:
+  revisar el budget de partículas del efecto de turbulencia (densidad/rate). No es un bug visual, es perf.
+- **`cap_52_iter4-emision-caja-ancha.png`:** mismo fondo; partículas amarillas **más dispersas y sueltas**
+  (emisión de caja ancha, algunos quads más grandes). **`FPS: 59`** → dentro del target 60. Aspecto correcto,
+  sin partículas fuera de cuadro ni pop-in visible.
+- **Lectura global:** color amarillo sobre cielo azul = buen contraste/legibilidad de VFX. No detecté
+  artefactos visuales (overdraw, z-fighting, partículas mal ancladas) en estas 2 capturas.
+- **Recomendación (dueño M52/M61):** validar el effecto de **turbulencia** contra el presupuesto de
+  partículas (24 FPS en la captura); las otras iteraciones (polen, caja ancha) parecen sanas.
+- **No afirmo "aprobado visualmente"**: esto es V2-asistencia; el cierre estético es del usuario.
