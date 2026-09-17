@@ -150,6 +150,22 @@ bloquear_m23.py
 reservar_log.ps1
 postlaunch_checklist.json
 
+# Duplicados de raíz (ya en PAPELERA/ o scripts/)
+_qa_note.py
+broken_log_refs.txt
+count_lists.ps1
+data.drift.json
+duplicates_scan.txt
+duplicates_summary.txt
+duplicates_with_dates.txt
+log_references_scan.txt
+logs_global_order.txt
+renumber_map.json
+renumber_map_v2.json
+renumber_map_v3.json
+sync_actuals.ps1
+POSTLAUNCH_CHECKLIST.md
+
 # Temporales de game/
 game/isla-ancestral/_probe_col.gd
 game/isla-ancestral/reservar_log.ps1
