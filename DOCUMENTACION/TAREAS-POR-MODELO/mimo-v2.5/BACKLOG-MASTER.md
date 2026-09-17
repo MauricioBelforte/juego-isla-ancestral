@@ -5,7 +5,9 @@
 
 > Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`. Fuente: columna **Recom** de `CHECKLIST-GLOBAL.md` + bugs asignados + fortalezas del modelo (§12.5 de `10-GUIA-COMPARATIVA-MODELOS.md`).
 
-**Módulos asignados:** 8  |  **Tareas pendientes totales:** 306
+**Módulos asignados:** 14  |  **Tareas pendientes totales:** ~1,050
+
+> Última actualización: 2026-09-15 (mimo-v2.5, OpenCode)
 
 > ⛔ **REGLA OBLIGATORIA — CODIFICACION UTF-8**
 > Todos los archivos del proyecto DEBEN guardarse en UTF-8 sin BOM. NUNCA en cp1252/ANSI.
@@ -38,20 +40,32 @@
 | # | ID | Módulo | Estado global | Progreso | Prioridad | Pendientes | Subcarpeta |
 |---|----|--------|---------------|----------|-----------|------------|------------|
 | 1 | 53 | 53-UI-UX | 🟡 Con dudas | 72/158 | Alta | 86 | `53-UI-UX/checklist.md` |
-| 2 | 160 | 160-Diseno-De-Ubicaciones-Del-Mundo | 🟢 Disponible | 59/134 | Alta | 75 | `160-Diseno-De-Ubicaciones-Del-Mundo/checklist.md` |
-| 3 | 156 | 156-Terrenos-Y-Movimiento | 🟢 Disponible | 10/302 | Alta | 292 | `156-Terrenos-Y-Movimiento/checklist.md` |
-| 4 | 154 | 154-Vision-Del-Agente | 🔵 En curso | 131/155 | Media | 24 | `154-Vision-Del-Agente/checklist.md` |
-| 5 | 08 | 08-Mundo-Voxel | ✅ Completado | 105/105 | — | 0 (bugs) | `08-Mundo-Voxel/checklist.md` |
-| 6 | 10 | 10-Generacion-Del-Mundo | ✅ Completado | 106/106 | — | 0 (bugs) | `10-Generacion-Del-Mundo/checklist.md` |
-| 7 | 11 | 11-Personaje-Del-Jugador | ✅ Completado | 122/122 | — | 0 | `11-Personaje-Del-Jugador/checklist.md` |
-| 8 | 12 | 12-Camara | ✅ Completado | 102/102 | — | 0 | `12-Camara/checklist.md` |
+| 2 | 160 | 160-Ubicaciones | 🟢 Disponible | 59/134 | Alta | 75 | `160-Ubicaciones/checklist.md` |
+| 3 | 156 | 156-Terrenos-Y-Movimiento | 🟢 Disponible | 10/302 | Alta | 292 | `156-Terrenos/checklist.md` |
+| 4 | 154 | 154-Vision-Del-Agente | 🔵 En curso | 131/155 | Media | 24 | `154-Vision/checklist.md` |
+| 5 | 78 | 78-Legal-Propiedad-Intelectual | ✅ | 157/157 | Alta | 157 | `78-Legal-PI/` — ✅ 157/157 completado. QA pendiente §21.8 |
+| 6 | 84 | 84-Musica-Y-Audio-Legal | 🔵 En curso | 77/100 | Alta | 100 | `84-Musica-Y-Audio-Legal/` — 77/100: 5 scripts + test + data verificados. Docs cubren contratos/licencias/IA. Pendiente: edge cases, build logging, doc pages |
+| 7 | 131 | 131-Creditos | 🔵 En curso | 55/99 | Media | 28 | `131-Creditos/` — +8 items: test v2, navegación, idioma, copyright. Pendiente: easter eggs/i18n/performance |
+| 8 | 150 | 150-Diseno-Sonoro-Narrativo | 🔵 En curso | 55/151 | Media | 151 | `150-Diseno-Sonoro/` — Creado narrative_sound.json (6 momentos, 4 leitmotifs, 2 reglas). Test 12/0 OK. Pendiente: integración gameplay, expansion islas |
+| 9 | 166 | 166-Variantes-Rendimiento | 🔵 En curso | 111/112 | Alta | 112 | `166-variantes/` — 111/112: 4 scripts Python + docs completos. H12 [?] pendiente: pasada ALTA 15 heroes (artista manual) |
+| 10 | 168 | 168-Plantilla-De-Isla | ✅ Completado | 104/104 | — | 0 | `168-Plantilla/` |
+| 11 | 08 | 08-Mundo-Voxel | ✅ Completado | 105/105 | — | 0 (bugs) | `08-Mundo-Voxel/` |
+| 12 | 10 | 10-Generacion-Del-Mundo | ✅ Completado | 106/106 | — | 0 (bugs) | `10-Generacion/` |
+| 13 | 11 | 11-Personaje-Del-Jugador | ✅ Completado | 122/122 | — | 0 | `11-Personaje/` |
+| 14 | 12 | 12-Camara | ✅ Completado | 102/102 | — | 0 | `12-Camara/` |
 
 ## Notas
 
-- M08, M10, M11, M12 están **completados** pero los incluyo para bugs reportados (BUG-019 LOD, BUG-020 palmeras sobre agua).
-- M53 (UI) es mi prioridad #1: completadas integraciones M57/M58/M87/M91 (6 tareas T-053-058 a T-053-069).
-- M160 (Ubicaciones) y M156 (Terrenos) están disponibles y alineados con mi fuerza de arquitectura.
-- M154 (Visión) lo heredé parcialmente — 24 ítems restantes de testing visual.
+- M08, M10, M11, M12, M168 están **completados** — incluidos para bugs/regresiones.
+- M53 (UI) es prioridad #1: integraciones M57/M58/M87/M91 avanzadas.
+- M160, M156, M154: módulos core (ya asignados).
+- **Nuevos módulos (2026-09-15):** M78, M84, M131, M150, M166 — tomados de la auditoría de agnes (revertidos a 🟢).
+- M78: Legal PI — documentación existe, puedo auditar/revisar.
+- M84: Audio Legal — documentación por MiMo V2.5 (yo), puedo continuar.
+- M131: Créditos — 72/100 hechos, puedo completar.
+- M150: Diseño Sonoro — vacío, puedo crear docs base.
+- M166: Variantes Rendimiento — docs + scripts existen, puedo auditar.
+- **Rol director/companion:** verifico consistencia, logs, referencias, propongo mejoras.
 
 ## Tareas adicionales completadas
 
