@@ -1,0 +1,131 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 162-Dialogos-Contextuales-De-NPCs (162)
+
+# Checklist personal tareas — 162-Dialogos-Contextuales-De-NPCs
+
+> Extraídas del `05-Checklist.md` del módulo (0 pendientes / 40 dudas de 120 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [x] T-001 1. Definir estructura de datos para diálogos contextuales
+- [x] T-002 2. Definir formato JSON para diálogos por NPC (grafo M21: `id`/`start`/`nodes`)
+- [x] T-003 3. Definir sistema de condiciones (capítulo, amistad, estación, hora, ubicación)
+- [x] T-004 4. Definir sistema de prioridad para resolución de conflictos
+- [x] T-005 5. Definir fallback cuando no hay diálogo válido
+- [x] T-006 6. Crear Resource GDScript para diálogos (se reusa `DialogueGraph`/`DialogueNode` de M21)
+- [x] T-007 7. Crear gestor de diálogos (`ContextualDialogueManager`, RefCounted)
+- [x] T-008 8. Crear evaluador de condiciones (en `ContextualDialogueManager._cumple`, semántica de M21)
+- [x] T-009 9. Definir namespace de Variables de Estado (M21 compatible: `flag_capitulo`/`estacion`/`hora`/`amistad_<slug>`/`flag_*`)
+- [x] T-010 10. Definir convención de IDs: `DLG-[SLUG]-CAP[N]-[TIPO][-VARIANTE]`
+- [x] T-011 11. Crear template de JSON vacío para NPCs nuevos (el generador `gen_m162_dialogues.py`)
+- [x] T-012 12. Definir tipos de diálogo válidos: SALUDO, HISTORIA, MISION, AMBIENTE, AMISTAD, ESTACIONAL, HORA
+- [x] T-013 13. Definir rango de capítulos: 0-7
+- [x] T-014 14. Definir niveles de amistad: desconocido (0-29), conocido (30-69), amigo (70-100)
+- [x] T-015 15. Definir franjas horarias: mañana (6-12), tarde (12-20), noche (20-6)
+- [x] T-016 16. Definir estaciones: PRIMAVERA, VERANO, OTONIO, INVIERNO
+- [x] T-017 17. Verificar integración con sistema de nodos de M21 (grafos validados con `DialogGraphValidator`)
+- [x] T-018 18. Verificar integración con variables de M22 (vía `flag_capitulo`/`flag_quest_*`)
+- [x] T-019 19. Verificar integración con sistema de amistad de M20 (vía `amistad_<slug>`)
+- [x] T-020 20. Verificar integración con sistema de tiempo de M29 (vía `estacion`/`hora`/`es_de_dia`/`es_noche`)
+- [x] T-021 21. Documentar diálogos del Mayor del Pueblo (NPC-RIZ-001) — 8 capítulos
+- [x] T-022 22. Documentar diálogos del Carpintero (NPC-RIZ-002) — 8 capítulos
+- [x] T-023 23. Documentar diálogos de la Vendedora de la Tienda General (NPC-RIZ-003) — 8 capítulos
+- [x] T-024 24. Documentar diálogos del Viejo Sabio (NPC-RIZ-004) — 8 capítulos
+- [x] T-025 25. Documentar diálogos del Pescador del Puerto (NPC-RIZ-005) — 8 capítulos
+- [x] T-026 26. Documentar diálogos de la Agricultora (NPC-RIZ-006) — 8 capítulos
+- [x] T-027 27. Documentar diálogos de la Niña del Pueblo (NPC-RIZ-007) — 8 capítulos
+- [x] T-028 28. Documentar diálogos del Animador de la Plaza (NPC-RIZ-008) — 8 capítulos
+- [x] T-029 29. Verificar coherencia del Mayor con eventos de M22 por capítulo
+- [x] T-030 30. Verificar coherencia del Viejo Sabio con misterios de M22
+- [?] T-031 31. Verificar que el Carpintero refleje progresión de herramientas T1
+- [?] T-032 32. Verificar que la Vendedora refleje cambios económicos por capítulo
+- [?] T-033 33. Verificar que el Pescador refleje cambios en el mar por capítulo
+- [?] T-034 34. Verificar que la Agricultora refleje impacto de cenizas en cultivos
+- [?] T-035 35. Verificar que la Niña tenga diálogos innocent-appropriate
+- [?] T-036 36. Verificar que el Animador mencione eventos/festivales relevantes
+- [x] T-037 37. Crear JSON del Mayor (NPC-RIZ-001)
+- [x] T-038 38. Crear JSON del Carpintero (NPC-RIZ-002)
+- [x] T-039 39. Crear JSON de la Vendedora (NPC-RIZ-003)
+- [x] T-040 40. Crear JSON del Viejo Sabio (NPC-RIZ-004)
+- [x] T-041 41. Crear JSON del Pescador (NPC-RIZ-005)
+- [x] T-042 42. Crear JSON de la Agricultora (NPC-RIZ-006)
+- [x] T-043 43. Crear JSON de la Niña (NPC-RIZ-007)
+- [x] T-044 44. Crear JSON del Animador (NPC-RIZ-008)
+- [x] T-045 45. Verificar que ningún diálogo de RIZ revele información de capítulos futuros
+- [x] T-046 46. Verificar que los saludos del Mayor sean consistentes entre capítulos
+- [?] T-047 47. Verificar que las misiones del Carpintero sean completables
+- [x] T-048 48. Verificar que los secretos del Sabio se revelen gradualmente
+- [?] T-049 49. Verificar que la Agricultora tenga remedios por estación
+- [?] T-050 50. Verificar que el Animador mencione festivales de M29
+- [?] T-051 51. Verificar que la Vendedora tenga stock coherente con capítulo
+- [?] T-052 52. Verificar que el Pescador mencione peces de M160
+- [x] T-053 53. Documentar diálogos del Herrero de Coral (NPC-COR-001) — 8 capítulos
+- [x] T-054 54. Documentar diálogos de la Pescadora de Coral (NPC-COR-002) — 8 capítulos
+- [x] T-055 55. Documentar diálogos del Comerciante Viajero (NPC-COR-003) — 8 capítulos
+- [x] T-056 56. Documentar diálogos del Guardia del Puerto (NPC-COR-004) — 8 capítulos
+- [x] T-057 57. Documentar diálogos de la Niña de la Playa (NPC-COR-005) — 8 capítulos
+- [?] T-058 58. Verificar coherencia del Herrero con sistema de forja de M158
+- [?] T-059 59. Verificar que la Pescadora mencione arrecifes de M160
+- [?] T-060 60. Verificar que el Comerciante refleje precios progresivos de M38
+- [?] T-061 61. Verificar que el Guardia mencione rutas de M160
+- [?] T-062 62. Verificar que la Niña de la Playa tenga diálogos innocent-appropriate
+- [x] T-063 63. Crear JSON del Herrero (NPC-COR-001)
+- [x] T-064 64. Crear JSON de la Pescadora (NPC-COR-002)
+- [x] T-065 65. Crear JSON del Comerciante (NPC-COR-003)
+- [x] T-066 66. Crear JSON del Guardia (NPC-COR-004)
+- [x] T-067 67. Crear JSON de la Niña de la Playa (NPC-COR-005)
+- [?] T-068 68. Verificar que el Herrero mencione cobre de Coral
+- [?] T-069 69. Verificar que el Comerciante tenga items exclusivos de Coral
+- [?] T-070 70. Verificar que el Guardia mencione peligros del arrecife
+- [?] T-071 71. Verificar que la Pescadora tenga tips de pesca por capítulo
+- [?] T-072 72. Verificar coherencia de COR con eventos de M22
+- [x] T-073 73. Documentar diálogos del Herrero Avanzado (NPC-CEN-001) — 8 capítulos
+- [x] T-074 74. Documentar diálogos del Minero (NPC-CEN-002) — 8 capítulos
+- [x] T-075 75. Documentar diálogos de la Cocinera del Pueblo (NPC-CEN-003) — 8 capítulos
+- [x] T-076 76. Documentar diálogos del Bibliotecario (NPC-CEN-004) — 8 capítulos
+- [x] T-077 77. Documentar diálogos del Guardia de la Mina (NPC-CEN-005) — 8 capítulos
+- [?] T-078 78. Verificar coherencia del Herrero Avanzado con sistema de hierro de M158
+- [?] T-079 79. Verificar que el Minero mencione minerales de M160
+- [?] T-080 80. Verificar que la Cocinera tenga recetas por capítulo
+- [?] T-081 81. Verificar que el Bibliotecario revele lore gradual de M22
+- [?] T-082 82. Verificar que el Guardia mencione la mina de M160
+- [x] T-083 83. Crear JSON del Herrero Avanzado (NPC-CEN-001)
+- [x] T-084 84. Crear JSON del Minero (NPC-CEN-002)
+- [x] T-085 85. Crear JSON de la Cocinera (NPC-CEN-003)
+- [x] T-086 86. Crear JSON del Bibliotecario (NPC-CEN-004)
+- [x] T-087 87. Crear JSON del Guardia de la Mina (NPC-CEN-005)
+- [?] T-088 88. Verificar que el Bibliotecario mencione cenizas de biblioteca antigua
+- [?] T-089 89. Verificar que el Herrero tenga hierro de Ceniza
+- [?] T-090 90. Verificar que la Cocinera mencione ingredientes de CEN
+- [?] T-091 91. Verificar que el Minero tenga misiones de exploración
+- [?] T-092 92. Verificar coherencia de CEN con eventos de M22
+- [x] T-093 93. Documentar diálogos del Encantador (NPC-AUR-001) — 8 capítulos
+- [x] T-094 94. Documentar diálogos de la Sanadora del Pueblo (NPC-AUR-002) — 8 capítulos
+- [x] T-095 95. Documentar diálogos del Guardia Ancestral (NPC-AUR-003) — 8 capítulos
+- [x] T-096 96. Documentar diálogos del Artista del Pueblo (NPC-AUR-004) — 8 capítulos
+- [x] T-097 97. Documentar diálogos del Viajero Misterioso (NPC-AUR-005) — 8 capítulos
+- [?] T-098 98. Verificar coherencia del Encantador con sistema de encantamientos de M158
+- [?] T-099 99. Verificar que la Sanadora tenga pociones por capítulo
+- [?] T-100 100. Verificar que el Guardia Ancestral mencione el templo de M160
+- [?] T-101 101. Verificar que el Artista mencione ubicaciones de M160
+- [x] T-102 102. Verificar que el Viajero Misterioso tenga arco narrativo propio
+- [x] T-103 103. Crear JSON del Encantador (NPC-AUR-001)
+- [x] T-104 104. Crear JSON de la Sanadora (NPC-AUR-002)
+- [x] T-105 105. Crear JSON del Guardia Ancestral (NPC-AUR-003)
+- [x] T-106 106. Crear JSON del Artista (NPC-AUR-004)
+- [x] T-107 107. Crear JSON del Viajero Misterioso (NPC-AUR-005)
+- [x] T-108 108. Verificar que el Viajero Misterioso revele identidad gradualmente
+- [?] T-109 109. Verificar que el Encantador mencione magia de AUR
+- [?] T-110 110. Verificar que la Sanadora tenga remedios de hierbas de AUR
+- [?] T-111 111. Verificar coherencia de AUR con eventos de M22
+- [?] T-112 112. Verificar que el Guardia Ancestral proteja templo consistentemente
+- [x] T-113 113. Verificar que DialogueManager.get_dialogue() retorna diálogo válido para cada NPC en cada capítulo (selector `ContextualDialogueManager.seleccionar` + simulación 8/8 OK)
+- [x] T-114 114. Verificar que las condiciones de amistad filtran correctamente (0-29, 30-69, 70-100) — mecanismo listo, contenido por nivel de amistad pendiente
+- [x] T-115 115. Verificar que las estaciones generan diálogos diferentes (variante PRIMAVERA del Mayor demostrada)
+- [?] T-116 116. Verificar que las franjas horarias generan diálogos diferentes — mecanismo listo, contenido por hora pendiente
+- [x] T-117 117. Verificar que el fallback funciona cuando no hay diálogo válido (simulado: Viajero diurno, NPC sin HISTORIA)
+- [x] T-118 118. Verificar que ningún diálogo contradice la historia de M22 (contenido alineado capítulo a capítulo)
+- [x] T-119 119. Verificar que los 23 JSONs tienen formato consistente (todos grafos M21 validados)
+- [x] T-120 120. Verificar que el sistema no genera errores en runtime (null checks, validación) — pendiente ejecutar `test_contextual_dialogue_m162.gd` en entorno con Godot

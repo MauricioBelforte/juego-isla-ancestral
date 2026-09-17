@@ -1,0 +1,163 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 01-Fundamentos-Del-Proyecto (01)
+
+# Checklist personal tareas — 01-Fundamentos-Del-Proyecto
+
+> Extraídas del `05-Checklist.md` del módulo (152 pendientes / 0 dudas de 152 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [ ] T-001 **M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0
+- [ ] T-002 **M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial
+- [ ] T-003 **M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input
+- [ ] T-004 **M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software
+- [ ] T-005 **M05** Control de Versiones [S] 🟡 — Git, .gitignore, ramas, mensajes de commit, Git LFS
+- [ ] T-006 **M06** Arquitectura General [C] 🔴 — managers, eventos globales, modularidad, evitar GameManager monolítico
+- [ ] T-007 **M07** Mundo Voxel [C] 🔴 — chunking, face/greedy meshing, threading, LOD, colisiones por grilla
+- [ ] T-008 **M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora
+- [ ] T-009 **M09** Generación del Mundo [C] 🔴 — seed, generador de terreno/biomas/vegetación/minerales/cuevas
+- [ ] T-010 **M10** Personaje del Jugador [M] 🔴 — modelo 3D, animaciones, controlador, colisiones, interacción
+- [ ] T-011 **M11** Cámara [M] 🔴 — tercera persona cenital inclinada, zoom, clipping, sensibilidad configurable
+- [ ] T-012 **M12** Herramientas [C] 🔴 — pala, pico, hacha, gancho mecánico, lanza-semillas, vara de flujo (sin daño)
+- [ ] T-013 **M13** Inventario [M] 🔴 — slots, stacks, hotbar, cofres, transferencia rápida, peso
+- [ ] T-014 **M14** Recursos [M] 🔴 — madera, piedra, arena, minerales, frutas, peces, rareza, respawn
+- [ ] T-015 **M15** Crafting [M] 🔴 — banco de trabajo, recetas, desbloqueos, preview, feedback
+- [ ] T-016 **M16** Construcción [C] 🔴 — modo construcción/decoración, grid, snapping, rotación, demolición
+- [ ] T-017 **M17** Casas [M] 🟡 — parcelas, ampliaciones, habitaciones, muebles interactivos, almacenamiento
+- [ ] T-018 **M18** NPC y Vecinos [C] 🔴 — especies, personalidades, rutinas, horarios, hogares, relaciones
+- [ ] T-019 **M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos
+- [ ] T-020 **M20** Diálogos [C] 🔴 — motor por nodos, flags narrativos, opciones, localización
+- [ ] T-021 **M21** Historia Principal [C] 🔴 — prólogo, capítulos, Sellos, templos, finales y ritmo
+- [ ] T-022 **M22** Historias Secundarias [M] 🟡 — arcos de vecinos, lugares, ruinas, objetos, postgame
+- [ ] T-023 **M23** Templos y Puzzles [C] 🔴 — framework emisor→receptor, dificultad, pistas, checkpoints
+- [ ] T-024 **M24** Ruinas [M] 🟡 — variantes pequeñas/medianas/grandes, inscripciones, pasajes ocultos
+- [ ] T-025 **M25** Templo Subterráneo [C] 🔴 — Templo de la Brisa: entrada, tutorial, salas, cámara del Sello
+- [ ] T-026 **M26** Islas del Mundo [C] 🟡 — Isla de Coral, Verde, Cenizas, Cielo (diseño completo por isla)
+- [ ] T-027 **M27** Viajes [M] 🟡 — Gran Vapor, boletos, requisitos, pantalla de viaje diegética
+- [ ] T-028 **M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos
+- [ ] T-029 **M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits
+- [ ] T-030 **M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna
+- [ ] T-031 **M31** Clima [M] 🟡 — sol, lluvia, tormenta, niebla, nieve, transiciones, accesibilidad
+- [ ] T-032 **M32** Agricultura [M] 🟡 — parcelas, semillas, riego, fertilizante, estaciones, plantas ancestrales
+- [ ] T-033 **M33** Pesca [M] 🟡 — especies, minijuego no frustrante, coleccionario, peces legendarios
+- [ ] T-034 **M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados
+- [ ] T-035 **M35** Fauna [M] 🟡 — especies no hostiles, hábitat, migraciones, observación, ecosistemas
+- [ ] T-036 **M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado
+- [ ] T-037 **M37** Economía [C] 🔴 — Gemas de Ámbar, Pases de Mérito, precios, sumideros, anti-exploits
+- [ ] T-038 **M38** Tiendas [M] 🟡 — tienda general, muebles, ropa, vivero, rotación de stock
+- [ ] T-039 **M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas
+- [ ] T-040 **M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops
+- [ ] T-041 **M41** Sonido Ambiental [M] 🟡 — viento, agua, océano, cuevas, ruinas, mecanismos
+- [ ] T-042 **M42** Efectos de Sonido [M] 🟡 — pasos, herramientas, bloques, diálogo, menús, logros
+- [ ] T-043 **M43** ASMR y Feedback [M] 🟡 — sensaciones táctiles de picar/cosechar/construir, capas sonoras
+- [ ] T-044 **M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD
+- [ ] T-045 **M45** Arte 2D [M] 🟡 — logo, iconos, UI, mapas, símbolos ancestrales, guías de estilo
+- [ ] T-046 **M46** Texturas y Materiales [M] 🟡 — tierra, césped, piedra, agua, variantes por bioma
+- [ ] T-047 **M47** Animación [C] 🟡 — jugador, NPC, fauna, vegetación, mecanismos, UI
+- [ ] T-048 **M48** Iluminación [M] 🟡 — URP/Forward+, GI suave, horaria, faroles, cuevas, optimización
+- [ ] T-049 **M49** Vegetación [M] 🟡 — hierba, árboles ancestrales, plantas luminosas, viento, instancing
+- [ ] T-050 **M50** Agua [C] 🟡 — océano, ríos, cascadas, congelamiento, evaporación, puzzles hidráulicos
+- [ ] T-051 **M51** Partículas y VFX [M] 🟡 — polvo, hojas, Resonancia, activación de runas, obtención de Sello
+- [ ] T-052 **M52** UI/UX [C] 🔴 — HUD, menús, inventario, mapa, diario, calendario, tooltips
+- [ ] T-053 **M53** Mapa [M] 🟡 — mapa global, descubrimiento progresivo, marcadores, leyenda
+- [ ] T-054 **M54** Diario del Jugador [M] 🟢 — registro de personajes, pistas, Sellos, ruinas, fotografías
+- [ ] T-055 **M55** Fotografía [M] 🟢 — modo fotografía, filtros, álbum, galería
+- [ ] T-056 **M56** Interfaz de Control [M] 🔴 — teclado, ratón, gamepad, remapeo, Steam Deck
+- [ ] T-057 **M57** Accesibilidad [M] 🔴 — daltonismo, subtítulos, texto ajustable, reducción de movimiento
+- [ ] T-058 **M58** Guardado [C] 🔴 — autosave, slots, GameState versionado, backups, recuperación
+- [ ] T-059 **M59** Datos y Serialización [M] 🔴 — formato, IDs persistentes, versionado de schema, migraciones
+- [ ] T-060 **M60** Rendimiento [C] 🔴 — 60 FPS, presupuestos, profiling, culling, batching, instancing
+- [ ] T-061 **M61** Memoria [M] 🔴 — texturas, meshes, audio, streaming, memory leaks, sesiones largas
+- [ ] T-062 **M62** Cargas y Streaming [M] 🔴 — carga asíncrona, chunks cercanos, progreso real
+- [ ] T-063 **M63** IA de NPC [C] 🔴 — máquina de estados, rutinas, pathfinding sobre terreno modificable
+- [ ] T-064 **M64** Animales IA [M] 🟡 — comportamiento no hostil, migraciones, spawn/despawn
+- [ ] T-065 **M65** Anti-Softlock [M] 🔴 — recuperación de objetos clave, reinicio de puzzles, fallbacks
+- [ ] T-066 **M66** Vehículos [M] 🟢 — barco (y post-v1.0 submarino), física, cámara, docking
+- [ ] T-067 **M67** Transporte y Navegación [M] 🟢 — puerto, rutas, señalización, fast travel narrativo
+- [ ] T-068 **M68** Fast Travel [S] 🟢 — puntos de viaje, requisitos, anti-bypass de eventos
+- [ ] T-069 **M69** Interacciones [M] 🔴 — distancia, indicador, prioridad, contextuales, cancelación
+- [ ] T-070 **M70** Progresión [M] 🔴 — narrativa, herramientas, construcción, social, islas, desbloqueos
+- [ ] T-071 **M71** Sistema de Logros [M] 🟡 — básicos, exploración, social, colección, secretos
+- [ ] T-072 **M72** Coleccionables [M] 🟡 — reliquias, fragmentos, conchas, fósiles, documentos
+- [ ] T-073 **M73** Eventos [M] 🟡 — festivales estacionales, llegada del vapor, eventos raros
+- [ ] T-074 **M74** Postgame [M] 🟢 — Era del Alba, nuevas islas, objetivos 100%, contenido libre
+- [ ] T-075 **M75** Multijugador [C] 🟢 — decidir local/online, cantidad, voz de diseño (post-v1.0)
+- [ ] T-076 **M76** Online y Red [C] 🟢 — cliente-servidor, sincronización, latencia, seguridad (post-v1.0)
+- [ ] T-077 **M77** Legal — Propiedad Intelectual [M] 🔴 — marcas, autoría, licencias, terceros
+- [ ] T-078 **M78** Legal — Contratos [M] 🟡 — freelancers, cesión de derechos, work-for-hire
+- [ ] T-079 **M79** Legal — Privacidad [M] 🔴 — GDPR/COPPA, política de privacidad, consentimientos
+- [ ] T-080 **M80** Legal — Menores [M] 🟡 — clasificación, controles parentales, contenido
+- [ ] T-081 **M81** Clasificación por Edades [S] 🟡 — IARC/ESRB/PEGI (cero violencia → permisiva)
+- [ ] T-082 **M82** Licencias de Software [M] 🟡 — engine, plugins, fuentes, librerías
+- [ ] T-083 **M83** Música y Audio — Legal [M] 🟡 — derechos de reproducción, sincronización, ámbitos territoriales
+- [ ] T-084 **M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro
+- [ ] T-085 **M85** IA Generativa [M] 🔴 — política de IA, declaración Steam, qué delegar y qué no
+- [ ] T-086 **M86** Localización [M] 🟡 — idioma base, claves, tablas, QA lingüístico
+- [ ] T-087 **M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ
+- [ ] T-088 **M88** Diseño de Menús [M] 🟡 — principal, pausa, inventario, ajustes, créditos
+- [ ] T-089 **M89** Configuración Gráfica [S] 🟡 — resolución, calidad, VSync, FPS, presets
+- [ ] T-090 **M90** Configuración de Audio [S] 🟡 — volúmenes independientes, rango dinámico
+- [ ] T-091 **M91** Tutorial [M] 🔴 — movimiento, cámara, recolección, construcción, progresivo
+- [ ] T-092 **M92** Balance [C] 🔴 — precios, recompensas, crafting, amistad, simulación económica
+- [ ] T-093 **M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia
+- [ ] T-094 **M94** Monetización [M] 🟡 — premium, DLC de islas vs contenido gratis, precio
+- [ ] T-095 **M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar
+- [ ] T-096 **M96** Steam / Store Page [M] 🔴 — página, capsule art, capturas, trailer, wishlists
+- [ ] T-097 **M97** Trailer [M] 🟡 — teaser, gameplay, lanzamiento
+- [ ] T-098 **M98** Marketing [M] 🟡 — identidad, redes, devlogs, press kit, Next Fest
+- [ ] T-099 **M99** Community Management [M] 🟢 — Discord, reglas, feedback, FAQ
+- [ ] T-100 **M100** QA General [M] 🔴 — funcional, regresión, rendimiento, guardado, UI, audio
+- [ ] T-101 **M101** Bug Tracking [S] 🟡 — herramienta, categorías, severidades, reproducción
+- [ ] T-102 **M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación
+- [ ] T-103 **M103** Analytics [M] 🟢 — eventos, sesiones, anonimización, dashboard
+- [ ] T-104 **M104** Telemetría de Gameplay [M] 🟢 — tutorías, abandono de puzzles, zonas ignoradas
+- [ ] T-105 **M105** Seguridad [M] 🟢 — APIs, claves, validación, anti-manipulación (si online)
+- [ ] T-106 **M106** Backups [S] 🔴 — repositorio, assets, documentación, builds, restauración
+- [ ] T-107 **M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores
+- [ ] T-108 **M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport
+- [ ] T-109 **M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks
+- [ ] T-110 **M110** Código de Calidad [M] 🔴 — sin duplicados, tests, interfaces, deuda controlada
+- [ ] T-111 **M111** Testing Automático [M] 🔴 — unit, integración, save/load, economía, voxel, navegación
+- [ ] T-112 **M112** Pruebas de Stress [M] 🟡 — miles de bloques, muchos NPC, sesiones largas
+- [ ] T-113 **M113** Playtest [M] 🔴 — interno, externo, primera experiencia, con gamepad, hardware bajo
+- [ ] T-114 **M114** Hardware [M] 🟡 — PC mínimo/recomendado, GPU integrada/dedicada, SSD/HDD
+- [ ] T-115 **M115** Instalador [S] 🟢 — build release, instalación limpia, actualización, desinstalación
+- [ ] T-116 **M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado
+- [ ] T-117 **M117** CI/CD [M] 🟢 — tests automáticos, builds, artifacts, branch protection
+- [ ] T-118 **M118** Actualizaciones [M] 🟡 — patches, versionado, compatibilidad de saves, migraciones
+- [ ] T-119 **M119** DLC y Expansiones [M] 🟢 — estrategia post-lanzamiento, nuevas islas
+- [ ] T-120 **M120** Soporte Post-Lanzamiento [M] 🟢 — canal de soporte, tickets, hotfixes, roadmap
+- [ ] T-121 **M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización
+- [ ] T-122 **M122** Modding [C] 🟢 — decidir si habrá, API, seguridad (opcional muy a futuro)
+- [ ] T-123 **M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos
+- [ ] T-124 **M124** Términos de Servicio [S] 🟢 — EULA, licencia de uso, reembolsos
+- [ ] T-125 **M125** Marketing Legal [S] 🟢 — screenshots, música, influencers, claims
+- [ ] T-126 **M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares
+- [ ] T-127 **M127** Identidad de Marca [M] 🟡 — nombre (verificar colisión), logo, paleta, símbolo de Aurora
+- [ ] T-128 **M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento)
+- [ ] T-129 **M129** Artbook [M] 🟢 — arte conceptual, evolución del mundo (post-lanzamiento)
+- [ ] T-130 **M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos
+- [ ] T-131 **M131** Producción del Equipo [S] 🟡 — roles definidos aunque sea equipo chico
+- [ ] T-132 **M132** Gestión del Proyecto [M] 🔴 — kanban/scrum, milestones, sprints, backlog
+- [ ] T-133 **M133** Presupuesto [M] 🟡 — programación, arte, marketing, servidores, contingencia
+- [ ] T-134 **M134** Riesgos del Proyecto [M] 🔴 — scope creep, técnico, financiero, mitigaciones
+- [ ] T-135 **M135** Roadmap [M] 🔴 — preproducción → prototipo → slice → alpha → beta → lanzamiento
+- [ ] T-136 **M136** Prototipo [C] 🔴 — movimiento, cámara, voxel básico, extracción/colocación, mini puzzle, save
+- [ ] T-137 **M137** Vertical Slice [C] 🔴 — Aurora + templo completo + NPC con arco, arte final, medición de rendimiento
+- [ ] T-138 **M138** Pre-Alpha [C] 🔴 — núcleo jugable, arquitectura estable, primer bioma, primeros sistemas
+- [ ] T-139 **M139** Alpha [C] 🔴 — mecánicas completas, historia jugable, primer balance, QA intensivo
+- [ ] T-140 **M140** Beta [C] 🔴 — contenido completo, rendimiento objetivo, cero bugs críticos, localización
+- [ ] T-141 **M141** Release Candidate [C] 🔴 — freeze, builds limpias, saves compatibles, certificación
+- [ ] T-142 **M142** Lanzamiento [C] 🔴 — publicación en Steam, monitoreo, hotfix de emergencia
+- [ ] T-143 **M143** Después del Lanzamiento [M] 🟡 — reviews, bugs, rendimiento, retención, parches
+- [ ] T-144 **M144** Diseño de Experiencia [M] 🟡 — sensación de llegada, descubrimiento, hogar, comunidad, misterio
+- [ ] T-145 **M145** Diseño Emocional [M] 🟡 — calma, sorpresa, nostalgia, pertenencia, legado
+- [ ] T-146 **M146** World Building [C] 🔴 — historia de Aurora, Arquitectos, Resonancia, Primeros Jardineros, Elysia
+- [ ] T-147 **M147** Lore Ambiental [M] 🟡 — ruinas/objetos/vegetación que cuentan historias, pistas
+- [ ] T-148 **M148** Nombres y Nomenclatura [M] 🟡 — islas, personajes, Sellos, consistencia, marcas
+- [ ] T-149 **M149** Diseño Sonoro Narrativo [M] 🟢 — sonido de Resonancia, de cada Sello, silencios narrativos
+- [ ] T-150 **M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento
+- [ ] T-151 **M151** Principios que no deberían perderse [S] 🔴 — cero combate, cero FOMO, sin grind, sin espagueti
+- [ ] T-152 **M152** Objetivo Final del Proyecto [M] 🔴 — Aurora como hogar, curiosidad por explorar, mundo vivo post-créditos

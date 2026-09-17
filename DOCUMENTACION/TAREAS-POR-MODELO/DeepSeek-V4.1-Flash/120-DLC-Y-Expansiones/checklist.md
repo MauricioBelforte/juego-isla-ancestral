@@ -1,0 +1,233 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 120-DLC-Y-Expansiones (120)
+
+# Checklist personal tareas — 120-DLC-Y-Expansiones
+
+> Extraídas del `05-Checklist.md` del módulo (59 pendientes / 0 dudas de 222 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [ ] T-001 Definir estrategia
+- [ ] T-002 Definir qué queda en el juego base
+- [x] T-003 Crear DlcManager autoload con manifest data-driven [M]
+- [x] T-004 Verificar compatibilidad con version base [M]
+- [x] T-005 Activar/desactivar DLC con persistencia [M]
+- [x] T-006 Soporte para bundles con descuento [S]
+- [x] T-007 Test headless de DLC manager [M]
+- [x] T-008 Datos data-driven: dlc_manifest.json + bundles.json [S]
+- [x] T-009 Diseñar nuevas colecciones
+- [ ] T-010 Diseñar nuevas ruinas
+- [ ] T-011 Diseñar compatibilidad
+- [x] T-012 Diseñar precio
+- [ ] T-013 Diseñar bundle
+- [ ] T-014 Diseñar marketing
+- [x] T-015 Evitar bloquear contenido esencial
+- [x] T-016 Definir frecuencia (trimestral/semestral/anual)
+- [ ] T-017 Definir tamaño (pequeño/mediano/grande)
+- [ ] T-018 Definir temática (coherente con visión cozy)
+- [x] T-019 Diseñar DLC pequeños: trimestrales, 1-2 islas, 5-10 NPCs, 1 sistema
+- [x] T-020 Diseñar DLC medianos: semestrales, 2-3 islas, 10-15 NPCs, 2 sistemas
+- [x] T-021 Diseñar DLC grandes: anuales, 3-5 islas, 15-20 NPCs, 3 sistemas
+- [x] T-022 Definir historia principal completa
+- [ ] T-023 Definir 7 islas base
+- [ ] T-024 Definir 13 biomas base
+- [x] T-025 Definir sistemas core (crafting, construcción, NPCs, agricultura, pesca, minería, museos, economía)
+- [ ] T-026 Definir música base (12 tracks base)
+- [ ] T-027 Definir 30 NPCs base con amistad y diálogos
+- [x] T-028 Definir sistema de transporte y navegación
+- [x] T-029 Definir sistema de viajes entre islas
+- [x] T-030 Definir sistema de sellos (7 sellos base)
+- [x] T-031 Definir sistema de puzzles y templos
+- [x] T-032 Definir sistema de festivales y eventos
+- [x] T-033 Definir NO DLC obligatorio
+- [x] T-034 Diseñar Isla de Hielo (DLC 1)
+- [x] T-035 Diseñar Isla de Volcán (DLC 2)
+- [x] T-036 Diseñar Isla de Bosque (DLC 3)
+- [ ] T-037 Diseñar bioma: Hielo y nieve para Isla de Hielo
+- [ ] T-038 Diseñar bioma: Volcánico y rocoso para Isla de Volcán
+- [ ] T-039 Diseñar bioma: Bosque denso y místico para Isla de Bosque
+- [ ] T-040 Diseñar 5-7 NPCs nuevos por isla
+- [ ] T-041 Diseñar historia secundaria por isla
+- [ ] T-042 Diseñar 1 templo nuevo por isla
+- [x] T-043 Diseñar sistema nuevo por isla
+- [x] T-044 Diseñar colecciones por isla
+- [x] T-045 Diseñar historias secundarias opcionales
+- [x] T-046 Diseñar 2-3 cadenas por DLC
+- [x] T-047 Diseñar sellos nuevos (opcional)
+- [x] T-048 Diseñar consecuencias persistentes pero no esenciales
+- [x] T-049 Diseñar integración con historia principal del juego base (opcional)
+- [x] T-050 Diseñar independencia de historias DLC (opcional)
+- [x] T-051 Diseñar no bloquear contenido esencial del juego base
+- [x] T-052 Diseñar 5-10 NPCs por DLC
+- [ ] T-053 Diseñar rutinas diarias y semanales
+- [ ] T-054 Diseñar diálogos y amistad
+- [x] T-055 Diseñar misiones opcionales
+- [ ] T-056 Diseñar no afectar NPCs del juego base
+- [x] T-057 Diseñar NPCs DLC pueden visitar islas del juego base (opcional)
+- [x] T-058 Diseñar NPCs DLC pueden tener relaciones con NPCs del juego base (opcional)
+- [x] T-059 Diseñar NPCs DLC no bloquean contenido esencial del juego base
+- [x] T-060 Diseñar sistema de acuicultura (DLC opcional)
+- [x] T-061 Diseñar sistema de jardinería (DLC opcional)
+- [x] T-062 Diseñar sistema de fotografía avanzada (DLC opcional)
+- [x] T-063 Diseñar sistema de colecciones avanzadas (DLC opcional)
+- [x] T-064 Diseñar integración con sistemas del juego base
+- [x] T-065 Diseñar sistemas DLC opcionales (no obligatorios)
+- [x] T-066 Diseñar sistemas DLC no bloquean contenido esencial del juego base
+- [x] T-067 Diseñar 2-3 biomas nuevos por DLC
+- [x] T-068 Diseñar coherencia con islas nuevas
+- [ ] T-069 Diseñar flora y fauna específicas
+- [ ] T-070 Diseñar recursos específicos
+- [x] T-071 Diseñar biomas DLC solo en islas DLC
+- [x] T-072 Diseñar biomas DLC no aparecen en islas del juego base
+- [x] T-073 Diseñar biomas DLC no bloquean contenido esencial del juego base
+- [x] T-074 Diseñar 10-15 tracks nuevos por DLC
+- [ ] T-075 Diseñar leitmotifs de NPCs nuevos
+- [x] T-076 Diseñar coherencia con estilo base (cozy, relajante)
+- [ ] T-077 Diseñar leitmotifs de islas nuevas
+- [x] T-078 Diseñar músicas DLC solo en islas DLC
+- [x] T-079 Diseñar músicas DLC pueden aparecer en islas del juego base (opcional)
+- [x] T-080 Diseñar músicas DLC no bloquean contenido esencial del juego base
+- [x] T-081 Diseñar colecciones opcionales (peces tropicales, flores raras, artefactos antiguos)
+- [x] T-082 Diseñar 10-20 items por colección
+- [x] T-083 Diseñar coherencia con temática del DLC
+- [ ] T-084 Diseñar recompensas cosméticas (trofeos, títulos)
+- [x] T-085 Diseñar colecciones DLC solo en islas DLC
+- [x] T-086 Diseñar colecciones DLC pueden aparecer en museos del juego base (opcional)
+- [x] T-087 Diseñar colecciones DLC no bloquean contenido esencial del juego base
+- [x] T-088 Diseñar 2-3 ruinas/tempos nuevos por DLC
+- [x] T-089 Diseñar puzzles opcionales
+- [x] T-090 Diseñar sin afectar historia principal del juego base
+- [x] T-091 Diseñar sellos nuevos (opcional)
+- [x] T-092 Diseñar ruinas DLC solo en islas DLC
+- [x] T-093 Diseñar ruinas DLC no bloquean contenido esencial del juego base
+- [x] T-094 Diseñar ruinas DLC pueden integrarse con historia principal del juego base (opcional)
+- [ ] T-095 Diseñar compatible con versión 1.0 del juego base
+- [x] T-096 Diseñar DLC no requiere actualización del juego base
+- [x] T-097 Diseñar DLC funciona con savegames del juego base
+- [x] T-098 Diseñar DLC no rompe savegames del juego base
+- [x] T-099 Diseñar compatible con otros DLC
+- [x] T-100 Diseñar DLC no requiere otros DLC para funcionar
+- [x] T-101 Diseñar DLC puede integrarse con otros DLC (opcional)
+- [x] T-102 Diseñar DLC no rompe savegames con otros DLC
+- [ ] T-103 Diseñar backward compatible (compatible con versiones futuras)
+- [x] T-104 Diseñar compatible con futuros DLC
+- [x] T-105 Diseñar soporta desinstalación
+- [x] T-106 Diseñar desinstalación no rompe el juego base
+- [x] T-107 Diseñar desinstalación no rompe savegames
+- [x] T-108 Diseñar desinstalación conserva datos del usuario
+- [x] T-109 Diseñar DLC pequeños: USD 5-10
+- [x] T-110 Diseñar DLC medianos: USD 10-20
+- [x] T-111 Diseñar DLC grandes: USD 20-30
+- [x] T-112 Diseñar sensibles para género cozy (no predatory pricing)
+- [x] T-113 Diseñar justificación por tamaño de DLC
+- [x] T-114 Diseñar justificación por contenido de DLC
+- [x] T-115 Diseñar Season Pass (3 DLC por USD 20-25)
+- [ ] T-116 Diseñar descuento ~30% para Season Pass
+- [x] T-117 Diseñar DLC lanzados trimestralmente
+- [x] T-118 Diseñar Season Pass incluye todos los DLC del año
+- [x] T-119 Diseñar Bundle Completo (todos los DLC por USD 50-60)
+- [ ] T-120 Diseñar descuento ~40% para Bundle Completo
+- [x] T-121 Diseñar Bundle actualizado con cada nuevo DLC
+- [x] T-122 Diseñar Bundle incluye DLC pasados y futuros
+- [x] T-123 Diseñar Bundles temáticos (islas, sistemas, historias)
+- [x] T-124 Diseñar trailer específico por DLC
+- [x] T-125 Diseñar 1-2 minutos de duración
+- [x] T-126 Diseñar mostrar contenido nuevo (islas, NPCs, sistemas)
+- [ ] T-127 Diseñar coherente con estilo del juego (cozy, relajante)
+- [ ] T-128 Diseñar screenshots de contenido nuevo
+- [ ] T-129 Diseñar screenshots de islas nuevas
+- [ ] T-130 Diseñar screenshots de NPCs nuevos
+- [x] T-131 Diseñar screenshots de sistemas nuevos
+- [x] T-132 Diseñar anuncios en Steam Store
+- [x] T-133 Diseñar anuncios en Steam Community Hub
+- [x] T-134 Diseñar anuncios en Steam Discovery Queue
+- [x] T-135 Diseñar anuncios en Twitter/X
+- [x] T-136 Diseñar anuncios en Reddit
+- [x] T-137 Diseñar anuncios en Discord
+- [ ] T-138 Diseñar AMAs en Discord
+- [x] T-139 Definir DLC no bloquea contenido esencial del juego base
+- [x] T-140 Definir DLC es completamente opcional
+- [x] T-141 Definir DLC no es necesario para disfrutar del juego base
+- [x] T-142 Definir DLC no es necesario para completar historia principal del juego base
+- [x] T-143 Definir DLC no es necesario para progresión core del juego base
+- [ ] T-144 Definir filosofía cozy: sin FOMO, sin castigos, sin grinds
+- [x] T-145 Definir comunidad unificada: todos pueden jugar sin DLC
+- [x] T-146 Definir accesibilidad: juego base completo sin DLC
+- [x] T-147 Definir valor: DLC expande la experiencia, no la restringe
+- [x] T-148 Diseñar directorios por DLC (islas, biomas, npcs, historias, sistemas, ruinas, musica, colecciones)
+- [x] T-149 Diseñar manifest.json por DLC
+- [x] T-150 Diseñar metadata.json con metadatos del DLC
+- [ ] T-151 Diseñar estructura de archivos de islas
+- [ ] T-152 Diseñar estructura de archivos de biomas
+- [ ] T-153 Diseñar estructura de archivos de NPCs
+- [ ] T-154 Diseñar estructura de archivos de historias
+- [x] T-155 Diseñar estructura de archivos de sistemas
+- [ ] T-156 Diseñar estructura de archivos de ruinas
+- [ ] T-157 Diseñar estructura de archivos de música
+- [x] T-158 Diseñar estructura de archivos de colecciones
+- [x] T-159 Diseñar dlc_id
+- [x] T-160 Diseñar dlc_name
+- [x] T-161 Diseñar dlc_version
+- [x] T-162 Diseñar dlc_size
+- [x] T-163 Diseñar dlc_price
+- [x] T-164 Diseñar dlc_description
+- [x] T-165 Diseñar dlc_requires_base_game
+- [x] T-166 Diseñar dlc_requires_other_dlc
+- [x] T-167 Diseñar dlc_content (islands, biomas, npcs, historias, sistemas, ruinas, musica, colecciones)
+- [x] T-168 Diseñar dlc_compatibility (base_game_version, other_dlc, backward_compatible)
+- [x] T-169 Diseñar DLCManager como autoload
+- [x] T-170 Diseñar signal dlc_loaded(dlc_id)
+- [x] T-171 Diseñar signal dlc_unloaded(dlc_id)
+- [x] T-172 Diseñar método load_available_dlcs()
+- [x] T-173 Diseñar método load_dlc(dlc_id)
+- [x] T-174 Diseñar método unload_dlc(dlc_id)
+- [x] T-175 Diseñar método load_dlc_content(dlc_data)
+- [x] T-176 Diseñar método unload_dlc_content(dlc_data)
+- [x] T-177 Diseñar método is_dlc_loaded(dlc_id)
+- [x] T-178 Diseñar método is_dlc_available(dlc_id)
+- [ ] T-179 Diseñar método load_island(island_id)
+- [ ] T-180 Diseñar método load_biome(biome_id)
+- [ ] T-181 Diseñar método load_npc(npc_id)
+- [ ] T-182 Diseñar método load_historia(historia_id)
+- [x] T-183 Diseñar método load_sistema(sistema_id)
+- [ ] T-184 Diseñar método load_ruin(ruin_id)
+- [ ] T-185 Diseñar método load_music(track_id)
+- [x] T-186 Diseñar método load_coleccion(coleccion_id)
+- [x] T-187 Diseñar variable loaded_dlcs (Dictionary)
+- [x] T-188 Diseñar variable available_dlcs (Dictionary)
+- [x] T-189 Diseñar DLCCompatibilityChecker como autoload
+- [x] T-190 Diseñar método check_compatibility(dlc_data)
+- [ ] T-191 Diseñar método get_base_game_version()
+- [ ] T-192 Diseñar método is_version_compatible(current_version, required_version)
+- [x] T-193 Diseñar DLCUninstaller como autoload
+- [x] T-194 Diseñar método uninstall_dlc(dlc_id)
+- [x] T-195 Diseñar método mark_savegames_as_incomplete(dlc_id)
+- [x] T-196 Diseñar método delete_dlc_files(dlc_id)
+- [x] T-197 Diseñar método update_savegames()
+- [x] T-198 Diseñar DLCBundleManager como autoload
+- [ ] T-199 Diseñar método load_bundles()
+- [ ] T-200 Diseñar método get_bundle_price(bundle_id)
+- [x] T-201 Diseñar método get_bundle_dlc_ids(bundle_id)
+- [ ] T-202 Diseñar método calculate_bundle_discount(bundle_id)
+- [x] T-203 Diseñar método get_dlc_price(dlc_id)
+- [ ] T-204 Diseñar variable bundles (Dictionary)
+- [x] T-205 Diseñar res://dlc/bundles.json
+- [ ] T-206 Diseñar season_pass_2024
+- [ ] T-207 Diseñar bundle_completo
+- [ ] T-208 Diseñar bundle_islas
+- [x] T-209 Diseñar bundle_id, bundle_name, bundle_price, bundle_dlcs, bundle_description
+- [x] T-210 Diseñar res://dlc/dlc_manager.gd
+- [x] T-211 Diseñar res://dlc/dlc_compatibility_checker.gd
+- [x] T-212 Diseñar res://dlc/dlc_uninstaller.gd
+- [x] T-213 Diseñar res://dlc/dlc_bundle_manager.gd
+- [x] T-214 Diseñar res://dlc/bundles.json
+- [x] T-215 Diseñar prueba de carga de DLC
+- [ ] T-216 Diseñar prueba de compatibilidad con juego base
+- [x] T-217 Diseñar prueba de compatibilidad con otros DLC
+- [ ] T-218 Diseñar prueba de backward compatibility
+- [x] T-219 Diseñar prueba de desinstalación de DLC
+- [x] T-220 Diseñar prueba de savegames con contenido DLC
+- [x] T-221 Diseñar prueba de savegames sin contenido DLC
+- [x] T-222 Diseñar prueba de bundles de DLC

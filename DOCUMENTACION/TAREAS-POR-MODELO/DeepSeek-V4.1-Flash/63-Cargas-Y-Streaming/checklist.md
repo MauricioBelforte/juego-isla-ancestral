@@ -1,0 +1,112 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 63-Cargas-Y-Streaming (63)
+
+# Checklist personal tareas — 63-Cargas-Y-Streaming
+
+> Extraídas del `05-Checklist.md` del módulo (85 pendientes / 0 dudas de 101 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [x] T-001 Definir el problema: cargas sin congelar, streaming de mundo y progreso real [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [x] T-002 Registrar dependencias: M08, M61; relaciones M45-M47, M12, M29, M28/M69 [S] — verificadas Log 603: M08 (chunks voxel) y M61 (pool) presentes en el diseño del manager; relaciones documentadas en el header
+- [x] T-003 Catalogar los 15 puntos de la sección 62 [S] — el checklist cubre P1-P15 (verificado Log 603; marcado de implementación con iteraciones siguientes)
+- [x] T-004 RF1: pantalla de carga cozy con progreso real [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [x] T-005 RF2: cargas asíncronas (load_threaded_request) [S] — iter. 3 (Log 622): encolar() acepta ruta_recurso; ResourceLoader.load_threaded_request REAL (thread del engine), callback al cargar, re-encolado sin bloqueo si IN_PROGRESS, fallback a callable si falla/no existe; testeado con recurso real + fallback + compatibilidad sin ruta
+- [ ] T-006 RF3: chunks cercanos/lejanos con LRU [S]
+- [ ] T-007 RF4+RF5: NPC, audio, texturas, shaders + precalentamiento [S]
+- [x] T-008 RF6+RF7: progreso real y streaming por región [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [ ] T-009 RF8: anti-congelamiento verificable [S]
+- [ ] T-010 P1: pantalla de carga — arte cozy, barra real, consejos [S]
+- [ ] T-011 P2: cargas asíncronas — escenas, bancos, texturas [S]
+- [ ] T-012 P3: chunks cercanos — radio R=3, máx 5 en movimiento rápido [S]
+- [ ] T-013 P4: chunks lejanos — LRU, descarga diferida 2 frames [S]
+- [ ] T-014 P5: NPCs necesarios — instanciar al entrar, pausar al salir [S]
+- [ ] T-015 P6: audio — bancos regionales precargados [S]
+- [ ] T-016 P7: texturas — atlas + mips por LOD [S]
+- [ ] T-017 P8: shaders — precalentamiento + caché de variantes [S]
+- [ ] T-018 P9: precalentar — menú principal → mundo casi instantáneo [S]
+- [ ] T-019 P10: evitar congelamientos — deltas < 50 ms [S]
+- [x] T-020 P11: progreso real — pesos por operación, nunca fake [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [ ] T-021 P12: streaming del océano — 3 coronas de LOD [S]
+- [ ] T-022 P13: streaming subterráneo — pisos LOD 0-2 [S]
+- [ ] T-023 P14: streaming de islas — StreamableBox por isla [S]
+- [ ] T-024 P15: probar movimientos rápidos — teleport extremo ×10 [S]
+- [ ] T-025 Chunk voxel LOD 0 = peso 1 [S]
+- [ ] T-026 Chunk voxel LOD 1+ = peso 3 [S]
+- [ ] T-027 Banco de audio = peso 3 [S]
+- [ ] T-028 Atlas/mip texturas = peso 2 [S]
+- [ ] T-029 Compilación shader = peso 5 [S]
+- [ ] T-030 NPC instanciado = peso 1 [S]
+- [ ] T-031 Malla de región = peso 4 [S]
+- [ ] T-032 Barra = Σcompletado/Σtotal ×100; piso 2%, tope 98% [S]
+- [ ] T-033 Prioridad 0-1: anillo inmediato del jugador [S]
+- [ ] T-034 Prioridad 2-3: precarga anticipada del movimiento [S]
+- [ ] T-035 Prioridad bancos+texturas de región [S]
+- [x] T-036 Prioridad anillo 4-5 solo si presupuesto [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [ ] T-037 Pre-carga por near-event (destino Gran Vapor) [S]
+- [x] T-038 Cola con pesos y callbacks por operación [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [x] T-039 Tope MAX_CHUNKS configurable (4096 PC / 2048 Deck) [S]
+- [ ] T-040 Marca de envejecido por distancia [S]
+- [ ] T-041 Descarga diferida 2 frames (anti-parpadeo) [S]
+- [ ] T-042 Prioridad de descarga: distancia > antigüedad [S]
+- [ ] T-043 Pool de meshes reutilizado (M61) [S]
+- [ ] T-044 Cero allocs de memoria por frame [S]
+- [ ] T-045 Memory Profiler verifica tope efectivo [M]
+- [ ] T-046 Océano: 3 coronas (lejano/medio/costa) [S]
+- [ ] T-047 Anillo sigue a la cámara (M12) [S]
+- [ ] T-048 Updates solo en borde del anillo [S]
+- [ ] T-049 Subterráneo: pisos LOD 0-2 [S]
+- [ ] T-050 Descarga del piso al subir, sin huecos [S]
+- [ ] T-051 Islas: StreamableBox (radio 10 m) [S]
+- [ ] T-052 Precarga al 60% de la ruta de vuelo (M28) [S]
+- [ ] T-053 Vuelo de aproximación sin chunks vacíos [S]
+- [ ] T-054 Buceo/ascenso encadenado de LOD [S]
+- [ ] T-055 Escena full-screen con arte del mundo [S]
+- [ ] T-056 Nubes/parallax en animación suave [S]
+- [x] T-057 Barra de progreso real + etapa ("Cargando islas...") [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [x] T-058 Textos de estado descriptivos (sección 8 AGENTS) [S]
+- [ ] T-059 Consejos de mundo rotando (tips.txt, seed M29) [S]
+- [ ] T-060 Fade a escena al terminar [S]
+- [ ] T-061 Transición corta ≤ 2 s para Fast Travel/Gran Vapor [S]
+- [x] T-062 Input deshabilitado excepto pausa del sistema [S]
+- [ ] T-063 Shaders del mundo y efectos al arrancar [S]
+- [ ] T-064 Bancos del bioma inicial [S]
+- [ ] T-065 Atlas base comprimida (M47) [S]
+- [ ] T-066 Seed del spawn: 3 anillos si hay partida [S]
+- [ ] T-067 Continuar partida: < 30 operaciones restantes [S]
+- [ ] T-068 Carga casi instantánea tras precalentar [S]
+- [ ] T-069 Verificación en profiler del menú [M]
+- [ ] T-070 Prohibido load() síncrono en gameplay [S]
+- [ ] T-071 Deltas < 50 ms en frames de streaming [S]
+- [ ] T-072 _process/_physics_process libres de cargas [S]
+- [ ] T-073 Hilos de mesh solo en worker pool [S]
+- [ ] T-074 Teleport ×10 sin hitching [M]
+- [ ] T-075 Monitoreo en M113 (profiler) [M]
+- [x] T-076 M08: encolado de chunks y mesh en hilos [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [ ] T-077 M12: anillo de cámara y eventos de región [S]
+- [ ] T-078 M28/M69: precarga de destino [S]
+- [ ] T-079 M29: pausa de cargas en pantallas [S]
+- [ ] T-080 M45/M46: LoadingScreen reutilizable [S]
+- [ ] T-081 M47: mips por LOD [S]
+- [x] T-082 M61: presupuestos aplicados [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado
+- [ ] T-083 Sin acoplamiento al save del mundo (M29) [S]
+- [ ] T-084 Test: pesos de la barra correctos (M112) [M]
+- [ ] T-085 Test: precarga sin huecos visibles [M]
+- [ ] T-086 Test: LRU libera memoria (Memory Profiler) [M]
+- [ ] T-087 Test: delta < 50 ms en streaming activo [M]
+- [ ] T-088 Test: movimiento rápido (teleport/vapor/buceo) [M]
+- [ ] T-089 Test: pausa en carga no avanza el reloj [S]
+- [ ] T-090 Deck: 2048 chunks y texturas comprimidas [M]
+- [ ] T-091 Recorrido M114 completo [M]
+- [ ] T-092 Módulo marcado delegable (tras M08/M61) [S]
+- [ ] T-093 3 alternativas descartadas documentadas [S]
+- [ ] T-094 API estable [S]
+- [x] T-095 Implementación → AGENTE DELEGADO [S]
+- [ ] T-096 Bloqueado por M08/M61 documentado [S]
+- [ ] T-097 01-Requerimientos creado y firmado [S]
+- [ ] T-098 02-Analisis creado y firmado [S]
+- [ ] T-099 03-Diseno creado y firmado [S]
+- [ ] T-100 04-Codigo creado y firmado (Notas del Agente) [S]
+- [ ] T-101 05-Checklist creado y firmado (este archivo) [S]

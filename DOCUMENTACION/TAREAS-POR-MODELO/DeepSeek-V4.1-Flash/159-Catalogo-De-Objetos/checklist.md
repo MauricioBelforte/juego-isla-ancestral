@@ -1,0 +1,157 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 159-Catalogo-De-Objetos (159)
+
+# Checklist personal tareas — 159-Catalogo-De-Objetos
+
+> Extraídas del `05-Checklist.md` del módulo (25 pendientes / 52 dudas de 146 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+
+## Tareas
+
+- [x] T-001 Crear Resource `ItemData.gd` con todos los campos exportados + 3 enums tipados</arg>
+- [x] T-002 Crear Autoload `ItemDatabase.gd` con carga automática desde `data/items/`
+- [x] T-003 Definir enum `Categoria` con 16 categorías
+- [x] T-004 Definir enum `Rareza` con 4 niveles
+- [x] T-005 Definir enum `Interaccion` con 13 tipos
+- [x] T-006 Crear carpeta `data/items/` para Resources .tres
+- [x] T-007 Implementar `get_item(id)` para búsqueda por ID
+- [x] T-008 Implementar `get_items_by_category(cat)` para filtrado
+- [x] T-009 Implementar `get_items_by_rarity(rareza)` para filtrado
+- [x] T-010 Implementar `get_items_by_source(fuente)` para filtrado
+- [x] T-011 Implementar `get_interactive_items()` para objetos interactuables
+- [x] T-012 Implementar `get_placeable_items()` para objetos colocables
+- [x] T-013 Implementar `get_cookable_items()` para objetos de cocina
+- [x] T-014 Validar que todos los IDs sean únicos (función `validar_ids_unicos`)
+- [x] T-015 Crear placeholder `.tres` (item_obj_pla_001) de validación
+- [x] T-016 Documentar 10 cuadros (OBJ-CUA-001 a 010)
+- [x] T-017 Documentar 5 espejos (OBJ-ESP-001 a 005)
+- [x] T-018 Documentar 4 relojes (OBJ-REL-001 a 004)
+- [x] T-019 Definir tamaños de grid de pared
+- [x] T-020 Definir interacciones (mirar, mirarse, ver hora)
+- [x] T-021 Definir precios y rareza
+- [x] T-022 Crear iconos para cada objeto
+- [x] T-023 Crear modelos 3D placeholder
+- [x] T-024 Documentar 15 objetos de iluminación (OBJ-LUZ-001 a 015)
+- [x] T-025 Definir tamaños de grid
+- [x] T-026 Definir interacción (encender/apagar)
+- [x] T-027 Definir radio de iluminación
+- [x] T-028 Definir intensidad de luz
+- [x] T-029 Definir color de luz
+- [x] T-030 Definir precios y rareza
+- [x] T-031 Crear iconos
+- [x] T-032 Crear modelos 3D
+- [x] T-033 Crear efectos de luz (point light, spot light)
+- [x] T-034 Documentar 14 plantas (OBJ-PLA-001 a 014)
+- [x] T-035 Definir tamaños de grid
+- [x] T-036 Definir interacción (regar)
+- [x] T-037 Definir tiempo de crecimiento
+- [x] T-038 Definir precios y rareza
+- [x] T-039 Crear iconos
+- [x] T-040 Crear modelos 3D
+- [x] T-041 Crear animaciones de crecimiento
+- [x] T-042 Documentar 8 alfombras (OBJ-ALF-001 a 008)
+- [x] T-043 Definir tamaños de grid
+- [x] T-044 Definir precios y rareza
+- [x] T-045 Crear iconos
+- [x] T-046 Crear texturas de alfombras
+- [?] T-047 Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)
+- [x] T-048 Definir tamaños de grid
+- [?] T-049 Definir interacciones (cocinar, hornear, freír, etc.)
+- [?] T-050 Definir recetas asociadas
+- [x] T-051 Definir precios y rareza
+- [x] T-052 Crear iconos
+- [x] T-053 Crear modelos 3D
+- [?] T-054 Crear animaciones de uso
+- [?] T-055 Integrar con M16 (Crafting)
+- [?] T-056 Integrar con M18 (Casas)
+- [?] T-057 Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)
+- [x] T-058 Definir tamaños de grid
+- [?] T-059 Definir interacciones (fabricar, forjar, etc.)
+- [x] T-060 Definir precios y rareza
+- [x] T-061 Crear iconos y modelos 3D
+- [?] T-062 Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005)
+- [x] T-063 Definir tamaños de grid exterior
+- [?] T-064 Definir interacciones
+- [x] T-065 Definir precios y rareza
+- [x] T-066 Crear iconos y modelos 3D
+- [?] T-067 Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005)
+- [?] T-068 Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente
+- [?] T-069 Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente
+- [x] T-070 Definir tamaños de grid
+- [?] T-071 Definir interacciones (cortar, minar, recoger)
+- [?] T-072 Definir drops de materiales
+- [?] T-073 Definir tiempo de regeneración
+- [x] T-074 Crear iconos
+- [x] T-075 Crear modelos 3D
+- [?] T-076 Crear animaciones de recolección
+- [?] T-077 Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005)
+- [x] T-078 Definir tamaños de grid
+- [?] T-079 Definir interacciones (abrir/cerrar puertas/ventanas)
+- [x] T-080 Definir precios y rareza
+- [x] T-081 Crear iconos y modelos 3D
+- [?] T-082 Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005)
+- [?] T-083 Definir stats por tier (T1-T4)
+- [?] T-084 Definir durabilidad
+- [x] T-085 Definir precios y rareza
+- [?] T-086 Integrar con M13 (Herramientas) y M158 (Desbloqueo de Zonas)
+- [?] T-087 Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005)
+- [?] T-088 Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024)
+- [?] T-089 Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente
+- [?] T-090 Definir precios de compra/venta
+- [?] T-091 Definir efectos de comida (energía)
+- [?] T-092 Definir stack máximo
+- [x] T-093 Crear iconos
+- [?] T-094 Integrar con M14 (Inventario)
+- [?] T-095 Integrar con M16 (Crafting)
+- [?] T-096 Integrar con M38 (Economía)
+- [?] T-097 Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005)
+- [?] T-098 Definir slot (cabeza, cuerpo, pies, accesorio)
+- [?] T-099 Definir bonificaciones por terreno
+- [x] T-100 Definir precios y rareza
+- [?] T-101 Integrar con M155 (Vestimenta)
+- [?] T-102 Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005)
+- [?] T-103 Definir lore asociado a cada uno
+- [?] T-104 Definir interacciones (mirar + lore)
+- [?] T-105 Definir rareza (solo Raro/Legendario)
+- [?] T-106 Integrar con M25 (Ruinas) y M37 (Museos)
+- [?] T-107 Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005)
+- [?] T-108 Asociar cada item a un festival específico
+- [?] T-109 Definir duración de disponibilidad
+- [?] T-110 Definir interacciones
+- [?] T-111 Integrar con M29 (Tiempo y Calendario)
+- [?] T-112 Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005)
+- [?] T-113 Definir cómo se obtienen (puzzles, quests)
+- [?] T-114 Definir lore asociado
+- [?] T-115 Definir rareza (solo Raro/Legendario)
+- [?] T-116 Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)
+- [ ] T-117 Crear `06-Diseno-Visual.md` con paleta global de colores
+- [ ] T-118 Definir colores HEX para cada categoría de objeto
+- [ ] T-119 Definir formas y proporciones por categoría
+- [ ] T-120 Definir materiales por categoría
+- [ ] T-121 Definir paleta por bioma (13 biomas)
+- [ ] T-122 Definir reglas de variantes de color (máx 6 por malla)
+- [ ] T-123 Definir proporciones para Godot (1m = 1 unidad)
+- [ ] T-124 Definir LODs por categoría
+- [ ] T-125 Definir texturas por material
+- [ ] T-126 Crear referencias visuales para mobiliario
+- [ ] T-127 Crear referencias visuales para herramientas
+- [ ] T-128 Crear referencias visuales para naturaleza
+- [ ] T-129 Validar paleta de colores con dirección de arte
+- [ ] T-130 Documentar variaciones por bioma
+- [ ] T-131 Integrar con M45 (Arte 3D) para producción de assets
+- [ ] T-132 Verificar que todos los IDs son únicos
+- [ ] T-133 Verificar que todas las categorías tienen objetos
+- [ ] T-134 Verificar que todos los objetos tienen icono
+- [ ] T-135 Verificar que todos los objetos interactuables tienen interacción definida
+- [ ] T-136 Verificar que todos los objetos colocables tienen tamaño definido
+- [ ] T-137 Verificar que todos los objetos de tienda tienen precio
+- [ ] T-138 Verificar que la suma total es ≥ 300 objetos
+- [ ] T-139 Documentar integración con M14 (Inventario)
+- [ ] T-140 Documentar integración con M16 (Crafting)
+- [ ] T-141 Documentar integración con M18 (Casas)
+- [x] T-142 Crear test de carga de ItemDatabase
+- [x] T-143 Crear test de búsqueda por ID
+- [x] T-144 Crear test de búsqueda por categoría
+- [x] T-145 Crear test de búsqueda por rareza
+- [?] T-146 Crear test de integración con Inventario (M14 no implementado)
