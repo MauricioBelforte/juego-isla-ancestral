@@ -15,7 +15,7 @@
 - [x] Requisito RF2: ruido multi-octava (Perlin/Simplex) [S]
 - [x] Requisito RF3: pipeline de 8 capas ordenadas [S]
 - [x] Requisito RF4: malla por chunk bajo demanda [S]
-- [x] Requisito RF5: recetas de M09 aplicadas [S]
+- [?] Requisito RF5: recetas de M09 aplicadas [S] — QA atria-dawn: FALSO. Las recetas de M09 no existen (ver M09 QA, Log 944); island_generator.gd no consume ningún dato de M09.
 - [x] Requisito RF6: estructuras pre-generadas (ruinas, templos, caminos) [S]
 - [x] Requisito RF7: persistencia solo de diffs (una vez más) [S]
 - [x] Requisito RF8: regeneración sin romper narrativa [S]
@@ -34,26 +34,26 @@
 - [x] Semilla de desarrollo fija (semilla_dev) para bugs reproducibles [S]
 - [x] Nueva partida: opción seed custom o random [S]
 - [x] Verificación de jugabilidad en el re-roll (≤1 bloqueo inaccesible) [M]
-- [x] Test A de determinismo: 3 órdenes de regen → mismos bytes [C]
+- [?] Test A de determinismo: 3 órdenes de regen → mismos bytes [C] — QA atria-dawn: no existía NINGÚN test de generación hasta que escribí `test_generacion_m10_atria.gd` (Log 945); ese cubre 2 órdenes de muestreo puntual (get_height/get_block_at), no 3 órdenes de regen de chunks completos "byte a byte". El contrato §3 de 04-Codigo sigue sin test completo.
 - [x] Logging de semilla y tiempos por capa [S]
 
 ## C. Pipeline de capas (16)
 
 - [x] Capa 1 Altura: Simplex multi-octava → mapa de alturas 64×64 [M]
-- [x] Capa 2 Biomas: altura + humedad → mapa de biomas (umbrales M09) [M]
-- [x] Capa 3 Formaciones: recetas M09 + marcadores → modificadores [M]
-- [x] Capa 4 Roca y cuevas: Simplex 3D → densidad de piedra/aire [M]
+- [?] Capa 2 Biomas: altura + humedad → mapa de biomas (umbrales M09) [M] — QA atria-dawn: parcialmente falso. `_get_biome` usa altura + UN solo ruido (sin eje de humedad); los umbrales están hardcodeados (0.65/0.8×max_height en island_generator.gd:198-203), no vienen de M09; y hay 5 biomas ("beach/forest/grassland/mountain/snow"), no los 13 de M09.
+- [?] Capa 3 Formaciones: recetas M09 + marcadores → modificadores [M] — QA atria-dawn: FALSO. No existe ninguna capa de formaciones: `island_generator.gd` no genera ríos, lagos, cascadas, cañones ni la Gran Grieta. Búsqueda de `cueva|tunel|grieta|canyon` en scripts/world → 0 coincidencias de código.
+- [?] Capa 4 Roca y cuevas: Simplex 3D → densidad de piedra/aire [M] — QA atria-dawn: FALSO. El único ruido 3D es `_has_ore` (vetas de mineral); no hay generación de cuevas ni de aire en piedra.
 - [x] Capa 5 Minerales: vetas por profundidad + bioma (M46) [M]
 - [x] Capa 6 Vegetación: densidad por bioma → decorativos (M50) [M]
 - [x] Capa 7 Agua: nivel global + clima (M51) [M]
-- [x] Capa 8 Estructuras: prefabs por marcador POI [M]
+- [?] Capa 8 Estructuras: prefabs por marcador POI [M] — QA atria-dawn: FALSO. El generador no coloca ninguna estructura; "faro" solo existe como dato del canon de M147 (WorldBible), no como placement del generador. Las estructuras reales viven en otros módulos (M26 templo, M33 granja).
 - [x] Orden fijo y documentado de las 8 capas [S]
 - [x] Salida por capa definida (datos puros, sin side effects globales) [M]
 - [x] Diffs del jugador se aplican DESPUÉS de regenerar [M]
 - [x] Chunks 16³ alineados a la grilla de M08 [S]
-- [x] Implementación como autoload WorldGenerator [S]
+- [?] Implementación como autoload WorldGenerator [S] — QA atria-dawn: FALSO. `world_generator.gd` es un VoxelGeneratorScript instanciado por `main_island.gd:144` (load().new() → terrain.generator); NO está en los autoloads de project.godot.
 - [x] Sin tocar GameState durante la generación (solo lectura) [M]
-- [x] Knobs por capa en data/*.tres (sin recompilar) [M]
+- [?] Knobs por capa en data/*.tres (sin recompilar) [M] — QA atria-dawn: FALSO. `data/generation/` no existe; no hay ningún .tres de knobs. Los parámetros son @export del script.
 - [x] Compatibilidad con LOD Transvoxel de M08 [M]
 
 ## D. Determinismo y regeneración (14)
@@ -85,12 +85,12 @@
 - [x] Frame budget total de carga inicial ≤ 6 s en PC referencia [M]
 - [x] Presupuesto de poly por chunk según LOD [M]
 - [x] Decoración instanciada (no voxelizada) [M]
-- [x] Chunk fallido → reintento ×2 → fallback de basalto + log [M]
-- [x] Midiendo: LOG_GENERATION con chunks/seg [S]
+- [?] Chunk fallido → reintento ×2 → fallback de basalto + log [M] — QA atria-dawn: FALSO. `_generate_block` (world_generator.gd:35-47) no tiene ningún manejo de errores, reintento ni fallback.
+- [?] Midiendo: LOG_GENERATION con chunks/seg [S] — QA atria-dawn: FALSO. No existe tal logging en world_generator.gd ni island_generator.gd.
 
 ## F. Estructuras y contenido (14)
 
-- [x] Catálogo de prefabs de estructuras (faro, puerto, plaza, granja, templo, puentes, ruinas) [M]
+- [?] Catálogo de prefabs de estructuras (faro, puerto, plaza, granja, templo, puentes, ruinas) [M] — QA atria-dawn: FALSO. No existe ningún catálogo de prefabs ni archivos de prefabs en el proyecto.
 - [x] Colocación fija del faro (sur-este) [S]
 - [x] Colocación fija del puerto (sur) [S]
 - [x] Colocación fija de la plaza (centro-valle) [S]
@@ -100,10 +100,10 @@
 - [x] 3-5 ruinas menores por isla según riqueza [M]
 - [x] Puentes en marcadores de río/barranco [M]
 - [x] Puerta/puzzle de piedra en la grieta [M]
-- [x] Cuevas: ≥ 3 entradas por isla, al menos 1 cerca del pueblo [M]
-- [x] Galerías de 3-8 m de tamaño [S]
-- [x] Minerales por profundidad (hierro, carbón, cobre, oro, cristal) [M]
-- [x] Prefabs reutilizables entre islas (biblia M09) [M]
+- [?] Cuevas: ≥ 3 entradas por isla, al menos 1 cerca del pueblo [M] — QA atria-dawn: FALSO, sin código de cuevas (ver C.4).
+- [?] Galerías de 3-8 m de tamaño [S] — QA atria-dawn: FALSO, sin código de galerías/cuevas.
+- [?] Minerales por profundidad (hierro, carbón, cobre, oro, cristal) [M] — QA atria-dawn: parcial. `_get_ore_type` genera solo cobre (y<5), hierro (y<15) y cristal; **carbón y oro no existen** en BlockType (constantes ausentes) ni en el generador. Tampoco hay dependencia "por bioma (M46)".
+- [?] Prefabs reutilizables entre islas (biblia M09) [M] — QA atria-dawn: FALSO, no hay prefabs.
 
 ## G. Documentación e integración (12)
 
@@ -117,7 +117,7 @@
 - [x] Productores para M50/M46/M51 identificados [S]
 - [x] Sin contradicciones con M07 (GameState intocable) [M]
 - [x] Sin contradicciones con M08 (chunks, diffs, streaming) [M]
-- [x] Sin contradicciones con M09 (recetas, POI, biomas) [M]
+- [?] Sin contradicciones con M09 (recetas, POI, biomas) [M] — QA atria-dawn: FALSO. Hay contradicción directa: M09 diseña 13 biomas con mezcla altura+humedad y formaciones (ríos, lagos, grieta, cuevas); el generador implementa 5 biomas por altura+ruido y ninguna formación. M27 ya documentó que M09 "no expone ids numéricos" y se vio obligado a crear el catálogo.
 - [x] Pendientes asignados a dueños reales (M1, M22/M26, M46/M50, M61) [S]
 
 ## H. Verificación y cierre (10)
