@@ -1,4 +1,4 @@
-| **M117 Build-System - iteracion 2 (Log 941)** | **muse-spark-1.3-contributor/Cline** | **2026-09-16** | **LIBERADO: auditoria de 53 `[ ]` contra codigo/config real. 33 `[x]` con evidencia (bump_version 11/11, changelog 6/6, gates CI en YAML, preset Windows+M116, canales por tipo) + 20 `[?]` honestos con dueno (M118/M96/M116/M113/build-real). **Checklist del modulo (110 items reales): `59 [x]`/`51 [ ]` → `92 [x]` / `0 [ ]` / `18 [?]`.** Correccion de conteo: la fila declaraba `66/119`; el denominador real son 110 (la fila sumaba Evidencia+Reserva). `test_build_m117.gd` existente NO corre aislado (bootea escena principal, 58 leaks ObjectDB preexistentes ajenos) → `[?]` M118. Reserva 902 consumida sin log (relevada y cerrada en 941); reserva 941 borrada al escribir el log. Pendiente QA cruzado §21.8.** |
+| **M117 Build-System - iteracion 2 (Log 941)** | **muse-spark-1.3-contributor/Cline** | **2026-09-16** | **LIBERADO: auditoria de 53 `[ ]` contra codigo/config real. 33 `[x]` con evidencia (bump_version 11/11, changelog 6/6, gates CI en YAML, preset Windows+M116, canales por tipo) + 20 `[?]` honestos con dueno (M118/M96/M116/M113/build-real). **Checklist del modulo (110 items reales): `59 [x]`/`51 [ ]` → `92 [x]` / `0 [ ]` / `18 [?]`.** Correccion de conteo: la fila declaraba `66/119`; el denominador real son 110 (la fila sumaba Evidencia+Reserva). `test_build_m117.gd` existente NO corre aislado (bootea escena principal, 58 leaks ObjectDB preexistentes ajenos) → `[?]` M118. Reserva 902 consumida sin log (relevada y cerrada en 941); reserva 941 borrada al escribir el log. ✅ **Verificado por Hy3/WorkBuddy (Log 947, sec21.8):** re-grounding OK; headless 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); CI Python 11/11 + 6/6; 05-Checklist 93/0/23 (0 [ ] real, cumple sec24); 23 [?] diferidos con dueno no bloquean. Cumple sec21.8.** |
 | **M111 Codigo-De-Calidad - iteracion 4 relevo + sincronizacion (Log 891→909)** | **muse-spark-1.3-contributor/Cline** | **2026-09-14** | **CERRADO: relevo ox-alpha (fuera del proyecto, directiva usuario). 35 items [ ] sincronizados con codigo real de Hy3 (Log 771). Test headless nuevo test_m111_utils_headless.gd: 62 checks, 0 fallos (Godot 4.7.2 real). FIX bug real Factory.create Object→Variant. Test cableado en quality.yml (YAML OK). 209/209. Pendiente QA cruzado §21.8 por otro modelo.** |
 
 | **QA cruzado Lote E - 13 modulos (Log 861 headless + Log 862 re-grounding)** | **Hy3/WorkBuddy** | **2026-09-12** | **VERIFICADO (S21.8): 11 headless EXIT 0 + 2 re-grounding. 8 sellos faltantes de Lote D/B reparados + 5 nuevos. 0 bugs.** |
@@ -414,7 +414,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 
 ## 2026-09-16 06:13 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M110 LIBERADO (Log 928)
 
-- **M110 Debug Menu: 🔵 En curso → 🟡 Con dudas — 121/225.** Log 928 escrito; reserva 928 borrada.
+- **M110 Debug Menu: 🔵 En curso → 🟡 Con dudas — 121/225.** Log 928 escrito; reserva 928 borrada. ✅ **Verificado por Hy3/WorkBuddy (Log 948, sec21.8):** re-grounding OK; headless 3 suites 18/0+27/0+22/0=67 checks, 0 fallos, 0 SCRIPT ERROR; 05-Checklist 122/0/104 (0 [ ] real, cumple sec24); 104 [?] diferidos UI con dueno. Cumple sec21.8.
 - **Hallazgo central — falsos verdes:** `ejecutar_comando()` tenía **5 stubs de texto** (teleport, spawn,
   cambiar_hora, cambiar_clima, exportar) que devolvían `{"ok": true}` **sin ejecutar nada** (verificado
   con `git show HEAD`). Los tests pre-auditoría pasaban por eso. Ahora todos cableados a las APIs reales.
@@ -562,3 +562,29 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   scripts/terrenos/ M156) — cast ambiguo en terrain_data_provider.gd.
 - Reserva 944 consumida (log escrito, reserva borrada). M09 queda 🟡 re-apropiable. Detalle:
   `Logs/944-QA-M09-Terreno-Geografia_2026-09-16_22-52.md`.
+
+## 2026-09-17 04:58 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M10 QA CRUZADO (Log 945)
+
+- **M10 Generacion del Mundo: ✅ Completado → 🟡 Con dudas — 90/106** (16 items a [?]).
+  Tercer QA: los dos previos (Log 722 + Log 848) eran del **mismo modelo** (hy3/Hy3) y
+  solo verificaron presencia de archivos — nunca leyeron la logica del generador.
+- **Test nuevo** `test_generacion_m10_atria.gd` (no existia NINGUN test de generacion):
+  4 pass (determinismo 2 ordenes 0 diffs, semilla, agua pisable, rango alturas) +
+  1 fallo documentado.
+- **Hallazgo central: faltan 3 capas del pipeline de 8.** Formaciones, roca/cuevas y
+  estructuras NO existen — busqueda de cueva|tunel|grieta|canyon en scripts/world da 0.
+  No hay catalogo de prefabs ni placement (faro/puerto/plaza son datos del canon M147,
+  no los coloca el generador).
+- **Cadena M09 → M10 confirmada (viene del Log 944):** el generador no consume nada de
+  M09 — 5 biomas ad-hoc por altura+ruido, umbrales hardcodeados, no los 13 de M09.
+- **BUG-043 (delegado):** bioma "snow" inalcanzable — `_get_biome` evalua mountain
+  (h>26) antes que snow (h>32); 2000 muestras: snow=0, mountain=80, alt max 38>32.
+  Fix = reordenar 2 checks, pero **requiere visto bueno del usuario** (Log 791 congelo
+  el perfil del terreno max_height 40 / boost 1.0).
+- **Codigo muerto:** BlockCatalog sin usuarios en runtime (la library real es la inline
+  de main_island.gd, 31 modelos ids 0-30; el claim "21 bloques" era erroneo). Performance:
+  _has_ore hace FastNoiseLite.new() en cada llamada (camino caliente del generador).
+- **Error propio corregido:** use Write sobre 11-BUGS.md (1643 lineas) y lo destrui;
+  restaure con `git checkout` y re-anexé. Leccion: anexar SIEMPRE via temp + AppendAllText.
+- Reserva 945 consumida (log escrito, reserva borrada). M10 queda 🟡 re-apropiable.
+  Detalle: `Logs/945-QA-M10-Generacion_2026-09-17_04-58.md`.

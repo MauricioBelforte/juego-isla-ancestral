@@ -276,6 +276,14 @@ firma erronea 'Hy3' del Lote F, Log 880). NO se toca TAREAS-POR-MODELO/Hy3/.
 - 16/16 sellos intactos en CHECKLIST-GLOBAL tras la corrida (carrera no borro ninguno esta vez).
 - ULTIMO_NUMERO -> 889.
 
+
+## Lote K — QA cruzado §21.8 (2026-09-17, hy3/WorkBuddy, Log 947)
+
+| MID | Módulo | Log | Estado |
+|-----|--------|-----|--------|
+| 117-117-Build-System | QA cruzado Hy3 (Lote K, §21.8) | 947 |
+| 110-110-Debug-Menu | QA cruzado Hy3 (Lote K, §21.8) | 948 | ✅ VERIFICADO (Log 948, §21.8) 2026-09-17: 3 suites headless 18/0+27/0+22/0=67 checks, 0 fallos, 0 SCRIPT ERROR; 05-Checklist 122/0/104 (0 [ ] real, cumple sec24); re-verif sobre estado post-Log 928 (atria-dawn) | ✅ VERIFICADO (Log 947, §21.8) 2026-09-17: test_build_m117.gd 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); CI Python test_bump_version 11/11 + test_changelog 6/6; 05-Checklist 93/0/23 (0 [ ] real, cumple sec24) |
+
 ## Coordinación — Capacidades y Delegación (2026-09-14, hy3/WorkBuddy)
 
 ### Revisiones de delegables (QA, solo auditoría §21.4 — no autor)
