@@ -283,6 +283,10 @@ firma erronea 'Hy3' del Lote F, Log 880). NO se toca TAREAS-POR-MODELO/Hy3/.
 |-----|--------|-----|--------|
 | 117-117-Build-System | QA cruzado Hy3 (Lote K, §21.8) | 947 |
 | 110-110-Debug-Menu | QA cruzado Hy3 (Lote K, §21.8) | 948 | ✅ VERIFICADO (Log 948, §21.8) 2026-09-17: 3 suites headless 18/0+27/0+22/0=67 checks, 0 fallos, 0 SCRIPT ERROR; 05-Checklist 122/0/104 (0 [ ] real, cumple sec24); re-verif sobre estado post-Log 928 (atria-dawn) | ✅ VERIFICADO (Log 947, §21.8) 2026-09-17: test_build_m117.gd 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); CI Python test_bump_version 11/11 + test_changelog 6/6; 05-Checklist 93/0/23 (0 [ ] real, cumple sec24) |
+| 87-87-Localizacion | QA cruzado Hy3 (Lote K, §21.8) | 949 | ✅ VERIFICADO (Log 949, §21.8) 2026-09-17: test_localizacion_m87.gd 20/0 (EXIT 0, 0 SCRIPT ERROR); 05-Checklist 131/0/8 (0 [ ] real, cumple sec24); re-verif post-Log 907 (DeepSeek) |
+| 14-14-Inventario | QA cruzado Hy3 (Lote K, §21.8) | 951 | ✅ VERIFICADO (Log 951, §21.8) 2026-09-17: 2 suites headless 68/0 + 70/0 (EXIT 0, 0 SCRIPT ERROR); 05-Checklist 140/0/0 (0 [ ] real, cumple sec24); re-aplica sello perdido por BUG-034 |
+| 127-127-Copyright-Del-Juego | QA cruzado Hy3 (Lote K, §21.8) | 950 | 🟡 SIN sello limpio (Log 950, §21.8) 2026-09-17: test 13/0 green post-BUG-033, PERO 37 [ ] reales -> no cumple sec24; en Notas QA-SEALS |
+| 78-78-Legal-Propiedad-Intelectual | QA cruzado Hy3 (Lote K, §21.8) | 883 | ✅ YA verificado (Log 883, §21.8) 2026-09-13: marcador GLOBAL 'QA pendiente' corregido a 'QA cruzado ✅' |
 
 ## Coordinación — Capacidades y Delegación (2026-09-14, hy3/WorkBuddy)
 

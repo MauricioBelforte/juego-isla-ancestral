@@ -25,6 +25,8 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 103 | Logging | 938 | 2026-09-16 | headless | re-verif sec21.8 iter.1 (Log 918, DeepSeek-V4.1-Flash): test_logging_m103_iter1 131/0 x3 + regresion test_logger 14/0 x3 + test_logging_m103 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); guardian anti-falso-verde probado (sonda bloque D -> 131->122 EXIT 1); 7 defectos reales corregidos (BUG-041 falso positivo); quality.yml 236; verificar_checklist.py 167/12/0=179 |
 | 117 | Build-System | 947 | 2026-09-17 | headless | re-verif sec21.8 iter.2 (Log 941, muse-spark-1.3-contributor/Cline): test_build_m117.gd 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); CI Python test_bump_version 11/11 + test_changelog 6/6; 05-Checklist cuerpo 93/0/23 (0 [ ] real -> cumple sec24); 23 [?] diferidos con dueno no bloquean (precedente M103). Caveat: resumen L218 obsoleto "92/0/18" vs cuerpo 93/0/23 |
 | 110 | Debug-Menu | 948 | 2026-09-17 | headless | re-verif sec21.8 (Log 928, atria-dawn/Kilo Code): 3 suites headless 18/0 + 27/0 + 22/0 = 67 checks, 0 fallos, 0 SCRIPT ERROR (EXIT 0); re-grounding debug_menu.gd + 3 test + debug_menu_config.json + 05/04-Codigo presentes; 05-Checklist 122/0/104 (0 [ ] real -> cumple sec24); 104 [?] diferidos UI con dueno no bloquean. Caveat: 'ERROR: Parameter t is null' benigno en bloque de test. |
+| 87 | Localizacion | 949 | 2026-09-17 | headless | re-verif sec21.8 (Log 874->907, DeepSeek-V4.1-Flash): test_localizacion_m87.gd 20/0 (EXIT 0, 0 SCRIPT ERROR); re-grounding validador_po/auditor_claves/test en scripts/localization+localizacion presentes; 05-Checklist 131/0/8 (0 [ ] real -> cumple sec24). Caveat: BUG-042 (fonts .ttf 404) abierto, no bloquea. |
+| 14 | Inventario | 951 | 2026-09-17 | headless | re-verif sec21.8 (GLM-5.3): test_inventario 0 fallos + test_inventario_iter5 0 fallos (EXIT 0, 0 SCRIPT ERROR); re-grounding OK; 05-Checklist 140/0/0 (0 [ ] real -> cumple sec24). Re-aplica sello ausente en QA-SEALS (Log 697 no registrado -> BUG-034). |
 | 116 | Instalador | 883 | 2026-09-13 | headless | 2 tests, 33 checks, 0 fallos |
 | 123 | Modding | 883 | 2026-09-13 | headless | 69 checks, 0 fallos |
 | 126 | Marketing-Legal | 884 | 2026-09-13 | headless | 9 checks, 0 fallos |
@@ -42,9 +44,8 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 
 | MID | Módulo | Log | Motivo |
 |-----|--------|-----|--------|
-| 87 | Localizacion | 883 | `test_localizacion_m87.gd` falla por aserciones obsoletas → BUG-032, delegado a DeepSeek-V4.1-Flash |
 | 111 | Codigo-De-Calidad | 886 | 35 `[ ]` reales en 05-Checklist (sobre-cierre) → sin sello; delegado a otro modelo |
-| 127 | Copyright-Del-Juego | 883 | `test_copyright_m127.gd` falla por aserciones obsoletas → BUG-033, delegado a DeepSeek-V4.1-Flash |
+| 127 | Copyright-Del-Juego | 950 | test_copyright_m127.gd 13/0 green post-BUG-033, PERO 37 `[ ]` reales (procedimiento legal USCO/DMCA futuro) -> no cumple sec24, sin sello limpio. Autor DeepSeek-V4.1-Flash (Log 923). |
 | 148 | Lore-Ambiental | 886 | 92 `[ ]` reales (data-only) → sin sello; delegado a modelo de creatividad (§11.3) |
 
-**Total sellos limpios:** 22 · **Notas:** 4 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) = 22/22.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
+**Total sellos limpios:** 24 · **Notas:** 3 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) + M87 (2026-09-17, Log 949) + M14 (2026-09-17, Log 951) = 24/24.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
