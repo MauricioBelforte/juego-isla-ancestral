@@ -19,6 +19,21 @@ scripts/world/
 └── generators/             ← (M10)
 ```
 
+> ⚠️ **QA atria-dawn (Log 949, 2026-09-17): la lista de arriba era la arquitectura
+> PREVISTA. Estado real al 2026-09-17:**
+> - `voxel_world.gd` — **NO EXISTE**. No hay fachada VoxelWorld ni registro en
+>   ServiceRegistry. La edición de bloques la implementan otros módulos:
+>   `scripts/herramientas/tool_controller.gd` (`try_extract() -> Dictionary`,
+>   `try_place(block_id, metadata) -> bool`) y `interaction_manager.gd`.
+> - `block_catalog.gd` — existe (140 l.) pero **está muerto en runtime**: ni
+>   `BlockCatalog.new()` ni `get_library()` tienen llamadores. La library real la
+>   construye `main_island.gd:96-139` inline. Su método útil es `get_block()`.
+> - `block_validation.gd`, `world_events.gd`, `diff_store.gd` — **NO EXISTEN**.
+> - `block_type.gd` — **live y central**: constantes de ids + `create_default()`
+>   consumidas por island_generator, main_island, M15 recursos, etc.
+> - `generators/` — se implementó como `world_generator.gd` (VoxelGeneratorScript,
+>   M10) en la raíz de scripts/world/, no en subcarpeta.
+
 **Voxel Tools** (GDExtension): VoxelTerrain + VoxelMesherTransvoxel + VoxelStream (diff), colisiones por mapa de bloques.
 
 ## 3. Contrato a otros módulos (resumen)
