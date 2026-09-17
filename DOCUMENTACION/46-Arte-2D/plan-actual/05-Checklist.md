@@ -212,3 +212,44 @@
 - Al crear cada asset, marcar su estado en inventario_2d.json (0→2) y correr el validador.
 - El validador NO usa load() de Godot: los PNG crudos sin .import se leen con Image.load_png_from_buffer (los .png sin importar no pasan por ResourceLoader).
 - Para la cobertura 48/48: producir por familia siguiendo ART_STYLE_2D §9 y validar cada pieza.
+
+---
+
+## QA visual V1 — agnes-3-flash (Sapiens AI) / Kilo Code (Log 954, 2026-09-17)
+
+> Iter. acotada V1/QA (mi perfil: confirmar estado real + dejar dueños; NO soy aprobador estético ni
+> genero arte — V5/artistes = M45/Hy4/usuario M154). No re-marcé los ~103 `[x]` (esa reconciliación es
+> del dueño M46); solo verifiqué el estado y documenté los dueños de lo bloqueado.
+
+### Verificación V1 (estado real, 2026-09-17)
+- **Assets 2D en disco: 0 de 48.** `inventario_2d.json` define **48 assets** pero **ninguno existe** en
+  `assets/` (0 PNG/SVG/WebP en el repo). El validador lo confirma: `Cobertura del inventario: 0/48`.
+  → el trabajo artístico **NO es un bug de M46**: está **bloqueado por M45 (plantillas/referencia 3D) +
+  M108 (pipeline de importación) + artes** (producción real de los 48 assets).
+- **Data/tooling SÍ existen y son reales:** `ART_STYLE_2D.md` completo · `data/arte2d/inventario_2d.json`
+  (48 assets con id/familia/fuente/tamaño/estado) · `scripts/arte2d/validar_arte_2d.gd` **corrido headless:
+  `0 fallo(s)`, exit 0, 0 `SCRIPT ERROR`** (0 checks porque 0 archivos; valida lo que exista).
+- **M154/visión disponible:** la V1/QA se hizo vía validador headless + conteo de assets (no requiere
+  render visual). La aprobación estética final sigue siendo del usuario (M154).
+
+### Discrepancia doc↔archivo (flag, no re-marcado por mí)
+- El **archivo `05-Checklist.md` está 0/110 `[x]`**, pero las notas de **iter. 1 (glm-5.3, "103 `[x]`/6 `[ ]`/1
+  `[?]`")** e **iter. 2 (Log 726+865, "104/110 `[x]`, 6 `[ ]`")** declaran ~103–104 cerrados por
+  **diseño+tooling**. Los cierres **no se reflejaron en las casillas**. **Recomendado:** el dueño M46
+  reconcile: marcar `[x]` los ítems de diseño/tooling **con respaldo de los artefactos reales** (que
+  existen: ART_STYLE_2D + inventario + validador) y dejar los **asset-dependientes** `[ ]`/`[?]` con dueño.
+  No lo hago yo (fuera del alcance V1 acotado; §21.6 DoD lo exige por el dueño del módulo).
+
+### Dueños de lo asset-dependiente / bloqueado
+| Ítem / grupo | Bloqueado por | Dueño |
+|---|---|---|
+| Producción de los 48 assets (iconos/retratos/ilustraciones/atlas) | referencias 3D + pipeline | **M45 + M108 + artes** |
+| Retratos por NPC (plantilla 3D + repintado) | sprites 2D de NPCs | **M161 + M45** |
+| Prueba de legibilidad 32 px / 96 px obligatoria | assets existentes | **M45** (se ejecuta al haber arte) |
+| Verificación de atlas con carga diferida (M63/M62) | atlas existentes | **M108/M63** |
+| Detección de texto embebido por OCR (`[?]`) | herramienta OCR | **fuera de alcance V0 (M45/herramienta)** |
+| M154 visión operativa antes de trabajo visual | vía de visión activa | **M154** (V1/V2-asistencia disponible hoy) |
+
+**Veredicto V1:** M46 **diseño+tooling reales y operativos; 0 de 48 assets en disco (bloqueado por M45/M108/
+artes, no por M46).** Checklist archivo 0/110 (cierre no reflejado) — **flag para el dueño M46**. Liberado
+🟡 para que el dueño re-marque / lo asuman M45/M108.
