@@ -1,0 +1,42 @@
+ACUERDO DE LICENCIA DE USUARIO FINAL (EULA) - Isla Ancestral
+============================================================
+
+Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+
+Este archivo es la licencia que el instalador muestra al usuario antes de
+copiar los archivos. Refleja el contenido de LICENSE en la raiz del repositorio
+(licencia PROPIETARIA). Ante cualquier discrepancia, prevalece LICENSE.
+
+1. CONCESION DE LICENCIA
+   Se concede al usuario final una licencia personal, no exclusiva y no
+   transferible para instalar y ejecutar este juego en equipos de su propiedad,
+   exclusivamente para uso personal y no comercial.
+
+2. RESTRICCIONES
+   No se permite:
+   - redistribuir, vender, alquilar o sublicenciar el juego o sus archivos;
+   - modificar, descompilar o realizar ingenieria inversa del ejecutable,
+     salvo en la medida en que la ley aplicable lo permita expresamente;
+   - eliminar o alterar los avisos de copyright y de marcas.
+
+3. CONTENIDO DE TERCEROS
+   El juego incluye componentes de terceros cuyas licencias se detallan en
+   NOTICE.md. Esas licencias prevalecen sobre este acuerdo para dichos
+   componentes.
+
+4. DATOS DEL USUARIO
+   El juego guarda partidas y configuracion en el equipo del usuario
+   (%APPDATA%\Godot\app_userdata\isla-ancestral). La desinstalacion NO elimina
+   esos datos por defecto.
+
+5. GARANTIA
+   El software se entrega "TAL CUAL", sin garantia de ningun tipo. Isla
+   Ancestral Team no sera responsable de danos derivados del uso del software,
+   en la maxima medida permitida por la ley.
+
+6. ACEPTACION
+   Al continuar con la instalacion, el usuario declara haber leido y aceptado
+   los terminos de este acuerdo.
+
+----------------------------------------------------------------------------
+Isla Ancestral Team - 2026
