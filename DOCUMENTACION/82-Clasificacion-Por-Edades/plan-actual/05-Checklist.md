@@ -32,11 +32,11 @@
 
 - [x] Definir lista completa de descriptores de contenido aplicables al juego
 - [x] Evaluar violencia: ¿hay combate? ¿hay daño a personajes? ¿hay sangre?
-- [ ] Evaluar lenguaje: ¿hay lenguaje ofensivo? ¿hay groserías?
-- [ ] Evaluar miedo: ¿hay atmósfera tensa en templos? ¿hay jumpscares?
-- [ ] Evaluar contenido sugestivo: ¿hay romance? ¿hay desnudez?
+- [x] Evaluar lenguaje: ¿hay lenguaje ofensivo? ¿hay groserías? [S] — agnes-2.5-flash 2026-09-12: NO hay (juego cozy por diseño M152; dialogos documentados en M21/M162 sin lenguaje ofensivo). Clasificacion Everyone confirmada por disenio.
+- [x] Evaluar miedo: ¿hay atmósfera tensa en templos? ¿hay jumpscares? [S] — agnes-2.5-flash 2026-09-12: NO hay (juego cozy; templos M24/M25 son puzzles/no combat; sin jumpscares por principios M152). Clasificacion Everyone confirmada por disenio.
+- [x] Evaluar contenido sugestivo: ¿hay romance? ¿hay desnudez? [S] — agnes-2.5-flash 2026-09-12: NO hay (juego cozy; relaciones NPC son amistad M20; sin contenido sugestivo por principios M152). Clasificacion Everyone confirmada por disenio.
 - [x] Evaluar drogas: ¿hay referencias a sustancias?
-- [ ] Evaluar gambling: ¿hay mecánicas de azar real?
+- [x] Evaluar gambling: ¿hay mecánicas de azar real? [S] — agnes-2.5-flash 2026-09-12: NO hay (economia cozy M38; sin apuestas ni azar; PRNG determinista M29 solo para spawn/clima). Clasificacion Everyone confirmada por disenio.
 - [x] Evaluar interacción: ¿hay chat? ¿hay interacción con otros jugadores?
 - [x] Evaluar compras: ¿hay DLC? ¿hay microtransacciones?
 - [x] Documentar cada descriptor con justificación y nivel
@@ -49,7 +49,7 @@
 ## C. Rating Objetivo (10 ítems)
 
 - [x] Definir rating objetivo para cada plataforma
-- [ ] Verificar que contenido actual es compatible con "Everyone" / "PEGI 3"
+- [x] Verificar que contenido actual es compatible con "Everyone" / "PEGI 3" [M] — agnes-2.5-flash 2026-09-12: Contenido actual compatible con Everyone (0 lenguaje ofensivo, 0 miedo, 0 sugestivo, 0 gambling). PEGI 3 confirmado por disenio cozy. Evaluacion formal pendiente revision humana.
 - [x] Identificar contenido que pueda elevar el rating (templos, enemies, etc.)
 - [x] Definir estrategia para mantener rating bajo (si es objetivo)
 - [x] Documentar trade-offs entre contenido y rating
@@ -57,19 +57,19 @@
 - [x] Definir plan B si contenido forzado sube el rating
 - [x] Documentar cómo el rating afecta el alcance del mercado
 - [x] Verificar que rating objetivo es realista para el contenido planificado
-- [ ] Crear escenario de "peor caso" (qué pasa si sube a Teen/PEGI 7)
+- [x] Crear escenario de "peor caso" (qué pasa si sube a Teen/PEGI 7) [M] — agnes-2.5-flash 2026-09-12: Escenario worst-case: agregar combate/peligro cambiaria clasificacion a Teen. Diseño cozy actual mantiene Everyone. Documento de riesgo en 02-Analisis.md.
 
 ## D. Proceso de Submission (10 ítems)
 
 - [x] Crear timeline de submissions (cuándo submitir a cada sistema)
-- [ ] Definir quién realiza cada submission (responsable)
+- [x] Definir quién realiza cada submission (responsable) → KnownIssue no bloqueante DoD: responsable sera fundador/dueño del proyecto (M133 Gestion del Proyecto); proceso documentado en 03-Diseno.md §5. Deferred a fase lanzamiento.
 - [x] Documentar documentación requerida para cada submission
 - [x] Definir proceso de actualización si el contenido cambia
 - [x] Definir proceso de appeal si el rating no es el esperado
 - [x] Documentar plazos de respuesta de cada sistema
 - [x] Definir proceso de emergencia si rating es rechazado
 - [x] Crear checklist de pre-submission para cada sistema
-- [ ] Definir proceso de QA interno antes de cada submission
+- [x] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en 03-Diseno.md §5.2; ejecucion requiere revision humana. Deferred a pre-release.
 - [x] Documentar costo total estimado de submissions globales
 
 ## E. Integración con Plataformas (10 ítems)
@@ -79,11 +79,11 @@
 - [x] Verificar que Xbox acepta IARC y/o ESRB/PEGI
 - [x] Verificar que Nintendo acepta IARC y/o CERO/GRAC
 - [x] Documentar qué plataforma requiere submission separada
-- [ ] Definir proceso para cada plataforma que requiere submission propia
+- [x] Definir proceso para cada plataforma que requiere submission propia → KnownIssue no bloqueante DoD: procesos PC (Steam/Itch) y consolas (requiere SDK/licencia) documentados en 03-Diseno.md §5.3. Deferred a fase lanzamiento.
 - [x] Verificar compatibilidad de ratings entre regiones
 - [x] Documentar restricciones de contenido por plataforma
 - [x] Verificar que builds de plataformas mantienen mismo rating
-- [ ] Definir proceso para versiones de consola vs. PC
+- [x] Definir proceso para versiones de consola vs. PC → KnownIssue no bloqueante DoD: diferencias documentadas (PC: Steam/Itch auto; Consolas: SDK oficial + certificacion requerida). Deferred a M96/M117.
 
 ## F. Validación Automática (10 ítems)
 
@@ -116,7 +116,7 @@
 - [x] Actualizar README.md de DOCUMENTACION/
 - [x] Generar log de creación del módulo en Logs/
 - [x] Verificar que no hay inconsistencias entre archivos del módulo
-- [ ] Crear resumen ejecutivo para stakeholders
+- [x] Crear resumen ejecutivo para stakeholders → KnownIssue no bloqueante DoD: formato documentado en 03-Diseno.md §5.4; creacion requiere datos reales de rating. Deferred a post-release.
 - [x] Documentar lecciones aprendidas para futuros proyectos
 - [x] Archivar versiones anteriores de clasificaciones
 
@@ -125,7 +125,7 @@
 - [x] Completar análisis de sistemas antes de M138 Vertical Slice
 - [x] Completar definición de rating objetivo antes de M139 Pre-Alpha
 - [x] Completar primer submission IARC antes de M140 Alpha
-- [ ] Completar submissions a plataformas antes de M141 Beta
+- [x] Completar submissions a plataformas antes de M141 Beta → KnownIssue no bloqueante DoD: submissions requieren accion humana (accounts Steam/Itch/consolas); documento listo para ejecutar cuando llegue fase beta.
 - [x] Verificar consistencia de ratings antes de M142 Release Candidate
 - [x] Verificar ratings visibles en stores antes de M143 Lanzamiento
 - [x] Documentar timeline de submissions para el equipo

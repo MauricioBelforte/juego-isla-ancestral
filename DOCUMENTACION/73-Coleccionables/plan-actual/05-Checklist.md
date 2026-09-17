@@ -248,7 +248,7 @@ egistrar(id_global) para sistemas que ya conocen el id, y
 egistrar_por_fuente(fuente, id_local) para sistemas que solo saben donde lo obtuvieron. La conversion fuente -> categoria esta hard-coded en _categoria_para_fuente(); se puede mover a JSON si crece.
 > 3. **Mapa hard-coded conejo_pradera -> animales_001** en _on_especie_avistada: iter 2 deberia leer especie.id_local directo de FaunaSpecies (requiere agregar ese campo a M36).
 > 4. **Persistencia compacta**: solo guardo el set de ids collected (no el item completo). Al recargar, el manager consulta el catalog para reconstruir el item. Esto mantiene la serializacion < 5KB segun el plan.
-> 5. **Sin class_name** en los scripts propios (07-GUIA-GODOT §9.17): se preloadean. Solo ColeccionableItem se instancia via .new() (es un Resource).
+> 5. **Sin class_name** en los scripts propios (GUIA-GODOT/09-godot4-migracion.md §9.17): se preloadean. Solo ColeccionableItem se instancia via .new() (es un Resource).
 > 
 > **Validación:**
 > - Compilacion: 0 errores tras 1 iteracion de auto-correccion (var inferidas a Variant -> tipadas).

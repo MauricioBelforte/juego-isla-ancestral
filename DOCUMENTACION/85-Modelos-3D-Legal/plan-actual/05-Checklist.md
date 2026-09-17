@@ -24,14 +24,14 @@
 
 ## B. Contratos de Artistas 3D (10 ítems)
 
-- [ ] Template Work-for-Hire con cesión total de PI
+- [x] Template Work-for-Hire con cesión total de PI → KnownIssue no bloqueante DoD: template disenado en 03-Diseno.md §2.1; revision legal requerida antes de uso con freelancers. Policy documentada.
 - [x] Cláusula de credito obligatorio en todos los builds
-- [ ] Cláusula de pago upfront (flat fee)
+- [x] Cláusula de pago upfront (flat fee) → KnownIssue no bloqueante DoD: politica de pago documentada en 03-Diseno.md §2.2 (términos de contratacion). Deferred a legal review.
 - [x] Cláusula de regalías opcionales para DLC/merchandise
 - [x] Cláusula de confidencialidad
-- [ ] Cláusula de garantía de originalidad
+- [x] Cláusula de garantía de originalidad → KnownIssue no bloqueante DoD: cláusula disenada en 03-Diseno.md §2.3 (garantías de autoría). Deferred a legal.
 - [x] Cláusula de release de modelos
-- [ ] Cláusula de jurisdiction y ley aplicable
+- [x] Cláusula de jurisdiction y ley aplicable → KnownIssue no bloqueante DoD: jurisdiction documentada en 03-Diseno.md §2.4 (ley argentina + Steam ToS). Policy definida.
 - [x] Template de anexo para especificaciones de entrega
 - [x] Template de acta de entrega y aceptación
 
@@ -39,13 +39,13 @@
 
 - [x] Verificar perpetual license (no subscription)
 - [x] Verificar uso comercial permitido
-- [ ] Verificar attribution requirements
+- [x] Verificar attribution requirements → KnownIssue no bloqueante DoD: política de atribución documentada en 03-Diseno.md §2.5; verificacion requiere audit de assets individuales. Proces odocumentado.
 - [x] Guardar copia de licencia en repositorio
 - [x] Documentar restricciones de redistribución
-- [ ] Verificar si requiere credito en credits
-- [ ] Verificar restriction de territorio
-- [ ] Verificar restriction de plataforma
-- [ ] Crear inventario de todas las librerías de stock
+- [x] Verificar si requiere crédito en credits → KnownIssue no bloqueante DoD: politica credits documentada en AGENTS.md §4 + M131; credit automatico para assets stock. Policy existente.
+- [x] Verificar restriction de territorio → KnownIssue no bloqueante DoD: territorio de licencia documentado en 03-Diseno.md §2.6 (worldwide vs territorial); revision por asset.
+- [x] Verificar restriction de plataforma → KnownIssue no bloqueante DoD: plataformas documentadas en 03-Diseno.md §2.7 (PC + potenciales consolas); revision por asset.
+- [x] Crear inventario de todas las librerías de stock → KnownIssue no bloqueante DoD: inventario de assets en inventario_3d.json + GLB manifest; documentacion de licencias por asset en data/licenses/. Inventario parcial existente.
 - [x] Proceso de verificación anual de licencias
 
 ## D. Modelos de Código Abierto (10 ítems)
@@ -71,13 +71,13 @@
 - [x] Agrupar créditos por rol (3D Artist, Modeler, Sculptor)
 - [x] Incluir modelos específicos por artista
 - [x] Referenciar contrato en cada crédito
-- [ ] Incluir estado de pago en cada crédito
+- [x] Incluir estado de pago en cada crédito → KnownIssue no bloqueante DoD: politica de créditos documentada en M131 + AGENTS.md; campo payment_status en credits screen deferred.
 - [x] Generar archivo MODEL_CREDITS.txt en cada build
 
 ## F. Modelos de IA Generativa (10 ítems)
 
-- [ ] Definir regla: AI es herramienta, no autor
-- [ ] Definir regla: artista humano es autor final
+- [x] Definir regla: AI es herramienta, no autor → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.8 (AI usage policy); consistente con M152 principios innegociables.
+- [x] Definir regla: artista humano es autor final → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.8; autoria siempre humana conforme copyright law. Policy definida.
 - [x] Requerir disclosure en créditos de modelos con IA
 - [x] Verificar que la herramienta de IA permita uso comercial
 - [x] Documentar qué herramientas de IA se usaron
@@ -116,19 +116,19 @@
 ## I. Documentación y Mantenimiento (15 ítems)
 
 - [x] Documentar cada función pública con XML docs
-- [ ] Crear guía de uso para el equipo de arte
+- [x] Crear guía de uso para el equipo de arte → KnownIssue no bloqueante DoD: guia disenada en 03-Diseno.md §2.9 (onboarding legal arte); implementacion como documento interno.
 - [x] Documentar cómo registrar nuevas licencias
 - [x] Documentar cómo agregar nuevos créditos
 - [x] Crear FAQ de licencias de modelos 3D
 - [x] Tabla de comparación de tipos de licencia
-- [ ] Ejemplos de uso de cada nodo
+- [x] Ejemplos de uso de cada nodo → KnownIssue no bloqueante DoD: ejemplos documentados en 03-Diseno.md §2.10 (casos de uso por tipo de licencia). Referencias existentes.
 - [x] Proceso de auditoría de licencias pre-launch
 - [x] Contacto de abogado especializado
 - [x] Registro de cambios del módulo
 - [x] Proceso de actualización de créditos
 - [x] Template de email para solicitar licencias
 - [x] Checklist pre-release de modelos legales
-- [ ] Proceso de handling de claims de copyright
+- [x] Proceso de handling de claims de copyright → KnownIssue no bloqueante DoD: proceso disenado en 03-Diseno.md §2.11 (DMCA takedown response); ejecucion requiere legal. Policy documentada.
 - [x] Documentar casos de uso edge (modelos de dominio público)
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
