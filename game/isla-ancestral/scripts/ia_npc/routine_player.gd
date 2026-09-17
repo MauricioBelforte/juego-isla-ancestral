@@ -1,12 +1,12 @@
-﻿# Modelo: agnes-2.5-flash
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M64: IA de NPC â€” Reproductor de Rutinas diarias
+# M64: IA de NPC — Reproductor de Rutinas diarias
 #
-# Lee el perfil del NPC y determina la prÃ³xima acciÃ³n segÃºn la hora actual.
+# Lee el perfil del NPC y determina la próxima acción según la hora actual.
 # Cada NPC tiene una rutina diaria en su VillagerProfile.rutina_diaria.
-# IntegraciÃ³n con M29 (GameClock) para hora/minuto.
+# Integración con M29 (GameClock) para hora/minuto.
 
 extends Node
 class_name RoutinePlayer
@@ -16,9 +16,9 @@ class_name RoutinePlayer
 
 ## Hora actual de despertar (desde la rutina o default 6)
 var wake_hour: int = 6
-## Ãšltimo slot ejecutado
+## Último slot ejecutado
 var _last_slot_index: int = -1
-## Ãndice del slot actual
+## Índice del slot actual
 var _current_slot_index: int = 0
 
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 	pass
 
 
-## Obtener la prÃ³xima acciÃ³n basada en la hora actual
+## Obtener la próxima acción basada en la hora actual
 func get_next_action(controller: Node) -> Dictionary:
 	if npc_profile == null:
 		return {}
@@ -53,7 +53,7 @@ func get_next_action(controller: Node) -> Dictionary:
 
 
 func _get_next_slot(rutina: Dictionary, hora: int, minuto: int) -> Dictionary:
-	"""Buscar el prÃ³ximo slot en el futuro."""
+	"""Buscar el próximo slot en el futuro."""
 	var best_key = ""
 	var best_diff = 999
 	for key in rutina.keys():
@@ -97,7 +97,7 @@ func get_wake_hour() -> int:
 	return wake_hour
 
 
-## Verificar si es hora de una acciÃ³n especÃ­fica
+## Verificar si es hora de una acción específica
 func is_action_due(action: StringName, current_hour: int, current_minute: int) -> bool:
 	if npc_profile == null:
 		return false
@@ -108,7 +108,7 @@ func is_action_due(action: StringName, current_hour: int, current_minute: int) -
 	return false
 
 
-## Resetear al cambio de dÃ­a
+## Resetear al cambio de día
 func reset_daily() -> void:
 	_last_slot_index = -1
 	_current_slot_index = 0

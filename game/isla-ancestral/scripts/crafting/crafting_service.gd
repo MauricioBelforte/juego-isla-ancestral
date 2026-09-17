@@ -8,7 +8,7 @@
 # (invariante §1.3.2) y persistencia (RF17/M59).
 # Regla RF11: los materiales SOLO se consumen si la receta completa está disponible
 # y la entrega del resultado está garantizada (remover/agregar todo-o-nada en M14).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

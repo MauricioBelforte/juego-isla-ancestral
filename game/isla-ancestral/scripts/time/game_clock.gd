@@ -44,6 +44,7 @@ var _eventos_visitados: Array = []
 
 func _ready() -> void:
 	_estado_estacion = get_estacion()
+	_asegurar_semilla_partida()
 	_registrar_como_proveedor_guardado()
 
 func _registrar_como_proveedor_guardado() -> void:
@@ -145,6 +146,75 @@ func proximos_eventos(dias: int = 7) -> Array:
 		})
 	return eventos
 
+## ── Semilla de tiempo por partida (H120, M29 iter 1 — GLM-5.3 / Kilo Code, Log 824) ──
+## PRNG determinista por partida: la misma partida produce la misma secuencia
+## de valores "aleatorios" diarios entre sesiones (y entre cargas del mismo save).
+## Patrones de consumo recomendados (los módulos dueños de contenido definen el suyo):
+##   var v = GameTime.valor_diario("mi_modulo", 0, 99)   # entero estable del día actual
+##   var r = GameTime.rng_diario("mi_modulo")            # RandomNumberGenerator fresh del día
+## La flag usar_semilla_tiempo (time_config.tres, default true) activa la semilla por
+## partida; en false se usa la semilla 0 (modo determinista global, útil para tests/QA).
+var _semilla_partida: int = 0
+
+func get_semilla_partida() -> int:
+	return _semilla_partida
+
+## Asigna la semilla de partida (la invoca M59 al crear partida nueva o restaurar
+## el save; también la usan los tests para fijar determinismo).
+func set_semilla_partida(semilla: int) -> void:
+	_semilla_partida = int(semilla)
+
+## Genera una semilla nueva para partida nueva (una sola vez por partida).
+## Se llama desde _ready si el save no trajo semilla (primera partida).
+## Nota C56/E89/E90: NO lee el reloj del SO (regla de oro del módulo: el
+## gameplay jamás consume tiempo real). Usa randi() global del motor — la
+## fuente de entropía idiomática de Godot 4, auto-inicializada por el runtime.
+func _asegurar_semilla_partida() -> void:
+	if _semilla_partida != 0:
+		return
+	var usar := true
+	var config = _config_de_tiempo()
+	if config != null and "usar_semilla_tiempo" in config:
+		usar = bool(config.usar_semilla_tiempo)
+	if not usar:
+		_semilla_partida = 0  # modo determinista global (tests/QA reproducibles)
+		return
+	# Entropía del motor (randi() global, 64 bits en Godot 4): dos partidas
+	# creadas en el mismo segundo difieren; nos quedamos con 31 bits para
+	# evitar overflows en las multiplicaciones de los consumidores.
+	_semilla_partida = int(randi() % 2147483647)
+
+func _config_de_tiempo():
+	if get_tree() == null:
+		return null
+	return load("res://data/time/time_config.tres")
+
+## Valor entero determinista del día actual para un namespace de consumidor.
+## misma partida + mismo día + mismo namespace → SIEMPRE el mismo valor.
+## rango [min, max] inclusivo. Para valores continuos usar rng_diario().
+func valor_diario(ns_consumidor: String, minimo: int = 0, maximo: int = 99) -> int:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = _hash_semilla_diaria(ns_consumidor)
+	return rng.randi_range(minimo, maximo)
+
+## RandomNumberGenerator determinista del día actual para un namespace.
+## Los consumidores pueden llamar varios randi/randf del mismo día y
+## obtener la misma secuencia en cualquier carga del mismo save.
+func rng_diario(ns_consumidor: String) -> RandomNumberGenerator:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = _hash_semilla_diaria(ns_consumidor)
+	return rng
+
+## Hash estable: semilla de partida + día absoluto + namespace (FNV-1a 32 bits,
+## determinista entre sesiones a diferencia de hash() de Godot).
+func _hash_semilla_diaria(ns_consumidor: String) -> int:
+	var h: int = 2166136261
+	var clave := str(_semilla_partida) + ":" + str(dia_absoluto()) + ":" + ns_consumidor
+	for ch in clave.to_utf8_buffer():
+		h = (h ^ int(ch)) * 16777619
+		h = h % 2147483647  # mantener en 31 bits
+	return h
+
 func _info_dia() -> Dictionary:
 	return {
 		"dia": _dia, "mes": _mes, "anio": _anio,
@@ -173,6 +243,7 @@ func get_save_data() -> Dictionary:
 		"dia": _dia, "mes": _mes, "anio": _anio,
 		"acumulador": _acumulador,
 		"eventos_visitados": _eventos_visitados.duplicate(),
+		"semilla_partida": _semilla_partida,  # H120: misma semilla al recargar
 	}
 
 func restore_save_data(data: Dictionary) -> void:
@@ -183,6 +254,10 @@ func restore_save_data(data: Dictionary) -> void:
 	_anio = maxi(1, int(data.get("anio", 1)))
 	_acumulador = float(data.get("acumulador", 0.0))
 	_estado_estacion = get_estacion()
+	# H120: restaurar la semilla de partida del save (0 = genera nueva en _ready)
+	_semilla_partida = int(data.get("semilla_partida", 0))
+	if _semilla_partida == 0:
+		_asegurar_semilla_partida()
 	_eventos_visitados.clear()
 	for e in data.get("eventos_visitados", []):
 		_eventos_visitados.append(str(e))

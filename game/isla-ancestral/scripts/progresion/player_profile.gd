@@ -6,7 +6,7 @@
 # Estadísticas acumuladas y del día, primeras veces, reputación y títulos
 # (03-Diseno §3.4). Lógica pura, sin UI. Persistencia delegada al
 # ProgressionManager (un solo punto de guardado de la sección "progresion").
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 ## Reputación (§4.5): 60% amistad, 40% contribución (ventas y trueques)

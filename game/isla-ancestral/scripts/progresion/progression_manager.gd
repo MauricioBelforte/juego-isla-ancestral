@@ -9,7 +9,7 @@
 #   evaluar_condicion_id() con caché de resultados congelados, reevaluar_sucias(),
 #   detectar_condiciones_imposibles() (estático + dinámico).
 #
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, seccion 9.17)
 #   - snake_case en señales
 #   - Duck-typing en GameLogger (M103), M13 (tool_controller), M18 (casa_manager)

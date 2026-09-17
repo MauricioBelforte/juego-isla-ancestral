@@ -134,7 +134,7 @@ func agregar_esporas(cantidad: int) -> int:
 func _realizar_autosave() -> void:
 	# Fix C56 (M30 re-auditoría, Log 429): reloj del SO prohibido en gameplay
 	# (regla de oro M30). El timestamp no alimenta lógica (solo metadata del
-	# autosave) -> segundos de motor desde el arranque. Ver 07-GUIA-GODOT §9.64.
+	# autosave) -> segundos de motor desde el arranque. Ver GUIA-GODOT/09-godot4-migracion.md §9.64.
 	_last_save_timestamp = Time.get_ticks_msec() / 1000.0
 	_save_count += 1
 	# Delegamos al InventarioService principal; este solo loggea y

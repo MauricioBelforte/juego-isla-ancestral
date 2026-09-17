@@ -1,4 +1,4 @@
-﻿# Modelo: minimax-m3-free
+# Modelo: minimax-m3-free
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
@@ -54,7 +54,7 @@ func _check(cond: bool, msg: String) -> void:
 	else:
 		print("OK: " + msg)
 
-## â”€â”€ Tests â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+## ── Tests ────────────────────────────────────────────────────
 
 func _test_catalogo_basico() -> void:
 	# El fallback debe haber cargado 5 especies si catalog.json no existe

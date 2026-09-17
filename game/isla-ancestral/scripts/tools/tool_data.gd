@@ -96,6 +96,24 @@ const MATERIALES := {
 	Nivel.CRISTAL: "Cristal",
 }
 
+## IDs cortos por tipo para contratos con otros módulos (M15 usa
+## "pico"/"hacha"/... en ResourceDefinition.herramienta_requerida).
+const IDS := {
+	Tipo.PICO: "pico",
+	Tipo.AZADA: "azada",
+	Tipo.HACHA: "hacha",
+	Tipo.PALA: "pala",
+	Tipo.REGADERA: "regadera",
+	Tipo.CANA: "cana",
+	Tipo.MARTILLO: "martillo",
+	Tipo.TIJERAS: "tijeras",
+	Tipo.LUPA: "lupa",
+}
+
+## ID corto de esta herramienta (ej: "pico") — para integración M15/M33/M35.
+func nombre_id() -> StringName:
+	return StringName(IDS.get(tipo, ""))
+
 ## Crea una instancia nueva de herramienta con stats de tabla.
 static func crear(p_tipo: int, p_nivel: int) -> ToolData:
 	var t := ToolData.new()

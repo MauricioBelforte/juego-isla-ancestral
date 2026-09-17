@@ -84,6 +84,6 @@ static func _registrar_veta(rm: Node, data: Dictionary) -> bool:
     rm._definiciones[def.def_id] = def
     return true
 
-## Acceso seguro al autoload ResourceManager (sin class_name, ver 07-GUIA-GODOT §9.17).
+## Acceso seguro al autoload ResourceManager (sin class_name, ver GUIA-GODOT/09-godot4-migracion.md §9.17).
 static func _get_resource_manager() -> Node:
     return Engine.get_main_loop().root.get_node_or_null("ResourceManager")

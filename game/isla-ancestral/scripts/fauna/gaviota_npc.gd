@@ -70,7 +70,7 @@ const VARIANTE_LOD := "alta"
 # pico +X, cola -X). El bug v11/v12 ("alas por la nuca/garganta") era
 # setear ejes equivocados: el roll correcto es rotation.z (eje del span)
 # con MISMO signo en ambas alas, y el barrido hacia atras es rotation.y
-# (yaw) con signo negado por lado. Ver 07-GUIA-GODOT §11.5 E-11.
+# (yaw) con signo negado por lado. Ver GUIA-GODOT/11-blender-godot.md §11.5 E-11.
 # v14 (rediseño Blender): span del ala 0.82 → 0.60, patas 0.09 → 0.18 en
 # pose de VUELO recogidas hacia atras (dir original del cono), pies
 # nuevos pegados al extremo. En tierra el NPC las DESPLIEGA a vertical.

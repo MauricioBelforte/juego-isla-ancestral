@@ -13,7 +13,7 @@
 class_name UIRoot
 extends CanvasLayer
 
-## ⚠️ §9.47 (07-GUIA-GODOT): NO montar widgets HUD aquí.
+## ⚠️ §9.47 (GUIA-GODOT/INDICE.md): NO montar widgets HUD aquí.
 ## Los widgets oficiales viven en el CanvasLayer "UI" de la escena
 ## (RelojWidget w_reloj.gd, StatusBar, InteractPrompt) y en player.gd
 ## (hotbar dinámico). Este UIRoot SOLO monta las capas MODALES del M53

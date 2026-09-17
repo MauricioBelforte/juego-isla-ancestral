@@ -7,7 +7,7 @@ extends CharacterBody3D
 ##
 ## Patrón copiado del villager (M19): CharacterBody3D + snap al terreno
 ## vía TerrainLocator (autoload) con reintentos diferidos — NUNCA un
-## IslandGenerator propio (07-GUIA-GODOT §10.16: es la causa de los NPCs
+## IslandGenerator propio (GUIA-GODOT/08-terreno-voxel.md §10.16: es la causa de los NPCs
 ## flotando). Sistema SEPARADO del fauna_manager (§15: no tocar lo que
 ## funciona); es un NPC decorativo, no una especie del registry.
 ##

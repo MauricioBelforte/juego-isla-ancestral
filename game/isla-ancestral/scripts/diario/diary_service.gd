@@ -15,7 +15,7 @@
 #  - Anti-spoiler (§3.2): no descubierto = invisible; % sobre lo DESCUBIERTO.
 #  - Marca favorito + búsqueda básica + log DIARY-ADD (convención M103).
 #  - Persistencia ISaveProvider M59: sección "diary" (§2.3, < 5 KB típico).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 ## Estados de una entrada (diseño §1 diary_entry)

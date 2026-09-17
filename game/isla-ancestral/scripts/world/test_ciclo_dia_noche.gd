@@ -7,9 +7,13 @@ extends SceneTree
 
 const DAY_NIGHT_CYCLE := preload("res://scripts/world/day_night_cycle.gd")
 const GAME_TIME := preload("res://scripts/time/game_clock.gd")
+## M31 iter. 3: bus real para el test del contrato (autoload EventBus en runtime)
+const BUS := preload("res://scripts/core/event_bus.gd")
 
 var _fallos := 0
 var _checks := 0
+## M31 iter. 3 (GLM-5.3/Kilo Code): contador de señales fase_cambio recibidas
+## vía EventBus real — el contrato central del módulo (antes no se testeaba).
 var _fases_recibidas: Array = []
 
 
@@ -86,6 +90,28 @@ func _ejecutar() -> void:
 	_check("get_fase() == PROFUNDA tras 01h", cycle.get_fase() == cycle.FASE_PROFUNDA)
 	_check("es_de_dia() false a las 01h", not cycle.es_de_dia())
 
+	# M31 iter. 3: CONTRATO EventBus.time.fase_cambio con el bus REAL (autoload
+	# en runtime; en headless se instancia el EventBus_ y su dominio time).
+	# Valida que la señal del contrato se emite SOLO en cambio de franja.
+	var bus: Node = root.get_node_or_null("/root/EventBus")
+	if bus == null:
+		bus = BUS.new()
+		root.add_child(bus)
+	if bus.time != null and bus.time.has_signal("fase_cambio"):
+		_fases_recibidas.clear()
+		bus.time.fase_cambio.connect(_on_fase_recibida)
+		cycle._on_hora_cambio(23)  # PROFUNDA -> PROFUNDA (ya estaba): sin señal
+		_check("sin señal en misma franja (23->23)", _fases_recibidas.is_empty())
+		cycle._on_hora_cambio(5)   # PROFUNDA -> ALBA: 1 señal
+		_check("1 señal al cambiar franja (23->5)", _fases_recibidas.size() == 1)
+		if not _fases_recibidas.is_empty():
+			_check("fase emitida == ALBA (0)", int(_fases_recibidas[0]) == cycle.FASE_ALBA)
+		cycle._on_hora_cambio(7)   # ALBA -> DIA: 1 señal
+		_check("1 señal al cambiar franja (5->7)", _fases_recibidas.size() == 2)
+		bus.time.fase_cambio.disconnect(_on_fase_recibida)
+	else:
+		_check("EventBus.time.fase_cambio existe (contrato M31)", false)
+
 	print("=== Resumen: %d checks, %d fallos ===" % [_checks, _fallos])
 	if _fallos > 0:
 		print("FALLOS CICLO DIA/NOCHE")
@@ -93,6 +119,11 @@ func _ejecutar() -> void:
 	else:
 		print("CICLO DIA/NOCHE OK")
 		quit(0)
+
+
+## M31 iter. 3: receiver para el test del contrato EventBus.
+func _on_fase_recibida(fase: int) -> void:
+	_fases_recibidas.append(fase)
 
 
 func _wait_frame() -> void:

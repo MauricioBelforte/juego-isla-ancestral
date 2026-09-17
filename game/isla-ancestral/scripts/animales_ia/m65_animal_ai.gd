@@ -12,7 +12,7 @@
 # alimentarse, descanso) consumiendo la senal `solicitar_movimiento(destino, velocidad)`
 # que M36 emite por cada individuo.
 #
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, seccion 9.17)
 #   - snake_case en senales
 #   - Duck-typing en M36 (fauna) y M29 (TimeCalendar)

@@ -3,7 +3,7 @@ extends CharacterBody3D
 ## M36: Cangrejo de playa NPC — deambula DE LADO como los cangrejos reales
 ##
 ## Segundo animal del pipeline Blender->Godot->movimiento (ver
-## 07-GUIA-GODOT §11). Patron tortuga_npc.gd (log 545) con las
+## GUIA-GODOT/11-blender-godot.md §11). Patron tortuga_npc.gd (log 545) con las
 ## particularidades del cangrejo:
 ##   - CAMINA DE LADO: el cangrejo no apunta su frente (+X del GLB) hacia
 ##     la direccion de marcha; apunta PERPENDICULAR (su lado mira al

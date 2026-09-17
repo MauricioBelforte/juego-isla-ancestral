@@ -42,7 +42,26 @@ func _ready() -> void:
 	if precios != null:
 		precios.recalcular_tabla_dia()
 		precios.vincular_eventos()
+	_conectar_senal_amistad_m20()
 	_registrar_como_proveedor_guardado()
+
+## J.8 (iter 5, GLM-5.3 / Kilo Code — Log 822): consume la señal
+## nivel_amistad_cambio(npc_id, nivel) de M20 (dominio EventBus.progresion)
+## para invalidar la caché de descuento por amistad del PriceManager (L.6).
+## Duck-typing: si M20/EventBus no están, el comercio funciona igual (descuento 0).
+func _conectar_senal_amistad_m20() -> void:
+	var bus = get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	var dominio = bus.get("progresion")
+	if dominio == null or not dominio.has_signal("nivel_amistad_cambio"):
+		return
+	if not dominio.is_connected("nivel_amistad_cambio", Callable(self, "_on_nivel_amistad_cambio")):
+		dominio.connect("nivel_amistad_cambio", Callable(self, "_on_nivel_amistad_cambio"))
+
+func _on_nivel_amistad_cambio(npc_id: String, _nivel: int) -> void:
+	if precios != null and precios.has_method("invalidar_cache_amistad"):
+		precios.invalidar_cache_amistad(npc_id)
 
 ## Inicializacion perezosa defensiva: garantiza PriceManager aunque _ready
 ## no haya corrido (ej: instancias montadas por tests fuera del arbol activo).
@@ -91,6 +110,8 @@ func depositar_monedas(total: int) -> bool:
 
 ## ── RF15: historial de transacciones ─────────────────────
 ## Registra la transacción, emite la señal del contrato §5 y recorta el anillo.
+## M38 iter 4 (GLM-5.3 — Log 819): también loguea con la convención DOM-ECO-TRX
+## del proyecto (§4 de 04-Codigo) para M103/M104.
 func _registrar_tx(tipo: String, monto: int) -> void:
 	var tx := {
 		"tipo": tipo,
@@ -102,6 +123,7 @@ func _registrar_tx(tipo: String, monto: int) -> void:
 	_historial.append(tx)
 	while _historial.size() > HISTORIAL_MAX:
 		_historial.pop_front()  # anillo: se descarta la más antigua
+	print("[DOM-ECO-TRX] tipo=%s monto=%d saldo=%d dia=%d" % [tipo, monto, saldo, tx["dia"]])
 	transaccion_registrada.emit(tx)
 
 ## Día absoluto del calendario (M29) por duck-typing; 0 si no está disponible.

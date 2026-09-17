@@ -10,7 +10,7 @@
 #   - claves de WorldStateService desconocidas (si se pasa un allowlist).
 #
 # NOTA: los parametros no llevan anotacion de tipo (class_name de otro script) para
-# evitar el Parse Error en headless (ver 07-GUIA-GODOT.md §9.50). Se usa duck-typing;
+# evitar el Parse Error en headless (ver GUIA-GODOT/09-godot4-migracion.md). Se usa duck-typing;
 # DialogueGraph/DialogueNode ya estan compilados en el proyecto (los tests los usan).
 
 extends RefCounted
@@ -19,29 +19,43 @@ class_name DialogGraphValidator
 
 const OPERADORES_VALIDOS := ["==", "!=", ">=", "<=", ">", "<"]
 
-## Allowlist canonical de claves de mundo soportadas por WorldStateService (M21).
-## Fuente unica de verdad: world_state_service.gd documenta estas claves.
-## - claves escalares: hora, minuto, dia, mes, anio, estacion, es_de_dia, es_noche, dia_absoluto, clima
-## - claves con sufijo por entidad: amistad_<npc_id>, flag_<clave>
-## Las claves con sufijo se reconstruyen en _clave_conocida() (prefijo + "_").
+## Allowlist canonical de claves soportadas al evaluar condiciones de dialogo (M21).
+## Tres familias:
+##  - claves escalares de WorldStateService: hora, minuto, dia, mes, anio, estacion,
+##    es_de_dia, es_noche, dia_absoluto, clima
+##  - claves con sufijo por entidad en WorldStateService: amistad_<npc_id>, flag_<clave>
+##  - claves de payload inyectadas por M21 en runtime (ver dialogue_manager.gd):
+##      * gift_reaction (M20->M21): npc_id, reaccion_id, item_id
+##      * level_up_reaction (M20->M21): npc_id, new_level
+##  (estas NO existen en WorldStateService; las inyecta M21 via start_dialogue(context))
+##  - session-vars de amistad inyectadas por el llamador: <npc_id>_amistad
+##    (reconocidas por sufijo en _clave_conocida, no por este prefijo).
+## Las claves con sufijo se reconstruyen en _clave_conocida() (prefijo + "_" o sufijo "_amistad").
 const CLAVES_MUNDO_BASE := [
 	"hora", "minuto", "dia", "mes", "anio", "estacion",
 	"es_de_dia", "es_noche", "dia_absoluto", "clima",
-	"amistad_", "flag_"
+	"amistad_", "flag_",
+	# payload de evento inyectado por M21 (no viven en WorldStateService)
+	"npc_id", "reaccion_id", "item_id", "new_level"
 ]
 
-## Devuelve true si la clave es reconocida por WorldStateService (prefijo o exacta).
+## Devuelve true si la clave es reconocida al evaluar condiciones de dialogo.
+## Acepta: clave exacta en allowlist, clave con prefijo conocido (ej. amistad_/flag_),
+## o clave con sufijo de session-var de amistad (<npc_id>_amistad, inyectada por el llamador).
 static func _clave_conocida(clave: String, allowlist: Array) -> bool:
 	if allowlist.has(clave):
 		return true
 	for pref in allowlist:
 		if str(pref).ends_with("_") and clave.begins_with(str(pref)):
 			return true
+	# session-vars de amistad inyectadas por el llamador: <npc_id>_amistad
+	if clave.ends_with("_amistad"):
+		return true
 	return false
 
 ## Valida un DialogueGraph ya cargado.
-## claves_mundo: Array de claves validas de WorldStateService (opcional). Si esta vacio,
-## NO se chequean claves de mundo desconocidas (solo se valida la sintaxis de la condicion).
+## claves_mundo: Array de claves validas (opcional). Si esta vacio, se usa
+## CLAVES_MUNDO_BASE (validacion siempre activa contra la allowlist canonica).
 ## Devuelve Array de Strings (problemas). Vacio = grafo valido.
 static func validar(grafo, claves_mundo: Array = []) -> Array:
 	var problemas: Array = []
@@ -59,6 +73,13 @@ static func validar(grafo, claves_mundo: Array = []) -> Array:
 	for id_nodo in grafo.nodes:
 		if not alcanzables.has(id_nodo):
 			problemas.append("nodo huérfano (inaccesible desde start): '%s'" % id_nodo)
+	# next_id / goto_id apuntando a nodos inexistentes (arista colgante = crash en runtime)
+	for id_nodo in grafo.nodes:
+		var nodo = grafo.nodes[id_nodo]
+		if nodo.next_id != "" and not grafo.nodes.has(nodo.next_id):
+			problemas.append("nodo '%s': next_id '%s' no existe" % [id_nodo, nodo.next_id])
+		if nodo.goto_id != "" and not grafo.nodes.has(nodo.goto_id):
+			problemas.append("nodo '%s': goto_id '%s' no existe" % [id_nodo, nodo.goto_id])
 	# operadores de condicion invalidos + claves de mundo desconocidas
 	for id_nodo in grafo.nodes:
 		var nodo = grafo.nodes[id_nodo]

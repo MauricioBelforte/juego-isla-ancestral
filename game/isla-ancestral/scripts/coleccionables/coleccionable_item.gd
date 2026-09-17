@@ -4,7 +4,7 @@
 #
 # M73: Coleccionables - ColeccionableItem (Resource).
 # Datos puros de un item coleccionable: id unico, categoria, nombre, icono path, fuente (donde se obtiene), recompensa.
-# Sin class_name (07-GUIA-GODOT §9.17): se instancia via .new() o preload.
+# Sin class_name (GUIA-GODOT/09-godot4-migracion.md §9.17): se instancia via .new() o preload.
 
 extends Resource
 

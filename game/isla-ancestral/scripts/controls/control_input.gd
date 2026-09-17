@@ -9,7 +9,7 @@
 #   - Remapeo en caliente con deteccion de conflictos (RF3, RF5)
 #   - Ajustes: sensibilidad, inversion, dead zones, vibracion (RF4)
 #   - Persistencia atómica JSON en user://settings/controls.cfg (RF8)
-# ⚠️ Sin class_name: es autoload (pitfall documentado en 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall documentado en GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

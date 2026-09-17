@@ -38,12 +38,26 @@ func _registrar_servicio() -> void:
 func _max_copias() -> int:
 	return int(config.get("retencion", {}).get("max_copias", 5))
 
+## Ruta del directorio de backups en el sistema operativo.
+## ⚠️ MEDIDO 2026-09-14 (Godot 4.7.2 headless con `--path` relativo):
+## `DirAccess.open("user://...")` devuelve **null** y `DirAccess.get_files_at()`
+## sobre `user://` devuelve **[]**, aunque `FileAccess` sí resuelve `user://`.
+## `DirAccess.open("res://")` funciona. La forma que sí funciona es globalizar
+## primero: `DirAccess.open(globalize_path("user://..."))`. Ese era el motivo de
+## `cantidad_backups() == 0` (BUG-035) y de que la retención nunca se aplicara.
+func _dir_os() -> String:
+	return ProjectSettings.globalize_path(DIR_BACKUP)
+
 ## Crea un backup de un archivo (copia + checksum). Devuelve la ruta o "".
 func crear_backup(ruta_origen: String, nombre: String) -> String:
 	if not FileAccess.file_exists(ruta_origen):
 		push_warning("[M107] Origen no existe: %s" % ruta_origen)
 		return ""
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(DIR_BACKUP))
+	# `make_dir_recursive_absolute()` sí acepta `user://` tal cual.
+	# (`DirAccess.new()` NO existe: la clase es abstracta — era un error de
+	# parseo que impedía compilar todo el autoload, BUG-035.)
+	if not DirAccess.dir_exists_absolute(DIR_BACKUP):
+		DirAccess.make_dir_recursive_absolute(DIR_BACKUP)
 	var ruta_backup := "%s%s" % [DIR_BACKUP, nombre]
 	var err := DirAccess.copy_absolute(ruta_origen, ruta_backup)
 	if err != OK:
@@ -76,7 +90,8 @@ func restaurar(ruta_backup: String, ruta_destino: String) -> bool:
 	return err == OK
 
 func _limpiar_excedentes() -> void:
-	var dir := DirAccess.open(DIR_BACKUP)
+	# Globalizar primero: `DirAccess.open("user://...")` devuelve null (medido).
+	var dir := DirAccess.open(_dir_os())
 	if dir == null:
 		return
 	var archivos: Array = []
@@ -88,7 +103,30 @@ func _limpiar_excedentes() -> void:
 		DirAccess.remove_absolute("%s%s" % [DIR_BACKUP, viejo["nombre"]])
 
 func cantidad_backups() -> int:
-	var dir := DirAccess.open(DIR_BACKUP)
-	if dir == null:
+	if not DirAccess.dir_exists_absolute(DIR_BACKUP):
 		return 0
-	return dir.get_files().size()
+	return DirAccess.get_files_at(_dir_os()).size()
+
+
+## Audit/manifest de los backups existentes (ítem "verificación de integridad / registro de
+## backups" del 05-Checklist). Devuelve [ {nombre, mtime, integridad} ] ordenado por mtime ascendente.
+## `integridad` = resultado de `verificar_integridad` si el checksum está habilitado; `true` si no
+## (no hay nada que verificar). V0 + headless-safe.
+func listar_backups() -> Array:
+	var resultado: Array = []
+	if not DirAccess.dir_exists_absolute(DIR_BACKUP):
+		return resultado
+	var dir := DirAccess.open(_dir_os())
+	if dir == null:
+		return resultado
+	var checksum_on := bool(config.get("verificacion", {}).get("checksum_habilitado", true))
+	for f in dir.get_files():
+		var ruta := "%s%s" % [DIR_BACKUP, f]
+		var integridad := bool(verificar_integridad(ruta)) if checksum_on else true
+		resultado.append({
+			"nombre": f,
+			"mtime": int(FileAccess.get_modified_time(ruta)),
+			"integridad": integridad,
+		})
+	resultado.sort_custom(func(a, b): return int(a["mtime"]) <= int(b["mtime"]))
+	return resultado

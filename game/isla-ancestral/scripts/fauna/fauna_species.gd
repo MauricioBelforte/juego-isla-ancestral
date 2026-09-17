@@ -3,7 +3,7 @@
 # Fecha: 2026-09-01
 #
 # M36: Fauna - FaunaSpecies (Resource) — datos puros de una especie.
-# Sin class_name (07-GUIA-GODOT §9.17) para que test headless --script funcione via preload.
+# Sin class_name (GUIA-GODOT/09-godot4-migracion.md §9.17) para que test headless --script funcione via preload.
 # Sin embargo este Resource es instanciable via .new() directo (no via GDScript.new()).
 # Cobertura: secciones A (catalogo), parte de B (comportamiento), parte de C (biomas).
 

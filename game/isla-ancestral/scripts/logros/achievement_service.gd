@@ -27,7 +27,7 @@
 #  - RF10: API consulta completa (get_todos/get_estado/get_en_progreso/...).
 #  - RF14: validar_catalogo() con errores accionables (id vacío, condición
 #    vacía, tipo desconocido, stat_id vacío en stat_min).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_CATALOGO: String = "res://data/logros/logros.json"

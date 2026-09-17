@@ -66,6 +66,20 @@ var _ventas_hoy: Dictionary = {}          # item_id -> cantidad vendida hoy
 var _ventas_ventana: Array[Dictionary] = []  # {item_id, cantidad, dia}
 var _dia_actual: int = 0
 
+## L.3 (iter 5, Log 822): caché de la tabla del día — se calcula UNA vez por día
+## laborable y se invalida al registrar ventas o recalcular. Sin bucles por frame.
+var _cache_tabla_dia: Dictionary = {}
+var _cache_tabla_valida: bool = false
+
+## L.6/J.8 (iter 5, Log 822): caché de descuento por amistad (npc_id -> descuento).
+## Se invalida con la señal nivel_amistad_cambio de M20 (EventBus.progresion).
+var _cache_desc_amistad: Dictionary = {}
+
+## L.7 (iter 5): tope de entradas de la ventana de oferta (3 días con ventas
+## plenas de ~15 ítems superan holgadamente cualquier caso real; el pop_front
+## del podado ya acota por día, esto acota el array ante picos artificiales).
+const MAX_ENTRADAS_VENTANA: int = 120
+
 ## Estado de mercado (RF9 estación, RF14 ferias) — duck-typed, no acopla módulos vecinos
 var _estacion_forzado: String = ""          # override de estación (test/control externo)
 var _multiplicador_feria_compra: float = 1.0
@@ -97,13 +111,54 @@ func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int =
 		return 0
 	var mercado := _ajuste_estacional(item_id, base)
 	mercado = int(round(float(mercado) * _multiplicador_feria_compra))
+	# M38 iter 4: sensibilidad por ítem — los ítems de precio fijo ignoran mercado.
+	mercado = _aplicar_variabilidad(item_id, base, mercado)
 	var desc_amistad := _descuento_amistad(npc_id)
 	var desc_volumen := _descuento_volumen(cantidad)
 	var desc_total := minf(desc_amistad + desc_volumen, DESCUENTO_TOTAL_MAX)
 	var final := int(round(float(mercado) * (1.0 - desc_total)))
 	return maxi(1, final)
 
+## M38 iter 4 (GLM-5.3 — Log 819): interpola entre precio base y precio de mercado
+## según PriceDefinition.variabilidad_mercado (0.0 = fijo, 1.0 = sensible).
+## Sin catálogo o sin entrada → comportamiento anterior (mercado completo).
+func _aplicar_variabilidad(item_id: String, base: int, precio_mercado: int) -> int:
+	var v := _variabilidad_item(item_id)
+	if v >= 0.999:
+		return precio_mercado
+	if v <= 0.001:
+		return base
+	return int(round(lerpf(float(base), float(precio_mercado), v)))
+
+## Resuelve PriceDefinition.variabilidad_mercado del catálogo (default 1.0 si no hay entrada).
+func _variabilidad_item(item_id: String) -> float:
+	var cat = _catalog_get()
+	if cat != null and cat.has_method("get_price_def"):
+		var def = cat.get_price_def(item_id)
+		if def != null and "variabilidad_mercado" in def:
+			return clampf(float(def.variabilidad_mercado), 0.0, 1.0)
+	return 1.0
+
 func precio_venta_vigente(item_id: String) -> int:
+	var base := _precio_venta_base(item_id)
+	if base <= 0:
+		return 0
+	# K.4 (iter 5, Log 822): exceder el límite diario de ventas rebaja el precio
+	# de venta al 50% (FACTOR_EXCEDIDO_DIARIO, §2.2). La señal precio_rebajado
+	# se emite en registrar_venta al CRUZAR el límite (un disparo, no por consulta).
+	if precio_rebajado_hoy(item_id):
+		base = int(round(float(base) * FACTOR_EXCEDIDO_DIARIO))
+	var final := maxi(1, base)
+	# RF11 (anti-grind): la venta NUNCA supera la compra vigente (reventa no rentable).
+	var tope := precio_compra_vigente(item_id)
+	if final > tope:
+		final = tope
+	return final
+
+## Núcleo del precio de venta SIN rebaja por límite diario (K.4 iter 5): tope
+## 50-60% de la compra + estacional + feria + oferta. Compartido por
+## precio_venta_vigente y el cálculo del "antes" del aviso precio_rebajado.
+func _precio_venta_base(item_id: String) -> int:
 	var compra := _precio_base_compra(item_id)
 	if compra <= 0:
 		return 0
@@ -111,12 +166,7 @@ func precio_venta_vigente(item_id: String) -> int:
 	base = _ajuste_estacional(item_id, base)
 	base = int(round(float(base) * _multiplicador_feria_venta))
 	base = _ajuste_por_oferta(item_id, base)
-	var final := maxi(1, base)
-	# RF11 (anti-grind): la venta NUNCA supera la compra vigente (reventa no rentable).
-	var tope := precio_compra_vigente(item_id)
-	if final > tope:
-		final = tope
-	return final
+	return maxi(1, base)
 
 ## Límite diario de ventas del ítem (anti-grind).
 ## Resuelve la banda de rareza: primero del catálogo central (PriceDefinition.rareza),
@@ -165,13 +215,22 @@ func ventas_hoy(item_id: String) -> int:
 	return int(_ventas_hoy.get(item_id, 0))
 
 ## Registra una venta (la invoca EconomyManager tras depositar).
+## K.4/I.9 (iter 5, Log 822): al CRUZAR el límite diario emite precio_rebajado
+## (un solo disparo por cruce — la consulta pura precio_venta_vigente ya aplica
+## el factor, aquí solo avisamos). L.3: invalida la caché de la tabla del día.
 func registrar_venta(item_id: String, cantidad: int, dia: int) -> void:
 	if dia != _dia_actual:
 		_dia_actual = dia
 		_ventas_hoy.clear()
+	var excedia_antes: bool = precio_rebajado_hoy(item_id)
 	_ventas_hoy[item_id] = ventas_hoy(item_id) + cantidad
 	_ventas_ventana.append({"item_id": item_id, "cantidad": cantidad, "dia": dia})
 	_podar_ventana(dia)
+	_cache_tabla_valida = false  # L.3: la tabla del día cambió
+	if not excedia_antes and precio_rebajado_hoy(item_id):
+		var antes := _precio_venta_base(item_id)
+		var despues := maxi(1, int(round(float(antes) * FACTOR_EXCEDIDO_DIARIO)))
+		precio_rebajado.emit(item_id, maxi(1, antes), despues)
 
 ## ¿Precio rebajado por haber superado el límite diario?
 func precio_rebajado_hoy(item_id: String) -> bool:
@@ -181,8 +240,20 @@ func precio_rebajado_hoy(item_id: String) -> bool:
 ## Devuelve { item_id: {compra, venta, limite, vendidas_hoy, rebajado} }.
 ## `item_ids` vacío → enumera candidatos del catálogo central (overrides) + ítems
 ## con ventas registradas. Solo incluye ítems con precio base > 0.
-## Sin bucles por frame: se consulta bajo demanda (apertura de tienda/diario).
+## L.3 (iter 5, Log 822): resultado cacheado — se calcula UNA vez por día laborable
+## y se invalida al registrar ventas / recalcular / cambiar feria. Consultas
+## repetidas de la UI devuelven la copia del cache (O(1) tras la primera).
+## Con `item_ids` explícito NO usa cache (consulta puntual de la tienda abierta).
 func tabla_del_dia(item_ids: Array = []) -> Dictionary:
+	if item_ids.is_empty() and _cache_tabla_valida:
+		return _cache_tabla_dia.duplicate(true)
+	var tabla := _calcular_tabla(item_ids)
+	if item_ids.is_empty():
+		_cache_tabla_dia = tabla
+		_cache_tabla_valida = true
+	return tabla
+
+func _calcular_tabla(item_ids: Array) -> Dictionary:
 	var candidatos: Array[String] = []
 	for id in item_ids:
 		var s := str(id)
@@ -219,7 +290,6 @@ func tabla_del_dia(item_ids: Array = []) -> Dictionary:
 			"rebajado": precio_rebajado_hoy(id),
 		}
 	return tabla
-
 ## Serializa estado (§6)
 func serializar() -> Dictionary:
 	return {
@@ -241,10 +311,15 @@ func deserializar(d: Dictionary) -> void:
 # ── Mercado: estación (RF9) y ferias (RF14) ──
 
 ## Fuerza la estación activa (override para test o control externo). Vacío → lee del calendario.
+## I.10 (iter 5, Log 822): el cambio de estación invalida la caché de la tabla
+## (el ajuste estacional cambia los precios de los ítems de temporada).
 func forzar_estacion(nombre: String) -> void:
 	_estacion_forzado = "" if nombre == null else str(nombre)
+	_cache_tabla_valida = false
 
 ## Ajuste estacional (RF9, diseño §2.4): +5% en temporada del ítem, -10% fuera. Sin temporada → sin cambio.
+## I.10 (iter 5, Log 822): registra DOM-ECO-MERCADO con el motivo de cada ajuste
+## (convención del proyecto para M103/M104; solo cuando el ajuste aplica).
 func _ajuste_estacional(item_id: String, base: int) -> int:
 	var temporada_item := _temporada_item(item_id)
 	if temporada_item.is_empty():
@@ -253,15 +328,23 @@ func _ajuste_estacional(item_id: String, base: int) -> int:
 	if actual.is_empty():
 		return base
 	if temporada_item == actual:
-		return int(round(float(base) * (1.0 + TEMPORADA_BONUS_COMPRA)))
-	return int(round(float(base) * (1.0 - TEMPORADA_PENALIZACION)))
+		var bono := int(round(float(base) * (1.0 + TEMPORADA_BONUS_COMPRA)))
+		print("[DOM-ECO-MERCADO] item=%s motivo=temporada_bono estacion=%s base=%d nuevo=%d" % [item_id, actual, base, bono])
+		return bono
+	var penal := int(round(float(base) * (1.0 - TEMPORADA_PENALIZACION)))
+	print("[DOM-ECO-MERCADO] item=%s motivo=temporada_penalizacion estacion=%s base=%d nuevo=%d" % [item_id, actual, base, penal])
+	return penal
 
-## Resuelve la temporada del ítem desde el catálogo central (PriceDefinition.temporada_bonus).
+## Resuelve la temporada del ítem desde el catálogo central (PriceDefinition.temporada,
+## renombrado de temporada_bonus en iter 4; acepta la clave antigua por compatibilidad).
 func _temporada_item(item_id: String) -> String:
 	var cat = _catalog_get()
 	if cat != null and cat.has_method("get_price_def"):
 		var def = cat.get_price_def(item_id)
 		if def != null:
+			var t = def.get("temporada")
+			if t != null and not str(t).is_empty():
+				return str(t)
 			var tb = def.get("temporada_bonus")
 			if tb != null:
 				return str(tb)
@@ -291,19 +374,23 @@ func aplicar_precios_feria(multiplicador_compra: float, multiplicador_venta: flo
 	_multiplicador_feria_compra = clampf(float(multiplicador_compra), 0.1, 5.0)
 	_multiplicador_feria_venta = clampf(float(multiplicador_venta), 0.1, 5.0)
 	_feria_activa = true
+	_cache_tabla_valida = false  # L.3: los precios cambiaron
 	_emitir_tabla()
 
 func limpiar_precios_feria() -> void:
 	_multiplicador_feria_compra = 1.0
 	_multiplicador_feria_venta = 1.0
 	_feria_activa = false
+	_cache_tabla_valida = false  # L.3: los precios cambiaron
 	_emitir_tabla()
 
 func esta_feria_activa() -> bool:
 	return _feria_activa
 
 ## Recálculo diario (RF9): refresca estación y avisa a la UI. Llamado al amanecer (M31) o manualmente.
+## L.3 (iter 5): invalida la caché de la tabla — el día cambió, se recalcula una vez.
 func recalcular_tabla_dia() -> void:
+	_cache_tabla_valida = false
 	_emitir_tabla()
 
 func _emitir_tabla() -> void:
@@ -371,13 +458,19 @@ func _precio_base_compra(item_id: String) -> int:
 	return maxi(0, int(item.precio_compra))
 
 ## Ajuste por ventana de oferta: ventas recientes bajan el precio hasta -10%
+## I.10 (iter 5, Log 822): registra DOM-ECO-MERCADO con el motivo cuando el
+## ajuste aplica (hay ventas recientes del ítem en la ventana de 3 días).
 func _ajuste_por_oferta(item_id: String, base: int) -> int:
 	var vendidas := 0
 	for e in _ventas_ventana:
 		if str(e["item_id"]) == item_id:
 			vendidas += int(e["cantidad"])
+	if vendidas == 0:
+		return base
 	var factor := 1.0 - minf(AJUSTE_OFERTA_MAX, float(vendidas) * 0.02)
 	var ajustado := int(round(float(base) * factor))
+	if ajustado != base:
+		print("[DOM-ECO-MERCADO] item=%s motivo=oferta_saturada vendidas_ventana=%d base=%d nuevo=%d" % [item_id, vendidas, base, ajustado])
 	return clampi(ajustado, maxi(1, int(round(float(base) * (1.0 - AJUSTE_OFERTA_MAX)))), base)
 
 ## Descuento minorista/mayorista por volumen: mayor cantidad → mayor descuento
@@ -392,6 +485,10 @@ func _descuento_volumen(cantidad: int) -> float:
 
 ## Descuento por amistad (M20): consulta niveles del autoload Friendship.
 ## Sin npc_id, sin M20 o nivel < 2 → sin descuento (comportamiento previo).
+## L.6/J.8 (iter 5, Log 822): resultado cacheado por (npc_id, nivel); la señal
+## nivel_amistad_cambio de M20 (EventBus.progresion) invalida la entrada del NPC.
+## El nivel se re-lee en cada consulta (barata: get_nivel es un lookup), solo el
+## cálculo del descuento sobre DESCUENTO_AMISTAD queda cacheado.
 func _descuento_amistad(npc_id: String) -> float:
 	if npc_id.is_empty():
 		return 0.0
@@ -399,12 +496,28 @@ func _descuento_amistad(npc_id: String) -> float:
 	if fs == null or not fs.has_method("get_nivel"):
 		return 0.0
 	var nivel := int(fs.get_nivel(npc_id))
+	if _cache_desc_amistad.has(npc_id):
+		var entry: Dictionary = _cache_desc_amistad[npc_id]
+		if int(entry.get("nivel", -1)) == nivel:
+			return float(entry.get("desc", 0.0))
 	var mejor := 0.0
 	for umbral in DESCUENTO_AMISTAD:
 		if nivel >= int(umbral):
 			mejor = maxf(mejor, float(DESCUENTO_AMISTAD[umbral]))
+	_cache_desc_amistad[npc_id] = {"nivel": nivel, "desc": mejor}
 	return mejor
+
+## J.8 (iter 5, Log 822): invalida la caché de descuento de un NPC al cambiar su
+## nivel de amistad (señal nivel_amistad_cambio de M20 vía EventBus.progresion).
+## Conectada por EconomyManager en _ready (duck-typing: si no hay bus, no pasa nada).
+func invalidar_cache_amistad(npc_id: String) -> void:
+	_cache_desc_amistad.erase(npc_id)
 
 func _podar_ventana(dia: int) -> void:
 	while _ventas_ventana.size() > 0 and (dia - int(_ventas_ventana[0]["dia"])) > VENTANA_OFERTA_DIAS:
+		_ventas_ventana.pop_front()
+	# L.7 (iter 5, Log 822): tope de entradas — ante picos artificiales de ventas
+	# en un día, el array queda acotado (memoria constante, arrays de tamaño fijo
+	# en la práctica: MAX_ENTRADAS_VENTANA sobra para 3 días reales).
+	while _ventas_ventana.size() > MAX_ENTRADAS_VENTANA:
 		_ventas_ventana.pop_front()

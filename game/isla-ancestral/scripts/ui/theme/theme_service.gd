@@ -7,7 +7,7 @@
 # (theme del SceneTree). Todas las capas/widgets que no definan tema propio
 # lo heredan. Reaplica en cambio de escala (M58), recarga fuentes (M87/M88)
 # y se adapta a cambios de resolución (M90/T-053-063).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

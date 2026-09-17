@@ -40,8 +40,18 @@ func _check(cond: bool, msg: String) -> void:
 
 func _test_version() -> void:
 	var meta: Dictionary = _bal.obtener_meta()
-	_check(str(meta.get("balance_version", "")) == "1.1.0",
-		"balance_version 1.1.0 (%s)" % str(meta.get("balance_version")))
+	# Versión mínima 1.1.0: la estableció la iter. 3 (flash); la iter. 4 (GLM-5.3)
+	# la bumppeó a 1.2.0 (regla U.3: bump en cada cambio de balance). Aceptamos
+	# >= 1.1.0 para que el test no quede acoplado a cada bump futuro.
+	var v := str(meta.get("balance_version", ""))
+	var partes := v.split(".")
+	var ok := partes.size() == 3
+	if ok:
+		for i in range(3):
+			if int(partes[i]) < ["1", "1", "0"][i].to_int():
+				ok = false
+				break
+	_check(ok, "balance_version >= 1.1.0 semántico (%s)" % v)
 	_check(meta.has("rareza") and meta.has("rendimiento"), "meta con rareza/rendimiento/viajes")
 
 func _test_friendship() -> void:

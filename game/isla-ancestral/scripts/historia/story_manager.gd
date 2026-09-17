@@ -12,7 +12,7 @@
 #    objeto M14. Sin dependencia de contenido narrativo (textos mínimos).
 #  - Persistencia ISaveProvider (M59): sección "historia".
 #  - Emite EventBus.quest.prereq_met(seal_id) por cada sello (contrato M07).
-# ⚠️ Sin class_name: es autoload (pitfall documentado 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall documentado GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 ## Cargas del JSON del grafo

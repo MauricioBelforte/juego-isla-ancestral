@@ -14,7 +14,7 @@
 #   - Inventario (autoload) y TimeCalendar (M29) consultados via get_node_or_null
 #   - SaveManager (M59) para persistencia de estado por interactuable
 #
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, seccion 9.17/9.41)
 #   - snake_case en senales (seccion 1.1)
 #   - _ en vars no usadas (seccion 1.3)

@@ -18,16 +18,16 @@ static func validar_catalogo(config: Dictionary) -> Array[String]:
 	var ids := {}
 	var hex_rex := RegEx.create_from_string("^#[A-Fa-f0-9]{6}$")
 	for e in vfx:
-		var id := String(e.get("id", ""))
+		var id := str(e.get("id", ""))
 		if id.is_empty():
 			errores.append("VFX sin id")
 		elif ids.has(id):
 			errores.append("id duplicado: %s" % id)
 		else:
 			ids[id] = true
-		if not String(e.get("nombre", "")).is_empty() == false and str(e.get("nombre", "")).is_empty():
+		if str(e.get("nombre", "")).is_empty():
 			errores.append(id + ": sin nombre")
-		if not TIPOS.has(String(e.get("tipo", ""))):
+		if not TIPOS.has(str(e.get("tipo", ""))):
 			errores.append("%s: tipo inválido (%s)" % [id, e.get("tipo", "")])
 		var cantidad := int(e.get("cantidad", 0))
 		if cantidad < 5 or cantidad > 300:
@@ -35,6 +35,6 @@ static func validar_catalogo(config: Dictionary) -> Array[String]:
 		var emision := float(e.get("emision", 0))
 		if emision <= 0.0 or emision > 3.0:
 			errores.append("%s: emision fuera de rango (%.2f)" % [id, emision])
-		if hex_rex.search(String(e.get("color", ""))) == null:
+		if hex_rex.search(str(e.get("color", ""))) == null:
 			errores.append("%s: color inválido" % id)
 	return errores

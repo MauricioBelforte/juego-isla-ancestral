@@ -326,8 +326,12 @@ func _enganchar_voxel_viewer(player: Node) -> void:
 	var viewer := get_node_or_null("VoxelViewer") as VoxelViewer
 	if viewer == null or player == null:
 		return
+	if viewer.get_parent() != player:
+		var padre_viejo := viewer.get_parent()
+		if padre_viejo != null:
+			padre_viejo.remove_child(viewer)
+		player.add_child(viewer)
 	viewer.position = Vector3.ZERO
-	player.add_child(viewer)
 	print("[M09] VoxelViewer enganchado al Player — streaming alrededor del spawn")
 
 func _liberar_fisica_player(player: Node) -> void:

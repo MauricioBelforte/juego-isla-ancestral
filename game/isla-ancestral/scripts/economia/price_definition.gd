@@ -25,3 +25,12 @@ extends Resource
 
 ## El ítem puede revenirse (se puede vender de vuelta al jugador). Si false, solo compra.
 @export var revendible: bool = true
+
+## M38 iter 4 (GLM-5.3 / Kilo Code — Log 819): sensibilidad del ítem al mercado.
+## 0.0 = precio fijo (ignora ajustes de oferta/estación) .. 1.0 = sensible al máximo.
+## Escala el ajuste por oferta (ventana 3 días) y el bono estacional.
+@export var variabilidad_mercado: float = 0.5
+
+## M38 iter 4: estación de temporada del ítem ("primavera"/"verano"/"otono"/"invierno").
+## "" = sin temporada (nunca recibe bono ni penalización estacional).
+@export var temporada: String = ""

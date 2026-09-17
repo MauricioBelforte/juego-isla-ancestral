@@ -15,7 +15,7 @@
 #    en travesía no se cancela (viaje en curso).
 #  - Persistencia M59: serialize/restore (§6) — si se guarda en travesía, al
 #    restaurar continúa con tiempo restante intacto.
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41); el
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41); el
 # contrato del diseño lo llama "class_name TravelService", la convención del
 # proyecto manda ( BoatRoute sí lleva class_name por ser Resource).
 extends Node

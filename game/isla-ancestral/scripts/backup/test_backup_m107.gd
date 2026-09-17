@@ -1,4 +1,4 @@
-﻿# Modelo: deepseek-v4-flash
+# Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
@@ -19,6 +19,7 @@ func _run() -> void:
 	_test_policy()
 	_test_backup()
 	_test_restaurar()
+	_test_audit()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -81,6 +82,38 @@ func _test_restaurar() -> void:
 	_check("backup corrupto no restaura", bm.restaurar(malo, origen) == false)
 	DirAccess.remove_absolute(origen)
 	DirAccess.remove_absolute(malo)
+
+## ── Audit: listar_backups() (método agregado en iter. agnes, Log 927) ─────────
+func _test_audit() -> void:
+	print("--- Audit: listar_backups() (manifest de backups) ---")
+	var bm := root.get_node_or_null("BackupManager")
+	var origen := "user://test_audit_src.json"
+	var payload := '{"audit":true}'
+	var contenido := Validador.crc32_hex(payload) + "\n" + payload
+	var f := FileAccess.open(origen, FileAccess.WRITE)
+	f.store_string(contenido)
+	f.close()
+	var ruta = bm.crear_backup(origen, "backup_audit.json")
+	var manifest: Array = bm.listar_backups()
+	_check("manifest es Array", manifest is Array, "tipo=%s" % str(typeof(manifest)))
+	_check("manifest lista el backup creado", _contiene(manifest, "backup_audit.json"))
+	_check("entry del manifest con integridad=true", _es_integra(manifest, "backup_audit.json"))
+	# limpieza
+	DirAccess.remove_absolute(origen)
+	if ruta != "" and FileAccess.file_exists(ruta):
+		DirAccess.remove_absolute(ruta)
+
+func _contiene(manifest: Array, nombre: String) -> bool:
+	for e in manifest:
+		if str(e.get("nombre", "")) == nombre:
+			return true
+	return false
+
+func _es_integra(manifest: Array, nombre: String) -> bool:
+	for e in manifest:
+		if str(e.get("nombre", "")) == nombre:
+			return bool(e.get("integridad", false))
+	return false
 
 func _summary() -> void:
 	print("=== Resumen M107: %d checks, %d fallos ===" % [_checks, _fallos])

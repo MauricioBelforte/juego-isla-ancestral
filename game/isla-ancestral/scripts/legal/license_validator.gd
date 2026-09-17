@@ -142,7 +142,7 @@ static func validar_lock_file(ruta_catalogo: String) -> Dictionary:
 		return {"valid": false, "expected": expected_hash, "actual": "", "error": "no se puede abrir catalogo"}
 	var data := file_access.get_buffer(file_access.get_length())
 	file_access.close()
-	var actual_hash := String(data.hash())
+	var actual_hash := str(hash(data))
 	var valid := (actual_hash == expected_hash)
 	return {"valid": valid, "expected": expected_hash, "actual": actual_hash, "error": "" if valid else "checksum mismatch"}
 

@@ -10,7 +10,7 @@
 #   - (futuro) M35 mineria -> registra el mineral
 # Persistencia M59 con set de ids collected (compacto).
 #
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, seccion 9.17)
 #   - snake_case en senales
 #   - Duck-typing en M36 fauna_registry

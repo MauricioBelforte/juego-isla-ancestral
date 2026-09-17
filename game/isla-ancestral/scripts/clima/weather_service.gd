@@ -11,7 +11,7 @@
 #  - Persistencia ISaveProvider (M59): sección "clima"; al cargar recomputa y valida
 #    (si difieren, gana el recomputado — nunca data corrupta, 03-Diseno §3)
 #  - Consumidores (M19/M33/M34/M36/M49/M50/M51/M52) escuchan señales, no internals
-# ⚠️ Sin class_name: es autoload (pitfall documentado en 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall documentado en GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 enum Clima { SOLEADO, NUBLADO, LLUVIA, TORMENTA, NIEBLA, NIEVE, VIENTO, TROPICAL, ESPECIAL }

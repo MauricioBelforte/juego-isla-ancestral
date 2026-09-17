@@ -11,7 +11,7 @@
 #  - Estado persistente ISaveProvider M59: sección "postgame" (activo,
 #    epílogo visto, contadores de actividades repetibles).
 #  - Señal postgame_activado para M92/M53/M21 (epílogo cozy, sin "Fin" frío).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_ACTIVIDADES: String = "res://data/postgame/actividades.json"

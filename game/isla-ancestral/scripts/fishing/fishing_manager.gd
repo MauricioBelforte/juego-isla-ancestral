@@ -7,7 +7,7 @@
 # con cebo y pity), sesiones, colección/persistencia M59.
 # Datos desde data/balance/fishing.json (M93: peces con temporada/hora/clima/
 # probabilidad/pity). Reglas anti-frustración §6 verificables en test.
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 
@@ -29,7 +29,12 @@ var _capturas_totales: int = 0
 
 func _ready() -> void:
 	_prng = RandomNumberGenerator.new()
-	_prng.seed = hash(Time.get_ticks_usec())
+	# PRNG de partida (M29 H120, Log 824): la secuencia es determinista por
+	# partida+ día (misma partida → mismas capturas en recargas del mismo save).
+	# Fallback: si GameTime no existe aún (tests unitarios), semilla 0 estable.
+	var gt := get_node_or_null("/root/GameTime")
+	if gt and gt.has_method("rng_diario"):
+		_prng = gt.rng_diario("m34")
 	_cargar_peces()
 
 ## ── Datos (M93) ──────────────────────────────────────────
@@ -52,14 +57,29 @@ func _cargar_peces() -> void:
 		pez.valor_venta = int(datos.get("precio_venta", 0))
 		pez.pity = int(datos.get("pity", 0) if datos.get("pity", 0) != null else 0)
 		var horas: Array = datos.get("horas", [])
-		if horas.size() >= 2:
-			pez.franjas = [_franja_de_hora(int(horas[0]))]
+		# Toda hora listada mapea a su franja (antes solo se usaba la primera:
+		# "horas": [4, 20] perdía la NOCHE de la 20). Contrato FishDefinition:
+		# franjas vacías = todas.
+		var franjas_set: Array[int] = []
+		for h in horas:
+			var franja := _franja_de_hora(int(h))
+			if not franjas_set.has(franja):
+				franjas_set.append(franja)
+		pez.franjas = franjas_set
 		var clima: Array = datos.get("clima", [])
 		for c in clima:
 			pez.climas.append(_clima_numero(String(c)))
+		# "temporadas": ["todas"] → estaciones VACÍAS (= todas, contrato
+		# FishDefinition L14). Antes: _estacion_numero("todas") devolvía -1 y
+		# pez.estaciones = [-1] NUNCA matcheaba una estación real 0-3 → el
+		# pez caía SIEMPRE al fallback "todas las especies" de resolver_especie
+		# (el filtro de estación quedaba roto para peces "todas").
 		var temporada: Array = datos.get("temporadas", [])
-		for t in temporada:
-			pez.estaciones.append(_estacion_numero(String(t)))
+		if not temporada.has("todas"):
+			for t in temporada:
+				var est := _estacion_numero(String(t))
+				if est >= 0:
+					pez.estaciones.append(est)
 		_peces.append(pez)
 
 func _franja_de_hora(hora: int) -> int:
@@ -155,14 +175,7 @@ func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
 	var cal = get_node_or_null("/root/TimeCalendar")
 	var estacion: int = int(cal.get_estacion()) if cal else 0
 	var hora: int = cal.get_hora() if cal else 12
-	var franja_actual: int = _franja_de_hora(hora)
-	var candidatas: Array = []
-	for pez in _peces:
-		if pez.estaciones.size() > 0 and not pez.estaciones.has(estacion):
-			continue
-		if pez.franjas.size() > 0 and not pez.franjas.has(franja_actual):
-			continue
-		candidatas.append(pez)
+	var candidatas: Array = _candidatas_de_estacion(estacion, hora)
 	if candidatas.is_empty():
 		candidatas = _peces  # fallback: nunca pescar "nada" (cozy)
 	# Peso: base x bono cebo x bono clima x pity
@@ -184,6 +197,21 @@ func resolver_especie(_spot, cebo: CeboDefinition = null) -> FishDefinition:
 				_pity_contadores[elegido.id] = 0
 			return elegido
 	return candidatas[0] if candidatas.size() > 0 else null
+
+## Candidatas por estación M29 + franja M31 (extraído de resolver_especie
+## para testabilidad, patrón _peso_efectivo del Log 310). El clima NO filtra
+## (§6 M32: bono sí, bloqueo no — solo multiplica pesos en _peso_efectivo).
+## Contrato: estaciones/franjas VACÍAS = todas (FishDefinition L14-15).
+func _candidatas_de_estacion(estacion: int, hora: int = 12) -> Array:
+	var franja_actual: int = _franja_de_hora(hora)
+	var candidatas: Array = []
+	for pez in _peces:
+		if pez.estaciones.size() > 0 and not pez.estaciones.has(estacion):
+			continue
+		if pez.franjas.size() > 0 and not pez.franjas.has(franja_actual):
+			continue
+		candidatas.append(pez)
+	return candidatas
 
 ## ── Bonos de clima (M32→M34, glm-5.3-flash 2026-08-31) ──
 ## Diseño M32 §6 / checklist P21: "lluvia +15% raro; tropical +25% raro;

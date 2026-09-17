@@ -13,7 +13,7 @@
 #  - Persistencia ISaveProvider (M59): sección "barter" {dia, usos}.
 #  - Señales: trueque_exitoso(npc_id, oferta_id, entregado, recibido) /
 #    trueque_rechazado(motivo). Log DOM-ECO-TRUEQUE (convención del proyecto).
-# ⚠️ Sin class_name: es autoload (pitfall documentado 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall documentado GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 ## Directorio de ofertas (una BarterOffer .tres por propuesta)

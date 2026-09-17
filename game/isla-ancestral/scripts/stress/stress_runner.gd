@@ -20,6 +20,7 @@ const _SC_BLOCK := preload("res://scripts/stress/escenarios/block_edit_stress.gd
 const _SC_INVENTORY := preload("res://scripts/stress/escenarios/inventory_stress.gd")
 const _SC_EQUIPMENT := preload("res://scripts/stress/escenarios/equipment_stress.gd")
 const _SC_BASE := preload("res://scripts/stress/stress_scenario.gd")
+const _COMPARADOR := preload("res://scripts/stress/stress_comparator.gd")
 
 const RUTA_REPORTE := "user://stress_report.json"
 
@@ -35,10 +36,17 @@ func _run() -> void:
 		quit(1)
 		return
 	var reporte := _ejecutar_todos()
+	var comp := _COMPARADOR.new()
+	if "update-baseline" in OS.get_cmdline_user_args():
+		comp.guardar(comp.ruta_baseline(), comp.derivar_baseline(reporte.get("escenarios", [])))
+		print("=== [M113] Baseline actualizado (update-baseline) ===")
+		quit(0)
+		return
 	_escribir_reporte(reporte)
 	var ok := _es_check_status(reporte)
-	print("=== [M113] StressRunner completado: %d escenarios ===" % _escenarios.size())
-	quit(0 if ok else 1)
+	var comparacion := comp.comparar(reporte.get("escenarios", []), comp.cargar())
+	print("=== [M113] StressRunner completado: %d escenarios | baseline: %s ===" % [_escenarios.size(), _etiqueta_comparacion(comparacion)])
+	quit(0 if (ok and not bool(comparacion.get("regresion", false))) else 1)
 
 func _registrar_escenarios() -> Array:
 	return [
@@ -96,3 +104,15 @@ func _es_check_status(reporte: Dictionary) -> bool:
 		if String(escenario.get("status", "ok")) != "ok":
 			return false
 	return true
+
+
+## Etiqueta legible del veredicto del comparador para el log del runner.
+func _etiqueta_comparacion(comparacion: Dictionary) -> String:
+	if bool(comparacion.get("regresion", false)):
+		return "REGRESIÓN (%d métrica(s) > umbral %d%%)" % [
+			(comparacion.get("regresiones", []) as Array).size(),
+			int(float(comparacion.get("umbral", 0.05)) * 100.0),
+		]
+	if not bool(comparacion.get("hay_baseline", false)):
+		return "sin baseline (primera corrida: sin regresión que medir)"
+	return "ok (sin regresión > %d%%)" % int(float(comparacion.get("umbral", 0.05)) * 100.0)

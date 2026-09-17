@@ -1,9 +1,9 @@
-﻿# Modelo: agnes-2.5-flash
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M64: IA de NPC â€” Controlador principal por NPC (NPCAgent)
-# Se adjunta a cada Villager como componente. Usa NPCStateMachine monolÃ­tico.
+# M64: IA de NPC — Controlador principal por NPC (NPCAgent)
+# Se adjunta a cada Villager como componente. Usa NPCStateMachine monolítico.
 
 class_name NPCAgent
 extends CharacterBody3D
@@ -25,7 +25,7 @@ var _needs: NPCNeeds = null
 var _blackboard: NPCBlackboard = null
 var _nav_agent: NavigationAgent3D = null
 
-## SeÃ±ales pÃºblicas
+## Señales públicas
 signal npc_state_changed(old_state: StringName, new_state: StringName)
 signal npc_arrived(location: StringName)
 signal npc_stuck(duration: float)
@@ -212,7 +212,7 @@ func _get_profile_id() -> String:
 	return "unknown"
 
 
-# â”€â”€ API pÃºblica â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── API pública ────────────────────────────────────────────
 
 func get_state_machine() -> Node:
 	return _state_machine
@@ -329,14 +329,14 @@ func set_simulation_level(level: String) -> void:
 		return
 	_sim_level = level
 	_state_machine.set_simulation_level(level)
-	print("[NPCAgent] %s simulaciÃ³n: %s" % [_npc_id, level])
+	print("[NPCAgent] %s simulación: %s" % [_npc_id, level])
 
 
 func get_simulation_level() -> String:
 	return _sim_level
 
 
-# â”€â”€ Persistencia (ISaveProvider M59) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Persistencia (ISaveProvider M59) ───────────────────────
 
 func get_save_data() -> Dictionary:
 	return {

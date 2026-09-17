@@ -8,7 +8,7 @@
 # Diseno data-driven: cualquier seccion agregada al JSON aparece
 # automaticamente en la UI sin tocar codigo.
 #
-# Sin class_name (autoload, 07-GUIA-GODOT 9.17/9.41).
+# Sin class_name (autoload, GUIA-GODOT/INDICE.md 9.17/9.41).
 # Sin acoplamiento con M87 Localization: si M87 existe, lo consume;
 # si no, el fallback de idioma es hard-coded en este manager.
 

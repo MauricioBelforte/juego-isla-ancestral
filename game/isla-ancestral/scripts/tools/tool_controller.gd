@@ -40,7 +40,7 @@ const B_GRAVEL: int = 27
 const B_MOSS: int = 28
 const B_MUD: int = 29
 
-## Señales para feedback (snake_case, 07-GUIA-GODOT §1.1)
+## Señales para feedback (snake_case, GUIA-GODOT/01-gdscript-errores-comunes.md §1.1)
 signal objetivo_actualizado(pos: Vector3i, block_id: int, valido: bool, progreso: float)
 signal golpe_conectado(pos: Vector3i, block_id: int, material: String, progreso: float)
 signal golpe_fallido(pos: Vector3i, razon: String)
@@ -254,6 +254,8 @@ func intentar_golpe() -> void:
 
 ## CONTRATO M08: intenta extraer el bloque apuntado (progresivo).
 ## Devuelve {} si no hay target o el golpe no completó la extracción.
+## M13 iter 4 (GLM-5.3): antes del voxel, intenta el golpe sobre un
+## ResourceNode de M15 cercano al rayo (cableado M13→M15, [?] de M15 iter 4).
 func try_extract() -> Dictionary:
 	if herramienta == null:
 		return {}
@@ -262,6 +264,12 @@ func try_extract() -> Dictionary:
 		return {}
 	if not herramienta.permite(ToolData.Accion.EXTRACT):
 		return {}
+
+	# Cableado M13→M15 (iter 4): ResourceNode de M15 en el punto de mira.
+	if _intentar_golpe_recurso_m15():
+		_gastar_durabilidad()
+		_cooldown = herramienta.velocidad_efectiva()
+		return {"ok": true, "recurso_m15": true}
 
 	var hit = _raycast_camara()
 	var info := _voxel_de_hit(hit)
@@ -309,6 +317,49 @@ func try_extract() -> Dictionary:
 	if not extraidos.is_empty():
 		return {"ok": true, "block_id": block_id, "pos": pos, "drops": extraidos[0]["drops"], "extracciones": extraidos}
 	return {}
+
+## Cableado M13→M15 (iter 4, GLM-5.3 — cierra el [?] bloqueador de M15).
+## Busca un ResourceNode de M15 a ≤1.5 m del punto de mira del rayo y, si
+## existe, deriva el golpe al helper ResourceManager.recibir_golpe_en_nodo.
+## Devuelve true si el golpe se consumó contra un recurso M15.
+## Regla cozy: si el golpe contra el recurso falla por herramienta equivocada,
+## NO cae al voxel de debajo (evita romper el mundo por accidente).
+func _intentar_golpe_recurso_m15() -> bool:
+	var rm = get_tree().root.get_node_or_null("ResourceManager")
+	if rm == null or not rm.has_method("recibir_golpe_en_nodo"):
+		return false
+	# Punto de referencia del rayo: cruce con el mundo voxel o punto a ALCANCE/2.
+	var punto: Vector3 = global_position + Vector3(0, 1, 0)
+	var hit = _raycast_camara()
+	if hit != null:
+		punto = Vector3(hit.position)
+	# Buscar el nodo de M15 más cercano al punto de mira dentro del radio.
+	var nodo := _recurso_m15_cercano_a(rm, punto, 1.5)
+	if nodo == null:
+		return false
+	var ok: bool = rm.recibir_golpe_en_nodo(nodo, herramienta.nombre_id())
+	if not ok:
+		# Herramienta equivocada contra el recurso: feedback sin romper voxel.
+		_emitir_fallo_actual("herramienta_equivocada")
+	return true  # el golpe se consumió contra el recurso (aplicado o fallido)
+
+## Busca en los nodos activos de M15 el más cercano a `punto` dentro de `radio`.
+func _recurso_m15_cercano_a(rm: Node, punto: Vector3, radio: float) -> ResourceNode:
+	var spawner = rm.get("spawner")
+	if spawner == null or not spawner.has_method("obtener_nodos"):
+		return null
+	var mejor: ResourceNode = null
+	var mejor_d: float = radio
+	for nodo in spawner.obtener_nodos().values():
+		if nodo == null or not is_instance_valid(nodo):
+			continue
+		if nodo.estado == ResourceNode.Estado.AGOTADO:
+			continue
+		var d: float = nodo.global_position.distance_to(punto)
+		if d <= mejor_d:
+			mejor = nodo
+			mejor_d = d
+	return mejor
 
 ## CONTRATO M08/M17: intenta colocar un bloque en la cara adyacente al apuntado.
 func try_place(block_id: int, _metadata: Dictionary = {}) -> bool:

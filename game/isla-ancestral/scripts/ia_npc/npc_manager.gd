@@ -1,34 +1,34 @@
-﻿# Modelo: agnes-2.5-flash
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M64: IA de NPC â€” NPCManager (autoload)
+# M64: IA de NPC — NPCManager (autoload)
 #
-# Gestiona todos los NPCAgents activos: registro/desregistro, niveles de simulaciÃ³n
-# por burbuja de distancia, mÃ©tricas de rendimiento, persistencia M59.
+# Gestiona todos los NPCAgents activos: registro/desregistro, niveles de simulación
+# por burbuja de distancia, métricas de rendimiento, persistencia M59.
 # No modifica M19; solo consume su API.
 
 extends Node
 
 ## Preload para resolver el class_name NPCAgent en este script
-## (evita fallo de parseo headless por class_name cruzado, AGENTS.md Â§9.50)
+## (evita fallo de parseo headless por class_name cruzado, AGENTS.md §9.50)
 const NPCAgentScript = preload("res://scripts/ia_npc/npc_agent.gd")
 
-## SeÃ±ales
+## Señales
 signal npc_sim_level_changed(npc_id: StringName, old_level: String, new_level: String)
 signal npc_created(npc_id: StringName)
 signal npc_removed(npc_id: StringName)
 signal performance_tick(active_full: int, active_medium: int, active_light: int, avg_tick_ms: float)
 
-## Constantes de simulaciÃ³n por burbuja
+## Constantes de simulación por burbuja
 const BUBBLE_FULL: float = 30.0
 const BUBBLE_MEDIUM: float = 60.0
 const BUBBLE_LIGHT: float = 100.0
-const MAX_AGMPS_FULL: int = 60  # MÃ¡ximo de NPCs con IA completa (presupuesto M61)
+const MAX_AGMPS_FULL: int = 60  # Máximo de NPCs con IA completa (presupuesto M61)
 
 ## Lista de agentes registrados
 var _agents: Dictionary = {}  # npc_id -> NPCAgent
-## MÃ©tricas de rendimiento
+## Métricas de rendimiento
 var _tick_times: Array[float] = []
 const MAX_TICK_HISTORY: int = 60
 
@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 
 func _suscribir_villager_manager() -> void:
-	"""Suscribirse a seÃ±ales de VillagerManager para registrar/desregistrar agentes."""
+	"""Suscribirse a señales de VillagerManager para registrar/desregistrar agentes."""
 	var vm = get_node_or_null("/root/VillagerManager")
 	if vm != null:
 		vm.poblacion_cambio.connect(_on_poblacion_cambio)
@@ -53,8 +53,8 @@ func _suscribir_villager_manager() -> void:
 
 
 func _on_poblacion_cambio(activos: Array) -> void:
-	"""Sincronizar agentes registrados con la poblaciÃ³n actual de M19."""
-	# Eliminar agentes que ya no estÃ¡n activos
+	"""Sincronizar agentes registrados con la población actual de M19."""
+	# Eliminar agentes que ya no están activos
 	var to_remove := []
 	for npc_id in _agents.keys():
 		var found = false
@@ -76,7 +76,7 @@ func _on_poblacion_cambio(activos: Array) -> void:
 
 
 func _add_agent(npc_id: String, agent_node: Node) -> void:
-	"""Agregar un agente al manager. Busca NPCAgent en la jerarquÃ­a del villager."""
+	"""Agregar un agente al manager. Busca NPCAgent en la jerarquía del villager."""
 	if _agents.has(npc_id):
 		return
 	# Buscar NPCAgent como hijo del villager
@@ -84,7 +84,7 @@ func _add_agent(npc_id: String, agent_node: Node) -> void:
 	if agent_node.has_node("NPCAgent"):
 		npc_agent = agent_node.get_node("NPCAgent")
 	if npc_agent == null:
-		# Crear NPCAgent dinÃ¡micamente si no existe
+		# Crear NPCAgent dinámicamente si no existe
 		npc_agent = _create_npc_agent(agent_node)
 	if npc_agent != null:
 		_agents[npc_id] = npc_agent
@@ -119,7 +119,7 @@ func _remove_agent(npc_id: String) -> void:
 
 
 func _update_simulation_levels() -> void:
-	"""Actualizar niveles de simulaciÃ³n basado en distancia al jugador."""
+	"""Actualizar niveles de simulación basado en distancia al jugador."""
 	var player_pos = _get_player_position()
 	if player_pos == Vector3.ZERO:
 		return
@@ -154,7 +154,7 @@ func _get_player_position() -> Vector3:
 
 
 func _update_performance_metrics(delta: float) -> void:
-	"""Registrar tiempo de tick para mÃ©tricas de rendimiento."""
+	"""Registrar tiempo de tick para métricas de rendimiento."""
 	var start = Time.get_ticks_msec()
 	# Simular un tick ligero
 	for npc_id in _agents.keys():
@@ -165,7 +165,7 @@ func _update_performance_metrics(delta: float) -> void:
 	_tick_times.append(elapsed)
 	if _tick_times.size() > MAX_TICK_HISTORY:
 		_tick_times.resize(MAX_TICK_HISTORY)
-	# Emitir mÃ©tricas cada ~1 segundo
+	# Emitir métricas cada ~1 segundo
 	if _tick_times.size() >= 10:
 		var avg = 0.0
 		for t in _tick_times:
@@ -185,7 +185,7 @@ func _update_performance_metrics(delta: float) -> void:
 		performance_tick.emit(full, medium, light, avg)
 
 
-# â”€â”€ API pÃºblica â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── API pública ──────────────────────────────────────────────────────
 
 func get_agent(npc_id: String) -> NPCAgent:
 	return _agents.get(npc_id, null)
@@ -231,7 +231,7 @@ func get_performance_summary() -> Dictionary:
 	}
 
 
-# â”€â”€ Persistencia (ISaveProvider M59) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Persistencia (ISaveProvider M59) ─────────────────────────────────
 
 func _registrar_proveedor_guardado() -> void:
 	var sm = get_node_or_null("/root/SaveManager")
@@ -259,4 +259,4 @@ func restore_save_data(data: Dictionary) -> void:
 			var agent = _agents[npc_id]
 			if agent != null and is_instance_valid(agent):
 				agent.restore_save_data(agents_data[npc_id])
-		# Si el agente no existe, se recrearÃ¡ cuando M19 registre el villager
+		# Si el agente no existe, se recreará cuando M19 registre el villager

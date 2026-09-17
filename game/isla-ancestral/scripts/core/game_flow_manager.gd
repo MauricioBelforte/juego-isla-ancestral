@@ -6,7 +6,7 @@
 # Según 03-Diseno §1.1/§3: BOOT → MENU → CARGANDO → MUNDO → PAUSA → ERROR.
 # Solo orquesta ESTADOS y valida transiciones; la carga de escenas la hace
 # SceneManager (M63 pendiente) y los servicios de dominio no lo conocen.
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

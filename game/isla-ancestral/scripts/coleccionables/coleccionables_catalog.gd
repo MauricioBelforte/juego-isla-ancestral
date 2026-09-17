@@ -6,7 +6,7 @@
 # Carga el catalogo de items desde data/coleccionables/catalog.json.
 # Si el JSON no existe o falla, carga un fallback in-code con items representativos
 # de 4 fuentes: mineria, fauna, reliquias, conchas.
-# Sin class_name: se preloadea (07-GUIA-GODOT §9.17).
+# Sin class_name: se preloadea (GUIA-GODOT/09-godot4-migracion.md §9.17).
 
 extends RefCounted
 

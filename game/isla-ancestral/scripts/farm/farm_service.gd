@@ -7,7 +7,7 @@
 # get_tile/get_growth_hint/advance_day/reserve_plot/get_active_farm_stats.
 # Reglas: progreso nunca se pierde (pausa, no muerte), avance por día M29,
 # consumo/entrega via Inventario M14, catálogo desde M93 farming.json.
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

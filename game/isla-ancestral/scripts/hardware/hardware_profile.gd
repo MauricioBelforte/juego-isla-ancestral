@@ -4,7 +4,7 @@
 #
 # M115: Hardware - HardwareProfile (Resource).
 # Sin `class_name` para que el test headless --script lo pueda usar via preload().
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - snake_case en exports
 #   - Enums nombrados
 #   - Persistencia M59 con get_section_name/get_save_data/restore_save_data

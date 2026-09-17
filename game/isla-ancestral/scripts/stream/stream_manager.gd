@@ -13,7 +13,7 @@
 #    descarga primero lejanos, pool de meshes reutilizado (M61).
 #  - Señales: chunk_listo/banco_listo/shader_listo/progreso_cambiado (§1).
 #  - Persistencia ISaveProvider M59: sección "stream" (estadísticas LRU).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 signal progreso_cambiado(porcentaje: float)

@@ -1,7 +1,7 @@
 # crear_conejo_lowpoly.py — Conejo (M36 Fauna)
 # Metodología Hy4: bmesh lofting con anillos YZ variando X (como crear_jabali_lowpoly.py)
 # Importa plantilla_asset.py para todos los helpers probados.
-# Altura objetivo: 0.35m (tabla 2.5 de 09-GUIA-BLENDER).
+# Altura objetivo: 0.35m (tabla 2.5 de OBSOLETOS/09-GUIA-BLENDER.md).
 # Referencia: personaje 1.8m, arbol_frutal 6m (aprobado por usuario).
 import bpy, os, sys, bmesh, math
 from math import radians, cos, sin, pi

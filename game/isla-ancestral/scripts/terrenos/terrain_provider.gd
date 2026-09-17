@@ -6,7 +6,7 @@
 # Data-driven (§1.3 adaptado a JSON del proyecto): carga los 7 terrenos de
 # data/terrenos/terrenos.json. Los consumidores (M11, M155, M53) consultan
 # por id. Terreno desconocido → modificador 1.0 (§10.2 edge case).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_CATALOGO: String = "res://data/terrenos/terrenos.json"

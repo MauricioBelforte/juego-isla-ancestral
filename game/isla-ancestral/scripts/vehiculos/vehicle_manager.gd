@@ -11,7 +11,7 @@
 #  - Baúl (M14) por contrato de slots; integración duck-typed con Inventario.
 #  - Eventos EventBus.vehicle (VEHICLE_ENTERED/EXITED) + logs VEH-ENTER/EXIT.
 #  - Persistencia ISaveProvider M59: sección "vehiculos".
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_CATALOGO: String = "res://data/vehiculos/vehicles.json"

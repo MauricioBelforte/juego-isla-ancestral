@@ -8,7 +8,7 @@
 # Persistencia M59 con JSON en user://fauna/registro.json (no rompe si M59 no esta).
 # Reutiliza TimeCalendar (M29) para contexto temporal sin acoplamiento fuerte.
 #
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, seccion 9.17)
 #   - snake_case en senales
 #   - Duck-typing en M29 y M59 (no falla si no existen)
@@ -194,7 +194,7 @@ func _tiempo_actual_s() -> float:
 	# práctica. Time.get_ticks_msec() (tiempo de motor: segundos reales de
 	# pared desde el arranque) preserva el comportamiento observable —
 	# 30s reales entre re-registros del mismo individuo en la sesión.
-	# Ver 07-GUIA-GODOT §9.64.
+	# Ver GUIA-GODOT/09-godot4-migracion.md §9.64.
 	return float(Time.get_ticks_msec()) / 1000.0
 
 func _on_dia_cambio(_info: Dictionary) -> void:

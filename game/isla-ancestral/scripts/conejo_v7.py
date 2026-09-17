@@ -1,7 +1,7 @@
 """
 Conejo v7 — REDISEÑO con bmesh lofting (técnica Hy4, crear_jabali_lowpoly.py).
 Cuerpo redondeado con anillos elípticos + cubos solo para detalles chicos
-(orejas, ojos, nariz). Alturas de la tabla 2.5 de 09-GUIA-BLENDER (0.35m).
+(orejas, ojos, nariz). Alturas de la tabla 2.5 de OBSOLETOS/09-GUIA-BLENDER.md (0.35m).
 Render orbital 7 vistas + guardado .blend + export GLB.
 """
 import bpy

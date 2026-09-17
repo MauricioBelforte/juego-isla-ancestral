@@ -15,7 +15,7 @@
 #  - Integración historia (§I): zona_bloquea_historia() consultable por M22;
 #    anti-softlock: forja T1 siempre disponible (regalo) en isla_raiz.
 #  - Persistencia ISaveProvider M59: sección "tool_tiers".
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 const RUTA_CONFIG: String = "res://data/herramientas/tiers_config.json"

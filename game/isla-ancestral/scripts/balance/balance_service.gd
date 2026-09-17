@@ -7,7 +7,7 @@
 # Los valores se cargan UNA vez en _ready(); nunca se guardan en GameState (M59).
 # Consumidores: M38 (economía), M20 (amistad), M16 (crafting), M17 (construcción),
 # M33/M34/M35, M22/M23, M153 (sellos), M71 (desbloqueos).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

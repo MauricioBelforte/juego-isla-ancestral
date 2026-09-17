@@ -6,7 +6,7 @@
 # Catalogo data-driven de definiciones de recursos (RF1-RF2).
 # Orquesta recoleccion, drops y persistencia. Se comunica por senales con
 # M14 (Inventario), M13 (senal golpe_aplicado — pendiente) y M29 (respawn).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 
@@ -27,6 +27,8 @@ func _ready() -> void:
 	_registrar_proveedor_guardado()
 	spawner = ResourceSpawner.new(self)
 	add_child(spawner)
+	# iter 4 (GLM-5.3): el spawner persiste sus regiones como sección propia (M59)
+	_registrar_proveedor_guardado_spawner()
 
 ## ── API pública para spawner ─────────────────────────────
 
@@ -66,14 +68,18 @@ func obtener_todas() -> Array[ResourceDefinition]:
 	return res
 
 func cantidad_de(def_id: StringName) -> int:
-	# Consulta para M16 (crafting): cantidad disponible en inventario
+	# Consulta para M16 (crafting): cantidad disponible en inventario.
+	# iter 6 (atria-dawn / Kilo Code — Log 937): FIX stub. Antes devolvía 0 fijo
+	# con el comentario falso "el inventario no tiene metodo cantidad_de directo".
+	# Inventario SÍ lo expone: count_item(item_id, include_house) (M14). Sin
+	# callers hoy, pero cualquier consumidor futuro (M16 validación de recetas)
+	# vería 0 disponibles => crafting roto.
 	if not _definiciones.has(def_id):
 		return 0
 	var inv = get_node_or_null("/root/Inventario")
-	if inv == null or not inv.has_method("agregar_items"):
+	if inv == null or not inv.has_method("count_item"):
 		return 0
-	# El inventario no tiene metodo "cantidad_de" directo; placeholder
-	return 0
+	return int(inv.count_item(String(def_id)))
 
 ## ── Definiciones por defecto (RF1: 6 tipos) ─────────────
 
@@ -209,11 +215,50 @@ func _registrar_proveedor_guardado() -> void:
 		if gt != null and gt.has_signal("dia_cambio"):
 			gt.dia_cambio.connect(_on_dia_cambio_m29)
 			_gt_dia_cambio_conectado = true
+	_conectar_estacion_cambio()
 
 var _gt_dia_cambio_conectado: bool = false
+var _gt_estacion_conectada: bool = false
 
 func _on_dia_cambio_m29(_info: Dictionary) -> void:
 	_evaluar_respawn_global()
+
+## M15 iter 5 (GLM-5.3 / Kilo Code — Log 821): suscripción a estacion_cambio (L.1).
+## Idempotente con bandera (patrón del dia_cambio). Conexión diferida si GameTime
+## aún no está en el árbol (autoloads pueden bootear en cualquier orden).
+func _conectar_estacion_cambio() -> void:
+	if _gt_estacion_conectada:
+		return
+	var gt = get_node_or_null("/root/GameTime")
+	if gt == null or not gt.has_signal("estacion_cambio"):
+		return
+	gt.estacion_cambio.connect(_on_estacion_cambio_m29)
+	_gt_estacion_conectada = true
+
+## Handler de cambio de estación (L.1): el respawn estacional ya filtra por
+## estación dentro de evaluar_respawn(); al cambiar la estación se re-evalúa
+## el pool global para que los recursos de la nueva estación reaparezcan de
+## forma masiva. Aviso suave no intrusivo (L.2, cozy).
+func _on_estacion_cambio_m29(_estacion: int) -> void:
+	var respawns := _contar_respawns_disponibles()
+	_evaluar_respawn_global()
+	print("[M15] estación cambió — recursos estacionales re-evaluados (respawns disponibles: %d)" % respawns)
+
+## Cuantos nodos agotados cumplirían el ciclo de respawn (para el aviso L.2).
+func _contar_respawns_disponibles() -> int:
+	var gt = get_node_or_null("/root/GameTime")
+	if gt == null:
+		return 0
+	var dia_actual: int = int(gt.dia_absoluto()) if gt.has_method("dia_absoluto") else 0
+	var estacion: int = int(gt.get_estacion()) if gt.has_method("get_estacion") else 0
+	var n := 0
+	for nodo in _nodos_activos:
+		if nodo == null or not is_instance_valid(nodo):
+			continue
+		if nodo.esta_listo_para_respawn() and dia_actual >= nodo.respawn_dia_absoluto \
+				and (nodo.respawn_estacion < 0 or nodo.respawn_estacion == estacion):
+			n += 1
+	return n
 
 ## RF respawn (M15 iter 3): evalúa todos los nodos activos y los que cumplan
 ## el ciclo de respawn vuelven a INTACTO.
@@ -266,6 +311,17 @@ func desregistrar_nodo(nodo: ResourceNode) -> void:
 
 func get_section_name() -> String:
 	return SECCION_SAVE
+
+## Sección del spawner (iter 4): el SaveManager M59 recolecta TODAS las
+## secciones registradas; el spawner registra la suya propia para que la
+## persistencia de regiones sea independiente de la de nodos (M59 agrega
+## "resource_spawner" como sección aparte).
+func _registrar_proveedor_guardado_spawner() -> void:
+	if spawner == null:
+		return
+	var sm = get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("register_provider"):
+		sm.register_provider(spawner)
 
 func get_save_data() -> Dictionary:
 	# M15 iter 3: persistencia real — estado de cada nodo activo

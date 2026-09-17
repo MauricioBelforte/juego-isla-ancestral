@@ -7,7 +7,7 @@
 # NO duplica estado: DELEGA en los autoloads existentes (TimeCalendar M29,
 # GameTime M30, Friendship M20, EventBus M07) y guarda SOLO banderas propias
 # del sistema de dialogo (flag_*) como proveedor de guardado M59.
-# ⚠️ Sin class_name: es autoload (pitfall documentado en 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall documentado en GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 
 extends Node
 

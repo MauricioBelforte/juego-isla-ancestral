@@ -25,19 +25,43 @@ const CENTRO_ISLA := Vector2(2560.0, 2560.0)
 const RADIO_CUBIERTO := 2700.0
 ## Altura del impostor: 15% bajo el terreno real (anti z-fighting)
 const FACTOR_ALTURA := 0.85
-## Exageración de las cimas (petición usuario: ver las montañas desde lejos).
-## Cerca (<1024m) el impostor se desvanece y las reales toman el mando.
-const MONT_EXAG := 4.0
+## Exageración de las cimas — GRADIENTE por distancia al centro (Log 820,
+## petición usuario: montañas MUY ALTAS en el centro, cada vez más bajas
+## hacia la arena, y bien bajitas junto a la costa). EDITAR ESTOS 4 NÚMEROS
+## A OJO — guía: DOCUMENTACION/GUIA-CONFIGURACION-SIMPLE.md
+const MONT_EXAG_CERCA := 4.0      ## exageración en el CENTRO de la isla
+const MONT_EXAG_LEJOS := 1.0      ## exageración JUNTO A LA ARENA (1.0 = altura real)
+const RADIO_EXAG_CERCA := 0.0     ## radio (m) donde arranca la exageración "cerca"
+const RADIO_EXAG_LEJOS := 2100.0  ## radio (m) donde se alcanza la exageración "lejos"
 ## Altura mínima para incluir la celda (debajo = agua/orilla, la cubre el agua)
 const H_MIN := 4.0
 ## Disco que SIGUE al player (petición usuario): altura = terreno local
 const DISCO_BASE_Y := 4.3
 const COLOR_DISCO_BASE := Color(0.60, 0.74, 0.38)
+## Radio del disco verde base (Log 820: editable a ojo)
+const DISCO_R := 1800.0
+## ── ANILLO DE ARENA (Log 820) — EDITAR A OJO ──────────────────────────
+## Disco circular LISO de arena (sin bordes triangulares). Ocultamiento
+## SEPARADO del impostor (guía: DOCUMENTACION/GUIA-CONFIGURACION-SIMPLE.md)
+const ANILLO_R_INTERNO := 1800.0  ## radio donde NACE la arena (esconde bajo la isla)
+const ANILLO_R_EXTERNO := 3000.0  ## radio donde TERMINA la arena — Log 821:
+## debe ser MAYOR que la costa más lejana (~2600) para que el anillo se vea
+## COMPLETO alrededor de la isla (si queda adentro de alguna costa, esa zona
+## queda enterrada bajo la isla y el anillo se ve con forma de C).
+const ANILLO_OCULTAR_UMBRAL := 150.0  ## Log 821: abertura CHICA donde el
+## player está parado (los sectores a menos de 150m se ocultan y no pisan su
+## terreno); el resto del anillo se ve completo. Antes 1.0 = pisaba bloques
+## bajos; 400 = abertura gigante (forma de C).
+## ──────────────────────────────────────────────────────────────────────
 ## Tiles de 640m con ocultamiento independiente
 const TAMANO_TILE := 640.0
 ## El impostor se oculta cuando el player está a menos de esto del tile
 ## (los chunks reales llegan a 1024m — el impostor toma el mando más allá)
 const TILE_OCULTAR_UMBRAL := 400.0
+## Log 821 (restaurado): con 10.0 los tiles del impostor cercanos dejan de
+## ocultarse y TAPAN el terreno real (por eso "las montañas no se generan
+## cerca" — el impostor las cubre con sus prismas). El umbral GRANDE hace que
+## cerca del player el impostor se oculte y el terreno real tome el mando.
 ## Filas por frame en la construcción incremental
 const FILAS_POR_FRAME := 6
 
@@ -54,6 +78,7 @@ var _stage := "esperando"  # esperando → muestreando → tileando → listo
 var _island_gen = null
 var _alturas_celda: Dictionary = {}
 var _tiles: Array = []
+var _anillo_sectores: Array = []
 var _fila_actual := 0
 var _fila_min := 0
 var _fila_max := 0
@@ -110,16 +135,23 @@ func _process(_delta: float) -> void:
 			if player == null:
 				return
 			var pp: Vector3 = player.global_position
-			for t in _tiles:
-				var mi := t as MeshInstance3D
-				if mi == null:
-					continue
-				var aabb := mi.get_aabb()
-				var aabb_min := aabb.position + mi.global_position
-				var aabb_max := aabb.end + mi.global_position
-				var punto_cercano := Vector3(clampf(pp.x, aabb_min.x, aabb_max.x), 0.0, clampf(pp.z, aabb_min.z, aabb_max.z))
-				var d := Vector2(pp.x, pp.z).distance_to(Vector2(punto_cercano.x, punto_cercano.z))
-				mi.visible = d > TILE_OCULTAR_UMBRAL
+			_aplicar_ocultamiento(_tiles, TILE_OCULTAR_UMBRAL, pp)
+			_aplicar_ocultamiento(_anillo_sectores, ANILLO_OCULTAR_UMBRAL, pp)
+
+## Oculta los meshes de una lista cuya distancia XZ al player sea < umbral
+## (los chunks reales toman el mando cerca). Impostor y anillo usan umbrales
+## SEPARADOS (Log 820 — configurables a ojo por separado).
+func _aplicar_ocultamiento(lista: Array, umbral: float, pp: Vector3) -> void:
+	for t in lista:
+		var mi := t as MeshInstance3D
+		if mi == null:
+			continue
+		var aabb := mi.get_aabb()
+		var aabb_min := aabb.position + mi.global_position
+		var aabb_max := aabb.end + mi.global_position
+		var punto_cercano := Vector3(clampf(pp.x, aabb_min.x, aabb_max.x), 0.0, clampf(pp.z, aabb_min.z, aabb_max.z))
+		var d := Vector2(pp.x, pp.z).distance_to(Vector2(punto_cercano.x, punto_cercano.z))
+		mi.visible = d > umbral
 
 ## Muestrea una fila de TODA la isla: cachea la altura de cada celda.
 func _muestrear_fila(z: int) -> void:
@@ -152,7 +184,17 @@ func _crear_tiles() -> void:
 					if _alturas_celda.has(clave):
 						var h: float = _alturas_celda[clave]
 						if h >= 4.0:
-							var top := h * FACTOR_ALTURA * MONT_EXAG
+							# Exageración GRADIENTE por distancia al centro
+							# (Log 820): 4 números editables arriba. Interpola
+							# MONT_EXAG_CERCA → MONT_EXAG_LEJOS entre
+							# RADIO_EXAG_CERCA y RADIO_EXAG_LEJOS.
+							var dist_centro := Vector2(float(x) + PASO * 0.5 - CENTRO_ISLA.x, float(z) + PASO * 0.5 - CENTRO_ISLA.y).length()
+							var t_exag := clampf((dist_centro - RADIO_EXAG_CERCA) / maxf(RADIO_EXAG_LEJOS - RADIO_EXAG_CERCA, 1.0), 0.0, 1.0)
+							var exag := lerpf(MONT_EXAG_CERCA, MONT_EXAG_LEJOS, t_exag)
+							# La playa (h≤6) SIEMPRE a altura real (E-817:
+							# exagerarla la convertía en acantilados falsos que
+							# sepultaban el anillo arena).
+							var top := h * FACTOR_ALTURA * exag if h > 6.0 else h * FACTOR_ALTURA
 							var x0 := float(x)
 							var x1 := float(x) + PASO
 							var z0 := float(z)
@@ -201,7 +243,7 @@ func _crear_tiles() -> void:
 func _crear_disco_base() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var r_max := 1800.0
+	var r_max := DISCO_R
 	var segs := 64
 	for i in range(segs):
 		var a0 := TAU * float(i) / float(segs)
@@ -237,31 +279,57 @@ func _crear_disco_base() -> void:
 	mi.name = "DiscoBase"
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = COLOR_DISCO_BASE
+	# FIX Log 817 (anillo arena verde): el material usaba albedo_color=verde sin
+	# vertex_color_use_as_albedo → pintaba disco Y anillo del mismo verde y
+	# ignoraba el COLOR_ARENA de los vértices. Ahora el color vive SOLO en los
+	# vértices (albedo blanco = no altera): disco verde, anillo arena.
+	mat.albedo_color = Color.WHITE
+	mat.vertex_color_use_as_albedo = true
 	mat.roughness = 1.0
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mi.material_override = mat
 	mi.position = Vector3.ZERO  # vértices ya mundiales
 	add_child(mi)
-	# ── Anillo de ARENA (Log 803): franja entre el disco verde y el agua
-	# — color arena blanca, misma altura y=4.3, visible desde lejos como
-	# playa continua alrededor de la isla (petición usuario).
-	var r_arena_min := r_max
-	var r_arena_max := r_max + 500.0
-	var segs_a := 64
-	for i in range(segs_a):
-		var a0a := TAU * float(i) / float(segs_a)
-		var a1a := TAU * float(i + 1) / float(segs_a)
-		var q00 := Vector3(CENTRO_ISLA.x + cos(a0a) * r_arena_min, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * r_arena_min)
-		var q01 := Vector3(CENTRO_ISLA.x + cos(a1a) * r_arena_min, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * r_arena_min)
-		var q10 := Vector3(CENTRO_ISLA.x + cos(a0a) * r_arena_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * r_arena_max)
-		var q11 := Vector3(CENTRO_ISLA.x + cos(a1a) * r_arena_max, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * r_arena_max)
-		# FIX Log 804 (winding del anillo): mismo bug que el abanico — el orden
-		# (q00, q01, q11) da normal hacia abajo con cull_back → invisible desde
-		# arriba. Orden correcto: (q00, q11, q01) + (q00, q10, q11).
-		_tri(st, q00, COLOR_ARENA, q11, COLOR_ARENA, q01, COLOR_ARENA)
-		_tri(st, q00, COLOR_ARENA, q10, COLOR_ARENA, q11, COLOR_ARENA)
-	print("[M09-Horizonte] disco base de fondo marino: r %.0fm a y=%.2f (opaco, siempre visible)" % [r_max, DISCO_BASE_Y])
+	# ── Anillo de ARENA v4 (Log 803, FIX 817/818/819/820): DISCO CIRCULAR
+	# LISO de arena entre el disco verde y el mar.
+	# 817: el bucle estaba después de st.commit() → nunca entró al mesh.
+	# 818: sectores con ocultamiento (los bloques reales mandan cerca).
+	# 819: abrazacostas por dirección → DESCARTADO (bordes triangulares con
+	#      agua entre segmentos — petición usuario: "quiero que sea un disco").
+	# 820: DISCO CIRCULAR liso, radios y ocultamiento EDITABLES a ojo
+	#      (ANILLO_R_INTERNO / ANILLO_R_EXTERNO / ANILLO_OCULTAR_UMBRAL).
+	var sectores := 16
+	var segs_por_sector := 8
+	var total_segs := sectores * segs_por_sector
+	var mat_arena := StandardMaterial3D.new()
+	mat_arena.albedo_color = Color.WHITE
+	mat_arena.vertex_color_use_as_albedo = true
+	mat_arena.roughness = 1.0
+	mat_arena.cull_mode = BaseMaterial3D.CULL_DISABLED
+	for s in range(sectores):
+		var st_s := SurfaceTool.new()
+		st_s.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for j in range(segs_por_sector):
+			var i := s * segs_por_sector + j
+			var a0a := TAU * float(i) / float(total_segs)
+			var a1a := TAU * float(i + 1) / float(total_segs)
+			var q00 := Vector3(CENTRO_ISLA.x + cos(a0a) * ANILLO_R_INTERNO, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * ANILLO_R_INTERNO)
+			var q01 := Vector3(CENTRO_ISLA.x + cos(a1a) * ANILLO_R_INTERNO, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * ANILLO_R_INTERNO)
+			var q10 := Vector3(CENTRO_ISLA.x + cos(a0a) * ANILLO_R_EXTERNO, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a0a) * ANILLO_R_EXTERNO)
+			var q11 := Vector3(CENTRO_ISLA.x + cos(a1a) * ANILLO_R_EXTERNO, DISCO_BASE_Y, CENTRO_ISLA.y + sin(a1a) * ANILLO_R_EXTERNO)
+			# FIX Log 804 (winding): orden (q00, q11, q01) + (q00, q10, q11)
+			# → normal hacia arriba.
+			_tri(st_s, q00, COLOR_ARENA, q11, COLOR_ARENA, q01, COLOR_ARENA)
+			_tri(st_s, q00, COLOR_ARENA, q10, COLOR_ARENA, q11, COLOR_ARENA)
+		var mi_s := MeshInstance3D.new()
+		mi_s.mesh = st_s.commit()
+		mi_s.name = "ArenaSector_%d" % s
+		mi_s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		mi_s.material_override = mat_arena
+		mi_s.position = Vector3.ZERO  # vértices ya mundiales
+		add_child(mi_s)
+		_anillo_sectores.append(mi_s)  # ocultamiento con SU PROPIO umbral
+	print("[M09-Horizonte] disco base r %.0fm + anillo arena circular r %.0f-%.0fm (%d sectores, ocultar anillo <%.0fm, ocultar impostor <%.0fm)" % [DISCO_R, ANILLO_R_INTERNO, ANILLO_R_EXTERNO, sectores, ANILLO_OCULTAR_UMBRAL, TILE_OCULTAR_UMBRAL])
 
 
 func _color_por_altura(h: float) -> Color:

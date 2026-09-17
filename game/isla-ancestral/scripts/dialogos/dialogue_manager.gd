@@ -81,7 +81,7 @@ var _grafos_cache: Dictionary = {}
 
 ## M21 (iter 7): cache del script DialogGraphValidator para validacion estatica en
 ## start_dialogue. Sin anotacion de tipo (class_name de otro script no compila en
-## headless, ver 07-GUIA-GODOT.md §9.50); se resuelve con load() en runtime.
+## headless, ver GUIA-GODOT/09-godot4-migracion.md); se resuelve con load() en runtime.
 var _validador_script = null
 
 func is_dialogue_active() -> bool:

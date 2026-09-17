@@ -71,7 +71,7 @@ func crear_cofre(tipo: String, posicion: Vector3) -> StringName:
 		"contenido": [],  # Array de {item_id, cantidad}
 		# Fix C56 (M30 re-auditoría, Log 429): reloj del SO prohibido en gameplay
 		# (regla de oro M30). "creado" no se persiste ni se consume -> segundos
-		# de motor. Ver 07-GUIA-GODOT §9.64.
+		# de motor. Ver GUIA-GODOT/09-godot4-migracion.md §9.64.
 		"creado": Time.get_ticks_msec() / 1000.0,
 	}
 	# Duck-typing a M17: si existe ChestManager, registrar alli tambien

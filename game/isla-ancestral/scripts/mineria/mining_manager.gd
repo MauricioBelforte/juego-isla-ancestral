@@ -11,7 +11,7 @@
 #   - Límite suave diario por zona (RF10) con señal zone_exhausted
 #   - Persistencia de contadores de zona (SaveManager M59)
 #   - Señal mina_extraccion_exitosa con el resumen (para M53 UI texto flotante)
-# Pitfalls respetados (07-GUIA-GODOT):
+# Pitfalls respetados (GUIA-GODOT/INDICE.md):
 #   - Sin class_name (autoload, §9.17/§9.41)
 #   - snake_case en señales (§1.1)
 #   - _ en vars no usadas (§1.3)
@@ -194,7 +194,7 @@ func restore_save_data(data: Dictionary) -> void:
         _zone_quota_dia[String(k)] = int(zd[k])
     _catalogo_cargado = bool(data.get("catalogo_cargado", false))
 
-## ── Accesos seguros a autoloads (07-GUIA-GODOT §9.17) ───────
+## ── Accesos seguros a autoloads (GUIA-GODOT/09-godot4-migracion.md §9.17) ───────
 
 func _get_resource_manager() -> Node:
     return Engine.get_main_loop().root.get_node_or_null("ResourceManager")

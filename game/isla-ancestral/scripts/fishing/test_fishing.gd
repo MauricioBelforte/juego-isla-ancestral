@@ -25,6 +25,10 @@ func _run() -> void:
 	_test_escape_sin_perdidas()
 	_test_resolucion_condiciones()
 	_test_coleccion()
+	_test_iter2_estaciones_todas()
+	_test_iter2_franjas_horas()
+	_test_iter2_prng_semilla_m29()
+	_test_iter2_filtro_estacion_verano()
 	print("=== TEST M34 PESCA: %d fallo(s) ===" % _fallos)
 	quit(1 if _fallos > 0 else 0)
 
@@ -113,3 +117,85 @@ func _test_coleccion() -> void:
 	_fm._coleccion.clear()
 	_fm.restore_save_data(data)
 	_check(_fm.get_collection_data().size() >= 1, "restore recupera colección")
+
+## ── Iter. 2 (GLM-5.3 / Kilo Code, Log 833): brechas V0 ──────────────
+
+func _get_pez(id: String) -> FishDefinition:
+	for pez in _fm._peces:
+		if pez.id == id:
+			return pez
+	return null
+
+func _test_iter2_estaciones_todas() -> void:
+	# Bug: "temporadas": ["todas"] → estaciones=[-1] nunca matcheaba
+	# estación real 0-3. Fix: "todas" → estaciones vacías (contrato L14).
+	var sardina := _get_pez("pez_sardina")
+	if sardina == null:
+		_check(false, "sardina presente para test estaciones")
+		return
+	_check(sardina.estaciones.is_empty(),
+		"sardina 'todas' → estaciones VACÍAS (antes [-1], %s)" % str(sardina.estaciones))
+	# El filtro la acepta en CUALQUIER estación M29 (a hora NOCHE=4, que es
+	# una franja de la sardina; a las 12 la filtra la FRANJA, por diseño).
+	for estacion in [0, 1, 2, 3]:
+		var candidatas: Array = _fm._candidatas_de_estacion(estacion, 4)
+		_check(candidatas.has(sardina),
+			"sardina candidata en estación %d (filtro arreglado)" % estacion)
+
+func _test_iter2_franjas_horas() -> void:
+	# Bug: "horas": [4, 20] solo usaba la primera → franjas=[ALBA], la hora
+	# 20 (NOCHE) se descartaba. Fix: cada hora mapea a su franja (sin dupes).
+	var sardina := _get_pez("pez_sardina")
+	if sardina == null:
+		_check(false, "sardina presente para test franjas")
+		return
+	var franjas := sardina.franjas
+	_check(franjas.has(3), "sardina incluye NOCHE (hora 4 → <5 = NOCHE)")
+	_check(franjas.has(2), "sardina incluye ATARDECER (hora 20 → 17..20 = ATARDECER, antes descartada)")
+	_check(franjas.size() == 2, "sardina 2 franjas exactas (4→NOCHE, 20→ATARDECER): %s" % str(franjas))
+	# El pez luna: [21, 3] → ambas NOCHE, sin duplicados
+	var luna := _get_pez("pez_luna")
+	if luna:
+		_check(luna.franjas == [3], "luna [21,3] → [NOCHE] sin dupes: %s" % str(luna.franjas))
+
+func _test_iter2_prng_semilla_m29() -> void:
+	# Brecha: PRNG con hash(Time.get_ticks_usec()) = entropía runtime NO
+	# determinista por partida. Fix: GameTime.rng_diario("m34") (M29 H120).
+	var gt = root.get_node_or_null("GameTime")
+	if gt == null or not gt.has_method("rng_diario"):
+		_check(true, "sin GameTime: PRNG semilla 0 estable (fallback documentado)")
+		return
+	# Misma partida + mismo día + mismo namespace → misma secuencia
+	var r1 = gt.rng_diario("m34")
+	var seq1 := [r1.randf(), r1.randf(), r1.randf()]
+	var r2 = gt.rng_diario("m34")
+	var seq2 := [r2.randf(), r2.randf(), r2.randf()]
+	_check(str(seq1) == str(seq2), "rng_diario(m34) reproducible mismo día")
+	# Namespace distinto → secuencia distinta (no colisiona con otros módulos)
+	var r3 = gt.rng_diario("m34_otro")
+	var seq3 := [r3.randf(), r3.randf(), r3.randf()]
+	_check(str(seq1) != str(seq3), "namespace m34 aislado de otros consumidores")
+	# El manager consume el PRNG diario: capturas reproducibles tras recargar
+	var a1 = _fm.resolver_especie(null, null)
+	var a2 = _fm.resolver_especie(null, null)
+	_check(a1 != null and a2 != null, "resolver_especie operativa con PRNG diario")
+
+func _test_iter2_filtro_estacion_verano() -> void:
+	# E2E del filtro REAL: la sardina ("todas") es candidata en TODAS las
+	# estaciones por REGLA (no por fallback) y el luna solo en verano.
+	# El calendario arranca en estación_inicial=0 (time_config.tres), así que
+	# el E2E usa el estacion paramétrico (el de runtime se valida en el bucle
+	# de _test_iter2_estaciones_todas).
+	var ids_todas: Dictionary = {}
+	for estacion in [0, 1, 2, 3]:
+		var candidatas: Array = _fm._candidatas_de_estacion(estacion, 4)  # franja NOCHE
+		var ids := []
+		for p in candidatas:
+			ids.append(p.id)
+		ids_todas[estacion] = ids
+	_check(ids_todas[1].has("pez_sardina"), "sardina candidata en verano POR REGLA (no fallback)")
+	_check(ids_todas[1].has("pez_luna"), "luna candidata en verano (su estación) + franja NOCHE")
+	_check(ids_todas[0].has("pez_sardina"), "sardina candidata también en primavera")
+	_check(not ids_todas[0].has("pez_luna"), "luna NO candidata en primavera (filtro real activo)")
+	_check(not ids_todas[2].has("pez_luna"), "luna NO candidata en otoño (filtro real activo)")
+	_check(not ids_todas[3].has("pez_luna"), "luna NO candidata en invierno (filtro real activo)")

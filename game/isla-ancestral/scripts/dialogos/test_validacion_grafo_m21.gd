@@ -74,9 +74,10 @@ func _test_clave_mundo_desconocida() -> void:
 	var fin := DialogueNode.new(); fin.id = "fin"; fin.tipo = DialogueNode.TIPO_FIN; g.nodes["fin"] = fin
 	var problemas = _validador.validar(g, ["amistad_npc"])
 	_check(_contiene(problemas, "clave de mundo desconocida"), "detecta clave de mundo 'foo_inexistente'")
-	# Sin allowlist, NO se reporta (solo se valida sintaxis).
+	# Sin allowlist explicita, el validador usa CLAVES_MUNDO_BASE (validacion siempre
+	# activa, ver dialog_graph_validator.gd L135). Por eso la clave sigue reportandose.
 	var problemas_sin = _validador.validar(g, [])
-	_check(not _contiene(problemas_sin, "clave de mundo desconocida"), "sin allowlist no reporta clave de mundo")
+	_check(_contiene(problemas_sin, "clave de mundo desconocida"), "sin allowlist usa base y reporta clave de mundo")
 
 ## JSON malformado => ok=false.
 func _test_json_malformado() -> void:

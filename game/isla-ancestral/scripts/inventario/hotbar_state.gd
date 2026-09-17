@@ -110,7 +110,7 @@ func _tiempo_actual_s() -> float:
 	# gameplay (regla de oro del módulo 30; el scan caso_reloj_tests.gd lo
 	# detecta y hacía fallar el check). El valor no se persiste ni alimenta
 	# lógica (solo feedback UI de sesión), así que ticks del motor preservan
-	# el comportamiento observable. Ver 07-GUIA-GODOT §9.64.
+	# el comportamiento observable. Ver GUIA-GODOT/09-godot4-migracion.md §9.64.
 	return float(Time.get_ticks_msec()) / 1000.0
 
 func _get_save_manager() -> Node:

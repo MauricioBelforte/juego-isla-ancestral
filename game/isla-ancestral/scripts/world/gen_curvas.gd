@@ -1,7 +1,7 @@
 # Genera .tres canónicos de las curvas M31.
 # ⚠️ Curve.add_point espera Vector2 y el DOMINIO de posición es 0..1 (curva
 # normalizada, NO un eje de horas). El consumidor samplea con hora/24.0.
-# Descubrimiento documentado en 07-GUIA-GODOT §9.60.
+# Descubrimiento documentado en GUIA-GODOT/09-godot4-migracion.md §9.60.
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/world/gen_curvas.gd
 extends SceneTree
 

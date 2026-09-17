@@ -80,3 +80,46 @@ func mods_ids() -> Array:
 	for m in config.get("mods", []):
 		ids.append(m.get("id", ""))
 	return ids
+
+## §6 "comportamiento: menor prioridad se omite + warning".
+## Agrupa por objetivo de override: gana el de mayor `prioridad` (empate → orden
+## de declaración); los demás se OMITEN y se devuelven como advertencia.
+## `cfg` permite inyectar una config (tests); vacío = la real.
+## Devuelve {activos: Array[String], omitidos: Array[{id, motivo}]}.
+func resolver_prioridad(cfg: Dictionary = {}) -> Dictionary:
+	var fuente: Dictionary = cfg if not cfg.is_empty() else config
+	var grupos: Dictionary = {}
+	var activos: Array = []
+	for m in fuente.get("mods", []):
+		var overs: Array = m.get("override", [])
+		if overs.is_empty():
+			activos.append(String(m.get("id", "")))
+			continue
+		for o in overs:
+			var k := String(o)
+			if not grupos.has(k):
+				grupos[k] = []
+			grupos[k].append(m)
+	var omitidos: Array = []
+	for objetivo in grupos.keys():
+		var lista: Array = grupos[objetivo]
+		lista.sort_custom(func(a, b): return int(a.get("prioridad", 0)) > int(b.get("prioridad", 0)))
+		activos.append(String(lista[0].get("id", "")))
+		for i in range(1, lista.size()):
+			omitidos.append({
+				"id": String(lista[i].get("id", "")),
+				"motivo": "menor prioridad que %s sobre '%s'" % [String(lista[0].get("id", "")), objetivo],
+			})
+	return {"activos": activos, "omitidos": omitidos}
+
+## §7 "regla de compatibilidad con updates (M118)": tras un update a `build_nuevo`
+## el mod sigue compatible si y sólo si `build_nuevo >= min_build`. Un downgrade
+## por debajo del min_build lo bloquea.
+func es_compatible_update(id: String, build_nuevo: String) -> bool:
+	var m := mod(id)
+	if m.is_empty():
+		return false
+	var min_build: String = String(m.get("min_build", ""))
+	if min_build.is_empty():
+		return true
+	return build_nuevo >= min_build

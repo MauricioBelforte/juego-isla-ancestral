@@ -11,7 +11,7 @@
 #  - Persistencia: guardar_config/cargar_config de M60 (escritura atómica).
 #  - Señales volumen_cambiado/mute_cambiado para la UI (M53) y M41-M44.
 #  - Sin bucles por frame; sin UI (dueño M53).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 ## Bus -> volumen lineal por defecto (diseño §3: defaults de AudioSettings)

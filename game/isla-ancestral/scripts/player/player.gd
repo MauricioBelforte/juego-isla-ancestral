@@ -98,6 +98,10 @@ func _ready() -> void:
 	# M13/M57: Crear hotbar HUD de herramientas visible desde el inicio
 	_create_hotbar_hud.call_deferred()
 
+	# M13 iter 4 (GLM-5.3): persistencia del hotbar en M59 (ítem D.12 / T-019).
+	# El provider serializa durabilidad/nivel/mejoras vía ToolData.serializar().
+	_registrar_provider_herramientas.call_deferred()
+
 func _find_terrain() -> VoxelTerrain:
 	var root = get_tree().current_scene
 	if root:
@@ -161,6 +165,35 @@ func _crear_herramientas_iniciales() -> void:
 	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.AZADA, ToolData.Nivel.COBRE))
 	add_tool_to_hotbar(ToolData.crear(ToolData.Tipo.MARTILLO, ToolData.Nivel.COBRE))
 	print("[M13] Hotbar inicial: %d herramientas" % _hotbar.size())
+
+## ── M13 iter 4 (GLM-5.3 / Kilo Code): persistencia hotbar en M59 ────────
+## Registra un ToolsSaveProvider con referencias a este player (duck-typing,
+## sin acoplarse al player: el provider llama a estos accessors).
+
+func _registrar_provider_herramientas() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm == null or not sm.has_method("register_provider"):
+		return
+	var provider := ToolsSaveProvider.new(
+		_hotbar,
+		Callable(self, "_get_hotbar_index"),
+		Callable(self, "_set_hotbar_index"),
+		Callable(self, "_restaurar_hotbar")
+	)
+	sm.register_provider(provider)
+	print("[M13] ToolsSaveProvider registrado (sección %s)" % provider.get_section_name())
+
+func _get_hotbar_index() -> int:
+	return _hotbar_index
+
+func _set_hotbar_index(index: int) -> void:
+	_equip_hotbar_slot(index)
+
+func _restaurar_hotbar(nuevo_hotbar: Array[ToolData]) -> void:
+	_hotbar = nuevo_hotbar
+	_hotbar_index = 0
+	_refresh_hotbar()
+	print("[M13] Hotbar restaurado desde save: %d herramientas" % _hotbar.size())
 
 ## M13: Callback de equipado (refresca el HUD de herramientas)
 func _on_herramienta_equipada(_tool: ToolData) -> void:

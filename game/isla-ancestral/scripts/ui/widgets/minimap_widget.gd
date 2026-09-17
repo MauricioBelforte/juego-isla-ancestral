@@ -61,23 +61,29 @@ func _ready() -> void:
 ## ── Input handling ───────────────────────────────────────
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Zoom con rueda del ratón
+	# FIX M57 (el minimapa robaba el zoom de cámara): SOLO manejar el scroll
+	# si el mouse está sobre el rectángulo del minimapa. Si no, dejar el
+	# evento pasar a la cámara (zoom del personaje). El pan/drag sigue
+	# funcionando igual.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-		_zoom = clampf(_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
-		_update_transform()
-		get_viewport().set_input_as_handled()
+		if get_global_rect().has_point(get_global_mouse_position()):
+			_zoom = clampf(_zoom + ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+			_update_transform()
+			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		_zoom = clampf(_zoom - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
-		_update_transform()
-		get_viewport().set_input_as_handled()
+		if get_global_rect().has_point(get_global_mouse_position()):
+			_zoom = clampf(_zoom - ZOOM_STEP, ZOOM_MIN, ZOOM_MAX)
+			_update_transform()
+			get_viewport().set_input_as_handled()
 	# Pan con arrastre
 	elif event is InputEventMouseMotion and _is_dragging:
 		_pan_offset += event.relative
 		_update_transform()
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE:
-		_is_dragging = event.pressed
-		if event.pressed:
-			_drag_start = event.position
+		if get_global_rect().has_point(get_global_mouse_position()):
+			_is_dragging = event.pressed
+			if event.pressed:
+				_drag_start = event.position
 
 ## ── API pública ─────────────────────────────────────────
 

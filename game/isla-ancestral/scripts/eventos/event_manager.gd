@@ -1,24 +1,24 @@
-﻿# Modelo: agnes-2.5-flash
+# Modelo: agnes-2.5-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #
-# M74: Eventos â€” EventManager (autoload "eventos")
+# M74: Eventos — EventManager (autoload "eventos")
 #
-# Orquestador central de eventos: catÃ¡logo, agenda anual, disparo con aviso previo,
-# participaciÃ³n con condiciones, recompensas seguras con token anti-duplicado,
+# Orquestador central de eventos: catálogo, agenda anual, disparo con aviso previo,
+# participación con condiciones, recompensas seguras con token anti-duplicado,
 # anti-FOMO (todo repetible anual), persistencia versionada M59.
 #
 # Reglas de oro:
 # 1. Nunca leer reloj del SO; usar GameClock (M30).
 # 2. Nada se pierde para siempre: evento anual se repite.
-# 3. Token anti-duplicado por aÃ±o natural, no permanente.
+# 3. Token anti-duplicado por año natural, no permanente.
 # 4. Cero polling por frame: checks en dia_cambio / anio_cambio / clima_cambio.
-# 5. UI separada por seÃ±ales (M09).
-# 6. Fallback: si escena falla, evento_cancelado + compensaciÃ³n, jamÃ¡s crash.
+# 5. UI separada por señales (M09).
+# 6. Fallback: si escena falla, evento_cancelado + compensación, jamás crash.
 
 extends Node
 
-## â”€â”€ SeÃ±ales pÃºblicas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+## ── Señales públicas ─────────────────────────────────────
 signal evento_proximo(evento_id: StringName, dias_restantes: int)
 signal evento_iniciado(evento_id: StringName)
 signal evento_terminado(evento_id: StringName)
@@ -26,17 +26,17 @@ signal evento_cancelado(evento_id: StringName, razon: StringName)
 signal evento_recompensa_entregada(evento_id: StringName, recompensa: Dictionary)
 signal agenda_actualizada()
 
-## â”€â”€ CatÃ¡logo y estado â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+## ── Catálogo y estado ────────────────────────────────────
 var _catalogo: Dictionary = {}          # id -> EventDefinition
 var _estado_anual: Dictionary = {}      # anio -> {evento_id -> EventState}
 var _sorpresa_semanal_count: int = 0
 var _ultima_semana_sorpresa: int = -1
-var _eventos_del_dia_cache: Array = []  # Cache para el dÃ­a actual
+var _eventos_del_dia_cache: Array = []  # Cache para el día actual
 var _aviso_emitido_hoy: PackedStringArray = []  # Para evitar doble aviso
 const MAX_SORPRESAS_SEMANA: int = 3
 const DIAS_PARA_AVISO_DEFAULT: int = 3
 
-## â”€â”€ Evento actual â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+## ── Evento actual ────────────────────────────────────────
 var evento_actual: Object = null
 var evento_actual_id: StringName = &""
 
@@ -47,7 +47,7 @@ func _ready() -> void:
 	_conectar_eventbus()
 	normalizar_agenda()
 	_registrar_proveedor_guardado()
-	print("[EventManager] CatÃ¡logo cargado: %d eventos" % _catalogo.size())
+	print("[EventManager] Catálogo cargado: %d eventos" % _catalogo.size())
 
 
 func _cargar_catalogo() -> void:
@@ -75,7 +75,7 @@ func _cargar_catalogo() -> void:
 
 
 func _conectar_eventbus() -> void:
-	"""Suscribirse a seÃ±ales de M29/M30/M32."""
+	"""Suscribirse a señales de M29/M30/M32."""
 	var gt = get_node_or_null("/root/GameTime")
 	if gt != null:
 		gt.dia_cambio.connect(_on_dia_cambio)
@@ -102,7 +102,7 @@ func _on_dia_cambio(info: Dictionary) -> void:
 	if hora != null:
 		minuto_val = hora.get_minuto()
 
-	# 1. Chequear aviso previo para eventos prÃ³ximos
+	# 1. Chequear aviso previo para eventos próximos
 	_verificar_aviso_previo(anio, mes, dia, estacion, hora_val, minuto_val)
 
 	# 2. Chequear inicio de eventos (franja horaria)
@@ -117,7 +117,7 @@ func _on_dia_cambio(info: Dictionary) -> void:
 	# 5. Limpiar cache de avisos emitidos hoy
 	_aviso_emitido_hoy.clear()
 
-	# 6. Emitir seÃ±al de agenda actualizada
+	# 6. Emitir señal de agenda actualizada
 	agenda_actualizada.emit()
 
 
@@ -128,7 +128,7 @@ func _on_clima_cambio(clima: int) -> void:
 		if evento_actual != null and evento_actual.variante_cubierta != null:
 			if evento_actual.variante_cubierta != null:
 				print("[EventManager] Tormenta detectada, variante cubierta para %s" % evento_actual_id)
-				# La UI consumirÃ­a esta seÃ±al para cambiar de escena
+				# La UI consumiría esta señal para cambiar de escena
 				pass
 
 
@@ -137,16 +137,16 @@ func _verificar_aviso_previo(anio: int, mes: int, dia: int, estacion: int, hora:
 	for ev_id in _catalogo.keys():
 		var ev: EventDefinition = _catalogo[ev_id]
 		if not ev.coincide_fecha(dia, mes, estacion):
-			# Verificar si es prÃ³ximo (dentro de dias_aviso)
+			# Verificar si es próximo (dentro de dias_aviso)
 			var mins_hasta = ev.minutos_hasta_inicio(hora, minuto)
 			var dias_hasta = mins_hasta / 1440
 			if dias_hasta > 0 and dias_hasta <= ev.dias_aviso:
-				# Solo emitir si no se avisÃ³ antes
+				# Solo emitir si no se avisó antes
 				var key := "%s_%d" % [ev_id, anio]
 				if key not in _aviso_emitido_hoy:
 					_aviso_emitido_hoy.append(key)
 					evento_proximo.emit(ev_id, dias_hasta)
-					print("[EventManager] Aviso previo: %s en %d dÃ­as" % [ev_id, dias_hasta])
+					print("[EventManager] Aviso previo: %s en %d días" % [ev_id, dias_hasta])
 
 
 func _verificar_inicio_evento(anio: int, mes: int, dia: int, estacion: int, hora: int, minuto: int) -> void:
@@ -157,7 +157,7 @@ func _verificar_inicio_evento(anio: int, mes: int, dia: int, estacion: int, hora
 			continue
 		if not ev.esta_en_franja(hora, minuto):
 			continue
-		# Verificar si ya estÃ¡ en curso
+		# Verificar si ya está en curso
 		var es = _get_estado(ev_id, anio)
 		if es == null or es.estado == EventState.Estado.PENDIENTE:
 			# Iniciar evento
@@ -166,7 +166,7 @@ func _verificar_inicio_evento(anio: int, mes: int, dia: int, estacion: int, hora
 			evento_iniciado.emit(ev_id)
 			print("[EventManager] Evento iniciado: %s" % ev_id)
 			return
-		# Verificar ocupaciÃ³n de NPCs (M19)
+		# Verificar ocupación de NPCs (M19)
 
 
 func _verificar_fin_evento(anio: int, mes: int, dia: int, estacion: int, hora: int, minuto: int) -> void:
@@ -178,7 +178,7 @@ func _verificar_fin_evento(anio: int, mes: int, dia: int, estacion: int, hora: i
 	if ev == null:
 		return
 	if not ev.esta_en_franja(hora, minuto):
-		# Franco terminÃ³
+		# Franco terminó
 		_finalizar_evento(ev_id, anio, false)
 		evento_terminado.emit(ev_id)
 		print("[EventManager] Evento terminado: %s" % ev_id)
@@ -208,7 +208,7 @@ func _finalizar_evento(ev_id: StringName, anio: int, cancelado: bool) -> void:
 		if ev != null and ev.recompensa_compensatoria != null:
 			_entregar_una_recompensa(ev.recompensa_compensatoria, ev, anio)
 	else:
-		# Si el jugador no participÃ³, marcar NO_PARTICIPADO
+		# Si el jugador no participó, marcar NO_PARTICIPADO
 		if es.estado != EventState.Estado.PARTICIPADO:
 			es.estado = EventState.Estado.NO_PARTICIPADO
 	evento_actual = null
@@ -222,14 +222,14 @@ func _on_festival_data_event(ev: Dictionary) -> void:
 	pass
 
 
-# â”€â”€ ParticipaciÃ³n â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Participación ──────────────────────────────────────────
 
 func puede_participar(evento_id: StringName) -> Dictionary:
-	"""EvalÃºa si el jugador puede participar. Retorna {ok: bool, razon: StringName}."""
+	"""Evalúa si el jugador puede participar. Retorna {ok: bool, razon: StringName}."""
 	var ev: EventDefinition = _catalogo.get(evento_id, null)
 	if ev == null:
 		return {"ok": false, "razon": &"evento_no_existe"}
-	# Chequear si ya participÃ³ este aÃ±o
+	# Chequear si ya participó este año
 	var anio = _get_anio_actual()
 	var es = _get_estado(evento_id, anio)
 	if es != null and es.is_participated_this_year(anio):
@@ -264,7 +264,7 @@ func iniciar_participacion(evento_id: StringName, contexto: Dictionary = {}) -> 
 
 
 func finalizar_evento(evento_id: StringName, resultado_data: Dictionary = {}) -> void:
-	"""Finaliza participaciÃ³n y entrega recompensas."""
+	"""Finaliza participación y entrega recompensas."""
 	var anio = _get_anio_actual()
 	var ev: EventDefinition = _catalogo.get(evento_id, null)
 	if ev == null:
@@ -278,30 +278,30 @@ func finalizar_evento(evento_id: StringName, resultado_data: Dictionary = {}) ->
 
 
 func _entregar_recompensas(ev: EventDefinition, anio: int, resultado: Dictionary = {}) -> void:
-	"""Entrega todas las recompensas del evento con verificaciÃ³n doble."""
+	"""Entrega todas las recompensas del evento con verificación doble."""
 	for recomp in ev.recompensas:
 		if recomp is RecompensaDef:
 			_entregar_una_recompensa(recomp, ev, anio)
 
 
 func _entregar_una_recompensa(recomp: RecompensaDef, ev: EventDefinition, anio: int) -> void:
-	"""Entrega una recompensa individual con validaciÃ³n de token anti-duplicado."""
+	"""Entrega una recompensa individual con validación de token anti-duplicado."""
 	var es = _get_estado(ev.id, anio)
 	if es == null or not es.puede_recibir_recompensa(anio):
-		print("[EventManager] Recompensa %s ya entregada este aÃ±o o estado invÃ¡lido" % ev.id)
+		print("[EventManager] Recompensa %s ya entregada este año o estado inválido" % ev.id)
 		return
 	# Entregar
 	var ok = recomp.entregar(self, {"evento_id": ev.id})
 	if ok:
 		es.marcar_recompensa_recibida(anio)
 		evento_recompensa_entregada.emit(ev.id, recomp.to_dict())
-		print("[EventManager] Recompensa entregada: %s â†’ %s" % [ev.id, recomp.to_dict()])
+		print("[EventManager] Recompensa entregada: %s → %s" % [ev.id, recomp.to_dict()])
 	else:
-		print("[EventManager] FALLÃ“ entrega de recompensa: %s" % recomp.to_dict())
+		print("[EventManager] FALLÓ entrega de recompensa: %s" % recomp.to_dict())
 
 
 func entregar_recompensa(evento_id: StringName) -> Array:
-	"""API pÃºblica: entrega recompensas de un evento finalizado."""
+	"""API pública: entrega recompensas de un evento finalizado."""
 	var anio = _get_anio_actual()
 	var ev: EventDefinition = _catalogo.get(evento_id, null)
 	if ev == null:
@@ -319,11 +319,11 @@ func entregar_recompensa(evento_id: StringName) -> Array:
 	return entregadas
 
 
-# â”€â”€ Sorpresas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Sorpresas ─────────────────────────────────────────────
 
 func registrar_sorpresa(evento_id: StringName) -> bool:
-	"""Registra una sorpresa si cumple lÃ­mites semanales y no es dÃ­a de festival."""
-	# LÃ­mite semanal
+	"""Registra una sorpresa si cumple límites semanales y no es día de festival."""
+	# Límite semanal
 	var gt = get_node_or_null("/root/GameTime")
 	var semana_dia := 0
 	if gt != null:
@@ -333,7 +333,7 @@ func registrar_sorpresa(evento_id: StringName) -> bool:
 		_sorpresa_semanal_count = 0
 	if _sorpresa_semanal_count >= MAX_SORPRESAS_SEMANA:
 		return false
-	# No en dÃ­a de festival
+	# No en día de festival
 	var tc = get_node_or_null("/root/TimeCalendar")
 	if tc != null and tc.hay_festival_hoy():
 		return false
@@ -342,7 +342,7 @@ func registrar_sorpresa(evento_id: StringName) -> bool:
 	return true
 
 
-# â”€â”€ Agenda â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Agenda ────────────────────────────────────────────────
 
 func get_eventos_del_dia(fecha: Dictionary) -> Array:
 	"""Retorna eventos que coinciden con la fecha dada."""
@@ -358,7 +358,7 @@ func get_eventos_del_dia(fecha: Dictionary) -> Array:
 
 
 func get_eventos_proximos(dias: int) -> Array:
-	"""Retorna prÃ³ximos N dÃ­as de eventos."""
+	"""Retorna próximos N días de eventos."""
 	var gt = get_node_or_null("/root/GameTime")
 	if gt == null:
 		return []
@@ -403,7 +403,7 @@ func get_evento_actual() -> Object:
 func normalizar_agenda() -> void:
 	"""Construye/normaliza la agenda anual al cargar partida."""
 	var anio = _get_anio_actual()
-	# Asegurar que todos los eventos del catÃ¡logo tengan estado para este aÃ±o
+	# Asegurar que todos los eventos del catálogo tengan estado para este año
 	for ev_id in _catalogo.keys():
 		if _get_estado(ev_id, anio) == null:
 			var es := EventState.new()
@@ -414,7 +414,7 @@ func normalizar_agenda() -> void:
 	agenda_actualizada.emit()
 
 
-# â”€â”€ Historial â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Historial ─────────────────────────────────────────────
 
 func get_recuerdos() -> Array:
 	"""Retorna array de recuerdos (participaciones pasadas)."""
@@ -433,11 +433,11 @@ func get_recuerdos() -> Array:
 
 
 func get_historial_por_anio(anio: int) -> Dictionary:
-	"""Retorna diccionario evento_id -> EventState para un aÃ±o dado."""
+	"""Retorna diccionario evento_id -> EventState para un año dado."""
 	return _estado_anual.get(anio, {}).duplicate()
 
 
-# â”€â”€ Persistencia (ISaveProvider M59) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Persistencia (ISaveProvider M59) ─────────────────────
 
 func _registrar_proveedor_guardado() -> void:
 	var sm = get_node_or_null("/root/SaveManager")
@@ -475,7 +475,7 @@ func restore_save_data(data: Dictionary) -> void:
 	print("[EventManager] Estado restaurado: %d eventos" % eventos_data.size())
 
 
-# â”€â”€ Utilidades internas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Utilidades internas ───────────────────────────────────
 
 func _get_estado(evento_id: StringName, anio: int) -> EventState:
 	var year_states = _estado_anual.get(anio, {})
@@ -500,15 +500,15 @@ func _get_anio_actual() -> int:
 
 
 func _get_estacion_para_mes(mes: int) -> int:
-	"""Mapeo mesâ†’estaciÃ³n (0-3)."""
+	"""Mapeo mes→estación (0-3)."""
 	if mes <= 3: return 0    # Primavera
 	if mes <= 6: return 1    # Verano
-	if mes <= 9: return 2    # OtoÃ±o
+	if mes <= 9: return 2    # Otoño
 	return 3                  # Invierno
 
 
 func _build_context() -> Dictionary:
-	"""Construye contexto para evaluaciÃ³n de condiciones."""
+	"""Construye contexto para evaluación de condiciones."""
 	var ctx := {}
 	var gt = get_node_or_null("/root/GameTime")
 	if gt != null:

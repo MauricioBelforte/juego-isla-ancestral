@@ -290,7 +290,7 @@ const WHITELIST_RELOJ_SO := [
 	# nunca gameplay. Sin esto el check C56 fallaba (407 archivos escaneados).
 	# ⚠️ fauna_registry.gd de M36 NO entró a la whitelist: su uso era GAMEPLAY
 	# real (dedupe de avistamientos) y se corrigió el código a
-	# Time.get_ticks_msec() — ver 07-GUIA-GODOT §9.64 y Log 429.
+	# Time.get_ticks_msec() — ver GUIA-GODOT/09-godot4-migracion.md §9.64 y Log 429.
 	"res://scripts/crash/",
 	"res://scripts/debug/",
 	"res://scripts/stress/",
@@ -303,6 +303,13 @@ const WHITELIST_RELOJ_SO := [
 	# eran gameplay y se corrigieron a Time.get_ticks_msec() (§9.64).
 	"res://scripts/legal/",
 	"res://scripts/updates/",
+	# Vigilancia continua C56 (2026-09-11, GLM-5.3/Kilo Code, Log 827): M117/M118
+	# (cicd_manager: retención de artefactos de build J — compara la edad del
+	# archivo contra dias_maximo). Es METADATA del sistema de archivos para
+	# limpiar ZIPs viejos de CI/CD, jamás gameplay. Mismo criterio que saving/
+	# y updates/. Sin esto el scan marcaba 1 falso positivo y el check C56
+	# fallaba con 685 archivos (bug registrado en 11-BUGS.md con A/B, Log 824).
+	"res://scripts/ci/",
 ]
 
 func _scan_anti_reloj_so() -> void:

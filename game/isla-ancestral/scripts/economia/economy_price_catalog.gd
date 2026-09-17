@@ -20,13 +20,28 @@ const CATALOG_PATH: String = "res://data/economy/econ_prices.tres"
 # Cache estático de la instancia cargada (ResourceLoader ya cachea, pero reforzamos).
 static var _instance: EconomyPriceCatalog = null
 
+# L.1 (iter 5, GLM-5.3 / Kilo Code — Log 822): índice O(1) item_id → PriceDefinition.
+# Se construye UNA vez al resolver el catálogo; get_price_def pasa de O(n) por
+# consulta a O(1) — cada cálculo de precio consulta 2-3 veces (base, rareza,
+# temporada, variabilidad) y el catálogo crece con el contenido real.
+var _indice: Dictionary = {}
+
 ## Cachea y devuelve la instancia única del catálogo.
 static func get_catalog() -> EconomyPriceCatalog:
 	if _instance == null:
 		_instance = load(CATALOG_PATH) as EconomyPriceCatalog
 		if _instance == null:
 			push_warning("M38: econ_prices.tres no existe o no cargó; sin overrides, precios base de ItemData.")
+	if _instance != null and _instance._indice.is_empty() and not _instance.price_overrides.is_empty():
+		_instance._construir_indice()
 	return _instance
+
+## Reconstruye el índice item_id → definición (idempotente).
+func _construir_indice() -> void:
+	_indice.clear()
+	for e in price_overrides:
+		if e != null and str(e.item_id) != "":
+			_indice[str(e.item_id)] = e
 
 ## Validación en carga: la venta nunca debe superar o igualar la compra.
 func _validate() -> bool:
@@ -36,10 +51,14 @@ func _validate() -> bool:
 	return true
 
 ## Lookup por item_id. Devuelve la PriceDefinition o null si no hay override.
+## L.1 (iter 5): O(1) vía _indice; fallback lineal solo si el índice está vacío
+## (defensivo ante asignaciones externas de price_overrides sin reconstruir).
 func get_price_def(item_id: String) -> PriceDefinition:
 	if item_id == "":
 		return null
-	for e in price_overrides:
-		if e.item_id == item_id:
-			return e
+	if _indice.has(item_id):
+		return _indice[item_id]
+	if _indice.is_empty() and not price_overrides.is_empty():
+		_construir_indice()
+		return _indice.get(item_id, null)
 	return null

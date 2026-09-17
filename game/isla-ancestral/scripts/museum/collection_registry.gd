@@ -15,7 +15,7 @@
 #  - API panel M53: get_resumen_para_ui() (cartel de entrada §7) +
 #    exposiciones_completas_count().
 #  - RF2: exposición fauna con especies reales de M36 (data-driven).
-# ⚠️ Sin class_name: es autoload (pitfall 07-GUIA-GODOT §9.17/§9.41).
+# ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
 signal item_registered(exhibition_id: String, item_id: String)
