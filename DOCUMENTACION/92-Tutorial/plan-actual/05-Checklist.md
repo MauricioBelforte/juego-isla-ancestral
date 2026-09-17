@@ -3,15 +3,15 @@
 
 ## Reserva actual
 
-- Estado: 🔵 En curso — iter. triggers (verificación Log 336 + RF20 + RF19) — reserva 2026-09-15 04:40, Log reservado 911
-- Agente: glm-5.3-flash (Cline) — relevo de agnes-2.5-flash (sin actividad desde 2026-09-04, regla 21.4.7); iters previas respetadas: núcleo Deepseek (Log 259), triggers avanzados glm-5.3-flash (Log 336)
+- Estado: 🟢 Liberado — iter. 3 lógica (interruptores, consejos, persistencia de pasos, feedback, edge cases) — reserva 2026-09-15 04:40, Log reservado 914 → **Log 914 emitido, cierre 2026-09-15**
+- Agente: glm-5.3-flash (Cline) — relevo de agnes-2.5-flash (sin actividad desde 2026-09-04, regla 21.4.7); iters previas respetadas: núcleo Deepseek (Log 259), triggers avanzados glm-5.3-flash (Log 336), iter. triggers RF20/RF19 (Log 911)
 - Fase: 8 (Vertical slice / Onboarding)
 - Dificultad: 3
 - Visión: V0 (lógica); UI de pistas/burbujas es V2 (M53)
-- Entrada: núcleo Log 259 + triggers Log 336; M53 core ✅; M70 mockeable
-- Salida: RF20 re-programación ×3 → descarte seguro + RF19 log M103 + Q3 dist² + tests S3/S7 headless 0 fallos + ítems verificados del Log 336 marcados
-- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial_triggers.gd` (extensión), docs del módulo
-- Fecha cierre: —
+- Entrada: núcleo Log 259 + triggers Log 336 + RF20/RF19 Log 911; M53 core ✅; M70 mockeable
+- Salida iter. 3: interruptores RF9 independientes (pistas/prólogo/consejos) + consejos RF6 (una vez, cooldown 90 s, contextos, no en diálogo) + contexto T-016 + pasos/persistencia P4 + skip RF7/S5 + re-play RF8/S6 + objetivo destruido P5 + mundo inactivo P6 + diálogo P7 + feedback RF24/P15 (no modal, persiste antes de emitir) + ícono InputMap en vivo P8/P9 + pistas RF4/S8 (máx. 2, expiración P2, posponer P13/P14). **103 checks en test_tutorial_iter3.gd; 3 suites: 0 fallos (196 checks)**
+- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial_iter3.gd` (nuevo), `scripts/tutorial/test_tutorial_triggers.gd`, `scripts/run_m92_tests.bat` (nuevo, corredor de las 3 suites), docs del módulo
+- Fecha cierre: 2026-09-15 (Log 914)
 
 # 05-Checklist.md — Módulo 92: Tutorial
 
@@ -24,17 +24,17 @@
 ## A. Problema, objetivos y alcance (12)
 
 - [x] Definir el problema: juegos cozy con muchos sistemas pequeños y jugador nuevo sin guía [S]
-- [ ] Descartar la pared de texto como solución: rompe la fantasía cozy [S]
-- [ ] Registrar dependencias del módulo: M53 (UI-UX), M70 (Interacciones) [S]
-- [ ] Registrar módulos enseñados: M11, M13, M33, M34, M35, M16, M19/M21 [M]
-- [ ] Definir el objetivo: aprendizaje por inmersión en 15-20 minutos, sin frustración [M]
-- [ ] Definir alcance: capítulos, triggers, pistas contextuales, prólogo guiado, consejos, skip/re-play [M]
-- [ ] Definir fuera de alcance: diálogos (M21), misiones (M22), mecánicas enseñadas (M13/M33...) [M]
+- [x] Descartar la pared de texto como solución: rompe la fantasía cozy [S]
+- [x] Registrar dependencias del módulo: M53 (UI-UX), M70 (Interacciones) [S]
+- [x] Registrar módulos enseñados: M11, M13, M33, M34, M35, M16, M19/M21 [M]
+- [x] Definir el objetivo: aprendizaje por inmersión en 15-20 minutos, sin frustración [M]
+- [x] Definir alcance: capítulos, triggers, pistas contextuales, prólogo guiado, consejos, skip/re-play [M]
+- [x] Definir fuera de alcance: diálogos (M21), misiones (M22), mecánicas enseñadas (M13/M33...) [M]
 - [x] Establecer restricciones: Godot 4.x + Voxel Tools + GDScript, sin C# para gameplay [S]
 - [x] Establecer regla roja cozy: el tutorial nunca bloquea ni castiga al jugador [S]
-- [ ] Establecer restricción de longitud: pistas ≤ 2 líneas, máx. 3 pasos visibles por guion [S]
-- [ ] Establecer restricción de rendimiento: presupuesto ≤ 0.2 ms por frame [M]
-- [ ] Documentar la persistencia mínima de GameState.M92 (< 1 KB) [S]
+- [x] Establecer restricción de longitud: pistas ≤ 2 líneas, máx. 3 pasos visibles por guion [S]
+- [x] Establecer restricción de rendimiento: presupuesto ≤ 0.2 ms por frame [M]
+- [x] Documentar la persistencia mínima de GameState.M92 (< 1 KB) [S]
 
 ## B. RF: Triggers y detección de contexto (15)
 
@@ -67,8 +67,8 @@
 - [ ] RF17: capítulo Crafting: abrir banco → mostrar receta requerida → fabricar → verificar inventario [M]
 - [ ] RF18: capítulo Vecinos: saludar con E → elegir opción de diálogo → recibir primer regalo [M]
 - [ ] RF13: capítulo Herramientas: equipar y usar la primera herramienta con pista de energía [M]
-- [ ] RF24: cada capítulo completo emite feedback breve (sonido de éxito M44 + mensaje 2 s) [M]
-- [ ] RF24: el feedback de éxito nunca es modal obligatorio (se puede ignorar) [S]
+- [x] RF24: cada capítulo completo emite feedback breve (sonido de éxito M44 + mensaje 2 s) [M]
+- [x] RF24: el feedback de éxito nunca es modal obligatorio (se puede ignorar) [S]
 - [ ] RF5: los pasos SECUENCIA aceptan avanzar solo al cumplir la meta, sin bloquear otras acciones [M]
 
 ## D. RF: Pistas contextuales y sistema de consejos (14)
@@ -78,26 +78,26 @@
 - [ ] RF4: flecha opcional apuntando al objetivo cuando está fuera de pantalla [M]
 - [ ] RF4: la burbuja se oculta con fade al expirar, al alejarse (> 6 m) o al cumplir la acción [M]
 - [ ] RF4: la burbuja se oculta sin parpadear al abrir menús/diálogos y reaparece si el contexto sigue [M]
-- [ ] RF4: máx. 2 pistas vivas simultáneas en todo momento [S]
-- [ ] RF9: el interruptor "Pistas contextuales" (on/off) apaga todas las burbujas [M]
-- [ ] RF9: el interruptor de pistas no afecta la secuencia guiada del prólogo (interruptor separado) [M]
+- [x] RF4: máx. 2 pistas vivas simultáneas en todo momento [S]
+- [x] RF9: el interruptor "Pistas contextuales" (on/off) apaga todas las burbujas [M]
+- [x] RF9: el interruptor de pistas no afecta la secuencia guiada del prólogo (interruptor separado) [M]
 - [x] RF6: sistema de consejos: tips opcionales de profundización (riego, horarios, senderismo) [M]
-- [ ] RF6: los consejos se muestran una sola vez (registro en `consejos_vistos`) [M]
-- [ ] RF6: contextos permitidos de consejo: carga de escena, caminata larga, pausa [M]
-- [ ] RF6: cooldown mínimo de 90 s entre consejos [S]
-- [ ] RF6: los consejos nunca aparecen durante diálogos (M21) ni cutscenes [S]
-- [ ] RF6: interruptor independiente "Consejos" (on/off) en opciones de juego [S]
+- [x] RF6: los consejos se muestran una sola vez (registro en `consejos_vistos`) [M]
+- [x] RF6: contextos permitidos de consejo: carga de escena, caminata larga, pausa [M]
+- [x] RF6: cooldown mínimo de 90 s entre consejos [S]
+- [x] RF6: los consejos nunca aparecen durante diálogos (M21) ni cutscenes [S]
+- [x] RF6: interruptor independiente "Consejos" (on/off) en opciones de juego [S]
 
 ## E. RF: Skip, replay y revalidación (12)
 
 - [x] RF7: skip global: desactiva el tutorial restante y se persiste por guardado [M]
-- [ ] RF7: skip por capítulo: libera el guion actual sin marcarlo como completado [M]
-- [ ] RF7: al saltear, las pistas activas se ocultan de inmediato y sin parpadeo [M]
+- [x] RF7: skip por capítulo: libera el guion actual sin marcarlo como completado [M]
+- [x] RF7: al saltear, las pistas activas se ocultan de inmediato y sin parpadeo [M]
 - [x] RF8: re-play del tutorial completo desde opciones del juego (M53) [M]
-- [ ] RF8: re-play de capítulos sueltos (ej: volver a ver el de pesca) [M]
+- [x] RF8: re-play de capítulos sueltos (ej: volver a ver el de pesca) [M]
 - [ ] RF8: confirmación obligatoria antes de re-jugar (M53) [S]
-- [ ] RF8: snapshot del estado previo para no contaminar la partida en curso (RN11) [M]
-- [ ] RF8: el re-play usa estado_replay sin revalidación (muestra todos los pasos) [M]
+- [x] RF8: snapshot del estado previo para no contaminar la partida en curso (RN11) [M]
+- [x] RF8: el re-play usa estado_replay sin revalidación (muestra todos los pasos) [M]
 - [ ] RF3: jugador que ya pescó antes del capítulo: capítulo marcado completo sin mostrar pasos [C]
 - [ ] RF3: jugador que ya crafteó antes del capítulo: misma revalidación silenciosa [M]
 - [ ] RF10: nunca interrumpir interacciones de M70, diálogos de M21 ni animaciones en curso [M]
@@ -211,20 +211,20 @@
 ## P. Edge cases (15)
 
 - [ ] P1: jugador que ya completó el juego en otra partida: revalidación evita pasos redundantes [M]
-- [ ] P2: jugador hace otra cosa durante una pista: la pista expira sin castigo y el capítulo queda pendiente [M]
+- [x] P2: jugador hace otra cosa durante una pista: la pista expira sin castigo y el capítulo queda pendiente [M]
 - [x] P3: tutorial bloqueante roto (meta imposible): watchdog re-programa ×3 y descarta con log [C]
-- [ ] P4: reinicio del juego con guardado a mitad de capítulo: el capítulo se retoma desde el paso pendiente [M]
-- [ ] P5: el objeto de la lección fue destruido (árbol talado, parcela removida): re-programar o descartar [M]
-- [ ] P6: el nodo objetivo está fuera del mundo activo (M63): trigger se pausa hasta su alta [M]
-- [ ] P7: se abre un modal justo con pista activa: DORMIDO y reaparición sin parpadeo al cerrar [M]
-- [ ] P8: el jugador remapea la tecla E a otra tecla: la pista muestra el ícono nuevo desde InputMap [C]
-- [ ] P9: cambio de dispositivo mid-pista (teclado→gamepad): el ícono de tecla se actualiza en vivo [M]
+- [x] P4: reinicio del juego con guardado a mitad de capítulo: el capítulo se retoma desde el paso pendiente [M]
+- [x] P5: el objeto de la lección fue destruido (árbol talado, parcela removida): re-programar o descartar [M]
+- [x] P6: el nodo objetivo está fuera del mundo activo (M63): trigger se pausa hasta su alta [M]
+- [x] P7: se abre un modal justo con pista activa: DORMIDO y reaparición sin parpadeo al cerrar [M]
+- [x] P8: el jugador remapea la tecla E a otra tecla: la pista muestra el ícono nuevo desde InputMap [C]
+- [x] P9: cambio de dispositivo mid-pista (teclado→gamepad): el ícono de tecla se actualiza en vivo [M]
 - [x] P10: el jugador salta el tutorial en el prólogo: el resto de capítulos se desactivan ordenadamente [M]
 - [ ] P11: re-play mientras un capítulo está activo: conflicto resuelto con snapshot y cancelación suave [C]
 - [ ] P12: jugador con lectura lenta (M58 x4): las pistas permanecen sin bloquear acciones [M]
-- [ ] P13: dos pistas simultáneas en la misma zona: la de mayor prioridad se queda, la otra se pospone [M]
-- [ ] P14: el jugador usa el fast-travel (M69) con una pista activa: la pista se descarta limpiamente [S]
-- [ ] P15: el jugador cierra el juego en el instante del feedback de capítulo: el estado ya está persistido (orden write antes del feedback) [M]
+- [x] P13: dos pistas simultáneas en la misma zona: la de mayor prioridad se queda, la otra se pospone [M]
+- [x] P14: el jugador usa el fast-travel (M69) con una pista activa: la pista se descarta limpiamente [S]
+- [x] P15: el jugador cierra el juego en el instante del feedback de capítulo: el estado ya está persistido (orden write antes del feedback) [M]
 
 ## Q. Optimización (8)
 
@@ -233,7 +233,7 @@
 - [x] Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S] → `distance_squared_to()` + radio² (Log 911)
 - [x] Q4: las condiciones de contexto son funciones baratas (< 1 µs cada una) [S]
 - [ ] Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
-- [ ] Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
+- [x] Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
 - [ ] Q7: no hay alocaciones por frame en la ruta crítica (buffers reutilizados) [M]
 - [ ] Q8: profiler: verificar ≤ 0.2 ms en la zona de la plaza con NPCs y cultivos [M]
 
@@ -253,11 +253,11 @@
 - [x] S2: test de triggers de señal con mocks de M70/M33/M34/M35 [M] → mejor que mocks: test_tutorial_triggers usa el EventBus REAL (inventory.item_added, world.block_placed, npc.gift_given) + anti-duplicado (Log 336/911)
 - [x] S3: test de trigger de mundo con distancias límites (radio exacto ±0.01 m) [M] → 4.99 dispara / 5.01 no, con dist² (Log 911)
 - [ ] S4: test de revalidación: señal de maestría previa completa el capítulo en silencio [M]
-- [ ] S5: test de skip global y por capítulo (estado persistido correctamente) [M]
-- [ ] S6: test de re-play con snapshot (la partida no se contamina) [C]
+- [x] S5: test de skip global y por capítulo (estado persistido correctamente) [M]
+- [x] S6: test de re-play con snapshot (la partida no se contamina) [C]
 - [x] S7: test del watchdog: meta imposible → re-programación ×3 → descarte sin bloqueo [C] → 3 timeouts → descarte seguro, señal emitida, capítulo re-activable (Log 911)
-- [ ] S8: test de pistas: máx. 2 vivas, pool reutilizado, fade y expiración [M]
-- [ ] S9: test de consejos: una sola vez, cooldown 90 s, contextos restringidos [M]
+- [x] S8: test de pistas: máx. 2 vivas, pool reutilizado, fade y expiración [M]
+- [x] S9: test de consejos: una sola vez, cooldown 90 s, contextos restringidos [M]
 - [ ] S10: test de integración End-to-End: partida nueva → prólogo → capítulo cultivo completo con mocks [C]
 - [ ] S11: test de rendimiento: medición < 0.2 ms en escenario denso (zona de plaza) [C]
 - [ ] S12: test de regresión con InputMap remapeado (íconos dinámicos correctos) [M]

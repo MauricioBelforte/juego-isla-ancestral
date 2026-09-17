@@ -23,7 +23,7 @@ scripts/world/
 > PREVISTA. Estado real al 2026-09-17:**
 > - `voxel_world.gd` — **NO EXISTE**. No hay fachada VoxelWorld ni registro en
 >   ServiceRegistry. La edición de bloques la implementan otros módulos:
->   `scripts/herramientas/tool_controller.gd` (`try_extract() -> Dictionary`,
+>   `scripts/tools/tool_controller.gd` (`try_extract() -> Dictionary`,
 >   `try_place(block_id, metadata) -> bool`) y `interaction_manager.gd`.
 > - `block_catalog.gd` — existe (140 l.) pero **está muerto en runtime**: ni
 >   `BlockCatalog.new()` ni `get_library()` tienen llamadores. La library real la
@@ -42,6 +42,23 @@ scripts/world/
 - `world.try_place(pos: Vector3i, type: BlockId) -> Result` (M17/M13)
 - `world.get_block(pos) -> BlockData`, `world.set_block_puzzle(pos, state)` (M24)
 - Eventos: `block_placed/removed/modified` (payload tipado) — consumidos por NPC reactividad (M19/M64), quests (M22), economía (M38), sonido (M43).
+
+> ⚠️ **QA atria-dawn (Log 949): los contratos de arriba son los DISEÑADOS. La
+> implementación real difiere — usar las firmas reales:**
+> - No existe el objeto `world`. La edición se hace contra el controlador de
+>   herramientas: `tool_controller.try_extract() -> Dictionary` (sin args de
+>   posición — opera sobre el objetivo mirado) y
+>   `tool_controller.try_place(block_id: int, metadata: Dictionary = {}) -> bool`.
+>   Existe también un `recurso_mock.gd` con firmas parecidas (mock de test).
+> - `set_block_puzzle` **no existe**; la lógica de bloques-puzzle con estado la
+>   implementa M24/M26 por su cuenta (entidad vinculada, ver riesgo H.4).
+> - `world.get_block(pos)` no existe; el acceso a bloques del terreno es vía
+>   `VoxelTerrain.get_voxel_tool()` + `get_voxel()` (ej. `main_island.gd:349-358`)
+>   y `BlockCatalog.get_block(id)` para metadatos del BlockType.
+> - Los eventos `block_placed/removed` **sí** están cableados por el EventBus
+>   (servicio `event_bus` del Bootstrap): el log de boot registra
+>   `[M92] Triggers EventBus conectados: ["inventory.item_added",
+>   "world.block_placed", "npc.gift_given"]`.
 
 ## 4. Pendientes del módulo (con dueño)
 
@@ -107,3 +124,35 @@ DIRECTIVA NUEVA — colores por isla: cada isla definira su propia paleta de blo
 (library propia o variantes de color por bioma) y los bloques extraidos por el
 personaje conservaran el color de la isla de origen (requiere campo origen_isla en
 ItemData + variante de color en el bloque colocado — a implementar en M08/M14/M15).
+
+## 6. QA Cruzado — Notas del Agente (atria-dawn)
+
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-17 05:35
+**Estado:** QA realizado — módulo **mantiene ✅** (0 flips; 105/105 [x] se sostienen)
+
+### Veredicto diferenciado
+A diferencia de M09 y M10 (revertidos a 🟡 en los Logs 944/945), el checklist de M08 es **honesto en su alcance**: prácticamente todos los ítems usan verbos de diseño ("Diseñar/Documentar/Definir") y la nota de cierre deja claro que "la validación física (greedy por tipo, radio de carga, medición de remesh) es responsabilidad del hito M1 y de M61; el diseño queda cerrado aquí". Además M08 **sí tiene código vivo**: `block_type.gd` (constantes de ids 0–30 + `create_default()`) es central para island_generator, la library de main_island, M15 recursos, etc. No hay sobre-cierre que revertir.
+
+### Lo que SÍ está mal (defectos de documentación — corregidos en este QA)
+1. **§2 listaba 5 archivos de los que 4 NO existen**: `voxel_world.gd`, `block_validation.gd`, `world_events.gd`, `diff_store.gd`. Mismo patrón de "paths fantasma" que M09. La fachada VoxelWorld y su registro en ServiceRegistry **nunca se materializaron**; la edición de bloques la implementan `scripts/tools/tool_controller.gd` + `interaction_manager.gd`. Marcado in-situ arriba.
+2. **§3 firmas de contrato incorrectas vs implementación**: `world.try_extract(pos, tool)` y `world.try_place(pos, type)` no existen (no hay objeto `world`); las reales son `tool_controller.try_extract() -> Dictionary` y `try_place(block_id, metadata) -> bool`. `set_block_puzzle` no existe. Corregido in-situ arriba con las firmas reales.
+3. **Claims de MiMo stale**: "BLOCK_AIR a BLOCK_LAVA" — **LAVA no existe** (las constantes llegan hasta MUD=29 + SHALLOW_WATER=30); "BlockCatalog.new().build_voxel_library()" — el método real es `_build_library()` (privado, se llama desde `_init`) y `BlockCatalog` es **código muerto** en runtime (ver M10 QA, Log 945).
+4. **Fila de CHECKLIST-GLOBAL**: "librería 21 bloques" — la library real de `main_island.gd:96-139` tiene **31 modelos** (ids 0–30).
+
+### Lo que está bien (verificado)
+- `block_type.gd`: 30 constantes (AIR=0 … MUD=29 + SHALLOW_WATER=30), categorías (SOLID/TRANSPARENT/LIQUID/EMISSIVE), tool_required, drops, debug colors — **live y consistente** con la library de main_island y con el generador de M10.
+- Paleta Maldivas aprobada por el usuario (Hy3, 2026-08-29) aplicada en main_island.gd — confirmada en código (SAND #F5F0E1, GRASS #55711E, SHALLOW_WATER (0.25,0.82,0.78), etc.).
+- `VoxelBoxMover` del jugador **live** (boot headless: "Player VoxelBoxMover listo, terrain encontrado").
+- Boot headless limpio; los 105 ítems de diseño son trazables a 03-Diseno.md.
+- Directiva "colores por isla" (2026-08-29) documentada correctamente como pendiente de M08/M14/M15.
+
+### No verificado en esta iter (headless)
+- "Edición E/Q" del GDD (interacción de colocar/extraer en runtime): requiere input/jugador activo; no replicable headless. Las funciones subyacentes (`try_place`/`try_extract` en tool_controller) existen y están tipadas.
+
+### Recomendaciones para el próximo agente
+1. Si se materializa la fachada VoxelWorld (voxel_world.gd), alinearla con las firmas reales actuales o migrar tool_controller a ella — hoy hay dos "contratos" (el doc de diseño y el código real) que no coinciden.
+2. Decidir el destino de `BlockCatalog` muerto (borrarlo o cablearlo de verdad — ver Log 945).
+3. El flag `has_gravity` de arena/grava está definido en BlockType pero **no hay código que lo consuma** (gravedad de bloques sueltos) — queda como diseño pendiente de M1.
+4. `world.block_placed` está en EventBus; verificar que M19/M22/M38/M43 realmente consuman `block_removed`/`block_modified` también (no se vio en el boot).

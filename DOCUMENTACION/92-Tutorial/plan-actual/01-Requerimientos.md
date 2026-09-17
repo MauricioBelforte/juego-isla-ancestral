@@ -23,7 +23,7 @@ Que el jugador aprenda las mecánicas esenciales de la isla Aurora (moverse, int
 
 ### 3.1 Dentro del alcance
 - Guiones de tutorial por capítulos: prólogo de llegada, moverse, interactuar (M70), herramientas (M13), cultivo (M33), pesca (M34), minería (M35), crafting (M16) y primeros vecinos (M19/M21).
-- Triggers contextuales: eventos del mundo o del jugador que disparan la lección correspondiente (primer paso, primera interacción "E", primera cosecha, etc.).
+- Triggers contextuales: eventos del mundo o del jugador que disparan la lección correspondiente (primer paso, primera interacción "E", primera cosecha, etc.). La sección "Fuera del alcance" (§3.2, más abajo) detalla lo que el módulo NO implementa.
 - Pistas contextuales world-space: burbujas breves con texto corto, flecha opcional hacia el objetivo y tecla a presionar (icono adaptado a teclado/gamepad según M57).
 - Secuencias guiadas del prólogo: pasos cortos y encadenados con marcador de objetivo y retroalimentación de éxito (chirrido cozy, confeti ligero opcional).
 - Sistema de consejos: tips de profundización opcionales, registrables como leídos, que aparecen solo en contextos de espera (carga, caminata larga) y son desactivables.

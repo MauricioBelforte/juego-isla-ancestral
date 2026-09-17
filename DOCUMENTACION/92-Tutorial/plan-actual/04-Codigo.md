@@ -258,3 +258,36 @@ func _on_timeout(capitulo_id: StringName) -> void   # reprogramar x3 o descartar
 - M53: dibujar pasos escuchando paso_mostrado; respetar skip_todo()/set_dormido() del núcleo.
 - M63: llamar activar_trigger_mundo(id, false/true) al (des)cargar un mundo.
 - M13/M33/M34/M16: llamar Tutorial.cumplir_meta("usar_herramienta"/etc.) al ejecutar la acción enseñada — el capítulo se cierra solo.
+
+## Notas del Agente — Iteración 3: lógica completa sin UI (historial, no borra las anteriores)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Cline
+**Fecha:** 2026-09-17 02:43
+**Estado:** Parcial (lógica del tutorial completa: interruptores, consejos, persistencia de pasos, feedback y edge cases implementados y testeados; módulo liberado 🟡 — falta UI V2 M53 y guiones .tres Q5)
+
+### Lo que hice
+- **Interruptores RF9 independientes (T-042/043/049):** `pistas_contextuales_activas` / `prologo_guiado_activo` / `consejos_activos` + setters/getters — apagar uno no afecta los otros (probado conmutando en todos los órdenes).
+- **Sistema de consejos RF6 (T-044 a T-048, S9):** `registrar_consejo` / `intentar_mostrar_consejo(contexto)` — una sola vez (`consejos_vistos`), cooldown **90 s** (`COOLDOWN_CONSEJO_S`), contextos permitidos `["carga_escena","caminata_larga","pausa"]` (`CONTEXTOS_CONSEJO`), nunca durante diálogos (M21) ni cutscenes, y con interruptor propio. Q6: contador interno de caminata (sin física extra).
+- **Contexto T-016:** `establecer_contexto` / `_contexto_permitido` (hora/día/estación/zona); sin datos del proveedor **no** bloquea (cozy) y `capitulo_pospuesto` preserva el capítulo (nunca se pierde; `_contexto_permitido` es O(1), complementa Q4).
+- **Pasos/persistencia P4 (T-012/050/051):** `_paso_pendiente` + `paso_pendiente()` — tras restaurar guardado, el capítulo se retoma desde el paso pendiente; las preferencias RF9 viajan en `get_save_data()` (liviano, < 1 KB).
+- **Skip RF7/S5 (T-052):** `skip_capitulo` (sin marcar completado) y `skip_todo`; ocultan pistas de inmediato (`descartar_pistas`), sin parpadeo, y persisten.
+- **Re-play RF8/S6 (T-054/055):** `iniciar_replay` / `terminar_replay` / `en_replay` con **snapshot** del estado previo — muestra todos los pasos sin revalidación y **sin contaminar** la partida (RN11); re-play activo cancela suave el capítulo en curso.
+- **Feedback RF24/P15 (T-033/034):** nueva señal `feedback_capitulo(capitulo_id, datos)` — **nunca modal** (`modal: false`), 2 s (`FEEDBACK_DURACION_S`), sonido "exito" (M44), texto por clave `tr()`; el estado se **persiste antes de emitir** la señal (P15 verificado con orden de eventos).
+- **Pistas RF4/S8 (T-041/053):** `registrar_pista` / `ocultar_pista` / `descartar_pistas` / `pistas_vivas()` — máx. **2 vivas** (`MAX_PISTAS_VIVAS`); excedentes **pospuestos** (señal `capitulo_pospuesto`, P13), expiración sin castigo (señal `pista_expirada`, P2), fast-travel (P14) y ocultación por diálogo (P7) con motivos trazables.
+- **Edge cases:** objetivo destruido (P5: cuenta como intento → descarte seguro RF20) y nodo fuera del mundo (P6: `pausar_por_mundo_inactivo`, retomable, nunca se pierde) + diálogo P7 (DORMIDO + reaparición de pistas vivas) + InputMap en vivo P8/P9 (`icono_tecla_dinamico` sin caché, device-aware).
+- **Tests:** `test_tutorial_iter3.gd` NUEVO con **103 checks** (interruptores, diálogo, consejos, contexto, persistencia, skip, re-play, P5/P6, feedback/P15, P8); `scripts/run_m92_tests.bat` NUEVO que corre las 3 suites. **Verificado con binario real headless: iter3 0 fallos, triggers 0 fallos (71), núcleo 0 fallos (22) — 196 checks en verde.**
+- **Docs:** 01-Requerimientos se complementó con la sección "Fuera del alcance" que faltaba (§3.2); 46 ítems del checklist del módulo marcados con evidencia (39 nuevos + 7 de deriva documental previa); Reserva actualizada a 🟢 Liberado.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **UI de presentación (M53, V2):** burbujas world-space, marcadores de objetivo, flechas y pool visual de nodos (T-036/037/038/039/040/046-Q1). Las señales (`paso_mostrado`, `feedback_capitulo`, `pista_expirada`, `capitulo_pospuesto`) quedan listas para el presentador.
+- **Guiones .tres (Q5):** los capítulos base siguen registrados por código (`_registrar_capitulos_base`); moverlos a Resources es el paso previo natural a los guiones finales (capítulos didácticos RF11-RF18).
+- **Capítulos didácticos RF11-RF18** (Moverse/Cultivo/Pesca/Minería/Crafting/Vecinos/Herramientas): requieren las mecánicas reales de M13/M33/M34/M35/M16 para cumplir_meta auténtico (hoy: mockeables vía `cumplir_meta`).
+- **Confirmación de re-play (RF8-M53):** la UI de confirmación es del presentador; `iniciar_replay` ya es idempotente y seguro.
+
+### Recomendaciones para el próximo agente
+- **M53:** consumir las 4 señales nuevas (`paso_mostrado` ya existía; suman `feedback_capitulo`, `pista_expirada`, `capitulo_pospuesto`); respetar `MAX_PISTAS_VIVAS=2` al dibujar y usar `icono_tecla_dinamico()` para el ícono del paso.
+- **Q5:** migrar `_registrar_capitulos_base()` a `.tres` (Q5) — desacopla contenido y habilita los guiones didácticos RF11-RF18 sin tocar el manager.
+- **Rendimiento:** Q8 (profiler ≤ 0.2 ms en plaza densa) queda como medición pendiente; el presupuesto de diseño ya se respeta por construcción (throttle 0.25 s + dist² + contexto O(1)).
+- **S10-S12** (E2E cultivo, profiler, InputMap remapeado) quedan para cuando existan las mecánicas reales.
+
