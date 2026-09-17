@@ -40,7 +40,14 @@ EXCLUIDOS = ('Obsoletos', '.git', 'node_modules', '.venv', '__pycache__',
              # Sin excluirlo se audita esa copia y TODAS sus referencias
              # salen rotas: medido el 2026-09-16, 158 rutas rotas con
              # .kilo/ contra 1 real sin el.
-             '.kilo')
+             '.kilo',
+             # PAPELERA/ es el area de descarte: guarda herramientas de
+             # reparacion de logs, escaneos y la cuarentena de logs
+             # recuperados (cuyos numeros estan rotos POR DEFINICION).
+             # Auditarla produce ruido, no hallazgos: medido el 2026-09-17,
+             # su README de cuarentena generaba 13 "rutas rotas" falsas
+             # contra 1 real.
+             'PAPELERA')
 
 
 def raiz_repo():
