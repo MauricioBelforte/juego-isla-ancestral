@@ -7,6 +7,14 @@
 #   - data/operaciones/postlaunch_checks.json (si tiene campo version)
 # Tipos de bump: major, minor, patch.
 # Uso: python tools/ci/bump_version.py [major|minor|patch] [--dry-run]
+#
+# FIX M117 iter. 2 (muse-spark-1.3-contributor / Cline, Log 902):
+# el PROJECT_ROOT se calculaba solo desde la UBICACION del script
+# (HERE/../..), ignorando el cwd. Un runner que copiara el repo (CI) o un test
+# con tempdir veia bump_version leer/escribir SIEMPRE el project.godot del repo
+# real. Ahora: si el cwd contiene un project.godot con config/version=, se usa
+# ese arbol (cwd-first); si no, se cae al layout clasico HERE/../...
+# Test afectado: tools/ci/test_bump_version.py (7/11 -> expect 11/11).
 
 import os
 import sys
@@ -23,6 +31,44 @@ PROJECT_GODOT = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "project.go
 COPYRIGHT_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "legal", "copyright.json")
 CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
 POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
+
+
+def _root_desde_cwd() -> Optional[str]:
+    """Si el cwd es un arbol de proyecto con config/version=, devolverlo (cwd-first)."""
+    cwd = os.path.abspath(os.getcwd())
+    for root in (cwd, os.path.dirname(cwd)):
+        pg = os.path.join(root, "game", "isla-ancestral", "project.godot")
+        if os.path.exists(pg):
+            try:
+                with open(pg, "r", encoding="utf-8") as f:
+                    for line in f:
+                        if re.match(r'^config/version="\d+\.\d+\.\d+', line.strip()):
+                            return root
+            except OSError:
+                pass
+    return None
+
+
+_CWD_ROOT = _root_desde_cwd()
+if _CWD_ROOT:
+    PROJECT_ROOT = _CWD_ROOT
+    PROJECT_GODOT = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "project.godot")
+    COPYRIGHT_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "legal", "copyright.json")
+    CHANGELOG_MD = os.path.join(PROJECT_ROOT, "CHANGELOG.md")
+    POSTLAUNCH_JSON = os.path.join(PROJECT_ROOT, "game", "isla-ancestral", "data", "operaciones", "postlaunch_checks.json")
+
+
+
+def _get_current_version_str() -> Optional[str]:
+    """Devuelve la version cruda tal como esta escrita (con sufijo, ej '0.0.0-dev')."""
+    if not os.path.exists(PROJECT_GODOT):
+        return None
+    with open(PROJECT_GODOT, "r", encoding="utf-8") as f:
+        for line in f:
+            m = re.match(r'^config/version="([^"]+)"', line.strip())
+            if m:
+                return m.group(1)
+    return None
 
 
 def _git(*args: str) -> str:
@@ -77,9 +123,11 @@ def _set_version_in_project_godot(new_version: str, dry_run: bool) -> Tuple[bool
 
 
 def _set_version_in_copyright_json(new_version: str, new_year: int, dry_run: bool) -> Tuple[bool, str]:
-    """Actualiza year en copyright.json para todos los elementos."""
+    """Actualiza year en copyright.json para todos los elementos.
+    Ausente = skip tolerante (no es error: un repo sin copyright.json no debe
+    romper el bump de version; FIX Log 902)."""
     if not os.path.exists(COPYRIGHT_JSON):
-        return False, f"copyright.json no existe"
+        return True, "copyright.json ausente — skip"
     with open(COPYRIGHT_JSON, "r", encoding="utf-8") as f:
         data = json.load(f)
     if "elementos" not in data:
@@ -159,7 +207,8 @@ def main() -> int:
         return 1
     new_version_tuple = bump_semver(current, args.kind)
     new_version = f"{new_version_tuple[0]}.{new_version_tuple[1]}.{new_version_tuple[2]}"
-    old_version = f"{current[0]}.{current[1]}.{current[2]}"
+    _old_raw = _get_current_version_str()
+    old_version = _old_raw if _old_raw else f"{current[0]}.{current[1]}.{current[2]}"
     new_year = datetime.now().year
     print(f"[bump] {old_version} -> {new_version} ({args.kind})")
     if args.dry_run:

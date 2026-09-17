@@ -39,7 +39,7 @@
 ### TD-001: Voxel Addon sin soporte Web (WASM)
 - **Prioridad:** Alta
 - **Estado:** Abierta
-- **Dueño:** ox-alpha / Agente Voxel
+- **Dueño:** Agente Voxel
 - **Estimación:** 2-4 semanas (requiere fork/addon alternativo)
 - **Módulo Afectado:** M04 Game Engine, M13 Herramientas, M27 Islas del Mundo
 - **Fecha Creación:** 2026-08-25
@@ -49,7 +49,7 @@
 ### TD-002: Bootstrap deferred scene loading - race condition potencial
 - **Prioridad:** Media
 - **Estado:** Abierta
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 4-8 horas
 - **Módulo Afectado:** M07 Arquitectura (Bootstrap)
 - **Fecha Creación:** 2026-08-26
@@ -59,7 +59,7 @@
 ### TD-003: VillagerManager - iteración O(n) en _process para 100+ NPCs
 - **Prioridad:** Media
 - **Estado:** Abierta
-- **Dueño:** ox-alpha / Agente M64 IA NPC
+- **Dueño:** Agente M64 IA NPC
 - **Estimación:** 1-2 días
 - **Módulo Afectado:** M19 NPC y Vecinos, M64 IA NPC
 - **Fecha Creación:** 2026-08-27
@@ -69,7 +69,7 @@
 ### TD-004: EconomyManager - anti-grind band caps hardcoded en test
 - **Prioridad:** Baja
 - **Estado:** En Progreso
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 2-4 horas
 - **Módulo Afectado:** M38 Economía
 - **Fecha Creación:** 2026-08-26
@@ -79,7 +79,7 @@
 ### TD-005: SaveManager - falta validación de checksum en saves
 - **Prioridad:** Media
 - **Estado:** Abierta
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 4-6 horas
 - **Módulo Afectado:** M59 Guardado
 - **Fecha Creación:** 2026-08-25
@@ -89,7 +89,7 @@
 ### TD-006: EventBus - 9 dominios sin documentación de contrato
 - **Prioridad:** Baja
 - **Estado:** Abierta
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 2-3 horas
 - **Módulo Afectado:** M07 Arquitectura (EventBus)
 - **Fecha Creación:** 2026-08-26
@@ -99,7 +99,7 @@
 ### TD-007: ItemDatabase - búsqueda lineal O(n) en get_item()
 - **Prioridad:** Baja
 - **Estado:** Abierta
-- **Dueño:** ox-alpha / Agente M159 Catálogo
+- **Dueño:** Agente M159 Catálogo
 - **Estimación:** 1-2 horas
 - **Módulo Afectado:** M159 Catálogo de Ítems
 - **Fecha Creación:** 2026-08-24
@@ -109,7 +109,7 @@
 ### TD-008: CodeQualityCheck - falsos positivos en complejidad ciclomática
 - **Prioridad:** Baja
 - **Estado:** Abierta
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 2-4 horas
 - **Módulo Afectado:** M111 Código de Calidad
 - **Fecha Creación:** 2026-08-28
@@ -119,7 +119,7 @@
 ### TD-009: Pre-commit hooks - requieren Godot instalado localmente
 - **Prioridad:** Media
 - **Estado:** Abierta
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Estimación:** 4-8 horas
 - **Módulo Afectado:** M111 Código de Calidad, M118 CI/CD
 - **Fecha Creación:** 2026-08-28
@@ -129,7 +129,7 @@
 ### TD-010: Falta tests de integración cross-módulo (M14+M38+M39)
 - **Prioridad:** Media
 - **Estado:** Abierta
-- **Dueño:** ox-alpha / Agente M112 Testing
+- **Dueño:** Agente M112 Testing
 - **Estimación:** 1-2 días
 - **Módulo Afectado:** M112 Testing Automático, M14 Inventario, M38 Economía, M39 Tiendas
 - **Fecha Creación:** 2026-08-26
@@ -144,21 +144,21 @@
 - **Prioridad:** Alta (era)
 - **Estado:** Resuelta
 - **Resuelto:** 2026-08-28
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Notas:** `TimeCalendar` implementado con tick 1:40 (1 seg real = 40 seg juego), anti-drift accumulador, pausa/avanzar_hasta, EventBus calendar + ISaveProvider M59. Test 13/13 OK.
 
 ### TD-R002: M14 Inventario - class_name ItemData colisión con M159
 - **Prioridad:** Alta (era)
 - **Estado:** Resuelta
 - **Resuelto:** 2026-08-26
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Notas:** Renombrado `ItemData` (M14) a `InventoryItemData` para evitar colisión con `ItemData` de M159 Catálogo. Contrato `/root/Inventario` verificado.
 
 ### TD-R003: M38 Economía - PriceManager anti-arbitraje/anti-grind
 - **Prioridad:** Alta (era)
 - **Estado:** Resuelta
 - **Resuelto:** 2026-08-26
-- **Dueño:** ox-alpha
+- **Dueño:** Sin asignar (ox-alpha inactivo 2026-09-14)
 - **Notas:** `PriceManager` implementado con precios dinámicos, clamp MAX_SALDO, descuento amistad verificado, test_loop_economico.gd 14/14 OK.
 
 ---

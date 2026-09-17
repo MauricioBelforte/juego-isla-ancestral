@@ -28,7 +28,8 @@ def main() -> int:
                 f.write(f'config/version="{initial_ver}"\n')
             r = subprocess.run(
                 ["python", script, kind, "--dry-run"],
-                capture_output=True, text=True, timeout=10, cwd=tmp
+                capture_output=True, text=True, timeout=10, cwd=tmp,
+                encoding="utf-8", errors="replace",
             )
             tests.append((r.returncode == 0, f"{test_name}: exit {r.returncode}"))
             tests.append((f"{initial_ver} -> {expected_new}" in r.stdout, f"bump {initial_ver} -> {expected_new}"))

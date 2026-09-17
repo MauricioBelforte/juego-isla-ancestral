@@ -35,7 +35,7 @@ Todo vive en `tools/mcp/godot-mcp/scripts-reutilizables/` y usa el venv del proy
 1. **Las capturas se guardan TODAS durante el desarrollo** (directiva del usuario, AGENTS.md §24): nunca sobrescribir, cada captura es un archivo nuevo con timestamp. Mínimo conservar anterior + actual para comparativas de bugs.
 2. **Las capturas NO se versionan en git** (`**/capturas/` en `.gitignore`).
 3. **Nomenclatura:** `cap_{ID}_{AAAA-MM-DD_HH-MM-SS}[_nota].png` dentro de `capturas/{ID-Modulo}-Nombre/` — `cap_godot.py` lo hace automático con `--modulo`.
-4. Antes de codificar, leer `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` y `07-GUIA-GODOT.md` (AGENTS.md §26).
+4. Antes de codificar, leer `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` y `GUIA-GODOT/INDICE.md` (AGENTS.md §26).
 
 ### Estado
 

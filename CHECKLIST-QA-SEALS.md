@@ -21,6 +21,8 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 84 | Musica-Y-Audio-Legal | 883 | 2026-09-13 | headless | 8 checks, 0 fallos |
 | 105 | Telemetria-De-Gameplay | 935 | 2026-09-16 | headless | re-verif sec21.8 iter.7 (Log 926, DeepSeek-V4.1-Flash): 4 suites x3 EXIT 0 (test_telemetry 16/0, iter5 10/0, iter6 11/0, iter7 27/0), 0 SCRIPT ERROR en scripts/telemetry/; CHECKS_MINIMOS 16/10/11 + flag _fin() iter7; quality.yml 251-254; verificar_checklist.py 120/0/45 |
 | 124 | Contenido-Generado-Por-Usuarios | 936 | 2026-09-16 | headless | re-verif sec21.8 iter.2 (Log 905, DeepSeek-V4.1-Flash): test_ugc_m124 16/0 x3 + test_ugc_m124_iter2 85/0 x3 (EXIT 0, 0 SCRIPT ERROR en scripts/ugc/); guardian anti-falso-verde por marcadores de bloque (_fin A-F en _vistos + _verificar_marcadores) + watchdog; 05-Checklist 83/25/0=108 (coincide CHECKLIST-GLOBAL 83/108) |
+| 60 | Datos-Y-Serializacion | 937 | 2026-09-16 | headless | re-verif sec21.8 iter.4 (Log 916, DeepSeek-V4.1-Flash): 3 suites x3 EXIT 0 (base 94/0, iter3 132/0, iter4 152/0 = 378 checks, 0 fallos, 0 SCRIPT ERROR); guardian anti-falso-verde probado (sonda bloque D -> 128/1 EXIT 1); quality.yml 215/219/227; verificar_checklist.py 188/4/4=196 |
+| 103 | Logging | 938 | 2026-09-16 | headless | re-verif sec21.8 iter.1 (Log 918, DeepSeek-V4.1-Flash): test_logging_m103_iter1 131/0 x3 + regresion test_logger 14/0 x3 + test_logging_m103 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); guardian anti-falso-verde probado (sonda bloque D -> 131->122 EXIT 1); 7 defectos reales corregidos (BUG-041 falso positivo); quality.yml 236; verificar_checklist.py 167/12/0=179 |
 | 116 | Instalador | 883 | 2026-09-13 | headless | 2 tests, 33 checks, 0 fallos |
 | 123 | Modding | 883 | 2026-09-13 | headless | 69 checks, 0 fallos |
 | 126 | Marketing-Legal | 884 | 2026-09-13 | headless | 9 checks, 0 fallos |
@@ -43,4 +45,4 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 127 | Copyright-Del-Juego | 883 | `test_copyright_m127.gd` falla por aserciones obsoletas → BUG-033, delegado a DeepSeek-V4.1-Flash |
 | 148 | Lore-Ambiental | 886 | 92 `[ ]` reales (data-only) → sin sello; delegado a modelo de creatividad (§11.3) |
 
-**Total sellos limpios:** 18 · **Notas:** 4 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) = 18/18.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
+**Total sellos limpios:** 20 · **Notas:** 4 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) = 20/20.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).

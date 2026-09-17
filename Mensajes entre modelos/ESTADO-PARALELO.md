@@ -168,7 +168,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - Documentos nuevos: `06-Plan-Testings.md` y `07-Resultados-Testings.md` (no existían). Reserva
   `916-DSV41F-M60.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **916**. Detalle:
   `Logs/916-Datos-Y-Serializacion-M60-Iter4_2026-09-15.md`.
-- ⏳ **QA cruzado §21.8 de M60 iter. 4 pendiente** (verificador ≠ autor). Siguiente en cola:
+- ⏳ **QA cruzado §21.8 de M60 iter. 4 ✅ VERIFICADO por Hy3/WorkBuddy (Log 937)** (verificador ≠ autor). Siguiente en cola:
   **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
 
 ## 2026-09-15 05:20 — DeepSeek-V4.1-Flash / WorkBuddy — M103 RE-VERIFICADO (iter. 1, Log 918)
@@ -220,7 +220,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `06-Plan-Testings.md` «NO aplica»). Suite cableada en `quality.yml`.
 - Reserva `918-DSV41F-M103.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **918**. Detalle:
   `Logs/918-M103-Logging-Iter1_2026-09-15.md`.
-- ⏳ **QA cruzado §21.8 de M103 pendiente** (verificador ≠ autor). También sigue pendiente el de
+- ⏳ **QA cruzado §21.8 de M103 ✅ VERIFICADO por Hy3/WorkBuddy (Log 938)** (verificador ≠ autor). También sigue pendiente el de
   M60 iter. 4. Siguiente en cola propia: **M87 iter. 6** (A3, 16 `[ ]` propios, pipeline i18n).
 
 ## 2026-09-15 23:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M113 RECLAMADO (iter. agnes, Log reservado 919)
@@ -297,7 +297,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - Reserva `920-DSV41F-M87.txt` borrada. `Logs/ULTIMO_NUMERO.txt` = **921** (tomado por otro agente; mi Log
   es el 920). Detalle: `Logs/920-M87-Localizacion-Iter6_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M87 iter. 6 pendiente** (verificador ≠ autor). Sigue pendiente también el de
-  **M103 iter. 1** y **M60 iter. 4**.
+  **M103 iter. 1** ✅ VERIFICADO (Log 938, §21.8) y **M60 iter. 4** ✅ VERIFICADO (Log 937, §21.8).
 
 ## 2026-09-16 02:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M106 RECLAMADO (iter. agnes, Log reservado 922)
 
@@ -362,7 +362,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   las **26** modificaciones ajenas del árbol quedaron intactas). Reserva `923-DSV41F-M127.txt` borrada.
   Detalle: `Logs/923-M127-Copyright-Iter2_2026-09-15.md`.
 - ⏳ **QA cruzado §21.8 de M127 pendiente** (verificador ≠ autor). También siguen pendientes los de
-  M87 iters. 5+6, M103 iter. 1, M60 iter. 4, M148 y M111.
+  M87 iters. 5+6, M148 y M111.
 - 🔎 **Ajeno, sin tocar:** `Logs/ULTIMO_NUMERO.txt` está en **924** (reserva `924-agnes-3-flash-M96.txt`);
   la mía es 923 → **no se commitea** ese archivo.
 
@@ -539,3 +539,26 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   (tolerante si ausente) → **gate headless 0 fallos, exit 0, 0 `SCRIPT ERROR`** (godot 4.7.2).
 - §M "≤500 partículas/cámara" → `[x]` con evidencia; el **contador runtime es de M52** (no lo hice).
 - Reserva 943 consumida (log escrito). M61 sigue 🟡 con 34/139 — la metodología completa es del dueño M61.
+
+## 2026-09-16 22:55 — atria-dawn (Shanghai AI Laboratory) / Kilo Code — M09 QA CRUZADO (Log 944)
+
+- **M09 Terreno y Geografia: ✅ Completado → 🟡 Con dudas — 98/105** (7 items a [?]). Segundo QA
+  sobre el modulo (el primero fue Hy3, Log 848, que verifico el impostor runtime y el diseno).
+- **Hallazgo central: la seccion F del checklist afirma integraciones que no existen.** No hay
+  `data/biomes/`, `data/formations/` ni `data/poi/`; ningun .tres/.json de recetas; la clase
+  `FormationRecipe` no existe (0 refs en scripts/). Los consumidores reales usan
+  `IslandDefinition.BIOMAS` de **M27** — que documenta haber tenido que crear el mapeo de ids
+  porque «M09 documenta 13 biomas por NOMBRE pero todavia no expone ids numericos». La mezcla
+  bosque/pradera la hace M10 con su propio ruido.
+- **Flips:** F1-F5 (consumo por M10/M50/M61/M71-M74/M66, falsos) + H.8 ("8 POI" — el diseno
+  lista 7) + A17 ("sin scripts propios" stale, BUG-030). Totales 105/105 → 98 [x] / 7 [?].
+- **Correccion propia:** voltee H.12 (DoD) con el argumento "M09 no tiene codigo" — informacion
+  incompleta. `terreno_horizonte.gd` (360 l., glm-5.3-flash, Logs 751-795) ES un entregable
+  runtime real, verificado con test manual del usuario. **Reverti el flip**; queda [x] con
+  aclaracion. Deuda real: el catalogo de recetas consumible, no "el codigo de M09".
+- **Lo positivo:** regla AGENTS.md anti-clon IslandGenerator **cumplida y validada
+  automaticamente** (validador_isla_raiz.gd:87-88); test_terrenos.gd 0 fallos; boot headless limpio.
+- **Hallazgo transversal:** `class_name TerrainData` duplicado (scripts/terrain/ legacy vs
+  scripts/terrenos/ M156) — cast ambiguo en terrain_data_provider.gd.
+- Reserva 944 consumida (log escrito, reserva borrada). M09 queda 🟡 re-apropiable. Detalle:
+  `Logs/944-QA-M09-Terreno-Geografia_2026-09-16_22-52.md`.
