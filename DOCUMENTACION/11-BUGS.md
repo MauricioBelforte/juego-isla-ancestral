@@ -1969,3 +1969,84 @@ de M38/M159, sigue delegado).
 
 - `game/isla-ancestral/scripts/ui/theme/theme_ux.gd` (func `_get_all_tweens`)
 - `game/isla-ancestral/scripts/ui/layers/dialog_layer.gd` (func duplicada eliminada)
+---
+
+## BUG-049: `reservar_log.py` CIEGO a los numeros de 1, 2 y 4+ digitos (98 logs invisibles)
+
+- **Fecha de reporte:** 2026-09-18 03:30
+- **Modulo(s) afectado(s):** Transversal — `scripts/reservar_log.py` (guardian de reservas de `Logs/`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Descripcion del problema:**
+Los dos regex del guardian exigian **exactamente 3 digitos**:
+
+```python
+RE_LOG = re.compile(r'^(\d{3})-.*\.md$')
+RE_RES = re.compile(r'^(\d{3})-.*\.txt$')
+```
+
+Con el protocolo v3 (`Logs/NUMEROS_DISPONIBLES.txt` = **1000-1500**) **todo log nuevo tiene 4
+digitos**, asi que a partir de 1000 el guardian queda ciego. Y no era solo el futuro: tambien
+quedaban fuera los logs de **1 y 2 digitos** que ya existian en `Logs/`.
+
+**Pasos para reproducir:**
+1. `python scripts/reservar_log.py --estado` → informa `reservas/*.txt : 0`.
+2. `ls Logs/reservas/` → hay `1000-atria-dawn-M13-QA.txt`.
+3. Contar `Logs/*.md` aplicando cada regex por separado.
+
+**Comportamiento esperado:**
+`--estado` debe ver TODOS los logs y TODAS las reservas, y detectar `RESERVA DOBLE` / `COLISION`
+para cualquier numero, no solo para los de 3 digitos.
+
+**Comportamiento actual (medido, Log 986):**
+
+```
+--estado  ANTES :  Logs/*.md : 860 numeros     reservas/*.txt : 0
+--estado  DESPUES: Logs/*.md : 958 numeros     reservas/*.txt : 1
+```
+
+→ **98 logs** y **1 reserva** eran invisibles al guardian. `RESERVA DOBLE` y `COLISION` no se
+evaluaban para ninguno de esos numeros: el script parecia sano (`Sin conflictos de numeracion`)
+mientras no miraba casi una decima parte de `Logs/`.
+
+**Entorno / Contexto:**
+- Plataforma: PC (Windows), Python 3.13
+- Ocurre desde: creacion del script (Log 975, commit `c5f588d`)
+- Frecuencia: Siempre
+
+**Evidencia:**
+- `Logs/reservas/1000-atria-dawn-M13-QA.txt` existia y `--estado` informaba `reservas/*.txt : 0`.
+- Conteo directo por regex: `\d{3}` → **860** archivos; `\d+` → **958** archivos.
+- Con el fix, `--estado` sigue dando **0 conflictos** (no hay colisiones reales hoy), pero ahora las
+  mira todas.
+
+**Intentos de solucion ya probados (si aplica):**
+- Se detecto al verificar el cierre del ciclo de M127 (no por un test, sino por **desconfiar de un
+  "0"**: `reservas/*.txt : 0` contradecia un `ls` que mostraba un archivo).
+
+**Referencias cruzadas:**
+- Guia 07 §8: no
+- Modulo/documentacion relacionada: trampa **72** del skill `isla-ancestral-ciclo-modulo`;
+  `.workbuddy-ai/memory/MEMORY.md` §Reglas duras ("Reservar log = `reservar_log.py`").
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-18 03:30
+
+**Resolucion (completar cuando se resuelva):**
+- [→] Como se corrigio: `scripts/reservar_log.py` — los dos regex pasan a `^(\d+)-.*\.(md|txt)$`,
+  con un comentario que explica por que `\d{3}` era el bug (para que nadie lo "optimice" de vuelta).
+- [→] Archivos/commits modificados: `scripts/reservar_log.py` (2 regex + 5 lineas de comentario).
+- [x] Log del proyecto: **Log 986** (M127 iter. 3) — hallado en la verificacion final del ciclo.
+- [x] Verificado por: el autor, **por medicion** (`--estado` 860 → 958; `reservas` 0 → 1) y
+  confirmando que con el fix el veredicto sigue siendo `Sin conflictos de numeracion`.
+
+**Hallazgo relacionado — NO corregido (decision de protocolo, no unilateral):**
+`--reservar` sigue asignando `max(ULTIMO_NUMERO, Logs/*.md, reservas/*.txt) + 1` y **no toca**
+`Logs/NUMEROS_DISPONIBLES.txt`. Con el fix, `siguiente_libre()` devuelve **1001** (porque atria
+reservo 1000) — y **1001 sigue listado** en `NUMEROS_DISPONIBLES.txt`. Un agente que siga el
+protocolo v3 tomaria 1001 del archivo, y otro que use `--reservar` tambien: **colision**. Integrar
+`--reservar` con la lista v3 es una decision de protocolo → se **reporta**, no se rediseña solo.

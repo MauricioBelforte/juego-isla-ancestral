@@ -32,8 +32,13 @@ LOGS = os.path.join(RAIZ, 'Logs')
 RESERVAS = os.path.join(LOGS, 'reservas')
 ULTIMO = os.path.join(LOGS, 'ULTIMO_NUMERO.txt')
 
-RE_LOG = re.compile(r'^(\d{3})-.*\.md$')
-RE_RES = re.compile(r'^(\d{3})-.*\.txt$')
+# OJO: \d{3} dejaba CIEGO al guardián a partir de 1000. Con el protocolo v3
+# (Logs/NUMEROS_DISPONIBLES.txt = 1000-1500) TODO log nuevo tiene 4 dígitos, así
+# que `reservas_por_numero()` y `logs_por_numero()` no los veían: ni RESERVA
+# DOBLE ni COLISION se detectaban para NNNN. Medido el 2026-09-18 (Log 986):
+# `1000-atria-dawn-M13-QA.txt` existía y --estado informaba "reservas/*.txt: 0".
+RE_LOG = re.compile(r'^(\d+)-.*\.md$')
+RE_RES = re.compile(r'^(\d+)-.*\.txt$')
 
 
 def logs_por_numero():
