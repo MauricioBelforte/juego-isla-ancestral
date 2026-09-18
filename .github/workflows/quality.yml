@@ -266,7 +266,12 @@ jobs:
           godot --headless --script scripts/build/test_build_m117.gd 2>&1 || true
           # M116 validador del instalador (V3 AppVersion sync, Log 946): evita
           # que .iss y project.godot se desalineen en el futuro.
-          godot --headless --script scripts/build/test_instalador_m116.gd 2>&1 || true
+          # iter. 3 (Log 1014): GATE DURO - se quito `|| true`. El test es
+          # determinista (15 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR x3) y el
+          # validador corre 61 checks sobre el repo real; `|| true` lo dejaba sin
+          # poder fallar el build (familia trampa 75: el verde lo producia la
+          # tuberia, no el programa).
+          godot --headless --script scripts/build/test_instalador_m116.gd 2>&1
           # M83 Licencias (Log 974 agnes-3): test del validador de catálogo + del
           # nuevo scanner (classificar/detectar/scan_addons). Gate duro: ambos
           # deterministas y verdes (boot-time UI errors preexistentes no afectan
