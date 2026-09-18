@@ -243,3 +243,22 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       eliminado, los bytes ajenos devueltos a *unstaged*, mi gate intacto en `fd2a791`. **Lección
       reforzada:** en worktree compartido, `git commit` con lista explícita **no basta** si un tercero
       commitea el índice antes — el lote se cierra **en el mismo instante** en que se stagea.
+
+- [x] Log reservado: **1011** — M60 iter. 5: evaluación del ítem 168 (reutilización de dicts/buffers) (2026-09-18)
+      **Resultado: la optimización pedida se EVALUÓ y resultó CONTRAPRODUCENTE. NO se implementó; el
+      código de producción quedó SIN CAMBIOS** (`serializador.gd` byte a byte igual a HEAD).
+      Arnés propio `test_datos_m60_iter5.gd` (5 bloques, **40 checks ×3**, 0 fallos, 0 `SCRIPT ERROR`):
+      las 3 variantes del encoder binario y las 2 de `a_plano` dan salida **idéntica** (oráculo
+      independiente escrito a mano + equivalencia entre variantes + round-trip + **sin aliasing**),
+      pero la reutilización es **1,08-1,15× MÁS LENTA** (suma de los mismos 3 casos: 410-459 ms
+      producción vs 472-499 ms reutilización; mínimo de 5 rondas intercaladas, ×3 corridas).
+      Causa medida: `PackedByteArray.resize()` **ya crece amortizado** (los ~6 `resize()` por chunk no
+      eran el coste) y el reuso de dicts añade `keys()`/`erase()`/`get()`. BULK
+      (`to_byte_array()`) **tampoco es fiable**: gana en una corrida y pierde en otra.
+      ⚠️ **Trampa metodológica nueva (importante):** la 1ª versión del arnés medía cada variante **una
+      sola vez y en orden fijo** → el warm-up castigaba a la primera e **invirtió el veredicto**
+      (llegó a dar la reutilización como **1,4× más rápida**). Con rondas intercaladas + mínimo el
+      resultado se dio vuelta y quedó estable. **Un benchmark de una sola pasada y orden fijo no
+      prueba nada.** Casi reporto una conclusión falsa.
+      Regresión: base **94/0** · iter3 **132/0** · iter4 **152/0**, los tres con 0 `SCRIPT ERROR`.
+      **M60 queda 189/196 · 3 `[ ]` (las 3 de M08) · 4 `[?]`** → **sin trabajo propio pendiente**.

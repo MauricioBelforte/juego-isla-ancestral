@@ -224,7 +224,7 @@
 - [x] Optimización: binario para voxel por densidad de datos [M]
 - [x] Optimización: compresión de voxel bajo demanda según tamaño [C]
 - [x] Optimización: carga perezosa de catálogos (solo al necesitarlos) [S]
-- [ ] Optimización: reutilización de dicts y buffers en bucles de guardado [S] -- iter. 4: NO implementada; se deja abierta (no se marca por simpatía).
+- [x] Optimización: reutilización de dicts y buffers en bucles de guardado [S] -- iter. 5 (Log 1011): **evaluada por medición y DESCARTADA — el código de producción NO se cambió.** Arnés propio `test_datos_m60_iter5.gd` (5 bloques, **40 checks ×3**, 0 fallos, 0 SCRIPT ERROR): las 3 variantes del encoder binario y las 2 de `a_plano` producen salida **idéntica** (oráculo independiente + equivalencia entre variantes + round-trip + sin aliasing), pero la reutilización resulta **1,08-1,15× MÁS LENTA** que la implementación actual (suma de los mismos 3 casos: 410-459 ms producción vs 472-499 ms reutilización; mínimo de 5 rondas intercaladas, ×3 corridas). Causa medida: `PackedByteArray.resize()` **ya crece de forma amortizada** (los ~6 `resize()` por chunk no eran el coste real) y el reuso de dicts añade el libro mayor de `keys()`/`erase()`/`get()`. La variante BULK (`PackedInt32Array.to_byte_array()`) **tampoco es fiable**: gana en una corrida y pierde en otra. **No se envía una pesimización**; el arnés queda como evidencia y guarda de regresión.
 - [x] Optimización: checksum sobre flujo sin copias innecesarias [S]
 - [x] Optimización: IO en hilo secundario, UI nunca bloqueada [M]
 - [x] Optimización: medición de duraciones con Time.get_ticks_msec() [S]

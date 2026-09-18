@@ -182,7 +182,7 @@
 - [x] T-165 Optimización: binario para voxel por densidad de datos [M]
 - [x] T-166 Optimización: compresión de voxel bajo demanda según tamaño — iter. 3. [C]
 - [x] T-167 Optimización: carga perezosa de catálogos (solo al necesitarlos) — iter. 3 índice sin `load()`. [S]
-- [ ] T-168 Optimización: reutilización de dicts y buffers en bucles de guardado [S]
+- [x] T-168 Optimización: reutilización de dicts y buffers en bucles de guardado [S] -- iter. 5 (Log 1011): **evaluada por medición y DESCARTADA** — contraproducente (1,08-1,15x MÁS LENTA que la implementación actual; arnés `test_datos_m60_iter5.gd`, 40 checks x3). **Código de producción SIN cambios**; el arnés queda como evidencia.
 - [x] T-169 Optimización: checksum sobre flujo sin copias innecesarias [S]
 - [x] T-170 Optimización: IO en hilo secundario, UI nunca bloqueada [M]
 - [x] T-171 Optimización: medición de duraciones con Time.get_ticks_msec() [S]

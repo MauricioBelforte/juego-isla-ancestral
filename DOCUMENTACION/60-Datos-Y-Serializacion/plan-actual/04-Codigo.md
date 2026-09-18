@@ -333,3 +333,42 @@ Los ítems 32/56/69/194 quedan `[x]` por el lado de M60: las llamadas son correc
 - **Si `VERSION_ACTUAL` sube:** registrar la migración en `MIGRACIONES` usando los patrones nuevos; jamás editar las existentes. La rama de log `migrado vX -> vY` se activará sola.
 - **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (132) · `test_datos_m60_iter4.gd` (152). Los tres deben correr ×3 y con `grep "SCRIPT ERROR"` = 0.
 - **Regresión conocida:** `borrar_slot` ahora devuelve `false` para un slot in-range vacío. Si algún consumidor dependía del `true`, debe ajustarse.
+
+---
+
+## Notas del Agente — iter. 5 (2026-09-18)
+
+Ítem 168 del checklist: *"Optimización: reutilización de dicts y buffers en bucles de guardado [S]"*.
+
+### Lo que hice
+- **Evalué la optimización pedida con un arnés propio** (`test_datos_m60_iter5.gd`, 5 bloques, **40 checks ×3**, 0 fallos, 0 `SCRIPT ERROR`) en vez de implementarla a ciegas.
+- El arnés **no toca producción**: define localmente las variantes (buffer reutilizado, dict de destino reutilizado, BULK) y las compara contra `Serializer` **tal cual está**.
+- Bloques A/B/C/D = aserciones duras: equivalencia **byte a byte con un oráculo independiente** (codificador little-endian escrito a mano, sin `encode_s32`), round-trip, equivalencia entre las 3 variantes del encoder y las 2 de `a_plano`, y **sin aliasing** de la entrada.
+- Bloque E sólo **mide**: 5 rondas intercaladas, mínimo por variante, ×3 corridas.
+
+### Resultado (medido, no afirmado)
+| caso | producción (actual) | reuso de buffer/dict | BULK |
+|---|---|---|---|
+| 6000 chunks × 1 vóxel | **52-64 ms** | 61-80 ms | 51-69 ms |
+| 400 chunks × 60 vóxeles | **38-49 ms** | 44-50 ms | 40-41 ms |
+| payload de 60 entidades | **315-369 ms** | 339-394 ms | — |
+
+Suma de los **mismos 3 casos**, mínimo de 5 rondas: **producción 410-459 ms vs reutilización 472-499 ms** → la reutilización es **1,08-1,15× MÁS LENTA**.
+
+### Por qué la premisa era falsa
+- **`PackedByteArray.resize()` ya crece de forma amortizada.** Los ~6 `resize()` por chunk que la optimización pretendía eliminar **no eran el coste**; añadir una pasada previa para calcular el tamaño exacto cuesta más de lo que ahorra.
+- **El reuso de dicts añade libro mayor:** `keys()` (que asigna un Array nuevo), `erase()` y `get()` por clave cuestan más que asignar el árbol nuevo en GDScript.
+- **BULK (`PackedInt32Array.to_byte_array()`) no es fiable:** gana en una corrida (40 vs 49 ms) y pierde en otra (41 vs 38 ms). Perfil inestable → no se adopta.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **No existe una versión de la reutilización que gane.** No es que mi implementación sea mejorable: la premisa (que reusar ahorra) no se sostiene en este motor. **No la implementé y no se cambió el código de producción.**
+- **La medición es de un entorno headless** (Godot 4.7.2, Windows). El orden de magnitud (reuso ≥ producción) es lo que se afirma, no los valores exactos.
+- **No medí el efecto en el juego real** (presión de GC / frame-time): el arnés mide *throughput*, no latencia de frame.
+
+### Trampa metodológica (nueva)
+La **primera** versión del arnés medía cada variante **una sola vez y en orden fijo**. Eso castiga a la primera con el warm-up y **invirtió el veredicto** (llegó a dar la reutilización como 1,4× *más rápida*). Al re-medir con **rondas intercaladas y mínimo** el resultado se dio vuelta y quedó estable en 3 corridas. **Lección: un benchmark de una sola pasada y orden fijo no prueba nada.**
+
+### Recomendaciones para el próximo agente
+- **No reabrir el ítem 168 sin una medición nueva.** El arnés está ahí para eso. Si cambia la forma de los datos (chunks con muchos más vóxeles, payloads mucho más grandes), **re-medir antes de concluir**.
+- **Si algún día se busca un win real en el encoder**, el candidato medido es BULK, pero sólo cuando hay **muchos enteros por chunk**; hoy no es fiable.
+- **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (132) · `test_datos_m60_iter4.gd` (152) · `test_datos_m60_iter5.gd` (40). Los cuatro ×3 y con `grep "SCRIPT ERROR"` = 0.

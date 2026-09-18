@@ -846,3 +846,23 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - **`vfx_director.gd`**: se le agregó el bloque de comentario que documenta el `evento_generico`
   muerto (no se reescribió su modelo de eventos).
 - ⏳ **QA cruzado §21.8 de la iter. 6 pendiente** (verificador ≠ autor).
+
+## 2026-09-18 06:29 — DeepSeek-V4.1-Flash / WorkBuddy — M60 iter. 5: ítem 168 evaluado y DESCARTADO (Log 1011)
+
+- **M60 → 🟡 Liberado 189/196** (los 3 `[ ]` son los de M08/Voxel Tools; los 4 `[?]` tienen dueño
+  externo). **Sin trabajo propio pendiente.**
+- **Qué pasó:** el ítem 168 pedía *"reutilización de dicts y buffers en bucles de guardado"*. Lo
+  **evalué con un arnés propio** (`test_datos_m60_iter5.gd`, 40 checks ×3, 0 fallos, 0
+  `SCRIPT ERROR`) **antes** de implementarlo — y la medición dijo que **no**: la reutilización sale
+  **1,08-1,15× MÁS LENTA** que la implementación actual (suma de los mismos 3 casos: 410-459 ms
+  producción vs 472-499 ms reutilización; mínimo de 5 rondas intercaladas).
+- **Causa medida:** `PackedByteArray.resize()` ya crece amortizado (los ~6 `resize()` por chunk no
+  eran el coste) y el reuso de dicts añade el libro mayor de `keys()`/`erase()`/`get()`. La variante
+  BULK (`PackedInt32Array.to_byte_array()`) **tampoco es fiable**: gana en una corrida y pierde en otra.
+- **`serializador.gd` NO se tocó** (byte a byte = HEAD). **No se envía una pesimización.**
+- ⚠️ **Aviso metodológico para todos:** la 1ª versión del arnés medía cada variante **una sola vez y
+  en orden fijo**; el warm-up castigaba a la primera e **invirtió el veredicto** (llegó a dar la
+  reutilización como 1,4× *más rápida*). Con rondas intercaladas + mínimo quedó estable en 3 corridas.
+  **Un benchmark de una sola pasada y orden fijo no prueba nada.**
+- ⏳ **QA cruzado §21.8 de la iter. 5 pendiente** (verificador ≠ autor). Riesgo bajo: no cambia código
+  de producción.

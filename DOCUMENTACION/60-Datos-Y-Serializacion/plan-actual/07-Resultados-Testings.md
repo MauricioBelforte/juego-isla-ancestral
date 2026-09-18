@@ -115,3 +115,38 @@ registrarlo. Que un test falle *dentro de mi suite* no prueba que el componente 
 Corregido en: `11-BUGS.md` (BUG-041 reclasificado), `04-Codigo.md`, `05-Checklist.md`,
 `06-Plan-Testings.md`, este archivo, el Log 916, `ESTADO-PARALELO.md`, `BACKLOG-MASTER.md`,
 `CHECKLIST-GLOBAL.md` y el código/comentarios del suite.
+
+## 9. iter. 5 — evaluación del ítem 168 (reutilización de dicts/buffers)
+
+**Qué es:** un **arnés de evaluación**, no una suite de regresión del módulo. Mide la optimización
+pedida por el ítem 168 comparándola contra `Serializer` **sin tocar producción**.
+
+**Resultado: 40 checks, 0 fallos, ×3 corridas, 0 `SCRIPT ERROR`, exit 0.**
+
+| bloque | qué prueba | checks |
+|---|---|---|
+| A | la implementación en producción coincide byte a byte con un **oráculo independiente** (codificador little-endian escrito a mano) | 9 |
+| B | round-trip `desde_binario_voxel(a_binario_voxel(x))` == x, idempotencia del codec | 8 |
+| C | equivalencia de las 3 variantes del encoder + el caso peligroso (buffer reusado con payload **más chico**) | 6 |
+| D | equivalencia de las 2 variantes de `a_plano` + reuso anidado real + cambios de forma + **sin aliasing** | 12 |
+| E | determinismo del JSON canónico + **medición** (informativa) | 3 |
+| — | guardián: los 5 bloques se completaron + piso de 34 checks | 2 |
+
+**Medición (mínimo de 5 rondas intercaladas, ×3 corridas; menor = mejor):**
+
+| caso | producción | reuso de buffer/dict | BULK |
+|---|---|---|---|
+| 6000 chunks × 1 vóxel | **52-64 ms** | 61-80 ms | 51-69 ms |
+| 400 chunks × 60 vóxeles | **38-49 ms** | 44-50 ms | 40-41 ms |
+| payload de 60 entidades | **315-369 ms** | 339-394 ms | — |
+
+**Veredicto: la reutilización es 1,08-1,15× MÁS LENTA.** No se implementó; **el código de producción
+quedó sin cambios**. Detalle del porqué y de la trampa metodológica en `04-Codigo.md` (iter. 5).
+
+⚠️ **Nota sobre la medición:** los tiempos son **informativos**, no aserciones — en CI son ruidosos.
+Lo que la suite garantiza de verdad es la **equivalencia** (bloques A-D): si alguien cambia el
+formato al "optimizar", el arnés lo detecta.
+
+**Regresión del resto del módulo (misma corrida):** `test_datos_m60.gd` **94/0** ·
+`test_datos_m60_iter3.gd` **132/0** · `test_datos_m60_iter4.gd` **152/0** — los tres con 0
+`SCRIPT ERROR` y exit 0.
