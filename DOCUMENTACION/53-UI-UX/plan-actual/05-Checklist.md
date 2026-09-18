@@ -200,7 +200,7 @@
 - [x] 04-Codigo creado y firmado (rutas, firmas clave, logs) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 - [x] Plan-actual copiado idéntico desde plan-inicial [S]
-- [ ] Plan de testings sugerido: navegación por 3 métodos, edge cases y rendimiento [M]
+- [x] Plan de testings sugerido: navegación por 3 métodos, edge cases y rendimiento [M]
 - [x] Módulo marcado delegable para implementación (tras M07, M11 y M57) [S]
 - [x] Acoplamiento verificado: gameplay, mundo y AI no importan res://ui [M]
 - [x] Checklist completo con mas de 110 items [S]

@@ -42,7 +42,7 @@
 | 1 | 53 | 53-UI-UX | 🟡 Con dudas | 130/158 | Alta | 28 | `53-UI-UX/checklist.md` — 82%, items restantes dependen de M57/M58/M63/M90 |
 | 2 | 160 | 160-Ubicaciones | 🟢 Disponible | 59/134 | Alta | 75 | `160-Ubicaciones/checklist.md` |
 | 3 | 156 | 156-Terrenos-Y-Movimiento | 🟢 Disponible | 10/302 | Alta | 292 | `156-Terrenos/checklist.md` |
-| 4 | 154 | 154-Vision-Del-Agente | 🔵 En curso | 155/157 | Media | 2 | `154-Vision/checklist.md` — casi completo |
+| 4 | 154 | 154-Vision-Del-Agente | ✅ | 155/155 | Media | 0 | `154-Vision/checklist.md` — ✅ completado |
 | 5 | 78 | 78-Legal-Propiedad-Intelectual | ✅ | 159/159 | Alta | 0 | `78-Legal-PI/` — ✅ completado |
 | 6 | 84 | 84-Musica-Y-Audio-Legal | 🔵 En curso | 77/100 | Alta | 23 | `84-Musica-Y-Audio-Legal/` — pendiente: edge cases, build logging |
 | 7 | 131 | 131-Creditos | 🔵 En curso | 60/103 | Media | 43 | `131-Creditos/` — pendiente: audio, easter eggs, i18n, performance |

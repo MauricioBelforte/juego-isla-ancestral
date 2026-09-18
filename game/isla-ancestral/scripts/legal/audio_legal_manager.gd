@@ -171,6 +171,49 @@ func validate_with_json_data() -> Array:
 
 ## --- Utilidades ---
 
+## M84: Modo dry-run — verifica sin generar outputs
+var _dry_run: bool = false
+
+func set_dry_run(active: bool) -> void:
+	_dry_run = active
+
+func is_dry_run() -> bool:
+	return _dry_run
+
+## M84: Logging de validación de build
+func validar_build() -> Dictionary:
+	var errores := validate_all_audio()
+	var resultado := {
+		"errores": errores,
+		"total_licencias": _licencias.size(),
+		"total_creditos": _creditos.size(),
+		"dry_run": _dry_run,
+		"timestamp": Time.get_datetime_string_from_system(),
+	}
+	if not _dry_run and errores.is_empty():
+		_generar_archivos_build()
+	 resultado["archivos_generados"] = not _dry_run and errores.is_empty()
+	return resultado
+
+func _generar_archivos_build() -> void:
+	var gen := AudioCreditsGenerator.new()
+	var ruta_credits := "res://build/AUDIO_CREDITS.txt"
+	gen.guardar_compacto(_creditos, ruta_credits)
+	var ruta_reporte := "res://build/AUDIO_LICENSE_REPORT.txt"
+	var file := FileAccess.open(ruta_reporte, FileAccess.WRITE)
+	if file:
+		file.store_string(gen.generar_reporte_licencias(_licencias))
+		file.close()
+
+## M84: Skip de validación en builds de desarrollo
+var _skip_validation: bool = false
+
+func set_skip_validation(skip: bool) -> void:
+	_skip_validation = skip
+
+func should_validate() -> bool:
+	return not _skip_validation
+
 
 func get_tracks_por_tipo(tipo: AudioLicense.AudioType) -> Array[AudioLicense]:
 	var resultado: Array[AudioLicense] = []
