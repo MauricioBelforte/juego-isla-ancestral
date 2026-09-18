@@ -27,7 +27,7 @@
 - [x] Definir tema: naturaleza (aves, viento, agua) → implementado: instrumentos ["piano", "cuerdas", "vientos"]
 - [x] Definir instrumentos: flauta, piano suave, cuerdas → implementado: en leitmotif aurora_motivo
 - [ ] Diseñar frecuencia: aparición en historia, interacciones importantes → pendiente: integration
-- [ ] Diseñar leitmotif: repetición con variación según contexto → implementado: variantes ["calm", "tension", "triumph"] pero falta integración
+- [x] Diseñar leitmotif: repetición con variación según contexto → implementado: variantes ["calm", "tension", "triumph"] pero falta integración
 - [ ] Diseñar trigger: Aurora aparece → leitmotif de Aurora → pendiente: integration
 - [ ] Diseñar trigger: Aurora habla → diálogo con leitmotif → pendiente: integration
 - [ ] Diseñar trigger: Aurora en peligro → leitmotif tensa → pendiente: integration
@@ -37,7 +37,7 @@
 - [x] Definir tema: energía (resonancia, campanas) → implementado: instrumentos ["cuerdas armónicas", "vibración", "eco"]
 - [x] Definir instrumentos: campanas, sintetizadores, bajo → implementado: en leitmotif resonancia_motivo
 - [ ] Diseñar frecuencia: uso de Resonancia, descubrimiento de tecnología → pendiente: integration
-- [ ] Diseñar leitmotif: repetición con variación según intensidad → implementado: variantes ["activate", "idle", "break"] pero falta integración
+- [x] Diseñar leitmotif: repetición con variación según intensidad → implementado: variantes ["activate", "idle", "break"] pero falta integración
 - [ ] Diseñar trigger: jugador usa Resonancia → sonido de Resonancia → pendiente: integration
 - [ ] Diseñar trigger: Resonancia se carga → sonido de carga → pendiente: integration
 - [ ] Diseñar trigger: Resonancia se activa → sonido de activación → pendiente: integration
@@ -47,7 +47,7 @@
 - [x] Definir tema: instrumento distintivo por Sello → implementado: leitmotif "aurora_motivo" asociado
 - [x] Definir instrumentos: cello, piano, flauta, etc. → implementado: en leitmotif aurora_motivo
 - [ ] Diseñar frecuencia: elección de Sello por el jugador → pendiente: integration
-- [ ] Diseñar leitmotif: repetición al recordar Sello → implementado: leitmotif asociado pero falta integración
+- [x] Diseñar leitmotif: repetición al recordar Sello → implementado: leitmotif asociado pero falta integración
 - [ ] Diseñar trigger: jugador elige Sello → sonido del Sello
 - [ ] Diseñar trigger: jugador recuerda Sello → leitmotif del Sello
 - [ ] Diseñar trigger: jugador completa Sello → variación del leitmotif → pendiente: integration
@@ -57,7 +57,7 @@
 - [x] Definir tema: oscuro (campanas distantes, bajo) → implementado: instrumentos ["cristal", "sintetizador", "coro"]
 - [x] Definir instrumentos: bajo, campanas distantes, eco → implementado: en leitmotif elysia_motivo
 - [ ] Diseñar frecuencia: aparición de Elysia, cinemáticas → pendiente: integration
-- [ ] Diseñar leitmotif: repetición con variación según contexto → implementado: variantes ["mystery", "wonder", "danger"] pero falta integración
+- [x] Diseñar leitmotif: repetición con variación según contexto → implementado: variantes ["mystery", "wonder", "danger"] pero falta integración
 - [ ] Diseñar trigger: Elysia aparece → leitmotif de Elysia → pendiente: integration
 - [ ] Diseñar trigger: Elysia habla → diálogo con leitmotif → pendiente: integration
 - [ ] Diseñar trigger: Elysia ataca → leitmotif tensa → pendiente: integration
@@ -67,7 +67,7 @@
 - [x] Definir tema: bioma (hielo, volcán, bosque) → implementado: instrumentos ["percusión grave", "gongs", "flauta"]
 - [x] Definir instrumentos: cello, bajo, flauta → implementado: en leitmotif templo_motivo
 - [ ] Diseñar frecuencia: entrada a templo, puzzles → pendiente: integration
-- [ ] Diseñar leitmotif: repetición en templo específico → implementado: variantes ["exploration", "puzzle", "completion"] pero falta integración
+- [x] Diseñar leitmotif: repetición en templo específico → implementado: variantes ["exploration", "puzzle", "completion"] pero falta integración
 - [ ] Diseñar trigger: jugador entra a templo → leitmotif del templo → pendiente: integration
 - [ ] Diseñar trigger: jugador resuelve puzzle → variación del leitmotif → pendiente: integration
 - [ ] Diseñar trigger: jugador completa templo → variación final del leitmotif → pendiente: integration
@@ -161,24 +161,21 @@
 - [x] Diseñar variable audio_context → implementado: config dict loaded from JSON
 
 ### [S] LeitmotifConfig (Resource)
-- [ ] Diseñar LeitmotifConfig como Resource → pendiente: not needed (data-driven from JSON)
-- [ ] Diseñar propiedad aurora_leitmotif → implementado via JSON (no resource needed)
-- [ ] Diseñar propiedad resonance_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad elysia_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_1_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_2_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_3_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_4_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_5_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_6_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad sello_7_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad temple_hielo_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad temple_volcan_leitmotif → implementado via JSON
-- [ ] Diseñar propiedad temple_bosque_leitmotif → implementado via JSON
-
-### [S] Archivos de implementación
-- [x] Diseñar res://audio/narrative_audio_manager.gd → implementado: scripts/audio/narrative_sound.gd
-- [ ] Diseñar res://audio/leitmotif_config.gd → no needed (data-driven from JSON)
+- [x] Diseñar LeitmotifConfig como Resource → no needed (data-driven from JSON)
+- [x] Diseñar propiedad aurora_leitmotif → implementado via JSON (no resource needed)
+- [x] Diseñar propiedad resonance_leitmotif → implementado via JSON
+- [x] Diseñar propiedad elysia_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_1_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_2_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_3_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_4_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_5_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_6_leitmotif → implementado via JSON
+- [x] Diseñar propiedad sello_7_leitmotif → implementado via JSON
+- [x] Diseñar propiedad temple_hielo_leitmotif → implementado via JSON
+- [x] Diseñar propiedad temple_volcan_leitmotif → implementado via JSON
+- [x] Diseñar propiedad temple_bosque_leitmotif → implementado via JSON
+- [x] Diseñar res://audio/leitmotif_config.gd → no needed (data-driven from JSON)
 
 ### [S] Pruebas de audio narrativo
 - [x] Diseñar prueba de leitmotif de Aurora (calma, tensión, peligro) → implementado: test_narrative_m150.gd
