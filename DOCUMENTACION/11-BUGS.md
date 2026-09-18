@@ -895,7 +895,7 @@ módulo si algún día se usa `_container`.
 - **Módulo(s) afectado(s):** M39 (Tiendas) / M38 (Economía) — `scripts/economia/price_manager.gd` (`_precio_base_compra` L442, `precio_compra_vigente` L108) · `scripts/economia/economy_manager.gd` (`precio_compra_vigente` L79) · test `scripts/shops/test_loop_economico.gd` L50-56.
 - **Severidad:** 🟠 Mayor
 - **Prioridad sugerida:** Media
-- **Estado:** [?] Delegado (código dueño ajeno: M39 agnes-2.5-flash, M38 GLM-5.3; §21.4 lock — Hy3 no modifica)
+- **Estado:** [x] Resuelto (dueño M39 glm-5.3-flash — causa raíz: id inexistente, NO precio; Log 1017)
 
 **Descripción del problema:**
 `test_loop_economico.gd` check `precio compra definido` FALLA (Resumen: 14 checks, 1 fallos; EXIT=1). `EconomyManager.precio_compra_vigente` → `PriceManager.precio_compra_vigente` → `_precio_base_compra(item_id)` devuelve 0 porque ni el override de catálogo (`econ_prices.tres`, `PriceDefinition.precio_compra`) ni `ItemData` (`db.get_item("OBJ-PLA-001").precio_compra`) aportan valor > 0. El test parchea `item.set("precio_compra", 100)` en memoria, pero `PriceManager` lee de su propia ruta de lookup (catálogo/ItemData), no del objeto parcheado, así que el precio queda en 0.
@@ -927,10 +927,11 @@ Devuelve 0 → el loop de compra no puede computar precio de compra válido.
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-12 04:45
 
-**Resolución (pendiente de dueño — delegado §21.4):**
-- [→] Cómo se corrige (sugerido): dueño M39/M38 define `precio_compra` para `OBJ-PLA-001` (y demás ítems de catálogo) en `econ_prices.tres` y/o `ItemData`, o ajusta `PriceManager` para leer de la fuente que el test parchea.
-- [ ] Log del proyecto:
-- [ ] Verificado por: dueño M39/M38 (agnes / GLM-5.3)
+**Resolución (dueño M39 — causa raíz id inexistente, NO precio):**
+- [x] Cómo se corrigió: la investigación con el mapa real de ids (`scripts/reporte_ids_items.py`, 111 `.tres`) demostró que **`OBJ-PLA-001` no existe**: `item_obj_pla_001.tres` contiene `id = "OBJ-CUA-007"`. El "precio 0" era síntoma, no causa: `_precio_base_compra` devuelve 0 para un id fantasma por diseño defensivo correcto. Fix en `game/isla-ancestral/scripts/shops/test_loop_economico.gd`: fixture migrado a **`OBJ-PLA-002`** (existe, precio_compra=30 en su `.tres`) + nuevo check `"item OBJ-PLA-002 existe en ItemDatabase"` (guardián anti-falso-verde: si el id desaparece, el test lo dice en vez de pasar trivial). 0 restantes `OBJ-PLA-001` en el test (verificado por conteo Python).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/shops/test_loop_economico.gd` (migración OBJ-PLA-001 → OBJ-PLA-002 en 8 sitios + 1 check nuevo); `scripts/reporte_ids_items.py` (sección CRUCE econ_prices vs items/ para futuros diagnósticos); sin commit aún.
+- [x] Log del proyecto: 1017 (este log).
+- [x] Verificado por: glm-5.3-flash (Cline), 2026-09-18 — `scripts/run_shops_tests.bat`: **test_tiendas EXIT=0 + test_loop_economico EXIT=0 (15 checks, 0 fallos, "LOOP ECONOMICO OK") + test_tiendas_iter_glm EXIT=0**.
 
 ---
 
@@ -2050,3 +2051,92 @@ mientras no miraba casi una decima parte de `Logs/`.
 reservo 1000) — y **1001 sigue listado** en `NUMEROS_DISPONIBLES.txt`. Un agente que siga el
 protocolo v3 tomaria 1001 del archivo, y otro que use `--reservar` tambien: **colision**. Integrar
 `--reservar` con la lista v3 es una decision de protocolo → se **reporta**, no se rediseña solo.
+
+## BUG-050: M39 Tiendas — `catalogo_tiendas.gd` llama `.size()` a un Callable (SCRIPT ERROR al boot) + catálogo M39 referencia item M15 inexistente `piedra_caliza`
+
+- **Fecha de reporte:** 2026-09-18 19:15
+- **Modulo(s) afectado(s):** M39 Tiendas (`scripts/shops/catalogo_tiendas.gd`), M15 Items (`piedra_caliza`)
+- **Severidad:** 🟠 Mayor (emite `SCRIPT ERROR` en **todo** boot de autoloads; contamina cada run headless)
+- **Prioridad sugerida:** Media-Alta
+- **Estado:** [?] Delegado (dueño M39, en curso por glm — no lo corrijo para no pisar su trabajo)
+
+**Descripción del problema:**
+Al bootear el proyecto (cualquier test `--headless` que levante autoloads) se emite:
+```
+SCRIPT ERROR: Invalid call. Nonexistent function 'size' in base 'Callable'.
+   at: push_warning (core/variant/variant_utility.cpp)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+```
+Además: `WARNING: [M39] 'tienda_general': item_id inexistente en M15: piedra_caliza` — el catálogo M39
+referencia un `item_id` que no existe en el catálogo de M15.
+
+**Lectura (agnés, sin corregir):** `catalogo_tiendas.gd:63` llama `.size()` sobre algo que en runtime
+es un **Callable** (no un Array) → `Callable.size()` no existe. Probablemente una lista de validadores
+/ campos quedó como Callable (o una señal) y se itera con `.size()`. Y `piedra_caliza` es un `item_id`
+huérfano (M15 no lo define) → el validador de tienda lo reporta.
+
+**Pasos para reproducir:**
+1. `godot --headless --path game/isla-ancestral --script res://scripts/logros/test_logros.gd` (cualquier
+   test que bootee autoloads).
+2. Ver el `SCRIPT ERROR` de `catalogo_tiendas.gd:63` + el warning de `piedra_caliza`.
+
+**Causa probable (hipótesis para glm):** en `_validar_tienda` (línea 63) se itera una colección de
+validadores/campos que quedó como `Callable` (o una señal) y se usa `.size()` sobre ella; y el catálogo
+M39 trae `piedra_caliza` sin contraparte en M15.
+
+**Referencias cruzadas:** detectado durante la verificación de M72 Logros (Log 1021, agnes-3-flash).
+El core de M72 es inexistente para este bug (afecta a M39/M15).
+
+**Firma:**
+**Modelo:** agnes-3-flash (Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18 19:15
+
+**Delegación:** [?] **M39 (glm-5.3-flash, en curso)** — es su módulo y su código. Corregir el
+`catalogo_tiendas.gd:63` (`.size()` sobre Callable) y reconciliar `piedra_caliza` con el catálogo M15
+(o removerlo). Verificado por el verificador §21.8.
+
+---
+
+## BUG-051 — CI: el job `godot-lint` es un no-op completo (lint de GDScript inefectivo)
+
+**Estado:** [?] Delegado
+**Modulo:** M111 (Codigo de Calidad) / M83 (CI de licencias)
+**Severidad:** Media
+
+### Pasos para reproducir
+
+1. Abrir `.github/workflows/quality.yml`.
+2. Ver el job `godot-lint` (lineas 10-34), paso "Check for Godot parser errors".
+3. La linea 33 contiene: `godot --headless --script 2>&1 || true`
+
+### Causa
+
+El comando `--script` **no tiene ningun script**. Godot falla con error de uso y el
+`|| true` lo silencia. El paso **nunca valida nada** y el job `godot-lint` **nunca puede
+fallar**. La linea 28 (`code_quality_check.gd`) tambien lleva `|| true`.
+
+### Evidencia
+
+- `.github/workflows/quality.yml:33` (sin script).
+- Log 1027 (atria-dawn, 2026-09-18) seccion 5.
+
+### Contexto
+
+Descubierto durante el re-QA de M126 al auditar los 52 gates del workflow. Los 9 gates
+sin `|| FAIL=1` SI son duros (GH Actions usa `set -e` por defecto), pero este job es la
+excepcion real: es un no-op disfrazado de gate de lint.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18 21:07
+
+**Delegacion:** [?] **M111/M83** — decidir que script de lint debe ejecutar el paso
+(`scripts/editor/code_quality_check.gd` en `|| true` de la linea 28 es el candidato
+natural) y remover el `|| true` para que el gate sea real.
