@@ -130,12 +130,12 @@ jobs:
           godot --headless --script scripts/particles/test_vfx_factory_headless.gd 2>&1 || true
           godot --headless --script scripts/particles/test_vfx_director_headless.gd 2>&1 || true
           godot --headless --script scripts/particles/test_vfx_pool_m52.gd 2>&1 || true
-          # M52 iter. 6: catalogo de 31 entradas + schema con reglas
+          # M52 iter. 6: catálogo de 31 entradas + schema con reglas
           # verificables (RF3/4/6/7/11/14/16), loops con culling y fase fija,
-          # LOD 25% y trigger centralizado. Los 13 buses del catalogo se
+          # LOD 25% y trigger centralizado. Los 13 buses del catálogo se
           # verifican contra scripts/core/event_bus.gd.
           godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || true
-          # M52 iter. 6: el catalogo es un dataset generado - detecta ediciones
+          # M52 iter. 6: el catálogo es un dataset generado — detecta ediciones
           # a mano que no pasaron por el generador.
           python tools/vfx/gen_vfx_catalog.py --check
           # Run localization test (M87): catálogos ES/EN/PT del autoload
@@ -267,6 +267,18 @@ jobs:
           # M116 validador del instalador (V3 AppVersion sync, Log 946): evita
           # que .iss y project.godot se desalineen en el futuro.
           godot --headless --script scripts/build/test_instalador_m116.gd 2>&1 || true
+          # M83 Licencias (Log 974 agnes-3): test del validador de catálogo + del
+          # nuevo scanner (classificar/detectar/scan_addons). Gate duro: ambos
+          # deterministas y verdes (boot-time UI errors preexistentes no afectan
+          # el exit 0/1 del test).
+          godot --headless --script scripts/legal/test_licenses_m83.gd 2>&1
+          godot --headless --script scripts/licensing/test_license_scanner_m83.gd 2>&1
+          # M126 Marketing-Legal (Log 981 agnes-3): validación de marketing_legal.json
+          # (scaffold legal). Gate duro: test determinista y verde (9/0).
+          godot --headless --script scripts/legal/test_marketing_legal_m126.gd 2>&1
+          # M128 Identidad de Marca (Log 985 agnes-3): validación de identidad_marca.json
+          # (BrandValidator, scaffold legal). Gate duro: test determinista y verde (8/0).
+          godot --headless --script scripts/legal/test_brand_m128.gd 2>&1
           echo "All validation tests completed"
 
   legal-tools:
