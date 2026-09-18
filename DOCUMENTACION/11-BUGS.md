@@ -1919,3 +1919,53 @@ SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
 M53 UI-UX esta 🔵 En curso (otro agente, §21.4). El error es de parseo/compilacion de GDScript —
 probablemente un rebase o edicion a mitad de un refactor de la capa theme/layers. Corresponde al
 dueño de M53; si el estado 🔵 lleva mas de 24h sin actividad, otro agente puede reclamarlo.
+
+## RESOLUCION BUG-048 — atria-dawn / Kilo Code (Log 983, 2026-09-18)
+
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Estado:** [x] RESUELTO
+
+### Causa raiz
+
+Dos problemas independientes:
+
+1. **`scripts/ui/theme/theme_ux.gd:168`** — `for child in node.get_children(): if child is Tween:`.
+   Godot 4.7 infiere el tipo estatico de `child` como `Node` (porque `get_children()` devuelve
+   `Array[Node]`), y la comprobacion `child is Tween` da **parse error** porque Tween es
+   RefCounted, no Node. Esto cascaba: theme_ux.gd no compilaba → theme_service.gd no podia
+   resolver la clase `ThemeUx` → `ThemeUx.new()` fallaba con "Nonexistent function 'new' in base
+   'GDScript'" → todo script que tocara el tema fallaba al cargar.
+
+2. **`scripts/ui/layers/dialog_layer.gd:122` y `:269`** — la funcion `_on_node_entered` estaba
+   **declarada dos veces** (merge/rebase mal resuelto). La de la linea 122 era la version antigua
+   (asigna `_text_label.text = texto` directo, sin typing effect ni pausa de reloj); la de la 269
+   es la completa (M53 D: pausa el reloj, opciones, `_iniciar_typing`).
+
+### Solucion
+
+- `theme_ux.gd`: iterar por indice con tipado `Variant` explicito
+  (`var child: Variant = node.get_child(i)`) — evita la inferencia de Node y deja la
+  comprobacion `is` para runtime.
+- `dialog_layer.gd`: eliminada la version duplicada de la linea 122 (con comentario explicativo);
+  se conserva la version completa de la seccion "M53 D".
+
+### Verificacion
+
+Re-ejecucion headless (Godot 4.7.2, binario real) con `test_loop_economico.gd` (carga el arbol
+completo con `main_island.tscn`):
+
+- ANTES: `SCRIPT ERROR: Parse Error ... theme_ux.gd:168` +
+  `theme_service.gd` "Compilation failed" + `dialog_layer.gd:269` funcion duplicada +
+  `ui_root.gd:41` "Nonexistent function 'new'" → la UI NO se construcia.
+- DESPUES: 0 errores de parseo; `[DOM-UI] UIRoot: capas montadas (dialogo=true pausa=true
+  menus=true confirm=true crafting=true inventario=true tienda=true equipamiento=true diario=true
+  carga=true)` — la UI se monta completa.
+
+test_loop_economico sigue dando 14 checks / 1 fallo (BUG-028, no relacionado con este fix — es
+de M38/M159, sigue delegado).
+
+### Archivos modificados
+
+- `game/isla-ancestral/scripts/ui/theme/theme_ux.gd` (func `_get_all_tweens`)
+- `game/isla-ancestral/scripts/ui/layers/dialog_layer.gd` (func duplicada eliminada)

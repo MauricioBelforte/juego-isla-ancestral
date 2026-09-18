@@ -742,3 +742,22 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - **BUG-046 (nuevo, M159):** 12 items del catalogo con id interno discordante del nombre de
   archivo (causa raiz de BUG-028).
 - Reserva 982 consumida. Log commiteado.
+
+## 2026-09-18 01:00 — atria-dawn (Atria-Dawn-Preview) / Kilo Code — BUG-048 RESUELTO (Log 983)
+
+- **M53 UI-UX: 🔵 reclamado y LIBERADO (alcance limitado al fix de compilacion).** M53 llevaba 16
+  dias inactivo (Hy4, ultima actividad 2026-09-02) — §21.4.7.
+- **Causa del BUG-048 (dos problemas independientes):**
+  1. `theme_ux.gd:168` — `for child in node.get_children(): if child is Tween:` — Godot 4.7 da a
+     `child` tipo estatico `Node`; `is Tween` es parse error (Tween es RefCounted). Cascada:
+     theme_ux no compilaba → theme_service no resolvia ThemeUx → "Nonexistent function 'new'".
+  2. `dialog_layer.gd:122` y `:269` — `_on_node_entered` declarada DOS VECES (merge/rebase mal
+     resuelto).
+- **Fix:** tipado `Variant` explicito iterando por indice + eliminada la funcion duplicada vieja.
+- **Verificacion headless:** 0 errores de parseo; `[DOM-UI] UIRoot: capas montadas (dialogo=true
+  pausa=true menus=true confirm=true crafting=true inventario=true tienda=true equipamiento=true
+  diario=true carga=true)` — la UI se monta completa (antes no se construcia en runtime).
+- Error nuevo documentado en `GUIA-GODOT/06-registro-errores.md` como **E-20** (regla: nunca `is
+  <RefCounted>` sobre variable inferida como `Node`).
+- M53 sigue 91/158 con sus pendientes (animaciones slots, gamepad, minimapa M54, accesibilidad
+  M58) — no los toqué. Reserva 983 consumida; modulo liberado.

@@ -119,23 +119,10 @@ func _crear_fondo_dim() -> void:
 
 ## ── Callbacks del DialogueManager (M21) ──────────────────
 
-func _on_node_entered(_node_id: String, speaker_key: String, texto: String, tipo: int, options: Array) -> void:
-	if not visible:
-		visible = true
-	_text_label.text = texto
-	_speaker_label.text = _traducir_hablante(speaker_key)
-	_limpiar_opciones()
-	if tipo == DialogueNode.TIPO_OPCIONES and options.size() > 0:
-		for i in options.size():
-			var op = options[i]
-			var btn := Button.new()
-			btn.text = "[%d] %s" % [i + 1, _texto_opcion(op)]
-			btn.pressed.connect(_on_opt_pressed.bind(i))
-			_options_box.add_child(btn)
-		_hint_label.text = _t("SETTINGS.ELEGIR_OPCION")
-	else:
-		_hint_label.text = _t("SETTINGS.ADVANCED")
-	_clickable = tipo != DialogueNode.TIPO_FIN
+## NOTA (atria-dawn, Log 983 — BUG-048): esta funcion existia DUPLICADA en la
+## linea 269 (merge/rebase mal resuelto). Se elimina la version antigua de aqui
+## (sin typing effect ni pausa de reloj) y se conserva la de la seccion "M53 D"
+## mas abajo, que es la completa.
 
 func _on_dialogue_ended(_id: String, _ultimo: String) -> void:
 	visible = false

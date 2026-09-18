@@ -164,7 +164,13 @@ func apply_reduce_motion(node: Node) -> void:
 
 func _get_all_tweens(node: Node) -> Array[Tween]:
 	var result: Array[Tween] = []
-	for child in node.get_children():
+	# Godot 4.7: get_children() infiere Array[Node]; `child is Tween` sobre una
+	# variable de tipo estatico Node da parse error (Tween es RefCounted, no
+	# Node). Iterar por indice con tipado Variant explicito evita la inferencia
+	# y deja la comprobacion `is` para runtime (BUG-048, atria-dawn Log 983).
+	var count := node.get_child_count()
+	for i in count:
+		var child: Variant = node.get_child(i)
 		if child is Tween:
 			result.append(child)
 		result.append_array(_get_all_tweens(child))

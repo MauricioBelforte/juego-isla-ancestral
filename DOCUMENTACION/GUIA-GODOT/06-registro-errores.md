@@ -190,6 +190,51 @@ node.target_position = Vector3(0, 0, -5)
 
 ---
 
+## E-20: `is Tween` (o cualquier tipo RefCounted) sobre variable inferida como `Node`
+
+**Síntoma:**
+```
+SCRIPT ERROR: Parse Error: Expression is of type "Node" so it can't be of type "Tween".
+   at: GDScript::reload (res://scripts/ui/theme/theme_ux.gd:168)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+ERROR: Failed to load script "res://scripts/ui/theme/theme_service.gd" with error "Compilation failed".
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+```
+
+**Ubicación:** `scripts/ui/theme/theme_ux.gd:168` (función `_get_all_tweens`). Cascada a
+`theme_service.gd:18` y a todo script que instanciara `ThemeUx`.
+
+**Causa:** Al iterar `for child in node.get_children():`, Godot 4.x da a `child` el tipo estático
+`Node` (porque `get_children()` devuelve `Array[Node]`). La comprobación `child is Tween` es
+rechazada en tiempo de compilación porque `Tween` es `RefCounted`, no `Node`, y el analizador de
+tipos exige compatibilidad en la jerarquía. El error es de **parseo**, no de runtime: el script no
+compila y todo lo que lo referencia falla en cadena con errores engañosos ("Nonexistent function
+'new'").
+
+**Solución:** romper la inferencia de tipo con una variable `Variant` explícita. Iterar por índice:
+
+```gdscript
+# INCORRECTO — parse error en Godot 4.x:
+for child in node.get_children():
+	if child is Tween:          # ← child es Node estático; Tween no deriva de Node
+
+# CORRECTO:
+var count := node.get_child_count()
+for i in count:
+	var child: Variant = node.get_child(i)
+	if child is Tween:
+		...
+```
+
+Regla general: **nunca usar `is <RefCounted>` (Tween, Resource, etc.) sobre una variable cuyo tipo
+estático se infiere como `Node`** (típico al iterar `get_children()`). Si hay que filtrar nodos por
+tipo no-Nodo, tipar la variable como `Variant` primero.
+
+**Fecha:** 2026-09-18 01:00 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+(Log 983; también ver `11-BUGS.md` BUG-048)
+
+---
+
 ## Plantilla para nuevos errores
 
 ```markdown
