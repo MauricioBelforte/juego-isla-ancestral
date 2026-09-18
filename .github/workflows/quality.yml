@@ -137,7 +137,7 @@ jobs:
           godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || true
           # M52 iter. 6: el catálogo es un dataset generado — detecta ediciones
           # a mano que no pasaron por el generador.
-          python tools/vfx/gen_vfx_catalog.py --check
+          python ../../tools/vfx/gen_vfx_catalog.py --check
           # Run localization test (M87): catálogos ES/EN/PT del autoload
           # `LocalizationManager` + fallback + interpolación. Las aserciones de
           # conteo comparan contra el JSON fuente (fix BUG-032: estaban fijadas a
@@ -276,7 +276,7 @@ jobs:
           # M126 Marketing-Legal (Log 981 agnes-3): validación de marketing_legal.json
           # (scaffold legal). Gate duro: test determinista y verde (9/0).
           godot --headless --script scripts/legal/test_marketing_legal_m126.gd 2>&1
-          # M128 Identidad de Marca (Log 985 agnes-3): validación de identidad_marca.json
+          # M128 Identidad de Marca (Log 1013 agnes-3): validación de identidad_marca.json
           # (BrandValidator, scaffold legal). Gate duro: test determinista y verde (8/0).
           godot --headless --script scripts/legal/test_brand_m128.gd 2>&1
           echo "All validation tests completed"
