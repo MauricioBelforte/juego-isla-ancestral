@@ -459,3 +459,36 @@ estado `[x] Resuelto`. Nota de alcance: otros conectores de `item_added`
 no producen ERROR, pero conviene revisarlos en su módulo si se usa `_container`.
 
 **Firma:** hy3 (WorkBuddy), 2026-09-15 01:25 → BUG-040 cerrado.
+## Lote L — Nuevos / Re-QA cruzado §21.8 (2026-09-18, hy3/WorkBuddy)
+
+> Detectado al cruzar CHECKLIST-GLOBAL (estado vivo) vs CHECKLIST-QA-SEALS.md (25 sellos,
+> fuente de verdad) + git log reciente (commits 965883b M83, 3ee08d3/e3c7421 M53+M131).
+> Criterio §21.8: verificador (hy3/WorkBuddy, Tencent Hunyuan) != autor.
+
+### Nuevos — candidatos §21.8 (nunca verificados por hy3, o self-verified por el autor -> viola §21.8)
+
+| Modulo | Autor | Estado GLOBAL (2026-09-18) | Accion hy3 |
+|--------|-------|----------------------------|------------|
+| 53-UI-UX | mimo-v2.5 (OpenCode), Log 980 | 🔵 En curso 91/158; BUG-048 resuelto (Log 983, atria-dawn) | 🔍 VERIFICADO hy3 (Log 1001, §21.8): codigo + test_ui_framework headless 0 fallos / 0 SCRIPT ERROR; PERO 28 [ ] reales en 05-Checklist -> NO sellable (§24). Nota en SEALS. |
+| 30-Reloj-En-Tiempo-Real | mimo-v2.5 (OpenCode) | 🟡 Con dudas 98/104 (self-verified mimo 2026-09-16, 6 pendientes) | ⏳ QA cruzado hy3 al cerrar mimo (self-verify viola §21.8). 6 [ ] reales -> aun no sellable. |
+| 92-Tutorial | glm-5.3-flash (Log 911/914/987), relevo agnes | 🟡 Liberado iter.4 97/185 (NO cerrado) | ⏳ BLOQUEADO: autor no cerro (97/185). QA cruzado hy3 post-cierre. |
+
+### Re-QA — verificados por hy3 antes, pero con trabajo nuevo de OTRO modelo (o sello perdido BUG-034)
+
+| Modulo | Autor nueva ronda | Estado GLOBAL (2026-09-18) | Accion hy3 |
+|--------|-------------------|----------------------------|------------|
+| 83-Licencias-De-Software | agnes (Log 974, capa scanner) | 🟡 16/100 Liberado iter. agnes | ⏳ Re-QA BLOQUEADA: modulo no cerrado (16/100). No emitir sello hasta cierre. |
+| 131-Creditos | mimo (Log 980) | 🔵 55/99 En curso | ⏳ Re-QA BLOQUEADA: mimo no cerro (55/99). No emitir sello hasta cierre. |
+| 126-Marketing-Legal | agnes (Log 981, data-layer+CI) | 🟡 4/101 Liberado iter. agnes | ⏳ Re-QA BLOQUEADA: agnes no cerro (4/101). Sello Log 884 previo en SEALS queda PENDIENTE de re-afirmacion. |
+
+### Reconciliacion BUG-034 — re-registro de sellos hy3 ausentes en CHECKLIST-QA-SEALS (NO re-verificar) — ✅ FINALIZADA 2026-09-18
+
+**Resultado:** de los 11 IDs listados, solo 5 son verificacion §21.8 genuina de hy3 y fueron re-registrados en SEALS (total 25 -> 30):
+**M08, M10, M11, M102, M165** (Logs 747 / 961 / 835·723 / 767 / 699; todos 0 [ ] real -> limpios).
+
+**Excluidos (NO son sellos hy3, no se re-registran para no fabricar sellos):**
+- **M04**: hy3 solo hizo re-grounding Lote D (Log 857/896, "no sobre-cerrado", 12 docs); sin conteo de checklist 0 [ ] -> no es sello limpio. (Fila ausente en GLOBAL actual.)
+- **M112, M133, M134, M135, M136**: GLOBAL los marca "✅ Verificado por Hy3 (Log 866/867)", PERO **Logs 866/867 son de AGNES** (Round 3/4 cierre), NO de hy3. Misatribucion del agente regenerador. Autores reales: M112=ox-alpha; M133/M134/M135/M136=GLM-5.3 Flash.
+- Nota amplia: el patron "Verificado por Hy3 (Log 866/867)" aparece en ~30 modulos de GLOBAL (M01-M03, M06, M44, M80, M82, M85, M86, M97, M100, M114, M120, M121, M125, M129, M132, M137-M143…) y es sistematicamente falso (866/867 = AGNES). Fuera de alcance de este lote; requiere auditoria aparte.
+
+**Siguiente:** M83/M126/M131 (re-QA) y M30/M92 (QA cruzado nuevo) requieren cierre del autor antes de QA cruzado hy3.

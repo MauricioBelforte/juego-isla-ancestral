@@ -41,6 +41,11 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | BUG-039 | Generador-Checklist (fix estructura) | 931 | 2026-09-16 | code+funcional | generar_checklist_global.py: run --output temp = 11 cols (Recom heredada), 167 filas, sin duplicados, prefijo/sufijo conservados; caveat: no reinyecta Notas en regen -> BUG-034/QA-SEALS |
 
 | 66 | Anti-Softlock | 953 | 2026-09-17 | headless | re-verif sec21.8 (Log 701, agnes-2.5-flash/Kilo Code): test_anti_softlock_m66.gd 0 fallos (EXIT 0, 0 SCRIPT ERROR); re-grounding softlock_guard/softlock_rules/irecoverable presentes; 05-Checklist 110/0/7 (0 [ ] real -> cumple sec24). Caveat: test usa _check(true) tautologicos + ERROR benigno RefCounted/Node en handler IRecoverable (no aborta, superficial). |
+| 08 | Mundo-Voxel | 747 | 2026-09-03 | re-grounding | re-grounding Mundo-Voxel: 105/105 [x] 0 [ ] 0 [?]; codigo voxel presente; sin suite headless aislada (requiere GDExtension Voxel Tools). cumple sec24 |
+| 10 | Generacion-Del-Mundo | 961 | 2026-09-07 | re-grounding+boot | re-grounding Generacion-Del-Mundo: 106/106 [x] 0 [ ] 0 [?]; EXIT=0 0 errores boot (Log 961, +834). cumple sec24 |
+| 11 | Personaje-Del-Jugador | 723 | 2026-09-07 | re-grounding+boot | re-grounding Personaje-Del-Jugador: 122/122 [x] 0 [ ] 0 [?]; EXIT=0 0 errores boot (Log 723, +835). cumple sec24 |
+| 102 | Bug-Tracking | 767 | 2026-09-07 | re-grounding | re-grounding Bug-Tracking: artifacts en disco presentes + 05-Checklist 140/140 [x] 0 [?] (Log 767). cumple sec24 |
+| 165 | Voxel-Tools-Guia | 699 | 2026-09-05 | re-grounding | RE-QA Voxel-Tools-Guia: 05-Checklist 48/48 [x] 0 [ ] 0 [?]; previa verify de MiMo invalida sec21.8 (Log 699). cumple sec24 |
 ## Notas QA (sin sello limpio §21.8)
 
 | MID | Módulo | Log | Motivo |
@@ -48,5 +53,8 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 111 | Codigo-De-Calidad | 886 | 35 `[ ]` reales en 05-Checklist (sobre-cierre) → sin sello; delegado a otro modelo |
 | 127 | Copyright-Del-Juego | 950 | test_copyright_m127.gd 13/0 green post-BUG-033, PERO 37 `[ ]` reales (procedimiento legal USCO/DMCA futuro) -> no cumple sec24, sin sello limpio. Autor DeepSeek-V4.1-Flash (Log 923). |
 | 148 | Lore-Ambiental | 886 | 92 `[ ]` reales (data-only) → sin sello; delegado a modelo de creatividad (§11.3) |
+| 53 | UI-UX | 1001 | test_ui_framework headless 0 fallos / 0 SCRIPT ERROR (Godot 4.7.2), codigo presente; PERO 28 `[ ]` reales en 05-Checklist (130/158) -> no cumple sec24, sin sello limpio. Autor mimo-v2.5 (Log 980). |
 
-**Total sellos limpios:** 25 · **Notas:** 3 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) + M87 (2026-09-17, Log 949) + M14 (2026-09-17, Log 951)  + M66 (2026-09-17, Log 953) = 25/25.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
+**Total sellos limpios:** 30 · **Notas:** 4 · **Re-verif. headless 2026-09-14:** 14/14 PASS · **+ M26 (2026-09-16, Log 930) + BUG-035/039 (2026-09-16, Log 931) + M105 re-verif. iter.7 (2026-09-16, Log 935) + M124 re-verif. iter.2 (2026-09-16, Log 936) + M60 re-verif. iter.4 (2026-09-16, Log 937) + M103 re-verif. iter.1 (2026-09-16, Log 938) + M117 (2026-09-17, Log 947) + M110 (2026-09-17, Log 948) + M87 (2026-09-17, Log 949) + M14 (2026-09-17, Log 951)  + M66 (2026-09-17, Log 953) + M08/M10/M11/M102/M165 (re-conciliacion BUG-034, 2026-09-18, Logs 747/961/723/767/699) = 30/30.** (M105 ya contaba en el total del Lote G/I; se actualiza su evidencia al estado iter.7).
+
+> **Reconciliación BUG-034 (2026-09-18, hy3) — ✅ FINALIZADA:** re-registrados 5 sellos hy3 ausentes de este archivo: M08/M10/M11/M102/M165 (todos 0 [ ] real -> limpios). **Excluidos M04/M112/M133/M134/M135/M136** (NO se re-registran para no fabricar sellos). Evidencia: GLOBAL los marca "✅ Verificado por Hy3 (Log 866/867)", pero **Logs 866/867 son de AGNES** (Round 3/4 cierre), NO de hy3 — misatribución del agente regenerador. Autores reales: M04 = re-grounding solo (Log 857, sin conteo 0 [ ]); M112 = ox-alpha; M133/M134/M135/M136 = GLM-5.3 Flash. Deben reconciliarse por su verificador original.
