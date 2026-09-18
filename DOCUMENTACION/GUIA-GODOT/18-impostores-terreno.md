@@ -146,7 +146,7 @@ func _pared_si_cliff(st: SurfaceTool, vecino: Vector2i, esquina_a: Vector3, esqu
 
 1. **Exageración SOLO en montañas reales** (h > 20 con max_height 40).
    Exagerar TODAS las celdas crea montañas gigantes falsas en todo el terreno
-   que tapan el disco verde y la arena (bug del Log 803).
+   que tapan el disco verde y la arena (bug del Log 817).
 2. **Paredes SOLO en acantilados** (vecino ≥2m más bajo). Paredes en todas
    las celdas = overdraw masivo = tilda GPU integrada.
 3. **FACTOR_ALTURA 0.85**: el impostor queda 15% bajo el terreno real.
@@ -316,7 +316,7 @@ de prueba, NO del juego (el juego funciona normal con WASD).
 | Dos generadores compitiendo | Bug indeterminista (B-076) | Un solo dueño de terrain.generator |
 | Noise por voxel | Tildes al caminar (~100ms/chunk) | Precalculo por columna (Log 800) |
 | get_voxel en chunks no cargados | Freeze del main thread | Suelo fantasma O(1) |
-| Exagerar TODO el terreno | Montañas falsas tapando todo | Exagerar solo h>20 (Log 803) |
+| Exagerar TODO el terreno | Montañas falsas tapando todo | Exagerar solo h>20 (Log 817) |
 | Paredes en todas las celdas | Overdraw = tilda GPU integrada | Paredes solo en acantilados |
 | TRANSPARENCY_ALPHA en mesh de km | Freeze de GPU integrada | Material opaco + fade binario |
 | Plano horizontal de canto | Línea de subpíxeles (invisible) | Impostor heightmap con relieve |

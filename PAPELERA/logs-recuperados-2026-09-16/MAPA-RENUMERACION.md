@@ -99,17 +99,68 @@ una nota de procedencia en el propio log.
 - Las citas "Log 722/724" del **M118 (CI-CD)** → esas sí apuntan al log commiteado
   en 722/724 (`M48-AnimationService`, `M118-ITER3`), que es correcto.
 
-## Pendientes / discrepancias registradas (no resueltas aquí)
+## Discrepancias de citas — 2ª pasada con prueba (2026-09-17, Log 975)
 
-1. `terreno_horizonte.gd:255` cita "FIX Log 792 v2 (aro sin superficie)", pero el
-   log 792 recuperado trata de la **pared perimetral + suelo fantasma**. La guía 17
-   atribuye el fix del abanico a **Log 790**, pero el contenido del 790 tampoco
-   menciona el abanico. Sin prueba concluyente → **no se editó la cita**.
-2. `GUIA-GODOT/18-impostores-terreno.md` L149/L319 citan "Log 803" para el fix de
-   *exageración*; el 803 recuperado trata del anillo de arena. Los logs que sí
-   mencionan la exageración son 817/820/843. Sin prueba concluyente → **no se editó**.
-3. `GUIA-GODOT/19-diagnostico-tildes.md` C-09 cita "Log 805: `terreno_horizonte.gd:163`"
-   para un parse error; el 805 recuperado trata del *winding* del anillo. **No se editó**.
-4. `terreno_horizonte.gd:238` cita "Log 800" para el disco base de fondo marino; el
-   800 recuperado trata de la generación por columnas (misma sesión y subsistema).
-   **No se editó.**
+Cierre de los 4 casos dejados abiertos en la 1ª pasada. Regla aplicada: **una cita
+sólo se edita si la prueba es concluyente**; si no, se documenta y se deja intacta.
+
+### RESUELTO — caso 2: `GUIA-GODOT/18-impostores-terreno.md` L149 y L319
+
+Se corrigió **`Log 803` → `Log 817`** (2 líneas, `git diff` = 2 hunks de 1 línea).
+
+Prueba:
+- `Logs/803-M49-ANILLO-ARENA_2026-09-09_19-55-00.md` (19 líneas) **no menciona** la
+  exageración: `grep -i "exager|falsas|tapan"` → **vacío**. Su tema es la **creación**
+  del anillo de arena en `_crear_disco_base()`.
+- `Logs/817-M09-ANILLO-ARENA-VISIBLE_2026-09-11_02-48-00.md` documenta **exactamente**
+  el bug: *"Exageración ×4 del impostor sepultaba el anillo: MONT_EXAG se aplicaba a
+  TODAS las celdas h≥4 … Fix: exageración solo para h>6"* — y el título incluye
+  "exageración playa".
+- El **código vivo** etiqueta ese mismo fix como **E-817**:
+  `terreno_horizonte.gd:194` → *"La playa (h≤6) SIEMPRE a altura real (E-817:
+  exagerarla la convertía en acantilados falsos que sepultaban el anillo arena)"*.
+- El propio log 817 declara haber agregado el "complemento de exageración" a las guías.
+
+### NO RESUELTO — caso 1: `terreno_horizonte.gd:255` "FIX Log 792 v2 (aro sin superficie)"
+
+Evidencia **activamente contradictoria**, se deja la cita intacta:
+- El comentario describe un fix de **geometría del abanico** (p00 y p01 son el mismo
+  punto r=0 → 1 triángulo degenerado + 1 con normal invertida). **Ningún log recuperado
+  documenta ese fix.** `grep -ril "aro sin superficie" Logs/` → sólo el propio Log 975.
+- El 792 recuperado documenta el **muro perimetral + suelo fantasma** (modifica
+  `_crear_disco_base()`, o sea la MISMA función, pero no el abanico).
+- El 790 **no contiene** "abanico"/"aro" (`grep` vacío), pero el **Log 805 lo cita
+  explícitamente**: *"mismo bug de winding que el abanico del disco (Log 790)"*.
+- El marcador `v2` del comentario sugiere un **segundo pase de la sesión 792**, que no
+  generó log propio. → Ambas atribuciones (790 y 792) son defendibles; **decide el dueño**.
+
+### NO RESUELTO — caso 3: `GUIA-GODOT/19-diagnostico-tildes.md:90` C-09 "Log 805: `terreno_horizonte.gd:163`"
+
+- El 805 completo (19 líneas) trata del **winding del anillo**; **no hay parse error**.
+- `grep -rn "163" Logs/` filtrado por `terreno_horizonte|parse` → **sólo el Log 975**.
+  **Ningún log documenta un parse error en la línea 163.**
+- Los parse errors **sí** documentados en ese archivo son otros y con otras líneas:
+  `Logs/784` ("`CENTRO_ISLA` faltaba — 2 parse errors corregidos"), `Logs/789`
+  ("Parse Error línea **196** (indentación del edit de material) y línea **8**"),
+  `Logs/786` (`get_voxel()` espera `Vector3i`).
+- No hay base para elegir sustituto (163 ≠ 196) → **flag, no edición.**
+
+### NO RESUELTO — caso 4: `terreno_horizonte.gd:238` "Disco base de fondo marino (petición usuario, Log 800)"
+
+- El 800 recuperado trata de la **generación por columnas**; su única mención del disco
+  es una línea de evidencia (`"Impostor heightmap + disco base activos"`) que **prueba
+  que el disco ya existía** antes de 800 → la atribución de la *petición* al 800 no se sostiene.
+- `grep -rln "fondo marino" Logs/` → **803, 804, 805** (y el 975). O sea: la cadena de
+  boot `"disco base de fondo marino"` sólo aparece desde el 803.
+- `grep -rln "2100" Logs/` → **vacío**: el `r 2100` del comentario (hoy `DISCO_R = 1800`)
+  y el `y=0.2` (hoy `DISCO_BASE_Y = 4.3`) corresponden a una revisión **no documentada**.
+- No se puede identificar el log de origen → **flag, no edición.**
+
+### HALLAZGO NUEVO (drift de contenido, no de cita) — no editado
+
+`GUIA-GODOT/18-impostores-terreno.md` L147/L319 dicen *"h > 20 con max_height 40"*,
+pero el código vivo usa **`h > 6.0`** (`terreno_horizonte.gd:197`) y desde el Log 820 la
+exageración de montañas es un **gradiente** (`MONT_EXAG_CERCA/LEJOS`), sin umbral fijo
+de altura para el multiplicador. `grep -rln "h *> *20" Logs/` → **vacío**: ningún log
+respalda el "h > 20". **Es drift de documentación, no una cita rota** → lo decide el dueño
+de la guía (arreglar sólo la cita, como se hizo, deja el número viejo visible en la misma línea).
