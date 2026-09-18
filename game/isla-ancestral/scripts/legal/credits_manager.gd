@@ -261,6 +261,62 @@ func validar_catalogo() -> Array:
 		return ["Catalogo no cargado"]
 	return []
 
+## ── Easter eggs y atajos (M131 iter 6) ─────────────────────
+
+var _konami_sequence: Array = []
+var _konami_target: Array = [
+	"up", "up", "down", "down", "left", "right", "left", "right", "b", "a"
+]
+var _creditos_extendidos: bool = false
+signal konami_desbloqueado()
+
+func _input(event: InputEvent) -> void:
+	# ESC o B: salida
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_ESCAPE:
+			salir_creditos.emit()
+		# Konami code tracking
+		var action := ""
+		match event.keycode:
+			KEY_UP: action = "up"
+			KEY_DOWN: action = "down"
+			KEY_LEFT: action = "left"
+			KEY_RIGHT: action = "right"
+			KEY_B: action = "b"
+			KEY_A: action = "a"
+		if action != "":
+			_konami_sequence.append(action)
+			if _konami_sequence.size() > _konami_target.size():
+				_konami_sequence = _konami_sequence.slice(-_konami_target.size())
+			if _konami_sequence == _konami_target:
+				_creditos_extendidos = true
+				konami_desbloqueado.emit()
+				_konami_sequence = []
+
+signal salir_creditos()
+signal salto_seccion(idx: int)
+
+func saltar_seccion_tecla(keycode: int) -> bool:
+	# Page Down: siguiente sección
+	if keycode == KEY_PAGEDOWN:
+		return siguiente_seccion()
+	# Page Up: sección anterior
+	if keycode == KEY_PAGEUP:
+		return seccion_anterior()
+	return false
+
+func es_extension_desbloqueada() -> bool:
+	return _creditos_extendidos
+
+func obtener_farewell() -> String:
+	if _idioma == "en":
+		return "Thank you for playing Isla Ancestral!"
+	return "¡Gracias por jugar Isla Ancestral!"
+
+func tiene_ducking() -> bool:
+	# ducking se aplica cuando hay audio activo (requiere M91)
+	return Engine.has_singleton("AudioServer") and AudioServer.get_bus_count() > 0
+
 ## ── Callbacks ─────────────────────────────────────────────
 
 func _on_m87_idioma(nuevo: String) -> void:
