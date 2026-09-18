@@ -57,9 +57,9 @@ Contenido mínimo:
 [Lista]
 ```
 
-**Paso 1:** Leer `Logs/ULTIMO_NUMERO.txt` → obtener número actual (N)
-**Paso 2:** Crear archivo con N+1
-**Paso 3:** Actualizar `ULTIMO_NUMERO.txt` con el nuevo número
+**Paso 1:** Leer `Logs/NUMEROS_DISPONIBLES.txt` → tomar primer número (N), borrarlo de la lista
+**Paso 2:** Crear archivo de log con N
+**Paso 3:** Guardar N en tu backlog personal (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`)
 
 ---
 

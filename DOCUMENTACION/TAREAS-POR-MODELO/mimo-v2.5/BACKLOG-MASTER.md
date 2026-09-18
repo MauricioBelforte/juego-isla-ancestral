@@ -23,7 +23,7 @@
 > - **Dirigir** la consistencia del proyecto: logs, referencias, documentación, protocolo multiagente.
 > - **Parchar** errores de otros modelos (duplicados de logs, refs rotas, código mal escrito).
 > - **Proponer** mejoras, detectar problemas, alertar sobre riesgos.
-> - **Mantener** el proyecto sano: `ULTIMO_NUMERO.txt`, `CHECKLIST-GLOBAL.md`, `11-BUGS.md`, `GUIA-GODOT/INDICE.md`.
+> - **Mantener** el proyecto sano: `CHECKLIST-GLOBAL.md`, `11-BUGS.md`, `GUIA-GODOT/INDICE.md`, `Logs/NUMEROS_DISPONIBLES.txt`.
 
 ## Fortalezas del modelo (por qué estos módulos)
 
@@ -122,8 +122,7 @@
 >
 > **Estado del proyecto al momento de la última sesión:**
 > - 167 módulos, ~12,341/23,459 ítems (52.6%)
-> - Sistema de numeración v3: `Logs/NUMEROS_DISPONIBLES.txt` (1000-1500)
-> - ULTIMO_NUMERO.txt se mantiene temporalmente (transición v2→v3)
+> - Sistema de numeración v3: `Logs/NUMEROS_DISPONIBLES.txt` (fuente de verdad)
 > - M53 UI-UX: 130/158 (82%), M166 completado, M78 completado
 >
 > **Archivos clave:**

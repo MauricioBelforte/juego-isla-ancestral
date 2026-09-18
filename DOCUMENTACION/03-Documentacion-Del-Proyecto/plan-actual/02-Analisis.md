@@ -44,7 +44,7 @@
 |---|---|---|
 | Componentes | `DOCUMENTACION/{NN}-Nombre/` con `plan-inicial/` y `plan-actual/` | Vigente |
 | Archivos | 01-Requerimientos · 02-Analisis · 03-Diseno · 04-Codigo · 05-Checklist (≥100 ítems); 06/07 opcionales | Vigente |
-| Logs | `Logs/{NN}-descripcion_YYYY-MM-DD_HH-MM-SS.md` + `ULTIMO_NUMERO.txt` | Vigente |
+| Logs | `Logs/{NN}-descripcion_YYYY-MM-DD_HH-MM-SS.md` + `NUMEROS_DISPONIBLES.txt` | Vigente |
 | Firmas | `**Modelo:** X` / `**Plataforma:** Y` al inicio de cada doc | Vigente |
 | Estados checklist | `[ ]` / `[x]` / `[?]` + esfuerzo `[S]/[M]/[C]` | Vigente |
 | Global | CHECKLIST-GLOBAL.md, una fila por módulo | Vigente |

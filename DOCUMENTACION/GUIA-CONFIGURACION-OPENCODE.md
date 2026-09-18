@@ -93,7 +93,7 @@ juego-isla-ancestral/
 │       ├── project.godot
 │       └── scripts/
 ├── Logs/                        ← Logs de agentes
-│   └── ULTIMO_NUMERO.txt        ← Último número de log
+│   └── NUMEROS_DISPONIBLES.txt  ← Pool de números para logs (v3)
 └── tools/
     └── mcp/
         ├── godot-mcp/           ← Servidor MCP Godot
@@ -124,7 +124,7 @@ juego-isla-ancestral/
 ### Logs duplicados
 - Ejecutar verificación de duplicados (tarea recurrente de MiMo)
 - Renombrar archivos duplicados
-- Actualizar `ULTIMO_NUMERO.txt`
+- Verificar `NUMEROS_DISPONIBLES.txt` para siguiente número
 - Corregir referencias en documentación
 
 ---

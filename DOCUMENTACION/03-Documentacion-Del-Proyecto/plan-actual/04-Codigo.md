@@ -41,7 +41,7 @@ Módulo **documental** (infraestructura documental): no genera código de juego.
 |---|---|---|
 | Crear componente | Sección 11 AGENTS: numerar (README), crear plan-inicial + plan-actual, 5 archivos | Todo módulo nuevo |
 | Actualizar documentación | Documentación primero (AGENTS §13) | Todo cambio |
-| Registrar log | `Logs/{NN}-...` + ULTIMO_NUMERO | Todo módulo |
+| Registrar log | `Logs/{NN}-...` + NUMEROS_DISPONIBLES | Todo módulo |
 | Actualizar global | CHECKLIST-GLOBAL (manual o `scripts/generar_checklist_global.py`) | Fin de turno |
 | Verificar consistencia | `scripts/verificar_checklist.py` + `scripts/test_scripts.py` | Antes de producción |
 | Backup pre-cambio grande | `Obsoletos/AAAA-MM-DD_HH-MM-SS_nombre.ext` | Refactors |

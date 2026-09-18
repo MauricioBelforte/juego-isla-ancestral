@@ -61,7 +61,7 @@ raiz/
 │   ├── 00-PLAN-INICIAL/ (origen, NO MODIFICAR)
 │   ├── NN-Componente/plan-inicial/ + plan-actual/
 │   └── INVESTIGACION SOBRE OTROS JUEGOS/
-├── Logs/ (+ rotated/ + ULTIMO_NUMERO.txt)
+├── Logs/ (+ NUMEROS_DISPONIBLES.txt)
 ├── Obsoletos/
 ├── scripts/ (kit del protocolo; backups/ no versionado)
 └── (futuro Assets/, Builds/ — Unity, fuera de DOCUMENTACION)
@@ -74,7 +74,7 @@ raiz/
 3. Checklist ≥100 ítems, verificables, con estados honestos.
 4. `plan-inicial/` inmutable; `plan-actual/` es la verdad vigente; cambios se reflejan en ambos flujos.
 5. Firmas de modelo/plataforma en todo documento generado/modificado.
-6. Log por tarea terminada + actualización de `ULTIMO_NUMERO.txt`.
+6. Log por tarea terminada + toma de número de `Logs/NUMEROS_DISPONIBLES.txt`.
 7. `Obsoletos/` para respaldo previo a cambios grandes.
 8. Actualizar `1-5-*-ACTUAL.md` ante cambios significativos.
 9. Cambios de estado global → CHECKLIST-GLOBAL (o recalcular con `scripts/`).
