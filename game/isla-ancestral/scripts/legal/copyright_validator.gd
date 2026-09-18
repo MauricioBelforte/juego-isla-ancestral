@@ -1,3 +1,7 @@
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02

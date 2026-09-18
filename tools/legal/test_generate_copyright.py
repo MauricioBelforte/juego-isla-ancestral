@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # M127: Test del generador data-driven de copyright docs.
 # Valida que NOTICE.md y LICENSE se generan correctamente desde los JSONs.
 

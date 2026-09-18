@@ -7,7 +7,7 @@
 
 Módulo de **copyright del juego** para registro de copyright. Define registro de obras relevantes, código, arte, música, narrativa, logos y evidencia de autoría. Implementable inmediatamente (depende de M78 para legal general, M128 para identidad de marca, M41 para música). Es un módulo de documentación legal y procesos.
 
-**06-Plan-Testings.md:** el módulo NO tenía plan de testings. La cobertura real vive en `game/isla-ancestral/scripts/legal/test_copyright_m127.gd` (13 checks, 0 fallos ×3) y en las 4 suites de `tools/legal/` (13/13, 10/10, 18/18, 12/12). Ver §6.
+**06-Plan-Testings.md / 07-Resultados-Testings.md:** el módulo NO tenía plan de testings hasta la iter. 3 (Log 986), que creó ambos. La cobertura real vive en `game/isla-ancestral/scripts/legal/test_copyright_m127.gd` (13 checks, 0 fallos ×3) y en las **11 suites** de `tools/legal/` (**324 checks, 0 fallos**; las 7 nuevas suman 271). Ver §6 (iter. 2) y §7 (iter. 3).
 
 ## 2. Archivos involucrados (implementación)
 
@@ -30,8 +30,8 @@ tools/legal/signoff_check.py                → validador pre-release        (te
 NOTICE.md · LICENSE · AUTHORS.md · CONTRIBUTING.md
 legal/copyright_register.md                 → entregable declarado por este módulo
 
-06-Plan-Testings.md                         → NO EXISTE en plan-actual/ (ver §6)
-07-Resultados-Testings.md                   → NO EXISTE en plan-actual/ (ver §6)
+06-Plan-Testings.md                         → creado en la iter. 3 (Log 986)
+07-Resultados-Testings.md                   → creado en la iter. 3 (Log 986)
 ```
 
 ## 3. Contratos de integración
@@ -140,3 +140,62 @@ mención a Berna en `NOTICE.md`) con otras inventadas. La auditoría revirtió e
 - Sellado de tiempo criptográfico (SHA-256) sobre versiones maestras.
 - Procedimientos operativos de registro formal USCO (4 documentos).
 - Pantalla de licencias de terceros en el menú de opciones.
+
+## 7. Actualización de implementación (iter. 3 — DeepSeek-V4.1-Flash / WorkBuddy, Log 986)
+
+Iteración de **tooling de autoría**: 7 herramientas nuevas en `tools/legal/`, cada una con su
+suite, y los 6 gates cableados en `.github/workflows/quality.yml` (job `legal-tools`).
+
+### Qué se agregó
+
+| Herramienta | Item | Qué hace |
+|---|---|---|
+| `insert_copyright_headers.py` | L105 | Cabecera de copyright + SPDX en `.gd`/`.cs`/`.py`. Idempotente, preserva el EOL **por archivo**, salta la línea de coding. Alcance declarado en `headers_scope.json`. |
+| `timestamp_seal.py` | L106 | Sello SHA-256 de las versiones maestras: hash por archivo + `hash_arbol` + cadena `hash_previo`/`hash_cadena`. Alcance en `seal_scope.json`. |
+| `scan_orphan_code.py` | L136 | Detecta código huérfano sin atribución: `SIN_HISTORIAL`, `SIN_CABECERA`, `AUTOR_PLACEHOLDER`. |
+| `validate_asset_metadata.py` | L112 | Valida la metadata de copyright **embebida** (glTF `asset.copyright`, PNG `tEXt`, Vorbis `COPYRIGHT=`, WAV `ICOP`, EXIF `0x8298`) y detecta placeholders por magic number. |
+| `audit_dependencies.py` | L141, L164 | Audita dependencias: addons declarados en `licencias.json`, archivo de licencia en disco, presencia en `NOTICE.md`, manifiestos excluidos del build, assets de terceros sin licencia y placeholders. |
+| `dump_authorship_evidence.py` | L140 | Vuelca commits + diffstat por commit + autores + totales y firma el volcado con SHA-256 (`.sha256` hermano verificable). |
+| `registros_db.py` | L139 | Base centralizada de números de registro, certificados y fechas de concesión (`data/legal/registros.json`), con contrato validado. |
+
+### El techo de deuda: por qué un validador que siempre falla no sirve
+
+`validate_asset_metadata.py` y `audit_dependencies.py` encuentran deuda **real y
+legítima** que este módulo no puede cerrar (los `.glb` sin `asset.copyright` los
+arregla el pipeline de exportación; los `.ttf` HTML son de M46/M88). Un gate de CI
+que siempre sale 1 se desactiva en una semana.
+
+La solución es el **techo de deuda** declarado en el `*_scope.json` de cada
+validador: cada entrada tiene `tipo`, `patron` (glob con `**/`), `max`, `motivo` y
+`dueño`. `--check` falla **solo con hallazgos NUEVOS** (los que superan el techo);
+`--estricto` cuenta todo. La deuda queda **visible** (se imprime con su motivo y su
+dueño) pero no bloquea; y agregar un asset sin copyright **sí** rompe CI, que es lo
+que se quiere. Es el mismo criterio que el skill del proyecto aplica a las
+heurísticas de localización: *una excepción invisible es un agujero negro*.
+
+### Decisiones que se dejaron al dueño (no se resolvieron aquí)
+
+1. **`addons/gdUnit4`** está en disco y **no** declarado en `licencias.json` ni en
+   `NOTICE.md`. Declararlo toca artefactos legales (`NOTICE.md`, `LICENSE`) que
+   genera este mismo módulo: la decisión de declarar o sacar el addon es del dueño.
+   Queda en el baseline con motivo y dueño.
+2. **Alcance de las cabeceras**: el item pide cubrir "los scripts de código fuente".
+   Ampliarlo a todo el repo reescribe ~700 `.gd` y ~200 `.py` **de otros módulos**;
+   en un worktree compartido eso arrastraría trabajo sin commitear ajeno. El alcance
+   actual y el motivo de la ampliación pendiente están en `headers_scope.json`.
+3. **Alcance del sellado**: ídem (`seal_scope.json`) — hoy sella las rutas legales;
+   ampliarlo a `assets/`, `data/audio`, etc. multiplica el tamaño de cada sello.
+
+### Hallazgos reales reportados (no arreglados)
+
+- `addons/gdUnit4` sin declarar (autor *Mike Schulze*, v6.2.1, MIT).
+- Los **3 `.ttf`** de `assets/fonts/` son páginas HTML 404 (**BUG-042**), dueño M46/M88.
+- Los **434 `.glb`** exportados no llevan `asset.copyright` (dueño: pipeline de exportación).
+
+### Bugs de las propias herramientas, encontrados por las suites
+
+`detectar_contenido()` sin `lstrip()`; tabla de magic con OR en vez de AND en
+formatos multi-firma; el parser Vorbis dejaba el NUL terminador en el valor;
+`--json` contaminaba stdout con el resumen; `fnmatch` no da semántica globstar;
+faltaba `import re`; un typo `FORMAT`/`FORMATO`. Detalle y cómo se detectó cada uno
+en `07-Resultados-Testings.md` §5.

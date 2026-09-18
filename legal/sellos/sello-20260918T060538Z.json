@@ -1,0 +1,690 @@
+{
+  "algoritmo": "sha256",
+  "arbol": [
+    {
+      "bytes": 505,
+      "ruta": "AUTHORS.md",
+      "sha256": "eb67d9988c641a3f2c207a07ed1b98a5de035ac4520688e5e98f467058c33007"
+    },
+    {
+      "bytes": 1557,
+      "ruta": "CONTRIBUTING.md",
+      "sha256": "6c969127f6155d06ce50d4884b3eaf088a6431072beb003f5339e901c63433ac"
+    },
+    {
+      "bytes": 1281,
+      "ruta": "LICENSE",
+      "sha256": "ddf0ee06461381fdd32d343a4505b2157735f5454b65a76bad513f84374df2d2"
+    },
+    {
+      "bytes": 2059,
+      "ruta": "NOTICE.md",
+      "sha256": "0ef4e45b13dda309b9cf748c7ce6236fecd3826478ad9dbb6bbc430d2c5fefa8"
+    },
+    {
+      "bytes": 437,
+      "ruta": "game/isla-ancestral/data/legal/artbook.json",
+      "sha256": "7b26c794cf6a056f37a14b1769a30695a614d0a3a192c967f2a9324182ef90e1"
+    },
+    {
+      "bytes": 519,
+      "ruta": "game/isla-ancestral/data/legal/audio_licenses.json",
+      "sha256": "144da23188b5ab3d92aca349752abcb704481d24cebeffa296b8e59c7cb8e964"
+    },
+    {
+      "bytes": 552,
+      "ruta": "game/isla-ancestral/data/legal/clasificacion.json",
+      "sha256": "0bd1b8020d61c32ba6418df627a6757291de9d6527838392032f7bca20c8dfb7"
+    },
+    {
+      "bytes": 608,
+      "ruta": "game/isla-ancestral/data/legal/contratos.json",
+      "sha256": "d4f759c62aa09c59c0370581ca960019d2e59202ed411e8c5de18a0f4d0f3d16"
+    },
+    {
+      "bytes": 2278,
+      "ruta": "game/isla-ancestral/data/legal/copyright.json",
+      "sha256": "f665310a2c937c2f4481bf2c97be0d531ca2f865f1c3edcfedf60888f588e285"
+    },
+    {
+      "bytes": 1443,
+      "ruta": "game/isla-ancestral/data/legal/creditos.json",
+      "sha256": "c019baff338072ce64ee04e4b91b7784e247cea8ece4245e891f137f38e43aa4"
+    },
+    {
+      "bytes": 345,
+      "ruta": "game/isla-ancestral/data/legal/ia_generativa.json",
+      "sha256": "46ad944bedb91c6f51ebb0bf60cf99f051cbc2f376afb3dc31b9afbf0366403d"
+    },
+    {
+      "bytes": 385,
+      "ruta": "game/isla-ancestral/data/legal/identidad_marca.json",
+      "sha256": "69c50477245cf750bd70b6ba44ced30bf6ac9bb0bcfc5390c3befbf15f19fb1d"
+    },
+    {
+      "bytes": 8924,
+      "ruta": "game/isla-ancestral/data/legal/legal_data.json",
+      "sha256": "3cb75c22e9e5d354e50a536ed5a80b3d2730b93982b811c0e2f8e249fbc02471"
+    },
+    {
+      "bytes": 456,
+      "ruta": "game/isla-ancestral/data/legal/licencias.json",
+      "sha256": "eb9c461bbd8fc9c04688ad379541585d67ea874c89a2beb8cd6cf24bd729e67d"
+    },
+    {
+      "bytes": 639,
+      "ruta": "game/isla-ancestral/data/legal/marketing_legal.json",
+      "sha256": "77dbdfb9bf745e90b2418c92bcd32a579ac5756e6dfe6c5bc25cd9d5aa8b2ea1"
+    },
+    {
+      "bytes": 363,
+      "ruta": "game/isla-ancestral/data/legal/menores.json",
+      "sha256": "593b7e1a8676f69af02168badb763376ade219b8b97eead434a25819cae9dd55"
+    },
+    {
+      "bytes": 581,
+      "ruta": "game/isla-ancestral/data/legal/merchandising.json",
+      "sha256": "9bdefa9acfff5313415585807b7fb67275ca2cd2163c0d318d2638a7d0ccb48b"
+    },
+    {
+      "bytes": 459,
+      "ruta": "game/isla-ancestral/data/legal/modelos_3d.json",
+      "sha256": "0c2676975d441f51f0a4ebbfdc45ec117afae11a76f34efe9d18ba7d78791bba"
+    },
+    {
+      "bytes": 679,
+      "ruta": "game/isla-ancestral/data/legal/privacidad.json",
+      "sha256": "8519ff87da803b24663e1629d445c1569b8d441c4ad2f01cbebbbc6c8d0eeb89"
+    },
+    {
+      "bytes": 378,
+      "ruta": "game/isla-ancestral/data/legal/produccion.json",
+      "sha256": "8a74c75f7a40be5799a4d92018760908d6f49f9db8a0e729cdba8a2f0bf4f890"
+    },
+    {
+      "bytes": 818,
+      "ruta": "game/isla-ancestral/data/legal/registros.json",
+      "sha256": "4b24f31a20122bf73abe682bc7d54f29db528c72a7f70669c0f7ecc739bd8d20"
+    },
+    {
+      "bytes": 570,
+      "ruta": "game/isla-ancestral/data/legal/terminos.json",
+      "sha256": "069afbee8c1968214c5c08608162ee9592d8524c011ec7c52583e943470cb3f8"
+    },
+    {
+      "bytes": 1242,
+      "ruta": "game/isla-ancestral/scripts/legal/artbook_validator.gd",
+      "sha256": "593adafe0616c71e6cd2430ed40ad86ec27cd185771a6cef2e8fc591713a7bd3"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/artbook_validator.gd.uid",
+      "sha256": "e36d864d3b3a20766c8cdff44a09dbb9c35f6975f2b298e728719acf917814f8"
+    },
+    {
+      "bytes": 4772,
+      "ruta": "game/isla-ancestral/scripts/legal/asset_validation_m78.gd",
+      "sha256": "636be46c57bfa0f5d5d357ba407e7c0d630b570514856a8eb28c58a6c86ff3de"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/asset_validation_m78.gd.uid",
+      "sha256": "5f0d353417243a576da2220e26ecae2ab39850e68278717b31e9ad745073cbc6"
+    },
+    {
+      "bytes": 2452,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_credit.gd",
+      "sha256": "9c003bf5701d4e001b629ab55b08c026258d2cacf9db1e869a6cf50d05994f5b"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_credit.gd.uid",
+      "sha256": "53af7a430fd7f5ff8fa430c13ec1d0d4656a69ca675d2b58c67fd57e9b73f701"
+    },
+    {
+      "bytes": 3719,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_credits_generator.gd",
+      "sha256": "7b0b9fb733f49084085fe6015348989655cfb1c198c43e4ae8f1862d3f063453"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_credits_generator.gd.uid",
+      "sha256": "574a66747f4999f87e792aa881cb7e913f2fd28d95bf3f5ef7c1c4a35b083c31"
+    },
+    {
+      "bytes": 6118,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_legal_manager.gd",
+      "sha256": "e82d6e1a2f1c0cd745420f740df486c33537cbbe63a20d59e0acd14460117b3c"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_legal_manager.gd.uid",
+      "sha256": "fbf6f3fcdb07549196574702e8be18a0e8f1eb77f04947687590448d1c4c0117"
+    },
+    {
+      "bytes": 4419,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_license.gd",
+      "sha256": "09b5bcb61bd7ca6361d952fca6ac8c2f6a61de53fabe5efa3aedc59438ca6d4e"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_license.gd.uid",
+      "sha256": "e476ffb4c8869de2a98955d025fb4d8882779790ba54c3daa7dec3072e517a01"
+    },
+    {
+      "bytes": 1366,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_license_validator.gd",
+      "sha256": "77f5acc6591cef3e9e9ed6c2b37989fbd91610c211499ca6a6131b1bd314bcd4"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/audio_license_validator.gd.uid",
+      "sha256": "91edad9fa7127ebff8e689b17124369ae77f311477f3c10ff128ff8d9cc906be"
+    },
+    {
+      "bytes": 1245,
+      "ruta": "game/isla-ancestral/scripts/legal/brand_validator.gd",
+      "sha256": "ebc86dcedd2fc725b42e81a50ee0eb859f1900684b31665bdc46eb98320f299b"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/brand_validator.gd.uid",
+      "sha256": "2ffec764821b3eff5719ff24ecd34b92ab197b5c066a715858884a7e902f4cf2"
+    },
+    {
+      "bytes": 1332,
+      "ruta": "game/isla-ancestral/scripts/legal/contract_validator.gd",
+      "sha256": "905e7a1b9b15d6c2ac3441496d48b2a9b405116ff5bf5fd62b4573896acb3ee9"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/contract_validator.gd.uid",
+      "sha256": "8ae29652be37d86297ba6ab598eb4deb063395079e686dcf4f7703dfd22ea80e"
+    },
+    {
+      "bytes": 1479,
+      "ruta": "game/isla-ancestral/scripts/legal/copyright_validator.gd",
+      "sha256": "2ddcc71737bf04d8761aec96d0195e00313799da2baf140d0bbae0e367685010"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/copyright_validator.gd.uid",
+      "sha256": "f4a751198ee50a76854a777e26c5eeab0c5d9171ffdcff7d4dbbc758ba4646af"
+    },
+    {
+      "bytes": 10034,
+      "ruta": "game/isla-ancestral/scripts/legal/credits_manager.gd",
+      "sha256": "6acb35dde1fa51e36c1cc42981d6b33a1bfdcea18a903a2ebb7d728e722382ca"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/credits_manager.gd.uid",
+      "sha256": "d32235b9fb4598ebe2bca893a4162c287ff334c1b0f961d9a4c66e847b8d7c33"
+    },
+    {
+      "bytes": 1261,
+      "ruta": "game/isla-ancestral/scripts/legal/credits_validator.gd",
+      "sha256": "f875f39e48420a5a2c9d1809324e6a0fa72c3e23251801bc4134b25d711cdd10"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/credits_validator.gd.uid",
+      "sha256": "a67d2f50c054c829636329e57b88395d261e78f20ce1785e8bda0b6149c7db66"
+    },
+    {
+      "bytes": 1140,
+      "ruta": "game/isla-ancestral/scripts/legal/genai_validator.gd",
+      "sha256": "46ed664a208d925d66b0148d465caeec30518aab9b836f3747de48c4881f5b6a"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/genai_validator.gd.uid",
+      "sha256": "2f035dd1d319fa0b0f1a4ad8fb04d0b7afbb6ba6706065b9ec97b8ab936ad4c8"
+    },
+    {
+      "bytes": 7840,
+      "ruta": "game/isla-ancestral/scripts/legal/legal_validator.gd",
+      "sha256": "3aa88e5e5e2c4110cb7c63c1004d8ba97c05d765a14fd82a8eb4a0ce5479732b"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/legal_validator.gd.uid",
+      "sha256": "5ee580d3bcb5ab6ae2ff8a9f45c3d7ee1999a6cde56f1cff7f1ad10f527be00d"
+    },
+    {
+      "bytes": 7031,
+      "ruta": "game/isla-ancestral/scripts/legal/license_validator.gd",
+      "sha256": "8b7acb2df66a1b63213f7da2cac5902fc4a89e9400235189afe830f50cdbb0e0"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/license_validator.gd.uid",
+      "sha256": "ae85ef4b36a0a6c6f4d448bb156bc169a14938a9512a13348a0d973bdade16d4"
+    },
+    {
+      "bytes": 1326,
+      "ruta": "game/isla-ancestral/scripts/legal/marketing_legal_validator.gd",
+      "sha256": "2c2ddd7204c9623d42e35b922d1faf81fe1582adb3eeb9ced64d07d6e2cf02d5"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/marketing_legal_validator.gd.uid",
+      "sha256": "4de8d9d4f62459dcad91697c9f066e8bfb57da90822f7b0ebc50ca89f46caed9"
+    },
+    {
+      "bytes": 1348,
+      "ruta": "game/isla-ancestral/scripts/legal/merch_validator.gd",
+      "sha256": "e52f70f99123e14dcc966eff599dc0918962ce35e28507f1397d7005f2f729d9"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/merch_validator.gd.uid",
+      "sha256": "34338249f55c715b15405526e4e9ae381547cd814a1537685d3715c53b6165ce"
+    },
+    {
+      "bytes": 1336,
+      "ruta": "game/isla-ancestral/scripts/legal/minors_validator.gd",
+      "sha256": "df57a4a60f2e50e3d61a80d0f2913af687eec13682ab81e5dd28d12318f6f238"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/minors_validator.gd.uid",
+      "sha256": "de32d447e044c9463670498b62519b6e528e526263921054bb78f5de633c9bc9"
+    },
+    {
+      "bytes": 1136,
+      "ruta": "game/isla-ancestral/scripts/legal/model3d_validator.gd",
+      "sha256": "22fceb4fec9707393d5049631564acb24af9f5dc775c1d76463783ca8c0b9a69"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/model3d_validator.gd.uid",
+      "sha256": "1b436c2a515aca81f51bb96c08ab0a8c89984bac62ce637ebe99be68b8058b39"
+    },
+    {
+      "bytes": 1362,
+      "ruta": "game/isla-ancestral/scripts/legal/privacy_validator.gd",
+      "sha256": "d18132479b7043912f25bc7862c19aa93a4e01e48ebbfe363bf9da5b0474a254"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/privacy_validator.gd.uid",
+      "sha256": "1656cde296270ab51fbe6881721433b187178856e0cdbec1cfa9d1acfdfef968"
+    },
+    {
+      "bytes": 1230,
+      "ruta": "game/isla-ancestral/scripts/legal/production_validator.gd",
+      "sha256": "3c9f6b066eaa3d5b01fdf72d8df9a8d0c5f6af39a912bcc5c664e582494634bd"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/production_validator.gd.uid",
+      "sha256": "2cd71c5bea200459ec785115fd517359bcadf6adad8e4998cd96d1adcc288160"
+    },
+    {
+      "bytes": 1418,
+      "ruta": "game/isla-ancestral/scripts/legal/rating_validator.gd",
+      "sha256": "0d4652f843d483180131c1f69b1d0d802bd8e69f4a2879ec40b85d1a19e9bff1"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/rating_validator.gd.uid",
+      "sha256": "7ec71de2ddd38f2614b2bcbec8597943df3c39a43ae71a45f5499692b29c46c7"
+    },
+    {
+      "bytes": 1415,
+      "ruta": "game/isla-ancestral/scripts/legal/terms_validator.gd",
+      "sha256": "46a76d037c4bc38e3e5294c0888107ad04419e5e455d9ca4bbf33f3ef0b1d747"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/terms_validator.gd.uid",
+      "sha256": "a04c62c9c7bf74d797dea17fa40b10aa3afb3504bedcf966083e7265f6ab5ece"
+    },
+    {
+      "bytes": 2296,
+      "ruta": "game/isla-ancestral/scripts/legal/test_artbook_m130.gd",
+      "sha256": "47ce8d47a599d6c8f6a978f45be7cb50057e63fae7b2652075c7e72ba8a55d03"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_artbook_m130.gd.uid",
+      "sha256": "4bdf62b203540f1d90efb6809bb3cee0e518c311763eed631ec6800d8188d703"
+    },
+    {
+      "bytes": 2409,
+      "ruta": "game/isla-ancestral/scripts/legal/test_audio_licenses_m84.gd",
+      "sha256": "a75f97efc291840c3bc5740a350efc46814eb37723599613d1f91eeea87b2c3d"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_audio_licenses_m84.gd.uid",
+      "sha256": "07104034d1a11a931aceaa6bbca009f0c688f4f97b535bd8960d44ae1d98cc91"
+    },
+    {
+      "bytes": 2327,
+      "ruta": "game/isla-ancestral/scripts/legal/test_brand_m128.gd",
+      "sha256": "f81dcea343ec41cac133ccdd41401e49c281bbb8b6fcd59b3aa1bfbaee352cee"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_brand_m128.gd.uid",
+      "sha256": "48bf2e6445d453c85cabdc7476812d87acc2c430c664e2325855bf29736dfcfb"
+    },
+    {
+      "bytes": 2458,
+      "ruta": "game/isla-ancestral/scripts/legal/test_contracts_m79.gd",
+      "sha256": "438cee5c42a0d016e77738dc3e0bd7f33f7ce007066cc961d1ec0f6c2c7e2ac8"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_contracts_m79.gd.uid",
+      "sha256": "7aff22cdfb138b199d247cdef11dfe099c29f7c1603ca0dd90f0131fb0aed619"
+    },
+    {
+      "bytes": 7126,
+      "ruta": "game/isla-ancestral/scripts/legal/test_copyright_m127.gd",
+      "sha256": "ec81050be36def099b92cf43351f947468bfa68f04a67793ae0abb315e96205c"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/test_copyright_m127.gd.uid",
+      "sha256": "443f91ed92785aa490bd271ad48d0b7d330d3c5e871b0d510cacdafe217fcf08"
+    },
+    {
+      "bytes": 2311,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131.gd",
+      "sha256": "2b8cf0b41376340865b8697415fe95beef405750b26e38e892c1ddbc3f6fd471"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131.gd.uid",
+      "sha256": "dc2a8fe5e48ef64242d29785d43ce3e838d0c7402afccd9742e30f92c882c064"
+    },
+    {
+      "bytes": 8530,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131_iter2.gd",
+      "sha256": "f85a61cc2b7676124e50ac01a135dbe3422c89e22811ccefaed0ce578f2ad17b"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131_iter2.gd.uid",
+      "sha256": "e7ba63213a00d14f4858e68e1b1bf544925370db3ec31d821e200885ea2955f3"
+    },
+    {
+      "bytes": 5524,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131_v2.gd",
+      "sha256": "bf6198497695e2121375442f7b0504e005dff67797b737f8218e9482d532b00e"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/test_credits_m131_v2.gd.uid",
+      "sha256": "cf69c47481833e7692d39e0854c53cb9e05d4b48fe1abaaf82fd161c5b55f0a7"
+    },
+    {
+      "bytes": 2506,
+      "ruta": "game/isla-ancestral/scripts/legal/test_genai_m86.gd",
+      "sha256": "ddd886045de4d9de0d4ec157524b13bf403b30b7c67a7b24f8cd7136cb368b54"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_genai_m86.gd.uid",
+      "sha256": "db2bda386fefac4f6a30d21ba7d32b012cc7ec73019bd53035af61e69cd422b7"
+    },
+    {
+      "bytes": 8137,
+      "ruta": "game/isla-ancestral/scripts/legal/test_legal_m78.gd",
+      "sha256": "3cde98fc8190b5f21c96c68060d62d1d21bf828becb18133a2ffe1e418020091"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_legal_m78.gd.uid",
+      "sha256": "8c13326fd90e5571720031aa444d875887a77e196ea95f9e097bf710171b841a"
+    },
+    {
+      "bytes": 5222,
+      "ruta": "game/isla-ancestral/scripts/legal/test_legal_m78_v2.gd",
+      "sha256": "bf9b5ce050203da452eb298882ac79069f3c7ae4d40f8f49aa8861f16a3c4710"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_legal_m78_v2.gd.uid",
+      "sha256": "cb9411619aef7b4b2232f20fa60a090509152a6dfd457de6a18f52c01b636dc0"
+    },
+    {
+      "bytes": 4593,
+      "ruta": "game/isla-ancestral/scripts/legal/test_licenses_m83.gd",
+      "sha256": "28bef8cd31fb662fd4eaf3e57258227c2b2bd6d23e99edabccf6ac4d37d68088"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_licenses_m83.gd.uid",
+      "sha256": "746398fe322ab6bfa14107b7ffedc3f3aabe9e26e9df960e1d3281293c998004"
+    },
+    {
+      "bytes": 2488,
+      "ruta": "game/isla-ancestral/scripts/legal/test_marketing_legal_m126.gd",
+      "sha256": "9695951c0c293093b26b1f90855846a38a077259525e67ad92e3bc356762e59f"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_marketing_legal_m126.gd.uid",
+      "sha256": "cbbd23fbd0d2ff78d477f495e34be1939b7a482c95dd23711491190edcd3aaad"
+    },
+    {
+      "bytes": 2328,
+      "ruta": "game/isla-ancestral/scripts/legal/test_merch_m129.gd",
+      "sha256": "d1c11f3655aec325d9992aa9a9f409ab328ee148f556b4ef7eb83446d0f48551"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_merch_m129.gd.uid",
+      "sha256": "6ae0a13e03678e69016a9c8ea1cdc723e3cd916e48723a0cfd74befe59a78b1d"
+    },
+    {
+      "bytes": 2372,
+      "ruta": "game/isla-ancestral/scripts/legal/test_minors_m81.gd",
+      "sha256": "4667bfd4bb7c9beae79d3cd512e559ef4b4cd567d7b62cf78be0468c8fb895e7"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/test_minors_m81.gd.uid",
+      "sha256": "780dc74bfa419a46ceb39c532776eb752e00675d4c541a4f0aa955817d192ff6"
+    },
+    {
+      "bytes": 2344,
+      "ruta": "game/isla-ancestral/scripts/legal/test_model3d_m85.gd",
+      "sha256": "c5d473f65fc1b5539257c68fd98ba5f379540b715e9855708645d2618fac4920"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_model3d_m85.gd.uid",
+      "sha256": "a362c012bec5c5eb4ad7a93afc741ee1153dbc38460fb285c0b5200df8740ea9"
+    },
+    {
+      "bytes": 2595,
+      "ruta": "game/isla-ancestral/scripts/legal/test_privacy_m80.gd",
+      "sha256": "75a9b2c2eae49da8954c6efe4488186af4cb07782608f2e752e370a62b9d7a84"
+    },
+    {
+      "bytes": 19,
+      "ruta": "game/isla-ancestral/scripts/legal/test_privacy_m80.gd.uid",
+      "sha256": "8c83526ea74256fc0c6fb8dc9e8f6939d7a85eb1f644be9209dfc80220b52c24"
+    },
+    {
+      "bytes": 2323,
+      "ruta": "game/isla-ancestral/scripts/legal/test_production_m132.gd",
+      "sha256": "e4b420ba6b78e8bcd41895d7cfca13799c63bffd8d4e30b6afdb852d304818de"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_production_m132.gd.uid",
+      "sha256": "0fb7c1c21008507fc298431ef440e2e579c098bf8b0b6867d065fa9101df9152"
+    },
+    {
+      "bytes": 2546,
+      "ruta": "game/isla-ancestral/scripts/legal/test_rating_m82.gd",
+      "sha256": "d89078abd637df633770c1b6b1a4c4ef96552106f079d765e534f6896cf2022e"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_rating_m82.gd.uid",
+      "sha256": "4914b249a94d9033910136eb99cfef835904d8ba208393443c807a256e7d1ae1"
+    },
+    {
+      "bytes": 2448,
+      "ruta": "game/isla-ancestral/scripts/legal/test_terms_m125.gd",
+      "sha256": "f27acf189aad72cf63e513a98521e0299566b23a605944b2ec54f95517bc5a01"
+    },
+    {
+      "bytes": 20,
+      "ruta": "game/isla-ancestral/scripts/legal/test_terms_m125.gd.uid",
+      "sha256": "0a9d9331da3c5356682e5731225b8daf676aafcb56397701e65c19a37df6df50"
+    },
+    {
+      "bytes": 3030,
+      "ruta": "legal/copyright_register.md",
+      "sha256": "5900e93cfc30ce602c45839d8007da08867428bf01e0a8f3d81f5c3158f037ef"
+    },
+    {
+      "bytes": 2326,
+      "ruta": "tools/legal/asset_metadata_scope.json",
+      "sha256": "1c65c888be9200bdff7c537cd32a7a6eec5da2d730dadf68ed2c74cb913980ef"
+    },
+    {
+      "bytes": 17388,
+      "ruta": "tools/legal/audit_dependencies.py",
+      "sha256": "40dc19612a40798a87971715ec3e7f0f2b07894e874e631764125c59fad0ee6e"
+    },
+    {
+      "bytes": 2780,
+      "ruta": "tools/legal/audit_dependencies_scope.json",
+      "sha256": "376af63171665b63d70ee4d5e3b77e1b0d103ae312379b64ab131b29b6bd5cab"
+    },
+    {
+      "bytes": 10224,
+      "ruta": "tools/legal/dump_authorship_evidence.py",
+      "sha256": "1d9bccb40c07080975f46f3a08d569b71521e427740225d400614a4a0f5590b1"
+    },
+    {
+      "bytes": 9244,
+      "ruta": "tools/legal/generate_authors.py",
+      "sha256": "b72efdee815bcde3c34ede0ed24a056aa83768ec3a219627a0625a5d3cd91225"
+    },
+    {
+      "bytes": 8141,
+      "ruta": "tools/legal/generate_copyright_docs.py",
+      "sha256": "da1756597e8260cc1504d59da2a427d9cdfca865b94a786d3553558432c3d471"
+    },
+    {
+      "bytes": 7634,
+      "ruta": "tools/legal/generate_copyright_register.py",
+      "sha256": "caa540f61ca7f36f64ddebb57f8c5d46f805c5aae85b70c0b5802c7308e1c4db"
+    },
+    {
+      "bytes": 990,
+      "ruta": "tools/legal/headers_scope.json",
+      "sha256": "3f706b2a59925dba09810078299bea181ee5a3650bd231ae70c9083c94c232bf"
+    },
+    {
+      "bytes": 11778,
+      "ruta": "tools/legal/insert_copyright_headers.py",
+      "sha256": "43ac52c1d7649215da75cd76e96556146867d6b3e6d1d10761f29f9cd75b3175"
+    },
+    {
+      "bytes": 9485,
+      "ruta": "tools/legal/registros_db.py",
+      "sha256": "ee174148da3d9a4f839766e98bd86c9136ea7662b40b5d560c5d18a039513e53"
+    },
+    {
+      "bytes": 7383,
+      "ruta": "tools/legal/scan_orphan_code.py",
+      "sha256": "34d780e5ffdf81717719d00be2cc8446806bf9be83cf9921a90e9a249cb7e5b4"
+    },
+    {
+      "bytes": 1064,
+      "ruta": "tools/legal/seal_scope.json",
+      "sha256": "7e28377adc8e1a41fa612c63811620f49794e74afd46a99f240afaee4dbcdb75"
+    },
+    {
+      "bytes": 4694,
+      "ruta": "tools/legal/signoff_check.py",
+      "sha256": "a2d9c970ec5e62c1824f942c11323267281c39adbb2f48e0f0b36c6245300f94"
+    },
+    {
+      "bytes": 13893,
+      "ruta": "tools/legal/test_audit_dependencies.py",
+      "sha256": "faf7040b2b03c5b71fa157c5a9abe83dcfa6715a199999d119f9de1aff2dda1e"
+    },
+    {
+      "bytes": 8768,
+      "ruta": "tools/legal/test_dump_authorship_evidence.py",
+      "sha256": "d7a9ad9c285d4800c0319c72e9ace304f14f58a787d3d31bace5e56bed07db1d"
+    },
+    {
+      "bytes": 2853,
+      "ruta": "tools/legal/test_generate_authors.py",
+      "sha256": "5964034b294c226ae282f5a14fddfa5f7e4001e3ca9c8f145936c06b8f17a1e9"
+    },
+    {
+      "bytes": 3263,
+      "ruta": "tools/legal/test_generate_copyright.py",
+      "sha256": "569d0776bd5ffff1879727557481f78f13b6dff3bda4039fe49ae022c4537dd9"
+    },
+    {
+      "bytes": 5965,
+      "ruta": "tools/legal/test_generate_register.py",
+      "sha256": "7ead836cd7c79083eec18f84551d1445802a5003a75b739a5473077896428cd6"
+    },
+    {
+      "bytes": 7935,
+      "ruta": "tools/legal/test_insert_copyright_headers.py",
+      "sha256": "24d3756166ce5636d247d9ef86903b99d97d9cf1195e403ef2e2d6988a9f382c"
+    },
+    {
+      "bytes": 10340,
+      "ruta": "tools/legal/test_registros_db.py",
+      "sha256": "d5cf052d0bb64d0916cad34dc89dc86e26dbf0e47d0015971942a0ae0ccf1727"
+    },
+    {
+      "bytes": 7025,
+      "ruta": "tools/legal/test_scan_orphan_code.py",
+      "sha256": "a9b2d729a9ddf0f21d7651fb221ddfcbb36567795943372aaa0626d5fa96d5c1"
+    },
+    {
+      "bytes": 3413,
+      "ruta": "tools/legal/test_signoff_check.py",
+      "sha256": "77a77c3e5af1913a95d7b0d8965e725b85ae2a86712b993254c84c6fe3520e46"
+    },
+    {
+      "bytes": 9362,
+      "ruta": "tools/legal/test_timestamp_seal.py",
+      "sha256": "ba70c72e8b2db0b7d0b78180b74b1218cf2af9f6b55c54ff607d4195f1dc43d5"
+    },
+    {
+      "bytes": 21584,
+      "ruta": "tools/legal/test_validate_asset_metadata.py",
+      "sha256": "93e2f6c11e12aba3f093d48aabe539deb1d9b8509de6e702489b7bc5cddbc0c0"
+    },
+    {
+      "bytes": 11449,
+      "ruta": "tools/legal/timestamp_seal.py",
+      "sha256": "d7d5eacccff9e957f429c8f358a5b3e302a7475fb625bbd484d154e886795f45"
+    },
+    {
+      "bytes": 23104,
+      "ruta": "tools/legal/validate_asset_metadata.py",
+      "sha256": "7e3322325dbf89e8fcea061f11cb2944099be9b3912216a7f7fcbdfb65490233"
+    }
+  ],
+  "archivos": 135,
+  "bytes_totales": 390704,
+  "creado_utc": "2026-09-18T06:05:38Z",
+  "git_branch": "main",
+  "git_commit": "402cfbb52c791aa98ccd9130219dd8d01689991c",
+  "hash_arbol": "1ab1687367daad9e83c51504e5428b4ad5f6f3af57df22c757d6011b6b27bd7b",
+  "hash_cadena": "0786f5d5871c88ad92b3439c5d1f1cab2835905197a51bbc9f04e88adfaa939f",
+  "hash_previo": null,
+  "sello_id": "20260918T060538Z",
+  "version": 1
+}

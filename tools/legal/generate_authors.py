@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # M127: Copyright - Generador de AUTHORS.md y CONTRIBUTING.md desde git log (iter 2).
 # Lee el historial de git (commits, autores, fechas) y produce:
 #   - AUTHORS.md: lista de contribuidores ordenada por numero de commits

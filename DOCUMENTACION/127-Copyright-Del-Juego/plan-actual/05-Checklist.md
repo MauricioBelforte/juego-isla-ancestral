@@ -1,3 +1,5 @@
+> **ITER. 3 — TOOLING DE AUTORÍA (2026-09-18, DeepSeek-V4.1-Flash / WorkBuddy, Log 986):** se cierran 12 ítems con 7 herramientas nuevas en `tools/legal/`, cada una con su suite propia (32+30+19+71+40+35+44 = **271 checks, 0 fallos**) y cableadas en `.github/workflows/quality.yml` (job `legal-tools`). Los validadores usan un **techo de deuda** declarado en su `*_scope.json`: `--check` falla solo con hallazgos NUEVOS, así que la deuda conocida no rompe CI pero un hallazgo nuevo sí. Hallazgos reales reportados (no arreglados aquí, son de otros dueños): **addons/gdUnit4** sin declarar en `licencias.json`/`NOTICE.md`; los **3 `.ttf`** de `assets/fonts/` son páginas HTML 404 (BUG-042); los **434 `.glb`** exportados no llevan `asset.copyright`. Resultado: **51 [x] · 25 [?] · 25 [ ]**.
+>
 > **RE-VERIFICADO SELECTIVAMENTE (2026-09-15, iter. 2 — DeepSeek-V4.1-Flash / WorkBuddy, Log 923):** el módulo había sido revertido a `0/101` por la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real y citando secciones de `03-Diseno.md` que **no existen**: 2.3, 3.1, 3.2, 4.2, 4.3 — el documento sólo tiene §1, §2 y §3). Se re-marca ítem por ítem con criterio auditable: **[x]** cita un artefacto real o una sección existente de `03-Diseno.md`; **[?]** nombra el dueño externo o la acción humana requerida; **[ ]** es trabajo pendiente real de este módulo. Se **preservan** las 4 marcas previas de MiMo V2.5 (minimax-m3-free) y se refresca su nota de test (9 → 13 checks). Resultado: **39 [x] · 25 [?] · 37 [ ]**.
 
 > **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
@@ -85,16 +87,16 @@
 
 ### [S] Pruebas de copyright
 - [x] Diseñar prueba de que git logs muestran autoría correcta — OK tools/legal/test_generate_authors.py 10/10 (lee git log real)
-- [ ] Diseñar prueba de que timestamps sean consistentes → KnownIssue no bloqueante DoD: consistencia de timestamps garantizada por git (author date + commit date) + filesystem mtime; validacion automatica posible con script. Design documentado en operativa/copyright.md.
-- [ ] Diseñar prueba de que borradores estén accesibles → KnownIssue no bloqueante DoD: borradores en repositorio git (accesibles via git log); politica de acceso documentada en AGENTS.md §3. Prueba: verificar commits existen.
-- [ ] Diseñar prueba de que metadata esté presente → KnownIssue no bloqueante DoD: metadata de assets registrada en inventarios data-driven (inventarios_2d.json, etc.); verificacion automatica mediante validador. Design documentado.
+- [x] Diseñar prueba de que timestamps sean consistentes → KnownIssue no bloqueante DoD: consistencia de timestamps garantizada por git (author date + commit date) + filesystem mtime; validacion automatica posible con script. Design documentado en operativa/copyright.md. — OK tools/legal/timestamp_seal.py + --cadena (test 30/30): sella SHA-256 de 135 archivos maestros y encadena cada sello al anterior
+- [x] Diseñar prueba de que borradores estén accesibles → KnownIssue no bloqueante DoD: borradores en repositorio git (accesibles via git log); politica de acceso documentada en AGENTS.md §3. Prueba: verificar commits existen. — OK tools/legal/dump_authorship_evidence.py (test 35/35): vuelca commits + diffstat desde git log y firma el volcado con SHA-256 verificable
+- [x] Diseñar prueba de que metadata esté presente → KnownIssue no bloqueante DoD: metadata de assets registrada en inventarios data-driven (inventarios_2d.json, etc.); verificacion automatica mediante validador. Design documentado. — OK tools/legal/validate_asset_metadata.py (test 71/71): valida la metadata de copyright EMBEBIDA (glTF asset.copyright, PNG tEXt, Vorbis COPYRIGHT=, WAV ICOP, EXIF 0x8298) y detecta placeholders
 
 ## Totales
 
 **Total de ítems:** 101
-**Ítems verificados con evidencia citada [x]:** 39
+**Ítems verificados con evidencia citada [x]:** 51
 **Ítems con dueño externo o accion humana [?]:** 25
-**Ítems pendientes de implementación [ ]:** 37
+**Ítems pendientes de implementación [ ]:** 25
 
 ## Extensión QA cruzado (consolidación 2026-08-20)
 
@@ -102,14 +104,14 @@
 
 ### Implementación
 - [x] Desarrollar script para generar automáticamente el archivo de avisos de copyright y atribución en cada build [S] — OK tools/legal/generate_copyright_docs.py -> NOTICE.md + LICENSE (test 13/13)
-- [ ] Implementar protocolo automatizado de inserción de encabezados de copyright en scripts de código fuente (.gd / .cs) [S]
-- [ ] Crear sistema de sellado de tiempo criptográfico (hashes SHA-256) sobre versiones maestras de código, arte y audio [M]
+- [x] Implementar protocolo automatizado de inserción de encabezados de copyright en scripts de código fuente (.gd / .cs) [S] — OK tools/legal/insert_copyright_headers.py --check (test 32/32): idempotente, preserva el EOL por archivo y salta la linea de coding
+- [x] Crear sistema de sellado de tiempo criptográfico (hashes SHA-256) sobre versiones maestras de código, arte y audio [M] — OK tools/legal/timestamp_seal.py (test 30/30): SHA-256 por archivo + hash_arbol + cadena hash_previo/hash_cadena
 - [ ] Documentar procedimiento operativo paso a paso para el registro formal de código ante la US Copyright Office (USCO) [M]
 - [ ] Documentar procedimiento operativo para el registro formal de arte 2D/3D y logos ante la USCO (Visual Arts) [M]
 - [ ] Documentar procedimiento operativo para el registro formal de la banda sonora ante la USCO (Sound Recording) [M]
 - [ ] Documentar procedimiento operativo para el registro formal de la narrativa y biblia de lore ante la USCO (Literary Work) [M]
-- [ ] Diseñar sistema de resguardo inmutable de logs de Git y commits para trazabilidad de autoría en litigios [M]
-- [ ] Implementar validador de metadata de copyright embebida en assets exportados (texturas, modelos, música) [S]
+- [x] Diseñar sistema de resguardo inmutable de logs de Git y commits para trazabilidad de autoría en litigios [M] — OK tools/legal/dump_authorship_evidence.py: volcado + .sha256 hermano; --verificar detecta un byte alterado (probado por inyeccion). La inmutabilidad la da el hash + el versionado en git, no el filesystem
+- [x] Implementar validador de metadata de copyright embebida en assets exportados (texturas, modelos, música) [S] — OK tools/legal/validate_asset_metadata.py (test 71/71); hallazgo real: los 434 .glb exportados no llevan asset.copyright (techo de deuda declarado, dueño: pipeline de exportacion)
 
 ### Integración
 - [?] Integrar con M118 (CI/CD) para verificar automáticamente la presencia de cabeceras de copyright en cada PR [M] — **dueno: M118** (depende de que exista el inserter de cabeceras)
@@ -133,12 +135,12 @@
 
 ### Optimización
 - [ ] Automatizar el empaquetado de código y muestras visuales según formatos y límites USCO → KnownIssue no bloqueante DoD: automatizacion requerira script Python; especificaciones USCO documentadas en 03-Diseno.md §4.2. Deferred a tooling iteracion.
-- [ ] Desarrollar herramienta de escaneo de repositorio para detectar código huérfano sin atribución de autor [M]
+- [x] Desarrollar herramienta de escaneo de repositorio para detectar código huérfano sin atribución de autor [M] — OK tools/legal/scan_orphan_code.py --check (test 19/19): SIN_HISTORIAL + SIN_CABECERA + AUTOR_PLACEHOLDER, con alcance declarado en scope
 - [?] Optimizar costos de registro formal agrupando múltiples obras relacionadas bajo registros colectivos [S] — **dueno: usuario** (decision de registro)
 - [ ] Diseñar pipeline de metadata que no incremente innecesariamente el tamaño de los paquetes de distribución [S]
-- [ ] Centralizar base de datos de números de registro, certificados y fechas de concesión de derechos de autor [S]
-- [ ] Simplificar la recolección de pruebas periciales de autoría mediante scripts de volcado de commits y diffs [M]
-- [ ] Implementar auditoría automatizada de dependencias para certificar la ausencia de código no autorizado [M]
+- [x] Centralizar base de datos de números de registro, certificados y fechas de concesión de derechos de autor [S] — OK tools/legal/registros_db.py + data/legal/registros.json (test 44/44): contrato validado, numero unico, fecha no futura, elemento contra copyright.json
+- [x] Simplificar la recolección de pruebas periciales de autoría mediante scripts de volcado de commits y diffs [M] — OK tools/legal/dump_authorship_evidence.py (test 35/35): commits + diffstat por commit + totales + autores, con huella SHA-256
+- [x] Implementar auditoría automatizada de dependencias para certificar la ausencia de código no autorizado [M] — OK tools/legal/audit_dependencies.py --check (test 40/40); hallazgo real: addons/gdUnit4 esta en disco y NO declarado en licencias.json ni NOTICE.md
 - [?] Mantener matriz de titularidad de derechos actualizada ante eventuales cesiones, acuerdos o publishing — **dueno: usuario** (requiere acuerdos firmados)
 
 ### Documentación
@@ -161,7 +163,7 @@
 - [?] Diseñar sello distintivo de copyright oficial para manuales de juego, artbooks y piezas de coleccionista [S] — **dueno: M46 / M130**
 - [ ] Realizar revisión semestral de la consistencia de marcas y avisos de copyright en todas las plataformas soportadas [S]
 - [ ] Documentar registro de la primera fijación y uso ininterrumpido del nombre 'Isla Ancestral' como evidencia de derechos marcarios ante eventuales oposiciones [M]
-- [ ] Diseñar auditoría de dependencias del repositorio para certificar que el build final no incorpora assets placeholder de terceros sin licencia [M]
+- [x] Diseñar auditoría de dependencias del repositorio para certificar que el build final no incorpora assets placeholder de terceros sin licencia [M] — OK tools/legal/audit_dependencies.py --check (test 40/40): ASSET_PLACEHOLDER detecta los 3 .ttf que son HTML 404 (BUG-042) + manifiestos no declarados + assets de terceros sin licencia
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 

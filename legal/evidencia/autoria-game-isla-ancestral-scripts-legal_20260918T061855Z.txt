@@ -1,0 +1,36 @@
+Generado (UTC): 20260918T061855Z
+Herramienta    : tools/legal/dump_authorship_evidence.py
+
+EVIDENCIA DE AUTORIA - Isla Ancestral
+========================================================================
+Alcance   : game/isla-ancestral/scripts/legal
+Rango     : inicio .. HEAD
+Commits   : 5
+Autores   : 1
+
+------------------------------------------------------------------------
+1. AUTORES
+------------------------------------------------------------------------
+  Mauricio Belforte                <belymau@hotmail.com>  5 commit(s)
+
+------------------------------------------------------------------------
+2. COMMITS (hash | autor | fecha_autor | fecha_commit | archivos | +/- | asunto)
+------------------------------------------------------------------------
+b763066ca8f2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:33:34-03:00 | 2026-09-17T02:33:34-03:00 | 11 | +1353/-38 | chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+39803bbdfecb | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T02:01:54-03:00 | 2026-09-16T02:01:54-03:00 | 1 | +102/-13 | feat(M127): iter. 2 — re-marcado honesto, entregable colgante y guardian anti-falso-verde
+580a32cae4a3 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:28:37-03:00 | 2026-09-06T00:28:37-03:00 | 4 | +345/-3 | Se actualizaron inventario, herramientas, localización, legal y accesibilidad
+b8bd39f36efc | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:37:46-03:00 | 2026-09-02T18:37:46-03:00 | 2 | +301/-0 | Se agregaron 11-BUGS, logs renumerados 401-553, checklists M14-M160, scripts economía/fauna/vehículos/ubicaciones/inventario, datos herramientas/ubicaciones/vegetación, herramientas CI, cangrejo playa
+9450f6a39d90 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:14:28-03:00 | 2026-09-02T02:14:28-03:00 | 34 | +1932/-0 | Se agregó código GDScript nuevo y actualizado de múltiples módulos
+
+------------------------------------------------------------------------
+3. TOTALES
+------------------------------------------------------------------------
+  archivos tocados : 52
+  lineas agregadas : 4033
+  lineas borradas  : 54
+  primer commit    : 9450f6a39d90 (2026-09-02T02:14:28-03:00)
+  ultimo commit    : b763066ca8f2 (2026-09-17T02:33:34-03:00)
+
+Nota: el CUERPO de este volcado es determinista para un rango fijo de
+commits; la huella SHA-256 del archivo .sha256 cubre el archivo completo,
+incluida la cabecera de generacion.

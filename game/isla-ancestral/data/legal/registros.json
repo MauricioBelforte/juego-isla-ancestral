@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "descripcion": "Base centralizada de numeros de registro, certificados y fechas de concesion de derechos de autor (M127, item L139). La consume tools/legal/registros_db.py. NO confundir con copyright.json: ese declara QUE elementos existen y su proteccion automatica (Berna); este anota los registros FORMALES obtenidos, con numero, certificado y fecha.",
+  "esquema": {
+    "elemento": "id de un elemento de copyright.json (p. ej. codigo_fuente)",
+    "tipo_registro": "codigo_fuente | artes_visuales | grabacion_sonora | obra_literaria | marca",
+    "numero": "numero de registro otorgado por la oficina (unico)",
+    "fecha_concesion": "AAAA-MM-DD, no puede estar en el futuro",
+    "certificado": "ruta o identificador del certificado emitido",
+    "notas": "opcional"
+  },
+  "registros": []
+}

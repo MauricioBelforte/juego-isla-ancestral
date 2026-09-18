@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # M127 iter 3: Test del generador de AUTHORS.md y CONTRIBUTING.md.
 
 import os

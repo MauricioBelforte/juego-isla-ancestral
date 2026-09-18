@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "descripcion": "Alcance de la auditoria de dependencias (M127 iter. 3, items L141 y L164). Lo consume tools/legal/audit_dependencies.py. Certifica que el build final no incorpora codigo ni assets de terceros sin licencia trazable.",
+  "addons": "game/isla-ancestral/addons",
+  "licencias_json": "game/isla-ancestral/data/legal/licencias.json",
+  "notice": "NOTICE.md",
+  "mapa_addons": {
+    "zylann.voxel": "voxel_tools"
+  },
+  "manifiestos_excluidos": {
+    "tools/mcp/requirements.txt": "Dependencias del servidor MCP de herramientas (72 paquetes). NO se distribuyen con el juego: no entran en el build exportado. Se declaran aqui para que la exclusion sea EXPLICITA y auditable, en vez de un salto silencioso.",
+    "tools/mcp/godot-mcp/package.json": "Dependencias Node del servidor MCP de Godot (5 paquetes). Igual que el anterior: tooling de desarrollo, fuera del build distribuido."
+  },
+  "asset_scope": {
+    "rutas": ["game/isla-ancestral/assets"],
+    "extensiones": [".glb", ".gltf", ".png", ".jpg", ".jpeg", ".webp", ".ogg", ".flac", ".wav", ".mp3", ".ttf", ".otf", ".woff", ".woff2"],
+    "excluir": [".git", ".kilo", "PAPELERA", "Obsoletos", "node_modules", "__pycache__", ".import", "archive", "staging", "fichas"]
+  },
+  "baseline": [
+    {
+      "tipo": "DEP_NO_DECLARADA",
+      "objeto": "game/isla-ancestral/addons/gdUnit4",
+      "motivo": "Addon de TESTING (autor Mike Schulze, v6.2.1, licencia MIT, LICENSE presente en disco). No esta en licencias.json ni en NOTICE.md. Es una decision del dueño: declararlo y atribuirlo, o sacarlo del arbol antes del build. El auditor no lo declara por su cuenta porque licencias.json alimenta NOTICE.md y LICENSE, que son artefactos legales.",
+      "dueno": "dueño del proyecto"
+    },
+    {
+      "tipo": "ASSET_PLACEHOLDER",
+      "objeto": "game/isla-ancestral/assets/fonts/FredokaOne-Regular.ttf",
+      "motivo": "BUG-042: es una pagina HTML 404 de github.githubassets.com guardada con extension .ttf. Se reporta, no se borra (el archivo es de otro modulo).",
+      "dueno": "M46/M88"
+    },
+    {
+      "tipo": "ASSET_PLACEHOLDER",
+      "objeto": "game/isla-ancestral/assets/fonts/Nunito-Bold.ttf",
+      "motivo": "BUG-042: idem.",
+      "dueno": "M46/M88"
+    },
+    {
+      "tipo": "ASSET_PLACEHOLDER",
+      "objeto": "game/isla-ancestral/assets/fonts/Nunito-Regular.ttf",
+      "motivo": "BUG-042: idem.",
+      "dueno": "M46/M88"
+    }
+  ],
+  "notas": [
+    "El baseline NO es una lista de excepciones silenciosas: cada entrada se IMPRIME como ACEPTADO con su motivo y su dueño, y --estricto las cuenta como fallo. La deuda sigue visible.",
+    "Un hallazgo nuevo (que no este en el baseline) hace fallar --check: eso es lo que convierte al auditor en una guarda de CI util."
+  ]
+}

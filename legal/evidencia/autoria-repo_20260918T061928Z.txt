@@ -1,0 +1,219 @@
+Generado (UTC): 20260918T061928Z
+Herramienta    : tools/legal/dump_authorship_evidence.py
+
+EVIDENCIA DE AUTORIA - Isla Ancestral
+========================================================================
+Alcance   : TODO el repositorio
+Rango     : 2026-09-01 .. 2026-09-18
+Commits   : 188
+Autores   : 1
+
+------------------------------------------------------------------------
+1. AUTORES
+------------------------------------------------------------------------
+  Mauricio Belforte                <belymau@hotmail.com>  188 commit(s)
+
+------------------------------------------------------------------------
+2. COMMITS (hash | autor | fecha_autor | fecha_commit | archivos | +/- | asunto)
+------------------------------------------------------------------------
+402cfbb52c79 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T02:56:29-03:00 | 2026-09-18T02:56:29-03:00 | 5 | +392/-200 | Se realizo QA del modulo M29 Tiempo y Calendario (Log 984)
+195cfc752d76 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T02:45:03-03:00 | 2026-09-18T02:45:03-03:00 | 2 | +533/-35 | Sistema de numeración v3: lista de números disponibles
+56eb354f7308 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T02:26:37-03:00 | 2026-09-18T02:26:37-03:00 | 2 | +67/-16 | docs: corregir cita de exageracion en GUIA 18 (Log 803 -> 817) + 2a pasada de discrepancias
+79c1700f140f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T01:03:30-03:00 | 2026-09-18T01:03:30-03:00 | 8 | +199/-24 | Se corrigio el BUG-048: la UI no compilaba en runtime (Log 983)
+bf0c89f24172 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T00:53:10-03:00 | 2026-09-18T00:53:10-03:00 | 8 | +496/-17 | Se realizo QA cruzado del modulo M38 Economia (Log 982)
+95401293144a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T00:33:00-03:00 | 2026-09-18T00:33:00-03:00 | 1 | +56/-0 | Se versionó la iter. data-layer+CI de M126 Marketing-Legal (Log 981)
+bc035222f120 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-18T00:11:44-03:00 | 2026-09-18T00:11:44-03:00 | 7 | +339/-59 | Se realizo QA cruzado del modulo M12 Camara (Log 955)
+3ee08d337836 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T20:32:08-03:00 | 2026-09-17T20:32:08-03:00 | 3 | +65/-1 | Log 980: M53 UI-UX 78→82% + M131 Créditos 56→58%
+e3c7421c8282 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T20:24:07-03:00 | 2026-09-17T20:24:07-03:00 | 1 | +4/-4 | M131 Créditos: avanzar de 56/103 a 60/103 (58%)
+965883bd7645 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T20:22:53-03:00 | 2026-09-17T20:22:53-03:00 | 3 | +339/-0 | Se implementó la capa scanner de M83 Licencias (Log 974) + test + gate CI
+84d975d41d42 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T20:21:20-03:00 | 2026-09-17T20:21:20-03:00 | 10 | +629/-64 | M53 UI-UX: avanzar de 78% a 82% (130/158 items)
+c5f588dfae62 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T20:13:52-03:00 | 2026-09-17T20:13:52-03:00 | 53 | +693/-100 | fix(logs): restaurar 25 huerfanos del dedup, renumerar colisiones y corregir citas
+b3e294b54494 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:46:47-03:00 | 2026-09-17T19:46:47-03:00 | 96 | +10480/-0 | chore: logs QA + obsoletos + backups de encoding
+d0d2bbbb6a8e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:45:22-03:00 | 2026-09-17T19:45:22-03:00 | 777 | +51572/-0 | feat: Blender MCP tools - scripts de creación de assets
+54583e043191 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:45:07-03:00 | 2026-09-17T19:45:07-03:00 | 15 | +2349/-0 | feat: installer ISS + scripts de build y utilidades
+f64c870bd617 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:44:52-03:00 | 2026-09-17T19:44:52-03:00 | 43 | +12042/-0 | feat: scripts de juego - islas, mapa, security, templos, transporte, ugc
+e05c0547fd01 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:44:30-03:00 | 2026-09-17T19:44:30-03:00 | 41 | +2140/-0 | docs: backlogs HY4, glm-5.3, atria-dawn, muse-spark
+f0a64e7db761 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:44:07-03:00 | 2026-09-17T19:44:07-03:00 | 39 | +27186/-0 | docs: contexto para próximo agente + prompts de creación en Blender
+72a6fea12f3f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:43:36-03:00 | 2026-09-17T19:43:36-03:00 | 9 | +792/-154 | chore: actualizar system files, backlog glm-5.3-flash, debug scripts
+05aaffe67bc8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:43:25-03:00 | 2026-09-17T19:43:25-03:00 | 8 | +692/-380 | docs: actualizar plan-actual de módulos M08, M11, M92, M110
+f83c7a55db4d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:43:14-03:00 | 2026-09-17T19:43:14-03:00 | 24 | +3816/-0 | docs: backlog DeepSeek-V4.1-Flash (25 archivos)
+e2e9da2910e3 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:42:55-03:00 | 2026-09-17T19:42:55-03:00 | 6 | +618/-0 | docs: documentación legal, plataformas y límites de modding
+299431537fc1 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:42:44-03:00 | 2026-09-17T19:42:44-03:00 | 18 | +2118/-0 | docs: agregar planes y resultados de testing para 9 módulos
+6ff67daff941 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:42:23-03:00 | 2026-09-17T19:42:23-03:00 | 31 | +10861/-0 | docs: agregar guías de referencia GUIA-BLENDER y GUIA-GODOT
+fb3b7089e81b | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:42:04-03:00 | 2026-09-17T19:42:04-03:00 | 3 | +0/-2389 | chore: eliminar logs temporales de diagnóstico
+d5b9d9ce76ef | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T19:41:52-03:00 | 2026-09-17T19:41:52-03:00 | 14 | +0/-2790 | chore: eliminar archivos temporales de raíz (ya respaldados en PAPELERA/)
+9925aadeea84 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T06:00:47-03:00 | 2026-09-17T06:00:47-03:00 | 4 | +130/-2 | Se versionó la iter. V1-QA de M46 (Log 954): estado real de assets 2D + dueños + flag doc/archivo
+15eaeae32f19 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T05:17:25-03:00 | 2026-09-17T05:17:25-03:00 | 1 | +2/-2 | docs(qa): corrige marcadores stale \u00a721.8 en ESTADO-PARALELO (M87 Log 949, M117 Log 947)
+1b2350cf401b | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T04:52:54-03:00 | 2026-09-17T04:52:54-03:00 | 4 | +71/-5 | docs(qa): §21.8 M66 Anti-Softlock verificado (Log 953) + corrige marcador stale M68
+38dd84617810 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T04:34:41-03:00 | 2026-09-17T04:34:41-03:00 | 3 | +4/-3 | fix(ci): 3 fixes - BOM, EditorScript, tar warning
+98f8c05ed78f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T03:01:42-03:00 | 2026-09-17T03:01:42-03:00 | 4 | +24/-36 | fix(ci): reemplazar firebelley por solarlabyrinth/action-setup-godot@v3
+b393a251e579 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:56:59-03:00 | 2026-09-17T02:56:59-03:00 | 2 | +6/-6 | fix(ci): arreglar testing.yml y dev-build.yml
+4d473741f4e0 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:56:05-03:00 | 2026-09-17T02:56:05-03:00 | 2 | +167/-0 | chore(logs): versionar 2 logs que estaban UNTRACKED en Logs/ (trampa 64)
+665b0aa22148 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:55:52-03:00 | 2026-09-17T02:55:52-03:00 | 1 | +154/-0 | docs(logs): Log 952 — auditoría de referencias a Logs/ + preservación de 26 huérfanos
+c0f6c5847d93 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:54:45-03:00 | 2026-09-17T02:54:45-03:00 | 5 | +70/-10 | docs(qa): sincroniza registros §21.8 Lote K (M87/M14/M127/M78) — Log 949/950/951
+a466ab3b7804 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:52:18-03:00 | 2026-09-17T02:52:18-03:00 | 29 | +2063/-46 | fix(ci):修复 workflow - script faltante, flags inválidos, || true
+a42c636d1be3 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:41:13-03:00 | 2026-09-17T02:41:13-03:00 | 4 | +309/-0 | chore(logs): versionar 4 logs que estaban untracked en Logs/ (trampa 64)
+3807ee0b36e0 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:38:57-03:00 | 2026-09-17T02:38:57-03:00 | 2 | +169/-0 | Se versionó la iter. 3 de M117 (Log 946) y el fix del desync del instalador .iss
+eae36a8eb7cb | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:35:19-03:00 | 2026-09-17T02:35:19-03:00 | 1 | +15/-0 | docs(m8): actualizar documentación de M08 Mundo-Voxel
+8f3f81597404 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:34:43-03:00 | 2026-09-17T02:34:43-03:00 | 23 | +1073/-819 | chore(backlogs): actualizar backlogs personales de Hy3, glm-5.3-flash y agnes-3-flash
+0fb0141bb1f8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:34:00-03:00 | 2026-09-17T02:34:00-03:00 | 16 | +528/-63 | chore(tools): actualizar scripts de Blender, CI, checklist global, quality workflow
+b763066ca8f2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:33:34-03:00 | 2026-09-17T02:33:34-03:00 | 120 | +7625/-814 | chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+10b7461de573 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:33:03-03:00 | 2026-09-17T02:33:03-03:00 | 30 | +1601/-41 | chore(data): actualizar datos del juego - balance, audio, islas, templos, transporte, legal
+97941c9f772d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:32:32-03:00 | 2026-09-17T02:32:32-03:00 | 1 | +16/-0 | chore(gitignore): agregar archivos duplicados de raíz que ya están en PAPELERA/
+3cec3bf88805 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:27:23-03:00 | 2026-09-17T02:27:23-03:00 | 7 | +212/-8 | feat(qa): selios §21.8 hy3 para M117 Build-System y M110 Debug-Menu (Logs 947-948)
+11d037e869d2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:04:50-03:00 | 2026-09-17T02:04:50-03:00 | 11 | +652/-43 | chore(general): actualizar CHANGELOG, CHECKLIST-QA, installer, CI tools, ESTADO-PARALELO
+b040850eecfa | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:04:14-03:00 | 2026-09-17T02:04:14-03:00 | 8 | +16/-7895 | docs(limpieza): eliminar guías obsoletas movidas a carpetas temáticas
+4e45fc78b048 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:03:46-03:00 | 2026-09-17T02:03:46-03:00 | 10 | +1436/-623 | docs(guías): actualizar guías de conexión, orden de implementación, backlogs y prompts
+06b0efc2e46c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:03:28-03:00 | 2026-09-17T02:03:28-03:00 | 18 | +1647/-1022 | docs(módulos): actualizar documentación de módulos 150-167 + 26-28 (diseño, islas, viajes)
+9bef97a795b0 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:03:10-03:00 | 2026-09-17T02:03:10-03:00 | 19 | +854/-492 | docs(módulos): actualizar documentación de módulos 117-149 (build, CI/CD, modding, lore, nomenclatura)
+325560530f7d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:02:52-03:00 | 2026-09-17T02:02:52-03:00 | 18 | +981/-522 | docs(módulos): actualizar documentación de módulos 92-116 (QA, legal, testing, hardware)
+dd6fa0b46c9a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:02:35-03:00 | 2026-09-17T02:02:35-03:00 | 11 | +872/-522 | docs(módulos): actualizar documentación de módulos 68, 73, 78, 80, 81, 82, 83, 84, 85, 86
+901bdc907782 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:02:14-03:00 | 2026-09-17T02:02:14-03:00 | 13 | +688/-448 | docs(módulos): actualizar documentación de módulos 38, 49, 52, 54, 57, 59, 64, 65, 66
+55cd43006794 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T02:00:50-03:00 | 2026-09-17T02:00:50-03:00 | 20 | +1235/-674 | docs(módulos): actualizar documentación de 20 módulos sin actividad activa
+33782cb7b9ad | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T00:50:24-03:00 | 2026-09-17T00:50:24-03:00 | 2 | +735/-74 | docs(modelos): documentar debilidades de agnes-2.5-flash + actualizar backlog mimo-v2.5
+65ee3fa01838 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T00:50:07-03:00 | 2026-09-17T00:50:07-03:00 | 1 | +32/-32 | fix(checklist): actualizar CHECKLIST-GLOBAL con progreso real verificado de 8 módulos
+01c87001a060 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-17T00:49:37-03:00 | 2026-09-17T00:49:37-03:00 | 15 | +3011/-0 | chore(raiz): limpieza de archivos sueltos en raíz + reorganización
+fd5796bea001 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:54:54-03:00 | 2026-09-16T19:54:54-03:00 | 1 | +7/-1 | fix(scripts): auditar_referencias.py auditaba el worktree .kilo/ y reportaba 158 rutas rotas donde hay 1
+e447fc114d3d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:23:46-03:00 | 2026-09-16T19:23:46-03:00 | 1 | +1/-1 | fix(docs): reparar la cita falsa Logs/679-workbuddy-M16-3D.md -> Logs/737-workbuddy-M16-3D.md
+68f7b7629e85 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:21:47-03:00 | 2026-09-16T19:21:47-03:00 | 6 | +75/-0 | fix(gitignore): las herramientas que el Log 933 movio a scripts/ quedaron ignoradas por patrones sin barra inicial
+84f69922e982 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:10:16-03:00 | 2026-09-16T19:10:16-03:00 | 1 | +225/-0 | feat(tools/logs): herramienta para recuperar archivos borrados desde el ledger de snapshots
+9fc6f1d1358c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:07:20-03:00 | 2026-09-16T19:07:20-03:00 | 3 | +130/-0 | chore(tools): crear tools/logs para las herramientas de logs
+4ac9cb1e65f9 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T19:07:04-03:00 | 2026-09-16T19:07:04-03:00 | 20 | +1735/-0 | chore(logs): recuperar los 20 logs perdidos en el borrado de Logs/ del 2026-09-16
+90481bca43bb | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T18:44:51-03:00 | 2026-09-16T18:44:51-03:00 | 23 | +1181/-12 | Se versionó la iteración agnes de M61 Rendimiento (gate de límites de cantidad) y los logs no versionados del 2026-09-16
+e8d6291da6ff | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T17:48:21-03:00 | 2026-09-16T17:48:21-03:00 | 2 | +7/-6 | docs(qa): sincronizar en los registros compartidos solo las lineas del QA §21.8 de Hy3
+758726f38a19 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T17:46:43-03:00 | 2026-09-16T17:46:43-03:00 | 6 | +0/-24 | chore(logs): borrar 6 reservas huerfanas de Hy3 (su loop nunca las borro)
+f74fe1766495 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T17:38:21-03:00 | 2026-09-16T17:38:21-03:00 | 9 | +753/-0 | docs(qa): versionar los artefactos del QA cruzado §21.8 de Hy3/WorkBuddy (Logs 915-938) + CHECKLIST-QA-SEALS.md
+22da82c7d21e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T13:55:49-03:00 | 2026-09-16T13:55:49-03:00 | 2 | +9/-1 | fix(M105): el comentario del CI decia "iter7 = 22 checks" (son 27) + Log 926 8.1 desactualizado
+d4012a49259a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T05:23:02-03:00 | 2026-09-16T05:23:02-03:00 | 7 | +12/-12 | fix(M105): fecha de cierre correcta (2026-09-16, no 09-15)
+d35f7d3ab393 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T05:16:25-03:00 | 2026-09-16T05:16:25-03:00 | 13 | +1454/-202 | feat(M105): iter. 7 — metricas faltantes, bug de sesion, guardianes y CI
+a0dd230b2cd8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T02:43:03-03:00 | 2026-09-16T02:43:03-03:00 | 11 | +60/-13 | ci(§28): job encoding-guard en quality.yml — el BOM ya no puede volver
+39803bbdfecb | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T02:01:54-03:00 | 2026-09-16T02:01:54-03:00 | 12 | +1035/-94 | feat(M127): iter. 2 — re-marcado honesto, entregable colgante y guardian anti-falso-verde
+ee48995f828a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T01:45:49-03:00 | 2026-09-16T01:45:49-03:00 | 1 | +51/-0 | docs(backlog HY4): cierres del Log 925 (BOM 2/2 y rutas .cs)
+72ef78583f81 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T01:44:04-03:00 | 2026-09-16T01:44:04-03:00 | 1 | +155/-0 | docs(log 925): cierre de rutas .cs heredadas + commit 2/2 del BOM
+5df6e5593e2e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-16T01:42:16-03:00 | 2026-09-16T01:42:16-03:00 | 12 | +61/-61 | docs(M109/M113/M117/M118/M26/M81): cerrar las 61 rutas .cs que quedo pendientes el commit 53edd1b
+efd5796068b7 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T23:05:00-03:00 | 2026-09-15T23:05:00-03:00 | 1 | +1/-1 | fix(M87): alinear la celda Estado de la fila 87 con el header del modulo
+f5fbbd55e05a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T21:02:39-03:00 | 2026-09-15T21:02:39-03:00 | 3 | +203/-5 | docs(M87): registros compartidos del cierre de iter. 6 (Log 920)
+ed0c66c9f216 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T21:02:25-03:00 | 2026-09-15T21:02:25-03:00 | 24 | +3801/-145 | feat(M87): iters. 5 y 6 — validador PO, analizador de layout, glosario y re-traduccion de UI
+520021b318e2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T05:27:34-03:00 | 2026-09-15T05:27:34-03:00 | 4 | +258/-5 | docs(M103): registros compartidos del cierre de iter. 1 (Log 918)
+cd697d079272 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T05:27:15-03:00 | 2026-09-15T05:27:15-03:00 | 10 | +1402/-308 | feat(M103): iter. 1 — reclamo §21.4.7 y re-verificación selectiva tras la reversión del 2026-09-14
+f6e85bcb061b | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T04:43:47-03:00 | 2026-09-15T04:43:47-03:00 | 10 | +175/-67 | fix(BUG-041): reclasificar a FALSO POSITIVO — GameLogger (M103) SI registra
+c4db8354522c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T04:27:43-03:00 | 2026-09-15T04:27:43-03:00 | 3 | +24/-5 | fix(M60): corregir el desglose por bloque de la suite iter. 4 (cifras medidas, no copiadas)
+4d1ee65530ba | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T04:23:04-03:00 | 2026-09-15T04:23:04-03:00 | 6 | +1452/-250 | docs(M60): registros compartidos del cierre de iter. 4 (Log 916)
+8cc2d4bf5f97 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T04:22:41-03:00 | 2026-09-15T04:22:41-03:00 | 17 | +3262/-262 | feat(M60): iter. 4 — re-verificacion selectiva tras la auditoria del 2026-09-14
+1215fe3eb67b | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T03:29:39-03:00 | 2026-09-15T03:29:39-03:00 | 1 | +1/-1 | fix(M53): corregir arity de señal item_added en inventory_layer.gd (BUG-040)
+53edd1be4404 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T03:22:03-03:00 | 2026-09-15T03:22:03-03:00 | 44 | +372/-372 | doc: corregir rutas .cs en plan-actual/plan-inicial (decisión §28 + limpieza .cs)
+b929ba030165 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T01:18:36-03:00 | 2026-09-15T01:18:36-03:00 | 361 | +361/-361 | fix(bom): quitar BOM de los 361 logs historicos (commit 2/2)
+eb98614ce44f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-15T01:09:18-03:00 | 2026-09-15T01:09:18-03:00 | 83 | +83/-83 | fix(bom): quitar BOM de los 83 archivos vivos que lo tienen en HEAD
+9340c8c99377 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:55:24-03:00 | 2026-09-14T23:55:24-03:00 | 1 | +49/-0 | docs(backlog HY4): estado de la Opcion B (parchar huecos)
+a50b061fabe2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:54:05-03:00 | 2026-09-14T23:54:05-03:00 | 1 | +1/-1 | fix(doc): Log 723 inexistente -> Log 835 real en la fila M11
+42b05771470d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:51:32-03:00 | 2026-09-14T23:51:32-03:00 | 1 | +145/-0 | docs(log 904): auditoria de los 14 modulos sobre-cerrados
+d35d458b2931 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:50:12-03:00 | 2026-09-14T23:50:12-03:00 | 3 | +119/-2 | fix(bom): quitar BOM de M115 y anadir scripts/verificar_bom.py
+1cdedde018b7 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:41:23-03:00 | 2026-09-14T23:41:23-03:00 | 1 | +130/-0 | docs(log 903): mojibake real vs documentado - triaje y cierre del verificador
+c952bdf548e1 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:39:23-03:00 | 2026-09-14T23:39:23-03:00 | 2 | +111/-7 | fix(mojibake): filtro por linea para documentacion + test de regresion
+f308b7cf437c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T23:31:04-03:00 | 2026-09-14T23:31:04-03:00 | 1 | +4/-4 | fix(§28): reparar mojibake real en CHECKLIST-GLOBAL.md (8 marcas)
+e3b2165c2ce0 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T06:21:29-03:00 | 2026-09-14T06:21:29-03:00 | 2 | +64/-1 | Se agrego log 875 de auditoria agnes-2.5-flash
+e261ced44622 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T06:20:42-03:00 | 2026-09-14T06:20:42-03:00 | 27 | +3872/-3743 | Se revirtieron 28 modulos inflados por agnes-2.5-flash (auditoria completa)
+2e9f0befb974 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-14T04:11:24-03:00 | 2026-09-14T04:11:24-03:00 | 97 | +6094/-6 | Se corrigieron logs duplicados y problemas de nomenclatura
+11f5205425c2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T19:15:33-03:00 | 2026-09-13T19:15:33-03:00 | 1 | +31/-4 | docs(HY4): reauditar pendientes del backlog propio
+e4fe80e456d5 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T19:14:24-03:00 | 2026-09-13T19:14:24-03:00 | 1 | +1/-1 | fix(§28): quitar BOM de CHECKLIST-OBJETOS-BLENDER.md
+6e57c37b08d1 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T18:41:11-03:00 | 2026-09-13T18:41:11-03:00 | 7 | +154/-8 | docs(identidad): la identidad es por CHAT, no por plataforma (Log 880)
+297c3b30222a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T18:15:50-03:00 | 2026-09-13T18:15:50-03:00 | 1 | +153/-0 | log 876: .github/ versionado + bug_corregido en bug_metrics.yml y backup.yml
+02f08935a844 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T18:15:24-03:00 | 2026-09-13T18:15:24-03:00 | 1 | +1/-1 | fix(ci): backup.yml usa actions/checkout@v4 (v3 corre en Node 16, ya deprecado)
+c1da859ed168 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T18:14:10-03:00 | 2026-09-13T18:14:10-03:00 | 1 | +67/-67 | fix(ci): bug_metrics.yml tenia YAML invalido (el workflow no arrancaba)
+a49c8b0e6082 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T18:10:05-03:00 | 2026-09-13T18:10:05-03:00 | 11 | +1068/-1 | ci: versiona .github/ (plantilla de issues, labels y workflows)
+55033ddfdc58 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T17:30:42-03:00 | 2026-09-13T17:30:42-03:00 | 1 | +137/-0 | log 875: docs/ versionado y politica de uso en AGENTS.md
+b3865c176e40 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T17:29:27-03:00 | 2026-09-13T17:29:27-03:00 | 6 | +64/-0 | docs: politica de docs/ en AGENTS.md + referencias en planes actuales
+82fe882cadde | Mauricio Belforte <belymau@hotmail.com> | 2026-09-13T17:26:47-03:00 | 2026-09-13T17:26:47-03:00 | 18 | +1678/-1 | docs: versiona la carpeta docs/ (material complementario M98/M101/M102/M111/M114)
+12a4c55aa0d8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-12T21:26:58-03:00 | 2026-09-12T21:26:58-03:00 | 12 | +670/-32 | Se agrego regla de codificacion UTF-8 a los 11 backlogs personales y guia de metodologia
+ce09ed7153ee | Mauricio Belforte <belymau@hotmail.com> | 2026-09-12T19:45:23-03:00 | 2026-09-12T19:45:23-03:00 | 8 | +1091/-1068 | Se corrigio mojibake (doble encoding cp1252 a UTF-8) y se agrego advertencia de codificacion
+06d6269bd101 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-12T14:43:45-03:00 | 2026-09-12T14:43:45-03:00 | 2 | +503/-0 | Auditoria transversal de enlaces markdown y rutas citadas (Log 860)
+945d21b7e056 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-12T14:34:43-03:00 | 2026-09-12T14:34:43-03:00 | 11 | +939/-16 | Limpieza transversal: TMP de libvoxel, referencias a Logs/ e inventario (Log 853)
+dcc6010ce8f5 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-12T14:07:12-03:00 | 2026-09-12T14:07:12-03:00 | 63 | +954/-163 | Saneamiento transversal de codificacion UTF-8 (2a campaña, Log 852)
+37c484af2bf4 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-11T18:37:44-03:00 | 2026-09-11T18:37:44-03:00 | 7 | +1152/-0 | feat(M18-BIS): casona 10x8 m (sala + 2 dormitorios + cocina) — log 822
+5ec9649993c4 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-11T18:14:53-03:00 | 2026-09-11T18:14:53-03:00 | 101 | +0/-0 | assets(3d): trackear 101 GLB untracked (riesgo E-103)
+619c12005a60 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-10T02:17:24-03:00 | 2026-09-10T02:17:24-03:00 | 1 | +42/-0 | Log 807: cierre de sesion de horizonte - sistema estable confirmado por el usuario
+1e1479ff4faf | Mauricio Belforte <belymau@hotmail.com> | 2026-09-10T00:15:50-03:00 | 2026-09-10T00:15:50-03:00 | 2 | +30/-1 | Anillo de arena integrado a la isla real (r 1800-2300, y=4.3, winding antihorario validado en test) - transicion verde/arena/mar
+05ad09638b73 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-09T21:24:49-03:00 | 2026-09-09T21:24:49-03:00 | 1 | +6/-0 | AGENTS.md: referencia a la carpeta GUIA-GODOT con los 3 archivos tematicos (zoom, disco, impostores)
+e30c088a5b74 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-09T21:06:13-03:00 | 2026-09-09T21:06:13-03:00 | 4 | +724/-0 | Carpeta GUIA-GODOT creada: 3 guias tematicas al detalle (zoom, disco solido, impostores) + README indice
+6364720db914 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-09T20:07:41-03:00 | 2026-09-09T20:07:41-03:00 | 2 | +77/-2 | Se documento la receta 13.10 del disco solido con SurfaceTool (3 errores + 5 reglas) y la cronologia anti-tildes 13.7-13.9
+841afaf34b94 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-08T06:42:49-03:00 | 2026-09-08T06:44:04-03:00 | 118 | +2684/-395 | Se implemento el sistema de horizonte y vision lejana para la isla 10x (Logs 758-799)
+c1074190ff36 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-07T00:07:04-03:00 | 2026-09-07T00:07:04-03:00 | 66 | +1983/-99 | Se corrigieron ultimos 2 logs duplicados (722, 751) y 6 referencias cruzadas rotas
+9e378d6c403e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T18:55:58-03:00 | 2026-09-06T18:55:58-03:00 | 229 | +12568/-2522 | Se corrigieron numeraciones de logs duplicados y se actualizaron referencias cruzadas
+0e038a89469c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:34:04-03:00 | 2026-09-06T00:34:04-03:00 | 2 | +2/-1 | Se actualizaron CHECKLIST-GLOBAL y ESTADO-PARALELO
+2577f077b21a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:33:49-03:00 | 2026-09-06T00:33:49-03:00 | 1 | +2/-1 | Se actualizó BACKLOG-MASTER de Hy3
+6adba0a32497 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:33:26-03:00 | 2026-09-06T00:33:26-03:00 | 6 | +170/-72 | Se completaron commits pendientes: CHECKLIST, logs finales, scripts
+ed2e777ae4fd | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:33:05-03:00 | 2026-09-06T00:33:05-03:00 | 12 | +2667/-0 | Se agregaron archivos de análisis temporales
+501822401044 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:32:22-03:00 | 2026-09-06T00:32:22-03:00 | 49 | +6619/-0 | Se agregaron archivos obsoletos: backups y logs antiguos
+800d5024dc97 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:32:00-03:00 | 2026-09-06T00:32:00-03:00 | 10 | +0/-913 | Se eliminaron logs obsoletos y archivos temporales
+70b6c3157b38 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:31:51-03:00 | 2026-09-06T00:31:51-03:00 | 9 | +991/-0 | Se agregaron docs: AUTHORS, CONTRIBUTING, guías OpenCode, guías Blender, testings
+5f5252202f44 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:31:37-03:00 | 2026-09-06T00:31:37-03:00 | 51 | +4030/-48 | Se actualizaron scripts, escenas, shaders, localización y proyecto
+daa028c66aad | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:31:28-03:00 | 2026-09-06T00:31:28-03:00 | 79 | +13980/-200 | Se actualizaron herramientas: Blender scripts, CI tools, legal tools, postlaunch
+39f4c5e05f0e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:31:19-03:00 | 2026-09-06T00:31:19-03:00 | 84 | +0/-0 | Se actualizaron assets 3D: alta/media/baja poli
+9699e1606bca | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:31:10-03:00 | 2026-09-06T00:31:10-03:00 | 93 | +11749/-633 | Se actualizaron backlogs de modelos: Hy3, agnes, deepseek, minimax, step, mimo
+5d23f3bdb38b | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:30:59-03:00 | 2026-09-06T00:30:59-03:00 | 141 | +4194/-3741 | Se actualizaron checklists de 130+ módulos: progreso y códigos
+2f77442b8d37 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:30:04-03:00 | 2026-09-06T00:30:04-03:00 | 10 | +1088/-98 | Se actualizaron guías y docs: guías de Godot, orden, comparativa, bugs, methodology
+8d9f89aa6ad9 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:29:27-03:00 | 2026-09-06T00:29:27-03:00 | 114 | +8254/-3998 | Se actualizaron archivos de datos: diálogos, logros, economía, vegetación
+8a4135c37ab8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:29:16-03:00 | 2026-09-06T00:29:16-03:00 | 175 | +6190/-57 | Se agregaron logs 552-719 y reservas de módulos
+3fc06330e9c2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:29:06-03:00 | 2026-09-06T00:29:06-03:00 | 134 | +409/-2886 | Se agregaron 100+ logs históricos de agentes (413-551)
+e169f665f7d6 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:28:46-03:00 | 2026-09-06T00:28:46-03:00 | 29 | +1729/-59 | Se actualizaron UI, mundo, vegetación, terreno, player, NPC, foto y DLC
+580a32cae4a3 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:28:37-03:00 | 2026-09-06T00:28:37-03:00 | 17 | +1105/-19 | Se actualizaron inventario, herramientas, localización, legal y accesibilidad
+5d51aadca08c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:28:28-03:00 | 2026-09-06T00:28:28-03:00 | 22 | +2430/-15 | Se actualizaron gameplay: diálogos contextuales, fauna IA, economía, eventos
+64ce4338b3d8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:28:18-03:00 | 2026-09-06T00:28:18-03:00 | 15 | +930/-19 | Se actualizaron core systems: bootstrap, CI/CD, debug, streaming, reloj
+d090438df9a2 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:27:43-03:00 | 2026-09-06T00:27:43-03:00 | 6 | +1228/-171 | Se actualizaron 9 referencias a logs renumerados (683->709, 673->715, 713->717)
+60aacbac24f6 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-06T00:27:33-03:00 | 2026-09-06T00:27:33-03:00 | 1 | +1/-1 | Se limpiaron 40 logs redundantes y basura de otros agentes
+59cb54a2d9a3 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T19:43:27-03:00 | 2026-09-02T19:43:27-03:00 | 2 | +339/-0 | Se agregó script jabalí y actualizó auditoría logs
+17558c21e7dc | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T19:42:58-03:00 | 2026-09-02T19:42:58-03:00 | 2 | +10/-7 | Se actualizó 11-BUGS y auditar aliasing
+44d42e848933 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T19:42:30-03:00 | 2026-09-02T19:42:30-03:00 | 6 | +19/-3 | Se actualizó vegetación, player, checklist objetos Blender y reserva jabalí
+c22c4d080dca | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T19:42:00-03:00 | 2026-09-02T19:42:00-03:00 | 18 | +1260/-15 | Se agregó LICENSE, NOTICE, POSTLAUNCH_CHECKLIST, copyright, cangrejo NPC, operaciones, vegetation plan, herramientas legales y postlaunch
+36138d493f5c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T19:41:41-03:00 | 2026-09-02T19:41:41-03:00 | 1 | +17/-0 | Se actualizó .gitignore con temporales de agentes, build output e imágenes de prueba
+3ebd1ec893d6 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:44:00-03:00 | 2026-09-02T18:44:00-03:00 | 8 | +0/-0 | Se completó renumeración logs 521-547
+3d0b99bbf33f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:43:28-03:00 | 2026-09-02T18:43:28-03:00 | 1 | +0/-0 | Se agregó cangrejo playa baja calidad
+ba1b9f44fd70 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:42:27-03:00 | 2026-09-02T18:42:27-03:00 | 8 | +5/-10 | Se completó renumeración logs 506-520, terrenos checklist
+446def79fc04 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:41:52-03:00 | 2026-09-02T18:41:52-03:00 | 7 | +117/-0 | Se completó renumeración logs 501-505, actualización 11-BUGS, log 554 terrenos
+9b3bb800336c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:41:23-03:00 | 2026-09-02T18:41:23-03:00 | 9 | +7/-2 | Se completó renumeración logs 496-500, cangrejo media calidad
+fc7147db34ad | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:40:49-03:00 | 2026-09-02T18:40:49-03:00 | 6 | +18/-1 | Se completó renumeración logs 491-495, terrain modifiers update
+03324a18490a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:40:20-03:00 | 2026-09-02T18:40:20-03:00 | 10 | +0/-0 | Se completó renumeración logs 481-490
+35828a24fd49 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:39:51-03:00 | 2026-09-02T18:39:51-03:00 | 6 | +39/-0 | Se completó renumeración logs 476-480, test terrenos
+fe0f94cb3170 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:39:11-03:00 | 2026-09-02T18:39:11-03:00 | 7 | +63/-14 | Se completó renumeración logs 472-475, auditoría logs, cangrejo playa alta calidad, terrain modifiers
+f62552085a1a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:38:33-03:00 | 2026-09-02T18:38:33-03:00 | 31 | +0/-859 | Se completó renumeración de logs duplicados 401-449
+b8bd39f36efc | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T18:37:46-03:00 | 2026-09-02T18:37:46-03:00 | 176 | +7782/-786 | Se agregaron 11-BUGS, logs renumerados 401-553, checklists M14-M160, scripts economía/fauna/vehículos/ubicaciones/inventario, datos herramientas/ubicaciones/vegetación, herramientas CI, cangrejo playa
+92755d38824c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:12:10-03:00 | 2026-09-02T15:12:10-03:00 | 5 | +29/-20 | Se actualizó fauna, project.godot, checklist objetos Blender y exportar_godot
+d8b6758476d1 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:11:48-03:00 | 2026-09-02T15:11:48-03:00 | 25 | +697/-57 | Se agregó postgame, tortuga marina 3D, vehículos, mapa, accesibilidad, progresión, logs 449-534
+7c12306ed479 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:11:19-03:00 | 2026-09-02T15:11:19-03:00 | 1 | +74/-18 | Se actualizó test transacciones económicas
+f77d3d8e04e5 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:04:10-03:00 | 2026-09-02T15:04:10-03:00 | 1 | +55/-0 | Se agregó test de transacciones económicas
+8db7a56ea460 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:03:51-03:00 | 2026-09-02T15:03:51-03:00 | 1 | +2/-2 | Se actualizó checklist legal privacidad
+aebf1d52f409 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T15:03:28-03:00 | 2026-09-02T15:03:28-03:00 | 15 | +285/-157 | Se actualizó economía, vehículos, terrenos, logging, hardware, debug, logs 448
+24bc707a10f8 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:59:54-03:00 | 2026-09-02T14:59:54-03:00 | 10 | +155/-115 | Se actualizó CHECKLIST-GLOBAL, community management, terrenos y logs 447-538
+f1063fa0d562 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:53:47-03:00 | 2026-09-02T14:53:47-03:00 | 2 | +20/-23 | Se actualizó test logging y script tortuga marina
+f02b4ca899d9 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:53:26-03:00 | 2026-09-02T14:53:26-03:00 | 53 | +475/-788 | Se renombró backlog GLM-5.3 a GLM-5.3-Flash, accesibilidad aplicador, debug menu fixes, test mapa búsqueda, logs 446-537
+1a8b772d464c | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:47:24-03:00 | 2026-09-02T14:47:24-03:00 | 1 | +45/-0 | Se agregó script de búsqueda de mapa
+6014d11204d5 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:47:04-03:00 | 2026-09-02T14:47:04-03:00 | 55 | +3780/-101 | Se agregó backlog GLM-5.3, pipeline assets avanzado, VFX, control final gate, logging, telemetría y scripts generación tareas
+27535dd4624f | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:39:58-03:00 | 2026-09-02T14:39:58-03:00 | 1 | +1/-0 | Se actualizó checklist M108 Pipeline de Assets
+b9379b72e737 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:39:29-03:00 | 2026-09-02T14:39:29-03:00 | 29 | +620/-124 | Se actualizó legal, debug menu, pipeline assets, artbook, control final y logs 444-536
+9ea11f7a3888 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:33:11-03:00 | 2026-09-02T14:33:11-03:00 | 25 | +645/-71 | Se actualizó mapa, localización, progresión, CI-CD, modding, control final y logs 532-533
+3d8a4acbef52 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T14:32:34-03:00 | 2026-09-02T14:32:34-03:00 | 366 | +21590/-3773 | Se agregaron checklists M100-M160, guías de implementación, metodología TAREAS-POR-MODELO, logs 414-532, datos de juego, scripts GDScript, assets 3D y herramientas Blender
+4edc9b7c999e | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:19:27-03:00 | 2026-09-02T02:19:27-03:00 | 6 | +82/-23 | Se agregó iteración M69 Fast Travel, hardware manager y datos QA
+f1bf7b85644a | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:19:01-03:00 | 2026-09-02T02:19:01-03:00 | 1 | +42/-0 | Se actualizó hardware profile con detección de plataforma
+81ed3548b32d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:18:33-03:00 | 2026-09-02T02:18:33-03:00 | 4 | +114/-1 | Se agregó servicio de fast travel, test headless y actualización CHECKLIST-GLOBAL
+acb58188aa73 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:17:57-03:00 | 2026-09-02T02:17:57-03:00 | 2 | +86/-0 | Se agregó log M73 y datos de fast travel
+06f69d43a281 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:17:22-03:00 | 2026-09-02T02:17:22-03:00 | 5 | +44/-5 | Se actualizó CHECKLIST-GLOBAL y checklists M147/M148
+f659462c32fb | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:16:49-03:00 | 2026-09-02T02:16:49-03:00 | 40 | +1387/-130 | Se actualizaron checklists, guías, herramientas de auditoría y scripts Blender
+5b799281b98d | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:16:05-03:00 | 2026-09-02T02:16:05-03:00 | 9 | +593/-12 | Se agregaron prompts, herramientas Blender y script plantilla
+f5e1a0da9049 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:15:03-03:00 | 2026-09-02T02:15:03-03:00 | 543 | +16249/-29 | Se agregó data del juego: items, dialogues, balance, locales, resources
+9450f6a39d90 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:14:28-03:00 | 2026-09-02T02:14:28-03:00 | 361 | +30545/-431 | Se agregó código GDScript nuevo y actualizado de múltiples módulos
+d2ce30701bf6 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:13:40-03:00 | 2026-09-02T02:13:40-03:00 | 206 | +7039/-138 | Se agregaron logs 316-507 y reservas del protocolo multiagente
+a18301a6c896 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:12:59-03:00 | 2026-09-02T02:12:59-03:00 | 189 | +8199/-5198 | Se actualizó documentación de 167 módulos (iteraciones 1-3 de múltiples agentes)
+94b1c3e0dc90 | Mauricio Belforte <belymau@hotmail.com> | 2026-09-02T02:10:27-03:00 | 2026-09-02T02:10:27-03:00 | 1 | +57/-129 | Se actualizó .gitignore de Unity a Godot 4.x
+
+------------------------------------------------------------------------
+3. TOTALES
+------------------------------------------------------------------------
+  archivos tocados : 6456
+  lineas agregadas : 380942
+  lineas borradas  : 56846
+  primer commit    : 94b1c3e0dc90 (2026-09-02T02:10:27-03:00)
+  ultimo commit    : 402cfbb52c79 (2026-09-18T02:56:29-03:00)
+
+Nota: el CUERPO de este volcado es determinista para un rango fijo de
+commits; la huella SHA-256 del archivo .sha256 cubre el archivo completo,
+incluida la cabecera de generacion.

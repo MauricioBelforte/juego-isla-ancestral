@@ -1,3 +1,7 @@
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # Modelo: deepseek-v4-flash (iter. 1) · DeepSeek-V4.1-Flash / WorkBuddy (fix BUG-033 + guarda, iter. 2)
 # Plataforma: Kilo Code (iter. 1) · WorkBuddy (fix BUG-033 / iter. 2)
 # Fecha: 2026-09-02 (iter. 1) · 2026-09-14 (fix BUG-033) · 2026-09-16 (iter. 2, guarda anti-falso-verde)

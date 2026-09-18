@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "descripcion": "Alcance del validador de metadata de copyright embebida (M127 iter. 3, item L112). Lo consume tools/legal/validate_asset_metadata.py. Escanea los assets EXPORTADOS y comprueba (a) que el contenido corresponda a la extension y (b) que el formato, cuando puede, lleve copyright embebido.",
+  "rutas": [
+    "game/isla-ancestral/assets"
+  ],
+  "extensiones": [
+    ".glb", ".gltf", ".png", ".jpg", ".jpeg", ".webp",
+    ".ogg", ".flac", ".wav", ".mp3",
+    ".ttf", ".otf", ".woff", ".woff2"
+  ],
+  "excluir": [
+    ".git", ".kilo", "PAPELERA", "Obsoletos", "node_modules",
+    "__pycache__", ".import", "archive", "staging", "fichas"
+  ],
+  "ampliacion_pendiente": {
+    "motivo": "El item pide cubrir 'assets exportados (texturas, modelos, musica)'. Este alcance cubre assets/ pero NO addons/ (codigo de terceros, lo cubre tools/legal/audit_dependencies.py) ni los assets que viven fuera de assets/.",
+    "accion": "Agregar rutas en 'rutas' si el proyecto exporta assets a otra carpeta.",
+    "decision": "dueño del proyecto"
+  },
+  "baseline": [
+    {
+      "tipo": "MAGIC_INVALIDO",
+      "patron": "**/assets/fonts/*.ttf",
+      "max": 3,
+      "motivo": "BUG-042: los 3 .ttf son paginas HTML 404 de github.githubassets.com guardadas con extension .ttf (304 KB cada una). No se borran: el archivo es de M46/M88. Si aparece un CUARTO placeholder, el techo se excede y --check falla.",
+      "dueno": "M46/M88"
+    },
+    {
+      "tipo": "SIN_ATRIBUCION",
+      "patron": "**/assets/3d/**/*.glb",
+      "max": 418,
+      "motivo": "Techo de deuda (trinquete), no un permiso: los 434 .glb exportados salen del I/O de Blender con asset.generator pero SIN asset.copyright. Cerrarlo exige tocar el pipeline de exportacion, no el validador. Con 418 aceptados, agregar un asset nuevo sin copyright hace fallar --check.",
+      "dueno": "pipeline de exportacion (M166/M09)"
+    }
+  ],
+  "notas": [
+    "SOPORTAN_COPYRIGHT esta en el script, no aqui: es una propiedad del FORMATO (glTF asset.copyright, PNG tEXt, Vorbis COPYRIGHT=, WAV ICOP, EXIF 0x8298), no una decision del proyecto.",
+    "El baseline es un TRINQUETE por conteo: --check solo falla con hallazgos NUEVOS (los que superan el techo). --estricto cuenta todo, techo incluido. Un techo que se excede se imprime como EXCEDIDO."
+  ]
+}

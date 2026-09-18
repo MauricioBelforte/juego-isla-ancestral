@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # M127: Copyright - Test de tools/legal/generate_copyright_register.py (iter. 2).
 # Verifica: generacion, secciones, contenido data-driven, determinismo,
 # --check (al dia / desactualizado) y rechazo de catalogos invalidos.

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "descripcion": "Alcance del protocolo de cabeceras de copyright (M127 iter. 3). Lo consume tools/legal/insert_copyright_headers.py.",
+  "extensiones": [".gd", ".cs", ".py"],
+  "incluir": [
+    "game/isla-ancestral/scripts/legal/copyright_validator.gd",
+    "game/isla-ancestral/scripts/legal/test_copyright_m127.gd",
+    "tools/legal"
+  ],
+  "excluir": [
+    "__pycache__",
+    ".git",
+    ".kilo",
+    "addons",
+    "Obsoletos",
+    "PAPELERA",
+    "node_modules"
+  ],
+  "ampliacion_pendiente": {
+    "motivo": "El requisito pide cubrir 'los scripts de codigo fuente' del proyecto. Ampliar el alcance a todo el repositorio reescribe ~700 .gd y ~200 .py que pertenecen a OTROS modulos; en un worktree compartido (trampa 70) un git add de esos archivos arrastraria el trabajo sin commitear de otros agentes.",
+    "accion": "Agregar las rutas en 'incluir' y correr --apply con el arbol limpio, en un commit propio y acotado.",
+    "decision": "dueño del proyecto"
+  }
+}

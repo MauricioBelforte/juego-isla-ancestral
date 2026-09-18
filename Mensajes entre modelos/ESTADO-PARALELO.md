@@ -780,3 +780,32 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   mismo commit. Dejarlo roto dejo el modulo indistinguible de "nada implementado" durante 4 dias.
 - Reserva 984 consumida (el archivo de reserva fue barrido por una limpieza de Logs/reservas —
   Logs/ no rastreado sigue siendo fragil; commitear siempre).
+
+## 2026-09-18 03:17 — DeepSeek-V4.1-Flash (WorkBuddy) — M127 Copyright iter. 3: tooling de autoría (Log 986)
+
+- **M127 Copyright del Juego: 🟡 Con dudas — 51/101** (era 39/101 en iter. 2). 12 ítems `[ ]` → `[x]`
+  por **medición**, no por afirmación. Totales reales: **51 [x] · 25 [?] · 25 [ ]** (contados con
+  `scripts/verificar_checklist.py`; el mismo script confirma que `CHECKLIST-GLOBAL` ya no miente para M127).
+- **7 herramientas nuevas en `tools/legal/`**, cada una con suite propia: `insert_copyright_headers.py` (32),
+  `timestamp_seal.py` (30), `scan_orphan_code.py` (19), `validate_asset_metadata.py` (71),
+  `audit_dependencies.py` (40), `dump_authorship_evidence.py` (35), `registros_db.py` (44) = **271 checks, 0 fallos**.
+  Con las 4 suites preexistentes, `tools/legal` queda en **11 suites / 324 checks / 0 fallos**. Cero regresiones.
+- **CI (`quality.yml`)**: 4 suites → **11 suites + 6 puertas duras `--check`** (cabeceras, cadena de sellos,
+  código huérfano, metadata de assets, dependencias, registro formal). Las puertas usan **techo de deuda**:
+  la deuda conocida se declara en `*_scope.json` (`tipo`/`patron`/`max`/`motivo`/`dueño`) y `--check` solo
+  falla ante hallazgos **NUEVOS**. Una puerta que siempre falla no sirve; una excepción invisible es un agujero negro.
+- **3 hallazgos reales, reportados y NO parcheados** (no son mis archivos / no tengo prueba para tocarlos):
+  1. `addons/gdUnit4` no está declarado en `licencias.json` ni en `NOTICE.md` (el otro addon, `zylann.voxel`, sí).
+  2. **BUG-042 confirmado independientemente por magic bytes**: `assets/fonts/{FredokaOne-Regular,Nunito-Bold,Nunito-Regular}.ttf`
+     (304 KB c/u) tienen magic `0a0a0a0a` y su contenido son **páginas HTML 404** de `github.githubassets.com`.
+     Dueño M46/M88. Un `.ttf` válido empieza en `00010000`.
+  3. **418 `.glb`** bajo `assets/3d/**` sin `asset.copyright` (tienen `asset.generator` del exportador Blender,
+     pero no la atribución). Dueño: pipeline de exportación (M166/M09). Declarado como techo de deuda, no borrado.
+- **Docs del módulo**: `06-Plan-Testings.md` y `07-Resultados-Testings.md` **creados** (el módulo no tenía
+  plan de testings); `04-Codigo.md` corregido (decía "06/07 NO EXISTE") y ampliado con §7. Las 3 decisiones de
+  diseño que no me corresponden quedan anotadas en §7, no inventadas.
+- **Verificación**: GDScript `test_copyright_m127.gd` **13/0 ×3**, 0 `SCRIPT ERROR`; guardián anti-falso-verde
+  probado por inyección. `legal/sellos/` y `legal/evidencia/` verificados **no ignorados** por git (trampa 66).
+- ⏳ **QA cruzado §21.8 de M127 sigue pendiente** (verificador ≠ autor) → por eso el estado NO sube a ✅.
+- Commit **selectivo por lista explícita de rutas** (trampa 70: worktree compartido, había 12+ entradas ajenas
+  en el árbol). Reserva `986-DeepSeek-V4.1-Flash-M127.txt` liberada.

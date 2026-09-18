@@ -281,11 +281,35 @@ jobs:
       # registro de copyright y el validador pre-release.
       - name: Run legal tooling tests
         run: |
+          # M127 iter. 2 (Log 923): 4 suites originales.
           python3 tools/legal/test_generate_copyright.py 2>&1
           python3 tools/legal/test_generate_authors.py 2>&1
           python3 tools/legal/test_generate_register.py 2>&1
           python3 tools/legal/test_signoff_check.py 2>&1
+          # M127 iter. 3 (Log 986): 7 suites nuevas.
+          python3 tools/legal/test_insert_copyright_headers.py 2>&1
+          python3 tools/legal/test_timestamp_seal.py 2>&1
+          python3 tools/legal/test_scan_orphan_code.py 2>&1
+          python3 tools/legal/test_validate_asset_metadata.py 2>&1
+          python3 tools/legal/test_audit_dependencies.py 2>&1
+          python3 tools/legal/test_dump_authorship_evidence.py 2>&1
+          python3 tools/legal/test_registros_db.py 2>&1
           echo "Legal tooling tests completed"
+
+      # Gates duros (M127 iter. 3). Deterministas y verdes en este commit.
+      # Los validadores usan un TECHO DE DEUDA declarado en su *_scope.json:
+      # --check solo falla con hallazgos NUEVOS, asi que la deuda conocida no
+      # rompe CI pero un hallazgo nuevo si. El motivo y el dueno de cada techo
+      # estan en asset_metadata_scope.json y audit_dependencies_scope.json.
+      - name: Verify legal gates (M127 iter. 3)
+        run: |
+          python3 tools/legal/insert_copyright_headers.py --check 2>&1
+          python3 tools/legal/timestamp_seal.py --cadena 2>&1
+          python3 tools/legal/scan_orphan_code.py --check 2>&1
+          python3 tools/legal/validate_asset_metadata.py --check 2>&1
+          python3 tools/legal/audit_dependencies.py --check 2>&1
+          python3 tools/legal/registros_db.py --check 2>&1
+          echo "Legal gates passed"
 
       # El generador es DETERMINISTA (sin fecha de generacion), asi que el
       # artefacto commiteado debe coincidir byte a byte con su fuente. Si alguien

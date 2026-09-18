@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
+# SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
+
 # M127 iter 4 (minimax-3): Validador pre-release de documentos legales.
 # Verifica que NOTICE.md, LICENSE, AUTHORS.md, CONTRIBUTING.md existen,
 # tienen contenido valido, y los placeholders de copyright estan actualizados.

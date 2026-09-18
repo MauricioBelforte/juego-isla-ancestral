@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "descripcion": "Alcance del sellado SHA-256 (M127 iter. 3). Lo consume tools/legal/timestamp_seal.py. Sella las VERSIONES MAESTRAS de los elementos declarados en game/isla-ancestral/data/legal/copyright.json.",
+  "rutas": [
+    "LICENSE",
+    "NOTICE.md",
+    "AUTHORS.md",
+    "CONTRIBUTING.md",
+    "legal",
+    "tools/legal",
+    "game/isla-ancestral/scripts/legal",
+    "game/isla-ancestral/data/legal"
+  ],
+  "excluir": [
+    ".git",
+    "__pycache__",
+    "node_modules",
+    ".kilo",
+    "PAPELERA",
+    "Obsoletos",
+    "legal/sellos",
+    ".workbuddy-ai"
+  ],
+  "ampliacion_pendiente": {
+    "motivo": "El sellado de evidencia de autoria idealmente cubre TODO el arbol (codigo, arte, audio). Ampliarlo multiplica el tamano de cada sello y el tiempo de cada corrida, y congela en el registro el trabajo sin commitear de otros agentes del worktree compartido (trampa 70).",
+    "accion": "Agregar rutas en 'rutas' (p. ej. game/isla-ancestral/assets, data/audio) cuando el arbol este limpio.",
+    "decision": "dueño del proyecto"
+  }
+}
