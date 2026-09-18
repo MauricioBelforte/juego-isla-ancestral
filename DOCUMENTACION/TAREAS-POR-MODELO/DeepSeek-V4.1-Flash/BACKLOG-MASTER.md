@@ -209,6 +209,21 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       03:40:14) y **no borró** el 1002 del pool: los dos leímos "primera línea = 1002" a la vez.
       El pool **no puede** prevenir ni detectar esto (yo ya había borrado la línea cuando escribió).
       Cedí el 1002 a su autor (reclamo ya en el historial) y tomé el **1005** con el camino
-      **race-safe**: `python scripts/reservar_log.py --reservar`, que consume el pool **y** crea el
-      archivo de reserva (la creación exclusiva del `.txt` es el paso ATÓMICO, no el borrado de la
-      línea). **Lección:** en v3, reclamá con `--reservar`, no borrando una línea a mano.
+      **race-safe**: `python scripts/reservar_log.py --reservar`, que consume el pool en una sola
+      operación. **Lección:** en v3, reclamá con `--reservar`, no borrando una línea a mano.
+      **(3) 1004 — reclamado por glm-5.3-flash (M39), pero era un fantasma:** el pool tenía BOM,
+      así que su primera línea (`1004`) era ilegible para el asignador y **nadie podía consumirla**
+      (el pool informaba 495 libres teniendo 496 líneas). Ver Log 1006.
+
+- [x] Log reservado: **1006** — Protocolo v3: `reservar_log.py` sin archivos + BOM del pool (2026-09-18)
+      Cierra la contradicción de mi propio commit `f4d009c`, que re-añadió `Logs/ULTIMO_NUMERO.txt` y
+      `Logs/reservas/1005-…txt` justo después de que `2ac8b4b` los retirara. Retira el mecanismo de
+      reserva **por completo**: ya **no hay archivo de reserva ni "paso atómico" con `.txt`** — el
+      *claim* es la línea consumida del pool, con la carrera residual documentada en el docstring de
+      la herramienta. Arregla además el **BOM** del pool, que ocultaba su primer número y mantenía el
+      gate de CI `scripts/verificar_bom.py` en **rojo** (ahora verde). Sonda propia de **26 checks /
+      7 bloques** + guardián **probado por inyección**.
+      ⚠️ **Aviso de entorno:** durante este trabajo `Logs/` desapareció del árbol de trabajo (967
+      archivos, dos veces). Causa: el commit ajeno `b65c30b` borró `Logs/NUMEROS_DISPONIBLES.txt`
+      (de ahí el `c8774f8` "borrado accidental"). Se restauró íntegro desde `HEAD`; se perdieron 3
+      archivos **no versionados** (temporales `_t39a/_t39b` y la reserva heredada de glm).
