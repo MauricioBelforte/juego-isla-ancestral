@@ -156,11 +156,31 @@ verificar con `--estado` al cerrar el ciclo).
 
 ## Pendiente
 
-- **Gate de CI para la sonda**: `quality.yml` tiene modificaciones ajenas en vuelo (gates de
-  M83/M126 de agnes-3-flash) → no lo toco en este commit para no arrastrar trabajo ajeno
-  (trampa 70). Queda añadir `python tools/logs/test_reservar_log_pool.py` como paso de CI.
-- **Corrección de `AGENTS.md` §6.1.d** (propuesta arriba).
-- `Logs/qa_m09_2026-09-11.txt` sigue siendo el único archivo no-`NNN-` de `Logs/` además del pool;
-  es ajeno a este trabajo.
+- ~~Gate de CI para la sonda~~ → **CERRADO en el cierre de este hilo** (abajo).
+- **Corrección de `AGENTS.md` §6.1.d** (propuesta arriba) — **decide el dueño**, no la aplico.
 - Los **10 ítems `[ ]` de M52** con dueño externo y el **QA cruzado §21.8 de M52 iter. 6** siguen
   pendientes (ver Log 1005).
+
+## Cierre del hilo — gate de CI de la sonda
+
+Se añadió el job **`log-protocol`** a `.github/workflows/quality.yml`, enganchado al `summary`
+(entra en el `needs` y en la condición que hace fallar el build). Tres pasos:
+
+1. **`Verify log numbering contract`** — gate duro: `python3 tools/logs/test_reservar_log_pool.py`.
+2. **`Prove the guardian by injection`** — gate duro: `python3 tools/logs/probar_guardian_reservar_log.py`.
+   Es el más fuerte de los dos: si alguien reintroduce el archivo de reserva retirado, la sonda
+   **FALLA** y el build se rompe. Un guardián que no discrimina no protege nada.
+3. **`Report pool status (informativo)`** — `continue-on-error`, porque el estado real del pool
+   puede traer hallazgos heredados de otros agentes.
+
+**Cómo se versionó sin arrastrar trabajo ajeno (trampa 70).** `quality.yml` tenía en vuelo las
+puertas de M83/M126/M128 de agnes-3-flash (15+/3−, sin commitear). Se aplicó la variante de la
+trampa 59: guardar el árbol → `git checkout HEAD -- quality.yml` → re-aplicar **solo mis bytes** →
+`git add` → restaurar el árbol. Resultado verificado: **staged = 42+/2−, 0 líneas de agnes**;
+**sin stagear = 15+/3− de agnes, intacto**. Los tres pasos se simularon en local antes de commitear
+(`rc=0` en los tres) y el YAML se validó con PyYAML (9 jobs, `needs` sin referencias inexistentes).
+
+**Nota de entorno:** al empezar este cierre, `Logs/` tenía 3 temporales ajenos
+(`_t39_test_loop_economico.txt`, `_t39_test_tiendas.txt`, `_t39_test_tiendas_iter_glm.txt`) que
+violan la regla "`Logs/` = solo `NNN-*.md` + el pool". Son de otro agente → **reportados, no
+tocados**.

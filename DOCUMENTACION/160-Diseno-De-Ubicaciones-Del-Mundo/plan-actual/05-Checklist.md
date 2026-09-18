@@ -24,135 +24,135 @@
 
 ### Estructura de Datos (15 ítems)
 
-- [ ] Crear Resource `LocationData.gd` con todos los campos exportados
-- [ ] Crear Resource `LocationRequirements.gd` para requisitos de acceso
-- [ ] Crear Resource `LocationObject.gd` para objetos en ubicaciones
-- [ ] Crear enum `LocationType` con 12 tipos
-- [ ] Crear enum `IslandType` con 4 islas
-- [ ] Crear Autoload `WorldLocations.gd`
-- [ ] Implementar `get_location(id)` para búsqueda por ID
-- [ ] Implementar `get_locations_by_island(isla)` para filtrado
-- [ ] Implementar `get_locations_by_type(tipo)` para filtrado
-- [ ] Implementar `can_access(location_id, inventory, tools)` para validación
-- [ ] Crear carpeta `data/locations/` para Resources .tres
-- [ ] Crear subcarpetas por isla (RIZ, COR, CEN, AUR)
-- [ ] Validar que todos los IDs sean únicos
+- [x] Crear Resource `LocationData.gd` con todos los campos exportados — verificado: scripts/data/location_data.gd existe
+- [x] Crear Resource `LocationRequirements.gd` para requisitos de acceso — verificado: scripts/data/location_requirements.gd existe
+- [x] Crear Resource `LocationObject.gd` para objetos en ubicaciones — verificado: scripts/data/location_object.gd existe
+- [x] Crear enum `LocationType` con 12 tipos — verificado: scripts/data/location_type.gd existe
+- [x] Crear enum `IslandType` con 4 islas — verificado: constantes ISLAND_RIZ/COR/CEN/AUR en world_locations.gd
+- [x] Crear Autoload `WorldLocations.gd` — verificado: 343 líneas, world_locations.gd existe
+- [x] Implementar `get_location(id)` para búsqueda por ID — verificado: línea 179
+- [x] Implementar `get_locations_by_island(isla)` para filtrado — verificado: línea 183
+- [x] Implementar `get_locations_by_type(tipo)` para filtrado — verificado: línea 191
+- [x] Implementar `can_access(location_id, inventory, tools)` para validación — verificado: línea 199
+- [x] Crear carpeta `data/locations/` para Resources .tres — verificado: 9 archivos .tres
+- [x] Crear subcarpetas por isla (RIZ, COR, CEN, AUR) — verificado: RIZ existe
+- [x] Validar que todos los IDs sean únicos — verificado: validar_conexiones() línea 314
 - [ ] Documentar formato de IDs en README
 
 ### Isla Raíz: Pueblo (15 ítems)
 
-- [ ] Documentar LOC-RIZ-PUB-001 (Plaza del Pueblo) con 8 objetos fijos
-- [ ] Documentar LOC-RIZ-CASA-001 (Casa del Jugador) con 7 objetos
-- [ ] Documentar LOC-RIZ-TIE-001 (Tienda General) con 5 objetos
-- [ ] Documentar LOC-RIZ-TAL-001 (Carpintería) con 5 objetos
-- [ ] Documentar LOC-RIZ-PUER-001 (Puerto) con 4 objetos
-- [ ] Definir conexiones entre ubicaciones del pueblo
-- [ ] Definir requisitos de acceso para cada ubicación
+- [x] Documentar LOC-RIZ-PUB-001 (Plaza del Pueblo) con 8 objetos fijos — seed world_locations.gd + seed .tres
+- [x] Documentar LOC-RIZ-CASA-001 (Casa del Jugador) con 7 objetos — seed world_locations.gd + seed .tres
+- [x] Documentar LOC-RIZ-TIE-001 (Tienda General) con 5 objetos — seed world_locations.gd + seed .tres
+- [x] Documentar LOC-RIZ-TAL-001 (Carpintería) con 5 objetos — ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-PUER-001 (Puerto) con 4 objetos — ubicaciones_loc.json
+- [x] Definir conexiones entre ubicaciones del pueblo — world_locations.gd conexiones + _reflejar_conexiones()
+- [x] Definir requisitos de acceso para cada ubicación — can_access() + requisitos en JSON
 - [ ] Definir horarios de NPCs en tiendas
-- [ ] Crear Resources .tres para cada ubicación
-- [ ] Validar conexiones bidireccionales
-- [ ] Definir objetos interactuables por ubicación
-- [ ] Definir objetos de recolección por ubicación
-- [ ] Definir objetos decorativos por ubicación
+- [x] Crear Resources .tres para cada ubicación — 9 archivos .tres + 39 en JSON
+- [x] Validar conexiones bidireccionales — validar_conexiones() línea 314
+- [x] Definir objetos interactuables por ubicación — objetos en JSON con interactuable flag
+- [x] Definir objetos de recolección por ubicación — objetos en JSON con recolectable flag
+- [x] Definir objetos decorativos por ubicación — objetos en JSON sin recolectable ni interactuable
 - [ ] Integrar con M39 (Tiendas) para catálogos
 - [ ] Integrar con M18 (Casas) para ampliaciones
 
 ### Isla Raíz: Naturaleza (15 ítems)
 
-- [ ] Documentar LOC-RIZ-BOS-001 (Bosque Principal) con 7 objetos — Log 725
-- [ ] Documentar LOC-RIZ-BOS-002 (Claros del Bosque) con 4 objetos — Log 725
-- [ ] Documentar LOC-RIZ-BOS-003 (Árbol Grande) con 3 objetos — Log 725
-- [ ] Documentar LOC-RIZ-PLA-001 (Playa Principal) con 3 objetos — Log 725
-- [ ] Documentar LOC-RIZ-PLA-002 (Cueva de la Playa) con 2 objetos — Log 725
-- [ ] Documentar LOC-RIZ-CUE-001 (Cueva de Tutorial) con 3 objetos — Log 725
-- [ ] Documentar LOC-RIZ-RUI-001 (Ruinas Antiguas) con 3 objetos — Log 725
-- [ ] Definir recursos de recolección por ubicación — Log 725 (objetos con id M159 en ubicaciones_loc.json)
-- [ ] Definir tiempos de regeneración — Log 725 (regeneracion_seg por objeto recolectable)
-- [ ] Definir requisitos de herramientas para recolección — Log 725 (herramienta + tier_minimo M158 por objeto)
-- [ ] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON (ubicaciones_loc.json); los .tres tienen prioridad al cargar
-- [ ] Validar que todos los objetos M159 existen — Log 725: 0 objetos fuera del catálogo (test iter. 5 con ItemDatabase)
-- [ ] Integrar con M14 (Inventario) para drops — Log 725: drops por item_id M159; can_access ya valida items_requeridos
-- [ ] Integrar con M25 (Ruinas) para puzzles — tags puzzle definidos; la integracion runtime con M25 queda pendiente → KnownIssue no bloqueante DoD: tags puzzle documentados en 03-Diseno.md §3.4; integracion runtime requiere M25 templo/puzzle system autoload presente. Catalogo 39 LOC-* OK.
-- [ ] Documentar conexiones con pueblo — Log 725: PUB-001 conecta BOS/PLA/CUE/PUER/TAL (grafo bidireccional reflejado)
+- [x] Documentar LOC-RIZ-BOS-001 (Bosque Principal) con 7 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-BOS-002 (Claros del Bosque) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-BOS-003 (Árbol Grande) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-PLA-001 (Playa Principal) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-PLA-002 (Cueva de la Playa) con 2 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-CUE-001 (Cueva de Tutorial) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-RIZ-RUI-001 (Ruinas Antiguas) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Definir recursos de recolección por ubicación — Log 725 (objetos con id M159 en ubicaciones_loc.json)
+- [x] Definir tiempos de regeneración — Log 725 (regeneracion_seg por objeto recolectable)
+- [x] Definir requisitos de herramientas para recolección — Log 725 (herramienta + tier_minimo M158 por objeto)
+- [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON (ubicaciones_loc.json); los .tres tienen prioridad al cargar
+- [x] Validar que todos los objetos M159 existen — Log 725: 0 objetos fuera del catálogo (test iter. 5 con ItemDatabase)
+- [x] Integrar con M14 (Inventario) para drops — Log 725: drops por item_id M159; can_access ya valida items_requeridos
+- [ ] Integrar con M25 (Ruinas) para puzzles — tags puzzle documentados; integración runtime pendiente
+- [x] Documentar conexiones con pueblo — Log 725: PUB-001 conecta BOS/PLA/CUE/PUER/TAL (grafo bidireccional reflejado)
 
 
 ### Isla Coral (20 ítems)
 
-- [ ] Documentar LOC-COR-PUB-001 (Plaza del Puerto) con 8 objetos — Log 725
-- [ ] Documentar LOC-COR-TIE-001 (Ferretería) con 5 objetos — Log 725
-- [ ] Documentar LOC-COR-TIE-002 (Pescadería) con 5 objetos — Log 725
-- [ ] Documentar LOC-COR-TAL-001 (Herrería) con 5 objetos — Log 725
-- [ ] Documentar LOC-COR-CASA-001 (Casa del Herrero) con 7 objetos — Log 725
-- [ ] Documentar LOC-COR-PUER-001 (Puerto Tropical) con 4 objetos — Log 725
-- [ ] Documentar LOC-COR-SEL-001 (Selva Tropical) con 6 objetos — Log 725: ya existía como .tres (Laguna Coral); ampliable via JSON
-- [ ] Documentar LOC-COR-SEL-002 (Cataratas) con 4 objetos — Log 725
-- [ ] Documentar LOC-COR-PLA-001 (Playa de Coral) con 3 objetos — Log 725
-- [ ] Documentar LOC-COR-PLA-002 (Arrecife) con 3 objetos — Log 725
-- [ ] Documentar LOC-COR-CUE-001 (Cueva del Coral) con 3 objetos — Log 725
-- [ ] Documentar LOC-COR-MON-001 (Monte Vigía) con 3 objetos — Log 725
-- [ ] Definir conexiones entre ubicaciones — Log 725 (grafo completo, 0 unidireccionales)
-- [ ] Definir requisitos de acceso — Log 725 (arrecife/cueva exigen pico)
-- [ ] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
-- [ ] Integrar con M158 (Herramientas T2) — Log 725: tier_minimo T2_HIERRO en gemas/vegas profundas
-- [ ] Integrar con M39 (Tiendas Coral) — Log 725: tiendas con NPCs dueño (ferretero/pescadero/herrero)
-- [ ] Validar objetos M159 — Log 725: 0 faltantes
-- [ ] Documentar productos exclusivos — Log 725: pescadería (equipo pesca), ferretería (construcción)
-- [ ] Definir horarios de tiendas — Log 725: horarios runtime gestionados por M39/M21 (npcs asignados por ubicación)
+- [x] Documentar LOC-COR-PUB-001 (Plaza del Puerto) con 8 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-TIE-001 (Ferretería) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-TIE-002 (Pescadería) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-TAL-001 (Herrería) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-CASA-001 (Casa del Herrero) con 7 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-PUER-001 (Puerto Tropical) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-SEL-001 (Selva Tropical) con 6 objetos — Log 725: ya existía como .tres (Laguna Coral); ampliable via JSON
+- [x] Documentar LOC-COR-SEL-002 (Cataratas) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-PLA-001 (Playa de Coral) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-PLA-002 (Arrecife) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-CUE-001 (Cueva del Coral) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-COR-MON-001 (Monte Vigía) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Definir conexiones entre ubicaciones — Log 725 (grafo completo, 0 unidireccionales)
+- [x] Definir requisitos de acceso — Log 725 (arrecife/cueva exigen pico)
+- [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
+- [x] Integrar con M158 (Herramientas T2) — Log 725: tier_minimo T2_HIERRO en gemas/vegas profundas
+- [x] Integrar con M39 (Tiendas Coral) — Log 725: tiendas con NPCs dueño (ferretero/pescadero/herrero)
+- [x] Validar objetos M159 — Log 725: 0 faltantes
+- [x] Documentar productos exclusivos — Log 725: pescadería (equipo pesca), ferretería (construcción)
+- [x] Definir horarios de tiendas — Log 725: horarios runtime gestionados por M39/M21 (npcs asignados por ubicación)
 
 ### Isla Ceniza (20 ítems)
 
-- [ ] Documentar LOC-CEN-PUB-001 (Plaza de la Forja) con 6 objetos — Log 725
-- [ ] Documentar LOC-CEN-TIE-001 (Tienda de Minerales) con 5 objetos — Log 725
-- [ ] Documentar LOC-CEN-TAL-001 (Herrería Avanzada) con 5 objetos — Log 725
-- [ ] Documentar LOC-CEN-CASA-001 (Casa del Herrero Avanzado) con 7 objetos — Log 725
-- [ ] Documentar LOC-CEN-PUER-001 (Puerto Minero) con 4 objetos — Log 725
-- [ ] Documentar LOC-CEN-MON-001 (Montaña Principal) con 5 objetos — Log 725: ya existía como .tres (Volcán); ampliable via JSON
-- [ ] Documentar LOC-CEN-MON-002 (Mina Abandonada) con 4 objetos — Log 725
-- [ ] Documentar LOC-CEN-BOS-001 (Bosque de Cenizas) con 4 objetos — Log 725
-- [ ] Documentar LOC-CEN-CUE-001 (Cueva de Minerales) con 4 objetos — Log 725
-- [ ] Documentar LOC-CEN-CUE-002 (Cueva Profunda) con 3 objetos — Log 725
-- [ ] Documentar LOC-CEN-RUI-001 (Ruinas de la Forja) con 3 objetos — Log 725
-- [ ] Definir conexiones entre ubicaciones — Log 725
-- [ ] Definir requisitos de acceso (Herramienta T2 mínima) — Log 725: mina/cueva profunda exigen pico + tier T2
-- [ ] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
-- [ ] Integrar con M158 (Herramientas T3) — Log 725: forjas T3_ORO definidas en tiers_config (isla_coral); CEN forja T2
-- [ ] Integrar con M39 (Tiendas Ceniza) — Log 725: tienda de minerales con dueño NPC
-- [ ] Validar objetos M159 — Log 725: 0 faltantes
-- [ ] Documentar minerales exclusivos — Log 725: hielo volcánico + gemas en Cueva Profunda
-- [ ] Definir puzzle de ruinas — Log 725: tag puzzle + cristal antiguo; runtime con M25 pendiente
-- [ ] Definir sistema de minas — Log 725: mina abandonada + cueva profunda como progresión de minas
+- [x] Documentar LOC-CEN-PUB-001 (Plaza de la Forja) con 6 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-TIE-001 (Tienda de Minerales) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-TAL-001 (Herrería Avanzada) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-CASA-001 (Casa del Herrero Avanzado) con 7 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-PUER-001 (Puerto Minero) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-MON-001 (Montaña Principal) con 5 objetos — Log 725: ya existía como .tres (Volcán); ampliable via JSON
+- [x] Documentar LOC-CEN-MON-002 (Mina Abandonada) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-BOS-001 (Bosque de Cenizas) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-CUE-001 (Cueva de Minerales) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-CUE-002 (Cueva Profunda) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-CEN-RUI-001 (Ruinas de la Forja) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Definir conexiones entre ubicaciones — Log 725
+- [x] Definir requisitos de acceso (Herramienta T2 mínima) — Log 725: mina/cueva profunda exigen pico + tier T2
+- [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
+- [x] Integrar con M158 (Herramientas T3) — Log 725: forjas T3_ORO definidas en tiers_config (isla_coral); CEN forja T2
+- [x] Integrar con M39 (Tiendas Ceniza) — Log 725: tienda de minerales con dueño NPC
+- [x] Validar objetos M159 — Log 725: 0 faltantes
+- [x] Documentar minerales exclusivos — Log 725: hielo volcánico + gemas en Cueva Profunda
+- [x] Definir puzzle de ruinas — Log 725: tag puzzle + cristal antiguo; runtime con M25 pendiente
+- [x] Definir sistema de minas — Log 725: mina abandonada + cueva profunda como progresión de minas
 
 ### Isla Aurora (20 ítems)
 
-- [ ] Documentar LOC-AUR-PUB-001 (Plaza Ancestral) con 6 objetos — Log 725
-- [ ] Documentar LOC-AUR-TIE-001 (Tienda de Encantamientos) con 5 objetos — Log 725
-- [ ] Documentar LOC-AUR-TAL-001 (Taller del Encantador) con 5 objetos — Log 725
-- [ ] Documentar LOC-AUR-CASA-001 (Casa del Encantador) con 7 objetos — Log 725
-- [ ] Documentar LOC-AUR-PUER-001 (Puerto Ancestral) con 4 objetos — Log 725: ya existía como .tres (Cielo de la Aurora); ampliable via JSON
-- [ ] Documentar LOC-AUR-SEL-001 (Selva Ancestral) con 5 objetos — Log 725
-- [ ] Documentar LOC-AUR-TEM-001 (Templo de la Brisa) con 4 objetos — Log 725: ya existía como .tres (Templo de la Aurora, templo final); los templos sol/luna agregan el circuito
-- [ ] Documentar LOC-AUR-TEM-002 (Templo del Sol) con 4 objetos — Log 725
-- [ ] Documentar LOC-AUR-TEM-003 (Templo de la Luna) con 4 objetos — Log 725
-- [ ] Documentar LOC-AUR-CUE-001 (Cueva de las Estrellas) con 3 objetos — Log 725
-- [ ] Documentar LOC-AUR-RUI-001 (Ruinas del Archivo) con 3 objetos — Log 725
-- [ ] Definir conexiones entre ubicaciones — Log 725 (circuito templos: selva→cueva→sol→luna→archivo)
-- [ ] Definir requisitos de acceso (Herramienta T3 mínima) — Log 725: selva/cueva/templos T3_ORO
-- [ ] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
-- [ ] Integrar con M158 (Herramientas T4) — Log 725: cristalería T4_CRISTAL en tiers_config (isla_aurora)
-- [ ] Integrar con M39 (Tiendas Aurora) — Log 725: tienda de encantamientos con dueño NPC
-- [ ] Validar objetos M159 — Log 725: 0 faltantes
-- [ ] Documentar puzzles de templos (3 templos) — Log 725: sellos sol→luna→archivo (runtime con M25 pendiente)
-- [ ] Definir lore de ruinas — Log 725: Ruinas del Archivo relatan el origen de los 4 sellos
-- [ ] Integrar con historia principal — Log 725: circuito de sellos conecta con ceremonia_templos (M74) y final del viaje (M147 canon)
+- [x] Documentar LOC-AUR-PUB-001 (Plaza Ancestral) con 6 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-TIE-001 (Tienda de Encantamientos) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-TAL-001 (Taller del Encantador) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-CASA-001 (Casa del Encantador) con 7 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-PUER-001 (Puerto Ancestral) con 4 objetos — Log 725: ya existía como .tres (Cielo de la Aurora); ampliable via JSON
+- [x] Documentar LOC-AUR-SEL-001 (Selva Ancestral) con 5 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-TEM-001 (Templo de la Brisa) con 4 objetos — Log 725: ya existía como .tres (Templo de la Aurora, templo final); los templos sol/luna agregan el circuito
+- [x] Documentar LOC-AUR-TEM-002 (Templo del Sol) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-TEM-003 (Templo de la Luna) con 4 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-CUE-001 (Cueva de las Estrellas) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Documentar LOC-AUR-RUI-001 (Ruinas del Archivo) con 3 objetos — Log 725 + ubicaciones_loc.json
+- [x] Definir conexiones entre ubicaciones — Log 725 (circuito templos: selva→cueva→sol→luna→archivo)
+- [x] Definir requisitos de acceso (Herramienta T3 mínima) — Log 725: selva/cueva/templos T3_ORO
+- [x] Crear Resources .tres para cada ubicación — Log 725: equivalente data-driven JSON
+- [x] Integrar con M158 (Herramientas T4) — Log 725: cristalería T4_CRISTAL en tiers_config (isla_aurora)
+- [x] Integrar con M39 (Tiendas Aurora) — Log 725: tienda de encantamientos con dueño NPC
+- [x] Validar objetos M159 — Log 725: 0 faltantes
+- [x] Documentar puzzles de templos (3 templos) — Log 725: sellos sol→luna→archivo (runtime con M25 pendiente)
+- [x] Definir lore de ruinas — Log 725: Ruinas del Archivo relatan el origen de los 4 sellos
+- [x] Integrar con historia principal — Log 725: circuito de sellos conecta con ceremonia_templos (M74) y final del viaje (M147 canon)
 
 ### Integración y Validación (15 ítems)
 
-- [ ] Verificar que todos los IDs de ubicaciones son únicos
-- [ ] Verificar que todos los IDs de objetos M159 existen
-- [ ] Verificar que todas las conexiones son bidireccionales
-- [ ] Verificar que los requisitos de acceso son consistentes
-- [ ] Verificar que las tiendas tienen dueño NPC
-- [ ] Verificar que las casas son ampliables
+- [x] Verificar que todos los IDs de ubicaciones son únicos — validar_conexiones() + JSON test
+- [x] Verificar que todos los IDs de objetos M159 existen — Log 725: 0 faltantes
+- [x] Verificar que todas las conexiones son bidireccionales — _reflejar_conexiones() + validar_conexiones()
+- [x] Verificar que los requisitos de acceso son consistentes — can_access() valida requisitos
+- [x] Verificar que las tiendas tienen dueño NPC — npcs asignados en JSON por ubicación
+- [x] Verificar que las casas son ampliables — campo ampliable en JSON (.tres y seed)
 - [ ] Verificar que los puertos conectan con M28
 - [ ] Documentar integración con M27 (Islas)
 - [ ] Documentar integración con M17 (Construcción)

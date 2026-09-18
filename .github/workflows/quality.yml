@@ -390,9 +390,48 @@ jobs:
         run: |
           python3 scripts/diagnosticar_mojibake.py 2>&1 | tail -25 || true
 
+  # Protocolo de numeracion de logs (v3, AGENTS.md 6.1). El asignador YA NO crea
+  # archivos: el numero se consume del pool. La sonda comprueba ese contrato
+  # sobre un arbol temporal, y esta probada por inyeccion: si alguien
+  # reintroduce el archivo de reserva retirado, FALLA. Ver Logs/1006.
+  log-protocol:
+    name: Log numbering protocol (v3)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Gate duro. La sonda es determinista: trabaja sobre un arbol temporal y
+      # no toca el repo. Piso declarado de 22 checks; hoy da 26.
+      - name: Verify log numbering contract
+        run: |
+          python3 tools/logs/test_reservar_log_pool.py
+
+      # Gate duro, y el mas fuerte: muta el asignador para que vuelva a crear el
+      # archivo de reserva y comprueba que la sonda FALLA. Restaura el archivo
+      # verificando sha256, asi que no deja el arbol sucio. Un guardian que no
+      # falla ante una regresion es un falso verde.
+      - name: Prove the guardian by injection
+        run: |
+          python3 tools/logs/probar_guardian_reservar_log.py
+
+      # Informativo, NO bloquea: el estado real del pool puede traer hallazgos
+      # heredados de otros agentes. Se muestra para diagnostico.
+      - name: Report pool status (informativo)
+        continue-on-error: true
+        run: |
+          python3 scripts/reservar_log.py --estado
+
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -406,7 +445,8 @@ jobs:
           echo "legal-tools: ${{ needs.legal-tools.result }}"
           echo "security-scan: ${{ needs.security-scan.result }}"
           echo "encoding-guard: ${{ needs.encoding-guard.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]]; then
+          echo "log-protocol: ${{ needs.log-protocol.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi
