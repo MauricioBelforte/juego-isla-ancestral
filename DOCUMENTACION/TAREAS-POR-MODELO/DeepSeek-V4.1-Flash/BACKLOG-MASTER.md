@@ -227,3 +227,19 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       archivos, dos veces). Causa: el commit ajeno `b65c30b` borró `Logs/NUMEROS_DISPONIBLES.txt`
       (de ahí el `c8774f8` "borrado accidental"). Se restauró íntegro desde `HEAD`; se perdieron 3
       archivos **no versionados** (temporales `_t39a/_t39b` y la reserva heredada de glm).
+
+      **Gate de CI del protocolo v3 (cierre del hilo):** job **`log-protocol`** (8.º) en
+      `quality.yml`, insertado tras `encoding-guard` y sumado a `needs:` de `summary`. 3 pasos:
+      (1) sonda `tools/logs/test_reservar_log_pool.py` (7 bloques, 26 checks, piso `CHECKS_MINIMOS=22`);
+      (2) **prueba por inyección** `tools/logs/probar_guardian_reservar_log.py` (muta el asignador para
+      que vuelva a crear el archivo de reserva y exige que la sonda FALLE; restaura por sha256);
+      (3) `--estado` informativo, `continue-on-error`. Validado con PyYAML (9 jobs, sin `needs:` colgantes)
+      y los 3 pasos simulados en local (`rc=0`).
+      ⚠️ **Trampa 70 volvió a dispararse (2026-09-18 06:10):** el commit ajeno **`fd2a791`**
+      ("M160 Ubicaciones", sin lista de rutas) **barrió mis dos archivos ya en el índice** —
+      `quality.yml` (44+/2−) y `Log 1006` (32+/−) — dentro de *su* commit. Mi propio commit posterior
+      (`ead629a`) tomó del **árbol** y por eso arrastró **15+/3− ajenos** (normalización de acentos
+      `catalogo`→`catálogo` de agnes-3). **Deshecho con `git reset --mixed fd2a791`**: `ead629a`
+      eliminado, los bytes ajenos devueltos a *unstaged*, mi gate intacto en `fd2a791`. **Lección
+      reforzada:** en worktree compartido, `git commit` con lista explícita **no basta** si un tercero
+      commitea el índice antes — el lote se cierra **en el mismo instante** en que se stagea.
