@@ -284,47 +284,44 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 ### 6.1 Protocolo de Numeración (OBLIGATORIO — previene duplicados)
 
 > ⚠️ **Este protocolo debe seguirse EXACTAMENTE para evitar logs duplicados.**
-> **Versión 2 (2026-09-01, propuesta del usuario + glm-5.3-flash):** el número de log se
-> **RESERVA al bloquear el módulo** (no al escribir el log), y la reserva vive en una
-> carpeta de archivos temporales `Logs/reservas/` (no en memoria del agente).
+> **Versión 3 (2026-09-17, propuesta del usuario + mimo-v2.5):** se usa una
+> **lista de números disponibles** (`Logs/NUMEROS_DISPONIBLES.txt`) en lugar de
+> `ULTIMO_NUMERO.txt`. Cada agente toma el primer número de la lista, lo borra,
+> y lo guarda en su backlog personal. **Colisión = imposible** (cada número se
+> consume una sola vez).
 
-**Semántica de `ULTIMO_NUMERO.txt` (v2):** contiene el último número **RESERVADO** (no el último usado). Puede haber huecos en la secuencia si una reserva no se consumió — los huecos son inofensivos.
+**Archivo central:** `Logs/NUMEROS_DISPONIBLES.txt` — una línea por número, orden ascendente (1000, 1001, 1002, ...). Cuando se agoten, agregar más números al final.
 
-#### 6.1.a RESERVA del número (en el MISMO momento de bloquear el módulo)
+> **Período de transición:** `Logs/ULTIMO_NUMERO.txt` se mantiene temporalmente
+> por si algún agente tiene un número reservado del sistema anterior (v2).
+> Cuando todos hayan migrado, se eliminará.
 
-1. **Leer `Logs/ULTIMO_NUMERO.txt`** → obtener el número actual (N).
-2. **Calcular siguiente:** N + 1. **VERIFICAR** que no exista `Logs/{N+1}-*.md` NI `Logs/reservas/{N+1}-*`; si existe → incrementar hasta número libre (bucle).
-3. **ESCRIBIR el número reservado** en `ULTIMO_NUMERO.txt` (ahora N+1).
-4. **CREAR la reserva temporal** en la carpeta de reservas (la "variable temporal" compartida):
+#### 6.1.a RESERVA del número (al finalizar la tarea, antes de crear el log)
+
+1. **Leer `Logs/NUMEROS_DISPONIBLES.txt`** → tomar la primera línea (el número más bajo disponible).
+2. **BORRAR esa línea** del archivo (el número queda consumido — nadie más lo puede tomar).
+3. **Guardar el número en tu backlog personal** (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`) bajo la tarea que estás completando, en una línea tipo:
    ```
-   Logs/reservas/{NUMERO}-{AGENTE}-{MODULO}.txt
+   - [x] Log reservado: **980** — M53 UI-UX avance 78→82%
    ```
-   Ejemplo: `Logs/reservas/376-glm-5.3-flash-M32.txt` con contenido:
-   ```
-   numero: 376
-   agente: glm-5.3-flash
-   plataforma: Kilo Code
-   modulo: M32-Clima
-   fecha: 2026-09-01 12:00
-   ```
-5. **Anotar el número en la reserva del módulo** (CHECKLIST-GLOBAL / ESTADO-PARALELO / 05-Checklist): "Log reservado: {NUMERO}" — trazabilidad si la sesión muere.
-6. Conservar el número en la sesión (variable temporal del agente) para el paso 6.1.c.
+4. Conservar el número en la sesión para el paso 6.1.b.
+
+> **¿Por qué en el backlog?** Porque cada agente tiene su propia carpeta (`TAREAS-POR-MODELO/<MODELO>/`), lo que elimina la carrera por archivos compartidos. Si la sesión muere, el siguiente agente puede ver en el backlog qué número se tomó y si se consumió o no.
 
 #### 6.1.b ESCRITURA del log (al finalizar la tarea)
 
-1. **VERIFICAR** que `Logs/{NUMERO}-*.md` no exista (otra reserva puede haber colisionado por race residual); si existe → incrementar hasta número libre (y actualizar la reserva temporal).
-2. **Crear el archivo de log** con el nombre: `{NUMERO}-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
-3. **Actualizar el header** del archivo con `# Log {NUMERO}: Descripcion`.
-4. **BORRAR la reserva temporal** `Logs/reservas/{NUMERO}-{AGENTE}-{MODULO}.txt` (la variable temporal se consume).
+1. **Crear el archivo de log** con el nombre: `{NUMERO}-DESCRIPCION_BREVE_AAAA-MM-DD_HH-MM-SS.md`.
+2. **Actualizar el header** del archivo con `# Log {NUMERO}: Descripcion`.
+3. **Marcar en tu backlog** que el log se creó (cambiar `Log reservado` → `Log creado`).
 
 #### 6.1.c ABORTO o liberación sin log
 
-- Si el agente libera el módulo **sin haber escrito el log**, la reserva queda como **hueco** (inofensivo): **BORRAR el archivo de reserva** y anotar "log reservado {N} no usado" en la liberación.
-- **Reservas huérfanas** (archivo en `Logs/reservas/` sin log asociado y con más de 48 h): el siguiente agente puede borrarlas y liberar el número para su reuso.
+- Si el agente libera el módulo **sin haber escrito el log**, el número queda como **hueco** (inofensivo): anotar "log reservado {N} no usado" en la liberación.
+- **Número huérfano** (reservado en un backlog pero sin log asociado por más de 48 h): el siguiente agente puede reasignarlo a sí mismo (editar su backlog con el número, borrar la referencia del backlog anterior).
 
-#### 6.1.d Colisión residual (carrera en ULTIMO_NUMERO.txt)
+#### 6.1.d Colisión residual
 
-- Si dos agentes reservan a la vez y obtienen el mismo número: la verificación de `Logs/reservas/` en el paso 2 de 6.1.a detecta el duplicado → el segundo incrementa. La verificación de 6.1.b.1 absorbe cualquier caso residual.
+- **Imposible con este sistema.** Cada número se consume al tomarlo de la lista. No hay lectura compartida ni archivos concurrentes. El único riesgo es que dos agentes lean `NUMEROS_DISPONIBLES.txt` simultáneamente — si esto ocurre, la línea en blanco resultante se detecta y el segundo agente toma el siguiente número válido.
 
 ### 6.2 Formato del Archivo
 
@@ -350,11 +347,11 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 ### 6.3 Reglas de Seguridad
 
-- **NUNCA** editar el número directamente sin verificar que no exista un archivo con ese número NI una reserva en `Logs/reservas/`.
-- **SIEMPRE** verificar la existencia del archivo antes de crearlo.
-- **La reserva vive en `Logs/reservas/`** (carpeta compartida, auditable por todos): NUNCA guardar el número solo en memoria ni ensuciar el código con constantes.
-- **El número en ULTIMO_NUMERO.txt es el ÚLTIMO número RESERVADO** (no el usado). Al leerlo, sumar 1.
-- Si dos agentes leen `ULTIMO_NUMERO.txt` al mismo tiempo, el segundo debe verificar reservas y archivos y encontrar el número tomado → incrementar.
+- **NUNCA** tomar un número de `NUMEROS_DISPONIBLES.txt` sin borrarlo de la lista.
+- **SIEMPRE** verificar la existencia del archivo de log antes de crearlo.
+- **El número se consume al tomararlo** de la lista — no hay reserva compartida.
+- **Cada agente guarda su número en su backlog personal** (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`).
+- Si dos agentes leen `NUMEROS_DISPONIBLES.txt` simultáneamente, la línea en blanco resultante se detecta y el segundo toma el siguiente válido.
 
 ## 7. Seguimiento de Progreso (Checklist)
 
@@ -379,7 +376,7 @@ El bucle reservar → leer → implementar → testear → documentar → libera
 - **Comando `/bucle`** (`.kilo/command/bucle.md`): invocable por CUALQUIER modelo en cualquier sesión. Arranca el bucle indefinido: elige módulo de su línea (columna Recom del CHECKLIST), reserva log (protocolo v2 §6.1.a), implementa, testea headless, documenta con evidencia, libera, repite hasta agotar tokens.
 - **Agente `bucle-terreno`** (`.kilo/agent/bucle-terreno.md`, mode: primary, 200 pasos): variante de glm-5.3-flash.
 - **Agente `bucle`** (`.kilo/agent/bucle.md`, mode: all, 200 pasos): variante genérica para cualquier modelo — busca módulos con Recom = su propio modelo.
-- Cada modelo firma sus documentos y usa su identidad en las reservas (`Logs/reservas/{N}-{agente}-{MODULO}.txt`).
+- Cada modelo firma sus documentos y usa su identidad en los logs (firmas en `Logs/`).
 
 **Identidad = por CHAT, no por plataforma** (aclarado por el usuario el 2026-09-13):
 
@@ -598,7 +595,7 @@ Logs/
 │   └── 03-aplicacion-2026-10-03.log
 ├── aplicacion.log                    ← Log actual (siempre < tamaño máximo)
 ├── output.txt
-└── ULTIMO_NUMERO.txt
+└── NUMEROS_DISPONIBLES.txt           ← Lista de números disponibles (cada agente toma el primero)
 ```
 
 ### Implementación en Código (Unity/C#)
