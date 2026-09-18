@@ -1759,3 +1759,163 @@ M1 (la unica camara jugable hoy es follow_camera.gd).
 - `DOCUMENTACION/12-Camara/plan-actual/05-Checklist.md` — 53 items flagueados, seccion QA anexada.
 - `DOCUMENTACION/12-Camara/plan-actual/04-Codigo.md` — seccion "Notas del Agente (2026-09-18)".
 - `Logs/955-QA-M12-Camara_*.md`.
+
+## ACTUALIZACION BUG-028 — causa raiz encontrada (atria-dawn / Kilo Code, Log 982, 2026-09-18)
+
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+
+El reporte original de Hy3 (2026-09-12) decia "loop compra roto". **La causa real es mucho mas
+simple: el item_id `OBJ-PLA-001` NO EXISTE en ItemDatabase.**
+
+- `data/items/item_obj_pla_001.tres` contiene `id = "OBJ-CUA-007"` (nombre de archivo e id interno
+  discordantes — ver BUG-046 abajo; 12 items del catalogo M159 tienen este problema).
+- `ItemDatabase.get_item("OBJ-PLA-001")` devuelve **null** (verificado por diagnostico headless
+  propio: `scripts/economia/test_diag_m38_atria.gd`).
+- Como el item no existe, el test (L50-53) no puede inyectarle el precio, y la consulta devuelve 0.
+- El check falla SIEMPRE, independientemente del estado de la economia. **El "loop compra roto"
+  era un artefacto del test.**
+- **Agravante (falso-verde):** con precio 0 la compra es gratis, y los checks `compra: saldo
+  bajado` (`saldo <= 10000`) y `anti-arbitraje (saldo <= inicial)` pasan de forma trivial sin que
+  el saldo se mueva. El test no valida el loop economico real.
+
+El comentario "Fix M39" en `price_manager._precio_base_compra` sugeria que el bug se habia
+arreglado; el bug nunca estuvo en PriceManager.
+
+**Fix propuesto:** cambiar `OBJ-PLA-001` por un item_id existente (ej. `madera_roble`) en
+test_loop_economico.gd, o crear el item `OBJ-PLA-001` en M159. Recomiendo lo segundo (ver BUG-046).
+
+## BUG-046: catalogo M159 — 12 items con id interno discordante del nombre de archivo
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA M38, Log 982)
+- **Modulo:** M159 Catalogo-De-Objetos (data/items/)
+- **Severidad:** Media (mantenimiento; causa raiz de BUG-028)
+- **Estado:** [?] Delegado
+
+### Sintoma
+
+Doce archivos `.tres` de `data/items/` tienen un `id` interno cuya categoria NO coincide con el
+prefijo del nombre del archivo:
+
+| Archivo | id interno |
+|---|---|
+| item_obj_pla_001.tres | OBJ-CUA-007 |
+| item_obj_ban_001.tres | OBJ-MES-007 |
+| item_obj_cam_001.tres | OBJ-MES-009 |
+| item_obj_cam_002.tres | OBJ-MES-010 |
+| item_obj_est_001.tres | OBJ-MES-008 |
+| item_obj_est_002.tres | OBJ-CUA-008 |
+| item_obj_esp_001.tres | OBJ-CUA-003 |
+| item_obj_esp_002.tres | OBJ-CUA-004 |
+| item_obj_luz_001.tres | OBJ-CUA-006 |
+| item_obj_rel_001.tres | OBJ-CUA-005 |
+| item_obj_sil_001.tres | OBJ-MES-005 |
+| item_obj_sil_002.tres | OBJ-MES-006 |
+
+(Nota: el resto del catalogo — 99 archivos — SI coincide; los otros "discordantes" detectados en
+el escaneo eran solo diferencias de mayusculas/guion_vs_guion_bajo, falsos positivos.)
+
+### Impacto
+
+- Cualquier referencia por nombre de archivo (convencion comun en tests y en scripts de otros
+  modulos) resuelve un id distinto al esperado. BUG-028 es el caso concreto.
+- Mantiene la ilusion de que `OBJ-PLA-001` existe (el archivo esta) cuando el id real es otro.
+
+### Fix sugerido
+
+Renombrar los `id` internos para coincidir con el stem del archivo, o renombrar los archivos.
+Requiere verificacion de referencias cruzadas en todo `scripts/` y `data/` (grep por cada id).
+
+## BUG-047: M38 — items solo-vendibles con precio_venta anulado (devuelve 0)
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA M38, Log 982)
+- **Modulo:** M38 Economia
+- **Severidad:** Alta (contenido del juego inalcanzable)
+- **Estado:** [?] Delegado (codigo dueño: M38 GLM-5.3/glm-5.3-flash — §21.4 lock)
+
+### Sintoma
+
+5 de las 15 entradas de `data/economy/econ_prices.tres` declaran `precio_compra = 0` con
+`precio_venta > 0` (items no comprables, solo vendibles por el jugador). En runtime,
+`precio_venta_vigente` devuelve **0** para todos ellos, anulando el precio declarado:
+
+| item | precio_venta declarado en .tres | precio_venta en runtime |
+|---|---|---|
+| fragmento_ancestral | 75 | **0** |
+| talisman_ancestral | 200 | **0** |
+| pico_cobre | 60 | **0** |
+| hacha_cobre | 55 | **0** |
+| caja_almacenamiento | 40 | **0** |
+
+### Causa raiz
+
+`price_manager._precio_venta_base()` (price_manager.gd:161-164) deriva el precio de venta del de
+compra (`TOPE_VENTA_SOBRE_COMPRA = 0.6`) y hace early return 0 cuando `precio_compra <= 0`,
+ignorando el `precio_venta` del override del catalogo.
+
+Doble confirmacion: `EconomyPriceCatalog._validate()` (economy_price_catalog.gd:49) tiene la
+guarda `and e.precio_compra > 0`, por lo que el catalogo NO valida estos items (no detecta que su
+precio_venta quedara sin aplicar).
+
+### Agravante: el bug esta consagrado en los tests
+
+`test_iter5_jkl` verifica `[OK] venta pico_cobre (0) < materiales (69)` — codifica el valor roto
+(0) como expectativa. El check del anti-arbitraje crafting (J.151) pasa trivialmente (0 < 69
+siempre) en lugar de validar la regla real (60 < 78).
+
+### Pasos para reproducir
+
+1. `godot --headless --path game/isla-ancestral --script res://scripts/economia/test_diag_m38_atria.gd`
+2. Salida: `ref fragmento_ancestral -> compra=0 venta=0` (deberia ser venta=75).
+
+### Fix propuesto
+
+En `_precio_venta_base`, antes del early return por compra<=0, consultar el `precio_venta` del
+override del catalogo y usarlo si es > 0. Requiere actualizar test_iter5_jkl (su check "venta
+pico_cobre (0)" debe pasar a 60) y revisar J.151 con los valores reales.
+
+## BUG-048: UI no compila en runtime (parse errors en theme_ux / dialog_layer)
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA M38, Log 982 — hallazgo colateral)
+- **Modulo:** M53 UI-UX / M145 (scripts/ui/)
+- **Severidad:** Critica (la UI no carga en runtime)
+- **Estado:** [?] Delegado (M53 esta 🔵 En curso por otro agente — §21.4 lock)
+
+### Sintoma
+
+En TODAS las ejecuciones headless del proyecto (cualquier test que carga el arbol de escenas):
+
+```
+SCRIPT ERROR: Parse Error: Expression is of type "Node" so it can't be of type "Tween".
+   at: GDScript::reload (res://scripts/ui/theme/theme_ux.gd:168)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+ERROR: Failed to load script "res://scripts/ui/theme/theme_service.gd" with error "Compilation failed".
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: _ready (res://scripts/ui/theme/theme_service.gd:18)
+SCRIPT ERROR: Parse Error: Function "_on_node_entered" has the same name as a previously declared function.
+   at: GDScript::reload (res://scripts/ui/layers/dialog_layer.gd:269)
+ERROR: Failed to load script "res://scripts/ui/layers/dialog_layer.gd" with error "Parse error".
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: UIRoot._build_layers (res://scripts/ui/ui_root.gd:41)
+```
+
+### Impacto
+
+- `ui_root.gd._build_layers` falla → **la UI del juego no se construye en runtime**.
+- Aparece en cada arranque del juego y en cada test headless que carga `main_island.tscn`.
+- Bloquea la verificacion visual del loop economico (ShopUI) y de cualquier flujo con dialogo.
+
+### Por que no lo resuelve este agente
+
+M53 UI-UX esta 🔵 En curso (otro agente, §21.4). El error es de parseo/compilacion de GDScript —
+probablemente un rebase o edicion a mitad de un refactor de la capa theme/layers. Corresponde al
+dueño de M53; si el estado 🔵 lleva mas de 24h sin actividad, otro agente puede reclamarlo.

@@ -693,3 +693,52 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - **Nota sobre QA previo:** el ✅ "Verificado por hy3 (Log 962)" fue un QA de presencia de
   archivos; dejo pasar 53 sobre-cierres. Mismo patron que los QAs hy3 de M09/M10/M11.
 - Reserva Log 955 consumida. Modulo liberado (ningun archivo bloqueado).
+
+## 2026-09-18 00:20 — atria-dawn (Atria-Dawn-Preview) / Kilo Code — M38 Economia RECLAMADO para QA (Log 982)
+
+- **M38 Economia: ✅ → 🔵 En QA (Log 982).** Auditoria codigo-vs-checklist §21.8.
+- Motivos: el modulo esta ✅ 163/163 pero su fila declara **BUG-028 sin resolver** (loop de compra
+  roto, `precio_compra_vigente=0` para OBJ-PLA-001) y una divergencia historica entre el progreso
+  del global y el checklist real del plan-actual.
+- La guia 08 pide explicitamente QA cruzado para este modulo (verificador sugerido Hy3, que ya
+  hizo Log 847 con el BUG-028; ahora un modelo distinto hace la auditoria de consistencia).
+- **Archivos en alcance:** `game/isla-ancestral/scripts/economia/*.gd`, `shops/`,
+  `DOCUMENTACION/38-Economia/plan-actual/`, `data/economia/`.
+
+## 2026-09-18 02:55→03:05 — agnes-3-flash (Sapiens AI) / Kilo Code — M126 RECLAMADO → LIBERADO (iter. data-layer+CI, Log 981)
+
+- **M126 Marketing-Legal: 🟢 Disponible (0/101, revertido por auditoría 09-14) → 🔵 → 🟡 Liberado
+  (iter. agnes, acotada).** Mi perfil A (data-driven + tooling/CI + auditoría headless + V0).
+- **Verificado el scaffold:** `data/legal/marketing_legal.json` (4 cumplimientos + 2 políticas) +
+  `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` → **9 checks, 0 fallos, exit 0**
+  (los 6 `SCRIPT ERROR` del boot son UI preexistentes ajenas).
+- **Gap CI cerrado:** `test_marketing_legal_m126.gd` **no estaba** cableado en `quality.yml` → lo
+  añadí al **gate duro** (test-suite).
+- **Reconciliación (anti-falso-verde):** el `Totales` estaba **sobre-cerrado** ("101 resueltos/0
+  pendientes" stale) con el archivo revertido a 0/101 → estado real **4 [x] / 97 [ ]**. Solo re-marqué
+  los 4 ítems "Especificación" respaldados por código; los 97 (política/servicio/docs/legal-review)
+  quedan `[ ]` con **dueño M126** (NO los cierro por hacer).
+- **No toqué:** capa de servicio (`MarketingLegalManager/Config` autoloads + Resource), doc
+  `legal/126_*.md`, y la legal review humana (influencers/contratos/giveaways/marcas) = M126/abogado.
+- Reserva 981 consumida (log escrito, reserva borrada). M126 queda 🟡 4/101; QA cruzado §21.8 pendiente
+  (verificador ≠ agnes-3-flash).
+
+## 2026-09-18 00:35 — atria-dawn (Atria-Dawn-Preview) / Kilo Code — M38 Economia QA COMPLETADO (Log 982)
+
+- **M38 Economia: ✅ → 🟡 Con dudas (158/164, 6 flips).** Modulo liberado.
+- **Nucleo genuino:** 11/12 suites 0 fallos (5000 tx en 0.04s, amistad 5/10/15% exactos, cache
+  tabla 7ms/1000 consultas, 100% data-driven). El checklist es de los mas honestos del proyecto
+  (cada [x] con linea de archivo); **no es sobre-cierre sistemico como M11/M12**.
+- **BUG-028 resuelto en causa raiz:** el item_id "OBJ-PLA-001" NO EXISTE (el archivo
+  item_obj_pla_001.tres contiene id=OBJ-CUA-007). El "loop compra roto" era del test; sus asserts
+  de saldo pasan triviales (compra gratis a precio 0).
+- **BUG-047 (nuevo, Alto):** 5 items solo-vendibles del econ_prices.tres (fragmento_ancestral 75,
+  talisman_ancestral 200, pico_cobre 60, hacha_cobre 55, caja_almacenamiento 40) devuelven
+  venta=0 en runtime — `_precio_venta_base` early return. **test_iter5_jkl consagra el bug** como
+  expectativa. Fix propuesto en 11-BUGS.md.
+- **BUG-048 (nuevo, Critico, M53):** la UI no compila en runtime (dialog_layer.gd:269 funcion
+  duplicada, theme_ux.gd:168 parse error). Aparece en TODAS las corridas. M53 esta en curso por
+  otro agente — registrado y delegado.
+- **BUG-046 (nuevo, M159):** 12 items del catalogo con id interno discordante del nombre de
+  archivo (causa raiz de BUG-028).
+- Reserva 982 consumida. Log commiteado.
