@@ -3,15 +3,23 @@
 **Modelo:** SWE-1.6
 **Plataforma:** DEVIN
 
+## Reserva actual
+
+- **ACTIVA:** Reserva Log 981 agnes-3-flash/Kilo Code (2026-09-18 02:55) — M126 en curso (iter. acotada
+  data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
+  `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
+  `quality.yml` + re-marcar solo los ítems respaldados por código + flag del sobre-cierre del `Totales`
+  ("101 resueltos" stale). El resto (capa de servicio/docs/legal review) = dueño M126.
+
 # 05-Checklist.md — Módulo 126: Marketing Legal
 
 ## Checklist de implementación del módulo
 
 ### [S] Especificación de marketing legal
-- [ ] Cargar datos desde JSON (secciones/politicas/elementos) [S]
-- [ ] Detectar errores estructurales (id, nombre, etc) [S]
-- [ ] Test headless de validacion [M]
-- [ ] Datos data-driven en data/legal/ [S]
+- [x] Cargar datos desde JSON (secciones/politicas/elementos) [S] — **iter. agnes (Log 981): `marketing_legal_validator.gd` carga `data/legal/marketing_legal.json` (cumplimientos + politicas).**
+- [x] Detectar errores estructurales (id, nombre, etc) [S] — **iter. agnes (Log 981): `validar()` detecta sin id / sin regla / sin alcance / sin políticas (test 9/0).**
+- [x] Test headless de validacion [M] — **iter. agnes (Log 981): `test_marketing_legal_m126.gd` 9 checks 0 fallos, exit 0; cableado al gate duro `quality.yml`.**
+- [x] Datos data-driven en data/legal/ [S] — **iter. agnes (Log 981): `data/legal/marketing_legal.json` (4 cumplimientos + 2 políticas).**
 - [ ] Revisar influencers → KnownIssue no bloqueante DoD:revision requiere accion humana; criterios documentados en 03-Diseno.md §3. Deferred a fase marketing.
 - [ ] Revisar contratos promocionales
 - [ ] Revisar giveaways → KnownIssue no bloqueante DoD:revision requiere accion humana; criterios documentados en 03-Diseno.md §3. Deferred a fase marketing.
@@ -78,8 +86,50 @@
 ## Totales
 
 **Total de ítems:** 101
-**Ítems resueltos por documentación:** 101
-**Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+**Ítems resueltos:** 4 (respaldados por código: `marketing_legal.json` + `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0)
+**Ítems pendientes de implementación:** 97 (política/servicio/documentación/legal-review — dueño M126)
+
+> **Reparación del sobre-cierre:** el bloque superior original decía "101 resueltos / 0 pendientes" —
+> sobre-cerrado / stale. El archivo fue revertido a 0/101 por la auditoría del 2026-09-14; agnes-3-flash
+> (Log 981, 2026-09-18) lo señaló con una nota pero dejó el bloque superior sin corregir.
+> **atria-dawn (Kilo Code, Log 1027, 2026-09-18)** reparó el bloque para que coincida con el conteo
+> real **4 [x] / 97 [ ]** (verificación regex estricta). La nota original de agnes se conserva debajo.
+
+> **Corrección agnes-3-flash (Log 981, 2026-09-18):** el bloque anterior es **sobre-cerrado / stale**
+> (declara "101 resueltos / 0 pendientes" pero el archivo quedó **revertido a 0/101 por la auditoría del
+> 2026-09-14**, y el módulo solo tiene la **capa de validación de datos** implementada). Estado real:
+> **`4 [x]` / `97 [ ]`** — los 4 `[x]` son los ítems de "Especificación de marketing legal" respaldados por
+> código (`marketing_legal.json` + `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0).
+> Los otros 97 son ítems de **política/servicio/documentación/legal-review** (screenshots, música,
+> terceros, branding, influencers, contratos, giveaways, capa de servicio autoload, docs `.md`) = **dueño
+> M126** (varios ya anotados "KnownIssue no bloqueante DoD ... documentada en 03-Diseno.md §3.X", i.e.
+> diseño hecho pero pendiente legal review / ejecución). No los re-marqué (anti-falso-verde).
+
+## QA agnes — capa data-layer + gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 981)
+
+> Iteración acotada (data-driven + tooling/CI + V0). Verifiqué el scaffold y lo cableé al gate; NO
+> implemento la capa de servicio ni la legal review (dueño M126 / humana).
+
+- **Scaffold verificado (headless, godot 4.7.2):** `data/legal/marketing_legal.json` (4 cumplimientos +
+  2 políticas) + `scripts/legal/marketing_legal_validator.gd` (`validar()`/`reporte()` detectan datos
+  corruptos) + `scripts/legal/test_marketing_legal_m126.gd` → **9 checks, 0 fallos, exit 0** (los 6
+  `SCRIPT ERROR` del boot son de `theme_ux`/`theme_service`/`dialog_layer`/`ui_root` — preexistentes,
+  ajenos a M126).
+- **Gate CI (gap real cerrado):** `test_marketing_legal_m126.gd` **NO estaba** cableado en `quality.yml`.
+  Lo añadí al **gate duro** (test-suite), junto a los tests M83.
+- **Reconciliación honesta:** re-marcados los 4 ítems "Especificación" respaldados por código; flag del
+  sobre-cierre del `Totales`; el resto (97) queda `[ ]` con dueño M126.
+
+### Lo que NO hice (honestidad §21.4.8)
+- **Capa de servicio** (`MarketingLegalManager`/`MarketingLegalConfig` autoloads + Resource de config):
+  **no implementada** (hallazgo Hy3 QA) → decisión/dueño M126.
+- **Docs `.md`** (`legal/126_*.md`) y **legal review** (influencers/contratos/giveaways): requieren acción
+  humana/dueño → no los cierro.
+- No re-marqué los 97 ítems restantes (evitar falso-verde); los dejen el dueño M126 o el QA §21.8.
+
+### Verificación
+- `godot --headless --path game/isla-ancestral --script res://scripts/legal/test_marketing_legal_m126.gd`
+  → **9 checks, 0 fallos, exit 0**.
 
 ## Extensión QA cruzado (consolidación 2026-08-20)
 

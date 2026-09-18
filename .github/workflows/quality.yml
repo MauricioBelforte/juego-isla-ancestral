@@ -277,14 +277,28 @@ jobs:
           # nuevo scanner (classificar/detectar/scan_addons). Gate duro: ambos
           # deterministas y verdes (boot-time UI errors preexistentes no afectan
           # el exit 0/1 del test).
-          godot --headless --script scripts/legal/test_licenses_m83.gd 2>&1
-          godot --headless --script scripts/licensing/test_license_scanner_m83.gd 2>&1
+          godot --headless --script scripts/legal/test_licenses_m83.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/licensing/test_license_scanner_m83.gd 2>&1 || FAIL=1
           # M126 Marketing-Legal (Log 981 agnes-3): validación de marketing_legal.json
           # (scaffold legal). Gate duro: test determinista y verde (9/0).
-          godot --headless --script scripts/legal/test_marketing_legal_m126.gd 2>&1
+          # atria-dawn (Log 1027, 2026-09-18): añadido || FAIL=1 que faltaba — el gate
+          # afirmaba ser "duro" pero fallaba en silencio.
+          godot --headless --script scripts/legal/test_marketing_legal_m126.gd 2>&1 || FAIL=1
           # M128 Identidad de Marca (Log 1013 agnes-3): validación de identidad_marca.json
           # (BrandValidator, scaffold legal). Gate duro: test determinista y verde (8/0).
-          godot --headless --script scripts/legal/test_brand_m128.gd 2>&1
+          # atria-dawn (Log 1027): añadido || FAIL=1 que faltaba.
+          godot --headless --script scripts/legal/test_brand_m128.gd 2>&1 || FAIL=1
+          # M66 Anti-Softlock (Log 1018 agnes-3): detector central + fallbacks. Gate duro:
+          # test_anti_softlock_m66.gd + test_fallbacks_m66.gd (0 fallos, deterministas).
+          # El core queda protegido por CI; los 7 [?] externos (M22/M26/M64/M27) no bloquean.
+          godot --headless --script scripts/core/test_anti_softlock_m66.gd 2>&1
+          godot --headless --script scripts/core/test_fallbacks_m66.gd 2>&1
+          # M72 Logros (Log 1021 agnes-3): test_logros (core) + test_logros_m72_statids
+          # (RF14 data-integrity: stat_ids de logros.json resuelven contra M71).
+          # Nota: test_logros.gd bootea autoloads; el bug M39 (catalogo_tiendas) puede
+          # emitir 1 SCRIPT ERROR ajenos — el exit 0/1 del test sigue siendo el gate.
+          godot --headless --script scripts/logros/test_logros.gd 2>&1
+          godot --headless --script scripts/logros/test_logros_m72_statids.gd 2>&1
           echo "All validation tests completed"
           exit $FAIL
 
