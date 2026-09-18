@@ -129,6 +129,8 @@ WorldLocations="*res://scripts/data/world_locations.gd"
 EnchantmentSystem="*res://scripts/enchantment/enchantment_system.gd"
 TransportManager="*res://scripts/transporte/transport_manager.gd"
 IslandRegistry="*res://scripts/islas/island_registry.gd"
+gem_currency="*res://scripts/combat/gem_currency.gd"
+combat_island="*res://scripts/combat/combat_island_system.gd"
 
 [display]
 
