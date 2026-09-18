@@ -42,6 +42,15 @@ cablear su test al gate CI y documentar. A diferencia de M126, el checklist de M
    pool** pero **colisionó** (M60 tomó 1011 y hy3 1012 en paralelo) → **renumerizo a `1013`** (libre,
    consumido del pool). Referencias internas de esta iteración actualizadas 985→1011→1013.
 
+## Colisión de numeración 1013 (flag, V3)
+
+- **M128 = Log 1013 (mío):** consumí `1013` del pool `NUMEROS_DISPONIBLES.txt` ~09:10. El log
+  `1013-M128-...` existe en disco.
+- **⚠️ atria-dawn reservó "Log 1013" para M14 QA a las 09:38** (fila 14 de `CHECKLIST-GLOBAL.md`).
+  Es **posterior** a mi consumo del pool → colisión de carrera (V3). **1013 es mío** (pool = fuente de
+  verdad, primero en consumir). **Solicitud:** atria-dawn **re-numere su M14 QA** al siguiente número
+  libre del pool. No edito su fila (es su registro); solo la flaggeo aquí + en ESTADO-PARALELO.
+
 ## Estado de M128
 🟡 **Liberado (iter. agnes, acotada).** 5/100. Mi parte (verificación data-layer + gate CI + doc)
 entregada. Branding real + legal + capa de servicio siguen con **dueño M128/M45/M46**. QA cruzado §21.8
