@@ -492,3 +492,17 @@ no producen ERROR, pero conviene revisarlos en su módulo si se usa `_container`
 - Nota amplia: el patron "Verificado por Hy3 (Log 866/867)" aparece en ~30 modulos de GLOBAL (M01-M03, M06, M44, M80, M82, M85, M86, M97, M100, M114, M120, M121, M125, M129, M132, M137-M143…) y es sistematicamente falso (866/867 = AGNES). Fuera de alcance de este lote; requiere auditoria aparte.
 
 **Siguiente:** M83/M126/M131 (re-QA) y M30/M92 (QA cruzado nuevo) requieren cierre del autor antes de QA cruzado hy3.
+
+### Auditoría BUG-034 ampliada (BUG-050 propuesto) — Log 1012 (2026-09-18)
+
+Cruzados los 86 sellos "Verificado por Hy3" actuales de CHECKLIST-GLOBAL.md contra los 30 sellos limpios de CHECKLIST-QA-SEALS.md (fuente de verdad):
+
+- **Respaldados (MID en SEALS):** 16 — M08, M10, M11, M14, M26, M27, M60, M66, M68, M102, M103, M105, M110, M117, M124, M165. (Nota: M26 cita 866/867 con log equivocado; su sello real es Log 930.)
+- **Sin base §21.8 (MID NO en SEALS):** 70
+  - **Misatribución AGNES (citan 866/867):** 41 — M01, M02, M03, M06, M38, M44, M55, M76, M77, M79, M80, M81, M82, M85, M86, M88, M89, M91, M97, M98, M99, M100, M106, M113, M114, M120, M121, M125, M129, M130, M132, M137, M138, M139, M140, M141, M142, M143, M152, M161, M164.
+  - **Otros logs ajenos (no en SEALS):** 29 — M04(857), M05(857), M19(553/678/856), M28(517/517/856), M37(542/856), M45(733/857/733), M48(722/856), M50(857), M51(749/857), M56(585/856), M58(727/709/856), M62(604/856), M63(746/856), M65(584/856), M67(528/856), M73(715/856), M74(728/609/856), M75(617/534/856), M112(765/219), M118(724/684/857), M119(517/698/848/698), M133(219), M134(221), M135(197), M136(198), M144(611/857), M156(554/437/856), M158(610/543/856), M168(700/848).
+- **Total GLOBAL que cita 866/867 (AGNES como "prueba" hy3):** 42.
+
+**Conclusión:** la columna "Verificado por Hy3" de GLOBAL NO es evidencia fiable (81% sin sello en SEALS; 42 usan logs de AGNES). **BUG-050 propuesto:** el regenerador auto-sella cierres ajenos. Fuente de verdad = CHECKLIST-QA-SEALS.md.
+
+**Acción:** re-QA / reconciliación de los 70 módulos sin sello queda pendiente del verificador original de cada autor (agnes, glm-5.3-flash, ox-alpha, mimo, etc.). hy3 NO emite sellos falsos para ellos.
