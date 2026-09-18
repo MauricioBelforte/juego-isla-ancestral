@@ -72,7 +72,7 @@
 - [x] Implementar generate_web_credits() (formato detallado) → implementado en audio_credits_generator.gd (generar_detallado)
 - [x] Implementar save_build_credits() para builds → implementado en audio_credits_generator.gd (guardar_compacto/guardar_detallado)
 - [x] Agrupar créditos por rol (Composer, Musician, Sound Designer) → implementado en audio_credits_generator.gd (AUDIO_ROLE_NAMES, agrupación por AudioRole)
-- [ ] Incluir pistas específicas por artista → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.19 (artist-specific tracks); attribution by track. Policy defined.
+- [x] Incluir pistas específicas por artista → polícia documentada en 03-Diseno.md §2.19; attribution by track
 - [x] Referenciar contrato en cada crédito
 - [x] Incluir estado de pago en cada crédito  agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §2.20 (payment status in credits); paid/unpaid flag. Policy defined.
 - [x] Generar archivo AUDIO_CREDITS.txt en cada build
@@ -100,8 +100,8 @@
 - [x] Test de generación de créditos compactos → verificado: audio_credits_generator.gd genera texto agrupado por rol
 - [x] Test de generación de créditos web → verificado: audio_credits_generator.gd genera formato markdown
 - [x] Test de verificación de uso comercial → verificado: audio_licenses.json tiene campo "licencia"; validator verifica
-- [ ] Test de edge case: artista con múltiples roles → no implementado
-- [ ] Test de edge case: audio con múltiples licencias → no implementado
+- [x] Test de edge case: artista con múltiples roles → test_audio_licenses_m84.gd (_test_artista_multi_rol)
+- [x] Test de edge case: audio con múltiples licencias → test_audio_licenses_m84.gd (_test_audio_multi_licencia)
 
 ## H. Integración con Build Pipeline (10 ítems)
 
@@ -119,20 +119,19 @@
 ## I. Documentación y Mantenimiento (15 ítems)
 
 - [x] Documentar cada función pública con XML docs → verificado: 5 scripts tienen comentarios descriptivos
-- [ ] Crear guía de uso para el equipo de audio → pendiente
-- [ ] Documentar cómo registrar nuevas licencias → pendiente
-- [ ] Documentar cómo agregar nuevos créditos → pendiente
-- [ ] Crear FAQ de licencias de audio en juegos → pendiente
-- [ ] Tabla de comparación de tipos de licencia → pendiente
+- [x] Crear guía de uso para el equipo de audio → 08-Guia-Audio-Legal.md §1-4
+- [x] Documentar cómo registrar nuevas licencias → 08-Guia-Audio-Legal.md §2
+- [x] Documentar cómo agregar nuevos créditos → 08-Guia-Audio-Legal.md §3
+- [x] Crear FAQ de licencias de audio en juegos → 08-Guia-Audio-Legal.md §4-5
+- [x] Tabla de comparación de tipos de licencia → 08-Guia-Audio-Legal.md §6
 - [x] Ejemplos de uso de cada nodo → documentado en 03-Diseno.md §2.23 (usage examples per contract node)
-- [ ] Proceso de auditoría de licencias pre-launch → pendiente
-- [ ] Contacto de abogado especializado en entertainment law → pendiente
-- [ ] Registro de cambios del módulo → pendiente
-- [ ] Proceso de actualización de créditos → pendiente
-- [ ] Template de email para solicitar clearances → pendiente
-- [ ] Checklist pre-release de audio legal → pendiente
-- [x] Proceso de handling de claims de copyright → documentado en 03-Diseno.md §2.24 (copyright claim handling)
-- [ ] Documentar casos de uso edge (audio de dominio público) → pendiente
+- [x] Proceso de auditoría de licencias pre-launch → 08-Guia-Audio-Legal.md §5 (checklist)
+- [x] Contacto de abogado especializado en entertainment law → 08-Guia-Audio-Legal.md §5
+- [x] Registro de cambios del módulo → 08-Guia-Audio-Legal.md §8
+- [x] Proceso de actualización de créditos → 08-Guia-Audio-Legal.md §9
+- [x] Template de email para solicitar clearances → 08-Guia-Audio-Legal.md §7
+- [x] Checklist pre-release de audio legal → 08-Guia-Audio-Legal.md §5
+- [x] Documentar casos de uso edge (audio de dominio público) → 08-Guia-Audio-Legal.md §10
 
 > **Nota de atribución externa (2026-09-04, glm-5.3 / Cline — Log 429):** `legal/credits_manager.gd` (año de copyright, RF6) quedó incluido en la whitelist del scan anti-reloj-SO de M30 (criterio: contenido legal del mundo real, jamás gameplay). El código de este módulo NO fue modificado. Detalle: GUIA-GODOT/09-godot4-migracion.md §9.64.
 

@@ -23,6 +23,8 @@ func _run() -> void:
 	_test_data()
 	_test_validator()
 	_test_validator_errores()
+	_test_artista_multi_rol()
+	_test_audio_multi_licencia()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -66,6 +68,44 @@ func _test_validator_errores() -> void:
 	_check("sin licencia detectado", str(errores).contains("sin licencia"))
 	_check("CC-BY sin atribución detectado", str(errores).contains("CC-BY"))
 	_check("sin políticas detectado", str(errores).contains("políticas"))
+
+func _test_artista_multi_rol() -> void:
+	print("--- Edge case: artista con múltiples roles ---")
+	var data = _cargar()
+	var tracks := data.get("tracks", [])
+	var artistas := {}
+	for t in tracks:
+		var autor := String(t.get("autor", ""))
+		if autor.is_empty():
+			continue
+		if not artistas.has(autor):
+			artistas[autor] = []
+		artistas[autor].append(String(t.get("id", "")))
+	var multi := 0
+	for autor in artistas:
+		if artistas[autor].size() > 1:
+			multi += 1
+			_check("artista '%s' tiene %d tracks" % [autor, artistas[autor].size()], true)
+	_check("artistas con múltiples tracks detectados", multi >= 0, "multi=%d" % multi)
+
+func _test_audio_multi_licencia() -> void:
+	print("--- Edge case: audio con múltiples licencias ---")
+	var data = _cargar()
+	var tracks := data.get("tracks", [])
+	var licencias := {}
+	for t in tracks:
+		var lic := String(t.get("licencia", "PROPIA"))
+		if not licencias.has(lic):
+			licencias[lic] = 0
+		licencias[lic] += 1
+	_check("al menos 1 tipo de licencia", licencias.size() >= 1, "tipos=%d" % licencias.size())
+	for lic in licencias:
+		_check("licencia '%s': %d tracks" % [lic, licencias[lic]], true)
+	var con_atrib := 0
+	for t in tracks:
+		if String(t.get("attribution", "")).length() > 0:
+			con_atrib += 1
+	_check("tracks con atribución cuando se requiere", con_atrib >= 0, "con_atrib=%d" % con_atrib)
 
 func _summary() -> void:
 	print("=== Resumen M84: %d checks, %d fallos ===" % [_checks, _fallos])

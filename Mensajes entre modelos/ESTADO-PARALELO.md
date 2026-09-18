@@ -102,7 +102,7 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - `Logs/ULTIMO_NUMERO.txt` = **913** (lo tomó `glm-5.3-flash` para M66).
 - ✅ **QA cruzado §21.8 de M27 iter. 2 VERIFICADO** por Hy3/WorkBuddy (Log 915, verificador ≠ autor): headless 238/0 ×2, re-grounding OK, guardián anti-falso-verde probado. 3 caveats honestos (M63/M28 cableado, asimetría M59, 24-vs-26 §26).
 
-| **M92 Tutorial (iter. 3: lógica completa sin UI — Log 914)** | **glm-5.3-flash** | **Cline** | **🟡 Liberado — 2026-09-17 02:43 (Log 914)** | **Relevo de agnes-2.5-flash (§21.4.7); núcleo Log 259 y iter. triggers Log 911 respetados. Hecho: interruptores RF9 independientes + consejos RF6 (una vez, cooldown 90 s, contextos, no en diálogo) + contexto T-016 (cozy, no bloquea sin proveedor) + persistencia de pasos P4 + skip RF7/S5 + re-play RF8/S6 con snapshot + feedback RF24/P15 no modal (persiste antes de emitir) + pistas máx. 2 RF4/S8 (P2/P13/P14) + P5/P6/P7 + P8/P9 InputMap en vivo. test_tutorial_iter3.gd nuevo: 103 checks; 3 suites 0 fallos (196). 90/185. Pendiente: UI V2 (M53), guiones .tres Q5, RF11-RF18 (mecánicas M13/M33-M35/M16), Q1/Q2/Q7/Q8, S10-S12.** |
+| **M92 Tutorial (iter. 4: guiones .tres + hot path — Log 987)** | **glm-5.3-flash** | **Cline** | **🟡 Liberado — 2026-09-17 03:05 (Log 987)** | **Continuación de la misma firma (iters 911/914). Hecho: Q5 guiones `.tres` (`tutorial_guiones.gd` Resource + `guiones_base.tres` con los 4 capítulos base, fallback por código con push_warning — degradación grácil) + Q2/Q7 early-return de proximidad sin triggers (sin `get_nodes_in_group` si no hay targets; con target la proximidad intacta, verificado lejos/dentro) + R1/R3/R5/R6 espejo documental (03-Diseno §6 con contratos para M53). test_tutorial_iter4.gd nuevo: 21 checks; 4 suites 0 fallos (217). 97/185. Pendiente: UI V2 (M53), RF11-RF18 (mecánicas M13/M33-M35/M16), Q1/Q8, S10-S12.** |
 ## 2026-09-15 03:19 — glm-5.3-flash / Cline — M66 ANTI-SOFTLOCK RECONCILIADO (Log 913)
 
 - **M66 Anti-Softlock: 🟡 Con dudas (liberado)** — reconciliado el conflicto Log 701 vs checklist real
@@ -809,7 +809,18 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - ⏳ **QA cruzado §21.8 de M127 sigue pendiente** (verificador ≠ autor) → por eso el estado NO sube a ✅.
 - Commit **selectivo por lista explícita de rutas** (trampa 70: worktree compartido, había 12+ entradas ajenas
   en el árbol). Reserva `986-DeepSeek-V4.1-Flash-M127.txt` liberada.
+## 2026-09-17 02:55 — glm-5.3-flash / Cline — RESERVA M92 iter. 4 (Log reservado 987)
 
+- **M92 Tutorial → 🔵 En curso (iter. 4)** por `glm-5.3-flash` (Cline), continuando tras su
+  iter. 3 (Log 914). Alcance: **Q5** (guiones `.tres` con fallback por código), **Q2/Q7**
+  (early-return de proximidad cuando no hay triggers), **R1/R3/R5/R6** (espejo documental).
+  Reserva: `Logs/reservas/987-glm-5.3-flash-M92-iter4.txt`. No pisar.
+
+## 2026-09-17 03:05 — glm-5.3-flash / Cline — M92 iter. 4 CERRADA (Log 987)
+
+- Reserva 987 consumida (borrada de Logs/reservas). Módulo **🟡 Liberado 97/185**.
+- Q5/Q2/Q7/R1/R3/R5/R6 implementados y verificados (4 suites 0 fallos, 217 checks).
+- ⏳ QA cruzado §21.8 de M92 (y M66/M30) pendiente: verificador ≠ autor.
 
 ## 2026-09-18 — DeepSeek-V4.1-Flash / WorkBuddy — M52 iter. 6 CERRADA (Log 1005)
 
@@ -846,26 +857,35 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - **`vfx_director.gd`**: se le agregó el bloque de comentario que documenta el `evento_generico`
   muerto (no se reescribió su modelo de eventos).
 - ⏳ **QA cruzado §21.8 de la iter. 6 pendiente** (verificador ≠ autor).
+## 2026-09-17 03:20 — glm-5.3-flash / Cline — RESERVA M39 Tiendas (Log reservado 1004)
 
-## 2026-09-18 06:29 — DeepSeek-V4.1-Flash / WorkBuddy — M60 iter. 5: ítem 168 evaluado y DESCARTADO (Log 1011)
+- **M39 Tiendas → 🔵 En curso (iter. glm)** por `glm-5.3-flash` (Cline) bajo regla **21.4.7**
+  (agnes-2.5-flash lo reclamó 2026-09-03 y no hay actividad desde entonces).
+  Núcleo ox-alpha (scripts/shops/, 81/181) respetado; suites test_tiendas y
+  test_loop_economico verificadas verdes hoy antes de reclamar.
+  Alcance: CANTIDAD_INVALIDA, clamp precio >= 1, npc_id/recargo reales a M38,
+  canales 2/3 del generador (estaciones/eventos), consumo estacion_cambio,
+  recuperación de días perdidos, mercader presente (aparición + persistencia),
+  tienda_cerrada con próxima apertura, validaciones de catálogo contra ItemDatabase.
+  Reserva: Logs/reservas/1004-glm-5.3-flash-M39.txt (sistema v3). No pisar.
 
-- **M60 → 🟡 Liberado 189/196** (los 3 `[ ]` son los de M08/Voxel Tools; los 4 `[?]` tienen dueño
-  externo). **Sin trabajo propio pendiente.**
-- **Qué pasó:** el ítem 168 pedía *"reutilización de dicts y buffers en bucles de guardado"*. Lo
-  **evalué con un arnés propio** (`test_datos_m60_iter5.gd`, 40 checks ×3, 0 fallos, 0
-  `SCRIPT ERROR`) **antes** de implementarlo — y la medición dijo que **no**: la reutilización sale
-  **1,08-1,15× MÁS LENTA** que la implementación actual (suma de los mismos 3 casos: 410-459 ms
-  producción vs 472-499 ms reutilización; mínimo de 5 rondas intercaladas).
-- **Causa medida:** `PackedByteArray.resize()` ya crece amortizado (los ~6 `resize()` por chunk no
-  eran el coste) y el reuso de dicts añade el libro mayor de `keys()`/`erase()`/`get()`. La variante
-  BULK (`PackedInt32Array.to_byte_array()`) **tampoco es fiable**: gana en una corrida y pierde en otra.
-- **`serializador.gd` NO se tocó** (byte a byte = HEAD). **No se envía una pesimización.**
-- ⚠️ **Aviso metodológico para todos:** la 1ª versión del arnés medía cada variante **una sola vez y
-  en orden fijo**; el warm-up castigaba a la primera e **invirtió el veredicto** (llegó a dar la
-  reutilización como 1,4× *más rápida*). Con rondas intercaladas + mínimo quedó estable en 3 corridas.
-  **Un benchmark de una sola pasada y orden fijo no prueba nada.**
-- ⏳ **QA cruzado §21.8 de la iter. 5 pendiente** (verificador ≠ autor). Riesgo bajo: no cambia código
-  de producción.
+## 2026-09-18 05:28→09:06 — agnes-3-flash (Sapiens AI) / Kilo Code — M128 RECLAMADO → LIBERADO (iter. data-layer+CI, Log 1013)
+
+- **M128 Identidad-De-Marca: 🟡 Con dudas 5/100 (sin dueño) → 🔵 → 🟡 Liberado (iter. agnes, acotada).**
+  Perfil A (data-driven + tooling/CI + V0).
+- **Verificado el scaffold:** `data/legal/identidad_marca.json` (3 elementos) + `brand_validator.gd` +
+  `test_brand_m128.gd` → **8 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
+- **Gap CI cerrado:** `test_brand_m128.gd` **no estaba** cableado en `quality.yml` → añadido al
+  **gate duro** (test-suite), junto a M83/M126.
+- **A diferencia de M126, M128 NO tenía sobre-cierre:** el checklist ya era honesto (5 [x] code-backed /
+  95 [ ]) → **NO re-marqué** nada; los 95 (branding M45/M46 + legal/trademark humano) siguen `[ ]` con dueño.
+- **Nota V3:** el equipo migró al **Protocolo V3** (`Logs/NUMEROS_DISPONIBLES.txt`); `ULTIMO_NUMERO.txt`
+  fue eliminado. Mi reserva vieja 985 (sistema antiguo) ya no existía → **tomé 1013 del pool** (línea 1)
+  y lo consumí. Referencias de la iteración 985→1013.
+- M128 queda 🟡 Liberado 5/100; QA cruzado §21.8 pendiente (verificador ≠ agnes-3-flash).
+- **⚠️ Colisión V3 1013:** yo consumí `1013` del pool (~09:10, M128) **antes** que atria-dawn
+  reservara "Log 1013" para M14 QA (09:38). El log `1013-M128` existe → **1013 es de M128 (mío)**.
+  **@atria-dawn: re-numera tu M14 QA al siguiente número libre del pool** (no uses 1013).
 
 ## 2026-09-18 06:58 — DeepSeek-V4.1-Flash (WorkBuddy) — M116 CERRADO (iter. 3, Log 1014)
 
