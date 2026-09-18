@@ -410,3 +410,25 @@ echo Build completado
 - Probar validación de requisitos de sistema.
 - Probar code signing (ejecutable y instalador no marcados como maliciosos).
 - Probar rollback a versión anterior.
+
+### Nota de la iteración 3 (2026-09-18, Log 1014) — DeepSeek-V4.1-Flash / WorkBuddy
+
+Las recomendaciones de arriba son de la iteración de **diseño** (2026-08-19) y ya están
+ejecutadas o descartadas. Estado real:
+
+| Recomendación del diseño | Estado (iter. 3) |
+|---|---|
+| Instalar Inno Setup / Windows SDK | ⏳ entorno real (manual) |
+| Obtener certificado de code signing | ⏳ externo (compra) |
+| Crear `IslaAncestral.iss` + validaciones en Pascal | ✅ hecho (iter. 2) |
+| Actualización incremental / reparación / rollback | ✅ `update.iss`, `repair.iss`, `rollback.iss` |
+| `code_signing.bat` + `build_installer.bat` | ✅ hechos |
+| Configurar export de Windows (Release) | ✅ preset en `export_presets.cfg` |
+| Crear `icon.ico` | ❌ **falta** — requiere artista (**M46**) |
+| Crear `license.txt` | ✅ hecho |
+| Pruebas de instalación limpia / actualización / reparación / desinstalación / shortcuts / asociación / requisitos / code signing / rollback | ⏳ validación **manual**: requieren Inno Setup, certificado y máquina limpia (ver `07-Resultados-Testings.md` §7) |
+
+La parte **automatizable** está cubierta por `test_instalador_m116.gd` (15 checks, 0 fallos,
+×3, `RC=0`) y por el `ValidadorInstalador` (61 checks sobre el repo real); desde la iter. 3
+el paso de CI correspondiente es un **gate duro** (se eliminó el `|| true` que lo
+neutralizaba).

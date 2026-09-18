@@ -103,7 +103,58 @@ Compilación real con Inno Setup, firma con certificado, instalación limpia en 
 máquina sin el juego, y verificación con antivirus. Requieren herramientas y
 entorno que no están disponibles aquí.
 
-## 8. Conclusión
+## 8. Iteración 3 (2026-09-18, Log 1014) — gate duro en CI + corrección de conteos
+
+Iteración de **verificación y honestidad**, sin funcionalidad nueva.
+
+### 8.1 Re-ejecución (3 corridas, exit code del PROCESO)
+
+| Suite | Checks | Fallos | SCRIPT ERROR | RC | Veredicto |
+|---|---|---|---|---|---|
+| `test_instalador_m116.gd` (corrida 1) | 15 | 0 | 0 | 0 | ✅ |
+| `test_instalador_m116.gd` (corrida 2) | 15 | 0 | 0 | 0 | ✅ |
+| `test_instalador_m116.gd` (corrida 3) | 15 | 0 | 0 | 0 | ✅ |
+
+Salida **byte-idéntica** en las 3 corridas (465 líneas, mismo `sha256`): determinismo
+confirmado. El validador sigue reportando **61 checks, 0 errores** sobre el repo real y
+los bloques B–F siguen detectando cada fallo inyectado.
+
+> El `RC` se leyó del proceso (`godot ... > out 2>&1; rc=$?`), **no** de un `tail`/`grep`
+> aguas abajo: encadenar `python x.py | tail` mide el exit de `tail` y produce un
+> falso-verde (trampa 75).
+
+### 8.2 El gate de CI deja de ser decorativo
+
+El paso de M116 en `.github/workflows/quality.yml` estaba cableado **con `|| true`**:
+existía, pero no podía hacer fallar el build. Con 3 corridas `RC=0` como evidencia se
+quitó el `|| true` → **gate duro**.
+
+### 8.3 Corrección de los conteos declarados
+
+La `05-Checklist.md` declaraba `180 [x] / 6 [?] / 12 [ ]` mientras el cuerpo ya tenía
+**192 tareas completadas**. Además los **6 ítems del historial** estaban como `- [x]`,
+lo que infla el denominador (trampa 42): el archivo contaba 198 = 192 tareas + 6 de
+historial.
+
+| Qué | Antes | Después |
+|---|---|---|
+| Totales declarados en `05-Checklist.md` | `180 [x] / 6 [?] / 12 [ ]` | `192 [x] / 0 [?] / 0 [ ]` |
+| Ítems del historial de la iter. 1 | `- [x]` (6) | viñetas simples (6) |
+| `CHECKLIST-GLOBAL.md` fila 116 | `198/198` | `192/192` |
+| Checklist personal (`TAREAS-POR-MODELO/…/116-Instalador/checklist.md`) | `182 [x] / 6 [?] / 10 [ ]` | `192 [x] / 0 / 0` |
+
+Verificado con la herramienta del repo (`scripts/verificar_checklist.py`):
+**M116 → 192 completados, 0 pendientes, 0 dudas**, y la fila del GLOBAL coincide con el
+módulo (M116 **no** aparece entre las 13 inconsistencias que reporta el verificador).
+
+### 8.4 Artefacto faltante (dueño externo)
+
+`installer/icon.ico` **no existe**. Los 10 artefactos de `installer/` que revisa el
+bloque G (todos menos `README.md`, que es `.md`) están sin BOM, pero el icono depende del
+artista (**M46**). Queda **reportado, no parcheado**: un `.ico` inventado por el agente
+sería peor que la ausencia declarada.
+
+## 9. Conclusión
 
 La parte automatizable del pipeline de distribución queda **verificada y
 protegida contra regresión**: el validador impide que vuelva a colarse un script

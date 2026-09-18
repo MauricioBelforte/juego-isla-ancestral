@@ -62,7 +62,23 @@ Ejecución:
 | CP-13 | — | Regresión M117 tras añadir el preset | 14 checks, 0 fallos |
 | CP-14 | — | Determinismo: 3 corridas consecutivas | mismo resultado |
 
-## 4. Casos NO cubiertos (con motivo)
+## 4. Iteración 3 (2026-09-18, Log 1014) — el test pasa a gate DURO en CI
+
+La iteración 2 dejó el test cableado en `quality.yml` pero **neutralizado con `|| true`**:
+el paso existía y sin embargo el pipeline seguía verde aunque el test fallara. El verde lo
+producía la tubería, no el programa (familia **trampa 75**).
+
+En la iter. 3 se midió el exit code **del proceso** (no el de un `tail`/`grep` aguas abajo)
+en 3 corridas consecutivas — `RC=0` las tres — y recién entonces se quitó el `|| true`.
+El paso es ahora un **gate duro**: si el validador deja pasar un artefacto roto, el build
+de CI falla.
+
+Criterio de aceptación añadido:
+
+4. El paso de CI de M116 **no** lleva `|| true` y su exit code es el del proceso Godot,
+   no el de una tubería intermedia.
+
+## 5. Casos NO cubiertos (con motivo)
 
 | Caso | Motivo |
 |---|---|
@@ -74,7 +90,7 @@ Ejecución:
 
 Estos casos quedan como **validación manual** en la máquina de release.
 
-## 5. Criterio de aceptación
+## 6. Criterio de aceptación
 
 El módulo se considera verificado en su parte automatizable si:
 
