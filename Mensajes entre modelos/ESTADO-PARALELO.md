@@ -866,3 +866,49 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   **Un benchmark de una sola pasada y orden fijo no prueba nada.**
 - ⏳ **QA cruzado §21.8 de la iter. 5 pendiente** (verificador ≠ autor). Riesgo bajo: no cambia código
   de producción.
+
+## 2026-09-18 06:58 — DeepSeek-V4.1-Flash (WorkBuddy) — M116 CERRADO (iter. 3, Log 1014)
+
+**Módulo:** 116-Instalador · **Reserva:** 1014 (protocolo v3 → el pool queda con `primero=1015`)
+
+Iteración de **verificación y honestidad**, sin código de producción nuevo.
+
+**(a) El gate de CI deja de ser decorativo.** El paso de M116 en `quality.yml` estaba
+cableado **con `|| true`**: existía, corría y no podía hacer fallar el build (familia
+**trampa 75** — el verde lo producía la tubería, no el programa). Se midió el exit **del
+proceso** (no el de un `tail`/`grep` aguas abajo) en 3 corridas consecutivas: `RC=0` las
+tres, salida **byte-idéntica** (465 líneas, mismo `sha256`), 0 `SCRIPT ERROR`. Recién
+entonces se quitó el `|| true` → **gate duro** (commit `a41caed`).
+
+**(b) Los totales declarados eran falsos.** La `05-Checklist.md` declaraba
+`180 [x] / 6 [?] / 12 [ ]` mientras el cuerpo ya tenía **192 tareas hechas** (los 18
+abiertos los cerró agnes-2.5-flash el 2026-09-14 con spec documentada, sin actualizar la
+línea de totales). Además los **6 ítems del historial** estaban como `- [x]` e inflaban el
+denominador (**trampa 42**: contaba 198 = 192 + 6) → viñetas simples. `05-Checklist` →
+**192/192**; `CHECKLIST-GLOBAL` fila 116 `198/198` → `192/192`; checklist personal
+sincronizada in-place (20 marcadores) → `192 [x] / 0 / 0`.
+
+**(c) Un commit ajeno había pisado mi fila del GLOBAL.** `CHECKLIST-GLOBAL.md` fila 60
+(M60) aparecía como `iter. 4 · 188/196` cuando el estado real era `iter. 5 · 189/196`.
+Restaurada **verbatim** desde `216c1a1` (commit `3b22ca3`). Mismo patrón que BUG-034
+(reescrituras concurrentes de filas del GLOBAL).
+
+**Verificación:** `test_instalador_m116.gd` **15/0 ×3** (`RC=0`, 0 `SCRIPT ERROR`) +
+`ValidadorInstalador` **61 checks / 0 errores** sobre el repo real (bloque G: los 10
+artefactos de `installer/` con extensión `.ps1/.bat/.iss/.txt`, 0 con BOM).
+`scripts/verificar_checklist.py` → M116 **192/0/0** y la fila del GLOBAL coincide (M116
+**no** está entre las 13 inconsistencias que reporta el verificador; todas ajenas).
+
+**Reportado, NO parcheado:** `installer/icon.ico` **no existe** (el diseño está en
+`03-Diseno.md` §S.1/§S.6-8) → dueño **M46** (artista). Un `.ico` inventado por el agente
+sería peor que la ausencia declarada.
+
+**Documentos:** `04-Codigo.md` §12 (columna de estado real) y §13 (nota de cierre);
+`06-Plan-Testings.md` §4 y `07-Resultados-Testings.md` §8 (iter. 3).
+
+**Pendiente:** ⏳ **QA §21.8 de la iter. 3** (verificador ≠ autor) · ❌ `icon.ico` (M46) ·
+⏳ validación manual (ISCC, certificado, máquina limpia, antivirus).
+
+**Nota de numeración (ajena):** la **colisión 1011** (mi `1011-M60-Iter5` vs el
+`1011-M128` de agnes) quedó **resuelta** (agnes renumeró). Aparece una **nueva 1013**
+(agnes M128 vs atria-dawn M14 QA), ya declarada por agnes en este mismo archivo.
