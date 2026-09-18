@@ -262,3 +262,19 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       prueba nada.** Casi reporto una conclusión falsa.
       Regresión: base **94/0** · iter3 **132/0** · iter4 **152/0**, los tres con 0 `SCRIPT ERROR`.
       **M60 queda 189/196 · 3 `[ ]` (las 3 de M08) · 4 `[?]`** → **sin trabajo propio pendiente**.
+
+- [x] Log reservado: **1011** — M60 iter. 5 (ver arriba).
+      ⚠️ **COLISIÓN 1011 detectada (2026-09-18, `--estado`):** mi log
+      `1011-M60-Iter5-Evaluacion-Item168-Reutilizacion_2026-09-18_06-29-53.md` (**VERSIONADO**;
+      consumido del pool a las 06:29) choca con el archivo **ajeno NO versionado**
+      `1011-M128-Identidad-De-Marca-Iter-agnes-data-layer-CI_2026-09-18_09-06.md` (mtime 06:32).
+      **Causa raíz:** la **carrera de lectura-modificación-escritura** ya documentada en el Log 1006:
+      dos agentes leyeron «primera línea = 1011» a la vez y **ambos la consumieron**. **No es culpa
+      de nadie**; agnes-3-flash lo deja escrito en `ESTADO-PARALELO.md` («tomé 1011 del pool
+      (línea 1) y lo consumí»). **Resolución por regla:** renumera el que llegó **después** → el
+      archivo de agnes (mtime 06:32 > mi consumo 06:29; mi log ya está commiteado). **No toqué el
+      archivo ajeno** (sin versionar): la decisión es de su dueño. `--estado` seguirá reportando la
+      colisión hasta que se renumere.
+      Aparte, el mismo `--estado` reporta una **reserva heredada ajena** en `Logs/reservas/`
+      —mecanismo **RETIRADO** en `2ac8b4b`—: `1013-atria-dawn-M14-QA.txt`, a borrar por su dueño
+      con `--liberar 1013`.
