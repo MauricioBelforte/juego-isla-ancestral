@@ -7,7 +7,11 @@
 
 Módulo de **instalador** para distribución del juego en Windows. Define build release de Godot, instalador Windows (Inno Setup), directorio de instalación, desinstalador, shortcuts, asociación de archivos, validación de permisos, code signing, validación de actualizaciones, reparación, desinstalación, instalación limpia, actualización y rollback. Implementable inmediatamente (depende de M117 para build system, M119 para actualizaciones, M96 para plataformas). Es un módulo de distribución y packaging.
 
-**06-Plan-Testings.md:** NO APLICA (módulo de instalador, sin código de gameplay; tests pueden ser manuales de instalación)
+**06-Plan-Testings.md / 07-Resultados-Testings.md:** SÍ existen en `plan-actual/` (creados en la
+iter. 2, Log 877). La nota original ("NO APLICA") era **incorrecta**: el módulo tiene un validador
+determinista (`ValidadorInstalador`, reglas V1-V11) + `test_instalador_m116.gd` (15 checks ×3) que
+corre headless. Lo que sí es manual (Inno Setup real, certificado de firma, máquina limpia,
+antivirus) queda listado en `07-Resultados-Testings.md` §7. Corregido en la iter. 3 (Log 1014).
 
 ## 2. Archivos involucrados (implementación)
 
@@ -31,8 +35,8 @@ scripts/
 
 icon.ico                                        → Icono del juego
 
-06-Plan-Testings.md                               → NO APLICA
-07-Resultados-Testings.md                        → NO APLICA
+06-Plan-Testings.md                               → SÍ (iter. 2, Log 877): plan del validador + test
+07-Resultados-Testings.md                        → SÍ (iter. 2, Log 877): 15/0 ×3 + validador 61 checks
 ```
 
 ## 3. Contratos de integración
@@ -320,24 +324,24 @@ echo Build completado
 
 ## 12. Pendientes del módulo (con dueño)
 
-| Pendiente | Dueño |
-|---|---|
-| Crear installer/IslaAncestral.iss | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear installer/system_requirements.iss | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear installer/update.iss | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear installer/repair.iss | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear installer/rollback.iss | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear installer/code_signing.bat | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear scripts/build_installer.bat | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear icon.ico | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear license.txt | **IMPLEMENTACIÓN INMEDIATA** |
-| Configurar Godot export para Windows Desktop (Release) | **IMPLEMENTACIÓN INMEDIATA** |
-| Obtener certificado digital de code signing | **IMPLEMENTACIÓN MANUAL** |
-| Instalar Inno Setup | **IMPLEMENTACIÓN MANUAL** |
-| Instalar Windows SDK (para signtool) | **IMPLEMENTACIÓN MANUAL** |
-| Integrar con M117 (Build System) para build release | **M117 (Build System)** |
-| Integrar con M119 (Actualizaciones) para detección de versiones | **M119 (Actualizaciones)** |
-| Integrar con M96 (Plataformas) para requisitos de plataforma | **M96 (Plataformas)** |
+| Pendiente | Dueño | Estado real (iter. 3, Log 1014) |
+|---|---|---|
+| Crear installer/IslaAncestral.iss | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 5047 B |
+| Crear installer/system_requirements.iss | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2439 B |
+| Crear installer/update.iss | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2041 B |
+| Crear installer/repair.iss | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2416 B |
+| Crear installer/rollback.iss | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2318 B |
+| Crear installer/code_signing.bat | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2438 B |
+| Crear scripts/build_installer.bat | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — 2962 B |
+| Crear icon.ico | **IMPLEMENTACIÓN INMEDIATA** | ❌ **FALTA** — el diseño está documentado (03-Diseno §S.1/§S.6-8) pero el **archivo no existe**; requiere artista (**M46**) |
+| Crear license.txt | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — installer/license.txt 1838 B |
+| Configurar Godot export para Windows Desktop (Release) | **IMPLEMENTACIÓN INMEDIATA** | ✅ HECHO (iter. 2) — preset "Windows" en export_presets.cfg |
+| Obtener certificado digital de code signing | **IMPLEMENTACIÓN MANUAL** | ⏳ externo (compra de certificado) |
+| Instalar Inno Setup | **IMPLEMENTACIÓN MANUAL** | ⏳ externo (entorno real) |
+| Instalar Windows SDK (para signtool) | **IMPLEMENTACIÓN MANUAL** | ⏳ externo (entorno real) |
+| Integrar con M117 (Build System) para build release | **M117 (Build System)** | ✅ M117 cerró (Log 946) |
+| Integrar con M119 (Actualizaciones) para detección de versiones | **M119 (Actualizaciones)** | ✅ M119 cerrado |
+| Integrar con M96 (Plataformas) para requisitos de plataforma | **M96 (Plataformas)** | ⏳ de M96 |
 
 ## 13. Notas del Agente
 
