@@ -1,5 +1,0 @@
-numero: 980
-agente: mimo-v2.5
-plataforma: OpenCode
-modulo: M53-UI-UX + M131-Creditos
-fecha: 2026-09-17

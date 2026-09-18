@@ -292,10 +292,6 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 **Archivo central:** `Logs/NUMEROS_DISPONIBLES.txt` — una línea por número, orden ascendente (1000, 1001, 1002, ...). Cuando se agoten, agregar más números al final.
 
-> **Período de transición:** `Logs/ULTIMO_NUMERO.txt` se mantiene temporalmente
-> por si algún agente tiene un número reservado del sistema anterior (v2).
-> Cuando todos hayan migrado, se eliminará.
-
 #### 6.1.a RESERVA del número (al finalizar la tarea, antes de crear el log)
 
 1. **Leer `Logs/NUMEROS_DISPONIBLES.txt`** → tomar la primera línea (el número más bajo disponible).
