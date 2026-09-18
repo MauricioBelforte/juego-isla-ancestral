@@ -24,7 +24,7 @@ func _check(nombre: String, cond: bool) -> void:
 func _run() -> void:
 	print("=== [M52] Test de VfxFactory ===")
 	var catalogo: Array = FACTORY.cargar_catalogo()
-	_check("Catálogo VFX cargado (8)", catalogo.size() == 8)
+	_check("Catálogo VFX cargado (31)", catalogo.size() == 31)
 	var vfx := {}
 	for e in catalogo:
 		if String(e.get("id", "")) == "vfx_polen":

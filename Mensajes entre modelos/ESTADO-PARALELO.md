@@ -809,3 +809,40 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
 - ⏳ **QA cruzado §21.8 de M127 sigue pendiente** (verificador ≠ autor) → por eso el estado NO sube a ✅.
 - Commit **selectivo por lista explícita de rutas** (trampa 70: worktree compartido, había 12+ entradas ajenas
   en el árbol). Reserva `986-DeepSeek-V4.1-Flash-M127.txt` liberada.
+
+
+## 2026-09-18 — DeepSeek-V4.1-Flash / WorkBuddy — M52 iter. 6 CERRADA (Log 1005)
+
+- Módulo **M52 Partículas-Y-VFX**: 88/148 → **137/148** (`[x]=137 · [ ]=10 · [?]=1`).
+- **Catálogo 8 → 31 entradas** (24/24 nombres del plan maestro; el plan enumera **24**, el
+  checklist decía 25 → discrepancia **reportada**, no inventada). 20 campos por efecto.
+- **`vfx_schema.gd`** extendido: RF3/RF4/RF6/RF7/RF11/RF14/RF16, con 16 mutaciones probadas
+  por inyección. Conjuntos cerrados duplicados a propósito con el generador.
+- **Nuevos:** `vfx_loops.gd` (culling por radio + LOD 25% + fase fija + una zona = un
+  emisor) y `vfx_trigger.gd` (punto único evento → VFX).
+- **`tools/vfx/gen_vfx_catalog.py`**: el catálogo es un dataset con generador validante y
+  `--check` en CI (editar el JSON a mano se detecta).
+- Tests: `test_vfx_m52_iter6.gd` **76/0 ×3** + 105 de las 4 suites previas = **181/0**, 0
+  `SCRIPT ERROR`. 2 aserciones obsoletas de la iter. 5 corregidas a los valores medidos.
+- **Hallazgo para el repo:** `vfx_director.gd` se conectaba a `EventBus.evento_generico`,
+  una señal que **no existe** (`scripts/core/event_bus.gd` no la declara) → el director
+  quedaba mudo y **ningún VFX se disparaba por un evento real de juego**. El EventBus es
+  namespaced. `VfxTrigger` es la ruta que funciona; **migrar el director queda pendiente**
+  (no se mezcló con el cambio de catálogo).
+- **Hallazgo de protocolo (dos modos de fallo del v3, ambos resueltos):** perdí **dos** números
+  antes de quedarme con el **1005**.
+  **(1) 1001 — doble asignador.** `Logs/reservas/1001-hy3-M53.txt` (hy3, 03:37) existía cuando
+  tomé el 1001 de `NUMEROS_DISPONIBLES.txt` (03:38): la herramienta legada y la lista eran **dos
+  asignadores independientes**. Cedí el 1001 a hy3 → **corregido**: `--reservar` ahora **consume
+  del pool** y `--estado` **detecta el doble asignador** (sonda aislada 19/19).
+  **(2) 1002 — carrera lectura-modificación-escritura.** Otro agente ya había escrito y
+  **commiteado** `Logs/1002-Avance-modulos-M154-M84-M53_2026-09-17.md` (commit `5f4e003`,
+  03:40:14) sin borrar el 1002 del pool → los dos leímos "primera línea = 1002" a la vez. El
+  pool **no puede** prevenirlo ni detectarlo después (la línea ya estaba borrada). Cedí el 1002 a
+  su autor y tomé el **1005** por el camino **race-safe**:
+  `python scripts/reservar_log.py --reservar`, que consume el pool **y** crea el archivo de
+  reserva. **La creación exclusiva del `.txt` es el paso ATÓMICO, no el borrado de la línea.**
+  **Para todos: en v3 reclamá con `--reservar`, no borrando una línea a mano.**
+- **`vfx_director.gd`**: se le agregó el bloque de comentario que documenta el `evento_generico`
+  muerto (no se reescribió su modelo de eventos).
+- ⏳ **QA cruzado §21.8 de la iter. 6 pendiente** (verificador ≠ autor).

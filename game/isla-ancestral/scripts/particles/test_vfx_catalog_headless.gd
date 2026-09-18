@@ -24,15 +24,15 @@ func _check(nombre: String, cond: bool) -> void:
 func _run() -> void:
 	print("=== [M52] Test del catálogo VFX ===")
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/vfx/vfx_catalog.json"))
-	_check("Catálogo de 8 VFX válido", SCHEMA.validar_catalogo(config).is_empty())
-	# evento único por VFX (los 8 vinculan a eventos conocidos)
+	_check("Catálogo de 31 VFX válido", SCHEMA.validar_catalogo(config).is_empty())
+	# evento único por VFX (las 31 entradas vinculan a 30 eventos distintos)
 	var ids := {}
 	for e in config["vfx"]:
 		ids[e["evento"]] = true
-	_check("8 eventos distintos vinculados", ids.size() == 8)
-	# caso roto: tipo inválido
+	_check("30 eventos distintos vinculados", ids.size() == 30)
+	# caso roto: tipo inválido ("magia" SÍ es válido desde iter. 6: es un tipo real)
 	var roto: Dictionary = config.duplicate(true)
-	roto["vfx"][0]["tipo"] = "magia"
+	roto["vfx"][0]["tipo"] = "inexistente"
 	var errores: Array = SCHEMA.validar_catalogo(roto)
 	_check("Detecta tipo inválido", errores.any(func(e): return String(e).contains("tipo inválido")))
 	# caso roto: cantidad fuera de rango

@@ -130,6 +130,14 @@ jobs:
           godot --headless --script scripts/particles/test_vfx_factory_headless.gd 2>&1 || true
           godot --headless --script scripts/particles/test_vfx_director_headless.gd 2>&1 || true
           godot --headless --script scripts/particles/test_vfx_pool_m52.gd 2>&1 || true
+          # M52 iter. 6: catalogo de 31 entradas + schema con reglas
+          # verificables (RF3/4/6/7/11/14/16), loops con culling y fase fija,
+          # LOD 25% y trigger centralizado. Los 13 buses del catalogo se
+          # verifican contra scripts/core/event_bus.gd.
+          godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || true
+          # M52 iter. 6: el catalogo es un dataset generado - detecta ediciones
+          # a mano que no pasaron por el generador.
+          python tools/vfx/gen_vfx_catalog.py --check
           # Run localization test (M87): catálogos ES/EN/PT del autoload
           # `LocalizationManager` + fallback + interpolación. Las aserciones de
           # conteo comparan contra el JSON fuente (fix BUG-032: estaban fijadas a

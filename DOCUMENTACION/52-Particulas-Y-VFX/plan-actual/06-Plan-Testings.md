@@ -73,3 +73,30 @@ GODOT="D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64
 | `vfx_trigger.gd` (VFX + SFX + feedback) | No implementado |
 | Atmosféricos por clima/estación (M32/M29) | No implementado |
 | Partículas 2D de UI (M53) | No implementado |
+
+---
+
+## 6. Plan de la iteración 6 (Log 1002)
+
+Objetivo: cerrar el catálogo, hacer **verificables** las reglas del plan e
+implementar loops, LOD y el disparo centralizado.
+
+| # | Caso | Cómo se prueba | Criterio |
+|---|------|----------------|----------|
+| 6.1 | Catálogo real válido | `SCHEMA.validar_catalogo(config)` | 0 errores, `version == 2`, 31 entradas |
+| 6.2 | Cobertura del plan | `SCHEMA.cobertura_plan()` | `[]` (24/24) |
+| 6.3 | Reglas por inyección | 16 mutaciones del catálogo | cada una produce el error esperado (RF3/RF4/RF6/RF7/RF11/RF14/RF16) |
+| 6.4 | Loops: una zona = un emisor | `registrar()` 2× la misma zona | la segunda devuelve `false` |
+| 6.5 | Culling por radio | `cantidad_efectiva()` a 0 / 35 / 41 | 40 / 10 (25%) / 0 |
+| 6.6 | LOD | `factor_lod()` cerca y lejos | 1.0 / 0.25 |
+| 6.7 | Fase fija (RF4) | `fase_en_t()` 2×, `t=0`, `t` y `t+periodo` | iguales / igual a la fase declarada / periódica |
+| 6.8 | Trigger: mapa derivado | `construir(catalogo)` | 13 buses |
+| 6.9 | Trigger: conexión real | `conectar(stub)` + `emit` | 13 conectados, 0 faltantes, el callback recibe |
+| 6.10 | Trigger: reporta faltantes | `conectar(stub parcial)` | 11 faltantes **nombrados** |
+| 6.11 | Trigger: condiciones | `disparar()` con contexto de estación | otoño 2 ids, primavera 3 |
+| 6.12 | Buses contra el EventBus real | leer `event_bus.gd` y buscar `signal <n>(` | los 13 existen; `evento_generico` NO |
+| 6.13 | Guardián anti-falso-verde | inyectar un `return` tras el bloque B | exit 2 + bloques faltantes nombrados + `INVALIDO` |
+
+**Determinismo:** las suites se corren 3 veces y deben dar el mismo resultado.
+**Piso:** `CHECKS_MINIMOS = 60`; por debajo, el resultado es `INVALIDO` aunque no
+haya fallos (un helper roto no puede producir un verde).

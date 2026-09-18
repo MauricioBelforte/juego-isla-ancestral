@@ -143,6 +143,14 @@ gen_*.py
 !scripts/validate_m39.bat
 !scripts/validate_tscn.bat
 
+# Excepcion (M52 iter. 6, Log 1005): `tools/vfx/gen_vfx_catalog.py` NO es un
+# generador desechable. Es la FUENTE DE VERDAD del dataset
+# `game/isla-ancestral/data/vfx/vfx_catalog.json`: regenerarlo es determinista y
+# `--check` corre en CI para detectar ediciones a mano del JSON. Sin versionarlo,
+# el catalogo queda sin procedencia. El patron `gen_*.py` de la linea 129 lo
+# ignoraba en silencio (misma familia que el caso de arriba).
+!tools/vfx/gen_vfx_catalog.py
+
 # Temporales de agentes (raíz del proyecto)
 _tmp_*.txt
 _tmp_*.py

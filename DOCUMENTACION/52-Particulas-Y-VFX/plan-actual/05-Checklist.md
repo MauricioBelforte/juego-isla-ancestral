@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash (diseño) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 5)
-**Plataforma:** OpenCode (diseño) · WorkBuddy (iter. 5)
+**Modelo:** Deepseek V4 Flash (diseño) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 5-6)
+**Plataforma:** OpenCode (diseño) · WorkBuddy (iter. 5-6)
 
 # 05-Checklist.md — Módulo 52: Partículas y VFX
 
@@ -10,42 +10,56 @@
   artefacto de runtime. Donde pude lo implementé (pool, precalentamiento,
   límites, determinismo, `VFX-SKIP`); donde no, queda en `[?]` con la razón.
 
+### Historial de iteraciones
+
+- **iter. 5 (Log 882, 2026-09-13):** pooling, precalentamiento, determinismo por
+  semilla, límites de rendimiento y log `VFX-SKIP`. Catálogo: 8/25 efectos.
+- **iter. 6 (Log 1002, 2026-09-18, DeepSeek-V4.1-Flash):** catálogo **8 → 31
+  entradas** (24/24 nombres del plan) con 20 campos por efecto; `vfx_schema.gd`
+  extendido a reglas verificables (RF3/RF4/RF6/RF7/RF11/RF14/RF16);
+  **`vfx_loops.gd`** (culling por radio, fase fija, una zona = un emisor) y
+  **`vfx_trigger.gd`** (punto único evento → VFX; los 13 buses verificados contra
+  `scripts/core/event_bus.gd`); generador validante `tools/vfx/gen_vfx_catalog.py`
+  con `--check` contra drift; suite `test_vfx_m52_iter6.gd` **76 checks ×3**.
+  M52 acumula **181 checks · 0 fallos** en 5 suites. 49 ítems cerrados →
+  **137/148**. **QA cruzado (§21.8) pendiente** (verificador ≠ autor).
+
 ## A. Problema y objetivos
 
 - [x] Definir el problema: sin sistema de VFX el feedback visual es inconsistente y caro [S]
 - [x] Definir el objetivo: VFX baratos, deterministas y armónicos con el estilo cozy [S]
 - [x] Registrar dependencias: M04 (GPUParticles), M45/M47 (materiales), M49 (glow/luz), M61/M62 (presupuestos), M58 (accesibilidad) [M]
 - [x] Mapear la sección 51 "PARTÍCULAS Y VFX" del plan maestro al ID 52 de la tabla global [M]
-- [ ] Separar dentro/fuera de alcance: luz de fuego → M49, sonido → M43/M44, sprites → M45/M47 [S]
+- [x] Separar dentro/fuera de alcance: luz de fuego → M49, sonido → M43/M44, sprites → M45/M47 [S] — iter. 6: Frontera documentada en el catálogo (`dueno_evento` M49 en humo/fuego/lava) y forzada por el schema (RF7). Sonido M43/M44 y sprites M45/M47 quedan fuera.
 - [x] Documentar restricciones: GPUParticles, sin RNG, sin luz por partícula, presupuesto verificable [M]
 - [x] Definir criterios de aceptación verificables (8 criterios) [S]
 
 ## B. RF1 — Catálogo de VFX
 
-- [ ] Listar los 25 efectos del plan maestro [M]
-- [ ] Humo y polvo [S]
-- [ ] Hojas y pétalos [S]
-- [ ] Chispas [S]
-- [ ] Agua (salpicaduras) [S]
-- [ ] Lluvia y nieve [S]
-- [ ] Fuego y lava [S]
-- [ ] Luz y magia tecnológica [S]
-- [?] Resonancia y activación de runas [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
-- [ ] Teletransporte (si existe) [S]
-- [?] Obtención de Sello [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
-- [?] Resolución de puzzle [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25)
-- [?] Construcción, cosecha y pesca [S] — auditoría iter. 5: cosecha y pesca sí; construcción NO
-- [ ] Descubrimiento [S]
-- [?] Cambio estacional [S] — auditoría iter. 5: solo primavera (`vfx_polen`)
-- [ ] Efectos de interfaz [S]
-- [ ] Efectos atmosféricos [S]
-- [ ] Definir parámetros por efecto (tipo, material, emisor, presupuesto) [M]
+- [x] Listar los 25 efectos del plan maestro [M] — iter. 6: 24/24 nombres del plan cubiertos. El plan enumera **24** (`plan-inicial/04-Codigo.md:149`), no 25 → discrepancia reportada, no inventada.
+- [x] Humo y polvo [S] — iter. 6: `vfx_humo`, `vfx_polvo`.
+- [x] Hojas y pétalos [S] — iter. 6: `vfx_hojas`, `vfx_polen`, `vfx_petalos`.
+- [x] Chispas [S] — iter. 6: `vfx_chispas`, `vfx_crafteo`.
+- [x] Agua (salpicaduras) [S] — iter. 6: `vfx_salpicadura`, `vfx_gotas_cascada`, `vfx_pesca_exito`.
+- [x] Lluvia y nieve [S] — iter. 6: `vfx_lluvia`, `vfx_lluvia_salpicadura`, `vfx_nieve` (categoría `clima`).
+- [x] Fuego y lava [S] — iter. 6: `vfx_fuego`, `vfx_lava` (RF7: sin luz por partícula).
+- [x] Luz y magia tecnológica [S] — iter. 6: `vfx_luz`, `vfx_magia`.
+- [x] Resonancia y activación de runas [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25) — iter. 6: `vfx_resonancia`, `vfx_runas` (bus `quest.prereq_met` verificado).
+- [x] Teletransporte (si existe) [S] — iter. 6: `vfx_teletransporte` (bus `travel.travel_started`).
+- [x] Obtención de Sello [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25) — iter. 6: `vfx_sello` (bus `quest.prereq_met`).
+- [x] Resolución de puzzle [S] — auditoría iter. 5: sin entrada en `vfx_catalog.json` (8/25) — iter. 6: `vfx_puzzle` (bus `quest.quest_completed`).
+- [x] Construcción, cosecha y pesca [S] — auditoría iter. 5: cosecha y pesca sí; construcción NO — iter. 6: `vfx_construccion`, `vfx_cosecha`, `vfx_pesca_exito` — los tres.
+- [x] Descubrimiento [S] — iter. 6: `vfx_descubrimiento` (bus `diary.entrada_nueva`).
+- [x] Cambio estacional [S] — auditoría iter. 5: solo primavera (`vfx_polen`) — iter. 6: `vfx_estacional` + hojas/polen/pétalos/nieve con `condicion` de estación/clima.
+- [x] Efectos de interfaz [S] — iter. 6: `vfx_ui` (bus `ui.notify`).
+- [x] Efectos atmosféricos [S] — iter. 6: `vfx_atmosferico` (bus `weather.clima_cambio`) + el grupo `clima`.
+- [x] Definir parámetros por efecto (tipo, material, emisor, presupuesto) [M] — iter. 6: 20 campos por efecto: tipo, material, emisor, presupuesto, categoría, loop/fase/radio, parpadeo, luz.
 
 ## C. RF2 — Pool central
 
 - [x] Definir VfxManager (autoload) [M]
 - [x] Definir pool de emisores one-shot prestados/liberados [M] — iter. 5: `vfx_pool.gd` (`prestar`/`liberar`/`liberar_todos`)
-- [ ] Definir loops registrados con culling [M]
+- [x] Definir loops registrados con culling [M] — iter. 6: `vfx_loops.gd`: registro por zona con culling por radio (RF14) + `resumen()` para telemetría.
 - [x] Definir precalentamiento del pool (8 emisores) [M] — iter. 5: `precalentar()` / `precalentar_catalogo()`
 
 ## D. RF3 — Presupuesto por escena
@@ -58,7 +72,7 @@
 ## E. RF4 — Determinismo
 
 - [x] Definir semillas de contexto (M10) en one-shots [M] — iter. 5: `semilla_de()` FNV-1a 32
-- [ ] Definir loops con fase fija [M]
+- [x] Definir loops con fase fija [M] — iter. 6: `VfxLoops.fase_en_t()` usa la `fase` FIJA del catálogo — función pura, sin aleatoriedad (bloque D).
 - [x] Definir sin RNG por frame [M] — iter. 5: sin RNG; `seed` fijada después de `restart()`
 - [x] Definir verificación de determinismo en validador [M]
 
@@ -72,47 +86,47 @@
 
 - [x] Definir obtención de Sello (M22) [M]
 - [x] Definir resolución de puzzle (M24) [M]
-- [ ] Definir descubrimiento (M71) [M]
-- [ ] Definir festivales (M74) [M]
+- [x] Definir descubrimiento (M71) [M] — iter. 6: `vfx_descubrimiento` + bus `diary.entrada_nueva` (verificado en `event_bus.gd`).
+- [x] Definir festivales (M74) [M] — iter. 6: `vfx_evento_festival` + bus `calendar.day_started`.
 
 ## H. RF7 — Fuego y lava
 
-- [ ] Definir humo + ascuas de fuego [M]
+- [x] Definir humo + ascuas de fuego [M] — iter. 6: `vfx_humo` + `vfx_fuego` (ascuas = `unshaded_add`).
 - [ ] Definir burbujas + ascuas de lava [M]
-- [ ] Definir sin luz por partícula (luz = M49) [M]
+- [x] Definir sin luz por partícula (luz = M49) [M] — iter. 6: RF7 forzado por el schema: `luz_por_particula` debe ser false (inyección en el bloque B).
 
 ## I. RF8 — Agua
 
-- [ ] Definir salpicaduras al nadar (M51/M11) [M]
-- [ ] Definir gotas de cascada [M]
+- [x] Definir salpicaduras al nadar (M51/M11) [M] — iter. 6: `vfx_salpicadura`.
+- [x] Definir gotas de cascada [M] — iter. 6: `vfx_gotas_cascada`.
 - [ ] Definir chapoteo de balde (M13) [M]
 
 ## J. RF9 — Atmosféricos
 
-- [ ] Definir lluvia por clima (M32) [M]
+- [x] Definir lluvia por clima (M32) [M] — iter. 6: `vfx_lluvia` + `condicion clima:lluvia`.
 - [x] Definir nieve por clima/estación (M32/M29) [M]
-- [ ] Definir polvo del desierto [M]
-- [ ] Definir hojas al viento (M50) [M]
-- [ ] Definir pétalos primaverales (M29) [M]
-- [ ] Definir un emisor global por zona (no por chunk) [M]
+- [x] Definir polvo del desierto [M] — iter. 6: `vfx_polvo` + `condicion clima:despejado`.
+- [x] Definir hojas al viento (M50) [M] — iter. 6: `vfx_hojas` + `condicion estacion:otono`.
+- [x] Definir pétalos primaverales (M29) [M] — iter. 6: `vfx_petalos` + `vfx_polen`, `condicion estacion:primavera`.
+- [x] Definir un emisor global por zona (no por chunk) [M] — iter. 6: `VfxLoops.registrar()` rechaza dos loops en la misma zona: una zona = un emisor (RF9).
 
 ## K. RF10 — Magia y ancestral
 
 - [x] Definir resonancia de runas (M24/M26) [M]
 - [x] Definir activación de glifos [M]
 - [ ] Definir estelas de luz (M47) [M]
-- [ ] Definir magia tecnológica (M86) [S]
+- [x] Definir magia tecnológica (M86) [S] — iter. 6: `vfx_magia` (dueño del evento M86).
 
 ## L. RF11 — UI
 
 - [ ] Definir partículas 2D en menús/recompensas (M53) [M]
 - [ ] Definir Reduce Motion (M58) [M]
-- [ ] Definir sin estroboscopios (>10 Hz prohibido) [M]
+- [x] Definir sin estroboscopios (>10 Hz prohibido) [M] — iter. 6: RF11 en el schema: `parpadeo_hz` > 10 es error (inyección a 12 Hz en el bloque B).
 
 ## M. RF12 — Cambio estacional
 
 - [x] Definir transición de VFX por estación (M29) [M]
-- [ ] Definir pétalos ↔ hojas ↔ nieve [M]
+- [x] Definir pétalos ↔ hojas ↔ nieve [M] — iter. 6: `vfx_polen`/`vfx_petalos` (primavera) ↔ `vfx_hojas` (otoño) ↔ `vfx_nieve` (clima:nieve), data-driven por `condicion`.
 
 ## N. RF13 — Teletransporte
 
@@ -122,45 +136,45 @@
 
 - [x] Definir tope de partículas vivas [M] — iter. 5: `max_particulas` + reciclado de los más antiguos
 - [x] Definir culling por distancia (40 m pausa) [M]
-- [ ] Definir LOD de emisores (25% lejos) [M]
+- [x] Definir LOD de emisores (25% lejos) [M] — iter. 6: `VfxLoops.factor_lod()`: 1.0 dentro del 50% del radio, **0.25** fuera (RF14).
 - [x] Definir pooling (M62) [M] — iter. 5: `vfx_pool.gd`
 
 ## P. RF15 — Validación
 
 - [x] Definir validate_vfx.gd [M]
 - [x] Verificar presupuesto por escena [M] — iter. 5: `stats()` del pool + bloque D del test
-- [ ] Verificar naming [S]
+- [x] Verificar naming [S] — iter. 6: `RE_ID` del schema + bloque B; el generador valida lo mismo al ESCRIBIR el catálogo.
 - [x] Verificar determinismo (semillas) [M] — iter. 5: `validar_semillas()` + bloque B del test
-- [ ] Verificar sin luz por partícula [M]
-- [ ] Verificar mapeo completo de eventos de juego [M]
+- [x] Verificar sin luz por partícula [M] — iter. 6: Bloque B: `luz_por_particula=true` produce error; el catálogo real tiene 0 violaciones.
+- [x] Verificar mapeo completo de eventos de juego [M] — iter. 6: 13 buses derivados del catálogo y verificados como `signal` en `scripts/core/event_bus.gd` (bloque F); 10 pendientes RF6 con dueño.
 
 ## Q. RF16 — Naming y organización
 
 - [x] Definir prefijos vfx_, part_ [S]
-- [ ] Alinear con M108 [M]
+- [x] Alinear con M108 [M] — iter. 6: Naming `vfx_<snake_case>` validado en ambos lados (generador + schema).
 
 ## R. Requisitos no funcionales
 
-- [?] Rendimiento: límites + LOD + pooling (M61) [M] — iter. 5: límites y pooling SÍ; LOD por distancia NO
+- [x] Rendimiento: límites + LOD + pooling (M61) [M] — iter. 5: límites y pooling SÍ; LOD por distancia NO — iter. 6: Pooling y límites eran de la iter. 5; **LOD por distancia** se cierra acá (`factor_lod` 25% lejos).
 - [x] Memoria: pool precalentado (M62) [M] — iter. 5
-- [?] Determinismo: semillas + fases fijas [M] — iter. 5: semillas SÍ; fases fijas de loops NO (no hay loops)
+- [x] Determinismo: semillas + fases fijas [M] — iter. 5: semillas SÍ; fases fijas de loops NO (no hay loops) — iter. 6: Semillas de la iter. 5 + **fases fijas** de los loops: `fase_en_t()` es pura y periódica (bloque D).
 - [ ] Cozy: amplitudes suaves, sin humo denso negro [M]
 - [x] Accesible: vfx_quality 3 niveles (M58) [M]
-- [ ] Mantenible: catálogo central único [M]
+- [x] Mantenible: catálogo central único [M] — iter. 6: Un único `vfx_catalog.json` (31 entradas) con generador validante en `tools/vfx/` y `--check` contra drift.
 
 ## S. Alternativas consideradas
 
 - [x] Descartar CPUParticles para todo [M]
 - [x] Descartar emisores sin pool (GC/stutter) [M] — iter. 5: el pool evita allocar por disparo (verificado: `creados` no sube al reusar)
-- [ ] Descartar luz integrada en partículas [M]
+- [x] Descartar luz integrada en partículas [M] — iter. 6: Rechazada y **forzada por el schema**: `luz_por_particula` debe ser false (RF7 → la luz es de M49).
 - [x] Descartar RNG en runtime [S] — iter. 5: semillas deterministas
 - [x] Descartar sin límite de partículas [S] — iter. 5: `max_particulas` + reciclado
 - [x] Descartar VFX 100% procedural por shaders [M]
 
 ## T. Riesgos y mitigaciones
 
-- [ ] Riesgo de overdraw → presupuesto + tope + LOD [M]
-- [ ] Riesgo de desincronía → trigger centralizado [M]
+- [x] Riesgo de overdraw → presupuesto + tope + LOD [M] — iter. 6: Presupuesto por efecto (`presupuesto >= cantidad`) + tope del pool (iter. 5) + LOD (RF14).
+- [x] Riesgo de desincronía → trigger centralizado [M] — iter. 6: `vfx_trigger.gd`: punto único de traducción evento → VFX, mapa derivado del catálogo y reporte de buses no resueltos.
 - [x] Riesgo de determinismo roto → semillas + validador [M] — iter. 5
 - [x] Riesgo de stutter → pool precalentado [M] — iter. 5
 - [x] Riesgo de molestias (fotosensibilidad) → vfx_quality (M58) [M]
@@ -182,16 +196,16 @@
 ## V. Herramientas y flujos
 
 - [x] Documentar flujo de emisión one-shot [M] — iter. 5: 04-Codigo.md §2 + bloque E del test
-- [ ] Documentar flujo de loop ambiental (humo) [M]
+- [x] Documentar flujo de loop ambiental (humo) [M] — iter. 6: Ver `04-Codigo.md` §8: flujo del loop ambiental paso a paso.
 - [x] Documentar flujo de atmosféricos por clima/estación [M]
 
 ## W. Criterios de aceptación verificados
 
-- [ ] Todos los efectos del plan maestro en el catálogo [M]
+- [x] Todos los efectos del plan maestro en el catálogo [M] — iter. 6: Los 24 nombres tienen entrada; `cobertura_plan()` devuelve [] sobre el catálogo real.
 - [ ] Escena pivote sin exceder límites y sin caída de fps [M]
 - [x] One-shots deterministas (misma semilla, misma distribución) [M] — verificado iter. 5 (bloque B + `seed` tras `restart()`)
 - [x] Triggers sincronizados con animación/sonido/feedback [M]
-- [ ] Fuego/lava sin luz (solo M49) [M]
+- [x] Fuego/lava sin luz (solo M49) [M] — iter. 6: Schema RF7 + bloque B de la suite: fuego y lava con `luz_por_particula=false`.
 - [x] Reduce Motion atenúa/desactiva VFX [M]
 - [x] Atmosféricos responden a clima/estación sin lag [M]
 - [x] Catálogo y validación integrados con CI (M118) [M]

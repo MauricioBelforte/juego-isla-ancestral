@@ -227,7 +227,7 @@ func _test_director() -> void:
 	var director = DIRECTOR.new()
 	root.add_child(director)
 	await process_frame
-	_check("director conoce 8 eventos", director.eventos_registrados() == 8)
+	_check("director conoce 30 eventos", director.eventos_registrados() == 30)
 
 	var contenedor := Node3D.new()
 	root.add_child(contenedor)

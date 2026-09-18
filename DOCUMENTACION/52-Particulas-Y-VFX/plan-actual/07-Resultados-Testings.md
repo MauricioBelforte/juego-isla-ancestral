@@ -95,3 +95,53 @@ Salida real (extracto; los autoloads inundan stdout, por eso se filtra):
 - `Reduce Motion`/`vfx_quality` (M58), loops con culling, LOD por distancia,
   presupuesto por preset (M90), `vfx_trigger.gd`, atmosféricos, UI 2D:
   **no implementados** → sin tests.
+
+---
+
+## 3. Resultados de la iteración 6 (Log 1002, 2026-09-18)
+
+| Suite | Archivo | Resultado | Corridas |
+|-------|---------|-----------|----------|
+| **Iter. 6** (catálogo + loops + trigger) | `scripts/particles/test_vfx_m52_iter6.gd` | **76 checks · 0 fallos** | **3/3** |
+| Catálogo (actualizado a 31) | `.../test_vfx_catalog_headless.gd` | 4 checks · 0 fallos | 1 |
+| Factory (actualizado a 31) | `.../test_vfx_factory_headless.gd` | 8 checks · 0 fallos | 1 |
+| Director (actualizado a 30 eventos) | `.../test_vfx_director_headless.gd` | 4 checks · 0 fallos | 1 |
+| Pool + runtime (iter. 5) | `.../test_vfx_pool_m52.gd` | 89 checks · 0 fallos | 1 |
+
+**Total M52: 181 checks · 0 fallos · 0 `SCRIPT ERROR`.**
+
+### Verificación del guardián (por inyección)
+
+Se copió la suite, se inyectó un `return` justo después de cerrar el bloque B y
+se corrió el proceso real:
+
+```
+exit code del PROCESO: 2
+=== Resumen M52 iter. 6: 26 checks, 0 fallos ===
+bloques ejecutados: 2/6 ["A", "B"]
+BLOQUES QUE NO CORRIERON: ["C", "D", "E", "F"]
+piso de checks: 60 (medidos 26)
+=== RESULTADO: INVALIDO (bloques faltantes o bajo el piso) ===
+```
+
+Es decir: **un aborto silencioso NO produce un verde**. Y la prueba destapó un
+defecto del guardián (el proceso quedaba colgado sin llamar a `quit()`), que se
+corrigió: `_summary()` se encola desde `_init()` y es idempotente.
+
+### Regresiones encontradas y resueltas
+
+Al pasar el catálogo de 8 a 31 entradas, **2 suites previas quedaron rojas**:
+
+| Suite | Aserción obsoleta | Valor medido |
+|-------|-------------------|--------------|
+| `test_vfx_director_headless.gd` | "8 eventos del catálogo" | 30 eventos distintos |
+| `test_vfx_pool_m52.gd` | "director conoce 8 eventos" | 30 eventos distintos |
+
+No eran regresiones de código sino aserciones fijadas a la iter. 5; se
+actualizaron a los valores **medidos** (trampa 49: contar, no copiar).
+
+### Pendiente
+
+- **QA cruzado (§21.8)** — lo hace otro modelo (verificador ≠ autor).
+- Migrar `vfx_director.gd` a `VfxTrigger`.
+- Calibración visual (requiere revisión humana).

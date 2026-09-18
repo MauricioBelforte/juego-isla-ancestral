@@ -26,7 +26,7 @@ func _run() -> void:
 	var director = DIRECTOR.new()
 	root.add_child(director)
 	await process_frame
-	_check("Director instanciado (8 eventos del catálogo)", director.eventos_registrados() == 8)
+	_check("Director instanciado (30 eventos del catálogo)", director.eventos_registrados() == 30)
 	# dispatch (headless: sin container, solo registra el id)
 	var exito: bool = director.disparar("bloque_roto", Vector3(1, 2, 3))
 	_check("Disparo de evento conocido exitoso", exito)

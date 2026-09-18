@@ -17,6 +17,19 @@
 #
 # Además: el pool emite `emision_descartada` y el director lo escribe como log
 # `VFX-SKIP` en GameLogger (RF3) — antes el descarte era invisible.
+#
+# ⚠️ HALLAZGO DE LA ITER. 6 (Log 1002) — el enganche a eventos reales NO funciona:
+# `_ready()` intenta `EventBus.evento_generico`, una señal que **NO EXISTE** en
+# ningún archivo del repo (`scripts/core/event_bus.gd` no la declara). El
+# `has_signal()` devuelve false y el director queda mudo: **ningún VFX se
+# disparaba por un evento real de juego**. El EventBus del proyecto es
+# namespaced (`world.block_placed`, `quest.prereq_met`, `weather.clima_cambio`…),
+# no plano. La ruta que SÍ funciona es `vfx_trigger.gd` (VfxTrigger), que deriva
+# el mapa bus -> vfx del catálogo, resuelve los namespaces reales y REPORTA los
+# que no puede resolver. Los 13 buses del catálogo están verificados contra
+# `event_bus.gd` por `test_vfx_m52_iter6.gd` (bloque F).
+# Queda PENDIENTE migrar este director a VfxTrigger (no se hizo acá para no
+# cambiar el modelo de eventos en el mismo ciclo que el catálogo).
 
 class_name VfxDirector
 extends Node

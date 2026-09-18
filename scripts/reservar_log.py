@@ -31,6 +31,12 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LOGS = os.path.join(RAIZ, 'Logs')
 RESERVAS = os.path.join(LOGS, 'reservas')
 ULTIMO = os.path.join(LOGS, 'ULTIMO_NUMERO.txt')
+# Protocolo v3 (AGENTS.md 6.1): pool de numeros libres 1000-1500. Es el asignador
+# CANONICO. Si --reservar no lo consume, quedan DOS asignadores independientes
+# (esta herramienta y la lista) y la colision que 6.1.d daba por imposible
+# ocurre: medido el 2026-09-18, hy3 recibio el 1001 por aqui mientras DeepSeek
+# tomaba el 1001 de la lista -> dos logs con el mismo numero.
+DISPONIBLES = os.path.join(LOGS, 'NUMEROS_DISPONIBLES.txt')
 
 # OJO: \d{3} dejaba CIEGO al guardián a partir de 1000. Con el protocolo v3
 # (Logs/NUMEROS_DISPONIBLES.txt = 1000-1500) TODO log nuevo tiene 4 dígitos, así
@@ -73,15 +79,63 @@ def ultimo_numero():
         return 0
 
 
+def _leer_bytes(ruta):
+    try:
+        with open(ruta, 'rb') as f:
+            return f.read()
+    except OSError:
+        return None
+
+
+def _eol_de(raw):
+    """EOL dominante, preservado al reescribir (trampa 69: core.autocrlf=true)."""
+    crlf = raw.count(b'\r\n')
+    lf = raw.count(b'\n') - crlf
+    return b'\r\n' if crlf >= lf else b'\n'
+
+
+def numeros_disponibles():
+    """(lista_de_int, eol, existe) del pool v3. Orden de aparicion = orden de reparto."""
+    raw = _leer_bytes(DISPONIBLES)
+    if raw is None:
+        return [], b'\n', False
+    nums = [int(l.strip()) for l in raw.split(b'\n') if l.strip().isdigit()]
+    return nums, _eol_de(raw), True
+
+
+def consumir_primero_del_pool():
+    """Borra la PRIMERA linea numerica del pool v3 y devuelve su numero.
+
+    None si el pool no existe o no tiene numeros. Preserva el EOL del archivo.
+    """
+    raw = _leer_bytes(DISPONIBLES)
+    if raw is None:
+        return None
+    eol = _eol_de(raw)
+    lineas = raw.split(eol)
+    idx = next((i for i, l in enumerate(lineas) if l.strip().isdigit()), None)
+    if idx is None:
+        return None
+    num = int(lineas[idx].strip())
+    del lineas[idx]
+    with open(DISPONIBLES, 'wb') as f:
+        f.write(eol.join(lineas))
+    return num
+
+
 def siguiente_libre(logs, res):
     return max([ultimo_numero()] + list(logs) + list(res)) + 1
 
 
 def cmd_estado():
     logs, res = logs_por_numero(), reservas_por_numero()
+    pool, _, hay_pool = numeros_disponibles()
     print('ULTIMO_NUMERO.txt : %d' % ultimo_numero())
     print('Logs/*.md         : %d numeros' % len(logs))
     print('reservas/*.txt    : %d' % len(res))
+    if hay_pool:
+        print('NUMEROS_DISPONIBLES: %d libres (primero=%s)'
+              % (len(pool), pool[0] if pool else '-'))
     problemas = 0
     for num in sorted(set(logs) | set(res)):
         ocupado_por_log = logs.get(num, [])
@@ -95,6 +149,15 @@ def cmd_estado():
             problemas += 1
         if len(ocupado_por_log) > 1:
             print('  !! COLISION %d: %s' % (num, ocupado_por_log))
+            problemas += 1
+    if hay_pool:
+        # Doble asignador: un numero que sigue en el pool v3 pero ya tiene log o
+        # reserva puede entregarse DOS veces (una por la lista, otra por --reservar).
+        for num in sorted((set(logs) | set(res)) & set(pool)):
+            quien = ('escrito en Logs/ %s' % logs[num]) if num in logs \
+                else ('reservado por %s' % res[num])
+            print('  !! DOBLE ASIGNADOR %d: sigue en NUMEROS_DISPONIBLES.txt y ya esta %s'
+                  % (num, quien))
             problemas += 1
     if problemas:
         print('\n%d problema(s) de numeracion.' % problemas)
@@ -117,7 +180,13 @@ def cmd_check(num):
 
 def cmd_reservar(agente, modulo):
     logs, res = logs_por_numero(), reservas_por_numero()
-    num = siguiente_libre(logs, res)
+    num = consumir_primero_del_pool()
+    origen = 'NUMEROS_DISPONIBLES.txt (protocolo v3, AGENTS.md 6.1.a)'
+    if num is None or num in logs or num in res:
+        if num is not None:
+            print('AVISO: el pool entrego %d, ya ocupado/reservado -> modo legado.' % num)
+        num = siguiente_libre(logs, res)
+        origen = 'max+1 (modo legado: no hay pool v3)'
     os.makedirs(RESERVAS, exist_ok=True)
     slug = re.sub(r'[^A-Za-z0-9._-]+', '-', '%s-%s' % (agente, modulo)).strip('-')
     destino = os.path.join(RESERVAS, '%d-%s.txt' % (num, slug))
@@ -127,6 +196,7 @@ def cmd_reservar(agente, modulo):
     with open(ULTIMO, 'w', encoding='utf-8', newline='') as f:
         f.write('%d\n' % num)
     print('Reservado Log %d -> %s' % (num, os.path.relpath(destino, RAIZ)))
+    print('Origen del numero : %s' % origen)
     print('ULTIMO_NUMERO.txt -> %d' % num)
     return 0
 

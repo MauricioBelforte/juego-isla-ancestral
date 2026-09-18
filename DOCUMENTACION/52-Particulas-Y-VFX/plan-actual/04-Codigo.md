@@ -190,3 +190,129 @@ determinismo, límites, log `VFX-SKIP`).
   `EventBus` real en lugar de solo el catálogo.
 - Añadir loops registrados con culling por distancia (RF2/RF14).
 - QA cruzado (§21.8) por otro modelo.
+
+---
+
+## 8. API de la iteración 6 (Log 1002)
+
+La iter. 5 dejó 3 huecos grandes: catálogo de 8 sobre 25 efectos, ninguna regla
+del plan **verificable** por código, y los loops/LOD/trigger sin implementar.
+La iter. 6 los cierra con dos sistemas nuevos y un validador extendido.
+
+### 8.1 `VfxSchema` (extendido)
+
+Conjuntos cerrados y reglas, todas comprobables en headless:
+
+| Regla | Qué exige | Por qué |
+|---|---|---|
+| RF3 | `presupuesto >= cantidad` | el presupuesto no puede ser menor que lo que el efecto emite |
+| RF4 | un loop trae `fase` en `[0,1)` | determinismo: la fase es un valor declarado, nunca aleatorio |
+| RF6 | sin `bus` ⇒ hace falta `dueno_evento` | o lo dispara el EventBus, o hay un dueño declarado; nadie dispara nada es un bug silencioso |
+| RF7 | `luz_por_particula == false` | la luz es de M49 (RF7 del plan) |
+| RF11 | `parpadeo_hz <= 10` | sin estroboscopios (accesibilidad, M58) |
+| RF14 | loop ⇒ `radio > 0`; no-loop ⇒ `radio == 0` | el culling necesita radio; un no-loop con radio es un dato muerto |
+| RF16 | id `vfx_<snake_case>` | naming alineado con M108 |
+| RF1 | los 24 nombres del plan están cubiertos | `cobertura_plan()` devuelve los que faltan |
+
+Los conjuntos cerrados (`TIPOS`, `CATEGORIAS`, `EMISORES`, `MATERIALES`) están
+duplicados **a propósito** en el generador: uno valida al escribir, el otro al
+leer. Si divergen, uno de los dos falla.
+
+### 8.2 `VfxLoops` (RefCounted) — loops ambientales
+
+Lógica pura, sin nodos: decide *qué zona emite, con qué cantidad y en qué fase*.
+El emisor lo sigue creando el pool.
+
+- `registrar(vfx, zona, posicion)` — **una zona = un emisor** (RF9: no uno por
+  chunk). Registrar dos veces la misma zona devuelve `false` en vez de reemplazar
+  en silencio; tampoco acepta un `vfx` que no sea `loop` o que no traiga radio.
+- `activos(camara)` — culling por distancia al centro de la zona, ordenado por
+  cercanía.
+- `factor_lod(vfx, distancia)` — **RF14**: `1.0` dentro del 50% del radio,
+  `0.25` fuera.
+- `cantidad_efectiva(zona, camara)` — cantidad tras el LOD; `0` si está fuera de
+  radio o si baja del mínimo útil (no vale la pena emitir 2 partículas).
+- `fase_en_t(vfx, t, periodo)` — **función pura**: `fposmod(fase + t/periodo, 1)`.
+  Dos corridas con el mismo `t` dan lo mismo (RF4).
+- `resumen(camara)` — foto para telemetría/log de M103.
+
+### 8.3 `VfxTrigger` (RefCounted) — punto único evento → VFX
+
+⚠️ **Hallazgo real de esta iteración:** `vfx_director.gd` se conectaba a
+`EventBus.evento_generico`, una señal que **no existe** en el repo. El
+`has_signal()` devolvía false y el director quedaba mudo: **ningún VFX se
+disparaba por un evento real de juego**. El `EventBus` del proyecto no es plano:
+son sub-objetos con namespace (`world.block_placed`, `quest.prereq_met`,
+`weather.clima_cambio`, …).
+
+`VfxTrigger` hace explícito el contrato:
+
+- `construir(catalogo)` — deriva el mapa `bus → [ids]` del catálogo: agregar un
+  efecto con `bus` lo conecta **sin tocar código**.
+- `conectar(raiz, cb)` — resuelve cada bus namespaced contra el nodo del bus y
+  devuelve `{conectados, faltantes}`. `faltantes` **nombra** lo que no pudo
+  resolver: un bus mal escrito es un hallazgo, no un detalle.
+- `disparar(bus, contexto, catalogo)` — puro: decide qué ids corresponden, y
+  filtra por `condicion` (`"clave:valor"` contra el contexto).
+- `cobertura()` / `eventos_pendientes()` — los 10 efectos sin `bus` dependen de
+  otro módulo (M49/M32/M13/M16/M51/M86) y se reportan con su dueño.
+
+Los **13** buses del catálogo están verificados contra `event_bus.gd` por el
+bloque F de la suite. Queda **pendiente** migrar `vfx_director.gd` a
+`VfxTrigger` (no se hizo en el mismo ciclo que el catálogo, para no mezclar dos
+cambios de modelo).
+
+### 8.4 `tools/vfx/gen_vfx_catalog.py` — generador validante
+
+El catálogo es un **dataset**: su fuente de verdad es la tabla `E` del generador.
+Regenerarlo es determinista (mismo `E` → mismos bytes) y `--check` lo verifica,
+así que editar el JSON a mano se detecta en CI. Valida **antes** de escribir:
+ids únicos, naming, conjuntos cerrados, rangos, presupuesto, RF7/RF11/RF14/RF6 y
+la cobertura de los 24 nombres.
+
+### 8.5 Flujo de un loop ambiental (humo)
+
+1. **Catálogo** — `vfx_humo`: `loop=true`, `radio=40`, `fase=0.0`, `cantidad=40`,
+   `emisor=global`, `presupuesto=80`, `dueno_evento=M49` (el evento es de M49).
+2. **Registro** — el sistema de zonas llama
+   `loops.registrar(vfx_humo, "zona_playa", posicion_del_centro)`. Una zona, un
+   emisor.
+3. **Culling** — cada frame, `loops.activos(camara)` devuelve las zonas dentro de
+   radio, ordenadas por cercanía.
+4. **LOD** — `cantidad_efectiva("zona_playa", camara)`: `40` dentro del 50% del
+   radio, `10` (25%) entre el 50% y el 100%, `0` fuera. Con menos del mínimo
+   útil no se emite.
+5. **Fase** — `fase_en_t(vfx_humo, t, periodo)` da la posición en el ciclo. Es
+   pura: no hay `randf()`, así que la corrida es reproducible.
+6. **Emisión** — el pool presta un emisor (T-027), lo configura con
+   `VfxFactory.redisparar()` (semilla DESPUÉS de `restart()`) y lo libera.
+7. **Límites** — si el pool no tiene presupuesto, descarta y el director escribe
+   `VFX-SKIP` en `GameLogger` (RF3: el descarte es visible).
+8. **Telemetría** — `loops.resumen(camara)` da zonas activas y partículas
+   totales para el frame budget.
+
+### 8.6 Lo que sigue sin implementarse
+
+- `vfx_manager.gd`, `vfx_atmospheric.gd`, `ui/ui_vfx.gd`.
+- Presupuesto por preset (M90) — el `presupuesto` por efecto ya existe.
+- Migrar `vfx_director.gd` a `VfxTrigger` (el `evento_generico` es código muerto).
+- Los 10 efectos con `dueno_evento` externo (el evento lo emite otro módulo).
+- **Aprobación visual**: amplitudes, colores y densidades son calibración
+  estética y requieren revisión humana (este host no tiene visión fiable).
+- **QA cruzado (§21.8)**: lo hace otro modelo, no el autor.
+
+### 8.7 Notas del agente (iter. 6)
+
+- El checklist pedía "los 25 efectos del plan maestro"; el plan enumera **24**
+  (`plan-inicial/04-Codigo.md:149`). Se cubren los 24 y la discrepancia se
+  **reporta**, no se inventa un 25º efecto para cuadrar el número.
+- Dos suites previas quedaron **rojas** al cambiar el catálogo: asertaban
+  "8 eventos" / "8 VFX". Son aserciones obsoletas de la iter. 5, no regresiones
+  de código; se actualizaron a los valores medidos (30 eventos, 31 entradas).
+- El guardián anti-falso-verde de la suite nueva **se probó por inyección**: con
+  un `return` temprano dentro de `_run`, la corrida salía **exit 2**, nombraba
+  los bloques faltantes (`["C","D","E","F"]`) y decía `INVALIDO`.
+- Esa prueba destapó un defecto del propio guardián: con `_summary()` sólo al
+  final de `_run`, un aborto temprano dejaba el proceso **colgado** (nunca se
+  llamaba a `quit()`, sin exit code, muerto por timeout a los 300 s). Ahora
+  `_summary()` se encola también desde `_init()` y es idempotente.
