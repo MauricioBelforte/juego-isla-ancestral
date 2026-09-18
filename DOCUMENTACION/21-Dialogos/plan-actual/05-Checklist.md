@@ -33,7 +33,7 @@
 - [ ] RF4: salto rápido de línea y salto completo con confirmación doble [S]
 - [ ] RF5: variables de estado del mundo como condición de ramas [S]
 - [ ] RF6: textos dinámicos con placeholders resueltos en runtime [S]
-- [ ] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
+- [x] RF7: diálogos contextuales por estación, hora, clima y progreso — clima resuelto en iter 8 (Hy3/WorkBuddy): WorldStateService.get_value("clima") delega en WeatherService.get_nombre_clima() (M32); validador acepta "clima" y rechaza typos. test_clima_dialogo_m21.gd 0 fallos [S]
 - [ ] RF8: avance automático opcional con temporizador [S]
 - [ ] RF9: señales de eventos de conversación (inicio, fin, nodo, opción) [S]
 - [?] RF10-RF12: traducción con claves, base de diálogos con IDs únicos y triggers [S]
@@ -49,7 +49,7 @@
 - [ ] Implementar DialogueManager como autoload registrado en project.godot [S]
 - [ ] Implementar start_dialogue con cache de grafos [S]
 - [ ] Implementar stop_dialogue con limpieza de estado [S]
-- [ ] Implementar advance() que respeta tipeo activo [S] — iter 10 (Hy3/WorkBuddy): DialogueManager.set_tipeando() + advance() no avanza si _tipeando; test_iter10_m21.gd
+- [x] Implementar advance() que respeta tipeo activo [S] — iter 10 (Hy3/WorkBuddy): DialogueManager.set_tipeando() + advance() no avanza si _tipeando; test_iter10_m21.gd
 - [ ] Implementar reentrada segura: dos diálogos nunca activos a la vez [S]
 - [ ] Implementar contexto por sesion (quien habla, desde donde se abrio) [S]
 - [ ] Implementar resolucion de texto con claves y placeholders [S]
@@ -68,8 +68,8 @@
 - [ ] Detectar ciclos sin salida (loop de LINEA sin FIN) [M]
 - [ ] Validar condiciones con sintaxis incorrecta (operador fuera de OPERADORES_VALIDOS) [S]
 - [ ] Validar referencias a variables inexistentes del WorldStateService (allowlist en validar(grafo, claves_mundo)) [S]
-- [ ] DialogGraphValidator (validacion estatica complementaria a DialogueGraph.validate): nodos huerfanos + operadores invalidos + claves de mundo desconocidas; validar_texto/archivo; test_validacion_grafo_m21.gd 0 fallos (Log 300) [S]
-- [ ] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
+- [x] DialogGraphValidator (validacion estatica complementaria a DialogueGraph.validate): nodos huerfanos + operadores invalidos + claves de mundo desconocidas; validar_texto/archivo; test_validacion_grafo_m21.gd 0 fallos (Log 300) [S]
+- [x] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
 - [ ] Emitir log [VAL-DGT] con conteo de errores y advertencias [S]
 - [ ] Fallback amigable al usar un grafo invalido (mensaje por defecto) [S]
 - [ ] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
@@ -77,14 +77,14 @@
 ## D. UI y tipografía progresiva (16)
 
 - [ ] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S]
-- [ ] Crear caja de dialogo con nombre y retrato del hablante [S] (retrazo grafico NpcPortraitUI: 150x150, tint por expresion feliz/feliz_intenso/neutral, set_speaker + set_expression; iter 5 / Log 299)
+- [x] Crear caja de dialogo con nombre y retrato del hablante [S] (retrazo grafico NpcPortraitUI: 150x150, tint por expresion feliz/feliz_intenso/neutral, set_speaker + set_expression; iter 5 / Log 299)
 - [ ] Implementar tipografia progresiva letra a letra [S]
 - [ ] Configurar velocidad de tipeo por caracteres por minuto [S]
 - [ ] Acelerar el tipeo mientras se mantiene presionada la confirmacion [S]
 - [ ] Completar la linea al instante con el primer confirm durante el tipeo [S]
 - [ ] Avanzar de nodo con el confirm una vez completada la linea [S]
 - [ ] Implementar salto completo del dialogo con doble confirmacion sostenida [S]
-- [ ] skip_all (salto rapido) en DialogueManager: fast-forward por LINEA/EVENTO hasta OPCIONES (el jugador elige) o FIN; bind KEY_ESCAPE en DialogueUI; test_skip_m21.gd 0 fallos (Log 309) [S]
+- [x] skip_all (salto rapido) en DialogueManager: fast-forward por LINEA/EVENTO hasta OPCIONES (el jugador elige) o FIN; bind KEY_ESCAPE en DialogueUI; test_skip_m21.gd 0 fallos (Log 309) [S]
 - [ ] Mostrar indicador de linea completada (flecha pulsante) [S]
 - [ ] Mostrar indicador de espera mientras se escribe (tres puntos) [S]
 - [ ] Implementar avance automatico opcional con temporizador y pausa en opciones [S]
@@ -113,12 +113,12 @@
 - [ ] Implementar get_snapshot para evaluar condiciones en lote [S]
 - [ ] Condiciones sobre estacion del ano (primavera, verano, otono, invierno) [S]
 - [ ] Condiciones sobre hora del dia y franjas horarias [S]
-- [ ] Condiciones sobre clima (lluvia, sol, tormenta) [S] — iter 8 (Hy3/WorkBuddy): clave "clima" resuelta contra M32 + allowlist de validacion activa (rechaza "climaX"). test_clima_dialogo_m21.gd 0 fallos
+- [x] Condiciones sobre clima (lluvia, sol, tormenta) [S] — iter 8 (Hy3/WorkBuddy): clave "clima" resuelta contra M32 + allowlist de validacion activa (rechaza "climaX"). test_clima_dialogo_m21.gd 0 fallos
 - [ ] Condiciones sobre progreso de la historia principal [S]
 - [ ] Condiciones sobre amistad por NPC (M19) [S]
 - [ ] Condiciones sobre etapa de misiones M22 y sellos M23 [S]
 - [ ] Condiciones sobre eventos y festivales activos (M73) [S]
-- [ ] Efectos que modifican amistad del NPC (M19) [S] — iter 10 (Hy3/WorkBuddy): DialogueNode.apply_effects soporta destino "amistad" (set/increment sobre Friendship.set_nivel); test_iter10_m21.gd
+- [x] Efectos que modifican amistad del NPC (M19) [S] — iter 10 (Hy3/WorkBuddy): DialogueNode.apply_effects soporta destino "amistad" (set/increment sobre Friendship.set_nivel); test_iter10_m21.gd
 - [ ] Efectos que marcan banderas permanentes de conversaciones vistas [S]
 - [ ] Persistir banderas de conversacion en el guardado de partida [M]
 
@@ -132,7 +132,7 @@
 - [ ] M20 -> M21: DialogueManager consume EventBus.npc.friendship_level_up y reenvia level_up_reaction(npc, new_level) a la UI [S]
 - [ ] M20 -> M21 (L82): escenas breves de evento con dialogo — DialogueManager auto-inicia reaccion_regalo.json (rama por reaccion_id R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO) y reaccion_nivel.json al recibir gift_given/friendship_level_up (guarda is_dialogue_active) [S]
 - [ ] M53 -> M21: DialogueUI consume gift_reaction/level_up_reaction y muestra la expresion del NPC (badge _expresion) + guarda ultima reaccion para el retrato (get_ultima_reaccion); la escena breve de reaccion se proyecta en la caja de dialogo (capa M53) [S]
-- [ ] reaccion_nivel.json ramifica por new_level (>=5 / >=3 / default) con fall-through de condiciones; el dialogo de subida de nivel varia el texto segun el umbral; test_eventos_dialogo_m21 _test_ramas_por_nivel (Log 300) [S]
+- [x] reaccion_nivel.json ramifica por new_level (>=5 / >=3 / default) con fall-through de condiciones; el dialogo de subida de nivel varia el texto segun el umbral; test_eventos_dialogo_m21 _test_ramas_por_nivel (Log 300) [S]
 - [ ] Efectos de opcion informan al sistema de misiones M22 [S]
 - [ ] Dialogos de pistas y revelaciones conectados a M23 (templos) [S]
 - [?] Dialogos contextuales por clima/estacion/hora via M29/M31 [S]
@@ -146,7 +146,7 @@
 
 - [ ] NPC desaparece o se aleja durante el dialogo: cierre limpio sin errores [S]
 - [ ] Iniciar dialogo dos veces en el mismo frame: segunda llamada ignorada [S]
-- [ ] Grafo invalido en start_dialogue: feedback por log y fallback [S] — iter 8: gate [VAL-DGV] ahora pasa CLAVES_MUNDO_BASE al validador (rechaza claves desconocidas en runtime, no solo CI)
+- [x] Grafo invalido en start_dialogue: feedback por log y fallback [S] — iter 8: gate [VAL-DGV] ahora pasa CLAVES_MUNDO_BASE al validador (rechaza claves desconocidas en runtime, no solo CI)
 - [ ] Clave de texto ausente en el diccionario: se muestra la clave cruda [S]
 - [ ] Placeholder faltante: se muestra el nombre de la variable entre llaves [S]
 - [ ] Opcion unica con condiciones falsas: rama colapsa a next_id alternativo [S]
@@ -158,14 +158,14 @@
 - [ ] Multiples hablantes en un mismo grafo: retrato y nombre cambian por nodo [S]
 - [ ] Recarga del grafo con datos rotos en caliente: el cache no se corrompe [S]
 - [ ] La UI nunca emite errores si el manager no esta activo [S]
-- [ ] La UI no muta los datos del grafo cacheado: las opciones se copian con duplicate() y la limpieza reasigna en vez de clear() [S]
-- [ ] El diálogo se puede reiniciar N veces sin errores [VAL-DGT] (fix verificado headless) [S]
+- [x] La UI no muta los datos del grafo cacheado: las opciones se copian con duplicate() y la limpieza reasigna en vez de clear() [S]
+- [x] El diálogo se puede reiniciar N veces sin errores [VAL-DGT] (fix verificado headless) [S]
 
 ## I. Optimización (7)
 
 - [ ] Cache de grafos cargados con descarte LRU por limite de memoria [M]
 - [ ] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S]
-- [ ] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S] — iter 9 (Hy3/WorkBuddy): _combinar_estado usa ws.get_snapshot(claves) en vez de N get_value
+- [x] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S] — iter 9 (Hy3/WorkBuddy): _combinar_estado usa ws.get_snapshot(claves) en vez de N get_value
 - [ ] UI oculta con visibility, sin procesos en idle cuando no hay dialogo [S]
 - [ ] Fuentes del modulo M87 con atlas compartido, sin reimport por nodo [S]
 - [ ] Load de JSON asincrono con carga diferida por zona del mapa [M]
