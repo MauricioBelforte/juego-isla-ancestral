@@ -43,7 +43,7 @@
 - [ ] Nivel 2 Hierro: receta M16 + hierro (M46) [M]
 - [ ] Nivel 3 Oro: receta M16 + oro profundo (M46) [M]
 - [ ] Nivel 4 Cristal: receta M16 + cristal de Resonancia (M46) [M]
-- [x] Factores de tiempo: T1=1.0, T2=0.8, T3=0.65, T4=0.5 [S]
+- [x] Factores de tiempo: la velocidad por golpe decae con el nivel (pico 1.2→0.9→0.7→0.5; hacha 1.0→0.8→0.6→0.4; pala 0.8→0.65→0.5→0.35; monótono decreciente; T4≈50% de T1) — valores reales por tipo en `ToolData.STATS`, no factores genéricos únicos [S] *(QA atria-dawn 2026-09-18, Log 1000: la redacción original citaba "T1=1.0, T2=0.8, T3=0.65, T4=0.5" genéricos — no existen en el código; la intención y la monotonía sí se cumplen)*
 - [x] Área 3×3 desde T3 (pico, azada, pala) [S]
 - [ ] Mejoras fabricadas en mesa de trabajo (M16) [S]
 - [ ] Progresión visible (apariencia + brillo por nivel → M45/M65 assets) [M]
@@ -53,7 +53,7 @@
 ## D. Durabilidad y reparación (12)
 
 - [x] Desgaste determinista: 1 por uso (sin aleatoriedad) [M]
-- [x] Durabilidad NUNCA llega a 0 (mínimo 1, inservible; test headless verifica que nunca es negativa) [M]
+- [x] Durabilidad cozy: llega a 0 = inservible, NUNCA negativa y NUNCA desaparece del inventario (test headless verifica límite en 0) [M] *(QA atria-dawn 2026-09-18, Log 1000: la redacción original decía "nunca llega a 0 (mínimo 1)" — falso; `inutilizada()` es `<= 0` y `gastar_uso()` decrementa hasta 0. El propio test del módulo afirma `durabilidad_actual == 0`. La regla cozy real —nunca negativa, nunca se pierde— SÍ se cumple; era un error de redacción del ítem, no del código)*
 - [x] Herramienta inservible no desaparece del inventario [M]
 - [ ] Reparación gratis con recursos del mundo (mesa M16) [M]
 - [ ] Costo de reparación = ½ costo de fabricación (campo receta_reparacion listo; tabla M16) [M]
@@ -169,7 +169,16 @@
 
 **Iteración 4 — 17 ítems [x], 2 ítems [?] honestos. Módulo liberado a 🟡.**
 
-**Totales:** 102 ítems · Completados: 5 · Pendientes: 97 · No resueltos: 0.
+**Totales:** 120 ítems · Completados: 84 · Pendientes: 34 (todos con dueño externo asignado: M16/M17/M33/M35/M45/M46/M53/M59/M65/M22/M71/M12) · No resueltos: 2.
+
+> **QA §21.8 — atria-dawn (Atria-Dawn-Preview) / Kilo Code, 2026-09-18, Log 1000.**
+> Veredicto: **🟡 MANTIENE (honesto).** M13 NO es sobre-cierre. Los 84 [x] son verificados contra código real:
+> - **Tests re-ejecutados con binario Godot 4.7.2 real (headless):** `test_herramientas.gd` 7/7 suites 0 fallos (catálogo 9×4, durabilidad cozy, reparación 20%, serialización roundtrip, acciones por tipo, mapeo block→item, tabla golpes 2-6) + `test_herramientas_iter4.gd` 0 fallos (provider round-trip M59, contrato nombre_id↔M15, cableado M13→M15 end-to-end con drops al inventario M14).
+> - **Código VIVO (no muerto):** `ToolController` se instancia por código en `player.gd:86` como hijo del jugador (a diferencia de M12 donde `camera_rig.gd` jamás se instanciaba). Conectado a `interaction_manager.gd:298`, `progression_manager.gd:187` y `player.gd:130` (E/Q).
+> - **Tablas verificadas ítem por ítem:** `ToolData.STATS` 9 tipos × 4 niveles (durabilidad, velocidad, área 9 desde T3 en pico/azada/pala; martillo y lupa -1 = infinita), `NOMBRES`, `MATERIALES`, `IDS`, `GOLPES`.
+> - **Metadata corregida (2 flips documentales, no de código):** D.2 redacción "nunca llega a 0" → la regla cozy real es "llega a 0 = inservible, nunca negativa, nunca desaparece" (ambos consistente código↔test); C.3 factores de tiempo genéricos citados no existen → valores reales por tipo en STATS (monótonos decrecientes, T4≈50% T1). Totales corregidos (decía "102 ítems · 5 completados" — stale).
+> - **Los 34 [ ] son honestos:** todos pendientes por módulo dueño externo, no trabajo sin hacer del M13. Los 2 [?] de la iter 4 siguen abiertos (verificación in-game V1 por el usuario; refinamiento de puntería M15 sin voxel detrás).
+> - M13 permanece 🟡 (no ✅) correctamente: la DoD requiere todos los [x], y las integraciones de M16/M33/M35 etc. son requisitos de cierre del módulo.
 ## Notas del Agente (Cierre Fase 3 - 2026-08-28)
 
 **Modelo:** Hy3
