@@ -160,3 +160,23 @@ lugar de "requiere QA visual". Contenedor de referencia: **220×40 px** a 16 px.
 - **Aprobación estética del texto:** sigue fuera de alcance. Lo que la iter. 6 demuestra es que el **encaje** se puede medir sin visión; que el resultado *guste* no es medible.
 - **QA visual de las fuentes:** bloqueada de hecho por **BUG-042** (3 de las 4 fuentes de `assets/fonts/` son páginas HTML 404 con extensión `.ttf`; `load()` no devuelve `null` sino un `FontFile` con métricas en cero). Dueño: M46/M88.
 - **Traducción humana del catálogo completo:** el contenido narrativo crece de forma continua; cada clave nueva debe agregarse a es.po y en.po (validar_catalogos lo controla).
+
+## 7. Casos de prueba (iteración 7 — corrección de la regresión M53/M87)
+
+Corrección, no funcionalidad nueva. El objetivo es que la regresión medida **no pueda volver a pasar
+inadvertida**.
+
+| # | Caso | Qué mide | Evidencia |
+|---|------|----------|-----------|
+| C1 | `es.po` / `en.po` sin errores de bytes ni de estructura | R1 sin BOM, R2 sin CRLF, R6 sin `msgstr` vacío, R7 sin `msgid` duplicado | `ValidadorPO.validar_archivo(…, "es")` / `(…, "en")` → `ok=true` |
+| C2 | Paridad es↔en tras agregar las 3 claves | P1 claves faltantes = 0, P3 placeholders desalineados = 0 | `validar_par` → `ok=true` |
+| C3 | Ninguna entrada queda "sin traducir" (P5) | `no_traducidas` vacío: los `msgstr` de `en` no repiten los de `es` | `validar_par` → `no_traducidas = []` |
+| C4 | `SETTINGS.DESCARTAR_MENSAJE` lleva `%s` en ambos idiomas | El llamador hace `_t(clave) % item_name`; sin `%s` la interpolación es un no-op | `placeholders` de la clave = `{printf: ["%s"], printf_n: 1}` en los dos catálogos |
+| C5 | El auditor ve claves pasadas como argumento a `open_confirm` | `RE_CLAVE_ARG1`/`RE_CLAVE_ARG2` sobre un fixture que imita el llamador real (multi-línea, con `% n` en el mensaje) | `usadas_sin_clave` contiene las 2 claves del fixture |
+| C6 | Un texto humano no se confunde con una clave | El patrón exige la forma `MODULO.SECCION.CLAVE` | `open_confirm("¿Seguro?", "DLG.OK", …)` → `DLG.OK` sí, `¿Seguro?` no |
+| C7 | Producción sin claves ausentes (el caso que falló) | `usadas_sin_clave` vacío y `ok=true` sobre `res://scripts` real | bloque G del suite |
+| C8 | Las 2 claves del llamador de M53 dejan de figurar como huérfanas | `claves_sin_uso` ya no las lista | bloque G del suite |
+| C9 | Determinismo | 3 corridas con salida idéntica salvo timestamps y `session id` | `sha256` normalizado igual ×3 |
+
+**Fuera de alcance:** no se convirtieron en error las claves huérfanas (`claves_sin_uso`): son
+legítimas (contenido aún no migrado) y el veredicto del auditor no las mira.

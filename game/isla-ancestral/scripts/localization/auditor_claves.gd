@@ -8,6 +8,8 @@
 #   · presentes en el catálogo pero sin uso literal → huérfanas (o dinámicas)
 #   · construcciones dinámicas (`_t("DIARY.CAT_" + cat)`) → prefijos, no falsos positivos
 #   · claves con contexto gettext (`tr_ctx`) → clave compuesta "MOD.SEC.CTX|CLAVE"
+#   · claves que NO pasan por `_t()`: APIs que reciben la clave como argumento y
+#     traducen adentro (`open_confirm` → `ConfirmPopup.configurar` hace `_t(clave)`)
 #
 # Uso: AuditorClaves.auditar("res://scripts", "res://locales/es.po")
 # ⚠️ class_name nuevo → requiere `--editor --quit` una vez para registrarse.
@@ -20,6 +22,22 @@ const RE_DINAMICA := "_t\\s*\\(\\s*\"([^\"]*)\"\\s*\\+"
 const RE_TRAD := "traducir_clave\\s*\\(\\s*\"([^\"]+)\""
 const RE_TR_KEY := "tr_key\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]*)\""
 const RE_TR_CTX := "tr_ctx\\s*\\(\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\"\\s*,\\s*\"([^\"]+)\""
+
+## APIs que reciben CLAVES como argumentos string: el llamador las traduce adentro
+## (`ConfirmPopup.configurar` hace `_t(title_key)`), así que la clave NO aparece en
+## una llamada `_t()` y el auditor no la veía. Sin estos patrones, una clave usada
+## así y ausente del catálogo se reportaba como huérfana en vez de faltante.
+##
+## Regresión real (M53/M87, Log 1015): `SETTINGS.DESCARTAR_TITULO` y
+## `SETTINGS.DESCARTAR_MENSAJE` se usaban en `inventory_layer.gd` desde M53
+## (`84d975d`) pero nunca entraron al catálogo; el auditor sólo veía
+## `SETTINGS.DESCARTAR` (que sí pasa por `_t()`), así que el hueco pasó inadvertido.
+##
+## Se captura cada POSICIÓN por separado para tolerar llamadas mixtas (un título
+## literal y un mensaje con clave). La forma exigida es MODULO.SECCION.CLAVE, de
+## modo que un texto humano (`open_confirm("¿Seguro?")`) no se marca como clave.
+const RE_CLAVE_ARG1 := "open_confirm\\s*\\(\\s*\"([A-Z][A-Z0-9_]*(?:\\.[A-Z0-9_]+)+)\""
+const RE_CLAVE_ARG2 := "open_confirm\\s*\\(\\s*\"[^\"]*\"\\s*,\\s*\"([A-Z][A-Z0-9_]*(?:\\.[A-Z0-9_]+)+)\""
 
 ## Prefijos de claves que solo existen en tests negativos (fallback / clave literal).
 const PREFIJOS_TEST: Array[String] = ["NOPE.", "TEST."]
@@ -154,6 +172,10 @@ static func _escanear_texto(t: String, archivo: String, inf: Dictionary) -> void
 	for m in _matches(t, RE_TR_CTX):
 		var ctx: String = m.get_string(2) + "." + m.get_string(3) + "." + m.get_string(1) + "|" + m.get_string(4)
 		_registrar(usadas, inf["origenes"], ctx.to_upper(), archivo)
+	for m in _matches(t, RE_CLAVE_ARG1):
+		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
+	for m in _matches(t, RE_CLAVE_ARG2):
+		_registrar(usadas, inf["origenes"], m.get_string(1), archivo)
 
 ## ── Utilidades ───────────────────────────────────────────
 

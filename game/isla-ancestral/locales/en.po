@@ -123,6 +123,15 @@ msgstr "Sort"
 msgid "SETTINGS.APLICAR"
 msgstr "Apply"
 
+msgid "SETTINGS.DESCARTAR"
+msgstr "Discard"
+
+msgid "SETTINGS.DESCARTAR_TITULO"
+msgstr "Discard item"
+
+msgid "SETTINGS.DESCARTAR_MENSAJE"
+msgstr "Are you sure you want to discard %s?"
+
 msgid "npc.catalina"
 msgstr "Catalina"
 

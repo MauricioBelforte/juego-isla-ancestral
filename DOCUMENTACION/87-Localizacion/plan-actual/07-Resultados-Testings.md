@@ -257,3 +257,74 @@ real. El fallo es silencioso por la trampa 3. Dueño: **M46/M88**. Registrado en
 > son páginas HTML 404, así que no hay nada fiable que mirar. Lo que sí se hizo fue convertir en **medición**
 > todo lo que admitía medición. Los 7 ítems `[?]` del checklist tienen dueño nombrado; ningún `[x]` de esta
 > iteración se apoya en una impresión.
+
+## 9. Iteración 7 — corrección de la regresión M53/M87 (2026-09-18, Log 1015)
+
+### 9.1 Qué estaba roto
+
+`scripts/ui/layers/inventory_layer.gd` (M53, commit `84d975d` del 2026-09-17 20:21) usa tres claves
+que **no existían en ninguno de los dos catálogos**:
+
+```gdscript
+_discard_button.text = _t("SETTINGS.DESCARTAR")            # línea 121
+ui_mgr.open_confirm(
+    "SETTINGS.DESCARTAR_TITULO",
+    "SETTINGS.DESCARTAR_MENSAJE" % item_name,              # líneas 374-376
+    _ejecutar_descarte.bind(_selected_slot), Callable())
+```
+
+Consecuencia real, no teórica: el botón renderizaba la clave cruda y **cada corrida headless del
+proyecto** emitía `WARNING: [M87] Clave sin traducción: SETTINGS.DESCARTAR`. El aviso está presente en
+las 31 salidas del barrido de CI de esta iteración, o sea en todos los tests que bootean la escena.
+
+### 9.2 Cómo se midió (y por qué el test decía verde)
+
+El barrido midió el **exit code del proceso** de cada comando neutralizado con `|| true`
+(`subprocess.run` sin shell), no el de la tubería — trampa 75: `godot … | tail; echo $?` devuelve el
+exit de `tail`. Así apareció el único rojo de 31:
+
+```
+L162  M87  ROJO RC=1  SCRIPT_ERROR=0  11.9s
+      | FALLO: auditor real: 0 claves de PRODUCCIÓN ausentes -> ["SETTINGS.DESCARTAR"]
+```
+
+### 9.3 Cifras medidas (antes → después)
+
+| Métrica | Antes | Después |
+|---|---|---|
+| `usadas` (auditor sobre `res://scripts`) | 55 | **57** |
+| `total_claves` (catálogo `es.po`) | 174 | **177** |
+| `usadas_sin_clave` de producción | 1 (`SETTINGS.DESCARTAR`) | **0** |
+| `claves_sin_uso` con `DESCARTAR_*` | 2 | **0** |
+| avisos `Clave sin traducción` por corrida | 1 | **0** |
+| veredicto | `CLAVES SIN TRADUCCIÓN` | **`OK`** |
+
+### 9.4 Suites (×3, determinista)
+
+`test_validador_po_m87.gd` → **RC=0**, **0 `SCRIPT ERROR`**, 9/9 bloques con marca `_fin()`,
+`=== TEST M87 ITER5 (validador .po): 0 fallo(s) ===` y **`sha256` idéntico en las 3 corridas** (con
+timestamps y `session id` normalizados). Las 6 suites de `scripts/localization/` siguen en verde.
+
+Barrido completo de gates propios (31 comandos): **30 verdes en las 3 pasadas** con salida idéntica
+tras normalizar timestamps/duraciones/sesiones (30/31 byte-idénticos; el restante,
+`test_datos_m60.gd`, idéntico **como multiset**: sólo se reordena un log asíncrono de M60 entre líneas
+de `DOM-UI`). El rojo L162 es el corregido acá.
+
+### 9.5 Reporte (NO tocado, por ser ajeno)
+
+El barrido dejó 14 gates de módulos ajenos todavía neutralizados con `|| true`. Dos de ellos están
+**estructuralmente rotos**, y el neutralizador es lo único que evita que el CI falle por un comando
+inválido:
+
+| Línea | Comando | Problema |
+|---|---|---|
+| 33 | `godot --headless --script 2>&1 \|\| true` | `--script` **sin ruta**: no puede funcionar. El paso además imprime `echo "Godot headless lint completed"` incondicional. |
+| 83 | `godot --headless --check-only 2>&1 \|\| true` | `--check-only` **sin ruta**. El `echo "… (exit code: $?)"` de la línea siguiente siempre imprime `0`, porque `$?` es el del `\|\| true`. |
+
+Los otros 12 son tests de M59/M29/M20/M38/M111/M107/M117 y de los jobs `godot-lint` /
+`code-quality-script`. **No se tocaron:** la decisión sobre esos gates no es de M87.
+
+> **Nota de honestidad:** el arreglo de M87 no se apoya en una impresión. Se apoya en el veredicto de un
+> auditor ejecutado sobre el código real, en el recuento de claves antes/después y en 3 corridas con
+> hash idéntico. Lo que **no** se hizo: QA visual del diálogo (bloqueada por BUG-042, 3 de las 4 fuentes
+> son páginas HTML 404) y traducción definitiva de los textos (revisión humana, RN9).

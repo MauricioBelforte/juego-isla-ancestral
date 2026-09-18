@@ -295,3 +295,45 @@ Desglose MEDIDO del suite nuevo: A9 + B5 + C8 + D9 + E5 + F6 + G6 + H6 + I12 + J
 | Integrar M29/M30: fechas y horas localizadas | **M29/M30** | `LocaleUtils.format_date/format_hora` están listas y probadas; falta que el reloj y el calendario las usen |
 
 > **Nota de honestidad:** los 16 pendientes de la iter. 5 **no** se cerraron en bloque. Los que admitían una medición determinista se cerraron con cifras reproducibles; los que dependen de otra UI (M53), de un traductor humano o de otro módulo quedaron `[?]` **con dueño nombrado y motivo medido**. Ningún `[x]` de esta iteración se apoya en una impresión visual: la QA visual sigue bloqueada por BUG-042, y donde no se puede mirar se mide.
+
+## Iteración 7 — corrección de la regresión M53/M87 (DeepSeek-V4.1-Flash / WorkBuddy, 2026-09-18, Log 1015)
+
+Iteración de **corrección**, no de funcionalidad. No cambia el estado de ningún ítem del checklist
+(129 `[x]` / 7 `[?]` / 0 `[ ]`, igual que al cerrar la iter. 6): lo que hace es reparar un defecto que
+el checklist ya daba por cubierto y cerrar el punto ciego que lo dejó pasar.
+
+### Qué se corrigió
+3 claves (`SETTINGS.DESCARTAR`, `_TITULO`, `_MENSAJE`) usadas por M53 (`84d975d`) y ausentes de
+`es.po`/`en.po`. El botón de descarte mostraba la clave cruda y cada corrida headless emitía
+`WARNING: [M87] Clave sin traducción`. `_MENSAJE` se agregó **con `%s`**, porque el llamador interpola
+el nombre del objeto (`_t(clave) % item_name`).
+
+### Causa de raíz
+`AuditorClaves` sólo veía claves dentro de `_t("…")`. Las que se pasan como **argumento** a una API que
+traduce adentro (`open_confirm` → `ConfirmPopup.configurar` → `_t(title_key)`) eran invisibles: las 2
+claves del diálogo figuraban como **huérfanas** del catálogo en vez de **faltantes** del código, así que
+el veredicto daba OK con el bug vivo. Se agregaron `RE_CLAVE_ARG1`/`RE_CLAVE_ARG2` (exigen la forma
+`MODULO.SECCION.CLAVE`, así un texto humano no se marca).
+
+### Cifras medidas
+| Métrica | Antes | Después |
+|---|---|---|
+| `usadas` (auditor real) | 55 | **57** |
+| `total_claves` (`es.po`) | 174 | **177** |
+| `usadas_sin_clave` de producción | 1 | **0** |
+| `claves_sin_uso` con `DESCARTAR_*` | 2 | **0** |
+| veredicto | `CLAVES SIN TRADUCCIÓN` | **`OK`** |
+
+### Suites
+`test_validador_po_m87.gd` **RC=0 / 0 fallos / 0 `SCRIPT ERROR` ×3** con `sha256` idéntico
+(timestamps y `session id` normalizados). Las 6 suites de `scripts/localization/` siguen verdes.
+
+### Por qué el defecto sobrevivió 18 h
+El 2026-09-17 02:52 el gate de M87 en `quality.yml` quedó neutralizado con `|| true` (commit
+`a466ab3`). Esa misma tarde (20:21) M53 agregó las 3 claves: el test **habría** fallado, pero el gate no
+podía hacer fallar nada. En esta iteración se midió el exit **del proceso** (trampa 75) y el rojo
+apareció. Se endureció el gate de M87 (patrón acumulativo) junto con el resto de los gates propios.
+
+### Reporte sin parchear (ajeno)
+14 gates de otros módulos siguen con `|| true`; 2 de ellos son comandos **inválidos**
+(`--script` sin ruta, L33; `--check-only` sin ruta, L83). No se tocaron: no es decisión de M87.

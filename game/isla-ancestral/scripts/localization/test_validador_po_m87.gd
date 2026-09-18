@@ -9,6 +9,10 @@
 # plurales, convención de claves, placeholders y coherencia entre idiomas.
 # iter. 6 (2026-09-15): bloque I — exención P5 declarada en el .po con
 # `#. no-traducir: <motivo>`, para plantillas sin palabras que no son un olvido.
+# iter. 7 (2026-09-18, Log 1015): bloque G — el auditor ahora ve las claves que
+# NO pasan por `_t()` sino como argumento de `open_confirm` (el llamador traduce
+# adentro). Cierra el punto ciego que dejó pasar la regresión M53/M87: las 2
+# claves del diálogo de descarte se usaban desde M53 y no estaban en el catálogo.
 # Ejecutar:
 #   Godot --headless --path game/isla-ancestral --script res://scripts/localization/test_validador_po_m87.gd
 #
@@ -228,6 +232,23 @@ func _test_auditor_claves() -> void:
 	_check(bool(real["ok"]), "auditor real: veredicto OK")
 	_check((real["usadas_sin_clave_solo_tests"] as Array).size() > 0, "auditor real: separa los probes de test")
 	_check((real["claves_dinamicas"] as Array).has("DIARY.CAT_LUGARES"), "auditor real: reconoce claves de prefijo dinámico")
+
+	# Claves que NO pasan por `_t()`: el llamador las traduce adentro
+	# (`open_confirm` → `ConfirmPopup.configurar` → `_t(title_key)`). Punto ciego
+	# que dejó pasar la regresión M53/M87 (Log 1015): las 2 claves del diálogo de
+	# descarte se usaban en `inventory_layer.gd` y no estaban en el catálogo.
+	var con_arg := "ui_mgr.open_confirm(\n\t\"DLG.CONFIRMAR_TITULO\",\n\t\"DLG.CONFIRMAR_MENSAJE\" % n,\n\tcb,\n\tCallable()\n)\n"
+	var inf_arg: Dictionary = AuditorClaves.auditar_texto(con_arg, "fixture_arg.gd", "res://locales/es.po")
+	_check((inf_arg["usadas_sin_clave"] as Array).has("DLG.CONFIRMAR_TITULO"), "auditor ve la clave de TÍTULO pasada a open_confirm (sin `_t()`)")
+	_check((inf_arg["usadas_sin_clave"] as Array).has("DLG.CONFIRMAR_MENSAJE"), "auditor ve la clave de MENSAJE pasada a open_confirm (sin `_t()`)")
+	# Un texto humano literal no se confunde con una clave, pero no tapa la posición 2.
+	var lit := "ui_mgr.open_confirm(\"\u00bfSeguro?\", \"DLG.OK\", cb, Callable())\n"
+	var inf_lit: Dictionary = AuditorClaves.auditar_texto(lit, "fixture_lit.gd", "res://locales/es.po")
+	_check(not (inf_lit["usadas_sin_clave"] as Array).has("\u00bfSeguro?"), "un literal humano no se marca como clave")
+	_check((inf_lit["usadas_sin_clave"] as Array).has("DLG.OK"), "llamada mixta: la posición con clave sí se captura")
+	# Y las claves del llamador real de M53 ya no figuran como huérfanas.
+	_check(not (real["claves_sin_uso"] as Array).has("SETTINGS.DESCARTAR_TITULO"), "la clave de título de M53 deja de ser huérfana")
+	_check(not (real["claves_sin_uso"] as Array).has("SETTINGS.DESCARTAR_MENSAJE"), "la clave de mensaje de M53 deja de ser huérfana")
 	print(AuditorClaves.formatear_informe(real))
 	_fin("auditor")
 

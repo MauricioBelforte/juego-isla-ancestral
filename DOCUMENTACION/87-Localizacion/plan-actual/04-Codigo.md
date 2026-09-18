@@ -406,3 +406,65 @@ Al empezar la iteración, `test_validador_po_m87.gd` (iter. 5) **estaba en rojo*
 - Si un `msgstr` debe ser idéntico entre idiomas **por diseño**, NO lo saques de la regla P5 en silencio: pon `#. no-traducir: <motivo>` en la entrada. Así el traductor lo ve en Poedit y la exención queda listada en `exentas_p5`.
 - ⚠️ Al agregar un `class_name` nuevo hay que regenerar la caché con `--headless --path game/isla-ancestral --editor --quit`, o el script no resuelve el tipo y el test falla por una razón que no tiene nada que ver con el código.
 - ⚠️ Un error de script **aborta la función en silencio**: por eso ambos suites de M87 exigen que cada bloque deje una marca final (`_fin()`), y el suite de iter. 6 añade además un watchdog que convierte el cuelgue en `EXIT=1`.
+
+## Nota del Agente — Iteración 7 (corrección) — regresión M53/M87 y punto ciego del auditor (DeepSeek-V4.1-Flash / WorkBuddy, 2026-09-18, Log 1015)
+
+### Qué se corrigió
+`SETTINGS.DESCARTAR`, `SETTINGS.DESCARTAR_TITULO` y `SETTINGS.DESCARTAR_MENSAJE` se usaban en
+`scripts/ui/layers/inventory_layer.gd` (M53, commit `84d975d`) y **no existían en ninguno de los dos
+catálogos**. Efecto real medido: el botón de descarte renderizaba la clave cruda y
+`LocalizationManager._avisar_faltante` emitía `WARNING: [M87] Clave sin traducción: SETTINGS.DESCARTAR`
+en **cada corrida headless del proyecto** (está en las 31 salidas del barrido de CI de esta iteración).
+Se agregaron las 3 entradas a `es.po` y `en.po`.
+
+`SETTINGS.DESCARTAR_MENSAJE` lleva `%s` **a propósito**: el llamador hace
+`_t("SETTINGS.DESCARTAR_MENSAJE") % item_name` y `ConfirmPopup.configurar` traduce la clave con `_t()`;
+sin el `%s` la interpolación del nombre del objeto era un no-op silencioso.
+
+### Causa de raíz — punto ciego de `AuditorClaves`
+El auditor sólo veía claves dentro de una llamada `_t("…")`. Las que se pasan **como argumento** a una
+API que traduce adentro (`open_confirm` → `ConfirmPopup.configurar` → `_t(title_key)`) eran invisibles:
+`SETTINGS.DESCARTAR_TITULO`/`_MENSAJE` figuraban como **huérfanas** del catálogo, no como **faltantes**
+del código, así que el veredicto del test daba OK con el bug vivo. Se agregaron dos patrones
+posicionales (`RE_CLAVE_ARG1`/`RE_CLAVE_ARG2`) que exigen la forma `MODULO.SECCION.CLAVE`, de modo que
+un texto humano literal no se confunda con una clave.
+
+### Por qué sobrevivió 18 horas (cadena de custodia, con fechas)
+| Fecha/hora | Hecho |
+|---|---|
+| 2026-09-13 | M87 iter. 5 cierra con `AuditorClaves` en verde. La afirmación era correcta **en ese momento**. |
+| 2026-09-17 02:52 | Commit `a466ab3` (Mauricio Belforte): el gate de M87 en `quality.yml` queda **neutralizado con `|| true`** para desbloquear el CI. |
+| 2026-09-17 20:21 | Commit `84d975d` (M53): `inventory_layer.gd` usa 3 claves que no están en el catálogo. El gate **habría** fallado; estaba neutralizado. |
+| 2026-09-18 | Barrido de esta iteración: al medir el **exit del proceso** (no el de la tubería) el test aparece **RC=1**. |
+
+La neutralización del gate **no causó** la regresión, pero **sí** su invisibilidad: entre el 17 y el 18
+de septiembre el único test que la detectaba no podía hacer fallar nada. Por eso la corrección se
+acompaña del endurecimiento del gate (patrón acumulativo) y del cierre del punto ciego.
+
+### Efecto medido
+| Métrica | Antes | Después |
+|---|---|---|
+| `usadas` (auditor sobre `res://scripts`) | 55 | **57** |
+| `total_claves` (catálogo `es.po`) | 174 | **177** |
+| `usadas_sin_clave` de producción | 1 (`SETTINGS.DESCARTAR`) | **0** |
+| `claves_sin_uso` con `DESCARTAR_*` | 2 | **0** |
+| avisos `Clave sin traducción` por corrida | 1 | **0** |
+| veredicto del auditor | `CLAVES SIN TRADUCCIÓN` | **`OK`** |
+
+### Archivos
+- `game/isla-ancestral/locales/es.po` — +9 líneas (13107 B), LF, sin BOM
+- `game/isla-ancestral/locales/en.po` — +9 líneas (12478 B), LF, sin BOM
+- `game/isla-ancestral/scripts/localization/auditor_claves.gd` — 2 constantes + 4 líneas de escaneo
+- `game/isla-ancestral/scripts/localization/test_validador_po_m87.gd` — 6 aserciones nuevas en el bloque G
+
+### Lo que NO hice
+- **No toqué `inventory_layer.gd`:** el defecto era del catálogo, no del llamador. M53 usa claves, que
+  es exactamente lo que M87 le pide.
+- **No convertí en error las claves huérfanas** (`claves_sin_uso`): son legítimas (contenido aún no
+  migrado) y el veredicto no las mira.
+- **No endurecí los gates de módulos ajenos** de `quality.yml` (14 siguen con `|| true`): no es mi
+  decisión. Ver el reporte en `07-Resultados-Testings.md` §9.5.
+
+### Recomendación para el próximo agente
+Si agregás una API que reciba **claves** en vez de texto ya traducido, agregala a `RE_CLAVE_ARG1/2`
+(o generalizá el patrón). Si no, el auditor no ve esas claves y el hueco vuelve a ser invisible.

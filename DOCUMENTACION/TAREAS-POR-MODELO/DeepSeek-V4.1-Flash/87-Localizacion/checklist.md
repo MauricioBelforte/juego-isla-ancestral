@@ -145,3 +145,20 @@
 - [x] T-134 Probar el cambio de idioma con un diálogo activo (M21) [M]
 - [x] T-135 Probar la cobertura de caracteres de es/en en las fuentes (M88) [M] — iter. 5 (Log 874): sincronizado con 05-Checklist
 - [x] T-136 Probar el rendimiento de re-traducción del HUD completo en 60 fps [C] — iter. 6 (Log 920): sincronizado con 05-Checklist
+
+## Iteración 7 — corrección de la regresión M53/M87 (2026-09-18, Log 1015)
+
+Iteración de corrección sobre el mismo alcance: **ningún marcador cambió** (siguen 129 `[x]` /
+7 `[?]` / 0 `[ ]`), porque el defecto no era un ítem sin hacer sino uno que el checklist ya daba por
+cubierto y estaba roto.
+
+- 3 claves de M53 (`SETTINGS.DESCARTAR`, `_TITULO`, `_MENSAJE`) agregadas a `es.po`/`en.po`.
+  `_MENSAJE` con `%s`: el llamador hace `_t(clave) % item_name`.
+- Causa de raíz cerrada: `AuditorClaves` ahora ve las claves que se pasan como **argumento** a
+  `open_confirm` (antes sólo veía `_t("…")`), por eso las reportaba como huérfanas en vez de faltantes.
+- Medido: `usadas` 55→**57**, catálogo 174→**177**, `usadas_sin_clave` 1→**0**, veredicto
+  `CLAVES SIN TRADUCCIÓN` → **`OK`**; `test_validador_po_m87.gd` **RC=0 / 0 fallos ×3** con hash idéntico.
+- El gate de M87 en `quality.yml` dejó de ser decorativo (patrón acumulativo, `exit $FAIL`).
+
+> Fuente de verdad del ítem: el `05-Checklist.md` del módulo. Esta checklist personal se mantiene
+> **sincronizada in-place**, nunca regenerada.

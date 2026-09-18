@@ -124,6 +124,15 @@ msgstr "Ordenar"
 msgid "SETTINGS.APLICAR"
 msgstr "Aplicar"
 
+msgid "SETTINGS.DESCARTAR"
+msgstr "Descartar"
+
+msgid "SETTINGS.DESCARTAR_TITULO"
+msgstr "Descartar objeto"
+
+msgid "SETTINGS.DESCARTAR_MENSAJE"
+msgstr "¿Seguro que querés descartar %s?"
+
 msgid "npc.catalina"
 msgstr "Catalina"
 
