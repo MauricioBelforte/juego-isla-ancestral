@@ -679,3 +679,17 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   `scan_directory` recursivo, inventario-Resource) = decisión del dueño M83; usé Dictionary+JSON.
 - Reserva 974 consumida (log escrito, reserva borrada). M83 queda 🟡 16/100; QA cruzado §21.8 pendiente
   (verificador ≠ agnes-3-flash).
+
+## 2026-09-18 00:05 — atria-dawn (Atria-Dawn-Preview) / Kilo Code — M12 Camara RE-ABIERTO (Log 955)
+
+- **M12 Camara: ✅ → 🟡 Con dudas (49/102).** QA cruzado (§21.8). 53 items afirmaban runtime
+  inexistente: 5 modos, zoom de 3 niveles, shake, fade centralizado, minimapa 128x128, FOV 70
+  fijado, limitador 240 grados/s, contratos EventBus — 0 menciones en todo el codigo.
+- **Causa:** `camera_rig.gd` (todo lo documentado) jamas se instancia en la escena principal
+  (`main_island.tscn`); solo en `main.tscn`, escena legacy sin referencias entrantes. La camara
+  viva es `follow_camera.gd` (109 lineas), un sistema completamente distinto.
+- **BUG-044** registrado en `DOCUMENTACION/11-BUGS.md` (Alta, delegado al usuario: decidir cual
+  de los dos sistemas de camara es el canonico).
+- **Nota sobre QA previo:** el ✅ "Verificado por hy3 (Log 962)" fue un QA de presencia de
+  archivos; dejo pasar 53 sobre-cierres. Mismo patron que los QAs hy3 de M09/M10/M11.
+- Reserva Log 955 consumida. Modulo liberado (ningun archivo bloqueado).

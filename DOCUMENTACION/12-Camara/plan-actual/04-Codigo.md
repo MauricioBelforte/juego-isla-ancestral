@@ -64,3 +64,63 @@ data/camera/camera_settings.tres       → sensibilidad, distancias, fov
 
 - El VoxelViewer ahora SIGUE al jugador (main_island._process) — sin esto el borde del
   mundo se ve CUADRADO (10.1 de la guia Godot). La camara no cambio.
+
+
+## Notas del Agente (2026-09-18 - atria-dawn / Kilo Code, QA cruzado, Log 955)
+
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Estado:** QA ejecutado - modulo bajado de OK a DUDAS (53 flips en 05-Checklist.md)
+
+### Divergencia critica entre este documento y el codigo real
+
+La seccion 2 de este archivo dice "implementacion prevista" y la seccion 1 dice "No crea scripts
+todavia". Sin embargo el `05-Checklist.md` firme 102/102 items como cumplidos, muchos de ellos
+afirmando comportamiento en runtime (modos, fade, shake, minimapa, zoom de 3 niveles). Esa es la
+inconsistencia que el QA revirtio.
+
+### Estado real de los 6 archivos previstos
+
+| Archivo | Estado |
+|---|---|
+| `scripts/camera/camera_mode.gd` | EXISTE - enum ModoCamara, ZOOM_LEVELS, PITCH_ANGLES, helpers estaticos |
+| `scripts/camera/camera_spring.gd` | EXISTE - cableado solo en main.tscn (escena muerta) |
+| `scripts/camera/camera_fade.gd` | NO EXISTE - 0 menciones de fade_screen/transition_finished en el proyecto |
+| `scripts/camera/camera_shake.gd` | NO EXISTE - trigger_shake se mergeo dentro de camera_rig.gd (linea 201) |
+| `scripts/camera/minimap_view.gd` | NO EXISTE - MINIMAP es solo un valor del enum |
+| `data/camera/camera_settings.tres` | NO EXISTE - la carpeta data/camera/ no existe; la config real vive en el autoload GameSettings |
+
+### Archivo no previsto que es el nucleo real
+
+`scripts/camera/camera_rig.gd` (267 lineas, class_name CameraRig) implementa los 5 modos, zoom por
+niveles, shake y pivot - **pero jamas se instancia en la escena principal del juego**
+(`run/main_scene = res://scenes/main_island.tscn`). Solo vive en `scenes/main.tscn` +
+`scripts/main.gd`, que no es la escena principal y no tiene ninguna referencia entrante. Es codigo
+muerto.
+
+La camara que realmente corre el juego es `scripts/follow_camera.gd` (109 lineas), instanciada en
+`main_island.tscn:70-73`. No tiene modos, ni niveles de zoom (continuo 4-20 m), ni shake, ni fade,
+ni minimapa; su yaw es orbit libre del mouse (contradicen la recomendacion "direccion de camara =
+direccion del personaje" de este mismo archivo). SI implementa colision por voxel raycast,
+seguimiento suave, y consumo del autoload GameSettings (mouse_sensitivity, invert_y, persistido).
+
+### Contratos de la seccion 3
+
+`EventBus.ui.camera_mode`, `EventBus.ui.shake_requested`, `camera_mode_changed`, `camera_state` en
+GameState.M12: **0 menciones en todo el codigo del proyecto**. Ningun consumidor existe. La
+senal `mode_changed` que camera_rig.gd declara (linea 7) tampoco tiene conexiones.
+
+### Bug registrado
+
+- **BUG-044**: dos sistemas de camara paralelos; el documentado (camera_rig.gd) es codigo muerto.
+  Requiere decision del usuario antes de cualquier cambio: integrar el rig en main_island.tscn, o
+  reescribir la documentacion para describir follow_camera.gd.
+
+### Recomendaciones para el proximo agente
+
+1. No tocar follow_camera.gd hasta resolver BUG-044: es la unica camara que el juego usa.
+2. La seccion 2 y 3 de este archivo deben reescribirse una vez resuelto BUG-044.
+3. Si se integra camera_rig.gd: conectar `set_player_pivot`, cablear modos desde M17/M21/M22, e
+   implementar fade y minimapa (ambos ausentes por completo).
+4. `camera_spring.gd` y el raycast de follow_camera.gd duplican la misma responsabilidad
+   (colision de camara contra terreno): unificar al integrar.

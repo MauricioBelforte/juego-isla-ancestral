@@ -1690,3 +1690,72 @@ debe aprobar, porque el perfil del terreno se congeló deliberadamente (Log 791)
 - Cadenas relacionadas: M09 (Log 944) documentó que el generador no consume las recetas
   de biomas de M09; este bug es otra consecuencia de que la lógica de biomas es
   ad-hoc del generador en vez de data-driven.
+
+## BUG-044: modulo M12 Camara — dos sistemas paralelos; el documentado es codigo muerto
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA cruzado M12, Log 955)
+- **Modulo:** M12 Camara
+- **Severidad:** Alta (arquitectura)
+- **Estado:** [?] Delegado
+
+### Sintoma
+
+El `05-Checklist.md` del M12 firme 102/102 items como cumplidos, afirmando comportamiento en
+runtime: 5 modos de camara (Explore/Build/Dialog/Cutscene/Minimap), zoom de 3 niveles (2.5/5/8 m),
+shake narrativo, fade centralizado, minimapa 128x128, FOV 70 fijado, limitador de rotacion
+240 grados/s. **Ninguno de esos comportamientos existe en la escena que el juego ejecuta.**
+
+### Causa raiz
+
+Existen dos sistemas de camara paralelos:
+
+1. **`scripts/camera/camera_rig.gd`** (267 lineas, CameraRig.tscn, camera_mode.gd, camera_spring.gd):
+   implementa todo lo que el modulo documenta. Pero **jamais se instancia en la escena principal**
+   (`run/main_scene = res://scenes/main_island.tscn`). Solo esta cableado en `scenes/main.tscn` +
+   `scripts/main.gd`, escena que no es la principal y no tiene ninguna referencia entrante desde
+   ningun .gd ni .tscn del proyecto. **Es codigo muerto.**
+
+2. **`scripts/follow_camera.gd`** (109 lineas, instanciada en `main_island.tscn:70-73`): la camara
+   que realmente corre el juego. Un solo modo, zoom continuo 4-20 m por scroll, yaw de orbit libre
+   del mouse, colision por voxel raycast, sin shake, sin fade, sin minimapa, sin FOV fijado.
+
+Ademas, los contratos de integracion documentados (seccion 3 de `04-Codigo.md`) no existen:
+`EventBus.ui.camera_mode`, `EventBus.ui.shake_requested`, `camera_mode_changed`,
+`camera_state` en GameState.M12 tienen **0 menciones** en todo el codigo del proyecto. Y de los 6
+archivos previstos en la seccion 2, solo existen 2 (camera_mode.gd, camera_spring.gd); faltan
+camera_fade.gd, camera_shake.gd, minimap_view.gd y data/camera/camera_settings.tres (carpeta
+inexistente — la config real es el autoload GameSettings).
+
+### Pasos para reproducir
+
+1. Abrir `game/isla-ancestral/project.godot`: `run/main_scene = "res://scenes/main_island.tscn"`.
+2. Abrir `scenes/main_island.tscn`: el nodo camara es un Camera3D plano con
+   `scripts/follow_camera.gd`. No hay ningun nodo CameraRig en la escena.
+3. Buscar `CameraRig|camera_rig` en todos los .tscn: aparece en `main.tscn` y `CameraRig.tscn`
+   solamente.
+4. Buscar `set_mode(|camera_mode_changed|shake_requested|fade_screen|transition_finished` en
+   todos los .gd: **0 resultados** (fuera del propio camera_rig.gd).
+
+### Impacto
+
+- Todo el M12 (documentado como OK por un QA anterior) es especificacion, no implementacion.
+- `camera_spring.gd` (colision spring-arm) duplica la logica de colision de follow_camera.gd.
+- Los modulos consumidores M13 (hotbar), M15, M17 (modo Build), M21 (Dialog), M22 (Cutscene) no
+  tienen ninguna camara de modo con la que integrarse.
+
+### Por que no lo resuelve este agente
+
+Requiere una decision de diseno del **usuario**: conservar `camera_rig.gd` (integrandolo en
+main_island.tscn y reimplementando fade + minimapa ausentes) o conservar `follow_camera.gd`
+(reescribiendo toda la documentacion del M12 para describir lo que realmente hay). Ambas opciones
+implican descartar trabajo ya hecho. Ademas, al integrar el rig se romperia temporalmente el hito
+M1 (la unica camara jugable hoy es follow_camera.gd).
+
+### Documentacion de soporte
+
+- `DOCUMENTACION/12-Camara/plan-actual/05-Checklist.md` — 53 items flagueados, seccion QA anexada.
+- `DOCUMENTACION/12-Camara/plan-actual/04-Codigo.md` — seccion "Notas del Agente (2026-09-18)".
+- `Logs/955-QA-M12-Camara_*.md`.
