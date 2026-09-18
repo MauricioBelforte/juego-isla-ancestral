@@ -334,4 +334,36 @@
 - backup_manager.gd (M107) no parsea en headless: `DirAccess.new()` sobre clase abstracta. Candidato a fix.
 - El patron "test SceneTree sin GdUnit4" funciono bien para utils puras; replicar en M117/M122.
 
+## QA cruzado §21.8 — iter. 4 (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1032; verificador ≠ autor muse-spark-1.3-contributor)
+
+> Verificación independiente del cierre 209/209 (Log 891/909). Re-grounding **sustantivo** (no solo "tests
+> verdes"): cada claim de iter. 4 verificada contra el artefacto real.
+
+### Verificación (godot 4.7.2 headless, 2026-09-18)
+- **`test_m111_utils_headless.gd` re-ejecutado: `M111-UTILS-P1: passed=62 failed=0` + `OK`** — coincide
+  exacto con la claim "62 checks, 0 fallos". 0 `SCRIPT ERROR` propios. ✅
+- **9/9 archivos M111 existen en código:** `math_utils.gd`, `validation_utils.gd`, `format_utils.gd`,
+  `game_constants.gd`, `game_enums.gd`, `state_machine.gd`, `factory.gd`, `command.gd`, `strategy.gd`.
+  El cierre `[x]` de los 35 ítems de utilidades está **respaldado en disco** (no es [x] vacío). ✅
+- **FIX `Factory.create()` confirmado en código:** `func create(id: String, context: Variant = null) -> Variant`
+  (el bug Object→Variant que el autor documenta ya está aplicado). ✅
+- **Checklist consistente:** conteo real `209 [x] · 0 [ ] · 0 [?]` = fila global 209/209 (no stale). ✅
+- **Test cableado en `quality.yml`** (línea 178).
+
+### Hallazgo (no revierte el 209/209, es seguimiento)
+- **Gate SUAVE, no duro:** el paso M111 en `quality.yml` usa `godot --headless -s ... || true` → el CI
+  **NO falla** si un check de M111 fallara. Es **documentado por el autor** (su `[?]` honesto): el test
+  bootea el proyecto completo (autoloads) y el **exit global es 1 por errores preexistentes ajenos a M111**
+  (`backup_manager.gd` `DirAccess.new()` abstracto + **68 leaks ObjectDB** + **14 resources in use** al
+  salir, dueño M107/core). Verifiqué ese exit global 1 al re-ejecutar (leaks/resources reales en la salida).
+  → **Recomendación a M111/M107:** para convertirlo en gate **duro** (`|| FAIL=1` como M52/M116), hay que
+  aislar el test o resolver el exit global 1 preexistente. No lo cierro aquí (dueño M107/core).
+- Comparación: el gate de **M52 usa `|| FAIL=1` (duro)**; M111 es la excepción documentada.
+
+### Veredicto §21.8
+- **M111 iter. 4 = CUMPLE §21.8** (verificador ≠ autor, re-grounding + headless + 9/9 archivos + fix
+  confirmado + 209/209 consistente). **Cero falsos-verdes** en el `[x]` (todo respaldado en código).
+- El módulo puede mantenerse **✅**. El único item abierto es el **gate duro vs suave** (documentado,
+  dueño M107/core) — no bloquea el ✅.
+
 
