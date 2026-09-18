@@ -203,10 +203,10 @@
 - [x] Registry sin TimeCalendar no rompe [S]
 - [x] dedup de avistamiento no bloquea primer avistamiento (fix Log 429) [S]
 - [x] Restore de save con version antigua no sobreescribe [S]
-- [x] [M09] Spawner real con burbuja 72m y filtros bioma/hora [C] — KnownIssue no bloqueante DoD: dueño M09; spawner basico en fauna_registry.gd. Avanzar cuando M09 exponga get_height/bioma por coordenada.
+- [x] [M09] Spawner real con burbuja 72m y filtros bioma/hora [C] — KnownIssue no bloqueante DoD: dueño M09. **⚠️ QA atria-dawn 2026-09-18 (Log 1008): NO hay spawner básico en fauna_registry.gd (0 menciones de "spawn"/"spawner" en ese archivo); `fauna_manager.gd:6-7` solo documenta la intención en comentarios.** El claim original afirmaba código existente — corregido a "pendiente, sin código". Avanzar cuando M09 exponga get_height/bioma por coordenada.
 - [x] [M09] Caches de spawn por bioma [M] — KnownIssue no bloqueante DoD: dueño M09; implementacion deferred a spawner M09.
 - [x] [M65] Movimiento real via NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M65; movimiento basico ya opera. Avanzar cuando M65 tenga navmesh.
-- [x] [M32] Reaccion de fauna a clima (lluvia/tormenta) [M] — KnownIssue no bloqueante DoD: dueño M32 (Clima); hook EventBus.weather.clima_cambio preparado en fauna_registry.gd. Avanzar cuando M32 emita seniales.
+- [x] [M32] Reaccion de fauna a clima (lluvia/tormenta) [M] — KnownIssue no bloqueante DoD: dueño M32 (Clima). **⚠️ QA atria-dawn 2026-09-18 (Log 1008): NO hay hook EventBus.weather.clima_cambio preparado — 0 menciones de "clima"/"weather"/"lluvia"/"tormenta" en fauna_registry.gd ni fauna_behavior.gd.** El claim original afirmaba el hook listo — corregido a "pendiente, sin código". Avanzar cuando M32 emita seniales.
 - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45; faunas funcionan con placeholders geometricos. Avanzar cuando M45 entregue GLBs.
 - [x] [M55/M37] UI de diario de fauna y museo [C] — KnownIssue no bloqueante DoD: dueño M55 (Diario) + M37 (Museo); datos de avistamientos existen en fauna_registry. Avanzar cuando M55/M37 existan.
 - [x] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implementada en behavior.gd. Avanzar con navmesh M65.
