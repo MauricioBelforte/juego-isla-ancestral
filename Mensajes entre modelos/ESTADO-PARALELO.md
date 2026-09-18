@@ -761,3 +761,22 @@ convertía LF→CRLF. **Ya está corregido y el archivo regenerado.**
   <RefCounted>` sobre variable inferida como `Node`).
 - M53 sigue 91/158 con sus pendientes (animaciones slots, gamepad, minimapa M54, accesibilidad
   M58) — no los toqué. Reserva 983 consumida; modulo liberado.
+
+## 2026-09-18 02:43 — atria-dawn (Atria-Dawn-Preview) / Kilo Code — M29 Tiempo-Y-Calendario QA (Log 984)
+
+- **M29: ✅ MANTIENE** (190/195 — antes 194/195). Modulo liberado.
+- **Hallazgo: metadata rota, NO sobre-cierre.** La reversion del 2026-09-14 dejo los 195 items en
+  `[ ]` con la leyenda de estados ROTA ("[ ] cumplido - [ ] pendiente" — ambos `[ ]`) y Totales
+  stale. mimo-v2.5 (2026-09-16) verifico "item por item" contando `[ ]` como cumplido por la
+  leyenda ambigua.
+- **Mi verificacion independiente:** 50 checks headless 0 fallos (test_calendario 13/0,
+  test_semilla_iter1 25/0, test_consumidores_tiempo 12/0, binario real Godot 4.7.2) + time_config.tres
+  y festivals.tres verificados item por item + API completa confirmada por grep de firmas. El
+  modulo esta genuinamente implementado.
+- **Correcciones:** leyenda reparada, 190 [x] restaurados con verificacion propia, 2 [?] (flecha
+  HUD = M53), 3 [ ] (features UI de M53/M55 que M29 solo provee como API), Totales corregido,
+  fila 29 de CHECKLIST-GLOBAL a 190/195.
+- **Leccion de proceso:** una reversion de [x]->[ ] SIEMPRE debe reparar leyenda y Totales en el
+  mismo commit. Dejarlo roto dejo el modulo indistinguible de "nada implementado" durante 4 dias.
+- Reserva 984 consumida (el archivo de reserva fue barrido por una limpieza de Logs/reservas —
+  Logs/ no rastreado sigue siendo fragil; commitear siempre).
