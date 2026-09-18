@@ -317,3 +317,34 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 - **Recomendación (dueño M52/M61):** validar el effecto de **turbulencia** contra el presupuesto de
   partículas (24 FPS en la captura); las otras iteraciones (polen, caja ancha) parecen sanas.
 - **No afirmo "aprobado visualmente"**: esto es V2-asistencia; el cierre estético es del usuario.
+
+## QA cruzado §21.8 — iter. 6 (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1030; verificador ≠ autor DeepSeek-V4.1-Flash)
+
+> Verificación independiente del cierre iter. 6 (Log 1002). Re-grounding **sustantivo** (no solo "tests
+> verdes"): cada claim de iter. 6 verificada contra el artefacto real.
+
+### Verificación (godot 4.7.2 headless + python, 2026-09-18)
+- **5 suites M52 re-ejecutadas → 181 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR` propios:**
+  catalog 4 + director 4 + factory 8 + **iter6 76** + pool 89 = **181** (coincide exacto con la claim
+  "181 checks · 0 fallos en 5 suites"). ✅
+- **Generador `tools/vfx/gen_vfx_catalog.py --check`: OK, exit 0** — "catalogo 31 entradas, 12 loops,
+  21 con bus, 10 con dueno_evento; plan cubierto 24/24; vfx_catalog.json **coincide** con el generador"
+  (sin drift). ✅
+- **Claim "13 buses verificados contra `event_bus.gd`": CONFIRMADA** — el catálogo trae **13 buses
+  únicos**; los 13 resuelven a señales reales de `scripts/core/event_bus.gd` (0 sin resolver, verificado
+  con un script headless). ✅
+- **Claim "31 entradas / 24/24 nombres del plan": CONFIRMADA** (`vfx_catalog.json` = 31; `--check` 24/24).
+- **Presupuesto de perf (RF3/RF14):** las **31/31** entradas llevan campo `presupuesto` (+ `emision`,
+  `emisor`, `luz_por_particula`). El **flag de turbulencia 24 FPS** (mi QA V2 previa + M61) queda
+  **modelado a nivel de data** (cada efecto con `presupuesto`); la validación runtime de FPS bajo carga
+  sigue siendo de M61/load-test (V2), no lo cierro headless.
+
+### Veredicto §21.8
+- **Cero falsos-verdes detectados:** el progreso es consistente (checklist `[x]`=137 = fila global
+  137/148, no stale); las claims de iter. 6 se respaldan en código/data.
+- **Los 10 `[ ]` + 1 `[?]` están abiertos legítimamente** con dueño: presets/triggers "Definir..." de
+  M48/M90/M47/M53/M58 + cozy + escena pivote (diseño), y el `[?]` "Catálogo de VFX por evento" deferred a
+  M44/M92. Ninguno es un cierre falso.
+- **M52 iter. 6 CUMPLE §21.8** (verificador ≠ autor, re-grounding + headless). ✅
+- **Queda (no bloquea el ✅ de iter. 6):** los 10 `[ ]` de diseño/dueño + validación runtime perf de
+  turbulencia (M61/load-test V2) + los `[ ]` visuales de M45/M47.

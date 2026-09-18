@@ -1,3 +1,4 @@
+| **M52 Particulas-Y-VFX - QA cruzado §21.8 de iter. 6 (Log 1030)** | **agnes-3-flash (Sapiens AI)/Kilo Code** | **2026-09-18** | **VERIFICADO (§21.8, verificador ≠ autor DeepSeek-V4.1-Flash):** re-grounding sustantivo. 5 suites M52 re-ejecutadas → **181 checks, 0 fallos** (catalog 4 + director 4 + factory 8 + iter6 76 + pool 89), exit 0, 0 `SCRIPT ERROR` propios. `gen_vfx_catalog.py --check` **OK** (31 entradas, 12 loops, 21 con bus, 24/24 plan, sin drift). **Claim "13 buses verificados contra event_bus.gd" confirmada** (13 buses únicos, 0 sin resolver). Presupuesto de perf modelado en 31/31 entradas (liga el flag de turbulencia 24 FPS M61 a data). **Cero falsos-verdes** (progreso consistente 137/148); los 10 `[ ]`+1 `[?]` abiertos legítimos con dueño (M48/M90/M47/M53/M58/cozy/pivote + M44/M92). M52 iter. 6 CUMPLE §21.8. |
 | **M117 Build-System - iteracion 2 (Log 941)** | **muse-spark-1.3-contributor/Cline** | **2026-09-16** | **LIBERADO: auditoria de 53 `[ ]` contra codigo/config real. 33 `[x]` con evidencia (bump_version 11/11, changelog 6/6, gates CI en YAML, preset Windows+M116, canales por tipo) + 20 `[?]` honestos con dueno (M118/M96/M116/M113/build-real). **Checklist del modulo (110 items reales): `59 [x]`/`51 [ ]` → `92 [x]` / `0 [ ]` / `18 [?]`.** Correccion de conteo: la fila declaraba `66/119`; el denominador real son 110 (la fila sumaba Evidencia+Reserva). `test_build_m117.gd` existente NO corre aislado (bootea escena principal, 58 leaks ObjectDB preexistentes ajenos) → `[?]` M118. Reserva 902 consumida sin log (relevada y cerrada en 941); reserva 941 borrada al escribir el log. ✅ **Verificado por Hy3/WorkBuddy (Log 947, sec21.8):** re-grounding OK; headless 14/0 x3 (EXIT 0, 0 SCRIPT ERROR); CI Python 11/11 + 6/6; 05-Checklist 93/0/23 (0 [ ] real, cumple sec24); 23 [?] diferidos con dueno no bloquean. Cumple sec21.8.** |
 | **M111 Codigo-De-Calidad - iteracion 4 relevo + sincronizacion (Log 891→909)** | **muse-spark-1.3-contributor/Cline** | **2026-09-14** | **CERRADO: relevo ox-alpha (fuera del proyecto, directiva usuario). 35 items [ ] sincronizados con codigo real de Hy3 (Log 771). Test headless nuevo test_m111_utils_headless.gd: 62 checks, 0 fallos (Godot 4.7.2 real). FIX bug real Factory.create Object→Variant. Test cableado en quality.yml (YAML OK). 209/209. Pendiente QA cruzado §21.8 por otro modelo.** |
 
@@ -932,3 +933,30 @@ sería peor que la ausencia declarada.
 **Nota de numeración (ajena):** la **colisión 1011** (mi `1011-M60-Iter5` vs el
 `1011-M128` de agnes) quedó **resuelta** (agnes renumeró). Aparece una **nueva 1013**
 (agnes M128 vs atria-dawn M14 QA), ya declarada por agnes en este mismo archivo.
+
+## 2026-09-18 18:35→18:45 — agnes-3-flash (Sapiens AI) / Kilo Code — M66 RECLAMADO → LIBERADO (iter. gate CI, Log 1018)
+
+- **M66 Anti-Softlock: 🟡 Con dudas 110/117 → 🔵 → 🟡 Liberado (iter. agnes gate CI).** Perfil A
+  (data-driven + tooling/CI + V0).
+- **Gap CI cerrado:** los 2 tests M66 (`test_anti_softlock_m66.gd` + `test_fallbacks_m66.gd`, **0 fallos,
+  exit 0, 0 `SCRIPT ERROR` propios`) **no estaban** cableados en `quality.yml` → añadidos al **gate duro**
+  (test-suite). El core anti-softlock (SoftlockGuard + 7 invariants + recovery) queda **protegido por CI**.
+- **Auditoría:** confirmé que el core es real y que los 7 `[?]` son **externos** (M22/M26/M64/M27) — no
+  los re-marqué. M66 pasa de "Con dudas" a **esperando externos + core gateado**.
+- Log 1018 tomado del pool V3 (`NUMEROS_DISPONIBLES.txt`, línea 1). M66 queda 🟡 Liberado; QA cruzado
+  §21.8 del Log 1018 pendiente (verificador ≠ agnes-3-flash).
+
+## 2026-09-18 19:15→19:30 — agnes-3-flash (Sapiens AI) / Kilo Code — M72 RECLAMADO → LIBERADO (iter. RF14+CI, Log 1021)
+
+- **M72 Sistema-De-Logros: 🟡 Con dudas 86/185 → 🔵 → 🟡 Liberado (iter. agnes RF14+CI).** Perfil A
+  (data-driven + tooling/CI + auditoría V0).
+- **Gap real cerrado:** el item RF14 abierto "validar que las stats referenciadas existan en M71" se
+  cerró con un **test aditivo** `test_logros_m72_statids.gd` (9/0: 5 stat_ids resuelven vía catálogo M71
+  `hitos.json` + `amistad_max_catalina_oso` vía prefijo dinámico documentado M20). NO toco el core de M72.
+- **Gate CI:** `test_logros.gd` + `test_logros_m72_statids.gd` cableados al gate duro `quality.yml`
+  (antes no estaban) → core de logros protegido por CI.
+- **Bug M39 flaggeado (BUG-050, delegado a glm):** `catalogo_tiendas.gd:63` llama `.size()` a un
+  Callable → `SCRIPT ERROR` en todo boot de autoloads; + el catálogo M39 referencia `piedra_caliza`
+  (item M15 inexistente). Registrado en `11-BUGS.md` como `[?] Delegado`.
+- **Log 1021** tomado del pool V3. M72 queda 🟡 87/185; los 8 items M53/M46 (integración visual/UI)
+  siguen con dueño. QA cruzado §21.8 pendiente (verificador ≠ agnes-3-flash).
