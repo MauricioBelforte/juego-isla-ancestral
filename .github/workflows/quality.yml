@@ -101,6 +101,7 @@ jobs:
       - name: Run validation tests
         run: |
           cd game/isla-ancestral
+          FAIL=0
           # Run save validation test (M59)
           godot --headless --script scripts/saving/validate_save.gd 2>&1 || true
           # Run time calendar tests (M29)
@@ -118,23 +119,23 @@ jobs:
           # Run lore environmental gate (M148): falla (exit 1) si hay IDs
           # duplicados, canon_ref vacío, cobertura < 12 por isla o grafo de
           # pistas roto (consumidor inexistente).
-          godot --headless --script scripts/lore/lore_gate.gd 2>&1 || true
+          godot --headless --script scripts/lore/lore_gate.gd 2>&1 || FAIL=1
           # Run lore environmental tests (M148): catálogo, auditor adversario,
           # grafo de pistas, persistencia (30 ciclos) y migración.
-          godot --headless --script scripts/lore/test_lore_m148.gd 2>&1 || true
+          godot --headless --script scripts/lore/test_lore_m148.gd 2>&1 || FAIL=1
           # Run VFX/particles tests (M52): catálogo, factory, director y pool
           # (pooling, precalentamiento, determinismo por semilla, límites y
           # log VFX-SKIP). El test del pool instancia nodos reales — cubre la
           # ruta de runtime que los 3 tests puros nunca ejercitaban.
-          godot --headless --script scripts/particles/test_vfx_catalog_headless.gd 2>&1 || true
-          godot --headless --script scripts/particles/test_vfx_factory_headless.gd 2>&1 || true
-          godot --headless --script scripts/particles/test_vfx_director_headless.gd 2>&1 || true
-          godot --headless --script scripts/particles/test_vfx_pool_m52.gd 2>&1 || true
+          godot --headless --script scripts/particles/test_vfx_catalog_headless.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/particles/test_vfx_factory_headless.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/particles/test_vfx_director_headless.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/particles/test_vfx_pool_m52.gd 2>&1 || FAIL=1
           # M52 iter. 6: catálogo de 31 entradas + schema con reglas
           # verificables (RF3/4/6/7/11/14/16), loops con culling y fase fija,
           # LOD 25% y trigger centralizado. Los 13 buses del catálogo se
           # verifican contra scripts/core/event_bus.gd.
-          godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || true
+          godot --headless --script scripts/particles/test_vfx_m52_iter6.gd 2>&1 || FAIL=1
           # M52 iter. 6: el catálogo es un dataset generado — detecta ediciones
           # a mano que no pasaron por el generador.
           python ../../tools/vfx/gen_vfx_catalog.py --check
@@ -142,24 +143,24 @@ jobs:
           # `LocalizationManager` + fallback + interpolación. Las aserciones de
           # conteo comparan contra el JSON fuente (fix BUG-032: estaban fijadas a
           # 11 claves con el catálogo en 25 -> false-red).
-          godot --headless --script scripts/localizacion/test_localizacion_m87.gd 2>&1 || true
+          godot --headless --script scripts/localizacion/test_localizacion_m87.gd 2>&1 || FAIL=1
           # M87 núcleo (iter. 1): carga de catalogos, traduccion es/en,
           # placeholders, plurales, formatos, fallback y validar_catalogos.
-          godot --headless --script scripts/localization/test_localization.gd 2>&1 || true
+          godot --headless --script scripts/localization/test_localization.gd 2>&1 || FAIL=1
           # M87 iter. 2-4: persistencia M60 + sugerencia de idioma del SO + contexto
           # gettext + cache; cobertura de fuentes por idioma (M88); y robustez
           # determinista (parseo .po corrupto, placeholders mal formados, estados
           # de catalogo RF21, plurales n=0/negativos y formatos edge).
-          godot --headless --script scripts/localization/test_localizacion_iter2.gd 2>&1 || true
-          godot --headless --script scripts/localization/test_localizacion_iter3.gd 2>&1 || true
-          godot --headless --script scripts/localization/test_localizacion_iter4.gd 2>&1 || true
+          godot --headless --script scripts/localization/test_localizacion_iter2.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/localization/test_localizacion_iter3.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/localization/test_localizacion_iter4.gd 2>&1 || FAIL=1
           # M87 iter. 5 + bloque I de iter. 6: validador de catalogos .po (reglas
           # R1-R13 por archivo y P1-P5 por par es<->en) + auditoria de claves
           # codigo<->catalogo. Incluye la exencion P5 declarada EN EL PROPIO
           # catalogo con `#. no-traducir: <motivo>` (plantillas sin palabras,
           # codigos de divisa, unidades): la clave exenta se lista aparte en
           # `exentas_p5`, asi que la exencion es auditable y no un agujero negro.
-          godot --headless --script scripts/localization/test_validador_po_m87.gd 2>&1 || true
+          godot --headless --script scripts/localization/test_validador_po_m87.gd 2>&1 || FAIL=1
           # M87 iter. 6: encaje de texto MEDIDO en headless (expansion es->en,
           # desborde del contenedor de referencia 220x40, palabras sin espacios y
           # truncado), glosario de terminos canonicos, re-traduccion selectiva de
@@ -167,11 +168,11 @@ jobs:
           # _fin() + guardian anti-falso-verde: un error de script aborta la funcion
           # en SILENCIO, y con extends SceneTree ademas cuelga el arbol (el watchdog
           # lo convierte en EXIT 1). 82 checks.
-          godot --headless --script scripts/localization/test_localizacion_iter6.gd 2>&1 || true
+          godot --headless --script scripts/localization/test_localizacion_iter6.gd 2>&1 || FAIL=1
           # Run copyright test (M127): copyright.json + CopyrightValidator.
           # Mínimos en vez de números fijos + ids únicos (fix BUG-033: fijaba
           # 5 elementos / 2 políticas con el catálogo en 7 / 5 -> false-red).
-          godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || true
+          godot --headless --script scripts/legal/test_copyright_m127.gd 2>&1 || FAIL=1
           # Run M111 quality-utils test: Math/Validation/Format utils, constants,
           # enums, structs, patterns y components (SceneTree, sin GdUnit4).
           godot --headless -s res://tests/test_m111_utils_headless.gd 2>&1 || true
@@ -179,7 +180,7 @@ jobs:
           # bloqueada, checkpoints atomicos (tmp -> bak -> cp), telemetria de puzzles
           # y 6 suites de validacion (softlock/anti-exploit/voxel/accesibilidad/
           # orientacion/checkpoints). 7 bloques con marcador _fin() anti-falso-verde.
-          godot --headless --script scripts/templos/test_templo_m26.gd 2>&1 || true
+          godot --headless --script scripts/templos/test_templo_m26.gd 2>&1 || FAIL=1
           # Run backup tests (M107): BackupManager + rotacion/retencion de copias.
           # Cableado junto al fix de BUG-035: el autoload hacia `DirAccess.new()`
           # (clase abstracta en Godot 4) -> parse error -> el autoload no cargaba y
@@ -189,11 +190,11 @@ jobs:
           # (RF13), sanitizacion del UGC (4K -> 2K, sobre sin coords del save,
           # compresion ZSTD via FileAccess.open_compressed) y telemetria sin PII.
           # El suite de iter. 2 usa marcadores _fin() por bloque + watchdog.
-          godot --headless --script scripts/ugc/test_ugc_m124.gd 2>&1 || true
-          godot --headless --script scripts/ugc/test_ugc_m124_iter2.gd 2>&1 || true
+          godot --headless --script scripts/ugc/test_ugc_m124.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/ugc/test_ugc_m124_iter2.gd 2>&1 || FAIL=1
           # Run transport tests (M68). iter. 1: nucleo data-driven (grafo, dijkstra,
           # costes, horarios, clima, desbloqueo, waypoints) — 177 checks.
-          godot --headless --script scripts/transporte/test_transporte_m68.gd 2>&1 || true
+          godot --headless --script scripts/transporte/test_transporte_m68.gd 2>&1 || FAIL=1
           # iter. 2: planificador de viaje (cozy < 4 s, cargar destino ANTES de
           # mover, orientacion al destino), viajes especiales (M74/M31), viajes
           # narrativos (M22/M23), eventos de ruta sin peligro (M64), puente con
@@ -201,10 +202,10 @@ jobs:
           # (validate_transport.gd) + ciclo completo — 199 checks, 8 bloques con
           # marcador _fin() y guarda anti-falso-verde (si un bloque aborta en
           # silencio, la suite FALLA).
-          godot --headless --script scripts/transporte/test_transporte_m68_iter2.gd 2>&1 || true
+          godot --headless --script scripts/transporte/test_transporte_m68_iter2.gd 2>&1 || FAIL=1
           # Run island tests (M27). iter. 1: nucleo data-driven del archipielago
           # 1+12 (IslandDefinition/Archipielago/IslandRegistry/IslandProps) — 171 checks.
-          godot --headless --script scripts/islas/test_islas_m27.gd 2>&1 || true
+          godot --headless --script scripts/islas/test_islas_m27.gd 2>&1 || FAIL=1
           # iter. 2 (iter. 4 del modulo): los 9 edge cases K1-K9 como logica pura
           # (IslandOps: cola de operaciones con prioridad/etapas 60-25-10-5/idempotencia;
           # IslandTravelGuard: precarga sin congelar, viaje con descarga en curso,
@@ -214,17 +215,17 @@ jobs:
           # (el checklist decia 24: el plan tiene 26) — 238 checks, 8 bloques con
           # marcador _fin() y guarda anti-falso-verde probada en vivo (un aborto
           # silencioso en un bloque hace FALLAR la suite y nombra el bloque).
-          godot --headless --script scripts/islas/test_islas_m27_iter2.gd 2>&1 || true
+          godot --headless --script scripts/islas/test_islas_m27_iter2.gd 2>&1 || FAIL=1
           # Coherencia Islas (islas.json) <-> Mapa (map_data.json): 4 islas + 9 POIs.
-          godot --headless --script scripts/islas/sincronizar_islas_mapa.gd 2>&1 || true
+          godot --headless --script scripts/islas/sincronizar_islas_mapa.gd 2>&1 || FAIL=1
           # Run data/serialization tests (M60). base: serializador JSON/binario,
           # checksum CRC32, contrato v1, escritura atomica y backups rotativos
           # (94 checks, incl. la ruta asincrona por Thread de la iter. 2).
-          godot --headless --script scripts/datos/test_datos_m60.gd 2>&1 || true
+          godot --headless --script scripts/datos/test_datos_m60.gd 2>&1 || FAIL=1
           # iter. 3: construcciones (EstructurasCodec + BuildingsSaveProvider),
           # ventana de backups, compresion ZIP_DEFLATE, catalogos perezosos y
           # progreso del guardado (132 checks).
-          godot --headless --script scripts/datos/test_datos_m60_iter3.gd 2>&1 || true
+          godot --headless --script scripts/datos/test_datos_m60_iter3.gd 2>&1 || FAIL=1
           # iter. 4 (re-verificacion selectiva tras la auditoria del 2026-09-14):
           # motor de migracion inyectable (migrar_con_cadena) + patrones puros,
           # borrado de slot sin fugas (.deflate/.bak*), regeneracion de meta.json,
@@ -232,7 +233,7 @@ jobs:
           # y validacion temprana al guardar — 152 checks, 8 bloques con marcador
           # _fin() y guarda anti-falso-verde probada en vivo (un aborto silencioso
           # en un bloque hace FALLAR la suite y nombra el bloque).
-          godot --headless --script scripts/datos/test_datos_m60_iter4.gd 2>&1 || true
+          godot --headless --script scripts/datos/test_datos_m60_iter4.gd 2>&1 || FAIL=1
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/
@@ -241,7 +242,7 @@ jobs:
           # senal line_emitted — 131 checks, 10 bloques con marcador _fin() y
           # guarda anti-falso-verde probada por INYECCION (un aborto silencioso en
           # un bloque hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
-          godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1 || true
+          godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1 || FAIL=1
           # M105 Telemetria de gameplay. iter. 7: las 3 metricas
           # `time_to_first_*` que faltaban (house/puzzle/seal — el diseno pide 5
           # y solo existian 2 + session_duration) + fix de `establecer_opt_in`
@@ -256,10 +257,10 @@ jobs:
           # `_terminado` no basta -> base/iter5/iter6 llevan ademas un PISO de
           # chequeos (CHECKS_MINIMOS) que hace fallar la suite si un aborto se
           # come checks. Los pisos son: base 16, iter5 10, iter6 11.
-          godot --headless --script scripts/telemetry/test_telemetry.gd 2>&1 || true
-          godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1 || true
-          godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1 || true
-          godot --headless --script scripts/telemetry/test_telemetria_iter7.gd 2>&1 || true
+          godot --headless --script scripts/telemetry/test_telemetry.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/telemetry/test_telemetria_iter7.gd 2>&1 || FAIL=1
           # M117 Build System (Log 946 agnes-3): test de build al gate duro.
           # Nota: --script bootea los autoloads del proyecto (58 leaks ObjectDB
           # preexistentes ajenos a M117); el exit code 0/1 sigue siendo el gate.
@@ -285,6 +286,7 @@ jobs:
           # (BrandValidator, scaffold legal). Gate duro: test determinista y verde (8/0).
           godot --headless --script scripts/legal/test_brand_m128.gd 2>&1
           echo "All validation tests completed"
+          exit $FAIL
 
   legal-tools:
     name: Legal Tooling Tests (M127)
