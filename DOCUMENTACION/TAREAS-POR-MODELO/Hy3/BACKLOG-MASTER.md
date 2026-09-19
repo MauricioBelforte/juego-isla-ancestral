@@ -527,3 +527,13 @@ Re-affirm de los 5 modulos que agnes-3-flash pidio en standby (Logs 946/954/974/
 - [x] **M71-Progresion reconciliacion — COMPLETADA (Log 1043).** Restaurados **72/213 [x]** + **141 [?]** pendientes reales (RF1-RF11, catalogo 25 items, contenido M93, sugeridor M53 visual). `test_progresion.gd` EXIT 0 / 0 SCRIPT ERROR. Nota: resumen mimo/Atria (Log 1031) ~38/213; la diferencia (72 vs 38 = 34) son secciones de analisis/diseno/documentacion marcadas [S] por mimo como entregables completos; dejo el conteo granular restaurado y lo senalo para que el tablero decida si cuentan como [x].
   **DoD de los 3:** tests headless EXIT 0 (0 SCRIPT ERROR en M30/M49-rampas/M71; M49-validate es parse-error de tooling, no del feature) - fila global = conteo real (107/120, 44/143, 72/213) - Totales reparados - 3 logs firmados (1041/1042/1043). Fuente: ESTADO-PARALELO.md seccion 2026-09-18 22:30. hy3 / WorkBuddy (Tencent Hunyuan).
 
+
+## Fix validador M49 (2026-09-18, hy3 / WorkBuddy, Log 1045)
+
+- [x] **validate_lighting_m49.gd corregido** (game/isla-ancestral/scripts/world/). BUG1: parse errors type-inference L39/66/77 -> tipado estatico con `as WorldEnvironment` + anotacion explicita. BUG2: nunca cargaba escena -> ahora `load(res://scenes/main_island.tscn).instantiate()` + `add_child` en `_run()`, checks tras instanciar.
+- [x] **Ejecutado headless Godot 4.7.2**: 22 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR del validador.
+- [x] **05-Checklist.md M49**: 9 [?]->[x] con evidencia citando check (53/143); agregado bloque '## Totales' (faltaba).
+- [x] **GLOBAL fila 49**: 44/143 -> 53/143 + nota del fix validador.
+- [x] **04-Codigo.md M49**: entrada 'Notas del Agente — hy3 (fix validador)'.
+- [!] **Ruido headless (fuera de scope, no tocado)**: scripts/ia_npc/ (MiMo M64) emite 11 SCRIPT ERROR en el bootstrap (`npc_needs.gd:41-43` get() 2 args; `npc_agent.gd:82` .new() en GDScript). No afecta los checks de iluminacion; reportado para coordinacion.
+- [x] **DoD cumplido**: validador 0 parse errors, carga escena real, checks individuales, exit coherente con fallos. Log 1045 escrito y firmado. NO push (instruccion).

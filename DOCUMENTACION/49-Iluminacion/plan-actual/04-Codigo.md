@@ -167,3 +167,20 @@ func validar_escena(escena: Node3D) -> Array[String]:
 - Coordinar el bake de lightmaps con M108/M118 antes de producir interiores masivos.
 - Validar bias de sombras del voxel temprano (acne es el riesgo más visible).
 - Considerar QA cruzado (sección 21.8) por otro modelo.
+
+---
+
+## Notas del Agente — hy3 (fix validador, 2026-09-18)
+
+**Modelo:** hy3 / WorkBuddy (Tencent Hunyuan)
+**Plataforma:** WorkBuddy (OpenCode)
+**Fecha:** 2026-09-18
+**Estado:** validate_lighting_m49.gd corregido y funcional (22 checks, 0 fallos, EXIT 0)
+
+### Lo que hice
+- Corregí los 2 bugs del validador: parse errors de type-inference (L39/66/77, ahora tipado estaticamente con `as WorldEnvironment` + anotacion explicita) y carga real de escena (`load().instantiate()` + `add_child` en `_run()`, checks despues de instanciar).
+- Ejecuté headless con Godot 4.7.2: WorldEnvironment/ACES, ambiente piso >=0.15 (0.85), sol/luna (energy 1.35/0.12), sombras (shadow_bias 0.050, normal_bias 1.5, max_distance 120), fog habilitado + 4 curvas .tres (day/sky/moon/fog cargan como Curve) -> todos OK, 0 fallos, EXIT 0.
+- Volteé 9 [?]->[x] en 05-Checklist.md citando el check que lo prueba (53/143). Agregué el bloque '## Totales' que faltaba. Ver Log 1045.
+
+### Hallazgo colateral (fuera de scope, no tocado)
+- `scripts/ia_npc/` (MiMo, M64) emite SCRIPT ERROR en headless: `npc_needs.gd:41-43` (get() con 2 args, parse error) y `npc_agent.gd:82` (.new() en GDScript base). El bootstrap spawnea NPC agents y crashea, pero NO afecta los checks de iluminacion. Prohibido tocar por encomienda; lo reporto para coordinacion.
