@@ -1,8 +1,8 @@
 # 11 — BUGS: Registro Central de Problemas y Fallas
 
-**Modelo:** hy3 (último modificador)
-**Plataforma:** WorkBuddy
-**Fecha:** 2026-09-02 19:55
+**Modelo:** Atria-Dawn-Preview (último modificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 (Log 1048)
 
 > ⚠️ **Documento de trabajo VIVO.** Este archivo es el **registro central de bugs** del proyecto: el usuario, junto conmigo o con cualquier LLM acompañante, anota aquí los problemas y fallas que va encontrando, con el **mayor detalle posible**, en formato checklist. Complementa (NO reemplaza) a `DOCUMENTACION/102-Bug-Tracking/`, al registro de errores de Godot (`GUIA-GODOT/06-registro-errores.md`), y a GitHub Issues.
 
@@ -131,6 +131,16 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-040 | `inventory_layer.gd` captura ERROR de señal `item_added` (handler 2 args vs emisión 3 args) | M53 UI Inventario (`inventory_layer.gd`) | 🟠 Mayor | [x] Resuelto (2026-09-15, hy3 — verificación headless M110 22/0, EXIT 0; error de señal ausente) | hy3 | 2026-09-15 01:25 |
 | BUG-041 | ~~`logger.gd` (autoload `GameLogger`) no registra NADA~~ **FALSO POSITIVO (verificado con sonda)**: `GameLogger` **sí registra** (`categories_enabled` se puebla en `_ready()`, `_log()` escribe a disco y emite). Residuo real: `log_buffer` es **código muerto** (nadie hace `append`) y `_flush()` es un no-op permanente | M103 Logging (`scripts/logging/logger.gd`) | 🟢 Baja (limpieza) | [x] Cerrado — falso positivo (reclasificado 2026-09-15) | DeepSeek-V4.1-Flash | 2026-09-15 |
 | BUG-042 | Tres de los cuatro `.ttf` de `assets/fonts/` no son fuentes sino páginas HTML «Page not found · GitHub» (descargas 404 guardadas con extensión `.ttf`). `load()` devuelve un `FontFile` NO nulo con datos vacíos: FreeType «Error loading font: ''» y métricas 0.0 px, así que el fallo es silencioso | M46/M88 (fuentes) — afecta a M53 (UI) y M87 (tipografía) | 🟠 Mayor | [ ] Abierto — reportado por M87 iter. 6 (Log 920) | DeepSeek-V4.1-Flash | 2026-09-15 |
+| BUG-052 | **434 .glb de `assets/3d` sin atribución de copyright por-archivo** (claim M127 Log 1022 verificado empírico: 0 de 694 .glb versionados tiene sidecar/extras GLB/catálogo por-archivo; el +16 sobre el techo 418 son respaldos Obsoletos, no assets nuevos) | M166/M09 (pipeline de exportación) — deuda declarada M127 | 🟠 Mayor | [ ] Abierto — verificado y cuantificado por agnes-3-flash (Log 1035); fix = pipeline (dueño M166/M09) | agnes-3-flash (Kilo Code) | 2026-09-18 20:40 |
+| BUG-053 | QA visual orbitales: 7 artefactos (V-1..V-7) en M16/M19/M25/M33/M51 — destacan: **`antorcha_pared` flota 30 cm** (único glb con cota positiva del repo, M25), silueta rota en `hacha_piedra` media/baja (M16), piezas flotantes en `npc_sentado_v3` (M19), escalón de torso en `espantapajaros` (M33) y shore-fade exuberante M51 (issue conocido M167) | M16/M19/M25/M33/M51 — aprobación final M154 (usuario) | 🟠 Mayor | [?] Delegado (ver §8; verificaciones y evidencia en Log 1035) | agnes-3-flash (Kilo Code) | 2026-09-18 20:40 |
+| BUG-051 | CI: job `godot-lint` era un no-op completo (`--script` sin script + `\|\| true`) | M111/M83 (CI) | 🟠 Mayor | **[x] Resuelto (2026-09-18, Log 1039)** — gate duro real con colector de preloads + `--check-only` + `\|\| FAIL=1`; verificado por inyección | Atria-Dawn-Preview | 2026-09-18 21:07 |
+| BUG-054 | M39↔M15: **13 referencias rotas (8 item_ids inexistentes)** en las 3 tiendas oficiales — `catalogo_venta` Y `catalogo_recompra` | M39 (glm activo) / M15 | 🟠 Mayor | [?] Delegado (ver §6 y §8) | Atria-Dawn-Preview | 2026-09-18 |
+| BUG-055 | **Corrección de BUG-050**: el SCRIPT ERROR `.size()` sobre Callable NO está en `catalogo_tiendas.gd:63` — está en `test_logros.gd:291` (`_ach.desbloqueados`, propiedad inexistente) | M72 (test propio) | 🟡 Menor | [?] Delegado a M72 (agnes-3-flash) | Atria-Dawn-Preview | 2026-09-18 |
+| BUG-056 | **7 scripts del repo no compilaban** (Python-ismos y indentación) — hallados por el gate nuevo de BUG-051 | M73/M131/M155/tests | 🟠 Mayor | **[x] Resuelto (2026-09-18, Log 1039)** — fixes mecánicos; el gate los habría encontrado antes | Atria-Dawn-Preview | 2026-09-18 |
+| BUG-058 | `validar_nombres.py` (M149) inunda con **1128 falsos positivos** (847 de `Godot/app_userdata` runtime + ~280 de `addons/`) + deriva real: **41 `.tres`** `LOC-*`/`NPC-*` violan el snake_case documentado | M149 / M160 / M161 / M118 | 🟡 Menor | [?] Delegado — dueño M149 (fix exclusiones) + M160/M161 (convención IDs). No es sobre-cierre: C.14/D.10 eran ciertos el 2026-08-28, la deriva es posterior | atria-dawn | 2026-09-19 |
+| BUG-059 | M126 + M128: **~33 citas colgantes** a `03-Diseno.md` §1.X–§3.9 que **no existen** (vestigio de los sellos ✅ fabricados por agnes-2.5-flash). M128: ~15 ítems con diseño **inexistente** + contradicción app icon 512 vs 1024 | M126 / M128 | 🟡 Menor | [?] Delegado — dueño M126/M128. Citas corregidas con notas de re-referencia por atria-dawn (Log 1048); estado de ítems no cambia | atria-dawn | 2026-09-19 |
+| BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
+| BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -422,10 +432,221 @@ La numeración de logs del proyecto presenta múltiples inconsistencias: número
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-03 03:50
 
+---
+
+### BUG-058 — `validar_nombres.py` (M149) inunda con falsos positivos + deriva de convención en 41 `.tres`
+
+- **Fecha de reporte:** 2026-09-19
+- **Módulo(s) afectado(s):** M149 Nombres-Y-Nomenclatura (`operativa/validar_nombres.py`),
+  M160 (datos/locations), M161 (data/npc_visuals), M118 (CI hooks)
+- **Severidad:** 🟡 Menor (la herramienta funciona, pero **no es usable como gate CI** mientras
+  inunde con ruido; y la convención documentada ya no describe el repo real)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado — dueño **M149** (fix del validador) + **M160/M161** (decisión de
+  convención de IDs LOC-/NPC-). No lo arreglo yo: es fix de herramienta + decisión de diseño que
+  excede el alcance V0 de la reconciliación.
+
+**Descripción — dos problemas relacionados:**
+
+**(a) Falsos positivos por falta de exclusiones.** `validar_nombres.py` reporta **1128
+violaciones** al ejecutarse sobre el repo. Desglose (medido por mí, 2026-09-19):
+
+| Origen | Cuenta | Naturaleza |
+|---|---|---|
+| `Godot/app_userdata/isla-ancestral/analytics/lote_*.json` | **847** | Salida de telemetría en tiempo de ejecución — **no es fuente del repo** |
+| `addons/gdUnit4/**` (PascalCase.gd) | **~280** | Terceros — no aplica la convención del proyecto |
+| `Godot/editor_settings-4.7.tres` | 1 | Config del editor |
+| **Arbol fuente real** | **~50** | Ver (b) |
+
+El validador solo excluye `Obsoletos/`. **Sin excluir `Godot/`, `app_userdata/` y `addons/`, su
+output es 95% ruido** y no puede usarse como gate (el item E.14 de M149 lo delega a M118; cuando
+M118 lo cablee, esto romperá el pipeline).
+
+**(b) Deriva real de convención en 41 `.tres`.** Excluyendo terceros/runtime, quedan ~50
+violaciones reales. Las significativas:
+
+- **20 `data/locations/<ISO>/LOC-<ISO>-<TIP>-<NNN>.tres`** (M160) y **21
+  `data/npc_visuals/<ISO>/NPC-<ISO>-<NNN>-<rol>.tres`** (M161) — añadidas en el commit del
+  **2026-09-02**. Violan el snake_case documentado en `code-conventions.md` §2, PERO siguen un
+  patrón de ID de datos legítimo y consistente que **la convención no cubre** (§3 solo documenta
+  `item_<cat3>_<sub3>_<NNN>` de M159).
+- **9 escenas snake_case** en `scenes/` (`hud.tscn`, `villager.tscn`, `npc_agent.tscn`,
+  `caso_reloj.tscn`, `bench_scene_a.tscn`, `captura_playa.tscn`, `gaviota_demo_parada.tscn`,
+  `prueba_arquitectura.tscn`, `ruina_preview.tscn`) — `villager.tscn` ya estaba documentado como
+  deuda M19/M04; las demás son scenes de test/preview/demo que la convención permite en snake pero
+  el validador no distingue (falsa positive o deuda, según se lea).
+- **4 scripts:** `_probe_col.gd`, `scripts/debug/_probe_debug.gd` (ambos desde 2026-09-01),
+  `scripts/editor/_colector_sintaxis.gd` (mío, Log 1039 — prefijo `_` para tooling privado),
+  `tests/.../test_ia_npc_m64_iterN.gd` (WIP sin commitear de MiMo, sufijo camelCase `iterN`).
+
+**Por qué no es sobre-cierre de M149:** los items C.14 y D.10 claimaban "scripts 100% snake_case ✓"
+y ".tres 100% snake_case ✓" — **eran ciertos el 2026-08-28** cuando GLM los verificó; la deriva
+vino después (commits 2026-09-01/02 y míos). Por eso los dejé `[x]` con **nota de staleness** y no
+los revertí: la verificación existió, lo stale es el resultado. Si el proyecto quiere conteo
+"vigente al día de hoy", esos dos ítems pasan a `[?]`.
+
+**Fix propuesto (dueño M149/M118):**
+1. `validar_nombres.py`: añadir exclusiones `Godot/`, `app_userdata/`, `addons/`; y aceptar
+   prefijo `_` en scripts de tooling (`_probe_*.gd`, `_colector_*.gd`).
+2. `code-conventions.md` §3: ampliar IDs de datos con los patrones reales
+   `LOC-<ISO>-<TIP>-<NNN>` y `NPC-<ISO>-<NNN>-<rol>` (o decidir renombrar 41 archivos —
+   **cuidado: renombrar .tres rompe referencias**; documentar y dejar a M160/M161).
+3. Cuando M111/M118 cableen el hook (item E.14), ejecutarlo post-fix (a) o el CI queda roto.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19
+
+---
+
+### BUG-059 — M126 + M128: ~33 citas colgantes a secciones de `03-Diseno.md` que no existen
+
+- **Fecha de reporte:** 2026-09-19
+- **Módulo(s) afectado(s):** M126 Marketing-Legal, M128 Identidad-De-Marca (checklists
+  `plan-actual/05-Checklist.md`)
+- **Severidad:** 🟡 Menor (no afecta código ni runtime — los ítems afectados ya están `[ ]`
+  correctamente; es **deuda de documentación** que afirma tener diseño cuando no lo tiene)
+- **Prioridad sugerida:** Media (impacta la confianza en TODAS las notas KnownIssue del repo)
+- **Estado:** [?] Delegado — dueño **M126/M128** (documentación). Las citas se corrigieron con
+  notas de re-referencia (no se borró el texto original); el estado de los ítems no cambia.
+
+**Descripción:** las notas "KnownIssue no bloqueante DoD: ... documentada en `03-Diseno.md` §X.Y"
+citaban secciones **inexistentes**. Patrón idéntico en ambos módulos (vestigio de los sellos ✅
+fabricados por agnes-2.5-flash, revertidos el 2026-09-14):
+
+- **M126:** el checklist cita `03-Diseno.md §3.1`–`§3.9` (influencers, contratos, giveaways,
+  screenshots, FTC, etc.). El archivo tiene **solo §1 (Estructura), §2 (Sistema de revisión legal)
+  y §3 (Pruebas)** — las subsecciones §3.1–§3.9 **no existen**. El contenido sustantivo que esas
+  notas afirma documentar está parcialmente en §1 (árbol de cobertura) y §2 (plantilla de
+  `marketing_legal_review.md` con decisiones ✅/❌).
+- **M128:** el checklist cita `§1.1`–`§1.10` y `§2.1`–`§2.6`. El archivo tiene **§1–§5** con otra
+  estructura. Verificación item por item (tabla completa en el checklist de M128):
+  - ✅ contenido real mal numerado: paleta hex (citada §1.1, real **§3**); clear space + min size
+    (citado §2.3, real **§2**).
+  - ⚠️ parcial: formatos PNG/SVG (citado §2.4, **§4** lista los archivos pero no menciona AI).
+  - ❌ **fabricados** (no existen en ningún lado del módulo): jerarquía tipográfica, swatches,
+    licencias de fuentes, registro de dominio, email corporativo, proveedores POD, criterios de
+    testing, press kit, versionado del manual, cease & desist, monitoreo de trademark, lockup
+    horizontal, variantes light/dark, test de legibilidad.
+  - ❌ **contradicción:** el app icon es **512x512** según checklist/`04-Codigo.md` pero
+    **1024x1024** según `03-Diseno.md` §2 (tabla "Tamaño Mínimo").
+
+**Por qué importa:** estas notas eran la "evidencia" que justificaba dejar ítems como
+casi-terminados. Al ser colgantes, **no hay tal diseño** — los ítems están más lejos de lo que el
+checklist sugiere. Cualquier agente que planee cerrar M126/M128 pensando "solo falta ejecución,
+el diseño ya está" **va a encontrar que el diseño no existe** para ~15 ítems de M128.
+
+**Fix propuesto (dueño M126/M128):**
+1. Ya hecho parcialmente por mí: notas de re-referencia al inicio de ambos checklists (M126:
+   mapa a §1/§2; M128: tabla item-por-item). **No borré las notas originales** (trazabilidad).
+2. Pendiente: cuando M126/M128 se retomen, **escribir de verdad** el diseño faltante en
+   `03-Diseno.md` (sección de tipografía en M128; §3.1-§3.9 reales en M126) o borrar las citas
+   falsas.
+3. **Resolución de la contradicción del app icon** (512 vs 1024): alinear antes de producir
+   (dueño M46/M128). Godot/Steam requieren 1024+.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19
+
 
 ## 7. Bugs Resueltos (historial)
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
+
+### BUG-052 — Boot del proyecto roto: `.get()` de 2 args sobre `Resource` (3 archivos, 5 sitios)
+
+- **Estado:** [x] Resuelto (2026-09-19, Log 1044) | **Módulo:** M64 (IA de NPC) — impacto **transversal: todo el proyecto** | **Severidad:** 🔴 Crítico
+- **Reportado por:** atria-dawn-preview / Kilo Code (descubierto al auditar la evidencia del Log 1042 de hy3)
+- **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code | **Fecha:** 2026-09-19 00:30
+
+- **Síntoma:** Todo run headless del proyecto (`--headless --path game/isla-ancestral --script ...`)
+  arrancaba con:
+  ```
+  SCRIPT ERROR: Parse Error: Too many arguments for "get()" call. Expected at most 1 but received 2.
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:41)
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:42)
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:43)
+  SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+  ERROR: Failed to load script "res://scripts/ia_npc/npc_agent.gd" with error "Compilation failed".
+  ```
+  **Impacto:** cualquier agente que corriera un test headless veía errores ajenos a su módulo
+  (falso-rojo), o —peor— un test que reportaba "0 fallos" mientras el stderr contenía `SCRIPT
+  ERROR` (falso-verde, lección 28). La evidencia del Log 1042 de hy3 ("0 SCRIPT ERROR") era
+  inválida por este motivo.
+
+- **Causa raíz:** `Resource` extiende `Object`, y `Object.get()` admite **1 solo** argumento.
+  Los sitios usaban el patrón de `Dictionary.get(clave, default)`. En los 3 archivos las variables
+  receptoras estaban tipadas como `Resource` (perfil de NPC, config de necesidades), por lo que el
+  parser rechazaba el segundo argumento. Como `npc_needs.gd` era dependencia de `npc_agent.gd`,
+  la compilación fallaba en cascada.
+
+- **Solución:** aplicar el guard `!= null` explícito en vez del argumento default, preservando la
+  semántica de fallback original:
+  1. `scripts/ia_npc/npc_agent.gd:199` — `profile.get("job", "")` → `profile.get("job")`
+     (el guard de la línea 198 ya asegura non-null).
+  2. `scripts/ia_npc/npc_agent.gd:205` — `pp.get("job", "")` → guard explícito
+     `pp.get("job") != null and str(pp.get("job")) == my_job` (mismo patrón que línea 198).
+  3. `scripts/ia_npc/npc_needs.gd:41-43` — `cfg.get("rate", actual)` ×3 → lectura en `var v` +
+     `if v != null: campo = v`.
+  No se cambió ninguna feature: solo sintaxis + guards equivalentes.
+
+- **Verificación:** binario real Godot 4.7.2, `--script res://scripts/world/test_ramps_color_m49.gd`:
+  **0 SCRIPT ERROR / 0 Parse Error / 0 Compile Error / 0 "Failed to load"** en todo el boot (antes:
+  5 parse errors + cascada). Suite de M64 re-corrida: `test_ia_npc_m64_iterN.gd` →
+  **82 checks, 0 fallos, EXIT 0** (sin regresión en el módulo del dueño, MiMo V2.5).
+  Residuo benigno: 66 ObjectDB leaked at exit + 9 resources in use (leaks de shutdown, no de boot).
+
+- **Zona ajena:** `scripts/ia_npc/` es territorio 🔵 de MiMo V2.5 (M64). Se editó por necesidad de
+  desbloqueo sistémico del boot, sin tocar features. Alerta dejada en `ESTADO-PARALELO.md`
+  (sección 2026-09-19 00:30) para que MiMo relea antes de seguir y no pise el fix.
+
+- **Lección para el registro (GUIA-GODOT):** si una variable está tipada como `Resource`/`Object`,
+  **no** usar `.get(clave, default)` — es el método de `Dictionary`. Usar `.get(clave)` + guard
+  `!= null`, o `get_property_list`/acceso directo a la propiedad. El parse error no aparece en el
+  archivo del caller sino como "Failed to compile depended scripts", lo que despista.
+
+### BUG-051 — CI: job `godot-lint` era un no-op completo (lint de GDScript inefectivo)
+
+- **Estado:** [x] Resuelto (2026-09-18, Log 1039) | **Módulo:** M111/M83 (CI) | **Severidad:** 🟠 Mayor
+- **Síntoma:** `.github/workflows/quality.yml:33` ejecutaba `godot --headless --script 2>&1 || true`
+  — **sin ningún script**. Godot falla con error de uso, el `|| true` lo silencia, y el paso
+  "Check for Godot parser errors" nunca valida nada. El job `godot-lint` **nunca podía fallar**.
+- **Solución:** 3 piezas nuevas:
+  1. `tools/quality/gen_colector_sintaxis.py` — genera `scripts/editor/_colector_sintaxis.gd` con un
+     `preload` por cada .gd del proyecto (830; excluye `.godot/`, `addons/` terceros, `Godot/` y a
+     sí mismo). `preload` fuerza el parseo a tiempo de compilación.
+  2. `quality.yml` job `godot-lint`: pasos nuevos `Setup Python`, `Generate syntax collector` e
+     `Import project resources` (`--import` construye la caché de class_names; sin él, un checkout
+     limpio da ~19 falsos positivos). El paso de check ahora usa
+     `godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 || FAIL=1`
+     — **gate duro**.
+  3. Se retiró el paso "Run GDScript Linter" (`code_quality_check.gd` es `@tool extends
+     EditorScript`; no corre headless; era un segundo no-op silencioso con `|| true`).
+- **Verificación (binario real, Godot 4.7.2):** árbol limpio → **EXIT 0**; error de sintaxis
+  inyectado → **EXIT 1** nombrando el archivo exacto; fresh checkout + `--import` → **EXIT 0**.
+- **Detalles técnicos y calleones sin salida documentados:** ver la entrada de BUG-051 en §6.
+- **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-18 (Log 1039)
+
+### BUG-056 — 7 scripts del repo no compilaban (hallados por el gate nuevo de BUG-051)
+
+- **Estado:** [x] Resuelto (2026-09-18, Log 1039) | **Módulo:** M73/M131/M155/tests | **Severidad:** 🟠 Mayor
+- **Síntoma:** 7 scripts con errores de sintaxis REALES que arrastraban versionados: nadie los había
+  parseado nunca (la mayoría son `load()`-bajo-demanda o tests gdUnit4 que no corren en CI).
+- **Los 7 y sus fixes:**
+  | Script | Error | Fix |
+  |---|---|---|
+  | `scripts/coleccionables/collectible_category.gd:66` | docstring estilo Python `"""..."""` | `##` docstring |
+  | `scripts/coleccionables/collectible_category.gd:60` | comprensión de listas `[String(t) for t in tags]` (Python) | bucle `for` |
+  | `scripts/legal/audio_legal_manager.gd:195` | 1 espacio en vez de tab | tab |
+  | `scripts/legal/test_credits_m131_v2.gd:72` | `ok := ...` (redeclaración sin `var`) | `ok = ...` |
+  | `tests/unit/interfaces/test_i_{damageable,interactable,saveable}.gd` | `class CustomX` declarada DENTRO de una función (GDScript no lo permite) | clase movida a ámbito de archivo |
+  | `tests/unit/player/test_equipment_manager.gd:133+` | 76 líneas con espacio+tab en vez de tab | tabs |
+- **Verificación:** `--check-only` sobre el colector: **830/830 EXIT 0** después de los fixes (antes
+  EXIT 1). La prueba de inyección de BUG-051 confirma que el gate los habría detectado.
+- **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-18 (Log 1039)
 
 ### BUG-001 — Overlay de inventario queda pegado al cerrar (M53/M14)
 
@@ -873,6 +1094,54 @@ módulo si algún día se usa `_container`.
 
 ---
 
+
+### BUG-060 — player.gd: `_create_hotbar_hud()` accede a `current_scene` sin null-check (crash potencial)
+
+- **Fecha de reporte:** 2026-09-19 02:55
+- **Módulo(s) afectado(s):** M11 (Personaje del Jugador) — `game/isla-ancestral/scripts/player/player.gd`, función `_create_hotbar_hud()` (líneas 972-979)
+- **Severidad:** 🟢 Mayor (crash en runtime si el Player se instancia antes de que la escena actual esté lista)
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Descripción del problema:**
+En `_create_hotbar_hud()`, las líneas 972 y 978 invocan `get_tree().current_scene.get_node_or_null("UI")` y `get_tree().current_scene.add_child(canvas)` sin verificar que `current_scene` sea no-nulo. Si el nodo Player se instancia/inicia antes de que `SceneTree.current_scene` apunte a una escena válida (transición de escenas o arranque con `--script`), `current_scene` es `null` y Godot lanza error al desreferenciar `null` (crash del nodo / SCRIPT ERROR).
+
+**Pasos para reproducir:**
+1. Instanciar `player.gd` (Player) donde `get_tree().current_scene == null` (escena aún no cargada, o `--script` headless previo al `change_scene`).
+2. Llamar a `_create_hotbar_hud()` (vía `_ready` o el flujo de HUD).
+3. Observar el error al desreferenciar `current_scene`.
+
+**Comportamiento esperado:**
+El HUD del hotbar sólo se crea con una escena actual válida; si no, se omite sin crashear (defensa temprana).
+
+**Comportamiento actual (pre-fix):**
+`current_scene` nulo -> `get_node_or_null` / `add_child` sobre `null` -> error de runtime / crash.
+
+**Entorno / Contexto:**
+- Godot 4.7.2 (stable, win64).
+- Detectado por hy3 en la suite headless M11 (Log 1055) y re-verificado por Atria (confirma sin fix).
+- Frecuencia: depende del orden de instanciación del Player vs. la escena; en juego real puede ocurrir en transiciones.
+
+**Evidencia:**
+- `player.gd:972` `var ui := get_tree().current_scene.get_node_or_null("UI")` (sin guard).
+- `player.gd:978` `get_tree().current_scene.add_child(canvas)` (sin guard).
+
+**Referencias cruzadas:**
+- Log 1055 (suite M11, nex-n2.5-pro) — fallo E2/E3 atribuido a "headless sin mundo"; NOTA: el fix de este bug NO elimina E2/E3 (ese es VoxelTerrain no autoload en `--script`, artefacto headless independiente, confirmado inalterado en re-run).
+- Atria re-verificó que el bug de `current_scene` seguía sin fix.
+
+**Firma:**
+**Modelo:** hy3 / WorkBuddy (Tencent Hunyuan)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 02:55
+
+**Resolución:**
+- [x] Cómo se corrigió: en `player.gd` `_create_hotbar_hud()` se captura `var current_scene := get_tree().current_scene` al inicio y se agrega guard temprano `if current_scene == null: push_warning(...); return`. Las dos desreferencias (L972 y L978) usan la variable local `current_scene` ya validada. Patrón defensivo consistente con `_verificar_rect_hotbar()` en el mismo archivo.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/player/player.gd` (líneas 972-979 -> 971-981 con guard). Pendiente de commit (push negativo por instrucción).
+- [x] Log del proyecto: Log 1060 (hy3, 2026-09-19).
+- [x] Verificado por: hy3 con binario Godot 4.7.2 headless. M11 suite: 26 checks, 1 fallo (E2/E3 headless-only, inalterado), 0 SCRIPT ERROR. M64 suite (regresión): 82 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR. El fix no introduce nuevos SCRIPT ERROR.
+
+---
 ## 8. Bugs Delegados a Otros Agentes
 
 > ⚠️ **Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
@@ -1135,6 +1404,36 @@ Ambos `05-Checklist.md` comienzan con bytes `EF BB BF` (UTF-8 BOM). La regla §2
 **Resolución (verificada 2026-09-15, hy3 / WorkBuddy):**
 Inspección por bytes: ambos `05-Checklist.md` (M54 y M84) ya están SIN BOM (los 3 bytes `EF BB BF` no están). La reescritura de la auditoría 2026-09-14 (reversión de marcadores sobre-cerrados) ya normalizó la codificación a UTF-8 sin BOM. No fue necesario cambio. BUG-038 cerrado como ya-resuelto (sin acción pendiente). |
 
+### BUG-053 — QA visual orbitales: 7 artefactos M16/M19/M25/M33/M51 (delegado a M154/dueños de módulo)
+
+- **Fecha de reporte:** 2026-09-18 20:40
+- **Módulo(s) afectado(s):** M16 Crafting, M19 NPCs, M25 Ruinas-Templos, M33 Agricultura, M51 Agua-Interfaz (M154 aprobación final)
+- **Severidad:** 🟠 Mayor (V-3 `antorcha_pared` flota 30 cm = alta; el resto media/baja)
+- **Prioridad sugerida:** Media (pendiente de aprobación estética del usuario M154 + H12 M166)
+- **Estado:** [?] Delegado — agnes-3-flash verificó y documentó (V1/V2-asistencia); no toca mallas/GLB (V5 = Hy4)
+
+**Descripción del problema (resumen V-1..V-7, evidencia completa en Log 1035):**
+V-1 M16: hoja de `hacha_piedra` media/baja como vela semitransparente (decimate/blend, familia E-23).
+V-2 M19: brazo-cuajado del `npc_base_v5` colado al torso (perfil).
+V-3 M25: `antorcha_pared` (3 variantes) z_min +0.295/+0.34 — única cota positiva del repo (694 glb auditados): flota ~30 cm si se posiciona sobre terreno; en el set de captura va montada en pared (E-80).
+V-4 M19: `npc_sentado_v3` con pieza gris flotando tras la cabeza + anillo a la cintura.
+V-5 M33: `espantapajaros` con escalón en la cintura del torso (2 cajas desplazadas).
+V-6 M51: shore-fade blanco cubriendo demasiada arena (issue conocido M167, CONFIRMADO en iter. 2026-09-06).
+V-7 M51: orilla con banda de espuma blanca estática/borde duro; palmeras de banca se ven flotando sobre la banda.
+
+**Por qué agnes-3-flash no lo resuelve:** corrección de mallas/GLB es V5 (Hy4/Blender) y la aprobación estética es del usuario (M154). Lo que sí quedó hecho: verificación empírica (26 capturas leídas + 694 glb medidos en z), lista de evidencia por captura y propuesta de fix por item.
+**Firma:** agnes-3-flash (Sapiens AI) / Kilo Code, 2026-09-18 20:40
+
+### BUG-052 — Deuda de copyright de .glb: 434/418 explicados, fix del pipeline pendiente
+
+- **Fecha de reporte:** 2026-09-18 20:40 (ampliación del hallazgo M127, Log 1022; no existía entrada .glb previa en §6/§8 — verificación por búsqueda `glb|copyright|M127`)
+- **Módulo(s) afectado(s):** M166/M09 (pipeline de exportación), deuda declarada por M127 en `tools/legal/asset_metadata_scope.json` (baseline SIN_ATRIBUCION `**/assets/3d/**/*.glb` max 418)
+- **Severidad:** 🟠 Mayor (legal/distribución)
+- **Estado:** [ ] Abierto — dueños M166/M09. Verificación empírica COMPLETA por agnes-3-flash (Log 1035).
+
+**Verificación (Log 1035):** 694 .glb versionados auditados uno por uno (sidecars + extras GLB + catálogos `data/legal` + git). **CON copyright: 0 · SIN: 694 · AMBIGUO: 0.** Origen de los 694: propio (pipeline Blender MCP, generator "Khronos glTF Blender I/O v4.2.83", commits "Belforte Pipeline Blender->Godot"). El claim "434" = 418 activos + 16 respaldos `media/Obsoletos/` (2026-09-04) — el crecido 418→434 NO son assets nuevos. Atribución propuesta: "Isla Ancestral Team — © 2026 — Propietaria" (copyright.json `assets_visuales` + NOTICE.md). Fix sugerido: embeder `asset.copyright`/`asset.license` en el exportador glTF del pipeline + sidecar obligatorio para imports de terceros.
+**Firma:** agnes-3-flash (Sapiens AI) / Kilo Code, 2026-09-18 20:40
+
 
 ## 9. Historial de Modificaciones de Este Archivo
 ## 9. Historial de Modificaciones de Este Archivo
@@ -1157,6 +1456,7 @@ Inspección por bytes: ambos `05-Checklist.md` (M54 y M84) ya están SIN BOM (lo
 | 2026-09-03 03:50 | step-3.7-flash | Kilo Code | BUG-002 [x] Resuelto: tanda conservadora completa de renumbering de logs duplicados. 4 renombres puntuales (413 dup1/dup2, 437 dup2, 564 dup1) + reparación de referencias en CHECKLIST-GLOBAL/ESTADO-PARALELO/08-GUIA/108/163/M23 + corrección referencia incorrecta M163/564 → `[?]`. Log 552. |
 | 2026-09-14 20:55 | DeepSeek-V4.1-Flash | WorkBuddy | BUG-035 [x] Resuelto (Log 902): causa raíz en `backup_manager.gd` (autoload M107) — `DirAccess.new()` sobre clase **abstracta** mataba el autoload entero y ensuciaba **todo** run headless con 3 `SCRIPT ERROR` (invalidaba la verificación por grep). Corregido con API `*_absolute` / `globalize_path`; `test_backup_m107.gd` **9/0 ×3**, 0 SCRIPT ERROR. BOM §28 eliminado de ese test. Además: M26 Templo-Subterráneo iter. 2 (Log 902) — fila 26: **50/115**. |
 | 2026-09-15 01:20 | DeepSeek-V4.1-Flash | WorkBuddy | BUG-039 [x] Resuelto: `scripts/generar_checklist_global.py` reescribia `CHECKLIST-GLOBAL.md` desde una plantilla fija (borraba el aviso ⛔ UTF-8 §28, la sección "Flujo para modelos nuevos" y la columna `Recom`; −34,5 KB), cortaba la tabla en la primera línea huérfana (303 filas duplicadas, 220 KB) y convertía LF→CRLF. Corregido: preserva prefijo/sufijo y el esquema de columnas, parseo con `maxsplit`, reenganche de líneas huérfanas, conserva filas sin checklist, conserva la anotación manual del `Estado` y detecta el salto de línea. Verificado: 167 filas sin duplicados, 11 columnas, 0 desajustes `Progreso` vs `[x]` real, LF conservado. Además restauré las filas 27/68/87 de DeepSeek-V4.1-Flash (registros perdidos: 9/171→83/192, 0/131→36/131, 90/136→120/136) y el archivo quedó regenerado (119 081 B). |
+| 2026-09-18 20:40 | agnes-3-flash | Kilo Code | Ampliación del hallazgo M127 (Log 1022): registro BUG-052 (deuda de copyright de .glb verificada empírico: 0 de 694 glb versionados con atribución por-archivo; claim 434 = 418 activos + 16 respaldos Obsoletos) y BUG-053 [?] Delegado (7 artefactos visuales V-1..V-7 en M16/M19/M25/M33/M51; el destacado: `antorcha_pared` flota 30 cm). Evidencia y conteos exactos en Log 1035 + `tools/legal/auditoria_copyright_glb.json` + `tools/legal/flotacion_glb.json`. |
 ## [2026-09-03 05:45] — Bug 023: crash al bootear main_island.gd (full_load_distance)
 
 - **Estado:** [x] Resuelto (2026-09-03 05:55, deepseek-v4-flash-vision-exp)
@@ -2054,6 +2354,11 @@ protocolo v3 tomaria 1001 del archivo, y otro que use `--reservar` tambien: **co
 
 ## BUG-050: M39 Tiendas — `catalogo_tiendas.gd` llama `.size()` a un Callable (SCRIPT ERROR al boot) + catálogo M39 referencia item M15 inexistente `piedra_caliza`
 
+> ⚠️ **CORREGIDO por atria-dawn (2026-09-18, Log 1039):** la atribución del `.size()` sobre Callable
+> es **ERRÓNEA** — el error está en `test_logros.gd:291` (M72), no en `catalogo_tiendas.gd:63`.
+> Ver **BUG-055**. La parte de `piedra_caliza` SÍ es real, pero es 1 de **13 referencias rotas**
+> (ver **BUG-054**).
+
 - **Fecha de reporte:** 2026-09-18 19:15
 - **Modulo(s) afectado(s):** M39 Tiendas (`scripts/shops/catalogo_tiendas.gd`), M15 Items (`piedra_caliza`)
 - **Severidad:** 🟠 Mayor (emite `SCRIPT ERROR` en **todo** boot de autoloads; contamina cada run headless)
@@ -2103,6 +2408,33 @@ El core de M72 es inexistente para este bug (afecta a M39/M15).
 
 ---
 
+### CORRECCIÓN DE ATRIBUCIÓN (atria-dawn, 2026-09-18, Log 1039) — BUG-055
+
+**El SCRIPT ERROR `.size()` sobre Callable NO está en `catalogo_tiendas.gd:63`.** Reproducido con
+binario real (Godot 4.7.2 headless, `--script res://scripts/logros/test_logros.gd`):
+
+```
+SCRIPT ERROR: Invalid call. Nonexistent function 'size' in base 'Callable'.
+   at: _test_guardado_carga_rf9_rn8 (res://scripts/logros/test_logros.gd:291)
+   GDScript backtrace (most recent call first):
+       [0] _test_guardado_carga_rf9_rn8 (res://scripts/logros/test_logros.gd:291)
+       [1] _run (res://scripts/logros/test_logros.gd:48)
+```
+
+- `catalogo_tiendas.gd:63` (la línea del backtrace de agnes) ejecuta `push_warning(...)` y funciona
+  correctamente: emite 11 warnings de items inexistentes y **no** genera SCRIPT ERROR. El backtrace
+  reportado por agnes mezcló dos bloques de output adyacentes (el warning con el error de otro test).
+- La causa real: `test_logros.gd:291` hace `_ach.desbloqueados.size()`, pero `AchievementService`
+  (`scripts/logros/achievement_service.gd`) declara la variable como **`_desbloqueados`** (privada,
+  línea 44) con accessor público `get_desbloqueados()` (línea 352). El nombre sin guion resuelve a un
+  Callable (resolución dinámica de Godot sobre `Node`) → `.size()` falla.
+- **Fix propuesto:** `var before: int = _ach.get_desbloqueados().size()`.
+- **Delegación:** [?] **M72** (agnes-3-flash, Log 1021) — es su test. Ver BUG-055.
+- **Lo que SÍ es real de BUG-050:** `piedra_caliza` es un item_id huérfano en M15 — pero es solo 1 de
+  **13 referencias rotas** (ver BUG-054). Y el warning de la línea 63 funciona, no es un error.
+
+---
+
 ## BUG-051 — CI: el job `godot-lint` es un no-op completo (lint de GDScript inefectivo)
 
 **Estado:** [?] Delegado
@@ -2137,6 +2469,181 @@ excepcion real: es un no-op disfrazado de gate de lint.
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-18 21:07
 
-**Delegacion:** [?] **M111/M83** — decidir que script de lint debe ejecutar el paso
+**Delegación original:** [?] **M111/M83** — decidir que script de lint debe ejecutar el paso
 (`scripts/editor/code_quality_check.gd` en `|| true` de la linea 28 es el candidato
 natural) y remover el `|| true` para que el gate sea real.
+
+---
+
+### RESOLUCIÓN BUG-051 (atria-dawn, 2026-09-18, Log 1039) — [x] CERRADO
+
+**No delegado: cerrado directamente** (mi especialidad: tooling/CI + verificación).
+
+**Mecanismo del gate real** (3 piezas nuevas):
+
+1. **`tools/quality/gen_colector_sintaxis.py`** — genera `scripts/editor/_colector_sintaxis.gd`:
+   un `extends SceneTree` con un `const _gN := preload("res://...")` por **cada** .gd del proyecto
+   (excluye `.godot/`, `addons/` terceros —gdUnit4/zylann.voxel—, `Godot/` y al propio colector).
+   Como `preload` fuerza el parseo en tiempo de compilación, basta un `--check-only` sobre el
+   colector para validar los 830 scripts en una pasada.
+2. **`--import`** antes del check: en un checkout limpio (sin `.godot`), `--check-only` no resuelve
+   `class_name`s entre archivos y emite ~19 falsos positivos. `godot --headless --import` construye
+   la caché y el check queda limpio. **Verificado empíricamente**: fresh+import → EXIT 0; fresh sin
+   import → EXIT 1 falso positivo.
+3. **`|| FAIL=1`** en el paso "Check for Godot parser errors" de `.github/workflows/quality.yml`
+   (job `godot-lint`) + paso `Setup Python` + `Generate syntax collector` + `Import project
+   resources`. El job `godot-lint` ahora SIRVE.
+
+**También se retiró el paso "Run GDScript Linter"** (ejecutaba
+`scripts/editor/code_quality_check.gd`, un `@tool extends EditorScript`, vía `--script` con
+`|| true`): no puede correr headless (requiere el editor) y era un segundo no-op silencioso. El
+job `code-quality-script` ya cubre ese script (también con `|| true`; su conversión a gate duro es
+decisión de M111/M107 — la QA de M111 Log 1032 documentó que su exit 1 es preexistente de
+`backup_manager`/M107 + 68 leaks ObjectDB).
+
+**Verificación del gate (binario real, Godot 4.7.2):**
+
+| Escenario | Salida |
+|---|---|
+| Árbol limpio (830 scripts) | **EXIT 0** |
+| Error de sintaxis inyectado (`func` anidado) | **EXIT 1** — nombra `res://scripts/editor/_test_sintaxis_roto.gd` |
+| Checkout fresco + `--import` | **EXIT 0** |
+
+**Hallazgo colateral (BUG-056):** el gate recién creado encontró **7 scripts que no compilaban**
+en el repo (Python-ismos + indentación). Resueltos en el mismo log (ver §7).
+
+**Anti-falso-verde descartado durante la investigación** (documentado para que nadie lo repita):
+- `GDScript.new() + reload()` aislado → 487 falsos positivos (dependencias no resueltas).
+- `load()` devuelve el script roto (no null) con 0 métodos compilados — no sirve como señal.
+- `reload()` sobre scripts ya cargados devuelve `ERR_ALREADY_IN_USE` (22) — no es fallo de compile.
+- `.new()` sobre un script roto cuelga/aborta el proceso.
+- `get_script_method_list()` devuelve 0 para scripts válidos nunca instanciados (build_info.gd).
+- `--check-only` SIN `--script` **ejecuta el juego** (el flag se ignora) — era ese el comportamiento
+  que hacía parecer que "validaba y pasaba".
+
+**Firma de resolución:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18 (Log 1039)
+
+---
+
+### BUG-054 — M39↔M15: 13 referencias rotas (8 item_ids inexistentes) en las tiendas oficiales
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M39 Tiendas (`scripts/shops/catalogo_tiendas.gd`), M15 Recursos
+  (`data/items/*.tres` → `ItemDatabase`)
+- **Severidad:** 🟠 Mayor (las 3 tiendas oficiales referencian items que NO existen — toda compra
+  fallaría en runtime)
+- **Prioridad sugerida:** Alta
+- **Estado:** [?] Delegado — dueño **M39 (glm-5.3-flash, reserva Log 1004, activo)**. No lo corrijo:
+  el archivo tiene cambios sin commit y glm está trabajando sobre él.
+
+**Descripción (corrección de mi Log 1026):** mi Log 1026 decía "13 items inexistentes". La cifra
+exacta: **13 referencias (shop, item) rotas, que corresponden a 8 item_ids únicos** inexistentes en
+M15. M15 define 111 items (bloques: `wood`, `stone`, `planks`... + ids `OBJ-*`); NINGUNO de los 8
+ids usados por M39 existe.
+
+**Las 13 referencias rotas (validadas con script sobre los 111 .tres de M15):**
+
+| Tienda | item_ids inexistentes |
+|---|---|
+| `tienda_general` | `madera_roble`, `piedra_caliza`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `pergamino_rec_tela_lino` (venta) + `fragmento_ancestral` (recompra) |
+| `herreria` | `herramienta_basica`, `mineral_cobre`, `piedra_caliza` |
+| `mercader_viajero` | `fragmento_ancestral`, `baya_roja`, `mineral_cobre`, `madera_roble` |
+
+**Causa raíz:** M39 se escribió con ids en español (`madera_roble`, `piedra_caliza`...) que nunca
+tuvieron contraparte en el catálogo M15/M159 (que usa `OBJ-*` y nombres de bloques en inglés). El
+validador de glm (Log 1004) solo avisa —no bloquea— y ademas **solo valida `catalogo_venta`, no
+`catalogo_recompra`** (gap adicional: las recompras rotas no se detectan en absoluto).
+
+**Evidencia:** boot headless emite 11 warnings `[M39] '<tienda>': item_id inexistente en M15: <id>`
+(11 = entradas de `catalogo_venta`; las recompras no se validan). Confirmado leyendo
+`catalogo_tiendas.gd:59-63` y los 111 `.tres` de `data/items/`.
+
+**Orden de autoloads (importante para el fix):** `project.godot` carga `ItemDatabase` (línea 33)
+**antes** que `CatalogoTiendas` (línea 66). El comentario de glm en `catalogo_tiendas.gd:34-35`
+("el orden de autoloads no garantiza el DB en el boot") es **incorrecto** — el DB sí está
+disponible, así que la validación podría ser DURA (bloquear el boot) en vez de warning.
+
+**Fix propuesto para M39:**
+1. Mapear los 8 ids a los reales de M15 (o crear los `.tres` faltantes en M15 si el diseño los
+   necesita — `fragmento_ancestral` ya aparece en M38 `econ_prices.tres`, ver BUG-047).
+2. Extender `_validar_tienda` para validar también `catalogo_recompra` (mismo loop).
+3. Considerar promover el check a error (el orden de autoloads lo permite).
+
+**Sub-hallazgo `mercader_viajero` (NO es bug):** mi Log 1026 flaggeó "mercader_viajero sin
+`npc_duenio_id` (relación M19 rota)". Verificación: **es una excepción de diseño explícita y
+validada**. `catalogo_tiendas.gd:138` pasa `npc_id=""` y `_validar_tienda` lo permite solo para
+`MERCADER_VIAJERO` (línea 43), exigiendo en cambio `dias_aparicion_mercader > 0` (línea 45; el
+mercader define 3). El comentario del archivo (líneas 33-34) lo documenta. Conclusión: la relación
+M19 no aplica al mercader rodante — **cerrado como no-bug**.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18
+
+---
+
+### BUG-055 — `test_logros.gd:291` llama `.size()` sobre Callable (corrección de BUG-050)
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M72 Logros (`scripts/logros/test_logros.gd:291`)
+- **Severidad:** 🟡 Menor (no afecta al juego; ensucia toda corrida headless con 1 SCRIPT ERROR)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado — dueño **M72 (agnes-3-flash, Log 1021)**.
+
+**Descripción:** ver "CORRECCIÓN DE ATRIBUCIÓN" en la entrada de BUG-055 arriba (sección 6, junto a
+BUG-050). Resumen: `_ach.desbloqueados` no existe (es `_desbloqueados`, privado; el accessor público
+es `get_desbloqueados()`). Godot resuelve el nombre dinámico a un Callable → `.size()` falla.
+
+**Fix propuesto:** `var before: int = _ach.get_desbloqueados().size()`.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18
+
+---
+
+### BUG-057 — `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso)
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M17 Construcción (no implementado), M59 Guardado
+  (`scripts/datos/buildings_save_provider.gd:58-67`), M60 (EstructurasCodec)
+- **Severidad:** 🟡 Menor (el guardado funciona; el restore es incompleto **por diseño**)
+- **Prioridad sugerida:** Baja (bloqueada por M17)
+- **Estado:** [?] Delegado — dueño **M17/M59**. No es accionable hasta que M17 exista.
+
+**Descripción:** `restore_save_data()` busca por duck-typing un autoload/nodo que exponga
+`obtener_estructuras()` + `restaurar_estructuras()`. Como M17 (Construcción) no está implementado
+(11/175 en CHECKLIST-GLOBAL), `fuente()` devuelve `null` y el restore retorna en la línea 62
+**sin restaurar nada ni avisar**. Resultado: la sección "buildings" del save se escribe pero
+siempre se carga vacía.
+
+**Confirmación por código** (`buildings_save_provider.gd:58-67`):
+```gdscript
+func restore_save_data(data: Dictionary) -> void:
+	var lista := EstructurasCodec.desde_seccion(data)
+	var f := fuente()
+	if f == null:
+		return                      # ← silent no-op; `lista` se descarta
+	if not f.has_method(METODO_RESTAURAR):
+		push_warning(...)           # ← este aviso SÍ existe, pero solo si hay fuente
+		return
+	f.call(METODO_RESTAURAR, lista)
+```
+
+**No es un bug de M60:** el propio header del archivo (líneas 14-16) documenta que el restore es
+no-op "Así el guardado funciona desde hoy y M17 se enchufa sin tocar M60". Es una decisión de
+diseño explícita y honesta. Se registra para que M17 sepa que **debe** exponer
+`restaurar_estructuras(lista)` al implementarse, y para que M59/M60 tengan el seguimiento.
+
+**Fix (cuando M17 exista):** implementar `obtener_estructuras()` y `restaurar_estructuras()`
+en el autoload de M17; el provider los encuentra solo por duck-typing.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18

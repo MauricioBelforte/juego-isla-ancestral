@@ -969,13 +969,17 @@ var _hotbar_equipped_label: Label = null
 var _blink_tiempo: float = 0.0
 
 func _create_hotbar_hud() -> void:
-	var ui := get_tree().current_scene.get_node_or_null("UI")
+	var current_scene := get_tree().current_scene
+	if current_scene == null:
+		push_warning("[M13/M57] current_scene es null: no se puede crear el Hotbar HUD todavia. Se omite.")
+		return
+	var ui := current_scene.get_node_or_null("UI")
 	var canvas := ui as CanvasLayer
 	if canvas == null:
 		canvas = CanvasLayer.new()
 		canvas.name = "HotbarCanvas"
 		canvas.layer = 10
-		get_tree().current_scene.add_child(canvas)
+		current_scene.add_child(canvas)
 
 	# Etiqueta de herramienta equipada (nombre + durabilidad)
 	var equipped_panel := PanelContainer.new()

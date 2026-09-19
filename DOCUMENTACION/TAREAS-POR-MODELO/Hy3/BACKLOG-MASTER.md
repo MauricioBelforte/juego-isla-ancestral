@@ -567,3 +567,14 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - **SEALS:** M153 y M64 agregados a tabla de sellos limpios (LF). Total 27 -> 29. Notas QA siguen 7.
 - **GLOBAL:** filas 153 y 64 actualizadas en working tree con nota de QA, PERO NO commiteadas (GLOBAL regenerado por otro agente en el arbol = 166 lineas de diff ajeno; commitearlo arrastraria trabajo ajeno, trapa 70 / BUG-034). Quedan para el regenerador. Fuente de verdad de sellos = SEALS.
 - **Sin push** (instruccion).
+
+## Fix BUG-060 player.gd - current_scene null en _create_hotbar_hud() (2026-09-19, hy3 / WorkBuddy) - Log 1060
+
+- [x] Bug confirmado: `player.gd` `_create_hotbar_hud()` (L971-982) accedia `get_tree().current_scene` sin null-check -> null-deref/crash potencial.
+- [x] Fix null-safety: guard temprano `if current_scene == null: push_warning(...); return` + usar referencia validada local en `add_child`. Consistente con `_verificar_rect_hotbar()`.
+- [x] Evidencia M11 (`test_player_m11.gd`, autor nex, Log 1055): EXIT 1, "26 checks, 1 fallos", **0 SCRIPT ERROR**. El guard emite WARNING limpio (sin crash).
+- [x] E2/E3 NO desaparece: "VoxelTerrain no autoload (headless sin mundo)" persiste = artefacto de entorno headless, independiente del bug corregido.
+- [x] Evidencia M64 (regresion): EXIT 0, "82 checks, 0 fallos", 0 SCRIPT ERROR. Sin regresion.
+- [x] BUG-060 registrado en DOCUMENTACION/11-BUGS.md (tabla + seccion 4): [x] Resuelto, hy3, 2026-09-19.
+- [x] Log 1060 reservado (--agente hy3 --modulo 11). Sin push (instruccion).
+- [!] Nota: NO se toco M11 (Nex) ni scripts/ia_npc (MiMo). El fix es local a player.gd.
