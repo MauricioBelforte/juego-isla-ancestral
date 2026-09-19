@@ -1,4 +1,4 @@
-> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
+> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.  **Re-verificado post-auditoria (2026-09-19, hy3):** el modulo fue re-verificado item por item por mimo-v2.5 (2026-09-15) y muestreado anti-sobre-cierre por Atria-Dawn (Log 1048, 2026-09-19): 15 [x] estratificados, 0% falsos -> honesto. Los 120 [x] actuales son genuine (implementacion GLM 2026-08-28 verificada por hy3 QA 2026-08-28). El revert de agnes no afecto el trabajo real de GLM.
 
 **Modelo:** GLM
 **Plataforma:** Kilo
@@ -6,7 +6,7 @@
 
 # 05-Checklist.md — Módulo 153: Objetivo Final del Proyecto (130 ítems)
 
-**Estado:** 115/130 [x] + 15 [?] (telemetria M104/M105 y verificaciones de juego implementado — conocidos, no bloqueantes)
+**Estado:** 120/130 [x] + 10 [ ] (KnownIssue no bloqueante DoD: telemetria M104/M105 x3 + verificaciones de juego implementado en M44/M47/M54/M55/M17/M59/M73/M161 - conocidos, no bloqueantes) + 0 [?]
 
 ## Reserva actual
 
@@ -254,4 +254,61 @@
 - Los [?] de los módulos en estado 🟡 están documentados como actividades programadas de fase jugable / telemetría / otros dueños (honestidad §21.4.3), no deuda de diseño.
 
 ### Veredicto
-Módulo 153 (Objetivo Final): mantiene estado 🟡; 10 [?] justificados (telemetría M104/M105 y verificaciones de juego implementado). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
+Módulo 153 (Objetivo Final): mantiene estado 🟡; 10 **`[ ]`** justificados (telemetría M104/M105 y verificaciones de juego implementado). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
+
+## Notas del Agente — Auditoría secundaria de sobre-cierre (atria-dawn)
+
+**Modelo:** Atria-Dawn-Preview (Shanghai AI Laboratory)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 (Log 1048)
+**Rol:** muestreo anti-sobre-cierre (este módulo clama 120/130 y fue revertido por la auditoría
+del 2026-09-14 → verificar si los `[x]` restaurados son legítimos)
+
+### Muestra verificada (~15 [x] estratificados)
+**Todos verificables.** El módulo es **inusualmente honesto** — distingue explícitamente
+"especificado" de "implementado":
+
+| Claim | Verificación |
+|---|---|
+| `vision_contract.json` O1/O3/O5/O6/O8/O10/O12/O15/O17/O18/O19 | ✅ contrato real, **19 objetivos O1–O19** presentes |
+| `validate_vision.py` ejecutable, cobertura con WARN real | ✅ **EJECUTADO ahora: 19/19 objetivos, contrato completo, "Todos los módulos declaran O#", EXIT 0** |
+| `prueba_vision.md` (checklist O1-O19 para M114/M151) | ✅ existe (4327 B) |
+| `validate_vision.gd` con `validate_principios` "en ambos (.gd spec y .py ejecutable)" | ✅ **honesto**: el .gd **no existe** (ni se claims implementado) — `04-Codigo.md` §3 lo marca "Especificado; equivalente ejecutable actual = validate_vision.py", deferred a editor/CI M118. El spec §3 sí contiene `validate_principios`, y el .py también → la claim "en ambos" es verdadera (spec + impl) |
+| Cobertura O# de todos los módulos | ✅ verificada por el validador (0 violaciones) |
+
+### Veredicto: **0% de [x] falsos en la muestra → NO hay sobre-cierre**
+Los 10 `[ ]` restantes son **dependencias externas legítimas** con dueño real (M104 telemetría ×3,
+M44/M47 identidad gráfica, M54 mapa, M74 eventos, M55 diario, M59 persistencia, M73 colecciones) —
+requieren que esos módulos existan antes de poder verificarse. No abro bug.
+
+### Corrección menor aplicada
+El "Veredicto" decía "10 **[?]** justificados" pero las marcas reales son **10 `[ ]`** (pendientes
+con dueño externo, no dudas de diseño). Corregido el texto para que coincida con las marcas
+(lección 24: el documento debe describir lo que dice).
+
+**Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-19
+
+
+## Totales (cierre 2026-09-19, hy3)
+
+- **[x]:** 120
+- **[ ]:** 10 (KnownIssue no bloqueante DoD, dependencias externas legitimas)
+- **[?]:** 0
+- **Total:** 130
+- **Modulos dependientes (GLOBAL 2026-09-19, no satisfechos -> items siguen [ ]):** M104 (49/117 En curso) y M105 (120/165 Con dudas, cerro sin los 3 eventos); M44 (76/113), M47 (18/119), M54 (34/177), M55 (8/131), M17 (11/175), M59 (55/130), M73 (28/135 Liberado correcciones), M161 (94/138), M74 (95/285 Liberado parcial), M25 (114/122 Con dudas).
+
+## Notas del Agente - Cierre hy3 (2026-09-19)
+
+**Agente que cierra:** Hy3 (Kilo/WorkBuddy, Tencent Hunyuan) | **Rol:** cierre del modulo (no es el QA cruzado §21.8 futuro).
+
+### Verificacion de cierre realizada
+- Boot headless Godot 4.7.2 (Log 1044 limpio): `SCRIPT_ERROR_count=0`, `BOOT_EXIT=0`. Cumple leccion 28 (anti-falso-verde).
+- Los 120 [x] son genuine: implementacion GLM (2026-08-28) verificada por hy3 QA cruzado (2026-08-28) + re-verificacion mimo (2026-09-15) + auditoria anti-sobre-cierre Atria-Dawn (Log 1048, 2026-09-19, muestra 15 [x], 0% falsos). NO es sello stale.
+- Los 10 [ ] son KnownIssue no bloqueante DoD (deferrals externos con dueño real). NO se marcaron [x] porque sus dependencias NO estan satisfechas (estado GLOBAL 2026-09-19 arriba). Marcarlos [x] seria sobre-cierre (BUG-034/050 que hy3 documento).
+- `objetivo_activo.gd` / `motivacion_manager.gd` NO emiten telemetria ni integran progression_manager hoy; los 3 eventos (volver_a_casa/acercarse_puerto/pausa_contemplativa) son responsabilidad del consumidor M104/M105 (deferidos a M105, que cerro sin ellos). No implemente cruce de scope.
+- 0 [?] -> modulo ✅-elegible por DoD §21.6 (KnownIssue no bloqueante cierra [ ] sin bloquear sello).
+
+### Veredicto de cierre
+**✅ Completado por hy3 (2026-09-19)** — 120/130, 10 [ ] KnownIssue no bloqueante (externos), 0 [?]. Requiere QA cruzado §21.8 por verificador != hy3 (GLM es el autor; hy3 ya hizo QA 2026-08-28, pero la tarea pide re-QA por tercero).
+
+**Firma:** Hy3 / WorkBuddy (Tencent Hunyuan) — 2026-09-19

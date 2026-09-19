@@ -537,3 +537,22 @@ Re-affirm de los 5 modulos que agnes-3-flash pidio en standby (Logs 946/954/974/
 - [x] **04-Codigo.md M49**: entrada 'Notas del Agente — hy3 (fix validador)'.
 - [!] **Ruido headless (fuera de scope, no tocado)**: scripts/ia_npc/ (MiMo M64) emite 11 SCRIPT ERROR en el bootstrap (`npc_needs.gd:41-43` get() 2 args; `npc_agent.gd:82` .new() en GDScript). No afecta los checks de iluminacion; reportado para coordinacion.
 - [x] **DoD cumplido**: validador 0 parse errors, carga escena real, checks individuales, exit coherente con fallos. Log 1045 escrito y firmado. NO push (instruccion).
+
+
+## Cierre M153 Objetivo-Final (2026-09-19, hy3 / WorkBuddy) — Log 1053
+
+- [x] Reclamado: GLOBAL fila 153 🔵 En curso -> ✅ Completado, agente hy3, Última actividad 2026-09-19.
+- [x] 05-Checklist M153: 120/130 genuine (GLM + QA hy3 2026-08-28 + mimo 2026-09-15 + auditoria Atria Log 1048 honesta). 0 [?].
+- [x] 10 [ ] mantenidos como KnownIssue no bloqueante DoD (deferrals externos: M104/M105 telemetria x3, M44/M47/M54/M55/M17/M59/M73/M161 verificaciones). NO fabricados [x] (anti-sobre-cerrado).
+- [x] Evidencia: validate_vision.py GREEN (19/19, 0 violaciones); boot headless 0 SCRIPT ERROR, EXIT 0.
+- [!] test_motivacion_m94.gd: 0 SCRIPT ERROR pero 5 fallos de asercion (diarios/semanales/mensuales/progreso) -> scope M94 (motivacion), no del guardian de M153. Reportado para coordinacion, no tocado.
+- [x] Bloque `## Totales` agregado; banner REVERTIDO anotado con re-verificacion; header stale corregido.
+- [x] Firma ✅ Completado por hy3. Requiere QA cruzado §21.8 por verificador != hy3 (pendiente, por la tarea).
+- [x] Commit selectivo (trap 70): solo 05-Checklist M153 + GLOBAL + Log 1053 + BACKLOG. NUMEROS_DISPONIBLES.txt NO commiteado (contador compartido).
+
+## Tarea 2 — QA cruzado M64 (DIFERIDA, 2026-09-19)
+
+- [ ] M64 (IA de NPC, MiMo) SIGUE 🔵 En curso 88/120 (GLOBAL fila 170). MiMo NO lo libero esta ronda.
+- [ ] Condicion de la tarea: 'cuando la fila 64 pase a 🟡/✅'. No cumplida -> QA cruzado M64 NO ejecutado (no fabriqué QA).
+- [ ] Al liberar MiMo M64: marcar '🔵 QA por hy3' en Notas, correr 82 checks headless con binario real, verificar que fixes de Log 1044 (npc_agent.gd/npc_needs.gd) estan en arbol, y firmar '✅ Verificado por hy3 2026-09-19' o 🟡 con notas.
+- [!] Recordar: scripts/ia_npc/ es de MiMo (lectura sola para QA, no tocar).
