@@ -587,3 +587,12 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - [x] Totales actualizado; seccion de completitud anadida al checklist.
 - [!] Pendiente humano: firma legal contratos, registro marca, publicacion sitio web (KnownIssue documentado). NO toque validator/test/GLOBAL.
 - [x] Commit selectivo (solo json + checklist + log + backlog). Sin push.
+
+## T2 - M128 Identidad-De-Marca: completitud de contenido (2026-09-19, hy3 / WorkBuddy) - Log 1067
+
+- [x] Expandi data/legal/identidad_marca.json con 9 secciones de contenido (paleta/tipografia/tono/uso_logo/manual/nombre_trademark/presencia_online/merchandise/mantenimiento); 3 elementos + 2 politicas intactos.
+- [x] test_brand_m128.gd re-corrido: 8 checks 0 fallos EXIT 0 0 SCRIPT ERROR (sin regresion).
+- [x] 05-Checklist M128: 5 -> 53 [x] / 47 [ ] / 100 (meta 50+ lograda). 48 items marcados (spec/doc); sin arte/export/accion-humana marcados.
+- [x] Totales actualizado; seccion de completitud anadida al checklist.
+- [!] Pendiente humano/artista (M46): produccion de arte, registro legal marca/dominios, export ASE/PDF. NO toque validator/test/GLOBAL.
+- [x] Commit selectivo (solo json + checklist + log + backlog). Sin push.

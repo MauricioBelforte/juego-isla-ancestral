@@ -4,5 +4,108 @@
     {"id": "paleta_colores", "elemento": "Paleta de colores", "uso": "digital", "version": "1.0"},
     {"id": "tipografia", "elemento": "Tipografía corporativa", "uso": "digital", "version": "1.0"}
   ],
-  "politicas": {"manual_de_marca": true, "revision_anual": true}
+  "politicas": {"manual_de_marca": true, "revision_anual": true},
+
+  "paleta_colores": {
+    "primario": {"nombre": "Azul Bosque", "hex": "#2E5A4C", "rgb": [46, 90, 76], "cmyk": [49, 0, 16, 64], "uso": "color base de marca, headers, botones primarios"},
+    "secundario": {"nombre": "Dorado Anciano", "hex": "#D4A843", "rgb": [212, 168, 67], "cmyk": [0, 21, 68, 17], "uso": "acentos, detalles, llamadas a la acción"},
+    "acento": {"nombre": "Blanco Perla", "hex": "#F5F0E8", "rgb": [245, 240, 232], "cmyk": [0, 2, 5, 4], "uso": "fondos claros, texto sobre colores oscuros"},
+    "neutros": [
+      {"nombre": "Carbón", "hex": "#2B2B2B", "rgb": [43, 43, 43], "uso": "texto principal"},
+      {"nombre": "Gris Piedra", "hex": "#8C8C84", "rgb": [140, 140, 132], "uso": "texto secundario, bordes"},
+      {"nombre": "Crema", "hex": "#EFE9DC", "rgb": [239, 233, 220], "uso": "fondos cálidos"}
+    ],
+    "secundarios": [
+      {"nombre": "Verde Hoja", "hex": "#4A7C59", "rgb": [74, 124, 89], "uso": "naturaleza, éxito"},
+      {"nombre": "Terracota", "hex": "#C06B4F", "rgb": [192, 107, 79], "uso": "alertas suaves, calor"},
+      {"nombre": "Cielo Claro", "hex": "#A9D2E8", "rgb": [169, 210, 232], "uso": "cielo, agua"}
+    ],
+    "contraste_wcag": {
+      "objetivo": "WCAG AA: 4.5:1 texto normal, 3:1 texto grande/UI",
+      "pares_verificados_por_diseno": [
+        "Blanco Perla (#F5F0E8) sobre Azul Bosque (#2E5A4C) — cumple AA",
+        "Carbón (#2B2B2B) sobre Blanco Perla (#F5F0E8) — cumple AA",
+        "Dorado (#D4A843) sobre Carbón (#2B2B2B) — cumple AA para texto grande"
+      ],
+      "nota": "El test automatizado de contraste (M128 H.143) debe confirmar todos los pares antes del lanzamiento; las especificaciones aquí son el baseline de diseño."
+    },
+    "documentacion_color": "Cada color documentado en RGB, CMYK y HEX. Variaciones para modo oscuro: invertir fondo a Carbón y usar acento Blanco Perla para texto; no alterar los hex de marca.",
+    "dark_mode": "En modo oscuro el fondo pasa a Carbón (#2B2B2B) y el texto a Blanco Perla (#F5F0E8); Azul Bosque y Dorado se mantienen como acentos."
+  },
+
+  "tipografia": {
+    "principal": {"nombre": "Fredoka / Fredoka One", "uso": "títulos y logo tipográfico", "licencia": "SIL Open Font License (OFL) 1.1"},
+    "secundaria": {"nombre": "Nunito", "uso": "cuerpo, UI, lectura", "licencia": "SIL Open Font License (OFL) 1.1"},
+    "monospace": {"nombre": "JetBrains Mono (u otro monospace OFL)", "uso": "código, datos técnicos, consolas", "licencia": "SIL Open Font License (OFL) 1.1"},
+    "licencias": "Todas las fuentes corporativas son OFL 1.1: uso comercial permitido, debe incluirse el aviso OFL y no vender la fuente por separado. Verificadas para el juego (FredokaOne-Regular.ttf, Nunito-Bold.ttf, Nunito-Regular.ttf ya en game/isla-ancestral/assets/fonts/).",
+    "jerarquia": {"H1": "32px", "H2": "24px", "H3": "20px", "H4": "16px", "H5": "14px", "H6": "12px", "body": "14px", "caption": "11px"},
+    "pesos": ["light 300", "regular 400", "bold 700"],
+    "uso_interfaces": "Títulos en Fredoka; cuerpo y controles en Nunito; datos técnicos/código en monospace. No mezclar más de dos familias por pantalla."
+  },
+
+  "tono_voz": {
+    "tono": "Cálido, cozy, cercano y respetuoso. Invita a la calma de cuidar una isla; nunca agresivo ni precipitado.",
+    "voz": "Comunidad rioplatense neutra (voseo estándar, sin tecnicismos). Habla con el jugador como un vecino, no como una marca corporativa.",
+    "ejemplos_correctos": [
+      "Te invitamos a recorrer tu isla y descubrir qué necesita cada rincón.",
+      "Gracias por acompañar a la comunidad: tu huerta creció gracias a tu paciencia."
+    ],
+    "ejemplos_incorrectos": [
+      "¡COMPRA YA O TE ARREPIENTES!",
+      "NUESTRA MARCA ES LA MEJOR DEL MERCADO, punt."
+    ]
+  },
+
+  "uso_logo": {
+    "espacio_libre": "Claros mínimos iguales a la altura de la letra 'i' del logotipo (aprox. 1/4 de la altura total) a su alrededor.",
+    "tamano_minimo": "32px de alto en digital; 10mm en impresión.",
+    "permitidos": ["sobre fondo liso de marca", "en headers y pie de página", "en material promocional cozy"],
+    "prohibidos": ["distorsionar o estirar", "cambiar los colores de marca", "colocar sobre fondo de bajo contraste", "aplicar sombras o efectos que dañen la legibilidad", "reencuadrar recortando el espacio libre"],
+    "formatos": ["PNG (raster, transparente)", "SVG (vector)", "AI (fuente/editable, opcional)"],
+    "light_dark": "Existen variantes sobre fondo claro y oscuro; no invertir los colores manualmente ni recrear el logo."
+  },
+
+  "manual_marca": {
+    "estructura_10_secciones": ["1. Introducción y propósito", "2. Identidad (nombre, tagline, valores)", "3. Reglas de logo (variantes, clear space, usos)", "4. Paleta de colores completa", "5. Tipografía y jerarquía", "6. Iconografía y fotografía", "7. Uso en redes sociales", "8. Restricciones de merchandise", "9. Coherencia con otros módulos", "10. Contacto para aprobación de uso"],
+    "introduccion": "Isla Ancestral es un juego cozy de cuidar una isla; el manual garantiza que la marca se comunique con la misma calma en todos los puntos de contacto.",
+    "identidad": {"nombre": "Isla Ancestral", "tagline": "Cuidá tu rincón del mundo", "valores": ["calma", "comunidad", "naturaleza", "curiosidad"]},
+    "reglas_logo": "Ver sección uso_logo: clear space 1/4 altura, mínimo 32px/10mm, usos permitidos y prohibidos.",
+    "paleta": "Ver sección paleta_colores (primario/secundario/acento/neutros/secundarios + contraste WCAG).",
+    "tipografia": "Ver sección tipografia (Fredoka títulos, Nunito cuerpo, monospace datos).",
+    "iconografia": "Iconos en estilo plano cozy, trazo 2px, paleta de marca; no usar emoji como logo.",
+    "redes": "Mismo tono y voz (ver tono_voz); usar plantillas de marca; no prometer contenido no entregado.",
+    "merchandise": "Ver sección merchandise.",
+    "contacto_aprobacion": "press@islaancestral.com para solicitudes de uso de marca fuera de las guidelines."
+  },
+
+  "nombre_trademark": {
+    "proceso_registro": "Buscar disponibilidad en USPTO/EUIPO y territorios clave (LATAM) antes del lanzamiento; registrar en clases 9/41 (software/juegos) recomendado.",
+    "cease_desist": "Ante uso no autorizado de 'Isla Ancestral' o sus logos, enviar carta de cese y desista desde press@islaancestral.com; documentar en el changelog de marca.",
+    "monitoreo": "Configurar alertas (Google Alerts / marcas) sobre el nombre y variantes; revisión trimestral.",
+    "territorios": "Registrados: por definir al lanzamiento. Pendientes: US, UE, AR/CL/UY/MX/BR (priorizar según audiencia)."
+  },
+
+  "presencia_online": {
+    "coherencia": "Sitio web, redes y prensa usan el mismo logo, paleta y tipografía definidos aquí; el app icon sigue las specs de uso_logo.",
+    "guidelines_redes": "Un post por día máximo en lanzamiento; tono cálido; hashtags de comunidad; mencionar créditos de asset artists cuando aplique.",
+    "tono_comunicacion": "Ver sección tono_voz."
+  },
+
+  "merchandise": {
+    "productos_permitidos": ["camisetas", "tazas", "posters", "llaveros", "pins"],
+    "logo_minimo_impresion": "No reducir el logo bajo 10mm de alto; respetar clear space en bordados y serigrafía.",
+    "aprobacion_disenos": "Todo diseño de merchandise pasa por aprobación en press@islaancestral.com antes de producción.",
+    "restricciones_calidad": "No usar colores fuera de la paleta; no distorsionar el logo; materiales libres de plomo.",
+    "estandares_calidad": {"textil": "100% algodón o mezcla premium, estampado duradero", "ceramica": "esmalte atóxico", "papel": "papel reciclado certificado"},
+    "guia_colores_impresion": "Usar CMYK de paleta_colores para impresión; conversión RGB→CMYK debe aprobarse para evitar desviaciones.",
+    "muestreo": "Producir muestra física y aprobar antes del lote completo.",
+    "proveedores_aprobados": "Seleccionar POD (print-on-demand) con certificación; benchmarking por región antes de contratar.",
+    "checklist_qa": "Revisar: registro nítido, colores dentro de tolerancia, sin defectos de estampado, empaque con branding coherente."
+  },
+
+  "mantenimiento": {
+    "quien_aprueba": "Solo el equipo de marca (press@islaancestral.com) aprueba cambios de logo, paleta o tipografía.",
+    "changelog": "Mantener changelog del manual con fecha y motivo de cada cambio; revisión anual obligatoria (política revision_anual).",
+    "proceso_partners": "Nuevos partners reciben el manual y firman acuse de recibido de las guidelines antes de usar la marca."
+  }
 }
