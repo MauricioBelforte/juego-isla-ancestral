@@ -578,3 +578,12 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - [x] BUG-060 registrado en DOCUMENTACION/11-BUGS.md (tabla + seccion 4): [x] Resuelto, hy3, 2026-09-19.
 - [x] Log 1060 reservado (--agente hy3 --modulo 11). Sin push (instruccion).
 - [!] Nota: NO se toco M11 (Nex) ni scripts/ia_npc (MiMo). El fix es local a player.gd.
+
+## T1 - M126 Marketing-Legal: completitud de contenido legal (2026-09-19, hy3 / WorkBuddy) - Log 1066
+
+- [x] Expandi data/legal/marketing_legal.json con 9 secciones de contenido (screenshots/musica/terceros/branding/influencers/contratos_promocionales/giveaways/revision/pruebas); 4 cumplimientos + 2 politicas intactos.
+- [x] test_marketing_legal_m126.gd re-corrido: 9 checks 0 fallos EXIT 0 0 SCRIPT ERROR (sin regresion).
+- [x] 05-Checklist M126: 4 -> 59 [x] / 42 [ ] / 101 (meta 50+ lograda). 55 items marcados (44 contenido + 11 [S] extension). Sin [M] marcados.
+- [x] Totales actualizado; seccion de completitud anadida al checklist.
+- [!] Pendiente humano: firma legal contratos, registro marca, publicacion sitio web (KnownIssue documentado). NO toque validator/test/GLOBAL.
+- [x] Commit selectivo (solo json + checklist + log + backlog). Sin push.

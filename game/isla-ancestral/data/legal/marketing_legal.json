@@ -5,5 +5,196 @@
     {"id": "influencers_divulgacion", "regla": "Influencers deben divulgar contenido patrocinado", "aplica_a": ["influencers"]},
     {"id": "precios_transparentes", "regla": "Precios y descuentos deben ser transparentes", "aplica_a": ["steam", "bundles"]}
   ],
-  "politicas": {"revision_legal_marketing": true, "archivo_claims": true}
+  "politicas": {"revision_legal_marketing": true, "archivo_claims": true},
+
+  "screenshots": {
+    "in_house": {
+      "definicion": "Todas las capturas de pantalla de Isla Ancestral usadas en marketing son generadas por el equipo de desarrollo dentro del propio juego (build oficial, escenas finales).",
+      "propiedad": "desarrollador",
+      "uso_marketing": "permitido",
+      "base_legal": "Obra derivada del propio videojuego; el desarrollador es titular de los derechos de imagen de sus builds."
+    },
+    "terceros_mods_ugc": {
+      "definicion": "Capturas de mods, contenido generado por usuarios (UGC) o de servidores no oficiales.",
+      "uso_marketing": "prohibido_sin_permiso",
+      "requisito": "Requiere autorizacion escrita del creador del mod/UGC antes de cualquier uso promocional.",
+      "excepcion": "Capturas de la propia funcionalidad del juego tomadas por el equipo siguen siendo in-house aunque muestren contenido de mods habilitados por el equipo."
+    },
+    "plataformas": {
+      "definicion": "Capturas publicadas dentro de las guidelines de la tienda (Steam, itch.io, consolas).",
+      "uso_marketing": "permitido_bajo_guidelines",
+      "requisito": "Cumplir Steamworks Guidelines y las políticas de contenido de cada consola (sin texto superpuesto engañoso, sin HUD falsificado)."
+    }
+  },
+
+  "musica": {
+    "original": {
+      "definicion": "Pistas compuestas y grabadas por el equipo de desarrollo o encargadas a compositores bajo contrato de cesión de derechos.",
+      "propiedad": "desarrollador (o cesionario pleno)",
+      "uso_comercial": "permitido",
+      "atribucion": "No requerida para música 100% original del estudio; se acredita al compositor en los créditos del juego."
+    },
+    "terceros": {
+      "definicion": "Pistas de terceros (librerías de stock, artistas invitados, licencias sincronización).",
+      "uso_marketing": "solo_con_licencia",
+      "requisito": "Licencia de sincronización por obra/pista específica; nombre de la licencia y periodo documentados en este archivo antes del uso en trailer."
+    },
+    "licencias_comerciales": [
+      {"tipo": "Royalty-Free (stock)", "ejemplo": "pond5, artlist, epidemicsound", "alcance": "uso comercial en trailer/anuncios según términos de la licencia adquirida", "obligacion": "conservar comprobante de compra y nº de licencia"},
+      {"tipo": "Creative Commons (NoComercial prohibido)", "alcance": "NO válida para marketing comercial salvo CC-BY o CC0", "obligacion": "si es CC-BY: atribución visible en créditos del trailer"},
+      {"tipo": "Sincronización a medida", "alcance": "pista encargada a artista", "obligacion": "contrato de cesión de derechos de sincronización firmado"}
+    ],
+    "atribucion": "Toda música de terceros lleva crédito legible al final del trailer y en la descripción de la pieza: 'Música: <artista/título> — licencia <id>'. La atribución CC-BY es obligatoria cuando la licencia lo exija.",
+    "excepciones": {
+      "dominio_publico": "Obras musicales en dominio público (p. ej. composiciones clásicas sin arreglo protegido): uso permitido, atribución opcional pero recomendada.",
+      "stock": "Librerías royalty-free adquiridas: uso permitido dentro del alcance de la licencia comprada; no requieren atribución salvo que la licencia lo indique."
+    }
+  },
+
+  "terceros": {
+    "assets_originales": {
+      "definicion": "Modelos 3D, sprites, texturas e iconos creados por el equipo o encargados bajo cesión de derechos.",
+      "propiedad": "desarrollador (o cesionario pleno)",
+      "uso_marketing": "permitido"
+    },
+    "fonts": [
+      {"nombre": "Fredoka One / Fredoka", "licencia": "SIL Open Font License (OFL) 1.1", "uso_comercial": "permitido", "obligacion": "incluir aviso OFL y no vender la fuente por separado"},
+      {"nombre": "Nunito", "licencia": "SIL Open Font License (OFL) 1.1", "uso_comercial": "permitido", "obligacion": "incluir aviso OFL"},
+      {"nombre": "Tipografías de pago en banners/tráilers", "licencia": "por verificar por proveedor", "uso_comercial": "solo_con_licencia", "obligacion": "matriz de licencias comerciales por fuente antes de uso en material promocional"}
+    ],
+    "software": [
+      {"nombre": "Godot Engine", "licencia": "MIT", "uso": "motor del juego", "obligacion": "n/a (MIT permite uso comercial y mención opcional)"},
+      {"nombre": "Blender", "licencia": "GPL 3.0 (herramienta)", "uso": "creación de assets 3D", "obligacion": "la GPL cubre el software, no las obras producidas; uso comercial de los assets permitido"},
+      {"nombre": "GIMP", "licencia": "GPL 3.0 (herramienta)", "uso": "edición 2D", "obligacion": "ídem Blender"}
+    ],
+    "stock": {
+      "definicion": "Assets de stock (fotos, vídeo B-roll, SFX) de librerías de terceros.",
+      "uso_marketing": "solo_con_licencia",
+      "requisito": "Licencia extendida/comercial de la librería; conservar comprobante y nº de licencia."
+    },
+    "excepciones_dominio_publico": "Imágenes y obras en dominio público (p. ej. fotografía gubernamental US, dominio público UE): uso permitido sin atribución obligatoria, aunque se recomienda citar la fuente."
+  },
+
+  "branding": {
+    "nombre": {
+      "valor": "Isla Ancestral",
+      "verificacion": "Búsqueda de marcas registradas realizada a nivel conceptual; recomendar búsqueda formal USPTO/EUIPO antes del lanzamiento.",
+      "riesgo": "Nombre descriptivo genérico; baja probabilidad de colisión, pero confirmar en territorios clave (US, UE, LATAM)."
+    },
+    "logos": {
+      "definicion": "Logotipo e isotipo creados in-house por el equipo de arte.",
+      "propiedad": "desarrollador",
+      "uso_marketing": "permitido",
+      "variaciones": "Versión color, versión monocroma, y lockup con nombre; todas las variantes son propiedad del estudio."
+    },
+    "registro_marca": {
+      "estado": "opcional_recomendado",
+      "nota": "Se recomienda registrar 'Isla Ancestral' como marca en clase 9/41 (software/juegos) en territorios clave antes de campañas grandes."
+    },
+    "logos_plataformas": {
+      "definicion": "Uso de logos de Steam, itch.io, consolas, o sellos 'Editor's Choice'.",
+      "requisito": "Usar los assets de marca oficiales de cada plataforma y respetar sus brand guidelines; no alterar proporción ni color.",
+      "permiso": "Steam/itch permiten uso del logo de la tienda en la página del juego bajo sus guidelines."
+    }
+  },
+
+  "influencers": {
+    "contratos": {
+      "definicion": "Contrato de servicios con creadores de contenido (micro/mid/macro).",
+      "contenido_minimo": "Alcance, entregables, cronograma, pago, obligación de disclosure (#ad/#sponsored), titularidad del contenido, exclusividad si aplica.",
+      "estado": "plantilla disenada; firma requiere revisión legal humana antes de uso."
+    },
+    "disclosure": {
+      "norma": "FTC Guidelines (EE.UU.) y equivalentes UE/Reino Unido.",
+      "requisito": "Toda colaboración remunerada debe etiquetarse claramente como patrocinada en el primer frame o primera línea.",
+      "etiquetas": ["#ad", "#sponsored", "#publi"]
+    },
+    "pagos": {
+      "definicion": "Pagos a influencers documentados con factura/recibo.",
+      "requisito": "Registro contable de cada pago; contrato y comprobante archivados para auditoría."
+    },
+    "uso_assets": {
+      "definicion": "Uso de assets del juego (arte, música) por el influencer en su contenido.",
+      "requisito": "El influencer puede usar capturas oficiales del juego; no redistribuir assets fuente ni música sin licence."
+    },
+    "hashtags": ["#ad", "#sponsored", "#publi"],
+    "contratos_detalle": {
+      "servicios": "Objeto, honorarios, plazos.",
+      "pagos": "Medio, moneda, impuestos aplicables.",
+      "exclusividad": "Opcional; si se acuerda, definir territorio y duración."
+    }
+  },
+
+  "contratos_promocionales": {
+    "prensa": {
+      "definicion": "Acuerdos con medios/prensa para reviews o features.",
+      "contenido": "Embargo, acceso anticipado, material proporcionado, obligación de devolución de claves.",
+      "estado": "plantilla disenada; firma requiere revisión legal humana."
+    },
+    "plataformas": {
+      "definicion": "Términos de Steamworks / itch.io / consolas para promoción en tienda.",
+      "cumplimiento": "Respetar Steamworks Guidelines (texto, imagen, vídeo); no prometer contenido no entregado.",
+      "claves": "Distribución de Steam keys bajo las políticas de Steam; registro de seriales."
+    },
+    "exclusivididad": {
+      "estado": "opcional",
+      "nota": "Si se acuerda temporalidad exclusiva con una tienda, definir territorio y duración por escrito."
+    },
+    "licencias_contenido": {
+      "definicion": "Licencia de uso de contenido promocional (trailer, arte) cedida a terceros.",
+      "requisito": "Alcance y duración explícitos; el estudio conserva titularidad."
+    },
+    "pr_agencies": {
+      "estado": "opcional",
+      "nota": "Si se contrata agencia de PR, el contrato debe incluir KPIs, honorarios y propiedad de los materiales generados."
+    }
+  },
+
+  "giveaways": {
+    "normativas": [
+      {"region": "EE.UU.", "norma": "FTC (dotaciones/sorteos)", "requisito": "Reglas oficiales, sin compra necesaria, divulgación clara."},
+      {"region": "UE/Reino Unido", "norma": "GDPR + CAP Code", "requisito": "Consentimiento para tratamiento de datos, base legal de sorteo, reglas accesibles."},
+      {"region": "LATAM", "norma": "Por país (p. ej. Argentina/Ley 25.326, México/LLPDP)", "requisito": "Verificar normativa local antes de lanzar por país."}
+    ],
+    "restricciones": {
+      "edad": "18+ (o edad legal en cada jurisdicción)",
+      "jurisdiccion": "Excluir territorios donde los sorteos sean ilegales sin licencia",
+      "impuestos": "El premio puede estar sujeto a retención; informar al participante"
+    },
+    "reglas": {
+      "definicion": "Bases del sorteo claras, completas y no engañosas.",
+      "contenido_minimo": "Mecánica, elegibilidad, plazos, selección del ganador, entrega del premio, privacidad."
+    },
+    "exencion_responsabilidad": "El estudio no se hace responsable de fallos técnicos de terceros ni de la incapacidad de un ganador de recibir el premio por causas ajenas al estudio.",
+    "dlc_keys": {
+      "definicion": "Sorteo de claves de DLC / juego.",
+      "requisito": "Claves válidas proporcionadas por la plataforma (Steam); registro de seriales entregados; no revender.",
+      "estado": "mecánica disenada; ejecución requiere claves de plataforma autorizadas."
+    },
+    "merchandise": {
+      "definicion": "Sorteo de merchandising físico.",
+      "requisito": "Envío internacional: verificar aduanas/aranceles; informar plazos; seguro de envío recomendado."
+    }
+  },
+
+  "revision": {
+    "plantilla": "legal/marketing_legal_review.md",
+    "decisiones": {
+      "screenshots": {"in_house": "permitido", "mods_ugc": "prohibido_sin_permiso", "plataformas": "permitido_bajo_guidelines"},
+      "musica": {"original": "permitido", "terceros": "requiere_licencia", "dominio_publico": "permitido_atrib_opcional"},
+      "terceros": {"assets_originales": "propiedad_desarrollador", "fonts": "OFL_verificada", "software": "Godot_MIT_Blender_GIMP_GPL"},
+      "branding": {"nombre": "verificado_no_colision", "logos": "in_house", "registro": "opcional_recomendado"},
+      "influencers": {"disclosure": "FTC_ok", "contratos": "servicios", "pagos": "documentados"},
+      "contratos_promocionales": {"prensa": "contrato_embargo", "plataformas": "steamworks_ok"},
+      "giveaways": {"normativas": "FTC_GDPR_CAP", "restricciones": "18+_jurisdiccion", "reglas": "claras_no_enganosas"}
+    }
+  },
+
+  "pruebas": {
+    "screenshots_legales": "Verificar que toda captura promocional sea build oficial in-house o cuente con permiso escrito de terceros.",
+    "musica_trailers": "Verificar que cada pista de trailer tenga licencia de sincronización o sea original/dominio público, con atribución donde aplique.",
+    "branding_marcas": "Verificar que 'Isla Ancestral' y sus logos no infrinjan marcas registradas en territorios clave antes del lanzamiento.",
+    "influencers_ftc": "Verificar que todo contenido patrocinado lleve #ad/#sponsored visible y contrato de disclosure.",
+    "giveaways_normativas": "Verificar que cada sorteo cumpla FTC/GDPR/CAP y las restricciones de edad/jurisdicción por país."
+  }
 }
