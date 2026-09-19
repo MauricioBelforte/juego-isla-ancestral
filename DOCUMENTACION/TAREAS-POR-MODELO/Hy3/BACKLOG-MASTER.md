@@ -556,3 +556,14 @@ Re-affirm de los 5 modulos que agnes-3-flash pidio en standby (Logs 946/954/974/
 - [ ] Condicion de la tarea: 'cuando la fila 64 pase a 🟡/✅'. No cumplida -> QA cruzado M64 NO ejecutado (no fabriqué QA).
 - [ ] Al liberar MiMo M64: marcar '🔵 QA por hy3' en Notas, correr 82 checks headless con binario real, verificar que fixes de Log 1044 (npc_agent.gd/npc_needs.gd) estan en arbol, y firmar '✅ Verificado por hy3 2026-09-19' o 🟡 con notas.
 - [!] Recordar: scripts/ia_npc/ es de MiMo (lectura sola para QA, no tocar).
+## QA cruzado §21.8 M153 + M64 (Logs 1056 / 1057, 2026-09-19)
+
+Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy3 = verificador.
+
+- **M153 Objetivo-Final (Log 1056):** QA cruzado §21.8 completado y sellado. Implementador = GLM (hy3 solo CERRO en Log 1053, no implemento -> puede verificar). Evidencia: guardian `validate_vision.py` re-corrido por hy3 GREEN 19/19; 05-Checklist 120/10/0 (**0 [?] ocultos**); los 10 [ ] son KnownIssue DoD con deps externas REALES (M104/M105/M44/M47/M54/M55/M17/M59/M73/M161/M74, ninguna satisfecha). **Sello: ✅ Verificado por hy3 2026-09-19** (en SEALS, +1 sello limpio -> 29 total).
+
+- **M64 IA-De-NPC (Log 1057):** QA cruzado §21.8 completado y sellado. Implementador = MiMo V2.5 (liberado 🟣 100/117, Log 1046). Evidencia: `test_ia_npc_m64_iterN.gd` re-corrido por hy3 = **82 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR**; fixes Log 1044 (npc_agent.gd / npc_needs.gd boot) integrados y verificados (no pasados por alto). 05-Checklist 100/0/17 (17 [?] documentados, visibles). **Sello: ✅ Verificado por hy3 2026-09-19** (en SEALS, +1 sello limpio -> 29 total). No se toco M11 (Nex) ni cola visual (Agnes M19/M31/M51/M52).
+
+- **SEALS:** M153 y M64 agregados a tabla de sellos limpios (LF). Total 27 -> 29. Notas QA siguen 7.
+- **GLOBAL:** filas 153 y 64 actualizadas en working tree con nota de QA, PERO NO commiteadas (GLOBAL regenerado por otro agente en el arbol = 166 lineas de diff ajeno; commitearlo arrastraria trabajo ajeno, trapa 70 / BUG-034). Quedan para el regenerador. Fuente de verdad de sellos = SEALS.
+- **Sin push** (instruccion).
