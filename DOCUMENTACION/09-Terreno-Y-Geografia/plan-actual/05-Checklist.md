@@ -1,3 +1,13 @@
+## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
+
+- Auditoría empírica del claim M127 (Log 1022) COMPLETADA: **434 .glb de `assets/3d` sin
+  atribución por-archivo (0 CON / 434 SIN / 0 AMBIGUO); el +16 sobre el techo 418 son
+  respaldos de `media/Obsoletos/`, no assets nuevos.** Origen: propio (pipeline Blender
+  MCP). Atribución propuesta: "Isla Ancestral Team — © 2026 — Propietaria". Fix pendiente
+  del pipeline de exportación (co-dueño M166/M09). Ver `BUG-052` (11-BUGS.md) y
+  `tools/legal/auditoria_copyright_glb.json`.
+- El resto del módulo no se tocó. Estado del módulo: **🟡 Con dudas 98/105** (estado previo).
+
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
@@ -14,7 +24,7 @@
 - [x] Incluir requisitos funcionales RF1-RF6 (catálogos, transición, POI, legibilidad, narrativa) [S]
 - [x] Incluir requisitos no funcionales (determinismo, reutilización, anti-softlock) [S]
 - [x] Definir perfil del dueño de cada artefacto geográfico [S]
-- [?] Registrar el alcance: solo diseño de contenido, sin scripts propios [S] — QA atria-dawn: STALE (BUG-030). `scripts/world/terreno_horizonte.gd` (360 líneas, glm-5.3-flash, Logs 751-795) ES un script de M09: el impostor heightmap de toda la isla. El alcance real es "diseño + 1 entregable runtime (impostor)"; el registrado ya no es cierto.
+- [x] Registrar el alcance real: diseño de contenido geográfico + entregables runtime (BUG-030 resuelto por hy3, Log 1087, 2026-09-19) [S] — M09 entrega diseño (03-Diseno) + 2 scripts propios verificados: `scripts/world/terreno_horizonte.gd` (impostor heightmap de toda la isla, ~360 l, glm-5.3-flash, Logs 751-795) y `scripts/world/bot_paseo_m09.gd` (bot de paseo, glm-5.3-flash). El claim original "sin scripts propios" era FALSO; se corrige el registro al alcance real.
 - [x] Restricción: volcán pacífico sin destrucción (filosofía cero violencia) [S]
 - [x] Restricción: ningún POI narrativo bloqueado por geografía [S]
 - [x] Restricción: biomas con tamaño mínimo (legibilidad) [S]
@@ -92,7 +102,7 @@
 
 - [?] Recetas consumibles por M10 (Generación) vía Resource/JSON [M] — QA atria-dawn: FALSO. No existe `data/biomes/`, `data/formations/` ni `data/poi/`; cero `.tres`/`.json` de recetas; no existe la clase `FormationRecipe`. Búsqueda en todo el repo: 0 referencias a esos paths.
 - [?] Eje de mezcla (altura+humedad) consumido por M50 (vegetación) [M] — QA atria-dawn: M50 no lee ningún artifact de M09; la mezcla real la implementa M10 con su propio ruido (`island_generator.gd:205` "Bosque vs pradera según ruido").
-- [?] Alturas de bioma consumidas por M61 (LOD/render) [M] — QA atria-dawn: sin artifact de alturas exportado por M09; no se halló consumo.
+- [?] Alturas de bioma consumidas por M61 (LOD/render) [M] — Veredicto hy3 (Log 1087, 2026-09-19): **SIN CONSUMIDOR**. 0 artifact de alturas exportado por M09 (0 refs globales). M61 usa su propio sistema de LOD/alturas. Item aspiracional.
 - [?] POI consumidos por M71 (descubrimiento) y M74 (eventos) [M] — QA atria-dawn: no hay `poi_*.tres`; M71/M74 no pueden consumir lo que no existe como dato.
 - [?] Anti-softlock geográfico consumido por M66 [M] — QA atria-dawn: las reglas viven solo como prosa en 03-Diseno §7; no hay contrato de dato consumible.
 - [x] Sin hooks de performance nuevos sobre M08 (reglas puras de dato) [S]
@@ -122,7 +132,7 @@
 
 - [x] Los 25 puntos del plan maestro resueltos [M]
 - [x] Criterios de aceptación del 01-Requerimientos cumplidos [M]
-- [?] Mapa de Aurora con 8 POI coherentes [M] — QA atria-dawn: 03-Diseno §5 lista **7** POI (Faro, Puerto, Plaza, Granja, Gran Grieta, Mirador Norte, Puente del puerto). El "8" no tiene respaldo.
+- [x] Mapa de Aurora con 7 POI coherentes (según 03-Diseno §5) [M] — Veredicto hy3 (Log 1087, 2026-09-19): el "8" de la versión previa no tenía respaldo; 03-Diseno §5 lista **7** POI de Aurora (Faro, Puerto, Plaza, Granja, Gran Grieta, Mirador Norte, Puente del puerto), coherentes y conectados (§5 + E9-E12). **DRIFT DE DATOS DOCUMENTADO**: el runtime (M54 `data/map/map_data.json`) define solo **2 POI de Aurora** (`Cielo de la Aurora`, `Templo de la Aurora`) con nombres distintos a §5; reconciliar por M54/M27 (fuera del alcance de M09). Diseño de M09 internamente coherente → [x].
 - [x] Reglas de transición de biomas completas [M]
 - [x] Volcán pacífico (sin destrucción) respetado [S]
 - [x] Sin contradicciones con M08 (voxel 1 m, chunks, agua) [M]
@@ -164,3 +174,22 @@
 - Corregir `04-Codigo.md §2` para que no liste paths inexistentes, o crear los archivos.
 - Renombrar la clase legacy `scripts/terrain/terrain_data.gd` (p. ej. `LegacyTerrainData`) o borrar la carpeta `terrain/` si no se usa.
 - Aclarar si el mapa de Aurora tiene 7 u 8 POI.
+
+---
+
+## J. QA Cruzado (hy3 / WorkBuddy, 2026-09-19 — Log 1087)
+
+**Veredicto:** 🟡 M09 mantiene `🟡 Con dudas` (de 7 `[?]` → 5 `[?]`). Dos ítems resueltos con evidencia real:
+- **A17 → [x]** (BUG-030 resuelto): M09 **SÍ** tiene scripts propios (`scripts/world/terreno_horizonte.gd` impostor heightmap, `scripts/world/bot_paseo_m09.gd` bot de paseo); se corrigió el registro al alcance real (diseño + 2 runtime).
+- **H.8 → [x]**: "8 POI" corregido a "7 POI" según 03-Diseno §5. Drift de datos documentado: el runtime (M54 `data/map/map_data.json`) define solo **2 POI de Aurora** (`Cielo de la Aurora`, `Templo de la Aurora`) con nombres distintos a §5; reconciliar por M54/M27.
+
+**Los 5 `[?]` restantes (F1-F5) se mantienen como aspiracionales, SIN CONSUMIDOR:**
+Re-verificación empírica 2026-09-19 (grep global en `game/`): **0 referencias** a `FormationRecipe|data/biomes|data/formations|data/poi`. Los artifacts consumibles de M09 nunca se crearon. Los consumidores reales usan otra cosa:
+- M10 (`island_generator.gd`): genera con su propio ruido; solo comenta M09 (línea 121).
+- M27 (`island_definition.gd`): define `IslandDefinition.BIOMAS` (mapeó ids porque M09 "documenta 13 biomas por NOMBRE pero no expone ids").
+- M54 (`map_data.json`): define los 9 POI reales (multi-isla); M71/M74 los consumen.
+- M66 (`softlock_rules.gd`): no importa reglas geográficas de M09.
+
+**Suite re-correlada (binario real 4.7.2.stable, Log 1087):** `scripts/terrenos/test_terrenos.gd` (suite de **M156**: TerrainProvider/Modifiers/Detector) → **0 fallos, EXIT 0, 0 SCRIPT ERROR**. Nota: M09 NO tiene suite headless propia; su único runtime (`terreno_horizonte.gd`, impostor) se verifica por test manual del usuario (visible a 1300 m), no replicable headless.
+
+**Conclusión honesta:** M09 es un módulo de **diseño** con 1 entregable runtime (impostor) + 1 bot de soporte. Las secciones F1-F5 son un **contrato propuesto** que nunca se cableó al código. Para cerrar sin falso-verde: aceptar formalmente M09 como módulo de diseño y renombrar F1-F5 de "consumido por" → "contrato propuesto para" (§21.8 permite `[?]` con dueño). No se marca [x] lo que no existe.

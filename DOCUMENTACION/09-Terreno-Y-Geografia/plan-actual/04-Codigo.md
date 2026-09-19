@@ -7,21 +7,32 @@
 
 Módulo **de diseño de contenido geográfico** (recetas + reglas). No genera scripts propios todavía: las recetas se consumen por el generador (M10). Sin 06/07 por ahora (validación visual en el prototipo).
 
-## 2. Estructura de datos de recetas (para M10)
+## 2. Estructura de datos de recetas (para M10) — ESTADO REAL (hy3, Log 1087, 2026-09-19)
+
+> ⚠️ **Los paths siguientes NUNCA se crearon** (verificado por grep global: 0 refs a
+> `FormationRecipe|data/biomes|data/formations|data/poi` en todo `game/`). El diseño
+> original proponía exportar recetas como `.tres`, pero el código real no las consume:
+> M10 (`island_generator.gd`) genera con su propio ruido y M27 (`island_definition.gd`)
+> define `IslandDefinition.BIOMAS`. Se documenta aquí el contrato **propuesto**, no
+> implementado.
 
 ```
-data/biomes/   → biome_resonance.tres (alturas, materiales, decoración)
-data/formations/ → formation_gran_grieta.tres (spline, alturas, restricciones)
-data/poi/      → poi_faro.tres (posición, progresión requerida)
+data/biomes/   → biome_resonance.tres (alturas, materiales, decoración)        [NO CREADO]
+data/formations/ → formation_gran_grieta.tres (spline, alturas, restricciones) [NO CREADO]
+data/poi/      → poi_faro.tres (posición, progresión requerida)               [NO CREADO]
 ```
 
-Receta (Resource):
+Receta (Resource) propuesta — clase `FormationRecipe` **NO EXISTE**:
 ```
 FormationRecipe:
   id, biomas_fuente[], posición_rel, tamaño, alturas(min/max),
   material_base, ruido_mods, reglas_mezcla, decoración[],
   poi_ref, restricciones[]
 ```
+
+**Entregables runtime reales de M09 (verificados, Log 1087):**
+- `scripts/world/terreno_horizonte.gd` — impostor heightmap de TODA la isla (visible a 1300 m).
+- `scripts/world/bot_paseo_m09.gd` — bot de paseo de soporte (test manual del usuario).
 
 ## 3. Decisiones que otros módulos consumen
 
@@ -115,3 +126,28 @@ FormationRecipe:
 3. Renombrar `scripts/terrain/terrain_data.gd` → `LegacyTerrainData` (o borrar la carpeta `terrain/` si no se usa) para eliminar el `class_name` duplicado.
 4. Aclarar si el mapa de Aurora tiene 7 u 8 POI.
 5. Convertir `test_terrain.gd` (M156) en headless o moverlo a SceneTree para que entre en la suite.
+
+## Notas del Agente
+
+**Modelo:** agnes-3-flash (Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18 20:55
+**Estado:** Parcial (solo la parte de copyright de la asignación; el módulo queda en su estado previo: 🟡 98/105)
+
+### Lo que hice (Log 1035)
+- Co-verificación de la deuda de copyright de .glb (dueño pipeline M166/M09): 434 .glb de
+  assets/3d sin atribución por-archivo; 418 activos + 16 respaldos Obsoletos. Origen: propio
+  (pipeline Blender MCP). Atribución propuesta: Isla Ancestral Team © 2026 Propietaria
+  (data/legal/copyright.json assets_visuales + NOTICE.md).
+- Hallazgo de pipeline (relevante a M09 por posicionamiento): los glb de la librería
+  NO van asentados en Z_APOYO=0.045 — salen centrados en origen (z_min negativo) y el
+  runtime los posiciona con get_height+1 (GUIA 07 §10.16). Única cota positiva del repo:
+  antorcha_pared +0.295/+0.34 (V-3, BUG-053).
+
+### Lo que NO hice
+- No toqué terreno, islas, .tres ni scripts de M09; tampoco el impostor de horizonte.
+
+### Recomendaciones para el próximo agente
+1. Fix BUG-052: embeber asset.copyright en el pipeline de exportación (ver M166 04-Codigo).
+2. Si se mueve/re-exporta algún glb de assets/3d, mantener la convención de cota actual
+   (centrado en origen) documentada; no corregir el z_min a 0.045 en el glb.
