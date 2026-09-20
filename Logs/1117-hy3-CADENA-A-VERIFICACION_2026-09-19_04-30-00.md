@@ -52,6 +52,6 @@ Motivo (lección del clasificador): chequear que el archivo `03-Diseno.md` exist
 - `.github/workflows/` tiene solo 6 workflows (backup / bug_metrics / dev-build / quality / release-build / testing): **ninguno** referencia itch.io / butler / stakeholders / firebelley.
 - Los 4 ítems son de **implementación** (no diseño legítimo) → marca `[x]` falsa → se descartan (`[x]→[ ]`).
 
-Consecuencia aplicada (Log 1125): M118 revertido ✅→🟡 (4 marcas, Totales 102/4/0), fila global + nota firmada. M118 no tiene sello, así que no se invalida sello alguno. Brecha registrada como **BUG-071**. Lo demás de este log (M114 / M119 / M136 = Caso B) se mantiene sin cambios.
+Consecuencia aplicada (Log 1125): M118 revertido ✅→🟡 (4 marcas, Totales 102/4/0), fila global + nota firmada. M118 no tiene sello, así que no se invalida sello alguno. Brecha registrada como **BUG-072**. Lo demás de este log (M114 / M119 / M136 = Caso B) se mantiene sin cambios.
 
 **Firma:** hy3 (WorkBuddy), 2026-09-19.

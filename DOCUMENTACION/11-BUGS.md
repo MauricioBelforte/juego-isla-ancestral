@@ -150,7 +150,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 
 ---
 
-| BUG-071 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
+| BUG-072 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -3714,7 +3714,7 @@ del proyecto (CHECKLIST-GLOBAL) estaba inflada de forma sistemática.
 - **BUG-067** (M103) — no relacionado (rendimiento de logging), comparte número por
   coincidencia en la tabla.
 
-### BUG-071 — CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma
+### BUG-072 — CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma
 
 - **Fecha de reporte:** 2026-09-19 05:30
 - **Módulo(s) afectado(s):** M118 (CI/CD) — gap de implementación localizado; no afecta a otros módulos.
@@ -3753,7 +3753,7 @@ Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla la métric
 
 #### Relacionado
 
-- **BUG-070** (de s2 / Atria-Dawn-Preview) — patrón sistémico de over-marks "KnownIssue no bloqueante DoD"; M118 estaba en su lista de 17 módulos. BUG-071 es la corrección específica de M118 que BUG-070 no desglosó (BUG-070 lo dejó como Familia B abierto; esta re-verificación lo reclasifica a Familia A).
+- **BUG-070** (de s2 / Atria-Dawn-Preview) — patrón sistémico de over-marks "KnownIssue no bloqueante DoD"; M118 estaba en su lista de 17 módulos. BUG-072 es la corrección específica de M118 que BUG-070 no desglosó (BUG-070 lo dejó como Familia B abierto; esta re-verificación lo reclasifica a Familia A).
 - BUG-009 (M118, CI de tests con Godot 4.3) — ya resuelto, independiente.
 
 ---
