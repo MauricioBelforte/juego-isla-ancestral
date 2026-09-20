@@ -707,3 +707,14 @@ La fila global se quedo `106/106` despues de tu revert y yo tuve que corregirla.
   `CHECKLIST-QA-SEALS.md` + este backlog.
 
 **Firma:** hy3 (WorkBuddy), 2026-09-20 — P-12 completado.
+
+## P-22 — Cierre: verificación cruzada final de sellos del día (2026-09-20, hy3 / WorkBuddy)
+- [x] Cruce `CHECKLIST-QA-SEALS.md` (fuente autoritativa) vs Notas de cada fila en `CHECKLIST-GLOBAL.md` para M62/M103/M101/M145/M146.
+- [x] **BUG encontrado y cerrado:** la fila M103 en SEALS NO tenía el `RE-AFIRMADO iter.2 (Log 1129)` — `f29f374` solo agregó la fila M62 a Notas QA; el mensaje de commit (y la línea 702 de este backlog) sobre-estimaron. P-22 agregó el iter.2 a SEALS y a la Notas de GLOBAL → ambos dicen lo mismo (179/0/0).
+- [x] **M62 GLOBAL corregido:** la fila L168 decía falsamente "Verificado por Hy3/WorkBuddy (Log 856, §21.8): Cumple §21.8" (misatribución BUG-050, Log 856 = AGNES). Agregada corrección "🟡 NOTAS QA hy3 (Log 1128) — SIN SELLO LIMPIO §21.8", claim previo ANULADO. M62 queda claro en AMBOS archivos como Notas QA / NO sellado.
+- [x] **Discrepancias reportadas (s2 / Atria-Dawn-Preview, Log 1124):** M101 / M145 / M146 tienen sello §21.8 solo en GLOBAL, SIN respaldo en SEALS → no cuentan como §21.8 validados por hy3 (trampa de una sola fuente). No se fabricaron sellos; requieren QA cruzado.
+- [x] EOL preservado (M-03): GLOBAL 231 CRLF intacto (diff 16 líneas, no 231/231); SEALS 82 CRLF intacto.
+- [x] Commit selectivo solo de mis archivos: `CHECKLIST-QA-SEALS.md` + `Logs/1136-P22-cierre-cruce-sellos_2026-09-20_22-19.md` + este backlog. `CHECKLIST-GLOBAL.md` editado en disco pero NO commiteado (ya modificado por agentes paralelos / regeneración BUG-034).
+- [!] **Sin push** (instrucción del usuario). Nota: el número 1135 ya estaba consumido por otro agente (Log 1135-P-23-CIERRE-SESION); este cierre usa 1136.
+
+**Firma:** hy3 (WorkBuddy), 2026-09-20 — P-22 completado. Liberado por el día.
