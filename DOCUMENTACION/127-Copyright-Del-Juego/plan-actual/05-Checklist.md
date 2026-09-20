@@ -1,3 +1,5 @@
+> **ITER. 4 — EMPAQUETADO USCO Y REPARACIÓN DE CITAS (2026-09-20, DeepSeek-V4.1-Flash / WorkBuddy, Log 1119):** se cierra el ítem de empaquetado con `tools/legal/empaquetar_deposito_usco.py` (suite **38/38**, `--selftest` **45/45**) y se **escribe la sección que faltaba**: `03-Diseno.md §4` con la especificación real (**37 CFR 202.20(c)(2)(vii)**). **Hallazgo del ciclo:** dos ítems de esta checklist citaban secciones **inexistentes** de `03-Diseno.md` — `§2.3` (línea 71) y `§4.2` (línea 137) —, el mismo defecto que causó la reversión del 2026-09-14 y que la propia nota de la iter. 2 afirma haber corregido. Ambas citas quedan corregidas y anotadas. Resultado: **52 [x] · 25 [?] · 24 [ ]**.
+>
 > **ITER. 3 — TOOLING DE AUTORÍA (2026-09-18, DeepSeek-V4.1-Flash / WorkBuddy, Log 986):** se cierran 12 ítems con 7 herramientas nuevas en `tools/legal/`, cada una con su suite propia (32+30+19+71+40+35+44 = **271 checks, 0 fallos**) y cableadas en `.github/workflows/quality.yml` (job `legal-tools`). Los validadores usan un **techo de deuda** declarado en su `*_scope.json`: `--check` falla solo con hallazgos NUEVOS, así que la deuda conocida no rompe CI pero un hallazgo nuevo sí. Hallazgos reales reportados (no arreglados aquí, son de otros dueños): **addons/gdUnit4** sin declarar en `licencias.json`/`NOTICE.md`; los **3 `.ttf`** de `assets/fonts/` son páginas HTML 404 (BUG-042); los **434 `.glb`** exportados no llevan `asset.copyright`. Resultado: **51 [x] · 25 [?] · 25 [ ]**.
 >
 > **RE-VERIFICADO SELECTIVAMENTE (2026-09-15, iter. 2 — DeepSeek-V4.1-Flash / WorkBuddy, Log 923):** el módulo había sido revertido a `0/101` por la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real y citando secciones de `03-Diseno.md` que **no existen**: 2.3, 3.1, 3.2, 4.2, 4.3 — el documento sólo tiene §1, §2 y §3). Se re-marca ítem por ítem con criterio auditable: **[x]** cita un artefacto real o una sección existente de `03-Diseno.md`; **[?]** nombra el dueño externo o la acción humana requerida; **[ ]** es trabajo pendiente real de este módulo. Se **preservan** las 4 marcas previas de MiMo V2.5 (minimax-m3-free) y se refresca su nota de test (9 → 13 checks). Resultado: **39 [x] · 25 [?] · 37 [ ]**.
@@ -68,7 +70,7 @@
 - [x] Definir registro de música (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
 - [x] Definir evidencia de autoría (timestamps, archivos de proyecto) — OK 03-Diseno.md 2 (Evidencia de Autoria)
 - [x] Diseñar timestamps de archivos como evidencia — OK 03-Diseno.md 1 y 2
-- [ ] Diseñar archivos de proyecto (DAW, MIDI) → KnownIssue no bloqueante DoD: formatos de archivo de audio documentados en M41/M42/M43; estructura de proyectos DAW en 03-Diseno.md §2.3.
+- [ ] Diseñar archivos de proyecto (DAW, MIDI) → KnownIssue no bloqueante DoD: los formatos de audio están documentados en M41/M42/M43. **Cita corregida (iter. 4, Log 1119):** decía "estructura de proyectos DAW en 03-Diseno.md §2.3" y **§2.3 no existe** (este documento sólo tiene §1, §2, §3 y §4). La estructura de proyectos DAW **no está especificada en ningún documento** → dueño M41/M42/M43.
 
 ### [S] Narrativa
 - [x] Definir registro de narrativa (copyright automatico) — OK 03-Diseno.md 1 y 2 + NOTICE.md
@@ -134,7 +136,7 @@
 - [?] Diseñar estrategia de protección de copyright en jurisdicciones internacionales no firmantes del Convenio de Berna [M] — **dueno: usuario** (asesoria legal)
 
 ### Optimización
-- [ ] Automatizar el empaquetado de código y muestras visuales según formatos y límites USCO → KnownIssue no bloqueante DoD: automatizacion requerira script Python; especificaciones USCO documentadas en 03-Diseno.md §4.2. Deferred a tooling iteracion.
+- [x] Automatizar el empaquetado de código y muestras visuales según formatos y límites USCO [M] — OK `tools/legal/empaquetar_deposito_usco.py` (suite 38/38, `--selftest` 45/45) + la **especificación real escrita en 03-Diseno.md §4** (37 CFR 202.20(c)(2)(vii)): regla 50 páginas / primeras+últimas 25 + página del aviso, invariante de tachado `tachado < visible`, límite de 3×3 a 9×12 pulgadas leído de la cabecera del archivo, y metadata ≤ 10 % del paquete. Gate `--check` en `quality.yml` con techo de deuda declarado. **Cita corregida (iter. 4, Log 1119):** decía "especificaciones USCO documentadas en 03-Diseno.md §4.2" y **§4.2 no existía**; el ítem se cierra por **artefacto**, no por cita. Medido sobre el repo: 891 fuentes → 2 450 páginas → recorte 1..25 + 1109 + 2426..2450.
 - [x] Desarrollar herramienta de escaneo de repositorio para detectar código huérfano sin atribución de autor [M] — OK tools/legal/scan_orphan_code.py --check (test 19/19): SIN_HISTORIAL + SIN_CABECERA + AUTOR_PLACEHOLDER, con alcance declarado en scope
 - [?] Optimizar costos de registro formal agrupando múltiples obras relacionadas bajo registros colectivos [S] — **dueno: usuario** (decision de registro)
 - [ ] Diseñar pipeline de metadata que no incremente innecesariamente el tamaño de los paquetes de distribución [S]
@@ -189,3 +191,19 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
+
+**Totales:** 101 ítems · Completados: 52 · Pendientes: 24 · No resueltos: 25.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 51 [x] / 25 [ ] /
+> 25 [?]. Las marcas no se tocaron.
+
+> **Iter. 4 (DeepSeek-V4.1-Flash / WorkBuddy, 2026-09-20, Log 1119):** la línea de
+> Totales pasa a **52 [x] / 24 [ ] / 25 [?]** por el **único** ítem que cambió de
+> estado (empaquetado USCO: `[ ]` → `[x]` con artefacto real). Conteo **medido** con
+> `grep -c`, no estimado. Además se corrigen las **dos citas a secciones
+> inexistentes** de `03-Diseno.md` (`§2.3` línea 71, `§4.2` línea 137) y se escribe
+> `03-Diseno.md §4` con la especificación real (37 CFR 202.20(c)(2)(vii)). El ítem
+> "pipeline de metadata que no incremente el tamaño de los paquetes de
+> distribución" **sigue `[ ]`**: es sobre los paquetes de distribución (M108/M117),
+> no sobre el depósito; el script implementa la regla solo para el depósito.

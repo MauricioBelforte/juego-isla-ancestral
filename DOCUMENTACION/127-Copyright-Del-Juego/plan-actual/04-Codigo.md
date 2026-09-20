@@ -199,3 +199,52 @@ formatos multi-firma; el parser Vorbis dejaba el NUL terminador en el valor;
 `--json` contaminaba stdout con el resumen; `fnmatch` no da semántica globstar;
 faltaba `import re`; un typo `FORMAT`/`FORMATO`. Detalle y cómo se detectó cada uno
 en `07-Resultados-Testings.md` §5.
+
+
+## 8. Iteración 4 (Log 1119) — empaquetado del depósito USCO
+
+### 8.1 `03-Diseno.md §4`: la sección que faltaba
+
+La checklist citaba `03-Diseno.md §4.2` para justificar el ítem de empaquetado y
+`§2.3` para los archivos de proyecto DAW: **ninguna de las dos existe** (el
+documento tenía §1, §2 y §3). Es el mismo defecto que provocó la reversión del
+2026-09-14, y la nota de la iter. 2 afirmaba haberlo corregido. Se escribe **§4**
+con la especificación real, citando la norma (**37 CFR 202.20(c)(2)(vii)**) en vez
+de inventarla, y se corrigen las dos citas en la checklist.
+
+### 8.2 `tools/legal/empaquetar_deposito_usco.py`
+
+| Regla | Qué implementa |
+|-------|----------------|
+| 4.1 | `<= 50` páginas -> todo el fuente; `> 50` -> primeras 25 + últimas 25 + la página del aviso. Unidad = **50 líneas/página**, declarada en el informe |
+| 4.2 | Invariante `tachado < visible` **y** `visible > 0`; cualquier otro caso es inadmisible |
+| 4.3 | 3x3 a 9x12 pulgadas; el **DPI es obligatorio** (el límite es físico) y las dimensiones se leen de la **cabecera real** (PNG `IHDR` / JPEG `SOF`), no de metadatos |
+| 4.4 | El metadata no debe pasar del 10 % del paquete |
+
+CLI: `--plan`, `--emitir <dir>`, `--check`, `--json`, `--selftest`.
+Salida: `0` conforme · `1` violación nueva · **`3` CIEGO**.
+
+### 8.3 Defectos que encontró la propia suite (no el autor)
+
+1. **`--json` no era JSON puro**: además del JSON imprimía las líneas del techo de
+   deuda, así que el consumidor recibía `Extra data` y no parseaba. Ahora `--json`
+   imprime **solo** JSON e incluye la clasificación de violaciones.
+2. **El manifiesto inflaba el paquete al 37,6 %** (medido) porque incluía las **891
+   rutas** de fuentes: violaba la regla 4.4 que el propio script comprueba. La lista
+   pasa a `fuentes.txt` (material depositado) y el manifiesto guarda **conteo +
+   SHA-256** -> **0,6 %** del paquete.
+3. `analizar()` no exponía la `deuda`, así que un consumidor no podía clasificar
+   las violaciones sin releer el alcance.
+
+### 8.4 Medición sobre el repo real
+
+891 fuentes (`game/isla-ancestral`, excluyendo `addons/` de terceros) -> 122 468
+líneas -> **2 450 páginas** -> regla de recorte: páginas **1..25**, la **página del
+aviso (1109)** y **2 426..2 450** = **51 unidades**.
+
+### 8.5 Deuda declarada, no escondida
+
+La única muestra visual candidata es una captura de render de 768x768 px: a 300 dpi
+mide **2,56 x 2,56 pulgadas**, por debajo del mínimo de 3x3. Se declara en
+`deposito_usco_scope.json` con motivo y dueño (**usuario / M46**), y `--check` falla
+solo ante una clave **no declarada**.

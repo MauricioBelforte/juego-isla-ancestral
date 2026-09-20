@@ -381,6 +381,9 @@ jobs:
           python3 tools/legal/test_audit_dependencies.py 2>&1
           python3 tools/legal/test_dump_authorship_evidence.py 2>&1
           python3 tools/legal/test_registros_db.py 2>&1
+          # M127 iter. 4 (Log 1119): empaquetado del deposito USCO
+          # (37 CFR 202.20(c)(2)(vii)). 38 checks + el --selftest del script.
+          python3 tools/legal/test_empaquetar_deposito_usco.py 2>&1
           echo "Legal tooling tests completed"
 
       # Gates duros (M127 iter. 3). Deterministas y verdes en este commit.
@@ -397,6 +400,18 @@ jobs:
           python3 tools/legal/audit_dependencies.py --check 2>&1
           python3 tools/legal/registros_db.py --check 2>&1
           echo "Legal gates passed"
+
+      # Gate de la iter. 4 (Log 1119): empaquetado del deposito USCO.
+      # Exit 3 = DETECTOR CIEGO (no resolvio fuentes que medir) y se trata como
+      # fallo: "0 hallazgos" sin haber mirado no es un aprobado. Los hallazgos
+      # conocidos estan declarados con motivo y dueno en deposito_usco_scope.json,
+      # asi que --check solo falla ante una clave NO declarada.
+      - name: Verify USCO deposit gate (M127 iter. 4)
+        run: |
+          FAIL=0
+          python3 tools/legal/empaquetar_deposito_usco.py --check 2>&1 || FAIL=1
+          echo "deposito USCO (FAIL=$FAIL)"
+          exit $FAIL
 
       # El generador es DETERMINISTA (sin fecha de generacion), asi que el
       # artefacto commiteado debe coincidir byte a byte con su fuente. Si alguien

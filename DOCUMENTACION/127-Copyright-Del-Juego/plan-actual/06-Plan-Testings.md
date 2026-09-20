@@ -114,3 +114,28 @@ Toda suite nueva implementa las **tres capas** del skill:
 - Los gates de CI (`--check`) deben salir 0 **con el techo de deuda declarado**.
   La deuda conocida está en `asset_metadata_scope.json` y
   `audit_dependencies_scope.json`, con motivo y dueño por entrada.
+
+
+## 5. Iteración 4 (Log 1119): el gate de depósito USCO
+
+| Suite | Qué cubre | Checks |
+|-------|-----------|--------|
+| `empaquetar_deposito_usco.py --selftest` | reglas 4.1-4.4 con fixtures: frontera 50/51 páginas, invariante de tachado, PNG/JPEG desde cabecera real (**y un PNG real del repo**), límites en pulgadas, techo de deuda, guarda de ceguera | **45** |
+| `test_empaquetar_deposito_usco.py` | CLI (`--plan`/`--check`/`--json`), mini-proyecto sintético en temporal, emisión del depósito, EOL y BOM del artefacto | **38** |
+
+**Total de checks de código de M127: 324 (iter. 3) + 38 + 45 = 407.**
+
+### Cómo se prueba el gate EN ROJO (no solo en verde)
+
+1. `secretos.activo=true` con `tachado 900 > visible 100` -> `VIOLA: 4.2|secretos` -> **exit 1**.
+2. `codigo.incluir` apuntando a una ruta inexistente -> **DETECTOR CIEGO -> exit 3**.
+3. Deuda declarada que ya no ocurre -> se reporta como **obsoleta** (el techo no se
+   pudre en silencio).
+
+Los tres casos están en la suite; el 1 y el 3 también en `--selftest`.
+
+### Piso de checks
+
+`CHECKS_MINIMOS = 45` (selftest) y `38` (suite): **medidos en verde**. La suite
+**lee** el conteo del resumen en vez de fijarlo en la aserción: fijar `"42/42"` de
+memoria la dejó en rojo cuando el selftest pasó a 45/45.

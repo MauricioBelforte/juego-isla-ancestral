@@ -141,3 +141,61 @@ Los encontró la suite, no una lectura casual. Cada uno está cubierto por un ch
 - 6 gates de CI verdes sobre el repo real, con el techo de deuda declarado.
 - 12 ítems del checklist cerrados con artefacto citado: **51 [x] · 25 [?] · 25 [ ]**.
 - La deuda restante está **declarada con dueño** (baseline con motivo), no escondida.
+
+
+## 7. Iteración 4 (Log 1119) — empaquetado USCO
+
+### 7.1 Resultados
+
+| Prueba | Resultado |
+|--------|-----------|
+| `empaquetar_deposito_usco.py --selftest` | **45/45 OK**, exit 0 |
+| `test_empaquetar_deposito_usco.py` | **38/38 OK**, exit 0 |
+| `--check` sobre el repo real | exit 0, **0 violaciones nuevas**, 1 deuda declarada |
+| `--emitir` | `deposito_codigo.txt` (94 602 B) + `fuentes.txt` (49 833 B) + `manifiesto.json` (1 130 B) |
+| Metadata del paquete | **0,6 %** del total (límite 10 %) |
+
+### 7.2 Inyección: el gate probado en rojo
+
+| Inyección | Resultado medido |
+|-----------|------------------|
+| `secretos.activo=true`, `tachado 900 > visible 100` | `VIOLA: 4.2\|secretos -> lo tachado (900) no es proporcionalmente menor que lo restante (100)` -> **exit 1** |
+| `codigo.incluir = ["no/existe/esta/ruta"]` | `DETECTOR CIEGO (exit 3): no se resolvio ninguna fuente de codigo en el alcance` -> **exit 3** |
+| Restaurado el alcance | `conforme: 0 violaciones nuevas (1 deuda declarada)` -> **exit 0** |
+
+### 7.3 Hallazgos técnicos de esta iteración
+
+| Hallazgo | Cómo se detectó | Resolución |
+|----------|-----------------|------------|
+| `--json` no era JSON puro | La suite intentó `json.loads` y recibió `Extra data: line 949` | `--json` imprime solo JSON |
+| El manifiesto inflaba el paquete al **37,6 %** | El propio check 4.4 del script | Lista a `fuentes.txt`; manifiesto con conteo + SHA-256 -> 0,6 % |
+| `analizar()` no exponía la `deuda` | La suite no podía clasificar violaciones | La `deuda` pasa al resultado |
+| Tupla vs lista tras JSON | `man["rangos"] == [(1,25),(37,61)]` falló: JSON devuelve listas | La aserción normaliza a listas |
+| **La lección de la iter. 3 no se aplicó** | El worktree de `quality.yml` quedó **sin** mi gate tras commitear | Ver 7.4 |
+
+### 7.4 La lección que ya estaba escrita y no se aplicó
+
+La §5 de **este mismo documento** (iter. 3) dice, textualmente:
+
+> *El árbol de trabajo restaurado sin mi cambio -> Técnica de bytes: si se restaura
+> sin lo mío, el próximo commit ajeno revierte el cambio en silencio -> Se escribe
+> `árbol_actual + lo mío`, no `HEAD + lo ajeno`.*
+
+En la iter. 4 (Log 1112) se commiteó `quality.yml` con `hash-object -w` +
+`update-index --cacheinfo`, que escribe **solo el índice**: el worktree quedó con
+`HEAD + lo ajeno` **sin lo mío**. Medido después: el worktree tenía **0** apariciones
+de `architecture-guard` y `git diff HEAD` mostraba **+43/-42**; un `git add` ajeno
+habría borrado el gate en silencio. Se reparó re-aplicando mis 5 hunks de forma
+**aditiva** (script con aserciones: 5 hunks, ajenos intactos), y el diff residual
+quedó en **+41/-6**, todas las eliminaciones pertenecientes al fix BUG-051 ajeno.
+
+**Regla para la próxima:** al commitear con la técnica de bytes, construir el blob
+como **worktree actual + lo mío** (y escribir el worktree), nunca `HEAD + lo mío`.
+
+### 7.5 Criterio de cierre de la iter. 4
+
+- 38/38 + 45/45 checks, exit 0, y el gate probado **en rojo** (exit 1 y exit 3).
+- 1 ítem del checklist cerrado con artefacto citado: **52 [x] · 25 [?] · 24 [ ]**.
+- **2 citas falsas reparadas** (`03-Diseno.md §2.3` y `§4.2`) y `§4` escrita con la
+  norma real.
+- La deuda restante está **declarada con dueño**, no escondida.

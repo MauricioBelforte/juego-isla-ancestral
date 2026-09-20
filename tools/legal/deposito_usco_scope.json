@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "descripcion": "Alcance del deposito USCO de codigo fuente y muestras visuales (M127 iter. 4, Log 1119). Lo consume tools/legal/empaquetar_deposito_usco.py, que implementa 37 CFR 202.20(c)(2)(vii) segun 03-Diseno.md 4.1-4.4.",
+  "paginas_por_unidad": 50,
+  "codigo": {
+    "extensiones": [".gd", ".py"],
+    "incluir": ["game/isla-ancestral"],
+    "excluir": ["addons", "Obsoletos", "PAPELERA", "__pycache__", ".godot", "Godot"]
+  },
+  "secretos": {
+    "activo": false,
+    "opcion": "a",
+    "tachado_lineas": 0,
+    "visible_lineas": 0
+  },
+  "visuales": [
+    {
+      "ruta": "tools/mcp/blender-mcp/NPC_EXPORT/02_CENIZA/13_BRASA/REVISION_03/cap_NPC_BRASA_v3_2026-09-11_20-40-11_0.png",
+      "dpi": 300
+    }
+  ],
+  "limite_metadata": 0.10,
+  "deuda": [
+    {
+      "clave": "4.3|visual|tools/mcp/blender-mcp/NPC_EXPORT/02_CENIZA/13_BRASA/REVISION_03/cap_NPC_BRASA_v3_2026-09-11_20-40-11_0.png",
+      "motivo": "La unica muestra visual candidata hoy es una captura de render de 768x768 px (pipeline M166). A 300 dpi mide 2.56 x 2.56 pulgadas, por debajo del minimo de 3x3 pulgadas que exige 37 CFR 202.20(c)(2)(vii)(C)(1). El limite se cumple imprimiendo a <= 256 dpi o con una captura mayor. NO se elige una muestra definitiva para el deposito: el arte final es de M46 y la decision de que obra registrar es del usuario.",
+      "dueno": "usuario / M46"
+    }
+  ]
+}
