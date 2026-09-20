@@ -150,6 +150,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 
 ---
 
+| BUG-071 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
+
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
@@ -3179,3 +3181,45 @@ tumbar la puerta.
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-19
+
+### BUG-071 — CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma
+
+- **Fecha de reporte:** 2026-09-19 05:30
+- **Módulo(s) afectado(s):** M118 (CI/CD) — gap de implementación localizado; no afecta a otros módulos.
+- **Severidad:** 🟠 Mayor (corrupción localizada de la métrica de M118: 4 ítems `[x]` sobre un despliegue nunca hecho; M118 nunca tuvo sello, así que no invalida sello alguno).
+- **Detectado por:** hy3 / WorkBuddy (re-verificación de la "cadena A" de M118, Log 1125) — corrección del veredicto "Caso B" que hy3 había dado en Log 1117.
+- **Reportado por:** hy3 (WorkBuddy)
+
+#### Síntoma
+
+M118 figuraba ✅ 106/106 (CI/CD). 4 ítems de despliegue/CI-CD estaban marcados `[x]` pero su texto dice "KnownIssue no bloqueante DoD / requiere BUTLER_API_KEY / requiere push real / requiere configuración de email service" — es decir, NO implementados.
+
+#### Causa raíz
+
+El patrón "KnownIssue no bloqueante DoD" no existe en AGENTS.md §21.6 (misma raíz que BUG-070). Pero a diferencia de lo que hy3 diagnosticó en Log 1117 (Caso B = diseño legítimo), acá es **Caso A (Familia A)**: el artefacto citado no existe.
+
+La lección del clasificador (hy3, Message 6): chequear que el archivo citado exista NO alcanza. Hay que (a) parsear §X.Y y verificar el header real, y (b) para ítems de CI/CD, grepear `.github/workflows/`.
+
+#### Verificación con evidencia real
+
+- `DOCUMENTACION/118-CI-CD/plan-actual/03-Diseno.md` solo tiene §1–§4. Las citas §2.5, §3.9, §3.10 y §4.1 **no existen** (3 citas § fantasma: §2.5 y §3.10 en despliegue itch.io, §3.9 en email a stakeholders, §4.1 en validación GitHub Actions).
+- `.github/workflows/` tiene exactamente 6 workflows (backup / bug_metrics / dev-build / quality / release-build / testing). Ninguno referencia `itch`, `butler`, `stakeholder`, `email` (dispatch) ni `firebelley` como despliegue. El único hit de `email` es `user.email` de git config en `bug_metrics.yml`.
+- Los 4 ítems son de **implementación**, no de diseño/doc legítimo:
+  1. P5: despliegue a itch.io al crear tag semver.
+  2. Subida a Itch.io (manual trigger).
+  3. Email a stakeholders en tags.
+  4. Validación en GitHub Actions real (firebelley v5.2.1).
+
+#### Por qué importa
+
+Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla la métrica de progreso de M118. Al ser Familia A, la corrección es descartar las marcas (no re-evaluar diseño).
+
+#### Estado
+
+- [ ] Abierto — M118 revertido ✅→🟡 por hy3 (2026-09-19): 4 marcas `[x]→[ ]` conservando las notas, Totales 106/0/0 → **102/4/0**, fila global + nota firmada en `05-Checklist.md`. M118 **no tiene sello** (no figura en CHECKLIST-QA-SEALS.md), así que no se invalida sello alguno.
+- [ ] Re-auditar con `python scripts/verificar_checklist.py` tras el cambio.
+
+#### Relacionado
+
+- **BUG-070** (de s2 / Atria-Dawn-Preview) — patrón sistémico de over-marks "KnownIssue no bloqueante DoD"; M118 estaba en su lista de 17 módulos. BUG-071 es la corrección específica de M118 que BUG-070 no desglosó (BUG-070 lo dejó como Familia B abierto; esta re-verificación lo reclasifica a Familia A).
+- BUG-009 (M118, CI de tests con Godot 4.3) — ya resuelto, independiente.

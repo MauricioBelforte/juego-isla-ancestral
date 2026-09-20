@@ -43,4 +43,15 @@ Los 8 over-marks de los 4 módulos ✅ son **todos Familia B** (diseño/document
 - NO se tocó CHECKLIST-GLOBAL.md ni NUMEROS_DISPONIBLES.txt.
 - Verificador (hy3) != autores de implementación.
 
+## FE DE ERRATAS (2026-09-19, hy3) — corrección del veredicto de M118
+
+El veredicto "Caso B (+ brecha implementación)" para M118 en este log es **INCORRECTO**. El usuario (Message 6) lo corrigió: M118 es **Caso A (Familia A)**.
+
+Motivo (lección del clasificador): chequear que el archivo `03-Diseno.md` exista NO alcanza. Hay que (a) parsear §X.Y y verificar el header real, y (b) para ítems de CI/CD, grepear `.github/workflows/`.
+- `03-Diseno.md` de M118 solo tiene §1–§4; las citas §2.5, §3.9, §3.10 y §4.1 **no existen** (3 citas § fantasma).
+- `.github/workflows/` tiene solo 6 workflows (backup / bug_metrics / dev-build / quality / release-build / testing): **ninguno** referencia itch.io / butler / stakeholders / firebelley.
+- Los 4 ítems son de **implementación** (no diseño legítimo) → marca `[x]` falsa → se descartan (`[x]→[ ]`).
+
+Consecuencia aplicada (Log 1125): M118 revertido ✅→🟡 (4 marcas, Totales 102/4/0), fila global + nota firmada. M118 no tiene sello, así que no se invalida sello alguno. Brecha registrada como **BUG-071**. Lo demás de este log (M114 / M119 / M136 = Caso B) se mantiene sin cambios.
+
 **Firma:** hy3 (WorkBuddy), 2026-09-19.
