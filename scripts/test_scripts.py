@@ -289,6 +289,40 @@ def test_ver_fail_fast_detector_ciego():
         assert filas.get("03") is not None, "el caso sano dejo de parsear (falso positivo del fail-fast)"
 
 
+def test_ver_exit_codes():
+    """REGRESIÓN BUG-075: el detector ciego tiene que salir con 3, no con 1.
+
+    Con el 1 compartido, un llamador (CI) no puede distinguir «no miré» de «miré
+    y hay N alertas» — exactamente la ceguera que el fail-fast vino a curar, un
+    nivel más arriba. Se corre el script como subproceso porque el contrato es
+    el exit code del proceso, no el valor de retorno de una función.
+    """
+    import subprocess
+
+    script = RAIZ / "scripts" / "verificar_checklist.py"
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        (tmp / "VACIO.md").write_bytes(b"")
+        (tmp / "SIN_TABLA.md").write_text("# Titulo\n\nsin tabla\n", encoding="utf-8")
+
+        for nombre, ruta in [
+            ("inexistente", tmp / "NO_EXISTE.md"),
+            ("0 bytes", tmp / "VACIO.md"),
+            ("sin tabla", tmp / "SIN_TABLA.md"),
+        ]:
+            r = subprocess.run(
+                [sys.executable, str(script), "--checklist", str(ruta)],
+                capture_output=True,
+            )
+            assert r.returncode == 3, f"{nombre}: esperaba exit 3, obtuve {r.returncode}"
+
+        # El 1 sigue reservado a «mire y encontre alertas». No se puede asertar el
+        # conteo (cambia entre corridas segun lo que arreglan los demas agentes),
+        # pero si que el archivo sano NUNCA caiga en el 3.
+        r = subprocess.run([sys.executable, str(script)], capture_output=True)
+        assert r.returncode in (0, 1), f"archivo real: esperaba 0 o 1, obtuve {r.returncode}"
+
+
 def test_ver_normalizar():
     """REGRESIÓN: verifica que la normalización no pierda letras."""
     resultado = ver.normalizar("Prioridad")
@@ -341,6 +375,7 @@ def main():
         "fail-fast: vacio/inexistente/sin tabla NO devuelve {} (BUG-075)",
         test_ver_fail_fast_detector_ciego,
     )
+    test("exit codes: detector ciego = 3, no 1 (BUG-075)", test_ver_exit_codes)
     test("normalizar no pierde letras (REGRESIÓN)", test_ver_normalizar)
     test("detectar_colgados identifica módulos inactivos", test_ver_detectar_colgados)
 

@@ -10,6 +10,12 @@ Recorre DOCUMENTACION/{NN}-*/plan-actual/05-Checklist.md y valida:
 
 Uso:
     python scripts/verificar_checklist.py [--checklist PATH] [--horas-limite H]
+
+Códigos de salida (BUG-075 — no compartir el 1 y el 3):
+    0  sin alertas: todo consistente.
+    1  miré y encontré alertas (inconsistencias reales del protocolo).
+    3  DETECTOR CIEGO: no pude leer mi fuente de verdad (archivo ausente, vacío,
+       sin tabla, o sin nada que analizar). No es «0 problemas», es «no miré».
 """
 
 import argparse
@@ -34,6 +40,26 @@ CHECKLIST_GLOBAL = RAIZ / "CHECKLIST-GLOBAL.md"
 HORAS_LIMITE_DEFAULT = 24
 
 ESTADOS_EN_CURSO = {"🔵", "🔴"}
+
+
+# ---------------------------------------------------------------------------
+# Excepciones
+# ---------------------------------------------------------------------------
+class DetectorCiegoError(RuntimeError):
+    """BUG-075: fallo de INFRAESTRUCTURA, no de contenido.
+
+    El orquestador no pudo leer su fuente de verdad (archivo ausente, vacío, sin
+    tabla, o sin nada que analizar). Eso **no** es «0 problemas»: es «no miré», y
+    un resultado vacío es indistinguible de «no hay datos» (familia trampas
+    91/100).
+
+    Hereda de ``RuntimeError`` para no romper a los llamadores existentes, y
+    ``main()`` lo mapea al **código 3**. Ese código tiene que ser DISTINTO del 1:
+    el 1 ya significa «miré y encontré alertas» (hoy, 92 preexistentes), así que
+    compartirlo dejaría al llamador sin forma de separar «el orquestador está
+    ciego» de «hay inconsistencias». Misma convención que
+    ``auditar_arquitectura_m62.py`` y ``empaquetar_deposito_usco.py``.
+    """
 
 
 # ---------------------------------------------------------------------------
@@ -82,14 +108,14 @@ def leer_tabla_global(archivo: Path):
     excepción explícita para que `main()` termine con exit 1.
     """
     if not archivo.exists():
-        raise RuntimeError(
+        raise DetectorCiegoError(
             f"BUG-075: {archivo.name} no existe — la fuente de verdad global "
             "desapareció. Revisar escrituras de agentes paralelos."
         )
 
     contenido = archivo.read_text(encoding="utf-8")
     if not contenido.strip():
-        raise RuntimeError(
+        raise DetectorCiegoError(
             f"BUG-075: {archivo.name} está VACÍO ({archivo.stat().st_size} bytes). "
             "La fuente de verdad global se truncó — restaurar desde HEAD antes "
             "de continuar (git checkout HEAD -- CHECKLIST-GLOBAL.md)."
@@ -105,7 +131,7 @@ def leer_tabla_global(archivo: Path):
             break
 
     if inicio_tabla is None:
-        raise RuntimeError(
+        raise DetectorCiegoError(
             f"BUG-075: {archivo.name} existe ({len(contenido)} chars) pero no "
             "contiene la tabla '| ID |' — truncamiento parcial o formato roto."
         )
@@ -180,15 +206,19 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int):
     alertas = []
 
     if not DOCUMENTACION.exists():
-        alertas.append(f"⚠️ No existe la carpeta DOCUMENTACION/ ({DOCUMENTACION})")
-        return alertas
+        raise DetectorCiegoError(
+            f"BUG-075: no existe la carpeta DOCUMENTACION/ ({DOCUMENTACION}) — "
+            "no hay nada que analizar. Revisar el checkout antes de confiar en el resultado."
+        )
 
     # Colectar todos los 05-Checklist.md
     checklists = sorted(DOCUMENTACION.glob("*/plan-actual/05-Checklist.md"))
 
     if not checklists:
-        alertas.append("⚠️ No se encontraron checklists en DOCUMENTACION/*/plan-actual/")
-        return alertas
+        raise DetectorCiegoError(
+            "BUG-075: no se encontraron checklists en DOCUMENTACION/*/plan-actual/ — "
+            "el analisis correria sobre 0 modulos y reportaria «sin inconsistencias»."
+        )
 
     # Tabla global
     # BUG-075: sin el fail-fast de leer_tabla_global(), un archivo vacío
@@ -286,7 +316,22 @@ def main():
     print("=" * 60)
     print()
 
-    alertas = analizar_proyecto(args.checklist, args.horas_limite)
+    try:
+        alertas = analizar_proyecto(args.checklist, args.horas_limite)
+    except DetectorCiegoError as e:
+        # BUG-075: exit 3 = DETECTOR CIEGO. Deliberadamente distinto del 1, que
+        # significa «mire y encontre alertas». Con el mismo codigo, un llamador
+        # (CI) no puede separar «el orquestador esta ciego» de «hay 92
+        # inconsistencias preexistentes», y el fail-fast queda inutil.
+        print()
+        print("=" * 60)
+        print("🛑 DETECTOR CIEGO — fallo de infraestructura (exit 3):")
+        print(f"   {e}")
+        print()
+        print("Esto NO es «sin inconsistencias»: es «no mire». El orquestador no")
+        print("pudo leer su fuente de verdad, asi que no hay nada que reportar.")
+        print("Restaurar el archivo (git checkout HEAD -- CHECKLIST-GLOBAL.md) y reintentar.")
+        return 3
 
     print()
     print("=" * 60)
