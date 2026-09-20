@@ -594,7 +594,7 @@ jobs:
           python3 scripts/reservar_log.py --estado
 
   architecture-guard:
-    name: Architecture Guard (M62: servicios y carga sincrona)
+    name: "Architecture Guard (M62: servicios y carga sincrona)"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
