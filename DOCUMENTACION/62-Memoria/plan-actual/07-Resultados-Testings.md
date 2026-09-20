@@ -1,0 +1,142 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-19 (Log 1094)
+
+# 07-Resultados-Testings.md — Módulo 62: Memoria
+
+> Iter. 3 (Log 1094). Todas las cifras de este documento salen de una corrida real, no de una
+> estimación. Donde algo no se probó, se dice.
+
+## 1. Estado final de las suites
+
+| Suite | Checks | Fallos | Salida | Determinismo (×3) |
+|---|---|---|---|---|
+| `test_memoria_m62.gd` | 27 | 0 | 0 | idénticas |
+| `test_enforcement_m62.gd` | 47 | 0 | 0 | idénticas |
+| `test_pool_iter2.gd` | 25 | 0 | 0 | idénticas |
+| `test_memoria_m62_iter3.gd` | 133 | 0 | 0 | idénticas |
+| `generar_budgets.gd -- --check` | 20 | 0 | 0 | sha256 `872f9321bc61ab21` en 2 escrituras |
+
+**Total: 232 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
+`[OK]`/`[FAIL]` **normalizada**, no sobre la salida cruda: la salida cruda trae timestamps de sesión y
+duraciones, y compararla entera daría «0 idénticas» con la suite perfectamente determinista.
+
+`CHECKS_MINIMOS` de cada suite se fijó con la salida real de estas corridas (133, 47, 27, 25), no con
+una estimación.
+
+## 2. La primera corrida de `test_memoria_m62_iter3.gd` encontró 2 defectos reales
+
+La suite se escribió y se corrió **antes** de darla por buena. Resultado de esa primera corrida:
+
+- **705** `SCRIPT ERROR: Out of bounds set index '0' (on base: 'PackedFloat32Array')`
+- **7** `ERROR: Can't use get_node() with absolute paths from outside the active scene tree.`
+- **4** `[FAIL]` — todos en el bloque D (ventana circular)
+
+Ambos eran defectos **del código de producción**, no del test:
+
+1. `_registrar_muestra()` escribía en `_muestras` dando por hecho que `_ready()` había corrido el
+   `resize()`. Un monitor instanciado suelto (`load(...).new()`, que es como lo hacen los runs
+   `--script`) nunca dispara `_ready()` → array vacío → el `SCRIPT ERROR` **abortaba la función** y
+   `_muestras_n` quedaba en 0. Arreglado con dimensionado **perezoso** (`_asegurar_ventana()`), que
+   además sólo toca el array una vez, así que sigue sin haber allocs por frame.
+2. `_log_m62()` y `_registrar_servicio()` resolvían `/root/GameLogger` y `/root/ServiceRegistry` con
+   ruta absoluta desde un nodo **fuera del árbol** → error de Godot. Arreglado con guarda
+   `is_inside_tree()`.
+
+## 3. Hallazgo grave: una suite entera muerta que reportaba verde
+
+`test_enforcement_m62.gd` (iter. 2) **no verificaba nada y salía con código 0**.
+
+Medido, no inferido:
+
+```
+SCRIPT ERROR: Trying to assign value of type 'RefCounted' to a variable of type 'Node'.
+   at: _test_registros (res://scripts/rendimiento/memoria/test_enforcement_m62.gd:29)
+   at: _test_enforcement_niveles (res://scripts/rendimiento/memoria/test_enforcement_m62.gd:46)
+=== TEST M62 ENFORCEMENT: 0 fallo(s) ===   → salida 0
+```
+
+Causa: `var budget: Node = load("…/budget_registry.gd").new()` cuando los registries son `RefCounted`.
+La asignación tipada abortaba las **dos** funciones de verificación (0 checks ejecutados). La tercera
+función sí corría, pero sus 3 aserciones eran `_check(true, "…sin crash")` → **infalsificables**.
+Sumado a que el resumen sólo contaba fallos (sin contador de checks, sin piso y sin watchdog), la
+suite llevaba desde el 2026-09-01 diciendo verde sin comprobar nada. Además llamaba a
+`monitor._muestrear()` (renombrado a `muestrear_ahora()`) y a `_enforcement()` con 1 argumento
+(ahora recibe 2).
+
+**Reescrita**: 47 checks con aserciones que pueden fallar. Para poder asertar la alarma de pico se le
+agregó un contador observable (`alarmas_pico()`): antes sólo hacía `push_warning` y era imposible
+verificar desde un test.
+
+También se corrigieron **2 aserciones infalsificables** en `test_pool_iter2.gd`
+(`a.is_processing() == true or true` y `conns_antes >= 0`) y se reemplazó `emisor.free()` de un nodo
+que seguía **dentro del pool** por un drenado real.
+
+## 4. Hallazgo de datos: el test consagraba el bug
+
+`data/rendimiento/budgets.json` había divergido del diseño §2 en **los 8 sistemas de los 3 presets**.
+Las sumas reales eran **1664 / 2112 / 2560** contra las declaradas **1500 / 2000 / 2500**.
+
+El gate nuevo `generar_budgets.gd -- --check` lo detectó **antes** de regenerar, con la lista exacta
+de discrepancias (p. ej. `"texturas: disco=384 diseño=250"`) y salida 1. Ese es el requisito para
+confiar en un gate: que **discrimine**.
+
+Peor que la divergencia: `test_memoria_m62.gd` **asertaba el valor divergente**.
+
+```
+- _check("tope media voxel = 640", b.tope_de("voxel") == 640, …)   # HEAD tenía 640
++ _check("tope media voxel = 650", b.tope_de("voxel") == 650, …)   # diseño §2
+```
+
+El dataset estaba mal **y** el test afirmaba el valor malo: dos errores que se cancelaban y daban
+verde. Se corrigió la aserción y se agregó una guarda contra la divergencia silenciosa (la suma de
+topes debe dar el total declarado del preset).
+
+## 5. Guardián probado POR INYECCIÓN (4 de 4 suites)
+
+En cada suite se insertó una falla temporal (índice fuera de rango en un `PackedFloat32Array`) que
+produce `SCRIPT ERROR` y aborta la función. La copia se borró después.
+
+| Suite | Dónde se inyectó | Checks | Fallos | Salida | ¿Nombró el bloque? |
+|---|---|---|---|---|---|
+| `test_memoria_m62_iter3.gd` | bloque H | 133 → **114** | 2 | 1 | sí: «el bloque H NO se ejecutó» |
+| `test_memoria_m62_iter3.gd` | `_run()` (tras el bloque A) | 133 → **21** | 10 | 1 | sí: nombró B, C, D, E, F, G, H, I, J |
+| `test_enforcement_m62.gd` | bloque C | 47 → **36** | 2 | 1 | sí: «el bloque C NO se ejecutó» |
+| `test_memoria_m62.gd` | `_run()` (tras el bloque budget) | 27 → **11** | 4 | 1 | sí: nombró pool, unload, monitor |
+| `test_pool_iter2.gd` | bloque C | 25 → **22** | 2 | 1 | sí: «el bloque C NO se ejecutó» |
+
+Las 3 capas quedaron probadas: el bloque ausente se **nombra**, el conteo **cae bajo el piso** y
+`_summary()` **corre igual** cuando `_run()` muere entero (caso 2 y 4). Un guardián probado sólo en
+verde no prueba nada.
+
+## 6. Gate de CI
+
+`quality.yml` → job `test-suite`, con el patrón `FAIL=0` + `|| FAIL=1` + `exit $FAIL` (**sin `|| true`**):
+
+```
+godot --headless --script scripts/rendimiento/memoria/test_memoria_m62.gd 2>&1 || FAIL=1
+godot --headless --script scripts/rendimiento/memoria/test_enforcement_m62.gd 2>&1 || FAIL=1
+godot --headless --script scripts/rendimiento/memoria/test_pool_iter2.gd 2>&1 || FAIL=1
+godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter3.gd 2>&1 || FAIL=1
+godot --headless --script scripts/rendimiento/memoria/generar_budgets.gd -- --check 2>&1 || FAIL=1
+```
+
+Antes de iter. 3 **ninguna suite de M62 estaba en el CI**: se verificó por búsqueda y las 3 suites
+existentes daban 0 coincidencias. El módulo no tenía gate.
+
+Los 5 comandos se corrieron **con el mismo directorio de trabajo que usa el CI**
+(`cd game/isla-ancestral`, sin `--path`) y los 5 dieron salida 0. El YAML se validó con un parser
+(10 jobs) y el bloque de M62 no aporta ningún `|| true`.
+
+**Deuda reportada, no corregida:** el archivo tiene **12 `|| true`** pre-existentes que silencian
+tests de otros módulos (líneas 130-142, 202, 212, 291). Es un falso verde heredado, ajeno a M62.
+
+## 7. Lo que NO se probó (honestidad obligatoria)
+
+- **Play Mode** (checklist §N): sesión de 30 min con drift ≤ 5 %, teleport extremo ×10, 500 bloques
+  excavados y regenerados, cambio de bioma de audio, preset Baja con 4 GB de RAM.
+- **Baselines de memoria** (§L): menú < 600 MB, spawn < 1600 MB, horizonte < 2200 MB, subterráneo
+  < 2000 MB, tormenta ≤ 2500 MB.
+- **Integración real con M08/M09/M41-M44/M63**: los contadores por sistema están implementados pero
+  nadie reporta todavía, así que `total_consumo_mb()` sigue en 0 fuera de los tests.
+- **QA cruzado §21.8**: pendiente, y **no puede hacerlo el autor**.

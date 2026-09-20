@@ -295,3 +295,146 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       nex-n2.5, glm-5.3-flash). La nota del ciclo quedó anexada al worktree; el registro autoritativo
       y commiteado es `Logs/1024-Bug042-Fuentes-Reales-Gate-Binarios_2026-09-19_21-54-56.md` +
       `DOCUMENTACION/11-BUGS.md`.
+
+- [x] Log reservado: **1094** — M62 Memoria iter. 3: 5 defectos reales + suite muerta + gate de CI (2026-09-19)
+      Al reservar: **primero=1094**. Al cerrar: ver `--estado` abajo. **No toque ninguna colision ajena.**
+      Cierra 34 items del checklist de M62 (59/150 -> 93/150). Hallazgo principal: **una suite entera
+      (`test_enforcement_m62.gd`) estaba muerta y reportaba verde**, lo que **invalida el sello §21.8
+      previo (Log 856)** — M62 necesita QA cruzado nuevo.
+      ⚠️ `CHECKLIST-GLOBAL.md` y `Mensajes entre modelos/ESTADO-PARALELO.md` **NO se commitearon**: el
+      worktree acumulaba cambios ajenos sin commitear (94 filas en el global —una reescritura con
+      mojibake distinto a HEAD— y 1050 lineas en el paralelo de 9+ agentes). Mis entradas quedaron
+      anexadas en el worktree; el registro **autoritativo y commiteado** es
+      `Logs/1094-M62-Memoria-Iter3-Semaforo-Enforcement-Suite-Muerta_2026-09-19.md`.
+      **Tampoco toque** el byte **NUL** pre-existente en `CHECKLIST-GLOBAL.md` (offset 165941, ya estaba
+      en HEAD): es lo que hace que git lo trate como **binario** y sus diffs sean invisibles.
+
+---
+
+## ACTUALIZACION 2026-09-20 — nuevas asignaciones (curado por atria-dawn, Log 1091/1092)
+
+> Anadido sobre tu backlog existente — **no se piso tu historial**. Estas tareas son
+> **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
+> tus tareas pendientes actuales, o en paralelo si prefieres.
+
+### 62-Memoria (57 pendientes) — iter. 3 EJECUTADA (Log 1094, 2026-09-19)
+
+> **34 de los 91 items cerrados** en la iter. 3, cada uno respaldado por un test o por el generador
+> validante. Checklist del modulo: **59/150 -> 93/150**. Lo mas importante de este ciclo **no** fueron
+> los items cerrados, sino lo que aparecio al correr las suites: ver `Logs/1094-*.md`.
+>
+> - **5 defectos reales** en el monitor: el semaforo comparaba contra el consumo *reportado* (0 si
+>   nadie reporta) en vez del *presupuesto* -> quedaba mudo, y por lo mismo el enforcement **nunca
+>   corria**; `_process` muestreaba por frame con `append()`+`pop_front` (alloc por frame, prohibido);
+>   el drift se medía sobre ~10 s y `drift_check()` no existia; faltaba el pico por punto de interes.
+> - **6.o, de datos:** `budgets.json` divergia del diseno §2 en los 8 sistemas de los 3 presets
+>   (1664/2112/2560 vs 1500/2000/2500) **y `test_memoria_m62.gd` asertaba el valor divergente**.
+> - **HALLAZGO GRAVE:** `test_enforcement_m62.gd` estaba **MUERTA Y DABA VERDE** (una asignacion
+>   tipada `RefCounted -> Node` abortaba 2 de sus 3 funciones; la tercera usaba `_check(true, ...)`
+>   infalsificable). Reescrita.
+> - **El sello §21.8 previo (Log 856, Hy3) queda INVALIDADO:** se apoyo en «0 fallos (EXIT 0)» de esa
+>   suite muerta. **M62 necesita §21.8 nuevo.**
+> - **Suites: 232 checks, 0 fallos, x3 identicas** (27 + 47 + 25 + 133), guardian de 3 capas probado
+>   **por inyeccion en las 4**. **Gate de CI agregado** (`quality.yml`): M62 no tenia ninguno.
+>
+> Los 57 items que siguen son, en su mayoria, **Play Mode / baselines / integracion con M08-M63**:
+> requieren mundo real, hardware objetivo o que otros modulos reporten consumo.
+
+- [ ] Definir el problema: memoria creciente por chunks, señales, texturas y audio sin descarga en mundo voxel cozy
+- [ ] Registrar dependencias: M61 (rendimiento), M08 (voxel), M63 (streaming); relaciones M41-M44, M12, M90, M103, M110
+- [ ] Definir el objetivo: RAM predecible y estable, sin leaks y sin picos de frame en hardware medio/bajo
+- [x] Muestreo periódico: cada 5 s en calma y cada 1 s con movimiento de cámara
+- [x] Lectura de `Performance.PERFORMANCE_OBJECT_COUNT` para conteo de objetos vivos
+- [x] Lectura de `Performance.PERFORMANCE_ORPHAN_NODE_COUNT` para nodos huérfanos
+- [x] Detección de drift: comparación contra baseline estabilizada a los 5 minutos
+- [x] Registro del pico de memoria por sesión y por punto de interés (spawn, teleport, escena)
+- [x] Presupuesto texturas/atlas: 400 MB en preset Alta
+- [x] Presupuesto audio (M41-M44): 250 MB en preset Alta
+- [x] Presupuesto escenas/NPCs/objetos: 350 MB en preset Alta
+- [x] Presupuesto UI y fuentes: 100 MB en preset Alta
+- [x] Presupuesto shaders/materiales: 100 MB en preset Alta
+- [x] Presets por calidad M90: Baja 1.5 GB, Media 2.0 GB, Alta 2.5 GB
+- [x] Familia `particula`: efectos de clima, herramientas y esporas de luz (M11/M32)
+- [x] Familia `objeto_recogible`: objetos lanzados o dropeados (M15)
+- [x] Familia `texto_efimero`: textos flotantes y notificaciones UI (M53)
+- [x] Familia `npc_temporal`: NPCs de visita o eventos con reinicio de estado limpio
+- [x] Precalentamiento al arrancar y en pantalla de carga (M63), nunca en mitad de gameplay
+- [x] Ítems devueltos: invisibles, quietos, sin señales activas y sin referencias externas
+- [x] Regla: prohibido conectar señales a lambdas que capturen nodos externos sin limpieza
+- [x] Patrón de desconexión central en `_exit_tree()` documentado para todos los módulos
+- [x] Timers cancelados en `_exit_tree()` de cada nodo que los posea
+- [x] Tweens cancelados en `_exit_tree()` (evita callables repetitivos que retienen)
+- [x] Prohibido crear Node sin padre que quede huérfano; chequeo con contador de orphans
+- [x] Policy de recursos compartidos: `duplicate(false)` y caché con un solo dueño (D6)
+- [ ] Texturas de región se liberan al salir de la misma (con M63 y M09)
+- [ ] Los datos de partida (M29) no retienen referencias a nodos del mundo
+- [x] Los callables con bound parameters se desconectan en `_exit_tree` (anti-leak de lambdas)
+- [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares)
+- [ ] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base
+- [ ] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual)
+- [ ] RN1: presupuesto de RAM objetivo ≤ 2.5 GB en PCs de gama media (preset Alta)
+- [ ] RN1: preset Baja ≤ 1.5 GB para gama baja con 4 GB de RAM
+- [ ] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones
+- [ ] RN2: cero hitching perceptible por refcount en liberaciones masivas
+- [ ] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline
+- [ ] RN6: ninguna operación de memoria bloquea el hilo principal
+- [ ] RN9: la gestión de memoria es transparente para la partida (determinismo intacto)
+- [x] Flujo muestreo → semáforo → política de acción (warning/crítico/emergencia)
+- [ ] Descarga dura al 95%: atlas fuera de pantalla y bancos de biomas viajeros
+- [x] Toda decisión de descarga queda registrada en log (M103) para análisis
+- [ ] Buffers de VoxelTools por chunk se liberan al descargar (sin acumulación)
+- [ ] Colliders estáticos de chunks descargados se liberan junto con la mesh
+- [ ] Sin duplicación de meshes entre M63 (streaming) y el 62 (descarga)
+- [ ] Generación de mallas en hilos (M08): resultados por cola sin copias extra
+- [ ] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM
+- [ ] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos
+- [ ] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test)
+- [ ] Bancos de audio por bioma (M42) cargados al entrar y descargados al salir de la región
+- [ ] Pistas largas (música M41, ASMR M44) reproducidas por streaming, no en RAM completa
+- [ ] Streams `.ogg` liberados de caché cuando ningún reproductor los usa
+- [ ] Los buses (M91) no retienen streams detenidos
+- [ ] Cambio de bioma: descarga del banco anterior diferida 1 frame (no corta transiciones)
+- [ ] Prueba: 30 min con clima cambiante (M32) sin crecimiento de memoria de audio
+- [ ] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62
+- [ ] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake)
+- [ ] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño)
+- [ ] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel)
+- [ ] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo
+- [ ] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables
+- [x] Textura gigante (4K simple sin mips): detector la identifica y degrada calidad automáticamente
+- [ ] Atlas lleno: política de evicción por orden de uso con log del evento
+- [ ] Chunk sin descargar tras cambio rápido de región: el monitor lo detecta y fuerza liberación
+- [ ] Banco de audio pedido mientras se descarga: reproducción diferida o silenciada graceful
+- [ ] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga
+- [ ] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados
+- [ ] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros
+- [x] Tween sin fin en UI: auto-detención en `_exit_tree`
+- [x] Nieve/niebla (M32) que crea nodos por frame: detector de nodos por frame con alerta
+- [ ] Memoria al límite durante tormenta máxima: degrada con aviso y el juego sigue jugable
+- [ ] Baseline menú principal: objetivo < 600 MB
+- [ ] Baseline spawn de Aurora: objetivo < 1.600 MB
+- [ ] Baseline horizonte terrestre oteado: objetivo < 2.200 MB
+- [ ] Baseline subterráneo del templo (M26): objetivo < 2.000 MB
+- [ ] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta)
+- [x] Uso de arrays tipados y `Packed*Array` donde el tamaño es fijo
+- [ ] Evitar `duplicate()`, `instantiate()` y `load()` síncrono en gameplay
+- [ ] Pico de liberación por refcount < 3 ms al descargar una región completa
+- [x] Documentar la arquitectura en plan-actual/03-Diseno.md
+- [x] Registrar los edge cases y sus soluciones en plan-actual/04-Codigo.md
+- [x] Notas del Agente firmadas con modelo, plataforma y fecha en 04-Codigo.md
+- [ ] Test Play Mode: drift-check de 30 min sin teleport con drift ≤ 5%
+- [ ] Test Play Mode: teleport extremo ×10 con memoria estable y sin picos
+- [ ] Test Play Mode: cambio de bioma de audio sin crecimiento de memoria
+- [ ] Test Play Mode: excavar y regenerar 500 bloques sin leaks de buffers voxel
+- [ ] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel
+- [ ] Test Play Mode: textura gigante forzada degrada sin crash
+- [x] Test de semáforos: forzar 90% y verificar descargas automáticas y registro en log
+- [ ] Test de nodos huérfanos: conteo de orphans en reposo con valor estable
+- [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable
+
+
+
+
+**Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
+debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
+Atria a 99/100. No repetir.

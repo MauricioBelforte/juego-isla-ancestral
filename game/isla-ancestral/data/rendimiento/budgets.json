@@ -1,35 +1,36 @@
 {
+  "version": 2,
   "preset_activo": "media",
   "presets": {
     "baja": {
-      "voxel": 512,
-      "texturas": 384,
-      "audio": 128,
-      "escenas": 256,
-      "pools": 128,
-      "ui": 64,
-      "shaders": 64,
-      "reserva": 128
+      "voxel": 500,
+      "texturas": 250,
+      "audio": 150,
+      "escenas": 220,
+      "pools": 120,
+      "ui": 70,
+      "shaders": 60,
+      "reserva": 130
     },
     "media": {
-      "voxel": 640,
-      "texturas": 512,
-      "audio": 160,
-      "escenas": 320,
+      "voxel": 650,
+      "texturas": 320,
+      "audio": 200,
+      "escenas": 280,
       "pools": 160,
-      "ui": 80,
+      "ui": 85,
       "shaders": 80,
-      "reserva": 160
+      "reserva": 225
     },
     "alta": {
-      "voxel": 768,
-      "texturas": 640,
-      "audio": 192,
-      "escenas": 384,
-      "pools": 192,
-      "ui": 96,
-      "shaders": 96,
-      "reserva": 192
+      "voxel": 800,
+      "texturas": 400,
+      "audio": 250,
+      "escenas": 350,
+      "pools": 200,
+      "ui": 100,
+      "shaders": 100,
+      "reserva": 300
     }
   }
 }

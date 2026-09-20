@@ -304,6 +304,25 @@ jobs:
           # 0.0 px, asi que el gate no se conforma con que el archivo exista.
           # Gate duro: || FAIL=1.
           godot --headless --script scripts/fonts/test_fuentes_binarias_bug042.gd 2>&1 || FAIL=1
+          # M62 Memoria (Log 1094, DeepSeek-V4.1-Flash). El modulo NO tenia
+          # gate: ninguna de sus suites figuraba aca, y una de ellas estaba
+          # MUERTA dando verde (una asignacion tipada RefCounted -> Node
+          # abortaba las funciones con SCRIPT ERROR y el resumen imprimia
+          # "0 fallo(s)"). Las 4 suites ahora tienen guardian de 3 capas:
+          # bloque marcado con _fin(), piso de checks MEDIDO (no copiado) y
+          # _summary() en su propio call_deferred, asi que un aborto silencioso
+          # se detecta aunque no quede ningun [FAIL].
+          # 27 + 47 + 25 + 133 = 232 checks. Gate duro: || FAIL=1.
+          godot --headless --script scripts/rendimiento/memoria/test_memoria_m62.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/rendimiento/memoria/test_enforcement_m62.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/rendimiento/memoria/test_pool_iter2.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter3.gd 2>&1 || FAIL=1
+          # El dataset de presupuestos es GENERADO, no editado a mano: los 8
+          # sistemas de los 3 presets habian divergido del diseno §2 (las sumas
+          # daban 1664/2112/2560 en vez de 1500/2000/2500). Este gate sale 1 si
+          # alguien toca budgets.json sin pasar por generar_budgets.gd.
+          # Gate duro: || FAIL=1.
+          godot --headless --script scripts/rendimiento/memoria/generar_budgets.gd -- --check 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 
