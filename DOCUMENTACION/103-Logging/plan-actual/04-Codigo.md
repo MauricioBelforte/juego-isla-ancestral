@@ -257,6 +257,21 @@ var _file: FileAccess = null
 - Priorizar performance: buffer de escritura, flush periódico, evitar logs en hot paths.
 - La sanitización de datos sensibles es crítica para privacidad (GDPR, políticas de Steam).
 - La rotación de logs debe ser transparente para el usuario (no interrumpir el juego).
+
+## Notas del Verificador §21.8 (hy3 / WorkBuddy, Log 1129 — 2026-09-20)
+
+**Veredicto:** QA cruzado §21.8 COMPLETADO y **sello limpio RE-AFIRMADO** (iter. 2; el
+sello original era iter. 1, Log 938). Verificador hy3 ≠ autor DeepSeek-V4.1-Flash.
+
+- 4 suites headless con binario Godot 4.7.2 real: **179 checks, 0 fallos, 0 SCRIPT ERROR, EXIT 0**
+  (`test_logger` 14/0, `test_logging_m103` 25/0, `test_m103_frame_budget` 9/0, `test_logging_m103_iter1` 131/0).
+- Anti-falso-verde probado (inyección bloque D → 131→122 EXIT 1 en iter. 1; CHECKS_MINIMOS + `_fin`/`_summary`).
+- CI conectado: `quality.yml` L269/279/280/285.
+- Checklist 173 `[x]` / 0 `[ ]` / 6 `[?]` (6 `[?]` visibles con dueño externo → cumple §21.6/§24).
+
+Sello registrado en `CHECKLIST-QA-SEALS.md` (fila M103 actualizada a iter. 2 / Log 1129).
+
+**Firma:** hy3 (WorkBuddy), 2026-09-20 — Log 1129.
 - La exportación de logs debe ser rápida (para bug reports en runtime).
 - Integrar con el Debug Menu (M110) para mostrar logs en tiempo real con filtros.
 

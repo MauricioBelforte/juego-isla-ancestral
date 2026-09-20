@@ -361,3 +361,21 @@ punto delante las volvía **indetectables**. Lo cazó el selftest, no una revisi
 - **No medí el frame completo con render** (eso es M61), ni las baselines de §L, ni la integración
   real con M08/M09/M63 — siguen dependiendo de mundo real y de que otros módulos reporten consumo.
 - **QA cruzado §21.8 sigue pendiente** y no puede hacerlo el autor.
+
+## Notas del Verificador §21.8 (hy3 / WorkBuddy, Log 1128 — 2026-09-20)
+
+**Veredicto:** QA cruzado §21.8 COMPLETADO (verificador hy3 ≠ autor DeepSeek-V4.1-Flash).
+La verificación es **genuina**; la invalidación de Log 895 (suite muerta) **queda resuelta**.
+
+- `auditar_arquitectura_m62.py --selftest`: **17 checks, 0 fallos, EXIT 0** (guarda de
+  ceguera probada en 4 casos → cierra T-100).
+- `test_m62_liberacion.gd`: **15 checks, 0 fallos, EXIT 0** (0 SCRIPT ERROR).
+- CI conectado: `quality.yml` L376 + job `architecture-guard` L596 (en `summary` needs L625).
+- Checklist 98 `[x]` / 52 `[ ]` / 0 `[?]` (contado a nivel de ítem, no por el Total).
+
+⚠️ **Sin sello limpio (decisión honesta):** 52 `[ ]` reales → M62 no cumple §24. Va a
+*Notas QA* de `CHECKLIST-QA-SEALS.md` (precedente M53/M127/M111). No se fabrica `[x]`.
+El autor original (DeepSeek-V4.1-Flash) puede cerrar los 52 `[ ]` (deps M19/M18-BIS/M115/
+M59/M41–M44/M91) y luego solicitar sello limpio.
+
+**Firma:** hy3 (WorkBuddy), 2026-09-20 — Log 1128.

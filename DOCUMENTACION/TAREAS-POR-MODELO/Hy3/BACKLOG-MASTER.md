@@ -676,3 +676,34 @@ checklist leido. Si la suite no corre, el sello no se puede dar.
 **Recordatorio operativo (de M118):** cuando reviertas o cambies un modulo,
 **cerrá el ciclo en CHECKLIST-GLOBAL.md** tambien, no solo en el `05-Checklist.md`.
 La fila global se quedo `106/106` despues de tu revert y yo tuve que corregirla.
+
+---
+
+## P-12 — Re-auditoría §21.8 M62 iter.4 + M103 iter.2 (2026-09-20, hy3 / WorkBuddy)
+
+> Tarea del usuario (Mensaje 7). Método (M-02 / P-12): re-auditar con binario Godot 4.7.2
+> real, no sobre checklist leído. Autonomía total: intenté cerrar primero; donde no pude dar
+> sello limpio sin violar §24, informo con `[?]` honesto.
+
+- [x] **P-12.1 — Renombre BUG-071(M118)→BUG-072** (colisión de numeración: 071 era de
+  DeepSeek, `ed39d5b` 02:35:36 < mi `939d974` 02:52:35). Commit `dedd013` (4 archivos
+  propios: 11-BUGS, 118/05-Checklist, Log 1125, Log 1117). Resolución en BUG-074 (meta-bug).
+- [x] **P-12.2 — QA §21.8 M62 iter.4 (DeepSeek, Log 1112, `1582ac2`):** verificación
+  **genuina** pero **SIN sello limpio** → *Notas QA* (Log 1128). Binario real: auditor
+  `auditar_arquitectura_m62.py --selftest` **17/0** + suite `test_m62_liberacion.gd` **15/0**
+  (EXIT 0, 0 SCRIPT ERROR); CI `quality.yml` L376 + job `architecture-guard` L596 conectado;
+  checklist 98/52/0. Invalidación de Log 895 (suite muerta) **resuelta**. 52 `[ ]` reales
+  (deps M19/M18-BIS/M115/M59/M41–M44/M91) → no cumple §24 (precedente M53/M127/M111).
+- [x] **P-12.3 — QA §21.8 M103 iter.2 (DeepSeek, Log 1109, `96759b6`):** **sello limpio
+  RE-AFIRMADO** (Log 1129). Binario real: 4 suites **179 checks / 0 fallos / 0 SCRIPT ERROR**
+  (EXIT 0): `test_logger` 14/0, `test_logging_m103` 25/0 (11 checks resucitados trampa 46),
+  `test_m103_frame_budget` 9/0, `test_logging_m103_iter1` 131/0; CI `quality.yml`
+  L269/279/280/285; checklist 173/0/6 (6 `[?]` visibles con dueño → cumple §21.6/§24).
+  Fila M103 en SEALS actualizada a iter.2.
+- [x] Logs 1128 (M62) y 1129 (M103) escritos y firmados; notas de verificador añadidas a
+  `04-Codigo.md` de M62 y M103; `CHECKLIST-QA-SEALS.md` actualizado (M103 sellos + M62 Notas QA).
+- [!] **Sin push** (instrucción del usuario). Commit selectivo solo de mis archivos (NO
+  `CHECKLIST-GLOBAL.md` / `NUMEROS_DISPONIBLES.txt`): 2 logs + 2 `04-Codigo.md` +
+  `CHECKLIST-QA-SEALS.md` + este backlog.
+
+**Firma:** hy3 (WorkBuddy), 2026-09-20 — P-12 completado.
