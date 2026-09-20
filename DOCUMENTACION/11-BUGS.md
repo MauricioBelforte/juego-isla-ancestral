@@ -151,6 +151,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 ---
 
 | BUG-072 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
+| BUG-078 | **El CI ejecuta 8 scripts que NO estan versionados** (`godot --headless --script <ruta>` sobre archivos que no existen en el repo): M11 + 5 de M64 + M116 + M117. En un checkout limpio `godot` sale con **EXIT 1** (`File not found`) -> el job `godot-lint` queda ROJO. Introducido por `0fb0141` (2) y por `11ac4d9` (6) — **el propio commit que arreglaba BUG-051**, que era el mismo defecto | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [ ] Parcial — M11 versionado (`5ce3aa9`); los 7 ajenos en `DEUDA_CONOCIDA` de `validar_workflows.py` | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 
@@ -159,6 +160,81 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-078 — El gate de CI ejecuta 8 scripts que NO estan en el repositorio
+
+- **Fecha de reporte:** 2026-09-20 09:10
+- **Modulo(s) afectado(s):** M83 (CI) — `.github/workflows/quality.yml`, job `godot-lint`.
+  Duenos de los archivos faltantes: **M11** (1), **M64** (5), **M116** (1), **M117** (1).
+- **Severidad:** 🔴 Critica — en un checkout limpio el job falla y con el `needs:` del
+  `summary` se cae el gate duro. El repo queda en verde solo en la maquina donde los
+  archivos existen por casualidad.
+- **Introducido por:** `0fb0141` (2026-09-17, M116/M117) y `11ac4d9` (2026-09-20 02:50,
+  M64 x5 + M11). **El segundo es el commit que arreglaba BUG-051** — «el fix del gate
+  `godot-lint` no estaba versionado» — o sea: **el fix del bug reintrodujo el bug 6 veces**,
+  en el mismo job y en el mismo commit.
+- **Estado:** [ ] Parcialmente resuelto. M11 versionado en `5ce3aa9`; los otros 7 quedan
+  declarados en `DEUDA_CONOCIDA` de `scripts/validar_workflows.py`, que **falla** ante
+  cualquier cita nueva sin versionar.
+
+**Que pasa.** El job `godot-lint` ejecuta, entre otros:
+
+```
+godot --headless --script scripts/player/test_player_m11.gd 2>&1 || FAIL=1
+godot --headless --script scripts/ia_npc/test_navegacion_m64.gd 2>&1 || FAIL=1
+...
+```
+
+y esos archivos **no estan en el repositorio**. Verificado con la unica medicion que sirve
+—`ls` miente, porque el archivo si esta en el disco del autor—:
+
+| comando | resultado |
+|---|---|
+| `git cat-file -e HEAD:game/isla-ancestral/scripts/player/test_player_m11.gd` | **no existe** |
+| `git log -S'test_player_m11' -- .` | nunca se commiteo el archivo (solo la cita) |
+
+**Efecto medido, no inferido.** `godot --headless --script <ruta inexistente>` sale con
+**EXIT 1**:
+
+```
+ERROR: Attempt to open script 'res://scripts/player/test_player_m11.gd' resulted in error 'File not found'.
+ERROR: Can't load script: scripts/player/test_player_m11.gd
+```
+
+Con `|| FAIL=1` y el `exit $FAIL` del job, eso es el job en **ROJO**. Y como el primer
+archivo faltante corta la cadena, los otros 7 ni siquiera llegan a informar su propio
+estado: **un rojo que oculta 7 rojos mas**.
+
+**Barrido completo (68 citas `--script` en los 6 workflows):**
+
+| workflow | cita | dueno |
+|---|---|---|
+| quality.yml | `scripts/player/test_player_m11.gd` | M11 — **resuelto** |
+| quality.yml | `scripts/ia_npc/test_navegacion_m64.gd` | M64 |
+| quality.yml | `scripts/ia_npc/test_social_m64.gd` | M64 |
+| quality.yml | `scripts/ia_npc/test_rendimiento_m64.gd` | M64 |
+| quality.yml | `scripts/ia_npc/test_persistencia_m64.gd` | M64 |
+| quality.yml | `scripts/ia_npc/test_ia_npc_m64_iterN.gd` | M64 |
+| quality.yml | `scripts/build/test_instalador_m116.gd` | M116 |
+| quality.yml | `scripts/build/test_build_m117.gd` | M117 |
+
+Ademas `scripts/editor/_colector_sintaxis.gd` no esta versionado **a proposito**: lo genera
+`tools/quality/gen_colector_sintaxis.py` en un paso previo del mismo job. Ese caso va en
+`CITAS_PERMITIDAS`, no en la deuda.
+
+**Gate agregado.** `scripts/validar_workflows.py` (regla 5): toda cita `--script` de un
+workflow debe existir en `HEAD` (`git cat-file -e`, **no** `os.path.exists`). Trae
+`CITAS_PERMITIDAS`, `DEUDA_CONOCIDA` (reportada como aviso, para no apagar el CI por deuda
+de otro dueno) y **marca como problema una entrada de deuda que ya este resuelta**, para que
+la lista no envejezca en silencio. `--selftest`: 6/6, con el fixture de la cita sin versionar
+probado en rojo.
+
+**Por que importa mas de lo que parece.** Es la **trampa 98** y es la **tercera vez** en este
+repo: BUG-051 y BUG-071 fueron lo mismo. La leccion que ya estaba escrita en el skill
+—«antes de cerrar un bug cuyo cierre se apoya en un gate, corre `git cat-file -e HEAD:<ruta>`
+sobre cada archivo que ese gate ejecuta»— **no se aplico al escribir el fix de BUG-051**.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20
+
 ### BUG-077 — `quality.yml` era YAML INVALIDO: el CI entero estuvo apagado ~3 h
 
 - **Fecha de reporte:** 2026-09-20 04:45
