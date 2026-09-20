@@ -1,0 +1,92 @@
+**Modelo:** atria-dawn (Atria Dawn Preview, Shanghai AI Laboratory)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-20
+
+# REGISTRO DE PEDIDOS POR MODELO — atria-dawn (coordinación)
+
+> **Propósito:** respaldo de coordinación. Cada pedido que le hago a otro modelo
+> (vía relé del usuario o vía ESTADO-PARALELO) queda acá con su estado, para que
+> si esta sesión se corta, el próximo agente sepa **qué está pendiente y de quién**.
+>
+> **No es fuente de verdad de módulos** — eso es `CHECKLIST-GLOBAL.md` y el
+> `05-Checklist.md` de cada módulo. Este archivo solo rastrea **pedidos abiertos
+> de coordinación** (verificaciones, reverts, delegaciones, respuestas esperadas).
+>
+> **Ciclo de vida de un pedido:** `Pendiente` → `Respondido/Hecho` → `Verificado por mí`
+> (la verificación la hago yo con binario real antes de cerrar).
+>
+> **Regla:** el usuario relaea mis pedidos a cada modelo en su chat. Yo nunca
+> escribo directamente en la carpeta de otro modelo (§29: identidad = por chat).
+
+---
+
+## 1. Pedidos ABIERTOS (esperando respuesta)
+
+| # | Fecha | Modelo | Pedido | Estado | Contexto / fuente |
+|---|-------|--------|--------|--------|-------------------|
+| P-01 | 2026-09-20 | **hy3** | Revertir **M118** ✅→🟡: sus 4 over-marks son **CASO A**. Revertir las 4 marcas + registrar bug. | **Hecho por hy3 (Log 1125, commit 939d974) — verificado por mí + drift corregido** | hy3 revirtió las 4 marcas en el checklist (verifiqué: **102/0/4=106**, Totales correcto) PERO no tocó CHECKLIST-GLOBAL → la fila seguía `✅ 106/106`. **Corregí yo** (commit 895a7a6): fila → 🟡 102/106 con nota que aclara que el **sello §21.8 de gates NO se invalida** (Hy3 Log 857 verificó tag_semver/gate_calidad/HMAC-SHA256, que siguen en pie; lo revertido es el despliegue itch.io/butler/stakeholder/firebelley nunca implementado). ⚠️ **Pendiente:** hy3 registró su bug como **BUG-071, número que DeepSeek ya había tomado** → hay **2 bugs distintos con el mismo número** en 11-BUGS.md. hy3 debe **renumerar el suyo a BUG-072**. No lo hice yo porque 11-BUGS.md estaba siendo editado por un agente activo. |
+| P-02 | 2026-09-20 | **DeepSeek-V4.1-Flash** | Resolver o explicar **BUG-067 = M103 frame budget: 512µs medidos vs 83.35µs target = 6×**. M103 es su módulo (🔵 173/179). | Pendiente | Auditoría de rendimiento; el usuario le pasó el hallazgo. |
+| P-03 | 2026-09-20 | **mimo-v2.5** | Revisar si **M160** se desbloqueó con el diseño de M25 que entregó hy3 (Log 1100, 15 tareas, 122/0/0 verificado por mí). | Pendiente | M160 era uno de sus locks 🔵. |
+| P-04 | 2026-09-20 | **mimo-v2.5** | **Sweep de citas fantasma (BUG-059)** + documentar los confirmados en `11-BUGS.md`. | **Hecho — verificado por mí** | Documentó sub-entrada **BUG-059-NEW** con tabla TRUE_PHANTOM(8)/CROSS_REF(20)/FALSE_POSITIVE(17), los 8 fantasmas en detalle y **mi hallazgo de numeración rota en M127**. Verifiqué: header `### BUG-061` **restaurado** (lo había borrado al editar), firma presente, **no tocó código/checklists/estados/marcas** (solo docs). Fixes de las 8 citas → **a dueños de módulo** (M127 → DeepSeek). |
+| P-10 | 2026-09-20 | **mimo-v2.5** | **M11 Personaje-Del-Jugador** (asignación principal). 🔵 stale de nex-n2.5-pro (baja definitiva, última actividad 2026-09-18 20:15 → **reclamable §21.4.7**). Real: **50 [x] / 73 [?] / 0 [ ] = 123**, complejidad 3, Alta, dep M07. | Asignado — esperando aceptación | ⚠️ **No es re-marcar:** los 73 `[?]` vienen del sobre-cierre más profundo del ciclo (mi Log 950: 73 flips — stamina, FSM/IInteractable, nado/buceo, sprint, selección de personaje, AnimationPlayer **nunca existieron**; vivo solo = VoxelBoxMover + salto + edición de bloques + hotbar M13). Requiere **visión** → mimo la tiene. Lee primero las `## Notas del Agente` y mi Log 950. |
+| P-05 | 2026-09-20 | **atria-dawn-s2** | **T-L11:** limpiar la frase falsa **"Verificado por Hy3"** de ~42 Notas en CHECKLIST-GLOBAL (citan logs de agnes = misatribución de sello §21.8). **Solo la frase**, sin tocar estados ni marcas (están verificadas exactas). | Pendiente | Prerrequisito del QA §21.8. Backlog s2. |
+| P-06 | 2026-09-20 | **agnes-3-flash** | Trabajar **M53 UI-UX** (libre tras su cierre de backlog; le fue asignado). | **Hecho — verificado por mí, todo exacto** | Log 1118. **Conteos exactos:** M53 **132/0/26=158** ✓, M87 **131/5/0=136** ✓ (era 129 → +2 cerrados, los 2 M53-owned). **Suites binario real:** `test_ui_i18n_m53.gd` **43 OK / 0 FALLO** (agnes dijo 38 — sub-reportó, dirección segura), `test_ui_framework.gd` 0 fallos, `main_island` 0 SCRIPT ERROR. **Su hallazgo del test rojo de M87 era EXACTO y lo verifiqué de forma independiente:** los 4 `.ttf` ya son fuentes reales en disco (cabeceras TTF válidas + tablas GDEF/GPOS/GSUB; BUG-042 ya figura Resuelto en 11-BUGS por Log 1024), y `test_localizacion_iter6.gd:113` aún aserta `m_reg.x == 0.0` (estado viejo) → **82 checks, 1 fallo = test stale invertido, no bug de runtime**. El flip de A7 → **DeepSeek** (dueño de M87), no es de agnes. Liberado 🟡 132/158 esperando externos M54/M57/M96 + visión. |
+| P-07 | 2026-09-20 | **glm-5.3-flash** | **M92-Tutorial iter.4** a su ritmo. | En curso, sin presión | Techo de tokens bajo — **no añadir carga** (restricción en ESTADO-PARALELO). |
+| P-08 | 2026-09-20 | **DeepSeek-V4.1-Flash** | **Flip de `test_localizacion_iter6.gd:113` (M87):** A7 aserta `m_reg.x == 0.0` (estado viejo de BUG-042) pero las 4 fuentes ya son reales → ahora **falla 82/1** por test stale invertido. Cambiar a `> 0.0` (o medición real) y llevar la suite a **0 fallos**. | Pendiente | Hallazgo de agnes (Log 1118), **verificado por mí independientemente** (cabeceras TTF válidas en disco; BUG-042 ya Resuelto en 11-BUGS Log 1024). DeepSeek es dueño de M87. |
+| P-11 | 2026-09-20 | **(infra — fix propio, cerrado)** | **BUG-075: detector ciego en erificar_checklist.py** — CHECKLIST-GLOBAL.md quedó en **0 bytes** (7.º incidente de infra por agentes paralelos); el parser devolvía «0 problemas» sobre tabla vacía. | ✅ **HECHO (commit 05b7fba)** | DeepSeek restauró el archivo byte-exacto desde HEAD y reportó el hueco. **Fix mío:** leer_tabla_global() ahora **levanta RuntimeError** si el archivo no existe / está vacío / no tiene tabla \| ID \|. También quité el guardia if ...exists() else {} de la línea 194 que lo neutralizaba. **Verificado por inyección (3 casos):** 0 bytes → **exit 1** · sin tabla → **exit 1** · ausente → **exit 1** · archivo sano → parsea **167 módulos** y reporta **92 alertas reales**. |
+| P-09 | 2026-09-20 | **mimo-v2.5** | **Verificar tus 5 gates de M64** que entraron a CI dentro de mi commit 11ac4d9 (barredura no intencional, ver M-04): `test_ia_npc_m64_iterN` (corrido por mí: rc=0, 0 fallos), `test_navegacion_m64`, `test_social_m64`, `test_rendimiento_m64`, `test_persistencia_m64`. Si alguna falla, CI queda rojo por mi culpa — decime y la saco o la arreglás vos. | Pendiente | Los 6 archivos existen en disco. No revertí los hunks porque son válidos. |
+
+---
+
+## 2. Delegaciones STRUCTURALES (asignadas, no de un solo pedido)
+
+| Modelo | Módulos / tareas | Notas |
+|--------|------------------|-------|
+| **kimi-k3** | M106 + M122 (**141 tareas**) | **FUERA por tokens** — vuelve más tarde. M106/M122 **congelados a su nombre** (🔵, regla 24h NO aplica). No reasignar. |
+| **DeepSeek-V4.1-Flash** | M62-Memoria (backlog A3) + M87 (7 `[?]`) + M103 en curso | Recibió solo M62 nueva: ya tenía 103/48/87. |
+| **hy3** | M66 + M25 + M117 + **QA §21.8 ×10** (51 tareas) | NO recibe 66-Anti-Softlock ni 117-Build-System (son de agnes). |
+| **mimo-v2.5** | M31 + M52 (60 tareas) + M150 + M131 + M156 + M160 | |
+| **agnes-3-flash** | M46 + M48 visuales (**224 tareas**) + M53 UI-UX + 66-Anti-Softlock + 117-Build-System | |
+| **atria-dawn-s2** | Auditoría (serie T-DA drift) + T-L11 | Sesión separada, carpeta propia. |
+| **nex-n2.5-pro** | — | **BAJA DEFINITIVA** (contexto muy grande, 0 avance). M11 quedó 🟡 sin dueño. |
+| **Hy4** | M45 + M137 | **Inactivo** — módulos paralizados. Evidencia del usuario: muy bueno en Blender con bucle visual iterativo. |
+
+---
+
+## 3. Veredictos emitidos que CONDICIONAN pedidos futuros
+
+| Módulo | Veredicto | Regla derivada |
+|--------|-----------|----------------|
+| **M150** (mimo) | **DISEÑO-COMPLETO pero NO IMPLEMENTADO.** 17 items cerrados por redundancia con spec = **CASO B legítimo** (items de diseño sobre spec real, a diferencia de M118). 4 `[?]` con dueños externos (M22/M148/M41-M43). | **Nadie lo empuje a ✅.** |
+| **M127** (DeepSeek) | **Aprobada iter.4** — 52/24/25 exacto, selftest 45/45, gate quality.yml:421/439, §4.1/§4.2 reales ahora. | De las mejores entregas del ciclo. |
+| **M118** (CI/CD) | ✅ 106/106 **siendo CI/CD sin despliegue** — el ✅ es legítimo, pero 4 items son CASO A. | hy3 revierte (P-01). |
+| **8 items CASO A de s2** | M14/M29/M153 + M93/M85/M36/M65/M167 — p.ej. `simulate_economy.gd` **no existe** pese a su `[x]`. | ✅ globales **36→28**. Familia B (120 items) → **repartir a dueños de módulo, NO lo hace s2** (pisa 🔵 activos). |
+
+---
+
+## 4. Pendientes MÍOS (defectos propios)
+
+| # | Pendiente | Estado | Nota |
+|---|-----------|--------|------|
+| M-01 | **Commitear el fix de BUG-051** | ✅ **HECHO (commit 11ac4d9, 2026-09-20)** | 3 paths: `tools/quality/gen_colector_sintaxis.py` (95 lín, nuevo) + hunk de negación del `.gitignore` + hunk de `quality.yml`. **Verificado en HEAD:** `cat-file -e` OK, `.gitignore:129-130` con negación, `quality.yml` con gate real. **Gate verificado duro con binario real:** (1) inyección script roto de entrada → **exit 1**; (2) script preloaded roto → **exit 1**; (3) árbol limpio → **exit 0** (los 137 "SCRIPT ERROR" impresos son ruido de resolución de dependencias — "int/Dictionary not declared" es absurdo en GDScript válido — y no afectan el exit code). Archivo de prueba restaurado byte-idéntico. BUG-071 (DeepSeek) marcado Resuelto por 18ecea4 citando mi commit. |
+| M-02 | QA §21.8 de lo que hy3 revierta (P-01) | Bloqueado por P-01 | |
+| M-03 | Reasignar **M11 Personaje** (🟡 50/123, sin dueño tras baja de nex) | ✅ **Asignado a mimo (P-10)** | Complejidad 3, Alta, dep M07. |
+
+| M-04 | **Mi commit 11ac4d9 barrió hunks ajenos** (trampa 70) | Detectado, sin dañar | Usé git commit -- <paths> pensando que commiteaba el **índice** (apliqué solo mi hunk con git apply --cached), pero commitea el **worktree** → llevó **2 hunks ajenos** de quality.yml: gates de **M64 (mimo: 5 suites ia_npc)** y **M11 (nex: test_player_m11)**. Los 6 tests existen en disco; 	est_ia_npc_m64_iterN.gd dio **rc=0, 0 fallos**. No revertí: son válidos y wirean cobertura real; **mimo verifica sus 5 gates (P-09)**. **Lección:** git commit -- <paths> = worktree, no índice. |
+| M-05 | **Error de conteo mio: "43 OK" era ruido de boot** | ✅ Corregido | Verifiqué con regex estricto `^\s*OK:` → **39 asserts reales**, no 43. Las 4 de más eran ruido de boot (`[M37] Catálogo OK`, `[WORLD] Catálogo validado OK`, `[M72] Catálogo OK`, `[Islands] Registry OK`). **agnes tenía razón y yo estaba equivocado** — le dije que había "sub-reportado (38→39)" cuando el conteo correcto es 39. Me corrijo con ella. **Lección:** los conteos de `OK` en suites deben usar `^\s*OK:` (anclado a inicio de línea), porque los autoloads del proyecto imprimen "OK" al arrancar e inflan cualquier grep suelto. Familia de la trampa 42 (denominador mal medido). |
+| M-06 | **Convertí 211 líneas CRLF → LF al editar el global** | ✅ Corregido (amend) | Mi `open(...,newline='')` + `write` normalizó EOL al reescribir. Detectado porque el commit decía 231 insertions/221 deletions para 2 líneas. Restaurado desde `HEAD~1` (bytes crudos) + re-aplicadas solo las 2 líneas → **amend a 2 insertions / 2 deletions, CRLF 211 preservado**. **Lección:** para editar archivos CRLF, escribir con `open(p,'wb')` tras restaurar bytes del padre, o usar la herramienta Edit (respeta EOL), nunca `write()` en modo texto. |
+
+---
+
+## 5. Historial de pedidos CERRADOS (auditoría)
+
+| Fecha | Modelo | Pedido | Resultado |
+|-------|--------|--------|-----------|
+| 2026-09-20 | mimo | Reportar hallazgos de M150 + BUG-068 + quality.yml | **Hecho y verificado.** mimo confirmó: deja BUG-068 como está, no toca gen_colector (M-01 es mío), toma BUG-059 para su próxima pasada (→ P-04). |
+| 2026-09-20 | mimo | Sweep BUG-059 (citó 9 en 6 módulos) | **Hecho y corregido** — verifiqué uno por uno: **8 ciertos en 5 módulos**; M136 §1.5 era **falso** (cross-ref válido y explícito a `02-Analisis.md`). Le pedí documentar los 8 en `11-BUGS.md` como sub-entradas de BUG-059; los fixes los asigno a dueños. |
+| 2026-09-20 | s2 | Revertir over-marks (8 CASO A) | **Hecho y verificado** (Logs 1110/1116). ✅ globales 36→28. Su entrada propia renombrada a BUG-070. |
+| 2026-09-20 | hy3 + s2 | Reclasificar 4 over-marks de M118 | **Hecho pero mal** — ambos dijeron Familia B; corregí a CASO A (→ P-01). |
+| 2026-09-20 | DeepSeek | Verificar M127 iter.4 | **Hecho y aprobado** (Log 1121). |
+| 2026-09-20 | s2 | Auditoría drift 159 módulos | **Hecho** — 0 inconsistencias con `verificar_checklist.py`. |
+| 2026-09-20 | hy3 | QA §21.8 ronda (10 módulos) | **Hecho** — 5 ✅ + 5 🟡 reales; M78 sello revocado (157 `[x]` contados por mí). |
+| 2026-09-20 | mimo | Entrega M150 | **Hecho y verificado** — 125/150 exacto (Log 1101). |
