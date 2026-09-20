@@ -165,6 +165,14 @@ archivo que existe en el disco del autor pero no en el repositorio*. `ls` no la 
 - 2 fixtures nuevos. **Selftest 6/6.** Corrida real: **6 workflows validos + 7 avisos,
   EXIT 0**.
 - `main()` ahora sale **3** (detector ciego) si git no esta disponible.
+- **Defecto propio, encontrado al re-medir el gate (mismo dia):** la ruta `--selftest` **no** tenia
+  el guardian de PyYAML. Sin el parser tiraba un **traceback de Python con exit 1**, mientras que la
+  ruta real ya salia **3** con el mensaje accionable — incoherente, y justo en el comando que el
+  skill le indica al proximo agente. Reparado: `--selftest` tambien sale **3** (DETECTOR CIEGO).
+  **Medido en las 4 rutas:** sin PyYAML `--selftest` **3** (antes: 1 + traceback) y real **3**;
+  con PyYAML `--selftest` **0 (6/6)** y real **0 (6 workflows validos + 7 avisos)**.
+  (Nota de metodo: habia escrito "selftest 6/6" de memoria en la primera version de este log; al
+  re-correrlo **midiendo** aparecio el defecto. Medir antes de escribir la cifra, otra vez.)
 
 Commit **`ad449cd`** (+76 lineas en `11-BUGS.md`).
 

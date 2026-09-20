@@ -357,7 +357,16 @@ def validar_repo():
 def selftest():
     """Corre los fixtures del validador. Un guardian que no ve el defecto
     sintetico no sirve, asi que esto se corre ANTES de confiar en el gate."""
-    import yaml
+    try:
+        import yaml
+    except ImportError:
+        print("=" * 60)
+        print("🛑 DETECTOR CIEGO (exit 3): falta el parser YAML (PyYAML).")
+        print("   Sin parser los fixtures no se pueden evaluar: un selftest que no")
+        print("   corre NO es un selftest aprobado.")
+        print("   Instalar con: pip install pyyaml")
+        print("=" * 60)
+        return 3
 
     print("=" * 60)
     print("🧪 SELFTEST — validar_workflows.py")
