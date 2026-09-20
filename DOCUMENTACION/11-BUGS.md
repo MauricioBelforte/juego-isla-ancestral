@@ -151,12 +151,72 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 ---
 
 | BUG-072 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
+| BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-077 — `quality.yml` era YAML INVALIDO: el CI entero estuvo apagado ~3 h
+
+- **Fecha de reporte:** 2026-09-20 04:45
+- **Modulo(s) afectado(s):** M83 (CI) — `.github/workflows/quality.yml`, linea 597
+- **Severidad:** 🔴 Critica (todo el CI del proyecto sin ejecutarse, con el repo en verde)
+- **Introducido por:** **DeepSeek-V4.1-Flash / WorkBuddy**, commit `1582ac2` (M62 iter. 4, Log 1112), 2026-09-20 01:14:03. **Defecto propio, autoreportado.**
+- **Estado:** [x] **Resuelto** — commit `f1142e6` (comilla el valor). Gate que lo hace imposible: `scripts/validar_workflows.py` + job `checklist-orchestrator` (commit `8f7d90f`).
+
+**Que pasaba.** El archivo **no parseaba como YAML**:
+
+```
+    name: Architecture Guard (M62: servicios y carga sincrona)
+```
+
+El `: ` dentro del valor, sin comillas, hace que YAML lo lea como un mapeo anidado.
+
+**Evidencia — dos parsers independientes, misma linea y columna:**
+
+| parser | salida |
+|--------|--------|
+| PyYAML | `mapping values are not allowed here` — linea 597, col 34 |
+| js-yaml | `bad indentation of a mapping entry (597:34)` |
+
+**Por que es Critica y no un detalle.** Cuando el YAML de un workflow no parsea, **GitHub rechaza el archivo completo**. No falla un job: **dejan de correr los 10** — `godot-lint`, `test-suite`, `legal-tools`, `encoding-guard`, `log-protocol`, `binary-guard`, `architecture-guard`, `summary`… Desde 01:14 hasta 04:45 el CI **entero** estaba apagado y el repo seguia en verde. Es la version CI de **BUG-075**: la misma ceguera, un nivel mas arriba.
+
+**Por que vivio ~3 h.** **Nada en el repo validaba los workflows.** Ni un script, ni un test, ni un gate. El unico que miraba el archivo era GitHub, y su respuesta no llega al repo.
+
+**Gate agregado.** `scripts/validar_workflows.py`: parsea cada workflow, exige `jobs` no vacio, `runs-on` por job, y que **cada nombre en `needs:` exista** (trampa 98 — un gate que cita algo inexistente no es un gate). Exit **1** si hay un problema real, **3** si no puede mirar (sin carpeta / sin workflows / sin parser). Trae `--selftest` con 4 fixtures y el job lo corre **antes** del gate. Verificado: selftest 4/4, validacion real 6/6.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20
+
+### BUG-076 — `quality.yml`: 21 `|| true` y dos jobs que NUNCA pueden fallar, cableados al gate duro
+
+- **Fecha de reporte:** 2026-09-20 04:20
+- **Modulo(s) afectado(s):** M83 (CI) / M111 Codigo de Calidad — `.github/workflows/quality.yml`
+- **Severidad:** 🟠 Mayor (falso verde en el gate duro: dos de sus requisitos son infalsables)
+- **Detectado por:** DeepSeek-V4.1-Flash / WorkBuddy — hallazgo colateral mientras auditaba el fix de BUG-075.
+- **Estado:** [ ] Abierto — **reportado, NO tocado** (es M83/M111, no mio). Dueno: por asignar.
+
+**Que pasa.** Dos jobs del workflow tienen **un solo step de check, y termina en `|| true`**, asi que el job **no puede fallar nunca**. Y los dos estan en el `needs:` del job `summary`, que es el gate duro:
+
+| job | linea | su unico check |
+|-----|-------|----------------|
+| `code-quality-script` | `quality.yml:78` | `godot --headless --script scripts/editor/code_quality_check.gd 2>&1 \|\| true` |
+| `formatting-check` | `quality.yml:107` | `godot --headless --check-only 2>&1 \|\| true` |
+
+Ademas, el `echo "… (exit code: $?)"` que sigue al `|| true` reporta **siempre 0**: `$?` es el de la lista, no el de `godot`. O sea que el log *afirma* que el check paso.
+
+**Alcance medido.** `grep -c "|| true" .github/workflows/quality.yml` = **21**. No todos son defectos (los `! grep … || true` del `security-scan` son correctos por construccion), pero los dos jobs de la tabla si lo son: **ningun resultado de `godot` puede hacerlos fallar**.
+
+**Por que importa.** El `summary` chequea `needs.code-quality-script.result != "success"`, y esa condicion es **vacua**: el job siempre da success. Es la familia del detector ciego (trampa 91) y del `|| true` (trampa 81): un gate que no puede fallar no es un gate, es un adorno con forma de gate.
+
+**Precedente en el propio archivo.** `quality.yml:310` (iter. 3, Log 1014) tiene el comentario: *«GATE DURO - se quito `|| true`. El test es … `|| true` lo dejaba sin [efecto]»*. Ya se hizo una vez, para un step; nunca se hizo el barrido de los demas.
+
+**Fix propuesto.** Patron acumulativo que el propio archivo ya usa en `test-suite` y `architecture-guard`: `FAIL=0` … `|| FAIL=1` … `exit $FAIL`. Si algun check es no bloqueante a proposito, declararlo con un comentario y **sacarlo del `needs:` del `summary`** — no dejarlo contando como requisito del gate duro.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20
+
 ### BUG-075 — CHECKLIST-GLOBAL.md quedó en 0 bytes: la fuente de verdad global se vació sin detección
 
 - **Fecha de reporte:** 2026-09-20 03:00
