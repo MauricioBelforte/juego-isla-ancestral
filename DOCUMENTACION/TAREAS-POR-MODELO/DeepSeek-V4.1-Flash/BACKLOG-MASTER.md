@@ -202,6 +202,8 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 
 > **M62 Memoria iter. 4 (Log 1112, 2026-09-20):** **98/150 · 0 `[?]` · 52 `[ ]`**. 5 ítems cerrados, **todos por medición**: carga síncrona en gameplay (L190), pico de liberación por refcount (L191), deltas de frame (RN2), hilo principal (RN6) y huérfanos estables en reposo. **Lo más importante del ciclo no fueron los cierres, sino las dos veces que medir cambió la conclusión:** (1) la hipótesis de partida —referencia a un autoload declarado después ⇒ **null silencioso** desde `_ready()`— resultó **FALSA** al medirla con un banco de pruebas propio; (2) una aserción de la suite («2048 chicos cuestan más en total que 256 grandes») era **una suposición**, y los datos dijeron lo contrario. Y el **selftest del auditor nuevo cazó 4 defectos del propio auditor** antes de que llegara a CI. Se añaden **2 gates** (`architecture-guard` + la suite en `test-suite`) y se escalan **BUG-068** (autoload duplicado: el mismo script en dos entradas ⇒ 2 instancias, medido) y **BUG-069** (2 componentes cíclicas + 9 refs fuera de orden; **deuda arquitectónica, sin fallo de runtime medido**). ⏳ QA cruzado §21.8 de M62 sigue pendiente: el sello previo (Log 895) quedó invalidado en iter. 3 porque se apoyó en una suite muerta.
 
+> **M127 Copyright del Juego iter. 4 (Log 1119, 2026-09-20):** **52 [x] · 25 `[?]` · 24 `[ ]`** (era 51/25/25). Se cierra el unico item `[ ]` que era **tooling** ("automatizar el empaquetado de codigo y muestras visuales segun formatos y limites USCO"), que estaba diferido con la cita *"especificaciones USCO documentadas en `03-Diseno.md §4.2`"* — **y `§4.2` no existia**. La auditoria de la cita destapo **2 citas a secciones inexistentes** (`§2.3` linea 71, `§4.2` linea 137): el mismo defecto que causo la reversion del 2026-09-14 y que la nota de la iter. 2 afirmaba haber corregido. Se escribe `03-Diseno.md §4` con la especificacion **real** (37 CFR 202.20(c)(2)(vii), verificada contra la norma) y se corrigen ambas citas. La **suite nueva encontro 3 defectos propios** antes de llegar a CI: `--json` no era JSON puro; el manifiesto inflaba el paquete al **37,6 %** (violaba la regla 4.4 que el propio script comprueba -> ahora 0,6 % con conteo + SHA-256); y `analizar()` no exponia la `deuda`. ✅ **QA cruzado §21.8 del delta CERRADO** — **Log 1121** (atria-dawn, 2026-09-20, verificador ≠ autor): **aprobado**. Verificado contra los artefactos: conteo **52 [x] / 24 [ ] / 25 [?]** exacto, `--selftest` **45/45**, gate presente en `quality.yml`, y **`03-Diseno.md §4.1/§4.2` existen de verdad** (las 2 citas fantasma reparadas). El sello del Log 1022 cubre la iter. 3.
+
 > ⚠️ **La checklist personal se desincroniza.** Tras cerrar una iteración, el `05-Checklist.md` del módulo es la **fuente de verdad**; la personal (`TAREAS-POR-MODELO/<modelo>/<modulo>/checklist.md`) queda atrás. **No regenerarla** con `gen_checklist_personal.py` (borra las notas de evidencia que otros agentes agregaron a cada ítem). Sincronizar **in-place**: parsear los `- [x|?| ]` de ambos en orden (alinean 1:1), cambiar solo los estados que difieren y anexar la nota. En M87 eran 29 ítems.
 
 ## Números de log consumidos (protocolo v3)
@@ -343,6 +345,36 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       mis entradas quedaron anexadas en el worktree y el registro **autoritativo** es
       `Logs/1112-*.md`. `11-BUGS.md` y `quality.yml` **sí se commitearon**, construyendo el blob como
       `HEAD` + solo mis líneas (ambos tenían hunks ajenos en el worktree).
+- [x] Log reservado: **1119** — M127 Copyright iter. 4: empaquetado del deposito USCO
+      (37 CFR 202.20(c)(2)(vii)) + reparacion de 2 citas a secciones inexistentes.
+      **Medido:** 891 fuentes -> 122 468 lineas -> 2 450 paginas -> recorte 1..25 + aviso (1109) +
+      2426..2450 = **51 unidades**. Suite **38/38**, `--selftest` **45/45**, y el gate probado
+      **EN ROJO**: violacion nueva -> exit 1, alcance vacio -> **DETECTOR CIEGO -> exit 3**.
+      Commit **`8048b96`** (10 archivos, +1437/-2). Detalle: `Logs/1119-*.md`.
+      ⚠️ Igual que en 1094/1109/1112: `CHECKLIST-GLOBAL.md` y `ESTADO-PARALELO.md` **NO se
+      commitearon** (worktree con cambios ajenos); `quality.yml` **si**, con blob = `HEAD` + solo
+      mis lineas (el worktree traia 2 hunks ajenos sin commitear).
+      ⚠️ **Dos hallazgos cruzados reportados, no arreglados:** (1) el worktree de `quality.yml`
+      habia quedado **sin mi gate `architecture-guard`** por la tecnica de bytes del Log 1112
+      (un `git add` ajeno lo habria borrado en silencio) — **reparado de forma aditiva**;
+      (2) **colision de numero `BUG-068`** (mia commiteada vs. atria-dawn sin commitear) —
+      reportada en `ESTADO-PARALELO.md`, entrada ajena **no tocada**.
+- [x] Log reservado: **—** (sin log nuevo) — cierre del §21.8 de M127 iter. 4 + **BUG-071** documentado.
+      **§21.8 SELLADO por atria-dawn (Log 1121): aprobado** — conteo 52/24/25 exacto, `--selftest` 45/45,
+      gate presente, `§4.1/§4.2` reales. **BUG-071** (commit `ed39d5b`, 1 archivo, **+47/-0**): el fix de
+      BUG-051 **no esta en el repositorio** (HEAD conserva el no-op; `tools/quality/gen_colector_sintaxis.py`
+      sin versionar, oculto por `gen_*.py`). **Documentado y NO arreglado** (dueno atria-dawn, fix de 1 linea).
+      El verificador lo confirmo de forma independiente: *"no es 'un archivo sin versionar': BUG-051 esta
+      cerrado sin artefacto versionado"*. **El numero `BUG-072` queda reservado para hy3/M118** (verificado
+      libre en HEAD y worktree).
+      ⚠️ **Hallazgos AJENOS de la auditoria del sello** (reportados en `ESTADO-PARALELO.md`, **no tocados**;
+      `CHECKLIST-GLOBAL.md` y `11-BUGS.md` tenian mtime 02:48, otro agente escribiendo):
+      (1) **`CHECKLIST-GLOBAL.md` tiene un byte NUL** (linea 194) donde deberia ir un digito, **pre-existente**
+      (HEAD tambien lo tiene) y **sin gate que lo detecte**; (2) **`CHECKLIST-QA-SEALS.md` esta 2 sellos
+      atrasado** para M127 (su fila 59 sigue con el veredicto del Log 950); (3) `verificar_checklist.py`
+      reporta **2 claims de cierre falso** — **118-CI-CD** dice 106/106 y tiene **102/106**, **39-Tiendas**
+      dice 127/181 y tiene **162/181** — mas 3 locks colgados (M122/M166/M39); y (4) la **fila 127 de
+      `CHECKLIST-GLOBAL.md` no registra el sello** (su columna `Estado` sigue en `iter. 3`).
 
 ---
 
