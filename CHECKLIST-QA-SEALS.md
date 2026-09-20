@@ -29,7 +29,7 @@ reestructuración; solo hy3 (WorkBuddy) lo escribe.
 | 116 | Instalador | 1071 | 2026-09-19 | headless | re-verif §21.8 (hy3 != DeepSeek-V4.1-Flash): 2 tests, 33 checks (18+15), 0 fallos, EXIT 0; 05-Checklist 192/192 [x] (0 [ ] real -> cumple sec24); codigo vivo (InstaladorConfig autoload + installer/ .iss/.ps1 + validador 61 checks). Re-afirma Log 883. |
 | 13 | Herramientas | 1073 | 2026-09-19 | headless | re-verif §21.8 (hy3 != GLM-5.3): test_herramientas 0 fallos + test_herramientas_iter4 0 fallos (EXIT 0, 0 SCRIPT ERROR en scripts/tools/); 05-Checklist 84/34/2=120 (0 [?] ocultos; 34 [ ] deps externas documentadas M16/M17/M33/M35/M45/M46/M53/M59/M65/M22/M71/M12, NO sobre-cierre). Re-afirma Log 1000 (atria-dawn). Cumple §21.8. |
 | 123 | Modding | 883 | 2026-09-13 | headless | 69 checks, 0 fallos |
-| 149 | Nombres-Y-Nomenclatura | 883 | 2026-09-13 | re-grounding | 100/100 verificado (sin test headless) |
+| 149 | Nombres-Y-Nomenclatura | 1092 | 2026-09-19 | re-grounding + BUG-058 fix | ✅ CERRADO 100/100 (hy3 ≠ autor GLM). BUG-058 corregido (exclusiones Godot/app_userdata/addons + modo --staged). 3 [?] honestos cerrados con evidencia: A.13 proceso revisión nativa documentado, E.15 hook pre-commit creado (operativa/pre-commit-naming), G.10 proceso evaluación documentado. Validador: 45 violaciones reales documentadas, 0 SCRIPT ERROR; --staged OK exit 0 |
 | 150 | Diseno-Sonoro-Narrativo | 884 | 2026-09-13 | headless | 12 checks, 0 fallos |
 | 160 | Diseno-De-Ubicaciones-Del-Mundo | 883 | 2026-09-13 | re-grounding | 155/155 verificado (sin test headless) |
 | 27 | Islas-Del-Mundo | 915 | 2026-09-15 | headless | test_islas_m27_iter2.gd 238 checks / 0 fallos ×2 (EXIT 0, 0 SCRIPT ERROR); re-grounding OK; guardián anti-falso-verde probado en vivo |

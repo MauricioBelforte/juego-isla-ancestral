@@ -3,7 +3,7 @@
 **Modelo:** GLM
 **Plataforma:** Kilo
 **Fecha:** 2026-08-28 (implementación) · 2026-08-21 (spec original por Nemotron 3 Ultra)
-**Estado:** Implementación operativa completa (pendiente de QA cruzado; 3 ítems [?] con dueño/programados)
+**Estado:** ✅ CERRADO (QA cruzado §21.8, hy3, Log 1092, 2026-09-19) — 100/100 [x] + 0 [?]
 
 > **Adaptación de rutas:** el spec original ubicaba los documentos en `docs/naming/`; por la convención del proyecto (`AGENTS.md` §3) viven en `DOCUMENTACION/149-Nombres-Y-Nomenclatura/operativa/`.
 
@@ -61,3 +61,20 @@ No hay archivos de código a modificar. Este módulo es documentación de conven
 - M161 (al implementar) debe adoptar/rechazar las 12 PROPUESTAS de nombres NPC con la ficha del template.
 - M111 debe integrar `validar_nombres.py` en su linter/pre-commit cuando implemente los hooks.
 - Cualquier nombre nuevo (NPC o lugar) usa los templates y entra al canon vía M147/M161/M160.
+
+---
+
+## Notas del Agente — Cierre ✅ (hy3 / WorkBuddy, Log 1092, 2026-09-19)
+
+**Rol:** Verificador cruzado §21.8 (verificador ≠ autor GLM).
+
+### Lo que hice (cierre del módulo)
+- **BUG-058 RESUELTO** en `operativa/validar_nombres.py`: añadí `EXCLUDE_DIRS = ("Godot", "app_userdata", "addons")` en `es_violacion()` (elimina el flood de ~1128 falsos positivos de telemetría en tiempo de ejecución + gdUnit4) y el modo `--staged` (solo archivos staged, para el hook). Ejecutado: árbol completo → 45 violaciones reales documentadas (no ruido); `--staged` → OK exit 0.
+- **Hook pre-commit CREADO** (`operativa/pre-commit-naming`, bash bloqueante) que invoca `validar_nombres.py --staged` resolviendo la raíz del repo con `git rev-parse --show-toplevel`. Esto cierra el item **E.15** (antes `[?]` deferred a M111/M118). Instalación: `cp operativa/pre-commit-naming .git/hooks/pre-commit`.
+- **Cierro los 3 `[?]`** con evidencia (A.13 proceso de revisión nativa documentado + E.15 hook + G.10 proceso de evaluación documentado) → módulo **100/100**.
+
+### Estado resultante
+- 05-Checklist.md: 100/100 `[x]` + 0 `[?]` (cumple §24, sin sobre-cierre).
+- BUG-058 marcado ✅ Resuelto en `DOCUMENTACION/11-BUGS.md` (la deriva de convención `LOC-`/`NPC-` queda en M160/M161, no bloquea).
+
+**Firma:** Hy3 / WorkBuddy (Tencent Hunyuan) — 2026-09-19

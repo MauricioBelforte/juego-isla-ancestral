@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Pre-commit hook — Módulo 149 (Isla Ancestral) — validación de naming automática.
+#
+# Verifica SOLO los archivos que se van a commitear contra las convenciones de
+# code-conventions.md (.gd snake_case, .tscn PascalCase para entidades, .tres/.json
+# snake_case, sin backups con fecha dentro de scripts/ ni scenes/).
+#
+# Instalación (git corre el hook desde la raíz del repo):
+#   cp DOCUMENTACION/149-Nombres-Y-Nomenclatura/operativa/pre-commit-naming .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# El hook es BLOCKING: si hay violaciones de naming en archivos staged, el commit
+# se aborta (exit 1) para no introducir deuda nueva. La deuda histórica del árbol
+# (BUG-058: _probe_*.gd, LOC-/NPC-*.tres, etc.) no afecta porque solo se chequea lo
+# staged. Ejecutar `python validar_nombres.py` (sin --staged) para el reporte total.
+#
+# Implementado por hy3 (Log 1092, 2026-09-19). Núcleo: operativa/validar_nombres.py.
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+VALIDATOR="$REPO_ROOT/DOCUMENTACION/149-Nombres-Y-Nomenclatura/operativa/validar_nombres.py"
+
+PY="$(command -v python3 || command -v python || true)"
+
+if [ -z "$PY" ]; then
+  echo "[M149 pre-commit] ADVERTENCIA: Python no encontrado; se OMITE la validacion de naming (commit procede sin gate)." >&2
+  exit 0
+fi
+
+if [ ! -f "$VALIDATOR" ]; then
+  echo "[M149 pre-commit] ADVERTENCIA: validar_nombres.py no encontrado en $VALIDATOR; se omite la validacion." >&2
+  exit 0
+fi
+
+"$PY" "$VALIDATOR" --staged
