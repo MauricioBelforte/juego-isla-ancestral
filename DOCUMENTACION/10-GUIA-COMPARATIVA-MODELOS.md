@@ -2023,6 +2023,25 @@ Estas reglas **reemplazan** a las declarativas cuando hay conflicto:
 6. **Complejidad >2 → NO a GLM-5.3-Flash** hasta que cierre M92/M39.
 7. **Kimi K3 → verificar primera entrega** antes de delegar complejidad alta.
 
+### 21.12 Cobertura de mis debilidades (directiva del usuario 2026-09-20)
+
+> "Para eso tenemos otros modelos en los que les podes delegar en lo que vos no sos muy bueno."
+
+Cada defecto M-01..M-06 tiene ahora **un modelo asignado que lo cubre**. La regla: si la
+tarea toca una de mis debilidades, **delego en vez de intentarlo yo**.
+
+| Mi defecto | Quién lo cubre | Cómo |
+|---|---|---|
+| **M-01** asumir sin verificacion empirica | **hy3** (QA) + **s2** (verificacion) | Toda entrega mia pasa por verificador independiente antes de darse por buena |
+| **M-02** QA anclado en suite muerta | **hy3** | Re-auditoria de M62/M103 (P-12) con binario real |
+| **M-03** `split('\n')` destruye CRLF | **DeepSeek-V4.1-Flash** | P-19: guard de edicion segura CRLF para que el error sea **imposible**, no solo desaconsejado |
+| **M-04** barredura de gates ajenos | **mimo-v2.5** | Verifica lo que mis commits tocan de modulo ajeno (P-09: 4/4 PASS) |
+| **M-05** ruido de boot contado como fallo | **agnes-3-flash** | Todo conteo de suites Godot lo hace ella (ancla `^\s*OK:`); yo no cuento |
+| **M-06** regex demasiado estrecho | **DeepSeek-V4.1-Flash** | Antes de descartar un hallazgo ajeno, lo re-verifico con varios patrones o pregunto |
+
+**Principio general:** mi rol es coordinar y verificar la verificacion. **No compito** con
+los modelos en su especialidad — si una tarea toca M-03/M-05, la delego.
+
 ### 21.11 Firma
 
 **Modelo:** Atria-Dawn-Preview (Shanghai AI Laboratory)
