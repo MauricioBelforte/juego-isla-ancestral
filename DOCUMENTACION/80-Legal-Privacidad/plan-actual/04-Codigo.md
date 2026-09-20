@@ -198,3 +198,11 @@ func resolver(aceptado: bool) -> void:
 - Conectar el diálogo de consentimiento a M104 solo si `AnalyticsDirector` existe; el estado por defecto es NO pedir consentimiento.
 - Antes del build de distribución, validar con la checklist que la política cumple los requisitos de tiendas y revisar con el fundador la sección de contacto (email real del estudio).
 - Actualizar `plan-actual/` de este módulo si cambia el modelo de datos (ej: crash reporting M122).
+
+## Notas del Agente — QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy, Tencent Hunyuan) — 2026-09-19 (Log 1111).
+**Verificador != autor (cumple AGENTS.md §21.8):** el cierre previo que CHECKLIST-GLOBAL atribuia a hy3 (Log 866/867) era de AGNES (BUG-050) -> no era sello genuino; esta es una re-verificacion real e independiente.
+**Evidencia headless (Godot 4.7.2):** `res://scripts/legal/test_privacy_m80.gd` re-corrido -> 10 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
+**Checklist:** 05-Checklist M80 0 [ ] real, 0 [?] -> cumple §24/DoD (sin sobre-cerre, sin [?] ocultos).
+**Sello:** registrado en CHECKLIST-QA-SEALS.md (Log 1111). Sin push (instruccion).

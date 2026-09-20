@@ -89,3 +89,11 @@ if not result.is_valid:
 - **Rating_profile**: Resource → cargado una vez, cacheado
 - **ContentValidator**: Validación por eventos (no cada frame)
 - **Performance**: Overhead mínimo, solo en build pipeline
+
+## Notas del Agente — QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy, Tencent Hunyuan) — 2026-09-19 (Log 1111).
+**Verificador != autor (cumple AGENTS.md §21.8):** el cierre previo que CHECKLIST-GLOBAL atribuia a hy3 (Log 866/867) era de AGNES (BUG-050) -> no era sello genuino; esta es una re-verificacion real e independiente.
+**Evidencia headless (Godot 4.7.2):** `res://scripts/legal/test_rating_m82.gd` re-corrido -> 9 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
+**Checklist:** 05-Checklist M82 0 [ ] real, 0 [?] -> cumple §24/DoD (sin sobre-cerre, sin [?] ocultos).
+**Sello:** registrado en CHECKLIST-QA-SEALS.md (Log 1111). Sin push (instruccion).

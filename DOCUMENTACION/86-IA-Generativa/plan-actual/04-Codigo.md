@@ -158,3 +158,11 @@ Steamworks al momento del Go Live.
 4. Enlazar el módulo 86 con el 78 (Legal-PI) cuando el 78 exista: el 86 asume su marco, no lo redefine.
 5. Actualizar la fila 86 de CHECKLIST-GLOBAL.md (estado, progreso y nota) recién cuando la implementación esté hecha; este componente solo documentó el diseño.
 6. Alimentar el módulo 131 (Créditos) con el registro de herramientas cuando se produzcan assetos finales con IA aprobada.
+
+## Notas del Agente — QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy, Tencent Hunyuan) — 2026-09-19 (Log 1111).
+**Verificador != autor (cumple AGENTS.md §21.8):** el cierre previo que CHECKLIST-GLOBAL atribuia a hy3 (Log 866/867) era de AGNES (BUG-050) -> no era sello genuino; esta es una re-verificacion real e independiente.
+**Evidencia headless (Godot 4.7.2):** `res://scripts/legal/test_genai_m86.gd` re-corrido -> 8 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
+**Checklist:** 05-Checklist M86 0 [ ] real, 0 [?] -> cumple §24/DoD (sin sobre-cerre, sin [?] ocultos).
+**Sello:** registrado en CHECKLIST-QA-SEALS.md (Log 1111). Sin push (instruccion).

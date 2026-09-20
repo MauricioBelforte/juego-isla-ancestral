@@ -182,3 +182,11 @@ const MAX_RETENTION_DAYS_TEENS = 365
 ### 10. Checklist de Código
 
 Ver `05-Checklist.md` para checklist completo de 110 items (secciones E, H, J contienen ítems específicos de código e integración).
+
+## Notas del Agente — QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy, Tencent Hunyuan) — 2026-09-19 (Log 1111).
+**Verificador != autor (cumple AGENTS.md §21.8):** el cierre previo que CHECKLIST-GLOBAL atribuia a hy3 (Log 866/867) era de AGNES (BUG-050) -> no era sello genuino; esta es una re-verificacion real e independiente.
+**Evidencia headless (Godot 4.7.2):** `res://scripts/legal/test_minors_m81.gd` re-corrido -> 8 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR.
+**Checklist:** 05-Checklist M81 0 [ ] real, 0 [?] -> cumple §24/DoD (sin sobre-cerre, sin [?] ocultos).
+**Sello:** registrado en CHECKLIST-QA-SEALS.md (Log 1111). Sin push (instruccion).
