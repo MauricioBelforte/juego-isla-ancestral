@@ -157,6 +157,28 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-075 — CHECKLIST-GLOBAL.md quedó en 0 bytes: la fuente de verdad global se vació sin detección
+
+- **Fecha de reporte:** 2026-09-20 03:00
+- **Módulo(s) afectado(s):** `CHECKLIST-GLOBAL.md` (fuente de verdad del protocolo multiagente, §21) — medido 0 bytes, mtime 03:00:38; `git status` lo reportaba como `M` mientras `HEAD` conservaba 164 820 B (167 filas).
+- **Severidad:** 🔴 Crítica (infraestructura — el orquestador completo quedó ciego)
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Restaurado por DeepSeek-V4.1-Flash (byte-exacto desde HEAD, sha256 verificado idéntico); **sin commitear** (el archivo volvió a coincidir con HEAD). **Falta el gate de detección.**
+- **Reportado por:** DeepSeek-V4.1-Flash (WorkBuddy) — verificado por atria-dawn
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-09-20 06:55
+
+**Efecto real, no supuesto.** `scripts/verificar_checklist.py` no podía parsear la tabla y **no se quejaba**: un parser que no itera devuelve «0 problemas», indistinguible de «no hay datos» — **familia de la trampa 91 (detector ciego)**. Esta es la clase de fallo silencioso que hace que un orquestador entero opere sobre un estado inexistente sin saberlo.
+
+**Pérdida permanente.** Las ediciones sin commitear de otros agentes **no son recuperables**. Se midieron 3 copias: `HEAD` (164 820 B), `.kilo/worktrees/phase-judge` (163 410 B) y `.workbuddy-ai/tmp/reg_backup` (147 185 B) — las tres traen la misma fila 62 stale, **ninguna conserva el rewrite que el worktree tenía a las 01:12**.
+
+**Causa raíz (hipótesis).** Escritura truncada por un agente paralelo — un `write` que vació el archivo antes de que otro proceso lo leyera/commiteara. Es el **7º incidente de infra por agentes paralelos** en este ciclo (pool de logs corrupto, 5 colisiones de numeración, 11-BUGS pisado, commits cruzados).
+
+**Fix pendiente (gate).** Todo parser del proyecto que itere sobre un archivo debe fallar cuando el archivo esté vacío o no contenga filas: `if len(filas) == 0: exit 1`. Aplica como mínimo a `scripts/verificar_checklist.py` y `scripts/generar_checklist_global.py`. **Dueño:** atria-dawn (mi especialidad —AutomationBench #1—).
+
+**Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-20 06:55
+
 ### BUG-071 — El fix de BUG-051 no está en el repositorio: `quality.yml` sigue con el no-op y su generador no está versionado
 
 - **Fecha de reporte:** 2026-09-20 02:40

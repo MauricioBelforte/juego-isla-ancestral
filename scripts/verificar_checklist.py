@@ -73,11 +73,28 @@ def leer_tabla_global(archivo: Path):
     """Parsea la tabla resumen de CHECKLIST-GLOBAL.md.
 
     Devuelve un dict {id_modulo: {columna: valor}} con los datos de la tabla.
+
+    Fail-fast anti detector ciego (BUG-075): si el archivo está vacío, no
+    existe, o no contiene la tabla, esto es un FALLO de infraestructura, no un
+    "0 problemas". Un parser que no itera devuelve «0 inconsistencias», lo cual
+    es indistinguible de «no hay datos» y deja al orquestador operando sobre un
+    estado inexistente sin saberlo (familia trampa 91). Aquí levantamos una
+    excepción explícita para que `main()` termine con exit 1.
     """
     if not archivo.exists():
-        return {}
+        raise RuntimeError(
+            f"BUG-075: {archivo.name} no existe — la fuente de verdad global "
+            "desapareció. Revisar escrituras de agentes paralelos."
+        )
 
     contenido = archivo.read_text(encoding="utf-8")
+    if not contenido.strip():
+        raise RuntimeError(
+            f"BUG-075: {archivo.name} está VACÍO ({archivo.stat().st_size} bytes). "
+            "La fuente de verdad global se truncó — restaurar desde HEAD antes "
+            "de continuar (git checkout HEAD -- CHECKLIST-GLOBAL.md)."
+        )
+
     lineas = contenido.splitlines()
 
     # Buscar la línea de encabezado de la tabla (contiene | ID |)
@@ -88,7 +105,10 @@ def leer_tabla_global(archivo: Path):
             break
 
     if inicio_tabla is None:
-        return {}
+        raise RuntimeError(
+            f"BUG-075: {archivo.name} existe ({len(contenido)} chars) pero no "
+            "contiene la tabla '| ID |' — truncamiento parcial o formato roto."
+        )
 
     # Parsear encabezados para mapear nombres de columna
     encabezados_raw = [c.strip().lower() for c in lineas[inicio_tabla].strip().strip("|").split("|")]
@@ -171,9 +191,12 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int):
         return alertas
 
     # Tabla global
-    filas_global = leer_tabla_global(checklist_global) if checklist_global.exists() else {}
+    # BUG-075: sin el fail-fast de leer_tabla_global(), un archivo vacío
+    # producía «No se pudo parsear» como alerta suave y el conteo de módulos
+    # caía a 0, reportando "sin inconsistencias" sobre un orquestador ciego.
+    filas_global = leer_tabla_global(checklist_global)
     if not filas_global:
-        alertas.append("⚠️ No se pudo parsear la tabla de CHECKLIST-GLOBAL.md")
+        alertas.append("⚠️ La tabla de CHECKLIST-GLOBAL.md está vacía (0 filas)")
 
     # 1. Verificar consistencia de progreso y estado
     for cl in checklists:
