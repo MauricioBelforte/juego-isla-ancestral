@@ -102,3 +102,15 @@ gh label create severity:major --color "ff7b72" --description "Bloquea milestone
 - La guía `docs/bug_tracking_guide.md` debe incluir ejemplos concretos del proyecto (bugs reales del prototipo).
 - El botón "Reportar Bug" del Debug Menu (M110) debe capturar metadata específica: seed, posición, FPS.
 - Priorizar bugs críticos y mayores antes de menores y triviales (matriz de decisión en 02-Analisis.md).
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19 (re-confirmacion)
+
+### Evidencia
+- Log 767 (hy3, 2026-09-07): re-grounding Bug-Tracking - artifacts en disco presentes (`.github/ISSUE_TEMPLATE/bug_report.md` 55 lineas, `.github/workflows/bug_metrics.yml` 226 lineas, `docs/bug_tracking_guide.md` 246 lineas, `docs/bug_metrics.md`); 05-Checklist 140/140 [x] 0 [?].
+- 05-Checklist: 140/140 [x], 0 [ ], 0 [?]. Sin banner REVERTIDO.
+- Sin suite headless (es especificacion/tooling, no codigo de juego) - re-grounding documentado cumple §24.
+
+### Conclusion
+Modulo ya llevaba sello §21.8 (Log 767) en CHECKLIST-QA-SEALS.md. Re-confirmado por hy3 2026-09-19: checklist limpio + artifacts reales. Cumple §21.8.

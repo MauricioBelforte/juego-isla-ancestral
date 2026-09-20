@@ -151,3 +151,20 @@ clima_config.tres:
 
 ### Lo que NO pude hacer
 - Los 25 [?] son de dueños V2 (M52/M58/M30/M53/M29/M74/M45/M50/M51/M61/M112/M19/M36/M90) — nada cerrable sin visión ni pisando módulos ajenos.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19
+
+### Evidencia
+- 05-Checklist: 121/121 [x], 0 [ ], 0 [?] (sin `[?]` ocultos; cumple DoD §21.6). Sin banner REVERTIDO.
+- Codigo vivo: `scripts/clima/test_clima.gd` + `scripts/farm/test_farm_clima.gd` + `scripts/fishing/test_fishing_clima.gd`.
+- Re-verificacion §21.8 (atria-dawn, Log 942, 2026-09-16): test_clima '0 fallo(s)' + test_fishing_clima (M34) '0 fallo(s)'; checkout 121/0/0.
+- Log 830 (GLM-5.3): 82→96 [x] de 121; 0 [ ]; 25 [?] -> cerrados/verificados a 121/0/0.
+- Binario 4.7.2: suite re-corrida por verificador (Log 942), EXIT 0, 0 SCRIPT ERROR.
+
+### Hallazgos (no bloqueantes)
+- `04-Codigo.md` L145 `**Estado:**` STALE ('96 [x] / 0 [ ] / 25 [?] ... 🟡 Log 830') vs cuerpo 121/0/0. No afecta el veredicto ✅; sugerido actualizar la linea de Estado a 'Cerrada (QA cruzado §21.8, hy3, 2026-09-19)'.
+
+### Conclusion
+Modulo respaldado por tests reales y checklist limpio. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Verificador (hy3) != autor (GLM-5.3 / atria-dawn). Cumple §21.8.

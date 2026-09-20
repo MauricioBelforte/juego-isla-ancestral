@@ -269,3 +269,20 @@ func _init() -> void:
 - **Próxima iter M93 (iter. 5):** simulate_economy.gd con 3 perfiles + completar catálogo de pesca (25 peces/4 cebos/3 cañas — formato documentado en 04-Codigo M34 §0b) + techo 115% como aserción del simulador.
 - **QA cruzado §21.8 (verificador: Hy3, NO auto-verificar):** puntos rápidos → test_balance_m93_iter4.gd 0 fallos (7 bloques), validate_balance 0 fallos, version 1.2.0 en meta.json, mining.json reglas_minado, progression.json 3 curvas + reglas, meta.json v3 reglas_anti_grind/anti_exploit, timing.json rutinas.
 - **M38 (si lo tomás):** EconomyPriceCatalog podría SOURCEAR de BalanceService.get_tabla("prices") para una sola fuente de verdad — hoy hay 2 fuentes (prices.json + catálogo M38) con los mismos márgenes 55-70%.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** 🟡 Hallazgos
+
+### Evidencia
+- Log 836 (GLM-5.3, iter.4): 'Se cerraron 64 [ ] -> 112 [x] / 22 [?]', tests `0 fallos` (test_balance, iter3, iter4, validate_balance 10 reglas). Binario 4.7.2.
+- 05-Checklist: 134 [x], 0 [ ], 0 [?] en conteo actual.
+- Codigo vivo: `scripts/balance/test_balance.gd`, `test_balance_m93_iter3.gd`, `test_balance_m93_iter4.gd`, `validate_balance.gd`.
+
+### Hallazgos (bloqueantes para ✅)
+- **Over-mark (sobre-cierre):** L138 `- [x] Definir simulate_economy.gd con escenarios ... -> KnownIssue no bloqueante DoD: NO implementado; es la brecha principal del modulo.` - item `[x]` cuyo texto dice 'NO implementado'. Debe ser `[ ]` o corregirse.
+- `04-Codigo.md` L235 `**Estado:**` STALE ('Parcial-liberado ... 🟡 112/134 con 22 [?]') vs cuerpo 134/0/0.
+- L198 otro `[x]` con 'requiere simulacion dinamica (O) o playtest' (brecha abierta).
+
+### Conclusion
+Tests pasan (0 fallos) pero el cierre documental tiene over-mark (L138 'NO implementado') y Estado stale. No se marca ✅ hasta sanear L138 + el Estado. Requiere accion del autor + re-verificacion. Sin sello limpio (ausente de SEALS).

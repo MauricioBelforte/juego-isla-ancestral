@@ -294,3 +294,19 @@ credits_generator.save_build_credits(audio_legal.credits, output_path)
 | IA Generativa (M86) | Valida audio generado por IA |
 | Build Pipeline (M117) | Incluye créditos en builds |
 | Legal PI (M78) | Verifica propiedad intelectual |
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** 🟡 Hallazgos
+
+### Evidencia (codigo respaldado)
+- BUG-062 (atria-dawn, Log 1085, 2026-09-19): `test_audio_licenses_m84.gd` re-corrido -> **EXIT 0 - 15 checks, 0 fallos** (antes 38/5 -> corregido a 15/0). 0 SCRIPT ERROR. Binario 4.7.2.
+- 05-Checklist: 99/99 [x], 0 [ ], 0 [?].
+
+### Hallazgos (bloqueantes para ✅)
+- **Over-mark (sobre-cierre):** L117 `- [x] Generar reporte de licencias de audio por build -> no implementado` - item marcado `[x]` pero su texto declara 'no implementado'. Debe flippearse a `[ ]` o corregirse el texto. Viola §24 (un modulo no cierra con `[x]` que el propio autor describe como no hecho).
+- **Sello STALE:** CHECKLIST-QA-SEALS.md citaba Log 883 (8 checks, 2026-09-13) - anterior al fix BUG-062. Actualizado a Log 1085 (15 checks) en SEALS (nota 🟡).
+- `04-Codigo.md` NO tiene linea `**Estado:**` ni cierre §21.8.
+
+### Conclusion
+El codigo esta genuinamente respaldado (15/0, EXIT 0), pero el cierre documental tiene defectos (over-mark L117 + Estado ausente). No se marca ✅ hasta sanear L117 y el Estado. Requiere accion del autor (MiMo) + re-verificacion.

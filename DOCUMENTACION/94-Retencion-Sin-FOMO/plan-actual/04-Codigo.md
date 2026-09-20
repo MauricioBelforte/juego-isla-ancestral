@@ -119,3 +119,19 @@ reporte(violaciones) -> String                # legible para CI/QA
 - Conectar con M74 (Eventos): el motor_variantes ya tiene el API de variantes; solo falta cargar las festividades reales desde M74.
 - Conectar con M59 (DataStore): en el guardado, incluir `mm.snapshot()` en el payload y en carga, llamar `mm.restaurar(datos.get("motivacion", {}))`.
 - Para test de ausencia 7 días: crear un escenario que avance 7 días de juego (M29 GameClock) y verificar que cultivos/amistad/perfiles no cambien.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19
+
+### Evidencia
+- BUG-061 (atria-dawn, Log 1083, 2026-09-19): `test_motivacion_m94.gd`/`test_antifomo_headless.gd` -> **EXIT 0 - 38 checks, 0 fallos** (antes 38/5, EXIT 1). 0 SCRIPT ERROR. Binario 4.7.2.
+- 05-Checklist: 138 [x] en cuerpo, 0 [ ], 0 [?].
+- Log 367: '38 checks, 0 fallos'.
+
+### Hallazgos (no bloqueantes)
+- Drift de conteo: cuerpo 138 `[x]` vs `**Total de items:** 113` (L198). Sin `[?]` ocultos; no afecta veredicto ✅ pero sugerido reconciliar el Total a 138 (o el cuerpo a 113).
+- `04-Codigo.md` L100 `**Estado:**` dice '🟡 liberado' - actualizable a 'Cerrada (QA cruzado §21.8, hy3, 2026-09-19)'.
+
+### Conclusion
+Respaldado por tests reales (38/0, EXIT 0) y checklist sin `[?]`. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Verificador (hy3) != autor. Cumple §21.8.

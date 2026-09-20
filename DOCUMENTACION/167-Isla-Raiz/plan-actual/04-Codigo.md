@@ -133,3 +133,20 @@ Regla: NUNCA crear `IslandGenerator` propio con radio hardcodeado (causa de flot
 **Lo que NO pude hacer:** revalidar el diálogo F con input real (requiere build jugable interactiva; el diálogo ya fue verificado 2026-08-28 y el hook está intacto). NO toqué M08/M09/M10 más allá del fix mínimo de batimetría (documentado).
 
 **Recomendaciones:** en M137 (primera build de prototipo) revalidar L.9 con el recorrido completo; el validador debe correr en CI desde ahora (gate para cambio de radio/perfil). El check "centro >= 12" está calibrado con el pico real de la semilla 42 (=14); si se cambia la semilla, recalibrar.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19
+
+### Evidencia
+- Log 379: `validador_isla_raiz.gd` (28 checks) -> **28/28 OK, exit 0** (2 corridas, 0 fallos). Binario 4.7.2.
+- Log 751: boot completo sin SCRIPT ERROR (2 warnings del parser corregidos).
+- 05-Checklist: 114 [x], 0 [ ], 0 [?]. Sin banner REVERTIDO.
+- Codigo vivo: `scripts/terreno/validador_isla_raiz.gd` (28 checks).
+
+### Hallazgos (no bloqueantes)
+- `04-Codigo.md` L129 `**Estado:**` STALE ('Iter 1 cierre completado - 102/104 [x] + 2 [?]') y L17 tabla '83/104' - ambos desactualizados vs cuerpo 114/0/0. Sugerido actualizar a 'Cerrada (QA cruzado §21.8, hy3, 2026-09-19)'.
+- Misatribucion menor: L129 firma 'Hy3/Kilo' historica; verificacion §21.8 actual es hy3 != autor original.
+
+### Conclusion
+Respaldado por test real (28/28 OK, exit 0) y checklist limpio. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Cumple §21.8.

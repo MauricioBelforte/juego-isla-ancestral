@@ -217,3 +217,19 @@ La visión vía Blender es conceptualmente otra "vía de ojos" del agente — mi
 3. Cuidado con execute_blender_code: siempre respaldar .blend antes (el snippet de seguridad está en 03-Diseno.md).
 4. El viewport debe estar en Material Preview para que los screenshots muestren colores reales.
 5. Coordinar con M45 (Arte 3D): V5 convierte a Blender en la herramienta DCC recomendada del proyecto.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** 🟡 Hallazgos
+
+### Evidencia
+- 05-Checklist: 155 [x] en cuerpo.
+- Artifacts: `scripts/mcp/screenshot_mcp.py`, `scripts/blender/setup_estudio.py` listados como `⬜ Pendiente` en 04-Codigo.
+
+### Hallazgos (bloqueantes para ✅)
+- **Contradiccion de conteo:** L202 `**Totales:** 153 items · Completados: 73 · Pendientes: 80` vs cuerpo 155 `[x]`. El Total declara 80 pendientes pero el cuerpo marca 155 hechos - sobre-cierre de conteo.
+- **Sin evidencia de test:** no existe suite headless re-corrida con binario 4.7.2; los scripts Python estan 'Pendiente'. No hay log de re-verificacion.
+- `04-Codigo.md` L194 `**Estado:**` 'Completado (documentacion V5)' - contradice el Total 73/80.
+
+### Conclusion
+Conteo contradictorio (73/80 vs 155) + ausencia de test ejecutable = no cumple criterios de ✅ (checklist sin `[?]`/sobre-cierre + suite re-corrida). Requiere saneo de Totales + ejecutar/registrar test con 4.7.2. Sin sello limpio.

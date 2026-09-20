@@ -155,3 +155,16 @@ Sin editor/binary Godot en el entorno: `validate_vision.gd` y `vision_contract.j
 - M105 (al implementar telemetría) debe crear los 5 eventos del contrato; M114 debe usar `prueba_vision.md` en su primer corte.
 - Los módulos nuevos declaran O# desde hoy (validador lo verifica con WARN); la alineación de los existentes puede hacerse por tandas en los QA cruzados.
 - M151 (Control Final) consume `prueba_vision.md` como su checklist de terminación (19 en ✓ = condición de lanzamiento).
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19 (re-confirmacion)
+
+### Evidencia
+- Log 1056 (hy3, 2026-09-19): QA cruzado §21.8, Exit Code 0, stderr vacio; boot headless Godot 4.7.2 = 0 SCRIPT ERROR, EXIT 0.
+- `operativa/validate_vision.py` GREEN 19/19 (0 violaciones) re-corrido por hy3.
+- 05-Checklist: 120/130 [x], 10 [ ] KnownIssue (deps externas REALES M104/M105/M44/M47/M54/M55/M17/M59/M73/M161/M74), 0 [?]. Los 10 [ ] son KnownIssue documentados, NO sobre-cierre.
+- Banner REVERTIDO POR AUDITORIA (2026-09-14) presente pero re-verificado post-auditoria (2026-09-19, hy3) -> 120 [x] genuine.
+
+### Conclusion
+Sello §21.8 ya registrado (Log 1056) en CHECKLIST-QA-SEALS.md. Re-confirmado por hy3 2026-09-19. Cumple §24 (0 [?] ocultos). Verificador (hy3) != autor (GLM).

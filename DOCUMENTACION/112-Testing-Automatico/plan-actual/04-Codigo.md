@@ -282,3 +282,22 @@ Exit code 0 → suite OK. Exit code ≠ 0 → suite fallida (el CI de M118 bloqu
 - Verificar que los tests de regresión se marquen al estabilizar flujos nuevos (sección 16 del AGENTS.md).
 - Consumir la API pública de M29/M31 (tiempo/calendario) para `advance_days()` en lugar de manipular `Time` directamente.
 - Después de implementar, actualizar el 05-Checklist.md marcando los ítems reales y escribir el log en `Logs/` con la firma del modelo.
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** 🟡 Hallazgos
+
+### Evidencia
+- 05-Checklist: 208 [x], 0 [ ], 0 [?] en conteo declarado.
+- Artifacts presentes: `tests/run_tests.gd`, `scenes/test_runner.tscn`, `tools/ci/run_tests.py`.
+
+### Hallazgos (bloqueantes para ✅)
+- **Over-mark (sobre-cierre) multiple:** varios `[x]` declaran trabajo pendiente:
+  - L98/L99: 'Alcanzar cobertura global >= 40%/60% -> pendiente ejecucion real'
+  - L124/L125: 'suite <= 10 min / unit tests <= 2 min -> pendiente ejecucion real'
+  - L165: 'Testear utilidades de M111 ... -> pendiente (scripts no existen aun)'
+- **Sin sello §21.8:** excluido de CHECKLIST-QA-SEALS.md por reconciliacion BUG-034 (autor real = ox-alpha, no hy3).
+- `04-Codigo.md` L15-29 marca varios artifacts `PENDIENTE DE IMPLEMENTACION`.
+
+### Conclusion
+El conteo 208/0/0 no refleja el estado real (cobertura y scripts pendientes). No cumple §24 (sobre-cierre). Requiere saneo de los `[x]` over-marked + cierre genuino por autor + QA cruzado. Sin sello limpio.

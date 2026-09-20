@@ -163,3 +163,19 @@ Este juego incluye componentes de terceros. Se distribuyen bajo sus licencias or
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
+
+## Notas del Agente - QA cruzado §21.8 (hy3 / WorkBuddy, 2026-09-19)
+
+**Veredicto:** 🟡 Hallazgos (SELO §21.8 REVOCADO)
+
+### Evidencia
+- 05-Checklist L1: `> REVERTIDO POR AUDITORIA (2026-09-14): agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.`
+- El banner NO fue honrado: el cuerpo aun declara 157 [x], 0 [ ], 0 [?] - no se revertio manualmente nada.
+- SEALS citaba Log 883 (9 checks, 2026-09-13) - ANTERIOR a la reverion de auditoria (2026-09-14). Sello STALE/falso.
+
+### Hallazgos (bloqueantes)
+- **Sello invalido:** el cierre Log 883 (agnes-2.5-flash) fue revertido por auditoria; el sello en CHECKLIST-QA-SEALS.md es STALE. Revocado (movido a Notas, precedente M46/M126/M128).
+- Sin re-verificacion post-reversion.
+
+### Conclusion
+Igual que M46/M126/M128: banner REVERTIDO + cierre previo anulado + sello desactualizado. Requiere cierre genuino por autor (agnes) + QA cruzado §21.8 (verificador != autor). Sin sello limpio.
