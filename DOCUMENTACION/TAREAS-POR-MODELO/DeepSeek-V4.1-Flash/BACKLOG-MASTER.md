@@ -300,7 +300,7 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
       Al reservar: **primero=1094**. Al cerrar: ver `--estado` abajo. **No toque ninguna colision ajena.**
       Cierra 34 items del checklist de M62 (59/150 -> 93/150). Hallazgo principal: **una suite entera
       (`test_enforcement_m62.gd`) estaba muerta y reportaba verde**, lo que **invalida el sello §21.8
-      previo (Log 856)** — M62 necesita QA cruzado nuevo.
+      previo (Log 895)** — M62 necesita QA cruzado nuevo.
       ⚠️ `CHECKLIST-GLOBAL.md` y `Mensajes entre modelos/ESTADO-PARALELO.md` **NO se commitearon**: el
       worktree acumulaba cambios ajenos sin commitear (94 filas en el global —una reescritura con
       mojibake distinto a HEAD— y 1050 lineas en el paralelo de 9+ agentes). Mis entradas quedaron
@@ -332,7 +332,8 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 > - **HALLAZGO GRAVE:** `test_enforcement_m62.gd` estaba **MUERTA Y DABA VERDE** (una asignacion
 >   tipada `RefCounted -> Node` abortaba 2 de sus 3 funciones; la tercera usaba `_check(true, ...)`
 >   infalsificable). Reescrita.
-> - **El sello §21.8 previo (Log 856, Hy3) queda INVALIDADO:** se apoyo en «0 fallos (EXIT 0)» de esa
+> - **FE DE ERRATAS (mismo dia):** este hallazgo se cito primero como «Log 856». **856 es `Logs/856-AGNES-M54-AVANCE-RESUMEN_2026-09-12.md`** (M54, agnes). El QA de M62 vive en **`Logs/895-HY3-LOTED.md`**, un archivo que **se autotitula «Log 856»** en su encabezado (linea 1) — su fila M62 dice literalmente «test_enforcement_m62.gd + test_memoria_m62.gd + test_pool_iter2.gd | 0 fallos (EXIT 0)». Corregido en Log 1094.
+> - **El sello §21.8 previo (Log 895, Hy3) queda INVALIDADO:** se apoyo en «0 fallos (EXIT 0)» de esa
 >   suite muerta. **M62 necesita §21.8 nuevo.**
 > - **Suites: 232 checks, 0 fallos, x3 identicas** (27 + 47 + 25 + 133), guardian de 3 capas probado
 >   **por inyeccion en las 4**. **Gate de CI agregado** (`quality.yml`): M62 no tenia ninguno.

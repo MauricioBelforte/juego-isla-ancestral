@@ -22,7 +22,7 @@ aparecieron al **correr** las suites en vez de confiar en ellas.
 | 4 | El drift se medía sobre ~10 s, no contra una baseline a los 5 min; `drift_check()` **no existía** | media |
 | 5 | Faltaba el **pico por punto de interés** | baja |
 | 6 | `budgets.json` divergía del diseño §2 en **los 8 sistemas de los 3 presets** | alta |
-| 7 | **`test_enforcement_m62.gd` estaba MUERTA Y DABA VERDE** → invalida el §21.8 de Log 856 | **crítica** |
+| 7 | **`test_enforcement_m62.gd` estaba MUERTA Y DABA VERDE** → invalida el §21.8 de Log 895 (HY3-LOTED) | **crítica** |
 
 ## 1. Los 5 defectos del monitor (medidos, no inferidos)
 
@@ -91,7 +91,7 @@ checks, sin piso y sin watchdog, el resumen decía `0 fallo(s)` y salía 0. Adem
 `monitor._muestrear()` (renombrado a `muestrear_ahora()`) y a `_enforcement()` con 1 argumento
 (ahora recibe 2).
 
-**Consecuencia directa:** el sello **§21.8 de M62 (Log 856, Hy3/WorkBuddy)** se apoyó en «0 fallos
+**Consecuencia directa:** el sello **§21.8 de M62 (Log 895, Hy3/WorkBuddy)** se apoyó en «0 fallos
 (EXIT 0)» de esa suite. El sello **queda invalidado** y **M62 necesita un §21.8 nuevo**. No es un
 error de Hy3: es lo que pasa cuando el veredicto de un QA se apoya en el exit code de una suite que
 no puede fallar.
