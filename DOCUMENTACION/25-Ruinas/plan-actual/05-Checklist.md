@@ -1,4 +1,4 @@
-# 05 — Checklist — M25: Ruinas (114/122)
+# 05 — Checklist — M25: Ruinas (122/122)
 
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
@@ -27,7 +27,7 @@
 
 - [x] Diseñar chozas/ermitas (3-5 piezas, 1 puzzle Exploración) [S]
 - [x] Diseñar caseríos (8-15 piezas, 1-2 puzzles Ritual) [M]
-- [ ] Diseñar atalayas con vista de bioma [S]
+- [x] Diseñar atalayas con vista de bioma [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §Atalayas)
 - [x] Definir 2-4 ruinas por bioma [S]
 - [x] Documentar ruinas pequeñas y medianas [S]
 
@@ -127,19 +127,19 @@
 - [x] Implementar variante de puzzle por seed de partida [M]
 - [x] Diseñar caminos de 2-4 tramos entre ruinas [M]
 - [x] Definir nodos de conexión con M28 (caminos) [M] (definido: tramos como nodos M28 en 03-Diseno.md)
-- [ ] Definir validación de caminos con NavigationServer3D [M]
+- [x] Definir validación de caminos con NavigationServer3D [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §NavigationServer3D)
 - [x] Diseñar conexión costera por faros y puentes [S] (definido en 03-Diseno.md)
 - [x] Documentar variantes y conexiones [S] (03-Diseno.md)
 
 ## Integración y presupuestos
 
 - [x] Integrar con M24 (puzzles y framework emisor→receptor) [M]
-- [ ] Integrar con M26 (templo subterráneo, sin rozar) [S]
-- [ ] Integrar con M28 (caminos) [M]
-- [ ] Integrar con M31 (alineación solar en observatorios) [S]
-- [ ] Integrar con M32 (viento/lluvia en pasajes y jardines) [S]
-- [ ] Integrar con M36 (museo: vitrinas para objetos) [M]
-- [ ] Integrar con M45/M47 (kit de referencia para assets) [M]
+- [x] Integrar con M26 (templo subterráneo, sin rozar) [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M26)
+- [x] Integrar con M28 (caminos) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M28)
+- [x] Integrar con M31 (alineación solar en observatorios) [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M31)
+- [x] Integrar con M32 (viento/lluvia en pasajes y jardines) [S] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M32)
+- [x] Integrar con M36 (museo: vitrinas para objetos) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M36)
+- [x] Integrar con M45/M47 (kit de referencia para assets) [M] (disenado por hy3 2026-09-19 — ver 08-Integraciones.md §M45/M47)
 - [x] Implementar LOD 0-2 vía M63 (culling por región) [M]
 - [x] Implementar sin Update por ruina (estática) [S]
 - [x] Implementar sin costos de simulación en ruinas [S]
@@ -147,19 +147,25 @@
 
 ## Testings y documentación
 
-- [ ] Diseñar 06-Plan-Testings.md: validación del kit (pivotes/snaps) [M]
-- [ ] Diseñar 06-Plan-Testings.md: armado de los 13 tipos [M]
-- [ ] Diseñar 06-Plan-Testings.md: progresión de descubrimiento [M]
+- [x] Diseñar 06-Plan-Testings.md: validación del kit (pivotes/snaps) [M] (hy3 2026-09-19: 06-Plan-Testings.md §1)
+- [x] Diseñar 06-Plan-Testings.md: armado de los 13 tipos [M] (hy3 2026-09-19: 06-Plan-Testings.md §2)
+- [x] Diseñar 06-Plan-Testings.md: progresión de descubrimiento [M] (hy3 2026-09-19: 06-Plan-Testings.md §3)
 - [x] Diseñar 06-Plan-Testings.md: edge cases (ruina sin puzzle, cofre) [M]
-- [ ] Diseñar 06-Plan-Testings.md: pruebas de rendimiento (LOD) [M]
-- [ ] Definir criterio de éxito: suite completa pasa sin fallos [S]
-- [ ] Crear 07-Resultados-Testings.md para registrar la ejecución [S]
+- [x] Diseñar 06-Plan-Testings.md: pruebas de rendimiento (LOD) [M] (hy3 2026-09-19: 06-Plan-Testings.md §4)
+- [x] Definir criterio de éxito: suite completa pasa sin fallos [S] (hy3 2026-09-19: 06-Plan-Testings.md §5)
+- [x] Crear 07-Resultados-Testings.md para registrar la ejecución [S] (hy3 2026-09-19: 07-Resultados-Testings.md)
 - [x] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M] (03-Diseno.md expandido con diseño completo)
 - [x] Actualizar plan-actual como espejo del estado real [M] (03-Diseno.md + 04-Codigo.md actualizados)
-- [ ] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S]
+- [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] (hy3 2026-09-19: Log 1100-hy3-M25-DISENO_2026-09-19_22-50-00.md)
 - [x] Actualizar fila 25 en CHECKLIST-GLOBAL al implementar [S]
 
-**Total:** 114/122 [x] — Diseño completo, implementación pendiente (8 items restantes: integraciones + testings + log).
+**Totales:** 122 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 0. (15 tareas T1–T15 cerradas por hy3 2026-09-19; las 107 [x] previas de MiMo carry bandera de auditoría Log 1065 — ver Notas del Agente)
+
+> **Corregido por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
+> la línea decía 114/122 con 8 pendientes; el conteo real de marcas es 107 [x] / 15 [ ] /
+> 0 [?]. Solo se corrigió esta línea — las marcas no se tocaron. Los 7 [x] de diferencia
+> y los 7 [ ] extra provienen de ítems agregados o revertidos con posterioridad a la
+> nota original (sin registro de cuáles; no se reconstruye el historial).
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -186,3 +192,24 @@
 ### Pendientes (honestidad)
 - Pulido artistico de la ruina (M45/M65 assets; texturas de piedra rota con mas detalle).
 - Integracion de la ruina a la isla a la vista del puntaje V2 (la preview es la evidencia; el generador_ruina en main_island usa el mismo _buscar_altura, pero el spawn del jugador la dejaba fuera del encuadre inicial — requiere posicion definitiva cuando se cierre el layout).
+
+
+## Notas del Agente — Diseño M25 Ruinas (hy3 / WorkBuddy, 2026-09-19)
+
+**Modelo:** Hy3 / WorkBuddy — tareas T1–T15 del BACKLOG-MASTER.md (ACTUALIZACION 2026-09-20, curado por atria-dawn).
+
+### Lo que hice (15 tareas de diseño/documentación, no implementación de GDScript)
+- Atalayas + NavigationServer3D + 6 integraciones (M26/M28/M31/M32/M36/M45/M47): `08-Integraciones.md`.
+- Plan de testings (kit/pivotes, 13 tipos, progresión, LOD, criterio éxito): `06-Plan-Testings.md`.
+- Plantilla de resultados: `07-Resultados-Testings.md`.
+- Log: `Logs/1100-hy3-M25-DISENO_2026-09-19_*.md`.
+- Los 15 `[ ]` del checklist marcados `[x]` (firma hy3 2026-09-19).
+
+### Hallazgos (honestidad, no revertí nada)
+- **Drift de conteo (atria-dawn Log 1065):** CHECKLIST-GLOBAL declaraba 114/122 pero el real era 107/122. El header de este checklist decía 114/122 y "8 items restantes" (erróneo: eran 15). Ahora 122/122 tras cerrar las 15 tareas de diseño. Las 107 `[x]` previas de MiMo NO fueron verificadas por mí contra código real — carry la bandera de auditoría: requieren verificación de respaldo (spot-check recomendado en fase de implementación). No reporté bug ni revertí (per instrucción de atria).
+- **Integridad:** las 15 tareas son de diseño/documentación; el autor de implementación sigue siendo MiMo V2.5. Respeto §21.8 (verificador ≠ autor): no implementé GDScript de M25.
+- **Dependencias:** todas las integraciones son por señal/Resource (acoplamiento débil, "sin rozar"); ninguna requiere modificar código ajeno.
+
+### Pendiente (humano / autor MiMo)
+- Ejecutar `06-Plan-Testings.md` en headless 4.7.2 y llenar `07-Resultados-Testings.md`.
+- Verificar respaldo de código de las 107 `[x]` previas (auditoría Log 1065).
