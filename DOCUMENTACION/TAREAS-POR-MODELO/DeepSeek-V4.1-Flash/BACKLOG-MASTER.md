@@ -384,7 +384,12 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 > **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
 > tus tareas pendientes actuales, o en paralelo si prefieres.
 
-### 62-Memoria (57 pendientes) — iter. 3 EJECUTADA (Log 1094, 2026-09-19)
+### 62-Memoria (52 pendientes) — iter. 3 (Log 1094) + **iter. 4 (Log 1112, 2026-09-20)**
+
+> **Sincronizacion in-place (2026-09-20):** 5 marcas de la iter. 4 estaban `[ ]` aca y `[x]`
+> en el `05-Checklist.md` del modulo (fuente de verdad). Corregidas con la nota de evidencia
+> del modulo. Auditoria por texto (exacto + difuso Jaccard >= 0,60): **0 desfases extra**.
+> Conteo medido: modulo **150 items / 98 `[x]` / 0 `[?]` / 52 `[ ]`**.
 
 > **34 de los 91 items cerrados** en la iter. 3, cada uno respaldado por un test o por el generador
 > validante. Checklist del modulo: **59/150 -> 93/150**. Lo mas importante de este ciclo **no** fueron
@@ -442,10 +447,10 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [ ] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual)
 - [ ] RN1: presupuesto de RAM objetivo ≤ 2.5 GB en PCs de gama media (preset Alta)
 - [ ] RN1: preset Baja ≤ 1.5 GB para gama baja con 4 GB de RAM
-- [ ] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones
+- [x] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones — **iter. 4 (Log 1112): MEDIDO.** Lote completo 2,1–5,8 ms (8 MB) y 3,9–5,8 ms (64 MB) contra el limite de 50 ms. `test_m62_liberacion.gd`
 - [ ] RN2: cero hitching perceptible por refcount en liberaciones masivas
 - [ ] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline
-- [ ] RN6: ninguna operación de memoria bloquea el hilo principal
+- [x] RN6: ninguna operación de memoria bloquea el hilo principal — **iter. 4 (Log 1112): MEDIDO.** Pico de una operacion 0,279–0,492 ms, por debajo de un frame a 60 FPS (16,67 ms). Alcance: liberacion de `RefCounted`
 - [ ] RN9: la gestión de memoria es transparente para la partida (determinismo intacto)
 - [x] Flujo muestreo → semáforo → política de acción (warning/crítico/emergencia)
 - [ ] Descarga dura al 95%: atlas fuera de pantalla y bancos de biomas viajeros
@@ -485,8 +490,8 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [ ] Baseline subterráneo del templo (M26): objetivo < 2.000 MB
 - [ ] Baseline tormenta máxima (M32) + banco de audio completo: ≤ 2.500 MB (Alta)
 - [x] Uso de arrays tipados y `Packed*Array` donde el tamaño es fijo
-- [ ] Evitar `duplicate()`, `instantiate()` y `load()` síncrono en gameplay
-- [ ] Pico de liberación por refcount < 3 ms al descargar una región completa
+- [x] Evitar `duplicate()`, `instantiate()` y `load()` síncrono en gameplay — **iter. 4 (Log 1112): MEDIDO + gate.** `scripts/auditar_arquitectura_m62.py`: 0 hallazgos en 800 `.gd` y 79 callbacks por frame; guarda de ceguera (exit 3) y `--selftest` probado EN ROJO. Gate `architecture-guard`
+- [x] Pico de liberación por refcount < 3 ms al descargar una región completa — **iter. 4 (Log 1112): MEDIDO.** 15 checks, 0 fallos, x5 identicas: pico 0,279–0,492 ms (2048x4 KB) y 0,414–0,448 ms (256x256 KB) contra el limite de 3 ms. Rondas intercaladas (trampa 78)
 - [x] Documentar la arquitectura en plan-actual/03-Diseno.md
 - [x] Registrar los edge cases y sus soluciones en plan-actual/04-Codigo.md
 - [x] Notas del Agente firmadas con modelo, plataforma y fecha en 04-Codigo.md
@@ -497,7 +502,7 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [ ] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel
 - [ ] Test Play Mode: textura gigante forzada degrada sin crash
 - [x] Test de semáforos: forzar 90% y verificar descargas automáticas y registro en log
-- [ ] Test de nodos huérfanos: conteo de orphans en reposo con valor estable
+- [x] Test de nodos huérfanos: conteo de orphans en reposo con valor estable — **iter. 4 (Log 1112): MEDIDO.** Bloque D: base 0, 5 muestras sin deriva, 128 nodos sin padre contados (0 → 128) y de vuelta a 0. Lee `Performance.OBJECT_ORPHAN_NODE_COUNT`
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable
 
 
