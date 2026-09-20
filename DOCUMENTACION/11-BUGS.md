@@ -130,7 +130,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-039 | `scripts/generar_checklist_global.py` reescribe el archivo desde una plantilla fija: borra el encabezado y desplaza columnas | Transversal | 🔴 Alta | [x] Resuelto (2026-09-15, generador corregido y verificado) | DeepSeek-V4.1-Flash | 2026-09-15 01:11 |
 | BUG-040 | `inventory_layer.gd` captura ERROR de señal `item_added` (handler 2 args vs emisión 3 args) | M53 UI Inventario (`inventory_layer.gd`) | 🟠 Mayor | [x] Resuelto (2026-09-15, hy3 — verificación headless M110 22/0, EXIT 0; error de señal ausente) | hy3 | 2026-09-15 01:25 |
 | BUG-041 | ~~`logger.gd` (autoload `GameLogger`) no registra NADA~~ **FALSO POSITIVO (verificado con sonda)**: `GameLogger` **sí registra** (`categories_enabled` se puebla en `_ready()`, `_log()` escribe a disco y emite). Residuo real: `log_buffer` es **código muerto** (nadie hace `append`) y `_flush()` es un no-op permanente | M103 Logging (`scripts/logging/logger.gd`) | 🟢 Baja (limpieza) | [x] Cerrado — falso positivo (reclasificado 2026-09-15) | DeepSeek-V4.1-Flash | 2026-09-15 |
-| BUG-042 | Tres de los cuatro `.ttf` de `assets/fonts/` no son fuentes sino páginas HTML «Page not found · GitHub» (descargas 404 guardadas con extensión `.ttf`). `load()` devuelve un `FontFile` NO nulo con datos vacíos: FreeType «Error loading font: ''» y métricas 0.0 px, así que el fallo es silencioso | M46/M88 (fuentes) — afecta a M53 (UI) y M87 (tipografía) | 🟠 Mayor | [ ] Abierto — reportado por M87 iter. 6 (Log 920) | DeepSeek-V4.1-Flash | 2026-09-15 |
+| BUG-042 | Tres de los cuatro `.ttf` de `assets/fonts/` no son fuentes sino páginas HTML «Page not found · GitHub» (descargas 404 guardadas con extensión `.ttf`). `load()` devuelve un `FontFile` NO nulo con datos vacíos: FreeType «Error loading font: ''» y métricas 0.0 px, así que el fallo es silencioso | M46/M88 (fuentes) — afecta a M53 (UI) y M87 (tipografía) | 🟠 Mayor | [x] Resuelto (2026-09-19, Log 1024 — 3 fuentes reales verificadas + gate de bytes mágicos en CI + guarda de medición en `theme_ux._try_load_font`) | DeepSeek-V4.1-Flash | 2026-09-15 |
 | BUG-052 | **434 .glb de `assets/3d` sin atribución de copyright por-archivo** (claim M127 Log 1022 verificado empírico: 0 de 694 .glb versionados tiene sidecar/extras GLB/catálogo por-archivo; el +16 sobre el techo 418 son respaldos Obsoletos, no assets nuevos) | M166/M09 (pipeline de exportación) — deuda declarada M127 | 🟠 Mayor | [ ] Abierto — verificado y cuantificado por agnes-3-flash (Log 1035); fix = pipeline (dueño M166/M09) | agnes-3-flash (Kilo Code) | 2026-09-18 20:40 |
 | BUG-053 | QA visual orbitales: 7 artefactos (V-1..V-7) en M16/M19/M25/M33/M51 — **TRIAJE 2026-09-19 (Log 1049-1052, agnes-3-flash): V-3 (antorcha_pared flota 30 cm) RESUELTO** (regla E-80 `scripts/ruinas/colocar_props_m25.gd` + test 11/11 + captura antes/después en `capturas/19-Muelle/`); V-1/V-2/V-4/V-5 (mesh) [?] Delegado a Hy4 (V5, no disponible hasta mañana); V-6/V-7 = **duplicado** de issue documentado M167/M51 iter. 5 (no se abre bug nuevo) | M16/M19/M25/M33/M51 — mallas: Hy4 (Blender); decisión estética M154 (usuario) | 🟠 Mayor | [?] Delegado (V-3 resuelto; ver §8) | agnes-3-flash (Kilo Code) | 2026-09-19 03:10 |
 | BUG-051 | CI: job `godot-lint` era un no-op completo (`--script` sin script + `\|\| true`) | M111/M83 (CI) | 🟠 Mayor | **[x] Resuelto (2026-09-18, Log 1039)** — gate duro real con colector de preloads + `--check-only` + `\|\| FAIL=1`; verificado por inyección | Atria-Dawn-Preview | 2026-09-18 21:07 |
@@ -2865,3 +2865,97 @@ en el autoload de M17; el provider los encuentra solo por duck-typing.
 **Modelo:** Atria-Dawn-Preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-18
+
+---
+
+## RESOLUCION BUG-042 — DeepSeek-V4.1-Flash / WorkBuddy (Log 1024, 2026-09-19)
+
+**Estado:** `[x] Resuelto`. La descarga corrupta se reemplazo por los binarios reales y la clase de
+fallo quedo **gateada**: no puede volver a pasar en silencio.
+
+### Origen del defecto (rastreado hasta el commit)
+
+Los tres `.ttf` falsos entraron en el repo el **2026-08-30** en el commit `dd101d9` ("Se corrigió
+carga de fuentes TTF en tema UI (§9.48)"), que los agrego con **514 lineas de HTML cada uno** y cuyo
+mensaje afirma *"0 errores FreeType en runtime"*. Ese mismo lote agrego `Nunito-Variable.ttf` **como
+binario** (276.932 B): de las cuatro descargas, una salio bien y las otras tres guardaron la
+respuesta 404 de GitHub con extension `.ttf`. El defecto vivio **19 dias** sin que ningun test se
+pusiera en rojo — incluido el suite de M88, porque `test_fonts_m88.gd` prueba el **catalogo** (ids,
+familias, licencias) y **nunca carga un archivo de fuente**. Falso verde estructural: el test no
+tocaba la capa donde estaba el bug.
+
+### Que se cambio
+
+1. **Los 3 binarios ahora son fuentes reales.** Nunito Regular/Bold (instancias estaticas
+   `wght=400/700` derivadas con `fontTools` de `google/fonts/ofl/nunito/Nunito[wght].ttf`) y Fredoka
+   One Regular (`google/fonts@be2838a2/ofl/fredokaone/FredokaOne-Regular.ttf`). Ambas familias ya
+   estaban declaradas con licencia **SIL OFL 1.1** en `ASSETS-LICENSE.md` (A003/A004) y
+   `THIRD-PARTY-NOTICES.md`: no hubo decision de licencia nueva.
+
+   - El origen elegido quedo **validado por el propio repo**: la `Nunito-Variable.ttf` que ya estaba
+     en `assets/fonts/` es **byte-identica** (`sha256 bb55a5ca…`) al upstream canonico.
+   - Cobertura medida: **938 glifos** por instancia de Nunito (tildes, `ñ/Ñ`, `¡¿`, cirilico);
+     Fredoka One 228.
+   - `sha256` **antes** (HTML 404): `FredokaOne 14c7df8d…` · `Nunito-Bold 1a242bd0…` ·
+     `Nunito-Regular 7be2e0e2…`. **Despues** (TrueType `00010000`): `58faf312…` · `d6e5eb78…` ·
+     `e81d084d…`.
+
+2. **Guarda en produccion** (`game/isla-ancestral/scripts/ui/theme/theme_ux.gd::_try_load_font`).
+   El cargador hacia `if err == OK: return font_file`, y `load_dynamic_font()` **devuelve OK sobre
+   una pagina HTML**. Ahora exige que la fuente **mida**: si `get_string_size("A", …, 16).x <= 0`
+   avisa y cae a la fuente de reserva. Es la diferencia entre "el asset de hoy esta bien" y "un
+   asset malo manana no puede pasar desapercibido".
+
+3. **Gate de CI nuevo** (job `binary-guard` en `quality.yml`). `scripts/verificar_binarios.py` lee
+   los **bytes magicos** de los binarios **versionados** (`git ls-files`) y los compara con lo que su
+   extension promete: 1.107 archivos, 28 extensiones. Detecta el caso "texto disfrazado"
+   (HTML/XML/JSON/404) y exige **AND dentro de cada firma** — si no, un WAV con extension `.webp`
+   pasaria, porque los dos empiezan con `RIFF` y solo difieren en los bytes 8-11 (bug real que
+   encontro la sonda, no una hipotesis).
+
+4. **Dos sondas.** `scripts/test_verificar_binarios.py` (57 checks, con prueba por inyeccion de la
+   tabla de firmas) y `game/isla-ancestral/scripts/fonts/test_fuentes_binarias_bug042.gd`
+   (**22 checks ×3, 0 `SCRIPT ERROR`**), esta ultima cableada en el job `test-suite` y probada
+   **sin cache de importacion** para que funcione en un checkout limpio de CI.
+
+### El modo de fallo, medido en cada corrida (no citado)
+
+```
+load_dynamic_font("user://…ttf_que_es_html")  ->  err = 0 (OK)   ancho = 0.0 px
+fuente real                                    ->  "Jugar"@16 px = 38.0 px
+```
+
+**`err == OK` y la referencia no nula no prueban nada: solo la medicion prueba.** El bloque G
+comprueba que `theme_ux._try_load_font` **rechaza** el falso y devuelve la reserva. Y la sonda esta
+**probada por inyeccion**: revirtiendo la guarda al `err == OK` original, el bloque G falla con
+`devolvio ():<FontFile#…> en vez de la reserva` (verificado; archivo restaurado y comprobado por
+`sha256`).
+
+### Hallazgo lateral (no tocado)
+
+`game/isla-ancestral/data/fonts/fonts.json` (M88) declara **4 fuentes placeholder**
+(`museo_moderno`, `texto_cozy`, `script_isla`, `mono_debug`) con `tiene_archivo: false`, que **no
+corresponden** a los archivos reales de `assets/fonts/` (Nunito / Fredoka One). La metadata es
+honesta respecto de si misma, pero **el catalogo y los archivos no describen lo mismo**. No se toco:
+es diseño de M88 y `test_fonts_m88.gd` fija el contenido actual (`museo_moderno` con licencia
+`OFL`). Queda para su dueño.
+
+### Reportado, NO parcheado
+
+El guard encontro ademas **3 `.png` que no son PNG** (1 JPEG, 2 WebP) bajo `tools/mcp/*/capturas/`,
+**untracked y gitignoreados** (capturas locales de MCP, no assets del repo). Por eso el gate audita
+los **versionados** y no el arbol completo: un PNG mal etiquetado en un directorio ignorado no debe
+tumbar la puerta.
+
+### Referencias cruzadas
+
+`Logs/1024-Bug042-Fuentes-Reales-Gate-Binarios_2026-09-19_21-54-56.md` ·
+`scripts/verificar_binarios.py` · `scripts/test_verificar_binarios.py` ·
+`game/isla-ancestral/scripts/fonts/test_fuentes_binarias_bug042.gd` ·
+`game/isla-ancestral/scripts/ui/theme/theme_ux.gd` · `.github/workflows/quality.yml` (job
+`binary-guard`) · `ASSETS-LICENSE.md` (A003/A004) · `Mensajes entre modelos/ESTADO-PARALELO.md`.
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-19
