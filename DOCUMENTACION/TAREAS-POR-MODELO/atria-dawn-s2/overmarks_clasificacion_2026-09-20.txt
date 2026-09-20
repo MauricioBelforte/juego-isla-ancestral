@@ -1,0 +1,307 @@
+============================================================================
+M93  93-Balance                            22 over-marks
+  [A] - [x] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: N
+        -> cita 1 archivo(s) ausente(s): simulate_economy.gd
+  [A] - [x] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. 
+        -> cita 1 archivo(s) ausente(s): simulate_economy.gd
+  [B] - [x] Definir salida: AO total, recursos por pipeline, desvío vs. diseño [M] — KnownIssue no bloqueante DoD: ídem O.1; r
+        -> item de diseno/documentacion
+  [A] - [x] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; 
+        -> cita 1 archivo(s) ausente(s): simulate_economy.gd
+  [B] - [x] Definir API de precios consumida por M39 (tiendas) [M] — agnes-2.5-flash 2026-09-12: API EXPUESTA (get_price/get_s
+        -> item de diseno/documentacion
+  [B] - [x] Definir eventos: AO por sesión, AO por día, tiempo por actividad [M] — KnownIssue no bloqueante DoD: M105 (Telemet
+        -> cita archivos que EXISTEN (telemetry_director.gd) -> parcial/renombre
+  [B] - [x] Definir evento de compra con ítem y precio [M] — KnownIssue no bloqueante DoD: ídem M105/M38; el evento existiria 
+        -> item de diseno/documentacion
+  [B] - [x] Definir evento de venta con ítem y precio [M] — KnownIssue no bloqueante DoD: ídem M38/M105. Diseñado.
+        -> item de diseno/documentacion
+  [B] - [x] Definir métrica de % de jugadores que mantienen rutina semana 1 [M] — KnownIssue no bloqueante DoD: requiere telem
+        -> item de diseno/documentacion
+  [B] - [x] Definir alerta de desvío > 20% vs simulación [M] — KnownIssue no bloqueante DoD: depende de la simulacion (O) + te
+        -> item de diseno/documentacion
+  [B] - [x] Definir sesión de playtest específica de economía (wallets y rutina) [M] — KnownIssue no bloqueante DoD: M114 (Pla
+        -> item de diseno/documentacion
+  [B] - [x] Definir encuesta de percepción de precios (barato/justo/caro) [S] — KnownIssue no bloqueante DoD: ídem M114 (juega
+        -> item de diseno/documentacion
+  [B] - [x] Definir comparación percepción vs. simulación [M] — KnownIssue no bloqueante DoD: depende de S (telemetria) + O (s
+        -> item de diseno/documentacion
+  [B] - [x] Definir plan de ajuste post-playtest (quién decide y cuándo) [M] — KnownIssue no bloqueante DoD: ídem M114; la reg
+        -> item de diseno/documentacion
+  [B] - [x] Probar jugador que vende todo (economía estable) [M] — KnownIssue no bloqueante DoD: requiere simulacion dinámica 
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Probar jugador que no vende nada (almacenamiento M14 sin penalización) [M] — KnownIssue no bloqueante DoD: ídem; M
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Definir test de simulación 365 días rutinario [C] — KnownIssue no bloqueante DoD: depende de O (simulate_economy) 
+        -> item de diseno/documentacion
+  [B] - [x] Definir feedback de compra con precio claro en UI (M53) [S] — KnownIssue no bloqueante DoD: dueño M53 (UI/UX); los
+        -> item de diseno/documentacion
+  [B] - [x] Definir aviso de "descuento de evento" cuando aplique (M74) [S] — KnownIssue no bloqueante DoD: dueño M74 (Eventos
+        -> item de diseno/documentacion
+  [B] - [x] Definir que la escasez se comunique sin ansiedad (M94) [M] — KnownIssue no bloqueante DoD: dueño M94/M53; las REGL
+        -> item de diseno/documentacion
+  [B] - [x] Definir tipografía de precios legible (M88) [S] — KnownIssue no bloqueante DoD: dueño M88 (Localización) + M53. De
+        -> item de diseno/documentacion
+  [B] - [x] Definir sonido de moneda/compra coherente con el valor (M43/M44) [S] — KnownIssue no bloqueante DoD: dueño M43/M44
+        -> item de diseno/documentacion
+  RESUMEN M93: A(descartar)=3  B(reevaluar)=19  total=22
+============================================================================
+M85  85-Modelos-3D-Legal                   15 over-marks
+  [B] - [x] Template Work-for-Hire con cesión total de PI → KnownIssue no bloqueante DoD: template disenado en 03-Diseno.md §2
+        -> item de diseno/documentacion
+  [B] - [x] Cláusula de pago upfront (flat fee) → KnownIssue no bloqueante DoD: politica de pago documentada en 03-Diseno.md §
+        -> item de diseno/documentacion
+  [B] - [x] Cláusula de garantía de originalidad → KnownIssue no bloqueante DoD: cláusula disenada en 03-Diseno.md §2.3 (garan
+        -> item de diseno/documentacion
+  [B] - [x] Cláusula de jurisdiction y ley aplicable → KnownIssue no bloqueante DoD: jurisdiction documentada en 03-Diseno.md 
+        -> item de diseno/documentacion
+  [B] - [x] Verificar attribution requirements → KnownIssue no bloqueante DoD: política de atribución documentada en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Verificar si requiere crédito en credits → KnownIssue no bloqueante DoD: politica credits documentada en AGENTS.md
+        -> item de diseno/documentacion
+  [B] - [x] Verificar restriction de territorio → KnownIssue no bloqueante DoD: territorio de licencia documentado en 03-Disen
+        -> item de diseno/documentacion
+  [B] - [x] Verificar restriction de plataforma → KnownIssue no bloqueante DoD: plataformas documentadas en 03-Diseno.md §2.7 
+        -> item de diseno/documentacion
+  [A] - [x] Crear inventario de todas las librerías de stock → KnownIssue no bloqueante DoD: inventario de assets en inventari
+        -> verbo de implementacion sin entrega de codigo
+  [B] - [x] Incluir estado de pago en cada crédito → KnownIssue no bloqueante DoD: politica de créditos documentada en M131 + 
+        -> item de diseno/documentacion
+  [B] - [x] Definir regla: AI es herramienta, no autor → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.8 
+        -> item de diseno/documentacion
+  [B] - [x] Definir regla: artista humano es autor final → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.
+        -> item de diseno/documentacion
+  [B] - [x] Crear guía de uso para el equipo de arte → KnownIssue no bloqueante DoD: guia disenada en 03-Diseno.md §2.9 (onboa
+        -> item de diseno/documentacion
+  [B] - [x] Ejemplos de uso de cada nodo → KnownIssue no bloqueante DoD: ejemplos documentados en 03-Diseno.md §2.10 (casos de
+        -> item de diseno/documentacion
+  [B] - [x] Proceso de handling de claims de copyright → KnownIssue no bloqueante DoD: proceso disenado en 03-Diseno.md §2.11 
+        -> item de diseno/documentacion
+  RESUMEN M85: A(descartar)=1  B(reevaluar)=14  total=15
+============================================================================
+M32  32-Clima                              15 over-marks
+  [B] - [x] Densidad por calidad grafica (M90) — M90 sin implementar → KnownIssue no bloqueante DoD: especificacion documentad
+        -> item de diseno/documentacion
+  [B] - [x] Presupuesto ≤ 1 ms GPU pico (M61) — profiling con dueño M61 → KnownIssue no bloqueante DoD: budget documentado en 
+        -> item de diseno/documentacion
+  [B] - [x] M19 NPC: refugio en tormenta + paraguas → KnownIssue no bloqueante DoD: integracion M19 clima documentada en 03-Di
+        -> cita archivos que EXISTEN (villager_mood.gd) -> parcial/renombre
+  [B] - [x] M36 Fauna: spawns condicionados → KnownIssue no bloqueante DoD: integracion M36 clima documentada en 03-Diseno.md 
+        -> item de diseno/documentacion
+  [B] - [x] M50 Vegetación: sway por intensidad → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.7 (
+        -> item de diseno/documentacion
+  [B] - [x] M51 Agua: ondas por clima → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.8 (water wave
+        -> item de diseno/documentacion
+  [B] - [x] M30 UI: banner + aviso 1 dia antes → KnownIssue no bloqueante DoD: dato existe (clima_de_manana() probado en test_
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] M08 Voxel: cubierta de nieve visual → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.9 (
+        -> item de diseno/documentacion
+  [B] - [x] Eventos registrables en diario M55 → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.11 (
+        -> item de diseno/documentacion
+  [B] - [x] Aviso de tormenta 1 dia antes (UI) → KnownIssue no bloqueante DoD: dato listo (clima_de_manana()); UI con dueño M3
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Opción "Reducir clima" (densidad -50%) → KnownIssue no bloqueante DoD: opcion documentada en 03-Diseno.md §2.12 (c
+        -> item de diseno/documentacion
+  [B] - [x] Opción "Sin truenos" (fotosensibilidad) → KnownIssue no bloqueante DoD: accesibilidad documentada en 03-Diseno.md 
+        -> item de diseno/documentacion
+  [B] - [x] Opción "Niebla reducida" (visual 80%) → KnownIssue no bloqueante DoD: accesibilidad documentada en 03-Diseno.md §2
+        -> item de diseno/documentacion
+  [B] - [x] Banner siempre con texto (nunca solo imagen) → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.md 
+        -> item de diseno/documentacion
+  [B] - [x] Test: aviso de tormenta con 1 dia de anticipación → KnownIssue no bloqueante DoD: protocolo disenado en 03-Diseno.
+        -> item de diseno/documentacion
+  RESUMEN M32: A(descartar)=0  B(reevaluar)=15  total=15
+============================================================================
+M36  36-Fauna                              13 over-marks
+  [B] - [x] [M09] Spawner real con burbuja 72m y filtros bioma/hora [C] — KnownIssue no bloqueante DoD: dueño M09. **⚠️ QA atr
+        -> cita archivos que EXISTEN (fauna_registry.gd,fauna_manager.gd) -> parcial/renombre
+  [B] - [x] [M09] Caches de spawn por bioma [M] — KnownIssue no bloqueante DoD: dueño M09; implementacion deferred a spawner M
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M65] Movimiento real via NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M65; movimi
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M32] Reaccion de fauna a clima (lluvia/tormenta) [M] — KnownIssue no bloqueante DoD: dueño M32 (Clima). **⚠️ QA a
+        -> cita archivos que EXISTEN (fauna_registry.gd,fauna_behavior.gd) -> parcial/renombre
+  [B] - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45; faunas funcionan con placeholders 
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M55/M37] UI de diario de fauna y museo [C] — KnownIssue no bloqueante DoD: dueño M55 (Diario) + M37 (Museo); dato
+        -> item de proceso/validacion (no code artifact)
+  [A] - [x] [M65] Anti-stuck de manada/banco coordinado [M] — KnownIssue no bloqueante DoD: dueño M65; logica basica implement
+        -> cita 1 archivo(s) ausente(s): behavior.gd
+  [B] - [x] [M61] Presupuesto de simulacion de individuos (M65 ya define 40) [M] — KnownIssue no bloqueante DoD: dueño M61; bu
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M61] Pool de nodos para evitar alloc/free por frame [C] — KnownIssue no bloqueante DoD: dueño M61; pool base de M
+        -> item de proceso/validacion (no code artifact)
+  [A] - [x] Crear plan-inicial/ como reversa historica [M] — KnownIssue no bloqueante DoD: plan-inicial sera creado cuando se 
+        -> verbo de implementacion sin entrega de codigo
+  [B] - [x] Viñeta/tooltip de avistamiento en HUD (M53) [M] — KnownIssue no bloqueante DoD: dueño M53; datos de avistamientos 
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Sonidos de fauna contextuales (M43) [M] — KnownIssue no bloqueante DoD: dueño M43; sistema SFXManager funciona. Av
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Verificación de criaturas IN-GAME (aparición/behavior en el mundo) → KnownIssue no bloqueante DoD: requiere M64 IA
+        -> cita archivos que EXISTEN (test_fauna.gd) -> parcial/renombre
+  RESUMEN M36: A(descartar)=2  B(reevaluar)=11  total=13
+============================================================================
+M146 146-Diseno-Emocional                  10 over-marks
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  RESUMEN M146: A(descartar)=0  B(reevaluar)=10  total=10
+============================================================================
+M145 145-Diseno-De-Experiencia             9 over-marks
+  [B] - [x] Testear onboarding con jugadores nuevos → KnownIssue no bloqueante DoD: requiere build jugable; planificado en pla
+        -> item de diseno/documentacion
+  [B] - [x] Iterar segun feedback de testing → idem; ejecutara tras S1 → KnownIssue no bloqueante DoD — feedback collection re
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Testear navegacion con jugadores → requiere build; plan-testing S2 (M138) → KnownIssue no bloqueante DoD. Navegaci
+        -> item de diseno/documentacion
+  [B] - [x] Iterar segun feedback → idem → KnownIssue no bloqueante DoD.
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Testear feedback con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Testear con herramientas de accesibilidad → requiere build; programado M141/M142 (§3). KnownIssue no bloqueante Do
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Testear ritmo con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Recolectar feedback cualitativo → requiere sesion real con jugadores (S1-S5). KnownIssue no bloqueante DoD.
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] Iterar segun hallazgos → requiere hallazgos de las sesiones → KnownIssue no bloqueante DoD. Proces disenado en 03-
+        -> item de diseno/documentacion
+  RESUMEN M145: A(descartar)=0  B(reevaluar)=9  total=9
+============================================================================
+M78  78-Legal-Propiedad-Intelectual        9 over-marks
+  [B] - [x] RF1: fecha de ingreso registrada para cada asset [S] → KnownIssue no bloqueante DoD: politica de registro document
+        -> item de diseno/documentacion
+  [B] - [x] RF1: los assets propios también se registran con autoría y fecha [S] → KnownIssue no bloqueante DoD: politica auto
+        -> item de diseno/documentacion
+  [B] - [x] Definir el procedimiento de búsqueda de colisión para el título "Isla Ancestral" [M] → KnownIssue no bloqueante Do
+        -> item de diseno/documentacion
+  [B] - [x] Definir el procedimiento para nombres de templos, herramientas e islas secundarias [S] → KnownIssue no bloqueante 
+        -> item de diseno/documentacion
+  [B] - [x] Definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional [M] → KnownIssue no bloqueante DoD: bases
+        -> item de diseno/documentacion
+  [B] - [x] Definir la revisión del logo y nombre antes del primer trailer público [M] → KnownIssue no bloqueante DoD:revision
+        -> item de diseno/documentacion
+  [B] - [x] Diseñar la política anti-plagio redactada y exigible a colaboradores [M] → KnownIssue no bloqueante DoD: politica 
+        -> item de diseno/documentacion
+  [B] - [x] Diseñar las entradas de ejemplo en notices (Godot, Voxel Tools, Nunito, Freesound) [S] → KnownIssue no bloqueante 
+        -> item de diseno/documentacion
+  [B] - [x] Búsqueda de marcas agrupada en una sola sesión trimestral [S] → KnownIssue no bloqueante DoD: politica de búsqueda
+        -> item de diseno/documentacion
+  RESUMEN M78: A(descartar)=0  B(reevaluar)=9  total=9
+============================================================================
+M82  82-Clasificacion-Por-Edades           6 over-marks
+  [B] - [x] Definir quién realiza cada submission (responsable) → KnownIssue no bloqueante DoD: responsable sera fundador/dueñ
+        -> item de diseno/documentacion
+  [B] - [x] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en
+        -> item de diseno/documentacion
+  [B] - [x] Definir proceso para cada plataforma que requiere submission propia → KnownIssue no bloqueante DoD: procesos PC (S
+        -> item de diseno/documentacion
+  [B] - [x] Definir proceso para versiones de consola vs. PC → KnownIssue no bloqueante DoD: diferencias documentadas (PC: Ste
+        -> item de diseno/documentacion
+  [B] - [x] Crear resumen ejecutivo para stakeholders → KnownIssue no bloqueante DoD: formato documentado en 03-Diseno.md §5.4
+        -> item de diseno/documentacion
+  [B] - [x] Completar submissions a plataformas antes de M141 Beta → KnownIssue no bloqueante DoD: submissions requieren accio
+        -> item de proceso/validacion (no code artifact)
+  RESUMEN M82: A(descartar)=0  B(reevaluar)=6  total=6
+============================================================================
+M81  81-Legal-Menores                      6 over-marks
+  [B] - [x] Diseñar UI de pantalla de age gate (AgeGateScreen) → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Diseñar flujo de consentimiento parental por email (parental email verification) → KnownIssue no bloqueante DoD: f
+        -> item de diseno/documentacion
+  [B] - [x] Diseñar proceso de submission al portal IARC (International Age Rating Coalition) → KnownIssue no bloqueante DoD: 
+        -> item de diseno/documentacion
+  [B] - [x] Completar analisis regulatorio completo antes de M137 Prototipo → KnownIssue no bloqueante DoD: analisis regulator
+        -> item de diseno/documentacion
+  [B] - [x] Completar rating IARC antes de M141 Beta → KnownIssue no bloqueante DoD: proceso disenado en 03-Diseno.md §E; subm
+        -> item de diseno/documentacion
+  [B] - [x] Completar revision por abogado antes de M143 Lanzamiento → KnownIssue no bloqueante DoD: politica documentada en 0
+        -> item de diseno/documentacion
+  RESUMEN M81: A(descartar)=0  B(reevaluar)=6  total=6
+============================================================================
+M65  65-Animales-IA                        5 over-marks
+  [A] - [x] [M08] Movimiento real con NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M08 (VoxelT
+        -> cita 1 archivo(s) ausente(s): animal_behavior.gd
+  [B] - [x] [M09] Spawner con burbuja 72m y filtros [C] — KnownIssue no bloqueante DoD: dueño M09 (Terreno); spawner basico ex
+        -> cita archivos que EXISTEN (fauna_registry.gd) -> parcial/renombre
+  [B] - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45 (Arte-3D); animadores GLB pendiente
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M43] Sonidos contextuales de fauna [M] — KnownIssue no bloqueante DoD: dueño M43 (SFXManager); sistema de sonidos
+        -> item de proceso/validacion (no code artifact)
+  [B] - [x] [M61] Pool de nodos para evitar alloc/free [C] — KnownIssue no bloqueante DoD: dueño M61 (Rendimiento); pool exist
+        -> item de proceso/validacion (no code artifact)
+  RESUMEN M65: A(descartar)=1  B(reevaluar)=4  total=5
+============================================================================
+M154 154-Vision-Del-Agente                 4 over-marks
+  [B] - [x] Probar interaccion: click/tecla mueve al personaje [M] -- agnes-2.5-flash 2026-09-12: prueba disenada en 03-Diseno
+        -> item de diseno/documentacion
+  [B] - [x] Crear preview_personaje.tscn en el proyecto Godot [M] -- agnes-2.5-flash 2026-09-12: escena disenada en 03-Diseno.
+        -> item de diseno/documentacion
+  [B] - [x] Test de reproducibilidad: otro agente sigue la guia e instala V4 [C] -- agnes-2.5-flash 2026-09-12: protocolo dise
+        -> item de diseno/documentacion
+  [B] - [x] Exportar personaje aprobado a .glb e importarlo en Godot [M] -- agnes-2.5-flash 2026-09-12: workflow disenado en 0
+        -> item de diseno/documentacion
+  RESUMEN M154: A(descartar)=0  B(reevaluar)=4  total=4
+============================================================================
+M118 118-CI-CD                             4 over-marks
+  [B] - [x] P5: despliegue a itch.io al crear tag semver [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md 
+        -> item de diseno/documentacion
+  [B] - [x] Subida a Itch.io (manual trigger) [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §3.10 (itch
+        -> item de diseno/documentacion
+  [B] - [x] Email a stakeholders en tags [S] -- agnes-2.5-flash 2026-09-12: politica disenada en 03-Diseno.md §3.9 (stakeholde
+        -> item de diseno/documentacion
+  [B] - [x] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -
+        -> item de diseno/documentacion
+  RESUMEN M118: A(descartar)=0  B(reevaluar)=4  total=4
+============================================================================
+M167 167-Isla-Raiz                         4 over-marks
+  [B] - [x] Crear el primer modulo de isla futura (cuando aplique) [M] → KnownIssue no bloqueante DoD: M168 es la plantilla; e
+        -> item de diseno/documentacion
+  [B] - [x] Densidad de contenido en la isla completa (109 vegetales en r 1800 + recursos M15 solo cerca del spawn — repoblar 
+        -> item de diseno/documentacion
+  [B] - [x] M160 ubicaciones: migrar coords del spawn viejo (314-330, 320) al interior real [M] → KnownIssue no bloqueante DoD
+        -> item de proceso/validacion (no code artifact)
+  [A] - [x] Ajuste olas en arena: el shore-fade cubre demasiada arena (profundidad_min/max a calibrar) [S] → KnownIssue no blo
+        -> cita 1 archivo(s) ausente(s): water_config.tres
+  RESUMEN M167: A(descartar)=1  B(reevaluar)=3  total=4
+============================================================================
+M116 116-Instalador                        2 over-marks
+  [B] - [x] Validar antivirus → KnownIssue no bloqueante DoD: requiere certificado de CA / entorno real (MANUAL). politica doc
+        -> item de diseno/documentacion
+  [B] - [x] Definir certificado digital de autoridad de confianza → KnownIssue no bloqueante DoD: requiere certificado de CA (
+        -> item de diseno/documentacion
+  RESUMEN M116: A(descartar)=0  B(reevaluar)=2  total=2
+============================================================================
+M114 114-Playtest                          2 over-marks
+  [B] - [x] Exigir firma de NDA antes de la primera sesion → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.m
+        -> item de diseno/documentacion
+  [B] - [x] Escribir el discurso de briefing estándar en español (5 minutos) → KnownIssue no bloqueante DoD: estructura disena
+        -> item de diseno/documentacion
+  RESUMEN M114: A(descartar)=0  B(reevaluar)=2  total=2
+============================================================================
+M94  94-Retencion-Sin-FOMO                 1 over-marks
+  [B] - [x] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo di
+        -> item de diseno/documentacion
+  RESUMEN M94: A(descartar)=0  B(reevaluar)=1  total=1
+============================================================================
+M119 119-Actualizaciones                   1 over-marks
+  [B] - [x] Compatibilidad con versiones anteriores de saves — KnownIssue no bloqueante DoD (due帽o M59) [M] -- agnes-2.5-flash
+        -> item de diseno/documentacion
+  RESUMEN M119: A(descartar)=0  B(reevaluar)=1  total=1

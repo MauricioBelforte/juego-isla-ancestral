@@ -1,0 +1,85 @@
+==============================================================================
+M93   93-Balance                             over-marks=22
+  citados en over-marks: 2 | FALTAN: 1 ['simulate_economy.gd']
+  declarados en 04-Codigo: 16 | FALTAN: 4 ['balance.gd', 'simulate_economy.gd', 'balance_report.gd', 'test_simulate.gd']
+  familia inicial: A (codigo ausente)
+==============================================================================
+M85   85-Modelos-3D-Legal                    over-marks=15
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 6 | FALTAN: 5 ['model_legal_manager.gd', 'model_license_validator.gd', 'model_license.gd', 'model_credit.gd', 'build_script.gd']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M32   32-Clima                               over-marks=15
+  citados en over-marks: 1 | FALTAN: 0 
+  declarados en 04-Codigo: 15 | FALTAN: 4 ['particulas_clima.gd', 'eventos_tabla.tres', 'banner_clima.gd', 'caso_clima_tests.gd']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M36   36-Fauna                               over-marks=13
+  citados en over-marks: 5 | FALTAN: 1 ['behavior.gd']
+  declarados en 04-Codigo: 7 | FALTAN: 0 []
+  familia inicial: A (codigo ausente)
+==============================================================================
+M146  146-Diseno-Emocional                   over-marks=10
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 0 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M145  145-Diseno-De-Experiencia              over-marks=9
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 0 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M78   78-Legal-Propiedad-Intelectual         over-marks=9
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 0 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M82   82-Clasificacion-Por-Edades            over-marks=6
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 9 | FALTAN: 8 ['rating_profile.gd', 'content_validator.gd', 'iarc_submission.gd', 'rating_display.gd', 'legal_config.gd', 'build_script.gd', 'store_page.gd', 'rating_profile.tres']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M81   81-Legal-Menores                       over-marks=6
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 23 | FALTAN: 20 ['legal_config.gd', 'age_gate_system.gd', 'parental_consent_service.gd', 'data_sanitizer.gd', 'iarc_validator.gd', 'legal_events.gd', 'i_legal_service.gd', 'age_gate_screen.gd', '...']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M65   65-Animales-IA                         over-marks=5
+  citados en over-marks: 2 | FALTAN: 1 ['animal_behavior.gd']
+  declarados en 04-Codigo: 5 | FALTAN: 0 []
+  familia inicial: A (codigo ausente)
+==============================================================================
+M154  154-Vision-Del-Agente                  over-marks=4
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 0 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M118  118-CI-CD                              over-marks=4
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 2 | FALTAN: 1 ['BuildScript.cs']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M167  167-Isla-Raiz                          over-marks=4
+  citados en over-marks: 1 | FALTAN: 1 ['water_config.tres']
+  declarados en 04-Codigo: 12 | FALTAN: 1 ['isla_generador.gd']
+  familia inicial: A (codigo ausente)
+==============================================================================
+M116  116-Instalador                         over-marks=2
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 1 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M114  114-Playtest                           over-marks=2
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 0 | FALTAN: 0 []
+  familia inicial: B (sin citas directas)
+==============================================================================
+M94   94-Retencion-Sin-FOMO                  over-marks=1
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 12 | FALTAN: 3 ['ObjetivoDiario.cs', 'MotorEventosVariantes.cs', 'AntiFomoAuditor.cs']
+  familia inicial: B (sin citas directas)
+==============================================================================
+M119  119-Actualizaciones                    over-marks=1
+  citados en over-marks: 0 | FALTAN: 0 
+  declarados en 04-Codigo: 6 | FALTAN: 4 ['update_checker.gd', 'save_migrator.gd', 's.tres', 'game_version.gd']
+  familia inicial: B (sin citas directas)

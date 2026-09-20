@@ -39,6 +39,19 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
+
+class DetectorCiegoError(RuntimeError):
+    """BUG-075: el global existe pero está vacío o sin tabla.
+
+    Regenerarlo en este estado descartaría silenciosamente el prefijo/sufijo
+    (aviso ⛔ UTF-8, "Flujo para modelos nuevos", simbología) y el esquema de
+    columnas real. Antes el código caía al default y reescribía el archivo
+    sobre un estado inexistente: «0 problemas» indistinguible de «no hay
+    datos» (familia trampa 100). Fail-fast con exit 3, mismo convenio que
+    scripts/verificar_checklist.py.
+    """
+
+
 # ---------------------------------------------------------------------------
 # Configuración
 # ---------------------------------------------------------------------------
@@ -154,7 +167,19 @@ def leer_estructura_existente(archivo: Path):
     if not archivo.exists():
         return None, None, None, None, None
 
-    lineas = archivo.read_text(encoding="utf-8").splitlines()
+    contenido = archivo.read_text(encoding="utf-8")
+
+    # BUG-075: fail-fast. Un global vacío o sin tabla NO es "primera generación":
+    # es un truncamiento, y regenerar aquí borraría prefijo/sufijo y columnas
+    # manuales sin que nadie se entere (detector ciego, trampa 100).
+    if not contenido.strip():
+        raise DetectorCiegoError(
+            f"BUG-075: {archivo.name} existe pero está VACÍO "
+            f"({archivo.stat().st_size} bytes). Restaurar desde HEAD antes de "
+            "continuar (git checkout HEAD -- CHECKLIST-GLOBAL.md)."
+        )
+
+    lineas = contenido.splitlines()
 
     inicio = None
     for i, linea in enumerate(lineas):
@@ -163,7 +188,11 @@ def leer_estructura_existente(archivo: Path):
             break
 
     if inicio is None or inicio + 1 >= len(lineas):
-        return None, None, None, None, None
+        raise DetectorCiegoError(
+            f"BUG-075: {archivo.name} existe ({len(contenido)} chars) pero no "
+            "contiene la tabla '| ID |' — truncamiento parcial o formato roto. "
+            "Restaurar desde HEAD antes de continuar."
+        )
 
     fin = len(lineas)
     for j in range(inicio + 2, len(lineas)):
@@ -290,7 +319,20 @@ def generar_tabla(salida: Path, dry_run: bool = False):
         return 1
 
     # Leer la estructura existente: prefijo/sufijo (intocables) + esquema de columnas
-    prefijo, encabezado, separador, cuerpo, sufijo = leer_estructura_existente(salida)
+    try:
+        prefijo, encabezado, separador, cuerpo, sufijo = leer_estructura_existente(salida)
+    except DetectorCiegoError as e:
+        # BUG-075: exit 3 = DETECTOR CIEGO, distinto del 1 (problema de datos).
+        # Si el global está truncado, regenerar destruiría contenido intocable;
+        # preferimos no escribir nada a escribir sobre un estado inexistente.
+        print()
+        print("=" * 60)
+        print("🛑 DETECTOR CIEGO — fallo de infraestructura (exit 3):")
+        print(f"   {e}")
+        print()
+        print("No se regenera nada: el prefijo/sufijo y las columnas manuales")
+        print("se perderían silenciosamente. Restaurar el archivo y reintentar.")
+        return 3
     if encabezado is None:
         prefijo = list(PREFIJO_DEFECTO)
         encabezado = ENCABEZADO_DEFECTO

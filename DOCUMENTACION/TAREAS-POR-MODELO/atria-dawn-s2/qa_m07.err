@@ -1,0 +1,100 @@
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: madera_roble
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: piedra_caliza
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: baya_roja
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: fibra_algodon
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: mineral_cobre
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'tienda_general': item_id inexistente en M15: pergamino_rec_tela_lino
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'herreria': item_id inexistente en M15: herramienta_basica
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_herreria (res://scripts/shops/catalogo_tiendas.gd:133)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:27)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'herreria': item_id inexistente en M15: mineral_cobre
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_herreria (res://scripts/shops/catalogo_tiendas.gd:133)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:27)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'mercader_viajero': item_id inexistente en M15: fragmento_ancestral
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_mercader_viajero (res://scripts/shops/catalogo_tiendas.gd:155)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:28)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'mercader_viajero': item_id inexistente en M15: baya_roja
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_mercader_viajero (res://scripts/shops/catalogo_tiendas.gd:155)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:28)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] 'mercader_viajero': item_id inexistente en M15: mineral_cobre
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_mercader_viajero (res://scripts/shops/catalogo_tiendas.gd:155)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:28)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: [M39] Tienda 'mercader_viajero' sin npc_duenio_id (validar en editor)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] registrar_tienda (res://scripts/shops/shop_manager.gd:137)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:73)
+       [2] _registrar_mercader_viajero (res://scripts/shops/catalogo_tiendas.gd:155)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:28)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+WARNING: 58 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 9 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

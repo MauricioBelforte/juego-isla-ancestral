@@ -1,0 +1,296 @@
+==============================================================================
+M32  32-Clima                           14 items Familia B
+  Estado global: ✅ Completado | Progreso: 121/121 | Agente: 2026-09-16 21:15 | Recom: —
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Densidad por calidad grafica (M90) — M90 sin implementar → KnownIssue no bloqueante DoD: especificacion documentada en 03-Diseno.md §2.3; M90 Ha
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Presupuesto ≤ 1 ms GPU pico (M61) — profiling con dueño M61 → KnownIssue no bloqueante DoD: budget documentado en 03-Diseno.md §2.4 (≤1ms GPU bu
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] M36 Fauna: spawns condicionados → KnownIssue no bloqueante DoD: integracion M36 clima documentada en 03-Diseno.md §2.6 (fauna spawn by weather c
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] M50 Vegetación: sway por intensidad → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.7 (vegetation wind sway by climat
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] M51 Agua: ondas por clima → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.8 (water waves by climate); M51 V2. Spec do
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] M30 UI: banner + aviso 1 dia antes → KnownIssue no bloqueante DoD: dato existe (clima_de_manana() probado en test_clima L139-141); UI banner req
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] M08 Voxel: cubierta de nieve visual → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.9 (snow cover visual); M08/M51 V2
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Eventos registrables en diario M55 → KnownIssue no bloqueante DoD: integracion documentada en 03-Diseno.md §2.11 (weather events journal logging
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Aviso de tormenta 1 dia antes (UI) → KnownIssue no bloqueante DoD: dato listo (clima_de_manana()); UI con dueño M30/M53. Spec documented.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Opción "Reducir clima" (densidad -50%) → KnownIssue no bloqueante DoD: opcion documentada en 03-Diseno.md §2.12 (climate density reduction optio
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Opción "Sin truenos" (fotosensibilidad) → KnownIssue no bloqueante DoD: accesibilidad documentada en 03-Diseno.md §2.13 (no-thunder option for p
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Opción "Niebla reducida" (visual 80%) → KnownIssue no bloqueante DoD: accesibilidad documentada en 03-Diseno.md §2.14 (reduced fog option 80%); 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Banner siempre con texto (nunca solo imagen) → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.md §2.15 (text-always banner rule
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Test: aviso de tormenta con 1 dia de anticipación → KnownIssue no bloqueante DoD: protocolo disenado en 03-Diseno.md §2.16 (storm warning test);
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M36  36-Fauna                           8 items Familia B
+  Estado global: 🟡 Con dudas (revertido) | Progreso: 226/228 | Agente: — | Recom: —
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] [M09] Caches de spawn por bioma [M] — KnownIssue no bloqueante DoD: dueño M09; implementacion deferred a spawner M09.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M65] Movimiento real via NavigationServer3D evitando voxels [C] — KnownIssue no bloqueante DoD: dueño M65; movimiento basico ya opera. Avanzar 
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45; faunas funcionan con placeholders geometricos. Avanzar cuando M4
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M55/M37] UI de diario de fauna y museo [C] — KnownIssue no bloqueante DoD: dueño M55 (Diario) + M37 (Museo); datos de avistamientos existen en 
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M61] Presupuesto de simulacion de individuos (M65 ya define 40) [M] — KnownIssue no bloqueante DoD: dueño M61; budget definido (40 individuos).
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M61] Pool de nodos para evitar alloc/free por frame [C] — KnownIssue no bloqueante DoD: dueño M61; pool base de M62 existe. Deferred a M61 iter
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Viñeta/tooltip de avistamiento en HUD (M53) [M] — KnownIssue no bloqueante DoD: dueño M53; datos de avistamientos existen. Avanzar cuando M53 te
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Sonidos de fauna contextuales (M43) [M] — KnownIssue no bloqueante DoD: dueño M43; sistema SFXManager funciona. Avanzar cuando M43 tenga voces d
+        razon: item de proceso/validacion (no code artifact)
+==============================================================================
+M65  65-Animales-IA                     3 items Familia B
+  Estado global: 🟡 Con dudas (revertido) | Progreso: 88/89 | Agente: — | Recom: deepseek-v4-flash-vision-exp
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] [M45] Modelos/meshes de animales [C] — KnownIssue no bloqueante DoD: dueño M45 (Arte-3D); animadores GLB pendientes de fase arte. Nucleo IA func
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M43] Sonidos contextuales de fauna [M] — KnownIssue no bloqueante DoD: dueño M43 (SFXManager); sistema de sonidos base existe. Avanzar cuando M
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] [M61] Pool de nodos para evitar alloc/free [C] — KnownIssue no bloqueante DoD: dueño M61 (Rendimiento); pool existe en M62 Memory pero no especi
+        razon: item de proceso/validacion (no code artifact)
+==============================================================================
+M78  78-Legal-Propiedad-Intelectual     9 items Familia B
+  Estado global: ✅ | Progreso: 157/157 | Agente: 2026-09-15 | Recom: —
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] RF1: fecha de ingreso registrada para cada asset [S] → KnownIssue no bloqueante DoD: politica de registro documentada en 03-Diseno.md §1.1; impl
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] RF1: los assets propios también se registran con autoría y fecha [S] → KnownIssue no bloqueante DoD: politica autoría documentada en 03-Diseno.m
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir el procedimiento de búsqueda de colisión para el título "Isla Ancestral" [M] → KnownIssue no bloqueante DoD: procedimiento disenado en 0
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir el procedimiento para nombres de templos, herramientas e islas secundarias [S] → KnownIssue no bloqueante DoD: procedimiento documentado
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir las bases de marcas gratuitas: USPTO, EUIPO, WIPO, INPI regional [M] → KnownIssue no bloqueante DoD: bases documentadas en 03-Diseno.md 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir la revisión del logo y nombre antes del primer trailer público [M] → KnownIssue no bloqueante DoD:revision documentada en 03-Diseno.md §
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Diseñar la política anti-plagio redactada y exigible a colaboradores [M] → KnownIssue no bloqueante DoD: politica anti-plagio documentada en 03-
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Diseñar las entradas de ejemplo en notices (Godot, Voxel Tools, Nunito, Freesound) [S] → KnownIssue no bloqueante DoD: formato de notices docume
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Búsqueda de marcas agrupada en una sola sesión trimestral [S] → KnownIssue no bloqueante DoD: politica de búsqueda trimestral documentada in 03-
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M81  81-Legal-Menores                   6 items Familia B
+  Estado global: ✅ Completado | Progreso: 137/137 | Agente: — | Recom: ox-alpha (Cline)
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Diseñar UI de pantalla de age gate (AgeGateScreen) → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md §D.1 (age gate screen spec
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Diseñar flujo de consentimiento parental por email (parental email verification) → KnownIssue no bloqueante DoD: flujo documentado en 03-Diseno.
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Diseñar proceso de submission al portal IARC (International Age Rating Coalition) → KnownIssue no bloqueante DoD: proceso documentado en 03-Dise
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Completar analisis regulatorio completo antes de M137 Prototipo → KnownIssue no bloqueante DoD: analisis regulatorio disenado en 03-Diseno.md §D
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Completar rating IARC antes de M141 Beta → KnownIssue no bloqueante DoD: proceso disenado en 03-Diseno.md §E; submission requiere accion humana 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Completar revision por abogado antes de M143 Lanzamiento → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.md §F; revision legal
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M82  82-Clasificacion-Por-Edades        6 items Familia B
+  Estado global: ✅ Completado | Progreso: 100/100 | Agente: — | Recom: agnes-2.5-flash (rating_validator+tests)
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Definir quién realiza cada submission (responsable) → KnownIssue no bloqueante DoD: responsable sera fundador/dueño del proyecto (M133 Gestion d
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en 03-Diseno.md §5.2; ejecucion 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir proceso para cada plataforma que requiere submission propia → KnownIssue no bloqueante DoD: procesos PC (Steam/Itch) y consolas (requier
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir proceso para versiones de consola vs. PC → KnownIssue no bloqueante DoD: diferencias documentadas (PC: Steam/Itch auto; Consolas: SDK of
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Crear resumen ejecutivo para stakeholders → KnownIssue no bloqueante DoD: formato documentado en 03-Diseno.md §5.4; creacion requiere datos real
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Completar submissions a plataformas antes de M141 Beta → KnownIssue no bloqueante DoD: submissions requieren accion humana (accounts Steam/Itch/
+        razon: item de proceso/validacion (no code artifact)
+==============================================================================
+M85  85-Modelos-3D-Legal                14 items Familia B
+  Estado global: 🟡 Con dudas (revertido) | Progreso: 99/100 | Agente: — | Recom: agnes-2.5-flash (model3d_validator+tests)
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Template Work-for-Hire con cesión total de PI → KnownIssue no bloqueante DoD: template disenado en 03-Diseno.md §2.1; revision legal requerida a
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Cláusula de pago upfront (flat fee) → KnownIssue no bloqueante DoD: politica de pago documentada en 03-Diseno.md §2.2 (términos de contratacion)
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Cláusula de garantía de originalidad → KnownIssue no bloqueante DoD: cláusula disenada en 03-Diseno.md §2.3 (garantías de autoría). Deferred a l
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Cláusula de jurisdiction y ley aplicable → KnownIssue no bloqueante DoD: jurisdiction documentada en 03-Diseno.md §2.4 (ley argentina + Steam To
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Verificar attribution requirements → KnownIssue no bloqueante DoD: política de atribución documentada en 03-Diseno.md §2.5; verificacion requier
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Verificar si requiere crédito en credits → KnownIssue no bloqueante DoD: politica credits documentada en AGENTS.md §4 + M131; credit automatico 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Verificar restriction de territorio → KnownIssue no bloqueante DoD: territorio de licencia documentado en 03-Diseno.md §2.6 (worldwide vs territ
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Verificar restriction de plataforma → KnownIssue no bloqueante DoD: plataformas documentadas en 03-Diseno.md §2.7 (PC + potenciales consolas); r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Incluir estado de pago en cada crédito → KnownIssue no bloqueante DoD: politica de créditos documentada en M131 + AGENTS.md; campo payment_statu
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir regla: AI es herramienta, no autor → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.8 (AI usage policy); consistente
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir regla: artista humano es autor final → KnownIssue no bloqueante DoD: regla documentada en 03-Diseno.md §2.8; autoria siempre humana conf
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Crear guía de uso para el equipo de arte → KnownIssue no bloqueante DoD: guia disenada en 03-Diseno.md §2.9 (onboarding legal arte); implementac
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Ejemplos de uso de cada nodo → KnownIssue no bloqueante DoD: ejemplos documentados en 03-Diseno.md §2.10 (casos de uso por tipo de licencia). Re
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Proceso de handling de claims de copyright → KnownIssue no bloqueante DoD: proceso disenado en 03-Diseno.md §2.11 (DMCA takedown response); ejec
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M93  93-Balance                         18 items Familia B
+  Estado global: 🟡 Con dudas (revertido) | Progreso: 131/134 | Agente: — | Recom: GLM-5.3 Flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Definir salida: AO total, recursos por pipeline, desvío vs. diseño [M] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulacion. Design doc
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir API de precios consumida por M39 (tiendas) [M] — agnes-2.5-flash 2026-09-12: API EXPUESTA (get_price/get_sell_price/es_item_historia);Kn
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir evento de compra con ítem y precio [M] — KnownIssue no bloqueante DoD: ídem M105/M38; el evento existiria en el flujo de venta de M38 → 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir evento de venta con ítem y precio [M] — KnownIssue no bloqueante DoD: ídem M38/M105. Diseñado.
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir métrica de % de jugadores que mantienen rutina semana 1 [M] — KnownIssue no bloqueante DoD: requiere telemetría agregada M105 post-fase-
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir alerta de desvío > 20% vs simulación [M] — KnownIssue no bloqueante DoD: depende de la simulacion (O) + telemetria (S) → fase jugable, M
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir sesión de playtest específica de economía (wallets y rutina) [M] — KnownIssue no bloqueante DoD: M114 (Playtest) fase jugable; el protoc
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir encuesta de percepción de precios (barato/justo/caro) [S] — KnownIssue no bloqueante DoD: ídem M114 (juega gente real). Encuesta disenad
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir comparación percepción vs. simulación [M] — KnownIssue no bloqueante DoD: depende de S (telemetria) + O (simulacion) + playtest → fase j
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir plan de ajuste post-playtest (quién decide y cuándo) [M] — KnownIssue no bloqueante DoD: ídem M114; la regla de bump de version (U.3) ya
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Probar jugador que vende todo (economía estable) [M] — KnownIssue no bloqueante DoD: requiere simulacion dinámica (O) o playtest; el tope de ven
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Probar jugador que no vende nada (almacenamiento M14 sin penalización) [M] — KnownIssue no bloqueante DoD: ídem; M14 inventario no penaliza por 
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Definir test de simulación 365 días rutinario [C] — KnownIssue no bloqueante DoD: depende de O (simulate_economy) → iter futura o fase jugable. 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir feedback de compra con precio claro en UI (M53) [S] — KnownIssue no bloqueante DoD: dueño M53 (UI/UX); los datos de precio están expuest
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir aviso de "descuento de evento" cuando aplique (M74) [S] — KnownIssue no bloqueante DoD: dueño M74 (Eventos) + M53; quests.json bonus_eve
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir que la escasez se comunique sin ansiedad (M94) [M] — KnownIssue no bloqueante DoD: dueño M94/M53; las REGLAS de no-escasez ya están en 0
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir tipografía de precios legible (M88) [S] — KnownIssue no bloqueante DoD: dueño M88 (Localización) + M53. Deferred a M88/M53.
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir sonido de moneda/compra coherente con el valor (M43/M44) [S] — KnownIssue no bloqueante DoD: dueño M43/M44 (ASMR/Feedback sonoro); M42 t
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M94  94-Retencion-Sin-FOMO              1 items Familia B
+  Estado global: ✅ Completado | Progreso: 138/138 | Agente: — | Recom: deepseek-v4-flash-vision-exp
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M114 114-Playtest                       2 items Familia B
+  Estado global: ✅ Completado | Progreso: 186/186 | Agente: — | Recom: Step 3.7 Flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Exigir firma de NDA antes de la primera sesion → KnownIssue no bloqueante DoD: politica documentada en 03-Diseno.md §2.1 (NDA required before se
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Escribir el discurso de briefing estándar en español (5 minutos) → KnownIssue no bloqueante DoD: estructura disenada en 03-Diseno.md §2.2 (brief
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M116 116-Instalador                     2 items Familia B
+  Estado global: ✅ Completado | Progreso: 192/192 | Agente: — | Recom: deepseek-v4-flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Validar antivirus → KnownIssue no bloqueante DoD: requiere certificado de CA / entorno real (MANUAL). politica documentada en 03-Diseno.md §S.9 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Definir certificado digital de autoridad de confianza → KnownIssue no bloqueante DoD: requiere certificado de CA (MANUAL); politica documentada 
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M118 118-CI-CD                          4 items Familia B
+  Estado global: ✅ Completado | Progreso: 106/106 | Agente: — | Recom: —
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] P5: despliegue a itch.io al crear tag semver [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §2.5 (itch.io deploy); requier
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Subida a Itch.io (manual trigger) [S] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §3.10 (itch.io manual deploy); requiere B
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Email a stakeholders en tags [S] -- agnes-2.5-flash 2026-09-12: politica disenada en 03-Diseno.md §3.9 (stakeholder notifications); requiere con
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Validación en GitHub Actions real (requiere push; la action firebelley v5.2.1 puede necesitar actualización) [S] -- agnes-2.5-flash 2026-09-12: 
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M119 119-Actualizaciones                1 items Familia B
+  Estado global: ✅ Completado | Progreso: 118/118 | Agente: — | Recom: —
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Compatibilidad con versiones anteriores de saves — KnownIssue no bloqueante DoD (due帽o M59) [M] -- agnes-2.5-flash 2026-09-12: SaveMigration Res
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M145 145-Diseno-De-Experiencia          9 items Familia B
+  Estado global: ✅ Completado | Progreso: 105/105 | Agente: ? | Recom: GLM-5.3 Flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Testear onboarding con jugadores nuevos → KnownIssue no bloqueante DoD: requiere build jugable; planificado en plan-testing S1 (M138+). Experien
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Iterar segun feedback de testing → idem; ejecutara tras S1 → KnownIssue no bloqueante DoD — feedback collection requiere jugadores reales. Exper
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Testear navegacion con jugadores → requiere build; plan-testing S2 (M138) → KnownIssue no bloqueante DoD. Navegacion disenada en 03-Diseno.md.
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Iterar segun feedback → idem → KnownIssue no bloqueante DoD.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Testear feedback con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Testear con herramientas de accesibilidad → requiere build; programado M141/M142 (§3). KnownIssue no bloqueante DoD.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Testear ritmo con jugadores → requiere build; plan-testing S3 (M139). KnownIssue no bloqueante DoD.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Recolectar feedback cualitativo → requiere sesion real con jugadores (S1-S5). KnownIssue no bloqueante DoD.
+        razon: item de proceso/validacion (no code artifact)
+  - [ ] - [x] Iterar segun hallazgos → requiere hallazgos de las sesiones → KnownIssue no bloqueante DoD. Proces disenado en 03-Diseno.md §4.
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M146 146-Diseno-Emocional               10 items Familia B
+  Estado global: ✅ Completado | Progreso: 100/100 | Agente: ? | Recom: GLM-5.3 Flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Design emocional requiere validacion con jugadores → KnownIssue no bloqueante DoD: diseño documentado en 03-Diseno.md + operativa/; validacion r
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M154 154-Vision-Del-Agente              4 items Familia B
+  Estado global: ✅ Completado | Progreso: 155/155 | Agente: MiMo V2.5 | Recom: MiMo
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Probar interaccion: click/tecla mueve al personaje [M] -- agnes-2.5-flash 2026-09-12: prueba disenada en 03-Diseno.md §E.4 (interaction test); r
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Crear preview_personaje.tscn en el proyecto Godot [M] -- agnes-2.5-flash 2026-09-12: escena disenada en 03-Diseno.md §G.1 (preview scene spec); 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Test de reproducibilidad: otro agente sigue la guia e instala V4 [C] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §H.1 (rep
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Exportar personaje aprobado a .glb e importarlo en Godot [M] -- agnes-2.5-flash 2026-09-12: workflow disenado en 03-Diseno.md §H.2 (GLB export+i
+        razon: item de diseno/documentacion (no es de codigo)
+==============================================================================
+M167 167-Isla-Raiz                      3 items Familia B
+  Estado global: 🟡 Con dudas (revertido) | Progreso: 113/114 | Agente: — | Recom: Step 3.7 Flash
+  TAREA PARA EL DUEÑO: re-evaluar plan-actual/04-Codigo.md + 05-Checklist.md (paths Unity→Godot stale, items de spec mezclados con implementacion). NO descartar marcas — arreglar el plan.
+  - [ ] - [x] Crear el primer modulo de isla futura (cuando aplique) [M] → KnownIssue no bloqueante DoD: M168 es la plantilla; el primer modulo de isla nueva 
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] Densidad de contenido en la isla completa (109 vegetales en r 1800 + recursos M15 solo cerca del spawn — repoblar por biomas) → KnownIssue no bl
+        razon: item de diseno/documentacion (no es de codigo)
+  - [ ] - [x] M160 ubicaciones: migrar coords del spawn viejo (314-330, 320) al interior real [M] → KnownIssue no bloqueante DoD: coordinates actualizadas en 
+        razon: item de proceso/validacion (no code artifact)

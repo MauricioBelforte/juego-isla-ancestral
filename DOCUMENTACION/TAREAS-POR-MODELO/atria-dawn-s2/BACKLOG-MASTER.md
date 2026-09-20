@@ -380,3 +380,23 @@ nuestra debilidad compartida:
 **Regla:** si una verificacion requiere conteo de suites Godot o edicion de archivos
 CRLF, **delega** (agnes / DeepSeek). Vos haces la auditoria de documentacion y la
 verificacion cruzada entre fuentes.
+
+## P-17 — Ejecución (2026-09-20 07:55, Log 1131)
+
+- [x] **P-17.1** Verificar P-13 (exit 3 + job CI) — 3 casos inyectados por
+  `--checklist` (inexistente / 0 bytes / sin tabla) → **exit 3** los tres;
+  control real → **exit 1 (85 alertas)**. No colapsan. Job CI en
+  `quality.yml` traduce 3 → fail, 1 → warning. **FUNCIONA.**
+- [x] **P-17.2** Merge sección 9 de `11-BUGS.md` — header duplicado unificado,
+  2 filas huérfanas reubicadas al final de la tabla.
+- [x] **P-17.3** Documentar trampa de los 6 sellos → **T-101** en
+  `GUIA-GODOT/06-registro-errores.md` (con regla «no verifiques tu propio trabajo»).
+- [→] **P-17.4** Seguimiento 6 bugs sin firma (BUG-068/069/071 DeepSeek,
+  BUG-058/072 hy3, BUG-043) — **siguen sin firma**; reportado, dueños no
+  respondieron aún. No las firmo yo (trabajo ajeno).
+- [x] **P-17.5** Re-aplicar 3 sellos perdidos por BUG-075 (M101, M145, M146)
+  cruzando AMBAS fuentes esta vez.
+- [x] **P-17.6** Gate de detección en `scripts/generar_checklist_global.py`
+  (parte del fix BUG-075 que me corresponde — DeepSeek cubrió solo el parser).
+  Implementado + probado (vacío→3, sin tabla→3, inexistente→0, control→0).
+  **Verificación final delegada a otro agente** (regla T-101).
