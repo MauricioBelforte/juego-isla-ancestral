@@ -141,6 +141,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-059 | M126 + M128: **~33 citas colgantes** a `03-Diseno.md` §1.X–§3.9 que **no existen** (vestigio de los sellos ✅ fabricados por agnes-2.5-flash). M128: ~15 ítems con diseño **inexistente** + contradicción app icon 512 vs 1024 | M126 / M128 | 🟡 Menor | [?] Delegado — dueño M126/M128. Citas corregidas con notas de re-referencia por atria-dawn (Log 1048); estado de ítems no cambia | atria-dawn | 2026-09-19 |
 | BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
 | BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
+| BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [?] Abierto — medido y documentado (Log 1109); **no se parchea `logger.gd`** (rompería el crash-proof). Recomendación: gate de consola por nivel o `print` acotado + el modo «escribir sin `flush`» que el propio logger ya soporta | DeepSeek-V4.1-Flash | 2026-09-19 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -151,6 +152,78 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+
+### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
+
+- **Fecha de reporte:** 2026-09-19 22:50
+- **Módulo(s) afectado(s):** M103 Logging (`game/isla-ancestral/scripts/logging/logger.gd`, hot path
+  `_log()` línea 117) y su documentación `DOCUMENTACION/103-Logging/plan-actual/03-Diseno.md` (§3 y
+  §10 Regla 5). Escala a **M61** (Rendimiento) y **M110** (Debug Menu / consola in-game).
+- **Severidad:** 🟠 Mayor (rendimiento + contradicción de diseño)
+- **Detectado por:** DeepSeek-V4.1-Flash / WorkBuddy — suite nueva
+  `scripts/logging/test_m103_frame_budget.gd`, creada en la iter. 2 para cerrar por **medición** el
+  ítem L199 del checklist («Definir impacto máximo en frame budget < 0,5 %»). Log 1109.
+
+#### Qué se midió (medición propia, no cita)
+
+`RONDAS := 5` intercaladas, `ITERACIONES := 200` por variante, **mínimo por variante** (trampa 78: un
+benchmark de una sola pasada y en orden fijo miente). Godot 4.7.2 headless, salida a **tubería**:
+
+```
+-- presupuesto: 0.50% de 16.67 ms (60 FPS) = 83.35 us por frame
+     gate is_level_enabled ....... 0.140 us
+     llamada FILTRADA ............ 1.110 us   (caben 75 por frame en el 0.5%)
+     solo disco (store+flush) .... 4.925 us
+     llamada que ESCRIBE (total).. 512.310 us   (caben 0 por frame en el 0.5%)
+-- ATRIBUCION del coste de escribir: disco=1%  resto(consola+formato)=99%
+```
+
+Sonda aislada de atribución (`N := 50`, escritura a **archivo** para no medir la tubería):
+`print()` **430,8 µs (86 %)** · `FileAccess` + `flush` **11,4 µs (2 %)** · sin `flush` **1,4 µs**.
+
+#### Las dos consecuencias
+
+1. **Una llamada que escribe no cabe en el frame**: ~512 µs contra los **83,35 µs** del 0,5 %. Lo que
+   mantiene el coste fuera del frame es el **gate por nivel** (`is_level_enabled()`, 0,14 µs): una
+   llamada **filtrada** cuesta ~1,1 µs y caben ~75 por frame. Es decir, **el coste no está en el
+   disco sino en la consola**, y por eso el «buffer de escritura» que pedía el diseño (§10 Regla 5)
+   **no habría cambiado nada** — de ahí que se cierre el ítem como innecesario.
+2. **El diseño se contradice a sí mismo**: §3 pide **a la vez** «Logger escribe a consola (`print`)»
+   **y** «< 0,5 % de frame budget»; §10 Regla 5 pide «buffer de escritura» + «flush periódico (cada
+   1 s o 100 líneas)». Bajo una tubería (`|`) un `print()` cuesta **~35× más** que a un archivo
+   (~430 µs vs ~15 µs), de modo que **ambas afirmaciones no pueden ser ciertas simultáneamente**
+   cuando la salida está redirigida. La implementación real hace lo contrario de la Regla 5 (flush
+   **por línea**, deliberado, por crash-proof) y su coste medido es el **1 %** del coste de escribir.
+
+#### Por qué NO se parchea `logger.gd`
+
+El hallazgo es de **calibración y de diseño**, no un defecto funcional. Tocar el hot path alteraría
+el contrato **crash-proof** (las líneas tienen que estar en disco al momento; es lo que necesitan el
+QA por logs y el volcado pre-crash de M122) y podría romper las 4 suites y los consumidores. La
+decisión es de **M61/M110**.
+
+#### Recomendación (para M61/M110)
+
+- **Gate de consola por nivel**: no `print`-ear en release para niveles por debajo de WARNING, o
+  `print` acotado (p. ej. sólo las últimas N líneas por frame). Ya existe el precedente: la
+  atribución demuestra que la consola es el 99 % del coste.
+- **Modo «escribir sin `flush`»**: el propio `logger.gd` ya lo soporta (medido: 1,4 µs frente a
+  4,9 µs con `flush`). Suficiente cuando no se necesita crash-proof línea a línea.
+- **No añadir el buffer de 100 líneas**: la medición lo descarta como solución (ataca el 1 %, no el
+  99 %).
+
+#### Referencias cruzadas
+
+`game/isla-ancestral/scripts/logging/test_m103_frame_budget.gd` (9 checks) ·
+`game/isla-ancestral/scripts/logging/logger.gd` (`_log()`) ·
+`DOCUMENTACION/103-Logging/plan-actual/04-Codigo.md` §7 ·
+`DOCUMENTACION/103-Logging/plan-actual/07-Resultados-Testings.md` ·
+`Logs/1109-…` · `DOCUMENTACION/103-Logging/plan-actual/05-Checklist.md` (ítems L135/L136/L199/L227).
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-19
 
 ### BUG-015 — Signals conectados sin disconnect en _exit_tree (memory leak potencial)
 

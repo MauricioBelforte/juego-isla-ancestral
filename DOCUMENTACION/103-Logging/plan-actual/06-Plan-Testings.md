@@ -5,6 +5,13 @@
 
 > **Iter. 1 (2026-09-15, Log 918).** Creado al reclamar el módulo (§21.4.7). Antes **no existía**
 > (y `04-Codigo.md` afirmaba, incorrectamente, que «06-Plan-Testings.md NO aplica hoy»).
+>
+> **Iter. 2 (2026-09-19, Log 1109).** Auditoría con el patrón del **Log 1094** (suites muertas: un
+> `SCRIPT ERROR` aborta la función y sus checks nunca fallan). Resultado: **no había suite muerta**,
+> pero sí **2 defectos reales** — `test_logging_m103.gd` publicaba «14 checks» con **11
+> inalcanzables** (trampa 46) y `test_logger.gd` no limpiaba su export. Se **endurecen las 3 suites**
+> (guardián de 3 capas) y se añade **`test_m103_frame_budget.gd`**, que cierra el ítem L199 del
+> checklist **por medición**, no por afirmación.
 
 ## 1. Objetivo y alcance
 
@@ -33,9 +40,16 @@ Suites del módulo:
 
 | Suite | Checks | Cobertura | Guardián |
 |---|---|---|---|
-| `test_logger.gd` (ox-alpha) | 14 | niveles, sanitización, export, rotación, persistencia | ❌ no |
-| `test_logging_m103.gd` (deepseek-v4-flash/Kilo) | 14 | **sólo presencia de API** + una lectura de contenido | ❌ no |
+| `test_logger.gd` (ox-alpha) | 14 | niveles, sanitización, export, rotación, persistencia | ✅ iter. 2 (3 capas) |
+| `test_logging_m103.gd` (deepseek-v4-flash/Kilo) | 25 | API + **`export_last_lines` y los 8 métodos de rotación** (iter. 2: antes tenía **11 checks inalcanzables**) | ✅ iter. 2 (3 capas) |
 | `test_logging_m103_iter1.gd` (**iter. 1**) | 131 | ver §4 | ✅ `_fin()` + `_summary()` + watchdog |
+| `test_m103_frame_budget.gd` (**iter. 2, nuevo**) | 9 | impacto en el frame budget + **atribución** del coste (consola vs disco) | ✅ iter. 2 (3 capas) |
+
+**Guardián de 3 capas (iter. 2, patrón M62/M60):** (1) cada bloque cierra con `_fin("X. …")` y
+`_summary()` **nombra** los bloques que no terminaron; (2) **piso `CHECKS_MINIMOS` medido en verde**
+—no estimado—: 14 / 25 / 131 / 9; (3) `_summary()` en su **propio `call_deferred`** (trampa 61: si
+vive al final de `_run()`, un aborto se lleva el `quit()` y el `SceneTree` **cuelga para siempre**).
+El guardián se **probó en rojo por inyección** en las 4 suites (ver `07-Resultados-Testings.md` §5).
 
 `--check-only --script` se usa además para detectar errores de parseo sin ejecutar.
 
@@ -51,6 +65,10 @@ En GDScript un `SCRIPT ERROR` **aborta la función en silencio**: la suite segui
    `!! WATCHDOG` y sale con código 1.
 4. El desglose por bloque se **mide** (se imprime) y su suma debe cuadrar con el total del `Resumen`.
 5. El guardián se **prueba por inyección** (ver `07-Resultados-Testings.md` §4): no basta con que exista.
+6. **Piso `CHECKS_MINIMOS`** (iter. 2): si el total de checks ejecutados baja del piso **medido en
+   verde**, la suite falla. Es la defensa contra el aborto que se come checks sin dejar ningún
+   `[FALLO]` (trampa 85). Pisos: `test_logger` **14** · `test_logging_m103` **25** · `iter1` **131** ·
+   `frame_budget` **9**.
 
 ## 4. Bloques de la suite iter. 1
 
@@ -74,6 +92,8 @@ En GDScript un `SCRIPT ERROR` **aborta la función en silencio**: la suite segui
 - Los **10 bloques** cierran (sin abortos silenciosos).
 - La suma del desglose por bloque **cuadra** con el total del `Resumen`.
 - El guardián **falla** cuando se inyecta un aborto (probado, no supuesto).
+- El total **no baja del piso** `CHECKS_MINIMOS` (iter. 2): un aborto que se coma checks sin dejar
+  `[FALLO]` también debe tumbar la suite.
 
 ## 6. Aislamiento
 
@@ -87,6 +107,10 @@ estado de configuración del autoload se restaura antes de terminar (nivel, `jso
 - **Consola in-game, filtros de UI, búsqueda de texto y coloreado** → M110. La suite prueba el *servicio*,
   no la UI.
 - **Volcado pre-crash real** → M122 (el módulo consumidor no existe).
-- **Impacto en frame budget** → M61 (no medido; el diseño evita allocaciones en hot path, pero eso no es una medición).
+- **Impacto en frame budget** → ✅ **medido en iter. 2** (`test_m103_frame_budget.gd`): llamada
+  filtrada ~1,1 µs (caben ~75/frame) · llamada que **escribe** ~512 µs (caben **0**/frame) · **99 %**
+  del coste es consola+formato. El hallazgo y la contradicción de diseño quedan en **BUG-067**. Lo que
+  **sigue** sin cubrir es la calibración final en un **build real** (M61): aquí se mide en headless y
+  con la salida a **tubería**, que no es el entorno de producción.
 - **Rotación con archivos > 10 MB reales** → la suite baja el umbral a ~209 bytes para forzarla; el camino
   es el mismo, pero no se ejercita el volumen real.

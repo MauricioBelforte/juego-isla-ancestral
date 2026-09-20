@@ -5,6 +5,10 @@
 
 > **Iter. 1 (2026-09-15, Log 918).** Todas las cifras de este documento están **medidas** (salida real
 > de Godot), no copiadas de otro documento.
+>
+> **Iter. 2 (2026-09-19, Log 1109).** Ver §9 al final: auditoría de suites muertas, endurecimiento de
+> las 3 suites, **11 checks inalcanzables resucitados** y la **medición del frame budget** que cierra
+> el ítem L199 (hallazgo → BUG-067).
 
 ## 1. Entorno
 
@@ -129,3 +133,109 @@ done
 ```
 
 Esperado: tres veces `=== Resumen M103 iter. 1: 131 checks, 0 fallos ===` y ningún `SCRIPT ERROR`.
+
+---
+
+## 9. Iter. 2 (2026-09-19, Log 1109) — auditoría, endurecimiento y medición del frame budget
+
+### 9.1 Resultado global (4 suites × 3 corridas)
+
+| Suite | Checks | Bloques | Fallos | `SCRIPT ERROR` | Exit | Determinista ×3 |
+|---|---|---|---|---|---|---|
+| `test_logger.gd` | 14 | A2 B4 C4 D2 E1 F1 | 0 | 0 | 0 | ✅ 14/14/14 |
+| `test_logging_m103.gd` | 25 | A10 B4 C3 D8 | 0 | 0 | 0 | ✅ 25/25/25 |
+| `test_logging_m103_iter1.gd` | 131 | A33 B10 C5 D9 E10 F12 G19 H11 I6 J15 | 0 | 0 | 0 | ✅ 131/131/131 |
+| `test_m103_frame_budget.gd` (**nuevo**) | 9 | A3 B4 C2 | 0 | 0 | 0 | ✅ 9/9/9 |
+| **Total** | **179** | | **0** | **0** | **0** | |
+
+### 9.2 Los 2 defectos reales que encontró la auditoría
+
+| # | Defecto | Cómo se detectó | Impacto |
+|---|---|---|---|
+| 1 | **`test_logging_m103.gd` tenía 11 checks INALCANZABLES** (trampa 46): `_test_export()` y `_test_rotation()` estaban **definidos y nunca llamados** desde `_run()` | lectura del flujo de llamadas: la suite publicaba «14 checks» pero **jamás** ejercitaba `export_last_lines()` ni los 8 métodos de rotación | La suite daba una **cobertura falsa**: prometía export y rotación que nunca corrían. Ahora los llama → **25 checks** |
+| 2 | **`test_logger.gd` no limpiaba su archivo exportado**: reconstruía el nombre del export a partir del reloj **actual**, así que `_limpiar()` borraba **otro** nombre y el temporal quedaba en disco | revisión del bloque de limpieza (trampa de estado residual) | Basura en `user://` entre corridas; podía dar verde/rojo según el segundo exacto |
+
+**Las 3 suites del módulo no tenían** (a) `_summary()` diferido —trampa 61: si vive al final de
+`_run()`, un aborto se lleva el `quit()` y el `SceneTree` **cuelga**— ni (b) **piso de checks**. Las
+dos cosas se añadieron.
+
+### 9.3 Guardián probado EN ROJO por inyección (4 suites)
+
+Aborto inyectado dentro de un helper, vía un intermedio sin tipo (para que el `SCRIPT ERROR` **no**
+detenga `_run()` sino que se coma los checks del bloque):
+
+| Suite | Antes | Tras la inyección | Bloques nombrados | Exit |
+|---|---|---|---|---|
+| `test_logging_m103.gd` | 25 | **11** | `["B","C","D"]` | **1** (sin colgar) |
+| `test_logger.gd` | 14 | **7** | `["C","D","E","F"]` | **1** (sin colgar) |
+| `test_logging_m103_iter1.gd` | 131 | **126** | `["C"]` | **1** (sin colgar) |
+| `test_m103_frame_budget.gd` | 9 | **4** (2 fallos) | `["B","C"]` | **1** (sin colgar) |
+
+Puntos de inyección (documentados, para poder repetirlo):
+
+| Suite | Dónde se inyectó |
+|---|---|
+| `test_logging_m103.gd` | tras cerrar el bloque **A** (sólo A completo) |
+| `test_logger.gd` | tras cerrar el bloque **B** (A y B completos) |
+| `test_logging_m103_iter1.gd` | **dentro del helper** del bloque C (C no cierra; D..J sí) |
+| `test_m103_frame_budget.gd` | al inicio del bloque **B** (`_run()` aborta: no cierran B ni C) |
+
+Las sondas eran **copias temporales** (`_tmp_probe_*.gd`) y se borraron; las suites volvieron a su
+total ×3. En **las 4** se dispararon **las dos** defensas a la vez —el guardián de bloques *y* el piso
+(`solo N checks ejecutados (minimo M)`)— y las 4 salieron con **exit 1 sin colgarse** (trampa 61
+cubierta: el `_summary()` diferido imprime aunque `_run()` aborte).
+
+### 9.4 Medición del frame budget (cierra el ítem L199)
+
+Metodología: `RONDAS := 5` **intercaladas** (no 5 corridas seguidas del mismo orden) y **mínimo por
+variante**; trampa 78 — un benchmark de una sola pasada en orden fijo miente. `ITERACIONES := 200`.
+
+```
+-- presupuesto: 0.50% de 16.67 ms (60 FPS) = 83.35 us por frame
+     gate is_level_enabled ....... 0.140 us
+     llamada FILTRADA ............ 1.110 us   (caben 75 por frame en el 0.5%)
+     solo disco (store+flush) .... 4.925 us
+     llamada que ESCRIBE (total).. 512.310 us   (caben 0 por frame en el 0.5%)
+-- ATRIBUCION del coste de escribir: disco=1%  resto(consola+formato)=99%
+```
+
+Sonda aislada de atribución (`N := 50`, salida a **archivo** para no medir la tubería): `print()`
+**430,8 µs (86 %)** · `FileAccess` + `flush` **11,4 µs (2 %)** · sin `flush` **1,4 µs**.
+
+**Lectura honesta:**
+
+- Lo que mantiene el coste fuera del frame es el **gate por nivel** (0,14 µs). Una llamada **filtrada**
+  cabe ~75 veces por frame; una que **escribe**, **0**.
+- **El buffer de escritura que pedía el diseño no habría servido de nada**: ataca el **1 %** (disco) y
+  el cuello de botella es el **99 %** (consola+formato). Por eso el ítem se cierra como innecesario y
+  no como «implementado».
+- **El diseño se contradice** (`03-Diseno.md` §3 pide `print` a consola **y** < 0,5 %; §10 Regla 5 pide
+  buffer+flush periódico mientras el código hace flush por línea): bajo tubería un `print` cuesta
+  ~35× más que a archivo. Registrado como **BUG-067**.
+
+### 9.5 Regresión (ítem L240, cerrado)
+
+| Suite | Resultado |
+|---|---|
+| `scripts/economia/test_m38_economia_smoke.gd` | exit 0 ✅ |
+| `scripts/economia/test_barter.gd` | exit 0 ✅ |
+| `scripts/shops/test_tiendas.gd` | exit 0 ✅ |
+| `scripts/time/test_consumidores_tiempo.gd` | exit 0 ✅ |
+| `scripts/clock/test_reloj_hud.gd` | exit 0 ✅ |
+| `scripts/shops/test_loop_economico.gd` | **15 checks / 0 fallos** ✅ (antes daba **14/1**: el dueño de M38 lo arregló) |
+
+**6 de 6**, así que el ítem N20 pasa de `[?]` a `[x]`.
+
+### 9.6 Reproducir (iter. 2)
+
+```bash
+GODOT="D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe"
+for S in test_logger test_logging_m103 test_logging_m103_iter1 test_m103_frame_budget; do
+  for i in 1 2 3; do
+    "$GODOT" --headless --path game/isla-ancestral \
+      --script "res://scripts/logging/$S.gd" 2>&1 | grep -E "Resumen|SCRIPT ERROR"
+  done
+done
+```
+
+Esperado: 14 · 25 · 131 · 9 checks, **0 fallos**, ningún `SCRIPT ERROR`, exit 0, tres veces cada uno.

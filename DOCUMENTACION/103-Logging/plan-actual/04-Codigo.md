@@ -59,6 +59,44 @@
 > `IMPLEMENTACI脫N` eliminado. Los 4 ítems de **historial** llevaban checkbox → viñetas planas
 > (si no, `verificar_checklist.py` los cuenta como ítems).
 
+## 0-ter. Estado tras la auditoría iter. 2 (2026-09-19 — DeepSeek-V4.1-Flash / WorkBuddy, Log 1109)
+
+> **Motivo:** M103 se escribió **antes** de la lección del **Log 1094** (una suite puede estar
+> **MUERTA y verde**: un `SCRIPT ERROR` aborta la función, sus checks nunca corren y por eso nunca
+> fallan). Se audita M103 con ese patrón. Resultado: **no había suite muerta**, pero sí **dos
+> defectos reales** y **tres suites sin guardián completo**.
+>
+> **Defectos encontrados y corregidos (iter. 2):**
+> 1. **`test_logging_m103.gd` tenía 11 checks INALCANZABLES** (trampa 46): `_test_export()` y
+>    `_test_rotation()` estaban definidos pero **nunca se llamaban** desde `_run()`. La suite
+>    publicaba «14 checks» sin ejercitar **jamás** `export_last_lines()` ni los 8 métodos de
+>    rotación. Ahora los llama: **25 checks** (bloques A10 · B4 · C3 · D8).
+> 2. **`test_logger.gd` no limpiaba lo que escribía**: reconstruía el nombre del archivo exportado a
+>    partir del reloj **actual**, así que el temporal quedaba en disco (el `_limpiar` borraba otro
+>    nombre). Ahora borra el `exp_path` real que devolvió la exportación.
+>
+> **Endurecimiento (3 capas) en las 3 suites del módulo** — patrón de M62/M60:
+> - **capa 1:** cada bloque cierra con `_fin("X. …")`, y `_summary()` **nombra** los bloques que no
+>   terminaron (no basta con «0 fallos»);
+> - **capa 2:** **piso `CHECKS_MINIMOS` medido en verde** (no estimado): `test_logger` 14 ·
+>   `test_logging_m103` 25 · `iter1` 131;
+> - **capa 3:** `_summary()` en su **propio `call_deferred`** (trampa 61: si vive al final de
+>   `_run()`, un aborto se lleva también el `quit()` y el `SceneTree` **cuelga para siempre**).
+>
+> **Guardián probado EN ROJO por inyección** (aborto dentro de un helper, vía intermedio sin tipo):
+> `test_logging_m103` 25→11 nombrando `["B","C","D"]` · `test_logger` 14→7 nombrando
+> `["C","D","E","F"]` · `iter1` 131→126 nombrando `["C"]`. Las tres **salieron con código 1 sin
+> colgarse** y las sondas temporales se borraron.
+>
+> **Suite nueva:** `test_m103_frame_budget.gd` → **9 checks / 0 fallos**, cierra el ítem **L199**
+> («impacto máximo en frame budget < 0,5 %») **por medición**, no por afirmación. Ver §7 y BUG-067.
+>
+> **Totales medidos (iter. 2, 4 suites):** `14 + 25 + 131 + 9 = 179 checks · 0 fallos` · **0
+> `SCRIPT ERROR`** propios · exit 0. Ver `07-Resultados-Testings.md`.
+>
+> **Checklist:** **173 `[x]` · 6 `[?]` · 0 `[ ]`** (antes 167/12/0). Los 6 `[?]` que quedan son
+> **dependencias externas reales** (M102/M110/M122), no huecos del módulo. Matriz completa en §7.
+
 ## 1. Carácter del Componente
 
 Módulo de **infraestructura técnica** que implementa el servicio de logging transversal. Implementable inmediatamente (depende solo de M04 Godot y M07 Arquitectura). Es crítico para debugging y bug tracking (M102).
@@ -172,9 +210,10 @@ var _file: FileAccess = null
 
 | Suite | Checks | Estado |
 |---|---|---|
-| `test_logger.gd` (ox-alpha) | 14 | ✅ 14/0 |
-| `test_logging_m103.gd` (deepseek-v4-flash/Kilo) | 14 | ✅ 14/0 (solo presencia de API) |
+| `test_logger.gd` (ox-alpha) | 14 | ✅ 14/0 — iter. 2: guardián de 3 capas + limpieza del export |
+| `test_logging_m103.gd` (deepseek-v4-flash/Kilo) | 25 | ✅ 25/0 — iter. 2: **11 checks inalcanzables resucitados** (trampa 46) |
 | `test_logging_m103_iter1.gd` (iter. 1) | 131 | ✅ **131/0 ×3**, 0 `SCRIPT ERROR`, guardián probado por inyección |
+| `test_m103_frame_budget.gd` (iter. 2, **nuevo**) | 9 | ✅ 9/0 — cierra el ítem L199 **por medición** |
 
 ## 5. Pendientes del módulo (con dueño)
 
@@ -188,9 +227,9 @@ var _file: FileAccess = null
 | Integración con Debug Menu (consola in-game, filtros, búsqueda, scroll, coloreado) | ⏳ Pendiente | M110 (Debug Menu) |
 | Integración con Crash Reporting (logs pre-crash) | ⏳ Pendiente | M122 (Crash Reporting) |
 | `bug_{timestamp}.log` para issues | ⏳ No definido (solo existen `export_*` y `crash_*`) | M102 (Bug Tracking) |
-| Calibración de performance (impacto en frame budget < 0,5 %) | ⏳ Sin medir | M61 (Rendimiento) |
+| Calibración de performance (impacto en frame budget < 0,5 %) | ✅ **MEDIDO en iter. 2** (`test_m103_frame_budget.gd`, Log 1109): llamada filtrada **1,11 µs** (75/frame) · llamada que escribe **512 µs** (0/frame) · **99 %** del coste es consola+formato | M103 — **cierra el ítem L199**; el hallazgo se escala a M61/M110 vía BUG-067 |
 | `data/logging/logger_config.json` **huérfano** (ningún lector; contradice el `.tres`) | ⏳ Decidir: borrar o cablear | M103 (DeepSeek-V4.1-Flash) |
-| Buffer de escritura de 100 líneas (ítems G13/G14 y N7 del checklist) | ❌ Retirado por diseño (era código muerto) — la escritura es inmediata | M103 (revisable si M61 mide impacto) |
+| Buffer de escritura de 100 líneas (ítems G13/G14 y N7 del checklist) | ✅ **RESUELTO en iter. 2 por medición**: retirado (era código muerto) y ahora **medido innecesario** — el buffer **no** es el cuello de botella (disco+flush = 1 % del coste; 99 % = consola+formato). Ver BUG-067 | M103 (cerrado) |
 
 ## 6. Notas del Agente
 
@@ -243,6 +282,7 @@ var _file: FileAccess = null
 - Volcado de logs pre-crash automático (depende de M122 Crash Reporting).
 - Tests unitarios formalizados con GdUnit4 para el Logger (M112 ya hecho; se pueden agregar como suite adicional). Los 14 checks son un test headless custom, no parte de la suite GdUnit4.
 - Calibración de performance/frame budget exacta (M61 Rendimiento).
+  *(**Resuelto en iter. 2**, Log 1109: medido con `test_m103_frame_budget.gd`. Ver §0-ter y BUG-067.)*
 
 ### Hallazgo técnico importante
 - **Godot 4.7 tiene una clase nativa `Logger`** → usar `GameLogger` como nombre del autoload y `class_name`. El nombre de servicio en ServiceRegistry queda `"logger"` (interfaz, no clase).
@@ -251,3 +291,56 @@ var _file: FileAccess = null
 - Conectar M110 (Debug Menu) a la señal `line_emitted(level, category, line)` para la consola in-game.
 - Conectar M122 (Crash Reporting) a `GameLogger.flush()` + `LogExporter` para volcado pre-crash.
 - Unificar con `registro.gd` (M05) si el equipo quiere un solo punto de logging; actualmente conviven (`registro.gd` = utilidades estáticas ligeras, `GameLogger` = servicio completo con rotación/export).
+
+## 7. Auditoría iter. 2 — matriz de los 12 `[?]` del checklist
+
+> Regla de la casa: **no cerrar por inspección**. Cada `[?]` se cierra **sólo** si hay evidencia
+> ejecutable (suite/medición) o una **decisión documentada**; si depende de un módulo que no existe,
+> se deja `[?]` **con dueño**. La línea cita `05-Checklist.md`.
+>
+> **Veredicto: 6 cerrables · 6 delegados.** Totales nuevos: **173 `[x]` · 6 `[?]` · 0 `[ ]`**.
+
+| Ítem (`05-Checklist.md`) | Lín. | Veredicto | Evidencia |
+|---|---|---|---|
+| RF18: crash reporting (integración M122) | 46 | `[?]` → **M122** | El módulo consumidor **no existe**. Diseño en `03-Diseno.md` §8. No es un hueco de M103 |
+| Definir buffer de escritura (performance) | 135 | `[x]` **resuelto por medición** | Log 1109: el buffer **no** es el cuello de botella — disco+flush = **1 %** del coste; **99 %** = consola+formato. Decisión: sin buffer, gate por `is_level_enabled()` |
+| Definir flush periódico (100 líneas / 1 s) | 136 | `[x]` **resuelto por medición** | Log 1109: el flush **por línea** es deliberado (crash-proof) y su coste es **1 %** del coste de escribir. La rotación va por contador incremental `_bytes_written` |
+| Definir generación de `bug_{timestamp}.log` | 157 | `[?]` → **M102** | No existe: sólo `export_{timestamp}.log` (LogExporter) y `crash_{timestamp}.log` (diseño M122) |
+| Definir búsqueda de texto | 184 | `[?]` → **M110/M53** | No hay API de búsqueda en `logger.gd`; es una función de la consola in-game (UI), no del servicio |
+| Definir scroll en consola in-game | 187 | `[?]` → **M110** | No hay consola in-game propia; el consumidor es M110 (Debug Menu) |
+| Definir coloreado por nivel | 188 | `[?]` → **M110** | Verificado: `logging_config.gd` **no** define colores. El coloreado es de la UI (M110) |
+| Definir timestamp relativo («hace X s») | 189 | `[x]` **decisión documentada** | Formato **absoluto ISO 8601** deliberado (`03-Diseno.md` §9). El relativo exigiría un **delta por línea** (coste en el hot path) y sólo lo mostraría la consola de M110 |
+| Definir impacto máximo en frame budget (< 0,5 %) | 199 | `[x]` **MEDIDO** | **`test_m103_frame_budget.gd` (9 checks, Log 1109)**: llamada filtrada **1,11 µs** (caben 75/frame en el 0,5 %) · llamada que **escribe 512 µs** (caben **0**/frame) · atribución disco 1 % / consola+formato 99 %. Hallazgo escalado como **BUG-067** |
+| Criterios de aceptación cumplidos (5) | 212 | `[?]` → **M102** | **4 de 5** cumplidos. El nº4 (adjuntar logs a issues vía M102) depende de un módulo que no existe |
+| Implementar buffer + flush periódico (performance) | 227 | `[x]` **resuelto por medición** | Log 1109: **no se implementa** porque la medición demuestra que es innecesario (el coste está en la consola, no en el disco). Ver BUG-067 |
+| Regresión completa: 6 tests de economía/tiendas/tiempo | 240 | `[x]` **VERIFICADO 6/6** | Iter. 2: los **6** pasan con exit 0 (incluido `shops/test_loop_economico.gd`, que ya da **15 checks / 0 fallos** — el dueño de M38 lo arregló; antes daba 14/1). `scripts/economia/` y `scripts/shops/` limpios |
+
+### Hallazgo de rendimiento de iter. 2 (base de BUG-067)
+
+Medido con `RONDAS := 5` intercaladas y **mínimo por variante** (trampa 78: un benchmark de una sola
+pasada en orden fijo miente):
+
+```
+-- presupuesto: 0.50% de 16.67 ms (60 FPS) = 83.35 us por frame
+     gate is_level_enabled ....... 0.140 us
+     llamada FILTRADA ............ 1.110 us   (caben 75 por frame en el 0.5%)
+     solo disco (store+flush) .... 4.925 us
+     llamada que ESCRIBE (total).. 512.310 us   (caben 0 por frame en el 0.5%)
+-- ATRIBUCION del coste de escribir: disco=1%  resto(consola+formato)=99%
+```
+
+**Dos consecuencias que van más allá de M103:**
+
+1. **Una llamada que escribe NO cabe en el frame budget**: ~512 µs contra los **83,35 µs** del 0,5 %.
+   El **gate por nivel** (`is_level_enabled()`, 0,14 µs) es lo que mantiene el coste fuera del frame;
+   una llamada **filtrada** cuesta ~1,1 µs y caben ~75 por frame.
+2. **Inconsistencia de diseño:** `03-Diseno.md` §10 Regla 5 pide «buffer de escritura» + «flush
+   periódico», y §3 pide **a la vez** «escribe a consola (`print`)» y «< 0,5 % frame budget». Bajo una
+   tubería (`|`) un `print()` cuesta ~35× más que a un archivo (~430 µs vs ~15 µs), así que **ambas
+   cosas no pueden ser ciertas a la vez** cuando la salida está redirigida. Queda registrado en
+   **BUG-067** con recomendación: gate de consola por nivel (o `print` acotado) + el modo
+   «escribir sin `flush`» que el propio `logger.gd` ya soporta.
+
+> ⚠️ **No se toca `logger.gd` en esta iteración**: el hallazgo es de **diseño/calibración**, y
+> cambiarlo alteraría el contrato de crash-proof (flush por línea) que el QA por logs necesita. Se
+> documenta y se escala; la decisión es de M61/M110.

@@ -33,6 +33,11 @@ extends SceneTree
 const MODULO := "M103 iter. 1"
 const TIMEOUT_FRAMES := 900
 const BLOQUES_ESPERADOS: Array[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+# Piso MEDIDO en verde (iter. 2, 2026-09-20): la corrida imprime exactamente
+# este numero. Es la 3ª capa del guardian: caza el aborto que ocurre DENTRO de
+# un helper (los marcadores `_fin` por si solos no lo ven, porque el aborto de
+# una funcion auxiliar devuelve el control al llamador).
+const CHECKS_MINIMOS := 131
 
 # Valores esperados de los enums (se contrastan contra los del autoload en A).
 const LV_DEBUG := 0
@@ -65,6 +70,12 @@ var _capturadas: Array[String] = []
 
 func _init() -> void:
 	call_deferred("_run")
+	# iter. 2: el resumen va DIFERIDO y APARTE. Antes se llamaba inline al final
+	# de `_run()`: si un SCRIPT ERROR abortaba `_run()`, no se imprimía resumen
+	# NI se llamaba a `quit()` → el SceneTree cuelga para siempre y el stdout se
+	# pierde por buffering (trampas 28/61). En la cola diferida, `_summary()`
+	# corre igual y NOMBRA los bloques que faltaron.
+	call_deferred("_summary")
 
 
 func _process(_delta: float) -> bool:
@@ -176,7 +187,7 @@ func _run() -> void:
 	_bloque_j_configuracion()
 
 	_limpiar_tmp()
-	_summary()
+	# OJO: `_summary()` NO se llama aca. Va diferido desde `_init` (iter. 2).
 
 
 func _bloque_a_autoload() -> void:
@@ -600,6 +611,10 @@ func _summary() -> void:
 	var detalle: String = "" if faltantes.is_empty() else " — bloques que no terminaron: %s" % str(faltantes)
 	_check("los %d bloques se completaron (sin abortos silenciosos)%s" % [BLOQUES_ESPERADOS.size(), detalle],
 		faltantes.is_empty())
+	# 3ª capa: piso de checks contados (caza el aborto dentro de un helper).
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("  [FALLO] solo %d checks ejecutados (minimo %d)" % [_checks, CHECKS_MINIMOS])
 	_terminado = true
 	print("-- checks por bloque: %s" % str(_checks_por_bloque))
 	print("=== Resumen %s: %d checks, %d fallos ===" % [MODULO, _checks, _fallos])

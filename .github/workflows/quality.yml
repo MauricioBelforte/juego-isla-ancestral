@@ -243,6 +243,22 @@ jobs:
           # guarda anti-falso-verde probada por INYECCION (un aborto silencioso en
           # un bloque hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
           godot --headless --script scripts/logging/test_logging_m103_iter1.gd 2>&1 || FAIL=1
+          # M103 Logging iter. 2 (Log 1109, DeepSeek-V4.1-Flash). El modulo NO
+          # tenia gate para 2 de sus 3 suites, y una de ellas publicaba "14
+          # checks" con 11 INALCANZABLES (trampa 46: _test_export/_test_rotation
+          # definidos y nunca llamados -> no ejercitaban export_last_lines ni
+          # la rotacion). Ahora las 3 suites llevan guardian de 3 capas: bloque
+          # marcado con _fin(), piso de checks MEDIDO (no copiado: 14 / 25 / 131)
+          # y _summary() en su propio call_deferred, asi que un aborto silencioso
+          # se detecta aunque no quede ningun [FAIL]. 14 + 25 + 131 = 170 checks.
+          # Gate duro: || FAIL=1.
+          godot --headless --script scripts/logging/test_logger.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/logging/test_logging_m103.gd 2>&1 || FAIL=1
+          # Cierra el item L199 del checklist por MEDICION (no por afirmacion):
+          # mide el impacto en el frame budget y ATRIBUYE el coste (99% consola
+          # vs 1% disco). Hallazgo -> BUG-067. 9 checks, 0 fallos, exit 0.
+          # Gate duro: || FAIL=1.
+          godot --headless --script scripts/logging/test_m103_frame_budget.gd 2>&1 || FAIL=1
           # M105 Telemetria de gameplay. iter. 7: las 3 metricas
           # `time_to_first_*` que faltaban (house/puzzle/seal — el diseno pide 5
           # y solo existian 2 + session_duration) + fix de `establecer_opt_in`

@@ -9,7 +9,14 @@
 >
 > **Módulo RECLAMADO el 2026-09-15 (§21.4.7, Log 918)** tras la retirada de ox-alpha (Cline) del proyecto. Estaba en `0/183` por la reversión de la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real).
 >
-> **iter. 1 (2026-09-15, Log 918):** re-marcado **selectivo** con evidencia ejecutable. Suite nueva `scripts/logging/test_logging_m103_iter1.gd` → **131 checks / 0 fallos ×3**, 0 `SCRIPT ERROR`, guardián anti-falso-verde (10 bloques + watchdog) probado por inyección. Resultado: **167 `[x]` · 12 `[?]` · 0 `[ ]`**.
+> **iter. 1 (2026-09-15, Log 918):** re-marcado **selectivo** con evidencia ejecutable. Suite nueva `scripts/logging/test_logging_m103_iter1.gd` → **131 checks / 0 fallos ×3**, 0 `SCRIPT ERROR`, guardián anti-falso-verde (10 bloques + watchdog) probado por inyección. Resultado: **167 `[x]` · 12 `[?]` · 0 `[ ]`** (iter. 1).
+>
+> **iter. 2 (2026-09-19, Log 1109):** auditoría de suites muertas. **2 defectos reales**
+> (`test_logging_m103.gd` con **11 checks inalcanzables**; `test_logger.gd` sin limpiar su
+> export) + guardián de 3 capas en las 3 suites + `test_m103_frame_budget.gd` (**nuevo**,
+> 9 checks) que **cierra el frame budget por medición**. **179 checks / 0 fallos ×3.**
+> Cerrados **6** `[?]`: T-093, T-094, T-135, T-142, T-165, T-178. Resultado:
+> **173 `[x]` · 6 `[?]` · 0 `[ ]`**. Hallazgo de rendimiento → **BUG-067**.
 
 > **RECLAMADO de nuevo el 2026-09-20 (reasignación desde kimi-k3):** M103 estuvo 🔵 a
 > nombre de kimi-k3 desde el 2026-09-19 (Log 1070) pero K3 no tocó el plan-actual (stale
@@ -25,7 +32,8 @@
 >
 > **7 fixes reales:** `log_buffer` eliminado (código muerto) · rotación disparada desde `_log()` con contador `_bytes_written` · JSON con contexto era INVÁLIDO (faltaba coma ante `context`) · `export_by_date(hours)` era un no-op (regex exigía espacio, Godot emite `T`; y comparaba en días) · `export_by_level`/`export_by_category` ahora entienden JSON · `_json_escape` escapa CR/TAB · `LogRotator.get_size()` devolvía caracteres, no bytes.
 >
-> **Abiertos `[?]`:** M53/M110 (consola in-game, búsqueda, coloreado) · M61 (frame budget) · M122 (crash pre-crash) · M102 (`bug_{timestamp}.log`) · buffer de escritura (retirado por diseño).
+> **Abiertos `[?]` (6, todos externos):** M110/M53 (consola in-game, búsqueda, coloreado) · M122 (crash pre-crash, RF18) · M102 (`bug_{timestamp}.log` + criterio de aceptación nº4).
+> **Cerrados en iter. 2 por medición/decisión:** T-093/T-094/T-165 (buffer+flush: medidos innecesarios — el cuello es la consola, no el disco) · T-135 (timestamp absoluto por decisión) · T-142 (frame budget **medido**) · T-178 (regresión **6/6**).
 
 ## Tareas
 
@@ -121,8 +129,8 @@
 - [x] T-090 Definir método get_log_file_path() [S]
 - [x] T-091 Definir verificación de nivel antes de loguear [S]
 - [x] T-092 Definir verificación de categoría antes de loguear [S]
-- [?] T-093 Definir buffer de escritura (performance) [S]
-- [?] T-094 Definir flush periódico (cada 100 líneas o 1s) [S]
+- [x] T-093 Definir buffer de escritura (performance) [S]
+- [x] T-094 Definir flush periódico (cada 100 líneas o 1s) [S]
 - [x] T-095 Crear logging_config.tres [S]
 - [x] T-096 Definir campo level_min [S]
 - [x] T-097 Definir campo categories_enabled [S]
@@ -163,14 +171,14 @@
 - [x] T-132 Definir visualización en archivo [S]
 - [?] T-133 Definir scroll en consola in-game [S]
 - [?] T-134 Definir coloreado por nivel (INFO=blanco, ERROR=rojo) [S]
-- [?] T-135 Definir timestamp relativo (hace X segundos) [S]
+- [x] T-135 Definir timestamp relativo (hace X segundos) [S]
 - [x] T-136 Regla 1: Sin logs en hot paths [S]
 - [x] T-137 Regla 2: Contexto útil en logs [S]
 - [x] T-138 Regla 3: Niveles apropiados [S]
 - [x] T-139 Regla 4: Sin información sensible [S]
 - [x] T-140 Regla 5: Performance (buffer, flush periódico) [S]
 - [x] T-141 Definir condicional is_level_enabled() para mensajes complejos [S]
-- [?] T-142 Definir impacto máximo en frame budget (< 0.5%%) [S]
+- [x] T-142 Definir impacto máximo en frame budget (< 0.5%%) [S]
 - [x] T-143 Documentar buenas prácticas de logging [S]
 - [x] T-144 Documentar anti-patterns (logs en loops, strings concatenados) [S]
 - [x] T-145 Definir guía para desarrolladores [S]
@@ -193,7 +201,7 @@
 - [x] T-162 Implementar enums Level (DEBUG..CRITICAL) y Category (BOOT..CRASH) [S]
 - [x] T-163 Implementar formato de línea humano [timestamp] [NIVEL] [CAT] mensaje + contexto opcional [M]
 - [x] T-164 Implementar formato JSON opcional (json_output) para herramientas [M]
-- [?] T-165 Implementar buffer + flush periódico (cada 100 líneas) para performance [M]
+- [x] T-165 Implementar buffer + flush periódico (cada 100 líneas) para performance [M]
 - [x] T-166 Implementar export_all/export_last_lines/export_by_level/export_by_category/export_by_date [M]
 - [x] T-167 Crear scripts/logging/log_rotator.gd (LogRotator): rotación n→n+1, elimina el más antiguo [M]
 - [x] T-168 Implementar compresión gzip de rotados (compress_old_logs) [M]
@@ -206,5 +214,5 @@
 - [x] T-175 Registrar servicio "logger" en ServiceRegistry (M07) desde _ready [S]
 - [x] T-176 Emitir señal line_emitted(level, category, line) para consola in-game (M110 futuro) [M]
 - [x] T-177 Test headless test_logger.gd: 14/14 checks OK (niveles, sanitización, exportación, rotación, persistencia) [M]
-- [?] T-178 Regresión completa: 6 tests de economía/tiendas/tiempo con 0 fallos tras el autoload (Godot 4.7.2) [S]
+- [x] T-178 Regresión completa: 6 tests de economía/tiendas/tiempo con 0 fallos tras el autoload (Godot 4.7.2) [S]
 - [x] T-179 Documentar descubrimiento: Godot 4.7 reserva "Logger" → usar GameLogger (ver plan-actual/04-Codigo.md) [S]
