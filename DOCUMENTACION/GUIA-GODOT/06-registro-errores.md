@@ -1,8 +1,8 @@
-# Registro de Errores — E-11 a E-19
+# Registro de Errores — E-11 a E-22
 
-> **Modelo:** MiMo V2.5
-> **Plataforma:** OpenCode
-> **Fecha:** 2026-09-09
+> **Modelo:** atria-dawn (Atria Dawn Preview) (último modificador)
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-09-20 (Sección T-98..T-100 agregada; E-22: 2026-09-19)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §8
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -232,6 +232,221 @@ tipo no-Nodo, tipar la variable como `Variant` primero.
 
 **Fecha:** 2026-09-18 01:00 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
 (Log 983; también ver `11-BUGS.md` BUG-048)
+
+---
+
+## E-21: `.get(clave, default)` sobre `Resource`/`Object` — Parse Error de "too many arguments"
+
+**Fecha:** 2026-09-19 00:30 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+**Bug registrado:** BUG-052 (11-BUGS.md), Log 1044. **Severidad:** 🔴 rompía el boot de TODO el
+proyecto (compilación en cascada).
+
+### Síntoma engañoso
+
+El error NO se reporta en el archivo del caller, sino como dependencia rota:
+
+```
+SCRIPT ERROR: Parse Error: Too many arguments for "get()" call. Expected at most 1 but received 2.
+  at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:41)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+ERROR: Failed to load script "res://scripts/ia_npc/npc_agent.gd" with error "Compilation failed".
+```
+
+Si tu script depende (preload/herencia) del archivo roto, ves `Failed to compile depended scripts`
+**y apuntas al archivo equivocado**. El error real está en la dependencia.
+
+### Causa
+
+`Dictionary.get(clave, default)` admite 2 args, pero **`Object.get(property)` admite solo 1**.
+Como `Resource` extiende `Object`, cualquier variable tipada `Resource`/`Object` rechaza el
+default:
+
+```gdscript
+# INCORRECTO — parse error si perfil es Resource
+var job := str(profile.get("job", ""))
+
+# CORRECTO — guard explicito
+if profile != null and profile.get("job") != null:
+    var job := str(profile.get("job"))
+```
+
+`Object.get()` devuelve `null` si la propiedad no existe (no crashea), así que el guard alcanza.
+
+### Detección
+
+Cuando un run headless muestre `Failed to compile depended scripts`, NO investigues el archivo
+del caller: buscá el `at: GDScript::reload (res://...)` **anterior** en el log — ése es el archivo
+con el parse error real.
+
+### Patrón para configs (fallback de 3 campos)
+
+```gdscript
+# INCORRECTO
+hunger_rate = cfg.get("hunger_rate", hunger_rate)
+
+# CORRECTO (semántica equivalente, null-safe)
+var v = cfg.get("hunger_rate")
+if v != null:
+    hunger_rate = v
+```
+
+**Lección transversal:** este bug rompió el boot durante días y **contaminó toda la evidencia
+headless del repo** (tests que reportaban "0 fallos" con stderr lleno de SCRIPT ERROR = falso-
+verde, lección 28). Si tu test pasa pero el log tiene SCRIPT ERROR de **cualquier** módulo (aunque
+no sea el tuyo), el resultado NO es válido: reportalo, no lo ignores.
+
+## E-22: `ZIPWriter` no existe en Godot 4.x — es `ZIPPacker` (instancia, no estático)
+
+**Fecha:** 2026-09-19 04:50 | **Modelo:** kimi-k3 (Moonshot AI) | **Plataforma:** Kilo Code
+**Bug registrado:** BUG-058 (11-BUGS.md), Log 1077. **Severidad:** 🔴 rompía el autoload M107 →
+`SCRIPT ERROR` en stderr de TODOS los runs headless (falso-verde masivo, lección 28).
+
+### Síntoma
+
+```
+SCRIPT ERROR: Parse Error: Identifier "ZIPWriter" not declared in the current scope.
+  at: GDScript::reload (res://scripts/backup/backup_manager.gd:125)
+ERROR: Failed to instantiate an autoload, script '.../backup_manager.gd' does not inherit from 'Node'.
+```
+
+Tras renombrar la clase aparece el segundo error:
+
+```
+SCRIPT ERROR: Parse Error: Cannot call non-static function "open()" on the class "ZIPPacker"
+directly. Make an instance instead.
+```
+
+### Causa
+
+Código portado de Godot 3: allí existía `ZIPWriter` con `open()` **estático**
+(`ZIPWriter.open(path, ZIPWriter.APPEND_CREATE)`) y `write_file(path, bytes)` directo.
+En Godot 4.x:
+
+1. La clase se llama **`ZIPPacker`** (`ZIPWriter` no existe → parse error de identificador).
+2. `open()` es de **instancia**: `var w := ZIPPacker.new(); w.open(path, ZIPPacker.APPEND_ADDINZIP)`.
+3. Antes de escribir cada entrada hay que llamar **`start_file(path)`**; `write_file(bytes)` solo
+   recibe los datos. `start_file` cierra la entrada anterior (no existe `finish_file()`).
+
+### Solución (patrón correcto Godot 4.7)
+
+```gdscript
+# INCORRECTO (Godot 3):
+var writer = ZIPWriter.open(zip_path, ZIPWriter.APPEND_CREATE)
+writer.write_file("archivo.txt", datos)
+
+# CORRECTO (Godot 4.x) — ver cicd_manager.gd::generar_artefacto():
+var writer := ZIPPacker.new()
+if writer.open(zip_path, ZIPPacker.APPEND_ADDINZIP) != OK:
+    return false
+writer.start_file("archivo.txt")
+writer.write_file(datos)
+writer.close()
+
+# Guard de disponibilidad:
+func zip_available() -> bool:
+    return ClassDB.class_exists(&"ZIPPacker")
+```
+
+### Lección transversal
+
+Un autoload con parse error **no impide que los demás scripts `--script` corran** (boot OK),
+pero llena stderr de `SCRIPT ERROR` → cualquier test headless pasa a ser **falso-verde**
+(lección 28). Hy3 (Log 1072) ya lo había detectado desde QA de M118. Si el stderr de un test
+muestra parse errors de un autoload ajeno, hay que repararlo ANTES de fiarse del resultado.
+
+---
+
+## Sección T: Trampas de validación (anti falso-verde)
+
+> Trampas medidas en producción (2026-09-18 → 2026-09-20). No son errores de Godot:
+> son **modos en que una verificación parece pasar y no pasa**. Cada una proboca
+> sobre-cierres o bugs no detectados. Quien valide una entrega debe revisar esta
+> lista antes de dar un veredicto.
+
+### T-98: El archivo que cita un gate puede no estar versionado
+
+**Síntoma:** un gate de CI o un `[x]` se apoya en un archivo que **existe en el
+worktree pero no en `HEAD`**. Localmente el gate funciona; en checkout limpio
+(CI real) falla con `Errno 2` o es un no-op.
+
+**Detección:** `ls` y `Test-Path` mienten. La verificación válida es:
+```
+git cat-file -e HEAD:ruta/al/archivo.py    # exit 0 = está versionado
+git ls-files tools/quality/                # vacío = nadie lo agregó
+```
+También revisar `.gitignore`: un patrón genérico (`gen_*.py`) puede matchear el
+archivo y la negación (`!ruta`) existir **solo en el worktree**.
+
+**Caso real:** BUG-051 figuraba `[x] Resuelto` (Log 1039) con el gate
+`godot --headless --script` sin script + `|| true` = no-op en `HEAD`, y su
+generador `tools/quality/gen_colector_sintaxis.py` sin versionar (matcheado por
+`.gitignore:129`). Fix entró en commit 11ac4d9. BUG-071.
+
+**Regla:** antes de cerrar un bug cuyo cierre se apoya en un gate, correr
+`git cat-file -e HEAD:<ruta>` sobre **cada archivo que ese gate ejecuta**.
+
+**Fecha:** 2026-09-20 | **Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy
+
+---
+
+### T-99: Verificar que el archivo citado existe no alcanza (over-marks)
+
+**Síntoma:** un over-mark se defiende con «el archivo existe». Pero el item cita
+una **sección `§X.Y` que no existe** dentro de ese archivo, o afirma una
+integración que no está en el código.
+
+**Detección — 2 pasos:**
+1. **Parsear la `§X.Y` citada** y verificar que el header real exista:
+   `grep -E '^#{2,3} 2\.5' 03-Diseno.md`. M118 citaba `§2.5/§3.9/§3.10/§4.1`
+   pero su `03-Diseno.md` solo tiene `§1–§4`.
+2. **Para items de CI/CD/despliegue**, grepear `.github/workflows/`:
+   ```
+   grep -rn "itch\|butler\|stakeholder\|firebelley" .github/workflows/
+   ```
+   Los 6 workflows reales (backup/bug_metrics/dev-build/quality/release-build/
+   testing) **no despliegan** a itch.io ni envían emails.
+
+**Caso real:** M118 ✅ 106/106 siendo CI/CD sin despliegue → revertido a 🟡
+102/0/4 (hy3 Log 1125). A s2 le pasó la misma clase en su auditoría.
+
+**Regla:** para validar un `[x]` no basta `Test-Path`; hay que verificar la
+**afirmación concreta** (sección citada existe + integración grepable).
+
+**Fecha:** 2026-09-20 | **Modelo:** hy3 | **Plataforma:** WorkBuddy
+
+---
+
+### T-100: Detector ciego — parser que no itera devuelve «0 problemas»
+
+**Síntoma:** un archivo crítico (p. ej. `CHECKLIST-GLOBAL.md`) queda en **0
+bytes** por escritura truncada de un agente paralelo. El verificador del
+protocolo no puede parsear la tabla y, en vez de fallar, reporta
+**«0 inconsistencias»** — indistinguible de «todo bien».
+
+**Causa raíz:** `leer_tabla_global()` devolvía `{}` silenciosamente cuando el
+archivo no existía, estaba vacío o no tenía tabla. El bucle principal iteraba 0
+módulos y el conteo de alertas quedaba en 0.
+
+**Solución:** fail-fast explícito:
+```python
+if not archivo.exists():
+    raise RuntimeError("BUG-075: ... no existe")
+if not contenido.strip():
+    raise RuntimeError("BUG-075: ... está VACÍO")
+if inicio_tabla is None:
+    raise RuntimeError("BUG-075: ... no contiene la tabla '| ID |'")
+```
+Y **remover** cualquier guardia tipo
+`leer_tabla_global(x) if x.exists() else {}` que neutralice el fail-fast.
+
+**Caso real:** `CHECKLIST-GLOBAL.md` a 0 bytes (mtime 03:00:38) con 167 filas
+sanas en `HEAD`; `verificar_checklist.py` callaba. Fix en commit 05b7fba,
+verificado por inyección (vacío / sin tabla / ausente → todos exit 1).
+
+**Regla:** todo parser que itere sobre un archivo debe fallar (exit ≠ 0) cuando
+el archivo esté vacío o no contenga filas. «Sin datos» ≠ «sin problemas».
+
+**Fecha:** 2026-09-20 | **Modelo:** atria-dawn | **Plataforma:** Kilo Code
 
 ---
 
