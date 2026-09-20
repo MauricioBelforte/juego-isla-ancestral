@@ -620,9 +620,72 @@ jobs:
           exit $FAIL
 
 
+  checklist-orchestrator:
+    name: "Protocolo y Workflows (gate de ceguera, BUG-075/077)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # La suite que cubre los scripts de protocolo. Existia desde antes pero
+      # NO corria en CI: era el unico test de verificar_checklist.py y nadie lo
+      # ejecutaba. Un fail-fast sin suite cableada se revierte sin que nadie lo
+      # note (paso exactamente eso con el guardia que neutralizaba BUG-075).
+      - name: Suite de los scripts de protocolo
+        run: python scripts/test_scripts.py
+
+      # BUG-077: el propio CI puede estar apagado y nadie se entera. El
+      # 2026-09-20 `quality.yml` quedo con YAML INVALIDO — un `name:` con ': '
+      # sin comillas, en el commit 1582ac2 — y GitHub rechaza el archivo
+      # COMPLETO: no falla un job, dejan de correr los 10. Vivia sin detectarse
+      # porque nada validaba los workflows.
+      - name: Instalar parser YAML
+        run: pip install pyyaml
+
+      - name: Validador de workflows — selftest (probarlo en rojo)
+        run: python scripts/validar_workflows.py --selftest
+
+      - name: Validar los workflows de GitHub Actions
+        run: python scripts/validar_workflows.py
+
+      # Gate de CEGUERA, no de contenido. Los tres codigos significan cosas
+      # distintas y por eso no pueden compartir el mismo (BUG-075):
+      #   0 -> sin alertas: todo consistente.
+      #   1 -> mire y hay alertas: NO bloquea aca. Son las inconsistencias
+      #        preexistentes del protocolo, que se siguen en 11-BUGS.md
+      #        (BUG-063/064/066 y familia). Bloquear con 1 dejaria el job rojo
+      #        siempre y el gate inutil, que es justo lo que se queria evitar.
+      #   3 -> DETECTOR CIEGO: FALLA. El orquestador no pudo leer su fuente de
+      #        verdad (archivo ausente, vacio, sin tabla, o 0 modulos). Un
+      #        «0 problemas» sobre un archivo vacio no es un aprobado: es «no
+      #        mire». Fue el 7mo incidente de infra por agentes paralelos.
+      - name: Verificar el orquestador (gate de ceguera)
+        run: |
+          set +e
+          python scripts/verificar_checklist.py
+          CODE=$?
+          set -e
+          echo "verificar_checklist.py -> exit $CODE"
+          if [ "$CODE" -eq 3 ]; then
+            echo "::error::DETECTOR CIEGO (exit 3): el orquestador no pudo leer CHECKLIST-GLOBAL.md. Restaurar desde HEAD antes de continuar (BUG-075)."
+            exit 1
+          fi
+          if [ "$CODE" -eq 1 ]; then
+            echo "::warning::Hay inconsistencias preexistentes en el protocolo (exit 1). Este gate cubre la CEGUERA (exit 3), no el contenido; el detalle se sigue en 11-BUGS.md."
+          fi
+          exit 0
+
+
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -639,7 +702,8 @@ jobs:
           echo "log-protocol: ${{ needs.log-protocol.result }}"
           echo "binary-guard: ${{ needs.binary-guard.result }}"
           echo "architecture-guard: ${{ needs.architecture-guard.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]]; then
+          echo "checklist-orchestrator: ${{ needs.checklist-orchestrator.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi
