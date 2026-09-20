@@ -10,6 +10,18 @@
 > **Módulo RECLAMADO el 2026-09-15 (§21.4.7, Log 918)** tras la retirada de ox-alpha (Cline) del proyecto. Estaba en `0/183` por la reversión de la auditoría del 2026-09-14 (agnes-2.5-flash lo cerró sin verificación real).
 >
 > **iter. 1 (2026-09-15, Log 918):** re-marcado **selectivo** con evidencia ejecutable. Suite nueva `scripts/logging/test_logging_m103_iter1.gd` → **131 checks / 0 fallos ×3**, 0 `SCRIPT ERROR`, guardián anti-falso-verde (10 bloques + watchdog) probado por inyección. Resultado: **167 `[x]` · 12 `[?]` · 0 `[ ]`**.
+
+> **RECLAMADO de nuevo el 2026-09-20 (reasignación desde kimi-k3):** M103 estuvo 🔵 a
+> nombre de kimi-k3 desde el 2026-09-19 (Log 1070) pero K3 no tocó el plan-actual (stale
+> desde 2026-09-15) — se concentró en M106. **Liberado de K3 y reasignado a
+> DeepSeek-V4.1-Flash** (decisión del usuario + Atria): la iter. 1 fue de este modelo, y
+> los 12 `[?]` son decisiones de diseño + 1 implementación + 1 regresión — scope acotado
+> para su límite de tokens, complejidad 2.
+>
+> **⚠️ Delimitación con M122 (kimi-k3):** T-022 (RF18 crash reporting integración) y
+> T-109 (bug_{timestamp}.log) son responsabilidad de **M122 Crash-Reporting** (K3).
+> Déjalos como `[?]` con dueño M122; **no los implementes** — solo documenta la
+> dependencia.
 >
 > **7 fixes reales:** `log_buffer` eliminado (código muerto) · rotación disparada desde `_log()` con contador `_bytes_written` · JSON con contexto era INVÁLIDO (faltaba coma ante `context`) · `export_by_date(hours)` era un no-op (regex exigía espacio, Godot emite `T`; y comparaba en días) · `export_by_level`/`export_by_category` ahora entienden JSON · `_json_escape` escapa CR/TAB · `LogRotator.get_size()` devolvía caracteres, no bytes.
 >
