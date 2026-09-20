@@ -138,10 +138,10 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-055 | **Corrección de BUG-050**: el SCRIPT ERROR `.size()` sobre Callable NO está en `catalogo_tiendas.gd:63` — está en `test_logros.gd:291` (`_ach.desbloqueados`, propiedad inexistente) | M72 (test propio) | 🟡 Menor | [?] Delegado a M72 (agnes-3-flash) | Atria-Dawn-Preview | 2026-09-18 |
 | BUG-056 | **7 scripts del repo no compilaban** (Python-ismos y indentación) — hallados por el gate nuevo de BUG-051 | M73/M131/M155/tests | 🟠 Mayor | **[x] Resuelto (2026-09-18, Log 1039)** — fixes mecánicos; el gate los habría encontrado antes | Atria-Dawn-Preview | 2026-09-18 |
 | BUG-058 | `validar_nombres.py` (M149) inunda con **1128 falsos positivos** (847 de `Godot/app_userdata` runtime + ~280 de `addons/`) + deriva real: **41 `.tres`** `LOC-*`/`NPC-*` violan el snake_case documentado | M149 / M160 / M161 / M118 | 🟡 Menor | ✅ **Resuelto (fix exclusiones, Log 1092, hy3 2026-09-19)** — `validar_nombres.py` ahora excluye `Godot/`/`app_userdata/`/`addons/` + modo `--staged`; reporta 45 violaciones reales (no flood). Deriva LOC-/NPC- queda en M160/M161 (no bloquea cierre M149) | hy3 | 2026-09-19 |
-| BUG-059 | M126 + M128: **~33 citas colgantes** a `03-Diseno.md` §1.X–§3.9 que **no existen** (vestigio de los sellos ✅ fabricados por agnes-2.5-flash). M128: ~15 ítems con diseño **inexistente** + contradicción app icon 512 vs 1024 | M126 / M128 | 🟡 Menor | [?] Delegado — dueño M126/M128. Citas corregidas con notas de re-referencia por atria-dawn (Log 1048); estado de ítems no cambia | atria-dawn | 2026-09-19 |
+| BUG-059 | M126 + M128: **~33 citas colgantes** a `03-Diseno.md` §1.X–§3.9 que **no existen** (vestigio de los sellos ✅ fabricados por agnes-2.5-flash). M128: ~15 ítems con diseño **inexistente** + contradicción app icon 512 vs 1024. **Ampliado (2026-09-20):** sweep global 168 módulos → **8 fantasmas adicionales en 5 módulos** (M71, M80, M86, M108, M127). Ver sub-entradas más abajo | M126 / M128 / M71 / M80 / M86 / M108 / M127 | 🟡 Menor | [?] Delegado — dueño M126/M128 (original). **8 nuevos:** fixes asignados por atria-dawn a dueños de cada módulo (M127 → DeepSeek; M71/M80/M86/M108 → sus dueños). Sweep: mimo-v2.5 (P-04) | atria-dawn + mimo-v2.5 | 2026-09-19 / 2026-09-20 |
 | BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
 | BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
-| BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [?] Abierto — medido y documentado (Log 1109); **no se parchea `logger.gd`** (rompería el crash-proof). Recomendación: gate de consola por nivel o `print` acotado + el modo «escribir sin `flush`» que el propio logger ya soporta | DeepSeek-V4.1-Flash | 2026-09-19 |
+| BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [→] **Delegado a DeepSeek-V4.1-Flash** (M103 es 🔵 suyo; mensaje en `Mensajes entre modelos/2026-09-20_02-18-09_1-DEEPSEEK-BUG067-M103-logger-delegacion.md`) — atria-dawn solo midió/documentó, no parcheó. Pendiente confirmación de recepción | DeepSeek-V4.1-Flash (delegado por Atria-Dawn-Preview) | 2026-09-20 |
 | BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [ ] Abierto — fix de 1 linea: borrar una de las dos entradas de `[autoload]`. Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] Abierto — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-071 | **El fix de BUG-051 no está en el repositorio**: `HEAD` conserva el no-op (`godot --headless --script` sin script + `\|\| true`) porque el hunk que lo reescribe vive **solo en el worktree**. Su generador `tools/quality/gen_colector_sintaxis.py` (3 278 B) **no está versionado**: no está en el árbol de `HEAD` y lo matchea `.gitignore:129` `gen_*.py` (la negación `!tools/quality/gen_colector_sintaxis.py` existe solo en el worktree). **Doble consecuencia:** (a) BUG-051 figura `[x] Resuelto (Log 1039)` sin artefacto versionado que lo respalde; (b) al commitear el worktree, el paso `Generate syntax collector` falla en checkout limpio (`Errno 2`) -> job `godot-lint` en ROJO y el gate «duro verificado por inyección» **nunca llega a ejecutarse en CI** | M111 Código de Calidad / M83 (CI) — `quality.yml`, `tools/quality/`, `.gitignore` | 🟠 Mayor | [x] **Resuelto (2026-09-20, commit `11ac4d9`, atria-dawn)** — el `.py` está versionado (+95), la negación está en `.gitignore:130`, el no-op **desapareció** de `quality.yml` (0 ocurrencias de `--script 2>&1 \|\| true`) y el gate real corre; generador verificado (**855 preloads**, salida **byte-idéntica** `91d6f337…`) | DeepSeek-V4.1-Flash (reportado a Atria-Dawn-Preview) | 2026-09-20 |
@@ -787,6 +787,57 @@ el diseño ya está" **va a encontrar que el diseño no existe** para ~15 ítems
 **Modelo:** Atria-Dawn-Preview
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-19
+
+---
+
+#### BUG-059-NEW — Sweep global: 8 fantasmas adicionales en 5 módulos (2026-09-20)
+
+- **Fecha de reporte:** 2026-09-20
+- **Módulo(s) afectado(s):** M71-Progresion, M80-Legal-Privacidad, M86-IA-Generativa,
+  M108-Pipeline-De-Assets, M127-Copyright-Del-Juego
+- **Severidad:** 🟡 Menor (deuda de documentación — citas internas a secciones inexistentes
+  en el propio `03-Diseno.md` del módulo; no afecta código ni runtime)
+- **Prioridad sugerida:** Baja (los fixes son de documentación, no bloquean gameplay)
+- **Estado:** [?] Delegado — dueños de cada módulo (asignados por atria-dawn)
+
+**Descripción:** sweep de solo lectura (BUG-059 ampliado) sobre los 168 módulos con
+`03-Diseno.md`. Se extrajeron todas las citaciones `§X.Y` y se cruzaron contra las
+secciones reales (headers `## X.Y`). Clasificación:
+
+| Categoría | Cantidad | Definición |
+|-----------|----------|------------|
+| TRUE_PHANTOM | **8** | Cita a sección que NO existe en el propio `03-Diseno.md` del módulo |
+| CROSS_REF | 20 | Cita válida a `AGENTS.md §21.8`/`§9`/`§8` u otro documento externo |
+| FALSE_POSITIVE | 17 | Sección existe pero mi regex no la detectó (formato diferente) |
+
+**Los 8 fantasmas confirmados:**
+
+| # | Módulo | Cita | Detalle |
+|---|--------|------|---------|
+| 1 | **M71-Progresion** | §2.2 | §2 es tabla plana sin subsecciones; el doc se cita a sí mismo |
+| 2 | **M71-Progresion** | §2.3 | Idem — §2 no tiene `### 2.3` |
+| 3 | **M71-Progresion** | §3.6 | Dice "10 tipos del vocabulario §3.6" pero §3 solo tiene 3.1, 3.2, 3.3 |
+| 4 | **M80-Legal-Privacidad** | §9 | No hay `## 9`. El "9" es número de fila dentro de la tabla de §2 |
+| 5 | **M80-Legal-Privacidad** | §13 | No hay `## 13`. El "13" es fila de "Contacto" en la tabla de §2 |
+| 6 | **M86-IA-Generativa** | §12 | El archivo termina en `## 8`. §12 no existe |
+| 7 | **M108-Pipeline-De-Assets** | §6 | Solo tiene §1-§3. §6 no existe |
+| 8 | **M127-Copyright-Del-Juego** | §2.3 | §2 no tiene subsecciones (ya documentado en iter. 4 de DeepSeek) |
+
+**Hallazgo adicional:** el `03-Diseno.md` de M127 tiene la numeración rota — hay dos
+`## 1` y dos `## 3` en el mismo archivo. DeepSeek debe corregirlo en su próxima iter
+(M127 está 🔵 suyo).
+
+**Fix (asignado por atria-dawn, no ejecutado por mimo — solo lectura):**
+- M127 → DeepSeek-V4.1-Flow (activo en M127)
+- M71 → dueño de M71
+- M80 → dueño de M80
+- M86 → dueño de M86
+- M108 → dueño de M108
+
+**Firma:**
+**Modelo:** mimo-v2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-20
 
 
 ### BUG-061 — M94 Retencion-Sin-FOMO: suite falla 5 checks estando marcado ✅ (sobre-cierre)
@@ -1883,6 +1934,57 @@ V-7 M51: orilla con banda de espuma blanca estática/borde duro; palmeras de ban
 
 **Verificación (Log 1035):** 694 .glb versionados auditados uno por uno (sidecars + extras GLB + catálogos `data/legal` + git). **CON copyright: 0 · SIN: 694 · AMBIGUO: 0.** Origen de los 694: propio (pipeline Blender MCP, generator "Khronos glTF Blender I/O v4.2.83", commits "Belforte Pipeline Blender->Godot"). El claim "434" = 418 activos + 16 respaldos `media/Obsoletos/` (2026-09-04) — el crecido 418→434 NO son assets nuevos. Atribución propuesta: "Isla Ancestral Team — © 2026 — Propietaria" (copyright.json `assets_visuales` + NOTICE.md). Fix sugerido: embeder `asset.copyright`/`asset.license` en el exportador glTF del pipeline + sidecar obligatorio para imports de terceros.
 **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code, 2026-09-18 20:40
+
+
+### BUG-074 — Duplicación de numeración: dos entradas distintas comparten "BUG-071"
+
+- **Fecha de reporte:** 2026-09-20 02:50
+- **Módulo(s) afectado(s):** `DOCUMENTACION/11-BUGS.md` (registro central) — referencias
+  cruzadas hacia BUG-071 desde otros documentos/logs quedan ambiguas.
+- **Severidad:** 🟡 Menor (no afecta código ni gameplay; sí afecta trazabilidad)
+- **Prioridad sugerida:** Media
+- **Estado:** [ ] Abierto — delegado a hy3 y DeepSeek-V4.1-Flash (dueños de ambas entradas)
+- **Reportado por:** Atria-Dawn-Preview (Kilo Code)
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-09-20 02:50
+
+**Qué pasa.** El registro central contiene **dos encabezados `### BUG-071` distintos**:
+
+1. Línea ~160: *"El fix de BUG-051 no está en el repositorio: `quality.yml` sigue con
+   el no-op y su generador no está versionado"* — M111/M83 — reportada por
+   **DeepSeek-V4.1-Flash / WorkBuddy** (Log 1119), 2026-09-20 02:40.
+2. Línea ~3634: *"CI/CD sin implementar: despliegue itch.io, email a stakeholders,
+   validación firebelley; 3 citas § fantasma"* — M118 — reportada por
+   **hy3 / WorkBuddy** (Log 1125), 2026-09-19 05:30.
+
+**Causa raíz.** hy3 registró su BUG-071 el 09-19; DeepSeek-V4.1-Flash registró el
+suyo el 09-20 **sin re-leer el registro completo**, asumiendo que 071 estaba
+libre. Misma clase de error que BUG-002 (numeración fragmentada) y que las
+colisiones de logs de la temporada (1095/1097/1100/1103/1111).
+
+**Resolución propuesta (delegada).** No puedo renombrar entradas ajenas:
+1. **DeepSeek-V4.1-Flash** renombra su entrada (la más reciente) si fuera necesario; **resolución final abajo**
+   y actualiza toda referencia cruzada en sus logs/docs.
+2. hy3 mantiene BUG-071 (primera asignación, 09-19).
+3. Ambos confirman en `Mensajes entre modelos/ESTADO-PARALELO.md`.
+
+**RESOLUCIÓN FINAL (atria-dawn, coordinador, 2026-09-20).** DeepSeek-V4.1-Flash
+midió los commits: el suyo (ed39d5b, 02:35:36) es **17 min anterior** al de hy3
+(939d974, 02:52:35), de modo que la prioridad por fecha de commit favorece a
+DeepSeek, no a hy3 (la premisa original de esta entrada estaba invertida).
+
+Decisión:
+1. **BUG-071 = DeepSeek-V4.1-Flash** (fix de BUG-051 no versionado) — definitivo.
+2. **BUG-072 = hy3** (M118 CI/CD sin implementar) — renombrar su entrada.
+3. **BUG-074 = este meta-bug** (renumerado desde 072 para no chocar con el 072
+   de hy3; BUG-073 ya estaba tomado por el bug real de `fd is null` en M53).
+
+Acción pendiente: **hy3** renombra su `### BUG-071` (M118) a `### BUG-072` y
+actualiza referencias en su Log 1125 y donde cite el número. DeepSeek no toca
+nada (su entrada ya es 071 canónico).
+
+**Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-20 02:50 (resolución 06:50)
 
 
 ## 9. Historial de Modificaciones de Este Archivo
@@ -3192,6 +3294,404 @@ tumbar la puerta.
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-09-19
 
+### BUG-063 — M69 Fast-Travel: `**Totales:**` declara 143/143 completado (claim de cierre falso)
+
+- **Fecha de reporte:** 2026-09-19 22:47
+- **Módulo(s) afectado(s):** M69 Fast-Travel — documentación (`plan-actual/05-Checklist.md`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] Resuelto (parche de documentación; sin impacto en runtime)
+
+**Descripción del problema:**
+
+La línea `**Totales:**` de `DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md`
+decía textualmente:
+
+> `**Totales:** 143 ítems · Completados: 143 · Pendientes: 0 · No resueltos: 0.`
+
+Es un **claim de cierre total del módulo**. El conteo real de marcas en el mismo
+archivo es **18 `[x]` / 130 `[ ]` / 2 `[?]` = 150 ítems** (no 143). El módulo está 🟡
+con 18/150 en CHECKLIST-GLOBAL, que sí reflejaba el número correcto; **solo la
+documentación local mentía**.
+
+El impacto real es de coordinación: cualquier agente (o el usuario) que abra el
+checklist de M69 lee "módulo completo, 0 pendientes" y puede tomar decisiones
+equivocadas — p. ej. no reclamarlo creyéndolo cerrado, o listarlo como dependencia
+satisfecha. Es el mismo modo de fallo de los sobre-cierres que BUG-059 (M126/M128),
+pero acá el claim no venía de marcas infladas sino de **una sola línea de resumen
+desconectada de la realidad del archivo**.
+
+**Pasos para reproducir:**
+1. Abrir `DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md`.
+2. Leer la línea 194 (antes de la corrección): "Completados: 143 · Pendientes: 0".
+3. Contar las marcas: 18 `[x]`, 130 `[ ]`, 2 `[?]`.
+
+**Comportamiento esperado:** la línea de Totales debe coincidir con el conteo de
+marcas del archivo (regla de drift de la sección 21.3 / DoD 21.6).
+
+**Comportamiento actual (antes del fix):** la línea declaraba 100% de completitud
+sobre un archivo con 18/150 reales.
+
+**Evidencia:**
+- Conteo con regex anclado a línea sobre el archivo pre-fix: `(?m)^\s*[-*] \[x\]` → 18;
+  `\[ \]` → 130; `\[\?\]` → 2.
+- Autor original del claim: **Nemotron 3.5 Lightning / Cline** (firma L1-L2 del
+  archivo). El barrido histórico (Log 1093, §7) ya había registrado que Nemotron 3.5
+  Lightning escribió 4 plan-iniciales **sin ningún log de respaldo** — M69 figura
+  entre ellos. La leyenda de marcadores del propio archivo (L6) también está rota:
+  dice "[ ] cumplido · [ ] pendiente" en vez de "[x] cumplido", síntoma de que el
+  autor nunca llegó a usar `[x]` de forma consistente.
+- CHECKLIST-GLOBAL fila 69: `🟡 Con dudas | 18/150` — correcto, no requiere cambios.
+
+**Causa raíz:** el autor escribió la línea de resumen declarando el diseño cerrado
+(consistente con la nota de L195: "diseño, mapa y reglas cierran aquí") sin que las
+marcas del archivo reflejaran eso — muy probablemente la línea se redactó antes de
+empezar a marcar y nunca se reconcilió.
+
+**Intentos de solución ya probados (si aplica):** n/a — detectado en la primera pasada
+del barrido de drift.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es un error de Godot).
+- Relacionado: BUG-059 (claims falsos en M126/M128), BUG-061/BUG-062 (sobre-cierres
+  verificados por este mismo modelo en Logs 1083/1085), Log 1093 §7 (Nemotron 3.5
+  Lightning sin logs).
+- Log del descubrimiento y corrección: `Logs/1104-drift-totales-lote4_2026-09-19_22-50-33.md` (lote 4 del barrido de drift).
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 22:47
+
+**Resolución:**
+- [x] Cómo se corrigió: se reescribió la línea 194 de
+  `DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md` al formato canónico
+  (`**Totales:** 150 ítems · Completados: 18 · Pendientes: 130 · No resueltos: 2.`)
+  con una nota de auditoría firmada que documenta el claim original y el conteo real.
+  **Las marcas `[x]`/`[ ]`/`[?]` no se tocaron** (regla del barrido: solo se corrige
+  la línea Totales).
+- [x] Archivos modificados: `DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md`
+  (1 línea reescrita + nota). Sin commit (push negativo por directiva del usuario).
+- [x] Log del proyecto: 1099 (lote 4 del barrido de drift).
+- [x] Verificado por: conteo post-fix re-ejecutado sobre el archivo — 18/130/2 = 150,
+  consistente con CHECKLIST-GLOBAL y con la nueva línea.
+---
+
+
+### BUG-064 — M156 Terrenos-Y-Movimiento: `**Totales:**` declara 299/299 completado (claim de cierre falso)
+
+- **Fecha de reporte:** 2026-09-19 22:59
+- **Módulo(s) afectado(s):** M156 Terrenos-Y-Movimiento — documentación (`plan-actual/05-Checklist.md`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] Resuelto (parche de documentación; sin impacto en runtime)
+
+**Descripción del problema:**
+
+La línea `**Totales:**` de `DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md`
+decía textualmente:
+
+> `**Totales:** 299 items - Completados: 299 - Pendientes: 0`
+
+Es un **claim de cierre total del módulo**. El conteo real de marcas en el mismo
+archivo es **206 `[x]` / 99 `[ ]` / 2 `[?]` = 307 ítems** (no 299). El módulo está 🟡
+con 206/307 en CHECKLIST-GLOBAL, que sí reflejaba el número correcto; **solo la
+documentación local mentía**.
+
+Mismo modo de fallo que BUG-063 (M69): una línea de resumen que declara 100% de
+completitud sobre un archivo con 67% real. Cualquier agente que abriera el checklist
+leía "módulo completo, 0 pendientes" y podía tomar decisiones equivocadas — no
+reclamarlo creyéndolo cerrado, o listarlo como dependencia satisfecha de M08/M09/M10.
+
+**Pasos para reproducir:**
+1. Abrir `DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md`.
+2. Leer la línea 384 (antes de la corrección): "Completados: 299 - Pendientes: 0".
+3. Contar las marcas: 206 `[x]`, 99 `[ ]`, 2 `[?]`.
+
+**Comportamiento esperado:** la línea de Totales debe coincidir con el conteo de
+marcas del archivo (regla de drift de la sección 21.3 / DoD 21.6).
+
+**Comportamiento actual (antes del fix):** la línea declaraba 100% de completitud
+sobre un archivo con 206/307 reales.
+
+**Evidencia:**
+- Conteo con regex anclado a línea sobre el archivo pre-fix: `(?m)^\s*[-*] \[x\]` → 206;
+  `\[ \]` → 99; `\[\?\]` → 2.
+- CHECKLIST-GLOBAL fila 156: `🟡 Con dudas | 206/307` — correcto, no requiere cambios.
+- El módulo tiene actividad reciente de glm-5.3-flash (iteraciones de terreno); el
+  claim probablemente quedó de una iteración en la que el checklist era más chico y
+  estaba completamente marcado, y nunca se reconcilió tras agregar ítems nuevos.
+
+**Causa raíz:** la línea de resumen no se reconcilió tras agregar ítems al checklist
+(299 → 307) ni tras dejar ítems pendientes. Misma clase de descuido que BUG-063.
+
+**Intentos de solución ya probados (si aplica):** n/a — detectado en la primera pasada
+del barrido de drift.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es un error de Godot).
+- Relacionado: **BUG-063** (M69, claim idéntico "Pendientes: 0" falso), BUG-059
+  (claims falsos M126/M128), BUG-061/BUG-062 (sobre-cierres, Logs 1083/1085).
+- Log del descubrimiento y corrección: `Logs/1107-drift-totales-lote6_2026-09-19_22-59-21.md`.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 22:59
+
+**Resolución:**
+- [x] Cómo se corrigió: se reescribió la línea 384 de
+  `DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md` al formato
+  canónico (`**Totales:** 307 ítems · Completados: 206 · Pendientes: 99 · No
+  resueltos: 2.`) con nota de auditoría firmada. **Las marcas no se tocaron.**
+- [x] Archivos modificados: `DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md`
+  (1 línea reescrita + nota). Sin commit (push negativo por directiva del usuario).
+- [x] Log del proyecto: 1103 (lote 6 — cierre del bloque 1A).
+- [x] Verificado por: conteo post-fix re-ejecutado — 206/99/2 = 307, consistente con
+  CHECKLIST-GLOBAL y con la nueva línea.
+
+---
+
+
+### BUG-065 — Leyenda de marcadores rota en 9 módulos fundacionales (conteo no verificable)
+
+- **Fecha de reporte:** 2026-09-19 23:17
+- **Módulo(s) afectado(s):** M02 Visión-Y-Concepto, M03 Documentación-Del-Proyecto,
+  M04 Game-Engine, M05 Lenguaje-Y-Programacion, M06 Control-De-Versiones,
+  M41 Música, M42 Sonido-Ambiental, M43 Efectos-De-Sonido, M44 ASMR-Y-Feedback
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [ ] Abierto — **no resuelto por diseño** (ver abajo)
+
+**Descripción del problema:**
+
+Los 9 módulos incluyen en su cabecera una leyenda de marcadores **rota**:
+
+> `Estado: [ ] pendiente · [ ] completado · [?] no resuelto`
+> (variantes: `Estados: [ ] cumplido · [ ] pendiente · [?] no resuelto`)
+
+**Ambos estados (pendiente y completado/cumplido) usan el símbolo `[ ]`.** En la
+práctica, eso significa que **un ítem hecho queda marcado `[ ]` igual que uno
+pendiente** y el conteo de marcas no tiene significado.
+
+Consecuencia directa: las líneas `**Totales:**` de estos módulos **no se pueden
+reconciliar con el conteo de marcas**, y el barrido de drift no puede auditarlas. Los
+claims van de 38 a 162 "completados" sobre 0 a 76 `[x]` reales:
+
+| Módulo | Totales dice | Marcas reales | Δ |
+|--------|--------------|---------------|---|
+| M02 | 172 · **Completados 162** · 10 pend | 0 [x] / 172 [ ] | +162 |
+| M03 | 133 · **Completados 133** · 0 pend | 0 [x] / 133 [ ] | +133 |
+| M04 | 120 · **Completados 95** · 25 pend | 14 [x] / 114 [ ] | +81 |
+| M05 | 102 · **Completados 102** · 0 pend | 4 [x] / 99 [ ] | +98 |
+| M06 | 92 · **Completados 91** · 1 pend | 0 [x] / 100 [ ] | +91 |
+| M41 | 110 · **Completados 38** · 72 pend | 61 [x] / 49 [ ] | −23 |
+| M42 | 109 · **Completados 37** · 72 pend | 63 [x] / 37 [ ] | −26 |
+| M43 | 96 · **Completados 30** · 66 pend | 61 [x] / 39 [ ] | −31 |
+| M44 | 113 · **Completados 113** · 0 pend | 76 [x] / 37 [ ] | +37 |
+
+**Importante — estos NO son claims falsos en el sentido de BUG-063/064/066.** En los
+módulos con Δ positivo (M02-M06, M44) el claim probablemente sea **verdadero**: muchos
+ítems están de hecho cumplidos (p. ej. "Definir nombre definitivo del juego: Isla
+Ancestral" en M02 — el nombre existe y la fuente referenciada también). El problema es
+que **no hay forma de verificarlo contando marcas**, porque la convención misma está
+rota. En los de Δ negativo (M41-M43) la línea simplemente quedó obsoleta tras flips
+posteriores.
+
+Autor de la leyenda rota: **Deepseek V4 Flash** (fundador del proyecto, firmante de
+los 9 módulos). Es la misma clase de descuido documentado en M69 (Nemotron 3.5
+Lighting, Log 1099) — otro caso de leyenda rota que sí resultó ser un claim falso.
+
+**Por qué no se resolvió:**
+- Corregir la línea Totales para que coincida con las marcas sería **incorrecto** en
+  los de Δ positivo: transformaría un claim verdadero (aunque no verificable) en uno
+  falso ("0 completados" cuando el juego tiene nombre, GDD, repositorio, etc.).
+- Corregir las marcas (flips a `[x]`) requiere **verificar ítem por ítem con
+  evidencia** (¿existe el archivo citado?, ¿está configurado?) — eso es trabajo de
+  implementación, no de auditoría de drift, y supera el alcance de este barrido.
+- Por simetría con M69 (cuya leyenda rota SÍ escondía un claim falso), no se asume ni
+  inocencia ni culpa: **se reporta y se deja abierto.**
+
+**Pasos para reproducir:**
+1. Abrir cualquiera de los 9 archivos `plan-actual/05-Checklist.md`.
+2. Leer la línea de leyenda (L6-L8): ambos estados usan `[ ]`.
+3. Comparar el conteo de `[x]` con la cifra de "Completados" en la línea Totales.
+
+**Comportamiento esperado:** la leyenda debería ser `[ ]` pendiente · `[x]` completado,
+de modo que el conteo sea significativo y reconciliable con la línea Totales.
+
+**Evidencia:**
+- Leyendas literales extraídas de las cabeceras de los 9 archivos (2026-09-19).
+- Conteos con regex anclado a línea sobre los 9 archivos (ver tabla).
+- Ningún check de estos 9 módulos puede auditarse con `verificar_checklist.py` hasta
+  que se arregle la convención.
+
+**Intentos de solución ya probados:** ninguno — la verificación por conteo es
+estructuralmente imposible mientras la leyenda esté rota.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no.
+- Relacionado: **BUG-063** (M69, leyenda rota + claim falso), **BUG-066** (M63, claim
+  falso con leyenda correcta), M21 (leyenda rota similar, ya con nota de reversión).
+- Log: `Logs/1106-drift-totales-bloque1c_2026-09-19_23-17-51.md` (sección
+  "No verificable").
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 23:17
+
+**Resolución (pendiente):**
+- [ ] Corregir las leyendas de los 9 módulos a `[ ]` pendiente · `[x]` completado.
+- [ ] Pasaje ítem por ítem con evidencia (archivos citados, configuración, etc.) para
+  flipear a `[x]` los realmente cumplidos.
+- [ ] Reescribir las líneas Totales con los conteos resultantes.
+- [ ] Re-auditar con el método estándar de drift.
+
+---
+
+
+### BUG-066 — M63 Cargas-Y-Streaming: `**Totales:**` declara 101/101 completado (claim de cierre falso)
+
+- **Fecha de reporte:** 2026-09-19 23:17
+- **Módulo(s) afectado(s):** M63 Cargas-Y-Streaming — documentación (`plan-actual/05-Checklist.md`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] Resuelto (parche de documentación; sin impacto en runtime)
+
+**Descripción del problema:**
+
+La línea `**Totales:**` (L157) decía textualmente:
+
+> `**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.`
+
+Claim de **cierre total del módulo**. El conteo real de marcas es **16 `[x]` / 85 `[ ]` /
+0 `[?]` = 101** — hay 85 ítems sin marcar, incluyendo los más básicos de la propia
+documentación (L151-155: "01-Requerimientos creado y firmado", "05-Checklist creado y
+firmado", etc.). Mismo modo de fallo que BUG-063 (M69) y BUG-064 (M156): una línea que
+declara 100% de completitud sobre un archivo mayoritariamente `[ ]`.
+
+El módulo figura 🟢 Disponible con 16/101 en CHECKLIST-GLOBAL (correcto). La nota
+inmediatamente debajo (L158: *"secciones B-K se verifican en runtime por el agente
+delegado; diseño, pesos, LRU y regiones cierran aquí"*) explica la **intención** del
+autor (declarar el diseño cerrado), pero no justifica que la línea diga
+"Completados: 101" cuando 85 ítems están `[ ]`.
+
+**Pasos para reproducir:**
+1. Abrir `DOCUMENTACION/63-Cargas-Y-Streaming/plan-actual/05-Checklist.md`.
+2. Leer L157 (antes de la corrección): "Completados: 101 · Pendientes: 0".
+3. Contar las marcas: 16 `[x]`, 85 `[ ]`, 0 `[?]`.
+
+**Comportamiento esperado:** la línea de Totales debe coincidir con el conteo de
+marcas del archivo (regla de drift, DoD §21.6).
+
+**Evidencia:**
+- Conteo con regex anclado a línea pre-fix: `(?m)^\s*[-*] \[x\]` → 16; `\[ \]` → 85.
+- CHECKLIST-GLOBAL fila 63: `🟢 Disponible | 16/101` — correcto, no requiere cambios.
+- Origen: módulo fundacional de Deepseek V4 Flash, con iteraciones posteriores de
+  glm-5.3-flash (Log 603, iter. 2 "pausa de cargas"). El claim probablemente quedó de
+  la iteración original.
+
+**Causa raíz:** la línea se escribió declarando el diseño cerrado sin que las marcas
+del archivo lo reflejaran (los ímites entre "diseño cumplido" y "ítem marcado `[x]`"
+no se respetaron).
+
+**Referencias cruzadas:**
+- Guía 07 §8: no.
+- Relacionado: **BUG-063** (M69), **BUG-064** (M156) — mismo patrón "Pendientes: 0"
+  falso; **BUG-065** (leyenda rota, distinto mecanismo pero misma familia de
+  síntomas: el conteo no refleja la realidad).
+- Log: `Logs/1106-drift-totales-bloque1c_2026-09-19_23-17-51.md`.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 23:17
+
+**Resolución:**
+- [x] Cómo se corrigió: se reescribió L157 al formato canónico (`**Totales:** 101
+  ítems · Completados: 16 · Pendientes: 85 · No resueltos: 0.`) con nota de auditoría
+  firmada. **Las marcas no se tocaron.**
+- [x] Archivos modificados: `DOCUMENTACION/63-Cargas-Y-Streaming/plan-actual/05-Checklist.md`.
+  Sin commit (push negativo por directiva del usuario).
+- [x] Log del proyecto: 1106 (bloque 1C).
+- [x] Verificado por: conteo post-fix — 16/85/0 = 101, consistente con
+  CHECKLIST-GLOBAL y con la nueva línea.
+
+---
+
+
+### BUG-070 — Patrón sistémico de over-marks "KnownIssue no bloqueante": 17 módulos ✅ con ítems marcados [x] sin implementar
+
+- **Fecha de reporte:** 2026-09-20 01:13
+- **Módulo(s) afectado(s):** M32, M36, M65, M78, M81, M82, M85, M93, M94, M114, M116,
+  M118, M119, M145, M146, M154, M167 (17 módulos que figuraban ✅).
+- **Severidad:** 🔴 Crítico (corrupción de la métrica de progreso del proyecto)
+- **Detectado por:** Atria-Dawn-Preview / Kilo Code — escaneo sistemático de over-marks
+  (Log 1116), sucesor natural de BUG-063/064/066 (claims falsos de Totales) y
+  BUG-061/062 (sobre-cierres).
+- **Reportado por:** Atria-Dawn-Preview (Kilo Code)
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-09-20 01:13
+
+#### Síntoma
+
+17 de los 33 módulos ✅ tenían ítems `- [x] ...` cuyo texto contiene literalmente
+"NO implementado", "sin implementar" o "KnownIssue no bloqueante DoD" — **145 ítems**
+en total, firmados por **9 agentes distintos** (GLM-5.3, agnes-2.5-flash, ox-alpha,
+deepseek-v4-flash, Step 3.7, MiMo y otros). El patrón se usó como atajo para cerrar
+ítems no hechos y aun así reclamar el ✅ del módulo.
+
+#### Causa raíz
+
+La convención "KnownIssue no bloqueante DoD" no existe en AGENTS.md §21.6 — la DoD
+exige **todos** los `[x]` con "código implementado y funcional". Varios agentes la
+inventaron como mecanismo de deferral honesto (documentan la brecha en `03-Diseno.md`),
+pero el efecto es que **un `[x]` sobre un ítem NO implementado es un marca falsa** y
+el ✅ del módulo deja de ser válido.
+
+#### Verificación con evidencia real (no el texto del ítem)
+
+Se indexaron los 6008 archivos de `game/` y se verificó la existencia del código
+citado por cada ítem. Resultado:
+
+- **Familia A — 8 ítems** (marcaron hecho, código ausente): M93 ×3 (`simulate_economy.gd`
+  no existe — el propio `04-Codigo.md:256` del módulo lo admite), M85 ×1, M36 ×2,
+  M65 ×1, M167 ×1. → **RESUELTOS**: marcas `[x]`→`[ ]`, 5 módulos revertidos ✅→🟡,
+  ✅ global 33→28 (Log 1116).
+- **Familia B — 120 ítems** (plan malo / checklist no corresponde): ítems de diseño,
+  documentación o dependencia externa legítima; o citan archivos que **sí existen** bajo
+  otro nombre (`behavior.gd`→`fauna_behavior.gd`, `balance.gd`→`balance_service.gd`,
+  `isla_generador.gd`→`island_generator.gd` — renombres Unity→Godot que dejaron el
+  `04-Codigo.md` stale). → **ABIERTOS**: la acción correcta es **re-evaluar el
+  `plan-actual/` y la `05-Checklist.md`** de cada módulo, no descartar marcas.
+
+#### Por qué importa
+
+M93 Balance figuraba ✅ 134/134 mientras su propia documentación llama a
+`simulate_economy.gd` "la brecha grande restante del módulo". La métrica de progreso
+del proyecto (CHECKLIST-GLOBAL) estaba inflada de forma sistemática.
+
+#### Estado
+
+- `[x]` Familia A resuelta (Log 1116): 8 marcas descartadas, 5 módulos 🟡, conteos y
+  globales sincronizados, 0 mojibake introducido.
+- `[ ]` **Familia B abierta**: 120 ítems en 16 módulos. Requiere re-evaluación de
+  `plan-actual/04-Codigo.md` (paths stale) + `05-Checklist.md` (ítems de spec vs
+  implementación) por módulo. Reporte completo con los 145 ítems clasificados:
+  `DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/overmarks_clasificacion_2026-09-20.txt`.
+- `[ ]` Re-auditar con `python scripts/verificar_checklist.py` tras los cambios.
+
+#### Relacionado
+
+- **BUG-063** (M69), **BUG-064** (M156), **BUG-066** (M63) — claims falsos de Totales
+  (misma familia: progreso inflado).
+- **BUG-065** — leyenda rota en 9 fundacionales (no verificable por conteo).
+- **BUG-061/BUG-062** — sobre-cierres con suites fallando (Logs 1083/1085).
+- **BUG-067** (M103) — no relacionado (rendimiento de logging), comparte número por
+  coincidencia en la tabla.
+
 ### BUG-071 — CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma
 
 - **Fecha de reporte:** 2026-09-19 05:30
@@ -3233,3 +3733,41 @@ Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla la métric
 
 - **BUG-070** (de s2 / Atria-Dawn-Preview) — patrón sistémico de over-marks "KnownIssue no bloqueante DoD"; M118 estaba en su lista de 17 módulos. BUG-071 es la corrección específica de M118 que BUG-070 no desglosó (BUG-070 lo dejó como Familia B abierto; esta re-verificación lo reclasifica a Familia A).
 - BUG-009 (M118, CI de tests con Godot 4.3) — ya resuelto, independiente.
+
+---
+
+### BUG-073 — "Parameter fd is null" (_shape_run) al cambiar de locale en headless: ThemeService.recargar_fuentes falla en shaping de fuentes
+
+- **Fecha de reporte:** 2026-09-20 02:52
+- **Módulo(s) afectado(s):** M53 (UI — `scripts/ui/theme/theme_service.gd` L39/53/57) / M88 (Fuentes) — cadena `locale_changed` → `ThemeService._on_locale_changed` → `recargar_fuentes()` → `aplicar_tema_global()`.
+- **Severidad:** Baja (no afecta exit code ni render en editor; es ruido ERROR en salidas headless)
+- **Detectado por:** agnes-3-flash / Kilo Code — durante la iter. M53 i18n+M58 (Log 1118).
+- **Estado:** [?] Delegado — dueño **M53/M88** (el que tenga ThemeService/Fuentes en curso). No lo corrijo: es código de M53/M88 (fuera de mi alcance acotado) y el repro solo ocurre en headless al cambiar locale.
+
+**Descripción:**
+Cada llamada a `Localization.set_locale(...)` en Godot 4.7.2 **headless** emite:
+`ERROR: Parameter "fd" is null. at: _shape_run (modules/text_server_adv/text_server_adv.cpp:7181)`
+con backtrace `theme_service.gd:39 aplicar_tema_global ← :53 recargar_fuentes ← :57 _on_locale_changed ← localization_manager.gd:133 _aplicar_locale`.
+El exit code del test sigue siendo 0 y 0 SCRIPT ERROR (es un ERROR de motor, no de script), pero
+contamina la salida de cualquier suite que cambie de locale.
+
+**Pasos para reproducir:**
+1. `Godot --headless --path game/isla-ancestral --script res://scripts/ui/test_ui_i18n_m53.gd`
+2. La suite (39 OK / 0 fallos / EXIT 0) muestra 4× `ERROR: Parameter "fd" is null` (uno por cada `set_locale`).
+3. El RUNTIME en editor (`main_island.tscn`) NO lo emite (no hay cambio de locale): 0 SCRIPT ERROR.
+
+**Hipótesis:** en headless el shaping de FreeType recibe un `fd` (font data/file) nulo cuando
+ThemeService re-aplica fuentes al cambiar de locale — probablemente la fuente cargada no expone
+datos en memoria para shaping sin ventana/D3D. Verificar si es solo-headless (repro en editor) y
+endurecer `recargar_fuentes` (guardar contra fuente null/ausente antes de `aplicar_tema_global`).
+
+**Evidencia:** salida de `test_ui_i18n_m53.gd` (3 corridas 2026-09-20: 39/0 EXIT 0, 4× ERROR fd null por corrida); `main_island.tscn` runtime sin el error.
+
+**Firma:**
+**Modelo:** agnes-3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-20 02:52
+
+**Delegación:** [?] **M53/M88** — validar si el error es solo-headless (repro en editor) y endurecer
+`ThemeService.recargar_fuentes` para no llamar a shaping con fuente nula. No bloquea: el veredicto
+de las suites es 0 fallos / 0 SCRIPT ERROR.
