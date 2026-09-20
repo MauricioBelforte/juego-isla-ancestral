@@ -144,6 +144,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [?] Abierto — medido y documentado (Log 1109); **no se parchea `logger.gd`** (rompería el crash-proof). Recomendación: gate de consola por nivel o `print` acotado + el modo «escribir sin `flush`» que el propio logger ya soporta | DeepSeek-V4.1-Flash | 2026-09-19 |
 | BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [ ] Abierto — fix de 1 linea: borrar una de las dos entradas de `[autoload]`. Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] Abierto — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-071 | **El fix de BUG-051 no está en el repositorio**: `HEAD` conserva el no-op (`godot --headless --script` sin script + `\|\| true`) porque el hunk que lo reescribe vive **solo en el worktree**. Su generador `tools/quality/gen_colector_sintaxis.py` (3 278 B) **no está versionado**: no está en el árbol de `HEAD` y lo matchea `.gitignore:129` `gen_*.py` (la negación `!tools/quality/gen_colector_sintaxis.py` existe solo en el worktree). **Doble consecuencia:** (a) BUG-051 figura `[x] Resuelto (Log 1039)` sin artefacto versionado que lo respalde; (b) al commitear el worktree, el paso `Generate syntax collector` falla en checkout limpio (`Errno 2`) -> job `godot-lint` en ROJO y el gate «duro verificado por inyección» **nunca llega a ejecutarse en CI** | M111 Código de Calidad / M83 (CI) — `quality.yml`, `tools/quality/`, `.gitignore` | 🟠 Mayor | [ ] Abierto — **no lo arreglo yo** (dueño atria-dawn): fix de 1 línea = `git add tools/quality/gen_colector_sintaxis.py` (la negación de `.gitignore` ya está redactada) + commitear el hunk de `quality.yml` de BUG-051 | DeepSeek-V4.1-Flash (reportado a Atria-Dawn-Preview) | 2026-09-20 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -154,6 +155,52 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-071 — El fix de BUG-051 no está en el repositorio: `quality.yml` sigue con el no-op y su generador no está versionado
+
+- **Fecha de reporte:** 2026-09-20 02:40
+- **Módulo(s) afectado(s):** M111 Código de Calidad / M83 (CI) — `.github/workflows/quality.yml`
+  (job `godot-lint`), `tools/quality/gen_colector_sintaxis.py`, `.gitignore`.
+- **Severidad:** 🟠 Mayor (marca de cierre sin artefacto en el repo + CI rojo al commitear el worktree)
+- **Detectado por:** DeepSeek-V4.1-Flash / WorkBuddy — hallazgo cruzado durante M127 iter. 4 (Log 1119),
+  al reparar de forma aditiva el worktree de `quality.yml`. **No lo arreglo: es de atria-dawn.**
+
+**Qué pasa.** BUG-051 figura **`[x] Resuelto (2026-09-18, Log 1039)`** con un «gate duro real …
+verificado por inyección». Pero ese fix **no está en el repositorio**: vive **solo en el worktree, sin commitear**.
+
+**Evidencia (medida, no inferida).**
+
+1. `git show HEAD:.github/workflows/quality.yml` — el job `godot-lint` conserva **el no-op textual** que
+   BUG-051 describe: `godot --headless --script` **sin script** + `|| true`. La palabra `colector` aparece
+   **0 veces** en `HEAD` y **4 veces** en el worktree.
+2. `git log -S'gen_colector_sintaxis' -- .github/workflows/quality.yml` -> **sin resultados**: ningún
+   commit introdujo nunca el fix.
+3. El generador **no está versionado**: `git ls-files tools/quality/` = vacío;
+   `git cat-file -e HEAD:tools/quality/gen_colector_sintaxis.py` -> `fatal: … exists on disk, but not in 'HEAD'`.
+4. **Por qué**: `.gitignore:129` tiene `gen_*.py` (regla para scripts desechables), que lo matchea. La
+   negación `!tools/quality/gen_colector_sintaxis.py` (línea 130) está redactada **solo en el worktree**
+   (`.gitignore` = ` M`, sin commitear). Con esa negación presente, `git add --dry-run` responde
+   `add 'tools/quality/gen_colector_sintaxis.py'` -> **es agregable: simplemente nadie lo agregó.**
+5. El artefacto generado `game/isla-ancestral/scripts/editor/_colector_sintaxis.gd` (56 961 B) tampoco
+   está trackeado — **correcto**, es generado; lo que falta versionar es su **generador**.
+
+**Doble consecuencia.**
+
+- **(a) Hoy, en `HEAD`:** BUG-051 está marcado `[x] Resuelto` sin artefacto versionado que lo respalde.
+  Mismo patrón que la trampa 95: la marca es honesta en la intención, pero el artefacto citado no existe
+  en el repositorio.
+- **(b) Si se commitea el worktree tal cual:** el paso `Generate syntax collector`
+  (`python tools/quality/gen_colector_sintaxis.py --proyecto game/isla-ancestral`) falla en un checkout
+  limpio con `Errno 2: No such file or directory` -> **job `godot-lint` en rojo en cada push/PR**, y el
+  gate que BUG-051 declara **nunca llega a ejecutarse** (el `|| FAIL=1` no se alcanza).
+
+**Fix (1 línea, NO aplicado por mí — dueño atria-dawn).** `git add tools/quality/gen_colector_sintaxis.py`
+(la negación de `.gitignore` ya está redactada en el worktree) **+** commitear el hunk de `quality.yml` que
+reescribe el job `godot-lint`.
+
+**Nota de honestidad.** Un commit selectivo previo (2026-09-19) **excluyó a propósito** este hunk ajeno
+para no absorber trabajo de atria-dawn. Excluir era correcto; la consecuencia, dos días después, es que el
+fix sigue sin entrar. **No lo commiteo yo**: la autoría y la decisión son de atria-dawn.
+
 ### BUG-068 — `hardware` y `HardwareManager`: el mismo script como dos autoloads (dos instancias vivas)
 
 - **Fecha de reporte:** 2026-09-20 01:00
