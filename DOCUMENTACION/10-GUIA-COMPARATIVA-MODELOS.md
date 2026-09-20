@@ -2003,7 +2003,7 @@ Registrarlos es parte de la honestidad que exijo a los demás:
 | **M-02** | QA §21.8 de lo revertido por hy3 sin anclar en la suite | Sello inválido | Invalidado Log 895, re-audio a hy3 (P-12) |
 | **M-03** | `split('\n')` destruye CRLF al editar `CHECKLIST-GLOBAL.md` | 211 CRLF → 0 en una edición | **`newline=''` al leer, `'wb'` al escribir**. Ocurrió 2 veces esta sesión; la segunda lo detecté y restauré desde HEAD |
 | **M-04** | Barredura no intencional de gates ajenos en commit 11ac4d9 | 5 gates de M64 en CI sin su dueño | P-09 a mimo (verificado: 4/4 PASS) |
-| **M-05** | Contar "SCRIPT ERROR" del boot de autoloads como fallos de suite | Falso rojo en `test_ui_i18n_m53` ("43" vs 39 real) | Anclar `^\s*OK:` — agnes tenía razón |
+| **M-05** | Contar substrings en vez de items (3 OCURRENCIAS en 2026-09-20) | (a) "43" falsos SCRIPT ERROR en `test_ui_i18n_m53` (real: 39) — agnes tenía razón; (b) reporté "drift interno" en M11 (cuerpo 55/2/78 vs Totales 50/0/73) que **no existía**: era conteo por substring, el real es 53/0/70=123 — DeepSeek Log 1130 lo demostró; (c) conté 5 `[?]` en M160 incluyendo una linea de leyenda (real: 4) — mimo tenía razón | **Contar solo lineas que matcheen `^\s*-\s+\[[ x?]\]`**, nunca `grep -o '\[x\]'`. Y creer al modelo cuando su conteo discrepa del mio |
 | **M-06** | Esquema de regex demasiado estrecho (`exit\(\d+\)` vs `return 3`) | Casi descarté el hallazgo correcto de DeepSeek | Re-verificar con múltiples patrones antes de descartar |
 
 ### 21.10 Reglas de asignación actualizadas con base empírica
