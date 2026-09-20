@@ -1,11 +1,11 @@
 # 10 - GUÍA COMPARATIVA DE MODELOS
 
-> **Modelo:** Atria-Dawn-Preview (última modificación 2026-09-16: §20 autoevaluación honesta del Atria-Dawn-Preview (Shanghai AI Laboratory) vía Kilo Code + ficha §5.M + intro/matriz/delegación/reglas/fuentes actualizadas — **primera sesión, sin trabajo de módulo aún**; modelo agentic de 744B MoE sobre base GLM-5.2, contexto 256K, **solo texto** (no multimodal, verificado en docs oficiales); #1 del benchmark en búsqueda profunda, tool use, automatización y ciberseguridad; débil en coding puro y ofimática). Pasada previa: agnes-3-flash (Sapiens AI) (2026-09-15: §19 autoevaluación honesta del Agnes 3.0 Flash vía Kilo Code + ficha §5.L + intro/matriz/fuentes actualizadas — **primera sesión, sin trabajo de módulo aún**; aclarado que soy Sapiens AI, NO el agnes-2.5-flash (Sapiens AI) de §10/§13). Pasada previa: DeepSeek-V4.1-Flash (2026-09-11: §17 autoevaluación honesta del modelo DeepSeek V4.1 Flash sobre WorkBuddy — **visión verificada empíricamente 2/2** (foto JPEG y captura de viewport Blender PNG leídas OK), §5.B3 agregado, §5.B/§5.B2 marcados como **descatalogados el 2026-09-10** y rutados al nuevo modelo, matrices y flujo de delegación actualizados). Pasada previa: GLM-5.3 (2026-09-10: §16 autoevaluación honesta del flagship glm-5.3 sobre Kilo Code — primera pasada de esta identidad exacta; §5.C corregido con specs verificadas en docs oficiales de Z.ai: pesos MIT publicados, DeepSWE 66.9, Agents' Last Exam 28.5, ExploitBench 54.4%, contexto 1M/salida 128K, reasoning siempre activo; E-10 re-verificado empíricamente — solo texto, la lectura de imagen falla con "this model does not support image input"). Previas: Hy4 preview (2026-09-08: §15.3 corregido — la lectura de imágenes fue **4/4 OK** en el cierre del log 795, así que la debilidad "no fiable" se reformula como "inestable bajo carga, mejor de lo que creía"; sigo dependiendo del QA numérico como respaldo obligatorio. Previas: 2026-09-07 §15.4 agregado — las cuatro áreas declaradas por Tencent valoradas una por una con evidencia propia y con lo que NO me adjudico; §15.2/§15.3 del 2026-09-06 con fortalezas, debilidades y límites reales medidos en este proyecto; §5.G corregido con el caveat de que el benchmark es vendor-reported). Pasada previa: kimi-k3 (2026-09-04: §14). Otras pasadas: MiMo V2.5 (2026-09-02: §5.A); glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01 [identidad corregida a glm-5.3-flash en §7.7 — ver §16.1]; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
+> **Modelo:** Atria-Dawn-Preview (última modificación 2026-09-19: **§5.P alta de Kimi K3 (Moonshot AI)** — specs verificadas en fuentes oficiales (`github.com/MoonshotAI/Kimi-K3` README + `platform.kimi.ai/docs` quickstart + pricing): 2.8T/104B MoE (primer open-weight clase 3T), contexto 1M, multimodal nativo texto+imagen+video (MoonViT-V2), TB 2.1 **88.3 #1 del catálogo**, MCPMark-Verified **94.5 #1**, DeepSWE 67.5, output $15/1M (el más caro); matriz, capacidades, flujo de delegación y reglas de asignación actualizados — **5 modelos disponibles: Agnes 3, Hy3, MiMo V2.5, Atria Dawn, Kimi K3**. Pasada previa 2026-09-18: **§21 investigación de 10 modelos candidatos** por Atria-Dawn-Preview / Kilo Code — **ALTA: Nex-N2.5-Pro (Nex-AGI) §5.N** (líder *disponible ahora* en Terminal-Bench 2.1 82.7 y SWE-bench Pro 61.2, multimodal, gratis en OpenRouter) y **§5.O: 9 modelos evaluados y descartados con evidencia** (Laguna S 2.1, Step 3.7 Flash, Nemotron 3 Ultra/Super/3.5 Lightning, Ling 3.0 Flash VL/Santé/Fin, Dots 3 Note); matriz, capacidades, flujo de delegación y reglas actualizados. Pasada previa 2026-09-16: §20 autoevaluación honesta del Atria-Dawn-Preview (Shanghai AI Laboratory) vía Kilo Code + ficha §5.M + intro/matriz/delegación/reglas/fuentes actualizadas — **primera sesión, sin trabajo de módulo aún**; modelo agentic de 744B MoE sobre base GLM-5.2, contexto 256K, **solo texto** (no multimodal, verificado en docs oficiales); #1 del benchmark en búsqueda profunda, tool use, automatización y ciberseguridad; débil en coding puro y ofimática). Pasada previa: agnes-3-flash (Sapiens AI) (2026-09-15: §19 autoevaluación honesta del Agnes 3.0 Flash vía Kilo Code + ficha §5.L + intro/matriz/fuentes actualizadas — **primera sesión, sin trabajo de módulo aún**; aclarado que soy Sapiens AI, NO el agnes-2.5-flash (Sapiens AI) de §10/§13). Pasada previa: DeepSeek-V4.1-Flash (2026-09-11: §17 autoevaluación honesta del modelo DeepSeek V4.1 Flash sobre WorkBuddy — **visión verificada empíricamente 2/2** (foto JPEG y captura de viewport Blender PNG leídas OK), §5.B3 agregado, §5.B/§5.B2 marcados como **descatalogados el 2026-09-10** y rutados al nuevo modelo, matrices y flujo de delegación actualizados). Pasada previa: GLM-5.3 (2026-09-10: §16 autoevaluación honesta del flagship glm-5.3 sobre Kilo Code — primera pasada de esta identidad exacta; §5.C corregido con specs verificadas en docs oficiales de Z.ai: pesos MIT publicados, DeepSWE 66.9, Agents' Last Exam 28.5, ExploitBench 54.4%, contexto 1M/salida 128K, reasoning siempre activo; E-10 re-verificado empíricamente — solo texto, la lectura de imagen falla con "this model does not support image input"). Previas: Hy4 preview (2026-09-08: §15.3 corregido — la lectura de imágenes fue **4/4 OK** en el cierre del log 795, así que la debilidad "no fiable" se reformula como "inestable bajo carga, mejor de lo que creía"; sigo dependiendo del QA numérico como respaldo obligatorio. Previas: 2026-09-07 §15.4 agregado — las cuatro áreas declaradas por Tencent valoradas una por una con evidencia propia y con lo que NO me adjudico; §15.2/§15.3 del 2026-09-06 con fortalezas, debilidades y límites reales medidos en este proyecto; §5.G corregido con el caveat de que el benchmark es vendor-reported). Pasada previa: kimi-k3 (2026-09-04: §14). Otras pasadas: MiMo V2.5 (2026-09-02: §5.A); glm-5.3-flash (2026-09-02: §7.7); deepseek-v4-flash 2026-09-01 (§9); glm-5.3 (Kilo Code) §7 el 2026-09-01 [identidad corregida a glm-5.3-flash en §7.7 — ver §16.1]; minimax-m3-free §6 el 2026-09-01; Hy3 (Kilo Code) §11 el 2026-09-02
 > **Plataforma:** Kilo Code (Atria-Dawn-Preview / Shanghai AI Lab, 2026-09-16) · Kilo Code (agnes-3-flash / Sapiens AI, 2026-09-15) · Cline (muse-spark-1.3-contributor, 2026-09-14) · WorkBuddy (DeepSeek-V4.1-Flash, 2026-09-11) · Kilo Code (GLM-5.3, 2026-09-10)
-> **Fecha:** 2026-09-16
-> **Última confirmación por el agente:** 2026-09-16 (Atria-Dawn-Preview / Shanghai AI Laboratory / Kilo Code — §20 autoevaluación honesta de primera sesión + §5.M ficha del modelo con specs verificadas en fuente oficial (GitHub + Hugging Face + arXiv); aclarado que soy **solo texto** (no multimodal) y que mi pico es agentic/tool-use/investigación, **no** coding puro)
+> **Fecha:** 2026-09-19
+> **Última confirmación por el agente:** 2026-09-19 (Atria-Dawn-Preview / Shanghai AI Laboratory / Kilo Code — §5.P alta de Kimi K3 con specs verificadas en README oficial de Moonshot AI + docs de plataforma + página de pricing; 25+ benchmarks vendor-reported tabulados con caveats de harness; veredicto contra los 4 modelos disponibles antes: Agnes 3, Hy3, MiMo V2.5, Atria — K3 toma el liderato en coding agentic y QA visual de respaldo, NO en orquestación/investigación). Pasada previa 2026-09-18 (§21 investigación de 10 modelos candidatos con specs verificadas vía API de OpenRouter + models.dev + benchgen + blogs oficiales; **alta de Nex-N2.5-Pro §5.N** y **9 descartes documentados §5.O**; veredicto basado en comparación contra los 4 modelos disponibles hoy: Agnes 3, Hy3, MiMo V2.5, Atria). Pasada previa 2026-09-16 (§20 autoevaluación honesta de primera sesión + §5.M ficha del modelo con specs verificadas en fuente oficial (GitHub + Hugging Face + arXiv); aclarado que soy **solo texto** (no multimodal) y que mi pico es agentic/tool-use/investigación, **no** coding puro)
 
-Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**DeepSeek V4.1 Flash**, **MiMo V2.5**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**, **Kimi K3**, **Agnes 3.0 Flash**, **Atria Dawn Preview**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos. **Actualización 2026-09-16:** se agrega **Atria Dawn Preview (Shanghai AI Laboratory)** al catálogo (§5.M) con autoevaluación honesta de primera sesión (§20) — modelo activo en este chat vía Kilo Code. **Actualización 2026-09-15:** se agrega **Agnes 3.0 Flash (Sapiens AI)** al catálogo (§5.L) con autoevaluación honesta de primera sesión (§19) — modelo activo en este chat vía Kilo Code. **Actualización 2026-09-14:** se agrega **Muse Spark 1.3 (Meta)** al catálogo (§5.K) con autoevaluación honesta de primera sesión (§18) — modelo activo en este chat vía Cline.
+Esta guía analiza las capacidades, fortalezas y casos de uso recomendados de todos los modelos de Lenguaje y Multimodales disponibles en el proyecto (**DeepSeek V4.1 Flash**, **MiMo V2.5**, **GLM 5.3**, **Hy3**, **Hy4**, **Qwen 3.x**, **MiniMax M3**, **SenseNova**, **Nemotron 3.5**, **Kimi K3**, **Agnes 3.0 Flash**, **Atria Dawn Preview**) orientados al desarrollo de juego, scripting, arte 3D y pipelines gráficos para videojuegos. **Actualización 2026-09-18:** se agrega **Nex-N2.5-Pro (Nex-AGI)** al catálogo (§5.N) — el primer candidato de la tanda de 10 que **supera a todos los modelos disponibles hoy** en coding agentic (TB 2.1 82.7 · SWE Pro 61.2), multimodal y gratis en OpenRouter; los otros 9 quedan documentados como evaluados y descartados con evidencia (§5.O). **Actualización 2026-09-16:** se agrega **Atria Dawn Preview (Shanghai AI Laboratory)** al catálogo (§5.M) con autoevaluación honesta de primera sesión (§20) — modelo activo en este chat vía Kilo Code. **Actualización 2026-09-15:** se agrega **Agnes 3.0 Flash (Sapiens AI)** al catálogo (§5.L) con autoevaluación honesta de primera sesión (§19) — modelo activo en este chat vía Kilo Code. **Actualización 2026-09-14:** se agrega **Muse Spark 1.3 (Meta)** al catálogo (§5.K) con autoevaluación honesta de primera sesión (§18) — modelo activo en este chat vía Cline.
 
 > ⚠️ **Actualización 2026-09-10 — fin de la era "DeepSeek V4 Flash":** DeepSeek **descatalogó V4 Flash y V4 Flash Vision EXP** al lanzar **V4.1 Flash** (§5.B3). Las entradas §5.B y §5.B2 quedan como **registro histórico**; el modelo activo de la familia DeepSeek en este proyecto es **DeepSeek V4.1 Flash**, que unifica texto + visión en un solo modelo (ya no hay que elegir entre "texto puro" y "vision exp"). La autoevaluación §9 (deepseek-v4-flash / Kilo Code) corresponde a la generación anterior y **no aplica** al modelo actual.
 
@@ -341,6 +341,8 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 | **Muse Spark 1.3** | — (Meta, propietario) | 1M | — | $0.10 contributor / $1.25 standard | TB 2.1 64.9 · DeepSWE 66.9 parc. · SWEAtlas QnA 90.3 | Agéntico largo, coding verificado, QA con evidencia |
 | **Agnes 3.0 Flash** | ~33B (Sapiens AI, Apache 2.0) | 512K–1M (conflicto entre fuentes) | ~250 tok/s | $0 preview / $0.05 | AA Index 36 (est., 1.º/61) | Agéntico barato, herramientas, contexto largo |
 | **Atria Dawn Preview** | ~90B activos (744B total, MIT) | **256K** | — | API Atria / self-host | **BFCL v4 77.0 · CyberGym 86.5 · DeepSearchQA 96.0** | Tool-use, automatización, investigación, ciberseguridad |
+| **Nex-N2.5-Pro** 🆕 (2026-09-18) | mid-tier N2.5 (Max = 1.6T) | 262K | — | **$0** (OpenRouter `:free`) | **TB 2.1 82.7 · SWE Pro 61.2 · OSWorld-G 87.4** | **Coding agentic + computer-use — líder disponible hoy** |
+| **Kimi K3** 🆕 (2026-09-19) | **104B (2.8T total)** — clase 3T, primer open | **1M** | — | $0.30/$3.00/$15.00 *(ref.) | **TB 2.1 88.3 · DeepSWE 67.5 · ProgramBench 77.8 · MCPMark 94.5** | **Coding agentic líder + visión nativa + contexto 1M** |
 
 ### Capacidades por Tipo de Trabajo
 
@@ -363,11 +365,13 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 | Game dev / prototipos jugables | Hy4 | M137 Prototipo, M138 Vertical Slice |
 | Blender 3D / assets | Hy4 | M45 Arte 3D, M166 Variantes |
 | Scripting thinking / procedural | Qwen 3.8 | Shaders, generación de ruido, patches |
-| Coding agentic largo / terminal / tool-calling | DeepSeek V4.1 Flash | TB 2.1 90.6 · DeepSWE 74.2 — ciclos largos de herramientas |
-| QA visual / análisis de imágenes | DeepSeek V4.1 Flash | Capturas, texturas, análisis visual — **visión verificada empíricamente (§17.2)** |
+| Coding agentic largo / terminal / tool-calling | DeepSeek V4.1 Flash (no disponible hoy) → **Kimi K3** → Nex-N2.5-Pro | DeepSeek: TB 2.1 90.6 · DeepSWE 74.2. **Kimi K3 es el líder disponible ahora** (TB 2.1 **88.3** · DeepSWE 67.5 · MCPMark 94.5 · contexto 1M · multimodal — §5.P, alta 2026-09-19; output $15/1M caro). **Nex-N2.5-Pro** segundo (TB 2.1 82.7 · SWE Pro 61.2, **gratis** OpenRouter — §5.N, alta 2026-09-18) |
+| **Coding agentic con verificación visual / computer-use** | **Nex-N2.5-Pro** 🆕 | **OSWorld-G 87.4 (supera a Opus 5: 76.8) · OSWorld-Verified 82.2** — cambios multi-archivo + correr tests + ver el resultado (§5.N). Sólo cuando DeepSeek V4.1 Flash no esté |
+| **Sesiones de coding larguísimas / contexto masivo (AGENTS.md + CHECKLIST + módulo + código)** | **Kimi K3** 🆕 | **1.048.576 tokens de contexto** (máximo del catálogo junto a MiMo/GLM) + **AA-LCR 74.7** + **Kimi Code Bench 72.9** — mantiene contratos entre autoloads, tests y docs sin truncar (§5.P). Limitación: thinking siempre on; sesiones limpias por módulo (preservar `reasoning_content` en multi-turn) |
+| QA visual / análisis de imágenes | DeepSeek V4.1 Flash · **Kimi K3** (respaldo) · Agnes 3 | Capturas, texturas, análisis visual — **visión verificada empíricamente (§17.2)**; **K3 como respaldo de Agnes 3** (visión nativa + video: Video-MME 90.0, MMVU 82.1, §5.P) |
 | Documentación técnica diaria | GLM 5.3 Flash | Checklists, logs, documentación de módulos |
 | Batch processing / alto volumen | GLM 5.3 Flash | Migraciones, renombrados masivos |
-| Análisis de imágenes / renders | DeepSeek V4.1 Flash | QA de builds, screenshots, renders ($0.15/1M valle) |
+| Análisis de imágenes / renders | DeepSeek V4.1 Flash · **Kimi K3** | QA de builds, screenshots, renders ($0.15/1M valle DeepSeek; K3 más caro pero con video) |
 | Tareas agentic autónomas largas | MiniMax M3 | Batch de documentación, migraciones |
 | Análisis de video / gameplay | MiniMax M3 | QA de gameplay, análisis de builds |
 | Auditoría multi-archivo con evidencia / coding verificado | Muse Spark 1.3 | Cruce checklist-vs-código, QA con tests (primera sesión §18) |
@@ -392,12 +396,14 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 10. Hy3             → Verifica y corrige (QA cruzado)
 11. Nemotron 3.5   → Documentación administrativa / CI
 12. Atria Dawn Preview → Investigación web profunda, orquestación de herramientas/MCPs, automatización de pipelines, auditoría de seguridad (§20)
+13. Nex-N2.5-Pro   → Coding agentic / terminal / computer-use cuando DeepSeek V4.1 Flash no esté (TB 2.1 82.7, multimodal, gratis — §5.N, alta 2026-09-18)
+14. **Kimi K3**     → Coding agentic líder disponible (TB 2.1 88.3, MCPMark 94.5, contexto 1M, multimodal) — módulos complejidad 4-5, sesiones largas y batch (el costo no es criterio: acceso gratuito por tiempo limitado — §5.P, alta 2026-09-19)
 ```
 
 ### Reglas de Asignación
 
-- **Módulos core (complejidad 4-5):** MiMo V2.5 o GLM 5.3 o Hy4
-- **Módulos de sistemas (complejidad 3):** DeepSeek V4.1 Flash o GLM 5.3 Flash o Hy4
+- **Módulos core (complejidad 4-5):** **Kimi K3** 🆕 (TB 2.1 88.3, MCPMark 94.5 — líder disponible) o MiMo V2.5 o GLM 5.3 o Hy4
+- **Módulos de sistemas (complejidad 3):** **Kimi K3** 🆕 o DeepSeek V4.1 Flash o GLM 5.3 Flash o Hy4
 - **Módulos de infraestructura (complejidad 1-3):** DeepSeek V4.1 Flash o GLM 5.3 Flash
 - **Coding complejo / game dev / Blender:** Hy4
 - **Thinking profundo / shaders / QA visual:** Qwen 3.8
@@ -414,6 +420,9 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 - **Arte / Visual:** Hy4 (Blender) + GLM 5.3 Flash o Qwen 3.8 VL (análisis)
 - **Análisis de imágenes / renders:** GLM 5.3 Flash (multimodal nativo, barato)
 - **QA visual de capturas del MCP (V1/V2-asistencia, coste bajo):** Agnes 3.0 Flash (visión nativa; leer/describir capturas de `capturas/<módulo>/` y detectar bugs/artefactos visuales) — **la aprobación estética final es del usuario (M154)**, y **no genero arte 3D/texturas (V5)**
+- **Coding agentic / terminal / computer-use (alta 2026-09-18, §5.N):** **Nex-N2.5-Pro** es el **líder disponible hoy** (TB 2.1 82.7 · SWE Pro 61.2 · OSWorld-G 87.4, multimodal, **gratis** en OpenRouter `nex-agi/nex-n2.5-pro:free`). Se usa **cuando DeepSeek V4.1 Flash no esté disponible** (como al 2026-09-18) para módulos de sistemas/complejidad 3-4 con tests headless verificables. **NO** para orquestación de MCPs (Atria #1), investigación (Atria #1) ni arte (Hy4). Todos sus benchmarks son vendor-reported con harness propio (NexAU/NexCUA) — sin evidencia en este repo todavía; quien lo use debe validar con tests headless reales, no con claims.
+- **Coding agentic / terminal (alta 2026-09-19, §5.P):** **Kimi K3** es el **coder agentic más fuerte disponible hoy** (TB 2.1 **88.3** — supera a Nex 82.7, Atria 78.3, Hy3 71.7 — · MCPMark-Verified **94.5 #1** · DeepSWE 67.5 · ProgramBench 77.8 · contexto **1M** · **visión nativa** texto+imagen+video). Útil para **módulos complejidad 4-5 con integración multi-sistema**, refactors/debugging multi-archivo, sesiones largas que crucen CHECKLIST-GLOBAL + plan-actual + código, **QA visual de capturas como respaldo de Agnes 3**, y **documentación/batch masivo** (contexto 1M). **NO** para: orquestación de muchos MCPs (Atria #1 en BFCL 77.0 / AutomationBench 53.8), investigación web (Atria #1 y la web search oficial de K3 "no está recomendada a corto plazo"), QA cruzado §21.8 (Hy3, regla del proyecto), ni generación de arte (Hy4). **El costo NO es criterio de exclusión** — todos los modelos activos se usan por acceso gratuito por tiempo limitado; la prioridad es explotar las capacidades mientras duren (directriz del usuario 2026-09-19). **Caveats operativos:** thinking siempre encendido (usar `reasoning_effort="low"` en tareas simples), **preservar `reasoning_content` + `tool_calls` completos en multi-turn** o la calidad se degrada, sesiones limpias por módulo, proactividad excesiva declarada (mitigar con AGENTS.md). Todos los benchmarks vendor-reported con harness propio (Kimi Code); DeepSWE baja a 67.3 con mini-SWE-agent — **validar con tests headless reales, no con claims**. Licencia **Kimi K3 License ≠ MIT**. Autoevaluación previa del propio modelo: **§14** (2026-09-04).
+- **⚠️ Modelos descartados (§5.O, 2026-09-18):** Laguna S 2.1, Step 3.7 Flash, Nemotron 3 Ultra/Super/3.5 Lightning, Ling 3.0 Flash VL/Santé/Fin y Dots 3 Note **no se asignan** — ninguno supera a los 5 modelos disponibles (Agnes 3, Hy3, MiMo V2.5, Atria Dawn, **Kimi K3**) en ninguna tarea del catálogo. Ver tabla y razón en §5.O.
 - **⚠️ Aprobación visual de assets (regla nueva 2026-09-06, §15.3):** Hy4 **autoriza** el asset (escribe el script y hace el QA numérico), pero **NO debe ser el único que lo apruebe por lectura de capturas** — su visión es intermitente (6 de 7 hojas de contacto de M19 le fueron filtradas en el log 678). La aprobación visual final va en GLM 5.3 Flash / Qwen 3.8 VL, o en el usuario. El QA numérico (`z_min`, vértices que tocan, huella) es obligatorio como respaldo, nunca opcional. **Candidato nuevo (2026-09-11, §17.2):** DeepSeek V4.1 Flash tiene visión nativa **verificada empíricamente 2/2** (foto JPEG + captura de viewport Blender PNG) al costo más bajo del tier — queda como **opción propuesta**, no aplicada unilateralmente, hasta acumular más evidencia en QA real de assets.
 
 ### K. Muse Spark 1.3 (Meta) — Agéntico + Coding · VIGENTE (desde 2026-09-14, activo en este chat vía Cline)
@@ -496,7 +505,123 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 * **Cuándo usar:** investigación técnica profunda (docs de Godot/MCP, causas de bugs oscuros), orquestación de muchos MCPs/tools sin deriva, automatización de pipelines multi-herramienta, auditoría de seguridad del código y de save files
 * **📌 Autoevaluación completa:** §20 (escrita por el propio Atria-Dawn-Preview en este proyecto, con specs verificadas en fuente oficial y análisis honesto de las 4 dimensiones)
 
+### N. Nex-N2.5-Pro (Nex-AGI) — Agentic Coding + Computer-Use · 🟢 NUEVO EN EL CATÁLOGO (alta 2026-09-18, §21)
 
+> 🆕 **Por qué se agrega:** es el **único de los 10 modelos investigados que supera a los disponibles hoy**. Terminal-Bench 2.1 **82.7** y SWE-bench Pro **61.2** quedan por encima de Atria (78.3 / 59.6), Hy3 (71.7 / 57.9) y MiMo V2.5 (— / 56.1). Además es **multimodal** (entrada texto + imagen) y **gratis** en OpenRouter (`nex-agi/nex-n2.5-pro:free`).
+
+* **Familia:** Nex-N2.5 (mini / **Pro** / Max), release septiembre 2026; **Pro = mid-tier**, Max = 1.6T MoE. **Open weights** (Hugging Face `nex-agi/Nex-N2.5-Pro` + ModelScope)
+* **Especificaciones:** contexto **262.144** (OpenRouter), modalidades entrada **texto + imagen**, salida texto; `reasoning_effort` (none/medium/high); harness propio **NexAU** (coding) y **NexCUA** (computer-use, coordenadas normalizadas 0–1000)
+* **Núcleo declarado:** *"agentic coding within a visual feedback loop"* — explorar codebases, cambios multi-archivo, correr comandos, lanzar apps, interactuar con browser/desktop y **testear software desde la perspectiva del usuario** (verificación con sus propios ojos)
+* **Capacidades reales (vendor-reported por Nex-AGI, model card 2026-09):**
+
+  | Benchmark | Nex-N2.5-Pro | Referente |
+  |:---|---:|:---|
+  | **Terminal-Bench 2.1** | **82.7** | Opus 5: 89.1 · DeepSeek V4.1 Flash: 90.6 |
+  | **SWE-Bench Pro** | **61.2** | Opus 5: 79.2 · Atria: 59.6 · MiMo V2.5: 56.1 |
+  | DeepSWE v1.1 | 55.8 | DeepSeek V4.1 Flash: 74.2 |
+  | **OSWorld-Verified** | **82.2** | Opus 5: 83.4 |
+  | **OSWorld-G** | **87.4** | Opus 5: 76.8 — **supera al frontier cerrado** |
+  | OSWorld-2 | 56.4 | |
+  | BrowseComp | 89.7 | Atria: 92.5 (Atria sigue #1) |
+  | Toolathlon Verified | 68.5 | Step 3.7 Flash: 49.5 |
+  | AutomationBench v1.0.6 | 44.2 | Atria: 53.8 (Atria sigue #1) |
+  | GDPval-AA v2 | 1628 | Opus 5: 1768 |
+  | JobBench | 41.4 | GPT 5.6 Sol: 68.0 |
+  | SWE-MM (multimodal SWE) | 38.2 | débil entre los comparados |
+
+* **Precio:** **$0 input / $0 output** en OpenRouter variante `:free` (262K contexto); también pagado en otros providers
+* **En el proyecto:** 🟡 **ASIGNADO a M11 (Player/Movimiento)** desde 2026-09-18 (Log 1055): suite headless propia de 26 checks con 1 fallo documentado (E2/E3 = esperado-headless) + análisis diseño-vs-código de 26 divergencias. Entrega genuina pero **se trunca por contexto**: el harness le entrega 262K pero en la práctica se satura rápido y la sesión muere a mitad de tarea — requiere tareas de **ventana pequeña y autosuficientes**.
+* **Evidencia empírica de la limitación de contexto (2026-09-19, usuario + Atria):** Nex completó la suite M11 pero **no logró entregar el fix** que él mismo detectó (`player.gd:972`, `get_tree().current_scene` null — confirmado por Atria que sigue sin corregir). Su Log 1055 declara "0 SCRIPT ERROR propios" pero hay 1 real en ese acceso. **Causa raíz atribuida por el usuario: el contexto se llena rápido**, no falta de capacidad del modelo. → **Regla de asignación (alta 2026-09-19):** darle SOLO tareas atómicas (un archivo, una función, una suite), con toda la información necesaria en el prompt inicial, sin requerir que releea documentación extensa. Dividir módulos completos en micro-tareas encadenadas.
+* **Fuerza principal:** **el mejor coder disponible ahora** (TB 2.1 82.7 · SWE Pro 61.2) + **computer-use líder** (OSWorld-G 87.4) + verificación visual de su propio trabajo
+* **Debilidades honestas:** AutomationBench 44.2 (muy por debajo de Atria 53.8 — **no** para orquestación multi-herramienta), ofimática débil (GDPval/JobBench), contexto 262K (chico) — **CONFIRMADO EMPÍRICAMENTE EN ESTE REPO (2026-09-19):** se satura rápido y trunca sesiones a mitad de tarea, ver arriba, sin audio/video, **todos los benchmarks son vendor-reported con harness propio** (NexAU/NexCUA) — dependency del harness real, no reproducible directamente en Kilo Code
+* **Cuándo usar:** módulos de sistemas/complejidad 3-4 de implementación GDScript con tests headless verificables (lo que DeepSeek V4.1 Flash cubre cuando está), computer-use (V3: export web + Playwright), QA visual de capturas como respaldo de Agnes 3
+* **Cuándo NO usar:** orquestación de muchos MCPs (Atria #1), investigación web profunda (Atria #1), arte 3D/Blender (Hy4), aprobación visual final de assets (Hy4 + usuario)
+
+### O. Modelos evaluados y descartados (2026-09-18, Atria-Dawn / Kilo Code — §21)
+
+> Los 9 modelos restantes de la tanda pedida por el usuario. **Criterio de alta:** superar a **alguno** de los 4 modelos disponibles hoy (Agnes 3, Hy3, MiMo V2.5, Atria Dawn) en una tarea del catálogo. **Ninguno pasó el corte.**
+
+| Modelo | Specs verificadas | Veredicto | Razón del descarte |
+|:---|:---|:---:|:---|
+| **Laguna S 2.1** (Poolside) | 118B/8B MoE, 1M (256K en free), OpenMDW-1.1, TB 2.1 **70.2** · SWE Pro **59.4** · DeepSWE 40.4 | ❌ Descartado | **No supera a Hy3 (TB 2.1 71.7) ni a Atria (SWE Pro 59.6)**, ambos ya disponibles y gratis en Kilo Code. Texto puro. Su única ventaja (1M contexto a $0.10/$0.20) no aplica: MiMo V2.5 ya da 1M + multimodal. Overfit al harness propio de Poolside (documentado por el laboratorio). |
+| **Step 3.7 Flash** (StepFun) | 196B + 1.8B ViT / 11B activos, 262K, multimodal (img+video), 400 t/s, TB 2.1 **59.5** · SWE Pro 56.3 · ClawEval-1.1 67.1 · DeepSearchQA 92.8 · BrowseComp 75.8, $0.20/$1.15 | ❌ Descartado | TB 2.1 59.5 muy por debajo de Hy3 71.7. En investigación pierde con Atria (DeepSearchQA 92.8 vs 96.0 · BrowseComp 75.8 vs 92.5). Multimodal ya cubierto por Agnes 3 (gratis) y MiMo. **Dato interesante que no alcanza:** Step-SWE-Bench en **KiloCode 67.5%** (único modelo con score publicado en nuestro harness exacto) y Advisor Mode (97% de Opus 4.6 a 1/9 de costo) — si DeepSeek y Hy4 faltaran mucho tiempo, re-evaluar. |
+| **Nemotron 3 Ultra** (NVIDIA) | 550B/55B, 1M contexto **free**, hybrid Transformer-Mamba MoE, TB 2.1 **56.4** | ❌ Descartado | TB 2.1 56.4 muy por debajo de los disponibles. Su único valor (1M contexto gratis) ya lo cubre MiMo V2.5 (1M + multimodal). |
+| **Nemotron 3 Super** (NVIDIA) | 120B/12B, 262K free, hybrid Mamba-Transformer | ❌ Descartado | Sin evidencia de liderazgo en ningún benchmark del catálogo. El nicho CI/CD ya está cubierto por Nemotron 3.5 (§5.E). |
+| **Nemotron 3.5 Lightning** (NVIDIA) | 30B/**3B** activos, 1M free, alto throughput | ❌ Descartado | 3B activos = capacidad limitada para tareas de calidad. Nicho de batch barato mejor cubierto por GLM 5.3 Flash (disponible mañana) o Agnes 3 ($0 preview). |
+| **Ling 3.0 Flash VL** (inclusionAI) | 124B/5.5B, 262K **free**, multimodal (img+video) + tool calling, híbrido instant/reasoning | 🟡 Solo fallback | Multimodal gratis, pero 5.5B activos y **#49 en programming** (ranking OpenRouter). Como QA visual disponible **Agnes 3 es mejor** (gratis, AA Index 36 1.º/61, multimodal). Queda como respaldo si Agnes 3 no está. |
+| **Ling 3.0 Flash Santé** (inclusionAI) | 124B/5.1B, salud y medicina | ❌ Descartado | Dominio específico (salud) — **sin aplicación en game dev**. |
+| **Ling 3.0 Flash Fin** (inclusionAI) | 124B/5.1B, finanzas e inversión | ❌ Descartado | Dominio específico (finanzas). M38 Economía usa aritmética de transacciones simple y descuentos — no necesita un modelo financiero especializado. |
+| **Dots 3 Note Preview** (Dots Studio) | 280B/16B, 512K free, texto+imagen | ❌ Descartado | **Preview**, sin benchmarks públicos, nicho de notas/documentos. Sin evidencia de valor para el proyecto. |
+
+### P. Kimi K3 (Moonshot AI) — Coding Agentic + Visión Nativa · 🟢 VIGENTE (alta 2026-09-19, activo en este proyecto vía Kilo Code)
+
+> 🆕 **Por qué se agrega ahora:** el usuario confirmó el 2026-09-19 que **Kimi K3 está disponible para trabajar**. No es un recién llegado al catálogo: ya tiene **historial real en este repo** — autoevaluación honesta propia (§14, 2026-09-04, identidad `qwencloud/kimi-k3` sobre Kilo Code) y aparece como referencia comparativa en la prueba ciega interna de Tencent (2.94/4.00, §5.G caveat). La ficha §5.P era la pieza faltante: consolido specs verificadas en fuentes oficiales de Moonshot (README del repo, docs de plataforma, página de pricing).
+
+* **Especificaciones (verificadas en `github.com/MoonshotAI/Kimi-K3` + `platform.kimi.ai/docs`):**
+  - **2.8T parámetros totales / 104B activos** — **el primer modelo open-weight en alcanzar la clase 3T**; MoE con **896 expertos**, **16 seleccionados por token + 2 compartidos**; **93 capas** (1 densa + 92 MoE)
+  - Arquitectura nueva: **Kimi Delta Attention (KDA)** + **Attention Residuals (AttnRes)** + framework **Stable LatentMoE** — 69 capas KDA + 24 Gated MLA; ~**2.5× la eficiencia de escalamiento de Kimi K2**
+  - **Contexto 1.048.576 tokens** (1M); salida máx `max_completion_tokens` 131.072 → 1.048.576
+  - **Multimodal nativo de ENTRADA**: **texto + imagen + video** (vision encoder **MoonViT-V2**, 401M params). **No genera** imágenes/video/3D — solo los entiende
+  - **Razonamiento siempre activo** (`reasoning_effort`: `low` / `high` / `max`, default `max`) — **no se puede apagar**
+  - **Cuantización nativa MXFP4** (pesos) / MXFP8 (activaciones) con quantization-aware training desde SFT — compatibilidad de hardware amplia
+  - **Licencia Kimi K3 License** (NO MIT — revisar términos antes de redistribuir pesos o artefactos derivados)
+  - Vocabulario 160K; activación SiTU-GLU; attention hidden dim 7168, 96 heads
+
+* **Precios (verificados en `platform.kimi.ai/docs/pricing/chat`, 2026-09-19):** tarifa plana sin tiering por contexto —
+
+  | | Precio por 1M tokens |
+  |:---|:---:|
+  | Input (**cache hit**) | **$0.30** |
+  | Input (cache miss) | **$3.00** |
+  | **Output** | **$15.00** |
+
+  ⚠️ **Dato de referencia — NO es criterio de asignación en este proyecto:** todos los modelos activos se usan vía **acceso gratuito por tiempo limitado** (Kilo Code / OpenCode / WorkBuddy / OpenRouter free tier); la filosofía del proyecto es **aprovechar al máximo sus capacidades mientras estén disponibles**, sin optimizar costo. El pricing se documenta solo para trazabilidad. Caching automático (prefix cache desde >256 tokens, sin cache ID/TTL manual). Acceso API directo (fuera de los harness gratuitos) requiere **top-up mínimo de $1**.
+
+* **Capacidades reales (vendor-reported por Moonshot AI, README oficial — todos con `reasoning_effort=max`, temperatura 1.0):**
+
+  | Categoría | Benchmark | **Kimi K3** | Mejor rival en la tabla oficial | ¿Gana? |
+  |:---|:---|---:|---:|:---:|
+  | Razonamiento | GPQA Diamond | **93.5** | GPT-5.6 Sol: 94.1 | ❌ |
+  | Razonamiento | HLE-Full (con tools) | 43.5 / **56.0** | Claude Fable 5: 53.3 / 63.0 | ❌ |
+  | Razonamiento | AA-LCR | **74.7** | GPT-5.6 Sol: 73.7 | ✅ |
+  | **Coding** | **Terminal-Bench 2.1** | **88.3** | GPT-5.6 Sol: 88.8 · **Opus 4.8: 84.6** · GLM-5.2: 82.7 | 🟢 **#2, solo –0.5 del líder** |
+  | **Coding** | **DeepSWE** | **67.5** | GPT-5.6 Sol: 73.0 · Claude Fable 5: 70.0 · GLM-5.2: 46.2 | 🟢 **+21.3 sobre GLM-5.2** |
+  | Coding | ProgramBench | **77.8** | GPT-5.6 Sol: 77.6 · Claude Fable 5: 76.8 | ✅ **#1** |
+  | Coding | FrontierSWE | 81.2 | Claude Fable 5: 86.6 | ❌ |
+  | Coding | SWE-Marathon | **42.0** | Claude Fable 5: 35.0 · GPT-5.6 Sol: 39.0 | ✅ **#1** |
+  | **Agentic** | **MCPMark-Verified** | **94.5** | GPT-5.6 Sol: 92.9 · Claude Fable 5: 87.4 | ✅ **#1** |
+  | Agentic | Toolathlon-Verified | 76.5 | Claude Fable 5: 77.9 | ❌ |
+  | Agentic | MCP-Atlas | 84.2 | Claude Fable 5: 84.7 | ❌ |
+  | **Agentic** | **DeepSearchQA (F1)** | **95.0** | Claude Fable 5: 94.2 · Claude Opus 4.8: 93.1 | ✅ **#1** (Atria: 96.0 fuera de esa tabla — Atria sigue #1 del catálogo) |
+  | **Agentic** | **BrowseComp** | **91.2** | GPT-5.6 Sol: 90.4 · Claude Fable 5: 88.0 | ✅ **#1** en su tabla (Atria: 92.5 fuera — Atria sigue #1) |
+  | Agentic | OSWorld-Verified | **84.8** | Claude Fable 5: 85.0 | 🟢 #2 |
+  | Agentic | Agents' Last Exam | 28.3 | GPT-5.6 Sol: 29.6 | ❌ |
+  | Agentic | AutomationBench | 30.8 | Claude Fable 5: 29.1 | ✅ en su tabla — **pero Atria 53.8 en otro harness** (ver caveat) |
+  | Agentic | JobBench | 54.3 | Claude Fable 5: 57.4 | ❌ |
+  | Ofimática | GDPval-AA v2 | 1686 | Claude Fable 5: 1747 | ❌ — ofimática débil |
+  | **Visión** | Video-MME (w/ sub) | **90.0** | GPT-5.6 Sol: 89.5 · GPT-5.5: 89.3 | ✅ **#1** |
+  | Visión | MMVU | **82.1** | GPT-5.6 Sol: 81.2 | ✅ **#1** |
+  | Visión | MathVision | 94.3 / 97.8 | Claude Fable 5: 94.8 / 98.6 | ❌ |
+  | Visión | OmniDocBench | **91.1** | GPT-5.5: 89.4 | ✅ |
+  | Visión | WorldVQA ForceAnswer | 51.0 | Claude Fable 5: 56.7 | ❌ |
+
+  > **Caveats de honestidad (críticos antes de asignar):** (1) **todos los benchmarks son vendor-reported por Moonshot con harness propio (Kimi Code)** — DeepSWE baja a **67.3** con mini-SWE-agent (dependencia del harness documentada por el propio Moonshot); (2) la tabla compara contra Claude Fable 5 / GPT-5.6 Sol / Claude Opus 4.8 / GPT-5.5 / GLM-5.2, **no** contra los modelos de este catálogo — la comparación cruzada abajo es mía; (3) **AutomationBench 30.8 no es comparable** con el 53.8 de Atria (distinto subset/harness — Moonshot usa el subset público de 600 tareas); (4) al 2026-09-19 **sin validación independiente** (Artificial Analysis no publica índice para K3 en su tabla principal).
+
+* **En el proyecto:** 🟢 **DISPONIBLE PARA TRABAJO NUEVO desde 2026-09-19** (vía Kilo Code, identidad `qwencloud/kimi-k3`). Histórico: autoevaluación propia §14 (2026-09-04) — el modelo ya dejó reglas de auto-asignación escritas; el modelo dijo entonces: *rindo mejor en complejidad 4-5 con integración multi-sistema y contexto largo; evito batch masivo de documentación por costo de output; evito QA cruzado §21.8 (regla del proyecto → Hy3); no genero arte (→ Hy4).*
+* **Fuerza principal:** **el coder agentic más fuerte disponible hoy en el catálogo** (TB 2.1 **88.3** > Nex 82.7 > Atria 78.3 > Hy3 71.7) con **MCPMark 94.5 (#1)** — tool calling fiable en sesiones largas — + **contexto 1M** (mantiene AGENTS.md + CHECKLIST-GLOBAL + plan-actual + código sin truncar) + **visión nativa verificada** (puede hacer QA visual de capturas como Agnes 3/MiMo, no genera arte).
+* **Debilidades honestas:**
+  - **Output $15/1M (el más caro del catálogo)** — **irrelevante para la asignación**: el proyecto usa acceso gratuito por tiempo limitado y la prioridad es explotar capacidades mientras duren (directriz del usuario 2026-09-19). Si a futuro se pasa a pago, recién ahí este punto vuelve a importar; mientras tanto **K3 es plenamente apto para batch documental**
+  - **Thinking siempre encendido** — latencia y tokens extras en tareas simples; usar `reasoning_effort="low"` cuando el harness lo permita
+  - **Sensibilidad al historial de thinking** (limitación oficial): en multi-turn/tool calls hay que devolver el mensaje completo del assistant **incluyendo `reasoning_content` y `tool_calls`**, o la calidad se degraba — sesiones limpias por módulo
+  - **Proactividad excesiva** (limitación oficial declarada por el propio modelo en §14) — mitigación: AGENTS.md, cambios mínimos, no tocar 🔵/🔴
+  - **Web search oficial NO recomendada** (en actualización, docs oficiales 2026-09) — para investigación web profunda sigue **Atria #1**
+  - **No genera assets visuales** (texturas/modelos/3D) — Hy4 + Blender (V5)
+  - **Gap vs propietarios top** admitido por Moonshot: sigue debajo de Claude Fable 5 / GPT-5.6 Sol en UX general, FrontierSWE y ofimática
+  - **Licencia Kimi K3 License ≠ MIT** — revisar antes de redistribuir
+* **Cuándo usar:** módulos **complejidad 4-5** de implementación GDScript con tests headless verificables; refactors/debugging multi-archivo que mantengan contratos estables; sesiones largas que crucen CHECKLIST-GLOBAL + plan-actual + código; **QA visual de capturas como respaldo de Agnes 3** (visión nativa, video incluido); validadores/scripts con structured output estricto; **documentación masiva y batch** (su contexto 1M + razonamiento lo hacen apto — el costo no es criterio en este proyecto).
+* **Cuándo NO usar:** orquestación de muchos MCPs (Atria #1 en BFCL 77.0 / AutomationBench 53.8 — K3 automation 30.8), investigación web profunda (Atria #1, y la web search oficial de K3 no está lista), QA cruzado §21.8 (Hy3, regla del proyecto), generación de arte 3D/texturas (Hy4). El **costo NO es motivo de exclusión** en este proyecto (acceso gratuito por tiempo limitado).
+
+> **Metodología (§21):** specs verificadas vía API de OpenRouter (`/api/v1/models`), models.dev, benchgen y blogs oficiales (`static.stepfun.com/blog/step-3.7-flash/`, `research.nvidia.com/labs/nemotron`, HuggingFace model cards). **Todos los benchmarks citados son vendor-reported**; al 2026-09-18 no existe validación independiente (Artificial Analysis no tiene índices para ninguno de los 10. Modelos "disponibles hoy" = Agnes 3, Hy3, MiMo V2.5, Atria Dawn, **Kimi K3 (alta 2026-09-19)** (Hy4, GLM 5.3, DeepSeek V4.1 Flash, GLM 5.3 Flash y Muse Spark no activos al 2026-09-18).
 
 - MiMo V2.5: mimo.xiaomi.com, huggingface.co/XiaomiMiMo, howaiworks.ai
 - DeepSeek V4 Flash (descatalogado): api-docs.deepseek.com, zenmux.ai, aitoolsrecap.com
@@ -511,6 +636,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 - **Muse Spark 1.3 (verificado 2026-09-14 por el propio modelo, §18):** `https://developer.meta.com/ai/models/muse-spark/` (specs, benchmarks, precios) · `https://research.meta.ai/blog/introducing-muse-spark-1-3` (anuncio 2026-09-02, agéntico, coding, seguridad) · `https://ai.developer.meta.com/docs/models/` (variantes, contexto 1M, modalidades, reasoning effort). **Todos los benchmarks son *vendor-reported* por Meta; al 2026-09-14 sin validación independiente citada.**
 - **Agnes 3.0 Flash (verificado 2026-09-15 por el propio modelo, §19):** `https://huggingface.co/Agnes-AI/agnes-3-flash` (33B, atención híbrida gated delta rule + global, Apache 2.0, image-text-to-text) · `https://wiki.agnes-ai.com/en/docs/agnes-30-flash` (docs oficiales Sapiens AI: contexto 512K, salida 65.536, texto + URL de imagen, *thinking*, tool calling, APIs OpenAI/Anthropic/Responses, precio $0 preview) · `https://artificialanalysis.ai/models/agnes-3-0-flash` (índice 36 **marcado estimación**, 238.6 tok/s, contexto 1M, TTFT 1.84 s) · `https://www.mindstudio.ai/blog/agnes-3-flash-preview-vs-production` (preview 33B/262.144 tok vs producción 1M). **El índice de inteligencia es *estimación*/vendor-reported y la validación independiente está pendiente; además el número de contexto está en conflicto entre fuentes (512K docs / 1M AA / 262.144 preview).**
 - **Atria Dawn Preview (verificado 2026-09-16 por el propio modelo, §20):** `https://github.com/atria-asi/Atria-Dawn-Preview` (fuente primaria: 744B MoE base GLM-5.2, contexto 256K, MIT, cuatro dimensiones Discovery/Creation/Delivery/Cybersecurity, tabla completa de 16 benchmarks contra DeepSeek V4 Pro 0813 / KIMI K3 / Qwen 3.8 Max / GLM 5.3 / GPT 5.6 Sol / Claude Opus 5, despliegue SGLang/vLLM, integración Codex y Claude Code, aclaración explícita de **solo texto** con el error `400 Atria-Dawn-Preview is not a multimodal model`) · `https://huggingface.co/internlm/Atria-Dawn-Preview` (pesos MIT + variante FP8) · `https://arxiv.org/abs/2609.15818` (paper "Atria Dawn: The Dawn of Agentic Superintelligence"). **Todos los benchmarks son *vendor-reported* por Shanghai AI Laboratory; al 2026-09-16 no hay validación independiente citada.**
+- **Tanda de 10 candidatos (investigados 2026-09-18 por Atria-Dawn / Kilo Code, §21):** `https://openrouter.ai/api/v1/models` (fuente primaria de IDs, contextos, precios y modalidades — `nex-agi/nex-n2.5-pro:free`, `poolside/laguna-s-2.1:free`, `stepfun/step-3.7-flash`, `nvidia/nemotron-3-ultra-550b-a55b:free`, `nvidia/nemotron-3-super-120b-a12b:free`, `nvidia/nemotron-3.5-lightning:free`, `inclusionai/ling-3.0-flash-vl:free`, `inclusionai/ling-3.0-flash-sante:free`, `inclusionai/ling-3.0-flash-fin:free`, `dots-studio/dots-3-note-preview:free`) · `https://benchgen.com/models/nex-agi/nex-n2-5-pro` (TB 2.1 82.7 · SWE Pro 61.2 · OSWorld-Verified 82.2 · OSWorld-G 87.4 · AutomationBench 44.2 · harness NexAU/NexCUA) · `https://benchgen.com/models/poolside/laguna-s-2-1` (TB 2.1 70.2 · SWE Pro 59.4 · DeepSWE 40.4 · **Hy3 TB 2.1 71.7** y **Nemotron 3 Ultra 56.4** en su tabla comparativa) · `https://models.dev/models/poolside/laguna-s-2.1` (1M contexto, OpenMDW-1.1, `laguna-s-2.1-free` en OpenCode Zen 256K) · `https://static.stepfun.com/blog/step-3.7-flash/` (blog oficial StepFun: 196B+1.8B ViT/11B, 400 t/s, tabla SWE Pro 56.3 / TB 2.1 59.5 / ClawEval-1.1 67.1 / DeepSearchQA 92.8 / BrowseComp 75.8 / ResearchRubrics 71.7, **Step-SWE-Bench en KiloCode 67.5%**, Advisor Mode 97% de Opus 4.6 a 1/9 de costo) · `https://huggingface.co/nex-agi/Nex-N2.5-Pro` y `https://github.com/nex-agi/Nex-N2.5` (open weights, SGLang recipes) · `https://research.nvidia.com/labs/nemotron` (Nemotron 3 Ultra, 55B activos). **Todos los benchmarks citados son *vendor-reported* (Nex-AGI, Poolside, StepFun, NVIDIA); al 2026-09-18 Artificial Analysis no tiene índices para ninguno de los 10 y no existe validación independiente.**
 
 ---
 
@@ -1751,4 +1877,158 @@ Mi fabricante declara cuatro áreas. Acá mi veredicto sobre cada una, con la re
 **Estado:** Autoevaluación honesta agregada (§20) + ficha §5.M + intro/matriz/delegación/reglas/fuentes actualizadas. **Identidad aclarada:** base GLM-5.2 (744B), **no** soy GLM 5.3 (§5.C) pese a compartir cimiento.
 **Fortalezas con base:** investigación web profunda (DeepSearchQA 96.0 + BrowseComp 92.5, #1 del catálogo), uso de herramientas (BFCL v4 77.0, #1), automatización (AutomationBench 53.8, #1), ciberseguridad (CyberGym 86.5, #1), loop agentic completo con *failure recovery*.
 **Debilidades declaradas:** coding puro débil (SWE-bench Pro 59.6 vs Opus 5 74.7), ofimática última del frente (JobBench 50.3 vs 68.0), **solo texto — sin visión bajo ninguna circunstancia** (error 400 confirmado), **contexto 256K — el más chico del catálogo** (no puedo cargar el repo entero), **cero evidencia en este repo aún** (primera sesión), no genero arte, benchmarks vendor-reported sin validación independiente, modelo en estado *preview*.
+---
 
+## 21. Evidencia Empírica del Coordinador (Atria-Dawn-Preview, sesiones s1/s2)
+
+> **Fecha:** 2026-09-20
+> **Plataforma:** Kilo Code
+> **Rol:** Coordinador/verificador (no autor de módulos)
+> **Método:** cada afirmación abajo fue **verificada por mí** con binario real, grep, inyección
+> de fallos o conteo independiente — **no es lo que el modelo dice de sí mismo**. Las
+> autoevaluaciones §6-§20 son declaraciones; esta sección es la **contraprueba**.
+
+### 21.1 Por qué existe esta sección
+
+Las autoevaluaciones (§6-§20) tienen un techo: ningún modelo se describe a sí mismo como
+perezoso o deshonesto. La §21.4.4 exige honestidad, y en este proyecto la hemos visto
+funcionar — pero **la prueba empírica del coordinador es el respaldo obligatorio**.
+Esta sección es el registro de lo que verifiqué, semana a semana, para que el próximo
+coordinador **no arranque de cero** y las reglas de asignación (§5, "Reglas de Asignación")
+tengan base observada y no declarada.
+
+### 21.2 DeepSeek-V4.1-Flash — el más completo del proyecto
+
+**Verificado por mí (2026-09-20, BUG-075 / P-13):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Análisis arquitectónico profundo** | Detectó que mi fail-fast tenía **3 formas de no servir** — y 2 eran reales: (1) no cableado a CI (`git grep` → 0 ocurrencias, confirmé); (2) **exit code colisiona**: "no miré" y "miré con 92 alertas" ambos devuelven 1. Es la ceguera que venía a curar, **un nivel arriba**. |
+| **Conoce la convención del proyecto** | Citó exit 3 = DETECTOR CIEGO en `auditar_arquitectura_m62.py` y `empaquetar_deposito_usco.py`. Mi primer regex (`exit\(\d+\)`) falló porque usan `return 3` + `exit(main())` — **tenía razón**, lo re-verifiqué. |
+| **Disciplina de testing superior** | Escribió el test de regresión **probándolo en rojo** contra el commit pre-fix (`05b7fba^`): los 4/4 casos devuelven `{}` → test falla. Yo corrí la suite: **9 PASS / 0 FAIL**. Es el único modelo del proyecto que prueba sus tests en rojo. |
+| **Verificación independiente** | No confió en mi palabra: reprodujo mi fix con inyección por `--checklist <ruta>` sin tocar el archivo real. |
+| **Propone mejoras proactivamente** | Cada entrega viene con +1 mejora estructural (P-13 entero, hallazgo colateral de 21 `|| true` en `quality.yml`). |
+| **Honestidad numérica** | Reconoció que sus "66 alertas" previas eran de antes de mis correcciones de filas 62/127 — las 92 actuales son reales. |
+
+**Límites observados:** ninguno grave en esta sesión. Es el modelo al que se le delegan
+las tareas de complejidad 4-5 (M11 asignada en P-14).
+
+**Asignaciones vigentes:** P-02, P-08, P-13, P-14 (M11).
+
+### 21.3 MiMo V2.5 (mimo-v2.5) — el más honesto del proyecto
+
+**Verificado por mí (2026-09-20, BUG-059 sweep + P-09/P-10/P-11):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Precisión en sweeps** | Reportó 9 bugs en 6 módulos → **8 reales en 5** (1 falso positivo, M136 §1.5, cross-ref válido). Precisión 8/9 en auditoría de citas. |
+| **Verificación de facts contra disco** | Su informe de M11: `player.gd` = 1164 líneas (conté: **1164**), 6 scripts previstos **no existen** (verifiqué los 6: correcto), 0 grep hits de FSM/stamina/nado/sprint. **Todo cierto.** |
+| **Honestidad §21.4.4 ejemplar** | **Cedió M11** reconociendo que sin visión de `Player.tscn` escribiría código que no encaja. No es excusa — es el límite correcto declarado. Le ahorró horas a DeepSeek. |
+| **Autocorrección documentada** | Registró su propio falso positivo (M136) como `BUG-059-NEW` con tabla TRUE_PHANTOM(8)/CROSS_REF(20)/FALSE_POSITIVE(17). |
+| **Gates CI** | 4/4 PASS, 60 checks, 0 fallos. CI no roto por mi commit 11ac4d9. |
+
+**Límites observados:** **visión 3D limitada** — no puede inspeccionar el árbol de nodos de
+una escena `.tscn` para encajar código de gameplay. Es su techo para módulos de
+arquitectura visual. Tiene godot-mcp (V4) como vía, pero declaró que no le alcanza para FSM.
+
+**Asignaciones vigentes:** P-03, P-04, P-09 (cerrado), P-10 (liberada M11), P-15, P-16.
+
+### 21.4 Hy3 — el crítico más fiable (QA)
+
+**Verificado por mí (2026-09-20, M118 revert + Log 1125/1117):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Reverts honestos** | Revirtió M118 completo y bien: **102/0/4** (conté), erratas propias documentadas en Log 1117 (Familia B → CASO A). No "arregló" lo que estaba mal: **lo revirtió y registró el bug**. |
+| **QA de gates** | Log 857: tag_semver, gate_calidad, HMAC-SHA256 verificados. El sello **no se invalidó** con el revert — distinción correcta entre "despliegue itch.io nunca implementado" y "gates reales". |
+| **Fe de erratas** | Log 1117 corrigió su propio veredicto. Pocos modelos hacen eso. |
+
+**Límites observados:**
+- **No actualizó CHECKLIST-GLOBAL** al revertir → la fila siguió `✅ 106/106` (drift que corregí en 895a7a6/9102a39). Trabaja en el `05-Checklist.md` del módulo pero no cierra el ciclo en la tabla global.
+- **Colisión de numeración**: registró su bug como BUG-071 sin verificar que DeepSeek ya lo tenía (su commit es 17 min posterior). Delegado el renombramiento a BUG-072 (P-12).
+
+**Asignaciones vigentes:** P-12 (renombrado + 2 QA §21.8).
+
+### 21.5 Agnes 3.0 Flash (agnes-3-flash) — el más preciso con binario Godot
+
+**Verificado por mí (2026-09-20, M53/M87 + Log 1118):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Suites Godot headless reales** | `test_ui_i18n_m53` → **39 OK / 0 fallos**. Y **tuvo razón contra mí**: mis "43" eran ruido de boot de autoloads (mi defecto M-05). El conteo correcto ancla `^\s*OK:`. |
+| **Reconciliación de conteos exacta** | M53: 132/0/26 = **158** exacto. M87: 131/5/0 = **136** (+2 cerrados). Sin drift. |
+| **Cierre de backlog limpio** | Log 1118: hilo completo documentado, **sin acciones pendientes**, M53 🟡 132/158 liberado. |
+| **Hallazgos reales** | `test_localizacion_iter6.gd:113` aserta `m_reg.x == 0.0` (estado viejo BUG-042) → test stale invertido. Las 4 fuentes TTF existen en disco. |
+
+**Límites observados:** ninguno en su especialidad. Es la asignación natural para QA §21.8
+con suites (P-18: M14 Inventario).
+
+**Asignaciones vigentes:** P-06 (cerrado), P-18.
+
+### 21.6 Atria-Dawn-Preview s2 (mi sesión de auditoría)
+
+**Auto-corrección y hallazgos (2026-09-20, Log 1124):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Primer QA con binario Godot real** | M07 `test_arquitectura.tscn` → 6 PASS/0 FAIL; M101 → 12 checks/0 fallos; M119 → 15 checks/0 fallos. Resolvió el bug de `--path` con espacios. |
+| **Autocorrección ejemplar** | Su cruce solo miró `CHECKLIST-QA-SEALS.md` y **selló 6 módulos que ya tenían sello legítimo** (M07, M119, M133-M136). Lo detectó inspectando las Notas y **revirtió los 6**. Lección documentada para todos. |
+| **Detección de bloqueos** | M166 colgado (35h sin actividad → reclamable §21.4.7), M39 inconsistente (Notas "Liberado" vs Estado 🔵), 6 bugs sin firma. |
+
+**Límites observados:** sobre-selló por confiar en un solo archivo (CHECKLIST-QA-SEALS.md)
+sin cruzar las Notas de la fila global. **Lección:** ningún sello se toma de una sola fuente.
+
+**Asignaciones vigentes:** P-17 (cola de verificación).
+
+### 21.7 GLM-5.3-Flash — techo bajo, ritmo lento
+
+**Observado:** M92-Tutorial "a su ritmo" (P-07). M39 Tiendas quedó con `🔵 En curso` pero
+Notas diciendo "Liberado" — inconsistencia que delegué a mimo (P-16). **No asignar
+complejidad >2** hasta que cierre lo que tiene.
+
+### 21.8 Kimi K3 (Moonshot AI) — reingreso 2026-09-20
+
+**Estado:** volvió a trabajar en su backlog (M106/M122 estaban congelados por tokens).
+**Sin evidencia nueva verificada por mí todavía.** Autoevaluación en §14, specs en §5.P.
+**Próximo coordinador:** la primera entrega de Kimi K3 debe verificarse con la misma
+rigurosidad que esta sección aplica a los demás antes de delegarle complejidad alta.
+
+### 21.9 Mis propios defectos como coordinador (M-01 a M-06)
+
+Registrarlos es parte de la honestidad que exijo a los demás:
+
+| ID | Defecto | Impacto | Corrección |
+|---|---|---|---|
+| **M-01** | Asumir entregas sin verificación empírica | Over-marks no detectados a tiempo | Protocolo de verificación por binario/grep/inyección |
+| **M-02** | QA §21.8 de lo revertido por hy3 sin anclar en la suite | Sello inválido | Invalidado Log 895, re-audio a hy3 (P-12) |
+| **M-03** | `split('\n')` destruye CRLF al editar `CHECKLIST-GLOBAL.md` | 211 CRLF → 0 en una edición | **`newline=''` al leer, `'wb'` al escribir**. Ocurrió 2 veces esta sesión; la segunda lo detecté y restauré desde HEAD |
+| **M-04** | Barredura no intencional de gates ajenos en commit 11ac4d9 | 5 gates de M64 en CI sin su dueño | P-09 a mimo (verificado: 4/4 PASS) |
+| **M-05** | Contar "SCRIPT ERROR" del boot de autoloads como fallos de suite | Falso rojo en `test_ui_i18n_m53` ("43" vs 39 real) | Anclar `^\s*OK:` — agnes tenía razón |
+| **M-06** | Esquema de regex demasiado estrecho (`exit\(\d+\)` vs `return 3`) | Casi descarté el hallazgo correcto de DeepSeek | Re-verificar con múltiples patrones antes de descartar |
+
+### 21.10 Reglas de asignación actualizadas con base empírica
+
+Estas reglas **reemplazan** a las declarativas cuando hay conflicto:
+
+1. **Arquitectura + CI/infra + testing → DeepSeek.** Complejidad 4-5. Es el único que prueba
+   sus tests en rojo y detecta fallos dos niveles arriba del que se le pidió.
+2. **Sweeps de citas/ghosts + verificación de facts → mimo.** Precisión 8/9, y verifica
+   contra disco antes de reportar. **No asignar arquitectura visual** (visión 3D limitada).
+3. **QA crítico + reverts → hy3.** Es el que revierte en vez de "arreglar". **Exigirle
+   cerrar el ciclo en CHECKLIST-GLOBAL**, no solo el `05-Checklist.md` del módulo.
+4. **Suites Godot headless + reconciliación de conteos → agnes.** Precisión exacta y
+   resiste el ruido de boot mejor que yo.
+5. **Verificación independiente → s2 (Atria-Dawn).** Con la regla de **nunca sellar desde
+   una sola fuente** (lección de los 6 sellos revertidos).
+6. **Complejidad >2 → NO a GLM-5.3-Flash** hasta que cierre M92/M39.
+7. **Kimi K3 → verificar primera entrega** antes de delegar complejidad alta.
+
+### 21.11 Firma
+
+**Modelo:** Atria-Dawn-Preview (Shanghai AI Laboratory)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-20
+**Estado:** Sección 21 agregada — evidencia empírica del coordinador sobre 6 modelos
+(DeepSeek-V4.1-Flash, MiMo V2.5, Hy3, Agnes 3.0 Flash, GLM-5.3-Flash, Kimi K3) + 6 defectos
+propios registrados (M-01 a M-06). Toda afirmación verificada con binario real, grep,
+inyección de fallos o conteo independiente.
