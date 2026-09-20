@@ -193,10 +193,19 @@ func _load_fonts() -> void:
 func _try_load_font(path: String, fallback_font: Font) -> Font:
 	var font_file := FontFile.new()
 	var err := font_file.load_dynamic_font(path)
-	if err == OK:
-		return font_file as Font
-	push_warning("ThemeUx: no se pudo cargar fuente desde " + path)
-	return fallback_font
+	if err != OK:
+		push_warning("ThemeUx: no se pudo cargar fuente desde " + path)
+		return fallback_font
+	# BUG-042: `load_dynamic_font()` devuelve OK aunque el archivo NO sea una
+	# fuente. Medido el 2026-09-18: una pagina HTML 404 guardada con extension
+	# `.ttf` da err=0 y devuelve un FontFile NO nulo con TODAS las metricas en
+	# 0.0 px. Un objeto sin glifos es peor que una fuente ausente: el texto se
+	# dibuja con la de reserva y nada avisa. Por eso la unica comprobacion
+	# valida es MEDIR, no mirar la referencia ni el codigo de error.
+	if font_file.get_string_size("A", HORIZONTAL_ALIGNMENT_LEFT, -1, 16).x <= 0.0:
+		push_warning("ThemeUx: " + path + " no es una fuente valida (no mide texto) — se usa la de reserva")
+		return fallback_font
+	return font_file as Font
 
 
 func _setup_font_bindings() -> void:
