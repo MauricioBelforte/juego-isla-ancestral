@@ -1,25 +1,27 @@
 **Modelo:** DeepSeek-V4.1-Flash (último modificador)
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-19 (iter. 3 — Log 1094)
+**Fecha:** 2026-09-20 (iter. 4 — Log 1112)
 
 # 05-Checklist.md — Módulo 62: Memoria
 
 ## Reserva actual
 
-- Estado: 🟢 En curso — iter. 3 (Log 1094) por DeepSeek-V4.1-Flash
+- Estado: 🟢 En curso — iter. 4 (Log 1112) por DeepSeek-V4.1-Flash
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Fase: Base de producción (soporte M61 Rendimiento)
 - Dificultad: 3
 - Visión: V0
 - Entrada: M61 🟡 (núcleo OK, presupuestos base)
 - Salida: 5 defectos reales corregidos (denominador del semáforo, enforcement, muestreo por frame, drift/baseline a 5 min, pico por punto de interés) + `PoolFactory` + `LeakGuard` + `TextureMemory` + dataset regenerado por `generar_budgets.gd` + 4 suites con guardián probado por inyección (232 checks) + gate de CI en `quality.yml`
-- Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json`
+  - **iter. 4:** presupuesto de liberación por refcount **medido** (pico < 3 ms, delta de lote < 50 ms) + nodos huérfanos estables en reposo + **auditor estático de arquitectura de servicios** (`scripts/auditar_arquitectura_m62.py`, con selftest probado en rojo) + 2 gates nuevos de CI. 2 bugs nuevos (BUG-068/BUG-069).
+- Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json` + `scripts/auditar_arquitectura_m62.py`
 - Fecha cierre: (pendiente — al cerrar con `--estado`)
 
 ### Historial de reservas
 - **iter. 1** (núcleo): deepseek-v4-flash / Kilo Code — 2026-09-01 19:50 (Log 390), liberado 🟡
 - **iter. 2** (enforcement + pool): glm-5.3-flash / Kilo Code — 2026-09-01/03 (Log 604), liberado 🟡
 - **iter. 3**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-19 (Log 1094)
+- **iter. 4**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20 (Log 1112)
 
 ## A. Problema y objetivos
 
@@ -94,7 +96,7 @@
 - [ ] Los datos de partida (M29) no retienen referencias a nodos del mundo [M]
 - [x] Partículas y audio se detienen y devuelven al pool al desactivar la fuente [M]
 - [x] Los callables con bound parameters se desconectan en `_exit_tree` (anti-leak de lambdas) [M] — Log 1094: `LeakGuard.conectar()` guarda el Callable EXACTO (incluido el `.bind()`), así el disconnect funciona; probado
-- [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C]
+- [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evidencia de por qué.** El auditor nuevo mide **2 componentes fuertemente conexas** (7 nodos: `CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather`; y 2 nodos: `ThemeService, UIManager`) más 9 referencias a un autoload declarado después. Escalado como **BUG-069**; el gate los tiene en lista de permitidos para que ningún ciclo NUEVO pase
 - [ ] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C]
 - [ ] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual) [C]
 
@@ -102,12 +104,12 @@
 
 - [ ] RN1: presupuesto de RAM objetivo ≤ 2.5 GB en PCs de gama media (preset Alta) [M]
 - [ ] RN1: preset Baja ≤ 1.5 GB para gama baja con 4 GB de RAM [M]
-- [ ] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones [M]
+- [x] RN2: sin picos de frame: deltas < 50 ms durante descargas o liberaciones [M] — **iter. 4 (Log 1112): MEDIDO.** El lote completo de liberación por refcount queda en **2,1–5,8 ms** (ligero 8 MB) y **3,9–5,8 ms** (pesado 64 MB), muy por debajo del límite de 50 ms. Ver `test_m62_liberacion.gd`
 - [ ] RN2: cero hitching perceptible por refcount en liberaciones masivas [C]
 - [ ] RN3: memoria estable: sesión de 30 min con drift < 5% sobre baseline [C]
 - [x] RN4: topes configurables desde `budgets.tres` sin recompilar [S]
 - [x] RN5: implementación 100% Godot 4.x + GDScript, sin C# ni plugins externos [S]
-- [ ] RN6: ninguna operación de memoria bloquea el hilo principal [M]
+- [x] RN6: ninguna operación de memoria bloquea el hilo principal [M] — **iter. 4 (Log 1112): MEDIDO** para el caso de liberación por refcount: el pico de UNA operación es 0,279–0,492 ms (ligero) y 0,414–0,448 ms (pesado), por debajo de un frame a 60 FPS (16,67 ms). Alcance: mide liberación de `RefCounted`, no toda operación de memoria del motor
 - [ ] RN9: la gestión de memoria es transparente para la partida (determinismo intacto) [S]
 
 ## G. Diseño de arquitectura
@@ -187,8 +189,8 @@
 - [x] Profiling: identificar top de allocs por frame en hot paths [M]
 - [x] Cero allocs deliberados en `_process`/`_physics_process` del gameplay [C] — Log 1094: el muestreo por frame con `_muestras.append()`+`pop_front` (un alloc deliberado por frame, justo lo prohibido) se reemplazó por muestreo por TIEMPO y ventana circular `PackedFloat32Array`
 - [x] Uso de arrays tipados y `Packed*Array` donde el tamaño es fijo [M] — Log 1094: ventana de 600 muestras en `PackedFloat32Array` pre-dimensionado (0 allocs por frame)
-- [ ] Evitar `duplicate()`, `instantiate()` y `load()` síncrono en gameplay [M]
-- [ ] Pico de liberación por refcount < 3 ms al descargar una región completa [C]
+- [x] Evitar `duplicate()`, `instantiate()` y `load()` síncrono en gameplay [M] — **iter. 4 (Log 1112): MEDIDO y con gate.** Auditor estático nuevo `scripts/auditar_arquitectura_m62.py` (reglas B1/B2/B3): **0 hallazgos** en 800 archivos `.gd` y **79 callbacks por frame** (`_process`, `_physics_process`, `_input`, `_unhandled_input`, `_unhandled_key_input`, `_integrate_forces`). El auditor lleva **guarda de ceguera** (si resuelve 0 autoloads, o el grafo queda con 0 aristas, o encuentra 0 callbacks por frame, sale 3 en vez de 0) y `--selftest` probado EN ROJO: su primera corrida cazó 4 defectos del propio auditor (entre ellos que `x.instantiate()` y `d.duplicate()` eran indetectables por un lookbehind mal puesto). Gate `architecture-guard` en `quality.yml`
+- [x] Pico de liberación por refcount < 3 ms al descargar una región completa [C] — **iter. 4 (Log 1112): MEDIDO.** `test_m62_liberacion.gd` (15 checks, 0 fallos, x5 idénticas): pico por objeto **0,279–0,492 ms** en la variante ligera (2048 × 4 KB) y **0,414–0,448 ms** en la pesada (256 × 256 KB), contra el límite declarado de 3 ms. Medición con rondas intercaladas y mínimo por variante (trampa 78)
 
 ## M. Documentación
 
@@ -210,7 +212,7 @@
 - [ ] Test Play Mode: máximo de chunks cargados sin superar el presupuesto voxel [M]
 - [ ] Test Play Mode: textura gigante forzada degrada sin crash [M]
 - [x] Test de semáforos: forzar 90% y verificar descargas automáticas y registro en log [C] — Log 1094: bloques B y C de `test_memoria_m62_iter3.gd` (1599/1600/1799/1800/1899/1900/2000 MB) + bloque C de `test_enforcement_m62.gd`
-- [ ] Test de nodos huérfanos: conteo de orphans en reposo con valor estable [M]
+- [x] Test de nodos huérfanos: conteo de orphans en reposo con valor estable [M] — **iter. 4 (Log 1112): MEDIDO.** Bloque D de `test_m62_liberacion.gd`: base=0, 5 muestras consecutivas sin deriva, crear 128 nodos sin padre los cuenta (0 → 128) y liberarlos devuelve el conteo a 0 (sin leak). Lee `Performance.OBJECT_ORPHAN_NODE_COUNT`
 - [ ] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C]
 
 ## Notas del Agente (iter. 2 GlobalPool — Log 604, glm-5.3-flash/Kilo Code)
@@ -229,3 +231,52 @@
 - Contadores propios por sistema voxel/audio/texturas (requiere instrumentar M08/M43/M47)
 - Test de leaks teleport ×10 (requiere mundo real M08/M09)
 - Presupuestos por preset M90 (800 MB voxel / 200 MB pool en Alta)
+
+## Notas del Agente (iter. 4 — Log 1112, DeepSeek-V4.1-Flash / WorkBuddy)
+
+### Lo que hice
+- **Auditor estático nuevo** `scripts/auditar_arquitectura_m62.py` (fuera de `res://`: es herramienta de
+  repo, junto a `verificar_binarios.py`). Dos grupos de reglas que hasta ahora no tenían ninguna puerta:
+  - **Grupo A — grafo de servicios** (111 autoloads, 213 referencias explícitas):
+    A1 componentes fuertemente conexas (Tarjan) · A2 referencias a un autoload declarado después,
+    alcanzables desde `_ready()` · A3 el mismo script registrado como dos autoloads.
+  - **Grupo B — carga síncrona** en callbacks por frame (`load()`, `instantiate()`, `duplicate()`).
+- **Suite nueva** `test_m62_liberacion.gd` (15 checks): presupuesto de liberación por refcount
+  (L191 + RN2 + RN6) y nodos huérfanos en reposo.
+- **2 gates de CI nuevos**: `test_m62_liberacion.gd` dentro de `test-suite`, y el job
+  `architecture-guard` (con selftest + auditor) registrado en `summary`.
+
+### Lo que la medición me corrigió (3 veces)
+1. **A2 no es un bug de runtime.** La hipótesis era «`get_node_or_null("/root/X")` desde `_ready()`
+   devuelve null si X se declara después → rama saltada en silencio». **Medido con un banco de
+   pruebas propio (2 autoloads, Godot 4.7.2 headless): falso.** En `_ready()` Godot ya instanció
+   TODOS los autoloads, así que la búsqueda acierta. Lo único que falla es `_init()`, y falla con
+   un `ERROR` fuerte y **para cualquier destino**, no por el orden. Se dejó escrito en el auditor y
+   en BUG-069 para que nadie «arregle» un crash que no existe.
+2. **Mi propio auditor tenía 4 defectos.** El `--selftest` los cazó en rojo: `x.instantiate()` y
+   `d.duplicate()` eran **indetectables** (lookbehind que prohibía el punto delante, y esas dos son
+   siempre llamadas a método); y dos aserciones del selftest estaban mal escritas (esperaban que
+   `_ready` fuera un callback por frame, y ponían `preload` y `instantiate` en la misma línea).
+3. **Una aserción de la suite era una suposición.** «2048 objetos chicos cuestan más en total que
+   256 grandes» → medido: **al revés** (2346 µs vs 4270 µs). Y comparar los **picos** por objeto
+   resultó inestable (corrida 3: 492 µs > 448 µs). La comparación estable es el **total**.
+
+### Hallazgos escalados
+- **BUG-068** — `hardware` y `HardwareManager` son el **mismo script** en dos autoloads → 2
+  instancias (medido: `instance_id` distintos, `==` falso), 2 parseos del JSON y 2 registros en
+  ServiceRegistry. Los dos nombres están **sin usar** (0 referencias). Fix de 1 línea.
+- **BUG-069** — 2 componentes cíclicas + 9 referencias fuera de orden. Deuda arquitectónica, **sin
+  fallo de runtime medido**.
+
+### Trampas nuevas que deja esta iteración
+- **Un auditor ciego y un auditor limpio dicen lo mismo.** El detector de ciclos reportó «0 ciclos»
+  DOS veces siendo ciego: la primera porque resolvía mal las rutas de los autoloads (los 111
+  quedaban «sin archivo») y la segunda porque no encontraba callbacks por frame. De ahí la guarda
+  de ceguera con exit 3, y el fixture explícito de «grafo con 0 aristas».
+- **Un detector laxo inventa ciclos.** Contar la mera aparición del identificador dio 13 ciclos, uno
+  de ellos `HardwareManager -> hardware`: y resulta que **ambos nombres apuntan al mismo archivo**.
+  Solo cuentan las referencias explícitas (`get_node`/`get_node_or_null("/root/X")`) y hay que
+  excluir las aristas entre autoloads del mismo archivo.
+- **El selftest hay que probarlo antes de confiar en él.** El de este auditor pasó de 4 fallos a 0
+  corrigiendo el auditor Y las aserciones; sin esa primera corrida en rojo, el gate habría entrado a
+  CI sin detectar `instantiate()` ni `duplicate()`.

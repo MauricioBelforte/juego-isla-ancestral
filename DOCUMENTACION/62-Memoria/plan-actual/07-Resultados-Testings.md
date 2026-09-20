@@ -15,9 +15,10 @@
 | `test_enforcement_m62.gd` | 47 | 0 | 0 | idénticas |
 | `test_pool_iter2.gd` | 25 | 0 | 0 | idénticas |
 | `test_memoria_m62_iter3.gd` | 133 | 0 | 0 | idénticas |
+| `test_m62_liberacion.gd` (iter. 4) | 15 | 0 | 0 | idénticas (×5) |
 | `generar_budgets.gd -- --check` | 20 | 0 | 0 | sha256 `872f9321bc61ab21` en 2 escrituras |
 
-**Total: 232 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
+**Total: 247 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
 `[OK]`/`[FAIL]` **normalizada**, no sobre la salida cruda: la salida cruda trae timestamps de sesión y
 duraciones, y compararla entera daría «0 idénticas» con la suite perfectamente determinista.
 
@@ -140,3 +141,69 @@ tests de otros módulos (líneas 130-142, 202, 212, 291). Es un falso verde here
 - **Integración real con M08/M09/M41-M44/M63**: los contadores por sistema están implementados pero
   nadie reporta todavía, así que `total_consumo_mb()` sigue en 0 fuera de los tests.
 - **QA cruzado §21.8**: pendiente, y **no puede hacerlo el autor**.
+
+## 8. Iteración 4 (Log 1112): presupuesto de liberación y auditor de arquitectura
+
+### 8.1 `test_m62_liberacion.gd` — 15 checks, 0 fallos, ×5 idénticas
+
+Metodología anti-trampa-78: **rondas intercaladas** (se miden las 2 variantes en cada ronda) y
+**mínimo por variante**; luego se corre la suite 5 veces y se comprueba que el signo no cambia.
+
+| Variante | Objetos | Payload | Pico por objeto (L191, límite 3 ms) | Lote completo (RN2, límite 50 ms) |
+|---|---|---|---|---|
+| ligera | 2048 | 4 KB (8 MB) | 0,279 – 0,492 ms | 2,1 – 3,4 ms |
+| pesada | 256 | 256 KB (64 MB) | 0,414 – 0,448 ms | 3,9 – 5,8 ms |
+
+RN6 se satisface con margen: el pico de **una** operación (≤ 0,492 ms) está muy por debajo de un
+frame a 60 FPS (16,67 ms). **Huérfanos**: base 0, estable en 5 muestras consecutivas, 128 nodos sin
+padre contados (0 → 128) y liberados (128 → 0, sin leak).
+
+### 8.2 Tres correcciones que hizo la medición (no la revisión)
+
+1. **La hipótesis sobre A2 era falsa.** Se creía que una referencia a un autoload declarado después
+   devolvía null desde `_ready()`. Banco de pruebas propio (2 autoloads, Godot 4.7.2 headless):
+   desde `_init()` → null + `ERROR` fuerte; desde `_ready()` → **encontrado**. Godot ya instanció
+   todos los autoloads antes del primer `_ready()`. Se documenta para que nadie «arregle» un crash
+   inexistente; ver BUG-069.
+2. **El auditor tenía 4 defectos propios**, cazados por su selftest en rojo.
+3. **Una aserción de la suite era una suposición**: «2048 objetos chicos cuestan más en total que 256
+   grandes» → medido **al revés** (2346 µs vs 4270 µs). Y comparar **picos** es inestable (corrida 3:
+   492 µs > 448 µs); la señal estable es el **total**.
+
+### 8.3 Guardián probado POR INYECCIÓN (5.ª suite)
+
+Inyección: `var _x: Node = load("res://.../unload_policy.gd").new()` al principio de `_run()`
+(asignar un `RefCounted` a un `Node` aborta la función). Resultado:
+
+```
+SCRIPT ERROR: Trying to assign value of type 'RefCounted' to a variable of type 'Node'.
+   at: _run (.../_tmp_inject_m62.gd:109)
+  [FALLO] los 4 bloques se completaron — no terminaron: ["A", "B", "C", "D"]
+  [FALLO] solo 1 checks ejecutados (minimo 15)
+-- checks por bloque: {  }
+=== Resumen M62 liberacion: 1 checks, 2 fallos ===
+RC=1
+```
+
+Las 3 capas funcionan: el `SCRIPT ERROR` **aborta la función** (por eso sus checks no corren y no
+fallan), `_summary()` **nombra** los 4 bloques que no terminaron, y el **piso** salta. Además
+**termina con exit 1 sin colgarse**, que es lo que se quería verificar del `call_deferred` separado.
+El archivo inyectado y su `.uid` se borraron al terminar.
+
+### 8.4 Auditor estático: 17 checks de selftest, y 0 hallazgos en carga síncrona
+
+- **Grupo B (carga síncrona): 0 hallazgos** en **800 archivos `.gd`** y **79 callbacks por frame**.
+- **Grupo A:** 111 autoloads, 213 referencias explícitas, **2 componentes cíclicas**, **9 referencias
+  fuera de orden**, **1 autoload duplicado**. Escalados como **BUG-068** (duplicado, defecto real
+  medido) y **BUG-069** (ciclos + orden, deuda arquitectónica sin fallo de runtime medido).
+
+### 8.5 Reproducir
+
+```bash
+# auditor (herramienta de repo; se prueba en rojo primero)
+python scripts/auditar_arquitectura_m62.py --selftest
+python scripts/auditar_arquitectura_m62.py
+# suite headless
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_liberacion.gd
+```

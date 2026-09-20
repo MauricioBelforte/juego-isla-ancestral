@@ -287,3 +287,77 @@ la suite falló nombrando el bloque y bajando del piso (47→36, 133→114, 27�
   el enforcement ya se dispara solo desde `nivel_para()`.
 - **Antes de creer un `[x]` de este checklist, contar las casillas y abrir el artefacto que cita.**
   En este módulo hubo un `[x]` falso durante 18 días (GameLogger) y una suite entera muerta dando verde.
+
+## Notas del Agente — Iteración 4 (Log 1112, DeepSeek-V4.1-Flash / WorkBuddy)
+
+### §1. Qué se agregó
+
+| Artefacto | Qué es | Dónde |
+|---|---|---|
+| `auditar_arquitectura_m62.py` | Auditor estático de arquitectura (servicios + carga síncrona) con `--selftest` | `scripts/` (herramienta de repo, fuera de `res://`) |
+| `test_m62_liberacion.gd` | Suite headless de presupuesto de liberación y huérfanos (15 checks) | `game/isla-ancestral/scripts/rendimiento/memoria/` |
+| Gate `architecture-guard` | Job de CI nuevo (selftest + auditor), registrado en `summary` | `.github/workflows/quality.yml` |
+| Gate de la suite | `test_m62_liberacion.gd` dentro de `test-suite` | `.github/workflows/quality.yml` |
+
+### §2. Las reglas del auditor
+
+**Grupo A — grafo de servicios.** 111 autoloads, 213 referencias explícitas
+(`get_node("/root/X")` / `get_node_or_null("/root/X")`).
+
+- **A1** componentes fuertemente conexas (Tarjan). Se reporta la SCC, no cada ciclo: un componente de
+  7 nodos contiene decenas de ciclos y enumerarlos vuelve inestable cualquier lista de permitidos.
+- **A2** referencias a un autoload declarado DESPUÉS, alcanzables desde `_ready()` (recorrido de
+  llamadas intra-archivo, profundidad 4).
+- **A3** el mismo script registrado como dos autoloads.
+
+**Grupo B — carga síncrona** en callbacks por frame: `load()`, `ResourceLoader.load()`,
+`instantiate()`, `duplicate()` dentro de `_process` / `_physics_process` / `_input` /
+`_unhandled_input` / `_unhandled_key_input` / `_integrate_forces`.
+
+⚠️ **El lookbehind NO es el mismo en las tres reglas.** Para `load(` hay que excluir un `.` previo
+(si no, se marca `ResourceLoader.load()`, que tiene su propia regla). Para `instantiate(` y
+`duplicate(` es al revés: son **siempre** llamadas a método (`x.instantiate()`), así que prohibir el
+punto delante las volvía **indetectables**. Lo cazó el selftest, no una revisión a ojo.
+
+### §3. Las tres veces que la medición corrigió la hipótesis
+
+1. **A2 no rompe nada.** La hipótesis era «`get_node_or_null` desde `_ready()` devuelve null si el
+   destino se declara después → rama saltada en silencio». Banco de pruebas propio (2 autoloads,
+   Godot 4.7.2 headless): **falso**. En `_ready()` ya están todos los autoloads; la búsqueda acierta.
+   Lo único que falla es `_init()`, con `ERROR` fuerte y para **cualquier** destino (no depende del
+   orden). Queda escrito en el auditor y en BUG-069 para que nadie «arregle» un crash inexistente.
+2. **El propio auditor tenía 4 defectos**, cazados por su `--selftest` en la primera corrida
+   (2 reglas indetectables + 2 aserciones del selftest mal escritas).
+3. **Una aserción de la suite era una suposición**: «2048 objetos chicos cuestan más en total que
+   256 grandes» → medido al revés (2346 µs vs 4270 µs). Y comparar **picos** por objeto es inestable
+   (corrida 3: 492 µs > 448 µs); la señal estable es el **total**.
+
+### §4. Resultados medidos
+
+- **Grupo B: 0 hallazgos** en 800 archivos `.gd` y **79 callbacks por frame**. Con guarda de
+  ceguera (exit 3 si resuelve 0 autoloads, o el grafo queda con 0 aristas, o hay 0 callbacks).
+- **Liberación por refcount** (`test_m62_liberacion.gd`, 15 checks, 0 fallos, x5 idénticas):
+  pico por objeto **0,279–0,492 ms** (2048 × 4 KB) y **0,414–0,448 ms** (256 × 256 KB) contra el
+  límite de **3 ms** (L191); lote completo **2,1–5,8 ms** contra **50 ms** (RN2); por debajo de un
+  frame de 16,67 ms (RN6).
+- **Huérfanos**: base 0, estable en 5 muestras, 128 nodos sin padre contados, liberados → vuelve a 0.
+
+### §5. Hallazgos escalados (no son míos para arreglar)
+
+- **BUG-068** — `hardware` y `HardwareManager` son el **mismo script** (`hardware_manager.gd`) en dos
+  entradas de `[autoload]`. Medido: `instance_id` distintos y `==` falso → 2 instancias, 2 parseos de
+  `hardware_profiles.json`, 2 registros en ServiceRegistry. Los dos nombres están **sin usar**
+  (0 referencias). Fix de 1 línea.
+- **BUG-069** — 2 componentes cíclicas (7 y 2 nodos) + 9 referencias fuera de orden. Deuda
+  arquitectónica, **sin fallo de runtime medido**.
+
+### §6. Lo que NO hice (honestidad obligatoria)
+
+- **No marqué `[x]` el ítem de ciclos (E97)**: los ciclos existen. Se documentan y se escalan.
+- **No arreglé los ciclos ni el autoload duplicado**: son archivos de otros módulos (M115, M59,
+  M41-M44, M91). Los reporto con evidencia y fix propuesto.
+- **No toqué `quality.yml` con `git add`**: el worktree tiene 2 hunks ajenos (BUG-051 de atria-dawn,
+  y los gates de M64/M11). El commit se construyó como `HEAD` + **solo mis líneas**.
+- **No medí el frame completo con render** (eso es M61), ni las baselines de §L, ni la integración
+  real con M08/M09/M63 — siguen dependiendo de mundo real y de que otros módulos reporten consumo.
+- **QA cruzado §21.8 sigue pendiente** y no puede hacerlo el autor.

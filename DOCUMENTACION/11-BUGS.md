@@ -142,6 +142,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
 | BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
 | BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [?] Abierto — medido y documentado (Log 1109); **no se parchea `logger.gd`** (rompería el crash-proof). Recomendación: gate de consola por nivel o `print` acotado + el modo «escribir sin `flush`» que el propio logger ya soporta | DeepSeek-V4.1-Flash | 2026-09-19 |
+| BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [ ] Abierto — fix de 1 linea: borrar una de las dos entradas de `[autoload]`. Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] Abierto — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase | DeepSeek-V4.1-Flash | 2026-09-20 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
@@ -152,6 +154,104 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-068 — `hardware` y `HardwareManager`: el mismo script como dos autoloads (dos instancias vivas)
+
+- **Fecha de reporte:** 2026-09-20 01:00
+- **Módulo(s) afectado(s):** M115 Hardware (config) — `game/isla-ancestral/project.godot`
+  sección `[autoload]` (entradas `hardware` y `HardwareManager`), ambas apuntando a
+  `game/isla-ancestral/scripts/hardware/hardware_manager.gd`.
+- **Severidad:** 🟡 Menor (desperdicio duplicado + trampa latente; no rompe nada hoy)
+- **Detectado por:** DeepSeek-V4.1-Flash / WorkBuddy — auditor nuevo
+  `scripts/auditar_arquitectura_m62.py`, regla **A3** (iter. 4 de M62, Log 1112).
+
+**Qué pasa.** `project.godot` registra el MISMO archivo dos veces, con dos nombres distintos. Godot
+crea **una instancia por entrada**, así que no son el mismo objeto.
+
+**Evidencia (medida, no inferida).** Banco de pruebas propio con 2 autoloads apuntando al mismo
+script, Godot 4.7.2 headless:
+
+```
+Gamma    instance_id=27363640780  contador=42
+GammaDos instance_id=27430749646  contador=42
+son el MISMO objeto? false
+```
+
+Y en el repo, los dos nombres están **sin usar**:
+
+```
+grep -rn --include=*.gd '"/root/hardware"'        scripts  ->  0
+grep -rn --include=*.gd '"/root/HardwareManager"' scripts  ->  0
+```
+
+**Impacto.** El arranque hace el trabajo dos veces: `_ready()` de `hardware_manager.gd` llama a
+`_cargar_perfiles()` (parseo de `hardware_profiles.json`) y a `_registrar_servicio()` dos veces. La
+segunda registración dispara el `push_warning` de `ServiceRegistry.register()` («ya está
+registrado, sobrescribiendo»), así que una de las dos instancias queda inalcanzable por el
+registro. Además es una trampa: si alguien empieza a usar `/root/hardware` y otro código usa
+`/root/HardwareManager`, estarán hablando con **dos objetos distintos con estado independiente**.
+
+**Fix propuesto (1 línea).** Borrar una de las dos entradas de `[autoload]` (queda
+`HardwareManager`, que es el nombre que usa el resto del proyecto para servicios). Antes de
+borrar, confirmar que nada la resuelve por el nombre corto — hoy: 0 usos.
+
+---
+
+### BUG-069 — Grafo de servicios: 2 componentes cíclicas y 9 referencias fuera de orden
+
+- **Fecha de reporte:** 2026-09-20 01:00
+- **Módulo(s) afectado(s):** M62 Memoria (arquitectura de servicios) — toca
+  `scripts/museum/collection_registry.gd`, `scripts/fishing/fishing_manager.gd`,
+  `scripts/inventario/inventario_service.gd`, `scripts/saving/save_manager.gd`,
+  `scripts/time/*`, `scripts/clima/weather_service.gd`, `scripts/ui/theme/theme_service.gd`,
+  `scripts/ui/core/ui_manager.gd`. Regla origen: `scripts/core/service_registry.gd` §Reglas
+  («un servicio NO puede depender de otro de nivel superior»).
+- **Severidad:** 🟡 Menor (deuda arquitectónica; **no hay fallo de runtime medido**)
+- **Detectado por:** DeepSeek-V4.1-Flash / WorkBuddy — auditor nuevo
+  `scripts/auditar_arquitectura_m62.py`, reglas **A1** (ciclos) y **A2** (orden), Log 1112.
+
+**A1 — 2 componentes fuertemente conexas** (111 autoloads, 213 referencias explícitas):
+
+1. `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` — 7 nodos.
+2. `{ThemeService, UIManager}` — 2 nodos.
+
+Se reporta la SCC y no cada ciclo suelto a propósito: esa componente contiene decenas de ciclos
+distintos y enumerarlos no aporta nada (además de volver inestable cualquier lista de permitidos).
+
+**A2 — 9 referencias a un autoload declarado DESPUÉS**, alcanzables desde `_ready()`
+(la más grande: `SaveManager` #8 → `Fishing` #45, delta +37; una sola es directa en `_ready`:
+`UIManager` #19 → `ControlInput` #24).
+
+**⚠️ Lo que NO es este bug (importa).** La hipótesis inicial era que A2 producía un **null
+silencioso** (`get_node_or_null` no avisa y la rama se saltaba). **Se midió y es falso.** Banco de
+pruebas con 2 autoloads, Godot 4.7.2 headless:
+
+```
+Alfa (indice 0) -> /root/Beta (indice 1) desde _init()   -> <Object#null>
+   + ERROR: Can't use get_node() with absolute paths from outside the active scene tree.
+Alfa (indice 0) -> /root/Beta (indice 1) desde _ready()  -> Beta:<Node#27011319242>
+Alfa (indice 0) -> /root/Beta (indice 1) DIFERIDO 2 frame -> Beta:<Node#27011319242>
+```
+
+Es decir: en `_ready()` Godot 4.7.2 **ya instanció todos los autoloads**, así que la búsqueda
+**acierta** aunque el destino se declare después. Y la falla desde `_init()` no depende del orden:
+`/root/...` no resuelve ahí para **ningún** destino. Se deja escrito para que nadie «arregle» un
+crash que no existe ni cite este bug como causa de un fallo de arranque.
+
+**Impacto real.** El grafo deja de ser acíclico y el orden de declaración pasa a ser carga
+estructural: la corrección depende hoy de un detalle de implementación del motor (que los
+`_ready()` se difieran a después de agregar todos los autoloads). Cualquier dependencia que se
+mueva a `_init()`, o cualquier lectura durante la construcción de otro servicio, rompe. Es deuda
+arquitectónica, no un defecto funcional.
+
+**Fix propuesto.** Romper los ciclos donde sea barato: `Fishing` → `CollectionRegistry` ya ocurre
+dentro de `entrega_museo()` (evento), así que se puede invertir a una señal de `EventBus`; y
+`ThemeService` ⇄ `UIManager` puede quedar en una sola dirección si `ThemeService` publica un
+`theme_changed` en vez de consultar a `UIManager`. El gate los tiene en lista de permitidos
+(`PERMITIDOS`, con este ID) para que **ningún ciclo nuevo** entre: al arreglar uno, hay que borrar
+su entrada (el auditor avisa cuáles quedaron obsoletas).
+
+---
+
 
 ### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
 

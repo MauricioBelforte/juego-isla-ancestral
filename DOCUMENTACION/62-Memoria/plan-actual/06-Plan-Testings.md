@@ -42,9 +42,16 @@ levantan **todos los autoloads**, así que la salida propia se separa por marcad
 | `test_enforcement_m62.gd` (iter. 2) | 47 | registry, escalonamiento por preset, enforcement niveles 1/2/3, alarma de pico | ✅ (reescrita en iter. 3) |
 | `test_pool_iter2.gd` (iter. 2) | 25 | API única, auditoría de señales, fallback honesto, drenado | ✅ (agregado en iter. 3) |
 | `test_memoria_m62_iter3.gd` (iter. 3) | 133 | dataset/presets, semáforo, enforcement, muestreo, drift, POI, pool, LeakGuard, texturas, descargas | ✅ (nueva) |
+| `test_m62_liberacion.gd` (iter. 4) | 15 | presupuesto de liberación por refcount (pico por objeto, delta de lote), hilo principal, huérfanos en reposo | ✅ (nueva) |
 | `generar_budgets.gd -- --check` | 20 | dataset vs diseño §2 (no es test de código: es **gate de datos**) | aborta sin escribir |
 
-**Total de checks de código: 232.**
+**Total de checks de código: 247.**
+
+Además, **fuera de GDScript**, la iter. 4 agrega un auditor estático con su propio selftest:
+
+| Herramienta | Checks | Cobertura | Anti-falso-verde |
+|---|---|---|---|
+| `scripts/auditar_arquitectura_m62.py` | 17 | componentes cíclicas, referencias fuera de orden, autoload duplicado, carga síncrona por frame | `--selftest` + guarda de ceguera (exit 3) |
 
 ## 4. Estrategia anti-falso-verde
 
@@ -84,3 +91,30 @@ Las copias se borraron después (si no, quedan como UNTRACKED).
 - **Mediciones de baseline** (checklist §L): menú < 600 MB, spawn < 1600 MB, horizonte < 2200 MB,
   subterráneo < 2000 MB, tormenta ≤ 2500 MB. Requieren el juego corriendo.
 - **El QA cruzado §21.8**, que por regla **no puede hacer el autor** del módulo.
+
+## 7. La iter. 4 añade una capa que no es de runtime: el auditor estático
+
+Las reglas de arquitectura de servicios y de carga síncrona son **propiedades estáticas del árbol de
+archivos**: se deciden sin abrir el juego. Un test de runtime solo las detectaría cuando ya ocurren,
+y una de ellas (una referencia fuera de orden) no «ocurre» de forma visible.
+
+El auditor vive fuera de `res://` (`scripts/auditar_arquitectura_m62.py`, junto a
+`verificar_binarios.py`) porque es herramienta de repo, no código del juego.
+
+**Cómo se prueba a sí mismo.** `--selftest` construye proyectos Godot sintéticos y exige que las 4
+reglas detecten defectos conocidos (componente cíclica, referencia fuera de orden, autoload
+duplicado, `load()` en `_process`), más 3 casos de **ceguera** y un control positivo. En su primera
+corrida el selftest **cazó 4 defectos del propio auditor**: `x.instantiate()` y `d.duplicate()` eran
+indetectables (un lookbehind prohibía el punto delante, y esas dos son siempre llamadas a método), y
+dos aserciones estaban mal escritas.
+
+**Guarda de ceguera (exit 3).** Si el auditor no resuelve autoloads, o el grafo de servicios queda
+con 0 aristas, o no encuentra ningún callback por frame, **no devuelve 0**: devuelve 3. Motivo
+concreto: el 2026-09-20 el mismo detector reportó «0 ciclos» **dos veces siendo ciego** (primero por
+resolver mal las rutas de los autoloads, después por no encontrar callbacks). Un «0» que no se puede
+distinguir de «no miré» no es un aprobado.
+
+**Lista de permitidos, visible.** Los hallazgos conocidos (BUG-068/BUG-069) están en `PERMITIDOS` con
+su ID de bug, se imprimen en **cada** corrida y la clave es el hallazgo **exacto** (la componente por
+sus miembros ordenados, la arista por par origen→destino): así un hallazgo NUEVO dentro de un archivo
+ya permitido sigue tumbando la puerta. Si un arreglo deja una entrada obsoleta, el auditor lo avisa.

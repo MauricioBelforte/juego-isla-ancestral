@@ -333,6 +333,12 @@ jobs:
           godot --headless --script scripts/rendimiento/memoria/test_enforcement_m62.gd 2>&1 || FAIL=1
           godot --headless --script scripts/rendimiento/memoria/test_pool_iter2.gd 2>&1 || FAIL=1
           godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter3.gd 2>&1 || FAIL=1
+          # M62 iter. 4 (Log 1112, DeepSeek-V4.1-Flash): presupuesto de liberacion
+          # por refcount MEDIDO (pico por objeto < 3 ms de L191, delta de lote
+          # < 50 ms de RN2) + nodos huerfanos estables en reposo. Guardian de 3
+          # capas probado por inyeccion: un aborto deja 1 check y 2 fallos, EXIT 1.
+          # 15 checks. Gate duro: || FAIL=1.
+          godot --headless --script scripts/rendimiento/memoria/test_m62_liberacion.gd 2>&1 || FAIL=1
           # El dataset de presupuestos es GENERADO, no editado a mano: los 8
           # sistemas de los 3 presets habian divergido del diseno §2 (las sumas
           # daban 1664/2112/2560 en vez de 1500/2000/2500). Este gate sale 1 si
@@ -537,9 +543,36 @@ jobs:
         run: |
           python3 scripts/reservar_log.py --estado
 
+  architecture-guard:
+    name: Architecture Guard (M62: servicios y carga sincrona)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Se prueba EN ROJO primero: si el selftest no ve los defectos sinteticos
+      # (componente ciclica, referencia fuera de orden, autoload duplicado,
+      # load() en _process), el gate no vale nada. En su primera corrida cazo
+      # 4 defectos del propio auditor.
+      - name: Auditor selftest (probar el guardian en rojo)
+        run: python scripts/auditar_arquitectura_m62.py --selftest
+      # Gate duro. Exit 3 = DETECTOR CIEGO (no resolvio autoloads, o el grafo
+      # quedo con 0 aristas, o no encontro callbacks por frame): se trata como
+      # fallo, porque "0 hallazgos" sin haber mirado no es un aprobado.
+      - name: Auditar arquitectura de servicios y carga sincrona
+        run: |
+          FAIL=0
+          python scripts/auditar_arquitectura_m62.py 2>&1 || FAIL=1
+          echo "auditoria de arquitectura M62 (FAIL=$FAIL)"
+          exit $FAIL
+
+
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -555,7 +588,8 @@ jobs:
           echo "encoding-guard: ${{ needs.encoding-guard.result }}"
           echo "log-protocol: ${{ needs.log-protocol.result }}"
           echo "binary-guard: ${{ needs.binary-guard.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]]; then
+          echo "architecture-guard: ${{ needs.architecture-guard.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi
