@@ -83,6 +83,8 @@ capturas y opinar); la aprobación estética final sigue siendo del usuario (M15
 | 13 | **M72** Logros (iter. RF14+CI) | 🟡 Liberado (iter. agnes, acotada) | **1021** | Iteración acotada (data-driven + tooling/CI + V0): cerré el item RF14 abierto "validar que las stats referenciadas existan en M71" con un **test aditivo** `test_logros_m72_statids.gd` (**9/0**: 5 stat_ids vía catálogo M71 `hitos.json` + `amistad_max_catalina_oso` vía prefijo dinámico M20) — **NO toco el core** (`achievement_service.gd` de glm). **Cableé `test_logros.gd` + RF14 al gate duro `quality.yml`** (gap: no estaban). **Flaggeé el bug M39** (BUG-050: `catalogo_tiendas.gd:63` `.size()` sobre Callable + item M15 `piedra_caliza` inexistente) → delegado a M39/glm en `11-BUGS.md`. M72 86→87/185. Log 1021 del pool V3. |
 | 14 | **M52** VFX (**QA cruzado §21.8**, no it.) | ✅ QA §21.8 CUMPLIDO (verificador ≠ autor) | **1030** | **QA §21.8 de iter. 6 de DeepSeek-V4.1-Flash** (Log 1002/1005). Re-grounding **sustantivo** (no solo "tests verdes"): 5 suites M52 → **181 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`** (coincide exacto con la claim); `gen_vfx_catalog.py --check` **OK** (31 entradas, 12 loops, 21 con bus, 24/24 plan, sin drift); **confirmé la claim "13 buses verificados contra `event_bus.gd`"** (13 únicos, 0 sin resolver); presupuesto de perf modelado en **31/31** entradas (`presupuesto`+`emision`/`emisor`/`luz_por_particula`) → **liga mi flag de turbulencia 24 FPS (M61) a data**. **Cero falsos-verdes** (progreso consistente 137/148); los 10 `[ ]`+1 `[?]` abiertos legítimos con dueño. Veredicto: **M52 iter. 6 CUMPLE §21.8**. Log 1030 del pool V3. |
 | 15 | **M111** Codigo-De-Calidad (**QA cruzado §21.8**, no it.) | ✅ QA §21.8 CUMPLIDO (mantiene ✅) | **1032** | **QA §21.8 de iter. 4 de muse-spark-1.3-contributor** (Log 891/909). Re-grounding: `test_m111_utils_headless.gd` → **`passed=62 failed=0` + OK**, exit 0, 0 `SCRIPT ERROR`; **9/9 archivos M111 en disco** (math/validation/format utils, constants, enums, state_machine, factory, command, strategy); **FIX `Factory.create -> Variant` confirmado**; 209/209 consistente (0 `[ ]`/`[?]`). **Hallazgo (no revierte el ✅):** el test en `quality.yml` es gate **SUAVE** (`|| true`, documentado por el autor — exit global 1 preexistente de `backup_manager`/M107 + 68 leaks ObjectDB + 14 resources in use); para gate **duro** (`|| FAIL=1` como M52) → aislar test o resolver el exit 1 (dueño M107/core). **M111 CUMPLE §21.8, mantiene ✅.** Log 1032 del pool V3. |
+| 16 | **M09** Terreno (QA visual T-V01, no it.) | ✅ T-V01 completada | **1115** | **Cierre de T-V01 del backlog (asignado por atria-dawn, ACTUALIZACION 2026-09-20).** V4: run `main_island.tscn` + captura (`capturas/09/cap_09_2026-09-19_21-45-49_impostor_1300m.png`): 42 tiles activos + disco/anillo horizonte, 0 SCRIPT ERROR, FPS 60; fog 0.001 tapa el horizonte en MI captura → veredicto agnes "no verificable". **V1 usuario: "los impostores sí funcionan (grises altos)"** → **IMPOSTOR VERIFICADO**; los "verdes bajos" aclarados = piso COLOR_PASTO del heightmap unificado (el viejo impostor MONTAÑAS 36-tile fue reemplazado, iter. DEFINITIVA 2026-09-08). QA note en `09-.../05-Checklist.md` + pendiente fog (M09/M49, diseño). Log 1115 del pool. |
+| 17 | **M53** UI-UX (iter. agnes i18n+M58, acotada) | 🔵 En curso → Liberado (iter. agnes) | **1118** | **M53 asignado por el usuario 2026-09-20 (Recom Hy4 inactivo, §21.4.7) + prioridad "overlays/accesibilidad M58 + labels/tooltip M87 ×2".** Iteración acotada (data-driven + test headless + runtime): (1) `UiI18n` (puente M53↔M87: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía `RetraductorUI` + `conectar_locale`); (2) claves `EQUIP.*` + `UI.INTERACTUAR` en es.po/en.po (validador PO M87 0 fallos; `EQUIP.EQUIPADO` exento P5); (3) adopción de metadatos en `equipment_layer`/`equipment_ui`/`interact_prompt` (H-7 strings hardcodeados → claves); (4) `TooltipService.show_tooltip_key` + re-traducción en vivo del tooltip visible + `UIManager` prioriza `tooltip_text_key`; (5) `SubtituloOverlay` M58 RF8 en `DialogLayer` (D.7 [x]); (6) hook RF18 `UIManager._conectar_m58` (pausa instantánea → PauseLayer + reanudar); (7) `UIManager._conectar_m87` re-traduce capas montadas + HUD en `locale_changed`. Test `test_ui_i18n_m53.gd` **39/0 exit 0** + regresión `test_ui_framework` 0 fallos + **runtime main_island 0 SCRIPT ERROR**. **Cierro M87×2** (M53-owned → `[x]` en M87, 131/136). **NO adiviné visuales:** J.6 opacidad + J.7 indicador audio = sin fuente M58/M91 → `[ ]` con dueño; I.8/I.9/I.10/C.12 = **visión del usuario (M154)**. Hallazgo: `test_localizacion_iter6` A7 aserta el BUG-042 viejo (fuentes ya corregidas en Log 1024) → **residual M87/M88, no lo toqué**. Log 1118 del pool V3. |
 
 
 
@@ -112,3 +114,61 @@ V0 acotada sobre M61 (Log 943); pendiente visual: V3 M46 Arte-2D (fila de la col
 ver el estado actual; luego escribo la QA note en el `05-Checklist.md` del módulo (sección "QA visual
 V2-asistencia — agnes-3-flash") sin afirmar "aprobado por el usuario".
 
+---
+
+## ACTUALIZACION 2026-09-20 — nuevas asignaciones (curado por atria-dawn, Log 1091/1092)
+
+> Anadido sobre tu backlog existente — **no se piso tu historial**. Estas tareas son
+> **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
+> tus tareas pendientes actuales, o en paralelo si prefieres.
+
+*(Sin modulos nuevos — continua con tus tareas pendientes actuales.)*
+
+## ACTUALIZACION 2026-09-20 — M53 UI-UX asignado por el usuario (04:15Z)
+
+> El usuario asigna **M53 UI-UX** (Recom Hy4 inactivo, §21.4.7) con prioridad:
+> (1) overlays/accesibilidad (M58: subtítulos RF8 + RF18), (2) labels/tooltips
+> traducidos (M87 ×2). Log reservado: **1118** (vía `reservar_log.py`).
+> **COMPLETADO 2026-09-20 (Log 1118 creado):** iteración agnes acotada en M53 + cierre
+> de M87×2. Ver fila 17 del historial.
+
+
+### QA visual puntual — impostor de M09 (1 tarea)
+
+> **Unica tarea nueva, chica** (eres lenta, reportado). M09 no tiene suite headless —
+> su impostor se verifica visualmente (visible a 1300 m). Captura → analiza → reporta.
+> **Si no hay captura posible, reporta "no verificable"** — no apruebes sin evidencia.
+
+- [x] **T-V01:** Verificar `scripts/world/terreno_horizonte.gd` (impostor heightmap)
+  con captura V4: ¿se ve correcto desde la distancia objetivo? — **COMPLETADO
+  2026-09-20 (Log 1115).** V4: run main_island + captura
+  `capturas/09/cap_09_2026-09-19_21-45-49_impostor_1300m.png` (42 tiles activos,
+  0 SCRIPT ERROR, FPS 60; horizonte tapado por fog 0.001 → mi veredicto "no
+  verificable"). V1 usuario: "los impostores sí funcionan — los altos grises; los
+  verdes bajos que no veo = piso COLOR_PASTO del heightmap unificado, no asset
+  aparte" → **IMPOSTOR VERIFICADO**. QA note en `09-.../05-Checklist.md`.
+  Log reservado: **1115** → **Log creado** (`1115-QA-VISUAL-M09-IMPOSTOR`).
+
+
+**Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
+debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
+Atria a 99/100. No repetir.
+---
+
+## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
+
+> Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
+> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+
+Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 1:**
+
+### M-05 — Contar ruido de boot como fallos de suite (tu cobertura = conteos Godot)
+Conte 43 "SCRIPT ERROR" en `test_ui_i18n_m53` y pense que la suite fallaba. Eran
+**autoloads imprimiendo "OK:" al bootear** — el numero real era **39 OK / 0 fallos**.
+Me equivoque y vos tenias razon. **Tu cobertura: TODO conteo de suites Godot lo haces vos.**
+
+**Regla fija (leida en M-05, `GUIA-GODOT/06-registro-errores.md`):** anclar los conteos
+en `^\s*OK:`. Yo **no cuento** suites Godot — te lo delego a vos que lo haces exacto
+(132/0/26 = 158, 131/5/0 = 136, sin drift).
+
+P-18 (M14 Inventario) es justo esto: 5 suites, binario real, sello §21.8 si pasan.

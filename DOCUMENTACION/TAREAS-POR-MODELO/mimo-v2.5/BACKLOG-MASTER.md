@@ -40,13 +40,13 @@
 | # | ID | Módulo | Estado global | Progreso | Prioridad | Pendientes | Subcarpeta |
 |---|----|--------|---------------|----------|-----------|------------|------------|
 | 1 | 53 | 53-UI-UX | 🟡 Con dudas | 130/158 | Alta | 28 | `53-UI-UX/checklist.md` — 82%, items restantes dependen de M57/M58/M63/M90 |
-| 2 | 160 | 160-Ubicaciones | 🟢 Disponible | 59/134 | Alta | 75 | `160-Ubicaciones/checklist.md` |
-| 3 | 156 | 156-Terrenos-Y-Movimiento | 🟢 Disponible | 10/302 | Alta | 292 | `156-Terrenos/checklist.md` |
+| 2 | 160 | 160-Ubicaciones | 🟡 Con dudas | 148/155 | Alta | 7 | `160-Ubicaciones/` — verificado: 5 [?] bloqueados M25/M28, 2 [ ] pendientes |
+| 3 | 156 | 156-Terrenos-Y-Movimiento | 🟡 Con dudas | 246/307 | Media | 61 | `156-Terrenos/` — 59 [ ] pendientes (integracion M11/M155, assets audio/visual, escenas, polish), 2 [?] |
 | 4 | 154 | 154-Vision-Del-Agente | ✅ | 155/155 | Media | 0 | `154-Vision/checklist.md` — ✅ completado |
 | 5 | 78 | 78-Legal-Propiedad-Intelectual | ✅ | 159/159 | Alta | 0 | `78-Legal-PI/` — ✅ completado |
 | 6 | 84 | 84-Musica-Y-Audio-Legal | 🔵 En curso | 77/100 | Alta | 23 | `84-Musica-Y-Audio-Legal/` — pendiente: edge cases, build logging |
-| 7 | 131 | 131-Creditos | 🔵 En curso | 60/103 | Media | 43 | `131-Creditos/` — pendiente: audio, easter eggs, i18n, performance |
-| 8 | 150 | 150-Diseno-Sonoro-Narrativo | 🔵 En curso | 69/151 | Media | 82 | `150-Diseno-Sonoro/` — narrative_sound.json creado, test 12/0 OK |
+| 7 | 131 | 131-Creditos | 🟡 Con dudas | 83/94 | Media | 11 | `131-Creditos/` — limpieza completada, 9 [?] bloqueados audio M41/M42/M43 |
+| 8 | 150 | 150-Diseno-Sonoro-Narrativo | 🟡 Con dudas | 146/150 | Media | 4 | `150-Diseno-Sonoro/` — 17 items cerrados por spec, 4 [?] pendientes (M22, M148, M41/M42/M43) |
 | 9 | 166 | 166-Variantes-Rendimiento | ✅ | 112/112 | Alta | 0 | `166-variantes/` — ✅ completado |
 | 10 | 168 | 168-Plantilla-De-Isla | ✅ Completado | 104/104 | — | 0 | `168-Plantilla/` |
 | 11 | 08 | 08-Mundo-Voxel | ✅ Completado | 108/108 | — | 0 | `08-Mundo-Voxel/` |
@@ -131,3 +131,87 @@
 > - `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.5/BACKLOG-MASTER.md` — Este archivo
 >
 > **GUÍA DE REINSTALACIÓN:** `DOCUMENTACION/GUIA-CONFIGURACION-OPENCODE.md`
+
+---
+
+## ACTUALIZACION 2026-09-20 — nuevas asignaciones (curado por atria-dawn, Log 1091/1092)
+
+> Anadido sobre tu backlog existente — **no se piso tu historial**. Estas tareas son
+> **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
+> tus tareas pendientes actuales, o en paralelo si prefieres.
+
+### 31-Ciclo-Dia-Noche (49 pendientes)
+
+- [?] P6: estrellas — canvas procedural, alpha 0→100% 20:00-22:00 [C] → parámetros en fase_umbral.json §estrellas (alpha_inicio 20, fin 22, max 1.0)...
+- [?] P7: luna — esfera + fases del calendario M29 [C] → luz OK; esfera con textura de fases = M45 (K.2)
+- [?] P8: nubes — velo 2D con drift, densidad estacional [C] → sin implementar; escénico V2 (K.2)
+- [?] P11: niebla — matinal otoño, bruma verano, densa invierno, nocturna 0.25 [M] → `fog_curve.tres` data por hora EXISTE (Log curvas iter. 2); Fog...
+- [?] P17: spawn de recursos — nocturnos opcionales (nunca críticos) [M] → M15 tiene temporada_respawn (iter. 5 estación) pero NO ventana horaria; r...
+- [?] P19: eventos nocturnos — lluvia de estrellas días 10 y 25 [M] → data estrellas en JSON; evento calendario de M74 + partículas M52 sin implemen...
+- [?] P20: secretos nocturnos — flora brillante + murales lore [M] → no implementado; dueños M15/M25/M148 (G)
+- [?] Luna esférica con textura de fases [S] → luz sin mesh — M45 (K.2)
+- [?] Nubes velo 2D con drift lento [S] → sin implementar (K.2)
+- [?] Niebla (FogVolume ligero) [S] → data fog_curve.tres; FogVolume nodo no existe en escena (K.2)
+- [?] Prefab de farol con omni 3200K [S] → sin implementar; dueño M18/M45 (K.2)
+- [?] Canvas de estrellas [S] → sin implementar (K.2)
+- [?] Compatible con M12 minimapa (sin luz) [S] → M12 minimapa sin implementar (fila 12 global); la regla "sin luz" documentada en diseño §4
+- [?] `season_mod.tres`: 4 mods estacionales [S] → NO existe; curva única anual (K.2 visual fino)
+- [?] Validación de rangos de curvas en dev mode (M110) [M] → M110 dev tools sin implementar; test_curvas_luz valida rangos en CI (parcial, dueño M110)
+- [?] M15 Recursos: flor lumínica + cristales estelares nocturnos [M] → M15 solo tiene respawn estacional (iter. 5); contenido nocturno inexistente ...
+- [?] M17 Construcción: faroles sin red eléctrica en v1 [S] → M17 sin faroles; puzzle farol_cargado existe en M23 data — dueño M17/M18
+- [?] M13 Linterna: sugerencia automática opcional [S] → M13 sin linterna (grep 0); dueño M13 contenido + M92 sugerencia
+- [?] M37 Museo: horario definido [M] → scripts/museos inexistente; M37 28/148 fila global — dueño M37
+- [?] M32 Clima: lluvia de estrellas nunca con tormenta [S] → WeatherService enum sin "lluvia de estrellas" (es evento M74 + partículas M52); coordi...
+- [?] Lluvia de estrellas: días 10 y 25, 22:00-23:30 [M] → fase_umbral.json §estrellas documenta la ventana; evento del calendario + partículas = M7...
+- [?] Partículas de estrellas fugaces (M52) [C] → M52 sin implementar
+- [?] Lince de luna: día 15, Claro del Bosque [C] → fauna especial de M36/M93 data
+- [?] Interacción "observar" del lince (sin caza) [M] → ídem
+- [?] Flora brillante: Senda de las Luciérnagas [C] → M15 contenido + M45 assets
+- [?] Bono x2 de noche en flora (único bonus horario) [M] → hook futuro: consumers pueden leer es_de_dia(); implementación M15/M93
+- [?] Murales luminosos en ruinas (M25, lore M148) [C] → dueños M25/M148
+- [?] Diario M55 registra "deseo" de estrellas [S] → M55 sin implementar
+- [?] TTS/texto accesible en eventos (M58) [M] → M58 sin implementar
+- [?] Linterna del jugador rango 12 m [M] → no existe (M13/M45) — dueño externo
+- [?] Opción M58 "Noche clara" (piso 0.35) [M] → M58 sin implementar; el piso es constante en curva — el hook sería parametrizar sky_curve (K.2 con ...
+- [?] Faroles cada 40 m en poblado [C] → M18-BIS 🔵 WorkBuddy está construyendo casas — coordinar al liberar; prefab farol inexistente
+- [?] Minimapa operable de noche [S] → M12 minimapa sin implementar
+- [?] QA M114: checklist visual nocturno por zona [M] → M114 sin implementar; soy solo-texto — QA visual del usuario o agente con visión
+- [?] 1 draw call de nubes [S] → sin nubes (D); la regla queda para el dueño escénico
+- [?] Test: umbral farol antes/después [M] → sin autoswitch runtime (RF6 [?]) — test se escribirá con la feature (dueño M18/M45)
+- [?] Transición amanecer/atardecer de 90 s con curvas de interpolación (polish)
+- [?] `Sky` procedural con gradiente por hora y estrellas alpha 0→100% 20:00-22:00
+- [?] Luna esférica con textura de fases (M45)
+- [?] Nubes velo 2D con drift lento y densidad estacional
+- [?] Niebla por estación/hora (FogVolume ligero ≤120 m)
+- [?] Prefab de farol con omni 3200K r 8 m y autoswitch por umbral 0.35
+- [?] Faroles cada 40 m en poblado (M18)
+- [?] Sincronización lluvia de estrellas con M52 (días 10/25 22:00-23:30) [M] — **precisión QA V2 agnes-3-flash (Log 1052, 2026-09-19): el catálogo ...
+- [?] Flora brillante con bonus x2 (M15)
+- [?] Murales luminosos en ruinas (M25/M148)
+- [?] Opción M58 "Noche clara" (piso 0.35) — M58 sin implementar
+- [?] Integración con M49 iluminación global — M49 sin implementar
+- [?] QA visual M114 (checklist nocturno por zona) — M114 sin implementar
+
+
+
+
+**Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
+debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
+Atria a 99/100. No repetir.
+---
+
+## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
+
+> Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
+> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+
+Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 1:**
+
+### M-04 — Barredura no intencional de trabajo ajeno en commits (tu cobertura)
+Mi commit 11ac4d9 barrio **5 gates de M64** dentro de un fix de CI, y no me di cuenta
+hasta que te lo pregunte. **Tu cobertura:** cuando un commit o cambio mio toque archivos
+de tu modulo (o que te afecten), **verificalo vos** aunque yo diga que esta bien.
+Ya lo hiciste una vez (P-09: 4/4 PASS, 60 checks, 0 fallos) — ese es el estandar.
+
+**Como operar:** si ves en git log un commit mio que toca `quality.yml`, tus gates, o
+archivos de tus modulos, correrlos y reportar. **No asumas que yo lo verifique.**

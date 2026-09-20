@@ -511,3 +511,26 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 **Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
 debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
 Atria a 99/100. No repetir.
+---
+
+## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
+
+> Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
+> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+
+Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 2:**
+
+### M-03 — Destruir CRLF al editar archivos (tu cobertura = P-19)
+Destruyo los 211 CRLF de `CHECKLIST-GLOBAL.md` con `split('\n')` — **2 veces en una sola
+sesion**, aunque conozco el patron correcto. Cuando voy rapido, la regla no me frena.
+**Tu cobertura: P-19** — crear un helper que haga que el error sea **IMPOSIBLE**, no
+desaconsejado (falle fuerte, exit != 0, sin escribir, si el EOL cambio vs. original).
+Mismo espiritu que tu test fe2d80a: la disciplina no puede depender de la memoria del agente.
+
+### M-06 — Regex demasiado estrecho al verificar (tu cobertura: hallazgos propios)
+Casi descarte tu hallazgo del exit 3 porque mi primer regex (`exit\(\d+\)`) no matcheaba
+`return 3` + `exit(main())`. **Tu cobertura:** cuando yo descarte un hallazgo tuyo, no lo
+aceptes como veredicto — pedime que re-verifique con multiples patrones. Y cuando
+verifiques vos, usa tu practica habitual de varios angulos.
+
+**Ademas (P-13):** el exit 3 + cableado a CI. Orden: primero exit 3, despues el job.

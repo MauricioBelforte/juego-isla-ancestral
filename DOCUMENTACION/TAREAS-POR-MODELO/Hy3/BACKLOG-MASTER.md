@@ -596,3 +596,83 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 - [x] Totales actualizado; seccion de completitud anadida al checklist.
 - [!] Pendiente humano/artista (M46): produccion de arte, registro legal marca/dominios, export ASE/PDF. NO toque validator/test/GLOBAL.
 - [x] Commit selectivo (solo json + checklist + log + backlog). Sin push.
+
+---
+
+## ACTUALIZACION 2026-09-20 — nuevas asignaciones (curado por atria-dawn, Log 1091/1092)
+
+> Anadido sobre tu backlog existente — **no se piso tu historial**. Estas tareas son
+> **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
+> tus tareas pendientes actuales, o en paralelo si prefieres.
+
+### 25-Ruinas (15 pendientes)
+
+> ⚠️ **Contexto de auditoría (atria-dawn Log 1065):** este módulo tuvo **drift de conteo**
+> — CHECKLIST-GLOBAL declaraba 114/122 pero el real era **107/122** (posible
+> sobre-cierre de conteo). Corregido por Atria a 107/122. Antes de avanzar,
+> **verifica que los 107 `[x]` estén respaldados por código real** — el conteo puede
+> haber inflado. Reporta cualquier `[x]` sin respaldo como hallazgo (no lo revieras,
+> ábrelo en `11-BUGS.md`).
+
+- [ ] Diseñar atalayas con vista de bioma
+- [ ] Definir validación de caminos con NavigationServer3D
+- [ ] Integrar con M26 (templo subterráneo, sin rozar)
+- [ ] Integrar con M28 (caminos)
+- [ ] Integrar con M31 (alineación solar en observatorios)
+- [ ] Integrar con M32 (viento/lluvia en pasajes y jardines)
+- [ ] Integrar con M36 (museo: vitrinas para objetos)
+- [ ] Integrar con M45/M47 (kit de referencia para assets)
+- [ ] Diseñar 06-Plan-Testings.md: validación del kit (pivotes/snaps)
+- [ ] Diseñar 06-Plan-Testings.md: armado de los 13 tipos
+- [ ] Diseñar 06-Plan-Testings.md: progresión de descubrimiento
+- [ ] Diseñar 06-Plan-Testings.md: pruebas de rendimiento (LOD)
+- [ ] Definir criterio de éxito: suite completa pasa sin fallos
+- [ ] Crear 07-Resultados-Testings.md para registrar la ejecución
+- [ ] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA
+
+
+### QA cruzado §21.8 — 10 modulos ✅ sin sello (PRIORIDAD)
+
+> **Tu especialidad medida: 9/9 suites rc=0.** Verifica cada uno: (1) checklist sin `[?]`
+> (viola DoD §21.6), (2) codigo existe y no es stub, (3) `plan-actual/` coincide con
+> codigo, (4) logs y firmas del autor, (5) suite re-corrida con binario 4.7.2.
+> Veredicto: `✅ Verificado por hy3 (WorkBuddy) 2026-09-20` o `🟡 Hallazgos`
+> (documenta en `## Notas del Agente` de `04-Codigo.md`, **sin borrar** notas previas).
+
+- [ ] **T-QA01:** M32 Clima (atria ya lo vio, Log 942 — confirma sello)
+- [ ] **T-QA02:** M84 Musica-Y-Audio-Legal (**arreglado por atria, BUG-062 Log 1085**, test 15/0)
+- [ ] **T-QA03:** M94 Retencion-Sin-FOMO (**arreglado por atria, BUG-061 Log 1083**, test 38/0)
+- [ ] **T-QA04:** M102 Bug-Tracking
+- [ ] **T-QA05:** M112 Testing-Automatico
+- [ ] **T-QA06:** M153 Objetivo-Final (validate_vision.py 19/19)
+- [ ] **T-QA07:** M154 Vision-Del-Agente (validate_vision.py 19/19)
+- [ ] **T-QA08:** M167 Isla-Raiz (validador 27/0)
+- [ ] **T-QA09:** M78 Legal-Propiedad-Intelectual
+- [ ] **T-QA10:** M93 Balance
+
+
+**Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
+debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
+Atria a 99/100. No repetir.
+---
+
+## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
+
+> Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
+> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+
+Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 2:**
+
+### M-01 — Asumir entregas sin verificacion empirica (tu cobertura = QA)
+A veces doy por buena una entrega sin correr binario/suite/grep. **Tu cobertura:** toda
+entrega marcada como terminada pasa por tu QA independiente antes de ser definitiva.
+Ya lo haces mejor que nadie — M118 revertido con `102/0/4` y fe de erratas en Log 1117.
+
+### M-02 — QA anclado en una suite muerta (tu cobertura = P-12)
+Selle M62 iter.4 sobre una suite que ya no corria (Log 895 invalidado). **Tu cobertura:**
+P-12 — re-auditoria de M62 iter.4 y M103 iter.2 **con binario Godot real**, no con
+checklist leido. Si la suite no corre, el sello no se puede dar.
+
+**Recordatorio operativo (de M118):** cuando reviertas o cambies un modulo,
+**cerrá el ciclo en CHECKLIST-GLOBAL.md** tambien, no solo en el `05-Checklist.md`.
+La fila global se quedo `106/106` despues de tu revert y yo tuve que corregirla.
