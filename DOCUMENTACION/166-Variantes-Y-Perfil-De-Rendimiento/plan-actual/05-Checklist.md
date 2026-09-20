@@ -1,3 +1,15 @@
+## Liberado — parte de copyright (Log 1035, 2026-09-18 20:55, agnes-3-flash / Kilo Code)
+
+- Auditoría empírica del claim M127 (Log 1022) COMPLETADA: **434 .glb de `assets/3d` sin
+  atribución por-archivo (0 CON / 434 SIN / 0 AMBIGUO); el +16 sobre el techo 418 son
+  respaldos de `media/Obsoletos/`, no assets nuevos.** Origen: propio (pipeline Blender
+  MCP). Fix pendiente del pipeline (dueño M166/M09): embeber `asset.copyright`/`asset.license`
+  en la exportación + sidecar obligatorio en imports de terceros. Ver `BUG-052` (11-BUGS.md),
+  `tools/legal/auditoria_copyright_glb.json`, `scripts/auditar_copyright_glb.py`.
+- QA visual V2-asistencia: 7 artefactos V-1..V-7 (ver `BUG-053`, Log 1035). Lo mío no toca:
+  H12 (pasada ALTA, dueño mimo-v2.5/Hy4) y los 4 scripts de variantes siguen intactos.
+- Estado del módulo: **🔵 En curso (H12, mimo-v2.5)** — se libera solo la parte de copyright.
+
 > **RE-MARCADO POR MIMO V2.5 (2026-09-15):** Verificación contra código real. 4 scripts Python existen (stats_asset.py, generar_variante.py, capturar_angulos.py, abrir_blend.py). Docs completos (10 archivos plan-inicial + plan-actual). 111/112 items verificados. H12 requiere artista manual (Blender + V5).
 
 # 05-Checklist — M166 · Variantes de Assets por Perfil de Rendimiento
@@ -163,3 +175,25 @@ Regla del proyecto: este checklist debe tener **≥ 100 ítems** verificables. L
 > - **Re-corregir scripts Python**: iteraciones previas (Hy4) los dejaron funcionales segun el plan. No los modifique.
 >
 > **Estado:** 🟡 Liberado al 99.1%. Listo para QA cruzado (Hy3 en WorkBuddy). M166 completo salvo la pasada visual final.
+
+---
+
+## Notas del Agente (mimo-v2.5 / OpenCode)
+
+**Modelo:** mimo-v2.5
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-20 09:43
+**Estado:** Reclamado y verificado — H12 bloqueado (artista manual)
+
+### Lo que hice
+- Reclamé M166 de CHECKLIST-GLOBAL (lock stale ~35h, s2 lo reportó como reclamable §21.4.7).
+- Verifiqué 111/112 [x] en el checklist contra el código: 4 scripts Python existen (stats_asset.py, generar_variante.py, capturar_angulos.py, abrir_blend.py), docs completos.
+- Actualicé CHECKLIST-GLOBAL: 🔵 En curso → 🟡 Con dudas, agente → —.
+- Documenté que H12 requiere artista manual + Blender (V5) — fuera del perfil de mimo-v2.5.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **H12**: pasada ALTA sobre 15 heroes. Requiere Blender MCP + artista (Hy4). No es ejecutable por agente solo-texto.
+
+### Recomendaciones para el próximo agente
+- Hy4 es el dueño designado de H12. Si se toma H12, usar generar_variante.py --alta sobre cada hero.
+- M166 está al 99.1%. Solo falta la pasada artística para cerrar al 100%.
