@@ -139,7 +139,7 @@ window/stretch/aspect="expand"
 
 [gdscript]
 
-"#M111-ConfiguraciÃƒÂ³ndelinterycalidaddecÃƒÂ³digo#HabilitarlinterestÃƒÂ¡ticodeGDScriptformatter/indent/type"=1
+"#M111-Configuracion del linter y calidad de codigo#Habilitar el test estatico de GDScriptformatter/indent/type"=1
 formatter/indent/size=4
 formatter/indent/continuation=4
 formatter/indent/preprocessor=1
