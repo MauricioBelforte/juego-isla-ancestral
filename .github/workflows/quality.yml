@@ -299,6 +299,11 @@ jobs:
           # emitir 1 SCRIPT ERROR ajenos — el exit 0/1 del test sigue siendo el gate.
           godot --headless --script scripts/logros/test_logros.gd 2>&1
           godot --headless --script scripts/logros/test_logros_m72_statids.gd 2>&1
+          # BUG-042: las fuentes deben ser binarios REALES y MEDIR texto.
+          # `load_dynamic_font()` sobre una pagina HTML devuelve err=0 con
+          # 0.0 px, asi que el gate no se conforma con que el archivo exista.
+          # Gate duro: || FAIL=1.
+          godot --headless --script scripts/fonts/test_fuentes_binarias_bug042.gd 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 
@@ -423,6 +428,41 @@ jobs:
         run: |
           python3 scripts/diagnosticar_mojibake.py 2>&1 | tail -25 || true
 
+  # Integridad de los binarios versionados (BUG-042). Un asset con extension X y
+  # contenido que no es X NO rompe de forma visible: `load()` devuelve un
+  # recurso NO nulo con datos vacios. Medido el 2026-09-18: 3 de las 4 `.ttf` de
+  # `assets/fonts/` eran la pagina `Page not found . GitHub` (~304 KB de HTML
+  # cada una), el juego seguia andando con la fuente de fallback, FreeType solo
+  # emitia `Error loading font: ''` y ningun test se ponia en rojo. Esta puerta
+  # lee los BYTES MAGICOS de cada binario versionado y los compara con lo que su
+  # extension promete. Alcance: `git ls-files` (lo que existe en un checkout CI).
+  binary-guard:
+    name: Binary asset magic bytes (BUG-042)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Gate duro: sale con 1 si algun binario miente sobre su formato.
+      - name: Verify binary magic bytes
+        run: |
+          python3 scripts/verificar_binarios.py
+
+      # Gate duro, y el mas fuerte: la sonda prueba el guard POR INYECCION
+      # (muta la tabla de firmas y exige que la deteccion cambie; ademas exige
+      # que deje pasar los binarios reales). Una guarda nunca probada es una
+      # guarda que puede estar muerta.
+      - name: Prove the guard by injection
+        run: |
+          python3 scripts/test_verificar_binarios.py
+
   # Protocolo de numeracion de logs (v3, AGENTS.md 6.1). El asignador YA NO crea
   # archivos: el numero se consume del pool. La sonda comprueba ese contrato
   # sobre un arbol temporal, y esta probada por inyeccion: si alguien
@@ -464,7 +504,7 @@ jobs:
 
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -479,7 +519,8 @@ jobs:
           echo "security-scan: ${{ needs.security-scan.result }}"
           echo "encoding-guard: ${{ needs.encoding-guard.result }}"
           echo "log-protocol: ${{ needs.log-protocol.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]]; then
+          echo "binary-guard: ${{ needs.binary-guard.result }}"
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi
