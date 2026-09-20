@@ -22,16 +22,40 @@ jobs:
           version: "4.7-stable"
           export-templates: false
 
-      - name: Run GDScript Linter
-        run: |
-          cd game/isla-ancestral
-          godot --headless --script scripts/editor/code_quality_check.gd 2>&1 || true
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
+      # Fix BUG-051 (atria-dawn, 2026-09-18): el paso "Check for Godot parser
+      # errors" era un NO-OP completo — ejecutaba `godot --headless --script`
+      # SIN ningun script y el `|| true` silenciaba todo, de modo que el job
+      # godot-lint NUNCA podia fallar.
+      #
+      # Ahora se genera `scripts/editor/_colector_sintaxis.gd`: un script con
+      # un `preload` por cada .gd del proyecto (excluye .godot/, addons/ de
+      # terceros y Godot/). Como preload fuerza el parseo en tiempo de
+      # compilacion, `--check-only` sobre el colector valida los 831 scripts
+      # en una pasada y aborta (exit 1) si alguno no parsea.
+      - name: Generate syntax collector
+        run: python tools/quality/gen_colector_sintaxis.py --proyecto game/isla-ancestral
+
+      # --import construye la cache de class_names de .godot. Sin este paso,
+      # en un checkout limpio (sin .godot) --check-only no resuelve class_names
+      # entre archivos y emite falsos positivos. Verificado: fresh + import =>
+      # EXIT 0; fresh sin import => EXIT 1 falso.
+      - name: Import project resources
+        run: godot --headless --path game/isla-ancestral --import
+
+      # GATE DURO (era NO-OP). El `|| FAIL=1` permite ver TODOS los scripts
+      # rotos en una sola pasada y luego fallar el job.
       - name: Check for Godot parser errors
         run: |
           cd game/isla-ancestral
-          godot --headless --script 2>&1 || true
-          echo "Godot headless lint completed"
+          FAIL=0
+          godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 || FAIL=1
+          echo "Godot headless lint completed (FAIL=$FAIL)"
+          exit $FAIL
 
   code-quality-script:
     name: Custom Code Quality Check (M111)
@@ -315,6 +339,17 @@ jobs:
           # emitir 1 SCRIPT ERROR ajenos — el exit 0/1 del test sigue siendo el gate.
           godot --headless --script scripts/logros/test_logros.gd 2>&1
           godot --headless --script scripts/logros/test_logros_m72_statids.gd 2>&1
+           # M64 IA de NPC (Log 2026-09-18 mimo-v2.5): plan_stack + watchdog + FSM + needs + blackboard.
+           godot --headless --script scripts/ia_npc/test_ia_npc_m64_iterN.gd 2>&1 || FAIL=1
+           # M64 suites nuevas (Log 1046 mimo-v2.5): navegación + social + rendimiento + persistencia.
+           godot --headless --script scripts/ia_npc/test_navegacion_m64.gd 2>&1 || FAIL=1
+           godot --headless --script scripts/ia_npc/test_social_m64.gd 2>&1 || FAIL=1
+           godot --headless --script scripts/ia_npc/test_rendimiento_m64.gd 2>&1 || FAIL=1
+           godot --headless --script scripts/ia_npc/test_persistencia_m64.gd 2>&1 || FAIL=1
+           # M11 Personaje del Jugador (Logs 1055/1062/1064/1069, nex-n2.5-pro):
+           # constantes @export, hitbox CapsuleShape3D, movimiento, equipo y API nativa Voxel Tools.
+           # 30 checks, 0 fallos, EXIT 0 y 0 SCRIPT ERROR propios. Gate duro: || FAIL=1.
+           godot --headless --script scripts/player/test_player_m11.gd 2>&1 || FAIL=1
           # BUG-042: las fuentes deben ser binarios REALES y MEDIR texto.
           # `load_dynamic_font()` sobre una pagina HTML devuelve err=0 con
           # 0.0 px, asi que el gate no se conforma con que el archivo exista.

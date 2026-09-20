@@ -127,6 +127,7 @@ fix_*.py
 !scripts/fix_encoding.py
 verify_*.py
 gen_*.py
+!tools/quality/gen_colector_sintaxis.py
 
 # Excepcion: scripts/fix_encoding.py NO es un script desechable. Es la
 # herramienta permanente de saneamiento de codificacion del proyecto
