@@ -226,6 +226,69 @@ def test_ver_leer_tabla_global():
         assert fila["ultimaactividad"] == "2026-08-14 10:00", f"Última actividad incorrecta: {fila['ultimaactividad']}"
 
 
+def test_ver_fail_fast_detector_ciego():
+    """REGRESIÓN BUG-075: un archivo vacío/inexistente/sin tabla NO puede
+    devolver {} («0 problemas»).
+
+    El 7º incidente de infra dejó al orquestador ciego sin que nadie lo supiera:
+    un guardia `if checklist_global.exists() else {}` neutralizaba el fail-fast
+    y NINGÚN test cubría los 3 caminos de fallo. Un `return {}` es
+    indistinguible de «no hay datos» (familia trampa 91/100), así que los 3
+    casos deben levantar RuntimeError en vez de devolver un valor.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+
+        # (1) el archivo no existe
+        try:
+            ver.leer_tabla_global(tmp / "NO_EXISTE.md")
+        except RuntimeError as e:
+            assert "BUG-075" in str(e), f"RuntimeError sin marca BUG-075: {e}"
+        else:
+            raise AssertionError("archivo inexistente devolvio un valor en vez de fallar")
+
+        # (2) 0 bytes — el caso EXACTO del incidente
+        vacio = tmp / "VACIO.md"
+        vacio.write_bytes(b"")
+        try:
+            ver.leer_tabla_global(vacio)
+        except RuntimeError as e:
+            assert "VAC" in str(e).upper(), f"RuntimeError sin diagnostico de vacio: {e}"
+        else:
+            raise AssertionError("archivo de 0 bytes devolvio un valor en vez de fallar")
+
+        # (2b) solo espacios/saltos: `.strip()` vacio, mismo camino que (2)
+        blanco = tmp / "BLANCO.md"
+        blanco.write_text("\n\r\n   \n", encoding="utf-8")
+        try:
+            ver.leer_tabla_global(blanco)
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("archivo con solo espacios devolvio un valor en vez de fallar")
+
+        # (3) existe y tiene contenido, pero sin la tabla '| ID |'
+        sin_tabla = tmp / "SIN_TABLA.md"
+        sin_tabla.write_text("# Titulo\n\nSin tabla aca.\n", encoding="utf-8")
+        try:
+            ver.leer_tabla_global(sin_tabla)
+        except RuntimeError as e:
+            assert "ID" in str(e), f"RuntimeError sin mencion de la tabla: {e}"
+        else:
+            raise AssertionError("archivo sin tabla devolvio un valor en vez de fallar")
+
+        # Control: con una tabla valida NO debe levantar
+        sana = tmp / "SANA.md"
+        sana.write_text(
+            "| ID | Módulo | Estado | Progreso |\n"
+            "|----|--------|--------|----------|\n"
+            "| 03 | Modulo-3 | 🟡 Con dudas | 3/10 |\n",
+            encoding="utf-8",
+        )
+        filas = ver.leer_tabla_global(sana)
+        assert filas.get("03") is not None, "el caso sano dejo de parsear (falso positivo del fail-fast)"
+
+
 def test_ver_normalizar():
     """REGRESIÓN: verifica que la normalización no pierda letras."""
     resultado = ver.normalizar("Prioridad")
@@ -274,6 +337,10 @@ def main():
     print()
     print("verificar_checklist.py:")
     test("leer_tabla_global parsea correctamente", test_ver_leer_tabla_global)
+    test(
+        "fail-fast: vacio/inexistente/sin tabla NO devuelve {} (BUG-075)",
+        test_ver_fail_fast_detector_ciego,
+    )
     test("normalizar no pierde letras (REGRESIÓN)", test_ver_normalizar)
     test("detectar_colgados identifica módulos inactivos", test_ver_detectar_colgados)
 
