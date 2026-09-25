@@ -450,6 +450,120 @@ el archivo esté vacío o no contenga filas. «Sin datos» ≠ «sin problemas»
 
 ---
 
+### T-101: Verificar contra una sola fuente de sellos produce sellos redundantes
+
+**Síntoma:** un agente hace QA cruzado (§21.8), decide que un módulo «no tiene
+sello de verificador» consultando **un solo** registro, aplica el suyo... y
+resulta que el módulo **ya estaba verificado** por otro agente. El sello nuevo
+es ruido en la columna Notas y, si el agente afterwards se fia de su propio
+sello, puede tapar o contradecir el original.
+
+**Causa raíz:** el estado de «¿este módulo está verificado?» está **distribuido
+en dos fuentes** que un cruce ingenuo no une:
+
+1. `CHECKLIST-QA-SEALS.md` (registro curado, en este proyecto lo mantiene hy3) —
+   **no es exhaustivo**: muchos sellos legítimos nunca llegan a escritarse ahí.
+2. La **columna Notas de `CHECKLIST-GLOBAL.md`** — donde los verificadores
+   dejan `✅ Verificado por ...`, `QA cruzado por ...`, `Re-QA ...` con su
+   log de evidencia.
+
+Mirar solo (1) hace creer que faltan sellos que en realidad existen en (2).
+
+**Detección — 2 pasos antes de sellar:**
+
+```bash
+# 1. Registro curado
+grep -nE '^\|\s*<ID>\s*\|' CHECKLIST-QA-SEALS.md
+
+# 2. Columna Notas del global (campo final de la fila)
+grep -nE '^\|\s*<ID>\s*\|' CHECKLIST-GLOBAL.md | grep -E 'Verificado por|QA cruzado por|Re-QA'
+```
+
+Solo si **ambas** fuentes están vacías el módulo necesita sello. Si ya hay un
+sello (aunque sea de un agente del que desconfías), **no se pinta encima**: se
+deja y, si hay problema con la evidencia, se abre entrada en `11-BUGS.md`.
+
+**Caso real (Log 1124):** atria-dawn crucé solo contra SEALS y sellé
+**M07, M119, M133, M134, M135, M136** — los seis ya tenían sello legítimo (hy3
+Logs 698/768/848 y agnes-2.5-flash con atribución corregida en Log 1120). Se
+detectó al inspeccionar el contenido real de las Notas y se revirtieron los 6
+sellos inmediatamente. Sellos finales válidos de ese pase: **M101, M145, M146**
+(los únicos realmente sin verificador previo).
+
+**Regla de oro derivada — no verifiques tu propio trabajo:** si yo implementé o
+reparé el módulo, mi sello no es QA independiente (misma ceguera que esta
+trampa). El verificador §21.8 debe ser un agente distinto al que cerró el
+módulo. Esto también aplica a la verificación de herramientas: si sos el autor
+del fix, delegá la verificación.
+
+**Prevención al escribir archivos compartidos:** tras cualquier edición aditiva
+en `CHECKLIST-GLOBAL.md` o `11-BUGS.md`, **re-leer y verificar** que no se
+duplicaron headers ni se perdieron filas ajenas (ver T-100: un archivo
+compartido puede quedar en 0 bytes por escritura truncada paralela y tu
+edición se pierde entera).
+
+**Fecha:** 2026-09-20 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+
+---
+
+### T-102: El resumen de un QA no puede contradecir su propio detalle
+
+**Síntoma:** un agente ejecuta un QA, el informe **detallado** lista
+hallazgos reales (`FALTA: X`), y a pesar de eso el **veredicto final**
+dice que todo «pasa limpio». El coordinador (que lee el resumen) se queda
+con un **falso verde**; los hallazgos estaban escritos más arriba pero
+nadie los cerró.
+
+**Causa raíz:** dos sesgos distintos, ambos sutiles:
+
+1. **Excusarse en la matización:** el detalle decía que la columna Estado
+   marcaba `⬜ Pendiente`, así que el veredicto razonó «no es un faltante,
+   es trabajo futuro». Pero el archivo era un `04-Codigo.md` (inventario de
+   **código**) y la sección se titulaba **«Scripts implementados»**. La
+   matización de una columna no deshace el encuadre de la sección.
+2. **Cierre por costumbre:** tras N módulos que sí pasaban, el cerebro
+   escribe el mismo cierre para el módulo N+1 sin releer la sección de
+   hallazgos.
+
+**Regla derivada — el detalle manda:** si el informe detalle dice
+`FALTA: X` y el resumen dice «limpio», **el resumen es el que está mal**.
+El resumen es lo que se vende como sello; el detalle es la evidencia. Si
+se contradicen, corregir el resumen, nunca suavizar el detalle.
+
+**Detección:** antes de escribir cualquier veredicto, releer **solo la
+sección de hallazgos** del propio informe (los bloques `FALTA:` /
+`ALERTA:`) y hacer que el veredicto los enumere uno por uno con su
+resolución. Si un hallazgo no tiene resolución escrita, el módulo no está
+limpio.
+
+**Caso real (P-40, Log 1155):** `qa_documental.txt` sobre M07 detallaba
+`3 NO existen` (thread_pool / voxel_world / game_state) y el veredicto
+decía «los 5 módulos pasan limpios». El coordinador lo detectó: las 3
+rutas **nunca existieron** en el historial de git (`git log --all --
+'*nombre*'` solo devolvía skills de terceros). Era plan aspiracional
+sentado en una sección «Scripts implementados» — drift doc↔código, el
+mismo patrón que M167/M119. Corregido: rutas reubicadas a una sección
+«Scripts previstos (NO implementados)» y veredicto reescrito a
+«NO limpio».
+
+**Verificación complementaria para `04-Codigo.md`:** toda ruta citada
+debe, o bien **existir** en el árbol (o bajo `game/isla-ancestral/`), o
+bien vivir en una sección **explícitamente** marcada como
+«previsto / no implementado». Para distinguir plan aspiracional de código
+borrado:
+
+```bash
+# ¿alguna vez existió?
+git log --all --oneline --name-only -- '*thread_pool*'
+```
+
+Si no hay commits del proyecto (solo `.claude/skills/`), es aspiracional y
+no puede figurar como inventario de código.
+
+**Fecha:** 2026-09-25 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+
+---
+
 ## Plantilla para nuevos errores
 
 ```markdown

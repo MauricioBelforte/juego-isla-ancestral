@@ -48,6 +48,11 @@ func progreso(collected_count: int) -> float:
 
 ## Serialización a Dictionary (para logs y debugging)
 func to_dict() -> Dictionary:
+	# Fix BUG-051 (atria-dawn, 2026-09-18): GDScript no soporta comprensiones
+	# de listas ([f(x) for x in arr]); se construye con un bucle.
+	var tags_str: Array = []
+	for t in tags:
+		tags_str.append(String(t))
 	return {
 		"id": String(id),
 		"nombre_es": nombre_es,
@@ -57,13 +62,13 @@ func to_dict() -> Dictionary:
 		"recompensa_item": String(recompensa_item),
 		"recompensa_cantidad": recompensa_cantidad,
 		"orden_exposicion": orden_exposicion,
-		"tags": [String(t) for t in tags],
+		"tags": tags_str,
 	}
 
 
 ## Carga categorías desde un Dictionary parseado de JSON
+## Retorna Array de CollectibleCategory instanciados.
 static func cargar_desde_json(datos: Dictionary) -> Array:
-	"""Retorna Array de CollectibleCategory instanciados."""
 	var categorias: Array = []
 	for entry in datos.get("categorias", []):
 		if not (entry is Dictionary):

@@ -3,6 +3,37 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 ## Unit tests para la interfaz ISaveable (M111)
 ## Verifica que la interfaz define los métodos esperados
 
+# Fix BUG-051 (atria-dawn, 2026-09-18): GDScript no permite declarar clases
+# dentro de funciones; CustomSaveable estaba dentro de
+# test_inheritance_implements_all_methods y era un parse error.
+class CustomSaveable extends ISaveable:
+	var _data: Dictionary = {}
+	var _dirty: bool = false
+	var _save_id: String = "custom_saveable_001"
+	var _version: int = 2
+
+	func get_save_data() -> Dictionary:
+		return _data.duplicate(true)
+
+	func load_save_data(data: Dictionary, version: int = 1) -> void:
+		_data = data.duplicate(true)
+		_dirty = false
+
+	func get_save_id() -> String:
+		return _save_id
+
+	func get_save_version() -> int:
+		return _version
+
+	func has_unsaved_changes() -> bool:
+		return _dirty
+
+	func mark_saved() -> void:
+		_dirty = false
+
+	func validate_save_data(data: Dictionary) -> bool:
+		return data.has("required_field")
+
 func test_get_save_data_default() -> void:
 	var saveable = ISaveable.new()
 	var data = saveable.get_save_data()
@@ -38,34 +69,6 @@ func test_validate_save_data_default() -> void:
 	assert_that(valid).is_true()
 
 func test_inheritance_implements_all_methods() -> void:
-	class CustomSaveable extends ISaveable:
-		var _data: Dictionary = {}
-		var _dirty: bool = false
-		var _save_id: String = "custom_saveable_001"
-		var _version: int = 2
-
-		func get_save_data() -> Dictionary:
-			return _data.duplicate(true)
-
-		func load_save_data(data: Dictionary, version: int = 1) -> void:
-			_data = data.duplicate(true)
-			_dirty = false
-
-		func get_save_id() -> String:
-			return _save_id
-
-		func get_save_version() -> int:
-			return _version
-
-		func has_unsaved_changes() -> bool:
-			return _dirty
-
-		func mark_saved() -> void:
-			_dirty = false
-
-		func validate_save_data(data: Dictionary) -> bool:
-			return data.has("required_field")
-
 	var custom = CustomSaveable.new()
 	assert_that(custom.get_save_id()).is_equal_to("custom_saveable_001")
 	assert_that(custom.get_save_version()).is_equal_to(2)

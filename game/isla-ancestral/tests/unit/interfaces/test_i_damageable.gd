@@ -3,6 +3,35 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 ## Unit tests para la interfaz IDamageable (M111)
 ## Verifica que la interfaz define los métodos esperados
 
+# Fix BUG-051 (atria-dawn, 2026-09-18): GDScript no permite declarar clases
+# dentro de funciones; la clase CustomDamageable estaba dentro de
+# test_inheritance_implements_all_methods y era un parse error (el script
+# nunca compilo). Movida a ambito de archivo.
+class CustomDamageable extends IDamageable:
+	var _health: float = 100.0
+	var _max_health: float = 100.0
+
+	func take_damage(amount: float, damage_type: StringName = &"", source: Node = null) -> float:
+		_health = max(0.0, _health - amount)
+		return amount
+
+	func get_health() -> float:
+		return _health
+
+	func get_max_health() -> float:
+		return _max_health
+
+	func is_alive() -> bool:
+		return _health > 0.0
+
+	func heal(amount: float) -> float:
+		var old_health = _health
+		_health = min(_max_health, _health + amount)
+		return _health - old_health
+
+	func set_health(value: float) -> void:
+		_health = clamp(value, 0.0, _max_health)
+
 func test_take_damage_default() -> void:
 	var damageable = IDamageable.new()
 	var result = damageable.take_damage(10.0)
@@ -33,31 +62,6 @@ func test_set_health_default() -> void:
 	damageable.set_health(50.0)
 
 func test_inheritance_implements_all_methods() -> void:
-	class CustomDamageable extends IDamageable:
-		var _health: float = 100.0
-		var _max_health: float = 100.0
-
-		func take_damage(amount: float, damage_type: StringName = &"", source: Node = null) -> float:
-			_health = max(0.0, _health - amount)
-			return amount
-
-		func get_health() -> float:
-			return _health
-
-		func get_max_health() -> float:
-			return _max_health
-
-		func is_alive() -> bool:
-			return _health > 0.0
-
-		func heal(amount: float) -> float:
-			var old_health = _health
-			_health = min(_max_health, _health + amount)
-			return _health - old_health
-
-		func set_health(value: float) -> void:
-			_health = clamp(value, 0.0, _max_health)
-
 	var custom = CustomDamageable.new()
 	assert_that(custom.get_health()).is_equal_to(100.0)
 	assert_that(custom.get_max_health()).is_equal_to(100.0)

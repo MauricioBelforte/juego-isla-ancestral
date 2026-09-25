@@ -3,6 +3,25 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 ## Unit tests para la interfaz IInteractable (M111)
 ## Verifica que la interfaz define los métodos esperados
 
+# Fix BUG-051 (atria-dawn, 2026-09-18): GDScript no permite declarar clases
+# dentro de funciones; CustomInteractable estaba dentro de
+# test_inheritance_implements_all_methods y era un parse error.
+class CustomInteractable extends IInteractable:
+	func interact(interactor: Node) -> bool:
+		return true
+
+	func get_interaction_prompt(interactor: Node) -> String:
+		return "Custom Prompt"
+
+	func is_interactable(interactor: Node) -> bool:
+		return false
+
+	func get_interaction_priority() -> int:
+		return 10
+
+	func get_interaction_range() -> float:
+		return 5.0
+
 func test_interact_default() -> void:
 	var interactable = IInteractable.new()
 	var result = interactable.interact(null)
@@ -29,22 +48,6 @@ func test_get_interaction_range_default() -> void:
 	assert_that(interaction_range).is_equal_to(2.0)
 
 func test_inheritance_implements_all_methods() -> void:
-	class CustomInteractable extends IInteractable:
-		func interact(interactor: Node) -> bool:
-			return true
-
-		func get_interaction_prompt(interactor: Node) -> String:
-			return "Custom Prompt"
-
-		func is_interactable(interactor: Node) -> bool:
-			return false
-
-		func get_interaction_priority() -> int:
-			return 10
-
-		func get_interaction_range() -> float:
-			return 5.0
-
 	var custom = CustomInteractable.new()
 	assert_that(custom.interact(null)).is_true()
 	assert_that(custom.get_interaction_prompt(null)).is_equal_to("Custom Prompt")
