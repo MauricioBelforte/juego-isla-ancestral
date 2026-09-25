@@ -113,7 +113,12 @@ def archivos(raiz: str, incluir_tests: bool, verbose: bool):
 
 def main() -> int:
     ap = argparse.ArgumentParser(add_help=True)
-    ap.add_argument("--raiz", default=os.path.join("game", "isla-ancestral", "scripts"))
+    # La raiz por defecto se resuelve respecto al ARCHIVO (no al CWD): el gate da igual
+    # desde la raiz del repo (CI) que desde un subdirectorio. Si el CWD fuese el que manda,
+    # un `defaults.run.working-directory` futuro o una corrida manual lo romperian en silencio.
+    _repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _raiz_def = os.path.join(_repo, "game", "isla-ancestral", "scripts")
+    ap.add_argument("--raiz", default=_raiz_def)
     ap.add_argument("--incluir-tests", action="store_true")
     ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--selftest", action="store_true")
