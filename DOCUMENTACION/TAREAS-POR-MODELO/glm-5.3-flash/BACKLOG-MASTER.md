@@ -19,8 +19,8 @@
 
 | # | ID | Módulo | Pendientes reales (05-Checklist) | Notas | Subcarpeta |
 |---|----|--------|----------------------------------|-------|------------|
-| 1 | 92 | 92-Tutorial | 83 (82 ab + 1 ?) | Alta · iter.3 lógica completa (Log 914, 90/185): interruptores/consejos/P2-P15/S5-S9 · falta UI M53 + guiones .tres + RF11-RF18 | `92-Tutorial/checklist.md` |
-| 2 | 39 | 39-Tiendas | 100 | Media · núcleo datos | `39-Tiendas/checklist.md` |
+| 1 | 92 | 92-Tutorial | 76 (75 ab + 1 ?) | Alta · iter.4 data-driven (Log 987, 97/185): guiones .tres + Q2/Q7 + R-block · falta UI M53 + RF11-RF18 + Q1/Q8 + S10-S12 | `92-Tutorial/checklist.md` |
+| 2 | 39 | 39-Tiendas | 54 | Media · iter. glm cerrada (Log 1017): checklist 81→127 [x]; pendientes UI M53/ferias M73/QA | `39-Tiendas/checklist.md` |
 | 3 | 158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | 87 | 🟢 0→87 hecho por otro; núcleo a retomar | `158-Herramientas-Y-Desbloqueo-De-Zonas/checklist.md` |
 | 4 | 19 | 19-NPC-Y-Vecinos | 83 | Alta · núcleo iter. 3 (Log 553) | `19-NPC-Y-Vecinos/checklist.md` |
 | 5 | 25 | 25-Ruinas | 84 | Media · kit modular | `25-Ruinas/checklist.md` |
@@ -43,3 +43,6 @@
 2. Marcar el ítem correspondiente en el `05-Checklist.md` del módulo.
 3. Actualizar la fila del módulo en `CHECKLIST-GLOBAL.md` (progreso).
 
+## Logs
+
+- [x] Log creado: **1017** — M39 cierre iter GLM (atomicidad catalogo D8 + falso-verde loop economico)
