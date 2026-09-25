@@ -130,20 +130,26 @@ REGLAS_CARGA = (
 # archivo ya permitido sigue tumbando la puerta.
 # ---------------------------------------------------------------------------
 PERMITIDOS = {
-    # A1 — componentes ciclicas conocidas (BUG-068)
-    "A1|CollectionRegistry,Fishing,GameTime,Inventario,SaveManager,TimeCalendar,Weather": "BUG-068",
-    "A1|ThemeService,UIManager": "BUG-068",
-    # A2 — referencias a un autoload declarado despues (BUG-068)
-    "A2|SaveManager->Fishing": "BUG-068",
-    "A2|Localization->DataStore": "BUG-068",
-    "A2|Friendship->VillagerManager": "BUG-068",
-    "A2|WorldState->SaveManager": "BUG-068",
-    "A2|TimeCalendar->GameTime": "BUG-068",
-    "A2|AudioConfig->DataStore": "BUG-068",
-    "A2|UIManager->ControlInput": "BUG-068",
-    "A2|ShopManager->GameTime": "BUG-068",
-    "A2|Friendship->GameTime": "BUG-068",
-    # A3 — el mismo script registrado como dos autoloads (BUG-068)
+    # A1 — componentes ciclicas conocidas.
+    # ⚠️ CORRECCION (2026-09-24, P-30): estas entradas y las A2 estaban
+    # etiquetadas "BUG-068", pero A1/A2 (ciclos y orden de autoloads) son el
+    # contenido de BUG-069. BUG-068 es SOLO el A3 (el mismo script como dos
+    # autoloads). La etiqueta equivocada mandaba al bug que no era.
+    "A1|CollectionRegistry,Fishing,GameTime,Inventario,SaveManager,TimeCalendar,Weather": "BUG-069",
+    "A1|ThemeService,UIManager": "BUG-069",
+    # A2 — referencias a un autoload declarado despues (regla de capas).
+    # Medido: NO es un fallo de runtime (en _ready() todos los autoloads ya
+    # existen); es deuda arquitectonica. Ver BUG-069.
+    "A2|SaveManager->Fishing": "BUG-069",
+    "A2|Localization->DataStore": "BUG-069",
+    "A2|Friendship->VillagerManager": "BUG-069",
+    "A2|WorldState->SaveManager": "BUG-069",
+    "A2|TimeCalendar->GameTime": "BUG-069",
+    "A2|AudioConfig->DataStore": "BUG-069",
+    "A2|UIManager->ControlInput": "BUG-069",
+    "A2|ShopManager->GameTime": "BUG-069",
+    "A2|Friendship->GameTime": "BUG-069",
+    # A3 — el mismo script registrado como dos autoloads.
     "A3|scripts/hardware/hardware_manager.gd": "BUG-068",
 }
 

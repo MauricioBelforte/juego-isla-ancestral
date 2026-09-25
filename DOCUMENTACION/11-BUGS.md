@@ -371,6 +371,18 @@ fix sigue sin entrar. **No lo commiteo yo**: la autoría y la decisión son de a
 que queda es la de la trampa 98: `git cat-file -e HEAD:<ruta>` sobre **cada archivo que un gate ejecuta**,
 antes de cerrar un bug cuyo cierre se apoya en ese gate.
 
+**Estado final (2026-09-24, P-30):** `[x] Resuelto` — **verificado de forma independiente**
+(por quien lo detecto, no por quien lo resolvio). Medido, no heredado:
+`git cat-file -e HEAD:tools/quality/gen_colector_sintaxis.py` -> **existe**; el commit `11ac4d9`
+existe; la palabra `colector` aparece **4 veces** en `HEAD` (era **0** al reportar); el no-op
+`godot --headless --script 2>&1` tiene **0 ocurrencias** en `HEAD`; `.gitignore:130` conserva la
+negacion `!tools/quality/gen_colector_sintaxis.py` y `git check-ignore -v` confirma que el
+archivo **no** esta ignorado; y `godot-lint` figura en la condicion bloqueante del job `summary`
+(`quality.yml` L724). **Dueno del fix: atria-dawn** — no me lo cargo, la autoria es suya.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-24 23:20 (detector del bug + verificador
+independiente del fix)
+
 ### BUG-068 — `hardware` y `HardwareManager`: el mismo script como dos autoloads (dos instancias vivas)
 
 - **Fecha de reporte:** 2026-09-20 01:00
@@ -412,6 +424,48 @@ registro. Además es una trampa: si alguien empieza a usar `/root/hardware` y ot
 borrar, confirmar que nada la resuelve por el nombre corto — hoy: 0 usos.
 
 ---
+
+**Estado (2026-09-24, P-30): `[?]` Delegado a M90/infra — con DOS CORRECCIONES a este mismo
+reporte.** Sigue abierto: `project.godot` conserva las dos entradas (L51 `hardware` y L109
+`HardwareManager`, ambas -> `scripts/hardware/hardware_manager.gd`).
+
+**Correccion 1 — «los dos nombres estan sin usar / 0 usos» es FALSO.** Se midio con el patron
+`"/root/hardware"` (con barra inicial), que solo aparece si alguien hace `get_node` con la ruta
+absoluta. Los autoloads se usan por **identificador** y por **nombre relativo**, y ahi SI se usan:
+
+| Forma | `hardware` | `HardwareManager` |
+|---|---|---|
+| `"/root/<nombre>"` | 0 | 0 |
+| `<nombre>.metodo()` | 0 | 0 |
+| `get_node_or_null("<nombre>")` | **1** (`scripts/hardware/test_hardware.gd:87`) | **4** (`scripts/hardware/test_hardware_m115.gd:35,47,56,64`) |
+
+Medido sobre **1097** archivos `.gd`. Cada nombre lo usa un test distinto: el corto, el retarget de
+agnes-3-flash (2026-09-15); el largo, el test de deepseek-v4-flash (2026-09-02). Ninguno se usa en
+codigo de produccion.
+
+**Correccion 2 — el `push_warning` de «ya esta registrado, sobrescribiendo» NO se dispara.**
+`hardware_manager.gd` L35 esta **guardado**: `if not sr.has("hardware"): sr.register("hardware", self)`.
+La segunda instancia ve `has()` = true y **no** vuelve a registrar, asi que el `push_warning` de
+`ServiceRegistry.register()` (que si existe: `service_registry.gd` L27-28) **nunca se alcanza**. Lo
+que si se duplica es `_ready()` completo: `_cargar_perfiles()` parsea el JSON **dos veces** y la
+linea `[M115] HardwareManager listo` se imprime dos veces. La trampa latente (dos objetos con estado
+independiente) sigue valida y medida.
+
+**El fix de «1 linea» propuesto arriba NO es seguro tal como esta escrito:** borrar la entrada
+`hardware` **rompe** `test_hardware.gd:87`, que es justamente el test que corrigio un falso verde.
+El fix correcto es de **dos** pasos: (1) sacar `hardware=...` de `project.godot` L51 — el diseno del
+modulo especifica solo `HardwareManager` (`DOCUMENTACION/115-Hardware/plan-actual/04-Codigo.md:278`);
+(2) migrar `test_hardware.gd:87` de `"hardware"` a `"HardwareManager"`.
+
+**Por que se delega y no se aplica:** la documentacion del propio modulo ya asigno el fix a
+**M90/infra** — `115-Hardware/plan-actual/04-Codigo.md:316-318`: «`project.godot` registra el
+autoload **dos veces** ... **Lo documento y NO lo toco** (afecta a todo el boot; **dueno
+M90/infra**)», y `05-Checklist.md:220` lo lista como pendiente de **Infra**. Es un archivo de boot
+compartido: la decision y el commit son del dueno. Este reporte aporta la **receta medida** y la
+correccion de sus dos afirmaciones falsas, para que nadie actue sobre la premisa equivocada.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-24 23:20 (detector + autor de las 2
+correcciones; fix delegado a M90/infra)
 
 ### BUG-069 — Grafo de servicios: 2 componentes cíclicas y 9 referencias fuera de orden
 
@@ -468,6 +522,32 @@ dentro de `entrega_museo()` (evento), así que se puede invertir a una señal de
 su entrada (el auditor avisa cuáles quedaron obsoletas).
 
 ---
+**Estado (2026-09-24, P-30): `[?]` Abierto — y DERIVO desde el reporte.** Re-medido con el mismo
+auditor (`scripts/auditar_arquitectura_m62.py`):
+
+- **A1 — sigue en 2 componentes** (la de 7 y la de 2). Sin cambio.
+- **A2 — paso de 9 a 11 referencias fuera de orden.** Aparecieron **2 nuevas**, no permitidas:
+  `A2|UIManager->AccesibilityManager` (delta +41) y `A2|UIManager->Localization` (delta +18).
+- A3 (el autoload duplicado) sigue igual, y es de BUG-068, no de este bug.
+
+**Medicion importante — el CI NO esta rojo hoy, pero se pondra rojo.** El auditor es un **gate
+duro** (job `architecture-guard` en `quality.yml`, sin `continue-on-error`, presente en el `needs`
+de `summary`) y **sale exit 1** con esos 2 hallazgos. Pero el auditor lee el **worktree**, y las 2
+referencias nuevas **NO estan en `HEAD`**: `git show HEAD:game/isla-ancestral/scripts/ui/core/ui_manager.gd`
+da **0** ocurrencias de `AccesibilityManager` y **0** de `/root/Localization`, mientras el worktree da
+**2** y **1**; y `git log --all -S` encuentra **0 commits** que las introdujeran. Son parte de un
+cambio **sin commitear** de 86+/5- lineas en `ui_manager.gd`, de otro agente.
+-> **Cuando ese cambio se commitee, `architecture-guard` va a rojo.** Se reporta ahora para que no
+sorprenda. Es la leccion de la trampa 101 aplicada a otro gate: medir contra `HEAD`, no contra el
+worktree.
+
+**Correccion de etiqueta (aplicada en el mismo commit).** El `PERMITIDOS` del auditor tenia las 11
+entradas A1/A2 etiquetadas **`BUG-068`**, cuando son hallazgos de **este** bug (BUG-069). Corregido:
+A1/A2 -> `BUG-069`, A3 -> `BUG-068`. La etiqueta equivocada mandaba al bug que no era.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-24 23:20 (detector + re-medicion + correccion
+de etiqueta; los 2 hallazgos nuevos son del dueno de `UIManager`)
+
 
 
 ### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
