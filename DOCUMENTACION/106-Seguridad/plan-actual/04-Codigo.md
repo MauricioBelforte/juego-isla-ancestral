@@ -35,8 +35,8 @@ res://network/
 scripts/
 └── security_check.sh                           → Script de CI/CD para seguridad
 
-06-Plan-Testings.md                               → NO APLICA
-07-Resultados-Testings.md                        → NO APLICA
+06-Plan-Testings.md                               → SI APLICA (8 suites headless)
+07-Resultados-Testings.md                        → SI APLICA (237 checks, 0 fallos)
 ```
 
 ## 3. Contratos de integración
@@ -710,3 +710,81 @@ TAMPER_SECRET_KEY=your_tamper_secret_key_here
 
 ### Verificación total M106 tras T-009
 144 (previos) + 15 (database) = **159 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** (godot 4.7.2).
+
+## 26. Iteracion P-36 — 7 servicios offline + KeyManager (2026-09-25, DeepSeek-V4.1-Flash / WorkBuddy, Log 1149)
+
+**Contexto (trampa 58).** La iteracion kimi-k3 cerro en 149/206 pero dejo **todo** su trabajo
+**sin commitear**: 4 helpers, 5 tests, 2 modificaciones de codigo y 9 logs existian solo en el
+worktree. `HEAD` tenia 4 archivos de M106; el worktree, 11 helpers + 8 tests. Recuperado en
+`471d2b8` (autoria kimi-k3; recuperacion y verificacion DeepSeek).
+
+### 26.1 Falsos verdes corregidos
+- **Escaner de secrets (ROJO real).** La nota de kimi afirmaba "20/0 verde"; el test estaba en
+  **ROJO (20/1)**: `DirAccess.open("user://...")` devuelve `null` en headless (pitfall §9.6). Se
+  midio con `--path` relativo **y** absoluto -> `null` en ambos, o sea no era la invocacion. Fix:
+  helper tolerante `_abrir_dir()` que reintenta con `ProjectSettings.globalize_path`. -> **20/0**.
+- **KeyManager (falso verde heredado).** Sus 5 items estaban `[x]` con **cero implementacion**
+  (grep de `load_keys_from_environment|validate_keys|key_manager` sobre todo `scripts/` -> 0).
+  Tambien en `HEAD`. Se implemento `security_key_manager.gd`.
+
+### 26.2 Servicios nuevos (7)
+Todos `RefCounted`, sin `class_name` (via `preload`), headless-safe, cabecera firmada:
+
+| Archivo | API principal |
+|---|---|
+| `security_output_validator.gd` | `calcular_sha256`, `validar_checksum`, `validar_json`, `validar_firma`, `_igualdad_constante` |
+| `security_tamper_protection.gd` | `calcular_checksum`, `calcular_hmac`, `validar_savegame`, `validar_savegame_firma`, `_canonico` |
+| `security_duplication_prevention.gd` | `generar_request_id`, `ya_procesado`, `marcar_procesado`, `limpiar_antiguos`, `cantidad_procesados` |
+| `security_economy_validation.gd` | `validar_economia`, `validar_economia_checksum`, `calcular_checksum_economia`, `_leer_oro/_leer_inventario/_leer_cantidad` |
+| `security_audit_logger.gd` | `registrar`, `formatear`, `guardar`, `cantidad`, `limpiar` |
+| `security_api_security.gd` | senales `api_autenticada(exito)` / `limite_tasa_excedido`; `cargar_api_key`, `configurar_limite_tasa`, `reiniciar_contador`, `autenticar`, `verificar_limite` |
+| `security_config.gd` | `extends Resource`, 8 `@export`, `como_diccionario()` |
+| `security_key_manager.gd` | `CLAVES_REQUERIDAS` (5), `cargar_desde_entorno(entorno)`, `obtener`, `validar`, `faltantes` |
+
+- **`security_config.gd`** extiende `Resource` (no `RefCounted`) porque es un recurso serializable,
+  como pide el diseno.
+- **`.env.example`** creado en la raiz del repo: plantilla versionable **sin** secrets. `.env.local`
+  ya lo citaba y no existia -> cita rota.
+
+### 26.3 Cripto medida antes de escribirla
+Godot 4.7 **no trae HMAC**: `security_tamper_protection.calcular_hmac` lo implementa a mano
+(ipad/opad + `HashingContext`, hasheando la clave primero si mide >64 B). Ambos vectores se
+midieron contra **Python** (`hashlib` / `hmac`) antes de fijarlos en el test:
+- `sha256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad`
+- `hmac_sha256(clave="key", msg="The quick brown fox jumps over the lazy dog")`
+  `= 2d93cbc1be167bcb1637a4a23cbff01a7878f0c50ee833954ea5221bb1b8c628`
+Incluida la rama **clave > 64 B** (se hashea antes), verificada byte a byte.
+
+**Defecto corregido tras la primera corrida:** `HashingContext.update()` con un buffer **vacío**
+imprime un `ERROR` de motor (`Condition "len == 0" is true`, `core/crypto/hashing_context.cpp:54`),
+disparado por `sha256('')`. El digest era correcto, pero el proyecto trata WARNINGS como ERRORES. Se
+agregó un helper `_actualizar(ctx, bytes)` que omite la llamada si el buffer mide 0 bytes (hashear el
+vacío es legítimo), aplicado en `security_output_validator.gd` y `security_tamper_protection.gd`.
+Encontrado **midiendo la salida**, no leyendo el código: la lección es que un check verde puede estar
+tapando un `ERROR` del motor.
+
+### 26.4 Test: `test_security_m106_services.gd`
+- 8 bloques (**A** OutputValidator, **B** Tamper, **C** Duplication, **D** Economy, **E** Audit,
+  **F** API, **G** Config, **H** KeyManager).
+- Guardian de **3 capas**: (1) marcadores `_fin("X")` + `_summary()` que **nombra** los bloques
+  que no corrieron, diferido con `call_deferred` para que corra **aunque `_run()` aborte** a mitad
+  de frame (trampa 62); (2) piso `CHECKS_MINIMOS := 66` **medido en verde**; (3) aserciones
+  falsables (nunca `_check(true, ...)`).
+- Probado **en rojo** por inyeccion de un aborto en runtime dentro de un helper de bloque
+  (`var _boom: Dictionary = ([] as Variant)`) -> `[FAIL] bloques que NO se ejecutaron: ["C"]` +
+  exit 1.
+- Resultado: **78 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** x3 corridas (godot 4.7.2).
+
+### 26.5 Desviaciones honestas
+- **`security_api_security` NO usa `Timer`:** un `RefCounted` no puede tener nodos hijos. El rate
+  limit es por **contador** + `reiniciar_contador()`; la ventana temporal la aporta el llamador.
+- **Vocabulario dual** en `economy_validation` (`oro`/`gold`/`plata`, `inventario`/`inventory`,
+  `cantidad`/`quantity`): el diseno no fija nombres de campo y el savegame real usa espanol, pero
+  los tests y los datos de ejemplo usan ingles.
+- **Alcance:** estos son los servicios **locales/offline** del diseno. Los 12 items `[?]`
+  (firewalls, monitoreo server-side, usuarios de BD, CAPTCHA, bloqueo de IPs, advisories) quedan
+  con dueno **M77 / M107 / CI-M111** y **no** se marcan `[x]` sin implementar.
+
+### 26.6 Verificacion total M106 tras P-36
+159 (previos) + 78 (servicios) = **237 checks, 0 fallos** en 8 suites (tabla en `05-Checklist.md`).
+

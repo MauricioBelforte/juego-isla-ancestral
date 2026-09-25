@@ -19,9 +19,10 @@ const _ECO := preload("res://scripts/security/security_economy_validation.gd")
 const _AUDIT := preload("res://scripts/security/security_audit_logger.gd")
 const _API := preload("res://scripts/security/security_api_security.gd")
 const _CFG := preload("res://scripts/security/security_config.gd")
+const _KEYMGR := preload("res://scripts/security/security_key_manager.gd")
 
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G"]
-const CHECKS_MINIMOS := 60
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H"]
+const CHECKS_MINIMOS := 66
 
 # Vectores de referencia (independientes del motor).
 const SHA256_ABC := "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
@@ -45,6 +46,7 @@ func _run() -> void:
 	_bloque = "E"; _test_audit()
 	_bloque = "F"; _test_api()
 	_bloque = "G"; _test_config()
+	_bloque = "H"; _test_key_manager()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1
@@ -201,6 +203,27 @@ func _test_config() -> void:
 	c.max_gold = 500
 	_check("mutacion de propiedad", c.como_diccionario().get("max_gold") == 500)
 	_fin("G")
+
+## ── H. KeyManager (falso verde heredado, corregido en P-36) ─
+func _test_key_manager() -> void:
+	print("--- H. KeyManager (claves desde entorno) ---")
+	var k = _KEYMGR.new()
+	_check("CLAVES_REQUERIDAS = 5", _KEYMGR.CLAVES_REQUERIDAS.size() == 5)
+	# entorno completo -> 0 vacias, validar true
+	var completo := {"API_KEY": "a", "STEAM_API_KEY": "b", "ANALYTICS_KEY": "c", "CRASH_REPORTING_KEY": "d", "TAMPER_SECRET_KEY": "e"}
+	_check("entorno completo -> 0 vacias", k.cargar_desde_entorno(completo) == 0)
+	_check("validar -> true", k.validar())
+	_check("obtener(API_KEY)", k.obtener("API_KEY") == "a")
+	_check("obtener(inexistente) -> ''", k.obtener("NO_EXISTE") == "")
+	_check("faltantes vacio", k.faltantes().is_empty())
+	# entorno incompleto -> cuenta vacias y validar false
+	var k2 = _KEYMGR.new()
+	var parcial := {"API_KEY": "a"}
+	_check("entorno parcial -> 4 vacias", k2.cargar_desde_entorno(parcial) == 4)
+	_check("validar -> false", not k2.validar())
+	_check("faltantes = 4", k2.faltantes().size() == 4)
+	_check("sin cargar -> validar false", not _KEYMGR.new().validar())
+	_fin("H")
 
 ## Guardián de 3 capas: nombra bloques faltantes y exige el piso de checks.
 func _summary() -> void:

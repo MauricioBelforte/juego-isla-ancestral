@@ -24,9 +24,17 @@ extends RefCounted
 func calcular_sha256(datos: String) -> String:
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
-	ctx.update(datos.to_utf8_buffer())
+	_actualizar(ctx, datos.to_utf8_buffer())
 	var digest: PackedByteArray = ctx.finish()
 	return digest.hex_encode()
+
+
+## `HashingContext.update()` con un buffer vacío imprime un ERROR del motor
+## (`Condition "len == 0" is true`, core/crypto/hashing_context.cpp:54). Hashear el vacío es
+## legítimo (sha256("") = e3b0c442…), así que se omite la llamada cuando no hay bytes.
+func _actualizar(ctx: HashingContext, bytes: PackedByteArray) -> void:
+	if bytes.size() > 0:
+		ctx.update(bytes)
 
 
 ## ¿El checksum declarado coincide con el SHA-256 del texto? (comparación en tiempo constante).

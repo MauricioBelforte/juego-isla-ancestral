@@ -29,9 +29,17 @@ const _BLOQUE: int = 64
 func calcular_checksum(datos: String) -> String:
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
-	ctx.update(datos.to_utf8_buffer())
+	_actualizar(ctx, datos.to_utf8_buffer())
 	var digest: PackedByteArray = ctx.finish()
 	return digest.hex_encode()
+
+
+## `HashingContext.update()` con un buffer vacío imprime un ERROR del motor
+## (`Condition "len == 0" is true`, core/crypto/hashing_context.cpp:54). Hashear el vacío es
+## legítimo (sha256("") = e3b0c442…), así que se omite la llamada cuando no hay bytes.
+func _actualizar(ctx: HashingContext, bytes: PackedByteArray) -> void:
+	if bytes.size() > 0:
+		ctx.update(bytes)
 
 
 ## HMAC-SHA256 (hex) de `datos` con `secreto` (RFC 2104).
@@ -52,7 +60,7 @@ func calcular_hmac(datos: String, secreto: String) -> String:
 	var ci := HashingContext.new()
 	ci.start(HashingContext.HASH_SHA256)
 	ci.update(ipad)
-	ci.update(datos.to_utf8_buffer())
+	_actualizar(ci, datos.to_utf8_buffer())
 	var interno: PackedByteArray = ci.finish()
 	var co := HashingContext.new()
 	co.start(HashingContext.HASH_SHA256)
