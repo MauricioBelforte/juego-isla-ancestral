@@ -250,3 +250,8 @@
 **Total de ítems:** 189
 **Ítems resueltos por documentación:** 189
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+**Totales:** 202 ítems · Completados: 115 · Pendientes: 87 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 115 [x] / 87 [ ] / 0 [?].
+> Las marcas no se tocaron.

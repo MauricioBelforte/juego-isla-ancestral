@@ -88,3 +88,24 @@ legal/
 - Probar que branding no infrinja marcas registradas.
 - Probar que influencers disclosure cumpla FTC Guidelines.
 - Probar que giveaways cumplan normativas locales.
+
+---
+
+## Iteración agnes — capa data-layer + gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 981)
+
+> Este `04-Codigo.md` (SWE-1.6/DEVIN) predice al scaffold real: declaraba "sin código de gameplay /
+> tests manuales", pero en iteraciones posteriores **sí se creó** la capa de validación de datos. Mi
+> iter. acotada la verifica y la cablea al gate CI.
+
+### Estado real del código (verificado headless, godot 4.7.2)
+- `data/legal/marketing_legal.json` — catálogo data-driven (4 `cumplimientos` + 2 `politicas`).
+- `scripts/legal/marketing_legal_validator.gd` (`class_name MarketingLegalValidator`) — `validar()`/
+  `reporte()`: detecta sin id / sin regla / sin alcance / sin políticas.
+- `scripts/legal/test_marketing_legal_m126.gd` — **9 checks, 0 fallos, exit 0**.
+- **Gap cerrado:** el test **no estaba** cableado en `quality.yml` → lo añadí al **gate duro**
+  (test-suite), junto a los tests M83.
+
+### Lo que sigue NO implementado (dueño M126 / humano, no lo cierro)
+- Capa de servicio: `MarketingLegalManager`/`MarketingLegalConfig` (autoloads) + Resource de config.
+- Doc `legal/marketing_legal_review.md` (el 04-Codigo lo prevé pero no existe).
+- Legal review humana (influencers/contratos/giveaways/marcas USPTO-EUIPO/FTC) → requieren abogado.

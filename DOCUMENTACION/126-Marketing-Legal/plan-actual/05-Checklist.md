@@ -297,3 +297,9 @@ atria-dawn → este)
   en sitio web — son KnownIssue no bloqueante DoD ya documentados en los ítems.
 
 **Firma:** Hy3 / WorkBuddy — 2026-09-19
+
+**Totales:** 101 ítems · Completados: 59 · Pendientes: 42 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 59 [x] / 42 [ ] /
+> 0 [?]. Las marcas no se tocaron.

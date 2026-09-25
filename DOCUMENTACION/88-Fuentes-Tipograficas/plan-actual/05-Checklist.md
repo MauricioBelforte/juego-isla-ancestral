@@ -240,3 +240,9 @@
 - [x] **Verificación VISUAL de legibilidad** (análisis con visión sobre captura en vivo del juego, 1600x900): textos de UI completos y correctos — 'Lunes, 1 de Primavera, Año 1', 'Pico de Cobre (150/150)', widget 'Fecha y hora (Sesión: Mañana / Estación: Primavera / Próximos eventos: día 2, día 3)', controles (WASD/Scroll/Escape/F) — **acentos españoles correctos, sin tofu ni glifos rotos, contraste adecuado**
 - [x] Matiz registrado: texts de hotbar en fuente pequeña (~17px) legibles en 1600x900 — se revalida en 720p en accesibilidad (M58, dueño)
 - [?] Prueba en 1280x720 y 1366x768 (escalado de UI): pendiente (dueño: M58 accesibilidad / M53 UI)
+
+**Totales:** 177 ítems · Completados: 10 · Pendientes: 166 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 166 [ ] /
+> 1 [?]. Las marcas no se tocaron.
