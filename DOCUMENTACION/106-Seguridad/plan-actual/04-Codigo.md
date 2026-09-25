@@ -1,7 +1,7 @@
-**Modelo:** agnes-3-flash (Sapiens AI) (último modificador)
+**Modelo:** kimi-k3 (Moonshot AI) (ultimo modificador)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-09-16 (iter. agnes: helper `security_input_validator` + test + reconciliación del sobre-cierre)
-**Historial:** especificación original por SWE-1.6 / DEVIN (2026-08-19); implementación de `security_manager.gd` (catálogo) por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-16, Log 922)
+**Fecha:** 2026-09-20 (iter. kimi T-001 L1077 + fix M107 E-22; kimi2 T-002 L1080; kimi3/4 T-003 L1081 + T-004 L1082; kimi5 T-005 L1086; kimi6 T-006 L1088; kimi7 T-007 L1126; kimi8 T-008 entornos L1132)
+**Historial:** espec. original SWE-1.6/DEVIN (2026-08-19); security_manager.gd (catalogo) por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-16, Log 922); iter. kimi por kimi-k3 (Kilo Code, 2026-09-19, Log 1077)
 
 # 04-Codigo.md — Módulo 106: Seguridad
 
@@ -514,3 +514,199 @@ TAMPER_SECRET_KEY=your_tamper_secret_key_here
   anti-hallucinatoria. **No soy aprobador visual.** Los servicios online (rate limiting/bots/CI secrets/
   HMAC-SHA) son de M77/CI/external → `[?]` con dueño; el núcleo local (catálogo + InputValidator +
   `validar_save`) lo cubro.
+
+## 18. Iteración kimi — RF11 economía adulterada + fix transversal M107 (2026-09-19, kimi-k3 (Moonshot AI) / Kilo Code, Log 1077)
+
+### T-001: Prevenir economía adulterada (RF11) — implementado y verificado
+- **NUEVO método `SecurityManager.validar_economia(player_data: Dictionary) -> bool`** en
+  `scripts/security/security_manager.gd` (autoload, sin `class_name`). Reusa el catálogo
+  data-driven existente (`data/security/security_policies.json` → `restricciones`:
+  `max_plata` 999999, `max_objetos_inventario` 99, `max_nivel` 50) vía `validar_max()`.
+- Detecta: `plata` / `objetos_inventario` / `nivel` **negativos** y **fuera de rango**; registra
+  alerta por cada violación vía `registrar_alerta()`. Devuelve `false` si se detecta adulteración.
+- Gobernado por la política `rechazar_input_invalido` (si está deshabilitada, retorna `true`).
+- Claves opcionales: `validar_economia({})` → `true` (nada que validar); valida solo lo presente.
+- Tipos explícitos (warnings-as-errors del proyecto).
+
+### Test (bloque D agregado a `test_security_m106.gd`)
+- 9 checks nuevos: economía legítima→true sin alertas, plata excede max→false+alerta, plata
+  negativa→false, objetos exceden max→false, nivel excede max→false, dict vacío→true, plata en el
+  límite (999999)→true, alerta registrada contiene "Economía adulterada". Guardián bloque D.
+- **Resultado: suite M106 21/0, 0 SCRIPT ERROR, EXIT 0** (12 previos + 9 nuevos).
+  Regresión input `test_security_m106_input.gd` 25/0. **Total M106: 46 checks, 0 fallos.**
+
+### Fix transversal previo (desbloqueo del boot headless) — BUG-058 / E-22
+- **Bloqueante:** el autoload M107 `scripts/backup/backup_manager.gd` (de mimo-v2.5, Log 1068) estaba
+  roto con código de Godot 3 → `SCRIPT ERROR` en stderr de TODOS los runs headless (falso-verde
+  masivo, lección 28). Hy3 ya lo había detectado (Log 1072) pero no lo reparó (era QA de M118).
+- **Fix quirúrgico (sin tocar otra lógica de M107):**
+  1. `ZIPWriter` (Godot 3) → `ZIPPacker` (Godot 4); `zip_available()` → `ClassDB.class_exists(&"ZIPPacker")`.
+  2. `open()` estático → instancia: `var writer := ZIPPacker.new()` + `writer.open(zip_path, ZIPPacker.APPEND_ADDINZIP)`.
+  3. `write_file(path, bytes)` → `start_file(path)` + `write_file(bytes)` (patrón `cicd_manager.gd` M118).
+  4. 6 inferencias `var x := cat.get(...)` (Variant) → tipo explícito `str(...)`/`bool(...)` (warnings-as-errors).
+- **Verificado:** boot headless limpio, autoload BackupManager carga sin parse error, 0 SCRIPT ERROR.
+- Registrado en `11-BUGS.md` (BUG-058, sección 7 resueltos) y `GUIA-GODOT/06-registro-errores.md` (E-22).
+
+### Notas para el próximo agente (kimi-k3 continuará)
+- T-002+ (bots, rate limiting, audit server logs) aplican recién con **M77 (online)** — deferred.
+- Considerar HMAC/SHA-256 para `validar_save` (CRC32 es débil) — pendiente de iteración futura.
+- `validar_economia` está listo para que M60 (Datos) lo llame al cargar savegame junto a `validar_save`.
+
+## 19. Iteración kimi 2 — RF12 prevención de bots (2026-09-19, kimi-k3 (Moonshot AI) / Kilo Code, Log 1080)
+
+### T-002: Prevenir bots (RF12) — implementado y verificado
+- **NUEVO método `SecurityManager.registrar_accion_bot(timestamp_ms: int) -> int`** en
+  `scripts/security/security_manager.gd`. Detector local de input automatizado (autoclicker/macro):
+  marca intervalos sub-mínimos entre acciones consecutivas y, si la racha supera `max_rafaga_bot`,
+  registra alerta `"Patrón de bot"` (una por racha; pausa humana resetea el contador).
+- **Data-driven:** nuevas restricciones en `data/security/security_policies.json`:
+  `min_intervalo_accion_ms` (80, piso fisiológico del input humano) y `max_rafaga_bot` (10).
+- Gobernado por la política `rechazar_input_invalido`. Estado interno `_ultimo_ts_bot` /
+  `_intervalos_bot` (tipos explícitos). El timestamp lo inyecta el caller (`Time.get_ticks_msec()`)
+  → función pura y testeable headless sin reloj real.
+- **Alcance honesto:** es la capa **local** de prevención de bots (v1 single-player). El CAPTCHA y
+  el rate limiting por IP/endpoint (online) quedan deferred a M77 (T-019..T-023, T-066).
+
+### Test (bloque E agregado a `test_security_m106.gd`)
+- 6 checks nuevos: ritmo humano (200ms) sin marcas ni alertas, ráfaga bot (10ms) marcada y con
+  alerta al alcanzar `max_rafaga_bot`, una sola alerta por racha, pausa humana resetea el contador.
+  Guardián bloque E.
+- **Resultado: suite M106 27/0, 0 SCRIPT ERROR, EXIT 0** (21 previos + 6 nuevos).
+
+## 20. Iteraciones kimi 3 y 4 — RF13 audit log + RF1 rate limiting (2026-09-19, kimi-k3 (Moonshot AI) / Kilo Code, Logs 1081 y 1082)
+
+### T-003: Registrar accesos importantes (RF13) — implementado y verificado
+- **`SecurityManager.registrar_acceso(accion, detalle = "", nivel = "info") -> int`**: agrega entrada
+  con timestamp al buffer. Nivel `"critico"` genera `registrar_alerta()`. Auto-vuelca a disco al
+  alcanzar `max_audit_buffer`. Devuelve el tamaño del buffer.
+- **`volcar_audit_log() -> bool`**: persiste el buffer en `user://security_audit.log` (JSON Lines)
+  con **retención** de las últimas `audit_retener_lineas` (rotación). **`cantidad_audit()`**.
+- Data-driven: `max_audit_buffer` (50), `audit_retener_lineas` (500). Estado `_audit_buffer: Array`.
+- Test bloque F (8 checks): buffer, info sin alerta, crítico con alerta, volcado, archivo, retención,
+  entrada parseable con campos. **Suite 35/0.**
+
+### T-004: Rate limiting por IP/usuario/endpoint (RF1 parcial) — implementado y verificado
+- **Definición data-driven** en `security_policies.json` → nueva sección `limites_tasa`:
+  `por_ip` (100), `por_usuario` (60), `endpoints` (`/api/telemetry` 30, `/api/crash` 10,
+  `/api/save` 20); ventana `limite_tasa_ventana_s` (60).
+- **`verificar_limite_tasa(clave, ahora_s) -> bool`**: ventana deslizante **offline en memoria**.
+  Clave `"tipo:valor"` (`ip:` / `usuario:` / `endpoint:`); el límite sale del catálogo vía
+  **`_limite_tasa_de()`** (match por tipo). Devuelve `true` si está permitida (consume) o `false` si
+  excede (registra alerta `"Límite de tasa excedido"`). Estado `_tasa_marcas: Dictionary`.
+- Test bloque G (8 checks): clave sin límite permitida, 10/10 dentro del límite, 11ª rechazada +
+  alerta, ventana expira y permite de nuevo, tipos independientes, endpoint no listado permitido.
+  **Suite 43/0.**
+- **Alcance honesto:** la verificación es local (en memoria). La aplicación real sobre tráfico de
+  red (middleware de servidor, T-005) queda **deferred a M77** — aquí está la definición + el
+  verificador reutilizable.
+
+## 21. Iteración kimi 5 — T-005 middleware de rate limiting (2026-09-19, kimi-k3 (Moonshot AI) / Kilo Code, Log 1086)
+
+### T-005: Diseñar middleware de rate limiting en servidor — implementado y verificado
+- **NUEVO `scripts/security/security_rate_limit_middleware.gd`** (RefCounted, **sin `class_name`**,
+  vía `preload` — patrón `security_input_validator.gd`, pitfall §9.41). Componente de **decisión**
+  que orquesta las 3 capas (endpoint → IP → usuario) sobre `SecurityManager.verificar_limite_tasa()`.
+- **Inyección del SecurityManager por constructor** (`_init(security_manager)`) → testeable headless
+  sin reloj ni red. **Fail-open** si no hay manager (no bloquea el juego).
+- `procesar(ip, usuario, endpoint, ahora_s) -> Dictionary` →
+  `{permitida, motivo, capa, reintentar_en_s}`. Rechazo temprano por la capa más específica.
+- **NUEVO `SecurityManager.tasa_reintento_s(clave, ahora_s) -> int`**: segundos hasta que la clave
+  recupere capacidad (0 = ya hay) — alimenta el `reintentar_en_s` del middleware.
+- **NUEVO `test_security_m106_middleware.gd`** (guardianes anti-falso-verde) → **19 checks, 0 fallos**:
+  permitida (todas las capas), fail-open, rechazo por endpoint con `reintentar_en_s` decreciente,
+  reintento tras ventana, saturación de IP (100) y de usuario (60) con capas/claves independientes.
+- **Lección del test:** ventana deslizante de 60s → las solicitudes de saturación deben caer
+  **dentro** de la ventana (mismo segundo) o expiran antes (1ª corrida: 4 fallos por `t+1` = 100s).
+- **Alcance honesto:** es el componente de decisión headless-safe. La integración al servidor HTTP
+  real (interceptar requests, responder 429) es de **M77 (online)** — deferred.
+
+### Verificación total M106 tras T-005
+`test_security_m106.gd` 43/0 + `test_security_m106_input.gd` 25/0 + `test_security_m106_middleware.gd`
+19/0 = **87 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** (godot 4.7.2 headless).
+
+## 22. Iteración kimi 6 — T-006 no almacenar claves en código fuente (2026-09-19, kimi-k3 (Moonshot AI) / Kilo Code, Log 1088)
+
+### T-006: Definir no almacenar claves en código fuente (RF2) — implementado y verificado
+- **NUEVO `scripts/security/security_secret_scanner.gd`** (RefCounted, **sin `class_name`**, vía
+  `preload` — pitfall §9.41). Escáner headless de secrets hardcodeados en código fuente.
+- **Patrones regex** (`PATRONES_DEFAULT`, inyectables por `patrones_custom`): asignaciones
+  `api_key|secret|token|password|passwd|pwd` con `[:=]+` (cubre `=` y `:=`), claves AWS/GCP/Azure,
+  AWS access key id (`AKIA[0-9A-Z]{16}`), clave privada PEM, bearer token.
+- **Filtros anti-falso-positivo:** ignora comentarios GDScript (`#...`) y placeholders legítimos
+  (`your_`, `changeme`, `example`, `placeholder`, `xxx`, `<...>`, `env.`, `OS.get_environment`,
+  `getenv`). El fragmento reportado se **redacta** (`***REDACTED***`, sin exponer el secret).
+- **API:** `escanear_texto(contenido)` → hallazgos `{linea, patron, fragmento}`;
+  `escanear_archivo(ruta)`; `escanear_directorio(dir_raiz)` (recursivo, extensiones
+  gd/cfg/json/tscn/tres/cs/py/env); `resumen(resultado)` para logs/CI.
+- **NUEVO `test_security_m106_secrets.gd`** (guardianes) → **20 checks, 0 fallos**: detección de
+  api_key/password/token/AKIA/PEM/bearer, número de línea correcto, fragmento redactado,
+  falsos positivos evitados (comentario, placeholder, env), escaneo de archivo/directorio.
+- **Lección:** el operador `:=` de GDScript requiere `[:=]+` en el regex (no `[:=]`); la AKIA de
+  ejemplo documental contiene "EXAMPLE" → cae en el filtro anti-placeholder (usar otra en el test).
+- **Uso en CI:** reutilizable por `scripts/security_check.sh` (M106/CI) para bloquear commits con
+  secrets. El escaneo del repo completo en CI queda deferred a M118 (CI/CD).
+
+### Verificación total M106 tras T-006
+`test_security_m106.gd` 43/0 + `test_security_m106_input.gd` 25/0 + `test_security_m106_middleware.gd`
+19/0 + `test_security_m106_secrets.gd` 20/0 = **107 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0**
+(godot 4.7.2 headless).
+
+## 23. Iteración kimi 7 — T-007 .env.local de desarrollo + cobertura .gitignore (2026-09-20, kimi-k3 (Moonshot AI) / Kilo Code, Log 1126)
+
+### T-007: Diseñar archivo .env.local para desarrollo (en .gitignore) — implementado y verificado
+- **NUEVO `.env.local`** (raíz del proyecto): variables de entorno de desarrollo con
+  **placeholders** (NO secrets reales): `APP_ENV=dev`, `API_BASE_URL=http://localhost:8080`,
+  `API_KEY_DEV=__REEMPLAZAR_...__`, `TELEMETRY_ENABLED=false`, `CRASH_REPORTING_ENABLED=false`,
+  `LOG_LEVEL=DEBUG`.
+- **Cobertura `.gitignore`:** agregados `.env`, `.env.local`, `.env.*.local`, `.env.production`,
+  `.env.staging`, `*.key`, `*.pem`, `.secrets`. **Confirmado con `git check-ignore -v`**
+  (`.env.local` → línea 214, `.env.production` → 216). **Hallazgo:** el `.gitignore` previo NO
+  cubría `.env*` — riesgo real de commitear secrets, ahora cerrado.
+- **NUEVO `test_security_m106_env.gd`** (guardianes) → **13 checks, 0 fallos**: archivo existe en
+  la raíz (ruta resuelta con `globalize_path` + `get_base_dir` ×3 sobre `game/isla-ancestral/`),
+  parseable KEY=VALUE, `APP_ENV=dev`, API localhost, telemetría/crash OFF, `API_KEY_DEV` placeholder.
+- **Alcance honesto:** `.env.example` (plantilla versionable) es T-065; la carga de variables al
+  inicio del juego es parte del KeyManager (diseño, integración con M77/M60).
+
+### Verificación total M106 tras T-007
+107 (previos) + 13 (env) = **120 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** (godot 4.7.2 headless).
+
+## 24. Iteración kimi 8 — T-008 entornos separados dev/staging/prod (2026-09-20, kimi-k3 (Moonshot AI) / Kilo Code, Log 1132)
+
+### T-008: Definir entornos separados (dev/staging/prod) (RF4) — implementado y verificado
+- **NUEVO `data/security/security_environments.json`**: entornos `dev` (localhost, telemetría OFF,
+  log DEBUG, base `dev_local`, secrets de `.env.local`), `staging` (staging-api, datos simulados,
+  log INFO) y `prod` (api real, telemetría ON, log WARNING, secrets de secret manager).
+- **NUEVO `security_environment_resolver.gd`** (RefCounted, sin `class_name`, vía `preload`):
+  selecciona el entorno activo (argumento → `APP_ENV` → default `dev`; case-insensitive; inválido
+  → `dev` con warning). API: `entorno()`, `config_entorno()` (copia), `valor(clave, default)`,
+  `es_dev()`, `es_prod()`, `entornos_disponibles()`.
+- **NUEVO `test_security_m106_environments.gd`** (guardianes) → **24 checks, 0 fallos**: entornos
+  definidos, selección forzada/case-insensitive/inválido→dev, separación real de valores dev vs
+  prod, clave inexistente→default, `config_entorno()` devuelve copia.
+- **Alcance honesto:** es la definición + resolver. Las bases de datos separadas por entorno
+  (T-009) y la carga efectiva de secrets (KeyManager) se integran con M60/M77.
+
+### Verificación total M106 tras T-008
+120 (previos) + 24 (entornos) = **144 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** (godot 4.7.2).
+
+## 25. Iteración kimi 9 — T-009 bases de datos separadas por entorno (2026-09-20, kimi-k3 (Moonshot AI) / Kilo Code, Log 1134)
+
+### T-009: Diseñar bases de datos separadas por entorno (RF4) — implementado y verificado
+- **`security_environments.json` extendido**: nuevos campos por entorno `bd_host` (localhost /
+  staging-db / db) y `bd_credencial_origen` (`env_local` dev / `env_sistema` staging /
+  `secret_manager` prod).
+- **NUEVO `security_database_config.gd`** (RefCounted, sin `class_name`, vía `preload`):
+  `config_bd()` → `{entorno, nombre, host, credencial_origen}` del entorno activo;
+  `validar_separacion()` → violaciones ([] = OK) con reglas: dev/staging nunca apuntan a la
+  `base_datos`/`bd_host` de prod, nombres de BD distintos entre entornos, prod exige
+  `secret_manager` (nunca `env_local`); `es_separacion_valida()`.
+- **NUEVO `test_security_m106_database.gd`** (guardianes) → **15 checks, 0 fallos**: config por
+  entorno, separación válida en el JSON real, nombres distintos, invariantes de credencial.
+- **Lección:** indexar un `Dictionary` (`config_bd()["nombre"]`) devuelve `Variant` sin tipo para
+  inferir → `var x := ...` es parse error con warnings-as-errors; usar `var x: String = str(...)`.
+- **Alcance honesto:** es la definición + validador de separación. La conexión real a las bases
+  (drivers, pool) es de M60/M77 cuando exista el backend.
+
+### Verificación total M106 tras T-009
+144 (previos) + 15 (database) = **159 checks, 0 fallos, 0 `SCRIPT ERROR`, EXIT 0** (godot 4.7.2).

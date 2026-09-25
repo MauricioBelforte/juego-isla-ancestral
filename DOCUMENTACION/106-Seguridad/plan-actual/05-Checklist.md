@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 106: Seguridad
 
-> **Reserva actual (2026-09-16):** 🔵 En curso — **agnes-3-flash (Sapiens AI) / Kilo Code**, iter. agnes, Log reservado **922** (`Logs/reservas/922-agnes-3-flash-M106.txt`). Relevo §21.4.7 de la reserva agnes-2.5 (stale >24h). Scope: auditoría del sobre-cierre + reconciliación código↔checklist + `security_input_validator.gd` (métodos "InputValidator" del diseño, `[ ]`) + test headless con guardián.
+> **Reserva actual (2026-09-19):** 🔵 En curso — **kimi-k3 (Moonshot AI) / Kilo Code**, Log reservado **1077**. Relevo §21.4.7 de la reserva agnes-3-flash (2026-09-16, stale >24h; backlog propio T-001..T-066). Scope T-001: `SecurityManager.validar_economia()` (RF11 economía adulterada) + test bloque D. **Fix transversal previo:** autoload M107 roto (BUG-058/E-22) reparado para desbloquear el boot headless.
 
 ## Checklist de implementación del módulo
 
@@ -18,26 +18,26 @@
 - [x] Validar datos online
 - [x] Prevenir manipulación
 - [x] Prevenir duplicación
-- [ ] Prevenir economía adulterada
-- [ ] Prevenir bots
-- [ ] Registrar accesos importantes
+- [x] Prevenir economía adulterada ← **(kimi-k3, Log 1077, 2026-09-19):** `SecurityManager.validar_economia()` + test bloque D (21/0 verde headless, 0 SCRIPT ERROR)
+- [x] Prevenir bots ← **(kimi-k3, Log 1080, 2026-09-19):** `SecurityManager.registrar_accion_bot()` (detección de timing inhumano, data-driven `min_intervalo_accion_ms`/`max_rafaga_bot`) + test bloque E (27/0 verde, 0 SCRIPT ERROR)
+- [x] Registrar accesos importantes ← **(kimi-k3, Log 1081, 2026-09-19):** `SecurityManager.registrar_acceso()` + `volcar_audit_log()` (audit local JSON Lines en user://, retención data-driven) + test bloque F (35/0 verde, 0 SCRIPT ERROR)
 - [x] Implementar backups
 - [x] Rotar credenciales
 - [x] Auditar dependencias
 
 ### [S] Protección de APIs
 - [x] Definir autenticación (API keys, JWT, OAuth 2.0)
-- [ ] Definir rate limiting (por IP, por usuario, por endpoint)
+- [x] Definir rate limiting (por IP, por usuario, por endpoint) ← **(kimi-k3, Log 1082, 2026-09-19):** `SecurityManager.verificar_limite_tasa()` + `_limite_tasa_de()` (ventana deslizante offline, catálogo `limites_tasa` por_ip/por_usuario/endpoints) + test bloque G (43/0 verde, 0 SCRIPT ERROR)
 - [x] Diseñar middleware de autenticación en servidor
-- [ ] Diseñar middleware de rate limiting en servidor
+- [x] Diseñar middleware de rate limiting en servidor ← **(kimi-k3, Log 1086, 2026-09-19):** `security_rate_limit_middleware.gd` (RefCounted, orquesta IP+usuario+endpoint sobre `verificar_limite_tasa`, fail-open, reporta `reintentar_en_s` vía nuevo `tasa_reintento_s()`) + `test_security_m106_middleware.gd` (19/0 verde, 0 SCRIPT ERROR)
 - [x] Diseñar headers de autenticación en cliente
 - [x] Diseñar manejo de errores de autenticación y rate limiting
 
 ### [S] Protección de claves
 - [x] Definir almacenamiento seguro (environment variables, secret managers)
-- [ ] Definir no almacenar claves en código fuente
+- [x] Definir no almacenar claves en código fuente ← **(kimi-k3, Log 1088, 2026-09-19):** `security_secret_scanner.gd` (escáner headless de secrets hardcodeados: regex api_key/token/password/AKIA/PEM/bearer con `[:=]+`, filtros anti-placeholder/comentario/env, fragmento REDACTED) + `test_security_m106_secrets.gd` (20/0 verde, 0 SCRIPT ERROR)
 - [x] Definir no almacenar claves en archivos de configuración en repositorio
-- [ ] Diseñar archivo .env.local para desarrollo (en .gitignore)
+- [x] Diseñar archivo .env.local para desarrollo (en .gitignore) ← **(kimi-k3, Log 1126, 2026-09-20):** `.env.local` creado (placeholders, APP_ENV=dev, API localhost, telemetría OFF) + `.gitignore` cubre `.env`/`.env.local`/`.env.*.local`/`.env.production`/`.env.staging`/`*.key`/`*.pem`/`.secrets` (git check-ignore confirmado) + `test_security_m106_env.gd` (13/0 verde, 0 SCRIPT ERROR)
 - [x] Diseñar archivo .env.production para producción (en .gitignore)
 - [x] Diseñar carga de variables de entorno al inicio del juego
 - [x] Diseñar validación de que todas las claves requeridas están presentes
@@ -50,13 +50,13 @@
 - [x] Diseñar templates de configuración (.env.example) sin secrets
 
 ### [S] Separar desarrollo y producción
-- [ ] Definir entornos separados (dev/staging/prod)
+- [x] Definir entornos separados (dev/staging/prod) ← **(kimi-k3, Log 1132, 2026-09-20):** `security_environments.json` (dev/staging/prod data-driven) + `security_environment_resolver.gd` (RefCounted, selección por APP_ENV/argumento/default, `valor()`/`es_dev()`/`es_prod()`) + `test_security_m106_environments.gd` (24/0 verde, 0 SCRIPT ERROR)
 - [x] Definir desarrollo: localhost, datos de prueba, keys de desarrollo
 - [x] Definir staging: entorno intermedio, datos simulados, keys de staging
 - [x] Definir producción: entorno real, datos reales, keys de producción
 - [x] Diseñar configuración por entorno (dev/staging/prod)
 - [x] Diseñar variables de entorno para diferenciar entornos
-- [ ] Diseñar bases de datos separadas por entorno
+- [x] Diseñar bases de datos separadas por entorno ← **(kimi-k3, Log 1134, 2026-09-20):** `security_database_config.gd` (RefCounted: `config_bd()` + `validar_separacion()` — dev/staging nunca apuntan a la BD/host de prod, nombres distintos, prod exige secret_manager) + campos `bd_host`/`bd_credencial_origen` en `security_environments.json` + `test_security_m106_database.gd` (15/0 verde, 0 SCRIPT ERROR)
 - [x] Diseñar APIs separadas por entorno (dev-api, staging-api, prod-api)
 
 ### [S] Proteger servidores
