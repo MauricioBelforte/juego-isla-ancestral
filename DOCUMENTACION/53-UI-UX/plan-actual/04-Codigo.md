@@ -41,9 +41,22 @@ res://scripts/ui/
 │   └── aanim_config.gd             # Curvas y duraciones de transiciones (reduce_motion)
 ├── i18n/                           # Strings y traducciones (M87)
 │   └── ui_es.po · ui_en.po ...
+├── i18n/ui_i18n.gd                 # (Log 1118) UiI18n: puente M53↔M87 — traducir/
+│                                     #   traducir_param + metadatos text_key/tooltip_text_key
+│                                     #   + RetraductorUI + conectar_locale
+├── overlays/subtitulo_overlay.gd   # (Log 1118) SubtituloOverlay: subtítulos M58 RF8
 └── glyphs/                         # Iconos vectoriales (SVG) del HUD y botones (M46)
     ├── icon_coin.svg · icon_seed.svg ...
 ```
+
+> **Agregado agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** `i18n/ui_i18n.gd`
+> (puente M53↔M87) y `overlays/subtitulo_overlay.gd` (M58 RF8) +
+> `test_ui_i18n_m53.gd` (39 checks). `UIManager` expone además `_conectar_m87` /
+> `_on_locale_changed_ui` (re-traducción runtime de capas montadas + HUD) y
+> `_conectar_m58` / `_on_pausa_instantanea` / `_on_pausa_continuar` (RF18 →
+> PauseLayer + `reanudar()` de M58). `TooltipService.show_tooltip_key(clave, at,
+> params)` resuelve tooltips por clave M87 y re-traduce el visible en `locale_changed`;
+> `UIManager._on_focus_moved_tooltip` prioriza el metadato `tooltip_text_key`.
 
 ## 2. Autoloads registrados (project.godot)
 

@@ -73,7 +73,7 @@
 - [x] Opciones de diálogo seleccionables por foco y confirm [S]
 - [x] Velocidad de texto ajustable en runtime (M58) [S]
 - [x] Pausa de texto a pedido según M58 [S]
-- [ ] Subtítulos de diálogo si M58 los activa [M]
+- [x] Subtítulos de diálogo si M58 los activa [M] — Log 1118 (agnes-3-flash): `SubtituloOverlay` (scripts/ui/overlays/subtitulo_overlay.gd) montado en DialogLayer, gobernado por M58 RF8 (`AccesibilityManager.get_subtitulos()` + señal `subtitulos_changed`); visible solo si `activado`; oculto en los 3 paths de cierre del diálogo. Test headless `test_ui_i18n_m53.gd` 39/0.
 - [x] Pausar GameClock durante el diálogo y restaurarlo al cerrar [M]
 - [x] Verificar que el diálogo cierra solo con dialog_finished y restaura el foco [M]
 
@@ -145,7 +145,7 @@
 - [x] Integrar high_contrast con contraste AA y bordes reforzados [M]
 - [x] Integrar modo daltonismo con formas y texturas además del color [M]
 - [x] Integrar reduce_motion desactivando tweens y transiciones [M]
-- [ ] Integrar tamaño, opacidad y fondo de subtítulos [M]
+- [ ] Integrar tamaño, opacidad y fondo de subtítulos [M] — Log 1118 (agnes-3-flash): **tamaño + fondo + activado integrados** vía M58 RF8 en `SubtituloOverlay` (tamano→px 14/18/24, fondo→alpha, activado→visibilidad; test 39/0). **Opacidad: M58 RF8 no expone campo `opacidad`** (`get_subtitulos()` solo devuelve {activado,tamano,fondo}) → no se integró lo que no existe (anti-falso-verde); queda **decisión M58** (agregar campo) o se fija el alpha por defecto (0.45, ya aplicado).
 - [ ] Integrar indicadores visuales de sonido (toast visual de eventos auditivos) [M]
 - [x] Navegación completa por foco sin ratón (con gamepad y teclado) [S]
 - [x] Velocidad de texto y pausa de diálogo según M58 [S]
@@ -208,3 +208,55 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+**Totales:** 158 ítems · Completados: 132 · Pendientes: 26 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?].
+> Las marcas no se tocaron.
+
+> **Actualización agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** D.7 pasó `[ ]`→`[x]`
+> (SubtituloOverlay M58 RF8, test 39/0). Conteo real actual: 132 [x] / 26 [ ] / 0 [?].
+
+## Iteración agnes (Log 1118, 2026-09-20) — i18n M53↔M87 + overlays M58
+
+**Alcance (iteración acotada: data-driven + test headless + runtime, sin arte nuevo):**
+
+1. **Puente M53↔M87 (labels/tooltip traducidos):** `scripts/ui/i18n/ui_i18n.gd`
+   (`UiI18n`: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía
+   `RetraductorUI` + `conectar_locale`). Adopción: `equipment_layer` (3 etiquetas
+   estáticas con `text_key` + dinámicos re-generados en `locale_changed`),
+   `equipment_ui` (EQUIP.VACIO + bonus) e `interact_prompt` (UI.INTERACTUAR).
+   Claves `EQUIP.*` + `UI.INTERACTUAR` agregadas a `locales/es.po` + `en.po`
+   (validador PO M87: 0 fallos; `EQUIP.EQUIPADO` exento P5 por plantilla idéntica).
+   **Cierro los 2 items M87×2** (M53-owned, ver `87-Localizacion/.../05-Checklist.md`).
+2. **Re-traducción runtime:** `UIManager._conectar_m87()` + `_on_locale_changed_ui`
+   → al cambiar de idioma, `RetraductorUI.retraducir` sobre capas montadas + HUD
+   (solo nodos visibles; dinámicos los re-genera cada capa).
+3. **TooltipService por clave (M87):** `show_tooltip_key(clave, at, params)` resuelve
+   en el locale del momento y guarda la clave; el tooltip visible se **re-traduce en
+   vivo** al cambiar de idioma (M87 `locale_changed`). `UIManager._on_focus_moved_tooltip`
+   prioriza el metadato `tooltip_text_key` sobre `tooltip_text` estático.
+4. **Overlays accesibilidad M58:** `SubtituloOverlay` (D.7 `[x]`: activado/tamano/fondo
+   desde M58 RF8, reacciona a `subtitulos_changed`) montado en `DialogLayer`
+   (muestra en entrada de nodo, oculta en los 3 paths de cierre). **RF18:**
+   `UIManager._conectar_m58()` abre la PauseLayer ante `pausa_instantanea_activada`
+   y liga `continuar_pedido`→`AccesibilityManager.reanudar()` cuando M58 pausó.
+   J.6 queda `[ ]` (tamaño+fondo integrados; **opacidad no existe en M58 RF8** → decisión M58).
+   J.7 (indicador visual de sonido) queda `[ ]`: **no hay fuente de eventos de audio**
+   (señal M91) que lo dispare → decisión M91/M58.
+
+**Evidencia:** `test_ui_i18n_m53.gd` **39 checks / 0 fallos / EXIT 0** (headless
+`--script`, Godot 4.7.2); regresión `test_ui_framework.gd` 0 fallos; validador PO M87
+0 fallos; corrida runtime `main_island.tscn`: **0 SCRIPT ERROR** (UIRoot montó 10 capas,
+incluida la DialogLayer con el nuevo SubtituloOverlay).
+
+**Hallazgos (no bloquean, reportados):**
+- `test_localizacion_iter6.gd` A7 falla: aserta el estado BUG-042 **anterior** (fuentes
+  corruptas) pero las fuentes se reemplazaron en el Log 1024 → **residual M87/M88**,
+  fuera de mi alcance (no toqué ese test).
+- `equipment_ui.gd` (esqueleto M155) no está montado en ninguna escena (código muerto
+  reemplazado por `equipment_layer`): aun así, sus 2 strings quedaron con claves.
+- Decisiones visuales pendientes del usuario (no las adivino): I.8 legibilidad AA,
+  I.9 coherencia visual entre capas, I.10 locales largos (alemán), C.12 test de
+  navegación 30 min/método, y el mapeo px de subtítulos (14/18/24 = decisión mía
+  registrada, alineada a ThemeUx SMALL/BODY/H3).
