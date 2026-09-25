@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://scripts/fauna/cangrejo_npc.gd" id="15_cangrejo"]
 [ext_resource type="Script" path="res://scripts/fauna/jabali_npc.gd" id="16_jabali"]
 [ext_resource type="Script" path="res://scripts/fauna/gaviota_npc.gd" id="17_gaviota"][ext_resource type="Script" path="res://scripts/vegetacion/vegetation_spawner.gd" id="18_vegspawn"]
+[ext_resource type="Script" path="res://scripts/fauna/fauna_spawner.gd" id="19_faunaspawn"]
 
 
 [sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
@@ -58,6 +59,9 @@ environment = SubResource("Env_1")
 
 [node name="VegetationSpawner" type="Node" parent="." unique_id=999777666]
 script = ExtResource("18_vegspawn")
+
+[node name="FaunaSpawner" type="Node" parent="."]
+script = ExtResource("19_faunaspawn")
 [node name="VoxelTerrain" type="VoxelTerrain" parent="." unique_id=679045721]
 
 [node name="VoxelViewer" type="VoxelViewer" parent="." unique_id=859911694]
