@@ -639,3 +639,15 @@ verifiques vos, usa tu practica habitual de varios angulos.
       **Trampa nueva (103-bis):** un hallazgo de herramienta no dice **de que archivo** viene si hay dos
       copias del mismo archivo en el arbol (worktrees anidados en `.kilo/`); `git status` en el worktree
       anidado puede decir **limpio** y no decir nada del principal. Localizar el archivo, no suponerlo.
+
+- [x] Log reservado: **1166** — P-49b: **integración del bucket B de atria-dawn-preview** en 5 commits
+      de merge (drift `plan-actual/` 86 · logs 39 · backlogs/scratch 19 · auditorías 4 · sueltos 9 =
+      **157 archivos, +9034 −258**), verificados uno a uno con `git diff --stat HEAD~1 HEAD`; los
+      **145/145** archivos del bucket quedan limpios (árbol sucio **428 → 283**). **2 falsos positivos**
+      del clasificador corregidos a mano (`38-Economia` y `Auditorias/` eran 100 % atria: el otro modelo
+      era **mención en prosa/tabla**, no autoría) con un override explícito y justificado. **Chequeo
+      trampa 87:** las 106 rutas B no-log, revisadas por líneas AÑADIDAS, dieron 15 menciones y **0 hunks
+      ajenos** → ningún B→C extra. **Trampas nuevas:** (a) `git diff --stat HEAD~1` compara contra el
+      **worktree** (inflado: 188 en vez de 86) → medir `HEAD~1 HEAD`; (b) lock de git por concurrencia
+      (otro agente commiteaba) → reintentar el `commit` **sin** re-`add`; (c) el árbol se movió entre el
+      encargo y el turno (B 149→145, pool 1165→1166). **Push NEGATIVO.** (2026-09-25)
