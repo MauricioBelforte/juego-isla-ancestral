@@ -177,7 +177,13 @@
 - [ ] Crear guía para agregar nuevos NPCs
 - [ ] Documentar proporciones y tamaños
 
-**Totales:** 130 items · Completados: 13 · Pendientes: 117
+**Totales:** 138 ítems · Completados: 94 · Pendientes: 42 · No resueltos: 2.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **lote 6):** la línea decía *"130 items · Completados: 13 · Pendientes: 117"*.
+> Conteo real: 94 [x] / 42 [ ] / 2 [?] = 138. En este caso el claim **sub-reportaba**
+> el progreso (13 vs 94 [x] reales, -81) — la línea quedó obsoleta tras flips
+> posteriores. Las marcas no se tocaron; solo se reescribió esta línea.
 **Nota:** Iter 1 completada por stepfun-3.7-flash / Kilo Code (2026-09-01). Estructura de datos y autoload implementados. Pendiente: 22 Resources .tres restantes, variantes estacionales, tests headless.
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 

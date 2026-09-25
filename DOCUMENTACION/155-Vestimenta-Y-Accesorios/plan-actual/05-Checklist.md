@@ -172,7 +172,12 @@
 
 - [ ] Verificar M154 operativo antes de trabajo visual [S]
 
-**Totales:** 123 items · Completados: 100 · Pendientes: 23 · No resueltos: 0
+**Totales:** 108 ítems · Completados: 84 · Pendientes: 24 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **lote 6):** la línea decía *"123 items · Completados: 100 · Pendientes: 23"*.
+> Conteo real: 84 [x] / 24 [ ] / 0 [?] = 108. Claim inflado por 16 [x] y 15 ítems
+> de total. Las marcas no se tocaron; solo se reescribió esta línea.
 **Nota:** Verificación item por item por MiMo V2.5 (OpenCode) 2026-09-15 contra código real (equipment_slot.gd, equipment_manager.gd, equipment_catalog.gd, test_equipment_m155.gd, equipment_layer.gd).
 ## Iteración 2 (2026-09-01 — deepseek-v4-flash-vision-exp / Kilo Code)
 
