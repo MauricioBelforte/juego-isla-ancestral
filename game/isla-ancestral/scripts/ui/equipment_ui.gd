@@ -58,7 +58,9 @@ func _refresh_slot(slot_control: Control, slot_type: EquipmentSlot.SlotType) -> 
             rarity.text = slot.rarity
     else:
         if label:
-            label.text = "Vacío"
+            # M87 (Log 1118): clave de catálogo en vez de literal (H-7)
+            label.set_meta("text_key", "EQUIP.VACIO")
+            label.text = UiI18n.traducir("EQUIP.VACIO")
         if rarity:
             rarity.visible = false
 
@@ -70,7 +72,8 @@ func _on_equipment_changed(slot_type: int, new_item_id: String) -> void:
 func _on_terrain_bonus_updated(total_bonus: float) -> void:
     var bonus_label: Label = $Panel/VBox/BonusLabel
     if bonus_label:
-        bonus_label.text = "Bono terreno: +%.0f%%" % (total_bonus * 100.0)
+        # M87 (Log 1118): clave parametrizada {p}
+        bonus_label.text = UiI18n.traducir_param("EQUIP.BONO", {"p": str(int(total_bonus * 100.0))})
 
 func _get_slot_control(slot_type: int) -> Control:
     match slot_type:

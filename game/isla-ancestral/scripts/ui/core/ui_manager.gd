@@ -66,6 +66,13 @@ func _ready() -> void:
 	var win := get_window()
 	if win and win.has_signal("focus_entered"):
 		win.focus_entered.connect(_on_window_focus_restored)
+	# M58 RF18 (Log 1118): pausa instantánea de M58 -> overlay de pausa M53
+	_conectar_m58()
+	# M87 (Log 1118): re-traducción en vivo de capas montadas al cambiar de
+	# idioma (M53 adopta la convención de metadatos text_key/tooltip_text_key
+	# de RetraductorUI; los textos dinámicos los re-generan las propias capas
+	# vía locale_changed)
+	_conectar_m87()
 
 ## §9.50 — Congela el mundo mientras haya una capa MODAL_FULL visible.
 ## Las capas UI van en PROCESS_MODE_ALWAYS (siguen recibiendo input); el resto
@@ -85,12 +92,20 @@ func _actualizar_pausa_mundo() -> void:
 		_log("mundo %s (MODAL_FULL visible)" % ["PAUSADO" if hay_modal else "REANUDADO"])
 
 ## Muestra el tooltip del control enfocado si define tooltip_text
+## (o el metadato M87 `tooltip_text_key` si está presente — Log 1118)
 func _on_focus_moved_tooltip(node: Node) -> void:
-	if node is Control and str(node.tooltip_text) != "":
-		var ts = get_node_or_null("/root/TooltipService")
-		if ts == null:
-			ts = _buscar_nodo(get_tree().root, "TooltipService")
-		if ts and ts.has_method("show_tooltip"):
+	var ts = get_node_or_null("/root/TooltipService")
+	if ts == null:
+		ts = _buscar_nodo(get_tree().root, "TooltipService")
+	if ts == null or not (node is Control):
+		return
+	if node.has_meta("tooltip_text_key"):
+		# M87 (Log 1118): tooltip por clave de catálogo — se re-traduce en vivo
+		if ts.has_method("show_tooltip_key"):
+			ts.show_tooltip_key(str(node.get_meta("tooltip_text_key")), node)
+		return
+	if str(node.tooltip_text) != "":
+		if ts.has_method("show_tooltip"):
 			ts.show_tooltip(str(node.tooltip_text), node)
 
 ## ── Acciones transversales (M57) ─────────────────────────
@@ -414,6 +429,72 @@ func _on_settings_changed() -> void:
 	var ts = get_node_or_null("/root/ThemeService")
 	if ts and ts.has_method("aplicar_tema_global"):
 		ts.aplicar_tema_global(ts.get_ui_scale() if ts.has_method("get_ui_scale") else 1.0)
+
+
+## ── M58 RF18 (Log 1118): pausa instantánea → overlay de pausa M53 ───────────
+
+## M58 (AccesibilityManager) puede pausar el juego sin menús intermedios; M53
+## es la que muestra el overlay: se conecta a su señal y, al llegar, abre la
+## PauseLayer si no hay ninguna capa modal visible. El reanudar se liga a la
+## señal `continuar_pedido` de la PauseLayer (ver _conectar_m58).
+## Si M58 no está montado, el hook no existe: NO se finge.
+func _m58() -> Node:
+	return get_node_or_null("/root/AccesibilityManager")
+
+func _conectar_m58() -> void:
+	var acc := _m58()
+	if acc == null or not acc.has_signal("pausa_instantanea_activada"):
+		return
+	acc.pausa_instantanea_activada.connect(_on_pausa_instantanea)
+	var pausa = _buscar_capa("PauseLayer")
+	if pausa and pausa.has_signal("continuar_pedido"):
+		pausa.continuar_pedido.connect(_on_pausa_continuar)
+
+func _on_pausa_instantanea() -> void:
+	var pausa = _buscar_capa("PauseLayer")
+	if pausa == null:
+		return
+	# Las capas montadas ya están registradas: se abren con open()
+	# (push_layer es no-op para una capa ya en pila). La visibilidad de una
+	# MODAL_FULL pausa el mundo vía UILayer._notification (§9.50), igual que RF18.
+	if not pausa.visible and pausa.has_method("open"):
+		pausa.open()
+	_log("RF18: overlay de pausa abierto por pausa instantánea de M58")
+
+## Al pulsar "Continuar" en el overlay, si M58 había pausado (RF18) se reanuda.
+func _on_pausa_continuar() -> void:
+	var acc := _m58()
+	if acc and acc.has_method("esta_pausado") and acc.esta_pausado() and acc.has_method("reanudar"):
+		acc.reanudar()
+
+
+## ── M87 (Log 1118): re-traducción en vivo al cambiar de idioma ──────────────
+
+## M53 adopta la convención de M87 (scripts/localization/retraductor_ui.gd):
+## un control declara su clave con el metadato `text_key` (texto) o
+## `tooltip_text_key` (tooltip). Al cambiar de idioma, M87 emite locale_changed
+## y M53 re-traduce las capas montadas + el HUD con RetraductorUI (solo los
+## nodos visibles; los dinámicos los re-genera cada capa con sus parámetros).
+## Si M87 no está montado, no hay nada que hacer: NO se finge.
+func _conectar_m87() -> void:
+	var loc := get_node_or_null("/root/Localization")
+	if loc == null or not loc.has_signal("locale_changed"):
+		return
+	if not loc.locale_changed.is_connected(_on_locale_changed_ui):
+		loc.locale_changed.connect(_on_locale_changed_ui)
+
+func _on_locale_changed_ui(_locale: String) -> void:
+	var raices: Array[Node] = []
+	for capa in _stack:
+		if is_instance_valid(capa):
+			raices.append(capa)
+	if _hud != null and is_instance_valid(_hud):
+		raices.append(_hud)
+	for raiz in raices:
+		var rep: Dictionary = UiI18n.retraducir(raiz)
+		if int(rep.get("traducidos", 0)) > 0:
+			_log("M87: %s re-traducido (%d props, %.2f ms)" % [
+				raiz.name, int(rep.get("traducidos", 0)), float(rep.get("ms", 0.0))])
 
 
 ## ── Logging ─────────────────────────────────────────────

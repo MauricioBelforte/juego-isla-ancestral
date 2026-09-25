@@ -84,10 +84,11 @@ func _build_ui() -> void:
 	key_label.add_theme_color_override("font_color", COLOR_KEY)
 	hbox.add_child(key_label)
 
-	# Texto descriptivo
+	# Texto descriptivo — M87 (Log 1118): clave del catálogo + metadato
+	# (el RetraductorUI global lo re-traduce al cambiar de idioma)
 	_label = Label.new()
 	_label.name = "ActionLabel"
-	_label.text = "Interactuar"
+	UiI18n.meta_texto(_label, "UI.INTERACTUAR")
 	_label.add_theme_font_size_override("font_size", 14)
 	_label.add_theme_color_override("font_color", COLOR_TEXT)
 	hbox.add_child(_label)

@@ -564,3 +564,47 @@ msgid "M68.TRIP.SEGUNDOS"
 msgid_plural "M68.TRIP.SEGUNDOS"
 msgstr[0] "{n} segundo"
 msgstr[1] "{n} segundos"
+
+# M53 UI/UX — claves adoptadas por M53 (Log 1118, agnes-3-flash): equipo (M155) + prompts HUD
+msgid "EQUIP.TITULO"
+msgstr "Vestimenta del jugador"
+
+msgid "EQUIP.CATALOGO_TITULO"
+msgstr "Prendas del catálogo (click para equipar)"
+
+msgid "EQUIP.HINT"
+msgstr "E / ESC para cerrar — los candados se desbloquean con capítulo o banderas (M71)"
+
+msgid "EQUIP.VACIO"
+msgstr "Vacío"
+
+msgid "EQUIP.BONO"
+msgstr "Bono terreno: +{p}%"
+
+msgid "EQUIP.BONO_EQUIPO"
+msgstr "Bono de terreno del equipo: +{p}%"
+
+#. no-traducir: plantilla tipo: item (nombres de prendas no se traducen)
+msgid "EQUIP.EQUIPADO"
+msgstr "{tipo}: {item}"
+
+msgid "EQUIP.TOOLTIP_QUITAR"
+msgstr "Click para quitar — {item} ({rareza})"
+
+msgid "EQUIP.TOOLTIP_ELEGIR"
+msgstr "Selecciona una prenda del catálogo para equipar aquí"
+
+msgid "EQUIP.PRENDAS"
+msgstr "{n} prendas en el catálogo"
+
+msgid "EQUIP.REQ_CAPITULO"
+msgstr "Requiere cap. {c}"
+
+msgid "EQUIP.REQ_FLAG"
+msgstr "Requiere flag: {c}"
+
+msgid "EQUIP.REQ"
+msgstr "Requiere: {c}"
+
+msgid "UI.INTERACTUAR"
+msgstr "Interactuar"

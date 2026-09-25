@@ -19,6 +19,8 @@ var _text_label: Label
 var _options_box: VBoxContainer
 var _hint_label: Label
 var _clickable: bool = false
+## M53 D.7/J.6 (Log 1118): overlay de subtítulos gobernado por M58 (RF8)
+var _subtitulo: SubtituloOverlay = null
 
 ## M53 D: Velocidad de texto ajustable (M58)
 var _text_speed: float = 0.03  ## segundos por carácter (0 = instantáneo)
@@ -107,6 +109,12 @@ func _crear_ui() -> void:
 	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	vbox.add_child(_hint_label)
 
+	# M53 D.7/J.6 (Log 1118): subtítulos de diálogo (M58 RF8) — el overlay
+	# se suscribe solo a M58; si M58 no está montado, usa defaults RF8.
+	_subtitulo = SubtituloOverlay.new()
+	_subtitulo.name = "Subtitulo"
+	add_child(_subtitulo)
+
 func _crear_fondo_dim() -> void:
 	# Fondo oscurecido sutil (el mundo queda visible pero atenuado)
 	var dim := ColorRect.new()
@@ -127,6 +135,7 @@ func _crear_fondo_dim() -> void:
 func _on_dialogue_ended(_id: String, _ultimo: String) -> void:
 	visible = false
 	_limpiar_opciones()
+	_ocultar_subtitulo()
 
 func _on_option_selected(_idx: int) -> void:
 	# Opción elegida por teclado en M21: refrescar la capa
@@ -174,6 +183,16 @@ func _on_opt_pressed(idx: int) -> void:
 	var dm = get_node_or_null("/root/DialogueManager")
 	if dm:
 		dm.choose_option(idx)
+
+## ── M53 D.7 (Log 1118): subtítulos M58 (RF8) ─────────────
+
+func _mostrar_subtitulo(texto: String) -> void:
+	if _subtitulo != null:
+		_subtitulo.mostrar(texto)
+
+func _ocultar_subtitulo() -> void:
+	if _subtitulo != null:
+		_subtitulo.ocultar()
 
 ## ── Utilidades ───────────────────────────────────────────
 
@@ -227,6 +246,7 @@ func on_layer_closed() -> void:
 	# M53 D: restaurar GameClock al cerrar diálogo
 	_pausar_reloj(false)
 	_detener_typing()
+	_ocultar_subtitulo()
 
 ## ── M53 D: Suscripciones EventBus ───────────────────────
 
@@ -240,6 +260,7 @@ func _on_event_dialog_finished(_id: String) -> void:
 		_limpiar_opciones()
 		_pausar_reloj(false)
 		_detener_typing()
+		_ocultar_subtitulo()
 		# Restaurar foco a la capa anterior
 		var ui_mgr = get_node_or_null("/root/UIManager")
 		if ui_mgr and ui_mgr.has_method("request_focus_restore"):
@@ -273,6 +294,8 @@ func _on_node_entered(_node_id: String, speaker_key: String, texto: String, tipo
 	_clickable = tipo != DialogueNode.TIPO_FIN
 	# M53 D: iniciar typing effect
 	_iniciar_typing(texto)
+	# M53 D.7 (Log 1118): subtítulos M58 — texto completo del nodo
+	_mostrar_subtitulo(texto)
 
 func _iniciar_typing(texto: String) -> void:
 	_detener_typing()

@@ -28,6 +28,9 @@ func _ready() -> void:
 	if _manager:
 		_manager.equipment_changed.connect(_on_equipment_changed)
 		_manager.terrain_bonus_updated.connect(_on_terrain_bonus_updated)
+	# M87 (Log 1118): al cambiar de idioma, re-generar los textos dinámicos
+	# (los estáticos se re-traducen solos vía metadatos text_key + M87)
+	_conectar_locale()
 
 ## ── Construcción (por código, patrón InventoryLayer) ─────
 
@@ -58,12 +61,13 @@ func _crear_ui() -> void:
 	panel.add_child(vbox)
 
 	var titulo := Label.new()
-	titulo.text = "Vestimenta del jugador"
+	# M87 (Log 1118): estático → clave + metadato (RetraductorUI lo re-traduce)
+	UiI18n.meta_texto(titulo, "EQUIP.TITULO")
 	titulo.add_theme_font_size_override("font_size", 26)
 	vbox.add_child(titulo)
 
 	_bonus_label = Label.new()
-	_bonus_label.text = "Bono terreno: +0%"
+	_bonus_label.text = UiI18n.traducir_param("EQUIP.BONO", {"p": "0"})
 	_bonus_label.add_theme_font_size_override("font_size", 15)
 	vbox.add_child(_bonus_label)
 
@@ -89,7 +93,7 @@ func _crear_ui() -> void:
 	vbox.add_child(sep)
 
 	var grid_title := Label.new()
-	grid_title.text = "Prendas del catálogo (click para equipar)"
+	UiI18n.meta_texto(grid_title, "EQUIP.CATALOGO_TITULO")
 	grid_title.add_theme_font_size_override("font_size", 15)
 	vbox.add_child(grid_title)
 
@@ -104,7 +108,7 @@ func _crear_ui() -> void:
 	scroll.add_child(_grid)
 
 	var hint := Label.new()
-	hint.text = "E / ESC para cerrar — los 🔒 se desbloquean con capítulo o banderas (M71)"
+	UiI18n.meta_texto(hint, "EQUIP.HINT")
 	hint.add_theme_font_size_override("font_size", 12)
 	hint.add_theme_color_override("font_color", Color(0.55, 0.5, 0.45))
 	vbox.add_child(hint)
@@ -112,6 +116,19 @@ func _crear_ui() -> void:
 	_refresh_equipo()
 
 ## ── Refresh ─────────────────────────────────────────────
+
+## M87 (Log 1118): los textos DINÁMICOS (parámetros {tipo}/{item}/{p}...) no los
+## re-traduce el RetraductorUI global (no pasa parámetros); la capa los re-genera
+## ella misma al cambiar de idioma. Los estáticos llevan metadato text_key y
+## sí se re-traducen solos.
+func _conectar_locale() -> void:
+	var loc := get_node_or_null("/root/Localization")
+	if loc and loc.has_signal("locale_changed"):
+		loc.locale_changed.connect(_on_locale_changed)
+
+func _on_locale_changed(_locale: String) -> void:
+	if visible:
+		_refresh_equipo()
 
 func _refresh_equipo() -> void:
 	if _manager == null:
@@ -123,17 +140,17 @@ func _refresh_equipo() -> void:
 			continue
 		var slot = _manager.get_equipped_item(st)
 		if slot and slot.is_equipped():
-			btn.text = "%s: %s" % [tipo.capitalize(), slot.item_name]
-			btn.tooltip_text = "Click para quitar — %s (%s)" % [slot.item_id, slot.rarity]
+			btn.text = UiI18n.traducir_param("EQUIP.EQUIPADO", {"tipo": tipo.capitalize(), "item": slot.item_name})
+			btn.tooltip_text = UiI18n.traducir_param("EQUIP.TOOLTIP_QUITAR", {"item": slot.item_id, "rareza": slot.rarity})
 		else:
-			btn.text = "%s: (vacío)" % tipo.capitalize()
-			btn.tooltip_text = "Selecciona una prenda del catálogo para equipar aquí"
+			btn.text = UiI18n.traducir_param("EQUIP.EQUIPADO", {"tipo": tipo.capitalize(), "item": UiI18n.traducir("EQUIP.VACIO")})
+			btn.tooltip_text = UiI18n.traducir("EQUIP.TOOLTIP_ELEGIR")
 	var total_bonus := 0.0
 	if _manager.has_method("get_terrain_bonus_total"):
 		total_bonus = float(_manager.get_terrain_bonus_total())
 	elif _manager.get("player_equipment") and _manager.player_equipment.has_method("get_total_terrain_bonus"):
 		total_bonus = float(_manager.player_equipment.get_total_terrain_bonus("current"))
-	_bonus_label.text = "Bono de terreno del equipo: +%d%%" % int(total_bonus * 100.0)
+	_bonus_label.text = UiI18n.traducir_param("EQUIP.BONO_EQUIPO", {"p": str(int(total_bonus * 100.0))})
 
 	# Grid de prendas con estado de desbloqueo
 	for child in _grid.get_children():
@@ -156,9 +173,9 @@ func _refresh_equipo() -> void:
 			var tipo_req: String = String(unlock_data.get("tipo", ""))
 			var valor_req: String = String(unlock_data.get("valor", ""))
 			match tipo_req:
-				"chapter": req_text = "Requiere cap. %s" % valor_req
-				"flag": req_text = "Requiere flag: %s" % valor_req
-				_: req_text = "Requiere: %s" % valor_req
+				"chapter": req_text = UiI18n.traducir_param("EQUIP.REQ_CAPITULO", {"c": valor_req})
+				"flag": req_text = UiI18n.traducir_param("EQUIP.REQ_FLAG", {"c": valor_req})
+				_: req_text = UiI18n.traducir_param("EQUIP.REQ", {"c": valor_req})
 		btn.text = ("%s — %s (%s)" % [nombre, rareza, item_id]) if desbloqueada else ("🔒 %s (%s)" % [nombre, item_id])
 		# Tooltip detallado: nombre, rareza, slot, descripcion, bonos terreno, requisito
 		var tooltip_lines := PackedStringArray([nombre, "Rareza: %s" % rareza, "Slot: %s" % slot_tipo, desc])
@@ -174,7 +191,7 @@ func _refresh_equipo() -> void:
 		btn.disabled = not desbloqueada
 		btn.pressed.connect(_on_item_pressed.bind(item_id))
 		_grid.add_child(btn)
-	_info_label.text = "%d prendas en el catálogo" % items.size()
+	_info_label.text = UiI18n.traducir_param("EQUIP.PRENDAS", {"n": str(items.size())})
 
 ## ── Interacción ──────────────────────────────────────────
 

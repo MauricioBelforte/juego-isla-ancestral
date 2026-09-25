@@ -560,3 +560,47 @@ msgid "M68.TRIP.SEGUNDOS"
 msgid_plural "M68.TRIP.SEGUNDOS"
 msgstr[0] "{n} second"
 msgstr[1] "{n} seconds"
+
+# M53 UI/UX — keys adopted by M53 (Log 1118, agnes-3-flash): equipment (M155) + HUD prompts
+msgid "EQUIP.TITULO"
+msgstr "Player's clothing"
+
+msgid "EQUIP.CATALOGO_TITULO"
+msgstr "Clothing catalog (click to equip)"
+
+msgid "EQUIP.HINT"
+msgstr "E / ESC to close — locked items unlock via chapter or flags (M71)"
+
+msgid "EQUIP.VACIO"
+msgstr "Empty"
+
+msgid "EQUIP.BONO"
+msgstr "Terrain bonus: +{p}%"
+
+msgid "EQUIP.BONO_EQUIPO"
+msgstr "Team terrain bonus: +{p}%"
+
+#. no-traducir: plantilla tipo: item (nombres de prendas no se traducen)
+msgid "EQUIP.EQUIPADO"
+msgstr "{tipo}: {item}"
+
+msgid "EQUIP.TOOLTIP_QUITAR"
+msgstr "Click to remove — {item} ({rareza})"
+
+msgid "EQUIP.TOOLTIP_ELEGIR"
+msgstr "Select a clothing item from the catalog to equip here"
+
+msgid "EQUIP.PRENDAS"
+msgstr "{n} items in the catalog"
+
+msgid "EQUIP.REQ_CAPITULO"
+msgstr "Requires chapter {c}"
+
+msgid "EQUIP.REQ_FLAG"
+msgstr "Requires flag: {c}"
+
+msgid "EQUIP.REQ"
+msgstr "Requires: {c}"
+
+msgid "UI.INTERACTUAR"
+msgstr "Interact"

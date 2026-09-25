@@ -149,6 +149,13 @@ PERMITIDOS = {
     "A2|UIManager->ControlInput": "BUG-069",
     "A2|ShopManager->GameTime": "BUG-069",
     "A2|Friendship->GameTime": "BUG-069",
+    # P-37 (2026-09-25, agnes-3-flash, Log 1151): M53 P-18 agrego los hooks de
+    # accesibilidad i18n en ui_manager.gd — pausa instantanea M58 (RF18) apunta a
+    # AccesibilityManager y la re-traducion en vivo apunta a Localization (M87).
+    # Ambas son A2 legitimas (regla de capas; runtime OK porque los autoloads ya
+    # existen en _ready): se documentan aqui para que el gate no rompa el merge.
+    "A2|UIManager->AccesibilityManager": "BUG-069",
+    "A2|UIManager->Localization": "BUG-069",
     # A3 — el mismo script registrado como dos autoloads.
     # BUG-068 RESUELTO (2026-09-25, P-32): se elimino el autoload duplicado
     # `hardware` de project.godot (queda solo `HardwareManager`, que es lo que
