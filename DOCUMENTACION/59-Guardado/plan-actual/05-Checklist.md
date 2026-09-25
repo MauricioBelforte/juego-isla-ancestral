@@ -217,3 +217,8 @@
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [ ] Revisar que plan-inicial == plan-actual (SHA-256) [S]
 - [ ] Confirmar 130 ítems exactos [S]
+**Totales:** 130 ítems · Completados: 55 · Pendientes: 75 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
+> Las marcas no se tocaron.

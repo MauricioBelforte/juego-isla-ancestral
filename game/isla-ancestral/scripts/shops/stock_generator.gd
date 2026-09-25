@@ -55,10 +55,20 @@ func _generar(definicion: Resource, prng: RandomNumberGenerator, ctx: Contexto, 
 	for entrada in definicion.catalogo_venta:
 		var minimo := int(entrada.stock_min)
 		var maximo := int(entrada.stock_max)
-		# Canal 2: estación — rotación fuerte reduce ítems fuera de estación (placeholder M29)
+		# Canal 2 (iter. glm, Log 1004): estación — descarta ítems fuera de temporada
+		# SIN tocar básicos garantizados (§8). Con ctx.estacion == -1 (sin calendario
+		# o sin datos) el filtro no aplica: degradación grácil.
+		if ctx.estacion >= 0 and not entrada.es_basico \
+				and not entrada.estaciones_disponibles.is_empty() \
+				and not (ctx.estacion in entrada.estaciones_disponibles):
+			continue
+		# Canal 3 (iter. glm): eventos — los ítems con evento_id solo se ofrecen
+		# mientras ese evento (M73) esté activo. Sin evento_id = siempre disponible.
+		if String(entrada.evento_id) != "" and not (String(entrada.evento_id) in ctx.eventos_activos):
+			continue
+		# Canal 2-bis (placeholder heredado): rotación fuerte reduce el máximo.
 		if def_es_rotacion_fuerte(definicion) and not entrada.es_basico:
 			maximo = maxi(minimo, maximo / 2)
-		# Canal 3: eventos — placeholder M73 (los eventos activos amplían max en futuro)
 		# Canal 4: rareza — aforo por peso de rareza
 		var techo_rareza := int(round(float(maximo) / maxf(1.0, entrada.peso_rareza)))
 		techo_rareza = clampi(techo_rareza, minimo, maximo)
@@ -68,6 +78,11 @@ func _generar(definicion: Resource, prng: RandomNumberGenerator, ctx: Contexto, 
 			cantidad = maxi(cantidad, minimo)  # básicos garantizan stock_min >= 1 (§8)
 		resultado[entrada.item_id] = cantidad
 	return resultado
+
+## Canalización completa con contexto (iter. glm): la usa ShopManager en el evento
+## de cambio de estación (L189) para regenerar el stock de rotación fuerte.
+func generar_con_contexto(definicion: Resource, prng: RandomNumberGenerator, ctx: Contexto) -> Dictionary:
+	return _generar(definicion, prng, ctx, true)
 
 func def_es_rotacion_fuerte(definicion: Resource) -> bool:
 	return definicion.rotacion_estacional_fuerte

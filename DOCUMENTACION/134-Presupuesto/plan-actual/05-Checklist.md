@@ -175,3 +175,8 @@ Todos implementados como techos del escenario financiado en `budget-breakdown.md
 
 ### Veredicto
 Módulo 134 (Presupuesto): VERIFICADO (100/100, 0 [?]). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
+**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

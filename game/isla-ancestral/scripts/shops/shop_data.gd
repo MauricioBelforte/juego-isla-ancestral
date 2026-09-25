@@ -24,24 +24,38 @@ class StockEntry:
 	var stock_max: int = 10
 	var peso_rareza: float = 1.0  # mayor = más raro → menos ejemplares
 	var es_basico: bool = false   # básicos garantizan stock_min >= 1
+	## Canal 2 (iter. glm, Log 1004): estaciones en que el ítem está en temporada
+	## (vacío = disponible siempre). Los básicos NUNCA se descartan por estación (§8).
+	var estaciones_disponibles: Array[int] = []
+	## Canal 3 (iter. glm): solo se ofrece mientras el evento esté activo (M73).
+	## Vacío = no depende de eventos.
+	var evento_id: String = ""
 
-	func _init(p_id: String = "", p_min: int = 1, p_max: int = 10, p_rareza: float = 1.0, p_basico: bool = false) -> void:
+	func _init(p_id: String = "", p_min: int = 1, p_max: int = 10, p_rareza: float = 1.0, p_basico: bool = false, p_estaciones: Array[int] = [], p_evento: String = "") -> void:
 		item_id = p_id
 		stock_min = p_min
 		stock_max = p_max
 		peso_rareza = p_rareza
 		es_basico = p_basico
+		estaciones_disponibles = p_estaciones
+		evento_id = p_evento
 
 	func serializar() -> Dictionary:
-		return {"id": item_id, "min": stock_min, "max": stock_max, "r": peso_rareza, "b": es_basico}
+		return {"id": item_id, "min": stock_min, "max": stock_max, "r": peso_rareza, "b": es_basico, "s": estaciones_disponibles, "e": evento_id}
 
 	static func deserializar(d: Dictionary) -> StockEntry:
+		var est: Array[int] = []
+		var raw: Array = d.get("s", [])
+		for e in raw:
+			est.append(int(e))
 		return StockEntry.new(
 			str(d.get("id", "")),
 			int(d.get("min", 1)),
 			int(d.get("max", 10)),
 			float(d.get("r", 1.0)),
-			bool(d.get("b", false))
+			bool(d.get("b", false)),
+			est,
+			str(d.get("e", ""))
 		)
 
 @export var shop_id: String = ""

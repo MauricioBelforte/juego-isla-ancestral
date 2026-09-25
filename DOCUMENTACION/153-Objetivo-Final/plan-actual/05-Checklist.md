@@ -324,3 +324,23 @@ con dueño externo, no dudas de diseño). Corregido el texto para que coincida c
 **Veredicto QA sec21.8:** ✅ Verificado por hy3 2026-09-19 - trabajo genuine, sin sobre-cierre. (Cierre Log 1053 por hy3; este sello es la verificacion sec21.8, verificador != GLM.)
 
 **Firma:** Hy3 / WorkBuddy (Tencent Hunyuan) - 2026-09-19
+
+**Totales:** 130 ítems · Completados: 120 · Pendientes: 10 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:
+> 120 [x] / 10 [ ] / 0 [?]. Las marcas no se tocaron.
+>
+> **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
+> **2026-09-19, Log 1109):** el módulo figuraba ✅ en CHECKLIST-GLOBAL con 120/130,
+> pero tiene **10 `[ ]` pendientes**. La definición de completado exige todos los
+> ítems `[x]`. Por directriz del usuario (*"si no está terminado por alguna razón se
+> revierte"*), el módulo volvió a **🟡 Con dudas (revertido)** en el global.
+>
+> **Matiz importante:** el último firmante (hy3) documentó los 10 `[ ]` como
+> *"KnownIssue no bloqueante DoD"* (L295/L307/L309) — deferrals externos legítimos
+> (telemetría M104/M105, verificaciones que requieren otros módulos), con 0 `[?]`.
+> Es la defensa más argumentada de los tres módulos revertidos. **Pero la DoD §21.6
+> tal como está escrita en AGENTS.md no contempla esa excepción** — exige todos los
+> `[x]`. Si el usuario quiere formalizar la figura "KnownIssue no bloqueante" como
+> excepción válida en la DoD, este módulo es el candidato para restaurar el ✅.

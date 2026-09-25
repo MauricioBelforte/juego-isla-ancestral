@@ -35,35 +35,36 @@ func _ejecutar() -> void:
 	def.dias_abiertos = dias
 	var franjas: Array[Vector2i] = [Vector2i(0, 24)]
 	def.franjas_horarias = franjas
-	var entry = load("res://scripts/shops/shop_data.gd").StockEntry.new("OBJ-PLA-001", 2, 5, 1.0, true)
+	var entry = load("res://scripts/shops/shop_data.gd").StockEntry.new("OBJ-PLA-002", 2, 5, 1.0, true)
 	def.catalogo_venta.append(entry)
-	def.catalogo_recompra.append("OBJ-PLA-001")
+	def.catalogo_recompra.append("OBJ-PLA-002")
 	_sm.registrar_tienda(def)
 
 	_sm.tick_hora(1, 10)
 	_check("tienda abierta tras tick", _sm.esta_abierta("test_tienda"))
-	_check("stock inicial >= 2", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-001", 0)) >= 2)
+	_check("stock inicial >= 2", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-002", 0)) >= 2)
 
 	_eco.saldo = 10000
 	_check("saldo asignado", _eco.puede_pagar(10000))
 
-	var item = _db.get_item("OBJ-PLA-001")
+	var item = _db.get_item("OBJ-PLA-002")
+	_check("item OBJ-PLA-002 existe en ItemDatabase", item != null)
 	if item != null and int(item.precio_compra) <= 0:
 		item.set("precio_compra", 100)
 		item.set("precio_venta", 60)
 
-	var precio_c := int(_eco.precio_compra_vigente("OBJ-PLA-001"))
+	var precio_c := int(_eco.precio_compra_vigente("OBJ-PLA-002"))
 	_check("precio compra definido", precio_c > 0)
-	var stock_ini := int(_sm.listar_stock("test_tienda").get("OBJ-PLA-001", 0))
-	_sm.comprar("test_tienda", "OBJ-PLA-001", 2)
-	_check("compra: item en inventario", _inv.count_item("OBJ-PLA-001") == 2)
-	_check("compra: stock descontado en 2", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-001", 0)) == stock_ini - 2)
+	var stock_ini := int(_sm.listar_stock("test_tienda").get("OBJ-PLA-002", 0))
+	_sm.comprar("test_tienda", "OBJ-PLA-002", 2)
+	_check("compra: item en inventario", _inv.count_item("OBJ-PLA-002") == 2)
+	_check("compra: stock descontado en 2", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-002", 0)) == stock_ini - 2)
 	_check("compra: saldo bajado", _eco.saldo <= 10000)
 
 	var saldo_antes := int(_eco.saldo)
-	_sm.vender("test_tienda", "OBJ-PLA-001", 2)
-	_check("venta: inventario vacio", _inv.count_item("OBJ-PLA-001") == 0)
-	_check("venta: stock acumulado", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-001", 0)) >= 2)
+	_sm.vender("test_tienda", "OBJ-PLA-002", 2)
+	_check("venta: inventario vacio", _inv.count_item("OBJ-PLA-002") == 0)
+	_check("venta: stock acumulado", int(_sm.listar_stock("test_tienda").get("OBJ-PLA-002", 0)) >= 2)
 	_check("venta: saldo aumento", int(_eco.saldo) >= saldo_antes)
 
 	_check("anti-arbitraje (saldo <= inicial)", _eco.saldo <= 10000)

@@ -253,3 +253,12 @@
 **Veredicto V1:** M46 **diseño+tooling reales y operativos; 0 de 48 assets en disco (bloqueado por M45/M108/
 artes, no por M46).** Checklist archivo 0/110 (cierre no reflejado) — **flag para el dueño M46**. Liberado
 🟡 para que el dueño re-marque / lo asuman M45/M108.
+
+**Totales:** 110 ítems · Completados: 0 · Pendientes: 110 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 110 [ ] /
+> 0 [?]. Las marcas no se tocaron. Consistente con el veredicto V1 ya asentado en
+> este archivo: M46 tiene diseño + tooling reales y operativos, pero **0 de 48 assets
+> en disco** (bloqueado por M45/M108, no por M46) — el cierre del checklist no se
+> refleja en las marcas por decisión del dueño, que prefirió flaggearlo.

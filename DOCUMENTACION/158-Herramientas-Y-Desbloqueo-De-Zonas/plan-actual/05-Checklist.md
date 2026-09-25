@@ -202,7 +202,13 @@
 - [ ] Tabla de costos por isla documentada [S]
 - [ ] DoD cumplida: 5 archivos + firma + log [M]
 
-**Totales:** 140 items · Completados: 42 · Pendientes: 98 · No resueltos: 0 (iter. 1, Log 543)
+**Totales:** 140 ítems · Completados: 53 · Pendientes: 87 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1C):** la línea decía *"140 items · Completados: 42 · Pendientes: 98"*
+> (iter. 1, Log 543). Conteo real: 53 [x] / 87 [ ] / 0 [?] = 140. Sub-reportaba 11
+> [x] — ítems flipeados a [x] en iteraciones posteriores sin actualizar la línea.
+> Las marcas no se tocaron; solo se reescribió esta línea.
 
 ## Notas del Agente
 

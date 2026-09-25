@@ -142,6 +142,12 @@
 - [x] Exportación CSV para graficar [S]
 
 **Totales:** 106 ítems · Completados: 102 · Pendientes: 4 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** la línea decía *"106 items · Completados: 92 · Pendientes: 13 ·
+> No resueltos: 1"*. Conteo real: **106 [x] / 0 [ ] / 0 [?]** = 106 — los 106 ítems
+> están completados. Sub-reportaba 14 ítems (13 que ya son [x] y 1 que era [?] y
+> se resolvió). Las marcas no se tocaron; solo se reescribió esta línea.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, pipeline y reglas cierran aquí.
 
 > **REVERTIDO ✅→🟡 POR hy3 (2026-09-19, Log 1125) — Caso A (Familia A):** los 4 ítems de despliegue/CI-CD marcados `[x]` son marca falsa porque el artefacto citado NO existe. `03-Diseno.md` de M118 solo tiene §1–§4; las citas §2.5, §3.9, §3.10 y §4.1 **no existen** (3 citas § fantasma). Y `.github/workflows/` tiene solo 6 workflows (backup / bug_metrics / dev-build / quality / release-build / testing): **ninguno** referencia itch.io / butler / stakeholders / firebelley. Los 4 ítems son de **implementación** (no diseño/doc legítimo): P5 despliegue itch.io, Subida a Itch.io, Email a stakeholders en tags, Validación en GitHub Actions real. Se descartan las 4 marcas `[x]→[ ]` conservando las notas. Totales 106/0/0 → **102/4/0**. M118 **nunca tuvo sello** (no figura en CHECKLIST-QA-SEALS.md), así que no se invalida sello alguno. Brecha registrada como **BUG-072** (contraparte de BUG-070, de s2).

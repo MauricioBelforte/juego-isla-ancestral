@@ -13,6 +13,9 @@ var definicion: Resource = null                  # ShopData
 var stock_actual: Dictionary = {}                # {item_id: int} — O(1)
 var fecha_ultimo_restock: int = -1               # día laborable del último restock
 var abierta_ahora: bool = false                  # cacheado por ShopManager en cada tick horario
+## L98/L212/L227 (iter. glm, Log 1004): presencia diaria del mercader viajero
+## (calendario de aparición PRNG). Se persiste con la tienda (L227).
+var mercader_presente: bool = true
 
 func _init(p_def: Resource = null) -> void:
 	definicion = p_def
@@ -61,6 +64,7 @@ func serializar() -> Dictionary:
 		"shop_id": definicion.shop_id if definicion != null else "",
 		"stock": stock_actual.duplicate(),
 		"ultimo_restock": fecha_ultimo_restock,
+		"mercader": mercader_presente,
 	}
 
 func deserializar(d: Dictionary) -> void:
@@ -69,3 +73,4 @@ func deserializar(d: Dictionary) -> void:
 	for k in stock_guardado:
 		stock_actual[str(k)] = int(stock_guardado[k])
 	fecha_ultimo_restock = int(d.get("ultimo_restock", -1))
+	mercader_presente = bool(d.get("mercader", true))

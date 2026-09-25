@@ -294,3 +294,8 @@
 
 ### Veredicto
 Módulo 136 (Roadmap): VERIFICADO (199/199, 0 [?]). Reflejado en CHECKLIST-GLOBAL.md, ESTADO-PARALELO.md y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md. Log 204.
+**Totales:** 199 ítems · Completados: 199 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 199 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -141,6 +141,19 @@
 - [x] Checked en README de DOCUMENTACION [S] *(auditoría iter 1 — Log 824: módulo listado en README de DOCUMENTACION como componente {ID}-Nombre)*
 
 **Totales:** 195 items - Completados: 190 - Pendientes: 3 - No resueltos: 2 (QA atria-dawn 2026-09-18, Log 984). El conteo anterior (104/104) era de antes de la reversion del 2026-09-14 y no se habia actualizado.
+
+> **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
+> **2026-09-19, Log 1109):** el módulo figuraba ✅ Verificado en CHECKLIST-GLOBAL pero
+> tiene **3 `[ ]` y 2 `[?]` sin resolver**. La definición de completado exige todos
+> los ítems `[x]`. Por directriz del usuario (*"si no está terminado por alguna razón
+> se revierte"*), el módulo volvió a **🟡 Con dudas (revertido)** en el global.
+>
+> **Transparencia sobre mi propio QA previo (Log 984, 2026-09-18):** aquel veredicto
+> fue "**✅ MANTIENE**" basado en que el núcleo está genuinamente implementado (50
+> checks headless, 0 fallos) — y eso sigue siendo cierto. Pero el QA verificó el
+> *código*, no el *cumplimiento de la DoD a nivel de ítems*: los 3 `[ ]` y 2 `[?]`
+> quedaron fuera del veredicto. La reversión corrige exactamente ese hueco: núcleo
+> verificado ≠ módulo completado. Cuando se cierren los 5 ítems, podrá volver a ✅.
 **Nota:** los ítems de implementación (B-H en runtime) quedan como tarea del agente delegado; el diseño y la definición están cerrados aquí.
 
 ---
