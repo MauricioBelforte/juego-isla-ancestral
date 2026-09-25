@@ -380,6 +380,33 @@ jobs:
           # alguien toca budgets.json sin pasar por generar_budgets.gd.
           # Gate duro: || FAIL=1.
           godot --headless --script scripts/rendimiento/memoria/generar_budgets.gd -- --check 2>&1 || FAIL=1
+          # M106 Seguridad (P-36, Log 1149, DeepSeek-V4.1-Flash). El modulo tenia
+          # 8 suites y NINGUNA cableada: el job `security-scan` no es un gate real
+          # (4 grep con `|| true`, trampa 81). Ademas su trabajo previo vivia SOLO
+          # en el worktree (trampa 58) y uno de sus tests estaba en ROJO pese a
+          # que la nota del checklist afirmaba "20/0 verde" (DirAccess.open en
+          # headless -> null, pitfall 9.6). Las 8 suites tienen guardian de 3
+          # capas (bloque `_fin()`, piso CHECKS_MINIMOS MEDIDO, `_summary()` en su
+          # propio call_deferred) y la nueva esta probada EN ROJO por inyeccion.
+          # 43+25+19+20+13+24+15+78 = 237 checks. Gate duro: || FAIL=1.
+          godot --headless --script scripts/security/test_security_m106.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_input.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_middleware.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_secrets.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_env.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_environments.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_database.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/security/test_security_m106_services.gd 2>&1 || FAIL=1
+          # M122 Crash Reporting (P-36, Log 1150, DeepSeek-V4.1-Flash). Su test de
+          # nucleo estaba en ROJO (12/2) y la Evidencia del checklist afirmaba
+          # "12 checks, 0 fallos": el bug real era `DirAccess.open("user://...")`
+          # == null en headless (pitfall 9.6, la misma trampa que en M106) en
+          # crash_reporter.dumps_pendientes(). Corregido -> 13/0. La suite nueva
+          # cubre los 10 helpers offline (10 bloques A-J) con transporte HTTP
+          # inyectado: sin red, fail-closed asertado. 13+168 = 181 checks.
+          # Gate duro: || FAIL=1.
+          godot --headless --script scripts/crash/test_crash_m122.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/crash/test_crash_m122_offline.gd 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 
