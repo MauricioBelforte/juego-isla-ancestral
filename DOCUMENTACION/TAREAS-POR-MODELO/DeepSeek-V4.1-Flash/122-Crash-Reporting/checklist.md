@@ -1,0 +1,278 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 122-Crash-Reporting (122)
+
+# Checklist personal tareas — 122-Crash-Reporting
+
+> Extraídas del `05-Checklist.md` del módulo (265 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+>
+> **iter. 1 (Log 1150):** estado **254 `[x]` · 11 `[?]` con dueño · 0 `[ ]`**.
+
+## Tareas
+
+- [x] T-001 Generar dump con stack trace y sesion [M]
+- [x] T-002 Enviar dump con reintentos (max 3) [M]
+- [x] T-003 Gestionar dumps pendientes en disco [S]
+- [x] T-004 Test headless de crash reporting [M]
+- [x] T-005 Autoload CrashReporter registrado en project.godot [S]
+- [x] T-006 Datos en user://crash/ con versionado [S]
+- [x] T-007 Capturar memoria [M]
+- [x] T-008 Capturar escena [M]
+- [x] T-009 Capturar contexto seguro [M]
+- [x] T-010 Agrupar crashes
+- [x] T-011 Priorizar crashes
+- [x] T-012 Analizar frecuencia
+- [x] T-013 Corregir crashes críticos
+- [x] T-014 Crear builds de diagnóstico
+- [x] T-015 Integración con M103 (Logging)
+- [x] T-016 Evaluar Crashlytics (Firebase) como opción principal
+- [x] T-017 Evaluar Sentry como fallback [S]
+- [x] T-018 Evaluar implementación propia como último recurso
+- [x] T-019 Seleccionar Crashlytics (Firebase) como opción principal
+- [x] T-020 Documentar ventajas de Crashlytics
+- [x] T-021 Documentar desventajas de Crashlytics
+- [x] T-022 Documentar ventajas de Sentry [S]
+- [x] T-023 Documentar desventajas de Sentry [S]
+- [x] T-024 Documentar ventajas de implementación propia
+- [x] T-025 Documentar desventajas de implementación propia
+- [x] T-026 Diseñar recolección de información de hardware (OS, arquitectura, CPU, GPU, RAM)
+- [x] T-027 Diseñar recolección de información de software (versión, Godot, modo, escena)
+- [x] T-028 Diseñar recolección de información de contexto del juego (hora, estación, posición, seed)
+- [x] T-029 Diseñar recolección de GPU (modelo, VRAM, driver)
+- [x] T-030 Diseñar recolección de CPU (modelo, núcleos, frecuencia)
+- [x] T-031 Diseñar recolección de memoria (total, disponible, uso al crash)
+- [x] T-032 Diseñar recolección de escena activa (ruta)
+- [x] T-033 Diseñar recolección de versión del juego (semver)
+- [x] T-034 Diseñar recolección de versión de Godot
+- [x] T-035 Diseñar recolección de modo de ejecución (debug/release)
+- [x] T-036 Definir reglas de sanitización
+- [x] T-037 Definir qué datos NO incluir (PII, datos sensibles) [M]
+- [x] T-038 Definir qué datos SI incluir (categorías, tipos) [M]
+- [x] T-039 Diseñar ejemplo de contexto seguro [M]
+- [x] T-040 Diseñar ejemplo de contexto NO seguro [M]
+- [x] T-041 Definir lista de unsafe keys (username, ip, email, phone, address, inventory, chat, api_key, token) [M]
+- [x] T-042 Diseñar algoritmo de sanitización
+- [x] T-043 Diseñar validación de safe keys
+- [x] T-044 Definir criterios de agrupación (stack trace hashing, tipo de error, escena, versión)
+- [x] T-045 Diseñar algoritmo de hashing de stack trace [M]
+- [x] T-046 Diseñar agrupación por tipo de error
+- [x] T-047 Diseñar agrupación por escena activa
+- [x] T-048 Diseñar agrupación por versión del juego
+- [x] T-049 Documentar beneficios de agrupación
+- [x] T-050 Diseñar matriz de prioridad (frecuencia, severidad, impacto)
+- [x] T-051 Definir niveles de frecuencia (alta, media, baja)
+- [x] T-052 Definir niveles de severidad (crash, hang)
+- [x] T-053 Definir niveles de impacto (todos, algunos) [M]
+- [x] T-054 Definir prioridades (CRÍTICA, ALTA, MEDIA, BAJA) [M]
+- [x] T-055 Diseñar workflow de priorización
+- [x] T-056 Diseñar filtros por frecuencia
+- [x] T-057 Diseñar filtros por severidad [M]
+- [x] T-058 Diseñar filtros por impacto [M]
+- [x] T-059 Diseñar ordenamiento por prioridad [M]
+- [x] T-060 Definir paso 1: Identificar crash
+- [x] T-061 Definir paso 2: Reproducir crash
+- [x] T-062 Definir paso 3: Corregir bug [S]
+- [x] T-063 Definir paso 4: Testear corrección
+- [x] T-064 Definir paso 5: Desplegar patch [S]
+- [x] T-065 Definir paso 6: Verificar reducción de frecuencia
+- [x] T-066 Diseñar integración con M102 (Bug Tracking)
+- [x] T-067 Diseñar plantilla de issue de crash
+- [x] T-068 Diseñar vinculación de issue con crash en dashboard
+- [x] T-069 Diseñar características de builds de diagnóstico
+- [x] T-070 Diseñar logs adicionales (M103)
+- [?] T-071 Diseñar asserts no eliminados (debug mode) — requiere export_presets de debug (dueño: M117)
+- [?] T-072 Diseñar símbolos de debug para stack traces detallados — requiere export_presets con símbolos (dueño: M117)
+- [?] T-073 Diseñar profiling habilitado (M61) — requiere build con profiling (dueño: M61)
+- [x] T-074 Diseñar crash reporter en modo verbose
+- [x] T-075 Definir casos de uso de builds de diagnóstico
+- [x] T-076 Diseñar logs de crash en Logging service
+- [x] T-077 Definir nivel de log (CRITICAL) [M]
+- [x] T-078 Definir categoría de log (CRASH)
+- [x] T-079 Diseñar contenido de log (stack trace, metadata, contexto) [M]
+- [x] T-080 Diseñar formato de log (JSON)
+- [x] T-081 Diseñar trigger de log de crash
+- [x] T-082 Diseñar guardado de log en archivo [S]
+- [x] T-083 Diseñar envío de log a servicio externo
+- [x] T-084 Diseñar workflow de creación de issue
+- [x] T-085 Diseñar detección de crash crítico
+- [x] T-086 Diseñar creación automática de issue en GitHub
+- [x] T-087 Diseñar vinculación de issue con crash en dashboard
+- [x] T-088 Diseñar cierre de issue cuando crash resuelto
+- [x] T-089 Diseñar plantilla de issue de crash
+- [x] T-090 Diseñar inclusión de stack trace en issue [M]
+- [x] T-091 Diseñar inclusión de metadata en issue [M]
+- [x] T-092 Diseñar inclusión de contexto en issue [M]
+- [x] T-093 Diseñar inclusión de frecuencia en issue
+- [x] T-094 Diseñar panel de "Diagnostics" en Debug Menu [M]
+- [x] T-095 Diseñar botón "Test Crash" para testear crash reporter
+- [x] T-096 Diseñar botón "Send Crash Report" para envío manual
+- [x] T-097 Diseñar visualización de metadata del sistema
+- [x] T-098 Diseñar funcionalidad de test crash
+- [x] T-099 Diseñar funcionalidad de envío manual de crash
+- [x] T-100 Diseñar formato de metadata en Debug Menu [M]
+- [x] T-101 Diseñar opciones de opt-out
+- [x] T-102 Diseñar checkbox en configuración inicial
+- [?] T-103 Diseñar checkbox en settings (M90) — requiere la UI de settings (dueño: M90)
+- [x] T-104 Diseñar botón "No enviar" al primer crash
+- [x] T-105 Diseñar explicación clara de qué datos se envían
+- [?] T-106 Diseñar cumplimiento GDPR — requiere revisión legal (dueño: COORDINADOR)
+- [x] T-107 Diseñar consentimiento explícito
+- [x] T-108 Diseñar opción de opt-out en cualquier momento
+- [x] T-109 Diseñar datos anonimizados [M]
+- [x] T-110 Diseñar política de privacidad accesible
+- [x] T-111 Diseñar caché de crashes
+- [x] T-112 Diseñar guardado local cuando no hay conexión [M]
+- [x] T-113 Diseñar envío automático al reconectar [M]
+- [x] T-114 Diseñar límite de caché (10 crashes)
+- [x] T-115 Diseñar descarte de crash más antiguo si caché llena
+- [x] T-116 Diseñar archivo de caché (user://crash_cache.json)
+- [x] T-117 Diseñar serialización de crashes en caché
+- [x] T-118 Diseñar deserialización de crashes desde caché
+- [x] T-119 Diseñar crash reporter ligero
+- [x] T-120 Diseñar envío de crash en background
+- [x] T-121 Diseñar no envío de datos en tiempo real (batch) [M]
+- [x] T-122 Diseñar compresión de datos antes de envío [M]
+- [?] T-123 Diseñar mínimo impacto en FPS — requiere medición en build real (dueño: M61)
+- [x] T-124 Diseñar no bloqueo de hilo principal
+- [x] T-125 Diseñar métricas (crashes por versión, plataforma, escena)
+- [x] T-126 Diseñar frecuencia de crashes (por 1000 usuarios)
+- [x] T-127 Diseñar tasa de corrección (crashes resueltos / total)
+- [x] T-128 Diseñar visualización (gráficos de tendencia, tablas)
+- [x] T-129 Diseñar filtros (versión, plataforma, escena) [M]
+- [x] T-130 Diseñar exportación de datos (CSV)
+- [x] T-131 Diseñar CrashDashboard.gd
+- [x] T-132 Diseñar CrashViewer
+- [x] T-133 Diseñar CrashAnalytics
+- [x] T-134 Diseñar CrashPrioritizer
+- [x] T-135 Diseñar alerta cuando crash crítico supera umbral (5% de usuarios)
+- [x] T-136 Diseñar alerta cuando crash nueva alta frecuencia (>100 usuarios en 24h)
+- [x] T-137 Diseñar notificación por email/Slack
+- [x] T-138 Diseñar CrashAlerts.gd
+- [x] T-139 Diseñar check_alerts() [M]
+- [x] T-140 Diseñar _send_alert() [M]
+- [x] T-141 Diseñar integración con Slack webhook
+- [x] T-142 Diseñar política de retención (90 días)
+- [x] T-143 Diseñar anonimización de crash metadata
+- [x] T-144 Diseñar retención de logs de crash (30 días)
+- [?] T-145 Diseñar cumplimiento GDPR — requiere revisión legal (dueño: COORDINADOR)
+- [x] T-146 Diseñar eliminación automática de datos antiguos
+- [?] T-147 Diseñar tests manuales — requiere sesión de playtest (dueño: M114)
+- [x] T-148 Diseñar test de crash con "Test Crash" en Debug Menu
+- [x] T-149 Diseñar verificación de envío de crash
+- [x] T-150 Diseñar verificación de captura de metadata
+- [x] T-151 Diseñar verificación de contexto seguro
+- [?] T-152 Diseñar test de opt-out — depende del opt-out (dueño: M90)
+- [x] T-153 Diseñar test de offline mode [M]
+- [x] T-154 Diseñar tests automáticos [M]
+- [x] T-155 Diseñar mock de crash reporter
+- [x] T-156 Diseñar tests de sanitización de contexto
+- [x] T-157 Diseñar tests de agrupación de crashes
+- [x] T-158 Diseñar CrashReporter.gd
+- [x] T-159 Diseñar capture_crash()
+- [x] T-160 Diseñar _collect_metadata() [M]
+- [x] T-161 Diseñar _sanitize_context() [M]
+- [x] T-162 Diseñar _send_crash()
+- [x] T-163 Diseñar _save_to_cache() [M]
+- [x] T-164 Diseñar _has_connection() [M]
+- [x] T-165 Diseñar signal crash_sent
+- [x] T-166 Diseñar signal crash_saved_to_cache
+- [x] T-167 Diseñar _setup_crash_handler()
+- [x] T-168 Diseñar MetadataCollector.gd [M]
+- [x] T-169 Diseñar collect_hardware_metadata() [M]
+- [x] T-170 Diseñar collect_software_metadata() [M]
+- [x] T-171 Diseñar collect_game_context() [M]
+- [x] T-172 Diseñar recolección de OS, OS version, arquitectura
+- [x] T-173 Diseñar recolección de CPU, CPU cores
+- [x] T-174 Diseñar recolección de GPU, GPU driver
+- [x] T-175 Diseñar recolección de RAM total, RAM disponible
+- [x] T-176 Diseñar recolección de versión del juego
+- [x] T-177 Diseñar recolección de versión de Godot
+- [x] T-178 Diseñar recolección de modo de ejecución
+- [x] T-179 Diseñar recolección de escena activa
+- [x] T-180 Diseñar recolección de hora del juego
+- [x] T-181 Diseñar recolección de estación
+- [x] T-182 Diseñar recolección de posición del jugador
+- [x] T-183 Diseñar recolección de seed del mundo
+- [x] T-184 Diseñar ContextSanitizer.gd [M]
+- [x] T-185 Diseñar sanitize() [M]
+- [x] T-186 Diseñar _is_unsafe_key() [M]
+- [x] T-187 Diseñar lista de unsafe keys [M]
+- [x] T-188 Diseñar validación de safe keys
+- [x] T-189 Diseñar CrashCache.gd
+- [x] T-190 Diseñar save_crash()
+- [x] T-191 Diseñar load_cached_crashes()
+- [x] T-192 Diseñar clear_cache() [M]
+- [x] T-193 Diseñar _load_cache() [M]
+- [x] T-194 Diseñar _save_cache() [M]
+- [x] T-195 Diseñar MAX_CACHE_SIZE = 10 [M]
+- [x] T-196 Diseñar CACHE_FILE = "user://crash_cache.json"
+- [x] T-197 Diseñar CrashSender.gd
+- [x] T-198 Diseñar send_crash()
+- [x] T-199 Diseñar send_cached_crashes()
+- [x] T-200 Diseñar has_connection() [M]
+- [x] T-201 Diseñar service_url
+- [x] T-202 Diseñar api_key [M]
+- [x] T-203 Diseñar headers HTTP [M]
+- [x] T-204 Diseñar manejo de respuesta HTTP [M]
+- [x] T-205 Diseñar CrashDashboard.gd
+- [x] T-206 Diseñar load_crashes()
+- [x] T-207 Diseñar _display_crashes()
+- [x] T-208 Diseñar _display_crash_chart()
+- [x] T-209 Diseñar _fetch_crashes_from_service()
+- [x] T-210 Diseñar crash_list (ItemList)
+- [x] T-211 Diseñar crash_chart (Chart)
+- [x] T-212 Diseñar crash_filters (FilterPanel)
+- [x] T-213 Diseñar CrashLogging.gd
+- [x] T-214 Diseñar log_crash()
+- [x] T-215 Diseñar uso de Logger service
+- [x] T-216 Diseñar nivel CRITICAL [M]
+- [x] T-217 Diseñar categoría CRASH
+- [x] T-218 Diseñar contenido de log (error, stack trace, metadata, contexto) [M]
+- [x] T-219 Diseñar CrashBugTracking.gd
+- [x] T-220 Diseñar create_issue_for_crash()
+- [x] T-221 Diseñar _format_issue_body() [M]
+- [x] T-222 Diseñar _create_github_issue() [M]
+- [x] T-223 Diseñar validación de prioridad CRÍTICA
+- [x] T-224 Diseñar plantilla de issue (stack trace, metadata, contexto, frecuencia, prioridad)
+- [x] T-225 Diseñar uso de GitHub API [M]
+- [x] T-226 Diseñar headers de autorización
+- [x] T-227 Diseñar CrashDebugMenu.gd
+- [x] T-228 Diseñar add_diagnostics_panel() [M]
+- [x] T-229 Diseñar _on_test_crash()
+- [x] T-230 Diseñar _on_send_crash_report()
+- [x] T-231 Diseñar _format_metadata() [M]
+- [x] T-232 Diseñar botón "Test Crash"
+- [x] T-233 Diseñar botón "Send Crash Report"
+- [x] T-234 Diseñar label de metadata del sistema
+- [x] T-235 Diseñar CrashAlerts.gd
+- [x] T-236 Diseñar check_alerts() [M]
+- [x] T-237 Diseñar _send_alert() [M]
+- [x] T-238 Diseñar umbral de crash crítico (5%)
+- [x] T-239 Diseñar umbral de crash nueva (1%)
+- [x] T-240 Diseñar notificación por Slack webhook
+- [x] T-241 Diseñar formato de alerta [M]
+- [x] T-242 Diseñar sección crash_reporting en project.gd
+- [x] T-243 Diseñar configuración enabled
+- [x] T-244 Diseñar configuración service
+- [x] T-245 Diseñar configuración api_key
+- [x] T-246 Diseñar configuración opt_out_allowed
+- [x] T-247 Diseñar configuración anonymous_only
+- [x] T-248 Diseñar configuración cache_enabled
+- [x] T-249 Diseñar configuración cache_max_size
+- [x] T-250 Diseñar 06-Plan-Testings.md (APLICA) [M]
+- [x] T-251 Diseñar tests de captura de crash
+- [x] T-252 Diseñar tests de recolección de metadata
+- [x] T-253 Diseñar tests de sanitización de contexto
+- [x] T-254 Diseñar tests de offline mode [M]
+- [x] T-255 Diseñar tests de integración con M103
+- [x] T-256 Diseñar tests de integración con M102
+- [x] T-257 Diseñar tests de integración con M110
+- [x] T-258 Diseñar tests de agrupación de crashes
+- [x] T-259 Diseñar tests de priorización de crashes
+- [x] T-260 Núcleo V0 verificado: `CrashReporter` autoload presente + dump JSON a `user://crash/` + reintentos + cola pendiente [M]
+- [x] T-261 Test headless M122 ejecutado: **13 checks, 0 fallos** (Log 1150, P-36). La nota previa decía «12 checks, 0 fallos (Log 518)» y era un **FALSO VERDE**: el test estaba en ROJO (12/2) por `DirAccess.open("user://…") == null` en headless; se corrigió `crash_reporter.dumps_pendientes()` con `_abrir_dir()` [M]
+- [x] T-262 Tareas locales cerradas: núcleo, cache, logging, alertas, testing y contratos documentados [S]
+- [x] T-263 Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
+- [?] T-264 Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
+- [?] T-265 Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]

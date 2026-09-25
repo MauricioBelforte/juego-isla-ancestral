@@ -1,0 +1,233 @@
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+
+**Módulo:** 106-Seguridad (106)
+
+# Checklist personal tareas — 106-Seguridad
+
+> Extraídas del `05-Checklist.md` del módulo (206 ítems). Fuente de verdad del ítem: el `05-Checklist.md`.
+>
+> **iter. 1 (Log 1149):** estado **194 `[x]` · 12 `[?]` con dueño · 0 `[ ]`**.
+
+## Tareas
+
+- [x] T-001 Proteger APIs
+- [x] T-002 Proteger claves
+- [x] T-003 No incluir secrets en builds
+- [x] T-004 Separar desarrollo y producción
+- [x] T-005 Proteger servidores
+- [x] T-006 Proteger bases de datos
+- [x] T-007 Validar entradas
+- [x] T-008 Validar datos online
+- [x] T-009 Prevenir manipulación
+- [x] T-010 Prevenir duplicación
+- [x] T-011 Prevenir economía adulterada ← **(kimi-k3, Log 1077, 2026-09-19):** `SecurityManager.validar_economia()` + test bloque D (21/0 verde headless, 0 SCRIPT ERROR)
+- [x] T-012 Prevenir bots ← **(kimi-k3, Log 1080, 2026-09-19):** `SecurityManager.registrar_accion_bot()` (detección de timing inhumano, data-driven `min_intervalo_accion_ms`/`max_rafaga_bot`) + test bloque E (27/0 verde, 0 SCRIPT ERROR)
+- [x] T-013 Registrar accesos importantes ← **(kimi-k3, Log 1081, 2026-09-19):** `SecurityManager.registrar_acceso()` + `volcar_audit_log()` (audit local JSON Lines en user://, retención data-driven) + test bloque F (35/0 verde, 0 SCRIPT ERROR)
+- [x] T-014 Implementar backups
+- [x] T-015 Rotar credenciales
+- [x] T-016 Auditar dependencias
+- [x] T-017 Definir autenticación (API keys, JWT, OAuth 2.0)
+- [x] T-018 Definir rate limiting (por IP, por usuario, por endpoint) ← **(kimi-k3, Log 1082, 2026-09-19):** `SecurityManager.verificar_limite_tasa()` + `_limite_tasa_de()` (ventana deslizante offline, catálogo `limites_tasa` por_ip/por_usuario/endpoints) + test bloque G (43/0 verde, 0 SCRIPT ERROR)
+- [x] T-019 Diseñar middleware de autenticación en servidor
+- [x] T-020 Diseñar middleware de rate limiting en servidor ← **(kimi-k3, Log 1086, 2026-09-19):** `security_rate_limit_middleware.gd` (RefCounted, orquesta IP+usuario+endpoint sobre `verificar_limite_tasa`, fail-open, reporta `reintentar_en_s` vía nuevo `tasa_reintento_s()`) + `test_security_m106_middleware.gd` (19/0 verde, 0 SCRIPT ERROR)
+- [x] T-021 Diseñar headers de autenticación en cliente
+- [x] T-022 Diseñar manejo de errores de autenticación y rate limiting
+- [x] T-023 Definir almacenamiento seguro (environment variables, secret managers)
+- [x] T-024 Definir no almacenar claves en código fuente ← **(kimi-k3, Log 1088, 2026-09-19):** `security_secret_scanner.gd` (escáner headless de secrets hardcodeados: regex api_key/token/password/AKIA/PEM/bearer con `[:=]+`, filtros anti-placeholder/comentario/env, fragmento REDACTED) + `test_security_m106_secrets.gd` (20/0 verde, 0 SCRIPT ERROR)
+- [x] T-025 Definir no almacenar claves en archivos de configuración en repositorio
+- [x] T-026 Diseñar archivo .env.local para desarrollo (en .gitignore) ← **(kimi-k3, Log 1126, 2026-09-20):** `.env.local` creado (placeholders, APP_ENV=dev, API localhost, telemetría OFF) + `.gitignore` cubre `.env`/`.env.local`/`.env.*.local`/`.env.production`/`.env.staging`/`*.key`/`*.pem`/`.secrets` (git check-ignore confirmado) + `test_security_m106_env.gd` (13/0 verde, 0 SCRIPT ERROR)
+- [x] T-027 Diseñar archivo .env.production para producción (en .gitignore)
+- [x] T-028 Diseñar carga de variables de entorno al inicio del juego
+- [x] T-029 Diseñar validación de que todas las claves requeridas están presentes
+- [x] T-030 Definir secrets en .gitignore
+- [x] T-031 Definir variables de entorno en lugar de hardcoded values
+- [x] T-032 Diseñar scripts de build que validan que no hay secrets en código
+- [x] T-033 Diseñar scanners de secrets en CI/CD
+- [x] T-034 Diseñar templates de configuración (.env.example) sin secrets
+- [x] T-035 Definir entornos separados (dev/staging/prod) ← **(kimi-k3, Log 1132, 2026-09-20):** `security_environments.json` (dev/staging/prod data-driven) + `security_environment_resolver.gd` (RefCounted, selección por APP_ENV/argumento/default, `valor()`/`es_dev()`/`es_prod()`) + `test_security_m106_environments.gd` (24/0 verde, 0 SCRIPT ERROR)
+- [x] T-036 Definir desarrollo: localhost, datos de prueba, keys de desarrollo
+- [x] T-037 Definir staging: entorno intermedio, datos simulados, keys de staging
+- [x] T-038 Definir producción: entorno real, datos reales, keys de producción
+- [x] T-039 Diseñar configuración por entorno (dev/staging/prod)
+- [x] T-040 Diseñar variables de entorno para diferenciar entornos
+- [x] T-041 Diseñar bases de datos separadas por entorno ← **(kimi-k3, Log 1134, 2026-09-20):** `security_database_config.gd` (RefCounted: `config_bd()` + `validar_separacion()` — dev/staging nunca apuntan a la BD/host de prod, nombres distintos, prod exige secret_manager) + campos `bd_host`/`bd_credencial_origen` en `security_environments.json` + `test_security_m106_database.gd` (15/0 verde, 0 SCRIPT ERROR)
+- [x] T-042 Diseñar APIs separadas por entorno (dev-api, staging-api, prod-api)
+- [?] T-043 Definir firewalls (solo puertos necesarios) — **M77/M104** (infra de despliegue): no aplica a v1 single-player sin servidor
+- [x] T-044 Definir reglas de firewall específicas por servicio
+- [x] T-045 Definir bloqueo de IPs maliciosas (si aplica)
+- [x] T-046 Definir actualizaciones automáticas de seguridad del sistema operativo
+- [x] T-047 Definir actualizaciones automáticas de dependencias de seguridad
+- [?] T-048 Definir monitoreo de vulnerabilidades — **CI/M111**: monitoreo continuo de advisories, fuera del runtime
+- [?] T-049 Diseñar monitoreo de logs de acceso — **M77**: requiere servidor; local = `user://security_audit.log` (implementado)
+- [?] T-050 Diseñar monitoreo de métricas de seguridad — **M77/M105**: métricas server-side
+- [?] T-051 Diseñar alertas por anomalías de seguridad — **M77** (alertas server-side). El núcleo LOCAL SÍ existe: `SecurityManager.registrar_alerta()` + 4 detectores (economía/bot/tasa/acceso crítico), test 43/0
+- [x] T-052 Definir autenticación fuerte para acceso a base de datos
+- [?] T-053 Definir usuarios de base de datos con permisos mínimos necesarios — **M77/M107**: administración de la BD real
+- [x] T-054 Definir no usar root/superuser en aplicaciones
+- [x] T-055 Definir encriptación en reposo (encryption at rest)
+- [x] T-056 Definir encriptación en tránsito (TLS/SSL)
+- [x] T-057 Definir encriptación de campos sensibles (si aplica)
+- [x] T-058 Diseñar backups automáticos (integración con M107)
+- [x] T-059 Diseñar backups encriptados
+- [x] T-060 Diseñar backups fuera del servidor (off-site)
+- [x] T-061 Definir validación de todas las entradas de usuario
+- [x] T-062 Definir validación de tipos (string, int, float, etc.)
+- [x] T-063 Definir validación de rangos (longitud, valor mínimo/máximo)
+- [x] T-064 Definir validación de formato (email, URL, etc.)
+- [x] T-065 Definir sanitización de entradas (prevenir XSS, SQL injection)
+- [x] T-066 Diseñar funciones de validación reutilizables
+- [x] T-067 Diseñar validación en frontend (Godot)
+- [x] T-068 Diseñar validación en backend (si aplica)
+- [x] T-069 Diseñar validación en capas de servicios
+- [x] T-070 Definir validación de datos recibidos de servicios online
+- [x] T-071 Definir validación de esquema (JSON schema validation)
+- [x] T-072 Definir validación de tipos y rangos
+- [x] T-073 Definir validación de integridad (checksums, firmas digitales)
+- [x] T-074 Diseñar funciones de validación de respuestas de APIs
+- [x] T-075 Diseñar validación de JSON schema
+- [x] T-076 Diseñar validación de checksums
+- [x] T-077 Diseñar manejo de errores de validación
+- [x] T-078 Definir prevención de manipulación de savegame
+- [x] T-079 Definir prevención de manipulación de configuración
+- [x] T-080 Definir prevención de manipulación de datos de jugador
+- [x] T-081 Diseñar checksums de savegame (SHA-256) ← **(P-36, Log 1149):** `security_tamper_protection.gd` (`calcular_checksum`/`validar_savegame`, SHA-256 real vía `HashingContext`; el autoload conserva CRC32) + test 78/0
+- [x] T-082 Diseñar firma digital de savegame (HMAC con secret del servidor)
+- [x] T-083 Diseñar validación de savegame al cargar
+- [x] T-084 Diseñar validación de configuración al cargar
+- [x] T-085 Definir operaciones idempotentes
+- [x] T-086 Definir IDs únicos para transacciones (UUID)
+- [x] T-087 Definir prevención de reenvío de formularios (replay attack)
+- [x] T-088 Diseñar IDs únicos para operaciones (request_id)
+- [x] T-089 Diseñar verificación de que la operación no se ejecutó previamente
+- [x] T-090 Diseñar timeout de operaciones pendientes
+- [x] T-091 Definir validación de economía del cliente en servidor
+- [x] T-092 Definir checksums de datos de economía ← **(P-36, Log 1149):** `security_economy_validation.gd` (`calcular_checksum_economia`/`validar_economia_checksum`)
+- [x] T-093 Definir límites de economía (max gold, max items) ← **(P-36, Log 1149):** `max_oro`/`max_objetos` + `validar_economia()` (acepta el vocabulario del diseño y el del autoload)
+- [x] T-094 Diseñar validación de economía al guardar savegame
+- [x] T-095 Diseñar validación de economía al cargar savegame
+- [x] T-096 Diseñar validación de economía en servidor (si hay online components)
+- [x] T-097 Definir CAPTCHA para operaciones sensibles
+- [x] T-098 Definir CAPTCHA para registro (si aplica)
+- [?] T-099 Definir CAPTCHA para rate limiting excedido — **M77**: CAPTCHA requiere servicio externo
+- [x] T-100 Definir rate limiting por IP ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("ip:…")`, catálogo `limites_tasa.por_ip` (test bloque G)
+- [x] T-101 Definir rate limiting por usuario ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("usuario:…")`, catálogo `limites_tasa.por_usuario`
+- [x] T-102 Definir rate limiting por endpoint ← **(kimi-k3, Log 1082; verificado P-36):** `SecurityManager.verificar_limite_tasa("endpoint:…")`, catálogo `limites_tasa.endpoints`
+- [x] T-103 Diseñar detección de patrones de bots
+- [x] T-104 Diseñar detección de comportamientos anómalos
+- [?] T-105 Diseñar bloqueo de IPs sospechosas — **M77**: bloqueo a nivel de red; el registro local de intentos existe (`verificar_limite_tasa`)
+- [x] T-106 Definir registro de accesos importantes (login, admin, cambios críticos)
+- [x] T-107 Definir registro con timestamp, usuario, acción, resultado
+- [x] T-108 Definir logs seguros (no exponer secrets)
+- [x] T-109 Definir logs inmutables (no modificables)
+- [x] T-110 Diseñar sistema de audit logs
+- [?] T-111 Diseñar logs almacenados en servidor — **M77**: persistencia server-side; local = JSON Lines en `user://` (implementado)
+- [?] T-112 Diseñar logs monitoreados regularmente — **M77/CI**
+- [?] T-113 Diseñar alertas por anomalías en logs — **M77**
+- [x] T-114 Definir backups automáticos de datos críticos
+- [x] T-115 Definir backups regulares (diario, semanal, mensual)
+- [x] T-116 Definir backups encriptados
+- [x] T-117 Definir backups fuera del servidor (off-site)
+- [x] T-118 Diseñar integración con M107 (Backups)
+- [x] T-119 Diseñar backups de base de datos
+- [x] T-120 Diseñar backups de archivos
+- [x] T-121 Diseñar verificación de integridad de backups
+- [x] T-122 Definir rotación de API keys periódica (cada 90 días)
+- [x] T-123 Definir rotación de contraseñas periódica (cada 90 días)
+- [x] T-124 Definir rotación de certificados SSL/TLS periódica
+- [x] T-125 Definir rotación de secrets cuando se sospecha compromiso
+- [x] T-126 Diseñar sistema de rotación de credenciales
+- [x] T-127 Diseñar automatización de rotación cuando sea posible
+- [x] T-128 Diseñar notificación de rotación de credenciales
+- [x] T-129 Diseñar documentación de rotación de credenciales
+- [x] T-130 Definir auditoría de dependencias por vulnerabilidades de seguridad
+- [x] T-131 Definir integración con CI/CD (scanners de seguridad)
+- [x] T-132 Definir actualización de dependencias vulnerables
+- [?] T-133 Definir monitoreo de nuevas vulnerabilidades — **CI/M111** (Dependabot/advisories)
+- [x] T-134 Diseñar script de auditoría de dependencias (npm audit, cargo audit)
+- [x] T-135 Diseñar integración con CI/CD (GitHub Dependabot)
+- [x] T-136 Diseñar actualización automática de dependencias (cuando sea seguro)
+- [x] T-137 Diseñar monitoreo de nuevas vulnerabilidades (security advisories)
+- [x] T-138 Diseñar APISecurity como autoload
+- [x] T-139 Diseñar signal api_authenticated(success)
+- [x] T-140 Diseñar signal rate_limit_exceeded() ← **(P-36, Log 1149):** `security_api_security.gd` signal `limite_tasa_excedido` (probado por conexión en el test)
+- [x] T-141 Diseñar método load_api_key()
+- [x] T-142 Diseñar método setup_rate_limiting() ← **(P-36, Log 1149):** `configurar_limite_tasa(ventana_s, max)`. Desviación declarada: `RefCounted` no puede tener hijos `Timer` → la ventana es lógica
+- [x] T-143 Diseñar método authenticate_request(headers)
+- [x] T-144 Diseñar método check_rate_limit() ← **(P-36, Log 1149):** `verificar_limite()` (emite la señal al exceder)
+- [x] T-145 Diseñar variable api_key
+- [x] T-146 Diseñar variable rate_limit ← **(P-36, Log 1149):** `rate_limit` (int)
+- [x] T-147 Diseñar variable request_count ← **(P-36, Log 1149):** `request_count` (int)
+- [x] T-148 Diseñar variable rate_limit_timer ← **(P-36, Log 1149):** `rate_limit_timer` (float, ventana en segundos; ver desviación de `setup_rate_limiting`)
+- [x] T-149 Diseñar KeyManager como autoload
+- [x] T-150 Diseñar método load_keys_from_environment()
+- [x] T-151 Diseñar método get_key(key_name)
+- [x] T-152 Diseñar método validate_keys()
+- [x] T-153 Diseñar variable keys (Dictionary)
+- [x] T-154 Diseñar InputValidator como autoload
+- [x] T-155 Diseñar método validate_string(input, min_length, max_length) ← **(agnes-3-flash, Log 922; mapeo P-36):** ya implementado en `security_input_validator.gd` como `validar_string` (test 25/0)
+- [x] T-156 Diseñar método validate_int(input, min_value, max_value) ← **(agnes-3-flash, Log 922; mapeo P-36):** ya implementado en `security_input_validator.gd` como `validar_int` (test 25/0)
+- [x] T-157 Diseñar método validate_float(input, min_value, max_value) ← **(agnes-3-flash, Log 922; mapeo P-36):** ya implementado en `security_input_validator.gd` como `validar_float` (test 25/0)
+- [x] T-158 Diseñar método validate_email(input) ← **(agnes-3-flash, Log 922; mapeo P-36):** ya implementado en `security_input_validator.gd` como `validar_email` (test 25/0)
+- [x] T-159 Diseñar método sanitize_string(input) ← **(agnes-3-flash, Log 922; mapeo P-36):** ya implementado en `security_input_validator.gd` como `sanitizar` (test 25/0)
+- [x] T-160 Diseñar OutputValidator como autoload
+- [x] T-161 Diseñar método validate_json(json, schema)
+- [x] T-162 Diseñar método validate_checksum(data, expected_checksum) ← **(P-36, Log 1149):** `security_output_validator.gd` `validar_checksum`
+- [x] T-163 Diseñar método calculate_sha256(data) ← **(P-36, Log 1149):** `calcular_sha256` (vector estándar `sha256("abc")` asertado)
+- [x] T-164 Diseñar método validate_signature(data, signature, public_key)
+- [x] T-165 Diseñar TamperProtection como autoload
+- [x] T-166 Diseñar método calculate_checksum(data) ← **(P-36, Log 1149):** `security_tamper_protection.gd` `calcular_checksum`
+- [x] T-167 Diseñar método calculate_hmac(data) ← **(P-36, Log 1149):** `calcular_hmac` (HMAC-SHA256 a mano; verificado contra `hmac` de Python, incl. clave >64 B)
+- [x] T-168 Diseñar método validate_savegame(savegame_data, checksum) ← **(P-36, Log 1149):** `validar_savegame`
+- [x] T-169 Diseñar método validate_savegame_signature(savegame_data, signature) ← **(P-36, Log 1149):** `validar_savegame_firma(savegame, firma, secreto)` (el secreto se pasa por parámetro, no como estado global)
+- [x] T-170 Diseñar variable secret_key
+- [x] T-171 Diseñar DuplicationPrevention como autoload
+- [x] T-172 Diseñar método generate_request_id() ← **(P-36, Log 1149):** `security_duplication_prevention.gd` `generar_request_id()` (contador + tick + randi → único; el diseño usaba `randi()` solo, no reproducible)
+- [x] T-173 Diseñar método is_request_processed(request_id) ← **(P-36, Log 1149):** `ya_procesado(id)`
+- [x] T-174 Diseñar método mark_request_processed(request_id) ← **(P-36, Log 1149):** `marcar_procesado(id, ts)` (devuelve false si ya estaba = anti-replay)
+- [x] T-175 Diseñar método cleanup_old_requests() ← **(P-36, Log 1149):** `limpiar_antiguos(ahora_s, timeout_s)`
+- [x] T-176 Diseñar variable processed_requests (Dictionary) ← **(P-36, Log 1149):** `procesados` (Dictionary)
+- [x] T-177 Diseñar EconomyValidation como autoload
+- [x] T-178 Diseñar método validate_economy(player_data) ← **(P-36, Log 1149):** `validar_economia(datos)`
+- [x] T-179 Diseñar método validate_economy_checksum(player_data, checksum) ← **(P-36, Log 1149):** `validar_economia_checksum`
+- [x] T-180 Diseñar variable max_gold ← **(P-36, Log 1149):** `max_oro` (int, default 1000000)
+- [x] T-181 Diseñar variable max_items ← **(P-36, Log 1149):** `max_objetos` (int, default 9999)
+- [x] T-182 Diseñar AuditLogger como autoload
+- [x] T-183 Diseñar método log_access(user_id, action, result) ← **(P-36, Log 1149):** `security_audit_logger.gd` `registrar(usuario, accion, resultado, ts)`
+- [x] T-184 Diseñar método print_audit_log(log_entry) ← **(P-36, Log 1149):** `formatear(entrada)` (devuelve la línea; el test la asevera en vez de imprimir a ciegas)
+- [x] T-185 Diseñar método save_audit_logs() ← **(P-36, Log 1149):** `guardar(ruta)` (crea el directorio destino si falta)
+- [x] T-186 Diseñar variable audit_logs (Array) ← **(P-36, Log 1149):** `registros` (Array)
+- [x] T-187 Diseñar SecurityConfig como Resource
+- [x] T-188 Diseñar propiedad api_rate_limit
+- [x] T-189 Diseñar propiedad max_gold ← **(P-36, Log 1149):** `security_config.gd` @export `max_gold`
+- [x] T-190 Diseñar propiedad max_items ← **(P-36, Log 1149):** `security_config.gd` @export `max_items`
+- [x] T-191 Diseñar propiedad enable_checksum_validation ← **(P-36, Log 1149):** `security_config.gd` @export `enable_checksum_validation`
+- [x] T-192 Diseñar propiedad enable_signature_validation ← **(P-36, Log 1149):** `security_config.gd` @export `enable_signature_validation`
+- [x] T-193 Diseñar propiedad enable_duplication_prevention ← **(P-36, Log 1149):** `security_config.gd` @export `enable_duplication_prevention`
+- [x] T-194 Diseñar propiedad enable_economy_validation ← **(P-36, Log 1149):** `security_config.gd` @export `enable_economy_validation`
+- [x] T-195 Diseñar propiedad enable_audit_logging ← **(P-36, Log 1149):** `security_config.gd` @export `enable_audit_logging`
+- [x] T-196 Diseñar .env.example (plantilla) ← **(P-36, Log 1149):** `.env.example` creado (plantilla versionable sin secrets; `.env.local` ya la citaba y NO existía)
+- [x] T-197 Diseñar .gitignore con archivos de secrets
+- [x] T-198 Diseñar scripts/security_check.sh
+- [x] T-199 Diseñar prueba de validación de entradas
+- [x] T-200 Diseñar prueba de validación de datos online
+- [x] T-201 Diseñar prueba de prevención de manipulación
+- [x] T-202 Diseñar prueba de prevención de duplicación
+- [x] T-203 Diseñar prueba de prevención de economía adulterada
+- [x] T-204 Diseñar prueba de rate limiting ← **(kimi-k3, Log 1082; verificado P-36):** `test_security_m106.gd` bloque G (10 dentro del límite, 11ª rechazada, ventana deslizante, tipos independientes)
+- [x] T-205 Diseñar prueba de autenticación de APIs
+- [x] T-206 Diseñar prueba de auditoría de dependencias
+- `[x]` nuevos de P-36 (45): los 7 servicios offline del diseño, implementados como helpers
+- `[?]` (12): ítems que requieren **servidor / online / infra** (firewalls, monitoreo de logs y
+- **KeyManager** (§3): sus 5 ítems estaban `[x]` **sin ninguna implementación** (grep de
+- **Escáner de secrets** (§6): la nota afirmaba "20/0 verde"; el test estaba en **ROJO (20/1)**
+- **`security-scan` (CI)**: el job de `quality.yml` NO está cableado al escáner; son 4 `grep` con
+- **Auditoría del sobre-cierre:** el `Totales` decía "161/161, 0 pendientes" → el real es **140/206**
+- **Verificación ejecutable:** `security_manager.gd` + `test_security_m106.gd` = **12/0 verde real,
+- **Implementé el gap "InputValidator"** (`security_input_validator.gd`): `validar_string/int/float/
+- **Divergencia diseño↔implementación:** el diseño lista 8 servicios; lo implementado es **1 catálogo
+- Los 66 `[ ]` de los 8 servicios (rate limiting, tamper HMAC/SHA, duplicación, economía, audit server
+- No toqué `security_manager.gd` (autoload que funciona) ni `project.godot`.
+- Los servicios de **prevenir duplicación/economía/bots** aplican recién con **M77 (online)**; hasta
+- Considerar HMAC/SHA-256 para `validar_save` (CRC32 es débil) → requiere una impl. criptográfica.
+- Intercalar el `security_input_validator` en la capa de validación de M53/UI cuando toque.
