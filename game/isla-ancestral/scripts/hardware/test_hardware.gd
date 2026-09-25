@@ -81,15 +81,18 @@ func _test_profile_standalone() -> void:
 	_check("M59 version 0 ignorada", int(p3.quality_preset) == QP_VERY_LOW)
 	_check("fin A", _fin())
 
-## ── B. HardwareManager de catálogo (autoload `hardware`) ─────────────────────
+## ── B. HardwareManager de catálogo (autoload `HardwareManager`) ──────────────
 func _test_catalogo_autoload() -> void:
 	print("--- B. HardwareManager de catálogo (autoload) ---")
-	var hm := root.get_node_or_null("hardware")
+	# P-32 (2026-09-25): el autoload duplicado `hardware` se elimino de
+	# project.godot (BUG-068). Queda solo `HardwareManager`, que es lo que
+	# especifica el diseno del modulo (115-Hardware/plan-actual/04-Codigo.md:278).
+	var hm := root.get_node_or_null("HardwareManager")
 	if hm == null:
-		_check("autoload hardware presente", false, "nodo 'hardware' ausente")
+		_check("autoload HardwareManager presente", false, "nodo 'HardwareManager' ausente")
 		_check("fin B", _fin())
 		return
-	_check("autoload hardware presente", true)
+	_check("autoload HardwareManager presente", true)
 	_check("3 perfiles de catálogo", hm.perfiles_ids().size() == 3, "ids=%s" % str(hm.perfiles_ids()))
 	_check("perfil('baja') existe", not hm.perfil("baja").is_empty())
 	_check("perfil inexistente -> {}", hm.perfil("no_existe").is_empty())

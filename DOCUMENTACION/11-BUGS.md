@@ -142,8 +142,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
 | BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
 | BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [→] **Delegado a DeepSeek-V4.1-Flash** (M103 es 🔵 suyo; mensaje en `Mensajes entre modelos/2026-09-20_02-18-09_1-DEEPSEEK-BUG067-M103-logger-delegacion.md`) — atria-dawn solo midió/documentó, no parcheó. Pendiente confirmación de recepción | DeepSeek-V4.1-Flash (delegado por Atria-Dawn-Preview) | 2026-09-20 |
-| BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [ ] Abierto — fix de 1 linea: borrar una de las dos entradas de `[autoload]`. Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
-| BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] Abierto — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [x] **Resuelto (2026-09-25, P-32)** — aplicado el fix de **2** pasos (el de 1 linea rompia `test_hardware.gd:87`): entrada `hardware` borrada de `project.godot` + test migrado a `HardwareManager`. Suites **21/0** y **17/0** antes y despues, duplicacion **2 -> 1**, boot 0 SCRIPT ERROR, y la entrada muerta A3 del auditor borrada. ⚠️ La premisa «Ninguno de los dos nombres se usa» de esta fila es **FALSA** (ver correccion 1 en el detalle). Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] **Abierto** — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase. **Re-medido 2026-09-25 (P-32): A2 subio de 9 a 11** — 2 hallazgos NUEVOS (`UIManager->AccesibilityManager` delta +40, `UIManager->Localization` delta +17) que vienen del cambio **sin commitear** de agnes-3-flash en `ui_manager.gd` (86+/5-, Log 1118): **al mergearlo, `architecture-guard` va a rojo** | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-071 | **El fix de BUG-051 no está en el repositorio**: `HEAD` conserva el no-op (`godot --headless --script` sin script + `\|\| true`) porque el hunk que lo reescribe vive **solo en el worktree**. Su generador `tools/quality/gen_colector_sintaxis.py` (3 278 B) **no está versionado**: no está en el árbol de `HEAD` y lo matchea `.gitignore:129` `gen_*.py` (la negación `!tools/quality/gen_colector_sintaxis.py` existe solo en el worktree). **Doble consecuencia:** (a) BUG-051 figura `[x] Resuelto (Log 1039)` sin artefacto versionado que lo respalde; (b) al commitear el worktree, el paso `Generate syntax collector` falla en checkout limpio (`Errno 2`) -> job `godot-lint` en ROJO y el gate «duro verificado por inyección» **nunca llega a ejecutarse en CI** | M111 Código de Calidad / M83 (CI) — `quality.yml`, `tools/quality/`, `.gitignore` | 🟠 Mayor | [x] **Resuelto (2026-09-20, commit `11ac4d9`, atria-dawn)** — el `.py` está versionado (+95), la negación está en `.gitignore:130`, el no-op **desapareció** de `quality.yml` (0 ocurrencias de `--script 2>&1 \|\| true`) y el gate real corre; generador verificado (**855 preloads**, salida **byte-idéntica** `91d6f337…`) | DeepSeek-V4.1-Flash (reportado a Atria-Dawn-Preview) | 2026-09-20 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
@@ -467,6 +467,42 @@ correccion de sus dos afirmaciones falsas, para que nadie actue sobre la premisa
 **Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-24 23:20 (detector + autor de las 2
 correcciones; fix delegado a M90/infra)
 
+**Estado final (2026-09-25, P-32): `[x]` Resuelto — fix de 2 pasos aplicado y verificado headless.**
+El area es **Infra** (M90/infra), asi que el fix dejo de estar delegado y se aplico. Los dos pasos,
+tal cual la receta:
+
+1. `project.godot`: eliminada la entrada duplicada
+   `hardware="*res://scripts/hardware/hardware_manager.gd"` (queda solo `HardwareManager`, que es lo
+   que especifica `DOCUMENTACION/115-Hardware/plan-actual/04-Codigo.md:278`).
+2. `scripts/hardware/test_hardware.gd:87`: migrado `get_node_or_null("hardware")` a `"HardwareManager"`.
+
+**Evidencia medida con Godot 4.7.2 headless (`4.7.2.stable.official.ed1daf0bf`):**
+
+| Suite | Antes del fix | Despues del fix |
+|---|---|---|
+| `test_hardware.gd` | EXIT 0 · 21 checks / 0 fallos · 0 SCRIPT ERROR | EXIT 0 · 21 checks / 0 fallos · 0 SCRIPT ERROR |
+| `test_hardware_m115.gd` | EXIT 0 · 17 checks / 0 fallos · 0 SCRIPT ERROR | EXIT 0 · 17 checks / 0 fallos · 0 SCRIPT ERROR |
+| Duplicacion de `[M115] HardwareManager listo` | **2** | **1** |
+
+Boot completo (`--headless --quit-after 3`): **0 SCRIPT ERROR** y el diff normalizado contra la linea
+base contiene **solo** el efecto buscado — la instancia duplicada desaparece y
+`ServiceRegistry: registrado 'hardware'` queda **una** vez (481 a 480 lineas utiles). **No existe
+ningun consumidor** del servicio `"hardware"` ni del nodo autoload en el repo, asi que registrar el
+servicio mas tarde en el boot no rompe a nadie.
+
+**Efecto colateral en el gate de arquitectura (M62):** BUG-068 **era** el hallazgo `A3` («el mismo
+script registrado como dos autoloads»). Al desaparecer el duplicado, su entrada de `PERMITIDOS` en
+`scripts/auditar_arquitectura_m62.py` quedo muerta y se **borro**: una excepcion muerta enmascara la
+reaparicion del bug. Probado en rojo — reinyectando el autoload duplicado, el auditor vuelve a
+reportar `A3|scripts/hardware/hardware_manager.gd` (arnes 8/0). Selftest del auditor: **0 fallos**.
+
+**Reportado, NO tocado (documentacion del modulo, quedo obsoleta):**
+`115-Hardware/plan-actual/04-Codigo.md:316-318` («Hallazgo 3 ... Lo documento y NO lo toco») y
+`05-Checklist.md:220` («Infra: resolver el autoload duplicado») describen el defecto como pendiente.
+Son del modulo; los actualiza su dueno.
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-25 (fix aplicado + suites antes/despues + boot)
+
 ### BUG-069 — Grafo de servicios: 2 componentes cíclicas y 9 referencias fuera de orden
 
 - **Fecha de reporte:** 2026-09-20 01:00
@@ -548,7 +584,41 @@ A1/A2 -> `BUG-069`, A3 -> `BUG-068`. La etiqueta equivocada mandaba al bug que n
 **Firma:** DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-24 23:20 (detector + re-medicion + correccion
 de etiqueta; los 2 hallazgos nuevos son del dueno de `UIManager`)
 
+**Re-verificacion (2026-09-25, P-32) — la alarma de CI SE SOSTIENE, y ahora tiene dueno.**
+El coordinador pidio reclasificar esto como «incidente cerrado por la reparacion del worktree roto».
+Se **midio antes de escribirlo** y **la premisa no se sostiene**: las 2 referencias **no** viven en el
+worktree roto. Evidencia (reproducible con los comandos de la tabla):
 
+| Medicion | Resultado |
+|---|---|
+| `grep -c AccesibilityManager game/isla-ancestral/scripts/ui/core/ui_manager.gd` (worktree **principal**) | **2** — L436 (comentario) y L442 `get_node_or_null("/root/AccesibilityManager")` |
+| `git show HEAD:game/isla-ancestral/scripts/ui/core/ui_manager.gd` | **0** |
+| `.kilo/worktrees/phase-judge/.../scripts/ui/core/ui_manager.gd` | **0** |
+| `git log --all -S'AccesibilityManager' -- <ruta>` | **0 commits** |
+| `git status --short <ruta>` | ` M` — **modificado**, 86 insertions / 5 deletions |
+| `git cat-file -e HEAD:<ruta>` | **existe** en HEAD (472 lineas; el worktree tiene 553) |
+
+Ademas el auditor **esta correctamente acotado al proyecto principal**: `base = "game/isla-ancestral"`
+esta fijo (`scripts/auditar_arquitectura_m62.py:729`) y `raiz_scripts = <raiz>/game/isla-ancestral/scripts`,
+asi que **no** lee las copias de `.kilo/`. Su hallazgo es sobre el worktree principal.
+
+**Conclusion:** el cambio es de **agnes-3-flash** — `Logs/1118-M53-UI-UX-Iter-agnes-i18n-M58_2026-09-20_02-21-00.md`
+(2026-09-20): «puentes i18n M53<->M87 + overlays accesibilidad M58 (RF8/RF18)». Vive **sin commitear en
+el worktree principal**, que es justamente el que se va a mergear. `architecture-guard` es **gate duro**
+(sin `continue-on-error`, presente en el `needs` de `summary`) y **hoy sale exit 1** con estos 2
+hallazgos. -> **El riesgo es real y se materializa en el merge; no es un artefacto de un worktree roto.**
+
+**Estado: `[?]` ABIERTO — NO se reclasifica como incidente cerrado**, porque hacerlo asentaria algo
+falso en el registro. Dueno: **agnes-3-flash** (autora del cambio). Los 2 hallazgos no estan en `HEAD`,
+asi que hoy el gate pasa; al mergear ese archivo, va a rojo.
+
+**La trampa que queda documentada (es distinta de la que se suponia).** Un hallazgo de una herramienta
+**no dice de que archivo viene si hay dos copias del mismo archivo en el arbol** (worktrees anidados en
+`.kilo/`). Y `git status` dentro del worktree anidado puede decir **limpio** sin decir nada del worktree
+principal. Antes de atribuir un hallazgo hay que **localizar el archivo** (`find -name`, `grep -rn`),
+no suponerlo. Es la trampa 102 vista desde el otro lado: ahi el error fue creer que un worktree roto
+podia mentir; aca el error fue creer que un worktree **limpio** explicaba el hallazgo. En ambos casos
+lo que falla es **no medir el archivo concreto**.
 
 ### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
 

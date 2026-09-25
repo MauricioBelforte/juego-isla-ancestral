@@ -150,7 +150,12 @@ PERMITIDOS = {
     "A2|ShopManager->GameTime": "BUG-069",
     "A2|Friendship->GameTime": "BUG-069",
     # A3 — el mismo script registrado como dos autoloads.
-    "A3|scripts/hardware/hardware_manager.gd": "BUG-068",
+    # BUG-068 RESUELTO (2026-09-25, P-32): se elimino el autoload duplicado
+    # `hardware` de project.godot (queda solo `HardwareManager`, que es lo que
+    # especifica el diseno del modulo: 115-Hardware/plan-actual/04-Codigo.md:278)
+    # y se migro `test_hardware.gd` al nombre restante. El A3 dejo de observarse
+    # y su entrada se BORRA: una excepcion muerta en el allowlist enmascara la
+    # reaparicion del bug (el auditor volveria a verlo, pero ya estaria permitido).
 }
 
 EXCLUIDOS_DIR = (".git", "node_modules", "__pycache__", ".godot", "addons",

@@ -32,7 +32,7 @@ una vez y el propio scanner se autodetecto).
 Uso:
     python scripts/diagnosticar_mojibake.py
     echo $?   # 0 = limpio, 1 = queda mojibake (SUCIO)
-    python scripts/diagnosticar_mojibake.py --selftest   # 21 casos, 2 direcciones
+    python scripts/diagnosticar_mojibake.py --selftest   # 28 casos, 2 direcciones
 
 Codigos de salida: 0 limpio | 1 queda mojibake reparable | 2 uso.
 IRREVERSIBLE y EXCLUIDO se informan pero NO bloquean (no son reparables por
@@ -49,6 +49,15 @@ PAT = re.compile(
     '|\u00e2\u20ac'              # prefijo de raya/comillas tipograficas
     '|\u00e2[\u0080-\u0093]'     # prefijo de flechas y comillas bajas
     '|\u00f0'                    # prefijo de emoji
+    # BOM UTF-8 re-encodeado: los bytes EF BB BF se leyeron como cp1252 y se
+    # re-grabaron como UTF-8 -> texto 'i>>?' (U+00EF U+00BB U+00BF), bytes
+    # C3 AF C2 BB C2 BF. Necesita su PROPIA alternativa porque su primer
+    # caracter (U+00EF) NO es ni A-tilde ni A-circunfleja, asi que ninguna de
+    # las ramas de arriba lo ve. Se exige la SECUENCIA EXACTA de 3 caracteres
+    # (no 'U+00EF + byte de continuacion'): una 'i' con dieresis es una letra
+    # legitima (naive, maiz) y un patron laxo daria falsos positivos (M-06).
+    # Medido el 2026-09-25 (P-32) en game/isla-ancestral/project.godot L11.
+    '|\u00ef\u00bb\u00bf'
     '|\ufffd'                    # caracter de reemplazo
 )
 
@@ -61,7 +70,7 @@ FFFD = '\ufffd'
 # funcionando con backlogs y guias nuevos (Hy4, Log 903).
 PAT_LINEA_DOC = re.compile(
     'caracteres rotos'                 # banner de los BACKLOG-MASTER
-    '|doble (encoding|codificacion)'   # banner de CHECKLIST-GLOBAL y guias
+    '|doble[ -](encoding|codificacion|codificado|codificada)'  # banner de CHECKLIST-GLOBAL, guias y la cita del BOM
     '|mojibake'
     '|U\\+00F0|U\\+0178|U\\+FFFD'      # tablas de los reparadores
     '|F0 9F 9F|F0 9F 94|0x94'          # ejemplos de bytes de emoji corruptos
@@ -94,7 +103,12 @@ EXCLUIDOS_DIR = ('./Obsoletos', './scripts/backups', './out',
 # Dependencias de terceros: no son codigo del proyecto y no se deben "reparar".
 EXCLUIDOS_SUELTOS = ('.venv', 'node_modules', 'site-packages')
 
-EXT = ('.md', '.gd', '.txt', '.json', '.cfg', '.py')
+# Extensiones escaneadas. Se agregaron .godot/.tscn/.tres el 2026-09-25 (P-32):
+# el punto ciego mas caro era `project.godot`, el punto de ENTRADA del motor, que
+# tenia el BOM mojibake en su clave config_version (L11). Medido contra HEAD: las
+# 248 versionadas con extension nueva (.tscn 30, .tres 217, .godot 1) aportan
+# 0 SUCIO propias; la unica que aportaba era project.godot, ya saneado.
+EXT = ('.md', '.gd', '.txt', '.json', '.cfg', '.py', '.godot', '.tscn', '.tres')
 
 
 def raiz_repo():
@@ -222,6 +236,10 @@ def selftest():
         ('A-tilde SUELTA (sin byte de continuacion)', '\u00c3'),
         ('A-circunfleja SUELTA (sin continuacion)', '\u00c2'),
         ('prosa que menciona la palabra', 'esto no es mojibake, es una palabra'),
+        # La 'i' con dieresis es una letra VALIDA (naive, maiz). Este caso es el
+        # que protege contra un patron laxo 'U+00EF + byte de continuacion':
+        # existiria, daria falsos positivos, y nadie lo notaria hasta el rojo.
+        ('i-dieresis legitima (naive/maiz)', 'na\u00efve, ma\u00efz'),
     ]
 
     # B) MOJIBAKE REAL -> SUCIO
@@ -231,6 +249,9 @@ def selftest():
         ('raya (E2 80 xx)', 'hola \u00e2\u20ac\u201d chau'),
         ('seccion (C2 A7)', '\u00c2\u00a721.8'),
         ('emoji (F0 9F)', 'estado \u00f0\u0178\u0178\u00a2'),
+        # El BOM UTF-8 (EF BB BF) leido como cp1252 y re-grabado como UTF-8.
+        # Medido en game/isla-ancestral/project.godot L11 (P-32, 2026-09-25).
+        ('BOM re-encodeado (EF BB BF)', '"\u00ef\u00bb\u00bfconfig_version"=5'),
     ]
 
     # C) CONVERSION PREVIA con errors=replace -> IRREVERSIBLE
@@ -249,6 +270,10 @@ def selftest():
     documentados = [
         ('banner de BACKLOG', 'caracteres rotos (\u00c3\u00b3, \u00e2\u20ac)'),
         ('tabla de reparador', 'U+00F0 -> \u00f0'),
+        # Una guia que CITA el defecto del BOM (DOCUMENTACION/62-Memoria/.../
+        # 04-Codigo.md L280, medido el 2026-09-25): citarlo no es tenerlo.
+        ('cita del BOM doble-codificado',
+         'tiene un `"\u00ef\u00bb\u00bfconfig_version"` (el BOM doble-codificado)'),
     ]
 
     print('=' * 60)
@@ -288,6 +313,23 @@ def selftest():
     print('E) lineas que documentan el sintoma -> no cuentan')
     for n, c in documentados:
         chk(n, c, 'limpio')
+    print()
+    print('F) configuracion del gate (el sweep depende de esto)')
+    # El sweep solo mira EXT: si alguien saca .godot, el punto ciego mas caro
+    # vuelve en silencio y el selftest seguiria verde. Se asierta aca.
+    for ext in ('.godot', '.tscn', '.tres'):
+        total[0] += 1
+        if ext in EXT:
+            print('  OK    EXT incluye %s' % ext)
+        else:
+            fallos[0] += 1
+            print('  FALLO EXT NO incluye %s (punto ciego de vuelta)' % ext)
+    total[0] += 1
+    if '\u00ef\u00bb\u00bf' in PAT.pattern:
+        print('  OK    PAT cubre la secuencia del BOM (U+00EF U+00BB U+00BF)')
+    else:
+        fallos[0] += 1
+        print('  FALLO PAT NO cubre la secuencia del BOM')
     print()
     print('=' * 60)
     if fallos[0]:

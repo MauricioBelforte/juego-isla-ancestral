@@ -8,8 +8,6 @@
 
 config_version=5
 
-"ï»¿config_version"=5
-
 [application]
 
 config/name="isla-ancestral"
@@ -48,7 +46,6 @@ ControlInput="*res://scripts/controls/control_input.gd"
 ResourceManager="*res://scripts/resources/resource_manager.gd"
 mineria="*res://scripts/mineria/mining_manager.gd"
 interacciones="*res://scripts/interacciones/interaction_manager.gd"
-hardware="*res://scripts/hardware/hardware_manager.gd"
 fauna_registry="*res://scripts/fauna/fauna_registry.gd"
 fauna="*res://scripts/fauna/fauna_manager.gd"
 credits_manager="*res://scripts/legal/credits_manager.gd"

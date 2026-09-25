@@ -605,3 +605,20 @@ verifiques vos, usa tu practica habitual de varios angulos.
 > **exit code medido** (`godot --headless --script <inexistente>` -> EXIT 1), no por inspeccion.
 > **Regla operativa derivada:** cuando descartes un hallazgo mio, el descarte necesita **comando y
 > salida**, no un veredicto; y cuando yo verifique, doy el comando reproducible.
+
+- [x] Log reservado: **1147** — P-32 (paquete infra): BOM de `project.godot` saneado con boot
+      byte-identico, los **2 puntos ciegos** del gate anti-mojibake cerrados (selftest 28/28, probado
+      en rojo por inyeccion), **BUG-068 resuelto** (fix de 2 pasos, suites 21/0 y 17/0, duplicacion
+      2 -> 1, entrada muerta A3 borrada) y **BUG-069 re-verificado**. (2026-09-25)
+      Al abrir: `--estado` dio **primero=1146**; al reservar: **1147** (1145 y 1146 los consumio otro
+      agente en el intervalo). **Medir el pool antes de reservar**, otra vez.
+      **Cobertura de las premisas (2 de 3 vinieron mal y se corrigieron con medicion):** (a) el fix de
+      `project.godot` se pidio como «convertir» la clave corrupta, pero `config_version=5` **ya existia**
+      en L9: convertirla habria dejado una **clave duplicada** -> se borro la linea corrupta
+      (2 borrados, resto byte-identico); (b) BUG-069 **no** era artefacto del worktree roto: las 2 refs
+      viven en el worktree **principal** (`ui_manager.gd`, agnes-3-flash, 86+/5-, Log 1118) y se
+      materializan **en el merge** -> **no** se asento la reclasificacion pedida, queda `[?]` con dueno;
+      (c) el fix de BUG-068 **si** era seguro: se aplico con suites antes/despues.
+      **Trampa nueva (103-bis):** un hallazgo de herramienta no dice **de que archivo** viene si hay dos
+      copias del mismo archivo en el arbol (worktrees anidados en `.kilo/`); `git status` en el worktree
+      anidado puede decir **limpio** y no decir nada del principal. Localizar el archivo, no suponerlo.
