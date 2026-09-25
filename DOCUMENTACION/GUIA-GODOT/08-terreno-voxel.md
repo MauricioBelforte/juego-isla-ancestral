@@ -178,10 +178,10 @@ func _ready() -> void:
 
 ## 10. Configuración fija de la Isla Raíz (§10.15)
 
-- Radio: 256 unidades
+- Radio: 2560 unidades (mundo 5120×5120). El centro real es (2560,2560) y se lee de `mundo_raiz.gd` (punto único de verdad del layout).
 - Perfil en capas: agua → arena → tierra → montañas
 - Paleta: Maldivas (colores aprobados arriba)
-- Spawn: centro de la isla
+- Spawn: (3860, 3860) = `MundoRaiz.SPAWN_JUGADOR` (llanura de césped en el centro real). NO usar (256,256) — esa esquina queda fuera de la isla 5120².
 - Cámara: posición fija o con seguimiento
 - Posicionamiento: SIEMPRE usar `TerrainLocator` (autoload)
 

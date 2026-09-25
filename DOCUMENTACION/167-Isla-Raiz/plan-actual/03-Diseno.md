@@ -10,14 +10,14 @@ restaurar estos valores:
 
 | Parámetro | Valor | Dónde | Nota |
 |---|---|---|---|
-| `world_seed` | `42` | main_island.gd:87 | Semilla determinista |
-| `island_radius` | `256` | main_island.gd:88 | **El radio define qué se ve** (256 = isla chica visible) |
-| `max_height` | `40` | main_island.gd:89 | Altura máx de la montaña |
-| Centro de la isla | `(256, 256)` | — | `get_height` usa `x - island_radius` |
-| Spawn del jugador | `(256, 16, 256)` | main_island.gd | Centro, sobre la montaña |
-| VoxelViewer | `(256, 30, 256)` | main_island.gd | Sigue al jugador (coordenada inicial) |
+| `world_seed` | `42` | main_island.gd:146 | Semilla determinista |
+| `island_radius` | `2560` | main_island.gd:147 | **El radio define qué se ve** (2560 = mundo 5120², isla grande) |
+| `max_height` | `40` | main_island.gd:148 | Altura máx de la montaña |
+| Centro de la isla | `(2560, 2560)` | — | `get_height` usa `x - island_radius` (punto único de verdad: mundo_raiz.gd CENTRO) |
+| Spawn del jugador | `(3860, 0, 3860)` [MundoRaiz.SPAWN_JUGADOR] | main_island.gd | Centro real de la isla 5120² |
+| VoxelViewer | `(2560, 30, 2560)` | main_island.gd | Sigue al jugador (coordenada inicial) |
 
-### Perfil del terreno (en capas, isla radio 256 → mundo de 512 bloques de diámetro)
+### Perfil del terreno (en capas, isla radio 2560 → mundo de 5120 bloques de diámetro)
 
 El `get_height(x, z)` del `island_generator.gd` produce:
 
@@ -64,7 +64,7 @@ nodo.global_position = Vector3(x, h + 1, z)       # 1 bloque sobre la superficie
 ### Mapa de ubicaciones actuales (Isla Raíz)
 | Objeto | Coordenada (X, Z) | Altura | Nota |
 |---|---|---|---|
-| Jugador (spawn) | (256, 256) | calculada +3 | Centro de la isla |
+| Jugador (spawn) | (3860, 3860) | calculada +3 | Centro real de la isla 5120² |
 | Catalina (NPC) | (268, 268) | snap Y=24 (montaña) | Sobre la superficie real (TerrainLocator) |
 | Ruina Chozavil | (660, 660) | snap | M25 (nota: radio viejo) |
 
@@ -75,9 +75,9 @@ nodo.global_position = Vector3(x, h + 1, z)       # 1 bloque sobre la superficie
 - Colisión con terreno (acorta distancia si hay obstáculo).
 
 ## 4. Procedimiento de recuperación (si se rompe el mundo/cámara/spawn)
-1. **Spawn en el mar / "no me veo"**: verificar `island_radius` vs spawn. Centro = (radio, radio).
-   Con radio 256, centros (256, 256).
-2. **Pasto infinito**: el `island_radius` es demasiado grande (2048). Volver a 256.
+1. **Spawn en el mar / "no me veo"**: verificar `island_radius` vs spawn. Centro = (radio, radio) = (2560, 2560) (punto único de verdad: mundo_raiz.gd CENTRO).
+   Con radio 2560, centro real (2560, 2560).
+2. **Pasto infinito**: el `island_radius` es demasiado grande. Volver a 2560 (mundo 5120²).
 3. **NPC flotante**: el `island_radius` del snap del villager ≠ radio del mundo.
 4. **Cámara no sigue**: re-verificar la búsqueda del target en `_physics_process`.
 
@@ -108,7 +108,7 @@ hasta 6 veces) hasta que el locator esté disponible. Runtime verificado:
 `CatalinaOso snap al terreno en Y=24.0 (height=23)`.
 
 ### 6.4 Valor real del pico central (observación honesta)
-Con la semilla 42, `get_height(256,256) = 14`: la "montaña tipo volcán" real es una
+Con la semilla 42, `get_height(2560,2560) = 14`: la "montaña tipo volcán" real es una
 montaña central suave de ~14 bloques (no 30-40). El techo `max_height=40` es solo el
 tope. El validador usa el umbral >= 12 y el diseño del perfil se mantiene (ladera
 continua hasta la planicie verificada: salto máximo 2 bloques por voxel en el radial).

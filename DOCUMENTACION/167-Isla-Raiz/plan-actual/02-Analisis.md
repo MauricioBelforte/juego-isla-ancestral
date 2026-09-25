@@ -20,7 +20,7 @@ El terreno depende de: semilla, `island_radius`, `max_height`, y la función `ge
 - El perfil del generador fue EL MISMO durante la jornada (montañas + plato + agua).
 - Lo que cambió la vista fue el `island_radius`: con 2048 se ve pasto hasta el horizonte;
   con 256 se ve la montaña, el plato de arena y el agua a la vez.
-- **Conclusión:** el "terreno ideal" es una isla CHICA (radio 256), no un perfil distinto.
+- **Conclusión:** el "terreno ideal" es una isla (radio 2560 / mundo 5120², migracion M167 "Isla 10x"), no un perfil distinto.
 
 ### Posicionamiento de objetos
 - `get_height(x, z)` devuelve la altura real del suelo en (x, z) usando el generador.

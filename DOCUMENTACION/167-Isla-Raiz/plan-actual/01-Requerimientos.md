@@ -18,7 +18,7 @@ objetos sobre el terreno.
    rebuscar en commits.
 
 ## Alcance
-- Configuración documentada del mundo de la Isla Raíz (radio 256, perfil en capas, paleta Maldivas).
+- Configuración documentada del mundo de la Isla Raíz (radio 2560 / mundo 5120², perfil en capas, paleta Maldivas).
 - Método robusto para posicionar cualquier objeto sobre el terreno.
 - Reglas de cámara, spawn y snap de NPC.
 - Manual de recuperación.

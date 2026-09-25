@@ -181,7 +181,10 @@ func _setup_terrain() -> void:
 	# nunca en el agua del océano que está a nivel de mar)
 	var player = get_node_or_null("Player")
 	if player:
-		player.set_deferred("global_position", Vector3(256, 16, 256))
+		# M167 (P-39): el spawn real ya NO está en la esquina vieja (256,16,256)
+		# sino en el centro real de la isla (mundo 5120²) consumido desde el
+		# punto único de verdad mundo_raiz.gd (SPAWN_JUGADOR = 3860,3860).
+		player.set_deferred("global_position", MundoRaiz.SPAWN_JUGADOR)
 	_ajustar_spawn_superficie.call_deferred()
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
@@ -202,7 +205,9 @@ func _crear_oceano() -> void:
 	mat.albedo_color = Color(0.08, 0.35, 0.62)
 	mat.roughness = 0.5
 	oceano.material_override = mat
-	oceano.position = Vector3(256, 1.2, 256)
+	# M167 (P-39): océano centrado en el centro real de la isla (mundo 5120²),
+	# no en la esquina vieja (256,1.2,256). Consume mundo_raiz.gd.
+	oceano.position = MundoRaiz.centro_vec3(1.2)
 	# PlaneMesh en Godot 4 ya es horizontal (normal +Y): NO rotar (la rotación
 	# -90 lo dejaba VERTICAL / pared azul — fix 2026-09-03).
 	add_child(oceano)
@@ -234,7 +239,9 @@ func _crear_base_verde_isla() -> void:
 	mat.roughness = 1.0
 	mat.metallic = 0.0
 	disco.material_override = mat
-	disco.position = Vector3(256, 2.95, 256)
+	# M167 (P-39): disco de arena blanca también centrado en el centro real
+	# (mundo 5120²) consumido desde mundo_raiz.gd, no en la esquina vieja.
+	disco.position = MundoRaiz.centro_vec3(2.95)
 	add_child(disco)
 
 func _add_block(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void:

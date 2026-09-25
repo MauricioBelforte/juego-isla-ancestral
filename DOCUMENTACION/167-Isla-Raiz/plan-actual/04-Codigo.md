@@ -20,12 +20,12 @@
 ```gdscript
 var generator = load("res://scripts/world/world_generator.gd").new()
 generator.world_seed = 42
-generator.island_radius = 256    # <-- RADIO de la isla (clave: define qué se ve)
+generator.island_radius = 2560   # <-- RADIO de la isla (mundo 5120², clave: define qué se ve)
 generator.max_height = 40
 terrain.generator = generator
 
-player.global_position = Vector3(256, 16, 256)          # spawn en el centro
-voxel_viewer_node.global_position = Vector3(256, 30, 256)  # viewer inicial
+player.global_position = MundoRaiz.SPAWN_JUGADOR          # spawn en el centro
+voxel_viewer_node.global_position = Vector3(2560, 30, 2560)  # viewer inicial
 ```
 
 ### isla_generador.gd (perfil del get_height)
@@ -53,7 +53,7 @@ func _physics_process(delta):
 ```gdscript
 func _snap_to_ground():
     var gen = ... .new(null, 42)
-    gen.island_radius = 256   # <-- DEBE ser igual al del mundo
+    gen.island_radius = 2560  # <-- DEBE ser igual al del mundo (mundo 5120²)
     gen.max_height = 40
     var h = gen.get_height(x, z)
     if h > 0: global_position.y = h + 1
@@ -72,11 +72,11 @@ nodo.global_position = Vector3(obj_x, h + 1, obj_z)
 **Estado:** Núcleo documentado (79/104) — fuente de verdad del terreno de la Isla Raíz.
 
 ### Lo que hice
-- Documenté la configuración fija del terreno (radio 256, perfil en capas, paleta)
+- Documenté la configuración fija del terreno (radio 2560 / mundo 5120², perfil en capas, paleta)
 - Establecí el posicionamiento de objetos con get_height como método robusto
 - Creé el procedimiento de recovery (cámara, spawn, NPC, pasto infinito)
-- Fijé el spawn en el centro (256,256) y Catalina junto al spawn
-- Restauré el terreno ideal (isla chica 256) que el usuario aprobó
+- Fijé el spawn en el centro real (3860,3860) [MundoRaiz.SPAWN_JUGADOR] y Catalina junto al spawn
+- Restauré el terreno ideal (isla mundo 5120² / radio 2560 — migración M167 "Isla 10×" que el usuario aprobó)
 
 ### Lo que dejé pendiente (honestidad)
 - NPC Catalina: a veces flota — el snap crea su propio IslandGenerator y su radio
@@ -105,7 +105,7 @@ Regla: NUNCA crear `IslandGenerator` propio con radio hardcodeado (causa de flot
 
 | Archivo | Función | Ejecución |
 |---|---|---|
-| `game/isla-ancestral/scripts/terreno/validador_isla_raiz.gd` | Validador del terreno (28 checks): config real de main_island.gd (seed/radio/altura/spawn/TerrainLocator), perfil get_height radial (centro/plato/agua clara/profunda), determinismo (semilla 42), sin muros verticales (salto ≤6), batimetría (SHALLOW_WATER 30 / WATER 17) | `godot --headless --path game/isla-ancestral --script res://scripts/terreno/validador_isla_raiz.gd` → **28/28 OK, exit 0** |
+| `game/isla-ancestral/scripts/terreno/validador_isla_raiz.gd` | Validador del terreno (30 checks): config real de main_island.gd (seed/radio/altura/spawn/TerrainLocator), perfil get_height radial (centro/plato/agua clara/profunda), determinismo (semilla 42), sin muros verticales (salto ≤6), batimetría (SHALLOW_WATER 30 / WATER 17) | `godot --headless --path game/isla-ancestral --script res://scripts/terreno/validador_isla_raiz.gd` → **30/30 OK, exit 0** |
 | `game/isla-ancestral/scripts/terreno/captura_playa.gd` + `scenes/captura_playa.tscn` | Escena de inspección de la costa (misma librería Maldivas, viewer en la playa mirando al mar) para QA visual | `godot_run_project` con escena `scenes/captura_playa.tscn` |
 
 ### Cambios en código (fixes del dominio posicionamiento/terreno)
@@ -139,14 +139,37 @@ Regla: NUNCA crear `IslandGenerator` propio con radio hardcodeado (causa de flot
 **Veredicto:** ✅ Verificado por hy3 (WorkBuddy) 2026-09-19
 
 ### Evidencia
-- Log 379: `validador_isla_raiz.gd` (28 checks) -> **28/28 OK, exit 0** (2 corridas, 0 fallos). Binario 4.7.2.
+- Log 379: `validador_isla_raiz.gd` (30 checks) -> **30/30 OK, exit 0** (2 corridas, 0 fallos). Binario 4.7.2.
 - Log 751: boot completo sin SCRIPT ERROR (2 warnings del parser corregidos).
 - 05-Checklist: 114 [x], 0 [ ], 0 [?]. Sin banner REVERTIDO.
-- Codigo vivo: `scripts/terreno/validador_isla_raiz.gd` (28 checks).
+- Codigo vivo: `scripts/terreno/validador_isla_raiz.gd` (30 checks).
 
 ### Hallazgos (no bloqueantes)
 - `04-Codigo.md` L129 `**Estado:**` STALE ('Iter 1 cierre completado - 102/104 [x] + 2 [?]') y L17 tabla '83/104' - ambos desactualizados vs cuerpo 114/0/0. Sugerido actualizar a 'Cerrada (QA cruzado §21.8, hy3, 2026-09-19)'.
 - Misatribucion menor: L129 firma 'Hy3/Kilo' historica; verificacion §21.8 actual es hy3 != autor original.
 
 ### Conclusion
-Respaldado por test real (28/28 OK, exit 0) y checklist limpio. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Cumple §21.8.
+Respaldado por test real (30/30 OK, exit 0) y checklist limpio. Sello §21.8 registrado en CHECKLIST-QA-SEALS.md (ausente previamente). Cumple §21.8.
+
+## Notas del Agente - P-39 (hy3 / WorkBuddy, 2026-09-25) — parametrización del validador M167
+
+**Contexto:** la migración M167 "Isla 10×" (commit `c107419`, 2026-09-07) pasó el generador de
+`island_radius = 256` → `2560` (mundo 5120², centro `(2560,2560)`) y creó el autoload
+`scripts/world/mundo_raiz.gd` como punto único de verdad del layout (`CENTRO`, `SPAWN_JUGADOR`,
+`SPAWN_CONTENIDO`). La migración quedó a medio hacer: `main_island.gd` L184 (spawn) y L205/L237
+(océano/disco) seguían en la esquina vieja `(256,…)`, y `validador_isla_raiz.gd` exigía `256`
+literal → **gate rojo en falso** (el código ya era correcto en 2560).
+
+**Cambios (P-39):**
+- `validador_isla_raiz.gd` reescrito paramétrico: lee `RADIO_EXPECTADO = MundoRaiz.CENTRO.x`
+  (2560) en vez de hardcodear 256; offsets de perfil dinámico escalados por ratio (invariantes al
+  radio porque `get_height` normaliza por `island_radius`); checks anti-regresión de spawn/océano.
+- `main_island.gd`: L184 spawn → `MundoRaiz.SPAWN_JUGADOR` (3860,3860); L205 océano y L237 disco
+  de arena → `MundoRaiz.centro_vec3(…)`. (Eran los 3 reductos del centro viejo; el coordinador
+  nombró 2, el disco L237 era un tercero que también se corrigió.)
+- Runtime headless (`main_island.tscn --quit-after`): `[M09] Spawn sobre superficie calculada
+  Y=8 en (3860, 3860)` → el jugador termina en (3860,3860) con terreno bajo él (get_height ≠ 0).
+  Antes spawn en (256,16,256) = esquina del mundo, fuera de la isla (game-breaker).
+
+**Verificación:** selftest verde (30/30, exit 0, 0 SCRIPT ERROR) + prueba en rojo (reintroduje
+`Vector3(256,16,256)` y el validador reportó 2 FALLO + exit 1, confirmando el gate vivo).
