@@ -1106,9 +1106,15 @@ El **Módulo 154 (Visión del Agente)** es un **prerrequisito obligatorio** para
   a `DOCUMENTACION/<ID>-Isla-<Nombre>`** y completar sus placeholders.
 - **Regla de isolación:** cada isla es un módulo INDEPENDIENTE. Un agente que toque el terreno
   de una isla NO debe modificar el de otra.
-- **Reglas de oro heredadas:** el centro de la isla es `(island_radius, island_radius)`;
-  posicionar con `get_height(x,z) + 1`; radio ~256 para isla visible; el snap del NPC debe
-  usar el MISMO radio que el mundo (si no, flota).
+- **Reglas de oro heredadas (CORREGIDAS 2026-09-25, P-39):** la Isla Raíz es **5120x5120 con
+  centro (2560,2560)** desde el rework "Isla 10x" (commit `c107419`, M09/M167, pedido del
+  usuario). **NO 256** — el valor 256 quedó obsoleto en toda la documentación y fue causa de
+  gates rojos en falso (`validador_isla_raiz.gd`). La regla correcta: **el punto único de
+  verdad es el autoload `scripts/world/mundo_raiz.gd`** (`CENTRO`, `RADIO_ISLA`,
+  `SPAWN_JUGADOR`) — cambiar UNA constante mueve la isla entera. Posicionar con
+  `get_height(x,z) + 1`; el snap del NPC debe usar el MISMO radio que el mundo (si no, flota).
+  **Migración M167 en curso:** `main_island.gd` L147/L162/L296 ya están en 2560, pero
+  **L184 (spawn player) y L205 (océano) siguen en (256,...) — centro viejo.** Ver P-39.
 - **Posicionamiento (OBLIGATORIO):** usar el autoload `TerrainLocator` (`get_height` +
   `posicionar_sobre_terreno`). **NUNCA** crear un `IslandGenerator` propio con radio
   hardcodeado (causa de NPCs flotando). Ver guía 07 §10.16.
