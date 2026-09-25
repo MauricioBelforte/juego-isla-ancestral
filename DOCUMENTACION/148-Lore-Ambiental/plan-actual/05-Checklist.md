@@ -235,3 +235,9 @@ Evidencia ejecutada en headless (no son ítems del checklist, son pruebas):
      (`ids_duplicados()`), que es lo que el LoreGate de CI verifica.
 - Brechas de contenido **no** cerradas (requieren trabajo narrativo, no de datos):
   el catálogo tiene 4 islas (el diseño pide 6) y 16 pistas (el diseño pide 30).
+
+**Totales:** 117 ítems · Completados: 23 · Pendientes: 92 · No resueltos: 2.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 92 [ ] /
+> 2 [?]. Las marcas no se tocaron.

@@ -200,3 +200,8 @@
 - [ ] 01-Requerimientos creado y firmado [S]
 - [ ] 02-Analisis, 03-Diseno y 04-Codigo creados y firmados [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
+**Totales:** 153 ítems · Completados: 67 · Pendientes: 86 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
+> Las marcas no se tocaron.

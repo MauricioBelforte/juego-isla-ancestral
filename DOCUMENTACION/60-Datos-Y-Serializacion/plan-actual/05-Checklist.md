@@ -253,3 +253,9 @@
 - [x] Testings: test de guardado con log registrado (M103) [S]
 - [x] Testings: test de config con claves faltantes y nuevas desde viejas versiones [M]
 - [x] Testings: test de hilo: guardado asincrónico sin bloquear el frame [C]
+
+**Totales:** 196 ítems · Completados: 189 · Pendientes: 3 · No resueltos: 4.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 189 [x] / 3 [ ] /
+> 4 [?]. Las marcas no se tocaron.

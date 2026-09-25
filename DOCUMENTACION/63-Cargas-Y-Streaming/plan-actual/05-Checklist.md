@@ -154,7 +154,17 @@
 - [ ] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 
-**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 101 ítems · Completados: 16 · Pendientes: 85 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1C):** la línea decía *"101 ítems · Completados: 101 · Pendientes: 0 ·
+> No resueltos: 0"* — un **claim de cierre total que es falso**. El conteo real de
+> marcas es 16 [x] / 85 [ ] / 0 [?] = 101: hay 85 ítems sin marcar, incluidos los
+> propios "01-Requerimientos creado y firmado" (L151-155). Las marcas no se
+> tocaron; solo se reescribió esta línea. Ver `BUG-066` en `11-BUGS.md`.
+> La nota de abajo ("diseño, pesos, LRU y regiones cierran aquí") refleja la
+> intención del autor, pero la línea de Totales no puede declarar 101 completados
+> sobre 85 ítems `[ ]`.
 **Nota:** secciones B-K se verifican en runtime por el agente delegado; diseño, pesos, LRU y regiones cierran aquí.
 
 ## Notas del Agente (iter. 2 pausa de cargas — Log 603, glm-5.3-flash/Kilo Code)

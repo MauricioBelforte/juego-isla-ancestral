@@ -209,3 +209,26 @@
 - [x] `data/motivacion/objetivos.json` v2 — los 7 objetivos completados (tipo, cadencia diario_suave, target_min 5-20 min, recompensas, expiracion=false, descripciones cozy)
 - [x] Verificada la data (7/7 campos completos) y re-ejecutado el auditor anti-FOMO: 6/6 OK, 0 violaciones
 - [x] Retención sin presión confirmada en la data (todos diario_suave + sin expiración)
+
+## Corrección de esquema (2026-09-19 — Atria-Dawn-Preview / Kilo Code, Log 1083)
+
+- [x] BUG-061: el JSON v2 de arriba usaba un esquema divergente del que lee el código
+  (`cadencia`/`target_min`/`recompensa`-string) — el JSON "v2" rompía el contrato del manager
+  (`plazo`/`cantidad_requerida`/`recompensa_id`+`recompensa_cantidad`): `objetivos_por_plazo()`
+  devolvía [] y el umbral de progreso caía a 1. Suite 38 checks / 5 fallos.
+- [x] Se reescribió `objetivos.json` al esquema canónico con la distribución 3 diarios
+  (madera, vecinos, regalo) + 2 semanales (pescar, minerales) + 2 mensuales (construir,
+  explorar) de `04-Codigo.md` §3; sin tocar código ni test.
+- [x] Re-corrido con binario real: **EXIT 0 — 38 checks, 0 fallos** (antes 38/5). Ver
+  `11-BUGS.md` §7 BUG-061.
+
+**Totales:** 138 ítems · Completados: 138 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:
+> **138 [x] / 0 [ ] / 0 [?]** = 138. Las marcas no se tocaron.
+>
+> **Nota:** CHECKLIST-GLOBAL reportaba ✅ **135/135** — desfasado en 3 ítems
+> respecto a este conteo. Los 3 ítems extra son de la sección "Corrección de
+> esquema" agregada al resolver BUG-061 (Log 1083). El global se actualizó a
+> 138/138 en esta misma auditoría.

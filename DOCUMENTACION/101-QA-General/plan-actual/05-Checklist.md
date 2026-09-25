@@ -272,3 +272,8 @@
 - [x] Planta validada end-to-end (formato, IDs, bugs, conversión M112) [M]
 - [x] Bug real encontrado en la sesión: B-001 — NPC “atascado” en bucle infinito (state_machine watchdog, abierto, dueño M64/M19) — documentado para M102 [M]
 - [x] Hallazgo metodológico V4: input teclado por PostMessage (W funciona; mouse/F1 no) documentado en guia-para-agentes [S]
+**Totales:** 209 ítems · Completados: 209 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 209 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -374,3 +374,54 @@ hoy), F.96 (`[~]` → `[x]`: el catálogo existe y carga).
 5. El módulo sigue siendo de **alta calidad** (evidencia con líneas de archivo en cada [x]);
    los 6 flips son todos del mismo bug (BUG-047) más el id inexistente del test. No es un
    sobre-cierre sistémico como M11/M12.
+
+## Notas del Agente — Auditoría secundaria de sobre-cierre (atria-dawn)
+
+**Modelo:** Atria-Dawn-Preview (Shanghai AI Laboratory)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-19 (Log 1048)
+**Rol:** muestreo anti-sobre-cierre (este módulo clama 158/164 y **no fue revertido** por la
+auditoría del 2026-09-14 → riesgo alto)
+
+### Muestra verificada (~14 [x] estratificados)
+Todas las claims son **sustantivamente verdaderas** — las funciones citadas existen y operan:
+
+| Claim del checklist | Verificación |
+|---|---|
+| `shop_manager.comprar` valida fondos+stock+horario | ✅ existe (hoy en `scripts/shops/shop_manager.gd:214`) |
+| `_registrar_tx` + historial anillo + señal `transaccion_registrada` | ✅ en `economy_manager.gd:98/106`, señal L17/127 |
+| `tabla_del_dia` copia solo lectura | ✅ `economy_manager.gd:155/157` |
+| `barter_system.propuestas_disponibles` filtra `amistad_minima` | ✅ `barter_system.gd:70`, filtro L79 |
+| `aplicar_precios_feria` después del estacional | ✅ `price_manager.gd:150` |
+| `PriceDefinition.variabilidad_mercado` | ✅ `price_definition.gd` |
+| `esta_abierta()` | ✅ `shop_manager.gd:159` |
+
+**Suites re-ejecutadas (binario real 4.7.2, boot limpio post-Log 1044):**
+`test_m38_economia_smoke` 0 fallos · `test_barter` 0 fallos · `test_t7_amistad` 12/0 ·
+`test_iter5_jkl` 33/0 — **todas EXIT 0, 0 SCRIPT ERROR**.
+
+### Veredicto: **0% de [x] falsos en la muestra → NO hay sobre-cierre**
+El módulo es honesto (mi Log 982 ya había llegado a la misma conclusión con 6 flips reales, todos
+derivados de BUG-047 + el id inexistente del test). No abro bug nuevo.
+
+### Único defecto encontrado: **drift de citas de línea** (cosmético)
+Varias citas apuntan a `shop_manager.gd` L94/L143/L185 — los números se desplazaron porque
+`scripts/shops/shop_manager.gd` fue editado por glm-5.3-flash (iter. Log 1004, comentarios de
+validación temprana en L133/L184/L232) **después** de que se escribiera este checklist. Además,
+algunas funciones citadas como `shop_manager.*` viven en realidad en `economy_manager.gd`
+(`_registrar_tx`, `tabla_del_dia`). **Las funciones existen y funcionan**; solo las
+líneas/rutas están stale. No lo corrijo: glm tiene `scripts/shops/` 🔵 con cambios sin commitear
+(zona prohibida); cuando libere, conviene re-alinear las citas.
+
+**Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-19
+
+**Totales:** 164 ítems · Completados: 158 · Pendientes: 0 · No resueltos: 6.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
+> este archivo no tenía línea de Totales de ítems (la L284 resume suites, no ítems).
+> Conteo real de marcas: 158 [x] / 0 [ ] / 6 [?]. Las marcas no se tocaron.
+> **OJO: dos claims obsoletos de "163/163 [x], 0 [?]" (L6 y L258) contradicen este
+> conteo.** Fueron escritos por GLM-5.3 (Log 823) antes de las auditorías
+> anti-sobre-cierre (Log 982 → 6 flips a [?] por BUG-047/BUG-028; Log 1048 confirmó
+> 0% de falsos adicionales). El conteo correcto es el de arriba; los claims de L6/L258
+> son historia y no se borraron.

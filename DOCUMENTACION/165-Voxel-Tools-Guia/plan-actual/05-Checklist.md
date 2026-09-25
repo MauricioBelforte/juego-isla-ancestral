@@ -74,3 +74,8 @@
 - [x] Implementar sistema de chunks dinámicos [M] — documentado en 03-Diseno.md (VoxelTerrain ya maneja chunks automáticamente)
 - [x] Agregar LOD para optimización [M] — documentado en 03-Diseno.md (guidelines de rendimiento)
 - [x] Probar con terreno destructible [V4] — verificado: jugador equipado con Pico de Cobre (150/150), hotbar con 5 herramientas, sistema de destrucción preparado (E para romper). Recipe documentada en 03-Diseno.md (VoxelTool.do_sphere)
+**Totales:** 48 ítems · Completados: 48 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 48 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

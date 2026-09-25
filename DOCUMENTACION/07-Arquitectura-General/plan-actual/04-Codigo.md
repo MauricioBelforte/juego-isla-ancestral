@@ -18,9 +18,20 @@ Módulo de **diseño arquitectónico** (complejidad 5). Hoy entrega el contrato;
 | `scripts/core/game_settings.gd` | Singleton de configuración del juego (M46). Guarda/carga ajustes en `user://settings.cfg` (sensibilidad mouse, invertir Y, volumen, fullscreen, resolución). Señal `settings_changed` | ✅ Implementado |
 | `scripts/core/terrain_locator.gd` | Servicio CENTRAL de posicionamiento sobre terreno (M167/M168). Autoload que busca VoxelTerrain activo con reintento. Expone `get_height(x,z)`, `posicionar_sobre_terreno(nodo,x,z)`, `esta_sobre_superficie(nodo)`. Anti-flotamiento: TODOS los objetos usan este servicio | ✅ Implementado |
 | `scripts/core/registro.gd` | Clase estática de logging y validación (M05). `Registro.info()`, `.aviso()`, `.error()`, `.verificar()`, `.verificar_no_nulo()`. Contadores para tests | ✅ Implementado |
-| `scripts/core/thread_pool.gd` | Cola de trabajos pesados | ⬜ Pendiente |
-| `scripts/world/voxel_world.gd` | World + chunks | ⬜ Pendiente (M08) |
-| `scripts/data/game_state.gd` | Estado serializable (M59) | ⬜ Pendiente (M59) |
+
+### Scripts previstos (NO implementados)
+
+> ⚠️ Los siguientes archivos **no existen en el repositorio ni existieron
+> nunca en el historial de git** (verificado 2026-09-25 por
+> atria-dawn-preview con `git log --all -- '*nombre*'`). Son **plan
+> aspiracional**, no código real. Se listan aparte para que nadie los cite
+> como implementados. Si se implementan, mover a la tabla de arriba.
+
+| Archivo | Rol | Dueño |
+|---|---|---|
+| `scripts/core/thread_pool.gd` | Cola de trabajos pesados | Hito M1 (rendimiento) |
+| `scripts/world/voxel_world.gd` | World + chunks | M08 (terreno voxel) |
+| `scripts/data/game_state.gd` | Estado serializable | M59 (guardado) |
 
 ## 3. Decisiones que otros módulos consumen
 

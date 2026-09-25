@@ -278,3 +278,8 @@
 - El controller ya expone rumbo (rad) y velocidad (m/s con signo) — el HUD M53 puede leerlos directo vía Vehiculos.controller.
 - Para aguas poco profundas: consultar M51/mesh de agua y emitir Vehiculos.avisar("...") (la señal ya existe).
 - Al integrar M57: el enter/exit actual es programático; conectar a InteractionManager (M70) con área de proximidad.
+**Totales:** 131 ítems · Completados: 19 · Pendientes: 112 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 19 [x] / 112 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -251,3 +251,9 @@
 - [x] `data/control_final/estado_release.json` — estado actual pre-release (4/7 gates cumplidos)
 - [x] Gate ejecutado: **BLOQUEADO** con 3 gates pendientes (zero_criticos_abiertos, ci_gates_verdes, textos_localizados) — veredicto realista del estado del proyecto
 - [?] Cablear el gate al CI (workflow de release que ejecute el gate al tag) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
+
+**Totales:** 151 ítems · Completados: 10 · Pendientes: 139 · No resueltos: 2.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 139 [ ] /
+> 2 [?]. Las marcas no se tocaron.

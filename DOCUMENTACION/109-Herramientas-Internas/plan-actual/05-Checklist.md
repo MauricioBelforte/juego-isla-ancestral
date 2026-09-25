@@ -223,3 +223,9 @@
 - [x] **Auditoría masiva del dataset real**: `scripts/editor/tools/dialogos_auditor.gd` recorre los 268 grafos (data/dialogues/ + contextual) → **268 OK, 0 con problemas** (reporte: tools/reportes/dialogos_audit.txt, exit 0) — ningún problema de referencia/huérfano en el contenido de los agentes
 - [x] Auditor no-recursivo (get_files_at) — los builds headless con -s no sostienen el listado recursivo por DirAccess en este entorno (documentado; el npc_visual_check usa load() que sí recorre)
 - [?] Panel del editor de diálogos en el dock (vista de grafo + edición de texto de nodo) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
+
+**Totales:** 138 ítems · Completados: 27 · Pendientes: 108 · No resueltos: 3.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 27 [x] / 108 [ ] /
+> 3 [?]. Las marcas no se tocaron.

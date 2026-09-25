@@ -239,3 +239,8 @@
 - [x] Definir criterio de éxito del piloto: 3 sesiones completas, 80% de encuestas, informe en una semana [S]
 - [x] Definir que los errores del piloto se corrigen en las plantillas antes de la ronda oficial [S]
 - [x] Definir medición del tiempo real de análisis por sesión para ajustar el presupuesto de horas [S]
+**Totales:** 186 ítems · Completados: 186 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

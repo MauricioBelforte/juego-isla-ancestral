@@ -276,3 +276,8 @@
 - [x] El pelo interfería con la cabeza (solapes pelo_top/cabeza z 1.7-1.8 + laterales 1×6×3 envolviendo media cara) — rediseñado: gorro fino 7×7×1 POR ENCIMA (z 1.8-1.9, sin solapar), nuca 7×1×2 atrás, patillas 1×1×2 solo mitad trasera [S] — Log 736
 - [x] GLB regenerado + reimport con pipeline de cache (.scn + .import borrados → --import) [S] — Log 736
 - [x] Verificación: render CYCLES + captura en juego tercera persona — cara limpia [S] — capturas/45/
+**Totales:** 171 ítems · Completados: 22 · Pendientes: 149 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 22 [x] / 149 [ ] / 0 [?].
+> Las marcas no se tocaron.

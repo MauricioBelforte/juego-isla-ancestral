@@ -195,3 +195,8 @@
 - Priorizar interacción real chamán-jugador antes de ampliar secciones C/D.
 - Usar V4 (godot-mcp) para capturas de prueba de la UI de encantamientos.
 - Consultar DOCUMENTACION/GUIA-GODOT/INDICE.md para pitfalls conocidos de Godot 4.x.
+**Totales:** 124 ítems · Completados: 23 · Pendientes: 101 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].
+> Las marcas no se tocaron.

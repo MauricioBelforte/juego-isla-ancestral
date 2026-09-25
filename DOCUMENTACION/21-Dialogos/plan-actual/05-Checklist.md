@@ -201,3 +201,12 @@
 - [ ] Test de condiciones de mundo y efectos con WorldStateService (test_condiciones_mundo.gd — 0 fallos) [S]
 - [ ] Test headless de consumo de gift_given M20 por clase exacta (test_reaccion_m21_dialogo.gd — 0 fallos, Log 297) [S]
 - [ ] Test headless de escenas breves de evento (L82) + consumo M53: ramas por clase, auto-disparo desde EventBus y DialogueUI badge/expresion (test_eventos_dialogo_m21.gd — 0 fallos, Log 298) [S]
+
+**Totales:** 143 ítems · Completados: 13 · Pendientes: 123 · No resueltos: 7.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 13 [x] / 123 [ ] /
+> 7 [?]. Las marcas no se tocaron. La nota de Reserva actual (línea 14) menciona
+> "78/139 + 5 [?]" de la iteración 8 de Hy3; el módulo fue revertido por auditoría
+> 2026-09-14 (ver nota al inicio del archivo) y desde entonces los totales no se
+> recalculaban.

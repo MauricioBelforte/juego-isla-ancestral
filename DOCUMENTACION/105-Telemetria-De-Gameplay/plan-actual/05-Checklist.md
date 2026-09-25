@@ -272,3 +272,9 @@
 
 > El conteo lo define `scripts/verificar_checklist.py` (regex `^\s*- \[x\]`). El
 > "138" anterior era una cifra escrita a mano, no medida.
+
+**Totales:** 165 ítems · Completados: 120 · Pendientes: 0 · No resueltos: 45.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 120 [x] / 0 [ ] /
+> 45 [?]. Las marcas no se tocaron.

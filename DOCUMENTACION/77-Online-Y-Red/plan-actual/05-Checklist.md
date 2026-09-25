@@ -210,3 +210,8 @@
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+**Totales:** 130 ítems · Completados: 4 · Pendientes: 126 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 126 [ ] / 0 [?].
+> Las marcas no se tocaron.

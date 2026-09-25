@@ -303,3 +303,8 @@
 > **Estado:** M70 permanece 🟡 (QA completado, pendiente cierre de dueño). NO se marca ✅ porque los prompts visuales (M53/M154) y la integración con 10 consumidores siguen fuera de iter 1.
 > 
 > **Estado del módulo:** 🟡 Liberado con honestidad — listo para QA cruzado por Hy3 (WorkBuddy) o cualquier agente distinto. NO listo para ✅ hasta que M53 integre el prompt visual y se cierre M154.
+**Totales:** 198 ítems · Completados: 77 · Pendientes: 121 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 77 [x] / 121 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -135,11 +135,11 @@
 
 ## O. Simulación Económica
 
-- [x] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: NO implementado; es la brecha principal del modulo. Design documentado en 03-Diseno.md §2; implementacion requerira iteracion futura M93 + M105 datos reales.
-- [x] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado.
+- [ ] Definir `simulate_economy.gd` con escenarios (rutinario, diligente, minimalista) → KnownIssue no bloqueante DoD: NO implementado; es la brecha principal del modulo. Design documentado en 03-Diseno.md §2; implementacion requerira iteracion futura M93 + M105 datos reales.
+- [ ] Definir simulación de 60/180/365 días [C] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulate_economy.gd. Design documentado.
 - [x] Definir salida: AO total, recursos por pipeline, desvío vs. diseño [M] — KnownIssue no bloqueante DoD: ídem O.1; requiere simulacion. Design documentado.
 - [x] Definir exit code != 0 si se detecta exploit o desvío > umbral [M] — patrón ya establecido: validate_balance.gd usa exit(1) con fallos (ejecutable en CI); simulate_economy heredaría el patrón.
-- [x] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_economy.gd exista. Deferred.
+- [ ] Definir que la simulación corra en CI (M118) [M] — KnownIssue no bloqueante DoD: M118 (CI/CD) tiene cicd_manager; agregar el job cuando simulate_economy.gd exista. Deferred.
 
 ## P. Validación Automática
 
@@ -232,3 +232,8 @@
 - [x] Definir coordinación con M153 (Sellos) para bloques de progreso [M] — CERRADO (parcial por diseño): seals.json define los 3 bloques (esfuerzo 2/4/6 h, grind 0) coherentes con progression.json (sello_1 8 h/12 sesiones); M153 vision_contract es la gobernanza (O1-O19, guardián validate_vision). Los sellos de gameplay real los implementa M153 en fase jugable — el CONTRATO de balance está cerrado aquí.
 - [x] Definir coordinación con M94 (retención) para ausencia benigna [M] — CERRADO iter. 4: las 3 reglas de M94 viven en tablas M93 (sin decaimiento friendship, cultivos_sin_muerte, bonus_retorno +5 AO/día tope 150) + M94 iter 1 (minimax-m3) implementó el sistema anti-FOMO data-driven que las consume. Contrato cerrado.
 - [x] Definir revisión periódica del balance (cada 3 meses post-lanzamiento) [M]
+**Totales:** 134 ítems · Completados: 131 · Pendientes: 3 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 134 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

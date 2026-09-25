@@ -138,7 +138,12 @@
 
 ---
 
-**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** la línea decía *"102 ítems · Completados: 102"*. Conteo real:
+> 105 [x] / 0 [ ] / 0 [?] = 105. Sub-reportaba 3 ítems (línea obsoleta tras agregar
+> ítems ya marcados). Las marcas no se tocaron; solo se reescribió esta línea.
 **Nota:** los detalles de implementación (bootstrap real, verificación de capas, perf de eventos) se ejecutan en el hito M1 y quedan registrados en 04-Codigo.md §4 como pendientes con dueño.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)

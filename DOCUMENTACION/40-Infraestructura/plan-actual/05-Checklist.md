@@ -295,3 +295,9 @@ divergencias honestas: D8 BOOT (mi GFM permite BOOT->CARGANDO/MUNDO para prototi
 D8 CARGANDO (permite volver a MENU) y RF1 (orden de autoloads NO reordenado — histórico).
 Pendiente mayormente: M89 (menú), M63 (carga con progreso), EventBus/Logger/GameState reales
 (salvados por sistemas existentes), pantallas boot/error.tscn.
+
+**Totales:** 211 ítems · Completados: 95 · Pendientes: 114 · No resueltos: 2.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /
+> 2 [?]. Las marcas no se tocaron.

@@ -173,7 +173,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — `Logs/902-M26-Templo-Subterraneo-Iter2_2026-09-14.md`
 - [x] Actualizar fila 26 en CHECKLIST-GLOBAL al implementar [S]
 
-**Total:** `[x]` 50 · `[?]` 8 · `[ ]` 57 · total 115 (incluye el ítem de dependencia M154).
+**Totales:** 129 ítems · Completados: 62 · Pendientes: 57 · No resueltos: 10 (incluye el ítem de dependencia M154).
 El módulo sigue 🟡: la lógica verificable está implementada y probada, pero la
 geometría (M08), los assets (M45/M47/M52/M63), el audio (M41/M42/M43) y las
 UI de M58 quedan pendientes de sus módulos.

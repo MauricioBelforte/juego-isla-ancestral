@@ -231,3 +231,9 @@
 >
 > **Estado actual (iter 1, minimax-m3-free / Kilo Code):** opción B implementada y validada. Opción A queda
 > ABIERTA como tarea de M08 (subsistema de protección), fuera del alcance de M35.
+
+**Totales:** 142 ítems · Completados: 60 · Pendientes: 69 · No resueltos: 13.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 60 [x] / 69 [ ] /
+> 13 [?]. Las marcas no se tocaron.

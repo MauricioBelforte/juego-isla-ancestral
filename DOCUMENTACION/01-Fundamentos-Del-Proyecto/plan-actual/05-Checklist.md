@@ -237,3 +237,8 @@ Esta checklist contiene los **152 módulos** extraídos del `Plan-inicial-minimo
 | Fases | 17 |
 
 > **Nota de desglose:** cada uno de los 152 ítems se convertirá en un componente `DOCUMENTACION/{NN}-Modulo/` con su `plan-inicial/` (5+2 archivos) y `plan-actual/`, generando así **152 checklists de ≥100 ítems** (15.200+ puntos de control totales). El orden de creación de los componentes sigue la numeración de fases, priorizando los módulos de la Fase 1 y los de mayor riesgo técnico (M07, M37, M58, M60, M63).
+**Totales:** 152 ítems · Completados: 0 · Pendientes: 152 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 152 [ ] / 0 [?].
+> Las marcas no se tocaron.

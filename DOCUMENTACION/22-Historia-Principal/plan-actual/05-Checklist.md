@@ -163,3 +163,8 @@
 **Hallazgo honesto:** el `final_secreto` es IN-ALCANZABLE sin `pistas_secreto_completas` (confirmado por `test_historia.gd:83`). No es bug: es por diseño (M25/M147 alimentan esa bandera). El validador ahora lo hace visible como ADVERTENCIA en lugar de silencio.
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs preservadas + JSON válido.
+**Totales:** 100 ítems · Completados: 51 · Pendientes: 49 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 51 [x] / 49 [ ] / 0 [?].
+> Las marcas no se tocaron.

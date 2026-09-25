@@ -250,3 +250,8 @@
 - M53: usar get_resumen_para_ui() para el cartel de entrada y get_donatable_items(sala) para el panel de donación; escuchar EventBus.ui.notify {tipo:"museo"} y señales donation_accepted/rejected/reward_granted.
 - Al agregar exposiciones nuevas: seguir el vocabulario de validar_catalogo() (id único, items no vacíos, recompensa con item_id) — la validación se ejecuta en cada boot.
 - Para "obras de arte ancestral" (RF5): definir los ids con M25/M163 y añadir la sala al JSON — el resto del flujo ya funciona.
+**Totales:** 148 ítems · Completados: 36 · Pendientes: 112 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 36 [x] / 112 [ ] / 0 [?].
+> Las marcas no se tocaron.

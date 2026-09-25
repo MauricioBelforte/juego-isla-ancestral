@@ -143,3 +143,14 @@ Agrega aquí los ítems específicos de TU isla hasta superar 100. Usa el checkl
 - [ ] Verificar que el jugador aparece sobre terreno [S]
 - [ ] Verificar que la cámara funciona [S]
 - [ ] Documentar lecciones aprendidas en plan-actual [M]
+
+**Totales:** 104 ítems · Completados: 0 · Pendientes: 104 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:
+> 0 [x] / 104 [ ] / 0 [?]. Las marcas no se tocaron.
+>
+> **El 0/104 es CORRECTO Y DELIBERADO:** este módulo es una **maqueta** (plantilla
+> para crear islas nuevas, a copiar a `<ID>-Isla-<Nombre>` y completar). Su ✅ en
+> CHECKLIST-GLOBAL significa "la plantilla existe y es usable", no "sus 104 ítems
+> están hechos". No es drift ni sobre-cierre.

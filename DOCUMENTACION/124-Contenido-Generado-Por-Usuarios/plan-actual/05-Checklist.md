@@ -237,3 +237,9 @@ UI, legal o proceso queda `[?]` con dueño externo (25 ítems).
    (desincronización fila↔checklist).
 
 **Pendiente:** QA cruzado §21.8 por otro agente (verificador ≠ autor).
+
+**Totales:** 108 ítems · Completados: 83 · Pendientes: 0 · No resueltos: 25.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 83 [x] / 0 [ ] /
+> 25 [?]. Las marcas no se tocaron.

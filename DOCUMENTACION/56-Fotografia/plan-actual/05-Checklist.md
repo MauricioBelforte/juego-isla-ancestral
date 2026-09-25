@@ -239,3 +239,9 @@
 - Presets visuales aplicados al render (DOF/EV/contraste/viñeta) — V2 M49.
 - Fijar hora/clima para la foto — M31/M32.
 - UI del modo foto y captura a archivo — M53/M56 visual.
+
+**Totales:** 137 ítems · Completados: 21 · Pendientes: 114 · No resueltos: 2.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 21 [x] / 114 [ ] /
+> 2 [?]. Las marcas no se tocaron.

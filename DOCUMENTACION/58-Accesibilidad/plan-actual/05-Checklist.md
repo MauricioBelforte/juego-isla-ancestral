@@ -256,3 +256,9 @@
 - Conectar subtitulos_changed al DialogLayer (M53) para que muestre/oculte subtítulos según el perfil.
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
+
+**Totales:** 183 ítems · Completados: 131 · Pendientes: 50 · No resueltos: 2.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 50 [ ] /
+> 2 [?]. Las marcas no se tocaron.

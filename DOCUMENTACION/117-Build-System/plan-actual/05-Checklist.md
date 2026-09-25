@@ -248,3 +248,9 @@ El conteo automático del archivo debe coincidir con las secciones 1 a 17: **92 
 **Nota de honestidad (§21.6):** la fila previa de `CHECKLIST-GLOBAL.md` declaraba `66/119`.
 El denominador 119 era incorrecto: el modulo tiene 110 items y la fila sumaba tambien las
 secciones de Evidencia y Reserva. Estado corregido y reportado como **`92/110`**.
+
+**Totales:** 110 ítems · Completados: 92 · Pendientes: 0 · No resueltos: 18.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 0 [ ] /
+> 18 [?], consistente con el 92/110 reportado arriba. Las marcas no se tocaron.

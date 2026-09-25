@@ -367,3 +367,8 @@
   dueño M107/core) — no bloquea el ✅.
 
 
+**Totales:** 209 ítems · Completados: 209 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 209 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

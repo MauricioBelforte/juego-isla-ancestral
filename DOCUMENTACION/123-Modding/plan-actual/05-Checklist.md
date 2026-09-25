@@ -197,3 +197,8 @@
 - 2 bugs propios cazados por el test adversarial: extensión desde `ruta` (no `nombre`) y números JSON como `float`
 - BOM §28 eliminado de `test_modding_m123.gd`; todos los archivos del módulo UTF-8 sin BOM
 - Documentación: `06-Plan-Testings.md`, `07-Resultados-Testings.md`, `08-Limites-Politicas-Y-Herramientas.md`
+**Totales:** 108 ítems · Completados: 108 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 108 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

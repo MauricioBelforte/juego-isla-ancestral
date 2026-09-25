@@ -256,3 +256,9 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 - Considerar **mediana de N corridas** o umbral por métrica (más flojo en timing, estricto en integridad) si el ±5% único sigue siendo frágil.
 - Los 17 escenarios restantes (NPC/fauna/vegetación/mundo grande/…) siguen esperando a M19/M65/M08/M50.
 
+**Totales:** 132 ítems · Completados: 102 · Pendientes: 30 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 102 [x] / 30 [ ] /
+> 0 [?]. Las marcas no se tocaron.
+

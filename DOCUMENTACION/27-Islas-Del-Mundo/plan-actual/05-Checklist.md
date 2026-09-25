@@ -319,3 +319,11 @@ Los `93 [?]` quedan intactos: son de M63/M61, M10, M54, M50/M36/M15/M23/M19 y M2
 - Nadie llama todavía a `IslandOps`/`IslandTravelGuard` → **M63** (streaming) y **M28** (barco) deben cablearlas
 - Asimetría de M59: `esta_descubierta(aurora) == true` pero `islas_descubiertas()` no la lista → **M59/M54**
 
+**Totales:** 192 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 93.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] /
+> 93 [?]. Las marcas no se tocaron. El alto número de [?] es consistente con el
+> historial del módulo (núcleo de generación + tests 171/0 verificados; el resto son
+> dependencias externas M45/M46/M49/M52/M53/M54/M59/M63/M28).
+

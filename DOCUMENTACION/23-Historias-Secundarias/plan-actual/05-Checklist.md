@@ -196,3 +196,8 @@ A diferencia de los clusters legales/store (que solo tenían JSON+Validator+Test
 - Estado: **🟡 Con dudas** (núcleo verificado; contenido pendiente).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
+**Totales:** 104 ítems · Completados: 24 · Pendientes: 80 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?].
+> Las marcas no se tocaron.

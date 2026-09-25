@@ -420,3 +420,8 @@
 - Para Boat V2: reutilizar BoatRoute.sample_position(t) y _process delta para movimiento; agregar partículas con M51.
 - El flujo de reserva temprana de dock destino requiere llamar Harbor.lock_dock() desde TravelService._zarpar().
 
+**Totales:** 130 ítems · Completados: 50 · Pendientes: 80 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 80 [ ] / 0 [?].
+> Las marcas no se tocaron.

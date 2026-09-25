@@ -231,3 +231,9 @@
 - [x] Verificación headless del canon: 7/7 checks OK (estructura y conteos de world_data.json + servicio)
 - [x] Cross-referencia M54: los 8 lugares del canon se usan como base de los POIs del mapa (map_data.json)
 - [?] Aplicación del canon en gameplay (M22 historia/sellos — dueño: Hy3/WorkBuddy)
+
+**Totales:** 134 ítems · Completados: 65 · Pendientes: 68 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 65 [x] / 68 [ ] /
+> 1 [?]. Las marcas no se tocaron.

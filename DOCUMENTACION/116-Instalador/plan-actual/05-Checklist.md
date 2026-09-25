@@ -281,3 +281,11 @@
 - Parse de ambos scripts verificado (UTF-8 BOM; sin ParserError)
 - Smoke de ejecucion en consola real (ventana PowerShell nativa) → KnownIssue no bloqueante DoD; protocolo disenado en 03-Diseno.md §S.13. Manual test deferred.
 - RF6-RF13 (asociacion, permisos, antivirus, actualizaciones, reparacion, desinstalacion real, install custom UI) → agnes-2.5-flash 2026-09-14: specs completas en 03-Diseno.md §RF6-RF13; implementacion requiere build Windows real. Spec complete.
+
+**Totales:** 192 ítems · Completados: 192 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** la única mención previa era narrativa, en la Reserva actual (L9:
+> *"totales REALES (192/192; la linea '180/6/12' estaba obsoleta)"*). Conteo real
+> de marcas: 192 [x] / 0 [ ] / 0 [?]. Las marcas no se tocaron. Se agrega la línea
+> canónica al final del archivo para uniformidad con el resto del bloque.

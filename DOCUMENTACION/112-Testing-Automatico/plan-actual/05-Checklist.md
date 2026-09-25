@@ -259,3 +259,8 @@
 - [x] Verificar que los unit tests cumplen ≤ 2 minutos [C] → pendiente medición
 - [x] Ajustar configuración de framework ante fallos de integración [M]
 - [x] Confirmar que ningún archivo fuera de DOCUMENTACION/112-Testing-Automatico/ fue modificado [S]
+**Totales:** 208 ítems · Completados: 208 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -234,3 +234,9 @@ Detalle y owners: `plan-actual/MATRIZ-PLATAFORMAS.md` §"¿Quién decide qué".
 - **M144** debe **regenerar `MATRIZ-PLATAFORMAS.md`** si cambia `plataformas.json` (la tabla es derivada).
 - Los GATE de consolas (P2) se desbloquean cuando **M149** cierre el presupuesto y **M142** la certificación.
 - El `[?]` de Steam real sigue pendiente de credenciales (M97/M118).
+
+**Totales:** 106 ítems · Completados: 71 · Pendientes: 34 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 71 [x] / 34 [ ] /
+> 1 [?]. Las marcas no se tocaron.

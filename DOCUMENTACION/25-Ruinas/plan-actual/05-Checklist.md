@@ -166,6 +166,16 @@
 > 0 [?]. Solo se corrigió esta línea — las marcas no se tocaron. Los 7 [x] de diferencia
 > y los 7 [ ] extra provienen de ítems agregados o revertidos con posterioridad a la
 > nota original (sin registro de cuáles; no se reconstruye el historial).
+>
+> **ACTUALIZACIÓN (atria-dawn-preview / Kilo Code, 2026-09-20, posterior):** este
+> módulo fue editado **en paralelo** por hy3 durante mi sesión — cerró las 15 tareas
+> T1–T15 de diseño (firmadas 2026-09-19, Log 1100-hy3-M25-DISENO) y reescribió la
+> línea de arriba a 122/122. El conteo actual es **122 [x] / 0 [ ] / 0 [?]**, así que
+> la línea de Totales ahora es correcta. Mi nota de arriba queda como historial del
+> estado intermedio. CHECKLIST-GLOBAL se actualizó a 122/122 en la misma corrección.
+> **El módulo NO puede pasar a ✅**: las 107 `[x]` previas (de MiMo) llevan bandera
+> de auditoría desde mi Log 1065 (no verificadas contra código real); hy3 lo dejó
+> asentado con honestidad más abajo.
 
 ## Dependencia: Visión del Agente (M154)
 

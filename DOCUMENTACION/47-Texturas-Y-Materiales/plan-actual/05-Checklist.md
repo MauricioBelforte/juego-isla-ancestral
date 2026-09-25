@@ -210,3 +210,8 @@
 #### Recomendaciones
 - Agregar nuevos recursos al JSON (no al código): match por substring permite cubrir variantes (veta_*, mineral_*, madera_*).
 - Para texturas UV procedurales (siguiente iteración), extender material_para() con un campo "textura" en el JSON.
+**Totales:** 119 ítems · Completados: 18 · Pendientes: 101 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 18 [x] / 101 [ ] / 0 [?].
+> Las marcas no se tocaron.

@@ -274,3 +274,13 @@ Log reservado: 512
 
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
+
+**Totales:** 186 ítems · Completados: 43 · Pendientes: 134 · No resueltos: 9.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
+> este archivo no tenía línea de Totales canónica, solo notas de iteración con
+> totales inconsistentes entre sí (iter 5: 57 [x] + 110 [ ] + 5 [?] = 172; iter 4:
+> 52 [x] + 114 [ ] + 6 [?] = 172). El conteo real actual es 43 [x] / 134 [ ] /
+> 9 [?] = 186: el checklist creció 14 ítems desde esas notas y la cuenta de [x]
+> bajó. Las marcas no se tocaron; las notas de iteración se conservan como
+> historial. No se reconstruye qué ítem cambió (sin registro intermedio).

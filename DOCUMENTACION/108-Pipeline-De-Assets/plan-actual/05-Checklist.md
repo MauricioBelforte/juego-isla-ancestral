@@ -281,3 +281,9 @@
 - [x] Test headless M108 ejecutado y verde 0 fallos — `[?]` (Log 529 previsto; escena de prueba se cerró sin output en intentos automáticos) [C]
 - [x] Validator/presets/promote_asset/atlas_builder/retire_asset/memory_reporter operativos — `[?]` (dueño M108 núcleo) [M]
 - [x] Flujo staging → final con CI headless y exit code — `[?]` (dueño M108/M118) [C]
+
+**Totales:** 205 ítems · Completados: 124 · Pendientes: 78 · No resueltos: 3.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 124 [x] / 78 [ ] /
+> 3 [?]. Las marcas no se tocaron.

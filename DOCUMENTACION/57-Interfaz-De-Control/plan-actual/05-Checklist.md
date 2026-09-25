@@ -174,3 +174,9 @@
 - [x] 03-Diseno creado y firmado [S]
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S]
 - [x] 05-Checklist creado y firmado (este archivo) [S]
+
+**Totales:** 119 ítems · Completados: 91 · Pendientes: 27 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 91 [x] / 27 [ ] /
+> 1 [?]. Las marcas no se tocaron.

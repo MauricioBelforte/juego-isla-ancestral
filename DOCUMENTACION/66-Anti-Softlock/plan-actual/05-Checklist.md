@@ -187,3 +187,12 @@
   watchdog NPC → M64; integración/persistencia de misiones → M22; Templo Subterráneo → M26. Se abren
   cuando esos módulos expongan la API.
 - **Estado:** M66 pasa de `🟡 Con dudas` a **core verificado + gate CI, esperando externos** (110/117).
+
+**Totales:** 117 ítems · Completados: 109 · Pendientes: 0 · No resueltos: 8.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 109 [x] / 0 [ ] /
+> 8 [?]. Las marcas no se tocaron. **Nota:** el claim de la línea de arriba
+> (110/117) no coincide — dice 110 [x] pero el conteo real es 109 [x]. Diferencia
+> de 1 sin registro de qué ítem cambió; no se reconstruye. El número correcto es
+> el de esta línea (verificable contando las marcas).

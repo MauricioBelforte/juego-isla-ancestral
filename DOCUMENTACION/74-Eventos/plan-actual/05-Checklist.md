@@ -434,3 +434,11 @@ plan-actual y muchos ítems de diseño quedaron sin marcar cuando el código ya 
 #### Recomendaciones para el próximo agente
 - Los .tres de capítulos usan flags {capitulo, historia, gatillo}: el disparador debe leer el flag gatillo y la condición de capítulo desde historia_principal.json.
 - Coordinar con M23/M149 para el evento de final (4 finales = 4 eventos candidatos a agregar con la misma plantilla).
+
+**Totales:** 285 ítems · Completados: 95 · Pendientes: 2 · No resueltos: 188.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 2 [ ] /
+> 188 [?]. Las marcas no se tocaron. El alto número de [?] es consistente con el
+> alcance declarado del módulo (narrativa de eventos capítulos 1-7 implementada; el
+> resto son dependencias externas de contenido).

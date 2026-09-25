@@ -365,3 +365,11 @@
 - **alidar_definicion() no existe** (ítem C.65) — útil para validación en editor; evitaría def_ids duplicados (ítem M.187).
 - **Tests con cota superior:** reemplazar los count >= 1 por rangos [min, max] en los tests de drops — es lo que permitió detectar el bug duplicado.
 - **Commitear el log al terminar** — mis logs 928/934 fueron borrados por un git-clean de otro agente por ser no rastreados.
+
+**Totales:** 222 ítems · Completados: 99 · Pendientes: 115 · No resueltos: 8.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
+> este archivo no tenía línea de Totales canónica, solo notas de iteración parciales
+> (iter 3: 25 [x] + 135 [ ] + 5 [?]; iter 4 y 5 sin total de módulo). El conteo real
+> actual es 99 [x] / 115 [ ] / 8 [?] = 222, consistente con el 99/222 reportado en
+> la iter 6 (reserva actual, línea 10). Las marcas no se tocaron.

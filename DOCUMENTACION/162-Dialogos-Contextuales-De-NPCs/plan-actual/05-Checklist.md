@@ -264,3 +264,9 @@
 
 - **Iter. contenido 4 (Log 640, glm-5.3-flash/Kilo Code):** 18 HISTORIA nocturnas para AUR/CEN/COR/riz_006-008 (cobertura nocturna COMPLETA 23/23 NPCs). Registry 328 → 346; 346/346 grafos OK. Generador `gen_m162_noche_all.py` idempotente. Regresión M21 0 fallos.
 - **Iter. contenido 5 (Log 641, glm-5.3-flash/Kilo Code):** 20 HISTORIA estacionales para los 5 NPCs RIZ (4 estaciones × 5). Registry 346 → 366; 366/366 grafos OK. Generador \gen_m162_estaciones.py\ idempotente. Regresión M21 implícita (sin cambios de selector).
+
+**Totales:** 120 ítems · Completados: 80 · Pendientes: 0 · No resueltos: 40.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 80 [x] / 0 [ ] /
+> 40 [?]. Las marcas no se tocaron.

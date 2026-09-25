@@ -210,3 +210,8 @@
 - [ ] 03-Diseno creado y firmado (arquitectura y contratos) [S]
 - [ ] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S]
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
+**Totales:** 148 ítems · Completados: 50 · Pendientes: 98 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?].
+> Las marcas no se tocaron.
