@@ -438,3 +438,95 @@ func _format_metadata() -> String:
 - Integrar con M102 (Bug Tracking) para crear issues automáticamente por crashes críticos.
 - Revisar GDPR compliance con abogado antes de lanzamiento.
 - Monitorear dashboard de estadísticas regularmente para identificar crashes recurrentes.
+
+## 15. Iteración P-36 — 10 helpers offline, 2 falsos verdes y corrección del diseño (2026-09-25, DeepSeek-V4.1-Flash / WorkBuddy, Log 1150)
+
+**Estado de partida (medido, no heredado).** El checklist decía `185 [x] / 80 [ ]` y su bloque
+`## Totales` afirmaba «335 ítems, 335 resueltos, 0 pendientes» — **falso en las dos cifras**: hay
+**265** marcadores, y su «Evidencia» declaraba un test verde que estaba **en ROJO**. Se corrigieron
+los dos (ver `05-Checklist.md`).
+
+### 15.1 Divergencias diseño ↔ código (patrón M167), TODAS medidas
+
+| El diseño (03-Diseno.md) dice | El repo tiene | Resolución |
+|---|---|---|
+| 9 archivos en `scripts/services/`, `scripts/ui/`, `scripts/integrations/`, `scripts/alerts/` | 1 autoload en `scripts/crash/` | Se implementaron los 10 helpers en **`scripts/crash/`** (donde vive el módulo y donde apunta el autoload). **NO se reescribió el diseño ni se crearon directorios nuevos.** |
+| `class_name CrashReporter extends Node` | autoload sin `class_name` | Correcto: la regla del proyecto (§9.17/§9.41) **prohíbe** `class_name` en autoloads. El diseño es el que está mal. |
+| API `capture_crash(error, stack_trace, context)` | `reportar_crash(tipo, mensaje, stack)` | Adaptación ya documentada por el agente anterior (deepseek-v4-flash, 2026-09-01). Se conserva. |
+| `OS.get_dynamic_memory_usage()` | **no existe en Godot 4.7** (SCRIPT ERROR de parseo, medido) | `OS.get_memory_info()` -> `physical`/`available`. |
+| `store_var`/`get_var` para la caché | — | **JSON**: auditable y portable entre versiones del motor. |
+| `HTTPRequest.new()` dentro de los helpers | — | **Transporte inyectado como `Callable`**: testeable offline, sin acoplar al árbol. Sin transporte -> fail-closed (`false`), nunca un envío inventado. |
+| `ServiceRegistry.get("logger")` dentro del helper | — | Logger **inyectado**; `registrar()` devuelve 0 si falta. El cableado es del autoload. |
+| `_is_safe_key` / sanitización superficial | — | **Recursiva**: el diseño dejaba pasar `{"player": {"email": …}}`. |
+| `_format_issue_body` usaba una variable `crash` **nunca declarada** | — | Corregido: usa `datos` (el parámetro). Era un error de parseo latente. |
+| `CrashCache.save_crash` hacía **un** `pop_front()` | — | `while`: defensivo si el archivo quedó por encima del límite. |
+| `debug_menu.add_panel()/add_button()` (API de M110) | **M110 no expone esos métodos** | El panel se describe como **datos** (`describir_panel`) y las acciones reciben sus dependencias por parámetro. El cableado real es de M110. |
+| Matriz de prioridad (§13) | no cubre «Media+Algunos» ni «Baja+Todos» | Interpolado y **documentado en `crash_prioritizer.gd`**. |
+
+### 15.2 Helpers nuevos (10, todos `RefCounted` sin `class_name`, cabecera firmada)
+
+| Archivo | API principal |
+|---|---|
+| `crash_metadata.gd` | `recolectar_hardware`, `recolectar_software(escena)`, `recolectar_contexto_juego(datos)`, `recolectar_todo` |
+| `crash_context_sanitizer.gd` | `CLAVES_INSEGURAS` (9), `sanitizar` (recursivo), `es_clave_insegura`, `claves_removidas`, `es_contexto_seguro` |
+| `crash_cache.gd` | `MAX_CACHE_SIZE` (10), `guardar`, `cargar`, `limpiar`, `cantidad`, `archivo_existe` |
+| `crash_sender.gd` | `configurar(url, clave, transporte)`, `tiene_conexion`, `construir_headers`, `construir_cuerpo`, `enviar`, `enviar_cache`, `comprimir`/`descomprimir` (GZIP), `intentos_de`/`marcar_intento` |
+| `crash_logging.gd` | `NIVEL` (CRITICAL), `CATEGORIA_CRASH` (6 = `Category.CRASH` de M103), `formatear_entradas`, `registrar(datos, logger)` |
+| `crash_bug_tracking.gd` | `debe_crear_issue`, `formatear_titulo`, `formatear_cuerpo`, `crear_issue(datos, transporte)`, `URL_API` |
+| `crash_debug_menu.gd` | `describir_panel`, `formatear_metadata`, `accion_test_crash`, `accion_enviar_pendientes` |
+| `crash_alerts.gd` | `UMBRAL_CRITICO` (5 %), `UMBRAL_NUEVA` (1 %), `evaluar`, `formatear_alerta`, `construir_payload`, `enviar`, `enviar_todas` |
+| `crash_analytics.gd` | `huella_stack`, `normalizar_stack`, `agrupar`, `frecuencias`, `top`, `nuevas` |
+| `crash_prioritizer.gd` | `CRITICA/ALTA/MEDIA/BAJA`, `ORDEN`, `prioridad`, `prioridad_de`, `filtrar`, `ordenar` |
+
+**`crash_reporter.gd` (autoload) — bug real corregido:** `dumps_pendientes()` usaba
+`DirAccess.open("user://…")`, que devuelve **null** en headless (pitfall §9.6) -> devolvía `[]` y el
+test quedaba en ROJO aunque los dumps SÍ estaban en disco. Se agregó `_abrir_dir()` (reintenta con
+`ProjectSettings.globalize_path`) y el resultado ahora va **ordenado** (determinista).
+
+### 15.3 Hashing del stack trace (ítem «Diseñar algoritmo de hashing de stack trace»)
+
+`crash_analytics.huella_stack()` normaliza ANTES de hashear, para que un mismo bug agrupe aunque
+cambien las direcciones de memoria o los números de línea entre builds:
+quita tokens `0x…`, quita el sufijo `:NNN`, descarta líneas vacías y recorta espacios.
+Luego aplica `String.sha256_text()` del motor (verificado contra el vector estándar
+`sha256("abc") = ba7816bf…`). **Sin dependencias externas y sin criptografía propia.**
+
+### 15.4 Sentry como fallback (ítems «Evaluar Sentry», «ventajas», «desventajas»)
+
+- **Ventajas:** SDK nativo con *release health*, *breadcrumbs* automáticos y *source maps*;
+  agrupa por huella de stack sin escribir el algoritmo; *self-hosted* disponible (los datos no
+  salen del país del equipo); plan gratuito para proyectos chicos; alertas por email/Slack nativas.
+- **Desventajas:** exige un DSN y un servicio externo (bloqueante offline); su *self-hosted* pide
+  infraestructura (Docker/Postgres) que M107/M118 tendrían que sostener; el SDK agrega peso al
+  binario; la cuota gratuita se agota con volumen alto.
+- **Decisión (heredada de 04-Codigo §14):** **Crashlytics como principal, Sentry como fallback.**
+  Este módulo **no** elige transporte: `crash_sender` recibe la URL y el transporte por inyección,
+  así cualquiera de los dos se cablea sin tocar el código.
+
+### 15.5 Workflow de corrección de crashes (ítems «paso 3» y «paso 5»)
+
+1. **Identificar** — `crash_analytics.top()` ordena por cantidad; la huella agrupa el mismo bug.
+2. **Reproducir** — build de diagnóstico (§14): asserts vivos, símbolos, profiling (M61).
+3. **Corregir bug** — el fix va con un test que **falla antes** y pasa después; si el bug era de
+   datos, se revisa además la aserción que lo fijaba.
+4. **Testear** — suites headless del módulo + regresión del resto (M112).
+5. **Desplegar patch** — bump de `application/config/version` (hoy `0.0.6`) + nota en el changelog
+   (M119/M121); el patch se marca en el issue de M102.
+
+### 15.6 Verificación total M122 tras P-36
+
+| Suite | checks |
+|---|---|
+| `test_crash_m122.gd` (núcleo/autoload) | **13/0** |
+| `test_crash_m122_offline.gd` (10 helpers, 10 bloques A–J) | **168/0** |
+| **Total** | **181 checks, 0 fallos, 0 `SCRIPT ERROR`, exit 0** ×3 corridas (godot 4.7.2) |
+
+### 15.7 Huecos declarados (honestidad obligatoria)
+
+- La sección `crash_reporting/*` de §11 **no está aplicada** a `project.godot` (hoy sólo el
+  autoload). Dueño: **M117/coordinador**. No se tocó `project.godot` (archivo compartido).
+- `export_presets.cfg` sin config de debug/símbolos -> **M117**.
+- La frecuencia es **relativa a la muestra local**; el % real de usuarios necesita backend.
+- Nada de este módulo **envía** datos: los transportes son inyectables y por defecto están ausentes
+  (fail-closed). El envío real es de **M104/M118** con la API key del coordinador.
+

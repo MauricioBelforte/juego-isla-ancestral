@@ -12,9 +12,9 @@
 - [x] Test headless de crash reporting [M]
 - [x] Autoload CrashReporter registrado en project.godot [S]
 - [x] Datos en user://crash/ con versionado [S]
-- [ ] Capturar memoria
-- [ ] Capturar escena
-- [ ] Capturar contexto seguro
+- [x] Capturar memoria [M]
+- [x] Capturar escena [M]
+- [x] Capturar contexto seguro [M]
 - [x] Agrupar crashes
 - [x] Priorizar crashes
 - [x] Analizar frecuencia
@@ -24,13 +24,13 @@
 
 ### [S] Alternativas de crash reporter
 - [x] Evaluar Crashlytics (Firebase) como opción principal
-- [ ] Evaluar Sentry como fallback
+- [x] Evaluar Sentry como fallback [S]
 - [x] Evaluar implementación propia como último recurso
 - [x] Seleccionar Crashlytics (Firebase) como opción principal
 - [x] Documentar ventajas de Crashlytics
 - [x] Documentar desventajas de Crashlytics
-- [ ] Documentar ventajas de Sentry
-- [ ] Documentar desventajas de Sentry
+- [x] Documentar ventajas de Sentry [S]
+- [x] Documentar desventajas de Sentry [S]
 - [x] Documentar ventajas de implementación propia
 - [x] Documentar desventajas de implementación propia
 
@@ -48,17 +48,17 @@
 
 ### [S] Contexto seguro
 - [x] Definir reglas de sanitización
-- [ ] Definir qué datos NO incluir (PII, datos sensibles)
-- [ ] Definir qué datos SI incluir (categorías, tipos)
-- [ ] Diseñar ejemplo de contexto seguro
-- [ ] Diseñar ejemplo de contexto NO seguro
-- [ ] Definir lista de unsafe keys (username, ip, email, phone, address, inventory, chat, api_key, token)
+- [x] Definir qué datos NO incluir (PII, datos sensibles) [M]
+- [x] Definir qué datos SI incluir (categorías, tipos) [M]
+- [x] Diseñar ejemplo de contexto seguro [M]
+- [x] Diseñar ejemplo de contexto NO seguro [M]
+- [x] Definir lista de unsafe keys (username, ip, email, phone, address, inventory, chat, api_key, token) [M]
 - [x] Diseñar algoritmo de sanitización
 - [x] Diseñar validación de safe keys
 
 ### [S] Agrupación de crashes
 - [x] Definir criterios de agrupación (stack trace hashing, tipo de error, escena, versión)
-- [ ] Diseñar algoritmo de hashing de stack trace
+- [x] Diseñar algoritmo de hashing de stack trace [M]
 - [x] Diseñar agrupación por tipo de error
 - [x] Diseñar agrupación por escena activa
 - [x] Diseñar agrupación por versión del juego
@@ -68,20 +68,20 @@
 - [x] Diseñar matriz de prioridad (frecuencia, severidad, impacto)
 - [x] Definir niveles de frecuencia (alta, media, baja)
 - [x] Definir niveles de severidad (crash, hang)
-- [ ] Definir niveles de impacto (todos, algunos)
-- [ ] Definir prioridades (CRÍTICA, ALTA, MEDIA, BAJA)
+- [x] Definir niveles de impacto (todos, algunos) [M]
+- [x] Definir prioridades (CRÍTICA, ALTA, MEDIA, BAJA) [M]
 - [x] Diseñar workflow de priorización
 - [x] Diseñar filtros por frecuencia
-- [ ] Diseñar filtros por severidad
-- [ ] Diseñar filtros por impacto
-- [ ] Diseñar ordenamiento por prioridad
+- [x] Diseñar filtros por severidad [M]
+- [x] Diseñar filtros por impacto [M]
+- [x] Diseñar ordenamiento por prioridad [M]
 
 ### [S] Workflow de corrección de crashes
 - [x] Definir paso 1: Identificar crash
 - [x] Definir paso 2: Reproducir crash
-- [ ] Definir paso 3: Corregir bug
+- [x] Definir paso 3: Corregir bug [S]
 - [x] Definir paso 4: Testear corrección
-- [ ] Definir paso 5: Desplegar patch
+- [x] Definir paso 5: Desplegar patch [S]
 - [x] Definir paso 6: Verificar reducción de frecuencia
 - [x] Diseñar integración con M102 (Bug Tracking)
 - [x] Diseñar plantilla de issue de crash
@@ -90,20 +90,20 @@
 ### [S] Builds de diagnóstico
 - [x] Diseñar características de builds de diagnóstico
 - [x] Diseñar logs adicionales (M103)
-- [ ] Diseñar asserts no eliminados (debug mode)
-- [ ] Diseñar símbolos de debug para stack traces detallados
-- [ ] Diseñar profiling habilitado (M61)
+- [?] Diseñar asserts no eliminados (debug mode) — requiere export_presets de debug (dueño: M117)
+- [?] Diseñar símbolos de debug para stack traces detallados — requiere export_presets con símbolos (dueño: M117)
+- [?] Diseñar profiling habilitado (M61) — requiere build con profiling (dueño: M61)
 - [x] Diseñar crash reporter en modo verbose
 - [x] Definir casos de uso de builds de diagnóstico
 
 ### [S] Integración con M103 (Logging)
 - [x] Diseñar logs de crash en Logging service
-- [ ] Definir nivel de log (CRITICAL)
+- [x] Definir nivel de log (CRITICAL) [M]
 - [x] Definir categoría de log (CRASH)
-- [ ] Diseñar contenido de log (stack trace, metadata, contexto)
+- [x] Diseñar contenido de log (stack trace, metadata, contexto) [M]
 - [x] Diseñar formato de log (JSON)
 - [x] Diseñar trigger de log de crash
-- [ ] Diseñar guardado de log en archivo
+- [x] Diseñar guardado de log en archivo [S]
 - [x] Diseñar envío de log a servicio externo
 
 ### [S] Integración con M102 (Bug Tracking)
@@ -113,36 +113,36 @@
 - [x] Diseñar vinculación de issue con crash en dashboard
 - [x] Diseñar cierre de issue cuando crash resuelto
 - [x] Diseñar plantilla de issue de crash
-- [ ] Diseñar inclusión de stack trace en issue
-- [ ] Diseñar inclusión de metadata en issue
-- [ ] Diseñar inclusión de contexto en issue
+- [x] Diseñar inclusión de stack trace en issue [M]
+- [x] Diseñar inclusión de metadata en issue [M]
+- [x] Diseñar inclusión de contexto en issue [M]
 - [x] Diseñar inclusión de frecuencia en issue
 
 ### [S] Integración con M110 (Debug Menu)
-- [ ] Diseñar panel de "Diagnostics" en Debug Menu
+- [x] Diseñar panel de "Diagnostics" en Debug Menu [M]
 - [x] Diseñar botón "Test Crash" para testear crash reporter
 - [x] Diseñar botón "Send Crash Report" para envío manual
 - [x] Diseñar visualización de metadata del sistema
 - [x] Diseñar funcionalidad de test crash
 - [x] Diseñar funcionalidad de envío manual de crash
-- [ ] Diseñar formato de metadata en Debug Menu
+- [x] Diseñar formato de metadata en Debug Menu [M]
 
 ### [S] Opt-out del usuario
 - [x] Diseñar opciones de opt-out
 - [x] Diseñar checkbox en configuración inicial
-- [ ] Diseñar checkbox en settings (M90)
+- [?] Diseñar checkbox en settings (M90) — requiere la UI de settings (dueño: M90)
 - [x] Diseñar botón "No enviar" al primer crash
 - [x] Diseñar explicación clara de qué datos se envían
-- [ ] Diseñar cumplimiento GDPR
+- [?] Diseñar cumplimiento GDPR — requiere revisión legal (dueño: COORDINADOR)
 - [x] Diseñar consentimiento explícito
 - [x] Diseñar opción de opt-out en cualquier momento
-- [ ] Diseñar datos anonimizados
+- [x] Diseñar datos anonimizados [M]
 - [x] Diseñar política de privacidad accesible
 
 ### [S] Offline mode
 - [x] Diseñar caché de crashes
-- [ ] Diseñar guardado local cuando no hay conexión
-- [ ] Diseñar envío automático al reconectar
+- [x] Diseñar guardado local cuando no hay conexión [M]
+- [x] Diseñar envío automático al reconectar [M]
 - [x] Diseñar límite de caché (10 crashes)
 - [x] Diseñar descarte de crash más antiguo si caché llena
 - [x] Diseñar archivo de caché (user://crash_cache.json)
@@ -152,9 +152,9 @@
 ### [S] Performance impact
 - [x] Diseñar crash reporter ligero
 - [x] Diseñar envío de crash en background
-- [ ] Diseñar no envío de datos en tiempo real (batch)
-- [ ] Diseñar compresión de datos antes de envío
-- [ ] Diseñar mínimo impacto en FPS
+- [x] Diseñar no envío de datos en tiempo real (batch) [M]
+- [x] Diseñar compresión de datos antes de envío [M]
+- [?] Diseñar mínimo impacto en FPS — requiere medición en build real (dueño: M61)
 - [x] Diseñar no bloqueo de hilo principal
 
 ### [S] Dashboard de estadísticas
@@ -162,7 +162,7 @@
 - [x] Diseñar frecuencia de crashes (por 1000 usuarios)
 - [x] Diseñar tasa de corrección (crashes resueltos / total)
 - [x] Diseñar visualización (gráficos de tendencia, tablas)
-- [ ] Diseñar filtros (versión, plataforma, escena)
+- [x] Diseñar filtros (versión, plataforma, escena) [M]
 - [x] Diseñar exportación de datos (CSV)
 - [x] Diseñar CrashDashboard.gd
 - [x] Diseñar CrashViewer
@@ -174,26 +174,26 @@
 - [x] Diseñar alerta cuando crash nueva alta frecuencia (>100 usuarios en 24h)
 - [x] Diseñar notificación por email/Slack
 - [x] Diseñar CrashAlerts.gd
-- [ ] Diseñar check_alerts()
-- [ ] Diseñar _send_alert()
+- [x] Diseñar check_alerts() [M]
+- [x] Diseñar _send_alert() [M]
 - [x] Diseñar integración con Slack webhook
 
 ### [S] Retención de datos
 - [x] Diseñar política de retención (90 días)
 - [x] Diseñar anonimización de crash metadata
 - [x] Diseñar retención de logs de crash (30 días)
-- [ ] Diseñar cumplimiento GDPR
+- [?] Diseñar cumplimiento GDPR — requiere revisión legal (dueño: COORDINADOR)
 - [x] Diseñar eliminación automática de datos antiguos
 
 ### [S] Testing de crash reporter
-- [ ] Diseñar tests manuales
+- [?] Diseñar tests manuales — requiere sesión de playtest (dueño: M114)
 - [x] Diseñar test de crash con "Test Crash" en Debug Menu
 - [x] Diseñar verificación de envío de crash
 - [x] Diseñar verificación de captura de metadata
 - [x] Diseñar verificación de contexto seguro
-- [ ] Diseñar test de opt-out
-- [ ] Diseñar test de offline mode
-- [ ] Diseñar tests automáticos
+- [?] Diseñar test de opt-out — depende del opt-out (dueño: M90)
+- [x] Diseñar test de offline mode [M]
+- [x] Diseñar tests automáticos [M]
 - [x] Diseñar mock de crash reporter
 - [x] Diseñar tests de sanitización de contexto
 - [x] Diseñar tests de agrupación de crashes
@@ -201,20 +201,20 @@
 ### [S] CrashReporter (servicio principal)
 - [x] Diseñar CrashReporter.gd
 - [x] Diseñar capture_crash()
-- [ ] Diseñar _collect_metadata()
-- [ ] Diseñar _sanitize_context()
+- [x] Diseñar _collect_metadata() [M]
+- [x] Diseñar _sanitize_context() [M]
 - [x] Diseñar _send_crash()
-- [ ] Diseñar _save_to_cache()
-- [ ] Diseñar _has_connection()
+- [x] Diseñar _save_to_cache() [M]
+- [x] Diseñar _has_connection() [M]
 - [x] Diseñar signal crash_sent
 - [x] Diseñar signal crash_saved_to_cache
 - [x] Diseñar _setup_crash_handler()
 
 ### [S] MetadataCollector
-- [ ] Diseñar MetadataCollector.gd
-- [ ] Diseñar collect_hardware_metadata()
-- [ ] Diseñar collect_software_metadata()
-- [ ] Diseñar collect_game_context()
+- [x] Diseñar MetadataCollector.gd [M]
+- [x] Diseñar collect_hardware_metadata() [M]
+- [x] Diseñar collect_software_metadata() [M]
+- [x] Diseñar collect_game_context() [M]
 - [x] Diseñar recolección de OS, OS version, arquitectura
 - [x] Diseñar recolección de CPU, CPU cores
 - [x] Diseñar recolección de GPU, GPU driver
@@ -229,31 +229,31 @@
 - [x] Diseñar recolección de seed del mundo
 
 ### [S] ContextSanitizer
-- [ ] Diseñar ContextSanitizer.gd
-- [ ] Diseñar sanitize()
-- [ ] Diseñar _is_unsafe_key()
-- [ ] Diseñar lista de unsafe keys
+- [x] Diseñar ContextSanitizer.gd [M]
+- [x] Diseñar sanitize() [M]
+- [x] Diseñar _is_unsafe_key() [M]
+- [x] Diseñar lista de unsafe keys [M]
 - [x] Diseñar validación de safe keys
 
 ### [S] CrashCache
 - [x] Diseñar CrashCache.gd
 - [x] Diseñar save_crash()
 - [x] Diseñar load_cached_crashes()
-- [ ] Diseñar clear_cache()
-- [ ] Diseñar _load_cache()
-- [ ] Diseñar _save_cache()
-- [ ] Diseñar MAX_CACHE_SIZE = 10
+- [x] Diseñar clear_cache() [M]
+- [x] Diseñar _load_cache() [M]
+- [x] Diseñar _save_cache() [M]
+- [x] Diseñar MAX_CACHE_SIZE = 10 [M]
 - [x] Diseñar CACHE_FILE = "user://crash_cache.json"
 
 ### [S] CrashSender
 - [x] Diseñar CrashSender.gd
 - [x] Diseñar send_crash()
 - [x] Diseñar send_cached_crashes()
-- [ ] Diseñar has_connection()
+- [x] Diseñar has_connection() [M]
 - [x] Diseñar service_url
-- [ ] Diseñar api_key
-- [ ] Diseñar headers HTTP
-- [ ] Diseñar manejo de respuesta HTTP
+- [x] Diseñar api_key [M]
+- [x] Diseñar headers HTTP [M]
+- [x] Diseñar manejo de respuesta HTTP [M]
 
 ### [S] CrashDashboard
 - [x] Diseñar CrashDashboard.gd
@@ -269,38 +269,38 @@
 - [x] Diseñar CrashLogging.gd
 - [x] Diseñar log_crash()
 - [x] Diseñar uso de Logger service
-- [ ] Diseñar nivel CRITICAL
+- [x] Diseñar nivel CRITICAL [M]
 - [x] Diseñar categoría CRASH
-- [ ] Diseñar contenido de log (error, stack trace, metadata, contexto)
+- [x] Diseñar contenido de log (error, stack trace, metadata, contexto) [M]
 
 ### [S] CrashBugTracking (integración M102)
 - [x] Diseñar CrashBugTracking.gd
 - [x] Diseñar create_issue_for_crash()
-- [ ] Diseñar _format_issue_body()
-- [ ] Diseñar _create_github_issue()
+- [x] Diseñar _format_issue_body() [M]
+- [x] Diseñar _create_github_issue() [M]
 - [x] Diseñar validación de prioridad CRÍTICA
 - [x] Diseñar plantilla de issue (stack trace, metadata, contexto, frecuencia, prioridad)
-- [ ] Diseñar uso de GitHub API
+- [x] Diseñar uso de GitHub API [M]
 - [x] Diseñar headers de autorización
 
 ### [S] CrashDebugMenu (integración M110)
 - [x] Diseñar CrashDebugMenu.gd
-- [ ] Diseñar add_diagnostics_panel()
+- [x] Diseñar add_diagnostics_panel() [M]
 - [x] Diseñar _on_test_crash()
 - [x] Diseñar _on_send_crash_report()
-- [ ] Diseñar _format_metadata()
+- [x] Diseñar _format_metadata() [M]
 - [x] Diseñar botón "Test Crash"
 - [x] Diseñar botón "Send Crash Report"
 - [x] Diseñar label de metadata del sistema
 
 ### [S] CrashAlerts
 - [x] Diseñar CrashAlerts.gd
-- [ ] Diseñar check_alerts()
-- [ ] Diseñar _send_alert()
+- [x] Diseñar check_alerts() [M]
+- [x] Diseñar _send_alert() [M]
 - [x] Diseñar umbral de crash crítico (5%)
 - [x] Diseñar umbral de crash nueva (1%)
 - [x] Diseñar notificación por Slack webhook
-- [ ] Diseñar formato de alerta
+- [x] Diseñar formato de alerta [M]
 
 ### [S] Configuración
 - [x] Diseñar sección crash_reporting en project.gd
@@ -313,28 +313,71 @@
 - [x] Diseñar configuración cache_max_size
 
 ### [S] Plan de testings
-- [ ] Diseñar 06-Plan-Testings.md (APLICA)
+- [x] Diseñar 06-Plan-Testings.md (APLICA) [M]
 - [x] Diseñar tests de captura de crash
 - [x] Diseñar tests de recolección de metadata
 - [x] Diseñar tests de sanitización de contexto
-- [ ] Diseñar tests de offline mode
+- [x] Diseñar tests de offline mode [M]
 - [x] Diseñar tests de integración con M103
 - [x] Diseñar tests de integración con M102
 - [x] Diseñar tests de integración con M110
 - [x] Diseñar tests de agrupación de crashes
 - [x] Diseñar tests de priorización de crashes
 
-## Totales
+## Totales (reconciliado por DeepSeek-V4.1-Flash, P-36, Log 1150, 2026-09-25)
 
-**Total de ítems:** 335
-**Ítems resueltos por documentación:** 335
-**Ítems pendientes de implementación:** 0 (implementación inmediata posible)
+**Corrección del sobre-cierre previo:** decía «Total de ítems: 335 · resueltos: 335 ·
+pendientes: 0». Falso: el checklist tiene **265 marcadores**, no 335, y había **80 `[ ]`**.
+Además la Evidencia afirmaba un test verde que estaba **en ROJO**. Ninguno de los dos números
+era medido.
+
+**Conteo real tras P-36: 254 `[x]` · 0 `[ ]` · 11 `[?]`** (total 265).
+
+**Regla usada en esta reconciliación** (para que un `[x]` signifique algo):
+- `[x]` = el ítem tiene (a) una sección de diseño que lo especifica **y** (b) evidencia
+  ejecutable en las suites headless (tag `[M]`) o un artefacto ya verificado en el repo
+  (tag `[S]`, p. ej. el logger de M103 o el autoload en `project.godot`).
+- `[?]` = requiere un recurso externo (API key/token/webhook), otro módulo, export presets o
+  una revisión legal/medición que **no** se puede hacer offline. **Dueño nombrado.**
+- `[ ]` = 0. Nada queda en el limbo.
+
+**Implementado en P-36 (10 helpers + 2 suites, ver 04-Codigo.md §15):**
+`crash_metadata.gd` · `crash_context_sanitizer.gd` · `crash_cache.gd` · `crash_sender.gd` ·
+`crash_logging.gd` · `crash_bug_tracking.gd` · `crash_debug_menu.gd` · `crash_alerts.gd` ·
+`crash_analytics.gd` · `crash_prioritizer.gd`.
+
+**Falsos verdes corregidos en P-36:**
+- **Test headless en ROJO declarado verde.** `test_crash_m122.gd` daba **12 checks, 2 fallos**
+  y la Evidencia afirmaba «12 checks, 0 fallos (Log 518)». Causa: `dumps_pendientes()` usaba
+  `DirAccess.open("user://…")`, que devuelve **null** en headless (pitfall §9.6) -> devolvía []
+  aunque los dumps SÍ estaban en disco. Corregido con `_abrir_dir()` tolerante -> **13/0**.
+- **Totales inventados** (335/335/0 sobre 265 marcadores). Ver arriba.
+- **Bug del diseño en `_format_issue_body`**: el esqueleto de 04-Codigo usaba una variable
+  `crash` que nunca se declaraba (`crash.metadata.get(...)`). Corregido en `crash_bug_tracking.gd`.
+- **API inexistente en el diseño**: `OS.get_dynamic_memory_usage()` no existe en Godot 4.7
+  (SCRIPT ERROR de parseo medido). Se usa `OS.get_memory_info()`.
+
+**Suites (headless, 0 `SCRIPT ERROR`, ×3 corridas):**
+
+| Suite | checks |
+|---|---|
+| `test_crash_m122.gd` (núcleo/autoload) | 13/0 |
+| `test_crash_m122_offline.gd` (10 helpers) | 168/0 |
+| **Total** | **181 checks, 0 fallos** |
+
+**Huecos declarados (no maquillados):**
+- La sección `crash_reporting/*` del diseño (§11) **no está aplicada** a `project.godot`: hoy
+  sólo está el autoload. Dueño: M117/coordinador.
+- `export_presets.cfg` no tiene config de debug/símbolos (ítems 93/94) -> M117.
+- La prioridad se calcula sobre la **muestra local**; el % real de usuarios necesita backend.
+- La matriz de prioridad del diseño (§13) no cubre «Media+Algunos» ni «Baja+Todos»: se
+  interpolaron y quedó documentado en `crash_prioritizer.gd`.
 
 ## Evidencia M122 (2026-09-02)
 
 - [x] Núcleo V0 verificado: `CrashReporter` autoload presente + dump JSON a `user://crash/` + reintentos + cola pendiente [M]
-- [x] Test headless M122 ejecutado: `=== TEST M122: 12 checks, 0 fallos ===` (Log 518) [C]
+- [x] Test headless M122 ejecutado: **13 checks, 0 fallos** (Log 1150, P-36). La nota previa decía «12 checks, 0 fallos (Log 518)» y era un **FALSO VERDE**: el test estaba en ROJO (12/2) por `DirAccess.open("user://…") == null` en headless; se corrigió `crash_reporter.dumps_pendientes()` con `_abrir_dir()` [M]
 - [x] Tareas locales cerradas: núcleo, cache, logging, alertas, testing y contratos documentados [S]
 - [x] Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
-- [ ] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
-- [ ] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]
+- [?] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
+- [?] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]

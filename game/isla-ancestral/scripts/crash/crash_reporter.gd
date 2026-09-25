@@ -68,14 +68,27 @@ func enviar_dump(ruta: String) -> bool:
 	return true
 
 func dumps_pendientes() -> Array:
-	var dir := DirAccess.open(DIR_DUMPS)
+	var dir := _abrir_dir(DIR_DUMPS)
 	if dir == null:
 		return []
 	var pendientes: Array = []
 	for f in dir.get_files():
 		if f.ends_with(".json"):
 			pendientes.append("%s%s" % [DIR_DUMPS, f])
+	pendientes.sort()
 	return pendientes
+
+
+## `DirAccess.open("user://...")` devuelve **null** en headless (pitfall §9.6, medido con `--path`
+## relativo y absoluto). Se reintenta con la ruta globalizada: `_ready()` ya creó el directorio con
+## `make_dir_recursive_absolute(globalize_path(DIR_DUMPS))`, así que la ruta absoluta siempre abre.
+## Bug real: sin esto, `dumps_pendientes()`/`cantidad_dumps()` devolvían []/0 y el test de M122
+## quedaba en ROJO (12 checks, 2 fallos) aunque los dumps SÍ estaban en disco.
+func _abrir_dir(ruta: String) -> DirAccess:
+	var dir := DirAccess.open(ruta)
+	if dir != null:
+		return dir
+	return DirAccess.open(ProjectSettings.globalize_path(ruta))
 
 func cantidad_dumps() -> int:
 	return dumps_pendientes().size()
