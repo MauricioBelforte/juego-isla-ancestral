@@ -1,0 +1,90 @@
+CLASIFICACION PRELIMINAR DE ARCHIVOS M (ronda 1)
+TOTAL clasificados: 224
+
+=== BUCKET A (por modelo) ===
+agnes-3-flash: 2
+atria-dawn: 1
+atria-dawn (coordinador): 5
+deepseek-v4.1-flash: 83
+glm-5.3-flash: 14
+hy3: 3
+mimo-v2.5: 9
+nemotron: 10
+ox-alpha: 3
+step-3.7-flash: 2
+swe: 14
+
+=== BUCKET B (coordinador): 7 ===
+
+=== BUCKET C (inclasificable): 71 ===
+  .gitignore <- sin prefijo de commit conocido: Se corrigio BUG-051: el fix del gate godot-lint no estaba versionado
+  DOCUMENTACION\111-Codigo-De-Calidad\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: Se agrego QA cruzado sec21.8 de M111-Codigo-De-Calidad iter. 4 (Log 1032): passed=62/0, 9/9 archivos, fix Variant, hallazgo gate suave (|| true) delegado a M107/M111
+  DOCUMENTACION\117-Build-System\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: chore(tools): actualizar scripts de Blender, CI, checklist global, quality workflow
+  DOCUMENTACION\131-Creditos\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: M131 Créditos: 60→87/99 (88%)
+  DOCUMENTACION\14-Inventario\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: Se realizo QA del modulo M14 Inventario (Log 1013)
+  DOCUMENTACION\149-Nombres-Y-Nomenclatura\operativa\quick-reference.md <- sin prefijo de commit conocido: Se cerro la Fase 3 de M13 Herramientas y se implemento el lote V0 de gestion con QA cruzado
+  DOCUMENTACION\162-Dialogos-Contextuales-De-NPCs\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: Se actualizaron checklists de 130+ módulos: progreso y códigos
+  DOCUMENTACION\166-Variantes-Y-Perfil-De-Rendimiento\plan-actual\04-Codigo.md <- plan-actual sin **Modelo:** legible; ultimo commit: Limpieza transversal: TMP de libvoxel, referencias a Logs/ e inventario (Log 853)
+  DOCUMENTACION\23-Historias-Secundarias\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: Se actualizaron checklists de 130+ módulos: progreso y códigos
+  DOCUMENTACION\35-Mineria\plan-actual\05-Checklist.md <- plan-actual sin **Modelo:** legible; ultimo commit: Se actualizaron checklists de 130+ módulos: progreso y códigos
+  DOCUMENTACION\GUIA-GODOT\06-registro-errores.md <- sin prefijo de commit conocido: Se agregaron las trampas T-98 a T-100 al registro de errores (validacion anti falso-verde)
+  DOCUMENTACION\TAREAS-POR-MODELO\agnes-3-flash\BACKLOG-MASTER.md <- sin prefijo de commit conocido: Se agrego nota IMPORTANTE de cobertura de debilidades del coordinador a 5 backlogs (M-01 a M-06, seccion 21.12)
+  DOCUMENTACION\TAREAS-POR-MODELO\atria-dawn-s2\BACKLOG-MASTER.md <- sin prefijo de commit conocido: Se agrego el gate anti-detector-ciego en generar_checklist_global.py y el cierre de sesion de atria-dawn-s2
+  DOCUMENTACION\TAREAS-POR-MODELO\glm-5.3-flash\39-Tiendas\checklist.md <- sin prefijo de commit conocido: Se renombró backlog GLM-5.3 a GLM-5.3-Flash, accesibilidad aplicador, debug menu fixes, test mapa búsqueda, logs 446-537
+  DOCUMENTACION\TAREAS-POR-MODELO\glm-5.3-flash\92-Tutorial\checklist.md <- sin prefijo de commit conocido: chore: actualizar system files, backlog glm-5.3-flash, debug scripts
+  DOCUMENTACION\TAREAS-POR-MODELO\glm-5.3-flash\BACKLOG-MASTER.md <- sin prefijo de commit conocido: chore: actualizar system files, backlog glm-5.3-flash, debug scripts
+  Logs\NUMEROS_DISPONIBLES.txt <- sin prefijo de commit conocido: Se añadio el test RF14 de M72 (data-integrity stat_ids) + Log 1021 + pool V3
+  Logs\_d39.txt <- sin prefijo de commit conocido: Fix CI: BOM en Logs/ + ruta gen_vfx_catalog en quality.yml
+  Logs\_estado39.txt <- sin prefijo de commit conocido: Fix CI: BOM en Logs/ + ruta gen_vfx_catalog en quality.yml
+  Logs\_t39_test_loop_economico.txt <- sin prefijo de commit conocido: Fix CI: BOM en Logs/ + ruta gen_vfx_catalog en quality.yml
+  Logs\_t39_test_tiendas.txt <- sin prefijo de commit conocido: Fix CI: BOM en Logs/ + ruta gen_vfx_catalog en quality.yml
+  Logs\_t39_test_tiendas_iter_glm.txt <- sin prefijo de commit conocido: Fix CI: BOM en Logs/ + ruta gen_vfx_catalog en quality.yml
+  game\isla-ancestral\data\audio\narrative_sound.json <- sin prefijo de commit conocido: chore(data): actualizar datos del juego - balance, audio, islas, templos, transporte, legal
+  game\isla-ancestral\data\motivacion\objetivos.json <- sin prefijo de commit conocido: Se actualizaron archivos de datos: diálogos, logros, economía, vegetación
+  game\isla-ancestral\data\security\security_policies.json <- sin prefijo de commit conocido: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game\isla-ancestral\data\villagers\bruno_sapo.tres <- sin prefijo de commit conocido: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game\isla-ancestral\data\villagers\catalina_oso.tres <- sin prefijo de commit conocido: Avance multi-agente: GLM-5.3/Flash, MiniMax-M3, Hy3, MiMo V2.5
+  game\isla-ancestral\data\villagers\finneas_zorro.tres <- sin prefijo de commit conocido: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game\isla-ancestral\data\villagers\luna_zorra.tres <- sin prefijo de commit conocido: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game\isla-ancestral\data\villagers\mateo_mapache.tres <- sin prefijo de commit conocido: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game\isla-ancestral\scripts\audio\narrative_sound.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game\isla-ancestral\scripts\backup\backup_manager.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\backup\test_backup_m107.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\camera\camera_rig.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\camera\camera_spring.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\camera\simple_camera.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\coleccionables\collectible_category.gd <- sin prefijo de commit conocido: Se agregaron 11-BUGS, logs renumerados 401-553, checklists M14-M160, scripts economía/fauna/vehículos/ubicaciones/inventario, datos herramientas/ubicaciones/vegetación, herramientas CI, cangrejo playa
+  game\isla-ancestral\scripts\economia\economy_manager.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\economia\price_manager.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\follow_camera.gd <- sin prefijo de commit conocido: Spawn movido al interior de la isla (2048, 1638) — diagnostico pendiente
+  game\isla-ancestral\scripts\ia_npc\npc_agent.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\ia_npc\npc_manager.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\ia_npc\npc_needs.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game\isla-ancestral\scripts\legal\audio_legal_manager.gd <- sin prefijo de commit conocido: Avance módulos: M154 completado, M84 85%, M53 83%
+  game\isla-ancestral\scripts\legal\test_audio_licenses_m84.gd <- sin prefijo de commit conocido: M84 Audio Legal: 85→99/99 ✅ COMPLETADO
+  game\isla-ancestral\scripts\legal\test_credits_m131_v2.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\player\test_equipment_m155.gd <- sin prefijo de commit conocido: Se actualizaron UI, mundo, vegetación, terreno, player, NPC, foto y DLC
+  game\isla-ancestral\scripts\security\security_manager.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game\isla-ancestral\scripts\security\test_security_m106.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game\isla-ancestral\scripts\shops\catalogo_tiendas.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game\isla-ancestral\scripts\shops\shop.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\shops\shop_data.gd <- sin prefijo de commit conocido: Ajustes finales de posicion: jugador y Catalina sobre la planicie de arena
+  game\isla-ancestral\scripts\shops\shop_manager.gd <- sin prefijo de commit conocido: Ajustes finales de posicion: jugador y Catalina sobre la planicie de arena
+  game\isla-ancestral\scripts\shops\stock_generator.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\shops\test_loop_economico.gd <- sin prefijo de commit conocido: Se sube la primera versión funcional del juego Isla Ancestral
+  game\isla-ancestral\scripts\time\game_clock.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\tutorial\tutorial_manager.gd <- sin prefijo de commit conocido: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python
+  game\isla-ancestral\scripts\ui\core\ui_manager.gd <- sin prefijo de commit conocido: M53 UI-UX: avanzar de 78% a 82% (130/158 items)
+  game\isla-ancestral\scripts\ui\equipment_ui.gd <- sin prefijo de commit conocido: Se actualizaron UI, mundo, vegetación, terreno, player, NPC, foto y DLC
+  game\isla-ancestral\scripts\ui\layers\dialog_layer.gd <- sin prefijo de commit conocido: Se corrigio el BUG-048: la UI no compilaba en runtime (Log 983)
+  game\isla-ancestral\scripts\ui\layers\equipment_layer.gd <- sin prefijo de commit conocido: Se implemento el sistema de horizonte y vision lejana para la isla 10x (Logs 758-799)
+  game\isla-ancestral\scripts\ui\services\tooltip_service.gd <- sin prefijo de commit conocido: Avance multi-agente: GLM-5.3/Flash, MiniMax-M3, Hy3, MiMo V2.5
+  game\isla-ancestral\scripts\ui\widgets\interact_prompt.gd <- sin prefijo de commit conocido: Se implementaron 7 widgets del HUD (M53 UI/UX)
+  game\isla-ancestral\tests\integration\test_inventory_economy.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\interfaces\test_i_damageable.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\interfaces\test_i_interactable.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\interfaces\test_i_saveable.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\inventario\test_contenedor_inventario.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\inventario\test_inventory_slot.gd <- sin prefijo de commit conocido: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game\isla-ancestral\tests\unit\player\test_equipment_manager.gd <- sin prefijo de commit conocido: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  scripts\run_m92_tests.bat <- sin prefijo de commit conocido: feat: installer ISS + scripts de build y utilidades

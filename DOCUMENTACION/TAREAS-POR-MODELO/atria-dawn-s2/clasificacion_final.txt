@@ -1,0 +1,308 @@
+CLASIFICACION DE ARCHIVOS M POR AUTOR - SOPORTE AL MERGE
+========================================================
+Fecha: 2026-09-25 | Por: atria-dawn-s2 (Kilo Code) | NO se commiteo nada
+
+Total clasificado: 224 archivos M
+  Bucket A (modelo identificable):  182 (81%)
+  Bucket B (coordinador Atria):      29 (13%)
+  Bucket C (conflicto/inclasificable): 13 (6%)  <- bajo el 15%, el metodo sirve
+
+Distribucion bucket A (listo para commits por modelo):
+  deepseek-v4.1-flash: 90   <- el mas grande (M93/M94 + P-30/P-32)
+  glm-5.3-flash: 21+3 backlog
+  mimo-v2.5: 14
+  swe: 14
+  nemotron: 10
+  hy3: 5
+  ox-alpha: 4
+  kimi-k3: 4
+  step-3.7-flash: 3
+  agnes-3-flash: 3+1
+  atria-dawn (yo, s2): 1+1+GUIA-GODOT/06
+
+Senales usadas (en orden de prioridad):
+  1. plan-actual/*.md -> firma **Modelo:** del header (archivo entero)
+  2. game/ y otros    -> ruta indexada en 04-Codigo.md/03-Diseno.md (978
+     rutas) -> modulo -> columna "Agente actual" de CHECKLIST-GLOBAL
+  3. Nombre _m{ID}_   -> modulo -> agente global
+  4. Overrides        -> subdir shops/=M39(glm), ui/=M53(atria BUG-048),
+     audio/=M84(mimo), tests *inventario*=M14(QA propia Log 1013)
+  5. Prefijo commit   -> fallback (debil: bulk commits antiguos)
+
+Verificacion extra hecha (mas alla del commit): diff SIN commitear de los
+4 archivos compartidos, para detectar multi-autoria real:
+  - 11-BUGS.md          -> MULTI-AUTOR, va a C (hunks atria + deepseek)
+  - ESTADO-PARALELO.md  -> MULTI-AUTOR, va a C (todos los modelos)
+  - GUIA-GODOT/06       -> LIMPIO: T-98..100 commiteados por hy3; el diff
+                           sin commitear es SOLO mi T-101 (56+/0-). Va a A.
+  - CHECKLIST-GLOBAL.md -> EOL 231/231 + multi-autor, va a C (editar_crlf.py)
+  - NUMEROS_DISPONIBLES -> pool sano: 352 libres, primero=1149, 0 conflictos.
+                           OJO: dijiste primer libre 1145; el real es 1149
+                           (se consumieron 4 desde tu chequeo).
+
+CLASIFICACION FINAL DE ARCHIVOS M — TOTAL 224
+Metodo: 1) firma **Modelo:** del plan-actual  2) ruta -> modulo
+(indice 04-Codigo/03-Diseno) -> agente en CHECKLIST-GLOBAL  3) prefijo
+del ultimo commit  4) reglas especiales (backlogs, scratch M39, UI).
+
+=== BUCKET A (por modelo) ===
+
+## agnes-3-flash (3)
+  DOCUMENTACION/113-Pruebas-De-Stress/plan-actual/05-Checklist.md  [firma header **Modelo:** 'agnes-3-flash (Sapiens AI) (último modificador)']
+  DOCUMENTACION/166-Variantes-Y-Perfil-De-Rendimiento/plan-actual/04-Codigo.md  [firma header **Modelo:** 'agnes-3-flash (Sapiens AI)']
+  DOCUMENTACION/64-IA-De-NPC/plan-actual/04-Codigo.md  [firma header **Modelo:** 'MiMo V2.5 (coordinación) / agnes-2.5-flash (implementación inicial)']
+
+## agnes-3-flash (backlog propio) (1)
+  DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/BACKLOG-MASTER.md  [backlog personal del modelo agnes-3-flash]
+
+## atria-dawn (1)
+  DOCUMENTACION/15-Recursos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'atria-dawn (último actualizador — iter 6 reservada, 2026-09-16)']
+
+## atria-dawn (backlog propio) (1)
+  DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn/BACKLOG-MASTER.md  [backlog personal del modelo atria-dawn]
+
+## atria-dawn (coordinador) (7)
+  .gitignore  [infraestructura del repo]
+  game/isla-ancestral/scripts/ui/core/ui_manager.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+  game/isla-ancestral/scripts/ui/equipment_ui.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+  game/isla-ancestral/scripts/ui/layers/dialog_layer.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+  game/isla-ancestral/scripts/ui/layers/equipment_layer.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+  game/isla-ancestral/scripts/ui/services/tooltip_service.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+  game/isla-ancestral/scripts/ui/widgets/interact_prompt.gd  [subdir ui/ -> M53 (BUG-048 Log 983, atria)]
+
+## atria-dawn-s2 (yo) (2)
+  DOCUMENTACION/GUIA-GODOT/06-registro-errores.md  [T-98..T-100 ya en HEAD (hy3); diff sin commitear = mi T-101]
+  DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/BACKLOG-MASTER.md  [mi carpeta de backlog]
+
+## deepseek-v4.1-flash (89)
+  DOCUMENTACION/01-Fundamentos-Del-Proyecto/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/07-Arquitectura-General/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/09-Terreno-Y-Geografia/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/101-QA-General/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash-vision-exp']
+  DOCUMENTACION/105-Telemetria-De-Gameplay/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash']
+  DOCUMENTACION/108-Pipeline-De-Assets/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/109-Herramientas-Internas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/112-Testing-Automatico/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash / ox-alpha (Cline)']
+  DOCUMENTACION/114-Playtest/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/116-Instalador/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash (ultimo modificador; diseño y iter. 1 por SWE-1.6/DEVIN y deepseek-v4-flash-vision-exp)']
+  DOCUMENTACION/12-Camara/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/123-Modding/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash (iter. 2) · núcleo original: Deepseek V4 Flash']
+  DOCUMENTACION/124-Contenido-Generado-Por-Usuarios/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/137-Prototipo/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/138-Vertical-Slice/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/139-Pre-Alpha/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/140-Alpha/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/141-Beta/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/142-Release-Candidate/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/143-Lanzamiento/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/144-Despues-Del-Lanzamiento/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/147-World-Building/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash (último modificador)']
+  DOCUMENTACION/148-Lore-Ambiental/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash (iter. 1) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 2)']
+  DOCUMENTACION/151-Control-Final/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/16-Crafting/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/163-Sistema-De-Encantamientos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'step-3.7-flash (último modificador; documentación base por Deepseek V4 Flash)']
+  DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash']
+  DOCUMENTACION/18-Casas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/19-NPC-Y-Vecinos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/21-Dialogos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/22-Historia-Principal/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; documentación base por Deepseek V4 Flash)']
+  DOCUMENTACION/24-Templos-Y-Puzzles/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/26-Templo-Subterraneo/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash (diseño, 2026-08-17) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 2, 2026-09-14)']
+  DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/28-Viajes/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/31-Ciclo-Dia-Noche/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/33-Agricultura/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/37-Museos-Y-Colecciones/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/39-Tiendas/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/39-Tiendas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/40-Infraestructura/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/45-Arte-3D/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/47-Texturas-Y-Materiales/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/48-Animacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/50-Vegetacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/51-Agua/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash (diseño) · DeepSeek-V4.1-Flash / WorkBuddy (iter. 5-6)']
+  DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash (doc original) + mimo-v2.5-free (verificacion 2026-09-14)']
+  DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; documentación base por Deepseek V4 Flash)']
+  DOCUMENTACION/56-Fotografia/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/57-Interfaz-De-Control/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/58-Accesibilidad/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/60-Datos-Y-Serializacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash']
+  DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/63-Cargas-Y-Streaming/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/66-Anti-Softlock/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/66-Anti-Softlock/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/67-Vehiculos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; docs por Deepseek V4 Flash)']
+  DOCUMENTACION/68-Transporte-Y-Navegacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash']
+  DOCUMENTACION/72-Sistema-De-Logros/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/72-Sistema-De-Logros/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; docs por Deepseek V4 Flash)']
+  DOCUMENTACION/75-Postgame/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; docs por Deepseek V4 Flash)']
+  DOCUMENTACION/76-Multijugador/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/77-Online-Y-Red/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/78-Legal-Propiedad-Intelectual/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/79-Legal-Contratos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/80-Legal-Privacidad/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/86-IA-Generativa/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'DeepSeek-V4.1-Flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash, iters 2-3 por glm-5.3-flash, iter. 4 por deepseek-v4-flash)']
+  DOCUMENTACION/89-Diseno-De-Menus/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/92-Tutorial/plan-actual/03-Diseno.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/92-Tutorial/plan-actual/04-Codigo.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/92-Tutorial/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo/iter. 1 por Deepseek V4 Flash)']
+  DOCUMENTACION/93-Balance/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM-5.3 (último modificador — iter. 4 cerrada 2026-09-12; iter. 3 glm-5.3-flash materializada sin log; núcleo iters. 1-2 Deepseek V4 Flash)']
+  DOCUMENTACION/94-Retencion-Sin-FOMO/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash (último modificador)']
+  DOCUMENTACION/95-Monetizacion/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash (último modificador)']
+  DOCUMENTACION/96-Plataformas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'deepseek-v4-flash (último modificador)']
+  DOCUMENTACION/97-Steam-Store-Page/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/98-Trailer/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  DOCUMENTACION/99-Marketing/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Deepseek V4 Flash']
+  Logs/_d39.txt  [scratch files de M39 (prefijo _d39/_t39)]
+  Logs/_estado39.txt  [scratch files de M39 (prefijo _d39/_t39)]
+  Logs/_t39_test_loop_economico.txt  [scratch files de M39 (prefijo _d39/_t39)]
+  Logs/_t39_test_tiendas.txt  [scratch files de M39 (prefijo _d39/_t39)]
+  Logs/_t39_test_tiendas_iter_glm.txt  [scratch files de M39 (prefijo _d39/_t39)]
+  game/isla-ancestral/data/motivacion/objetivos.json  [ruta -> modulo ['94'] -> agente global]
+  game/isla-ancestral/scripts/ia_npc/npc_agent.gd  [ruta -> modulo ['01'] -> agente global]
+
+## glm-5.3-flash (21)
+  DOCUMENTACION/118-CI-CD/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash']
+  DOCUMENTACION/133-Gestion-Del-Proyecto/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/134-Presupuesto/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/135-Riesgos-Del-Proyecto/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/136-Roadmap/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/145-Diseno-De-Experiencia/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/146-Diseno-Emocional/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/149-Nombres-Y-Nomenclatura/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/153-Objetivo-Final/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM']
+  DOCUMENTACION/158-Herramientas-Y-Desbloqueo-De-Zonas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; docs por MiMo V2.5)']
+  DOCUMENTACION/29-Tiempo-Y-Calendario/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM-5.3 (último actualizador — iter 1, 2026-09-11)']
+  DOCUMENTACION/38-Economia/plan-actual/05-Checklist.md  [firma header **Modelo:** 'GLM-5.3 (último actualizador — iter 5b, 2026-09-11)']
+  DOCUMENTACION/46-Arte-2D/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash']
+  DOCUMENTACION/59-Guardado/plan-actual/05-Checklist.md  [firma header **Modelo:** 'glm-5.3-flash (último modificador; núcleo por ox-alpha)']
+  game/isla-ancestral/scripts/shops/catalogo_tiendas.gd  [subdir shops/ -> M39 -> agente global]
+  game/isla-ancestral/scripts/shops/shop.gd  [subdir shops/ -> M39 -> agente global]
+  game/isla-ancestral/scripts/shops/shop_data.gd  [subdir shops/ -> M39 -> agente global]
+  game/isla-ancestral/scripts/shops/shop_manager.gd  [subdir shops/ -> M39 -> agente global]
+  game/isla-ancestral/scripts/shops/stock_generator.gd  [subdir shops/ -> M39 -> agente global]
+  game/isla-ancestral/scripts/shops/test_loop_economico.gd  [subdir shops/ -> M39 -> agente global]
+  scripts/run_m92_tests.bat  [test del modulo M92 (por nombre); agente global: glm-5.3-flash]
+
+## glm-5.3-flash (backlog propio) (3)
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/39-Tiendas/checklist.md  [backlog personal del modelo glm-5.3-flash]
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/92-Tutorial/checklist.md  [backlog personal del modelo glm-5.3-flash]
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/BACKLOG-MASTER.md  [backlog personal del modelo glm-5.3-flash]
+
+## hy3 (5)
+  DOCUMENTACION/131-Creditos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Hy3']
+  DOCUMENTACION/167-Isla-Raiz/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Hy3']
+  DOCUMENTACION/23-Historias-Secundarias/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Hy3']
+  DOCUMENTACION/36-Fauna/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Hy3']
+  DOCUMENTACION/65-Animales-IA/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Hy3']
+
+## kimi-k3 (4)
+  game/isla-ancestral/data/security/security_policies.json  [ruta -> modulo ['106'] -> agente global]
+  game/isla-ancestral/scripts/backup/backup_manager.gd  [ruta -> modulo ['106', '26'] -> agente global]
+  game/isla-ancestral/scripts/security/security_manager.gd  [ruta -> modulo ['106'] -> agente global]
+  game/isla-ancestral/scripts/security/test_security_m106.gd  [test del modulo M106 (por nombre); agente global: kimi-k3]
+
+## mimo-v2.5 (14)
+  DOCUMENTACION/12-Camara/plan-actual/03-Diseno.md  [firma header **Modelo:** 'mimo-v2.5']
+  DOCUMENTACION/12-Camara/plan-actual/04-Codigo.md  [firma header **Modelo:** 'mimo-v2.5']
+  DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5']
+  DOCUMENTACION/165-Voxel-Tools-Guia/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5']
+  DOCUMENTACION/168-Plantilla-De-Isla/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5']
+  DOCUMENTACION/25-Ruinas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5']
+  DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5 (OpenCode)']
+  DOCUMENTACION/64-IA-De-NPC/plan-actual/03-Diseno.md  [firma header **Modelo:** 'MiMo V2.5']
+  DOCUMENTACION/82-Clasificacion-Por-Edades/plan-actual/05-Checklist.md  [firma header **Modelo:** 'MiMo V2.5']
+  game/isla-ancestral/data/audio/narrative_sound.json  [audio -> M84 -> agente global]
+  game/isla-ancestral/scripts/audio/narrative_sound.gd  [audio -> M84 -> agente global]
+  game/isla-ancestral/scripts/legal/audio_legal_manager.gd  [ruta -> modulo ['84'] -> agente global]
+  game/isla-ancestral/scripts/legal/test_audio_licenses_m84.gd  [test del modulo M84 (por nombre); agente global: mimo-v2.5]
+  game/isla-ancestral/scripts/legal/test_credits_m131_v2.gd  [test del modulo M131 (por nombre); agente global: mimo-v2.5]
+
+## nemotron (10)
+  DOCUMENTACION/119-Actualizaciones/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/128-Identidad-De-Marca/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/128-Identidad-De-Marca/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3.5 Lightning']
+  DOCUMENTACION/81-Legal-Menores/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/83-Licencias-De-Software/plan-actual/04-Codigo.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/83-Licencias-De-Software/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/84-Musica-Y-Audio-Legal/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+  DOCUMENTACION/85-Modelos-3D-Legal/plan-actual/05-Checklist.md  [firma header **Modelo:** 'Nemotron 3 Ultra']
+
+## ox-alpha (4)
+  DOCUMENTACION/130-Artbook/plan-actual/05-Checklist.md  [firma header **Modelo:** 'ox-alpha']
+  DOCUMENTACION/154-Vision-Del-Agente/plan-actual/05-Checklist.md  [firma header **Modelo:** 'ox-alpha']
+  DOCUMENTACION/159-Catalogo-De-Objetos/plan-actual/05-Checklist.md  [firma header **Modelo:** 'ox-alpha (Cline)']
+  game/isla-ancestral/data/villagers/catalina_oso.tres  [ruta -> modulo ['19', '20'] -> agente global]
+
+## step-3.7-flash (3)
+  DOCUMENTACION/155-Vestimenta-Y-Accesorios/plan-actual/05-Checklist.md  [firma header **Modelo:** 'stepfun-3.7-flash']
+  DOCUMENTACION/161-Diseno-Visual-De-NPCs/plan-actual/05-Checklist.md  [firma header **Modelo:** 'stepfun-3.7-flash']
+  game/isla-ancestral/scripts/follow_camera.gd  [ruta -> modulo ['12', '167', '168'] -> agente global]
+
+## swe (14)
+  DOCUMENTACION/100-Community-Management/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/106-Seguridad/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/107-Backups/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/120-DLC-Y-Expansiones/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/121-Soporte-Post-Lanzamiento/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/125-Terminos-De-Servicio/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/126-Marketing-Legal/plan-actual/04-Codigo.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/126-Marketing-Legal/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/129-Merchandising/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/150-Diseo-Sonoro-Narrativo/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/152-Principios-Innegociables/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/88-Fuentes-Tipograficas/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/90-Configuracion-Grafica/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+  DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md  [firma header **Modelo:** 'SWE-1.6']
+
+=== BUCKET B (coordinador Atria main): 29 ===
+  DOCUMENTACION/106-Seguridad/plan-actual/04-Codigo.md  [prefijo commit: docs(módulos): actualizar documentación de módulos 92-116 (QA, legal, testing, hardware)]
+  DOCUMENTACION/111-Codigo-De-Calidad/plan-actual/05-Checklist.md  [QA propia (Log 1013/1032): Se agrego QA cruzado sec21.8 de M111-Codigo-De-Calidad iter. 4 (Log 1032): passed=62/0, 9/9 archivos, fix Variant, hallazgo gate suave (|| true) delegado a M107/M111]
+  DOCUMENTACION/115-Hardware/plan-actual/05-Checklist.md  [prefijo commit: fix(logs): restaurar 25 huerfanos del dedup, renumerar colisiones y corregir citas]
+  DOCUMENTACION/117-Build-System/plan-actual/05-Checklist.md  [prefijo commit: chore(tools): actualizar scripts de Blender, CI, checklist global, quality workflow]
+  DOCUMENTACION/14-Inventario/plan-actual/05-Checklist.md  [QA propia (Log 1013/1032): Se realizo QA del modulo M14 Inventario (Log 1013)]
+  DOCUMENTACION/149-Nombres-Y-Nomenclatura/operativa/quick-reference.md  [prefijo commit: Se cerro la Fase 3 de M13 Herramientas y se implemento el lote V0 de gestion con QA cruzado]
+  DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-actual/05-Checklist.md  [bulk update de checklists (coordinador): Se actualizaron checklists de 130+ módulos: progreso y códigos]
+  DOCUMENTACION/35-Mineria/plan-actual/05-Checklist.md  [bulk update de checklists (coordinador): Se actualizaron checklists de 130+ módulos: progreso y códigos]
+  DOCUMENTACION/70-Interacciones/plan-actual/05-Checklist.md  [prefijo commit: fix(bom): quitar BOM de los 83 archivos vivos que lo tienen en HEAD]
+  DOCUMENTACION/73-Coleccionables/plan-actual/05-Checklist.md  [prefijo commit: docs(módulos): actualizar documentación de módulos 68, 73, 78, 80, 81, 82, 83, 84, 85, 86]
+  DOCUMENTACION/74-Eventos/plan-actual/05-Checklist.md  [prefijo commit: fix(bom): quitar BOM de los 83 archivos vivos que lo tienen en HEAD]
+  DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md  [prefijo commit: docs(guías): actualizar guías de conexión, orden de implementación, backlogs y prompts]
+  game/isla-ancestral/locales/en.po  [prefijo commit: fix(M87): 3 claves de M53 ausentes del catalogo + el auditor deja de ser ciego a open_confirm]
+  game/isla-ancestral/locales/es.po  [prefijo commit: fix(M87): 3 claves de M53 ausentes del catalogo + el auditor deja de ser ciego a open_confirm]
+  game/isla-ancestral/scripts/camera/camera_rig.gd  [prefijo commit: Se sube la primera versión funcional del juego Isla Ancestral]
+  game/isla-ancestral/scripts/camera/camera_spring.gd  [prefijo commit: Se sube la primera versión funcional del juego Isla Ancestral]
+  game/isla-ancestral/scripts/camera/simple_camera.gd  [prefijo commit: Se sube la primera versión funcional del juego Isla Ancestral]
+  game/isla-ancestral/scripts/economia/economy_manager.gd  [prefijo commit: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python]
+  game/isla-ancestral/scripts/economia/price_manager.gd  [prefijo commit: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python]
+  game/isla-ancestral/scripts/ia_npc/npc_manager.gd  [prefijo commit: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python]
+  game/isla-ancestral/scripts/ia_npc/state_machine.gd  [prefijo commit: fix(bom): quitar BOM de los 83 archivos vivos que lo tienen en HEAD]
+  game/isla-ancestral/scripts/time/game_clock.gd  [prefijo commit: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python]
+  game/isla-ancestral/scripts/tutorial/tutorial_manager.gd  [prefijo commit: chore(scripts): actualizar scripts del juego - 120 archivos GDScript + Python]
+  game/isla-ancestral/tests/integration/test_inventory_economy.gd  [infra de tests de M14 (QA Log 1013)]
+  game/isla-ancestral/tests/unit/interfaces/test_i_damageable.gd  [infra de tests de M14 (QA Log 1013)]
+  game/isla-ancestral/tests/unit/interfaces/test_i_interactable.gd  [infra de tests de M14 (QA Log 1013)]
+  game/isla-ancestral/tests/unit/interfaces/test_i_saveable.gd  [infra de tests de M14 (QA Log 1013)]
+  game/isla-ancestral/tests/unit/inventario/test_contenedor_inventario.gd  [infra de tests de M14 (QA Log 1013)]
+  game/isla-ancestral/tests/unit/inventario/test_inventory_slot.gd  [infra de tests de M14 (QA Log 1013)]
+
+=== BUCKET C (inclasificable / conflicto): 13 ===
+  CHECKLIST-GLOBAL.md <- EOL (231 CRLF + 1 NUL) + multi-autor; diff 231/231 — coordinador lo maneja con editar_crlf.py
+  DOCUMENTACION/11-BUGS.md <- MULTI-AUTOR: diff sin commitear tiene hunks de atria (merge sec.9 + firma BUG-043), deepseek (BUG-071/BUG-072 fila) y otros; separar hunks a mano
+  Logs/NUMEROS_DISPONIBLES.txt <- pool de logs: infraestructura compartida, multi-autor
+  Mensajes entre modelos/ESTADO-PARALELO.md <- ruta no indexada en 04-Codigo.md (Mensajes entre modelos/ESTADO-PARALELO.md); ultimo commit: Se agrego QA cruzado sec21.8 de M111-Codigo-De-Calidad iter. 4 (Log 1032): passed=62/0, 9/9 archivos, fix Variant, hallazgo gate suave (|| true) delegado a M107/M111
+  game/isla-ancestral/data/villagers/bruno_sapo.tres <- ruta no indexada en 04-Codigo.md (data/villagers/bruno_sapo.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/finneas_zorro.tres <- ruta no indexada en 04-Codigo.md (data/villagers/finneas_zorro.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/luna_zorra.tres <- ruta no indexada en 04-Codigo.md (data/villagers/luna_zorra.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/mateo_mapache.tres <- ruta no indexada en 04-Codigo.md (data/villagers/mateo_mapache.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/scripts/backup/test_backup_m107.gd <- test del modulo M107 sin agente asignado
+  game/isla-ancestral/scripts/coleccionables/collectible_category.gd <- ruta no indexada en 04-Codigo.md (scripts/coleccionables/collectible_category.gd); ultimo commit: Se agregaron 11-BUGS, logs renumerados 401-553, checklists M14-M160, scripts economía/fauna/vehículos/ubicaciones/inventario, datos herramientas/ubicaciones/vegetación, herramientas CI, cangrejo playa
+  game/isla-ancestral/scripts/ia_npc/npc_needs.gd <- ruta no indexada en 04-Codigo.md (scripts/ia_npc/npc_needs.gd); ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game/isla-ancestral/scripts/player/test_equipment_m155.gd <- test del modulo M155 sin agente asignado
+  game/isla-ancestral/tests/unit/player/test_equipment_manager.gd <- modulos ['155'] sin agente asignado en global; ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos

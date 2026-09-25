@@ -400,3 +400,85 @@ verificacion cruzada entre fuentes.
   (parte del fix BUG-075 que me corresponde — DeepSeek cubrió solo el parser).
   Implementado + probado (vacío→3, sin tabla→3, inexistente→0, control→0).
   **Verificación final delegada a otro agente** (regla T-101).
+
+## P-23 — Cierre de sesión (2026-09-20 08:25, Log 1135, commit 39fb8af)
+
+- [x] **P-23.1** Notificación a dueños de bugs sin firma en ESTADO-PARALELO,
+  con línea, dueño, módulo y **plazo 2026-09-21**.
+- [x] **P-23.2** BUG-043 firmado — era mío (Log 945), el único de los 6 que
+  podía firmar. Contador 6→5.
+- [x] **P-23.3** Commit `39fb8af` con **solo trabajo propio** (36 archivos).
+  Protegidos: CHECKLIST-GLOBAL.md (EOL), 11-BUGS.md, GUIA-GODOT/06,
+  ESTADO-PARALELO.md (todos con trabajo ajeno sin commitear mezclado).
+- [x] **P-23.4** No se ejecutó `generar_checklist_global.py` en modo
+  escritura (pisaría M93/M94 de DeepSeek) — solo `--dry-run`.
+
+**Sesión s2 cerrada.** Resumen completo en Log 1135.
+
+---
+
+## Sesión s3 (2026-09-25) — Soporte al merge final
+
+- [x] **P-30.1** Clasificación de los 224 archivos M por autor: A=182,
+      B=29, C=13 (6%). Reporte con evidencia por archivo.
+- [x] **P-30.2** Verificación extra: diff sin commitear de los 4
+      compartidos. 11-BUGS.md → C (multi-autor real); GUIA-GODOT/06 → A
+      (solo mi T-101); CHECKLIST-GLOBAL.md → C (EOL); pool sano.
+- [x] **P-30.3** QA documental §21.8 de M07/M133/M134/M135/M136: todos
+      pasan, PERO ya tenían sello legítimo de Hy3. Regla T-101 aplicada —
+      no se agregaron sellos redundantes.
+- [x] Log creado: **1152** — Soporte-Merge-QA.
+
+### P-40 — Cierra la discrepancia de M07 (asignada por el coordinador)
+
+- [x] **P-40.1** Verificar `git log --all` de thread_pool/voxel_world/
+      game_state: **nunca existieron** (solo skills de terceros). Plan
+      aspiracional documentado como código.
+- [x] **P-40.2** Corregir `04-Codigo.md` de M07: 3 rutas reubicadas a
+      sección "Scripts previstos (NO implementados)" con advertencia.
+- [x] **P-40.3** Notificar a mimo en ESTADO-PARALELO.md (su sello Log
+      1148 puede ser over-mark; M07 → 🟡 si no confirma).
+- [x] **P-40.4** Corregir `qa_documental.txt`: M07 → NO limpio, los
+      otros 4 limpios.
+- [x] **P-40.5** Trampa **T-102** en GUIA-GODOT/06: "el detalle manda".
+- [x] Log creado: **1155** — P-40-M07-drift-T102.
+- [ ] **P-40.6** Esperar respuesta/confirmación de mimo sobre su sello
+      de M07. Sin commitear nada de M07 (visto bueno del coordinador).
+      → **CANCELADO por el coordinador:** M07 se queda ✅, el sello de
+      mimo (Log 1148) es válido, mi corrección del 04-Codigo ya resolvió
+      la ambigüedad. No baja a 🟡.
+
+### P-44 — Merge de modelos inactivos huérfanos (asignada por el coordinador)
+
+- [x] **P-44.1** Driver con estado live + verificaciones (EOL, hunks
+      ajenos, índice vacío, `git show --stat` por commit).
+- [x] **P-44.2** 7 commits, 56 archivos: glm 20+3, swe 13, nemotron 11,
+      ox-alpha 4, kimi 2, step 3. Sin tocar activos ni compartidos.
+- [x] **P-44.3** 1 excluido por hunks mezclados:
+      `38-Economia/plan-actual/05-Checklist.md` (base glm + mi auditoría
+      Log 1048) → bucket C del coordinador.
+- [x] **P-44.4** Verificación post-commit: 0 protegidos commiteados,
+      165 M restantes, sin push.
+- [x] Log creado: **1158** — P-44-Merge-Huerfanos.
+
+### P-46 — Clasificación y merge de untracked (asignada por el coordinador)
+
+- [x] **P-46.1** Clasificador de untracked en 3 rondas: firma
+      `**Modelo:**`/`**Origen:**` de cualquier .md (no solo plan-actual),
+      companions .uid heredan, `re.MULTILINE` necesario para `$`.
+- [x] **P-46.2** Hallazgo: FAMILIA-B-REPLANIFICACION.md usa `**Origen:**
+      atria-dawn` → son míos, NO trabajo de glm/step (mala atribución
+      evitada).
+- [x] **P-46.3** 2 commits, 8 archivos: glm 3 (Log 1017 + tutorial M92),
+      kimi 5 (backlog + security_environments.json M106). Verificados.
+- [x] **P-46.4** Categorías aparte: scratch 118, artefactos reports/ 70,
+      míos 86, bucket C 58.
+- [x] Log creado: **1162** — P-46-Untracked.
+
+### Acumulado de la sesión s3
+
+- P-40 (M07 drift doc↔código) + T-102 — Log 1155
+- P-44 (merge M de inactivos, 56 archivos / 7 commits) — Log 1158
+- P-46 (merge untracked de inactivos, 8 archivos / 2 commits) — Log 1162
+- **Total: 64 archivos commiteados en 9 commits, todos verificados por
+  modelo. Sin push en ningún momento.**

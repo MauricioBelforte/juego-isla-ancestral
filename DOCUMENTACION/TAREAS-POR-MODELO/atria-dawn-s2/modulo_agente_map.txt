@@ -1,0 +1,167 @@
+01	DeepSeek
+02	DeepSeek
+03	DeepSeek
+04	MiMo ✅
+05	MiMo ✅
+06	agnes-2.5-flash
+07	—
+08	MiMo ✅
+09	—
+10	—
+11	**Reasignado a DeepSeek-V4.1-Flash (P-14):** lock stale de nex (35h, dado de baja), reclamado por 21.4.7. mimo-v2.5 evaluó y cedió (FSM 10 estados + 6 scripts faltantes requiere contexto de DeepSeek). Drift interno M11: cuerpo 55/2/78 vs Totales 50/0/73.
+12	—
+13	—
+14	—
+15	—
+16	Step 3.7 Flash
+17	Qwen3.8 Max
+18	glm-5.3-free
+19	—
+20	ox-alpha (Cline)
+21	Deepseek V4 Flash
+22	4
+23	Step 3.7 Flash
+24	agnes-2.5-flash
+25	mimo-v2.5
+26	—
+27	deepseek-v4-flash-vision-exp
+28	GLM-5.3 Flash
+29	—
+30	—
+31	GLM-5.3 Flash
+32	—
+33	Deepseek V4 Flash
+34	GLM-5.3 Flash
+35	GLM-5.3 Flash
+36	—
+37	GLM-5.3 Flash
+38	—
+39	glm-5.3-flash
+40	Deepseek V4 Flash
+41	deepseek-v4-flash
+42	deepseek-v4-flash
+43	agnes-2.5-flash (SFXManager+tests)
+44	deepseek-v4-flash
+45	—
+46	agnes-2.5-flash
+47	—
+48	deepseek-v4-flash-vision-exp
+49	—
+50	deepseek-v4-flash-vision-exp
+51	—
+52	DeepSeek-V4.1-Flash
+53	**✅ BUG-048 RESUELTO por atria-dawn (Kilo Code) Log 983 (2026-09-18): la UI no compilaba en runtime** (theme_ux.gd:168 parse error por `is Tween` sobre var inferida Node en Godot 4.7 + dialog_layer.gd con `_on_node_entered` duplicada por merge mal resuelto). Verificado headless: `UIRoot: capas montadas (dialogo=true pausa=true menus=true confirm=true crafting=true inventario=true tienda=true equipamiento=true diario=true carga=true)`. M53 liberado del bloqueo temporal — alcance limitado al fix; el checklist no se avanza. Iter. 6 previa (Log 563) — glm-5.3-flash: puente EventBus.ui.notify→NotificationService. Pendientes: animaciones slots, gamepad inventario, Minimapa M54, accesibilidad M58.
+54	mimo-v2.5-free
+55	Hy4
+56	Hy4
+57	Hy4
+58	—
+59	glm-5.3-flash
+60	DeepSeek-V4.1-Flash
+61	agnes-3-flash (Kilo Code)
+62	DeepSeek-V4.1-Flash
+63	DeepSeek
+64	mimo-v2.5
+65	deepseek-v4-flash-vision-exp
+66	—
+67	3
+68	—
+69	agnes-2.5-flash
+70	minimax-m3-free
+71	—
+72	—
+73	agnes-2.5-flash
+74	—
+75	deepseek-v4-flash-vision-exp
+76	2026-09-03 08:35
+77	5
+78	—
+79	agnes-2.5-flash (contract_validator+tests)
+80	agnes-2.5-flash (privacy_validator+tests)
+81	ox-alpha (Cline)
+82	agnes-2.5-flash (rating_validator+tests)
+83	—
+84	mimo-v2.5
+85	agnes-2.5-flash (model3d_validator+tests)
+86	agnes-2.5-flash (genai_validator+tests)
+87	deepseek-v4-flash
+88	agnes-2.5-flash
+89	agnes-2.5-flash
+90	minimax-m3-free
+91	glm-5.3-flash
+92	glm-5.3-flash
+93	GLM-5.3 Flash
+94	deepseek-v4-flash-vision-exp
+95	deepseek-v4-flash-vision-exp
+96	deepseek-v4-flash
+97	agnes-2.5-flash (store_page_validator+tests)
+98	DeepSeek
+99	DeepSeek
+100	agnes-2.5-flash (community_manager+tests)
+101	deepseek-v4-flash
+102	ox-alpha (Cline)
+103	DeepSeek-V4.1-Flash
+104	—
+105	DeepSeek-V4.1-Flash
+106	kimi-k3
+107	—
+108	Step 3.7 Flash
+109	Step 3.7 Flash
+110	—
+111	muse-spark-1.3-contributor (Cline)
+112	ox-alpha (Cline)
+113	deepseek-v4-flash-vision-exp
+114	Step 3.7 Flash
+115	deepseek-v4-flash
+116	deepseek-v4-flash
+117	—
+118	—
+119	—
+120	DeepSeek
+121	deepseek-v4-flash
+122	Step 3.7 Flash
+123	deepseek-v4-flash-vision-exp
+124	DeepSeek-V4.1-Flash
+125	agnes-2.5-flash (terms_validator+tests)
+126	—
+127	—
+128	—
+129	agnes-2.5-flash (merch_validator+tests)
+130	agnes-2.5-flash (artbook_validator+tests)
+131	mimo-v2.5
+132	agnes-2.5-flash (production_validator+tests)
+133	GLM-5.3 Flash ✅
+134	GLM-5.3 Flash ✅
+135	GLM-5.3 Flash ✅
+136	GLM-5.3 Flash ✅
+137	Hy4
+138	Hy4
+139	Hy4
+140	Hy4
+141	Hy4
+142	Hy4
+143	Hy4
+144	minimax-3 (Kilo Code)
+145	GLM-5.3 Flash
+146	GLM-5.3 Flash
+147	deepseek-v4-flash
+148	—
+149	—
+150	mimo-v2.5
+151	agnes-2.5-flash
+152	agnes-2.5-flash
+153	—
+154	MiMo
+155	—
+156	deepseek-v4-flash-vision-exp
+158	GLM-5.3 Flash
+159	DeepSeek
+160	mimo-v2.5
+161	Hy4
+162	hy3
+163	Step 3.7 Flash
+164	—
+165	—
+166	mimo-v2.5
+167	Step 3.7 Flash
+168	—

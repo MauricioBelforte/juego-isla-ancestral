@@ -1,0 +1,45 @@
+
+=== DOCUMENTACION/11-BUGS.md
+anadidas: 110  eliminadas: 13
+menciones de modelos en el diff: ['agnes', 'atria-dawn', 'deepseek', 'glm', 'hy3']
+  + | BUG-071 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto
+  + - **Estado:** [?] Delegado — dueño **M149** (fix del validador) + **M160/M161** (decisión de
+  +   convención de IDs LOC-/NPC-). No lo arreglo yo: es fix de herramienta + decisión de diseño que
+  +   excede el alcance V0 de la reconciliación.
+  + | 2026-09-02 21:40 | deepseek-v4-flash-vision-exp | Kilo Code | Registro BUG-003..BUG-010 (resueltos: M120/M115/M161/M73/M103/M156/M118/M110) y BUG-0
+  + | 2026-09-02 23:40 | deepseek-v4-flash-vision-exp | Kilo Code | Resueltos: BUG-011 (verif. runtime del fix de glm), BUG-022 (VegetationSpawner h<3), 
+
+=== Mensajes entre modelos/ESTADO-PARALELO.md
+anadidas: 2876  eliminadas: 963
+menciones de modelos en el diff: ['agnes', 'atria-dawn', 'deepseek', 'gemini', 'glm', 'hy3', 'kimi', 'mimo']
+  + ## 2026-09-20 04:58 — kimi-k3 (Moonshot AI) / Kilo Code — M106 T-008 (entornos separados) — M106 EN CURSO 🔵
+  + 
+  + - **T-008 HECHA (Log 1132):** NUEVO `security_environments.json` (dev/staging/prod data-driven) +
+  +   NUEVO `security_environment_resolver.gd` (RefCounted, selección por APP_ENV/argumento/default,
+  +   `valor()`/`es_dev()`/`es_prod()`). NUEVO `test_security_m106_environments.gd` (guardianes, 24/0).
+  + - **Verificación binario real 4.7.2 headless: entornos 24/0; total M106 144 checks, 0 fallos,
+
+=== DOCUMENTACION/GUIA-GODOT/06-registro-errores.md
+anadidas: 56  eliminadas: 0
+menciones de modelos en el diff: ['agnes', 'atria-dawn', 'hy3']
+  + ### T-101: Verificar contra una sola fuente de sellos produce sellos redundantes
+  + 
+  + **Síntoma:** un agente hace QA cruzado (§21.8), decide que un módulo «no tiene
+  + sello de verificador» consultando **un solo** registro, aplica el suyo... y
+  + resulta que el módulo **ya estaba verificado** por otro agente. El sello nuevo
+  + es ruido en la columna Notas y, si el agente afterwards se fia de su propio
+
+=== CHECKLIST-GLOBAL.md
+anadidas: 231  eliminadas: 231
+menciones de modelos en el diff: ['agnes', 'atria-dawn', 'deepseek', 'gemini', 'glm', 'hy3', 'kimi', 'mimo']
+  + # CHECKLIST-GLOBAL.md — Orquestador Multiagente
+  + 
+  + > **Modelo:** glm-5.3-flash (último modificador)
+  + > **Plataforma:** Kilo Code
+  + > **Última generación automática:** 2026-09-15 01:19:23 (recontado a mano 2026-08-31 23:53)
+  + 
+
+=== Logs/NUMEROS_DISPONIBLES.txt
+anadidas: 1  eliminadas: 128
+menciones de modelos en el diff: []
+  + 1500

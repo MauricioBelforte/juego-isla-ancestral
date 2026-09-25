@@ -1,0 +1,256 @@
+CLASIFICACION RONDA 2 — TOTAL 224
+=== BUCKET A (por modelo) ===
+
+## agnes-3-flash (3)
+  DOCUMENTACION/113-Pruebas-De-Stress/plan-actual/05-Checklist.md
+  DOCUMENTACION/166-Variantes-Y-Perfil-De-Rendimiento/plan-actual/04-Codigo.md
+  DOCUMENTACION/64-IA-De-NPC/plan-actual/04-Codigo.md
+
+## atria-dawn (1)
+  DOCUMENTACION/15-Recursos/plan-actual/05-Checklist.md
+
+## atria-dawn (coordinador) (1)
+  .gitignore
+
+## atria-dawn-s2 (yo) (1)
+  DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/BACKLOG-MASTER.md
+
+## deepseek-v4.1-flash (92)
+  DOCUMENTACION/01-Fundamentos-Del-Proyecto/plan-actual/05-Checklist.md
+  DOCUMENTACION/07-Arquitectura-General/plan-actual/05-Checklist.md
+  DOCUMENTACION/09-Terreno-Y-Geografia/plan-actual/05-Checklist.md
+  DOCUMENTACION/101-QA-General/plan-actual/05-Checklist.md
+  DOCUMENTACION/105-Telemetria-De-Gameplay/plan-actual/05-Checklist.md
+  DOCUMENTACION/108-Pipeline-De-Assets/plan-actual/05-Checklist.md
+  DOCUMENTACION/109-Herramientas-Internas/plan-actual/05-Checklist.md
+  DOCUMENTACION/11-BUGS.md
+  DOCUMENTACION/112-Testing-Automatico/plan-actual/05-Checklist.md
+  DOCUMENTACION/114-Playtest/plan-actual/05-Checklist.md
+  DOCUMENTACION/116-Instalador/plan-actual/05-Checklist.md
+  DOCUMENTACION/12-Camara/plan-actual/05-Checklist.md
+  DOCUMENTACION/123-Modding/plan-actual/05-Checklist.md
+  DOCUMENTACION/124-Contenido-Generado-Por-Usuarios/plan-actual/05-Checklist.md
+  DOCUMENTACION/137-Prototipo/plan-actual/05-Checklist.md
+  DOCUMENTACION/138-Vertical-Slice/plan-actual/05-Checklist.md
+  DOCUMENTACION/139-Pre-Alpha/plan-actual/05-Checklist.md
+  DOCUMENTACION/140-Alpha/plan-actual/05-Checklist.md
+  DOCUMENTACION/141-Beta/plan-actual/05-Checklist.md
+  DOCUMENTACION/142-Release-Candidate/plan-actual/05-Checklist.md
+  DOCUMENTACION/143-Lanzamiento/plan-actual/05-Checklist.md
+  DOCUMENTACION/144-Despues-Del-Lanzamiento/plan-actual/05-Checklist.md
+  DOCUMENTACION/147-World-Building/plan-actual/05-Checklist.md
+  DOCUMENTACION/148-Lore-Ambiental/plan-actual/05-Checklist.md
+  DOCUMENTACION/151-Control-Final/plan-actual/05-Checklist.md
+  DOCUMENTACION/16-Crafting/plan-actual/05-Checklist.md
+  DOCUMENTACION/163-Sistema-De-Encantamientos/plan-actual/05-Checklist.md
+  DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md
+  DOCUMENTACION/18-Casas/plan-actual/05-Checklist.md
+  DOCUMENTACION/19-NPC-Y-Vecinos/plan-actual/05-Checklist.md
+  DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/05-Checklist.md
+  DOCUMENTACION/21-Dialogos/plan-actual/05-Checklist.md
+  DOCUMENTACION/22-Historia-Principal/plan-actual/05-Checklist.md
+  DOCUMENTACION/24-Templos-Y-Puzzles/plan-actual/05-Checklist.md
+  DOCUMENTACION/26-Templo-Subterraneo/plan-actual/05-Checklist.md
+  DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/05-Checklist.md
+  DOCUMENTACION/28-Viajes/plan-actual/05-Checklist.md
+  DOCUMENTACION/31-Ciclo-Dia-Noche/plan-actual/05-Checklist.md
+  DOCUMENTACION/33-Agricultura/plan-actual/05-Checklist.md
+  DOCUMENTACION/37-Museos-Y-Colecciones/plan-actual/05-Checklist.md
+  DOCUMENTACION/39-Tiendas/plan-actual/04-Codigo.md
+  DOCUMENTACION/39-Tiendas/plan-actual/05-Checklist.md
+  DOCUMENTACION/40-Infraestructura/plan-actual/05-Checklist.md
+  DOCUMENTACION/45-Arte-3D/plan-actual/05-Checklist.md
+  DOCUMENTACION/47-Texturas-Y-Materiales/plan-actual/05-Checklist.md
+  DOCUMENTACION/48-Animacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/50-Vegetacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/51-Agua/plan-actual/05-Checklist.md
+  DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/05-Checklist.md
+  DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md
+  DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md
+  DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/05-Checklist.md
+  DOCUMENTACION/56-Fotografia/plan-actual/05-Checklist.md
+  DOCUMENTACION/57-Interfaz-De-Control/plan-actual/05-Checklist.md
+  DOCUMENTACION/58-Accesibilidad/plan-actual/05-Checklist.md
+  DOCUMENTACION/60-Datos-Y-Serializacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md
+  DOCUMENTACION/63-Cargas-Y-Streaming/plan-actual/05-Checklist.md
+  DOCUMENTACION/66-Anti-Softlock/plan-actual/04-Codigo.md
+  DOCUMENTACION/66-Anti-Softlock/plan-actual/05-Checklist.md
+  DOCUMENTACION/67-Vehiculos/plan-actual/05-Checklist.md
+  DOCUMENTACION/68-Transporte-Y-Navegacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/72-Sistema-De-Logros/plan-actual/04-Codigo.md
+  DOCUMENTACION/72-Sistema-De-Logros/plan-actual/05-Checklist.md
+  DOCUMENTACION/75-Postgame/plan-actual/05-Checklist.md
+  DOCUMENTACION/76-Multijugador/plan-actual/05-Checklist.md
+  DOCUMENTACION/77-Online-Y-Red/plan-actual/05-Checklist.md
+  DOCUMENTACION/78-Legal-Propiedad-Intelectual/plan-actual/05-Checklist.md
+  DOCUMENTACION/79-Legal-Contratos/plan-actual/05-Checklist.md
+  DOCUMENTACION/80-Legal-Privacidad/plan-actual/05-Checklist.md
+  DOCUMENTACION/86-IA-Generativa/plan-actual/05-Checklist.md
+  DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/89-Diseno-De-Menus/plan-actual/05-Checklist.md
+  DOCUMENTACION/92-Tutorial/plan-actual/03-Diseno.md
+  DOCUMENTACION/92-Tutorial/plan-actual/04-Codigo.md
+  DOCUMENTACION/92-Tutorial/plan-actual/05-Checklist.md
+  DOCUMENTACION/93-Balance/plan-actual/05-Checklist.md
+  DOCUMENTACION/94-Retencion-Sin-FOMO/plan-actual/05-Checklist.md
+  DOCUMENTACION/95-Monetizacion/plan-actual/05-Checklist.md
+  DOCUMENTACION/96-Plataformas/plan-actual/05-Checklist.md
+  DOCUMENTACION/97-Steam-Store-Page/plan-actual/05-Checklist.md
+  DOCUMENTACION/98-Trailer/plan-actual/05-Checklist.md
+  DOCUMENTACION/99-Marketing/plan-actual/05-Checklist.md
+  Logs/_d39.txt
+  Logs/_estado39.txt
+  Logs/_t39_test_loop_economico.txt
+  Logs/_t39_test_tiendas.txt
+  Logs/_t39_test_tiendas_iter_glm.txt
+  game/isla-ancestral/data/motivacion/objetivos.json
+  game/isla-ancestral/scripts/ia_npc/npc_agent.gd
+  game/isla-ancestral/scripts/ui/layers/dialog_layer.gd
+  game/isla-ancestral/scripts/ui/layers/equipment_layer.gd
+
+## glm-5.3-flash (21)
+  DOCUMENTACION/118-CI-CD/plan-actual/05-Checklist.md
+  DOCUMENTACION/133-Gestion-Del-Proyecto/plan-actual/05-Checklist.md
+  DOCUMENTACION/134-Presupuesto/plan-actual/05-Checklist.md
+  DOCUMENTACION/135-Riesgos-Del-Proyecto/plan-actual/05-Checklist.md
+  DOCUMENTACION/136-Roadmap/plan-actual/05-Checklist.md
+  DOCUMENTACION/145-Diseno-De-Experiencia/plan-actual/05-Checklist.md
+  DOCUMENTACION/146-Diseno-Emocional/plan-actual/05-Checklist.md
+  DOCUMENTACION/149-Nombres-Y-Nomenclatura/plan-actual/05-Checklist.md
+  DOCUMENTACION/153-Objetivo-Final/plan-actual/05-Checklist.md
+  DOCUMENTACION/158-Herramientas-Y-Desbloqueo-De-Zonas/plan-actual/05-Checklist.md
+  DOCUMENTACION/29-Tiempo-Y-Calendario/plan-actual/05-Checklist.md
+  DOCUMENTACION/38-Economia/plan-actual/05-Checklist.md
+  DOCUMENTACION/46-Arte-2D/plan-actual/05-Checklist.md
+  DOCUMENTACION/59-Guardado/plan-actual/05-Checklist.md
+  game/isla-ancestral/scripts/shops/shop.gd
+  game/isla-ancestral/scripts/shops/shop_data.gd
+  game/isla-ancestral/scripts/shops/shop_manager.gd
+  game/isla-ancestral/scripts/shops/stock_generator.gd
+  game/isla-ancestral/scripts/ui/core/ui_manager.gd
+  game/isla-ancestral/scripts/ui/services/tooltip_service.gd
+  scripts/run_m92_tests.bat
+
+## hy3 (5)
+  DOCUMENTACION/131-Creditos/plan-actual/05-Checklist.md
+  DOCUMENTACION/167-Isla-Raiz/plan-actual/05-Checklist.md
+  DOCUMENTACION/23-Historias-Secundarias/plan-actual/05-Checklist.md
+  DOCUMENTACION/36-Fauna/plan-actual/05-Checklist.md
+  DOCUMENTACION/65-Animales-IA/plan-actual/05-Checklist.md
+
+## kimi-k3 (3)
+  game/isla-ancestral/data/security/security_policies.json
+  game/isla-ancestral/scripts/backup/backup_manager.gd
+  game/isla-ancestral/scripts/security/security_manager.gd
+
+## mimo-v2.5 (10)
+  DOCUMENTACION/12-Camara/plan-actual/03-Diseno.md
+  DOCUMENTACION/12-Camara/plan-actual/04-Codigo.md
+  DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md
+  DOCUMENTACION/165-Voxel-Tools-Guia/plan-actual/05-Checklist.md
+  DOCUMENTACION/168-Plantilla-De-Isla/plan-actual/05-Checklist.md
+  DOCUMENTACION/25-Ruinas/plan-actual/05-Checklist.md
+  DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md
+  DOCUMENTACION/64-IA-De-NPC/plan-actual/03-Diseno.md
+  DOCUMENTACION/82-Clasificacion-Por-Edades/plan-actual/05-Checklist.md
+  game/isla-ancestral/scripts/legal/audio_legal_manager.gd
+
+## nemotron (10)
+  DOCUMENTACION/119-Actualizaciones/plan-actual/05-Checklist.md
+  DOCUMENTACION/128-Identidad-De-Marca/plan-actual/04-Codigo.md
+  DOCUMENTACION/128-Identidad-De-Marca/plan-actual/05-Checklist.md
+  DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/05-Checklist.md
+  DOCUMENTACION/69-Fast-Travel/plan-actual/05-Checklist.md
+  DOCUMENTACION/81-Legal-Menores/plan-actual/05-Checklist.md
+  DOCUMENTACION/83-Licencias-De-Software/plan-actual/04-Codigo.md
+  DOCUMENTACION/83-Licencias-De-Software/plan-actual/05-Checklist.md
+  DOCUMENTACION/84-Musica-Y-Audio-Legal/plan-actual/05-Checklist.md
+  DOCUMENTACION/85-Modelos-3D-Legal/plan-actual/05-Checklist.md
+
+## ox-alpha (4)
+  DOCUMENTACION/130-Artbook/plan-actual/05-Checklist.md
+  DOCUMENTACION/154-Vision-Del-Agente/plan-actual/05-Checklist.md
+  DOCUMENTACION/159-Catalogo-De-Objetos/plan-actual/05-Checklist.md
+  game/isla-ancestral/data/villagers/catalina_oso.tres
+
+## step-3.7-flash (3)
+  DOCUMENTACION/155-Vestimenta-Y-Accesorios/plan-actual/05-Checklist.md
+  DOCUMENTACION/161-Diseno-Visual-De-NPCs/plan-actual/05-Checklist.md
+  game/isla-ancestral/scripts/follow_camera.gd
+
+## swe (14)
+  DOCUMENTACION/100-Community-Management/plan-actual/05-Checklist.md
+  DOCUMENTACION/106-Seguridad/plan-actual/05-Checklist.md
+  DOCUMENTACION/107-Backups/plan-actual/05-Checklist.md
+  DOCUMENTACION/120-DLC-Y-Expansiones/plan-actual/05-Checklist.md
+  DOCUMENTACION/121-Soporte-Post-Lanzamiento/plan-actual/05-Checklist.md
+  DOCUMENTACION/125-Terminos-De-Servicio/plan-actual/05-Checklist.md
+  DOCUMENTACION/126-Marketing-Legal/plan-actual/04-Codigo.md
+  DOCUMENTACION/126-Marketing-Legal/plan-actual/05-Checklist.md
+  DOCUMENTACION/129-Merchandising/plan-actual/05-Checklist.md
+  DOCUMENTACION/150-Diseo-Sonoro-Narrativo/plan-actual/05-Checklist.md
+  DOCUMENTACION/152-Principios-Innegociables/plan-actual/05-Checklist.md
+  DOCUMENTACION/88-Fuentes-Tipograficas/plan-actual/05-Checklist.md
+  DOCUMENTACION/90-Configuracion-Grafica/plan-actual/05-Checklist.md
+  DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md
+
+=== BUCKET B (coordinador): 25 ===
+  CHECKLIST-GLOBAL.md
+  DOCUMENTACION/106-Seguridad/plan-actual/04-Codigo.md
+  DOCUMENTACION/115-Hardware/plan-actual/05-Checklist.md
+  DOCUMENTACION/117-Build-System/plan-actual/05-Checklist.md
+  DOCUMENTACION/149-Nombres-Y-Nomenclatura/operativa/quick-reference.md
+  DOCUMENTACION/70-Interacciones/plan-actual/05-Checklist.md
+  DOCUMENTACION/73-Coleccionables/plan-actual/05-Checklist.md
+  DOCUMENTACION/74-Eventos/plan-actual/05-Checklist.md
+  DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md
+  DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn/BACKLOG-MASTER.md
+  game/isla-ancestral/data/audio/narrative_sound.json
+  game/isla-ancestral/locales/en.po
+  game/isla-ancestral/locales/es.po
+  game/isla-ancestral/scripts/backup/test_backup_m107.gd
+  game/isla-ancestral/scripts/camera/camera_rig.gd
+  game/isla-ancestral/scripts/camera/camera_spring.gd
+  game/isla-ancestral/scripts/camera/simple_camera.gd
+  game/isla-ancestral/scripts/economia/economy_manager.gd
+  game/isla-ancestral/scripts/economia/price_manager.gd
+  game/isla-ancestral/scripts/ia_npc/npc_manager.gd
+  game/isla-ancestral/scripts/ia_npc/state_machine.gd
+  game/isla-ancestral/scripts/legal/test_credits_m131_v2.gd
+  game/isla-ancestral/scripts/shops/test_loop_economico.gd
+  game/isla-ancestral/scripts/time/game_clock.gd
+  game/isla-ancestral/scripts/tutorial/tutorial_manager.gd
+
+=== BUCKET C (inclasificable): 31 ===
+  DOCUMENTACION/111-Codigo-De-Calidad/plan-actual/05-Checklist.md <- sin **Modelo:** legible; ultimo commit: Se agrego QA cruzado sec21.8 de M111-Codigo-De-Calidad iter. 4 (Log 1032): passed=62/0, 9/9 archivos, fix Variant, hallazgo gate suave (|| true) delegado a M107/M111
+  DOCUMENTACION/14-Inventario/plan-actual/05-Checklist.md <- sin **Modelo:** legible; ultimo commit: Se realizo QA del modulo M14 Inventario (Log 1013)
+  DOCUMENTACION/162-Dialogos-Contextuales-De-NPCs/plan-actual/05-Checklist.md <- sin **Modelo:** legible; ultimo commit: Se actualizaron checklists de 130+ módulos: progreso y códigos
+  DOCUMENTACION/35-Mineria/plan-actual/05-Checklist.md <- sin **Modelo:** legible; ultimo commit: Se actualizaron checklists de 130+ módulos: progreso y códigos
+  DOCUMENTACION/GUIA-GODOT/06-registro-errores.md <- ; ultimo commit: Se agregaron las trampas T-98 a T-100 al registro de errores (validacion anti falso-verde)
+  DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/BACKLOG-MASTER.md <- ; ultimo commit: Se agrego nota IMPORTANTE de cobertura de debilidades del coordinador a 5 backlogs (M-01 a M-06, seccion 21.12)
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/39-Tiendas/checklist.md <- ; ultimo commit: Se renombró backlog GLM-5.3 a GLM-5.3-Flash, accesibilidad aplicador, debug menu fixes, test mapa búsqueda, logs 446-537
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/92-Tutorial/checklist.md <- ; ultimo commit: chore: actualizar system files, backlog glm-5.3-flash, debug scripts
+  DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/BACKLOG-MASTER.md <- ; ultimo commit: chore: actualizar system files, backlog glm-5.3-flash, debug scripts
+  Logs/NUMEROS_DISPONIBLES.txt <- pool de logs: infraestructura compartida, multi-autor
+  Mensajes entre modelos/ESTADO-PARALELO.md <- ruta no indexada en 04-Codigo.md (Mensajes entre modelos/ESTADO-PARALELO.md); ultimo commit: Se agrego QA cruzado sec21.8 de M111-Codigo-De-Calidad iter. 4 (Log 1032): passed=62/0, 9/9 archivos, fix Variant, hallazgo gate suave (|| true) delegado a M107/M111
+  game/isla-ancestral/data/villagers/bruno_sapo.tres <- ruta no indexada en 04-Codigo.md (data/villagers/bruno_sapo.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/finneas_zorro.tres <- ruta no indexada en 04-Codigo.md (data/villagers/finneas_zorro.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/luna_zorra.tres <- ruta no indexada en 04-Codigo.md (data/villagers/luna_zorra.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/data/villagers/mateo_mapache.tres <- ruta no indexada en 04-Codigo.md (data/villagers/mateo_mapache.tres); ultimo commit: Se agregó data del juego: items, dialogues, balance, locales, resources
+  game/isla-ancestral/scripts/audio/narrative_sound.gd <- ruta no indexada en 04-Codigo.md (scripts/audio/narrative_sound.gd); ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game/isla-ancestral/scripts/coleccionables/collectible_category.gd <- ruta no indexada en 04-Codigo.md (scripts/coleccionables/collectible_category.gd); ultimo commit: Se agregaron 11-BUGS, logs renumerados 401-553, checklists M14-M160, scripts economía/fauna/vehículos/ubicaciones/inventario, datos herramientas/ubicaciones/vegetación, herramientas CI, cangrejo playa
+  game/isla-ancestral/scripts/ia_npc/npc_needs.gd <- ruta no indexada en 04-Codigo.md (scripts/ia_npc/npc_needs.gd); ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game/isla-ancestral/scripts/legal/test_audio_licenses_m84.gd <- ruta no indexada en 04-Codigo.md (scripts/legal/test_audio_licenses_m84.gd); ultimo commit: M84 Audio Legal: 85→99/99 ✅ COMPLETADO
+  game/isla-ancestral/scripts/player/test_equipment_m155.gd <- ruta no indexada en 04-Codigo.md (scripts/player/test_equipment_m155.gd); ultimo commit: Se actualizaron UI, mundo, vegetación, terreno, player, NPC, foto y DLC
+  game/isla-ancestral/scripts/security/test_security_m106.gd <- ruta no indexada en 04-Codigo.md (scripts/security/test_security_m106.gd); ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game/isla-ancestral/scripts/shops/catalogo_tiendas.gd <- ruta no indexada en 04-Codigo.md (scripts/shops/catalogo_tiendas.gd); ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
+  game/isla-ancestral/scripts/ui/equipment_ui.gd <- modulos ['155'] sin agente asignado en global; ultimo commit: Se actualizaron UI, mundo, vegetación, terreno, player, NPC, foto y DLC
+  game/isla-ancestral/scripts/ui/widgets/interact_prompt.gd <- ruta no indexada en 04-Codigo.md (scripts/ui/widgets/interact_prompt.gd); ultimo commit: Se implementaron 7 widgets del HUD (M53 UI/UX)
+  game/isla-ancestral/tests/integration/test_inventory_economy.gd <- ruta no indexada en 04-Codigo.md (tests/integration/test_inventory_economy.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/interfaces/test_i_damageable.gd <- ruta no indexada en 04-Codigo.md (tests/unit/interfaces/test_i_damageable.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/interfaces/test_i_interactable.gd <- ruta no indexada en 04-Codigo.md (tests/unit/interfaces/test_i_interactable.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/interfaces/test_i_saveable.gd <- ruta no indexada en 04-Codigo.md (tests/unit/interfaces/test_i_saveable.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/inventario/test_contenedor_inventario.gd <- ruta no indexada en 04-Codigo.md (tests/unit/inventario/test_contenedor_inventario.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/inventario/test_inventory_slot.gd <- ruta no indexada en 04-Codigo.md (tests/unit/inventario/test_inventory_slot.gd); ultimo commit: Se corrigió infraestructura completa de tests y se actualizó .gitignore
+  game/isla-ancestral/tests/unit/player/test_equipment_manager.gd <- modulos ['155'] sin agente asignado en global; ultimo commit: Se agregó código GDScript nuevo y actualizado de múltiples módulos
