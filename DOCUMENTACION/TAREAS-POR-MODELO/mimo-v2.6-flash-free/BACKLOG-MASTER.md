@@ -5,5 +5,5 @@
 
 ## Tareas
 
-- [x] Log reservado: **1161** — P-43b QA cruzado M106 + M122
+- [x] Log reservado y creado: **1161** — P-43b QA cruzado M106 + M122
 - [x] Log reservado y creado: **1164** — P-50 cierre hallazgos (KnownIssue H-1, cabeceras H-2, sello SEALS)
