@@ -1,0 +1,39 @@
+{
+  "_descripcion": "M106 T-008: Entornos separados dev/staging/prod (RF4). El entorno activo lo define APP_ENV.",
+  "entorno_activo_por_defecto": "dev",
+  "entornos": {
+    "dev": {
+      "descripcion": "Desarrollo local. Datos de prueba, keys de desarrollo, localhost.",
+      "api_base_url": "http://localhost:8080",
+      "telemetria": false,
+      "crash_reporting": false,
+      "log_level": "DEBUG",
+      "base_datos": "dev_local",
+      "bd_host": "localhost",
+      "bd_credencial_origen": "env_local",
+      "secrets_origen": ".env.local (en .gitignore)"
+    },
+    "staging": {
+      "descripcion": "Entorno intermedio pre-producción. Datos simulados, keys de staging.",
+      "api_base_url": "https://staging-api.isla-ancestral.example",
+      "telemetria": true,
+      "crash_reporting": true,
+      "log_level": "INFO",
+      "base_datos": "staging",
+      "bd_host": "staging-db.isla-ancestral.example",
+      "bd_credencial_origen": "env_sistema",
+      "secrets_origen": "variables de entorno del sistema (CI/staging)"
+    },
+    "prod": {
+      "descripcion": "Producción. Datos reales, keys de producción, máxima seguridad.",
+      "api_base_url": "https://api.isla-ancestral.example",
+      "telemetria": true,
+      "crash_reporting": true,
+      "log_level": "WARNING",
+      "base_datos": "prod",
+      "bd_host": "db.isla-ancestral.example",
+      "bd_credencial_origen": "secret_manager",
+      "secrets_origen": "secret manager / variables de entorno del sistema (NUNCA en el repo)"
+    }
+  }
+}
