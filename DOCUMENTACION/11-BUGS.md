@@ -832,9 +832,7 @@ La numeración de logs del proyecto presenta múltiples inconsistencias: número
 - **Severidad:** 🟡 Menor (la herramienta funciona, pero **no es usable como gate CI** mientras
   inunde con ruido; y la convención documentada ya no describe el repo real)
 - **Prioridad sugerida:** Media
-- **Estado:** [?] Delegado — dueño **M149** (fix del validador) + **M160/M161** (decisión de
-  convención de IDs LOC-/NPC-). No lo arreglo yo: es fix de herramienta + decisión de diseño que
-  excede el alcance V0 de la reconciliación.
+- **Estado:** Parcialmente resuelto (actualizado por hy3 2026-09-24). (a) **[x] M149 `validar_nombres.py` + hook pre-commit:** RESUELTO (hy3, Log 1092); verificado empíricamente 2026-09-24 — `EXCLUDE_DIRS = ("Godot", "app_userdata", "addons")` en `operativa/validar_nombres.py` L38, `operativa/pre-commit-naming` existe, M149 cerrado 🟢 99/100 (1 `[?]` externo legítimo en A.13). El flood de 1128 falsos positivos desapareció. (b) **[?] M160/M161 (convención LOC-/NPC-, 41 `.tres`):** SIN MOVIMIENTO al 2026-09-24 — sin decisión de renombrar ni ampliación de `code-conventions.md` §3; sigue delegado (renombrar 41 `.tres` rompería referencias; fuera de alcance V0). No bloquea el cierre de M149.
 
 **Descripción — dos problemas relacionados:**
 
@@ -3890,7 +3888,13 @@ Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla la métric
 #### Relacionado
 
 - **BUG-070** (de s2 / Atria-Dawn-Preview) — patrón sistémico de over-marks "KnownIssue no bloqueante DoD"; M118 estaba en su lista de 17 módulos. BUG-072 es la corrección específica de M118 que BUG-070 no desglosó (BUG-070 lo dejó como Familia B abierto; esta re-verificación lo reclasifica a Familia A).
-- BUG-009 (M118, CI de tests con Godot 4.3) — ya resuelto, independiente.
+- **BUG-009** (M118, CI de tests con Godot 4.3) — ya resuelto, independiente.
+
+#### Firma (verificador hy3 — 2026-09-24)
+**Modelo:** Hy3 / WorkBuddy (Tencent Hunyuan)
+**Rol:** Verificador §21.8 (verificador ≠ autores de implementación de M118)
+**Fecha:** 2026-09-24
+**Veredicto:** BUG-072 validado como reporte correcto y completo. `### BUG-072` confirmado en 11-BUGS.md L3856; Log 1125 (hy3) referencia BUG-072 de forma consistente (el renombre BUG-071→BUG-072 tocó el contenido; el slug del filename se renombró a BUG072 en esta misma sesión para cerrar la inconsistencia). M118 revertido ✅→🟡 por hy3 (2026-09-19): 4 marcas `[x]→[ ]` conservando notas, Totales 106/0/0 → **102/4/0**, fila global + nota firmada en `05-Checklist.md`. M118 no tiene sello §21.8 (ausente en CHECKLIST-QA-SEALS.md), por lo que no se invalida sello alguno. Re-auditoría con `python scripts/verificar_checklist.py` pendiente (ítem `[ ]` en Estado).
 
 ---
 
