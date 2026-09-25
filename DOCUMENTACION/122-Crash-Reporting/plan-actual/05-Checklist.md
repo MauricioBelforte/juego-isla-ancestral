@@ -381,3 +381,36 @@ era medido.
 - [x] Envío real a Crashlytics/Sentry — `[?]` (dueño M104/M118/M76) [M]
 - [?] Integración M103/M102/M110 completa — `[?]` (dueño M103/M102/M110) [M]
 - [?] Metadata avanzada, sanitización, dashboard — `[?]` (dueño M61/M114) [M]
+
+
+## KnownIssue (QA §21.8 — Log 1164, mimo-v2.6-flash-free/OpenCode, 2026-09-25)
+
+### KI-01 — `_abrir_dir()` de `crash_reporter.gd`: la rama del retry globalizado nunca se dispara
+
+- **Evidencia (6 configuraciones medidas + prueba en rojo):** se rompió `_abrir_dir` a
+  `return DirAccess.open(ruta)` y se volvió a correr. Resultado **idéntico** al fix activo:
+  | Configuración | fix OK | fix ROTO |
+  |---|---|---|
+  | `APPDATA` por defecto (`--path` relativo y absoluto) | verde | verde |
+  | `APPDATA` fresco + 2 dumps pre-creados por mí antes de correr | **2/2** | **2/2** |
+  | Config exacta P-42 (`APPDATA`=proyecto, 14 dumps reales) | **14/14** | **14/14** |
+  | M106 `test_security_m106_secrets.gd` (escáner) | **20/0** | **20/0** |
+
+  Medición directa de `DirAccess.open(ruta)` vs `DirAccess.open(globalize_path(ruta))`:
+  siempre **OK/OK** (dir existe) o **NULL/NULL** (dir no existe) — **nunca divergen**, por eso
+  el retry no aporta nada.
+- **Por qué NO es bloqueante:** el comportamiento requerido está satisfecho — `dumps_pendientes()`
+  detecta dumps reales en disco y **nunca devuelve 0**. El código es defensivo e inofensivo.
+  Solo el comentario de `crash_reporter.gd` L82-86 sobre-explica la causa: afirma que
+  `DirAccess.open("user://…")` da null en headless **con el directorio existente**, lo que
+  **no es reproducible** en Godot 4.7.2 / Windows.
+- **Causa real del rojo original (rastro):** los 14 dumps de
+  `game/isla-ancestral/Godot/app_userdata/…/crash/` son **solo de 01:17–01:34 del 2026-09-25**,
+  la ventana en que P-42 corrió con `APPDATA` apuntando al proyecto. Con `APPDATA` fresco el
+  directorio no existe y **ambas** rutas dan NULL: ahí lo que salva es
+  `_ready(): DirAccess.make_dir_recursive_absolute(...)` (L23), **no** el retry.
+- **Código:** **NO tocado** (es de DeepSeek, P-36). Solo documentación.
+- **Dueño:** **DeepSeek-V4.1-Flash** — limpiar la rama redundante y/o corregir el comentario
+  cuando termine **P-48**.
+- **QA:** verificado por **mimo-v2.6-flash-free / opencode** (≠ autor) — Log **1161** (QA) +
+  Log **1164** (documentación de este KnownIssue).

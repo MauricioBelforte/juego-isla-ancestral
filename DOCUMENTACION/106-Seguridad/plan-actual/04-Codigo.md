@@ -1,7 +1,7 @@
-**Modelo:** kimi-k3 (Moonshot AI) (ultimo modificador)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-09-20 (iter. kimi T-001 L1077 + fix M107 E-22; kimi2 T-002 L1080; kimi3/4 T-003 L1081 + T-004 L1082; kimi5 T-005 L1086; kimi6 T-006 L1088; kimi7 T-007 L1126; kimi8 T-008 entornos L1132)
-**Historial:** espec. original SWE-1.6/DEVIN (2026-08-19); security_manager.gd (catalogo) por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-16, Log 922); iter. kimi por kimi-k3 (Kilo Code, 2026-09-19, Log 1077)
+**Modelo:** DeepSeek-V4.1-Flash (ultimo modificador)
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-25 (P-36 Log 1149 + P-42 Log 1156)
+**Historial:** kimi-k3 (Moonshot AI) por Kilo Code (2026-09-19/20, iters T-001..T-008 + fix M107 E-22); espec. original SWE-1.6/DEVIN (2026-08-19); security_manager.gd (catalogo) por deepseek-v4-flash (Kilo Code, 2026-09-01); iter. agnes por agnes-3-flash (Kilo Code, 2026-09-16, Log 922); iter. kimi por kimi-k3 (Kilo Code, 2026-09-19, Log 1077)
 
 # 04-Codigo.md — Módulo 106: Seguridad
 

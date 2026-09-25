@@ -1,5 +1,7 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** DeepSeek-V4.1-Flash (ultimo modificador)
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-09-25 (P-36 Log 1150 + P-42 Log 1156)
+**Historial:** SWE-1.6 / Devin (espec. original)
 
 # 04-Codigo.md — Módulo 122: Crash Reporting
 
