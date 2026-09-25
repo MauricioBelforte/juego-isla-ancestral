@@ -8,6 +8,20 @@
   "restricciones": {
     "max_objetos_inventario": 99,
     "max_plata": 999999,
-    "max_nivel": 50
+    "max_nivel": 50,
+    "min_intervalo_accion_ms": 80,
+    "max_rafaga_bot": 10,
+    "max_audit_buffer": 50,
+    "audit_retener_lineas": 500,
+    "limite_tasa_ventana_s": 60
+  },
+  "limites_tasa": {
+    "por_ip": 100,
+    "por_usuario": 60,
+    "endpoints": {
+      "/api/telemetry": 30,
+      "/api/crash": 10,
+      "/api/save": 20
+    }
   }
 }
