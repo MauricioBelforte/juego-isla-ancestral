@@ -197,3 +197,32 @@ verificados como legítimos en QA cruzado.
   `fauna_behavior` (M36) y su integración en `main_island` queda pendiente. La evidencia
   dura del flujo (fauna_behavior→autoload→PackLogic) es la prueba agregada + las suites verdes.
 
+
+
+## Notas del Agente — P-49 (agnes-3-flash / Kilo Code, Log 1165, 2026-09-25)
+
+**Modelo:** agnes-3-flash
+**Plataforma:** Kilo Code
+**Estado:** **✅ Limitación levantada** — los grupos de manada/banco se ven ahora en el runtime de main_island
+
+### Lo que ocurrió
+- P-49 cerró la "limitación honesta" anotada en P-38: `main_island` solo tenía NPCs
+  legacy (sin `fauna_behavior`), así los logs de grupo `[M65]` no se observaban.
+- Se integró el spawner de M36: `fauna_spawner.gd` + nodo `FaunaSpawner` en
+  `main_island.tscn` (doc: M36 `04-Codigo.md` §P-49): crea criaturas con `fauna_behavior`
+  en zonas de bioma derivadas de `MundoRaiz` (pradera en el spawn del jugador;
+  playa/humedal en la banda costera) y se auto-registran en `animal_ai`
+  → `PackLogic`/`SchoolLogic` reales en la escena principal.
+
+### Evidencia de runtime (Godot 4.7.2 headless, `main_island.tscn --quit-after 300`, ×2)
+- `[M65] Manada (PackLogic) creada para conejo_pradera` (2–4 individuos por corrida).
+- `[M65] Banco (SchoolLogic) creado para gaviota_playera` (3–4) y `para cangrejo_humedal` (2–3).
+- `[M36-SPAWNER] poblacion inicial: 9 / 10 individuos en 3 zonas`
+  (⇒ `grupo_tamanio(especie) >= 1` por construcción: grupos de 2+ miembros).
+- Probe del árbol de escena: 9 nodos `Fauna_*` con el script `fauna_behavior` bajo `FaunaSpawner`.
+- **0 SCRIPT ERROR ×2** y las 3 suites siguen 0 fallos
+  (`tests/test_m65.gd`, `scripts/animales_ia/test_m65.gd`, `test_fauna.gd`) — M36/M65 no degradados.
+
+### Pendiente (dueño M09, no M65)
+- Spawner completo "burbuja 72m" con `bioma_de_posicion` del M09 + despawn/densidad
+  por distancia al jugador. El spawner actual usa zonas fijas nominales (documentado en M36 04-Codigo §P-49).
