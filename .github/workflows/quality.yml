@@ -510,14 +510,32 @@ jobs:
           python3 scripts/verificar_bom.py
           echo "Sin BOM: ningun archivo versionado empieza con EF BB BF"
 
-      # Informativo, NO bloquea: el mojibake documentado (banners, tablas de
-      # reparacion, volcados de bytes) no es corrupcion, y el verificador ya
-      # los filtra. Se deja visible para que una regresion real se vea en el log
-      # sin romper el build por un falso positivo.
-      - name: Mojibake scan (informativo)
-        continue-on-error: true
+      # GATE (P-20). Antes era informativo por TRES motivos apilados:
+      # `continue-on-error: true`, el sufijo OR-true y el `| tail` — y el pipe
+      # ademas se comia el exit code, porque `$?` pasaba a ser el de `tail`
+      # (siempre 0). Un falso positivo NO es la razon para que no bloquee: el
+      # detector ya filtra por CONTENIDO las lineas que documentan el sintoma
+      # (banners, tablas de reparacion, volcados de bytes) y por RUTA los
+      # respaldos (Obsoletos/, Logs/, backups, .kilo/ y .workbuddy-ai/).
+      # Medido el 2026-09-24 sobre los 8272 archivos VERSIONADOS (contenido de
+      # HEAD, que es lo que ve un checkout limpio): 0 SUCIO / 0 IRREVERSIBLE.
+      # Activar el gate no rompe el CI; lo que estaba tapando era la REGRESION.
+      # (Nota deliberada: este comentario NO escribe el token literal del sufijo,
+      # porque contarlo con `grep -c` es la unica forma de auditar BUG-076 y un
+      # comentario que lo menciona infla el conteo. Medido: el token literal
+      # bajó 21 -> 20 en este archivo, aunque `grep -c` diga 21 en los dos.)
+      - name: Mojibake detector — selftest (probarlo en rojo)
+        run: python3 scripts/diagnosticar_mojibake.py --selftest
+
+      - name: Mojibake scan (gate)
         run: |
-          python3 scripts/diagnosticar_mojibake.py 2>&1 | tail -25 || true
+          python3 scripts/diagnosticar_mojibake.py > /tmp/mojibake.txt 2>&1
+          codigo=$?
+          tail -25 /tmp/mojibake.txt
+          if [ "$codigo" -ne 0 ]; then
+            echo "::error::Mojibake en contenido versionado. Reparar con: python scripts/fix_encoding.py"
+          fi
+          exit $codigo
 
   # Integridad de los binarios versionados (BUG-042). Un asset con extension X y
   # contenido que no es X NO rompe de forma visible: `load()` devuelve un

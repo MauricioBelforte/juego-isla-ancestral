@@ -31,7 +31,12 @@ una vez y el propio scanner se autodetecto).
 
 Uso:
     python scripts/diagnosticar_mojibake.py
-    echo $?   # 0 = limpio, 1 = queda mojibake
+    echo $?   # 0 = limpio, 1 = queda mojibake (SUCIO)
+    python scripts/diagnosticar_mojibake.py --selftest   # 21 casos, 2 direcciones
+
+Codigos de salida: 0 limpio | 1 queda mojibake reparable | 2 uso.
+IRREVERSIBLE y EXCLUIDO se informan pero NO bloquean (no son reparables por
+herramienta: el primero necesita reescritura a mano, el segundo es intencional).
 """
 import os
 import re
@@ -71,10 +76,21 @@ EXCLUIDOS_ARCH = ('./AGENTS.md', './scripts/verify_final.py',
                   './scripts/fix_coordinacion.py', './scripts/fix_emoji3.py',
                   './scripts/fix_emoji2.py', './scripts/fix_encoding.py',
                   './scripts/fix_emoji.py', './scripts/saneamiento_utf8.py',
-                  './scripts/fix_final3.py', './scripts/fix_final4.py')
+                  './scripts/fix_final3.py', './scripts/fix_final4.py',
+                  # Script de PRUEBA de atria-dawn-s2 (untracked: no existe en
+                  # CI). Contiene literales mojibake A PROPOSITO en su tabla de
+                  # deteccion, igual que fix_encoding.py. Medido el 2026-09-24.
+                  './DOCUMENTACION/TAREAS-POR-MODELO/atria-dawn-s2/scripts-prueba/verificar_cierre.py')
 EXCLUIDOS_DIR = ('./Obsoletos', './scripts/backups', './out',
                  './.workbuddy-ai', './.git', './node_modules', './.godot',
-                 './addons', './bin', './Logs')
+                 './addons', './bin', './Logs',
+                 # `.kilo/` esta en .gitignore:69 -> no existe en un checkout de
+                 # CI. Medido el 2026-09-24 (P-20): de 88 SUCIO + 6 IRREVERSIBLE
+                 # del working tree, 87+6 eran de .kilo/worktrees/ (worktrees de
+                 # otros agentes con su propio Obsoletos/ y Logs/, que las
+                 # exclusiones prefijadas con './' NO atrapaban). Excluirlo hace
+                 # que la corrida local coincida con la de CI.
+                 './.kilo')
 # Dependencias de terceros: no son codigo del proyecto y no se deben "reparar".
 EXCLUIDOS_SUELTOS = ('.venv', 'node_modules', 'site-packages')
 
@@ -93,7 +109,50 @@ def raiz_repo():
     raise SystemExit('No encontre AGENTS.md subiendo desde %s' % __file__)
 
 
-def main():
+def es_excluido(p):
+    """¿La ruta esta en alguna lista de exclusion? (p con '/' y prefijo './')."""
+    return (p in EXCLUIDOS_ARCH
+            or p.startswith(tuple(d + '/' for d in EXCLUIDOS_DIR))
+            or p.startswith(tuple(d[2:] for d in EXCLUIDOS_DIR))
+            or any('/' + x + '/' in '/' + p for x in EXCLUIDOS_SUELTOS))
+
+
+def clasificar(p, raw):
+    """Veredicto para UN archivo. None = no aplica (NUL, encoding, o limpio).
+
+    Extraido de main() para poder ejercitarlo con fixtures: un detector que no
+    se puede correr sobre contenido sintetico no se puede probar en las DOS
+    direcciones, y un gate que no se probo en rojo no sirve.
+    """
+    if b'\x00' in raw:
+        return None
+    try:
+        s = raw.decode('utf-8')
+    except UnicodeDecodeError:
+        return None
+    if not PAT.search(s):
+        return None
+    # Se descartan las lineas que DOCUMENTAN el mojibake; el resto es
+    # contenido real del archivo y lo que se debe reparar.
+    util = '\n'.join(l for l in s.split('\n') if not PAT_LINEA_DOC.search(l))
+    n = len(PAT.findall(util))
+    if n == 0:
+        return None
+    if es_excluido(p):
+        return ('EXCLUIDO', n)
+    if FFFD in util:
+        return ('IRREVERSIBLE', n)
+    return ('SUCIO', n)
+
+
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    if '--selftest' in argv:
+        return selftest()
+    if argv:
+        print('Uso: python scripts/diagnosticar_mojibake.py [--selftest]')
+        return 2
+
     os.chdir(raiz_repo())
     cats = {'SUCIO': [], 'IRREVERSIBLE': [], 'EXCLUIDO': []}
 
@@ -108,31 +167,9 @@ def main():
                 raw = open(p, 'rb').read()
             except OSError:
                 continue
-            if b'\x00' in raw:
-                continue
-            try:
-                s = raw.decode('utf-8')
-            except UnicodeDecodeError:
-                continue
-            if not PAT.search(s):
-                continue
-            # Se descartan las lineas que DOCUMENTAN el mojibake; el resto es
-            # contenido real del archivo y lo que se debe reparar.
-            lineas = [l for l in s.split('\n') if not PAT_LINEA_DOC.search(l)]
-            util = '\n'.join(lineas)
-            n = len(PAT.findall(util))
-            if n == 0:
-                continue
-            if (p in EXCLUIDOS_ARCH
-                    or p.startswith(tuple(d + '/' for d in EXCLUIDOS_DIR))
-                    or p.startswith(tuple(d[2:] for d in EXCLUIDOS_DIR))
-                    or any('/' + x + '/' in '/' + p
-                           for x in EXCLUIDOS_SUELTOS)):
-                cats['EXCLUIDO'].append((p, n))
-            elif FFFD in util:
-                cats['IRREVERSIBLE'].append((p, n))
-            else:
-                cats['SUCIO'].append((p, n))
+            r = clasificar(p, raw)
+            if r is not None:
+                cats[r[0]].append((p, r[1]))
 
     for c in cats:
         cats[c].sort(key=lambda x: -x[1])
@@ -156,6 +193,107 @@ def main():
         print('ACCION: correr  python scripts/fix_encoding.py')
         return 1
     print('LIMPIO: no queda mojibake reparable.')
+    return 0
+
+
+def selftest():
+    """Prueba el detector en LAS DOS DIRECCIONES antes de confiar en el gate.
+
+    La mitad que importa es la de "NO debe marcar": un detector de substrings
+    reporta mojibake en cualquier archivo con acentos validos. El primer byte de
+    TODO acento UTF-8 es A-tilde, y A-circunfleja + euro es el prefijo de la raya
+    larga: por eso el patron exige el byte de continuacion. Si esta mitad del
+    selftest no existiera, el gate nace con falsos positivos y alguien lo
+    desactiva (leccion del 2026-09-20: "un selftest que solo prueba el rojo es
+    medio selftest").
+
+    TODO literal sospechoso va en escapes \\uXXXX: si se escribiera crudo, este
+    archivo seria el primer archivo corrupto (ya paso una vez, ver docstring).
+    """
+    P = './game/isla-ancestral/scripts/ejemplo.gd'
+
+    # A) UTF-8 VALIDO -> no debe marcar NADA
+    limpios = [
+        ('acentos validos', '\u00e1 \u00e9 \u00ed \u00f3 \u00fa \u00f1 \u00fc'),
+        ('mayusculas acentuadas', '\u00c1 \u00c9 \u00cd \u00d3 \u00da \u00d1'),
+        ('rayas y comillas tipograficas', '\u2014 \u2013 \u201ccomillas\u201d'),
+        ('seccion y flecha', '\u00a7 21.8 \u2192'),
+        ('emoji valido', '\U0001f7e2 \U0001f3ae \u2705'),
+        ('A-tilde SUELTA (sin byte de continuacion)', '\u00c3'),
+        ('A-circunfleja SUELTA (sin continuacion)', '\u00c2'),
+        ('prosa que menciona la palabra', 'esto no es mojibake, es una palabra'),
+    ]
+
+    # B) MOJIBAKE REAL -> SUCIO
+    sucios = [
+        ('acento (C3 xx)', 'configuraci\u00c3\u00b3n'),
+        ('enie (C3 B1)', 'a\u00c3\u00b1o'),
+        ('raya (E2 80 xx)', 'hola \u00e2\u20ac\u201d chau'),
+        ('seccion (C2 A7)', '\u00c2\u00a721.8'),
+        ('emoji (F0 9F)', 'estado \u00f0\u0178\u0178\u00a2'),
+    ]
+
+    # C) CONVERSION PREVIA con errors=replace -> IRREVERSIBLE
+    irreversibles = [('caracter de reemplazo U+FFFD', 'texto \ufffd roto')]
+
+    # D) RUTA EXCLUIDA -> EXCLUIDO (se ve en el informe, no bloquea)
+    excluidos = [
+        ('./AGENTS.md', '\u00c2\u00a7'),
+        ('./Obsoletos/respaldo.md', 'a\u00c3\u00b1o'),
+        ('./Logs/900-viejo.md', 'a\u00c3\u00b1o'),
+        ('.kilo/worktrees/x/Obsoletos/y.md', 'a\u00c3\u00b1o'),
+        ('./.workbuddy-ai/tmp/z.md', 'a\u00c3\u00b1o'),
+    ]
+
+    # E) LINEAS QUE DOCUMENTAN el sintoma -> no deben contar
+    documentados = [
+        ('banner de BACKLOG', 'caracteres rotos (\u00c3\u00b3, \u00e2\u20ac)'),
+        ('tabla de reparador', 'U+00F0 -> \u00f0'),
+    ]
+
+    print('=' * 60)
+    print('SELFTEST - diagnosticar_mojibake.py (las DOS direcciones)')
+    print('=' * 60)
+    print()
+    fallos = [0]
+    total = [0]
+
+    def chk(nombre, contenido, esperado, ruta=P):
+        total[0] += 1
+        r = clasificar(ruta, contenido.encode('utf-8'))
+        obtenido = r[0] if r else 'limpio'
+        if obtenido == esperado:
+            print('  OK    %-46s -> %s' % (nombre, obtenido))
+        else:
+            fallos[0] += 1
+            print('  FALLO %-46s -> esperaba %s, obtuvo %s'
+                  % (nombre, esperado, obtenido))
+
+    print('A) UTF-8 valido -> NO debe marcar (aqui se pescan los falsos positivos)')
+    for n, c in limpios:
+        chk(n, c, 'limpio')
+    print()
+    print('B) mojibake real -> SUCIO')
+    for n, c in sucios:
+        chk(n, c, 'SUCIO')
+    print()
+    print('C) conversion previa con errors=replace -> IRREVERSIBLE')
+    for n, c in irreversibles:
+        chk(n, c, 'IRREVERSIBLE')
+    print()
+    print('D) ruta excluida -> EXCLUIDO')
+    for r, c in excluidos:
+        chk(r, c, 'EXCLUIDO', ruta=r)
+    print()
+    print('E) lineas que documentan el sintoma -> no cuentan')
+    for n, c in documentados:
+        chk(n, c, 'limpio')
+    print()
+    print('=' * 60)
+    if fallos[0]:
+        print('SELFTEST FALLIDO: %d de %d casos mal.' % (fallos[0], total[0]))
+        return 1
+    print('SELFTEST OK: %d/%d casos.' % (total[0], total[0]))
     return 0
 
 
