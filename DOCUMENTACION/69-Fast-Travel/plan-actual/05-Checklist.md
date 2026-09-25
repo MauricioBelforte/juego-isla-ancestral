@@ -191,7 +191,16 @@
 - [ ] Test de fallback: 3 fallos seguidos ? modo seguro [M]
 - [ ] Test de perfilado: sin allocs en frame [M]
 
-**Totales:** 143 ítems · Completados: 143 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 150 ítems · Completados: 18 · Pendientes: 130 · No resueltos: 2.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **lote 4):** la línea decía *"143 ítems · Completados: 143 · Pendientes: 0 ·
+> No resueltos: 0"* — un claim de **cierre total que es falso**. El conteo real de
+> marcas es 18 [x] / 130 [ ] / 2 [?] = 150. Las marcas no se tocaron; solo se
+> reescribió esta línea. Autor original del claim: Nemotron 3.5 Lightning / Cline
+> (cuyo Log 1093 registró que escribió plan-iniciales sin logs de respaldo). Ver
+> `BUG-063` en `11-BUGS.md`. El módulo está 🟡 con 18/150 reales (CHECKLIST-GLOBAL
+> ya reflejaba el conteo correcto).
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, mapa y reglas cierran aquí.
 ## Iteración 1 (2026-09-02 05:40 — deepseek-v4-flash-vision-exp / Kilo Code)
 

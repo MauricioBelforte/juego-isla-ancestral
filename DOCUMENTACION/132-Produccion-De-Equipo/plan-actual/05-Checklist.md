@@ -135,3 +135,8 @@
 - [ ] Evaluar efectividad de procesos
 - [ ] Ajustar según feedback del equipo
 - [ ] Archivar procesos obsoletos
+**Totales:** 105 ítems · Completados: 63 · Pendientes: 42 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 63 [x] / 42 [ ] / 0 [?].
+> Las marcas no se tocaron.

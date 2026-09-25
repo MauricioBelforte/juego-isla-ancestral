@@ -193,3 +193,8 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 - **Prioridad 2:** Crear test_headless para audio_legal_manager (patrón: test_audio_licenses_m84.gd)
 - **Prioridad 3:** Integrar con M117 Build Pipeline cuando exista
 - **Pendiente humano:** Contratos de compositores/artistas, clearances, licencias de stock — esos requieren acción legal externa
+**Totales:** 99 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] / 0 [?].
+> Las marcas no se tocaron.

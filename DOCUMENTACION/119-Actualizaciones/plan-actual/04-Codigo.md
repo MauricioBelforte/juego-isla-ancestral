@@ -4,228 +4,77 @@
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:28:00
 
-## Archivos a Crear
+## Archivos — estado real (reconciliación 2026-09-25)
 
-### 1. `scripts/updates/update_manager.gd` — Gestor de actualizaciones
+> **Fuente de verdad:** el código que existe vive en `game/isla-ancestral/scripts/updates/`.
+> La arquitectura de diseño (clases `GameVersion`, `UpdateChecker`, `SaveMigrator`,
+> `UpdateInfo`) está en `03-Diseno.md` §2–§3 y **no llegó a disco**: la implementación
+> real consolidó versionado, canales y detección en un único `update_manager.gd` con
+> versiones `String`.
+>
+> ⚠️ **Corrección P-41 (2026-09-25, mimo-v2.6/OpenCode):** este archivo presentaba
+> bloques de código completos para **3 archivos que no existen**, sin marca de estado,
+> de modo que leían como creados. Quedan marcados `⬜ Pendiente` y se retira el código
+> de archivo (el diseño completo ya está en `03-Diseno.md`) para que plan y disco
+> coincidan — línea de cierre de M119.
 
-```gdscript
-class_name UpdateManager
-extends Node
+| Archivo | Estado | Evidencia |
+|---------|--------|-----------|
+| `scripts/updates/update_manager.gd` | ✅ Implementado | 92 líneas; autoload en `project.godot` |
+| `scripts/updates/test_updates_m119.gd` | ✅ Implementado | suite headless **15 checks / 0 fallos / EXIT 0** |
+| `data/updates/versions.json` | ✅ Implementado | 3 canales (estable/beta/dev) + `politica` |
+| `scripts/updates/update_checker.gd` | ⬜ **Pendiente** | no existe en disco — diseño en `03-Diseno.md` §3 |
+| `scripts/updates/save_migrator.gd` | ⬜ **Pendiente** | no existe en disco — depende de M59; diseño en `03-Diseno.md` §3 y §5 |
+| `scripts/updates/game_version.gd` | ⬜ **Pendiente** | no existe — enfoque sustituido por `comparar_versiones()` |
 
-## Gestor principal de actualizaciones del juego.
+### 1. `scripts/updates/update_manager.gd` — Gestor de actualizaciones ✅ IMPLEMENTADO
 
-signal update_available(info: UpdateInfo)
-signal update_progress(progress: float)
-signal update_downloaded(info: UpdateInfo)
-signal update_applied(info: UpdateInfo)
-signal update_failed(error: String)
+**Ruta real:** `game/isla-ancestral/scripts/updates/update_manager.gd` (92 líneas)
+**Sin `class_name`** (es autoload — pitfall §9.17/§9.41).
 
-var current_version: GameVersion
-var latest_version: GameVersion
-var is_downloading: bool = false
+| Función | Firma | Qué hace |
+|---------|-------|----------|
+| `_cargar_versions()` | `-> void` | lee `res://data/updates/versions.json` |
+| `comparar_versiones(a, b)` | `-> int` | semver `X.Y.Z` sobre strings → `1` / `-1` / `0` |
+| `hay_actualizacion(version_local)` | `-> bool` | ¿la versión remota del canal supera a la local? |
+| `version_remota()` | `-> String` | versión del canal activo |
+| `set_canal(canal)` | `-> bool` | cambia canal (estable/beta/dev) |
+| `politica()` | `-> Dictionary` | `min_versiones_atras`, `aviso_previa`, `requiere_reinicio` |
+| `_guardar_version()` | `-> void` | persiste en `user://version.tres` con `ConfigFile` |
+| `_registrar_servicio()` | `-> void` | registra `updates` en `ServiceRegistry` |
 
-func _ready() -> void:
-    current_version = _load_current_version()
+> ⚠️ **Diseño original sustituido.** El bloque que este archivo mostraba usaba
+> `GameVersion` / `UpdateChecker` / `SaveMigrator` / `UpdateDownloader` /
+> `RollbackManager` — **ninguno de esos tipos existe en disco**. La implementación
+> real (deepseek-v4-flash, 2026-09-01) optó por versiones `String` + `versions.json`.
+> El diseño completo queda en `03-Diseno.md` §2–§3. **No copiar el diseño viejo
+> encima de lo implementado** (§15: no romper lo que funciona).
 
-func check_for_updates() -> void:
-    var checker = UpdateChecker.new()
-    latest_version = await checker.check_latest()
-    
-    if latest_version and latest_version.is_newer_than(current_version):
-        var info = UpdateInfo.new()
-        info.version = latest_version
-        update_available.emit(info)
+### 2. `scripts/updates/update_checker.gd` — ⬜ Pendiente (no implementado)
 
-func download_update(info: UpdateInfo) -> void:
-    is_downloading = true
-    var downloader = UpdateDownloader.new()
-    
-    var progress = await downloader.download(info.download_url)
-    update_progress.emit(progress)
-    
-    if progress >= 1.0:
-        update_downloaded.emit(info)
-        is_downloading = false
+- **No existe en disco.** Diseño: `03-Diseno.md` §3 (`### UpdateChecker`).
+- El chequeo **local** ya está cubierto por `UpdateManager.hay_actualizacion()`,
+  que solo compara contra `versions.json`: **no** hace red, ni Steam, ni GOG.
+- Implementación real depende de: **M96** (plataformas) / **M117** (build).
 
-func apply_update(info: UpdateInfo) -> void:
-    # 1. Backup del save actual
-    var migrator = SaveMigrator.new()
-    migrator.backup_all_saves()
-    
-    # 2. Aplicar archivos nuevos
-    var applier = UpdateApplier.new()
-    var success = await applier.apply(info)
-    
-    if success:
-        # 3. Migrar saves si es necesario
-        if info.version.is_newer_than(current_version):
-            migrator.migrate_all_saves(current_version, info.version)
-        
-        # 4. Guardar nueva versión
-        _save_version(info.version)
-        
-        update_applied.emit(info)
-    else:
-        update_failed.emit("Failed to apply update")
+### 3. `scripts/updates/save_migrator.gd` — ⬜ Pendiente (no implementado)
 
-func rollback() -> void:
-    var rollback_manager = RollbackManager.new()
-    rollback_manager.restore_previous_version()
+- **No existe en disco.** Diseño: `03-Diseno.md` §3 (`### SaveMigrator`) y §5
+  (estrategia de migración + backup automático).
+- **Depende de M59** (`SaveManager` autoload) — misma condición de la nota de
+  compatibilidad de saves en `05-Checklist.md`.
+- `SaveMigration` (Resource) está diseñado en `03-Diseno.md` §2 pero **tampoco
+  existe en disco**.
 
-func _load_current_version() -> GameVersion:
-    if FileAccess.file_exists("user://version.tres"):
-        return load("user://version.tres") as GameVersion
-    return GameVersion.new()
+### 4. `scripts/updates/game_version.gd` — ⬜ Pendiente (enfoque sustituido)
 
-func _save_version(version: GameVersion) -> void:
-    ResourceSaver.save(version, "user://version.tres")
-```
-
-### 2. `scripts/updates/update_checker.gd` — Verificador de actualizaciones
-
-```gdscript
-class_name UpdateChecker
-extends Node
-
-## Verifica actualizaciones disponibles en la plataforma.
-
-const STEAM_APP_ID = 0  # Reemplazar con ID real
-
-func check_latest() -> GameVersion:
-    # Intentar verificar vía Steam
-    if Engine.has_singleton("Steam"):
-        return await _check_steam()
-    
-    # Fallback: verificar vía HTTP
-    return await _check_http()
-
-func _check_steam() -> GameVersion:
-    var steam = Engine.get_singleton("Steam")
-    # Implementación específica de Steam
-    return null
-
-func _check_http() -> GameVersion:
-    var http = HTTPRequest.new()
-    add_child(http)
-    
-    var error = http.request("https://api.example.com/latest-version")
-    if error != OK:
-        return null
-    
-    var response = await http.request_completed
-    var result = response[0]
-    var code = response[1]
-    var body = response[2]
-    
-    if code == 200:
-        var json = JSON.parse_string(body.get_string_from_utf8())
-        if json:
-            var version = GameVersion.new()
-            version.major = json.get("major", 0)
-            version.minor = json.get("minor", 0)
-            version.patch = json.get("patch", 0)
-            version.build = json.get("build", 0)
-            return version
-    
-    return null
-```
-
-### 3. `scripts/updates/save_migrator.gd` — Migrador de saves
-
-```gdscript
-class_name SaveMigrator
-extends Node
-
-## Migra saves a nueva versión del juego.
-
-const SAVES_DIR = "user://saves/"
-const BACKUP_DIR = "user://saves/backups/"
-
-func migrate_all_saves(from_version: GameVersion, to_version: GameVersion) -> void:
-    var dir = DirAccess.open(SAVES_DIR)
-    if not dir:
-        return
-    
-    dir.list_dir_begin()
-    var file_name = dir.get_next()
-    
-    while file_name != "":
-        if file_name.ends_with(".tres"):
-            var save_path = SAVES_DIR.path_join(file_name)
-            migrate_save(save_path, from_version, to_version)
-        file_name = dir.get_next()
-
-func migrate_save(save_path: String, from_version: GameVersion, to_version: GameVersion) -> bool:
-    # Buscar migración necesaria
-    var migration = _find_migration(from_version, to_version)
-    if not migration:
-        return true  # No necesita migración
-    
-    # Ejecutar migración
-    var script = load(migration.migration_script)
-    if script:
-        var instance = script.new()
-        var success = instance.migrate(save_path)
-        
-        if success:
-            # Verificar integridad
-            return _verify_save(save_path)
-    
-    return false
-
-func backup_all_saves() -> void:
-    DirAccess.make_dir_recursive_absolute(BACKUP_DIR)
-    
-    var dir = DirAccess.open(SAVES_DIR)
-    if not dir:
-        return
-    
-    dir.list_dir_begin()
-    var file_name = dir.get_next()
-    var timestamp = Time.get_datetime_string_from_system()
-    
-    while file_name != "":
-        if file_name.ends_with(".tres"):
-            var source = SAVES_DIR.path_join(file_name)
-            var dest = BACKUP_DIR.path_join(file_name.replace(".tres", "_backup_%s.tres" % timestamp))
-            DirAccess.copy_absolute(source, dest)
-        file_name = dir.get_next()
-
-func _find_migration(from: GameVersion, to: GameVersion) -> SaveMigration:
-    # Buscar migración en el array de migraciones
-    # Retornar null si no hay migración necesaria
-    return null
-
-func _verify_save(save_path: String) -> bool:
-    var save = ResourceLoader.load(save_path)
-    return save != null
-```
-
-### 4. `scripts/updates/game_version.gd` — Resource de versión
-
-```gdscript
-class_name GameVersion
-extends Resource
-
-@export var major: int = 0
-@export var minor: int = 0
-@export var patch: int = 0
-@export var build: int = 0
-@export var date: String = ""
-
-func to_string() -> String:
-    return "v%s.%s.%s.%s (%s)" % [major, minor, patch, build, date]
-
-func is_newer_than(other: GameVersion) -> bool:
-    if major != other.major: return major > other.major
-    if minor != other.minor: return minor > other.minor
-    if patch != other.patch: return patch > other.patch
-    return build > other.build
-
-func is_same_major_minor(other: GameVersion) -> bool:
-    return major == other.major and minor == other.minor
-```
-
+- **No existe en disco.** Diseño: `03-Diseno.md` §2 (`### GameVersion (Resource)`).
+- El diseño preveía `major/minor/patch/build/date` + `to_string()` +
+  `is_newer_than()` + `is_same_major_minor()`.
+- Lo real: versiones `String` + `UpdateManager.comparar_versiones()`, que cubre la
+  **comparación** pero **no** `to_string()` ni `is_same_major_minor()`.
+- **Decidir arquitectura antes de implementar**: no crear dos sistemas paralelos
+  de versionado (§15).
 ## Archivos a Modificar
 
 ### 5. `project.godot` — Agregar autoload

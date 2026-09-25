@@ -6,22 +6,30 @@
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-21 01:24:00
 
+## Reserva actual
+
+- **ACTIVA:** Reserva Log 974 agnes-3-flash/Kilo Code (2026-09-17 22:55) — M83 en curso (iter. acotada
+  tooling/data-driven V0): implementar **capa scanner** §A (`scripts/licensing/license_scanner.gd`:
+  `LicenseType` + `classificar()` por contenido + fallback UNKNOWN + `detectar_archivo_licencia` +
+  `scan_directorio`/`scan_addon` recursivo) + test headless + gate duro `quality.yml`. Respeta el
+  núcleo existente (`license_validator.gd` + `licencias.json` + `test_licenses_m83.gd` 17/0).
+
 ## A. Inventario de Licencias (15 ítems)
 
 - [ ] Crear Resource LicenseProfile con campos: dependency_name, version, license_type, license_text, license_url, commercial_use, modifications_required, attribution_required, source_offer_required, notes
-- [ ] Definir enum LicenseType con todos los tipos: MIT, BSD_2, BSD_3, APACHE_2, GPL_2, GPL_3, LGPL, MPL_2, AGPL, CC0, CC_BY, CC_BY_NC, PROPRIETARY, UNKNOWN, DUAL
+- [x] Definir enum LicenseType con todos los tipos: MIT, BSD_2, BSD_3, APACHE_2, GPL_2, GPL_3, LGPL, MPL_2, AGPL, CC0, CC_BY, CC_BY_NC, PROPRIETARY, UNKNOWN, DUAL — **iter. agnes (Log 974): `LicenseScanner.TYPES` (Array data-driven de los 15 tipos; Array en vez de enum por §9.x de hardcoded enums). Nota: el recurso `LicenseProfile` (ítem anterior) sigue `[ ]` — el scanner usa Dictionary.**
 - [ ] Implementar función scan_project() que escanea core, addons y dependencias externas
-- [ ] Implementar función scan_addon() que lee plugin.cfg y busca LICENSE
+- [x] Implementar función scan_addon() que lee plugin.cfg y busca LICENSE — **iter. agnes (Log 974): `LicenseScanner.scan_addon()` (plugin.cfg name/version + LICENSE detection). Test: addons reales gdUnit4/voxel → MIT.**
 - [ ] Implementar función scan_directory() recursiva para buscar archivos de licencia
-- [ ] Crear detección automática de archivos LICENSE, LICENSE.txt, LICENSE.md, COPYING, COPYING.txt
-- [ ] Implementar clasificador de licencias basado en contenido de texto (_classify_license)
-- [ ] Soporte para detección de MIT, Apache 2.0, GPL-2, GPL-3, LGPL, MPL-2, AGPL, BSD-2, BSD-3, CC-BY, CC-BY-NC, CC0
-- [ ] Fallback a UNKNOWN cuando la licencia no puede clasificarse
+- [x] Crear detección automática de archivos LICENSE, LICENSE.txt, LICENSE.md, COPYING, COPYING.txt — **iter. agnes (Log 974): `LicenseScanner.detectar_archivo_licencia()` contra `LICENSE_FILES`.**
+- [x] Implementar clasificador de licencias basado en contenido de texto (_classify_license) — **iter. agnes (Log 974): `LicenseScanner.classificar()` (frases de alta señal, sin substrings colisionables). Test 24/0.**
+- [x] Soporte para detección de MIT, Apache 2.0, GPL-2, GPL-3, LGPL, MPL-2, AGPL, BSD-2, BSD-3, CC-BY, CC-BY-NC, CC0 — **iter. agnes (Log 974): cubierto por `classificar()`.**
+- [x] Fallback a UNKNOWN cuando la licencia no puede clasificarse — **iter. agnes (Log 974): `classificar()` retorna UNKNOWN (probado: texto vacío + propietario).**
 - [ ] Crear inventario persistente (Resource) que almacena resultados del escaneo
 - [x] Cache de resultados de escaneo para evitar re-escaneos innecesarios — license_validator.gd: static var _cache + TTL 300s
 - [x] Función refresh_inventory() para forzar re-escaneo completo — limpiar_caché() implementado
 - [ ] Soporte para exclusiones: marcar dependencias que no requieren escaneo
-- [ ] Logging de todas las licencias encontradas
+- [x] Logging de todas las licencias encontradas — **iter. agnes (Log 974): `LicenseScanner.reporte(inventario)` lista cada dependencia (nombre/versión/tipo/archivo).**
 - [x] Exportar inventario a formato JSON para auditoría externa — reporte_ejecutivo() genera JSON legible
 
 ## B. Validación de Compatibilidad (15 ítems)
@@ -133,8 +141,43 @@
 - [ ] Procedimiento para auditar licencias periódicamente
 - [ ] Acci贸n externa no ejecutable por agente (requiere contacto humano con abogado) [M] -- agnes-2.5-flash 2026-09-12: TODO documento de licencias completo; CONTACTO con abogado requiere acci贸n humana. KnownIssue no bloqueante DoD — documentaci贸n lista para revisi贸n legal.
 
-**Totales:** 100 ítems · Completados: 7 · Pendientes: 93 · No resueltos: 0.
+**Totales:** 100 ítems · Completados: 16 · Pendientes: 84 · No resueltos: 0.
 **Nota:** Verificación item por item por MiMo V2.5 (OpenCode) 2026-09-15. Solo items con código real verificado en license_validator.gd + licencias.json + test_licenses_m83.gd.
+**Corrección agnes-3-flash (Log 974, 2026-09-17):** el `Totales` anterior decía "Completados: 7" pero el archivo traía **9** `[x]` (stale). Ahora, tras mi iter. scanner, son **16 `[x]` / 84 `[ ]`** (7 nuevos en §A: A.2/A.4/A.6/A.7/A.8/A.9/A.14 respaldados por `license_scanner.gd` + test 24/0).
+
+## Iteración agnes — capa scanner (2026-09-17, agnes-3-flash (Sapiens AI) / Kilo Code, Log 974)
+
+> Alcance acotado (tooling/data-driven V0): implementar lo que faltaba del diseño §A — la capa de
+> **escaneo** (detección de LICENSE + clasificador por contenido). El núcleo existente
+> (`license_validator.gd` + `licencias.json` + `test_licenses_m83.gd` 17/0) se respeta.
+
+- **Nuevo `scripts/licensing/license_scanner.gd`** (class_name LicenseScanner, RefCounted, estático —
+  headless, sin autoload):
+  - `TYPES`: catálogo data-driven de los 15 tipos (§A.2).
+  - `classificar(texto)`: clasificador por **frases de alta señal** (evita falsos positivos por
+    substring, ej. "implied"→"mpl") + fallback `UNKNOWN` (§A.7/A.8/A.9).
+  - `detectar_archivo_licencia(dir)`: LICENSE/LICENSE.txt/LICENSE.md/COPYING/COPYING.txt (§A.6).
+  - `scan_addon(dir)`: plugin.cfg (name/version) + licencia (§A.4).
+  - `scan_addons()`: inventario de los addons del repo (usando `DirAccess.get_directories()`).
+  - `cargar_catalogo()`: lee `licencias.json`.
+  - `reporte(inventario)`: logging legible de cada licencia encontrada (§A.14).
+- **Nuevo `scripts/licensing/test_license_scanner_m83.gd`** (headless, SceneTree): **24 checks, 0 fallos,
+  exit 0**. Verifica el clasificador (12 tipos + 2 fallback), detección en addons reales
+  (gdUnit4/voxel → MIT), catálogo y regresión con `LicenseValidator`.
+- **Gate CI:** ambos tests M83 cableados en `quality.yml` (test-suite, gate duro).
+- **Hallazgo:** el `Totales` del checklist estaba stale (7 vs 9 reales) → corregido.
+
+### Lo que NO hice (honestidad, §21.4.8)
+- Los ítems `§A.1/§A.3/§A.5/§A.10` (Resource `LicenseProfile`/`LicensePolicy`, `scan_project` completo
+  core+externas, `scan_directory` recursivo, inventario persistente como Resource) siguen `[ ]`: requieren
+  el diseño de Resources que es decisión del **dueño M83** (yo usé Dictionary+JSON para no forzar el diseño).
+- `§B/§C/§D/§E/§F/§G/§H/§I` siguen en su estado (mixto `[x]`/`[ ]`); no los toco.
+
+### Verificación
+- `godot --headless --script res://scripts/licensing/test_license_scanner_m83.gd` → **24 checks, 0 fallos,
+  exit 0** (los 6 `SCRIPT ERROR` del boot son de `theme_ux`/`theme_service`/`dialog_layer`/`ui_root` —
+  preexistentes y ajenos a M83).
+- Regresión: `test_licenses_m83.gd` **17 checks, 0 fallos, exit 0**.
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
 

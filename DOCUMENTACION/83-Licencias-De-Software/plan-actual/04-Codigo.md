@@ -288,3 +288,36 @@ LicenseScanner="*res://scripts/licensing/license_scanner.gd"
 | Build Pipeline (M117) | Agrega paso de validación de licencias |
 | Validación de Builds (M72) | Agrega checks de licencia |
 | Assets de Terceros (M71) | Verifica licencias de assets |
+
+## Iteración agnes — capa scanner (2026-09-17, agnes-3-flash (Sapiens AI) / Kilo Code, Log 974)
+
+> El diseño original de 04-Codigo describía `license_scanner.gd` como "a crear" (nunca implementado).
+> Lo implementé como **capa de escaneo** estática (headless, sin autoload), respetando el núcleo ya
+> existente (`license_validator.gd` + `licencias.json` + `test_licenses_m83.gd`).
+
+### Nuevo archivo: `game/isla-ancestral/scripts/licensing/license_scanner.gd`
+- `class_name LicenseScanner` (`RefCounted`, funciones `static` → corren headless/CI, sin autoload).
+- `TYPES`: Array data-driven con los 15 tipos de §A.2 (en vez de `enum` — pitfall de enums hardcodeados).
+- `classificar(texto) -> String`: clasificador **por frases de alta señal** (no por substring corto) con
+  fallback `UNKNOWN`. Orden: AGPL > LGPL > GPL(v2/v3) > MPL_2 > CC_BY_NC > CC0 > CC_BY > APACHE_2 >
+  BSD_3/2 > MIT > UNKNOWN.
+  - **Bug evitado:** el substring `mpl` falseaba con "implied"/"sample"; se usa `mozilla public license` /
+    `mpl 2.0` / `mpl-2.0` en su lugar.
+- `detectar_archivo_licencia(dir)`: busca LICENSE/LICENSE.txt/LICENSE.md/COPYING/COPYING.txt.
+- `scan_addon(dir)`: lee `plugin.cfg` (name/version) + clasifica la licencia del addon.
+- `scan_addons()`: inventario de `res://addons/` (usa `DirAccess.get_directories()`, no `iterate_subdirs`
+  que no existe en Godot 4).
+- `cargar_catalogo()`: lee `data/legal/licencias.json`.
+- `reporte(inventario)`: logging legible de cada licencia.
+
+### Nuevo test: `scripts/licensing/test_license_scanner_m83.gd` (headless)
+- **24 checks, 0 fallos, exit 0**: clasificador (12 tipos + 2 fallback), detección en addons reales
+  (gdUnit4/voxel → MIT), catálogo, y regresión con `LicenseValidator`.
+
+### Cables / CI
+- `quality.yml` (test-suite, gate duro): `test_licenses_m83.gd` + `test_license_scanner_m83.gd`.
+
+### Decisión de diseño (para el dueño M83)
+- Usé **Dictionary** para el perfil de licencia en vez del **Resource `LicenseProfile`** del diseño: no
+  forzaré el diseño de Resource sin la decisión del dueño (dejaría `§A.1`/`§A.10` como `[ ]` honesto).
+  Si M83 prefiere Resources, se migra el `scan_addon()` a devolver `LicenseProfile`.

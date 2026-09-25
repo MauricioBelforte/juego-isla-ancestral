@@ -284,3 +284,9 @@ Log 1028 atria-dawn → este)
 - **Pendiente humano/artista:** producción de arte (M46), registro legal de marca/dominios, export a ASE/PDF.
 
 **Firma:** Hy3 / WorkBuddy — 2026-09-19
+
+**Totales:** 100 ítems · Completados: 53 · Pendientes: 47 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 53 [x] / 47 [ ] /
+> 0 [?]. Las marcas no se tocaron.

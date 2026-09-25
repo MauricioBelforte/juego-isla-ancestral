@@ -79,3 +79,21 @@ brand/
 | Legal PI (M78) | Registra trademarks definidos en BrandConfig |
 | Marketing (M151) | Usa assets de brand/ |
 | Comunidad (M152) | Usa guidelines para redes sociales |
+
+## Iteración agnes — data-layer + gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1013)
+
+> Iteración acotada (data-driven + tooling/CI + V0). Verifiqué el scaffold de validación y lo cableé al
+> gate CI. NO genero branding ni hago legal (dueño M128/M46).
+
+### Estado real del código (verificado headless, godot 4.7.2)
+- `data/legal/identidad_marca.json` — catálogo data-driven (3 elementos: nombre/logo/paleta-base).
+- `scripts/legal/brand_validator.gd` (`class_name BrandValidator`) — `validar()`/`reporte()`: detecta
+  sin id / sin nombre / sin uso / sin políticas.
+- `scripts/legal/test_brand_m128.gd` — **8 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
+- **Gap cerrado:** el test **no estaba** cableado en `quality.yml` → añadido al **gate duro**
+  (test-suite), junto a los tests M83/M126.
+
+### Lo que sigue NO implementado (dueño M128 / humano / M46)
+- Branding real (logo/paleta/tipografía en `assets/brand/`) → M45/M46.
+- Registro de trademark, dominio, redes y legal → acción externa/abogado.
+- Capa de servicio (`BrandConfig`/`BrandUITheme`) y los 95 `[ ]` del checklist.
