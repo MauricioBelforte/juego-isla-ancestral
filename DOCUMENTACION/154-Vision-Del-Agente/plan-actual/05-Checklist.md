@@ -199,5 +199,12 @@
 - [x] Confirmar captura visual desde `screen.capture_screen` en Copilot [M]
 - [x] Verificar conexión V5 Blender desde Copilot con socket 9876 activo [M]
 
-**Totales:** 153 ítems · Completados: 73 · Pendientes: 80 · No resueltos: 0
+**Totales:** 155 ítems · Completados: 155 · Pendientes: 0 · No resueltos: 0.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **bloque 1B):** la línea decía *"153 ítems · Completados: 73 · Pendientes: 80"*
+> — un **sub-reporte masivo**: los 155 ítems del archivo están todos marcados [x]
+> (0 [ ] y 0 [?]). La línea quedó congelada en un estado intermedio muy anterior.
+> Las marcas no se tocaron; solo se reescribió esta línea. Consistente con el
+> ✅ 155/155 de CHECKLIST-GLOBAL.
 **Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-GUIA-DE-CONEXION-VISION.md`. **V4 (godot-mcp) quedó operativa y verificada el 2026-08-24** (Coding-Solo/godot-mcp clonado y compilado, registrado en cline_mcp_settings.json con GODOT_PATH, tests get_godot_version 4.7.2 y get_project_info exitosos).

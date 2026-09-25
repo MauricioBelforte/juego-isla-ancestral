@@ -226,4 +226,8 @@
 - [x] Crear test de búsqueda por rareza
 - [?] Crear test de integración con Inventario (M14 no implementado)
 
-**Total: 135 ítems**
+**Totales:** 146 ítems · Completados: 69 · Pendientes: 25 · No resueltos: 52.
+
+> **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
+> **lote 6):** la línea decía solo *"**Total: 135 ítems**"* (sin desglose y con total
+> equivocado). Conteo real: 69 [x] / 25 [ ] / 52 [?] = 146. Las marcas no se tocaron.

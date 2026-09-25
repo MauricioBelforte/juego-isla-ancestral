@@ -24,3 +24,13 @@ linea_saludo = "¡Hola, amiguito! ¿Quieres probar algo delicioso?"
 linea_despedida = "¡Vuelve pronto! Siempre hay galletas frescas."
 linea_sueno = "Mmm... receta secreta..."
 hogar_deseado = "bosque"
+rutina_diaria = {
+"06:00": "despertar",
+"07:00": "ir_a_trabajar",
+"07:30": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"18:00": "ir_a_casa",
+"18:30": "socializar",
+"22:00": "dormir"
+}
