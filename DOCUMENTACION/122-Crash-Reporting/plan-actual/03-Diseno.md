@@ -1,6 +1,12 @@
 **Modelo:** SWE-1.6
 **Plataforma:** Devin
 
+> ⚠️ **ALINEADO AL CÓDIGO (P-42.1, 2026-09-25).** Este documento describe el **diseño**; la
+> **implementación real** vive en `game/isla-ancestral/scripts/crash/` (10 helpers `RefCounted`
+> **sin `class_name`** + el autoload `CrashReporter`). Las rutas y las firmas de las secciones 2–10
+> ya fueron corregidas para reflejar el código. Ver la **tabla de correspondencia (§16)** y
+> `04-Codigo.md §15`. `class_name` queda como **deuda OPCIONAL**, no como pendiente activo.
+
 # 03-Diseno.md — Módulo 122: Crash Reporting
 
 ## 1. Arquitectura del módulo
@@ -25,7 +31,7 @@ Crash Reporting (sistema de reporting de crashes)
 
 ## 2. CrashReporter (servicio principal)
 
-**Archivo: scripts/services/crash_reporter.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_reporter.gd` (autoload `CrashReporter`)
 
 **Responsabilidades:**
 - Capturar crashes automáticamente
@@ -36,7 +42,8 @@ Crash Reporting (sistema de reporting de crashes)
 
 **Métodos principales:**
 ```gdscript
-class_name CrashReporter
+# Autoload registrado en project.godot. SIN class_name:
+# la regla del proyecto (§9.17/§9.41) prohibe class_name en autoloads.
 extends Node
 
 signal crash_sent(success: bool)
@@ -97,7 +104,7 @@ func _has_connection() -> bool:
 
 ## 3. MetadataCollector (recolección de metadata)
 
-**Archivo: scripts/services/metadata_collector.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_metadata.gd`
 
 **Responsabilidades:**
 - Recolectar información de hardware
@@ -106,7 +113,7 @@ func _has_connection() -> bool:
 
 **Métodos principales:**
 ```gdscript
-class_name MetadataCollector
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 static func collect_hardware_metadata() -> Dictionary:
@@ -119,7 +126,7 @@ static func collect_hardware_metadata() -> Dictionary:
         "gpu": RenderingServer.get_video_adapter_name(),
         "gpu_driver": RenderingServer.get_video_adapter_vendor(),
         "ram_total": OS.get_static_memory_usage(),
-        "ram_available": OS.get_dynamic_memory_usage()
+        "ram_available": OS.get_memory_info()["available"]  # get_dynamic_memory_usage() NO existe en 4.7
     }
 
 static func collect_software_metadata() -> Dictionary:
@@ -144,7 +151,7 @@ static func collect_game_context() -> Dictionary:
 
 ## 4. ContextSanitizer (sanitización de contexto)
 
-**Archivo: scripts/services/context_sanitizer.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_context_sanitizer.gd`
 
 **Responsabilidades:**
 - Sanitizar contexto para no enviar datos personales
@@ -153,7 +160,7 @@ static func collect_game_context() -> Dictionary:
 
 **Métodos principales:**
 ```gdscript
-class_name ContextSanitizer
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 var unsafe_keys = ["username", "ip", "email", "phone", "address", "inventory", "chat", "api_key", "token"]
@@ -175,7 +182,7 @@ func _is_unsafe_key(key: String) -> bool:
 
 ## 5. CrashCache (caché offline)
 
-**Archivo: scripts/services/crash_cache.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_cache.gd`
 
 **Responsabilidades:**
 - Guardar crashes localmente cuando no hay conexión
@@ -184,7 +191,7 @@ func _is_unsafe_key(key: String) -> bool:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashCache
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 const MAX_CACHE_SIZE = 10
@@ -218,7 +225,7 @@ func _save_cache(cache: Array) -> void:
 
 ## 6. CrashSender (envío a servicio externo)
 
-**Archivo: scripts/services/crash_sender.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_sender.gd`
 
 **Responsabilidades:**
 - Enviar crashes a Crashlytics/Sentry
@@ -227,7 +234,7 @@ func _save_cache(cache: Array) -> void:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashSender
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 var service_url: String = "https://crash-reporting-service.com/api/crashes"
@@ -254,7 +261,7 @@ func send_cached_crashes(cache: Array) -> int:
 
 ## 7. CrashDashboard (dashboard de estadísticas)
 
-**Archivo: scripts/ui/crash_dashboard.gd**
+**Archivo: NO IMPLEMENTADO en M122.** La capa de DATOS que el dashboard consume existe en `game/isla-ancestral/scripts/crash/crash_analytics.gd` (`agrupar`/`frecuencias`/`top`/`nuevas`) y `game/isla-ancestral/scripts/crash/crash_prioritizer.gd` (`prioridad`/`filtrar`/`ordenar`). La UI (Control/escena) es de **M110/M53**, no de este modulo.
 
 **Responsabilidades:**
 - Visualizar crashes en dashboard
@@ -263,7 +270,7 @@ func send_cached_crashes(cache: Array) -> int:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashDashboard
+# (NO IMPLEMENTADO — la UI es de M110/M53)
 extends Control
 
 @onready var crash_list = $CrashList
@@ -294,7 +301,7 @@ func _fetch_crashes_from_service() -> Array:
 
 ## 8. Integración con M103 (Logging)
 
-**Archivo: scripts/integrations/crash_logging.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_logging.gd`
 
 **Responsabilidades:**
 - Loggear crashes en Logging service
@@ -302,7 +309,7 @@ func _fetch_crashes_from_service() -> Array:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashLogging
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 func log_crash(crash_data: Dictionary) -> void:
@@ -315,7 +322,7 @@ func log_crash(crash_data: Dictionary) -> void:
 
 ## 9. Integración con M102 (Bug Tracking)
 
-**Archivo: scripts/integrations/crash_bug_tracking.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_bug_tracking.gd`
 
 **Responsabilidades:**
 - Crear issue en GitHub por crash crítico
@@ -323,7 +330,7 @@ func log_crash(crash_data: Dictionary) -> void:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashBugTracking
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 func create_issue_for_crash(crash_data: Dictionary) -> void:
@@ -359,7 +366,7 @@ func _create_github_issue(title: String, body: String) -> void:
 
 ## 10. Integración con M110 (Debug Menu)
 
-**Archivo: scripts/integrations/crash_debug_menu.gd**
+**Archivo real:** `game/isla-ancestral/scripts/crash/crash_debug_menu.gd`
 
 **Responsabilidades:**
 - Agregar panel de "Diagnostics" en Debug Menu
@@ -368,7 +375,7 @@ func _create_github_issue(title: String, body: String) -> void:
 
 **Métodos principales:**
 ```gdscript
-class_name CrashDebugMenu
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 func add_diagnostics_panel(debug_menu: DebugMenu) -> void:
@@ -396,7 +403,7 @@ func _format_metadata() -> String:
 
 ## 11. Configuración
 
-**Archivo: project.gd (sección crash_reporting)**
+**Archivo:** `project.godot` (sección `crash_reporting`) — **NO APLICADA todavía** (hoy solo existe el autoload). Dueño: M117/coordinador.
 ```gdscript
 [crash_reporting]
 enabled = true
@@ -478,7 +485,7 @@ crash_reporter_verbose = true
 
 **Implementación:**
 ```gdscript
-class_name CrashAlerts
+# RefCounted. SIN class_name: se usa por preload de ruta.
 extends RefCounted
 
 func check_alerts(crashes: Array) -> void:
@@ -495,3 +502,63 @@ func _send_alert(message: String) -> void:
     var json_data = JSON.stringify(alert_data)
     http.request("https://hooks.slack.com/services/YOUR/WEBHOOK/URL", headers, HTTPClient.METHOD_POST, json_data)
 ```
+
+## 16. Correspondencia diseño ↔ código real (P-42.1, 2026-09-25)
+
+> **Decisión del coordinador:** *alinear el diseño al código* (regla 15: no se toca lo que funciona).
+> Los 10 helpers viven en `scripts/crash/` y las 2 suites pasan con **181 checks / 0 fallos**.
+> El diseño original pedía 9 archivos repartidos en `scripts/services/`, `scripts/ui/` y
+> `scripts/integrations/`, con `class_name` — **nada de eso se implementó así**, y es el diseño el que
+> estaba equivocado.
+
+### 16.1 Tabla de correspondencia
+
+| Diseño (este documento) | Código real (`game/isla-ancestral/`) |
+|---|---|
+| `scripts/services/crash_reporter.gd` · `CrashReporter extends Node` | `scripts/crash/crash_reporter.gd` — **autoload**, sin `class_name` |
+| `scripts/services/metadata_collector.gd` | `scripts/crash/crash_metadata.gd` |
+| `scripts/services/context_sanitizer.gd` | `scripts/crash/crash_context_sanitizer.gd` |
+| `scripts/services/crash_cache.gd` | `scripts/crash/crash_cache.gd` |
+| `scripts/services/crash_sender.gd` | `scripts/crash/crash_sender.gd` |
+| `scripts/integrations/crash_logging.gd` | `scripts/crash/crash_logging.gd` |
+| `scripts/integrations/crash_bug_tracking.gd` | `scripts/crash/crash_bug_tracking.gd` |
+| `scripts/integrations/crash_debug_menu.gd` | `scripts/crash/crash_debug_menu.gd` |
+| §15 `CrashAlerts` (sin ruta) | `scripts/crash/crash_alerts.gd` |
+| §1 `CrashAnalytics` (sin ruta) | `scripts/crash/crash_analytics.gd` |
+| §1 `CrashPrioritizer` (sin ruta) | `scripts/crash/crash_prioritizer.gd` |
+| §1 `CrashHandler` | **no existe** como archivo: el manejo vive en el `_ready()` del autoload |
+| §7 `scripts/ui/crash_dashboard.gd` · `CrashDashboard extends Control` | **NO IMPLEMENTADO** — sólo la capa de datos (`crash_analytics` + `crash_prioritizer`); la UI es de **M110/M53** |
+| §1 `CrashViewer` | **NO IMPLEMENTADO** — idem anterior |
+
+### 16.2 Deuda OPCIONAL declarada: `class_name`
+
+El diseño pedía `class_name` en los 10 helpers. **No se agregó**, por dos razones medidas:
+
+1. `crash_reporter.gd` es un **autoload** y la regla del proyecto (§9.17/§9.41) **prohíbe**
+   `class_name` en autoloads.
+2. Los otros 9 helpers se consumen **por ruta** (`preload("res://scripts/crash/…")`) y se inyectan
+   como dependencias; **ningún módulo los referencia por tipo**.
+
+**Excepción (única razón para refactorizar):** si algún módulo pasa a necesitar una de estas clases
+**por tipo** (p. ej. `var c: CrashSender`), entonces sí hay que declarar `class_name` y el ítem queda
+`[?]` nombrando al módulo dependiente. **Hoy no ocurre** — medido con `grep` sobre todo el repo:
+* 0 declaraciones `class_name` en `scripts/crash/` (las únicas apariciones de la palabra son los
+  comentarios «RefCounted sin class_name (preload)» de cada helper);
+* 0 usos como tipo (`var x: <Clase>`, `-> <Clase>`) en todo `game/`;
+* las 11 menciones de esos nombres viven **sólo** dentro de `scripts/crash/` (cada helper y las 2
+  suites), y las suites cargan por `preload("res://scripts/crash/…")`.
+
+Por eso `class_name` es **deuda opcional documentada**, no un pendiente activo.
+
+### 16.3 Defectos del diseño corregidos en esta alineación
+
+| El diseño decía | El código hace | Por qué |
+|---|---|---|
+| `OS.get_dynamic_memory_usage()` | `OS.get_memory_info()["available"]` | El método **no existe** en Godot 4.7 → `SCRIPT ERROR` de parseo (medido) |
+| `store_var`/`get_var` en la caché | **JSON** (`crash_cache.json`) | Auditable y portable entre versiones del motor |
+| `CrashCache.save_crash` con **un** `pop_front()` | `while cache.size() > MAX_CACHE_SIZE` | Defensivo si el archivo quedó por encima del límite |
+| `_is_safe_key` (lista plana) | **sanitización recursiva** | El diseño dejaba pasar `{"player": {"email": …}}` |
+| `HTTPRequest.new()` dentro de cada helper | **transporte inyectado** (`Callable`) | Testeable offline; sin transporte → *fail-closed* (`false`), nunca un envío inventado |
+| `ServiceRegistry.get("logger")` dentro del helper | **logger inyectado** | Desacopla el helper del árbol; el cableado es del autoload |
+| `debug_menu.add_panel()` / `panel.add_button()` | **panel descripto como datos** (`describir_panel`) | M110 **no expone** esa API; el cableado real es de M110 |
+| Matriz de prioridad §13 con 6 filas | 8 combinaciones (interpola «Media+Algunos» y «Baja+Todos») | El diseño no cubría 2 casos reales |

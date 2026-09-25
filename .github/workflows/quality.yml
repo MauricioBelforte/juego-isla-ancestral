@@ -492,16 +492,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check for hardcoded secrets
+      # GATE DURO (P-42, 2026-09-25, DeepSeek-V4.1-Flash). Antes eran 4 `grep ... || true`
+      # que NUNCA podian fallar (trampa 81) y ademas estaban ROTOS: en BRE (grep sin -E)
+      # `\s` es la LETRA `s`, asi que el patron real era `passwords*=` y NO matcheaba la
+      # forma normal `password = "..."`; y `! grep | grep -v ... || true` negaba el exit
+      # code del ULTIMO comando del pipe, no el del grep que buscaba.
+      # Reemplazado por `scripts/auditar_secrets.py` (patrones espejo del escaner in-game
+      # M106 T-006: security_secret_scanner.gd).
+      # MEDIDO: 634 archivos bajo scripts/ (2717 en todo el proyecto) -> 0 secrets -> exit 0,
+      # asi que el gate nace VERDE y NO deja el CI rojo. Se probo EN ROJO por inyeccion
+      # (`--selftest`, 6/6) y NOMBRA archivo + linea + regla (un exit 1 solo no identifica
+      # la causa). Excluye `test_*`/`mock*` — sus fixtures son secrets de mentira — y esa
+      # exclusion esta documentada y medida dentro del script.
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: "Gate: no hardcoded secrets (M106)"
         run: |
-          # Check for common secret patterns in GDScript files
-          cd game/isla-ancestral
-          echo "Scanning for potential secrets..."
-          ! grep -r -i "password\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
-          ! grep -r -i "api_key\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
-          ! grep -r -i "secret\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
-          ! grep -r -i "token\s*=" scripts/ --include="*.gd" | grep -v "test" | grep -v "mock" || true
-          echo "Secret scan completed"
+          python3 scripts/auditar_secrets.py
+          python3 scripts/auditar_secrets.py --selftest
 
       - name: Check for debug prints in production code
         run: |

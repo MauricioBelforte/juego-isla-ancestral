@@ -788,3 +788,68 @@ tapando un `ERROR` del motor.
 ### 26.6 Verificacion total M106 tras P-36
 159 (previos) + 78 (servicios) = **237 checks, 0 fallos** en 8 suites (tabla en `05-Checklist.md`).
 
+## 27. Iteracion P-42 — `security-scan` deja de ser un falso gate (2026-09-25, DeepSeek-V4.1-Flash / WorkBuddy, Log 1156)
+
+**Decision del coordinador (P-42):** convertir los 4 `grep ... || true` del job `security-scan` en un
+gate duro, con procedimiento obligatorio: secret inyectado -> exit 1; arbol limpio -> exit 0.
+
+### 27.1 Por que los 4 grep NO eran un gate (tres defectos apilados, no uno)
+1. **`|| true` al final de cada linea** -> el step **nunca** podia fallar (trampa 81).
+2. **El patron estaba roto.** `grep` sin `-E` usa BRE, donde `\s` es la **letra `s`**: el patron
+   real era `passwords*=` y **no matcheaba** la forma normal `password = "..."`.
+3. **El `!` negaba al comando equivocado.** En `! grep -r ... | grep -v test | grep -v mock`, el `!`
+   se aplica al **ultimo** comando del pipe (`grep -v mock`), no al `grep` que buscaba. Con el
+   `|| true` encima, un secret real se perdia **dos veces**.
+
+### 27.2 El gate nuevo: `scripts/auditar_secrets.py`
+- **Python** (no GDScript) porque el job `security-scan` **no instala Godot**: solo hace checkout.
+- **Patrones espejo** de `security_secret_scanner.gd` (T-006): clave asignada, cloud key,
+  `AKIA[0-9A-Z]{16}`, PEM privada, bearer token -> el gate de CI y el escaner in-game coinciden.
+- **Filtra placeholders** (`your_`, `changeme`, `example`, `<`, `os.get_environment`, ...) y las
+  **lineas de comentario**; **redacta** el valor (`***REDACTED***`): nunca imprime el secret.
+- **Nombra archivo + linea + regla**, porque un `exit 1` a secas no identifica la causa (trampa 101).
+- Exit: `0` limpio · `1` hallazgos · `2` raiz invalida.
+
+### 27.3 Medicion (antes de decidir, no despues)
+| Alcance | Archivos | Hallazgos | Exit |
+|---|---|---|---|
+| `game/isla-ancestral/scripts` (scope del job) | 634 (264 excluidos) | **0** | 0 |
+| `game/isla-ancestral` (proyecto) | 2717 (307 excluidos) | **0** | 0 |
+| repo entero (`.`) | 3554 (341 excluidos) | **0** | 0 |
+
+-> El arbol esta **limpio**: el gate **nace verde** y no deja el CI rojo. Por eso se convirtio a
+**duro** y no a *warn*.
+
+### 27.4 Prueba EN ROJO por inyeccion (procedimiento obligatorio)
+- `--selftest`: **6/6** — fixture limpio -> 0 hallazgos; fixture sucio -> 2 hallazgos nombrando la
+  linea; **sin fuga** del valor en el fragmento; arbol temporal con secret -> exit 1; sin el -> exit 0;
+  secret en `test_*.gd` -> exit 0 (excluido, documentado).
+- **Sobre el arbol REAL:** se inyecto `game/isla-ancestral/scripts/_p42_probe_secret.gd` con un
+  `AKIA...` -> **exit 1**, `.../_p42_probe_secret.gd:2: [aws-access-key-id] var api_key:***REDACTED***`;
+  borrado el archivo -> **exit 0**. La sonda se elimino (no quedo artefacto).
+
+### 27.5 Exclusiones declaradas (y por que)
+- `test_*` / `mock*` / `tests/`: sus fixtures son secrets **de mentira**. **Medido:** sin la
+  exclusion hay **8 hallazgos**, todos en `test_security_m106_secrets.gd` y
+  `test_logging_m103_iter1.gd`. Con ella, el gate seria inutil sin aportar nada.
+- **2 archivos exentos** (el detector y sus fixtures): `security_secret_scanner.gd` (contiene los
+  PATRONES como strings) y `scripts/auditar_secrets.py` (contiene los `FIXTURE_*` del selftest). La
+  exencion es **por archivo**, esta documentada y **no puede apagar la deteccion en silencio**:
+  el `--selftest` la prueba en cada corrida de CI.
+
+### 27.6 Lo que NO se convirtio (y por que)
+El step vecino **"Check for debug prints in production code"** sigue siendo informativo (tiene
+`|| true` y un `| head -20`). **Medido:** hay **712** `print(` en `scripts/` fuera de tests/mocks ->
+convertirlo a gate duro dejaria el CI **rojo permanente sin plan de remediacion**. Se reporta al
+coordinador en lugar de romperlo (decision por evidencia, no por ideal).
+
+### 27.7 Cableado y validacion
+- `quality.yml`: se agrego `Setup Python` (convencion de los otros jobs) y el step
+  `Gate: no hardcoded secrets (M106)` corre el gate **y** su `--selftest` (el selftest es la
+  garantia de que el gate no es un detector ciego, trampa 91).
+- **El validador del repo cazo un bug propio:** `name: Gate: no hardcoded secrets (M106)` tiene un
+  `: ` sin comillas -> YAML invalido (patron **BUG-077**), y GitHub habria **apagado el workflow
+  entero**. Corregido a `name: "Gate: no hardcoded secrets (M106)"`.
+- `scripts/validar_workflows.py`: **6 workflows validos, 0 problemas**, con los **mismos 7 avisos**
+  de deuda previa BUG-078 (ninguno nuevo). Selftest del validador: **6/6**.
+- EOL del workflow preservado (**CRLF**, 765) via `scripts/editar_crlf.py`.

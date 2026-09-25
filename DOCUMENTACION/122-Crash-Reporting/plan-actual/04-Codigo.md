@@ -530,3 +530,38 @@ Luego aplica `String.sha256_text()` del motor (verificado contra el vector está
 - Nada de este módulo **envía** datos: los transportes son inyectables y por defecto están ausentes
   (fail-closed). El envío real es de **M104/M118** con la API key del coordinador.
 
+## 16. Iteración P-42 — el DISEÑO se alinea al código (2026-09-25, DeepSeek-V4.1-Flash / WorkBuddy, Log 1156)
+
+**Decisión del coordinador (P-42.1):** ante el drift diseño↔código que reporté en §15, se elige
+**alinear el diseño al código** (regla 15: no se toca lo que funciona). Los 10 helpers viven en
+`scripts/crash/` sin `class_name`, y las 2 suites pasan con **181 checks / 0 fallos**.
+
+### 16.1 Qué se cambió
+`03-Diseno.md` — **21 reemplazos exactos, con conteo asertado** (el script aborta si un reemplazo no
+matchea lo esperado, así que no puede "alinear" a medias):
+- **Rutas**: `scripts/services/*.gd`, `scripts/ui/crash_dashboard.gd` y `scripts/integrations/*.gd`
+  -> `game/isla-ancestral/scripts/crash/*.gd` (las 9 reales).
+- **`class_name`**: eliminado de los 10 bloques de código del diseño. El autoload no puede tenerlo
+  (§9.17/§9.41) y los 9 helpers no lo necesitan.
+- **Defecto del diseño corregido**: `OS.get_dynamic_memory_usage()` ->
+  `OS.get_memory_info()["available"]` (el método no existe en Godot 4.7: `SCRIPT ERROR` medido).
+- **Cabecera de aviso** (el documento ahora declara que la implementación vive en `scripts/crash/`) y
+  **§16 nueva** con la tabla de correspondencia y la deuda opcional.
+
+### 16.2 `class_name` = deuda OPCIONAL (medido, no asumido)
+La única razón para declarar `class_name` sería que **otro módulo** referenciara esas clases **por
+tipo**. Medido con `grep` sobre todo el repo:
+- **0** declaraciones `class_name` en `scripts/crash/` (sólo comentarios «RefCounted sin class_name»).
+- **0** usos como tipo (`var x: <Clase>`, `-> <Clase>`) en todo `game/`.
+- Las menciones de esos nombres viven **sólo** dentro de `scripts/crash/`; las 2 suites cargan por
+  `preload("res://scripts/crash/...")`.
+
+-> **No se refactorizó nada.** Si algún día un módulo necesita una clase **por tipo**, ese ítem pasa a
+`[?]` nombrando al módulo dependiente — así quedó escrito en `03-Diseno.md §16.2`.
+
+### 16.3 Estado del checklist
+La alineación es **documental**: no agrega ni quita ítems, así que `05-Checklist.md` sigue en
+**254 `[x]` · 11 `[?]` · 0 `[ ]` (265)**. Los `[x]` de «Diseñar CrashDashboard.gd» / «Diseñar
+CrashViewer» (líneas 167/168/259) siguen siendo válidos: son ítems de **diseño** y el diseño existe.
+Lo que ahora el diseño declara **explícitamente** es que su **implementación** no es de M122 sino de
+**M110/M53** (la capa de datos sí es de M122: `crash_analytics` + `crash_prioritizer`).
