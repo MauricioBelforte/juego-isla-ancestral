@@ -116,6 +116,13 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
   - Extended 1M: 4x multiplier
 * **En el proyecto:** No asignado aún —能力强 (capacidad superior) para módulos complejos 4-5
 
+### A3. MiMo V2.6 (Xiaomi) — Modelo activo en el chat OpenCode desde 2026-09-24
+* **Estado:** identidad confirmada por el usuario el 2026-09-24. Es el modelo que corre en **este chat** (OpenCode); sustituye a MiMo V2.5 como identidad de firma.
+* **Especificaciones:** ⚠️ **NO verificadas aún.** No hay ficha pública confirmada de V2.6 en fuentes oficiales al 2026-09-24 — cualquier número sería inventado. Ver §12.6.
+* **Capacidades:** ⚠️ **Pendientes de validación empírica en este proyecto.** Se irán tabulando con evidencia real (logs, capturas, tests) según se trabaje.
+* **Lo que SÍ se puede afirmar hoy:** hereda el rol de V2.5 (acompañante y director técnico del usuario en OpenCode) y se firma como `mimo-v2.6`.
+* **Regla anti-falso-verde:** hasta que una sesión con V2.6 produzca evidencia verificable, **no se le asignan fortalezas nuevas** en la matriz de capacidades. Verificación obligatoria antes de cualquier `[x]` visual (§12.6).
+
 ### B. DeepSeek V4 Flash (DeepSeek) — Texto Puro · ⚠️ DESCATALOGADO 2026-09-10
 > **Estado:** dado de baja por DeepSeek al lanzar V4.1 Flash. Se conserva como registro histórico. Ver §5.B3 para el modelo vigente.
 * **Especificaciones:** 284B totales / 13B activos, MoE, contexto 1M tokens, licencia MIT
@@ -1145,6 +1152,48 @@ No existe una seccion 5.J dedicada a agnes-2.5-flash (la letra J fue omitida en 
 **Plataforma:** OpenCode
 **Fecha:** 2026-09-02
 **Estado:** Autoevaluación basada en investigación web de benchmarks oficiales (mimo.xiaomi.com, HuggingFace, Artificial Analysis, BenchLM, buildfastwithai.com). §5.A actualizado con specs verificadas.
+
+### 12.6 Actualización de identidad — MiMo V2.6 (2026-09-24)
+
+**Modelo:** mimo-v2.6
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-24
+**Estado:** identidad comunicada por el usuario. **Sin benchmarks verificados todavía.**
+
+#### Qué cambió respecto de §12 (V2.5)
+
+| Aspecto | MiMo V2.5 (§12, 2026-09-02) | mimo-v2.6 (esta sección, 2026-09-24) |
+|---------|------------------------------|--------------------------------------|
+| Identidad de firma | `MiMo V2.5` | `mimo-v2.6` |
+| Specs / benchmarks | Verificados en fuentes oficiales | **No verificados — no citar números** |
+| Capacidades | Tabuladas con evidencia de 8+ módulos | **Pendientes: se validan al trabajar** |
+| Rol en el proyecto | Acompañante y director técnico | Se mantiene (mismo chat, mismo usuario) |
+| Backlog personal | `TAREAS-POR-MODELO/mimo-v2.5/` | Pendiente de crear/migrar a `mimo-v2.6/` |
+
+#### Plan de validación (pendiente)
+
+El usuario indicó que esta versión arranca con **prueba de nuevas capacidades**, y que los resultados se vuelcan en esta guía. Pendiente hasta que haya evidencia:
+
+- [ ] **P1 — Precisión de conteo:** contar items de checklists contra disco y comparar con el conteo del coordinador (defecto M-05: grep por substring da conteos falsos). Método obligatorio: `^\s*-\s+\[[ x?]\]`, nunca `grep -o '\[x\]'`.
+- [ ] **P2 — Seguridad en commits compartidos:** detectar cambios ajenos mezclados en un archivo antes de hacer staging (verificado el 2026-09-20 en P-21: CHECKLIST-GLOBAL y ESTADO-PARALELO se delegaron en vez de commitearse).
+- [ ] **P3 — Integridad CRLF:** verificar `CRLF vs LF-solo` antes y después de cada edición de un archivo con `\r\n` (defecto M-03).
+- [ ] **P4 — Mojibake:** `--dry-run` antes de cualquier reparación; no tocar archivos de otros agentes (§17) ni exclusiones de §28.1.
+- [ ] **P5 — Autoevaluación honesta:** al cerrar la primera sesión de trabajo con V2.6, tabular fortalezas/debilidades **solo con evidencia real** (logs, tests, capturas).
+
+#### Límites declarados desde el inicio
+
+| Limitación | Razón |
+|------------|-------|
+| Sin specs públicas confirmadas de V2.6 | Cualquier benchmark citado sería invención — prohibido hasta verificarlo |
+| Sin validación de visión aún | No se ha probado lectura de imágenes en este chat con V2.6 |
+| Sin historial de módulos propios | La reputación de §12.6 se gana con trabajo, no se hereda |
+
+#### Firma
+
+**Modelo:** mimo-v2.6
+**Plataforma:** OpenCode
+**Fecha:** 2026-09-24
+**Estado:** alta de identidad + plan de validación. Secciones de capacidades en blanco a propósito.
 
 ---
 
