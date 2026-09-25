@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="TutorialGuiones" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/tutorial/tutorial_guiones.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+capitulos = {
+"prologo": {
+"pasos": [{
+"tipo": "PISTA",
+"texto_clave": "TUTORIAL.PROLOGO_BIENVENIDA",
+"icono_tecla": ""
+}, {
+"tipo": "SECUENCIA",
+"texto_clave": "TUTORIAL.PROLOGO_MOVERSE",
+"meta": "mover",
+"icono_tecla": "mover_norte"
+}],
+"meta": "mover",
+"rejugable": true,
+"extra": {
+"guiado": true
+}
+},
+"interactuar": {
+"pasos": [{
+"tipo": "SECUENCIA",
+"texto_clave": "TUTORIAL.INTERACTUAR",
+"meta": "interactuar",
+"icono_tecla": "interactuar"
+}],
+"meta": "interactuar",
+"rejugable": false,
+"extra": {}
+},
+"herramienta": {
+"pasos": [{
+"tipo": "PISTA",
+"texto_clave": "TUTORIAL.HERRAMIENTA",
+"icono_tecla": "colocar"
+}, {
+"tipo": "SECUENCIA",
+"texto_clave": "TUTORIAL.HERRAMIENTA_USO",
+"meta": "usar_herramienta",
+"icono_tecla": "colocar"
+}],
+"meta": "usar_herramienta",
+"rejugable": false,
+"extra": {}
+},
+"vecino": {
+"pasos": [{
+"tipo": "SECUENCIA",
+"texto_clave": "TUTORIAL.VECINO",
+"meta": "charlar",
+"icono_tecla": "interactuar"
+}],
+"meta": "charlar",
+"rejugable": true,
+"extra": {}
+}
+}
