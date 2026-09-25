@@ -68,10 +68,11 @@ func posicion_lider() -> Vector3:
 
 
 func tick(delta: float, pos_jugador: Vector3) -> void:
-	if _miembros.size() < 2:
+	if _miembros.size() == 0:
 		return
 	_actualizar_lider(delta)
-	_cohesion(delta, pos_jugador)
+	if _miembros.size() >= 2:
+		_cohesion(delta, pos_jugador)
 
 
 func _actualizar_lider(delta: float) -> void:
@@ -121,7 +122,7 @@ func _cohesion(_delta: float, _pos_jugador: Vector3) -> void:
 			continue
 		if m.nodo == null or not is_instance_valid(m.nodo):
 			continue
-		var pos = m.nodo.global_position
+		var pos = m.nodo.get_global_position()
 		var dist = pos.distance_to(lider_pos)
 		if dist > DELTA_SEGUIDOR:
 			var dir = (lider_pos - pos).normalized()
@@ -175,15 +176,8 @@ func destino_huida_coordinada(pos_jugador: Vector3) -> Vector3:
 
 
 func limpiar() -> void:
-	var i := 0
-	while i < _miembros.size():
-		var m = _miembros[i]
-		if m.nodo == null or not is_instance_valid(m.nodo):
-			if m.id == _lider_id:
-				_lider_id = ""
-			_miembros.remove_at(i)
-		else:
-			i += 1
+	_miembros.clear()
+	_lider_id = ""
 ## Test helpers
 func _get_lider_id() -> String:
 	return _lider_id

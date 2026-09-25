@@ -7,8 +7,11 @@
 
 extends SceneTree
 
-const PackLogicRef = preload("res://scripts/fauna/pack_logic.gd")
-const SchoolLogicRef = preload("res://scripts/fauna/school_logic.gd")
+# FIX agnes-3-flash (Log 1154, P-38, 2026-09-25): los preloads apuntaban a
+# res://scripts/fauna/ (ruta del Log 584); pack/school se movieron a
+# scripts/animales_ia/ y el preload quedo muerto (BUG-080).
+const PackLogicRef = preload("res://scripts/animales_ia/pack_logic.gd")
+const SchoolLogicRef = preload("res://scripts/animales_ia/school_logic.gd")
 
 var _fallos: int = 0
 var _ok: int = 0
@@ -139,6 +142,17 @@ func _correr() -> void:
 	if animal_ai != null:
 		_check("animal_ai tick", animal_ai.has_method("tick"))
 		_check("animal_ai registrar", animal_ai.has_method("registrar"))
+		# P-38 (Log 1154): prueba del flujo real de produccion: el auto-registro
+		# de M36 (fauna_behavior._ready -> animal_ai.registrar) crea el
+		# PackLogic de la especie gregaria.
+		if fauna != null and fauna.has_method("obtener_especie"):
+			var fb := Node3D.new()
+			fb.set_script(load("res://scripts/fauna/fauna_behavior.gd"))
+			fb.especie = fauna.obtener_especie(&"conejo_pradera")
+			root.add_child(fb)  # _ready dispara ai.registrar(fb) -> PackLogic
+			_check("fauna_behavior gregario crea grupo en autoload", animal_ai.grupo_tamanio("conejo_pradera") >= 1)
+			root.remove_child(fb)
+			fb.free()
 
 	# ── Fin ────────────────────────────────────────────────────
 	print("\n===== RESULTADOS M65 ANIMALES IA =====")

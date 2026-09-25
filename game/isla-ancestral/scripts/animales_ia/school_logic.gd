@@ -68,7 +68,7 @@ func tick(delta: float, pos_jugador: Vector3) -> void:
 
 
 func _aplicar_reglas(miembro: Dictionary, pos_jugador: Vector3) -> void:
-	var pos = miembro.nodo.global_position
+	var pos = miembro.nodo.get_global_position()
 	var cohesion: Vector3 = (_calcular_centro() - pos).normalized() * VELOCIDAD_COHESION
 	var alineacion: Vector3 = _direccion_grupal * VELOCIDAD_ALINEACION
 	var separacion: Vector3 = _calcular_separacion(miembro, pos)
@@ -87,7 +87,7 @@ func _calcular_centro() -> Vector3:
 	var count := 0
 	for m in _miembros:
 		if m.nodo != null and is_instance_valid(m.nodo):
-			sum += m.nodo.global_position
+			sum += m.nodo.get_global_position()
 			count += 1
 	if count == 0:
 		return Vector3.ZERO
@@ -113,7 +113,7 @@ func _calcular_separacion(miembro: Dictionary, pos: Vector3) -> Vector3:
 			continue
 		if m.nodo == null or not is_instance_valid(m.nodo):
 			continue
-		var otras_pos = m.nodo.global_position
+		var otras_pos = m.nodo.get_global_position()
 		var dist = pos.distance_to(otras_pos)
 		if dist < RADIO_SEPARACION and dist > 0.01:
 			var away = (pos - otras_pos).normalized() / dist
@@ -150,7 +150,7 @@ func verificar_delta_max() -> bool:
 	var centro := _calcular_centro()
 	for m in _miembros:
 		if m.nodo != null and is_instance_valid(m.nodo):
-			var dist = m.nodo.global_position.distance_to(centro)
+			var dist = m.nodo.get_global_position().distance_to(centro)
 			if dist > RADIO_COHESION:
 				return false
 	return true

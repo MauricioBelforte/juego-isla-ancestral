@@ -106,22 +106,22 @@
 - [x] [M61] Pool de nodos para evitar alloc/free [C] — KnownIssue no bloqueante DoD: dueño M61 (Rendimiento); pool existe en M62 Memory pero no especificamente para fauna. Deferred a M61 iteracion.
 
 ## K. Organización / documentación
-- [?] Mover pack_logic/school_logic a scripts/animales_ia/ (hoy en scripts/fauna/) [M] — iter. cierre (Log 595): movidos con .uid. **⚠️ QA agnes-3-flash (Log 1145, P-31, 2026-09-25): el claim "sin referencias cruzadas rotas (scan de repo sin hits)" era FALSO** — el scan omite `tests/`: `tests/test_m65.gd` quedó con el preload `res://scripts/fauna/pack_logic.gd` (ruta vieja) → suite **no ejecutable** (6× SCRIPT ERROR, EXIT 1) + PackLogic/SchoolLogic **huérfanas en producción** (el autoload `m65_animal_ai` no las usa; único consumidor = el test roto). Ver **BUG-080** (delegado a M65/glm). Marcado `[x]`→`[?]` (Caso A: [x] con claim falso).
+- [x] Mover pack_logic/school_logic a scripts/animales_ia/ (hoy en scripts/fauna/) [M] — iter. cierre (Log 595): movidos con .uid. **⚠️ QA agnes-3-flash (Log 1145, P-31, 2026-09-25): el claim "sin referencias cruzadas rotas (scan de repo sin hits)" era FALSO** — el scan omite `tests/`: `tests/test_m65.gd` quedó con el preload `res://scripts/fauna/pack_logic.gd` (ruta vieja) → suite **no ejecutable** (6× SCRIPT ERROR, EXIT 1) + PackLogic/SchoolLogic **huérfanas en producción** (el autoload `m65_animal_ai` no las usa; único consumidor = el test roto). Ver **BUG-080** (delegado a M65/glm). Marcado `[x]`→`[?]` (Caso A: [x] con claim falso). **✅ P-38 (Log 1154, agnes-3-flash): resuelto** — los archivos están en `scripts/animales_ia/` (Log 584) y las referencias rotas de `tests/test_m65.gd` fueron corregidas; PackLogic/SchoolLogic ahora las consume el autoload. Marcado `[?]`→`[x]`.
 - [x] DOCUMENTACION/65-Animales-IA/plan-actual creada en QA (Log 415) [S]
 - [x] 05-Checklist >= 100 ítems [S]
 - [x] Log 415 de QA cruzado firmado [S]
 
 ## L. QA cruzado (Log 415 — Hy3 / Kilo Code)
-- [?] Verificación estática de m65_animal_ai/pack/school/test [S] — **⚠️ QA agnes-3-flash (Log 1145, P-31): degradado [x]→[?] por BUG-080.** La "verificación estática" de pack/school queda invalidada: el test `tests/test_m65.gd` es no ejecutable (preload muerto tras el move del Log 584) y la lógica de manada/banco no tiene consumidor en producción. Re-verificar cuando M65 resuelva BUG-080.
+- [x] Verificación estática de m65_animal_ai/pack/school/test [S] — **⚠️ QA agnes-3-flash (Log 1145, P-31): degradado [x]→[?] por BUG-080.** La "verificación estática" de pack/school queda invalidada: el test `tests/test_m65.gd` es no ejecutable (preload muerto tras el move del Log 584) y la lógica de manada/banco no tiene consumidor en producción. Re-verificar cuando M65 resuelva BUG-080. **✅ P-38 (Log 1154): re-verificado** — `tests/test_m65.gd` es ejecutable de nuevo (35 OK / 0 fallos) y PackLogic/SchoolLogic tienen consumidor en producción (el autoload `animal_ai`). Marcado `[?]`→`[x]`.
 - [x] Coherencia con test_m65.gd [S]
 - [x] Contrato M36↔M65 validado [S]
 - [x] Fix integración (FSM no invocada + avistamiento no cableado) [C]
 - [x] Veredicto: mantiene 🟡 (resto con dueño externo) [S]
-- [?] Integración de manada/banco: PackLogic/SchoolLogic cableadas al autoload `animal_ai` Y con test ejecutable [C] — **⚠️ QA agnes-3-flash (Log 1145, P-31, 2026-09-25): BUG-080.** Hoy: (a) `tests/test_m65.gd` no ejecutable (preload `res://scripts/fauna/pack_logic.gd` muerto tras el move del Log 584 → 6× SCRIPT ERROR, EXIT 1); (b) `m65_animal_ai.gd` no consume `PackLogic`/`SchoolLogic` (únicas refs del repo: el test roto + el colector de sintaxis) → la lógica de manada/banco **no está integrada en producción**. El autoload M65 y el `scripts/animales_ia/test_m65.gd` (24 OK / 0 fallos ×2) siguen verdes — lo que falta es la mitad manada/banco. Dueño: M65 (glm-5.3-flash) o el siguiente agente del módulo.
+- [x] Integración de manada/banco: PackLogic/SchoolLogic cableadas al autoload `animal_ai` Y con test ejecutable [C] — **⚠️ QA agnes-3-flash (Log 1145, P-31, 2026-09-25): BUG-080.** Hoy: (a) `tests/test_m65.gd` no ejecutable (preload `res://scripts/fauna/pack_logic.gd` muerto tras el move del Log 584 → 6× SCRIPT ERROR, EXIT 1); (b) `m65_animal_ai.gd` no consume `PackLogic`/`SchoolLogic` (únicas refs del repo: el test roto + el colector de sintaxis) → la lógica de manada/banco **no está integrada en producción**. El autoload M65 y el `scripts/animales_ia/test_m65.gd` (24 OK / 0 fallos ×2) siguen verdes — lo que falta es la mitad manada/banco. Dueño: M65 (glm-5.3-flash) o el siguiente agente del módulo. **✅ P-38 (Log 1154, agnes-3-flash): resuelto (BUG-080)** — PackLogic/SchoolLogic cableadas al autoload `animal_ai` (`registrar`/`tick`/`desregistrar` + `grupo_tamanio`), `tests/test_m65.gd` ejecutable (35 OK / 0) y prueba del flujo real `fauna_behavior`→autoload. Marcado `[?]`→`[x]`.
 
 **Total:** 100+ ítems. Pendientes `[ ]` son trabajo con dueño en otros módulos,
 verificados como legítimos en QA cruzado.
-**Totales:** 90 ítems · Completados: 86 · Pendientes: 1 · No resueltos: 3.
+**Totales:** 90 ítems · Completados: 89 · Pendientes: 1 · No resueltos: 0. (P-38, Log 1154: 3 `[?]`→`[x]` — BUG-080 resuelto; el `[ ]` restante es el KnownIssue M08.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 89 [x] / 0 [ ] / 0 [?].
@@ -168,4 +168,32 @@ verificados como legítimos en QA cruzado.
    el estado "pendiente de integración" como `[?]` con dueño.
 3. Sanear L109 (revertir a `[?]`) y la fila GLOBAL 89/89 → el conteo real.
 4. Re-verificar en `scripts/animales_ia/test_m65.gd` + `tests/test_m65.gd` tras el fix.
+
+## Notas del Agente — P-38 (agnes-3-flash / Kilo Code, Log 1154, 2026-09-25)
+
+**Modelo:** agnes-3-flash
+**Plataforma:** Kilo Code
+**Estado:** **✅ Completado** (BUG-080 resuelto — manada/banco de vuelta en producción)
+
+### Lo que hice
+- P-38: revivió la feature de manada/banco (BUG-080).
+- Fix de preloads muertos en `tests/test_m65.gd` (`scripts/fauna/` → `scripts/animales_ia/`).
+- Integró `PackLogic`/`SchoolLogic` en el autoload `m65_animal_ai.gd`
+  (`registrar`→`_grupo_agregar`, `tick`→`_grupos_tick`, `desregistrar`→`_grupo_remover`).
+- Fix de semántica de PackLogic (`limpiar()` vacía el grupo; `tick` elige líder con ≥1
+  miembro) y de accesos a `Resource.get(2 args)` → propiedades directas.
+- Agregó `grupo_tamanio(especie_id)` (QA read-only) + prueba del flujo real en `tests/test_m65.gd`.
+- Flips `[?]`→`[x]` en L109/L115/L120 (BUG-080 resuelto); Totales 86→89 [x].
+
+### Evidencia (headless Godot 4.7.2, binario real)
+- `tests/test_m65.gd`: 35 OK / 0 fallos, EXIT 0 (antes: no ejecutable).
+- `scripts/animales_ia/test_m65.gd`: 0 fallos (suite base de 24 OK intacta).
+- `scripts/fauna/test_fauna.gd`: 0 fallos.
+- `main_island.tscn --quit-after 300` ×2: 0 SCRIPT ERROR.
+
+### Limitación honesta
+- En `main_island` los NPCs son scripts legacy (no `fauna_behavior`), así los logs de
+  grupo `[M65]` NO se ven aún en la escena principal; el flujo de producción es
+  `fauna_behavior` (M36) y su integración en `main_island` queda pendiente. La evidencia
+  dura del flujo (fauna_behavior→autoload→PackLogic) es la prueba agregada + las suites verdes.
 
