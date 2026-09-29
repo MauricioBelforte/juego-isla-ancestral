@@ -651,3 +651,16 @@ verifiques vos, usa tu practica habitual de varios angulos.
       **worktree** (inflado: 188 en vez de 86) → medir `HEAD~1 HEAD`; (b) lock de git por concurrencia
       (otro agente commiteaba) → reintentar el `commit` **sin** re-`add`; (c) el árbol se movió entre el
       encargo y el turno (B 149→145, pool 1165→1166). **Push NEGATIVO.** (2026-09-25)
+
+- [x] Log reservado: **1167** — P-52: **integración de los buckets de modelos INACTIVOS** en 6 commits de
+      merge (`0195b23` glm-5.3 12 · `c4eb372` nex 6 · `15bfb9b` deepseek-v4-flash 2 · `ae446be` gemini 1 ·
+      `b9e8ad8` step-3.7 1 · `15a78b4` deepseek-v4.1-flash 1) = **23 archivos, +1565 −7**; verificado con
+      `git cat-file -e HEAD:<ruta>`: **23/23 en HEAD**. **7 exclusiones: son de mimo-v2.5** (modelo activo):
+      `narrative_sound.gd` (M150 — su cabecera compuesta engañó a `familia()`; el Log 1095 lo prueba),
+      **los 5 `.tres` de vecinos** (Log 1040 de mimo: rutinas elderly/child/enhanced → el bucket «hy4»
+      queda **vacío**) y `game_clock.gd` (M29, no M31; residuo de la edición temporal de `_hora` del
+      Log 1084). Lección: **el mapa módulo→agente es pista, no prueba**. **Trampas nuevas:** (a) el
+      **índice compartido no es de confianza** — un `git commit` **sin pathspec** se llevó 5 archivos
+      ajenos pre-staged → usar `git commit -m "..." -- <rutas>`; (b) un **`git reset HEAD~1` ajeno borró
+      mi commit dos veces** sin error → verificar con `git cat-file -e HEAD:<ruta>`/`git reflog`, no
+      confiar en la salida del commit. **Push NEGATIVO.** (2026-09-29)
