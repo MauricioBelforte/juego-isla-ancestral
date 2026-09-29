@@ -6,8 +6,8 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 func test_slot_empty_by_default() -> void:
 	var slot = InventorySlot.new()
 	assert_that(slot.esta_libre()).is_true()
-	assert_that(slot.item_id).is_equal_to("")
-	assert_that(slot.cantidad).is_equal_to(0)
+	assert_that(slot.item_id).is_equal("")
+	assert_that(slot.cantidad).is_equal(0)
 	assert_that(slot.favorito).is_false()
 	assert_that(slot.bloqueado).is_false()
 
@@ -15,9 +15,9 @@ func test_ocupar() -> void:
 	var slot = InventorySlot.new()
 	var instancia = {"durability": 80, "level": 2}
 	slot.ocupar("pico_hierro", 1, instancia)
-	assert_that(slot.item_id).is_equal_to("pico_hierro")
-	assert_that(slot.cantidad).is_equal_to(1)
-	assert_that(slot.instancia).is_equal_to(instancia)
+	assert_that(slot.item_id).is_equal("pico_hierro")
+	assert_that(slot.cantidad).is_equal(1)
+	assert_that(slot.instancia).is_equal(instancia)
 	assert_that(slot.esta_libre()).is_false()
 
 func test_vaciar() -> void:
@@ -25,8 +25,8 @@ func test_vaciar() -> void:
 	slot.ocupar("madera", 50)
 	slot.vaciar()
 	assert_that(slot.esta_libre()).is_true()
-	assert_that(slot.item_id).is_equal_to("")
-	assert_that(slot.cantidad).is_equal_to(0)
+	assert_that(slot.item_id).is_equal("")
+	assert_that(slot.cantidad).is_equal(0)
 	assert_that(slot.instancia).is_empty()
 
 func test_puede_apilar_true() -> void:
@@ -35,9 +35,13 @@ func test_puede_apilar_true() -> void:
 	assert_that(slot.puede_apilar(5, 99)).is_true()
 	assert_that(slot.puede_apilar(89, 99)).is_true()
 
-func test_puede_apilar_false_different_item() -> void:
+## FIX agnes-3-flash (Log 1127): el test original afirmaba que "un item distinto
+## no puede apilar", pero la API real es puede_apilar(cantidad_extra, stack_max)
+## — NO recibe item id (la identidad del item la garantiza el llamador,
+## ContenedorInventario.add_item pasada 1: `s.item_id == item_id`). El caso
+## "false" que la API SÍ expresa es: slot VACIO no puede apilar.
+func test_puede_apilar_false_empty_slot() -> void:
 	var slot = InventorySlot.new()
-	slot.ocupar("madera", 10)
 	assert_that(slot.puede_apilar(5, 99)).is_false()
 
 func test_puede_apilar_false_exceeds_max() -> void:
@@ -56,11 +60,11 @@ func test_serializar_full_slot() -> void:
 	slot.favorito = true
 	slot.bloqueado = true
 	var data = slot.serializar()
-	assert_that(data.id).is_equal_to("pico_hierro")
-	assert_that(data.n).is_equal_to(1)
+	assert_that(data.id).is_equal("pico_hierro")
+	assert_that(data.n).is_equal(1)
 	assert_that(data.fav).is_true()
 	assert_that(data.lock).is_true()
-	assert_that(data.inst.durability).is_equal_to(80)
+	assert_that(data.inst.durability).is_equal(80)
 
 func test_deserializar() -> void:
 	var data = {
@@ -71,17 +75,17 @@ func test_deserializar() -> void:
 		"inst": {"level": 3}
 	}
 	var slot = InventorySlot.deserializar(data)
-	assert_that(slot.item_id).is_equal_to("espada_madera")
-	assert_that(slot.cantidad).is_equal_to(1)
+	assert_that(slot.item_id).is_equal("espada_madera")
+	assert_that(slot.cantidad).is_equal(1)
 	assert_that(slot.favorito).is_true()
 	assert_that(slot.bloqueado).is_false()
-	assert_that(slot.instancia.level).is_equal_to(3)
+	assert_that(slot.instancia.level).is_equal(3)
 
 func test_deserializar_defaults() -> void:
 	var data = {"id": "test"}
 	var slot = InventorySlot.deserializar(data)
-	assert_that(slot.item_id).is_equal_to("test")
-	assert_that(slot.cantidad).is_equal_to(0)
+	assert_that(slot.item_id).is_equal("test")
+	assert_that(slot.cantidad).is_equal(0)
 	assert_that(slot.favorito).is_false()
 	assert_that(slot.bloqueado).is_false()
 	assert_that(slot.instancia).is_empty()

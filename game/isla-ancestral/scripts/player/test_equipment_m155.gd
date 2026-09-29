@@ -52,17 +52,25 @@ func _test_equipment_manager_autoload() -> void:
 func _test_equip_unequip() -> void:
 	var em := root.get_node_or_null("EquipmentManager")
 	_check(em != null, "EquipmentManager presente")
-	if em == null:
+	if em == null or em.get("player_equipment") == null:
+		_check(false, "EquipmentManager.player_equipment inicializado")
 		return
-	# Equipar botas de barro en feet
-	var ok := em.equip_item("feet_boots_mud", em.player_equipment.get_slot(preload("res://scripts/player/equipment_slot.gd").SlotType.FEET).slot_type)
+	var feet_slot_type := preload("res://scripts/player/equipment_slot.gd").SlotType.FEET
+	var feet_slot: EquipmentSlot = em.player_equipment.get_slot(feet_slot_type)
+	if feet_slot == null:
+		_check(false, "slot feet inicializado")
+		return
+	var ok: bool = em.equip_item("feet_boots_mud", feet_slot_type)
 	_check(ok, "equip_item feet_boots_mud retorna true")
-	var slot := em.get_equipped_item(preload("res://scripts/player/equipment_slot.gd").SlotType.FEET)
-	_check(slot != null and slot.item_id == "feet_boots_mud", "botas equipadas en slot feet")
-	# Desequipar
-	var returned := em.unequip_slot(preload("res://scripts/player/equipment_slot.gd").SlotType.FEET)
+	var slot: EquipmentSlot = em.get_equipped_item(feet_slot_type)
+	if slot == null:
+		_check(false, "slot feet equipado")
+		return
+	_check(slot.item_id == "feet_boots_mud", "botas equipadas en slot feet")
+	var returned: String = em.unequip_slot(feet_slot_type)
 	_check(returned == "feet_boots_mud", "unequip retorna item_id correcto")
-	_check(not em.get_equipped_item(preload("res://scripts/player/equipment_slot.gd").SlotType.FEET).is_equipped(), "slot feet vacío tras unequip")
+	var slot_vacio: EquipmentSlot = em.get_equipped_item(feet_slot_type)
+	_check(slot_vacio != null and not slot_vacio.is_equipped(), "slot feet vacío tras unequip")
 
 func _test_accesorios_limit() -> void:
 	# Item 153: límite de 4 accesorios se respeta
@@ -93,11 +101,11 @@ func _test_bloqueadas_no_equipan() -> void:
 	_check(em != null, "EquipmentManager presente para test bloqueo")
 	if em != null:
 		# player_state sin chapter 3 completado
-		var state := {"capitulos_completados": []}
-		var unlocked := em.is_item_unlocked("acc_amulet_ancestral", state)
-		_check(not unlocked, "amuleto ancestral BLOQUEADO sin capítulo 3")
-		# Con chapter 3 sí desbloqueado
-		state["capitulos_completados"] = ["3"]
+		var state := {"capitulo_actual": 0}
+		var unlocked: bool = em.is_item_unlocked("acc_amulet_ancestral", state)
+		_check(not unlocked, "amuleto ancestral BLOQUEADO antes del capítulo 3")
+		# Con capítulo 3 sí desbloqueado
+		state["capitulo_actual"] = 3
 		unlocked = em.is_item_unlocked("acc_amulet_ancestral", state)
 		_check(unlocked, "amuleto ancestral DESBLOQUEADO con capítulo 3")
 		# Items sin unlock condition siempre disponibles
@@ -112,8 +120,8 @@ func _test_bonus_terreno() -> void:
 		# Equipar skates (bono pavement=1.30, mud=-0.60)
 		var feet_slot_type := preload("res://scripts/player/equipment_slot.gd").SlotType.FEET
 		em.equip_item("feet_skates", feet_slot_type)
-		var bonus_pavement := em.get_terrain_bonus("pavement")
-		var bonus_mud := em.get_terrain_bonus("mud")
+		var bonus_pavement: float = em.get_terrain_bonus("pavement")
+		var bonus_mud: float = em.get_terrain_bonus("mud")
 		_check(bonus_pavement > 0.0, "skates en pavement: bonus positivo (%.2f)" % bonus_pavement)
 		_check(bonus_mud < 0.0, "skates en mud: bonus negativo (%.2f)" % bonus_mud)
 		# Limpiar
