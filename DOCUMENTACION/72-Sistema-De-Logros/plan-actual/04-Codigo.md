@@ -281,3 +281,23 @@ func store_stats() -> void: ...
 - M53: pantalla escucha logro_desbloqueado y usa listado_para_ui() (los ocultos ya llegan como "???").
 - Nuevo logro = nueva entrada en logros.json con condición del vocabulario M71 (§3.6) — sin tocar código.
 - M71.progreso_parcial solo funciona con condiciones stat_min; para otros tipos la UI muestra desbloqueado/no.
+
+## Iteración agnes — test RF14 data-integrity + gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1021)
+
+> Iteración acotada (data-driven + tooling/CI + V0). **Aditiva**: NO modifico `achievement_service.gd`
+> (core de M72, glm-5.3). Agrego un test + cableo CI.
+
+### Nuevo archivo (aditivo)
+- `scripts/logros/test_logros_m72_statids.gd` — cierra el item RF14 abierto ("validar que las stats
+  referenciadas existan en M71") como **equivalente headless**: cada `stat_id` de `logros.json` debe
+  resolver contra (a) `data/progresion/hitos.json` (vocabulario M71, recursivo `stat_min`+`compuesta`)
+  **o** (b) prefijo dinámico documentado (`amistad_max_*` M20 / `pescar_*` M34, registrados en runtime
+  por `achievement_service._on_nivel_amistad`/`_on_captura_pesca`). **9 checks, 0 fallos, exit 0.**
+
+### Gate CI
+- `test_logros.gd` + `test_logros_m72_statids.gd` añadidos al **gate duro** `quality.yml` (test-suite).
+
+### Hallazgo ajeno (delegado, M39/glm)
+- `catalogo_tiendas.gd:63` → `SCRIPT ERROR: Nonexistent function 'size' in base 'Callable'` + warning
+  "item_id inexistente en M15: `piedra_caliza`". Bug de M39 (en curso por glm) que contamina el boot
+  de autoloads. **Delegado** (11-BUGS + ESTADO-PARALELO), no lo corrijo.

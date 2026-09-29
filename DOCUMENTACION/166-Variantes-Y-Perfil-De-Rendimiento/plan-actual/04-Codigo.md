@@ -188,3 +188,36 @@ python capturar_angulos.py SM_Cofre_ ../25-Ruinas-Templos/capturas/cap_25_cofre_
 
 # 4) QA visual de BAJA (mismo flujo)
 ```
+
+
+## Notas del Agente
+
+**Modelo:** agnes-3-flash (Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18 20:55
+**Estado:** Parcial (parte de copyright verificada y documentada; H12 sigue pendiente del dueño)
+
+### Lo que hice (Log 1035)
+- Auditoría empírica .glb por .glb de la deuda de copyright M127 (Log 1022): **0 de 694 .glb
+  versionados tiene atribución por-archivo** (sidecars, extras GLB, catálogos data/legal).
+  Scope del claim: **434 en assets/3d = 418 activos + 16 respaldos media/Obsoletos/** —
+  el crecido 418→434 no son assets nuevos. Origen de los 694: propio (Blender MCP,
+  generator Khronos I/O 4.2.83, commits pipeline). Herramientas: scripts/auditar_copyright_glb.py
+  y scripts/auditar_flotacion_glb.py + JSONs en tools/legal/.
+- QA visual V2-asistencia de capturas orbitales M16/M19/M25/M33/M51: 7 artefactos
+  V-1..V-7 (BUG-053), el destacado: antorcha_pared flota 30 cm (único glb con cota
+  positiva del repo).
+
+### Lo que NO hice (honestidad obligatoria)
+- H12 (pasada ALTA 15 héroes): requiere V5/Blender — sigue con mimo-v2.5/Hy4.
+- No toqué los 4 scripts de variantes ni mallas/GLB.
+- Fix del pipeline de exportación (embeber asset.copyright) NO lo ejecuté: es trabajo de
+  pipeline (dueño M166/M09) y fuera de mi alcance (EVITAR: no modificar GLB).
+
+### Recomendaciones para el próximo agente
+1. Fix BUG-052 (dueño pipeline M166/M09): agregar asset.copyright/license al exportador
+   glTF y re-exportar los 418 activos; dejar el techo 418 en asset_metadata_scope.json
+   (los 16 Obsoletos ya quedan excluidos por el scan).
+2. V-3 (BUG-053): decidir el destino de antorcha_pared — sacarla de assets/3d (librería
+   de suelo) o montar runtime sobre pared (E-80, Empty de referencia).
+3. V-1: re-derivar hacha_piedra media/baja en la pasada H12 (verificar blend-mode/decimate).

@@ -224,3 +224,20 @@
 - M20/M21: la memoria de cada vecino alimenta reacciones con continuidad (memoria_conteo(vecino, "regalo") para diálogos "ya me diste N regalos").
 - Auditar los otros ISaveProvider con el lente del aliasing (deep copy en get_save_data).
 - Poblar arranque es deferred: si la escena Main carga más tarde, los vecinos quedan bajo el manager (lógicos); al existir villager.tscn se instanciará con perfil sincronizado.
+
+## Notas del Agente — QA V2 triage (agnes-3-flash / Kilo Code, 2026-09-19, Log 1049)
+
+- Alcance: solo el triage de los artefactos V-2/V-3/V-4 del QA visual de Log 1035. NO toqué
+  `scripts/ia_npc/` ni `scripts/player/` (zonas de otros agentes) ni mallas/GLB.
+- **V-3 (`antorcha_pared`, bug de posicionamiento M25/M19): RESUELTO** con regla E-80 de
+  colocación (`scripts/ruinas/colocar_props_m25.gd` + test headless 11/11 + captura
+  `capturas/19-Muelle/cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png`).
+  La pieza no está instanciada en ninguna escena hoy: el fix es la regla que usará el
+  spawner de props M25 cuando se implemente (M25 = 13/105).
+- **V-2 / V-4 (mallas M19: `npc_base_v5` brazo colado al torso; `npc_sentado_v3` piezas
+  flotantes): [?] DELEGADO a Hy4** (corregir en el .blend / re-derivar variantes). Hy4 no
+  está disponible hasta mañana. Evidencia: `tools/mcp/blender-mcp/19-NPCs/capturas/`.
+- Observación del boot (fuera de mi alcance, para el dueño M19/M64): 6 vecinos arrancan con
+  `[Villager] ? creado (especie=?)` y "no pudo calcular altura tras 7 intentos, manteniendo
+  Y=2.0" (x6) — los glbs de villager parecen no cargar la especie ni la cota; ver si es
+  ruido preexistente o bug del spawner de villager (scripts/player/ = Nex, no lo toco).

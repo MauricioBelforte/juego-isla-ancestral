@@ -168,3 +168,26 @@ Implementé el **núcleo funcional** del detector anti-softlock en Godot 4.7.2 (
 ### Recomendaciones para el próximo agente
 - M22/M23: al activar una misión con objetivo, llamar SoftlockGuard reg.en MisionInvariant.registrar_objetivo(mision_id, objetivo_id) y registrar_fallback(objetivo, alternativa).
 - Al activar fallback: llamar activar_fallback() y registrar_recompensa_entregada(alternativo) al entregar la recompensa equivalente.
+
+## Iteración agnes — gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1018)
+
+> Iteración acotada (gate CI + auditoría V0). El core ya estaba verificado (glm Log 913 + QA 953); mi
+> parte es **proteger ese core en CI** y **confirmar que los 7 `[?]` son externos**.
+
+### Estado real del código (verificado headless, godot 4.7.2)
+- `scripts/core/softlock_guard.gd` (SoftlockGuard autoload: tick 60 s, disparos en transiciones/guardado,
+  dispatcher de invariantes en cascada + cooldown toast) + `softlock_rules.gd` + `invariants/`
+  (jugador/misión/npc/objeto_clave/vehiculo/puzzle + `irecoverable`) + `recovery/`
+  (cofre_recuperacion, checkpoint_manager).
+- `test_anti_softlock_m66.gd` → **0 fallos, exit 0**; `test_fallbacks_m66.gd` → **0 fallos, exit 0**
+  (0 `SCRIPT ERROR` propios).
+
+### Gap cerrado
+- Los 2 tests M66 **no estaban** cableados en `quality.yml` → añadidos al **gate duro** (test-suite).
+  El core anti-softlock queda protegido por CI.
+
+### Lo que NO hice (dueños externos, `[?]` honestos)
+- Los 7 `[?]` de M66 requieren **API de M22/M26/M64/M27** (NavigationServer3D 2-caminos → M27,
+  watchdog NPC → M64, integración/persistencia de misiones → M22, Templo Subterráneo → M26). No son
+  cerrables headless por M66 → quedan `[?]` con dueño. M66 pasa de `🟡 Con dudas` a **core verificado +
+  gate CI, esperando externos**.
