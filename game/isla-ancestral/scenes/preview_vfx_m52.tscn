@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/particles/preview_vfx_m52.gd" id="1_vfx"]
+
+[node name="PreviewVFXM52" type="Node3D"]
+script = ExtResource("1_vfx")
