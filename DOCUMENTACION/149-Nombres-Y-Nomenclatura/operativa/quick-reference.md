@@ -70,7 +70,7 @@ scripts/saving/save_writer.gd
 - Este módulo aporta las **reglas**; M111 (en curso) las integra en su linter/pre-commit.
 - El validador de naming de este módulo (`validar_nombres.py`) es ejecutable por consola y puede ser invocado por el CodeQualityCheck de M111 cuando exista.
 
-## 5. Templates de escena y recurso
+## 6. Templates de escena y recurso
 
 **Escena de entidad (PascalCase.tscn):**
 ```
@@ -90,7 +90,7 @@ display_name = "Mineral de Cobre"   # nombre artístico traducible
 categoria = 2
 ```
 
-## 6. Snippets para IDE
+## 7. Snippets para IDE
 
 Guardar como `gdscript-naming.code-snippets` (VS Code/Cursor):
 ```json

@@ -279,3 +279,29 @@ Formato de línea de ejemplo: `[DOM-TIEN-COMPRA] compra shop=puesto_semillas ite
 - Al conectar M29/M30, verificar los nombres reales de `nuevo_dia_laborable`, `estacion_cambio` y el PRNG del día.
 - El autoload debe registrarse en `project.godot` con nombre `ShopManager` para que la UI (M53) y M38 lo consuman sin ciclos.
 - En `plan-actual/` copiar estos archivos y actualizarlos contra el código real a medida que se implemente.
+
+## 5. Notas del Agente (iter. glm 2 — cierre, Log 1017)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Cline
+**Fecha:** 2026-09-19
+**Estado:** Parcial (iteración completa; queda UI M53 y tipos de tienda no-oficiales)
+
+### Lo que hice (2026-09-18/19 — Log 1017)
+1. **BUG de atomicidad D8 encontrado y corregido** (`shop_manager.gd` L238-248): en la compra con inventario LLENO, las monedas **se perdían** — el flujo anterior hacía `puede_pagar` (consulta) y `retirar_monedas` DESPUÉS de mover stock; al fallar `agregar_items` solo revertía stock. Fix: `retirar_monedas(total)` es ahora el PASO de validación+cobro (devuelve false → SIN_FONDOS sin efectos), y el revert en fallo de inventario devuelve **stock Y monedas** (`depositar_monedas(total)`). El jugador nunca pierde nada (RNF1/RNF9).
+2. **Test de atomicidad** en `test_tiendas_iter_glm.gd`: llena los 3 contenedores (84 adds, `agregar_items` cae a CASA), fuerza INVENTARIO_LLENO y verifica revert TOTAL (stock exacto + saldo exacto). Cobertura extra del total de compra vía señal (coherencia total==precio×cant, clamp >=1, precio == recargado de M38).
+3. **Lecciones operativas documentadas**: `remover_items` es todo-o-nada con validación previa (count < pedido → false SIN remover) — el cleanup de tests debe pasar el conteo real. Con `retirar_monedas` como guardia, `puede_pagar` queda redundante en el flujo de compra.
+4. **BUG-028 cerrado en causa raíz** (id `OBJ-PLA-001` inexistente; fixture de `test_loop_economico.gd` migrado a `OBJ-PLA-002` + check guardián de existencia): las 3 suites verdes. Detalle en `11-BUGS.md`.
+5. Marcado el `05-Checklist.md` (46 ítems con evidencia de código + suites verdes): **127 [x] / 54 [ ]**.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **UI (M53)**: `tienda_cerrada` con `proxima_apertura` emite los datos pero `shop_ui.gd` aún no dibuja el cartel; `inventario_tienda_cambio` no está consumida por la UI.
+- **Ferias M73**: el canal 3 del generador existe y está probado, pero ShopManager nunca llena `ctx.eventos_activos` con eventos reales de M73 (aparición garantizada vía `evento_iniciado` pendiente).
+- **Tipos PUESTO_SEMILLAS/PESCADERIA**: solo hay 3 tiendas oficiales (general, herrería, viajero). Los catálogos viven en `catalogo_tiendas.gd` (data-driven en código); migración a `.tres` para M108 pendiente.
+- **Avisos "item_id inexistente en M15"** en boot: los ids del catálogo (`madera_roble`, etc.) usan la nomenclatura legacy de M93/balance y NO existen en ItemDatabase (M159 tiene `OBJ-*`/inglés). Es el **BUG-046** (12 `.tres` con id discordante) + desajuste de nomenclatura M149/M159 — dueño: M159. PriceManager funciona porque consulta `econ_prices.tres` (que SÍ usa los ids legacy). Marcar los avisos como conocidos, no corregidos.
+
+### Recomendaciones para el próximo agente
+- Conectar ShopUI a `tienda_cerrada` (cartel "abre a las X") usando `proxima_apertura()`.
+- Llenar `ctx.eventos_activos` desde M73 en `_reabastecer_una` y en `_on_estacion_cambio`.
+- Si se toca el flujo de compra: `retirar_monedas` YA es el guardia atómico; no restaurar el `puede_pagar` previo (duplicaría la consulta).
+- Los tests de tiendas requieren restaurar el inventario con conteos exactos (ver lección 3).

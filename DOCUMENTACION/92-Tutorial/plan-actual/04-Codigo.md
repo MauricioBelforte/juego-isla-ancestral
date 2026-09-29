@@ -287,7 +287,33 @@ func _on_timeout(capitulo_id: StringName) -> void   # reprogramar x3 o descartar
 
 ### Recomendaciones para el próximo agente
 - **M53:** consumir las 4 señales nuevas (`paso_mostrado` ya existía; suman `feedback_capitulo`, `pista_expirada`, `capitulo_pospuesto`); respetar `MAX_PISTAS_VIVAS=2` al dibujar y usar `icono_tecla_dinamico()` para el ícono del paso.
-- **Q5:** migrar `_registrar_capitulos_base()` a `.tres` (Q5) — desacopla contenido y habilita los guiones didácticos RF11-RF18 sin tocar el manager.
+- **Q5 (HECHO en iter. 4, Log 987):** `tutorial_guiones.gd` + `data/tutorial/guiones_base.tres` (4 capítulos) con fallback por código.
 - **Rendimiento:** Q8 (profiler ≤ 0.2 ms en plaza densa) queda como medición pendiente; el presupuesto de diseño ya se respeta por construcción (throttle 0.25 s + dist² + contexto O(1)).
 - **S10-S12** (E2E cultivo, profiler, InputMap remapeado) quedan para cuando existan las mecánicas reales.
+
+
+## Notas del Agente — Iteración 4: guiones .tres + hot path + espejo documental (historial)
+
+**Modelo:** glm-5.3-flash
+**Plataforma:** Cline
+**Fecha:** 2026-09-17 03:05
+**Estado:** Parcial (Q5/Q2/Q7/R1/R3/R5/R6 implementados y verificados; módulo liberado 🟡 97/185 — falta UI V2 M53, capítulos didácticos RF11-RF18, Q1/Q8, S10-S12)
+
+### Lo que hice
+- **Q5 (T-150):** `scripts/tutorial/tutorial_guiones.gd` (Resource `TutorialGuiones`, patrón weather_config/clima_config) + `data/tutorial/guiones_base.tres` con los **4 capítulos base** serializados (prologo/interactuar/herramienta/vecino). `_registrar_capitulos_base()` ahora carga el `.tres` (duck-typing `res.get("capitulos")`) y SOLO si falta/vacío usa el fallback por código (`_registrar_capitulos_base_fallback()` con `push_warning`) — degradación grácil, cozy. Contenido idéntico al previo: tests existentes intactos.
+- **Q2 (T-147):** triggers de ACCIÓN ya eran event-driven (EventBus); la única ruta con polling es la proximidad de mundo (necesaria: no hay señal posicional). Optimizada: en `_process`, si `_targets_mundo` está vacío NO se consulta al jugador (evita `get_nodes_in_group`, que aloca un Array por llamado cada 0,25 s). Verificado que con target registrado la proximidad sigue disparando (test lejos/dentro).
+- **Q7 (T-152):** hot path auditado — `_procesar_pistas` early-return sin pistas, vencimiento por contador interno sin física extra, `_chequear_proximidad` sin sqrt ni alocaciones (Q3 previo). Única alocación residual: `get_nodes_in_group` — ahora solo corre cuando hay triggers registrados.
+- **R1/R3/R5/R6:** 01-Requerimientos (RF1-RF25 + RN1-RN12 ✓, verificado en iter. 3 con la referencia §3.1→§3.2), 03-Diseno ampliado con sección "Estado de implementación" (iter. 1-4), 05-Checklist (185 ítems con esfuerzo), plan-actual espejo (02/03 idénticos a plan-inicial; 01/04/05 evolucionados legítimamente).
+- **Test:** `test_tutorial_iter4.gd` NUEVO (21 checks: carga del .tres, contenido completo, consumo por el manager, hot path vacío y proximidad lejos/dentro). **4 suites: 0 fallos (22+71+103+21 = 217), EXIT=0.** Corrección durante la sesión: mi primer test tenía un error aritmético (908−905=3 m, no 8) — corregido a 915 (10 m); el manager nunca estuvo roto.
+- **Marca de deriva:** T-149/Q4 (módulo ya [x] de iter. 2) sincronizada en el checklist personal.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Q1** (pool visual de nodos UI) y **Q8** (medición real con profiler en plaza densa): M53/profiler.
+- **S10-S12 / RF11-RF18:** requieren mecánicas reales (M13/M33/M34/M35/M16).
+- **UI de presentación (M53):** burbujas, marcadores, confirmación de re-play.
+
+### Recomendaciones para el próximo agente
+- **M53:** consumir las señales (`paso_mostrado`, `feedback_capitulo`, `pista_expirada`, `capitulo_pospuesto`); los guiones didácticos RF11-RF18 ahora se AGREGAN al `.tres` (o un `.tres` por capítulo) sin tocar el manager.
+- **Q5-bis:** cuando existan los guiones didácticos finales, considerar `.tres` por capítulo en `data/tutorial/guiones/` y carga por carpetas.
+- **Q8:** medir con profiler el tick 0,25 s en plaza densa (con triggers activos) para cerrar RN4.
 

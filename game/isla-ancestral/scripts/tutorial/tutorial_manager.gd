@@ -111,6 +111,22 @@ func _ready() -> void:
 ## ── Capítulos base (contenido de ejemplo) ────────────────
 
 func _registrar_capitulos_base() -> void:
+	# Q5 (T-150, iter. 4): los guiones base viven en un Resource (.tres) — contenido
+	# data-driven sin parseo en runtime. Si el recurso falta o está vacío, se usa el
+	# fallback por código (degradación grácil, cozy: el tutorial nunca arranca roto).
+	var res: Resource = load("res://data/tutorial/guiones_base.tres")
+	if res != null and res.get("capitulos") is Dictionary:
+		var guiones: Dictionary = res.get("capitulos")
+		if guiones.size() > 0:
+			for cid in guiones:
+				var c: Dictionary = guiones[cid]
+				registrar_capitulo(String(cid), c.get("pasos", []), String(c.get("meta", "")), bool(c.get("rejugable", false)), c.get("extra", {}))
+			return
+	_registrar_capitulos_base_fallback()
+
+## Q5: fallback por código — SOLO si falta data/tutorial/guiones_base.tres.
+func _registrar_capitulos_base_fallback() -> void:
+	push_warning("[M92] guiones_base.tres ausente o vacío; usando capítulos base por código (fallback Q5)")
 	registrar_capitulo("prologo", [
 		{"tipo": "PISTA", "texto_clave": "TUTORIAL.PROLOGO_BIENVENIDA", "icono_tecla": ""},
 		{"tipo": "SECUENCIA", "texto_clave": "TUTORIAL.PROLOGO_MOVERSE", "meta": "mover", "icono_tecla": "mover_norte"},
@@ -226,7 +242,10 @@ func _process(delta: float) -> void:
 	_throttle_mundo += delta
 	if _throttle_mundo >= THROTTLE_MUNDO_S:
 		_throttle_mundo = 0.0
-		_chequear_proximidad()
+		# Q2/Q7 (iter. 4): sin triggers de mundo NO se consulta al jugador —
+		# _obtener_jugador() usa get_nodes_in_group (aloca un Array por llamado).
+		if not _targets_mundo.is_empty():
+			_chequear_proximidad()
 	# T-041/Q2: las pistas se evalúan por vencimiento (sin polling adicional)
 	_procesar_pistas()
 	# RF23: watchdog del capítulo activo (timeout cozy)

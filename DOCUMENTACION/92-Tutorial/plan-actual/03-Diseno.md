@@ -164,3 +164,14 @@ ACTIVO ──(paso completado)──► CONSECUENCIA(2 s) ──► ESPERANDO
 | M58 Accesibilidad | Preferencias (duración xN, contraste, tamaño) | Datos en bruto de pistas (texto, posición, duración) |
 | M66 Anti-Softlock | Watchdog global | Timeouts re-programables por capítulo |
 | M103 Logging | Servicio de logs | Logs de degradación, revalidación y descarte |
+
+## 6. Estado de implementación (iter. 1-4, actualizado 2026-09-17)
+
+| Iteración | Contenido | Log |
+|---|---|---|
+| 1 (núcleo) | TutorialManager autoload: capítulos PISTA/SECUENCIA, triggers de señal, revalidación, estados, persistencia M59 | 259 |
+| 2 (triggers) | Triggers acción vía EventBus real + mundo por proximidad (throttle 0,25 s, dist²) + watchdog RF23 + degradación + gate M19 | 336/911 |
+| 3 (lógica completa) | Interruptores RF9 independientes + consejos RF6 + contexto T-016 + persistencia de pasos P4 + skip/re-play RF7-RF8 (snapshot) + feedback RF24/P15 + pistas máx. 2 (P2/P13/P14) + P5/P6/P8/P9 | 914 |
+| 4 (data-driven) | Guiones `.tres` (`TutorialGuiones` + `guiones_base.tres`, fallback por código) + early-return de proximidad sin triggers + espejo documental | 987 |
+
+Contratos vivos para M53: señales `paso_mostrado`, `capitulo_iniciado/completado`, `capitulo_timeout/descartado`, `feedback_capitulo`, `consejo_mostrado`, `pista_expirada`, `capitulo_pospuesto`, `pistas_ocultas`; API `icono_tecla_dinamico()`, `pistas_vivas()`, interruptores `set_pistas_contextuales`/`set_prologo_guiado`/`set_consejos`.

@@ -105,7 +105,7 @@ func _catalog_get():
 ## Precio de venta al jugador en la tienda (lo que paga). `cantidad` aplica el
 ## descuento mayorista por volumen (M38). Devuelve precio UNITARIO (ShopManager
 ## multiplica por cantidad), ya clampeado a >= 1.
-func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int = 1) -> int:
+func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int = 1, recargo_pct: float = 0.0) -> int:
 	var base := _precio_base_compra(item_id)
 	if base <= 0:
 		return 0
@@ -117,6 +117,10 @@ func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int =
 	var desc_volumen := _descuento_volumen(cantidad)
 	var desc_total := minf(desc_amistad + desc_volumen, DESCUENTO_TOTAL_MAX)
 	var final := int(round(float(mercado) * (1.0 - desc_total)))
+	# M39 iter. glm (Log 1004): recargo opcional de mercaderes viajeros, declarado
+	# por la tienda (topes de M38); 0.0 = sin cambio de comportamiento (retrocompatible).
+	if recargo_pct > 0.0:
+		final = int(round(float(final) * (1.0 + recargo_pct / 100.0)))
 	return maxi(1, final)
 
 ## M38 iter 4 (GLM-5.3 — Log 819): interpola entre precio base y precio de mercado
