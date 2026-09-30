@@ -614,6 +614,53 @@ esta contaminacion. DeepSeek lo demostrar y generalizo este patron como
 trampa 110. No se revirtio nada (el contenido era correcto); solo los
 mensajes eran imprecisos.
 
+### T-104: Test acoplado a un numero magico que el propio agente muta en otra ronda
+
+**Sintoma:** un suite pasa en su primera corrida y rompe en HEAD sin que nadie haya
+tocado el test. El agente que lo escribio creo el assert contra el valor actual de un
+dato (tamaño de catalogo, cantidad de entradas, total de items); despues, en otra
+ronda o en otro commit suyo, expandio ese mismo dato — y el assert que daba por fijo
+el numero viejo queda en rojo, aunque la feature nueva sea correcta.
+
+**Caso real (M150, P-48 ronda 2):** `3a568ea` subio `narrative_sound.json` v1.1 de 6
+a 32 momentos narrativos. `test_narrative_m150.gd` afirmaba `size() == 6` → 2 checks
+en rojo en HEAD. Medido: `3a568ea^` = 6/OK, `3a568ea` = 32/FAIL. Fix en `c6b3426`:
+cambiar los conteos fijos a `>= 6`, validando las 6 anclas originales una a una en
+_test_momentos (12/0, exit 0).
+
+**Por que engaña el sintoma:** el fallo **no aparece cuando el agente escribe el
+test** — aparece cuando **otro commit suyo** (o su propia ronda siguiente) mueve el
+dato que el assert daba por inmutable. El test pasa en su corrida inicial, asi que
+el agente lo da por bueno. El rojo llega despues, fuera del contexto donde se tomo
+la decision de disenio.
+
+**Causa raiz:** el assert codifica el estado actual del dato como si fuera un
+contrato, cuando el dato es **contenido mutable por diseno**. Un catalogo que va a
+crecer iteracion a iteracion nunca deberia tener un assert de igualdad exacta sobre
+su tamaño.
+
+**Deteccion:**
+```bash
+# antes y despues de un commit que toca el dato del assert, correr el suite
+git stash && <suite>  # o comparar padre vs commit
+# buscar asserts de igualdad sobre conteos
+grep -nE "size\(\)\s*==|assert_eq.*count" <suite>
+```
+
+**Prevencion:**
+1. Si el assert protege **contenido**, exigir las anclas por identidad/id (las 6
+   originales validadas una a una), no por cardinalidad exacta.
+2. Si de verdad se quiere un conteo, usar `>= N` (piso) en vez de `== N` y
+   documentar en el test por que ese piso es el contrato real.
+3. Regla de oro: **antes de expandir un catalogo/dato en una ronda nueva, correr el
+   suite que lo toca** — el rojo aparece ahi, no en la ronda original.
+
+**Perspectiva aportada por:** mimo-v2.6-flash-free (P-48, Log 1175) — el angulo de
+"el fallo llega cuando OTRO commit del mismo agente mueve el dato" es suyo.
+**Documentado por:** Atria-Dawn-Preview | **Plataforma:** Kilo Code | 2026-09-30
+
+---
+
 **Fecha:** 2026-09-25 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
 
 ---
