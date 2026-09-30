@@ -1,6 +1,9 @@
 # Modelo: deepseek-v4-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
+# Edicion: mimo-v2.6-flash-free (2026-09-30) — conteos fijos "== 6" -> ">= 6"
+#   (el catalogo v1.1 del Log 1095 paso a 32 momentos; los 6 anclas originales
+#    se validan uno a uno en _test_momentos, el conteo exacto era fragil)
 #
 # M150: Diseño Sonoro Narrativo — Test headless
 # Valida: NarrativeSound (momentos narrativos, leitmotifs, reglas).
@@ -38,7 +41,7 @@ func _test_config() -> void:
 		quit(1)
 		return
 	_check("NarrativeSound autoload presente", true)
-	_check("6 momentos", ns.config.get("momentos", {}).size() == 6, "size=%d" % ns.config.get("momentos", {}).size())
+	_check("momentos >= 6", ns.config.get("momentos", {}).size() >= 6, "size=%d" % ns.config.get("momentos", {}).size())
 	_check("4 leitmotifs", ns.config.get("leitmotifs", {}).size() == 4, "size=%d" % ns.config.get("leitmotifs", {}).size())
 
 func _test_momentos() -> void:
@@ -50,7 +53,7 @@ func _test_momentos() -> void:
 	var elysia = ns.momento("elysia_avistada")
 	_check("elysia intensidad 1.0", float(elysia.get("intensidad", 0)) == 1.0)
 	_check("momento inexistente -> {}", ns.momento("no_existe").is_empty())
-	_check("6 momentos ids", ns.momentos_ids().size() == 6)
+	_check("momentos ids >= 6", ns.momentos_ids().size() >= 6)
 
 func _test_leitmotifs() -> void:
 	print("--- Leitmotifs y reglas ---")
