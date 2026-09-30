@@ -564,6 +564,60 @@ no puede figurar como inventario de código.
 
 ---
 
+### T-103: Atribuir un archivo por la firma del header atribuye al ultimo que toco, no al que hizo el cambio
+
+**Síntoma:** para clasificar archivos modificados sin commitear por autor
+(manejo de merges multiagente), se lee la firma `**Modelo:**` del header
+del archivo y se le asigna el commit a ese modelo. Resultado: 77 archivos
+atribuidos a DeepSeek eran en realidad drift del coordinador firmado en
+las lineas añadadidas del diff. El mensaje del commit quedaba impreciso
+(el contenido era correcto).
+
+**Causa raíz:** la firma del header identifica al **ultimo autor que
+edito el archivo commiteado**, no al autor de los **hunks sin commitear**.
+En un worktree con trabajo de varios agentes acumulado, esas dos cosas
+casi nunca coinciden. Es la misma familia de T-102/`Origen:` ≠ `Modelo:`,
+pero aplicada a `git diff` en vez de a archivos:
+
+| Fuente de la firma | Atribuye a | Cuando usarla |
+|---|---|---|
+| Header del archivo (`**Modelo:**`) | ultimo que toco (commiteado) | nunca, para trabajo sin commitear |
+| Lineas añadadidas del diff (`git diff --unified=0`) | **quien hace el cambio real** | **esta es la correcta** |
+
+**Detección — el comando que importa:**
+
+```bash
+# autor REAL de los hunks sin commitear de un archivo
+git diff --unified=0 -- <ruta> | grep '^+'
+# buscar **Modelo:** / **Origen:** / "Log N" / nombre de modelo
+```
+
+Si las lineas añadadidas firman a un modelo distinto del header, el
+archivo es **hunks mezclados**: no se commitea en el commit de ninguno de
+los dos; va al bucket de merge manual.
+
+**Prevención para clasificadores de merge:**
+1. Para archivos **M** (modificados): atribuir por hunks del diff, no por
+   header. Check adicional EOL: `adds == dels` y `adds+dels >= 90%` de las
+   lineas del archivo.
+2. Para archivos **untracked** (nuevos): el archivo entero es el diff, asi
+   que el header SI vale — pero hay que leer `**Modelo:**` **o**
+   `**Origen:**` (los artefactos de coordinacion usan `Origen:`), y el
+   regex necesita `re.MULTILINE` para que `$` coincida con fin de linea.
+3. En backlog-folders (`TAREAS-POR-MODELO/<modelo>/`), la carpeta NO
+   nombra al autor: lo hace la firma del contenido. `FAMILIA-B-*.md` vive
+   en carpetas de glm/step pero firma `Origen: atria-dawn`.
+
+**Caso real (P-44/P-45/P-48):** mi clasificador de los 224 M uso la firma
+del header; algunos commits de P-44 quedaron con mensajes imprecisos por
+esta contaminacion. DeepSeek lo demostrar y generalizo este patron como
+trampa 110. No se revirtio nada (el contenido era correcto); solo los
+mensajes eran imprecisos.
+
+**Fecha:** 2026-09-25 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+
+---
+
 ## Plantilla para nuevos errores
 
 ```markdown
