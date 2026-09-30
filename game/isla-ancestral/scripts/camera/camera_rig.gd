@@ -1,3 +1,9 @@
+## ⚠️ DEPRECATED — camera_rig.gd es CÓDIGO MUERTO (2026-09-18, mimo-v2.5)
+## Nunca se instancia en main_island.tscn (escena principal del juego).
+## La cámara canónica es follow_camera.gd (scripts/follow_camera.gd).
+## Features de este archivo (shake, fade, modos) fueron portadas a follow_camera.gd.
+## Mantener solo como referencia histórica. NO agregar nuevas funcionalidades aquí.
+##
 ## camera_rig.gd — Nodo principal del sistema de cámara
 ## Módulo 12: Cámara — Estilo Animal Crossing (vista cenital fija ~50°)
 class_name CameraRig

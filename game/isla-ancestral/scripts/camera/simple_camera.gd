@@ -1,5 +1,9 @@
 extends Camera3D
 
+## ⚠️ DEPRECATED — simple_camera.gd es CÓDIGO MUERTO (2026-09-18, mimo-v2.5)
+## Cámara alternativa que nunca se usó en la escena principal.
+## La cámara canónica es follow_camera.gd (scripts/follow_camera.gd).
+##
 ## Cámara estilo Animal Crossing — Sin look_at para preservar VoxelViewer
 
 var _player: Node3D = null

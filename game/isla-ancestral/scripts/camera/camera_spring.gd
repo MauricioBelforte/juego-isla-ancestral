@@ -1,3 +1,7 @@
+## ⚠️ DEPRECATED — camera_spring.gd es CÓDIGO MUERTO (2026-09-18, mimo-v2.5)
+## Solo era usado por camera_rig.gd (también deprecated).
+## La colisión de cámara está integrada en follow_camera.gd via voxel raycast.
+##
 ## camera_spring.gd — Spring-arm con colisión contra bloques
 ## Módulo 12: Cámara
 class_name CameraSpring
