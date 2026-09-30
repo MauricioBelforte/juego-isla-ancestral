@@ -677,3 +677,13 @@ verifiques vos, usa tu practica habitual de varios angulos.
       versionados** (~91 KB) que la limpieza de `78c83da` **truncó en vez de borrar** → pendiente para el
       coordinador (requiere `git rm --cached` + commit, y **mimo está activo**). Log en **ASCII puro**
       (0 bytes no-ASCII, verificado con `LC_ALL=C grep -c '[^ -~]'`, no mirado). (2026-09-30)
+
+- [x] Log reservado: **1177** — **trazabilidad de push (AGENTS.md §4.3)**: documentados los **4 pushes del
+      cierre** con rango, hora, ejecutante y tipo (fuente: `git reflog show origin/main`). Push 1
+      `9798ae8..7f5bf6e` (principal, 172 commits) · push 2 `7f5bf6e..be971cb` (catch-up, mi Log 1173) ·
+      push 3 `be971cb..470611a` (**NO atribuible**: mi push en background terminó 4 s después con
+      `Everything up-to-date`, así que no fue mío — el hueco exacto que cierra la regla) · push 4
+      `470611a..1c60025` (catch-up, 10 commits). **Push 4 ejecutado**: auditoría previa limpia
+      (fast-forward, 0 credenciales reales, blob máx 0.28 MB, árbol 0 sucios). **Lección:** un push
+      cortado por el timeout del wrapper **puede haber completado igual** (el mío se reportó como SIGTERM
+      y sí se había empujado) → verificar con el reflog/`fetch` antes de reintentar. (2026-09-30)
