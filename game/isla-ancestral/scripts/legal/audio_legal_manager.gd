@@ -192,7 +192,7 @@ func validar_build() -> Dictionary:
 	}
 	if not _dry_run and errores.is_empty():
 		_generar_archivos_build()
-	 resultado["archivos_generados"] = not _dry_run and errores.is_empty()
+	resultado["archivos_generados"] = not _dry_run and errores.is_empty()
 	return resultado
 
 func _generar_archivos_build() -> void:

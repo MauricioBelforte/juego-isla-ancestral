@@ -72,7 +72,7 @@ func _test_validator_errores() -> void:
 func _test_artista_multi_rol() -> void:
 	print("--- Edge case: artista con múltiples roles ---")
 	var data = _cargar()
-	var tracks := data.get("tracks", [])
+	var tracks: Array = data.get("tracks", [])
 	var artistas := {}
 	for t in tracks:
 		var autor := String(t.get("autor", ""))
@@ -91,7 +91,7 @@ func _test_artista_multi_rol() -> void:
 func _test_audio_multi_licencia() -> void:
 	print("--- Edge case: audio con múltiples licencias ---")
 	var data = _cargar()
-	var tracks := data.get("tracks", [])
+	var tracks: Array = data.get("tracks", [])
 	var licencias := {}
 	for t in tracks:
 		var lic := String(t.get("licencia", "PROPIA"))

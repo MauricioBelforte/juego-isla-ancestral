@@ -47,6 +47,214 @@
       "leitmotif": "",
       "duracion_s": 1.5,
       "categoria": "interaccion"
+    },
+    "maquina_ancestral": {
+      "nombre": "Maquina Ancestral",
+      "descripcion": "Sonido al interactuar con maquinas ancestrales",
+      "intensidad": 0.6,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 2.0,
+      "categoria": "interaccion"
+    },
+    "maquina_activada": {
+      "nombre": "Maquina Activada",
+      "descripcion": "Sonido cuando una maquina ancestral se activa",
+      "intensidad": 0.8,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 1.5,
+      "categoria": "interaccion"
+    },
+    "maquina_desactivada": {
+      "nombre": "Maquina Desactivada",
+      "descripcion": "Sonido cuando una maquina ancestral se desactiva",
+      "intensidad": 0.4,
+      "leitmotif": "",
+      "duracion_s": 1.0,
+      "categoria": "interaccion"
+    },
+    "telemetria_ancestral": {
+      "nombre": "Telemetria Ancestral",
+      "descripcion": "Sonido de feedback de UI de telemetria ancestral",
+      "intensidad": 0.3,
+      "leitmotif": "",
+      "duracion_s": 0.5,
+      "categoria": "ui"
+    },
+    "telemetria_actualizada": {
+      "nombre": "Telemetria Actualizada",
+      "descripcion": "Sonido cuando la telemetria ancestral se actualiza",
+      "intensidad": 0.2,
+      "leitmotif": "",
+      "duracion_s": 0.3,
+      "categoria": "ui"
+    },
+    "telemetria_completada": {
+      "nombre": "Telemetria Completada",
+      "descripcion": "Sonido cuando la telemetria ancestral se completa",
+      "intensidad": 0.5,
+      "leitmotif": "",
+      "duracion_s": 0.8,
+      "categoria": "ui"
+    },
+    "aurora_aparece": {
+      "nombre": "Aurora Aparece",
+      "descripcion": "Leitmotif de Aurora al aparecer en escena",
+      "intensidad": 0.9,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 3.0,
+      "categoria": "personaje"
+    },
+    "aurora_habla": {
+      "nombre": "Aurora Habla",
+      "descripcion": "Leitmotif suave de Aurora durante dialogo",
+      "intensidad": 0.4,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 2.0,
+      "categoria": "personaje"
+    },
+    "aurora_peligro": {
+      "nombre": "Aurora en Peligro",
+      "descripcion": "Leitmotif tenso de Aurora en situacion de peligro",
+      "intensidad": 0.8,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 3.5,
+      "categoria": "personaje"
+    },
+    "elysia_habla": {
+      "nombre": "Elysia Habla",
+      "descripcion": "Leitmotif de Elysia durante dialogo",
+      "intensidad": 0.5,
+      "leitmotif": "elysia_motivo",
+      "duracion_s": 2.5,
+      "categoria": "personaje"
+    },
+    "elysia_ataca": {
+      "nombre": "Elysia Ataca",
+      "descripcion": "Leitmotif tenso de Elysia en ataque",
+      "intensidad": 1.0,
+      "leitmotif": "elysia_motivo",
+      "duracion_s": 3.0,
+      "categoria": "personaje"
+    },
+    "jugador_elige_sello": {
+      "nombre": "Jugador Elige Sello",
+      "descripcion": "Sonido al elegir un Sello ancestral",
+      "intensidad": 1.0,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 2.5,
+      "categoria": "logro"
+    },
+    "jugador_completa_sello": {
+      "nombre": "Jugador Completa Sello",
+      "descripcion": "Variacion del leitmotif al completar un Sello",
+      "intensidad": 1.0,
+      "leitmotif": "aurora_motivo",
+      "duracion_s": 4.0,
+      "categoria": "logro"
+    },
+    "jugador_usa_resonancia": {
+      "nombre": "Jugador Usa Resonancia",
+      "descripcion": "Sonido al usar la mecanica de Resonancia",
+      "intensidad": 0.7,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 1.5,
+      "categoria": "interaccion"
+    },
+    "resonancia_cargando": {
+      "nombre": "Resonancia Cargando",
+      "descripcion": "Sonido mientras la Resonancia se carga",
+      "intensidad": 0.5,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 2.0,
+      "categoria": "interaccion"
+    },
+    "resonancia_inactiva": {
+      "nombre": "Resonancia Inactiva",
+      "descripcion": "Sonido de Resonancia en estado idle",
+      "intensidad": 0.2,
+      "leitmotif": "resonancia_motivo",
+      "duracion_s": 1.0,
+      "categoria": "interaccion"
+    },
+    "descubre_isla": {
+      "nombre": "Descubre Isla",
+      "descripcion": "Sonido al descubrir una nueva isla",
+      "intensidad": 0.9,
+      "leitmotif": "",
+      "duracion_s": 3.0,
+      "categoria": "descubrimiento"
+    },
+    "descubre_item": {
+      "nombre": "Descubre Item",
+      "descripcion": "Sonido al descubrir un nuevo item",
+      "intensidad": 0.6,
+      "leitmotif": "",
+      "duracion_s": 1.0,
+      "categoria": "descubrimiento"
+    },
+    "descubre_mecanica": {
+      "nombre": "Descubre Mecanica",
+      "descripcion": "Sonido al desbloquear nueva mecanica",
+      "intensidad": 0.7,
+      "leitmotif": "",
+      "duracion_s": 2.0,
+      "categoria": "descubrimiento"
+    },
+    "area_misteriosa": {
+      "nombre": "Area Misteriosa",
+      "descripcion": "Ambiente tenso al entrar a area misteriosa",
+      "intensidad": 0.4,
+      "leitmotif": "",
+      "duracion_s": 5.0,
+      "categoria": "ambiental"
+    },
+    "silencio_revelacion": {
+      "nombre": "Silencio Antes de Revelacion",
+      "descripcion": "Pausa de tension antes de una revelacion importante",
+      "intensidad": 0.0,
+      "leitmotif": "",
+      "duracion_s": 3.0,
+      "categoria": "narrativo"
+    },
+    "silencio_pos_musica": {
+      "nombre": "Silencio Despues de Musica",
+      "descripcion": "Pausa de impacto despues de una pieza musical",
+      "intensidad": 0.0,
+      "leitmotif": "",
+      "duracion_s": 2.0,
+      "categoria": "narrativo"
+    },
+    "puerta_abierta": {
+      "nombre": "Puerta Abierta",
+      "descripcion": "Sonido de apertura de puerta ancestral",
+      "intensidad": 0.7,
+      "leitmotif": "",
+      "duracion_s": 1.5,
+      "categoria": "interaccion"
+    },
+    "puerta_cerrada": {
+      "nombre": "Puerta Cerrada",
+      "descripcion": "Sonido de cierre de puerta ancestral",
+      "intensidad": 0.5,
+      "leitmotif": "",
+      "duracion_s": 1.0,
+      "categoria": "interaccion"
+    },
+    "templo_puzzle": {
+      "nombre": "Templo Puzzle",
+      "descripcion": "Variacion del leitmotif durante puzzle de templo",
+      "intensidad": 0.6,
+      "leitmotif": "templo_motivo",
+      "duracion_s": 3.0,
+      "categoria": "descubrimiento"
+    },
+    "templo_completado": {
+      "nombre": "Templo Completado",
+      "descripcion": "Variacion final al completar un templo",
+      "intensidad": 1.0,
+      "leitmotif": "templo_motivo",
+      "duracion_s": 4.0,
+      "categoria": "logro"
     }
   },
   "leitmotifs": {
@@ -88,9 +296,9 @@
     "fade_out_leitmotif_al_cambiar_zona": true
   },
   "metadata": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "creado_por": "deepseek-v4-flash",
     "fecha": "2026-09-01",
-    "notas": "Data-driven: cualquier momento/leitmotif agregado al JSON aparece en el juego sin tocar código"
+    "notas": "Data-driven: cualquier momento/leitmotif agregado al JSON aparece en el juego sin tocar codigo. v1.1: +28 momentos (maquina, telemetria, aurora, elysia, sello, resonancia, descubrimiento, puertas, templo, narrativos)."
   }
 }
