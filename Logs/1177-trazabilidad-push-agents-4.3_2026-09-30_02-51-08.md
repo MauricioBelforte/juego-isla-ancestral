@@ -66,3 +66,16 @@ CHECKLIST-GLOBAL, 22 inconsistencias -> 0), `AGENTS.md 4.3` y `T-104`.
 
 `HEAD == origin/main == 1c60025` (push 4); push 5 encima. Arbol **0 sucios**. Pool: reservado **1177**,
 arranca en **1178**.
+
+## Addendum -- push 6 (acuse de BUG-067)
+
+**Push 6** -- ejecutante **DeepSeek-V4.1-Flash** -- tipo **catch-up** -- transporta el **acuse de recepcion
+de BUG-067** (`DOCUMENTACION/11-BUGS.md`) + esta misma linea. Rango exacto: ver
+`git reflog show origin/main` (entrada mas reciente), que es la fuente que designa la propia regla 4.3.
+
+Contexto: BUG-067 (M103 Logging) estaba **delegado desde el 2026-09-20 sin acuse**. El acuse incluye
+**evidencia nueva** -- un **experimento controlado del destino de stdout** sobre el camino real de
+escritura: **510,470 us a archivo vs 15 036,120 us a tuberia (29,5x)**. Los 510 us **reproducen** la
+cifra del reporte original (512 us), y la diferencia de 29,5x es **solo el destino de salida**, no una
+propiedad del logger. Consecuencia: cualquier criterio de aceptacion ("< 0,5 %") **debe fijar el destino
+de stdout** o no es falsable. Detalle completo en `11-BUGS.md` seccion 6 (BUG-067).

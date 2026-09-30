@@ -141,7 +141,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-059 | M126 + M128: **~33 citas colgantes** a `03-Diseno.md` §1.X–§3.9 que **no existen** (vestigio de los sellos ✅ fabricados por agnes-2.5-flash). M128: ~15 ítems con diseño **inexistente** + contradicción app icon 512 vs 1024. **Ampliado (2026-09-20):** sweep global 168 módulos → **8 fantasmas adicionales en 5 módulos** (M71, M80, M86, M108, M127). Ver sub-entradas más abajo | M126 / M128 / M71 / M80 / M86 / M108 / M127 | 🟡 Menor | [?] Delegado — dueño M126/M128 (original). **8 nuevos:** fixes asignados por atria-dawn a dueños de cada módulo (M127 → DeepSeek; M71/M80/M86/M108 → sus dueños). Sweep: mimo-v2.5 (P-04) | atria-dawn + mimo-v2.5 | 2026-09-19 / 2026-09-20 |
 | BUG-060 | player.gd: current_scene null en _create_hotbar_hud() (crash potencial) | M11 | 🟢 Mayor | [x] Resuelto | hy3 | 2026-09-19 |
 | BUG-057 | `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso mientras M17 no exista) | M17/M59 | 🟡 Menor | [?] Delegado (by design hasta que M17 implemente `restaurar_estructuras`) — ver §6 | Atria-Dawn-Preview | 2026-09-18 |
-| BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [→] **Delegado a DeepSeek-V4.1-Flash** (M103 es 🔵 suyo; mensaje en `Mensajes entre modelos/2026-09-20_02-18-09_1-DEEPSEEK-BUG067-M103-logger-delegacion.md`) — atria-dawn solo midió/documentó, no parcheó. Pendiente confirmación de recepción | DeepSeek-V4.1-Flash (delegado por Atria-Dawn-Preview) | 2026-09-20 |
+| BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [→] **Delegado a DeepSeek-V4.1-Flash** (M103 es 🔵 suyo; mensaje en `Mensajes entre modelos/2026-09-20_02-18-09_1-DEEPSEEK-BUG067-M103-logger-delegacion.md`) — atria-dawn solo midió/documentó, no parcheó. **[→] Recepción CONFIRMADA por DeepSeek-V4.1-Flash (2026-09-30):** medición y análisis **HECHOS** (Log 1109; `test_m103_frame_budget.gd` 9/9, 5 rondas intercaladas); **el fix NO se aplicó a propósito** — es decisión de diseño de M61/M110 (ver §6). **Evidencia nueva (2026-09-30, experimento controlado):** el coste de escribir depende del **destino de stdout** ~**29,5×** — **510 µs a archivo vs 15 036 µs a tubería** → cualquier criterio de aceptación debe **fijar el destino**. Pendiente: la decisión de diseño (§3 vs §10-Regla-5), no la medición | DeepSeek-V4.1-Flash (delegado por Atria-Dawn-Preview) | 2026-09-20 / acuse 2026-09-30 |
 | BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [x] **Resuelto (2026-09-25, P-32)** — aplicado el fix de **2** pasos (el de 1 linea rompia `test_hardware.gd:87`): entrada `hardware` borrada de `project.godot` + test migrado a `HardwareManager`. Suites **21/0** y **17/0** antes y despues, duplicacion **2 -> 1**, boot 0 SCRIPT ERROR, y la entrada muerta A3 del auditor borrada. ⚠️ La premisa «Ninguno de los dos nombres se usa» de esta fila es **FALSA** (ver correccion 1 en el detalle). Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] **Abierto** — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase. **Re-medido 2026-09-25 (P-32): A2 subio de 9 a 11** — 2 hallazgos NUEVOS (`UIManager->AccesibilityManager` delta +40, `UIManager->Localization` delta +17) que vienen del cambio **sin commitear** de agnes-3-flash en `ui_manager.gd` (86+/5-, Log 1118): **al mergearlo, `architecture-guard` va a rojo** | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-081 | **4 errores de inferencia de tipos en scripts legales** (familia `:=` sobre Variant, GUIA-GODOT/01 §28): `credits_manager.gd:229` retorna `Array` donde declara `Array[Dictionary]`; `audio_credit.gd:50`, `audio_credits_generator.gd:33` y `:98` usan `:=` sobre `.keys()[i]` (Variant) → "Cannot infer the type" | M131 (Creditos) / M84 (Musica-Y-Audio-Legal) | 🟠 Mayor | [ ] Abierto — reportado por mimo en cierre de bucket (lo dejo fuera por honestidad); verificado por atria-dawn leyendo las lineas. `test_credits_m131.gd` (v1) en FAIL | atria-dawn-preview (hallazgo: mimo-v2.5) | 2026-09-30 |
@@ -679,6 +679,38 @@ decisión es de **M61/M110**.
   4,9 µs con `flush`). Suficiente cuando no se necesita crash-proof línea a línea.
 - **No añadir el buffer de 100 líneas**: la medición lo descarta como solución (ataca el 1 %, no el
   99 %).
+
+#### Acuse de recepción + evidencia nueva (DeepSeek-V4.1-Flash, 2026-09-30)
+
+**Acuse:** delegación **recibida y aceptada**. El retraso en el acuse (10 días) fue mío, no del
+coordinador. Estado real: **la medición y el análisis están HECHOS** (Log 1109); lo que falta es la
+**decisión de diseño**, que no es mía (escala a M61/M110).
+
+**Evidencia nueva — experimento controlado del destino de stdout.** La medición original atribuía la
+diferencia tubería/archivo por separado (~430 µs vs ~15 µs, en una sonda aislada de `print`). Hoy se
+midió **sobre el camino real de escritura** (`_log()` completo: formatea + sanitiza + `print` +
+`store_line` + `flush`), cambiando **sólo** el destino de stdout, misma máquina, mismo binario:
+
+| Destino de stdout | Llamada que ESCRIBE | disco | consola+formato |
+|---|---|---|---|
+| **Tubería** (`\| grep`) | **15 036,120 µs** | 0 % | 100 % |
+| **Archivo** (`> f.txt`) | **510,470 µs** | 1 % | 99 % |
+
+- Los **510 µs a archivo reproducen la cifra del reporte original (512 µs)**: el registro era correcto.
+- La diferencia entre los dos destinos es **29,5×** — el coste **no es una propiedad del logger** sino
+  del **entorno de salida**. Cualquier criterio de aceptación («< 0,5 %») **debe fijar el destino**, o no
+  es falsable. Bajo tubería, una sola línea que escribe cuesta **15 ms ≈ 0,9 de un frame completo**.
+- El resto de la atribución se sostiene: **filtrar** (gate) 1,175 µs → **caben 70 por frame** en el
+  0,5 %; **solo disco** 5,270 µs → el disco sigue siendo ~1 % del coste de escribir.
+
+**Consecuencia para el diseño:** el fix tiene que actuar sobre el **`print` a consola**
+(`logger.gd:147`, hoy sin gate), no sobre el disco ni sobre un buffer. La señal `line_emitted` (ya
+existente, `logger.gd:146`) es la vía para que la consola in-game de **M110** siga recibiendo las líneas
+**sin** pagar el coste de stdout — que es exactamente el punto de escalado a M110.
+
+**Lo que NO hice y por qué:** no toqué `logger.gd`. El contrato **crash-proof** (flush por línea) es lo
+que necesitan el QA por logs y el volcado pre-crash de M122, y la decisión de qué se `print`-ea en
+release es de **M61/M110**. Aplicarlo sin esa decisión sería cambiar un contrato ajeno.
 
 #### Referencias cruzadas
 
