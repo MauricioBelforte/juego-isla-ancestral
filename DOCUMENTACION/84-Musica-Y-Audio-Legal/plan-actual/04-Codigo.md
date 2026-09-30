@@ -310,3 +310,36 @@ credits_generator.save_build_credits(audio_legal.credits, output_path)
 
 ### Conclusion
 El codigo esta genuinamente respaldado (15/0, EXIT 0), pero el cierre documental tiene defectos (over-mark L117 + Estado ausente). No se marca ✅ hasta sanear L117 y el Estado. Requiere accion del autor (MiMo) + re-verificacion.
+
+---
+
+## Notas del Agente — reapertura puntual por BUG-081
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-09-30 04:24
+
+> ⚠️ **M84 NO se reabrió como módulo.** Sigue siendo `✅` sellado y **no debe** marcarse
+> como `✅` nuevo ni resetearse su progreso. Esto es únicamente un **bugfix sobre un módulo
+> cerrado**, registrado como **BUG-081** en `DOCUMENTACION/11-BUGS.md`.
+
+### Qué se tocó (2 de los 4 sitios de BUG-081 viven en M84)
+
+- `scripts/legal/audio_credit.gd:50` — `var rol_texto := AudioRole.keys()[rol].capitalize()`
+  → `var rol_texto: String = ...` (`.keys()` devuelve `Array`; su indexado produce `Variant`
+  y `:=` no infiere — lección §28 de `GUIA-GODOT/01-gdscript-errores-comunes.md`).
+- `scripts/legal/audio_credits_generator.gd:33` — `var rol_key := AudioCredit.AudioRole.keys()[cred.rol]`
+  → `var rol_key: String = ...`
+- `scripts/legal/audio_credits_generator.gd:98` → `var tipo_key: String = AudioLicense.AudioType.keys()[lic.audio_type]`
+
+No se modificó ninguna lógica: solo la anotación de tipo. El contrato público de las
+funciones (`String`, `Dictionary`, retorno de texto) queda idéntico al de antes.
+
+### Verificación
+
+- `--check-only` sobre los 4 scripts: **4/4 OK**.
+- `run_tests.py --module m84`: **1 OK, 0 FAIL** (`test-audio_licenses_m84`, exit=0) — sin
+  regresión respecto del baseline.
+- `run_tests.py --module m131`: **3 OK, 0 FAIL** (baseline: 2 OK, 1 FAIL).
+
+**Commit:** `6b7fdf1` · **Log:** `Logs/1178-BUG-081_errores-inferencia-scripts-legales_2026-09-30_04-24-35.md`

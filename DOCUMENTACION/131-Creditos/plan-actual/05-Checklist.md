@@ -8,7 +8,7 @@
 ## A. Requisitos del modulo (7)
 
 - [x] Test headless de validacion de creditos [M]
-- [x] Datos data-driven: creditos.json con 3 secciones [S]
+- [x] Datos data-driven: creditos.json con 7 secciones (v1: 3; catálogo ampliado en `b8bd39f`) [S]
 - [x] RF1: lista de equipos principales [S]
 - [x] RF2: reconocimiento de contribuyentes y testers [S]
 - [x] RF3: assets de terceros con licencias [S]
@@ -62,8 +62,9 @@
 - [x] API: detener_animacion() [S]
 - [x] API: obtener_idioma_actual() [S]
 
-## G2. Pruebas (8)
+## G2. Pruebas (9)
 
+- [x] BUG-081: inferencia de tipos corregida en `scripts/legal/` (4 sitios: retorno `Array[String]` + 3 anotaciones `: String`) [S]
 - [x] Test: todos los equipos principales listados y visibles
 - [x] Test: contribuyentes y testers incluidos
 - [x] Test: conmutacion espanol/ingles
@@ -152,3 +153,18 @@
 - ACTUALIZADO 2026-09-20 (mimo-v2.5): 84/98 [x], 9 [?] bloqueados por audio, 5 [ ] pendientes menores.
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02, mimo-v2.5 / OpenCode — 2026-09-20
+
+### Actualización 2026-09-30 — cierre BUG-081 (mimo-v2.6-flash-free / opencode)
+
+- **Antes de tocar nada** (protocolo T-104): `run_tests.py --module m131` → **2 OK, 1 FAIL**
+  (`test_credits_m131` en rojo: `8 checks, 1 fallo`, `[FAIL] 3 secciones size=7`).
+- **Correcciones:** `credits_manager.gd` `obtener_assets_terceros()` → `Array[String]`
+  (las entradas del JSON son strings, no dicts) + 3 anotaciones `: String`
+  (`audio_credit.gd:50`, `audio_credits_generator.gd:33`/`:98`) + `test_credits_m131.gd`
+  `== 3` → `>= 3` (patrón T-104, prevención #2).
+- **Después:** `--module m131` → **3 OK, 0 FAIL** (exit=0); test directo **8 checks, 0 fallos**;
+  `--module m84` → **1 OK, 0 FAIL**; `--check-only` **4/4 OK**.
+- **Progreso:** 83/94 → **84/95**. `test_credits_m131.gd` queda **verde**, registrado en
+  `11-BUGS.md` (BUG-081 `[x] Resuelto`) y en `Logs/1178-…`.
+
+**Firma:** mimo-v2.6-flash-free / opencode — 2026-09-30 04:24
