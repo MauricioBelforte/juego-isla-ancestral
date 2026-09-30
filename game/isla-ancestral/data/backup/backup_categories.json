@@ -1,0 +1,84 @@
+{
+  "categorias": {
+    "repositorio": {
+      "rf": "RF1",
+      "descripcion": "Repositorio Git completo",
+      "origenes": ["../../.git"],
+      "destino": "repositorio/",
+      "frecuencia": "continuo",
+      "compresion": true,
+      "retencion_dias": 365
+    },
+    "assets": {
+      "rf": "RF2",
+      "descripcion": "Assets del juego (Git LFS)",
+      "origenes": ["assets/"],
+      "destino": "assets/",
+      "frecuencia": "continuo",
+      "compresion": true,
+      "retencion_dias": 90,
+      "lfs": true
+    },
+    "documentacion": {
+      "rf": "RF3",
+      "descripcion": "Documentacion del proyecto",
+      "origenes": ["DOCUMENTACION/", "docs/", "README.md", "AGENTS.md", "CHECKLIST-GLOBAL.md"],
+      "destino": "documentacion/",
+      "frecuencia": "continuo",
+      "compresion": true,
+      "retencion_dias": 180
+    },
+    "builds": {
+      "rf": "RF4",
+      "descripcion": "Builds y releases",
+      "origenes": ["Builds/"],
+      "destino": "builds/",
+      "frecuencia": "post_release",
+      "compresion": true,
+      "retencion_dias": 365
+    },
+    "saves": {
+      "rf": "RF6",
+      "descripcion": "Saves del juego",
+      "origenes": ["user://saves/"],
+      "destino": "saves/",
+      "frecuencia": "semanal",
+      "compresion": true,
+      "retencion_dias": 90
+    },
+    "musica": {
+      "rf": "RF7",
+      "descripcion": "Musica y proyectos DAW",
+      "origenes": ["assets/audio/", "proyectos_daw/"],
+      "destino": "musica/",
+      "frecuencia": "semanal",
+      "compresion": true,
+      "retencion_dias": 180
+    },
+    "fuente": {
+      "rf": "RF8",
+      "descripcion": "Archivos fuente (scripts, escenas, shaders)",
+      "origenes": ["scripts/", "scenes/", "shaders/"],
+      "destino": "fuente/",
+      "frecuencia": "continuo",
+      "compresion": true,
+      "retencion_dias": 180
+    }
+  },
+  "retencion": {
+    "diarios": 30,
+    "semanales": 52,
+    "mensuales": 60,
+    "permanentes": ["repositorio", "documentacion"]
+  },
+  "verificacion": {
+    "checksum_habilitado": true,
+    "algoritmo": "CRC32",
+    "integrity_check_al_restaurar": true
+  },
+  "compresion": {
+    "habilitada": true,
+    "formato": "zip",
+    "nivel": 6
+  }
+}
