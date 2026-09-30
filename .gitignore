@@ -207,3 +207,14 @@ Obsoletos/libvoxel-TMP-*/
 # Scratch temporal mudado desde la raiz (_tmp_*, patch_m74_*, _gen_*, ...).
 # Se conserva en disco por si alguien lo necesita, no en el historial.
 Obsoletos/raiz-temporales-*/
+
+# ── Secrets y variables de entorno (M106 T-007) ─────────────────────────────
+# NUNCA versionar archivos .env con secrets. Solo la plantilla .env.example sí.
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.key
+*.pem
+.secrets

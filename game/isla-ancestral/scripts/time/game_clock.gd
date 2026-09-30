@@ -35,7 +35,7 @@ signal evento_activado(evento: Dictionary)
 var _dia: int = 1          # 1-based día del mes
 var _mes: int = 1          # 1-based mes (1..12)
 var _anio: int = 1
-var _hora: int = 8         # 0..23 (mañana inicial)
+var _hora: int = 8          # 0..23
 var _minuto: int = 0
 var _acumulador: float = 0.0
 var _pausado: bool = false
