@@ -1,132 +1,185 @@
-**Modelo:** agnes-2.5-flash (implementación) / MiMo V2.5 (coordinación)
-**Plataforma:** Kilo Code / OpenCode
-**Última actualización:** 2026-09-01
+**Modelo:** MiMo V2.5 (coordinación) / agnes-2.5-flash (implementación inicial)
+**Plataforma:** OpenCode / Kilo Code
+**Última actualización:** 2026-09-18
 
 # 04-Codigo.md — Módulo 64: IA de NPC
 
 ## 1. Archivos Involucrados
 
-### Scripts (GDScript, tipado) — Implementados por agnes-2.5-flash
+### Scripts Core (12 archivos)
+
+| Archivo | class_name | Propósito | Líneas |
+|---|---|---|---|
+| `npc_agent.gd` | NPCAgent | Controlador principal por NPC. Orquesta FSM, rutinas, necesidades, navegación, social, separación. | 411 |
+| `state_machine.gd` | NPCStateMachine | FSM plana con pila de planes. Fallback con `is_fallback` + `fell_back`. | ~180 |
+| `base_state.gd` | — | Clase base de estados (Node). | ~30 |
+| `routine_player.gd` | RoutinePlayer | Lee `VillagerProfile.rutina_diaria` y matchea hora:minute. | ~80 |
+| `npc_needs.gd` | NPCNeeds | hunger/energy/social/mood. Config vía `set_config()`. | 129 |
+| `npc_blackboard.gd` | NPCBlackboard | Datos compartidos. `to_dict()` / `from_dict()` (static). | 79 |
+| `npc_manager.gd` | — | Autoload. Registro/desregistro, BudgetRegistry (32MB), watchdog. | ~200 |
+| `plan_stack.gd` | NPCPlanStack | Pila de planes. push/pop/peek/recovery/clear/serialize. MAX_DEPTH=8. | 142 |
+| `npc_watchdog.gd` | NPCWatchdog | Anti-atascos. Per-state timeouts + transition burst detection. | 153 |
+| `npc_needs_config.gd` | NPCNeedsConfig | Resource configurable de rates/thresholds. | ~40 |
+
+### Estados (8 archivos en `states/`)
+
+| Archivo | Estado | Sub-estados |
+|---|---|---|
+| `idle_state.gd` | Idle | Espera, mira alrededor |
+| `movement_state.gd` | Movement | WalkTo, RunTo, Avoid |
+| `work_state.gd` | Work | WorkAnimate, WorkPause |
+| `social_state.gd` | Social | Greet, Chat, GroupChat |
+| `eat_state.gd` | Eat | GoToEat, Eating, LeaveEat |
+| `sleep_state.gd` | Sleep | GoToSleep, Sleeping, WakeUp |
+| `react_state.gd` | React | ReactRain, ReactEvent, ReactPlayer |
+| `interact_state.gd` | Interact | TalkToPlayer, GiveGift, Trade |
+
+### Tests (5 archivos)
+
+| Archivo | Checks | Fallos | Tipo |
+|---|---|---|---|
+| `test_ia_npc_m64_iterN.gd` | 82 | 0 | Suite principal (plan_stack, watchdog, needs, blackboard, FSM, profiles) |
+| `test_navegacion_m64.gd` | 9 | 0 | Watchdog + constantes separación |
+| `test_social_m64.gd` | 14 | 0 | Needs + selectividad + límites |
+| `test_rendimiento_m64.gd` | 8 | 0 | 60+100 NPCs performance |
+| `test_persistencia_m64.gd` | 29 | 0 | Roundtrip Needs/Blackboard/PlanStack |
+| **TOTAL** | **142** | **0** | |
+
+### Datos
 
 | Archivo | Propósito |
 |---|---|
-| `scripts/ia_npc/npc_agent.gd` | Controlador principal por NPC (class_name NPCAgent, extends CharacterBody3D). Orquesta FSM, rutinas, necesidades, navegación y blackboard. |
-| `scripts/ia_npc/state_machine.gd` | Máquina de estados (NPCStateMachine). FSM plana con pila de estados. |
-| `scripts/ia_npc/base_state.gd — Clase base de estados (Node, sin class_name para evitar conflictos preload). |
-| `scripts/ia_npc/routine_player.gd` | Reproductor de rutinas (RoutinePlayer). |
-| `scripts/ia_npc/npc_needs.gd` | Sistema de necesidades (NPCNeeds). |
-| `scripts/ia_npc/npc_blackboard.gd` | Memoria compartida entre estados (NPCBlackboard). |
-| `scripts/ia_npc/npc_manager.gd` | Manager global con registro/desregistro + burbujas de simulación (NPCManager, autoload `ia_npc`). |
-| `scripts/ia_npc/states/idle_state.gd` | Estado: idle |
-| `scripts/ia_npc/states/movement_state.gd` | Estado: movimiento |
-| `scripts/ia_npc/states/work_state.gd` | Estado: trabajo |
-| `scripts/ia_npc/states/social_state.gd` | Estado: socialización |
-| `scripts/ia_npc/states/eat_state.gd` | Estado: comer |
-| `scripts/ia_npc/states/sleep_state.gd` | Estado: sueño |
-| `scripts/ia_npc/states/react_state.gd` | Estado: reacción |
-| `scripts/ia_npc/states/interact_state.gd` | Estado: interacción con jugador |
+| `data/villagers/*.tres` | 6 perfiles con `rutina_diaria` (catalina, finneas, mateo, luna, bruno, mercedes) |
+| `data/ia/npc_needs_config.tres` | Config default de necesidades |
 
-**Total: 15 archivos GDScript**
+### CI
 
-### Escenas
-| Archivo | Propósito |
-|---|---|
-| `scenes/npc/npc_agent.tscn` | Escena NPCAgent (Node3D + NPCAgent.gd + NavigationAgent3D + CollisionShape3D). **Fix MiMo:** corregido ExtResource reference. |
+| Workflow | Línea | Gate |
+|---|---|---|
+| `.github/workflows/quality.yml:327` | `test_ia_npc_m64_iterN.gd` | `|| FAIL=1` (duro) |
+| `.github/workflows/quality.yml:328-331` | 4 suites nuevas | `|| FAIL=1` (duro) |
 
-### Datos (pre-existentes, compartidos con M19)
-| Archivo | Propósito |
-|---|---|
-| `data/villagers/*.tres` | Perfiles de NPCs (catalina_oso, finneas_zorro, mateo_mapache, luna_zorra, bruno_sapo) |
-
-## 2. Funciones Clave (firmas GDScript)
+## 2. Funciones Clave
 
 ```gdscript
 # ---------- npc_agent.gd ----------
-class_name NPCAgent
-extends CharacterBody3D
+class_name NPCAgent extends CharacterBody3D
 
-## Señales públicas
 signal npc_state_changed(old_state: StringName, new_state: StringName)
 signal npc_arrived(location: StringName)
 signal npc_stuck(duration: float)
 
-## Timer para tick discreto de la FSM (~2 veces por segundo en nivel full)
-var _tick_timer: float = 0.0
-const TICK_INTERVAL_FULL: float = 0.5
-const TICK_INTERVAL_MEDIUM: float = 1.0
-const TICK_INTERVAL_LIGHT: float = 5.0
+const MAX_SIMULTANEOUS_SOCIALS: int = 3
+const SEPARATION_FORCE: float = 1.5
+const SEPARATION_RADIUS: float = 1.5
 
-## API pública
-func get_npc_id() -> StringName
-func initialize(npc_id: StringName, routine_data: Dictionary) -> void
-func get_current_state() -> StringName
-func get_simulation_level() -> String
-func set_simulation_level(level: String) -> void
-func navigate_to(target_pos: Vector3) -> void
-func on_arrived() -> void
-func is_at_destination() -> bool
+func _ready() -> void                    # Setup components, navigation, routine
+func _process(delta: float) -> void      # Update blackboard, FSM, needs
+func _select_social_partner(nearby: Array) -> StringName  # Job-matching priority
+func apply_separation(all_npcs: Array) -> Vector3         # Repulsion force
+func navigate_to(target: Vector3) -> void
+func check_routine_transition() -> Dictionary
 func get_save_data() -> Dictionary
-func load_save_data(data: Dictionary) -> void
+func restore_save_data(data: Dictionary) -> void
 
-# ---------- npc_manager.gd ----------
-extends Node
+# ---------- plan_stack.gd ----------
+class_name NPCPlanStack extends RefCounted
 
-## Señales
-signal npc_created(npc_id: StringName)
-signal npc_removed(npc_id: StringName)
+func push_plan(state: StringName, data: Dictionary, source: StringName) -> bool
+func pop_plan() -> Dictionary
+func peek_current() -> Dictionary
+func peek_previous() -> Dictionary
+func has_state(state: StringName) -> bool
+func clear_plans() -> void
+func to_dict() -> Dictionary             # Key: "stack"
+func from_dict(d: Dictionary) -> void
 
-## Burbujas de simulación
-const BUBBLE_FULL: float = 30.0
-const BUBBLE_MEDIUM: float = 60.0
-const BUBBLE_LIGHT: float = 100.0
+# ---------- npc_watchdog.gd ----------
+class_name NPCWatchdog extends Node
 
-func register_npc(agent: NPCAgent) -> void
-func unregister_npc(agent: NPCAgent) -> void
-func _update_simulation_levels() -> void
+func register_npc(npc_id: StringName) -> void
+func unregister_npc(npc_id: StringName) -> void
+func on_state_changed(npc_id: StringName, new_state: StringName) -> void
+func get_npc_state_info(npc_id: StringName) -> Dictionary
+func is_npc_registered(npc_id: StringName) -> bool
 
-# ---------- state_machine.gd ----------
-class_name NPCStateMachine
-extends Node
+# ---------- npc_needs.gd ----------
+class_name NPCNeeds extends RefCounted
 
-func transition_to(state_name: StringName, data: Dictionary = {}) -> void
-func get_current_state_name() -> StringName
-func set_simulation_level(level: String) -> void
+var hunger: float = 100.0
+var energy: float = 100.0
+var social: float = 50.0
+var mood: float = 75.0
+
+func set_config(cfg: Resource) -> void    # Config override (1-arg get)
+func update(delta: float) -> void         # Decrementa por tiempo
+func get_urgent_need() -> StringName      # &"hunger" / &"energy" / &"social" / &""
+func eat(amount: float = 30.0) -> void
+func sleep(amount: float = 40.0) -> void
+func socialize(amount: float = 20.0) -> void
+func to_dict() -> Dictionary
+func from_dict(d: Dictionary) -> void
+
+# ---------- npc_blackboard.gd ----------
+class_name NPCBlackboard extends RefCounted
+
+func set_value(key: StringName, value: Variant) -> void
+func get_value(key: StringName, default: Variant = null) -> Variant
+func has_value(key: StringName) -> bool
+func to_dict() -> Dictionary
+static func from_dict(d: Dictionary) -> NPCBlackboard
+
+# ---------- game_clock.gd (M29, autoload "GameTime") ----------
+# API disponible para M64:
+func pausa() -> void                     # Congela tiempo de juego
+func resume() -> void                    # Reanuda tiempo de juego
+func get_hora() -> int                   # 0-23
+func get_minuto() -> int                 # 0-59
+func es_de_dia() -> bool                 # 6 <= hora < 20
+func dia_absoluto() -> int               # Día monótono (para restocks)
+signal hora_cambio(hora: int)
+signal dia_cambio(info: Dictionary)
 ```
 
-## 3. Correcciones Aplicadas (MiMo V2.5)
+## 3. Correcciones Aplicadas
 
-| Fecha | Archivo | Corrección |
-|---|---|---|
-| 2026-09-01 | `npc_agent.gd` | Agregado `class_name NPCAgent` (faltaba — causaba "Could not find type NPCAgent") |
-| 2026-09-01 | `npc_agent.tscn` | Corregido `ExtResource("1")` reference (tenía id inconsistente) |
+| Fecha | Agente | Archivo | Corrección |
+|---|---|---|---|
+| 2026-09-01 | agnes-2.5-flash | `npc_agent.gd` | Agregado `class_name NPCAgent` |
+| 2026-09-01 | agnes-2.5-flash | `npc_agent.tscn` | Corregido ExtResource reference |
+| 2026-09-18 | mimo-v2.5 | `npc_needs.gd` | Fix `set_config()` — `Resource.get()` solo acepta 1 arg |
+| 2026-09-18 | mimo-v2.5 | `state_machine.gd` | Fix `is_fallback` — detecta estados no existentes (var `fell_back`) |
+| 2026-09-18 | mimo-v2.5 | `npc_agent.gd` | Added selectividad social, separación, MAX_SIMULTANEOUS_SOCIALS |
+| 2026-09-18 | mimo-v2.5 | `test_persistencia_m64.gd` | Fix `BBScript.from_dict()` (static) + `stack` key |
 
 ## 4. Logs Relacionados
 
-| Log | Contenido |
-|---|---|
-| — | Pendiente de log por agnes-2.5-flash |
+| Log | Agente | Contenido |
+|---|---|---|
+| 1040 | mimo-v2.5 | plan_stack.gd + npc_watchdog.gd + test_ia_npc_m64_iterN.gd (82/0) + fix is_fallback |
+| 1046 | mimo-v2.5 | 4 suites nuevas (60/0) + npc_needs_config + selectividad social + fix set_config |
 
-## 5. Notas del Agente
-
-**Modelo:** agnes-2.5-flash
-**Plataforma:** Kilo Code
-**Fecha:** 2026-09-01 04:47
-**Estado:** Implementación iter 1 completada (21 archivos creados)
+## 5. Notas del Agente (iter 1 — agnes-2.5-flash, 2026-09-01)
 
 ### Lo que hice
-- Creé 15 scripts GDScript en `scripts/ia_npc/` (npc_agent, npc_manager, npc_needs, npc_blackboard, state_machine, state, routine_player, + 8 estados)
-- Creé escena `scenes/npc/npc_agent.tscn`
-- FSM jerárquica con 8 estados (Idle, Movement, Work, Social, Eat, Sleep, React, Interact)
-- NPCManager autoload con burbujas de simulación (full/medium/light/sleep)
-- Sistema de necesidades (NPCNeeds)
-- Memoria compartida (NPCBlackboard)
-- Perfiles de rutina para 5 NPCs
+- 15 scripts GDScript, escena npc_agent.tscn, FSM con 8 estados
+- NPCManager autoload con burbujas de simulación
+- Sistema de necesidades, memoria compartida, perfiles de rutina
+
+## 6. Notas del Agente (iter 2 — mimo-v2.5, 2026-09-18)
+
+### Lo que hice
+- plan_stack.gd: pila de planes con recovery, MAX_DEPTH=8
+- npc_watchdog.gd: anti-atascos con per-state timeouts
+- 5 suites de testing (142 checks, 0 fallos)
+- npc_needs_config.gd/.tres: configuración de rates/thresholds
+- npc_agent.gd: selectividad social, separación, límites
+- state_machine.gd: fix is_fallback para estados no existentes
+- 03-Diseno.md: reescrito para reflejar implementación real
+- 04-Codigo.md: actualizado con archivos, firmas, correcciones
+- CI: 5 tests wired en quality.yml con gate duro
 
 ### Lo que NO pude hacer
-- No actualicé el plan-actual de documentación (pendiente)
-- No agregué nada a la guía GUIA-GODOT/ (pendiente)
-- No generé log en Logs/ (pendiente)
-
-### Fix aplicado por MiMo V2.5
-- Agregué `class_name NPCAgent` que faltaba en `npc_agent.gd`
-- Corregí `ExtResource` en `npc_agent.tscn`
+- GameClock pause: no integrado (pendiente)
+- Group C: no marqué [?] con owners (pendiente)
+- Runtime verification de social/rutina: requiere juego corriendo

@@ -3,15 +3,15 @@
 
 ## Reserva actual
 
-- Estado: 🟢 Liberado — iter. 3 lógica (interruptores, consejos, persistencia de pasos, feedback, edge cases) — reserva 2026-09-15 04:40, Log reservado 914 → **Log 914 emitido, cierre 2026-09-15**
-- Agente: glm-5.3-flash (Cline) — relevo de agnes-2.5-flash (sin actividad desde 2026-09-04, regla 21.4.7); iters previas respetadas: núcleo Deepseek (Log 259), triggers avanzados glm-5.3-flash (Log 336), iter. triggers RF20/RF19 (Log 911)
+- Estado: 🟢 Liberado — **iter. 4** (Q5 guiones .tres + Q2/Q7 hot path + R1/R3/R5/R6 espejo) — reserva 2026-09-17 02:55, Log reservado 987 → **Log 987 emitido, cierre 2026-09-17 03:05**
+- Agente: glm-5.3-flash (Cline) — continuando tras su propia iter. 3 (Log 914); núcleo Deepseek (Log 259) y iters 336/911 respetados
 - Fase: 8 (Vertical slice / Onboarding)
-- Dificultad: 3
-- Visión: V0 (lógica); UI de pistas/burbujas es V2 (M53)
-- Entrada: núcleo Log 259 + triggers Log 336 + RF20/RF19 Log 911; M53 core ✅; M70 mockeable
-- Salida iter. 3: interruptores RF9 independientes (pistas/prólogo/consejos) + consejos RF6 (una vez, cooldown 90 s, contextos, no en diálogo) + contexto T-016 + pasos/persistencia P4 + skip RF7/S5 + re-play RF8/S6 + objetivo destruido P5 + mundo inactivo P6 + diálogo P7 + feedback RF24/P15 (no modal, persiste antes de emitir) + ícono InputMap en vivo P8/P9 + pistas RF4/S8 (máx. 2, expiración P2, posponer P13/P14). **103 checks en test_tutorial_iter3.gd; 3 suites: 0 fallos (196 checks)**
-- Archivos: `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial_iter3.gd` (nuevo), `scripts/tutorial/test_tutorial_triggers.gd`, `scripts/run_m92_tests.bat` (nuevo, corredor de las 3 suites), docs del módulo
-- Fecha cierre: 2026-09-15 (Log 914)
+- Dificultad: 2
+- Visión: V0 (lógica/documental); UI de pistas/burbujas es V2 (M53)
+- Entrada: iter. 3 (Log 914) — manager con interruptores/consejos/contexto/persistencia/feedback; M53 core ✅
+- Salida: `tutorial_guiones.gd` + `data/tutorial/guiones_base.tres` (4 capítulos base serializados) con fallback por código (Q5) + early-return de proximidad sin triggers (Q2/Q7) + `test_tutorial_iter4.gd` (**21 checks**) + 03-Diseno al día. **4 suites: 0 fallos (217 checks)**
+- Archivos: `scripts/tutorial/tutorial_guiones.gd` (nuevo), `data/tutorial/guiones_base.tres` (nuevo), `scripts/tutorial/tutorial_manager.gd`, `scripts/tutorial/test_tutorial_iter4.gd` (nuevo), `scripts/run_m92_tests.bat`, docs del módulo
+- Fecha cierre: 2026-09-17 03:05 (Log 987)
 
 # 05-Checklist.md — Módulo 92: Tutorial
 
@@ -229,22 +229,22 @@
 ## Q. Optimización (8)
 
 - [ ] Q1: pool de burbujas con máx. 2 nodos UI vivos (reutilización, sin instanciado por pista) [M]
-- [ ] Q2: la lógica de triggers se evalúa solo ante señales o entrada, nunca por polling innecesario [M]
+- [x] Q2: la lógica de triggers se evalúa solo ante señales o entrada, nunca por polling innecesario [M]
 - [x] Q3: el trigger de mundo usa distancia al cuadrado (sin sqrt) [S] → `distance_squared_to()` + radio² (Log 911)
 - [x] Q4: las condiciones de contexto son funciones baratas (< 1 µs cada una) [S]
-- [ ] Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
+- [x] Q5: los guiones serializados en Resources (sin parseo en runtime) [S]
 - [x] Q6: el consejo de contexto "caminata larga" usa un contador de tiempo sin física extra [S]
-- [ ] Q7: no hay alocaciones por frame en la ruta crítica (buffers reutilizados) [M]
+- [x] Q7: no hay alocaciones por frame en la ruta crítica (buffers reutilizados) [M]
 - [ ] Q8: profiler: verificar ≤ 0.2 ms en la zona de la plaza con NPCs y cultivos [M]
 
 ## R. Documentación (7)
 
-- [ ] R1: 01-Requerimientos.md con RF1-RF25 y RN1-RN12 [S]
+- [x] R1: 01-Requerimientos.md con RF1-RF25 y RN1-RN12 [S]
 - [x] R2: 02-Analisis.md con tipos de tutorial, onboarding cozy y decisión A4 [S]
-- [ ] R3: 03-Diseno.md con arquitectura, flujos y estados [S]
+- [x] R3: 03-Diseno.md con arquitectura, flujos y estados [S]
 - [x] R4: 04-Codigo.md con archivos previstos (Pendiente de implementación) y firmas GDScript [S]
-- [ ] R5: 05-Checklist.md con ítems numerables y marcadores de esfuerzo [S]
-- [ ] R6: plan-actual creado como espejo idéntico de plan-inicial [S]
+- [x] R5: 05-Checklist.md con ítems numerables y marcadores de esfuerzo [S]
+- [x] R6: plan-actual creado como espejo idéntico de plan-inicial [S]
 - [x] R7: al implementar: log en Logs/, plan-actual actualizado y CHECKLIST-GLOBAL.md con progreso del 92 [M]
 
 ## S. Testings (12)
@@ -265,3 +265,9 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+
+**Totales:** 185 ítems · Completados: 97 · Pendientes: 87 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 97 [x] / 87 [ ] /
+> 1 [?]. Las marcas no se tocaron.

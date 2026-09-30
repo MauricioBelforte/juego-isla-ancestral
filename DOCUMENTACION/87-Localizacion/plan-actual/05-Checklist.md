@@ -103,10 +103,10 @@
 - [x] Integrar M21: manejar el cambio de idioma con un diálogo activo [M]
 - [x] Integrar M44: subtítulos mostrados en el idioma activo [M]
 - [x] Integrar M44: subtítulos independientes del idioma (atributo aparte en settings) [S]
-- [?] Integrar M53: labels de UI usando tr_key en vez de texto estático [M] -- **M53**. iter. 6: el mecanismo de M87 está provisto y probado — un nodo declara su clave con `set_meta("text_key", "HUD.ENERGIA")` y `RetraductorUI` la resuelve (bloques H e I). Falta que la UI de M53 adopte el metadato en sus labels.
+- [x] Integrar M53: labels de UI usando tr_key en vez de texto estático [M] -- **M53** (Log 1118, agnes-3-flash/Kilo Code 2026-09-20): M53 adoptó el metadato vía `UiI18n` (`scripts/ui/i18n/ui_i18n.gd`): `equipment_layer` (título/catálogo/hint con `text_key` + dinámicos re-generados en `locale_changed`), `equipment_ui` (EQUIP.VACIO) e `interact_prompt` (UI.INTERACTUAR). `UIManager._on_locale_changed_ui` dispara `RetraductorUI.retraducir` sobre capas montadas + HUD al cambiar de idioma. Test headless `test_ui_i18n_m53.gd` 39/0 (incluye re-traducción en vivo de capa registrada en→es). Claves EQUIP.*/UI.INTERACTUAR agregadas a es.po/en.po (validador PO M87 0 fallos).
 - [x] Integrar M53: dropdown de idioma en la pantalla de configuración [M]
 - [x] Integrar M53: re-traducción de la UI completa al emitir locale_changed [M]
-- [?] Integrar M53: tooltips y descripciones traducidos [S] -- **M53**. iter. 6: `RetraductorUI` ya soporta la propiedad `tooltip_text` vía el metadato `tooltip_text_key` (misma ruta que `text`), probado en el recorrido del árbol. Falta la adopción del metadato en los widgets de M53.
+- [x] Integrar M53: tooltips y descripciones traducidos [S] -- **M53** (Log 1118, agnes-3-flash/Kilo Code 2026-09-20): `TooltipService` adopta el metadato — `show_tooltip_key(clave, at, params)` resuelve vía M87 al mostrarse y guarda la clave para re-traducir el tooltip VISIBLE en vivo al cambiar de idioma (`locale_changed`); `UiI18n.meta_tooltip` declara el metadato; `UIManager._on_focus_moved_tooltip` prioriza `tooltip_text_key` sobre `tooltip_text` estático. Test `test_ui_i18n_m53.gd` 39/0 (tooltip por clave resuelto es + re-traducido a en en vivo).
 - [x] Integrar M88: verificar cobertura de caracteres es/en en las fuentes [M] — glm-5.3-flash 2026-09-02 (iter. 3, Log 488): validar_cobertura_idiomas() en FontCatalog (testeado es/en/ru)
 - [x] Integrar M88: FontLoader selecciona fuente según el idioma activo [S] — fuente_para_idioma(locale) en FontCatalog (testeado es→texto_cozy)
 - [?] Integrar M58: el tamaño de texto ajustable no rompe la traducción [M] -- **M53**. iter. 6: el análisis responde a la escala de forma monótona (bloque K: desbordan 0 a 12 px, 63 a 16 px, 97 a 24 px), así que la herramienta para validarlo existe y está probada; lo que falta es que los layouts de M53 absorban esos tres casos.
@@ -337,3 +337,14 @@ apareció. Se endureció el gate de M87 (patrón acumulativo) junto con el resto
 ### Reporte sin parchear (ajeno)
 14 gates de otros módulos siguen con `|| true`; 2 de ellos son comandos **inválidos**
 (`--script` sin ruta, L33; `--check-only` sin ruta, L83). No se tocaron: no es decisión de M87.
+
+**Totales:** 136 ítems · Completados: 131 · Pendientes: 0 · No resueltos: 5.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 0 [ ] /
+> 7 [?]. Las marcas no se tocaron.
+
+> **Actualización agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** los 2 ítems
+> "Integrar M53" (labels tr_key + tooltips traducidos) pasaron `[?]`→`[x]` con la
+> adopción M53 documentada en cada línea (UiI18n + metadatos + test 39/0).
+> Conteo real actual: 131 [x] / 0 [ ] / 5 [?].

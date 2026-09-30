@@ -297,7 +297,11 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 
 - Checklist original: **139** ítems → `[x]` 78 · `[?]` 8 · `[ ]` 52 · `[!]` 1
 - Ítems nuevos de esta sección: **10** (todos `[x]`)
-- **Total del archivo: 149 ítems → `[x]` 88 · `[?]` 8 · `[ ]` 52 · `[!]` 1**
+- **Total del archivo (número histórico al cierre de iter. 5): 149 ítems → `[x]` 88 · `[?]` 8 · `[ ]` 52 · `[!]` 1**
+- **Corrección de totales (agnes-3-flash, 2026-09-19, Log 1052 — lección 24):** el recuento de arriba quedó
+  obsoleto tras la iter. 6. **Conteo real actual del archivo: 149 líneas → `[x]` 137 · `[ ]` 10 · `[?]` 1 ·
+  `[!]` 1.** La fila global (137/148) coincide con el `[x]` real (el `/148` descuenta la línea `[!]`
+  no-marca). El `[?]` restante es "Catálogo VFX por evento" (sección "Faltantes").
 
 ## QA visual V2-asistencia (agnes-3-flash / Sapiens AI / Kilo Code, 2026-09-16 — visión nativa)
 
@@ -348,3 +352,31 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 - **M52 iter. 6 CUMPLE §21.8** (verificador ≠ autor, re-grounding + headless). ✅
 - **Queda (no bloquea el ✅ de iter. 6):** los 10 `[ ]` de diseño/dueño + validación runtime perf de
   turbulencia (M61/load-test V2) + los `[ ]` visuales de M45/M47.
+
+## QA visual V2-asistencia — verificación de la calibración post-iteración 6 (agnes-3-flash / Sapiens AI / Kilo Code, 2026-09-19, Log 1052)
+
+> Log 882 dejó la **calibración visual "no verificada"** (solo tests headless). Esta sección la
+> cierra con evidencia V4 real: nueva escena de preview `scenes/preview_vfx_m52.tscn` +
+> `scripts/particles/preview_vfx_m52.gd` que dispara 6 eventos del catálogo a través del
+> VfxDirector (pool iter. 5/6) y captura in-engine.
+
+- **Captura:** `tools/mcp/godot-mcp/capturas/52-Particulas-Y-VFX/cap_52M-CalibracionVisual_post-iter6_2026-09-19_03-03-38.png`
+  (V4, godot-mcp run_project + screen capture, 2026-09-19 03:03 local).
+- **Hallazgo 1 (cableado de disparos):** la primera corrida usó los `id` del catálogo (`vfx_polen`...)
+  y los 6 disparos **fallaron** — VfxDirector keya por el campo **`evento`** (trigger: `primavera_inicio`,
+  `fuego_encendido`, ...), no por `id`. Corregido: **6/6 disparos OK** (labels verdes en la captura).
+  Es decir: el catálogo + pool + triggers funcionan in-engine post-iteración 6.
+- **Hallazgo 2 (calibración visual):** la emisión actual es **muy sutil**: a resolución normal de
+  ventana (~936×556) las partículas (polen 150, confeti 120, magia 50) se leen como puntos tenues
+  apenas visibles sobre el fondo oscuro; sin artefactos (ningún quad gigante, pop-in, overdraw o
+  z-fighting visibles). La calibración es **baja/deliberada** — si el objetivo es un VFX "que se ve",
+  el parámetro a tocar es `cantidad`/`emision` del catálogo por evento (decisión de diseño del usuario,
+  M154). Mi lectura V2-asistencia: **funciona y es limpio; la densidad es una elección pendiente**.
+- **No apruebo estéticamente** (M154 = usuario); esta sección documenta el estado medido, no un
+  veredicto de "queda bien".
+
+**Totales:** 148 ítems · Completados: 137 · Pendientes: 10 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 137 [x] / 10 [ ] /
+> 1 [?]. Las marcas no se tocaron.

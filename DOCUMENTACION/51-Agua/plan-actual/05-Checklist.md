@@ -288,3 +288,27 @@
 - [x] Verificación visual: orilla limpia + espuma pegada a la arena + mar azul (capturas/51/shorefade_azul.png), FPS 60 [S] — Log 750
 - [x] Herramienta reutilizable: medir_costa_m51.gd (escaneo radial de costa con TerrainLocator) [S] — Log 750
 - [ ] Confirmación estética final del usuario [S]
+
+## Triage V-6/V-7 de Log 1035 — duplicado de issues documentados (agnes-3-flash / Kilo Code, 2026-09-19, Log 1051)
+
+- **V-6 (shore-fade "enmascara demasiada arena") = DUPLICADO, no bug nuevo:** coincide con
+  (a) KnownIssues de M167-Isla-Raiz "shore-fade enmascara demasiada arena (M51 QA, Log 767,
+  2026-09-07)" y (b) el ítem abierto de esta propia checklist `[ ] Confirmación estética final
+  del usuario` (iter. 5, Log 750, 2026-09-06 18:23). Mi captura `shorefade_azul` (18:22, Log
+  1035) es del minuto anterior al release de iter. 5: documenta el estado que iter. 5 corrige
+  (fade por profundidad de pantalla, "Arena seca: alpha 0"). **No abro bug nuevo; la decisión
+  de "demasiada arena" es la confirmación estética del usuario (M154), ítem `[ ]` pendiente.**
+- **V-7 (banda de espuma blanca de borde duro, "olas estáticas") = captururas PRE-iteración-5:**
+  `cap_51_2026-09-06_16-23-25_agua_olas_v1.png` (16:23) es de iter. 3; iter. 5 (18:23) cambió
+  el borde a "banda de espuma pulsante (sin TIME*1.6 + olas) = vaivén natural". En una
+  captura estática el pulso se ve "fijo" — efecto esperado de fotografiar un bucle, no bug.
+  La observación de "palmeras flotando en la banda blanca" = tinte somero turquesa (iter. 5)
+  ocultando la base del tronco: es el look declarado de marea somera; si al usuario no le
+  convence, entra en la misma confirmación estética `[ ]`. **Clasificado: duplicado/obsoleto,
+  sin bug nuevo.**
+
+**Totales:** 166 ítems · Completados: 35 · Pendientes: 130 · No resueltos: 1.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 35 [x] / 130 [ ] /
+> 1 [?]. Las marcas no se tocaron.

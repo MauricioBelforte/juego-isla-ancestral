@@ -1,218 +1,177 @@
 **Modelo:** MiMo V2.5
 **Plataforma:** OpenCode
+**Última actualización:** 2026-09-18
 
 # 03-Diseno.md — Módulo 64: IA de NPC
 
 ## 1. Arquitectura del Sistema
 
-### 1.1 Componentes Principales
+### 1.1 Componentes Principales (implementados)
 
 ```
-NPCIAController (Componente en cada NPC)
-├── HFSM (Máquina de estados jerárquica)
-│   ├── Root State
-│   │   ├── IdleState
-│   │   │   ├── IdleWait (esperando en posición)
-│   │   │   ├── IdleLook (mirando alrededor)
-│   │   │   └── IdleFidget (movimiento idle: rascarse, estirarse)
-│   │   ├── MovementState
-│   │   │   ├── WalkTo (caminando a destino)
-│   │   │   ├── RunTo (corriendo, si hay prisa)
-│   │   │   ├── Avoid (esquivando NPC/obstáculo)
-│   │   │   └── Wander (deambulando sin destino fijo)
-│   │   ├── WorkState
-│   │   │   ├── WorkAnimate (animación de trabajo)
-│   │   │   ├── WorkPause (pausa breve en trabajo)
-│   │   │   └── WorkComplete (trabajo terminado)
-│   │   ├── SocialState
-│   │   │   ├── Greet (saludo breve)
-│   │   │   ├── Chat (charla con otro NPC)
-│   │   │   └── GroupChat (conversación grupal)
-│   │   ├── EatState
-│   │   │   ├── GoToEat (ir a comer)
-│   │   │   ├── Eating (comiendo)
-│   │   │   └── LeaveEat (terminar de comer)
-│   │   ├── SleepState
-│   │   │   ├── GoToSleep (ir a dormir)
-│   │   │   ├── Sleeping (durmiendo)
-│   │   │   └── WakeUp (despertar)
-│   │   ├── ReactState
-│   │   │   ├── ReactRain (refugiarse por lluvia)
-│   │   │   ├── ReactEvent (ir a evento)
-│   │   │   ├── ReactPlayer (reaccionar al jugador)
-│   │   │   └── ReactDanger (evitar zona peligrosa)
-│   │   └── InteractState
-│   │       ├── TalkToPlayer (hablando con jugador)
-│   │       ├── GiveGift (recibiendo regalo)
-│   │       └── Trade (comerciando)
-│   ├── RoutineSystem (agenda diaria)
-│   ├── NeedsSystem (hambre, energía, social)
-│   └── Blackboard (datos compartidos)
+NPCAgent (CharacterBody3D, por cada NPC)
+├── NPCStateMachine (Node, FSM plana)
+│   ├── IdleState        — Espera, mira alrededor, rutina
+│   ├── MovementState    — Pathfinding con NavigationAgent3D
+│   ├── WorkState        — Trabajo según profession
+│   ├── SocialState      — Greet/Chat/GroupChat
+│   ├── EatState         — GoToEat/Eating/LeaveEat
+│   ├── SleepState       — GoToSleep/Sleeping/WakeUp
+│   ├── ReactState       — ReactRain/ReactEvent/ReactPlayer/ReactDanger
+│   └── InteractState    — TalkToPlayer/GiveGift/Trade
+├── NPCPlanStack (RefCounted, pila de planes)
+│   └── Push/Pop/Peek + recovery a Idle + MAX_DEPTH=8
+├── NPCWatchdog (Node, anti-atascos)
+│   └── Per-state timeouts + transition burst detection
+├── RoutinePlayer (Node, agenda diaria)
+│   └── Lee VillagerProfile.rutina_diaria (Dictionary)
+├── NPCNeeds (RefCounted, hambre/energía/social/mood)
+│   └── Configurable via npc_needs_config.tres
+├── NPCBlackboard (RefCounted, datos compartidos)
+│   └── player_position, is_raining, is_night, nearby_npcs, etc.
 ├── NavigationAgent3D (pathfinding)
-├── AnimationController (animator)
-└── AudioController (sonidos ambientales del NPC)
+└── NPCBudgetRegistry (en NPCManager, 32MB global)
 ```
 
-### 1.2 Definición de Rutina
+### 1.2 FSM — Flujo de Control
 
-Cada NPC tiene una `RoutineDefinition` (Resource `.tres`):
+El FSM es **plano** (no jerárquico). Cada estado tiene `enter()`, `exit()`, `update(delta)`, `tick(delta)`. La pila de planes (`NPCPlanStack`) permite recordar el estado anterior y hacer fallback:
+
+```
+Estado actual falla → pop plan → recuperar estado anterior → o Idle
+```
+
+El `NPCWatchdog` monitorea cada NPC con timeouts por estado:
+- Movement > 30s → stuck (pathfinding roto)
+- Work > 120s → warning
+- Social > 90s → stuck
+- Eat > 60s → warning
+- Idle > 60s → posible fallo de rutina
+- Más de 10 transiciones en 5s → bucle detectado
+
+### 1.3 Rutinas
+
+Las rutinas se almacenan en `VillagerProfile.rutina_diaria` como **Dictionary** (no como Resource separado):
 
 ```gdscript
-class_name RoutineDefinition
-extends Resource
-
-@export var npc_id: StringName
-@export var routine_slots: Array[RoutineSlot] = []
-
-# Ejemplo de routine_slots:
-# [
-#   {hour: 6, minute: 0, action: "wake_up", location: "casa"},
-#   {hour: 7, minute: 0, action: "go_to_work", location: "herreria"},
-#   {hour: 7, minute: 30, action: "work", location: "herreria"},
-#   {hour: 12, minute: 0, action: "go_to_eat", location: "casa"},
-#   {hour: 12, minute: 30, action: "eat", location: "casa"},
-#   {hour: 13, minute: 0, action: "go_to_work", location: "herreria"},
-#   {hour: 18, minute: 0, action: "go_home", location: "casa"},
-#   {hour: 18, minute: 30, action: "free_time", location: "pueblo"},
-#   {hour: 22, minute: 0, action: "go_to_sleep", location: "casa"},
-#   {hour: 22, minute: 30, action: "sleep", location: "casa"},
-# ]
-
-class_name RoutineSlot
-extends Resource
-
-@export var hour: int
-@export var minute: int
-@export var action: StringName
-@export var location: StringName
-@export var duration_minutes: int = 30
-@export var optional: bool = False  # Si es True, el NPC puede ignorarlo
+# VillagerProfile.rutina_diaria:
+{
+    "06:00": "despertar",
+    "07:00": "ir_a_trabajar",
+    "07:30": "trabajar",
+    "12:00": "comer",
+    "13:00": "trabajar",
+    "18:00": "ir_a_casa",
+    "18:30": "socializar",
+    "22:00": "dormir"
+}
 ```
 
-### 1.3 Sistema de Necesidades
+`RoutinePlayer.get_next_action()` compara hora:minuto actual con las keys del Dictionary. No hay randomización ±15min (pendiente).
 
-```gdscript
-class_name NPCNeeds
-extends RefCounted
+### 1.4 Necesidades
 
-var hunger: float = 100.0    # 0-100, baja al pasar el tiempo
-var energy: float = 100.0    # 0-100, baja con actividades
-var social: float = 50.0     # 0-100, baja sin interacción social
-var mood: float = 75.0       # 0-100, afecta diálogos
+Cuatro barras 0-100 con prioridad: `hunger > energy > social`. Cuando una cae bajo el umbral, se emite `need_urgent` y el FSM transiciona al estado correspondiente.
 
-func _process(delta: float) -> void:
-    hunger -= delta * 0.5     # Pierde 0.5 por segundo de juego
-    energy -= delta * 0.3
-    social -= delta * 0.1
-    
-    # Prioridades
-    if hunger < 20: return "need_eat"
-    if energy < 15: return "need_sleep"
-    if social < 20: return "need_socialize"
-    return "ok"
-```
+**Configuración configurable** (`npc_needs_config.tres`):
+
+| Parámetro | Default | Descripción |
+|-----------|---------|-------------|
+| hunger_rate | 1.0 | Decremento por segundo |
+| energy_rate | 0.5 | Decremento por segundo |
+| social_rate | 0.3 | Decremento por segundo |
+| hunger_urgency | 20.0 | Umbral de urgencia |
+| energy_urgency | 15.0 | Umbral de urgencia |
+| social_urgency | 20.0 | Umbral de urgencia |
+
+### 1.5 Navegación
+
+- **NavigationAgent3D** integrado en cada NPCAgent
+- `path_desired_distance = 1.0`, `target_desired_distance = 0.5`, `radius = 0.4`
+- Anti-atasco: stuck detection > 2s, respawn de emergencia > 10s
+- **Separación entre NPCs**: `SEPARATION_FORCE=1.5`, `SEPARATION_RADIUS=1.5`
+- Límite: 60 paths simultáneos
+
+### 1.6 Social
+
+- **Selectividad**: prioriza NPCs con mismo trabajo (`_select_social_partner()`)
+- **Límite**: `MAX_SIMULTANEOUS_SOCIALS=3`
+- Saludo breve 2-3s, charla > 30s, conversación grupal 3+ NPCs
+
+### 1.7 Reacciones Ambientales
+
+| Condición | Reacción | Estado |
+|-----------|----------|--------|
+| Lluvia | Buscar refugio | ✅ |
+| Tormenta | Volver a casa | ✅ |
+| Noche > 22:00 | Dormir | ✅ |
+| Evento/festival | Ir al lugar | ✅ |
+| Jugador pasa | Mirar, comentario | ✅ |
+| Recurso agotado | Comentario | [?] pendiente M17 |
+| Construcción nearby | Mirar, comentar | [?] pendiente M17 |
 
 ## 2. Transiciones de Estado
 
-### 2.1 Reglas de Transición
+### 2.1 Reglas Implementadas
 
 | Desde | Hacia | Condición |
 |-------|-------|-----------|
-| Idle | Movement | La rutina dice que debería estar en otro lugar |
-| Idle | Work | Es hora de trabajar |
-| Idle | Sleep | Es hora de dormir |
-| Idle | React | Lluvia, evento, peligro |
-| Movement | Work | Llegó al destino de trabajo |
-| Movement | Eat | Llegó al destino de comida |
-| Movement | Sleep | Llegó a la cama |
-| Movement | Idle | No hay más acciones en la rutina |
-| Work | Social | Pausa de trabajo + NPC cercano |
+| Idle | Movement | Rutina dice ir a otro lugar |
+| Idle | Eat/Sleep | Necesidad urgente |
+| Idle | Social | Necesidad social + NPC cercano |
+| Movement | Work/Eat/Sleep | Llegó al destino |
 | Work | Eat | Hora de comer |
 | Work | Idle | Jornada terminada |
-| Social | Work | Fin de la pausa |
-| Social | Idle | No hay más acciones sociales |
-| Eat | Work | Comida terminada |
-| Eat | Sleep | Es noche |
-| Sleep | Idle | Despertar (hora de la rutina) |
 | Cualquiera | React | Evento urgente (lluvia, festival) |
-| React | Estado anterior | Evento terminado |
+| Cualquiera | Sleep | Energy urgente |
+| Cualquiera | Eat | Hunger urgente |
+| React → anterior | — | Evento terminado, pop del plan_stack |
 
 ### 2.2 Prioridad de Transiciones
 
-1. **Urgente (interrumpe todo):** Lluvia intensa, evento de festival, peligro
-2. **Alta (interrumpe si es necesario):** Hora de dormir, hora de comer
-3. **Media (sigue la rutina):** Ir a trabajar, ir a socializar
-4. **Baja (idle):** Mirar alrededor, fidget, deambular
+1. **Urgente**: Lluvia, tormenta, festival, peligro → interrumpe todo
+2. **Alta**: Hunger/energy urgente → transición inmediata
+3. **Media**: Rutina (hora de trabajar, comer) → sigue agenda
+4. **Baja**: Idle, mirar alrededor → solo si no hay nada mejor
 
-## 3. Navegación y Pathfinding
+### 2.3 Fallback y Recovery
 
-### 3.1 Configuración de NavigationServer3D
+Cuando un estado falla o el target no existe:
+1. `state_machine.gd` detecta con `is_fallback` (variable `fell_back`)
+2. Hace pop del plan_stack
+3. Si el stack tiene un plan previo → recuperar ese estado
+4. Si no → transicionar a Idle
+5. `clear_plans()` resetea la pila completa
+
+## 3. GameClock Integration (M29)
+
+El FSM se pausa/resume con `GameTime.pausa()` / `GameTime.resume()`:
 
 ```gdscript
-# En el NPC
-@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+# En NPCAgent o NPCManager:
+func pause_ai() -> void:
+    var gt = get_node_or_null("/root/GameTime")
+    if gt != null:
+        gt.pausa()
+    # El FSM deja de hacer update() en _process
 
-func _ready():
-    nav_agent.path_desired_distance = 1.0
-    nav_agent.target_desired_distance = 0.5
-    nav_agent.radius = 0.4  # Radio del NPC
-
-func navigate_to(target_pos: Vector3) -> void:
-    nav_agent.target_position = target_pos
-    # El pathfinding se procesa en el siguiente frame
-
-func _physics_process(delta):
-    if nav_agent.is_navigation_finished():
-        return
-    
-    var next_pos = nav_agent.get_next_path_position()
-    var direction = (next_pos - global_position).normalized()
-    velocity = direction * move_speed
-    move_and_slide()
+func resume_ai() -> void:
+    var gt = get_node_or_null("/root/GameTime")
+    if gt != null:
+        gt.resume()
 ```
 
-### 3.2 Anti-Atascos
+GameClock (`GameTime` autoload):
+- `_pausado = true` → `_process()` retorna sin avanzar tiempo
+- `pausa()` / `resume()` son las API públicas
+- `dia_cambio` signal → conectable para reset de rutinas diarias
+- `hora_cambio` signal → conectable para rutinas por hora
+- 1s real = 1 min de juego, día = 24 min reales
 
-| Mecánica | Implementación |
-|----------|---------------|
-| Detección de stuck | Si no se mueve > 2 s intentando llegar → recalcula path |
-| Desvío de obstáculos | Si chocó con otro NPC → buscar punto alternativo cercano |
-| Separación | Fuerza de separación entre NPCs (evitar superposición) |
-| Respawn de emergencia | Si lleva > 10 s atascado → teletransportar a destino más cercano |
-| Límite de agentes | Máximo 60 paths simultáneos; el resto espera |
+## 4. Persistencia
 
-## 4. Comportamiento Social
-
-### 4.1 Reglas de Socialización
-
-| Evento | Acción | Duración |
-|--------|--------|----------|
-| Dos NPCs se cruzan | Saludo breve (asentir, grito) | 2-3 s |
-| Dos NPCs están cerca > 30 s | Iniciar charla | 30-60 s |
-| 3+ NPCs en zona social | Conversación grupal | 60-120 s |
-| Jugador se acerca a NPC trabajando | Saludo rápido, continúa trabajando | 5 s |
-| Jugador habla con NPC | Entrar en estado Interact | Variable |
-
-### 4.2 Selectividad Social
-
-Los NPCs no socializan con todos por igual:
-
-| Condición | Probabilidad de socializar |
-|-----------|---------------------------|
-| Mismo trabajo | +30% |
-| Vecinos de casa | +20% |
-| Amistad alta (M20) | +40% |
-| Mismo género | +10% |
-| Sin relación | Base (50%) |
-
-## 5. Reacciones Ambientales
-
-| Condición | Reacción |
-|-----------|----------|
-| Lluvia | Buscar refugio (techo cercano) |
-| Tormenta | Volver a casa inmediatamente |
-| Noche (> 22:00) | Volver a dormir |
-| Evento/festival | Ir al lugar del evento |
-| Construction nearby (M17) | Mirar la construcción, comentar |
-| Jugador pasa corriendo | Mirar al jugador, comentario rápido |
-| Recurso agotado cerca | Comentario sobre el recurso |
+NPCAgent expone `get_save_data()` / `restore_save_data()`:
+- Serializa: npc_id, state, needs (to_dict), sim_level
+- NPCBlackboard: `to_dict()` / `from_dict()` (static)
+- NPCPlanStack: `to_dict()` / `from_dict()` con key `"stack"`
+- NPCNeeds: `to_dict()` / `from_dict()` con keys hunger/energy/social/mood

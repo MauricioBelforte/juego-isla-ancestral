@@ -1,87 +1,112 @@
-**Modelo:** MiMo V2.5
+**Modelo:** mimo-v2.5
 **Plataforma:** OpenCode
+**Última actualización:** 2026-09-18 (FASE 2 — arquitectura hybrid)
 
 # 03-Diseno.md — Módulo 12: Cámara
 
-## 0. Referencia visual: Animal Crossing
+## 0. Arquitectura (decisión 2026-09-18)
 
-> **Estilo de cámara: Animal Crossing / Stardew Valley / Zelda: Link's Awakening DX**
->
-> - Cámara fija en ángulo desde arriba (~50° pitch)
-> - La cámara **SIGUE** al jugador pero **NO ROTA** con el mouse
-> - El jugador se mueve relativo a la pantalla (arriba = alejarse, abajo = acercarse)
-> - Vista cenital con ángulo, NO vista tras el hombro
-> - El mundo se ve desde arriba, como un diorama
+### Cámara canónica: `follow_camera.gd` (109+ líneas)
 
-## 1. Modos de cámara (enum)
+La cámara que **realmente ejecuta** el juego es `scripts/follow_camera.gd`, instanciada en `main_island.tscn:70-73`. Esta fue la decisión de diseño:
 
-| Modo | Activo en | Comportamiento |
+- **§15 "no tocar lo que funciona":** follow_camera.gd funciona, player.gd consume sus APIs (`get_camera_forward_xz`, `get_camera_right_xz`).
+- **Código muerto:** `camera_rig.gd` (267 líneas) + `camera_spring.gd` + `camera_mode.gd` + `simple_camera.gd` existen pero **nunca se instancian** en la escena principal. Solo `main.gd` (legacy) los usa.
+- **Estrategia hybrid:** Features útiles de camera_rig (FOV, shake, fade, modos) fueron **portadas** a follow_camera.gd.
+
+### Archivos del módulo
+
+| Archivo | Estado | Función |
 |---|---|---|
-| `Explore` | Juego normal | Ángulo fijo ~50° sobre el jugador, sigue al pivot, sin rotación libre |
-| `Build` | Modo construir (M17) | Aérea 45°, distancia 12 m, zoom extendido |
-| `Dialog` | Diálogos/NPC (M21) | Encuadre de escena fijo, input bloqueado |
-| `Cutscene` | Eventos de historia (M22/M26) | Planos fijos con fade |
-| `Minimap` | Vista de supervisor | Textura top-down 2D (no render) |
+| `scripts/follow_camera.gd` | **CANÓNICO** | Cámara principal: orbit, zoom, colisión, shake, fade, modos |
+| `scripts/camera/camera_rig.gd` | ⚠️ DEPRECATED | Código muerto — referencia histórica |
+| `scripts/camera/camera_spring.gd` | ⚠️ DEPRECATED | Código muerto — spring-arm duplicado |
+| `scripts/camera/camera_mode.gd` | ⚠️ DEPRECATED | Código muerto — enum + constants (útil como referencia) |
+| `scripts/camera/simple_camera.gd` | ⚠️ DEPRECATED | Código muerto — alternativa no usada |
 
-**Reglas de activación:**
-- Explore = base; Build solo con herramienta de construcción equipada y modo activo; al desequipar → Explore.
-- Dialog/Cutscene nunca controlables por el jugador (input bloqueado a cámara).
-- Minimap sobre todo, cerrable (M y Esc), con marcadores de POI (M71).
-
-## 2. Spring-arm con colisión (especificación)
+## 1. Modos de cámara (enum en follow_camera.gd)
 
 ```
-PIVOT = player pivot (M11)  →  brazo de 5 m (default)
-Dirección: pitch = 50° fijo (desde horizontal); yaw = fijo (la cámara NO rota)
-Raycast (physics layer: bloques) desde PIVOT a la cámara:
-  si colisiona → cámara = punto de impacto − 0.8 m (separación mínima, nunca dentro de bloque)
-  lerp de retorno: 0.15 s (suave, sin rebotes)
-Distancia tras colisión: respetar zoom chosen si permite 0.8 m de separación línea de vista
+enum ModoCamara { EXPLORE, BUILD, DIALOG, CUTSCENE, MINIMAP }
 ```
 
-- El raycast ignora al jugador y a los decorativos no sólidos (M50).
-- En interiores (región 'interior', M24): distancia máxima 2.2 m y zoom bloqueado a cercano.
+| Modo | Estado | Comportamiento |
+|---|---|---|
+| `EXPLORE` | ✅ Activo | Modo base: orbit libre, zoom scroll, colisión terreno |
+| `BUILD` | [?] Pendiente M17 | Aérea 45°, distancia 12 m, solo con herramienta equipada |
+| `DIALOG` | [?] Pendiente M21 | Encuadre fijo, input bloqueado |
+| `CUTSCENE` | [?] Pendiente M22/M26 | Planos fijos con fade |
+| `MINIMAP` | [?] Pendiente M10 | Vista supervisor 2D |
 
-## 3. Comportamiento transversal
+**Señales:** `mode_changed(new_mode)`, `shake_finished()`, `transition_finished()`
 
-- **FOV:** 70° en todos los modos; sin cambio dinámico.
-- **Pitch fijo:** ~50° sobre horizontal (vista cenital con ángulo). No se ajusta con mouse.
-- **Yaw fijo:** La cámara apunta en una dirección fija (ej: sur). El jugador rota, la cámara NO.
-- **Shake:** `shake_requested(amplitude, duration)` en EventBus.ui; amplitud ≤ 0.15 m, ≤ 0.5 s; solo narrativos (vórtice, terremotos de evento).
-- **Fade/transeción:** `fade_screen(color, time)` centralizado; transición de escena = fade 0.3 s → swap → lerp 0.2 s.
-- **Anti-mareo:** Sin rotación de cámara con mouse; movimiento suave solo de posición.
+## 2. Seguimiento y colisión (follow_camera.gd)
 
-## 4. Minimapa (especificación)
+```
+PIVOT = player.group("player")  →  orbit con mouse
+Distancia: min 4.0 m, max 20.0 m (zoom scroll)
+Pitch: clamp -10° a 60° (libre por mouse)
+Yaw: orbit libre del mouse (sensibilidad desde GameSettings)
+Raycast (VoxelTool.raycast) contra VoxelTerrain:
+  si colisiona → cámara = hit_dist - 0.5 m (separación mínima)
+FOV: 70° fijo (anti-mareo), suave con lerpf
+```
 
-- Este sobre el Canvas: 128×128, esquina superior derecha (default; reposicionable en settings).
-- Fuente: texturas del generador M10 (mapa de biomas coloreado) + marcadores: POI (M71), casa del jugador (M31), camino, grieta, puerto.
-- No se renderiza el mundo; 0 coste de render; se actualiza al regenerar (M10) o al descubrir POI.
-- Iconos: 24×24 px, estilo brillante; colores por tipo.
+- El raycast busca el VoxelTerrain en la escena actual.
+- Re-intento de target en `_physics_process` (fix M21 — _ready con await puede correr antes del Player).
 
-## 5. Cámara de diálogo (reglas)
+## 3. Shake (portado de camera_rig.gd)
 
-- Plano: Vista cenital con los 2 personajes en cuadro (jugador + NPC).
-- Bloqueo de input de cámara durante el diálogo; zoom fijo ± 0.5 m según la escena.
-- Si el NPC está lejos → el jugador se gira automáticamente (suave 0.5 s) al iniciar el diálogo (regla anti-confusión).
-- Aplica a: M21 (diálogos), M22 (historia), M26 (templo), M74 (eventos).
+```
+trigger_shake(amplitude, duration)
+  amplitude: 0.0 - 0.15 m (clamp)
+  duration: 0.0 - 0.5 s (clamp)
+  frecuencia: 8 Hz (shake_frequency)
+  decaimiento: lineal (progreso = timer / duration)
+  offset: sin(freq * seed) * amp * (1 - progress)
+```
 
-## 6. Presupuesto y settings
+- Conectado a `EventBus.ui.shake_requested` si existe.
+- Solo eventos narrativos (vórtice, terremoto).
+- Sin shake por acciones del jugador (regla dura).
 
-- 1 cámara activa (la del mundo) + 1 Canvas de minimapa (textura, sin cámara).
-- Settings de cámara: distancia de zoom por defecto, minimapa reposicionable.
-- Sin sensibilidad de mouse (la cámara no rota con mouse).
-- Persistencia en GameState.M12 (M59).
+## 4. Fade (portado de camera_rig.gd)
 
-## 7. Interacción con M13 (herramientas)
+```
+fade_screen(color, time)   →  fade out + fade in ( tween )
+fade_to_black(time)        →  atajo a fade_screen(fade_color, time)
+fade_from_black(time)      →  fade in desde negro
+```
 
-- Al apuntar con herramienta (raycast de 4 m), la cámara se "acerca" a 3.5 m durante el uso (ligero, 0.3 s) y vuelve al soltar — ayuda de puntería sin romper el modo.
+- CanvasLayer con layer=100 (siempre encima).
+- ColorRect overlay con `mouse_filter = IGNORE`.
+- Tween mata el anterior si hay conflicto.
 
-## 8. Movimiento del jugador (referencia M11)
+## 5. FOV (nuevo)
 
-- El jugador se mueve **relativo a la pantalla**:
-  - W / ↑ = alejarse de la cámara (hacia "arriba" en pantalla)
-  - S / ↓ = acercarse a la cámara (hacia "abajo" en pantalla)
-  - A / ← = moverse a la izquierda en pantalla
-  - D / → = moverse a la derecha en pantalla
-- El jugador rota para mirar en la dirección que se mueve.
-- La cámara NUNCA rota — siempre apunta en la misma dirección.
+```
+@export target_fov: float = 70.0
+```
+
+- Aplicado en `_ready()` y suavizado en `_process()` con `lerpf(fov, target_fov, 8.0 * delta)`.
+- Anti-mareo: FOV fijo en todos los modos.
+
+## 6. Dependencias
+
+| Elemento | Estado | Dueño |
+|---|---|---|
+| Player pivot (group "player") | ✅ Funciona | M11 |
+| GameSettings (sensibilidad, invert Y) | ✅ Funciona | M59 |
+| EventBus.ui.shake_requested | [?] Pendiente | M05 |
+| VoxelTerrain (colisión) | ✅ Funciona | M10 |
+| Modo Build (herramienta equipada) | [?] Pendiente | M17 |
+| Modo Dialog (encuadre NPC) | [?] Pendiente | M21 |
+| Modo Cutscene (eventos historia) | [?] Pendiente | M22/M26 |
+| Minimapa (texturas biomas) | [?] Pendiente | M10 |
+| Calibración sensación real | [?] Pendiente | Playtest M1 |
+
+## 7. Consumidores de la cámara
+
+- **player.gd:385-387** — `get_camera_forward_xz()`, `get_camera_right_xz()` para movimiento relativo a cámara.
+- **tool_controller.gd** — Referencia al patrón de raycast de follow_camera.
+- **villager_manager.gd** — Referencia al patrón de raycast de M13/follow_camera.

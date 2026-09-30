@@ -147,7 +147,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 105 ítems · Completados: 98 · Pendientes: 0 · No resueltos: 7.
+**Totales:** 105 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 5.
 **Nota:** la calibración visual de recetas queda para el prototipo (M1); el diseño geográfico está cerrado aquí.
 
 ---
@@ -193,3 +193,26 @@ Re-verificación empírica 2026-09-19 (grep global en `game/`): **0 referencias*
 **Suite re-correlada (binario real 4.7.2.stable, Log 1087):** `scripts/terrenos/test_terrenos.gd` (suite de **M156**: TerrainProvider/Modifiers/Detector) → **0 fallos, EXIT 0, 0 SCRIPT ERROR**. Nota: M09 NO tiene suite headless propia; su único runtime (`terreno_horizonte.gd`, impostor) se verifica por test manual del usuario (visible a 1300 m), no replicable headless.
 
 **Conclusión honesta:** M09 es un módulo de **diseño** con 1 entregable runtime (impostor) + 1 bot de soporte. Las secciones F1-F5 son un **contrato propuesto** que nunca se cableó al código. Para cerrar sin falso-verde: aceptar formalmente M09 como módulo de diseño y renombrar F1-F5 de "consumido por" → "contrato propuesto para" (§21.8 permite `[?]` con dueño). No se marca [x] lo que no existe.
+
+## QA visual del impostor (cierre del pendiente "test manual del usuario, visible a 1300 m") — 2026-09-20
+
+- **V4 (agnes-3-flash / Kilo Code, Log 1035+):** run de `main_island.tscn` + captura
+  `tools/mcp/godot-mcp/capturas/09/cap_09_2026-09-19_21-45-49_impostor_1300m.png`:
+  mecanismo OK — logs `[M09-IMP] impostor heightmap completo: 42 tiles activos` +
+  `[M09-Horizonte] disco base r 1800m + anillo arena r 1800-3000m`, 0 SCRIPT ERROR, FPS 60.
+  Desde el spawn (3860,3860) el horizonte quedó **dominado por el fog global**
+  (`Env_1: fog_density 0.001` → ~82% de oclusión a 1300 m): montañas no discernibles en la
+  captura. Veredicto agnes: "no verificable" (ni aprobado ni rechazado).
+- **V1 (usuario, 2026-09-20, confirmación verbal):** **"los impostores sí funcionan — los
+  altos son de color gris; los verdes más bajos que alguna vez estuvieron ya no se ven."**
+  → **IMPOSTOR VERIFICADO (V1 usuario).** Cierre del pendiente "test manual del usuario".
+- **Contexto para el "verdes bajos que no están":** el impostor de MONTAÑAS separado
+  (36 tiles, verdes) quedó **reemplazado** por el impostor heightmap único de la iteración
+  DEFINITIVA (2026-09-08, `terreno_horizonte.gd` L15-16): los pisos verdes actuales son las
+  celdas `COLOR_PASTO` (h 6-16 m) del heightmap unificado — no un asset aparte. Si el
+  usuario no los ve hoy, es porque desde el spawn quedan bajo el umbral de ocultamiento
+  (<400 m mandan los chunks reales) o porque el perfil de esa isla tiene pocas celdas 6-16 m
+  del lado visible. No es un bug: es el estado documentado del script.
+- **Pendiente (no bloquea):** evaluar `fog_density` de `Env_1` (main_island.tscn) — a 0.001
+  la promesa de diseño "el horizonte SIEMPRE tiene la isla" queda tapada a 1.3-3 km (M09/M49,
+  decisión de diseño).

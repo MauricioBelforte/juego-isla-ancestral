@@ -6,6 +6,10 @@
 
 ## Reserva actual
 
+- **Liberada (Log 1021, V3 pool):** Reserva agnes-3-flash/Kilo Code (2026-09-18 19:15) — M72 iter.
+  acotada (data-integrity RF14 + gate CI + V0): test aditivo `test_logros_m72_statids.gd` (9/0) cierra el
+  item RF14 + `test_logros.gd`/RF14 cableados al gate duro `quality.yml` + bug M39 flaggeado como
+  BUG-050 (delegado). NO se tocó el core de M72. Cerrada 2026-09-18 19:30.
 - **Módulo:** 72 Sistema de Logros
 - **Reservado por:** glm-5.3-flash (Kilo Code)
 - **Estado:** 🟡 Liberado — iter. 3 cerrada (Log 527)
@@ -46,7 +50,7 @@
 - [ ] RF14: validar en editor que todo logro tenga ícono asignado [M]
 - [ ] RF14: validar en editor que todo logro tenga condición no nula [M] — iter. 3: validar_catalogo() (condición vacía = problema accionable)
 - [ ] RF14: validar en editor que las categorías usen el vocabulario conocido [M] — iter. 3: TIPOS_CONDICION_VALIDOS (10 tipos vocabulario M71 §3.6) + recursión compuesta
-- [ ] RF14: validar en editor que las estadísticas referenciadas existan en el perfil de M71 [M] — iter. 3: stat_min exige stat_id no vacío (validación estructural; existencia runtime via evaluador M71 con fallback 0)
+- [x] RF14: validar en editor que las estadísticas referenciadas existan en el perfil de M71 [M] — iter. 3: stat_min exige stat_id no vacío (validación estructural; existencia runtime via evaluador M71 con fallback 0). **iter. agnes (Log 1021): CERRADA la validación estática** — nuevo test aditivo `test_logros_m72_statids.gd` valida que cada `stat_id` de `logros.json` resuelve contra el vocabulario M71 (`data/progresion/hitos.json`, recursivo) **o** un prefijo dinámico documentado (`amistad_max_*` M20 / `pescar_*` M34) → **9 checks, 0 fallos, exit 0**. Cierra el "validar en editor" equivalente headless.
 - [ ] RF14: validar en editor que el mapeo Steam no tenga ids duplicados [M]
 - [ ] CAT: crear catálogo base .tres por categoría con logros cozy (primeras veces, hitos, colecciones) [C] — data/logros/logros.json con 7 logros cozy (JSON data-driven; .tres si el volumen lo pide)
 - [ ] CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj [M] — condiciones cozy (sellos/colecciones/primeras veces), sin contrarreloj
@@ -311,3 +315,39 @@
 - M53: suscribirse a EventBus.notify con {tipo: "logro"} para el toast pool; usar listado_para_ui() y get_en_progreso() para el panel.
 - Al migrar logros.json a .tres (RF1), mantener validar_catalogo() apuntando a la nueva fuente y agregar campo categoria/orden al vocabulario de validacion.
 - El flujo de retroactividad cubre "logro instalado despues de cumplir": no requiere codigo adicional por logro nuevo.
+
+## Iteración agnes — RF14 data-integrity + gate CI (2026-09-18, agnes-3-flash (Sapiens AI) / Kilo Code, Log 1021)
+
+> Iteración acotada (data-driven + tooling/CI + V0). NO toco el core de M72 (`achievement_service.gd`
+> pertenece a glm-5.3). Mi parte: cerrar el item RF14 abierto con un **test aditivo** y **proteger el
+> core en CI**.
+
+- **Item RF14 cerrado:** `RF14: validar que las estadísticas referenciadas existan en M71` → nuevo
+  test aditivo `scripts/logros/test_logros_m72_statids.gd` (9 checks, 0 fallos, exit 0): valida que cada
+  `stat_id` de `logros.json` resuelve contra (a) vocabulario M71 (`data/progresion/hitos.json`, recursivo
+  `stat_min`+`compuesta.hijos`) **o** (b) prefijo dinámico documentado (`amistad_max_*` M20, `pescar_*`
+  M34). Evidencia actual: 5 resuelven vía M71-known, 1 (`amistad_max_catalina_oso`) vía dinámico.
+- **Gate CI (gap cerrado):** `test_logros.gd` + `test_logros_m72_statids.gd` **no estaban** cableados en
+  `quality.yml` → añadidos al **gate duro** (test-suite). El core de logros queda protegido por CI.
+- **Hallazgo ajeno (delegado, no lo corrijo — M39 en curso por glm):** `catalogo_tiendas.gd:63` lanza
+  `SCRIPT ERROR: Nonexistent function 'size' in base 'Callable'` + warning "item_id inexistente en M15:
+  `piedra_caliza`" (catálogo M39 referencia un item M15 que no existe). Contamina el boot de autoloads.
+  → Delegado a M39/glm (ver 11-BUGS / ESTADO-PARALELO).
+
+### Lo que NO hice (dueño M72/glm)
+- El "validar **en editor**" original implica una herramienta de editor (VS Code Godot / plugin) — yo
+  di el **equivalente headless** (test). Si M72 quiere la herramienta de editor, es de glm.
+- Los 8 items con dueño M53/M46 (integración visual, notificaciones UI) siguen `[ ]` (dueño M53/M46).
+
+### Verificación (godot 4.7.2 headless)
+- `test_logros_m72_statids.gd` → **9 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`**.
+- `test_logros.gd` → **0 fallos, exit 0** (1 `SCRIPT ERROR` ajeno de M39 al boot).
+
+**Totales:** 185 ítems · Completados: 1 · Pendientes: 184 · No resueltos: 0.
+
+> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
+> este archivo no tenía línea de Totales. Conteo real de marcas: 1 [x] / 184 [ ] /
+> 0 [?]. Las marcas no se tocaron. **Contexto:** este checklist fue REVERTIDO por
+> auditoría el 2026-09-14 (sobre-cierre detectado); el 1/185 actual refleja solo
+> RF14/L53 re-verificados. El módulo necesita un pasaje completo de re-verificación
+> antes de cualquier cierre.
