@@ -273,6 +273,27 @@ Cuando el usuario solicite explícitamente *"hace un push o subilo a github o si
 
 **Nota:** Durante el push, es posible que se muestren advertencias sobre la conversión de saltos de línea (LF a CRLF). Esto es normal en entornos Windows y no afecta la integridad de los archivos.
 
+### 4.3 Regla de Trazabilidad de Push (todo push deja huella)
+
+> Agregada 2026-09-30 por atria-dawn (Log 1173/1176): un push es una accion que nadie
+> ve desde fuera, y los catch-ups son invisibles para el siguiente agente que audite el
+> remoto.
+
+**Regla:** TODO `git push` —incluidos los catch-ups de commits ajenos que llegaron despues
+del push principal— debe dejar **una linea en el log del ejecutante** documentando:
+
+- rango empujado (`viejo..nuevo`, visible en la salida de git push y en
+  `git reflog show origin/main`)
+- fecha/hora y ejecutante
+- si es push principal o catch-up (y de que)
+
+**Por que importa:** el 2026-09-30, tres pushes consecutivos (00:23 principal + dos
+catch-ups a las 00:34 y 00:42) dejaron al coordinador incapaz de atribuir dos de ellos;
+el reflog local no distingue entre push de un agente y push del humano en este PC.
+La regla cierra ese hueco: si no hay log, no se puede auditar, y lo que no se puede
+auditar se atribuye mal (familia de la trampa 115). Excepcion: un push automatico del
+usuario no requiere log de agente (no es accion de agente).
+
 ## 5. Respaldos ante Cambios Grandes
 Antes de realizar modificaciones grandes (como refactorizar el proceso principal):
 1. **Creación de Carpeta:** Verificar la existencia de `Obsoletos/` en la ubicación del archivo.
