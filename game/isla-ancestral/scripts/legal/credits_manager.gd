@@ -223,11 +223,16 @@ func obtener_contribuyentes() -> Array[String]:
 	return result
 
 ## RF: obtener lista de assets de terceros (seccion assets_terceros)
-func obtener_assets_terceros() -> Array[Dictionary]:
+## BUG-081: el tipo declarado era Array[Dictionary], pero las entradas del JSON
+## son Strings ("Font Awesome (CC BY 4.0)", ...). Se alinea a Array[String],
+## igual que obtener_contribuyentes() y al stub del 04-Codigo.md.
+func obtener_assets_terceros() -> Array[String]:
+	var result: Array[String] = []
 	for sec in _secciones:
 		if String(sec.get("id", "")) == "assets_terceros":
-			return sec.get("entradas", [])
-	return []
+			for entrada in sec.get("entradas", []):
+				result.append(String(entrada))
+	return result
 
 func cambiar_idioma(nuevo: String) -> bool:
 	"""RF4: conmuta entre es/en. Devuelve true si cambio."""

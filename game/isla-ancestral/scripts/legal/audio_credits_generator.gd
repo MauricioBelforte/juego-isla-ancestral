@@ -30,7 +30,7 @@ func generar_compacto(creditos: Array[AudioCredit]) -> String:
 	for cred in creditos:
 		if not cred.incluir_en_creditos:
 			continue
-		var rol_key := AudioCredit.AudioRole.keys()[cred.rol]
+		var rol_key: String = AudioCredit.AudioRole.keys()[cred.rol]
 		if not por_rol.has(rol_key):
 			por_rol[rol_key] = []
 		por_rol[rol_key].append(cred.persona_nombre)
@@ -95,7 +95,7 @@ func generar_reporte_licencias(licencias: Array[AudioLicense]) -> String:
 
 	var por_tipo: Dictionary = {}
 	for lic in licencias:
-		var tipo_key := AudioLicense.AudioType.keys()[lic.audio_type]
+		var tipo_key: String = AudioLicense.AudioType.keys()[lic.audio_type]
 		if not por_tipo.has(tipo_key):
 			por_tipo[tipo_key] = []
 		por_tipo[tipo_key].append(lic)

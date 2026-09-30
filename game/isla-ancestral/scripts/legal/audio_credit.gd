@@ -47,7 +47,7 @@ func es_pagado() -> bool:
 
 
 func generar_texto_credito() -> String:
-	var rol_texto := AudioRole.keys()[rol].capitalize()
+	var rol_texto: String = AudioRole.keys()[rol].capitalize()
 	if not texto_atribucion.is_empty():
 		return texto_atribucion
 	return "%s — %s (%s)" % [persona_nombre, contribucion, rol_texto]
