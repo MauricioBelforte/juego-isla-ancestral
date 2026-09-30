@@ -43,7 +43,9 @@ func _test_data() -> void:
 	print("--- Datos: creditos.json ---")
 	var data = _cargar()
 	_check("creditos.json cargado", not data.is_empty())
-	_check("3 secciones", data.get("secciones", []).size() == 3, "size=%d" % data.get("secciones", []).size())
+	# T-104: el conteo exacto era fragil (v1 = 3; desde b8bd39f el catálogo tiene 7).
+	# Contrato real: al menos las secciones originales, no exactamente 3.
+	_check("secciones >= 3", data.get("secciones", []).size() >= 3, "size=%d" % data.get("secciones", []).size())
 
 func _test_validator() -> void:
 	print("--- CreditsValidator: data real ---")
