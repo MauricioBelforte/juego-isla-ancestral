@@ -144,6 +144,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-067 | M103 Logging: el presupuesto de frame (**< 0,5 % = 83,35 µs**) **NO se cumple para una llamada que ESCRIBE** — medido **512 µs** (≈6× el frame completo); **99 % del coste es consola+formato (`print`)**, 1 % disco. Además `03-Diseno.md` §10 Regla 5 (buffer + flush periódico) **contradice** §3 (`print` a consola **y** < 0,5 %): bajo tubería un `print` cuesta ~35× más que a archivo, así que ambas cosas no pueden ser ciertas a la vez | M103 Logging (decisión de diseño) — escala a **M61** (Rendimiento) y **M110** (consola in-game) | 🟠 Mayor | [→] **Delegado a DeepSeek-V4.1-Flash** (M103 es 🔵 suyo; mensaje en `Mensajes entre modelos/2026-09-20_02-18-09_1-DEEPSEEK-BUG067-M103-logger-delegacion.md`) — atria-dawn solo midió/documentó, no parcheó. Pendiente confirmación de recepción | DeepSeek-V4.1-Flash (delegado por Atria-Dawn-Preview) | 2026-09-20 |
 | BUG-068 | `hardware` y `HardwareManager` son el **mismo script** (`scripts/hardware/hardware_manager.gd`) registrado como **dos autoloads**: Godot crea **una instancia por entrada** (medido: `instance_id` distintos y `a == b` falso), asi que el arranque parsea `hardware_profiles.json` dos veces y registra el servicio dos veces. **Ninguno de los dos nombres se usa** (0 referencias a `/root/hardware`, 0 a `/root/HardwareManager`): peso muerto duplicado y trampa latente | M115 Hardware (config) | 🟡 Menor | [x] **Resuelto (2026-09-25, P-32)** — aplicado el fix de **2** pasos (el de 1 linea rompia `test_hardware.gd:87`): entrada `hardware` borrada de `project.godot` + test migrado a `HardwareManager`. Suites **21/0** y **17/0** antes y despues, duplicacion **2 -> 1**, boot 0 SCRIPT ERROR, y la entrada muerta A3 del auditor borrada. ⚠️ La premisa «Ninguno de los dos nombres se usa» de esta fila es **FALSA** (ver correccion 1 en el detalle). Detectado por `scripts/auditar_arquitectura_m62.py` (regla A3, Log 1112) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-069 | Grafo de servicios (autoloads): **2 componentes ciclicas** — `{CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather}` (7 nodos) y `{ThemeService, UIManager}` — mas **9 referencias** a un autoload declarado DESPUES, alcanzables desde `_ready()`. ⚠️ **Medido: NO es un fallo de runtime** (en `_ready()` Godot 4.7.2 ya instancio todos los autoloads; solo `_init()` falla, y falla para cualquier destino, no por el orden). Es violacion de la regla de capas de `service_registry.gd` y fragilidad de inicializacion | M62 (arquitectura) — involucra M41-M44, M59, M63, M69, M91 | 🟡 Menor (deuda arquitectonica, sin fallo medido) | [ ] **Abierto** — detectado por `scripts/auditar_arquitectura_m62.py` (reglas A1/A2, Log 1112); el gate los tiene en lista de permitidos para que **ninguno nuevo** pase. **Re-medido 2026-09-25 (P-32): A2 subio de 9 a 11** — 2 hallazgos NUEVOS (`UIManager->AccesibilityManager` delta +40, `UIManager->Localization` delta +17) que vienen del cambio **sin commitear** de agnes-3-flash en `ui_manager.gd` (86+/5-, Log 1118): **al mergearlo, `architecture-guard` va a rojo** | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-081 | **4 errores de inferencia de tipos en scripts legales** (familia `:=` sobre Variant, GUIA-GODOT/01 §28): `credits_manager.gd:229` retorna `Array` donde declara `Array[Dictionary]`; `audio_credit.gd:50`, `audio_credits_generator.gd:33` y `:98` usan `:=` sobre `.keys()[i]` (Variant) → "Cannot infer the type" | M131 (Creditos) / M84 (Musica-Y-Audio-Legal) | 🟠 Mayor | [ ] Abierto — reportado por mimo en cierre de bucket (lo dejo fuera por honestidad); verificado por atria-dawn leyendo las lineas. `test_credits_m131.gd` (v1) en FAIL | atria-dawn-preview (hallazgo: mimo-v2.5) | 2026-09-30 |
 | BUG-071 | **El fix de BUG-051 no está en el repositorio**: `HEAD` conserva el no-op (`godot --headless --script` sin script + `\|\| true`) porque el hunk que lo reescribe vive **solo en el worktree**. Su generador `tools/quality/gen_colector_sintaxis.py` (3 278 B) **no está versionado**: no está en el árbol de `HEAD` y lo matchea `.gitignore:129` `gen_*.py` (la negación `!tools/quality/gen_colector_sintaxis.py` existe solo en el worktree). **Doble consecuencia:** (a) BUG-051 figura `[x] Resuelto (Log 1039)` sin artefacto versionado que lo respalde; (b) al commitear el worktree, el paso `Generate syntax collector` falla en checkout limpio (`Errno 2`) -> job `godot-lint` en ROJO y el gate «duro verificado por inyección» **nunca llega a ejecutarse en CI** | M111 Código de Calidad / M83 (CI) — `quality.yml`, `tools/quality/`, `.gitignore` | 🟠 Mayor | [x] **Resuelto (2026-09-20, commit `11ac4d9`, atria-dawn)** — el `.py` está versionado (+95), la negación está en `.gitignore:130`, el no-op **desapareció** de `quality.yml` (0 ocurrencias de `--script 2>&1 \|\| true`) y el gate real corre; generador verificado (**855 preloads**, salida **byte-idéntica** `91d6f337…`) | DeepSeek-V4.1-Flash (reportado a Atria-Dawn-Preview) | 2026-09-20 |
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
@@ -4211,3 +4212,53 @@ En verde (para contexto): `scripts/animales_ia/test_m65.gd` (autoload, 24 OK / 0
 **Modelo:** agnes-3-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-25 (P-38, Log 1154)
+
+---
+
+### BUG-081 — 4 errores de inferencia de tipos en scripts legales (`:=` sobre Variant + retorno inseguro)
+
+- **Fecha de reporte:** 2026-09-30 03:35
+- **Módulo(s) afectado(s):** M131 (Creditos) + M84 (Musica-Y-Audio-Legal) — scripts legales de creditos
+- **Severidad:** 🟠 Mayor (los 4 bloquean compilacion de los scripts involucrados)
+- **Prioridad sugerida:** Media
+- **Estado:** [ ] Abierto
+
+**Descripción del problema:**
+Misma familia que la leccion §28 de GUIA-GODOT/01-gdscript-errores-comunes.md (":= sobre Variant no infiere"): indexar un `Array` devuelto por `.keys()` produce un Variant, y `:=` no puede inferir su tipo. Ademas, `credits_manager.gd` declara un retorno tipado `Array[Dictionary]` y devuelve un `Array` plano. Reportados por mimo-v2.5 durante la consolidacion de su bucket (P-48/P-53) como **preexistentes, fuera de su bucket**; verificados por atria-dawn (coordinador) leyendo las lineas exactas.
+
+**Pasos para reproducir:**
+1. Compilar el proyecto Godot 4.7.2 (headless o editor).
+2. Observar los errores de parseo/inferencia en los 4 sitios.
+3. Alternativa: correr `test_credits_m131.gd` (sigue en FAIL segun mimo; la variante v2 fue arreglada por mimo a 2/3).
+
+**Comportamiento esperado:**
+Los scripts legales compilan sin error y las suites de M131/M84 pasan.
+
+**Comportamiento actual:**
+- `game/isla-ancestral/scripts/legal/credits_manager.gd:229` — `func obtener_assets_terceros() -> Array[Dictionary]:` retorna `sec.get("entradas", [])`. `Dictionary.get()` devuelve `Variant`; aunque el valor sea un Array, el retorno declarado es `Array[Dictionary]` y el tipado no coincide.
+- `game/isla-ancestral/scripts/legal/audio_credit.gd:50` — `var rol_texto := AudioRole.keys()[rol].capitalize()` → "Cannot infer the type".
+- `game/isla-ancestral/scripts/legal/audio_credits_generator.gd:33` — `var rol_key := AudioCredit.AudioRole.keys()[cred.rol]` → mismo patron.
+- `game/isla-ancestral/scripts/legal/audio_credits_generator.gd:98` — `var tipo_key := AudioLicense.AudioType.keys()[lic.audio_type]` → mismo patron.
+
+**Evidencia:**
+- Lineas leidas y confirmadas por atria-dawn (2026-09-30) con el contenido exacto de cada archivo.
+- Reporte original: mimo-v2.5, cierre de bucket P-48 (commit 2f130ac, Log 1172): "credits_manager.gd:229 retorna Array donde declara Array[Dictionary] / audio_credit.gd:50 y audio_credits_generator.gd:33/98 → Cannot infer the type / test_credits_m131.gd en FAIL".
+- Familia documentada: GUIA-GODOT/01 §28 (leccion agregada por agnes-3-flash, P-52, Log 1169).
+
+**Referencias cruzadas:**
+- GUIA-GODOT/01-gdscript-errores-comunes.md §28 (solucion: `=` sin inferencia o anotar tipo; para el retorno, `.values()` cast o tipado explicito en bucle).
+- Modulo relacionado: M131 (Creditos), M84 (Musica-Y-Audio-Legal).
+- Tests: `test_credits_m131.gd` (v1, FAIL), `test_credits_m131_v2.gd` (2/3, arreglado parcial por mimo).
+
+**Deuda de dueño:** mimo-v2.5 lo dejo fuera de su bucket por honestidad (no era suyo). Dueño natural: quien continue M131/M84 (DeepSeek ha trabajado M84/M122). **No delegado formalmente todavia** — el coordinador lo registra para que el siguiente agente lo tome.
+
+**Firma:**
+**Modelo:** atria-dawn-preview (registro; hallazgo original de mimo-v2.5)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-30 03:35
+
+**Resolución (completar cuando se resuelva):**
+- [→] Cómo se corrigió: [archivo + función + líneas + lógica del cambio]
+- [→] Archivos/commits modificados:
+- [ ] Log del proyecto:
+- [ ] Verificado por:
