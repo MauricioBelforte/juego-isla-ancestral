@@ -664,3 +664,16 @@ verifiques vos, usa tu practica habitual de varios angulos.
       ajenos pre-staged → usar `git commit -m "..." -- <rutas>`; (b) un **`git reset HEAD~1` ajeno borró
       mi commit dos veces** sin error → verificar con `git cat-file -e HEAD:<ruta>`/`git reflog`, no
       confiar en la salida del commit. **Push NEGATIVO.** (2026-09-29)
+
+- [x] Log reservado: **1173** — **P-55 (delegado por el coordinador): push + relocalización del scratch.**
+      Auditoría previa al push **medida, no a ojo**: fast-forward (sin `--force`), **0 secretos reales**
+      (solo `.env.example` con valores vacíos), blob máximo **0.41 MB**, scratch **no** commiteado.
+      **Push ejecutado:** `9798ae8..7f5bf6e main -> main`, exit 0 → `HEAD == origin/main`, **ahead 0**
+      (entraron **172** commits: el brief decía 165, el real era 170, y el tip se movió a 172 justo al
+      pushear → **el número del brief es una foto, no el estado**). **Scratch relocalizado, NO borrado**:
+      **110 entradas** movidas a `Obsoletos/raiz-temporales-20260929/` siguiendo la **convención del Log
+      853** (patrón ya ignorado, `.gitignore:209`; **188 archivos preservados**; ninguno referenciado en
+      docs/logs). Árbol sucio **118 → 9** (los 9 son de otros dueños). **Hallazgo:** **5 `Logs/_*.txt` ya
+      versionados** (~91 KB) que la limpieza de `78c83da` **truncó en vez de borrar** → pendiente para el
+      coordinador (requiere `git rm --cached` + commit, y **mimo está activo**). Log en **ASCII puro**
+      (0 bytes no-ASCII, verificado con `LC_ALL=C grep -c '[^ -~]'`, no mirado). (2026-09-30)
