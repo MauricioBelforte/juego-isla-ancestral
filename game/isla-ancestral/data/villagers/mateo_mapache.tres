@@ -21,10 +21,14 @@ gustos = ["tomate", "fibra_algodon"]
 disgustos = ["fragmento_ancestral"]
 hobbies = ["jardinería", "cantar"]
 rutina_diaria = {
+"06:00": "despertar",
+"06:30": "ir_a_trabajar",
 "07:00": "trabajar",
-"11:00": "regar",
-"16:00": "trabajar",
-"21:00": "descansar"
+"11:00": "comer",
+"11:30": "trabajar",
+"16:00": "socializar",
+"17:00": "ir_a_casa",
+"20:00": "dormir"
 }
 linea_saludo = "¡Las semillas no se siembran solas! ¿Me das una mano?"
 linea_despedida = "Nos vemos en la parcela, ¡el sol no espera!"

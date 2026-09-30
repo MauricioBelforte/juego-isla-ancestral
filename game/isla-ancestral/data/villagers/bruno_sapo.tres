@@ -21,10 +21,14 @@ gustos = ["madera_roble", "miel"]
 disgustos = ["pescado"]
 hobbies = ["carpintería", "contar historias"]
 rutina_diaria = {
-"08:00": "trabajar",
-"12:00": "almorzar",
-"15:00": "trabajar",
-"19:00": "descansar"
+"07:00": "despertar",
+"08:00": "ir_a_trabajar",
+"08:30": "trabajar",
+"12:00": "comer",
+"13:00": "socializar",
+"14:00": "trabajar",
+"18:00": "ir_a_casa",
+"19:00": "dormir"
 }
 linea_saludo = "Tranquilo, tranquilo... toda viga llega a su ranura."
 linea_despedida = "Que el viento sople a favor."

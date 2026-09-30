@@ -21,10 +21,14 @@ gustos = ["pescado", "mineral_cobre"]
 disgustos = ["baya_roja"]
 hobbies = ["pescar", "navegar"]
 rutina_diaria = {
-"06:00": "pescar",
-"12:00": "almorzar",
-"14:00": "pescar",
-"20:00": "descansar"
+"05:00": "despertar",
+"05:30": "ir_a_trabajar",
+"06:00": "trabajar",
+"12:00": "comer",
+"12:30": "trabajar",
+"18:00": "ir_a_casa",
+"18:30": "socializar",
+"21:00": "dormir"
 }
 linea_saludo = "La marea está tranquila hoy. ¿Subes a la lancha?"
 linea_despedida = "Cuida la costa, yo vigilo el agua."
