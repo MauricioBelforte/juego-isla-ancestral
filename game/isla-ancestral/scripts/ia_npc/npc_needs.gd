@@ -26,11 +26,27 @@ const HUNGER_URGENCY_THRESHOLD: float = 20.0
 const ENERGY_URGENCY_THRESHOLD: float = 15.0
 const SOCIAL_URGENCY_THRESHOLD: float = 20.0
 
+## Config opcional (si se asigna, sobreescribe los valores)
+var _config: Resource = null
+
 ## Señal de cambio de necesidad urgente
 signal need_urgent(new_need: StringName)
 
 func _init() -> void:
 	pass
+
+func set_config(cfg: Resource) -> void:
+	_config = cfg
+	if cfg != null:
+		var v = cfg.get("hunger_rate")
+		if v != null:
+			hunger_rate = v
+		v = cfg.get("energy_rate")
+		if v != null:
+			energy_rate = v
+		v = cfg.get("social_rate")
+		if v != null:
+			social_rate = v
 
 
 ## Actualizar necesidades (llamar desde _process con delta de juego)

@@ -39,12 +39,24 @@ const TICK_INTERVAL_LIGHT: float = 5.0
 var _sim_level: String = "full"
 var _npc_id: String = ""
 
+## M64: límite de socializaciones simultáneas y separación
+const MAX_SIMULTANEOUS_SOCIALS: int = 3
+const SEPARATION_FORCE: float = 1.5
+const SEPARATION_RADIUS: float = 1.5
+
+## M64/M29: pausa con GameClock
+var _paused: bool = false
+
 
 func _ready() -> void:
 	_npc_id = name
 	_setup_components()
 	_setup_navigation()
 	_load_routine_from_profile()
+	# M29: conectar dia_cambio para reset de rutinas
+	var gt = get_node_or_null("/root/GameTime")
+	if gt != null and gt.has_signal("dia_cambio"):
+		gt.dia_cambio.connect(_on_dia_cambio)
 	print("[NPCAgent] %s inicializado (perfil=%s)" % [_npc_id, _get_profile_id()])
 
 
@@ -96,6 +108,8 @@ func _setup_navigation() -> void:
 
 
 func _process(delta: float) -> void:
+	if _paused:
+		return
 	_update_blackboard(delta)
 	if _sim_level == "full" or _sim_level == "medium":
 		_state_machine.update(delta)
@@ -168,7 +182,11 @@ func _on_need_urgent(need: StringName) -> void:
 		&"social":
 			var nearby = _blackboard.get_value("nearby_npcs", [])
 			if nearby.size() > 0:
-				_state_machine.transition_to(&"Social", {"partner": nearby[0], "partner_count": nearby.size()})
+				var best_partner = _select_social_partner(nearby)
+				if best_partner != &"":
+					_state_machine.transition_to(&"Social", {"partner": best_partner, "partner_count": nearby.size()})
+				else:
+					_state_machine.transition_to(&"Idle")
 			else:
 				_state_machine.transition_to(&"Idle")
 		_:
@@ -178,6 +196,58 @@ func _on_need_urgent(need: StringName) -> void:
 func _on_state_changed(old: StringName, new: StringName) -> void:
 	npc_state_changed.emit(old, new)
 	print("[NPCAgent] %s: %s -> %s" % [_npc_id, old, new])
+
+
+## M29: Reset de rutina al cambio de día
+func _on_dia_cambio(_info: Dictionary) -> void:
+	_load_routine_from_profile()
+	_state_machine.transition_to(&"Idle")
+
+
+## M64: Selectividad social — prioriza mismo trabajo, luego vecinos
+func _select_social_partner(nearby: Array) -> StringName:
+	if nearby.is_empty():
+		return &""
+	var profile = _get_profile()
+	var my_job: String = ""
+	if profile != null and profile.get("job") != null:
+		my_job = str(profile.get("job"))
+	# Prioridad 1: mismo trabajo
+	for partner_id in nearby:
+		var partner_node = _get_nearby_node(partner_id)
+		if partner_node != null:
+			var pp = partner_node._get_profile() if partner_node.has_method("_get_profile") else null
+			if pp != null and pp.get("job") != null and str(pp.get("job")) == my_job and my_job != "":
+				return partner_id
+	# Prioridad 2: cualquier otro
+	return nearby[0] if nearby.size() > 0 else &""
+
+
+func _get_nearby_node(id: StringName) -> Node:
+	var vm = get_node_or_null("/root/VillagerManager")
+	if vm == null:
+		return null
+	for v in vm.obtener_activos():
+		if v != null and is_instance_valid(v) and v.name == id:
+			return v
+	return null
+
+
+## M64: Fuerza de separación entre NPCs (evita overlap)
+func apply_separation(all_npcs: Array) -> Vector3:
+	var separation := Vector3.ZERO
+	var count := 0
+	for other in all_npcs:
+		if other == self or not is_instance_valid(other):
+			continue
+		var diff: Vector3 = global_position - other.global_position
+		var dist: float = diff.length()
+		if dist > 0.0 and dist < SEPARATION_RADIUS:
+			separation += diff.normalized() / dist
+			count += 1
+	if count > 0:
+		separation /= count
+	return separation * SEPARATION_FORCE
 
 
 func _load_routine_from_profile() -> void:
@@ -334,6 +404,19 @@ func set_simulation_level(level: String) -> void:
 
 func get_simulation_level() -> String:
 	return _sim_level
+
+
+## M64/M29: Pausa/Resume IA — congela updates del FSM y necesidades
+func pause_ai() -> void:
+	_paused = true
+
+
+func resume_ai() -> void:
+	_paused = false
+
+
+func is_paused() -> bool:
+	return _paused
 
 
 # ── Persistencia (ISaveProvider M59) ───────────────────────

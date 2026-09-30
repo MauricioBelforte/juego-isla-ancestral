@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://scripts/ia_npc/npc_needs_config.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+hunger_rate = 0.5
+energy_rate = 0.3
+social_rate = 0.1
+mood_recovery_rate = 0.05
+mood_decay_rate = 0.1
+mood_recovery_threshold = 50.0
+hunger_urgency = 20.0
+energy_urgency = 15.0
+social_urgency = 20.0
+eat_recovery = 30.0
+sleep_recovery = 40.0
+socialize_recovery = 20.0

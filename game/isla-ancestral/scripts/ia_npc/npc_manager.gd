@@ -14,6 +14,9 @@ extends Node
 ## (evita fallo de parseo headless por class_name cruzado, AGENTS.md §9.50)
 const NPCAgentScript = preload("res://scripts/ia_npc/npc_agent.gd")
 
+## M61: BudgetRegistry para control de memoria
+const BudgetRegistryScript = preload("res://scripts/rendimiento/memoria/budget_registry.gd")
+
 ## Señales
 signal npc_sim_level_changed(npc_id: StringName, old_level: String, new_level: String)
 signal npc_created(npc_id: StringName)
@@ -31,17 +34,33 @@ var _agents: Dictionary = {}  # npc_id -> NPCAgent
 ## Métricas de rendimiento
 var _tick_times: Array[float] = []
 const MAX_TICK_HISTORY: int = 60
+## M61: BudgetRegistry reference
+var _budget_registry: MemoryBudgetRegistry = null
+## M64 iter.N: tick optimizado por burbuja
+var _tick_accumulator: float = 0.0
+const TICK_FULL_INTERVAL: float = 0.5    # 2×/s
+const TICK_MEDIUM_INTERVAL: float = 1.0  # 1×/s
+const TICK_LIGHT_INTERVAL: float = 5.0   # 1×/5s
+## M64 iter.N: watchdog global
+var _watchdog = null
 
 
 func _ready() -> void:
 	print("[NPCManager] Inicializado (burbujas: full=%.0fm med=%.0fm light=%.0fm)" % [BUBBLE_FULL, BUBBLE_MEDIUM, BUBBLE_LIGHT])
 	_registrar_proveedor_guardado()
 	_suscribir_villager_manager()
+	_init_budget_registry()
+	_init_watchdog()
 
 
 func _process(delta: float) -> void:
 	_update_simulation_levels()
 	_update_performance_metrics(delta)
+	# M64 iter.N: reportar consumo a BudgetRegistry cada ~5 segundos
+	_tick_accumulator += delta
+	if _tick_accumulator >= 5.0:
+		_tick_accumulator = 0.0
+		_report_budget()
 
 
 func _suscribir_villager_manager() -> void:
@@ -50,6 +69,27 @@ func _suscribir_villager_manager() -> void:
 	if vm != null:
 		vm.poblacion_cambio.connect(_on_poblacion_cambio)
 		print("[NPCManager] Suscrito a VillagerManager.poblacion_cambio")
+
+
+## M61: Inicializar BudgetRegistry para control de memoria de IA
+func _init_budget_registry() -> void:
+	var mm = get_node_or_null("/root/MemoryMonitor")
+	if mm != null and mm.has_method("get") and mm.get("budget") != null:
+		_budget_registry = mm.budget
+		if _budget_registry != null:
+			_budget_registry.registrar_sistema("ia_npc", 32)  # 32 MB tope para IA
+			print("[NPCManager] BudgetRegistry registrado (tope: 32 MB)")
+
+
+## M64 iter.N: Inicializar watchdog anti-atascos
+func _init_watchdog() -> void:
+	var WatchdogClass = preload("res://scripts/ia_npc/npc_watchdog.gd")
+	_watchdog = WatchdogClass.new()
+	_watchdog.name = "NPCWatchdog"
+	add_child(_watchdog)
+	_watchdog.stuck_detected.connect(_on_watchdog_stuck)
+	_watchdog.recovery_forced.connect(_on_watchdog_recovery)
+	print("[NPCManager] Watchdog anti-atascos inicializado")
 
 
 func _on_poblacion_cambio(activos: Array) -> void:
@@ -75,6 +115,43 @@ func _on_poblacion_cambio(activos: Array) -> void:
 			_add_agent(npc_id, v)
 
 
+## M64 iter.N: Watchdog — NPC atascado detectado
+func _on_watchdog_stuck(npc_id: StringName, state: StringName, duration: float) -> void:
+	print("[NPCManager] Watchdog: %s atascado en %s (%.1fs)" % [npc_id, state, duration])
+
+
+## M64 iter.N: Watchdog — recovery forzado
+func _on_watchdog_recovery(npc_id: StringName, action: StringName) -> void:
+	var agent = _agents.get(npc_id, null)
+	if agent == null or not is_instance_valid(agent):
+		return
+	var sm = agent.get_state_machine()
+	if sm == null:
+		return
+	match action:
+		&"force_idle":
+			sm.transition_to(&"Idle")
+			print("[NPCManager] Watchdog: forzando Idle a %s" % npc_id)
+		&"recover_plan":
+			if sm.has_method("recover_previous_plan"):
+				sm.recover_previous_plan()
+				print("[NPCManager] Watchdog: recuperando plan de %s" % npc_id)
+		&"work_complete":
+			sm.transition_to(&"Idle")
+			print("[NPCManager] Watchdog: terminando trabajo de %s" % npc_id)
+		&"wake_up":
+			sm.transition_to(&"Idle")
+			print("[NPCManager] Watchdog: despertando a %s" % npc_id)
+		_:
+			sm.transition_to(&"Idle")
+
+
+## M64 iter.N: Routing de cambios de estado al watchdog
+func _on_agent_state_changed(npc_id: StringName, new_state: StringName) -> void:
+	if _watchdog != null:
+		_watchdog.on_state_changed(npc_id, new_state)
+
+
 func _add_agent(npc_id: String, agent_node: Node) -> void:
 	"""Agregar un agente al manager. Busca NPCAgent en la jerarquía del villager."""
 	if _agents.has(npc_id):
@@ -90,6 +167,13 @@ func _add_agent(npc_id: String, agent_node: Node) -> void:
 		_agents[npc_id] = npc_agent
 		npc_agent.set_simulation_level("full")
 		npc_created.emit(npc_id)
+		# M64 iter.N: registrar en watchdog + conectar signal
+		if _watchdog != null:
+			_watchdog.register_npc(StringName(npc_id))
+		if npc_agent.has_signal("npc_state_changed"):
+			npc_agent.npc_state_changed.connect(
+				func(old_s, new_s): _on_agent_state_changed(npc_id, new_s)
+			)
 		print("[NPCManager] Agente registrado: %s" % npc_id)
 
 
@@ -115,6 +199,9 @@ func _remove_agent(npc_id: String) -> void:
 		var agent = _agents[npc_id]
 		_agents.erase(npc_id)
 		npc_removed.emit(npc_id)
+		# M64 iter.N: desregistrar del watchdog
+		if _watchdog != null:
+			_watchdog.unregister_npc(StringName(npc_id))
 		print("[NPCManager] Agente removido: %s" % npc_id)
 
 
@@ -186,6 +273,20 @@ func _update_performance_metrics(delta: float) -> void:
 
 
 # ── API pública ──────────────────────────────────────────────────────
+
+## M61: reportar consumo estimado de memoria al BudgetRegistry
+func _report_budget() -> void:
+	if _budget_registry == null:
+		return
+	# Estimación: ~512 bytes por agente activo + overhead de FSM
+	var mem_kb: int = _agents.size() * 512 + 4096
+	var mem_mb: int = maxi(1, mem_kb / 1024)
+	_budget_registry.reportar_consumo("ia_npc", mem_mb)
+	var sobre: Array = _budget_registry.verificar()
+	if "ia_npc" in sobre:
+		push_warning("[NPCManager] ¡Sobre presupuesto M61! (%d MB / %d MB)" % [
+			mem_mb, _budget_registry.tope_de("ia_npc")
+		])
 
 func get_agent(npc_id: String) -> NPCAgent:
 	return _agents.get(npc_id, null)

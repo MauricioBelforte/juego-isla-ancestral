@@ -11,6 +11,7 @@ class_name NPCStateMachine
 ## ── Señales públicas ─────────────────────────────────────
 signal state_changed(old_state: StringName, new_state: StringName)
 signal stuck_detected(npc_id: StringName, duration: float)
+signal plan_failed(failed_state: StringName, recovery_state: StringName)
 
 ## ── Estado actual ────────────────────────────────────────
 var current_state: Node = null
@@ -22,9 +23,13 @@ const STUCK_RESPAWN_THRESHOLD: float = 10.0
 var _last_position: Vector3 = Vector3.ZERO
 var simulation_level: String = "full"
 
+## ── Memoria de planes (M64 iter. N) ──────────────────────
+var plan_stack = null
+
 
 func _ready() -> void:
-	pass
+	var PlanStackClass = preload("res://scripts/ia_npc/plan_stack.gd")
+	plan_stack = PlanStackClass.new()
 
 
 ## ── Registro de estados ──────────────────────────────────
@@ -54,18 +59,34 @@ func transition_to(target: StringName, data: Dictionary = {}) -> void:
 			_history.resize(10)
 	# Find next state
 	var next = _states.get(target)
+	var fell_back: bool = false
 	if next == null:
 		push_warning("[StateMachine] Estado '%s' no existe, fallback a Idle" % target)
 		next = _states.get(&"Idle")
+		fell_back = true
 		if next == null:
 			push_error("[StateMachine] No hay Idle fallback!")
 			return
+	# Plan stack: push transiciones intencionales, pop en fallback a Idle
+	var is_fallback: bool = (fell_back or (target == &"Idle" and old_sn != "" and old_sn != "Idle"))
 	current_state = next
 	if current_state.has_method("enter"):
 		current_state.enter(data)
 	var new_sn: String = ""
 	if current_state.has_method("get_state_name_raw"):
 		new_sn = str(current_state.get_state_name_raw())
+	# Gestionar plan_stack
+	if plan_stack != null:
+		plan_stack.set_current_time(Time.get_ticks_msec() / 1000.0)
+		if is_fallback:
+			# Fallback a Idle = plan anterior falló → recuperar
+			var popped: Dictionary = plan_stack.pop_plan()
+			if not popped.is_empty():
+				var failed_state: StringName = StringName(str(popped.get("state", &"")))
+				plan_failed.emit(failed_state, &"Idle")
+		else:
+			# Transición normal → push plan
+			plan_stack.push_plan(target, data, &"transition")
 	state_changed.emit(StringName(old_sn), StringName(new_sn))
 	print("[StateMachine] Transición: %s -> %s" % [old_sn, new_sn])
 
@@ -215,3 +236,29 @@ func get_current_state_name() -> StringName:
 
 func get_history() -> Array[StringName]:
 	return _history.duplicate()
+
+
+## ── Plan stack API (M64 iter. N) ─────────────────────────
+
+func get_plan_stack():
+	return plan_stack
+
+
+## Forzar恢复 del plan anterior (llamar desde watchdog o recovery)
+func recover_previous_plan() -> bool:
+	if plan_stack == null or plan_stack.is_empty():
+		return false
+	var previous: Dictionary = plan_stack.peek_previous()
+	if previous.is_empty():
+		return false
+	var target_state: StringName = StringName(str(previous.get("state", &"Idle")))
+	var data: Dictionary = previous.get("data", {})
+	print("[StateMachine] Recovering plan: %s" % target_state)
+	transition_to(target_state, data)
+	return true
+
+
+## Limpiar planes al completar rutina exitosamente
+func clear_plans() -> void:
+	if plan_stack != null:
+		plan_stack.clear()
