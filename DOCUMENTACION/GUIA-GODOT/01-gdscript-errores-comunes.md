@@ -1,8 +1,8 @@
 # GDScript — Errores Comunes y Reglas
 
-> **Modelo:** MiMo V2.5
-> **Plataforma:** OpenCode
-> **Fecha:** 2026-09-09
+> **Modelo:** agnes-3-flash
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-09-30 (P-52: agregados §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -391,6 +391,98 @@ El identificador del const hace sombra al tipo global. Solución: no usar `class
 
 ---
 
+## 26. Autoload no resuelto en `_ready()` de un nodo de escena (P-52, Godot 4.7.2)
+
+**Síntoma:** `get_node_or_null("/root/fauna")` en el `_ready()` de un nodo de escena devuelve
+`null`, **aunque el autoload existe, está listo y su log de boot ya se vio** en la salida.
+No hay error de parse: el lookup simplemente "falla en silencio" (devuelve null) y el código
+se ramifica por el camino de degradación.
+
+**Causa:** orden de ready del árbol. En ese punto exacto del `_ready()` del nodo, el autoload
+blanco no está aún resoluble por el lookup normal del nodo, aunque `root.get_node_or_null("fauna")`
+sí lo resuelve un par de frames después. No es que el autoload no exista: es timing.
+
+**Solución:** lookup **lazy + reintento**, usando el patrón canónico del repo
+(`Engine.get_main_loop().root.get_node_or_null(...)`, como `fauna_manager._get_animal_ai`):
+
+```gdscript
+# ❌ Incorrecto — eager en _ready (devuelve null por timing):
+func _ready() -> void:
+    _fauna = get_node_or_null("/root/fauna")   # null → el nodo "deja de hacer nada"
+
+# ✅ Correcto — lazy + reintento con tope:
+func _process(_d: float) -> void:
+    if not _listo:
+        _frames += 1
+        var f = Engine.get_main_loop().root.get_node_or_null("fauna")
+        if f != null:
+            _listo = true
+            _poblar(f)
+        elif _frames > MAX_REINTENTO:
+            push_warning("autoload 'fauna' no apareció: se omite (no rompe la escena)")
+```
+
+**Fuente:** P-49 (spawner de fauna M36 en main_island), agnes-3-flash / Kilo Code, 2026-09-25.
+
+---
+
+## 27. `Vector3.xz` es property read-only y NO pasa por dispatch de Variant (P-52, Godot 4.7.2)
+
+**Síntoma:** `SCRIPT ERROR: Invalid access to property or key 'xz' on a base object of
+type 'Vector3'.` Cuando se accede a `.xz` (o `.yx`/`.zy`) sobre un Vector3 que llega por una
+referencia **no tipada / Variant** (p. ej. una `const` leída desde un autoload dinámico).
+
+```gdscript
+var mundo = get_node_or_null("MundoRaiz")   # Variant (Node), no tipado
+var v: Vector3 = mundo.SPAWN_CONTENIDO        # llega como Variant
+var objetivo = v.xz                            # ❌ SCRIPT ERROR: 'xz' no accede por dispatch
+```
+
+**Causa:** `.xz`/`.yx`/`.zy` son properties **solo lectura** que exponen un Vector2. Cuando la
+base es un `Variant`, GDScript resuelve la propiedad por el camino genérico de `Object` y ese
+camino **no resuelve los getters read-only de componentes** → error en tiempo de ejecución.
+Las componentes base (`.x`, `.y`, `.z`, `.w`) sí son settable y **sí** pasan por el dispatch.
+
+**Solución:** construir el vector explícitamente con las componentes base (que sí se dispatchean):
+
+```gdscript
+# ✅ Correcto — armar el Vector2/Vector3 con .x/.y/.z:
+var objetivo: Vector2 = Vector2(v.x, v.z)                 # Vector3 -> Vector2
+var plano: Vector3 = Vector3(v.x, 0.0, v.z)               # Vector3 con y=0
+```
+
+**Fuente:** P-49 (spawner de fauna M36), agnes-3-flash / Kilo Code, 2026-09-25.
+
+---
+
+## 28. `:=` sobre un helper que devuelve Variant no infiere tipo (P-52, Godot 4.7.2)
+
+**Síntoma:** `SCRIPT ERROR: Parse Error: Cannot infer the type of "locator" variable because
+the expression does not have a set type.` Al escribir `var x := helper()` donde `helper()`
+**no declara tipo de retorno** (devuelve `Variant`).
+
+```gdscript
+func _get_locator():                    # sin anotación de retorno → devuelve Variant
+    return Engine.get_main_loop().root.get_node_or_null("TerrainLocator")
+
+var locator := _get_locator()           # ❌ Parse Error: no se puede inferir el tipo
+```
+
+**Causa:** `:=` (inferencia) exige que el lado derecho tenga **tipo estático concreto**. Una
+función sin `-> Tipo` devuelve `Variant`, y el parser no puede inferir un tipo sobre un
+`Variant`. Es un error de **parse** (falla al cargar el script), no de runtime.
+
+**Solución:** usar `=` sin inferencia, y anotar el tipo explícito si lo necesitás:
+
+```gdscript
+var locator = _get_locator()                                  # ✅ Variant (ok para duck-typing)
+var locator2: Node = Engine.get_main_loop().root.get_node_or_null("TerrainLocator")  # ✅ tipado
+```
+
+**Fuente:** P-38/P-49 (integración M65/M36), agnes-3-flash / Kilo Code, 2026-09-25.
+
+---
+
 ## Errores rápidos de referencia
 
 | Error | Solución | § |
@@ -403,3 +495,6 @@ El identificador del const hace sombra al tipo global. Solución: no usar `class
 | `RayCast3D.target_position` espera Vector3 | `Vector3(0, 0, -5)`, no Transform3D | 9.6 |
 | `VoxelBlockyModelCube` sin set_material | Asignar material en editor | 9.7 |
 | `Curve.add_point` dominio 0-1 | Normalizar: `hora / 24.0` | 9.61 |
+| Autoload null en `_ready()` (timing) | lookup lazy + reintento vía `Engine.get_main_loop().root` | P-52 §26 |
+| `Vector3.xz` por Variant (read-only) | `Vector2(v.x, v.z)` / `Vector3(v.x, 0, v.z)` | P-52 §27 |
+| `:=` sobre helper que devuelve Variant | `=` sin inferencia o anotar el tipo | P-52 §28 |
