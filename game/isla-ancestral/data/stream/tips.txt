@@ -1,0 +1,16 @@
+# M63 §6 (L98): consejos de mundo de la pantalla de carga.
+# Formato: una frase por linea. Las lineas que empiezan con '#' son comentarios
+# y las lineas en blanco se ignoran (ver scripts/stream/consejos_carga.gd).
+# La rotacion es determinista por semilla de partida (M29): misma partida ->
+# mismo orden. NOTA: esta es la lista SEMILLA; ampliarla es trabajo de contenido
+# (Nivel C, dueño de contenido), no de logica.
+Los cocos caen solos si sacudes la palmera con fuerza.
+Al atardecer, las olas del este traen conchas raras.
+Los aldeanos recuerdan si les regalas fruta de tu isla.
+Plantar hierba alta atrae mariposas y, con suerte, alguna luciernaga.
+El templo antiguo guarda secretos bajo su primera escalera.
+Pesca con paciencia: los peces grandes desconfian del ruido.
+Una hoguera cerca del agua mantiene a raya a los espiritus curiosos.
+Los bancos de niebla anuncian lluvia; recoge tu ropa tendida.
+Cada isla tiene un ritmo distinto de mareas: aprende el tuyo.
+Los mensajes en botellas llegan mas lejos si los lanzas de noche.

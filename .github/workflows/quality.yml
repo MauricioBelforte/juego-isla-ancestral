@@ -433,13 +433,18 @@ jobs:
           # + regiones P12-P14) esta probada EN ROJO con 5 sondas (A asercion falsa,
           # B return que aborta _run, C piso+1, D bloques sin cerrar, E _fin
           # suprimido): las 5 dan EXIT 1 y el control sin mutar da EXIT 0.
-          # 21+29+9+7+7+51 = 124 checks. Gate duro: || FAIL=1.
+          # iter. 6 (Log 1193, DeepSeek-V4.1-Flash): cierra §6 L98/L99 (consejos
+          # de mundo rotando por semilla M29 + fundido hacia la escena); la suite
+          # nueva tiene el mismo guardian de 3 capas, piso 42 MEDIDO y las mismas
+          # 5 sondas en rojo (5/5 EXIT 1, control EXIT 0).
+          # 21+29+9+7+7+51+42 = 166 checks. Gate duro: || FAIL=1.
           godot --headless --script scripts/stream/test_stream.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_stream_m63.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_pausa_cargas.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_pantalla_carga.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_rf2_threaded.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_stream_m63_iter5.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_stream_m63_iter6.gd 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 
