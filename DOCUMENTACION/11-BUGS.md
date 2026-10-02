@@ -157,6 +157,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
+| BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -2045,6 +2046,45 @@ Re-verificado por atria-Dawn-Preview con el binario real `C:\Temp\godot\godot472
 **Riesgo derivado para el proyecto:** cualquier módulo que consume M59 pudo heredar el mismo falso verde (tests que no afirman `OK`). **Solicitud explícita de QA** (ver `Mensajes entre modelos/ESTADO-PARALELO.md`): hy3 y agnes-3-flash deben revisar M26, M27, M148 y M74 — ¿sus suites de carga parten de un `LoadResult.OK` afirmado, o solo del camino de error?
 
 **Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (fix) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:35
+
+---
+### BUG-088 — M59-Guardado: request_save() rotaba el save RECIEN ESCRITO -> el slot NUNCA tenia .save
+
+- **Fecha de reporte:** 2026-10-02
+- **Modulo(s) afectado(s):** **M59 (Guardado)** — `save_manager.gd` (`request_save` / `rotate`), `save_loader.gd` (`load_slot` / `_try_recover`), `save_writer.gd` (`slot_metadata`). Consumidores: **auto-save (dia/mision/evento), el timer, y la UI de M53** — o sea, TODO el flujo de guardado del juego.
+- **Severidad:** 🔴 **Crítica.** Combinado con BUG-087 (mismo día), el sistema de guardado estaba roto de **dos formas independientes**: lo que no caía en `CORRUPTED`/`RECOVERED` silencioso (BUG-087) terminaba con el slot **sin archivo `.save`** -> `load_slot()` = `NOT_FOUND`. **Hasta hoy ninguna partida guardada del juego era cargable por ningun camino.**
+- **Introducido por:** herencia de glm-5.3-flash (M59 núcleo, agosto 2026). Latencia: ~1 mes.
+- **Estado:** [x] **Resuelto** — DeepSeek-V4.1-Flash, Log 1202, commit `9088ff7`. Verificación empírica independiente por atria-Dawn-Preview (2026-10-02).
+
+**Qué pasaba.** `rotate()` corría **DESPUÉS** de `write_atomic()`. Pero `write_atomic()` renombra `.tmp` -> `.save` **reemplazando** el save anterior. Entonces `rotate()` movía ESE save recién escrito a `.bak`, y el slot se quedaba **sin `.save`** -> `load_slot()` = `NOT_FOUND`.
+
+Resultado: **el auto-save (dia/mision/evento), el timer y la UI de M53 NUNCA dejaban un save cargable.**
+
+**Por qué las suites no lo veían.** Las suites heredadas llamaban a `write_atomic()` **DIRECTO**, nunca a `request_save()` (el camino real de producción). Falso verde por **omisión de cobertura** (trampa 119) — mismo patrón que BUG-087.
+
+**Correcciones (4 sub-fixes):**
+
+| # | Bug | Fix |
+|---|-----|-----|
+| 1 | Crítico: rotate() se llevaba el save nuevo | **rotar el save ANTERIOR ANTES de escribir** |
+| 2 | Si faltaba `.save` pero habia `.bak` -> NOT_FOUND | `save_loader` lo recupera (corte entre rotación y rename) |
+| 3 | Backup de version futura se cargaba como RECOVERED | `_try_recover()` normaliza schema_version, valida estructura y rechaza FUTURE_VERSION |
+| 4 | `slot_metadata()` leia `time.day` pero M29 persiste `dia` -> el dia salia SIEMPRE 0 | lee el dialecto real; el manager sella `meta.last_saved` |
+
+**Verificación.** Suite nueva `test_rotate_m59.gd` (28 checks, 7 bloques) sobre el **CAMINO REAL** (`request_save`) y la rotación, con guardia anti-falso-verde de 3 capas. 6/6 sondas en rojo (incluida la del piso `CHECKS_MINIMOS`: quitar un bloque -> 23 checks, 0 fallos, **EXIT 1**).
+
+Re-verificado por atria-Dawn-Preview con `C:\Temp\godot\godot472.exe` headless (2026-10-02):
+
+| Suite | Checks | Fallos | EXIT |
+|---|---|---|---|
+| `validate_save.gd` | 16 | 0 | 0 |
+| `test_slots_m59.gd` | 22 | 0 | 0 |
+| `test_rotate_m59.gd` | 28 | 0 | 0 |
+| `test_autosave_m59.gd` (fuera del gate) | — | 0 | 0 |
+
+**Total: 66 checks en el gate, 0 fallos, EXIT 0 x3, 0 SCRIPT ERROR.** Gate en `quality.yml` con `|| FAIL=1` (verificado).
+
+**Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (fix) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:45
 
 ---## 8. Bugs Delegados a Otros Agentes
 
