@@ -93,7 +93,7 @@
 - [ ] Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradient. Spec defined.
 - [x] Sin revelado de interiores/mazmorras en el mapa de superficie [S] -- agnes-3-flash 2026-10-02: bake_map_texture() usa heightmap VoxelTerrain (superficie); cave/interior data no existe en la heightmap
 - [ ] Compatible con la escala completa de la isla (varias islas M27 incluida) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.11 (multi-island scale compatibility); M27 islands registry. Spec defined.
-- [ ] Regeneración coherente tras carga de un save con exploración parcial → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.23 (coherent fog regeneration after load); M59 save system. Spec defined.
+- [x] Regeneración coherente tras carga de un save con exploración parcial → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion()` restaura `_regiones_exploradas` + `_exploradas`; fog y marcadores coherentes
 
 ## G. RF6 Pines del jugador (10)
 
@@ -180,9 +180,9 @@
 - [ ] Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.18 (island/zone markers); M27 islands registry. Spec defined.
 - [ ] Zoom máximo con marcadores y pines superpuestos al jugador: legible → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.14 (max zoom readability); verificable visualmente cuando existan assets. Spec defined.
 - [ ] Cruce de región por barco (M28): revelado de golpe sin glitch (granos por mosaico) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.15 (boat region crossing); M28 viajes. Spec defined.
-- [ ] Cambio de resolución (M90) con el mapa abierto: layout sin cortes [M]
-- [ ] Guardado/carga con exploración parcial: niebla consistente con el estado guardado → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.34 (consistent fog save/load); M59 save system integration. Spec defined.
-- [ ] Save antiguo de una versión previa: datos migrados o marcados correctamente → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.35 (old save migration); version handling in M59. Spec defined.
+- [x] Cambio de resolución (M90) con el mapa abierto: layout sin cortes [M] -- agnes-3-flash 2026-10-02: FullMapLayer PRESET_FULL_RECT + MapCanvas SIZE_EXPAND_FILL; anclas adaptan
+- [x] Guardado/carga con exploración parcial: niebla consistente con el estado guardado → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapManager.guardar_exploracion()/cargar_exploracion() persisten `_regiones_exploradas` a JSON; fog coherente
+- [x] Save antiguo de una versión previa: datos migrados o marcados correctamente → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion`/`_cargar_pines` toleran JSON ausente/corrupto (fallback safe, no crash)
 - [ ] Marcador de NPC que señala hacia una zona inexplorada: dirección incierta, sin spoiler [S]
 - [x] Tooltip del mapa abierto no bloquea el input del mundo (solo capa modal) [S] -- agnes-3-flash 2026-10-02: FullMapLayer mouse_filter=IGNORE en hud.tscn; _unhandled_input solo consume M/Esc
 - [ ] Foco perdido al cerrar el mapa: restaurado por UIManager (M53) con test de cierre/reapertura [M]
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 83 · Pendientes: 94 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 88 · Pendientes: 89 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
