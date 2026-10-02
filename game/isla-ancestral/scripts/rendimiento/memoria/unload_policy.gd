@@ -1,6 +1,6 @@
-# Modelo: deepseek-v4-flash (núcleo) · DeepSeek-V4.1-Flash (iter. 3)
+# Modelo: deepseek-v4-flash (núcleo) · DeepSeek-V4.1-Flash (iter. 3, iter. 5)
 # Plataforma: Kilo Code · WorkBuddy
-# Fecha: 2026-09-01 · 2026-09-19
+# Fecha: 2026-09-01 · 2026-09-19 · 2026-10-02
 #
 # M62: Memoria — UnloadPolicy
 # Política de descarga (RF5): marca candidatos (recursos) con peso y
@@ -26,6 +26,7 @@ const MAX_POR_FRAME_PRESET := {"baja": 8, "media": 12, "alta": 16}
 
 var _candidatos: Array = []  # [{recurso, peso, distancia, edad}]
 var _ultimo_lote: Array = [] # [{peso, distancia, edad}] del último ejecutar_descarga()
+var _diferidos_lote: int = 0 # candidatos VETADOS por el filtro (handshake §5.3)
 
 func marcar_candidato(recurso: Resource, peso: int, distancia: float = INF) -> void:
 	_candidatos.append({
@@ -43,8 +44,15 @@ func max_por_frame_para(preset: String) -> int:
 ## Ordena por: lejanía primero, luego por edad (LRU). Devuelve MB "liberados"
 ## (peso de candidatos retirados de la cola; el drop de referencia real lo
 ## hace el caller, ya que Resource es RefCounted y no admite free()).
-func ejecutar_descarga(hasta_mb: int, max_por_frame: int = MAX_POR_FRAME) -> int:
+##
+## `filtro` (iter. 5, diseño §5.3): si es válido, se llama con el recurso de
+## cada candidato y un `false` lo VETA — no se descarga y NO sale de la cola
+## (queda para el próximo lote). Es el gancho del handshake con M63: el 62 no
+## descarga un recurso que la cola del 63 tenga EN CARGA.
+func ejecutar_descarga(hasta_mb: int, max_por_frame: int = MAX_POR_FRAME,
+		filtro: Callable = Callable()) -> int:
 	_ultimo_lote.clear()
+	_diferidos_lote = 0
 	# Ordenar: candidatos lejanos (distancia grande) primero, luego LRU
 	_candidatos.sort_custom(func(a, b):
 		var da: float = a.get("distancia", INF)
@@ -59,6 +67,10 @@ func ejecutar_descarga(hasta_mb: int, max_por_frame: int = MAX_POR_FRAME) -> int
 	for candidato in _candidatos:
 		if liberados >= hasta_mb or descargados >= max_por_frame:
 			break
+		if filtro.is_valid() and not bool(filtro.call(candidato.get("recurso"))):
+			# Vetado (handshake): ni se descarga ni se consume de la cola.
+			_diferidos_lote += 1
+			continue
 		liberados += int(candidato["peso"])
 		descargados += 1
 		_ultimo_lote.append({
@@ -70,6 +82,10 @@ func ejecutar_descarga(hasta_mb: int, max_por_frame: int = MAX_POR_FRAME) -> int
 	for c in a_eliminar:
 		_candidatos.erase(c)
 	return liberados
+
+## Cuántos candidatos vetó el filtro en el último `ejecutar_descarga()`.
+func diferidos_ultimo_lote() -> int:
+	return _diferidos_lote
 
 ## Resumen textual del último lote, para el log de M103 (diseño §G).
 func resumen_ultimo_lote() -> String:

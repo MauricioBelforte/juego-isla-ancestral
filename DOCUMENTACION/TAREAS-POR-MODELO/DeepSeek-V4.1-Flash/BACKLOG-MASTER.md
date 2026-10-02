@@ -712,3 +712,29 @@ verifiques vos, usa tu practica habitual de varios angulos.
       director; 0 citas vivas a secciones inexistentes. **NO sella §21.8** (autor == verificador).
       **Hallazgo ajeno reportado (no tocado, §21.4):** `validar_workflows.py` falla por 5 entradas
       obsoletas de `DEUDA_CONOCIDA` de M64 (scripts ya versionados). (2026-10-02)
+
+- [x] Log reservado: **1187** — **M62 (Memoria) iter. 5: handshake con M63 + edge cases de §K.**
+      Módulo **reservado de vuelta** al autor (commit `6d8d02b`); hy3 (Log 1128) lo dejó **sin sello
+      limpio** (98 `[x]` / 52 `[ ]`) con la nota de que el autor puede cerrar los 52. Al reservar:
+      `--estado` justo antes dio **primero=1187**; al cerrar, el pool arranca en **1188**. `--estado`
+      final: **0 conflictos**.
+      **Implementado (código):** handshake 63/62 (`avisar_carga_iniciada/terminada`, `esta_en_carga`,
+      `_puede_descargar` como filtro `Callable` en `UnloadPolicy.ejecutar_descarga`) — **el 62 NUNCA
+      descarga lo que el 63 está cargando**, ni en enforcement nivel 3. Cola de transición de escena
+      (doble cambio = 1 descarga; cancelación drena la cola). Región rápida → fuerza liberación. Banco
+      de audio diferido. Atlas LRU con log. Determinismo de la decisión (RN9).
+      **Suite nueva** `test_memoria_m62_iter5.gd`: 7 bloques (A–G), **60 checks, 0 fallos, exit 0, ×3
+      idénticas**. Guardián de 3 capas con piso **medido** (placeholder 44 → 60 real) y **probado EN
+      ROJO con 5 sondas** (A aserción falsa · B `return` en `_run()` · C piso+1 · D bloques sin cerrar
+      · E `_fin` suprimido): **5/5 exit 1**, control 0. **Exit code REAL** del proceso verificado en la
+      sonda B = **1** (los 7 bloques faltantes nombrados por la capa 3). **Regresión:** las 5 suites
+      previas ×3 = 247/0 → **total M62 = 307 checks**.
+      **Checklist: 98→107 `[x]`, 52→43 `[ ]`, 0 `[?]`** (contado por PREFIJO de línea). Cierra **L113,
+      L157, L160, L162, L167, L168, L171, L172, L173** con evidencia. **NO cierra los 43 restantes**
+      (no-headless: sesiones 30 min, teleport ×10, baselines §L, integraciones M08/M41-M44/M63/M09/M29)
+      y **NO toca M61** (en curso) → L154 sigue `[ ]`.
+      **Defecto propio cazado por el propio guardián:** `descastes` vs `descartes` abortó el bloque B y
+      el resumen lo dijo (`[FAIL] el bloque B NO se ejecutó`), sin "0 fallos" falso.
+      `auditar_arquitectura_m62.py`: 0 hallazgos nuevos, 0 violaciones B1/B2/B3. `validar_workflows.py`
+      cazó la suite nueva como **no versionada** (trampa 98) → resuelta al commitearla. **NO sella
+      §21.8** (autor == verificador). (2026-10-02)

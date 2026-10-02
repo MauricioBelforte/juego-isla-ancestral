@@ -16,14 +16,15 @@
 | `test_pool_iter2.gd` | 25 | 0 | 0 | idénticas |
 | `test_memoria_m62_iter3.gd` | 133 | 0 | 0 | idénticas |
 | `test_m62_liberacion.gd` (iter. 4) | 15 | 0 | 0 | idénticas (×5) |
+| `test_memoria_m62_iter5.gd` (iter. 5) | 60 | 0 | 0 | idénticas (×3) |
 | `generar_budgets.gd -- --check` | 20 | 0 | 0 | sha256 `872f9321bc61ab21` en 2 escrituras |
 
-**Total: 247 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
+**Total: 307 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
 `[OK]`/`[FAIL]` **normalizada**, no sobre la salida cruda: la salida cruda trae timestamps de sesión y
 duraciones, y compararla entera daría «0 idénticas» con la suite perfectamente determinista.
 
-`CHECKS_MINIMOS` de cada suite se fijó con la salida real de estas corridas (133, 47, 27, 25), no con
-una estimación.
+`CHECKS_MINIMOS` de cada suite se fijó con la salida real de estas corridas (133, 60, 47, 27, 25), no
+con una estimación.
 
 ## 2. La primera corrida de `test_memoria_m62_iter3.gd` encontró 2 defectos reales
 
@@ -206,4 +207,60 @@ python scripts/auditar_arquitectura_m62.py
 # suite headless
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_m62_liberacion.gd
+```
+
+## 9. Iteración 5 (Log 1187): handshake con M63 y edge cases de §K
+
+### 9.1 `test_memoria_m62_iter5.gd` — 60 checks, 0 fallos, ×3 idénticas
+
+7 bloques (A–G), 0 SCRIPT ERROR propio:
+
+- **A. Handshake con M63 (L157/L160):** un recurso marcado «en carga» por el 63 **no se descarga**;
+  el veto se cuenta en `diferidos_ultimo_lote()` y el candidato **no sale de la cola**. Al terminar
+  la carga del 63, el 62 sí lo descarga.
+- **B. Enforcement respeta el handshake:** el nivel 3 (duro) descarga el libre pero **deja en cola**
+  el que el 63 está cargando.
+- **C. Cola de transición (L172/L173):** el 2.º cambio de escena **encola** (no descarga dos veces);
+  al terminar arranca el encolado; `cancelar()` **drena** la cola y cuenta la cancelación.
+- **D. Región rápida (L168):** con candidatos pendientes, el cambio de región **fuerza** la
+  liberación y cuenta en `liberaciones_forzadas()`.
+- **E. Audio diferido (L171):** un banco pedido **durante** una descarga se difiere y se reproduce al
+  terminar; otro banco no se ve afectado.
+- **F. Atlas LRU con log (L167):** evicta por uso más antiguo, respeta el tope y no toca la reciente.
+- **G. Determinismo (RN9/L113):** dos monitores con la misma entrada → mismo nivel y **mismo orden**
+  de descarga.
+
+### 9.2 La 1.ª corrida falló — y el guardián lo dijo
+
+Escribí `mm.descastes_por_carga()` (transposición) cuando el método real es `descartes_por_carga()`.
+El `SCRIPT ERROR` **abortó el bloque B** y el resumen imprimió
+`[FAIL] el bloque B NO se ejecutó (posible SCRIPT ERROR que abortó la función)` → `58 checks, 1 fallos`,
+EXIT 1. Corregido el typo: **60 checks, 0 fallos**. No hubo «0 fallos» falso: la capa 1 (bloques
+nombrados) hizo su trabajo.
+
+### 9.3 Guardián probado EN ROJO: 5 de 5 sondas
+
+| Sonda | Inyección | Medido |
+|---|---|---|
+| A | aserción falsa | `61 checks, 1 fallos` → EXIT 1 |
+| B | `return` al inicio de `_run()` | `7 checks, 8 fallos` → EXIT 1 (**exit real del proceso verificado = 1**) |
+| C | piso +1 (61) | `60 checks, 1 fallos` → EXIT 1 |
+| D | `return` al inicio del bloque C | `46 checks, 2 fallos` → EXIT 1 |
+| E | `_fin("A")` suprimido | `61 checks, 1 fallos` → EXIT 1 |
+| — | control sin mutar | `60 checks, 0 fallos` → **EXIT 0** |
+
+### 9.4 Regresión y auditoría
+
+- 5 suites previas tras tocar `memory_monitor.gd`/`unload_policy.gd`: `27+47+25+133+15 = 247`, 0 fallos, ×3.
+- `auditar_arquitectura_m62.py`: **0 hallazgos nuevos**, **0 violaciones B1/B2/B3** en el código nuevo;
+  `--selftest` en verde.
+- `validar_workflows.py` cazó la suite nueva como **no versionada** (trampa 98: verde en disco, rojo en
+  CI) — resuelto al commitearla. Quedan 5 `DEUDA_CONOCIDA` obsoletas **ajenas** (dueño M64), reportadas
+  y **no tocadas**.
+
+### 9.5 Reproducir
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_memoria_m62_iter5.gd
 ```

@@ -43,9 +43,10 @@ levantan **todos los autoloads**, así que la salida propia se separa por marcad
 | `test_pool_iter2.gd` (iter. 2) | 25 | API única, auditoría de señales, fallback honesto, drenado | ✅ (agregado en iter. 3) |
 | `test_memoria_m62_iter3.gd` (iter. 3) | 133 | dataset/presets, semáforo, enforcement, muestreo, drift, POI, pool, LeakGuard, texturas, descargas | ✅ (nueva) |
 | `test_m62_liberacion.gd` (iter. 4) | 15 | presupuesto de liberación por refcount (pico por objeto, delta de lote), hilo principal, huérfanos en reposo | ✅ (nueva) |
+| `test_memoria_m62_iter5.gd` (iter. 5) | 60 | handshake con M63 (el 62 no descarga lo que el 63 carga), cola de transición de escena, región rápida → fuerza liberación, audio diferido, atlas LRU con log, determinismo (RN9) | ✅ (nueva, probada con 5 sondas) |
 | `generar_budgets.gd -- --check` | 20 | dataset vs diseño §2 (no es test de código: es **gate de datos**) | aborta sin escribir |
 
-**Total de checks de código: 247.**
+**Total de checks de código: 307.**
 
 Además, **fuera de GDScript**, la iter. 4 agrega un auditor estático con su propio selftest:
 
@@ -118,3 +119,27 @@ distinguir de «no miré» no es un aprobado.
 su ID de bug, se imprimen en **cada** corrida y la clave es el hallazgo **exacto** (la componente por
 sus miembros ordenados, la arista por par origen→destino): así un hallazgo NUEVO dentro de un archivo
 ya permitido sigue tumbando la puerta. Si un arreglo deja una entrada obsoleta, el auditor lo avisa.
+
+## 8. La iter. 5: guardián probado con 5 sondas y piso medido (no copiado)
+
+`test_memoria_m62_iter5.gd` cubre lo que el handshake con M63 y los edge cases de §K necesitaban, en
+**7 bloques (A–G) / 60 checks**. El piso `CHECKS_MINIMOS` arrancó como **placeholder (44)** y se fijó
+en **60 tras la 1.ª corrida verde** — la regla es que el piso se **mide**, no se estima.
+
+**Las 5 sondas (skill §4).** Copia temporal → inyección → correr → borrar. Cada sonda debe dar
+**EXIT 1**; el control sin mutar, **EXIT 0**:
+
+| Sonda | Inyección | Resultado medido |
+|---|---|---|
+| A | aserción falsa (`_check("...", 1 == 2)`) | `61 checks, 1 fallos` → EXIT 1 |
+| B | `return` al inicio de `_run()` (ningún bloque corre) | `7 checks, 8 fallos` → EXIT 1 (capa 3 nombra los 7 bloques) |
+| C | piso +1 (`CHECKS_MINIMOS := 61`) | `60 checks, 1 fallos` → EXIT 1 |
+| D | `return` al inicio del bloque C (C–G sin cerrar) | `46 checks, 2 fallos` → EXIT 1 |
+| E | suprimir un solo `_fin("A")` | `61 checks, 1 fallos` → EXIT 1 |
+
+De la sonda B se verificó además el **exit code REAL del proceso** (no sólo el texto): `EXIT REAL = 1`,
+con los 7 `[FAIL] el bloque X NO se ejecutó` impresos por la **capa 3** — la que corre en su propio
+`call_deferred` aunque `_run()` haya abortado.
+
+**Regresión.** Las 5 suites previas siguen verdes tras tocar `memory_monitor.gd`/`unload_policy.gd`:
+`27 + 47 + 25 + 133 + 15 = 247` checks, 0 fallos, ×3 cada una.

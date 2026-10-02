@@ -1,6 +1,6 @@
-# Modelo: deepseek-v4-flash (núcleo) · glm-5.3-flash (iter. 2) · DeepSeek-V4.1-Flash (iter. 3)
+# Modelo: deepseek-v4-flash (núcleo) · glm-5.3-flash (iter. 2) · DeepSeek-V4.1-Flash (iter. 3, iter. 5)
 # Plataforma: Kilo Code · WorkBuddy
-# Fecha: 2026-09-01 · 2026-09-19
+# Fecha: 2026-09-01 · 2026-09-19 · 2026-10-02
 #
 # M62: Memoria — MemoryMonitor (autoload)
 # Servicio único de monitoreo de memoria (RF1): muestrea memoria del motor
@@ -31,6 +31,20 @@
 #    y no existía: sólo el pico de sesión.
 # Además: las decisiones de descarga se registran en el log rotado de M103
 # (`GameLogger`), cosa que el checklist daba por hecha y el código no hacía.
+#
+# ── Iter. 5 (Log 1187, DeepSeek-V4.1-Flash) — handshake con M63 y colas ──
+# 6. HANDSHAKE CON M63 (diseño §5.3). El 62 anunciaba `recurso_descargar` pero
+#    NADIE miraba si el 63 lo tenía EN CARGA: la orden se ejecutaba igual. Se
+#    añaden `avisar_carga_iniciada/terminada()`, `esta_en_carga()` y un filtro
+#    en `UnloadPolicy.ejecutar_descarga()` que VETA el candidato en carga (no se
+#    descarga y queda en la cola para el próximo lote). Cierra L157 y L160.
+# 7. COLA DE TRANSICIÓN DE ESCENA. Cambiar de escena dos veces antes de terminar
+#    la transición no debe descargar dos veces: la segunda se ENCOLA y la
+#    cancelación es limpia. Cierra L172 y L173.
+# 8. CAMBIO RÁPIDO DE REGIÓN: el monitor lo detecta y FUERZA la liberación de
+#    los candidatos pendientes. Cierra L168.
+# 9. AUDIO PEDIDO DURANTE UNA DESCARGA: se difiere hasta que termina (nunca se
+#    reproduce a medias ni revienta). Cierra L171.
 
 extends Node
 
@@ -82,6 +96,31 @@ var _alarmas_pico: int = 0
 var _ultimo_enforcement: int = 0
 var _ultima_muestra: float = 0.0
 var _logger: Node = null
+
+## ── Iter. 5: handshake con M63 (diseño §5.3) ──
+## instance_id del recurso -> ruta (solo para el log). Lo que el 63 tiene EN
+## CARGA ahora mismo. El 62 NUNCA descarga algo que esté aquí.
+var _en_carga: Dictionary = {}
+var _descartes_por_carga: int = 0
+
+## ── Iter. 5: cola de transición de escena (checklist §K L172/L173) ──
+var _transicion_en_curso: bool = false
+var _transiciones_encoladas: int = 0
+var _transiciones_completadas: int = 0
+var _doble_descarga_evitada: int = 0
+var _cancelaciones_transicion: int = 0
+
+## ── Iter. 5: cambio rápido de región (checklist §K L168) ──
+var _region_actual: String = ""
+var _cambios_region: int = 0
+var _liberaciones_forzadas: int = 0
+
+## ── Iter. 5: audio pedido durante una descarga (checklist §K L171) ──
+var _audio_descargando: Dictionary = {}   # banco -> true
+var _audio_diferido: Dictionary = {}      # banco -> true
+
+## ── Iter. 5: evicción de atlas con log (checklist §K L167) ──
+var tex: TextureMemory = null
 
 func _ready() -> void:
 	budget = MemoryBudgetRegistry.new()
@@ -206,7 +245,7 @@ func _enforcement(actual_mb: float, nivel: int) -> void:
 		return
 	var objetivo := int(float(total) * OBJETIVO_DESCARGA)
 	var max_por_frame := unload.max_por_frame_para(budget.preset())
-	var liberados := unload.ejecutar_descarga(objetivo, max_por_frame)
+	var liberados := unload.ejecutar_descarga(objetivo, max_por_frame, _puede_descargar)
 	var etiqueta := "DURO" if nivel == 3 else "SUAVE"
 	print("[M62] enforcement %s: actual=%d MB presupuesto=%d MB — descargados %d objetos"
 		% [etiqueta, int(actual_mb), total, liberados])
@@ -214,6 +253,173 @@ func _enforcement(actual_mb: float, nivel: int) -> void:
 		% [etiqueta, int(actual_mb), total, liberados], 2 if nivel == 3 else 1)
 	emit_signal("recurso_descargado", "enforcement_%s" % etiqueta.to_lower(), liberados)
 	_ultimo_enforcement = nivel
+
+## ── Handshake con M63 (diseño §5.3) ─────────────────────────────────────
+## El 63 avisa qué está cargando. El 62 NO descarga un recurso en carga: la
+## orden se DESCARTA y el candidato queda en la cola para el próximo lote.
+func avisar_carga_iniciada(recurso: Resource) -> void:
+	if recurso == null:
+		return
+	_en_carga[recurso.get_instance_id()] = recurso.resource_path
+
+func avisar_carga_terminada(recurso: Resource) -> void:
+	if recurso == null:
+		return
+	_en_carga.erase(recurso.get_instance_id())
+
+func esta_en_carga(recurso: Resource) -> bool:
+	return recurso != null and _en_carga.has(recurso.get_instance_id())
+
+## Filtro que `UnloadPolicy` consulta por candidato. Devuelve false = vetar.
+func _puede_descargar(recurso: Resource) -> bool:
+	if esta_en_carga(recurso):
+		_descartes_por_carga += 1
+		_log_m62("descarga DESCARTADA: recurso en carga por M63 (%s)"
+			% recurso.resource_path, 1)
+		return false
+	return true
+
+func recursos_en_carga() -> int:
+	return _en_carga.size()
+
+func descartes_por_carga() -> int:
+	return _descartes_por_carga
+
+## ── Cola de transición de escena (checklist §K L172/L173) ────────────────
+## Cambiar de escena dos veces antes de terminar la transición no debe
+## descargar dos veces: la segunda se ENCOLA.
+func iniciar_transicion_escena(destino: String = "") -> bool:
+	if _transicion_en_curso:
+		_transiciones_encoladas += 1
+		_doble_descarga_evitada += 1
+		_log_m62("transición a '%s' ENCOLADA (ya hay una en curso)" % destino, 1)
+		return false
+	_transicion_en_curso = true
+	_log_m62("transición a '%s' iniciada" % destino, 1)
+	return true
+
+func terminar_transicion_escena() -> void:
+	if not _transicion_en_curso:
+		return
+	_transiciones_completadas += 1
+	if _transiciones_encoladas > 0:
+		# Arranca la encolada SIN volver a descargar nada: eso es lo que evita
+		# la doble descarga. La transición sigue en curso.
+		_transiciones_encoladas -= 1
+		return
+	_transicion_en_curso = false
+
+func transicion_en_curso() -> bool:
+	return _transicion_en_curso
+
+func transiciones_completadas() -> int:
+	return _transiciones_completadas
+
+func transiciones_encoladas() -> int:
+	return _transiciones_encoladas
+
+func doble_descarga_evitada() -> int:
+	return _doble_descarga_evitada
+
+## Cancelación limpia: corta la transición y drena los candidatos pendientes.
+## Devuelve cuántos candidatos había pendientes (ninguno queda colgado).
+func cancelar_transicion_escena() -> int:
+	if not _transicion_en_curso and _transiciones_encoladas == 0:
+		return 0
+	_transicion_en_curso = false
+	_transiciones_encoladas = 0
+	_cancelaciones_transicion += 1
+	var pendientes := unload.candidatos_count() if unload != null else 0
+	if unload != null and pendientes > 0:
+		var total := presupuesto_total_mb()
+		if total > 0:
+			var max_pf := unload.max_por_frame_para(budget.preset()) if budget != null else 3
+			unload.ejecutar_descarga(int(float(total) * OBJETIVO_DESCARGA), max_pf, _puede_descargar)
+	_log_m62("transición CANCELADA: %d candidatos drenados" % pendientes, 1)
+	return pendientes
+
+func cancelaciones_transicion() -> int:
+	return _cancelaciones_transicion
+
+## ── Cambio rápido de región (checklist §K L168) ──────────────────────────
+## El monitor DETECTA el cambio de región y, si hay candidatos pendientes,
+## FUERZA su liberación (no espera a que el semáforo llegue al 90%).
+## Devuelve true si forzó una liberación.
+func avisar_cambio_region(region: String) -> bool:
+	if region == _region_actual:
+		return false
+	_region_actual = region
+	_cambios_region += 1
+	if unload == null or unload.candidatos_count() == 0:
+		return false
+	var total := presupuesto_total_mb()
+	if total <= 0:
+		return false
+	var objetivo := int(float(total) * OBJETIVO_DESCARGA)
+	var max_pf := unload.max_por_frame_para(budget.preset()) if budget != null else 3
+	var liberados := unload.ejecutar_descarga(objetivo, max_pf, _puede_descargar)
+	if liberados > 0:
+		_liberaciones_forzadas += 1
+		_log_m62("cambio de región '%s': liberación FORZADA de %d MB" % [region, liberados], 1)
+	return liberados > 0
+
+func region_actual() -> String:
+	return _region_actual
+
+func cambios_region() -> int:
+	return _cambios_region
+
+func liberaciones_forzadas() -> int:
+	return _liberaciones_forzadas
+
+## ── Audio pedido durante una descarga (checklist §K L171) ────────────────
+## Si un banco se pide MIENTRAS se descarga, no se reproduce a medias: se
+## DIFIERE hasta que la descarga termina. Nunca revienta.
+func iniciar_descarga_audio(banco: String) -> void:
+	if not banco.is_empty():
+		_audio_descargando[banco] = true
+
+func terminar_descarga_audio(banco: String) -> void:
+	_audio_descargando.erase(banco)
+
+func descargando_audio(banco: String) -> bool:
+	return _audio_descargando.has(banco)
+
+## Devuelve "reproducir" o "diferido". El caller (M42) decide qué hacer con el
+## "diferido": encolarlo o silenciarlo graceful.
+func pedir_banco_audio(banco: String) -> String:
+	if _audio_descargando.has(banco):
+		_audio_diferido[banco] = true
+		return "diferido"
+	return "reproducir"
+
+func bancos_audio_diferidos() -> Array:
+	var nombres: Array = _audio_diferido.keys()
+	nombres.sort()
+	return nombres
+
+func audio_diferido_count() -> int:
+	return _audio_diferido.size()
+
+## ── Evicción de atlas CON LOG (checklist §K L167) ───────────────────────
+## El detector puro vive en `TextureMemory`; acá se lo conecta al log (M103) y
+## a la señal de descarga, para que la evicción NO sea silenciosa. El diseño §G
+## pide que toda decisión de descarga quede registrada.
+func evictar_atlas(entradas: Array, hasta_mb: int, max_entradas: int) -> Array:
+	if tex == null:
+		tex = TextureMemory.new()
+	var evictadas := tex.evictar_atlas(entradas, hasta_mb, max_entradas)
+	if evictadas.is_empty():
+		return evictadas
+	var mb := 0
+	var nombres: Array[String] = []
+	for e in evictadas:
+		mb += int((e as Dictionary).get("mb", 0))
+		nombres.append(String((e as Dictionary).get("nombre", "")))
+	_log_m62("atlas: evictadas %d entradas (%d MB): %s"
+		% [evictadas.size(), mb, ", ".join(nombres)], 1)
+	emit_signal("recurso_descargado", "atlas", mb)
+	return evictadas
 
 ## Alarma de pico (RN3): salto > 200 MB entre muestras consecutivas.
 ## Devuelve true si alarmó y lo cuenta en `alarmas_pico()`. Sin ese contador la

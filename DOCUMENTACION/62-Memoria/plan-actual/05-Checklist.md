@@ -1,12 +1,12 @@
 **Modelo:** DeepSeek-V4.1-Flash (último modificador)
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-20 (iter. 4 — Log 1112)
+**Fecha:** 2026-10-02 (iter. 5 — Log 1187)
 
 # 05-Checklist.md — Módulo 62: Memoria
 
 ## Reserva actual
 
-- Estado: 🟢 En curso — iter. 4 (Log 1112) por DeepSeek-V4.1-Flash
+- Estado: 🟢 En curso — iter. 5 (Log 1187) por DeepSeek-V4.1-Flash
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Fase: Base de producción (soporte M61 Rendimiento)
 - Dificultad: 3
@@ -14,6 +14,7 @@
 - Entrada: M61 🟡 (núcleo OK, presupuestos base)
 - Salida: 5 defectos reales corregidos (denominador del semáforo, enforcement, muestreo por frame, drift/baseline a 5 min, pico por punto de interés) + `PoolFactory` + `LeakGuard` + `TextureMemory` + dataset regenerado por `generar_budgets.gd` + 4 suites con guardián probado por inyección (232 checks) + gate de CI en `quality.yml`
   - **iter. 4:** presupuesto de liberación por refcount **medido** (pico < 3 ms, delta de lote < 50 ms) + nodos huérfanos estables en reposo + **auditor estático de arquitectura de servicios** (`scripts/auditar_arquitectura_m62.py`, con selftest probado en rojo) + 2 gates nuevos de CI. 2 bugs nuevos (BUG-068/BUG-069).
+  - **iter. 5 (Log 1187):** **handshake con M63** (el 62 nunca descarga lo que el 63 está cargando) + cola de transición de escena + región rápida → fuerza liberación + banco de audio diferido + atlas LRU con log + determinismo (RN9). Suite nueva `test_memoria_m62_iter5.gd` (**60 checks**, guardián probado con **5 sondas en rojo**, exit real verificado) + gate de CI. **9 ítems** de §K/§J/§F pasan a `[x]`. Total M62 = **307 checks**.
 - Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json` + `scripts/auditar_arquitectura_m62.py`
 - Fecha cierre: (pendiente — al cerrar con `--estado`)
 
@@ -22,6 +23,7 @@
 - **iter. 2** (enforcement + pool): glm-5.3-flash / Kilo Code — 2026-09-01/03 (Log 604), liberado 🟡
 - **iter. 3**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-19 (Log 1094)
 - **iter. 4**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20 (Log 1112)
+- **iter. 5**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-10-02 (Log 1187) — módulo **reservado de vuelta** al autor (commit `6d8d02b`)
 
 ## A. Problema y objetivos
 
@@ -110,7 +112,7 @@
 - [x] RN4: topes configurables desde `budgets.tres` sin recompilar [S]
 - [x] RN5: implementación 100% Godot 4.x + GDScript, sin C# ni plugins externos [S]
 - [x] RN6: ninguna operación de memoria bloquea el hilo principal [M] — **iter. 4 (Log 1112): MEDIDO** para el caso de liberación por refcount: el pico de UNA operación es 0,279–0,492 ms (ligero) y 0,414–0,448 ms (pesado), por debajo de un frame a 60 FPS (16,67 ms). Alcance: mide liberación de `RefCounted`, no toda operación de memoria del motor
-- [ ] RN9: la gestión de memoria es transparente para la partida (determinismo intacto) [S]
+- [x] RN9: la gestión de memoria es transparente para la partida (determinismo intacto) [S] — **iter. 5 (Log 1187): MEDIDO.** Bloque G de `test_memoria_m62_iter5.gd`: dos monitores con la MISMA entrada dan el mismo nivel (`nivel_para()` en 8 valores) y el **mismo orden** de descarga con los mismos MB liberados. La decisión es función pura de la entrada
 
 ## G. Diseño de arquitectura
 
@@ -154,23 +156,23 @@
 - [ ] Leer los presupuestos definitivos de M61 antes de fijar los topes duros del 62 [S]
 - [x] Los topes de RAM del 62 respetan los frame budgets del 61 (deltas < 50 ms) [M]
 - [x] La cola de streaming (M63) informa cargas/descargas al MemoryMonitor [M]
-- [ ] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake) [C]
+- [x] LRU compartido: el 63 decide qué cargar, el 62 decide qué liberar (handshake) [C] — **iter. 5 (Log 1187).** `MemoryMonitor.avisar_carga_iniciada()/avisar_carga_terminada()/esta_en_carga()`; el filtro `_puede_descargar()` se pasa a `UnloadPolicy.ejecutar_descarga(..., filtro)`. Bloque A de `test_memoria_m62_iter5.gd`
 - [ ] Sin doble carga del mismo recurso (ResourceCache + cola M63 con un solo dueño) [M]
 - [x] La pantalla de carga (M63) precarga pools sin duplicarlos al terminar [M]
-- [ ] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel) [C]
+- [x] El 62 nunca descarga un recurso que esté en la cola de carga del 63 (evento cancel) [C] — **iter. 5 (Log 1187).** El candidato vetado por el filtro **no sale de la cola** y se cuenta en `descartes_por_carga()`; probado tanto por la vía directa (bloque A) como por el enforcement nivel 3 (bloque B)
 - [ ] Teleport (M69/M28): drift-check obligatorio tras cada viaje largo [M]
-- [ ] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables [S]
+- [x] NO tocar la carpeta 61 (en curso por otro agente): solo consumir sus entregables [S] — **iter. 5 (Log 1187): cumplido y verificado.** `git status` de la iter. muestra cambios SOLO en `scripts/rendimiento/memoria/` (nunca en `scripts/rendimiento/` fuera de `memoria/`). M61 no se tocó; su presupuesto definitivo sigue pendiente (ver L154)
 
 ## K. Edge cases
 
 - [x] Textura gigante (4K simple sin mips): detector la identifica y degrada calidad automáticamente [M] — Log 1094: `TextureMemory.requiere_degradacion()` + `degradar()` (resize + mips); probado
-- [ ] Atlas lleno: política de evicción por orden de uso con log del evento [C]
-- [ ] Chunk sin descargar tras cambio rápido de región: el monitor lo detecta y fuerza liberación [M]
+- [x] Atlas lleno: política de evicción por orden de uso con log del evento [C] — **iter. 5 (Log 1187).** `MemoryMonitor.evictar_atlas(entradas, tope)`: evicta por uso más ANTIGUO, respeta el tope y **registra el evento** vía `_log_m62()`. Bloque F de `test_memoria_m62_iter5.gd`
+- [x] Chunk sin descargar tras cambio rápido de región: el monitor lo detecta y fuerza liberación [M] — **iter. 5 (Log 1187).** `avisar_cambio_region(region)`: si hay candidatos pendientes, **fuerza** la liberación (`liberaciones_forzadas()`); avisar la MISMA región no cuenta como cambio. Bloque D de `test_memoria_m62_iter5.gd`
 - [x] Chunk liberado mientras el jugador lo edita (M08): regeneración segura sin doble free [C]
 - [x] Audio acumulado por bug: cientos de voces creadas: tope duro del pool + log inmediato [M]
-- [ ] Banco de audio pedido mientras se descarga: reproducción diferida o silenciada graceful [M]
-- [ ] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga [C]
-- [ ] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados [C]
+- [x] Banco de audio pedido mientras se descarga: reproducción diferida o silenciada graceful [M] — **iter. 5 (Log 1187).** `iniciar_descarga_audio()` / `pedir_banco_audio(banco)`: si hay descarga en curso, el banco se **difiere** (`bancos_audio_diferidos()`) y se reproduce al terminar; otro banco no se ve afectado. Bloque E de `test_memoria_m62_iter5.gd`
+- [x] Escena cambiada dos veces antes de terminar la transición: cola evita doble descarga [C] — **iter. 5 (Log 1187).** `iniciar_transicion_escena()` devuelve `false` y **encola** el 2.º cambio (`doble_descarga_evitada()`); `terminar_transicion_escena()` encadena el encolado. Bloque C de `test_memoria_m62_iter5.gd`
+- [x] Cambio de escena con streaming activo: cancelación limpia sin recursos colgados [C] — **iter. 5 (Log 1187).** `cancelar_transicion_escena()` reporta los candidatos pendientes, **drena** la cola (nada colgado), corta la transición y cuenta la cancelación. Bloque C de `test_memoria_m62_iter5.gd`
 - [x] Cercanía de OOM del sistema: degradación máxima (LOD bajo, pools mínimos) sin crash [C]
 - [ ] Preset Baja en isla pequeña (M27): carga priorizada y descarga agresiva de viajeros [M]
 - [x] Partículas infinitas por bug: límite de vida y devolución al pool garantizadas [S]

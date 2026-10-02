@@ -362,6 +362,91 @@ punto delante las volvía **indetectables**. Lo cazó el selftest, no una revisi
   real con M08/M09/M63 — siguen dependiendo de mundo real y de que otros módulos reporten consumo.
 - **QA cruzado §21.8 sigue pendiente** y no puede hacerlo el autor.
 
+## Notas del Agente — Iteración 5 (Log 1187, DeepSeek-V4.1-Flash / WorkBuddy)
+
+> Módulo **reservado de vuelta** al autor original (commit `6d8d02b`, 2026-10-02 07:40). El
+> verificador hy3 (Log 1128) dejó M62 **sin sello limpio**: 98 `[x]` / **52 `[ ]`** / 0 `[?]`, con
+> la nota de que *«el autor original puede cerrar los 52 `[ ]`»*. Esta iteración cierra **9** de
+> esos 52 con evidencia medida y **delega el resto con dueño nombrado** (§6).
+
+### §1. Qué se agregó
+
+Todas las piezas que faltaban del **handshake con M63** (diseño §5.3) y varios edge cases de §K que
+estaban implementados sólo en prosa:
+
+- **Handshake (L157 / L160) — `MemoryMonitor`:** `avisar_carga_iniciada(recurso)` /
+  `avisar_carga_terminada(recurso)` / `esta_en_carga()` / `recursos_en_carga()`. El filtro
+  `_puede_descargar(recurso)` se pasa a `UnloadPolicy.ejecutar_descarga(...)` como `Callable`:
+  **el 62 NUNCA descarga un recurso que el 63 está cargando.** Los vetos se cuentan en
+  `descartes_por_carga()`.
+- **`UnloadPolicy.ejecutar_descarga(hasta_mb, max_por_frame, filtro)`:** nuevo 3.er parámetro
+  `filtro: Callable` (opcional, `Callable()` = sin filtro → compatibilidad total). Un candidato
+  vetado **no sale de la cola** y se cuenta en `diferidos_ultimo_lote()`.
+- **Cola de transición de escena (L172 / L173):** `iniciar_transicion_escena()` devuelve `true` si
+  arrancó y `false` si **encoló** (doble cambio antes de terminar = **una sola** descarga;
+  `doble_descarga_evitada()`), `terminar_transicion_escena()` encadena la siguiente,
+  `cancelar_transicion_escena()` **drena** la cola (nada colgado) y cuenta en
+  `cancelaciones_transicion()`.
+- **Cambio rápido de región (L168):** `avisar_cambio_region(region)` detecta el cambio, y si hay
+  candidatos pendientes **fuerza la liberación** (`liberaciones_forzadas()`).
+- **Banco de audio pedido durante una descarga (L171):** `iniciar_descarga_audio()` /
+  `pedir_banco_audio(banco)` — si hay descarga en curso, el banco se **difiere**
+  (`bancos_audio_diferidos()`) en vez de reventar; al terminar, pasa a reproducir.
+- **Atlas LRU con log (L167):** `evictar_atlas(entradas, tope)` evicta por uso más antiguo y
+  registra el evento vía `_log_m62()`.
+- **Determinismo (RN9 / L113):** la decisión de nivel y el orden de descarga son función pura de la
+  entrada (dos monitores con la misma entrada → misma decisión y mismo orden).
+
+### §2. Suite nueva y guardián de 3 capas
+
+`test_memoria_m62_iter5.gd` — **7 bloques (A–G), 60 checks, 0 fallos, EXIT 0, ×3 idénticas.**
+Guardián de 3 capas: (1) `_fin("X")` por bloque; (2) piso `CHECKS_MINIMOS := 60` **medido en verde**
+(no copiado: arrancó en un placeholder de 44 y se fijó tras la 1.ª corrida verde); (3) `_summary()`
+en su **propio `call_deferred`**, así un `SCRIPT ERROR` que aborte `_run()` igual imprime el resumen
+y **nombra** los bloques que no corrieron.
+
+**Guardián probado EN ROJO con 5 sondas** (skill §4, protocolo «copia temporal → inyección → correr
+→ borrar»): A aserción falsa · B `return` que aborta `_run()` · C piso +1 · D `return` que deja
+bloques sin cerrar · E `_fin()` suprimido. **Las 5 dan EXIT 1; el control sin mutar da EXIT 0.**
+Medido además el **exit code real** del proceso en la sonda B (la más importante): `EXIT REAL = 1`
+con los 7 `[FAIL] el bloque X NO se ejecutó` impresos por la capa 3.
+
+### §3. Regresión: las 5 suites previas siguen verdes
+
+`27 + 47 + 25 + 133 + 15 = 247` checks, **0 fallos**, ×3 cada una, tras tocar `memory_monitor.gd` y
+`unload_policy.gd`. Total M62 = **307 checks** (247 + 60). El auditor de arquitectura sigue en
+**0 hallazgos nuevos** y **0 violaciones B1/B2/B3** en el código nuevo.
+
+### §4. Un defecto propio cazado por el propio guardián
+
+La **1.ª corrida** de la suite falló: escribí `mm.descastes_por_carga()` (transposición) cuando el
+método es `descartes_por_carga()`. El `SCRIPT ERROR` **abortó el bloque B** y el guardián lo dijo
+con todas las letras (`[FAIL] el bloque B NO se ejecutó`), no con un «0 fallos» falso. Corregido el
+typo, 60/0. Es la prueba viva de por qué el guardián existe (trampa 11/119).
+
+### §5. Qué cierra (checklist)
+
+`[x]` nuevos: **L113** (RN9), **L157** (handshake), **L160** (nunca descarga lo que el 63 carga),
+**L167** (atlas LRU + log), **L168** (región rápida → fuerza liberación), **L171** (audio diferido),
+**L172** (doble cambio de escena), **L173** (cancelación limpia), **L162** (no tocar la carpeta 61).
+**9 ítems**, todos con evidencia de test o de `git`.
+
+### §6. Lo que NO hice (honestidad obligatoria)
+
+- **NO cerré los 43 `[ ]` restantes.** Son, por naturaleza, **no-headless**: sesiones de 30 min
+  (L100/L109/L208), teleport ×10 con mundo real (L101/L209), baselines de §L (L184-L188), y las
+  integraciones que dependen de **internals de otros módulos**: M08 voxel (L132/L134-L139),
+  M41-M44 audio (L144-L150), M29 (L96), M63/M09 (L95). Cerrarlos desde acá sería marcar sin medir.
+- **NO toqué M61** (`scripts/rendimiento/` fuera de `memoria/`): está en curso por otro agente.
+  Por eso **L154** (leer los presupuestos definitivos de M61) sigue `[ ]`.
+- **NO toqué `scripts/interacciones/`** (kimi/M70, en paralelo).
+- **NO modifiqué el auditor** para añadir un check de «carpeta 61 intacta»: el handshake ya está
+  cubierto **por comportamiento** en iter5, y un check estático de scope no encaja en un auditor de
+  arquitectura de servicios. Decisión explícita, no omisión.
+- **QA cruzado §21.8 sigue pendiente** (verificador ≠ autor) y **sigue sin sello limpio**: 43 `[ ]`.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-02 — Log 1187.
+
 ## Notas del Verificador §21.8 (hy3 / WorkBuddy, Log 1128 — 2026-09-20)
 
 **Veredicto:** QA cruzado §21.8 COMPLETADO (verificador hy3 ≠ autor DeepSeek-V4.1-Flash).
