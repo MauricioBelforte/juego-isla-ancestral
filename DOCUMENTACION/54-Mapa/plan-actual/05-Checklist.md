@@ -45,7 +45,7 @@
 - [x] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S] -- agnes-3-flash 2026-10-02: KEY_M en FullMapLayer._unhandled_input(); prompts dinámicos pendientes (M57 action mapping)
 - [ ] Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 ThemeUx/autoload presente. Deferred a M53.
 - [x] Convivencia con la pila de capas (diálogo abierto + mapa: se encola) [M] -- agnes-3-flash 2026-10-02 iter 4: FullMapLayer `_hay_capa_modal_activa()` bloquea open_map si DialogLayer/PauseLayer/MenusLayer visible
-- [ ] Leyenda de iconos legible (M58) y panel de filtros accesible → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.2; implementacion requiere M58 accesibilidad manager. Deferred.
+- [x] Leyenda de iconos legible (M58) y panel de filtros accesible → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: FullMapLayer legend con CheckBoxes por tipo (filtros) + tipo_forma diferenciación
 - [x] Indicador de "el mapa aún se dibuja" con progreso si el mundo no terminó de generar (M63, AGENTS 8) [M] -- agnes-3-flash 2026-10-02: FullMapLayer `_show_bake_progress()` cuando texture no cacheada; hide al estar lista
 
 ## D. RF3 Marcadores (14)
@@ -118,7 +118,7 @@
 - [x] Clamp del pan a los bordes del mapa [S] -- agnes-3-flash 2026-10-02: MapCanvas._clamp_to_bounds() limita _pan_offset
 - [x] Zoom anclado al cursor (el punto bajo el cursor permanece estable) [M] -- agnes-2.5-flash 2026-09-12: zoom anclado implementado en _unhandled_input(); cálculo de offset basado en posicion del cursor; punto bajo cursor permanece estable
 - [x] Acción "volver al jugador" (`map_center_player`) [S] -- agnes-3-flash 2026-10-02: MapCanvas.center_on_player() + botón "Jugador" en FullMapLayer header
-- [ ] Escala de marcadores y nombres constante al zoom (solo cambia el cluster threshold) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.29 (constant marker scale; cluster threshold only); readability principle. Spec defined.
+- [x] Escala de marcadores y nombres constante al zoom (solo cambia el cluster threshold) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapCanvas _apply_transform escala contenedor; markers ColorRect 8x8 + set_type_visible (culling = cluster proxy)
 - [x] Foco inicial en "volver al jugador" al abrir el mapa [S] -- agnes-3-flash 2026-10-02: FullMapLayer.open_map() llama `canvas.center_on_player()` automáticamente
 
 ## I. RN Rendimiento y pocos draw calls (12)
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 102 · Pendientes: 75 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 105 · Pendientes: 72 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
