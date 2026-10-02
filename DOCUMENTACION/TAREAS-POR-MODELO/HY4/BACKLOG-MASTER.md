@@ -402,3 +402,52 @@ nombre del blend no quitaba el sufijo `_lowpoly`, así que
 - MCP de Blender caído en esta sesión → **no se generó ningún asset**.
 - Decidir destino de los 2 huérfanos y de los 42 `.py` de `game/`.
 - H-1 (localización duplicada) sigue abierto.
+
+---
+
+## B6 — Artefactos documentados inexistentes (Log 1189)
+
+Auditoría: ¿la documentación de `plan-actual` cita rutas que no existen?
+**2763 referencias** escaneadas en 169 carpetas.
+
+| Clase | Cantidad | Significado |
+|---|---|---|
+| A | **1529** | la ruta resuelve exactamente — correctas |
+| B | **147** | nombre base existe en otra ruta — doc desactualizada |
+| C2 | **515** | candidato parecido (`difflib`) — renombrado/reubicado |
+| C1 | **572** | sin coincidencia — **artefacto ausente** |
+
+**28 módulos marcados ✅ citan artefactos ausentes.** Peores:
+M112 (25, incluido el framework GUT completo que nunca se usó), M154 (18),
+M122 (7), M123 (6), M82 (6), M81 (5), M11 (4).
+
+**Acción:** 2 marcas `_ (diseno heredado) _` donde el `[x]` cita un `.cs` de
+Unity que no puede existir (M118 `BuildScript.cs`, M81 `DataSanitizer.cs`).
+**No se volteó ningún `[x]`** — eso es §21.8, perfil Hy4 excluido.
+
+### Falsos positivos (no re-auditar)
+
+- **M26 Templo** — sus 5 rutas `.cs` ya están explicadas por un bloque
+  `Diseno original NO implementado (rutas muertas)`. El detector es ciego al
+  contexto.
+- **M106 Seguridad** — `security/X.gd` no resuelve, pero **existe** como
+  `scripts/security/security_X.gd` (los 8). Deriva de prefijo.
+- **Módulos sin implementar** (M120/121/125/150/90/91/58…) — sus rutas son
+  intención de diseño: ≈1030 de las 1314 menciones "rotas".
+
+### ⚠️ Trampa nueva (62) — tres bases antes de creer un "roto"
+
+Probar `raíz repo` · `game/isla-ancestral/` · `game/isla-ancestral/scripts/`;
+separar "ausente" de "renombrado" con `difflib`; y descartar módulos no
+implementados cruzando `CHECKLIST-GLOBAL.md`. Sin esos cuatro filtros el
+número (1577) es indistinguible del real.
+**Regla:** un "roto" sólo es hueco si el módulo está cerrado **Y** el nombre
+base no aparece en ningún lado del repo.
+
+### B0 — BOM: regresión recurrente (commit `0abeab6`)
+
+Tras cerrar 509 → 0, volvieron a aparecer **13** con BOM (12 scripts de
+`atria-dawn-s2/scripts-prueba` + 1 log). Limpiados en disco (diff 1:1, sólo
+los 3 bytes `EF BB BF`). Confirmación: **0 BOM** tras el commit.
+El BOM lo siguen regenerando otros agentes → el job `encoding-guard` de CI
+(`a0dd230`) es ahora la red de contención.
