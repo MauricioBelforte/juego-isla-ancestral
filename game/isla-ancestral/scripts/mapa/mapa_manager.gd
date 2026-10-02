@@ -108,7 +108,8 @@ func marcar_explorada(marcador_id: String) -> void:
 func agregar_pin(x: int, y: int, z: int, nota: String = "", tipo: String = "general") -> bool:
 	if _pines.size() >= MAX_PINES:
 		return false
-	_pines.append({"x": x, "y": y, "z": z, "nota": nota, "tipo": tipo})
+	var fecha: String = str(int(Time.get_unix_time_from_system()))
+	_pines.append({"x": x, "y": y, "z": z, "nota": nota, "tipo": tipo, "fecha": fecha})
 	_guardar_pines()
 	emit_signal("pines_changed", _pines.duplicate(true))
 	return true
