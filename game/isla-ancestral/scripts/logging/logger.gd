@@ -50,6 +50,17 @@ var compress_old_logs: bool = true
 var json_output: bool = false
 var sanitize_sensitive: bool = true
 
+## ── Eco a consola (BUG-067, iter. 2 2026-10-02) ─────────────
+## El `print()` a stdout es el **99 %** del coste de una llamada que ESCRIBE:
+## medido 510,470 us (stdout a archivo) / 15 036,120 us (a tuberia) frente a
+## 5,270 us de solo disco (presupuesto de frame = 83,35 us).
+## El eco se puede gatear SIN tocar el contrato crash-proof: el archivo se sigue
+## escribiendo y `line_emitted` se sigue emitiendo (la consola in-game de M110
+## depende de la SENAL, no de stdout).
+## Default: `true` + `DEBUG` = comportamiento historico (no cambia nada).
+var console_echo: bool = true
+var console_min_level: int = Level.DEBUG
+
 ## Bytes escritos en el archivo activo (contador incremental para decidir la
 ## rotación sin releer el archivo en cada línea — ver _maybe_rotate()).
 var _bytes_written: int = 0
@@ -79,6 +90,11 @@ func _load_config() -> void:
 			compress_old_logs = cfg.get_compress_old_logs()
 			json_output = cfg.get_json_output()
 			sanitize_sensitive = cfg.get_sanitize_sensitive()
+			# BUG-067: gate del eco a consola. Guardado por has_method para no
+			# romper con .tres antiguos que no traigan los campos.
+			if cfg.has_method("get_console_echo"):
+				console_echo = cfg.get_console_echo()
+				console_min_level = cfg.get_console_min_level()
 			for c in cfg.get_categories_enabled():
 				var cint := int(c)
 				if CATEGORY_TAG.has(cint):
@@ -144,7 +160,12 @@ func _log(level: int, message: String, category: int, context: Dictionary) -> vo
 			line += " %s" % str(context)
 
 	line_emitted.emit(level, category, line)
-	print(line)
+
+	# Eco a consola, GATEADO (BUG-067). `line_emitted` se emite SIEMPRE (M110),
+	# y el archivo se escribe SIEMPRE (contrato crash-proof). Lo unico que el gate
+	# evita es el `print()` a stdout, que es el 99 % del coste.
+	if console_echo and level >= console_min_level:
+		print(line)
 
 	# Escritura INMEDIATA + flush línea a línea (fix 2026-09-02,
 	# deepseek-v4-flash-vision-exp): un buffer de 100 líneas retrasaba la
@@ -164,6 +185,21 @@ func _json_escape(s: String) -> String:
 ## ── Configuración dinámica ──────────────────────────────
 func set_min_level(level: int) -> void:
 	min_level = level
+
+## ── Gate del eco a consola (BUG-067) ────────────────────
+## No afecta ni al archivo (crash-proof) ni a `line_emitted` (M110). Sirve para
+## que el build de release pueda apagar el `print()` sin perder ningun log.
+func set_console_echo(enabled: bool) -> void:
+	console_echo = enabled
+
+func set_console_min_level(level: int) -> void:
+	console_min_level = level
+
+func is_console_echo_enabled() -> bool:
+	return console_echo
+
+func get_console_min_level() -> int:
+	return console_min_level
 
 func set_category_enabled(category: int, enabled: bool) -> void:
 	if enabled:
@@ -187,6 +223,10 @@ func reload_config(cfg: Resource) -> void:
 		compress_old_logs = cfg.get_compress_old_logs()
 		json_output = cfg.get_json_output()
 		sanitize_sensitive = cfg.get_sanitize_sensitive()
+		# BUG-067: gate del eco a consola (ver _load_config).
+		if cfg.has_method("get_console_echo"):
+			console_echo = cfg.get_console_echo()
+			console_min_level = cfg.get_console_min_level()
 		for c in cfg.get_categories_enabled():
 			var cint := int(c)
 			if CATEGORY_TAG.has(cint):

@@ -238,4 +238,26 @@ for S in test_logger test_logging_m103 test_logging_m103_iter1 test_m103_frame_b
 done
 ```
 
-Esperado: 14 · 25 · 131 · 9 checks, **0 fallos**, ningún `SCRIPT ERROR`, exit 0, tres veces cada uno.
+Esperado: 14 · 25 · 131 · **14** checks, **0 fallos**, ningún `SCRIPT ERROR`, exit 0, tres veces cada uno.
+
+### 9.7 BUG-067: fix del eco a consola (iter. 2-bis, Log 1180)
+
+La medición de iter. 2 dejó abierto BUG-067: una llamada que **escribe** no cabía en el frame (512 µs)
+y el diseño se contradecía (`03-Diseno.md` §3 pedía `print` a consola **y** < 0,5 %). El coste se
+atribuyó al `print()` (99 %), no al disco (1 %). Fix aplicado: **gate del eco a consola**
+(`console_echo`, default `true` = comportamiento histórico intacto).
+
+`test_m103_frame_budget.gd` mide ahora **5 variantes** (la 5ª es la misma llamada que escribe pero con
+`set_console_echo(false)`). Resultado (mínimo de 5 rondas intercaladas, salida a tubería):
+
+| Variante | Coste | ¿Cabe en 83,35 µs? |
+|---|---|---|
+| llamada FILTRADA (gate de nivel) | ~1,1 µs | sí |
+| solo disco (store+flush) | ~5 µs | sí |
+| ESCRIBE (eco encendido, default) | ~14 138 µs | no (17 % del frame) |
+| **ESCRIBE con eco APAGADO** | **~40,5 µs** | **sí -- 49 % del presupuesto** |
+
+El número absoluto se **reporta** (`-- VEREDICTO`), **no** se asevera como gate (depende de la máquina;
+`quality.yml:285` lo corre como gate duro). Lo asertado es un **orden** con holgura (`< 3x`).
+
+`CHECKS_MINIMOS` 9 → 12. Totales M103: **14 + 25 + 131 + 14 = 184 checks / 0 fallos**, sin `SCRIPT ERROR`.

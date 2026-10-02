@@ -27,7 +27,7 @@ extends SceneTree
 
 const MODULO := "M103 frame-budget"
 const BLOQUES_ESPERADOS: Array[String] = ["A", "B", "C"]
-const CHECKS_MINIMOS := 9
+const CHECKS_MINIMOS := 12
 
 const RONDAS := 5
 const ITERACIONES := 200
@@ -50,6 +50,7 @@ var _min_gate: int = 1 << 60
 var _min_filtrada: int = 1 << 60
 var _min_escritura: int = 1 << 60
 var _min_disco: int = 1 << 60
+var _min_gateada: int = 1 << 60   # escritura con el eco a consola APAGADO (BUG-067)
 
 func _init() -> void:
 	call_deferred("_run")
@@ -81,6 +82,12 @@ func _run() -> void:
 	_log.set_log_path(_tmp)
 	_check("set_log_path acepta un path temporal de test", _log.get_log_file_path() == _tmp)
 	_check("API de medicion disponible (is_level_enabled)", _log.has_method("is_level_enabled"))
+	# ── Guard de la PROPIEDAD CLAVE del cambio (BUG-067): el gate es ADITIVO y su
+	# default NO altera el comportamiento historico. Si esto se rompe, el fix
+	# estaria apagando logs en produccion sin que nadie lo pida.
+	_check("API del gate de consola disponible (set_console_echo)", _log.has_method("set_console_echo"))
+	_check("el eco a consola viene ENCENDIDO por defecto (comportamiento historico intacto)",
+		_log.is_console_echo_enabled())
 	_fin("A. Preparación")
 
 	# ── B. Medicion (rondas intercaladas, minimo por variante) ──
@@ -93,9 +100,10 @@ func _run() -> void:
 		_min_filtrada = mini(_min_filtrada, _medir_filtrada())
 		_min_escritura = mini(_min_escritura, _medir_escritura())
 		_min_disco = mini(_min_disco, _medir_disco())
+		_min_gateada = mini(_min_gateada, _medir_escritura_gateada())
 
-	_check("se midieron las 4 variantes en %d rondas" % RONDAS,
-		_min_gate < (1 << 60) and _min_filtrada < (1 << 60) and _min_escritura < (1 << 60) and _min_disco < (1 << 60))
+	_check("se midieron las 5 variantes en %d rondas" % RONDAS,
+		_min_gate < (1 << 60) and _min_filtrada < (1 << 60) and _min_escritura < (1 << 60) and _min_disco < (1 << 60) and _min_gateada < (1 << 60))
 	_check("la llamada FILTRADA cuesta menos que la que ESCRIBE (el gate corta antes de formatear)",
 		_min_filtrada < _min_escritura,
 		"filtrada=%d us  escritura=%d us" % [_min_filtrada, _min_escritura])
@@ -124,6 +132,8 @@ func _run() -> void:
 	var us_disco: float = float(_min_disco) / float(ITERACIONES)
 	var cabe_filtradas: int = int(floor(presupuesto_us / maxf(us_filtrada, 0.001)))
 	var cabe_escrituras: int = int(floor(presupuesto_us / maxf(us_escritura, 0.001)))
+	var us_gateada: float = float(_min_gateada) / float(ITERACIONES)
+	var cabe_gateadas: int = int(floor(presupuesto_us / maxf(us_gateada, 0.001)))
 
 	print("-- presupuesto: %.2f%% de %.2f ms (60 FPS) = %.2f us por frame" % [LIMITE_PCT, PRESUPUESTO_FRAME_MS, presupuesto_us])
 	print("-- coste medido por llamada (MINIMO de %d rondas x %d iteraciones):" % [RONDAS, ITERACIONES])
@@ -131,6 +141,7 @@ func _run() -> void:
 	print("     llamada FILTRADA ............ %.3f us   (caben %d por frame en el 0.5%%)" % [us_filtrada, cabe_filtradas])
 	print("     solo disco (store+flush) .... %.3f us" % us_disco)
 	print("     llamada que ESCRIBE (total).. %.3f us   (caben %d por frame en el 0.5%%)" % [us_escritura, cabe_escrituras])
+	print("     ESCRIBE con eco APAGADO ..... %.3f us   (caben %d por frame en el 0.5%%)  <- BUG-067" % [us_gateada, cabe_gateadas])
 	print("-- ATRIBUCION del coste de escribir: disco=%.0f%%  resto(consola+formato)=%.0f%%" % [
 		100.0 * us_disco / maxf(us_escritura, 0.001),
 		100.0 * (1.0 - us_disco / maxf(us_escritura, 0.001))])
@@ -140,6 +151,28 @@ func _run() -> void:
 		us_filtrada <= presupuesto_us,
 		"%.3f us vs %.2f us" % [us_filtrada, presupuesto_us])
 	_check("el presupuesto admite al menos 10 llamadas FILTRADAS por frame", cabe_filtradas >= 10, "caben=%d" % cabe_filtradas)
+
+	# ── BUG-067: el eco a consola ES el coste, y apagarlo devuelve la llamada al frame ──
+	# Nota: estas 3 aserciones NO dependen del destino de stdout (con el eco apagado
+	# no hay `print`), asi que valen igual bajo tuberia que a archivo.
+	_check("apagar el eco a consola ABARATA la escritura (=> el coste es el `print`)",
+		_min_gateada < _min_escritura,
+		"con eco=%d us  sin eco=%d us" % [_min_escritura, _min_gateada])
+	_check("el eco a consola explica al menos el 80%% del coste de escribir",
+		float(_min_gateada) < float(_min_escritura) * 0.20,
+		"con eco=%d us  sin eco=%d us (queda el %.1f%%)" % [_min_escritura, _min_gateada,
+			100.0 * float(_min_gateada) / maxf(float(_min_escritura), 1.0)])
+	# ⚠️ El numero ABSOLUTO depende de la maquina — y del destino de stdout (BUG-067
+	# midio 29,5x entre tuberia y archivo) — asi que NO se asevera "<= 83,35 us"
+	# como gate duro: seria un gate que puede ponerse ROJO por la velocidad del
+	# runner. Se REPORTA el numero exacto y se asevera un ORDEN con holgura (3x),
+	# que solo se rompe si alguien vuelve a meter un `print` en el camino.
+	print("-- VEREDICTO (reportado, NO asertado): escritura con eco apagado = %.3f us = %.0f%% del presupuesto de %.2f us -> %s" % [
+		us_gateada, 100.0 * us_gateada / presupuesto_us, presupuesto_us,
+		"CABE" if us_gateada <= presupuesto_us else "NO CABE en esta maquina"])
+	_check("el eco apagado deja la escritura en el ORDEN del presupuesto (< 3x los 83,35 us)",
+		us_gateada < presupuesto_us * 3.0,
+		"%.3f us vs %.2f us (limite asertado = 3x)" % [us_gateada, presupuesto_us])
 	_fin("C. Veredicto")
 
 
@@ -180,6 +213,22 @@ func _medir_disco() -> int:
 	var t: int = Time.get_ticks_usec() - t0
 	f.close()
 	DirAccess.remove_absolute(_tmp + ".ctrl")
+	return t
+
+
+## Variante 5 (BUG-067): la MISMA llamada que ESCRIBE, pero con el eco a consola
+## APAGADO (`set_console_echo(false)`). Aisla el coste del `print()` sobre el
+## camino real: si la atribucion (99 % consola) es correcta, esta variante debe
+## caer al orden del disco. El archivo se sigue escribiendo y `line_emitted` se
+## sigue emitiendo: lo unico que desaparece es el `print()`.
+func _medir_escritura_gateada() -> int:
+	_log.set_min_level(LV_WARNING)
+	_log.set_console_echo(false)
+	var t0: int = Time.get_ticks_usec()
+	for k in ITERACIONES:
+		_log.warning("bench escritura gateada %d" % k, _log.Category.SYSTEM)
+	var t: int = Time.get_ticks_usec() - t0
+	_log.set_console_echo(true)   # restaurar SIEMPRE: no dejar el logger gateado
 	return t
 
 

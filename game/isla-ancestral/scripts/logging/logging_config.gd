@@ -30,6 +30,16 @@ extends Resource
 ## ¿Sanitizar datos sensibles?
 @export var sanitize_sensitive: bool = true
 
+## ── Eco a consola (BUG-067) ──
+## ¿Eco a stdout (`print`)? El `print` es el **99 %** del coste de una llamada que
+## escribe (510 us a archivo / 15 036 us a tuberia, frente a 5,3 us de solo disco).
+## `false` = solo archivo + senal `line_emitted`; la consola in-game de M110 NO
+## depende de stdout, asi que apagar el eco no le quita lineas.
+@export var console_echo: bool = true
+
+## Nivel minimo para el eco a consola (0=DEBUG...4=CRITICAL)
+@export var console_min_level: int = 0
+
 # ── Getters (usados por Logger via has_method) ──
 func get_level_min() -> int:
 	return level_min
@@ -51,3 +61,9 @@ func get_json_output() -> bool:
 
 func get_sanitize_sensitive() -> bool:
 	return sanitize_sensitive
+
+func get_console_echo() -> bool:
+	return console_echo
+
+func get_console_min_level() -> int:
+	return console_min_level

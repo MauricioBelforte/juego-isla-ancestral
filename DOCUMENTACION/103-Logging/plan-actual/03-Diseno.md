@@ -51,6 +51,11 @@ func set_min_level(level: Level)
 func set_category_enabled(category: Category, enabled: bool)
 func reload_config(config: LoggingConfig)
 
+# Eco a consola (BUG-067) — no afecta al archivo ni a `line_emitted`
+func set_console_echo(enabled: bool)          # false = no `print` (solo archivo + señal)
+func set_console_min_level(level: Level)      # nivel mínimo para el eco
+func is_console_echo_enabled() -> bool
+
 # Exportación
 func export_all() -> String
 func export_last_lines(lines: int) -> String
@@ -76,12 +81,22 @@ Logger sanitiza contexto (sensitive data)
     ↓
 Logger formatea línea: [timestamp] [INFO] [GAMEPLAY] mensaje
     ↓
-Logger escribe a consola (print en Godot)
+Logger emite señal line_emitted (SIEMPRE — la consume la consola in-game de M110)
     ↓
-Logger escribe a archivo (buffer + flush periódico)
+Logger escribe a consola (print en Godot) — GATEADO por `console_echo` (BUG-067)
+    ↓
+Logger escribe a archivo (flush línea a línea, contrato crash-proof)
     ↓
 LogRotator verifica tamaño (¿> 10 MB? Sí → rotar)
 ```
+
+> **Nota BUG-067 (2026-10-02).** El paso de consola es **el 99 % del coste** de una llamada
+> que escribe (medido: 510 µs a archivo / 15 036 µs a tubería, frente a ~5 µs de solo disco;
+> presupuesto de frame = 83,35 µs). Por eso el `print()` está **gateado** por la variable
+> `console_echo` (default `true` = comportamiento histórico intacto). Gatearlo **no quita
+> ningún log**: el archivo se sigue escribiendo igual (crash-proof) y `line_emitted` se sigue
+> emitiendo (la consola in-game de M110 depende de la **señal**, no de stdout). Con el eco
+> apagado, escribir baja a ~40 µs = **49 % del presupuesto** → cabe en el frame.
 
 ## 4. LogRotator (rotación de logs)
 
@@ -272,6 +287,16 @@ Al detectar un crash:
 - Nunca loguear passwords, datos personales, claves de API
 
 ### Regla 5: Performance
-- Buffer de escritura (no escribir cada línea individualmente)
-- Flush periódico (cada 1s o cada 100 líneas)
+- **El coste está en la consola, no en el disco** (medido, BUG-067): el `print()` a stdout es el
+  **99 %** del coste de una llamada que escribe; el disco es el **1 %**. Por tanto, la palanca real
+  es **gatear el eco a consola** (`console_echo`), no el buffer.
+- **Gate del eco a consola** (`console_echo`, BUG-067): `false` en builds de release, o
+  `console_min_level` para ecoar solo desde WARNING. **No pierde logs**: el archivo sigue con
+  flush línea a línea (crash-proof) y `line_emitted` se emite siempre (M110).
+- **Buffer de escritura: descartado como solución** (contradice el contrato crash-proof). Atacaría
+  el 1 % (disco), no el 99 % (consola). Se mantiene el **flush línea a línea** deliberado, que es
+  lo que necesitan el QA por logs y el volcado pre-crash de M122.
+- **Fijar el destino de stdout al medir**: el mismo `print` cuesta **29,5×** más a tubería que a
+  archivo (BUG-067, 2026-09-30). Cualquier criterio «< 0,5 % de frame» **debe declarar el destino**
+  o no es falsable (trampa 120).
 - Asíncrono si aplica (Godot single-threaded, pero usar yield si es blocking)

@@ -687,3 +687,13 @@ verifiques vos, usa tu practica habitual de varios angulos.
       (fast-forward, 0 credenciales reales, blob máx 0.28 MB, árbol 0 sucios). **Lección:** un push
       cortado por el timeout del wrapper **puede haber completado igual** (el mío se reportó como SIGTERM
       y sí se había empujado) → verificar con el reflog/`fetch` antes de reintentar. (2026-09-30)
+
+- [x] Log reservado: **1180** — **BUG-067 (M103 Logging): fix del eco a consola** (acuse de una delegación
+      de 2026-09-20 que estaba sin acuse). Causa: `_log()` hacía `print()` SIEMPRE → el `print` es el **99 %**
+      del coste de escribir (disco = 1 %). Fix **aditivo**: gate `console_echo` (default `true` = histórico
+      intacto) + `console_min_level`; el archivo (flush línea a línea, crash-proof) y `line_emitted` (M110)
+      **NO** se tocan. Medición: escribir con eco apagado = **~40,5 µs = 49 % del presupuesto** (83,35 µs) →
+      **CABE**; con eco = ~14 138 µs. Suites 14+14+25+131, 0 fallos; `CHECKS_MINIMOS` 9→12. El número
+      absoluto se **reporta** (no se asevera como gate: `quality.yml:285` es gate duro). `11-BUGS.md`
+      commiteado con **patch parcial** (`git apply --cached` de solo mis hunks; no me llevé el append de
+      hy3, BUG-082..086). Docs: `03-Diseno.md` §2/§3/§10-Regla-5 + `11-BUGS.md`. (2026-10-02)
