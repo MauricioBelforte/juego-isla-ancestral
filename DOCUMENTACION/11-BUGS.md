@@ -891,7 +891,7 @@ Desde cierta distancia, el jugador puede ver palmeras, árboles y objetos 3D per
 - **Módulo(s) afectado(s):** M10 Generación de mundo, M45 Vegetación
 - **Severidad:** 🟡 Menor
 - **Prioridad sugerida:** Media
-- **Estado:** [x] Resuelto (2026-09-02 23:40 + fix complementario 2026-09-02) | **Resolución:** deepseek-v4-flash-vision-exp — VegetationSpawner descarta候选antes con h<3 (Log 559). **Fix complementario MiMo V2.5:** vegetation_plan.gd zona playa reducida de 0.90-0.99 a 0.85-0.93 para que el plan NO genere posiciones en la banda de agua (0.94-1.0 según island_generator.gd). Doble capa de protección: plan + spawner.
+- **Estado:** [x] Resuelto (2026-09-02 23:40 + fix complementario 2026-09-02) | **Resolución:** deepseek-v4-flash-vision-exp — VegetationSpawner descarta candidatos con h<3 (Log 559). **Fix complementario MiMo V2.5:** vegetation_plan.gd zona playa reducida de 0.90-0.99 a 0.85-0.93 para que el plan NO genere posiciones en la banda de agua (0.94-1.0 según island_generator.gd). Doble capa de protección: plan + spawner.
 - **Reportado por:** Usuario
 
 **Descripción del problema:**
@@ -4408,7 +4408,7 @@ no al centro (2560,2560). Los datos de rendimiento resultantes no representan la
 
 **Comportamiento esperado:** waypoints y viewer posicionados respecto de `MundoRaiz.CENTRO` con
 `view_distance` acorde al mundo 5120².
-**Comportamiento actual:**硬硬编码 al mundo 256.
+**Comportamiento actual:** hardcodeado al mundo 256.
 **Entorno:** Godot 4.7.2, isla 5120².
 **Evidencia:** bench_recorder.gd (antes L17,20,22,117,119,139; ahora calcular_waypoints()/posicion_viewer()/objetivo_look()).
 **Resolución (2026-10-02, hy3 / WorkBuddy, Log 1183):** los 6 waypoints hardcodeados se reemplazaron por offsets del centro viejo (`WAYPOINTS_VIEJO`) + `calcular_waypoints()` que los reubica en `MundoRaiz.CENTRO` (2560,2560) escalados por `CENTRO.x / RADIO_VIEJO` (=10) para preservar la dispersión costa/centro del benchmark. `generator.island_radius` 256→`int(MundoRaiz.CENTRO.x)` (2560); `view_distance` 256→1024 (igual que main_island.gd:158); `viewer.global_position` y `look_at`→`MundoRaiz.centro_vec3(30/12)`. Se creó `test_bench_recorder_m166.gd` (gate headless): verde 0 fallos, rojo 9 fallos al inyectar 256, verde final; 0 SCRIPT ERROR. Push NEGATIVO (commit selectivo del fix).
