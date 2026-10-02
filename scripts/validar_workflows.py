@@ -59,14 +59,14 @@ CITAS_PERMITIDAS = {
 # Se reportan como AVISO, no como problema, para no apagar el CI por deuda de
 # otro dueno — pero cualquier cita NUEVA si falla. Al resolver una, hay que
 # borrar su linea: si sigue estando, el validador la marca como obsoleta.
+# (2026-10-02, DeepSeek-V4.1-Flash: las 5 entradas de M64 se borraron — sus
+# 5 suites quedaron versionadas en 454d0ae (2026-09-29) y, al seguir en la
+# lista, el validador marcaba DEUDA OBSOLETA y el gate de workflows salia 1
+# desde entonces. El CI llevaba rojo ~3 dias sin que nadie lo viera: el
+# escenario exacto de BUG-077. Las 2 de M116/M117 siguen siendo deuda real.)
 DEUDA_CONOCIDA = {
     "scripts/build/test_instalador_m116.gd": "M116",
     "scripts/build/test_build_m117.gd": "M117",
-    "scripts/ia_npc/test_ia_npc_m64_iterN.gd": "M64",
-    "scripts/ia_npc/test_navegacion_m64.gd": "M64",
-    "scripts/ia_npc/test_social_m64.gd": "M64",
-    "scripts/ia_npc/test_rendimiento_m64.gd": "M64",
-    "scripts/ia_npc/test_persistencia_m64.gd": "M64",
 }
 
 RE_SCRIPT = re.compile(r"--script\s+(?:res://)?([A-Za-z0-9_./\-]+\.gd)")
