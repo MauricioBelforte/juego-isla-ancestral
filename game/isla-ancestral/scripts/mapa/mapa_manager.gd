@@ -24,6 +24,7 @@ var _regiones_exploradas: Dictionary = {}  # region_id -> bool (fog por región)
 var _pines: Array = []             # [{x, y, z, nota, tipo}]
 var _cached_texture: Image = null  # Textura cacheada del mapa (sin segundo bake)
 var _texture_dirty: bool = true    # Invalidado en exploration_changed
+var _fast_travel_provider: Callable = Callable()  # Provider M69 (cancelar/estado)
 
 func _ready() -> void:
 	_cargar_config()
@@ -251,3 +252,22 @@ func get_cached_map_texture() -> Image:
 	if _cached_texture == null:
 		bake_map_texture()
 	return _cached_texture
+
+func cancelar_viaje() -> bool:
+	if _fast_travel_provider.is_valid():
+		var result: Variant = _fast_travel_provider.call()
+		if result != null and result is Dictionary:
+			return bool(result.get("cancelled", false))
+	return false
+
+## Devuelve el estado del viaje en curso (si el provider lo expone).
+func estado_viaje() -> Dictionary:
+	if _fast_travel_provider.is_valid():
+		var result: Variant = _fast_travel_provider.call("get_state")
+		if result is Dictionary:
+			return result
+	return {"en_curso": false}
+
+## M69 delega su viaje rápido al MapManager vía Callable (desacople §3).
+func register_fast_travel_provider(callable: Callable) -> void:
+	_fast_travel_provider = callable

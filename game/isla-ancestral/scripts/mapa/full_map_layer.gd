@@ -21,6 +21,7 @@ var _fog: FogRenderer
 var _player_dot: ColorRect
 var _markers_container: Control
 var _legend_panel: VBoxContainer
+var _cancel_btn: Button
 var _is_open: bool = false
 
 func _ready() -> void:
@@ -71,6 +72,13 @@ func _build_ui() -> void:
 	center_btn.tooltip_text = "Volver al jugador (map_center_player)"
 	center_btn.pressed.connect(_center_on_player)
 	header.add_child(center_btn)
+
+	var cancel_btn := Button.new()
+	cancel_btn.text = "Cancelar viaje"
+	cancel_btn.visible = false
+	cancel_btn.pressed.connect(_cancel_travel)
+	header.add_child(cancel_btn)
+	_cancel_btn = cancel_btn
 
 	# Canvas del mapa
 	_canvas = MapCanvas.new()
@@ -179,6 +187,13 @@ func _on_markers_changed(_markers: Array) -> void:
 func _center_on_player() -> void:
 	if _canvas != null:
 		_canvas.center_on_player()
+
+func _cancel_travel() -> void:
+	var mm := get_node_or_null("/root/MapManager")
+	if mm == null:
+		return
+	mm.cancelar_viaje()
+	_refresh_from_manager()
 
 func _refresh_from_manager() -> void:
 	var mm := get_node_or_null("/root/MapManager")

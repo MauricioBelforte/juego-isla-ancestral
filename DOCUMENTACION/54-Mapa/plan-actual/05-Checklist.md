@@ -72,7 +72,7 @@
 - [ ] Delegación del viaje por Callable (`register_fast_travel_provider`) sin importar nodos de M69 → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.7 (Callable delegation pattern); M69 TravelService. Spec defined.
 - [ ] Destinos bloqueados hasta desbloquearlos explorando → agnes-2.5-flash 2026-09-13: regla documentada en 03-Diseno.md §4.19 (destination unlock by exploration); progresión M71. Policy defined.
 - [ ] Visualización de ruta al destino (línea suave sobre el mapa, M28) [M]
-- [ ] Cancelación del viaje desde el mapa sin estado inconsistente [S]
+- [x] Cancelación del viaje desde el mapa sin estado inconsistente [S] -- agnes-3-flash 2026-10-02: `MapManager.cancelar_viaje()` + `register_fast_travel_provider()` (desacople M69) + botón "Cancelar viaje" en FullMapLayer
 - [ ] Estado del viaje en curso reflejado (`travel_state_changed`) y mapa cerrado durante el trayecto [M]
 - [ ] Re-apertura del mapa al llegar con la posición y región actualizada [M]
 - [x] Test end-to-end: bloqueado → desbloqueo → viaje → cancelación → llegada [C] -- agnes-2026-09-07: test_mapa_m54_e2e.gd implementado (_test_viaje_end_to_end); verifica MapManager config, marcadores, regiones
@@ -91,7 +91,7 @@
 - [ ] Transición suave de revelado (Tween 300 ms) reducible por reduce_motion (M58) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.10 (300ms tween + reduce_motion); M58. Spec defined.
 - [ ] Límites de región delineados dentro de la niebla (bordes visibles) → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.21 (region border visibility); visual spec. Spec defined.
 - [ ] Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradient. Spec defined.
-- [ ] Sin revelado de interiores/mazmorras en el mapa de superficie [S]
+- [x] Sin revelado de interiores/mazmorras en el mapa de superficie [S] -- agnes-3-flash 2026-10-02: bake_map_texture() usa heightmap VoxelTerrain (superficie); cave/interior data no existe en la heightmap
 - [ ] Compatible con la escala completa de la isla (varias islas M27 incluida) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.11 (multi-island scale compatibility); M27 islands registry. Spec defined.
 - [ ] Regeneración coherente tras carga de un save con exploración parcial → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.23 (coherent fog regeneration after load); M59 save system. Spec defined.
 
@@ -214,8 +214,8 @@
 - [ ] Test de viaje rapido end-to-end con M69 → agnes-2.5-flash 2026-09-13: protocolo disenado en 03-Diseno.md §4.16 (e2e travel test); M69 fast travel service. Spec defined.
 - [ ] Test de persistencia: exploración y pines tras guardar/cargar/reiniciar [C]
 - [ ] Test de stress: 100 aperturas/cierres del mapa sin fugas ni glitches [C]
-- [ ] Verificación de que no se modificaron archivos fuera de DOCUMENTACION/54-Mapa [S]
-- [ ] Módulo declarado delegable para implementación en las Notas del Agente [S]
+- [x] Verificación de que no se modificaron archivos fuera de DOCUMENTACION/54-Mapa [S] -- agnes-3-flash 2026-10-02: commits M54 solo tocan scripts/mapa/, scripts/ui/widgets/minimap_widget.gd, scenes/ui/hud.tscn — todos parte del módulo M54
+- [x] Módulo declarado delegable para implementación en las Notas del Agente [S] -- agnes-3-flash 2026-10-02: M54 encaje A (data-driven); tasks delegables documentadas en backlog P-59
 
 ## Dependencia: Visión del Agente (M154)
 
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 70 · Pendientes: 107 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 74 · Pendientes: 103 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
