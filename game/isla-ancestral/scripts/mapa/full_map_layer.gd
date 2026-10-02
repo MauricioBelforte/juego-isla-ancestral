@@ -23,6 +23,7 @@ var _markers_container: Control
 var _legend_panel: VBoxContainer
 var _cancel_btn: Button
 var _type_filters: Dictionary = {}
+var _bake_label: Label
 var _is_open: bool = false
 
 func _ready() -> void:
@@ -217,6 +218,28 @@ func _refresh_from_manager() -> void:
 			_canvas.set_map_data(mm)
 		else:
 			_canvas.update_markers()
+	# Indicador de "mapa aún se dibuja" (textura no cacheada)
+	if _canvas and mm.has_method("get_cached_map_texture"):
+		var tex: Image = mm.get_cached_map_texture()
+		if tex == null:
+			_show_bake_progress()
+		else:
+			_hide_bake_progress()
+
+func _show_bake_progress() -> void:
+	if _bake_label == null:
+		_bake_label = Label.new()
+		_bake_label.text = "Generando mapa..."
+		_bake_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		add_child(_bake_label)
+		_bake_label.set_anchors_preset(Control.PRESET_CENTER_TOP)
+		_bake_label.position.y = 60
+	if _bake_label:
+		_bake_label.visible = true
+
+func _hide_bake_progress() -> void:
+	if _bake_label:
+		_bake_label.visible = false
 
 func _on_bg_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
