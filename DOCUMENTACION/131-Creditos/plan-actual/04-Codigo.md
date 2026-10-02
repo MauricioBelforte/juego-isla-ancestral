@@ -86,3 +86,34 @@ func obtener_idioma_actual() -> String:
 - Crear la interfaz UI en Godot CanvasLayer con RichTextLabel
 - Integrar sistema de búsqueda y filtrado por nombre/rol/equipo
 - Conectar con M90/M91 para configuración de texto y animación
+
+### QA Cruzado P-56 (§21.8) — agnes-3-flash / Kilo Code, 2026-10-02
+
+**Modelo:** agnes-3-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-02
+**Veredicto:** **M131 NO es sellable a ✅** — queda **🟡 Con dudas**. (audit-only; no se toco codigo)
+
+**Lo que SI verifica (BUG-081 bien resuelto):**
+- Los 4 fixes de inferencia están en el código real: `credits_manager.gd:229`
+  (`obtener_assets_terceros() -> Array[String]`), `audio_credit.gd:50` (`: String`),
+  `audio_credits_generator.gd:33` y `:98` (`: String`).
+- Suites re-ejecutadas (binario real Godot 4.7.2, `C:\Temp\godot\godot472.exe`):
+  M131 = 8 checks / 0 fallos (exit 0); M84 = 15 checks / 0 fallos (exit 0) — coincide con el brief.
+- Log 1178 existe, firmado (mimo-v2.6-flash-free/opencode) y commiteado (`7f00e04`).
+- Fila 131 de CHECKLIST-GLOBAL: diff de 1 sola línea, numstat `1 1`, sin normalización CRLF→LF.
+
+**Por qué NO es ✅ (hallazgo central):**
+- `05-Checklist.md` de M131 tiene **9 `[?]`** (sección audio SFX/música, todas bloqueadas por
+  M41/M42/M43/M91 — el motor de audio aún no existe) + **2 `[ ]`** (.tres catalog, counter).
+- DoD §21.6 exige "ningún `[?]`" para sellar ✅. Con 9 `[?]`, M131 **no cumple** y queda correctamente
+  en **🟡 Con dudas** (la fila 131 está en 84/95, no en ✅ — el brief había dicho "quedó ✅",
+  lo cual no se ajusta al estado real del GLOBAL).
+- Los 9 `[?]` son **bloqueos externos documentados** (no fallos del agente): mismo carácter que el
+  KnownIssue de M36/M65, pero anotados como `[?]` en vez de `[ ]`.
+
+**Para sellar ✅ (decisión del dueño/coordinador, NO de QA):** reclasificar los 9 `[?]` de audio
+a `[ ]` KnownIssue (dueño externo M41/M42/M43/M91) siguiendo el precedente M36/M65 — eso dejaría
+"84 `[x]` / 0 `[?]` / 11 `[ ]`" y sí sería sellable. Así como está (9 `[?]`), no.
+
+→ Se delega de vuelta al coordinador con este veredicto.
