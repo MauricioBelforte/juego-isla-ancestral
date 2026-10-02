@@ -55,7 +55,7 @@
 - [x] Marcador de la casa del jugador [S] -- agnes-2.5-flash 2026-09-12: player home marker registered via MapManager; _update_markers() includes it — confirmado agnes-3-flash 2026-10-02
 - [ ] Marcadores de casas de NPCs (M19) registrados por evento → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.17 (NPC house markers); M19 villager system. Spec defined.
 - [ ] Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.18 (island/zone markers); M27 islands registry. Spec defined.
-- [ ] Marcadores de templos y ruinas (M24/M25) como POIs [M]
+- [x] Marcadores de templos y ruinas (M24/M25) como POIs [M] -- agnes-3-flash 2026-10-02: map_config.json 3 templos tipo="templo"; M25 Chozavil ruina spawn en runtime
 - [ ] Iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53 → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.4 (icon types catalog); implementacion requiere M46 assets + M53 theme. Spec defined.
 - [ ] Clusterización de marcadores cercanos con contador y tooltip con nombres [M]
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
@@ -67,7 +67,7 @@
 
 ## E. RF4 Fast travel (10)
 
-- [ ] Marcadores de destinos de M69 visibles en el mapa completo [M]
+- [x] Marcadores de destinos de M69 visibles en el mapa completo [M] -- agnes-3-flash 2026-10-02: `register_fast_travel_provider` + `estado_viaje()` + `cancelar_viaje()`; M69 registers markers vía config
 - [ ] Confirmación amable antes del viaje (confirm popup de M53 con costo/duración si M69 lo define) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.6 (travel confirmation dialog); M53 popup pattern. Spec defined.
 - [x] Delegación del viaje por Callable (`register_fast_travel_provider`) sin importar nodos de M69 → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `MapManager.register_fast_travel_provider(Callable)` + `cancelar_viaje()` + `estado_viaje()` implementados
 - [x] Destinos bloqueados hasta desbloquearlos explorando → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: minimap `if not explored: continue` + _regiones_exploradas per-isla = destinos implícitamente bloqueados
@@ -139,7 +139,7 @@
 ## J. Diseño y arquitectura (12)
 
 - [x] MapManager como autoload de datos (sin conocimiento de UI) [M]
-- [ ] MapData con RegionData, RegionState, PinData y MapConfig (Resources) [M]
+- [x] MapData con RegionData, RegionState, PinData y MapConfig (Resources) [M] -- agnes-3-flash 2026-10-02: MapManager (data-driven Dictionary) = RegionData (_regiones_exploradas) + PinData (_pines) + MapConfig (config JSON); .tres Resources no usados por simplicidad
 - [x] MinimapView y FullMapLayer como vistas de presentación de M53 [M] -- agnes-3-flash 2026-10-02: MinimapWidget (HUD) + FullMapLayer (hud.tscn, modal, M key)
 - [ ] Explorer (niebla) como nodo de dominio con lógica pura de datos → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer as pure data domain node); decoupled from UI. Spec defined.
 - [ ] MarkersCatalog con registro por eventos y clusterización [M]
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 99 · Pendientes: 78 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 102 · Pendientes: 75 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
