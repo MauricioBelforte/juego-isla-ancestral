@@ -61,7 +61,7 @@
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
 - [x] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M] -- agnes-3-flash 2026-10-02: minimap_widget._update_markers() línea 156-160: `if not explored: continue` — no crea el marcador si la región no está explorada
 - [x] Filtro por tipo de marcador con persistencia de preferencia [M] -- agnes-3-flash 2026-10-02: FullMapLayer legend CheckBox per tipo; `MapCanvas.set_type_visible()`
-- [ ] Diferenciación por forma + color para daltonismo (M58) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.5 (daltonismo-friendly shapes+colors); M58 accesibilidad. Policy defined.
+- [x] Diferenciación por forma + color para daltonismo (M58) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `MapManager.tipo_forma()` (circulo/diamante/cuadrado/triangulo) + colores por tipo en minimap_widget._crear_marcador_forma()
 - [x] Pool de sprites sin crear/destruir nodos al navegar [M] -- agnes-2.5-flash 2026-09-12: pool de sprites implementado en minimap_widget.gd; reutilizacion de nodos; sin allocaciones en flujo caliente
 - [x] Escala constante de los marcadores al hacer zoom (top_level, sin deformar) [M] -- agnes-2.5-flash 2026-09-12: marcadores usan top_level=true; escala constante independientemente de zoom; cluster threshold ajusta densidad
 
