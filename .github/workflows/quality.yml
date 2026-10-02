@@ -387,6 +387,14 @@ jobs:
           # D bloques sin cerrar, E _fin suprimido): las 5 dan EXIT 1 y el control
           # sin mutar da EXIT 0. 60 checks. Gate duro: || FAIL=1.
           godot --headless --script scripts/rendimiento/memoria/test_memoria_m62_iter5.gd 2>&1 || FAIL=1
+          # M62 iter. 6 (Log 1196, DeepSeek-V4.1-Flash): pureza de los datos de
+          # partida (item L98). El payload de los 39 proveedores ISaveProvider
+          # registrados como autoload — y el payload COMPLETO de collect() — no
+          # debe contener Nodos/Objects (leak + valor no serializable). El
+          # escaner es recursivo y el bloque D lo prueba EN ROJO (inyecta un
+          # proveedor que devuelve un Nodo -> 3 fallos, EXIT 1; el control sin
+          # mutar da EXIT 0). 58 checks. Gate duro: || FAIL=1.
+          godot --headless --script scripts/rendimiento/memoria/test_m62_pureza_save.gd 2>&1 || FAIL=1
           # El dataset de presupuestos es GENERADO, no editado a mano: los 8
           # sistemas de los 3 presets habian divergido del diseno §2 (las sumas
           # daban 1664/2112/2560 en vez de 1500/2000/2500). Este gate sale 1 si
@@ -699,13 +707,16 @@ jobs:
           python-version: "3.12"
       # Se prueba EN ROJO primero: si el selftest no ve los defectos sinteticos
       # (componente ciclica, referencia fuera de orden, autoload duplicado,
-      # load() en _process), el gate no vale nada. En su primera corrida cazo
-      # 4 defectos del propio auditor.
+      # load() en _process, `self` devuelto por get_save_data()), el gate no vale
+      # nada. En su primera corrida cazo 4 defectos del propio auditor.
       - name: Auditor selftest (probar el guardian en rojo)
         run: python scripts/auditar_arquitectura_m62.py --selftest
       # Gate duro. Exit 3 = DETECTOR CIEGO (no resolvio autoloads, o el grafo
-      # quedo con 0 aristas, o no encontro callbacks por frame): se trata como
-      # fallo, porque "0 hallazgos" sin haber mirado no es un aprobado.
+      # quedo con 0 aristas, o no encontro callbacks por frame, o no encontro
+      # ningun get_save_data()): se trata como fallo, porque "0 hallazgos" sin
+      # haber mirado no es un aprobado. Grupo C (iter. 6, item L98): el
+      # complemento estatico de test_m62_pureza_save.gd — cubre tambien los
+      # proveedores que NO se registran como autoload.
       - name: Auditar arquitectura de servicios y carga sincrona
         run: |
           FAIL=0

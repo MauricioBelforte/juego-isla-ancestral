@@ -3134,3 +3134,24 @@ M63).
 
 **Pool de logs:** cabeza 1194 (1190 fugado sin log — hueco inofensivo; colisión 1188 con dos logs
 commiteados, mi log y el de Hy4, pendiente de renumerar el segundo).
+
+## M62 iter. 6 — pureza de los datos de partida (L98) — DeepSeek-V4.1-Flash
+
+- **Entregado (Log 1196):** item **L98** (§E RF4) cerrado y MEDIDO. Suite nueva
+  `scripts/rendimiento/memoria/test_m62_pureza_save.gd` (58 checks, 0 fallos, EXIT 0): escanea
+  recursivamente el payload de los **39** proveedores `ISaveProvider` registrados como autoload
+  y el payload COMPLETO de `SaveManager.snapshot.collect()` (46 claves) -> **0 Objects/Nodos**.
+  Escaner probado EN ROJO (bloque D in-suite + sonda externa sobre el SaveManager real -> 3 fallos,
+  EXIT 1; control sin mutar EXIT 0). Complemento ESTATICO: **regla C** nueva en
+  `scripts/auditar_arquitectura_m62.py` (`get_save_data()` no devuelve `self`; 56 scripts con
+  `get_save_data`, 0 hallazgos; `--selftest` extendido, 0 fallos). Items §A L30-L32 cerrados con
+  evidencia de `01-Requerimientos.md`.
+- **M62 ahora:** checklist **111 [x] / 39 [ ] / 0 [?]** (7 suites, 365 checks, 0 fallos). Los 39 [ ]
+  siguen siendo NO-headless (30 min, teleport x10, baselines §L, integraciones M08/M41-44/M63/M09/M29/M91).
+- **NO sella §21.8** (autor != verificador): el delta iter. 5+6 de M62 queda para hy3/agnes/mimo.
+- **Hallazgo AJENO (no tocado):** el auditor reporta `A2|SubtitleManager->DataStore` como NUEVO.
+  `subtitle_manager.gd` esta SIN TRACKEAR y `SubtitleManager` solo vive en el `project.godot` del
+  worktree (M91). En HEAD no existe -> el gate commiteado queda verde. Dueno M91 decide.
+- **Observacion:** el tablero de arriba (otra sesion) propone fila 63 -> 🟡 Liberado y fila 59 ->
+  🔵 En curso. ESTA sesion NO toco M59; cerro M63 iter. 6 (Log 1193) y ahora M62 iter. 6. Si hay dos
+  sesiones DeepSeek conviene sincronizar antes de tocar la fila 59.

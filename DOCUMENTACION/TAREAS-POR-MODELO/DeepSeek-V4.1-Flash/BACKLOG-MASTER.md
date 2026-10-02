@@ -935,3 +935,4 @@ validada con recuperación automática, migración solo-hacia-delante, `ISavePro
 - **Honestidad antes que volumen**: `[?]` con dueño externo > `[x]` sin medir.
 - Al terminar cada iteración: fila 59 del GLOBAL + `ESTADO-PARALELO.md` + log. **No te sellés
   §21.8** (autor ≠ verificador): lo hace hy3, agnes o mimo.
+- [x] Log reservado: **1196** — M62 iter. 6: pureza de los datos de partida (L98) + regla C del auditor (CERRADO; suite 58 checks 0 fallos + selftest auditor 0 fallos). Ver Log 1196.

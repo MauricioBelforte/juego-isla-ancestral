@@ -464,3 +464,65 @@ El autor original (DeepSeek-V4.1-Flash) puede cerrar los 52 `[ ]` (deps M19/M18-
 M59/M41–M44/M91) y luego solicitar sello limpio.
 
 **Firma:** hy3 (WorkBuddy), 2026-09-20 — Log 1128.
+
+
+## Notas del Agente — Iteración 6 (Log 1196, 2026-10-02, DeepSeek-V4.1-Flash / WorkBuddy)
+
+**Cierra el item L98** (§E RF4): «Los datos de partida (M29) no retienen referencias a nodos del mundo».
+
+### Qué se entregó
+
+- **`scripts/rendimiento/memoria/test_m62_pureza_save.gd`** (nueva suite headless, 58 checks,
+  0 fallos, EXIT 0). 5 bloques con guardián anti-falso-verde de 3 capas (`_fin` por bloque +
+  piso `CHECKS_MINIMOS=58` medido en verde + `_summary()` en un `call_deferred` aparte):
+  - **A — contrato:** todo proveedor registrado implementa `get_section_name`/`get_save_data`/
+    `restore_save_data` y su sección tiene nombre no vacío (39 proveedores medidos).
+  - **B — pureza por proveedor:** cada `get_save_data()` se escanea de forma recursiva y debe dar
+    0 Objects. 39 checks (uno por sección) → un fallo nombra al proveedor.
+  - **C — payload completo:** `SaveManager.snapshot.collect()` (46 claves) escaneado recursivamente
+    → 0 Objects. Es el artefacto REAL que se escribe.
+  - **D — sonda roja del escáner:** un `SaveSnapshot` aislado con un proveedor que devuelve
+    `{"nodo": Node.new()}` → el escáner detecta 1 objeto y nombra la ruta exacta; un proveedor puro
+    → 0; y un nodo ANIDADO (dict en array en dict) también se detecta. Sin este bloque, un escáner
+    roto daría el mismo «0 objetos» que un payload limpio (trampa 61).
+  - **E — cobertura:** se escanearon las 39 secciones (no una muestra).
+- **`scripts/auditar_arquitectura_m62.py`** — **regla C** nueva (complemento ESTÁTICO):
+  `get_save_data()` no debe devolver `self` desnudo (excluye `self.metodo()`). Cubre los **56**
+  scripts con `get_save_data()` (más que los 39 autoload: también los que NO se registran).
+  El `--selftest` se extendió con un fixture `save.gd` que devuelve `self`, su control negativo
+  (`self.metodo()`) y un fixture de ceguera del grupo C. `--selftest` 0 fallos; auditor sobre el
+  repo real: **0 hallazgos de grupo C**.
+- **CI:** `test_m62_pureza_save.gd` cableado en el job `test-suite`; comentario de
+  `architecture-guard` actualizado (grupo C + la ceguera del grupo C).
+
+### Medición (Godot 4.7.2 headless)
+
+| Qué | Valor |
+|---|---|
+| Proveedores registrados como autoload | **39** |
+| Scripts con `get_save_data()` (estático) | **56** |
+| Claves del payload de `collect()` | **46** |
+| Objects/Nodos en el payload | **0** |
+| Suites M62 totales (7) | **365 checks, 0 fallos** |
+
+### Lo que la medición enseñó
+
+- **39 ≠ 56.** El runtime solo ve los proveedores registrados como autoload; el análisis estático ve
+  los 56 scripts que definen `get_save_data()`. Ninguna vista por sí sola cubre el item: van las DOS.
+- **Un «0 objetos» necesita su sonda roja.** El bloque D prueba que el escáner puede fallar; una
+  sonda EXTERNA (registrar un proveedor impuro en el `SaveManager` real) dio 3 fallos / EXIT 1,
+  con el control sin mutar en EXIT 0.
+
+### Hallazgo AJENO (no tocado)
+
+- El auditor reporta `A2|SubtitleManager->DataStore` como hallazgo NUEVO. **No es de este módulo**:
+  `subtitle_manager.gd` está SIN TRACKEAR y `SubtitleManager` solo existe en el `project.godot`
+  del worktree (M91/subtítulos). En HEAD no existe → el gate commiteado queda verde. El dueño de M91
+  debe decidir (allowlist A2 o reordenar). **No se tocó `PERMITIDOS`.**
+
+### NO sella §21.8
+
+- El autor no puede auto-verificarse (trampa 46/119). La re-verificación de M62 (y del delta de M63)
+  queda para un NO-autor.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-02 — Log 1196.

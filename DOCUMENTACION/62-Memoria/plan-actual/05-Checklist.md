@@ -1,12 +1,12 @@
 **Modelo:** DeepSeek-V4.1-Flash (último modificador)
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-02 (iter. 5 — Log 1187)
+**Fecha:** 2026-10-02 (iter. 6 — Log 1196)
 
 # 05-Checklist.md — Módulo 62: Memoria
 
 ## Reserva actual
 
-- Estado: 🟢 En curso — iter. 5 (Log 1187) por DeepSeek-V4.1-Flash
+- Estado: 🟢 En curso — iter. 6 (Log 1196) por DeepSeek-V4.1-Flash
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
 - Fase: Base de producción (soporte M61 Rendimiento)
 - Dificultad: 3
@@ -15,6 +15,7 @@
 - Salida: 5 defectos reales corregidos (denominador del semáforo, enforcement, muestreo por frame, drift/baseline a 5 min, pico por punto de interés) + `PoolFactory` + `LeakGuard` + `TextureMemory` + dataset regenerado por `generar_budgets.gd` + 4 suites con guardián probado por inyección (232 checks) + gate de CI en `quality.yml`
   - **iter. 4:** presupuesto de liberación por refcount **medido** (pico < 3 ms, delta de lote < 50 ms) + nodos huérfanos estables en reposo + **auditor estático de arquitectura de servicios** (`scripts/auditar_arquitectura_m62.py`, con selftest probado en rojo) + 2 gates nuevos de CI. 2 bugs nuevos (BUG-068/BUG-069).
   - **iter. 5 (Log 1187):** **handshake con M63** (el 62 nunca descarga lo que el 63 está cargando) + cola de transición de escena + región rápida → fuerza liberación + banco de audio diferido + atlas LRU con log + determinismo (RN9). Suite nueva `test_memoria_m62_iter5.gd` (**60 checks**, guardián probado con **5 sondas en rojo**, exit real verificado) + gate de CI. **9 ítems** de §K/§J/§F pasan a `[x]`. Total M62 = **307 checks**.
+  - **iter. 6 (Log 1196):** **pureza de los datos de partida** (item L98): los 39 proveedores `ISaveProvider` registrados devuelven solo datos (0 Nodos) y el payload COMPLETO de `collect()` tambien. Suite `test_m62_pureza_save.gd` (58 checks) con escaner recursivo probado EN ROJO. Complemento estatico: **regla C** en `auditar_arquitectura_m62.py` (56 scripts con `get_save_data`, 0 hallazgos).
 - Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json` + `scripts/auditar_arquitectura_m62.py`
 - Fecha cierre: (pendiente — al cerrar con `--estado`)
 
@@ -24,12 +25,13 @@
 - **iter. 3**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-19 (Log 1094)
 - **iter. 4**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-09-20 (Log 1112)
 - **iter. 5**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-10-02 (Log 1187) — módulo **reservado de vuelta** al autor (commit `6d8d02b`)
+- **iter. 6**: DeepSeek-V4.1-Flash / WorkBuddy — 2026-10-02 (Log 1196) — pureza de los datos de partida (L98) + regla C del auditor
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: memoria creciente por chunks, señales, texturas y audio sin descarga en mundo voxel cozy [S]
-- [ ] Registrar dependencias: M61 (rendimiento), M08 (voxel), M63 (streaming); relaciones M41-M44, M12, M90, M103, M110 [S]
-- [ ] Definir el objetivo: RAM predecible y estable, sin leaks y sin picos de frame en hardware medio/bajo [S]
+- [x] Definir el problema: memoria creciente por chunks, señales, texturas y audio sin descarga en mundo voxel cozy [S] — **iter. 6 (Log 1196):** documentado en `01-Requerimientos.md` §1 Problema (L12-14).
+- [x] Registrar dependencias: M61 (rendimiento), M08 (voxel), M63 (streaming); relaciones M41-M44, M12, M90, M103, M110 [S] — **iter. 6 (Log 1196):** `01-Requerimientos.md` §ID del Modulo (L9) lista las 3 dependencias y las 6 relaciones.
+- [x] Definir el objetivo: RAM predecible y estable, sin leaks y sin picos de frame en hardware medio/bajo [S] — **iter. 6 (Log 1196):** `01-Requerimientos.md` §2 Objetivo (L16-18).
 - [x] Implementar alcance núcleo: MemoryMonitor + BudgetRegistry + GlobalPool + UnloadPolicy [S]
 - [x] Fijar la prioridad del módulo: Alta (la memoria condiciona a todos los demás sistemas) [S]
 
@@ -95,7 +97,7 @@
 - [x] Prohibido crear Node sin padre que quede huérfano; chequeo con contador de orphans [S] — Log 1094: holder anti-huérfano en `GlobalPool` + `LeakGuard.contar_huerfanos()`; probado que el ítem estacionado cuelga del holder
 - [x] Policy de recursos compartidos: `duplicate(false)` y caché con un solo dueño (D6) [M] — Log 1094: `LeakGuard.recursos_duplicados()` agrupa por `resource_path`+`instance_id` y detecta la doble carga (probado)
 - [ ] Texturas de región se liberan al salir de la misma (con M63 y M09) [M]
-- [ ] Los datos de partida (M29) no retienen referencias a nodos del mundo [M]
+- [x] Los datos de partida (M29) no retienen referencias a nodos del mundo [M] — **iter. 6 (Log 1196): MEDIDO.** `test_m62_pureza_save.gd` (58 checks, 0 fallos): los 39 proveedores registrados y el payload completo de `collect()` dan 0 Objects; escaner recursivo probado EN ROJO (bloque D). Complemento estatico: regla C del auditor (56 scripts con `get_save_data`, 0 hallazgos).
 - [x] Partículas y audio se detienen y devuelven al pool al desactivar la fuente [M]
 - [x] Los callables con bound parameters se desconectan en `_exit_tree` (anti-leak de lambdas) [M] — Log 1094: `LeakGuard.conectar()` guarda el Callable EXACTO (incluido el `.bind()`), así el disconnect funciona; probado
 - [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evidencia de por qué.** El auditor nuevo mide **2 componentes fuertemente conexas** (7 nodos: `CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather`; y 2 nodos: `ThemeService, UIManager`) más 9 referencias a un autoload declarado después. Escalado como **BUG-069**; el gate los tiene en lista de permitidos para que ningún ciclo NUEVO pase
@@ -282,3 +284,36 @@
 - **El selftest hay que probarlo antes de confiar en él.** El de este auditor pasó de 4 fallos a 0
   corrigiendo el auditor Y las aserciones; sin esa primera corrida en rojo, el gate habría entrado a
   CI sin detectar `instantiate()` ni `duplicate()`.
+
+## Notas del Agente (iter. 6 — Log 1196, DeepSeek-V4.1-Flash / WorkBuddy)
+
+### Lo que hice
+- **Item L98 CERRADO y MEDIDO.** Suite nueva `test_m62_pureza_save.gd` (58 checks, 0 fallos, EXIT 0):
+  recorre de forma RECURSIVA el payload de los 39 proveedores `ISaveProvider` registrados como
+  autoload (y el payload COMPLETO de `SaveManager.snapshot.collect()`) y exige 0 referencias a
+  Objetos/Nodos. Medicion: 39 proveedores, 46 claves de payload, 0 objetos.
+- **Escaner probado EN ROJO** (bloque D, in-suite): un `SaveSnapshot` aislado con un proveedor que
+  devuelve `{"nodo": Node.new()}` -> el escaner detecta 1 objeto y nombra la ruta exacta; un
+  proveedor puro -> 0. Ademas sonda EXTERNA: registrar un proveedor impuro en el SaveManager REAL
+  -> 3 fallos, EXIT 1 (control sin mutar: EXIT 0).
+- **Complemento estatico: regla C** en `scripts/auditar_arquitectura_m62.py` — `get_save_data()` no
+  debe devolver `self` desnudo. Cubre los 56 scripts con `get_save_data()` (mas que los 39 autoload:
+  tambien los que NO se registran). Selftest del auditor EXTENDIDO (fixture `save.gd` que devuelve
+  `self` + control negativo `self.metodo()` + fixture de ceguera del grupo C): 0 fallos, EXIT 0.
+- **Items §A (L30-L32) cerrados** con evidencia: `01-Requerimientos.md` §ID del Modulo (L9), §1
+  Problema (L12-14) y §2 Objetivo (L16-18) ya contenian problema, dependencias y objetivo.
+
+### Lo que la medicion me enseno
+- **39 != 56.** El runtime solo ve los proveedores registrados como autoload; el analisis estatico ve
+  los 56 scripts que definen `get_save_data()`. Ninguna vista por si sola cubre el item: van las DOS.
+- **Un "0 objetos" necesita su sonda roja.** Sin el bloque D, un escaner roto (que no recorriera nada)
+  daria el mismo "0 objetos" que un payload limpio (trampa 61: un detector que da 100% esta roto).
+
+### Hallazgo AJENO (no tocado)
+- El auditor reporta `A2|SubtitleManager->DataStore` como hallazgo NUEVO. **NO es mio**:
+  `subtitle_manager.gd` esta SIN TRACKEAR y `SubtitleManager` solo existe en el `project.godot` del
+  WORKTREE (M91/subtitulos). En HEAD no existe -> el gate commiteado queda verde. El dueno de M91
+  debe decidir (allowlist A2 o reordenar). **No toque `PERMITIDOS`.**
+
+### NO sella §21.8
+- El autor no puede auto-verificarse (trampa 46/119). La re-verificacion de M62 queda para un NO-autor.

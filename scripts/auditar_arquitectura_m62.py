@@ -30,6 +30,16 @@ hiciera cumplir:
      (`_process`, `_physics_process`, `_input`, ...). Un `load()` ahi bloquea
      el hilo principal justo en el frame que M61 mide.
 
+  C. Los datos de partida (M29). El item L98 del checklist de M62 exige que
+     `get_save_data()` (contrato ISaveProvider de M59) devuelva DATOS y no
+     referencias al mundo. Devolver `self` mete el propio proveedor — que
+     cuando es autoload ES un Nodo — dentro del payload del save: leak y valor
+     no serializable. Esta regla es el complemento ESTATICO de la suite de
+     runtime `scripts/rendimiento/memoria/test_m62_pureza_save.gd` (que recorre
+     el payload real de los 39 proveedores registrados y lo escanea de forma
+     recursiva). El gate cubre ademas proveedores que NO se registran como
+     autoload y por tanto no aparecen en runtime.
+
 MEDICIONES (Godot 4.7.2 headless, banco de pruebas propio, 2026-09-20)
 ---------------------------------------------------------------------
 Antes de describir la severidad de A2 se midio, y la medicion contradijo la
@@ -122,6 +132,13 @@ REGLAS_CARGA = (
     ("B2", "instantiate()", re.compile(r"(?<![A-Za-z0-9_])instantiate\s*\(")),
     ("B3", "duplicate()", re.compile(r"(?<![A-Za-z0-9_])duplicate\s*\(")),
 )
+
+# Regla C (item L98): `get_save_data()` no debe devolver `self` DESNUDO.
+# Se excluye `self.algo` / `self.metodo()` (uso normal de self); solo cuenta el
+# `self` como VALOR (p. ej. `return {"yo": self}` o `var x = self`). Devolver
+# `self` mete el proveedor (que puede ser un Nodo autoload) en el payload.
+RE_GET_SAVE_DATA = re.compile(r"^\s*func\s+get_save_data\s*\(")
+RE_SELF_VALOR = re.compile(r"(?<![A-Za-z0-9_.])self(?![A-Za-z0-9_.])")
 
 # ---------------------------------------------------------------------------
 # Hallazgos ACEPTADOS (con justificacion y bug). Se imprimen SIEMPRE: una lista
@@ -444,10 +461,58 @@ def analizar_carga_sincrona(raiz, base):
 
 
 # ---------------------------------------------------------------------------
+# Grupo C — pureza de los datos de partida (M29, item L98)
+# ---------------------------------------------------------------------------
+
+def analizar_pureza_save(raiz, base):
+    """Regla C: `get_save_data()` no debe devolver `self` (referencia al mundo).
+
+    Complementa la suite de runtime `test_m62_pureza_save.gd`. Aqui se mira el
+    TEXTO de cada `get_save_data()` del arbol de scripts, asi que cubre tambien
+    los proveedores que no se registran como autoload y no aparecen en runtime.
+
+    Devuelve (hallazgos, n_archivos_con_get_save_data).
+    """
+    hallazgos = []
+    n_archivos = 0
+    raiz_scripts = os.path.join(raiz, base, "scripts")
+    for dirpath, dirnames, filenames in os.walk(raiz_scripts):
+        dirnames[:] = [d for d in dirnames if d not in EXCLUIDOS_DIR]
+        for fn in sorted(filenames):
+            if not fn.endswith(".gd"):
+                continue
+            p = os.path.join(dirpath, fn)
+            rel = os.path.relpath(p, raiz).replace("\\", "/")
+            try:
+                with open(p, encoding="utf-8", errors="replace") as fh:
+                    lineas = fh.read().splitlines()
+            except OSError:
+                continue
+            funcs = parsear_funciones(lineas)
+            if "get_save_data" not in funcs:
+                continue
+            n_archivos += 1
+            a, b = funcs["get_save_data"]
+            for i in range(a, b):
+                s = lineas[i].strip()
+                if s.startswith("#"):
+                    continue
+                corte = s.find(" #")
+                if corte >= 0:
+                    s = s[:corte]
+                if RE_SELF_VALOR.search(s):
+                    hallazgos.append({
+                        "regla": "C", "archivo": rel, "linea": i + 1,
+                        "texto": lineas[i].strip()[:100],
+                    })
+    return hallazgos, n_archivos
+
+
+# ---------------------------------------------------------------------------
 # Informe
 # ---------------------------------------------------------------------------
 
-def imprimir_informe(serv, carga, n_archivos, n_funciones, informe):
+def imprimir_informe(serv, carga, n_archivos, n_funciones, informe, pureza=(), n_prov=0):
     print("=== Auditoria de arquitectura M62 (servicios + carga sincrona) ===\n")
 
     print("-- Grupo A: grafo de servicios")
@@ -486,11 +551,20 @@ def imprimir_informe(serv, carga, n_archivos, n_funciones, informe):
         print("     %s %s:%d  en %s()  %s%s"
               % (h["regla"], h["archivo"], h["linea"], h["funcion"], h["etiqueta"], marca))
 
-    nuevos = hallazgos_nuevos(serv, carga)
+    print("\n-- Grupo C: pureza de los datos de partida (M29, item L98)")
+    print("   scripts con get_save_data() . %d" % n_prov)
+    print("   hallazgos .................. %d" % len(pureza))
+    for h in pureza:
+        clave = "%s|%s:%d" % (h["regla"], h["archivo"], h["linea"])
+        marca = " [permitido %s]" % PERMITIDOS[clave] if clave in PERMITIDOS else "  << NUEVO"
+        print("     %s %s:%d  %s%s"
+              % (h["regla"], h["archivo"], h["linea"], h["texto"], marca))
+
+    nuevos = hallazgos_nuevos(serv, carga, pureza)
     print("\n-- Hallazgos NUEVOS (no permitidos): %d" % len(nuevos))
     for n in nuevos:
         print("     %s" % n)
-    obsoletos = permitidos_obsoletos(serv, carga)
+    obsoletos = permitidos_obsoletos(serv, carga, pureza)
     if obsoletos:
         print("\n-- Aviso: %d entradas de PERMITIDOS ya no se observan (se pueden borrar):"
               % len(obsoletos))
@@ -511,7 +585,7 @@ def clave_scc(componente):
     return "A1|" + ",".join(sorted(componente))
 
 
-def claves_observadas(serv, carga):
+def claves_observadas(serv, carga, pureza=()):
     vistas = set()
     for comp in serv["sccs"]:
         vistas.add(clave_scc(comp))
@@ -521,16 +595,18 @@ def claves_observadas(serv, carga):
         vistas.add("A2|%s->%s" % (v["origen"], v["destino"]))
     for h in carga:
         vistas.add("%s|%s:%d" % (h["regla"], h["archivo"], h["linea"]))
+    for h in pureza:
+        vistas.add("%s|%s:%d" % (h["regla"], h["archivo"], h["linea"]))
     return vistas
 
 
-def hallazgos_nuevos(serv, carga):
-    return sorted(k for k in claves_observadas(serv, carga) if k not in PERMITIDOS)
+def hallazgos_nuevos(serv, carga, pureza=()):
+    return sorted(k for k in claves_observadas(serv, carga, pureza) if k not in PERMITIDOS)
 
 
-def permitidos_obsoletos(serv, carga):
+def permitidos_obsoletos(serv, carga, pureza=()):
     """Entradas de PERMITIDOS que ya NO se observan (se pueden borrar)."""
-    return set(PERMITIDOS) - claves_observadas(serv, carga)
+    return set(PERMITIDOS) - claves_observadas(serv, carga, pureza)
 
 
 def claves_carga(carga):
@@ -590,6 +666,18 @@ func _ready() -> void:
 	var r2 = load("res://z.tres")
 """
 
+# Grupo C: un proveedor que devuelve `self` (defecto) y otro que usa `self.metodo()`
+# (uso normal, NO debe marcarse). Van en el MISMO get_save_data para probar ambos.
+FIXTURE_SAVE = """extends Node
+
+func get_save_data() -> Dictionary:
+	var n := self._contar()
+	return {"yo": self, "n": n}
+
+func _contar() -> int:
+	return 1
+"""
+
 
 def selftest(raiz):
     """Construye un fixture con defectos CONOCIDOS y exige que las 4 reglas los vean."""
@@ -610,7 +698,7 @@ def selftest(raiz):
     with open(os.path.join(tmp, base, "project.godot"), "w", encoding="utf-8") as fh:
         fh.write(FIXTURE_PROJECT)
     for nombre, cuerpo in (("alfa.gd", FIXTURE_ALFA), ("beta.gd", FIXTURE_BETA),
-                           ("frame.gd", FIXTURE_FRAME)):
+                           ("frame.gd", FIXTURE_FRAME), ("save.gd", FIXTURE_SAVE)):
         with open(os.path.join(tmp, base, "scripts", nombre), "w", encoding="utf-8") as fh:
             fh.write(cuerpo)
 
@@ -650,8 +738,17 @@ def selftest(raiz):
           not any(h["funcion"] == "_ready" for h in carga), str(carga))
     check("control negativo: preload() NO se marca (es constante de compilacion, no carga)",
           not any("preload(" in h["texto"] for h in carga), str(carga))
-    check("B cuenta los archivos y los callbacks por frame del fixture (3 archivos, 1 callback)",
-          n_arch == 3 and n_func == 1, "archivos=%d funciones=%d" % (n_arch, n_func))
+    check("B cuenta los archivos y los callbacks por frame del fixture (4 archivos, 1 callback)",
+          n_arch == 4 and n_func == 1, "archivos=%d funciones=%d" % (n_arch, n_func))
+
+    pureza, n_prov = analizar_pureza_save(tmp, base)
+    check("C detecta `self` desnudo en get_save_data() (fixture save.gd)",
+          len(pureza) == 1 and pureza[0]["archivo"].endswith("save.gd"),
+          str(pureza))
+    check("C NO marca `self.metodo()` (uso normal de self)",
+          not any("_contar" in h["texto"] for h in pureza), str(pureza))
+    check("C cuenta los scripts con get_save_data() del fixture (1)",
+          n_prov == 1, "n=%d" % n_prov)
 
     # --- guardas de ceguera: probarlas es lo que las hace valer ---
     def fixture(nombre, autoloads_txt, archivos):
@@ -665,35 +762,46 @@ def selftest(raiz):
         o, m = cargar_autoloads(os.path.join(d, base, "project.godot"))
         s = analizar_servicios(d, base, o, m)
         _, _, nf = analizar_carga_sincrona(d, base)
-        return o, s, nf
+        return o, s, nf, d
 
     # (1) sin autoloads
-    o, s, nf = fixture("vacio", "", {})
+    o, s, nf, _d1 = fixture("vacio", "", {})
     check("ceguera 1: proyecto sin autoloads -> se declara CIEGO",
           len(o) == 0 and evaluar_ceguera(o, s, nf), str(evaluar_ceguera(o, s, nf)))
 
     # (2) autoloads declarados pero sin archivo (el error real del 2026-09-20:
     #     las rutas se resolvian mal y los 111 autoloads quedaban "sin archivo",
     #     lo que producia un "0 ciclos" indistinguible de "no mire")
-    o, s, nf = fixture("sinarchivo",
-                       'Fantasma="*res://scripts/no_existe.gd"',
-                       {"otro.gd": "extends Node\nfunc _process(_d):\n\tpass\n"})
+    o, s, nf, _d2 = fixture("sinarchivo",
+                            'Fantasma="*res://scripts/no_existe.gd"',
+                            {"otro.gd": "extends Node\nfunc _process(_d):\n\tpass\n"})
     check("ceguera 2: autoload declarado sin archivo -> CIEGO",
           len(o) == 1 and evaluar_ceguera(o, s, nf), str(evaluar_ceguera(o, s, nf)))
 
     # (3) todo resuelve pero NADIE se referencia: grafo de 0 aristas. Es el
     #     segundo falso verde real de hoy (0 aristas -> "0 ciclos").
-    o, s, nf = fixture("sinaristas",
-                       'Uno="*res://scripts/uno.gd"\nDos="*res://scripts/dos.gd"',
-                       {"uno.gd": "extends Node\nfunc _process(_d):\n\tpass\n",
-                        "dos.gd": "extends Node\nfunc _process(_d):\n\tpass\n"})
+    o, s, nf, _d3 = fixture("sinaristas",
+                            'Uno="*res://scripts/uno.gd"\nDos="*res://scripts/dos.gd"',
+                            {"uno.gd": "extends Node\nfunc _process(_d):\n\tpass\n",
+                             "dos.gd": "extends Node\nfunc _process(_d):\n\tpass\n"})
     check("ceguera 3: grafo con 0 aristas -> CIEGO (0 ciclos no es lo mismo que 'no mire')",
           s["aristas"] == 0 and evaluar_ceguera(o, s, nf), str(evaluar_ceguera(o, s, nf)))
 
-    # (4) control positivo: el fixture bueno NO se declara ciego
-    check("ceguera 4: el fixture con defectos NO se declara ciego (control positivo)",
-          evaluar_ceguera(orden, serv, n_func) == [],
-          str(evaluar_ceguera(orden, serv, n_func)))
+    # (4) grupo C: hay autoloads, aristas y callbacks por frame, pero NINGUN
+    #     get_save_data() -> el detector de pureza queda CIEGO.
+    o, s, nf, d4 = fixture("sin_save",
+                           'Uno="*res://scripts/uno.gd"\nDos="*res://scripts/dos.gd"',
+                           {"uno.gd": "extends Node\nfunc _ready():\n\tvar d = get_node_or_null(\"/root/Dos\")\nfunc _process(_d):\n\tpass\n",
+                            "dos.gd": "extends Node\nfunc _ready():\n\tvar u = get_node_or_null(\"/root/Uno\")\nfunc _process(_d):\n\tpass\n"})
+    _, np4 = analizar_pureza_save(d4, base)
+    check("ceguera 4 (grupo C): sin get_save_data() -> CIEGO",
+          np4 == 0 and any("get_save_data" in m for m in evaluar_ceguera(o, s, nf, np4)),
+          str(evaluar_ceguera(o, s, nf, np4)))
+
+    # (5) control positivo: el fixture bueno NO se declara ciego
+    check("ceguera 5: el fixture con defectos NO se declara ciego (control positivo)",
+          evaluar_ceguera(orden, serv, n_func, n_prov) == [],
+          str(evaluar_ceguera(orden, serv, n_func, n_prov)))
 
     print("\n=== Selftest: %d fallos ===" % fallos)
     return 0 if fallos == 0 else 1
@@ -703,7 +811,7 @@ def selftest(raiz):
 # main
 # ---------------------------------------------------------------------------
 
-def evaluar_ceguera(orden, serv, n_funciones):
+def evaluar_ceguera(orden, serv, n_funciones, n_prov=None):
     """Motivos por los que el auditor NO puede afirmar "no hay hallazgos".
 
     Existe porque el 2026-09-20 este mismo detector reporto "0 ciclos" dos veces
@@ -721,6 +829,8 @@ def evaluar_ceguera(orden, serv, n_funciones):
         motivos.append("el grafo de servicios quedo con 0 aristas (detector ciego)")
     if n_funciones == 0:
         motivos.append("no se encontro ninguna funcion por frame (detector ciego)")
+    if n_prov is not None and n_prov == 0:
+        motivos.append("no se encontro ningun get_save_data() (detector ciego, grupo C)")
     return motivos
 
 
@@ -738,9 +848,10 @@ def main():
     serv = analizar_servicios(raiz, base, orden, mapa)
     serv["orden_total"] = orden
     carga, n_arch, n_func = analizar_carga_sincrona(raiz, base)
+    pureza, n_prov = analizar_pureza_save(raiz, base)
 
     # --- Guardas de ceguera: sin esto, "0 hallazgos" no significa nada ---
-    ciego = evaluar_ceguera(orden, serv, n_func)
+    ciego = evaluar_ceguera(orden, serv, n_func, n_prov)
 
     if como_json:
         print(json.dumps({
@@ -749,11 +860,12 @@ def main():
             "autoloads_duplicados": serv["autoloads_duplicados"],
             "orden_violado": serv["orden_violado"],
             "sin_archivo": serv["sin_archivo"], "carga_sincrona": carga,
+            "pureza_save": pureza, "scripts_get_save_data": n_prov,
             "archivos_gd": n_arch, "funciones_por_frame": n_func,
-            "ciego": ciego, "nuevos": hallazgos_nuevos(serv, carga),
+            "ciego": ciego, "nuevos": hallazgos_nuevos(serv, carga, pureza),
         }, indent=2, ensure_ascii=False))
     else:
-        imprimir_informe(serv, carga, n_arch, n_func, informe)
+        imprimir_informe(serv, carga, n_arch, n_func, informe, pureza, n_prov)
 
     if ciego:
         print("\nDETECTOR CIEGO — no se puede afirmar que no hay hallazgos:")
@@ -763,7 +875,7 @@ def main():
 
     if informe:
         return 0
-    return 1 if hallazgos_nuevos(serv, carga) else 0
+    return 1 if hallazgos_nuevos(serv, carga, pureza) else 0
 
 
 if __name__ == "__main__":

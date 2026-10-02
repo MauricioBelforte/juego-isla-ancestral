@@ -69,3 +69,4 @@
 | Descarga que rompe el streaming activo | D6 handshake con M63; el 62 no descarga nada en cola de carga |
 | Presupuesto superado en preset Baja durante tormenta (clima + audio + partículas) | D10 degradación ordenada y registro en log; el juego nunca crashea por memoria |
 | Medidas muertas (monitor que avisa pero no actúa) | Enforcement duro al 95% sin excepción + tests de semáforo forzado |
+| Datos de partida (M29) que retengan Nodos del mundo | L98 verificado en runtime (39 proveedores + payload de `collect()` = 0 Objects, suite `test_m62_pureza_save.gd`) y en estatico (regla C de `auditar_arquitectura_m62.py`) |
