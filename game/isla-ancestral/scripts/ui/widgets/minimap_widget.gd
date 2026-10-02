@@ -54,6 +54,8 @@ var _zoom: float = 1.0
 var _pan_offset: Vector2 = Vector2.ZERO
 var _is_dragging: bool = false
 var _drag_start: Vector2 = Vector2.ZERO
+var _pos_timer: Timer
+var _island_fogs: Dictionary = {}  # island_id -> ColorRect (per-island fog)
 
 ## ── Ciclo de vida ───────────────────────────────────────
 
@@ -61,6 +63,12 @@ func _ready() -> void:
 	_build_ui()
 	_refresh_from_map_manager()
 	_update_transform()
+	# 2 Hz update de posición del jugador (no per-frame)
+	_pos_timer = Timer.new()
+	_pos_timer.wait_time = 0.5  # 2 Hz
+	_pos_timer.autostart = true
+	_pos_timer.timeout.connect(_update_player_position)
+	add_child(_pos_timer)
 	# Conectar al MapManager si existe
 	var mm := _get_map_manager()
 	if mm != null:
@@ -279,10 +287,49 @@ func _build_ui() -> void:
 func _on_exploracion_cambiada(_region_ids: Array) -> void:
 	_refresh_from_map_manager()
 	_update_markers()
+	_update_island_fogs()
+
+func _update_island_fogs() -> void:
+	var mm := _get_map_manager()
+	if mm == null:
+		return
+	# Create per-island fog rects if not already created
+	if _island_fogs.is_empty():
+		_build_island_fogs()
+	# Update visibility based on exploration state
+	for island_id in _island_fogs:
+		var fog: ColorRect = _island_fogs[island_id]
+		var region: String = mm.islas().get(island_id, {}).get("regione", "")
+		var explored: bool = _regiones_exploradas.get(region, false)
+		fog.visible = not explored
 
 func _on_pines_cambiados(_pines: Array) -> void:
 	# Los pines se podrían mostrar como marcadores adicionales
 	pass
+
+func _build_island_fogs() -> void:
+	var mm := _get_map_manager()
+	if mm == null:
+		return
+	var islas: Dictionary = mm.islas()
+	var map_area := MAP_SIZE - Vector2(8, 8)
+	var island_count: int = islas.size()
+	if island_count == 0:
+		return
+	# Distribuir fog por isla en cuadrícula 2x2 (4 islas)
+	var cell_w := map_area.x / 2.0
+	var cell_h := map_area.y / 2.0
+	var idx := 0
+	for island_id in islas:
+		var fog := ColorRect.new()
+		fog.size = Vector2(cell_w - 2, cell_h - 2)
+		fog.position = Vector2(4.0 + (idx % 2) * cell_w, 4.0 + (idx / 2) * cell_h)
+		fog.color = COLOR_FOG
+		fog.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(fog)
+		_island_fogs[island_id] = fog
+		idx += 1
+	_update_island_fogs()
 
 ## ── Utilidades ──────────────────────────────────────────
 

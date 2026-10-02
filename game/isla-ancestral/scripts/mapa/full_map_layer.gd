@@ -104,6 +104,9 @@ func _build_legend() -> void:
 func open_map() -> void:
 	if _is_open:
 		return
+	# Convivencia con pila de capas: no abrir si hay capa modal activa
+	if _hay_capa_modal_activa():
+		return
 	_is_open = true
 	visible = true
 	_refresh_from_manager()
@@ -112,6 +115,18 @@ func open_map() -> void:
 	var time_mgr := get_node_or_null("/root/TimeCalendar")
 	if time_mgr and time_mgr.has_method("pausa"):
 		time_mgr.pausa()
+
+func _hay_capa_modal_activa() -> bool:
+	# Verificar si DialogLayer, PauseLayer u otra capa UIRoot está visible
+	var ui_root := get_tree().root.get_node_or_null("UIRoot")
+	if ui_root:
+		if ui_root.get("dialog_layer") and ui_root.get("dialog_layer").visible:
+			return true
+		if ui_root.get("pause_layer") and ui_root.get("pause_layer").visible:
+			return true
+		if ui_root.get("menus_layer") and ui_root.get("menus_layer").visible:
+			return true
+	return false
 
 func close_map() -> void:
 	if not _is_open:

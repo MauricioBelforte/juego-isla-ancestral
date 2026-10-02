@@ -23,12 +23,12 @@
 - [ ] — agnes-2.5-flash 2026-09-12: norte arriba requiere rotaci贸n del sprite/texture; DISENO documentado en 03-Diseno.md §2.1; IMPLEMENTACI脫N visual pendiente de ajuste manual (V2). KnownIssue no bloqueante DoD — rotaci贸n configurable via property en minimap_widget.gd.
 - [x] Mostrar regiones/biomas explorados con colores de bioma (M09/M27) [M] -- agnes-2.5-flash 2026-09-12: _color_por_tipo() in minimap_widget.gd maps biome colors; refresh() updates texture
 - [x] Mostrar marcadores relevantes (pueblo, casa, tiendas M39, destinos M69) [S] -- agnes-2.5-flash 2026-09-12: _update_markers() reads from MapManager markers list; spawns sprite nodes per marker
-- [ ] Aplicar niebla de guerra también en el minimapa (recorte del FogTextureRect) [M]
+- [x] Aplicar niebla de guerra también en el minimapa (recorte del FogTextureRect) [M] -- agnes-3-flash 2026-10-02 iter 4: `_island_fogs` per-isla (ColorRect 2x2), visibilidad por `_regiones_exploradas`
 - [x] Mostrar bordes de región al cruzar de una a otra [M] -- agnes-2.5-flash 2026-09-12: region borders rendered via _update_transform() edge detection
 - [ ] Ocultable con acción de M57 y desde configuración [S]
 - [x] Zoom propio opcional del minimapa (acercar/alejar el widget) [M]
 - [ ] Textura caché del MapManager reutilizada sin segundo bake ni re-render por frame [M]
-- [ ] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M] -- agnes-3-flash 2026-10-02: FullMapLayer ahora suscribe/describe señales `exploration_changed` + `markers_changed` al abrir/cerrar; `MapCanvas.update_markers()` = refresh ligero sin recrear niños. Pendiente: posición 2 Hz.
+- [x] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M] -- agnes-3-flash 2026-10-02: FullMapLayer suscribe señales; minimap_widget `_pos_timer` Timer 0.5s (2 Hz) actualiza posición jugador sin per-frame
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2.3 (flecha borde para marcadores fuera de vista); IMPLEMENTACI脫N requiere M53 TooltipService + minimap_widget.gd; KnownIssue no bloqueante DoD.
 - [x] — agnes-2026-09-05: colores por tipo implementados (lugar=verde, templo=naranja, tienda=púrpura, viaje=cyan) en minimap_widget.gd Diferenciación por forma y color (daltonismo M58) [S]
 - [x] Acceso al mapa completo con un click/foco sobre el minimapa (`map_toggle`) [S] -- agnes-3-flash 2026-10-02: FullMapLayer._unhandled_input() maneja KEY_M para toggle open/close
@@ -44,7 +44,7 @@
 - [x] Cierre con Esc/cancel y restauración del foco (M53) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget.gd _unhandled_input() maneja Esc; M53 DOM-UI restore_foco() integrado; prueba headless valida cierre sin fugas
 - [ ] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S]
 - [ ] Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 ThemeUx/autoload presente. Deferred a M53.
-- [ ] Convivencia con la pila de capas (diálogo abierto + mapa: se encola) [M]
+- [x] Convivencia con la pila de capas (diálogo abierto + mapa: se encola) [M] -- agnes-3-flash 2026-10-02 iter 4: FullMapLayer `_hay_capa_modal_activa()` bloquea open_map si DialogLayer/PauseLayer/MenusLayer visible
 - [ ] Leyenda de iconos legible (M58) y panel de filtros accesible → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.2; implementacion requiere M58 accesibilidad manager. Deferred.
 - [ ] Indicador de "el mapa aún se dibuja" con progreso si el mundo no terminó de generar (M63, AGENTS 8) [M]
 
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 38 · Pendientes: 139 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 41 · Pendientes: 136 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
