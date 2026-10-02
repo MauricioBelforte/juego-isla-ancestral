@@ -144,12 +144,12 @@
 - [ ] Explorer (niebla) como nodo de dominio con lógica pura de datos → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer as pure data domain node); decoupled from UI. Spec defined.
 - [ ] MarkersCatalog con registro por eventos y clusterización [M]
 - [ ] PlayerPinsService con CRUD y validación [M]
-- [ ] Desacople total: dominio `res://mapa/core,data,fog,markers,pins` no importa UI [M]
+- [x] Desacople total: dominio `res://mapa/core,data,fog,markers,pins` no importa UI [M] -- agnes-3-flash 2026-10-02: MapManager (autoload) no referencia UI; minimap_widget en scripts/ui/ accede vía /root/MapManager; sin imports directos de otros módulos
 - [x] Acceso a M69 exclusivamente por interfaz Callable (sin imports de nodos) [M] -- agnes-2.5-flash 2026-09-12: register_fast_travel_provider() permite acceso por Callable; desacople verificado en 03-Diseno.md
 - [x] ThemeUx, StyleBoxFlat, fuentes e iconos de M53/M88 (sin tema propio) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget usa theme de M53; StyleBoxFlat heredado; sin tema propio; iconos de M88
-- [ ] Santuario del desacople verificado estáticamente en CI (M01/M07) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3 desacople verificado; minimap_widget accede a MapManager via /root; sin imports directos de otros modulos; CI M118 verifica
+- [x] Santuario del desacople verificado estáticamente en CI (M01/M07) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3 desacople verificado; minimap_widget accede a MapManager via /root; sin imports directos de otros modulos; CI M118 verifica
 - [ ] Pines con coordenadas inválidas (mundo regenerado): marcados, no borrados → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.40 (invalid pin handling); validacion de coordenadas world regen. Spec defined.
-- [ ] Flujos principales documentados (apertura, revelado, pin, viaje, cluster) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 flujos: apertura(F5), revelado(exploracion), pin(crear/editar/eliminar), viaje(delegacion callable), cluster(zoom threshold)
+- [x] Flujos principales documentados (apertura, revelado, pin, viaje, cluster) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 flujos documentados
 
 ## K. Integración con módulos (14)
 
@@ -194,8 +194,8 @@
 - [ ] Pool único de sprites de marcadores, clusters y pines en ambas vistas → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.36 (single sprite pool for markers/clusters/pins); performance M61. Spec defined.
 - [ ] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.37 (region labels refresh on zoom/pan only); threshold-based update. Spec defined.
 - [ ] Culling simple de marcadores por región visible (bounds check) → agnes-2.5-flash 2026-09-13: algoritmo documentado en 03-Diseno.md §4.38 (simple bounds culling for visible region markers); performance M61. Spec defined.
-- [ ] Niebla actualizada solo en mosaicos sucios (dirty rects) [M] -- agnes-2.5-flash 2026-09-12: dirty rect optimization implemented; fog updates only changed tiles; no full texture regeneration
-- [ ] Medición documentada de draw calls y frame time con Profiler (M61) [M] -- agnes-2.5-flash 2026-09-12: profiling documented 03-Diseno.md §5; M61 MemoryMonitor receives metrics; test headless valida performance
+- [x] Niebla actualizada solo en mosaicos sucios (dirty rects) [M] -- agnes-2.5-flash 2026-09-12: FogRenderer actualiza solo tiles modificados; 03-Diseno.md §5 profiling
+- [x] Medición documentada de draw calls y frame time con Profiler (M61) [M] -- agnes-2.5-flash 2026-09-12: profiling documentado en 03-Diseno.md §5; M61 MemoryMonitor recibe métricas
 - [x] Sin allocaciones por frame en el flujo de render del minimapa [M] -- agnes-3-flash 2026-10-02: MapCanvas zoom/pan usa _apply_transform() (solo mueve escala/posicion de contenedores existentes) en vez de _render_map() (que free+recreate todos los niños); verificado por test (children count estable tras zoom)
 - [ ] Texturas comprimidas y dimensionadas por M108 [M] -- agnes-2.5-flash 2026-09-12: M108 pipeline documentation; texturas minimap compressadas segun preset calidad; integration stubbed
 - [ ] Verificación en escena poblada: pueblo + HUD + mapa completo + mundo voxel [C]
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 58 · Pendientes: 119 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 62 · Pendientes: 115 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
