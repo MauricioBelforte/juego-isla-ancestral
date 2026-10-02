@@ -304,8 +304,28 @@ func _update_island_fogs() -> void:
 		fog.visible = not explored
 
 func _on_pines_cambiados(_pines: Array) -> void:
-	# Los pines se podrían mostrar como marcadores adicionales
-	pass
+	_refresh_pines()
+
+func _refresh_pines() -> void:
+	var mm := _get_map_manager()
+	if mm == null:
+		return
+	var pines: Array = mm.pines()
+	for p in pines:
+		var px: float = float(p.get("x", 0)) / WORLD_SIZE
+		var pz: float = float(p.get("z", 0)) / WORLD_SIZE
+		var pin_dot := ColorRect.new()
+		pin_dot.size = Vector2(3, 3)
+		pin_dot.color = Color(1.0, 0.3, 0.3)  # rojo = pin del jugador
+		pin_dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		pin_dot.position = Vector2(4.0 + px * (MAP_SIZE.x - 8.0), 4.0 + pz * (MAP_SIZE.y - 8.0))
+		# Nombre del pin
+		var label := Label.new()
+		label.text = String(p.get("nota", ""))
+		label.add_theme_font_size_override("font_size", 8)
+		label.position = pin_dot.position + Vector2(4, -10)
+		add_child(pin_dot)
+		add_child(label)
 
 func _build_island_fogs() -> void:
 	var mm := _get_map_manager()

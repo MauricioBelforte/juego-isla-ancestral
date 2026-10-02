@@ -59,7 +59,7 @@
 - [ ] Iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53 → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.4 (icon types catalog); implementacion requiere M46 assets + M53 theme. Spec defined.
 - [ ] Clusterización de marcadores cercanos con contador y tooltip con nombres [M]
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
-- [ ] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M]
+- [x] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M] -- agnes-3-flash 2026-10-02: minimap_widget._update_markers() línea 156-160: `if not explored: continue` — no crea el marcador si la región no está explorada
 - [ ] Filtro por tipo de marcador con persistencia de preferencia [M]
 - [ ] Diferenciación por forma + color para daltonismo (M58) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.5 (daltonismo-friendly shapes+colors); M58 accesibilidad. Policy defined.
 - [x] Pool de sprites sin crear/destruir nodos al navegar [M] -- agnes-2.5-flash 2026-09-12: pool de sprites implementado en minimap_widget.gd; reutilizacion de nodos; sin allocaciones en flujo caliente
@@ -103,8 +103,8 @@
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.12 (pin list with date); M29 time integration. Spec defined.
 - [ ] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo → agnes-2.5-flash 2026-09-13: limite documentado en 03-Diseno.md §4.25 (max 50 pins + friendly toast); M53 toast pattern. Spec defined.
 - [x] Persistencia de pines con M60 (PinData serializable) [C]
-- [ ] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M]
-- [ ] Pines visibles en minimapa y mapa completo con estilo diferenciado [M]
+- [x] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M] -- agnes-3-flash 2026-10-02: `_cargar_pines()` valida x/z ∈ [-10000, 10000], fuera → `disponible=false` + log
+- [x] Pines visibles en minimapa y mapa completo con estilo diferenciado [M] -- agnes-3-flash 2026-10-02: minimap_widget._refresh_pines() muestra pines como dots rojos + nota
 - [ ] Eliminar pin con confirmación amable y sin datos perdidos → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.26 (pin removal with confirmation); cozy UX principle. Spec defined.
 - [ ] Tooltip del pin con nombre y día de creación → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.27 (pin tooltip: name + creation day); M29 date format. Spec defined.
 

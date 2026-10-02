@@ -182,7 +182,16 @@ func _cargar_pines() -> void:
 		return
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_PINES))
 	if typeof(parsed) == TYPE_DICTIONARY and parsed.has("pines"):
-		_pines = parsed["pines"]
+		var loaded: Array = parsed["pines"]
+		for i in range(loaded.size()):
+			var p: Dictionary = loaded[i]
+			var x: int = int(p.get("x", 0))
+			var z: int = int(p.get("z", 0))
+			# Validación: fuera de rango se marca no disponible, no se borra
+			if x < -10000 or x > 10000 or z < -10000 or z > 10000:
+				p["disponible"] = false
+				print("[M54] Pin %d fuera de rango (%d,%d) — marcado no disponible" % [i, x, z])
+			_pines.append(p)
 
 ## ── Textura caché (bake una vez, invalida en exploration_changed) ──
 
