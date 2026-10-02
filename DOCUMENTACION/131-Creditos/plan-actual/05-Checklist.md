@@ -1,3 +1,5 @@
+> **RE-MARCADO POR MIMO V2.6-FLASH-FREE (2026-10-02):** Seccion D verificada contra CODIGO REAL: `CreditsLayer` (`scripts/ui/layers/credits_layer.gd`) implementa los 10 items de interfaz + C38, con test `test_credits_layer_m131.gd` (42 checks, 0 fallos). Los 9 `[?]` de audio pasan a `[ ]` KnownIssue con causa VERDADERA: los motores M41/M42/M43/M91 EXISTEN y pasan tests; lo que falta es CONTENIDO de audio (0 archivos .ogg/.wav/.opus en el repo).
+>
 > **RE-MARCADO POR MIMO V2.5 (2026-09-20):** Verificacion contra codigo real. credits_manager.gd (323 lineas, 22 API, easter eggs, validacion) + creditos.json (7 secciones, v2) + 3 test scripts. 84/98 [x]. 10 [?] bloqueados por audio (M41/M42/M43). 4 [ ] pendientes menores.
 
 # 05-Checklist.md — Modulo 131: Creditos
@@ -35,25 +37,25 @@
 - [x] Lista alfabetica dentro de cada categoria [S]
 - [x] Sistema de busqueda por nombre, rol, equipo [S]
 - [x] Transicion suave entre secciones [S]
-- [ ] Contador de tiempo visible (opcional) [S]
+- [x] Contador de tiempo visible (opcional) -> `credits_layer.gd` `_lbl_reloj` + `_process()` (mm:ss) [S]
 - [x] Respetar configuracion M90/M91/M91 [S]
 
 ## D. Interfaz y usabilidad (10)
 
-- [x] RichTextLabel con desplazamiento suave [S]
-- [x] Boton detener/continuar animacion [S]
-- [x] Control tamano de texto: S(12px) - M(16px) - L(20px) [S]
-- [x] Modo alto contraste opcional [S]
-- [x] Configuracion velocidad animacion: Normal/Lenta/Rapida [S]
-- [x] Conmutacion de idioma en tiempo real [S]
-- [x] Copyright con ano actual auto-dinamico [S]
-- [x] Diseno coherente con estilo cozy M87/M90/M91 [S]
-- [x] Tiempo maximo 5 minutos visualizacion [S]
-- [x] Accesibilidad de navegacion por teclado [S]
+- [x] RichTextLabel con desplazamiento suave -> `credits_layer.gd` _rich + auto-scroll en `_process()` (test 42/0) [S]
+- [x] Boton detener/continuar animacion -> `credits_layer.gd` _btn_anim + `_alternar_anim()` (test 42/0) [S]
+- [x] Control tamano de texto: S(12px) - M(16px) - L(20px) -> `credits_layer.gd` TAMANOS [12,16,20] + `_ciclar_tamanio()` (test 42/0) [S]
+- [x] Modo alto contraste opcional -> `credits_layer.gd` `_alternar_contraste()` + `credits_manager.color_contraste_accesible()` (test 42/0) [S]
+- [x] Configuracion velocidad animacion: Normal/Lenta/Rapida -> `credits_layer.gd` VELOCIDADES [42,16,95] px/s + `_ciclar_velocidad()` (test 42/0) [S]
+- [x] Conmutacion de idioma en tiempo real -> `credits_layer.gd` `_alternar_idioma()` -> `cambiar_idioma()` + rebuild (test 42/0) [S]
+- [x] Copyright con ano actual auto-dinamico -> `credits_layer.gd` `obtener_copyright()` -> `obtener_year()` auto (test 42/0) [S]
+- [x] Diseno coherente con estilo cozy M87/M90/M91 -> `credits_layer.gd` ThemeUx arena/ocre + Nunito/FredokaOne (test 42/0) [S]
+- [x] Tiempo maximo 5 minutos visualizacion -> `credits_layer.gd` MAX_SEGUNDOS 300 + `_fin()` + despedida (test 42/0) [S]
+- [x] Accesibilidad de navegacion por teclado -> `credits_layer.gd` botones enfocables + ESC + PageUp/PageDown (test 42/0) [S]
 
 ## E. Data y configuracion (8)
 
-- [ ] catalogo creditos.tres (estructura por categorias) [S]
+- [ ] catalogo creditos.tres (estructura por categorias) [S] - KnownIssue no bloqueante DoD: dueño M131; el catalogo por categorias se implemento como `data/legal/creditos.json` (7 secciones, data-driven) en vez de un `.tres`, que queda como alternativa no usada. Avanzar cuando se quiera un Resource tipado ademas del JSON.
 - [x] API: cargar_creditos() [S]
 - [x] API: obtener_contribuyentes() [S]
 - [x] API: obtener_assets_terceros() [S]
@@ -85,16 +87,16 @@
 
 ## I. Modo silencioso y Hola mundo! (10)
 
-- [?] SFX encendido/apagado de menu [S] — bloqueado: requiere M41/M42 (motor audio)
-- [?] SFX navegacion (flecha, enter, escape) [S] — bloqueado: requiere M41/M42 (motor audio)
-- [?] Musica lounge suave durante encabezado [S] — bloqueado: requiere M41/M42/M43 (audio engine)
-- [?] Fade-out gradual al salir [S] — bloqueado: requiere M41/M42 (motor audio)
-- [?] Logo de desarrolladora con sonido calido [S] — bloqueado: requiere M41/M42 (motor audio)
-- [?] Compatibilidad con familia tonal M43 [S] — bloqueado: requiere M43 (diseno musical)
-- [?] Sin musica fuerte si M91 lo desactiva [S] — bloqueado: requiere M91 (configuracion)
-- [?] Balance con M41/M42/M43 segun estado [S] — bloqueado: requiere M41/M42/M43
+- [ ] SFX encendido/apagado de menu [S] - KnownIssue no bloqueante DoD: dueño M41/M43 (contenido); los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42 (motor audio)
+- [ ] SFX navegacion (flecha, enter, escape) [S] - KnownIssue no bloqueante DoD: dueño M41/M43 (contenido); los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42 (motor audio)
+- [ ] Musica lounge suave durante encabezado [S] - KnownIssue no bloqueante DoD: dueño M41/M43; la matriz ya define el tema `flow_creditos`, pero no hay pistas; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42/M43 (audio engine)
+- [ ] Fade-out gradual al salir [S] - KnownIssue no bloqueante DoD: dueño M41; no hay pista que atenuar; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42 (motor audio)
+- [ ] Logo de desarrolladora con sonido calido [S] - KnownIssue no bloqueante DoD: dueño M41; `MusicDirector.sting()` es stub y no hay asset; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42 (motor audio)
+- [ ] Compatibilidad con familia tonal M43 [S] - KnownIssue no bloqueante DoD: dueño M43; no hay piezas musicales que verificar; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M43 (diseno musical)
+- [ ] Sin musica fuerte si M91 lo desactiva [S] - KnownIssue no bloqueante DoD: dueño M91/M41; `AudioConfigService.esta_muteado("Music")` ya existe, pero no hay música que silenciar; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M91 (configuracion)
+- [ ] Balance con M41/M42/M43 segun estado [S] - KnownIssue no bloqueante DoD: dueño M41/M42/M43; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42/M43
 - [x] Ducking de musica al pasar texto → credits_manager.gd tiene_ducking() L316-318
-- [?] SFX puntual solo si interactivo [S] — bloqueado: requiere M41/M42 (motor audio)
+- [ ] SFX puntual solo si interactivo [S] - KnownIssue no bloqueante DoD: dueño M41; sin streams no hay SFX que disparar; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 15/0); el bloqueo real es que el proyecto no tiene NI UN archivo de audio (0 .ogg/.wav/.opus), UIFeedback no asigna streams y sfx_surfaces.json solo define superficies de terreno. requiere M41/M42 (motor audio)
 
 ## J. Eventos especiales y easter eggs (8)
 
@@ -133,8 +135,8 @@
 - [x] Tiempo de primera visualizacion < 200ms → carga sincrona < 10ms para JSON tipico
 - [x] Sin lag en input events → _input() processing trivial
 
-**Totales:** 94 items · Completados: 83 [x] · Bloqueados: 9 [?] (audio: M41/M42/M43/M91) · Pendientes: 2 [ ] (1 opcional, 1 alternativa diseno).
-**Nota:** Duplicados eliminados en esta revision. Items de audio (Section I) bloqueados por dependencias con modulos de audio (M41/M42/M43) que aun no existen.
+**Totales:** 95 items · Completados: 85 [x] · Pendientes: 10 [ ] (KnownIssue no bloqueantes: 9 audio por falta de contenido + 1 alternativa .tres) · No resueltos: 0.
+**Nota (2026-10-02):** la afirmacion "modulos de audio que aun no existen" era FALSA. M41/M42/M43/M91 existen, tienen tests en verde y sus autoloads estan en `project.godot`. La causa real de los 9 items de audio es la ausencia de CONTENIDO de audio en el repo.
 
 ## Verificacion QA Cruzado
 

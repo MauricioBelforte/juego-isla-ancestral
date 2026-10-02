@@ -29,6 +29,7 @@ var shop_ui: Node = null
 var equipment_ui: Node = null
 var diary_layer: Node = null
 var loading_layer: Node = null
+var credits_layer: Node = null
 
 func _ready() -> void:
 	layer = 100
@@ -108,10 +109,17 @@ func _build_layers() -> void:
 		loading_layer.name = "LoadingLayer"
 		add_child(loading_layer)
 
-	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s diario=%s carga=%s)" % [
+	# M131: Pantalla de créditos (Sección D del checklist)
+	var cr_load := load("res://scripts/ui/layers/credits_layer.gd")
+	if cr_load:
+		credits_layer = cr_load.new()
+		credits_layer.name = "CreditsLayer"
+		add_child(credits_layer)
+
+	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s diario=%s carga=%s creditos=%s)" % [
 		dialog_layer != null, pause_layer != null, menus_layer != null,
 		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null, equipment_ui != null,
-		diary_layer != null, loading_layer != null])
+		diary_layer != null, loading_layer != null, credits_layer != null])
 
 func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> void:
 	if script == null:
@@ -152,10 +160,15 @@ func _conectar_menu_señales() -> void:
 				ui_mgr.push_layer(pause_layer)
 				print("[M89] Ajustes → PauseLayer")
 		)
-	# Créditos → print por ahora (M89 pendiente)
+	# Créditos → abrir CreditsLayer (M131). Se usa open() y no push_layer:
+	# las capas montadas ya están registradas y push_layer es no-op
+	# (ui_manager.gd L457-459). La visibilidad MODAL_FULL pausa el mundo
+	# vía UILayer._notification (§9.50).
 	if menus_layer.has_signal("creditos_pedido"):
 		menus_layer.creditos_pedido.connect(func():
-			print("[M89] Créditos → pendiente de implementar")
+			if credits_layer and credits_layer.has_method("open") and not credits_layer.visible:
+				credits_layer.open()
+				print("[M89] Créditos → CreditsLayer abierto")
 		)
 	# Salir → get_tree().quit()
 	if menus_layer.has_signal("salir_pedido"):
