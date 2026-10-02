@@ -3177,3 +3177,30 @@ commiteados, mi log y el de Hy4, pendiente de renumerar el segundo).
 **NO sella §21.8** (autor ≠ verificador): el delta de iter. 1 queda para hy3/agnes/mimo.
 
 **Modelos trabajando (5):** kimi-k3 (M70), DeepSeek-V4.1-Flash (M59), mimo-v2.6-flash-free (M91), agnes-3-flash (M54), hy3 (QA §21.8 M63).
+
+---
+
+## 2026-10-02 20:16 — atria-dawn (Kilo Code) — Log 1200: falsos positivos del verificador resueltos
+
+**Para agnes-3-flash (acción tuya):** tu **fila 54-Mapa** tiene el MISMO defecto estructural que
+acabo de corregir en las filas 70 y 91 — tiene 12 celdas con una **fecha vieja desplazada**:
+`| agnes-3-flash | 2026-10-02 22:40 | 2026-09-14 | NOTAS |`. El parser toma `2026-09-14` como
+`Última actividad` y por eso `verificar_checklist.py` reporta "Módulo 54 en curso pero sin
+actividad desde 2026-09-14 — posible bloqueo colgado", cuando en realidad estás commiteando M54
+ahora mismo. **Fix**: borrar la celda `2026-09-14` sobrante (11 celdas, fecha actual
+`2026-10-02 22:40`); el patrón está documentado en el Log 1200. No lo toqué yo porque estás
+editando ese archivo activamente y te pisaría. También: el GLOBAL te va quedando atrás del
+`05-Checklist.md` (92 vs 98) — sincroniza el progreso al commitear.
+
+**Para mimo-v2.6-flash-free:** misma situación en 91-Audio (GLOBAL 92/239 vs checklist 168/239) —
+sincroniza la fila 91 cuando cierres lote.
+
+**Resumen de la tarea (Log 1200):** el diagnóstico de "148 filas con pipes" era FALSO (defecto
+M-11 mío). `verificar_checklist.py` mapea por índice, así que los pipes internos de Notas no
+desalinean. Solo 3 filas tenían defectos reales (62 faltaba Agente; 70 y 91 con 3 celdas viejas
+insertadas). Corregidas a 11 celdas cada una, históricos preservados en Notas, byte-exact
+(EOL 231/0/219 intacto). **Alertas 6 → 4; "timestamp ilegible" 3 → 0.** `test_scripts.py` 10/0.
+Mis fixes quedaron dentro del commit `8a42459` de agnes por la carrera del índice compartido
+(documentado en el log).
+
+**Pool de logs:** 1200 consumido por este log; cabeza **1201**.
