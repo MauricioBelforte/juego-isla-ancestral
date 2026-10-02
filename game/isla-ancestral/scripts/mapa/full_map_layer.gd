@@ -22,6 +22,7 @@ var _player_dot: ColorRect
 var _markers_container: Control
 var _legend_panel: VBoxContainer
 var _cancel_btn: Button
+var _type_filters: Dictionary = {}
 var _is_open: bool = false
 
 func _ready() -> void:
@@ -94,26 +95,38 @@ func _build_ui() -> void:
 
 func _build_legend() -> void:
 	var lbl := Label.new()
-	lbl.text = "Leyenda:"
+	lbl.text = "Leyenda / Filtros:"
 	_legend_panel.add_child(lbl)
 
 	var types := [
-		["Lugar", Color(0.2, 0.8, 0.4)],
-		["Templo", Color(0.9, 0.5, 0.2)],
-		["Tienda", Color(0.6, 0.4, 0.9)],
-		["Viaje", Color(0.3, 0.8, 0.9)],
-		["Jugador", Color(1.0, 0.85, 0.2)],
+		["lugar", "Lugar", Color(0.2, 0.8, 0.4)],
+		["templo", "Templo", Color(0.9, 0.5, 0.2)],
+		["tienda", "Tienda", Color(0.6, 0.4, 0.9)],
+		["viaje", "Viaje", Color(0.3, 0.8, 0.9)],
 	]
+	_type_filters = {}
 	for entry in types:
+		var tipo_id: String = entry[0]
+		var tipo_name: String = entry[1]
+		var tipo_color: Color = entry[2]
 		var hbox := HBoxContainer.new()
 		_legend_panel.add_child(hbox)
+		var checkbox := CheckBox.new()
+		checkbox.text = tipo_name
+		checkbox.button_pressed = true
+		checkbox.pressed.connect(func(): _toggle_type_filter(tipo_id))
+		_type_filters[tipo_id] = checkbox
+		hbox.add_child(checkbox)
 		var dot := ColorRect.new()
-		dot.color = entry[1]
+		dot.color = tipo_color
 		dot.custom_minimum_size = Vector2(12, 12)
 		hbox.add_child(dot)
-		var lbl2 := Label.new()
-		lbl2.text = " " + entry[0]
-		hbox.add_child(lbl2)
+
+func _toggle_type_filter(tipo_id: String) -> void:
+	var visible: bool = _type_filters[tipo_id].button_pressed
+	# Actualizar visibilidad de marcadores en el canvas
+	if _canvas != null:
+		_canvas.set_type_visible(tipo_id, visible)
 
 func open_map() -> void:
 	if _is_open:
@@ -209,6 +222,19 @@ func _on_bg_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			close_map()
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			_crear_pin_en_cursor(event.position)
+
+func _crear_pin_en_cursor(screen_pos: Vector2) -> void:
+	if _canvas == null:
+		return
+	var world_coord: Vector2 = _canvas.screen_to_world(screen_pos)
+	if world_coord == Vector2.ZERO:
+		return
+	var mm := get_node_or_null("/root/MapManager")
+	if mm == null:
+		return
+	mm.agregar_pin(int(world_coord.x), 0, int(world_coord.y), "", "pin")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

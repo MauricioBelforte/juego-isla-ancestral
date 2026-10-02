@@ -157,7 +157,7 @@ func _render_map() -> void:
 		var explored = _exploradas.get(m.get("id", ""), false)
 		if not explored:
 			dot.modulate = Color(0.3, 0.3, 0.3, 0.5)
-
+		dot.set_meta("tipo", m_type)
 		_markers_container.add_child(dot)
 
 	# Player position
@@ -213,6 +213,24 @@ func center_on_player() -> void:
 	_pan_offset = Vector2(-px * size.x * _zoom + size.x * 0.5, -pz * size.y * _zoom + size.y * 0.5)
 	_clamp_to_bounds()
 	_apply_transform()
+
+## Convierte posición de pantalla a coordenada normalizada [0,1] del mundo.
+## Devuelve Vector2.ZERO si está fuera del mapa.
+func screen_to_world(screen_pos: Vector2) -> Vector2:
+	var local := screen_pos - _pan_offset
+	local /= _zoom
+	var nx := local.x / size.x
+	var ny := local.y / size.y
+	if nx < 0.0 or nx > 1.0 or ny < 0.0 or ny > 1.0:
+		return Vector2.ZERO
+	return Vector2(nx * _world_size, ny * _world_size)
+
+## Filtro: mostrar/ocultar marcadores por tipo.
+func set_type_visible(tipo: String, visible: bool) -> void:
+	for child in _markers_container.get_children():
+		var marker_tipo: String = child.get_meta("tipo", "")
+		if marker_tipo == tipo:
+			child.visible = visible
 
 func _apply_transform() -> void:
 	_islands_container.position = _pan_offset
