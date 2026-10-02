@@ -866,3 +866,84 @@ Arreglar el descubrimiento sigue siendo lote 4.
 - El **coste de 60 s** del test de subtítulos es aceptable dentro del
   `--timeout 180`. Si algún día se arregla (que los autoloads de mundo no
   generen en `--script`), eso es tarea de los   módulos de mundo, no de M91.
+
+---
+
+## Notas del Agente — Iteración 4 (Lote 4: aplicación/control por bus)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial — checklist **157 → 168 `[x]`**, **71 `[ ]`**, **0 `[?]`**,
+total 239 intacto.
+
+### Archivos tocados
+
+| Archivo | Qué |
+|---|---|
+| `scripts/audio/test_audio_config.gd` | +`_test_aplicacion_y_control_por_bus()` (37 checks); piso **66 → 103** |
+| `03-Diseno.md` §4 | +**Tabla de enrutamiento** y nota de la implementación real |
+| `05-Checklist.md` | **11 ítems** `[ ]` → `[x]` (delta verificado) |
+
+### Los 11 ítems
+
+**"Aplicación al bus de X" (6 — L48/55/62/69/76/83).** Para cada bus hijo el
+test comprueba que `set_volumen_porcentaje(bus, p)` llega al `volume_db`
+**de esa instancia**, que el estado interno lineal lo sigue, y que `Master`
+(bus padre) aplica igual.
+
+**"Control de X" (5 — L46/53/60/67/74).** El diseño estaba incompleto: no
+existía ninguna parte que dijera **qué familia de sonido va a qué bus**. Se
+añadió la tabla en `03-Diseno.md` §4:
+
+| Familia | Bus |
+|---|---|
+| Música de fondo | `Music` |
+| Audio de cinemáticas | `Cinematic` |
+| Herramientas / craft / interacción | `SFX` |
+| Viento / agua / pájaros | `Ambient` |
+| Voces de NPCs y de cinemáticas | `Voice` |
+| Hover / click / notificaciones | `UI` |
+
+Más la regla de **independencia**, verificada empíricamente: mover `Music`
+deja intactos los otros 5 buses, y el mute de `UI` no contamina a `Voice`.
+Por eso L46 son **dos** controles (`Music` y `Cinematic`), no uno.
+
+### Descubrimiento
+
+`03-Diseno.md` §4 todavía presentaba `audio_bus_setup.gd` como implementación.
+**Ese archivo nunca existió.** Los 7 buses los crea
+`AudioConfig._crear_buses()` (`audio_config_service.gd:48`), de forma
+idempotente (solo `add_bus` si el nombre aún no existe). Quedó documentado.
+
+### Verificación
+
+`test_audio_config.gd` → **103 checks, 0 fallos, EXIT 0**, y el piso
+`CHECKS_MINIMOS = 103` pasa (medido en verde, dos corridas seguidas).
+
+### Reparto de los 71 ítems que quedan
+
+| # | Grupo | Por qué |
+|---|---|---|
+| 13 | Especificación (L10-23) | revisar/contrastar con `01-Requerimientos` |
+| 12 | Menú de configuración (L198-211) | **dueño M53** — ahí vive la UI |
+| 10 | Sonidos de interfaz (6) + UISoundManager (4) | **bloqueado:** 0 assets de audio |
+| 9 | Pruebas con auriculares (4) / altavoces (5) | **requieren hardware del usuario** |
+| 6 | Audio 3D (L88-95) | subsistema propio |
+| 5 | Plan de testings (L310-316) | `06-Plan-Testings.md` → lote 5 |
+| 3 | AudioTestManager (L271-273) | depende de ese manager (no creado) |
+| 3 | Pruebas de calidad (L303/305/307) | balance de canales / espacial 3D / dispositivo |
+| 2 | Subtítulos (L102, L107) | selector de color (M53) y M58 |
+| 2 | M87 (L179, L181) | 6 idiomas (solo hay es/en/pt) y localización de dispositivos |
+| 2 | Guardado (L285, L288) | `save_settings()` / trigger al cerrar |
+| 1+1+1+1 | `apply_settings` (L216), `load_settings` (L277), `dropdown` de dispositivo (L147), alto contraste M58 (L171) | sueltos |
+
+### Recomendaciones para el próximo agente
+
+- **Lote 5 natural:** `06-Plan-Testings.md` (5 ítems) — ya existe cobertura
+  real que documentar: volúmenes (`test_audio_config`), rango dinámico y
+  compresión (`test_audio_effects_m91`), subtítulos (`test_subtitles_m91`).
+- **M53** puede cablear los 7 sliders con la API ya probada; los ítems
+  L198-211 son suyos, no míos.
+- **No marcar** los 10 de sonidos de interfaz ni los 9 de hardware: son
+  bloqueos reales, no deudas de implementación.

@@ -43,44 +43,44 @@
 
 ### [S] Música
 - [x] Definir slider de volumen de música (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir control de música de fondo y cinemáticas
+- [x] Definir control de música de fondo y cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 4 "Tabla de enrutamiento" -> música de fondo se enruta al bus Music via set_volumen_porcentaje("Music", p); control INDEPENDIENTE verificado (mover Music deja intactos los otros 5 buses, y el mute de UI no contamina a Voice); cinemáticas -> bus Cinematic
 - [x] Definir valor por defecto 70% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de música
+- [x] Definir aplicación al bus de música — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("Music", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Efectos
 - [x] Definir slider de volumen de efectos (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir control de efectos de juego (herramientas, craft, interacción)
+- [x] Definir control de efectos de juego (herramientas, craft, interacción) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 4 "Tabla de enrutamiento" -> herramientas/craft/interacción se enruta al bus SFX via set_volumen_porcentaje("SFX", p); control INDEPENDIENTE verificado (mover Music deja intactos los otros 5 buses, y el mute de UI no contamina a Voice)
 - [x] Definir valor por defecto 80% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de efectos
+- [x] Definir aplicación al bus de efectos — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("SFX", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Ambiente
 - [x] Definir slider de volumen de ambiente (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir control de sonidos ambientales (viento, agua, pájaros)
+- [x] Definir control de sonidos ambientales (viento, agua, pájaros) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 4 "Tabla de enrutamiento" -> viento/agua/pájaros se enruta al bus Ambient via set_volumen_porcentaje("Ambient", p); control INDEPENDIENTE verificado (mover Music deja intactos los otros 5 buses, y el mute de UI no contamina a Voice)
 - [x] Definir valor por defecto 60% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de ambiente
+- [x] Definir aplicación al bus de ambiente — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("Ambient", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Voces
 - [x] Definir slider de volumen de voces (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir control de voces de NPCs y cinemáticas
+- [x] Definir control de voces de NPCs y cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 4 "Tabla de enrutamiento" -> voces de NPCs y de cinemáticas se enruta al bus Voice via set_volumen_porcentaje("Voice", p); control INDEPENDIENTE verificado (mover Music deja intactos los otros 5 buses, y el mute de UI no contamina a Voice)
 - [x] Definir valor por defecto 90% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de voces
+- [x] Definir aplicación al bus de voces — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("Voice", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] UI
 - [x] Definir slider de volumen de UI (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir control de sonidos de interfaz (hover, click, notificaciones)
+- [x] Definir control de sonidos de interfaz (hover, click, notificaciones) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 4 "Tabla de enrutamiento" -> hover/click/notificaciones se enruta al bus UI via set_volumen_porcentaje("UI", p); control INDEPENDIENTE verificado (mover Music deja intactos los otros 5 buses, y el mute de UI no contamina a Voice)
 - [x] Definir valor por defecto 50% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de UI
+- [x] Definir aplicación al bus de UI — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("UI", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Cinemáticas
 - [x] Definir slider de volumen de cinemáticas (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [x] Definir control de audio de cinemáticas (música, voces, efectos)
 - [x] Definir valor por defecto 80% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
-- [ ] Definir aplicación al bus de cinemáticas
+- [x] Definir aplicación al bus de cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): test_audio_config.gd _test_aplicacion_y_control_por_bus(): set_volumen_porcentaje("Cinematic", p) golpea AudioServer.get_bus_volume_db DE ESE bus = porcentaje_a_db(p), y el estado interno lineal lo sigue; piso CHECKS_MINIMOS=103 medido en verde (103 checks, 0 fallos)
 - [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Audio 3D

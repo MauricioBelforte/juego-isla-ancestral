@@ -166,6 +166,50 @@ func setup_audio_buses():
     AudioServer.set_bus_send(cinematic_bus, master_bus)
 ```
 
+**✅ Implementación real (2026-10-02):** el `audio_bus_setup.gd` de arriba
+nunca se creó — los 7 buses los crea `AudioConfig._crear_buses()`
+(`scripts/audio/audio_config_service.gd:48`) dentro de `_ready()`, con
+`add_bus` + `set_bus_name` + `set_bus_send("Master")` solo si el nombre aún no
+existe (idempotente). Verificado por `test_audio_config.gd`.
+
+### Tabla de enrutamiento — "control de X" (5 ítems del checklist)
+
+Regla de diseño: **cada familia de sonido del juego tiene su bus propio y su
+control independiente.** Bajar una familia jamás mueve a las demás — verificado
+en `_test_aplicacion_y_control_por_bus()`: mover `Music` deja intactos los
+otros 5 buses.
+
+| Familia de sonido (texto del checklist) | Bus | Control | Default |
+|---|---|---|---|
+| Música de fondo | `Music` | `set_volumen_porcentaje("Music", p)` | 70% |
+| Audio de cinemáticas | `Cinematic` | `set_volumen_porcentaje("Cinematic", p)` | 80% |
+| Efectos de juego: herramientas, craft, interacción | `SFX` | `set_volumen_porcentaje("SFX", p)` | 80% |
+| Ambiente: viento, agua, pájaros | `Ambient` | `set_volumen_porcentaje("Ambient", p)` | 60% |
+| Voces de NPCs y de cinemáticas | `Voice` | `set_volumen_porcentaje("Voice", p)` | 90% |
+| Interfaz: hover, click, notificaciones | `UI` | `set_volumen_porcentaje("UI", p)` | 50% |
+| Mezcla general | `Master` | `set_volumen_porcentaje("Master", p)` | 80% |
+
+**Cómo enruta un emisor** (una línea por familia):
+
+```gdscript
+$AudioStreamPlayer3D.bus = "SFX"      # herramienta / craft / interacción
+$AudioStreamPlayer3D.bus = "Ambient"   # viento / agua / pájaros
+$AudioStreamPlayer2D.bus = "UI"        # hover / click / notificación
+$AudioStreamPlayer.bus = "Voice"       # NPC hablando, voz de cutscene
+```
+
+**Dos controles separados para música y cinemáticas:** `Music` gobierna la
+música de fondo y `Cinematic` el audio de cutscene. Si una cutscene necesita
+que la voz baje pero la música no, se usan `Voice` y `Music` por separado —
+por eso el ítem "control de música de fondo y cinemáticas" son dos canales,
+no uno.
+
+**Verificación automática:** `_test_aplicacion_y_control_por_bus()` en
+`scripts/audio/test_audio_config.gd` comprueba, para cada bus hijo, que
+`set_volumen_porcentaje()` llega al `volume_db` **de ese bus**, que el estado
+interno lineal lo sigue, que el mute no contamina a los vecinos y que ningún
+otro bus se mueve.
+
 ## 5. Audio 3D
 
 **Audio 3D:**
