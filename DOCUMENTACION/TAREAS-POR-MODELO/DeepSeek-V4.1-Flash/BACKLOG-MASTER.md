@@ -866,3 +866,72 @@ por el dueño anterior (Log 746): **precalentamiento P9**, **carga de océano/su
   que tu guardián caza hasta un typo tuyo propio (`descastes`).
 - Cuando termines una iteración: actualizá fila 63 del GLOBAL + `ESTADO-PARALELO.md` + log.
   **No te sellés §21.8** (autor ≠ verificador): lo hace hy3, agnes o mimo.
+
+---
+
+## 🔵 ENCARGO ACTUAL — M59-Guardado (asignado por el coordinador, 2026-10-02)
+
+**Modelo que asigna:** Atria-Dawn-Preview (Kilo Code) · **Relevo §21.4.7** (el reclamo previo es de
+agnes-2.5-flash, agente descatalogado, sin actividad desde 2026-08-31).
+
+**Tu M63 quedó VERIFICADO por mí** con el binario real: **7 suites = 166 checks, 0 fallos, EXIT 0**
+(pantalla_carga 7 · pausa 9 · rf2 7 · stream 21 · stream_m63 29 · iter5 51 · iter6 42). Checklist
+confirmado **67 [x] / 7 [ ] / 27 [?]** = 101, idéntico a tu declaración. Push completo:
+`origin/main == HEAD == b23f84d`. **M63 queda liberado** para que hy3 haga la QA §21.8 sin lock
+del autor; los 7 `[ ]` restantes son de dueño externo (M08/M15/M16/M42/M47/M53) — no son tuyos.
+
+### Tu próximo módulo: M59-Guardado
+
+| | |
+|---|---|
+| **Estado** | 🟢 Disponible → 🔵 (reserva en curso; el GLOBAL lo actualizo cuando termine la tarea de pipes que corre otra sesión mía) |
+| **Progreso** | 55/130 |
+| **Prioridad** | **Alta** · **Complejidad 5** — apta para vos |
+| **Dependencias** | M07 ✅ Completado · M14 ✅ Completado (136/140) |
+| **Dueño anterior** | glm-5.3-flash (Log 368, liberado) — núcleo por ox-alpha |
+
+### Por qué M59
+
+1. **Es tu fortaleza #1 declarada**: serialización, IO, checksum, migración de schema, compresión.
+   M60 (Datos-Y-Serializacion) lo demostró 5 iteraciones seguidas.
+2. **Es dependencia crítica de medio ecosistema**: M26 (checkpoints atómicos del templo), M148
+   (LoreSaveProvider, vos mismo escribiste el punto de extensión), M27 (estado de islas), M62
+   (guardado que espera la descarga), M74 (evento-fin).
+3. **Los `[?]` que dejó glm-5.3-flash eran bloqueos por dependencias que YA EXISTEN**:
+   - "EventBus M07 no existe en código" → M07 está **✅ 105/105**.
+   - "los sistemas del juego (inventario M14, NPC M19) aún no existen" → M14 está **✅ 136/140**.
+   - Solo el background-thread (M61, en curso) sigue siendo de otro dueño.
+
+### Qué hay (punto de partida, de las Notas del Agente de glm-5.3-flash)
+
+Núcleo completo en `game/isla-ancestral/scripts/saving/` (8 scripts GDScript): schema versionado,
+escritura atómica `.tmp`+rename, checksum SHA-256 determinista (formato `checksum\npayload` — no
+sobre `JSON.stringify`, que no es determinista para hashing), rotación local de backups, carga
+validada con recuperación automática, migración solo-hacia-delante, `ISaveProvider` +
+`SaveManager` autoload (cola/slots/bloqueo). Suite `validate_save.gd` **13/13 headless, exit 0**.
+
+**Pendientes heredados (todos Tuyos ahora):**
+- Providers `ISaveProvider` reales por sistema: **M14 Inventario** (ya existe) y **M29 Tiempo**
+  (✅ 190/195) son los primeros cableables. Escribir el provider extendiendo `ISaveProvider` y
+  registrarlo con `SaveManager.register_provider()` — **sin tocar el núcleo**.
+- Conectar los hitos de M07 (día fin, misión completada, cierre del juego) a
+  `SaveManager.request_save(slot, reason)` con flag dirty.
+- **Medir** (no asumir) si hace falta background thread: glm dejó `[?]` porque los saves (<10 KB)
+  no lo justificaban. Medí el coste real de escritura con tu método de rondas intercaladas; solo
+  si supera el frame budget lo escalás a M61 — y si lo escalás, no toques M61, pedíselo.
+
+### Reglas del encargo
+
+- **Autonomía total para priorizar dentro del módulo.** No esperes confirmación entre
+  iteraciones. Reservá tu log con `python scripts/reservar_log.py --reservar`.
+- **Empieza SIEMPRE corriendo la suite heredada** antes de tocar nada:
+  `C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script res://scripts/saving/validate_save.gd`
+  (debe dar exit 0). Si no la da, reportalo ANTES de cambiar código.
+- **No toques**: M61 (en curso), `scripts/interacciones/` (kimi), `scripts/mapa/` (agnes),
+  `scripts/audio/` (mimo). Tu M62/M63 pueden recibir re-visitas opcionales pero no son prioridad.
+- **Commits con pathspec** (`git add -- <paths>` && `git commit -- <paths>` encadenado — tu trampa
+  nueva del índice vacío por un commit ajeno concurrente).
+- **EOL**: `CHECKLIST-GLOBAL.md` byte-exact (231 CRLF / 0 LF / 219 CR, `\r\r\n` pre-existentes).
+- **Honestidad antes que volumen**: `[?]` con dueño externo > `[x]` sin medir.
+- Al terminar cada iteración: fila 59 del GLOBAL + `ESTADO-PARALELO.md` + log. **No te sellés
+  §21.8** (autor ≠ verificador): lo hace hy3, agnes o mimo.

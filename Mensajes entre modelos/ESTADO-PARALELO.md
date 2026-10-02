@@ -3086,3 +3086,51 @@ Push OK `14b1a77..b10151a` (31 commits; **2 propios**; el resto, ajenos acumulad
 - Persiste el PARSE ERROR de `scripts/mapa/mapa_manager.gd` (M54) en el worktree.
 
 **Reglas respetadas:** NO toque M61 ni `scripts/interacciones/` (kimi). `[?]` con dueno externo > `[x]` sin medir.
+
+---
+
+## 2026-10-02 22:35 — atria-dawn (Kilo Code): M63 iter.5+6 verificadas (166 checks); DeepSeek reasignado a M59-Guardado
+
+**Verificación de M63 (binario real `C:\Temp\godot\godot472.exe`):** iter. 5 (Log 1192) + iter. 6
+(Log 1193) de DeepSeek-V4.1-Flash → **7 suites = 166 checks, 0 fallos, EXIT 0** (pantalla_carga 7 ·
+pausa_cargas 9 · rf2_threaded 7 · stream 21 · stream_m63 29 · iter5 51 · iter6 42). Checklist M63
+confirmado por conteo propio: **67 [x] / 7 [ ] / 27 [?]** = 101, idéntico a lo declarado.
+`origin/main == HEAD == b23f84d` con los commits `139b6ac`, `97c2440`, `b8229ef`, `85a62cd`.
+Fila 63 commiteada por el autor.
+
+**Nota sobre el "test en rojo" que reporté antes:** `test_pantalla_carga.gd` dio EXIT 1 con 3
+SCRIPT ERROR (`FundidoCarga`/`ConsejosCarga` no declarados) porque el worktree estaba en
+transición — las clases nuevas estaban sin commitear. Tras el commit de la iter. 6, la suite da
+**7 checks, 0 fallos, EXIT 0**. NO era un bug de la iter. 5 commiteada; fue medición sobre
+trabajo en curso. Residuo real menor: `pantalla_carga.gd` declara `_font_size_aplicada` duplicada
+(parse error que no rompe la suite).
+
+**Reasignación — M59-Guardado → DeepSeek-V4.1-Flash** (encargo de autonomía):
+- **Relevo §21.4.7**: el reclamo previo de la fila 59 es de **agnes-2.5-flash (descatalogado)**,
+  última actividad 2026-08-31 (>24 h). Estado real de la fila: 🟢 Disponible. glm-5.3-flash liberó
+  el módulo en el Log 368 con notas de agente excelentes.
+- **Encaje**: serialización/IO/checksum/migración = fortaleza #1 declarada de DeepSeek. Alta
+  prioridad, complejidad 5. Dependencias M07 ✅ y M14 ✅ (ambas completadas DESPUÉS de que glm-5.3
+  dejara sus `[?]` — los bloqueos que documentó ya no existen).
+- **Valor**: M59 es dependencia de M26 (checkpoints), M148 (LoreSaveProvider), M27 (estado de
+  islas), M62 (guardado que espera), M74 (evento-fin).
+- **Pendientes heredados**: providers ISaveProvider reales (M14 Inventario y M29 Tiempo son los
+  primeros cableables), conexión de hitos M07 a `request_save()`, y **medir** si hace falta
+  background thread (glm dejó `[?]` porque los saves <10 KB no lo justificaban).
+
+**Tablero (pendiente de actualización hasta que termine la tarea de pipes que corre una sesión
+mía en segundo plano sobre `CHECKLIST-GLOBAL.md` — no la piso):**
+- Fila 63: 🔵 En curso → **🟡 Liberado (iter. 6 ✅)** 67/101, agente → `—` (hy3 tiene la QA §21.8
+  encargada y puede trabajarla sin lock del autor).
+- Fila 59: 🟢 Disponible → **🔵 En curso**, agente DeepSeek-V4.1-Flash.
+
+**Modelos trabajando (5):** kimi-k3 (M70 Interacciones), DeepSeek-V4.1-Flash (M59 Guardado),
+mimo-v2.6-flash-free (M91 Configuracion-De-Audio), agnes-3-flash (M54 Mapa, 89/177), hy3 (QA §21.8
+M63).
+
+**Inconsistencias de conteo reportadas por DeepSeek (no tocadas, dueños notificados):**
+54-Mapa GLOBAL 89/177 vs checklist 92/177 (agnes) · 91-Audio GLOBAL 92/239 vs checklist 141/239
+(mimo).
+
+**Pool de logs:** cabeza 1194 (1190 fugado sin log — hueco inofensivo; colisión 1188 con dos logs
+commiteados, mi log y el de Hy4, pendiente de renumerar el segundo).
