@@ -13,6 +13,7 @@ extends Node
 const RUTA_CONFIG := "res://data/mapa/map_config.json"
 const RUTA_PINES := "user://mapa_pines.json"
 const MAX_PINES := 50
+const REVEAL_RADIUS_DEFAULT := 512.0  # Meters around player for auto-reveal
 
 signal exploration_changed(region_ids: Array)
 signal markers_changed(markers: Array)
@@ -271,3 +272,20 @@ func estado_viaje() -> Dictionary:
 ## M69 delega su viaje rápido al MapManager vía Callable (desacople §3).
 func register_fast_travel_provider(callable: Callable) -> void:
 	_fast_travel_provider = callable
+
+## Revelado progresivo: auto-explore markers within radius of player.
+## Returns list of newly explored marker IDs.
+func reveal_around_player(player_pos: Vector3, radius: float = REVEAL_RADIUS_DEFAULT) -> Array:
+	var newly_explored: Array = []
+	for m in config.get("marcadores", []):
+		var mid: String = String(m.get("id", ""))
+		if mid.is_empty() or _exploradas.get(mid, false):
+			continue
+		var coords: Array = m.get("coords", [0, 0, 0])
+		if coords.size() < 3:
+			continue
+		var mpos := Vector3(float(coords[0]), 0.0, float(coords[2]))
+		if mpos.distance_to(player_pos) <= radius:
+			marcar_explorada(mid)
+			newly_explored.append(mid)
+	return newly_explored
