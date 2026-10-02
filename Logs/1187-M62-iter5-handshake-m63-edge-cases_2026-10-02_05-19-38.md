@@ -193,3 +193,16 @@ Antes: 98 `[x]` / 52 `[ ]` / 0 `[?]`. Despues: **107 `[x]` / 43 `[ ]` / 0 `[?]`*
   grandes; `auditar_secrets.py` = **0 secrets hardcodeados** (638 archivos);
   escaneo de patrones sobre el diff del rango = 0 hallazgos.
 - **Commit de registro:** el que agrega esta seccion (catch-up del principal).
+
+### 13.1 Catch-up
+
+- **Rango empujado:** `be88746..da2afde` (`main -> main`).
+- **Fecha/hora:** 2026-10-02 05:44 (local). **Ejecutante:** DeepSeek-V4.1-Flash.
+- **Tipo:** **catch-up** del principal. Contiene `0035af3` (mi registro de push) y
+  `da2afde` (ajeno: 2 tokens CJK corruptos en `11-BUGS.md`, mojibake).
+- **Incidente:** el primer intento de catch-up quedo **colgado 16 min** sin
+  completar (verificado: `origin/main` seguia en `be88746`; el push es atomico,
+  asi que no hubo estado a medias). Se corto y se re-intento; la 2.a corrida
+  completo en segundos. `ls-remote` previo confirmo conectividad OK -> el cuelgue
+  fue transitorio, no de red caida. Leccion: un push que no termina NO se
+  reasume a ciegas: primero `git rev-parse origin/main` para ver si ya entro.
