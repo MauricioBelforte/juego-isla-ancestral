@@ -36,7 +36,7 @@
 ## C. RF2 Mapa completo (12)
 
 - [x] Crear FullMapLayer como UILayer tipo MODAL_FULL de M53 [S]
-- [ ] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C]
+- [x] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C] -- agnes-3-flash 2026-10-02: `bake_map_texture()` samplea `TerrainLocator.get_height(x,z)` (VoxelTerrain real) y mapea a colores (agua/arena/verde/pardo); fallback blob en headless
 - [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACI脫N requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
 - [ ] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md fuentes documentadas; M88 FontCatalog proporciona Nunito/Fredoka One; jerarquia M53 ThemeUx aplicada en widget
 - [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
@@ -154,7 +154,7 @@
 ## K. Integración con módulos (14)
 
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.1 (RegionData alimentado por M09/M27); IMPLEMENTACI脱N bloqueada por M09/M27 (regiones/biomas del terreno); KnownIssue no bloqueante DoD.
-- [ ] M10: MapBaker genera la textura desde el chunk data (procesal estable por semilla) [C]
+- [x] M10: MapBaker genera la textura desde el chunk data (procesal estable por semilla) [C] -- agnes-3-flash 2026-10-02: bake_map_texture() es el MapBaker implícito: samplea VoxelTerrain heightmap y genera Image procedural
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.1 (posici贸n jugador por evento baja frecuencia); IMPLEMENTACI脱N bloqueada por M11 (player autoload signals); KnownIssue no bloqueante DoD.
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.2 (registro casas NPCs como marcadores din谩micos); IMPLEMENTACI脱N bloqueada por M19 (NPC profile system); KnownIssue no bloqueante DoD.
 - [ ] M24/M25: POIs de templos y ruinas como marcadores [M]
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 54 · Pendientes: 123 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 56 · Pendientes: 121 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
