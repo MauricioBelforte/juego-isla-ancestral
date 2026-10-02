@@ -697,3 +697,18 @@ verifiques vos, usa tu practica habitual de varios angulos.
       absoluto se **reporta** (no se asevera como gate: `quality.yml:285` es gate duro). `11-BUGS.md`
       commiteado con **patch parcial** (`git apply --cached` de solo mis hunks; no me llevé el append de
       hy3, BUG-082..086). Docs: `03-Diseno.md` §2/§3/§10-Regla-5 + `11-BUGS.md`. (2026-10-02)
+
+- [x] Log reservado: **1182** — **M105 (Telemetría de Gameplay): re-verificación independiente de los
+      guardianes + piso para iter7.** Re-medido, no heredado (trampa 119): las 4 suites ×3 = **64 checks,
+      0 fallos, 0 SCRIPT ERROR, exit 0** (base 16 / iter5 10 / iter6 11 / iter7 27). **Hueco cerrado:**
+      iter7 solo tenía el guardián de BLOQUES (`_fin()`) y **no** un piso de chequeos → un bloque que
+      llega a su `_fin()` saltándose checks en silencio no se detectaba; se añadió `CHECKS_MINIMOS := 27`
+      + el chequeo en `_resumen()` (medido en verde ×3). **Guardianes re-probados en ROJO con 6 sondas
+      (A..F)**, todas exit 1 (el sello previo decía "4 sondas" pero no dejó artefacto re-ejecutable); la
+      E es la fuerte: un solo `_fin()` suprimido se detecta con los 27 checks igual corriendo. **Hallazgo
+      2:** el comentario de CI decía "10 bloques" en iter7; `BLOQUES` tiene **12** → corregido (cambio
+      solo en comentarios, `validar_workflows.py` da OK). Cruces: contador oficial
+      `verificar_checklist.py` = 120/0/45 (idéntico a mi conteo); 14 símbolos de API presentes en el
+      director; 0 citas vivas a secciones inexistentes. **NO sella §21.8** (autor == verificador).
+      **Hallazgo ajeno reportado (no tocado, §21.4):** `validar_workflows.py` falla por 5 entradas
+      obsoletas de `DEUDA_CONOCIDA` de M64 (scripts ya versionados). (2026-10-02)

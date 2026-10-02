@@ -48,6 +48,12 @@ const BLOQUES := [
 	"limpieza",
 ]
 
+## Piso de chequeos (iter. 7-bis, 2026-10-02): el guardian de bloques nombra
+## un bloque que NO llama `_fin()`, pero NO detecta un bloque que llega a su
+## `_fin()` saltandose checks en silencio (p. ej. un bucle sobre 0 items). Este
+## piso cierra ese hueco, igual que base/iter5/iter6. Medido en verde x3 = 27.
+const CHECKS_MINIMOS := 27
+
 var _fallos := 0
 var _checks := 0
 var _ad = null
@@ -117,6 +123,9 @@ func _resumen() -> void:
 	if not faltantes.is_empty():
 		_fallos += 1
 		print("[FAIL] bloques NO completados (aborto silencioso): %s" % str(faltantes))
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo %d): aborto silencioso dentro de un bloque" % [_checks, CHECKS_MINIMOS])
 	print("=== TEST TELEMETRIA M105 ITER7: %d fallo(s) de %d cheque(s) ===" % [_fallos, _checks])
 	quit(1 if _fallos > 0 else 0)
 

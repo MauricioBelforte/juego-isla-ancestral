@@ -35,6 +35,60 @@
   cableados en CI · commit del trabajo de iter. 6 que estaba huerfano en el arbol.
 - Para tomarlo: protocolo §21.4 — bloquear en los 4 registros + reservar numero de log.
 
+## Re-verificacion independiente (2026-10-02, iter. 7-bis — DeepSeek-V4.1-Flash)
+
+El estado del modulo se re-MIDIO, no se heredo del sello previo (trampa 119: un
+`✅` no se hereda, se cuenta).
+
+**1. Las 4 suites, x3 cada una, exit 0, 0 SCRIPT ERROR (medido, no citado):**
+
+| suite | checks | fallos | piso CHECKS_MINIMOS |
+|---|---|---|---|
+| test_telemetry | 16 | 0 | 16 |
+| test_telemetria_iter5 | 10 | 0 | 10 |
+| test_telemetria_iter6 | 11 | 0 | 11 |
+| test_telemetria_iter7 | 27 | 0 | 27 (NUEVO, ver punto 2) |
+
+Total: 64 checks, 0 fallos.
+
+**2. Hueco encontrado y cerrado — iter7 no tenia piso de chequeos.**
+iter7 solo tenia el guardian de BLOQUES (`_fin()`): nombra un bloque que NO llama
+`_fin()`, pero NO detecta un bloque que llega a su `_fin()` saltandose checks en
+silencio (p. ej. un bucle sobre 0 items). Se le anadio `const CHECKS_MINIMOS := 27`
++ el chequeo en `_resumen()`, igual que base/iter5/iter6. Medido en verde x3 tras
+el cambio (27/0).
+
+**3. Los guardianes, re-probados en ROJO (6 sondas independientes).** El sello
+previo afirmaba "4 sondas" pero no dejo artefacto re-ejecutable; se re-midio:
+
+| sonda | inyeccion | resultado |
+|---|---|---|
+| A | asercion falsa inyectada (base) | `17 checks, 1 fallos`, exit 1 |
+| B | `return` tras el 1er check (aborta `_ejecutar`) | `NO llego al final` + `solo 1 checks (minimo 16)`, exit 1 |
+| C | `CHECKS_MINIMOS` 16 a 17 (base) | `solo 16 checks (minimo 17)`, exit 1 |
+| D | `return` tras el bloque autoload (iter7) | nombra 11 bloques faltantes, exit 1 |
+| E | suprimir `_fin("limpieza")` (iter7) | nombra `["limpieza"]` con 27 checks igual corriendo, exit 1 |
+| F | `CHECKS_MINIMOS` 27 a 28 (iter7, piso nuevo) | `solo 27 checks (minimo 28)`, exit 1 |
+
+Las 6 en rojo. Los ficheros de sonda se borraron (0 restos en el arbol).
+
+**4. Cruces:**
+- Contador oficial `scripts/verificar_checklist.py` -> `105-Telemetria-De-Gameplay:
+  [x] 120 / [ ] 0 / [?] 45`, identico a mi conteo por prefijo de linea.
+- CI: `quality.yml` (bloque M105) cablea las 4 suites con `|| FAIL=1`. El
+  comentario de CI decia "10 bloques" en iter7; el array `BLOQUES` tiene 12 ->
+  corregido a 12 y anadido el piso iter7 a la lista.
+- Citas: `03-Diseno.md` solo tiene §1-§6; las 2 citas a §3.4/§3.5 quedan
+  marcadas como FALSAS (reparadas en iter. 7). 0 citas vivas a secciones inexistentes.
+- API: spot-check de 14 simbolos citados (`establecer_opt_in`, `_cargar_opt_in`,
+  `_persistir_opt_in`, `enter_zone`, `exit_zone`, `_evaluar_zona_ignorada`,
+  `_duracion_sesion_seg`, `PUZZLE_ABANDONO_SEGUNDOS`, `ZONA_IGNORADA_SEGUNDOS`,
+  `enviar_evento`, `_iniciar_sesion`, `_finalizar_sesion`, `METRIC_SESSION_DURATION`,
+  `signal`) -> los 14 presentes en `telemetry_director.gd`.
+
+**5. Alcance:** esta pasada NO sella §21.8 (el verificador == autor). El sello QA
+cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
+
 ## Reserva anterior (iter. 6 — cerrada 2026-09-11)
 
 - Estado: 🟡 Liberado — 2026-09-11 20:10 (Log 826)

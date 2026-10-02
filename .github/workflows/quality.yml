@@ -288,15 +288,19 @@ jobs:
           # y solo existian 2 + session_duration) + fix de `establecer_opt_in`
           # (apagaba `opt_in` ANTES de `_finalizar_sesion()`, y esa ruta filtra
           # con `if not opt_in: return` -> `session_ended`/`session_duration`
-          # NUNCA salian al cerrar sesion). iter7 = 27 checks, 10 bloques con
+          # NUNCA salian al cerrar sesion). iter7 = 27 checks, 12 bloques con
           # marcador _fin() y guardian anti-falso-verde probado por INYECCION con
           # 4 sondas (aborto de bloque, aborto de _ejecutar sin cuelgue, aborto
           # dentro de un helper y aborto inline).
           # Se cablean los 4 suites del modulo. OJO: un SCRIPT ERROR dentro de un
           # helper NO detiene `_ejecutar` (medido en la sonda C), asi que el flag
-          # `_terminado` no basta -> base/iter5/iter6 llevan ademas un PISO de
-          # chequeos (CHECKS_MINIMOS) que hace fallar la suite si un aborto se
-          # come checks. Los pisos son: base 16, iter5 10, iter6 11.
+          # `_terminado` no basta -> los 4 suites llevan un PISO de chequeos
+          # (CHECKS_MINIMOS) que hace fallar la suite si un aborto se come
+          # checks. Los pisos son: base 16, iter5 10, iter6 11, iter7 27.
+          # (2026-10-02, DeepSeek-V4.1-Flash: re-verificacion independiente con
+          # 6 sondas en ROJO — A..F — y se anadio el piso a iter7, que antes
+          # solo tenia el guardian de bloques. Medido: 4 suites x3, 64 checks,
+          # 0 fallos, 0 SCRIPT ERROR.)
           godot --headless --script scripts/telemetry/test_telemetry.gd 2>&1 || FAIL=1
           godot --headless --script scripts/telemetry/test_telemetria_iter5.gd 2>&1 || FAIL=1
           godot --headless --script scripts/telemetry/test_telemetria_iter6.gd 2>&1 || FAIL=1
