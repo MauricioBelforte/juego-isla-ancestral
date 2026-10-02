@@ -149,12 +149,21 @@ a `|| FAIL=1`; `test_slots_m59.gd` se anade con `|| FAIL=1`. YAML validado (12 j
 
 ## 10. Push (huella - AGENTS.md 4.3)
 
-- **Rango:** (pendiente de completar tras el push)
-- **Tipo:** fast-forward a `main`, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
-- **Commits propios:** (pendiente)
-- **Nota de repo compartido:** el worktree `main` lo comparten ~4 agentes; entre el inicio y el
-  cierre de esta iteracion aparecio el commit AJENO `9dcee9f` (M54, pin creation right-click).
-  El push se hace sobre ese HEAD.
+- **Rango empujado:** `f50a1ea..80819e1` (fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`).
+- **Commits propios:** `15010f7` - "M59 iter. 1 (Log 1197): fix critico - ningun save valido se
+  podia cargar" (11 archivos, +607/-15).
+- **Commits AJENOS incluidos en el mismo push** (worktree `main` compartido por ~4 agentes):
+  `9dcee9f`, `ecfe122`, `e34c696`, `e5b4585`, `23a9dda`, `8a42459` (todos M54) y `80819e1`
+  (M91, autoload de subtitulos lote 3). Se empujan porque son ancestros de mi HEAD; no son mios.
+- **Escaneo pre-push:** sin coincidencias de secretos en el rango; blob maximo 4,6 MB
+  (`CONTACT_RAIZ.png`, de un commit ajeno).
+- **`CHECKLIST-GLOBAL.md` y `Logs/NUMEROS_DISPONIBLES.txt` NO commiteados** (quedan para el
+  coordinador, como manda la regla). El commit no los incluye (verificado con `git show --stat`).
+- **`validar_workflows.py`:** EXIT 0, `quality.yml` valido (2 avisos = deuda conocida BUG-078 de
+  M117/M116, no nueva).
+- **Nota de repo compartido:** el `HEAD` local volvio a moverse DESPUES de mi commit (M91), asi
+  que `origin/main == HEAD == 80819e1`; mi `15010f7` es ancestro verificado
+  (`git merge-base --is-ancestor 15010f7 origin/main` -> OK).
 
 ## NO sella sec21.8
 
