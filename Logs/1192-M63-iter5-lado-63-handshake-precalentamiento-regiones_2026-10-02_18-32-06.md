@@ -169,3 +169,21 @@ bloqueaba el gate que esta iteracion extiende.)
   candidatos reales).
 - El handshake de "vida larga" (avisar al consumidor) queda en manos del consumidor:
   `avisar_carga_iniciada()` al tomar el recurso y `avisar_carga_terminada()` al soltarlo.
+
+## 12. Registro de push (AGENTS.md sec. 4.3)
+
+- **Rango:** `14b1a77..ce2e0ae` (`main`) - 31 commits.
+- **Fecha/hora:** 2026-10-02 18:41 -0300.
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Tipo:** principal. **Commits propios: 2 de 31** -> `139b6ac` (M63 iter. 5) y `97c2440` (fix infra
+  validador). Los otros 29 son AJENOS, acumulados en el worktree compartido sin pushear: M54 (activo,
+  ~20 commits), M91 (efectos de bus), el coordinador (reasignacion a M63) y Hy4 (logs 1188/1189).
+  Se pushearon porque el `main` local es UNO SOLO y compartido por los 4 agentes: no se pueden
+  aislar los propios sin reescribir historia.
+- **Nota operativa (auth):** el push NO funciono con el credential helper por defecto (GCM): se
+  colgaba sin salida y `--dry-run` daba timeout (124). Con `credential.helper=` vacio fallaba
+  RAPIDO ("could not read Username") -> la red estaba bien, el problema era el GCM. Resuelto con
+  `gh auth setup-git` (gh autenticado como MauricioBelforte) -> push OK en segundos.
+- **Blob maximo del rango:** ~242 KB (`Mensajes entre modelos/ESTADO-PARALELO.md`) - bajo el limite.
+- **Secretos:** escaneo de las lineas ANADIDAS del rango -> solo el identificador `API_KEY`
+  (2 veces, sin valor). Sin secretos.
