@@ -2,7 +2,7 @@
 
 > **Modelo:** mimo-v2.6-flash-free (último modificador)
 > **Plataforma:** opencode
-> **Fecha:** 2026-10-02 (Sección T-105 y T-106 agregada)
+> **Fecha:** 2026-10-02 (Sección T-105, T-106, T-107 y T-108 agregada)
 > **Anterior:** atria-dawn (Atria Dawn Preview) / Kilo Code — 2026-09-20 (T-98..T-104; E-22: 2026-09-19)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §8
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -759,6 +759,118 @@ en la línea correcta**: hay que anclarlo a la IDENTIDAD de la línea, no a la c
 (misma familia que T-104).
 
 **Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+
+
+### T-107: Adivinar la API nativa de Godot — esqueletos de diseño con nombres inexistentes
+
+**Síntoma:**
+```
+SCRIPT ERROR: Parse Error: Static function "get_device_list()" not found in base "GDScriptNativeClass".
+SCRIPT ERROR: Invalid access to property or key 'release_us' on a base object of type 'AudioEffectCompressor'.
+```
+
+**Ubicación:** `scripts/audio/{dynamic_range_manager,compression_manager,output_device_manager}.gd`
+(M91, 2026-10-02). Los nombres erróneos venían de los esqueletos del **propio** `04-Codigo.md`
+§9/§10/§11 del módulo, escrito por Devin/SWE-1.6 sin contrastar contra el motor.
+
+**Causa:** un documento de diseño redactado sin verificar la API real de la versión del motor es
+una **hipótesis**, no una especificación. Godot renombra/elimina API entre versiones y entre 3→4;
+un nombre "razonable" (`release_us`, `ceil_db`, `get_device_list`) puede simplemente no existir.
+
+**Casos concretos (todos comprobados en Godot 4.7.2):**
+
+| Diseño (erróneo) | **Real en Godot 4.7.2** |
+|---|---|
+| `AudioServer.get_device_list()` | `get_output_device_list()` |
+| `AudioServer.set_device(n)` | `set_output_device(n)` |
+| `AudioServer.get_device()` | `get_output_device()` |
+| `compressor.release_us` | `release_ms` (milisegundos, no µs) |
+| `compressor.output_gain` | `gain` |
+| `limiter.ceil_db` | `ceiling_db` |
+| `limiter.soft_clip` (bool) | `soft_clip_db` + `soft_clip_ratio` |
+
+**Detección (sonda de reflexión ANTES de codificar):**
+```gdscript
+# métodos reales de una clase nativa
+for m in AudioServer.get_method_list(): print(String(m.name))
+# propiedades reales de una instancia
+var c := AudioEffectCompressor.new()
+for p in c.get_property_list(): print(String(p.name))
+# ¿existe la clase?
+print(ClassDB.class_exists("AudioEffectLimiter"))
+```
+La sonda se hace en un script temporal que se **borra** después (carpeta de scripts de prueba).
+
+**Refinamiento de T-105 — qué cubre y qué NO `--check-only`:**
+
+| Tipo de error | ¿Lo ve `--check-only`? |
+|---|---|
+| Llamada **estática** a clase nativa (`AudioServer.get_device_list()`) | **SÍ** → Parse Error |
+| Función **local** inexistente (`_remover()` vs `remover()`) | **SÍ** → Parse Error |
+| **Propiedad** inexistente en una instancia (`comp.release_us`) | **NO** → solo en runtime |
+
+O sea: T-105 sigue en pie para instancias, pero `--check-only` **sí** resuelve llamadas estáticas
+y referencias entre scripts. Combinar las dos técnicas: `--check-only` para sintaxis + referencias,
+y un test que **ejecute** la línea para las propiedades.
+
+**Prevención:**
+1. Nunca copiar esqueletos de `04-Codigo.md` sin sondear la API primero.
+2. Corregir **también el documento fuente**, no solo el código, para que el siguiente agente no
+   repita el error (hecho en la Nota de Iteración 2 de M91).
+3. Los 12 esqueletos §4–§14 de M91 fallan al compilar tal cual están escritos.
+
+**Lección transversal:** tratar todo documento de diseño como hipótesis verificable; el motor manda.
+
+**Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+
+---
+
+### T-108: `class_name` nuevo invisible en headless — la caché de clases no se regenera sola
+
+**Síntoma:**
+```
+SCRIPT ERROR: Parse Error: Identifier "DynamicRangeManager" not declared in the current scope.
+ERROR: Failed to load script "res://scripts/audio/test_audio_effects_m91.gd" with error "Parse error".
+```
+...pese a que el archivo que declara `class_name DynamicRangeManager` pasa `--check-only` limpio
+(EXIT 0) y compila sin errores.
+
+**Ubicación:** tests o scripts que referencian un `class_name` recién creado (M91, 2026-10-02).
+Se consumieron 4 corridas diagnosticando esto.
+
+**Causa:** Godot resuelve los identificadores globales de `class_name` contra
+`.godot/global_script_class_cache.cfg`. Esa caché la construye el **editor** en el paso
+`update_scripts_classes`, que **solo procesa los scripts que considera modificados**. Un editor
+lanzado y terminado a mitad del escaneo deja los archivos marcados como "ya vistos" **sin**
+registrar la clase, y las corridas siguientes los ignoran para siempre.
+
+**Solución:**
+```bash
+rm game/isla-ancestral/.godot/global_script_class_cache.cfg
+godot --headless --editor --quit --path game/isla-ancestral
+# verificar: el nombre nuevo debe aparecer en global_script_class_cache.cfg
+```
+
+**Verificación obligatoria:**
+```bash
+grep -c '"class":' .godot/global_script_class_cache.cfg   # debe crecer en N
+grep 'DynamicRangeManager' .godot/global_script_class_cache.cfg
+```
+
+**Prevención:**
+1. `.godot/` **no está versionado** (está en `.gitignore`): borrar la caché es seguro y no ensucia git.
+2. `--headless --import` y `--editor --quit` **no bastan** si la caché previa quedó parcial:
+   hay que **borrarla** para forzar el registro completo. `--import` ni siquiera corre
+   `update_scripts_classes`.
+3. Alternativa robusta para tests: `const X := preload("res://ruta/script.gd")` en vez del
+   identificador global — no depende de la caché.
+4. Los `.gd.uid` también se generan solos; en este proyecto `*.uid` está en `.gitignore`.
+
+**Lección transversal:** un "Identifier not declared" sobre un archivo que existe y parsea bien
+es un problema de **registro/cache**, no de código: no reescribas el archivo.
+
+**Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+
 
 ---
 

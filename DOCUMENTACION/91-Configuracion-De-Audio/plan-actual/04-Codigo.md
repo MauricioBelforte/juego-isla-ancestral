@@ -497,9 +497,9 @@ func save_settings():
 | Crear res://audio/audio_bus_setup.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://audio/audio_3d_setup.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://audio/ui_sound_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear res://audio/dynamic_range_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear res://audio/compression_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear res://audio/output_device_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
+| Crear res://audio/dynamic_range_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/audio/dynamic_range_manager.gd` |
+| Crear res://audio/compression_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/audio/compression_manager.gd` |
+| Crear res://audio/output_device_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/audio/output_device_manager.gd` |
 | Crear res://audio/audio_test_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://ui/subtitles/subtitle_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://settings/audio_settings.gd | **IMPLEMENTACIÓN INMEDIATA** |
@@ -602,3 +602,96 @@ func save_settings():
 - M41-M44: reproducir contenido por bus con AudioServer.get_bus_index("Music"/"SFX"/"Ambient"/"Voice") — ya creados.
 - M58: "Sin truenos" puede mutear SFX vía set_mute("SFX", true) parcial (o filtrar por stream).
 - La persistencia es automática en cada set (GestorConfig M60) — no duplicar en el menú.
+
+---
+
+## Notas del Agente — Iteración 2: efectos de bus (historial, no borra las anteriores)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial (lote 1 de 5: rango dinámico + compresión + dispositivo de salida, implementado y verificado)
+
+### Lo que hice
+
+Tres subsistemas nuevos, **stateless** (el estado se deriva de `AudioServer`,
+sin nodos ni coste por frame), en `game/isla-ancestral/scripts/audio/`:
+
+| Archivo | `class_name` | Cubre |
+|---|---|---|
+| `dynamic_range_manager.gd` | `DynamicRangeManager` | perfiles quiet/medio/dinámico + knobs manuales (threshold, ratio, attack, release) |
+| `compression_manager.gd` | `CompressionManager` | limiter con threshold/ceiling/soft_clip (on/off) |
+| `output_device_manager.gd` | `OutputDeviceManager` | `dispositivos()` / `actual()` / `seleccionar()` + 5 categorías de UI |
+
+- Test nuevo `scripts/audio/test_audio_effects_m91.gd`: **82 checks, 0 fallos**,
+  con piso `CHECKS_MINIMOS := 82` **medido en verde** (patrón M105, no estimado).
+- Suite base `test_audio_config.gd`: **0 fallos** (regresión nula — se verificó en cada iteración).
+- `tools/ci/run_tests.py --module m91` → **1 OK, 0 FAIL** (auto-descubre el test).
+- Checklist: **92 → 118 `[x]`** (26 ítems), totales recalculados, 239 ítems intactos.
+
+### ⚠️ API real de Godot 4.7.2 — los esqueletos de este documento están MAL (T-107)
+
+Este `04-Codigo.md` (§9/§10/§11, escrito por Devin/SWE-1.6) cita **nombres de
+API inexistentes en Godot 4.7**. Se sondearon por reflexión antes de codificar;
+la guía queda registrada en `GUIA-GODOT/06-registro-errores.md` **T-107**:
+
+| § del documento | Afirmación del diseño | **Real en Godot 4.7.2** |
+|---|---|---|
+| §11 | `AudioServer.get_device_list()` | **`get_output_device_list()`** |
+| §11 | `AudioServer.set_device(n)` | **`set_output_device(n)`** |
+| §11 | `AudioServer.get_device()` | **`get_output_device()`** |
+| §9 | `compressor.release_us` | **`release_ms`** (milisegundos, no µs) |
+| §9 | `compressor.output_gain` | **`gain`** |
+| §10 | `limiter.ceil_db` | **`ceiling_db`** |
+| §10 | `limiter.soft_clip = true` | **`soft_clip_db`** + **`soft_clip_ratio`** (no booleano) |
+
+Los esqueletos §4-§14 **NO deben copiarse tal cual**: fallan al compilar.
+
+### Arquitectura: qué NO crear (evitar duplicación, §9/§21.4)
+
+El esqueleto §2/§15 pide 12 archivos, pero **4 ya están resueltos** por el núcleo
+de `audio_config_service.gd` (Iteración 1). Crearlos duplicaría estado:
+
+| Diseñado | Estado real | Decisión |
+|---|---|---|
+| `audio_bus_setup.gd` | `_crear_buses()` ya crea y enruta los 7 buses | **NO crear** |
+| `audio_settings.gd` (Resource) | `_volumenes` / `_mutes` en `AudioConfigService` | **NO crear** |
+| `audio_settings_loader.gd` | `_cargar_config()` (M60 sección `audio`) | **NO crear** |
+| `audio_settings_saver.gd` | `_guardar_config()` (automático en cada `set_volumen`) | **NO crear** |
+
+También: las **rutas del §2 son incorrectas** (`res://audio/`, `res://ui/`,
+`res://settings/`) — la convención real del proyecto es
+`game/isla-ancestral/scripts/audio/`, `scripts/ui/…`.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Sliders y menú de settings** (`audio_settings_menu.gd`, 13 ítems de "Menú de
+  configuración de audio"): la UI es de **M53** (§16 Iteración 1 lo establece;
+  las señales `volumen_cambiado` y `buses_disponibles()` ya están listas).
+  Quedó pendiente el glue 0-100% ↔ 0-1 en `AudioConfigService`.
+- **Subtítulos** (`subtitle_manager.gd`), **sonidos de interfaz**
+  (`ui_sound_manager.gd`), **audio 3D** (`audio_3d_setup.gd`), **pruebas de
+  audio** (`audio_test_manager.gd`): 0 código; requieren escenas/streams.
+- **Integración M58 / M87 / M61** (dueños: esos módulos, ver §15).
+- **`06-Plan-Testings.md`** no existe todavía en `plan-actual/`.
+- **Pruebas con auriculares/altavoces** (5.1/7.1, HRTF): requieren hardware
+  real; solo se puede verificar la API headless.
+
+### Recomendaciones para el próximo agente
+
+- **No dupliques buses ni persistencia**: `AudioConfigService` ya lo hace todo.
+  Usa `DynamicRangeManager` / `CompressionManager` / `OutputDeviceManager`
+  (son stateless, se llaman directo, sin instanciar).
+- **M53**: `set_volumen(bus, valor)` toma 0-1; si el slider va 0-100, divide
+  antes. Escuchá `volumen_cambiado`. Para el dropdown de salida:
+  `OutputDeviceManager.dispositivos()` (lista real) y `categorias()` (etiquetas).
+- **Antes de copiar cualquier esqueleto de este documento, sondeá la API** con
+  `--check-only` + un script de reflexión sobre `get_property_list()`
+  (T-105: `--check-only` NO valida métodos del motor; T-107: nombres de
+  propiedades nativas).
+- **`class_name` requiere el caché de clases**: tras crear un `.gd` con
+  `class_name`, regenerar con
+  `godot --headless --editor --quit --path game/isla-ancestral`
+  **borrando antes** `.godot/global_script_class_cache.cfg` (si no, la caché
+  vieja marca los archivos como escaneados y no registra la clase nueva).
+  `.godot/` no está versionado, es seguro regenerarlo.

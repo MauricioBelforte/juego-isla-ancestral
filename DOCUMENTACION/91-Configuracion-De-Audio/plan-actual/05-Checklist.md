@@ -117,31 +117,31 @@
 - [x] Definir AudioBus para control de volumen
 
 ### [S] Rango dinámico
-- [ ] Definir quiet (compresión alta)
-- [ ] Definir medio (compresión media)
-- [ ] Definir dinámico (sin compresión)
+- [x] Definir quiet (compresión alta) — mimo-v2.6-flash-free 2026-10-02 (opencode): scripts/audio/dynamic_range_manager.gd PRESETS.quiet (threshold -20 dB, ratio 10)
+- [x] Definir medio (compresión media) — mimo-v2.6-flash-free 2026-10-02 (opencode): PRESETS.medio (threshold -10 dB, ratio 5)
+- [x] Definir dinámico (sin compresión) — mimo-v2.6-flash-free 2026-10-02 (opencode): remover() elimina el AudioEffectCompressor del bus
 - [x] Definir CompressorEffect en AudioServer
-- [ ] Definir threshold (umbral de compresión)
-- [ ] Definir ratio (proporción de compresión)
-- [ ] Definir attack (tiempo de ataque)
-- [ ] Definir release (tiempo de liberación)
+- [x] Definir threshold (umbral de compresión) — mimo-v2.6-flash-free 2026-10-02 (opencode): comp.threshold — testeado en -20 / -10 / -15 dB
+- [x] Definir ratio (proporción de compresión) — mimo-v2.6-flash-free 2026-10-02 (opencode): comp.ratio — testeado en 10 / 5 / 7
+- [x] Definir attack (tiempo de ataque) — mimo-v2.6-flash-free 2026-10-02 (opencode): comp.attack_us — testeado en 5000 / 3000 µs
+- [x] Definir release (tiempo de liberación) — mimo-v2.6-flash-free 2026-10-02 (opencode): comp.release_ms — testeado en 250 / 180 ms (API real: release_ms, NO release_us — T-107)
 
 ### [S] Compresión
-- [ ] Definir toggle de compresión (on/off)
-- [ ] Definir limitar picos de volumen para evitar clipping
-- [ ] Definir threshold (umbral de limitación)
-- [ ] Definir ratio (proporción de limitación)
+- [x] Definir toggle de compresión (on/off) — mimo-v2.6-flash-free 2026-10-02 (opencode): scripts/audio/compression_manager.gd activar()/desactivar() + activa()
+- [x] Definir limitar picos de volumen para evitar clipping — mimo-v2.6-flash-free 2026-10-02 (opencode): AudioEffectLimiter agregado al bus vía add_bus_effect
+- [x] Definir threshold (umbral de limitación) — mimo-v2.6-flash-free 2026-10-02 (opencode): limiter.threshold_db (default -3 dB) — testeado
+- [x] Definir ratio (proporción de limitación) — mimo-v2.6-flash-free 2026-10-02 (opencode): limiter.soft_clip_ratio (default 2.0) — testeado
 - [x] Definir LimiterEffect en AudioServer
-- [ ] Definir threshold (umbral de limitación)
-- [ ] Definir ceil (límite máximo de dB)
-- [ ] Definir soft clip (soft clipping para evitar clipping duro)
+- [x] Definir threshold (umbral de limitación) — mimo-v2.6-flash-free 2026-10-02 (opencode): limiter.threshold_db (default -3 dB) — testeado
+- [x] Definir ceil (límite máximo de dB) — mimo-v2.6-flash-free 2026-10-02 (opencode): limiter.ceiling_db (default 0 dB) — testeado (API real: ceiling_db, NO ceil_db — T-107)
+- [x] Definir soft clip (soft clipping para evitar clipping duro) — mimo-v2.6-flash-free 2026-10-02 (opencode): limiter.soft_clip_db (default -6 dB) — testeado (API real: soft_clip_db/soft_clip_ratio, NO soft_clip — T-107)
 
 ### [S] Dispositivo de salida
 - [x] Definir predeterminado del sistema
-- [ ] Definir auriculares
-- [ ] Definir altavoces
-- [ ] Definir HDMI
-- [ ] Definir Bluetooth
+- [x] Definir auriculares — mimo-v2.6-flash-free 2026-10-02 (opencode): scripts/audio/output_device_service.gd CATEGORIAS_LISTA
+- [x] Definir altavoces — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
+- [x] Definir HDMI — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
+- [x] Definir Bluetooth — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
 - [x] Definir AudioServer.get_device_list() para lista de dispositivos
 - [x] Definir AudioServer.set_device() para cambiar dispositivo
 - [ ] Definir dropdown en settings para seleccionar dispositivo
@@ -245,22 +245,22 @@
 
 ### [S] DynamicRangeManager
 - [x] Diseñar DynamicRangeManager
-- [ ] Diseñar método apply_dynamic_range(range)
-- [ ] Diseñar método apply_compression(bus_index, threshold, ratio, attack, release)
-- [ ] Diseñar método remove_compression(bus_index)
+- [x] Diseñar método apply_dynamic_range(range) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: DynamicRangeManager.aplicar(rango, bus)
+- [x] Diseñar método apply_compression(bus_index, threshold, ratio, attack, release) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: aplicar_compresion_manual(threshold, ratio, attack_us, release_ms, bus)
+- [x] Diseñar método remove_compression(bus_index) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: remover(bus)
 - [x] Diseñar AudioEffectCompressor para compresión
 
 ### [S] CompressionManager
 - [x] Diseñar CompressionManager
-- [ ] Diseñar método apply_compression(enabled)
-- [ ] Diseñar método remove_limiter(bus_index)
+- [x] Diseñar método apply_compression(enabled) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: CompressionManager.activar(bus) / desactivar(bus)
+- [x] Diseñar método remove_limiter(bus_index) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: desactivar(bus)
 - [x] Diseñar AudioEffectLimiter para limitación
 
 ### [S] OutputDeviceManager
 - [x] Diseñar OutputDeviceManager
-- [ ] Diseñar método get_output_devices()
-- [ ] Diseñar método set_output_device(device_name)
-- [ ] Diseñar método get_current_device()
+- [x] Diseñar método get_output_devices() — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: OutputDeviceManager.dispositivos() → AudioServer.get_output_device_list()
+- [x] Diseñar método set_output_device(device_name) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: seleccionar(nombre) con validación contra la lista real
+- [x] Diseñar método get_current_device() — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: actual() → AudioServer.get_output_device()
 - [x] Diseñar AudioServer.get_device_list() para lista de dispositivos
 - [x] Diseñar AudioServer.set_device() para cambiar dispositivo
 
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 92 · Pendientes: 147 · No resueltos: 0.
+**Totales:** 239 ítems · Completados: 118 · Pendientes: 121 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].
