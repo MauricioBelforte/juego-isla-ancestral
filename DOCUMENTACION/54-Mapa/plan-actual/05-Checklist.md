@@ -46,7 +46,7 @@
 - [ ] Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 ThemeUx/autoload presente. Deferred a M53.
 - [x] Convivencia con la pila de capas (diálogo abierto + mapa: se encola) [M] -- agnes-3-flash 2026-10-02 iter 4: FullMapLayer `_hay_capa_modal_activa()` bloquea open_map si DialogLayer/PauseLayer/MenusLayer visible
 - [ ] Leyenda de iconos legible (M58) y panel de filtros accesible → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.2; implementacion requiere M58 accesibilidad manager. Deferred.
-- [ ] Indicador de "el mapa aún se dibuja" con progreso si el mundo no terminó de generar (M63, AGENTS 8) [M]
+- [x] Indicador de "el mapa aún se dibuja" con progreso si el mundo no terminó de generar (M63, AGENTS 8) [M] -- agnes-3-flash 2026-10-02: FullMapLayer `_show_bake_progress()` cuando texture no cacheada; hide al estar lista
 
 ## D. RF3 Marcadores (14)
 
@@ -173,7 +173,7 @@
 - [x] Región sin explorar: no muestra detalles ni marcadores (spoiler prevention) [M] -- agnes-3-flash 2026-10-02: minimap_widget `if not explored: continue` (no crea marcador); island fogs ocultan regiones; MapManager `region_explorada()` controla acceso
 - [ ] Marcador fuera de la vista del minimapa: flecha de borde apunta la dirección [M]
 - [x] Mapa abierto mientras el jugador se mueve (pausa): datos congelados y coherentes [M] -- agnes-3-flash 2026-10-02: FullMapLayer pausa TimeCalendar.pausa() al abrir; señales solo emiten en runtime activo; datos map coherentes
-- [ ] Mundo aún generando o sin datos de región: mapa en blanco amable con progreso [M]
+- [x] Mundo aún generando o sin datos de región: mapa en blanco amable con progreso [M] -- agnes-3-flash 2026-10-02: FullMapLayer muestra "Generando mapa..." + fallback blob (terrain no disponible)
 - [ ] Jugador en otra isla (M27): selector de islas exploradas y minimapa de la isla actual [C]
 - [ ] Viaje rápido solicitado con diálogo abierto: petición encolada por pila M53 → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.13 (fast travel queue via M53 stack); M53 UI layer. Spec defined.
 - [x] Doble apertura del mapa (atajo repetido): idempotente, no rompe la pila [S] -- agnes-3-flash 2026-10-02: FullMapLayer.open_map() `if _is_open: return`
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 90 · Pendientes: 87 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 92 · Pendientes: 85 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
