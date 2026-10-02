@@ -214,3 +214,52 @@ El módulo usa el sistema central de logs de consola (M118): prefijo `[SAVE]` en
 ### Recomendaciones para el próximo agente
 - M34: al implementar sesión de pesca, emitir sesion_iniciada/sesion_terminada — el bloqueo del auto-save se activará solo.
 - M74: si el evento se cancela (evento_cancelado), considerar si amerita auto-save también (decisión de diseño).
+
+---
+
+## Notas del Agente — Iteración 1: carga, metadatos y versión futura (historial, no borra las anteriores)
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-02 20:04:00
+**Estado:** Parcial (3 bugs reales corregidos y MEDIDOS; módulo 🔵 En curso, Log 1197)
+
+### BUG CRÍTICO: `SaveLoader.load()` no podía cargar NINGÚN save válido
+
+**Causa raíz (medida con sonda, no inferida).** `JSON.parse_string()` de Godot 4.7 devuelve `float` para todo número:
+
+```
+JSON round-trip de {"a":1}      -> typeof=3 (TYPE_FLOAT) valor=1.0
+save válido leído del disco     -> schema_version=1.0 (FLOAT), time.day=5.0 (FLOAT)
+SaveSchema.validate()           -> ["schema_version no es int", "time.day no es int"]
+SaveLoader.load() (sin backup)  -> result=2 (CORRUPTED)
+SaveLoader.load() (con backup)  -> result=3 (RECOVERED); cargó día 5.0 mientras el disco tenía 99
+```
+
+`SaveSchema.validate()` exigía `typeof(x) == TYPE_INT` para `schema_version` y `time.day`. Como el payload que vuelve del disco SIEMPRE trae floats, `validate()` fallaba siempre y `load()` caía a `_try_recover()`: con backup cargaba **el save anterior en silencio** (pérdida de progreso), sin backup devolvía `CORRUPTED`.
+
+**Fix (2 piezas):**
+- `save_schema.gd`: nuevo `_es_entero(v)` — acepta `int`, o `float` con valor entero (`is_finite(f) and f == floorf(f) and absf(f) <= 2^53`). `validate()` lo usa para `schema_version` y `time.day`. El schema exige un entero *semántico*; JSON no preserva el tipo, así que validar el tipo crudo era un error de diseño.
+- `save_loader.gd`: tras el parseo, `payload["schema_version"] = int(...)`, restaurando el contrato del campo que el propio loader compara.
+
+### BUG: `slot_metadata()` devolvía `{}` siempre
+`JSON.parse_string(archivo_completo)` sobre un archivo cuyo formato es `checksum\npayload` (la 1ª línea es un SHA-256 hex) → el parseo fallaba siempre → `{}` para cualquier slot. Ahora usa `SaveWriter.parse_document()` (valida el checksum y extrae el payload).
+
+### BUG: `FUTURE_VERSION` sin aviso
+`SaveLoader` devolvía `FUTURE_VERSION` en silencio. Añadido `push_warning` explícito. El rechazo ya era correcto: no migra hacia atrás, no toca el archivo y `SaveManager.load_slot()` no fija `current_slot`.
+
+### La suite que no lo vio (y cómo se cerró la ceguera)
+`validate_save.gd` estaba en 13/13 verde. **Ningún test afirmaba `LoadResult.OK`:**
+- `_test_checksum_detection` aceptaba `RECOVERED or CORRUPTED` (disyunción laxa) y luego fijaba `CORRUPTED` — pero solo ejercitaba el camino de ERROR.
+- `_test_migration_path` llamaba `SaveSchema.validate()` sobre el `default_payload()` **en memoria** (que conserva los int), nunca sobre un payload leído del disco.
+
+Añadido `_test_carga_valida()` (3 checks): el payload del disco debe pasar `validate()`, `load()` debe dar `OK` y el día debe conservarse. **Probado EN ROJO antes del fix: 16 checks, 3 fallos, EXIT 1**, nombrando los errores exactos. Con el fix: **16 checks, 0 fallos, EXIT 0** (×3). Además el gate pasó de `|| true` (no-op, trampa 81) a `|| FAIL=1`.
+
+### Medición de rendimiento (sección R, "background thread")
+Detalle en `05-Checklist.md` (ítem marcado `[?]`, dueño M61). Resumen: `write_atomic` de 4,2 KB = **22,66 ms** de mediana; `request_save()` end-to-end = **48,20 ms**; el coste lo domina el I/O del SO (rename/crear/borrar ≈ 17-40 ms), no el payload (`serialize` 0,27 ms).
+
+### Recomendaciones para el próximo agente
+- **Correr las dos suites** antes de tocar M59: `validate_save.gd` (16 checks) y `test_slots_m59.gd` (22 checks). Ambas son gate duro en `quality.yml`.
+- **Nunca afirmar que "el camino feliz funciona" sin una aserción explícita de `LoadResult.OK`.**
+- Campos numéricos del schema: validar con `_es_entero()`, nunca con `typeof == TYPE_INT` (JSON los devuelve float).
+- `slot_metadata()` es el backend de la UI de slots (M53): usar esa API, no re-parsear el archivo a mano.

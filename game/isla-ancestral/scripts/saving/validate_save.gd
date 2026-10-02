@@ -27,10 +27,46 @@ func _delete_save_dir() -> void:
 func _run_all() -> void:
 	# Directamente en user:// propio de la validación para no tocar saves reales
 	_test_atomic_write()
+	_test_carga_valida()
 	_test_checksum_detection()
 	_test_backup_recovery()
 	_test_slot_rotations()
 	_test_migration_path()
+
+## Camino feliz de carga: un save VALIDO leido del disco debe dar LoadResult.OK.
+##
+## CEGUERA CERRADA (M59 iter. 1, DeepSeek-V4.1-Flash): la suite estaba verde sin
+## NINGUNA asercion sobre LoadResult.OK. save_loader.load() devolvia CORRUPTED
+## (sin backup) o RECOVERED (con backup) para TODO save valido, porque
+## JSON.parse_string() devuelve float para cualquier numero y SaveSchema.validate()
+## rechazaba con "schema_version no es int". El bug era invisible: solo se probaba
+## el camino de error. Falso verde por OMISION de asercion, no por asercion laxa.
+func _test_carga_valida() -> void:
+	print("--- Carga de un save VALIDO (camino feliz) ---")
+	# Sin backups: con un backup presente, un fallo de carga se enmascara como
+	# RECOVERED y el test pasaria por el motivo equivocado.
+	for i in range(1, SaveBackup.MAX_ROTATIONS + 1):
+		var bak := "%s/slot_1_r%d%s" % [SaveSchema.SAVE_DIR, i, SaveBackup.BAK_SUFFIX]
+		if FileAccess.file_exists(bak):
+			DirAccess.remove_absolute(bak)
+
+	var payload := SaveSchema.default_payload("slot_1")
+	payload["time"]["day"] = 5
+	SaveWriter.write_atomic(1, payload)
+
+	# El payload tal como vuelve del disco debe pasar la validacion de estructura.
+	var leido := SaveWriter.parse_document(FileAccess.get_file_as_string(SaveWriter.path_for(1)))
+	var errores: Array[String] = SaveSchema.validate(leido["payload"])
+	_check("payload del disco pasa validate()", errores.is_empty(),
+		"errores=%s" % str(errores))
+
+	var loader := SaveLoader.new()
+	var result := loader.load(1)
+	_check("save VALIDO -> LoadResult.OK", int(result["result"]) == SaveLoader.LoadResult.OK,
+		"resultado=%d (0=OK, 2=CORRUPTED, 3=RECOVERED)" % int(result["result"]))
+	_check("el payload cargado conserva el dia guardado",
+		int(result["payload"].get("time", {}).get("day", -1)) == 5,
+		"dia=%s" % str(result["payload"].get("time", {}).get("day", "N/A")))
 
 func _check(name: String, condition: bool, detail: String = "") -> void:
 	_checks += 1

@@ -37,6 +37,11 @@ func load(slot: int) -> Dictionary:
 
 	var payload: Dictionary = parsed["payload"]
 
+	# JSON no preserva int vs float: schema_version vuelve como float (1.0).
+	# Lo normalizamos al tipo del contrato para que el payload cargado sea
+	# consistente con default_payload() y la comparación de versión sea exacta.
+	payload["schema_version"] = int(payload.get("schema_version", 0))
+
 	# 1) Validar estructura
 	var errors: Array[String] = SaveSchema.validate(payload)
 	if not errors.is_empty():
@@ -45,6 +50,11 @@ func load(slot: int) -> Dictionary:
 	# 2) Verificar versión
 	var version := int(payload.get("schema_version", 0))
 	if version > SaveSchema.SCHEMA_VERSION:
+		# Aviso CLARO (V: "Cargar con versión futura (aviso claro)"): el save es
+		# más nuevo que el juego. Se rechaza SIN tocarlo — nunca degradar un save
+		# de una versión superior. La UI (M53) recibe además el código por la
+		# señal SaveManager.slot_loaded(slot, FUTURE_VERSION).
+		push_warning("[SAVE] El save del slot %d es de una versión FUTURA (v%d > v%d soportada). No se carga para no degradarlo; actualizá el juego." % [slot, version, SaveSchema.SCHEMA_VERSION])
 		return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
 
 	# 3) Migración solo hacia delante (con backup previo)

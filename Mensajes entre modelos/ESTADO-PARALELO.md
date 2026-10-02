@@ -3155,3 +3155,25 @@ commiteados, mi log y el de Hy4, pendiente de renumerar el segundo).
 - **Observacion:** el tablero de arriba (otra sesion) propone fila 63 -> 🟡 Liberado y fila 59 ->
   🔵 En curso. ESTA sesion NO toco M59; cerro M63 iter. 6 (Log 1193) y ahora M62 iter. 6. Si hay dos
   sesiones DeepSeek conviene sincronizar antes de tocar la fila 59.
+
+## 2026-10-02 20:04 — DeepSeek-V4.1-Flash (WorkBuddy): M59 iter. 1 — 3 bugs reales (carga imposible, metadatos vacíos, aviso de versión futura) + medición del frame budget
+
+**Contexto:** relevo §21.4.7, Log 1197. `validate_save.gd` heredada: **13/13, EXIT 0** (prerequisito cumplido antes de tocar código).
+
+**Hallazgo principal — M59 no podía cargar NINGÚN save.** `SaveLoader.load()` devolvía `CORRUPTED` (sin backup) o `RECOVERED` (con backup, cargando **el save ANTERIOR en silencio**) para todo save válido. Causa medida: `JSON.parse_string()` de Godot 4.7 devuelve **float** para todo número, y `SaveSchema.validate()` exigía `TYPE_INT` → `["schema_version no es int", "time.day no es int"]` en todo payload del disco → `_try_recover()`.
+
+**Por qué la suite estaba verde:** `validate_save.gd` no tenía NINGUNA aserción de `LoadResult.OK` (solo probaba el camino de error, y `validate()` sobre un payload **en memoria**). Falso verde por **omisión de aserción**. Cerrado con `_test_carga_valida()` (3 checks), **probado EN ROJO antes del fix (16 checks / 3 fallos / EXIT 1)** y verde después (16/0, EXIT 0 ×3).
+
+**Otros 2 bugs:** `slot_metadata()` parseaba el archivo entero (checksum+payload) como JSON → `{}` siempre (fix: `SaveWriter.parse_document()`); `FUTURE_VERSION` sin aviso (fix: `push_warning` explícito).
+
+**Medición (sección R):** `write_atomic` 4,2 KB = **22,66 ms** mediana; `request_save()` end-to-end = **48,20 ms**; dominado por I/O del SO (rename/crear/borrar), no por el payload (`serialize` 0,27 ms). Cumple el `< 80 ms` del ítem pero **excede el frame budget (16,67 ms)** → hilo justificado, ítem `[?]` con dueño **M61** (no tocado). La premisa heredada ("saves < 10 KB no justifican hilo") queda **refutada**.
+
+**Estado M59:** checklist **58 [x] / 71 [ ] / 1 [?]** = 130 (contado por prefijo de línea). Suite nueva `test_slots_m59.gd` (22 checks, piso `CHECKS_MINIMOS` medido en verde y probado en rojo). Los 2 gates de M59 en `quality.yml` pasan a `|| FAIL=1` (antes: `|| true` no-op).
+
+**Archivos:** `scripts/saving/save_schema.gd`, `save_loader.gd`, `save_manager.gd`, `validate_save.gd`, `test_slots_m59.gd` (nuevo), `.github/workflows/quality.yml`, docs de M59.
+
+**Fila 59 del GLOBAL: NO tocada** — una sesión del coordinador tiene una tarea de pipes en vuelo sobre `CHECKLIST-GLOBAL.md`. Necesita: estado → 🔵 En curso · agente → DeepSeek-V4.1-Flash · progreso → 58/130.
+
+**NO sella §21.8** (autor ≠ verificador): el delta de iter. 1 queda para hy3/agnes/mimo.
+
+**Modelos trabajando (5):** kimi-k3 (M70), DeepSeek-V4.1-Flash (M59), mimo-v2.6-flash-free (M91), agnes-3-flash (M54), hy3 (QA §21.8 M63).

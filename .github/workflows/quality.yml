@@ -126,8 +126,18 @@ jobs:
         run: |
           cd game/isla-ancestral
           FAIL=0
-          # Run save validation test (M59)
-          godot --headless --script scripts/saving/validate_save.gd 2>&1 || true
+          # Run save validation test (M59): atomico, checksum, estructura,
+          # corrupcion, backup y el camino feliz de carga (LoadResult.OK).
+          # GATE DURO: era `|| true` (no-op, trampa 81). El bug critico de
+          # M59 iter. 1 -- TODO save valido leido del disco daba CORRUPTED
+          # (sin backup) o RECOVERED (con backup) -- pasaba desapercibido.
+          godot --headless --script scripts/saving/validate_save.gd 2>&1 || FAIL=1
+          # M59 iter. 1 (DeepSeek-V4.1-Flash): metadatos por slot (D) y carga
+          # de version futura (V). 22 checks, piso CHECKS_MINIMOS medido en
+          # verde y _summary() en call_deferred (sobrevive a un SCRIPT ERROR
+          # que aborte _run()). Bug: slot_metadata() parseaba el archivo
+          # entero (checksum+payload) como JSON -> devolvia {} siempre.
+          godot --headless --script scripts/saving/test_slots_m59.gd 2>&1 || FAIL=1
           # Run time calendar tests (M29)
           godot --headless --script scripts/time/test_calendario.gd 2>&1 || true
           # Run time consumers tests

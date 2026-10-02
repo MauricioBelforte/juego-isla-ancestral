@@ -88,6 +88,25 @@ static func default_payload(profile_id: String = "") -> Dictionary:
 		},
 	}
 
+## Devuelve true si el valor es un entero "semantico": int, o un float con
+## valor entero.
+##
+## JSON NO preserva int vs float: JSON.parse_string() devuelve float para
+## CUALQUIER numero (`1` -> `1.0`). Por eso un payload que vuelve del disco
+## nunca es TYPE_INT. El schema exige un ENTERO, no el tipo de dato crudo, así
+## que aceptamos ambos. Bug real corregido en M59 iter. 1 (DeepSeek-V4.1-Flash):
+## validate() rechazaba TODO save leído del disco con "schema_version no es int"
+## -> SaveLoader.load() devolvía CORRUPTED (sin backup) o RECOVERED (con backup)
+## y el juego no podía cargar la partida.
+static func _es_entero(v: Variant) -> bool:
+	if typeof(v) == TYPE_INT:
+		return true
+	if typeof(v) == TYPE_FLOAT:
+		var f: float = v
+		# 2^53: por encima, los enteros ya no son representables exactos en float.
+		return is_finite(f) and f == floorf(f) and absf(f) <= 9007199254740992.0
+	return false
+
 ## Valida la estructura de un payload cargado.
 ## Devuelve un Array de Strings con los errores encontrados (vacío = OK).
 ## NO valida checksum (eso lo hace SaveLoader): aquí solo estructura/tipos/básicos.
@@ -96,7 +115,7 @@ static func validate(payload: Dictionary) -> Array[String]:
 
 	if not payload.has("schema_version"):
 		errors.append("Falta schema_version")
-	elif typeof(payload["schema_version"]) != TYPE_INT:
+	elif not _es_entero(payload["schema_version"]):
 		errors.append("schema_version no es int")
 	elif int(payload["schema_version"]) < 1:
 		errors.append("schema_version inválido: %s" % payload["schema_version"])
@@ -120,7 +139,7 @@ static func validate(payload: Dictionary) -> Array[String]:
 	# Validaciones mínimas de rangos clave
 	if payload.has("time") and typeof(payload["time"]) == TYPE_DICTIONARY:
 		var time_dict: Dictionary = payload["time"]
-		if time_dict.has("day") and typeof(time_dict["day"]) != TYPE_INT:
+		if time_dict.has("day") and not _es_entero(time_dict["day"]):
 			errors.append("time.day no es int")
 
 	return errors

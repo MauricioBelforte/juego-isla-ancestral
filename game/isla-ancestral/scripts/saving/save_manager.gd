@@ -215,15 +215,22 @@ func load_slot(slot: int) -> int:
 	emit_signal("slot_loaded", slot, code)
 	return code
 
-## Devuelve metadatos resumidos de un slot (para la UI), o null si no existe.
+## Devuelve metadatos resumidos de un slot (para la UI), o {} si no existe
+## o no es legible.
+##
+## BUG corregido en M59 iter. 1 (DeepSeek-V4.1-Flash): antes hacía
+## `JSON.parse_string(contenido_completo)`. El archivo NO es JSON: su primera
+## línea es el checksum SHA-256 en hex (`checksum\npayload`), así que el parseo
+## fallaba siempre y esta función devolvía {} para CUALQUIER slot. Ahora usa
+## SaveWriter.parse_document(), que valida el checksum y extrae el payload.
 func slot_metadata(slot: int) -> Dictionary:
 	if not SaveWriter.save_exists(slot):
 		return {}
-	var path := SaveWriter.path_for(slot)
-	var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-	if typeof(doc) != TYPE_DICTIONARY:
+	var content: String = FileAccess.get_file_as_string(SaveWriter.path_for(slot))
+	var doc: Dictionary = SaveWriter.parse_document(content)
+	if not doc.get("ok", false):
 		return {}
-	var payload: Variant = doc.get("payload", {})
+	var payload: Variant = doc.get("payload", null)
 	if typeof(payload) != TYPE_DICTIONARY:
 		return {}
 	var time_dict: Dictionary = payload.get("time", {})
