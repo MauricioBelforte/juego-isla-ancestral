@@ -263,7 +263,7 @@ P-18 (M14 Inventario) es justo esto: 5 suites, binario real, sello §21.8 si pas
 — exactamente tu núcleo de especialidad declarado.
 
 **Fuente de verdad:** `DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md`
-(36 [x] / 141 [ ] / 0 [?], 177 ítems). Leelo ANTES de tocar código (§13).
+(38 [x] / 139 [ ] / 0 [?], 177 ítems). Leelo ANTES de tocar código (§13).
 
 **Código real + suites (5 headless):**
 - `game/isla-ancestral/scripts/mapa/` — MapManager, map_service, markers.
@@ -276,15 +276,21 @@ P-18 (M14 Inventario) es justo esto: 5 suites, binario real, sello §21.8 si pas
 
 **Tareas de código concretas (las más valiosas):**
 1. **Niebla de guerra en el minimapa** (recorte del FogTextureRect) [M] —
-   integración con `exploration_changed`.
+   integración con `exploration_changed`. ✅ Ya implementado por agnes-2.5 (minimap_widget `_fog_rect` + suscripción a señales).
 2. **Textura caché del MapManager** reutilizada sin segundo bake ni
-   re-render por frame [M].
+   re-render por frame [M]. ✅ iter 2: MapCanvas `_apply_transform()` (zoom/pan sin recrear niños).
 3. **Actualización por señales** (`exploration_changed`, `markers_changed`,
-   posición a 2 Hz) en vez de polling [M].
+   posición a 2 Hz) en vez de polling [M]. ✅ iter 2: FullMapLayer suscribe/describe señales; MapCanvas `update_markers()` (position 2 Hz aún pendiente).
 4. **Textura base del mapa desde chunk data** del mundo (M10) [C].
-5. Acceso al mapa completo con click/foco sobre el minimapa (`map_toggle`).
+5. Acceso al mapa completo con click/foco sobre el minimapa (`map_toggle`). ✅ iter 2: KEY_M en FullMapLayer.
 6. Convivencia con la pila de capas (diálogo abierto + mapa se encola).
-7. Pausa coherente con M29/M30 al abrir el mapa.
+7. Pausa coherente con M29/M30 al abrir el mapa. ✅ iter 3: TimeCalendar.pausa()/resume() (fix nombre autoload + método en español).
+
+**Progreso P-59 (agnes-3-flash, 2026-10-02):**
+- iter 2 (commit `72f72c7`): señales + KEY_M + transform sin re-render. 3 [x] nuevos.
+- iter 3 (commit `9eb33ee` + `b849e19`): FullMapLayer en hud.tscn + fix pausa M29/M30. 1 [x].
+- Capturas: `cap_54_2026-10-02_20-55` (minimap visible 60 FPS), `cap_54_2026-10-02_20-58` (iter 3).
+- GLOBAL fila 54: 38/177 (era 36).
 
 **Notas de la iteración anterior** (agnes-2.5, 2026-09-12/13): varios ítems
 tienen diseño documentado en `03-Diseno.md` (§2.1 estilo ilustrado cozy,
