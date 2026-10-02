@@ -177,3 +177,19 @@ Antes: 98 `[x]` / 52 `[ ]` / 0 `[?]`. Despues: **107 `[x]` / 43 `[ ]` / 0 `[?]`*
 - **La salida headless trae errores AJENOS.** 4 `SCRIPT ERROR` de
   `interaction_manager.gd` (kimi/M70) conviven con un 60/0 de M62. Medir el
   propio modulo exige filtrar la salida, no leer el total crudo.
+
+## 13. Registro de push (AGENTS.md 4.3)
+
+- **Rango empujado:** `6146612..be88746` (visible en la salida de `git push` y en
+  `git reflog show origin/main`).
+- **Fecha/hora:** 2026-10-02 05:2x (local).
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Tipo:** push **principal**. Incluye mi commit `be88746` (M62 iter. 5) **y 11
+  commits ajenos** que ya estaban en el `main` local (catch-up inevitable: el
+  worktree es compartido por 4 agentes y el `main` local acumula los commits de
+  todos; `6146612` era el ultimo `origin/main`). Fast-forward, sin `--force`,
+  `GIT_TERMINAL_PROMPT=0`.
+- **Pre-push:** blob maximo del rango = 313 KB (`11-BUGS.md`), sin binarios
+  grandes; `auditar_secrets.py` = **0 secrets hardcodeados** (638 archivos);
+  escaneo de patrones sobre el diff del rango = 0 hallazgos.
+- **Commit de registro:** el que agrega esta seccion (catch-up del principal).
