@@ -335,3 +335,70 @@ Produjo 205 reemplazos con rutas inventadas. Se detectó por guardas
 `Localization` → `res://scripts/localization/localization_manager.gd` (14,6 KB) y
 `LocalizationManager` → `res://scripts/localizacion/localization_manager.gd` (2,7 KB).
 Conocido como H-1. Requiere dueño de módulo; no mergear de paso.
+
+---
+
+## B4 — BOM en CI: CERRADO (commit `a0dd230`)
+
+Job **`encoding-guard`** en `.github/workflows/quality.yml`: python 3.12 +
+`scripts/verificar_bom.py` (sale con 1 si hay BOM). Agregado a `needs` del
+`summary` y a la condición de fallo. Segundo paso informativo
+(`continue-on-error`): `diagnosticar_mojibake.py` — no bloquea a propósito.
+
+Correcciones en `scripts/verificar_bom.py` imprescindibles para que la guarda
+sea confiable:
+
+- Excluye directorios ocultos salvo `.github` → `.kilo/worktrees/phase-judge/`
+  metía **463** "BOM" que no son del repo versionado.
+- Exclusión de carpetas **case-insensitive** (conviven `Obsoletos/` y `OBSOLETOS/`).
+- Excluye `Godot/` (user:// runtime). `m87_val_bom.po` es el BOM **legítimo**:
+  es el fixture del validador `.po`.
+
+Limpieza: 9 `.gitkeep` versionados tenían BOM y nadie los veía (`.gitkeep` no
+está en la lista de extensiones). Ahora vacíos.
+
+**Verificación:** simulación sobre `git ls-files` → **0 versionados con BOM**
+→ exit 0. Quedan 4 BOM versionados, todos en
+`Obsoletos/encoding-backup-20260902_014555/` (respaldo histórico: se preserva).
+
+---
+
+## B5 — Auditoría de autoría Blender (Log 1188)
+
+Inventario de `tools/mcp/blender-mcp`: **126** `crear_*.py`, **16** módulos con
+`.blend`.
+
+| Hallazgo | Cantidad |
+|---|---|
+| Huérfanos reales (script sin asset) | **2** |
+| Duplicados | **2 pares** |
+| `.py` viviendo dentro de `game/` | **42** |
+
+**Huérfanos reales:** `50-Vegetacion/crear_hierba_alta_lowpoly.py` y
+`scripts-reutilizables/crear_jugador_voxel.py`.
+
+**Falsos positivos** (documentados para no re-auditarlos): `crear_roca_lowpoly`
+(su salida es `roca_comun`), `crear_decoracion_tienda_batch` (batch),
+`crear_cultivo_etapa_lowpoly` (parametrizado), `crear_catalogo_npcs` (catálogo).
+
+**Duplicados medidos:**
+- `crear_casa_01_choza.py` **byte-idéntico** (sha `6b02317ff9f04260`, 1157 líneas)
+  en `CASA_01_CHOZA/BAJA/` y `CASA_02_CASA_MEDIANA/BAJA/` → **reportado a MiMo**
+  (`Mensajes entre modelos/2026-10-02_17-17-31_2-HY4-M18BIS-script-duplicado.md`).
+  No se tocó: M18-BIS es de MiMo.
+- `crear_luna.py`: `NPC_SCRIPTS` (1087) vs `scripts-reutilizables` (1102).
+  Diff = 14 líneas de cabecera + 1 blanca. Código idéntico.
+
+### ⚠️ Trampa nueva (61) — un detector que da 100 % está roto
+
+El primer cruce dio **126 huérfanos de 126**. Causa: el normalizador del
+nombre del blend no quitaba el sufijo `_lowpoly`, así que
+`crear_monton_ramas_lowpoly.py` nunca podía coincidir con
+`monton_ramas_lowpoly.blend`. Corregido → 8, y de esos 8 solo 2 eran reales.
+**Regla:** si un detector marca todo, sospechar del detector antes que del repo.
+
+### Pendiente (requiere dueño o Blender MCP)
+
+- MCP de Blender caído en esta sesión → **no se generó ningún asset**.
+- Decidir destino de los 2 huérfanos y de los 42 `.py` de `game/`.
+- H-1 (localización duplicada) sigue abierto.
