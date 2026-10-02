@@ -1015,3 +1015,89 @@ al futuro: hay que moverla en cada lote.
 - Los 66 ítems que quedan son en su mayoría **bloqueos reales** (hardware,
   assets, otros módulos). Marcar cualquiera de ellos exige resolver ese
   bloqueo primero.
+
+---
+
+## Notas del Agente — Iteración 6 (Lote 6: contraste de Especificación)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial — checklist **173 → 187 `[x]`**, **52 `[ ]`**, **0 `[?]`**,
+total 239.
+
+### Qué se hizo
+
+Este lote **no tocó código**: fue la revisión que la iteración 4 había
+asignado a la sección "Especificación de configuración de audio"
+(*"revisar/contrastar con `01-Requerimientos`"*).
+
+La sección `### [S] Especificación de configuración de audio` son ítems
+**rollup**: uno por categoría, mapeados **1:1 con RF1–RF15** de
+`01-Requerimientos.md`:
+
+| Ítem | RF | Verificación |
+|---|---|---|
+| L9 Volumen maestro | RF1 | ya `[x]` |
+| L10–L15 Música/Efectos/Ambiente/Voces/UI/Cinemáticas | RF2–RF7 | bus + default + `set_volumen_porcentaje` → `test_audio_config` (103/0) |
+| L16 Audio 3D | RF8 | ya `[x]` |
+| L17 Subtítulos | RF9 | toggle + tamaño + opacidad + fondo + color → `test_subtitles_m91` (80/0) |
+| L18 Sonidos de interfaz | RF10 | **sigue `[ ]`** — 0 assets de audio |
+| L19 Rango dinámico | RF11 | pide selector (quieto/medio/dinámico) → `DynamicRangeManager.RANGOS=["quiet","medio","dinamico"]` + `PRESETS` + `aplicar_rango()`/`rango_actual()` |
+| L20 Compresión | RF12 | pide toggle → `CompressionManager.activar()/desactivar()/esta_activa()` |
+| L21 Dispositivo de salida | RF13 | pide selector → `CATEGORIAS_LISTA=["predeterminado","auriculares","altavoces","HDMI","Bluetooth"]` + `seleccionar_dispositivo()` |
+| L22–L23 Pruebas | RF14–RF15 | **siguen `[ ]`** — requieren hardware |
+
+Cada verificación se hizo **leyendo el código real**, no suponiendo:
+`RANGOS`, `CATEGORIAS_LISTA`, `activar()/desactivar()` etc. se comprobaron
+en los tres managers antes de marcar nada.
+
+### Los 14 ítems marcados
+
+**Especificación (10):** L10, L11, L12, L13, L14, L15, L17, L19, L20, L21.
+
+**Subtítulos (1):**
+- **L102** `Definir color de texto (selector)` → `set_text_color()` /
+  `get_text_color()` implementados **y testeados**
+  (`_test_defaults` default `Color(1,1,1,1)` + `_test_fondo` round-trip).
+  El *selector* de color es UI de M53, igual que en L101.
+
+**Sueltos (3)** — aquí **corrijo mi propia clasificación de la iteración 4**,
+donde los puse como pendientes sin haberlos leído:
+
+| Ítem | Qué hay realmente |
+|---|---|
+| L216 `apply_settings()` | esqueleto con cuerpo en `04-Codigo.md` §12; equivalente real `AudioConfig._aplicar_todo()` |
+| L277 `load_settings()` | esqueleto en §13 (`AudioSettingsLoader`); real `_cargar_config()` vía M60 |
+| L285 `save_settings()` | esqueleto en §14 (`AudioSettingsSaver`); real `_guardar_config()` vía M60 |
+
+Se marcaron `[x]` porque el ítem dice **"Diseñar"** y el diseño existe, con
+**evidencia transparente** que dice qué es esqueleto y qué es implementación
+real. Sus hermanos de sección (L214, L215, L276, L278, L286, L287) ya estaban
+`[x]` con los mismos esqueletos: dejar estos tres `[ ]` habría sido
+inconsistente. **L288** (trigger al cerrar settings) **sí sigue `[ ]`**:
+no tiene esqueleto, es un evento de la UI de M53.
+
+### Reparto de los 52 `[ ]` restantes
+
+| # | Grupo | Motivo |
+|---:|---|---|
+| 12 | Menú (L198-211) | **dueño M53** |
+| 10 | Sonidos de interfaz (6) + UISoundManager (4) | **bloqueado**: 0 `.wav`/`.ogg`/`.mp3` en el proyecto |
+| 9 | Pruebas con auriculares (4) / altavoces (5) | **hardware del usuario** |
+| 6 | Audio 3D (L88-95) | subsistema propio sin diseñar |
+| 3 | AudioTestManager (L271-273) | depende de ese manager (no creado) |
+| 3 | Pruebas de calidad (L303/305/307) | balance / espacial 3D / dispositivo |
+| 3 | Especificación (L18, L22, L23) | los 3 bloqueos de arriba, en rollup |
+| 2 | M87 (L179, L181) | 6 idiomas (solo hay es/en/pt) y localización de nombres de dispositivo |
+| 2 | Guardado (L288) + M58 (L171) | evento de M53 / M58 |
+| 2 | Subtítulos (L107) + M58 | M58 |
+
+### Recomendaciones para el próximo agente
+
+- **No quedan lotes de bajo riesgo**: los 52 restantes son bloqueos reales
+  (hardware, assets, otros módulos). El siguiente avance viene **desde M53**
+  cableando sliders a una API ya probada, o del usuario aportando assets de
+  audio.
+- El único pendiente técnico propio es **H-1**: `tools/ci/run_tests.py`
+  no descubre `test_audio_config.gd` (dueño: módulo de CI, no M91).

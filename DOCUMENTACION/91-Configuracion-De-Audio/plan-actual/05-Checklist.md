@@ -7,18 +7,18 @@
 
 ### [S] Especificación de configuración de audio
 - [x] Volumen maestro — glm-5.3-flash 2026-09-01: núcleo implementado (buses + set/get + persistencia M60), UI M53 con dueño
-- [ ] Música
-- [ ] Efectos
-- [ ] Ambiente
-- [ ] Voces
-- [ ] UI
-- [ ] Cinemáticas
+- [x] Música — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF2: bus Music, default 70%, slider 0-100% via set_volumen_porcentaje("Music", p) - testeado en test_audio_config _test_volumenes_default + _test_aplicacion_y_control_por_bus (103 checks, 0 fallos)
+- [x] Efectos — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF3: bus SFX, default 80%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
+- [x] Ambiente — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF4: bus Ambient, default 60%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
+- [x] Voces — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF5: bus Voice, default 90%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
+- [x] UI — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF6: bus UI, default 50%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
+- [x] Cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF7: bus Cinematic, default 80%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
 - [x] Audio 3D
-- [ ] Subtítulos
+- [x] Subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF9: toggle + tamano 0.5x-2x + opacidad 0.2-1.0 + fondo toggle/color + color de texto - todos implementados y testeados en test_subtitles_m91 (80 checks, 0 fallos)
 - [ ] Sonidos de interfaz
-- [ ] Rango dinámico
-- [ ] Compresión
-- [ ] Dispositivo de salida
+- [x] Rango dinámico — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF11 pide selector (quieto/medio/dinamico) - DynamicRangeManager.RANGOS=["quiet","medio","dinamico"] + PRESETS + aplicar_rango()/rango_actual(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
+- [x] Compresión — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF12 pide toggle que limite picos - CompressionManager activar()/desactivar()/esta_activa() sobre threshold_db/ceiling_db/soft_clip; testeado en test_audio_effects_m91 (82 checks, 0 fallos)
+- [x] Dispositivo de salida — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF13 pide selector (predeterminado/auriculares/altavoces) - OutputDeviceManager.CATEGORIAS_LISTA=["predeterminado","auriculares","altavoces","HDMI","Bluetooth"] + seleccionar_dispositivo() + dispositivos_reales(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
 - [ ] Pruebas con auriculares
 - [ ] Pruebas con altavoces
 
@@ -99,7 +99,7 @@
 - [x] Definir tamaño de subtítulos (slider 0.5x a 2x) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_subtitle_size() clamado [TAMANO_MIN=0.5, TAMANO_MAX=2.0], font_size=round(16*tamano); testeado 0.5/1.0/1.5/2.0
 - [x] Definir opacidad de subtítulos (slider 0.2 a 1.0) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_subtitle_opacity() clamado [OPACIDAD_MIN=0.2, OPACIDAD_MAX=1.0]; testeado 0.2/0.5/0.9/1.0
 - [x] Definir fondo de subtítulos (toggle + color) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_background_visible()/set_background_color() aplicados via StyleBoxFlat; apagar el fondo NO oculta el texto (testeado)
-- [ ] Definir color de texto (selector)
+- [x] Definir color de texto (selector) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_text_color()/get_text_color() implementados y TESTEADOS (test_subtitles_m91 _test_defaults default Color(1,1,1,1) + _test_fondo round-trip); el selector de color en la UI es de M53 (mismo caso que L101)
 - [x] Definir sincronización con audio
 - [x] Definir RichTextLabel para subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): RichTextLabel montado POR CODIGO en _crear_ui() dentro de PanelContainer+CanvasLayer(layer 90); sin .tscn (9.47)
 - [x] Definir SubtitleManager para mostrar subtítulos
@@ -213,7 +213,7 @@
 ### [S] Configuración de settings
 - [x] Diseñar AudioSettings (Resource)
 - [x] Diseñar campos: master_volume, music_volume, sfx_volume, ambient_volume, voice_volume, ui_volume, cinematic_volume, audio_3d, subtitles, subtitle_size, subtitle_opacity, subtitle_background, subtitle_color, ui_sounds, dynamic_range, compression, output_device
-- [ ] Diseñar método apply_settings()
+- [x] Diseñar método apply_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func apply_settings() en 04-Codigo 12 (aplica los 7 buses + DynamicRangeManager); implementacion real equivalente -> AudioConfig._aplicar_todo() en audio_config_service.gd
 
 ### [S] Buses de audio
 - [x] Diseñar AudioBusSetup
@@ -274,7 +274,7 @@
 
 ### [S] Carga de configuración
 - [x] Diseñar AudioSettingsLoader
-- [ ] Diseñar método load_settings()
+- [x] Diseñar método load_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func load_settings() en 04-Codigo 13 (AudioSettingsLoader); implementacion real equivalente -> AudioConfig._cargar_config() via M60 (persistencia verificada en test_audio_config _test_persistencia_m60)
 - [x] Diseñar carga desde user://settings/audio_settings.json
 - [x] Diseñar parseo de JSON
 - [x] Diseñar aplicación de configuración al inicio
@@ -282,7 +282,7 @@
 
 ### [S] Guardado de configuración
 - [x] Diseñar AudioSettingsSaver
-- [ ] Diseñar método save_settings()
+- [x] Diseñar método save_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func save_settings() en 04-Codigo 14 (AudioSettingsSaver); implementacion real equivalente -> AudioConfig._guardar_config() via M60 (get_save_data/restore_save_data)
 - [x] Diseñar guardado en user://settings/audio_settings.json
 - [x] Diseñar serialización de settings a JSON
 - [ ] Diseñar trigger de guardado al cerrar settings
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 173 · Pendientes: 66 · No resueltos: 0.
+**Totales:** 239 ítems · Completados: 187 · Pendientes: 52 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].
