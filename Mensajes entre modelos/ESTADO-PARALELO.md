@@ -3204,3 +3204,45 @@ Mis fixes quedaron dentro del commit `8a42459` de agnes por la carrera del índi
 (documentado en el log).
 
 **Pool de logs:** 1200 consumido por este log; cabeza **1201**.
+
+
+## M59-Guardado — iter. 2 (DeepSeek-V4.1-Flash, 2026-10-02 20:32, Log 1202)
+
+**BUG CRÍTICO #4 hallado y corregido:** `SaveManager.request_save()` —el camino normal
+(auto-save por día/misión/evento, timer, UI M53)— **no dejaba NINGÚN save cargable**.
+Medido: tras `request_save(slot)` el slot quedaba sin `slot_N.save` (solo `.bak`) y
+`load_slot()` devolvía `NOT_FOUND` (1). Causa: `rotate()` corría DESPUÉS de
+`write_atomic()`, que renombra `.tmp → .save` reemplazando el save anterior; `rotate()`
+movía entonces ESE save recién escrito a `.bak`. **Las 2 suites heredadas estaban verdes
+porque llamaban a `write_atomic()` directo, nunca a `request_save()`** (falso verde por
+omisión de cobertura, trampa 119). Fix: rotar ANTES de escribir.
+
+Otras 4 correcciones: (2) `save_loader` recupera el `.bak` cuando falta el `.save`
+(corte entre rotación y rename → antes `NOT_FOUND`, el progreso era inalcanzable);
+(3) `_try_recover()` normaliza/valida y rechaza `FUTURE_VERSION` (antes un backup de
+versión futura se cargaba como `RECOVERED`, degradando un save más nuevo);
+(4) `slot_metadata().day` leía `time.day` (clave del schema) mientras el proveedor de
+tiempo M29 persiste `dia` → salía SIEMPRE 0; (5) el manager sella `meta.last_saved`
+(ningún proveedor emite `meta` → salía SIEMPRE "").
+
+**Suite nueva `test_rotate_m59.gd`: 28 checks / 7 bloques. 6/6 sondas en rojo**
+(incluida la del piso `CHECKS_MINIMOS`: quitar un bloque → 23 checks, **0 fallos**, EXIT 1).
+Las 3 suites = **66 checks, 0 fallos, EXIT 0 ×3, 0 SCRIPT ERROR**. Gate añadido a
+`quality.yml` (`|| FAIL=1`; CRLF 824 → 834). Checklist M59 **60 [x] / 69 [ ] / 1 [?]**.
+
+**DEUDA REPORTADA (no arreglada aquí):** el schema y los proveedores hablan dialectos
+distintos (`time`: `day/season/hour/minute` vs `dia/mes/anio/hora/minuto`; `inventory`:
+`items/equipment/hotbar` vs índices `"0".."5"`; `economy`: `coins/shops` vs
+`saldo/precios/historial/reputacion`). `SaveSchema.validate()` es prácticamente vacua
+contra saves reales. **Reconciliar es de los dueños de M14/M29/M38.**
+
+**Corrección de honestidad:** el ítem I ("Guardar posición del jugador, zona y punto de
+spawn") afirmaba "guarda/restaura spawn_position (probado)". MEDIDO con un nodo Player
+inyectado: `spawn_position == position` (es una copia, no un punto de spawn) y
+`restore_save_data()` **no** restaura `spawn_position`/`zone`/`name` (el nodo Player no
+expone esas propiedades). Se mantiene `[x]` (el ítem pide GUARDAR y los 4 campos se
+escriben) pero la nota quedó corregida. El ítem T ("ciclo jugar → auto-save → cargar")
+era **falso** mientras el bug estaba vivo; ahora es real y medido.
+
+**NO sello §21.8** (autor ≠ verificador). Fila 59 de `CHECKLIST-GLOBAL.md` y el pool
+**NO tocados** (tarea del coordinador). Log 1202 consumido del pool; cabeza **1203**.

@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 59: Guardado (130 ítems)
 
-**Estado:** 58/130 completados (núcleo ox-alpha 27 + iter. glm-5.3-flash: dirty tracking EventBus M07, auto-save día/misión/cierre, bloqueo en diálogo, provider "player" + **iter. 1 DeepSeek-V4.1-Flash: 3 bugs reales corregidos** — todo save válido era incargable, `slot_metadata()` devolvía vacío y la versión futura no avisaba; ver 04-Codigo.md y Log 1197). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 60/130 completados (núcleo ox-alpha 27 + iter. glm-5.3-flash: dirty tracking EventBus M07, auto-save día/misión/cierre, bloqueo en diálogo, provider "player" + **iter. 1 DeepSeek-V4.1-Flash: 3 bugs reales corregidos** — todo save válido era incargable, `slot_metadata()` devolvía vacío y la versión futura no avisaba; ver 04-Codigo.md y Log 1197 + **iter. 2 DeepSeek-V4.1-Flash: BUG CRITICO de rotacion** — `request_save()` no dejaba NINGUN save cargable (rotate() corria despues de write_atomic() y movia el save recien escrito a .bak) + el camino de backup no recuperaba sin `.save`, + `slot_metadata()` leia la clave equivocada (dia SIEMPRE 0); ver 04-Codigo.md y Log 1202). [S]=Simple [M]=Medio [C]=Complejo.
 
 > **Reserva actual (LIBERADA 🟡)**
 > **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 21:45 · **Estado:** 🟡 Liberado (iter. auto-save/dirty/providers, Log 368)
@@ -11,9 +11,9 @@
 > **Archivos afectados:** `scripts/saving/save_manager.gd` (aditivo + fix de señal faltante), `scripts/saving/save_snapshot.gd` (fix bug latente Node-providers), `scripts/saving/player_save_provider.gd` (nuevo), `scripts/saving/test_autosave_m59.gd` (nuevo)
 
 > **Reserva actual (EN CURSO 🔵) — relevo §21.4.7**
-> **Agente:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02 20:04 · **Estado:** 🔵 En curso (iter. 1, Log 1197)
-> **Entrada:** núcleo ox-alpha ✅ + EventBus M07 ✅ + M14 ✅ (los bloqueos que glm documentó ya no existen) · **Salida:** 3 bugs reales corregidos (carga imposible de todo save válido, `slot_metadata()` vacío, versión futura sin aviso) + suite nueva `test_slots_m59.gd` (22 checks) + `validate_save.gd` 13→16 checks como gate DURO + medición del presupuesto de frame
-> **Archivos afectados:** `scripts/saving/save_schema.gd` (`_es_entero()`: validate tolera números JSON), `scripts/saving/save_loader.gd` (normaliza `schema_version` + aviso explícito de FUTURE_VERSION), `scripts/saving/save_manager.gd` (`slot_metadata()` corregido), `scripts/saving/validate_save.gd` (cierra la ceguera del camino feliz), `scripts/saving/test_slots_m59.gd` (nuevo), `.github/workflows/quality.yml` (los 2 gates de M59 pasan de `|| true`/ausente a `|| FAIL=1`)
+> **Agente:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02 20:32 · **Estado:** 🔵 En curso (iter. 2, Log 1202; iter. 1 en Log 1197)
+> **Entrada:** núcleo ox-alpha ✅ + EventBus M07 ✅ + M14 ✅ (los bloqueos que glm documentó ya no existen) · **Salida:** iter. 1 = 3 bugs reales (carga imposible de todo save válido, `slot_metadata()` vacío, versión futura sin aviso) + `test_slots_m59.gd` (22 checks) + `validate_save.gd` 13→16. iter. 2 = **BUG CRITICO de rotacion** (`request_save()` no dejaba `.save` cargable) + recuperacion de backup sin `.save` + `_try_recover` estricto + `slot_metadata()` lee `dia` + manager sella `meta.last_saved` + `test_rotate_m59.gd` (28 checks) como gate DURO
+> **Archivos afectados:** `scripts/saving/save_schema.gd` (`_es_entero()`), `scripts/saving/save_loader.gd` (normaliza `schema_version` + FUTURE_VERSION; iter. 2: recupera backup sin `.save` + `_try_recover` estricto), `scripts/saving/save_manager.gd` (`slot_metadata()`; iter. 2: rotate ANTES de write + `dia` + `meta.last_saved` + helper `_payload_para_slot()`), `scripts/saving/validate_save.gd`, `scripts/saving/test_slots_m59.gd`, `scripts/saving/test_rotate_m59.gd` (nuevo, 28 checks), `.github/workflows/quality.yml` (3 gates DUROS con `|| FAIL=1`)
 ## A. SaveManager (autoload)
 
 - [x] Definir SaveManager como autoload único de guardado [M]
@@ -41,7 +41,7 @@
 ## D. Múltiples Slots
 
 - [ ] Definir 3+ slots con UI de selección en el menú principal [M]
-- [x] Mostrar metadatos por slot (hora, día, progreso) [M] — *`slot_metadata()` CORREGIDO (iter. 1, Log 1197): parseaba el archivo entero —checksum hex incluido— como JSON, así que devolvía `{}` para cualquier slot. Ahora usa `SaveWriter.parse_document()` (valida checksum). Probado en `test_slots_m59.gd` bloques 1-2, con sonda roja. La UI de selección (M53) queda pendiente; el campo "progreso" requiere una definición de M71*
+- [x] Mostrar metadatos por slot (hora, día, progreso) [M] — *`slot_metadata()` CORREGIDO (iter. 1, Log 1197): parseaba el archivo entero —checksum hex incluido— como JSON, así que devolvía `{}` para cualquier slot. Ahora usa `SaveWriter.parse_document()` (valida checksum). Probado en `test_slots_m59.gd` bloques 1-2, con sonda roja. La UI de selección (M53) queda pendiente; el campo "progreso" requiere una definición de M71. **iter. 2 (Log 1202):** el `day` salia SIEMPRE 0 porque `slot_metadata()` leia `time.day` (clave del schema) mientras el proveedor de tiempo (M29) persiste `dia`; corregido para leer el dialecto real y caer a `day`. Ademas el manager ahora sella `meta.last_saved` (antes salia siempre vacio: ningun proveedor emite `meta`)*
 - [ ] Borrar y sobrescribir slot con confirmación [S]
 - [ ] Id de perfil en el archivo, validado al cargar (sin cruzamiento) [M]
 - [ ] Probar 3 perfiles sin mezcla y cambio de slot en plena sesión [C]
@@ -51,7 +51,7 @@
 - [x] Escribir a `.tmp` y renombrar a `.save` (regla dura) [C]
 - [x] Limpiar `.tmp` huérfanos al arrancar [M]
 - [x] Verificar integridad del `.tmp` (checksum) antes del rename [C]
-- [ ] Probar apagado (kill) durante escritura y en el rename [C]
+- [x] Probar apagado (kill) durante escritura y en el rename [C] — *iter. 2 (Log 1202): SIMULADO reproduciendo el estado en disco que deja el corte (no es un SIGKILL real, no simulable headless). (a) corte durante la ESCRITURA -> `.tmp` huerfano + `.save` anterior intacto: la carga sigue OK y `cleanup_orphan_tmp()` lo borra al arrancar (`test_rotate_m59.gd` bloque 7). (b) corte entre la rotacion y el rename -> `.save` ausente + `.bak` presente: `load_slot()` RECUPERA el backup (bloque 3)*
 - [ ] Probar en Windows/macOS/Linux (rename atómico varía por SO) [C]
 
 ## F. Checksum y Validación
@@ -83,7 +83,7 @@
 - [ ] Guardar islas, POI, exploración y niebla (M54) [M]
 - [ ] Guardar estado de ruinas (M25) y templos (M26) [M]
 - [ ] Guardar modificaciones del mundo (tala M50, minado M35) [M]
-- [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider guarda/restaura posición y spawn_position (probado); "zone" queda "" hasta que exista sistema de zonas (M09/M54)*
+- [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider escribe los 4 campos. **iter. 2 (Log 1202) MEDIDO con un nodo Player inyectado:** `get_save_data()` devuelve `{name, position, spawn_position, zone}` con `spawn_position == position` (NO es un punto de spawn real: es una copia) y `restore_save_data()` restaura `position` CORRECTAMENTE pero NO restaura `spawn_position`, `zone` ni `name` (el nodo Player no expone esas propiedades; verificado con `"x" in p`). Se mantiene `[x]` porque el item pide GUARDAR y los 4 campos se escriben; la parte de spawn/zona depende de un sistema inexistente (M09/M54) y no tiene consumidor en runtime*
 - [ ] Testear carga del mundo sin duplicar objetos [C]
 
 ## J. Guardado del Inventario (M14/M15/M16)
@@ -144,7 +144,7 @@
 
 ## Q. Robusteza (Apagado, Espacio, Perfiles)
 
-- [ ] Probar apagado a mitad de guardado y al iniciar la carga [C]
+- [x] Probar apagado a mitad de guardado y al iniciar la carga [C] — *iter. 2 (Log 1202): SIMULADO (estado en disco, no SIGKILL real). Corte a mitad de guardado -> `.save` anterior intacto o recuperable desde `.bak` (bloques 3 y 7 de `test_rotate_m59.gd`); al iniciar la carga, `SaveManager._process_init_cleanup()` limpia los `.tmp` huerfanos de los 3 slots (`cleanup_orphan_tmp`)*
 - [x] Probar falta de espacio: aviso claro y save anterior intacto [C]
 - [ ] Probar múltiples perfiles sin cruzamiento [C]
 - [ ] Probar archivos con permisos de solo lectura [M]
@@ -169,7 +169,7 @@
 ## T. Validación y QA
 
 - [x] Crear validate_save.gd (atómico, checksum, migración, perfiles) [C]
-- [x] Probar ciclo: jugar → auto-save → apagar → cargar → continuar [C]
+- [x] Probar ciclo: jugar → auto-save → apagar → cargar → continuar [C] — *iter. 2 (Log 1202): este `[x]` era FALSO mientras el bug critico estaba vivo — el auto-save (`request_save`) no dejaba `.save`, asi que el ciclo no podia cerrar. Con FIX 1 el ciclo es real y esta medido (`test_rotate_m59.gd` bloques 1, 2 y 6)*
 - [x] Probar ciclo de corrupción: corromper → detectar → recuperar [C]
 - [x] Probar ciclo de migración: save viejo → migrar → jugar [C] — *no aplica en v1 (sin versiones previas)*
 - [x] Probar ciclo de slots: guardar en 3 → cargar cada uno [C]
@@ -221,7 +221,7 @@
 - [ ] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
 - [ ] Revisar que plan-inicial == plan-actual (SHA-256) [S]
 - [ ] Confirmar 130 ítems exactos [S]
-**Totales:** 130 ítems · Completados: 58 · Pendientes: 71 · No resueltos: 1.
+**Totales:** 130 ítems · Completados: 60 · Pendientes: 69 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].
@@ -271,3 +271,33 @@
 - **Nunca afirmar que "el camino feliz funciona" sin una aserción explícita de `LoadResult.OK`.** El bug #1 vivió detrás de una suite verde.
 - Al agregar campos numéricos al schema, recordar que **JSON los devuelve como float**: validar con `_es_entero()`, no con `typeof == TYPE_INT`.
 - `slot_metadata()` es el backend de la UI de slots (M53): usar esa API, no re-parsear el archivo a mano.
+---
+
+## Notas del Agente — Iteración 2: rotación de backups, carga interrumpida y dialecto schema↔proveedores
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-02 20:32
+**Estado:** Parcial (1 bug crítico + 4 correcciones, todas con sonda en rojo; módulo 🔵 En curso, Log 1202)
+
+### BUG CRÍTICO #4 — `request_save()` no dejaba NINGÚN save cargable
+- **Síntoma medido:** tras `SaveManager.request_save(slot, ...)` el slot quedaba SIN `slot_N.save` (solo `slot_N_r1.bak`) y `load_slot()` devolvía `NOT_FOUND` (1). Es decir: el auto-save (día/misión/evento), el timer y la UI de guardado NUNCA producían un save cargable.
+- **Causa raíz:** `_process_queue()` hacía `write_atomic()` y DESPUÉS `rotate()`. `write_atomic()` renombra `.tmp → .save` REEMPLAZANDO el save anterior; luego `rotate()` movía ESE save recién escrito a `.bak`.
+- **Por qué nadie lo vio:** las suites heredadas llamaban a `write_atomic()` DIRECTO, nunca a `request_save()`; `validate_save.gd` incluso codifica el orden correcto a mano en `_test_backup_recovery()`.
+- **Fix:** rotar el save ANTERIOR a `.bak` ANTES de escribir el nuevo. Probado en rojo (revertir el orden → 8 fallos, EXIT 1).
+- **Corolario de proceso:** una suite puede estar verde y el camino real roto por OMISIÓN de cobertura (trampa 119). Ahora hay una suite dedicada al camino real.
+
+### Otras 4 correcciones
+- **Recuperación sin `.save`** (`save_loader.gd`): si falta el `.save` pero hay `.bak`, se recupera en vez de devolver `NOT_FOUND` (antes el progreso era inalcanzable aunque estuviera en disco).
+- **`_try_recover()` estricto**: normaliza `schema_version`, valida estructura y rechaza FUTURE_VERSION — antes un backup de versión futura se cargaba como `RECOVERED` (degradaba un save más nuevo).
+- **`slot_metadata().day`**: leía `time.day`, pero el proveedor de tiempo (M29) persiste `dia` → salía SIEMPRE 0. Ahora lee el dialecto real.
+- **`meta.last_saved`**: ningún proveedor emite `meta`, así que salía SIEMPRE ""; ahora lo sella el manager.
+
+### HALLAZGO DE DEUDA (reportado, NO arreglado aquí)
+El schema y los proveedores hablan dialectos distintos: `time` (schema `day/season/hour/minute` vs proveedor `dia/mes/anio/hora/minuto`), `inventory` (`items/equipment/hotbar` vs índices `"0".."5"`), `economy` (`coins/shops` vs `saldo/precios/historial/reputacion`). `collect()` REEMPLAZA cada sección entera, así que `SaveSchema.validate()` es prácticamente vacua contra los saves reales. Reconciliar el dialecto es de los dueños de M14/M29/M38.
+
+### Recomendaciones para el próximo agente
+- **Correr SIEMPRE las TRES suites**: `validate_save.gd` (16), `test_slots_m59.gd` (22) y `test_rotate_m59.gd` (28). Las tres son gate duro en `quality.yml`.
+- **Nunca asumir que una suite verde cubre el camino real**: si el código de producción entra por `SaveManager.request_save()`, la suite DEBE llamar a `request_save()`, no a `write_atomic()`.
+- Al leer metadatos, recordar que el dialecto del proveedor NO es el del schema.
+- Pendiente iter. 3: merge de defaults al cargar (item H "campos nuevos/faltantes").

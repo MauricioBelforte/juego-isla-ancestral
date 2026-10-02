@@ -263,3 +263,34 @@ Detalle en `05-Checklist.md` (ítem marcado `[?]`, dueño M61). Resumen: `write_
 - **Nunca afirmar que "el camino feliz funciona" sin una aserción explícita de `LoadResult.OK`.**
 - Campos numéricos del schema: validar con `_es_entero()`, nunca con `typeof == TYPE_INT` (JSON los devuelve float).
 - `slot_metadata()` es el backend de la UI de slots (M53): usar esa API, no re-parsear el archivo a mano.
+
+---
+
+## Notas del Agente — Iteración 2: rotación, carga interrumpida y dialecto (DeepSeek-V4.1-Flash, 2026-10-02)
+
+### Flujo de guardado CORREGIDO (`SaveManager._process_queue`)
+
+El orden de escritura es una **regla dura** del módulo. Desde iter. 2:
+
+1. `SaveBackup.rotate(slot)` — el save ANTERIOR pasa a `slot_N_r1.bak` (y `_r1` → `_r2`).
+2. `SaveWriter.write_atomic(slot, payload)` — `.tmp` → `.save` (rename atómico).
+
+**Por qué el orden importa (bug crítico de iter. 2):** `write_atomic()` renombra `.tmp → .save` con semántica de REEMPLAZO, así que si `rotate()` corre DESPUÉS, mueve el save **recién escrito** a `.bak` y el slot queda SIN `.save` → `load_slot()` = `NOT_FOUND`. `request_save()` (auto-save, timer, UI) nunca dejaba un save cargable. Las suites heredadas no lo veían porque llamaban a `write_atomic()` directo.
+
+### Carga (`SaveLoader.load`)
+
+- Si el `.save` **no existe** pero hay `.bak`, se recupera (`RECOVERED`) en vez de devolver `NOT_FOUND`: cubre el corte entre la rotación y la escritura.
+- `_try_recover()` es tan estricto como el camino principal: normaliza `schema_version`, valida estructura (`SaveSchema.validate`) y **rechaza `FUTURE_VERSION`** (antes un backup de versión futura se cargaba como `RECOVERED` y degradaba un save más nuevo).
+
+### Metadatos (`SaveManager.slot_metadata` + `meta.last_saved`)
+
+- `slot_metadata().day` lee el **dialecto real** del proveedor de tiempo (`dia`) y cae a `day`. Antes leía solo `day` (clave del schema) que NO existe en disco → devolvía SIEMPRE 0.
+- El manager sella `meta.last_saved` en `_payload_para_slot(slot)` (usado por la cola y por el guardado de cierre). Ningún proveedor emite `meta`, así que antes salía SIEMPRE vacío.
+
+### Deuda de integración: dialecto schema ↔ proveedores
+
+`collect()` hace `payload[seccion] = data` y **reemplaza la sección entera**. Los proveedores reales NO usan las claves del schema: `time` usa `dia/mes/anio/hora/minuto`, `inventory` usa índices `"0".."5"`, `economy` usa `saldo/precios/historial/reputacion`. Consecuencia: `SaveSchema.validate()` es prácticamente vacua contra saves reales. **Reconciliar el dialecto es de los dueños de M14/M29/M38**; M59 mitiga lo suyo leyendo el dialecto real y sellando su propia sección `meta`.
+
+### Suite nueva
+
+`scripts/saving/test_rotate_m59.gd` (28 checks, 7 bloques) cubre el **camino real** (`request_save`) y la rotación. Guardia de 3 capas: `_fin(clave)` por bloque, `CHECKS_MINIMOS = 28` medido en verde, `_summary()` en `call_deferred` separado.

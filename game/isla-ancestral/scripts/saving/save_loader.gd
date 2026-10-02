@@ -28,6 +28,14 @@ var snapshot: SaveSnapshot = null
 func load(slot: int) -> Dictionary:
 	var path := SaveWriter.path_for(slot)
 	if not FileAccess.file_exists(path):
+		# Sin save principal: puede ser un slot nuevo (no hay nada que cargar) o
+		# un guardado INTERRUMPIDO. Desde M59 iter. 2 el manager rota el save
+		# anterior a .bak ANTES de escribir el nuevo; si el proceso muere (o la
+		# escritura falla) entre la rotación y el rename, queda .bak pero no
+		# .save. Antes esto devolvía NOT_FOUND y el progreso era inalcanzable
+		# aunque estuviera en disco. Si hay backup, se recupera.
+		if SaveBackup.has_any_backup(slot):
+			return _try_recover(slot, "falta el save principal (guardado interrumpido)")
 		return {"result": LoadResult.NOT_FOUND, "payload": {}, "version": 0}
 
 	var content := FileAccess.get_file_as_string(path)
@@ -87,12 +95,27 @@ func _try_recover(slot: int, reason: String) -> Dictionary:
 		return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
 
 	var payload: Dictionary = parsed["payload"]
+
+	# M59 iter. 2: el camino de backup debe ser tan estricto como el principal.
+	# Antes _try_recover() restauraba el payload SIN normalizar ni validar, así
+	# que un backup de versión FUTURA se cargaba como RECOVERED (degradando un
+	# save más nuevo, contra la regla dura "nunca degradar un save").
+	payload["schema_version"] = int(payload.get("schema_version", 0))
+	var errors: Array[String] = SaveSchema.validate(payload)
+	if not errors.is_empty():
+		push_error("[SAVE] Backup de slot %d con estructura inválida (%s)" % [slot, ", ".join(errors)])
+		return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
+	var version := int(payload.get("schema_version", 0))
+	if version > SaveSchema.SCHEMA_VERSION:
+		push_warning("[SAVE] El backup del slot %d es de una versión FUTURA (v%d > v%d soportada). No se carga para no degradarlo." % [slot, version, SaveSchema.SCHEMA_VERSION])
+		return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
+
 	if snapshot != null:
 		snapshot.restore(payload)
 	return {
 		"result": LoadResult.RECOVERED,
 		"payload": payload,
-		"version": int(payload.get("schema_version", 0)),
+		"version": version,
 	}
 
 ## Migración de schema (M60). Actualmente no hay migraciones registradas

@@ -129,7 +129,7 @@ func _on_dialogo_cerrado() -> void:
 ## El flush integrado al flujo M40 (SceneManager) queda con dueño M40.
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST and current_slot >= 1 and not _blocked:
-		var payload := snapshot.collect("slot_%d" % current_slot)
+		var payload := _payload_para_slot(current_slot)
 		if SaveWriter.write_atomic(current_slot, payload):
 			_dirty = false
 			print("[SAVE] Guardado de cierre OK slot %d" % current_slot)
@@ -178,6 +178,18 @@ func request_save(slot: int, reason: String) -> void:
 	if not _writing:
 		_process_queue()
 
+## Recolecta el payload del slot y sella los metadatos que posee el MANAGER.
+##
+## M59 iter. 2: ningún proveedor emite la sección "meta", así que collect()
+## dejaba el default y `meta.last_saved` quedaba SIEMPRE "" (el backend de
+## "Mostrar hora/fecha del último guardado por slot" no tenía dato). La sella
+## el manager, que es quien escribe.
+func _payload_para_slot(slot: int) -> Dictionary:
+	var payload := snapshot.collect("slot_%d" % slot)
+	if typeof(payload.get("meta")) == TYPE_DICTIONARY:
+		payload["meta"]["last_saved"] = Time.get_datetime_string_from_system()
+	return payload
+
 ## Procesa la cola de guardados (uno a la vez, sin bloquear el frame).
 func _process_queue() -> void:
 	if _queue.is_empty() or _writing:
@@ -188,10 +200,22 @@ func _process_queue() -> void:
 	var reason := String(req["reason"])
 	last_reason = reason
 
-	var payload := snapshot.collect("slot_%d" % slot)
+	var payload := _payload_para_slot(slot)
+
+	# BUG CRÍTICO corregido en M59 iter. 2 (DeepSeek-V4.1-Flash):
+	# rotate() estaba DESPUÉS de write_atomic(). write_atomic renombra
+	# .tmp -> .save, lo que REEMPLAZA el save anterior; después rotate() movía
+	# ESE save recién escrito a slot_N_r1.bak. Resultado medido: el slot quedaba
+	# SIN slot_N.save (solo .bak) y load_slot() devolvía NOT_FOUND. Es decir,
+	# request_save() —el camino normal de auto-save y de la UI— NUNCA dejaba un
+	# save cargable. Las suites no lo veían porque llamaban a write_atomic()
+	# directo, nunca a request_save().
+	# Orden correcto: rotar el save ANTERIOR a .bak y recién después escribir el
+	# nuevo. Si write_atomic falla, el save anterior queda íntegro en .bak y
+	# SaveLoader.load() lo recupera (ver fix en save_loader.gd).
+	SaveBackup.rotate(slot)
 	var ok := SaveWriter.write_atomic(slot, payload)
 	if ok:
-		SaveBackup.rotate(slot)
 		current_slot = slot
 		_dirty = false
 		emit_signal("save_completed", slot, reason)
@@ -234,8 +258,17 @@ func slot_metadata(slot: int) -> Dictionary:
 	if typeof(payload) != TYPE_DICTIONARY:
 		return {}
 	var time_dict: Dictionary = payload.get("time", {})
+	# M59 iter. 2 (DeepSeek-V4.1-Flash): el proveedor de tiempo (M29) NO usa el
+	# dialecto del schema. Emite {dia, mes, anio, hora, minuto, ...}, mientras
+	# SaveSchema declara {day, season, hour, minute}. Como collect() REEMPLAZA la
+	# sección entera, `time.day` no existe en disco y este campo salía SIEMPRE 0
+	# (la UI de slots habría mostrado "día 0" para cualquier partida). Leemos el
+	# dialecto real y caemos al del schema si algún día se reconcilian.
+	# Deuda: el dialecto schema<->proveedores debe unificarse con los dueños de
+	# M14/M29/M38 (ver hallazgo en Log 1198).
+	var dia: int = int(time_dict.get("dia", time_dict.get("day", 0)))
 	return {
-		"day": int(time_dict.get("day", 0)),
+		"day": dia,
 		"version": int(payload.get("schema_version", 0)),
 		"last_saved": String(payload.get("meta", {}).get("last_saved", "")),
 	}

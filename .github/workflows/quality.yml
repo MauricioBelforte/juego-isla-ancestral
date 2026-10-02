@@ -138,6 +138,16 @@ jobs:
           # que aborte _run()). Bug: slot_metadata() parseaba el archivo
           # entero (checksum+payload) como JSON -> devolvia {} siempre.
           godot --headless --script scripts/saving/test_slots_m59.gd 2>&1 || FAIL=1
+          # M59 iter. 2 (DeepSeek-V4.1-Flash): el CAMINO REAL de guardado
+          # (SaveManager.request_save) y la rotacion de backups. 23 checks,
+          # piso CHECKS_MINIMOS medido en verde. BUG CRITICO: rotate()
+          # corria DESPUES de write_atomic(), que renombra .tmp -> .save
+          # REEMPLAZANDO el save anterior; luego rotate() movia ESE save
+          # recien escrito a .bak y el slot quedaba SIN .save ->
+          # load_slot() = NOT_FOUND. request_save() (auto-save, timer, UI)
+          # nunca dejaba un save cargable. Las suites previas no lo veian
+          # porque llamaban a write_atomic() directo, nunca a request_save().
+          godot --headless --script scripts/saving/test_rotate_m59.gd 2>&1 || FAIL=1
           # Run time calendar tests (M29)
           godot --headless --script scripts/time/test_calendario.gd 2>&1 || true
           # Run time consumers tests
