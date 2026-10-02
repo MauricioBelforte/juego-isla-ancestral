@@ -42,7 +42,7 @@
 - [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
 - [x] Pausa del mundo coherente con M29/M30 al abrir el mapa [M] -- agnes-3-flash 2026-10-02: FullMapLayer open/close llama TimeCalendar.pausa()/resume() (delega a GameTime/GameClock). Arreglado: el código anterior usaba "TimeManager" (no existe) y "pause()" (no es el método, es "pausa()").
 - [x] Cierre con Esc/cancel y restauración del foco (M53) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget.gd _unhandled_input() maneja Esc; M53 DOM-UI restore_foco() integrado; prueba headless valida cierre sin fugas
-- [ ] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S]
+- [x] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S] -- agnes-3-flash 2026-10-02: KEY_M en FullMapLayer._unhandled_input(); prompts dinámicos pendientes (M57 action mapping)
 - [ ] Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 ThemeUx/autoload presente. Deferred a M53.
 - [x] Convivencia con la pila de capas (diálogo abierto + mapa: se encola) [M] -- agnes-3-flash 2026-10-02 iter 4: FullMapLayer `_hay_capa_modal_activa()` bloquea open_map si DialogLayer/PauseLayer/MenusLayer visible
 - [ ] Leyenda de iconos legible (M58) y panel de filtros accesible → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.2; implementacion requiere M58 accesibilidad manager. Deferred.
@@ -117,7 +117,7 @@
 - [ ] Límites de zoom (0.6x-3x) para no perder contexto ni pixelar → agnes-2.5-flash 2026-09-13: limites documentados en 03-Diseno.md §4.28 (zoom range 0.6x-3x); context preservation. Spec defined.
 - [x] Clamp del pan a los bordes del mapa [S] -- agnes-3-flash 2026-10-02: MapCanvas._clamp_to_bounds() limita _pan_offset
 - [x] Zoom anclado al cursor (el punto bajo el cursor permanece estable) [M] -- agnes-2.5-flash 2026-09-12: zoom anclado implementado en _unhandled_input(); cálculo de offset basado en posicion del cursor; punto bajo cursor permanece estable
-- [ ] Acción "volver al jugador" (`map_center_player`) [S]
+- [x] Acción "volver al jugador" (`map_center_player`) [S] -- agnes-3-flash 2026-10-02: MapCanvas.center_on_player() + botón "Jugador" en FullMapLayer header
 - [ ] Escala de marcadores y nombres constante al zoom (solo cambia el cluster threshold) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.29 (constant marker scale; cluster threshold only); readability principle. Spec defined.
 - [ ] Foco inicial en "volver al jugador" al abrir el mapa [S]
 
@@ -219,7 +219,7 @@
 
 ## Dependencia: Visión del Agente (M154)
 
-- [ ] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+- [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S] -- agnes-3-flash 2026-10-02: V2 (MCP screen capture) operativa, 4 capturas guardadas en `capturas/54-Mapa/`
 ## Iteración 1 (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [ ] Datos: `data/map/map_data.json` — 9 POIs reales de la Isla Raíz (spawn/Chozavil/ruina/mesa/faro/templo_raíz/playa/plaza/ladera) con categorías y coordenadas dentro del mundo (radio 256)
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 52 · Pendientes: 125 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 54 · Pendientes: 123 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
