@@ -60,7 +60,7 @@
 - [ ] Clusterización de marcadores cercanos con contador y tooltip con nombres [M]
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
 - [x] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M] -- agnes-3-flash 2026-10-02: minimap_widget._update_markers() línea 156-160: `if not explored: continue` — no crea el marcador si la región no está explorada
-- [ ] Filtro por tipo de marcador con persistencia de preferencia [M]
+- [x] Filtro por tipo de marcador con persistencia de preferencia [M] -- agnes-3-flash 2026-10-02: FullMapLayer legend CheckBox per tipo; `MapCanvas.set_type_visible()`
 - [ ] Diferenciación por forma + color para daltonismo (M58) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.5 (daltonismo-friendly shapes+colors); M58 accesibilidad. Policy defined.
 - [x] Pool de sprites sin crear/destruir nodos al navegar [M] -- agnes-2.5-flash 2026-09-12: pool de sprites implementado en minimap_widget.gd; reutilizacion de nodos; sin allocaciones en flujo caliente
 - [x] Escala constante de los marcadores al hacer zoom (top_level, sin deformar) [M] -- agnes-2.5-flash 2026-09-12: marcadores usan top_level=true; escala constante independientemente de zoom; cluster threshold ajusta densidad
@@ -98,7 +98,7 @@
 ## G. RF6 Pines del jugador (10)
 
 - [ ] Crear pin en la posición actual del jugador (tecla/acción dedicada) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.24 (player position pin); input action dedicated. Spec defined.
-- [ ] Crear pin en la posición del cursor sobre el mapa completo [M]
+- [x] Crear pin en la posición del cursor sobre el mapa completo [M] -- agnes-3-flash 2026-10-02: FullMapLayer right-click → `MapCanvas.screen_to_world()` → `MapManager.agregar_pin()`
 - [ ] Nombre del pin editable (diálogo de M53, caracteres M87) [M] -- agnes-2.5-flash 2026-09-12: pin name editing documented; M53 dialog + M87 characters integrated
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.12 (pin list with date); M29 time integration. Spec defined.
 - [x] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo → agnes-2.5-flash 2026-09-13: limite documentado — agnes-3-flash 2026-10-02: MapManager MAX_PINES=50, `agregar_pin()` retorna false al alcanzar
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 88 · Pendientes: 89 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 90 · Pendientes: 87 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
