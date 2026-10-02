@@ -40,7 +40,7 @@
 - [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACI脫N requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
 - [ ] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md fuentes documentadas; M88 FontCatalog proporciona Nunito/Fredoka One; jerarquia M53 ThemeUx aplicada en widget
 - [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
-- [ ] Pausa del mundo coherente con M29/M30 al abrir el mapa [M]
+- [x] Pausa del mundo coherente con M29/M30 al abrir el mapa [M] -- agnes-3-flash 2026-10-02: FullMapLayer open/close llama TimeCalendar.pausa()/resume() (delega a GameTime/GameClock). Arreglado: el código anterior usaba "TimeManager" (no existe) y "pause()" (no es el método, es "pausa()").
 - [x] Cierre con Esc/cancel y restauración del foco (M53) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget.gd _unhandled_input() maneja Esc; M53 DOM-UI restore_foco() integrado; prueba headless valida cierre sin fugas
 - [ ] Atajo M/`map_toggle` para abrir (M57) con prompts dinámicos [S]
 - [ ] Navegacion 100% con gamepad y teclado (foco nativo M53) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.1; implementacion requiere M53 ThemeUx/autoload presente. Deferred a M53.

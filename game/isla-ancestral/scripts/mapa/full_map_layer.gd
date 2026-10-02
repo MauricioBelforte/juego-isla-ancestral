@@ -108,10 +108,10 @@ func open_map() -> void:
 	visible = true
 	_refresh_from_manager()
 	_connect_signals()
-	# Pausar el juego si M29 esta disponible
-	var time_mgr := get_node_or_null("/root/TimeManager")
-	if time_mgr and time_mgr.has_method("pause"):
-		time_mgr.pause()
+	# Pausar el tiempo del juego (M29/M30)
+	var time_mgr := get_node_or_null("/root/TimeCalendar")
+	if time_mgr and time_mgr.has_method("pausa"):
+		time_mgr.pausa()
 
 func close_map() -> void:
 	if not _is_open:
@@ -120,7 +120,7 @@ func close_map() -> void:
 	visible = false
 	_disconnect_signals()
 	closed.emit()
-	var time_mgr := get_node_or_null("/root/TimeManager")
+	var time_mgr := get_node_or_null("/root/TimeCalendar")
 	if time_mgr and time_mgr.has_method("resume"):
 		time_mgr.resume()
 

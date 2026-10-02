@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://hud_m53_screen"]
+[gd_scene load_steps=10 format=3 uid="uid://hud_m53_screen"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud/hud_screen.gd" id="1_hud"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/status_bar.gd" id="2_status"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/ui/widgets/interact_prompt.gd" id="7_interact"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/action_prompt_overlay.gd" id="8_action"]
 [ext_resource type="Script" path="res://scripts/ui/widgets/minimap_widget.gd" id="9_minimap"]
+[ext_resource type="Script" path="res://scripts/mapa/full_map_layer.gd" id="10_fullmap"]
 
 [node name="HUDScreen" type="CanvasLayer"]
 layer = 100
@@ -136,3 +137,13 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("9_minimap")
+
+[node name="FullMapLayer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_fullmap")
