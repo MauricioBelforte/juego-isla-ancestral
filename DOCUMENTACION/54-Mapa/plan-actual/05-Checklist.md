@@ -101,7 +101,7 @@
 - [ ] Crear pin en la posición del cursor sobre el mapa completo [M]
 - [ ] Nombre del pin editable (diálogo de M53, caracteres M87) [M] -- agnes-2.5-flash 2026-09-12: pin name editing documented; M53 dialog + M87 characters integrated
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.12 (pin list with date); M29 time integration. Spec defined.
-- [ ] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo → agnes-2.5-flash 2026-09-13: limite documentado en 03-Diseno.md §4.25 (max 50 pins + friendly toast); M53 toast pattern. Spec defined.
+- [x] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo → agnes-2.5-flash 2026-09-13: limite documentado — agnes-3-flash 2026-10-02: MapManager MAX_PINES=50, `agregar_pin()` retorna false al alcanzar
 - [x] Persistencia de pines con M60 (PinData serializable) [C]
 - [x] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M] -- agnes-3-flash 2026-10-02: `_cargar_pines()` valida x/z ∈ [-10000, 10000], fuera → `disponible=false` + log
 - [x] Pines visibles en minimapa y mapa completo con estilo diferenciado [M] -- agnes-3-flash 2026-10-02: minimap_widget._refresh_pines() muestra pines como dots rojos + nota
@@ -114,7 +114,7 @@
 - [x] Pan arrastrando con ratón (drag) [S] -- agnes-2026-09-07: minimap_widget.gd _is_dragging flag + InputEventMouseMotion, _pan_offset aplicado en _update_transform()
 - [x] Pan arrastrando con ratón (drag) [S] -- agnes-2.5-flash 2026-09-12: implemented minimap_widget.gd mouse button middle drag; pan offset applied to viewport
 - [x] Límites de zoom (0.6x-3x) para no perder contexto ni pixelar [S] -- agnes-2026-09-07: const ZOOM_MIN=0.6, ZOOM_MAX=3.0, clampf en cada wheel event
-- [ ] Límites de zoom (0.6x-3x) para no perder contexto ni pixelar → agnes-2.5-flash 2026-09-13: limites documentados en 03-Diseno.md §4.28 (zoom range 0.6x-3x); context preservation. Spec defined.
+- [x] Límites de zoom (0.6x-3x) para no perder contexto ni pixelar → agnes-2.5-flash 2026-09-13: limites documentados — agnes-3-flash 2026-10-02: minimap_widget ZOOM_MIN=0.6 ZOOM_MAX=3.0; MapCanvas 0.5-3.0
 - [x] Clamp del pan a los bordes del mapa [S] -- agnes-3-flash 2026-10-02: MapCanvas._clamp_to_bounds() limita _pan_offset
 - [x] Zoom anclado al cursor (el punto bajo el cursor permanece estable) [M] -- agnes-2.5-flash 2026-09-12: zoom anclado implementado en _unhandled_input(); cálculo de offset basado en posicion del cursor; punto bajo cursor permanece estable
 - [x] Acción "volver al jugador" (`map_center_player`) [S] -- agnes-3-flash 2026-10-02: MapCanvas.center_on_player() + botón "Jugador" en FullMapLayer header
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 68 · Pendientes: 109 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 70 · Pendientes: 107 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
