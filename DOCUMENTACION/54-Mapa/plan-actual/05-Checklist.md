@@ -119,7 +119,7 @@
 - [x] Zoom anclado al cursor (el punto bajo el cursor permanece estable) [M] -- agnes-2.5-flash 2026-09-12: zoom anclado implementado en _unhandled_input(); cálculo de offset basado en posicion del cursor; punto bajo cursor permanece estable
 - [x] Acción "volver al jugador" (`map_center_player`) [S] -- agnes-3-flash 2026-10-02: MapCanvas.center_on_player() + botón "Jugador" en FullMapLayer header
 - [ ] Escala de marcadores y nombres constante al zoom (solo cambia el cluster threshold) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.29 (constant marker scale; cluster threshold only); readability principle. Spec defined.
-- [ ] Foco inicial en "volver al jugador" al abrir el mapa [S]
+- [x] Foco inicial en "volver al jugador" al abrir el mapa [S] -- agnes-3-flash 2026-10-02: FullMapLayer.open_map() llama `canvas.center_on_player()` automáticamente
 
 ## I. RN Rendimiento y pocos draw calls (12)
 

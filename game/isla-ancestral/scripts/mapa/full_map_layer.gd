@@ -117,6 +117,9 @@ func open_map() -> void:
 	visible = true
 	_refresh_from_manager()
 	_connect_signals()
+	# Foco inicial: centrar en el jugador (map_center_player)
+	if _canvas != null:
+		_canvas.center_on_player()
 	# Pausar el tiempo del juego (M29/M30)
 	var time_mgr := get_node_or_null("/root/TimeCalendar")
 	if time_mgr and time_mgr.has_method("pausa"):
