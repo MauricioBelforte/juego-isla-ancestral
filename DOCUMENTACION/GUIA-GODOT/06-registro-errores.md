@@ -1,8 +1,9 @@
 # Registro de Errores — E-11 a E-22
 
-> **Modelo:** atria-dawn (Atria Dawn Preview) (último modificador)
-> **Plataforma:** Kilo Code
-> **Fecha:** 2026-09-20 (Sección T-98..T-100 agregada; E-22: 2026-09-19)
+> **Modelo:** mimo-v2.6-flash-free (último modificador)
+> **Plataforma:** opencode
+> **Fecha:** 2026-10-02 (Sección T-105 y T-106 agregada)
+> **Anterior:** atria-dawn (Atria Dawn Preview) / Kilo Code — 2026-09-20 (T-98..T-104; E-22: 2026-09-19)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §8
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -662,6 +663,102 @@ grep -nE "size\(\)\s*==|assert_eq.*count" <suite>
 ---
 
 **Fecha:** 2026-09-25 | **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code
+
+---
+
+### T-105: `--check-only` no valida nombres de métodos — EXIT 0 con error en runtime
+
+**Síntoma:**
+```
+# El gate pasa limpio:
+godot --headless --path <proyecto> --check-only --script res://scripts/ui/layers/credits_layer.gd
+=> exit 0, sin parse errors
+
+# ...pero al EJECUTAR el código revienta:
+SCRIPT ERROR: Nonexistent function "get_vscroll_bar" in base 'RichTextLabel'.
+```
+
+**Ubicación:** cualquier script; visto en `scripts/ui/layers/credits_layer.gd` (M131, 2026-10-02).
+
+**Causa:** `--check-only` hace parse + análisis estático. Un nombre de método inexistente **no es
+error de parse** — el parser no resuelve firmas de los métodos del motor — así que el gate
+reporta EXIT 0 y el fallo aparece recién en la línea que se ejecuta.
+
+**Caso concreto:**
+```gdscript
+# INCORRECTO (compila en --check-only, revienta en runtime)
+var bar := _rich.get_vscroll_bar()
+
+# CORRECTO — el nombre real lleva guiones bajos en "v_scroll"
+var bar: VScrollBar = _rich.get_v_scroll_bar()
+```
+
+**Detección (obligatoria):**
+```bash
+# --check-only NO basta: hay que EJECUTAR algo que recorra la linea sospechosa
+godot --headless --path <proyecto> --script res://ruta/test_*.gd
+```
+
+**Prevención:**
+1. `--check-only` sirve para **sintaxis y referencias entre scripts**, NO para la API del motor.
+2. Antes de usar un método de un nodo del motor que no se usa a diario: verificar el nombre en la
+   ayuda del editor — no adivinar por similitud (`get_vscroll_bar` "suena" bien y no existe).
+3. Si el método solo se llama tras una rama condicional, el test debe cubrir esa rama; si no,
+   ni siquiera el runtime lo detectará.
+
+**Lección transversal:** un gate en verde **solo cubre lo que ejecuta**. Si la aserción no llega
+a la línea, el código puede estar roto y el suite seguir en verde.
+
+**Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+
+---
+
+### T-106: Usar la variable de un `for` después del bucle — pisa/agrega la línea equivocada
+
+**Síntoma:**
+Un script de edición reporta "1 línea modificada" (su propio assert pasa) pero el archivo queda
+PEOR: en vez de **reemplazar** la línea objetivo, la **agrega al final** del archivo.
+
+**Ubicación:** edición de `CHECKLIST-GLOBAL.md` (M131, 2026-10-02). Detectado ANTES del commit
+gracias al numstat y al conteo de ocurrencias.
+
+**Causa:**
+```python
+for i, l in enumerate(lineas):
+    if l.startswith("| 131 |"):
+        nueva = "|".join(modificar(l.split("|")))
+lineas[i] = nueva   # BUG: `i` conserva la ULTIMA iteracion (el "" final), no la del match
+```
+
+**Solución:**
+```python
+idx = [k for k, l in enumerate(lineas) if l.startswith("| 131 |")]
+assert len(idx) == 1, "se esperaba 1 fila, hay %d" % len(idx)
+lineas[idx[0]] = nueva
+```
+
+**Detección:**
+```bash
+git diff --numstat -- <archivo>   # debia ser "1 1"; salio "1 0" = append, no replace
+grep -c "^| 131 |" <archivo>      # debia ser 1; salio 2 = fila duplicada
+```
+
+**Prevención:**
+1. **Capturar el indice dentro del `if`, no leerlo después del `for`.** En Python la variable del
+   bucle sobrevive a este.
+2. Toda edición programática de un archivo versionado debe exigir ANTES de escribir:
+   - exactamente N líneas distintas contra el original,
+   - el conteo de ocurrencias del patrón **igual al original** (que no se duplique ni se mueva),
+   - el `numstat` de git esperado (`1 1` para reemplazar una línea).
+3. Si el numstat no cuadra, **abortar y revertir**
+   (`git restore --source=HEAD --staged --worktree -- <archivo>`) en lugar de commitear y
+   revisar después.
+
+**Lección transversal:** un assert que solo cuenta "hay 1 cambio" **no sabe si el cambio está
+en la línea correcta**: hay que anclarlo a la IDENTIDAD de la línea, no a la cardinalidad
+(misma familia que T-104).
+
+**Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
 
 ---
 
