@@ -189,25 +189,47 @@ func bake_map_texture(width: int = 256, height: int = 256) -> Image:
 	if _cached_texture != null and not _texture_dirty:
 		return _cached_texture
 	var img := Image.create_empty(width, height, false, Image.FORMAT_RGBA8)
-	# Fondo mar
-	img.fill(Color(0.15, 0.25, 0.35, 1.0))
-	# Islas como blobs circulares (simplificado desde config)
-	var islas: Array = config.get("islas", [])
-	var positions: Array = [Vector2(0.25, 0.25), Vector2(0.75, 0.25), Vector2(0.25, 0.75), Vector2(0.75, 0.75)]
-	for i in range(mini(islas.size(), 4)):
-		var island_id: String = String(islas[i])
-		var center: Vector2 = (positions[i] as Vector2) * Vector2(width, height)
-		var radius := 40.0
-		var color: Color = Color.from_hsv(float(i) * 0.25, 0.3, 0.5, 1.0)
-		var explored: bool = _regiones_exploradas.get(island_id, true)
-		if not explored:
-			color = Color(0.1, 0.1, 0.12, 1.0)
-		for y in range(int(center.y) - int(radius), int(center.y) + int(radius)):
-			for x in range(int(center.x) - int(radius), int(center.x) + int(radius)):
-				if x < 0 or x >= width or y < 0 or y >= height:
-					continue
-				if (x - center.x) * (x - center.x) + (y - center.y) * (y - center.y) < radius * radius:
-					img.set_pixel(x, y, color)
+	img.fill(Color(0.15, 0.25, 0.35, 1.0))  # fondo mar
+	# Intentar usar TerrainLocator para texture basada en elevación real
+	var locator: Node = get_node_or_null("/root/TerrainLocator")
+	var has_terrain: bool = locator != null and locator.has_method("get_height")
+	if has_terrain:
+		var world_size: float = 6200.0  # radio isla * 2
+		for y in height:
+			for x in width:
+				var wx: int = int(float(x) / width * world_size)
+				var wz: int = int(float(y) / height * world_size)
+				var h: int = locator.get_height(wx, wz)
+				# Mapear altura a color: bajo=agua/arena, medio=verde, alto=pardo
+				var t: float = clampf(float(h) / 15.0, 0.0, 1.0)
+				var col: Color
+				if t < 0.15:
+					col = Color(0.2, 0.45, 0.7)  # agua
+				elif t < 0.3:
+					col = Color(0.85, 0.78, 0.5)  # arena
+				elif t < 0.7:
+					col = Color(0.3, 0.65, 0.25)  # verde
+				else:
+					col = Color(0.55, 0.45, 0.3)  # pardo/montaña
+				img.set_pixel(x, y, col)
+	else:
+		# Fallback: islas como blobs (sin VoxelTerrain, p.ej. headless)
+		var islas: Array = config.get("islas", [])
+		var positions: Array = [Vector2(0.25, 0.25), Vector2(0.75, 0.25), Vector2(0.25, 0.75), Vector2(0.75, 0.75)]
+		for i in range(mini(islas.size(), 4)):
+			var island_id: String = String(islas[i])
+			var center: Vector2 = (positions[i] as Vector2) * Vector2(width, height)
+			var radius := 40.0
+			var color: Color = Color.from_hsv(float(i) * 0.25, 0.3, 0.5, 1.0)
+			var explored: bool = _regiones_exploradas.get(island_id, true)
+			if not explored:
+				color = Color(0.1, 0.1, 0.12, 1.0)
+			for y in range(int(center.y) - int(radius), int(center.y) + int(radius)):
+				for x in range(int(center.x) - int(radius), int(center.x) + int(radius)):
+					if x < 0 or x >= width or y < 0 or y >= height:
+						continue
+					if (x - center.x) * (x - center.x) + (y - center.y) * (y - center.y) < radius * radius:
+						img.set_pixel(x, y, color)
 	_cached_texture = img
 	_texture_dirty = false
 	return img
