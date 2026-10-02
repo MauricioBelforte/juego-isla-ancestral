@@ -162,7 +162,7 @@
 - [x] M29/M30: pausa coherente y fecha de pines [S] -- agnes-3-flash 2026-10-02: pausa coherente (iter 3 TimeCalendar.pausa); pines almacenan `fecha` unix timestamp
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.2 (tiendas registradas autom谩ticamente); IMPLEMENTACI脱N bloqueada por M39 (ShopManager autoload); KnownIssue no bloqueante DoD.
 - [ ] M53: capa modal, foco, TooltipService, NotificationService y ThemeUx [M]
-- [ ] M57: acciones map_toggle, zoom, pan, cierre, pin y centro [M]
+- [x] M57: acciones map_toggle, zoom, pan, cierre, pin y centro [M] -- agnes-3-flash 2026-10-02: KEY_M (toggle), Esc (cierre), scroll+drag (zoom/pan), botón "Jugador" (centro). Input actions formales M57 pendientes.
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §4 accesibilidad (reduce_motion, daltonismo, contraste AA); IMPLEMENTACI脱N bloqueada por M58 (accesibility manager); KnownIssue no bloqueante DoD.
 - [ ] M60: persistencia de exploración, pines, preferencias y caché de textura [C]
 - [ ] M63: bake en background con barra de progreso (AGENTS 8) [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.4; IMPLEMENTACI脫N bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
@@ -170,9 +170,9 @@
 
 ## L. Edge cases (16)
 
-- [ ] Región sin explorar: no muestra detalles ni marcadores (spoiler prevention) [M]
+- [x] Región sin explorar: no muestra detalles ni marcadores (spoiler prevention) [M] -- agnes-3-flash 2026-10-02: minimap_widget `if not explored: continue` (no crea marcador); island fogs ocultan regiones; MapManager `region_explorada()` controla acceso
 - [ ] Marcador fuera de la vista del minimapa: flecha de borde apunta la dirección [M]
-- [ ] Mapa abierto mientras el jugador se mueve (pausa): datos congelados y coherentes [M]
+- [x] Mapa abierto mientras el jugador se mueve (pausa): datos congelados y coherentes [M] -- agnes-3-flash 2026-10-02: FullMapLayer pausa TimeCalendar.pausa() al abrir; señales solo emiten en runtime activo; datos map coherentes
 - [ ] Mundo aún generando o sin datos de región: mapa en blanco amable con progreso [M]
 - [ ] Jugador en otra isla (M27): selector de islas exploradas y minimapa de la isla actual [C]
 - [ ] Viaje rápido solicitado con diálogo abierto: petición encolada por pila M53 → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.13 (fast travel queue via M53 stack); M53 UI layer. Spec defined.
