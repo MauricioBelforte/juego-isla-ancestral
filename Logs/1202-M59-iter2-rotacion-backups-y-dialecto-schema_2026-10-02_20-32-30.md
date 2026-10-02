@@ -192,9 +192,13 @@ en el checklist para que quede la traza.
 
 ## 12. Huella de push (AGENTS.md 4.3)
 
-- Rango: (se completa al pushear)
+- Rango publicado: `ddc6d3f..9088ff7` (fast-forward, sin `--force`; `origin/main` = `9088ff7`)
 - Hora: 2026-10-02 20:32
 - Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy)
-- Tipo: fast-forward, sin `--force`
-- Commits propios: (se completa)
-- Commits ajenos en el rango: (se completa)
+- Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`
+- Commits propios: **1** -> `9088ff7` (M59 iter. 2, 9 archivos, +648/-15)
+- Commits ajenos en el rango: **8** -> M54 x5 (`71794fd`, `5079687`, `dd628cf`, `132a1a4`, `c14b397`), M91 x2 (`9e35a97`, `204196a`), coordinador x1 (`718b264`)
+- Pre-push: sin secretos en el diff propio; blob maximo del rango 265 KB (`Mensajes entre modelos/`)
+- Post-push: `HEAD == origin/main == 9088ff7`; `9088ff7` verificado ancestro de `origin/main` (`git merge-base --is-ancestor`)
+- Tras el push otros agentes commitearon localmente (`aab4be3`): repo = blanco movil
+- `validar_workflows.py`: EXIT 0 (`quality.yml` OK; 2 avisos de deuda BUG-078 de M117/M116, ajenos)
