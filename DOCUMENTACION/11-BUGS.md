@@ -1,4 +1,5 @@
-# 11 — BUGS: Registro Central de Problemas y Fallas
+
+| BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |# 11 — BUGS: Registro Central de Problemas y Fallas
 
 **Modelo:** Atria-Dawn-Preview (último modificador)
 **Plataforma:** Kilo Code
@@ -155,6 +156,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-078 | **El CI ejecuta 8 scripts que NO estan versionados** (`godot --headless --script <ruta>` sobre archivos que no existen en el repo): M11 + 5 de M64 + M116 + M117. En un checkout limpio `godot` sale con **EXIT 1** (`File not found`) -> el job `godot-lint` queda ROJO. Introducido por `0fb0141` (2) y por `11ac4d9` (6) — **el propio commit que arreglaba BUG-051**, que era el mismo defecto | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [ ] Parcial — M11 versionado (`5ce3aa9`); los 7 ajenos en `DEUDA_CONOCIDA` de `validar_workflows.py` | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -1998,7 +2000,53 @@ El HUD del hotbar sólo se crea con una escena actual válida; si no, se omite s
 - [x] Verificado por: hy3 con binario Godot 4.7.2 headless. M11 suite: 26 checks, 1 fallo (E2/E3 headless-only, inalterado), 0 SCRIPT ERROR. M64 suite (regresión): 82 checks, 0 fallos, EXIT 0, 0 SCRIPT ERROR. El fix no introduce nuevos SCRIPT ERROR.
 
 ---
-## 8. Bugs Delegados a Otros Agentes
+
+### BUG-087 — M59-Guardado: NINGUNA partida guardada cargaba (JSON.parse_string devuelve float, validate() exigía TYPE_INT)
+
+- **Fecha de reporte:** 2026-10-02
+- **Modulo(s) afectado(s):** **M59 (Guardado)** — `game/isla-ancestral/scripts/saving/save_schema.gd` (`_es_entero` / `validate`), `save_loader.gd` (`load`), `save_writer.gd` (`slot_metadata`). Consumidores directos: **M26, M27, M74, M148** (todo módulo que carga una partida).
+- **Severidad:** 🔴 **Crítica.** Hasta hoy, cualquier partida guardada era **incargable**: `load()` devolvía `CORRUPTED` (sin backup disponible) o `RECOVERED` (cargando en silencio la partida *anterior* con pérdida silenciosa del progreso real del jugador).
+- **Introducido por:** herencia de glm-5.3-flash (M59 núcleo, agosto 2026). Latencia del bug: **~1 mes**.
+- **Estado:** [x] **Resuelto** — DeepSeek-V4.1-Flash, Log 1197, commits `15010f7` + `ddc6d3f`. Verificación empírica independiente por atria-Dawn-Preview (2026-10-02).
+
+**Qué pasaba (causa MEDIDA, no inferida).** `JSON.parse_string` de Godot 4.7 **devuelve `float` para todo número** sin importar si el JSON lo escribió como entero:
+
+`
+JSON round-trip {"a":1}   -> typeof=3 (FLOAT), valor=1.0
+save válido del disco     -> schema_version=1.0, time.day=5.0
+SaveSchema.validate()     -> ["schema_version no es int", "time.day no es int"]
+load() sin backup -> 2 (CORRUPTED) | con backup -> 3 (RECOVERED), cargó día 5.0 (disco: 99)
+`
+
+`SaveSchema.validate()` exigía `TYPE_INT` estricto. Como todo payload leído del disco llega con números como `float`, la validación **siempre** fallaba y `load()` caía a `_try_recover()`.
+
+**Por qué la suite estaba verde (falso verde).** La suite heredada `validate_save.gd` marcaba 13/13 EXIT 0, pero **ningún test afirmaba `LoadResult.OK`**: solo se probaba el camino de error (aserción laxa `RECOVERED or CORRUPTED`) y `validate()` sobre un payload *en memoria* (que conserva los `int`). Falso verde por **omisión de aserción**, no por aserción equivocada — mismo patrón de riesgo que el sello §21.8 invalidado de M63 (test muerta dando verde).
+
+**Correcciones (3 bugs en la misma iteración):**
+
+| # | Bug | Fix |
+|---|-----|-----|
+| 1 | Crítico: ningún save cargaba | `SaveSchema._es_entero()` acepta `int` o `float` con valor entero; `SaveLoader` normaliza `schema_version` |
+| 2 | `slot_metadata()` devolvía `{}` siempre (parseaba checksum+payload como JSON) | usa `SaveWriter.parse_document()` |
+| 3 | `FUTURE_VERSION` sin aviso | `push_warning` explícito (no degrada el save) |
+
+**Verificación en rojo (guardianes vivos).**
+
+| Suite | Fix revertido | Con fix |
+|---|---|---|
+| `scripts/saving/validate_save.gd` | 16 checks / 3 fallos / EXIT 1 (nombra los errores exactos) | **16/0, EXIT 0** |
+| `scripts/saving/test_slots_m59.gd` (nueva) | 19 checks / 7 fallos / EXIT 1 | **22/0, EXIT 0** |
+| `CHEKS_MINIMOS` mutado a 99 | PISO NO CUMPLIDO + EXIT 1 | control EXIT 0 |
+
+Re-verificado por atria-Dawn-Preview con el binario real `C:\Temp\godot\godot472.exe` headless (2026-10-02): `validate_save.gd` 16 checks, 0 fallos; `test_slots_m59.gd` 22 checks, 0 fallos, EXIT 0 ambas.
+
+**Medición de rendimiento (derivada, item marcado [?] con dueño M61):** `write_atomic` 4,2 KB = 22,66 ms; `request_save()` end-to-end = 48,20 ms. Descomposición: serialize 0,27 ms, rename ~17-20 ms, crear+borrar ~38 ms → el coste es **I/O del SO, no el payload**. Cumple el `< 80 ms` del ítem pero **excede el frame budget (16,67 ms)** → ítem marcado `[?]` con dueño M61 (no tocado). La premisa heredada ("saves <10 KB no justifican hilo") queda refutada.
+
+**Riesgo derivado para el proyecto:** cualquier módulo que consume M59 pudo heredar el mismo falso verde (tests que no afirman `OK`). **Solicitud explícita de QA** (ver `Mensajes entre modelos/ESTADO-PARALELO.md`): hy3 y agnes-3-flash deben revisar M26, M27, M148 y M74 — ¿sus suites de carga parten de un `LoadResult.OK` afirmado, o solo del camino de error?
+
+**Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (fix) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:35
+
+---## 8. Bugs Delegados a Otros Agentes
 
 > ⚠️ **Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
 
