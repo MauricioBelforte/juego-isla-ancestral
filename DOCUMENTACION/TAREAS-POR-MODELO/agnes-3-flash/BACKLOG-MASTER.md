@@ -26,6 +26,7 @@ capturas y opinar); la aprobación estética final sigue siendo del usuario (M15
 
 | # | ID | Módulo | Estado global | Encaje | Subcarpeta |
 |---|----|--------|---------------|--------|------------|
+| **0** | **54** | **54-Mapa** | **🔵 En curso — LOCK ACTIVO a tu nombre (atria-dawn, commit 24ddc7e, 2026-10-02 08:55)** | **A** (data-driven + orquestación de servicios + señales EventBus) — 36 [x] / 141 [ ] / 0 [?]. **Empezá por acá.** | `54-Mapa/checklist.md` |
 | 1 | 113 | 113-Pruebas-De-Stress | 🟡 Con dudas (re-claimable, §21.5/§21.4.7) | **A** (tooling/gates/headless) — gap real: "baseline versionado perf_base.json" + "comparación automática ±5%" están `[x]` **por diseño** pero NO implementados en `stress_runner.gd` | `113-Pruebas-De-Stress/checklist.md` |
 | 2 | 115 | 115-Hardware | 🟢 revertido por auditoría 2026-09-14 (0/104) | **A** (data-driven + auditoría código↔checklist + test headless) — el código de M115 existe (4 archivos + `test_hardware.gd` 30/30) pero la auditoría revirtió el checklist a `[ ]`; mi parte = reconciliar contra código real y dejar `[?]` con dueño (M90/M57/M97) | `115-Hardware/checklist.md` |
 | 3 | 106 | 106-Seguridad | 🔵 (reserva agnes-2.5 stale → re-claimable §21.4.7) | **A** (validadores/sanitización + auditoría + headless) — implemento el helper reutilizable "InputValidator" del diseño (`[ ]`) + reconciliación del sobre-cierre | `106-Seguridad/checklist.md` |
@@ -248,3 +249,62 @@ en `^\s*OK:`. Yo **no cuento** suites Godot — te lo delego a vos que lo haces 
 (132/0/26 = 158, 131/5/0 = 136, sin drift).
 
 P-18 (M14 Inventario) es justo esto: 5 suites, binario real, sello §21.8 si pasan.
+
+---
+
+## Módulo ACTIVO — 54-Mapa (P-59)
+
+> **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).** Lock 🔵 a tu nombre
+> en la fila 54 de CHECKLIST-GLOBAL. **Prioridad sobre toda la tabla de
+> arriba** — esa tabla es tu reserva histórica re-claimable; M54 es el lock
+> activo de ahora.
+
+**Encaje A puro:** data-driven + orquestación de servicios + señales EventBus
+— exactamente tu núcleo de especialidad declarado.
+
+**Fuente de verdad:** `DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md`
+(36 [x] / 141 [ ] / 0 [?], 177 ítems). Leelo ANTES de tocar código (§13).
+
+**Código real + suites (5 headless):**
+- `game/isla-ancestral/scripts/mapa/` — MapManager, map_service, markers.
+- Suites: `test_mapa_m54.gd`, `test_mapa_m54_e2e.gd`, `test_mapa_busqueda.gd`,
+  `test_mapa_markers.gd`, `test_map_service_headless.gd`.
+- **Línea base medida por atria-dawn 2026-10-02** (`test_mapa_m54.gd`):
+  **27 checks, 0 fallos, EXIT 0.**
+- ⚠️ Tu cobertura M-05 aplica: anclar conteos en `^\s*OK:` — los logs de
+  boot del juego se mezclan con la salida de la suite.
+
+**Tareas de código concretas (las más valiosas):**
+1. **Niebla de guerra en el minimapa** (recorte del FogTextureRect) [M] —
+   integración con `exploration_changed`.
+2. **Textura caché del MapManager** reutilizada sin segundo bake ni
+   re-render por frame [M].
+3. **Actualización por señales** (`exploration_changed`, `markers_changed`,
+   posición a 2 Hz) en vez de polling [M].
+4. **Textura base del mapa desde chunk data** del mundo (M10) [C].
+5. Acceso al mapa completo con click/foco sobre el minimapa (`map_toggle`).
+6. Convivencia con la pila de capas (diálogo abierto + mapa se encola).
+7. Pausa coherente con M29/M30 al abrir el mapa.
+
+**Notas de la iteración anterior** (agnes-2.5, 2026-09-12/13): varios ítems
+tienen diseño documentado en `03-Diseno.md` (§2.1 estilo ilustrado cozy,
+§2.3 flecha borde para marcadores, norte arriba). Algunos `[ ]` están
+comentados con `— agnes-2.5-flash ... DISENO documentado` — eso significa
+que el diseño existe y falta la implementación, no que falte el diseño.
+
+**Método:** lotes → suite con binario real
+(`C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script
+res://scripts/mapa/test_mapa_m54.gd --quit-after 8000`) → marca [x] solo
+con la suite en verde (≥ 27 checks). T-104/mimo: si un test usa conteo
+mágico, cambial a `>=` ANTES de mutar el catálogo, no después.
+
+**Trampas:** 114 (pathspec SIEMPRE — kimi trabaja M70 en
+scripts/interacciones/, DeepSeek en M62, mimo en scripts/audio/), M-06
+(byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR), 119
+(✅ inflado), 118 (impresión visual ≠ diagnóstico).
+
+**Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
+1187, verificá — se mueve). Reserva con §6.1.a.
+
+**Al terminar o liberar:** Estado 🔵 → ✅/🟡 en la fila 54, Agente → —,
+actualiza Última actividad. Nunca dejes 🔵 huérfano (§21.4.5).

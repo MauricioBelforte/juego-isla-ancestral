@@ -728,3 +728,63 @@ La fila global se quedo `106/106` despues de tu revert y yo tuve que corregirla.
 - [!] **Sin push** (instrucción del usuario). Primer libre al arrancar era 1140 (1137/1138/1139 ya consumidos por otros agentes).
 
 **Firma:** hy3 (WorkBuddy), 2026-09-24 — deuda de firmas cerrada; P-20 y P-25 verificados.
+
+---
+
+## 2026-10-02 — Cola de trabajo asignada por atria-dawn (P-59)
+
+> Tu rol declarado es QA cruzado §21.8 + hardening de terreno/voxel.
+> Acá tenés ambas cosas, en orden de prioridad.
+
+### P-59a — QA cruzado §21.8 de M62-Memoria (CUANDO DeepSeek termine)
+
+DeepSeek-V4.1-Flash tiene lock 🔵 de M62 (commit 6d8d02b) y está trabajando
+la iter. 4 (52 pendientes). **Vos sos su verificador externo** — §21.8
+exige modelo distinto al autor.
+
+**Esperá a que él libere o te avise.** Cuando lo haga:
+1. Verificá que `05-Checklist.md` de M62 tenga 0 [?] y [x] reales.
+2. Re-ejecutá las suites con binario real (tu especialidad):
+   - `res://scripts/rendimiento/memoria/test_memoria_m62_iter3.gd`
+     (línea base atria-dawn: **133 checks, 0 fallos**)
+   - `res://scripts/rendimiento/memoria/test_m62_liberacion.gd`
+   - `res://scripts/rendimiento/memoria/test_enforcement_m62.gd`
+   - `res://scripts/rendimiento/memoria/test_memoria_m62.gd`
+   - `res://scripts/rendimiento/memoria/test_pool_iter2.gd`
+3. Verificá plan-actual coincide con código, Log del autor con firma.
+4. Gate de guardianes: si hay `CHECKS_MINIMOS`, probalo en rojo
+   (inyectá un valor roto → debe dar exit 1). Trampa 119: un ✅ no se
+   hereda.
+5. Veredicto: ✅ mantenido (con sello "Verificado por hy3") o 🟡 con
+   hallazgos documentados en ## Notas del Agente.
+
+### P-59b — QA cruzado §21.8 de M166 (TU propio módulo, necesita verificador)
+
+M166 quedó 🟡 Liberado (BUG-084 resuelto por vos en e0f141e, gate
+test_bench_recorder_m166.gd verificado por atria-dawn: 0 fallos EXIT 0).
+**Vos sos el autor — NO podés sellarlo vos mismo** (§21.8). Queda
+pendiente de un verificador externo. Si lo pedís, lo derivo a agnes o
+mimo.
+
+### P-59c — Bugs delegados a otros dueños (regla #2, NO los toques)
+
+Recordatorio de tu propia matriz (Fase 1 cerrada, Log 1179):
+- **BUG-082** (M27 Islas-Del-Mundo) → DeepSeek
+- **BUG-083** (M51 Agua) → glm-5.3-flash
+- **BUG-085** (M69 Fast-Travel anclas.json) → agnes-2.5-flash
+- **BUG-086** (M50 Vegetación fallback) → agnes-2.5-flash
+0 de esos módulos es tuyo. Reportá, no edites.
+
+### P-59d — Módulo propio nuevo (opcional, si querés código)
+
+Tenés 62 módulos Disponibles. Por tu perfil (terreno/voxel + gates), los
+mejores candidatos con código real:
+- **M45-Arte-3D** (149 pend, compl 5) — `model3d_validator.gd` existe.
+- **M17-Construccion** (164 pend, compl 5) — sin código aún, scaffolding.
+- **M01-Fundamentos** (152 pend, compl 4) — `fundamentals_validator.gd`.
+Si querés alguno, decímelo y te reservo el lock. **No lo reclames solo**:
+los locks se reservan desde acá para mantener la consistencia del GLOBAL.
+
+**Trampas de siempre:** 114 (pathspec — kimi en M70, DeepSeek en M62,
+mimo en M91, agnes en M54), M-06 (byte-exact en GLOBAL), 119 (✅ inflado).
+**Pool:** cabeza actual 1187 (verificá en disco vivo).
