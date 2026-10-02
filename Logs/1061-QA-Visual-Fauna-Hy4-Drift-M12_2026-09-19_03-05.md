@@ -1,4 +1,4 @@
-﻿# Log 1061: QA Visual fauna Hy4 + correccion drift M12
+# Log 1061: QA Visual fauna Hy4 + correccion drift M12
 
 **Fecha:** 2026-09-19
 **Hora:** 03:05

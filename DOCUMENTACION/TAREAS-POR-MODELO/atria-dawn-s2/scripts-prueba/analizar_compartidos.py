@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Analiza los hunks SIN commitear de los archivos compartidos para detectar
 autores multiples (conflictos reales para el merge)."""
 import io, os, re, subprocess

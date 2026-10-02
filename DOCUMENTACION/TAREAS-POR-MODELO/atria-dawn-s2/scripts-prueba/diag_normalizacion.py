@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import io, unicodedata
 root = r"D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral"
 head = io.open(root + r"\DOCUMENTACION\TAREAS-POR-MODELO\atria-dawn-s2\scripts-prueba\p13\head.md", encoding="utf-8").read()
