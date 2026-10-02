@@ -420,6 +420,26 @@ jobs:
           # Gate duro: || FAIL=1.
           godot --headless --script scripts/crash/test_crash_m122.gd 2>&1 || FAIL=1
           godot --headless --script scripts/crash/test_crash_m122_offline.gd 2>&1 || FAIL=1
+          # M63 Cargas y Streaming (Log 1192, DeepSeek-V4.1-Flash). El modulo NO
+          # tenia gate: ninguna de sus suites figuraba aca, y el sello §21.8 previo
+          # (Log 895) se apoyo en un "0 fallos" FALSO — test_stream_m63.gd emitia 3
+          # SCRIPT ERROR (API inexistente: weights/cargadas_size/presupuesto_chunks/
+          # cola_vacia) y 3 de sus 4 funciones NUNCA corrian. Las 5 suites previas
+          # imprimian "0 fallo(s)" SIN contador (un aborto por SCRIPT ERROR daba
+          # verde). Ahora las 6 tienen guardian de 3 capas: bloque _fin(), piso
+          # CHECKS_MINIMOS MEDIDO (no copiado) y _summary() en su propio
+          # call_deferred. test_stream_m63.gd fue REESCRITA contra la API real. La
+          # suite nueva de iter. 5 (lado 63 del handshake M62 + precalentamiento P9
+          # + regiones P12-P14) esta probada EN ROJO con 5 sondas (A asercion falsa,
+          # B return que aborta _run, C piso+1, D bloques sin cerrar, E _fin
+          # suprimido): las 5 dan EXIT 1 y el control sin mutar da EXIT 0.
+          # 21+29+9+7+7+51 = 124 checks. Gate duro: || FAIL=1.
+          godot --headless --script scripts/stream/test_stream.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_stream_m63.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_pausa_cargas.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_pantalla_carga.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_rf2_threaded.gd 2>&1 || FAIL=1
+          godot --headless --script scripts/stream/test_stream_m63_iter5.gd 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 

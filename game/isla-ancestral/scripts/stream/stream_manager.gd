@@ -1,18 +1,26 @@
-# Modelo: glm-5.3-flash
-# Plataforma: Kilo Code
-# Fecha: 2026-09-01
+# Modelo: glm-5.3-flash (iter. 1-3) · DeepSeek-V4.1-Flash (iter. 5)
+# Plataforma: Kilo Code · WorkBuddy
+# Fecha: 2026-09-01 · 2026-10-02
 #
 # M63: Cargas y Streaming — StreamManager (autoload "StreamManager")
 # Núcleo V0/V1 (03-Diseno §1-§4, §8):
 #  - Cola priorizada por pesos (§2: 7 tipos de operación con peso; barra =
 #    Σ pesos completados / Σ pesos encolados; piso 2%, tope 98%).
 #  - Procesamiento ASÍNCRONO por frame con presupuesto de tiempo (§8: sin
-#    load() síncrono en gameplay, delta < 50 ms) — V0 usa carga diferida
-#    (DeferredLoader) sin thread; el thread real es iter. 2.
+#    load() síncrono en gameplay, delta < 50 ms).
 #  - LRU de chunks (§4): MAX_CHUNKS, marcar envejecido → liberar en 2 frames,
 #    descarga primero lejanos, pool de meshes reutilizado (M61).
 #  - Señales: chunk_listo/banco_listo/shader_listo/progreso_cambiado (§1).
 #  - Persistencia ISaveProvider M59: sección "stream" (estadísticas LRU).
+# iter. 5 (Log 1192, DeepSeek-V4.1-Flash):
+#  - HANDSHAKE CON M62 (§5.3) — lado 63: el 63 DECLARA qué recursos está
+#    cargando/usando (`avisar_carga_iniciada/terminada`) y el 62 no los
+#    descarga. Registro de rutas en vuelo (anti doble carga) + registro de
+#    chunks como candidatos de descarga en M62. DESACOPLADO: si M62 no está
+#    presente (tests sueltos, orden de autoloads), todo es no-op.
+#  - PRECALENTAMIENTO (§7): `precalentar_mundo()` + `operaciones_restantes()`.
+#  - STREAMING POR REGIÓN (§5): coronas LOD del océano, pisos del subterráneo,
+#    StreamableBox por isla (matemática pura, testeable headless).
 # ⚠️ Sin class_name: es autoload (pitfall GUIA-GODOT/09-godot4-migracion.md §9.17/§9.41).
 extends Node
 
@@ -53,6 +61,15 @@ var _descargas_total: int = 0
 ## (mundo congelado/menús/pantallas modales no deben consumir presupuesto)
 var _cargas_pausadas: bool = false
 
+## ── iter. 5: handshake con M62 (§5.3) ───────────────────
+## Recursos que el 63 declaró "en carga" ante M62: instance_id -> Resource.
+var _en_carga: Dictionary = {}
+## Rutas con al menos una operación en vuelo: ruta -> nº de operaciones.
+## Sirve de anti doble carga (L158): no encolar dos veces la misma ruta.
+var _rutas_en_carga: Dictionary = {}
+## Cuántas veces se avisó a M62 (observabilidad; 0 si M62 no está presente).
+var _avisos_m62: int = 0
+
 
 func _ready() -> void:
 	_registrar_proveedor_guardado()
@@ -76,6 +93,10 @@ func encolar(op_id: String, tipo: String, prioridad: int, callable: Callable, ru
 		if err != OK:
 			push_warning("[M63] load_threaded falló para %s (%d); cae a callable" % [ruta_recurso, err])
 			usa_thread = false
+		else:
+			# iter. 5: la ruta queda "en vuelo" hasta que la op se complete
+			# (anti doble carga L158 + base del handshake con M62).
+			_abrir_ruta(ruta_recurso)
 	_cola.append({"op_id": op_id, "tipo": tipo, "peso": peso, "prioridad": prioridad, "callable": callable, "ruta": ruta_recurso, "threaded": usa_thread})
 	_pesos_encolados += peso
 	_ordenar_cola()
@@ -117,7 +138,85 @@ func pesos_encolados() -> float:
 	return _pesos_encolados
 
 
-## Progreso real de la cola (§2): piso 2%, tope 98% SOLO mientras haya cola.
+## ── Handshake con M62 (diseño §5.3) — LADO 63 ───────────
+## El 62 decide qué LIBERAR; el 63 decide qué CARGAR. El puente es este
+## contrato: el 63 DECLARA qué recursos tiene en vuelo/uso y el 62 los veta
+## en su política de descarga (`MemoryMonitor._puede_descargar`).
+##
+## DESACOPLAMIENTO: todo pasa por `_mem()`, que devuelve el autoload o null.
+## Si M62 no existe (tests sueltos, orden de carga, build sin memoria), los
+## avisos son no-op y el 63 sigue funcionando igual. Nunca se hace `has_method`
+## sobre un nodo nulo sin comprobarlo antes.
+
+## El autoload de M62, o null si no está presente.
+func _mem() -> Node:
+	return get_node_or_null("/root/MemoryMonitor")
+
+
+## Declara ante M62 que el 63 empieza a cargar/usar `recurso`: el 62 NO lo
+## descargará mientras siga declarado.
+func avisar_carga_iniciada(recurso: Resource) -> void:
+	if recurso == null:
+		return
+	_en_carga[recurso.get_instance_id()] = recurso
+	var mem := _mem()
+	if mem != null and mem.has_method("avisar_carga_iniciada"):
+		mem.avisar_carga_iniciada(recurso)
+		_avisos_m62 += 1
+
+
+## Declara que el 63 terminó con `recurso`: el 62 puede volver a considerarlo.
+func avisar_carga_terminada(recurso: Resource) -> void:
+	if recurso == null:
+		return
+	_en_carga.erase(recurso.get_instance_id())
+	var mem := _mem()
+	if mem != null and mem.has_method("avisar_carga_terminada"):
+		mem.avisar_carga_terminada(recurso)
+
+
+func recursos_en_carga_63() -> int:
+	return _en_carga.size()
+
+
+func esta_en_carga_63(recurso: Resource) -> bool:
+	return recurso != null and _en_carga.has(recurso.get_instance_id())
+
+
+## Cuántos avisos efectivos se hicieron a M62 (0 = M62 ausente: no-op).
+func avisos_m62() -> int:
+	return _avisos_m62
+
+
+## ── Anti doble carga (L158) ─────────────────────────────
+
+## ¿Ya hay alguna operación en vuelo para esta ruta? El 63 evita encolar dos
+## veces el mismo recurso (ResourceCache con un solo dueño).
+func esta_cargando_ruta(ruta: String) -> bool:
+	return int(_rutas_en_carga.get(ruta, 0)) > 0
+
+
+func rutas_en_carga() -> int:
+	return _rutas_en_carga.size()
+
+
+func _abrir_ruta(ruta: String) -> void:
+	if ruta == "":
+		return
+	_rutas_en_carga[ruta] = int(_rutas_en_carga.get(ruta, 0)) + 1
+
+
+func _cerrar_ruta(ruta: String) -> void:
+	if ruta == "":
+		return
+	var n := int(_rutas_en_carga.get(ruta, 0)) - 1
+	if n <= 0:
+		_rutas_en_carga.erase(ruta)
+	else:
+		_rutas_en_carga[ruta] = n
+
+
+## ── Progreso real de la cola (§2) ───────────────────────
 ## Al vaciar (cerrar), 100% (§2: "tope 98% hasta cerrar").
 func progreso() -> float:
 	if _cola.is_empty() and _pesos_encolados > 0.0:
@@ -157,10 +256,18 @@ func _process(delta: float) -> void:
 				continue
 			if estado == ResourceLoader.THREAD_LOAD_LOADED:
 				var rec: Resource = ResourceLoader.load_threaded_get(ruta)
+				_cerrar_ruta(ruta)
+				# Handshake (§5.3): mientras el 63 ENTREGA el recurso al
+				# consumidor, el 62 no puede descargarlo. Es la ventana de
+				# carga; para protección de vida larga el consumidor llama a
+				# `avisar_carga_iniciada()` y la cierra cuando suelta.
+				avisar_carga_iniciada(rec)
 				if callable.is_valid():
 					callable.call(rec)
+				avisar_carga_terminada(rec)
 			else:
 				# THREAD_LOAD_FAILED / INVALID_RESOURCE: fallback al callable
+				_cerrar_ruta(ruta)
 				if callable.is_valid():
 					callable.call()
 				push_warning("[M63] thread load falló para %s" % ruta)
@@ -185,9 +292,21 @@ func _process(delta: float) -> void:
 
 ## ── LRU de chunks (§4) ──────────────────────────────────
 
-## Registra un chunk activo con su distancia al jugador
+## Registra un chunk activo con su distancia al jugador.
+## iter. 5 (handshake §5.3): al dar de alta un chunk NUEVO con recurso, el 63
+## OFRECE ese recurso al 62 como candidato a descarga (con su distancia), que
+## es la mitad "el 62 decide qué liberar" del contrato. Solo en el ALTA: si el
+## chunk ya estaba registrado no se vuelve a ofrecer (si no, la cola del 62
+## crecería con el mismo chunk re-registrado cada frame).
+## OJO: `ejecutar_descarga` de M62 NO libera el recurso (solo decide y cuenta);
+## el drop real lo sigue haciendo el LRU de este manager. Ofrecer es seguro.
 func registrar_chunk(chunk_id: String, distancia: float, recurso: Resource = null) -> void:
+	var es_nuevo := not _chunks.has(chunk_id)
 	_chunks[chunk_id] = {"frames_envejecido": 0, "distancia": distancia, "recurso": recurso}
+	if es_nuevo and recurso != null:
+		var mem := _mem()
+		if mem != null and mem.has_method("registrar_candidato_descarga"):
+			mem.registrar_candidato_descarga(recurso, int(PESOS.get("chunk_lod0", 1.0)), distancia)
 
 
 func chunk_activo(chunk_id: String) -> bool:
@@ -224,6 +343,10 @@ func liberar_envejecidos() -> int:
 		var c: Dictionary = _chunks.get(cid, {})
 		var rec = c.get("recurso", null)
 		if rec != null:
+			# Handshake: el 63 deja de reclamar el recurso ANTES de soltar la
+			# referencia, para que no quede un frame en que M62 lo vea libre y
+			# M63 todavía lo esté usando.
+			avisar_carga_terminada(rec)
 			rec.unreference()  # libera la referencia (pool de meshes reutiliza, M61)
 		_chunks.erase(cid)
 		_descargas_total += 1
@@ -257,6 +380,127 @@ func set_max_chunks(n: int) -> void:
 ## Estadísticas (para métricas M110/M104)
 func descargas_total() -> int:
 	return _descargas_total
+
+
+## ── Precalentamiento del menú principal (§7) ────────────
+
+## Rutas REALES de shaders del mundo/efectos (verificadas en el repo).
+const SHADERS_MUNDO: Array[String] = [
+	"res://shaders/agua_olas.gdshader",
+	"res://shaders/oceano.gdshader",
+]
+## Banco de ambiente por bioma (M42); el bioma inicial es el 1.º del JSON.
+const BANCO_BIOMA: String = "res://data/audio/ambient_biome_bank.json"
+## §7.1: si hay partida, se precargan 3 anillos alrededor del punto de guardado.
+const ANILLOS_SPAWN: int = 3
+## §7.2: tras precalentar, "Continuar" debería encolar MENOS que esto.
+const OPERACIONES_CONTINUAR_MAX: int = 30
+
+var _precalentado: bool = false
+
+
+## Precalienta el mundo desde el menú principal (§7.1): shaders del mundo y
+## efectos, banco del bioma inicial, atlas base y —si hay partida— el seed del
+## spawn (3 anillos). Prioridades §3: los chunks del seed van primero (0-1),
+## después bancos/atlas (3) y shaders (4).
+## Devuelve cuántas operaciones encoló. IDEMPOTENTE: una 2.ª llamada sin
+## `forzar` no encola nada (el menú puede re-entrar por reintentos de UI).
+## `opciones`: shaders/bancos/atlas (Array de rutas), hay_partida, anillos,
+## forzar.
+func precalentar_mundo(opciones: Dictionary = {}) -> int:
+	if _precalentado and not bool(opciones.get("forzar", false)):
+		return 0
+	_precalentado = true
+	var n := 0
+	# §7.1 seed del spawn primero: es lo que el jugador ve al entrar.
+	if bool(opciones.get("hay_partida", false)):
+		var anillos := int(opciones.get("anillos", ANILLOS_SPAWN))
+		for i in range(anillos):
+			if encolar("spawn_anillo_%d" % i, "chunk_lod0", 1, Callable()):
+				n += 1
+	# §7.1 bancos del bioma inicial + atlas base (prioridad de región §3).
+	for ruta in opciones.get("bancos", [BANCO_BIOMA]):
+		n += _encolar_precarga(String(ruta), "banco_audio", 3)
+	for ruta in opciones.get("atlas", []):
+		n += _encolar_precarga(String(ruta), "textura_atlas", 3)
+	# §7.1 shaders del mundo y efectos.
+	for ruta in opciones.get("shaders", SHADERS_MUNDO):
+		n += _encolar_precarga(String(ruta), "shader", 4)
+	print("[M63] precalentamiento: %d operaciones encoladas (peso total %.0f)"
+		% [n, _pesos_encolados])
+	return n
+
+
+## Encola una precarga evitando la DOBLE CARGA (L158): si la ruta ya está en
+## vuelo, no se vuelve a encolar. Devuelve 1 si encoló, 0 si no.
+func _encolar_precarga(ruta: String, tipo: String, prioridad: int) -> int:
+	if ruta == "" or esta_cargando_ruta(ruta):
+		return 0
+	if not encolar("pre_%s" % ruta.get_file(), tipo, prioridad, Callable(), ruta):
+		return 0
+	return 1
+
+
+## Operaciones que aún faltan para entrar al mundo (§7.2). Tras
+## `precalentar_mundo()` el "Continuar" debería quedar por debajo de
+## OPERACIONES_CONTINUAR_MAX.
+func operaciones_restantes() -> int:
+	return _cola.size()
+
+
+func precalentado() -> bool:
+	return _precalentado
+
+
+## ── Streaming por región (§5) ───────────────────────────
+## MATEMÁTICA PURA, testeable headless. Acá se decide QUÉ corona/piso/caja
+## toca; instanciar geometría es de M08/M09/M27/M28 (dueños externos).
+
+## Coronas de LOD del océano (§5): 0 = costa (detallada), 1 = medio, 2 = lejano.
+const CORONAS_OCEANO: int = 3
+## Pisos del subterráneo (§5): 0 = techo/cueva real, 1-2 = profundidad.
+const PISOS_SUBTERRANEO: int = 3
+## Radio del StreamableBox por isla (§5), en metros.
+const RADIO_STREAMABLE_BOX: float = 10.0
+## §5: el vuelo de aproximación (M28) precarga el destino al 60% de la ruta.
+const FRACCION_PRECARGA_RUTA: float = 0.6
+
+
+## Corona de océano para una distancia (m): más cerca = más detalle.
+func corona_oceano(distancia: float) -> int:
+	if distancia <= RADIO_STREAMABLE_BOX:
+		return 0
+	if distancia <= RADIO_STREAMABLE_BOX * 4.0:
+		return 1
+	return 2
+
+
+## Piso del subterráneo por profundidad (m). 0 = superficie/techo.
+func piso_subterraneo(profundidad: float) -> int:
+	if profundidad <= 0.0:
+		return 0
+	if profundidad <= 32.0:
+		return 1
+	return 2
+
+
+## ¿El jugador está dentro del StreamableBox de la isla? (§5: radio 10 m)
+func dentro_streamable_box(pos_jugador: Vector3, centro_isla: Vector3) -> bool:
+	return pos_jugador.distance_to(centro_isla) <= RADIO_STREAMABLE_BOX
+
+
+## ¿Toca precargar el destino? (§5: al 60% de la ruta de vuelo M28)
+func toca_precargar_destino(progreso_ruta: float) -> bool:
+	return progreso_ruta >= FRACCION_PRECARGA_RUTA
+
+
+## Encadenado al cambiar de piso (§5: "descarga del piso al subir, sin
+## huecos"): el piso que se deja NO se libera hasta que el destino tenga su
+## LOD 0 listo. Devuelve el piso liberable, o -1 si todavía no.
+func piso_liberable(piso_actual: int, destino_lod0_listo: bool) -> int:
+	if not destino_lod0_listo:
+		return -1
+	return maxi(piso_actual - 1, -1)
 
 
 ## ── Persistencia (M59, métricas LRU) ────────────────────

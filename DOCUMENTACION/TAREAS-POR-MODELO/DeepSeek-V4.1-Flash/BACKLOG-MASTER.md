@@ -739,6 +739,45 @@ verifiques vos, usa tu practica habitual de varios angulos.
       cazó la suite nueva como **no versionada** (trampa 98) → resuelta al commitearla. **NO sella
       §21.8** (autor == verificador). (2026-10-02)
 
+- [x] Log reservado: **1192** — **M63 (Cargas y Streaming) iter. 5: lado 63 del handshake + P9 +
+      regiones P12-P14 + red de regresión endurecida.** (El Log 1188 que figuraba en el encargo ya
+      estaba tomado — colisión de numeración reportada; el pool entregó **1192**; el **1190** salió
+      del pool sin log escrito → fuga reportada.)
+      **Implementado (código, `stream_manager.gd`):** lado 63 del handshake §5.3 —
+      `avisar_carga_iniciada/terminada()` (contrato **Resource-keyed**, `get_instance_id()`),
+      desacoplado vía `_mem()` (no-op si M62 ausente); hooks en `_process` (entrega del recurso
+      threaded, ramas LOADED y FAILED), `liberar_envejecidos()` (antes de `unreference()`) y
+      `registrar_chunk()` (ofrece chunks nuevos a M62). Anti doble carga L158 (`_rutas_en_carga`).
+      Precalentamiento P9 (`precalentar_mundo` idempotente + `operaciones_restantes` + tope 30).
+      Regiones P12-P14 como matemática pura (`corona_oceano`, `piso_subterraneo`,
+      `dentro_streamable_box`, `toca_precargar_destino`, `piso_liberable`).
+      **Suite nueva** `test_stream_m63_iter5.gd`: 7 bloques (A–G), **51 checks, 0 fallos, exit 0, ×3**.
+      Guardián de 3 capas con piso **medido** y **probado EN ROJO con 5 sondas** (A aserción falsa ·
+      B `return` en `_run()` · C piso+1 · D bloques sin cerrar · E `_fin` suprimido): **5/5 exit 1**,
+      control 0 (exit code REAL verificado con `echo $?`). Bug propio cazado: el bloque E esperaba
+      `con partida > sin partida` pero el anti doble carga se come el re-encolado → arreglado midiendo
+      sobre **instancias aisladas**.
+      **Red de regresión ENDURECIDA:** las 5 suites previas imprimían `"0 fallo(s)"` SIN contador
+      (falso verde, trampas 46/119) → guardián de 3 capas cada una, probado en rojo. **`test_stream_m63.gd`
+      estaba MUERTA dando verde** (3 SCRIPT ERROR: `weights`/`cargadas_size`/`presupuesto_chunks`/
+      `cola_vacia`, API inexistente; 3 de sus 4 funciones nunca corrían) → **REESCRITA** contra la API
+      real (cubre `ProgressCalculator` + señales, que ninguna otra suite cubría).
+      **Total M63: 21+29+9+7+7+51 = 124 checks, 0 fallos, EXIT 0**, cableado en `quality.yml` con gate
+      duro. **Checklist: 16→61 `[x]`, 85→13 `[ ]`, 0→27 `[?]`** (por PREFIJO de línea; `[?]` = dueño
+      externo M08/M09/M12/M27/M28/M42/M45/M46/M47/M53/M69/M90/M112/M113/M114).
+      **HALLAZGO GRAVE: el sello §21.8 de M63 (Log 895, Hy3) está INVALIDADO** — se apoyó en el "0
+      fallos (EXIT 0)" de las 5 suites, incluida la suite muerta. Un sello sobre un "0 fallos" de una
+      suite muerta no se hereda: hay que **RE-VERIFICAR** (no-autor). **NO sello §21.8** (autor ==
+      verificador).
+      **Fix de infraestructura (fuera de M63, justificado):** `validar_workflows.py` tenía 5 entradas
+      OBSOLETAS de `DEUDA_CONOCIDA` (M64, versionadas en `454d0ae`) → el job de workflows salía 1
+      desde el 2026-09-29 (**CI rojo ~3 días**, escenario de BUG-077). Borradas; el validador sale 0
+      (selftest 6/6). El hallazgo ya se había reportado sin tocar en 1187; aquí se arregla porque
+      bloqueaba el gate que esta iteración extiende.
+      **Hallazgos ajenos reportados (no tocados):** colisión 1188; fuga de pool 1190; **PARSE ERROR**
+      de `scripts/mapa/mapa_manager.gd` (M54) en el worktree (2 SCRIPT ERROR de ruido en algunas
+      corridas). **No toqué M61** ni `scripts/interacciones/` (kimi). (2026-10-02)
+
 ---
 
 ## 🔵 ENCARGO ACTUAL — M63-Cargas-Y-Streaming (asignado por el coordinador, 2026-10-02 17:40)

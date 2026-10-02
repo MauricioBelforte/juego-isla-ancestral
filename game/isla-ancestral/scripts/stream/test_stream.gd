@@ -1,24 +1,36 @@
-# Modelo: glm-5.3-flash
-# Plataforma: Kilo Code
-# Fecha: 2026-09-01
+# Modelo: glm-5.3-flash (iter. 1) · DeepSeek-V4.1-Flash (iter. 5)
+# Plataforma: Kilo Code · WorkBuddy
+# Fecha: 2026-09-01 · 2026-10-02
 #
 # M63: Test de StreamManager (cola por pesos, progreso piso/tope, presupuesto
 # de frame, LRU envejecido/tope, persistencia).
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/stream/test_stream.gd
+#
+# iter. 5 (Log 1192): este test imprimia "0 fallo(s)" SIN contador de checks:
+# una asignacion tipada que abortase las funciones por SCRIPT ERROR, o un
+# bloque nunca llamado, daban igual "0 fallo(s)" + EXIT 0 (falso verde,
+# trampas 46/119). Ahora tiene guardian de 3 capas: bloque `_fin()`, piso
+# CHECKS_MINIMOS MEDIDO en verde y `_summary()` en su propio call_deferred.
 
 extends SceneTree
 
+## Piso MEDIDO en verde (Log 1192), NO copiado.
+const CHECKS_MINIMOS := 21
+const BLOQUES: Array[String] = ["autoload", "cola", "progreso", "presupuesto", "lru_envejecido", "lru_tope", "persistencia"]
+
 var _fallos: int = 0
+var _checks: int = 0
+var _vistos: Dictionary = {}
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	var sm := root.get_node_or_null("StreamManager")
 	_check(sm != null, "StreamManager autoload presente")
+	_fin("autoload")
 	if sm == null:
-		print("=== TEST M63 STREAM: 1+ fallo(s) ===")
-		quit(1)
 		return
 	_test_cola_pesos(sm)
 	_test_progreso_piso_tope(sm)
@@ -26,10 +38,25 @@ func _run() -> void:
 	_test_lru_envejecido(sm)
 	_test_lru_tope(sm)
 	_test_persistencia(sm)
-	print("=== TEST M63 STREAM: %d fallo(s) ===" % _fallos)
+
+func _fin(nombre: String) -> void:
+	_vistos[nombre] = true
+
+## Capa 3: corre SIEMPRE, aunque `_run()` haya abortado por un SCRIPT ERROR.
+func _summary() -> void:
+	for n in BLOQUES:
+		if not _vistos.has(n):
+			_checks += 1
+			_fallos += 1
+			print("FALLO: el bloque %s NO se ejecuto (posible SCRIPT ERROR)" % n)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("FALLO: solo %d checks ejecutados (minimo medido en verde: %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== TEST M63 STREAM: %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)
@@ -46,6 +73,7 @@ func _test_cola_pesos(sm: Node) -> void:
 	# El primero en procesarse debe ser op_b (prioridad 1)
 	var primero: String = String(sm._cola[0].get("op_id", ""))
 	_check(primero == "op_b", "orden por prioridad (op_b primero): %s" % primero)
+	_fin("cola")
 
 func _test_progreso_piso_tope(sm: Node) -> void:
 	# Piso 2% con cola no vacía al inicio (§2)
@@ -65,6 +93,7 @@ func _test_progreso_piso_tope(sm: Node) -> void:
 	var p1: float = sm.progreso()
 	_check(p1 <= 0.98 + 0.02, "tope 98% respetado en cola parcial (%.2f)" % p1)
 	sm._process(0.016)
+	_fin("progreso")
 
 func _test_presupuesto_frame(sm: Node) -> void:
 	# §8: el _process respeta PRESUPUESTO_MS — con muchas ops cortas, procesa
@@ -76,6 +105,7 @@ func _test_presupuesto_frame(sm: Node) -> void:
 	sm._process(0.016)
 	_check(sm.cola_size() < antes, "_process drena la cola (presupuesto ms)")
 	# Todas cortas: es plausible que drene en 1 frame con presupuesto 40ms — OK
+	_fin("presupuesto")
 
 func _test_lru_envejecido(sm: Node) -> void:
 	# §4: registrar chunks, envejecer los lejanos, liberar
@@ -93,6 +123,7 @@ func _test_lru_envejecido(sm: Node) -> void:
 	sm.marcar_envejecidos(100.0)
 	sm.liberar_envejecidos()
 	_check(sm.chunk_activo("chunk_recien"), "1 frame envejecido aún NO se libera")
+	_fin("lru_envejecido")
 
 func _test_lru_tope(sm: Node) -> void:
 	# §4 tope duro: MAX_CHUNKS (limpiar chunks de tests anteriores — singleton)
@@ -108,6 +139,7 @@ func _test_lru_tope(sm: Node) -> void:
 	_check(sm.chunks_activos() == 3, "chunks activos = 3")
 	_check(sm.chunk_activo("a") and sm.chunk_activo("b"), "los más cercanos sobreviven")
 	_check(not sm.chunk_activo("d") and not sm.chunk_activo("e"), "los más lejanos liberados")
+	_fin("lru_tope")
 
 func _test_persistencia(sm: Node) -> void:
 	var data: Dictionary = sm.get_save_data()
@@ -116,3 +148,4 @@ func _test_persistencia(sm: Node) -> void:
 	sm.restore_save_data({"max_chunks": 100, "descargas_total": 999})
 	_check(sm.chunks_activos() <= 100, "max_chunks restaurado")
 	sm.set_max_chunks(4096)
+	_fin("persistencia")

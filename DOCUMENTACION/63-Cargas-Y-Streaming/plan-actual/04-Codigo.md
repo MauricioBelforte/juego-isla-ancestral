@@ -101,3 +101,60 @@ StreamOp: { tipo, path, peso, callable_al_terminar }
 - M28/M69: el vuelo de aproximación encola la isla destino al 60% de la ruta (encolar con prioridad 5, §3).
 - Iter. 2 thread real: migrar los callables a ResourceLoader.load_threaded_request para texturas/shaders; el presupuesto pasa a 1 op por frame verificación.
 - MAX_CHUNKS por hardware: M90 presets (2048 Deck / 4096 PC) vía set_max_chunks.
+
+---
+
+## Notas del Agente — Iteración 5 (Log 1192, DeepSeek-V4.1-Flash/WorkBuddy)
+
+**Fecha:** 2026-10-02
+**Estado:** Parcial (lado 63 del handshake M62↔M63 + precalentamiento P9 + regiones P12-P14 + red de regresión endurecida)
+
+### Lo que hice
+
+**1. Handshake con M62 (§5.3) — LADO 63.** El 62 decide qué LIBERAR; el 63 decide qué CARGAR. El puente es `stream_manager.gd`:
+- `avisar_carga_iniciada(recurso)` / `avisar_carga_terminada(recurso)`: registro `_en_carga` por `recurso.get_instance_id()` (contrato Resource-keyed, NO path-keyed) + aviso al autoload M62.
+- `recursos_en_carga_63()`, `esta_en_carga_63()`, `avisos_m62()` (0 si M62 ausente).
+- **DESACOPLADO** vía `_mem()` = `get_node_or_null("/root/MemoryMonitor")`: si M62 no existe (tests sueltos, orden de autoloads, build sin memoria) todo es no-op y el 63 sigue igual.
+- Hooks reales: `_process()` avisa alrededor de la ENTREGA del recurso threaded (rama LOADED y rama FAILED); `liberar_envejecidos()` avisa ANTES de `unreference()`; `registrar_chunk()` OFRECE los chunks NUEVOS al 62 como candidatos de descarga (con su distancia).
+
+**2. Anti doble carga (L158).** Registro `_rutas_en_carga` (ruta → nº de operaciones en vuelo): `encolar()` abre la ruta, `_process()` la cierra. `esta_cargando_ruta()`, `rutas_en_carga()`.
+
+**3. Precalentamiento (§7 / P9).** `precalentar_mundo(opciones)`: shaders del mundo + banco del bioma inicial + atlas base + 3 anillos del spawn si `hay_partida`. IDEMPOTENTE (2.ª llamada sin `forzar` → 0). `operaciones_restantes()`, `precalentado()`, tope `OPERACIONES_CONTINUAR_MAX = 30` (§7.2).
+
+**4. Streaming por región (§5 / P12-P14).** Matemática pura testeable headless: `corona_oceano()` (3 coronas), `piso_subterraneo()` (3 pisos LOD 0-2), `dentro_streamable_box()` (radio 10 m), `toca_precargar_destino()` (60% de la ruta M28), `piso_liberable()` (encadenado al subir, sin huecos). Instanciar la geometría es de M08/M09/M27/M28 (dueños externos).
+
+**5. Suite nueva `test_stream_m63_iter5.gd`** (7 bloques A-G, **51 checks, 0 fallos, ×3**). Guardián de 3 capas probado EN ROJO con 5 sondas: (A) aserción falsa, (B) `return` que aborta `_run`, (C) piso+1, (D) bloques sin cerrar, (E) `_fin()` suprimido → las 5 dan **EXIT 1**; el control sin mutar da **EXIT 0**. El código de salida REAL se verificó con `echo $?`, no por el texto "FALLIDO".
+
+**6. Red de regresión ENDURECIDA.** Las 5 suites previas imprimían `"0 fallo(s)"` SIN contador de checks: un aborto por SCRIPT ERROR (o un bloque nunca llamado) daba igual "0 fallo(s)" + EXIT 0 → falso verde (trampas 46/119). Ahora las 5 tienen guardián de 3 capas (bloque `_fin()`, piso `CHECKS_MINIMOS` MEDIDO, `_summary()` en su propio `call_deferred`), probado en rojo por inyección de un `return` temprano.
+
+| Suite | Checks (verde) | Piso | Antes |
+|---|---|---|---|
+| `test_stream.gd` | 21 | 21 | "0 fallo(s)" sin contador |
+| `test_stream_m63.gd` | 29 | 29 | MUERTA dando verde (3 SCRIPT ERROR) |
+| `test_pausa_cargas.gd` | 9 | 9 | "0 fallo(s)" sin contador |
+| `test_pantalla_carga.gd` | 7 | 7 | "0 fallo(s)" sin contador |
+| `test_rf2_threaded.gd` | 7 | 7 | "0 fallo(s)" sin contador |
+| `test_stream_m63_iter5.gd` | 51 | 51 | nueva |
+
+**Total del módulo: 21+29+9+7+7+51 = 124 checks, 0 fallos, EXIT 0.** Las 6 suites quedan cableadas en `.github/workflows/quality.yml` con gate duro (`|| FAIL=1`).
+
+**7. `test_stream_m63.gd` REESCRITA.** Estaba MUERTA dando verde: apuntaba a una API que nunca existió en el manager entregado (`sm.weights`, `sm.cargadas_size()`, `sm.obtener_cache()`, `sm.presupuesto_chunks`, `sm.cola_vacia`, `encolar(tipo, ruta)` de 2 args, `precalentar_mundo(Array)`). Cada llamada lanzaba un SCRIPT ERROR que abortaba la función; el resumen imprimía "8 checks, 0 fallos" y salía con código 0. Reescrita contra la API REAL: cubre `ProgressCalculator` (pesos/progreso — cobertura que ninguna otra suite daba), la API de cola (incluido el rechazo de tipo desconocido), las SEÑALES (`operacion_completada`, `chunk_listo`, `banco_listo`, `shader_listo`, `progreso_cambiado`) y el progreso piso/tope/cierre.
+
+### Hallazgo grave: el sello §21.8 de M63 está INVALIDADO
+
+El `CHECKLIST-GLOBAL.md` (fila 63) y el `Log 895-HY3-LOTED.md` declaran M63 verificado §21.8 con **"0 fallos (EXIT 0)"** citando las 5 suites — incluida `test_stream_m63.gd`. Ese "0 fallos" era un **falso verde**: la suite emitía 3 SCRIPT ERROR y 3 de sus 4 funciones de test nunca corrían. Un sello que se apoyó en un "0 fallos" de una suite muerta queda **invalidado** → **hay que RE-VERIFICAR, no heredar**. La re-verificación §21.8 la hace un NO-autor (Hy3/verificador independiente), nunca el autor de la iteración. Reportado al coordinador.
+
+### Lo que NO hice (honestidad obligatoria)
+- **Integración real con M08/M09/M27/M28** (mallas de chunk reales, geometría de océano/subterráneo): fuera de alcance de una iteración headless. La DECISIÓN (qué corona/piso/caja) está implementada y testeada; instanciar geometría es de esos dueños → `[?]`.
+- **M12** (anillo sigue a la cámara), **M47** (mips por LOD), **M53/M46** (arte cozy de la pantalla), **M90** (presets Deck), **M113/M114** (profiler/recorrido): dueños externos → `[?]`.
+- **No toqué M61** (`scripts/rendimiento/` fuera de `memoria/`) ni `scripts/interacciones/` (kimi).
+
+### Hallazgos ajenos (reportados, NO tocados)
+- **Colisión de numeración 1188**: existen `Logs/1188-HY4-AUDITORIA-AUTORIA-BLENDER.md` y `Logs/1188-m62-iter5-verificada-deepseek-reasignado-m63_2026-10-02_17-47-26.md`.
+- **Fuga de pool**: el número **1190** salió del pool sin log escrito (consumido, nunca usado). El pool entregó **1192**.
+- **Contaminación de worktree ajena**: `scripts/mapa/mapa_manager.gd` (M54) tiene un PARSE ERROR en el worktree (líneas ~198-201, `center` sin tipo + inferencia Variant) y está modificado sin commitear. No es de M63; aparece como ruido en algunas corridas headless. NO tocado.
+
+### Recomendaciones para el próximo agente
+- Cablear `registrar_chunk()` desde M08 al poblar el anillo, para que el handshake con M62 tenga candidatos reales.
+- El handshake de "vida larga" (avisar al consumidor) queda en manos del consumidor: `avisar_carga_iniciada()` al tomar el recurso y `avisar_carga_terminada()` al soltarlo (el 63 solo cubre la ventana de carga).
+- Re-verificar §21.8 con un no-autor antes de volver a sellar M63.
