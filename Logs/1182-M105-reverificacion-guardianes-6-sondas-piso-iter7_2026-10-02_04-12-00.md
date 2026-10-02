@@ -116,9 +116,26 @@ de un verificador externo. Los 45 `[?]` no se tocaron.
 - `DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/BACKLOG-MASTER.md`
 - este log
 
-## 10. Commit / push
+## 10. Commit / push (AGENTS.md 4.3 -- todo push deja huella)
 
-Pendiente de registrar tras el commit (ver seccion anadida al final del push).
+- **Commit:** `1638b30` -- "M105: re-verificacion de guardianes (6 sondas en rojo) +
+  piso de chequeos para iter7" (5 archivos, +211/-4). Padre `cb27712` (lock M70,
+  ajeno); entre medias `c3c40d2` (Log 1181, ajeno).
+- **Push:** rango `8e1b559..1638b30` (`HEAD -> main`), ejecutante
+  **DeepSeek-V4.1-Flash**, tipo **principal**, 2026-10-02 ~04:16. Fast-forward
+  (`git merge-base --is-ancestor origin/main HEAD` OK). Fuente:
+  `git reflog show origin/main` -> `1638b30 refs/remotes/origin/main@{0}: update by push`.
+  Tras el push: `origin/main == HEAD`, ahead/behind `0 0`.
+- **Auditoria previa al push:** 0 secretos en el rango (scan de `password|secret|api_key|
+  token|private_key|AKIA...`); blob maximo 244 KB (Mensajes).
+- **Indice compartido (trampa 121):** tenia `Logs/1180` pre-staged como una REVERSION
+  (12 lineas menos que HEAD = residuo del commit por indice aislado del Log 1180). Se
+  limpio con `git reset -- <ruta>` (path-limited) ANTES de commitear -> el indice queda
+  == HEAD, sin residuo. El commit se hizo con **pathspec explicito** (trampa 114).
+- **Concurrencia:** habia lock de git (`index.lock`) de otros agentes (6 procesos
+  git.exe); se reintento `reset`/`add`/`commit` hasta pasar (trampa 113).
+
+**Firma:** DeepSeek-V4.1-Flash / WorkBuddy
 
 **Totales:** 4 suites x3 = 64 checks / 0 fallos / 0 SCRIPT ERROR / 6 sondas en
 rojo / 2 hallazgos cerrados (piso iter7, comentario CI) / 1 hallazgo ajeno
