@@ -22,6 +22,8 @@ var config: Dictionary = {}
 var _exploradas: Dictionary = {}   # marcador_id -> bool
 var _regiones_exploradas: Dictionary = {}  # region_id -> bool (fog por región)
 var _pines: Array = []             # [{x, y, z, nota, tipo}]
+var _cached_texture: Image = null  # Textura cacheada del mapa (sin segundo bake)
+var _texture_dirty: bool = true    # Invalidado en exploration_changed
 
 func _ready() -> void:
 	_cargar_config()
@@ -97,6 +99,7 @@ func marcar_explorada(marcador_id: String) -> void:
 				var region: String = String(m.get("region", String(m.get("isla", "raiz"))))
 				_regiones_exploradas[region] = true
 				break
+		invalidate_map_texture()
 		emit_signal("exploration_changed", _exploradas.keys())
 		emit_signal("markers_changed", marcadores_por_isla("raiz"))
 		print("[M54] Marcador explorado: %s" % marcador_id)
@@ -179,3 +182,40 @@ func _cargar_pines() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_PINES))
 	if typeof(parsed) == TYPE_DICTIONARY and parsed.has("pines"):
 		_pines = parsed["pines"]
+
+## ── Textura caché (bake una vez, invalida en exploration_changed) ──
+
+func bake_map_texture(width: int = 256, height: int = 256) -> Image:
+	if _cached_texture != null and not _texture_dirty:
+		return _cached_texture
+	var img := Image.create_empty(width, height, false, Image.FORMAT_RGBA8)
+	# Fondo mar
+	img.fill(Color(0.15, 0.25, 0.35, 1.0))
+	# Islas como blobs circulares (simplificado desde config)
+	var islas: Array = config.get("islas", [])
+	var positions: Array = [Vector2(0.25, 0.25), Vector2(0.75, 0.25), Vector2(0.25, 0.75), Vector2(0.75, 0.75)]
+	for i in range(mini(islas.size(), 4)):
+		var island_id: String = String(islas[i])
+		var center: Vector2 = (positions[i] as Vector2) * Vector2(width, height)
+		var radius := 40.0
+		var color: Color = Color.from_hsv(float(i) * 0.25, 0.3, 0.5, 1.0)
+		var explored: bool = _regiones_exploradas.get(island_id, true)
+		if not explored:
+			color = Color(0.1, 0.1, 0.12, 1.0)
+		for y in range(int(center.y) - int(radius), int(center.y) + int(radius)):
+			for x in range(int(center.x) - int(radius), int(center.x) + int(radius)):
+				if x < 0 or x >= width or y < 0 or y >= height:
+					continue
+				if (x - center.x) * (x - center.x) + (y - center.y) * (y - center.y) < radius * radius:
+					img.set_pixel(x, y, color)
+	_cached_texture = img
+	_texture_dirty = false
+	return img
+
+func invalidate_map_texture() -> void:
+	_texture_dirty = true
+
+func get_cached_map_texture() -> Image:
+	if _cached_texture == null:
+		bake_map_texture()
+	return _cached_texture

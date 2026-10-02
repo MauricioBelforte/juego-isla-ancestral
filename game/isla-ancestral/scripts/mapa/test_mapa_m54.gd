@@ -30,6 +30,7 @@ func _run() -> void:
 	_test_persistencia()
 	_test_signals()
 	_test_canvas_transform()
+	_test_texture_cache()
 	_summary()
 
 func _test_canvas_transform() -> void:
@@ -48,6 +49,21 @@ func _test_canvas_transform() -> void:
 	var children_updated := canvas._markers_container.get_child_count()
 	_check("update_markers no recrea niños", children_updated == children_after, "before=%d after=%d" % [children_after, children_updated])
 	canvas.queue_free()
+
+func _test_texture_cache() -> void:
+	print("--- Textura caché del MapManager ---")
+	var mm := root.get_node_or_null("MapManager")
+	var tex1: Image = mm.bake_map_texture(128, 128)
+	_check("bake texture != null", tex1 != null)
+	_check("bake texture size", tex1.get_width() == 128 and tex1.get_height() == 128)
+	var tex2: Image = mm.bake_map_texture(128, 128)
+	_check("cache reutilizada (same ref)", tex1 == tex2)
+	# Invalidar y verificar que se re-bake
+	mm.invalidate_map_texture()
+	var tex3: Image = mm.bake_map_texture(128, 128)
+	_check("re-bake tras invalidate (new ref)", tex3 != tex1)
+	var cached: Image = mm.get_cached_map_texture()
+	_check("get_cached_map_texture no null", cached != null)
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1
