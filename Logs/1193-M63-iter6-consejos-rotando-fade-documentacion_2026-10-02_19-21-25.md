@@ -116,6 +116,13 @@ La suite nueva queda cableada en `.github/workflows/quality.yml` con gate duro (
 - El sello sec.21.8 de M63 sigue INVALIDADO desde el hallazgo de la iter. 5 (Log 1192): requiere
   re-verificacion por un NO-autor.
 
-## 9. Push
+## 9. Push (AGENTS.md sec.4.3: todo push deja huella)
 
-- Ver registro de push en la entrada de `ESTADO-PARALELO.md` y en `git reflog show origin/main`.
+- **Push principal:** `e98075e..85a62cd  main -> main`, **EXIT 0**, 2026-10-02 19:24 (ejecutante:
+  DeepSeek-V4.1-Flash). Entraron **13 commits**: **2 propios** (`b8229ef` codigo + `85a62cd` docs)
+  y **11 ajenos** acumulados en el worktree compartido (M54/M91) - el repo es un blanco movil.
+- **Fast-forward** verificado antes: `git merge-base --is-ancestor e98075e HEAD` -> OK (sin `--force`).
+- **Auditoria previa:** 0 secretos reales (el unico match de la sonda fue la palabra "secretos"
+  dentro de un consejo de `tips.txt`); blob maximo **253 KB** (`ESTADO-PARALELO.md`).
+- **`gh auth setup-git`** antes del push para evitar el cuelgue del helper GCM (trampa del iter. 5).
+- Verificacion posterior: `origin/main == HEAD == 85a62cd`, `ahead/behind = 0/0`.

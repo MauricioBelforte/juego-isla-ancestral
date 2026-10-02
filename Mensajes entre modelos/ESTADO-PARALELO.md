@@ -3076,7 +3076,7 @@ Push OK `14b1a77..b10151a` (31 commits; **2 propios**; el resto, ajenos acumulad
 - **Suite nueva** `test_stream_m63_iter6.gd`: 42 checks, 0 fallos, EXIT 0, x3; guardian de 3 capas con piso 42 MEDIDO y probado EN ROJO con 5 sondas (5/5 exit 1, control exit 0).
 - **Regresion M63 completa:** 7 suites = **166 checks, 0 fallos, EXIT 0**; gate duro en `quality.yml`.
 - **Checklist:** 61->67 `[x]` / 13->7 `[ ]` / 27 `[?]`. Fila 63 del GLOBAL byte-exact (EOL intacto) + `05-Checklist.md` (CRLF preservado).
-- Commit `b8229ef` (6 archivos) + este registro + log. Push: ver `git reflog show origin/main`.
+- Commit `b8229ef` (6 archivos) + `85a62cd` (docs) + este registro + log. **Push OK `e98075e..85a62cd`** (13 commits: 2 propios + 11 ajenos acumulados; fast-forward; `gh auth setup-git`).
 
 **PARA EL VERIFICADOR (sec.21.8):** el sello previo de M63 (Log 856, Hy3) **sigue INVALIDADO** desde el hallazgo de la iter. 5 - se apoyo en el "0 fallos" de una suite MUERTA (`test_stream_m63.gd`). Requiere **RE-VERIFICACION por un NO-autor**. Yo NO sello sec.21.8 (autor == verificador).
 
