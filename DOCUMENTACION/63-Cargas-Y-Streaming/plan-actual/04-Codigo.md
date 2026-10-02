@@ -158,3 +158,57 @@ El `CHECKLIST-GLOBAL.md` (fila 63) y el `Log 895-HY3-LOTED.md` declaran M63 veri
 - Cablear `registrar_chunk()` desde M08 al poblar el anillo, para que el handshake con M62 tenga candidatos reales.
 - El handshake de "vida larga" (avisar al consumidor) queda en manos del consumidor: `avisar_carga_iniciada()` al tomar el recurso y `avisar_carga_terminada()` al soltarlo (el 63 solo cubre la ventana de carga).
 - Re-verificar §21.8 con un no-autor antes de volver a sellar M63.
+
+---
+
+## Notas del Agente — Iteración 6 (Log 1193, DeepSeek-V4.1-Flash/WorkBuddy)
+
+**Fecha:** 2026-10-02
+**Estado:** Parcial (cierra §6: consejos rotando L98 + fundido a escena L99; cierra la documentación de delegación L146-L150)
+
+### Por qué esta iteración (los 13 `[ ]` que quedaban)
+
+Tras la iter. 5, el checklist quedó en **61 `[x]` / 13 `[ ]` / 27 `[?]`**. Al revisar los 13 `[ ]` se separaron en dos grupos:
+
+- **Con dueño externo** (L28/L34/L36/L38/L39/L40/L41): poblado real de NPC/audio/texturas/shaders y el arte cozy → M08/M15/M16/M42/M47/M53. Quedan `[ ]` con su nota.
+- **Trabajo PROPIO de M63, sin dueño externo** (L98, L99, L146-L150): los tomé. La pantalla de carga es un entregable de este módulo (§6) y su comportamiento (consejos + transición) es suyo.
+
+### Lo que hice
+
+**1. Consejos de mundo rotando (§6, L98).** Nuevo `scripts/stream/consejos_carga.gd` (`class_name ConsejosCarga`, lógica PURA, métodos `static`):
+- `parsear(texto)`: una frase por línea, `#` = comentario, blancos ignorados, espacios recortados, ORDEN preservado.
+- `cargar(ruta)`: lee `tips.txt` con `FileAccess`; **degradación silenciosa** (archivo ausente/vacío → lista vacía, la pantalla sigue igual).
+- `indice_inicial(semilla, n)`: índice determinista por **semilla de partida (M29)**. **NO es `semilla % n`** (eso daría el mismo consejo a partidas creadas seguidas); mezcla la semilla y se verifica que 20 semillas contiguas dan ≥5 índices distintos.
+- `consejo(tips, semilla, tick)`: rota desde el índice inicial con `posmod` (da la vuelta).
+- Base de datos `data/stream/tips.txt` (junto a `weights.json`): **lista semilla** de 10 consejos; ampliarla es trabajo de **contenido** (Nivel C), no de lógica.
+
+**2. Fundido (fade) hacia la escena (§6, L99).** Nuevo `scripts/stream/fundido_carga.gd` (`class_name FundidoCarga`, máquina de estados PURA): `iniciar(duracion)` → `avanzar(delta)` → `alpha()` (1.0 → 0.0) / `progreso()` / `terminado()`. Idempotente (re-iniciar reinicia el reloj), `delta` negativo no retrocede, `duracion <= 0` nace TERMINADO, y `acotar_duracion()` respeta el tope **`DURACION_MAX = 2 s`** de §6 ("transición corta").
+
+**3. Integración en `pantalla_carga.gd`.** Label `Consejos` nuevo (los nodos `Fondo`/`Barra`/`Texto` se conservan: `test_pantalla_carga.gd` sigue 7/0). `configurar_seed()` (siembra desde el autoload `GameTime` = M29 si no se fija), `consejo_actual()`, `fundir(duracion)`, `fundiendo()`, `alpha_actual()`. El `_process` (habilitado solo con la pantalla visible, `set_process`) rota el consejo cada `INTERVALO_ROTACION` y avanza el fundido; al completarlo llama a `ocultar()`.
+
+**4. Suite nueva `test_stream_m63_iter6.gd`** (6 bloques A-F, **42 checks, 0 fallos, EXIT 0, ×3**). Guardián de 3 capas con piso **42 MEDIDO** y probado EN ROJO con 5 sondas: (A) aserción falsa, (B) `return` que aborta `_run`, (C) piso+1, (D) bloque sin cerrar, (E) `_fin()` no-op → **5/5 EXIT 1**; control sin mutar **EXIT 0**.
+
+**5. Regresión completa del módulo.** Las 7 suites, ×1 (la nueva ×3):
+
+| Suite | Checks | Piso |
+|---|---|---|
+| `test_stream.gd` | 21 | 21 |
+| `test_stream_m63.gd` | 29 | 29 |
+| `test_stream_m63_iter5.gd` | 51 | 51 |
+| `test_stream_m63_iter6.gd` | 42 | 42 |
+| `test_pausa_cargas.gd` | 9 | 9 |
+| `test_pantalla_carga.gd` | 7 | 7 |
+| `test_rf2_threaded.gd` | 7 | 7 |
+
+**Total del módulo: 21+29+51+42+9+7+7 = 166 checks, 0 fallos, EXIT 0.** La suite nueva queda cableada en `quality.yml` con gate duro (`|| FAIL=1`).
+
+**6. Documentación de cierre (L146-L150).** Cierro los 4 ítems de la sección §L que son documentación pura: módulo marcado delegable, 3 alternativas descartadas, API estable y bloqueo por M08/M61 documentados (ver `05-Checklist.md` y `02-Analisis.md`).
+
+### Nota de infraestructura (trampa 114, otra vez)
+
+El **índice git compartido volvió a fallar**: tras `git add` de mis 6 rutas, otro agente (M54) commiteó y el índice quedó **vacío** — `git commit -- <rutas>` falló con *"did not match any file(s) known to git"*. Solución aplicada: **encadenar `git add -- <rutas> && git commit -- <rutas>` en UNA sola invocación** (ventana de carrera mínima). Commit resultante `b8229ef`, con EXACTAMENTE mis 6 archivos (`git show --stat`). El worktree nunca se perdió.
+
+### Lo que NO hice (honestidad obligatoria)
+- **El contenido de `tips.txt`** es una lista semilla; redactar los consejos definitivos y su tono es de contenido (Nivel C).
+- **El arte cozy** de la pantalla (nubes/parallax/escena full-screen) sigue siendo de M53 → `[?]`.
+- **No toqué M61** ni `scripts/interacciones/` (kimi). **No sellé §21.8** (autor ≠ verificador).

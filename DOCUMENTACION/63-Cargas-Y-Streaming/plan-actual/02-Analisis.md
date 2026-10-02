@@ -36,3 +36,37 @@
 - **Barra de progreso falsa (fake timers):** engañosa y rompe la sección 8 (progreso real); descartado (pesos por operación).
 - **Streaming "todo instanciado de una vez" para islas pequeñas:** el mapa tiene decenas de islas (M27); memoria inaceptable; descartado (StreamableBox por isla).
 - **Cambiar LOD de chunks con operaciones síncronas de mesh:** provoca hitching notable (congelamiento); descartado (generación en hilos + cola).
+- **Consejos de carga elegidos con `randi()` (no deterministas):** rompe la reproducibilidad de QA y el "misma partida → misma experiencia"; descartado (rotación determinista por semilla de partida M29, `ConsejosCarga.indice_inicial`). *(iter. 6, Log 1193)*
+- **Fundido con `Tween` acoplado al árbol de escena:** no se puede ejercitar en headless sin montar el árbol; descartado (máquina de estados PURA `FundidoCarga` separada de la animación del nodo, testeable headless). *(iter. 6, Log 1193)*
+
+## 4. Dependencias y bloqueos (L150)
+
+- **M08 (voxel/chunks)** — *bloqueante de la parte no-headless*: el poblado REAL de chunks (radio R=3, máx 5 en movimiento rápido), los buffers de VoxelTools y la generación de mallas en hilos son de M08. El 63 aporta la DECISIÓN (cola, LRU, `registrar_chunk()`); la instanciación es del 08. **No bloquea** la lógica headless (ya implementada y medida).
+- **M61 (rendimiento/pool)** — *solo consumir, NO tocar* (en curso por otro agente, regla §21.4): el 63 consume sus presupuestos y suelta la referencia de malla (`unreference()`); el pool de meshes reutilizado es suyo.
+- **M28/M69 (viaje/teleport)** — el 63 aporta `toca_precargar_destino()` (60% de la ruta) y `corona_oceano()`/`piso_subterraneo()`; el enganche real del vuelo es de esos módulos → `[?]`.
+- **M29 (partida/save)** — el 63 lee la semilla de partida vía el autoload `GameTime` (`get_semilla_partida()`) y persiste su estado en su propia sección "stream" (ISaveProvider M59), sin acoplarse al save del mundo.
+- **M53/M46/M47/M90/M112/M113/M114** — arte cozy, LoadingScreen reutilizable, mips por LOD, presets Deck, profiler y recorrido: dueños externos → `[?]`.
+
+## 5. API estable (L148)
+
+Superficie pública del módulo, congelada para los consumidores (M08/M12/M28/M69/M29/M62):
+
+**`StreamManager` (autoload)**
+- Cola: `encolar(op_id, tipo, prioridad, callable, ruta_recurso="") -> bool`, `cola_size()`, `pausar_cargas()`, `reanudar_cargas()`, `cargas_pausadas()`.
+- Progreso: `progreso() -> float`, `pesos_encolados() -> float`; señales `progreso_cambiado`, `operacion_completada`, `chunk_listo`, `banco_listo`, `shader_listo`.
+- LRU: `registrar_chunk(chunk_id, distancia, recurso=null)`, `chunk_activo()`, `chunks_activos()`, `marcar_envejecidos(r_max)`, `liberar_envejecidos() -> int`, `aplicar_tope() -> int`, `set_max_chunks(n)`.
+- Handshake M62 (§5.3): `avisar_carga_iniciada(recurso)`, `avisar_carga_terminada(recurso)`, `recursos_en_carga_63()`, `esta_en_carga_63(recurso)`, `avisos_m62()`.
+- Anti doble carga: `esta_cargando_ruta(ruta)`, `rutas_en_carga()`.
+- Precalentamiento: `precalentar_mundo(opciones={}) -> int`, `operaciones_restantes()`, `precalentado()`.
+- Región: `corona_oceano(dist)`, `piso_subterraneo(prof)`, `dentro_streamable_box(pos, centro)`, `toca_precargar_destino(progreso_ruta)`, `piso_liberable(piso, destino_listo)`.
+- Persistencia (M59): `get_section_name() == "stream"`, `get_save_data()`, `restore_save_data(data)`.
+
+**`ProgressCalculator` (`class_name`, estático)** — `calcular_peso_total(cola)`, `progreso(completados, total)`, `peso_de_tipo(tipo, weights={})`.
+
+**`ConsejosCarga` (`class_name`, estático)** — `parsear(texto)`, `cargar(ruta=RUTA_DEFAULT)`, `indice_inicial(semilla, n)`, `consejo(tips, semilla, tick)`; const `INTERVALO_ROTACION`, `RUTA_DEFAULT`.
+
+**`FundidoCarga` (`class_name`)** — `iniciar(duracion=DURACION_DEFAULT)`, `avanzar(delta)`, `alpha()`, `progreso()`, `terminado()`, `estado()`; estático `acotar_duracion(d)`; enum `Estado`; const `DURACION_MAX = 2.0`, `DURACION_DEFAULT`.
+
+**`PantallaCarga` (autoload)** — `mostrar()`, `ocultar()`, `fundir(duracion)`, `fundiendo()`, `alpha_actual()`, `configurar_seed(semilla)`, `consejo_actual()`; señal `pantalla_oculta`.
+
+> Regla de estabilidad: **cambios aditivos** (nuevos métodos/constantes) no rompen consumidores; renombrar o cambiar la firma de los anteriores exige coordinar con los dueños listados en §4.

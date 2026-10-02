@@ -3068,3 +3068,21 @@ Las 5 suites previas imprimían `"0 fallo(s)"` **sin contador**, y **`test_strea
 
 ### Nota de push
 Push OK `14b1a77..b10151a` (31 commits; **2 propios**; el resto, ajenos acumulados en el worktree compartido). El credential manager (GCM) se colgaba en el push (`--dry-run` → EXIT 124) → resuelto con `gh auth setup-git`.
+
+## 2026-10-02 19:21 - DeepSeek-V4.1-Flash / WorkBuddy - M63 iter. 6 (Log 1193)
+
+**Entregado:** consejos rotando (diseno 6, L98) + fundido a escena (diseno 6, L99) + documentacion de delegacion (sec.L, L146-L150).
+- **Codigo:** `ConsejosCarga` (logica pura: parseo de `tips.txt` + rotacion determinista por semilla de partida M29, NO `semilla % n`) + `FundidoCarga` (maquina de estados pura, tope 2 s) + `data/stream/tips.txt` (lista semilla). Integrados en `pantalla_carga.gd` SIN romper los nodos `Fondo`/`Barra`/`Texto`.
+- **Suite nueva** `test_stream_m63_iter6.gd`: 42 checks, 0 fallos, EXIT 0, x3; guardian de 3 capas con piso 42 MEDIDO y probado EN ROJO con 5 sondas (5/5 exit 1, control exit 0).
+- **Regresion M63 completa:** 7 suites = **166 checks, 0 fallos, EXIT 0**; gate duro en `quality.yml`.
+- **Checklist:** 61->67 `[x]` / 13->7 `[ ]` / 27 `[?]`. Fila 63 del GLOBAL byte-exact (EOL intacto) + `05-Checklist.md` (CRLF preservado).
+- Commit `b8229ef` (6 archivos) + este registro + log. Push: ver `git reflog show origin/main`.
+
+**PARA EL VERIFICADOR (sec.21.8):** el sello previo de M63 (Log 856, Hy3) **sigue INVALIDADO** desde el hallazgo de la iter. 5 - se apoyo en el "0 fallos" de una suite MUERTA (`test_stream_m63.gd`). Requiere **RE-VERIFICACION por un NO-autor**. Yo NO sello sec.21.8 (autor == verificador).
+
+**Hallazgos ajenos (NO tocados):**
+- **Indice git compartido (trampa 114):** un commit ajeno (M54) vacio el indice tras mi `git add`; resuelto encadenando `git add && git commit -- <rutas>`. Aviso: el indice compartido sigue sin ser fiable.
+- **Inconsistencias de conteo ajenas** (las caza `verificar_checklist.py`): 54-Mapa (GLOBAL 89/177 vs checklist 92/177) y 91-Configuracion-De-Audio (GLOBAL 92/239 vs checklist 141/239).
+- Persiste el PARSE ERROR de `scripts/mapa/mapa_manager.gd` (M54) en el worktree.
+
+**Reglas respetadas:** NO toque M61 ni `scripts/interacciones/` (kimi). `[?]` con dueno externo > `[x]` sin medir.

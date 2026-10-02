@@ -778,6 +778,37 @@ verifiques vos, usa tu practica habitual de varios angulos.
       de `scripts/mapa/mapa_manager.gd` (M54) en el worktree (2 SCRIPT ERROR de ruido en algunas
       corridas). **No toqué M61** ni `scripts/interacciones/` (kimi). (2026-10-02)
 
+- [x] Log reservado: **1193** — **M63 (Cargas y Streaming) iter. 6: consejos rotando (L98) +
+      fundido a escena (L99) + documentación de delegación (L146-L150).** Al reservar: `--estado`
+      justo antes dio **primero=1193**. **Disparador:** tras la iter. 5 quedaban 13 `[ ]`; al
+      revisarlos, 7 tenían dueño externo (M08/M15/M16/M42/M47/M53) y **6 eran trabajo PROPIO del
+      módulo sin dueño** (L98, L99, L146-L150) → los tomé (autonomía del encargo).
+      **Implementado (código):** `ConsejosCarga` (`class_name`, lógica pura): parseo de `tips.txt`
+      (`#` = comentario), `indice_inicial(semilla, n)` DETERMINISTA por semilla de partida M29
+      (**no** `semilla % n`, que daría el mismo consejo a partidas contiguas) y `consejo(tips,
+      semilla, tick)` con wrap por `posmod`; base de datos NUEVA `data/stream/tips.txt` (lista
+      semilla de 10). `FundidoCarga` (`class_name`, máquina de estados pura): `iniciar/avanzar/
+      alpha/progreso/terminado`, idempotente, `delta` negativo no retrocede, `duracion <= 0` nace
+      TERMINADO, `acotar_duracion()` con tope **2 s** (§6). Integrados en `pantalla_carga.gd`
+      (Label `Consejos`; `configurar_seed`/`consejo_actual`/`fundir`; `_process` solo con la
+      pantalla visible) **sin romper** los nodos `Fondo`/`Barra`/`Texto`.
+      **Suite nueva** `test_stream_m63_iter6.gd`: 6 bloques (A-F), **42 checks, 0 fallos, exit 0,
+      ×3**; guardián de 3 capas con piso **42 MEDIDO** y probado **EN ROJO con 5 sondas** (A
+      aserción falsa · B `return` en `_run()` · C piso+1 · D bloque sin cerrar · E `_fin` no-op):
+      **5/5 exit 1**, control 0.
+      **Regresión:** las 7 suites = **166 checks, 0 fallos, EXIT 0** (21+29+51+42+9+7+7);
+      `test_pantalla_carga.gd` sigue 7/0 tras tocar `pantalla_carga.gd`. Cableada en `quality.yml`.
+      **Checklist: 61→67 `[x]`, 13→7 `[ ]`, 27 `[?]`** (por PREFIJO de línea); los 7 `[ ]`
+      restantes SÍ tienen dueño externo. Documentación de cierre en `02-Analisis.md` §3 (2
+      alternativas más) / §4 (dependencias y bloqueos) / §5 (API estable).
+      **Trampa 114 otra vez:** tras `git add`, un commit ajeno (M54) **vació el índice compartido**
+      → `git commit -- <rutas>` falló con *"did not match any file(s) known to git"*; se resolvió
+      **encadenando `git add && git commit -- <rutas>`** en una sola invocación. Commit `b8229ef`
+      con EXACTAMENTE 6 archivos. **Hallazgos ajenos:** inconsistencias de conteo de 54-Mapa y
+      91-Configuracion-De-Audio (reportadas, no tocadas); PARSE ERROR de `mapa_manager.gd` (M54).
+      **No toqué M61** ni `scripts/interacciones/` (kimi). **NO sello §21.8** (autor == verificador).
+      (2026-10-02)
+
 ---
 
 ## 🔵 ENCARGO ACTUAL — M63-Cargas-Y-Streaming (asignado por el coordinador, 2026-10-02 17:40)

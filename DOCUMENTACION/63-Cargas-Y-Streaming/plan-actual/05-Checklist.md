@@ -5,12 +5,12 @@
 
 ## Reserva actual
 
-- Estado: 🔵 En curso (iter. 5: lado 63 del handshake M62↔M63 + precalentamiento P9 + regiones P12-P14 + red de regresión endurecida) — reserva 2026-10-02, Log reservado 1192
+- Estado: 🔵 En curso (iter. 6: consejos rotando §6 L98 + fundido a escena §6 L99 + documentación de delegación §L) — reserva 2026-10-02, Log reservado 1193
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy) — iters previas respetadas: iter. 1 deepseek-v4-flash (Log 457), iters 2-3 glm-5.3-flash (Logs 603/622), iter. 4 glm-5.3-flash (Log 746)
 - Fase: Base de producción (soporte M61/M62)
 - Dificultad: 4
 - Visión: V0
-- Salida: StreamManager autoload (cola con pesos, LRU, progreso real, pausa/reanudar, handshake M62, precalentamiento, regiones) + ProgressCalculator + test headless 124/0 OK
+- Salida: StreamManager autoload (cola con pesos, LRU, progreso real, pausa/reanudar, handshake M62, precalentamiento, regiones) + ProgressCalculator + ConsejosCarga + FundidoCarga + test headless 166/0 OK
 - Fecha cierre: 2026-09-01 (Log 457)
  — Módulo 63: Cargas y Streaming
 
@@ -95,8 +95,8 @@
 - [?] Nubes/parallax en animación suave [S] — **dueño externo (M53/arte 2D)**
 - [x] Barra de progreso real + etapa ("Cargando islas...") [S] — glm-5.3-flash 2026-09-01 (iter. 1, Log reservado 423): implementado; MEDIDO en `test_pantalla_carga.gd` (7 checks)
 - [x] Textos de estado descriptivos (sección 8 AGENTS) [S] — MEDIDO en `test_pantalla_carga.gd`
-- [ ] Consejos de mundo rotando (tips.txt, seed M29) [S] — pendiente (data file + rotación)
-- [ ] Fade a escena al terminar [S] — pendiente
+- [x] Consejos de mundo rotando (tips.txt, seed M29) [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 6, Log 1193): `ConsejosCarga` (parseo de `tips.txt` + rotación DETERMINISTA por semilla M29, no `semilla % n`) integrado en `pantalla_carga.gd`; MEDIDO en `test_stream_m63_iter6.gd` bloques A-D/F
+- [x] Fade a escena al terminar [S] — DeepSeek-V4.1-Flash 2026-10-02 (iter. 6, Log 1193): `FundidoCarga` (máquina de estados pura, tope 2 s §6) + `PantallaCarga.fundir()`; MEDIDO en `test_stream_m63_iter6.gd` bloques E/F
 - [?] Transición corta ≤ 2 s para Fast Travel/Gran Vapor [S] — **dueño externo (M28/M69)**
 - [x] Input deshabilitado excepto pausa del sistema [S] — MEDIDO en `test_pantalla_carga.gd`
 
@@ -143,18 +143,18 @@
 
 ## L. Delegación y cierre (10)
 
-- [ ] Módulo marcado delegable (tras M08/M61) [S]
-- [ ] 3 alternativas descartadas documentadas [S]
-- [ ] API estable [S]
+- [x] Módulo marcado delegable (tras M08/M61) [S] — marcado en la cabecera del módulo y en este checklist (nota bajo los marcadores); superado por la implementación (iters 1-6)
+- [x] 3 alternativas descartadas documentadas [S] — `02-Analisis.md` §3: 5 alternativas (barra falsa, todo instanciado, LOD síncrono + las 2 de iter. 6: consejos no deterministas y Tween acoplado)
+- [x] API estable [S] — `02-Analisis.md` §5: superficie pública de StreamManager/ProgressCalculator/ConsejosCarga/FundidoCarga/PantallaCarga + regla de estabilidad aditiva
 - [x] Implementación → AGENTE DELEGADO [S]
-- [ ] Bloqueado por M08/M61 documentado [S]
+- [x] Bloqueado por M08/M61 documentado [S] — `02-Analisis.md` §4: M08 bloquea SOLO lo no-headless; M61 solo-consumir (§21.4)
 - [x] 01-Requerimientos creado y firmado [S] — el archivo existe en `plan-actual/`
 - [x] 02-Analisis creado y firmado [S] — el archivo existe en `plan-actual/`
 - [x] 03-Diseno creado y firmado [S] — el archivo existe en `plan-actual/`
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S] — actualizado en iter. 5 (Log 1192)
 - [x] 05-Checklist creado y firmado (este archivo) [S] — actualizado en iter. 5 (Log 1192)
 
-**Totales:** 101 ítems · Completados: 61 · Pendientes: 13 · No resueltos: 27.
+**Totales:** 101 ítems · Completados: 67 · Pendientes: 7 · No resueltos: 27.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1C):** la línea decía *"101 ítems · Completados: 101 · Pendientes: 0 ·
@@ -166,6 +166,8 @@
 > evidencia) y se marcaron `[?]` los que exigen un DUEÑO EXTERNO (M08/M09/M12/M27/
 > M28/M42/M45/M46/M47/M53/M69/M90/M112/M113/M114), según la regla *"`[?]` con dueño
 > externo > `[x]` sin medir"*. Conteo recomputado por prefijo de línea: 61/13/27.
+>
+> **Actualizado en iter. 6 (Log 1193, DeepSeek-V4.1-Flash):** se cerraron los 6 `[ ]` que eran trabajo PROPIO del módulo, no de un dueño externo: §G **L98** (consejos rotando) y **L99** (fade) con código + suite nueva, y §L **L146-L150** con documentación (`02-Analisis.md` §3/§4/§5). Los 7 `[ ]` que quedan (L28/L34/L36/L38/L39/L40/L41) SÍ tienen dueño externo (M08/M15/M16/M42/M47/M53) y su poblado real no es de M63. Conteo por prefijo de línea: 67/7/27.
 
 **Nota:** secciones B-K se verifican en runtime por el agente delegado; diseño, pesos, LRU y regiones cierran aquí.
 
