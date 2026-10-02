@@ -307,13 +307,13 @@
 - [ ] Diseñar pruebas de cambio de dispositivo de salida
 
 ### [S] Plan de testings
-- [ ] Diseñar 06-Plan-Testings.md (APLICA)
-- [ ] Diseñar tests de volúmenes
+- [x] Diseñar 06-Plan-Testings.md (APLICA) — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md creado en plan-actual/ - 8 secciones (alcance, 3 suites, ~30 escenarios con criterio de éxito, casos limite, definicion de pasa, rendimiento, huecos, como ejecutar) + 07-Resultados-Testings.md
+- [x] Diseñar tests de volúmenes — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md 3.1 escenarios V1-V10; ejecutados en test_audio_config.gd - 103 checks, 0 fallos, EXIT 0 (piso 103)
 - [x] Diseñar tests de audio 3D
 - [x] Diseñar tests de subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): scripts/ui/test_subtitles_m91.gd - 80 checks, 0 fallos, piso CHECKS_MINIMOS=50 medido en verde
-- [ ] Diseñar tests de rango dinámico
-- [ ] Diseñar tests de compresión
-- [ ] Diseñar tests de dispositivo de salida
+- [x] Diseñar tests de rango dinámico — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md 3.2 escenarios R1-R4; ejecutados en test_audio_effects_m91.gd _test_rango_dinamico - 82 checks, 0 fallos
+- [x] Diseñar tests de compresión — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md 3.3 escenarios C1-C4; ejecutados en test_audio_effects_m91.gd _test_compresion (incluye soft_clip_db + soft_clip_ratio, API real 4.7.2 T-107) - 82 checks, 0 fallos
+- [x] Diseñar tests de dispositivo de salida — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md 3.4 escenarios D1-D4; ejecutados en test_audio_effects_m91.gd _test_dispositivo_salida - 82 checks, 0 fallos
 - [x] Diseñar tests de pruebas de audio
 
 ## Totales
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 141 · Pendientes: 98 · No resueltos: 0.
+**Totales:** 239 ítems · Completados: 173 · Pendientes: 66 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].

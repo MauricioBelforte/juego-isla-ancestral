@@ -947,3 +947,71 @@ idempotente (solo `add_bus` si el nombre aún no existe). Quedó documentado.
   L198-211 son suyos, no míos.
 - **No marcar** los 10 de sonidos de interfaz ni los 9 de hardware: son
   bloqueos reales, no deudas de implementación.
+
+---
+
+## Notas del Agente — Iteración 5 (Lote 5: plan de testings)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial — checklist **168 → 173 `[x]`**, **66 `[ ]`**, **0 `[?]`**,
+total 239.
+
+### Archivos creados (nuevos)
+
+| Archivo | Qué |
+|---|---|
+| `plan-actual/06-Plan-Testings.md` | Plan: alcance, 3 suites, ~30 escenarios con criterio de éxito, casos límite, definición de "pasa", rendimiento, huecos y comandos |
+| `plan-actual/07-Resultados-Testings.md` | Resultados reales: **265 checks, 0 fallos** en las tres suites |
+
+Con esto el módulo 91 pasa de 5 a 7 archivos en `plan-actual/` (los 2 de
+testing que la metodología marca como opcionales — §3 y §11).
+
+### Los 5 ítems marcados
+
+| Ítem | Evidencia |
+|---|---|
+| L310 `Diseñar 06-Plan-Testings.md (APLICA)` | archivo creado, 8 secciones |
+| L311 tests de volúmenes | escenarios V1–V10 → `test_audio_config.gd` 103/0 |
+| L314 tests de rango dinámico | R1–R4 → `_test_rango_dinamico` |
+| L315 tests de compresión | C1–C4 → `_test_compresion` |
+| L316 tests de dispositivo de salida | D1–D4 → `_test_dispositivo_salida` |
+
+### Evidencia de la corrida (2026-10-02)
+
+```
+=== TEST M91 AUDIO:     103 checks, 0 fallo(s) ===   exit=0
+=== TEST M91 EFECTOS:    82 checks, 0 fallo(s) ===   exit=0
+=== TEST M91 SUBTITULOS:  80 checks, 0 fallo(s) ===   exit=0
+TOTAL: 265 checks, 0 fallos
+```
+
+### Corrección de la línea de Totales
+
+La línea `**Totales:**` de `05-Checklist.md` decía **141/98** (estado del
+lote 2) — quedó stale en los lotes 3 y 4. Ahora dice **173/66**. Ojo con eso
+al futuro: hay que moverla en cada lote.
+
+### Lo que NO se marcó (y por qué)
+
+- **L303 balance de canales**, **L305 espacialización 3D**,
+  **L307 cambio de dispositivo** (3 ítems de "Pruebas de calidad"): los
+  primeros dos requieren hardware/oyente humano; el tercero depende del
+  dropdown de M53 que no existe. Sí están documentados en el plan §3.2–3.4,
+  pero **sin ejecución real no se marcan**.
+- **Los 9 ítems de auriculares/altavoces** (§1.2 del plan): mismo motivo.
+- El resto de los **66 `[ ]`** queda repartido como se detalla en las notas
+  de la iteración 4 (13 especificación, 12 M53, 10 bloqueados por 0 assets
+  de audio, 6 audio 3D, M58/M87/guardado/AudioTestManager sueltos).
+
+### Recomendaciones para el próximo agente
+
+- **H-1 (CI):** corregir `tools/ci/run_tests.py` para que `--module` no filtre
+  por substring de ruta; hoy `test_audio_config.gd` queda fuera del CI.
+  Es trabajo del módulo de CI, no de M91.
+- **H-2 (leaks):** leer **T-109** antes de concluir que un test fuga — comparar
+  por tipo de instancia, no por total.
+- Los 66 ítems que quedan son en su mayoría **bloqueos reales** (hardware,
+  assets, otros módulos). Marcar cualquiera de ellos exige resolver ese
+  bloqueo primero.
