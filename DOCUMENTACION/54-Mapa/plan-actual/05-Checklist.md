@@ -82,7 +82,7 @@
 
 - [ ] Estado de exploración por región y por celda (no explorado / visto / visitado) → agnes-2.5-flash 2026-09-13: estado disenado en 03-Diseno.md §4.20 (exploration states: unseen/seen/visited); Explorer domain object. Spec defined.
 - [ ] Datos de exploracion en el dominio (Explorer) desacoplados de la UI → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer como dominio puro); desacople UI/ datos disenado. Spec defined.
-- [ ] Revelado progresivo alrededor del jugador con radio configurable en MapaConfig [M]
+- [x] Revelado progresivo alrededor del jugador con radio configurable en MapaConfig [M] -- agnes-3-flash 2026-10-02: `MapManager.reveal_around_player(pos, radius)` auto-explores markers within radius; `REVEAL_RADIUS_DEFAULT=512`
 - [ ] Marcado de `visited` al cruzar el borde de una región (evento M09/M27) → agnes-2.5-flash 2026-09-13: logica documentada en 03-Diseno.md §4.8 (visited flag on region border); evento M09/M27. Spec defined.
 - [x] Textura de niebla sobre el mapa completo (FogTextureRect opaco, modulate) [M] -- agnes-3-flash 2026-10-02: FullMapLayer._fog (FogRenderer) modulate-based fog overlay
 - [x] Textura de niebla aplicada también en el minimapa [M] -- agnes-3-flash 2026-10-02: minimap_widget._island_fogs (per-isla ColorRect, 2x2)
@@ -92,7 +92,7 @@
 - [ ] Límites de región delineados dentro de la niebla (bordes visibles) → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.21 (region border visibility); visual spec. Spec defined.
 - [ ] Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradient. Spec defined.
 - [x] Sin revelado de interiores/mazmorras en el mapa de superficie [S] -- agnes-3-flash 2026-10-02: bake_map_texture() usa heightmap VoxelTerrain (superficie); cave/interior data no existe en la heightmap
-- [ ] Compatible con la escala completa de la isla (varias islas M27 incluida) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.11 (multi-island scale compatibility); M27 islands registry. Spec defined.
+- [x] Compatible con la escala completa de la isla (varias islas M27 incluida) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: map_config.json 4 islas; bake_map_texture muestra todas; _regiones_exploradas per-isla
 - [x] Regeneración coherente tras carga de un save con exploración parcial → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion()` restaura `_regiones_exploradas` + `_exploradas`; fog y marcadores coherentes
 
 ## G. RF6 Pines del jugador (10)
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 92 · Pendientes: 85 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 94 · Pendientes: 83 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
