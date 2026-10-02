@@ -69,7 +69,7 @@
 
 - [ ] Marcadores de destinos de M69 visibles en el mapa completo [M]
 - [ ] Confirmación amable antes del viaje (confirm popup de M53 con costo/duración si M69 lo define) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.6 (travel confirmation dialog); M53 popup pattern. Spec defined.
-- [ ] Delegación del viaje por Callable (`register_fast_travel_provider`) sin importar nodos de M69 → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.7 (Callable delegation pattern); M69 TravelService. Spec defined.
+- [x] Delegación del viaje por Callable (`register_fast_travel_provider`) sin importar nodos de M69 → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `MapManager.register_fast_travel_provider(Callable)` + `cancelar_viaje()` + `estado_viaje()` implementados
 - [ ] Destinos bloqueados hasta desbloquearlos explorando → agnes-2.5-flash 2026-09-13: regla documentada en 03-Diseno.md §4.19 (destination unlock by exploration); progresión M71. Policy defined.
 - [ ] Visualización de ruta al destino (línea suave sobre el mapa, M28) [M]
 - [x] Cancelación del viaje desde el mapa sin estado inconsistente [S] -- agnes-3-flash 2026-10-02: `MapManager.cancelar_viaje()` + `register_fast_travel_provider()` (desacople M69) + botón "Cancelar viaje" en FullMapLayer
