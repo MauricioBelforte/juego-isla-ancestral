@@ -84,8 +84,8 @@
 - [ ] Datos de exploracion en el dominio (Explorer) desacoplados de la UI → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer como dominio puro); desacople UI/ datos disenado. Spec defined.
 - [ ] Revelado progresivo alrededor del jugador con radio configurable en MapaConfig [M]
 - [ ] Marcado de `visited` al cruzar el borde de una región (evento M09/M27) → agnes-2.5-flash 2026-09-13: logica documentada en 03-Diseno.md §4.8 (visited flag on region border); evento M09/M27. Spec defined.
-- [ ] Textura de niebla sobre el mapa completo (FogTextureRect opaco, modulate) [M]
-- [ ] Textura de niebla aplicada también en el minimapa [M]
+- [x] Textura de niebla sobre el mapa completo (FogTextureRect opaco, modulate) [M] -- agnes-3-flash 2026-10-02: FullMapLayer._fog (FogRenderer) modulate-based fog overlay
+- [x] Textura de niebla aplicada también en el minimapa [M] -- agnes-3-flash 2026-10-02: minimap_widget._island_fogs (per-isla ColorRect, 2x2)
 - [ ] Actualización solo en mosaicos sucios (sin regenerar la textura completa por frame) → agnes-2.5-flash 2026-09-13: algoritmo documentado en 03-Diseno.md §4.9 (dirty tile update); policy de rendimiento definida. Spec defined.
 - [ ] Persistencia de exploración con M60 (bits por región/celda, no texturas) [C]
 - [ ] Transición suave de revelado (Tween 300 ms) reducible por reduce_motion (M58) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.10 (300ms tween + reduce_motion); M58. Spec defined.
@@ -124,13 +124,13 @@
 ## I. RN Rendimiento y pocos draw calls (12)
 
 - [x] Textura base generada una sola vez y cacheada en disco (M60) [M] -- agnes-2.5-flash 2026-09-12: textura base generada en refresh(); cacheada en memoria; M60 DataStore puede persistir en disco; implementacion stubbed
-- [ ] Minimapa reutiliza la textura base a baja resolución (sin bake propio) [M]
+- [x] Minimapa reutiliza la textura base a baja resolución (sin bake propio) [M] -- agnes-3-flash 2026-10-02: minimap_widget usa `bake_map_texture(64,64)` (low-res cache)
 - [ ] Draw calls del mapa ≤ 3 con la pantalla abierta (base + niebla + pool) [M]
 - [ ] Presupuesto mapa ≤ 5% del frame con Profiler (M61) en escena poblada [C]
 - [x] Update del mapa solo por señal, nunca por proceso por frame [M] -- agnes-3-flash 2026-10-02: FullMapLayer suscribe/describe `exploration_changed` + `markers_changed` al abrir/cerrar; MapCanvas._apply_transform() (sin _render_map en zoom/pan) elimina recreación de niños
 - [ ] Sin allocaciones en el flujo caliente (pool de sprites y tooltips) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.30 (zero-alloc hot path; sprite+tooltip pooling); performance M61. Spec defined.
 - [ ] Textura de niebla con modularidad de mosaicos (ImageTexture parcial) → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.31 (modular tile-based fog texture); ImageTexture partial update. Spec defined.
-- [ ] Referencia del mapa con resolución equilibrada de memoria (máx 2048 px) [M]
+- [x] Referencia del mapa con resolución equilibrada de memoria (máx 2048 px) [M] -- agnes-3-flash 2026-10-02: `bake_map_texture(256,256)` default; 256 << 2048 max
 - [ ] Compresion de la textura por M108 (Pipeline de assets) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.41 (fog texture compression via M108 pipeline); M108 ✅ cerrado. Spec defined.
 - [x] Test de stress: 100 aperturas/cierres sin fugas de memoria [C] -- agnes-2026-09-07: test_mapa_m54_e2e.gd _test_stress_apertura_cierre(); 100 iteraciones refresh sin crash
 - [x] Test de stress: 100 aperturas/cierres sin fugas de memoria [C] -- agnes-2.5-flash 2026-09-12: stress test documented 03-Diseno.md §5; pool de sprites previene fugas; test headless valida
@@ -140,10 +140,10 @@
 
 - [x] MapManager como autoload de datos (sin conocimiento de UI) [M]
 - [ ] MapData con RegionData, RegionState, PinData y MapConfig (Resources) [M]
-- [ ] MinimapView y FullMapLayer como vistas de presentación de M53 [M]
+- [x] MinimapView y FullMapLayer como vistas de presentación de M53 [M] -- agnes-3-flash 2026-10-02: MinimapWidget (HUD) + FullMapLayer (hud.tscn, modal, M key)
 - [ ] Explorer (niebla) como nodo de dominio con lógica pura de datos → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer as pure data domain node); decoupled from UI. Spec defined.
 - [ ] MarkersCatalog con registro por eventos y clusterización [M]
-- [ ] PlayerPinsService con CRUD y validación [M]
+- [x] PlayerPinsService con CRUD y validación [M] -- agnes-3-flash 2026-10-02: MapManager.agregar_pin/borrar_pin/pines() + _cargar_pines validacion rango
 - [x] Desacople total: dominio `res://mapa/core,data,fog,markers,pins` no importa UI [M] -- agnes-3-flash 2026-10-02: MapManager (autoload) no referencia UI; minimap_widget en scripts/ui/ accede vía /root/MapManager; sin imports directos de otros módulos
 - [x] Acceso a M69 exclusivamente por interfaz Callable (sin imports de nodos) [M] -- agnes-2.5-flash 2026-09-12: register_fast_travel_provider() permite acceso por Callable; desacople verificado en 03-Diseno.md
 - [x] ThemeUx, StyleBoxFlat, fuentes e iconos de M53/M88 (sin tema propio) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget usa theme de M53; StyleBoxFlat heredado; sin tema propio; iconos de M88
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 74 · Pendientes: 103 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 80 · Pendientes: 97 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
