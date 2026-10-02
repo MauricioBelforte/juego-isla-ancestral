@@ -66,6 +66,12 @@ func _build_ui() -> void:
 	close_btn.pressed.connect(close_map)
 	header.add_child(close_btn)
 
+	var center_btn := Button.new()
+	center_btn.text = "Jugador"
+	center_btn.tooltip_text = "Volver al jugador (map_center_player)"
+	center_btn.pressed.connect(_center_on_player)
+	header.add_child(center_btn)
+
 	# Canvas del mapa
 	_canvas = MapCanvas.new()
 	_canvas.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -166,6 +172,10 @@ func _on_markers_changed(_markers: Array) -> void:
 	if not _is_open:
 		return
 	_refresh_from_manager()
+
+func _center_on_player() -> void:
+	if _canvas != null:
+		_canvas.center_on_player()
 
 func _refresh_from_manager() -> void:
 	var mm := get_node_or_null("/root/MapManager")

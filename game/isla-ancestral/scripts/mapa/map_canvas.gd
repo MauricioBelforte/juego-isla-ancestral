@@ -202,6 +202,18 @@ func apply_zoom(delta: float) -> void:
 	_zoom = clampf(_zoom + delta, ZOOM_MIN, ZOOM_MAX)
 	_apply_transform()
 
+func center_on_player() -> void:
+	var player: Node = Engine.get_main_loop().root.get_node_or_null("Player")
+	if player == null:
+		return
+	var wp: Vector3 = (player as Node3D).get_global_position()
+	var px := clampf(wp.x / _world_size, 0.0, 1.0)
+	var pz := clampf(wp.z / _world_size, 0.0, 1.0)
+	_zoom = 1.5
+	_pan_offset = Vector2(-px * size.x * _zoom + size.x * 0.5, -pz * size.y * _zoom + size.y * 0.5)
+	_clamp_to_bounds()
+	_apply_transform()
+
 func _apply_transform() -> void:
 	_islands_container.position = _pan_offset
 	_islands_container.scale = Vector2(_zoom, _zoom)
