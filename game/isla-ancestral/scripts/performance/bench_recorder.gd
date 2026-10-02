@@ -13,14 +13,35 @@
 
 extends Node3D
 
-const WAYPOINTS := [
-	Vector3(256, 60, 90),    # vista norte: montana central
-	Vector3(420, 40, 120),   # vista nordeste: playa + mar
-	Vector3(470, 30, 256),   # vista este: costa turquesa
-	Vector3(256, 55, 430),   # vista sur: playa delta
-	Vector3(100, 45, 256),   # vista oeste: bosque
-	Vector3(256, 100, 256),  # vista cenital de la isla
+# BUG-084 (Fase 2, M166, hy3): los waypoints estaban hardcodeados al mundo viejo
+# 512² (centro 256,256). Se migran a MundoRaiz: se guardan como OFFSETS desde el
+# centro viejo y se reubican en el centro real (2560,2560), escalados por el radio
+# del mundo real para preservar la dispersion costa/centro del benchmark.
+const RADIO_VIEJO := 256.0                       # radio del mundo viejo 512² (origen de los hardcodes)
+const WAYPOINTS_VIEJO := [                       # Vector3(offset_x, altitud_y, offset_z) desde el centro viejo
+	Vector3(  0.0,  60.0, -166.0),  # norte: montana central
+	Vector3(164.0,  40.0, -136.0),  # nordeste: playa + mar
+	Vector3(214.0,  30.0,    0.0),  # este: costa turquesa
+	Vector3(  0.0,  55.0,  174.0),  # sur: playa delta
+	Vector3(-156.0,  45.0,    0.0),  # oeste: bosque
+	Vector3(  0.0, 100.0,    0.0),  # cenital de la isla
 ]
+
+## Waypoints del benchmark en coordenadas del mundo real (centro MundoRaiz, escalados).
+func calcular_waypoints() -> Array:
+	var out: Array = []
+	var escala := MundoRaiz.CENTRO.x / RADIO_VIEJO   # 2560 / 256 = 10
+	for o in WAYPOINTS_VIEJO:
+		out.append(Vector3(MundoRaiz.CENTRO.x + o.x * escala, o.y, MundoRaiz.CENTRO.y + o.z * escala))
+	return out
+
+## Posicion del VoxelViewer en el centro real de la Isla Raiz (era Vector3(256,30,256)).
+func posicion_viewer() -> Vector3:
+	return MundoRaiz.centro_vec3(30.0)
+
+## Punto de mira del benchmark: el centro real de la isla (era Vector3(256,12,256)).
+func objetivo_look() -> Vector3:
+	return MundoRaiz.centro_vec3(12.0)
 const DURACION_WAYPOINT_S := 15.0
 const INTERVALO_MUESTREO := 30
 
@@ -109,17 +130,17 @@ func _setup_terreno() -> void:
 
 	var generator = load("res://scripts/world/world_generator.gd").new()
 	generator.world_seed = 42
-	generator.island_radius = 256
+	generator.island_radius = int(MundoRaiz.CENTRO.x)  # mundo real 5120² (era 256)
 	generator.max_height = 40
 	_terrain.generator = generator
 
 	var viewer := VoxelViewer.new()
-	viewer.view_distance = 256.0
+	viewer.view_distance = 1024.0  # coincide con main_island.gd:158 (era 256.0)
 	add_child(viewer)
-	viewer.global_position = Vector3(256, 30, 256)
+	viewer.global_position = posicion_viewer()  # MundoRaiz.centro_vec3(30) (era 256,256)
 
 	var cam := Camera3D.new()
-	cam.position = WAYPOINTS[0]
+	cam.position = calcular_waypoints()[0]
 	cam.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(cam)
 	_cam = cam
@@ -134,13 +155,13 @@ func _process(delta: float) -> void:
 	if _terminado:
 		return
 	_t_desde_inicio += delta
-	var objetivo: Vector3 = WAYPOINTS[_idx_waypoint]
+	var objetivo: Vector3 = calcular_waypoints()[_idx_waypoint]
 	_cam.global_position = _cam.global_position.lerp(objetivo, delta / DURACION_WAYPOINT_S * 4.0)
-	_cam.look_at(Vector3(256, 12, 256), Vector3.UP)
+	_cam.look_at(objetivo_look(), Vector3.UP)  # centro real (era 256,12,256)
 
 	if _t_desde_inicio > DURACION_WAYPOINT_S * float(_idx_waypoint + 1):
-		_idx_waypoint = min(_idx_waypoint + 1, WAYPOINTS.size() - 1)
-	if _t_desde_inicio > DURACION_WAYPOINT_S * float(WAYPOINTS.size()):
+		_idx_waypoint = min(_idx_waypoint + 1, calcular_waypoints().size() - 1)
+	if _t_desde_inicio > DURACION_WAYPOINT_S * float(calcular_waypoints().size()):
 		_terminado = true
 		_finalizar()
 		return
@@ -172,7 +193,7 @@ func _finalizar() -> void:
 		max_draw = maxi(max_draw, int(m["draw_calls"]))
 	med["draw_calls_max"] = max_draw
 	med["muestras"] = n
-	med["waypoints"] = WAYPOINTS.size()
+	med["waypoints"] = calcular_waypoints().size()
 	med["fecha"] = Time.get_date_string_from_system()
 	med["hardware"] = _hardware_str()
 

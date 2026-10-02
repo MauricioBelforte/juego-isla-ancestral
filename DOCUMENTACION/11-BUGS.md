@@ -4333,3 +4333,125 @@ Los scripts legales compilan sin error y las suites de M131/M84 pasan.
 - [x] **Archivos/commits modificados:** `credits_manager.gd`, `audio_credit.gd`, `audio_credits_generator.gd` → commit `6b7fdf1`; `test_credits_m131.gd` → commit `d0c9603`.
 - [x] **Log del proyecto:** `Logs/1178-BUG-081_errores-inferencia-scripts-legales_2026-09-30_04-24-35.md`
 - [x] **Verificado por:** propio (mimo-v2.6-flash-free), 2026-09-30 — baseline **antes** de tocar: M131 `2 OK / 1 FAIL` (exit=1), test directo `8 checks / 1 fallo`; **después**: M131 `3 OK / 0 FAIL` (exit=0), test directo `8 checks / 0 fallos`, M84 `1 OK / 0 FAIL` (sin regresión), `--check-only` **4/4 OK**. Pendiente de **QA cruzado §21.8** por un modelo distinto.
+
+## 8. Bugs Delegados — auditoría reductos (256,...) centro viejo (hy3, Log 1179, 2026-09-30)
+
+> Auditoría estática Fase 1 (ofrecida tras P-39). Se leyeron y clasificaron 26 hits de `(256,...)`
+> en `game/isla-ancestral/scripts/`. NO se tocó código ajeno. Los tests de vegetación que pasan
+> `Vector2(256,256)` a `generar_plan()` son fixtures legítimos (planner puro). Los 5 hallazgos
+> siguientes son bugs latentes / fallback cuestionable en módulos de OTROS agentes -> delegados al
+> coordinador (estado `[?] Delegado`). Confirmar dueño exacto en CHECKLIST-GLOBAL antes de fase 2.
+
+### BUG-082 — map_data_service.gd: `dentro_de_isla` y asistencia de coords siguen en geometría "isla RIZ 256"
+
+- **Fecha de reporte:** 2026-09-30 04:55
+- **Módulo(s) afectado(s):** mapa/islas (M27 Islas del Mundo o M09 — confirmar dueño en CHECKLIST-GLOBAL; header del archivo "Kilo Code")
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [?] Delegado
+
+**Descripción del problema:**
+`scripts/map/map_data_service.gd:81` `func dentro_de_isla(x, z)` lee `riz.get("centro", [128, 128])`
+y `riz.get("radio", 256)`, con el comentario L80 "Asistencia de coordenadas (isla RIZ 256)". Opera
+sobre la isla 256 vieja, no sobre el mundo 5120² (centro (2560,2560), radio 1800/2560) de
+`mundo_raiz.gd`. En el mundo real, `dentro_de_isla(2560,2560)` devolvería FUERA y
+`dentro_de_isla(256,256)` DENTRO — al revés de lo correcto. `test_map_service_headless.gd:34`
+(`dentro_de_isla(256,256)` == true) es un fixture válido que SOLO PINCHA este bug.
+
+**Pasos para reproducir:**
+1. Abrir `map_data_service.gd`, ver `dentro_de_isla` (L81-86).
+2. Evaluar con `_config` sin "RIZ" real: `dentro_de_isla(2560,2560)` vs `dentro_de_isla(256,256)`.
+
+**Comportamiento esperado:** clasificar "dentro" según centro/radio real de `MundoRaiz` (5120²).
+**Comportamiento actual:** usa defaults legacy 256; en mundo 5120² clasifica al revés.
+**Entorno:** Godot 4.7.2, isla 5120².
+**Evidencia:** `map_data_service.gd:80` "# ── Asistencia de coordenadas (isla RIZ 256) ───────".
+**Referencias:** mundo_raiz.gd (M09, CENTRO 2560,2560).
+**Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55
+
+### BUG-083 — medir_costa_m51.gd: centro hardcodeado 256.0, mide la costa vieja
+
+- **Fecha de reporte:** 2026-09-30 04:55
+- **Módulo(s) afectado(s):** M51 (medición de costa)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado
+
+**Descripción del problema:**
+`scripts/world/medir_costa_m51.gd:33-34` `var x := 256.0 + dir.x * float(r)` /
+`var z := 256.0 + dir.y * float(r)` escanea rayos radiales desde (256,256) con `r in range(20,260,2)`.
+NO lee `MundoRaiz.CENTRO`. En el mundo 5120² mide una esquina vacía/agua, no la línea de costa real
+de la isla centrada en (2560,2560). El comentario L6 también dice "centro (256,256)". El script es
+de 2026-09-06, previo a la migración 2560 (commit c107419, 2026-09-07) -> obsoleto.
+
+**Pasos para reproducir:** ejecutar `Godot --headless --path game/isla-ancestral --script res://scripts/world/medir_costa_m51.gd`; los radios reportados corresponden a la esquina vieja.
+**Comportamiento esperado:** escanear desde `MundoRaiz.CENTRO` hasta el radio real de la isla.
+**Comportamiento actual:** escanea desde (256,256) hasta ~260u -> datos de costa erroneos.
+**Entorno:** Godot 4.7.2, isla 5120².
+**Evidencia:** medir_costa_m51.gd:6,33,34.
+**Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55
+
+### BUG-084 — bench_recorder.gd: waypoints / VoxelViewer hardcodeados al mundo viejo 256
+
+- **Fecha de reporte:** 2026-09-30 04:55
+- **Módulo(s) afectado(s):** M166 Variantes-Y-Perfil-De-Rendimiento (asignado P-58; era 🔵 de mimo-v2.5 inactivo, pasó a 🔵 de hy3 tras reconciliación de locks de atria-dawn — commit e87d401, 2026-10-02)
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Baja
+- **Estado:** [x] Resuelto (2026-10-02, Log 1183, hy3 — Fase 2 migrado a MundoRaiz vía skill isla-ancestral-qa-gate; gate test_bench_recorder_m166.gd: verde 0 fallos / rojo 9 fallos al inyectar 256 / verde final)
+
+**Descripción del problema:**
+`scripts/performance/bench_recorder.gd`: WAYPOINTS (L17 `Vector3(256,60,90)`, L20 `Vector3(256,55,430)`,
+L22 `Vector3(256,100,256)` "vista cenital de la isla"), `viewer.global_position = Vector3(256,30,256)`
+(L119), `viewer.view_distance = 256.0` (L117), `look_at(Vector3(256,12,256))` (L139). En el mundo
+5120² el benchmark se sienta en la esquina y encuadra ~256u; la "vista cenital" apunta a (256,256),
+no al centro (2560,2560). Los datos de rendimiento resultantes no representan la isla real.
+
+**Comportamiento esperado:** waypoints y viewer posicionados respecto de `MundoRaiz.CENTRO` con
+`view_distance` acorde al mundo 5120².
+**Comportamiento actual:**硬硬编码 al mundo 256.
+**Entorno:** Godot 4.7.2, isla 5120².
+**Evidencia:** bench_recorder.gd (antes L17,20,22,117,119,139; ahora calcular_waypoints()/posicion_viewer()/objetivo_look()).
+**Resolución (2026-10-02, hy3 / WorkBuddy, Log 1183):** los 6 waypoints hardcodeados se reemplazaron por offsets del centro viejo (`WAYPOINTS_VIEJO`) + `calcular_waypoints()` que los reubica en `MundoRaiz.CENTRO` (2560,2560) escalados por `CENTRO.x / RADIO_VIEJO` (=10) para preservar la dispersión costa/centro del benchmark. `generator.island_radius` 256→`int(MundoRaiz.CENTRO.x)` (2560); `view_distance` 256→1024 (igual que main_island.gd:158); `viewer.global_position` y `look_at`→`MundoRaiz.centro_vec3(30/12)`. Se creó `test_bench_recorder_m166.gd` (gate headless): verde 0 fallos, rojo 9 fallos al inyectar 256, verde final; 0 SCRIPT ERROR. Push NEGATIVO (commit selectivo del fix).
+**Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55 (re-apertura y cierre 2026-10-02)
+
+### BUG-085 — data/fasttravel/anclas.json: anclas en la esquina del mundo
+
+- **Fecha de reporte:** 2026-09-30 04:55
+- **Módulo(s) afectado(s):** M69 Fast-Travel (header "Kilo Code")
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [?] Delegado
+
+**Descripción del problema:**
+`game/isla-ancestral/data/fasttravel/anclas.json` define las anclas en x/z = 256/256 (Pueblo Raiz),
+256/80 (Playa del Norte), 310/310 (Casa), 320/320 (Tienda) — todas en la esquina ~256-320 del mundo
+5120², FUERA de la isla real (centro 2560,2560). `test_fast_travel_headless.gd:29`
+(`anclas()[0].get("x")==256`) es un fixture legítimo que SOLO PINCHA este bug de datos: el
+fast-travel teletransporta al jugador a la esquina del mundo, no a la isla.
+
+**Comportamiento esperado:** anclas en coords del mundo 5120² (cerca del centro/spawns reales).
+**Comportamiento actual:** anclas en la esquina 256.
+**Entorno:** Godot 4.7.2, isla 5120².
+**Evidencia:** anclas.json L6-9; fast_travel_service.gd:14 (RUTA_ANCLAS).
+**Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55
+
+### BUG-086 — vegetation_spawner.gd:36: fallback `else Vector2(256,256)` si MundoRaiz ausente
+
+- **Fecha de reporte:** 2026-09-30 04:55
+- **Módulo(s) afectado(s):** M50 Vegetación (header "[M50]")
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Baja
+- **Estado:** [?] Delegado (elegible fase 2 si M50 está 🟢/✅ libre)
+
+**Descripción del problema:**
+`scripts/vegetacion/vegetation_spawner.gd:36`
+`var centro: Vector2 = Vector2(mundo.SPAWN_CONTENIDO.x, mundo.SPAWN_CONTENIDO.z) if mundo else Vector2(256, 256)`.
+En juego `MundoRaiz` está presente -> usa (3860,3860) (correcto). Pero en contextos headless sin el
+autoload (p.ej. `--script`), `mundo` es null y la vegetación se puebla en la esquina (256,256).
+Fallback CUESTIONABLE: debería caer al centro real (`MundoRaiz.CENTRO` / Vector2(2560,2560)), no a la esquina.
+
+**Comportamiento esperado:** el fallback (si lo hay) use el centro real, no la esquina vieja.
+**Comportamiento actual:** fallback a (256,256) esquina.
+**Entorno:** Godot 4.7.2, isla 5120².
+**Evidencia:** vegetation_spawner.gd:33-38 (comentario L34 "antes (256,256) r=256, la esquina playa").
+**Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55
