@@ -31,7 +31,7 @@
 
 ## C. Configuración y Workflow (8)
 
-- [x] Godot Editor script BuildScript.cs configurado [S] _(diseno heredado: `BuildScript.cs` es una ruta Unity/C#; en este proyecto Godot/GDScript el equivalente vivo es `scripts/core/build_info.gd` — verificado 2026-09-13, Log 1189)_
+- [x] Godot Editor script BuildScript.cs configurado [S] _(diseno heredado: `BuildScript.cs` es una ruta Unity/C#; en este proyecto Godot/GDScript el equivalente vivo es `scripts/core/build_info.gd` — verificado 2026-10-02, Log 1189)_
 - [x] Workflow GitHub Actions con steps completos [S] -- agnes-2.5-flash 2026-09-12: estructura disenada en 03-Diseno.md §3.1 (CI pipeline stages); implementacion requiere github.com setup. Policy documented.
 - [x] Scripts PowerShell build_dev.ps1 y build_release.ps1 [S]
 - [x] Tests run_tests.gd con cobertura mínima 80% [S]

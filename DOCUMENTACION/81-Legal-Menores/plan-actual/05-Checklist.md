@@ -72,7 +72,7 @@
 
 ## E. Diseño de Minimización y Anonimización de Datos
 
-- [x] Diseñar DataSanitizer.cs como servicio central de sanitización _(diseno heredado: `DataSanitizer.cs` es una ruta Unity/C#; no existe ni puede existir en este proyecto Godot/GDScript — verificado 2026-09-13, Log 1189)_
+- [x] Diseñar DataSanitizer.cs como servicio central de sanitización _(diseno heredado: `DataSanitizer.cs` es una ruta Unity/C#; no existe ni puede existir en este proyecto Godot/GDScript — verificado 2026-10-02, Log 1189)_
 - [x] Implementar stripping de PII (Personal Identifiable Information) para menores
 - [x] Implementar hashing de identificadores (SHA-256 truncado) para menores
 - [x] Implementar reducción de granularidad de timestamps para menores
