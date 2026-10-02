@@ -107,6 +107,7 @@ func open_map() -> void:
 	_is_open = true
 	visible = true
 	_refresh_from_manager()
+	_connect_signals()
 	# Pausar el juego si M29 esta disponible
 	var time_mgr := get_node_or_null("/root/TimeManager")
 	if time_mgr and time_mgr.has_method("pause"):
@@ -117,17 +118,49 @@ func close_map() -> void:
 		return
 	_is_open = false
 	visible = false
+	_disconnect_signals()
 	closed.emit()
 	var time_mgr := get_node_or_null("/root/TimeManager")
 	if time_mgr and time_mgr.has_method("resume"):
 		time_mgr.resume()
+
+func _connect_signals() -> void:
+	var mm := get_node_or_null("/root/MapManager")
+	if mm == null:
+		return
+	if not mm.exploration_changed.is_connected(_on_exploration_changed):
+		mm.exploration_changed.connect(_on_exploration_changed)
+	if not mm.markers_changed.is_connected(_on_markers_changed):
+		mm.markers_changed.connect(_on_markers_changed)
+
+func _disconnect_signals() -> void:
+	var mm := get_node_or_null("/root/MapManager")
+	if mm == null:
+		return
+	if mm.exploration_changed.is_connected(_on_exploration_changed):
+		mm.exploration_changed.disconnect(_on_exploration_changed)
+	if mm.markers_changed.is_connected(_on_markers_changed):
+		mm.markers_changed.disconnect(_on_markers_changed)
+
+func _on_exploration_changed(_region_ids: Array) -> void:
+	if not _is_open:
+		return
+	_refresh_from_manager()
+
+func _on_markers_changed(_markers: Array) -> void:
+	if not _is_open:
+		return
+	_refresh_from_manager()
 
 func _refresh_from_manager() -> void:
 	var mm := get_node_or_null("/root/MapManager")
 	if mm == null:
 		return
 	if _canvas:
-		_canvas.set_map_data(mm)
+		if _canvas._islas.is_empty():
+			_canvas.set_map_data(mm)
+		else:
+			_canvas.update_markers()
 
 func _on_bg_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -135,8 +168,14 @@ func _on_bg_input(event: InputEvent) -> void:
 			close_map()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _is_open:
-		return
 	if event.is_action_pressed("ui_cancel"):
 		close_map()
 		get_viewport().set_input_as_handled()
+	elif event is InputEventKey:
+		if event.pressed and not event.echo:
+			if event.keycode == KEY_M:
+				if _is_open:
+					close_map()
+				else:
+					open_map()
+				get_viewport().set_input_as_handled()

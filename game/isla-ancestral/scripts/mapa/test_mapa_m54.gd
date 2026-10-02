@@ -28,7 +28,26 @@ func _run() -> void:
 	_test_pines()
 	_test_region()
 	_test_persistencia()
+	_test_signals()
+	_test_canvas_transform()
 	_summary()
+
+func _test_canvas_transform() -> void:
+	print("--- Canvas: zoom/pan sin re-render ---")
+	var mm := root.get_node_or_null("MapManager")
+	var canvas := MapCanvas.new()
+	root.add_child(canvas)
+	# In headless: _ready runs immediately on add_child (call_deferred already processed)
+	canvas.set_map_data(mm)
+	var children_before := canvas._markers_container.get_child_count()
+	canvas.apply_zoom(0.5)
+	canvas.apply_zoom(-0.3)
+	var children_after := canvas._markers_container.get_child_count()
+	_check("zoom no recrea niños", children_before == children_after, "before=%d after=%d" % [children_before, children_after])
+	canvas.update_markers()
+	var children_updated := canvas._markers_container.get_child_count()
+	_check("update_markers no recrea niños", children_updated == children_after, "before=%d after=%d" % [children_after, children_updated])
+	canvas.queue_free()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1
@@ -109,6 +128,17 @@ func _test_persistencia() -> void:
 	_check("exploración persistida (templo_coral)", mm.esta_explorada("templo_coral") == true)
 	_check("conteo tras recargar >= antes", mm.contar_exploradas() >= antes, "count=%d" % mm.contar_exploradas())
 	DirAccess.remove_absolute("user://mapa_exploracion.json")
+
+func _test_signals() -> void:
+	print("--- Señales reactivas ---")
+	var mm := root.get_node_or_null("MapManager")
+	var exp_count: Array = [0]
+	var mk_count: Array = [0]
+	mm.exploration_changed.connect(func(_ids): exp_count[0] += 1)
+	mm.markers_changed.connect(func(_m): mk_count[0] += 1)
+	mm.marcar_explorada("templo_ceniza")
+	_check("exploration_changed emitida", exp_count[0] == 1, "count=%d" % exp_count[0])
+	_check("markers_changed emitida", mk_count[0] == 1, "count=%d" % mk_count[0])
 
 func _summary() -> void:
 	print("=== Resumen M54: %d checks, %d fallos ===" % [_checks, _fallos])

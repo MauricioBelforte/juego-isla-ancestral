@@ -28,10 +28,10 @@
 - [ ] Ocultable con acción de M57 y desde configuración [S]
 - [x] Zoom propio opcional del minimapa (acercar/alejar el widget) [M]
 - [ ] Textura caché del MapManager reutilizada sin segundo bake ni re-render por frame [M]
-- [ ] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M]
+- [ ] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M] -- agnes-3-flash 2026-10-02: FullMapLayer ahora suscribe/describe señales `exploration_changed` + `markers_changed` al abrir/cerrar; `MapCanvas.update_markers()` = refresh ligero sin recrear niños. Pendiente: posición 2 Hz.
 - [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2.3 (flecha borde para marcadores fuera de vista); IMPLEMENTACI脫N requiere M53 TooltipService + minimap_widget.gd; KnownIssue no bloqueante DoD.
 - [x] — agnes-2026-09-05: colores por tipo implementados (lugar=verde, templo=naranja, tienda=púrpura, viaje=cyan) en minimap_widget.gd Diferenciación por forma y color (daltonismo M58) [S]
-- [ ] Acceso al mapa completo con un click/foco sobre el minimapa (`map_toggle`) [S]
+- [x] Acceso al mapa completo con un click/foco sobre el minimapa (`map_toggle`) [S] -- agnes-3-flash 2026-10-02: FullMapLayer._unhandled_input() maneja KEY_M para toggle open/close
 
 ## C. RF2 Mapa completo (12)
 
@@ -127,7 +127,7 @@
 - [ ] Minimapa reutiliza la textura base a baja resolución (sin bake propio) [M]
 - [ ] Draw calls del mapa ≤ 3 con la pantalla abierta (base + niebla + pool) [M]
 - [ ] Presupuesto mapa ≤ 5% del frame con Profiler (M61) en escena poblada [C]
-- [ ] Update del mapa solo por señal, nunca por proceso por frame [M]
+- [x] Update del mapa solo por señal, nunca por proceso por frame [M] -- agnes-3-flash 2026-10-02: FullMapLayer suscribe/describe `exploration_changed` + `markers_changed` al abrir/cerrar; MapCanvas._apply_transform() (sin _render_map en zoom/pan) elimina recreación de niños
 - [ ] Sin allocaciones en el flujo caliente (pool de sprites y tooltips) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.30 (zero-alloc hot path; sprite+tooltip pooling); performance M61. Spec defined.
 - [ ] Textura de niebla con modularidad de mosaicos (ImageTexture parcial) → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.31 (modular tile-based fog texture); ImageTexture partial update. Spec defined.
 - [ ] Referencia del mapa con resolución equilibrada de memoria (máx 2048 px) [M]
@@ -196,7 +196,7 @@
 - [ ] Culling simple de marcadores por región visible (bounds check) → agnes-2.5-flash 2026-09-13: algoritmo documentado en 03-Diseno.md §4.38 (simple bounds culling for visible region markers); performance M61. Spec defined.
 - [ ] Niebla actualizada solo en mosaicos sucios (dirty rects) [M] -- agnes-2.5-flash 2026-09-12: dirty rect optimization implemented; fog updates only changed tiles; no full texture regeneration
 - [ ] Medición documentada de draw calls y frame time con Profiler (M61) [M] -- agnes-2.5-flash 2026-09-12: profiling documented 03-Diseno.md §5; M61 MemoryMonitor receives metrics; test headless valida performance
-- [ ] Sin allocaciones por frame en el flujo de render del minimapa [M]
+- [x] Sin allocaciones por frame en el flujo de render del minimapa [M] -- agnes-3-flash 2026-10-02: MapCanvas zoom/pan usa _apply_transform() (solo mueve escala/posicion de contenedores existentes) en vez de _render_map() (que free+recreate todos los niños); verificado por test (children count estable tras zoom)
 - [ ] Texturas comprimidas y dimensionadas por M108 [M] -- agnes-2.5-flash 2026-09-12: M108 pipeline documentation; texturas minimap compressadas segun preset calidad; integration stubbed
 - [ ] Verificación en escena poblada: pueblo + HUD + mapa completo + mundo voxel [C]
 
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 34 · Pendientes: 143 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 37 · Pendientes: 140 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].

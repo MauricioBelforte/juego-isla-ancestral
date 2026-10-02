@@ -77,6 +77,30 @@ func set_map_data(mm: Node) -> void:
 	_exploradas = mm._exploradas.duplicate() if mm.has_method("get") else {}
 	_render_map()
 
+## Lightweight update after signal (exploration/markers changed).
+## Only updates marker visibility — no child recreation.
+func update_markers() -> void:
+	if _map_manager == null:
+		return
+	_marcadores = _map_manager.config.get("marcadores", [])
+	_exploradas = _map_manager._exploradas.duplicate()
+	var marker_colors := {
+		"lugar": Color(0.2, 0.8, 0.4),
+		"templo": Color(0.9, 0.5, 0.2),
+		"tienda": Color(0.6, 0.4, 0.9),
+		"viaje": Color(0.3, 0.8, 0.9),
+	}
+	var idx := 0
+	for m in _marcadores:
+		if idx >= _markers_container.get_child_count():
+			break
+		var dot := _markers_container.get_child(idx)
+		if dot is ColorRect:
+			var explored = _exploradas.get(m.get("id", ""), false)
+			dot.modulate = Color.WHITE if explored else Color(0.3, 0.3, 0.3, 0.5)
+		idx += 1
+	_apply_transform()
+
 func _render_map() -> void:
 	# Clear previous
 	for child in _islands_container.get_children():
@@ -172,16 +196,20 @@ func _on_gui_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and _is_dragging:
 		_pan_offset = _drag_pan_start + (event.position - _drag_start)
 		_clamp_to_bounds()
-		_render_map()
+		_apply_transform()
 
 func apply_zoom(delta: float) -> void:
-	var old_zoom := _zoom
 	_zoom = clampf(_zoom + delta, ZOOM_MIN, ZOOM_MAX)
-	# Zoom anchored to center
-	_render_map()
+	_apply_transform()
+
+func _apply_transform() -> void:
+	_islands_container.position = _pan_offset
+	_islands_container.scale = Vector2(_zoom, _zoom)
+	_markers_container.position = _pan_offset
+	_markers_container.scale = Vector2(_zoom, _zoom)
+	_fog_rect.modulate.a = 1.0 / _zoom if _zoom > 1.0 else 1.0
 
 func _clamp_to_bounds() -> void:
 	var max_pan := size * (_zoom - 1.0) * 0.5
 	_pan_offset = _pan_offset.clampf(-max_pan.x, max_pan.x) if max_pan.x > 0 else Vector2.ZERO
-	# Simplified: just clamp to reasonable range
 	_pan_offset = _pan_offset.clamp(-size * 0.5, size * 0.5)
