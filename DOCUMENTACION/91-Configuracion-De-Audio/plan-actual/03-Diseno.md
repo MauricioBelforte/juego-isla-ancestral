@@ -188,32 +188,126 @@ func setup_audio_3d():
 
 ## 6. Subtítulos
 
-**SubtitleManager:**
+> **Corregido 2026-10-02 (mimo-v2.6-flash-free / opencode).** El esqueleto
+> original tenía tres defectos que se documentan aquí para no repetirlos:
+> 1. Ruta `res://ui/subtitles/subtitle_manager.gd` no existe — la convención
+>    real del proyecto es `game/isla-ancestral/scripts/…`.
+> 2. Referenciaba una clase `AudioSettings` inexistente: la config real de
+>    audio es el autoload `AudioConfig` (`audio_config_service.gd`), y la
+>    persistencia vive en `DataStore` (M60).
+> 3. `class_name SubtitleManager` junto a `@onready $SubtitleLabel` exigía un
+>    `.tscn`, pero este proyecto **no** monta capas UI en escenas (§9.47): la
+>    UI se construye por código, igual que `credits_layer`.
+> 4. El `await` original tenía race condition: dos `show_subtitle` seguidos
+>    hacían que el reloj del primero ocultara al segundo.
+>
+> **Ruta real:** `game/isla-ancestral/scripts/ui/subtitle_manager.gd`
+> **Autoload:** `SubtitleManager` (sin `class_name` — pitfall §9.17/§9.41)
+
+**SubtitleManager (implementado):**
 ```gdscript
-# res://ui/subtitles/subtitle_manager.gd
-class_name SubtitleManager
-extends Node
+extends Node   # autoload "SubtitleManager", sin class_name
 
-@onready var subtitle_label = $SubtitleLabel
+# ── Límites del diseño (clamados en cada setter) ──
+const TAMANO_MIN := 0.5      # slider 0.5x a 2x
+const TAMANO_MAX := 2.0
+const OPACIDAD_MIN := 0.2    # slider 0.2 a 1.0
+const OPACIDAD_MAX := 1.0
+const TAMANO_BASE := 16.0    # font_size = round(16 * tamano)
 
-func show_subtitle(text: String, duration: float):
-    if AudioSettings.subtitles:
-        subtitle_label.text = text
-        subtitle_label.modulate.a = AudioSettings.subtitle_opacity
-        subtitle_label.add_theme_font_size_override("font_size", int(16 * AudioSettings.subtitle_size))
-        subtitle_label.visible = true
-        await get_tree().create_timer(duration).timeout
-        subtitle_label.visible = false
+# ── Estado (persistido en M60 sección "subtitles") ──
+var habilitados: bool = true          # toggle on/off
+var tamano: float = 1.0
+var opacidad: float = 0.9
+var fondo_visible: bool = true        # toggle + color del fondo
+var color_fondo: Color = Color(0, 0, 0, 0.6)
+var color_texto: Color = Color(1, 1, 1, 1)
 
-func hide_subtitle():
-    subtitle_label.visible = false
+# ── Señales (para que M53 refleje el estado en sus sliders) ──
+signal subtitulo_mostrado(texto: String, duracion: float)
+signal subtitulo_oculto()
+signal config_subtitulos_cambiada()
+signal habilitados_cambiado(habilitados: bool)
 ```
+
+**API pública (ítems de método):**
+```gdscript
+func show_subtitle(text: String, duration: float) -> void
+func hide_subtitle() -> void
+func hay_subtitulo_visible() -> bool
+func texto_actual() -> String
+
+func set_habilitados(v: bool)     # get_habilitados()
+func set_subtitle_size(v: float)  # get_subtitle_size()  — clamado a [0.5, 2.0]
+func set_subtitle_opacity(v: float) # get_subtitle_opacity() — clamado a [0.2, 1.0]
+func set_background_visible(v: bool) / get_background_visible()
+func set_background_color(c: Color) / get_background_color()
+func set_text_color(c: Color) / get_text_color()
+func restaurar_defaults() -> void
+func get_save_data() -> Dictionary
+func restore_save_data(data: Dictionary) -> void
+```
+
+**Estructura de UI (montada en `_ready()`, sin `.tscn`):**
+```
+SubtitleManager (autoload)
+└── CanvasLayer "SubtitulosCapa" (layer 90)
+    └── PanelContainer "SubtituloFondo"   ← fondo toggle+color (StyleBoxFlat)
+        └── RichTextLabel "SubtitleLabel" ← horizontal_alignment CENTER
+```
+Anclaje: centrado horizontalmente, pegado al borde inferior
+(`anchor_*` + `offset_*`, `grow_horizontal = BOTH`), así sigue a la ventana.
+
+**Anti-race-condition:** `show_subtitle` incrementa un contador `_generacion`
+y captura su valor local (`mi_generacion`). Al vencer el `SceneTreeTimer`,
+solo oculta si `mi_generacion == _generacion`. Si mientras tanto entró otro
+subtítulo, el reloj viejo queda obsoleto y no lo toca. `duration <= 0.0`
+significa "sin reloj": queda hasta `hide_subtitle()`.
+
+**Persistencia (M60, sección `subtitles`):** las claves son ASCII a propósito
+— el borrador usaba `subtítulo_size` con tilde, y las claves con tildes
+generan mojibake cuando un agente escribe en cp1252 (§28). Misma intención,
+distinto nombre:
+
+| Clave | Tipo | Equivalente al borrador |
+|-------|------|-------------------------|
+| `enabled` | bool | toggle de subtítulos |
+| `size` | **float** | `subtítulo_size` |
+| `opacity` | **float** | `subtítulo_opacity` |
+| `color` | `{"r","g","b","a"}` | `subtítulo_color` |
+| `background` | bool | fondo on/off |
+| `text_color` | `{"r","g","b","a"}` | color de texto |
+
+**Multiidioma (ítem de M87):** `show_subtitle` recibe **texto ya traducido**;
+el llamador resuelve la cadena con el autoload `Localization`. El gestor no
+hace `tr()` propio — así un mismo subtitle se sirve en cualquier idioma sin
+duplicar lógica, y el UTF-8 llega intacto (§28).
+
+**Tests:** `scripts/ui/test_subtitles_m91.gd` — 80 checks, 0 fallos.
+Cubre defaults, toggle, clamados de tamaño/opacidad, fondo, formato de
+guardado y la condición de carrera con relojes reales.
 
 ## 7. Sonidos de interfaz
 
-**UISoundManager:**
+> ⚠️ **BLOQUEADO (2026-10-02, mimo-v2.6-flash-free / opencode).** El diseño
+> de abajo **no está implementado** y no debe marcarse como hecho:
+>
+> 1. `UISoundManager` no existe en `scripts/`.
+> 2. El esqueleto tiene los mismos defectos del §6: ruta `res://audio/…`
+>    fuera de la convención real, clase `AudioSettings` inexistente (la real
+>    es `AudioConfig`), y `$HoverSound`/`$ClickSound`/… que exigirían un
+>    `.tscn` cuando este proyecto monta la UI por código (§9.47).
+> 3. **Cero assets de sonido en todo el proyecto** (0 `.wav` / `.ogg` /
+>    `.mp3`): sin streams no hay nada que `play()`. Esto hay que resolverlo
+>    antes de implementar — ya sea importando samples, o generándolos con
+>    `AudioStreamWAV` procedural / `AudioStreamGenerator`.
+>
+> Mientras tanto, los ítems de esta sección se dejan `[ ]` a propósito
+> (Trampa 119: no marcar por marcar).
+
+**UISoundManager (diseño original, pendiente de implementación):**
 ```gdscript
-# res://audio/ui_sound_manager.gd
+# res://audio/ui_sound_manager.gd   ← RUTA INCORRECTA, ver nota arriba
 class_name UISoundManager
 extends Node
 

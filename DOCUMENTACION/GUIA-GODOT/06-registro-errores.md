@@ -2,7 +2,7 @@
 
 > **Modelo:** mimo-v2.6-flash-free (último modificador)
 > **Plataforma:** opencode
-> **Fecha:** 2026-10-02 (Sección T-105, T-106, T-107 y T-108 agregada)
+> **Fecha:** 2026-10-02 (Sección T-105 a T-109 agregada)
 > **Anterior:** atria-dawn (Atria Dawn Preview) / Kilo Code — 2026-09-20 (T-98..T-104; E-22: 2026-09-19)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §8
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -868,6 +868,75 @@ grep 'DynamicRangeManager' .godot/global_script_class_cache.cfg
 
 **Lección transversal:** un "Identifier not declared" sobre un archivo que existe y parsea bien
 es un problema de **registro/cache**, no de código: no reescribas el archivo.
+
+**Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+
+
+---
+
+### T-109: Un test `--script` que espera relojes paga ~50 s de exit — y sus leaks NO son tuyos
+
+**Síntoma:**
+```
+[tests] Resumen: 2 OK, 0 FAIL
+WARNING: 393 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+ERROR: 42 RID allocations of type '...DummyMaterial...' were leaked at exit.
+```
+El test pasa (EXIT 0) pero tarda 60 s en lugar de 3, y reporta 393 ObjectDB leaks
+donde los tests que no esperan reportan 66. Tentación casi garantizada: "rompí algo".
+
+**Ubicación:** cualquier `test_*.gd` con `await` bajo `game/isla-ancestral/scripts/`.
+Reproducido en `scripts/ui/test_subtitles_m91.gd` (M91).
+
+**Causa:** dos fenómenos distintos que se confunden.
+
+1. **El coste de exit es un umbral fijo, no lineal.** Mientras el `SceneTree`
+   corre frames, los autoloads de mundo (`MundoRaiz`, `TerrainProvider`,
+   `BotPaseoM09`, …) generan terreno, y al salir hay que liberarlo todo.
+   Medido con tres variantes de `create_timer`:
+
+   | awaits | tiempo de juego | wall clock |
+   |--------|-----------------|-----------|
+   | 0 | 0,00 s | **2,9 s** |
+   | 1 | 0,02 s | **2,9 s** |
+   | 3 | 0,15 s | **56,6 s** |
+   | 3 | 0,70 s | **48,7 s** |
+
+   0,15 s tarda *más* que 0,70 s: no es lineal. Basta **un** frame de más para
+   cruzar el umbral. Consecuencia práctica: **acortar los `await` no mejora el
+   tiempo** — no pierdas el tiempo reescribiendo duraciones.
+
+2. **El recuento de ObjectDB leaks escala con lo que el mundo construyó, no
+   con tu código.** De 66 a 393 sin que tú crees ni un nodo.
+
+**Solución / protocolo:**
+1. **Nunca compares el total bruto de ObjectDB leaks entre tests de duración
+   distinta.** Es señal inútil.
+2. Compara **por tipo de instancia**. Con `--verbose` y un conteo de
+   `Leaked instance: <Tipo>`:
+   ```
+   MeshInstance3D 157 | ArrayMesh 82 | Node 56 | Node3D 44 | StandardMaterial3D 42
+   ```
+   Si no aparece **ningún tipo de tu código**, no hay fuga tuya. En el ejemplo,
+   mis `CanvasLayer`/`PanelContainer`/`RichTextLabel` dieron **0**.
+3. Si el test cabe en el `--timeout` (180 s), el coste fijo es **aceptable**:
+   documéntalo y sigue.
+4. **Los márgenes de tiempo son gratis.** Como el coste es de umbral, ampliar
+   un margen de 0,08 s a 0,25 s **no** sube el wall time. Y con frames de
+   ~80 ms (el mundo frena el bucle), un margen de un solo frame es flaky:
+   usa ≥3 frames.
+5. El test **sí** debe ejercitar el reloj real si tu lógica depende de él —
+   es la única manera de demostrar un guard anti-race. No lo sustituyas por
+   una comprobación del contador.
+
+**Si los ~50 s de exit te importan:** es un defecto **del proyecto** (los
+autoloads de mundo no deberían generar terreno dentro de un `--script` de
+test) y toca a los módulos de mundo, **no al tuyo**. No lo arregles desde tu
+módulo: solo lo documentas.
+
+**Lección transversal:** "test más largo = más leaks = regresión" es falso en
+este proyecto. Mide **por tipo**, no por total; y desconfía de cualquier
+métrica comparada sin igualar la duración del test.
 
 **Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
 

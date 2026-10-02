@@ -14,8 +14,8 @@ Módulo de **configuración de audio** que define menú de settings de audio, vo
 ```
 res://ui/settings/
 ├── audio_settings_menu.gd                     → Menú de configuración de audio
-└── subtitles/
-    └── subtitle_manager.gd                    → Manager de subtítulos
+└── subtitles/  (ruta de diseño, NO existe)
+    └── ✅ REAL 2026-10-02: scripts/ui/subtitle_manager.gd → autoload SubtitleManager
 
 res://audio/
 ├── audio_bus_setup.gd                         → Setup de buses de audio
@@ -262,28 +262,41 @@ func setup_audio_buses():
     AudioServer.set_bus_send(cinematic_bus, master_bus)
 ```
 
-## 7. Implementación de subtitle_manager.gd (esqueleto)
+## 7. Implementación de subtitle_manager.gd
+
+> ✅ **Implementado 2026-10-02 (mimo-v2.6-flash-free / opencode).**
+> El esqueleto original se retiró por cuatro defectos (detallados en
+> `03-Diseno.md` §6 y en la Trampa **T-107**): ruta `res://ui/subtitles/…`
+> inexistente, clase `AudioSettings` inexistente (la real es el autoload
+> `AudioConfig`), `@onready $SubtitleLabel` que exigía un `.tscn` cuando este
+> proyecto monta la UI por código (§9.47), y un `await` con **race condition**
+> (el reloj del primer subtítulo ocultaba al segundo).
+>
+> - **Implementación real:** `scripts/ui/subtitle_manager.gd` → autoload
+>   `SubtitleManager` (sin `class_name`, pitfall §9.17).
+> - **Tests:** `scripts/ui/test_subtitles_m91.gd` — 80 checks, 0 fallos,
+>   piso `CHECKS_MINIMOS = 50`.
+> - **API y persistencia:** `03-Diseno.md` §6 (corregido).
 
 ```gdscript
-# res://ui/subtitles/subtitle_manager.gd
-class_name SubtitleManager
-extends Node
+# Consumo desde M53 (menú de settings)
+SubtitleManager.set_habilitados(pressed)      # toggle on/off
+SubtitleManager.set_subtitle_size(v)          # slider 0.5 .. 2.0  (clamado)
+SubtitleManager.set_subtitle_opacity(v)       # slider 0.2 .. 1.0  (clamado)
+SubtitleManager.set_background_visible(v)     # toggle del fondo
+SubtitleManager.set_background_color(c)       # color del fondo
+SubtitleManager.set_text_color(c)
 
-@onready var subtitle_label = $SubtitleLabel
+# la UI escucha las señales para reflejar el estado
+SubtitleManager.habilitados_cambiado.connect(func(v): ...)
+SubtitleManager.config_subtitulos_cambiada.connect(func(): ...)
 
-func show_subtitle(text: String, duration: float):
-    if AudioSettings.subtitles:
-        subtitle_label.text = text
-        subtitle_label.modulate.a = AudioSettings.subtitle_opacity
-        subtitle_label.add_theme_font_size_override("font_size", int(16 * AudioSettings.subtitle_size))
-        if AudioSettings.subtitle_background:
-            subtitle_label.add_theme_color_override("font_color", AudioSettings.subtitle_color)
-        subtitle_label.visible = true
-        await get_tree().create_timer(duration).timeout
-        subtitle_label.visible = false
+# narrativa / diálogos: el llamador resuelve la cadena con Localization
+SubtitleManager.show_subtitle(Localization.tr("dialogo_01"), 4.0)
+SubtitleManager.hide_subtitle()
 
-func hide_subtitle():
-    subtitle_label.visible = false
+# NO hay AudioSettings: la persistencia vive en M60, sección "subtitles"
+# (claves ASCII: enabled / size / opacity / background / color / text_color)
 ```
 
 ## 8. Implementación de ui_sound_manager.gd (esqueleto)
@@ -501,7 +514,7 @@ func save_settings():
 | Crear res://audio/compression_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/audio/compression_manager.gd` |
 | Crear res://audio/output_device_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/audio/output_device_manager.gd` |
 | Crear res://audio/audio_test_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
-| Crear res://ui/subtitles/subtitle_manager.gd | **IMPLEMENTACIÓN INMEDIATA** |
+| Crear res://ui/subtitles/subtitle_manager.gd | ~~**IMPLEMENTACIÓN INMEDIATA**~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/ui/subtitle_manager.gd` (autoload `SubtitleManager`) + `scripts/ui/test_subtitles_m91.gd` |
 | Crear res://settings/audio_settings.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://settings/audio_settings_loader.gd | **IMPLEMENTACIÓN INMEDIATA** |
 | Crear res://settings/audio_settings_saver.gd | **IMPLEMENTACIÓN INMEDIATA** |
@@ -556,7 +569,7 @@ func save_settings():
 - Implementar AudioSettings como Resource en Godot.
 - Implementar AudioBusSetup para setup de buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic).
 - Implementar Audio3DSetup para espacialización y oclusión.
-- Implementar SubtitleManager para mostrar subtítulos.
+- ~~Implementar SubtitleManager para mostrar subtítulos.~~ ✅ **HECHO 2026-10-02** (mimo-v2.6-flash-free) → `scripts/ui/subtitle_manager.gd` + test 80 checks
 - Implementar UISoundManager para sonidos de interfaz.
 - Implementar DynamicRangeManager para rango dinámico con compresión.
 - Implementar CompressionManager para compresión de audio con limiter.
@@ -777,3 +790,79 @@ AudioConfig.volumen_cambiado.connect(func(bus, vol): ...)    # 0-1 lineal
 label.text = "%.1f dB" % AudioConfig.porcentaje_a_db(slider.value)
 ```
 
+---
+
+## Notas del Agente — Iteración 3 (Lote 3: subtítulos)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial — subtítulos implementados y verificados; sonidos de
+interfaz **bloqueados** (0 assets de audio en el proyecto).
+
+### Archivos tocados en este lote
+
+| Archivo | Qué pasó |
+|---|---|
+| `scripts/ui/subtitle_manager.gd` | **Nuevo.** Autoload `SubtitleManager` |
+| `scripts/ui/test_subtitles_m91.gd` | **Nuevo.** 80 checks, 0 fallos, piso 50 |
+| `project.godot` | **+1 línea:** autoload `SubtitleManager` (verificado: diff `1 0`) |
+| `03-Diseno.md` §6 | **Reescrito:** rutas/claves/código real + los 4 defectos del esqueleto |
+| `03-Diseno.md` §7 | **Nota de bloqueo:** `UISoundManager` sin implementar y sin assets |
+| `04-Codigo.md` §2/§7/§15/§16 | Ruta corregida, esqueleto retirado, fila y recomendación marcadas |
+| `05-Checklist.md` | **141 → 157 `[x]`** (16 ítems), 82 `[ ]`, 0 `[?]`, total 239 intacto |
+| `GUIA-GODOT/06-registro-errores.md` | **T-109** agregada (cabecera → T-105 a T-109) |
+
+### Descubrimiento nuevo: T-109
+
+Un test `--script` que `await`ea relojes tarda **~60 s en vez de 3** y reporta
+**393** ObjectDB leaks donde los tests sin `await` reportan 66. Medí la curva:
+
+| awaits | tiempo de juego | wall clock |
+|---|---|---|
+| 0 | 0,00 s | 2,9 s |
+| 1 | 0,02 s | 2,9 s |
+| 3 | 0,15 s | **56,6 s** |
+| 3 | 0,70 s | **48,7 s** |
+
+No es lineal: es un **umbral fijo** (los autoloads de mundo generan terreno y
+al salir hay que liberarlo). Dos consecuencias prácticas:
+
+1. **Acortar los `await` no mejora el tiempo** — no reescribas duraciones.
+2. **El recuento bruto de ObjectDB leaks no es señal de regresión propia.**
+   Hay que comparar **por tipo**: con `--verbose`, mis
+   `CanvasLayer`/`PanelContainer`/`RichTextLabel` dieron **0** — todo el
+   excedente era `MeshInstance3D`/`ArrayMesh`/`Node3D` de mundo.
+
+Bonus: los **márgenes de tiempo son gratis** (el coste es de umbral), así que
+ampliarlos es puro beneficio contra flakiness con frames de ~80 ms.
+
+### Sobre el CI (refinamiento de la nota anterior)
+
+`run_tests.py --module m91` filtra por **substring de la ruta**, no por módulo
+real. Por eso `test_audio_config.gd` quedaba fuera: su nombre no contiene
+`"m91"`. `test_subtitles_m91.gd` sí entra (y ahora CI reporta **2 OK, 0 FAIL**).
+Arreglar el descubrimiento sigue siendo lote 4.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Sonidos de interfaz** (ítems 18, 74, 110-113, 207, 240-242): el proyecto
+  tiene **0 archivos `.wav`/`.ogg`/`.mp3`**. No hay nada que reproducir.
+  `03-Diseno.md` §7 queda con nota de bloqueo en vez de ítems `[x]`.
+- **Ítem 179** — subtítulos en 6 idiomas: solo existen `es`/`en`/`pt`
+  (`data/localizacion/`). El mecanismo multiidioma está listo, el contenido no.
+- **Ítem 107** — accesibilidad M58: es otro módulo, no lo toqué.
+- **Ítem 17** (umbrella "Subtítulos") queda `[ ]` mientras 107 y 179 sigan
+  abiertos (mismo criterio que "Rango dinámico", ya implementado y aún `[ ]`).
+- **Ítems 48/55/62/69/76/83** ("aplicación al bus de X") y **46/53/60/67/74**
+  ("control de X") → lote 4, tal como quedó anotado en la iteración 2.
+
+### Recomendaciones para el próximo agente
+
+- **M53** ya puede cablear los sliders de subtítulos contra
+  `SubtitleManager` (ver §7 arriba). No hace falta nada más en M91.
+- Para **sonidos de interfaz**: primero conseguir samples (importar 4 cortos)
+  o decidir síntesis con `AudioStreamWAV` procedural. Recién después codificar.
+- El **coste de 60 s** del test de subtítulos es aceptable dentro del
+  `--timeout 180`. Si algún día se arregla (que los autoloads de mundo no
+  generen en `--script`), eso es tarea de los   módulos de mundo, no de M91.

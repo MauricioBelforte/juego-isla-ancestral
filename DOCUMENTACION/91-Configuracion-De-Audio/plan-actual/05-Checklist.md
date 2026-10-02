@@ -95,13 +95,13 @@
 - [ ] Definir PhysicsBody3D para bloqueo de sonido
 
 ### [S] Subtítulos
-- [ ] Definir toggle de subtítulos (on/off)
-- [ ] Definir tamaño de subtítulos (slider 0.5x a 2x)
-- [ ] Definir opacidad de subtítulos (slider 0.2 a 1.0)
-- [ ] Definir fondo de subtítulos (toggle + color)
+- [x] Definir toggle de subtítulos (on/off) — mimo-v2.6-flash-free 2026-10-02 (opencode): toggle on/off -> set_habilitados()/get_habilitados() + senal habilitados_cambiado; scripts/ui/subtitle_manager.gd
+- [x] Definir tamaño de subtítulos (slider 0.5x a 2x) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_subtitle_size() clamado [TAMANO_MIN=0.5, TAMANO_MAX=2.0], font_size=round(16*tamano); testeado 0.5/1.0/1.5/2.0
+- [x] Definir opacidad de subtítulos (slider 0.2 a 1.0) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_subtitle_opacity() clamado [OPACIDAD_MIN=0.2, OPACIDAD_MAX=1.0]; testeado 0.2/0.5/0.9/1.0
+- [x] Definir fondo de subtítulos (toggle + color) — mimo-v2.6-flash-free 2026-10-02 (opencode): set_background_visible()/set_background_color() aplicados via StyleBoxFlat; apagar el fondo NO oculta el texto (testeado)
 - [ ] Definir color de texto (selector)
 - [x] Definir sincronización con audio
-- [ ] Definir RichTextLabel para subtítulos
+- [x] Definir RichTextLabel para subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): RichTextLabel montado POR CODIGO en _crear_ui() dentro de PanelContainer+CanvasLayer(layer 90); sin .tscn (9.47)
 - [x] Definir SubtitleManager para mostrar subtítulos
 - [x] Definir sincronización con AudioPlayer para cinemáticas
 - [ ] Definir accesibilidad (M58) para ajustes de tamaño y contraste
@@ -167,13 +167,13 @@
 - [ ] Definir test button en settings
 
 ### [S] Integración con M58 (Accesibilidad)
-- [ ] Diseñar tamaño de subtítulos (slider 0.5x a 2x)
+- [x] Diseñar tamaño de subtítulos (slider 0.5x a 2x) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6 (corregido 2026-10-02): rangos TAMANO_MIN 0.5 / TAMANO_MAX 2.0 documentados e implementados
 - [ ] Diseñar alto contraste (toggle)
 - [x] Diseñar reducción de audio complejo (opción para simplificar audio)
 - [x] Diseñar audio descriptivo (opción para descripción visual en audio)
 - [x] Diseñar ajustes en menú de configuración de audio
-- [ ] Diseñar guardado en settings (M91)
-- [ ] Diseñar aplicación en tiempo real
+- [x] Diseñar guardado en settings (M91) — mimo-v2.6-flash-free 2026-10-02 (opencode): get_save_data()/restore_save_data() + _cargar_config()/_guardar_config() persisten en M60 seccion 'subtitles'
+- [x] Diseñar aplicación en tiempo real — mimo-v2.6-flash-free 2026-10-02 (opencode): _aplicar_apariencia() se invoca en CADA setter -> font_size/opacidad/fondo cambian en el mismo frame
 
 ### [S] Integración con M87 (Internacionalización)
 - [ ] Diseñar subtítulos en diferentes idiomas (español, portugués, francés, alemán, italiano, ruso)
@@ -203,7 +203,7 @@
 - [ ] Diseñar controles para volumen de UI (slider)
 - [ ] Diseñar controles para volumen de cinemáticas (slider)
 - [x] Diseñar controles para audio 3D (toggle)
-- [ ] Diseñar controles para subtítulos (toggle + sliders + color picker)
+- [x] Diseñar controles para subtítulos (toggle + sliders + color picker) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6: toggle + sliders (size, opacity) + color picker (background y text) con API set_*/get_* completa
 - [ ] Diseñar controles para sonidos de interfaz (toggle)
 - [ ] Diseñar controles para rango dinámico (dropdown)
 - [ ] Diseñar controles para compresión (toggle)
@@ -230,9 +230,9 @@
 
 ### [S] SubtitleManager
 - [x] Diseñar SubtitleManager
-- [ ] Diseñar método show_subtitle(text, duration)
-- [ ] Diseñar método hide_subtitle()
-- [ ] Diseñar RichTextLabel para subtítulos
+- [x] Diseñar método show_subtitle(text, duration) — mimo-v2.6-flash-free 2026-10-02 (opencode): subtitle_manager.gd show_subtitle(); duration<=0.0 significa sin reloj (queda hasta hide_subtitle())
+- [x] Diseñar método hide_subtitle() — mimo-v2.6-flash-free 2026-10-02 (opencode): subtitle_manager.gd hide_subtitle(); incrementa _generacion, oculta label+panel y emite subtitulo_oculto
+- [x] Diseñar RichTextLabel para subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): mismo nodo que el item 104 (_label) creado en _crear_ui()
 - [x] Diseñar aplicación de tamaño y opacidad desde AudioSettings
 
 ### [S] UISoundManager
@@ -290,8 +290,8 @@
 ### [S] Formato de JSON
 - [x] Diseñar formato de audio_settings.json
 - [x] Incluir todos los campos de AudioSettings
-- [ ] Incluir subtítulo_size y subtítulo_opacity como float
-- [ ] Incluir subtítulo_color como objeto {r, g, b, a}
+- [x] Incluir subtítulo_size y subtítulo_opacity como float — mimo-v2.6-flash-free 2026-10-02 (opencode): save['size'] y save['opacity'] son TYPE_FLOAT verificado en test; claves ASCII 'size'/'opacity' en vez de con tilde (28, anti-mojibake)
+- [x] Incluir subtítulo_color como objeto {r, g, b, a} — mimo-v2.6-flash-free 2026-10-02 (opencode): save['color'] = {r,g,b,a} floats en [0,1], typeof TYPE_DICTIONARY verificado en test
 
 ### [S] Diagrama de flujo
 - [x] Diseñar diagrama de flujo de configuración
@@ -301,7 +301,7 @@
 - [x] Diseñar pruebas manuales (volúmenes, audio 3D, subtítulos, rango dinámico, compresión, dispositivo de salida, pruebas de audio)
 - [x] Diseñar pruebas automáticas (carga de configuración, aplicación de configuración, cambio de dispositivo de salida)
 - [ ] Diseñar pruebas de balance de canales
-- [ ] Diseñar pruebas de sincronización de subtítulos
+- [x] Diseñar pruebas de sincronización de subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): test_subtitles_m91.gd _test_race_condition: reloj obsoleto NO oculta al sustituto y reloj valido SI oculta (margenes >=0.25s)
 - [ ] Diseñar pruebas de espacialización 3D
 - [x] Diseñar pruebas de compresión de audio
 - [ ] Diseñar pruebas de cambio de dispositivo de salida
@@ -310,7 +310,7 @@
 - [ ] Diseñar 06-Plan-Testings.md (APLICA)
 - [ ] Diseñar tests de volúmenes
 - [x] Diseñar tests de audio 3D
-- [ ] Diseñar tests de subtítulos
+- [x] Diseñar tests de subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): scripts/ui/test_subtitles_m91.gd - 80 checks, 0 fallos, piso CHECKS_MINIMOS=50 medido en verde
 - [ ] Diseñar tests de rango dinámico
 - [ ] Diseñar tests de compresión
 - [ ] Diseñar tests de dispositivo de salida

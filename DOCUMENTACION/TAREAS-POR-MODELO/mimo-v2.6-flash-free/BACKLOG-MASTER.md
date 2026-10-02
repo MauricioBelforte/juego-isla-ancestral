@@ -13,6 +13,7 @@
 - [x] Log creado: **1184** — Sello M131-Creditos a ✅ (pantalla de creditos implementada, 9 KnownIssue de audio, QA P-56 de agnes-3-flash)
 - [x] Log creado: **1191** — M91 lote 1: efectos de bus (DynamicRangeManager, CompressionManager, OutputDeviceManager) + 82 checks en verde + trampas T-107/T-108
 - [x] Log creado: **1194** — M91 lote 2: API de porcentaje 0-100 para sliders M53 (6 funciones) + piso CHECKS_MINIMOS=66 + checklist 118→141
+- [x] Log creado: **1198** — M91 lote 3: subtítulos (autoload SubtitleManager + test 80 checks + T-109 + doc) + checklist 141→157
 
 ## Módulo ACTIVO — 91-Configuracion-De-Audio
 
@@ -21,8 +22,9 @@
 > performance de M131). Complejidad 1 — ideal para vos.
 
 **Fuente de verdad:** `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md`
-(92 [x] / 147 [ ] / 0 [?], 239 ítems totales). Lee ese archivo ANTES de
-empezar; las tareas de abajo son un resumen, no la fuente.
+(157 [x] / 82 [ ] / 0 [?], 239 ítems totales — avance al cierre del lote 3
+2026-10-02). Lee ese archivo ANTES de empezar; las tareas de abajo son un
+resumen, no la fuente.
 
 **Código real:**
 - `game/isla-ancestral/scripts/audio/audio_config_service.gd` (autoload)
@@ -52,7 +54,13 @@ M-06 (byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR),
 119 (✅ inflado), 118 (impresión visual ≠ diagnóstico).
 
 **Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
-1187, pero verificá — se mueve). Reserva con §6.1.a.
+1199 tras reservar el 1198, pero verificá — se mueve). Reserva con §6.1.a.
+
+**Pendiente de M91 (lote 4):** tests de "aplicación al bus de X"
+(48/55/62/69/76/83) y "control de X" (46/53/60/67/74), más el descubrimiento
+de `--module` en `tools/ci/run_tests.py` (es substring de la ruta, no de
+módulo). **Sonidos de interfaz BLOQUEADOS:** el proyecto tiene 0 assets
+`.wav`/`.ogg`/`.mp3` — ver `03-Diseno.md` §7.
 
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, actualiza
 Última actividad en la fila 91. Nunca dejes 🔵 huérfano (§21.4.5).
