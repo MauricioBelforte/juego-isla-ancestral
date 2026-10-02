@@ -1,14 +1,21 @@
 # Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
+# Modificado: mimo-v2.6-flash-free / opencode — 2026-10-02 (API de porcentaje
+#             0-100 + piso CHECKS_MINIMOS = 66 medido en verde)
 #
 # M91: Test de AudioConfigService (buses, volúmenes linear→db, mute,
-# persistencia M60 sección "audio").
+# persistencia M60 sección "audio", porcentaje 0-100 para sliders de M53).
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/audio/test_audio_config.gd
 
 extends SceneTree
 
+## Piso de checks medido en verde (patrón M105): un suite que no llega al
+## piso dejó de comprobar algo aunque reporte 0 fallos.
+const CHECKS_MINIMOS: int = 66
+
 var _fallos: int = 0
+var _checks: int = 0
 
 func _init() -> void:
 	call_deferred("_run")
@@ -20,10 +27,15 @@ func _run() -> void:
 	_test_mute()
 	_test_persistencia_m60()
 	_test_coherencia_gestor()
-	print("=== TEST M91 AUDIO: %d fallo(s) ===" % _fallos)
+	_test_porcentaje_0_100()
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("FALLO: piso de checks no alcanzado (%d < %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== TEST M91 AUDIO: %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)
@@ -101,3 +113,59 @@ func _test_coherencia_gestor() -> void:
 		return
 	_check(absf(ac.get_volumen("Master") - 0.8) < 0.01, "Master default 0.8 (coherente M60)")
 	_check(absf(ac.get_volumen("SFX") - 0.8) < 0.01, "SFX default 0.8 (coherente M60)")
+
+func _test_porcentaje_0_100() -> void:
+	# API de slider 0-100 para M53 (módulo 91, lote 2, 2026-10-02).
+	# Cubre: defaults en %, conversión slider→dB (linear2db), round-trip,
+	# clamp, bus inexistente y coherencia con el estado interno lineal 0-1.
+	var ac := root.get_node_or_null("AudioConfig")
+	_check(ac != null, "AudioConfig presente (API de porcentaje)")
+	if ac == null:
+		return
+
+	var esperado := {"Master": 80.0, "Music": 70.0, "SFX": 80.0,
+		"Ambient": 60.0, "Voice": 90.0, "UI": 50.0, "Cinematic": 80.0}
+
+	# 1) Defaults del diseño §3 como porcentaje de slider (ítem "valores por defecto")
+	for bus in esperado:
+		_check(absf(ac.get_volumen_porcentaje(String(bus)) - float(esperado[bus])) < 0.6,
+			"default %s = %d%%" % [bus, int(esperado[bus])])
+
+	# 2) Conversión 0-100 → dB coherente con lo que AudioServer tiene aplicado
+	for bus in esperado:
+		var pct := float(esperado[bus])
+		var idx := AudioServer.get_bus_index(String(bus))
+		_check(absf(AudioServer.get_bus_volume_db(idx) - ac.porcentaje_a_db(pct)) < 0.6,
+			"%s: %.0f%% -> %.2f dB coincide con AudioServer" % [bus, pct, ac.porcentaje_a_db(pct)])
+
+	# 3) Round-trip porcentaje <-> lineal
+	for pct in [0.0, 25.0, 50.0, 75.0, 100.0]:
+		_check(absf(ac.lineal_a_porcentaje(ac.porcentaje_a_lineal(pct)) - pct) < 0.01,
+			"round-trip %.0f%%" % pct)
+
+	# 4) set/get porcentaje + coherencia con el estado interno lineal 0-1
+	_check(ac.set_volumen_porcentaje("Music", 42.0), "set_volumen_porcentaje Music 42 OK")
+	_check(absf(ac.get_volumen_porcentaje("Music") - 42.0) < 0.1, "get_volumen_porcentaje refleja 42%")
+	_check(absf(ac.get_volumen("Music") - 0.42) < 0.005, "estado interno lineal 0.42")
+	var idx_m := AudioServer.get_bus_index("Music")
+	_check(absf(AudioServer.get_bus_volume_db(idx_m) - ac.porcentaje_a_db(42.0)) < 0.1,
+		"AudioServer en dB = conversión de 42%")
+
+	# 5) Clamp fuera de rango (sliders torcidos / redondeos de UI)
+	ac.set_volumen_porcentaje("Music", 150.0)
+	_check(absf(ac.get_volumen_porcentaje("Music") - 100.0) < 0.1, "clamp 150% -> 100%")
+	ac.set_volumen_porcentaje("Music", -20.0)
+	_check(absf(ac.get_volumen_porcentaje("Music")) < 0.1, "clamp -20% -> 0%")
+
+	# 6) Bus inexistente devuelve false (igual que set_volumen)
+	_check(not ac.set_volumen_porcentaje("NoExiste", 50.0), "bus inexistente -> false")
+
+	# 7) Pisos de la conversión a dB
+	_check(absf(ac.porcentaje_a_db(100.0) - 0.0) < 0.01, "100% = 0 dB")
+	_check(ac.porcentaje_a_db(0.0) <= -79.0, "0% = piso -80 dB")
+	_check(absf(ac.porcentaje_a_db(50.0) - linear_to_db(0.5)) < 0.01, "50% = linear_to_db(0.5)")
+	_check(absf(ac.db_a_porcentaje(0.0) - 100.0) < 0.1, "0 dB -> 100% (inversa)")
+
+	# 8) Restaurar default cozy (no dejar estado sucio a otros tests)
+	ac.set_volumen_porcentaje("Music", 70.0)
+	_check(absf(ac.get_volumen_porcentaje("Music") - 70.0) < 0.6, "Music restaurado a 70%")

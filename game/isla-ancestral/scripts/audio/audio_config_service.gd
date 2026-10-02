@@ -1,6 +1,8 @@
 # Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
+# Modificado: mimo-v2.6-flash-free / opencode — 2026-10-02 (lote 2: API de
+#             porcentaje 0-100 para los sliders de M53)
 #
 # M91: Configuración de Audio — AudioConfigService (autoload "AudioConfig")
 # Núcleo V0/V1 (03-Diseno §1/§3/§4):
@@ -103,6 +105,41 @@ func set_volumen(bus: String, vol: float) -> bool:
 
 func get_volumen(bus: String) -> float:
 	return float(_volumenes.get(bus, 0.0))
+
+
+## ── API de porcentaje 0-100 (sliders de M53, §3) ────────
+# El estado interno SIEMPRE es lineal 0-1; el porcentaje es solo la capa de
+# presentación que usa la UI. Así persistencia, señales y mute siguen coherentes.
+
+## Slider 0-100 → lineal 0-1 (redondeo y clamp incluidos)
+static func porcentaje_a_lineal(porcentaje: float) -> float:
+	return clampf(porcentaje, 0.0, 100.0) / 100.0
+
+
+## Lineal 0-1 → slider 0-100
+static func lineal_a_porcentaje(volumen: float) -> float:
+	return clampf(volumen, 0.0, 1.0) * 100.0
+
+
+## Slider 0-100 → dB (linear2db, piso -80 dB como en _aplicar_volumen).
+## Útil para mostrar dB en la UI o para barras de medición.
+static func porcentaje_a_db(porcentaje: float) -> float:
+	return linear_to_db(maxf(porcentaje_a_lineal(porcentaje), 0.0001))
+
+
+## dB → slider 0-100 (inversa de porcentaje_a_db; db_to_linear + clamp)
+static func db_a_porcentaje(db: float) -> float:
+	return lineal_a_porcentaje(db_to_linear(db))
+
+
+## Fija el volumen de un bus desde un slider 0-100. Devuelve false si el bus no existe.
+func set_volumen_porcentaje(bus: String, porcentaje: float) -> bool:
+	return set_volumen(bus, porcentaje_a_lineal(porcentaje))
+
+
+## Devuelve el volumen de un bus como porcentaje 0-100 (para el valor del slider)
+func get_volumen_porcentaje(bus: String) -> float:
+	return lineal_a_porcentaje(get_volumen(bus))
 
 
 func set_mute(bus: String, mute: bool) -> void:

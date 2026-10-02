@@ -30,58 +30,58 @@
 - [x] Definir volumen de voces (slider 0-100%) — Voice 0.9 default, testeado
 - [x] Definir volumen de UI (slider 0-100%) — UI 0.5 default, testeado
 - [x] Definir volumen de cinemáticas (slider 0-100%) — Cinematic 0.8 default, testeado
-- [ ] Definir valores por defecto (maestro 80%, música 70%, efectos 80%, ambiente 60%, voces 90%, UI 50%, cinemáticas 80%)
-- [ ] Definir conversión de slider 0-100 a dB (linear2db)
+- [x] Definir valores por defecto (maestro 80%, música 70%, efectos 80%, ambiente 60%, voces 90%, UI 50%, cinemáticas 80%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
+- [x] Definir conversión de slider 0-100 a dB (linear2db) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [x] Definir buses de audio (Master, Music, SFX, Ambient, Voice, UI, Cinematic) — 7 buses creados en runtime enrutados a Master (testeado)
 
 ### [S] Volumen maestro
-- [ ] Definir slider de volumen maestro (0-100%)
+- [x] Definir slider de volumen maestro (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [x] Definir control de todos los canales de audio
-- [ ] Definir valor por defecto 80%
+- [x] Definir valor por defecto 80% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [x] Definir aplicación a AudioServer.set_bus_volume_db() — linear_to_db aplicado y verificado en AudioServer (testeado)
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Música
-- [ ] Definir slider de volumen de música (0-100%)
+- [x] Definir slider de volumen de música (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir control de música de fondo y cinemáticas
-- [ ] Definir valor por defecto 70%
+- [x] Definir valor por defecto 70% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de música
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Efectos
-- [ ] Definir slider de volumen de efectos (0-100%)
+- [x] Definir slider de volumen de efectos (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir control de efectos de juego (herramientas, craft, interacción)
-- [ ] Definir valor por defecto 80%
+- [x] Definir valor por defecto 80% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de efectos
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Ambiente
-- [ ] Definir slider de volumen de ambiente (0-100%)
+- [x] Definir slider de volumen de ambiente (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir control de sonidos ambientales (viento, agua, pájaros)
-- [ ] Definir valor por defecto 60%
+- [x] Definir valor por defecto 60% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de ambiente
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Voces
-- [ ] Definir slider de volumen de voces (0-100%)
+- [x] Definir slider de volumen de voces (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir control de voces de NPCs y cinemáticas
-- [ ] Definir valor por defecto 90%
+- [x] Definir valor por defecto 90% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de voces
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] UI
-- [ ] Definir slider de volumen de UI (0-100%)
+- [x] Definir slider de volumen de UI (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir control de sonidos de interfaz (hover, click, notificaciones)
-- [ ] Definir valor por defecto 50%
+- [x] Definir valor por defecto 50% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de UI
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Cinemáticas
-- [ ] Definir slider de volumen de cinemáticas (0-100%)
+- [x] Definir slider de volumen de cinemáticas (0-100%) — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [x] Definir control de audio de cinemáticas (música, voces, efectos)
-- [ ] Definir valor por defecto 80%
+- [x] Definir valor por defecto 80% — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 - [ ] Definir aplicación al bus de cinemáticas
-- [ ] Definir conversión de slider 0-100 a dB
+- [x] Definir conversión de slider 0-100 a dB — API set/get_volumen_porcentaje + porcentaje_a_db (test_audio_config: 66 checks, 0 fallos)
 
 ### [S] Audio 3D
 - [x] Definir toggle de audio 3D (on/off)
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 118 · Pendientes: 121 · No resueltos: 0.
+**Totales:** 239 ítems · Completados: 141 · Pendientes: 98 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].

@@ -695,3 +695,85 @@ También: las **rutas del §2 son incorrectas** (`res://audio/`, `res://ui/`,
   **borrando antes** `.godot/global_script_class_cache.cfg` (si no, la caché
   vieja marca los archivos como escaneados y no registra la clase nueva).
   `.godot/` no está versionado, es seguro regenerarlo.
+
+---
+
+## Notas del Agente — Lote 2: API de porcentaje 0-100 (sliders de M53)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Completado — commit `9afa2d0` (lote 1) + lote 2 pendiente de commit
+
+### Lo que hice
+
+Añadido a `scripts/audio/audio_config_service.gd` (autoload `AudioConfig`),
+**sin tocar la lógica existente** (los 7 buses, mute, persistencia M60 y las
+señales siguen intactos):
+
+| Función | Tipo | Qué hace |
+|---|---|---|
+| `porcentaje_a_lineal(p)` | `static` | slider 0-100 → lineal 0-1 (clamp incluido) |
+| `lineal_a_porcentaje(v)` | `static` | lineal 0-1 → slider 0-100 |
+| `porcentaje_a_db(p)` | `static` | slider 0-100 → dB vía `linear_to_db`, piso -80 dB |
+| `db_a_porcentaje(db)` | `static` | inversa (vía `db_to_linear`) |
+| `set_volumen_porcentaje(bus, p)` | instancia | fija volumen desde el slider (reutiliza `set_volumen`) |
+| `get_volumen_porcentaje(bus)` | instancia | devuelve el valor 0-100 del slider |
+
+**Decisión de diseño:** el estado interno **sigue siendo lineal 0-1**. El
+porcentaje es solo la capa de presentación, así persistencia (M60), señales
+(`volumen_cambiado`) y mute **no cambian de semántica** y no hay dos fuentes
+de verdad. `set_volumen_porcentaje` delega en `set_volumen`, así que
+persiste y emite señal automáticamente.
+
+### Verificación
+
+- `--check-only` del autoload: **EXIT 0**, sin parse errors.
+- **Sondeo T-107 antes de codificar** (no adivinar): se ejecutaron
+  `linear_to_db(0.5) = -6.02` y `db_to_linear(-6.0) = 0.501` en headless
+  para confirmar que existen y dan lo esperado.
+- `test_audio_config.gd`: **66 checks, 0 fallos**, EXIT 0 — piso
+  `CHECKS_MINIMOS := 66` **medido en verde**.
+- `test_audio_effects_m91.gd`: **82 checks, 0 fallos** (regresión nula).
+- `tools/ci/run_tests.py --module m91`: **1 OK, 0 FAIL**.
+- Checklist: **118 → 141 `[x]`** (+23), 98 `[ ]`, 0 `[?]`, total 239 intacto.
+
+### Qué cubren los 23 ítems marcados
+
+Los ítems `Definir valores por defecto`, `Definir slider de volumen de X
+(0-100%)`, `Definir valor por defecto NN%` y `Definir conversión de slider
+0-100 a dB` de las 7 secciones (maestro, música, efectos, ambiente, voces,
+UI, cinemáticas) — más los ítems 33/34 del bloque general.
+
+Los defaults ya existían en `DEFAULTS` (80/70/80/60/90/50/80 %) y ahora
+están **testeados expresados en porcentaje**.
+
+### Lo que NO marqué (honestidad)
+
+- `Definir control de música/efectos/ambiente/voces/UI de fondo` → requiere
+  los motores M41/M42/M43 (lote 4, integración).
+- `Definir aplicación al bus de X` (6 ítems) → ahora mismo solo está verificado
+  el **estado inicial** de cada bus y el cambio dinámico de **Music**; lo
+  correcto es un test que cambie cada bus y compruebe el dB resultante.
+  Queda para el lote 4 con tests dedicados por bus, **no** se marca "por hacer".
+- Sliders reales en pantalla (`Diseñar controles para volumen … slider`,
+  líneas 198-204) → **dueño M53**; acá está la API que esa UI va a consumir.
+
+### Nota sobre CI
+
+`tools/ci/run_tests.py --module m91` solo descubre
+`test-audio_effects_m91.gd`, **no** `test_audio_config.gd`. La suite base se
+verifica ejecutándola directamente. Vale la pena revisar el descubrimiento
+del runner en el lote 4.
+
+### Recomendaciones para el próximo agente (M53)
+
+```gdscript
+# En el menú de settings:
+slider.value = AudioConfig.get_volumen_porcentaje("Music")   # ya 0-100
+slider.value_changed.connect(func(v): AudioConfig.set_volumen_porcentaje("Music", v))
+AudioConfig.volumen_cambiado.connect(func(bus, vol): ...)    # 0-1 lineal
+# Si querés mostrar dB en la UI:
+label.text = "%.1f dB" % AudioConfig.porcentaje_a_db(slider.value)
+```
+
