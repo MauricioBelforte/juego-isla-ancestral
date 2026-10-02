@@ -738,3 +738,61 @@ verifiques vos, usa tu practica habitual de varios angulos.
       `auditar_arquitectura_m62.py`: 0 hallazgos nuevos, 0 violaciones B1/B2/B3. `validar_workflows.py`
       cazó la suite nueva como **no versionada** (trampa 98) → resuelta al commitearla. **NO sella
       §21.8** (autor == verificador). (2026-10-02)
+
+---
+
+## 🔵 ENCARGO ACTUAL — M63-Cargas-Y-Streaming (asignado por el coordinador, 2026-10-02 17:40)
+
+**Modelo que asigna:** Atria-Dawn-Preview (Kilo Code) · **Log:** 1188 · **Origen:** directiva del
+usuario ("DeepSeek es de los más capaces, que tenga autonomía").
+
+**Tu M62 iter. 5 quedó VERIFICADO por mí** con el binario real `C:\Temp\godot\godot472.exe`:
+6 suites = **307 checks, 0 fallos, 0 SCRIPT ERROR, exit 0** (27+47+25+133+15+60).
+Conteo del checklist confirmado: **107 [x] / 43 [ ] / 0 [?]**. Los 3 commits están en
+`origin/main` (`14b1a77`) y kimi (M70) quedó intacto. **M62 queda liberado** (los 43 [ ] son
+no-headless; no son tu deuda).
+
+### Tu próximo módulo: M63-Cargas-Y-Streaming
+
+| | |
+|---|---|
+| **Estado** | 🔵 En curso (reservado para ti en fila 63 del GLOBAL) |
+| **Progreso** | 16/101 |
+| **Complejidad** | 4 — apta para vos |
+| **Dependencias** | M08 ✅ Completado · **M61 NO tocar (en curso por otro) — solo consumir entregables** |
+| **Dueño anterior** | glm-5.3-flash (Log 746, 2026-09-06) — inactivo, libre legítimo |
+| **§21.8 previo** | ✅ Hy3 (Log 856): 5 suites headless 0 fallos |
+
+### Por qué M63
+
+1. **Es el otro extremo del handshake que acabás de construir.** En M62 iter. 5 escribiste el
+   contrato desde el lado del que *descarga* (`avisar_carga_iniciada/terminada`, filtro
+   `Callable` en `UnloadPolicy`). Ahora te toca el lado del que *carga*: el `StreamManager`
+   que tendría que emitir esos avisos. Tenés el contexto fresco y la mitad del contrato ya
+   probada.
+2. **Desbloquea tu propio M62**: 8 de los 43 `[ ]` no-headless son integraciones con M63
+   (texturas de región, buffers de VoxelTools, doble carga ResourceCache, handshake LRU).
+3. **Encaje A puro**: streaming en hilos, IO, colas de carga, precarga, tests headless.
+
+### Qué hay que hacer (punto de partida)
+
+Leé primero `DOCUMENTACION/63-Cargas-Y-Streaming/plan-actual/` completo. Pendientes declarados
+por el dueño anterior (Log 746): **precalentamiento P9**, **carga de océano/subterráneo/islas
+(P12-14)**, y el lado 63 del handshake con M62. La pantalla de carga P1 ya está hecha
+(CanvasLayer + barra conectada a `StreamManager.progreso_cambiado`).
+
+### Reglas del encargo
+
+- **Autonomía total para priorizar dentro del módulo.** Elegí vos el orden; no esperes
+  confirmación del coordinador entre iteraciones. Reservá tu log del pool con
+  `python scripts/reservar_log.py --reservar` (protocolo v3, trampa 58/70).
+- **No toques M61** (Rendimiento, en curso por otro agente) ni `scripts/interacciones/`
+  (kimi, M70) ni el código de otros 🔵. M62 es tuyo de nuevo si querés volver a cerrar
+  `[ ]` no-headless con arnés Play Mode — es opcional.
+- **Protocolo de commits**: `git add -- <paths>` + `git diff --cached --name-only` antes de
+  cada commit (trampa 114: el índice es compartido y se contamina con trabajo ajeno).
+- **EOL**: `CHECKLIST-GLOBAL.md` se edita byte-exact (231 CRLF / 219 CR, `\r\r\n` pre-existentes).
+- **Honestidad antes que volumen**: `[?]` con dueño externo > `[x]` sin medir. Ya demostraste
+  que tu guardián caza hasta un typo tuyo propio (`descastes`).
+- Cuando termines una iteración: actualizá fila 63 del GLOBAL + `ESTADO-PARALELO.md` + log.
+  **No te sellés §21.8** (autor ≠ verificador): lo hace hy3, agnes o mimo.
