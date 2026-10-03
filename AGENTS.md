@@ -425,7 +425,16 @@ Toda tarea de larga duración (carga de assets, generación procedural, operacio
 - **No acoplar** lógica de gameplay, persistencia o networking directamente en los scripts de UI.
 - **Componentes reutilizables:** Preferir la composición de componentes sobre la herencia profunda. Usar interfaces (`IInteractable`, `IDamageable`, etc.) para definir contratos entre sistemas.
 
-## 10. Protocolo de Comunicación entre Modelos de Lenguaje (Chat por Temas)
+## 10. Protocolo de Comunicación entre Modelos de Lenguaje
+
+La comunicación entre modelos tiene **DOS modos**, según el propósito:
+
+- **Modo Tema (10.1):** carpetas por *tema* para colaboración puntual entre dos o más modelos sobre un problema concreto.
+- **Modo Canal (10.2):** carpetas por *modelo* para el hilo permanente de comunicación entre el **director (Atria)** y cada agente activo. Es el modo operativo habitual con la flota en marcha.
+
+Ambos modos conviven en `Mensajes entre modelos/` y comparten `ESTADO-PARALELO.md` como tablero de coordinación global.
+
+### 10.1 Modo Tema — colaboración puntual entre pares
 
 Cuando una tarea se bloquee o requiera colaboración entre modelos, usar estructura tipo chat con carpetas por tema.
 
@@ -459,6 +468,36 @@ Mensajes entre modelos/
 7. **ESTADO-PARALELO.md:** Mantener actualizado para saber qué modelo trabaja en cada tema.
 8. **Carpetas enumeradas:** Las carpetas dentro de `Mensajes entre modelos/` usan prefijo numérico (`NN-`) para orden cronológico. Ejemplo: `01-Investigacion-FBNeo-GGPO/`, `02-Diseno-Arquitectura/`.
 9. **Subcarpetas por agente (opcional):** Si múltiples agentes trabajan dentro del mismo tema, cada uno crea su propia subcarpeta dentro del tema para no pisar archivos. Ejemplo: `01-Investigacion-FBNeo-GGPO/1-DEEPSEEK-planteo/`, `01-Investigacion-FBNeo-GGPO/2-CLAUDE-respuesta/`. Si no hay riesgo de colisión (un solo archivo por agente), se puede prescindir de subcarpetas y usar el formato estándar de mensajes.
+
+### 10.2 Modo Canal — hilo permanente director <-> agente
+
+Cada **modelo con trabajo asignado** tiene **una carpeta propia** en `Mensajes entre modelos/`, cuyo nombre es el modelo (sin prefijo numérico: son canales paralelos persistentes, no hay orden cronológico entre ellos). Ejemplo real (2026-10-03):
+
+```
+Mensajes entre modelos/
+├── ESTADO-PARALELO.md                     ← Coordinación global (compartido)
+├── Hy3/                                   ← Canal Hy3 ↔ Atria
+│   ├── 01-2026-10-03_19-36-22-apertura-canal.md      ← Atria: encargo inicial
+│   ├── 02-2026-10-04_03-12-00-informe-m59.md         ← Hy3: informe de cierre
+│   └── 03-2026-10-04_05-40-00-devolucion-m59.md      ← Atria: devolución
+├── DeepSeek-V4.1-Flash/
+├── agnes-3-flash/
+├── mimo-v2.6-flash-free/
+└── kimi-k3/
+```
+
+**Reglas del Modo Canal:**
+
+1. **Una carpeta por modelo activo**, creada por el director al asignarle trabajo. Cuando un modelo queda sin asignación, no se borra la carpeta: queda como archivo del hilo. Si se le vuelve a asignar trabajo, se reanuda con el siguiente número libre.
+2. **El archivo `01` lo escribe el director** y es el *prompt de partida*: explica el protocolo del canal, las reglas comunes y el encargo actual. A partir de ahí, cada ida y vuelta es un archivo nuevo.
+3. **Nombre de archivo:** `NN-AAAA-MM-DD_HH-MM-SS-tema-breve.md` — `NN` es el siguiente número libre **dentro de la carpeta**, la fecha/hora es real, y `tema-breve` describe de qué trata ese mensaje (no quién escribe: el autor lo dice la carpeta y la firma interior).
+4. **Firma en el contenido (obligatoria):** `**Modelo:**`, `**Plataforma:**`, `**Fecha:** AAAA-MM-DD HH:MM:SS`, `**Responde a:** <archivo anterior>`. Quien escribe puede ser el director (encargo, devolución, aviso) o el agente (informe, pregunta).
+5. **No se mezclan temas dentro de un archivo:** un informe por ítem o por iteración; si hay varios ítems, un archivo por iteración con una sección por ítem.
+6. **El backlog personal sigue siendo la fuente de tareas.** El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
+7. **No eliminar mensajes anteriores:** el hilo completo se conserva para trazabilidad.
+8. **Ventaja operativa:** el usuario solo necesita decirle a cada agente "leé tu carpeta en `Mensajes entre modelos/` y respondé ahí" — no hay que copiar prompts largos entre chats.
+
+> **Origen:** directo del usuario el 2026-10-03 (log del director): sustituye la transferencia manual de prompts por el usuario por un canal persistente por modelo. Los hilos por tema preexistentes se conservan sin migrar (sección 19).
 
 
 ## 11. Documentación de Nuevos Componentes (DOCUMENTACION)
