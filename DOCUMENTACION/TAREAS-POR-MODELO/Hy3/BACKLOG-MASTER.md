@@ -866,7 +866,7 @@ Contexto: cerraste M167 (Log 1212, 114/114) y sellaste 101/123/154/84/93 (Logs 1
 - [x] **M62-Memoria** — ✅ Verificado §21.8 hy3 (Log 1223): 365/0, guardián rojo; cierra QA delta iter.5+6 — 🟡 Liberado (iter. 6), 111/150, 0 [?]. QA del delta iter.5+6. El coordinador midió 307 (iter.5) + 365 (iter.6) checks / 0 fallos. El sello previo también quedó invalidado (evidencia perdida en la carrera de commits), así que es QA de nuevo.
 - [x] **M70-Interacciones** — ✅ Verificado §21.8 hy3 (Log 1224): 114/0, guardián rojo, QA parte propia (38 [?] externos no exigidos, 5 [ ] propios documentados); DRIFT 77/198 GLOBAL vs 155/198 módulo → Sección N.
 - [x] **M91-Configuracion-De-Audio** — ✅ Verificado §21.8 hy3 (Log 1225): 103/0 + 82/0, guardián rojo; L88 HRTF [?] confirmado GENUINAMENTE TÉCNICO (motor, no disfrazado). Permanece 🟡 Con dudas.
-- [ ] **M54-Mapa** — 🟡 Liberado (P-59), 127/177, 50 [ ] bloqueados por deps externas (M53/M58/M63/M69/M45/M46/M60). QA del P-59 entregado (12 funciones + 4 features: capas, KEY_M/N, center_on_player, route line, edge arrow, pins, filtros, bake indicator; 58/0 checks). NO exigir los 50 externos.
+- [x] **M54-Mapa** — ✅ Verificado §21.8 hy3 (Log 1226): 72/0 (4 suites vivas), guardián rojo; P-59 cubierto. HALLAZGO: test_mapa_m54_e2e.gd ROTO (falso verde, exit 0) → cuarentena recomendada. 50 [ ] externos no exigidos.
 
 ### N — Auditoría de DRIFT / sobre-cierre generalizada (extender tu hallazgo de M93)
 

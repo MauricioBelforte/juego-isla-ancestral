@@ -232,3 +232,17 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## QA cruzado §21.8 — Hy3 (Log 1226, 2026-10-03)
+
+- **Verificador:** hy3 / WorkBuddy (Tencent Hunyuan) — modelo DISTINTO al autor (agnes-3-flash), cumple AGENTS.md §21.8.
+- **Binario:** Godot 4.7.2 real.
+- **Verde (medido) — suites VIVAS de M54:**
+  - `test_mapa_m54.gd`: **42 checks / 0 fallos / EXIT 0** (MapManager: config, marcadores, exploración, pines, región, persistencia, señales, canvas_transform, texture_cache, stress).
+  - `test_map_service_headless.gd`: **12 / 0 / EXIT 0** (MapDataService).
+  - `test_mapa_markers.gd`: **9 / 0 / EXIT 0**.
+  - `test_mapa_busqueda.gd`: **9 / 0 / EXIT 0**.
+  - Total: **72 / 0 / EXIT 0** — cubre P-59 (12 funciones + capas, center_on_player, route_line, edge_arrow, pins, filtros, bake_indicator).
+- **Rojo (inyección):** forzar `_check(false, "INYECTADO ROJO M54")` en copia temporal → **EXIT 1**. El contador de fallos vuelve ROJO; el verde no es heredado.
+- **HALLAZGO (fuera de P-59):** `test_mapa_m54_e2e.gd` está ROTA (SCRIPT ERROR parse: inferencia de tipos `markers`/`explored`/`regions`/`routes`, `explorerd` no declarado) pero devuelve **EXIT 0 = falso verde**. Suite huérfana previa a P-59 (agnes-2.5-flash). Recomendación: cuarentenar o reparar tipos; no editada por el verificador.
+- **DoD:** 127/177 (backlog) · 50 `[ ]` externos (deps M53/M58/M63/M69/M45/M46/M60) **no exigidos**. Módulo permanece 🟡 Liberado.
