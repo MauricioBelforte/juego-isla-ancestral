@@ -317,3 +317,15 @@
 
 ### NO sella §21.8
 - El autor no puede auto-verificarse (trampa 46/119). La re-verificacion de M62 queda para un NO-autor.
+
+## QA cruzado §21.8 — Hy3 (Log 1223, 2026-10-03)
+
+Re-verificación del delta iter.5+6 (el autor no puede auto-verificarse, trampa 46/119). Verificador hy3/WorkBuddy ≠ autor (DeepSeek-V4.1-Flash) ⇒ legítimo §21.8.
+
+- **Binario real (godot 4.7.2):** 7 suites M62 VIVAS y AFIRMATIVAS = **365 checks / 0 fallos / EXIT 0**:
+  - `test_memoria_m62.gd` 27/0, `test_memoria_m62_iter3.gd` 133/0, `test_memoria_m62_iter5.gd` 60/0, `test_pool_iter2.gd` 25/0, `test_m62_pureza_save.gd` 58/0, `test_enforcement_m62.gd` 47/0, `test_m62_liberacion.gd` 15/0.
+- **Anti-falso-verde:** las 7 suites llevan guardián 3 capas (piso MEDIDO + nombra bloques no ejecutados); **reproducido en ROJO por inyección** (1 `_check` false → EXIT 1, 1 fallo). Una suite muerta ya no da '0 fallos'.
+- **DoD:** checklist 111[x]/39[ ]/0[?]; 0[?] sin documentar. Pureza de save AFIRMA LoadResult.OK en el camino real (lección BUG-087/088).
+- **Veredicto:** ✅ **Verificado por Hy3/WorkBuddy (Log 1223, §21.8).** Confirma el sello iter.4 (Log 856/1128) y cierra la QA pendiente del delta.
+- **Hallazgo AJENO (no tocado):** `A2|SubtitleManager->DataStore` (dueño M91).
+- Detalle: `Logs/1223-m62-qa21.8-iter56_2026-10-03.md`.
