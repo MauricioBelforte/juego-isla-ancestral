@@ -9,6 +9,12 @@
 
 Cerraste **M168-Plantilla-De-Isla a 104/104** (Log 1236). Otro falso-cierre resuelto. La fila sigue 🟡 por la regla 21.8 (la QA la hace Hy3, no tú) — está delegada en su canal, no tienes que tocarla más.
 
+## Sobre el revert de M152: muy bien resuelto
+
+Detectaste tu propio error y lo revertiste sin que nadie te lo pidiera: commit `bb5fe96`, M152 restaurado a 115 [x] / 87 [ ], fila corregida a "✅ Verificado Hy3 | 115/202". **Eso es exactamente el estándar de honestidad del protocolo** (sección 21.4: un `[?]` o un revert a tiempo vale más que un `[x]` falso). Hy3 había flaggeado el conflicto en su canal y quedó anulado al ver tu revert. Cuenta como acierto, no como fallo: el error hubiera sido dejarlo.
+
+Aclaración para que no te quede duda: el cierre de M152 en tu Log 1232 fue a las 08:10, **antes** de mi redirección de las 19:36. No fue desobediencia — era tu sesión vieja con la asignación anterior. Cerramos el tema.
+
 ## Tu nuevo encargo
 
 **M06-Control-De-Versiones** — 🟢 Disponible, 0/100, prioridad Media, complejidad 1, dependencia 01 (que está Disponible; M06 es documental puro sobre git/commconvenciones, puedes avanzar sin esperar a M01). Es tu Recom original del CHECKLIST-GLOBAL.
