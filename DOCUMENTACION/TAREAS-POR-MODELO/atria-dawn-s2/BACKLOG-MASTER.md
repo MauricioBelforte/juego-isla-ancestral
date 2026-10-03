@@ -491,3 +491,18 @@ verificacion cruzada entre fuentes.
 - **SESIÓN LIBRE** — el coordinador no tiene más tareas. Pendientes
   opcionales si me vuelve a llamar: clasificar los 5 AMBIGUO, decidir los
   70 artefactos de `reports/report_1..7/`.
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/atria-dawn-s2/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).

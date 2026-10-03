@@ -434,6 +434,8 @@ La comunicación entre modelos tiene **DOS modos**, según el propósito:
 
 Ambos modos conviven en `Mensajes entre modelos/` y comparten `ESTADO-PARALELO.md` como tablero de coordinación global.
 
+> **Guía de comunicación obligatoria:** [`Mensajes entre modelos/GUIA-COMUNICACION.md`](Mensajes%20entre%20modelos/GUIA-COMUNICACION.md) — define cómo se comunican director y agentes sin duplicar informes en el chat (regla de oro: el detalle va a la carpeta, el chat solo avisa).
+
 ### 10.1 Modo Tema — colaboración puntual entre pares
 
 Cuando una tarea se bloquee o requiera colaboración entre modelos, usar estructura tipo chat con carpetas por tema.
@@ -496,6 +498,7 @@ Mensajes entre modelos/
 6. **El backlog personal sigue siendo la fuente de tareas.** El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
 7. **No eliminar mensajes anteriores:** el hilo completo se conserva para trazabilidad.
 8. **Ventaja operativa:** el usuario solo necesita decirle a cada agente "leé tu carpeta en `Mensajes entre modelos/` y respondé ahí" — no hay que copiar prompts largos entre chats.
+9. **Economía de tokens en el chat (regla de oro):** el informe detallado se escribe en la carpeta del modelo; por el chat el agente solo avisa "terminé [ítem], informe en mi carpeta" (o "aborté [ítem]: [motivo de una línea]"). El director lee la carpeta, procesa y responde escribiendo un archivo nuevo en ella — nunca por el chat. El usuario solo necesita decir "fijate los que terminaron" / "terminó [modelo]" al director, y "andá a leer tu carpeta" al agente. Guía completa y obligatoria: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 
 > **Origen:** directo del usuario el 2026-10-03 (log del director): sustituye la transferencia manual de prompts por el usuario por un canal persistente por modelo. Los hilos por tema preexistentes se conservan sin migrar (sección 19).
 

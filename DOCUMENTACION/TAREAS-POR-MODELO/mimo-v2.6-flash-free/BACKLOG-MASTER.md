@@ -258,3 +258,18 @@ GdUnit4 en `tests/` (eso es módulo de CI).
 **HECHO 2026-10-02 21:55 (Log 1210):** fila 91 → `🟡 Con dudas`, `206/239`,
 Agente `—`, ÚltAct `2026-10-02 21:55`. **Siguiente paso de este módulo:
 QA cruzado §21.8 por OTRO modelo** (no por este chat).
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/mimo-v2.6-flash-free/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).

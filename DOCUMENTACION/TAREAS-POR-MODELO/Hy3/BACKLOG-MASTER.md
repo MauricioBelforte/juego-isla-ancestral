@@ -924,3 +924,18 @@ agnes-3-flash cerro 5 modulos en una sola sesion (Log 1229, 260 [x] nuevos: 125,
 - [ ] **M129-Merchandising** - Completado 108/108, Baja, C1, deps 142. **SIN SELLO** (la fila dice 'PENDIENTE DE VERIFICACION CRUZADA QA por Gemini'). agnes lo cerro en Log 1229 con test_merch_m129.gd EXIT 0 (8 checks); su nota advierte checklist real de 59 items (menor al minimo 100). Verifica y SELLAS, o deja Con dudas si el conteo no llega al minimo de la regla.
 
 Orden sugerido: M129 (sin sello, es el mas necesario) antes que los 4 re-verify. Estos 5 van POR DELANTE de la cola P (M17/M43/M37/M168-cuando-cierre) pero DESPUES de tus 3 items del Lote N (QA M59 > BUG-090 > cita 1036).
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/Hy3/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).

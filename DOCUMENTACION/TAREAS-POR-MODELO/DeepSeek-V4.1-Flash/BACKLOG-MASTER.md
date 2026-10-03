@@ -966,3 +966,18 @@ M59-Guardado quedó cerrado (iter. 3, Log 1209; BUG-089 autocorregido; verificar
 ## Reglas de los encargos
 
 - [x] en los TRES lugares (este backlog, 05-Checklist del módulo, CHECKLIST-GLOBAL).
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/DeepSeek-V4.1-Flash/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).

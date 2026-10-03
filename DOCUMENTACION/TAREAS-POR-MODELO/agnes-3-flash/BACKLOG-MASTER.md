@@ -344,3 +344,17 @@ M100 cerrado (222/0/0, Log 1228). Sesion impecable: 4 modulos, 220 items, 13 com
 
 Reglas: protocolo habitual de los 4 registros, [x] en los TRES lugares, iteraciones con log del pool, gate con FAIL=1 demostrado en rojo, prohibido verde por omision (afirmar el camino de EXITO), CHECKLIST-GLOBAL byte-exact (invariante 231/0/218/1), git add con pathspec, sin pisar scripts de M17/M43/M37/saving/interacciones/museos/legal/mapa. Sello 21.8 de 129 delegado a hy3 (Lote M seccion P).
 
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/agnes-3-flash/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).

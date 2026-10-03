@@ -19,15 +19,37 @@
 
 ## Modulos asignados
 
+> **Actualizado 2026-10-02 por atria-dawn:** M106 y M122 estan ✅ Completado
+> (P-36, ejecutado por otros modelos). Las 141 tareas de abajo son el espejo
+> stale de esos modulos — **ignoralas**. Tu modulo activo ahora es M70.
+
 | Modulo | Pendientes | Notas |
 |---|---:|---|
-| [106-Seguridad](106-Seguridad/checklist.md) | 57 | T-001..T-009 hechas |
-| [122-Crash-Reporting](122-Crash-Reporting/checklist.md) | 80 | |
+| [70-Interacciones](70-Interacciones/checklist.md) | 5 (+38 [?] externos) | **🟡 Liberado (iter. 3)** — gestor cerrado, Log 1185 (2026-10-02) |
+
+### 70-Interacciones (🟡 liberado — iter. 3)
+
+-Codigo real: `game/isla-ancestral/scripts/interacciones/`
+  (`interaction_manager.gd`, `interactable_base.gd`, `catalogo_categorias.gd`,
+  `categoria_interaccion.gd`, interfaz `IInteractable` v3).
+- Suite headless: `res://scripts/interacciones/test_interacciones.gd`
+  (**119 checks OK / 0 fallos / 0 SCRIPT ERROR** — binario Godot 4.7.2,
+  verificado 2026-10-02 iter 3).
+- Plan: `DOCUMENTACION/70-Interacciones/plan-actual/05-Checklist.md`
+  (**155 [x] / 5 [ ] / 38 [?]**).
+- Dependencias: M11 (player ✅), M13 (tool_controller ✅) — satisfechas.
+- Iter 3 (Log 1185): watchdog configurable, cancelacion por distancia RF12,
+  cooldown RF16 en evaluacion, atenuado RF22 solo-sin-validos, bloqueo real
+  RF10, PAUSABLE RF25 + hook modal M53 (RF14), item_seleccionado M14 en despacho.
+- Quedan 5 [ ]: hook FSM M11 (DORMIDO si ocupado), lectura FSM M11 completa,
+  flujo persistencia diferida 0.5 s (M59), unificacion tecla E/F (M57),
+  escenario cosecha 30 plantas (bench). Los 38 [?] tienen dueno externo
+  (M53/M154 render, M44, M87, M57, 11 consumidores, M61, M59).
 
 ## Orden de prioridad
 
-1. **M106 Seguridad** — 57 pendientes.
-2. **M122 Crash-Reporting** — 80 pendientes.
+1. **M70 Interacciones** — 🟡 liberado (iter. 3). Retomar solo si se asigna
+   una iter. 4 (hook FSM M11 o coordinacion con M53 para el render del prompt).
 
 ## Tareas (extraidas de los checklists reales)
 
@@ -209,6 +231,7 @@
 - [x] Log reservado: **1088** — M106 T-006 no almacenar claves en código fuente (security_secret_scanner.gd) + test_security_m106_secrets.gd → **Log creado** `Logs/1088-M106-T006-Secret-Scanner_2026-09-19_06-15-00.md`. M106: 6/66 → secrets 20/0, total M106 107 checks verde.
 - [x] Log reservado: **1126** — M106 T-007 .env.local para desarrollo + cobertura .gitignore + test_security_m106_env.gd → **Log creado** `Logs/1126-M106-T007-Env-Local-Gitignore_2026-09-20_04-53-00.md`. M106: 7/66 → env 13/0, total M106 120 checks verde.
 - [x] Log reservado: **1132** — M106 T-008 entornos separados dev/staging/prod (security_environments.json + resolver) + test_security_m106_environments.gd → **Log creado** `Logs/1132-M106-T008-Entornos-Separados_2026-09-20_04-58-00.md`. M106: 8/66 → envs 24/0, total M106 144 checks verde.
+- [x] Log reservado: **1185** — M70 iter. 3 cierre del gestor (watchdog configurable, cancelacion por distancia RF12, cooldown RF16, atenuado RF22, bloqueo RF10, PAUSABLE RF25 + hook modal M53, item_seleccionado M14) + 7 tests nuevos → **Log creado** `Logs/1185-M70-Iter3-Cierre-Gestor_2026-10-02_23-55-00.md`. M70: 77 → **155/198** (5 [ ] / 38 [?] con dueno) → suite **119 checks OK / 0 fallos / 0 SCRIPT ERROR**. Modulo 🟡 liberado.
 
 ## Flujo por tarea
 
@@ -224,3 +247,18 @@
 ## Firmas
 
 **Creado:** atria-dawn-preview / Kilo Code — 2026-09-19 07:30
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/kimi-k3/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
