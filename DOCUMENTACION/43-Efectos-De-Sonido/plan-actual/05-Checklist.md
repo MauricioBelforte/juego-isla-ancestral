@@ -48,14 +48,14 @@
 
 ## C. Familia tonal (8)
 
-- [ ] SFX comparten escala y timbres con M41 [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): sin `sfx_tones` no hay escala/timbre definidos: no es verificable
-- [ ] Confirmación: 5ª justa ascendente [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe el catálogo tonal (los tonos están en M41, no en M43)
-- [ ] Logro: triada mayor brillante [S]
-- [ ] Error: triada menor suave (nunca buzz) [S]
-- [ ] Recoger: nota aguda positiva [S]
-- [ ] Compra vs venta: distintos audiblemente [S]
-- [ ] Crafting éxito: arpegio 4ª-5ª [S]
-- [ ] Co-herencia con leitmotifs (M41) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no verificable sin familia tonal propia
+- [ ] SFX comparten escala y timbres con M41 [S] — ⚠️ pendiente: M43 ya tiene familia tonal propia (`sfx_tones.json`), pero **M41 no define escala ni timbres** (`music_director.gd` no tiene notas/frecuencias y `music_context_matrix.json` solo tiene temas/capas/pesos): la coherencia no es verificable aún
+- [x] Confirmación: 5ª justa ascendente [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** («confirmacion» = [0, 7] = 5ª justa, orden ascendente)
+- [x] Logro: triada mayor brillante [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** («logro» = [0, 4, 7], tono «brillante»)
+- [x] Error: triada menor suave (nunca buzz) [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** («error» = [7, 4, 0] descendente, 0.4 s, tono «suave»)
+- [x] Recoger: nota aguda positiva [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** («recoger» = [+12 semitonos = +1 octava], 0.2 s, tono «positivo»)
+- [x] Compra vs venta: distintos audiblemente [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** (compra [0,4,7]/«ligero» vs venta [0,3,7]/«medio»: notas y tono distintos; la escucha final queda pendiente de assets §7)
+- [x] Crafting éxito: arpegio 4ª-5ª [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK** («crafting_exito» = [0, 5, 7] = 4ª justa + 5ª justa)
+- [ ] Co-herencia con leitmotifs (M41) [S] — ⚠️ mismo motivo que el ítem anterior: M41 no expone leitmotifs ni escala; reevaluar cuando M41 defina su familia tonal
 
 ## D. Prioridades de canal y pool (10)
 
@@ -102,7 +102,7 @@
 
 - [ ] sfx_catalog.tres (catálogo) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): `sfx_catalog` no existe en `data/audio/` (solo `sfx_surfaces.json`)
 - [x] sfx_surfaces.tres (materiales) [S]
-- [ ] sfx_tones.tres (familia tonal) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): `sfx_tones` no existe en `data/audio/`
+- [x] sfx_tones.tres (familia tonal) [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK**; implementado como **`sfx_tones.json`** (consistente con `sfx_surfaces.json`, que ya era JSON a pesar de figurar como `.tres`; lo carga `SFXManager.tones`)
 - [ ] API: reproducir(efecto, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): la API real es `reproducir(tipo: String, prioridad: int)`: sin `pos` ni concepto de efecto
 - [ ] API: reproducir_localizado(tipo, material, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe; agnes-2.5-flash lo listó en «Lo que NO pude hacer» y aun así quedó [x]
 - [ ] API: configurar_volumen() [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe en `sfx_manager.gd`
@@ -136,8 +136,8 @@
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 41 · Pendientes: 59 · No resueltos: 0.
-**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de 24 voces (tope dinámico, no preallocado), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **15/0 OK** (12 checks: superficies, pool 24, prioridad). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. Quedan **59 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
+**Totales:** 100 ítems · Completados: 48 · Pendientes: 52 · No resueltos: 0.
+**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de 24 voces (tope dinámico, no preallocado), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **35/0 OK** (15 de superficies/pool/prioridad + 20 de familia tonal, agregados en el Lote B1). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). Quedan **52 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente
 

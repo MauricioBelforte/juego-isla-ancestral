@@ -1,0 +1,9 @@
+{
+  "confirmacion": {"notas_semitonos": [0, 7], "orden": "ascendente", "duracion_s": 0.35, "tono": "calido"},
+  "logro": {"notas_semitonos": [0, 4, 7], "orden": "ascendente", "duracion_s": 0.55, "tono": "brillante"},
+  "error": {"notas_semitonos": [7, 4, 0], "orden": "descendente", "duracion_s": 0.4, "tono": "suave"},
+  "recoger": {"notas_semitonos": [12], "orden": "ascendente", "duracion_s": 0.2, "tono": "positivo"},
+  "compra": {"notas_semitonos": [0, 4, 7], "monedas": 2, "orden": "ascendente", "duracion_s": 0.45, "tono": "ligero"},
+  "venta": {"notas_semitonos": [0, 3, 7], "monedas": 2, "orden": "ascendente", "duracion_s": 0.5, "tono": "medio"},
+  "crafting_exito": {"notas_semitonos": [0, 5, 7], "orden": "ascendente", "duracion_s": 0.4, "tono": "productivo"}
+}

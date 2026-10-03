@@ -1,8 +1,9 @@
 # GDScript — Errores Comunes y Reglas
 
-> **Modelo:** agnes-3-flash
-> **Plataforma:** Kilo Code
-> **Fecha:** 2026-09-30 (P-52: agregados §26-§28)
+> **Modelo:** mimo-v2.6-flash-free
+> **Plataforma:** opencode
+> **Fecha:** 2026-10-03 (M43 Lote B1: agregado §29 — JSON->float)
+> **Histórico:** 2026-09-30 agnes-3-flash (P-52: §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -483,6 +484,51 @@ var locator2: Node = Engine.get_main_loop().root.get_node_or_null("TerrainLocato
 
 ---
 
+## 29. `JSON.parse_string()` convierte TODOS los números a `float` —
+comparar arrays de números enteros contra un literal `int` falla (M43, Godot 4.7.2)
+
+**Mensaje** (test que falla sin motivo aparente):
+
+```
+[FAIL] logro: tríada mayor 0-4-7 v=[0.0, 4.0, 7.0]
+[FAIL] error: tríada menor descendente 7-4-0 v=[7.0, 4.0, 0.0]
+=== Resumen M43: 35 checks, 4 fallos ===
+```
+
+**Causa:** `JSON.parse_string()` devuelve todos los números del JSON como `float`,
+aunque en el archivo estén escritos como enteros (`[0, 4, 7]`). En GDScript la
+comparación de `Array` es exacta por elemento, e `int` y `float` son tipos distintos:
+
+```gdscript
+var d: Dictionary = JSON.parse_string('{"n":[0,4,7]}')
+d["n"] == [0, 4, 7]        # false -> es [0.0, 4.0, 7.0]
+d["n"] == [0.0, 4.0, 7.0]  # true
+```
+
+**Solución:** normalizar a `int` antes de comparar, sin aflojar la aserción:
+
+```gdscript
+func _a_ints(a: Array) -> Array:
+	var r: Array = []
+	for v in a:
+		r.append(int(v))
+	return r
+
+# en el test:
+_check("logro: triada mayor 0-4-7", _a_ints(d["n"]) == [0, 4, 7])
+```
+
+**Equívoco a evitar:** NO cambiar el JSON a `0.0` ni sustituir la igualdad por una
+comparación con tolerancia. Los semitonos/contadores son enteros: la aserción tiene
+que seguir siendo exacta (aflojarla convierte el test en un verde que no prueba nada).
+
+**Variante:** `var x := nodo_sin_tipo.metodo()` tampoco infiere (`Variant`); usar
+`var x: Dictionary = ...` — ver §28 y §6.
+
+**Fuente:** M43 Efectos de Sonido, Lote B1 — mimo-v2.6-flash-free / opencode, 2026-10-03.
+
+---
+
 ## Errores rápidos de referencia
 
 | Error | Solución | § |
@@ -498,3 +544,4 @@ var locator2: Node = Engine.get_main_loop().root.get_node_or_null("TerrainLocato
 | Autoload null en `_ready()` (timing) | lookup lazy + reintento vía `Engine.get_main_loop().root` | P-52 §26 |
 | `Vector3.xz` por Variant (read-only) | `Vector2(v.x, v.z)` / `Vector3(v.x, 0, v.z)` | P-52 §27 |
 | `:=` sobre helper que devuelve Variant | `=` sin inferencia o anotar el tipo | P-52 §28 |
+| `JSON.parse_string()` da `float` y el `==` de Array es exacto | `_a_ints()` antes de comparar | §29 |

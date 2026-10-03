@@ -33,7 +33,7 @@
 > M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
 
 **Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
-(**41 [x] / 59 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
+(**48 [x] / 52 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
 
 **Lote A — auditoría de coherencia (2026-10-03 00:32, hecho):** el checklist llegaba
 inflado a 61 `[x]`. Auditoría contra el código real → **22 `[x]` falsos bajados a `[ ]`
@@ -45,10 +45,23 @@ Brecha real detectada (diseño `04-Codigo.md` §2 vs runtime):
 ducking, distancias 15/20/30 m, límites por categoría, test de señales →
 **ninguno existe**; y el proyecto tiene **0 assets de audio** (§7 sellada).
 
+**Lote B1 — familia tonal (2026-10-03 00:40, hecho):** creado
+`game/isla-ancestral/data/audio/sfx_tones.json` (7 SFX: confirmacion, logro, error,
+recoger, compra, venta, crafting_exito) + API `tono(nombre)` / `tonos_disponibles()`
+en `sfx_manager.gd` (`_cargar_tones()` en `_ready`, sin romper la API previa).
+Suite ampliada con `_test_tonos()`: **15 → 35 checks, 0 fallos, EXIT=0**.
+Cierra **C52-C57 + G105** (checklist 41 → 48 `[x]`, nota de totales actualizada).
+**Lección documentada en `GUIA-GODOT/01` §29:** `JSON.parse_string()` devuelve
+`float` y el `==` de `Array` es exacto → 4 fallos en falso por
+`[0,4,7] != [0.0,4.0,7.0]`; solución `_a_ints()` (normalizar a int **antes** de
+comparar, sin aflojar la aserción). C51/C58 siguen `[ ]`: **M41 no define escala
+ni leitmotifs** (`music_director.gd` sin notas, `music_context_matrix.json` solo
+temas/capas/pesos).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 15/0, ya descubierta por el runner**)
+  (**suite de referencia: 35/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),

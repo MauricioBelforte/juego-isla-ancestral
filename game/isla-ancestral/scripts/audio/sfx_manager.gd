@@ -8,19 +8,26 @@
 # prioridad es mayor, corta la voz más antigua de menor prioridad; nunca
 # crece sin tope). Diseño original (04-Codigo.md §1.1).
 # ⚠️ Sin class_name: es autoload (pitfall §9.17/§9.41).
+#
+# Lote B1 (2026-10-03, mimo-v2.6-flash-free): se agrega la familia tonal
+# de 03-Diseno §4 (`sfx_tones.json`) + API `tono()`. Compatibilidad total
+# con los 15 checks originales de `test_sfx_m43.gd`.
 
 extends Node
 
 const MAX_VOCES := 24
 const RUTA_SURFACES := "res://data/audio/sfx_surfaces.json"
+const RUTA_TONES := "res://data/audio/sfx_tones.json"
 
 var surfaces: Dictionary = {}
+var tones: Dictionary = {}
 var _voces: Array = []  # [{tipo, prioridad, tiempo_ms}]
 
 func _ready() -> void:
 	_cargar_surfaces()
+	_cargar_tones()
 	_registrar_servicio()
-	print("[M43] SFXManager listo (%d superficies)" % surfaces.size())
+	print("[M43] SFXManager listo (%d superficies, %d tonos)" % [surfaces.size(), tones.size()])
 
 func _cargar_surfaces() -> void:
 	if not FileAccess.file_exists(RUTA_SURFACES):
@@ -29,6 +36,14 @@ func _cargar_surfaces() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_SURFACES))
 	if typeof(parsed) == TYPE_DICTIONARY:
 		surfaces = parsed
+
+func _cargar_tones() -> void:
+	if not FileAccess.file_exists(RUTA_TONES):
+		push_warning("[M43] sfx_tones.json no encontrado")
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_TONES))
+	if typeof(parsed) == TYPE_DICTIONARY:
+		tones = parsed
 
 func _registrar_servicio() -> void:
 	var sr := get_node_or_null("/root/ServiceRegistry")
@@ -74,3 +89,13 @@ func _reproducir(tipo: String, prioridad: int) -> bool:
 
 func voces_activas() -> int:
 	return _voces.size()
+
+## Devuelve la definición tonal de un SFX de UI/evento (03-Diseno §4).
+## Devuelve {} si el SFX no está en la familia tonal.
+func tono(nombre: String) -> Dictionary:
+	var t: Variant = tones.get(nombre, {})
+	return t if typeof(t) == TYPE_DICTIONARY else {}
+
+## Nombres de toda la familia tonal definida en `sfx_tones.json`.
+func tonos_disponibles() -> Array:
+	return tones.keys()
