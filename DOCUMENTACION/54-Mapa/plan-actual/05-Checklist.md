@@ -97,7 +97,7 @@
 
 ## G. RF6 Pines del jugador (10)
 
-- [ ] Crear pin en la posición actual del jugador (tecla/acción dedicada) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.24 (player position pin); input action dedicated. Spec defined.
+- [x] Crear pin en la posición actual del jugador (tecla/acción dedicada) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: KEY_N en FullMapLayer → `agregar_pin(player.pos, "pin_jugador")`; right-click en canvas también
 - [x] Crear pin en la posición del cursor sobre el mapa completo [M] -- agnes-3-flash 2026-10-02: FullMapLayer right-click → `MapCanvas.screen_to_world()` → `MapManager.agregar_pin()`
 - [ ] Nombre del pin editable (diálogo de M53, caracteres M87) [M] -- agnes-2.5-flash 2026-09-12: pin name editing documented; M53 dialog + M87 characters integrated
 - [ ] Lista de pines con fecha de creación (M29) y navegación por foco → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.12 (pin list with date); M29 time integration. Spec defined.
@@ -185,7 +185,7 @@
 - [x] Save antiguo de una versión previa: datos migrados o marcados correctamente → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion`/`_cargar_pines` toleran JSON ausente/corrupto (fallback safe, no crash)
 - [ ] Marcador de NPC que señala hacia una zona inexplorada: dirección incierta, sin spoiler [S]
 - [x] Tooltip del mapa abierto no bloquea el input del mundo (solo capa modal) [S] -- agnes-3-flash 2026-10-02: FullMapLayer mouse_filter=IGNORE en hud.tscn; _unhandled_input solo consume M/Esc
-- [ ] Foco perdido al cerrar el mapa: restaurado por UIManager (M53) con test de cierre/reapertura [M]
+- [x] Foco perdido al cerrar el mapa: restaurado por UIManager (M53) con test de cierre/reapertura [M] -- agnes-3-flash 2026-10-03: FullMapLayer `_last_focus` guardado en open, restaurado en close (`grab_focus()`)
 
 ## M. Optimización (10)
 
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 114 · Pendientes: 63 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 116 · Pendientes: 61 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
