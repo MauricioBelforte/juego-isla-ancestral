@@ -26,6 +26,7 @@ var _islands_container: Control
 var _markers_container: Control
 var _fog_rect: ColorRect
 var _player_dot: ColorRect
+var _route_lines: Array = []
 
 # Datos
 var _world_size: float = 640.0
@@ -231,6 +232,26 @@ func set_type_visible(tipo: String, visible: bool) -> void:
 		var marker_tipo: String = child.get_meta("tipo", "")
 		if marker_tipo == tipo:
 			child.visible = visible
+
+## Dibuja una línea suave desde el jugador al destino (M28 route).
+func draw_route_line(from: Vector2, to: Vector2) -> void:
+	_clear_route()
+	var line := Line2D.new()
+	line.points = PackedVector2Array([_world_to_screen(from), _world_to_screen(to)])
+	line.width = 2.0
+	line.default_color = Color(1.0, 0.85, 0.2, 0.6)  # ámbar suave
+	add_child(line)
+	_route_lines.append(line)
+
+## Borra todas las líneas de ruta.
+func clear_routes() -> void:
+	_clear_route()
+
+func _clear_route() -> void:
+	for line in _route_lines:
+		if is_instance_valid(line):
+			line.queue_free()
+	_route_lines.clear()
 
 func _apply_transform() -> void:
 	_islands_container.position = _pan_offset
