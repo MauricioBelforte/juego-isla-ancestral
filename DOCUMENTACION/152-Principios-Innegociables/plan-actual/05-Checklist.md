@@ -7,25 +7,25 @@
 
 ### [S] Especificación de principios innegociables
 - [x] No agregar combate simplemente porque "todo juego necesita combate"
-- [x] No convertir el juego en un survival de hambre si contradice la visión
-- [x] No castigar al jugador por jugar poco
-- [x] No obligar al jugador a optimizar constantemente
-- [x] No hacer que todos los NPC sean iguales
-- [x] No llenar el mundo únicamente con contenido procedural vacío
-- [x] No usar puzzles arbitrarios
-- [x] No esconder información esencial detrás de una sola acción fácilmente perdible
-- [x] No diseñar la economía alrededor del grind
-- [x] No sacrificar rendimiento por una pequeña mejora visual
+- [ ] No convertir el juego en un survival de hambre si contradice la visión
+- [ ] No castigar al jugador por jugar poco
+- [ ] No obligar al jugador a optimizar constantemente
+- [ ] No hacer que todos los NPC sean iguales
+- [ ] No llenar el mundo únicamente con contenido procedural vacío
+- [ ] No usar puzzles arbitrarios
+- [ ] No esconder información esencial detrás de una sola acción fácilmente perdible
+- [ ] No diseñar la economía alrededor del grind
+- [ ] No sacrificar rendimiento por una pequeña mejora visual
 - [x] No añadir sistemas sin comprobar que aporten algo
-- [x] No ampliar el mapa solamente para hacerlo grande
-- [x] No confundir cantidad con profundidad
-- [x] No introducir monetización que destruya la experiencia
-- [x] No depender de servicios externos sin plan de contingencia
-- [x] No utilizar assets sin licencia clara
-- [x] No depender de una sola persona para conocimiento crítico del proyecto
+- [ ] No ampliar el mapa solamente para hacerlo grande
+- [ ] No confundir cantidad con profundidad
+- [ ] No introducir monetización que destruya la experiencia
+- [ ] No depender de servicios externos sin plan de contingencia
+- [ ] No utilizar assets sin licencia clara
+- [ ] No depender de una sola persona para conocimiento crítico del proyecto
 
 ### [S] Filosofía cozy
-- [x] Definir filosofía cozy (sin FOMO, sin castigos irreversibles, eventos repetibles)
+- [ ] Definir filosofía cozy (sin FOMO, sin castigos irreversibles, eventos repetibles)
 - [x] Definir principio: herramientas que no desaparecen
 - [x] Definir principio: guardados y backups confiables
 - [x] Definir principio: progresión accesible a cualquier ritmo
@@ -75,13 +75,13 @@
 
 ### [S] Proceso de revisión
 - [x] Diseñar checklist de revisión contra principios (8 ítems)
-- [x] Diseñar formato de revisión de decisión
-- [x] Diseñar campo de justificación para desviaciones
-- [x] Diseñar campo de aprobación
-- [x] Diseñar registro de desviaciones justificadas
+- [ ] Diseñar formato de revisión de decisión
+- [ ] Diseñar campo de justificación para desviaciones
+- [ ] Diseñar campo de aprobación
+- [ ] Diseñar registro de desviaciones justificadas
 - [x] Definir métricas de cumplimiento (porcentaje de decisiones revisadas, porcentaje de decisiones que cumplen principios)
-- [x] Definir objetivo: 100% de decisiones críticas revisadas
-- [x] Definir objetivo: < 5% de desviaciones justificadas por mes
+- [ ] Definir objetivo: 100% de decisiones críticas revisadas
+- [ ] Definir objetivo: < 5% de desviaciones justificadas por mes
 - [x] Definir objetivo: 0% de principios violados sin justificación
 
 ### [S] Documentación de principios
@@ -91,50 +91,50 @@
 - [x] Diseñar docs/principios/tecnicos.md
 - [x] Diseñar docs/principios/proceso_revision.md
 - [x] Diseñar docs/principios/desviaciones_justificadas.md
-- [x] Diseñar docs/licencias_assets.md
-- [x] Diseñar docs/knowledge_sharing.md
+- [ ] Diseñar docs/licencias_assets.md
+- [ ] Diseñar docs/knowledge_sharing.md
 - [x] Definir introducción a los principios innegociables
 - [x] Definir lista de principios por categoría
 - [x] Definir cómo aplicar los principios
-- [x] Definir proceso de revisión
-- [x] Definir registro de desviaciones justificadas
+- [ ] Definir proceso de revisión
+- [ ] Definir registro de desviaciones justificadas
 
 ### [S] Integración con otros módulos
-- [x] Especificar integración con M01 (Fundamentos del Proyecto)
-- [x] Especificar integración con M02 (Visión y Concepto)
-- [x] Especificar integración con M07 (Arquitectura)
-- [x] Especificar integración con M10 (Generación del Mundo)
-- [x] Especificar integración con M13 (Herramientas)
-- [x] Especificar integración con M14 (Inventario)
-- [x] Especificar integración con M16 (Crafting)
-- [x] Especificar integración con M29 (Tiempo y Calendario)
-- [x] Especificar integración con M50 (Modelos 3D)
-- [x] Especificar integración con M59 (Guardado)
-- [x] Especificar integración con M61 (Rendimiento)
-- [x] Especificar integración con M64 (NPC)
+- [ ] Especificar integración con M01 (Fundamentos del Proyecto)
+- [ ] Especificar integración con M02 (Visión y Concepto)
+- [ ] Especificar integración con M07 (Arquitectura)
+- [ ] Especificar integración con M10 (Generación del Mundo)
+- [ ] Especificar integración con M13 (Herramientas)
+- [ ] Especificar integración con M14 (Inventario)
+- [ ] Especificar integración con M16 (Crafting)
+- [ ] Especificar integración con M29 (Tiempo y Calendario)
+- [ ] Especificar integración con M50 (Modelos 3D)
+- [ ] Especificar integración con M59 (Guardado)
+- [ ] Especificar integración con M61 (Rendimiento)
+- [ ] Especificar integración con M64 (NPC)
 - [x] Especificar integración con M90 (Configuración Gráfica)
-- [x] Especificar integración con M107 (Backups)
-- [x] Especificar integración con M111 (Código de Calidad)
-- [x] Especificar integración con M131 (Créditos)
+- [ ] Especificar integración con M107 (Backups)
+- [ ] Especificar integración con M111 (Código de Calidad)
+- [ ] Especificar integración con M131 (Créditos)
 
 ### [S] Revisión periódica
-- [x] Definir frecuencia de revisión (cada 3 meses)
-- [x] Definir responsable de revisión (equipo de diseño)
+- [ ] Definir frecuencia de revisión (cada 3 meses)
+- [ ] Definir responsable de revisión (equipo de diseño)
 - [x] Diseñar proceso de revisión de principios
 - [x] Diseñar proceso de actualización de principios
-- [x] Diseñar proceso de documentación de cambios
-- [x] Diseñar proceso de comunicación de cambios al equipo
+- [ ] Diseñar proceso de documentación de cambios
+- [ ] Diseñar proceso de comunicación de cambios al equipo
 
 ### [S] Ejemplos de aplicación
-- [x] Diseñar ejemplo 1: decisión de agregar combate
+- [ ] Diseñar ejemplo 1: decisión de agregar combate
 - [x] Diseñar ejemplo 2: decisión de agregar sistema de hambre
-- [x] Diseñar ejemplo 3: decisión de ampliar mapa
-- [x] Documentar resultado de ejemplo 1 (aprobado)
-- [x] Documentar resultado de ejemplo 2 (aprobado con modificación)
-- [x] Documentar resultado de ejemplo 3 (aprobado con condición)
+- [ ] Diseñar ejemplo 3: decisión de ampliar mapa
+- [ ] Documentar resultado de ejemplo 1 (aprobado)
+- [ ] Documentar resultado de ejemplo 2 (aprobado con modificación)
+- [ ] Documentar resultado de ejemplo 3 (aprobado con condición)
 
 ### [S] Documentación de filosofia_cozy.md
-- [x] Diseñar definición de cozy
+- [ ] Diseñar definición de cozy
 - [x] Diseñar principio: sin FOMO
 - [x] Diseñar implementación de sin FOMO
 - [x] Diseñar principio: sin castigos irreversibles
@@ -183,69 +183,69 @@
 - [x] Diseñar implementación de knowledge sharing
 
 ### [S] Documentación de proceso_revision.md
-- [x] Diseñar formato de revisión de decisión
+- [ ] Diseñar formato de revisión de decisión
 - [x] Diseñar checklist de principios (8 ítems)
-- [x] Diseñar campo de justificación
-- [x] Diseñar campo de aprobación
-- [x] Diseñar campo de fecha
-- [x] Diseñar campo de responsable
+- [ ] Diseñar campo de justificación
+- [ ] Diseñar campo de aprobación
+- [ ] Diseñar campo de fecha
+- [ ] Diseñar campo de responsable
 
 ### [S] Documentación de desviaciones_justificadas.md
-- [x] Diseñar tabla de desviaciones justificadas
+- [ ] Diseñar tabla de desviaciones justificadas
 - [x] Diseñar campos: ID, decisión, principio desviado, justificación, aprobado por, fecha
-- [x] Diseñar ejemplo de desviación justificada
+- [ ] Diseñar ejemplo de desviación justificada
 
 ### [S] Documentación de licencias_assets.md
-- [x] Diseñar formato de registro de licencias
-- [x] Diseñar campos: asset, licencia, atribución, fuente
-- [x] Definir licencias comunes (MIT, CC0, CC BY, CC BY-SA, CC BY-NC, propietario)
-- [x] Diseñar proceso de verificación de licencias
-- [x] Diseñar proceso de registro de assets
-- [x] Diseñar proceso de inclusión de archivo de licencia
-- [x] Diseñar proceso de atribución en créditos
+- [ ] Diseñar formato de registro de licencias
+- [ ] Diseñar campos: asset, licencia, atribución, fuente
+- [ ] Definir licencias comunes (MIT, CC0, CC BY, CC BY-SA, CC BY-NC, propietario)
+- [ ] Diseñar proceso de verificación de licencias
+- [ ] Diseñar proceso de registro de assets
+- [ ] Diseñar proceso de inclusión de archivo de licencia
+- [ ] Diseñar proceso de atribución en créditos
 
 ### [S] Documentación de knowledge_sharing.md
-- [x] Diseñar prácticas de documentation
+- [ ] Diseñar prácticas de documentation
 - [x] Diseñar prácticas de code reviews
-- [x] Diseñar prácticas de pair programming
-- [x] Diseñar prácticas de knowledge sharing sessions
-- [x] Diseñar herramientas de knowledge sharing
-- [x] Diseñar proceso de documentación de arquitectura
+- [ ] Diseñar prácticas de pair programming
+- [ ] Diseñar prácticas de knowledge sharing sessions
+- [ ] Diseñar herramientas de knowledge sharing
+- [ ] Diseñar proceso de documentación de arquitectura
 - [x] Diseñar proceso de documentación de sistemas
 - [x] Diseñar proceso de code reviews
-- [x] Diseñar proceso de pair programming
-- [x] Diseñar proceso de knowledge sharing sessions
+- [ ] Diseñar proceso de pair programming
+- [ ] Diseñar proceso de knowledge sharing sessions
 
 ### [S] Checklist de revisión contra principios
-- [x] Diseñar ítem: ¿Esta decisión respeta la filosofía cozy?
-- [x] Diseñar ítem: ¿Esta decisión no castiga al jugador por jugar poco?
-- [x] Diseñar ítem: ¿Esta decisión no obliga a optimizar constantemente?
-- [x] Diseñar ítem: ¿Esta decisión aporta calidad, no solo cantidad?
-- [x] Diseñar ítem: ¿Esta decisión no sacrifica rendimiento por bells and whistles?
-- [x] Diseñar ítem: ¿Esta decisión tiene propósito claro?
-- [x] Diseñar ítem: ¿Esta decisión no depende de servicios externos sin fallback?
-- [x] Diseñar ítem: ¿Esta decisión no introduce dependencia crítica de una sola persona?
+- [ ] Diseñar ítem: ¿Esta decisión respeta la filosofía cozy?
+- [ ] Diseñar ítem: ¿Esta decisión no castiga al jugador por jugar poco?
+- [ ] Diseñar ítem: ¿Esta decisión no obliga a optimizar constantemente?
+- [ ] Diseñar ítem: ¿Esta decisión aporta calidad, no solo cantidad?
+- [ ] Diseñar ítem: ¿Esta decisión no sacrifica rendimiento por bells and whistles?
+- [ ] Diseñar ítem: ¿Esta decisión tiene propósito claro?
+- [ ] Diseñar ítem: ¿Esta decisión no depende de servicios externos sin fallback?
+- [ ] Diseñar ítem: ¿Esta decisión no introduce dependencia crítica de una sola persona?
 
 ### [S] Métricas de cumplimiento
 - [x] Definir métrica: porcentaje de decisiones revisadas contra principios
 - [x] Definir métrica: porcentaje de decisiones que cumplen todos los principios
-- [x] Definir métrica: número de desviaciones justificadas por mes
+- [ ] Definir métrica: número de desviaciones justificadas por mes
 - [x] Definir métrica: número de principios violados sin justificación
-- [x] Definir objetivo: 100% de decisiones críticas revisadas
-- [x] Definir objetivo: < 5% de desviaciones justificadas por mes
+- [ ] Definir objetivo: 100% de decisiones críticas revisadas
+- [ ] Definir objetivo: < 5% de desviaciones justificadas por mes
 - [x] Definir objetivo: 0% de principios violados sin justificación
 
 ### [S] Proceso de revisión periódica
-- [x] Definir frecuencia: cada 3 meses
-- [x] Definir responsable: equipo de diseño
+- [ ] Definir frecuencia: cada 3 meses
+- [ ] Definir responsable: equipo de diseño
 - [x] Diseñar paso 1: revisar principios actuales
 - [x] Diseñar paso 2: evaluar relevancia de principios
 - [x] Diseñar paso 3: agregar nuevos principios si es necesario
 - [x] Diseñar paso 4: eliminar principios obsoletos si es necesario
-- [x] Diseñar paso 5: documentar cambios y justificaciones
-- [x] Diseñar paso 6: comunicar cambios al equipo
+- [ ] Diseñar paso 5: documentar cambios y justificaciones
+- [ ] Diseñar paso 6: comunicar cambios al equipo
 
-**Totales:** 202 ítems · Completados: 202 · Pendientes: 0 · No resueltos: 0.
+## Totales
 
 **Total de ítems:** 189
 **Ítems resueltos por documentación:** 189
