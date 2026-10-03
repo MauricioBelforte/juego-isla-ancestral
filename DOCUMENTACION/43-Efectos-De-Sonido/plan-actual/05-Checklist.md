@@ -89,11 +89,11 @@
 
 ## F. Ducking y volumetría (8)
 
-- [ ] SFX -6 dB durante diálogos (M21) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): sin ducking en `SFXManager` (el que existe es de M41/M42, no de M43)
-- [ ] Música -6 dB durante logros (M41) [S]
-- [ ] Correr +3 dB sobre paso normal [S]
-- [ ] SFX por debajo de diálogo en jerarquía [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no hay jerarquía de canales: solo una prioridad numérica 0-10
-- [ ] Error 0.4 s no punitivo [S]
+- [x] SFX -6 dB durante diálogos (M21) [S] — ✅ Lote B5 (2026-10-03, mimo): `ducking_dialogo()` en `sfx_manager.gd` baja el bus SFX exactamente 6 dB, es idempotente y **se suscribe en `_ready()` a `DialogueManager.dialogue_started/dialogue_ended` sin modificar un solo archivo de M21** (M43 solo escucha); verificado por `test_sfx_m43.gd` **106/0 OK**
+- [ ] Música -6 dB durante logros (M41) [S] — ⚠️ 2026-10-03 (mimo): le corresponde a **M41**, no a M43; además `music_director.gd` solo expone `tema_cambio(tema, capas)` — **no hay señal de logro** que poder escuchar, así que M43 no puede enlazarlo. Delegado a M41.
+- [ ] Correr +3 dB sobre paso normal [S] — ⚠️ 2026-10-03 (mimo): `02-Analisis §2` dice «activado por M34 (estado corriendo)» pero **M34 es *Pesca*** (CHECKLIST-GLOBAL fila 34), no movimiento: la dependencia está mal referenciada. No existe señal de «corriendo» en el código y sin `AudioStreamPlayer` el +3 dB no se percibiría igualmente (§7). No se implementa API huérfana (§21.4 «no hacer por hacer»).
+- [x] SFX por debajo de diálogo en jerarquía [S] — ✅ Lote B5 (2026-10-03, mimo): con el ducking activo el bus SFX queda 6 dB por debajo de su base y M91 ya separa los canales `Voice`/`SFX`; verificado midiendo `AudioServer.get_bus_volume_db("SFX")` antes/durante/después del ducking; verificado por `test_sfx_m43.gd` **106/0 OK**
+- [x] Error 0.4 s no punitivo [S] — ✅ Lote B1 (2026-10-03, mimo) — cerrado en B5 al releer `_test_tonos()`: `tones["error"]` = tríada **menor descendente [7,4,0]**, `duracion_s = 0.4` y `tono = "suave"` (nunca buzz), con 3 checks específicos en la suite; verificado por `test_sfx_m43.gd` **106/0 OK**
 - [ ] Ningún SFX estridente (cozy) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): el proyecto tiene 0 assets de audio (.wav/.ogg/.mp3): no se puede verificar
 - [x] Volumen configurable por bus (M91) [S] — ✅ Lote B4 (2026-10-03, mimo): `SFXManager.configurar_volumen(bus, dB)` implementado y **delegado en `AudioConfig` (M91)** (M43 NO toca `scripts/configuracion/`); convierte dB → lineal y valida el bus (inexistente → false); verificado por `test_sfx_m43.gd` **96/0 OK**
 - [ ] Pausa con GameClock sin residuos (M29) [S] — ⚠️ 2026-10-03 (mimo): la API `SFXManager.pausar()/reanudar()` **existe y está testeada** (3 checks: reproducir en pausa → false · la pausa no añade voces · la voz vencida se purga al reanudar = sin residuos), pero **falta el enlace con M29**: nadie llama `pausar()` cuando `GameTime.pausa()` se activa. API ✓ / integración ✗
@@ -136,8 +136,8 @@
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 68 · Pendientes: 32 · No resueltos: 0.
-**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **76/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). Quedan **37 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
+**Totales:** 100 ítems · Completados: 71 · Pendientes: 29 · No resueltos: 0.
+**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **106/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3 + 20 API pública §2 B4 + 10 ducking F92/F95 B5). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). **Lote B4 (2026-10-03)** cerró F98 + G106-G108 + G115 (API de §2). **Lote B5 (2026-10-03)** cerró F92, F95 y F96 (ducking de diálogo + error amable). Quedan **29 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente
 
@@ -169,7 +169,7 @@
 - **Progreso al reservar:** 61/100 `[x]` · 39 `[ ]` · **0 `[?]`**
 - **Dependencias:** **0 bloqueantes** — la columna `Dependencias` de la fila CHECKLIST-GLOBAL era espuria (traía un `Recom`); corregida a `—`
 - **Objetivo:** cerrar los 39 `ítems` `[S]` y dejar desbloqueados **M41, M42 y M44**
-- **Suites de referencia:** `test_sfx_m43.gd` (15/0 de agnes) ya descubierto por el runner
+- **Suites de referencia:** `test_sfx_m43.gd` (15/0 de agnes → **106/0** tras los lotes B1-B5)
 - **Registros de §26:** guía 08 · `CHECKLIST-GLOBAL.md` fila 43 · `ESTADO-PARALELO.md` · este archivo
 - **Nota de ubicación:** este bloque va **AL FINAL** del archivo para no desplazar las referencias `L##` (lección de M91, commit `b894ffe`)
 

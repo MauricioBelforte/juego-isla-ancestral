@@ -103,10 +103,29 @@ está testeada, pero **nadie la enlaza con `GameTime.pausa()`** (M29).
 (máx 2) descartaba legítimamente a `api_ui` — el código estaba bien; se hizo
 el test determinista (pool vacío al entrar).
 
+**Lote B5 — ducking de diálogo F92/F95 (2026-10-03 02:05, hecho):**
+`ducking_dialogo(activar)` baja el bus SFX **exactamente 6 dB** sobre la
+base que declare M91 (se recalcula en cada cambio, así que un slider
+movido durante el diálogo no deja volumen obsoleto) y es idempotente.
+El enlace con M21 se hizo **suscribiéndose en `_ready()` a
+`DialogueManager.dialogue_started/dialogue_ended` — sin modificar un solo
+archivo de `scripts/dialogos/`** (§15: M43 solo escucha). Suite
++`_test_ducking()` (10 checks): **96 → 106 checks, 0 fallos, EXIT=0**.
+Cierra **F92 + F95** (checklist 68 → 71 `[x]`) y **F96** (el error 0.4 s
+ya estaba testeado desde B1 y se me pasó cerrar: `tones["error"]` =
+[7,4,0] descendente, 0.4 s, tono suave).
+**Dos hallazgos documentados en F93/F94:** (1) F93 «Música -6 dB en
+logros (M41)» es de M41 y `music_director.gd` **no expone señal de
+logro**, solo `tema_cambio` — delegado; (2) F94 «Correr +3 dB» cita
+`02-Analisis` como «activado por M34» **pero M34 es *Pesca*
+(CHECKLIST-GLOBAL fila 34), no movimiento**: la dependencia está mal
+referenciada y no hay señal de «corriendo» en el código. No se creó API
+huérfana (§21.4 «no hacer por hacer»).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 96/0, ya descubierta por el runner**)
+  (**suite de referencia: 106/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),

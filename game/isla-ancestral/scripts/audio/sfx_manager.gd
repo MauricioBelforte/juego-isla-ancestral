@@ -28,6 +28,11 @@
 # argumento pasa a ser `pos`), `reproducir_localizado`,
 # `configurar_volumen(bus, dB)` (delega en AudioConfig/M91) y
 # `pausar()/reanudar()` con purga de residuos.
+#
+# Lote B5 (2026-10-03, mimo-v2.6-flash-free): ducking de diálogo (F92/F95) —
+# `ducking_dialogo()` baja el bus SFX 6 dB y se suscribe en `_ready()` a
+# `DialogueManager` (M21) **sin modificar sus archivos** (solo escucha
+# `dialogue_started`/`dialogue_ended`).
 
 extends Node
 
@@ -58,6 +63,7 @@ var catalog: Dictionary = {}
 var _voces: Array = []  # MAX_VOCES slots preallocados (§5); null = libre
 var _rng := RandomNumberGenerator.new()  # único y cacheado: sin allocs por evento
 var _pausado: bool = false  # API §2 pausar()/reanudar()
+var _ducking: bool = false  # F92: ducking de diálogo activo
 var _pausa_inicio: int = 0
 
 func _ready() -> void:
@@ -67,6 +73,7 @@ func _ready() -> void:
 	_cargar_tones()
 	_cargar_catalogo()
 	_registrar_servicio()
+	_conectar_dialogos()
 	print("[M43] SFXManager listo (%d superficies, %d tonos, catálogo %s)" % [surfaces.size(), tones.size(), "OK" if not catalog.is_empty() else "FALTA"])
 
 func _cargar_surfaces() -> void:
@@ -202,6 +209,50 @@ func _variaciones_de(tipo: String, material: String) -> Array:
 	for i in range(n):
 		out.append("%s%d" % [pref, i + 1])
 	return out
+
+## F92/F95: suscripción a M21. Se conecta solo si el autoload existe; los
+## archivos de `dialogue_manager.gd` NO se modifican (M43 únicamente escucha).
+func _conectar_dialogos() -> void:
+	var dm := get_node_or_null("/root/DialogueManager")
+	if dm == null:
+		return
+	if not dm.dialogue_started.is_connected(_on_dialogue_started):
+		dm.dialogue_started.connect(_on_dialogue_started)
+	if not dm.dialogue_ended.is_connected(_on_dialogue_ended):
+		dm.dialogue_ended.connect(_on_dialogue_ended)
+
+func _on_dialogue_started(_dialogue_id: String) -> void:
+	ducking_dialogo(true)
+
+func _on_dialogue_ended(_dialogue_id: String, _last_node_id: String) -> void:
+	ducking_dialogo(false)
+
+## F92: SFX -6 dB mientras hay diálogo (M21). Idempotente: repetir la misma
+## llamada no acumula atenuación.
+func ducking_dialogo(activar: bool) -> void:
+	if activar == _ducking:
+		return
+	_ducking = activar
+	_aplicar_ganancia_sfx(-6.0 if _ducking else 0.0)
+
+## F95: el SFX queda por debajo del diálogo en la jerarquía de canales (M91
+## ya separa Voice/SFX). Se recalcula la base desde AudioConfig en CADA cambio
+## para no arrastrar un volumen obsoleto si el usuario movió el slider del
+## diálogo mientras ducking estaba activo (M91 es el dueño del persistido).
+func _aplicar_ganancia_sfx(delta_db: float) -> void:
+	var idx := AudioServer.get_bus_index("SFX")
+	if idx < 0:
+		return
+	AudioServer.set_bus_volume_db(idx, _db_base_sfx() + delta_db)
+
+## Volumen base del bus SFX según M91 (lineal -> dB). Sin M91 devuelve 0 dB.
+func _db_base_sfx() -> float:
+	var ac: Node = Engine.get_main_loop().root.get_node_or_null("AudioConfig")
+	if ac != null and ac.has_method("get_volumen"):
+		var lin := float(ac.get_volumen("SFX"))
+		if lin > 0.0:
+			return 20.0 * log(lin) / log(10.0)
+	return 0.0
 
 ## 04-Codigo §2: volumen de un bus en dB (0 = sin cambio, -6 dB ≈ 50 %).
 ## Delega en AudioConfig (M91), dueño del árbol de buses y de la persistencia:

@@ -16,6 +16,7 @@
 # Lote B4 (2026-10-03, mimo-v2.6-flash-free): + _test_api() (§2: pos,
 # localizado, configurar_volumen, pausa). `reproducir()` cambió de firma
 # (el 2º argumento es ahora `pos`), así que sus 7 llamadas llevan `null`.
+# Lote B5 (2026-10-03, mimo-v2.6-flash-free): + _test_ducking() (F92/F95).
 # límites §5: ≤6 por tipo, UI máx 2, pool preallocado, PRNG cacheado).
 # data/audio/sfx_catalog.json (03-Diseno §3, 12 filas) y superficies a 9.
 
@@ -34,6 +35,7 @@ func _run() -> void:
 	_test_prioridad()
 	_test_categorias()
 	_test_api()
+	_test_ducking()
 	_test_tonos()
 	_test_catalogo()
 	_summary()
@@ -235,6 +237,49 @@ func _test_api() -> void:
 		"voces=%d" % sfx.voces_activas())
 	var ui_final: bool = sfx.reproducir("ui_final", null, 10)
 	_check("pool lleno: la UI entra cortando a un paso (nunca se corta)", ui_final)
+
+## F92/F95: ducking de diálogo suscrito a M21 (sin modificar sus archivos).
+func _test_ducking() -> void:
+	print("--- Ducking de diálogo (F92/F95) ---")
+	var sfx := root.get_node_or_null("SFXManager")
+	if sfx == null:
+		_check("SFXManager presente (ducking)", false)
+		return
+	var dm: Node = root.get_node_or_null("DialogueManager")
+	_check("DialogueManager (M21) disponible", dm != null)
+	if dm != null:
+		_check("suscripto a dialogue_started",
+			dm.dialogue_started.is_connected(sfx._on_dialogue_started))
+		_check("suscripto a dialogue_ended",
+			dm.dialogue_ended.is_connected(sfx._on_dialogue_ended))
+	var idx := AudioServer.get_bus_index("SFX")
+	_check("bus SFX existe (M91)", idx >= 0)
+	if idx < 0:
+		return
+	var base := AudioServer.get_bus_volume_db(idx)
+
+	# activar / idempotencia / desactivar
+	sfx.ducking_dialogo(true)
+	var ducked := AudioServer.get_bus_volume_db(idx)
+	_check("ducking baja 6 dB", abs(ducked - (base - 6.0)) < 0.02,
+		"base=%s ducked=%s" % [str(base), str(ducked)])
+	sfx.ducking_dialogo(true)
+	_check("ducking idempotente (no acumula)", abs(AudioServer.get_bus_volume_db(idx) - ducked) < 0.001,
+		"db=%s" % str(AudioServer.get_bus_volume_db(idx)))
+	sfx.ducking_dialogo(false)
+	var restaurado := AudioServer.get_bus_volume_db(idx)
+	_check("al soltar el diálogo vuelve la base", abs(restaurado - base) < 0.02,
+		"base=%s restaurado=%s" % [str(base), str(restaurado)])
+	sfx.ducking_dialogo(false)
+	_check("desactivar dos veces no cambia nada", abs(AudioServer.get_bus_volume_db(idx) - base) < 0.001)
+
+	# F95: SFX queda por debajo del diálogo al activarse
+	sfx.ducking_dialogo(true)
+	_check("SFX por debajo del diálogo (jerarquía)", AudioServer.get_bus_volume_db(idx) < base - 5.9)
+	sfx.ducking_dialogo(false)
+
+	# el flag de estado queda limpio para el resto de la suite
+	_check("sin ducking al terminar", bool(sfx._ducking) == false)
 
 ## Familia tonal (03-Diseno §4): 7 SFX de UI/eventos verificables por datos.
 ## NOTA: JSON.parse_string convierte todos los números a float, así que las
