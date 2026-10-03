@@ -335,8 +335,19 @@
 - **Logs de la iteración (lotes 1-9):** 1191, 1194, 1198, 1199, 1201, 1203, 1204, 1206, 1208
 - **Progreso al liberar:** 206/239 `[x]` · 32 `[ ]` · 1 `[?]` (86%)
 - **Motivo de 🟡 (no ✅):** queda **L88 `[?]`** — Godot 4.7.2 no expone HRTF (`AudioServer.get_speaker_mode()` no tiene contraparte HRTF; ver `03-Diseno.md` §5.1.1). Además 32 `[ ]` con dueños externos: 13 de M53 (UI), 10 sonidos de interfaz (0 assets de audio en el repo, `03-Diseno.md` §7 sellado), rollups L18/L22/L23 (ejecución con hardware real), 2 de M58, 2 de M87, 1 de M59, L151 (HRTF).
-- **QA cruzado §21.8:** **PENDIENTE** — requiere un segundo modelo distinto al que completó el módulo.
+- **QA cruzado §21.8:** ✅ **VERIFICADO por Hy3/WorkBuddy (Log 1225, 2026-10-03)** — verificador de modelo distinto (hy3 ≠ mimo). 103/0 + 82/0, guardián rojo.
 - **Suites al liberar:** `--module audio` 8 OK + `--module subtitle` 1 OK = **9 OK / 0 FAIL** (DoD de entrega cumplida).
 
 ---
+
+## QA cruzado §21.8 — Hy3 (Log 1225, 2026-10-03)
+
+- **Verificador:** hy3 / WorkBuddy (Tencent Hunyuan) — modelo DISTINTO al autor (mimo-v2.6-flash-free), cumple AGENTS.md §21.8.
+- **Binario:** Godot 4.7.2 real.
+- **Verde (medido):**
+  - `test_audio_config.gd`: **103 checks / 0 fallos / EXIT 0** (piso `CHECKS_MINIMOS = 103` medido; afirma AudioConfigService: buses, volúmenes linear→db, mute, persistencia M60, porcentaje 0-100, aplicación/control por bus).
+  - `test_audio_effects_m91.gd`: **82 checks / 0 fallos / EXIT 0**.
+- **Rojo (inyección):** forzar `_check(ac != null, "AudioConfig autoload presente")` → `_check(false, …)` en copia temporal → **EXIT 1**, `=== TEST M91 AUDIO: 103 checks, 1 fallo(s) ===`. El piso + contador de fallos vuelven ROJO; el verde no es heredado.
+- **L88 HRTF `[?]` — GENUINAMENTE TÉCNICO:** Godot 4.7.2 no expone HRTF (`AudioServer` sondeo T-107: 0 propiedades coincidentes; `03-Diseno.md` §5.1.1). No es un pendiente disfrazado; es limitación de motor (requiere GDExtension / DSP propio / decisión de usuario). Queda como `[?]` legítimo.
+- **DoD:** 206 `[x]` / 32 `[ ]` / 1 `[?]`. 32 `[ ]` y L88 `[?]` con dueño externo/engine documentado (M53 UI, assets de audio ausentes, rollups hardware, M58/M87/M59, L151). El módulo permanece 🟡 Con dudas por decisión del autor; el QA §21.8 no cambia ese estado.
 
