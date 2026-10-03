@@ -33,7 +33,7 @@
 > M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
 
 **Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
-(**57 [x] / 43 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
+(**63 [x] / 37 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
 
 **Lote A — auditoría de coherencia (2026-10-03 00:32, hecho):** el checklist llegaba
 inflado a 61 `[x]`. Auditoría contra el código real → **22 `[x]` falsos bajados a `[ ]`
@@ -72,10 +72,23 @@ cubierto recién en B2 con datos reales y con la nota pública en el checklist.
 `Colocar: misma familia` queda `[ ]`: el catálogo declara 4 variaciones pero
 no enlaza colocar ↔ superficie (el requisito no está modelado).
 
+**Lote B3 — categorías §2 y límites §5 (2026-10-03 01:15, hecho):**
+`sfx_manager.gd` ahora tiene `CATEGORIAS` (ui/mundo/bloque/paso) con
+`nivel_s2` (1 = alta … 4 = baja, la numeración del documento) **y**
+`prioridad` interna invertida (10 … 1, porque el corte del pool gana con
+el mayor), `MAX_MISMO_TIPO = 6`, `categoria_de(prioridad, categoria)`,
+pool **preallocado** (`_voces.resize(24)`, cero `append`) y un solo
+`RandomNumberGenerator` cacheado con semilla del reloj M29
+(`GameTime.dia_absoluto/hora/minuto`) + `randi()`. Los límites se
+evalúan ANTES del corte por prioridad. Suite +`_test_categorias()`:
+**59 → 76 checks, 0 fallos, EXIT=0**. Cierra **6 de la sección D**
+(checklist 57 → 63 `[x]`). Siguen `[ ]` en D: 3D/2D y distancias 15/20/30 m
+(sin `AudioStreamPlayer`: bloqueado por 0 assets de audio, §7).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 59/0, ya descubierta por el runner**)
+  (**suite de referencia: 76/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),

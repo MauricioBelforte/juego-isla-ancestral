@@ -12,6 +12,8 @@
 # conservan sin tocar.
 #
 # Lote B2 (2026-10-03, mimo-v2.6-flash-free): + _test_catalogo() contra
+# Lote B3 (2026-10-03, mimo-v2.6-flash-free): + _test_categorias() (§2 +
+# límites §5: ≤6 por tipo, UI máx 2, pool preallocado, PRNG cacheado).
 # data/audio/sfx_catalog.json (03-Diseno §3, 12 filas) y superficies a 9.
 
 extends SceneTree
@@ -27,6 +29,7 @@ func _run() -> void:
 	_test_surfaces()
 	_test_pool()
 	_test_prioridad()
+	_test_categorias()
 	_test_tonos()
 	_test_catalogo()
 	_summary()
@@ -88,6 +91,53 @@ func _test_prioridad() -> void:
 	# Reset: limpiar voces viejas es complejo en test; verificamos API básica
 	_check("reproducir prioridad media", sfx.reproducir("test_medio", 5) == true)
 	_check("reproducir prioridad alta", sfx.reproducir("test_alto", 9) == true)
+
+## Categorías de 03-Diseno §2 y límites de §5 (pool preallocado, ≤6 por
+## tipo, UI máx 2, PRNG cacheado). Corre con el pool ya lleno por _test_pool.
+func _test_categorias() -> void:
+	print("--- Categorías §2 + límites §5 ---")
+	var sfx := root.get_node_or_null("SFXManager")
+	if sfx == null:
+		_check("SFXManager presente (categorías)", false)
+		return
+	var cats: Dictionary = sfx.CATEGORIAS
+	_check("4 categorías de §2", cats.size() == 4, "n=%d" % cats.size())
+	_check("niveles §2 (ui=1, mundo=2, bloque=3, paso=4)",
+		int(cats["ui"]["nivel_s2"]) == 1 and int(cats["mundo"]["nivel_s2"]) == 2
+		and int(cats["bloque"]["nivel_s2"]) == 3 and int(cats["paso"]["nivel_s2"]) == 4)
+	_check("prioridad interna invertida (el mayor gana el corte)",
+		int(cats["ui"]["prioridad"]) > int(cats["mundo"]["prioridad"])
+		and int(cats["mundo"]["prioridad"]) > int(cats["bloque"]["prioridad"])
+		and int(cats["bloque"]["prioridad"]) > int(cats["paso"]["prioridad"]))
+	_check("UI nunca se corta", bool(cats["ui"]["nunca_corta"]))
+	_check("pasos se cortan primero", bool(cats["paso"]["se_corta_primero"]))
+	_check("UI máx 2 simultáneos (§2)", int(cats["ui"]["max_simultaneos"]) == 2)
+
+	# Deducción de categoría por prioridad
+	_check("prioridad 10 -> ui", sfx.categoria_de(10) == "ui")
+	_check("prioridad 5 -> mundo", sfx.categoria_de(5) == "mundo")
+	_check("prioridad 3 -> bloque", sfx.categoria_de(3) == "bloque")
+	_check("prioridad 1 -> paso", sfx.categoria_de(1) == "paso")
+	_check("categoría explícita se respeta", sfx.categoria_de(1, "ui") == "ui")
+
+	# §2: con 2 UI ya activas (_test_pool + _test_prioridad), la 3ª se corta
+	var ui_ok: bool = sfx.reproducir("ui_extra", 10)
+	_check("UI: 3ª simultánea descartada (máx 2)", ui_ok == false, "ok=%s" % ui_ok)
+
+	# §5: ≤ 6 del mismo tipo -> la 7ª se corta (las 6 primeras entran)
+	var siete_ok := true
+	for i in range(7):
+		var r: bool = sfx.reproducir("mismo_tipo", 5)
+		if r != (i < 6):
+			siete_ok = false
+	_check("≤ 6 del mismo tipo (la 7ª se corta)", siete_ok, "rango roto")
+	_check("pool sigue en el tope de 24", sfx.voces_activas() == 24,
+		"voces=%d" % sfx.voces_activas())
+
+	# §5: pool preallocado y PRNG cacheado
+	_check("pool preallocado a 24 slots", sfx._voces.size() == 24, "n=%d" % sfx._voces.size())
+	_check("PRNG cacheado (sin allocs por evento)", sfx._rng is RandomNumberGenerator)
+	_check("randi del RNG dentro de rango", sfx._rng.randi_range(0, 3) in [0, 1, 2, 3])
 
 ## Familia tonal (03-Diseno §4): 7 SFX de UI/eventos verificables por datos.
 ## NOTA: JSON.parse_string convierte todos los números a float, así que las

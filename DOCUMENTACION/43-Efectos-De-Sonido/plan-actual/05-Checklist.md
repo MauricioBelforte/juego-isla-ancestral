@@ -59,16 +59,16 @@
 
 ## D. Prioridades de canal y pool (10)
 
-- [ ] P1 UI: nunca se corta, máx 2 simultáneos [S]
-- [ ] P2 mundo: se corta un pasos si hace falta [S]
-- [x] P3 bloques: se corta un ambiente si hace falta [S]
-- [ ] P4 pasos/movimiento: se corta primero [S]
-- [ ] Pool de 24 voces prealocadas estáticas [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): el pool NO está preallocado: se llena con `append` bajo demanda en `_reproducir`; es un tope dinámico de 24
-- [ ] ≤ 6 simultáneos del mismo tipo [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe límite por tipo: solo el tope global de 24 voces
-- [ ] Sin allocs por frame (PRNG M29) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): usa `randi()` global, no el PRNG de M29; no hay frame loop de reproducción
-- [ ] 3D: pasos/interacciones; 2D: UI/diálogo [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): sin `AudioStreamPlayer` (ni 3D ni 2D): `reproducir` solo registra en el pool, no emite audio
-- [ ] Distancias: pasos 15 m, rotura 20 m, mundo 30 m [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): sin `AudioStreamPlayer3D` ni `max_distance`: no hay cálculo de distancia
-- [x] Excesos se cortan, jamás se apilan [S]
+- [x] P1 UI: nunca se corta, máx 2 simultáneos [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd` (`ui`: `nivel_s2`=1, `nunca_corta`=true, `max_simultaneos`=2; la 3ª UI simultánea se descarta, no corta a las existentes) ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] P2 mundo: se corta un pasos si hace falta [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd` (prioridad interna `mundo`=7 > `paso`=1: en pool lleno la llamada de mundo reemplaza a un paso — ya verificado en «reproducir prioridad media») ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] P3 bloques: se corta un ambiente si hace falta [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd` (`bloque`: `nivel_s2`=3, prioridad interna 5 entre `mundo` (7) y `paso` (1): en conflicto con pasos los corta; ante un ambiente de mayor prioridad lo cede) ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] P4 pasos/movimiento: se corta primero [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd` (`paso`: `nivel_s2`=4, prioridad interna 1 = la más baja, `se_corta_primero`=true: es lo primero que el corte por prioridad elige) ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] Pool de 24 voces prealocadas estáticas [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd`: `_voces.resize(MAX_VOCES)` en `_ready()` (24 slots fijos, `null` = libre; **cero `append`**, la ocupación es por slot) ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] ≤ 6 simultáneos del mismo tipo [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd`: `MAX_MISMO_TIPO=6` comprobado ANTES del corte por prioridad — las 6 primeras entran y la 7ª se corta ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [x] Sin allocs por frame (PRNG M29) [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd`: **un solo** `RandomNumberGenerator` cacheado en `_rng`, semilla resuelta UNA vez en `_ready()` mezclando el reloj de M29 (`GameTime.dia_absoluto/hora/minuto`, si está disponible) con `randi()`. No hay `frame loop` de reproducción que allocs por frame ; verificado por `test_sfx_m43.gd` **76/0 OK**
+- [ ] 3D: pasos/interacciones; 2D: UI/diálogo [S] — ⚠️ sigue pendiente: sin `AudioStreamPlayer` no se emite audio: queda a la espera de los `.wav` (§7)
+- [ ] Distancias: pasos 15 m, rotura 20 m, mundo 30 m [S] — ⚠️ sigue pendiente: sin `AudioStreamPlayer` no se emite audio: queda a la espera de los `.wav` (§7)
+- [x] Excesos se cortan, jamás se apilan [S] — ✅ Lote B3 (2026-10-03): `CATEGORIAS`/`MAX_MISMO_TIPO` en `sfx_manager.gd`: los límites (tipo y categoría) devuelven `false` antes de ocupar slot, y el corte por prioridad reemplaza en sitio: el array nunca supera 24 ; verificado por `test_sfx_m43.gd` **76/0 OK**
 
 ## E. Mapa de variaciones (14)
 
@@ -136,8 +136,8 @@
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 57 · Pendientes: 43 · No resueltos: 0.
-**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de 24 voces (tope dinámico, no preallocado), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **59/0 OK** (15 de superficies/pool/prioridad + 20 de familia tonal en el Lote B1 + 9 de superficies §3 y 24 de catálogo §3 en el Lote B2). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). Quedan **43 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
+**Totales:** 100 ítems · Completados: 63 · Pendientes: 37 · No resueltos: 0.
+**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **76/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). Quedan **37 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente
 
