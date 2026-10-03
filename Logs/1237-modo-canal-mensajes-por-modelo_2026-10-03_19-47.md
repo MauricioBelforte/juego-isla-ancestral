@@ -106,6 +106,11 @@ agnes gana prioridad: M152 ahora podria tener doble cierre (Hy3 Log 866 + agnes 
 - Logs/NUMEROS_DISPONIBLES.txt — 1237 consumido; cabeza 1238
 - Logs/1237-modo-canal-mensajes-por-modelo_2026-10-03_19-47.md — este log
 
+## Push con huella (seccion 4.3)
+
+Rango empujado: **ee9914f..ac8f4f5** (2026-10-03, 19:55, atria-Dawn-Preview, Kilo Code) — push principal del Modo Canal: 5 carpetas con su archivo 01 + AGENTS.md (secciones 10.1/10.2) + Log 1237 + pool. origin/main == HEAD == ac8f4f5.
+
+
 ## Proximos pasos
 
 1. Push de este lote (canal + AGENTS.md) y entrega al usuario de los 5 prompts cortos
