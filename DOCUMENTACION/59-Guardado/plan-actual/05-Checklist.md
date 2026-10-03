@@ -330,3 +330,16 @@ La traducción `dia` (proveedor M29) → `day` (schema) vive ahora en un único 
 - Correr SIEMPRE las TRES suites: `validate_save.gd` (16), `test_slots_m59.gd` (22) y `test_rotate_m59.gd` (43). Las tres son gate duro.
 - Al agregar un proveedor nuevo: su `restore_save_data()` debe tolerar claves extra (usar `data.get(...)`), porque el schema y los proveedores NO comparten dialecto.
 - Pendiente: reconciliar el dialecto `time`/`inventory`/`economy` con sus dueños.
+
+## QA cruzado §21.8 — Hy3 (Log 1233, 2026-10-03)
+
+**Verificador:** hy3 / WorkBuddy (Tencent Hunyuan). **Autor del módulo:** DeepSeek-V4.1-Flash (≠ verificador → sello legítimo).
+
+**Veredicto:** ✅ **VERIFICADO §21.8.** El módulo queda 🟡 Con dudas por el `[?]` de background-thread (sección R, diferido a M61, medido y justificado) y la deuda de dialecto (M14/M29/M38); NO por defecto de los bugs cerrados.
+
+**Pruebas (binario `C:\Temp\godot\godot472.exe --headless`):**
+- `test_rotate_m59.gd`: 43/0, EXIT 0 — afirma `request_save() → LoadResult.OK` (bloques 1 y 6).
+- `test_slots_m59.gd`: 22/0, EXIT 0.
+- `test_autosave_m59.gd`: 0 fallos, EXIT 0.
+- `validate_save.gd`: 16/0, EXIT 0 (gate duro).
+- **Rojo reproducible:** reintroducir BUG-088 (rotate tras write_atomic) → `test_rotate_m59` 8 fallos / EXIT 1; revertido sin diff.
