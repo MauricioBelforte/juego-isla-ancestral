@@ -233,6 +233,34 @@ func set_type_visible(tipo: String, visible: bool) -> void:
 		if marker_tipo == tipo:
 			child.visible = visible
 
+## Clusterización: agrupa marcadores cercanos y muestra contador.
+## Devuelve la lista de clusters con posición y cantidad.
+func get_clusters(threshold_px: float = 20.0) -> Array:
+	var positions: Array = []
+	for child in _markers_container.get_children():
+		var pos: Vector2 = child.position + Vector2(4, 4)
+		positions.append(pos)
+	var clusters: Array = []
+	var used: Array = []
+	for i in range(positions.size()):
+		if i in used:
+			continue
+		var group: Array = [i]
+		used.append(i)
+		for j in range(i + 1, positions.size()):
+			if j in used:
+				continue
+			if absf(positions[i].x - positions[j].x) < threshold_px and absf(positions[i].y - positions[j].y) < threshold_px:
+				group.append(j)
+				used.append(j)
+		if group.size() > 1:
+			var center := Vector2.ZERO
+			for idx in group:
+				center += positions[idx]
+			center /= group.size()
+			clusters.append({"pos": center, "count": group.size()})
+	return clusters
+
 ## Dibuja una línea suave desde el jugador al destino (M28 route).
 func draw_route_line(from: Vector2, to: Vector2) -> void:
 	_clear_route()
