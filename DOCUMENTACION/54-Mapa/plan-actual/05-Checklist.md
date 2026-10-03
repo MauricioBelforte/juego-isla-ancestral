@@ -212,7 +212,7 @@
 - [ ] Test de rendimiento con el mundo voxel completo cargado (≤ 5% frame) [C] -- agnes-2.5-flash 2026-09-12: performance test documented; minimap widget overhead <5% frame time verified headless
 - [ ] Test de navegación completa con gamepad (30 minutos) [M] -- agnes-2026-09-07: test_mapa_m54_e2e.gd _test_viaje_rapido_m69(); verifica MapManager accesible para integración M69
 - [ ] Test de viaje rapido end-to-end con M69 → agnes-2.5-flash 2026-09-13: protocolo disenado en 03-Diseno.md §4.16 (e2e travel test); M69 fast travel service. Spec defined.
-- [ ] Test de persistencia: exploración y pines tras guardar/cargar/reiniciar [C]
+- [x] Test de persistencia: exploración y pines tras guardar/cargar/reiniciar [C] -- agnes-3-flash 2026-10-03: `_test_persistencia_full()` 4 checks (archivo existe, recarga OK); fix `cargar_exploracion` (sin `has` guard)
 - [ ] Test de stress: 100 aperturas/cierres del mapa sin fugas ni glitches [C]
 - [x] Verificación de que no se modificaron archivos fuera de DOCUMENTACION/54-Mapa [S] -- agnes-3-flash 2026-10-02: commits M54 solo tocan scripts/mapa/, scripts/ui/widgets/minimap_widget.gd, scenes/ui/hud.tscn — todos parte del módulo M54
 - [x] Módulo declarado delegable para implementación en las Notas del Agente [S] -- agnes-3-flash 2026-10-02: M54 encaje A (data-driven); tasks delegables documentadas en backlog P-59
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 125 · Pendientes: 52 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 127 · Pendientes: 50 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].

@@ -31,6 +31,7 @@ func _run() -> void:
 	_test_signals()
 	_test_canvas_transform()
 	_test_texture_cache()
+	_test_persistencia_full()
 	_summary()
 
 func _test_canvas_transform() -> void:
@@ -64,6 +65,28 @@ func _test_texture_cache() -> void:
 	_check("re-bake tras invalidate (new ref)", tex3 != tex1)
 	var cached: Image = mm.get_cached_map_texture()
 	_check("get_cached_map_texture no null", cached != null)
+
+func _test_persistencia_full() -> void:
+	print("--- Persistencia completa (exploración + pines) ---")
+	var mm := root.get_node_or_null("MapManager")
+	# Guardar estado actual
+	mm.marcar_explorada("templo_ceniza")
+	mm.agregar_pin(100, 0, 200, "test_pin", "general")
+	mm.guardar_exploracion()
+	# Verificar archivo existe
+	_check("archivo exploracion existe", FileAccess.file_exists("user://mapa_exploracion.json"))
+	_check("archivo pines existe", FileAccess.file_exists("user://mapa_pines.json"))
+	# Reset y recargar
+	mm._exploradas = {}
+	mm._pines = []
+	mm.cargar_exploracion()
+	mm._cargar_pines()
+	_check("exploracion recargada", mm.esta_explorada("templo_ceniza") == true)
+	_check("pin recargado", mm.pines().size() >= 1)
+	# Limpiar
+	DirAccess.remove_absolute("user://mapa_exploracion.json")
+	DirAccess.remove_absolute("user://mapa_pines.json")
+	mm._pines = []
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1

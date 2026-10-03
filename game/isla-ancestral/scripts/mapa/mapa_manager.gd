@@ -164,12 +164,10 @@ func cargar_exploracion() -> void:
 		return
 	if parsed.has("exploradas"):
 		for id in parsed["exploradas"]:
-			if _exploradas.has(id):
-				_exploradas[id] = bool(parsed["exploradas"][id])
+			_exploradas[id] = bool(parsed["exploradas"][id])
 	if parsed.has("regiones"):
 		for id in parsed["regiones"]:
-			if _regiones_exploradas.has(id):
-				_regiones_exploradas[id] = bool(parsed["regiones"][id])
+			_regiones_exploradas[id] = bool(parsed["regiones"][id])
 
 ## Persistencia de pines (M59-compatible, data-driven).
 func _guardar_pines() -> void:
