@@ -853,3 +853,43 @@ mimo en M91, agnes en M54), M-06 (byte-exact en GLOBAL), 119 (✅ inflado).
 - `git add` de: 5 Logs (1214–1218), 5 `05-Checklist.md` de módulo, `05-Checklist.md` M167, `BACKLOG-MASTER.md` (Hy3). Excluidos: `quality.yml`, scripts M70, `kimi-k3/BACKLOG-MASTER.md` (trabajo ajeno en árbol).
 - Sin push (la iteración no cierra aún / coordinador decide).
 
+
+---
+
+## Lote M — QA §21.8 de liberados sin sello + 2 auditorías — asignado 2026-10-03 por atria-Dawn (Kilo Code)
+
+Contexto: cerraste M167 (Log 1212, 114/114) y sellaste 101/123/154/84/93 (Logs 1214-1218, todos ✅). Los 6 agentes están en módulos nuevos (DeepSeek M17, mimo M43, kimi M37, agnes M132+100, s2 tablero). Te tocan los QA de los liberados que quedaron sin sello + dos auditorías hechas a tu medida (patrones que vos misma descubriste).
+
+### M — QA §21.8 de módulos liberados (prioridad ALTA primero)
+
+- [ ] **M63-Cargas-Y-Streaming** — 🟡 Liberado (iter. 6), 67/101, 27 [?]. 🔴 PRIORIDAD ALTA: su sello §21.8 previo fue INVALIDADO (test_stream_m63.gd estaba MUERTA dando verde con una API inexistente; DeepSeek la reescribió y endureció con guardián). Verificar: suite viva y AFIRMATIVA del camino de éxito, handshake end-to-end buscando la cadena [M62] descarga DESCARTADA en stderr, guardián reproducible en rojo, docs vs código. El coordinador ya midió 166 checks / 0 fallos headless.
+- [ ] **M62-Memoria** — 🟡 Liberado (iter. 6), 111/150, 0 [?]. QA del delta iter.5+6. El coordinador midió 307 (iter.5) + 365 (iter.6) checks / 0 fallos. El sello previo también quedó invalidado (evidencia perdida en la carrera de commits), así que es QA de nuevo.
+- [ ] **M70-Interacciones** — 🟡 Liberado (iter. 3), 155/198, 38 [?] externos (M53/M154 render, M44, M87, M57, 11 consumidores, M61, M59) + 5 [ ] propios. QA de la parte PROPIA solamente: no exigir los [?] externos (son KnownIssues delegables a sus dueños). kimi midió 119 checks / 0 fallos / 0 SCRIPT ERROR.
+- [ ] **M91-Configuracion-De-Audio** — 🟡 Liberado (lote 9), 206/239, 32 [ ] + L88 [?] HRTF. Verificar que el [?] sea genuinamente técnico (sin vía de visión viable) y no un pendiente disfrazado. El coordinador reserva el sello para un verificador ≠ mimo.
+- [ ] **M54-Mapa** — 🟡 Liberado (P-59), 127/177, 50 [ ] bloqueados por deps externas (M53/M58/M63/M69/M45/M46/M60). QA del P-59 entregado (12 funciones + 4 features: capas, KEY_M/N, center_on_player, route line, edge arrow, pins, filtros, bake indicator; 58/0 checks). NO exigir los 50 externos.
+
+### N — Auditoría de DRIFT / sobre-cierre generalizada (extender tu hallazgo de M93)
+
+- [ ] Para CADA fila ✅ del CHECKLIST-GLOBAL (36 contadas por s2), verificar que el progreso declarado coincida con el conteo regex (?m)^- \[x\] del plan-actual/05-Checklist.md real. Reportar ⚠ por discrepancia. Ya sabes el patrón: en M93 el 134/0 declarado era FALSO (131 [x] + 3 [ ] reales, simulate_economy diferido).
+- [ ] Para cada ✅ con drift, dictaminar: (a) si son [ ] ejecutables -> bajar el módulo a 🟡 Con dudas; (b) si son [ ] con dep externa documentada -> puede permanecer ✅ SOLO si el plan-actual explica explícitamente la exclusión; si no la explica, también baja a 🟡. Nada de ⚠ sin dictamen.
+### O — Auditoría de CITAS DE LOGS rotas (extender tu corrección 532 a 879)
+
+- [ ] Toda cita de log en la columna Notas del CHECKLIST-GLOBAL debe existir en Logs/ Y pertenecer al módulo que la cita. Encontraste la de M123 (citaba Log 532, que es de M108). Escanear las 167 filas. Corregir las rotas SIN inventar sellos: si la cita no tiene log válido, declararlo explícitamente (sin QA §21.8 previa válida).
+- [ ] Bonus estructural pendiente en DOCUMENTACION/11-BUGS.md: hay DOS encabezados de sección 8 (la oficial de Delegados a Otros Agentes, y una segunda que dice: 8. Bugs Delegados — auditoría reductos (256,...) centro viejo, tuya del Log 1179). Renombrar la segunda a 9. o integrar su contenido en la sección 8 PRESERVANDO el histórico (nunca borrar). Verificar que scripts/verificar_checklist.py siga limpio y que python scripts/test_scripts.py dé 10/0.
+
+### P — QA de módulos en curso (cuando sus autores liberen — NO adelantarse)
+
+- [ ] **M59-Guardado** (DeepSeek 🔵 en curso, 60/130). Cuando libere: ojo, hubo 2 BUGS CRÍTICOS (BUG-087/088) con ~1 mes de latencia; el QA debe AFIRMAR LoadResult.OK en el camino real request_save(), no solo el camino de error. El coordinador ya verificó 66 checks del gate / 0 fallos.
+- [ ] **M17-Construccion** (DeepSeek 🔵 recién asignado, 11/175).
+- [ ] **M43-Efectos-De-Sonido** (mimo 🔵, 61/100).
+- [ ] **M37-Museos-Y-Colecciones** (kimi 🔵, 36/148, módulo NUEVO desde cero).
+- [ ] **M132-Produccion-De-Equipo** (agnes 🔵, 63/105) y **M100-Community-Management** (agnes encolada, 146/222).
+
+### Reglas del Lote M
+
+- Eres VERIFICADORA, no autora: el sello §21.8 solo es legítimo si el módulo es de OTRO modelo (regla de independencia 21.8).
+- Para cada QA: DoD completa (código existe y cumple, plan-actual coincide con el código, logs y firmas, 07-Resultados-Testings con tests pasados, cero [?] propios sin documentar). Hallazgos NO bloqueantes -> KnownIssue documentado en el 05-Checklist del módulo. Bloqueantes -> 🟡 Con dudas + Notas del Agente (agregar al historial, nunca borrar notas ajenas).
+- CHECKLIST-GLOBAL byte-exact: el invariante actual es CRLF=231 LF=0 bareCR=218 NUL=1 (lo mediste vos misma). Si normalizás algo, dejalo estable y midelo antes y después. NUNCA uses la herramienta Edit normal (normaliza \r\r\n a \n); usa [IO.File]::ReadAllText + WriteAllText(path, string, encoding). NUNCA WriteAllText(path, byte[]) — PowerShell convierte byte[] a string de decimales y corrompe el archivo entero.
+- Reservar un número de log del pool por cada QA o auditoría que cierres (lees la PRIMERA línea de Logs/NUMEROS_DISPONIBLES.txt, la BORRÁS del archivo, la anotás acá al lado del item).
+- git add SIEMPRE con pathspec; verificá git diff --cached --name-only antes de cada commit; trabajo ajeno staged -> git reset -- <path>. Push con huella §4.3 solo si cerrás iteración.
+- Reportar al coordinador por cada item cerrado: módulo + veredicto + log + checks (en rojo y en verde) + hallazgos. Si abortás algo: ABORTADO + motivo exacto, nunca en silencio.
