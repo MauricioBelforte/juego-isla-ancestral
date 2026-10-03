@@ -29,7 +29,7 @@
 - [x] Zoom propio opcional del minimapa (acercar/alejar el widget) [M]
 - [x] Textura caché del MapManager reutilizada sin segundo bake ni re-render por frame [M] -- agnes-3-flash 2026-10-02 iter 5: `bake_map_texture()` con Image cacheada; `invalidate_map_texture()` en `marcar_explorada`; `get_cached_map_texture()` para reutilización
 - [x] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M] -- agnes-3-flash 2026-10-02: FullMapLayer suscribe señales; minimap_widget `_pos_timer` Timer 0.5s (2 Hz) actualiza posición jugador sin per-frame
-- [ ] — agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2.3 (flecha borde para marcadores fuera de vista); IMPLEMENTACI脫N requiere M53 TooltipService + minimap_widget.gd; KnownIssue no bloqueante DoD.
+- [x] — agnes-2.5-flash 2026-09-12: diseño documentado en 03-Diseno.md §2.3 — agnes-3-flash 2026-10-03: `get_edge_arrow_marker()` implementado en minimap_widget
 - [x] — agnes-2026-09-05: colores por tipo implementados (lugar=verde, templo=naranja, tienda=púrpura, viaje=cyan) en minimap_widget.gd Diferenciación por forma y color (daltonismo M58) [S]
 - [x] Acceso al mapa completo con un click/foco sobre el minimapa (`map_toggle`) [S] -- agnes-3-flash 2026-10-02: FullMapLayer._unhandled_input() maneja KEY_M para toggle open/close
 
@@ -192,7 +192,7 @@
 - [ ] No regenerar la textura del mapa en cada apertura (caché persistente) [C]
 - [ ] Bake incremental por secciones del mundo para no bloquear (M63) [C] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.4; IMPLEMENTACI脱N bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
 - [ ] Pool único de sprites de marcadores, clusters y pines en ambas vistas → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.36 (single sprite pool for markers/clusters/pins); performance M61. Spec defined.
-- [ ] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.37 (region labels refresh on zoom/pan only); threshold-based update. Spec defined.
+- [x] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: MapCanvas `_islands_container` escala como bloque; labels no se refrescan individualmente en zoom/pan
 - [x] Culling simple de marcadores por región visible (bounds check) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: minimap `_update_markers` `if not explored: continue`; FullMapLayer `set_type_visible` culls by type
 - [x] Niebla actualizada solo en mosaicos sucios (dirty rects) [M] -- agnes-2.5-flash 2026-09-12: FogRenderer actualiza solo tiles modificados; 03-Diseno.md §5 profiling
 - [x] Medición documentada de draw calls y frame time con Profiler (M61) [M] -- agnes-2.5-flash 2026-09-12: profiling documentado en 03-Diseno.md §5; M61 MemoryMonitor recibe métricas
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 112 · Pendientes: 65 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 114 · Pendientes: 63 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
