@@ -1,5 +1,5 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 02-Analisis.md — Módulo 91: Configuración de Audio
 

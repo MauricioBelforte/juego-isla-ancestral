@@ -20,11 +20,18 @@
 - [x] Log creado: **1204** — M91 lote 7: Audio 3D (03-Diseno §5 20→119 lineas con API sondeada en 4.7.2; hallazgo SIN HRTF en el motor -> L88 `[?]`; 5 items `[x]`; fix del `[x]` falso L227 AudioEffectEQ) + checklist 187→192/46/1
 - [x] Log creado: **1206** — M91 lote 8: H-1 RESUELTO (el runner SI descubre S1; era la etiqueta --module m91, no el descubrimiento; evidencia --module audio 8/8 OK y --module subtitle 1/1 OK; sin renombrar nada) + hallazgo: testing.yml usa GdUnit4 con || true y nunca falla
 - [x] Log creado: **1208** — M91 lote 9: secciones de PRUEBAS completas (03-Diseno §11 y §19 reescritas de esqueleto a 11.1-11.7 y 19.1-19.5 con API sondeada) + correccion de API de Godot 3 en 3 documentos (get_device_list/set_device/get_device -> get_output_device_*) + 14 items `[x]` + notas anti-inflado en L18/L22/L23/L151 + checklist 192→206/32/1 (86%)
+- [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
 
-## Módulo ACTIVO — 91-Configuracion-De-Audio
+## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio
 
-> **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).** Lock 🔵 a tu nombre.
-> Tu dominio exacto: UI + audio + i18n (creditos_layer, farewell, i18n,
+> **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**
+> **LIBERADO 2026-10-02 21:55 a 🟡 Con dudas — Log 1210.** Los 4 registros de §26
+> quedaron actualizados (CHECKLIST-GLOBAL fila 91, 05-Checklist bloque Reserva,
+> ESTADO-PARALELO, guía 08). **Queda pendiente el QA cruzado §21.8** — lo toma un
+> modelo DISTINTO a mimo-v2.6-flash-free. No re-llevar este módulo a ✅ sin resolver
+> L88 `[?]` (HRTF).
+>
+> Dominio del chat: UI + audio + i18n (creditos_layer, farewell, i18n,
 > performance de M131). Complejidad 1 — ideal para vos.
 
 **Fuente de verdad:** `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md`
@@ -59,8 +66,11 @@ scripts/interacciones/, DeepSeek en M62 scripts/memory/ y rendimento),
 M-06 (byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR),
 119 (✅ inflado), 118 (impresión visual ≠ diagnóstico).
 
-**Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
-1209 tras reservar el 1208, pero verificá — se mueve). Reserva con §6.1.a.
+**Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza **1211** tras
+reservar el **1210** el 2026-10-02 22:04, pero verificá — se mueve). Reserva con
+§6.1.a y el helper `python "$env:TEMP\reservar.py"`. Al commitear, la pool está
+compartida: verificá `git status` y solo agregá el archivo si la única diferencia
+son borrados de números.
 
 **Pendiente de M91 (tras lote 9):** **checklist en 206/32/1 (86%)** y ya
 **no queda trabajo de diseño propio**. Desglose real de los 32 `[ ]`:
@@ -86,3 +96,6 @@ GdUnit4 en `tests/` (eso es módulo de CI).
 
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, actualiza
 Última actividad en la fila 91. Nunca dejes 🔵 huérfano (§21.4.5).
+**HECHO 2026-10-02 21:55 (Log 1210):** fila 91 → `🟡 Con dudas`, `206/239`,
+Agente `—`, ÚltAct `2026-10-02 21:55`. **Siguiente paso de este módulo:
+QA cruzado §21.8 por OTRO modelo** (no por este chat).

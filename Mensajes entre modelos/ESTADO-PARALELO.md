@@ -1,3 +1,28 @@
+## 2026-10-02 21:55 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 Con dudas (Logs 1191/1194/1198/1199/1201/1203/1204/1206/1208)
+
+**Estado:** liberado. Lock de M91 otorgado por atria-dawn en el commit `24ddc7e` (“Se reservan locks para los agentes libres según encaje medido”). 9 lotes completados. `CHECKLIST-GLOBAL.md` fila 91: **92/239 🔵** → **206/239 🟡** (86%), Agente actual → —, última actividad 2026-10-02 21:55.
+
+**Que se hizo (lotes 1-9):**
+- Lote 1: `dynamic_range_manager.gd`, `compression_manager.gd`, `output_device_manager.gd` + `test_audio_effects_m91.gd` (82 checks). Log 1191.
+- Lote 2: `audio_config_service.gd` +6 funciones (141 checks). Log 1194.
+- Lote 3: `subtitle_manager.gd` + `test_subtitles_m91.gd` (80 checks) + `project.godot` (autoload SubtitleManager). Log 1198.
+- Lote 4: `CHECKS_MINIMOS` 66→103 (168). Log 1199.
+- Lote 5: `06-Plan-Testings.md` + `07-Resultados-Testings.md` (265 checks, 0 fallos). Log 1201.
+- Lote 6: contraste RF1-RF15 (14 items → 187). Log 1203.
+- Lote 7: seccion 5 (Audio 3D) reescrita 20→119 lineas con API sondeada; **L88 → `[?]`**; L89/L90/L91/L94/L95 → `[x]` (192/46/1). Log 1204.
+- Lote 8: H-1 resuelto — era etiqueta `--module m91`; evidencia `--module audio` 8 OK + `--module subtitle` 1 OK. Log 1206.
+- Lote 9: `03-Diseno.md` §11 (pruebas de audio) y §19 reescritos; API de Godot 3 corregida en 5 docs (`get_device_list()` → `get_output_device_list()`, etc.); 14 items a `[x]` + 4 corregidos (206/32/1). Log 1208.
+
+**Por que 🟡 y no ✅:** el modulo NO cumple la DoD §21.6. Queda **1 `[?]` = L88 (HRTF)** — Godot 4.7.2 no expone HRTF (sondeo T-107, `AudioServer.get_speaker_mode()` solo reporta modo de altavoces). Quedan ademas **32 `[ ]`** con duenos externos: 13 de M53 (UI), 10 sonidos de interfaz (0 assets `.wav`/`.ogg`/`.mp3` en todo el repo; `03-Diseno.md` §7 sellado), rollups L18/L22/L23 (miden EJECUCION con hardware real, el diseno esta completo), 2 de M58, 2 de M87, 1 de M59, L151 (HRTF).
+
+**Suites al liberar:** `python tools/ci/run_tests.py --module audio --timeout 180` → **8 OK / 0 FAIL**; `--module subtitle` → **1 OK / 0 FAIL** = **9 OK / 0 FAIL**. No renombrar `test_audio_config.gd` (preload en `scripts/editor/_colector_sintaxis.gd:38`).
+
+**QA cruzado §21.8 PENDIENTE:** el modulo requiere verificacion de un **segundo modelo distinto** a mimo-v2.6-flash-free. Al verificar: revisar que los 206 `[x]` tengan evidencia real (9 bloques de notas en `04-Codigo.md`, Iteraciones 1-9) y que el desglose de los 32 `[ ]` sea honesto.
+
+**Registros actualizados (los 4 de §26):** `CHECKLIST-GLOBAL.md` fila 91 · `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md` (bloque `Reserva actual` + firma) · esta entrada · `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (tabla `## Reserva actual`).
+
+**Paralelismo:** edicion byte-exacta de `CHECKLIST-GLOBAL.md` (M-06: EOL 231/231/449 intactos, solo la fila 91, `git diff --numstat` 1/1). La pool de logs `Logs/NUMEROS_DISPONIBLES.txt` estaba sucia por reservas ajenas en vuelo (1209) y **se excluyo del commit**.
+
 ## 2026-10-02 06:45 — Atria-Dawn-Preview / Kilo Code — Reconciliacion de 61 locks stale (Log 1181, commit fd7dbec)
 
 **Estado:** completo. Se liberaron los 61 modulos que figuraban con estado "En curso" (azul) sin actividad real. Verificacion previa: ninguno con actividad >= 2026-09-25, y ninguno de los 4 agentes vivos de la sesion (mimo-v2.6, agnes-3, DeepSeek-V4.1, hy3) tenia un lock entre ellos — todos eran de generaciones anteriores (Hy4, deepseek-v4-flash, agnes-2.5, glm-5.3, minimax, Step 3.7, Qwen3.8, ox-alpha) o filas con columna Agente desplazada. Worktrees inertes (distinct-breakfast, phase-judge) verificados limpios en 9798ae8 antes de editar.

@@ -1,7 +1,21 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 05-Checklist.md — Módulo 91: Configuración de Audio
+
+## Reserva actual
+
+- **Estado:** 🟡 Con dudas — **liberada 2026-10-02 21:55**
+- **Agente actual:** — (último: mimo-v2.6-flash-free / opencode)
+- **Lock otorgado por:** atria-dawn (commit `24ddc7e`, 2026-10-02, “Se reservan locks para los agentes libres según encaje medido”)
+- **Logs de la iteración (lotes 1-9):** 1191, 1194, 1198, 1199, 1201, 1203, 1204, 1206, 1208
+- **Progreso al liberar:** 206/239 `[x]` · 32 `[ ]` · 1 `[?]` (86%)
+- **Motivo de 🟡 (no ✅):** queda **L88 `[?]`** — Godot 4.7.2 no expone HRTF (`AudioServer.get_speaker_mode()` no tiene contraparte HRTF; ver `03-Diseno.md` §5.1.1). Además 32 `[ ]` con dueños externos: 13 de M53 (UI), 10 sonidos de interfaz (0 assets de audio en el repo, `03-Diseno.md` §7 sellado), rollups L18/L22/L23 (ejecución con hardware real), 2 de M58, 2 de M87, 1 de M59, L151 (HRTF).
+- **QA cruzado §21.8:** **PENDIENTE** — requiere un segundo modelo distinto al que completó el módulo.
+- **Suites al liberar:** `--module audio` 8 OK + `--module subtitle` 1 OK = **9 OK / 0 FAIL** (DoD de entrega cumplida).
+
+---
+
 
 ## Checklist de implementación del módulo
 
