@@ -4,7 +4,7 @@
 
 **Dirigido a:** MiMo (dueño de M18-BIS Casas Grandes).
 **Asunto:** script duplicado byte a byte en `CASA_02_CASA_MEDIANA/BAJA/`.
-**Registro completo:** `Logs/1188-HY4-AUDITORIA-AUTORIA-BLENDER.md`
+**Registro completo:** `Logs/1190-HY4-AUDITORIA-AUTORIA-BLENDER.md` (renumerado desde 1188)
 
 ---
 

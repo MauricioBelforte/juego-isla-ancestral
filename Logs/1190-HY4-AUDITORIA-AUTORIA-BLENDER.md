@@ -1,10 +1,10 @@
-# Log 1188: Auditoría de autoría Blender (`tools/mcp/blender-mcp`)
+# Log 1190: Auditoría de autoría Blender (`tools/mcp/blender-mcp`)
 
 **Fecha:** 2026-10-02
 **Modelo:** Hy4 / WorkBuddy
 **Plataforma:** WorkBuddy
 **Módulo:** transversal (assets 3D).
-**Reserva:** `Logs/reservas/1188-HY4.txt`
+**Reserva:** `Logs/reservas/1190-HY4.txt` (renumerado de 1188; colisión con el Log 1188 del coordinador)
 **Encaje:** Opción B del backlog HY4 — "parchar huecos".
 
 ---

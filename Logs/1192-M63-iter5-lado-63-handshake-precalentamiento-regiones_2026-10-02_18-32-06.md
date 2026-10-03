@@ -120,9 +120,7 @@ bloqueaba el gate que esta iteracion extiende.)
 
 ## 7. Hallazgos ajenos (reportados, NO tocados)
 
-- **Colision de numeracion 1188:** existen `Logs/1188-HY4-AUDITORIA-AUTORIA-BLENDER.md` y
-  `Logs/1188-m62-iter5-verificada-deepseek-reasignado-m63_2026-10-02_17-47-26.md`.
-- **Fuga de pool:** el numero **1190** salio del pool sin log escrito (consumido, nunca usado).
+- **Colision de numeracion 1188 (RESUELTA):** el log de Hy4 se reenumero a `Logs/1190-HY4-AUDITORIA-AUTORIA-BLENDER.md` (regla Log 1011: el que llego despues se renumera; de paso se cubre la fuga del 1190); queda el del coordinador en `Logs/1188-m62-iter5-verificada-deepseek-reasignado-m63_2026-10-02_17-47-26.md`.
 - **Contaminacion de worktree ajena:** `scripts/mapa/mapa_manager.gd` (M54) tiene un **PARSE ERROR**
   en el worktree (lineas ~198-201: `center` sin tipo + inferencia Variant; y el archivo crecio
   respecto a HEAD) y esta modificado sin commitear. NO es de M63; aparece como ruido (2 SCRIPT ERROR)
