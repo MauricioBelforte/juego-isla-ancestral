@@ -89,9 +89,10 @@ byte-exacto preservando el invariante CRLF (**834 -> 843**, crlf==lf==cr).
 
 ## 6. Huella de push (AGENTS.md 4.3)
 
-- Rango publicado: (se completa al pushear)
-- Hora: 2026-10-02 21:44
+- Rango publicado: `4614e47..232cf1b` (`main`)
+- Hora: 2026-10-02 21:45 (-0300)
 - Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy)
 - Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`
-- Commits propios: (se completa)
-- Commits ajenos en el rango: (se completa)
+- Commits propios: 3 -> `428f078` (correccion BUG-089), `2f4e86d` (gate funcs duplicadas), `232cf1b` (Log 1209 + refs)
+- Commits ajenos en el rango: 12 (M54/agnes x9; coordinador x3: Log 1207, registro BUG-089, cierre H-1 M91)
+- Verificacion post-push: `HEAD == origin/main == 232cf1b`; `git merge-base --is-ancestor 428f078 origin/main` = SI
