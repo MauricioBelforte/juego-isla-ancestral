@@ -157,7 +157,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
-| BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [ ] Abierto (delegado a hy3) | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
+| BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -172,7 +172,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 - **Modulo(s) afectado(s):** **M54 (Mapa)** — game/isla-ancestral/scripts/mapa/test_mapa_m54_e2e.gd. Suite huérfana pre-P-59 (autor original: agnes-2.5-flash, descatalogado).
 - **Severidad:** 🟠 **Mayor.** La suite NO CARGA (Parse error) y por lo tanto no prueba nada, pero durante la QA §21.8 de M54 (hy3, Log 1226) se contó como verde espurio. No está en el gate de quality.yml (verificado), así que el CI no la ejecuta; el riesgo es que alguien la agregue o se apoye en ella.
 - **Introducido por:** herencia pre-P-59; quedó desactualizada respecto al API actual de M54 (P-59 reescribió markers/exploradas/regiones/rutas y la suite quedó referenciando nombres y formas viejas).
-- **Estado:** [ ] **Abierto, delegado a hy3** (quien lo descubrió y tiene el contexto completo del QA de M54).
+- **Estado:** [x] **Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena.** (quien lo descubrió y tiene el contexto completo del QA de M54).
 - **Reportado por:** hy3 (Log 1226, 2026-10-03). Verificación empírica independiente de atria-Dawn-Preview con C:\Temp\godot\godot472.exe headless (2026-10-03):
 
 **Errores medidos (EXIT 1, 6 Parse Errors):**
@@ -193,6 +193,8 @@ ERROR: Failed to load script "res://scripts/mapa/test_mapa_m54_e2e.gd" with erro
 2. **Cuarentena:** si el flujo e2e ya lo cubren los 4 suites vivos, borrar la suite huérfana (no está versionada en el gate). Decisión de hy3 con el coordinador.
 
 **Lección.** Una suite que NO CARGA no es "0 fallos": es un falso verde por inexistencia. Toda QA debe verificar que la suite CARGUE y AFIRME el camino de éxito antes de contarla (mismo patrón que el sello invalidado de M63: suite muerta dando verde).
+
+**Resolución (hy3, Log 1234, 2026-10-03):** se optó por **CUARENTENA** (no borrado, por la regla del proyecto de no eliminar scratch). `game/isla-ancestral/scripts/mapa/test_mapa_m54_e2e.gd` se relocalizó a `Obsoletos/raiz-temporales-20261003/test_mapa_m54_e2e.gd` con encabezado de cuarentena. Motivo: suite huérfana pre-P-59 escrita contra un API imaginado (`mm.config.get("islas"/"rutas")`, `region_explorada(String(dict))`, typo `explorerd`) → 6 Parse Errors, EXIT 1. El flujo que intentaba cubrir YA está verificado por las 4 suites vivas (Log 1226): `test_mapa_m54.gd` 42/0, `test_map_service_headless.gd` 12/0, `test_mapa_markers.gd` 9/0, `test_mapa_busqueda.gd` 9/0 (total 72/0, EXIT 0, 0 SCRIPT ERROR). No está en el gate de quality.yml, así que la cuarentena no afecta el CI.
 
 **Firma:** **Modelo:** atria-Dawn-Preview (registro y verificación) · hy3 (reporte) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-03 06:50
 
