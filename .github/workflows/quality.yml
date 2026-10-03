@@ -614,6 +614,15 @@ jobs:
           python3 scripts/verificar_bom.py
           echo "Sin BOM: ningun archivo versionado empieza con EF BB BF"
 
+      # GATE (Log 1208): un script GDScript con dos `func` del MISMO nombre a
+      # nivel de clase NO COMPILA (Godot rechaza el archivo entero) y contamina
+      # el "0 SCRIPT ERROR" de cualquier suite. El detector ignora las inner
+      # classes (sus funcs van indentadas y pueden repetir nombre legitimamente).
+      - name: Verify no duplicate top-level funcs (GDScript)
+        run: |
+          python3 scripts/verificar_funcs_duplicadas.py --selftest
+          python3 scripts/verificar_funcs_duplicadas.py
+
       # GATE (P-20). Antes era informativo por TRES motivos apilados:
       # `continue-on-error: true`, el sufijo OR-true y el `| tail` — y el pipe
       # ademas se comia el exit code, porque `$?` pasaba a ser el de `tail`
