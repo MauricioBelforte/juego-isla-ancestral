@@ -359,6 +359,27 @@ func set_minimap_visible(v: bool) -> void:
 	minimap_visible = v
 	visible = v
 
+## Muestra flecha de borde hacia marcador fuera de vista (edge arrow).
+## Devuelve la posición de la flecha en el minimapa.
+func get_edge_arrow_marker(target_pos: Vector2) -> Vector2:
+	var view := _get_viewport_rect()
+	if target_pos == Vector2.ZERO:
+		return Vector2.ZERO
+	if view.has_point(target_pos):
+		return Vector2.ZERO  # Dentro de vista, no necesita flecha
+	# Calcular punto de intersección del rayo center→target con el borde
+	var center := view.get_center()
+	var dir := (target_pos - center).normalized()
+	var half_w: float = view.size.x * 0.5
+	var half_h: float = view.size.y * 0.5
+	var t_x: float = absf(half_w / dir.x) if absf(dir.x) > 0.001 else 999999.0
+	var t_y: float = absf(half_h / dir.y) if absf(dir.y) > 0.001 else 999999.0
+	var t: float = minf(t_x, t_y)
+	return center + dir * t
+
+func _get_viewport_rect() -> Rect2:
+	return Rect2(Vector2.ZERO, MAP_SIZE)
+
 ## ── Utilidades ──────────────────────────────────────────
 
 func _get_map_manager() -> Node:
