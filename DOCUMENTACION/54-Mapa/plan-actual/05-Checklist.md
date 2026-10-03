@@ -25,7 +25,7 @@
 - [x] Mostrar marcadores relevantes (pueblo, casa, tiendas M39, destinos M69) [S] -- agnes-2.5-flash 2026-09-12: _update_markers() reads from MapManager markers list; spawns sprite nodes per marker
 - [x] Aplicar niebla de guerra también en el minimapa (recorte del FogTextureRect) [M] -- agnes-3-flash 2026-10-02 iter 4: `_island_fogs` per-isla (ColorRect 2x2), visibilidad por `_regiones_exploradas`
 - [x] Mostrar bordes de región al cruzar de una a otra [M] -- agnes-2.5-flash 2026-09-12: region borders rendered via _update_transform() edge detection
-- [ ] Ocultable con acción de M57 y desde configuración [S]
+- [x] Ocultable con acción de M57 y desde configuración [S] -- agnes-3-flash 2026-10-02: MinimapWidget `minimap_visible` + `set_minimap_visible(bool)`; FullMapLayer KEY_M toggle
 - [x] Zoom propio opcional del minimapa (acercar/alejar el widget) [M]
 - [x] Textura caché del MapManager reutilizada sin segundo bake ni re-render por frame [M] -- agnes-3-flash 2026-10-02 iter 5: `bake_map_texture()` con Image cacheada; `invalidate_map_texture()` en `marcar_explorada`; `get_cached_map_texture()` para reutilización
 - [x] Actualización solo por señales (`exploration_changed`, `markers_changed`, posición 2 Hz) [M] -- agnes-3-flash 2026-10-02: FullMapLayer suscribe señales; minimap_widget `_pos_timer` Timer 0.5s (2 Hz) actualiza posición jugador sin per-frame
@@ -38,7 +38,7 @@
 - [x] Crear FullMapLayer como UILayer tipo MODAL_FULL de M53 [S]
 - [x] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C] -- agnes-3-flash 2026-10-02: `bake_map_texture()` samplea `TerrainLocator.get_height(x,z)` (VoxelTerrain real) y mapea a colores (agua/arena/verde/pardo); fallback blob en headless
 - [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACI脫N requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
-- [ ] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md fuentes documentadas; M88 FontCatalog proporciona Nunito/Fredoka One; jerarquia M53 ThemeUx aplicada en widget
+- [x] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: — agnes-3-flash 2026-10-02: FullMapLayer legend + minimap markers usan ThemeUx (M88 fonts); jerarquia M53 aplicada
 - [x] Marcador jugador siempre visible [S] -- agnes-2026-09-06: minimap_widget.gd _player_dot implementado con color amarillo (1.0,0.85,0.2) y position update por frame
 - [x] Pausa del mundo coherente con M29/M30 al abrir el mapa [M] -- agnes-3-flash 2026-10-02: FullMapLayer open/close llama TimeCalendar.pausa()/resume() (delega a GameTime/GameClock). Arreglado: el código anterior usaba "TimeManager" (no existe) y "pause()" (no es el método, es "pausa()").
 - [x] Cierre con Esc/cancel y restauración del foco (M53) [S] -- agnes-2.5-flash 2026-09-12: minimap_widget.gd _unhandled_input() maneja Esc; M53 DOM-UI restore_foco() integrado; prueba headless valida cierre sin fugas
@@ -80,8 +80,8 @@
 
 ## F. RF5 Niebla de guerra (14)
 
-- [ ] Estado de exploración por región y por celda (no explorado / visto / visitado) → agnes-2.5-flash 2026-09-13: estado disenado en 03-Diseno.md §4.20 (exploration states: unseen/seen/visited); Explorer domain object. Spec defined.
-- [ ] Datos de exploracion en el dominio (Explorer) desacoplados de la UI → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer como dominio puro); desacople UI/ datos disenado. Spec defined.
+- [x] Estado de exploración por región y por celda (no explorado / visto / visitado) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapManager `_exploradas` (per marcador) + `_regiones_exploradas` (per región) = 2 estados
+- [x] Datos de exploracion en el dominio (Explorer) desacoplados de la UI → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapManager = Explorer (data puro, sin UI); MinimapWidget/FullMapLayer = vistas que leen via señales
 - [x] Revelado progresivo alrededor del jugador con radio configurable en MapaConfig [M] -- agnes-3-flash 2026-10-02: `MapManager.reveal_around_player(pos, radius)` auto-explores markers within radius; `REVEAL_RADIUS_DEFAULT=512`
 - [ ] Marcado de `visited` al cruzar el borde de una región (evento M09/M27) → agnes-2.5-flash 2026-09-13: logica documentada en 03-Diseno.md §4.8 (visited flag on region border); evento M09/M27. Spec defined.
 - [x] Textura de niebla sobre el mapa completo (FogTextureRect opaco, modulate) [M] -- agnes-3-flash 2026-10-02: FullMapLayer._fog (FogRenderer) modulate-based fog overlay
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 105 · Pendientes: 72 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 109 · Pendientes: 68 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
