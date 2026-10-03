@@ -870,8 +870,8 @@ Contexto: cerraste M167 (Log 1212, 114/114) y sellaste 101/123/154/84/93 (Logs 1
 
 ### N — Auditoría de DRIFT / sobre-cierre generalizada (extender tu hallazgo de M93)
 
-- [ ] Para CADA fila ✅ del CHECKLIST-GLOBAL (36 contadas por s2), verificar que el progreso declarado coincida con el conteo regex (?m)^- \[x\] del plan-actual/05-Checklist.md real. Reportar ⚠ por discrepancia. Ya sabes el patrón: en M93 el 134/0 declarado era FALSO (131 [x] + 3 [ ] reales, simulate_economy diferido).
-- [ ] Para cada ✅ con drift, dictaminar: (a) si son [ ] ejecutables -> bajar el módulo a 🟡 Con dudas; (b) si son [ ] con dep externa documentada -> puede permanecer ✅ SOLO si el plan-actual explica explícitamente la exclusión; si no la explica, también baja a 🟡. Nada de ⚠ sin dictamen.
+- [x] Para CADA fila ✅ del CHECKLIST-GLOBAL (50 contadas por hy3, 2026-10-03), verificar que el progreso declarado coincida con el conteo regex (?m)^- \[x\] del plan-actual/05-Checklist.md real. **Resultado (Log 1227): 0/50 filas con drift de conteo — patrón M93 AUSENTE.** Reportar ⚠ por discrepancia. Ya sabes el patrón: en M93 el 134/0 declarado era FALSO (131 [x] + 3 [ ] reales, simulate_economy diferido).
+- [x] Para cada ✅ con drift, dictaminar: (a) si son [ ] ejecutables -> bajar el módulo a 🟡 Con dudas; (b) si son [ ] con dep externa documentada -> puede permanecer ✅ SOLO si el plan-actual explica explícitamente la exclusión; si no la explica, también baja a 🟡. Nada de ⚠ sin dictamen. **Aplicado (Log 1227): 3 filas bajadas a 🟡 (168 falso-cierre 0/104, 127, 26); 10 filas ✅ con [ ] externo mantienen; 36 limpias sin acción.**
 ### O — Auditoría de CITAS DE LOGS rotas (extender tu corrección 532 a 879)
 
 - [ ] Toda cita de log en la columna Notas del CHECKLIST-GLOBAL debe existir en Logs/ Y pertenecer al módulo que la cita. Encontraste la de M123 (citaba Log 532, que es de M108). Escanear las 167 filas. Corregir las rotas SIN inventar sellos: si la cita no tiene log válido, declararlo explícitamente (sin QA §21.8 previa válida).
