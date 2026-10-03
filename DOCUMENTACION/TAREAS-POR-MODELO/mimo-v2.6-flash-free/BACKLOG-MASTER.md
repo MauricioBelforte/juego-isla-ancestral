@@ -33,7 +33,7 @@
 > M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
 
 **Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
-(**48 [x] / 52 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
+(**57 [x] / 43 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
 
 **Lote A — auditoría de coherencia (2026-10-03 00:32, hecho):** el checklist llegaba
 inflado a 61 `[x]`. Auditoría contra el código real → **22 `[x]` falsos bajados a `[ ]`
@@ -58,10 +58,24 @@ comparar, sin aflojar la aserción). C51/C58 siguen `[ ]`: **M41 no define escal
 ni leitmotifs** (`music_director.gd` sin notas, `music_context_matrix.json` solo
 temas/capas/pesos).
 
+**Lote B2 — catálogo y superficies de §3 (2026-10-03 00:55, hecho):** creado
+`game/isla-ancestral/data/audio/sfx_catalog.json` con las **12 filas exactas de
+`03-Diseno §3`** (6 paso + 5 romper + 1 colocar) + API `catalogo()` /
+`catalogo_variaciones(efecto, material)` en `sfx_manager.gd`. `sfx_surfaces.json`
+ampliado de 6 a **9 superficies**: nuevas hierba (5), nieve (4), arena (4) y
+piedra corregida de 4 a **5**; se conservan agua/metal/cristal (4). Suite
++`_test_catalogo()` y expectativas por superficie: **35 → 59 checks, 0 fallos,
+EXIT=0**. Cierra **8 del mapa §3 (E) + G103** (checklist 48 → 57 `[x]`).
+**Hallazgo de honestidad:** `Pasos hierba: 5` estaba `[x]` en la auditoría del
+Lote A **sin evidencia** (el archivo no tenía hierba) y no lo detecté — quedó
+cubierto recién en B2 con datos reales y con la nota pública en el checklist.
+`Colocar: misma familia` queda `[ ]`: el catálogo declara 4 variaciones pero
+no enlaza colocar ↔ superficie (el requisito no está modelado).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 35/0, ya descubierta por el runner**)
+  (**suite de referencia: 59/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),

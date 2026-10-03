@@ -1,0 +1,21 @@
+{
+  "fuente": "03-Diseno.md §3 — mapa material -> variaciones",
+  "paso": {
+    "hierba": 5,
+    "madera": 4,
+    "piedra": 5,
+    "tierra": 4,
+    "nieve": 4,
+    "arena": 4
+  },
+  "romper": {
+    "piedra": 5,
+    "madera": 5,
+    "tierra": 4,
+    "cristal": 4,
+    "metal": 4
+  },
+  "colocar": {
+    "variaciones": 4
+  }
+}

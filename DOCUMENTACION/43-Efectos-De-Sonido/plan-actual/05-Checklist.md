@@ -72,18 +72,18 @@
 
 ## E. Mapa de variaciones (14)
 
-- [x] Pasos hierba: 5 variaciones [S]
+- [x] Pasos hierba: 5 variaciones [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies: superficie nueva «hierba» con 5 (la única con 5 de los pasos, como dice §3) ; verificado por `test_sfx_m43.gd` **59/0 OK**. ⚠️ nota de honestidad: este ítem estaba marcado `[x]` en la auditoría del Lote A **sin evidencia** (`sfx_surfaces.json` no tenía hierba) y no lo detecté; queda cubierto recién ahora con datos reales
 - [x] Pasos madera: 4 [S] — verificado 2026-10-03: `sfx_surfaces.json` «madera» tiene 4 variaciones
-- [ ] Pasos piedra: 5 + eco ligero [S]
+- [x] Pasos piedra: 5 + eco ligero [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies: «piedra» pasa de 4 a **5** variaciones (5 nuevas) ; verificado por `test_sfx_m43.gd` **59/0 OK**; el «eco ligero» es matiz de composición — el matiz de diseño exige los `.wav` del compositor (§7)
 - [x] Pasos tierra: 4 [S] — verificado 2026-10-03: `sfx_surfaces.json` «tierra» tiene 4 variaciones
-- [ ] Pasos nieve: 4 [S]
-- [ ] Pasos arena: 4 [S]
-- [ ] Romper piedra: 5 + gravilla [S]
-- [ ] Romper madera: 5 + astillas [S]
-- [ ] Romper tierra: 4 [S]
-- [ ] Romper cristal: 4 tintineo [S]
-- [ ] Romper metal: 4 golpe metálico [S]
-- [ ] Colocar: misma familia del material [S]
+- [x] Pasos nieve: 4 [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies: superficie nueva «nieve» con 4 ; verificado por `test_sfx_m43.gd` **59/0 OK**
+- [x] Pasos arena: 4 [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies: superficie nueva «arena» con 4 ; verificado por `test_sfx_m43.gd` **59/0 OK**
+- [x] Romper piedra: 5 + gravilla [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (romper/piedra = 5) ; verificado por `test_sfx_m43.gd` **59/0 OK**; «+ gravilla» — el matiz de diseño exige los `.wav` del compositor (§7)
+- [x] Romper madera: 5 + astillas [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (romper/madera = 5) ; verificado por `test_sfx_m43.gd` **59/0 OK**; «+ astillas» — el matiz de diseño exige los `.wav` del compositor (§7)
+- [x] Romper tierra: 4 [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (romper/tierra = 4) ; verificado por `test_sfx_m43.gd` **59/0 OK**
+- [x] Romper cristal: 4 tintineo [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (romper/cristal = 4) ; verificado por `test_sfx_m43.gd` **59/0 OK**; el tintineo — el matiz de diseño exige los `.wav` del compositor (§7)
+- [x] Romper metal: 4 golpe metálico [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (romper/metal = 4) ; verificado por `test_sfx_m43.gd` **59/0 OK**; el timbre metálico — el matiz de diseño exige los `.wav` del compositor (§7)
+- [ ] Colocar: misma familia del material [S] — ⚠️ el catálogo declara `colocar.variaciones = 4` (testeado), pero el requisito «misma familia» (reutilizar los materiales de `paso`) **no está modelado**: `colocar` no referencia materiales. Hace falta un modelo de datos que enlace colocar ↔ superficie
 - [ ] Herramientas: 4 por tipo [S]
 - [ ] Pesca/craft/comercio: etapas diferenciadas [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no hay etapas de pesca/craft/comercio en `sfx_surfaces.json` ni catálogo de efectos
 
@@ -100,8 +100,8 @@
 
 ## G. Data y configuración (8)
 
-- [ ] sfx_catalog.tres (catálogo) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): `sfx_catalog` no existe en `data/audio/` (solo `sfx_surfaces.json`)
-- [x] sfx_surfaces.tres (materiales) [S]
+- [x] sfx_catalog.tres (catálogo) [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (6 paso + 5 romper + 1 colocar) ; verificado por `test_sfx_m43.gd` **59/0 OK**; implementado como **`sfx_catalog.json`** (mismo criterio que `sfx_tones`: todo el data de audio de M43 es JSON, consistente con `sfx_surfaces.json`)
+- [x] sfx_surfaces.tres (materiales) [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies (hierba, nieve, arena nuevas; piedra 4 → 5; se conservan agua/metal/cristal) ; verificado por `test_sfx_m43.gd` **59/0 OK**
 - [x] sfx_tones.tres (familia tonal) [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK**; implementado como **`sfx_tones.json`** (consistente con `sfx_surfaces.json`, que ya era JSON a pesar de figurar como `.tres`; lo carga `SFXManager.tones`)
 - [ ] API: reproducir(efecto, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): la API real es `reproducir(tipo: String, prioridad: int)`: sin `pos` ni concepto de efecto
 - [ ] API: reproducir_localizado(tipo, material, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe; agnes-2.5-flash lo listó en «Lo que NO pude hacer» y aun así quedó [x]
@@ -136,8 +136,8 @@
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 48 · Pendientes: 52 · No resueltos: 0.
-**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de 24 voces (tope dinámico, no preallocado), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **35/0 OK** (15 de superficies/pool/prioridad + 20 de familia tonal, agregados en el Lote B1). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). Quedan **52 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
+**Totales:** 100 ítems · Completados: 57 · Pendientes: 43 · No resueltos: 0.
+**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de 24 voces (tope dinámico, no preallocado), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (6×4) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **59/0 OK** (15 de superficies/pool/prioridad + 20 de familia tonal en el Lote B1 + 9 de superficies §3 y 24 de catálogo §3 en el Lote B2). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). Quedan **43 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente
 

@@ -1,7 +1,10 @@
 {
+  "hierba": {"variaciones": ["golpe_hierba_1", "golpe_hierba_2", "golpe_hierba_3", "golpe_hierba_4", "golpe_hierba_5"]},
   "madera": {"variaciones": ["golpe_madera_1", "golpe_madera_2", "golpe_madera_3", "golpe_madera_4"]},
-  "piedra": {"variaciones": ["golpe_piedra_1", "golpe_piedra_2", "golpe_piedra_3", "golpe_piedra_4"]},
+  "piedra": {"variaciones": ["golpe_piedra_1", "golpe_piedra_2", "golpe_piedra_3", "golpe_piedra_4", "golpe_piedra_5"]},
   "tierra": {"variaciones": ["golpe_tierra_1", "golpe_tierra_2", "golpe_tierra_3", "golpe_tierra_4"]},
+  "nieve": {"variaciones": ["golpe_nieve_1", "golpe_nieve_2", "golpe_nieve_3", "golpe_nieve_4"]},
+  "arena": {"variaciones": ["golpe_arena_1", "golpe_arena_2", "golpe_arena_3", "golpe_arena_4"]},
   "agua": {"variaciones": ["splash_1", "splash_2", "splash_3", "splash_4"]},
   "metal": {"variaciones": ["golpe_metal_1", "golpe_metal_2", "golpe_metal_3", "golpe_metal_4"]},
   "cristal": {"variaciones": ["cristal_1", "cristal_2", "cristal_3", "cristal_4"]}

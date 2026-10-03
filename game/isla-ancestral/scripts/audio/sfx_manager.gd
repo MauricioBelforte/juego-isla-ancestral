@@ -12,22 +12,30 @@
 # Lote B1 (2026-10-03, mimo-v2.6-flash-free): se agrega la familia tonal
 # de 03-Diseno §4 (`sfx_tones.json`) + API `tono()`. Compatibilidad total
 # con los 15 checks originales de `test_sfx_m43.gd`.
+#
+# Lote B2 (2026-10-03, mimo-v2.6-flash-free): catálogo de 03-Diseno §3
+# (`sfx_catalog.json`, 12 filas: 6 paso + 5 romper + 1 colocar) + API
+# `catalogo()` / `catalogo_variaciones()`. `sfx_surfaces.json` ampliado a
+# 9 superficies (hierba/nieve/arena nuevas y piedra 4 → 5, según §3).
 
 extends Node
 
 const MAX_VOCES := 24
 const RUTA_SURFACES := "res://data/audio/sfx_surfaces.json"
 const RUTA_TONES := "res://data/audio/sfx_tones.json"
+const RUTA_CATALOG := "res://data/audio/sfx_catalog.json"
 
 var surfaces: Dictionary = {}
 var tones: Dictionary = {}
+var catalog: Dictionary = {}
 var _voces: Array = []  # [{tipo, prioridad, tiempo_ms}]
 
 func _ready() -> void:
 	_cargar_surfaces()
 	_cargar_tones()
+	_cargar_catalogo()
 	_registrar_servicio()
-	print("[M43] SFXManager listo (%d superficies, %d tonos)" % [surfaces.size(), tones.size()])
+	print("[M43] SFXManager listo (%d superficies, %d tonos, catálogo %s)" % [surfaces.size(), tones.size(), "OK" if not catalog.is_empty() else "FALTA"])
 
 func _cargar_surfaces() -> void:
 	if not FileAccess.file_exists(RUTA_SURFACES):
@@ -44,6 +52,33 @@ func _cargar_tones() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_TONES))
 	if typeof(parsed) == TYPE_DICTIONARY:
 		tones = parsed
+
+## Carga el catálogo de efectos (03-Diseno §3: efecto → variaciones).
+func _cargar_catalogo() -> void:
+	if not FileAccess.file_exists(RUTA_CATALOG):
+		push_warning("[M43] sfx_catalog.json no encontrado")
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_CATALOG))
+	if typeof(parsed) == TYPE_DICTIONARY:
+		catalog = parsed
+
+## Catálogo completo de efectos declarados en `sfx_catalog.json`.
+func catalogo() -> Dictionary:
+	return catalog
+
+## Variaciones declaradas en el catálogo para un efecto/material.
+## `material` aplica a "paso" y "romper"; para "colocar" pasar "" (familia única).
+## Devuelve -1 si el efecto o la clave no existen.
+func catalogo_variaciones(efecto: String, material: String = "") -> int:
+	var sec: Variant = catalog.get(efecto)
+	if typeof(sec) != TYPE_DICTIONARY:
+		return -1
+	var d: Dictionary = sec
+	var clave: String = "variaciones" if (efecto == "colocar" or material.is_empty()) else material
+	var v: Variant = d.get(clave, -1)
+	if v is int or v is float:
+		return int(v)
+	return -1
 
 func _registrar_servicio() -> void:
 	var sr := get_node_or_null("/root/ServiceRegistry")

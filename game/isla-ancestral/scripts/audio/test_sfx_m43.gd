@@ -10,6 +10,9 @@
 # Lote B1 (2026-10-03, mimo-v2.6-flash-free): + _test_tonos() contra
 # data/audio/sfx_tones.json (03-Diseno §4). Los checks originales se
 # conservan sin tocar.
+#
+# Lote B2 (2026-10-03, mimo-v2.6-flash-free): + _test_catalogo() contra
+# data/audio/sfx_catalog.json (03-Diseno §3, 12 filas) y superficies a 9.
 
 extends SceneTree
 
@@ -25,6 +28,7 @@ func _run() -> void:
 	_test_pool()
 	_test_prioridad()
 	_test_tonos()
+	_test_catalogo()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -35,8 +39,13 @@ func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 		_fallos += 1
 		print("  [FAIL] %s %s" % [nombre, detalle])
 
+## Expectativas de variaciones por superficie (03-Diseno §3).
+## agua/metal/cristal no figuran en §3 pero ya existían: se fijan en 4.
+var _espd := {"hierba": 5, "madera": 4, "piedra": 5, "tierra": 4,
+	"nieve": 4, "arena": 4, "agua": 4, "metal": 4, "cristal": 4}
+
 func _test_surfaces() -> void:
-	print("--- Superficies: 6 × 4 variaciones ---")
+	print("--- Superficies: 9 (§3 pasos + agua/metal/cristal) ---")
 	var sfx := root.get_node_or_null("SFXManager")
 	if sfx == null:
 		_check("SFXManager autoload presente", false)
@@ -44,10 +53,13 @@ func _test_surfaces() -> void:
 		quit(1)
 		return
 	_check("SFXManager autoload presente", true)
-	_check("6 superficies", sfx.surfaces.size() == 6, "size=%d" % sfx.surfaces.size())
+	_check("9 superficies", sfx.surfaces.size() == 9, "size=%d" % sfx.surfaces.size())
 	for sup in sfx.surfaces:
 		var variaciones: Array = sfx.surfaces[sup].get("variaciones", [])
-		_check("superficie %s con 4 variaciones" % sup, variaciones.size() == 4, "size=%d" % variaciones.size())
+		var esp: int = int(_espd.get(sup, -1))
+		_check("superficie %s: %d variaciones (§3)" % [sup, esp],
+			esp > 0 and variaciones.size() == esp,
+			"esperado=%d size=%d" % [esp, variaciones.size()])
 	var variacion = sfx.reproducir_superficie("madera", 5)
 	_check("madera devuelve variación", variacion.begins_with("golpe_madera"), "v=%s" % variacion)
 	var vacio = sfx.reproducir_superficie("no_existe", 5)
@@ -143,6 +155,55 @@ func _test_tonos() -> void:
 	var cra: Dictionary = sfx.tono("crafting_exito")
 	var cra_n: Array = cra.get("notas_semitonos", [])
 	_check("crafting_exito: arpegio 4ª-5ª (0-5-7)", _a_ints(cra_n) == [0, 5, 7], "v=%s" % str(cra_n))
+
+## Catálogo de efectos (03-Diseno §3): 12 filas (6 paso + 5 romper + 1 colocar).
+## Verifica valores exactos de §3 y la coherencia catálogo ↔ sfx_surfaces.json.
+func _test_catalogo() -> void:
+	print("--- Catálogo: 12 filas de §3 ---")
+	var sfx := root.get_node_or_null("SFXManager")
+	if sfx == null:
+		_check("SFXManager presente (catálogo)", false)
+		return
+	_check("sfx_catalog.json cargado", not sfx.catalogo().is_empty())
+	_check("claves paso/romper/colocar",
+		sfx.catalogo().has("paso") and sfx.catalogo().has("romper") and sfx.catalogo().has("colocar"))
+
+	var paso: Dictionary = sfx.catalogo().get("paso", {})
+	var romper: Dictionary = sfx.catalogo().get("romper", {})
+	_check("paso: 6 materiales (§3)", paso.size() == 6, "n=%d" % paso.size())
+	_check("romper: 5 materiales (§3)", romper.size() == 5, "n=%d" % romper.size())
+	_check("colocar: 4 variaciones (§3)",
+		int(sfx.catalogo().get("colocar", {}).get("variaciones", 0)) == 4)
+	_check("total 12 filas de §3", paso.size() + romper.size() + 1 == 12,
+		"n=%d" % (paso.size() + romper.size() + 1))
+
+	# Valores exactos de §3 (paso 6 + romper 5 = 11 comprobaciones)
+	var s3 := {"paso": {"hierba": 5, "madera": 4, "piedra": 5, "tierra": 4, "nieve": 4, "arena": 4},
+		"romper": {"piedra": 5, "madera": 5, "tierra": 4, "cristal": 4, "metal": 4}}
+	for efecto in s3:
+		for mat in s3[efecto]:
+			var esp: int = int(s3[efecto][mat])
+			var real: int = sfx.catalogo_variaciones(efecto, mat)
+			_check("%s/%s = %d (§3)" % [efecto, mat, esp], real == esp, "real=%d" % real)
+
+	# Coherencia catálogo ↔ sfx_surfaces (paso usa las mismas superficies)
+	var coh := true
+	var detalle_coh := ""
+	for mat in paso:
+		if not sfx.surfaces.has(mat):
+			coh = false
+			detalle_coh = "falta superficie %s" % mat
+			break
+		var va: Array = sfx.surfaces[mat].get("variaciones", [])
+		if va.size() != int(paso[mat]):
+			coh = false
+			detalle_coh = "%s: surfaces=%d catalogo=%d" % [mat, va.size(), int(paso[mat])]
+			break
+	_check("catálogo paso ↔ sfx_surfaces coherentes", coh, detalle_coh)
+
+	_check("catalogo_variaciones(colocar) == 4", sfx.catalogo_variaciones("colocar") == 4)
+	_check("efecto inexistente -> -1", sfx.catalogo_variaciones("volar") == -1)
+	_check("material inexistente -> -1", sfx.catalogo_variaciones("paso", "vidrio") == -1)
 
 func _summary() -> void:
 	print("=== Resumen M43: %d checks, %d fallos ===" % [_checks, _fallos])
