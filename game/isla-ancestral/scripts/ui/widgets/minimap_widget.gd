@@ -55,11 +55,14 @@ var _pan_offset: Vector2 = Vector2.ZERO
 var _is_dragging: bool = false
 var _drag_start: Vector2 = Vector2.ZERO
 var _pos_timer: Timer
-var _island_fogs: Dictionary = {}  # island_id -> ColorRect (per-island fog)
+var _island_fogs: Dictionary = {}
+## Configuración: ocultar minimapa
+@export var minimap_visible: bool = true
 
 ## ── Ciclo de vida ───────────────────────────────────────
 
 func _ready() -> void:
+	visible = minimap_visible
 	_build_ui()
 	_refresh_from_map_manager()
 	_update_transform()
@@ -350,6 +353,11 @@ func _build_island_fogs() -> void:
 		_island_fogs[island_id] = fog
 		idx += 1
 	_update_island_fogs()
+
+## API: ocultar/mostrar minimapa (M57 config)
+func set_minimap_visible(v: bool) -> void:
+	minimap_visible = v
+	visible = v
 
 ## ── Utilidades ──────────────────────────────────────────
 
