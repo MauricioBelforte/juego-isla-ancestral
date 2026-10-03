@@ -33,6 +33,10 @@
 # `ducking_dialogo()` baja el bus SFX 6 dB y se suscribe en `_ready()` a
 # `DialogueManager` (M21) **sin modificar sus archivos** (solo escucha
 # `dialogue_started`/`dialogue_ended`).
+#
+# Lote B6 (2026-10-03, mimo-v2.6-flash-free): 7 suscripciones de §3 a
+# autoloads reales (logros, crafting, tienda) + `_conectar_si()` defensivo
+# (`has_signal` antes de `connect`).
 
 extends Node
 
@@ -74,6 +78,7 @@ func _ready() -> void:
 	_cargar_catalogo()
 	_registrar_servicio()
 	_conectar_dialogos()
+	_conectar_autoloads()
 	print("[M43] SFXManager listo (%d superficies, %d tonos, catálogo %s)" % [surfaces.size(), tones.size(), "OK" if not catalog.is_empty() else "FALTA"])
 
 func _cargar_surfaces() -> void:
@@ -226,6 +231,54 @@ func _on_dialogue_started(_dialogue_id: String) -> void:
 
 func _on_dialogue_ended(_dialogue_id: String, _last_node_id: String) -> void:
 	ducking_dialogo(false)
+
+## §3: enlaces con otros módulos. Solo M43 cambia: cada nodo se toma con
+## `get_node_or_null` y solo se conecta si `has_signal` — si otro módulo renombra
+## su señal, M43 lo ignora en vez de romper el arranque (§12.2).
+func _conectar_autoloads() -> void:
+	_conectar_si("Achievements", "logro_desbloqueado", _on_logro_desbloqueado)
+	_conectar_si("Crafting", "crafting_completed", _on_crafting_completed)
+	_conectar_si("Crafting", "crafting_failed", _on_crafting_failed)
+	_conectar_si("ShopManager", "compra_exitosa", _on_compra_exitosa)
+	_conectar_si("ShopManager", "venta_exitosa", _on_venta_exitosa)
+	_conectar_si("ShopManager", "compra_rechazada", _on_compra_rechazada)
+	_conectar_si("ShopManager", "venta_rechazada", _on_venta_rechazada)
+
+func _conectar_si(nodo: String, senal: String, cb: Callable) -> void:
+	var n := get_node_or_null("/root/" + nodo)
+	if n == null or not n.has_signal(senal):
+		return
+	if not n.is_connected(senal, cb):
+		n.connect(senal, cb)
+
+## §3 M46: logro → familia tonal §4 (arpegio de tríada mayor, prioridad 10).
+func _on_logro_desbloqueado(_logro_id: String, _nombre: String) -> void:
+	reproducir("logro", null, 10)
+
+## §3 M20: craft exitoso → `crafting_exito` (§4).
+func _on_crafting_completed(_recipe: Variant, _cantidad: int) -> void:
+	reproducir("crafting_exito", null, 6)
+
+## §3 M20: craft fallido → `error` amable (§4: 0.4 s, nunca buzz).
+func _on_crafting_failed(_recipe: Variant, _motivo: String) -> void:
+	reproducir("error", null, 10)
+
+## §3 M45: compra → `compra` (2 monedas + nota mayor, §4).
+func _on_compra_exitosa(_shop_id: String, _item_id: String, _cantidad: int, _total: int, _precio: int) -> void:
+	reproducir("compra", null, 6)
+
+## §3 M45: venta → `venta` (monedas + nota media, distinto de compra, §4).
+func _on_venta_exitosa(_shop_id: String, _item_id: String, _cantidad: int, _total: int, _precio: int) -> void:
+	reproducir("venta", null, 6)
+
+## §3 M45: transacción rechazada → `error` amable.
+## `Motivo` es un enum con class_name de otro script: se recibe como Variant
+## para no acoplar M43 a su tipo (GUIA-GODOT §9.50).
+func _on_compra_rechazada(_shop_id: String, _item_id: String, _motivo: Variant) -> void:
+	reproducir("error", null, 10)
+
+func _on_venta_rechazada(_shop_id: String, _item_id: String, _motivo: Variant) -> void:
+	reproducir("error", null, 10)
 
 ## F92: SFX -6 dB mientras hay diálogo (M21). Idempotente: repetir la misma
 ## llamada no acumula atenuación.

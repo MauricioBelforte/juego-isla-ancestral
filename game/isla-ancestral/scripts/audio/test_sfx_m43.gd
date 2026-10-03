@@ -17,6 +17,8 @@
 # localizado, configurar_volumen, pausa). `reproducir()` cambió de firma
 # (el 2º argumento es ahora `pos`), así que sus 7 llamadas llevan `null`.
 # Lote B5 (2026-10-03, mimo-v2.6-flash-free): + _test_ducking() (F92/F95).
+# Lote B6 (2026-10-03, mimo-v2.6-flash-free): + _test_senales() (L114) —
+# verifica las 7 conexiones y que cada handler emite su SFX.
 # límites §5: ≤6 por tipo, UI máx 2, pool preallocado, PRNG cacheado).
 # data/audio/sfx_catalog.json (03-Diseno §3, 12 filas) y superficies a 9.
 
@@ -36,6 +38,7 @@ func _run() -> void:
 	_test_categorias()
 	_test_api()
 	_test_ducking()
+	_test_senales()
 	_test_tonos()
 	_test_catalogo()
 	_summary()
@@ -280,6 +283,54 @@ func _test_ducking() -> void:
 
 	# el flag de estado queda limpio para el resto de la suite
 	_check("sin ducking al terminar", bool(sfx._ducking) == false)
+
+## L114: cada suscripción de §3 conecta y cada handler emite su SFX.
+## Se llama a los handlers directamente en vez de emitir señales ajenas, para
+## no disparar a otros suscriptores (UI, logros) durante la suite.
+func _test_senales() -> void:
+	print("--- Suscripciones §3 (L114) ---")
+	var sfx := root.get_node_or_null("SFXManager")
+	if sfx == null:
+		_check("SFXManager presente (señales)", false)
+		return
+	var pares := [
+		["Achievements", "logro_desbloqueado", sfx._on_logro_desbloqueado],
+		["Crafting", "crafting_completed", sfx._on_crafting_completed],
+		["Crafting", "crafting_failed", sfx._on_crafting_failed],
+		["ShopManager", "compra_exitosa", sfx._on_compra_exitosa],
+		["ShopManager", "venta_exitosa", sfx._on_venta_exitosa],
+		["ShopManager", "compra_rechazada", sfx._on_compra_rechazada],
+		["ShopManager", "venta_rechazada", sfx._on_venta_rechazada],
+	]
+	for par in pares:
+		var n: Node = root.get_node_or_null(String(par[0]))
+		_check("%s.%s disponible" % [par[0], par[1]], n != null)
+		if n == null:
+			continue
+		_check("%s.%s suscrito" % [par[0], par[1]], n.is_connected(String(par[1]), par[2]))
+
+	# cada handler emite el SFX esperado (pool vacío: siempre entra)
+	var casos := [
+		["logro", Callable(sfx, "_on_logro_desbloqueado").bind("id", "nombre")],
+		["crafting_exito", Callable(sfx, "_on_crafting_completed").bind(null, 1)],
+		["error", Callable(sfx, "_on_crafting_failed").bind(null, "falta material")],
+		["compra", Callable(sfx, "_on_compra_exitosa").bind("s", "i", 1, 10, 10)],
+		["venta", Callable(sfx, "_on_venta_exitosa").bind("s", "i", 1, 10, 10)],
+		["error", Callable(sfx, "_on_compra_rechazada").bind("s", "i", 1)],
+		["error", Callable(sfx, "_on_venta_rechazada").bind("s", "i", 1)],
+	]
+	for c in casos:
+		for i in range(24):
+			sfx._voces[i] = null
+		var esperado: String = c[0]
+		(c[1] as Callable).call()
+		var encontrado := false
+		for i in range(24):
+			var v: Variant = sfx._voces[i]
+			if v != null and String(v["tipo"]) == esperado:
+				encontrado = true
+				break
+		_check("handler emite \"%s\"" % esperado, encontrado)
 
 ## Familia tonal (03-Diseno §4): 7 SFX de UI/eventos verificables por datos.
 ## NOTA: JSON.parse_string convierte todos los números a float, así que las

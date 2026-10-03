@@ -122,10 +122,31 @@ logro**, solo `tema_cambio` — delegado; (2) F94 «Correr +3 dB» cita
 referenciada y no hay señal de «corriendo» en el código. No se creó API
 huérfana (§21.4 «no hacer por hacer»).
 
+**Lote B6 — 7 suscripciones de §3 (2026-10-03 02:35, hecho):**
+`_conectar_autoloads()` enlaza M43 con el resto del juego **sin tocar un
+solo archivo ajeno**: `Achievements.logro_desbloqueado` → `logro`,
+`Crafting.crafting_completed` → `crafting_exito`,
+`Crafting.crafting_failed` → `error`, `ShopManager.compra_exitosa` →
+`compra`, `ShopManager.venta_exitosa` → `venta` y
+`compra_rechazada`/`venta_rechazada` → `error`. Las **firmas se leyeron
+del código fuente** (ej. `compra_rechazada` tiene 3 args, no 4) y
+`Motivo` (enum con class_name ajeno) se recibe como `Variant` para no
+acoplar M43 (GUIA-GODOT §9.50). Conexión defensiva `_conectar_si()`:
+`has_signal` antes de `connect`, así un renombrado ajeno no rompe el
+arranque. Los 5 autoloads van declarados **antes** que `SFXManager`
+(líneas 24-85 vs 100 de `project.godot`), así que en `_ready()` ya
+existen. Suite +`_test_senales()` (21 checks: 14 de conexión + 7 de que
+cada handler emite su SFX): **106 → 127 checks, 0 fallos, EXIT=0**.
+Cierra **G114** (checklist 71 → 72 `[x]`, 29 → 28 `[ ]`).
+**Corrección de honestidad:** la nota de F93 decía «no hay señal de
+logro» — es **falso**: `Achievements.logro_desbloqueado` existe y ya la
+escucha M43. Lo que falta es que **M41** se suscriba para bajar la
+música; se corrigió la nota en el checklist.
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 106/0, ya descubierta por el runner**)
+  (**suite de referencia: 127/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),
