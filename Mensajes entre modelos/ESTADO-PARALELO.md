@@ -3273,7 +3273,7 @@ piso: 34 checks, 0 fallos, EXIT 1). Las 3 suites = **81 checks, 0 fallos, EXIT 0
 
 Durante la iter. 3 aparecio 1 SCRIPT ERROR en las 3 suites, apuntando a `minimap_widget.gd`
 (`Parse Error: Function "_ready" has the same name as a previously declared function`), y lo
-atribui a una regresion PUBLICADA de M54 (commit `46c1f79`). **MEDIDO DE NUEVO (Log 1208): ESO
+atribui a una regresion PUBLICADA de M54 (commit `46c1f79`). **MEDIDO DE NUEVO (Log 1209): ESO
 ERA FALSO.** `git log --all` da 18 commits que tocan el archivo y en TODOS hay **1 solo**
 `func _ready()`; en HEAD el archivo **compila** y las 3 suites de M59 corren con **0 SCRIPT
 ERROR**. Era un **estado TRANSITORIO del worktree** (M54 editaba el archivo en ese momento).

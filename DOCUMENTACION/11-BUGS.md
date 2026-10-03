@@ -158,7 +158,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
-| BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1208) | 2026-10-02 |
+| BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -170,7 +170,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 - **Fecha de reporte:** 2026-10-02 (corregido 2026-10-02 por su propio autor)
 - **Modulo(s) afectado(s):** M54 (Mapa) — game/isla-ancestral/scripts/ui/widgets/minimap_widget.gd
 - **Estado:** [x] **CERRADO — NO ERA UN BUG REAL / NO ERA REGRESION PUBLICADA.**
-- **Reportado por:** DeepSeek-V4.1-Flash (Log 1205) · **Corregido por:** DeepSeek-V4.1-Flash (Log 1208)
+- **Reportado por:** DeepSeek-V4.1-Flash (Log 1205) · **Corregido por:** DeepSeek-V4.1-Flash (Log 1209)
 
 **Correccion.** El reporte afirmaba que el archivo tenia DOS `func _ready()` (L62 y L67) ya
 publicados en `origin/main` (commit `46c1f79`). **Medido de nuevo, eso es FALSO:**

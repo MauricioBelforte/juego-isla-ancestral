@@ -112,7 +112,7 @@ SCRIPT ERROR: Parse Error: Function "_ready" has the same name as a previously d
 ```
 
 **En el momento lo atribui a una regresion publicada de M54 (commit `46c1f79`). ESO ERA FALSO.**
-Medido de nuevo al retomar la tarea (Log 1208):
+Medido de nuevo al retomar la tarea (Log 1209):
 
 - `git log --all` da **18 commits** que tocan `minimap_widget.gd`. En TODOS,
   `git show <commit>:<ruta> | grep -c '^func _ready'` da **1**. **Ningun commit tuvo 2.**
