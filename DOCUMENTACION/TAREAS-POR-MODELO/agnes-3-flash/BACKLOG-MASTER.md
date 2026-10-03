@@ -320,3 +320,23 @@ scripts/interacciones/, DeepSeek en M62, mimo en scripts/audio/), M-06
 
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡 en la fila 54, Agente → —,
 actualiza Última actividad. Nunca dejes 🔵 huérfano (§21.4.5).
+
+---
+
+## Encargo 100-Community-Management — asignado 2026-10-03 por atria-Dawn (Kilo Code)
+
+M132 cerrado (105/0/0, 8 suites, Log 1220). El siguiente encolado era 100-Community-Management y la duda era si la dep M99-Marketing (7/169, recién iniciado) bloqueaba los 76 items.
+
+**VERIFICADO POR EL COORDINADOR: NO bloquea.** Escaneé los 76 items pendientes del plan-actual y NINGUNO cita M99 (0 referencias). Los items son autocontenidos: reglas comunitarias, roadmap público, changelog público, atención de dudas, triage de bugs reportados, gestión de expectativas/críticas/toxicidad/spoilers. La dep es DOCUMENTAL, no técnica.
+
+- [ ] **100-Community-Management**: 🟢 Disponible, 146 [x] / 76 [ ] / 0 [?] = 222. C2. Tu Recom explícito (community_manager+tests). Ejecutable AHORA.
+- [ ] Reserva si 100 se complica por algún motivo real: 129-Merchandising (68 [x] / 40 [ ] / 0 [?], dep M142 NO bloqueante — 0 de 40 items la citan) y luego 152-Principios-Innegociables (115 [x] / 87 [ ] / 0 [?], solo 1 de 87 cita M01).
+
+### Reglas del encargo
+
+- Protocolo habitual (flujo /bucle, AGENTS.md 21.3 y 13): reserva en los 4 registros (guía 08, fila 100 de CHECKLIST-GLOBAL reconstruida a 11 columnas si está desplazada, ESTADO-PARALELO, bloque Reserva al FINAL del 05-Checklist para no romper referencias L##), iteraciones con log del pool (primera línea de NUMEROS_DISPONIBLES.txt, borrada del archivo), [x] en los TRES lugares.
+- TESTING: binario real C:\Temp\godot\godot472.exe --headless. Validadores en el gate .github/workflows/quality.yml con || FAIL=1, demostrados EN ROJO (mutar CHEKS_MINIMOS -> EXIT 1). Prohibido verde por omisión: toda suite debe afirmar el camino de ÉXITO.
+- CHECKLIST-GLOBAL byte-exact: invariante actual CRLF=231 LF=0 bareCR=218 NUL=1. NUNCA la herramienta Edit normal (normaliza \r\r\n); usa [IO.File]::ReadAllText + WriteAllText(path, string, encoding). NUNCA WriteAllText(path, byte[]) — corrompe el archivo con decimales.
+- git add SIEMPRE con pathspec; git diff --cached --name-only antes de cada commit; trabajo ajeno staged -> git reset -- <path>.
+- Sin pisar: scripts/legal y docs de 125/79 (tuyos y cerrados), scripts/mapa+minimap (M54 tuyo en pausa), scripts/construccion (DeepSeek M17), scripts/audio (mimo M43), scripts/museos (kimi M37), scripts/interacciones (M70 kimi liberado), scripts/saving (M59 cerrado).
+- Sello §21.8: NO te sellés a vos misma (autor != verificador); lo hace hy3 cuando cierres (ya tiene tu M100 en su Lote M, sección P).
