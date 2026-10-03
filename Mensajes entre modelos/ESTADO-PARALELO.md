@@ -1,3 +1,21 @@
+## 2026-10-03 00:05 — DeepSeek-V4.1-Flash / WorkBuddy — M17 Construccion RESERVADO (iter. 1) — Log 1211
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 17: 🟢 Disponible → **🔵 En curso**, Agente actual → DeepSeek-V4.1-Flash, última actividad 2026-10-03 00:05.
+
+**Registros actualizados (los 4 de §26 + guia 08):** `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (fila M17 al tope de la tabla `Reserva actual`) · `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md` (bloque `Reserva actual`: Estado → 🔵 En curso, Agente → DeepSeek-V4.1-Flash/WorkBuddy, fecha; firma del encabezado) · `CHECKLIST-GLOBAL.md` fila 17 · esta entrada.
+
+**Hallazgo 1 — la fila 17 tenía 13 columnas (canónica = 11).** Tenía dos columnas de agente/fecha de más (`Qwen3.8 Max` + `qwen/qwen3.8-max:free (Kilo Code)` como dos campos, y `agnes-2.5-flash` + fecha como dos). Reconstruida a 11 columnas tomando como referencia la fila 59, preservando el dato de Recom como `Qwen3.8 Max / qwen/qwen3.8-max:free (Kilo Code)`.
+
+**Hallazgo 2 — COLISIÓN de `class_name`.** El diseño de M17 (`03-Diseno.md`/`04-Codigo.md`) propone `BuildValidator`, pero **ese nombre global ya lo usa M117 Build System** (`game/isla-ancestral/scripts/build/build_validator.gd:10` → `class_name BuildValidator`). Declararlo de nuevo rompería M117 (nombre global duplicado). El validador de M17 se implementa como **`ConstruccionValidator`**; el resto de nombres propuestos (BuildManager, BuildGhost, BuildPreview, BuildHistory, ZoneRegistry, PlacementRule, BuildCatalogDB) están libres (verificado 0 coincidencias).
+
+**Hallazgo 3 — over-mark prematuro (reportado, NO revertido).** El ítem `Unit tests de BuildValidator: ocupación, soporte, zonas, reglas por pieza [C]` está `[x]` **sin que exista código** (`scripts/construccion/` no existe). En vez de revertirlo, esta iteración implementa el validador y sus unit tests, de modo que el `[x]` pase a ser verdadero. Los otros 10 `[x]` son resoluciones de diseño (02-Analisis §1 y §7) y son legítimos a nivel de diseño.
+
+**Rutas reales (no las del diseño).** `04-Codigo.md` propone `res://src/construccion/`; el proyecto usa `game/isla-ancestral/scripts/construccion/` (así lo confirma el propio `05-Checklist.md`). `scripts/build/` ya existe (M117) — no se toca.
+
+**Contrato de persistencia ya existente (M60 iter. 3, no tocado):** `scripts/datos/buildings_save_provider.gd` busca por duck-typing una fuente que exponga `obtener_estructuras() -> Array` y `restaurar_estructuras(lista) -> void`; `scripts/datos/estructuras_codec.gd` define la forma canónica `{id, tipo, pos[3] int, rot_y, planta, variante}`. M17 expondrá ambos métodos desde su autoload → **cierra BUG-057** cuando el núcleo exista.
+
+**Paralelismo / no tocado:** `scripts/saving/` (M59 cerrado), `scripts/ui/widgets/minimap*` y todo M54 (agnes, commits muy frecuentes), `scripts/audio` (M91), `scripts/interacciones` (M70/kimi), `scripts/rendimiento/memoria` (M62). La fila 17 se editó byte-exacta (CRLF 449→449, NUL 1→1, sin BOM) pero **NO se commitea en este push**: el archivo lleva además una edición en vuelo de agnes-3-flash en la fila 54 (127/177 → 130/177) y commitearlo la arrastraría bajo mi firma. Queda para el coordinador, según la regla `CHECKLIST-GLOBAL.md` lo commitea el coordinador.
+
 ## 2026-10-02 21:55 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 Con dudas (Logs 1191/1194/1198/1199/1201/1203/1204/1206/1208)
 
 **Estado:** liberado. Lock de M91 otorgado por atria-dawn en el commit `24ddc7e` (“Se reservan locks para los agentes libres según encaje medido”). 9 lotes completados. `CHECKLIST-GLOBAL.md` fila 91: **92/239 🔵** → **206/239 🟡** (86%), Agente actual → —, última actividad 2026-10-02 21:55.

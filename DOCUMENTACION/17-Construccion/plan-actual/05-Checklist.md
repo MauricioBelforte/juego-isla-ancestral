@@ -1,19 +1,19 @@
-**Modelo:** deepseek-v4-flash
-**Plataforma:** Kilo Code
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
 
 ## Reserva actual
 
 | Campo | Valor |
 |---|---|
 | Módulo | M17 Construcción (iter. 1) |
-| Estado | 🟢 Disponible |
-| Agente | DeepSeek V4 Flash (Kilo Code) |
+| Estado | 🔵 En curso (iter. 1) |
+| Agente | DeepSeek-V4.1-Flash (WorkBuddy) |
 | Fase | F5 (base de producción) |
 | Visión | V0 |
 | Entrada | M08✅ M14🟢 — sistema de construcción voxel complejo |
 | Salida | BuildingService autoload + catálogos data-driven + integración terreno M08 + inventario M14 + economía M38 + persistencia M59 + tests headless |
 | Archivos afectados | `game/isla-ancestral/scripts/construccion/` (a crear), `tests/test_construccion.gd` (a crear) |
-| Fecha reserva | 2026-09-01 00:15 |
+| Fecha reserva | 2026-10-03 00:05 (relevo: reserva previa 2026-09-01 de deepseek-v4-flash/Kilo Code) |
 
 # 05-Checklist.md — Módulo 17: Construcción
 
