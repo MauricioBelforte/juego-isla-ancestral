@@ -148,9 +148,17 @@ duplicadas **no carga**: el widget de minimapa esta ROTO al 100 %.
 
 ## 11. Huella de push (AGENTS.md 4.3)
 
-- Rango publicado: (se completa al pushear)
-- Hora: 2026-10-02 21:05
+- Rango publicado: `9067d1f..c14e396` (`main`)
+- Hora: 2026-10-02 21:09 (-0300)
 - Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy)
 - Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`
-- Commits propios: (se completa)
-- Commits ajenos en el rango: (se completa)
+- Commits propios: 1 -> `c14e396` (M59 iter. 3)
+- Commits ajenos en el rango: 7
+  - `d24c195` bloqueo de M59-Guardado y reconstruccion de su fila a 11 columnas (coordinador)
+  - `14803a3` registro de BUG-088 (coordinador)
+  - `b4354e2` registro de BUG-087 (coordinador)
+  - `9645883` M54: +3 [x] (leyenda filtros, escala zoom, daltonismo) (agnes)
+  - `f9cc745` M54: minimap ocultable (agnes)
+  - `b2856cd` M54: +4 [x] (ocultable, M88 fuentes, explorer desacoplado, estados) (agnes)
+  - `6b9fc46` M91 lote 6: contraste de Especificacion RF1-RF15 (mimo)
+- Verificacion post-push: `HEAD == origin/main == c14e396`; `git merge-base --is-ancestor c14e396 origin/main` = SI
