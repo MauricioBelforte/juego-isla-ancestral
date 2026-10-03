@@ -71,7 +71,7 @@
 - [ ] Confirmación amable antes del viaje (confirm popup de M53 con costo/duración si M69 lo define) → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.6 (travel confirmation dialog); M53 popup pattern. Spec defined.
 - [x] Delegación del viaje por Callable (`register_fast_travel_provider`) sin importar nodos de M69 → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `MapManager.register_fast_travel_provider(Callable)` + `cancelar_viaje()` + `estado_viaje()` implementados
 - [x] Destinos bloqueados hasta desbloquearlos explorando → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: minimap `if not explored: continue` + _regiones_exploradas per-isla = destinos implícitamente bloqueados
-- [ ] Visualización de ruta al destino (línea suave sobre el mapa, M28) [M]
+- [x] Visualización de ruta al destino (línea suave sobre el mapa, M28) [M] -- agnes-3-flash 2026-10-03: `MapCanvas.draw_route_line(from, to)` Line2D ámbar; `clear_routes()`
 - [x] Cancelación del viaje desde el mapa sin estado inconsistente [S] -- agnes-3-flash 2026-10-02: `MapManager.cancelar_viaje()` + `register_fast_travel_provider()` (desacople M69) + botón "Cancelar viaje" en FullMapLayer
 - [x] Estado del viaje en curso reflejado (`travel_state_changed`) y mapa cerrado durante el trayecto [M] -- agnes-3-flash 2026-10-02: `MapManager.estado_viaje()` + `cancelar_viaje()`; FullMapLayer `_cancel_btn` visible
 - [x] Re-apertura del mapa al llegar con la posición y región actualizada [M] -- agnes-3-flash 2026-10-02: FullMapLayer open → `center_on_player()` + `update_markers()`; señal `exploration_changed` refresh
@@ -171,7 +171,7 @@
 ## L. Edge cases (16)
 
 - [x] Región sin explorar: no muestra detalles ni marcadores (spoiler prevention) [M] -- agnes-3-flash 2026-10-02: minimap_widget `if not explored: continue` (no crea marcador); island fogs ocultan regiones; MapManager `region_explorada()` controla acceso
-- [ ] Marcador fuera de la vista del minimapa: flecha de borde apunta la dirección [M]
+- [x] Marcador fuera de la vista del minimapa: flecha de borde apunta la dirección [M] -- agnes-3-flash 2026-10-03: `MinimapWidget.get_edge_arrow_marker(target)` — cálculo de intersección rayo/borde
 - [x] Mapa abierto mientras el jugador se mueve (pausa): datos congelados y coherentes [M] -- agnes-3-flash 2026-10-02: FullMapLayer pausa TimeCalendar.pausa() al abrir; señales solo emiten en runtime activo; datos map coherentes
 - [x] Mundo aún generando o sin datos de región: mapa en blanco amable con progreso [M] -- agnes-3-flash 2026-10-02: FullMapLayer muestra "Generando mapa..." + fallback blob (terrain no disponible)
 - [ ] Jugador en otra isla (M27): selector de islas exploradas y minimapa de la isla actual [C]
@@ -226,8 +226,8 @@
 - [ ] `scripts/map/map_schema.gd` — valida POIs (id único, nombre, categorías permitidas, coords 0-512 dentro del mundo)
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
-- [ ] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §2-3; IMPLEMENTACI脱N bloqueada por M53 (UI layer/foco) y M57 (acciones); KnownIssue no bloqueante DoD.
-**Totales:** 177 ítems · Completados: 109 · Pendientes: 68 · No resueltos: 0.
+- [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
+**Totales:** 177 ítems · Completados: 112 · Pendientes: 65 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
