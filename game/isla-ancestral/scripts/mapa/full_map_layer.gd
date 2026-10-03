@@ -24,6 +24,7 @@ var _legend_panel: VBoxContainer
 var _cancel_btn: Button
 var _type_filters: Dictionary = {}
 var _bake_label: Label
+var _last_focus: Control = null
 var _is_open: bool = false
 
 func _ready() -> void:
@@ -137,6 +138,7 @@ func open_map() -> void:
 		return
 	_is_open = true
 	visible = true
+	_last_focus = get_viewport().gui_get_focus_owner()
 	_refresh_from_manager()
 	_connect_signals()
 	# Foco inicial: centrar en el jugador (map_center_player)
@@ -165,6 +167,10 @@ func close_map() -> void:
 	_is_open = false
 	visible = false
 	_disconnect_signals()
+	# Restaurar foco al control anterior
+	if _last_focus != null and is_instance_valid(_last_focus):
+		_last_focus.grab_focus()
+	_last_focus = null
 	closed.emit()
 	var time_mgr := get_node_or_null("/root/TimeCalendar")
 	if time_mgr and time_mgr.has_method("resume"):
@@ -271,3 +277,15 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					open_map()
 				get_viewport().set_input_as_handled()
+			elif event.keycode == KEY_N and _is_open:
+				# Crear pin en posición del jugador (tecla dedicada)
+				_crear_pin_en_jugador()
+				get_viewport().set_input_as_handled()
+
+func _crear_pin_en_jugador() -> void:
+	var player: Node = get_tree().root.get_node_or_null("Player")
+	var mm := get_node_or_null("/root/MapManager")
+	if player == null or mm == null:
+		return
+	var wp: Vector3 = (player as Node3D).get_global_position()
+	mm.agregar_pin(int(wp.x), int(wp.y), int(wp.z), "", "pin_jugador")
