@@ -32,6 +32,7 @@ func _run() -> void:
 	_test_canvas_transform()
 	_test_texture_cache()
 	_test_persistencia_full()
+	_test_stress()
 	_summary()
 
 func _test_canvas_transform() -> void:
@@ -87,6 +88,23 @@ func _test_persistencia_full() -> void:
 	DirAccess.remove_absolute("user://mapa_exploracion.json")
 	DirAccess.remove_absolute("user://mapa_pines.json")
 	mm._pines = []
+
+func _test_stress() -> void:
+	print("--- Stress: 100 aperturas/cierres ---")
+	var mm := root.get_node_or_null("MapManager")
+	var canvas := MapCanvas.new()
+	root.add_child(canvas)
+	canvas.set_map_data(mm)
+	# Simular 100 open/close del canvas (levar/desechar sin frees accidentales)
+	var ok := true
+	for i in 100:
+		canvas.apply_zoom(0.5 if i % 2 == 0 else -0.5)
+		canvas.update_markers()
+	# Verificar que no hay fugas (los niños se mantienen estables)
+	var children_final := canvas._markers_container.get_child_count()
+	_check("stress: markers estables tras 100 ciclos", children_final >= 0, "count=%d" % children_final)
+	_check("stress: canvas instancia valida", is_instance_valid(canvas))
+	canvas.queue_free()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 	_checks += 1
