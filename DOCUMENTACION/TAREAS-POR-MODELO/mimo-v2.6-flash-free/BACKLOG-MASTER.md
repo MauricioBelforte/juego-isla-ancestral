@@ -21,13 +21,15 @@
 - [x] Log creado: **1206** — M91 lote 8: H-1 RESUELTO (el runner SI descubre S1; era la etiqueta --module m91, no el descubrimiento; evidencia --module audio 8/8 OK y --module subtitle 1/1 OK; sin renombrar nada) + hallazgo: testing.yml usa GdUnit4 con || true y nunca falla
 - [x] Log creado: **1208** — M91 lote 9: secciones de PRUEBAS completas (03-Diseno §11 y §19 reescritas de esqueleto a 11.1-11.7 y 19.1-19.5 con API sondeada) + correccion de API de Godot 3 en 3 documentos (get_device_list/set_device/get_device -> get_output_device_*) + 14 items `[x]` + notas anti-inflado en L18/L22/L23/L151 + checklist 192→206/32/1 (86%)
 - [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
+- [x] Fix post-liberación (commit `b894ffe`, sin número de log nuevo): el bloque Reserva insertado tras el H1 desplazaba **+14** todas las líneas → se movió al **FINAL** del `05-Checklist.md` (15+/15−) y la línea 3 (blanca) pasó a ser línea de estado que remite al bloque; líneas 4..327 byte a byte iguales a `e986181` → **~200 referencias `L##` restauradas sin renumerar** en 05-Checklist, 03-Diseno, 04-Codigo, CHECKLIST-GLOBAL, ESTADO-PARALELO y Log 1210. Detalle en Log 1210 §"Corrección posterior".
 
 ## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio
 
 > **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**
 > **LIBERADO 2026-10-02 21:55 a 🟡 Con dudas — Log 1210.** Los 4 registros de §26
-> quedaron actualizados (CHECKLIST-GLOBAL fila 91, 05-Checklist bloque Reserva,
-> ESTADO-PARALELO, guía 08). **Queda pendiente el QA cruzado §21.8** — lo toma un
+> quedaron actualizados (CHECKLIST-GLOBAL fila 91, 05-Checklist bloque Reserva
+> **al final del archivo** para no desplazar las referencias `L##`, ESTADO-PARALELO,
+> guía 08). **Queda pendiente el QA cruzado §21.8** — lo toma un
 > modelo DISTINTO a mimo-v2.6-flash-free. No re-llevar este módulo a ✅ sin resolver
 > L88 `[?]` (HRTF).
 >
