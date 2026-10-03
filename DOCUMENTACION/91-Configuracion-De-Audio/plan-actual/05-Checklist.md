@@ -85,14 +85,14 @@
 
 ### [S] Audio 3D
 - [x] Definir toggle de audio 3D (on/off)
-- [ ] Definir espacialización (HRTF para auriculares)
-- [ ] Definir oclusión (bloqueo de sonido por objetos)
-- [ ] Definir Doppler effect (cambio de frecuencia por movimiento)
-- [ ] Definir distancia de atenuación (rolloff)
+- [?] Definir espacialización (HRTF para auriculares) — mimo-v2.6-flash-free 2026-10-02 (opencode): NO RESUELTO (honesto) - sondeo de Godot 4.7.2: AudioStreamPlayer3D tiene 67 propiedades y NINGUNA con modo de pan (solo panning_strength); AudioServer no expone HRTF/room; de las 29 clases AudioEffect* ninguna es spatializer. HRTF requiere GDExtension de terceros o DSP propio. 3 opciones reales documentadas en 03-Diseno 5.1
+- [x] Definir oclusión (bloqueo de sonido por objetos) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.4 - raycast desde el oidor + AudioEffectLowPassFilter.cutoff_hz (20500 Hz abierto / 800 Hz tapado) en un BUS PROPIO del reproductor, nunca en el bus SFX compartido (ese era el error del esqueleto anterior). Diseno verificado; pendiente de implementacion hasta que existan fuentes 3D
+- [x] Definir Doppler effect (cambio de frecuencia por movimiento) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.3 - doppler_tracking con enum REAL sondeado Disabled/Idle/Physics -> DOPPLER_TRACKING_PHYSICS_STEP(2), porque el juego mueve los cuerpos en el paso de fisica
+- [x] Definir distancia de atenuación (rolloff) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.2 - attenuation_model ATTENUATION_INVERSE_SQUARE_DISTANCE(1) + unit_size (0.1-100) + max_db (-24..+6 dB) + max_distance (0-4096 m) + attenuation_filter_cutoff_hz; todos los rangos sondeados en 4.7.2
 - [x] Definir Audio3D nodes para sonidos espaciales
 - [x] Definir AudioServer.set_bus_effect() para espacialización
-- [ ] Definir raycast para oclusión de sonido
-- [ ] Definir PhysicsBody3D para bloqueo de sonido
+- [x] Definir raycast para oclusión de sonido — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.5 - PhysicsRayQueryParameters3D.create(desde, hasta, mascara) + collide_with_bodies/collide_with_areas + intersect_ray(); propiedades reales verificadas por sondeo
+- [x] Definir PhysicsBody3D para bloqueo de sonido — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 5.6 - StaticBody3D en una capa de colision DEDICADA (p.ej. capa 12 'Occlusion') y collision_mask del ray solo a esa capa, para que paredes/rocas tapen pero jugadores, NPCs, animales y proyectiles NO tapen
 
 ### [S] Subtítulos
 - [x] Definir toggle de subtítulos (on/off) — mimo-v2.6-flash-free 2026-10-02 (opencode): toggle on/off -> set_habilitados()/get_habilitados() + senal habilitados_cambiado; scripts/ui/subtitle_manager.gd
@@ -224,7 +224,7 @@
 
 ### [S] Audio 3D setup
 - [x] Diseñar Audio3DSetup
-- [x] Diseñar espacialización con AudioEffectEQ
+- [x] Diseñar espacialización (pan 3D + atenuación) — mimo-v2.6-flash-free 2026-10-02 (opencode): TEXTO CORREGIDO desde «con AudioEffectEQ» (el original queda intacto en plan-inicial/05-Checklist.md:227). AudioEffectEQ ecualiza, NO espacializa. Diseno real en 03-Diseno 5.1-5.2: panning_strength + attenuation_model = ATTENUATION_INVERSE_SQUARE_DISTANCE
 - [x] Diseñar oclusión con AudioEffectLowPassFilter
 - [x] Diseñar AudioServer.add_bus_effect() para agregar efectos
 
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 187 · Pendientes: 52 · No resueltos: 0.
+**Totales:** 239 ítems · Completados: 192 · Pendientes: 46 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].

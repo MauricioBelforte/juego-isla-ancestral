@@ -1101,3 +1101,92 @@ no tiene esqueleto, es un evento de la UI de M53.
   audio.
 - El único pendiente técnico propio es **H-1**: `tools/ci/run_tests.py`
   no descubre `test_audio_config.gd` (dueño: módulo de CI, no M91).
+
+## Notas del Agente — Iteración 7 (Lote 7: Audio 3D)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Parcial — 5 de 6 ítems en `[x]`; **L88 queda `[?]` (honesto)**
+
+### Lo que hice
+
+1. **Reescribí `03-Diseno.md` §5 "Audio 3D"** (20 → 119 líneas). El
+   esqueleto anterior era **incorrecto**: usaba `AudioEffectEQ` como
+   "espacialización", cuando `AudioEffectEQ` **ecualiza, no espacializa**.
+2. **Sondeo de la API real (lección T-107)** en Godot 4.7.2, dos pasadas
+   (`ClassDB.class_get_integer_constant_list` + `get_property_list()`).
+   El script de sondeo (`_probe_a3d.gd`) se **borró** al terminar: no se
+   deja basura en el repo.
+3. **Marcé 5 ítems `[x]`** — L89 oclusión, L90 Doppler, L91 atenuación,
+   L94 raycast, L95 PhysicsBody3D — y **L88 → `[?]`**.
+4. **Corregí el ítem L227** del checklist: decía «Diseñar espacialización
+   con AudioEffectEQ» y estaba en `[x]` — API falsa marcada como hecha.
+   Texto nuevo con el diseño real; el original sigue intacto en
+   `plan-inicial/05-Checklist.md:227` (nunca se modifica).
+
+### Hallazgo importante: Godot 4.7.2 NO tiene HRTF
+
+| Pregunta | Resultado del sondeo |
+|---|---|
+| `panning_mode` en `AudioStreamPlayer3D` | **no existe** — 67 propiedades, solo `panning_strength` |
+| `AudioServer` expone HRTF / room | **no** — 0 propiedades coincidentes |
+| ¿Algún `AudioEffect*` espacial? | **no** — 29 clases; `AudioEffectPanner` es solo pan estéreo |
+
+Consecuencia: **L88 (HRTF para auriculares) no es alcanzable con el motor
+stock.** Las 3 opciones reales quedan documentadas en `03-Diseno` §5.1.1:
+GDExtension de terceros (Resonance / Steam Audio), DSP propio como
+`AudioEffect`, o aceptar pan equilibrado + atenuación.
+
+> ⚠️ **Impacto en el estado del módulo:** mientras L88 esté en `[?]`, M91
+> **no puede cerrarse en `✅`**; al liberarse pasaría a `🟡 Con dudas`.
+> Es una decisión real, no un descuido.
+
+### APIs sí verificadas (las de los 5 `[x]`)
+
+- `attenuation_model` → `ATTENUATION_INVERSE_SQUARE_DISTANCE(1)` ·
+  `unit_size` 0.1–100 · `max_db` −24..+6 dB · `max_distance` 0–4096 m
+- `doppler_tracking` → `DOPPLER_TRACKING_PHYSICS_STEP(2)`
+- `PhysicsRayQueryParameters3D`: `collision_mask`, `collide_with_bodies`,
+  `collide_with_areas`
+- `AudioEffectLowPassFilter.cutoff_hz` → 20–20500 Hz
+
+### Errores propios corregidos en el camino
+
+1. El script de marcado escribía `"[x] ..."` en vez de `"- [x] ..."`:
+   6 líneas quedaron **sin el guion** y el conteo cayó a 233. **Reparado**
+   inmediatamente → 192/46/1 = 239. Lección: verificar el conteo
+   **después** de escribir, no dar por bueno un `replace`.
+2. Una aserción exigía que `AudioEffectEQ` no apareciera en el texto nuevo,
+   pero lo menciono **a propósito** para explicar el error. La aserción era
+   demasiado estricta, no el contenido.
+
+### Reparto de los 46 `[ ]` restantes (+1 `[?]`)
+
+| # | Grupo | Motivo |
+|---:|---|---|
+| 12 | Menú (L198-211) | **dueño M53** |
+| 10 | Sonidos de interfaz (6) + UISoundManager (4) | **bloqueado**: 0 `.wav`/`.ogg`/`.mp3` en el proyecto |
+| 9 | Pruebas con auriculares (4) / altavoces (5) | **hardware del usuario** |
+| 3 | AudioTestManager (L271-273) | manager no creado |
+| 3 | Pruebas de calidad (L303/305/307) | balance / espacial 3D / dispositivo |
+| 3 | Especificación (L18, L22, L23) | rollup de los bloqueos de arriba |
+| 2 | M87 (L179, L181) | 6 idiomas (solo hay es/en/pt) y localización de nombres |
+| 2 | Guardado (L288) + M58 (L171) | evento de M53 / M58 |
+| 2 | Subtítulos (L107) + M58 | M58 |
+| **1** | **L88 HRTF** | **`[?]` — no existe en el motor** |
+| **46** | | |
+
+### Recomendaciones para el próximo agente
+
+- **H-1 sigue abierto** (dueño: módulo de CI): `tools/ci/run_tests.py
+  --module` no descubre `test_audio_config.gd`. Alternativa propia:
+  renombrar a `test_audio_config_m91.gd` y actualizar `06-Plan-Testings.md`,
+  `07-Resultados-Testings.md` y `04-Codigo.md`.
+- **Ningún script usa `AudioStreamPlayer3D` todavía.** Cuando entre la
+  primera fuente 3D, implementar `03-Diseno` §5.7: bus propio por
+  reproductor + `AudioEffectLowPassFilter` + raycast desde el oído.
+- **Decisión pendiente del usuario:** HRTF (GDExtension / DSP propio /
+  aceptar pan+atenuación). Marcar L88 solo cuando se elija.
+- El resto de pendientes es de **M53, M58, M87 o hardware**: no queda
+  trabajo técnico propio salvo H-1.

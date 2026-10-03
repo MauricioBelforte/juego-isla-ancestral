@@ -212,23 +212,122 @@ otro bus se mueve.
 
 ## 5. Audio 3D
 
-**Audio 3D:**
-```gdscript
-# res://audio/audio_3d_setup.gd
-class_name Audio3DSetup
-extends Node
+> **Reescrito 2026-10-02 · mimo-v2.6-flash-free (opencode).**
+> El esqueleto anterior (`AudioEffectEQ` como "espacialización") era
+> **incorrecto**: `AudioEffectEQ` ecualiza, no espacializa.
+> Todo lo siguiente está verificado contra la **API real de Godot 4.7.2**
+> mediante sondeo (`ClassDB.class_get_integer_constant_list` +
+> `get_property_list()`), siguiendo la lección **T-107**.
+>
+> **Estado de implementación: todavía no existe.** El proyecto no usa
+> `AudioStreamPlayer3D` en ningún script. Este apartado es el **diseño**
+> (los ítems dicen "Definir"); la implementación llegará cuando haya
+> fuentes de audio 3D que colocar.
 
-func setup_audio_3d():
-    var sfx_bus = AudioServer.get_bus_index("SFX")
-    
-    # Agregar efecto de espacialización
-    var spatial_effect = AudioEffectEQ.new()
-    AudioServer.add_bus_effect(sfx_bus, spatial_effect, 0)
-    
-    # Agregar efecto de oclusión
-    var occlusion_effect = AudioEffectLowPassFilter.new()
-    AudioServer.add_bus_effect(sfx_bus, occlusion_effect, 1)
+### 5.1 Espacialización — L88: HRTF **no disponible** → `[?]`
+
+Sondeo del 2026-10-02 sobre `AudioStreamPlayer3D` (Godot 4.7.2):
+
+| Pregunta | Resultado |
+|---|---|
+| ¿Existe `panning_mode`? | **No** — 67 propiedades, ninguna con modo de pan |
+| ¿Existe algo con "pan"? | solo `panning_strength` (rango 0–3) |
+| ¿`AudioServer` expone HRTF/room? | **No** — 0 propiedades coincidentes |
+| ¿Algún `AudioEffect*` espacial? | **No** — 29 clases registradas, ninguna spatializer; `AudioEffectPanner` es solo pan estéreo |
+
+**Conclusión: HRTF no se puede pedir al motor stock.** Opciones reales:
+
+1. **GDExtension de terceros** (Resonance Audio, Steam Audio).
+2. **DSP propio** — un `AudioEffect` con convolución HRTF (costo alto).
+3. **Pan equilibrado + atenuación + oclusión**, que es lo que sí da el motor.
+
+Mientras no se decida, **L88 queda `[?]`** (no resuelto, honesto): no se
+diseña a medias ni se marca como hecho. Lo implementable está en §5.2–§5.6.
+
+### 5.2 Atenuación / rolloff — L91
+
+| Parámetro | API real (4.7.2) | Rango / valores |
+|---|---|---|
+| Modelo | `attenuation_model` | `ATTENUATION_INVERSE_DISTANCE(0)` · `ATTENUATION_INVERSE_SQUARE_DISTANCE(1)` · `Logarithmic(2)` · `ATTENUATION_DISABLED(3)` |
+| Radio de referencia | `unit_size` | 0.1 – 100 |
+| Volumen máximo | `max_db` | −24 – +6 dB |
+| Distancia de corte | `max_distance` | 0 – 4096 m |
+| Filtro de lejanía | `attenuation_filter_cutoff_hz` / `attenuation_filter_db` | apaga agudos con la distancia |
+
+**Decisión de diseño:** `ATTENUATION_INVERSE_SQUARE_DISTANCE` (decae con el
+cuadrado de la distancia, como el sonido real), `unit_size = 10`,
+`max_distance` a ojo del tamaño de la isla, y `attenuation_filter_cutoff_hz`
+bajo para que lo lejano suene apagado en lugar de solo bajo.
+
+### 5.3 Doppler — L90
+
+`doppler_tracking` — enum real **`Disabled, Idle, Physics`**:
+
+| Constante | Valor |
+|---|---|
+| `DOPPLER_TRACKING_DISABLED` | 0 |
+| `DOPPLER_TRACKING_IDLE_STEP` | 1 |
+| `DOPPLER_TRACKING_PHYSICS_STEP` | 2 |
+
+**Decisión:** `DOPPLER_TRACKING_PHYSICS_STEP` para fuentes en movimiento
+(animales, proyectiles): muestrea la velocidad en cada paso de física, que
+es donde este juego mueve los cuerpos. `IDLE_STEP` sería para algo que se
+mueva solo por proceso visual.
+
+### 5.4 Oclusión (bloqueo por objetos) — L89
+
+Godot **no** oculta sonido por sí solo. Diseño: **raycast desde el oído +
+filtro pasa-bajos por reproductor**.
+
+1. El oído (cámara/jugador) lanza un ray hacia la fuente (§5.5).
+2. Si algo lo bloquea → `AudioEffectLowPassFilter.cutoff_hz` baja (p. ej. 800 Hz)
+   → suena "tapado".
+3. Si no hay bloqueo → `cutoff_hz` vuelve a 20500 Hz (abierto).
+
+> ⚠️ El filtro va en un **bus propio de cada reproductor**, **no** en el bus
+> `SFX` compartido: si se pusiera en `SFX`, *todo* el juego sonaría tapado.
+> Ese era precisamente el error del esqueleto anterior.
+
+### 5.5 Raycast para oclusión — L94
+
+```gdscript
+var q := PhysicsRayQueryParameters3D.create(desde, hasta, mascara_oclusion)
+q.collide_with_bodies = true    # propiedades reales verificadas por sondeo
+q.collide_with_areas  = false
+var golpe := get_world_3d().direct_space_state.intersect_ray(q)
+var oculto := not golpe.is_empty()
 ```
+
+`PhysicsRayQueryParameters3D` expone `from`, `to`, `collision_mask`,
+`collide_with_bodies`, `collide_with_areas`, `hit_from_inside`, `exclude`.
+
+### 5.6 PhysicsBody3D para bloqueo de sonido — L95
+
+Las paredes que deben tapar son **`StaticBody3D` en una capa de colisión
+dedicada** (p. ej. capa 12, `Occlusion`), y la `collision_mask` del raycast
+apunta **solo** a esa capa:
+
+- paredes, rocas y cuevas → tapan el sonido;
+- jugadores, NPCs, animales y proyectiles → **no** tapan (el ray los ignora).
+
+Sin capa dedicada el ray chocaría con cualquier cuerpo y **todo** sonaría
+constantemente tapado.
+
+### 5.7 Cómo queda montado (implementación futura)
+
+```
+AudioStreamPlayer3D                    ← una instancia por fuente
+├── bus propio "3D_<id>"
+│     └── AudioEffectLowPassFilter     ← oclusión (§5.4)
+├── attenuation_model / unit_size / max_distance   (§5.2)
+├── doppler_tracking = DOPPLER_TRACKING_PHYSICS_STEP (§5.3)
+└── stream = el audio
+```
+
+Un único script aparte (módulo nuevo, §15 de AGENTS.md) recorre por frame
+los reproductores activos, hace el raycast al oído (§5.5) y actualiza el
+`cutoff_hz` de su bus.
+
 
 ## 6. Subtítulos
 

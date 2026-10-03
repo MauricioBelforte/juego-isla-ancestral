@@ -17,6 +17,7 @@
 - [x] Log creado: **1199** — M91 lote 4: aplicacion/control por bus (11 items, test 103 checks, tabla de enrutamiento) + checklist 157→168
 - [x] Log creado: **1201** — M91 lote 5: 06-Plan-Testings.md + 07-Resultados (265 checks en verde) + checklist 168→173
 - [x] Log creado: **1203** — M91 lote 6: contraste Especificación RF1-RF15 (10 rollup) + L102 + L216/L277/L285 → checklist 173→187
+- [x] Log creado: **1204** — M91 lote 7: Audio 3D (03-Diseno §5 20→119 lineas con API sondeada en 4.7.2; hallazgo SIN HRTF en el motor -> L88 `[?]`; 5 items `[x]`; fix del `[x]` falso L227 AudioEffectEQ) + checklist 187→192/46/1
 
 ## Módulo ACTIVO — 91-Configuracion-De-Audio
 
@@ -25,8 +26,8 @@
 > performance de M131). Complejidad 1 — ideal para vos.
 
 **Fuente de verdad:** `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md`
-(187 [x] / 52 [ ] / 0 [?], 239 ítems totales — avance al cierre del lote 6
-2026-10-02). Lee ese archivo ANTES de empezar; las tareas de abajo son un
+(192 [x] / 46 [ ] / 1 [?], 239 ítems totales — avance al cierre del lote 7
+2026-10-02 2026-10-02). Lee ese archivo ANTES de empezar; las tareas de abajo son un
 resumen, no la fuente.
 
 **Código real:**
@@ -57,13 +58,16 @@ M-06 (byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR),
 119 (✅ inflado), 118 (impresión visual ≠ diagnóstico).
 
 **Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
-1204 tras reservar el 1203, pero verificá — se mueve). Reserva con §6.1.a.
+1205 tras reservar el 1204, pero verificá — se mueve). Reserva con §6.1.a.
 
-**Pendiente de M91 (lote 4):** tests de "aplicación al bus de X"
-(48/55/62/69/76/83) y "control de X" (46/53/60/67/74), más el descubrimiento
-de `--module` en `tools/ci/run_tests.py` (es substring de la ruta, no de
-módulo). **Sonidos de interfaz BLOQUEADOS:** el proyecto tiene 0 assets
-`.wav`/`.ogg`/`.mp3` — ver `03-Diseno.md` §7.
-
+**Pendiente de M91 (tras lote 7):** queda **1 `[?]` + 46 `[ ]`**, todos
+bloqueos reales: **L88 HRTF** (no existe en Godot 4.7.2 — elegir entre
+GDExtension / DSP propio / aceptar pan+atenuación), 12 de M53 (menú),
+10 de assets de audio (0 `.wav`/`.ogg`/`.mp3` en el proyecto), 9 de
+hardware del usuario, 3 de AudioTestManager (no creado), 3 de pruebas de
+calidad, 3 rollups, 5 de M58/M87. **Nada técnico propio salvo H-1:**
+`tools/ci/run_tests.py --module` no descubre `test_audio_config.gd`
+(es substring de la ruta). Cuando entre la primera fuente 3D, implementar
+`03-Diseno` §5.7 (bus propio + LPF + raycast desde el oído).
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, actualiza
 Última actividad en la fila 91. Nunca dejes 🔵 huérfano (§21.4.5).
