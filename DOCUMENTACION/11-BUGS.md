@@ -4469,7 +4469,7 @@ Los scripts legales compilan sin error y las suites de M131/M84 pasan.
 - [x] **Log del proyecto:** `Logs/1178-BUG-081_errores-inferencia-scripts-legales_2026-09-30_04-24-35.md`
 - [x] **Verificado por:** propio (mimo-v2.6-flash-free), 2026-09-30 — baseline **antes** de tocar: M131 `2 OK / 1 FAIL` (exit=1), test directo `8 checks / 1 fallo`; **después**: M131 `3 OK / 0 FAIL` (exit=0), test directo `8 checks / 0 fallos`, M84 `1 OK / 0 FAIL` (sin regresión), `--check-only` **4/4 OK**. Pendiente de **QA cruzado §21.8** por un modelo distinto.
 
-## 8. Bugs Delegados — auditoría reductos (256,...) centro viejo (hy3, Log 1179, 2026-09-30)
+## 8.1 Bugs Delegados — auditoría reductos (256,...) centro viejo (hy3, Log 1179, 2026-09-30)
 
 > Auditoría estática Fase 1 (ofrecida tras P-39). Se leyeron y clasificaron 26 hits de `(256,...)`
 > en `game/isla-ancestral/scripts/`. NO se tocó código ajeno. Los tests de vegetación que pasan
