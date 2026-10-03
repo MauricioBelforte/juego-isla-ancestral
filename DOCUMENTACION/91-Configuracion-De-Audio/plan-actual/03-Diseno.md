@@ -541,45 +541,148 @@ func remove_limiter(bus_index: int):
 
 ## 10. Dispositivo de salida
 
-**OutputDeviceManager:**
+**OutputDeviceManager** (implementado en `scripts/audio/output_device_manager.gd`
+como `RefCounted` con funciones `static`; probado con los 82 checks de
+`test_audio_effects_m91.gd`):
+
 ```gdscript
-# res://audio/output_device_manager.gd
+# res://scripts/audio/output_device_manager.gd   <- convencion real, NO res://audio/
 class_name OutputDeviceManager
-extends Node
+extends RefCounted
 
-func get_output_devices() -> Array:
-    return AudioServer.get_device_list()
+# API real Godot 4.7.2 - sondeada por reflexion (T-107).
+static func dispositivos() -> PackedStringArray:
+    return AudioServer.get_output_device_list()
 
-func set_output_device(device_name: String):
-    AudioServer.set_device(device_name)
+static func actual() -> String:
+    return AudioServer.get_output_device()
 
-func get_current_device() -> String:
-    return AudioServer.get_device()
+static func seleccionar(nombre: String) -> bool:
+    if not AudioServer.get_output_device_list().has(nombre):
+        return false
+    AudioServer.set_output_device(nombre)
+    return true
 ```
+
+> ⚠️ **API corregida 2026-10-02 (mimo-v2.6-flash-free / opencode).** El diseño
+> original de esta sección usaba `AudioServer.get_device_list()` /
+> `set_device()` / `get_device()` — **API de Godot 3, no existe en 4.7.2**.
+> El sondeo por reflexión confirma los nombres reales
+> `get_output_device_list()` / `set_output_device()` / `get_output_device()`.
+> El archivo **implementado** ya usaba los correctos desde el Lote 1; lo que
+> estaba mal era este diseño (y `02-Analisis` §14). Ver `GUIA-GODOT/06` T-107.
+
+**Dropdown en settings:** lo diseña y monta **M53** (menú). M91 solo expone
+`dispositivos()` / `actual()` / `seleccionar()`. Por eso **L147 queda `[ ]`** a
+propósito: el diseño de UI es de otro módulo (Trampa 119).
 
 ## 11. Pruebas de audio
 
-**AudioTestManager:**
+> **Reescrito 2026-10-02 · mimo-v2.6-flash-free 2026-10-02 (opencode).** El esqueleto anterior era un
+> archivo con funciones **vacías** (`# Test estéreo` sin nada más). Todo lo
+> de abajo está verificado contra la **API real de Godot 4.7.2** por sondeo
+> (lección T-107) y cubre **L271, L272 y L273**.
+>
+> **Estado: diseño, sin implementar.** El manager se crea cuando los botones
+> de prueba existan en el menú de settings (M53).
+
+### 11.1 APIs reales con las que se hace (sondeadas)
+
+| Para qué | API real (4.7.2) |
+|---|---|
+| Enviar un canal a la izquierda / derecha | `AudioEffectPanner.pan` → float **-1 .. 1**, paso 0.01 |
+| Modo de altavoces del driver | `AudioServer.get_speaker_mode()` |
+| Constantes de modo | `SPEAKER_MODE_STEREO=0` · `SPEAKER_SURROUND_31=1` · `SPEAKER_SURROUND_51=2` · `SPEAKER_SURROUND_71=3` |
+| **Medir** si un canal está sonando | `AudioServer.get_bus_peak_volume_left_db(bus)` / `..._right_db(bus)` |
+| Canales de un bus | `AudioServer.get_bus_channels(bus)` |
+| Lista / cambio de dispositivo | `AudioServer.get_output_device_list()` / `get_output_device()` |
+| Latencia real (para cortar el test) | `AudioServer.get_output_latency()` |
+
+> 💡 **El test de balance se puede automatizar:** `get_bus_peak_volume_*_db`
+> devuelve el pico real de cada canal, así que el test puede **comprobar**
+> que la izquierda suena y la derecha no (y viceversa) sin depender del oído.
+> Lo que sigue necesitando al usuario es *oír* si sale por el altavoz
+> correcto.
+
+### 11.2 Estructura del manager
+
 ```gdscript
-# res://audio/audio_test_manager.gd
-class_name AudioTestManager
-extends Node
+# res://scripts/audio/audio_test_manager.gd
+extends Node          # sin class_name (§9.17 / §9.41)
 
-@onready var test_sound = $TestSound
+signal test_iniciado(id: StringName)
+signal paso_cambiado(id: StringName, paso: int, texto: String)
+signal test_terminado(id: StringName, resultado: bool)
 
-func test_headphones():
-    # Test estéreo
-    test_sound.play()
-    # Test espacial 3D
-    # Test balance de canales
-
-func test_speakers():
-    # Test estéreo
-    test_sound.play()
-    # Test 5.1
-    # Test 7.1
-    # Test balance de canales
+enum Test { ESTEREO, ESPACIAL_3D, BALANCE, CINCO_UNO, SIETE_UNO, DISPOSITIVO }
 ```
+
+### 11.3 Test estéreo — L271 · L150 · L160
+
+**Objetivo:** confirmar que el canal izquierdo y el derecho suenan por
+separado.
+
+| Paso | Qué pasa | Qué debe notar el usuario |
+|---|---|---|
+| 1 | Tono de 200 Hz con `AudioEffectPanner.pan = -1`, 1,5 s | **Solo** el oído / altavoz **izquierdo** |
+| 2 | Silencio 0,5 s | — |
+| 3 | Mismo tono con `pan = +1`, 1,5 s | **Solo** el **derecho** |
+| 4 | «¿Funcionó?» → Sí / No | — |
+
+**Comprobación automática (sin oído):** durante el paso 1,
+`get_bus_peak_volume_left_db` debe estar por encima de -60 dB y el derecho
+prácticamente en -infinito.
+
+### 11.4 Test espacial 3D — L272 (HRTF depende de L88)
+
+**Objetivo:** confirmar que el sonido se desplaza alrededor de la cabeza.
+
+- Fuente `AudioStreamPlayer3D` describiendo un círculo de 3 m alrededor del
+  oído, una vuelta en 8 s, con `attenuation_model` y `unit_size` según
+  **§5.2**.
+- Esperado: recorrido audible **izquierda → atrás → derecha → frente**.
+- ❌ **La variante HRTF queda pendiente de L88** (`[?]`): Godot 4.7.2 no la
+  expone (ver §5.1.1). Este test cubre el espacializado que sí existe
+  (pan + atenuación + Doppler).
+
+### 11.5 Test de balance de canales — L273 · L152 · L163
+
+**Objetivo:** que ningún canal quede mudo ni mucho más bajo que los demás.
+
+1. Recorrer los canales que declara `get_bus_channels()` del bus destino.
+2. En cada canal mandar un tono de 1 s.
+3. **Automático:** leer `get_bus_peak_volume_*_db` y **fallar** si algún
+   canal queda por debajo de -60 dB.
+4. **Manual:** el usuario confirma que el canal anunciado es el que suena.
+
+### 11.6 Test 5.1 y 7.1 — L161 · L162
+
+Primero se le pregunta al driver:
+
+```gdscript
+match AudioServer.get_speaker_mode():
+    AudioServer.SPEAKER_MODE_STEREO:
+        pass   # no hay 5.1/7.1: informar y NO ofrecer el test
+    AudioServer.SPEAKER_SURROUND_51:
+        pass   # recorrer I, D, Centro, LFE, IT, DT
+    AudioServer.SPEAKER_SURROUND_71:
+        pass   # idem + IL, DR
+```
+
+Si el modo es `SPEAKER_MODE_STEREO` el test **no se ofrece**: no tiene
+sentido pedirle 5.1 a un driver estéreo, y ahí se le explica al usuario
+por qué.
+
+### 11.7 Botones de prueba en settings — L157 · L167
+
+- Dos botones en la sección de pruebas del menú: **«Probar auriculares»** y
+  **«Probar altavoces»**.
+- Muestran el paso actual (`paso_cambiado` → un Label) y los botones
+  «Sí funciona» / «No funciona».
+- **Deshabilitados** mientras corre un test (regla de §8: impedir doble
+  click durante la carga).
+- El menú es de **M53**: M91 solo expone el manager y sus señales.
+
 
 ## 12. Integración con M58 (Accesibilidad)
 
@@ -746,16 +849,56 @@ func save_settings():
 
 ## 19. Pruebas de calidad
 
-**Pruebas manuales:**
-- Probar ajustes de volúmenes en diferentes escenarios
-- Probar audio 3D con auriculares y altavoces
-- Probar subtítulos en diferentes idiomas
-- Probar rango dinámico (quiet, medio, dinámico)
-- Probar compresión de audio
-- Probar cambio de dispositivo de salida
-- Probar sonidos de interfaz
+> **Reescrito 2026-10-02 · mimo-v2.6-flash-free 2026-10-02 (opencode).** Antes era una lista de una línea
+> por prueba. Ahora cada una dice **qué se hace, qué se espera y quién la
+> puede ejecutar**. Cubre **L303, L305 y L307**.
 
-**Pruebas automáticas:**
-- Tests de carga de configuración
-- Tests de aplicación de configuración
-- Tests de cambio de dispositivo de salida
+### 19.1 Pruebas automáticas (corren sin usuario)
+
+| # | Prueba | Cómo se comprueba | Resultado medido |
+|---|---|---|---|
+| A1 | Carga de configuración | `test_audio_config.gd` | 103 checks, 0 fallos |
+| A2 | Aplicación y control por bus | misma suite, `_test_aplicacion_y_control_por_bus()` | (incluido en A1) |
+| A3 | Rango dinámico y compresión | `test_audio_effects_m91.gd` | 82 checks, 0 fallos |
+| A4 | Subtítulos | `test_subtitles_m91.gd` | 80 checks, 0 fallos |
+
+**265 checks, 0 fallos** (medido 2026-10-02). Ejecutar:
+
+```
+python tools/ci/run_tests.py --module audio --timeout 180      # A1-A3
+python tools/ci/run_tests.py --module subtitle --timeout 180   # A4
+```
+
+### 19.2 Pruebas de balance de canales — L303
+
+- **Automática:** tono por canal + `get_bus_peak_volume_*_db` → falla si
+  algún canal queda por debajo de -60 dB (procedimiento en **§11.5**).
+- **Manual (hardware):** el usuario confirma que el canal anunciado suena.
+
+### 19.3 Pruebas de espacialización 3D — L305
+
+- Fuente girando alrededor del oído durante 8 s (procedimiento en
+  **§11.4**).
+- Esperado: recorrido audible **izquierda → atrás → derecha → frente**.
+- ⚠️ La variante **HRTF depende de L88** y queda pendiente (`[?]`).
+
+### 19.4 Pruebas de cambio de dispositivo de salida — L307
+
+1. `AudioServer.get_output_device_list()` → poblar el dropdown.
+2. Elegir un segundo dispositivo.
+3. Esperado: `AudioServer.get_output_device()` devuelve el nombre nuevo y
+   un tono de prueba se oye por él.
+4. Volver al original y repetir la comprobación.
+
+> Requiere **dos dispositivos reales** en la máquina → su ejecución es
+> **hardware del usuario**; el diseño queda cerrado aquí.
+
+### 19.5 Pruebas manuales de escenario
+
+| Prueba | Cuándo |
+|---|---|
+| Volúmenes en escenario mixto (música + SFX + voz a la vez) | antes de cada release |
+| Subtítulos en es / en / pt | con M87 |
+| Rango dinámico (quiet / medio / dinámico) | al cambiar de preset |
+| Compresión on/off | al cambiar el toggle |
+| Sonidos de interfaz | **cuando existan los assets** (bloqueado) |

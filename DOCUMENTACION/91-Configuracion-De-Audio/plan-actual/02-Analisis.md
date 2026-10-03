@@ -206,8 +206,8 @@
 - Bluetooth
 
 **Implementación:**
-- AudioServer.get_device_list() para lista de dispositivos
-- AudioServer.set_device() para cambiar dispositivo
+- AudioServer.get_output_device_list() para lista de dispositivos (API real Godot 4.7.2; el diseño original decía `get_device_list()`, API de Godot 3)
+- AudioServer.set_output_device() para cambiar dispositivo (idem: el original decía `set_device()`)
 - Dropdown en settings para seleccionar dispositivo
 
 ## 15. Pruebas con auriculares

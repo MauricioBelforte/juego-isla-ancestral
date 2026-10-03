@@ -1252,3 +1252,109 @@ GdUnit4, y quedan fuera de ese camino. Anotado en `07-Resultados` §4 H-1.
 - Si se quiere cobertura de CI real para M91, hay que migrar las suites a
   **GdUnit4** dentro de `tests/` — eso es módulo de CI, no de M91.
 - Las 3 suites siguen en verde: **265 checks, 0 fallos**.
+## Notas del Agente — Iteración 9 (Lote 9: pruebas de audio + API de Godot 3)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02 21:35:00
+**Estado:** Completado (el módulo queda con 1 `[?]` pendiente)
+
+### Lo que hice
+
+1. **Reescribí `03-Diseno.md` §11 «Pruebas de audio»** — era un esqueleto con
+   solo comentarios `# Test estéreo`. Ahora son 7 subsecciones (11.1–11.7):
+   `AudioTestManager` con `enum Test`, señales `test_iniciado` /
+   `paso_cambiado` / `test_terminado`, los 4 tests (estéreo, espacial 3D,
+   balance de canales, 5.1/7.1) y los botones de prueba de settings, todo con
+   la API sondeada en el Lote 7.
+2. **Reescribí `03-Diseno.md` §19 «Pruebas de calidad»** — era una lista de
+   una línea. Ahora 5 subsecciones (19.1–19.5), automatizadas donde el motor
+   lo permite: `get_bus_peak_volume_left_db` / `..._right_db` permiten validar
+   el balance **sin oído humano**.
+3. **Corregí la API de Godot 3 heredada en 3 documentos** (hallazgo abajo).
+4. **Marqué 14 ítems `[x]`**: L150, L152, L157, L160, L161, L162, L163, L167,
+   L271, L272, L273, L303, L305, L307 → **192 → 206 `[x]` (86%)**.
+5. **Añadí notas anti-inflado** a L18, L22, L23 y L151: siguen en `[ ]` y
+   ahora explica *por qué*, para que el próximo agente no los marque «por
+   tener hijos en `[x]`» (Trampa 119).
+6. Borré el sondeo temporal `scripts/audio/_probe_speaker.gd`.
+
+### Hallazgo: tres documentos usaban la API de Godot 3
+
+`03-Diseno` §10, `02-Analisis` §14 y los ítems L145/L146/L264/L265 del
+checklist decían `AudioServer.get_device_list()` / `set_device()` /
+`get_device()`. **Esos métodos no existen en Godot 4.7.2.**
+
+| Equivocado (Godot 3) | Real (Godot 4.7.2, sondeo T-107) |
+|---|---|
+| `AudioServer.get_device_list()` | `AudioServer.get_output_device_list()` |
+| `AudioServer.set_device(n)` | `AudioServer.set_output_device(n)` |
+| `AudioServer.get_device()` | `AudioServer.get_output_device()` |
+
+**El código implementado NO estaba roto**: `output_device_manager.gd` ya usaba
+los nombres correctos desde el Lote 1 y hasta lo advertía en su cabecera. Lo
+que estaba mal era **solo la documentación**. Los ítems se reescribieron con
+el mismo patrón que L227 (el original queda preservado en
+`plan-inicial/05-Checklist.md`, que no se toca).
+
+### ⚠️ Error propio durante el lote — lección para no repetir
+
+Al reemplazar §10 escribí:
+
+```python
+k = ls.index("```", ls.index("```", i) + 1)
+```
+
+`list.index()` compara **igualdad exacta**, no subcadena. La cerca de apertura
+del bloque es `` ```gdscript ``, que **no** es igual a `` ``` ``, así que el
+primer `index` saltó a la cerca de **cierre** y el segundo saltó a la
+siguiente apertura de otra sección: **se comió 41 líneas de más** (el
+encabezado `## 11. Pruebas de audio`, `§11.1` y `§11.2`).
+
+**Cómo se detectó:** el propio script imprimió «reemplazo lineas 544-599
+(56 lineas)» en vez de ~15, y la verificación estructural posterior acusó
+`## 11`, `### 11.1` y `### 11.2` ausentes (864 líneas donde debían ser 905).
+
+**Recuperación:** el texto fuente vivía en mi propio script
+`diseno_s11_s19.py`, así que se restauró desde ahí. No se usó `git restore`
+— habría borrado también la reescritura de §19, que todavía no estaba
+commiteada. Quedó un `__FIRMA__` del literal crudo que el script original
+reemplazaba antes de escribir; se corrigió en la misma pasada.
+
+**Lección:** para cortar un bloque markdown entre cercas de código, buscar la
+apertura con `.startswith("```")` y después el siguiente elemento que **sea**
+`` ``` ``; nunca dos `index("```")` seguidos.
+
+### Estado del módulo
+
+| Métrica | Antes | Después |
+|---|---|---|
+| `[x]` | 192 | **206** |
+| `[ ]` | 46 | **32** |
+| `[?]` | 1 | 1 (L88, HRTF) |
+| Total | 239 | 239 |
+| Avance | 80% | **86%** |
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **L88 `[?]` / L151 `[ ]` (HRTF)** → Godot 4.7.2 no expone HRTF (verificado
+  por reflexión). Limitación real del motor, no un descuido.
+- **L22 / L23 (ejecutar pruebas con auriculares y altavoces)** → siguen `[ ]`:
+  requieren hardware real del usuario. Les puse nota para que no se inflen.
+- **L147 (dropdown de dispositivo de salida)** → `[ ]`: lo diseña y monta M53.
+- **L18 y L110–L116 (sonidos de interfaz)** → `[ ]`: `03-Diseno` §7 está
+  bloqueado porque el proyecto tiene **cero** assets `.wav`/`.ogg`/`.mp3`.
+- **No ejecuté las suites en este lote** (no se tocó GDScript): solo
+  documentación. Las 3 suites siguen en **265 checks, 0 fallos**.
+
+### Recomendaciones para el próximo agente
+
+- **M91 está en 86% con un solo `[?]`.** Ya no queda trabajo de diseño
+  propio pendiente: lo que resta es de **otros módulos** (M53 menú, M58
+  accesibilidad, M87 i18n) o es **bloqueante externo** (assets de audio,
+  hardware del usuario).
+- **Al liberar, M91 debe salir `🟡 Con dudas`, nunca `✅`**: el `[?]` de L88
+  lo impide (§21.2 y §21.6). Mientras el lock siga a mi nombre, la fila de
+  `CHECKLIST-GLOBAL.md` no se toca.
+- Si algún día se necesita HRTF real, las opciones están escritas en
+  `03-Diseno` §5.1.1 (plugin binaural, o aceptar el panorama estéreo actual).

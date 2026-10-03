@@ -19,6 +19,7 @@
 - [x] Log creado: **1203** — M91 lote 6: contraste Especificación RF1-RF15 (10 rollup) + L102 + L216/L277/L285 → checklist 173→187
 - [x] Log creado: **1204** — M91 lote 7: Audio 3D (03-Diseno §5 20→119 lineas con API sondeada en 4.7.2; hallazgo SIN HRTF en el motor -> L88 `[?]`; 5 items `[x]`; fix del `[x]` falso L227 AudioEffectEQ) + checklist 187→192/46/1
 - [x] Log creado: **1206** — M91 lote 8: H-1 RESUELTO (el runner SI descubre S1; era la etiqueta --module m91, no el descubrimiento; evidencia --module audio 8/8 OK y --module subtitle 1/1 OK; sin renombrar nada) + hallazgo: testing.yml usa GdUnit4 con || true y nunca falla
+- [x] Log creado: **1208** — M91 lote 9: secciones de PRUEBAS completas (03-Diseno §11 y §19 reescritas de esqueleto a 11.1-11.7 y 19.1-19.5 con API sondeada) + correccion de API de Godot 3 en 3 documentos (get_device_list/set_device/get_device -> get_output_device_*) + 14 items `[x]` + notas anti-inflado en L18/L22/L23/L151 + checklist 192→206/32/1 (86%)
 
 ## Módulo ACTIVO — 91-Configuracion-De-Audio
 
@@ -27,8 +28,8 @@
 > performance de M131). Complejidad 1 — ideal para vos.
 
 **Fuente de verdad:** `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md`
-(192 [x] / 46 [ ] / 1 [?], 239 ítems totales — avance al cierre del lote 7
-2026-10-02 2026-10-02). Lee ese archivo ANTES de empezar; las tareas de abajo son un
+(206 [x] / 32 [ ] / 1 [?], 239 ítems totales — avance al cierre del lote 9
+2026-10-02). Lee ese archivo ANTES de empezar; las tareas de abajo son un
 resumen, no la fuente.
 
 **Código real:**
@@ -59,17 +60,29 @@ M-06 (byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR),
 119 (✅ inflado), 118 (impresión visual ≠ diagnóstico).
 
 **Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
-1207 tras reservar el 1206, pero verificá — se mueve). Reserva con §6.1.a.
+1209 tras reservar el 1208, pero verificá — se mueve). Reserva con §6.1.a.
 
-**Pendiente de M91 (tras lote 8):** **H-1 CERRADO** — el runner sí
-descubre S1, solo fallaba la etiqueta `--module m91`; usar
-`--module audio` (S1+S2, 8/8 OK) y `--module subtitle` (S3, 1/1 OK).
-No renombrar `test_audio_config.gd`: rompería el `preload` de
-`scripts/editor/_colector_sintaxis.gd:38`. **Ya no queda ningún pendiente
-técnico propio**: los 46 `[ ]` + 1 `[?]` restantes son hardware (9),
-assets de audio (10), M53 (menú), M58, M87, AudioTestManager, pruebas de
-calidad, rollups, y **L88 HRTF** (`[?]` — Godot 4.7.2 no lo expone).
-Si se quiere CI real para M91, hay que migrar a GdUnit4 en `tests/` (módulo
-de CI).
+**Pendiente de M91 (tras lote 9):** **checklist en 206/32/1 (86%)** y ya
+**no queda trabajo de diseño propio**. Desglose real de los 32 `[ ]`:
+
+- **3 rollups** (L18, L22, L23) — miden *ejecución/sección completa*, no
+  diseño; tienen nota en el propio ítem para que no se inflen (Trampa 119).
+- **13 de M53 (menú)** — L147 (dropdown de dispositivo) y L198–L211
+  (sliders, toggles, dropdowns, botones de prueba).
+- **10 de sonidos de interfaz** — L110–L114, L116 y L240–L243: bloqueados
+  porque el proyecto tiene **cero** assets `.wav`/`.ogg`/`.mp3` (§7 sellada).
+- **2 de M58** — L107 (accesibilidad) y L171 (alto contraste).
+- **2 de M87** — L179 (subtítulos multi-idioma) y L181 (localización de
+  nombres de dispositivo).
+- **1 de M59** — L288 (trigger de guardado al cerrar settings).
+- **1 HRTF** — L151, depende del único `[?]` del módulo: **L88** (Godot
+  4.7.2 no expone HRTF; opciones escritas en `03-Diseno` §5.1.1).
+
+Referencias útiles del lote 8 (siguen vigentes): H-1 cerrado — usar
+`--module audio` (S1+S2, 8/8 OK) y `--module subtitle` (S3, 1/1 OK); **no**
+renombrar `test_audio_config.gd` (rompería el `preload` de
+`scripts/editor/_colector_sintaxis.gd:38`). CI real para M91 = migrar a
+GdUnit4 en `tests/` (eso es módulo de CI).
+
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, actualiza
 Última actividad en la fila 91. Nunca dejes 🔵 huérfano (§21.4.5).

@@ -15,12 +15,12 @@
 - [x] Cinemáticas — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF7: bus Cinematic, default 80%, slider 0-100% - testeado en test_audio_config (103 checks, 0 fallos)
 - [x] Audio 3D
 - [x] Subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF9: toggle + tamano 0.5x-2x + opacidad 0.2-1.0 + fondo toggle/color + color de texto - todos implementados y testeados en test_subtitles_m91 (80 checks, 0 fallos)
-- [ ] Sonidos de interfaz
+- [ ] Sonidos de interfaz — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): sus hijos L110-L114 y L116 siguen en [ ] a propósito y 03-Diseno §7 está **BLOQUEADO** (cero assets .wav/.ogg/.mp3 en todo el proyecto). Este rollup mide la SECCIÓN COMPLETA; no inflarlo con los 2 hijos sueltos que sí están en [x] (Trampa 119)
 - [x] Rango dinámico — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF11 pide selector (quieto/medio/dinamico) - DynamicRangeManager.RANGOS=["quiet","medio","dinamico"] + PRESETS + aplicar_rango()/rango_actual(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
 - [x] Compresión — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF12 pide toggle que limite picos - CompressionManager activar()/desactivar()/esta_activa() sobre threshold_db/ceiling_db/soft_clip; testeado en test_audio_effects_m91 (82 checks, 0 fallos)
 - [x] Dispositivo de salida — mimo-v2.6-flash-free 2026-10-02 (opencode): contrastado contra 01-Requerimientos RF13 pide selector (predeterminado/auriculares/altavoces) - OutputDeviceManager.CATEGORIAS_LISTA=["predeterminado","auriculares","altavoces","HDMI","Bluetooth"] + seleccionar_dispositivo() + dispositivos_reales(); testeado en test_audio_effects_m91 (82 checks, 0 fallos)
-- [ ] Pruebas con auriculares
-- [ ] Pruebas con altavoces
+- [ ] Pruebas con auriculares — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L150 [x], L152 [x], L157 [x]) y L151 queda [ ] por HRTF (ver L88 [?]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
+- [ ] Pruebas con altavoces — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): el DISEÑO está completo (L160, L161, L162, L163 y L167 todos [x]). Falta **EJECUTAR** con hardware real: este rollup mide ejecución, no diseño
 
 ### [S] Volúmenes
 - [x] Definir volumen maestro (slider 0-100%) — set_volumen("Master", v) linear→db (testeado)
@@ -142,29 +142,29 @@
 - [x] Definir altavoces — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
 - [x] Definir HDMI — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
 - [x] Definir Bluetooth — mimo-v2.6-flash-free 2026-10-02 (opencode): CATEGORIAS_LISTA
-- [x] Definir AudioServer.get_device_list() para lista de dispositivos
-- [x] Definir AudioServer.set_device() para cambiar dispositivo
+- [x] Definir AudioServer.get_output_device_list() para lista de dispositivos — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (el original dice `get_device_list()`, API de Godot 3; ver plan-inicial/05-Checklist.md:145). Real Godot 4.7.2: `AudioServer.get_output_device_list()` (sondeo T-107)
+- [x] Definir AudioServer.set_output_device() para cambiar dispositivo — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (el original dice `set_device()`, API de Godot 3; ver plan-inicial/05-Checklist.md:146). Real: `AudioServer.set_output_device()` (sondeo T-107)
 - [ ] Definir dropdown en settings para seleccionar dispositivo
 
 ### [S] Pruebas con auriculares
-- [ ] Definir estéreo (izquierda/derecha)
-- [ ] Definir espacial 3D (HRTF)
-- [ ] Definir balance de canales (izquierda/derecha)
+- [x] Definir estéreo (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.3 - tono de 200 Hz con AudioEffectPanner.pan=-1 durante 1,5 s, silencio, y luego pan=+1; comprobacion automatica leyendo get_bus_peak_volume_left/right_db
+- [ ] Definir espacial 3D (HRTF) — nota (2026-10-02, mimo-v2.6-flash-free 2026-10-02 (opencode)): Godot 4.7.2 NO expone HRTF (sondeo T-107; ver 03-Diseno §5.1.1 y L88 [?]). Queda [ ] hasta que el motor lo soporte o se adopte una alternativa definida
+- [x] Definir balance de canales (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - recorre los canales de get_bus_channels(), manda un tono de 1 s por canal y falla automaticamente si alguno queda por debajo de -60 dB
 - [x] Definir test de audio (sonido de prueba en cada canal)
 - [x] Definir AudioPlayer2D para estero
 - [x] Definir AudioPlayer3D para espacial 3D
 - [x] Definir AudioServer.set_bus_volume() para balance de canales
-- [ ] Definir test button en settings
+- [x] Definir test button en settings — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.7 - boton «Probar auriculares»: muestra el paso actual via la senal paso_cambiado y queda deshabilitado mientras corre el test (regla de la seccion 8); el menu es de M53
 
 ### [S] Pruebas con altavoces
-- [ ] Definir estéreo (izquierda/derecha)
-- [ ] Definir 5.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera)
-- [ ] Definir 7.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera, izquierda lateral, derecha lateral)
-- [ ] Definir balance de canales
+- [x] Definir estéreo (izquierda/derecha) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.3 - mismo procedimiento que L150 aplicado a los altavoces frontales
+- [x] Definir 5.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.6 - consulta AudioServer.get_speaker_mode(): si devuelve SPEAKER_SURROUND_51 recorre I, D, Centro, LFE, IT, DT; si devuelve SPEAKER_MODE_STEREO el test NO se ofrece y se explica al usuario
+- [x] Definir 7.1 (izquierda, derecha, centro, LFE, izquierda trasera, derecha trasera, izquierda lateral, derecha lateral) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.6 - igual que L161 con SPEAKER_SURROUND_71 y canales IL y DR
+- [x] Definir balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - procedimiento identico al de L152
 - [x] Definir test de audio (sonido de prueba en cada canal)
 - [x] Definir AudioServer.get_channel_count() para detectar canales
 - [x] Definir AudioServer.set_bus_channel_count() para configurar canales
-- [ ] Definir test button en settings
+- [x] Definir test button en settings — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.7 - boton «Probar altavoces» con el mismo patron que L157
 
 ### [S] Integración con M58 (Accesibilidad)
 - [x] Diseñar tamaño de subtítulos (slider 0.5x a 2x) — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno.md 6 (corregido 2026-10-02): rangos TAMANO_MIN 0.5 / TAMANO_MAX 2.0 documentados e implementados
@@ -261,16 +261,16 @@
 - [x] Diseñar método get_output_devices() — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: OutputDeviceManager.dispositivos() → AudioServer.get_output_device_list()
 - [x] Diseñar método set_output_device(device_name) — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: seleccionar(nombre) con validación contra la lista real
 - [x] Diseñar método get_current_device() — mimo-v2.6-flash-free 2026-10-02 (opencode): implementado: actual() → AudioServer.get_output_device()
-- [x] Diseñar AudioServer.get_device_list() para lista de dispositivos
-- [x] Diseñar AudioServer.set_device() para cambiar dispositivo
+- [x] Diseñar AudioServer.get_output_device_list() para lista de dispositivos — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (original en plan-inicial/05-Checklist.md:264). Implementado: OutputDeviceManager.dispositivos()
+- [x] Diseñar AudioServer.set_output_device() para cambiar dispositivo — mimo-v2.6-flash-free 2026-10-02 (opencode): texto corregido (original en plan-inicial/05-Checklist.md:265). Implementado: OutputDeviceManager.seleccionar() con validación contra la lista real
 
 ### [S] AudioTestManager
 - [x] Diseñar AudioTestManager
 - [x] Diseñar método test_headphones()
 - [x] Diseñar método test_speakers()
-- [ ] Diseñar test estéreo
-- [ ] Diseñar test espacial 3D
-- [ ] Diseñar test balance de canales
+- [x] Diseñar test estéreo — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.2/11.3 - AudioTestManager con senales test_iniciado / paso_cambiado / test_terminado, enum Test, y los 4 pasos del test (izquierda, silencio, derecha, veredicto)
+- [x] Diseñar test espacial 3D — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.4 - AudioStreamPlayer3D en circulo de 3 m alrededor del oido, vuelta completa en 8 s con attenuation_model y unit_size segun seccion 5.2; la variante HRTF depende de L88 y queda pendiente
+- [x] Diseñar test balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - recorrido de canales con medicion AUTOMATICA via get_bus_peak_volume_*_db, mas confirmacion manual por canal
 
 ### [S] Carga de configuración
 - [x] Diseñar AudioSettingsLoader
@@ -300,11 +300,11 @@
 ### [S] Pruebas de calidad
 - [x] Diseñar pruebas manuales (volúmenes, audio 3D, subtítulos, rango dinámico, compresión, dispositivo de salida, pruebas de audio)
 - [x] Diseñar pruebas automáticas (carga de configuración, aplicación de configuración, cambio de dispositivo de salida)
-- [ ] Diseñar pruebas de balance de canales
+- [x] Diseñar pruebas de balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 19.2 - automatica (fallo si canal < -60 dB) + manual por canal (hardware)
 - [x] Diseñar pruebas de sincronización de subtítulos — mimo-v2.6-flash-free 2026-10-02 (opencode): test_subtitles_m91.gd _test_race_condition: reloj obsoleto NO oculta al sustituto y reloj valido SI oculta (margenes >=0.25s)
-- [ ] Diseñar pruebas de espacialización 3D
+- [x] Diseñar pruebas de espacialización 3D — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 19.3 - recorrido audible izquierda -> atras -> derecha -> frente en 8 s; la variante HRTF depende de L88 ([?])
 - [x] Diseñar pruebas de compresión de audio
-- [ ] Diseñar pruebas de cambio de dispositivo de salida
+- [x] Diseñar pruebas de cambio de dispositivo de salida — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 19.4 - get_output_device_list() -> elegir -> get_output_device() -> tono de prueba -> volver; ejecucion real requiere dos dispositivos (hardware del usuario)
 
 ### [S] Plan de testings
 - [x] Diseñar 06-Plan-Testings.md (APLICA) — mimo-v2.6-flash-free 2026-10-02 (opencode): 06-Plan-Testings.md creado en plan-actual/ - 8 secciones (alcance, 3 suites, ~30 escenarios con criterio de éxito, casos limite, definicion de pasa, rendimiento, huecos, como ejecutar) + 07-Resultados-Testings.md
@@ -321,7 +321,7 @@
 **Total de ítems:** 227
 **Ítems resueltos por documentación:** 227
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
-**Totales:** 239 ítems · Completados: 192 · Pendientes: 46 · No resueltos: 1.
+**Totales:** 239 ítems · Completados: 206 · Pendientes: 32 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 147 [ ] / 0 [?].
