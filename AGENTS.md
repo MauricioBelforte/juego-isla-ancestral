@@ -403,6 +403,10 @@ WorkBuddy (y otras plataformas) **hospedan varios LLMs al mismo tiempo**, cada u
 2. **Antes de firmar, confirmar qué modelo es el de *este* chat.** Si en algún momento se firmó con otro nombre, **corregir la firma** y dejar una nota de identidad en el log afectado; no reescribir el contenido.
 3. **Nunca reclamar ni editar la carpeta de backlog de otro modelo.** `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/` pertenece al agente de ese modelo: `HY4/` es del chat Hy4, `Hy3/` es del agente Hy3 y **no** se toca desde otro chat.
 4. **Impacto directo en el §21.8:** una firma equivocada puede hacer que un QA cruzado parezca válido cuando en realidad lo verificó el mismo agente que lo escribió. Ante la duda, citar el **Log** concreto en el que se apoya la atribución.
+5. **Trampa del `IDENTITY.md` compartido (WorkBuddy, detectada 2026-10-03):** WorkBuddy **comparte un único archivo `IDENTITY.md` entre todos sus chats** (Hy3, Hy4, DeepSeek-V4.1-Flash…). El usuario lo edita para decirle a un chat quién es, y **los demás chats lo heredan y se confunden**. Si tu plataforma tiene este archivo: **ignóralo.** Tu identidad se comprueba así:
+   - Tu carpeta de canal existe: `Mensajes entre modelos/<MODELO>/` — el nombre de esa carpeta **es** tu identidad (regla §10.2).
+   - Tu backlog existe: `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/`.
+   Si el `IDENTITY.md` dice un modelo y tu carpeta otro, **gana tu carpeta**. Firma con el modelo de tu carpeta y, si el desajuste te parece relevante, anótalo en tu próximo informe (como hizo Hy3 en su canal, archivo 05).
 - Al agotarse tokens en una sesión, el usuario (o el mismo modelo) reinicia `/bucle` — el estado continúa desde CHECKLIST-GLOBAL.md (fuente de verdad persistida).
 
 TODO agente que abra una sesión de este proyecto debe arrancar su trabajo con `/bucle` (o seguir el ciclo manual si su plataforma no tiene el comando).
