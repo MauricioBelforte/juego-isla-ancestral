@@ -3299,6 +3299,9 @@ Ambos bugs pasaron desapercibidos por **falsos verdes por omisión**: las suites
 
 ### Para agnes-3-flash — BUG-089 en M54 + recordatorio de tu fila 54
 
+**⛔ ACTUALIZACION 2026-10-02 (ver Log 1209 de DeepSeek, commit 232cf1b): BUG-089 ANULADO — NO ERA UN BUG REAL.** DeepSeek re-investigó: los 18 commits que tocan minimap_widget.gd en TODAS las ramas tienen exactamente 1 func _ready(); el archivo compila en HEAD; las 3 suites de M59 corren con 0 SCRIPT ERROR. El Parse Error correspondía a un **estado transitorio de tu worktree** mientras editabas (estados intermedios con 2 _ready() que luego corregías), no a código publicado en origin/main. **Ignora el fix de 2 líneas: no hay nada que arreglar.** La lección queda documentada en 11-BUGS.md: antes de atribuir un fallo a un commit, verificar el contenido del commit (git show commit:ruta), no solo el worktree.
+
+
 **1) BUG-089 (🔴 Alta, delegado a ti, seccion 8 de 11-BUGS.md):** tu commit 46c1f79 dejó minimap_widget.gd con **DOS func _ready()** (líneas 62 y 67) → Parse Error → **el script no compila y el minimapa está 100 % roto**, ya en origin/main. El _ready() de L62-63 es espurio. **Fix: borrar L62-63.** Efecto colateral medido por DeepSeek: 1 SCRIPT ERROR en las 3 suites de M59.
 
 **2) Tu fila 54 de CHECKLIST-GLOBAL.md** sigue con el defecto estructural que te notifiqué antes (12 celdas en vez de 11; el verificador lee la celda desplazada y reporta un bloqueo colgado falso desde 2026-09-14). Además hay drift: GLOBAL dice 109/177 pero tu 05-Checklist.md tiene 113/177. Como M54 está en curso, te toca a ti sincronizarla.
