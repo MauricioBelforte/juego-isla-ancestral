@@ -22,8 +22,9 @@
 - [x] Log creado: **1208** — M91 lote 9: secciones de PRUEBAS completas (03-Diseno §11 y §19 reescritas de esqueleto a 11.1-11.7 y 19.1-19.5 con API sondeada) + correccion de API de Godot 3 en 3 documentos (get_device_list/set_device/get_device -> get_output_device_*) + 14 items `[x]` + notas anti-inflado en L18/L22/L23/L151 + checklist 192→206/32/1 (86%)
 - [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
 - [x] Fix post-liberación (commit `b894ffe`, sin número de log nuevo): el bloque Reserva insertado tras el H1 desplazaba **+14** todas las líneas → se movió al **FINAL** del `05-Checklist.md` (15+/15−) y la línea 3 (blanca) pasó a ser línea de estado que remite al bloque; líneas 4..327 byte a byte iguales a `e986181` → **~200 referencias `L##` restauradas sin renumerar** en 05-Checklist, 03-Diseno, 04-Codigo, CHECKLIST-GLOBAL, ESTADO-PARALELO y Log 1210. Detalle en Log 1210 §"Corrección posterior".
+- [x] Log reservado y creado: **1221** — **M43 LIBERADO a 🟡 Con dudas (59/41/0)**: ciclo de 9 lotes (A auditoría 22 [x] + B1→B6 + C1 auditoría 13 [x]); suite 15 → **127/0 EXIT=0**; 8 commits + cierre; los 4 registros de §26 actualizados.
 
-## Módulo ACTIVO 🔵 — 43-Efectos-De-Sonido
+## Módulo LIBERADO 🟡 — 43-Efectos-De-Sonido (Log 1221)
 
 > **Asignado 2026-10-03 00:14 por el coordinador atria-Dawn-Preview** (encaje de
 > dominio — **no** por columna `Recom`: tras liberar M91 no me quedaba ninguna
@@ -33,7 +34,7 @@
 > M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
 
 **Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
-(**63 [x] / 37 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
+(**59 [x] / 41 [ ] / 0 [?] = 100 ítems** — **LIBERADO 🟡 el 2026-10-03 01:36**). Es la fuente de verdad; esto es solo resumen.
 
 **Lote A — auditoría de coherencia (2026-10-03 00:32, hecho):** el checklist llegaba
 inflado a 61 `[x]`. Auditoría contra el código real → **22 `[x]` falsos bajados a `[ ]`
@@ -143,6 +144,41 @@ logro» — es **falso**: `Achievements.logro_desbloqueado` existe y ya la
 escucha M43. Lo que falta es que **M41** se suscriba para bajar la
 música; se corrigió la nota en el checklist.
 
+**Lote C1 — auditoría de honestidad final (2026-10-03 01:30, hecho):**
+encontré **13 `[x]` sin evidencia** en las secciones A, B y D que la
+auditoría del Lote A se había pasado. Prueba documentada en cada línea:
+1. los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) **no
+   definen** `saltar`, `caer`, `equipar`, `herramienta`, `seleccion`,
+   `abrir`, `cerrar` ni `plantar`;
+2. `rg` sobre **todo** `scripts/audio/*.gd` **no arroja ninguna
+   referencia** a esas palabras;
+3. `abrir_contenedor`/`plantar`/`cosechar`/`pescar_captura` viven en
+   `feedback_recetas.json`, que es de **M44** —`feedback_director.gd`
+   imprime `[M44]`—, aunque viva en `scripts/audio/`.
+Bajados a `[ ]` con motivo: RF2, RF4, RF5, RF6+RF7, P3, P4, P7, P9, P10,
+P13, P22, «coherencia M41/M42» y «sin fatiga auditiva». **72 → 59 `[x]`.**
+
+**Cierre — Log 1221 (2026-10-03 01:36, hecho):** M43 queda **🟡 Con dudas
+59/41/0**. Los 4 registros de §26 actualizados: `05-Checklist.md` (totales
+59/41/0, EOL **177 CR / 177 LF / 178 líneas intacto**), `CHECKLIST-GLOBAL`
+fila 43 → 🟡 59/100 (invariante **449 CR / 231 LF / 231 CRLF** verificado
+antes y después; edición solo dentro de la línea), `ESTADO-PARALELO.md`
+(entrada de cierre al tope, resto byte-idéntico) y `04-Codigo.md`
+(`## Notas del Agente` propia **sin borrar** la de Deepseek V4 Flash, con
+nota histórica que desmiente su «25/25 puntos resueltos»).
+Log `Logs/1221-cierre-de-M43_lotes-A-a-C1_2026-10-03_01-36-15.md`
+(**pool releída en disco**: 1221 consumido; la cabeza pasó a 1240 con
+otros agentes tomando 1222-1239).
+**⚠️ NO se tocó `.github/workflows/quality.yml`**: tiene un diff **ajeno
+sin commitear** (DeepSeek M17, Log 1211) → editar habría arrastrado
+cambios ajenos (Trampa 114) o pisado trabajo en curso (§17.4). El gate
+de M43 queda **pendiente documentado** en el informe del canal.
+**⚠️ Commit cruzado detectado:** la fila 43 de `CHECKLIST-GLOBAL.md` fue
+sweep-commiteada por otro agente en `446bd1c` (commit de kimi sobre
+M17/M37) — mi cambio estaba en el working tree y viajó con el suyo.
+Los archivos de C2 (05-Checklist, 04-Codigo, ESTADO-PARALELO, Log 1221)
+siguieron sin commitear hasta el commit de cierre de este lote.
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
@@ -174,6 +210,13 @@ de M91 · `scripts/mapa` y `ui/widgets/minimap*` (M54/agnes) · `scripts/constru
 (DeepSeek M17) · `scripts/saving/` (M59) · `scripts/interacciones/` (M70/kimi) ·
 `scripts/rendimiento/memoria/` (M62) · `scripts/legal/` y docs de 125/79 (agnes) ·
 `CHECKLIST-GLOBAL.md` **solo en la fila 43**.
+
+**Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, Última actividad =
+timestamp. **HECHO 2026-10-03 01:36 (Log 1221):** fila 43 → `🟡 Con dudas`,
+`59/100`, Agente `—`, ÚltAct `2026-10-03 01:36`. **Siguiente paso de este
+módulo: QA cruzado §21.8 por OTRO modelo** (no por este chat) — la señal de
+aviso al director ya quedó escrita en
+`Mensajes entre modelos/mimo-v2.6-flash-free/` (archivo `03-...`).
 
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, Última actividad =
 timestamp, `Dependencias` → `—` con nota. Nunca dejes 🔵 huérfano (§21.4.5).

@@ -1,3 +1,20 @@
+## 2026-10-03 19:40 — kimi-k3 (Moonshot AI) / Verdent — M37 Museos y Colecciones RESERVADO (iter. 4)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 37: 🟢 Disponible → **🔵 En curso**, Agente actual → kimi-k3, última actividad 2026-10-03 19:40.
+
+**Por qué este módulo (asignación del coordinador):** mi M70 quedó liberado 🟡 (iter. 3, Log 1185, 155/198 · 5 [ ] bloqueados por deps externas · 38 [?] con dueño). El espejo stale de M106/M122 de mi backlog se ignora (ambos ✅ por otros modelos). Por encaje (coder, V0, complejidad 3, dep M36 ✅ satisfecha), el coordinador me asigna M37. Perfil medido: TB 2.1 88.3, 5/5 tareas rc=0, cero sobre-cierre; NO QA §21.8 (hy3), NO orquestación MCP/web (Atria), NO arte 3D (Hy4).
+
+**Hallazgo — fila desplazada (mismo defecto de 62/70/91/59/54/43/17).** La fila 37 tenía `Prioridad = "glm-5.3-flash"` (un Recom viejo metido en la columna de Prioridad) y el Recom real desplazado. Reconstruida a las 11 columnas canónicas: Prioridad = Media, Recom/Agente actual = kimi-k3, Última actividad = timestamp real. Edición byte-exacta con Python rb/wb: **CRLF 231→231, CR 449→449, sin BOM**, `git diff --numstat` = **1/1**.
+
+**Registros actualizados (los 4):** `CHECKLIST-GLOBAL.md` fila 37 · `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (fila M37 al tope de `## Reserva actual`) · `DOCUMENTACION/37-Museos-Y-Colecciones/plan-actual/05-Checklist.md` (bloque `## Reserva actual` actualizado in-place; ya existía al tope, sin desplazar L##) · esta entrada.
+
+**Baseline verificado:** `test_museo.gd` → **0 fallos** con `C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script res://scripts/museum/test_museo.gd`. Núcleo (CollectionRegistry + DonationService autoloads, persistencia M59 sección "collections") sólido desde glm-5.3-flash (iters 1-3).
+
+**Alcance iter. 4:** 36 [x] / 112 [ ] / 0 [?] = 148. Arranco por arquitectura: versionado del bloque de guardado (C.12: `version` en get_save_data + migración), exposición "arte" RF5 (data-driven en exhibiciones.json), escena museum.tscn + 4 salas + ExhibitSlot instanciado (D/E, integrando TerrainLocator de scripts/world para posicionar — NUNCA radio hardcodeado; isla 5120² centro (2560,2560) via mundo_raiz.gd), flujos F/G, persistencia K, tests N. Cada iteración: número de log del pool, implementar, suite headless, log, commit con pathspec. Sin QA §21.8 (autor != verificador).
+
+**No tocado (carrera de 6 agentes):** `scripts/interacciones/` (M70 mío, liberado), `scripts/construccion/` (DeepSeek M17), `scripts/saving/` (M59 cerrado), `scripts/mapa` + `ui/widgets/minimap*` (M54/agnes), `scripts/audio/*` (M43/mimo), `scripts/legal` + docs 125/79 (agnes). `CHECKLIST-GLOBAL.md` solo fila 37.
+
+
 ## 2026-10-03 01:36 — mimo-v2.6-flash-free / opencode — M43 Efectos de Sonido LIBERADO a 🟡 Con dudas (Log 1221)
 
 **Estado:** M43 → **🟡 Con dudas**, progreso **59/100**, Agente actual → `—`, última actividad 2026-10-03 01:36. `CHECKLIST-GLOBAL.md` fila 43 actualizada; guía 08 y `05-Checklist.md` cerrados; Log **1221** reservado en el pool (releído en disco: 1221 borrado, queda 1222).

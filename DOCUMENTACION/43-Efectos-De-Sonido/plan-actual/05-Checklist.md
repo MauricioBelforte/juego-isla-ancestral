@@ -12,27 +12,27 @@
 - [x] Registrar dependencias: M06/M07, M13/M17, M34, M35, M20, M21, M45; relaciones M41/M42 [S]
 - [x] Catalogar los 25 puntos de la sección 42 [S]
 - [x] RF1: pasos por superficie (6 tipos × 4+) [S]
-- [x] RF2: acciones de movimiento (saltar, caer, nadar) [S]
+- [ ] RF2: acciones de movimiento (saltar, caer, nadar) [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `saltar`/`caer`/`nadar` en datos de M43.
 - [x] RF3: interacciones con bloques [S]
-- [x] RF4: recoger, abrir/cerrar, equipar, herramientas [S]
-- [x] RF5: pesca, crafting, comercio, diálogo [S]
-- [x] RF6+RF7: UI SFX y volumen dinámico (3D + ducking) [S]
+- [ ] RF4: recoger, abrir/cerrar, equipar, herramientas [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. Hay `recoger` (tono), pero **no** `abrir`/`cerrar`/`equipar`/`herramienta`.
+- [ ] RF5: pesca, crafting, comercio, diálogo [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. Hay `crafting_exito`/`compra`/`venta` (tonos), pero **no** pesca ni diálogo.
+- [ ] RF6+RF7: UI SFX y volumen dinámico (3D + ducking) [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. Queda a medias: ducking ✓ (B5) y volumen ✓ (B4), pero **3D ✗** (ver L69/L70, pendientes de los `.wav`).
 
 ## B. Resolución de los 25 puntos del plan (25)
 
 - [x] P1: pasos — 6 superficies × 4+ variaciones, pitch ±4% [S]
 - [ ] P2: correr — ritmo doble +3 dB (M34) [S]
-- [x] P3: saltar — despegue suave por superficie [S]
-- [x] P4: caer — 3 rangos de altura, sin violencia [S]
+- [ ] P3: saltar — despegue suave por superficie [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `saltar` en ningún dato de M43.
+- [ ] P4: caer — 3 rangos de altura, sin violencia [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `caer` en ningún dato de M43.
 - [ ] P5: nadar — entrada/avance/salida (M34) [S]
 - [ ] P6: recoger — click + nota aguda positiva [S]
-- [x] P7: abrir — 3 variaciones (madera/cerrojo) [S]
+- [ ] P7: abrir — 3 variaciones (madera/cerrojo) [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. La única receta de esta acción es `feedback_recetas.json`, que es de **M44** (`feedback_director.gd` imprime `[M44]`); M43 no lo define. `abrir_contenedor` está en M44, no en `sfx_tones`/`sfx_catalog`.
 - [ ] P8: cerrar — golpe seco corto [S]
-- [x] P9: equipar — swish + clic, 2 variaciones [S]
-- [x] P10: herramienta — por tipo, 4 variaciones [S]
+- [ ] P9: equipar — swish + clic, 2 variaciones [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `equipar` ni `swish` en ningún dato de M43.
+- [ ] P10: herramienta — por tipo, 4 variaciones [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `herramienta` en ningún dato de M43 (P10 se apoyaba en esto).
 - [x] P11: bloque roto — por material, 5 variaciones [S]
 - [x] P12: bloque colocado — impacto corto, 4 variaciones [S]
-- [x] P13: plantar — tierra + grano, 3 variaciones [S]
+- [ ] P13: plantar — tierra + grano, 3 variaciones [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. La única receta de esta acción es `feedback_recetas.json`, que es de **M44** (`feedback_director.gd` imprime `[M44]`); M43 no lo define. `plantar` está en `feedback_recetas.json` (M44).
 - [ ] P14: regar — chorrito + goteo corto [S]
 - [ ] P15: cosechar — follaje + nota de logro ligera [S]
 - [ ] P16: pescar — cast/splash/bote/reel (M35) [S]
@@ -41,7 +41,7 @@
 - [ ] P19: venta — monedas + nota media, distinto [S]
 - [ ] P20: diálogo — click de UI (M21) [S]
 - [ ] P21: menú — papel/pergamino suave [S]
-- [x] P22: selección — clic corto muy suave [S]
+- [ ] P22: selección — clic corto muy suave [S] — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. No hay `seleccion` en ningún dato de M43.
 - [x] P23: confirmación — 2 notas ascendentes 5ª [S]
 - [ ] P24: error — triada menor descendente 0.4 s [S]
 - [ ] P25: logro — arpegio triada mayor 3 notas [S]
@@ -131,13 +131,13 @@
 
 ## I. Integración y Mantenimiento (4 ítems)
 
-- [x] Verificar coherencia de SFX con M41 (Música) y M42 (Sonido Ambiental)
+- [ ] Verificar coherencia de SFX con M41 (Música) y M42 (Sonido Ambiental) — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. Es FALSO: M41 no define escala ni leitmotifs (ver L51/L58, ambos `[ ]`).
 - [x] Actualizar catálogo de SFX cuando se agreguen nuevas superficies
-- [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
+- [ ] Verificar que SFX no generan fatiga auditiva en sesiones largas — ⚠️ 2026-10-03 (mimo): **[x] sin evidencia — bajado en la auditoría C1**. Prueba: los 3 JSON de M43 (`sfx_tones`/`sfx_catalog`/`sfx_surfaces`) no definen el efecto y no hay referencia en todo `scripts/audio/*.gd`; sin definición de datos la API no tiene nada que reproducir. Es FALSO sin audio real: ver L117 `[ ]` (agnes no pudo QA con audio).
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 72 · Pendientes: 28 · No resueltos: 0.
-**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **127/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3 + 20 API pública §2 B4 + 10 ducking F92/F95 B5 + 21 suscripciones §3 B6). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). **Lote B4 (2026-10-03)** cerró F98 + G106-G108 + G115 (API de §2). **Lote B5 (2026-10-03)** cerró F92, F95 y F96 (ducking de diálogo + error amable). **Lote B6 (2026-10-03)** cerró G114 (7 suscripciones §3 a logros, crafting y tienda). Quedan **28 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
+**Totales:** 100 ítems · Completados: 59 · Pendientes: 41 · No resueltos: 0.
+**Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **127/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3 + 20 API pública §2 B4 + 10 ducking F92/F95 B5 + 21 suscripciones §3 B6). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). **Lote B4 (2026-10-03)** cerró F98 + G106-G108 + G115 (API de §2). **Lote B5 (2026-10-03)** cerró F92, F95 y F96 (ducking de diálogo + error amable). **Lote B6 (2026-10-03)** cerró G114 (7 suscripciones §3 a logros, crafting y tienda). Quedan **41 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente
 
