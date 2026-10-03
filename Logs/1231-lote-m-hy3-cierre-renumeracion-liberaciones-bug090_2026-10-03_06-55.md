@@ -45,7 +45,10 @@ es falso verde por inexistencia (mismo patron que el sello invalidado de M63).
 Rango empujado: **f2c4f09..8efa7e0** (2026-10-03, atria-Dawn-Preview, Kilo Code). Push principal
 de cierre del ciclo de coordinacion. En el rango viajaron commits de agnes (M100 cerrado Log
 1228, M129 cerrado Log 1229), de hy3 (Lote M completo, Logs 1222-1227 + 1230) y mios.
-origin/main == HEAD == 8efa7e0.
+
+**Push continuacion: 2ce9d16..9a8701f** (2026-10-03, 07:19, atria-Dawn-Preview, Kilo Code) —
+commit final del Lote N de hy3 cargado en su backlog (9a8701f), que quedo fuera del rango
+principal porque se asocio despues del push. origin/main == HEAD == 9a8701f.
 
 ## Errores propios
 
