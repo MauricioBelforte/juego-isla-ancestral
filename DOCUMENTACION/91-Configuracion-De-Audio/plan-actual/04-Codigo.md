@@ -1190,3 +1190,65 @@ GDExtension de terceros (Resonance / Steam Audio), DSP propio como
   aceptar pan+atenuación). Marcar L88 solo cuando se elija.
 - El resto de pendientes es de **M53, M58, M87 o hardware**: no queda
   trabajo técnico propio salvo H-1.
+
+
+## Notas del Agente — Iteración 8 (Lote 8: H-1 resuelto)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-02
+**Estado:** Completado — **sin cambios de checklist** (192/46/1/239)
+
+### Qué era H-1
+
+`tools/ci/run_tests.py --module m91` no ejecutaba `test_audio_config.gd`.
+Quedó anotado en el lote 5 como «dueño del módulo de CI, no de M91».
+
+### Qué era en realidad
+
+No era un problema de **descubrimiento**, sino de **etiqueta**:
+
+- `find_test_files()` busca `test_*.gd` recursivo bajo `scripts/` y `tests/`
+  → `scripts/audio/test_audio_config.gd` **sí se encuentra**.
+- `--module X` filtra con `X in ruta_completa`: la cadena `"m91"` no está en
+  la ruta de S1 (`test_audio_config.gd`), aunque sí en las otras dos.
+
+### Evidencia (ejecutado 2026-10-02, 0 fallos)
+
+| Comando | Resultado |
+|---|---|
+| `run_tests.py --module audio --timeout 180` | **8 OK, 0 FAIL** en 20.8 s — `test-audio_config` (**S1**, 103 checks), `test-audio_effects_m91` (**S2**, 82) y además M41/M42/M43/M44/M84/M150 |
+| `run_tests.py --module subtitle --timeout 180` | **1 OK, 0 FAIL** en 63.9 s — `test-subtitles_m91` (**S3**, 80) |
+
+`out/test-report.json` ya estaba en `.gitignore` (línea 183): sin artefactos.
+
+### Decisión: NO renombrar el archivo
+
+La alternativa que yo mismo había anotado (renombrar a
+`test_audio_config_m91.gd`) habría **roto**
+`scripts/editor/_colector_sintaxis.gd:38` — `const _g28 := preload(
+"res://scripts/audio/test_audio_config.gd")` — y obligado a tocar ~15
+referencias en documentos. **No hacía falta**: la suite ya se descubre.
+
+### Hallazgo adicional (para el dueño del módulo de CI)
+
+`.github/workflows/testing.yml` **no usa** `run_tests.py`: corre GdUnit4
+sobre `res://tests` y **todos** sus pasos terminan en `|| true`, así que ese
+workflow **nunca falla**. Las suites de M91 son `extends SceneTree`, no
+GdUnit4, y quedan fuera de ese camino. Anotado en `07-Resultados` §4 H-1.
+
+### Archivos tocados
+
+- `06-Plan-Testings.md` §2 → comandos corregidos con la tabla de evidencia.
+- `07-Resultados-Testings.md` §4 → H-1 marcado ✅ RESUELTO.
+- **`05-Checklist.md` sin cambios** — H-1 nunca fue un ítem.
+
+### Recomendaciones para el próximo agente
+
+- **H-1 queda cerrado**: desaparece el único «pendiente técnico propio»
+  que quedaba en M91. Lo que resta es **hardware del usuario (9), assets de
+  audio (10), M53 (12+), M58, M87, AudioTestManager, pruebas de calidad y el
+  `[?]` de HRTF (L88)**.
+- Si se quiere cobertura de CI real para M91, hay que migrar las suites a
+  **GdUnit4** dentro de `tests/` — eso es módulo de CI, no de M91.
+- Las 3 suites siguen en verde: **265 checks, 0 fallos**.

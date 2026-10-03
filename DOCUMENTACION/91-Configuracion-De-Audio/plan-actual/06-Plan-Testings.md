@@ -45,12 +45,20 @@ con su hardware. Este plan deja definido *qué* tiene que escuchar.
 | S2 | `test_audio_effects_m91.gd` | `… --script res://scripts/audio/test_audio_effects_m91.gd` | **82** | L314, L315, L316, regresión de buses |
 | S3 | `test_subtitles_m91.gd` | `… --script res://scripts/ui/test_subtitles_m91.gd` | **50** | L313 (y regresión de S3) |
 
-**Total: 265 checks.** La suite runner de CI es
-`python tools/ci/run_tests.py --module m91 --godot C:\Temp\godot\godot472.exe --timeout 180`.
+**Total: 265 checks.** El runner es `python tools/ci/run_tests.py`
+(el binario se autodetecta; forzar con `--godot`). Sin `--module` corre todo;
+por dominio:
 
-> ⚠️ **S1 no la descubre el runner** — `--module` filtra por *substring de la
-> ruta*, y `test_audio_config.gd` no contiene "m91". S1 se corre directo
-> (documentado en `04-Codigo.md`). Ver §7.
+| Comando | Resultado medido 2026-10-02 |
+|---|---|
+| `--module audio --timeout 180` | **8 OK, 0 FAIL** (20.8 s) — incluye **S1** y **S2** |
+| `--module subtitle --timeout 180` | **1 OK, 0 FAIL** (63.9 s) — **S3** |
+
+> ✅ **H-1 resuelto 2026-10-02 · mimo-v2.6-flash-free 2026-10-02 (opencode)** — S1 **sí** la descubre el runner:
+> `find_test_files()` busca `test_*.gd` recursivo bajo `scripts/` y `tests/`.
+> Lo que fallaba era solo la **etiqueta** `--module m91` (esa cadena no
+> aparece en ninguna ruta). **No hizo falta renombrar ningún archivo** ni
+> tocar `tools/ci/run_tests.py`. Detalle en `07-Resultados` §4 H-1.
 
 ---
 

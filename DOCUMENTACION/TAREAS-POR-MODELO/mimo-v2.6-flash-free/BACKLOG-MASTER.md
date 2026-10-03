@@ -18,6 +18,7 @@
 - [x] Log creado: **1201** — M91 lote 5: 06-Plan-Testings.md + 07-Resultados (265 checks en verde) + checklist 168→173
 - [x] Log creado: **1203** — M91 lote 6: contraste Especificación RF1-RF15 (10 rollup) + L102 + L216/L277/L285 → checklist 173→187
 - [x] Log creado: **1204** — M91 lote 7: Audio 3D (03-Diseno §5 20→119 lineas con API sondeada en 4.7.2; hallazgo SIN HRTF en el motor -> L88 `[?]`; 5 items `[x]`; fix del `[x]` falso L227 AudioEffectEQ) + checklist 187→192/46/1
+- [x] Log creado: **1206** — M91 lote 8: H-1 RESUELTO (el runner SI descubre S1; era la etiqueta --module m91, no el descubrimiento; evidencia --module audio 8/8 OK y --module subtitle 1/1 OK; sin renombrar nada) + hallazgo: testing.yml usa GdUnit4 con || true y nunca falla
 
 ## Módulo ACTIVO — 91-Configuracion-De-Audio
 
@@ -58,16 +59,17 @@ M-06 (byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR),
 119 (✅ inflado), 118 (impresión visual ≠ diagnóstico).
 
 **Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
-1205 tras reservar el 1204, pero verificá — se mueve). Reserva con §6.1.a.
+1207 tras reservar el 1206, pero verificá — se mueve). Reserva con §6.1.a.
 
-**Pendiente de M91 (tras lote 7):** queda **1 `[?]` + 46 `[ ]`**, todos
-bloqueos reales: **L88 HRTF** (no existe en Godot 4.7.2 — elegir entre
-GDExtension / DSP propio / aceptar pan+atenuación), 12 de M53 (menú),
-10 de assets de audio (0 `.wav`/`.ogg`/`.mp3` en el proyecto), 9 de
-hardware del usuario, 3 de AudioTestManager (no creado), 3 de pruebas de
-calidad, 3 rollups, 5 de M58/M87. **Nada técnico propio salvo H-1:**
-`tools/ci/run_tests.py --module` no descubre `test_audio_config.gd`
-(es substring de la ruta). Cuando entre la primera fuente 3D, implementar
-`03-Diseno` §5.7 (bus propio + LPF + raycast desde el oído).
+**Pendiente de M91 (tras lote 8):** **H-1 CERRADO** — el runner sí
+descubre S1, solo fallaba la etiqueta `--module m91`; usar
+`--module audio` (S1+S2, 8/8 OK) y `--module subtitle` (S3, 1/1 OK).
+No renombrar `test_audio_config.gd`: rompería el `preload` de
+`scripts/editor/_colector_sintaxis.gd:38`. **Ya no queda ningún pendiente
+técnico propio**: los 46 `[ ]` + 1 `[?]` restantes son hardware (9),
+assets de audio (10), M53 (menú), M58, M87, AudioTestManager, pruebas de
+calidad, rollups, y **L88 HRTF** (`[?]` — Godot 4.7.2 no lo expone).
+Si se quiere CI real para M91, hay que migrar a GdUnit4 en `tests/` (módulo
+de CI).
 **Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, actualiza
 Última actividad en la fila 91. Nunca dejes 🔵 huérfano (§21.4.5).

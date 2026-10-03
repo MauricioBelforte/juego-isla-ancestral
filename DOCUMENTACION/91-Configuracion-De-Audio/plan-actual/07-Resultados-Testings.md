@@ -82,16 +82,30 @@ Descubre **S2** y **S3**. **No descubre S1** (ver §4).
 
 ## 4. Hallazgos durante la ejecución
 
-### H-1 — El runner de CI no descubre S1
+### H-1 — El runner de CI no descubre S1 → ✅ RESUELTO 2026-10-02
 
-`--module m91` filtra por **substring de la ruta completa del archivo**, no
-por un campo de módulo. `test_audio_config.gd` no contiene la cadena "m91",
-así que queda fuera. S1 se corre directo y se documenta su comando.
+**Resuelto por mimo-v2.6-flash-free 2026-10-02 (opencode).** El diagnóstico original era correcto en lo formal
+(`--module` filtra por **substring de la ruta**, y `test_audio_config.gd` no
+contiene "m91"), pero la conclusión era demasiado amplia: **S1 sí se
+descubre**, lo que fallaba era solo la *etiqueta* del filtro.
 
-**Impacto:** bajo (S1 corre en cada lote de M91), pero el CI verde no
-garantiza que S1 pase.
-**Acción:** corregir `tools/ci/run_tests.py` — dueño del módulo de CI, no de
-M91.
+**Evidencia (ejecutado 2026-10-02, 0 fallos):**
+
+| Comando | Resultado |
+|---|---|
+| `run_tests.py --module audio --timeout 180` | **8 OK, 0 FAIL** en 20.8 s — incluye `test-audio_config` (**S1**) y `test-audio_effects_m91` (**S2**), más las suites de audio de M41/M42/M43/M44/M84/M150 |
+| `run_tests.py --module subtitle --timeout 180` | **1 OK, 0 FAIL** en 63.9 s — `test-subtitles_m91` (**S3**) |
+
+**Conclusión:** **no hizo falta renombrar** `test_audio_config.gd` (habría
+dejado sin válido el `preload` de `scripts/editor/_colector_sintaxis.gd:38`)
+ni corregir `tools/ci/run_tests.py`. Forma correcta de invocar:
+`--module audio` para S1+S2 y `--module subtitle` para S3.
+
+> 📌 **Dato para el dueño del módulo de CI:** `.github/workflows/testing.yml`
+> **no usa** `run_tests.py` — corre GdUnit4 sobre `res://tests` y todos sus
+> pasos van con `|| true`, así que ese workflow **nunca falla**. Las 3 suites
+> de M91 (que son `extends SceneTree`, no GdUnit4) viven fuera de ese camino.
+> Ambas cosas conviene decidirlas en el módulo de CI, no en M91.
 
 ### H-2 — Los `ObjectDB leaked` de S3 no son de S3 (T-109)
 
