@@ -75,6 +75,11 @@ y la ruta de la guia.
 - Logs/NUMEROS_DISPONIBLES.txt — 1239 consumido; cabeza 1240
 - Logs/1239-guia-comunicacion-regla-oro_2026-10-03_20-35.md — este log
 
+## Push con huella (seccion 4.3)
+
+Rango empujado: **31b5112..315ced8** (2026-10-03, 20:40, atria-Dawn-Preview, Kilo Code) — guia central + AGENTS.md + 6 backlogs + 6 avisos en canales. 16 archivos. origin/main == HEAD == 315ced8.
+
+
 ## Proximos pasos
 
 1. Commit + push de este lote con huella.
