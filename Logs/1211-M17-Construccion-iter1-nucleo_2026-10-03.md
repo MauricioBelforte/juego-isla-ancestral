@@ -104,3 +104,16 @@ EOL preservado (843 -> 854 CRLF; el archivo es CRLF).
 
 - M17 queda **En curso (iter. 1)**. NO sella 21.8.
 - Siguiente: preview/ghost, catalogo de 12 familias, integracion M18, badges de QA.
+
+## Huella de push (AGENTS.md 4.3)
+
+- Rango publicado: `8e9efcb..4282ffd` (codigo M17 iter. 1) + el commit de esta huella
+  (Log 1211) como tip de `main`.
+- Hora: 2026-10-03 19:48 (-0300).
+- Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy).
+- Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- Commits propios: `4282ffd` (M17 iter. 1) + el commit de esta huella.
+- Commits ajenos en el rango: 2 (M168: `bf0d494` Plantilla-De-Isla 104/104 y `987ef31`
+  log 1236 + pool). Se publican como catch-up.
+- Verificacion post-push: `HEAD == origin/main` (tip = commit de esta huella).
+
