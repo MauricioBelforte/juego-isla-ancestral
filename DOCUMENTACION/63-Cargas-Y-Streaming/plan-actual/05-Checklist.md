@@ -208,3 +208,17 @@
 - Integración real con M08/M09/M27/M28 (mallas de chunk, geometría de océano/subterráneo) → `[?]`.
 - M12 (anillo de cámara), M47 (mips), M53 (arte), M90 (Deck), M113/M114 (profiler/recorrido) → `[?]`.
 - Re-verificar §21.8 con un no-autor antes de volver a sellar M63.
+
+## QA cruzado §21.8 — Hy3 (Log 1222, 2026-10-03)
+
+Re-verificación independiente del sello invalidado (Log 856 se apoyó en la suite muerta `test_stream_m63.gd`). Verificador hy3/WorkBuddy ≠ autor (DeepSeek-V4.1-Flash) ⇒ legítimo §21.8.
+
+- **Binario real (godot 4.7.2):** 4 suites M63 VIVAS y AFIRMATIVAS del camino de éxito:/n  - `test_stream_m63.gd` (canónica, guardián 3 capas, piso 29 MEDIDO): **29/0, EXIT 0**.
+  - `test_stream_m63_iter5.gd`: **51/0, EXIT 0** — handshake M62<->M63 real: `[M62] descarga DESCARTADA: recurso en carga por M63 ()` en stderr (bloque B).
+  - `test_stream_m63_iter6.gd`: **42/0, EXIT 0**.
+  - `test_stream.gd`: **21/0, EXIT 0**.
+  - **Total: 143 checks / 0 fallos / EXIT 0**.
+- **Anti-falso-verde:** la suite nombra cada bloque no ejecutado (capa 3 `_summary()`) y exige piso MEDIDO; guardián **reproducido en ROJO por inyección** (1 `_check` forzado false → EXIT 1, 1 fallo). Una suite muerta ya no da '0 fallos'.
+- **DoD:** checklist 67[x]/7[ ]/27[?]; los 7[ ] y 27[?] tienen dueño externo documentado (0 sin dueño). 0[?] propios sin documentar.
+- **Veredicto:** ✅ **Verificado por Hy3/WorkBuddy (Log 1222, §21.8).** Confirma y mantiene el sello Log 1195. KnownIssues: 27[?] delegados a dueños externos (no bloquean).
+- Detalle: `Logs/1222-m63-qa21.8-reverificacion_2026-10-03.md`.
