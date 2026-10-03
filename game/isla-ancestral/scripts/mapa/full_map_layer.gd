@@ -289,3 +289,23 @@ func _crear_pin_en_jugador() -> void:
 		return
 	var wp: Vector3 = (player as Node3D).get_global_position()
 	mm.agregar_pin(int(wp.x), int(wp.y), int(wp.z), "", "pin_jugador")
+	_show_pin_list()
+
+## Muestra lista de pines con fecha (M29) y navegación por foco
+func _show_pin_list() -> void:
+	var mm := get_node_or_null("/root/MapManager")
+	if mm == null:
+		return
+	var pines: Array = mm.pines()
+	var panel := PanelContainer.new()
+	panel.position = Vector2(10, 60)
+	var vbox := VBoxContainer.new()
+	panel.add_child(vbox)
+	add_child(panel)
+	for i in range(pines.size()):
+		var p: Dictionary = pines[i]
+		var lbl := Label.new()
+		var fecha: String = String(p.get("fecha", ""))
+		lbl.text = "%d. %s (%s, %s) [fecha: %s]" % [i + 1, String(p.get("nota", "—")), String(p.get("x", "")), String(p.get("z", "")), fecha]
+		vbox.add_child(lbl)
+	panel.visible = not pines.is_empty()
