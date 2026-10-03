@@ -33,8 +33,18 @@
 > M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
 
 **Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
-(**61 [x] / 39 [ ] / 0 [?] = 100 ítems** — todos los pendientes `[S]`, 0 bloqueos).
-Leelo ANTES de empezar; esto es solo resumen.
+(**41 [x] / 59 [ ] / 0 [?] = 100 ítems**). Leelo ANTES de empezar; esto es solo resumen.
+
+**Lote A — auditoría de coherencia (2026-10-03 00:32, hecho):** el checklist llegaba
+inflado a 61 `[x]`. Auditoría contra el código real → **22 `[x]` falsos bajados a `[ ]`
+con motivo inline** (Trampa 119 / §21.4.3) y **2 submarcados subidos a `[x]`** con
+evidencia (madera/tierra ×4). 26 líneas modificadas, **0 líneas insertadas** →
+las `L##` no se movieron. Suite `test_sfx_m43.gd` = **15/0 OK, EXIT=0**.
+Brecha real detectada (diseño `04-Codigo.md` §2 vs runtime):
+`reproducir_localizado`, `configurar_volumen`, `sfx_catalog`, `sfx_tones`,
+ducking, distancias 15/20/30 m, límites por categoría, test de señales →
+**ninguno existe**; y el proyecto tiene **0 assets de audio** (§7 sellada).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
