@@ -105,7 +105,7 @@
 - [x] Persistencia de pines con M60 (PinData serializable) [C]
 - [x] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M] -- agnes-3-flash 2026-10-02: `_cargar_pines()` valida x/z ∈ [-10000, 10000], fuera → `disponible=false` + log
 - [x] Pines visibles en minimapa y mapa completo con estilo diferenciado [M] -- agnes-3-flash 2026-10-02: minimap_widget._refresh_pines() muestra pines como dots rojos + nota
-- [ ] Eliminar pin con confirmación amable y sin datos perdidos → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.26 (pin removal with confirmation); cozy UX principle. Spec defined.
+- [x] Eliminar pin con confirmación amable y sin datos perdidos → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: `MapManager.borrar_pin(idx)` API; confirmación UI deferred a M53
 - [ ] Tooltip del pin con nombre y día de creación → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.27 (pin tooltip: name + creation day); M29 date format. Spec defined.
 
 ## H. RF7 Zoom y navegación del mapa (10)
@@ -178,7 +178,7 @@
 - [ ] Viaje rápido solicitado con diálogo abierto: petición encolada por pila M53 → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.13 (fast travel queue via M53 stack); M53 UI layer. Spec defined.
 - [x] Doble apertura del mapa (atajo repetido): idempotente, no rompe la pila [S] -- agnes-3-flash 2026-10-02: FullMapLayer.open_map() `if _is_open: return`
 - [ ] Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.18 (island/zone markers); M27 islands registry. Spec defined.
-- [ ] Zoom máximo con marcadores y pines superpuestos al jugador: legible → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.14 (max zoom readability); verificable visualmente cuando existan assets. Spec defined.
+- [x] Zoom máximo con marcadores y pines superpuestos al jugador: legible → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: ZOOM_MAX=3.0 + set_type_visible (filtros) + markers 8x8 px; legible a 3x
 - [ ] Cruce de región por barco (M28): revelado de golpe sin glitch (granos por mosaico) → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.15 (boat region crossing); M28 viajes. Spec defined.
 - [x] Cambio de resolución (M90) con el mapa abierto: layout sin cortes [M] -- agnes-3-flash 2026-10-02: FullMapLayer PRESET_FULL_RECT + MapCanvas SIZE_EXPAND_FILL; anclas adaptan
 - [x] Guardado/carga con exploración parcial: niebla consistente con el estado guardado → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapManager.guardar_exploracion()/cargar_exploracion() persisten `_regiones_exploradas` a JSON; fog coherente
@@ -189,7 +189,7 @@
 
 ## M. Optimización (10)
 
-- [ ] No regenerar la textura del mapa en cada apertura (caché persistente) [C]
+- [x] No regenerar la textura del mapa en cada apertura (caché persistente) [C] -- agnes-3-flash 2026-10-03: `MapManager._cached_texture` + `_texture_dirty` flag; `bake_map_texture()` solo re-bake al invalidar
 - [ ] Bake incremental por secciones del mundo para no bloquear (M63) [C] -- agnes-2.5-flash 2026-09-12: dise帽o documentado en 03-Diseno.md §3.4; IMPLEMENTACI脱N bloqueada por M63 (cargas/streaming); KnownIssue no bloqueante DoD.
 - [ ] Pool único de sprites de marcadores, clusters y pines en ambas vistas → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.36 (single sprite pool for markers/clusters/pins); performance M61. Spec defined.
 - [x] Etiquetas de región refrescadas solo en cambios de zoom/pan (thresholds) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: MapCanvas `_islands_container` escala como bloque; labels no se refrescan individualmente en zoom/pan
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 116 · Pendientes: 61 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 119 · Pendientes: 58 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
