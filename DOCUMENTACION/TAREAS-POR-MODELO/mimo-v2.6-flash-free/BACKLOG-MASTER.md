@@ -85,10 +85,28 @@ evalúan ANTES del corte por prioridad. Suite +`_test_categorias()`:
 (checklist 57 → 63 `[x]`). Siguen `[ ]` en D: 3D/2D y distancias 15/20/30 m
 (sin `AudioStreamPlayer`: bloqueado por 0 assets de audio, §7).
 
+**Lote B4 — API pública de 04-Codigo §2 (2026-10-03 01:40, hecho):**
+`sfx_manager.gd` gana la firma de §2 `reproducir(efecto, pos, prioridad,
+categoria)` (el 2º argumento pasó a ser `pos`; `null` = 2D/UI y `Vector3`
+se registra en la voz), `reproducir_localizado(tipo, material, pos)` (resuelve
+variaciones: `paso` lee `surfaces`, `romper`/`colocar` generan por convención),
+`configurar_volumen(bus, dB)` — **delegado en `AudioConfig`/M91**, sin tocar
+`scripts/configuracion/` — y `pausar()/reanudar()` con purga de residuos
+(F99: el `tiempo_ms` se desplaza por la pausa y la vencida se purga).
+Suite +`_test_api()` (18 checks) y +2 de L115 (pool lleno no corta la UI):
+**76 → 96 checks, 0 fallos, EXIT=0**. Cierra **5 items** (checklist 63 → 68
+`[x]`, 37 → 32 `[ ]`): F98, G106, G107, G108, G115.
+**F99 `Pausa con GameClock` queda `[ ]` con nota honesta:** la API existe y
+está testeada, pero **nadie la enlaza con `GameTime.pausa()`** (M29).
+**Incidencia de test (documentada):** la primera corrida dio 2 fallos porque
+`_test_api()` heredaba el pool lleno de tests previos y el límite §5 de UI
+(máx 2) descartaba legítimamente a `api_ui` — el código estaba bien; se hizo
+el test determinista (pool vacío al entrar).
+
 
 **Código real (escrito por este chat en iteraciones previas):**
 - `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
-  (**suite de referencia: 76/0, ya descubierta por el runner**)
+  (**suite de referencia: 96/0, ya descubierta por el runner**)
 - Vecinos con los que hay que integrar, **no reimplementar**:
   `music_director.gd` (M41), `ambient_director.gd` (M42),
   `feedback_director.gd` (M44), `audio_config_service.gd` (M91),

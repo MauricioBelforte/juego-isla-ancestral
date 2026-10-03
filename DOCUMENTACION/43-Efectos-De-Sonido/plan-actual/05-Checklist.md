@@ -95,24 +95,24 @@
 - [ ] SFX por debajo de diálogo en jerarquía [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no hay jerarquía de canales: solo una prioridad numérica 0-10
 - [ ] Error 0.4 s no punitivo [S]
 - [ ] Ningún SFX estridente (cozy) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): el proyecto tiene 0 assets de audio (.wav/.ogg/.mp3): no se puede verificar
-- [ ] Volumen configurable por bus (M91) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): `configurar_volumen()` no existe en `sfx_manager.gd`
-- [ ] Pausa con GameClock sin residuos (M29) [S]
+- [x] Volumen configurable por bus (M91) [S] — ✅ Lote B4 (2026-10-03, mimo): `SFXManager.configurar_volumen(bus, dB)` implementado y **delegado en `AudioConfig` (M91)** (M43 NO toca `scripts/configuracion/`); convierte dB → lineal y valida el bus (inexistente → false); verificado por `test_sfx_m43.gd` **96/0 OK**
+- [ ] Pausa con GameClock sin residuos (M29) [S] — ⚠️ 2026-10-03 (mimo): la API `SFXManager.pausar()/reanudar()` **existe y está testeada** (3 checks: reproducir en pausa → false · la pausa no añade voces · la voz vencida se purga al reanudar = sin residuos), pero **falta el enlace con M29**: nadie llama `pausar()` cuando `GameTime.pausa()` se activa. API ✓ / integración ✗
 
 ## G. Data y configuración (8)
 
 - [x] sfx_catalog.tres (catálogo) [S] — ✅ Lote B2 (2026-10-03): `sfx_catalog.json` con las 12 filas de `03-Diseno §3` (6 paso + 5 romper + 1 colocar) ; verificado por `test_sfx_m43.gd` **59/0 OK**; implementado como **`sfx_catalog.json`** (mismo criterio que `sfx_tones`: todo el data de audio de M43 es JSON, consistente con `sfx_surfaces.json`)
 - [x] sfx_surfaces.tres (materiales) [S] — ✅ Lote B2 (2026-10-03): `sfx_surfaces.json` ampliado a 9 superficies (hierba, nieve, arena nuevas; piedra 4 → 5; se conservan agua/metal/cristal) ; verificado por `test_sfx_m43.gd` **59/0 OK**
 - [x] sfx_tones.tres (familia tonal) [S] — ✅ Lote B1 (2026-10-03): `sfx_tones.json` + API `tono()` en SFXManager; verificado por `test_sfx_m43.gd` **35/0 OK**; implementado como **`sfx_tones.json`** (consistente con `sfx_surfaces.json`, que ya era JSON a pesar de figurar como `.tres`; lo carga `SFXManager.tones`)
-- [ ] API: reproducir(efecto, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): la API real es `reproducir(tipo: String, prioridad: int)`: sin `pos` ni concepto de efecto
-- [ ] API: reproducir_localizado(tipo, material, pos) [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe; agnes-2.5-flash lo listó en «Lo que NO pude hacer» y aun así quedó [x]
-- [ ] API: configurar_volumen() [S] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe en `sfx_manager.gd`
+- [x] API: reproducir(efecto, pos) [S] — ✅ Lote B4 (2026-10-03, mimo): firma de `04-Codigo §2` `reproducir(efecto: String, pos: Variant = null, prioridad = 5, categoria = "")`; `pos = null` es 2D/UI y con `Vector3` se registra en la voz (`"pos"`); las 7 llamadas legadas del test pasaron a `null`; verificado por `test_sfx_m43.gd` **96/0 OK**
+- [x] API: reproducir_localizado(tipo, material, pos) [S] — ✅ Lote B4 (2026-10-03, mimo): implementado; resuelve las variaciones del material (§3) — `paso` lee `sfx_surfaces.json`, `romper`/`colocar` generan por convención — y registra la `pos`; devuelve `""` si el material no existe; verificado por `test_sfx_m43.gd` **96/0 OK**
+- [x] API: configurar_volumen() [S] — ✅ Lote B4 (2026-10-03, mimo): `configurar_volumen(bus: String, db: float) -> bool` delega en `AudioConfig.set_volumen()` (M91); verificado con bus inexistente → false y SFX a -6 dB ≈ 0.501 lineal (restaurando el volumen previo); verificado por `test_sfx_m43.gd` **96/0 OK**
 - [x] Suscripciones M34/M13/M17/M35/M20/M45/M21 listadas [S]
 - [x] Sin hardcode de paths [S]
 
 ## G2. Pruebas (4)
 
 - [ ] Test: cada señal dispara su SFX (M112) [M] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe test de señales en `test_sfx_m43.gd` (12 checks: superficies, pool, prioridad)
-- [ ] Test: pool 24 voces sin cortes de UI [M] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): el test cubre pool/prioridades pero no hay límite ni test de cortes de UI
+- [x] Test: pool 24 voces sin cortes de UI [M] — ✅ Lote B3+B4 (2026-10-03, mimo): `_test_categorias()` asegura "pool sigue en el tope de 24" y que la 3ª UI se descarta por su propio máximo (2); `_test_api()` añade el caso contrario: pool lleno con 24 pasos de prioridad 1 y la UI **entra** cortando a un paso («nunca se corta»); verificado por `test_sfx_m43.gd` **96/0 OK**
 - [ ] Test: ducking diálogo/logro correcto [M] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): no existe test de ducking para M43
 - [ ] Test: recorrido M114 sin fatiga auditiva [M] — ⚠️ auditoría 2026-10-03 (mimo-v2.6-flash-free): agnes-2.5-flash lo listó en «Lo que NO pude hacer» (QA con audio real pendiente)
 
@@ -136,7 +136,7 @@
 - [x] Verificar que SFX no generan fatiga auditiva en sesiones largas
 - [x] Documentar lecciones de diseño sonoro para futuros módulos
 
-**Totales:** 100 ítems · Completados: 63 · Pendientes: 37 · No resueltos: 0.
+**Totales:** 100 ítems · Completados: 68 · Pendientes: 32 · No resueltos: 0.
 **Nota:** el runtime de M43 está implementado y verificado: SFXManager autoload con pool de **24 voces preallocadas** (slots fijos, `null` = libre; B3), prioridades y límite duro (corta la menor prioridad, jamás apila), variaciones por superficie (9 superficies, 4–5 c/u) y API `reproducir`/`reproducir_superficie`. Test headless `test_sfx_m43.gd` **76/0 OK** (15 base de superficies/pool/prioridad + 20 familia tonal B1 + 24 catálogo y superficies §3 B2 + 17 categorías §2 y límites §5 B3). **Auditoría 2026-10-03 (mimo-v2.6-flash-free):** 22 ítems `[x]` no verificables bajaron a `[ ]` con su motivo inline (Trampa 119 — §21.4.3: un `[x]` falso es peor que un `[?]`) y 2 submarcados (madera/tierra ×4) subieron a `[x]` con evidencia. **Lote B1 (2026-10-03)** cerró C52-C57 + G105 (familia tonal). **Lote B2 (2026-10-03)** cerró 8 del mapa §3 (E) + G103 (catálogo). **Lote B3 (2026-10-03)** cerró 6 de prioridades/pool (D). Quedan **37 `[ ]`**: los implementables headless (API 3D, catálogos, familia tonal, límites por categoría, ducking, pausa M29, test de señales) y los bloqueados por **0 assets de audio** en el proyecto (§7 sellada) → `[?]` al cierre si el compositor no entrega.
 
 ## Notas del Agente

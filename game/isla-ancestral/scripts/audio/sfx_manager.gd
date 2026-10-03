@@ -22,6 +22,12 @@
 # bloque/paso con nivel_s2 + prioridad interna invertida), límites de §5
 # (≤ 6 del mismo tipo, UI máx 2 simultáneos), pool **preallocado a 24
 # slots** y PRNG cacheado con semilla del reloj M29.
+#
+# Lote B4 (2026-10-03, mimo-v2.6-flash-free): API pública de 04-Codigo §2
+# — `reproducir(efecto, pos, prioridad, categoria)` (firma de §2, el 2º
+# argumento pasa a ser `pos`), `reproducir_localizado`,
+# `configurar_volumen(bus, dB)` (delega en AudioConfig/M91) y
+# `pausar()/reanudar()` con purga de residuos.
 
 extends Node
 
@@ -51,6 +57,8 @@ var tones: Dictionary = {}
 var catalog: Dictionary = {}
 var _voces: Array = []  # MAX_VOCES slots preallocados (§5); null = libre
 var _rng := RandomNumberGenerator.new()  # único y cacheado: sin allocs por evento
+var _pausado: bool = false  # API §2 pausar()/reanudar()
+var _pausa_inicio: int = 0
 
 func _ready() -> void:
 	_voces.resize(MAX_VOCES)  # prealocación estática de 24 voces (§5)
@@ -163,10 +171,81 @@ func reproducir_superficie(superficie: String, prioridad: int = 5) -> String:
 	return variacion
 
 ## Reproduce un SFX directo con prioridad. Aplica límite duro del pool.
-func reproducir(tipo: String, prioridad: int = 5, categoria: String = "") -> bool:
-	return _reproducir(tipo, prioridad, categoria)
+## 04-Codigo §2: `reproducir(efecto, pos)`. `pos = null` es un SFX 2D (UI);
+## con `Vector3` se registra como espacial (la emisión 3D queda a la espera de
+## `AudioStreamPlayer3D`, §7). `prioridad`/`categoria` son de §2 y §5.
+func reproducir(efecto: String, pos: Variant = null, prioridad: int = 5, categoria: String = "") -> bool:
+	return _reproducir(efecto, prioridad, categoria, pos)
 
-func _reproducir(tipo: String, prioridad: int, categoria: String = "") -> bool:
+## 04-Codigo §2: `reproducir_localizado(tipo, material, pos)`. Resuelve las
+## variaciones del material en el catálogo §3 y registra la posición. Devuelve
+## la variación elegida o "" si el tipo/material no existe en §3.
+func reproducir_localizado(tipo: String, material: String, pos: Vector3) -> String:
+	var variaciones := _variaciones_de(tipo, material)
+	if variaciones.is_empty():
+		return ""
+	var v := String(variaciones[_rng.randi_range(0, variaciones.size() - 1)])
+	_reproducir("%s_%s" % [tipo, material], 5, tipo, pos)
+	return v
+
+## §3: variaciones de un (tipo, material). "paso" lee `sfx_surfaces.json`
+## (nombres reales); "romper"/"colocar" solo declaran conteo en el catálogo,
+## así que los nombres se generan por convención `<tipo>_<material>_<n>`.
+func _variaciones_de(tipo: String, material: String) -> Array:
+	if tipo == "paso":
+		return surfaces.get(material, {}).get("variaciones", [])
+	var n := catalogo_variaciones(tipo, material if tipo != "colocar" else "")
+	if n <= 0:
+		return []
+	var pref: String = "colocar_" if tipo == "colocar" else "%s_%s_" % [tipo, material]
+	var out: Array = []
+	for i in range(n):
+		out.append("%s%d" % [pref, i + 1])
+	return out
+
+## 04-Codigo §2: volumen de un bus en dB (0 = sin cambio, -6 dB ≈ 50 %).
+## Delega en AudioConfig (M91), dueño del árbol de buses y de la persistencia:
+## M43 NO toca `scripts/configuracion/` ni su data.
+func configurar_volumen(bus: String, db: float) -> bool:
+	var ac: Node = Engine.get_main_loop().root.get_node_or_null("AudioConfig")
+	if ac == null or not ac.has_method("set_volumen"):
+		return false
+	var lineal: float = 0.0 if db <= -80.0 else pow(10.0, db / 20.0)
+	return bool(ac.set_volumen(bus, clampf(lineal, 0.0, 1.0)))
+
+## 04-Codigo §2: congela la reproducción de SFX. API propia de M43 — el
+## enlace con la pausa global de M29 (`GameTime.pausa()`) lo hace el llamador.
+func pausar() -> void:
+	if _pausado:
+		return
+	_pausado = true
+	_pausa_inicio = Time.get_ticks_msec()
+
+## Reanuda y purga los residuos (F99): las voces no envejecen mientras el
+## juego estuvo pausado (su `tiempo_ms` se desplaza por esa duración) y las
+## que ya estaban vencidas se purgan aquí mismo.
+func reanudar() -> void:
+	if not _pausado:
+		return
+	_pausado = false
+	var delta := Time.get_ticks_msec() - _pausa_inicio
+	for i in range(MAX_VOCES):
+		var v: Variant = _voces[i]
+		if v != null:
+			v["tiempo_ms"] = int(v["tiempo_ms"]) + delta
+	_purgar_vencidas()
+
+func _purgar_vencidas() -> void:
+	var ahora := Time.get_ticks_msec()
+	for i in range(MAX_VOCES):
+		var v: Variant = _voces[i]
+		if v != null and ahora - int(v["tiempo_ms"]) > 5000:
+			_voces[i] = null
+
+
+func _reproducir(tipo: String, prioridad: int, categoria: String = "", pos: Variant = null) -> bool:
+	if _pausado:
+		return false  # §2: en pausa no se emite nada nuevo
 	var ahora := Time.get_ticks_msec()
 	# Limpiar voces viejas (> 5 s) -> slot libre del pool preallocado
 	for i in range(MAX_VOCES):
@@ -184,7 +263,7 @@ func _reproducir(tipo: String, prioridad: int, categoria: String = "") -> bool:
 	# Slot libre en el pool preallocado (24 fijos, sin append)
 	for i in range(MAX_VOCES):
 		if _voces[i] == null:
-			_voces[i] = {"tipo": tipo, "prioridad": prioridad, "categoria": cat, "tiempo_ms": ahora}
+			_voces[i] = {"tipo": tipo, "prioridad": prioridad, "categoria": cat, "tiempo_ms": ahora, "pos": pos}
 			return true
 	# Pool lleno: corta la de menor prioridad si la nueva es mayor
 	var idx_min := -1
@@ -195,7 +274,7 @@ func _reproducir(tipo: String, prioridad: int, categoria: String = "") -> bool:
 			min_prio = p
 			idx_min = i
 	if idx_min >= 0 and prioridad > min_prio:
-		_voces[idx_min] = {"tipo": tipo, "prioridad": prioridad, "categoria": cat, "tiempo_ms": ahora}
+		_voces[idx_min] = {"tipo": tipo, "prioridad": prioridad, "categoria": cat, "tiempo_ms": ahora, "pos": pos}
 		return true
 	return false  # descartada (límite duro)
 

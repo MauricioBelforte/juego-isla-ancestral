@@ -13,6 +13,9 @@
 #
 # Lote B2 (2026-10-03, mimo-v2.6-flash-free): + _test_catalogo() contra
 # Lote B3 (2026-10-03, mimo-v2.6-flash-free): + _test_categorias() (§2 +
+# Lote B4 (2026-10-03, mimo-v2.6-flash-free): + _test_api() (§2: pos,
+# localizado, configurar_volumen, pausa). `reproducir()` cambió de firma
+# (el 2º argumento es ahora `pos`), así que sus 7 llamadas llevan `null`.
 # límites §5: ≤6 por tipo, UI máx 2, pool preallocado, PRNG cacheado).
 # data/audio/sfx_catalog.json (03-Diseno §3, 12 filas) y superficies a 9.
 
@@ -30,6 +33,7 @@ func _run() -> void:
 	_test_pool()
 	_test_prioridad()
 	_test_categorias()
+	_test_api()
 	_test_tonos()
 	_test_catalogo()
 	_summary()
@@ -74,23 +78,23 @@ func _test_pool() -> void:
 # Llenar el pool hasta 24 (1 ya existe del test de superficies, caben 23 más)
 	var ok_llenar = true
 	for i in range(23):
-		if not sfx.reproducir("sfx_%d" % i, 1):
+		if not sfx.reproducir("sfx_%d" % i, null, 1):
 			ok_llenar = false
 			break
 	_check("pool lleno a 24 (1 existente + 23 nuevas)", ok_llenar and sfx.voces_activas() == 24, "voces=%d" % sfx.voces_activas())
 	# Pool lleno: nueva voz de mayor prioridad reemplaza la menor (prioridad 1)
-	var ok_alta = sfx.reproducir("sfx_importante", 10)
+	var ok_alta = sfx.reproducir("sfx_importante", null, 10)
 	_check("prioridad alta reemplaza en pool lleno", ok_alta and sfx.voces_activas() == 24, "ok=%s voces=%d" % [ok_alta, sfx.voces_activas()])
 	# Pool lleno: nueva voz de menor prioridad se descarta
-	var ok_baja = sfx.reproducir("sfx_trivial", 0)
+	var ok_baja = sfx.reproducir("sfx_trivial", null, 0)
 	_check("prioridad baja descartada (límite duro)", ok_baja == false and sfx.voces_activas() == 24, "ok=%s voces=%d" % [ok_baja, sfx.voces_activas()])
 
 func _test_prioridad() -> void:
 	print("--- Prioridades básicas ---")
 	var sfx := root.get_node_or_null("SFXManager")
 	# Reset: limpiar voces viejas es complejo en test; verificamos API básica
-	_check("reproducir prioridad media", sfx.reproducir("test_medio", 5) == true)
-	_check("reproducir prioridad alta", sfx.reproducir("test_alto", 9) == true)
+	_check("reproducir prioridad media", sfx.reproducir("test_medio", null, 5) == true)
+	_check("reproducir prioridad alta", sfx.reproducir("test_alto", null, 9) == true)
 
 ## Categorías de 03-Diseno §2 y límites de §5 (pool preallocado, ≤6 por
 ## tipo, UI máx 2, PRNG cacheado). Corre con el pool ya lleno por _test_pool.
@@ -121,13 +125,13 @@ func _test_categorias() -> void:
 	_check("categoría explícita se respeta", sfx.categoria_de(1, "ui") == "ui")
 
 	# §2: con 2 UI ya activas (_test_pool + _test_prioridad), la 3ª se corta
-	var ui_ok: bool = sfx.reproducir("ui_extra", 10)
+	var ui_ok: bool = sfx.reproducir("ui_extra", null, 10)
 	_check("UI: 3ª simultánea descartada (máx 2)", ui_ok == false, "ok=%s" % ui_ok)
 
 	# §5: ≤ 6 del mismo tipo -> la 7ª se corta (las 6 primeras entran)
 	var siete_ok := true
 	for i in range(7):
-		var r: bool = sfx.reproducir("mismo_tipo", 5)
+		var r: bool = sfx.reproducir("mismo_tipo", null, 5)
 		if r != (i < 6):
 			siete_ok = false
 	_check("≤ 6 del mismo tipo (la 7ª se corta)", siete_ok, "rango roto")
@@ -138,6 +142,99 @@ func _test_categorias() -> void:
 	_check("pool preallocado a 24 slots", sfx._voces.size() == 24, "n=%d" % sfx._voces.size())
 	_check("PRNG cacheado (sin allocs por evento)", sfx._rng is RandomNumberGenerator)
 	_check("randi del RNG dentro de rango", sfx._rng.randi_range(0, 3) in [0, 1, 2, 3])
+
+## API pública de 04-Codigo §2. Corre con el pool VACÍO: los límites de §5
+## (ui máx 2) descartaban legítimamente a `api_ui` si heredaba el estado de
+## los tests anteriores, y así el resultado no depende del orden de ejecución.
+func _voz_de(sfx: Node, tipo: String) -> Variant:
+	for i in range(24):
+		var v: Variant = sfx._voces[i]
+		if v != null and String(v["tipo"]) == tipo:
+			return v
+	return null
+
+func _test_api() -> void:
+	print("--- API pública §2 ---")
+	var sfx := root.get_node_or_null("SFXManager")
+	if sfx == null:
+		_check("SFXManager presente (API)", false)
+		return
+	# Estado inicial determinista: pool vacío y sin pausa heredada.
+	for i in range(24):
+		sfx._voces[i] = null
+	if sfx._pausado:
+		sfx.reanudar()
+	_check("pool vaciado antes de la API", sfx.voces_activas() == 0,
+		"activas=%d" % sfx.voces_activas())
+
+	# reproducir(efecto, pos)
+	_check("reproducir(efecto, pos) -> true", sfx.reproducir("api_pos", Vector3(1, 2, 3), 4))
+	var vz: Variant = _voz_de(sfx, "api_pos")
+	_check("pos Vector3 registrada en la voz", vz != null and vz["pos"] is Vector3,
+		"vz=%s" % str(vz))
+	_check("pos null = 2D/UI", sfx.reproducir("api_ui", null, 9))
+	var vz2: Variant = _voz_de(sfx, "api_ui")
+	_check("voz 2D registrada sin pos", vz2 != null and vz2["pos"] == null)
+
+	# reproducir_localizado(tipo, material, pos)
+	var loc: String = sfx.reproducir_localizado("paso", "madera", Vector3(0, 1, 0))
+	_check("localizado paso/madera -> golpe_madera_N", loc.begins_with("golpe_madera"),
+		"v=%s" % loc)
+	var rom: String = sfx.reproducir_localizado("romper", "piedra", Vector3(2, 1, 0))
+	_check("localizado romper/piedra -> romper_piedra_N", rom.begins_with("romper_piedra"),
+		"v=%s" % rom)
+	var col: String = sfx.reproducir_localizado("colocar", "madera", Vector3(3, 1, 0))
+	_check("localizado colocar -> colocar_N", col.begins_with("colocar_"), "v=%s" % col)
+	var mal: String = sfx.reproducir_localizado("paso", "no_existe", Vector3.ZERO)
+	_check("localizado material desconocido -> ''", mal == "")
+
+	# configurar_volumen(bus, dB) -> delega en AudioConfig (M91)
+	var ac: Node = Engine.get_main_loop().root.get_node_or_null("AudioConfig")
+	_check("AudioConfig (M91) disponible", ac != null)
+	_check("bus inexistente -> false", sfx.configurar_volumen("NoExiste", -6.0) == false)
+	var prev: float = float(ac.get_volumen("SFX")) if ac != null else 1.0
+	_check("configurar_volumen(SFX, -6 dB) -> true", sfx.configurar_volumen("SFX", -6.0))
+	_check("SFX a -6 dB ≈ 0.501 lineal",
+		abs(float(ac.get_volumen("SFX")) - 0.5012) < 0.002, "v=%s" % str(ac.get_volumen("SFX")))
+	# restaurar el volumen previo (lineal -> dB)
+	if prev > 0.0:
+		sfx.configurar_volumen("SFX", 20.0 * log(prev) / log(10.0))
+
+	# pausar()/reanudar() sin residuos (F99)
+	sfx.pausar()
+	var voces_antes: int = sfx.voces_activas()
+	_check("reproducir en pausa -> false", sfx.reproducir("en_pausa", null, 5) == false)
+	_check("la pausa no añade voces", sfx.voces_activas() == voces_antes,
+		"antes=%d ahora=%d" % [voces_antes, sfx.voces_activas()])
+	# envenenar una voz con un timestamp de hace 60 s (vencida)
+	for i in range(24):
+		var vv: Variant = sfx._voces[i]
+		if vv != null:
+			sfx._voces[i]["tiempo_ms"] = Time.get_ticks_msec() - 60000
+			break
+	sfx.reanudar()
+	var voces_rean: int = sfx.voces_activas()
+	_check("reanudar purga solo la voz vencida (sin residuos)",
+		voces_rean == voces_antes - 1,
+		"esperaba %d y hay %d" % [voces_antes - 1, voces_rean])
+	_check("reanudar devuelve a reproducir", sfx.reproducir("post_pausa", null, 5))
+	var vz3: Variant = _voz_de(sfx, "post_pausa")
+	_check("la voz nueva tras reanudar es fresca",
+		vz3 != null and Time.get_ticks_msec() - int(vz3["tiempo_ms"]) <= 5000,
+		"vz3=%s" % str(vz3))
+	# limpiar el flag por si otro test lo hereda
+	if sfx._pausado:
+		sfx.reanudar()
+
+	# L115: el pool lleno con pasos de prioridad 1 jamás corta a la UI.
+	for i in range(24):
+		sfx._voces[i] = null
+	for i in range(24):
+		sfx.reproducir("relleno_%d" % i, null, 1)
+	_check("pool 24 exactos con pasos", sfx.voces_activas() == 24,
+		"voces=%d" % sfx.voces_activas())
+	var ui_final: bool = sfx.reproducir("ui_final", null, 10)
+	_check("pool lleno: la UI entra cortando a un paso (nunca se corta)", ui_final)
 
 ## Familia tonal (03-Diseno §4): 7 SFX de UI/eventos verificables por datos.
 ## NOTA: JSON.parse_string convierte todos los números a float, así que las
