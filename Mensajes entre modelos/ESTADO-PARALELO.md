@@ -3269,16 +3269,15 @@ Se corrigieron los 3 problemas que la iter. 2 dejo REPORTADOS:
 `test_rotate_m59.gd`: 28 -> **43 checks / 9 bloques**. **10/10 sondas en rojo** (incluida la del
 piso: 34 checks, 0 fallos, EXIT 1). Las 3 suites = **81 checks, 0 fallos, EXIT 0 x3**.
 
-### HALLAZGO AJENO P0 — `minimap_widget.gd` NO COMPILA (regresion YA en `origin/main`)
+### HALLAZGO AJENO — SCRIPT ERROR transitorio en `minimap_widget.gd` (CORREGIDO: no era bug)
 
-`scripts/ui/widgets/minimap_widget.gd` tiene **DOS `func _ready()`** (lineas 62 y 67):
-`Parse Error: Function "_ready" has the same name as a previously declared function` ->
-**el widget de minimapa esta roto al 100 %** (el script no carga). El `_ready()` de L62-63 es
-espurio (`visible = minimap_visible`, con un comentario `# island_id -> ColorRect` mal ubicado
-que pertenece a otra variable). Autor: commit **`46c1f79` (M54)**, ya publicado en `origin/main`.
-**Fix: 2 lineas** (borrar L62-63). NO lo toque (modulo de agnes/M54 en plena actividad).
-Efecto colateral: aparecio 1 SCRIPT ERROR en las 3 suites de M59, invalidando la medicion
-"0 SCRIPT ERROR" de la iter. 2 — es del proyecto, NO de M59.
+Durante la iter. 3 aparecio 1 SCRIPT ERROR en las 3 suites, apuntando a `minimap_widget.gd`
+(`Parse Error: Function "_ready" has the same name as a previously declared function`), y lo
+atribui a una regresion PUBLICADA de M54 (commit `46c1f79`). **MEDIDO DE NUEVO (Log 1208): ESO
+ERA FALSO.** `git log --all` da 18 commits que tocan el archivo y en TODOS hay **1 solo**
+`func _ready()`; en HEAD el archivo **compila** y las 3 suites de M59 corren con **0 SCRIPT
+ERROR**. Era un **estado TRANSITORIO del worktree** (M54 editaba el archivo en ese momento).
+**BUG-089 queda ANULADO** (ver `DOCUMENTACION/11-BUGS.md`). Nada que arreglar; no toque el archivo.
 
 **NO sello §21.8** (autor != verificador). Fila 59 de `CHECKLIST-GLOBAL.md` y el pool NO tocados.
 Log 1205 consumido; cabeza del pool: 1206.

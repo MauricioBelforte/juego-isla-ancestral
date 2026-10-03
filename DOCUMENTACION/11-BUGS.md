@@ -158,30 +158,41 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
-| BUG-089 | minimap_widget.gd: DOS func _ready() -> script NO COMPILA (regresion en origin/main) | M54 | 🔴 Alta | [ ] Abierto (delegado a agnes-3-flash) | DeepSeek-V4.1-Flash (Log 1205) | 2026-10-02 |
+| BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1208) | 2026-10-02 |
 
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
-### BUG-089 — minimap_widget.gd: DOS func _ready() -> el script NO COMPILA (regresión ya en origin/main)
+### BUG-089 — minimap_widget.gd: DOS func _ready() -> **[INVALIDO / CORREGIDO]**
 
-- **Fecha de reporte:** 2026-10-02
-- **Modulo(s) afectado(s):** **M54 (Mapa)** — game/isla-ancestral/scripts/ui/widgets/minimap_widget.gd (líneas 62 y 67).
-- **Severidad:** 🔴 **Alta.** Parse Error: Function _ready has the same name as a previously declared function → **el script no carga y el widget de minimapa está roto al 100 %.**
-- **Introducido por:** commit 46c1f79 (M54, agnes-3-flash), **ya publicado en origin/main**.
-- **Estado:** [ ] **Abierto, delegado a agnes-3-flash** (su módulo, en plena actividad). NO tocado por el coordinador (regla §21.4: no pisar módulos en curso).
-- **Reportado por:** DeepSeek-V4.1-Flash (Log 1205, 2026-10-02) — medición con Parse Error explícito y números de línea.
-**Qué pasa.** El _ready() de L62-63 es **espurio** (visible = minimap_visible, con un comentario # island_id -> ColorRect mal ubicado que pertenece a otra variable). Compiten dos _ready() en el mismo script y Godot rechaza la clase entera.
+- **Fecha de reporte:** 2026-10-02 (corregido 2026-10-02 por su propio autor)
+- **Modulo(s) afectado(s):** M54 (Mapa) — game/isla-ancestral/scripts/ui/widgets/minimap_widget.gd
+- **Estado:** [x] **CERRADO — NO ERA UN BUG REAL / NO ERA REGRESION PUBLICADA.**
+- **Reportado por:** DeepSeek-V4.1-Flash (Log 1205) · **Corregido por:** DeepSeek-V4.1-Flash (Log 1208)
 
-**Fix propuesto (2 líneas):** borrar L62-63. No degrada nada: el _ready() legítimo (L67) conserva la inicialización.
+**Correccion.** El reporte afirmaba que el archivo tenia DOS `func _ready()` (L62 y L67) ya
+publicados en `origin/main` (commit `46c1f79`). **Medido de nuevo, eso es FALSO:**
 
-**Efecto colateral medido:** apareció **1 SCRIPT ERROR** en las 3 suites de M59, invalidando la medición 0 SCRIPT ERROR de la iter. 2 — **es del proyecto, NO de M59.** Cualquier suite que toque la escena de UI lo hereda.
+- Los **18 commits** que tocan `minimap_widget.gd` (en TODAS las ramas, `git log --all`)
+  tienen **exactamente 1** `func _ready()`. Ninguno tiene 2. Verificado con
+  `git show <commit>:<ruta> | grep -c '^func _ready'`.
+- En `HEAD` el archivo **compila** (`--check-only` sin Parse Error) y las 3 suites de M59
+  corren con **0 SCRIPT ERROR**.
+- El Parse Error observado durante la iter. 3 de M59 correspondia a un **estado transitorio
+  del WORKTREE** (M54 estaba editando el archivo en ese momento: agnes guardaba estados
+  intermedios con 2 `_ready()`, luego los corregia). No era codigo publicado.
 
-**Delegación:** ver sección 8.
+**Leccion.** Una medicion tomada mientras otro agente edita un archivo compartido no es
+estable: el worktree puede estar en un estado intermedio. **Antes de atribuir un fallo a un
+commit, verificar el CONTENIDO DEL COMMIT** (`git show <commit>:<ruta>`), no solo el worktree.
+El error era real; la ATRIBUCION ("regresion publicada") no.
 
-**Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (reporte) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:55
+**Fix:** ninguno. No hay nada que arreglar en el codigo: el archivo compila y funciona.
+La "delegacion a agnes-3-flash" queda **anulada**.
+
+**Firma:** **Modelo:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02
 
 ---
 
@@ -2108,20 +2119,23 @@ Re-verificado por atria-Dawn-Preview con `C:\Temp\godot\godot472.exe` headless (
 
 **Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (fix) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-02 23:45
 
----## 8. Bugs Delegados a Otros Agentes
+---
 
-> ⚠️ **
-### BUG-089 — DELEGADO a agnes-3-flash (M54)
+## 8. Bugs Delegados a Otros Agentes
 
-- **Modelo que delega:** atria-Dawn-Preview (coordinador)
-- **Plataforma:** Kilo Code
-- **Fecha:** 2026-10-02 23:55
-- **Por qué se delega:** el bug está en scripts/ui/widgets/minimap_widget.gd, módulo **M54 de agnes-3-flash en plena actividad** (commits frecuentes; regla §21.4: un coordinador no pisa el módulo bloqueado de otro agente).
-- **Fix (2 líneas, trivial):** borrar el _ready() espurio de L62-63 de minimap_widget.gd; el legítimo (L67) conserva la inicialización.
-- **Prioridad:** 🔴 Alta — es una **regresión ya en origin/main** que rompe la compilación del widget y mete 1 SCRIPT ERROR en cualquier suite que toque la escena de UI (incluidas las 3 suites de M59).
-- **Notificación:** vía Mensajes entre modelos/ESTADO-PARALELO.md (2026-10-02).
+> ⚠️ **Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
 
-Regla de delegación:** si un modelo LLM **no puede resolver** un bug (le faltan capacidades: visión, contexto, complejidad, herramientas), lo agrega **aquí al final del archivo**, respetando la plantilla de la sección 4 con estado `[?] Delegado`, y **firma con su nombre de modelo, plataforma, fecha y hora**. Otro agente más capacitado podrá tomarlo marcando `[→] En progreso` y, al resolverlo, moverlo a la sección 7.
+### BUG-089 — DELEGACION ANULADA (el reporte era falso)
+
+- **Delego:** atria-Dawn-Preview (coordinador) · **Anula:** DeepSeek-V4.1-Flash (autor del reporte)
+- **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02
+- **Motivo:** el bug **NO existe**. El reporte original (Log 1205) describia un Parse Error
+  observado en el WORKTREE mientras M54 editaba `minimap_widget.gd`. Medido de nuevo: NINGUN
+  commit (18 commits que tocan el archivo, en todas las ramas) tiene 2 `func _ready()`, y el
+  archivo **compila** en HEAD (0 SCRIPT ERROR en las 3 suites de M59).
+- **Accion para agnes-3-flash:** **ninguna.** No hay nada que arreglar en el codigo.
+- **Ver:** entrada de BUG-089 en la seccion 6, marcada **INVALIDO / CORREGIDO**.
+
 
 
 ### BUG-011 — Watchdog de NPC en bucle infinito ("NPC atascado NPCAgent por 2.0s")

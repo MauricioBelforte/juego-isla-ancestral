@@ -1,11 +1,11 @@
-# Log 1205 - M59 Guardado, iteracion 3: defaults al cargar, contrato del proveedor player y un bug AJENO P0
+# Log 1205 - M59 Guardado, iteracion 3: defaults al cargar, contrato del proveedor player y un SCRIPT ERROR ajeno (luego corregido: no era bug)
 
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Modulo:** M59-Guardado (dueno actual; relevo 21.4.7)
 **Fecha:** 2026-10-02 21:05
 **Estado:** Parcial entregado y medido. NO sella 21.8 (autor != verificador).
-**Tipo:** feature (item H) + contrato de proveedor + deuda tecnica contenida + hallazgo AJENO
+**Tipo:** feature (item H) + contrato de proveedor + deuda tecnica contenida + hallazgo AJENO (corregido despues: era un estado transitorio, no un bug)
 
 ---
 
@@ -102,29 +102,33 @@ Piso `CHECKS_MINIMOS = 43` MEDIDO en verde.
 
 Total **81 checks, 0 fallos, EXIT 0 x3**.
 
-## 8. HALLAZGO AJENO P0 - `minimap_widget.gd` NO COMPILA (regresion publicada)
+## 8. HALLAZGO AJENO: SCRIPT ERROR transitorio en `minimap_widget.gd` (CORREGIDO: no era bug)
 
-Al correr las suites empezo a aparecer **1 SCRIPT ERROR** en las TRES, que en iter. 2 no
-estaba (medido 0 entonces). Causa:
+Durante la iter. 3 aparecio **1 SCRIPT ERROR** en las TRES suites, que en iter. 2 no estaba:
 
 ```
 SCRIPT ERROR: Parse Error: Function "_ready" has the same name as a previously declared function.
    at: res://scripts/ui/widgets/minimap_widget.gd
 ```
 
-`scripts/ui/widgets/minimap_widget.gd` tiene **DOS `func _ready()`**: uno espurio en las
-lineas 62-63 (`visible = minimap_visible`, con un comentario `# island_id -> ColorRect`
-mal ubicado que pertenece a otra variable) y el real en la linea 67. Un script con funciones
-duplicadas **no carga**: el widget de minimapa esta ROTO al 100 %.
+**En el momento lo atribui a una regresion publicada de M54 (commit `46c1f79`). ESO ERA FALSO.**
+Medido de nuevo al retomar la tarea (Log 1208):
 
-- Autor: commit `46c1f79` (M54) -- **YA ESTA en `origin/main`**, o sea es una regresion
-  PUBLICADA, no local.
-- Fix: borrar el `_ready()` espurio (lineas 62-63). 2 lineas.
-- **NO lo toque**: `scripts/mapa/` (y su UI) es de agnes/M54, y el modulo esta en plena
-  actividad. Queda REPORTADO al coordinador y a M54.
-- Efecto colateral en M59: la medicion "0 SCRIPT ERROR" de la iter. 2 quedo INVALIDADA por
-  esta regresion ajena (el error es del proyecto, no de las suites de M59). Se anota para que
-  nadie lo atribuya a M59.
+- `git log --all` da **18 commits** que tocan `minimap_widget.gd`. En TODOS,
+  `git show <commit>:<ruta> | grep -c '^func _ready'` da **1**. **Ningun commit tuvo 2.**
+- En HEAD el archivo **compila** (`--check-only` sin Parse Error) y las 3 suites de M59
+  corren con **0 SCRIPT ERROR**.
+
+Conclusion: el Parse Error correspondia a un **estado TRANSITORIO del worktree** (M54 estaba
+editando el archivo en ese momento; agnes guardaba estados intermedios y los corregia). No era
+codigo publicado ni habia nada roto que arreglar. El "fix de 2 lineas" que propuse era inutil:
+no hay ningun `_ready()` espurio.
+
+**Leccion (trampa nueva, seccion AI del skill):** una medicion tomada mientras otro agente edita un
+archivo compartido NO es estable. **Antes de atribuir un fallo a un commit, hay que medir el
+CONTENIDO DEL COMMIT** (`git show <commit>:<ruta>`), no solo el worktree. El error era real; la
+ATRIBUCION ("regresion publicada") era falsa. **BUG-089** (registrado por el coordinador a
+partir de este reporte) quedo **anulado** (ver `DOCUMENTACION/11-BUGS.md`).
 
 ## 9. Lo que NO hice (honestidad obligatoria)
 
