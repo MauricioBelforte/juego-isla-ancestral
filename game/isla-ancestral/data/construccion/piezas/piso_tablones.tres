@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_1iln0"]
+
+[resource]
+script = ExtResource("1_1iln0")
+id = &"piso_tablones"
+nombre = "Piso de tablones"
+altura = 0.5
+superficie_ok = Array[StringName]([&"terreno", &"piso", &"techo", &"agua"])
+costo = {
+"madera": 2
+}
+bloque = 24

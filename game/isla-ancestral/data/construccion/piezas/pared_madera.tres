@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_0f80i"]
+
+[resource]
+script = ExtResource("1_0f80i")
+id = &"pared_madera"
+nombre = "Pared de madera"
+costo = {
+"madera": 4
+}
+bloque = 8
+superficie_ofrecida = &"pared"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_lq6f5"]
+
+[resource]
+script = ExtResource("1_lq6f5")
+id = &"techo_paja"
+nombre = "Techo de paja"
+variante = "cumbrera"
+altura = 0.5
+soportes_minimos = 2
+superficie_ok = Array[StringName]([&"pared", &"piso", &"techo"])
+costo = {
+"paja": 3
+}
+bloque = 25
+superficie_ofrecida = &"techo"

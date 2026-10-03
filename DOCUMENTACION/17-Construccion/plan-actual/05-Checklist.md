@@ -41,10 +41,10 @@
 - [x] P2: modo decoración — mismo sistema con catálogo filtrado a muebles y decoración [S]
 - [ ] P3: grid — rejilla voxel de 1 m alineada al origen global de M08 [S]
 - [ ] P4: snapping — ajuste de posición y rotación (90°) a la celda más cercana [S]
-- [ ] P5: rotación — pasos de 90° en Y persistidos como entero 0-3 [S]
+- [x] P5: rotación — pasos de 90° en Y persistidos como entero 0-3 [S]
 - [ ] P6: elevación — planta base y subir/bajar con altura máxima por zona [S]
 - [ ] P7: copia — tomar pieza existente como plantilla del fantasma [S]
-- [ ] P8: mover objetos — desocupar celdas originales y revalidar destino [S]
+- [x] P8: mover objetos — desocupar celdas originales y revalidar destino [S]
 - [ ] P9: recolocar — redondeo a rejilla y undo que devuelve la pieza a su celda [S]
 - [ ] P10: almacenamiento — devolver piezas al inventario M14 sin pérdidas [S]
 - [ ] P11: demolición — confirmación suave y retiro de la pieza del mundo [S]
@@ -120,9 +120,9 @@
 
 ## G. Validación y reglas de colocación (BuildValidator) (12)
 
-- [ ] Celda ocupada por otra pieza del jugador bloquea la colocación [M]
-- [ ] Soporte inferior requerido (terreno, piso o techo según la superficie de la receta) [C]
-- [ ] Regla por tipo de pieza declarada en PlacementRule y aplicada por el validador [M]
+- [x] Celda ocupada por otra pieza del jugador bloquea la colocación [M]
+- [x] Soporte inferior requerido (terreno, piso o techo según la superficie de la receta) [C]
+- [x] Regla por tipo de pieza declarada en PlacementRule y aplicada por el validador [M]
 - [ ] Puerta exige pared contigua en la celda de instalación [M]
 - [ ] Ventana exige pared contigua de al menos 1 celda [M]
 - [ ] Escalera exige apoyo en piso o pared y no bloquea la circulación [M]
@@ -135,7 +135,7 @@
 
 ## H. Zonas y permisos (8)
 
-- [ ] Zonas definidas como regiones AABB en celdas voxel (ZoneRegistry) [M]
+- [x] Zonas definidas como regiones AABB en celdas voxel (ZoneRegistry) [M]
 - [ ] Permiso "edificable" por defecto en el terreno del jugador y parcelas habilitadas [M]
 - [ ] Permiso "protegida" para parcelas de vecinos (M18) y áreas históricas [M]
 - [ ] Permiso "narrativa" para terrenos bloqueados por progreso (M70) [M]
@@ -146,9 +146,9 @@
 
 ## I. Costo de recursos e inventario (M14) (8)
 
-- [ ] Costo declarado por receta como diccionario item_id → cantidad [S]
+- [x] Costo declarado por receta como diccionario item_id → cantidad [S]
 - [ ] Verificación de recursos durante la preview: fantasma rojo con motivo al fallar [M]
-- [ ] Descuento atómico al confirmar (nunca descuenta sin colocar) [M]
+- [x] Descuento atómico al confirmar (nunca descuenta sin colocar) [M]
 - [x] Devolución parcial configurable por receta al demoler (default 50%) [M]
 - [ ] Devolución exacta al deshacer (undo restaura todos los recursos consumidos) [M]
 - [ ] El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M]
@@ -179,7 +179,7 @@
 - [ ] M25: ruinas como contenido solo visual (deconstruible = false) [M]
 - [ ] M64: señal obra_activa al entrar/salir y navmesh_delta al colocar/demoler [C]
 - [ ] M73: recetas de festival temporales en el catálogo (devolucion = 0) [M]
-- [ ] M58: serialización de lista de piezas y restauración idempotente [C]
+- [x] M58: serialización de lista de piezas y restauración idempotente [C]
 - [ ] M31: faroles y luces conectados al ciclo día/noche [M]
 - [ ] M32: la lluvia solo agrega VFX, nunca modifica o arruina piezas [S]
 - [ ] M71: logros de construcción escuchan la señal pieza_colocada [M]
@@ -189,7 +189,7 @@
 
 - [ ] Colocar fuera de zona: rechazo previo a la validación de soporte [M]
 - [ ] Pieza encima de un NPC activo: rechazo temporal con motivo "NPC en el lugar" [C]
-- [ ] Deshacer la última acción: restaura celdas y recursos exactamente [C]
+- [x] Deshacer la última acción: restaura celdas y recursos exactamente [C]
 - [ ] Redo tras deshacer solo disponible si no se realizó una acción intermedia [M]
 - [ ] Pieza en el aire sin soporte: bloqueo con motivo de soporte [M]
 - [ ] Colocar sobre techo: permitido solo si la superficie lo declara (techos con vegetación) [M]
@@ -206,7 +206,7 @@
 - [ ] Sin regeneración global de mesh del mundo al construir [C]
 - [x] BuildGhost con pooling: cero alocaciones en el tick de preview [M]
 - [ ] Raycast de colocación limitado a 1 por frame con cache de celda [M]
-- [ ] Ocupación consultada en mapa de celdas en memoria (diccionario) [M]
+- [x] Ocupación consultada en mapa de celdas en memoria (diccionario) [M]
 - [ ] Materiales de pieza compartidos entre instancias (static batching de Godot) [M]
 - [x] Límite suave de piezas por zona (configurable) con aviso al jugador [M]
 - [ ] Presupuesto medido con profiler: preview <= 1 ms por frame (M113) [C]
@@ -234,7 +234,7 @@
 ## P. Testings y QA (8)
 
 - [x] Unit tests de BuildValidator: ocupación, soporte, zonas, reglas por pieza [C]
-- [ ] Unit tests de costos: descuento, devolución y undo con recursos exactos [C]
+- [x] Unit tests de costos: descuento, devolución y undo con recursos exactos [C]
 - [ ] Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C]
 - [ ] Tests de integración: la navmesh se actualiza con puertas y obras (M64) [C]
 - [ ] Stress test M112: 200+ piezas en una zona sin caída de FPS ni memoria [C]
@@ -245,7 +245,11 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 11 · Pendientes: 164 · No resueltos: 0.
+**Totales:** 175 ítems · Completados: 23 · Pendientes: 152 · No resueltos: 0.
+
+> **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1211, 2026-10-03, iter. 1):**
+> +12 [x] (P5, P8, G1, G2, G3, H1, I1, I3, L3, M5, K-M58, P-costos) respaldados por el
+> nucleo `scripts/construccion/` y la suite `test_construccion.gd` (131 checks, 0 fallos).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 164 [ ] / 0 [?].

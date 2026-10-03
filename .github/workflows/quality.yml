@@ -278,6 +278,17 @@ jobs:
           # _fin() y guarda anti-falso-verde probada en vivo (un aborto silencioso
           # en un bloque hace FALLAR la suite y nombra el bloque).
           godot --headless --script scripts/datos/test_datos_m60_iter4.gd 2>&1 || FAIL=1
+          # M17 Construccion iter. 1 (Log 1211, DeepSeek-V4.1-Flash): nucleo de
+          # validacion (ConstruccionValidator -- renombrado por colision de
+          # class_name con BuildValidator de M117), zonas AABB (ZoneRegistry,
+          # contencion de intervalo semiabierto), pila undo/redo por deltas
+          # (BuildHistory), catalogo .tres (3 piezas prototipo) y el contrato de
+          # persistencia por duck-typing que CIERRA BUG-057 (BuildingsSaveProvider
+          # encuentra al autoload Construccion y guarda/restaura la seccion
+          # "buildings"). 131 checks, 12 bloques con marcador _fin() y guarda
+          # anti-falso-verde probada por INYECCION (un aborto dentro de un bloque
+          # hace FALLAR la suite, nombra el bloque y sale con EXIT 1).
+          godot --headless --script scripts/construccion/test_construccion.gd 2>&1 || FAIL=1
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/
