@@ -3,7 +3,7 @@
 
 # 05-Checklist.md — Módulo 59: Guardado (130 ítems)
 
-**Estado:** 60/130 completados (núcleo ox-alpha 27 + iter. glm-5.3-flash: dirty tracking EventBus M07, auto-save día/misión/cierre, bloqueo en diálogo, provider "player" + **iter. 1 DeepSeek-V4.1-Flash: 3 bugs reales corregidos** — todo save válido era incargable, `slot_metadata()` devolvía vacío y la versión futura no avisaba; ver 04-Codigo.md y Log 1197 + **iter. 2 DeepSeek-V4.1-Flash: BUG CRITICO de rotacion** — `request_save()` no dejaba NINGUN save cargable (rotate() corria despues de write_atomic() y movia el save recien escrito a .bak) + el camino de backup no recuperaba sin `.save`, + `slot_metadata()` leia la clave equivocada (dia SIEMPRE 0); ver 04-Codigo.md y Log 1202). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 60/130 completados (núcleo ox-alpha 27 + iter. glm-5.3-flash: dirty tracking EventBus M07, auto-save día/misión/cierre, bloqueo en diálogo, provider "player" + **iter. 1 DeepSeek-V4.1-Flash: 3 bugs reales corregidos** — todo save válido era incargable, `slot_metadata()` devolvía vacío y la versión futura no avisaba; ver 04-Codigo.md y Log 1197 + **iter. 2 DeepSeek-V4.1-Flash: BUG CRITICO de rotacion** — `request_save()` no dejaba NINGUN save cargable (rotate() corria despues de write_atomic() y movia el save recien escrito a .bak) + el camino de backup no recuperaba sin `.save`, + `slot_metadata()` leia la clave equivocada (dia SIEMPRE 0); ver 04-Codigo.md y Log 1202 + **iter. 3 DeepSeek-V4.1-Flash: item H real** — al cargar se completan con los defaults las secciones faltantes; contrato completo del proveedor `player` (restaura `spawn_position`/`zone` si el nodo las expone); el dialecto schema<->proveedores queda contenido en `SaveSchema.dia_de()`; ver 04-Codigo.md y Log 1205). [S]=Simple [M]=Medio [C]=Complejo.
 
 > **Reserva actual (LIBERADA 🟡)**
 > **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-08-31 21:45 · **Estado:** 🟡 Liberado (iter. auto-save/dirty/providers, Log 368)
@@ -11,9 +11,9 @@
 > **Archivos afectados:** `scripts/saving/save_manager.gd` (aditivo + fix de señal faltante), `scripts/saving/save_snapshot.gd` (fix bug latente Node-providers), `scripts/saving/player_save_provider.gd` (nuevo), `scripts/saving/test_autosave_m59.gd` (nuevo)
 
 > **Reserva actual (EN CURSO 🔵) — relevo §21.4.7**
-> **Agente:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02 20:32 · **Estado:** 🔵 En curso (iter. 2, Log 1202; iter. 1 en Log 1197)
-> **Entrada:** núcleo ox-alpha ✅ + EventBus M07 ✅ + M14 ✅ (los bloqueos que glm documentó ya no existen) · **Salida:** iter. 1 = 3 bugs reales (carga imposible de todo save válido, `slot_metadata()` vacío, versión futura sin aviso) + `test_slots_m59.gd` (22 checks) + `validate_save.gd` 13→16. iter. 2 = **BUG CRITICO de rotacion** (`request_save()` no dejaba `.save` cargable) + recuperacion de backup sin `.save` + `_try_recover` estricto + `slot_metadata()` lee `dia` + manager sella `meta.last_saved` + `test_rotate_m59.gd` (28 checks) como gate DURO
-> **Archivos afectados:** `scripts/saving/save_schema.gd` (`_es_entero()`), `scripts/saving/save_loader.gd` (normaliza `schema_version` + FUTURE_VERSION; iter. 2: recupera backup sin `.save` + `_try_recover` estricto), `scripts/saving/save_manager.gd` (`slot_metadata()`; iter. 2: rotate ANTES de write + `dia` + `meta.last_saved` + helper `_payload_para_slot()`), `scripts/saving/validate_save.gd`, `scripts/saving/test_slots_m59.gd`, `scripts/saving/test_rotate_m59.gd` (nuevo, 28 checks), `.github/workflows/quality.yml` (3 gates DUROS con `|| FAIL=1`)
+> **Agente:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Fecha:** 2026-10-02 21:05 · **Estado:** 🔵 En curso (iter. 3, Log 1205; iter. 1-2 en Logs 1197/1202)
+> **Entrada:** núcleo ox-alpha ✅ + EventBus M07 ✅ + M14 ✅ (los bloqueos que glm documentó ya no existen) · > **Salida:** iter. 1 = 3 bugs reales (carga imposible de todo save válido, `slot_metadata()` vacío, versión futura sin aviso) + `test_slots_m59.gd` (22 checks) + `validate_save.gd` 13→16. iter. 2 = **BUG CRITICO de rotacion** (`request_save()` no dejaba `.save` cargable) + recuperacion de backup sin `.save` + `_try_recover` estricto + `slot_metadata()` lee `dia` + manager sella `meta.last_saved`. iter. 3 = item H REAL (`SaveSchema.completar()` al cargar) + contrato completo del proveedor `player` + dialecto contenido en `SaveSchema.dia_de()`; `test_rotate_m59.gd` 28→43 checks como gate DURO
+> **Archivos afectados:** `scripts/saving/save_schema.gd` (`_es_entero()`; iter. 3: `completar()` + `dia_de()`), `scripts/saving/save_loader.gd` (normaliza `schema_version` + FUTURE_VERSION; iter. 2: recupera backup sin `.save` + `_try_recover` estricto; iter. 3: `completar()` en los 2 caminos), `scripts/saving/save_manager.gd` (`slot_metadata()`; iter. 2: rotate ANTES de write + `meta.last_saved` + helper `_payload_para_slot()`; iter. 3: usa `SaveSchema.dia_de`), `scripts/saving/player_save_provider.gd` (iter. 3: contrato completo), `scripts/saving/validate_save.gd`, `scripts/saving/test_slots_m59.gd`, `scripts/saving/test_rotate_m59.gd` (nuevo; 28→43 checks), `.github/workflows/quality.yml` (3 gates DUROS con `|| FAIL=1`)
 ## A. SaveManager (autoload)
 
 - [x] Definir SaveManager como autoload único de guardado [M]
@@ -75,7 +75,7 @@
 - [x] Incluir schema_version en cada save [S]
 - [x] Migraciones solo-hacia-delante (M60) con backup previo [M] — *infraestructura lista (v1 sin migraciones)*
 - [x] Migrar automáticamente al cargar saves antiguos con aviso [M] — *migra; aviso UI pendiente*
-- [x] Manejar campos nuevos (defaults) y faltantes (sin crash) [M]
+- [x] Manejar campos nuevos (defaults) y faltantes (sin crash) [M] — *iter. 3 (Log 1205): IMPLEMENTADO con `SaveSchema.completar()`, que rellena con los defaults del schema toda SECCION de nivel superior que falte, llamado ANTES de `validate()` en `SaveLoader.load()` y en `_try_recover()`. Antes, un save sin una seccion fallaba `validate()` -> CORRUPTED y no se podia cargar. DELIBERADAMENTE no toca el INTERIOR de las secciones: 15 proveedores iteran las claves de su seccion en `restore_save_data()` y `inventario_service` hace `for id in data: int(id)` (una clave del schema como `items` se leeria como el contenedor 0 y lo BORRARIA). Probado en bloque 8 de `test_rotate_m59.gd` (con control negativo: `validate()` SI detecta la falta)*
 - [x] Testear migración de 2 versiones atrás y versión futura [C] — *versión futura testeada EXPLÍCITAMENTE (iter. 1, Log 1197): `test_slots_m59.gd` bloque 3 fuerza v2 y verifica `FUTURE_VERSION` + que el save NO se degrade en disco (bloque 4). 2 versiones atrás no aplica en v1 (no hay versiones previas)*
 
 ## I. Guardado del Mundo (M09/M10/M54)
@@ -83,7 +83,7 @@
 - [ ] Guardar islas, POI, exploración y niebla (M54) [M]
 - [ ] Guardar estado de ruinas (M25) y templos (M26) [M]
 - [ ] Guardar modificaciones del mundo (tala M50, minado M35) [M]
-- [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider escribe los 4 campos. **iter. 2 (Log 1202) MEDIDO con un nodo Player inyectado:** `get_save_data()` devuelve `{name, position, spawn_position, zone}` con `spawn_position == position` (NO es un punto de spawn real: es una copia) y `restore_save_data()` restaura `position` CORRECTAMENTE pero NO restaura `spawn_position`, `zone` ni `name` (el nodo Player no expone esas propiedades; verificado con `"x" in p`). Se mantiene `[x]` porque el item pide GUARDAR y los 4 campos se escriben; la parte de spawn/zona depende de un sistema inexistente (M09/M54) y no tiene consumidor en runtime*
+- [x] Guardar posición del jugador, zona y punto de spawn [S] — *glm-5.3-flash: PlayerSaveProvider escribe los 4 campos. **iter. 2 (Log 1202) MEDIDO con un nodo Player inyectado:** `get_save_data()` devuelve `{name, position, spawn_position, zone}` con `spawn_position == position` (NO es un punto de spawn real: es una copia) y `restore_save_data()` restaura `position` CORRECTAMENTE pero NO restaura `spawn_position`, `zone` ni `name` (el nodo Player no expone esas propiedades; verificado con `"x" in p`). Se mantiene `[x]` porque el item pide GUARDAR y los 4 campos se escriben; **iter. 3 (Log 1205):** `restore_save_data()` ahora restaura `spawn_position` y `zone` SI el nodo las expone (duck-typing) y `get_save_data()` las LEE del nodo si existen; nunca asigna `name` (en un Node eso RENOMBRARIA el nodo y romperia `find_child("Player")`). El Player actual no las expone, asi que hoy `spawn_position` es un punto de REANUDACION; el contrato queda listo para cuando exista el sistema de zonas (M09/M54). Probado con un nodo inyectado (bloque 9)*
 - [ ] Testear carga del mundo sin duplicar objetos [C]
 
 ## J. Guardado del Inventario (M14/M15/M16)
@@ -301,3 +301,32 @@ El schema y los proveedores hablan dialectos distintos: `time` (schema `day/seas
 - **Nunca asumir que una suite verde cubre el camino real**: si el código de producción entra por `SaveManager.request_save()`, la suite DEBE llamar a `request_save()`, no a `write_atomic()`.
 - Al leer metadatos, recordar que el dialecto del proveedor NO es el del schema.
 - Pendiente iter. 3: merge de defaults al cargar (item H "campos nuevos/faltantes").
+---
+
+## Notas del Agente — Iteración 3: defaults al cargar, contrato del proveedor `player` y hallazgo ajeno
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-02 21:05
+**Estado:** Parcial (3 correcciones + 1 hallazgo ajeno P0; módulo 🔵 En curso, Log 1205)
+
+### Item H REAL — `SaveSchema.completar()`
+Un save al que le faltaba una sección fallaba `validate()` ("Falta sección: X") → CORRUPTED y **no se podía cargar**; el `[x]` del ítem solo era cierto en el sentido débil de "no crashea". Ahora `completar()` rellena con los defaults las secciones ausentes y se llama ANTES de `validate()` (en `load()` y en `_try_recover()`).
+
+**Lo que NO hace, a propósito:** no toca el INTERIOR de las secciones. Medido antes de implementarlo: **15 proveedores iteran las claves de su sección** en `restore_save_data()`, y `inventario_service` hace `for id in data: int(id)` → una clave del schema como `items` se leería como el contenedor `0` y **lo borraría**. Un merge de defaults ingenuo habría sido pérdida de datos silenciosa.
+
+### Contrato completo del `PlayerSaveProvider`
+- `restore_save_data()` restaura `spawn_position` y `zone` **si el nodo las expone** (duck-typing); antes solo restauraba `position`.
+- `get_save_data()` las lee del nodo si existen; antes `spawn_position` era siempre una copia de `position`.
+- **Nunca asigna `name`**: en un `Node`, `name` es `Node.name` y asignarlo renombraría el nodo, rompiendo `find_child("Player")`.
+
+### Dialecto contenido
+La traducción `dia` (proveedor M29) → `day` (schema) vive ahora en un único helper documentado, `SaveSchema.dia_de()`. La deuda de fondo (reconciliar el dialecto) sigue reportada a M14/M29/M38.
+
+### HALLAZGO AJENO P0 — `minimap_widget.gd` NO COMPILA
+`scripts/ui/widgets/minimap_widget.gd` tiene **dos `func _ready()`** (L62 y L67) → `Parse Error: Function "_ready" has the same name as a previously declared function` → el widget de minimapa está roto al 100 %. Autor: commit `46c1f79` (M54), **ya en `origin/main`**. Fix: borrar el `_ready()` espurio de L62-63 (2 líneas). **No lo toqué** (módulo de agnes/M54, en plena actividad) — reportado al coordinador. Efecto colateral: la medición "0 SCRIPT ERROR" de la iter. 2 quedó invalidada por esta regresión ajena.
+
+### Recomendaciones para el próximo agente
+- Correr SIEMPRE las TRES suites: `validate_save.gd` (16), `test_slots_m59.gd` (22) y `test_rotate_m59.gd` (43). Las tres son gate duro.
+- Al agregar un proveedor nuevo: su `restore_save_data()` debe tolerar claves extra (usar `data.get(...)`), porque el schema y los proveedores NO comparten dialecto.
+- Pendiente: reconciliar el dialecto `time`/`inventory`/`economy` con sus dueños.

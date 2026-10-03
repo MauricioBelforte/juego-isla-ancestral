@@ -257,16 +257,13 @@ func slot_metadata(slot: int) -> Dictionary:
 	var payload: Variant = doc.get("payload", null)
 	if typeof(payload) != TYPE_DICTIONARY:
 		return {}
-	var time_dict: Dictionary = payload.get("time", {})
-	# M59 iter. 2 (DeepSeek-V4.1-Flash): el proveedor de tiempo (M29) NO usa el
-	# dialecto del schema. Emite {dia, mes, anio, hora, minuto, ...}, mientras
-	# SaveSchema declara {day, season, hour, minute}. Como collect() REEMPLAZA la
-	# sección entera, `time.day` no existe en disco y este campo salía SIEMPRE 0
-	# (la UI de slots habría mostrado "día 0" para cualquier partida). Leemos el
-	# dialecto real y caemos al del schema si algún día se reconcilian.
-	# Deuda: el dialecto schema<->proveedores debe unificarse con los dueños de
-	# M14/M29/M38 (ver hallazgo en Log 1198).
-	var dia: int = int(time_dict.get("dia", time_dict.get("day", 0)))
+	# M59 iter. 2/3 (DeepSeek-V4.1-Flash): el proveedor de tiempo (M29) NO usa el
+	# dialecto del schema (emite `dia/mes/anio/hora/minuto`, el schema declara
+	# `day/season/hour/minute`). Como collect() REEMPLAZA la sección entera,
+	# `time.day` no existe en disco y este campo salía SIEMPRE 0. La traducción
+	# del dialecto vive en un único helper documentado (SaveSchema.dia_de).
+	# Deuda: reconciliar el dialecto es de los dueños de M14/M29/M38 (Log 1202).
+	var dia: int = SaveSchema.dia_de(payload)
 	return {
 		"day": dia,
 		"version": int(payload.get("schema_version", 0)),

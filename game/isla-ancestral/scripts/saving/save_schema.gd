@@ -107,6 +107,44 @@ static func _es_entero(v: Variant) -> bool:
 		return is_finite(f) and f == floorf(f) and absf(f) <= 9007199254740992.0
 	return false
 
+## Completa con los defaults del schema toda SECCION de nivel superior que falte
+## en un payload cargado. NO sobrescribe nada existente.
+##
+## M59 iter. 3 (DeepSeek-V4.1-Flash) — item H: "Manejar campos nuevos (defaults)
+## y faltantes (sin crash)". Antes, un save al que le faltaba una seccion fallaba
+## `validate()` con "Falta sección: X" -> CORRUPTED y no se podia cargar.
+##
+## DELIBERADAMENTE NO toca el INTERIOR de las secciones: los proveedores reales
+## usan su propio dialecto (ver Log 1202) y algunas restauraciones ITERAN las
+## claves de su seccion. Inyectar una clave del schema dentro de una seccion con
+## proveedor es PELIGROSO: `inventario_service.restore_save_data()` hace
+## `for id in data: int(id)` y trata la clave como indice de contenedor, asi que
+## una clave como "items" se leeria como el contenedor 0 y BORRARIA su contenido.
+## El interior de una seccion es responsabilidad de su proveedor.
+static func completar(payload: Dictionary) -> Dictionary:
+	var base: Dictionary = default_payload(String(payload.get("profile_id", "")))
+	for seccion in base:
+		if seccion == "schema_version" or seccion == "profile_id":
+			continue
+		if not payload.has(seccion):
+			payload[seccion] = base[seccion]
+	return payload
+
+## Lee el "dia" de un payload de save, tolerando el dialecto del proveedor.
+##
+## M59 iter. 3: el proveedor de tiempo (M29) NO usa el dialecto del schema.
+## Persiste `dia/mes/anio/hora/minuto`, mientras el schema declara
+## `day/season/hour/minute`. Como `collect()` REEMPLAZA la seccion entera,
+## `time.day` no existe en disco y leerlo devolvia SIEMPRE 0 (la UI de slots
+## habria mostrado "dia 0" para cualquier partida). Este helper es la UNICA
+## traduccion del dialecto; si algun dia los dueños de M29/M14/M38 reconcilian
+## las claves, se cambia solo aca.
+static func dia_de(payload: Dictionary) -> int:
+	var t: Variant = payload.get("time", {})
+	if typeof(t) != TYPE_DICTIONARY:
+		return 0
+	return int((t as Dictionary).get("dia", (t as Dictionary).get("day", 0)))
+
 ## Valida la estructura de un payload cargado.
 ## Devuelve un Array de Strings con los errores encontrados (vacío = OK).
 ## NO valida checksum (eso lo hace SaveLoader): aquí solo estructura/tipos/básicos.

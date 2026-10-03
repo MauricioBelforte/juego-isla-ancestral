@@ -25,8 +25,8 @@
 
 extends SceneTree
 
-## Piso de checks. MEDIDO en la primera corrida VERDE (28) y fijado aqui.
-const CHECKS_MINIMOS: int = 28
+## Piso de checks. MEDIDO en la primera corrida VERDE (43) y fijado aqui.
+const CHECKS_MINIMOS: int = 43
 
 ## Slot de trabajo (dentro de SLOT_COUNT=3). Se limpia antes y despues.
 const SLOT: int = 2
@@ -217,6 +217,95 @@ func _b7_tmp_huerfano(sm) -> void:
 	_ok(not _existe("slot_%d.tmp" % SLOT), "cleanup_orphan_tmp() borra el .tmp al arrancar")
 	_fin("7")
 
+## Item H: "Manejar campos nuevos (defaults) y faltantes (sin crash)".
+## Un save al que le falta una seccion debe CARGAR completandose con los defaults
+## del schema (antes: validate() -> "Falta sección: X" -> CORRUPTED).
+func _b8_completar_defaults(sm) -> void:
+	_abrir("8", "item H: save con secciones faltantes carga completando defaults")
+	_limpia()
+	var p: Dictionary = SaveSchema.default_payload("perfil_rot")
+	p["time"]["day"] = 55
+	p.erase("photos")
+	p.erase("collections")
+	_ok(SaveWriter.write_atomic(SLOT, p), "se escribio un save SIN photos/collections")
+	# Control: validate() SIN completar SI detecta la falta (el fix no es cosmetico).
+	var errores: Array[String] = SaveSchema.validate(p)
+	_ok(not errores.is_empty(),
+		"control: validate() reporta la seccion faltante sin completar (dio %d errores)" % errores.size())
+	var code: int = sm.load_slot(SLOT)
+	_ok(code == SaveLoader.LoadResult.OK,
+		"load_slot() completa con defaults y carga OK (dio %d)" % code)
+	var cargado: Dictionary = sm.loader.load(SLOT).get("payload", {})
+	_ok(cargado.has("photos") and cargado.has("collections"),
+		"el payload cargado recupero las secciones faltantes")
+	var photos: Dictionary = cargado.get("photos", {})
+	var ids: Variant = photos.get("ids", null)
+	_ok(ids is Array and (ids as Array).is_empty(), "photos.ids quedo con el default []")
+	_ok(int(cargado.get("time", {}).get("day", -1)) == 55,
+		"el dato REAL (day=55) no se sobrescribio (dio %s)" % str(cargado.get("time", {}).get("day")))
+	_fin("8")
+
+## Nodo con spawn_position/zone via script creado en runtime (para probar el
+## duck-typing del proveedor sin depender de un script ajeno).
+func _nodo_con_props() -> Node3D:
+	var scr := GDScript.new()
+	scr.source_code = "extends Node3D\nvar spawn_position: Vector3 = Vector3.ZERO\nvar zone: String = \"\"\n"
+	if scr.reload() != OK:
+		return null
+	var n := Node3D.new()
+	n.set_script(scr)
+	return n
+
+## Contrato COMPLETO del PlayerSaveProvider (iter. 3). Antes se guardaba
+## `spawn_position` pero nunca se restauraba.
+func _b9_player_provider() -> void:
+	_abrir("9", "PlayerSaveProvider: contrato completo con nodo inyectado")
+	var prov = PlayerSaveProvider.new()
+	_ok(prov.get_save_data().is_empty(), "sin nodo Player -> {} (no inventa datos)")
+
+	var p := Node3D.new()
+	p.name = "Player"
+	root.add_child(p)
+	p.global_position = Vector3(4.0, 0.0, 4.0)
+	var d: Dictionary = prov.get_save_data()
+	_ok(d.size() == 4, "con Player devuelve las 4 claves del schema (dio %d)" % d.size())
+	_ok(d.get("spawn_position") == d.get("position"),
+		"sin propiedad spawn_position en el nodo, se usa la posicion actual (documentado)")
+	p.global_position = Vector3.ZERO
+	prov.restore_save_data({"name": "X", "position": [10.0, 5.0, -3.0],
+		"spawn_position": [1.0, 2.0, 3.0], "zone": "playa"})
+	_ok(p.global_position == Vector3(10.0, 5.0, -3.0),
+		"restaura position (dio %s)" % str(p.global_position))
+	_ok(p.name == "Player",
+		"NO renombra el nodo al restaurar 'name' (sigue '%s')" % p.name)
+	root.remove_child(p)
+	p.free()
+
+	var q := _nodo_con_props()
+	if q == null:
+		_ok(false, "no se pudo crear el nodo con spawn_position/zone (script runtime)")
+		_fin("9")
+		return
+	q.name = "Player"
+	root.add_child(q)
+	q.global_position = Vector3(7.0, 0.0, 7.0)
+	q.set("spawn_position", Vector3(9.0, 9.0, 9.0))
+	q.set("zone", "cueva")
+	var d2: Dictionary = prov.get_save_data()
+	_ok(d2.get("spawn_position") == [9.0, 9.0, 9.0],
+		"lee spawn_position del nodo si existe (dio %s)" % str(d2.get("spawn_position")))
+	_ok(String(d2.get("zone")) == "cueva",
+		"lee zone del nodo si existe (dio '%s')" % String(d2.get("zone")))
+	prov.restore_save_data({"position": [1.0, 1.0, 1.0],
+		"spawn_position": [2.0, 3.0, 4.0], "zone": "playa"})
+	_ok(q.get("spawn_position") == Vector3(2.0, 3.0, 4.0),
+		"RESTAURA spawn_position si el nodo la expone (dio %s)" % str(q.get("spawn_position")))
+	_ok(String(q.get("zone")) == "playa",
+		"RESTAURA zone si el nodo la expone (dio '%s')" % String(q.get("zone")))
+	root.remove_child(q)
+	q.free()
+	_fin("9")
+
 # ── orquestacion ─────────────────────────────────────────────────────────
 
 func _run() -> void:
@@ -231,6 +320,8 @@ func _run() -> void:
 	_b5_control_vacio(sm)
 	_b6_metadatos_reales(sm)
 	_b7_tmp_huerfano(sm)
+	_b8_completar_defaults(sm)
+	_b9_player_provider()
 	_limpia()
 	sm.current_slot = -1
 

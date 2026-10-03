@@ -294,3 +294,27 @@ El orden de escritura es una **regla dura** del módulo. Desde iter. 2:
 ### Suite nueva
 
 `scripts/saving/test_rotate_m59.gd` (28 checks, 7 bloques) cubre el **camino real** (`request_save`) y la rotación. Guardia de 3 capas: `_fin(clave)` por bloque, `CHECKS_MINIMOS = 28` medido en verde, `_summary()` en `call_deferred` separado.
+
+---
+
+## Notas del Agente — Iteración 3: defaults al cargar y contrato del proveedor `player` (DeepSeek-V4.1-Flash, 2026-10-02)
+
+### Completar defaults al cargar (item H)
+
+`SaveSchema.completar(payload)` rellena con los defaults del schema toda **sección de nivel superior** que falte. `SaveLoader.load()` y `SaveLoader._try_recover()` lo llaman **antes** de `validate()`. Antes, un save sin una sección fallaba `validate()` ("Falta sección: X") → CORRUPTED y no se podía cargar.
+
+**NO toca el INTERIOR de las secciones, a propósito.** 15 proveedores iteran las claves de su sección en `restore_save_data()`, y `inventario_service` hace `for id in data: int(id)` tratando la clave como índice de contenedor: inyectar `items` (del schema) se leería como el contenedor `0` y **borraría su contenido**. El interior de una sección es responsabilidad de su proveedor.
+
+### Dialecto: una sola traducción
+
+`SaveSchema.dia_de(payload)` es la ÚNICA traducción del dialecto del proveedor de tiempo (`dia` de M29) al del schema (`day`). Si los dueños de M14/M29/M38 reconcilian las claves, se cambia solo ahí.
+
+### `PlayerSaveProvider` — contrato completo
+
+- `get_save_data()`: lee `spawn_position` y `zone` del nodo **si las expone** (duck-typing con `prop in nodo`); si no, `spawn_position` es la posición actual (punto de reanudación) y `zone` es `""`.
+- `restore_save_data()`: restaura `position` (siempre), y `spawn_position`/`zone` **si el nodo las expone**.
+- **Nunca asigna `name`**: en un `Node`, `name` es `Node.name`; asignarlo renombraría el nodo y rompería `find_child("Player")`.
+
+### Suite
+
+`test_rotate_m59.gd`: **43 checks, 9 bloques** (b8 = item H + control negativo; b9 = contrato del proveedor con nodo inyectado, incluido un nodo con `spawn_position`/`zone` creado con `GDScript` en runtime). Piso `CHECKS_MINIMOS = 43` medido en verde.

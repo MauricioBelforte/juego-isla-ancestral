@@ -3246,3 +3246,39 @@ era **falso** mientras el bug estaba vivo; ahora es real y medido.
 
 **NO sello §21.8** (autor ≠ verificador). Fila 59 de `CHECKLIST-GLOBAL.md` y el pool
 **NO tocados** (tarea del coordinador). Log 1202 consumido del pool; cabeza **1203**.
+
+
+## M59-Guardado — iter. 3 (DeepSeek-V4.1-Flash, 2026-10-02 21:05, Log 1205)
+
+Se corrigieron los 3 problemas que la iter. 2 dejo REPORTADOS:
+
+1. **Item H real** — `SaveSchema.completar()` rellena con los defaults del schema las secciones
+   de nivel superior que falten, y se llama ANTES de `validate()` (en `load()` y `_try_recover()`).
+   Antes, un save sin una seccion daba CORRUPTED. **NO toca el interior de las secciones**:
+   medido que **15 proveedores iteran las claves de su seccion** en `restore_save_data()` y
+   `inventario_service` hace `for id in data: int(id)` -> inyectar la clave del schema `items`
+   se leeria como el contenedor 0 y **lo borraria**. Un merge ingenuo habria sido perdida de datos.
+2. **Contrato completo del `PlayerSaveProvider`** — `restore_save_data()` restaura
+   `spawn_position`/`zone` si el nodo las expone (antes solo `position`), `get_save_data()` las
+   lee del nodo si existen, y **nunca** asigna `name` (renombraria el nodo y romperia
+   `find_child("Player")`).
+3. **Dialecto contenido** — la traduccion `dia`->`day` vive en un unico helper documentado,
+   `SaveSchema.dia_de()`. La deuda de fondo (reconciliar `time`/`inventory`/`economy`) sigue
+   REPORTADA a los duenos de M14/M29/M38.
+
+`test_rotate_m59.gd`: 28 -> **43 checks / 9 bloques**. **10/10 sondas en rojo** (incluida la del
+piso: 34 checks, 0 fallos, EXIT 1). Las 3 suites = **81 checks, 0 fallos, EXIT 0 x3**.
+
+### HALLAZGO AJENO P0 — `minimap_widget.gd` NO COMPILA (regresion YA en `origin/main`)
+
+`scripts/ui/widgets/minimap_widget.gd` tiene **DOS `func _ready()`** (lineas 62 y 67):
+`Parse Error: Function "_ready" has the same name as a previously declared function` ->
+**el widget de minimapa esta roto al 100 %** (el script no carga). El `_ready()` de L62-63 es
+espurio (`visible = minimap_visible`, con un comentario `# island_id -> ColorRect` mal ubicado
+que pertenece a otra variable). Autor: commit **`46c1f79` (M54)**, ya publicado en `origin/main`.
+**Fix: 2 lineas** (borrar L62-63). NO lo toque (modulo de agnes/M54 en plena actividad).
+Efecto colateral: aparecio 1 SCRIPT ERROR en las 3 suites de M59, invalidando la medicion
+"0 SCRIPT ERROR" de la iter. 2 — es del proyecto, NO de M59.
+
+**NO sello §21.8** (autor != verificador). Fila 59 de `CHECKLIST-GLOBAL.md` y el pool NO tocados.
+Log 1205 consumido; cabeza del pool: 1206.

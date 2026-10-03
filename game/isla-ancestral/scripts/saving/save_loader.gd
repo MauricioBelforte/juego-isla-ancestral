@@ -50,6 +50,12 @@ func load(slot: int) -> Dictionary:
 	# consistente con default_payload() y la comparación de versión sea exacta.
 	payload["schema_version"] = int(payload.get("schema_version", 0))
 
+	# 0) Completar con los defaults del schema lo que falte (item H: "campos
+	# nuevos (defaults) y faltantes (sin crash)"). Sin esto, un save al que le
+	# falta una seccion fallaba validate() -> CORRUPTED y no se podia cargar.
+	# NO toca el interior de las secciones (ver SaveSchema.completar).
+	payload = SaveSchema.completar(payload)
+
 	# 1) Validar estructura
 	var errors: Array[String] = SaveSchema.validate(payload)
 	if not errors.is_empty():
@@ -101,6 +107,7 @@ func _try_recover(slot: int, reason: String) -> Dictionary:
 	# que un backup de versión FUTURA se cargaba como RECOVERED (degradando un
 	# save más nuevo, contra la regla dura "nunca degradar un save").
 	payload["schema_version"] = int(payload.get("schema_version", 0))
+	payload = SaveSchema.completar(payload)
 	var errors: Array[String] = SaveSchema.validate(payload)
 	if not errors.is_empty():
 		push_error("[SAVE] Backup de slot %d con estructura inválida (%s)" % [slot, ", ".join(errors)])
