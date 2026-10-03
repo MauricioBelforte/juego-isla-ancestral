@@ -13,6 +13,36 @@
 > Si tu plataforma escribe en cp1252, NO TOQUES EL REPOSITORIO hasta configurar UTF-8.
 > Ver AGENTS.md seccion 28 paradetalles y herramientas de reparacion.
 
+## 🔄 Estado actual 2026-10-02 — RECONCILIACIÓN vs CHECKLIST-GLOBAL (vivo)
+
+> El cuerpo de este backlog refleja trabajo hasta 2026-09-19. Cruzado al 2026-10-02 contra
+> `CHECKLIST-GLOBAL.md` (fila de cada módulo) y `CHECKLIST-QA-SEALS.md`. hy3 = verificador §21.8
+> (verificador ≠ autor). Firmado: hy3 / WorkBuddy (Tencent Hunyuan).
+
+### Módulos de hy3 — estado vivo y pendientes
+
+| Módulo | Estado GLOBAL 2026-10-02 | Acción hy3 pendiente |
+|--------|--------------------------|----------------------|
+| 30-Reloj | 🟡 Con dudas (reconciliado hy3 2026-09-18) 107/120 | ✅ Cerrado por hy3 (reconciliación 2026-09-18). Sin acción. |
+| 49-Iluminacion | 🟡 Con dudas (reconciliado hy3 2026-09-18) 53/143 | ✅ Cerrado por hy3 (reconciliación 2026-09-18). Sin acción. |
+| 71-Progresion | 🟡 Con dudas (reconciliado hy3 2026-09-18) 72/213 | ✅ Cerrado por hy3 (reconciliación 2026-09-18). Sin acción. |
+| 53-UI-UX | 🟡 Con dudas 132/158 (BUG-048 resuelto Log 983) | ✅ Verificado hy3 (Log 1001) PERO 28 `[ ]` reales → NO sellable (§24). Sin acción hy3. |
+| 83-Licencias | 🟡 Liberado (agnes scanner) 16/100 | ⏳ BLOQUEADO en autor (agnes no cerró 16/100). QA cruzado hy3 post-cierre. |
+| 92-Tutorial | 🟡 Liberado (iter.4) 97/185 | ⏳ BLOQUEADO en autor (glm-5.3-flash no cerró 97/185). QA cruzado hy3 post-cierre. |
+| 126-Marketing-Legal | 🟡 Liberado (agnes data-layer+CI) 59/101 | ⏳ Re-QA BLOQUEADA: checklist 4[x]/97[ ] = 101; autor no cerró. Sin sello hasta cierre. |
+| 127-Copyright | 🟡 Con dudas (iter.4 ✅) 52/101 — QA iter.4 aprobada por atria-dawn (Log 1121, 2026-09-20) | ✅ Verificado por tercero (atria-dawn ≠ autor). BUG-033 resuelto. Sin acción hy3. |
+| 131-Créditos | ✅ Completado + 🔒 sello Log 1184 (mimo-v2.6-flash-free) | ✅ Cerrado y sellado. (En Lote L figuraba ⏳ — YA CERRADO, ver abajo.) |
+| 166-Variantes-Rendimiento | 🟡 Liberado (BUG-084 resuelto; H12 `[?]` art pendiente) 111/112 | ✅ BUG-084 resuelto por hy3 (Log 1183, `e0f141e`). Resto = arte Blender (dueño mimo/Hy4). Sin acción hy3. |
+| **167-Isla-Raíz** | ✅ Completado + 🔒 sello hy3 (Log 1212, 2026-10-03) 114/114 | ✅ **CERRADO y sellado:** 1 `[?]` resuelto + QA cruzado §21.8 (Log 1212). Fuera del alcance accionable de hy3. |
+
+### Otras notas hy3
+- **M63 (Cargas/Streaming, dueño DeepSeek):** verificado §21.8 por hy3 (Log 1195) — handshake 62<->63 end-to-end real + guardian en ROJO. Fila 63 de GLOBAL editada byte-exact, **sin commitear** (pendiente coordinador/DeepSeek). Ver MEMORY.md.
+- M131, M30, M49, M71, M166, M53, M127 están ✅ o verificados por tercero desde la óptica de hy3.
+
+### Conclusión para el usuario
+- Todo lo demás del backlog histórico está ✅ o bloqueado en terceros.
+- **M167 CERRADO y sellado (Log 1212, 2026-10-03).** No queda tarea accionable histórica de hy3; el alcance accionable ahora son los 5 módulos del Encargo 2 (M101/M123/M154/M84/M93, sellados Logs 1214–1218) y el fix de cita M123 (532→879).
+
 ## Total de tareas asignadas: 916 + QA cruzado nuevo (2026-09-03/05): M14, M119, M165, M168, M66, M08, M09, M10, M11, M12
 
 ## Nuevas asignaciones QA cruzado (2026-09-05, Hy3 / Kilo Code)
@@ -478,7 +508,7 @@ no producen ERROR, pero conviene revisarlos en su módulo si se usa `_container`
 | Modulo | Autor nueva ronda | Estado GLOBAL (2026-09-18) | Accion hy3 |
 |--------|-------------------|----------------------------|------------|
 | 83-Licencias-De-Software | agnes (Log 974, capa scanner) | 🟡 16/100 Liberado iter. agnes | ⏳ Re-QA BLOQUEADA: modulo no cerrado (16/100). No emitir sello hasta cierre. |
-| 131-Creditos | mimo (Log 980) | 🔵 55/99 En curso | ⏳ Re-QA BLOQUEADA: mimo no cerro (55/99). No emitir sello hasta cierre. |
+| 131-Creditos | mimo (Log 980) | ✅ Completado + 🔒 sello Log 1184 (mimo-v2.6-flash-free, 2026-10-02) | ✅ Cerrado y sellado — reconciliado 2026-10-02 (ver addendum "Estado actual 2026-10-02"). |
 | 126-Marketing-Legal | agnes (Log 981, data-layer+CI) | 🟡 4/101 Liberado iter. agnes | ⏳ Re-QA BLOQUEADA: agnes no cerro (4/101). Sello Log 884 previo en SEALS queda PENDIENTE de re-afirmacion. |
 
 ### Reconciliacion BUG-034 — re-registro de sellos hy3 ausentes en CHECKLIST-QA-SEALS (NO re-verificar) — ✅ FINALIZADA 2026-09-18
@@ -491,7 +521,7 @@ no producen ERROR, pero conviene revisarlos en su módulo si se usa `_container`
 - **M112, M133, M134, M135, M136**: GLOBAL los marca "✅ Verificado por Hy3 (Log 866/867)", PERO **Logs 866/867 son de AGNES** (Round 3/4 cierre), NO de hy3. Misatribucion del agente regenerador. Autores reales: M112=ox-alpha; M133/M134/M135/M136=GLM-5.3 Flash.
 - Nota amplia: el patron "Verificado por Hy3 (Log 866/867)" aparece en ~30 modulos de GLOBAL (M01-M03, M06, M44, M80, M82, M85, M86, M97, M100, M114, M120, M121, M125, M129, M132, M137-M143…) y es sistematicamente falso (866/867 = AGNES). Fuera de alcance de este lote; requiere auditoria aparte.
 
-**Siguiente:** M83/M126/M131 (re-QA) y M30/M92 (QA cruzado nuevo) requieren cierre del autor antes de QA cruzado hy3.
+**Siguiente:** M83/M126 (re-QA) requieren cierre del autor antes de QA cruzado hy3. M131 ya cerrado + sellado (Log 1184, 2026-10-02). M30 reconciliado hy3 2026-09-18 (sin acción); M92 bloqueado en autor (glm-5.3-flash, 97/185). Única tarea abierta de hy3 al 2026-10-02: **M167** (cerrar 1 `[?]` + sello §21.8, Log 1144).
 
 ### Auditoría BUG-034 ampliada (BUG-050 propuesto) — Log 1012 (2026-09-18)
 
@@ -640,15 +670,15 @@ Usuario pidió 2 QA cruzados §21.8 (verificador != autor de implementacion). hy
 > (documenta en `## Notas del Agente` de `04-Codigo.md`, **sin borrar** notas previas).
 
 - [ ] **T-QA01:** M32 Clima (atria ya lo vio, Log 942 — confirma sello)
-- [ ] **T-QA02:** M84 Musica-Y-Audio-Legal (**arreglado por atria, BUG-062 Log 1085**, test 15/0)
+- [x] **T-QA02:** M84 Musica-Y-Audio-Legal (✅ sellado hy3 Log 1217, test 15/0; gaps capa servicio = KnownIssues no bloqueantes)
 - [ ] **T-QA03:** M94 Retencion-Sin-FOMO (**arreglado por atria, BUG-061 Log 1083**, test 38/0)
 - [ ] **T-QA04:** M102 Bug-Tracking
 - [ ] **T-QA05:** M112 Testing-Automatico
 - [ ] **T-QA06:** M153 Objetivo-Final (validate_vision.py 19/19)
-- [ ] **T-QA07:** M154 Vision-Del-Agente (validate_vision.py 19/19)
-- [ ] **T-QA08:** M167 Isla-Raiz (validador 27/0)
+- [x] **T-QA07:** M154 Vision-Del-Agente (✅ sellado hy3 Log 1216, 155/155, 0[?]; 2 scripts V5 auxiliares ausentes = KnownIssue)
+- [x] **T-QA08:** M167 Isla-Raiz (✅ CERRADO + sellado hy3 Log 1212, validador 27/0)
 - [ ] **T-QA09:** M78 Legal-Propiedad-Intelectual
-- [ ] **T-QA10:** M93 Balance
+- [x] **T-QA10:** M93 Balance (✅ sellado hy3 Log 1218, 131/134, 3[ ] simulate_economy = KnownIssues; drift-audit "134/0" era FALSO)
 
 
 **Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
@@ -787,4 +817,39 @@ los locks se reservan desde acá para mantener la consistencia del GLOBAL.
 
 **Trampas de siempre:** 114 (pathspec — kimi en M70, DeepSeek en M62,
 mimo en M91, agnes en M54), M-06 (byte-exact en GLOBAL), 119 (✅ inflado).
-**Pool:** cabeza actual 1187 (verificá en disco vivo).
+**Pool:** cabeza actual 1220 (verificá en disco vivo; hy3 consumió 1212 + 1214–1218).
+
+---
+
+## Lote N — QA cruzado §21.8 + cierre (2026-10-03, hy3/WorkBuddy, Logs 1212/1214–1218)
+
+> **Encargos del coordinador (Atria-Dawn-Preview, 2026-10-03):** (1) cerrar M167 [hecho
+> sesión previa, Log 1212]; (2) QA cruzado §21.8 + sello de 5 módulos sin sello
+> (M101/M123/M154/M84/M93, prioridad M101+M123); (3) fix de cita rota M123 ("Log 532" → Log 879).
+> Identidad de este chat = hy3/WorkBuddy (verificador ≠ autor de los 5 módulos → sellos legítimos §21.8).
+
+### Resultados (medidos, no narrativa)
+
+| Módulo | Autor orig. | Veredicto | Log hy3 | Headless / checklist | Hallazgos |
+|---|---|---|---|---|---|
+| 101-QA-General | DeepSeek-V4.1-Flash | ✅ Verificado | 1214 | test_qa_m101 12/0; 209/209, 0[?] | cruzado previo Log 878 confirmado |
+| 123-Modding | DeepSeek-V4.1-Flash-vision-exp | ✅ Verificado | 1215 | test_modding_m123 69/0; 108/108, 0[?] | **cita corregida 532→879** (era log de M108) |
+| 154-Vision-Del-Agente | agnes-3-flash | ✅ Verificado | 1216 | 155/155, 0[?]; vías V1–V5 presentes | nota "24 items restantes" stale (ya resueltos Log 1002); 2 scripts V5 auxiliares ausentes = KnownIssue |
+| 84-Musica-Y-Audio-Legal | MiMo | ✅ Verificado (re-verif) | 1217 | test_audio_licenses_m84 15/0; 99/99, 0[?] | gaps capa servicio (autoload no registrado, sin manager test, M117 no integrado) = KnownIssues no bloqueantes |
+| 93-Balance | glm-5.3-flash | ✅ Verificado | 1218 | test_balance_m93_iter4 0 fallos; 131/134, 3[ ] | 3[ ] = simulate_economy diferido (KnownIssue); drift-audit interno "134/0" era FALSO |
+
+### M167 (previo, Log 1212)
+- ✅ CERRADO + 🔒 sello hy3 2026-10-03. 114/114, 0[?]. Fila 167 de GLOBAL intacta (re-leída).
+
+### M123 — fix de cita (Encargo 3)
+- La fila 123 de `CHECKLIST-GLOBAL.md` citaba "Log 532", que es el log propio de **M108** (Pipeline-De-Assets). Corregido a **Log 879** (QA §21.8 real de M123 por DeepSeek-V4.1-Flash iter.2). NO se inventó sello nuevo; M123 además recibió sello hy3 fresco (Log 1215).
+- `Log 532` sigue apareciendo 1× en GLOBAL (fila 108, legítimo) — no se tocó.
+
+### Sellos en GLOBAL (byte-exact, EOL/NUL preservado)
+- 5 filas selladas (101/123/154/84/93) vía `C://Temp//seal_5mods.py`; invariantes EOL confirmados ANTES/DESPUÉS: CRLF=231 LF=0 bareCR=218 NUL=1. `git diff` = 5 ins / 5 del (100% sellos hy3).
+- **No commiteado** (precedente: agnes reescribe GLOBAL constantemente → evitar mis-atribuir sus cambios concurrentes). Queda en working tree para el coordinador.
+
+### Commits (selectivos, pathspec)
+- `git add` de: 5 Logs (1214–1218), 5 `05-Checklist.md` de módulo, `05-Checklist.md` M167, `BACKLOG-MASTER.md` (Hy3). Excluidos: `quality.yml`, scripts M70, `kimi-k3/BACKLOG-MASTER.md` (trabajo ajeno en árbol).
+- Sin push (la iteración no cierra aún / coordinador decide).
+

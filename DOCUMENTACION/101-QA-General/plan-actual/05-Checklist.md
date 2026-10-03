@@ -277,3 +277,11 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 209 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## QA cruzado §21.8 — Hy3 (Log 1214, 2026-10-03)
+
+- **Verificador:** hy3 (WorkBuddy / Tencent Hunyuan) — modelo distinto del autor `deepseek-v4-flash-vision-exp` (Kilo Code).
+- **05-Checklist:** 209 `[x]` / 0 `[ ]` / 0 `[?]`.
+- **Test headless medido:** `godot --headless -s res://scripts/qa/test_qa_m101.gd` → **12 checks, 0 fallos, exit 0**.
+- Confirmo la cruzada previa Log 878 (DeepSeek-V4.1-Flash) — verificador independiente legítimo (autor ≠ verificador).
+- **Veredicto:** ✅ **Verificado por hy3 (Log 1214) 2026-10-03**.

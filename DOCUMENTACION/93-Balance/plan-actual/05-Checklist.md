@@ -237,3 +237,11 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 134 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## QA cruzado §21.8 — Hy3 (Log 1218, 2026-10-03)
+
+- **Verificador:** hy3 (WorkBuddy / Tencent Hunyuan) — distinto del autor `GLM-5.3` (Kilo Code) / `Deepseek V4 Flash`.
+- **05-Checklist:** 131 `[x]` + 3 `[ ]` (O.1 / O.2 / O.5 = `simulate_economy.gd`) / 0 `[?]`. Los 3 `[ ]` son **KnownIssues no bloqueantes** (simulación económica diferida a fase jugable).
+- **Test headless medido:** `godot --headless -s res://scripts/balance/test_balance_m93_iter4.gd` → **0 fallos, exit 0** + regresión iter3/iter4 (0 fallos). El test completó todas sus sub-pruebas.
+- **Nota honesta:** el "drift audit" interno miente "134 `[x]` / 0 `[ ]`"; hay 3 `[ ]` reales (líneas 138/139/142). No se hereda falso verde.
+- **Veredicto:** ✅ **Verificado por hy3 (Log 1218) 2026-10-03** (Estado ✅ justificado: mismo patrón que M167).

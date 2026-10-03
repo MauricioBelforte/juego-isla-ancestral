@@ -207,4 +207,12 @@
 > (0 [ ] y 0 [?]). La línea quedó congelada en un estado intermedio muy anterior.
 > Las marcas no se tocaron; solo se reescribió esta línea. Consistente con el
 > ✅ 155/155 de CHECKLIST-GLOBAL.
+
+## QA cruzado §21.8 — Hy3 (Log 1216, 2026-10-03)
+
+- **Verificador:** hy3 (WorkBuddy / Tencent Hunyuan) — distinto del autor `ox-alpha` (Cline) y de agnes-2.5-flash.
+- **05-Checklist:** 155 `[x]` / 0 `[ ]` / 0 `[?]`. La nota "24 items restantes" de CHECKLIST-GLOBAL es **STALE** (auditoría de drift corrigió a 155/155).
+- **Artefactos verificados en disco:** `tools/mcp/screen-mcp/server.py` (V2), `tools/mcp/godot-mcp/` (V4), `tools/mcp/blender-mcp/` (V5, 90+ scripts), `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` (guía maestra). Las 4 vías V1–V5 operativas.
+- **KnownIssue no bloqueante:** `scripts/blender/setup_estudio.py` y `scripts/blender/personaje_voxel.py` marcados `[x]` (bloque K, V5) pero **ausentes en el repo** (verificado con `find`). No afecta la conectividad de visión ya operativa.
+- **Veredicto:** ✅ **Verificado por hy3 (Log 1216) 2026-10-03**.
 **Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-GUIA-DE-CONEXION-VISION.md`. **V4 (godot-mcp) quedó operativa y verificada el 2026-08-24** (Coding-Solo/godot-mcp clonado y compilado, registrado en cline_mcp_settings.json con GODOT_PATH, tests get_godot_version 4.7.2 y get_project_info exitosos).

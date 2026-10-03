@@ -198,3 +198,11 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## QA cruzado §21.8 — Hy3 (Log 1217, 2026-10-03, re-verificación)
+
+- **Verificador:** hy3 (WorkBuddy / Tencent Hunyuan) — distinto del autor `Nemotron 3 Ultra` (OpenCode) y del implementador `MiMo V2.5` (5 scripts).
+- **05-Checklist:** 99 `[x]` / 0 `[ ]` / 0 `[?]`.
+- **Test headless medido:** `godot --headless -s res://scripts/legal/test_audio_licenses_m84.gd` → **15 checks, 0 fallos, exit 0**.
+- **Gaps no bloqueantes (documentados por MiMo):** `audio_legal_manager` NO registrado como autoload en `project.godot`; sin test headless del manager; M117 Build Pipeline no integrado. La capa de validación de datos está verificada y verde.
+- **Veredicto:** ✅ **Verificado por hy3 (Log 1217) 2026-10-03** (capa de validación de datos cumplida).

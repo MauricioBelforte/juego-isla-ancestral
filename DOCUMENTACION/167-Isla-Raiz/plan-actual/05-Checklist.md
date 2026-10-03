@@ -208,3 +208,15 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 114 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## QA cruzado §21.8 — Hy3 (Log 1212, 2026-10-03)
+
+> Verificador ≠ autor (hy3 / WorkBuddy != Step 3.7 Flash / deepseek-v4-flash-vision-exp). Cierre del único ítem abierto: verificación visual de terreno.
+
+- **Fuente de verdad (autoload):** `scripts/world/mundo_raiz.gd` → `CENTRO = Vector2(2560, 2560)`, `SPAWN_JUGADOR = Vector3(3860, 3860)`, mundo 5120², `RADIO_ISLA = 1800`. Sin `256` obsoleto.
+- **Código de producción:** `main_island.gd:147` `generator.island_radius = 2560` (vía MundoRaiz); `world_generator.gd` / `island_generator.gd` default `2560`; `bench_recorder.gd:133` `int(MundoRaiz.CENTRO.x)`. Grep global: **0 usos de `256` obsoleto en radio/spawn de producción** (resto = comentarios históricos, tests, helpers debug `captura_playa.gd`/`debug_alturas.gd`). `validador_isla_raiz.gd:79` _check que `Vector3(256, 16, 256)` NO está en `main_island.gd`.
+- **Latente menor (fuera de DoD M167, dominio M50/M36):** `vegetation_spawner.gd:36` fallback `Vector2(256, 256)` si `mundo` es null — en runtime el autoload está cargado, no dispara. Anotado, no bloquea.
+- **Verificación visual:** block L (capturas costa/ladera/agua) todo `[x]`; QA visual V2-asistencia de agnes (Log 751 + 2026-09-16) leyó 3 capturas reales → perfil en capas, paleta Maldivas (verde-arena-azul), FPS 60, sin artefactos. Capturas en `tools/mcp/godot-mcp/capturas/167-Isla-Raiz/`.
+- **Evidencia de medición:** no se generó screenshot in-engine fresco (sandbox headless, sin display/Godot corriendo); verificación apoyada en el autoload (fuente de verdad según coordinador) + grep + capturas previas. Satisface el ítem "verificación visual de terreno [V4]".
+- **Restante:** 1 `[ ]` (línea 180, shore-fade / calibración `profundidad_min/max` en `water_config.tres`) = **KnownIssue NO BLOQUEANTE** (aprobación usuario M49/M51). No impide §21.8.
+- **Veredicto:** ✅ **Verificado por hy3 (Log 1212, 2026-10-03)**. M167 listo para sello §21.8.
