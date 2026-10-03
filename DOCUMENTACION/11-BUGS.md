@@ -157,7 +157,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
-| BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
+| BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [ ] Abierto (delegado a hy3) | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
+
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
 ## 6. Bugs Abiertos (pendientes)
@@ -165,6 +166,37 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-090 — test_mapa_m54_e2e.gd: 6 Parse Errors, la suite NO CARGA (falso verde en la QA de M54)
+
+- **Fecha de reporte:** 2026-10-03
+- **Modulo(s) afectado(s):** **M54 (Mapa)** — game/isla-ancestral/scripts/mapa/test_mapa_m54_e2e.gd. Suite huérfana pre-P-59 (autor original: agnes-2.5-flash, descatalogado).
+- **Severidad:** 🟠 **Mayor.** La suite NO CARGA (Parse error) y por lo tanto no prueba nada, pero durante la QA §21.8 de M54 (hy3, Log 1226) se contó como verde espurio. No está en el gate de quality.yml (verificado), así que el CI no la ejecuta; el riesgo es que alguien la agregue o se apoye en ella.
+- **Introducido por:** herencia pre-P-59; quedó desactualizada respecto al API actual de M54 (P-59 reescribió markers/exploradas/regiones/rutas y la suite quedó referenciando nombres y formas viejas).
+- **Estado:** [ ] **Abierto, delegado a hy3** (quien lo descubrió y tiene el contexto completo del QA de M54).
+- **Reportado por:** hy3 (Log 1226, 2026-10-03). Verificación empírica independiente de atria-Dawn-Preview con C:\Temp\godot\godot472.exe headless (2026-10-03):
+
+**Errores medidos (EXIT 1, 6 Parse Errors):**
+
+```
+SCRIPT ERROR: Parse Error: Cannot infer the type of "markers" variable because the value doesn't have a set type.
+SCRIPT ERROR: Parse Error: Cannot infer the type of "explored" variable because the value doesn't have a set type.
+SCRIPT ERROR: Parse Error: Identifier "explorerd" not declared in the current scope.
+SCRIPT ERROR: Parse Error: Cannot infer the type of "regions" variable because the value doesn't have a set type.
+SCRIPT ERROR: Parse Error: Cannot infer the type of "routes" variable because the value doesn't have a set type.
+ERROR: Failed to load script "res://scripts/mapa/test_mapa_m54_e2e.gd" with error "Parse error".
+```
+
+**Causa.** Mezcla de (a) `var markers := ...` (inferencia) donde el lado derecho no tiene tipo determinado en Godot 4.7 — hay que tipar explícito o reescribir contra el API actual — y (b) un typo: `explorerd` (debe ser `explored` o el nombre real del API P-59).
+
+**Fix propuesto (2 caminos):**
+1. **Reescribir contra el API actual de M54** (el P-59 de agnes definió markers/exploradas/regiones/rutas; ver mapa_manager.gd y los 4 suites vivos que hy3 SÍ verificó: test_mapa_m54 42/0, test_map_service_headless 12/0, test_mapa_markers 9/0, test_mapa_busqueda 9/0). Ideal: que la suite e2e AFIRME el flujo completo end-to-end.
+2. **Cuarentena:** si el flujo e2e ya lo cubren los 4 suites vivos, borrar la suite huérfana (no está versionada en el gate). Decisión de hy3 con el coordinador.
+
+**Lección.** Una suite que NO CARGA no es "0 fallos": es un falso verde por inexistencia. Toda QA debe verificar que la suite CARGUE y AFIRME el camino de éxito antes de contarla (mismo patrón que el sello invalidado de M63: suite muerta dando verde).
+
+**Firma:** **Modelo:** atria-Dawn-Preview (registro y verificación) · hy3 (reporte) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-03 06:50
+
+---
 ### BUG-089 — minimap_widget.gd: DOS func _ready() -> **[INVALIDO / CORREGIDO]**
 
 - **Fecha de reporte:** 2026-10-02 (corregido 2026-10-02 por su propio autor)
