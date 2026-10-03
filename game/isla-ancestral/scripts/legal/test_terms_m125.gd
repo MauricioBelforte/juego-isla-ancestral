@@ -23,6 +23,8 @@ func _run() -> void:
 	_test_data()
 	_test_validator()
 	_test_validator_errores()
+	_test_terms_manager()
+	_test_terms_config()
 	_summary()
 
 func _check(nombre: String, cond: bool, detalle: String = "") -> void:
@@ -66,6 +68,33 @@ func _test_validator_errores() -> void:
 	_check("sin título detectado", str(errores).contains("sin título"))
 	_check("menos de 3 secciones detectado", str(errores).contains("3"))
 	_check("sin políticas detectado", str(errores).contains("políticas"))
+
+func _test_terms_manager() -> void:
+	print("--- TermsManager (autoload) ---")
+	var tm := root.get_node_or_null("TermsManager")
+	_check("TermsManager autoload presente", tm != null)
+	if tm == null:
+		return
+	_check("check_terms_acceptance inicial = false", tm.check_terms_acceptance() == false)
+	tm.accept_terms()
+	_check("tras accept: check = true", tm.check_terms_acceptance() == true)
+	# No se muestra si ya aceptó
+	var sig_count: Array = [0]
+	tm.terms_updated.connect(func(): sig_count[0] += 1)
+	tm.update_terms(2)
+	_check("update_terms(v2) -> terms_updated emitida", sig_count[0] == 1)
+	_check("tras update: re-aceptación (accepted=false)", tm.check_terms_acceptance() == false)
+	# Limpiar persistencia
+	DirAccess.remove_absolute("user://terminos_aceptados.json")
+
+func _test_terms_config() -> void:
+	print("--- TermsConfig (Resource) ---")
+	var cfg = load("res://scripts/legal/terms_config.gd").new()
+	_check("TermsConfig terms_version = 1", cfg.terms_version == 1)
+	_check("TermsConfig accept_required = true", cfg.accept_required == true)
+	_check("TermsConfig show_on_launch = true", cfg.show_on_launch == true)
+	_check("TermsConfig terms_file no vacío", cfg.terms_file != "")
+	cfg.free()
 
 func _summary() -> void:
 	print("=== Resumen M125: %d checks, %d fallos ===" % [_checks, _fallos])

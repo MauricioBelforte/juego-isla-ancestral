@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
+TermsManager="res://scripts/legal/terms_manager.gd"
 
 EventBus="*res://scripts/core/event_bus.gd"
 WorldState="*res://scripts/dialogos/world_state_service.gd"
@@ -129,6 +130,7 @@ TransportManager="*res://scripts/transporte/transport_manager.gd"
 IslandRegistry="*res://scripts/islas/island_registry.gd"
 gem_currency="*res://scripts/combat/gem_currency.gd"
 combat_island="*res://scripts/combat/combat_island_system.gd"
+Construccion="*res://scripts/construccion/build_manager.gd"
 
 [display]
 
