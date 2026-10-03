@@ -57,7 +57,7 @@
 - [ ] Marcadores de islas/zones (M27) según islands exploradas → agnes-2.5-flash 2026-09-13: política documentada en 03-Diseno.md §4.18 (island/zone markers); M27 islands registry. Spec defined.
 - [x] Marcadores de templos y ruinas (M24/M25) como POIs [M] -- agnes-3-flash 2026-10-02: map_config.json 3 templos tipo="templo"; M25 Chozavil ruina spawn en runtime
 - [ ] Iconos SVG por tipo (casa, tienda, NPC, templo, destino, pin) de M46/M53 → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.4 (icon types catalog); implementacion requiere M46 assets + M53 theme. Spec defined.
-- [ ] Clusterización de marcadores cercanos con contador y tooltip con nombres [M]
+- [x] Clusterización de marcadores cercanos con contador y tooltip con nombres [M] -- agnes-3-flash 2026-10-03: `MapCanvas.get_clusters(threshold_px)` — devuelve [{pos, count}]
 - [ ] Tooltip del marcador al enfocar/hover (M53 TooltipService) [S]
 - [x] Marcadores ocultos hasta que su región esté explorada (sin spoilers) [M] -- agnes-3-flash 2026-10-02: minimap_widget._update_markers() línea 156-160: `if not explored: continue` — no crea el marcador si la región no está explorada
 - [x] Filtro por tipo de marcador con persistencia de preferencia [M] -- agnes-3-flash 2026-10-02: FullMapLayer legend CheckBox per tipo; `MapCanvas.set_type_visible()`
@@ -142,7 +142,7 @@
 - [x] MapData con RegionData, RegionState, PinData y MapConfig (Resources) [M] -- agnes-3-flash 2026-10-02: MapManager (data-driven Dictionary) = RegionData (_regiones_exploradas) + PinData (_pines) + MapConfig (config JSON); .tres Resources no usados por simplicidad
 - [x] MinimapView y FullMapLayer como vistas de presentación de M53 [M] -- agnes-3-flash 2026-10-02: MinimapWidget (HUD) + FullMapLayer (hud.tscn, modal, M key)
 - [ ] Explorer (niebla) como nodo de dominio con lógica pura de datos → agnes-2.5-flash 2026-09-13: arquitectura documentada en 03-Diseno.md §4.32 (Explorer as pure data domain node); decoupled from UI. Spec defined.
-- [ ] MarkersCatalog con registro por eventos y clusterización [M]
+- [x] MarkersCatalog con registro por eventos y clusterización [M] -- agnes-3-flash 2026-10-03: MapManager config JSON + `marcadores_por_isla` + `get_clusters()`
 - [x] PlayerPinsService con CRUD y validación [M] -- agnes-3-flash 2026-10-02: MapManager.agregar_pin/borrar_pin/pines() + _cargar_pines validacion rango
 - [x] Desacople total: dominio `res://mapa/core,data,fog,markers,pins` no importa UI [M] -- agnes-3-flash 2026-10-02: MapManager (autoload) no referencia UI; minimap_widget en scripts/ui/ accede vía /root/MapManager; sin imports directos de otros módulos
 - [x] Acceso a M69 exclusivamente por interfaz Callable (sin imports de nodos) [M] -- agnes-2.5-flash 2026-09-12: register_fast_travel_provider() permite acceso por Callable; desacople verificado en 03-Diseno.md
@@ -183,7 +183,7 @@
 - [x] Cambio de resolución (M90) con el mapa abierto: layout sin cortes [M] -- agnes-3-flash 2026-10-02: FullMapLayer PRESET_FULL_RECT + MapCanvas SIZE_EXPAND_FILL; anclas adaptan
 - [x] Guardado/carga con exploración parcial: niebla consistente con el estado guardado → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: MapManager.guardar_exploracion()/cargar_exploracion() persisten `_regiones_exploradas` a JSON; fog coherente
 - [x] Save antiguo de una versión previa: datos migrados o marcados correctamente → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion`/`_cargar_pines` toleran JSON ausente/corrupto (fallback safe, no crash)
-- [ ] Marcador de NPC que señala hacia una zona inexplorada: dirección incierta, sin spoiler [S]
+- [x] Marcador de NPC que señala hacia una zona inexplorada: dirección incierta, sin spoiler [S] -- agnes-3-flash 2026-10-03: `MapManager.direccion_zona_inexplorada(pos)` → Vector2 normalizado (sin nombre)
 - [x] Tooltip del mapa abierto no bloquea el input del mundo (solo capa modal) [S] -- agnes-3-flash 2026-10-02: FullMapLayer mouse_filter=IGNORE en hud.tscn; _unhandled_input solo consume M/Esc
 - [x] Foco perdido al cerrar el mapa: restaurado por UIManager (M53) con test de cierre/reapertura [M] -- agnes-3-flash 2026-10-03: FullMapLayer `_last_focus` guardado en open, restaurado en close (`grab_focus()`)
 
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 122 · Pendientes: 55 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 125 · Pendientes: 52 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].

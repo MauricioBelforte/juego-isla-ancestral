@@ -289,3 +289,18 @@ func reveal_around_player(player_pos: Vector3, radius: float = REVEAL_RADIUS_DEF
 			marcar_explorada(mid)
 			newly_explored.append(mid)
 	return newly_explored
+
+## Devuelve dirección hacia una zona inexplorada cercana (sin spoiler del nombre).
+## Retorna Vector2 normalizado (dirección) o Vector2.ZERO si todo explorado.
+func direccion_zona_inexplorada(player_pos: Vector3) -> Vector2:
+	for m in config.get("marcadores", []):
+		var mid: String = String(m.get("id", ""))
+		if mid.is_empty() or _exploradas.get(mid, false):
+			continue
+		var coords: Array = m.get("coords", [0, 0, 0])
+		if coords.size() < 3:
+			continue
+		var mpos := Vector3(float(coords[0]), 0.0, float(coords[2]))
+		var dir := (mpos - player_pos).normalized()
+		return Vector2(dir.x, dir.z)
+	return Vector2.ZERO
