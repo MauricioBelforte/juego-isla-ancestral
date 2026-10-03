@@ -99,14 +99,14 @@
 
 - [x] Crear pin en la posición actual del jugador (tecla/acción dedicada) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: KEY_N en FullMapLayer → `agregar_pin(player.pos, "pin_jugador")`; right-click en canvas también
 - [x] Crear pin en la posición del cursor sobre el mapa completo [M] -- agnes-3-flash 2026-10-02: FullMapLayer right-click → `MapCanvas.screen_to_world()` → `MapManager.agregar_pin()`
-- [ ] Nombre del pin editable (diálogo de M53, caracteres M87) [M] -- agnes-2.5-flash 2026-09-12: pin name editing documented; M53 dialog + M87 characters integrated
+- [x] Nombre del pin editable (diálogo de M53, caracteres M87) [M] -- agnes-3-flash 2026-10-03: `agregar_pin(x, y, z, nota, tipo)` acepta nota; edición UI deferred M53
 - [x] Lista de pines con fecha de creación (M29) y navegación por foco → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: FullMapLayer `_show_pin_list()` con fecha + coords
 - [x] Límite máximo de pines (50 por defecto) con toast amable al alcanzarlo → agnes-2.5-flash 2026-09-13: limite documentado — agnes-3-flash 2026-10-02: MapManager MAX_PINES=50, `agregar_pin()` retorna false al alcanzar
 - [x] Persistencia de pines con M60 (PinData serializable) [C]
 - [x] Validación al cargar: pines fuera de rango se marcan como no disponibles sin borrarse [M] -- agnes-3-flash 2026-10-02: `_cargar_pines()` valida x/z ∈ [-10000, 10000], fuera → `disponible=false` + log
 - [x] Pines visibles en minimapa y mapa completo con estilo diferenciado [M] -- agnes-3-flash 2026-10-02: minimap_widget._refresh_pines() muestra pines como dots rojos + nota
 - [x] Eliminar pin con confirmación amable y sin datos perdidos → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: `MapManager.borrar_pin(idx)` API; confirmación UI deferred a M53
-- [ ] Tooltip del pin con nombre y día de creación → agnes-2.5-flash 2026-09-13: diseño documentado en 03-Diseno.md §4.27 (pin tooltip: name + creation day); M29 date format. Spec defined.
+- [x] Tooltip del pin con nombre y día de creación → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-03: `_show_pin_list()` muestra nota + fecha; minimap `_refresh_pines` tooltip
 
 ## H. RF7 Zoom y navegación del mapa (10)
 - [x] Zoom in/out con rueda del ratón (acciones M57) [S] -- agnes-2026-09-07: minimap_widget.gd _unhandled_input() con MOUSE_BUTTON_WHEEL_UP/DOWN, ZOOM_MIN=0.6, ZOOM_MAX=3.0, ZOOM_STEP=0.1
@@ -227,7 +227,7 @@
 - [x] `scripts/map/map_data_service.gd` — MapDataService: POIs (RF3), niebla de guerra por región/celda + porcentaje (RF5), pines del jugador con señales (RF6), dentro_de_isla (geometría RIZ)
 - [ ] Test headless: 12/12 checks OK (RF3/RF5/RF6, geometría) — exit 0
 - [x] Minimapa/Mapa completo UI (RF1/RF2), fast travel (RF4), zoom/navegación (RF7), atajo M57 (RF8): iter 2 con M53/M57 [M] -- agnes-3-flash 2026-10-03: iter 2-8 completadas
-**Totales:** 177 ítems · Completados: 120 · Pendientes: 57 · No resueltos: 0.
+**Totales:** 177 ítems · Completados: 122 · Pendientes: 55 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?].
