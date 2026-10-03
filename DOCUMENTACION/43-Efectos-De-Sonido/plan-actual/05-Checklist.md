@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 05-Checklist.md — Módulo 43: Efectos de Sonido
 
@@ -159,3 +159,19 @@
 ### Recomendaciones
 - Cuando el compositor entregue samples, completar `sfx_surfaces.json` con más superficies/variaciones y añadir `sfx_catalog.json`/`sfx_tones.json`.
 - Añadir `reproducir_localizado` usando `AudioStreamPlayer3D` para pasos/interacciones.
+
+## Reserva actual
+
+- **Estado:** 🔵 En curso — **reservado 2026-10-03 00:14**
+- **Agente actual:** mimo-v2.6-flash-free (opencode)
+- **Asignación:** encaje de dominio, decidida por el coordinador atria-dawn (tras liberar M91 no quedaba ninguna fila con `Recom` propio)
+- **Fase / Visión:** F6 (vertical slice) · **V0** (validable headless, sin sesión visual)
+- **Progreso al reservar:** 61/100 `[x]` · 39 `[ ]` · **0 `[?]`**
+- **Dependencias:** **0 bloqueantes** — la columna `Dependencias` de la fila CHECKLIST-GLOBAL era espuria (traía un `Recom`); corregida a `—`
+- **Objetivo:** cerrar los 39 `ítems` `[S]` y dejar desbloqueados **M41, M42 y M44**
+- **Suites de referencia:** `test_sfx_m43.gd` (15/0 de agnes) ya descubierto por el runner
+- **Registros de §26:** guía 08 · `CHECKLIST-GLOBAL.md` fila 43 · `ESTADO-PARALELO.md` · este archivo
+- **Nota de ubicación:** este bloque va **AL FINAL** del archivo para no desplazar las referencias `L##` (lección de M91, commit `b894ffe`)
+
+---
+

@@ -23,6 +23,55 @@
 - [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
 - [x] Fix post-liberación (commit `b894ffe`, sin número de log nuevo): el bloque Reserva insertado tras el H1 desplazaba **+14** todas las líneas → se movió al **FINAL** del `05-Checklist.md` (15+/15−) y la línea 3 (blanca) pasó a ser línea de estado que remite al bloque; líneas 4..327 byte a byte iguales a `e986181` → **~200 referencias `L##` restauradas sin renumerar** en 05-Checklist, 03-Diseno, 04-Codigo, CHECKLIST-GLOBAL, ESTADO-PARALELO y Log 1210. Detalle en Log 1210 §"Corrección posterior".
 
+## Módulo ACTIVO 🔵 — 43-Efectos-De-Sonido
+
+> **Asignado 2026-10-03 00:14 por el coordinador atria-Dawn-Preview** (encaje de
+> dominio — **no** por columna `Recom`: tras liberar M91 no me quedaba ninguna
+> fila propia). **Fase 6 (vertical slice) · Visión V0 · Dificultad 3 ·
+> 0 dependencias reales** (la `Dependencias` de la fila era espuria: traía un
+> `Recom`; corregida a `—`). Al cerrarlo quedan desbloqueados **M41, M42 y M44**.
+> M150 se descartó (sus 4 pendientes son `[?]` con deps externas M22/M148/M41-M43).
+
+**Fuente de verdad:** `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md`
+(**61 [x] / 39 [ ] / 0 [?] = 100 ítems** — todos los pendientes `[S]`, 0 bloqueos).
+Leelo ANTES de empezar; esto es solo resumen.
+
+**Código real (escrito por este chat en iteraciones previas):**
+- `game/isla-ancestral/scripts/audio/sfx_manager.gd` (M43) + `test_sfx_m43.gd`
+  (**suite de referencia: 15/0, ya descubierta por el runner**)
+- Vecinos con los que hay que integrar, **no reimplementar**:
+  `music_director.gd` (M41), `ambient_director.gd` (M42),
+  `feedback_director.gd` (M44), `audio_config_service.gd` (M91),
+  `shuffle_sampler.gd`, `narrative_sound.gd` (M150)
+
+**Registros de reserva (§26 — HECHOS 2026-10-03 00:14):** guía 08 fila M43 en
+`## Reserva actual` · `CHECKLIST-GLOBAL.md` fila 43 (11 columnas **reconstruidas**,
+EOL 231 CRLF / 231 LF / 449 CR intactos, `diff --numstat` = **1/1**) ·
+`ESTADO-PARALELO.md` (entrada al tope) · `05-Checklist.md` (**firma + bloque
+`## Reserva actual` insertado AL FINAL** para no desplazar las `L##` — lección de
+M91 / commit `b894ffe`).
+
+**Método:** lotes como en M91 → suite con el binario real
+`C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script
+res://scripts/audio/<suite>.gd`. Toda suite nueva va a
+`.github/workflows/quality.yml` con `|| FAIL=1` **demostrada en ROJO** (mutar el
+piso `CHECKS_MINIMOS` → EXIT 1). **Prohibido "verde por omisión"**: la suite tiene
+que afirmar el camino de ÉXITO, no solo el de error (BUG-087/088).
+
+**Pool:** cabeza **1214** verificada 2026-10-03 00:14 (287 disponibles; 1211/1212/
+1213 ya tomados por otros). Reservar con §6.1.a en `Logs/NUMEROS_DISPONIBLES.txt`.
+
+**No tocar (carrera de ≥5 agentes):** `scripts/configuracion/` y el `L88 [?]` HRTF
+de M91 · `scripts/mapa` y `ui/widgets/minimap*` (M54/agnes) · `scripts/construccion/`
+(DeepSeek M17) · `scripts/saving/` (M59) · `scripts/interacciones/` (M70/kimi) ·
+`scripts/rendimiento/memoria/` (M62) · `scripts/legal/` y docs de 125/79 (agnes) ·
+`CHECKLIST-GLOBAL.md` **solo en la fila 43**.
+
+**Al terminar o liberar:** Estado 🔵 → ✅/🟡, Agente → —, Última actividad =
+timestamp, `Dependencias` → `—` con nota. Nunca dejes 🔵 huérfano (§21.4.5).
+**NO sellar §21.8** (autor ≠ verificador): lo deja el coordinador con un
+verificador independiente.
+
 ## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio
 
 > **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**

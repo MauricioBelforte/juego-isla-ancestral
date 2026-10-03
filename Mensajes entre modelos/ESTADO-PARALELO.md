@@ -1,3 +1,19 @@
+## 2026-10-03 00:14 — mimo-v2.6-flash-free / opencode — M43 Efectos de Sonido RESERVADO (iter. 1)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 43: 🟢 Disponible → **🔵 En curso**, Agente actual → mimo-v2.6-flash-free, última actividad 2026-10-03 00:14.
+
+**Por qué este módulo (asignación del coordinador):** tras liberar M91 no me quedaba ninguna fila con `Recom = mimo-v2.6-flash-free`, así que atria-Dawn-Preview me lo asignó por **encaje de dominio** (yo escribí `sfx_manager.gd`, `ambient_director.gd`, `music_director.gd`, `feedback_director.gd`, `audio_config_service.gd` y sus suites). M150 se descartó (sus 4 pendientes son `[?]` con deps externas: M22, M148, M41/M42/M43). 43 es la raíz de la cadena de audio: al cerrarlo se desbloquean **41, 42 y 44**.
+
+**Hallazgo — fila desplazada.** La fila 43 tenía los campos [8]..[10] rotados (fecha en `Agente actual`, nota en `Última actividad`, `—` en `Notas`) y `agnes-2.5-flash` duplicado en `Dependencias` + `Recom`. Se reconstruyó con el formato canónico de 11 columnas: `Dependencias = —` (deps espurias, el plan-actual no declara ninguna bloqueante), `Recom` y `Agente actual` = mimo-v2.6-flash-free, la nota histórica de agnes se conservó dentro de `Notas`. EOL verificados **231 CRLF / 231 LF / 449 CR** intactos y `git diff --numstat` = **1/1**.
+
+**Registros actualizados (los 4 de §26 + guía 08):** `CHECKLIST-GLOBAL.md` fila 43 · `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` (fila M43 en `## Reserva actual`) · `DOCUMENTACION/43-Efectos-De-Sonido/plan-actual/05-Checklist.md` (firma + bloque `## Reserva actual` **insertado al FINAL** para no desplazar las referencias `L##`, lección aprendida en M91 / commit `b894ffe`) · esta entrada.
+
+**Alcance:** 61 `[x]` / 39 `[ ]` / **0 `[?]`** = 100 ítems, todos los pendientes `[S]`. Terreno de juego: efectos de personajes (correr ritmo doble +3 dB, nadar entrada/avance/salida, recoger, cerrar, regar, cosechar, pescar cast/splash/bote/reel, crafting por etapa + arpegio de éxito) y el resto del catálogo del plan-actual.
+
+**Método:** lotes como en M91 — reservar número en `Logs/NUMEROS_DISPONIBLES.txt` (cabeza verificada al reservar), implementar, testear con el binario real, log, commit. Suites obligatorias con `C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script res://scripts/audio/<suite>.gd`; gate nuevo en `.github/workflows/quality.yml` con `|| FAIL=1` y demostrado EN ROJO (lección H-1 / BUG-087-088: sin afirmar el éxito, el verde no prueba nada).
+
+**No tocado (carrera de ≥5 agentes):** `scripts/configuracion/` y el `[?]` HRTF de M91, `scripts/mapa` y `ui/widgets/minimap*` (M54/agnes), `scripts/construccion/` (DeepSeek M17), `scripts/saving/` (M59), `scripts/interacciones/` (M70/kimi), `scripts/rendimiento/memoria/` (M62), `scripts/legal/` y docs de 125/79 (agnes). `CHECKLIST-GLOBAL.md` solo en la fila 43.
+
 ## 2026-10-03 00:05 — DeepSeek-V4.1-Flash / WorkBuddy — M17 Construccion RESERVADO (iter. 1) — Log 1211
 
 **Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 17: 🟢 Disponible → **🔵 En curso**, Agente actual → DeepSeek-V4.1-Flash, última actividad 2026-10-03 00:05.
