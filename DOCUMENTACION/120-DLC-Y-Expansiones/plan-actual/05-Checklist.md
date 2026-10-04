@@ -287,3 +287,44 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 163 [x] / 59 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+> **Auditoría contra disco (T-D5, DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-04, Log 1291):**
+> Se auditó M120 contra el disco antes de aceptar el conteo del GLOBAL (método M03).
+>
+> **Conteo real de marcas:** 163 [x] / 59 [ ] / 0 [?] = 222 → **coincide exactamente** con la
+> fila 120 del GLOBAL (`163/222`). NO hay "falso cero": el número ya está sincronizado.
+> (Las líneas legacy `Ítems resueltos por documentación: 159` / `Ítems pendientes de
+> implementación: 0` son de SWE-1.6 y están STALE frente a las 222 marcas reales.)
+>
+> **Huella técnica real en disco:**
+> - `scripts/dlc/dlc_manager.gd` (autoload M120, project.godot:118) — manifest data-driven,
+>   activar/desactivar, bundles, compatibilidad de versión, ISaveProvider.
+> - `data/dlc/dlc_manifest.json` (2 DLC: `isla_hielo`, `pack_aurora`) + `data/dlc/bundles.json`
+>   (`bundle_deluxe`, descuento 0.15).
+> - `scripts/dlc/sincronizar_dlc.gd` (helper).
+> - Tests: `scripts/dlc/test_dlc_m120.gd` (16/0) + `tests/unit/dlc/test_dlc_manager.gd` (39/0, nuevo T-D5).
+>
+> **Servicios diseñados pero NO implementados** (04-Codigo.md §2/§5-7 los define; NO existen en
+> disco): `dlc_compatibility_checker.gd`, `dlc_uninstaller.gd`, `dlc_bundle_manager.gd`. Sus
+> funciones están parcialmente absorbidas en `DlcManager` (`es_compatible`/`version_base_actual`,
+> `bundle`/`bundles_que_contienen`) o pendientes (desinstalación real, cálculo de descuento).
+> Los ítems de este checklist que los nombran dicen "**Diseñar** ..." (diseño documentado → [x]
+> legítimo); la IMPLEMENTACIÓN figura como pendiente en 04-Codigo.md §9 ("IMPLEMENTACIÓN
+> INMEDIATA"). **NO son sobre-marcas.**
+>
+> **Aporte técnico T-D5 (código + test, commit pendiente):**
+> - `es_compatible()` comparaba versiones como STRINGS (`"1.10.0" >= "1.9.0"` daba false) →
+>   ahora `comparar_versiones()` semántica. Respalda "[x] Verificar compatibilidad con version
+>   base [M]", que ANTES no se cumplía.
+> - `_activos` no se persistía → `DlcManager` es ahora ISaveProvider (sección "dlc"): persiste
+>   DLCs activos + versión base y reconcilia al cargar los DLCs ausentes (`dlcs_faltantes`).
+>   Respalda "[x] Activar/desactivar DLC con persistencia [M]", que ANTES no se cumplía.
+> - Test nuevo `tests/unit/dlc/test_dlc_manager.gd` **39/0 EXIT 0** (12 bloques, piso
+>   `CHECKS_MINIMOS=39` MEDIDO).
+>
+> **Hallazgos para el GLOBAL (no editado por mí — dueño: director):**
+> 1. La fila 120 dice `🟢 Disponible` pero tiene 163 [x] → `verificar_checklist.py` (E3) lo marca
+>    como inconsistencia (uno de los 44 módulos con drift). Corresponde **🟡 Con dudas** (diseño
+>    completo; núcleo técnico = DlcManager; 3 servicios auxiliares pendientes).
+> 2. La fila 120 cita `🔵 Verificado por Hy3/WorkBuddy (Log 866, §21.8)` → **Log 866 es el log
+>    fraudulento** ya reemplazado por Hy3 (commit `ad6b370`). El sello §21.8 de M120 es INVÁLIDO.

@@ -171,6 +171,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-097 | `bootstrap.gd:109/115` llama `ServiceRegistry.list_registered()` y `.validate_required()` que NO existen: 2 errores de runtime en cada boot y la validación de servicios nunca corre | M07 | 🟡 Menor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 | BUG-098 | **BUG-091 residuo: los 44 SCRIPT ERROR restantes** (frente del director, mensaje 18 d). Clasificados por familia: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** funcion inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type. **42 fixeados; 1 delegado (agnes/BUG-095); 1 cascada dependiente; 0 falsos de `--script`.** Colector 44 -> 2; full load 0; M167 30/0 | transversal (BUG-091) | 🔴 Crítico | [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277) — residuo = `inventario_service.gd:171` (agnes) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-101 | **BUG REAL DE PRODUCTO (dormido, API muerta)**: `item_database.gd` (M159) poblaba `_by_category`/`_by_rarity`/`_by_fuente` con `Array` **sin tipar**, pero los getters declaran `-> Array[ItemData]` -> en Godot 4.7 la conversion implicita FALLA en runtime (`Trying to assign an array of type "Array" to a variable of type "Array[ItemData]"`) y `get_items_by_category()`/`get_items_by_rarity()`/`get_items_by_source()` devolvian **SIEMPRE vacio** desde el commit inicial `4234bca`. **0 consumidores en produccion** (unico llamador: `test_item_data.gd`). Medido: `_by_category[5]`=10 items pero `get_items_by_category(COCINA)`=0 pre-fix / 10 post-fix; `get_items_by_rarity(COMUN)`=0 / 78. Descubierto por DeepSeek-V4.1-Flash en T-D3 (Log 1288) | M159 (`scripts/data/item_database.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1288) | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-102 | **BUG REAL DE PRODUCTO (dormido)**: `dlc_manager.gd` (M120) `es_compatible()` comparaba versiones como STRINGS -> `"1.10.0" >= "1.9.0"` = **false** (lexicografico). Un DLC que exige version >= 1.9.0 se reportaba INCOMPATIBLE con la base 1.10.0 (y al reves). Ademas `_activos` (DLCs activados) **NO se persistia**: activar un DLC, guardar y cargar lo perdia (el item de checklist "Activar/desactivar DLC con persistencia [M]" estaba marcado [x] sin respaldo). Descubierto y resuelto por DeepSeek-V4.1-Flash en T-D5 (Log 1291) | M120 (`scripts/dlc/dlc_manager.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1291) | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -5246,3 +5247,49 @@ sea honesta y para no dejar una trampa a un futuro consumidor (M39/tiendas lista
 era el **CODIGO**, no debilitar el test (regla: un test no debe consagrar el bug).
 
 **Descubierto por:** DeepSeek-V4.1-Flash, al re-correr `test_item_data.gd` en T-D3 (frente del director, mensaje 20).
+
+### BUG-102 - `dlc_manager.gd` (M120): versionado lexicografico + DLCs activos no persistidos
+
+**Estado:** [x] Resuelto (DeepSeek-V4.1-Flash, Log 1291)
+**Modulo:** 120 (DLC y Expansiones)
+**Severidad:** Media (bug real de producto, **dormido**: DlcManager es autoload pero hoy nadie llama `es_compatible()`/`activar()` desde gameplay; el bug esta en el camino futuro de DLC)
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-04 23:xx
+
+**Defecto 1 — comparacion de versiones lexicografica:**
+`es_compatible(id, version_base)` hacia:
+    return version_base >= d.get("version_requerida", "")
+Comparar strings NO es comparar versiones: `"1.10.0" >= "1.9.0"` es **false** (porque en
+orden lexicografico el caracter `'1'` de "1.10.0"[2] es menor que `'9'` de "1.9.0"[2]).
+Efecto: un DLC que exige la base `>= 1.9.0` se reportaba **incompatible** con la base `1.10.0`.
+
+**Defecto 2 — `_activos` no persistido:**
+`activar(id)` solo hacia `_activos.append(id)` en memoria. `DlcManager` NO era ISaveProvider
+(M59), asi que la lista de DLCs activos se perdia en cada guardado/carga. El item de checklist
+"Activar/desactivar DLC con persistencia [M]" estaba marcado `[x]` pero **la persistencia no existia**.
+
+**Fix (Log 1291):**
+- `es_compatible()` usa ahora `comparar_versiones(a, b) -> int` **semantica** (compara por
+  segmentos `.`; tolera `"1.2"=="1.2.0"` y sufijos `"1.0.0-beta"`), con `_parsear_version()`.
+  `version_base_actual()` lee `application/config/version` de `ProjectSettings`.
+- `DlcManager` implementa ISaveProvider (seccion `"dlc"`): `get_section_name()`,
+  `get_save_data()` (`activos` + `version_base`), `restore_save_data()`. Al cargar un save que
+  referencia un DLC **no instalado**, no lo activa a ciegas: lo registra en `_faltantes`
+  (`dlcs_faltantes()`). Se expone `version_guardada()` / `save_de_version_superior()` (downgrade).
+  Registro defensivo: `SaveManager.register_provider(self)` solo si el autoload existe.
+
+**Medido (pre/post-fix, sonda headless):**
+- `comparar("1.10.0","1.9.0")`: antes (string `>=`) = **false**; ahora = **1** (mayor). Correcto.
+- Roundtrip save: activar `isla_hielo`+`pack_aurora` -> `get_save_data()` -> `restore_save_data()`
+  -> ambos activos, 0 faltantes. DLC ausente en el save -> queda en `dlcs_faltantes`, NO activado.
+
+**Verificacion:** test nuevo `tests/unit/dlc/test_dlc_manager.gd` **39/0 EXIT 0** (12 bloques,
+piso `CHECKS_MINIMOS=39` MEDIDO); test legacy `scripts/dlc/test_dlc_m120.gd` **16/0 EXIT 0**;
+colector 920 preloads / **0 SCRIPT ERROR**; full load **0 SCRIPT ERROR**.
+
+**Nota de metodo:** el fix respalda DOS items de checklist que estaban `[x]` sin respaldo real
+("[x] Verificar compatibilidad con version base [M]" y "[x] Activar/desactivar DLC con
+persistencia [M]"). No se debilito ningun test; se corrigio el CODIGO.
+
+**Descubierto por:** DeepSeek-V4.1-Flash en T-D5 (auditoria contra disco de M120, mensaje 24 del director).
