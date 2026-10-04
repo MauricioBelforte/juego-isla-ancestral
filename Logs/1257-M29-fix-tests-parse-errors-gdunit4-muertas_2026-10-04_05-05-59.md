@@ -131,3 +131,16 @@ x3 corridas identicas, EXIT 0, 0 SCRIPT ERROR. Verificado tambien con la invocac
 1. **`is_equal_to` / `is_instance_of` no existen en gdUnit4** -> 14 archivos de `tests/` los usan; el runner de gdUnit4 del proyecto no los corre (invocacion rota + `|| true`). El estandar VIVO es `extends SceneTree` + `--script`.
 2. **Un error de PARSEO en un script `--script` no llega a `_run()`** -> no sirve como sonda de "aborto silencioso"; la sonda debe inyectar un error de RUNTIME.
 3. **`Path.write_text` en Windows traduce `\n` -> `\r\n`** (rompe el EOL del archivo): usar `write_bytes` con el contenido ya normalizado. Y `write_bytes` puede dar `OSError Errno 22` por lock transitorio -> reintentar.
+
+## 9. Huella de push (AGENTS.md 4.3)
+
+- Rango: `bcba5a4..94474ed` (1 commit: `94474ed`, PROPIO).
+- Hora: 2026-10-04 05:07 (UTC) / 02:07 (-0300).
+- Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy).
+- Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- Contenido: 6 archivos, 779 inserciones, 147 borrados (2 suites reescritas + 04-Codigo + 05-Checklist + BACKLOG-MASTER + Log 1257).
+- Ajenos arrastrados: 0 (solo mi commit en el rango; `git log --oneline origin/main..HEAD` = 1 linea).
+- Verificacion: `git ls-remote origin refs/heads/main` =
+  `94474eddc2f22b79ac1d4d227c69587d808ec3b9` == HEAD local.
+- NO se commiteo `CHECKLIST-GLOBAL.md` (cambios ajenos en vuelo: filas 125/126, re-verify Hy3 Log 1258)
+  ni `ESTADO-PARALELO.md` (edicion ajena en vuelo). Ambos quedan para el coordinador.
