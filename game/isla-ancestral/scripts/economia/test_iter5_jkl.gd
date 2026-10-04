@@ -166,8 +166,12 @@ func _test_j5_j7_anti_arbitraje_crafting() -> void:
 	var venta_resultado := int(_pm.precio_venta_vigente(receta.resultado_id))
 	_check("venta pico_cobre (%d) < materiales (madera+cobre: %d)" % [venta_resultado, suma_materiales], venta_resultado < suma_materiales)
 	# RF11: la venta nunca supera la compra (reventa no rentable)
+	# BUG-047: solo aplica cuando compra > 0 (items sell-only no tienen arbitraje)
 	var compra_resultado := int(_pm.precio_compra_vigente(receta.resultado_id))
-	_check("RF11: venta (%d) <= compra (%d) del resultado", venta_resultado <= compra_resultado)
+	if compra_resultado > 0:
+		_check("RF11: venta (%d) <= compra (%d) del resultado" % [venta_resultado, compra_resultado], venta_resultado <= compra_resultado)
+	else:
+		_check("RF11 sell-only: venta (%d) > 0 (sin arbitraje)" % venta_resultado, venta_resultado > 0)
 
 ## ── K.13: descuentos nunca producen precio <= 0 ──────────────────────────
 ## Usa PriceManager con catálogo falso: precio base 1 y máximo descuento
