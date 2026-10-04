@@ -49,11 +49,23 @@ jobs:
 
       # GATE DURO (era NO-OP). El `|| FAIL=1` permite ver TODOS los scripts
       # rotos en una sola pasada y luego fallar el job.
+      # MODO A (BUG-091, fix atria-dawn-s2 2026-10-04): --check-only --script
+      # sale EXIT 0 aunque los preloads no compilen (verificado empiricamente:
+      # 22 SCRIPT ERROR impresos + "Failed to compile depended scripts" con
+      # EXIT 0; solo detecta archivos inexistentes). Se cuentan los SCRIPT
+      # ERROR de parseo impresos y se propagan al exit code del job.
       - name: Check for Godot parser errors
         run: |
           cd game/isla-ancestral
           FAIL=0
-          godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 || FAIL=1
+          LINT_LOG=$(mktemp)
+          godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 | tee "$LINT_LOG" || true
+          PARSE_ERRORS=$(grep -c "SCRIPT ERROR" "$LINT_LOG" || true)
+          echo "SCRIPT ERROR detectados: $PARSE_ERRORS"
+          if [ "$PARSE_ERRORS" -gt 0 ]; then
+            echo "GATE DURO BUG-091: $PARSE_ERRORS SCRIPT ERROR en scripts del proyecto"
+            FAIL=1
+          fi
           echo "Godot headless lint completed (FAIL=$FAIL)"
           exit $FAIL
 
@@ -121,6 +133,15 @@ jobs:
         with:
           version: "4.7-stable"
           export-templates: true
+
+      - name: Import project resources
+        # MODO B (BUG-091, fix atria-dawn-s2 2026-10-04): en un checkout
+        # limpio (sin .godot/) la cache de class_names no existe y todas las
+        # suites que usan class_name entre archivos mueren por PARSEO antes
+        # de llegar a sus aserciones (gates decorativos). Verificado en
+        # godot-lint: fresh + --import => EXIT 0; fresh sin --import =>
+        # EXIT 1 falso. DeepSeek-V4.1-Flash, Log 1244.
+        run: godot --headless --path game/isla-ancestral --import
 
       - name: Run validation tests
         run: |
