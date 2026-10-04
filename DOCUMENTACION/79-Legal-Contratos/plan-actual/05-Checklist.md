@@ -1,7 +1,7 @@
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 05-Checklist.md — Módulo 79: Legal — Contratos (110 ítems)
+# 05-Checklist.md — Módulo 79: Legal — Contratos (103 ítems)
 
 ## Convención
 - `[x]` = completado por documentación. `[x]` = pendiente. `[?]` = no resuelto.
