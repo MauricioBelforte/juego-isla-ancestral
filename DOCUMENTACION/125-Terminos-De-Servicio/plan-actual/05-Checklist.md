@@ -144,8 +144,8 @@
 
 ## Totales
 
-**Total de ítems:** 91
-**Ítems resueltos por documentación:** 91
+**Total de ítems:** 105
+**Ítems resueltos por documentación:** 105
 **Ítems pendientes de implementación:** 0 (implementación inmediata posible)
 
 ## Verificación QA Cruzado — Hy3 / Kilo Code (2026-09-02)
