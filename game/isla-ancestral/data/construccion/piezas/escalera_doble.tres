@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_olbe3")
 id = &"escalera_doble"
+mesh_path = "res://assets/3d/alta/18-Casas_escalera_mano.glb"
 nombre = "Escalera doble"
 familia = &"escalera"
 tamano = Vector2i(2, 1)

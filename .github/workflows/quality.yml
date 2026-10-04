@@ -300,6 +300,17 @@ jobs:
           # el techo pasa a 2x2. 99 checks, 9 bloques con marcador _fin() y
           # guarda anti-falso-verde probada por INYECCION (3 sondas en ROJO:/r/n          # asercion rota, aborto de runtime en el bloque 9 y un check menos).
           godot --headless --script scripts/construccion/test_construccion_iter2.gd 2>&1 || FAIL=1
+          # M17 Construccion iter. 3 (Log 1244, DeepSeek-V4.1-Flash): HUD del modo
+          # (BuildHudModel puro: filas de costo y motivos de rechazo traducidos),
+          # MESH REAL de la receta en el fantasma (PlacementRule.mesh_path en 30
+          # recetas del catalogo; BuildGhost resuelve la malla y cae a la caja de
+          # respaldo si la ruta no existe), FOLLOW con lerp (sin sobrepasar) y
+          # AUTO-OCULTADO fuera de zona; permisos finos M18/M25 (ZonasPermisos:
+          # casa del jugador edificable, parcelas NPC y ruinas protegidas) y STRESS
+          # M112 de 251 piezas (consistencia de ocupacion + undo/redo masivo con
+          # tope de pila 200). 138 checks, 9 bloques con marcador _fin() y guarda
+          # anti-falso-verde probada por INYECCION (4 sondas en ROJO limpio).
+          godot --headless --script scripts/construccion/test_construccion_iter3.gd 2>&1 || FAIL=1
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

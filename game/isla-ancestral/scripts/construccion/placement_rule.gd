@@ -61,6 +61,12 @@ extends Resource
 ## (piezas que no escriben voxel propio, p. ej. muebles decorativos).
 @export var bloque: int = 0
 
+## Ruta (res://) de la MALLA real de la pieza, para que el fantasma la muestre
+## en vez de la caja de respaldo. Acepta un `.glb` (PackedScene importada) o un
+## `Mesh`/`.res`. Vacio = el fantasma usa su caja de respaldo (iter. 2).
+## iter. 3 (mesh real de la receta).
+@export var mesh_path: String = ""
+
 ## Superficie que OFRECE la pieza ya colocada, para que otra pieza pueda apoyar
 ## encima: "piso" (piso/losa), "techo" (techo/cumbrera), "pared" (pared/pilar).
 @export var superficie_ofrecida: StringName = &"piso"
@@ -137,6 +143,7 @@ static func desde_dict(d: Dictionary) -> PlacementRule:
 	if c is Dictionary:
 		r.costo = (c as Dictionary).duplicate()
 	r.bloque = int(d.get("bloque", 0))
+	r.mesh_path = String(d.get("mesh_path", ""))
 	r.superficie_ofrecida = StringName(String(d.get("superficie_ofrecida", "piso")))
 	r.es_mueble = bool(d.get("es_mueble", false))
 	r.max_por_zona = int(d.get("max_por_zona", 0))
@@ -159,6 +166,7 @@ func a_dict() -> Dictionary:
 		"devolucion": devolucion,
 		"costo": costo.duplicate(),
 		"bloque": bloque,
+		"mesh_path": mesh_path,
 		"superficie_ofrecida": String(superficie_ofrecida),
 		"es_mueble": es_mueble,
 		"max_por_zona": max_por_zona,

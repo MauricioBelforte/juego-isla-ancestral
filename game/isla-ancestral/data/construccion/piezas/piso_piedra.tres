@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_vsvnk")
 id = &"piso_piedra"
+mesh_path = "res://assets/3d/alta/25-Ruinas-Templos_losa_grabado.glb"
 nombre = "Losa de piedra"
 familia = &"piso"
 altura = 0.5

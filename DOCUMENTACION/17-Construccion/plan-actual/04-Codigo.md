@@ -108,3 +108,23 @@ func registrar_zona(aabb: AABB, permiso: StringName) -> void
 - Prototipar con 3 piezas (pared, piso, techo) antes de crear las 12 familias; validar la rejilla 1 m contra el mesh de M08 en una escena de prueba.
 - Conectar la señal `obra_activa` con M64 al inicio para detectar bloqueos de rutas temprano.
 - Especificar los datos voxel de pieza en capa separada del terreno generado para que M08 pueda restaurar el terreno al demoler.
+
+## Notas del Agente — iter. 3 (implementación real)
+
+**Modelo:** DeepSeek-V4.1-Flash (WorkBuddy)
+**Fecha:** 2026-10-04
+**Log:** 1244
+
+Las rutas REALES de la implementación viven en `res://scripts/construccion/` (no
+`res://src/`, que era la propuesta de diseño). Archivos agregados en iter. 3:
+
+| Archivo | Tipo | Rol |
+|---|---|---|
+| `res://scripts/construccion/build_hud.gd` | Modelo puro | `BuildHudModel`: filas de costo y motivos de rechazo traducidos para el HUD (la capa UI es M18) |
+| `res://scripts/construccion/zonas_permisos.gd` | Política pura | `ZonasPermisos`: presets de permiso M18/M25 (casa del jugador, parcelas NPC, ruinas) y traducción a motivo |
+
+Cambios en archivos existentes:
+- `placement_rule.gd`: nuevo campo `@export var mesh_path: String` (round-trip en `desde_dict`/`a_dict`).
+- `build_ghost.gd`: `resolver_malla()`/`malla_desde_ruta()`/`cargar_malla()` (MESH REAL de la receta, con caja de respaldo), `seguir()`/`seguir_celda()`/`destino_de()` (FOLLOW con lerp, sin sobrepasar) y `actualizar_visibilidad()`/`debe_ocultarse()` (AUTO-OCULTADO fuera de zona).
+- `data/construccion/piezas/*.tres`: 30 recetas declaran `mesh_path` hacia `assets/3d/alta/`.
+- Suite `res://scripts/construccion/test_construccion_iter3.gd` (138 checks, 9 bloques `_fin`).

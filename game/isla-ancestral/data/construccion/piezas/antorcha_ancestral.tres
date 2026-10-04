@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_huiqp")
 id = &"antorcha_ancestral"
+mesh_path = "res://assets/3d/alta/13-Herramientas_antorcha_mano.glb"
 nombre = "Antorcha ancestral"
 familia = &"iluminacion"
 costo = {

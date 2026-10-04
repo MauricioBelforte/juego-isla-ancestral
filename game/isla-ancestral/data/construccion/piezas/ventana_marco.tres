@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_sp4m0")
 id = &"ventana_marco"
+mesh_path = "res://assets/3d/alta/18-Casas_ventana_marco.glb"
 nombre = "Ventana de marco"
 familia = &"ventana"
 superficie_ok = Array[StringName]([&"pared", &"piso"])

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_s5cvs")
 id = &"silla"
+mesh_path = "res://assets/3d/alta/18-Casas_silla_madera.glb"
 nombre = "Silla"
 familia = &"mueble"
 costo = {

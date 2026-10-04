@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ukvl2")
 id = &"puente_2"
+mesh_path = "res://assets/3d/alta/40-Infraestructura_puente_cuerda_colgante.glb"
 nombre = "Puente de 2 celdas"
 familia = &"puente"
 tamano = Vector2i(2, 1)

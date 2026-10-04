@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_maafe")
 id = &"mesa"
+mesh_path = "res://assets/3d/alta/18-Casas_mesa_madera.glb"
 nombre = "Mesa"
 familia = &"mueble"
 costo = {

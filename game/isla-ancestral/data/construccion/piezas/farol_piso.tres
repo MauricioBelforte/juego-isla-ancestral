@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_87nvn")
 id = &"farol_piso"
+mesh_path = "res://assets/3d/alta/18-Casas_decor_farol_mesa.glb"
 nombre = "Farol de piso"
 familia = &"iluminacion"
 costo = {

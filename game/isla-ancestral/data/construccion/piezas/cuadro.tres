@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_f7ysw")
 id = &"cuadro"
+mesh_path = "res://assets/3d/alta/18-Casas_cuadro_ancestral.glb"
 nombre = "Cuadro"
 familia = &"decoracion"
 costo = {

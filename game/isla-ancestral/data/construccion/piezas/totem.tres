@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ywfc3")
 id = &"totem"
+mesh_path = "res://assets/3d/alta/45-Arte3D_totem_isla.glb"
 nombre = "Totem ancestral"
 familia = &"decoracion"
 altura = 2.0

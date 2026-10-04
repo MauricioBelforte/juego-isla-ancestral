@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Módulo | M17 Construcción (iter. 2) |
-| Estado | 🔵 En curso (iter. 2) |
+| Módulo | M17 Construcción (iter. 3) |
+| Estado | 🔵 En curso (iter. 3) |
 | Agente | DeepSeek-V4.1-Flash (WorkBuddy) |
 | Fase | F5 (base de producción) |
 | Visión | V0 |
@@ -94,16 +94,16 @@
 
 ## E. Previsualización fantasma (BuildGhost) (10)
 
-- [ ] Fantasma con mesh de la receta y material semi-transparente [M]
+- [x] Fantasma con mesh de la receta y material semi-transparente [M]
 - [x] Color verde si la colocación es válida y rojo si es inválida [S]
-- [ ] El fantasma sigue al cursor con suavizado (lerp) sin saltos [M]
+- [x] El fantasma sigue al cursor con suavizado (lerp) sin saltos [M]
 - [x] La celda objetivo se recalculada solo si el cursor cambió (cache) [M]
-- [ ] El fantasma refleja la rotación y elevación actuales en tiempo real [S]
-- [ ] Se muestran en el HUD el costo y los motivos de rechazo (zona, soporte, ocupado, NPC, recursos) [M]
-- [ ] El fantasma se oculta automáticamente fuera de zona o sobre terreno no cargado [M]
+- [x] El fantasma refleja la rotación y elevación actuales en tiempo real [S]
+- [x] Se muestran en el HUD el costo y los motivos de rechazo (zona, soporte, ocupado, NPC, recursos) [M]
+- [x] El fantasma se oculta automáticamente fuera de zona o sobre terreno no cargado [M]
 - [x] Instancia única reutilizada del pool al entrar/salir del modo [M]
 - [x] LOD del fantasma: simplificación simple de malla a distancia > 40 m [M]
-- [ ] El fantasma nunca colisiona con el mundo (capa de ignorancia de raycast) [S]
+- [x] El fantasma nunca colisiona con el mundo (capa de ignorancia de raycast) [S]
 
 ## F. Rotación, elevación y manipulación (10)
 
@@ -136,10 +136,10 @@
 ## H. Zonas y permisos (8)
 
 - [x] Zonas definidas como regiones AABB en celdas voxel (ZoneRegistry) [M]
-- [ ] Permiso "edificable" por defecto en el terreno del jugador y parcelas habilitadas [M]
-- [ ] Permiso "protegida" para parcelas de vecinos (M18) y áreas históricas [M]
-- [ ] Permiso "narrativa" para terrenos bloqueados por progreso (M70) [M]
-- [ ] Permiso "agua" exclusivo para puentes (validado antes de la regla de pieza) [M]
+- [x] Permiso "edificable" por defecto en el terreno del jugador y parcelas habilitadas [M]
+- [x] Permiso "protegida" para parcelas de vecinos (M18) y áreas históricas [M]
+- [x] Permiso "narrativa" para terrenos bloqueados por progreso (M70) [M]
+- [x] Permiso "agua" exclusivo para puentes (validado antes de la regla de pieza) [M]
 - [ ] Aviso claro con motivo al intentar colocar fuera de zona (fantasma rojo + texto) [S]
 - [ ] Las zonas se serializan en M58 y se restauran antes de las piezas [C]
 - [ ] Cambios de zona emiten señal a M64 (navmesh) y a M93 (proyectos) [M]
@@ -147,7 +147,7 @@
 ## I. Costo de recursos e inventario (M14) (8)
 
 - [x] Costo declarado por receta como diccionario item_id → cantidad [S]
-- [ ] Verificación de recursos durante la preview: fantasma rojo con motivo al fallar [M]
+- [x] Verificación de recursos durante la preview: fantasma rojo con motivo al fallar [M]
 - [x] Descuento atómico al confirmar (nunca descuenta sin colocar) [M]
 - [x] Devolución parcial configurable por receta al demoler (default 50%) [M]
 - [ ] Devolución exacta al deshacer (undo restaura todos los recursos consumidos) [M]
@@ -187,7 +187,7 @@
 
 ## L. Edge cases (12)
 
-- [ ] Colocar fuera de zona: rechazo previo a la validación de soporte [M]
+- [x] Colocar fuera de zona: rechazo previo a la validación de soporte [M]
 - [ ] Pieza encima de un NPC activo: rechazo temporal con motivo "NPC en el lugar" [C]
 - [x] Deshacer la última acción: restaura celdas y recursos exactamente [C]
 - [ ] Redo tras deshacer solo disponible si no se realizó una acción intermedia [M]
@@ -196,7 +196,7 @@
 - [ ] Cerrar el modo con el fantasma activo: se devuelve al pool y no queda estado inconsistente [M]
 - [ ] Guardado a mitad de colocación (pieza fantasma activa): se descarta el fantasma, nada se persiste [M]
 - [ ] Pieza en el límite del mundo: rechazo claro dentro del AABB jugable [M]
-- [ ] Recursos insuficientes durante la preview: fantasma rojo y sin descuento [M]
+- [x] Recursos insuficientes durante la preview: fantasma rojo y sin descuento [M]
 - [ ] Doble confirmación rápida: cooldown y chequeo de celda repetida [S]
 - [ ] Demolición de pieza bajo otra pieza: se devuelve el material de la de abajo según orden [C]
 
@@ -237,7 +237,7 @@
 - [x] Unit tests de costos: descuento, devolución y undo con recursos exactos [C]
 - [ ] Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C]
 - [ ] Tests de integración: la navmesh se actualiza con puertas y obras (M64) [C]
-- [ ] Stress test M112: 200+ piezas en una zona sin caída de FPS ni memoria [C]
+- [x] Stress test M112: 200+ piezas en una zona sin caída de FPS ni memoria [C]
 - [ ] Playtest de construcción (M113) con teclado y mando: flujo completo sin fricción [C]
 - [ ] Recorrido M114: construir y decorar la casa del jugador (M18) sin errores de consola [C]
 - [ ] QA final: 0 errores en Play Mode, 0 excepciones al entrar/salir del modo repetidamente [M]
@@ -245,7 +245,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 45 · Pendientes: 130 · No resueltos: 0.
+**Totales:** 175 ítems · Completados: 59 · Pendientes: 116 · No resueltos: 0.
 
 > **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1211, 2026-10-03, iter. 1):**
 > +12 [x] (P5, P8, G1, G2, G3, H1, I1, I3, L3, M5, K-M58, P-costos) respaldados por el
@@ -257,6 +257,16 @@
 > `test_construccion_iter2.gd` (99 checks, 0 fallos; guarda anti-falso-verde probada con
 > 3 sondas en ROJO). Corrige ademas la receta techo 1x1 con `soportes_minimos=2`
 > (inconstruible por huella: no puede aportar 2 soportes) -> 2x2.
+
+> **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1244, 2026-10-04, iter. 3):**
+> +14 [x] respaldados por el HUD del modo (`BuildHudModel`: filas de costo y motivos
+> traducidos), el MESH REAL de la receta en el fantasma (`PlacementRule.mesh_path` en
+> 30 recetas del catalogo), FOLLOW con lerp y AUTO-OCULTADO fuera de zona (`BuildGhost`),
+> los permisos finos M18/M25 (`ZonasPermisos`: casa del jugador edificable, parcelas NPC
+> y ruinas protegidas) y el STRESS M112 de 251 piezas. Suite
+> `test_construccion_iter3.gd` (138 checks, 0 fallos; guarda anti-falso-verde probada con
+> 4 sondas en ROJO limpio). No se marca "aviso fuera de zona (fantasma rojo)": el diseno
+> de iter. 3 OCULTA el fantasma fuera de zona en vez de pintarlo rojo.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 164 [ ] / 0 [?].

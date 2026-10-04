@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_rhose")
 id = &"puerta_piedra"
+mesh_path = "res://assets/3d/alta/25-Ruinas-Templos_puerta_templo.glb"
 nombre = "Puerta de piedra"
 familia = &"puerta"
 tamano = Vector2i(1, 2)

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_h0qmn")
 id = &"estanteria"
+mesh_path = "res://assets/3d/alta/18-Casas_estanteria.glb"
 nombre = "Estanteria"
 familia = &"mueble"
 tamano = Vector2i(2, 1)

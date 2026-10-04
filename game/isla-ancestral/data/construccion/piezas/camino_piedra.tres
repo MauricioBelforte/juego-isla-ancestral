@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_08w2f")
 id = &"camino_piedra"
+mesh_path = "res://assets/3d/alta/25-Ruinas-Templos_losa_grabado.glb"
 nombre = "Camino de piedra"
 familia = &"camino"
 altura = 0.1

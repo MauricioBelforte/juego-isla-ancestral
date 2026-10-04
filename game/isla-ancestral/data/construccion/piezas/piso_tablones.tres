@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_1iln0")
 id = &"piso_tablones"
+mesh_path = "res://assets/3d/alta/18-Casas_piso_madera.glb"
 nombre = "Piso de tablones"
 familia = &"piso"
 altura = 0.5

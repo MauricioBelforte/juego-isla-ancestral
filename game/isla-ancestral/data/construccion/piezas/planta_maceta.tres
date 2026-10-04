@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_3yqs4")
 id = &"planta_maceta"
+mesh_path = "res://assets/3d/alta/18-Casas_decor_maceta_flor.glb"
 nombre = "Planta en maceta"
 familia = &"decoracion"
 costo = {

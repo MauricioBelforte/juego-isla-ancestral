@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_14s85")
 id = &"puerta_madera"
+mesh_path = "res://assets/3d/alta/18-Casas_puerta_articulada.glb"
 nombre = "Puerta de madera"
 familia = &"puerta"
 tamano = Vector2i(1, 2)

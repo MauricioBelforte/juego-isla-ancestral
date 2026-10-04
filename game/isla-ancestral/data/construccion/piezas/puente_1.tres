@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_ykqn5")
 id = &"puente_1"
+mesh_path = "res://assets/3d/alta/40-Infraestructura_puente_troncos.glb"
 nombre = "Puente de 1 celda"
 familia = &"puente"
 soportes_minimos = 0

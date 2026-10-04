@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_0f80i")
 id = &"pared_madera"
+mesh_path = "res://assets/3d/alta/18-Casas_pared_madera.glb"
 nombre = "Pared de madera"
 familia = &"pared"
 costo = {

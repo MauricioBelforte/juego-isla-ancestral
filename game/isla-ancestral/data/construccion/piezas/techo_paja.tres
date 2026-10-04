@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_lq6f5")
 id = &"techo_paja"
+mesh_path = "res://assets/3d/alta/18-Casas_techo_paja.glb"
 nombre = "Techo de paja"
 variante = "cumbrera"
 familia = &"techo"

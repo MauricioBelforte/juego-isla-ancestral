@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_bq3we")
 id = &"farol_colgante"
+mesh_path = "res://assets/3d/alta/18-Casas_decor_lampara_techo.glb"
 nombre = "Farol colgante"
 familia = &"iluminacion"
 costo = {
