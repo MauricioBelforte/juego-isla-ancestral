@@ -52,4 +52,4 @@ L171 era un rezagado: el unico uso directo de un autoload en todo el archivo. Fi
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `f2ea332..72d05aa` (main -> main), 2026-10-04 19:53, atria-dawn-s2 / Kilo Code. Commit `72d05aa` "Se fixeo el ultimo rezagado del colector: ItemDatabase en inventario_service.gd:171". Nota: entre mi push anterior (`78e353a`, canal 17) y este, otros agentes de la flota commitearon (mi base de pull era `f2ea332`); sin conflictos. Sin catch-ups.
