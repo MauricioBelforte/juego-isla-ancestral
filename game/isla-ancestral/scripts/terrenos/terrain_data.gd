@@ -2,10 +2,10 @@
 # Plataforma: Kilo Code
 # Fecha: 2026-09-02
 #
-# M156: Terrenos y Movimiento — TerrainData (Resource, diseño §1.5).
+# M156: Terrenos y Movimiento — TerrainDataM156 (Resource, diseño §1.5).
 # Datos configurables de un tipo de terreno: modificador de velocidad,
 # feedback visual/audio (V2 con dueño), color de debug.
-class_name TerrainData
+class_name TerrainDataM156
 extends Resource
 
 ## Identificador del terreno (0-6 según §4.1)
