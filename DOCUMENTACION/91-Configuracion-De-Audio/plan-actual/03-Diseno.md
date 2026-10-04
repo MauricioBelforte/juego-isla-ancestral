@@ -833,9 +833,15 @@ quedan los defaults — no hay crash (null-check con `has_method`).
 
 **Hallazgo de diseño (iter. 10, 2026-10-03):** con auto-guardado por setter
 (§16), un trigger de cierre **no es necesario** para volúmenes ni subtítulos:
-ya persisten en `config.cfg` antes de que el menú se cierre. El trigger sí hace
+ya persisten en `config.cfg` antes de que el menú se cierre. El trigger hacía
 falta para las secciones **sin** auto-save (rango dinámico, compresión,
 dispositivo de salida — BUG-092).
+
+> **Cerrado en iter. 11 (2026-10-04, BUG-092, Log 1260):** `set_opcion()`
+> quedó implementada **con auto-guardado por setter** (mismo camino que
+> `set_volumen()`), así que las 3 secciones ya persisten en cada cambio:
+> hoy **ninguna** sección necesita `al_cerrar_settings()`. El contrato se
+> conserva por si M53 prefiere escribir solo al cerrar — llamarlo sería inocuo.
 
 **Contrato de cierre (diseñado en M91; lo ejecuta M53 al cerrar su menú):**
 
@@ -843,8 +849,8 @@ dispositivo de salida — BUG-092).
 # Contrato: el menú de settings (M53) llama esto al cerrarse.
 func al_cerrar_settings() -> void:
     # 1. Volúmenes + subtítulos: NO-OP — ya persistidos en cada setter (§16).
-    # 2. Secciones sin auto-save → persistirlas con el MISMO patrón de AudioConfig:
-    #    (API propuesta — implementación pendiente, ver BUG-092)
+    # 2. Opciones (rango dinámico/compresión/dispositivo): auto-guardan en cada
+    #    set_opcion() desde la iter. 11 (BUG-092 cerrado) — patrón de set_volumen().
     AudioConfig.set_opcion("rango_dinamico", rango)
     AudioConfig.set_opcion("compresion", activo)
     AudioConfig.set_opcion("dispositivo_salida", nombre)
@@ -852,11 +858,14 @@ func al_cerrar_settings() -> void:
     #    SaveManager.request_save(slot, reason) — dueño M59, no de settings.
 ```
 
-**API propuesta `set_opcion(clave: String, valor: Variant) -> bool`:**
-valida la clave → `config["audio"][clave] = valor` → `DataStore.guardar_config()`
-(mismo camino y misma sección que `set_volumen()`; clamp/validación por tipo).
-**Requiere implementación** (M91): hasta que exista, `al_cerrar_settings()` no
-tendría efecto sobre esas 3 secciones.
+**API `set_opcion(clave: String, valor: Variant) -> bool` — IMPLEMENTADA
+(iter. 11, BUG-092, Log 1260):** valida la clave en `OPCIONES_VALIDAS`
+(`rango_dinamico` / `compresion` / `dispositivo_salida`) y el valor por tipo →
+aplica al motor y confirma el estado final → si todo OK: `_opciones[clave] = valor`,
+señal `opcion_cambiada` y `_guardar_config()` (mismo camino y misma sección que
+`set_volumen()`). Si validación o aplicación fallan → `false` y **no** persiste.
+Claves en español, coherentes con `config.cfg` (`volumen_maestro`, …). Detalle
+completo en `04-Codigo.md` (Notas del Agente — Iteración 11).
 
 > **Diseño viejo eliminado (2026-10-03):** la clase `AudioSettingsSaver` con su
 > `save_settings()` manual hacia `user://settings/audio_settings.json` no existe
@@ -872,12 +881,12 @@ tendría efecto sobre esas 3 secciones.
 
 | # | Prueba | Cómo se comprueba | Resultado medido |
 |---|---|---|---|
-| A1 | Carga de configuración | `test_audio_config.gd` | 103 checks, 0 fallos |
+| A1 | Carga de configuración | `test_audio_config.gd` | 136 checks, 0 fallos (incluye bloque BUG-092) |
 | A2 | Aplicación y control por bus | misma suite, `_test_aplicacion_y_control_por_bus()` | (incluido en A1) |
 | A3 | Rango dinámico y compresión | `test_audio_effects_m91.gd` | 82 checks, 0 fallos |
 | A4 | Subtítulos | `test_subtitles_m91.gd` | 80 checks, 0 fallos |
 
-**265 checks, 0 fallos** (medido 2026-10-02). Ejecutar:
+**298 checks, 0 fallos** (136 + 82 + 80; medido 2026-10-04). Ejecutar:
 
 ```
 python tools/ci/run_tests.py --module audio --timeout 180      # A1-A3

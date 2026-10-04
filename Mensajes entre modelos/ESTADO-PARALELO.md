@@ -1,3 +1,29 @@
+## 2026-10-04 02:28 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 (iter. 11: BUG-092 resuelto, Log 1260)
+
+**Estado:** liberado. `CHECKLIST-GLOBAL.md` fila 91: 🔵 En curso → **🟡 Con dudas**, Agente actual → **—**, última actividad 2026-10-04 02:28, progreso **207/239** (sin cambio de ítems: trabajo de bug, no de checklist).
+
+**Qué se hizo (encargo canal 06):** BUG-092 **resuelto** — `set_mute()` ahora llama `_guardar_config()` y `_guardar_config()` serializa `_mutes` + `_opciones`; nueva API `set_opcion()/get_opcion()/opciones_disponibles()` + señal `opcion_cambiada`, claves en español (`rango_dinamico`/`compresion`/`dispositivo_salida`, alineadas al contrato aprobado de `03-Diseno` §18 y a `config.cfg`); los 3 managers siguen **stateless** (AudioConfig = dueño único de la persistencia). Suite `test_audio_config.gd` 103 → **136 checks / 0 fallos / EXIT 0** (piso medido en verde, sonda en ROJO → EXIT 1 inyectada y removida); regresión `test_audio_effects_m91.gd` 82/0 + `test_sfx_m43.gd` 127/0. BUG-092 cerrado en `11-BUGS.md` §7 con bloque Resolución completo.
+
+**Registros en esta liberación:** esta entrada · `05-Checklist.md` (5 ediciones in-place, 354 líneas intactas) · `CHECKLIST-GLOBAL.md` fila 91 (**working tree**: carrera con fila 38 de agnes-3-flash → NO commiteada por mí) · guía 08 fila M91 (**working tree**: diffs de kimi en fila M37 → NO commiteada) · backlog personal.
+
+**NO se sella §21.8** (autor ≠ verificador): M91 queda `🟡`; L88 `[?]` HRTF sigue siendo el techo del módulo (nunca ✅).
+
+**Después (señal separada del director):** frente **M29-Tiempo-Y-Calendario** (tests con parse errors).
+
+
+## 2026-10-04 01:52 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio RE-BLOQUEADO 🔵 (iter. 11: BUG-092 por encargo del director)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 91: 🟡 Con dudas → **🔵 En curso**, Agente actual → mimo-v2.6-flash-free, última actividad 2026-10-04 01:52.
+
+**Por qué (canal 06 del director):** M91 iter. 10 **APROBADA**; BUG-092 asignado a este chat («es tuyo — adelante»). Alcance del encargo: (1) `set_mute()` → `_guardar_config()` y que `_guardar_config()` **serialice `_mutes`**; (2) API `set_opcion()` para las secciones sin auto-save (mismo camino que `set_volumen()` → `DataStore` → `user://config.cfg`); (3) `DynamicRangeManager`/`CompressionManager`/`OutputDeviceManager` persistan vía `DataStore`; (4) cerrar BUG-092 en `11-BUGS.md` con firma y commits; (5) suite `test_audio_config.gd` extendida (CHECKS_MINIMOS medido en verde, sonda en ROJO, restauración byte-exacto); (6) **NO sellar §21.8** (autor ≠ verificador).
+
+**Restricciones del encargo:** M53 dueño del menú (sin UI); 10 ítems de sonidos de interfaz sellados (0 assets); 13 ítems de M53 no se tocan; L88 `[?]` HRTF sigue siendo el techo del módulo.
+
+**Después (señal separada):** frente **M29-Tiempo-Y-Calendario** (tests con 22+6 parse errors, prioridad 3 del canal s2 archivo 06) — «después de BUG-092, si te parece bien».
+
+**Registros en esta reserva:** esta entrada · `05-Checklist.md` bloque Reserva · `CHECKLIST-GLOBAL.md` fila 91 · guía 08 fila M91 · backlog personal.
+
+
 ## 2026-10-04 00:03 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 Con dudas (iter. 10, Log 1250)
 
 **Estado:** liberado. `CHECKLIST-GLOBAL.md` fila 91: 🔵 En curso → **🟡 Con dudas**, Agente actual → **—**, última actividad 2026-10-04 00:03, progreso **207/239**.

@@ -3,6 +3,9 @@
 # Fecha: 2026-09-01
 # Modificado: mimo-v2.6-flash-free / opencode — 2026-10-02 (lote 2: API de
 #             porcentaje 0-100 para los sliders de M53)
+#             2026-10-04 (BUG-092: mutes persisten en config.cfg, API
+#             set_opcion() para rango_dinamico/compresion/dispositivo_salida con
+#             auto-guardado y restauración al arrancar — ver 11-BUGS BUG-092)
 #
 # M91: Configuración de Audio — AudioConfigService (autoload "AudioConfig")
 # Núcleo V0/V1 (03-Diseno §1/§3/§4):
@@ -29,13 +32,21 @@ const DEFAULTS: Dictionary = {
 ## Orden de creación de buses hijo (Master ya existe en el engine)
 const BUSES_HIJOS: Array[String] = ["Music", "SFX", "Ambient", "Voice", "UI", "Cinematic"]
 
+## Opciones de audio SIN auto-save propio (BUG-092): las secciones del menú que
+## hasta ahora solo vivían en memoria. Este servicio las centraliza en
+## config.cfg por el MISMO camino que set_volumen() (§18 del 03-Diseno).
+const OPCIONES_VALIDAS: Array[String] = ["rango_dinamico", "compresion", "dispositivo_salida"]
+
 signal volumen_cambiado(bus: String, volumen: float)
 signal mute_cambiado(bus: String, mute: bool)
+signal opcion_cambiada(clave: String, valor: Variant)
 
 ## volumen lineal (0-1) por bus (persistido)
 var _volumenes: Dictionary = {}
-## estado mute por bus
+## estado mute por bus (persistido en config.cfg desde BUG-092)
 var _mutes: Dictionary = {}
+## opciones seleccionables (rango_dinamico/compresion/dispositivo_salida, persistidas)
+var _opciones: Dictionary = {}
 
 
 func _ready() -> void:
@@ -63,6 +74,8 @@ func _crear_buses() -> void:
 func _cargar_config() -> void:
 	# Defaults del diseño primero, luego lo persistido (M60 sección "audio")
 	_volumenes = DEFAULTS.duplicate()
+	_mutes.clear()
+	_opciones = {}
 	var ds := get_node_or_null("/root/DataStore")
 	if ds != null and ds.has_method("cargar_config"):
 		var config: Dictionary = ds.cargar_config()
@@ -70,7 +83,17 @@ func _cargar_config() -> void:
 		for clave in audio:
 			if _volumenes.has(clave):
 				_volumenes[clave] = clampf(float(audio[clave]), 0.0, 1.0)
+		# BUG-092: mutes y opciones guardados como sub-diccionarios de "audio"
+		var mutes_v: Variant = audio.get("mutes", {})
+		if typeof(mutes_v) == TYPE_DICTIONARY:
+			for k in (mutes_v as Dictionary):
+				if _volumenes.has(String(k)):
+					_mutes[String(k)] = bool(mutes_v[k])
+		var opciones_v: Variant = audio.get("opciones", {})
+		if typeof(opciones_v) == TYPE_DICTIONARY:
+			_opciones = (opciones_v as Dictionary).duplicate()
 	_aplicar_todo()
+	_aplicar_opciones()
 
 
 ## Aplica los volúmenes al AudioServer (linear → db, §3)
@@ -146,6 +169,9 @@ func set_mute(bus: String, mute: bool) -> void:
 	_mutes[bus] = mute
 	_aplicar_volumen(bus, get_volumen(bus))
 	mute_cambiado.emit(bus, mute)
+	# BUG-092: los mutes se auto-guardan en config.cfg igual que los volúmenes
+	# (antes solo vivían en el savegame y se perdían entre sesiones).
+	_guardar_config()
 
 
 func esta_muteado(bus: String) -> bool:
@@ -155,6 +181,78 @@ func esta_muteado(bus: String) -> bool:
 ## Accesibilidad M58: "Sin truenos" = mute de SFX; volumen voz para subtítulos
 func buses_disponibles() -> Array:
 	return _volumenes.keys()
+
+
+## ── Opciones de audio (BUG-092: secciones sin auto-save) ──
+# set_opcion() sigue EXACTAMENTE el camino de set_volumen(): validar → aplicar
+# → persistir en config.cfg (escritura atómica de M60) → emitir señal.
+# La restauración al arrancar ocurre en _cargar_config() → _aplicar_opciones().
+
+## Fija una opción de audio. Devuelve false si la clave o el valor no son
+## válidos, o si la aplicación al motor falla (no persiste en ese caso).
+func set_opcion(clave: String, valor: Variant) -> bool:
+	if not OPCIONES_VALIDAS.has(clave):
+		return false
+	if not _valor_opcion_valido(clave, valor):
+		return false
+	if not _aplicar_opcion(clave, valor):
+		return false
+	_opciones[clave] = valor
+	opcion_cambiada.emit(clave, valor)
+	_guardar_config()
+	return true
+
+
+## Devuelve una opción persistida; por_defecto si no existe.
+func get_opcion(clave: String, por_defecto: Variant = null) -> Variant:
+	return _opciones.get(clave, por_defecto)
+
+
+## Claves de opción conocidas (para la UI de M53 y testeos).
+func opciones_disponibles() -> Array[String]:
+	return OPCIONES_VALIDAS.duplicate()
+
+
+func _valor_opcion_valido(clave: String, valor: Variant) -> bool:
+	match clave:
+		"rango_dinamico":
+			return typeof(valor) == TYPE_STRING \
+					and DynamicRangeManager.PRESETS.has(String(valor))
+		"compresion":
+			return typeof(valor) == TYPE_BOOL
+		"dispositivo_salida":
+			return typeof(valor) == TYPE_STRING \
+					and OutputDeviceManager.dispositivos().has(String(valor))
+	return false
+
+
+## Aplica la opción al motor (managers stateless de M91) y confirma el estado
+## final. Devuelve false si no se pudo aplicar (la opción NO se persiste).
+func _aplicar_opcion(clave: String, valor: Variant) -> bool:
+	match clave:
+		"rango_dinamico":
+			if not DynamicRangeManager.aplicar(String(valor)):
+				return false
+			# El estado final derivado debe coincidir con lo pedido
+			# ("dinamico" = sin compresión → actual() "dinamico").
+			return DynamicRangeManager.actual() == String(valor)
+		"compresion":
+			if bool(valor):
+				CompressionManager.activar()
+			else:
+				CompressionManager.desactivar()
+			return CompressionManager.activa() == bool(valor)
+		"dispositivo_salida":
+			return OutputDeviceManager.seleccionar(String(valor))
+	return false
+
+
+## Restaura y reaplica todas las opciones persistidas (llamado desde
+## _cargar_config()). Las claves desconocidas de versiones futuras se ignoran.
+func _aplicar_opciones() -> void:
+	for clave in _opciones:
+		if OPCIONES_VALIDAS.has(clave):
+			_aplicar_opcion(clave, _opciones[clave])
 
 
 ## ── Persistencia (M60 sección "audio") ──────────────────
@@ -173,6 +271,10 @@ func _guardar_config() -> void:
 	var audio: Dictionary = config.get("audio", {})
 	for bus in _volumenes:
 		audio[String(bus)] = float(_volumenes[bus])
+	# BUG-092: mutes y opciones van como sub-diccionarios de la misma sección
+	# (ConfigFile serializa Dictionary anidado; GestorConfig los devuelve tal cual).
+	audio["mutes"] = _mutes.duplicate()
+	audio["opciones"] = _opciones.duplicate()
 	config["audio"] = audio
 	ds.guardar_config(config)
 
@@ -182,7 +284,11 @@ func get_section_name() -> String:
 
 
 func get_save_data() -> Dictionary:
-	return {"volumenes": _volumenes.duplicate(), "mutes": _mutes.duplicate()}
+	return {
+		"volumenes": _volumenes.duplicate(),
+		"mutes": _mutes.duplicate(),
+		"opciones": _opciones.duplicate(),
+	}
 
 
 func restore_save_data(data: Dictionary) -> void:
@@ -194,4 +300,10 @@ func restore_save_data(data: Dictionary) -> void:
 	var m: Dictionary = data.get("mutes", {})
 	for k in m:
 		_mutes[String(k)] = bool(m[k])
+	# BUG-092: las opciones se mezclan estilo volúmenes (las ausentes se
+	# conservan) y se reaplican al motor.
+	var o: Dictionary = data.get("opciones", {})
+	for k in o:
+		_opciones[String(k)] = o[k]
 	_aplicar_todo()
+	_aplicar_opciones()

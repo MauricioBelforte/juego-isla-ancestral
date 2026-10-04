@@ -1358,3 +1358,41 @@ apertura con `.startswith("```")` y después el siguiente elemento que **sea**
   `CHECKLIST-GLOBAL.md` no se toca.
 - Si algún día se necesita HRTF real, las opciones están escritas en
   `03-Diseno` §5.1.1 (plugin binaural, o aceptar el panorama estéreo actual).
+
+## Notas del Agente — Iteración 11 (BUG-092: persistencia de mutes y opciones)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-04 02:10
+
+### Qué se hizo (fix + API)
+
+- `audio_config_service.gd` (único archivo de código del fix — los 3 managers NO se tocaron):
+  1. `set_mute()` → ahora llama `_guardar_config()` tras emitir `mute_cambiado` (era el bug original).
+  2. `_guardar_config()` serializa además `_mutes` y `_opciones` como **sub-diccionarios** de `config["audio"]` (ConfigFile serializa Dictionary anidado; GestorConfig los devuelve tal cual en `cargar_config()`).
+  3. `_cargar_config()` restaura mutes (solo buses conocidos) y opciones, y llama `_aplicar_todo()` + nuevo `_aplicar_opciones()`.
+  4. **Nueva API pública:** `set_opcion(clave, valor) -> bool`, `get_opcion(clave, por_defecto)`, `opciones_disponibles()` y señal `opcion_cambiada(clave, valor)`. `set_opcion()` sigue EXACTAMENTE el camino de `set_volumen()`: validar clave (`OPCIONES_VALIDAS`) → validar valor por tipo → aplicar al motor y **confirmar estado final** → recién entonces persistir. Si validación o aplicación fallan → `false` y no escribe disco.
+  5. `get_save_data()`/`restore_save_data()` incluyen `"opciones"` (merge estilo volúmenes + reaplicación al motor).
+- **Claves:** `rango_dinamico` / `compresion` / `dispositivo_salida`. ⚠️ Se escribieron primero en inglés (`dynamic_range`…) y se corrigieron a español: es el contrato ya aprobado de `03-Diseno` §18 y la convención de `config.cfg` (`volumen_maestro`, …). 43 reemplazos en 2 archivos.
+
+### Decisión de arquitectura (documentar para M53)
+
+**AudioConfig es el dueño ÚNICO de la persistencia de config.cfg.** Los managers (`DynamicRangeManager` / `CompressionManager` / `OutputDeviceManager`) siguen **stateless puros**: solo tocan `AudioServer`, 0 referencias a DataStore. La persistencia se centraliza en AudioConfig para no acoplar 3 managers a M60 ni duplicar el camino de escritura. Consecuencia para **M53 (dueño del menú):** llamar `AudioConfig.set_opcion()` en cada cambio de UI (mismo patrón que `set_volumen()`); `al_cerrar_settings()` ya no es estrictamente necesario (todo auto-guarda por setter) — ver `03-Diseno` §18.
+
+### Verificación
+
+- `test_audio_config.gd`: bloque nuevo `_test_bug092_persistencia_mutes_opciones()` → **136 checks / 0 fallos / EXIT 0** (piso `CHECKS_MINIMOS` subido de 103 → **136** medido en verde).
+- Sonda en ROJO: check temporal inyectado → **EXIT 1** (contador detecta fallo) → sonda removida → verde final.
+- Regresión: `test_audio_effects_m91.gd` **82/0** y `test_sfx_m43.gd` **127/0** (ambas EXIT 0).
+- Cierre documental: BUG-092 movido a §7 de `11-BUGS.md` con bloque Resolución completo (Log 1260).
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **QA §21.8 (verificador externo): no lo sellé yo** — autor ≠ verificador (regla del encargo del director, canal 06). M91 queda `🟡`, no `✅`.
+- **Sin wire-up real en menú:** no existe aún código de M53 que llame `set_opcion()`; la verificación de integración con la UI recae en M53.
+
+### Recomendaciones para el próximo agente
+
+- **M53:** al wire-up del menú, usar `set_opcion("rango_dinamico", …)` etc. (claves en español) y conectar `opcion_cambiada` solo si la UI necesita reflejar cambios externos.
+- Si algún día se añade una 4ª opción: agregar la clave a `OPCIONES_VALIDAS`, `_valor_opcion_valido()`, `_aplicar_opcion()` y un check en el bloque BUG-092 de la suite.
+- QA §21.8 sigue abierto: un modelo distinto debe verificar el cierre de BUG-092.

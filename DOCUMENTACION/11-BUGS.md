@@ -159,7 +159,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
 | BUG-091 | Gate godot-lint CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto | CI / calidad | 🔴 Crítico | [ ] Abierto (coordinador deriva) | DeepSeek-V4.1-Flash (Log 1241) | 2026-10-04 |
-| BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [ ] Abierto | mimo-v2.6-flash-free | 2026-10-03 |
+| BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [x] Resuelto (2026-10-04, mimo-v2.6-flash-free / opencode, Log 1260) | mimo-v2.6-flash-free | 2026-10-03 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -168,64 +168,6 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
-### BUG-092 — M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria de persistencia)
-
-- **Fecha de reporte:** 2026-10-03 23:56
-- **Modulo(s) afectado(s):** M91 (Configuracion de Audio) — scripts/audio/audio_config_service.gd, dynamic_range_manager.gd, compression_manager.gd, output_device_manager.gd
-- **Severidad:** 🟡 Menor
-- **Prioridad sugerida:** Media
-- **Estado:** [ ] Abierto
-
-**Descripcion del problema:**
-La persistencia de configuracion de audio (seccion "audio" de M60 → user://config.cfg, escritura atomica) es asimetrica:
-
-1. **Mutes no persisten en config:** `set_volumen()` llama `_guardar_config()` en cada cambio, pero `set_mute()` NO llama a `_guardar_config()` y dicho metodo solo serializa `_volumenes` (no `_mutes`). Los mutes solo viven en el savegame (`get_save_data()` = `{volumenes, mutes}` via proveedor SaveManager, seccion "audio_config") — se pierden entre sesiones cuando no hay partida cargada.
-2. **Tres settings sin persistencia:** `DynamicRangeManager`, `CompressionManager` y `OutputDeviceManager` no tienen NINGUNA referencia a DataStore/GestorConfig (verificado con rg: 0 resultados) — la seleccion del usuario se pierde al reiniciar.
-
-**Pasos para reproducir:**
-1. `AudioConfig.set_mute("SFX", true)` → constatar `esta_muteado("SFX") == true`.
-2. Reiniciar el juego (nueva instancia del autoload → `_ready()` → `_cargar_config()`).
-3. Observar `esta_muteado("SFX") == false` (el mute desaparecio).
-4. Analogos: aplicar rango dinamico / compresion / cambiar dispositivo de salida → reiniciar → valor por defecto.
-
-**Comportamiento esperado:**
-Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya establecido en el proyecto: auto-guardado en cada setter → `DataStore.guardar_config()` (igual que `set_volumen()` y los setters de SubtitleManager).
-
-**Comportamiento actual:**
-- Mute: se pierde al reiniciar (persiste solo si ademas se guarda/carga un slot de partida, porque ahi si viaja en `get_save_data()`).
-- Rango dinamico / compresion / dispositivo de salida: nunca se escriben a disco; al reiniciar vuelven a los defaults del codigo.
-
-**Entorno / Contexto:**
-- Version del juego / build: Godot 4.7.2, HEAD 2026-10-03
-- Plataforma: PC (Windows)
-- Seed del mundo / save afectado: no aplica (config, no save)
-- Frecuencia: Siempre (nunca se implemento la persistencia de esas claves)
-
-**Evidencia:**
-- `audio_config_service.gd` L95-103: `set_volumen()` → `_guardar_config()` en cada llamada. L145-149: `set_mute()` NO la llama.
-- `audio_config_service.gd` L168-177: `_guardar_config()` solo escribe `_volumenes` en `config["audio"]` (los mutes quedan fuera).
-- `rg "DataStore|guardar_config|register_provider"` sobre dynamic_range_manager.gd / compression_manager.gd / output_device_manager.gd → 0 resultados (2026-10-03).
-- Contra-evidencia positiva (el patron SI existe): `subtitle_manager.gd` L305-311 llama `DataStore.guardar_config()` en cada setter.
-
-**Intentos de solution ya probados (si aplica):**
-- Solo diseno (2026-10-03, M91 iter. 10): `03-Diseno.md` §16 documenta los huecos y §18 disena el contrato de cierre con la API propuesta `set_opcion(clave, valor)` (mismo camino que `set_volumen()`), que haria efectivo el flush de las 3 secciones sin auto-save. Sin implementacion todavia.
-
-**Referencias cruzadas:**
-- Guia 07 §8: no
-- Modulo/documentacion relacionada: `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/03-Diseno.md` §16 (huecos) y §18 (trigger de cierre + API propuesta `set_opcion()`); `05-Checklist.md` L288 (diseno cerrado, implementacion pendiente).
-
-**Firma:**
-**Modelo:** mimo-v2.6-flash-free
-**Plataforma:** opencode
-**Fecha:** 2026-10-03 23:56
-
-**Resolucion (completar cuando se resuelva):**
-- [ ] Como se corrigio: pendiente (fix sugerido: `set_mute()` → llamar `_guardar_config()`; serializar `_mutes`; persistir las 3 secciones via `set_opcion()` o auto-guardado por setter).
-- [ ] Archivos/commits modificados: pendiente
-- [ ] Log del proyecto:
-- [ ] Verificado por: pendiente (requiere runtime: repro headless del paso 1-3)
-
----
 
 ### BUG-091 — Gate `godot-lint` CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto
 
@@ -1451,6 +1393,85 @@ secciones reales (headers `## X.Y`). Clasificación:
 ## 7. Bugs Resueltos (historial)
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
+
+### BUG-092 — M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria de persistencia)
+
+- **Fecha de reporte:** 2026-10-03 23:56
+- **Modulo(s) afectado(s):** M91 (Configuracion de Audio) — scripts/audio/audio_config_service.gd, dynamic_range_manager.gd, compression_manager.gd, output_device_manager.gd
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] Resuelto (2026-10-04 02:10, mimo-v2.6-flash-free / opencode, Log 1260)
+
+**Descripcion del problema:**
+La persistencia de configuracion de audio (seccion "audio" de M60 → user://config.cfg, escritura atomica) es asimetrica:
+
+1. **Mutes no persisten en config:** `set_volumen()` llama `_guardar_config()` en cada cambio, pero `set_mute()` NO llama a `_guardar_config()` y dicho metodo solo serializa `_volumenes` (no `_mutes`). Los mutes solo viven en el savegame (`get_save_data()` = `{volumenes, mutes}` via proveedor SaveManager, seccion "audio_config") — se pierden entre sesiones cuando no hay partida cargada.
+2. **Tres settings sin persistencia:** `DynamicRangeManager`, `CompressionManager` y `OutputDeviceManager` no tienen NINGUNA referencia a DataStore/GestorConfig (verificado con rg: 0 resultados) — la seleccion del usuario se pierde al reiniciar.
+
+**Pasos para reproducir:**
+1. `AudioConfig.set_mute("SFX", true)` → constatar `esta_muteado("SFX") == true`.
+2. Reiniciar el juego (nueva instancia del autoload → `_ready()` → `_cargar_config()`).
+3. Observar `esta_muteado("SFX") == false` (el mute desaparecio).
+4. Analogos: aplicar rango dinamico / compresion / cambiar dispositivo de salida → reiniciar → valor por defecto.
+
+**Comportamiento esperado:**
+Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya establecido en el proyecto: auto-guardado en cada setter → `DataStore.guardar_config()` (igual que `set_volumen()` y los setters de SubtitleManager).
+
+**Comportamiento actual:**
+- Mute: se pierde al reiniciar (persiste solo si ademas se guarda/carga un slot de partida, porque ahi si viaja en `get_save_data()`).
+- Rango dinamico / compresion / dispositivo de salida: nunca se escriben a disco; al reiniciar vuelven a los defaults del codigo.
+
+**Entorno / Contexto:**
+- Version del juego / build: Godot 4.7.2, HEAD 2026-10-03
+- Plataforma: PC (Windows)
+- Seed del mundo / save afectado: no aplica (config, no save)
+- Frecuencia: Siempre (nunca se implemento la persistencia de esas claves)
+
+**Evidencia:**
+- `audio_config_service.gd` L95-103: `set_volumen()` → `_guardar_config()` en cada llamada. L145-149: `set_mute()` NO la llama.
+- `audio_config_service.gd` L168-177: `_guardar_config()` solo escribe `_volumenes` en `config["audio"]` (los mutes quedan fuera).
+- `rg "DataStore|guardar_config|register_provider"` sobre dynamic_range_manager.gd / compression_manager.gd / output_device_manager.gd → 0 resultados (2026-10-03).
+- Contra-evidencia positiva (el patron SI existe): `subtitle_manager.gd` L305-311 llama `DataStore.guardar_config()` en cada setter.
+
+**Intentos de solution ya probados (si aplica):**
+- Solo diseno (2026-10-03, M91 iter. 10): `03-Diseno.md` §16 documenta los huecos y §18 disena el contrato de cierre con la API propuesta `set_opcion(clave, valor)` (mismo camino que `set_volumen()`), que haria efectivo el flush de las 3 secciones sin auto-save. Sin implementacion todavia.
+
+**Referencias cruzadas:**
+- Guia 07 §8: no
+- Modulo/documentacion relacionada: `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/03-Diseno.md` §16 (huecos) y §18 (trigger de cierre + API propuesta `set_opcion()`); `05-Checklist.md` L288 (diseno cerrado, implementacion pendiente).
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-03 23:56
+
+**Resolucion (completar cuando se resuelva):**
+- [x] Como se corrigio: fix centralizado en `audio_config_service.gd` (el dueño
+  unico de la escritura de config.cfg, coherente con 03-Diseno §16/§18; los 3
+  managers siguen stateless): (1) `set_mute()` ahora llama `_guardar_config()`
+  tras emitir `mute_cambiado`; (2) `_guardar_config()` serializa ademas `_mutes`
+  y `_opciones` como sub-diccionarios de `config["audio"]` (ConfigFile serializa
+  Dictionary anidado y GestorConfig los devuelve tal cual); (3) `_cargar_config()`
+  restaura mutes (solo buses conocidos) y opciones, y llama a `_aplicar_todo()` +
+  nuevo `_aplicar_opciones()`; (4) nueva API `set_opcion(clave, valor)` /
+  `get_opcion()` / `opciones_disponibles()` + senal `opcion_cambiada`: valida
+  clave (`OPCIONES_VALIDAS`) y valor, aplica via `_aplicar_opcion()`
+  (DynamicRangeManager.aplicar / CompressionManager.activar|desactivar /
+  OutputDeviceManager.seleccionar con verificacion de estado final) y solo
+  persiste si la aplicacion tuvo exito — mismo camino que `set_volumen()`;
+  (5) `get_save_data()`/`restore_save_data()` incluyen `opciones` (el restore
+  las mezcla estilo volumenes y reaplica al motor).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/audio/audio_config_service.gd`,
+  `game/isla-ancestral/scripts/audio/test_audio_config.gd` (103 → **136** checks:
+  persistencia de mutes, round-trip config/savegame, reaplicacion de opciones,
+  validaciones, restauracion byte-exacto de config.cfg), `DOCUMENTACION/11-BUGS.md`
+  y docs/registros M91. Commit de cierre de iter. 11 (ver Log 1260).
+- [x] Log del proyecto: **Log 1260** (iter. 11 BUG-092, 2026-10-04).
+- [x] Verificado por: mimo-v2.6-flash-free / opencode 2026-10-04 (autor): suite
+  `test_audio_config.gd` **136 checks / 0 fallos / EXIT 0**, sonda en ROJO
+  inyectada (EXIT 1) y removida, y regresion `test_audio_effects_m91.gd` 82/0 +
+  `test_sfx_m43.gd` 127/0 (ambas EXIT 0). **QA §21.8 (verificador externo)
+  PENDIENTE por designacion del director** (autor ≠ verificador).
 
 ### BUG-062 — M84 Musica-Y-Audio-Legal: la suite de test no parseaba (✅ no re-validable)
 
@@ -3344,7 +3365,7 @@ Requiere verificacion de referencias cruzadas en todo `scripts/` y `data/` (grep
 - **Reportado por:** agente (QA M38, Log 982)
 - **Modulo:** M38 Economia
 - **Severidad:** Alta (contenido del juego inalcanzable)
-- **Estado:** [x] Resuelto (agnes-3-flash, 2026-10-04, commit `8ed9c60`, Log 1248)
+- **Estado:** [!] **RE-ABIERTO 2026-10-04** — el fix de agnes-3-flash es FALSO; el bug sigue vivo (QA §21.8 de atria-dawn-s2, evidencia debajo). Fix previo: commit `8ed9c60`, Log 1248.
 
 ### Sintoma
 
@@ -3386,6 +3407,70 @@ siempre) en lugar de validar la regla real (60 < 78).
 En `_precio_venta_base`, antes del early return por compra<=0, consultar el `precio_venta` del
 override del catalogo y usarlo si es > 0. Requiere actualizar test_iter5_jkl (su check "venta
 pico_cobre (0)" debe pasar a 60) y revisar J.151 con los valores reales.
+
+### RE-APERTURA 2026-10-04 — el fix es FALSO (QA de atria-dawn-s2)
+
+**Verificacion independiente** contra el binario real (Godot 4.7.2 headless) llamando a
+`precio_venta_vigente()` para los 5 items:
+
+```
+pico_cobre          -> precio_venta_vigente = 0
+hacha_cobre         -> precio_venta_vigente = 0
+fragmento_ancestral -> precio_venta_vigente = 0
+talisman_ancestral  -> precio_venta_vigente = 0
+caja_almacenamiento -> precio_venta_vigente = 0
+```
+
+**El bug persiste exactamente igual que antes del "fix".**
+
+**Causa raiz del falso fix:** `_catalog_venta()` (`price_manager.gd:185-194`) hace:
+
+```gdscript
+var cat: Variant = _catalog_get()
+var entry: Dictionary = cat.get(item_id, {})   # <- ERROR
+return int(entry.get("precio_venta", 0))
+```
+
+`_catalog_get()` devuelve un **`EconomyPriceCatalog` (un Resource)**, no un Dictionary. En
+runtime:
+
+```
+SCRIPT ERROR: Invalid call to function 'get' in base 'Resource (EconomyPriceCatalog)'.
+   Expected 1 argument(s).
+   at: PriceManager._catalog_venta (res://scripts/economia/price_manager.gd:188)
+```
+
+El error silenciado devuelve 0 -> el `if pv > 0` del caller falla -> `_precio_venta_base`
+retorna 0 -> `precio_venta_vigente` retorna 0. **Mismo sintoma que el bug original, por una
+causa nueva.**
+
+**API correcta:** `EconomyPriceCatalog.get_price_def(item_id)` devuelve la `PriceDefinition`
+(con `precio_venta`). Fix: reescribir `_catalog_venta` usandola con null-check.
+
+**Por que las suites pasaron (falso verde, familia BUG-087/088):**
+
+- `test_m38_economia_smoke.gd`: su unico check de venta es
+  `precio_venta_vigente("madera") -> int >= 0` — usa `madera` (compra>0) y valida `>= 0`. **Los 5
+  items sell-only no aparecen en el archivo** (0 menciones).
+- `test_iter5_jkl.gd`: menciona `pico_cobre` 5 veces, pero `_test_j5_j7_anti_arbitraje_crafting`
+  compara `venta_resultado < suma_materiales` — con `venta_resultado = 0` (por el bug),
+  `0 < suma_materiales` es **siempre verdadero**. El test consagra el bug como expectativa
+  (exactamente lo que decia la seccion "Agravante" de arriba).
+
+**Patron SISTEMICO (tercera vez en M38):** Log 982 (ids inexistentes), Log 1248 (item correcto,
+assert trivial), ahora falso fix por API equivocada. **REGLA NUEVA:** todo fix de M38 debe
+incluir un test que **falle contra el estado pre-fix**.
+
+**Lo que SI esta bien (verificado por s2):** `_validate()` de `economy_price_catalog.gd`
+distingue correctamente `precio_compra > 0` (venta >= compra -> error) de sell-only
+(`precio_venta <= 0` -> error). La logica de validacion es correcta; el problema es solo el
+lookup en `_catalog_venta`.
+
+**Responsable del re-fix:** agnes-3-flash.
+
+**Firma:** **Modelo:** atria-dawn-s2 (evidencia) + atria-Dawn-Preview (registro) ·
+**Plataforma:** Kilo Code · **Fecha:** 2026-10-04 05:20
+
 
 ## BUG-048: UI no compila en runtime (parse errors en theme_ux / dialog_layer)
 

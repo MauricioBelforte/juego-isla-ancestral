@@ -23,7 +23,9 @@
 - [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
 - [x] Fix post-liberación (commit `b894ffe`, sin número de log nuevo): el bloque Reserva insertado tras el H1 desplazaba **+14** todas las líneas → se movió al **FINAL** del `05-Checklist.md` (15+/15−) y la línea 3 (blanca) pasó a ser línea de estado que remite al bloque; líneas 4..327 byte a byte iguales a `e986181` → **~200 referencias `L##` restauradas sin renumerar** en 05-Checklist, 03-Diseno, 04-Codigo, CHECKLIST-GLOBAL, ESTADO-PARALELO y Log 1210. Detalle en Log 1210 §"Corrección posterior".
 - [x] Log reservado y creado: **1221** — **M43 LIBERADO a 🟡 Con dudas (59/41/0)**: ciclo de 9 lotes (A auditoría 22 [x] + B1→B6 + C1 auditoría 13 [x]); suite 15 → **127/0 EXIT=0**; 8 commits + cierre; los 4 registros de §26 actualizados.
-- [→] **M91 iter. 10 EN CURSO** — reservada 2026-10-03 23:29 (reasignación del director, canal `04-2026-10-04_00-45-00-respuesta-ciclo.md`): diseño de controles **L198-L211** + **L147** + **L288**, revisión de **L110-L116/L240-L243** con la API de M43. QC fila 91 → 🔵 en **working tree** (commit CG pendiente por carrera con agnes-3-flash, fila 06 sin commitear). QA §21.8 de M91 **ya VERIFICADO por Hy3 (Log 1225)**.
+- [x] Log creado: **1260** — **M91 iter. 11: BUG-092 resuelto** (set_mute auto-guarda, mutes+opciones serializados, API `set_opcion()` con claves español, suite 103→136 + sonda rojo, BUG-092 cerrado en 11-BUGS §7; liberada 🟡 02:28)
+- [x] **M91 iter. 10 CERRADA (Log 1250, aprobada por el director)** — reservada 2026-10-03 23:29 (reasignación del director, canal `04-2026-10-04_00-45-00-respuesta-ciclo.md`): diseño de controles **L198-L211** + **L147** + **L288**, revisión de **L110-L116/L240-L243** con la API de M43. QC fila 91 → 🔵 en **working tree** (commit CG pendiente por carrera con agnes-3-flash, fila 06 sin commitear). QA §21.8 de M91 **ya VERIFICADO por Hy3 (Log 1225)**.
+- [x] **M91 iter. 11 CERRADA (BUG-092)** — 2026-10-04 02:28, Log 1260: fix en `audio_config_service.gd` + API `set_opcion()/get_opcion()/opcion_cambiada` (claves `rango_dinamico`/`compresion`/`dispositivo_salida`), suite 103→136 (piso medido + sonda rojo EXIT 1), regresiones 82/0 + 127/0, BUG-092 cerrado en `11-BUGS.md` §7. QA §21.8 pendiente (autor ≠ verificador).
 
 ## Módulo LIBERADO 🟡 — 43-Efectos-De-Sonido (Log 1221)
 
@@ -224,7 +226,7 @@ timestamp, `Dependencias` → `—` con nota. Nunca dejes 🔵 huérfano (§21.4
 **NO sellar §21.8** (autor ≠ verificador): lo deja el coordinador con un
 verificador independiente.
 
-## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio (iter. 10 CERRADA 2026-10-04 00:03, Log 1250)
+## Módulo 🟡 — 91-Configuracion-De-Audio (iter. 11 CERRADA: BUG-092 resuelto, Log 1260)
 
 > **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**
 > **LIBERADO 2026-10-02 21:55 a 🟡 Con dudas — Log 1210.** Los 4 registros de §26
@@ -253,6 +255,8 @@ verificador independiente.
 > **103/0 + 82/0** (EXIT 0); (6) progreso **207/239** (05-Checklist + CG fila 91
 > + guía 08). Queda 🔵 sin trabajo propio: 31 `[ ]` con dueño externo/engine
 > + L88 `[?]` HRTF. **No re-llevar a ✅ sin resolver L88.**
+
+> **ITER. 11 CERRADA 2026-10-04 02:28 → 🟡 (Log 1260).** Encargo del director (canal 06): BUG-092 **resuelto** — `set_mute()` → `_guardar_config()` + `_mutes`/`_opciones` serializados como sub-diccionarios de `config["audio"]`; API `set_opcion(clave, valor) -> bool` con validación de clave/valor, aplicación al motor con confirmación de estado final y auto-guardado por setter (mismo camino que `set_volumen()`); claves en **español** (`rango_dinamico`/`compresion`/`dispositivo_salida` — los 3 managers siguen stateless, AudioConfig es el dueño único de la persistencia). Suite `test_audio_config.gd` 103 → **136/0 EXIT 0** (piso `CHECKS_MINIMOS=136`, sonda rojo EXIT 1 inyectada y removida) + regresiones 82/0 y 127/0. BUG-092 cerrado en `11-BUGS.md` §7. **NO se sella §21.8** (autor ≠ verificador) → M91 queda 🟡; L88 `[?]` HRTF sigue siendo el techo.
 
 >
 > Dominio del chat: UI + audio + i18n (creditos_layer, farewell, i18n,
