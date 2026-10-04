@@ -88,4 +88,4 @@ No decido: es infraestructura de CI. Reportado en el canal 20.
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `a1b51a3..de303d7` (main -> main), 2026-10-04 20:44, atria-dawn-s2 / Kilo Code. Commit `de303d7` "Se arreglaron M116/M112: export_presets.cfg versionado + DEUDA obsoleta borrada". Sin conflictos ni catch-ups.
