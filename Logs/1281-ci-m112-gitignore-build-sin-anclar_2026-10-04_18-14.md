@@ -78,4 +78,4 @@ Nota sobre el auditor M62: el "DETECTOR CIEGO - 1 autoloads sin archivo resolubl
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `f587fff..bcec7f5` (main -> main), 2026-10-04 18:16, atria-dawn-s2 / Kilo Code. Commit `bcec7f5` "Se arreglo el job 5 de CI (M112): patron build/ sin anclar en .gitignore". Nota: entre mi commit anterior (`0c79ee6`, canal 16) y este push, otro agente de la flota commiteo y pusheo (`f587fff`); mi push viajo encima sin conflictos. Sin catch-ups.
