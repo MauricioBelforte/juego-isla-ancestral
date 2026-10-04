@@ -27,19 +27,19 @@ func get_terrain_data(terrain_id: int) -> TerrainData:
 	return _terrains.get(terrain_id)
 
 func get_speed_modifier(terrain_id: int) -> float:
-	var terrain := _terrains.get(terrain_id)
+	var terrain: TerrainData = _terrains.get(terrain_id)
 	if terrain == null:
 		return 1.0
 	return terrain.speed_modifier
 
 func get_visual_config(terrain_id: int) -> Dictionary:
-	var terrain := _terrains.get(terrain_id)
+	var terrain: TerrainData = _terrains.get(terrain_id)
 	if terrain == null:
 		return {}
 	return terrain.visual_config
 
 func get_audio_config(terrain_id: int) -> Dictionary:
-	var terrain := _terrains.get(terrain_id)
+	var terrain: TerrainData = _terrains.get(terrain_id)
 	if terrain == null:
 		return {}
 	return terrain.audio_config
