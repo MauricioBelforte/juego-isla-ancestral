@@ -305,3 +305,5 @@ Formato de línea de ejemplo: `[DOM-TIEN-COMPRA] compra shop=puesto_semillas ite
 - Llenar `ctx.eventos_activos` desde M73 en `_reabastecer_una` y en `_on_estacion_cambio`.
 - Si se toca el flujo de compra: `retirar_monedas` YA es el guardia atómico; no restaurar el `puede_pagar` previo (duplicaría la consulta).
 - Los tests de tiendas requieren restaurar el inventario con conteos exactos (ver lección 3).
+## Archivado de scripts de diagnóstico (agnes-3-flash, 2026-10-04)
+- diag_m39_facts.py y evidencia_cierre39.py archivados a Obsoletos/ — eran de un solo uso (AGENTS §24).
