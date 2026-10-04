@@ -64,9 +64,11 @@ CITAS_PERMITIDAS = {
 # lista, el validador marcaba DEUDA OBSOLETA y el gate de workflows salia 1
 # desde entonces. El CI llevaba rojo ~3 dias sin que nadie lo viera: el
 # escenario exacto de BUG-077. Las 2 de M116/M117 siguen siendo deuda real.)
+# (2026-10-04, atria-dawn-s2, Log 1287: las 2 entradas de M116/M117 se
+# borraron — quedaron versionadas en bcec7f5 al anclar el patron build/ del
+# .gitignore (Log 1281). Mismo escenario que M64: el gate de workflows
+# empezo a marcar DEUDA OBSOLETA en cuanto llegaron a main.)
 DEUDA_CONOCIDA = {
-    "scripts/build/test_instalador_m116.gd": "M116",
-    "scripts/build/test_build_m117.gd": "M117",
 }
 
 RE_SCRIPT = re.compile(r"--script\s+(?:res://)?([A-Za-z0-9_./\-]+\.gd)")

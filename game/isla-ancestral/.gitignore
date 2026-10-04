@@ -1,7 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 *.import
-/export_presets.cfg
+# export_presets.cfg NO se ignora (fix atria-dawn-s2 2026-10-04, Log 1287):
+# los validadores M116/M117 lo leen en CI (4 presets: Web, Windows, ...).
+# El .gitignore estandar de Godot lo excluye, pero este proyecto lo necesita
+# versionado para que el pipeline de distribucion sea coherente.
 *.translation
 
 # Mono/C# ignores
