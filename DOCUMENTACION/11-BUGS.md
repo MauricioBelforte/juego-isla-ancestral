@@ -1395,6 +1395,17 @@ secciones reales (headers `## X.Y`). Clasificación:
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
 
+### BUG-047 — M38: items solo-vendibles con precio_venta anulado (devuelve 0) — RESUELTO
+
+- **Fecha de reporte:** 2026-09-18 · **Fecha de resolución:** 2026-10-04
+- **Módulo(s) afectado(s):** M38 Economía — `game/isla-ancestral/scripts/economia/price_manager.gd`
+- **Reportado por:** atria-dawn (QA M38, Log 982) · **Resuelto por:** agnes-3-flash (re-fix v3, commit `c60b068`) · **Verificado por:** atria-dawn-s2 (QA §21.8, Log 1267)
+- **Síntoma:** `precio_venta_vigente` devolvía **0** para los 5 items solo-vendibles del catálogo (`fragmento_ancestral` 75, `talisman_ancestral` 200, `pico_cobre` 60, `hacha_cobre` 55, `caja_almacenamiento` 40).
+- **Causa raíz:** tres defectos encadenados, mismo síntoma: (1) original: `_precio_venta_base` hacía early return 0 cuando `precio_compra <= 0`, ignorando el `precio_venta` del override; (2) falso fix v1: `_catalog_venta` llamaba `.get(item_id, {})` sobre un `EconomyPriceCatalog` (Resource) → SCRIPT ERROR silenciado → 0; (3) nadie vio: `precio_venta_vigente` clamaba `final` a `tope = precio_compra_vigente` = 0 para sell-only → clamp a 0.
+- **Solución aplicada (3 cambios, commit `c60b068`):** `_catalog_venta()` usa `EconomyPriceCatalog.get_price_def(item_id)` con null-check; `_precio_venta_base()` usa el `precio_venta` del catálogo directo (con ajuste estacional/feria/oferta) para `compra <= 0`, manteniendo `TOPE_VENTA_SOBRE_COMPRA` para `compra > 0`; `precio_venta_vigente()` clampa solo `if tope > 0` (los items normales siguen clampados).
+- **Verificación (Log 1267, binario real 4.7.2):** `test_bug047_sell_only.gd` **6/0** (nueva, afirma valores exactos del catálogo); `test_m38_economia_smoke.gd` 7/0; `test_iter5_jkl.gd` 33/0. **Sonda ROJO→VERDE empírica:** falso fix v1 (`8ed9c60`) → **6/6 FAIL** (actual=0); fix v3 → **6/0 OK**. La regla nueva (test que falle contra el pre-fix) se cumple. Regresión: el camino `compra > 0` no cambió (`madera_roble == 6` sigue OK; assert anti-arbitraje ahora no-trivial: 60 < 78, no 0 < 78).
+- **Firma:** **Modelo:** atria-dawn-s2 (verificación) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 06:50
+
 ### BUG-093 — M156: `test_terrain_modifiers.gd` era una suite MUERTA (API gdUnit4 inexistente)
 
 - **Fecha de reporte:** 2026-10-04 06:15
@@ -3415,7 +3426,7 @@ Requiere verificacion de referencias cruzadas en todo `scripts/` y `data/` (grep
 - **Reportado por:** agente (QA M38, Log 982)
 - **Modulo:** M38 Economia
 - **Severidad:** Alta (contenido del juego inalcanzable)
-- **Estado:** [!] **RE-ABIERTO 2026-10-04** — el fix de agnes-3-flash es FALSO; el bug sigue vivo (QA §21.8 de atria-dawn-s2, evidencia debajo). Fix previo: commit `8ed9c60`, Log 1248.
+- **Estado:** [x] **RESUELTO 2026-10-04** — re-fix v3 de agnes-3-flash (commit `c60b068`) **verificado por QA §21.8 de atria-dawn-s2 (Log 1267)**: los 3 cambios correctos (API `get_price_def`, `pv` directo, clamp solo si tope>0); sonda ROJO→VERDE confirmada empíricamente contra el binario real (falso fix v1 `8ed9c60` → **6/6 FAIL** con actual=0; fix v3 → **6/0 OK** con 75/200/60/55/40). Historial: reporte Log 982 → falso fix v1 (`8ed9c60`, Log 1248) → re-abierto por QA s2 (Log 1261) → re-fix v3 (`c60b068`) → verificado (Log 1267).
 
 ### Sintoma
 

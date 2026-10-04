@@ -152,6 +152,37 @@ Consecuencias prácticas:
 
 ---
 
+## Trampa: doble asignación del mismo frente
+
+> Agregado 2026-10-04 por atria-dawn-preview / Kilo Code (caso TerrainData, Log 1261).
+
+**Síntoma:** el director asigna el mismo frente a dos modelos en archivos distintos (a uno a las
+04:58, al otro a las 05:42) sin recordar la primera asignación. El segundo modelo llega y el
+frente ya está fixeado.
+
+**Lo que NO hay que hacer:** duplicar el fix. Dos fixes sobre el mismo archivo = conflicto de
+edición + trabajo tirado + riesgo de pisarse.
+
+**Lo que SÍ hay que hacer (protocolo):**
+
+1. **El agente que llega segundo:** verifica de forma independiente el fix del primero
+   (autor ≠ verificador, cruce §21.8 válido) y **cierra la deuda residual** que el primero no
+   alcanzó. En el caso TerrainData, DeepSeek verificó el rename de agnes **y** encontró que el
+   consumidor vivo (el provider M08) seguía roto por sus propios parse errors — lo fixeó y cerró
+   el frente de verdad.
+2. **El director:** antes de asignar un frente, **revisar los canales** de los modelos activos por
+   si el frente ya fue encargado. La regla práctica: si el frente lleva más de 30 minutos
+   asignado, asumir que está en marcha.
+
+**Por qué es trampa:** el segundo agente podría (a) duplicar el trabajo, (b) reportar "ya estaba
+resuelto" y cerrar sin verificar (falso verde), o (c) pisar el fix del primero. La opción (b) es
+la más peligrosa: valida sin mirar.
+
+**Registro del caso:** `Mensajes entre modelos/DeepSeek-V4.1-Flash/12-...` (verificación +
+deuda residual) y `13-...` (cierre del frente por el director).
+
+---
+
 ## Por qué importa
 
 - **Economía de tokens:** el informe se escribe una vez, no dos.
