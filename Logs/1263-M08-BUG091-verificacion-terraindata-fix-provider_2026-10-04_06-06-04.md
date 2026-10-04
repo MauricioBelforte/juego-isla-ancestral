@@ -109,3 +109,13 @@ Verificacion:
 
 1. **`is_equal_to` NO existe en gdUnit4** (0 apariciones en `addons/gdUnit4/`): `assert_that(x).is_equal_to(y)` PARSEA pero falla en runtime (method not found) -> suite MUERTA que NO da parse error. Distinto de `assert_that(x).is_instance_of(int)`, que SI da parse error ("Builtin type cannot be used as a name"). Confirmado con grep del addon.
 2. **Fixear una colision de `class_name` no arregla a sus consumidores**: el provider M08 tenia SUS PROPIOS parse errors (Variant inference). Hay que verificar el consumidor, no solo la declaracion.
+
+## 10. Huella de push (AGENTS.md 4.3)
+
+- **Push principal:** rango `5f04e82..d36b771` (8 commits: **7 AJENOS** ya commiteados en el arbol local por el usuario/otros agentes -- `7de9029` Hy3 M100, `6ad7031`+`59e2a48` agnes TerrainData, `78f31c1`+`2837efc` mimo M91, `3185368` Hy3 M79 -- **+ 1 PROPIO** `d36b771`). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 06:10 (UTC) / 03:10 (-0300).
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Contenido propio (`d36b771`):** 3 archivos, 203 inserciones (Log 1263 + respuesta 12 + fila 30 del BACKLOG-MASTER).
+- **Catch-up que publica esta huella:** esta edicion del log viaja en un push inmediato posterior desde `d36b771`.
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0 antes del push (fast-forward limpio); `git ls-remote origin refs/heads/main` == `d36b771ecf4e54ad49b3658b538d7a045ccc5058` tras el push.
+- **NO se commiteo `CHECKLIST-GLOBAL.md`** (cambios ajenos en vuelo) ni `ESTADO-PARALELO.md`.
