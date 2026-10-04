@@ -204,13 +204,13 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 
 ## Lote F — QA cruzado masivo (§21.8) — asignado 2026-09-12
 > 46 módulos '🟢 Disponible' sin sello §21.8. 33 headless EXIT 0 (Log 866) + 13 re-grounding (Log 867). M150 verificado por test pero su fila en CHECKLIST-GLOBAL fue eliminada por agente paralelo (reconciliar).
-| 1-01-Fundamentos-Del-Proyecto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 2-02-Vision-Y-Concepto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 3-03-Documentacion-Del-Proyecto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 6-06-Control-De-Versiones | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (6 checks) |
+| 1-01-Fundamentos-Del-Proyecto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_fundamentals_m01.gd 8 checks/0 fallos (headless) |
+| 2-02-Vision-Y-Concepto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_vision_m02.gd 8 checks/0 fallos (headless) |
+| 3-03-Documentacion-Del-Proyecto | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — audit DeepSeek Log 1283: 117/133 🟡 |
+| 6-06-Control-De-Versiones | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_version_control_m06.gd 6 checks/0 fallos (headless) |
 | 26-26-Templo-Subterraneo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (assets 25-Ruinas-Templos (.blend)) |
-| 38-38-Economia | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test_m38_economia_smoke EXIT 0 (smoke) |
-| 44-44-ASMR-Y-Feedback | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
+| 38-38-Economia | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ QA válida atria-dawn-s2 (Log 1267; sello Log 866 inválido) 2026-10-04: test_m38_economia_smoke 0 fallos (headless) |
+| 44-44-ASMR-Y-Feedback | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_feedback_m44.gd 9 checks/0 fallos (headless) |
 | 55-55-Diario-Del-Jugador | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test_diario EXIT 0 (DiaryService) |
 | 76-76-Multijugador | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (Logs multijugador) |
 | 77-77-Online-Y-Red | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (transport_network.gd + generar_red_transporte.gd) |
