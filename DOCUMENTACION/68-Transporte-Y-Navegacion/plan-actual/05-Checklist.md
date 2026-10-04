@@ -20,9 +20,9 @@
 
 ## Reserva anterior (iter. 2 — cerrada 2026-10-04)
 
-- Estado: 🔵 En curso
+- Estado: 🟡 Liberada — 2026-10-04 (superada por iter. 3)
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
-- Entrada: M68 36/131 `[x]` · 10 `[?]` · 85 `[ ]`
+- Entrada: M68 36/131 `[x]` · 10 `[?]` · 85 `[ ]` (encabezado stale; el real era 70/47/14)
 - Alcance: la **mitad verificable headless** — planificador de viaje (fases, cozy < 4 s, cargar destino ANTES de mover, orientación al destino, "nunca perder al jugador"), viajes especiales (M74/M31), viajes narrativos (M22/M23), eventos de ruta sin peligro, puente con M69, localización 12h/24h + plurales y validador unificado.
 - Fuera del alcance (dueño externo): todo lo que necesita escena/UI/3D — carteles (M46), capa del mapa (M54), panel (M53), docking y vehículos (M67), animaciones (M48), NPC pasajeros (M64).
 - Log: 910 (reserva en `Logs/reservas/910-DSV41F-M68.txt`)
