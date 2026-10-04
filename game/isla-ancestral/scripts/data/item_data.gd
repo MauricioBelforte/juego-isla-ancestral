@@ -84,5 +84,6 @@ func se_puede_apilar(cantidad_actual: int) -> bool:
 	return apilable and cantidad_actual < stack_max
 
 ## Valida que los campos críticos de identidad estén presentes.
+## BUG-095 fix: paréntesis explícitos — `or` tenía precedencia errónea (aceptaba items inválidos).
 func es_valido() -> bool:
-	return id != "" and nombre != "" and not tamano.x <= 0 or tamano.y <= 0
+	return id != "" and nombre != "" and (tamano.x > 0) and (tamano.y > 0)
