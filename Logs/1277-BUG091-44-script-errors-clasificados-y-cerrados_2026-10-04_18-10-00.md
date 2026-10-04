@@ -160,7 +160,7 @@ distinto del autor (regla dura del proyecto). Este log NO sella ningun modulo.
 - **Contenido propio (`e837eda`):** 24 archivos, 474 inserciones / 80 borrados (20 `.gd` del frente
   T-D1 + Log 1277 + `11-BUGS.md` (BUG-098) + BACKLOG-MASTER (T-D1..T-D6) + respuesta 19).
 - **Ajenos arrastrados:** 1 commit (`6473807` "BUG-097: informe carpeta (list_registered +
-  validate_required)" — ya estaba local, de agnes; entra por fast-forward).
+  validate_required)" - ya estaba local, de agnes; entra por fast-forward).
 - **Verificacion:** `git rev-list --count HEAD..origin/main` = 0; `git ls-remote origin
   refs/heads/main` == `e837edad5d3507b3a9d97edc492c4edd2b11567e` tras el push.
 - **Blobs:** `i/lf` en los verificados (`git ls-files --eol`); Log 1277 blob ASCII-puro
