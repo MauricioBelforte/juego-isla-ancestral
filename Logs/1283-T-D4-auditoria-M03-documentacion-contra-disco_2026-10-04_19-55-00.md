@@ -106,9 +106,11 @@ M03 corresponde a un verificador independiente. Este log NO sella el modulo.
 
 ## 9. Huella de push (AGENTS.md 4.3)
 
-- **Push principal:** rango `PENDIENTE..PENDIENTE` (1 commit, PROPIO). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
-- **Hora:** PENDIENTE.
+- **Push principal:** rango `78e353a..ad6b370` (2 commits: PROPIO `f42de14` + ajeno `ad6b370` de Hy3). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 19:50 (-0300).
 - **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
-- **Contenido propio:** `05-Checklist.md` de M03 + Log 1283 + BACKLOG-MASTER + respuestas 21 y 22.
-- **Ajenos arrastrados:** PENDIENTE.
-- **Verificacion:** PENDIENTE.
+- **Contenido propio (`f42de14`):** 5 archivos, 421 inserciones / 128 borrados (`05-Checklist.md` de M03 + Log 1283 + respuestas 21 y 22 + BACKLOG-MASTER).
+- **Ajenos arrastrados:** 1 commit (`ad6b370` "Hy3 T-H1: replace fraudulent Log 866 seals..." - ya estaba local).
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0; `git ls-remote origin refs/heads/main` == `ad6b37056d220e7076a8891e718882251733bb88` tras el push.
+- **Blobs:** `i/lf` en los 2 verificados (`git ls-files --eol`); Log 1283 blob ASCII-puro (0 no-ASCII, 0 CR, sin BOM).
+- **Nota (Log 866):** el commit ajeno arrastrado (`ad6b370`) reemplaza los sellos FRAUDULENTOS del Log 866 en M125/M79/M132. La fila de M03 en CHECKLIST-GLOBAL cita ese mismo Log 866 como verificacion -> queda invalidada (se lo reporte al director).
