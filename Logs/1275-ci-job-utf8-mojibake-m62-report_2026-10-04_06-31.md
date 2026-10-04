@@ -70,4 +70,4 @@ El camino correcto para el dueno de M91 es mover la declaracion de `DataStore` a
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `4b9b2bb..30a3a02` (main -> main), 2026-10-04, atria-dawn-s2 / Kilo Code. Commit `30a3a02` "Se arreglo el job UTF-8 de CI (mojibake en backlog de Hy3)". Sin catch-ups.
