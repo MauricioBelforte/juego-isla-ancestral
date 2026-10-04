@@ -10,6 +10,9 @@ Recorre DOCUMENTACION/{NN}-*/plan-actual/05-Checklist.md y valida:
 
 Uso:
     python scripts/verificar_checklist.py [--checklist PATH] [--horas-limite H]
+    python scripts/verificar_checklist.py --estructura
+    python scripts/verificar_checklist.py --totales
+    python scripts/verificar_checklist.py --todos
 
 Códigos de salida (BUG-075 — no compartir el 1 y el 3):
     0  sin alertas: todo consistente.
@@ -40,6 +43,20 @@ CHECKLIST_GLOBAL = RAIZ / "CHECKLIST-GLOBAL.md"
 HORAS_LIMITE_DEFAULT = 24
 
 ESTADOS_EN_CURSO = {"🔵", "🔴"}
+
+# SB-05 (space-bunny-alpha, 2026-10-04). Ver el canal
+# `Mensajes entre modelos/space-bunny-alpha/06-...-sb02-aceptado-sb05-verificador.md`.
+#
+# Estas verificaciones son "opt-in" (flags --estructura / --totales / --todos) y
+# NO alteran el comportamiento por defecto. Motivo: hoy el script devuelve exit
+# 0 sobre el repo y CI puede depender de eso. Anadir 58 alertas de filas mal
+# formadas sin avisar cambiaria el exit code de golpe y pondria el pipeline en
+# rojo. Con opt-in, el default es identico al previo (0 cambios) y las
+# verificaciones nuevas se piden explicitamente.
+SB05_NOTA = (
+    "SB-05: verificacion 2 (estructura de filas) y 4 (Totales) + fix del "
+    "comparador de estado (E3). Opt-in para no cambiar el exit code por defecto."
+)
 
 
 # ---------------------------------------------------------------------------
@@ -198,11 +215,182 @@ def detectar_colgados(filas: dict, horas_limite: int):
     return colgados
 
 
+# ===========================================================================
+# SB-05 — Verificaciones nuevas (opt-in). NO tocan leer_tabla_global() ni
+# detectar_colgados() para no romper los tests de regresion existentes.
+# ===========================================================================
+
+# E3 (fix mio, reportado en el Log 1279): el estado de una celda puede ser
+# "✅ Re-verificado (iter. 1)" o "🟡 Con dudas (Log 1130 ✅)". Comparar con
+# `== "✅"` (igualdad exacta) NO detecta el caso real, y `in` sobre el texto
+# produce falsos positivos con el ✅ que aparece DENTRO de un estado 🟡.
+# La regla correcta es: el emoji va SIEMPRE al principio, y se compara solo el
+# primer token.
+_EMOJI_RE = re.compile(r"^(\S+)")
+
+
+def estado_emoji(estado: str) -> str:
+    """Devuelve SOLO el emoji inicial de la celda de estado (fix E3).
+
+    "✅ Completado (P-36)"  -> "✅"
+    "🟡 Con dudas (Log 1 ✅)" -> "🟡"
+    "" o None               -> ""
+    """
+    if not estado:
+        return ""
+    m = _EMOJI_RE.match(estado.strip())
+    return m.group(1) if m else ""
+
+
+# --- Verificacion 2: estructura de filas de la tabla resumen ----------------
+# Motivo (SB-02, Log 1279): 58 de 167 filas tienen un numero de celdas distinto
+# al del encabezado, y el parser las mapea POR POSICION. Con un pipe sin
+# escapar dentro de la columna "Notas", las columnas "Agente actual" y "Ultima
+# actividad" reciben basura en silencio: el parser no falla, devuelve datos
+# equivocados. Sin este check, cualquier verificacion que dependa de esas
+# columnas (incluido detectar_colgados) opera sobre basura.
+#
+# E2 (fix mio): se excluyen las filas de LEYENDA (seccion 21.2 Simbolos), que
+# tienen un ID no numerico. Contarlas como modulos las hacia parecer mal
+# formadas.
+RE_ID_NUMERICO = re.compile(r"^\d{1,3}$")
+
+
+def analizar_estructura_tabla(archivo: Path):
+    """Verificacion 2: filas mal formadas de la tabla resumen.
+
+    Devuelve (n_cols_esperadas, lista_de_problemas) donde cada problema es
+    (num_linea, id_modulo, n_celdas, motivo).
+
+    Convencion de split (importante, y es parte del hallazgo): se quitan el
+    primer y el ultimo elemento SOLO si estan vacios. Asi las filas que NO
+    terminan en "|" se detectan como faltantes en vez de perder contenido en
+    silencio. La convencion ingenua split("|")[1:-1] daria un numero distinto
+    (54 vs 58 en el repo el 2026-10-04) — y esa ambiguedad ES el problema.
+    """
+    if not archivo.exists():
+        raise DetectorCiegoError(f"BUG-075: {archivo.name} no existe")
+
+    lineas = archivo.read_text(encoding="utf-8").split("\n")
+
+    # Encabezado: primera linea "| ID | ..."
+    idx_enc = None
+    for i, l in enumerate(lineas):
+        if l.strip().startswith("|") and l.strip().split("|")[1].strip() == "ID":
+            idx_enc = i
+            break
+    if idx_enc is None:
+        raise DetectorCiegoError(
+            f"BUG-075: {archivo.name} no contiene el encabezado '| ID |'"
+        )
+
+    celdas_enc = [c.strip() for c in lineas[idx_enc].strip().strip("|").split("|")]
+    n_esperadas = len(celdas_enc)
+
+    problemas = []
+    sin_pipe_final = []
+    for i, l in enumerate(lineas[idx_enc + 1:], idx_enc + 2):
+        s = l.strip()
+        if not s.startswith("|"):
+            continue
+        partes = s.split("|")
+        if partes and partes[0].strip() == "":
+            partes = partes[1:]
+        if partes and partes[-1].strip() == "":
+            partes = partes[:-1]
+        celdas = [p.strip() for p in partes]
+        if not celdas or not RE_ID_NUMERICO.match(celdas[0]):
+            continue  # E2: leyenda o separador, no es un modulo
+        if len(celdas) == n_esperadas:
+            continue
+        # indice de Recom / Agente / Actividad solo para el mensaje
+        motivo = "faltan celdas" if len(celdas) < n_esperadas else "sobran celdas"
+        if not s.endswith("|"):
+            motivo += " + no termina en '|'"
+            sin_pipe_final.append(i)
+        problemas.append((i, celdas[0], len(celdas), motivo))
+
+    return n_esperadas, problemas, sin_pipe_final
+
+
+# --- Verificacion 4: bloques "**Totales:**" que contradicen el conteo real ---
+# Motivo (SB-02, Log 1279): 14 bloques "Totales" dentro de 05-Checklist.md
+# contradicen el conteo real de marcas, mientras CHECKLIST-GLOBAL.md esta bien.
+# El patron H-D: el archivo se contradice a si mismo.
+#
+# E1 (fix mio): se comparan los CAMPOS declarados contra los reales, no "el
+# primer numero contra los completados". Y E4: toda alternacion va agrupada.
+_CAMPOS_TOTALES = (
+    ("total", r"(?:\d+)\s*i?t?e?m?o?s?\b"),
+    ("x", r"(?:completados)"),
+    ("?", r"(?:no resueltos|sin resolver)"),
+    ("e", r"(?:pendientes)"),
+)
+_RE_TOTALES_LINEA = re.compile(r"(?mi)^\s*\*{0,2}Totales\*{0,2}\s*:.*$")
+
+
+def parsear_totales(linea: str):
+    """Extrae {campo: valor} de una linea '**Totales:** ...'. None si no hay total.
+
+    E4 (fix mio): los patrones con alternacion van agrupados con (?:...) para
+    que el grupo de captura se aplique a TODAS las ramas. Sin agrupar, la
+    alternacion reparte el patron entero y group(1) es None en la 1a rama.
+    """
+    bajo = linea.lower()
+    out = {}
+    for campo, patron in _CAMPOS_TOTALES:
+        if campo == "total":
+            m = re.search(r"(\d+)\s*i?t?e?m?o?s?\b", bajo)
+        else:
+            m = re.search(patron + r"[^0-9]{0,14}(\d+)", bajo)
+        if m:
+            out[campo] = int(m.group(1))
+    return out if "total" in out else None
+
+
+def detectar_totales_incoherentes(checklists):
+    """Verificacion 4: 'Totales' declarados vs conteo real de marcas.
+
+    Devuelve lista de (nombre_modulo, num_linea, campos_discrepantes, detalle).
+    Un campo solo se reporta si el archivo LO declara y no coincide.
+    """
+    salida = []
+    for cl in checklists:
+        texto = cl.read_text(encoding="utf-8")
+        x, pend, dudas = contar_checklist(cl)
+        real = {"total": x + pend + dudas, "x": x, "?": dudas, "e": pend}
+        for m in _RE_TOTALES_LINEA.finditer(texto):
+            num_linea = texto[: m.start()].count("\n") + 1
+            decl = parsear_totales(m.group(0))
+            if decl is None:
+                continue
+            malas = [
+                f"{campo}: declarado={v} real={real[campo]}"
+                for campo, v in decl.items()
+                if campo in real and v != real[campo]
+            ]
+            if malas:
+                salida.append(
+                    (
+                        cl.parent.parent.name,
+                        num_linea,
+                        malas,
+                        f"real: [x]={x} [?]={dudas} [ ]={pend} total={real['total']}",
+                    )
+                )
+    return salida
+
+
 # ---------------------------------------------------------------------------
 # Análisis principal
 # ---------------------------------------------------------------------------
-def analizar_proyecto(checklist_global: Path, horas_limite: int):
-    """Ejecuta el análisis completo y devuelve una lista de alertas."""
+def analizar_proyecto(checklist_global: Path, horas_limite: int,
+                      con_estructura: bool = False, con_totales: bool = False):
+    """Ejecuta el análisis completo y devuelve una lista de alertas.
+
+    SB-05: `con_estructura` y `con_totales` activan las verificaciones nuevas.
+    Por defecto False -> comportamiento identico al previo (exit code no cambia).
+    """
     alertas = []
 
     if not DOCUMENTACION.exists():
@@ -256,18 +444,34 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int):
                     f"el 05-Checklist.md tiene '{esperado}'."
                 )
 
+            # E3 (SB-05): el estado se compara por su EMOJI INICIAL, no por
+            # igualdad exacta. Antes: `estado_declarado == "✅"` no detectaba
+            # "✅ Re-verificado (iter. 1)" (SB-02, Log 1279: 8 modulos con ✅ y
+            # trabajo pendiente pasaban como "sin alertas").
+            emoji_estado = estado_emoji(estado_declarado)
+
             # Verificar que un módulo con [x] no esté declarado ⬜/🟢 sin dudas
-            if x > 0 and estado_declarado in ("⬜", "🟢"):
+            if x > 0 and emoji_estado in ("⬜", "🟢"):
                 alertas.append(
                     f"❌ Inconsistencia en {nombre_modulo}: tiene {x} items [x] "
                     f"pero su estado global es '{estado_declarado}'."
                 )
 
-            # Verificar que un módulo con [?] no esté declarado ✅
-            if dudas > 0 and estado_declarado == "✅":
+            # Verificar que un módulo con [?] no esté declarado ✅ (DoD 21.6)
+            if dudas > 0 and emoji_estado == "✅":
                 alertas.append(
                     f"❌ Inconsistencia en {nombre_modulo}: tiene {dudas} items [?] "
-                    f"pero su estado global es '✅ Completado'."
+                    f"pero su estado global es '{estado_declarado}'."
+                )
+
+            # E3 (SB-05): la misma trampa de comparacion, para el caso `[ ]`:
+            # un modulo ✅ con items pendientes viola la DoD 21.6 igual que con
+            # [?]. Antes no se checkeaba en absoluto.
+            if pendientes > 0 and emoji_estado == "✅":
+                alertas.append(
+                    f"❌ Inconsistencia en {nombre_modulo}: tiene {pendientes} items [ ] "
+                    f"pendientes pero su estado global es '{estado_declarado}' "
+                    f"(DoD 21.6: ✅ exige todo [x])."
                 )
 
         # 2. Verificar DoD: si hay [x], deben existir Logs/ y firmas en plan-actual
@@ -286,6 +490,36 @@ def analizar_proyecto(checklist_global: Path, horas_limite: int):
             f"⚠️ Módulo {id_modulo} ({nombre}) está en curso pero {motivo}. "
             f"Posible bloqueo colgado (regla 21.4.7)."
         )
+
+    # --- SB-05: verificaciones nuevas (opt-in) ------------------------------
+    # 4. Estructura de filas de la tabla resumen
+    if con_estructura:
+        n_esp, problemas, sin_pipe = analizar_estructura_tabla(checklist_global)
+        faltan = [p for p in problemas if "faltan" in p[3]]
+        sobran = [p for p in problemas if "sobran" in p[3]]
+        print()
+        print(f"🔧 SB-05 · Estructura de la tabla: {n_esp} columnas en el encabezado")
+        print(f"   filas mal formadas: {len(problemas)} (faltan={len(faltan)} sobran={len(sobran)})")
+        print(f"   de las cuales no terminan en '|': {len(sin_pipe)} -> lineas {sin_pipe}")
+        print("   NOTA: una fila mal formada hace que el parser mapee por posicion y")
+        print("         las columnas 'Agente actual'/'Ultima actividad' reciban basura.")
+        for num_linea, mid, n, motivo in problemas:
+            alertas.append(
+                f"⚠️ Fila {mid} (L{num_linea}) mal formada: {n} celdas de {n_esp} ({motivo}) "
+                f"— el parser mapea por posicion."
+            )
+
+    # 5. Bloques "Totales" que contradicen el conteo real
+    if con_totales:
+        incoherentes = detectar_totales_incoherentes(checklists)
+        print()
+        print(f"🔧 SB-05 · Bloques 'Totales' que contradicen el conteo real: {len(incoherentes)}")
+        print("   (CHECKLIST-GLOBAL.md puede estar bien: el que miente es el checklist)")
+        for nombre, num_linea, malas, detalle in incoherentes:
+            alertas.append(
+                f"⚠️ {nombre} L{num_linea}: bloque 'Totales' incoherente — "
+                f"{'; '.join(malas)} ({detalle})"
+            )
 
     return alertas
 
@@ -309,15 +543,39 @@ def main():
         default=HORAS_LIMITE_DEFAULT,
         help="Horas sin actividad para considerar un 🔵/🔴 como colgado (default: 24).",
     )
+    parser.add_argument(
+        "--estructura",
+        action="store_true",
+        help="SB-05: verifica filas mal formadas de la tabla resumen "
+        "(celdas de mas/menos, filas sin pipe final).",
+    )
+    parser.add_argument(
+        "--totales",
+        action="store_true",
+        help="SB-05: verifica que los bloques '**Totales:**' de cada "
+        "05-Checklist.md cuadren con su conteo real de marcas.",
+    )
+    parser.add_argument(
+        "--todos",
+        action="store_true",
+        help="SB-05: activa --estructura y --totales.",
+    )
     args = parser.parse_args()
+
+    con_estructura = args.estructura or args.todos
+    con_totales = args.totales or args.todos
 
     print("=" * 60)
     print("🔍 VERIFICACIÓN DE CONSISTENCIA DEL PROTOCOLO MULTIAGENTE")
     print("=" * 60)
+    if con_estructura or con_totales:
+        print("SB-05 activo: --estructura=%s --totales=%s" % (con_estructura, con_totales))
     print()
 
     try:
-        alertas = analizar_proyecto(args.checklist, args.horas_limite)
+        alertas = analizar_proyecto(
+            args.checklist, args.horas_limite, con_estructura, con_totales
+        )
     except DetectorCiegoError as e:
         # BUG-075: exit 3 = DETECTOR CIEGO. Deliberadamente distinto del 1, que
         # significa «mire y encontre alertas». Con el mismo codigo, un llamador
