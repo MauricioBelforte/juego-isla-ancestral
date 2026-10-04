@@ -178,3 +178,17 @@ Dos correcciones:
 - T-D6 (M94-Retencion-Sin-FOMO): proximo en cola.
 
 Firma: DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-04.
+
+---
+
+## 9. Huella de push (AGENTS.md sec.4.3)
+
+- Rango: `5c15327..12cc9fd`
+- Fecha/hora: 2026-10-04 20:49
+- Rama: main (fast-forward, sin --force)
+- Contenido: T-D5 M120 (auditoria contra disco + BUG-102 + test nuevo 39/0 + Log 1291 + mensaje 25 al director)
+- Commits ajenos incluidos: ninguno. `12cc9fd` es solo mio (7 archivos); su padre `5c15327`
+  ya estaba en origin antes del push (lo pusheo otro agente en el arbol compartido).
+- Verificacion: `git rev-parse HEAD` == `git rev-parse origin/main` == `12cc9fd`.
+- Nota: el archivo `_colector_sintaxis.gd` NO se commiteo (preloadea 2 `.gd` untracked de
+  `scripts/interacciones/` en vuelo de otro agente; el CI lo regenera).
