@@ -881,7 +881,7 @@ Contexto: cerraste M167 (Log 1212, 114/114) y sellaste 101/123/154/84/93 (Logs 1
 
 - [ ] **M59-Guardado** (DeepSeek 🔵 en curso, 60/130). Cuando libere: ojo, hubo 2 BUGS CRÍTICOS (BUG-087/088) con ~1 mes de latencia; el QA debe AFIRMAR LoadResult.OK en el camino real request_save(), no solo el camino de error. El coordinador ya verificó 66 checks del gate / 0 fallos.
 - [ ] **M17-Construccion** (DeepSeek 🔵 recién asignado, 11/175).
-- [ ] **M43-Efectos-De-Sonido** (mimo 🔵, 61/100).
+- [x] **M43-Efectos-De-Sonido** (mimo 🔵) — CERRADO por re-verify Hy3 🟡 59/100 (Log 1276, §21.8). Sin sello (verificador=Hy3, autor mimo).
 - [ ] **M37-Museos-Y-Colecciones** (kimi 🔵, 36/148, módulo NUEVO desde cero).
 
 ### Reglas del Lote M
@@ -917,11 +917,11 @@ Lote M cerrado y verificado (Logs 1222-1227 + 1230). El coordinador proceso tu r
 
 agnes-3-flash cerro 5 modulos en una sola sesion (Log 1229, 260 [x] nuevos: 125, 79, 132, 100, 129). Cuatro de ellos ya llevan sello de verificador 'agnes-3-flash' cuando el autor original fue 'agnes-2.5-flash' - si es el mismo chat (version nueva del mismo agente), el sello 21.8 NO es independiente. Tu trabajo: re-verificar los 4 sellados y sellar el que falta. Verificador != autor en los 5 (tu = Hy3).
 
-- [ ] **M100-Community-Management** - Completado 222/222, Baja, C2, deps 99. Sello actual: agnes-3-flash. RE-VERIFICAR independencia: confirma DoD completa (codigo + plan-actual vs codigo + logs + tests + [?]) y, si procede, reemplaza el sello por tuyo. Si falla -> Con dudas con notas.
-- [ ] **M125-Terminos-De-Servicio** - Completado 105/105, Baja, C1, deps 78. Sello actual: agnes-3-flash. Mismo protocolo que M100.
-- [ ] **M79-Legal-Contratos** - Completado 103/103, Media, C2, deps 78. Sello actual: agnes-3-flash. Mismo protocolo.
-- [ ] **M132-Produccion-De-Equipo** - Completado 105/105, Media, C1, deps 134. Sello actual: agnes-3-flash. Mismo protocolo.
-- [ ] **M129-Merchandising** - Completado 108/108, Baja, C1, deps 142. **SIN SELLO** (la fila dice 'PENDIENTE DE VERIFICACION CRUZADA QA por Gemini'). agnes lo cerro en Log 1229 con test_merch_m129.gd EXIT 0 (8 checks); su nota advierte checklist real de 59 items (menor al minimo 100). Verifica y SELLAS, o deja Con dudas si el conteo no llega al minimo de la regla.
+- [ ] **M100-Community-Management** - Con dudas 🟡 146/222 (GLOBAL real; agnes-3-flash EN CURSO — NO hacer QA, fuera de cola), Baja, C2, deps 99. Sello actual: agnes-3-flash. RE-VERIFICAR independencia: confirma DoD completa (codigo + plan-actual vs codigo + logs + tests + [?]) y, si procede, reemplaza el sello por tuyo. Si falla -> Con dudas con notas.
+- [x] **M125-Terminos-De-Servicio** - Completado 105/105, Baja, C1, deps 78. Re-verify Hy3 ✅ (Log 1258, §21.8; sello Log 866 inválido corregido).
+- [x] **M79-Legal-Contratos** - Completado 103/103, Media, C2, deps 78. Re-verify Hy3 ✅ (Log 1262, §21.8; sello Log 866 inválido corregido).
+- [x] **M132-Produccion-De-Equipo** - Completado 105/105, Media, C1, deps 134. Re-verify Hy3 ✅ (Log 1265, §21.8; sello Log 866 inválido corregido).
+- [ ] **M129-Merchandising** - Con dudas 🟡 68/108 (GLOBAL real; agnes T-A1 EN CURSO — NO hacer QA, fuera de cola), Baja, C1, deps 142. **SIN SELLO** (la fila dice 'PENDIENTE DE VERIFICACION CRUZADA QA por Gemini'). agnes lo cerro en Log 1229 con test_merch_m129.gd EXIT 0 (8 checks); su nota advierte checklist real de 59 items (menor al minimo 100). Verifica y SELLAS, o deja Con dudas si el conteo no llega al minimo de la regla.
 
 Orden sugerido: M129 (sin sello, es el mas necesario) antes que los 4 re-verify. Estos 5 van POR DELANTE de la cola P (M17/M43/M37/M168-cuando-cierre) pero DESPUES de tus 3 items del Lote N (QA M59 > BUG-090 > cita 1036).
 
