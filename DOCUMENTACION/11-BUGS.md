@@ -150,6 +150,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 
 > ⚠️ Mantener esta tabla actualizada al registrar, delegar o resolver bugs. Los detalles completos viven en las secciones 6, 7 y 8.
 
+> **Patron (registrado 2026-10-04, orden del director, mensaje 16):** un item de widget/UI solo se marca `[x]` si el script **PARSEA** Y la escena que lo contiene **CARGA**. Un `[x]` en un checklist NO implica que el `.gd` compile (trampa BB del skill `isla-ancestral-ciclo-modulo`). Caso real: los 3 widgets de M53/M54 (`full_map_layer.gd`, `action_prompt_overlay.gd`, `hotbar_widget.gd`) tenian parse errors de BUG-091 -> el HUD estaba **roto en runtime**, no era deuda fria. Verificacion obligatoria: `--check-only` EXIT 0 **y** cargar la escena `.tscn` que los referencia.
+
 ---
 
 | BUG-071 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
@@ -160,7 +162,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
 | BUG-091 | Gate godot-lint CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto | CI / calidad | 🔴 Crítico | [ ] Abierto (coordinador deriva) | DeepSeek-V4.1-Flash (Log 1241) | 2026-10-04 |
 | BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [x] Resuelto (2026-10-04, mimo-v2.6-flash-free / opencode, Log 1260) | mimo-v2.6-flash-free | 2026-10-03 |
-| BUG-093 | M156: `test_terrain_modifiers.gd` era una suite MUERTA (API gdUnit4 inexistente: `is_equal_to`/`is_greater_than` -> parsea pero muere en runtime) + expectativa obsoleta (4.2 vs 4.8 real). Familia: 135 llamadas `is_equal_to` en 10 archivos de `tests/` | M156 | 🟡 Media | [x] Resuelto (2026-10-04, DeepSeek-V4.1-Flash, Log 1264) — convertida a headless, 10/0 x3, sonda ROJO 4/4 | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-093 | Familia de suites MUERTAS gdUnit4: API inexistente que PARSEA pero MUERE en runtime. Instancia M156 `test_terrain_modifiers.gd`: **RESUELTA** (Log 1264). Sub-frente FAMILIA (134 `is_equal_to`/12 archivos + 5 `is_greater_than`/3): **7/12 convertidas a headless y verdes (135 checks, 0 fallos)**; 5 rojas BLOQUEADAS por bugs ajenos / ediciones en vuelo | M156 + `tests/` (varios modulos) | 🟡 Media | [ ] **ABIERTO** — sub-frente en curso (DeepSeek-V4.1-Flash, Log 1268) | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-094 | 2a familia de APIs gdUnit4 MUERTAS en `tests/`: `is_instance_of` (real `is_instanceof`) 1 llamada / 1 archivo, `has_not_contains` (real `not_contains`) 1/1, `has_any_item` (real `contains`) 1/1 -> parsean pero mueren en runtime (suite muerta silenciosa, mismo mecanismo que BUG-093) | `tests/` (varios modulos) | 🟡 Media | [ ] **Abierto** — registrado (DeepSeek-V4.1-Flash, Log 1268); convertidas dentro del sub-frente BUG-093 | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -1412,7 +1415,7 @@ secciones reales (headers `## X.Y`). Clasificación:
 - **Módulo(s) afectado(s):** M156 (Terrenos y Movimiento) — `game/isla-ancestral/tests/unit/terrain/test_terrain_modifiers.gd` (también ejercita M08 `TerrainDataProvider`)
 - **Severidad:** 🟡 Media
 - **Prioridad sugerida:** Media
-- **Estado:** [x] Resuelto (2026-10-04, DeepSeek-V4.1-Flash, Log 1264)
+- **Estado:** [x] Instancia M156 **RESUELTA** (2026-10-04, DeepSeek-V4.1-Flash, Log 1264). [ ] **Sub-frente FAMILIA ABIERTO** (7/12 verdes; 5 rojas bloqueadas) — Log 1268.
 
 **Descripción del problema:**
 La suite usaba `assert_that(x).is_equal_to(y)` (4 veces) y `assert_that(x).is_greater_than(0.0)` (1 vez), métodos que **NO existen en gdUnit4** (0 apariciones en `addons/gdUnit4/`; los reales son `is_equal(...)` / `is_greater(...)`). GDScript los **parsea** (EXIT 0 en `--check-only`) pero la llamada **muere en runtime** ("Invalid call. Nonexistent function 'is_equal_to'") -> ninguna aserción corre jamás. Es una **suite muerta más silenciosa** que las que usan `is_instance_of(int)` (esas SÍ dan parse error). El runner del proyecto tampoco corre `tests/` (trampa AT), pero el defecto es independiente: aunque se cableara, nunca afirmaría nada.
@@ -1454,6 +1457,35 @@ Suite que parsea y no afirma nada (API inexistente) + expectativa obsoleta (4.2 
 - [x] Archivos/commits modificados: `game/isla-ancestral/tests/unit/terrain/test_terrain_modifiers.gd` (reescrito, LF), `DOCUMENTACION/11-BUGS.md` (este registro).
 - [x] Log del proyecto: **Log 1264** (BUG-093, 2026-10-04).
 - [x] Verificado por: DeepSeek-V4.1-Flash / WorkBuddy 2026-10-04 (autor): suite **10/0/EXIT 0 ×3**; sonda ROJO **4/4** (control EXIT 0; A fuente `return 0.0` -> 4 FAIL EXIT 1; B aborto runtime bloque B -> nombra `["B"]`; C `CHECKS_MINIMOS=999` -> EXIT 1), restauración byte-exacta (sha256). **QA §21.8 PENDIENTE** (autor ≠ verificador).
+
+**Sub-frente FAMILIA (Log 1268, 2026-10-04 07:30) — [ ] ABIERTO:**
+- **Alcance medido:** `is_equal_to` (real `is_equal`) = **134 llamadas / 12 archivos** de `tests/` (11 vivos); `is_greater_than` (real `is_greater`) = **5 / 3**. Familia 2ª (`is_instance_of`/`has_not_contains`/`has_any_item`) -> **BUG-094**.
+- **7/12 convertidas a headless y VERDES** (135 checks / 0 fallos / EXIT 0 ×3, piso `CHECKS_MINIMOS` MEDIDO y fijado, sonda ROJO 14/14, restauración byte-exacta): `test_i_interactable` (11), `test_i_saveable` (15), `test_i_damageable` (16), `test_contenedor_inventario` (33), `test_recipe_schema` (10), `test_economy_manager` (31), `test_economy_npc_shop` (19).
+- **5/12 ROJAS** (convertidas pero **NO cableadas**; bloqueadas por causas ajenas / en vuelo): `test_item_data` (61/3 fail), `test_npc_visual_database` (bloques async no completan), `test_equipment_manager` (async + inferencia en vuelo), `test_inventory_economy` + `test_stable_flows` (`Identifier not found: ItemDatabase` en dependencia `inventario_service.gd:171`).
+- **Hallazgo REAL** (reportado, NO corregido — fuera de alcance): `scripts/data/item_data.gd:88` `es_valido()` = `return id != "" and nombre != "" and not tamano.x <= 0 or tamano.y <= 0` -> por precedencia (`and` > `or`) equivale a `(A and B and C) or D`; con `tamano=(1,0)` devuelve `true` (debería `false`). Faltan paréntesis.
+- **Cableado a CI:** NO hecho (regla: no toco `quality.yml`); lista de las 7 suites entregada a s2/coordinador.
+
+### BUG-094 — 2ª familia de APIs gdUnit4 MUERTAS en `tests/` (`is_instance_of` / `has_not_contains` / `has_any_item`)
+
+- **Fecha de reporte:** 2026-10-04 07:30
+- **Módulo(s) afectado(s):** `game/isla-ancestral/tests/` (varios módulos). Sitios: `is_instance_of` -> `tests/unit/interfaces/test_i_saveable.gd`; `has_not_contains` -> `tests/unit/player/test_equipment_manager.gd`; `has_any_item` -> `tests/unit/editor/test_recipe_schema.gd`.
+- **Severidad:** 🟡 Media (mismo mecanismo que BUG-093: suite muerta silenciosa).
+- **Estado:** [ ] **Abierto** — registrado; los 3 sitios ya convertidos dentro del sub-frente BUG-093 (Log 1268).
+
+**Descripción del problema:**
+Segunda familia de métodos de aserción que **NO existen en gdUnit4** (0 apariciones en `addons/gdUnit4/`; los reales son `is_instanceof` / `not_contains` / `contains`). GDScript los **parsea** (EXIT 0 en `--check-only`) pero la llamada **muere en runtime** ("Invalid call. Nonexistent function ...") -> ninguna aserción de esa suite corre. Es exactamente el mismo patrón que BUG-093, con nombres distintos; el director pidió barrer otras APIs y, al ser familia nueva, abrir BUG-094.
+
+**Evidencia (medido 2026-10-04):**
+- `is_instance_of` = 1 llamada / 1 archivo; `has_not_contains` = 1 / 1; `has_any_item` = 1 / 1 (todas en `tests/`).
+- **NO muertas** (existen, verificado): `contains`, `is_empty`, `is_equal`, `is_false`, `is_greater_equal`, `is_not_empty`, `is_not_null`, `is_null`, `is_true`.
+- **NO son gdUnit4** (builtin/dominio, no cuentan): `has_signal` (Object), `is_instance_of(obj, Class)` builtin del motor, `has_unsaved_changes`, `is_alive`, `is_debug_build`, `is_interactable`, `is_item_equipped`, `is_item_unlocked`, `is_unlocked`.
+
+**Referencias cruzadas:** BUG-093 (familia 1ª, mismo mecanismo); skill `isla-ancestral-ciclo-modulo` §AZ; estándar headless del proyecto §12.1.
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-04 07:30
 
 ### BUG-092 — M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria de persistencia)
 
