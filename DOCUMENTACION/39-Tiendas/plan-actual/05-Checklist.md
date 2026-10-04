@@ -254,7 +254,7 @@
 - [x] Registro de tiendas con acceso O(1) por shop_id [S]
 - [x] listar_stock ordenado sin copias innecesarias (copia de solo lectura) [S]
 - [x] Evitar strings concatenados en hot paths (usar StringName en ids) [M]
-- [x] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M]
+- [ ] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M]
 - [x] Sin lecturas de disco en runtime: todo precargado [S] *(iter. glm — Log 1017)*
 
 ## S. Documentación entregada
@@ -284,7 +284,7 @@
 - [x] Definir prueba de integración con M38: precios idénticos en tienda y mercado [M] *(cierre glm-5.3-flash — Log 1120: cierre: G225 precio cobrado == recargado de M38)*
 - [x] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 
-**Totales:** 181 ítems · Completados: 181 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 181 ítems · Completados: 180 · Pendientes: 1 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 127 [x] / 54 [ ] /
