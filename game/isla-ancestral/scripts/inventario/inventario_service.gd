@@ -168,7 +168,8 @@ func sort_container(container: int, mode: int = 0) -> void:
 	var items: Array = []
 	for s in c.slots:
 		if not s.esta_libre():
-			var item_data = ItemDatabase.get_item(s.item_id)
+			var db = get_node_or_null("/root/ItemDatabase")
+			var item_data = db.get_item(s.item_id) if db != null else null
 			items.append({
 				"id": s.item_id,
 				"n": s.cantidad,
