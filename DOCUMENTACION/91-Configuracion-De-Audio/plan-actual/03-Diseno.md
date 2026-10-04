@@ -49,7 +49,14 @@ Configuración de Audio (menú de settings de audio)
 
 ## 2. Menú de configuración de audio
 
-**Archivo: res://ui/settings/audio_settings_menu.gd**
+> ⚠️ **Nota de alcance (2026-10-03, mimo-v2.6-flash-free / opencode, iter. 10):**
+> `res://ui/settings/audio_settings_menu.gd` **no existe todavía** (0 refs en
+> `scripts/`). Este §2 es la **especificación de controles que M91 entrega a
+> M53** (dueño del menú, ver §10): los ítems de controles del checklist
+> (L147, L198-L211) son de **M53** (Trampa 119). El estado real vive en el
+> autoload `AudioConfig` (§16-18), no en una clase `AudioSettings`.
+
+**Archivo: res://ui/settings/audio_settings_menu.gd** (futuro — M53)
 
 **Estructura:**
 ```gdscript
@@ -79,7 +86,15 @@ extends Control
 
 ## 3. Configuración de settings
 
-**Archivo: res://settings/audio_settings.gd**
+> ⚠️ **Corregido 2026-10-03 (mimo-v2.6-flash-free / opencode, iter. 10):**
+> `res://settings/audio_settings.gd` **no existe** — la implementación real es
+> el autoload `AudioConfig` (`scripts/audio/audio_config_service.gd`, sin
+> `class_name`, ver §16-18). Los **valores por defecto de abajo SÍ son los
+> reales** (`AudioConfig.DEFAULTS`, documentado allí como "diseño §3") y
+> `apply_settings()` equivale a `_aplicar_todo()`. El esqueleto de abajo queda
+> como diseño original de referencia.
+
+**Archivo (diseño original): res://settings/audio_settings.gd** → real: autoload `AudioConfig`
 
 **Estructura:**
 ```gdscript
@@ -745,107 +760,107 @@ por qué.
 
 ## 16. Guardado de configuración
 
-**Archivo: user://settings/audio_settings.json**
+> ✅ **CORREGIDO 2026-10-03 (mimo-v2.6-flash-free / opencode, M91 iter. 10).**
+> El diseño original de los §16-18 describía `user://settings/audio_settings.json`
+> con clases `AudioSettingsLoader` / `AudioSettingsSaver` que **no existen** en el
+> código (0 referencias en `scripts/`). La implementación real usa la persistencia
+> de M60. Debajo queda el diseño **real**, verificado contra el código.
+> Los huecos de persistencia encontrados quedaron como **BUG-092**.
 
-**Formato:**
-```json
-{
-    "master_volume": 0.8,
-    "music_volume": 0.7,
-    "sfx_volume": 0.8,
-    "ambient_volume": 0.6,
-    "voice_volume": 0.9,
-    "ui_volume": 0.5,
-    "cinematic_volume": 0.8,
-    "audio_3d": true,
-    "subtitles": true,
-    "subtitle_size": 1.0,
-    "subtitle_opacity": 0.8,
-    "subtitle_background": true,
-    "subtitle_color": {"r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0},
-    "ui_sounds": true,
-    "dynamic_range": "medio",
-    "compression": true,
-    "output_device": "predeterminado"
-}
+**Almacenamiento real:** `user://config.cfg` (escritura atómica) vía
+`DataStore.guardar_config()` / `DataStore.cargar_config()` → `GestorConfig` (M60).
+
+**Sección `"audio"` del config** — la escribe `AudioConfig._guardar_config()`
+(`audio_config_service.gd` L168-177), claves = nombre del bus → volumen lineal:
+
+```gdscript
+# user://config.cfg → sección "audio"
+{ "Master": 0.8, "Music": 0.7, "SFX": 0.8, "Ambient": 0.6,
+  "Voice": 0.9, "UI": 0.5, "Cinematic": 0.8 }
 ```
+
+**Cuándo se escribe — patrón del proyecto: auto-guardado en cada setter**
+(dispara `DataStore.guardar_config()` en el acto, no al cerrar el menú):
+
+- `AudioConfig.set_volumen()` → llama `_guardar_config()` en **cada** cambio (L102).
+- `SubtitleManager` → `_guardar_config()` en cada setter de subtítulos.
+- Consecuencia: **volúmenes y subtítulos NO necesitan trigger de cierre** (ya
+  están en disco antes de que el menú se cierre). El trigger de cierre solo
+  aplica a las secciones sin auto-save → §18.
+
+**Vía doble (NO confundir — son almacenes distintos):**
+
+| Vía | Almacén | Contenido | Cuándo se escribe |
+|-----|---------|-----------|-------------------|
+| Config (settings) | `user://config.cfg` sección `"audio"` | bus → lineal 0-1 | cada `set_volumen()` |
+| Savegame (slots) | slot `.save` sección `"audio_config"` | `{volumenes, mutes}` | `request_save()` / `load_slot()` — proveedor registrado en `_ready` (`get_section_name()` = `"audio_config"`) |
+
+**Huecos conocidos (→ BUG-092, 2026-10-03):**
+1. `set_mute()` NO llama `_guardar_config()` y `_guardar_config()` NO serializa
+   `_mutes` → los mutes viven solo en el savegame, **no** en `config.cfg`
+   (se pierden entre sesiones).
+2. `DynamicRangeManager` / `CompressionManager` / `OutputDeviceManager` no
+   persisten su selección (verificado: 0 referencias a `DataStore` en ellos).
 
 ## 17. Carga de configuración al inicio
 
-**Archivo: res://settings/audio_settings_loader.gd**
+**Real:** el autoload `AudioConfig._ready()` (`audio_config_service.gd` L41-44):
 
-**Estructura:**
 ```gdscript
-class_name AudioSettingsLoader
-extends Node
-
-func _ready():
-    load_settings()
-
-func load_settings():
-    var file = FileAccess.open("user://settings/audio_settings.json", FileAccess.READ)
-    if file:
-        var json = JSON.parse_string(file.get_as_text())
-        if json.error == OK:
-            var settings = json.result
-            AudioSettings.master_volume = settings["master_volume"]
-            AudioSettings.music_volume = settings["music_volume"]
-            AudioSettings.sfx_volume = settings["sfx_volume"]
-            AudioSettings.ambient_volume = settings["ambient_volume"]
-            AudioSettings.voice_volume = settings["voice_volume"]
-            AudioSettings.ui_volume = settings["ui_volume"]
-            AudioSettings.cinematic_volume = settings["cinematic_volume"]
-            AudioSettings.audio_3d = settings["audio_3d"]
-            AudioSettings.subtitles = settings["subtitles"]
-            AudioSettings.subtitle_size = settings["subtitle_size"]
-            AudioSettings.subtitle_opacity = settings["subtitle_opacity"]
-            AudioSettings.subtitle_background = settings["subtitle_background"]
-            AudioSettings.subtitle_color = Color(settings["subtitle_color"]["r"], settings["subtitle_color"]["g"], settings["subtitle_color"]["b"], settings["subtitle_color"]["a"])
-            AudioSettings.ui_sounds = settings["ui_sounds"]
-            AudioSettings.dynamic_range = settings["dynamic_range"]
-            AudioSettings.compression = settings["compression"]
-            AudioSettings.output_device = settings["output_device"]
-            AudioSettings.apply_settings()
-        file.close()
-    else:
-        # Configuración por defecto
-        AudioSettings.apply_settings()
+func _ready() -> void:
+    _crear_buses()                   # §4: crea buses hijo si faltan → Master
+    _cargar_config()                 # defaults → overlay config["audio"] → aplicar
+    _registrar_proveedor_guardado()  # SaveManager.register_provider(self)
 ```
 
-## 18. Guardado de configuración al cerrar
+`_cargar_config()` (L63-73), en orden:
 
-**Archivo: res://settings/audio_settings_saver.gd**
+1. `_volumenes = DEFAULTS.duplicate()` — defaults del diseño §3.
+2. Overlay: `DataStore.cargar_config()["audio"]` → `clampf(0.0, 1.0)` por bus
+   (solo claves que existen en `_volumenes`).
+3. `_aplicar_todo()` → `_aplicar_volumen()` por bus: lineal → dB, con mute
+   respetado (`set_bus_mute`).
 
-**Estructura:**
+**Fallback:** sin `DataStore`, sin `cargar_config()` o sin sección `"audio"`
+quedan los defaults — no hay crash (null-check con `has_method`).
+`SubtitleManager` carga su propia sección con el mismo patrón.
+
+> **No existe** `AudioSettingsLoader`, ni `user://settings/audio_settings.json`,
+> ni la clase `AudioSettings` (el diseño viejo de esta sección quedó reemplazado
+> el 2026-10-03, iter. 10).
+
+## 18. Guardado de configuración al cerrar — L288
+
+**Hallazgo de diseño (iter. 10, 2026-10-03):** con auto-guardado por setter
+(§16), un trigger de cierre **no es necesario** para volúmenes ni subtítulos:
+ya persisten en `config.cfg` antes de que el menú se cierre. El trigger sí hace
+falta para las secciones **sin** auto-save (rango dinámico, compresión,
+dispositivo de salida — BUG-092).
+
+**Contrato de cierre (diseñado en M91; lo ejecuta M53 al cerrar su menú):**
+
 ```gdscript
-class_name AudioSettingsSaver
-extends Node
-
-func save_settings():
-    var settings = {
-        "master_volume": AudioSettings.master_volume,
-        "music_volume": AudioSettings.music_volume,
-        "sfx_volume": AudioSettings.sfx_volume,
-        "ambient_volume": AudioSettings.ambient_volume,
-        "voice_volume": AudioSettings.voice_volume,
-        "ui_volume": AudioSettings.ui_volume,
-        "cinematic_volume": AudioSettings.cinematic_volume,
-        "audio_3d": AudioSettings.audio_3d,
-        "subtitles": AudioSettings.subtitles,
-        "subtitle_size": AudioSettings.subtitle_size,
-        "subtitle_opacity": AudioSettings.subtitle_opacity,
-        "subtitle_background": AudioSettings.subtitle_background,
-        "subtitle_color": {"r": AudioSettings.subtitle_color.r, "g": AudioSettings.subtitle_color.g, "b": AudioSettings.subtitle_color.b, "a": AudioSettings.subtitle_color.a},
-        "ui_sounds": AudioSettings.ui_sounds,
-        "dynamic_range": AudioSettings.dynamic_range,
-        "compression": AudioSettings.compression,
-        "output_device": AudioSettings.output_device
-    }
-    
-    var file = FileAccess.open("user://settings/audio_settings.json", FileAccess.WRITE)
-    file.store_string(JSON.stringify(settings))
-    file.close()
+# Contrato: el menú de settings (M53) llama esto al cerrarse.
+func al_cerrar_settings() -> void:
+    # 1. Volúmenes + subtítulos: NO-OP — ya persistidos en cada setter (§16).
+    # 2. Secciones sin auto-save → persistirlas con el MISMO patrón de AudioConfig:
+    #    (API propuesta — implementación pendiente, ver BUG-092)
+    AudioConfig.set_opcion("rango_dinamico", rango)
+    AudioConfig.set_opcion("compresion", activo)
+    AudioConfig.set_opcion("dispositivo_salida", nombre)
+    # 3. SaveManager NO participa: config ≠ savegame. El trigger de slot es
+    #    SaveManager.request_save(slot, reason) — dueño M59, no de settings.
 ```
+
+**API propuesta `set_opcion(clave: String, valor: Variant) -> bool`:**
+valida la clave → `config["audio"][clave] = valor` → `DataStore.guardar_config()`
+(mismo camino y misma sección que `set_volumen()`; clamp/validación por tipo).
+**Requiere implementación** (M91): hasta que exista, `al_cerrar_settings()` no
+tendría efecto sobre esas 3 secciones.
+
+> **Diseño viejo eliminado (2026-10-03):** la clase `AudioSettingsSaver` con su
+> `save_settings()` manual hacia `user://settings/audio_settings.json` no existe
+> en el código (0 referencias); el disparador real de escritura es el setter.
 
 ## 19. Pruebas de calidad
 

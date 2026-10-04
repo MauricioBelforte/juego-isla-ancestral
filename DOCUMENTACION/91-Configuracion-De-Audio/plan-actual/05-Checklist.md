@@ -210,7 +210,7 @@
 - [ ] Diseñar controles para dispositivo de salida (dropdown)
 - [ ] Diseñar botones de prueba (auriculares, altavoces)
 
-### [S] Configuración de settings
+### [S] Configuración de settings — ⚠️ corregido 2026-10-03 (mimo-v2.6-flash-free / opencode, iter. 10): `AudioSettings(Resource)` NO existe; la clase real es el autoload `AudioConfig` (`scripts/audio/audio_config_service.gd`, sin class_name; 03-Diseno §16-18 reescritos). `apply_settings()` real = `_aplicar_todo()`.
 - [x] Diseñar AudioSettings (Resource)
 - [x] Diseñar campos: master_volume, music_volume, sfx_volume, ambient_volume, voice_volume, ui_volume, cinematic_volume, audio_3d, subtitles, subtitle_size, subtitle_opacity, subtitle_background, subtitle_color, ui_sounds, dynamic_range, compression, output_device
 - [x] Diseñar método apply_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func apply_settings() en 04-Codigo 12 (aplica los 7 buses + DynamicRangeManager); implementacion real equivalente -> AudioConfig._aplicar_todo() en audio_config_service.gd
@@ -272,7 +272,7 @@
 - [x] Diseñar test espacial 3D — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.4 - AudioStreamPlayer3D en circulo de 3 m alrededor del oido, vuelta completa en 8 s con attenuation_model y unit_size segun seccion 5.2; la variante HRTF depende de L88 y queda pendiente
 - [x] Diseñar test balance de canales — mimo-v2.6-flash-free 2026-10-02 (opencode): 03-Diseno 11.5 - recorrido de canales con medicion AUTOMATICA via get_bus_peak_volume_*_db, mas confirmacion manual por canal
 
-### [S] Carga de configuración
+### [S] Carga de configuración — ⚠️ corregido 2026-10-03 (mimo iter. 10): `AudioSettingsLoader` y `user://settings/audio_settings.json` NO existen (0 refs en scripts/); carga real: `AudioConfig._cargar_config()` → `DataStore.cargar_config()` sección "audio" (defaults → overlay → aplicar). 03-Diseno §17 reescrito.
 - [x] Diseñar AudioSettingsLoader
 - [x] Diseñar método load_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func load_settings() en 04-Codigo 13 (AudioSettingsLoader); implementacion real equivalente -> AudioConfig._cargar_config() via M60 (persistencia verificada en test_audio_config _test_persistencia_m60)
 - [x] Diseñar carga desde user://settings/audio_settings.json
@@ -280,20 +280,20 @@
 - [x] Diseñar aplicación de configuración al inicio
 - [x] Diseñar fallback a configuración por defecto si no existe
 
-### [S] Guardado de configuración
+### [S] Guardado de configuración — ⚠️ corregido 2026-10-03 (mimo iter. 10): `AudioSettingsSaver` y `audio_settings.json` NO existen; guardado real: `set_volumen()` → `_guardar_config()` → `DataStore.guardar_config()` → `user://config.cfg` (auto-guardado en cada setter). 03-Diseno §16 reescrito. Huecos de persistencia → BUG-092.
 - [x] Diseñar AudioSettingsSaver
 - [x] Diseñar método save_settings() — mimo-v2.6-flash-free 2026-10-02 (opencode): esqueleto func save_settings() en 04-Codigo 14 (AudioSettingsSaver); implementacion real equivalente -> AudioConfig._guardar_config() via M60 (get_save_data/restore_save_data)
 - [x] Diseñar guardado en user://settings/audio_settings.json
 - [x] Diseñar serialización de settings a JSON
-- [ ] Diseñar trigger de guardado al cerrar settings
+- [x] Diseñar trigger de guardado al cerrar settings — mimo-v2.6-flash-free 2026-10-03 (opencode, iter. 10): 03-Diseno §18 — trigger diseñado contra APIs reales verificadas: volúmenes/subtítulos NO necesitan cierre (auto-guardado en cada setter, §16); secciones sin auto-save (rango dinámico/compresión/dispositivo) vía API propuesta `set_opcion()` con el mismo camino de `set_volumen()`; SaveManager NO participa (config ≠ savegame; el trigger de slot es `request_save()` de M59). Wire-up del cierre = M53 (dueño del menú); implementación de `set_opcion()` → BUG-092.
 
-### [S] Formato de JSON
+### [S] Formato de JSON — ⚠️ corregido 2026-10-03 (mimo iter. 10): no hay JSON propio; el formato real es `user://config.cfg` (GestorConfig, M60) con sección "audio" (bus → lineal 0-1). 03-Diseno §16 reescrito.
 - [x] Diseñar formato de audio_settings.json
 - [x] Incluir todos los campos de AudioSettings
 - [x] Incluir subtítulo_size y subtítulo_opacity como float — mimo-v2.6-flash-free 2026-10-02 (opencode): save['size'] y save['opacity'] son TYPE_FLOAT verificado en test; claves ASCII 'size'/'opacity' en vez de con tilde (28, anti-mojibake)
 - [x] Incluir subtítulo_color como objeto {r, g, b, a} — mimo-v2.6-flash-free 2026-10-02 (opencode): save['color'] = {r,g,b,a} floats en [0,1], typeof TYPE_DICTIONARY verificado en test
 
-### [S] Diagrama de flujo
+### [S] Diagrama de flujo — ⚠️ corregido 2026-10-03 (mimo iter. 10): el flujo real usa el autoload `AudioConfig` + `DataStore`/`GestorConfig` (M60), no `AudioSettings` (03-Diseno §16-17).
 - [x] Diseñar diagrama de flujo de configuración
 - [x] Diseñar flujo: Usuario abre settings → Menú de configuración de audio → Usuario ajusta volúmenes y opciones → AudioSettings se actualiza → AudioBusSetup aplica configuración → Configuración guardada → Usuario cierra settings → Configuración aplicada
 
@@ -329,13 +329,13 @@
 
 ## Reserva actual
 
-- **Estado:** 🔵 En curso — **iter. 10 reservada 2026-10-03 23:26** (liberación previa: 🟡 Con dudas 2026-10-02 21:55)
-- **Agente actual:** mimo-v2.6-flash-free / opencode (**iter. 10**; la liberación anterior también fue de este chat)
+- **Estado:** 🟡 Con dudas — **iter. 10 liberada 2026-10-04 00:03** (reservada 2026-10-03 23:26; liberación previa: 🟡 2026-10-02 21:55)
+- **Agente actual:** — (iter. 10 hecha y liberada por mimo-v2.6-flash-free / opencode; sin trabajo propio restante: los 31 `[ ]` restantes tienen dueño externo/engine — M53 UI, 0 assets de audio, hardware real, M58/M87, HRTF)
 - **Lock otorgado por:** atria-dawn (commit `24ddc7e`, 2026-10-02, “Se reservan locks para los agentes libres según encaje medido”) · **iter. 10:** reasignación del director (canal `04-2026-10-04_00-45-00-respuesta-ciclo.md`), tras cerrar M43. ⚠️ `CHECKLIST-GLOBAL.md` fila 91 quedó 🔵 en **working tree** — commit pendiente por carrera con agnes-3-flash (su fila 06 está sin commitear).
 - **Logs de la iteración (lotes 1-9):** 1191, 1194, 1198, 1199, 1201, 1203, 1204, 1206, 1208
-- **Alcance iter. 10 (en curso):** diseño de controles **L198-L211** (7 sliders, toggle, rango dinámico, compresión, 2 dropdowns, botones de prueba) + **L147** (dropdown de dispositivo) + **L288** (trigger de guardado al cerrar settings). Revisar si **L110-L116 / L240-L243** (sonidos de interfaz) siguen bloqueados por 0 assets o ahora son diseñables con la API de M43 (`sfx_tones.json` + `tono()` + `sfx_catalog.json` ya existen). **NO inflar rollups L18/L22/L23** (Trampa 119: miden ejecución con hardware real).
-- **Progreso al liberar:** 206/239 `[x]` · 32 `[ ]` · 1 `[?]` (86%)
-- **Motivo de 🟡 (no ✅):** queda **L88 `[?]`** — Godot 4.7.2 no expone HRTF (`AudioServer.get_speaker_mode()` no tiene contraparte HRTF; ver `03-Diseno.md` §5.1.1). Además 32 `[ ]` con dueños externos: 13 de M53 (UI), 10 sonidos de interfaz (0 assets de audio en el repo, `03-Diseno.md` §7 sellado), rollups L18/L22/L23 (ejecución con hardware real), 2 de M58, 2 de M87, 1 de M59, L151 (HRTF).
+- **Alcance iter. 10 (CORREGIDO 2026-10-03):** el alcance declarado al reservar estaba MAL: **L198-L211 y L147 son de M53** (dueño del menú — 03-Diseno §10 lo dice explícito para L147 y el desglose del lote 9 los agrupa como "13 de M53") → **NO se tocan** (Trampa 119). Trabajo real de la iter.: (1) **§16-18 de 03-Diseno reescritos** con la arquitectura real (AudioConfig + DataStore → user://config.cfg + proveedor savegame "audio_config"), (2) **L288 cerrado** con el diseño del trigger en §18, (3) notas de corrección inline en las 5 secciones con entidades stale (L213/L275/L283/L290/L296), (4) **BUG-092** abierto (mutes + 3 settings sin persistencia en config.cfg), (5) suites re-meditidas **103/0 + 82/0**. **NO inflar rollups L18/L22/L23** (Trampa 119).
+- **Progreso iter. 10:** 207/239 `[x]` · 31 `[ ]` · 1 `[?]` (86,6%) · suites verdes **103/0 + 82/0** (binario 4.7.2 real, headless, medido 2026-10-03).
+- **Motivo de 🟡 (no ✅):** queda **L88 `[?]`** — Godot 4.7.2 no expone HRTF (`AudioServer.get_speaker_mode()` no tiene contraparte HRTF; ver `03-Diseno.md` §5.1.1). Además 31 `[ ]` con dueños externos: 13 de M53 (UI: L147+L198-L211), 10 sonidos de interfaz (0 assets de audio en el repo, `03-Diseno.md` §7 sellado — re-verificado 2026-10-03), rollups L18/L22/L23 (ejecución con hardware real), 2 de M58, 2 de M87, L151 (HRTF).
 - **QA cruzado §21.8:** ✅ **VERIFICADO por Hy3/WorkBuddy (Log 1225, 2026-10-03)** — verificador de modelo distinto (hy3 ≠ mimo). 103/0 + 82/0, guardián rojo.
 - **Suites al liberar:** `--module audio` 8 OK + `--module subtitle` 1 OK = **9 OK / 0 FAIL** (DoD de entrega cumplida).
 

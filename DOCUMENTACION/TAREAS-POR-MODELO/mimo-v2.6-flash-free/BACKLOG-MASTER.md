@@ -224,7 +224,7 @@ timestamp, `Dependencias` → `—` con nota. Nunca dejes 🔵 huérfano (§21.4
 **NO sellar §21.8** (autor ≠ verificador): lo deja el coordinador con un
 verificador independiente.
 
-## Módulo ACTIVO 🔵 — 91-Configuracion-De-Audio (iter. 10)
+## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio (iter. 10 CERRADA 2026-10-04 00:03, Log 1250)
 
 > **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**
 > **LIBERADO 2026-10-02 21:55 a 🟡 Con dudas — Log 1210.** Los 4 registros de §26
@@ -239,6 +239,21 @@ verificador independiente.
 > **REASIGNADO 2026-10-03 23:17 (iter. 10, canal 04):** el director me lo devolvió
 > como prioridad tras cerrar M43; M41/M42/M44 quedan encolados (mismos bloqueos de
 > 0 assets de audio). Estado → 🔵 en curso.
+
+> **ITER. 10 CERRADA 2026-10-04 00:03 → 🟡 (Log 1250).** Alcance reservado
+> CORREGIDO: **L198-L211 + L147 son de M53** (dueño del menú; 03-Diseno §10
+> + desglose lote 9) → no tocados (Trampa 119). Trabajo real ejecutado:
+> (1) **03-Diseno §16-18 reescritos** con la arquitectura real (AudioConfig +
+> DataStore → `user://config.cfg`; AudioSettings/Loader/Saver y
+> `audio_settings.json` no existen — 0 refs en scripts/); (2) **L288 cerrado**
+> (trigger de cierre diseñado en §18, API propuesta `set_opcion()`);
+> (3) notas inline en L213/L275/L283/L290/L296 SIN insertar líneas (las
+> referencias `L##` del archivo son números de línea); (4) **BUG-092** abierto
+> (mutes + 3 settings sin persistencia en config.cfg); (5) suites re-meditidas
+> **103/0 + 82/0** (EXIT 0); (6) progreso **207/239** (05-Checklist + CG fila 91
+> + guía 08). Queda 🔵 sin trabajo propio: 31 `[ ]` con dueño externo/engine
+> + L88 `[?]` HRTF. **No re-llevar a ✅ sin resolver L88.**
+
 >
 > Dominio del chat: UI + audio + i18n (creditos_layer, farewell, i18n,
 > performance de M131). Complejidad 1 — ideal para vos.

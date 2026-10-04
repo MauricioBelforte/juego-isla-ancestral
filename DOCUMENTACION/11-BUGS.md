@@ -159,6 +159,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
 | BUG-091 | Gate godot-lint CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto | CI / calidad | 🔴 Crítico | [ ] Abierto (coordinador deriva) | DeepSeek-V4.1-Flash (Log 1241) | 2026-10-04 |
+| BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [ ] Abierto | mimo-v2.6-flash-free | 2026-10-03 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -167,6 +168,65 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-092 — M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria de persistencia)
+
+- **Fecha de reporte:** 2026-10-03 23:56
+- **Modulo(s) afectado(s):** M91 (Configuracion de Audio) — scripts/audio/audio_config_service.gd, dynamic_range_manager.gd, compression_manager.gd, output_device_manager.gd
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [ ] Abierto
+
+**Descripcion del problema:**
+La persistencia de configuracion de audio (seccion "audio" de M60 → user://config.cfg, escritura atomica) es asimetrica:
+
+1. **Mutes no persisten en config:** `set_volumen()` llama `_guardar_config()` en cada cambio, pero `set_mute()` NO llama a `_guardar_config()` y dicho metodo solo serializa `_volumenes` (no `_mutes`). Los mutes solo viven en el savegame (`get_save_data()` = `{volumenes, mutes}` via proveedor SaveManager, seccion "audio_config") — se pierden entre sesiones cuando no hay partida cargada.
+2. **Tres settings sin persistencia:** `DynamicRangeManager`, `CompressionManager` y `OutputDeviceManager` no tienen NINGUNA referencia a DataStore/GestorConfig (verificado con rg: 0 resultados) — la seleccion del usuario se pierde al reiniciar.
+
+**Pasos para reproducir:**
+1. `AudioConfig.set_mute("SFX", true)` → constatar `esta_muteado("SFX") == true`.
+2. Reiniciar el juego (nueva instancia del autoload → `_ready()` → `_cargar_config()`).
+3. Observar `esta_muteado("SFX") == false` (el mute desaparecio).
+4. Analogos: aplicar rango dinamico / compresion / cambiar dispositivo de salida → reiniciar → valor por defecto.
+
+**Comportamiento esperado:**
+Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya establecido en el proyecto: auto-guardado en cada setter → `DataStore.guardar_config()` (igual que `set_volumen()` y los setters de SubtitleManager).
+
+**Comportamiento actual:**
+- Mute: se pierde al reiniciar (persiste solo si ademas se guarda/carga un slot de partida, porque ahi si viaja en `get_save_data()`).
+- Rango dinamico / compresion / dispositivo de salida: nunca se escriben a disco; al reiniciar vuelven a los defaults del codigo.
+
+**Entorno / Contexto:**
+- Version del juego / build: Godot 4.7.2, HEAD 2026-10-03
+- Plataforma: PC (Windows)
+- Seed del mundo / save afectado: no aplica (config, no save)
+- Frecuencia: Siempre (nunca se implemento la persistencia de esas claves)
+
+**Evidencia:**
+- `audio_config_service.gd` L95-103: `set_volumen()` → `_guardar_config()` en cada llamada. L145-149: `set_mute()` NO la llama.
+- `audio_config_service.gd` L168-177: `_guardar_config()` solo escribe `_volumenes` en `config["audio"]` (los mutes quedan fuera).
+- `rg "DataStore|guardar_config|register_provider"` sobre dynamic_range_manager.gd / compression_manager.gd / output_device_manager.gd → 0 resultados (2026-10-03).
+- Contra-evidencia positiva (el patron SI existe): `subtitle_manager.gd` L305-311 llama `DataStore.guardar_config()` en cada setter.
+
+**Intentos de solution ya probados (si aplica):**
+- Solo diseno (2026-10-03, M91 iter. 10): `03-Diseno.md` §16 documenta los huecos y §18 disena el contrato de cierre con la API propuesta `set_opcion(clave, valor)` (mismo camino que `set_volumen()`), que haria efectivo el flush de las 3 secciones sin auto-save. Sin implementacion todavia.
+
+**Referencias cruzadas:**
+- Guia 07 §8: no
+- Modulo/documentacion relacionada: `DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/03-Diseno.md` §16 (huecos) y §18 (trigger de cierre + API propuesta `set_opcion()`); `05-Checklist.md` L288 (diseno cerrado, implementacion pendiente).
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-03 23:56
+
+**Resolucion (completar cuando se resuelva):**
+- [ ] Como se corrigio: pendiente (fix sugerido: `set_mute()` → llamar `_guardar_config()`; serializar `_mutes`; persistir las 3 secciones via `set_opcion()` o auto-guardado por setter).
+- [ ] Archivos/commits modificados: pendiente
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (requiere runtime: repro headless del paso 1-3)
+
+---
+
 ### BUG-091 — Gate `godot-lint` CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto
 
 - **Fecha de reporte:** 2026-10-04

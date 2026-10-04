@@ -1,3 +1,14 @@
+## 2026-10-04 00:03 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 Con dudas (iter. 10, Log 1250)
+
+**Estado:** liberado. `CHECKLIST-GLOBAL.md` fila 91: 🔵 En curso → **🟡 Con dudas**, Agente actual → **—**, última actividad 2026-10-04 00:03, progreso **207/239**.
+
+**Trabajo de la iter. 10:** (1) alcance reservado CORREGIDO — **L198-L211 + L147 son de M53** (dueño del menú, 03-Diseno §10 + desglose lote 9) → no tocados (Trampa 119); (2) **03-Diseno §16-18 reescritos** con la arquitectura real (AudioConfig + DataStore → `user://config.cfg`; no existen AudioSettings/Loader/Saver ni `audio_settings.json`); (3) **L288 cerrado** (trigger de cierre diseñado en §18 con API propuesta `set_opcion()`); (4) notas inline en L213/L275/L283/L290/L296 sin insertar líneas (las referencias `L##` son números de línea); (5) **BUG-092** abierto (mutes + 3 settings sin persistencia en config.cfg); (6) suites **103/0 + 82/0** re-meditidas (EXIT 0, binario 4.7.2).
+
+**Por qué se libera sin trabajo propio:** los 31 `[ ]` restantes tienen dueño externo/engine (13 de M53 UI, 10 sonidos de interfaz — §7 sellado por 0 assets re-verificados, 3 rollups de hardware real, 2 de M58, 2 de M87, L151) + L88 `[?]` HRTF. M91 queda 🟡 hasta resolver L88.
+
+**Registros (los 4):** `CHECKLIST-GLOBAL.md` fila 91 · `05-Checklist.md` bloque Reserva · esta entrada · guía 08 fila M91 (⚠️ esta en working tree, NO commiteable: la guía 08 trae diffs ajenos de kimi-k3 fila M37). Backlog personal actualizado. Informe de detalle: canal `mimo-v2.6-flash-free/05-...`.
+
+
 ## 2026-10-03 23:21 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio RESERVADO (iter. 10)
 
 **Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 91: 🟡 Con dudas → **🔵 En curso**, Agente actual → mimo-v2.6-flash-free, última actividad 2026-10-03 23:21.
