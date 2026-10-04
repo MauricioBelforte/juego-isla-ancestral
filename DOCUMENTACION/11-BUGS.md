@@ -158,6 +158,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
+| BUG-091 | Gate godot-lint CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto | CI / calidad | 🔴 Crítico | [ ] Abierto (coordinador deriva) | DeepSeek-V4.1-Flash (Log 1241) | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -166,6 +167,34 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-091 — Gate `godot-lint` CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto
+
+- **Fecha de reporte:** 2026-10-04
+- **Módulo(s) afectado(s):** CI/CD entero — `.github/workflows/quality.yml`, job `godot-lint`. Archivos con errores: **27 archivos / 73 errores reales** pertenecientes a M29 (tests de tiempo), M108/M109 (pipeline de assets), editor/herramientas internas, M73 (coleccionables), M59 (build_info), M160 (test_ubicaciones), M21 (auto_advance_manager), M163 (test_enchantment), M22 (quest_chain_service), M117/M78 (asset_validation), M54 (full_map_layer), M08 (terrain_data_provider x2 + colisión de class_name `TerrainData`), M53 (action_prompt_overlay, hotbar_widget).
+- **Severidad:** 🔴 **Crítico de proceso.** El gate `godot-lint` sale **EXIT 0** aunque existan los 73 parse errors: solo falla si el PROPIO colector no compila, no si los archivos colectados tienen errores. Cualquier `.gd` roto se viene subiendo a `main` sin que el CI lo avise — el efecto es que **ninguna medición de "0 SCRIPT ERROR" basada en CI es confiable**, y los agentes que confiaban en el gate verde estaban confiando en nada.
+- **Introducido por:** diseño del colector `_colector_sintaxis.gd` (importa los archivos y los compila en bloque; los errores de los archivos individuales no se propagan al exit code).
+- **Estado:** [ ] **Abierto.** Coordinador deriva.
+- **Reportado por:** DeepSeek-V4.1-Flash (Log 1241, canal archivo 04, 2026-10-03 21:15). Verificación: generó `listar_parse_errors.py` + `clasificar_errores.py` (en `Obsoletos/raiz-temporales-m17-2026-10-03/`), método `gen_colector_sintaxis.py` → `godot --import` → `--check-only`; solo archivos versionados; colector restaurado byte-exacto.
+
+**Clasificación de los 109 errores detectados:**
+- **73 REALES** en 27 archivos (lista completa con archivo:línea:error en `Mensajes entre modelos/DeepSeek-V4.1-Flash/04-2026-10-03_21-15-00-m17-iter2-entregada-lista-parse-errors.md`, sección 2).
+- **36 artefactos de contexto** (`Identifier not found:` de autoloads/`class_name` fuera del alcance del colector: EventBus x5, ServiceRegistry x2, ItemDatabase x2, MundoRaiz x2, EquipmentManager, GameLogger, NPCVisualDatabase + 12 cascadas). **No son errores reales.**
+
+**Dos casos verificados a mano** (podían ser artefacto de inner-class): `CollectibleCategory` y `AutoAdvanceManager` — **no** hay `class_name` ni `class` interna que los declare: son REALES.
+
+**Colisión de nombre global detectada:** hay **DOS `class_name TerrainData`** — `scripts/terrain/terrain_data.gd:1` y `scripts/terrenos/terrain_data.gd:8`. Es un error real de doble declaración.
+
+**Colector obsoleto:** referencia `probe_mesh_tmp.gd` y `test_mapa_m54_e2e.gd`, que **ya no existen** (este último cuarentenado en BUG-090, Log 1234).
+
+**Fix propuesto (2 frentes):**
+1. **El gate:** hacer que el job `godot-lint` falle cuando los archivos colectados tengan parse errors (propagar el conteo al exit code), o pasar a `--check-only` por archivo. Mientras tanto, **no confiar en el verde de este gate**.
+2. **Los 73 errores:** derivar por dueño de módulo. El bloque más grande es **M29 (28 errores en 2 archivos de tests)**: `Builtin type cannot be used as a name on its own` + `Identifier "int"/"bool"/"Dictionary"/"String" not declared` — patrón de tests que usan tipos como nombres de variable, fix mecánico. Segundo bloque: **M108/M109 pipeline de assets** (6 errores) y **editor/tools** (8 errores, `recipe_tool.gd` con 5).
+
+**Lección.** Un gate que no puede fallar no es un gate. Tras este hallazgo, toda afirmación de "0 SCRIPT ERROR" debe basarse en el binario real (`godot472.exe --headless`) o en un gate reparado, no en `godot-lint` hasta que se fixee.
+
+**Firma:** **Modelo:** atria-Dawn-Preview (registro) · DeepSeek-V4.1-Flash (reporte y medición) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 00:45
+
+---
 ### BUG-090 — test_mapa_m54_e2e.gd: 6 Parse Errors, la suite NO CARGA (falso verde en la QA de M54)
 
 - **Fecha de reporte:** 2026-10-03
