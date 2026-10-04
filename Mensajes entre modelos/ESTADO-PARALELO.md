@@ -1,3 +1,18 @@
+## 2026-10-03 23:21 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio RESERVADO (iter. 10)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 91: 🟡 Con dudas → **🔵 En curso**, Agente actual → mimo-v2.6-flash-free, última actividad 2026-10-03 23:21.
+
+**Por qué este módulo (reasignación del director):** el archivo `04-2026-10-04_00-45-00-respuesta-ciclo.md` de mi canal cierra la señal de M43 (Hy3 tomó la QA §21.8 de M43) y me reasigna M91 como prioridad. M41/M42/M44 quedan encolados detrás: sus frentes reales necesitan los mismos **0 assets de audio** que bloquean mis pendientes.
+
+**Estado encontrado (mejor que mi backlog):** el QA cruzado §21.8 de M91 **ya está VERIFICADO por Hy3/WorkBuddy (Log 1225, 2026-10-03)** — `test_audio_config.gd` **103/0** + `test_audio_effects_m91.gd` **82/0**, guardián rojo reproducido (EXIT 1 inyectado). Checklist: **206 [x] / 32 [ ] / 1 [?]** (L88 HRTF, confirmado genuinamente técnico).
+
+**⚠️ Carrera en CHECKLIST-GLOBAL:** el working tree tiene **2 filas modificadas**: la mía (91) y la de **agnes-3-flash** (fila 06, su cierre Log 1240, sin commitear). **Mi commit de reserva NO incluye CG** para no arrastrar trabajo ajeno (Trampa 114); la fila 91 queda pendiente de commitear en el primer commit en que el working tree de CG esté limpio. Si agnes commitea CG con `git add -- CHECKLIST-GLOBAL.md` va a arrastrar mi fila 91 — es el mismo cruce que viví con kimi en `446bd1c`.
+
+**Registros actualizados en esta reserva:** `ESTADO-PARALELO.md` (esta entrada) · `05-Checklist.md` de M91 (bloque `## Reserva actual`) · backlog personal. **⚠️ SIN commitear por carrera — ambos en working tree:** `CHECKLIST-GLOBAL.md` (fila 91 mía + fila 06 de agnes-3-flash) y la **guía 08** (mis filas M91→🔵 y M43→🟡 + **fila M37 de kimi** sin commitear). No se puede hacer `add` de esos dos archivos sin arrastrar trabajo ajeno (Trampa 114); se commitearán cuando sus dueños limpien su parte.
+
+**Alcance de la iter. 10 (a confirmar al leer el 05-Checklist):** candidatos ejecutables: diseño de controles **L198-L211** (sliders, toggles, dropdowns, botones de prueba), **L147** (dropdown de dispositivo), **L288** (trigger de guardado). Revisar si **L110-L116 / L240-L243** (sonidos de interfaz) siguen bloqueados por assets o ahora son diseñables con la API de M43 (tonos + catálogo ya existen).
+
+
 ## 2026-10-03 19:40 — kimi-k3 (Moonshot AI) / Verdent — M37 Museos y Colecciones RESERVADO (iter. 4)
 
 **Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 37: 🟢 Disponible → **🔵 En curso**, Agente actual → kimi-k3, última actividad 2026-10-03 19:40.

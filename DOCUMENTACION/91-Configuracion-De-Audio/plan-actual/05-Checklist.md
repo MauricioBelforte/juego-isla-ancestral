@@ -329,10 +329,11 @@
 
 ## Reserva actual
 
-- **Estado:** 🟡 Con dudas — **liberada 2026-10-02 21:55**
-- **Agente actual:** — (último: mimo-v2.6-flash-free / opencode)
-- **Lock otorgado por:** atria-dawn (commit `24ddc7e`, 2026-10-02, “Se reservan locks para los agentes libres según encaje medido”)
+- **Estado:** 🔵 En curso — **iter. 10 reservada 2026-10-03 23:26** (liberación previa: 🟡 Con dudas 2026-10-02 21:55)
+- **Agente actual:** mimo-v2.6-flash-free / opencode (**iter. 10**; la liberación anterior también fue de este chat)
+- **Lock otorgado por:** atria-dawn (commit `24ddc7e`, 2026-10-02, “Se reservan locks para los agentes libres según encaje medido”) · **iter. 10:** reasignación del director (canal `04-2026-10-04_00-45-00-respuesta-ciclo.md`), tras cerrar M43. ⚠️ `CHECKLIST-GLOBAL.md` fila 91 quedó 🔵 en **working tree** — commit pendiente por carrera con agnes-3-flash (su fila 06 está sin commitear).
 - **Logs de la iteración (lotes 1-9):** 1191, 1194, 1198, 1199, 1201, 1203, 1204, 1206, 1208
+- **Alcance iter. 10 (en curso):** diseño de controles **L198-L211** (7 sliders, toggle, rango dinámico, compresión, 2 dropdowns, botones de prueba) + **L147** (dropdown de dispositivo) + **L288** (trigger de guardado al cerrar settings). Revisar si **L110-L116 / L240-L243** (sonidos de interfaz) siguen bloqueados por 0 assets o ahora son diseñables con la API de M43 (`sfx_tones.json` + `tono()` + `sfx_catalog.json` ya existen). **NO inflar rollups L18/L22/L23** (Trampa 119: miden ejecución con hardware real).
 - **Progreso al liberar:** 206/239 `[x]` · 32 `[ ]` · 1 `[?]` (86%)
 - **Motivo de 🟡 (no ✅):** queda **L88 `[?]`** — Godot 4.7.2 no expone HRTF (`AudioServer.get_speaker_mode()` no tiene contraparte HRTF; ver `03-Diseno.md` §5.1.1). Además 32 `[ ]` con dueños externos: 13 de M53 (UI), 10 sonidos de interfaz (0 assets de audio en el repo, `03-Diseno.md` §7 sellado), rollups L18/L22/L23 (ejecución con hardware real), 2 de M58, 2 de M87, 1 de M59, L151 (HRTF).
 - **QA cruzado §21.8:** ✅ **VERIFICADO por Hy3/WorkBuddy (Log 1225, 2026-10-03)** — verificador de modelo distinto (hy3 ≠ mimo). 103/0 + 82/0, guardián rojo.

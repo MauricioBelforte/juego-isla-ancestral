@@ -23,6 +23,7 @@
 - [x] Log reservado y creado: **1210** — M91 LIBERADO a 🟡 Con dudas (206/239, 86%): los 4 registros de §26 actualizados (CHECKLIST-GLOBAL fila 91 byte-exacta, bloque Reserva actual + firmas en plan-actual, ESTADO-PARALELO, guía 08) + suites 9 OK/0 FAIL + QA §21.8 pendiente
 - [x] Fix post-liberación (commit `b894ffe`, sin número de log nuevo): el bloque Reserva insertado tras el H1 desplazaba **+14** todas las líneas → se movió al **FINAL** del `05-Checklist.md` (15+/15−) y la línea 3 (blanca) pasó a ser línea de estado que remite al bloque; líneas 4..327 byte a byte iguales a `e986181` → **~200 referencias `L##` restauradas sin renumerar** en 05-Checklist, 03-Diseno, 04-Codigo, CHECKLIST-GLOBAL, ESTADO-PARALELO y Log 1210. Detalle en Log 1210 §"Corrección posterior".
 - [x] Log reservado y creado: **1221** — **M43 LIBERADO a 🟡 Con dudas (59/41/0)**: ciclo de 9 lotes (A auditoría 22 [x] + B1→B6 + C1 auditoría 13 [x]); suite 15 → **127/0 EXIT=0**; 8 commits + cierre; los 4 registros de §26 actualizados.
+- [→] **M91 iter. 10 EN CURSO** — reservada 2026-10-03 23:29 (reasignación del director, canal `04-2026-10-04_00-45-00-respuesta-ciclo.md`): diseño de controles **L198-L211** + **L147** + **L288**, revisión de **L110-L116/L240-L243** con la API de M43. QC fila 91 → 🔵 en **working tree** (commit CG pendiente por carrera con agnes-3-flash, fila 06 sin commitear). QA §21.8 de M91 **ya VERIFICADO por Hy3 (Log 1225)**.
 
 ## Módulo LIBERADO 🟡 — 43-Efectos-De-Sonido (Log 1221)
 
@@ -223,15 +224,21 @@ timestamp, `Dependencias` → `—` con nota. Nunca dejes 🔵 huérfano (§21.4
 **NO sellar §21.8** (autor ≠ verificador): lo deja el coordinador con un
 verificador independiente.
 
-## Módulo LIBERADO 🟡 — 91-Configuracion-De-Audio
+## Módulo ACTIVO 🔵 — 91-Configuracion-De-Audio (iter. 10)
 
 > **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).**
 > **LIBERADO 2026-10-02 21:55 a 🟡 Con dudas — Log 1210.** Los 4 registros de §26
 > quedaron actualizados (CHECKLIST-GLOBAL fila 91, 05-Checklist bloque Reserva
 > **al final del archivo** para no desplazar las referencias `L##`, ESTADO-PARALELO,
-> guía 08). **Queda pendiente el QA cruzado §21.8** — lo toma un
-> modelo DISTINTO a mimo-v2.6-flash-free. No re-llevar este módulo a ✅ sin resolver
-> L88 `[?]` (HRTF).
+> guía 08). ~~Quedaba pendiente el QA cruzado §21.8~~ → **VERIFICADO por
+> Hy3/WorkBuddy (Log 1225, 2026-10-03)**: `test_audio_config.gd` 103/0 +
+> `test_audio_effects_m91.gd` 82/0, guardián rojo reproducido (EXIT 1 inyectado);
+> L88 HRTF `[?]` confirmado genuinamente técnico. No re-llevar este módulo a ✅
+> sin resolver L88 `[?]` (HRTF).
+>
+> **REASIGNADO 2026-10-03 23:17 (iter. 10, canal 04):** el director me lo devolvió
+> como prioridad tras cerrar M43; M41/M42/M44 quedan encolados (mismos bloqueos de
+> 0 assets de audio). Estado → 🔵 en curso.
 >
 > Dominio del chat: UI + audio + i18n (creditos_layer, farewell, i18n,
 > performance de M131). Complejidad 1 — ideal para vos.
