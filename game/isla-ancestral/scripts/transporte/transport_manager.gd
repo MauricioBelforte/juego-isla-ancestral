@@ -51,6 +51,13 @@ var _test_saldo: int = -1
 ## calendario real. Claves: dia, mes, anio, dia_absoluto, semana_dia, estacion.
 var _test_fecha: Dictionary = {}
 
+## ── Iter. 3: contexto de viaje (sección T) ────────────────
+## -1 = consultar los autoloads reales (M21/M14); 0 = forzar "no"; 1 = forzar "sí".
+## Permiten testear el gate de "viajar durante diálogo" sin arrancar un diálogo
+## real ni llenar el inventario real.
+var _test_dialogo: int = -1
+var _test_inventario_lleno: int = -1
+
 ## Registros de la iter. 2 (secciones N/O/P/Q/V). Se crean en `_ready()`.
 var _especiales: TransportSpecialTrips = null
 var _narrativos: TransportNarrativeTrips = null
@@ -94,6 +101,59 @@ func forzar_cartera(saldo: int) -> void:
 
 func saldo_simulado() -> int:
 	return _test_saldo
+
+
+## ── Iter. 3: contexto de viaje (sección T) ────────────────
+
+## Fija el contexto de viaje para el test determinista (diálogo/inventario).
+func forzar_contexto_viaje(en_dialogo: bool = false, inventario_lleno: bool = false) -> void:
+	_test_dialogo = 1 if en_dialogo else 0
+	_test_inventario_lleno = 1 if inventario_lleno else 0
+
+
+## Vuelve a consultar los autoloads reales (M21/M14).
+func limpiar_contexto_viaje() -> void:
+	_test_dialogo = -1
+	_test_inventario_lleno = -1
+
+
+## Diagnóstico del contexto de viaje (sección T). `bloqueado` es la ÚNICA causa
+## que impide viajar: un diálogo en curso (M21). El inventario lleno se REPORTA
+## pero NO bloquea (decisión documentada: un boleto no consume espacio de
+## inventario; bloquear por eso sería un gate falso).
+func contexto_de_viaje() -> Dictionary:
+	var en_dialogo: bool = _en_dialogo()
+	var lleno: bool = _inventario_lleno()
+	var motivo: String = ""
+	if en_dialogo:
+		motivo = "en diálogo (M21)"
+	return {
+		"bloqueado": en_dialogo,
+		"motivo": motivo,
+		"en_dialogo": en_dialogo,
+		"inventario_lleno": lleno,
+	}
+
+
+## ¿Hay un diálogo activo (M21)? Duck-typing tolerante: sin M21, nunca bloquea.
+func _en_dialogo() -> bool:
+	if _test_dialogo >= 0:
+		return _test_dialogo == 1
+	var dm := get_node_or_null("/root/DialogueManager")
+	if dm != null and dm.has_method("is_dialogue_active"):
+		return bool(dm.call("is_dialogue_active"))
+	return false
+
+
+## ¿El inventario principal (M14) está lleno? Duck-typing tolerante: sin M14,
+## nunca está lleno. Sólo informativo (no bloquea el viaje).
+func _inventario_lleno() -> bool:
+	if _test_inventario_lleno >= 0:
+		return _test_inventario_lleno == 1
+	var inv := get_node_or_null("/root/Inventario")
+	if inv != null and inv.has_method("has_free_space"):
+		return not bool(inv.call("has_free_space", 0))
+	return false
 
 
 func _ready() -> void:
@@ -214,6 +274,10 @@ func buy_ticket(route_id: StringName, stop_id: StringName) -> Dictionary:
 		return {"ok": false, "motivo": "sin red de transporte", "precio": 0}
 	if not _viaje_activo.is_empty():
 		return {"ok": false, "motivo": "ya hay un viaje en curso", "precio": 0}
+	# Sección T: no se puede iniciar un viaje durante un diálogo (M21).
+	var ctx: Dictionary = contexto_de_viaje()
+	if bool(ctx.get("bloqueado", false)):
+		return {"ok": false, "motivo": String(ctx.get("motivo", "bloqueado")), "precio": 0}
 	var r: TransportRoute = _red.ruta(route_id)
 	if r == null:
 		return {"ok": false, "motivo": "ruta inexistente", "precio": 0}
@@ -270,6 +334,21 @@ func planificar(origen: StringName, destino: StringName) -> Dictionary:
 	if bool(res.get("ok", false)):
 		res["precio"] = int(res.get("coste", 0))
 	return res
+
+
+## ── Iter. 3: waypoints automáticos de ruta (sección J, RF5) ────
+
+## Waypoints automáticos del camino más barato entre `origen` y `destino`:
+## el plan + sus puntos de seguimiento (paradas intermedias). Para rutas largas
+## (2+ saltos) el viaje los usa para no perder al jugador. Devuelve el dict de
+## `TransportRouteWaypoints.de_plan()`.
+func waypoints_de_ruta(origen: StringName, destino: StringName) -> Dictionary:
+	return TransportRouteWaypoints.de_plan(planificar(origen, destino), _red)
+
+
+## ¿La ruta más barata entre dos paradas es larga (2+ saltos)?
+func es_ruta_larga(origen: StringName, destino: StringName) -> bool:
+	return TransportRouteWaypoints.plan_es_largo(planificar(origen, destino))
 
 
 ## ── Iter. 2: registros de viajes especiales, narrativos, eventos y M69 ────

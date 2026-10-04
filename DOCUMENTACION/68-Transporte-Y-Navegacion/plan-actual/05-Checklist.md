@@ -1,13 +1,24 @@
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-11 (último modificador)
+**Fecha:** 2026-10-04 (último modificador)
 
 # 05-Checklist.md — Módulo 68: Transporte y Navegación (131 ítems)
 
-**Estado real:** **36/131 `[x]` · 10 `[?]` con dueño · 85 `[ ]`** (2026-09-11, iter. 1 por DeepSeek-V4.1-Flash, Log 828).
+**Estado real:** **75/131 `[x]` · 14 `[?]` con dueño · 42 `[ ]`** (2026-10-04, iter. 3 por DeepSeek-V4.1-Flash, Log 1251).
 > ⚠️ El encabezado anterior decía "130/130 completados" con **0 código implementado** (la documentación de M68 era sólo diseño con rutas estilo Unity). Corregido al estado real.
+> ⚠️ El encabezado de iter. 1 quedó stale en "36/131 · 10 `[?]` · 85 `[ ]`"; el conteo real (70/47/14) lo fijó la auditoría de drift de atria-dawn (2026-09-20, lote 4) y lo re-confirmó el conteo por prefijo de línea el 2026-10-04. Este encabezado ya refleja el estado tras iter. 3.
 
-## Reserva actual (iter. 2 — abierta 2026-09-15)
+## Reserva actual (iter. 3 — abierta 2026-10-04)
+
+- Estado: 🔵 En curso
+- Agente: DeepSeek-V4.1-Flash (WorkBuddy)
+- Entrada: M68 70/131 `[x]` · 14 `[?]` · 47 `[ ]` (conteo real; el encabezado stale decía 36/131)
+- Alcance: **waypoints de ruta (sección J) + edge cases de la sección T verificables headless** — `TransportRouteWaypoints` (modelo puro): waypoints de camino y de plan, fracciones/distancias acumuladas, `validar`, ruta larga, avance/índice más cercano; `TransportManager.waypoints_de_ruta()` / `es_ruta_larga()`; contexto de viaje (diálogo M21 bloquea / inventario lleno reportado), dinero justo, última hora de horario, parada recién desbloqueada (M71) + clima (M32).
+- Fuera del alcance (dueño externo): "sin señal" (cartel M46), panel (M53), vehículos (M67).
+- Log: 1251
+- Resultado: `test_transporte_m68_iter3.gd` **108 checks / 0 fallos / EXIT 0 ×3**, 8 bloques con marcador `_fin()` y guarda anti-falso-verde probada en ROJO (4/4 sondas: control 0, A/B/C/D exit 1). Sin regresión (iter. 1 177/0, iter. 2 199/0).
+
+## Reserva anterior (iter. 2 — cerrada 2026-10-04)
 
 - Estado: 🔵 En curso
 - Agente: DeepSeek-V4.1-Flash (WorkBuddy)
@@ -101,10 +112,10 @@
 ## J. Marcadores y Waypoints
 
 - [?] Marcadores de paradas en el mapa (M54) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: el dataset trae `poi_id` por parada; la capa es de M54. Dueño: M54. [S]
-- [ ] Waypoints automáticos en rutas largas [M]
+- [x] Waypoints automáticos en rutas largas [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: `TransportRouteWaypoints.de_plan()` genera los waypoints automáticamente y `plan_es_largo()` decide si la ruta es larga (`MIN_SALTOS_LARGA := 2`); `TransportManager.waypoints_de_ruta()` / `es_ruta_larga()` los exponen. Bloques A/B/C (108 checks).
 - [?] Waypoints manuales del jugador (marcas en el mapa) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: los datos y su persistencia están listos (T-049); el marcado en el mapa es de M54. Dueño: M54. [M]
 - [x] Persistencia de waypoints (M59) [M]
-- [ ] Testear waypoints con rutas de 2+ paradas [M]
+- [x] Testear waypoints con rutas de 2+ paradas [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: bloque A prueba un camino real de 3 paradas (aurora→plataforma_norte→puerto_norte): orden, índices 0/1/2, fracción 0.0→1.0, distancias por tramo y acumuladas; `validar()` sin errores.
 
 ## K. Panel de Transporte (M53)
 
@@ -180,11 +191,11 @@
 
 ## T. Edge Cases
 
-- [ ] Viajar con dinero justo o en la última hora de horario [M]
-- [ ] Viajar durante diálogo (M21, bloqueado) o con inventario lleno [M]
+- [x] Viajar con dinero justo o en la última hora de horario [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: bloque E (saldo EXACTO compra y queda en 0; un AO menos falla y NO cobra; ruta de 80 AO con saldo exacto) y bloque F (21:00 última hora abierta / 22:00 justo al cerrar / 06:00 justo al abrir / 05:00 antes de abrir; `list_routes` marca la ruta no disponible).
+- [x] Viajar durante diálogo (M21, bloqueado) o con inventario lleno [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: bloque D. Diálogo activo (M21, duck-typing `is_dialogue_active`) BLOQUEA `buy_ticket` (motivo "en diálogo (M21)"). Inventario lleno se REPORTA pero NO bloquea — **divergencia declarada** (decisión de diseño: viajar no requiere espacio libre; el equipaje se resuelve al llegar). Si el verificador §21.8 juzga que debe bloquear, revertir este ítem.
 - [?] Viajar al destino destruido (ruina M25) o con el vehículo en uso (M67) — iter. 1 DeepSeek-V4.1-Flash 2026-09-11: requiere el estado de M25/M67. Dueño: M25/M67. [M]
 - [x] Carga de guardado a mitad de viaje (M59) y viajes dobles (cola) [C]
-- [ ] Parada recién desbloqueada sin señal y clima cambiadizo (M32) [M]
+- [x] Parada recién desbloqueada sin señal y clima cambiadizo (M32) [M] — iter. 3 DeepSeek-V4.1-Flash 2026-10-04: bloque G. Desbloqueo en runtime (M71 `desbloquear_parada`), ruta sólo-verano (bloqueada en invierno), clima 3 (tormenta) bloquea un barco y clima 0 lo libera. Nota: "sin señal" (cartel M46) es externo, fuera del alcance headless (declarado en la propia suite).
 
 ## U. Rendimiento (M61)
 
@@ -238,8 +249,15 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 131 ítems · Completados: 70 · Pendientes: 47 · No resueltos: 14.
+**Totales:** 131 ítems · Completados: 75 · Pendientes: 42 · No resueltos: 14.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 70 [x] / 47 [ ] /
 > 14 [?]. Las marcas no se tocaron.
+
+> **Actualizado por iter. 3 (DeepSeek-V4.1-Flash / WorkBuddy, 2026-10-04, Log 1251):**
+> +5 `[x]` (J: waypoints automáticos, testear waypoints de 2+ paradas; T: dinero
+> justo/última hora, diálogo/inventario lleno, parada recién desbloqueada+clima) →
+> 75 [x] / 42 [ ] / 14 [?] = 131. Evidencia: `test_transporte_m68_iter3.gd`
+> 108 checks / 0 fallos / EXIT 0 ×3, guarda anti-falso-verde probada en ROJO (4/4
+> sondas). La divergencia de "inventario lleno" está declarada en el propio ítem.

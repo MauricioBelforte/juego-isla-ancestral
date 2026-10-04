@@ -1,11 +1,11 @@
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-09-15 (último modificador)
-**Historial:** diseño completo por Deepseek V4 Flash (OpenCode, 2026-08-17) · núcleo data-driven implementado por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · lógica headless de viaje, viajes especiales/narrativos, eventos de ruta, puente M69, localización y validador unificado por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-15, iter. 2 — Log 910)
+**Fecha:** 2026-10-04 (último modificador)
+**Historial:** diseño completo por Deepseek V4 Flash (OpenCode, 2026-08-17) · núcleo data-driven implementado por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-11) · lógica headless de viaje, viajes especiales/narrativos, eventos de ruta, puente M69, localización y validador unificado por DeepSeek-V4.1-Flash (WorkBuddy, 2026-09-15, iter. 2 — Log 910) · waypoints de ruta + edge cases T (dinero justo, horario, diálogo, desbloqueo+clima) por DeepSeek-V4.1-Flash (WorkBuddy, 2026-10-04, iter. 3 — Log 1251)
 
 # 04-Codigo.md — Módulo 68: Transporte y Navegación
 
-> ⚠️ **ESTADO 2026-09-15: iter. 2 completada** por DeepSeek-V4.1-Flash (WorkBuddy).
+> ⚠️ **ESTADO 2026-10-04: iter. 3 completada** por DeepSeek-V4.1-Flash (WorkBuddy).
 > La documentación previa describía rutas estilo Unity (`Assets/_Project/Transport/...`). La convención real del proyecto es **`game/isla-ancestral/scripts/<dominio>/`** y **`data/`** para los datasets; las firmas públicas del diseño se respetan con nombres reales.
 
 ## 1. Ubicación de archivos (REAL, implementado)
@@ -401,3 +401,77 @@ python scripts/aplicar_locales_m68.py
 - **M46/M53/M54:** consumir `TransportManager.red()`, `list_routes()` y `TransportLocalizer` (nunca duplicar la red).
 - **Si se cambian costes o paradas:** editar `generar_red_transporte.gd` y **regenerar** el `.tres`. Ojo: la regla "directo > combinado" **no** es universal (ver §11) — no la conviertas en invariante.
 - **Si se añaden claves de localización:** añadirlas a las tablas de `TransportLocalizer`, volver a volcar y aplicar. El test comprueba que no falte ninguna en `es` ni en `en`.
+
+## Notas del Agente — iter. 3 (2026-10-04)
+
+**Modelo:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Log:** 1251
+
+### 17. Alcance de la iter. 3
+
+La iter. 3 cierra la **mitad verificable headless que quedaba de las secciones J (Marcadores y Waypoints) y T (Edge Cases)**, sin tocar escena/UI/3D:
+
+- **`TransportRouteWaypoints`** (`class_name ... extends RefCounted`, **modelo puro**, sin nodos): calcula los waypoints de una ruta a partir del grafo.
+  - `de_camino(paradas: Array, red)` → `Array[Dictionary]`: un waypoint por parada con `{indice, stop_id, pos, fraccion, es_destino, tramo_m, acumulado_m}`. Los ids que no resuelven contra la red se **saltan** (no revientan).
+  - `de_plan(plan, red)` → `{ok, motivo, waypoints, distancia_total_m, saltos, es_larga, radio_llegada}`: envuelve un plan de `planificar()`.
+  - `plan_es_largo(plan)`: ruta larga si `saltos >= MIN_SALTOS_LARGA` (2).
+  - `validar(waypoints)`: invariantes de orden, fracción/acumulado monótonos, primero `fraccion == 0.0`, último `es_destino` y `fraccion == 1.0` (una ruta degenerada de 1 parada queda exenta de las reglas de fracción 1.0).
+  - `indice_mas_cercano(waypoints, punto)` / `avance_en(waypoints, punto)`: para la navegación/UI.
+- **`TransportManager`** gana `waypoints_de_ruta(origen, destino)` y `es_ruta_larga(origen, destino)` (delegan en el modelo con `_red`).
+- **Gate de contexto de viaje**: `contexto_de_viaje()` + `_en_dialogo()` (duck-typing `DialogueManager.is_dialogue_active`) + `_inventario_lleno()` (duck-typing `Inventario.has_free_space(0)`). `buy_ticket()` lo consulta justo después de comprobar `_viaje_activo`: **sólo el diálogo bloquea**; el inventario lleno se **reporta** pero no bloquea (decisión de diseño declarada — viajar no requiere espacio libre).
+- Hooks de test: `forzar_contexto_viaje(en_dialogo, inventario_lleno)` / `limpiar_contexto_viaje()`.
+
+### 18. API de la iter. 3
+
+```gdscript
+# Modelo puro (sin autoload)
+TransportRouteWaypoints.de_camino(["puerto_aurora","plataforma_norte","puerto_norte"], red)
+TransportRouteWaypoints.de_plan(plan, red)
+TransportRouteWaypoints.plan_es_largo(plan)
+TransportRouteWaypoints.validar(waypoints)          # -> Array[String] de errores
+TransportRouteWaypoints.resumen(waypoints)
+TransportRouteWaypoints.indice_mas_cercano(waypoints, punto)
+TransportRouteWaypoints.avance_en(waypoints, punto)
+
+# Manager (autoload)
+TransportManager.waypoints_de_ruta(&"puerto_aurora", &"puerto_norte")
+TransportManager.es_ruta_larga(&"puerto_aurora", &"puerto_norte")
+TransportManager.contexto_de_viaje()                 # {bloqueado, motivo, en_dialogo, inventario_lleno}
+TransportManager.forzar_contexto_viaje(true, false)  # test: diálogo activo
+TransportManager.limpiar_contexto_viaje()
+```
+
+### 19. Trampa medida: cache de `class_name` stale
+
+Al crear `TransportRouteWaypoints` (un `class_name` nuevo), en headless **no resolvía** hasta regenerar `.godot/global_script_class_cache.cfg`. Con la cache stale, `--script` **no** la regenera: hay que correr `godot --headless --path game/isla-ancestral --import` antes de medir la suite. Sin ese paso la suite muere por parseo antes de sus aserciones (falso verde del gate). Registrado también en la guía `DOCUMENTACION/GUIA-GODOT/01-gdscript-errores-comunes.md` (pedido del director, Log 1247).
+
+### 20. Bug propio encontrado y resuelto en la iter. 3
+
+- **`de_camino` acumulaba el tramo DESPUÉS del `append`** → `acumulado_m`/`fraccion` iban un tramo por detrás (el último daba `fraccion 0.0` en vez de `1.0`; p. ej. 30.0 en vez de 200.0). Lo cazó la **primera corrida** de la propia suite (9 FAIL). Fix: mover `acum += tramo` **antes** de calcular `frac`, dentro del bucle.
+
+### 21. Guarda anti-falso-verde (probada en ROJO, no heredada)
+
+`test_transporte_m68_iter3.gd` usa las **3 capas** del estándar:
+1. cada bloque cierra con `_fin(letra)`; si un bloque aborta en silencio (M124) la letra falta y `_summary()` **FALLA** nombrando los faltantes;
+2. piso `CHECKS_MINIMOS := 108` **medido en verde** (no estimado);
+3. `_summary()` en un `call_deferred` **separado** (si `_run()` muere, igual corre) + watchdog por temporizador → `quit(1)`.
+
+**Sondas (muta el archivo REAL, exige EXIT 1, restaura byte-exacto):** control → EXIT 0; A (modelo `es_destino=false`) → EXIT 1; B (aborto bloque C) → EXIT 1 y nombra `["C"]`; C (`CHECKS_MINIMOS=999`) → EXIT 1; D (sin `_fin` del bloque H) → EXIT 1 y nombra `["H"]`. **4/4 en rojo limpio.**
+> Nota de la sonda: un archivo `class_name ... extends RefCounted` **no** se puede correr con `--script` (nunca llama a `quit()` → cuelga); para probar el modelo hay que correr la **suite** que lo usa.
+
+### 22. Comandos
+
+```bash
+# iter. 3: 108 checks
+Godot --headless --path game/isla-ancestral --script res://scripts/transporte/test_transporte_m68_iter3.gd
+# regresión
+Godot --headless --path game/isla-ancestral --script res://scripts/transporte/test_transporte_m68.gd        # 177
+Godot --headless --path game/isla-ancestral --script res://scripts/transporte/test_transporte_m68_iter2.gd  # 199
+# regenerar la cache de class_names tras crear un class_name nuevo
+Godot --headless --path game/isla-ancestral --import
+```
+
+### 23. Recomendaciones para el próximo agente (se suman a las de §16)
+
+- **Gate CI pendiente:** falta añadir `test_transporte_m68_iter3.gd` al job `test-suite` de `.github/workflows/quality.yml` (`|| FAIL=1`). **No se aplicó** en esta iter. 3 por indicación del director (el workflow lo está editando s2 por BUG-091 modo A; evitar edición concurrente). La línea propuesta es la misma que la de iter. 1/2, con `108 checks`.
+- **BUG-091 modo B:** el job `test-suite` carece del paso `--import` que sí tiene `godot-lint`; en checkout limpio las suites con `class_name` mueren por parseo. Documentado, **no** parcheado (mismo motivo).
+- **M46/M53/M54:** consumir `TransportManager.waypoints_de_ruta()` para la señalización/capa; el modelo ya entrega posiciones, fracciones y distancias.
