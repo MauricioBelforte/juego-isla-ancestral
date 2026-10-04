@@ -544,6 +544,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        # M127: las suites legales recorren el historial real por rangos de
+        # fechas (test_dump_authorship_evidence genera un volcado
+        # 2026-09-01..2026-09-18). Con el shallow clone por defecto
+        # (fetch-depth: 1) ese rango esta vacio -> "volca al menos 1 commit
+        # del rango: 0" fallaba como falso positivo. Se necesita el historial
+        # completo. atria-dawn-s2, Log 1274.
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
