@@ -382,3 +382,38 @@ consecuencia.
    dejo el modulo en un estado indistinguible de "nada implementado" durante 4 dias, y el
    verificador siguiente (mimo-v2.5) no pudo distinguir cumplido de pendiente. **La metadata del
    checklist es parte de la entrega.**
+
+## L. Registro de iteración 2 (DeepSeek-V4.1-Flash / WorkBuddy — Log 1257)
+
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-04 · **Estado:** 🟡 (fix de tests; NO sella §21.8) · **Log:** 1257
+
+**Contexto:** el director (atria-Dawn-Preview) asignó M29 como frente tras aprobar M68 iter. 3,
+porque M29 es el **bloque más grande de los 73 parse errors de BUG-091: 28 errores en 2 archivos
+de tests del módulo** (`tests/unit/time/test_time_calendar.gd` 22,
+`tests/integration/test_time_calendar_events.gd` 6), todos del patrón "tipo builtin usado como nombre".
+
+**Lo que hice:**
+- Eliminé los 28 parse errors: ambos archivos parsean limpio (`--check-only` EXIT 0, 0 `Parse Error`).
+- Los 2 archivos NO eran sólo suites rotas por los tipos: eran suites **gdUnit4 muertas** (usaban
+  `is_instance_of(...)`, que no existe — el método real es `is_instanceof(type)` — e `is_equal_to(...)`,
+  que tampoco existe — el real es `is_equal(...)`). Un rename mecánico habría dejado 2 suites que
+  nunca afirman nada (verde falso, trampa 1197). **Decisión declarada:** convertirlas al estándar
+  headless del proyecto (`extends SceneTree` + `--script`, método §12.1).
+- **Suite viva 1** (`tests/unit/time/test_time_calendar.gd`): **74 checks / 0 fallos / EXIT 0 x3**.
+  8 bloques A-H (config, tipos, rangos, fecha, día/noche en bordes, pausa, persistencia, formato).
+- **Suite viva 2** (`tests/integration/test_time_calendar_events.gd`): **51 checks / 0 fallos / EXIT 0 x3**.
+  8 bloques A-H (estado inicial, día/noche, pausa, save/restore, semana+día absoluto, fecha completa,
+  eventos/festivales, eventos+persistencia).
+- Guardia anti-falso-verde de 3 capas (piso `CHECKS_MINIMOS` medido en verde: 74 / 51) + watchdog.
+- Sondas en ROJO 5/5 + 2 controles; restauración byte-exacta verificada.
+
+**Marcas:** sin cambios — los 195 ítems siguen en 190 [x] / 3 [ ] / 2 [?] (este trabajo es de
+infraestructura de tests, no de funcionalidad del módulo).
+
+**Pendiente (dueño):** cablear las 2 suites en el job `test-suite` de `quality.yml` — lo aplica s2
+junto con el fix del gate BUG-091 (modos A+B). Las líneas propuestas están en `04-Codigo.md`
+§Iteración 2.
+
+**NO sella §21.8** (autor ≠ verificador). El módulo sigue 🟡.
