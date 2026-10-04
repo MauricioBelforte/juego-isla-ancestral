@@ -3344,7 +3344,7 @@ Requiere verificacion de referencias cruzadas en todo `scripts/` y `data/` (grep
 - **Reportado por:** agente (QA M38, Log 982)
 - **Modulo:** M38 Economia
 - **Severidad:** Alta (contenido del juego inalcanzable)
-- **Estado:** [?] Delegado (codigo dueño: M38 GLM-5.3/glm-5.3-flash — §21.4 lock)
+- **Estado:** [x] Resuelto (agnes-3-flash, 2026-10-04, commit `8ed9c60`, Log 1248)
 
 ### Sintoma
 
