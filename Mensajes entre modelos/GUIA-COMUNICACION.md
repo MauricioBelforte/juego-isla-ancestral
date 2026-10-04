@@ -123,6 +123,35 @@ agente lee la respuesta del director y sigue
 
 ---
 
+## Colaboración horizontal (todos leen todos los canales)
+
+> Agregado 2026-10-04 por directiva del usuario (atria-dawn-preview / Kilo Code).
+
+**Todos los modelos tienen acceso a TODAS las carpetas de `Mensajes entre modelos/`.** La
+carpeta de cada modelo no es privada: es su hilo principal, pero el resto de la flota puede
+leerla íntegramente.
+
+Consecuencias prácticas:
+
+1. **Se puede pedir ayuda directa entre modelos.** Si un agente no resuelve algo, el director
+   puede escribirle a otro modelo: *"ayudame con X que no puedo resolver; el contexto está en
+   el canal de Hy3, archivo NN"*. El modelo consultado lee esa carpeta y responde en la suya o
+   en la del consultante.
+2. **Se puede referenciar conversaciones ajenas.** En un mensaje a un modelo es válido citar
+   archivos de otro canal (`Mensajes entre modelos/Hy3/07-...md`) como contexto — no hace falta
+   copiar el contenido.
+3. **El director orquesta las capacidades de cada modelo.** Cada modelo tiene fortalezas
+   distintas (auditoría, medición empírica, modelado 3D, documentación); el pedido de ayuda va
+   al modelo cuya capacidad mejor encaje con el problema.
+4. **No se mezclan los hilos.** Aunque todos lean todo, cada modelo **escribe** en su propia
+   carpeta. La colaboración horizontal es de lectura + mención, no de escritura cruzada.
+
+**Formato del pedido de ayuda:** en la carpeta del modelo al que se le pide, con
+`**Responde a:**` apuntando al archivo de contexto (propio o ajeno), y una sección
+`## Pedido a <MODELO>` que diga exactamente qué se necesita y dónde está el contexto.
+
+---
+
 ## Por qué importa
 
 - **Economía de tokens:** el informe se escribe una vez, no dos.

@@ -186,6 +186,24 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 
 **Colector obsoleto:** referencia `probe_mesh_tmp.gd` y `test_mapa_m54_e2e.gd`, que **ya no existen** (este último cuarentenado en BUG-090, Log 1234).
 
+**MODO B (hallazgo de DeepSeek, Log 1244, 2026-10-04) — el job `test-suite` tampoco sirve:**
+en un checkout limpio (sin `.godot/`), la cache de class_names no existe y **todas** las suites
+que usan `class_name` entre archivos fallan por PARSEO antes de llegar a sus aserciones.
+`godot-lint` ya documenta el arreglo (`--import` => EXIT 0; sin `--import` => EXIT 1 falso),
+pero **el paso no se replicó en el job `test-suite`**. Consecuencia: en CI, los gates de las
+suites con `class_name` son **decorativos** — el job muere por parseo antes de evaluarlos. Es
+un segundo "gate ciego", complementario del modo A.
+
+- **Patch propuesto (NO aplicado):** antes de "Run validation tests", insertar
+  `- name: Import project resources` con `run: godot --headless --path game/isla-ancestral --import`.
+- **Por qué no se aplicó:** `quality.yml` lo está editando atria-dawn-s2 por el modo A de
+  BUG-091. Dos agentes editando el mismo workflow a la vez repite el conflicto de edición
+  concurrente de M70 (ver `Mensajes entre modelos/06-M70-Conflicto-Edicion-Concurrente/`). El
+  patch queda documentado aquí para que s2 lo aplique en una sola edición conjunta.
+- **Confirmación independiente:** atria-dawn-s2 verificó el modo A por otro método (preload de
+  un archivo existente con parse errors → `--check-only --script` imprime los errores y sale
+  EXIT 0; solo detecta archivos inexistentes). Mismo veredicto, método distinto.
+
 **Fix propuesto (2 frentes):**
 1. **El gate:** hacer que el job `godot-lint` falle cuando los archivos colectados tengan parse errors (propagar el conteo al exit code), o pasar a `--check-only` por archivo. Mientras tanto, **no confiar en el verde de este gate**.
 2. **Los 73 errores:** derivar por dueño de módulo. El bloque más grande es **M29 (28 errores en 2 archivos de tests)**: `Builtin type cannot be used as a name on its own` + `Identifier "int"/"bool"/"Dictionary"/"String" not declared` — patrón de tests que usan tipos como nombres de variable, fix mecánico. Segundo bloque: **M108/M109 pipeline de assets** (6 errores) y **editor/tools** (8 errores, `recipe_tool.gd` con 5).
