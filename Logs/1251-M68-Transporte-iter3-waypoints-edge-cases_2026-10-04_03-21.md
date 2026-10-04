@@ -200,8 +200,15 @@ M61, accesibilidad M58, vehiculos M67.
 
 ## 4.3 Huella de push (AGENTS.md 4.3)
 
-- Rango: (a completar tras el push)
-- Hora: 2026-10-04 03:21 (UTC).
+- Rango: `e913997..bf9b1ed` (2 commits: `bf9b1ed` PROPIO + `a9701c8` AJENO).
+- Hora: 2026-10-04 03:25 (UTC) / 00:25 (-0300).
 - Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy).
 - Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
-- Contenido: (a completar)
+- Contenido: 16 archivos, 1372 inserciones, 124 borrados (incluye el commit ajeno).
+  Mi commit `bf9b1ed`: 7 archivos, 1038 inserciones, 16 borrados.
+- Ajenos arrastrados: 1 commit (`a9701c8` "M91 Configuracion de Audio iter. 10",
+  ya local, NO mio). Mi commit es el HEAD del rango; el ajeno era un ancestro local
+  sin pushear.
+- Verificacion: `git ls-remote origin refs/heads/main` =
+  `bf9b1ed2a261a8f8ba6dfdd6c540028a51e45d7d` == HEAD local.
+
