@@ -68,3 +68,13 @@ panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_
 1. **`Input.get_joy_button_string()` NO existe en Godot 4.7.2** (ni `get_joy_axis_string`). Verificado con `Input.get_method_list()`. Para nombrar botones de gamepad hay que mapear el enum `JoyButton` a mano.
 2. **Ruta del encargo desactualizada:** `full_map_layer.gd` esta en `scripts/mapa/`, no en `scripts/ui/widgets/`. Medir la ruta antes de interpretar "File not found -> EXIT 1".
 3. **Un `[x]` en checklist NO implica que el script compile:** los 3 items estaban `[x]` con parse errors vivos (familia de BUG-090/091).
+
+## 9. Huella de push (AGENTS.md 4.3)
+
+- **Push principal:** rango `f4c6eea..5fb4165` (**1 commit, PROPIO**). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 06:56 (UTC) / 03:56 (-0300).
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Contenido propio (`5fb4165`):** 8 archivos, 150 inserciones / 9 borrados (3 `.gd` + 2 `05-Checklist` + Log 1266 + respuesta 15 + BACKLOG-MASTER).
+- **Ajenos arrastrados:** 0 (`git log --oneline origin/main..HEAD` = 1 linea).
+- **Catch-up que publica esta huella:** esta edicion del log viaja en un push inmediato posterior desde `5fb4165`.
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0 antes del push; `git ls-remote origin refs/heads/main` == `5fb4165e504d21de810f9af0d3d5364953e52c18` tras el push.
