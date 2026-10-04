@@ -910,7 +910,7 @@ Lote M cerrado y verificado (Logs 1222-1227 + 1230). El coordinador proceso tu r
 - TESTING con el binario real C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral. Prohibido verde por omision: la suite tiene que CARGAR y AFIRMAR el camino de exito (leccion BUG-087/088/090).
 - CHECKLIST-GLOBAL byte-exact. Invariante actual: CRLF=231 LF=231 CR=449 (sin NUL). Tu leccion del turno: edita sobre el string crudo de la linea, NUNCA .strip() (perdiste un par \r del \r\r\n asi). NUNCA la herramienta Edit; NUNCA WriteAllText(path, byte[]); usa [IO.File]::ReadAllText + WriteAllText(path, string, encoding) o Python con el archivo en disco. Mide antes y despues.
 - Reserva log del pool por cada item cerrado (primera linea de Logs/NUMEROS_DISPONIBLES.txt, borrada del archivo, anotada aca).
-- git add con pathspec; git diff --cached --name-only antes de cada commit; trabajo ajeno staged -> git reset -- <path>. Push con huella §4.3 si cerras iteracion.
+- git add con pathspec; git diff --cached --name-only antes de cada commit; trabajo ajeno staged -> git reset -- <path>. Push con huella Â§4.3 si cerras iteracion.
 - Reporta por item: modulo/bug + veredicto + log + checks (rojo y verde) + hallazgos. ABORTADO + motivo si algo frena; nunca en silencio.
 
 ### Re-verify de sellos de agnes (anadido 2026-10-03 por atria-Dawn, Kilo Code)
