@@ -42,6 +42,8 @@ signal pieza_colocada(receta_id: StringName, celda: Vector3i)
 signal pieza_demolida(receta_id: StringName, celda: Vector3i)
 signal zona_rechazada(celda: Vector3i, motivo: String)
 signal estructuras_restauradas(cantidad: int)
+## M64: la navmesh debe recalcularse en las celdas que cambiaron (bloque K).
+signal navmesh_delta(celdas: Array)
 
 # ── Estado de sesion ────────────────────────────────────────────────────
 var _en_modo: bool = false
@@ -61,6 +63,8 @@ var _zonas: ZoneRegistry = ZoneRegistry.new()
 var _historial: BuildHistory = BuildHistory.new()
 var _mundo: ConstruccionMundo = ConstruccionMundo.new()
 var _catalogo: Dictionary = {}          # id (StringName) -> PlacementRule
+var _catalogo_db: BuildCatalogDB = BuildCatalogDB.new()
+var _preview: BuildPreview = BuildPreview.new()
 
 var _f_puede_pagar: Callable = Callable()
 var _f_descontar: Callable = Callable()
@@ -74,22 +78,24 @@ func _ready() -> void:
 	print("[M17] Construccion listo (catalogo=%d, terreno=%s, inventario=%s)" % [
 		n, str(_mundo.tiene_terreno()), str(_f_puede_pagar.is_valid())])
 
-## Carga las recetas .tres de `DIR_PIEZAS`. Devuelve cuantas registro.
-## Tolerante: si la carpeta no existe o un archivo no es una PlacementRule,
-## se omite (el conteo real se reporta en el arranque y lo afirma la suite).
+## Carga las recetas .tres de `DIR_PIEZAS` via `BuildCatalogDB` (recursivo, por
+## familia). Devuelve cuantas registro. Tolerante: si la carpeta no existe o un
+## archivo no es una PlacementRule, se omite (el conteo real lo afirma la suite).
 func _cargar_catalogo() -> int:
-	var d := DirAccess.open(DIR_PIEZAS)
-	if d == null:
-		push_warning("[M17] no se pudo abrir %s; catalogo vacio" % DIR_PIEZAS)
-		return 0
-	var n: int = 0
-	for f in d.get_files():
-		if not String(f).ends_with(".tres"):
-			continue
-		var res = load("%s/%s" % [DIR_PIEZAS, f])
-		if res is PlacementRule and registrar_receta(res):
-			n += 1
+	var n: int = _catalogo_db.cargar(DIR_PIEZAS)
+	if n == 0:
+		push_warning("[M17] catalogo vacio en %s" % DIR_PIEZAS)
+	for id in _catalogo_db.ids():
+		_catalogo[id] = _catalogo_db.receta(id)
 	return n
+
+## El catalogo data-driven (12 familias). Es la fuente; `_catalogo` es su espejo.
+func catalogo_db() -> BuildCatalogDB:
+	return _catalogo_db
+
+## Registra (o reemplaza) una receta en el catalogo Y en su espejo.
+func _espejo(r: PlacementRule) -> void:
+	_catalogo[r.id] = r
 
 ## Resuelve el inventario real (M14) por duck-typing. Tolerante si no esta.
 func _resolver_inventario() -> void:
@@ -155,6 +161,7 @@ func registrar_receta(r: PlacementRule) -> bool:
 	if r == null or not r.es_valida():
 		return false
 	_catalogo[r.id] = r
+	_catalogo_db.registrar(r)
 	return true
 
 ## Registra varias recetas. Devuelve cuantas se aceptaron.
@@ -170,6 +177,22 @@ func receta(id: StringName) -> PlacementRule:
 
 func catalogo() -> Dictionary:
 	return _catalogo.duplicate()
+
+# ── Preview / fantasma (iter. 2) ────────────────────────────────────────
+
+## Evalua la pieza seleccionada en `celda` para el fantasma. Devuelve el
+## resultado de `BuildPreview` (ok/valido/motivos/color/celdas/costo).
+## El preview NUNCA cobra ni escribe en el mundo (bloque I).
+func preview(celda: Vector3i) -> Dictionary:
+	return _preview.evaluar(self, celda)
+
+## Evalua una receta arbitraria (QA).
+func preview_receta(r: PlacementRule, celda: Vector3i, rotacion: int) -> Dictionary:
+	return _preview.evaluar_receta(self, r, celda, rotacion)
+
+## El evaluador de fantasma en uso (para inspeccionar la cache en tests).
+func preview_actual() -> BuildPreview:
+	return _preview
 
 ## Recetas filtradas por modo (construccion vs decoracion). RF2.
 func piezas_de_modo(modo: int) -> Array:
@@ -313,6 +336,8 @@ func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 		"bloque": r.bloque,
 	})
 	pieza_colocada.emit(r.id, celda)
+	navmesh_delta.emit(celdas.duplicate())
+	_preview.limpiar()
 
 	return {
 		"ok": true,
@@ -359,6 +384,8 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 		"estructura": e.duplicate(true),
 	})
 	pieza_demolida.emit(StringName(String(e.get("tipo", ""))), c_ancla)
+	navmesh_delta.emit(celdas.duplicate())
+	_preview.limpiar()
 
 	return {
 		"ok": true,
@@ -556,6 +583,10 @@ func _baja_estructura(ancla: String) -> void:
 func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 	var tipo: String = String(d.get("tipo", ""))
 	var celda: Vector3i = d.get("celda", Vector3i.ZERO)
+	# undo/redo cambian el mundo -> la cache del fantasma deja de valer y la
+	# navmesh (M64) debe recalcular las celdas afectadas.
+	_preview.limpiar()
+	navmesh_delta.emit((d.get("celdas", []) as Array).duplicate())
 	match tipo:
 		BuildHistory.TIPO_COLOCAR:
 			# deshacer colocar = demoler sin devolucion; rehacer = recolocar

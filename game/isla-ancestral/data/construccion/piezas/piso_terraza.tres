@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_ag4ij"]
+
+[resource]
+script = ExtResource("1_ag4ij")
+id = &"piso_terraza"
+nombre = "Terraza de madera"
+familia = &"piso"
+altura = 0.5
+costo = {
+"planks": 3
+}
+bloque = 24

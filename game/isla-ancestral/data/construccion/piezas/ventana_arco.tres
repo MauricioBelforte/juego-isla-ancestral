@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_kcga7"]
+
+[resource]
+script = ExtResource("1_kcga7")
+id = &"ventana_arco"
+nombre = "Ventana en arco"
+variante = "arco"
+familia = &"ventana"
+superficie_ok = Array[StringName]([&"pared", &"piso"])
+requiere_pared = true
+costo = {
+"glass": 1,
+"planks": 3
+}
+bloque = 13
+superficie_ofrecida = &"aire"

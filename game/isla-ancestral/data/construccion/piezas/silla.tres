@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_s5cvs"]
+
+[resource]
+script = ExtResource("1_s5cvs")
+id = &"silla"
+nombre = "Silla"
+familia = &"mueble"
+costo = {
+"planks": 2
+}
+superficie_ofrecida = &"aire"
+es_mueble = true

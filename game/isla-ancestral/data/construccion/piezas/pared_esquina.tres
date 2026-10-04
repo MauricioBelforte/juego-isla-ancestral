@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_ltwpi"]
+
+[resource]
+script = ExtResource("1_ltwpi")
+id = &"pared_esquina"
+nombre = "Esquina de madera"
+variante = "esquina"
+familia = &"pared"
+costo = {
+"planks": 3
+}
+bloque = 8
+superficie_ofrecida = &"pared"

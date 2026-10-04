@@ -6,9 +6,10 @@
 script = ExtResource("1_1iln0")
 id = &"piso_tablones"
 nombre = "Piso de tablones"
+familia = &"piso"
 altura = 0.5
 superficie_ok = Array[StringName]([&"terreno", &"piso", &"techo", &"agua"])
 costo = {
-"madera": 2
+"planks": 2
 }
 bloque = 24

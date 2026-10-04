@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_ukvl2"]
+
+[resource]
+script = ExtResource("1_ukvl2")
+id = &"puente_2"
+nombre = "Puente de 2 celdas"
+familia = &"puente"
+tamano = Vector2i(2, 1)
+soportes_minimos = 0
+superficie_ok = Array[StringName]([&"agua"])
+sobre_agua = true
+costo = {
+"planks": 6
+}
+bloque = 8

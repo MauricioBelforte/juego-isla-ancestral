@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_y5l0n"]
+
+[resource]
+script = ExtResource("1_y5l0n")
+id = &"cerca_madera"
+nombre = "Cerca de madera"
+familia = &"cerca"
+altura = 0.7
+costo = {
+"planks": 2
+}
+bloque = 8
+superficie_ofrecida = &"aire"

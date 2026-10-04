@@ -486,13 +486,21 @@ func _b12_catalogo_tres() -> void:
 		if String(f).ends_with(".tres"):
 			encontrados.append(String(f).get_basename())
 	encontrados.sort()
-	_ok(encontrados == esperados, "las 3 piezas existen: %s" % str(encontrados))
+	# iter. 2 crecio el catalogo a 33 recetas (12 familias): las 3 prototipo deben
+	# seguir presentes, pero ya NO son las unicas.
+	var faltan: Array = []
+	for e in esperados:
+		if not encontrados.has(e):
+			faltan.append(e)
+	_ok(faltan.is_empty(), "las 3 piezas prototipo siguen en el catalogo (faltan: %s)" % str(faltan))
 
 	var pared = load("%s/pared_madera.tres" % dir)
 	_ok(pared is PlacementRule, "pared_madera es una PlacementRule")
 	_ok(String(pared.id) == "pared_madera" and pared.bloque == 8, "pared: id y bloque correctos")
 	_ok(String(pared.superficie_ofrecida) == "pared", "pared ofrece superficie 'pared'")
-	_ok(int(pared.costo.get("madera", 0)) == 4, "pared cuesta 4 de madera")
+	# iter. 2: el item_id se corrigio a uno REAL de M14 (data/items/planks.tres);
+	# "madera" NO existe como item y el costo era impagable.
+	_ok(int(pared.costo.get("planks", 0)) == 4, "pared cuesta 4 de planks (item real de M14)")
 
 	var techo = load("%s/techo_paja.tres" % dir)
 	_ok(techo.soportes_minimos == 2, "techo exige 2 soportes (regla de techos)")

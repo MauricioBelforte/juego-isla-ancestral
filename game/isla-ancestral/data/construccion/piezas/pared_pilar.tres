@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_ubxdh"]
+
+[resource]
+script = ExtResource("1_ubxdh")
+id = &"pared_pilar"
+nombre = "Pilar de piedra"
+variante = "pilar"
+familia = &"pared"
+costo = {
+"stone": 3
+}
+bloque = 3
+superficie_ofrecida = &"pared"

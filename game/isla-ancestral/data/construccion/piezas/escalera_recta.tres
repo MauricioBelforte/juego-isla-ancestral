@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_jamwt"]
+
+[resource]
+script = ExtResource("1_jamwt")
+id = &"escalera_recta"
+nombre = "Escalera recta"
+familia = &"escalera"
+costo = {
+"planks": 4
+}
+bloque = 8

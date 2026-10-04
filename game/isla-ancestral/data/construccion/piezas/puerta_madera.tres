@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_14s85"]
+
+[resource]
+script = ExtResource("1_14s85")
+id = &"puerta_madera"
+nombre = "Puerta de madera"
+familia = &"puerta"
+tamano = Vector2i(1, 2)
+altura = 2.0
+superficie_ok = Array[StringName]([&"piso", &"terreno"])
+requiere_pared = true
+costo = {
+"planks": 6
+}
+superficie_ofrecida = &"aire"

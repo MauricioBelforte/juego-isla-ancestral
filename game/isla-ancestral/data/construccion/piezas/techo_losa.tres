@@ -1,19 +1,18 @@
 [gd_resource type="Resource" script_class="PlacementRule" format=3]
 
-[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_lq6f5"]
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_3t1qv"]
 
 [resource]
-script = ExtResource("1_lq6f5")
-id = &"techo_paja"
-nombre = "Techo de paja"
-variante = "cumbrera"
+script = ExtResource("1_3t1qv")
+id = &"techo_losa"
+nombre = "Losa de techo"
 familia = &"techo"
 tamano = Vector2i(2, 2)
 altura = 0.5
 soportes_minimos = 2
 superficie_ok = Array[StringName]([&"pared", &"piso", &"techo"])
 costo = {
-"grass": 3
+"planks": 3
 }
 bloque = 25
 superficie_ofrecida = &"techo"

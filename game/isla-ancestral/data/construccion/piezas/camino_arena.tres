@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_vrrqj"]
+
+[resource]
+script = ExtResource("1_vrrqj")
+id = &"camino_arena"
+nombre = "Camino de arena"
+familia = &"camino"
+altura = 0.1
+superficie_ok = Array[StringName]([&"terreno"])
+costo = {
+"sand": 2
+}
+bloque = 24

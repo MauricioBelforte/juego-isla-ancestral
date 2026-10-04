@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_bq3we"]
+
+[resource]
+script = ExtResource("1_bq3we")
+id = &"farol_colgante"
+nombre = "Farol colgante"
+familia = &"iluminacion"
+costo = {
+"crystal": 1,
+"planks": 1
+}
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 24

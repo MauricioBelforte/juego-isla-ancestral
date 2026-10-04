@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_vsvnk"]
+
+[resource]
+script = ExtResource("1_vsvnk")
+id = &"piso_piedra"
+nombre = "Losa de piedra"
+familia = &"piso"
+altura = 0.5
+costo = {
+"stone": 3
+}
+bloque = 24

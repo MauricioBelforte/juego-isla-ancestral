@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_h0qmn"]
+
+[resource]
+script = ExtResource("1_h0qmn")
+id = &"estanteria"
+nombre = "Estanteria"
+familia = &"mueble"
+tamano = Vector2i(2, 1)
+costo = {
+"planks": 4
+}
+superficie_ofrecida = &"aire"
+es_mueble = true

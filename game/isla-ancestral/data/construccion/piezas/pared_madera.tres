@@ -6,8 +6,9 @@
 script = ExtResource("1_0f80i")
 id = &"pared_madera"
 nombre = "Pared de madera"
+familia = &"pared"
 costo = {
-"madera": 4
+"planks": 4
 }
 bloque = 8
 superficie_ofrecida = &"pared"

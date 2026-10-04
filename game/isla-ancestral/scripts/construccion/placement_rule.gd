@@ -23,6 +23,11 @@ extends Resource
 ## Variante de la pieza (p. ej. "esquina", "pilar", "cumbrera"). Va al save.
 @export var variante: String = ""
 
+## Familia del catalogo (RF12, bloque J). Una de `BuildCatalogDB.FAMILIAS`:
+## pared / piso / techo / puerta / ventana / escalera / puente / camino /
+## cerca / iluminacion / mueble / decoracion. Vacio = sin familia.
+@export var familia: StringName = &""
+
 ## Huella en celdas (x, z). 1x1 = pared/piso; 1x2 = puerta; 3x1 = puente.
 @export var tamano: Vector2i = Vector2i.ONE
 
@@ -110,6 +115,7 @@ static func desde_dict(d: Dictionary) -> PlacementRule:
 	r.id = StringName(String(d.get("id", "")))
 	r.nombre = String(d.get("nombre", ""))
 	r.variante = String(d.get("variante", ""))
+	r.familia = StringName(String(d.get("familia", "")))
 	var t: Variant = d.get("tamano", null)
 	if t is Vector2i:
 		r.tamano = t
@@ -142,6 +148,7 @@ func a_dict() -> Dictionary:
 		"id": String(id),
 		"nombre": nombre,
 		"variante": variante,
+		"familia": String(familia),
 		"tamano": [tamano.x, tamano.y],
 		"altura": altura,
 		"soportes_minimos": soportes_minimos,

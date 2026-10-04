@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlacementRule" format=3]
+
+[ext_resource type="Script" path="res://scripts/construccion/placement_rule.gd" id="1_ywfc3"]
+
+[resource]
+script = ExtResource("1_ywfc3")
+id = &"totem"
+nombre = "Totem ancestral"
+familia = &"decoracion"
+altura = 2.0
+costo = {
+"crystal": 1,
+"wood": 3
+}
+superficie_ofrecida = &"aire"
+es_mueble = true
+max_por_zona = 8

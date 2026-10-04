@@ -5,8 +5,8 @@
 
 | Campo | Valor |
 |---|---|
-| Módulo | M17 Construcción (iter. 1) |
-| Estado | 🔵 En curso (iter. 1) |
+| Módulo | M17 Construcción (iter. 2) |
+| Estado | 🔵 En curso (iter. 2) |
 | Agente | DeepSeek-V4.1-Flash (WorkBuddy) |
 | Fase | F5 (base de producción) |
 | Visión | V0 |
@@ -53,18 +53,18 @@
 - [ ] P14: objetos inválidos — toda regla fallida bloquea la colocación con motivo [S]
 - [ ] P15: colisiones — piezas con colisión estática real; puertas con hueco navegable [S]
 - [ ] P16: restricciones — reglas por pieza, topes por zona, alturas y parcelas ajenas [S]
-- [ ] P17: paredes — bloques 1x1x1 con variantes de esquina y pilar [S]
-- [ ] P18: pisos — losa 1x1x0.5 con soporte total para piezas encima [S]
-- [ ] P19: techos — losa y cumbrera que exigen 2+ soportes en la celda [S]
-- [ ] P20: puertas — marco 1x2 que exige pared y talla hueco navegable [S]
+- [x] P17: paredes — bloques 1x1x1 con variantes de esquina y pilar [S]
+- [x] P18: pisos — losa 1x1x0.5 con soporte total para piezas encima [S]
+- [x] P19: techos — losa y cumbrera que exigen 2+ soportes en la celda [S]
+- [x] P20: puertas — marco 1x2 que exige pared y talla hueco navegable [S]
 - [ ] P21: ventanas — 1x1 en pared, transparentes a la luz (M48) [S]
 - [ ] P22: escaleras — bloque inclinado que exige apoyo y conecta plantas [S]
 - [ ] P23: puentes — losa 1-4 celdas solo sobre agua dentro de zona permitida [S]
-- [ ] P24: caminos — losa plana a nivel de césped sin bloqueo de paso [S]
-- [ ] P25: cercas — valla de 0.7 m que marca límites sin encerrar al jugador [S]
+- [x] P24: caminos — losa plana a nivel de césped sin bloqueo de paso [S]
+- [x] P25: cercas — valla de 0.7 m que marca límites sin encerrar al jugador [S]
 - [ ] P26: iluminación — faroles con SpotLight/OmniLight ligados al ciclo M31 [S]
 - [ ] P27: muebles — camas, mesas, sillas y estanterías con interacción M18 [S]
-- [ ] P28: decoración — plantas, cuadros, alfombras y tótems de bajo costo [S]
+- [x] P28: decoración — plantas, cuadros, alfombras y tótems de bajo costo [S]
 
 ## C. Modo construcción: entrada, salida y UX (10)
 
@@ -95,14 +95,14 @@
 ## E. Previsualización fantasma (BuildGhost) (10)
 
 - [ ] Fantasma con mesh de la receta y material semi-transparente [M]
-- [ ] Color verde si la colocación es válida y rojo si es inválida [S]
+- [x] Color verde si la colocación es válida y rojo si es inválida [S]
 - [ ] El fantasma sigue al cursor con suavizado (lerp) sin saltos [M]
-- [ ] La celda objetivo se recalculada solo si el cursor cambió (cache) [M]
+- [x] La celda objetivo se recalculada solo si el cursor cambió (cache) [M]
 - [ ] El fantasma refleja la rotación y elevación actuales en tiempo real [S]
 - [ ] Se muestran en el HUD el costo y los motivos de rechazo (zona, soporte, ocupado, NPC, recursos) [M]
 - [ ] El fantasma se oculta automáticamente fuera de zona o sobre terreno no cargado [M]
-- [ ] Instancia única reutilizada del pool al entrar/salir del modo [M]
-- [ ] LOD del fantasma: simplificación simple de malla a distancia > 40 m [M]
+- [x] Instancia única reutilizada del pool al entrar/salir del modo [M]
+- [x] LOD del fantasma: simplificación simple de malla a distancia > 40 m [M]
 - [ ] El fantasma nunca colisiona con el mundo (capa de ignorancia de raycast) [S]
 
 ## F. Rotación, elevación y manipulación (10)
@@ -128,7 +128,7 @@
 - [ ] Escalera exige apoyo en piso o pared y no bloquea la circulación [M]
 - [ ] Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C]
 - [ ] Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M]
-- [ ] Techos exigen 2+ soportes (paredes o pilares) en las celdas de cobertura [C]
+- [x] Techos exigen 2+ soportes (paredes o pilares) en las celdas de cobertura [C]
 - [ ] Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C]
 - [ ] Las piezas no pueden bloquear la única salida de la zona de construcción [C]
 - [ ] Las piezas de ruina M25 y parcelas de NPC son siempre no colocables ni demolidas [M]
@@ -157,18 +157,18 @@
 
 ## J. Piezas y catálogo modular (12)
 
-- [ ] Catálogo estructurado por categorías con filtro por modo construcción/decoración [M]
+- [x] Catálogo estructurado por categorías con filtro por modo construcción/decoración [M]
 - [ ] Paredes: estándar, esquina, pilar y vano [M]
-- [ ] Pisos: losa interior y terraza [M]
-- [ ] Techos: losa plana y cumbrera [M]
-- [ ] Puertas: madera y piedra con hueco navegable [M]
-- [ ] Ventanas: marco simple y arco [M]
-- [ ] Escaleras: recta de 1 celda y de 2 celdas [M]
+- [x] Pisos: losa interior y terraza [M]
+- [x] Techos: losa plana y cumbrera [M]
+- [x] Puertas: madera y piedra con hueco navegable [M]
+- [x] Ventanas: marco simple y arco [M]
+- [x] Escaleras: recta de 1 celda y de 2 celdas [M]
 - [ ] Puentes: losa de 1, 2, 3 y 4 celdas [M]
 - [ ] Caminos: piedra, arena y césped apisonado [M]
 - [ ] Cercas: madera baja, piedra y bambú [S]
-- [ ] Iluminación: farol colgante, farol de piso y antorcha ancestral [M]
-- [ ] Muebles y decoración: cama, mesa, silla, estantería, planta, cuadro, alfombra y tótem [C]
+- [x] Iluminación: farol colgante, farol de piso y antorcha ancestral [M]
+- [x] Muebles y decoración: cama, mesa, silla, estantería, planta, cuadro, alfombra y tótem [C]
 
 ## K. Integración con el resto del sistema (12)
 
@@ -177,7 +177,7 @@
 - [ ] M14: descuento, devolución y almacenamiento de piezas como ítems [M]
 - [ ] M18: las ampliaciones de la casa usan proyectos de piezas de este módulo [C]
 - [ ] M25: ruinas como contenido solo visual (deconstruible = false) [M]
-- [ ] M64: señal obra_activa al entrar/salir y navmesh_delta al colocar/demoler [C]
+- [x] M64: señal obra_activa al entrar/salir y navmesh_delta al colocar/demoler [C]
 - [ ] M73: recetas de festival temporales en el catálogo (devolucion = 0) [M]
 - [x] M58: serialización de lista de piezas y restauración idempotente [C]
 - [ ] M31: faroles y luces conectados al ciclo día/noche [M]
@@ -191,7 +191,7 @@
 - [ ] Pieza encima de un NPC activo: rechazo temporal con motivo "NPC en el lugar" [C]
 - [x] Deshacer la última acción: restaura celdas y recursos exactamente [C]
 - [ ] Redo tras deshacer solo disponible si no se realizó una acción intermedia [M]
-- [ ] Pieza en el aire sin soporte: bloqueo con motivo de soporte [M]
+- [x] Pieza en el aire sin soporte: bloqueo con motivo de soporte [M]
 - [ ] Colocar sobre techo: permitido solo si la superficie lo declara (techos con vegetación) [M]
 - [ ] Cerrar el modo con el fantasma activo: se devuelve al pool y no queda estado inconsistente [M]
 - [ ] Guardado a mitad de colocación (pieza fantasma activa): se descarta el fantasma, nada se persiste [M]
@@ -245,11 +245,18 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 23 · Pendientes: 152 · No resueltos: 0.
+**Totales:** 175 ítems · Completados: 45 · Pendientes: 130 · No resueltos: 0.
 
 > **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1211, 2026-10-03, iter. 1):**
 > +12 [x] (P5, P8, G1, G2, G3, H1, I1, I3, L3, M5, K-M58, P-costos) respaldados por el
 > nucleo `scripts/construccion/` y la suite `test_construccion.gd` (131 checks, 0 fallos).
+
+> **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1212, 2026-10-03, iter. 2):**
+> +22 [x] respaldados por el catalogo data-driven de 12 familias (33 recetas .tres con
+> ids de item REALES de M14), `BuildCatalogDB`/`BuildPreview`/`BuildGhost` y la suite
+> `test_construccion_iter2.gd` (99 checks, 0 fallos; guarda anti-falso-verde probada con
+> 3 sondas en ROJO). Corrige ademas la receta techo 1x1 con `soportes_minimos=2`
+> (inconstruible por huella: no puede aportar 2 soportes) -> 2x2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 11 [x] / 164 [ ] / 0 [?].
