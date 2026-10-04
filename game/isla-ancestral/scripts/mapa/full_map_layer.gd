@@ -29,7 +29,7 @@ var _is_open: bool = false
 
 func _ready() -> void:
 	visible = false
-	_mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build_ui()
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
@@ -42,10 +42,11 @@ func _build_ui() -> void:
 	add_child(bg)
 	bg.gui_input.connect(_on_bg_input)
 
-	# Panel central del mapa
+	# Panel central del mapa (600x500: tamano minimo + preset centrado;
+	# `set_anchors_and_offsets_preset` NO acepta un Vector2 como 3er arg -> margin es int)
 	var panel := PanelContainer.new()
-	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_MINSIZE, Vector2(600, 500))
-	panel.position -= Vector2(300, 250)
+	panel.custom_minimum_size = Vector2(600, 500)
+	panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER, Control.PRESET_MODE_MINSIZE)
 	add_child(panel)
 
 	var margin := MarginContainer.new()

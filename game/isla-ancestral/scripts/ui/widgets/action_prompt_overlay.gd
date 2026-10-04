@@ -47,6 +47,27 @@ const ACTION_TO_PROMPT := {
 	"pausa": "pause",
 }
 
+## Nombres legibles de botones de gamepad.
+## Godot 4.7.2 NO expone `Input.get_joy_button_string()` (verificado con
+## `Input.get_method_list()`: no existe) -> se mapea a mano el enum JoyButton.
+const JOY_BUTTON_NAMES := {
+	JOY_BUTTON_A: "A",
+	JOY_BUTTON_B: "B",
+	JOY_BUTTON_X: "X",
+	JOY_BUTTON_Y: "Y",
+	JOY_BUTTON_BACK: "View",
+	JOY_BUTTON_GUIDE: "Guide",
+	JOY_BUTTON_START: "Start",
+	JOY_BUTTON_LEFT_STICK: "L3",
+	JOY_BUTTON_RIGHT_STICK: "R3",
+	JOY_BUTTON_LEFT_SHOULDER: "LB",
+	JOY_BUTTON_RIGHT_SHOULDER: "RB",
+	JOY_BUTTON_DPAD_UP: "D-Pad Up",
+	JOY_BUTTON_DPAD_DOWN: "D-Pad Down",
+	JOY_BUTTON_DPAD_LEFT: "D-Pad Left",
+	JOY_BUTTON_DPAD_RIGHT: "D-Pad Right",
+}
+
 ## ── Ciclo de vida ──────────────────────────────────────
 
 func _ready() -> void:
@@ -103,7 +124,8 @@ func _event_to_display_text(evento: InputEvent) -> String:
 	if evento is InputEventKey:
 		return OS.get_keycode_string(evento.keycode)
 	elif evento is InputEventJoypadButton:
-		return Input.get_joy_button_string(evento.button_index)
+		var btn: int = int(evento.button_index)
+		return String(JOY_BUTTON_NAMES.get(btn, "Btn %d" % btn))
 	elif evento is InputEventJoypadMotion:
 		var axis_name := ""
 		if evento.axis == JOY_AXIS_LEFT_X or evento.axis == JOY_AXIS_RIGHT_X:

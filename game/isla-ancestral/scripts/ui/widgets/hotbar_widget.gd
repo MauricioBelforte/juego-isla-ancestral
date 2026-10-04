@@ -49,7 +49,7 @@ func refresh() -> void:
 		var tooltip_text := ""
 
 		# Intentar leer del inventario directamente
-		var slot_data := _read_hotbar_slot(inv, i)
+		var slot_data: Variant = _read_hotbar_slot(inv, i)
 		if slot_data != null:
 			item_id = str(slot_data.get("item_id", ""))
 			quantity = int(slot_data.get("cantidad", 0))

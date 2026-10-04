@@ -35,7 +35,7 @@
 
 ## C. RF2 Mapa completo (12)
 
-- [x] Crear FullMapLayer como UILayer tipo MODAL_FULL de M53 [S]
+- [x] Crear FullMapLayer como UILayer tipo MODAL_FULL de M53 [S] -- DeepSeek-V4.1-Flash 2026-10-04: fix de 2 parse errors de BUG-091 (L32: `_mouse_filter` -> `mouse_filter`; L47: `set_anchors_and_offsets_preset` no acepta Vector2 como 3er arg -> `custom_minimum_size` + preset centrado). `--check-only` EXIT 0; hud.tscn carga OK.
 - [x] Generar la textura base del mapa de la isla Aurora desde el chunk data del mundo (M10) [C] -- agnes-3-flash 2026-10-02: `bake_map_texture()` samplea `TerrainLocator.get_height(x,z)` (VoxelTerrain real) y mapea a colores (agua/arena/verde/pardo); fallback blob en headless
 - [ ] — agnes-2.5-flash 2026-09-12: estilo ilustrado cozy documentado en 03-Diseno.md §2.1 (manchas bioma con paleta pastel, bordes suaves); IMPLEMENTACI脫N requiere M45/M46 assets artísticos; KnownIssue no bloqueante DoD.
 - [x] Nombres de región con fuentes M88 (Nunito/Fredoka One) y jerarquía M53 [M] -- agnes-2.5-flash 2026-09-12: — agnes-3-flash 2026-10-02: FullMapLayer legend + minimap markers usan ThemeUx (M88 fonts); jerarquia M53 aplicada

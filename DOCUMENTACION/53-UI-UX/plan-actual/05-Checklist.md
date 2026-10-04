@@ -41,9 +41,9 @@
 - [x] Crear ClockWidget con formato cozy "Otoño 3, 14:30" (M29/M30) [S]
 - [x] Crear SeasonWidget con icono y texto de estación [S]
 - [x] Crear ResourceCounter con contadores de recursos principales (M38) [S]
-- [x] Crear HotbarWidget sincronizado por eventos del inventario (M11) [S]
+- [x] Crear HotbarWidget sincronizado por eventos del inventario (M11) [S] -- DeepSeek-V4.1-Flash 2026-10-04: fix de parse error de BUG-091 (L52: `var slot_data := _read_hotbar_slot(...)` inferido desde Variant -> tipo explicito `Variant`). `--check-only` EXIT 0; hud.tscn carga OK.
 - [x] Crear InteractPrompt contextual de "puedes interactuar" (M70) [S]
-- [x] Crear ActionPromptOverlay con prompts dinámicos por dispositivo (M57) [S]
+- [x] Crear ActionPromptOverlay con prompts dinámicos por dispositivo (M57) [S] -- DeepSeek-V4.1-Flash 2026-10-04: fix de parse error de BUG-091 (L106: `Input.get_joy_button_string()` NO existe en 4.7.2 -> mapa manual del enum JoyButton). `--check-only` EXIT 0.
 - [x] Implementar force_refresh puntual y refresh a baja frecuencia (2 Hz) sin polling por frame [M]
 - [x] Implementar set_hud_visible(false) para M56 Fotografía y capturas [S]
 - [x] Verificar que el HUD no tape el centro de la pantalla (regla de layout) [S]
