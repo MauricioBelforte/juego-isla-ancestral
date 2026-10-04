@@ -13,7 +13,7 @@ func _run() -> void:
     var categoria := "default"
     var seleccion := EditorInterface.get_selection()
     if not seleccion.get_selected_nodes().is_empty():
-        var recurso := seleccion.get_selected_nodes()[0]
+        var recurso: Variant = seleccion.get_selected_nodes()[0]
         if recurso is String and recurso.contains("/"):
             categoria = recurso.split("/")[-1]
 

@@ -14,7 +14,7 @@ var _dock: PanelContainer
 func _enter_tree() -> void:
 	_dock = load("res://scripts/editor/tools/recipe_tool.gd").new()
 	_dock.name = "HerramientasInternas"
-	add_control_to_dock(DOCK_SLOT_BOTTOM_LEFT, _dock)
+	add_control_to_dock(DOCK_SLOT_BOTTOM, _dock)
 	print("[M109] Plugin de herramientas internas activado (Editor de Recetas)")
 
 func _exit_tree() -> void:

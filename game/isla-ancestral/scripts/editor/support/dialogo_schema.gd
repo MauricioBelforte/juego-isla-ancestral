@@ -32,7 +32,7 @@ static func validar_grafo(dialogo: Dictionary) -> Array[String]:
 	var alcanzables := {}
 	var pila: Array[String] = [start]
 	while not pila.is_empty():
-		var nid := pila.pop_back()
+		var nid: String = pila.pop_back()
 		if alcanzables.has(nid):
 			continue
 		alcanzables[nid] = true

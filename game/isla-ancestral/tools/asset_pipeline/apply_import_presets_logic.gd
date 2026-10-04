@@ -176,14 +176,14 @@ func _aplicar_preset_import(import_path: String, preset: Dictionary) -> Array[St
         return cambios
 
     var data: Dictionary = json.get_data()
-    var params := data.get("params", {})
-    var settings := preset.get("settings", {})
+    var params: Dictionary = data.get("params", {})
+    var settings: Dictionary = preset.get("settings", {})
     var modificado := false
 
     for clave in settings:
-        var esperado := settings[clave]
+        var esperado: Variant = settings[clave]
         if params.has(clave):
-            var actual := params[clave]
+            var actual: Variant = params[clave]
             if _valores_distintos(actual, esperado):
                 params[clave] = esperado
                 modificado = true

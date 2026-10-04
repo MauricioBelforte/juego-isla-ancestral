@@ -527,6 +527,12 @@ jobs:
           godot --headless --script scripts/stream/test_rf2_threaded.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_stream_m63_iter5.gd 2>&1 || FAIL=1
           godot --headless --script scripts/stream/test_stream_m63_iter6.gd 2>&1 || FAIL=1
+          # M29 iter.2 (DeepSeek, Log 1257): suites gdUnit4 muertas convertidas
+          # a headless vivas. 74/0 y 51/0 checks (x3 ejecuciones). Gate duro.
+          godot --headless --script tests/unit/time/test_time_calendar.gd 2>&1 || FAIL=1
+          godot --headless --script tests/integration/test_time_calendar_events.gd 2>&1 || FAIL=1
+          # M68 iter.3 (Log 1251): waypoints + edge cases de transporte. 108/0.
+          godot --headless --script scripts/transporte/test_transporte_m68_iter3.gd 2>&1 || FAIL=1
           echo "All validation tests completed"
           exit $FAIL
 

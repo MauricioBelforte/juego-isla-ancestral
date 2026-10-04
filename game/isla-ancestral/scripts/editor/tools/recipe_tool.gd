@@ -21,7 +21,19 @@ func _ready() -> void:
 	_cargar_json()
 
 func _cargar_json() -> void:
-	_recetas = load("res://data/balance/crafting.json").get("recetas", {}) if FileAccess.file_exists(RUTA_DATOS) else {}
+	_recetas = {}
+	if not FileAccess.file_exists(RUTA_DATOS):
+		return
+	var f := FileAccess.open(RUTA_DATOS, FileAccess.READ)
+	if f == null:
+		return
+	var texto := f.get_as_text()
+	f.close()
+	var json := JSON.new()
+	if json.parse(texto) == OK:
+		var doc: Variant = json.data
+		if doc is Dictionary:
+			_recetas = doc.get("recetas", {})
 
 func listar() -> Array[String]:
 	return Array(_recetas.keys(), TYPE_STRING, "", null)
@@ -50,12 +62,14 @@ func guardar(valores: Dictionary) -> String:
 		if campo == "id" or campo == "coste_recursos":
 			continue
 		var v: Variant = valores.get(campo, "")
-		if campo == "nivel" or campo == "coste_ao" or campo == "resultado_cantidad":
-			v = string2num(str(v))
+		if campo == "coste_ao":
+			v = str(v).to_float()
+		elif campo == "nivel" or campo == "resultado_cantidad":
+			v = str(v).to_int()
 		receta[campo] = v
 	receta["coste_recursos"] = costes
 	var errores: Array[String] = SRC_SCHEMA.validar(id, receta)
-	if errores.is_empty():
+	if not errores.is_empty():
 		return "⚠️ Receta inválida: " + ", ".join(errores)
 	# guardar con backup .bak
 	var f := FileAccess.open(RUTA_DATOS, FileAccess.READ)
@@ -63,10 +77,16 @@ func guardar(valores: Dictionary) -> String:
 		var old := f.get_as_text()
 		f.close()
 		var bak := FileAccess.open(RUTA_DATOS + ".bak", FileAccess.WRITE)
-	if bak:
-		bak.store_string(old)
+		if bak:
+			bak.store_string(old)
+			bak.close()
+	_recetas[id] = receta
 	var doc := {"schema_version": 1, "recetas": _recetas}
-	doc["recetas"][id] = receta
-	var ok := FileAccess.store_json(RUTA_DATOS, doc)
+	var ok := false
+	var out := FileAccess.open(RUTA_DATOS, FileAccess.WRITE)
+	if out:
+		ok = true
+		out.store_string(JSON.stringify(doc, "\t"))
+		out.close()
 	print("[M109] Receta guardada: %s → crafting.json (%s)" % [id, "OK" if ok else "FAIL"])
 	return "Receta %s guardada con backup .bak" % id

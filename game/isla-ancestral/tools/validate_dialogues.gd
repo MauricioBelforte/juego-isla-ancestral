@@ -70,7 +70,7 @@ func _validate_file(path: String) -> Array:
 		errors.append("JSON invalido: " + json.get_error_message())
 		return errors
 
-	var data := json.data
+	var data: Variant = json.data
 	if not data is Dictionary:
 		errors.append("Root no es un Dictionary")
 		return errors

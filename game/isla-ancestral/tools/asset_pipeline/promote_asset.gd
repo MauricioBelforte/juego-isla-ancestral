@@ -15,9 +15,9 @@ func _run() -> void:
         print("[M108] promote_asset: selecciona un archivo en FileSystem.")
         return
 
-    var recurso := seleccion.get_selected_nodes()[0]
-    if recurso is not String:
-        var ruta := recurso.resource_path if recurso.has_method("get_path") else ""
+    var recurso: Variant = seleccion.get_selected_nodes()[0]
+    if recurso is Resource:
+        var ruta: String = recurso.resource_path
         if ruta.is_empty():
             print("[M108] promote_asset: no se pudo obtener la ruta del recurso.")
             return

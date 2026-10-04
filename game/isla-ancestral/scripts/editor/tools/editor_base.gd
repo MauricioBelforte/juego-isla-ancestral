@@ -63,7 +63,6 @@ func configurar(editor_nombre: String, ruta_datos: String, items_cargados: Calla
 	_items_cargados = items_cargados
 	_campos_form = campos_form
 	_guardado = guardado
-	var titulo: Label = get_node("VBoxContainer" if false else "") if get_node_or_null("") else null
 	recargar()
 
 func recargar() -> void:
@@ -84,7 +83,7 @@ func _render_form(item_id: String) -> void:
 	for child in _form_box.get_children():
 		child.queue_free()
 	_campos = _campos_form.call(item_id)  # nombre -> [valor, editable]
-	for campo in _campos:
+	for campo: String in _campos:
 		var fila := HBoxContainer.new()
 		var label := Label.new()
 		label.text = campo
@@ -104,11 +103,11 @@ func _guardar_entrada() -> void:
 	if not _guardado.is_valid():
 		return
 	var valores := {}
-	for campo in _campos:
+	for campo: String in _campos:
 		var edit: LineEdit = _form_box.get_node_or_null(campo)
 		if edit:
 			valores[campo] = edit.text
-	var res := _guardado.call(valores)
+	var res: String = _guardado.call(valores)
 	_estado_msg(str(res))
 
 func _borrar_entrada() -> void:
