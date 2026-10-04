@@ -355,3 +355,14 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] Docs M53: `03-Diseno`/`04-Codigo`/`05-Checklist` (7 ítems nuevos `[ ]` ya agregados) [S]
 - [x] Cierre: suites + log + registros + commit Trampa 114 + informe 11 [S]
 - [x] Log reservado y creado: **1273** — M53 sección Audio (Opción A canal 10): SettingsAudioLayer + routing ajustes_pedido + i18n + deprecación game_settings + docs; suites 51/0, 0, 0, 136/0; fila 53 liberada 139/165
+
+---
+
+## Módulo 🔵 ACTUAL — 55-Diario-Del-Jugador (frente T-M1, canal 12)
+
+- [x] **T-M0 — A2 M62 (CI rojo)** (canal 13, prioridad alta) — fix `A2|SubtitleManager->DataStore`: `DataStore` movido antes que `SubtitleManager` en `[autoload]` de `project.godot` (1 línea); rojo `exit=1` → verde `exit=0` + selftest `0 fallos`; Log **1285**; ⚠️ verde de CI en GitHub pendiente de push (confirmar con director)
+- [→] **T-M1 M55 Diario del Jugador** (reclamado 2026-10-04 17:55, canal 12 archivo 12; brevemente pausado por T-M0/canal 13, retomado 19:51) — UI del diario sobre DiaryService; leer TODO `plan-actual/` antes de codificar; al cierre: suites + docs + log + informe 15
+- [ ] **T-M2 M89 Diseno-De-Menus** (24/125, después de T-M1) — ⚠️ fila CG malformada (13 celdas) + nota vieja «🟡 Reclamado por agnes-2.5-flash» (2026-09-04, >24h → reclamable); reconstruir la fila al reclamar (precedente: fila 53)
+- [ ] **M88 Fuentes-Tipograficas** 🟡 10/177 — opcional tras T-M2; ANTES verificar estado real de fila + superposición con BUG-042 (DeepSeek, fuentes)
+
+**Restricciones vigentes (canal 12):** no `quality.yml` · no M91 · no `interaction_manager` (BUG-096, kimi M70) · no `service_registry.gd` (BUG-097, agnes) · sin arquitectura visual/3D (§21.14)
