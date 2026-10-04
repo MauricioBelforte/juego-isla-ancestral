@@ -275,7 +275,12 @@ Log reservado: 512
 **Iteración 5 — 5 ítems [x] verificados con test ejecutado, 5 [?] honestos restantes. Total módulo: 57 [x] + 110 [ ] + 5 [?] (de 172). Módulo liberado a 🟡.**
 **Iteración 4 — 27 ítems [x] verificados en código, 6 [?] honestos. Total módulo: 52 [x] + 114 [ ] + 6 [?] (de 172). Módulo liberado a 🟡.**
 
-**Totales:** 186 ítems · Completados: 43 · Pendientes: 134 · No resueltos: 9.
+**Totales:** 208 items · Completados: 43 · Pendientes: 156 · No resueltos: 9.
+
+> **Actualizado (atria-dawn-preview / Kilo Code, 2026-10-04, Log 1245):** se agrego la
+> seccion N (contrato de mejora y reparacion de herramientas, 22 items nuevos) por
+> decision del usuario tras la auditoria DoD de s2. Totales anteriores: 186 items / 43
+> [x] / 134 [ ] / 9 [?]. Las marcas de las secciones A-M no se tocaron.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 1):**
 > este archivo no tenía línea de Totales canónica, solo notas de iteración con
@@ -284,3 +289,79 @@ Log reservado: 512
 > 9 [?] = 186: el checklist creció 14 ítems desde esas notas y la cuenta de [x]
 > bajó. Las marcas no se tocaron; las notas de iteración se conservan como
 > historial. No se reconstruye qué ítem cambió (sin registro intermedio).
+
+---
+
+## N. Contrato de mejora y reparacion de herramientas (decision del usuario 2026-10-04)
+
+> **Origen:** auditoria DoD de atria-dawn-s2 (canal atria-dawn-s2, archivo
+> 03, 2026-10-04). La mejora y reparacion de herramientas que M13 necesita **no tenia
+> dueno en ningun modulo**: M16 no la planeaba en su checklist (solo una linea suelta de
+> diseno sobre reparacion en fogata) y M13 tampoco. Eso frena **12 de los 34 `[ ]` de M13**
+> y bloquea a M158 (Herramientas-Y-Desbloqueo-De-Zonas). **Decision del usuario
+> (2026-10-04, Log 1245): el contrato se define en M16.** M13 consume la API; M16 es el
+> dueno del diseno, el schema y el balance. Esta seccion es ese contrato.
+
+### N.1 Contrato y modelo de datos (7)
+
+- [ ] RF-MR1: `mejorar_herramienta(item_id: String) -> Dictionary` en `CraftingService` con
+  retorno honesto `{ok, motivo, nivel_anterior, nivel_nuevo}` (sin consumir si falla) [M]
+- [ ] RF-MR2: `reparar_herramienta(item_id: String) -> Dictionary` — restaura la durabilidad
+  de la herramienta al maximo de su nivel actual, retorno honesto idem [M]
+- [ ] RF-MR3: schema `data/crafting/mejora_herramienta.json`: tabla por tipo de herramienta
+  (hacha/martillo/azada/machete) con `coste_nivel[N]` (materiales por nivel) y `nivel_maximo`
+  por tipo [M]
+- [ ] RF-MR4: funciones de balance `durabilidad_maxima(tipo, nivel)` y
+  `efectividad(tipo, nivel)` — curva por tipo que M13 consume para escalado [M]
+- [ ] RF-MR5: integracion con M14 — mejorar/reparar consumen materiales del inventario via
+  `InventoryService`; fallo con motivo `materiales_insuficientes` **sin consumo parcial** [M]
+- [ ] RF-MR6: senales `herramienta_mejorada(item_id, nivel)` y
+  `herramienta_reparada(item_id, durabilidad)` emitidas solo en exito [S]
+- [ ] RF-MR7: persistencia del `nivel_mejora` por item en el save de M59 (campo aditivo,
+  sin romper partidas existentes) [M]
+
+### N.2 Estacion (4)
+
+- [ ] RF-MR8: decision de estacion documentada en `03-Diseno.md` — estacion nueva
+  (`yunque_de_mejora`) o reutilizacion de la fogata existente, con la justificacion [S]
+- [ ] RF-MR9: la estacion elegida se registra en `stations.json` con las recetas de
+  mejora y reparacion por tipo de herramienta [M]
+- [ ] RF-MR10: la estacion rechaza items que no son herramientas (M13 define la marca) con
+  motivo `no_es_herramienta` [S]
+- [ ] RF-MR11: feedback cozy — el fallo por materiales **no dana** la herramienta (no es
+  punitivo, coherente con la filosofia del modulo) [S]
+
+### N.3 Interfaz (3)
+
+- [ ] RF-MR12: panel de mejora en la estacion: nivel actual, coste del siguiente nivel,
+  durabilidad maxima resultante y boton deshabilitado cuando no se puede mejorar (techo o
+  materiales) [M]
+- [ ] RF-MR13: preview del coste con los iconos de M14 (feedback honesto de lo que se va a
+  consumir antes de confirmar) [S]
+- [ ] RF-MR14: notificacion cozy en exito reutilizando el `NotificationService` del modulo [S]
+
+### N.4 Integracion con M13 (3)
+
+- [ ] RF-MR15: M13 consume `efectividad(tipo, nivel)` para el escalado de rendimiento
+  (velocidad de tala/mineria, etc.) [M]
+- [ ] RF-MR16: M13 consume `durabilidad_maxima(tipo, nivel)` como techo al aplicar la
+  reparacion [S]
+- [ ] RF-MR17: contrato consumido documentado en el `04-Codigo.md` de M13 (firma de la API
+  que M13 usa) [S]
+
+### N.5 Testing y QA (3)
+
+- [ ] RF-MR18: test headless `_test_mejora_reparacion` — mejora consume materiales y sube
+  nivel, reparacion restaura durabilidad, fallo por materiales no consume ni dana [C]
+- [ ] RF-MR19: sonda en ROJO del umbral (mutacion de `CHECKS_MINIMOS` restaurada byte-exacto) [S]
+- [ ] RF-MR20: verificacion §21.8 por un modelo distinto al implementador [S]
+
+### N.6 Documentacion y desbloqueo (2)
+
+- [ ] RF-MR21: `03-Diseno.md` actualizado con el contrato completo (API, curvas, estacion,
+  balance) [S]
+- [ ] RF-MR22: desbloqueo de M158 registrado en CHECKLIST-GLOBAL (los 12 `[ ]` de M13 que
+  dependian de este contrato pasan a tener dueno) [S]
+
+**Seccion N — 22 items nuevos (todos `[ ]`).** Esta seccion es la que desbloquea los 12
+`[ ]` de M13 y, con ellos, el frente de M158. Ningun item de las secciones A-M se toco.

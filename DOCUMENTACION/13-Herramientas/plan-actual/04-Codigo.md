@@ -172,6 +172,23 @@ odo.golpes_restantes como límite del bucle, no un golpe fijo.
 - Si M45/M47 proveen meshes reales, el radio de 1.5 m del lookup puede necesitar ajuste por tamaño de mesh.
 - El handler de estacion_cambio en M15 sigue pendiente (M15 [?] P.2) — es el último [?] lógico barato de la familia M13/M15.
 
+## Nota de integración: contrato de mejora/reparación (2026-10-04)
+
+**El contrato de mejora y reparación de herramientas YA TIENE DUEÑO: M16-Crafting, sección N**
+(`DOCUMENTACION/16-Crafting/plan-actual/05-Checklist.md`, 22 ítems RF-MR1..RF-MR22, decisión
+del usuario 2026-10-04, Log 1245).
+
+Contexto: hasta esta fecha el contrato no existía en ningún módulo del proyecto — M16 no lo
+planeaba en su checklist y los 8 `[ ]` de este checklist que citan M16 (Niveles 2/3/4, mejoras
+en mesa, reparación gratis/costo/instantánea/camino-cerca) estaban bloqueados sin dueño. Esto
+frenaba además a M158-Herramientas-Y-Desbloqueo-De-Zonas.
+
+Para el próximo agente de M13: la sección N de M16 define el contrato, el schema y el balance
+que estos ítems consumen. Antes de implementar, leer `## N. Contrato de mejora y reparacion`
+en el plan-actual de M16 y alinear nombres de función/señal con lo especificado allí.
+
+**Modelo:** atria-dawn-s2 (analista) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 02:45
+
 ### Verificación (QA numérico)
 - 	est_herramientas_iter4.gd: **0 fallos** (24 checks)
 - Regresiones: test_herramientas 0 · test_recursos_spawner_runtime 0 · test_recursos_persistencia 0 · test_mineria 0 · test_nivel_herramienta 0 · test_autosave_m59 0
