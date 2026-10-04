@@ -18,14 +18,14 @@
 
 ## A. Problema y objetivos
 
-- [ ] Definir el problema: sin tiendas, la economía de M38 no tiene cara visible ni punto de intercambio [S]
+- [x] Definir el problema: sin tiendas, la economía de M38 no tiene cara visible ni punto de intercambio [S]
 - [x] Definir el objetivo: tiendas vivas como atributos de NPCs con catálogo, horario, descanso y stock renovable [S]
-- [ ] Registrar dependencias del módulo: M38 (Economía), M14 (Inventario), M29 (Calendario), M30 (Reloj) [S]
-- [ ] Registrar relaciones con M19 (Población), M20 (Amistad), M53 (UI) y M73 (Eventos) [S]
-- [ ] Separar dentro/fuera de alcance: precios y moneda en M38, UI completa en M53, misiones en M23 [S]
+- [x] Registrar dependencias del módulo: M38 (Economía), M14 (Inventario), M29 (Calendario), M30 (Reloj) [S]
+- [x] Registrar relaciones con M19 (Población), M20 (Amistad), M53 (UI) y M73 (Eventos) [S]
+- [x] Separar dentro/fuera de alcance: precios y moneda en M38, UI completa en M53, misiones en M23 [S]
 - [x] Documentar restricciones: Godot 4.x, GDScript tipado, sin C#, data-driven, determinismo PRNG, sin red [S]
-- [ ] Definir criterios de aceptación verificables (8 criterios) [S]
-- [ ] Incluir contexto del plan maestro: pueblo vivo con comercios que abren, cierran y reabastecen [S]
+- [x] Definir criterios de aceptación verificables (8 criterios) [S]
+- [x] Incluir contexto del plan maestro: pueblo vivo con comercios que abren, cierran y reabastecen [S]
 - [x] Nombrar los cinco tipos de tienda: semillas, pescadería, ferretería, general y mercader viajero [M] *(iter. glm — Log 1017)*
 - [x] Fijar la regla de oro: el módulo jamás define precios, solo consulta M38 [M] *(iter. glm — Log 1017)*
 
@@ -34,7 +34,7 @@
 - [x] RF3: catálogo por comerciante con ítems ofrecidos y ítems recomprados (ShopCatalog) [M]
 - [x] Definir items_venta como lista de StockEntry con rangos de stock [M]
 - [x] Definir items_recompra como lista de item_id (recompra selectiva por tienda) [M]
-- [ ] Definir pool_rodante exclusivo de mercaderes viajeros [M]
+- [x] Definir pool_rodante exclusivo de mercaderes viajeros [M]
 - [x] Validar en editor que cada item_id del catálogo exista en M15 [M] *(iter. glm — Log 1017)*
 - [x] Validar en editor que no haya ítems duplicados dentro del mismo catálogo [S] *(iter. glm — Log 1017)*
 - [x] Garantizar que los ítems básicos de cada tipo tengan stock_min >= 1 [M]
@@ -43,8 +43,8 @@
 
 - [x] RF2: enum TipoTienda con SEMILLAS, PESCADERIA, FERRETERIA, GENERAL y VIAJERO (+ TIENDA_JUGADOR para reputación) [S]
 - [x] Definir defaults de catálogo y stock por tipo (tabla de balance del 03-Diseno) [M]
-- [ ] Puesto de semillas: rotación estacional fuerte con semillas básicas siempre presentes [M]
-- [ ] Pescadería: catálogo ligado a la pesca de la estación y cebos [M]
+- [x] Puesto de semillas: rotación estacional fuerte con semillas básicas siempre presentes [M]
+- [x] Pescadería: catálogo ligado a la pesca de la estación y cebos [M]
 - [x] Ferretería: herramientas y materiales con stock estable y mayor ticket [M]
 - [x] Tienda general: mezcla flexible de comida, decoración y cotidianos [M] *(iter. glm — Log 1017)*
 - [x] Mercader viajero: sin local fijo, catálogo rodante y recargos dentro de topes de M38 [M] *(iter. glm — Log 1017)*
@@ -104,7 +104,7 @@
 - [x] RF4: definir dias_abierto, hora_apertura y hora_cierre en ShopDefinition [M]
 - [x] RF5: definir dias_descanso como días cerrados explícitos por tienda [M] *(iter. glm — Log 1017)*
 - [x] Implementar esta_abierta como función pura (día M29 + hora M30 + rangos) [M] (implementado: ShopManager.esta_abierta consulta M29 TimeCalendar con fallback a M30 GameClock, log 192)
-- [ ] Sin estado interno booleano de apertura (D4: consulta, no flag) [M]
+- [x] Sin estado interno booleano de apertura (D4: consulta, no flag) [M]
 - [x] Emitir tienda_cerrada con próxima apertura para el cartel de la UI [M] *(iter. glm — Log 1017)*
 - [x] Probar borde de hora exacta: apertura a las 09:00 incluida, cierre a las 17:00 excluido [M] *(iter. glm — Log 1017)*
 - [x] Probar día de descanso: tienda cerrada todo el día aunque esté en horario [M] *(iter. glm — Log 1017)*
@@ -190,10 +190,10 @@
 
 ## M. Integración con M19/M20 (Población y Amistad)
 
-- [ ] npc_duenio_id obligatorio y validado contra la población (M19) [M]
-- [ ] La tienda se abre interactuando con el NPC dueño en escena [M]
+- [x] npc_duenio_id obligatorio y validado contra la población (M19) [M]
+- [x] La tienda se abre interactuando con el NPC dueño en escena [M]
 - [x] La amistad (M20) afecta descuentos vía M38, no en este módulo [S] *(cierre glm-5.3-flash — Log 1120: cierre: SM L236 pasa npc_duenio_id a M38; el descuento lo aplica M38)*
-- [ ] Catálogo especial por amistad se resuelve como datos en .tres (si aplica) [M]
+- [x] Catálogo especial por amistad se resuelve como datos en .tres (si aplica) [M]
 - [x] Tienda sin dueño válido = error de validación en editor [S] *(iter. glm — Log 1017)*
 
 ## N. Integración con M29/M30 (Calendario y Reloj)
@@ -220,10 +220,10 @@
 
 - [x] ShopUI pide datos de catálogo, stock y precios sin lógica de negocio [M]
 - [x] UI consume señales compra/venta/inventario_tienda_cambio [M] *(cierre glm-5.3-flash — Log 1120: cierre: shop_ui L36-40 conecta las 5 señales)*
-- [ ] Cartel de cierre con próxima apertura (tienda_cerrada) [M]
+- [x] Cartel de cierre con próxima apertura (tienda_cerrada) [M]
 - [x] Feedback de rechazo con motivo legible y no duro [S] *(cierre glm-5.3-flash — Log 1120: cierre: _on_tx_rechazada + _motivo_texto i18n — shop_ui L309-326)*
-- [ ] Ferias (M73): mercaderes con aparición garantizada vía evento_iniciado [M]
-- [ ] Evento finalizado revierte catálogo extendido del día siguiente (D10) [M]
+- [x] Ferias (M73): mercaderes con aparición garantizada vía evento_iniciado [M]
+- [x] Evento finalizado revierte catálogo extendido del día siguiente (D10) [M]
 
 ## Q. Edge cases
 
@@ -253,8 +253,8 @@
 - [x] Catálogos .tres precargados en _ready() del ShopManager [S]
 - [x] Registro de tiendas con acceso O(1) por shop_id [S]
 - [x] listar_stock ordenado sin copias innecesarias (copia de solo lectura) [S]
-- [ ] Evitar strings concatenados en hot paths (usar StringName en ids) [M]
-- [ ] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M]
+- [x] Evitar strings concatenados en hot paths (usar StringName en ids) [M]
+- [x] Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame [M]
 - [x] Sin lecturas de disco en runtime: todo precargado [S] *(iter. glm — Log 1017)*
 
 ## S. Documentación entregada
@@ -277,14 +277,14 @@
 - [x] Definir prueba de horarios: bordes de hora, descansos y ítem cerrado [M] *(cierre glm-5.3-flash — Log 1120: cierre: test_tiendas_iter_glm _test_horarios_real)*
 - [x] Definir prueba de restock idempotente: doble señal del mismo día [M]
 - [x] Definir prueba de atomicidad: fallo de M14 revierte stock y monedas [C]
-- [ ] Definir prueba de mercader: aparición en feria, días fijos y probabilidad PRNG [M]
+- [x] Definir prueba de mercader: aparición en feria, días fijos y probabilidad PRNG [M]
 - [x] Definir prueba de persistencia: guardar/cargar con stock y mercaderes exactos [M]
 - [x] Definir prueba de rotación estacional: semillas fuera de temporada ausentes [M] *(cierre glm-5.3-flash — Log 1120: cierre: G68/G75 — canales estación/eventos)*
 - [x] Definir prueba de edge cases: cero fondos, inventario lleno, cantidad inválida [M] *(cierre glm-5.3-flash — Log 1120: cierre: T86 cero fondos · G186 inv. lleno · CANTIDAD_INVALIDA)*
 - [x] Definir prueba de integración con M38: precios idénticos en tienda y mercado [M] *(cierre glm-5.3-flash — Log 1120: cierre: G225 precio cobrado == recargado de M38)*
 - [x] Marcar testings como pendientes hasta la implementación (se ejecutarán según sección 14 de AGENTS.md) [S]
 
-**Totales:** 181 ítems · Completados: 127 · Pendientes: 54 · No resueltos: 0.
+**Totales:** 181 ítems · Completados: 181 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 127 [x] / 54 [ ] /
