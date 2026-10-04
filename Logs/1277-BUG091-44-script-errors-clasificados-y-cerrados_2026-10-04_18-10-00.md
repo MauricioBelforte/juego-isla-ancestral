@@ -150,3 +150,19 @@ Correccion de parse errors + validacion. El cierre/QA cruzado 21.8 corresponde a
 distinto del autor (regla dura del proyecto). Este log NO sella ningun modulo.
 
 **Firma:** **Modelo:** DeepSeek-V4.1-Flash / WorkBuddy **Fecha:** 2026-10-04 18:10
+
+## 11. Huella de push (AGENTS.md 4.3)
+
+- **Push principal:** rango `0c79ee6..e837eda` (2 commits: PROPIO `e837eda` + ajeno `6473807`).
+  Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 18:15 (-0300).
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Contenido propio (`e837eda`):** 24 archivos, 474 inserciones / 80 borrados (20 `.gd` del frente
+  T-D1 + Log 1277 + `11-BUGS.md` (BUG-098) + BACKLOG-MASTER (T-D1..T-D6) + respuesta 19).
+- **Ajenos arrastrados:** 1 commit (`6473807` "BUG-097: informe carpeta (list_registered +
+  validate_required)" — ya estaba local, de agnes; entra por fast-forward).
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0; `git ls-remote origin
+  refs/heads/main` == `e837edad5d3507b3a9d97edc492c4edd2b11567e` tras el push.
+- **Blobs:** `i/lf` en los verificados (`git ls-files --eol`); Log 1277 blob ASCII-puro
+  (0 no-ASCII, 0 CR, sin BOM).
+
