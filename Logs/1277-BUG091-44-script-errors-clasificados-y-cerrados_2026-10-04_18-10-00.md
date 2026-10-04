@@ -163,6 +163,8 @@ distinto del autor (regla dura del proyecto). Este log NO sella ningun modulo.
   validate_required)" - ya estaba local, de agnes; entra por fast-forward).
 - **Verificacion:** `git rev-list --count HEAD..origin/main` = 0; `git ls-remote origin
   refs/heads/main` == `e837edad5d3507b3a9d97edc492c4edd2b11567e` tras el push.
+- **Catch-ups posteriores:** `5feb941` (esta seccion de huella) y `3c9e69b` (fix de 1 char no-ASCII,
+  un em-dash, en la huella) - ambos publicados por pushes inmediatos desde el push principal.
 - **Blobs:** `i/lf` en los verificados (`git ls-files --eol`); Log 1277 blob ASCII-puro
   (0 no-ASCII, 0 CR, sin BOM).
 
