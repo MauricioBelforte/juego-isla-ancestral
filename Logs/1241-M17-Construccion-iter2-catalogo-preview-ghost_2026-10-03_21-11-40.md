@@ -138,4 +138,10 @@ fantasma, follow con lerp, permisos de zona finos (M18/M25), stress M112.
 
 ## 4.3 Huella de push (AGENTS.md 4.3)
 
-PENDIENTE: se completa tras el push.
+- Rango: `ec648d3..97a0b55` (1 commit, PROPIO: `97a0b55`).
+- Hora: 2026-10-03 21:14 (local).
+- Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy).
+- Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- Contenido: 44 archivos, 1671 inserciones, 45 borrados.
+- Ajenos arrastrados: 0 (el rango contiene solo mi commit; `ec648d3` era HEAD local y origin/main).
+- Verificacion: `git ls-remote origin refs/heads/main` = `97a0b5588217f59d8bff1f4c68b3f0d47ef7fa02` == HEAD local.
