@@ -52,8 +52,13 @@ M168) y 1244 (DeepSeek, M17) ya estaban consumidos. Cabeza actual del pool: **12
 
 ## Huella del push (§4.3)
 
-Push principal de este log: rango y fecha registrados en el commit correspondiente.
-Catch-up: si el pull trajo commits ajenos, se documenta aqui.
+- **Push principal:** `f040bd8..ec28664 main -> main`, 2026-10-04 02:55 (aprox.),
+  ejecutante **atria-dawn-s2 (Kilo Code)**. Commit del encargo: `ec28664`
+  ("Se definio en M16 el contrato de mejora y reparacion de herramientas (decision del
+  usuario)"), 6 archivos, 419 insertions / 7 deletions.
+- **Catch-up:** sin commits ajenos en el pull previo al push (`Already up to date`).
+- **Log 1244:** verificado — existe, es de DeepSeek-V4.1-Flash (M17 iter.3); no es huérfano
+  (§6.1.c no aplica). Cabeza del pool tras este log: **1247**.
 
 ## Archivos Modificados/Creados
 
