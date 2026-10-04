@@ -160,6 +160,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-088 | request_save() rotaba el save recien escrito -> slot sin .save (NUNCA cargable) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1202) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 || BUG-090 | test_mapa_m54_e2e.gd: 6 Parse Errors, suite no carga (falso verde en QA M54) | M54 | 🟠 Mayor | [x] Resuelto (hy3, Log 1234, 2026-10-03) — cuarentena a Obsoletos/ | hy3 (Log 1226) + atria-Dawn (verif.) | 2026-10-03 |
 | BUG-091 | Gate godot-lint CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto | CI / calidad | 🔴 Crítico | [ ] Abierto (coordinador deriva) | DeepSeek-V4.1-Flash (Log 1241) | 2026-10-04 |
 | BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [x] Resuelto (2026-10-04, mimo-v2.6-flash-free / opencode, Log 1260) | mimo-v2.6-flash-free | 2026-10-03 |
+| BUG-093 | M156: `test_terrain_modifiers.gd` era una suite MUERTA (API gdUnit4 inexistente: `is_equal_to`/`is_greater_than` -> parsea pero muere en runtime) + expectativa obsoleta (4.2 vs 4.8 real). Familia: 135 llamadas `is_equal_to` en 10 archivos de `tests/` | M156 | 🟡 Media | [x] Resuelto (2026-10-04, DeepSeek-V4.1-Flash, Log 1264) — convertida a headless, 10/0 x3, sonda ROJO 4/4 | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 
@@ -1393,6 +1394,55 @@ secciones reales (headers `## X.Y`). Clasificación:
 ## 7. Bugs Resueltos (historial)
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
+
+### BUG-093 — M156: `test_terrain_modifiers.gd` era una suite MUERTA (API gdUnit4 inexistente)
+
+- **Fecha de reporte:** 2026-10-04 06:15
+- **Módulo(s) afectado(s):** M156 (Terrenos y Movimiento) — `game/isla-ancestral/tests/unit/terrain/test_terrain_modifiers.gd` (también ejercita M08 `TerrainDataProvider`)
+- **Severidad:** 🟡 Media
+- **Prioridad sugerida:** Media
+- **Estado:** [x] Resuelto (2026-10-04, DeepSeek-V4.1-Flash, Log 1264)
+
+**Descripción del problema:**
+La suite usaba `assert_that(x).is_equal_to(y)` (4 veces) y `assert_that(x).is_greater_than(0.0)` (1 vez), métodos que **NO existen en gdUnit4** (0 apariciones en `addons/gdUnit4/`; los reales son `is_equal(...)` / `is_greater(...)`). GDScript los **parsea** (EXIT 0 en `--check-only`) pero la llamada **muere en runtime** ("Invalid call. Nonexistent function 'is_equal_to'") -> ninguna aserción corre jamás. Es una **suite muerta más silenciosa** que las que usan `is_instance_of(int)` (esas SÍ dan parse error). El runner del proyecto tampoco corre `tests/` (trampa AT), pero el defecto es independiente: aunque se cableara, nunca afirmaría nada.
+
+**Segundo defecto (expectativa obsoleta):** la 1ª aserción esperaba `4.2` para `calculate_effective_speed(5.0, 0.8, 0.2)`, pero el código (y el diseño §3.1: `base × terreno × (1+equipo)`, cap 50%) da **4.8** (= 5.0 × 0.8 × 1.2). El test "consagraba" un valor viejo; al estar muerta, nadie lo notó.
+
+**Pasos para reproducir:**
+1. `grep -rn "func is_equal_to" addons/gdUnit4/` -> **0** (el método no existe).
+2. Correr cualquier suite con `assert_that(x).is_equal_to(y)` -> SCRIPT ERROR en runtime, 0 aserciones ejecutadas.
+3. `godot --headless --path game/isla-ancestral --script res://tests/unit/terrain/test_terrain_modifiers.gd` (antes del fix: no afirmaba nada).
+
+**Comportamiento esperado:**
+Una suite que afirme de verdad: instanciar las clases reales, ejecutar las funciones y comparar contra los valores medidos, con guardia anti-falso-verde.
+
+**Comportamiento actual (antes):**
+Suite que parsea y no afirma nada (API inexistente) + expectativa obsoleta (4.2 vs 4.8 real).
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2, HEAD 2026-10-04
+- Plataforma: PC (Windows)
+- Frecuencia: Siempre (100 % de las corridas)
+
+**Evidencia:**
+- `grep -rn "func is_equal_to" addons/gdUnit4/` -> **0**; `func is_equal` -> 12+ implementaciones. Ídem `is_greater_than` -> **0**; `is_greater` -> 7.
+- Alcance de la familia (medido 2026-10-04): `is_equal_to` = **135 llamadas en 10 archivos** de `tests/`; `is_greater_than` = **5 llamadas en 3 archivos**; `is_instance_of` = 1 (esta sí da parse error).
+- Medido tras el fix: suite headless **10 checks / 0 fallos / EXIT 0 ×3**; sonda en ROJO **4/4** (control + fuente mutada + aborto runtime + piso).
+
+**Referencias cruzadas:**
+- Guía 07 §8: no
+- Módulo/documentación relacionada: `DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/03-Diseno.md` §3.1 (fórmula); skill `isla-ancestral-ciclo-modulo` §AS/§AZ; BUG-090 (misma clase: suite que no corre); M29 (Log 1257, mismo patrón detectado).
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-04 06:15
+
+**Resolución (completar cuando se resuelva):**
+- [x] Cómo se corrigió: reescritura de `test_terrain_modifiers.gd` al estándar headless del proyecto (`extends SceneTree` + asserts nativos, método 12.1). 2 bloques (A: `TerrainModifiers.calculate_effective_speed` — fórmula + cap 50% + clamp; B: `TerrainDataProvider.get_speed_modifier` sobre los 7 `.tres` reales + fallback 1.0). Guardia anti-falso-verde de 3 capas (`_fin` por bloque + piso `CHECKS_MINIMOS := 10` medido en verde + `_summary()` en `call_deferred` separado) + watchdog. **Expectativa 4.2 -> 4.8** corregida contra código+diseño.
+- [x] Archivos/commits modificados: `game/isla-ancestral/tests/unit/terrain/test_terrain_modifiers.gd` (reescrito, LF), `DOCUMENTACION/11-BUGS.md` (este registro).
+- [x] Log del proyecto: **Log 1264** (BUG-093, 2026-10-04).
+- [x] Verificado por: DeepSeek-V4.1-Flash / WorkBuddy 2026-10-04 (autor): suite **10/0/EXIT 0 ×3**; sonda ROJO **4/4** (control EXIT 0; A fuente `return 0.0` -> 4 FAIL EXIT 1; B aborto runtime bloque B -> nombra `["B"]`; C `CHECKS_MINIMOS=999` -> EXIT 1), restauración byte-exacta (sha256). **QA §21.8 PENDIENTE** (autor ≠ verificador).
 
 ### BUG-092 — M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria de persistencia)
 
