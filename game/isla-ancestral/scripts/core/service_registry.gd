@@ -30,5 +30,23 @@ func unregister(contract: String) -> void:
 func contracts() -> Array:
 	return _registry.keys()
 
+## BUG-097: lista de nombres de servicios registrados (Array[String]).
+## Usado por bootstrap.gd:109 y M62/M110 debug menu.
+func list_registered() -> Array[String]:
+	var result: Array[String] = []
+	for key in _registry:
+		result.append(String(key))
+	return result
+
+## BUG-097: valida que todos los servicios en `required` estén registrados.
+## Devuelve Array[String] de faltantes (vacío = todo OK).
+## No aborta el juego: el caller (bootstrap) decide push_error o log.
+func validate_required(required: Array) -> Array[String]:
+	var missing: Array[String] = []
+	for svc in required:
+		if not _registry.has(String(svc)):
+			missing.append(String(svc))
+	return missing
+
 func _ready() -> void:
 	print("[M40] ServiceRegistry listo (%d servicios registrados)" % _registry.size())
