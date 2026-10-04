@@ -81,3 +81,13 @@ Guardia anti-falso-verde de 3 capas: `_fin(letra)` por bloque + piso `CHECKS_MIN
 
 1. **`is_equal_to` / `is_greater_than` NO existen en gdUnit4**: parsean pero mueren en runtime -> suite MUERTA sin parse error (BUG-091 no la ve). Distinto de `is_instance_of(int)` (parse error). Familia: 140 llamadas / ~11 archivos.
 2. **La suite muerta puede consagrar un valor OBSOLETO**: 4.2 vs 4.8 real. Al revivirla hay que MEDIR el valor contra codigo+diseno, no copiar la asercion vieja.
+
+## 10. Huella de push (AGENTS.md 4.3)
+
+- **Push principal:** rango `03bf10d..607d77a` (6 commits: **5 AJENOS** ya commiteados en el arbol local por otros agentes -- `c60b068`+`0e3c20c` M38 BUG-047 v3, `fe7033d` mimo informe 09, `b163274`+`003caab` M39 Tiendas -- **+ 1 PROPIO** `607d77a`). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 06:49 (UTC) / 03:49 (-0300).
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Contenido propio (`607d77a`):** 5 archivos, 327 inserciones / 20 borrados (test convertido a headless + `11-BUGS.md` + Log 1264 + respuesta 14 + BACKLOG-MASTER).
+- **Catch-up que publica esta huella:** esta edicion del log viaja en un push inmediato posterior desde `607d77a`.
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0 antes del push; `git ls-remote origin refs/heads/main` == `607d77a9f873d33b897855901e550fce8a6b1b82` tras el push.
+- **NO se commiteo `CHECKLIST-GLOBAL.md`** (cambios ajenos en vuelo) ni `quality.yml` (s2).
