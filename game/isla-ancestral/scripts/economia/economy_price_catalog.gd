@@ -44,10 +44,15 @@ func _construir_indice() -> void:
 			_indice[str(e.item_id)] = e
 
 ## Validación en carga: la venta nunca debe superar o igualar la compra.
+## Para items solo-vendibles (compra=0): la venta debe ser > 0 (BUG-047).
 func _validate() -> bool:
 	for e in price_overrides:
-		if e.precio_venta >= e.precio_compra and e.precio_compra > 0:
-			push_error("M38: override '%s' -> venta (%d) >= compra (%d). Revise econ_prices.tres." % [e.item_id, e.precio_venta, e.precio_compra])
+		if e.precio_compra > 0:
+			if e.precio_venta >= e.precio_compra:
+				push_error("M38: override '%s' -> venta (%d) >= compra (%d). Revise econ_prices.tres." % [e.item_id, e.precio_venta, e.precio_compra])
+		else:
+			if e.precio_venta <= 0:
+				push_error("M38: override '%s' -> item solo-vendible sin precio_venta válido (0). Revise econ_prices.tres." % e.item_id)
 	return true
 
 ## Lookup por item_id. Devuelve la PriceDefinition o null si no hay override.

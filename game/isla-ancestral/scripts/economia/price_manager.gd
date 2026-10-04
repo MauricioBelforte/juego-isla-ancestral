@@ -165,12 +165,30 @@ func precio_venta_vigente(item_id: String) -> int:
 func _precio_venta_base(item_id: String) -> int:
 	var compra := _precio_base_compra(item_id)
 	if compra <= 0:
+		# Item solo-vendible: usar precio_venta del catálogo (BUG-047 fix)
+		var pv := _catalog_venta(item_id)
+		if pv > 0:
+			var base_pv := int(round(float(pv) * TOPE_VENTA_SOBRE_COMPRA))
+			base_pv = _ajuste_estacional(item_id, base_pv)
+			base_pv = int(round(float(base_pv) * _multiplicador_feria_venta))
+			base_pv = _ajuste_por_oferta(item_id, base_pv)
+			return maxi(1, base_pv)
 		return 0
 	var base := int(round(float(compra) * TOPE_VENTA_SOBRE_COMPRA))
 	base = _ajuste_estacional(item_id, base)
 	base = int(round(float(base) * _multiplicador_feria_venta))
 	base = _ajuste_por_oferta(item_id, base)
 	return maxi(1, base)
+
+## Devuelve el precio_venta del catálogo para un item (0 si no existe).
+func _catalog_venta(item_id: String) -> int:
+	var cat: Variant = _catalog_get()
+	if cat == null:
+		return 0
+	var entry: Dictionary = cat.get(item_id, {})
+	if entry.is_empty():
+		return 0
+	return int(entry.get("precio_venta", 0))
 
 ## Límite diario de ventas del ítem (anti-grind).
 ## Resuelve la banda de rareza: primero del catálogo central (PriceDefinition.rareza),
