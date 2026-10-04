@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 04-Codigo.md — Módulo 07: Arquitectura General
 
@@ -15,7 +15,7 @@ Módulo de **diseño arquitectónico** (complejidad 5). Hoy entrega el contrato;
 | `scripts/core/event_bus.gd` | Señales tipadas por dominio (9 dominios) | ✅ Implementado |
 | `scripts/core/service_registry.gd` | Service Locator (registro por interfaz) | ✅ Implementado |
 | `scripts/core/bootstrap.gd` | Registro de servicios core + carga de escena principal | ✅ Implementado |
-| `scripts/core/game_settings.gd` | Singleton de configuración del juego (M46). Guarda/carga ajustes en `user://settings.cfg` (sensibilidad mouse, invertir Y, volumen, fullscreen, resolución). Señal `settings_changed` | ✅ Implementado |
+| `scripts/core/game_settings.gd` | Singleton de configuración del juego (módulo dueño: **M07** — la referencia histórica a "M46" era errónea; la fila 46 es Arte-2D). Guarda/carga ajustes en `user://settings.cfg` (sensibilidad mouse, invertir Y, volumen, fullscreen, resolución). Señal `settings_changed`. | ✅ Implementado |
 | `scripts/core/terrain_locator.gd` | Servicio CENTRAL de posicionamiento sobre terreno (M167/M168). Autoload que busca VoxelTerrain activo con reintento. Expone `get_height(x,z)`, `posicionar_sobre_terreno(nodo,x,z)`, `esta_sobre_superficie(nodo)`. Anti-flotamiento: TODOS los objetos usan este servicio | ✅ Implementado |
 | `scripts/core/registro.gd` | Clase estática de logging y validación (M05). `Registro.info()`, `.aviso()`, `.error()`, `.verificar()`, `.verificar_no_nulo()`. Contadores para tests | ✅ Implementado |
 
@@ -86,3 +86,39 @@ Módulo de **diseño arquitectónico** (complejidad 5). Hoy entrega el contrato;
 - M08 (Mundo Voxel): VoxelWorld/ChunkManager deben cumplir el contrato de integración y comunicarse por `EventBus.world.*`
 - M11/M12 (Jugador/Cámara): pueden usar `EventBus.player.*` para comunicación
 - El siguiente paso es completar M08 (colisión + edibilidad de bloques) o M07 avanzado (GameState, más servicios)
+
+---
+
+## Notas del Agente — Deprecación de volúmenes en `game_settings.gd`
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-04 05:20:00
+**Estado:** Completado (documentación de deprecación, sin cambio de comportamiento)
+
+### Lo que hice
+- Investigación de propiedad: `game_settings.gd` es de **este módulo (M07)** — la
+  anotación histórica "(M46)" era errónea (fila 46 = Arte-2D) y quedó corregida en
+  la tabla de la sección 2.
+- Verifiqué con grep en todo el repo que `master_volume` / `music_volume` /
+  `sfx_volume` tienen **cero lectores externos** (solo se escriben/leen dentro del
+  propio archivo en `save()`, `load()` y `reset()`).
+- Añadí marcadores `# DEPRECATED (usar AudioConfig.set_volumen() — fuente de
+  verdad de audio (BUG-092, Log 1260))` sobre las tres variables y en los bloques
+  de save/load/reset de `scripts/core/game_settings.gd`.
+
+### Decisión
+- **NO se borran las variables** (compatibilidad de lectura de `user://settings.cfg`
+  y de posibles saves); su control real de audio lo tiene `AudioConfig` (M91) desde
+  BUG-092/Log 1260. La persistencia real de audio es `config["audio"]` vía
+  DataStore/GestorConfig (M60), no `settings.cfg`.
+- Fuente de verdad de audio = `AudioConfig.set_volumen()` (M91). Este módulo solo
+  conserva los defaults históricos de la sección `[audio]` de `settings.cfg`.
+
+### Lo que NO hice
+- No renombré ni eliminé claves de `settings.cfg` (rompería cargas de partidas/config
+  de usuarios existentes).
+
+### Recomendaciones para el próximo agente
+- Si algún día se migra `settings.cfg` a un esquema unificado, este es el punto de
+  entrada de la migración (los tres campos quedaron aislados y sin lectores).

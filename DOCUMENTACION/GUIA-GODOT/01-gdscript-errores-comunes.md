@@ -2,9 +2,9 @@
 
 > **Modelo:** mimo-v2.6-flash-free
 > **Plataforma:** opencode
-> **Fecha:** 2026-10-03 (M43 Lote B1: agregado §29 — JSON->float)
-> **Histórico:** 2026-09-30 agnes-3-flash (P-52: §26-§28)
-> **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-9.19
+> **Fecha:** 2026-10-04 (M53: agregado §30 — `bool(null)` y suites colgadas)
+> **Histórico:** 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
+> **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-§9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
 ---
@@ -529,6 +529,66 @@ que seguir siendo exacta (aflojarla convierte el test en un verde que no prueba 
 
 ---
 
+## 30. `bool(null)` — "Invalid call. Nonexistent 'bool' constructor"
+
+**Error (runtime, no de parseo):**
+
+```
+SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor.
+   at: _on_ui_layers_changed (res://scripts/interacciones/interaction_manager.gd:669)
+```
+
+**Causa:** en Godot 4.7.2, `bool(v)` con `v` de tipo Variant **NIL** no existe el
+constructor: revienta en runtime y **aborta la función completa**. Ejemplo real
+(probado con sonda aislada el 2026-10-04):
+
+```gdscript
+var n = null
+print(bool(n))   # ← SCRIPT ERROR (no imprime nada; la función queda cortada)
+```
+
+**Caso real en el proyecto:** `interaction_manager.gd:669` hace
+`bool(ui.get("hay_modal"))` — UIManager **no tiene** esa propiedad (es una variable
+local de `_actualizar_pausa_mundo`), `Object.get()` devuelve `null` y el cast
+aborta `_on_ui_layers_changed` en cada cambio de pila de capas.
+Registrado en `DOCUMENTACION/11-BUGS.md` como bug delegado (módulo NO-toque).
+
+**Solución:**
+
+```gdscript
+# ❌ bool(ui.get("hay_modal"))        ← revienta si la propiedad no existe
+# ✅ una de estas:
+var hay_modal: bool = (ui.get("hay_modal") == true)   # null == true → false, sin cast
+var v: Variant = ui.get("hay_modal")
+var hay_modal: bool = (v != null) and bool(v)         # bool() solo con no-null
+```
+
+En `Dictionary.get(k, defecto)` sí se puede y se debe pasar el default
+(`d.get("clave", false)`) — el default evita el NIL de raíz. `Object.get()` NO
+acepta default.
+
+**Regla:** nunca `bool(x)` sobre un Variant que pueda ser `null`; comparar con
+`== true` / `!= null`, o traer el default desde el origen.
+
+### 30.1 Colateral peligroso: la suite headless que aborta nunca termina
+
+Una suite `extends SceneTree` que sufre un `SCRIPT ERROR` dentro de `_run()` queda
+cortada **antes de `quit()`** → el proceso principal sigue corriendo para siempre
+(la carga del main scene y los autoloads siguen activos) y el runner de shell
+"se cuelga" 300 s hasta el timeout. Diagnóstico: **el PRIMER `SCRIPT ERROR` del log
+es el que abortó `_run`**; la línea con `GDScript backtrace ... _run` lo confirma.
+
+Prevención en suites nuevas:
+1. Guard temprano con `script.can_instantiate()` antes de `.new()` (un parse error
+   en otro archivo `load()` devuelve el GDScript roto, `.new()` revienta y aborta).
+2. No dejar `bool()` sin default ni `:=` sobre Variant en el camino crítico.
+3. Comparar `exit=0` y el resumen `=== ... checks, N fallo(s) ===`; si no aparece el
+   resumen, el `_run` fue abortado.
+
+**Fuente:** M53 Sección Audio (test round-trip) — mimo-v2.6-flash-free / opencode, 2026-10-04.
+
+---
+
 ## Errores rápidos de referencia
 
 | Error | Solución | § |
@@ -545,3 +605,5 @@ que seguir siendo exacta (aflojarla convierte el test en un verde que no prueba 
 | `Vector3.xz` por Variant (read-only) | `Vector2(v.x, v.z)` / `Vector3(v.x, 0, v.z)` | P-52 §27 |
 | `:=` sobre helper que devuelve Variant | `=` sin inferencia o anotar el tipo | P-52 §28 |
 | `JSON.parse_string()` da `float` y el `==` de Array es exacto | `_a_ints()` antes de comparar | §29 |
+| `Nonexistent 'bool' constructor` (runtime) | `== true` / `!= null` / default en `Dictionary.get`; nunca `bool(null)` | §30 |
+| Suite `extends SceneTree` colgada tras un error | `_run` abortado no llama `quit()`; mirar el PRIMER `SCRIPT ERROR` del log | §30.1 |

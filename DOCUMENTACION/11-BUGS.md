@@ -166,6 +166,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-094 | 2a familia de APIs gdUnit4 MUERTAS en `tests/`: `is_instance_of` (real `is_instanceof`) 1 llamada / 1 archivo, `has_not_contains` (real `not_contains`) 1/1, `has_any_item` (real `contains`) 1/1 -> parsean pero mueren en runtime (suite muerta silenciosa, mismo mecanismo que BUG-093) | `tests/` (varios modulos) | 🟡 Media | [ ] **Abierto** — registrado (DeepSeek-V4.1-Flash, Log 1268); convertidas dentro del sub-frente BUG-093 | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
+| BUG-096 | `interaction_manager.gd:669` hace `bool(ui.get("hay_modal"))` sobre una propiedad inexistente de UIManager (`get()` devuelve null) y `bool(null)` ABORTA `_on_ui_layers_changed` en cada cambio de pila de capas | M70 | 🟠 Mayor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
+| BUG-097 | `bootstrap.gd:109/115` llama `ServiceRegistry.list_registered()` y `.validate_required()` que NO existen: 2 errores de runtime en cada boot y la validación de servicios nunca corre | M07 | 🟡 Menor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -4909,3 +4911,155 @@ Fallback CUESTIONABLE: debería caer al centro real (`MundoRaiz.CENTRO` / Vector
 **Entorno:** Godot 4.7.2, isla 5120².
 **Evidencia:** vegetation_spawner.gd:33-38 (comentario L34 "antes (256,256) r=256, la esquina playa").
 **Firma:** **Modelo:** hy3 (WorkBuddy / Tencent Hunyuan) · **Plataforma:** WorkBuddy · **Fecha:** 2026-09-30 04:55
+
+## 8.2 Delegados — barrido del frente M53 "Sección Audio" (mimo-v2.6-flash-free, 2026-10-04)
+
+> Detectados durante la construcción de la sección Audio de Ajustes (encargo canal 10,
+> Opción A). Ambos son **preexistentes** (no los introdujo M53) y afectan módulos
+> **NO-toque** de este encargo, por lo que se delegan con `[?]` en lugar de arreglarlos.
+
+### BUG-096 — `interaction_manager.gd:669`: `bool(null)` aborta el handler de cambio de capas (M70)
+
+- **Fecha de reporte:** 2026-10-04 05:33
+- **Módulo(s) afectado(s):** M70-Interacciones (`scripts/interacciones/interaction_manager.gd:669`) — colateral en M53/UI (cada push/pop de capa dispara el error)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado
+
+**Descripción del problema:**
+`_on_ui_layers_changed` ejecuta `bool(ui.get("hay_modal"))`. UIManager **no tiene** la
+propiedad `hay_modal` (es una variable local de `_actualizar_pausa_mundo`), así que
+`Object.get()` devuelve `null` y en Godot 4.7.2 **`bool(null)` no existe** como
+constructor: revienta en runtime y **aborta la función en esa línea**. El resto del
+handler (reaccionar al cambio de pila de capas) nunca se ejecuta.
+
+**Pasos para reproducir:**
+1. Ejecutar el juego (o cualquier suite que monte UIRoot y navegue capas).
+2. Abrir/cerrar pausa, inventario o menús (push/pop de capas) — o dejar correr una
+   suite que haga open/close de capas (p. ej. `test_settings_audio_roundtrip.gd`).
+3. Leer el log: el error aparece **en cada cambio de pila**.
+
+**Comportamiento esperado:**
+Sin errores de runtime; `_on_ui_layers_changed` completa su recorrido.
+
+**Comportamiento actual:**
+```
+SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor.
+   at: _on_ui_layers_changed (res://scripts/interacciones/interaction_manager.gd:669)
+```
+La función queda cortada en la línea 669.
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2 (HEAD del repo, 2026-10-04)
+- Plataforma: PC (Windows)
+- Ocurre desde: preexistente (no introducido por M53; se hizo visible al correr las
+  suites de la Sección Audio)
+- Frecuencia: Siempre (cada cambio de pila de capas)
+
+**Evidencia:**
+- Mensaje de error exacto: el bloque de arriba.
+- Sonda aislada confirmada (2026-10-04): `var n = null; print(bool(n))` → mismo
+  `SCRIPT ERROR` y la función aborta.
+- Causa raíz verificada: grep de `hay_modal` en `ui_manager.gd` → 0 propiedades
+  (solo la var local en `_actualizar_pausa_mundo`).
+
+**Intentos de solución ya probados (si aplica):**
+- No se intentó fix: `scripts/interacciones/` está en la lista NO-toque del encargo
+  del canal 10 y el bug es preexistente de M70.
+
+**Fix sugerido (para el dueño de M70):**
+```gdscript
+# ❌ bool(ui.get("hay_modal"))
+# ✅ una de estas:
+var hay_modal: bool = (ui.get("hay_modal") == true)
+# …o mejor: consultar el estado REAL de UIManager (pila de capas / capa visible)
+# en vez de una propiedad fantasma que nunca existió.
+```
+
+**Referencias cruzadas:**
+- Guía 07 §8: no aplica
+- Documentación: `DOCUMENTACION/GUIA-GODOT/01-gdscript-errores-comunes.md` **§30**
+  (hallazgo documentado allí, 2026-10-04)
+- Módulo/documentación relacionada: `DOCUMENTACION/70-Interacciones/plan-actual/`;
+  Log 1187 ya había notado el ruido de `interaction_manager` en suites (`grep -v
+  interaction_manager`), sin diagnosticar la causa → esta entrada la explica.
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-04 05:33
+
+**Resolución (completar cuando se resuelva):**
+- [→] Cómo se corrigió: —
+- [→] Archivos/commits modificados: —
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (dueño M70 / agente con permiso sobre `scripts/interacciones/`)
+
+---
+
+### BUG-097 — `bootstrap.gd` llama dos métodos inexistentes de ServiceRegistry (M07)
+
+- **Fecha de reporte:** 2026-10-04 05:33
+- **Módulo(s) afectado(s):** M07-Arquitectura-General (`scripts/core/bootstrap.gd:109` y `:115` → `scripts/core/service_registry.gd`)
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado
+
+**Descripción del problema:**
+`_register_services()` llama `ServiceRegistry.list_registered()` (L109) y
+`_validate_services()` llama `ServiceRegistry.validate_required(REQUIRED_SERVICES)`
+(L115). **Ninguno de los dos métodos existe**: las funciones reales de
+`service_registry.gd` son `register`, `get_service`, `has`, `unregister`,
+`contracts` y `_ready`. Cada llamada revienta en runtime (método inexistente),
+lo que **aborta ambas funciones**: el print de servicios nunca aparece y — más
+importante — **la validación de servicios obligatorios nunca se ejecuta** (el
+`push_error` de faltantes está después de la llamada rota).
+
+**Pasos para reproducir:**
+1. Ejecutar el proyecto (o cualquier arranque que corra el autoload Bootstrap).
+2. Leer el log: 2 errores de runtime por arranque, apuntando a
+   `bootstrap.gd:109` y `bootstrap.gd:115`.
+
+**Comportamiento esperado:**
+`[Bootstrap] Servicios core registrados (N): ...` y
+`[Bootstrap] Todos los servicios obligatorios están registrados` (o el error real
+de faltantes, si los hubiera).
+
+**Comportamiento actual:**
+Dos SCRIPT ERROR de método inexistente; los dos prints/validaciones no corren.
+
+**Entorno / Contexto:**
+- Godot 4.7.2, HEAD 2026-10-04; Windows
+- Frecuencia: Siempre (cada boot)
+- Preexistente (detectado como ruido de boot al correr las suites de M53)
+
+**Evidencia:**
+- `service_registry.gd` solo define: `register, get_service, has, unregister,
+  contracts, _ready` (grep de `func`).
+- `bootstrap.gd:109`: `var registered = ServiceRegistry.list_registered()`
+- `bootstrap.gd:115`: `var missing = ServiceRegistry.validate_required(REQUIRED_SERVICES)`
+
+**Intentos de solución ya probados (si aplica):**
+- No se intentó fix (M07 es módulo ajeno a este encargo; solo se documenta aquí y
+  la deprecación relacionada de `game_settings.gd` se anotó en su plan-actual).
+
+**Fix sugerido (para el dueño de M07):**
+- Reescribir ambas líneas con la API real (`ServiceRegistry.contracts()` /
+  `has()` por servicio), o **añadir** `list_registered()` y `validate_required()`
+  a `service_registry.gd` si esa era la intención original del diseño.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no aplica
+- Módulo/documentación relacionada: `DOCUMENTACION/07-Arquitectura-General/plan-actual/04-Codigo.md`
+  (sección de notas del agente 2026-10-04)
+
+**Firma:**
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-04 05:33
+
+**Resolución (completar cuando se resuelva):**
+- [→] Cómo se corrigió: —
+- [→] Archivos/commits modificados: —
+- [ ] Log del proyecto:
+- [ ] Verificado por: pendiente (dueño M07)

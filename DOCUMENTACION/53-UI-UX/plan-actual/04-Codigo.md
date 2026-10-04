@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 04-Codigo.md — Módulo 53: UI/UX
 
@@ -216,3 +216,66 @@ static func show_tooltip_for_focused() -> void
 
 - `res://ui/**` importa: `res://core/**` (EventBus, tr_local, Logger/ErrorHandler), `res://data/**` (ToastData, recursos), `res://gameplay_domain/services/**` SOLO si el dominio ya expuso interfaz vía Callable/Resource (sin nodos), M57 `action_layer.gd` (estado de acciones), M88 recursos de fuentes (`theme_fonts.tres`).
 - **Prohibido**: importar nodos de gameplay (jugador, NPCs, mundo) o clases de IA desde `res://ui/**`. Verificación estática en CI (M07/M01).
+
+## 7. Sección Audio de Ajustes (iter. 2026-10-04, encargo canal 10 "Opción A")
+
+> **Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04
+
+### 7.1 Archivos tocados / creados
+
+| Archivo | Cambio |
+|---|---|
+| `scripts/ui/layers/settings_audio_layer.gd` | **NUEVO** — `class_name SettingsAudioLayer`, `extends UILayer` (MODAL_FULL). ~487 líneas: `_crear_ui` (3 filas slider+%, opciones, LblFallo, BtnVolver, TimerCommit), handlers forward (`_on_slider_volumen`, `_on_drag_ended`, `_on_mute_toggled`, `aplicar_opcion`, `commit_volumen/commit_pendiente`), reverse (`_on_ac_*` con `*_no_signal`), `on_layer_opened/closed`, `focus_first`, `_t`. Nodos con nombre testeable: `Slider_{bus}`, `Pct_{bus}`, `Mute_{bus}`, `Opt_Rango`, `Chk_Compresion`, `Opt_Dispositivo`, `LblFallo`, `BtnVolver`, `TituloAudio`, `TimerCommit`. |
+| `scripts/ui/ui_root.gd` | var `settings_audio_layer`; construcción tras `credits_layer` + `_conectar_ajustes()`; print de montaje ampliado con `ajustes=%s`; bloque `menus_layer.ajustes_pedido → push_layer(pause_layer)` **reemplazado por puntero** a la migración; funciones nuevas `_conectar_ajustes()` y `_abrir_ajustes(origen)`. |
+| `locales/es.po` / `locales/en.po` | +14 claves `SETTINGS.*` (AUDIO_TITULO, VOLVER, MAESTRO, MUSICA, EFECTOS, SILENCIAR, OPCIONES, RANGO_DINAMICO, RANGO_QUIET, RANGO_MEDIO, RANGO_DINAMICO_PRESET, COMPRESION, DISPOSITIVO_SALIDA, AUDIO_FALLA). LF, sin duplicados; reimportadas con `--editor --quit`. |
+| `scripts/core/game_settings.gd` | Deprecación de `master_volume`/`music_volume`/`sfx_volume` (comentarios en vars + save/load/reset). **Sin cambios de comportamiento** (cero lectores externos). Dueño: M07. |
+| `scripts/ui/test_settings_audio_roundtrip.gd` | **NUEVO** — suite headless (ver 7.3). |
+
+### 7.2 Puntos de integración
+
+- `ui_root.gd::_conectar_ajustes()` — conecta `menus_layer.ajustes_pedido` y
+  `pause_layer.ajustes_pedido` → `_abrir_ajustes("M89"|"T-053-066")` → `open()`.
+- `settings_audio_layer.gd::on_layer_opened()` — re-registra en la pila
+  (heal tras Esc), conecta las 3 señales de AudioConfig, `_sincronizar_todo()`.
+- `AudioConfig` (M91, NO modificado): `set_volumen_porcentaje`, `set_mute`,
+  `set_opcion` (→ `[M60] Config guardada` por commit), señales inversas.
+
+### 7.3 Suite de test (round-trip)
+
+`res://scripts/ui/test_settings_audio_roundtrip.gd` — SceneTree, `CHECKS_MINIMOS = 50`,
+**medido en verde: 51 checks / 0 fallos** (ejecuciones 2026-10-04, exit 0, dos corridas
+consecutivas). Cubre: montaje/registro/pila/MODAL_FULL; i18n (`Audio`, `Volver`);
+slider → `AudioConfig` → `config["audio"]` → `get_save_data`; debounce (sin escritura
+prematura); `drag_ended` commit; reverse sin bucle; mute round-trip + `mutes`;
+compresión/rango/dispositivo round-trip + `DynamicRangeManager.actual()`;
+**camino de fallo** (`aplicar_opcion("dispositivo_salida","no_existe")` → `false` +
+`LblFallo` visible + no persistido + reversión del widget); heal tras `pop_layer`
+(Esc); restauración del snapshot al final.
+
+Ejecución: `Godot --headless --path game/isla-ancestral --script res://scripts/ui/test_settings_audio_roundtrip.gd`
+
+### 7.4 Regresiones verificadas (2026-10-04)
+
+| Suite | Resultado |
+|---|---|
+| `test_settings_audio_roundtrip.gd` | ✅ 51 checks, 0 fallos |
+| `test_ui_framework.gd` | ✅ 0 fallos |
+| `test_ui_i18n_m53.gd` | ✅ 0 fallos (incluye auditor de claves i18n) |
+| `test_audio_config.gd` (M91) | ✅ 136 checks, 0 fallos |
+
+### 7.5 Eventos/logs emitidos
+
+- `[M89] Ajustes → SettingsAudioLayer (sección Audio)` o
+  `[T-053-066] Ajustes → SettingsAudioLayer (sección Audio)` — al abrir por deep-link.
+- `[M60] Config guardada (err=0)` — por commit de volumen/mute/opción (M60, ya existente).
+- `[DOM-UI] ... ajustes=%s` — print de montaje de UIRoot ampliado.
+
+### 7.6 Hallazgos (documentados fuera de este módulo)
+
+1. **`bool(null)` revienta en Godot 4.7.2** con `Invalid call. Nonexistent 'bool'
+   constructor` → documentado en `GUIA-GODOT/01-gdscript-errores-comunes.md`.
+2. **`interaction_manager.gd:669` usa `bool(ui.get("hay_modal"))`** — UIManager no
+   tiene esa propiedad (es una variable local de `_actualizar_pausa_mundo`), así que
+   `get()` devuelve `null` y el `bool(null)` aborta `_on_ui_layers_changed` en cada
+   cambio de pila. **Preexistente, fuera de alcance** (`scripts/interacciones/` está
+   en la lista de no-toque) → registrado como bug delegado en `DOCUMENTACION/11-BUGS.md`.

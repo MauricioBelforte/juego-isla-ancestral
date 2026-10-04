@@ -30,6 +30,7 @@ var equipment_ui: Node = null
 var diary_layer: Node = null
 var loading_layer: Node = null
 var credits_layer: Node = null
+var settings_audio_layer: Node = null
 
 func _ready() -> void:
 	layer = 100
@@ -116,10 +117,20 @@ func _build_layers() -> void:
 		credits_layer.name = "CreditsLayer"
 		add_child(credits_layer)
 
-	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s diario=%s carga=%s creditos=%s)" % [
+	# M53 (frente Opción A, canal 10): sección de Audio del menú Ajustes.
+	# Se monta el ÚLTIMO para dibujarse sobre pausa/menús, y recién entonces
+	# se cablean los dos deep-links de `ajustes_pedido` (menús y pausa).
+	var sa_load := load("res://scripts/ui/layers/settings_audio_layer.gd")
+	if sa_load:
+		settings_audio_layer = sa_load.new()
+		settings_audio_layer.name = "SettingsAudioLayer"
+		add_child(settings_audio_layer)
+		_conectar_ajustes()
+
+	print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%s diario=%s carga=%s creditos=%s ajustes=%s)" % [
 		dialog_layer != null, pause_layer != null, menus_layer != null,
 		confirm_popup != null, crafting_ui != null, inventory_layer != null, shop_ui != null, equipment_ui != null,
-		diary_layer != null, loading_layer != null, credits_layer != null])
+		diary_layer != null, loading_layer != null, credits_layer != null, settings_audio_layer != null])
 
 func _agregar_widget_hud(parent: Control, script: Script, nombre: String) -> void:
 	if script == null:
@@ -152,14 +163,9 @@ func _conectar_menu_señales() -> void:
 				gfm.cambiar_estado(gfm.Estado.CARGANDO)
 				print("[M89] Continuar → CARGANDO")
 		)
-	# Ajustes → abrir PauseLayer (capa de ajustes compartida)
-	if menus_layer.has_signal("ajustes_pedido"):
-		menus_layer.ajustes_pedido.connect(func():
-			var ui_mgr = get_node_or_null("/root/UIManager")
-			if ui_mgr and pause_layer:
-				ui_mgr.push_layer(pause_layer)
-				print("[M89] Ajustes → PauseLayer")
-		)
+	# Ajustes -> MIGRADO a _conectar_ajustes() (frente M53 Opción A): la señal
+	# se cablea recién al montar SettingsAudioLayer, con sus dos deep-links
+	# (menús y pausa). Antes empujaba PauseLayer, que era no-op (ya registrada).
 	# Créditos → abrir CreditsLayer (M131). Se usa open() y no push_layer:
 	# las capas montadas ya están registradas y push_layer es no-op
 	# (ui_manager.gd L457-459). La visibilidad MODAL_FULL pausa el mundo
@@ -176,3 +182,27 @@ func _conectar_menu_señales() -> void:
 			get_tree().quit()
 			print("[M89] Salir")
 		)
+
+## M53 frente Opción A (canal 10): cablear los deep-links de `ajustes_pedido`
+## a SettingsAudioLayer (sección Audio). Dos orígenes:
+##  - MenúsLayer (M89): antes empujaba PauseLayer; push_layer era no-op porque
+##    la capa ya registrada sigue en la pila (ui_manager.gd push_layer L182).
+##  - PauseLayer (T-053-066): emitía `ajustes_pedido` SIN listener (deep-link
+##    colgado). Ambos caminos abren la misma capa con open() (patrón sancionado
+##    ui_manager.gd L457-459); la capa se dibuja encima por orden de montaje.
+func _conectar_ajustes() -> void:
+	if menus_layer and menus_layer.has_signal("ajustes_pedido"):
+		menus_layer.ajustes_pedido.connect(func():
+			_abrir_ajustes("M89")
+		)
+	if pause_layer and pause_layer.has_signal("ajustes_pedido"):
+		pause_layer.ajustes_pedido.connect(func():
+			_abrir_ajustes("T-053-066")
+		)
+
+func _abrir_ajustes(origen: String) -> void:
+	if settings_audio_layer == null or not settings_audio_layer.has_method("open"):
+		return
+	if not settings_audio_layer.visible:
+		settings_audio_layer.open()
+		print("[%s] Ajustes → SettingsAudioLayer (sección Audio)" % origen)

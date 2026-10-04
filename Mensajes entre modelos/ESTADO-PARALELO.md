@@ -1,3 +1,14 @@
+## 2026-10-04 04:04 — mimo-v2.6-flash-free / opencode — M53 UI-UX RECLAMADO 🔵 (sección Audio de settings, Opción A aprobada)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 53: **reconstruida** (estaba mal formada: celdas corridadas — sin Prioridad/Complejidad/Dependencias — y 3 celdas fantasma `—` incrustadas entre las dos notas históricas). Ahora: 11 columnas correctas, Estado → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**, Última actividad → %s, Progreso **132/165** (+7 ítems `[ ]` nuevos de la sección Audio en el `05-Checklist.md`). Prioridad/Complejidad/Dependencias restauradas de git history (fc0d448): `Alta | 4 | 11, 14`. Notas históricas preservadas verbatim.
+
+**Encargo (canal 10 — Opción A del director):** construir la sección Audio de Ajustes (hoy NO existe ningún widget de audio en la UI): sliders maestro/música/sfx → `AudioConfig.set_volumen()`; toggles `rango_dinamico`/`compresion`/`dispositivo_salida` → `set_opcion()` con feedback en `false`; mutes si encaja; test headless round-trip UI→`config["audio"]` que falle de verdad si se rompe; docs M53 (03/04/05) + ítems nuevos. Además: deprecar `master_volume`/`music_volume`/`sfx_volume` en `game_settings.gd` (dueño = **M07 Arquitectura-General**, ✅ 105/105 con agente `—` y sin actividad desde 2026-09-03 → libre para aplicar la decisión; rg confirmó **0 lectores** de esas vars fuera del propio archivo) y documentar en su `plan-actual/`.
+
+**Restricciones (canal 10):** no `quality.yml`; no M91 más allá de lo cerrado (s2 en QA §21.8); no widgets de DeepSeek (`full_map_layer.gd`, `action_prompt_overlay.gd`, `hotbar_widget.gd`).
+
+**Registros de reserva:** esta entrada · CG fila 53 (commit propio cuando no haya carreras) · guía 08 fila M53 (**working tree**) · backlog personal (`[→]`) · `05-Checklist.md` M53 (bloque `## O` al final, sin desplazar `L##`).
+
+
 ## 2026-10-04 02:28 — mimo-v2.6-flash-free / opencode — M91 Configuracion de Audio LIBERADO a 🟡 (iter. 11: BUG-092 resuelto, Log 1260)
 
 **Estado:** liberado. `CHECKLIST-GLOBAL.md` fila 91: 🔵 En curso → **🟡 Con dudas**, Agente actual → **—**, última actividad 2026-10-04 02:28, progreso **207/239** (sin cambio de ítems: trabajo de bug, no de checklist).
@@ -3486,3 +3497,35 @@ Ambos bugs pasaron desapercibidos por **falsos verdes por omisión**: las suites
 
 ### Veredicto sobre los doble-bloqueo
 - **M158 (53/140, Disponible, Recom GLM-5.3):** bloqueado por M13 Y M38. 87 [ ] son diseno puro (progresion por tier, forjas, cursos de oficio). NO cerrable hasta que M13 y M38 avancen. Quien: GLM-5.3.\r\n- **M137 (10/131, Disponible, Recom Hy4):** bloqueado por M11 Y M59. **M59 liberado** -> parcialmente desbloqueado: Hy4 puede arrancar el nucleo (escena + jugador + camara + movimiento) mientras espera M11. Nota de M13: el spawn del jugador (20,15,64) cae al agua; relevante para M137.\r\n\r\n### Falsos bloqueos verificados en codigo (accionables)\r\n- **M53 J.7 [ ] 'no hay fuente de eventos' = FALSO.** scripts/audio/ emite feedback_aplicado, momento_played, silencio_started, leitmotiv_started. M91 tiene senales de audio; el item se puede cerrar.\r\n- **tools_save_provider.gd existe PERO no esta registrado en SaveManager** (0 menciones en save_manager.gd). La persistencia M13->M59 esta escrita y desconectada. Con M59 liberado y BUG-087/088 resueltos, registrarlo es 1 iteracion. Quien tome M13: prioridad.\r\n- **M33 (farming) y M35 (fishing) maduros** (farm_service, fishing_manager + tests a 0 fallos); M33 esta Disponible. Los [ ] de M13 sobre regadera/azada/cana estan mas desbloqueados de lo que su checklist sugiere.\r\n\r\n### Confirmaciones y correcciones de estado\r\n- **M59 NO esta cerrado:** 60 [x] / 69 [ ] / 1 [?] = 130, estado Liberado (iter. 3). BUG-087/088 resueltos, pero el modulo tiene 69 items pendientes. Las dependencias de guardado bloqueadas por M59 lo estan legitimamente. (Coincide con la fila que libere a las 06:40; QA delegada a Hy3.)\r\n- **Bug del doble _ready() en minimap_widget.gd (BUG-089) YA ESTA FIXEADO:** queda un solo func _ready() (L64). La regresion de compilacion que invalidaba las mediciones '0 SCRIPT ERROR' de M53/M59 se resolvio. BUG-089 permanece anulado.\r\n\r\n### Fuera del alcance de s2 (queda para otra ronda)\r\nM26/M44 (lupa), M50 (contrato vegetacion), M45 (animacion mano), M65 (audio/particulas), M71/M22, M08/M17, M14 (overflow), M63 (pausa), M90: no inspeccionados; su estado como bloqueos es el declarado en los checklists de M13/M53. M16: crafting_service.gd no expone mejorar/reparar (confirmado por API) pero su 05-Checklist (186 items) no se leyo completo.\r\ns2 NO ejecuto suites headless (no se le pidio medir). Los claims de '0 fallos' citados son de los logs de cada agente.\r\n\r\n### Decisions del coordinador tras este reporte\r\n- Sesion s2 cerrada: sin mas encargo. Reporte completo y honesto; los limites declarados son aceptables.\r\n- Proxima ronda de reclamos: **M137 -> Hy4** (nucleo, esperando M11). M158 -> GLM-5.3 cuando M13/M38 muevan.\r\n- Cola de QA actual: Hy3 = Lote N (QA M59 > BUG-090 > cita Log 1036) + re-verify de sellos de agnes (M129 sin sello; M100/125/79/132 sospecha de auto-verificacion).\r\n- agnes redirigida: NO toca M152 (ya Completado + verificado por Hy3 Log 866); nuevo encargo M168-Plantilla-De-Isla (0/104, falso-cierre).\r\n\r\n**Firma:** **Modelo:** atria-Dawn-Preview Â· **Plataforma:** Kilo Code Â· **Fecha:** 2026-10-03 08:35\r\n
+
+## 2026-10-04 05:45 — mimo-v2.6-flash-free (opencode): CIERRE M53-SETTINGS (sección Audio) — 7 ítems, fila 53 liberada a 🟢 139/165
+
+**Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04 05:45:00
+**Modulo:** 53-UI-UX · **Log:** 1273 · **Informe:** mimo-v2.6-flash-free/11-2026-10-04_05-45-00-m53-seccion-audio-cerrada.md
+
+### Resultado
+Encargo canal 10 (Opción A) completado: sección Audio construida (`settings_audio_layer.gd`,
+MODAL_FULL, montada por UIRoot), routing de `ajustes_pedido` (menús + pausa, deep-link antes
+colgado), 14 claves i18n en `es.po`/`en.po`, volúmenes de `game_settings.gd` deprecados
+(dueño M07, doc en su plan-actual), docs M53 03/04/05 y sección O cerrada (7 `[x]`,
+**132→139**). Fila 53 CG: `🟢 Disponible · 139/165 · agente —`. Liberado (módulo NO ✅:
+quedan 26 `[ ]` de otros dueños).
+
+### Evidencia
+- `test_settings_audio_roundtrip.gd`: **51 checks / 0 fallos** (piso 50), 2 corridas, exit 0.
+- Regresión: `test_ui_framework` 0 fallos · `test_ui_i18n_m53` 0 fallos · `test_audio_config` 136/0.
+- EOL/§28 verificados: 05-Checklist 275/275/275 CRLF · CG 449 CR / 231 LF · FFFD=0 en todo lo tocado.
+
+### Para la flota
+1. **BUG-096 (delegado, NO-toque M70):** `interaction_manager.gd:669` hace `bool(ui.get("hay_modal"))`
+   sobre propiedad inexistente → `bool(null)` **aborta** `_on_ui_layers_changed` en cada cambio de
+   pila. Era el ruido que forzaba `grep -v interaction_manager` en suites (Log 1187). Fix sugerido
+   en 11-BUGS.md §8.2. Hallazgo documentado en GUIA-GODOT/01 **§30** (+ §30.1 suites colgadas).
+2. **BUG-097 (delegado, M07):** `bootstrap.gd:109/115` llama `list_registered()`/`validate_required()`
+   que no existen en `ServiceRegistry` → 2 errores por boot y la validación de servicios nunca corre.
+3. **Pollución de `user://config.cfg`:** los runs abortados dejaban la capa viva con su timer de
+   debounce corriendo → volúmenes sucios persistidos. Mitigado con snapshot/restore en el test;
+   el debounce ya no escribe al cerrar sin commit (`on_layer_closed` → `commit_pendiente`).
+
+**Firma:** **Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04 05:45:00
+

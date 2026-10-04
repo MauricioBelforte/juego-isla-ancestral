@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 03-Diseno.md — Módulo 53: UI/UX
 
@@ -206,3 +206,67 @@ func pause_text() -> void
 3. UIManager autoload es el único punto de contacto hacia capas; las capas no se referencian entre sí (se comunican por eventos).
 4. Los widgets del HUD no mutan estado de gameplay; solo leen.
 5. Toda cadena visible pasa por tr_local (M87), nunca hardcodeada.
+
+## 7. Sección Audio de Ajustes — SettingsAudioLayer (iter. 2026-10-04, encargo canal 10 "Opción A")
+
+> **Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04
+> El M91 dejó el dominio de audio (AudioConfig) completo, pero **no existía ningún
+> widget de audio** en Ajustes. Esta sección es el puente UI→M91.
+
+### 7.1 Composición y posicionamiento
+
+```
+UIRoot (montaje)
+├─ ...capas existentes (pausa, menús, créditos, ...)
+└─ SettingsAudioLayer (MODAL_FULL)   ← montado el ÚLTIMO: se dibuja encima
+     ├─ Título  SETTINGS.AUDIO_TITULO
+     ├─ Fila slider Master/Music/SFX: [HSlider 0-100] [Label %] [CheckButton mute]
+     ├─ Separador + SETTINGS.OPCIONES
+     ├─ Rango dinámico (OptionButton: quiet/medio/dinámico)
+     ├─ Compresión (CheckButton) · Dispositivo de salida (OptionButton)
+     ├─ LblFallo (feedback, oculto por defecto)
+     └─ BtnVolver  ·  TimerCommit (0.25 s, one-shot)
+```
+
+### 7.2 Deep-links de `ajustes_pedido` (routing)
+
+Dos emisores, una sola capa; ambos caminos llaman `UIRoot._abrir_ajustes(origen)` →
+`SettingsAudioLayer.open()` si no está visible:
+
+| Emisor | Situación anterior | Situación nueva |
+|--------|--------------------|-----------------|
+| `MenusLayer.ajustes_pedido` (M89) | `ui_manager.push_layer(pause_layer)` — **no-op**: la capa ya registrada sigue en la pila (push_layer con capa en pila = warning) | `_abrir_ajustes("M89")` → open de la sección Audio |
+| `PauseLayer.ajustes_pedido` (T-053-066) | Emitía **sin listener** (deep-link colgado) | `_abrir_ajustes("T-053-066")` → open de la sección Audio |
+
+El registro de la pila lo hace la capa sola en `_enter_tree` (`register_layer`
+es idempotente), patrón sancionado en `ui_manager.gd`; `open()` no empuja, solo
+muestra. Esc/`close_top` → `pop_layer` des-registra; reabrir con `open()`
+**re-registra** (heal verificado por test).
+
+### 7.3 Flujo forward (widget → AudioConfig → disco)
+
+| Evento de widget | Handler | Acción | Persistencia |
+|---|---|---|---|
+| `HSlider.value_changed` | `_on_slider_volumen` | etiqueta % + marca sucio + (re)arranca TimerCommit | **ninguna** (debounce §21.4) |
+| `drag_ended(true)` / `TimerCommit.timeout` / `close()` | `commit_*` | `AudioConfig.set_volumen_porcentaje(bus, v)` | `config["audio"][bus]` (DataStore/GestorConfig, M60) |
+| `CheckButton.toggled` (mute) | `_on_mute_toggled` | `set_mute(bus, on)` | `config["audio"]["mutes"]` |
+| `OptionButton.item_selected` / compresión `toggled` | `aplicar_opcion(clave, valor)` | `set_opcion()`; si devuelve `false` → feedback | `config["audio"]["opciones"]` |
+
+- **Debounce:** un solo `[M60] Config guardada` por commit (no por frame): `value_changed`
+  marca pendiente; escriben `drag_ended`, el timer (0.25 s) o el cierre de la capa.
+- **Feedback de fallo:** `aplicar_opcion` con valor inválido → devuelve `false`,
+  muestra `SETTINGS.AUDIO_FALLA` en `LblFallo` y el widget revierte por la señal
+  inversa; un cambio válido posterior oculta el label.
+
+### 7.4 Flujo reverse (AudioConfig → widget, anti-bucle)
+
+`volumen_cambiado` / `mute_cambiado` / `opcion_cambiada` → los handlers inversos
+usan **`set_value_no_signal` / `set_pressed_no_signal` / `select()`**. Emitir
+`value_changed` desde el reverse cerraría el bucle: AudioConfig emite siempre
+(sin guard de igualdad) y `set_value` sí emite en el árbol (medido en 4.7.2).
+
+### 7.5 Decisiones y restricciones respetadas
+
+- Sin tocar `scripts/interacciones/`, `mapa/`, `construccion/`, `saving/` (lectura) ni widgets DeepSeek.
+- i18n: 14 claves `SETTINGS.*` nuevas agregadas a `locales/es.po` y `en.po` (LF).
+- Deprecación de los volúmenes de `game_settings.gd` (dueño M07) documentada en su `plan-actual/04-Codigo.md`.

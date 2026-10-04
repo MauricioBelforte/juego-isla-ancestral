@@ -342,3 +342,16 @@ Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes e
 No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
 
 Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+## Módulo 🔵 ACTUAL — 53-UI-UX (sección Audio de settings, canal 10)
+
+- [x] **M53-settings sección Audio (reclamado 2026-10-04 04:04, CERRADO 2026-10-04 05:45, log 1273)** — Opción A aprobada: construir la sección Audio de Ajustes + wire-up `set_opcion()` + deprecar volúmenes de `game_settings.gd` (dueño M07 ✅ sin agente activo). Fila 53 CG reconstruida y 🔵.
+- [x] Crear controles de la sección Audio: sliders maestro/música/sfx → `AudioConfig.set_volumen()` [M]
+- [x] Toggles `rango_dinamico` / `compresion` / `dispositivo_salida` → `set_opcion()` con feedback cuando devuelva `false` [M]
+- [x] Controles de mutes si encajan en la sección [S]
+- [x] Routing de `ajustes_pedido` (deep-link de pausa hoy colgado: emite sin listener) [M]
+- [x] Test headless round-trip UI → `config["audio"]` que FALLE si se rompe la integración [M]
+- [x] Deprecar `master_volume`/`music_volume`/`sfx_volume` en `game_settings.gd` (sin lectores; doc en M07 plan-actual) [S]
+- [x] Docs M53: `03-Diseno`/`04-Codigo`/`05-Checklist` (7 ítems nuevos `[ ]` ya agregados) [S]
+- [x] Cierre: suites + log + registros + commit Trampa 114 + informe 11 [S]
+- [x] Log reservado y creado: **1273** — M53 sección Audio (Opción A canal 10): SettingsAudioLayer + routing ajustes_pedido + i18n + deprecación game_settings + docs; suites 51/0, 0, 0, 136/0; fila 53 liberada 139/165

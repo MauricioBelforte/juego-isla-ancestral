@@ -1,5 +1,5 @@
-**Modelo:** MiMo V2.5 (OpenCode)
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 05-Checklist.md — Módulo 53: UI/UX
 
@@ -208,7 +208,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 158 ítems · Completados: 132 · Pendientes: 26 · No resueltos: 0.
+**Totales:** 165 ítems — Completados: 139 — Pendientes: 26 — No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?].
@@ -260,3 +260,16 @@ incluida la DialogLayer con el nuevo SubtituloOverlay).
   I.9 coherencia visual entre capas, I.10 locales largos (alemán), C.12 test de
   navegación 30 min/método, y el mapeo px de subtítulos (14/18/24 = decisión mía
   registrada, alineada a ThemeUx SMALL/BODY/H3).
+
+## O. Sección Audio de settings (wire-up M91) — Reserva actual
+
+> **✅ Reserva cerrada:** mimo-v2.6-flash-free / opencode — reclamo 2026-10-04 04:04, cierre 2026-10-04. Sección Audio construida (`settings_audio_layer.gd`, MODAL_FULL, montada por UIRoot), routing de `ajustes_pedido` (menús + pausa) cableado, 14 claves i18n agregadas, volúmenes de `game_settings.gd` deprecados (dueño M07) y docs 03/04 actualizados. Evidencia: suite `test_settings_audio_roundtrip.gd` = 51 checks / 0 fallos (piso 50); regresiones `test_ui_framework` 0 fallos, `test_ui_i18n_m53` 0 fallos, `test_audio_config` 136/0. Hallazgo delegado: `interaction_manager.gd:669` (`bool(null)`) en `11-BUGS.md`.
+
+- [x] Crear controles de la sección Audio: sliders maestro/música/sfx → `AudioConfig.set_volumen()` [M]
+- [x] Toggles `rango_dinamico` / `compresion` / `dispositivo_salida` → `set_opcion()` con feedback cuando devuelva `false` [M]
+- [x] Controles de mutes si encajan en la sección [S]
+- [x] Routing de `ajustes_pedido` (deep-link de pausa hoy colgado: emite sin listener) [M]
+- [x] Test headless round-trip UI → `config["audio"]` que FALLE si se rompe la integración [M]
+- [x] Deprecar `master_volume`/`music_volume`/`sfx_volume` en `game_settings.gd` (dueño M07; doc en su plan-actual) [S]
+- [x] Docs M53: `03-Diseno`/`04-Codigo` actualizados con la sección Audio [S]
+
