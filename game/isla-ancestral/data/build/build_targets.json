@@ -1,0 +1,8 @@
+{
+  "targets": [
+    {"id": "windows", "nombre": "Windows x64", "preset": "Windows", "prioridad": "P0", "arquitectura": "x86_64"},
+    {"id": "macos", "nombre": "macOS (Apple Silicon)", "preset": "macOS", "prioridad": "P1", "arquitectura": "arm64"},
+    {"id": "linux", "nombre": "Linux (Proton)", "preset": "Linux/X11", "prioridad": "P1", "arquitectura": "x86_64"},
+    {"id": "deck", "nombre": "Steam Deck", "preset": "Windows", "prioridad": "P0.5", "arquitectura": "x86_64"}
+  ]
+}

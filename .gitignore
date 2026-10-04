@@ -18,8 +18,14 @@ game/isla-ancestral/addons/
 # =============================================
 # Builds
 # =============================================
-build/
-Builds/
+# Anclado a la raiz (fix atria-dawn-s2 2026-10-04, Log 1276): el patron sin
+# ancla `build/` matcheaba cualquier carpeta build/ del arbol, incluyendo
+# game/isla-ancestral/scripts/build/ (tests M116/M117 + el autoload
+# BuildConfigManager) y game/isla-ancestral/data/build/ (build_targets.json,
+# leido por ese autoload). Esos archivos DEBEN versionarse; solo el directorio
+# de salida de builds de la raiz es lo que se quiere ignorar.
+/build/
+/Builds/
 
 # =============================================
 # IDE / Editor
