@@ -20,7 +20,7 @@ func _ready() -> void:
 func _cargar() -> void:
 	if not FileAccess.file_exists(RUTA_INFO):
 		return
-	var data := JSON.parse_string(FileAccess.get_file_as_string(RUTA_INFO))
+	var data = JSON.parse_string(FileAccess.get_file_as_string(RUTA_INFO))
 	if typeof(data) != TYPE_DICTIONARY:
 		return
 	version = String(data.get("version", version))

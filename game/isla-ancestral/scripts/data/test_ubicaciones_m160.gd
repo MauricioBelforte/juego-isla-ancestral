@@ -33,7 +33,7 @@ func _check(nombre: String, cond: bool, detalle: String = "") -> void:
 		print("  [FAIL] %s %s" % [nombre, detalle])
 
 func _get_wl():
-	return autoload("world_locations") if Engine.has_singleton("world_locations") else null
+	return root.get_node_or_null("/root/WorldLocations")
 
 func _test_carga() -> void:
 	print("--- Carga de ubicaciones ---")

@@ -185,7 +185,9 @@ func _recalcular_dia_actual() -> void:
 		_minutos_transicion = rng.randi_range(_config.transicion_min_minutos, _config.transicion_max_minutos)
 		_intensidad = 0.0
 		_intensidad_objetivo = 1.0
-		EventBus.weather.clima_cambio.emit(_clima_actual)
+		var bus := get_node_or_null("/root/EventBus")
+		if bus != null:
+			bus.weather.clima_cambio.emit(_clima_actual)
 
 
 func _on_minuto_cambio(_minuto: int) -> void:
@@ -193,7 +195,9 @@ func _on_minuto_cambio(_minuto: int) -> void:
 		return
 	var paso := 1.0 / float(maxi(_minutos_transicion, 1))
 	_intensidad = move_toward(_intensidad, _intensidad_objetivo, paso)
-	EventBus.weather.intensidad_cambio.emit(_intensidad)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.weather.intensidad_cambio.emit(_intensidad)
 
 
 ## ── Persistencia (ISaveProvider M59) ─────────────────────

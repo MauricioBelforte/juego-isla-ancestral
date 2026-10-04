@@ -1,5 +1,9 @@
 extends Node3D
 
+# BUG-091/44: las constantes de layout se toman de la clase (preload); el
+# identificador desnudo del autoload MundoRaiz no resuelve en modo --script.
+const MUNDO_RAIZ = preload("res://scripts/world/mundo_raiz.gd")
+
 ## Escena principal — Isla Raíz con generación procedural (M09/M10)
 
 @onready var fps_label = $UI/FPSLabel
@@ -183,8 +187,8 @@ func _setup_terrain() -> void:
 	if player:
 		# M167 (P-39): el spawn real ya NO está en la esquina vieja (256,16,256)
 		# sino en el centro real de la isla (mundo 5120²) consumido desde el
-		# punto único de verdad mundo_raiz.gd (SPAWN_JUGADOR = 3860,3860).
-		player.set_deferred("global_position", MundoRaiz.SPAWN_JUGADOR)
+		# punto único de verdad mundo_raiz.gd (MundoRaiz.SPAWN_JUGADOR = 3860,3860).
+		player.set_deferred("global_position", MUNDO_RAIZ.SPAWN_JUGADOR)
 	_ajustar_spawn_superficie.call_deferred()
 	
 	print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
@@ -207,7 +211,11 @@ func _crear_oceano() -> void:
 	oceano.material_override = mat
 	# M167 (P-39): océano centrado en el centro real de la isla (mundo 5120²),
 	# no en la esquina vieja (256,1.2,256). Consume mundo_raiz.gd.
-	oceano.position = MundoRaiz.centro_vec3(1.2)
+	# BUG-091/44: antes usaba el identificador desnudo MundoRaiz.centro_vec3 (no
+	# resuelve en --script); ahora se accede por nodo (convención get_node_or_null).
+	var mundo_raiz := get_node_or_null("/root/MundoRaiz")
+	if mundo_raiz != null:
+		oceano.position = mundo_raiz.centro_vec3(1.2)
 	# PlaneMesh en Godot 4 ya es horizontal (normal +Y): NO rotar (la rotación
 	# -90 lo dejaba VERTICAL / pared azul — fix 2026-09-03).
 	add_child(oceano)
@@ -241,7 +249,9 @@ func _crear_base_verde_isla() -> void:
 	disco.material_override = mat
 	# M167 (P-39): disco de arena blanca también centrado en el centro real
 	# (mundo 5120²) consumido desde mundo_raiz.gd, no en la esquina vieja.
-	disco.position = MundoRaiz.centro_vec3(2.95)
+	var mundo_raiz_disco := get_node_or_null("/root/MundoRaiz")
+	if mundo_raiz_disco != null:
+		disco.position = mundo_raiz_disco.centro_vec3(2.95)
 	add_child(disco)
 
 func _add_block(library: VoxelBlockyLibrary, block_name: String, color: Color) -> void:

@@ -5,6 +5,7 @@
 # M21: Dialogos — AutoAdvanceManager
 # Gestiona el avance automático de diálogos con temporizador y pausa en opciones.
 
+class_name AutoAdvanceManager
 extends Node
 
 ## Tiempo en segundos antes de avanzar automáticamente

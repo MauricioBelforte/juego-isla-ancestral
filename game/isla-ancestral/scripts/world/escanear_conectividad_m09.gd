@@ -35,7 +35,7 @@ func _run() -> void:
 				cruzo_agua = true
 			elif not cruzo_agua:
 				r_tierra_max = float(r)
-		var dir_nombre := ["E", "SE", "S", "SO", "O", "NO", "N", "NE"][i]
+		var dir_nombre = ["E", "SE", "S", "SO", "O", "NO", "N", "NE"][i]
 		print("  %s: tierra continua hasta r=%.0f%s" % [dir_nombre, r_tierra_max, (" (LUEGO HAY AGUA)" if cruzo_agua else " (todo tierra)")])
 
 	# ¿Y hacia dónde está el spawn actual (3860,3860)?

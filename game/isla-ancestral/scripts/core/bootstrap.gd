@@ -70,10 +70,11 @@ func _autoregistrar_dominios() -> void:
 		"game_flow": "GameFlowManager",
 		"scene_manager": "SceneManager",
 	}
+	var reg := get_node_or_null("/root/ServiceRegistry")
 	for contrato in dominios:
 		var nodo = get_node_or_null("/root/" + dominios[contrato])
-		if nodo != null and not ServiceRegistry.has(contrato):
-			ServiceRegistry.register(contrato, nodo)
+		if nodo != null and reg != null and not reg.has(contrato):
+			reg.register(contrato, nodo)
 
 
 ## M40: el GameFlowManager inicia en BOOT; esta escena es el mundo, así que
@@ -89,6 +90,12 @@ func _verificar_game_flow() -> void:
 		print("[Bootstrap] GameFlowManager -> MUNDO")
 
 
+## BUG-091/44: ServiceRegistry es autoload; su identificador desnudo no resuelve
+## en modo --script. Convención del proyecto: get_node_or_null.
+func _registry() -> Node:
+	return get_node_or_null("/root/ServiceRegistry")
+
+
 ## Registra los servicios core del juego
 func _register_core_services() -> void:
 	print("[Bootstrap] Registrando servicios core...")
@@ -96,23 +103,23 @@ func _register_core_services() -> void:
 	# 1. EventBus (ya existe como autoload, solo lo referenciamos)
 	var event_bus = get_node_or_null("/root/EventBus")
 	if event_bus:
-		ServiceRegistry.register("event_bus", event_bus)
+		_registry().register("event_bus", event_bus)
 	else:
 		push_warning("Bootstrap: EventBus no encontrado como autoload")
 	
 	# 2. ServiceRegistry (este mismo script)
-	ServiceRegistry.register("service_registry", self)
+	_registry().register("service_registry", self)
 	
 	# 3. GameState placeholder (M59 implementará la versión real)
 	# Por ahora no registramos nada — se creará cuando M59 se implemente
 	
-	var registered = ServiceRegistry.list_registered()
+	var registered = _registry().list_registered()
 	print("[Bootstrap] Servicios core registrados (%d): %s" % [registered.size(), str(registered)])
 
 
 ## Valida que todos los servicios obligatorios estén presentes
 func _validate_services() -> void:
-	var missing = ServiceRegistry.validate_required(REQUIRED_SERVICES)
+	var missing = _registry().validate_required(REQUIRED_SERVICES)
 	if missing.size() > 0:
 		push_error("Bootstrap: servicios obligatorios faltantes: %s" % str(missing))
 	else:
@@ -125,7 +132,7 @@ func _validate_services() -> void:
 func verificar_integridad_dominios() -> void:
 	var faltantes: Array[String] = []
 	for dominio in DOMINIOS_ESPERADOS:
-		if not ServiceRegistry.has(dominio):
+		if not _registry().has(dominio):
 			faltantes.append(dominio)
 	if faltantes.size() > 0:
 		print("[Bootstrap] DOM-INF-FALTANTE dominios de juego no registrados: %s" % str(faltantes))
@@ -165,9 +172,9 @@ func _load_main_scene() -> void:
 
 ## Registra un servicio adicional (llamado por módulos que se inicializan después)
 func register_service(interface_name: String, service: Node) -> void:
-	ServiceRegistry.register(interface_name, service)
+	_registry().register(interface_name, service)
 
 
 ## Obtiene un servicio (atajo)
 func get_service(interface_name: String) -> Node:
-	return ServiceRegistry.get_service(interface_name)
+	return _registry().get_service(interface_name)

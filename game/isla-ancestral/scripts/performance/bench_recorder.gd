@@ -13,6 +13,10 @@
 
 extends Node3D
 
+# BUG-091/44: MundoRaiz es autoload; en --script su identificador no resuelve.
+# Se accede a las constantes via preload (clase) — no por el nodo autoload.
+const MUNDO_RAIZ = preload("res://scripts/world/mundo_raiz.gd")
+
 # BUG-084 (Fase 2, M166, hy3): los waypoints estaban hardcodeados al mundo viejo
 # 512² (centro 256,256). Se migran a MundoRaiz: se guardan como OFFSETS desde el
 # centro viejo y se reubican en el centro real (2560,2560), escalados por el radio
@@ -30,18 +34,18 @@ const WAYPOINTS_VIEJO := [                       # Vector3(offset_x, altitud_y, 
 ## Waypoints del benchmark en coordenadas del mundo real (centro MundoRaiz, escalados).
 func calcular_waypoints() -> Array:
 	var out: Array = []
-	var escala := MundoRaiz.CENTRO.x / RADIO_VIEJO   # 2560 / 256 = 10
+	var escala := MUNDO_RAIZ.CENTRO.x / RADIO_VIEJO   # 2560 / 256 = 10
 	for o in WAYPOINTS_VIEJO:
-		out.append(Vector3(MundoRaiz.CENTRO.x + o.x * escala, o.y, MundoRaiz.CENTRO.y + o.z * escala))
+		out.append(Vector3(MUNDO_RAIZ.CENTRO.x + o.x * escala, o.y, MUNDO_RAIZ.CENTRO.y + o.z * escala))
 	return out
 
 ## Posicion del VoxelViewer en el centro real de la Isla Raiz (era Vector3(256,30,256)).
 func posicion_viewer() -> Vector3:
-	return MundoRaiz.centro_vec3(30.0)
+	return Vector3(MUNDO_RAIZ.CENTRO.x, 30.0, MUNDO_RAIZ.CENTRO.y)
 
 ## Punto de mira del benchmark: el centro real de la isla (era Vector3(256,12,256)).
 func objetivo_look() -> Vector3:
-	return MundoRaiz.centro_vec3(12.0)
+	return Vector3(MUNDO_RAIZ.CENTRO.x, 12.0, MUNDO_RAIZ.CENTRO.y)
 const DURACION_WAYPOINT_S := 15.0
 const INTERVALO_MUESTREO := 30
 

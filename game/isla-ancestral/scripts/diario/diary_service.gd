@@ -130,7 +130,9 @@ func registrar(entrada_id: String, categoria: String) -> bool:
 	_estados[entrada_id] = {"categoria": categoria, "estado": Estado.VISTO, "favorito": false}
 	_dia_registro[entrada_id] = _dia_absoluto()
 	_nuevas_sesion.append(entrada_id)
-	EventBus.diary.entrada_nueva.emit(entrada_id, categoria)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.diary.entrada_nueva.emit(entrada_id, categoria)
 	print("[DIARY-ADD] %s (%s)" % [entrada_id, categoria])
 	_emitir_progreso(categoria)
 	return true
@@ -225,9 +227,11 @@ func progreso_categoria(categoria: String) -> Dictionary:
 
 func _emitir_progreso(categoria: String) -> void:
 	var p := progreso_categoria(categoria)
-	EventBus.diary.progreso_cambiado.emit(float(p.get("percent", 0.0)))
-	if int(p.get("descubiertas", 0)) > 0 and absf(float(p.get("percent", 0.0)) - 1.0) < 0.001:
-		EventBus.diary.categoria_completa.emit(categoria)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.diary.progreso_cambiado.emit(float(p.get("percent", 0.0)))
+	if bus != null and int(p.get("descubiertas", 0)) > 0 and absf(float(p.get("percent", 0.0)) - 1.0) < 0.001:
+		bus.diary.categoria_completa.emit(categoria)
 
 
 ## ── Persistencia (M59, §2.3) ────────────────────────────

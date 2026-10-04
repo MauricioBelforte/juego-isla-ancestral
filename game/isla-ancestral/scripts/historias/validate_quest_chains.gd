@@ -14,7 +14,7 @@ func _run() -> void:
     if service == null:
         print("[M23] ERROR: QuestChainService no encontrado")
         return
-    var errores := service.validar_todas()
+    var errores = service.validar_todas()
     if errores.is_empty():
         print("[M23] OK: todas las cadenas válidas (%d)" % service._cadenas.size())
     else:
@@ -22,7 +22,7 @@ func _run() -> void:
         for e in errores:
             print("  - " + e)
 
-func _load_service() -> Script:
+func _load_service() -> Node:
     var path := "res://scripts/historias/quest_chain_service.gd"
     var script := load(path)
     if script == null:

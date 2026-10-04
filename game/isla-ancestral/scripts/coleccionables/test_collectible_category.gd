@@ -65,7 +65,7 @@ func _test_static_cargar_desde_json() -> void:
 	_check(cats is Array, "cargar_desde_json retorna Array")
 	_check(cats.size() == 1, "cargar_desde_json: 1 categoría parseada (%d)" % cats.size())
 	if cats.size() > 0:
-		var c := cats[0]
+		var c = cats[0]
 		_check(c.id == &"animales", "cargar_desde_json: id correcto")
 		_check(c.nombre_es == "Animales", "cargar_desde_json: nombre_es correcto")
 		_check(c.total_esperado == 4, "cargar_desde_json: total_esperado = 4")

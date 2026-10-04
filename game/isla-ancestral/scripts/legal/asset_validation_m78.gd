@@ -73,7 +73,7 @@ static func generar_reporte() -> String:
 		return "\n".join(lineas)
 
 	# Contar assets
-	var assets := data.get("assets_terceros", [])
+	var assets = data.get("assets_terceros", [])
 	lineas.append("Total assets registrados: %d" % assets.size())
 
 	# Verificar NC/ND

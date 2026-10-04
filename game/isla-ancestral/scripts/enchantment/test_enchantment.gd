@@ -2,7 +2,7 @@ extends SceneTree
 
 func _init() -> void:
 	var system = load("res://game/isla-ancestral/scripts/enchantment/enchantment_system.gd").new()
-	add_child(system)
+	root.add_child(system)
 	_await_frame()
 
 	var passed := 0

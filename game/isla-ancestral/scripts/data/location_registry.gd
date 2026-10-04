@@ -23,14 +23,14 @@ enum IslandType {
     AUR = 3
 }
 
-class LocationRequirements extends Resource:
+class RequisitosUbicacion extends Resource:
     @export var herramienta_minima: String
     @export var costo_entrada: int
     @export var items_requeridos: Array[String]
     @export var npcs_requeridos: Array[String]
     @export var descripcion_requisitos: String
 
-class LocationObject extends Resource:
+class ObjetoUbicacion extends Resource:
     @export var item_id: String
     @export var nombre: String
     @export var posicion: Vector3
@@ -44,14 +44,14 @@ class LocationObject extends Resource:
     @export var tiempo_regeneracion: float
     @export var notas: String
 
-class LocationData extends Resource:
+class DatosUbicacion extends Resource:
     @export var location_id: String
     @export var nombre: String
     @export var tipo: int
     @export var isla: int
     @export var descripcion: String
-    @export var requisitos: LocationRequirements
-    @export var objetos: Array[LocationObject]
+    @export var requisitos: RequisitosUbicacion
+    @export var objetos: Array[ObjetoUbicacion]
     @export var npcs: Array[String]
     @export var conexiones: Array[String]
     @export var ampliable: bool

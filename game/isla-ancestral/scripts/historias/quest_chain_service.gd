@@ -52,7 +52,7 @@ func _cargar_cadena_desde_json(fname: String) -> void:
     if json.parse(text) != OK:
         push_warning("[M23] JSON inválido en %s" % path)
         return
-    var data := json.get_data()
+    var data = json.get_data()
     if data is Dictionary and data.has("cadenas"):
         for chain_data in data["cadenas"]:
             _registrar_cadena(chain_data)
@@ -76,9 +76,11 @@ func _registrar_cadena(data: Dictionary) -> void:
         return
     
     _cadenas[chain.id] = chain
-    # Indexar por tipo
+    # Indexar por tipo (GDScript no tiene Dictionary.setdefault)
     var tipo: String = str(data.get("tipo", "general"))
-    _por_tipo.setdefault(tipo, []).append(chain)
+    if not _por_tipo.has(tipo):
+        _por_tipo[tipo] = []
+    _por_tipo[tipo].append(chain)
 
 func _rebuild_cache() -> void:
     # Reconstruir índices si es necesario
@@ -127,7 +129,7 @@ func marcar_paso_completado(chain_id: String, paso_id: String) -> void:
     # Verificar si es el último paso
     var chain := get_cadena(chain_id)
     if chain != null:
-        var ultimo_paso := chain.pasos.back()
+        var ultimo_paso = chain.pasos.back()
         if ultimo_paso.get("id") == paso_id:
             _estado[chain_id]["completada"] = true
             cadena_completada.emit(chain)
@@ -135,7 +137,7 @@ func marcar_paso_completado(chain_id: String, paso_id: String) -> void:
 func get_consecuencias_pendientes() -> Array:
     var out: Array = []
     for chain_id in _estado:
-        var st := _estado[chain_id]
+        var st = _estado[chain_id]
         if st.get("completada", false) and not st.get("consecuencias_aplicadas", false):
             out.append(chain_id)
     return out
@@ -165,7 +167,7 @@ func restore_save_data(data: Dictionary) -> void:
 func validar_todas() -> Array:
     var errores: Array = []
     for chain in _cadenas.values():
-        var errs := chain.validar()
+        var errs = chain.validar()
         if errs.size() > 0:
             errores.append("Cadena '%s': %s" % [chain.id, ", ".join(errs)])
     return errores

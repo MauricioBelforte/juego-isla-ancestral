@@ -90,38 +90,51 @@ Primeras ~30 tareas que tomo por orden de encaje, todas en módulos libres:
 
 | Orden | Módulo | Tarea | Qué es | Por qué yo |
 |-------|--------|-------|--------|-----------|
-| 1 | 60 | T-018 | RF3: serialización de construcciones y casas (M17/M18) | Serialización pura |
-| 2 | 60 | T-019 | RF3: serialización de fauna y vecinos (M36/M19) | Serialización pura |
+| 1 | 60 | T-018 [x] | RF3: serialización de construcciones y casas (M17/M18) | Serialización pura |
+| 2 | 60 | T-019 [x] | RF3: serialización de fauna y vecinos (M36/M19) | Serialización pura |
 | 3 | 60 | T-145 | Recetas y cultivos como Resources tipados (`.tres` M16/M33) | Datos estructurados |
-| 4 | 68 | T-017 | `transport_network.tres` como única fuente de verdad | Dataset + contrato |
-| 5 | 68 | T-002 | Cargar el grafo de paradas/rutas desde el `.tres` | IO + parser |
-| 6 | 68 | T-003 | Exponer API `list_routes`/`buy_ticket` a la UI (M53) | API/contrato |
-| 7 | 68 | T-020 | Testear el grafo con ruta corta (dijkstra, orden de paradas) | Test headless |
-| 8 | 68 | T-049 | Persistencia de waypoints (M59) | Save/IO |
-| 9 | 27 | T-011 | `IslandDefinition` como Resource con `@export` de metadatos | Datos tipados |
-| 10 | 27 | T-030 | 12 `.tres`, uno por satélite | Dataset |
-| 11 | 27 | T-041 | Registro sin duplicados: ids únicos al cargar `.tres` | Validación |
-| 12 | 27 | T-045 | Fallback: si falta un `.tres` → ERROR + Aurora siempre carga | Robustez |
-| 13 | 27 | T-036 | `posicion_ancla(id)` con cache de M10 | Cache/logic |
-| 14 | 87 | T-050 | Convención de claves `MODULO.SECCION.CLAVE` | Tooling i18n |
-| 15 | 87 | T-044 | Compatibilidad de los `.po` con Poedit/gettext | Validador |
-| 16 | 87 | T-058 | Cache de traducciones frecuentes | Optimización |
-| 17 | 116 | T-002 | Crear instalador | Tooling/packaging |
-| 18 | 116 | T-014 | Validar rollback | Robustez |
-| 19 | 116 | T-070 | Firma digital del instalador (.exe/.msi) | Seguridad |
-| 20 | 116 | T-078 | Detectar versión instalada | Lógica/IO |
-| 21 | 123 | T-022 | Esquema data idéntico al de M108 | Contrato de datos |
-| 22 | 148 | T-009 | Gate de CI ante IDs duplicados o `canonRef` vacío | CI + validación |
-| 23 | 148 | T-090 | Migración v3.1 para saves sin el campo | Migración de schema |
-| 24 | 148 | T-109 | Tests de trigger/persistencia en PlayMode | Test |
-| 25 | 52 | T-027 | Pool de emisores one-shot prestados/liberados | Pooling |
-| 26 | 52 | T-029 | Precalentamiento del pool (8 emisores) | Precalentamiento |
-| 27 | 52 | T-093 | Riesgo de determinismo roto → semillas + validador | Determinismo/test |
+| 4 | 68 | T-017 [x] | `transport_network.tres` como única fuente de verdad | Dataset + contrato |
+| 5 | 68 | T-002 [x] | Cargar el grafo de paradas/rutas desde el `.tres` | IO + parser |
+| 6 | 68 | T-003 [x] | Exponer API `list_routes`/`buy_ticket` a la UI (M53) | API/contrato |
+| 7 | 68 | T-020 [x] | Testear el grafo con ruta corta (dijkstra, orden de paradas) | Test headless |
+| 8 | 68 | T-049 [x] | Persistencia de waypoints (M59) | Save/IO |
+| 9 | 27 | T-011 [x] | `IslandDefinition` como Resource con `@export` de metadatos | Datos tipados |
+| 10 | 27 | T-030 [x] | 12 `.tres`, uno por satélite | Dataset |
+| 11 | 27 | T-041 [x] | Registro sin duplicados: ids únicos al cargar `.tres` | Validación |
+| 12 | 27 | T-045 [x] | Fallback: si falta un `.tres` → ERROR + Aurora siempre carga | Robustez |
+| 13 | 27 | T-036 [x] | `posicion_ancla(id)` con cache de M10 | Cache/logic |
+| 14 | 87 | T-050 [x] | Convención de claves `MODULO.SECCION.CLAVE` | Tooling i18n |
+| 15 | 87 | T-044 [x] | Compatibilidad de los `.po` con Poedit/gettext | Validador |
+| 16 | 87 | T-058 [x] | Cache de traducciones frecuentes | Optimización |
+| 17 | 116 | T-002 [x] | Crear instalador | Tooling/packaging |
+| 18 | 116 | T-014 [x] | Validar rollback | Robustez |
+| 19 | 116 | T-070 [x] | Firma digital del instalador (.exe/.msi) | Seguridad |
+| 20 | 116 | T-078 [x] | Detectar versión instalada | Lógica/IO |
+| 21 | 123 | T-022 [x] | Esquema data idéntico al de M108 | Contrato de datos |
+| 22 | 148 | T-009 [x] | Gate de CI ante IDs duplicados o `canonRef` vacío | CI + validación |
+| 23 | 148 | T-090 [x] | Migración v3.1 para saves sin el campo | Migración de schema |
+| 24 | 148 | T-109 [x] | Tests de trigger/persistencia en PlayMode | Test |
+| 25 | 52 | T-027 [x] | Pool de emisores one-shot prestados/liberados | Pooling |
+| 26 | 52 | T-029 [x] | Precalentamiento del pool (8 emisores) | Precalentamiento |
+| 27 | 52 | T-093 [x] | Riesgo de determinismo roto → semillas + validador | Determinismo/test |
 | 28 | 26 | T-053 ✅ | Guardado atómico en cada checkpoint (Log 902) | Save atómico |
 | 29 | 26 | T-084 ✅ | Testear softlocks por zona (suite M66) — Log 902 | Suite de tests |
 | 30 | 101 | — | QA cruzado §21.8 del módulo + cierre formal de "Con dudas" | Verificación |
 
 > **P-36 (2026-09-25):** M106 y M122 **no salen de esta cola** — los asigno el coordinador directamente por encaje (M106 es la version en codigo del gate `security-scan` que ya era mio; M122 depende de M103/M102/M110). Ambos cerrados con **0 `[ ]`**. La cola de abajo sigue vigente.
+
+> **Actualización 2026-10-04 (director atria-Dawn-Preview, mensaje 18 e):** la cola de arriba quedó **stale** — marqué `[x]` las tareas ya cerradas en las iteraciones 11-25 (M60, M68, M27, M87, M116, M123, M52, M26, M148). **Nuevas tareas asignadas:**
+
+| ID | Módulo | Estado | Tarea | Por qué yo |
+|---|---|---|---|---|
+| **T-D1** | BUG-091 (transversal) | ✅ **CERRADO** (Log 1277) | **Frente (d): los 44 SCRIPT ERROR restantes** — barrido, fix, validacion con full load | Parse errors + tests headless + validacion = mi nucleo |
+| **T-D2** | BUG-093 (transversal) | 🟡 Abierto | Convertir las 2 suites rojas de timing async (`test_npc_visual_database.gd`, `test_equipment_manager.gd`) cuando terminen las ediciones en vuelo de M53/mimo | Mi conversor + patron async medido (Log 1268 §3.4) |
+| **T-D3** | BUG-093 (transversal) | 🟡 Abierto | Re-correccion de las 3 suites bloqueadas por dependencias (`test_inventory_economy`, `test_stable_flows`, `test_item_data`) tras los fixes de agnes (BUG-095) + `inventario_service` | Cierre del sub-frente -> BUG-093 -> `[x]` |
+| **T-D4** | **M03-Documentacion-Del-Proyecto** | 🟢 Disponible 0/133 | Auditoria de la documentacion del repo **verificable contra disco** (estructura, `.gitignore`, scripts de automatizacion) | Encaje A puro, modulo LIBRE, 0 deps |
+| **T-D5** | **M120-DLC-Y-Expansiones** | 🟢 Disponible 6/222 | **Parte tecnica**: compatibilidad de saves entre DLC + versionado (lo "design-heavy" queda `[?]` con dueno) | Mi fortaleza #1 (M60 serializacion/migracion) |
+| **T-D6** | **M94-Retencion-Sin-FOMO** | 🟡 65/113 | Los 41 `[ ]` tecnicos: reglas de diseno como datos + verificacion de ausencia de telemetria manipuladora | Data-driven + validacion; lo "design-heavy" queda `[?]` |
+
+**Orden sugerido por el director:** T-D1 (critico, desbloquea CI) -> **T-D4** (limpio, libre, alta entrega) -> T-D2/T-D3 (cierre del sub-frente BUG-093) -> T-D5 -> T-D6.
 
 ---
 
@@ -202,6 +215,7 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 | 31 | (transversal) BUG-093 — suite MUERTA `test_terrain_modifiers.gd` | — | 1264 | **Frente del director (mensaje 13).** La suite usaba `assert_that().is_equal_to()` (x4) e `is_greater_than()` (x1) — métodos que **NO existen en gdUnit4** (0 en `addons/gdUnit4/`) -> **parseaba (EXIT 0) pero moría en runtime** (suite MUERTA; clase más silenciosa que `is_instance_of(int)`, que SÍ da parse error). **Segundo defecto:** la 1ª aserción esperaba `4.2` para `calculate_effective_speed(5.0,0.8,0.2)`; código + diseño §3.1 dan **4.8** -> expectativa OBSOLETA (la aserción consagraba un dato viejo). **Convertida al estándar headless** (`extends SceneTree`, 2 bloques A/B, guardia de 3 capas, piso `CHECKS_MINIMOS := 10` medido, watchdog). **10/0/EXIT 0 x3**; sonda ROJO **4/4** (control + fuente mutada + aborto runtime `["B"]` + piso), restauración byte-exacta (sha256). **Familia:** `is_equal_to` = 135 llamadas / 10 archivos; `is_greater_than` = 5 / 3 -> **>10**, sub-frente autorizado (pendiente). Registrado + CERRADO en `11-BUGS.md`. **NO sella §21.8.** | BUG-093 `[x] Resuelto` |
 | 32 | (transversal) BUG-091 — widgets M53/M54 (3 parse errors) | — | 1266 | **Frente del director (mensaje 13, parte c).** 3 widgets con parse error de BUG-091: `full_map_layer.gd` (M54, real en `scripts/mapa/`) L32 (`_mouse_filter` -> `mouse_filter`) + L47 (`set_anchors_and_offsets_preset` no acepta `Vector2` como 3er arg -> `custom_minimum_size` + preset centrado); `action_prompt_overlay.gd` (M53) L106 (`Input.get_joy_button_string()` **NO existe en 4.7.2** -> mapa manual del enum `JoyButton`); `hotbar_widget.gd` (M53) L52 (inferencia `Variant` -> tipo explicito). **HALLAZGO:** los 3 están referenciados por `scenes/ui/hud.tscn` (`[ext_resource]`) -> **NO** eran "código no conectado": el HUD tenía 3 scripts que no parseaban. `--check-only` **EXIT 0 x3**; sonda `load()` de `hud.tscn` + los 3 scripts **OK x4**. Marcados en los 05-Checklist de M53/M54 (los 3 ítems ya estaban `[x]` pese al parse error -> sobre-cierre). **NO sella §21.8.** | `[x]` corregidos |
 | 33 | (transversal) BUG-093 sub-frente FAMILIA + BUG-094 | — | 1268 | **Frente del director (mensaje 16).** Barrí la familia de APIs gdUnit4 **MUERTAS** en todo `game/isla-ancestral/tests/`: `is_equal_to` (real `is_equal`) = **134 llamadas / 12 archivos** + `is_greater_than` (real `is_greater`) = **5 / 3** (cifra corregida: eran 134/12, no 135/10). **2ª familia nueva -> BUG-094:** `is_instance_of` (real `is_instanceof`) 1/1, `has_not_contains` (real `not_contains`) 1/1, `has_any_item` (real `contains`) 1/1. **7/12 convertidas a headless y VERDES** (135 checks/0 fallos/EXIT 0 x3, piso `CHECKS_MINIMOS` **MEDIDO** y fijado, sonda ROJO 14/14, restauración byte-exacta): `test_i_interactable` (11), `test_i_saveable` (15), `test_i_damageable` (16), `test_contenedor_inventario` (33), `test_recipe_schema` (10), `test_economy_manager` (31), `test_economy_npc_shop` (19). **5/12 ROJAS** (convertidas, NO cableadas; causas ajenas / en vuelo): `test_item_data` (61/3 fail), `test_npc_visual_database` (async), `test_equipment_manager` (async+infer), `test_inventory_economy`+`test_stable_flows` (`Identifier not found: ItemDatabase` en `inventario_service.gd:171`). **Hallazgo REAL reportado (NO corregido):** `scripts/data/item_data.gd:88` `es_valido()` con bug de precedencia (`and` > `or`) -> `tamano=(1,0)` da `true` (debería `false`). Registrado en `11-BUGS.md` (tabla + §7: BUG-093 ABIERTO + BUG-094 nuevo) + **patrón widget** (un `[x]` de widget/UI exige parsea **Y** la escena carga). **NO toqué `quality.yml`** (lista de 7 suites a s2). **NO sella §21.8.** | BUG-093 [ ] ABIERTO · BUG-094 [ ] nuevo |
+| 34 | (transversal) BUG-091 residuo — los 44 SCRIPT ERROR | — | 1277 | **Frente del director (mensaje 18 d).** s2 cerró tools/editor (22->0, Log 1271) y agnes gameplay/world/core; quedaban **44 SCRIPT ERROR**. **Medido con el colector real** (`gen_colector_sintaxis.py` + `--check-only --script`, mismo criterio del gate `godot-lint`), **clasificado por familia**: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** función inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type = **44**. **HALLAZGO clave: el caso A NO es ruido de `--script`** — de **16** archivos que usan `EventBus.`, solo **5** fallaban; los otros 11 ya usaban `get_node_or_null("/root/EventBus")` (convención del proyecto, 172 archivos). Sonda empírica: `EventBus.emit_signal("x")` bajo `--check-only --script` -> "Identifier not found". En full load los autoloads sí resuelven (`-e --quit` = 0 antes y después) -> los 11 no rompían el juego pero SÍ el gate y las corridas headless. **Fix:** convención `get_node_or_null` para autoloads (+ helper `_registry()` en `bootstrap.gd`; `MUNDO_RAIZ`/`GAMELOGGER` por `preload` para constantes/enums), `class_name` faltantes, `:=`->`=` sobre Variant, rename de inner classes, fixes de funciones inexistentes, `-> Script`->`-> Node`. Archivo obsoleto `core/Obsoletos/...bootstrap.gd` **relocalizado** fuera de `scripts/` (+ `git rm` del `.uid`). **Resultado: colector 44 -> 2** (residuo = 1 error ajeno `inventario_service.gd:171` = agnes/BUG-095 + 1 cascada dependiente); **full load 0 SCRIPT ERROR / EXIT 0**; M167 `validador_isla_raiz` **30/0** (cadenas preservadas en comentarios); suites tocadas verdes (`test_collectible_category` 0, `test_ubicaciones_m160` 17/0, `test_bench_recorder_m166` 0). **Falsos de `--script`: 0.** **NO toqué `quality.yml`** (gate de s2; se pone verde solo con el fix de agnes). Hallazgos colaterales reportados: `test_enchantment` (M163) cuelga (prefijo doble `res://game/isla-ancestral/` + sin watchdog; no está en CI) y `test_collectible_category` (M73) emite `SCRIPT ERROR` de RefCounted pero dice "0 fallo(s)". Registrado como **BUG-098**. **NO sella §21.8.** | BUG-098 [x] resuelto en zona propia |
 
 **Regla del ciclo:** bloquear el módulo (reserva en `Logs/reservas/` + `🔵` en el checklist) → leer la documentación → codificar → test headless → documentar (04-Codigo, 05-Checklist, CHECKLIST-GLOBAL, ESTADO-PARALELO) → escribir el log → borrar la reserva → **siguiente módulo**.
 
@@ -231,6 +245,8 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [x] Log reservado: **1159** — P-45 (auditoría de autoría del merge + cierre de los logs de P-36, 2026-09-25). Medido con `--estado` **justo antes**: primero=**1159** (el encargo decía 1158; 1158 lo consumió s2 en su P-44). Al cerrar, el pool arranca en **1160**. `--estado` final: **0 conflictos**.
 
 - [x] Log reservado: **1163** — P-48 (reclasificación del merge por autoría REAL: buckets B/C/scratch/otros, **429** archivos sucios+untracked, **0 sin resolver**, 2026-09-25). Medido con `--estado` **justo antes** de reservar: primero=**1163** (el encargo decía 1160; 1160/1161/1162 los consumieron otros agentes — 1161 = QA P-43b de mimo, 1162 = P-46 del coordinador — entre el encargo y mi turno). Al cerrar, el pool arranca en **1164**. `--estado` final: **0 conflictos**. **Solo reporte:** no se commiteó ningún archivo de los buckets.
+
+- [x] Log reservado: **1277** — BUG-091 residuo: los 44 SCRIPT ERROR (frente del director, mensaje 18 d, 2026-10-04). Medido con `--estado` **justo antes** de reservar: el pool dio **primero=1277** (1271-1276 los consumieron s2/agnes/Hy3/mimo concurrentemente; mi intento previo de reservar 1271 colisionó con el Log 1271 de s2 = tools/editor, así que re-reservé). Al cerrar, el pool arranca en **1278**. `--estado` final: **0 conflictos**.
 
 - [x] Log reservado: **1005** — M52 Partículas-Y-VFX iter. 6 (2026-09-18)
       ⚠️ **Dos números perdidos antes de este, por dos modos de fallo DISTINTOS del protocolo v3:**

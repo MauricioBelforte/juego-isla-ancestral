@@ -211,7 +211,9 @@ func _on_herramienta_equipada(tool: Resource) -> void:
 		tool_id = tipos[idx] if idx >= 0 and idx < tipos.size() else str(idx)
 	if "nivel" in tool:
 		nivel = int(tool.nivel)
-	EventBus.progresion.nivel_herramienta_cambio.emit(tool_id, nivel)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.progresion.nivel_herramienta_cambio.emit(tool_id, nivel)
 	# Estadística para M71: nivel máximo alcanzado por herramienta (monótono)
 	var stat := "nivel_" + tool_id
 	var prev := int(profile.get_stat(stat)) if profile != null else 0

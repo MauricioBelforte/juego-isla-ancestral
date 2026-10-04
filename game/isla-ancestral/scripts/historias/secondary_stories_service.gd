@@ -105,7 +105,9 @@ func iniciar_cadena(cadena_id: String) -> Dictionary:
 		if h == null or String(h.final_elegido()) == "":
 			return {"ok": false, "motivo": "requiere postgame (final de M22)"}
 	_estado[cadena_id] = {"paso_actual": 0, "activa": true, "completada": false}
-	EventBus.quest.quest_started.emit(cadena_id)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.quest.quest_started.emit(cadena_id)
 	print("[M23] Cadena iniciada: %s — %s" % [cadena_id, String(c.get("titulo", ""))])
 	return {"ok": true, "motivo": ""}
 
@@ -172,9 +174,11 @@ func _completar_cadena(cadena_id: String) -> Dictionary:
 		if diary != null:
 			diary.registrar("mision_" + cadena_id, "misiones")
 	# Cosmético → señal de desbloqueo (M71 escucha)
-	if String(rec.get("cosmetico", "")) != "":
-		EventBus.quest.quest_updated.emit(cadena_id, "cosmetico", 1)
-	EventBus.quest.quest_completed.emit(cadena_id)
+	var bus := get_node_or_null("/root/EventBus")
+	if String(rec.get("cosmetico", "")) != "" and bus != null:
+		bus.quest.quest_updated.emit(cadena_id, "cosmetico", 1)
+	if bus != null:
+		bus.quest.quest_completed.emit(cadena_id)
 	print("[M23] Cadena completada: %s" % cadena_id)
 	return {"ok": true, "motivo": "", "completada": true}
 

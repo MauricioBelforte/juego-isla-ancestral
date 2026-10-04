@@ -64,6 +64,10 @@
 
 extends Node
 
+# BUG-091/44: GameLogger es autoload; en --script su identificador no resuelve.
+# El enum Category se toma de la clase via preload; el nodo, via get_node_or_null.
+const GAMELOGGER = preload("res://scripts/logging/logger.gd")
+
 ## ── Señales ─────────────────────────────────────────────────────────
 
 ## Emitida al cambiar el estado de opt-in (la UI M91/Startup la consume).
@@ -152,11 +156,13 @@ func _ready() -> void:
 	_configurar_timers()
 	_cargar_opt_in()
 	_registrar_servicio()
+	var logger := get_node_or_null("/root/GameLogger")
 	if opt_in:
 		_iniciar_sesion()
-		GameLogger.info("Telemetry: servicio inicializado (opt-in ON)", GameLogger.Category.ANALYTICS)
-	else:
-		GameLogger.info("Telemetry: servicio inicializado (opt-in OFF — sin captura)", GameLogger.Category.ANALYTICS)
+		if logger != null:
+			logger.info("Telemetry: servicio inicializado (opt-in ON)", GAMELOGGER.Category.ANALYTICS)
+	elif logger != null:
+		logger.info("Telemetry: servicio inicializado (opt-in OFF — sin captura)", GAMELOGGER.Category.ANALYTICS)
 
 ## ─── Service Registry (M07) ───────────────────
 
@@ -194,7 +200,9 @@ func establecer_opt_in(estado: bool) -> void:
 		_iniciar_sesion()
 	_emitir_opt_out_a_analytics()
 	cambio_opt_in.emit(opt_in)
-	GameLogger.info("Telemetry: opt-in = %s" % estado, GameLogger.Category.ANALYTICS)
+	var logger := get_node_or_null("/root/GameLogger")
+	if logger != null:
+		logger.info("Telemetry: opt-in = %s" % estado, GAMELOGGER.Category.ANALYTICS)
 
 ## Sincroniza el opt-out con M104 para privacy by design.
 func _emitir_opt_out_a_analytics() -> void:
@@ -373,7 +381,9 @@ func start_puzzle(puzzle_id: String) -> void:
 	_puzzle_inicio[puzzle_id] = Time.get_ticks_msec()
 	if _puzzle_check_timer.is_stopped():
 		_puzzle_check_timer.start()
-	GameLogger.debug("Telemetry: puzzle iniciado %s" % puzzle_id, GameLogger.Category.ANALYTICS)
+	var logger := get_node_or_null("/root/GameLogger")
+	if logger != null:
+		logger.debug("Telemetry: puzzle iniciado %s" % puzzle_id, GAMELOGGER.Category.ANALYTICS)
 
 func complete_puzzle(puzzle_id: String) -> void:
 	if not opt_in:

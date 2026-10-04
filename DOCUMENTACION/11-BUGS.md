@@ -164,10 +164,12 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-092 | M91: mute y 3 settings de audio NO se persisten en config.cfg (asimetria set_volumen vs set_mute + DynamicRange/Compression/OutputDevice sin DataStore) | M91 | 🟡 Menor | [x] Resuelto (2026-10-04, mimo-v2.6-flash-free / opencode, Log 1260) | mimo-v2.6-flash-free | 2026-10-03 |
 | BUG-093 | Familia de suites MUERTAS gdUnit4: API inexistente que PARSEA pero MUERE en runtime. Instancia M156 `test_terrain_modifiers.gd`: **RESUELTA** (Log 1264). Sub-frente FAMILIA (134 `is_equal_to`/12 archivos + 5 `is_greater_than`/3): **7/12 convertidas a headless y verdes (135 checks, 0 fallos)**; 5 rojas BLOQUEADAS por bugs ajenos / ediciones en vuelo | M156 + `tests/` (varios modulos) | 🟡 Media | [ ] **ABIERTO** — sub-frente en curso (DeepSeek-V4.1-Flash, Log 1268) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-094 | 2a familia de APIs gdUnit4 MUERTAS en `tests/`: `is_instance_of` (real `is_instanceof`) 1 llamada / 1 archivo, `has_not_contains` (real `not_contains`) 1/1, `has_any_item` (real `contains`) 1/1 -> parsean pero mueren en runtime (suite muerta silenciosa, mismo mecanismo que BUG-093) | `tests/` (varios modulos) | 🟡 Media | [ ] **Abierto** — registrado (DeepSeek-V4.1-Flash, Log 1268); convertidas dentro del sub-frente BUG-093 | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-095 | **BUG REAL DE PRODUCTO**: precedencia de operadores en `scripts/data/item_data.gd:88` `es_valido()`: `return id != "" and nombre != "" and not tamano.x <= 0 or tamano.y <= 0` -> por precedencia (`and` liga mas que `or`) equivale a `(A and B and C) or D`; con `tamano=(1,0)` devuelve `true` (deberia `false`). Faltan parentesis. Acepta items invalidos. Descubierto por DeepSeek-V4.1-Flash (Log 1268, sub-frente BUG-093, suite `test_item_data.gd` 3 fallos) — fuera de su alcance, delegado | data / items (M159) | 🟡 Media | [→] **En progreso** — delegado a agnes-3-flash (2026-10-04) | DeepSeek-V4.1-Flash (descubridor) / agnes-3-flash (fix) | 2026-10-04 |
 
 | BUG-089 | **INVALIDO (corregido 2026-10-02)**: `minimap_widget.gd` NUNCA tuvo 2 `func _ready()` en ningun commit (18 commits que tocan el archivo, en todas las ramas, TODOS con 1); el archivo compila en HEAD. Fue un estado transitorio del worktree mientras M54 editaba. | M54 | ⚪ Invalido | [x] Cerrado — no era regresion publicada | DeepSeek-V4.1-Flash (Log 1205) + correccion propia (Log 1209) | 2026-10-02 |
 | BUG-096 | `interaction_manager.gd:669` hace `bool(ui.get("hay_modal"))` sobre una propiedad inexistente de UIManager (`get()` devuelve null) y `bool(null)` ABORTA `_on_ui_layers_changed` en cada cambio de pila de capas | M70 | 🟠 Mayor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 | BUG-097 | `bootstrap.gd:109/115` llama `ServiceRegistry.list_registered()` y `.validate_required()` que NO existen: 2 errores de runtime en cada boot y la validación de servicios nunca corre | M07 | 🟡 Menor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
+| BUG-098 | **BUG-091 residuo: los 44 SCRIPT ERROR restantes** (frente del director, mensaje 18 d). Clasificados por familia: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** funcion inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type. **42 fixeados; 1 delegado (agnes/BUG-095); 1 cascada dependiente; 0 falsos de `--script`.** Colector 44 -> 2; full load 0; M167 30/0 | transversal (BUG-091) | 🔴 Crítico | [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277) — residuo = `inventario_service.gd:171` (agnes) | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -5063,3 +5065,75 @@ Dos SCRIPT ERROR de método inexistente; los dos prints/validaciones no corren.
 - [→] Archivos/commits modificados: —
 - [ ] Log del proyecto:
 - [ ] Verificado por: pendiente (dueño M07)
+
+---
+### BUG-098 — BUG-091 residuo: los 44 SCRIPT ERROR restantes (autoload bare-identifier + inferencia Variant + class_name faltante + parse errors varios)
+
+- **Fecha de reporte:** 2026-10-04
+- **Modulo(s) afectado(s):** transversal (BUG-091). Archivos: `clima/weather_service.gd`,
+  `diario/diary_service.gd`, `historia/story_manager.gd`, `historias/secondary_stories_service.gd`,
+  `progresion/progression_manager.gd`, `core/bootstrap.gd`, `core/Obsoletos/...bootstrap.gd`,
+  `core/build_info.gd`, `legal/asset_validation_m78.gd`, `world/escanear_conectividad_m09.gd`,
+  `coleccionables/collectible_category.gd` + `test_collectible_category.gd`,
+  `dialogos/auto_advance_manager.gd`, `data/location_registry.gd`, `data/test_ubicaciones_m160.gd`,
+  `enchantment/test_enchantment.gd`, `historias/quest_chain_service.gd` + `validate_quest_chains.gd`,
+  `telemetry/telemetry_director.gd`, `main_island.gd`, `performance/bench_recorder.gd`,
+  `inventario/inventario_service.gd` (ajeno).
+- **Severidad:** 🔴 **Crítico de proceso.** Son los errores que mantienen ROJO el gate `godot-lint`
+  (job `godot-lint` de `quality.yml`, que cuenta `SCRIPT ERROR` impresos por el colector). Mientras
+  existan, ninguna medicion de "0 SCRIPT ERROR" basada en el gate es confiable.
+- **Introducido por:** acumulacion historica; s2 cerro el frente `tools/editor` (22 -> 0, Log 1271)
+  y agnes cerro `gameplay/world/core` (ServiceRegistry). El residuo (44) quedo sin dueno hasta que
+  el director lo asigno a DeepSeek-V4.1-Flash (mensaje 18, item d).
+- **Estado:** [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277). Residuo = 1 error
+  ajeno (`inventario_service.gd:171`, agnes/BUG-095) + 1 cascada dependiente.
+
+**Desglose MEDIDO de los 44** (fuente: `Obsoletos/raiz-temporales-bug091-44-2026-10-04/col_out.txt`):
+
+| Familia | N | Detalle |
+|---|---|---|
+| A. `Identifier not found: <autoload>` | 11 | EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1 |
+| B. Cascada del colector | 1 | `_colector_sintaxis.gd:0` |
+| C. `Identifier "CollectibleCategory" not declared` | 6 | falta `class_name` |
+| D. `Cannot infer the type` (Variant) | 13 | collectible x8, auto_advance x1, quest_chain x2, validate_quest_chains x1, escanear_m09 x1 |
+| E. `Warning treated as error` (misma causa) | 4 | build_info, quest_chain x2, asset_validation_m78 |
+| F. `AutoAdvanceManager` no declarado | 2 | falta `class_name` |
+| G. `Class hides a global script class` | 3 | `location_registry.gd` (inner classes) |
+| H. `Function "X" not found in base self` | 3 | `setdefault()`, `autoload()`, `add_child()` |
+| I. Return-type mismatch | 1 | `validate_quest_chains.gd:33` |
+
+**Resultado:** 42 fixeados por DeepSeek-V4.1-Flash; **1 delegado** (`inventario_service.gd:171` =
+agnes/BUG-095); **1 cascada dependiente**; **0 falsos positivos de `--script`**.
+
+**Hallazgo clave (el caso A NO es ruido de `--script`):** de 16 archivos que usan `EventBus.`, solo
+5 fallaban; los otros 11 ya usaban `get_node_or_null("/root/EventBus")` (convencion del proyecto,
+172 archivos la usan). Sonda empirica: `EventBus.emit_signal("x")` bajo `--check-only --script` ->
+"Identifier not found: EventBus". En full load los autoloads SI resuelven (`-e --quit` = 0 antes y
+despues), asi que los 11 **no rompian el juego en runtime** pero SI el gate y las corridas headless
+`--script`. Los 5 archivos eran **rezagados de la convencion**, no ruido.
+
+**Evidencia (medida):**
+- Colector (`--check-only --script`): **44 -> 2** (el residuo = `inventario_service.gd:171` + cascada).
+- Full load (`godot --headless --path game/isla-ancestral -e --quit`): **0 SCRIPT ERROR / 0 ERROR / EXIT 0**.
+- `validador_isla_raiz.gd` (M167): **30 checks / 0 fallos** (se preservaron por TEXTO las cadenas
+  `MundoRaiz.SPAWN_JUGADOR`/`MundoRaiz.centro_vec3` en comentarios de `main_island.gd`).
+- Suites tocadas: `test_collectible_category` 0 fallos, `test_ubicaciones_m160` 17/0,
+  `test_bench_recorder_m166` 0 fallos (todas EXIT 0).
+
+**Hallazgos colaterales (reportados, NO fixeados):**
+- `test_enchantment.gd` (M163) **cuelga** al correrlo (no compilaba antes del fix; ahora compila pero
+  el `load()` tiene prefijo doble `res://game/isla-ancestral/...` -> null, y no tiene watchdog).
+  **No esta cableado en ningun workflow** (0 refs en `.github/`/`Tools/`) -> no afecta CI.
+- `test_collectible_category.gd` (M73, agnes) emite `SCRIPT ERROR: Attempted to free a RefCounted
+  object` (`.free()` sobre un `Resource`) pero reporta "0 fallo(s)" -> preexistente; patron "verde
+  con errores".
+
+**Firma:** **Modelo:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy (CodeBuddy) · **Fecha:** 2026-10-04 18:10
+
+**Resolución:**
+- [x] Cómo se corrigió: ver Log 1277 (convencion `get_node_or_null` para autoloads, `class_name`
+  faltantes, `:=` -> `=` sobre Variant, rename de inner classes, fixes de funciones inexistentes).
+- [x] Archivos/commits modificados: 20 archivos `.gd` + relocalizacion del bootstrap obsoleto (Log 1277).
+- [x] Log del proyecto: `Logs/1277-BUG091-44-script-errors-clasificados-y-cerrados_2026-10-04_18-10-00.md`
+- [ ] Verificado por: **NO sella 21.8** — pendiente verificador != autor. Residuo ajeno
+  (`inventario_service.gd:171`) pendiente de agnes (BUG-095).

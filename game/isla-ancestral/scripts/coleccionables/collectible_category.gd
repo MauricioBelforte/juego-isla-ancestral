@@ -7,6 +7,7 @@
 # icono path, total esperado, recompensas al completar, orden de exhibición.
 # Se carga dinámicamente con load() desde tests y otros scripts.
 
+class_name CollectibleCategory
 extends Resource
 
 ## ID único de la categoría (coincide con keys del catálogo)

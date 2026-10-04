@@ -182,7 +182,9 @@ func marcar_sello(sello_id: String) -> bool:
 	if sello_id in _sellos:
 		return true
 	_sellos.append(sello_id)
-	EventBus.quest.prereq_met.emit(sello_id)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.quest.prereq_met.emit(sello_id)
 	return true
 
 
@@ -202,7 +204,9 @@ func completar_nodo(id: String) -> Dictionary:
 	var nodo: Dictionary = get_nodo(id)
 	if String(nodo.get("tipo", "")) == "final":
 		_final_elegido = String(nodo.get("final_id", ""))
-	EventBus.quest.quest_started.emit(id)
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null:
+		bus.quest.quest_started.emit(id)
 	return {"ok": true, "motivos": []}
 
 
