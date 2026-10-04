@@ -134,9 +134,11 @@ NO toque `quality.yml` (regla). Las 5 rojas NO cablear hasta cerrar sus bloqueos
 
 ## 9. Huella de push (AGENTS.md 4.3)
 
-- **Push principal:** rango `PENDIENTE..PENDIENTE` (1 commit, PROPIO). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
-- **Hora:** PENDIENTE.
+- **Push principal:** rango `5a4210d..7c9d130` (1 commit, PROPIO). Fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- **Hora:** 2026-10-04 07:54 (UTC) / 04:54 (-0300).
 - **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
-- **Contenido propio:** 12 suites `tests/` convertidas + Log 1268 + `11-BUGS.md` (BUG-093 ABIERTO + BUG-094 + patron widget) + BACKLOG-MASTER + respuesta 17.
-- **Ajenos arrastrados:** PENDIENTE.
-- **Verificacion:** PENDIENTE.
+- **Contenido propio (`7c9d130`):** 17 archivos, 2897 inserciones / 572 borrados (12 suites `tests/` convertidas + Log 1268 + `11-BUGS.md` + BACKLOG-MASTER + respuestas 16 y 17).
+- **Ajenos arrastrados:** 0 (`git log --oneline origin/main..HEAD` = 1 linea).
+- **Catch-up que publica esta huella:** esta edicion del log viaja en un push inmediato posterior desde `7c9d130`.
+- **Verificacion:** `git rev-list --count HEAD..origin/main` = 0 antes del push; `git ls-remote origin refs/heads/main` == `7c9d130738018858b4f410af5092fa2174a368de` tras el push.
+- **Blobs:** `i/lf` en los 4 verificados (`git ls-files --eol`); Log 1268 blob ASCII-puro (0 no-ASCII, 0 CR).
