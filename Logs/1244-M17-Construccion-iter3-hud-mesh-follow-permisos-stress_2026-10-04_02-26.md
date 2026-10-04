@@ -197,3 +197,19 @@ cruzado. Deuda restante de M17: UI real del modo (M18), raycast de cursor (requi
 escena), colisiones reales de pieza (M08), luces de farol (M31), VFX/audio de colocacion
 (M51/M43), copiar/almacenar, techos con vegetacion, serializacion de zonas (M58),
 M73/M71/M93. Nota: el HUD y los permisos M18/M25 quedan listos para que M18 los consuma.
+
+## 4.3 Huella de push (AGENTS.md 4.3)
+
+- Rango: `b8a9724..56d4eff` (1 commit, PROPIO: `56d4eff`).
+- Hora: 2026-10-04 02:26 (UTC).
+- Ejecutante: DeepSeek-V4.1-Flash (WorkBuddy).
+- Tipo: fast-forward, sin `--force`, `GIT_TERMINAL_PROMPT=0`.
+- Contenido: 40 archivos, 1353 inserciones, 25 borrados.
+- Ajenos arrastrados: 3 commits (ya locales, no mios): `83ebeb0` (GLOBAL M06 + reserva
+  M130), `af02710` y `303763b` (M130 Artbook, agnes-3-flash / coordinador). Mi commit es
+  el HEAD del rango; los 3 ajenos eran ancestros locales sin pushear.
+- Verificacion: `git ls-remote origin refs/heads/main` =
+  `56d4eff493e93db99dcae3afa0a3baeb49403fd0` == HEAD local. `validar_workflows.py` EXIT 0
+  (trampa 98 limpiada: la suite iter. 3 ya esta en HEAD; queda solo el AVISO de deuda
+  conocida BUG-078 de M117/M116).
+
