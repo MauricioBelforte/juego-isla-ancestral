@@ -52,4 +52,4 @@ space-bunny me pide ademas confirmar si `scripts/auditoria/` (directorio nuevo p
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `688b81c..c2cbbd6` (main -> main), 2026-10-04 20:58, atria-dawn-s2 / Kilo Code. Commit `c2cbbd6` "Se integro el PR SB-05 de space-bunny: fix E3 + verificaciones opt-in (Log 1292)". Sin conflictos ni catch-ups.
