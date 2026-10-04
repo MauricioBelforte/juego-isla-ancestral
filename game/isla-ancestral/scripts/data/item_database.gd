@@ -68,19 +68,28 @@ func _registrar_item(item: ItemData) -> void:
 
 	_items[item.id] = item
 
-	# índices derivados (Dictionary.get con default)
-	if not _by_category.has(item.categoria):
-		_by_category[item.categoria] = []
-	_by_category[item.categoria].append(item)
+	# índices derivados. IMPORTANTE: se guardan como Array[ItemData] TIPADO.
+	# Guardar un Array sin tipo y devolverlo desde un getter `-> Array[ItemData]`
+	# lanza en runtime "Trying to assign an array of type Array to a variable of
+	# type Array[ItemData]" -> el getter devolvia vacio (BUG-100).
+	var por_cat: Array[ItemData] = []
+	if _by_category.has(item.categoria):
+		por_cat = _by_category[item.categoria]
+	por_cat.append(item)
+	_by_category[item.categoria] = por_cat
 
-	if not _by_rarity.has(item.rareza):
-		_by_rarity[item.rareza] = []
-	_by_rarity[item.rareza].append(item)
+	var por_rar: Array[ItemData] = []
+	if _by_rarity.has(item.rareza):
+		por_rar = _by_rarity[item.rareza]
+	por_rar.append(item)
+	_by_rarity[item.rareza] = por_rar
 
 	if item.fuente != "":
-		if not _by_fuente.has(item.fuente):
-			_by_fuente[item.fuente] = []
-		_by_fuente[item.fuente].append(item)
+		var por_fue: Array[ItemData] = []
+		if _by_fuente.has(item.fuente):
+			por_fue = _by_fuente[item.fuente]
+		por_fue.append(item)
+		_by_fuente[item.fuente] = por_fue
 
 	if item.interactivo:
 		_interactive.append(item)
@@ -94,13 +103,22 @@ func get_item(id: String) -> ItemData:
 	return _items.get(id)
 
 func get_items_by_category(cat: ItemData.Categoria) -> Array[ItemData]:
-	return _by_category.get(cat, [])
+	var out: Array[ItemData] = []
+	if _by_category.has(cat):
+		out = _by_category[cat]
+	return out
 
 func get_items_by_rarity(r: ItemData.Rareza) -> Array[ItemData]:
-	return _by_rarity.get(r, [])
+	var out: Array[ItemData] = []
+	if _by_rarity.has(r):
+		out = _by_rarity[r]
+	return out
 
 func get_items_by_source(fuente: String) -> Array[ItemData]:
-	return _by_fuente.get(fuente, [])
+	var out: Array[ItemData] = []
+	if _by_fuente.has(fuente):
+		out = _by_fuente[fuente]
+	return out
 
 func get_interactive_items() -> Array[ItemData]:
 	return _interactive.duplicate()

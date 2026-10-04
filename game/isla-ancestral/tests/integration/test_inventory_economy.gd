@@ -19,8 +19,8 @@
 extends SceneTree
 
 const TIMEOUT_SEG := 60.0
-## Piso MEDIDO en verde (se fija tras la 1a corrida).
-const CHECKS_MINIMOS := 0
+## Piso MEDIDO en verde (T-D3, 2026-10-04: 52 checks).
+const CHECKS_MINIMOS := 52
 const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 

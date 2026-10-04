@@ -170,6 +170,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-096 | `interaction_manager.gd:669` hace `bool(ui.get("hay_modal"))` sobre una propiedad inexistente de UIManager (`get()` devuelve null) y `bool(null)` ABORTA `_on_ui_layers_changed` en cada cambio de pila de capas | M70 | 🟠 Mayor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 | BUG-097 | `bootstrap.gd:109/115` llama `ServiceRegistry.list_registered()` y `.validate_required()` que NO existen: 2 errores de runtime en cada boot y la validación de servicios nunca corre | M07 | 🟡 Menor | [?] Delegado | mimo-v2.6-flash-free | 2026-10-04 |
 | BUG-098 | **BUG-091 residuo: los 44 SCRIPT ERROR restantes** (frente del director, mensaje 18 d). Clasificados por familia: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** funcion inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type. **42 fixeados; 1 delegado (agnes/BUG-095); 1 cascada dependiente; 0 falsos de `--script`.** Colector 44 -> 2; full load 0; M167 30/0 | transversal (BUG-091) | 🔴 Crítico | [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277) — residuo = `inventario_service.gd:171` (agnes) | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-101 | **BUG REAL DE PRODUCTO (dormido, API muerta)**: `item_database.gd` (M159) poblaba `_by_category`/`_by_rarity`/`_by_fuente` con `Array` **sin tipar**, pero los getters declaran `-> Array[ItemData]` -> en Godot 4.7 la conversion implicita FALLA en runtime (`Trying to assign an array of type "Array" to a variable of type "Array[ItemData]"`) y `get_items_by_category()`/`get_items_by_rarity()`/`get_items_by_source()` devolvian **SIEMPRE vacio** desde el commit inicial `4234bca`. **0 consumidores en produccion** (unico llamador: `test_item_data.gd`). Medido: `_by_category[5]`=10 items pero `get_items_by_category(COCINA)`=0 pre-fix / 10 post-fix; `get_items_by_rarity(COMUN)`=0 / 78. Descubierto por DeepSeek-V4.1-Flash en T-D3 (Log 1288) | M159 (`scripts/data/item_database.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1288) | DeepSeek-V4.1-Flash | 2026-10-04 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -5137,3 +5138,111 @@ despues), asi que los 11 **no rompian el juego en runtime** pero SI el gate y la
 - [x] Log del proyecto: `Logs/1277-BUG091-44-script-errors-clasificados-y-cerrados_2026-10-04_18-10-00.md`
 - [ ] Verificado por: **NO sella 21.8** — pendiente verificador != autor. Residuo ajeno
   (`inventario_service.gd:171`) pendiente de agnes (BUG-095).
+
+
+**Actualizacion (atria-dawn, 2026-10-04 21:35):** BUG-095 (el residuo inventario_service.gd:171) fue resuelto por agnes-3-flash en el commit 821f8f4 (2026-10-04 05:40 UTC). El segundo error (cascada _colector_sintaxis.gd:0) es dependiente del primero. **Se espera colector = 0 y gate godot-lint verde sin tocar quality.yml** — s2 verificando (canal 18). Si confirma, T-D1 se cierra formalmente y este bug se sella.
+## 8.4 Delegados - hallazgos colaterales del frente BUG-091 (atria-dawn, registro; hallazgos de DeepSeek Log 1277)
+
+### BUG-099 - `test_enchantment.gd` (M163) cuelga: `load()` con prefijo doble y sin watchdog
+
+**Estado:** [?] Delegado (test de M163, dueno por asignar)
+**Modulo:** 163 (Encantamientos)
+u{1F7E1} Media
+**Modelo:** atria-dawn-preview (registro; hallazgo original de DeepSeek-V4.1-Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-04 21:35
+
+**Pasos para reproducir:**
+1. Correr `test_enchantment.gd` (M163) headless con el binario Godot 4.7.2.
+2. El test cuelga indefinidamente (no falla: cuelga).
+
+**Causa:** `load("res://game/isla-ancestral/...")` lleva **prefijo doble**: el proyecto YA es
+`game/isla-ancestral`, asi que `res://` ya apunta ahi; la ruta duplicada no existe y
+`load()` devuelve `null`. El test opera sobre null y **no tiene watchdog**, por lo que
+cuelga en vez de reportar fallo.
+
+**Evidencia:** Log 1277 (DeepSeek, canal 19, hallazgo colateral 1). Antes no se detectaba
+porque el test no compilaba (parse error); el fix de parseo de DeepSeek (`root.add_child`)
+lo dejo compilable y **exposo el cuelgue**. Buena leccion: arreglar un parse error puede
+revelar un bug mas profundo detras.
+
+**Impacto:** **cero en CI** (0 referencias en `.github/` ni `Tools/`): es un test
+huerfano. No bloquea nada.
+
+**Resolucion:**
+- [ ] Corregir el `load()` (quitar el prefijo `game/isla-ancestral` duplicado).
+- [ ] Anadir watchdog / timeout al test.
+- [ ] Asignar al dueno de M163.
+
+### BUG-100 - Patron "verde con errores": `test_collectible_category.gd` reporta "0 fallos" con SCRIPT ERROR en consola
+
+**Estado:** [?] Delegado (M73 es de agnes-3-flash)
+**Modulo:** 73 (Coleccionables)
+u{1F7E1} Media (patron sistemico)
+**Modelo:** atria-dawn-preview (registro; hallazgo original de DeepSeek-V4.1-Flash)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-04 21:35
+
+**Pasos para reproducir:**
+1. Correr `test_collectible_category.gd` (M73) headless.
+2. La consola emite: `SCRIPT ERROR: Attempted to free a RefCounted object`.
+3. La suite reporta **"0 fallo(s)"** y **EXIT 0**.
+
+**Causa:** el test llama `.free()` sobre un objeto `Resource` (RefCounted). En Godot los
+RefCounted no se liberan manualmente; `.free()` genera SCRIPT ERROR, pero las aserciones de
+la suite no lo capturan.
+
+**Patron sistemico (lo importante):** una suite **verde** no implica **sana**. EXIT 0 + "0
+fallos" puede coexistir con SCRIPT ERROR en stderr. Misma familia que BUG-079 (gdUnit4 con
+APIs muertas) y que los tests "verdes" que no afirman lo que dicen afirmar.
+
+**Impacto:** el gate de CI actual (exit code) **no captura** este patron. Si se propaga,
+perdemos la capacidad de confiar en los "verdes" del proyecto.
+
+**Acciones:**
+- [ ] agnes-3-flash: fixear `.free()` en `test_collectible_category.gd` (M73).
+- [ ] s2: evaluar si los gates de CI deben capturar SCRIPT ERROR en stderr aunque EXIT sea 0.
+
+### BUG-101 - `item_database.gd` (M159): los getters por categoria/rareza/fuente devolvian SIEMPRE vacio (Array sin tipar -> Array[ItemData])
+
+**Estado:** [x] Resuelto (DeepSeek-V4.1-Flash, Log 1288)
+**Modulo:** 159 (ItemDatabase / catalogo de items)
+**Severidad:** Media (bug real de producto, pero **dormido**: 0 consumidores)
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-04 20:09
+
+**Pasos para reproducir (medido con sonda headless):**
+1. Cargar el autoload `ItemDatabase` (111 `.tres` en `res://data/items/`).
+2. `_by_category.size()` = 16 e incluye la clave `5` (COCINA); `_by_category[5].size()` = **10**.
+3. Pero `get_items_by_category(ItemData.Categoria.COCINA).size()` = **0**.
+4. Igual `get_items_by_rarity(ItemData.Rareza.COMUN)` = **0** (la clave `0` tiene 78 items).
+
+**Causa raiz:** `_registrar_item()` guardaba arrays **sin tipar**:
+    if not _by_category.has(item.categoria):
+        _by_category[item.categoria] = []
+    _by_category[item.categoria].append(item)
+y los getters declaran retorno tipado:
+    func get_items_by_category(cat: ItemData.Categoria) -> Array[ItemData]:
+        return _by_category.get(cat, [])
+En Godot 4.7 la conversion implicita `Array` -> `Array[ItemData]` en el `return` **falla en runtime**:
+`SCRIPT ERROR: Trying to assign an array of type "Array" to a variable of type "Array[ItemData]".`
+El error aborta el `return` y la funcion devuelve el valor por defecto del tipo: un `Array[ItemData]` **vacio**.
+
+**Fix (Log 1288):** los indices se guardan como `Array[ItemData]` **tipado** y los getters devuelven un
+`Array[ItemData]` construido de forma segura (vacio si la clave no existe):
+    var por_cat: Array[ItemData] = []
+    if _by_category.has(item.categoria):
+        por_cat = _by_category[item.categoria]
+    por_cat.append(item)
+    _by_category[item.categoria] = por_cat
+Verificado post-fix: `get_items_by_category(COCINA)` = **10**, `get_items_by_rarity(COMUN)` = **78**, 0 SCRIPT ERROR.
+
+**Impacto:** **NULO en gameplay** — 0 consumidores (el unico llamador era `test_item_data.gd`). Es una
+API muerta que **nunca funciono** (archivo con un solo commit: `4234bca`). Se arregla para que la suite
+sea honesta y para no dejar una trampa a un futuro consumidor (M39/tiendas listan items por categoria).
+
+**Nota de metodo:** la suite `test_item_data.gd` **detectaba correctamente** el defecto; el fix correcto
+era el **CODIGO**, no debilitar el test (regla: un test no debe consagrar el bug).
+
+**Descubierto por:** DeepSeek-V4.1-Flash, al re-correr `test_item_data.gd` en T-D3 (frente del director, mensaje 20).

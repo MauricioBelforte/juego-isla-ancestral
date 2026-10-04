@@ -19,8 +19,8 @@
 extends SceneTree
 
 const TIMEOUT_SEG := 60.0
-## Piso MEDIDO en verde (se fija tras la 1a corrida).
-const CHECKS_MINIMOS := 0
+## Piso MEDIDO en verde (T-D3, 2026-10-04: 32 checks).
+const CHECKS_MINIMOS := 32
 const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N']
 
 
@@ -132,10 +132,14 @@ func _summary() -> void:
 
 func before_test() -> void:
 	_economy = ECONOMY_SCRIPT.new()
+	root.add_child(_economy)
 	_economy._asegurar_precios()
+	# Se agregan al arbol para que get_node_or_null("/root/<Autoload>") resuelva
+	# (fuera del arbol lanza ERROR y devuelve null -> GameClock/SaveManager null).
 	_inventario = INVENTARIO_SCRIPT.new()
-	_inventario._ready()
+	root.add_child(_inventario)
 	_calendar = TIME_SCRIPT.new()
+	root.add_child(_calendar)
 
 
 func after_test() -> void:
@@ -202,9 +206,9 @@ func _bloque_D() -> void:
 func _bloque_E() -> void:
 	_ini("E. test_reg_inv_add_returns_zero")
 	before_test()
-	var resto = _inventario.add_item("madera", 5)
+	var resto = _inventario.add_item("wood", 5)
 	_check("resto .is_equal_to(0)", (resto) == (0))
-	_check("_inventario.count_item(\"madera\") .is_equal_to(5)", (_inventario.count_item("madera")) == (5))
+	_check("_inventario.count_item(\"wood\") .is_equal_to(5)", (_inventario.count_item("wood")) == (5))
 
 	after_test()
 	_fin("E. test_reg_inv_add_returns_zero")
@@ -213,10 +217,10 @@ func _bloque_E() -> void:
 func _bloque_F() -> void:
 	_ini("F. test_reg_inv_remove_returns_true")
 	before_test()
-	_inventario.add_item("piedra", 10)
-	var ok = _inventario.remove_item("piedra", 3)
+	_inventario.add_item("stone", 10)
+	var ok = _inventario.remove_item("stone", 3)
 	_check("ok .is_true()", (ok) == true)
-	_check("_inventario.count_item(\"piedra\") .is_equal_to(7)", (_inventario.count_item("piedra")) == (7))
+	_check("_inventario.count_item(\"stone\") .is_equal_to(7)", (_inventario.count_item("stone")) == (7))
 
 	after_test()
 	_fin("F. test_reg_inv_remove_returns_true")
@@ -225,10 +229,10 @@ func _bloque_F() -> void:
 func _bloque_G() -> void:
 	_ini("G. test_reg_inv_no_remove_insufficient")
 	before_test()
-	_inventario.add_item("madera", 2)
-	var ok = _inventario.remove_item("madera", 5)
+	_inventario.add_item("wood", 2)
+	var ok = _inventario.remove_item("wood", 5)
 	_check("ok .is_false()", (ok) == false)
-	_check("_inventario.count_item(\"madera\") .is_equal_to(2)", (_inventario.count_item("madera")) == (2))
+	_check("_inventario.count_item(\"wood\") .is_equal_to(2)", (_inventario.count_item("wood")) == (2))
 
 	after_test()
 	_fin("G. test_reg_inv_no_remove_insufficient")
@@ -237,17 +241,17 @@ func _bloque_G() -> void:
 func _bloque_H() -> void:
 	_ini("H. test_reg_inv_serialize_deserialize")
 	before_test()
-	_inventario.add_item("madera", 10)
-	_inventario.add_item("piedra", 5)
+	_inventario.add_item("wood", 10)
+	_inventario.add_item("stone", 5)
 
 	var data = _inventario.get_save_data()
 
 	var new_inv = INVENTARIO_SCRIPT.new()
-	new_inv._ready()
+	root.add_child(new_inv)
 	new_inv.restore_save_data(data)
 
-	_check("new_inv.count_item(\"madera\") .is_equal_to(10)", (new_inv.count_item("madera")) == (10))
-	_check("new_inv.count_item(\"piedra\") .is_equal_to(5)", (new_inv.count_item("piedra")) == (5))
+	_check("new_inv.count_item(\"wood\") .is_equal_to(10)", (new_inv.count_item("wood")) == (10))
+	_check("new_inv.count_item(\"stone\") .is_equal_to(5)", (new_inv.count_item("stone")) == (5))
 	new_inv.free()
 
 	after_test()
@@ -267,8 +271,11 @@ func _bloque_I() -> void:
 func _bloque_J() -> void:
 	_ini("J. test_reg_time_pause_resume")
 	before_test()
-	_calendar.pausar()
+	_calendar.pausa()
+	_check("_calendar._game_clock .is_not_null()", (_calendar._game_clock) != null)
+	_check("_calendar._game_clock._pausado .is_true() tras pausa()", (_calendar._game_clock) != null and (_calendar._game_clock._pausado) == true)
 	_calendar.resume()
+	_check("_calendar._game_clock._pausado .is_false() tras resume()", (_calendar._game_clock) != null and (_calendar._game_clock._pausado) == false)
 
 	after_test()
 	_fin("J. test_reg_time_pause_resume")
@@ -277,12 +284,15 @@ func _bloque_J() -> void:
 func _bloque_K() -> void:
 	_ini("K. test_reg_time_save_restore_full")
 	before_test()
+	_calendar.registrar_evento_visitado("fest_test_k")
 	var saved = _calendar.get_save_data()
 
 	var new_cal = TIME_SCRIPT.new()
+	root.add_child(new_cal)
 	new_cal.restore_save_data(saved)
 
 	_check("new_cal .is_not_null()", (new_cal) != null)
+	_check("new_cal.evento_ya_visitado(\"fest_test_k\") .is_true()", (new_cal.evento_ya_visitado("fest_test_k")) == true)
 	new_cal.free()
 
 	after_test()
@@ -295,9 +305,9 @@ func _bloque_L() -> void:
 	var ok = _economy.retirar_monedas(30)
 	_check("ok .is_true()", (ok) == true)
 
-	var resto = _inventario.add_item("madera", 1)
+	var resto = _inventario.add_item("wood", 1)
 	_check("resto .is_equal_to(0)", (resto) == (0))
-	_check("_inventario.count_item(\"madera\") .is_equal_to(1)", (_inventario.count_item("madera")) == (1))
+	_check("_inventario.count_item(\"wood\") .is_equal_to(1)", (_inventario.count_item("wood")) == (1))
 	_check("_economy.saldo .is_equal_to(70)", (_economy.saldo) == (70))
 
 	after_test()
@@ -307,13 +317,13 @@ func _bloque_L() -> void:
 func _bloque_M() -> void:
 	_ini("M. test_reg_cross_sell_integrates")
 	before_test()
-	_inventario.add_item("piedra", 5)
-	var ok = _inventario.remove_item("piedra", 3)
+	_inventario.add_item("stone", 5)
+	var ok = _inventario.remove_item("stone", 3)
 	_check("ok .is_true()", (ok) == true)
 
 	_economy.depositar_monedas(30)
 
-	_check("_inventario.count_item(\"piedra\") .is_equal_to(2)", (_inventario.count_item("piedra")) == (2))
+	_check("_inventario.count_item(\"stone\") .is_equal_to(2)", (_inventario.count_item("stone")) == (2))
 	_check("_economy.saldo .is_equal_to(130)", (_economy.saldo) == (130))
 
 	after_test()
@@ -324,8 +334,8 @@ func _bloque_N() -> void:
 	_ini("N. test_reg_cross_full_save")
 	before_test()
 	_economy.saldo = 500
-	_inventario.add_item("madera", 20)
-	_inventario.add_item("comida", 10)
+	_inventario.add_item("wood", 20)
+	_inventario.add_item("clay", 10)
 
 	var economy_data = _economy.get_save_data()
 	var inv_data = _inventario.get_save_data()
@@ -336,15 +346,16 @@ func _bloque_N() -> void:
 	new_economy.restore_save_data(economy_data)
 
 	var new_inv = INVENTARIO_SCRIPT.new()
-	new_inv._ready()
+	root.add_child(new_inv)
 	new_inv.restore_save_data(inv_data)
 
 	var new_time = TIME_SCRIPT.new()
+	root.add_child(new_time)
 	new_time.restore_save_data(time_data)
 
 	_check("new_economy.saldo .is_equal_to(500)", (new_economy.saldo) == (500))
-	_check("new_inv.count_item(\"madera\") .is_equal_to(20)", (new_inv.count_item("madera")) == (20))
-	_check("new_inv.count_item(\"comida\") .is_equal_to(10)", (new_inv.count_item("comida")) == (10))
+	_check("new_inv.count_item(\"wood\") .is_equal_to(20)", (new_inv.count_item("wood")) == (20))
+	_check("new_inv.count_item(\"clay\") .is_equal_to(10)", (new_inv.count_item("clay")) == (10))
 	_check("new_time .is_not_null()", (new_time) != null)
 
 	new_economy.free()
