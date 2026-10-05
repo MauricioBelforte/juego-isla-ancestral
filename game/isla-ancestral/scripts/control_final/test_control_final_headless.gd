@@ -39,5 +39,27 @@ func _run() -> void:
 	_check("Detecta 2 gates fallidos", pendientes2.size() == 2)
 	_check("Detecta crash_rate_cero", pendientes2.has("crash_rate_cero"))
 	_check("Veredicto 1 (bloqueado)", SCHEMA.veredicto(medio) == 1)
+
+	# ── PENDIENTE: gates sin dato medible (directiva del fundador) ───────────
+	var con_pendiente := todo_ok.duplicate()
+	con_pendiente["crash_rate_cero"] = {
+		"estado": "PENDIENTE",
+		"duenio": "M143/M104",
+		"fecha": "2026-10-04",
+		"desc": "Requiere 72 h de telemetria en produccion"
+	}
+	var pendientes3: Array = SCHEMA.verificar_gates(con_pendiente)
+	_check("Un gate PENDIENTE no bloquea el release", pendientes3.is_empty())
+	_check("Veredicto 0 con un PENDIENTE", SCHEMA.veredicto(con_pendiente) == 0)
+	var sin_dato: Array = SCHEMA.gates_pendientes(con_pendiente)
+	_check("gates_pendientes detecta crash_rate_cero", sin_dato.has("crash_rate_cero"))
+	_check("gates_pendientes no reporta los cumplidos", not sin_dato.has("suite_tests_verde"))
+	_check("es_pendiente distingue dict de bool", SCHEMA.es_pendiente(con_pendiente["crash_rate_cero"]) and not SCHEMA.es_pendiente(true))
+
+	# Mezcla: un PENDIENTE + un gate realmente roto -> bloquea por el roto.
+	var mixto := con_pendiente.duplicate()
+	mixto["zero_criticos_abiertos"] = false
+	var pendientes4: Array = SCHEMA.verificar_gates(mixto)
+	_check("Mezcla bloquea solo por el gate roto", pendientes4.size() == 1 and pendientes4.has("zero_criticos_abiertos"))
 	print("=== Resumen M151: %d checks, %d fallos ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)

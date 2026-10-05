@@ -23,6 +23,9 @@ func _run() -> void:
 		if typeof(parsed) == TYPE_DICTIONARY:
 			estado = parsed.get("gates", {})
 	var pendientes: Array[String] = SCHEMA.verificar_gates(estado)
+	var sin_dato: Array[String] = SCHEMA.gates_pendientes(estado)
+	if not sin_dato.is_empty():
+		print("== [M151] gates PENDIENTES (no bloqueantes, sin dato medible): %s ==" % ", ".join(sin_dato))
 	if pendientes.is_empty():
 		print("== [M151] CONTROL FINAL: RELEASE OK (7/7 gates cumplidos) ==")
 		quit(0)
