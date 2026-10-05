@@ -115,7 +115,9 @@ Ambos son de otros agentes; se reportan, no se corrigen.
 
 ## 9. Huella de push #2 (AGENTS sec.4.3)
 
-- **Push principal:** `6708281..bd6077e` -> `main` (fast-forward, sin `--force`).
-  Fecha/hora: 2026-10-05 ~23:40 UTC. Ejecutante: DeepSeek-V4.1-Flash.
-- Commit propio empujado: `bd6077e` (este Log 1337 + fila T-D9 (2) del backlog).
-- Sin commits ajenos en el rango (1 solo commit, mio).
+**Huella de push:** 2026-10-05 ~23:40 UTC - DeepSeek-V4.1-Flash/WorkBuddy - push PRINCIPAL - rango
+`6708281..HEAD` (**HEAD = el commit que contiene esta misma linea**) - `main -> main` (fast-forward,
+sin `--force`) - contenido: este Log 1337 + la fila T-D9 (2) del backlog + esta huella.
+- Commits ajenos intercalados: **0** en el rango (solo mis commits).
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main`.
+- El commit-huella que contiene esta misma seccion se empuja acto seguido (cierre del acto).
