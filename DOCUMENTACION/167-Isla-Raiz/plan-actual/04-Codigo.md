@@ -28,7 +28,7 @@ player.global_position = MundoRaiz.SPAWN_JUGADOR          # spawn en el centro
 voxel_viewer_node.global_position = Vector3(2560, 30, 2560)  # viewer inicial
 ```
 
-### isla_generador.gd (perfil del get_height)
+### island_generator.gd (perfil del get_height)
 ```gdscript
 # dist <= 0.94: arena (height 3-4) | 0.94-0.98: agua clara (2) | >0.98: profunda (0)
 # Montañas: pico_original = pow(island_shape, 1.5) * max_height

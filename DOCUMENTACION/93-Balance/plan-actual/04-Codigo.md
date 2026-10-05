@@ -26,7 +26,7 @@
 | `data/balance/unlocks.json` | Datos | Desbloqueos: coste y condición (M71) |
 | `data/balance/timing.json` | Datos | Tiempos objetivo diarios (RF16) |
 | `data/balance/progression.json` | Datos | Curvas de progresión (RF17) |
-| `scripts/balance/balance.gd` | Autoload | Acceso central de lectura |
+| `scripts/balance/balance_service.gd` | Autoload | Acceso central de lectura |
 | `scripts/balance/validate_balance.gd` | Tool | Reglas de negocio verificables |
 | `scripts/balance/simulate_economy.gd` | Tool | Simulación económica offline |
 | `scripts/balance/balance_report.gd` | Tool | Reporte markdown legible |
@@ -34,7 +34,7 @@
 
 ## 2. Funciones Clave
 
-### 2.1 `balance.gd`
+### 2.1 `balance_service.gd`
 
 ```gdscript
 extends Node
@@ -193,7 +193,7 @@ func _init() -> void:
 - Ningún ítem quedó `[?]`: la documentación es diseño a implementar, no código en runtime aún (el proyecto no tiene gameplay implementado).
 
 ### Recomendaciones para el próximo agente
-- Al implementar, empezar por `balance.gd` + `meta.json` y conectar M38/M39 (tiendas) primero.
+- Al implementar, empezar por `balance_service.gd` + `meta.json` y conectar M38/M39 (tiendas) primero.
 - El gate CI de balance (M118) debe correr en cada PR que toque `data/balance/`.
 
 ---
