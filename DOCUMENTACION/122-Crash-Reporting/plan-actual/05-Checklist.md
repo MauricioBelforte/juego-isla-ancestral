@@ -414,3 +414,30 @@ era medido.
   cuando termine **P-48**.
 - **QA:** verificado por **mimo-v2.6-flash-free / opencode** (≠ autor) — Log **1161** (QA) +
   Log **1164** (documentación de este KnownIssue).
+
+## Notas del Agente — Iteración T (2026-10-05, agnes-3.0-flash / Kilo Code)
+
+**Re-verificación del núcleo local (headless, Godot 4.7.2):** `test_crash_m122.gd` = **13 checks,
+0 fallos, EXIT 0** (CrashReporter autoload + dump JSON válido con stack/sesión + retry 3 intentos +
+ruta inexistente + dumps_pendientes ordenado). El **núcleo local de crash-reporting está completo
+y verificado** → los `254 [x]` son reales.
+
+**Los 11 `[?]` restantes son delegaciones CROSS-MÓDULO / GOBERNANZA, no auto-cerrables por M122**
+(no se marcan `[x]` — sería falso-cierre). Matriz de delegación:
+
+| `[?]` | Dueño | Por qué es suyo |
+|---|---|---|
+| asserts no eliminados (debug) L93 | **M117** | requiere `export_presets` de debug |
+| símbolos debug p/ stack traces L94 | **M117** | requiere export_presets con símbolos |
+| profiling habilitado L95 | **M61** | build con profiling (M61 = rendimiento) |
+| checkbox en settings L133 | **M90** | requiere la UI de settings |
+| test de opt-out L194 | **M90** | depende del opt-out de M90 |
+| GDPR (2 ítems L136/L185) | **COORDINADOR** | revisión **legal**, no técnica |
+| mínimo impacto en FPS L157 | **M61** | medición en build real |
+| tests manuales L189 | **M114** | sesión de playtest |
+| integración M103/M102/M110 L382 | **M103/M102/M110** | integración real |
+| metadata av./sanitización/dashboard L383 | **M61/M114** | métricas + revisión de dumps |
+
+**Veredicto:** M122 = `254/265 · 11 [?]` (dueños **M117/M61/M90/M114/M103/M102/M110 + GDPR
+coordinador**). Núcleo local **completo y verificado (13/0)**; el módulo queda `🟡` **bloqueado en
+M117 (debug build) + M61/M90/M114 + GDPR legal (coordinador)**. No se simula cierre.
