@@ -74,3 +74,28 @@ public string UltimoSaveValido(int perfilId);    // Continuar
 - El mapa (M28), colecciones (M73), habilidades (M71) y relación (M20) ya tienen managers; las Views solo llaman APIs.
 - El remapeo de M58 alimenta la pantalla de controles (los campos de escucha sobreescriben el action map).
 - CI: el test Navigator se ejecuta en build (gate de menús).
+
+## 6. Estado real en Godot (auditoría T-M2 — 2026-10-05)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+
+Las secciones 1-5 describen el diseño **heredado de Unity** (C#, prefabs, `ShellManager.cs`). El repo real es Godot 4.7.2 con GDScript. Mapeo verificado contra disco:
+
+| Diseño (Unity, §1-5) | Realidad en Godot | Estado |
+|---|---|---|
+| `ShellManager` singleton de pantallas | `scripts/ui/core/ui_manager.gd` (pila de capas + `MODAL_FULL`) + `scripts/ui/ui_root.gd` (montaje y wiring) | ✅ equivalente |
+| enum `IdPantalla` con 21 pantallas | No existe enum; las pantallas son `UILayer` (12 MODAL_FULL al montar UIRoot) | ❌ no existe |
+| `NavigatorManager` con grafo á/adyacencias | `scripts/ui/core/menu_navigator.gd`: estáticas `focus_first/focus_last/wrap_focus/move_tab` (columnas por posición x, sin grafo) | ⚠️ parcial |
+| Portada M147 + versión visible en P1 | No implementados | ❌ gap |
+| Botones P1: Continuar/Nueva/Cargar/Ajustes/Créditos/Salir (6) | `menus_layer.gd`: Jugar/Continuar/Ajustes/Créditos/Salir (5, falta "Cargar") | ⚠️ 5/6 |
+| P4 pantalla Cargar con lista de slots | No existe pantalla; API de slots en `saving/save_manager.gd` | ❌ gap |
+| P8 selector de perfiles 1-3 | No existe (M59 solo slots) | ❌ gap |
+| P5/P17 ajustes con 4 categorías | Solo `settings_audio_layer.gd` (Audio) | ⚠️ 1/4 |
+| P10 pausa con 9 opciones + Esc/Start | `pause_layer.gd` 4 opciones; abre solo vía RF18 (M58), Esc/Start solo cierra capas | ⚠️ parcial |
+| Tests Unity (Navigator 21, perfiles 30 ciclos, PerfUITests) | `test_m89_menus.gd` (48 checks), `test_slots_m59`, `test_settings_audio_roundtrip` (51), casos E91/C10; Navigator-21 y perfiles → `[?]` | ⚠️ parcial |
+| `settings.json` SO Unity | `core/game_settings.gd` (autoload GameSettings) + roundtrip audio | ✅ |
+
+- **Archivos Godot reales del módulo:** `ui/layers/menus_layer.gd`, `pause_layer.gd`, `credits_layer.gd`, `inventory_layer.gd`, `settings_audio_layer.gd` · `ui/core/ui_manager.gd`, `ui_layer.gd`, `menu_navigator.gd` · `ui/ui_root.gd` · tests `ui/test_m89_menus.gd` (nuevo, T-M2).
+- **Suite T-M2:** `test_m89_menus.gd` — verde 48/0 `exit=0`; sonda rojo 48/1 `exit=1`; regresión M53 0 fallos, M55 89/0.
+- **Zona s2:** `ui_manager.gd` pertenece a M53 (framework, canal 25) — solo lectura en T-M2.

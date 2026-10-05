@@ -7,6 +7,13 @@
 - `[ ]` = completado por documentación (fase documentada y validable). `[ ]` = pendiente. `[?]` = no resuelto.
 - Esfuerzo: `[S]` simple (minutos) · `[M]` medio (horas) · `[C]` complejo (días).
 
+## Reserva actual
+
+- **Agente:** mimo-v2.6-flash-free (opencode) — frente **T-M2** (canal 18, 2026-10-05 01:40, orden sugerido T-M2 primero).
+- **Reservado:** 2026-10-05 02:50 — `CHECKLIST-GLOBAL.md` fila 89 **reconstruida 13→11 celdas** y reclamada 🔵 (reclamo previo agnes-2.5-flash 2026-09-04 caducado >24h).
+- **Alcance:** auditoría contra disco (plan-actual vs. repo Godot) + suite headless — método de T-M1.
+- **Al cerrar:** actualizar este bloque · CG fila 89 · guía 08 · ESTADO-PARALELO · backlog · log · informe.
+
 ## 1. Shell y arquitectura (RF1/RF12)
 
 - [x] Definir ShellManager como singleton central de pantallas [M]
@@ -56,7 +63,7 @@
 
 ## 6. Ajustes (P5/P17)
 
-- [ ] Definir acceso a ajustes desde menú principal y pausa [S]
+- [x] Definir acceso a ajustes desde menú principal y pausa [S]
 - [ ] Definir categorías: Controles, Accesibilidad, Audio, Gráfica [M]
 - [x] Definir persistencia local `settings.json` (fuera del save) [M]
 - [ ] Definir aplicación en vivo de cambios [M]
@@ -65,11 +72,11 @@
 
 ## 7. Créditos (P6)
 
-- [ ] Definir pantalla de créditos con scroll [M]
+- [x] Definir pantalla de créditos con scroll [M]
 - [ ] Definir ralentización al final del scroll [S]
-- [ ] Definir volver al menú desde créditos [S]
+- [x] Definir volver al menú desde créditos [S]
 - [ ] Definir créditos accesibles con gamepad (scroll continuo) [S]
-- [ ] Definir créditos con estética del juego (M06/M49) [S]
+- [x] Definir créditos con estética del juego (M06/M49) [S]
 
 ## 8. Salir (P7)
 
@@ -97,16 +104,16 @@
 ## 11. Pantalla de pausa (P10)
 
 - [ ] Definir apertura con Input de pausa (Start/Esc) [M]
-- [ ] Definir Pausar() del mundo (M07/M29) [M]
+- [x] Definir Pausar() del mundo (M07/M29) [M]
 - [ ] Definir opciones: Reanudar/Inventario/Mapa/Diario/Colección/Habilidades/Relación/Ajustes/Guardar/Salir al título [M]
-- [ ] Definir reanudación sin saltos de tiempo [M]
-- [ ] Definir cierre con estado de última pantalla [S]
+- [x] Definir reanudación sin saltos de tiempo [M]
+- [x] Definir cierre con estado de última pantalla [S]
 - [ ] Definir inmunidad a inputs de gameplay en pausa [M]
 
 ## 12. Pantalla de inventario (P11/M16)
 
 - [ ] Definir grid paginado de ítems (12-20 por página) [M]
-- [ ] Definir pestañas: Items, Herramientas, Recetas [M]
+- [x] Definir pestañas: Items, Herramientas, Recetas [M] — hoy en código: Items/Herramientas/Construcción
 - [ ] Definir detalle del ítem (descripción, stack, lore opcional) [M]
 - [x] Definir uso/equipar con confirmación cuando aplica [M]
 - [x] Definir sin lógica de inventario en la View (manager M16) [S]
@@ -192,24 +199,63 @@
 
 ## 23. Tests y calidad (RF2/RF8/M112)
 
-- [x] Definir suite Navigator: recorre 21 pantallas sin atascos [M]
-- [x] Definir suite de perfiles/slots 30 ciclos [M]
-- [x] Definir suite de pausa: congelar/reanudar [M]
-- [x] Definir suite de settings ida y vuelta [M]
+- [?] Definir suite Navigator: recorre 21 pantallas sin atascos [M] — INFLADO: no existe; T-M2 solo valida foco en 2 capas (test_m89_menus C1-C7)
+- [?] Definir suite de perfiles/slots 30 ciclos [M] — slots: hay `test_slots_m59` + 100 ciclos de `test_stress_m113`; perfiles NO existen (sin suite posible)
+- [x] Definir suite de pausa: congelar/reanudar [M] — verificada hoy: casos E91/C10 (`caso_reloj_tests.gd`) + grupo F de `test_m89_menus.gd`
+- [x] Definir suite de settings ida y vuelta [M] — `test_settings_audio_roundtrip.gd` (51 checks / 0 fallos)
 - [ ] Definir metric de apertura < 300 ms sin picos de memoria [M]
 - [ ] Definir foco visible en todas las pantallas (M58) [S]
 - [ ] Definir playtest de 5 usuarios en continuar/nueva/cargar [M]
 
+## Auditoría contra disco (T-M2 — 2026-10-05)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-05 04:15
+
+Método (idéntico a T-M1): lectura completa del plan-actual, contraste ítem por ítem contra los archivos reales del repo Godot, y suite headless nueva `scripts/ui/test_m89_menus.gd`. Resultado detallado en `07-Resultados-Testings.md`; plan en `06-Plan-Testings.md`.
+
+### Suite nueva: `test_m89_menus.gd` (grupo A-H)
+
+- **Verde final:** 48 checks / 0 fallos / `exit=0` (2026-10-05 03:55).
+- **Sonda rojo (honestidad):** constante `ESPERA_BOTONES_MENUS` 5→6 → `FALLO: A5 5 botones (esperados 6)` / 1 fallo / `exit=1`; constante restaurada y verde reejecutado.
+- **Regresión:** `test_ui_framework.gd` 0 fallos / `exit=0`; `test_diario_ui.gd` 89 checks / 0 fallos / `exit=0`.
+
+### Flips aplicados (8 `[ ]`→`[x]`, 2 `[x]`→`[?]`)
+
+| Ítem | Antes→Después | Evidencia |
+|------|---------------|-----------|
+| §6 acceso a ajustes desde menú y pausa | [ ]→[x] | `ui_root.gd:194-199` conecta `ajustes_pedido` de MenusLayer y PauseLayer; suite E7-E8 |
+| §7 pantalla de créditos con scroll | [ ]→[x] | `credits_layer.gd:342` avance por `VELOCIDADES`; 3 velocidades (D5) |
+| §7 volver al menú desde créditos | [ ]→[x] | `credits_layer.cerrar()` → `close_top()` (D4) |
+| §7 créditos con estética del juego (M06) | [ ]→[x] | paleta ThemeUx (COLOR_BG_ARENA, ocre) en todo el layer |
+| §11 Pausar() del mundo (M07/M29) | [ ]→[x] | `ui_manager.gd:82-92`; suite F: logs `mundo PAUSADO`/`REANUDADO` |
+| §11 reanudación sin saltos de tiempo | [ ]→[x] | `game_clock.gd` `_pausado` + casos E91/C10 (`caso_reloj_tests.gd`) |
+| §11 cierre con estado de última pantalla | [ ]→[x] | T-053-066 deep-linking pausa↔ajustes (`pause_layer.gd:88-100`) + semántica de pila |
+| §12 pestañas inventario | [ ]→[x] | `inventory_layer.gd:21` (hoy: Items/Herramientas/Construcción; "Recetas" renombrado) |
+| §23 suite Navigator 21 pantallas | [x]→[?] | INFLADO: no existe; hoy solo foco verificado en 2 capas (C1-C7) |
+| §23 suite perfiles/slots 30 ciclos | [x]→[?] | INFLADO en perfiles: no existen perfiles; slots sí (`test_slots_m59`, 100 ciclos en `test_stress_m113`) |
+
+### Gaps de la auditoría (integran los 93 `[ ]` restantes)
+
+1. RF1 incompleto: **5/6 botones** del menú principal (falta "Cargar"; botones hoy: Jugar/Continuar/Ajustes/Créditos/Salir).
+2. **Nadie llama `menus_layer.open()`** → el título no se muestra al arrancar.
+3. RF11: `salir_pedido` → `get_tree().quit()` **sin confirmación** de salida.
+4. RF11/RF5: Esc/Start en juego **solo cierra capas**; abrir PauseLayer es solo vía RF18 (M58).
+5. Ajustes = **solo Audio** (`SettingsAudioLayer`); faltan pantallas de Controles/Accesibilidad/Gráfica.
+6. **Perfiles 1-3 no existen** en M59 (solo slots).
+7. Inventario con **scroll, no grid paginado** (§12 ítem íntegro).
+8. Sin portada M147, sin versión visible, sin 21 pantallas/enum IdPantalla (docs = diseño heredado Unity).
+
 ## Totales
 
-**Total de ítems:** 124
-**Ítems resueltos por documentación:** 124 (0 pendientes, 0 dudas — DoD cubierto)
-**Ítems pendientes de implementación:** 0 (módulo listo para implementar/delegar)
+**Total de ítems:** 125
+**[x] completados:** 30 · **[ ] pendientes:** 93 · **[?] no resueltos:** 2 (ver auditoría T-M2)
 
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 125 ítems · Completados: 24 · Pendientes: 101 · No resueltos: 0.
+**Totales:** 125 ítems · Completados: 30 · Pendientes: 93 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 101 [ ] / 0 [?].

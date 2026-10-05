@@ -93,3 +93,37 @@ Input Pausa (Start/Esc) → ShellManager.Abrir(Pausa)
 - No se reescribe M53 (modales/diálogos existentes se reutilizan).
 - No UI con lógica de gameplay (AGENTS.md §9).
 - No pantallas de contenido con datos cacheados duplicados (siempre managers).
+
+## 8. Nota de mapeo (T-M2): diseño heredado vs. implementación Godot
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-05
+
+Las secciones 1-7 son el diseño original (Unity). Este es el mapa estado-por-pantalla contra el disco (detalles en `04-Codigo.md` §6 y `05-Checklist.md` auditoría):
+
+| Pantalla (diseño) | Implementación real | Estado |
+|---|---|---|
+| P1 Menú principal | `MenusLayer` (5/6 botones; sin open() al arrancar, sin portada M147, sin versión) | ⚠️ |
+| P2 Continuar | `SaveManager` slots (sin selector de perfiles) | ⚠️ |
+| P3 Nueva partida | botón "Jugar" → GameFlowManager (sin flujo de slots) | ⚠️ |
+| P4 Cargar | no existe pantalla (solo API de slots) | ❌ |
+| P5 Ajustes | `SettingsAudioLayer` (solo Audio) | ⚠️ 1/4 |
+| P6 Créditos | `CreditsLayer` (scroll, 3 velocidades, cerrar, ThemeUx) | ✅ |
+| P7 Salir | `quit()` sin confirmación (RF11) | ❌ |
+| P8 Perfiles 1-3 | no existe | ❌ |
+| P9 Slots | no hay pantalla propia (API en M59) | ⚠️ |
+| P10 Pausa | `PauseLayer` (4 opciones vs 9; apertura solo RF18) | ⚠️ |
+| P11 Inventario | `InventoryLayer` (scroll, pestañas Items/Herramientas/Construcción) | ⚠️ |
+| P12 Mapa | `full_map_layer` (zona DeepSeek — no tocar) | ⚠️ ajeno |
+| P13 Diario | `DiaryLayer` (M55, 89 checks) | ✅ |
+| P14 Colección | manager (M73) sin UI | ❌ |
+| P15 Habilidades | manager (M71) sin UI | ❌ |
+| P16 Relación | manager (M20) sin UI | ❌ |
+| P17 Config general | no (solo audio) | ❌ |
+| P18 Controles | manager (M58) sin UI | ❌ |
+| P19 Accesibilidad | managers sin UI | ❌ |
+| P20 Audio | `SettingsAudioLayer` (roundtrip 51/0) | ✅ |
+| P21 Gráfica | sin UI | ❌ |
+
+> El grafo Navigator del §4 no existe como tal: `menu_navigator.gd` resuelve foco por capa, no grafo por pantalla (ítem §1 `[?]`-parcial en la auditoría).
