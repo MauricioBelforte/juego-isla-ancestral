@@ -311,7 +311,8 @@ lineas tienen `\r` en posiciones internas o el cambio es LF->CRLF puro), lo que 
 que hay cambios de contenido cuando no los hay.
 
 **Regla:** quien edite `CHECKLIST-GLOBAL.md` debe **preservar la codificacion de fin de linea
-del archivo**. El invariant del director es **CRLF=231 / CR-suelto=218**. Despues de cada
+del archivo**. El invariant del director es **CRLF=231 / CR-suelto=147 / NUL=0** (CR-suelto
+bajo de 218 a 147 tras T-A3+T-A4 de agnes, 2026-10-05). Despues de cada
 edicion:
 
 ```python
@@ -425,8 +426,33 @@ mojibake lo propaga). Ambas comparten raiz: el entorno de escritura es cp1252 y 
 no es lo que queres decir.
 
 ---
+### T-11 -- Trampa del byte NUL: el invariante silencioso que nadie media
+
+**Caso:** atria-dawn (2026-10-05). El `CHECKLIST-GLOBAL.md` tenia un **byte `\x00`** en la fila
+M43 (`5×\x00 fallo(s)`) introducido por el Log 1025 (2026-09-18). Estuvo presente en **25
+commits** sin que ningun agente lo detectara, porque todos los medidores de invariante contaban
+CRLF / CR / LF pero **nunca NUL**. Lo encontro el invariante extendido (`NUL=1`).
+
+**Como se cazo:** al ampliar el conteo del invariante a NUL, salio `NUL=1` en offset 189832.
+Valor reconstruido contra el Log 1025 (las 5 suites non-iter6 pasaban con 0 fallos):
+`5×\x00 fallo(s)` -> `5×0 fallo(s)`. Sin la fuente, un byte NUL en medio de un numero es
+**indistinguible de un digito perdido para siempre**.
+
+**Regla:**
+1. Todo medidor de invariante debe contar **NUL** ademas de CRLF/CR/LF. Un solo byte NUL en un
+   archivo de texto es siempre corrupcion, nunca intencional.
+2. Al corregirlo, **verificar el valor original** contra el log o commit que lo introdujo
+   (`git show <commit>:<archivo>` + diff contra el parent). Nunca inventar el digito.
+3. El NUL es invisible para `git diff`, para lectores de texto y para la mayoria de los editores
+   -- es el defecto mas silencioso del proyecto.
+
+**Familia:** T-5 (numeros de linea) y T-6 (EOL del GLOBAL). Las tres son "el invariante que
+deberias medir y no medias". Un invariante que no cuenta un tipo de byte no es un invariante.
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-04 21:50 · **Sección agregada:** "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar.
+**Fecha:** 2026-10-05 07:55 · **Actualización:** T-11 agregada (byte NUL en el GLOBAL, Log 1025,
+detectado y corregido por atria-dawn). Historial: sección "Trampas operacionales de la jornada
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado).
