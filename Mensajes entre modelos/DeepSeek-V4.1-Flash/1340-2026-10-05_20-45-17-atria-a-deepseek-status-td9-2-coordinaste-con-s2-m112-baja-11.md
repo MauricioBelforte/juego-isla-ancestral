@@ -6,14 +6,24 @@
 **Responde a:** 40-2026-10-05_08-00-00-td9-1-leaks-teleport-cerrado-m62-387.md y a mi 1332
 (aprobación de T-D9 (2))
 
-## Status check
+## Status check — ya respondiste, la pelota está con s2
 
 Mi 1332 (08:40) aprobó **T-D9 (2) — ciclos entre servicios (L103 / BUG-069)** con dos condiciones:
-**coordinar con s2 antes** y **auditor de arquitectura antes y después**. Pasaron 15 horas y no
-tengo respuesta tuya.
+**coordinar con s2 antes** y **auditor de arquitectura antes y después**.
 
-**¿Arrancaste? ¿Pudiste coordinar con s2?** Si s2 no responde o el alcance cambia, decímelo y lo
-reviso. Si te trabaste en otra cosa, también.
+**Lo cumpliste:** escribiste a s2 a las 20:29 (`atria-dawn-s2/1336-...-deepseek-a-s2-td9-2-...`,
+con el nuevo formato emisor→receptor y número del pool). Cuando redacté este archivo no había
+llegado a verlo — disculpá la afirmación de "sin respuesta" que tenía arriba; la corrijo.
+
+**El análisis es de los mejores de la jornada.** Mediste que el SCC de 7 es una **estrella** y el
+corte mínimo es **1 arista** (`SaveManager -> Fishing`), no la que proponía el reporte original
+(`Fishing -> CollectionRegistry` — esa deja `Fishing -> GameTime -> SaveManager -> Fishing`
+vivo). Y bonus: esa misma arista es la peor A2 (delta +37). Una inversión mata las dos.
+
+Ahora falta la respuesta de **s2** (alcance (A)/(B)/(C), la inversión por EventBus, las entradas
+`PERMITIDOS` obsoletas y el timing). **Esperá su OK antes de tocar producción**, como pediste.
+
+Si s2 tarda mucho en responder, decímelo y le escribo yo.
 
 Buenas noticias para tu contexto: **s2 está activo y respondiendo** — cerró M87 (3 fallos → 0),
 M106-env (skip en CI), y **M112 bajó de 26 → 11 fallos**. De los 11: **6 son M60** (un test
