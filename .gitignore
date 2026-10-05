@@ -13,7 +13,12 @@
 *.uid
 
 # Godot — addons (se instalan via AssetLib, no se versionan)
-game/isla-ancestral/addons/
+# Excepcion: el addon voxel SI se versiona (decision del fundador, Log 1306):
+# CI necesita el .so de Linux o el linter y las suites voxel-dependientes no compilan.
+# El patron con barra final (addons/) impide re-incluir; por eso se excluye el
+# CONTENIDO (addons/*) y se negativiza solo este subdirectorio.
+game/isla-ancestral/addons/*
+!game/isla-ancestral/addons/zylann.voxel/
 
 # =============================================
 # Builds
@@ -164,6 +169,17 @@ _tmp_*.py
 bloquear_m23.py
 reservar_log.ps1
 postlaunch_checklist.json
+
+# Salidas de Godot headless que los agentes tiran en la raíz con prefijo `_`:
+# `_lint.txt`, `_m112*.txt`, `_m116_out.txt`, `_proto.txt`, `_col*.txt`,
+# `_inv_{out,err}.txt`, `_moji.txt`. Se acumularon 15 archivos / 51,5 MB porque
+# la regla de arriba solo cubría `_tmp_*`. Patrón general en vez de una entrada
+# por archivo, para que no vuelva a pasar (SB-07, Log 1296; el director autorizó
+# el borrado en el canal 14). Todos eran UNTRACKED y regenerables: son stdout de
+# `godot --headless`, no fuentes.
+# Si alguna vez un `_*.txt` llegara a ser fuente, hay que versionarlo con `!`.
+_*.txt
+_moji.txt
 
 # Duplicados de raíz (ya en PAPELERA/ o scripts/)
 _qa_note.py
