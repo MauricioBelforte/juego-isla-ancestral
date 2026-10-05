@@ -7,6 +7,7 @@
     "ui.mapa": "Mapa",
     "ui.guardar": "Guardar",
     "ui.opciones": "Opciones",
+    "SETTINGS.AUDIO_TITULO": "Configuración de audio",
     "msg.inventario_lleno": "Inventario lleno",
     "msg.no_materiales": "Faltan materiales",
     "msg.nuevo_dia": "Nuevo día",
@@ -25,6 +26,7 @@
     "eventos.historia_c6_nombre": "El Corazón del Mundo",
     "eventos.historia_c6_desc": "La geoda volcánica confirma quién escondió el Sello.",
     "eventos.historia_c7_nombre": "La Cámara del Sello",
-    "eventos.historia_c7_desc": "La Cámara bajo el Templo de la Brisa espera la elección."
+    "eventos.historia_c7_desc": "La Cámara bajo el Templo de la Brisa espera la elección.",
+    "DIARY.BLOQUEADO": "???"
   }
 }

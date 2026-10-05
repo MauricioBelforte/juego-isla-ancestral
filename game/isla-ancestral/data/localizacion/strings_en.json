@@ -7,6 +7,7 @@
     "ui.mapa": "Map",
     "ui.guardar": "Save",
     "ui.opciones": "Options",
+    "SETTINGS.AUDIO_TITULO": "Audio settings",
     "msg.inventario_lleno": "Inventory full",
     "msg.no_materiales": "Not enough materials",
     "msg.nuevo_dia": "New day",
@@ -25,6 +26,7 @@
     "eventos.historia_c6_nombre": "The Heart of the World",
     "eventos.historia_c6_desc": "The volcanic geode confirms who hid the Seal.",
     "eventos.historia_c7_nombre": "The Seal Chamber",
-    "eventos.historia_c7_desc": "The chamber beneath the Temple of the Breeze awaits the choice."
+    "eventos.historia_c7_desc": "The chamber beneath the Temple of the Breeze awaits the choice.",
+    "DIARY.BLOQUEADO": "???"
   }
 }

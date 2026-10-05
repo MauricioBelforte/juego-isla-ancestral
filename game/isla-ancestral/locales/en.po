@@ -607,7 +607,7 @@ msgstr "Interact"
 
 # M53: sección Audio de Ajustes (frente mimo-v2.6-flash-free, 2026-10-04)
 msgid "SETTINGS.AUDIO_TITULO"
-msgstr "Audio"
+msgstr "Audio settings"
 msgid "SETTINGS.MAESTRO"
 msgstr "Master"
 msgid "SETTINGS.MUSICA"
@@ -689,5 +689,6 @@ msgstr "Completed of the discovered content"
 msgid "DIARY.DIA"
 msgstr "Day %s"
 
+#. no-traducir: secreto del lore (§3.2); el "???" es intencional en todos los idiomas
 msgid "DIARY.BLOQUEADO"
 msgstr "???"

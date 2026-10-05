@@ -693,5 +693,6 @@ msgstr "Completado del contenido descubierto"
 msgid "DIARY.DIA"
 msgstr "Día %s"
 
+#. no-traducir: secreto del lore (§3.2); el "???" es intencional en todos los idiomas
 msgid "DIARY.BLOQUEADO"
 msgstr "???"

@@ -103,14 +103,16 @@ func _bloque_a_fuentes(fuente: Font) -> void:
 	var grande: Vector2 = AnalizadorLayout.medir_linea(fuente, "Jugar", 24)
 	_check(grande.x > m.x, "A5 la medición escala con el tamaño (@24 > @16): %.1f > %.1f" % [grande.x, m.x])
 
-	# Fuente real del juego: sólo Nunito-Variable es un TTF válido (BUG-042).
+	# Fuentes reales del juego (BUG-042 resuelto 2026-09-19, Log 1024: las .ttf que
+	# eran paginas HTML 404 se reemplazaron por TTF reales). A6/A7 ahora verifican
+	# la RESOLUCION: ambas fuentes cargan y miden de verdad.
 	var f_var: Font = load("res://assets/fonts/Nunito-Variable.ttf")
 	var m_var: Vector2 = AnalizadorLayout.medir_linea(f_var, "Jugar", TAMANO)
 	_check(m_var.x > 0.0, "A6 Nunito-Variable.ttf mide de verdad (%.1f px) — fuente real utilizable" % m_var.x)
 
 	var f_reg: Font = load("res://assets/fonts/Nunito-Regular.ttf")
 	var m_reg: Vector2 = AnalizadorLayout.medir_linea(f_reg, "Jugar", TAMANO)
-	_check(m_reg.x == 0.0, "A7 Nunito-Regular.ttf mide 0 px → BUG-042 confirmado (es una página HTML 404, no una fuente)")
+	_check(m_reg.x > 0.0, "A7 Nunito-Regular.ttf mide de verdad (%.1f px) — BUG-042 resuelto (antes era una pagina HTML 404)" % m_reg.x)
 
 	var sin_wrap: Vector2 = AnalizadorLayout.medir_linea(fuente, "Settings of the island game", TAMANO)
 	var con_wrap: Vector2 = AnalizadorLayout.medir(fuente, "Settings of the island game", TAMANO, 60.0)
