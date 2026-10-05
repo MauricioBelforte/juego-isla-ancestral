@@ -55,6 +55,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [test]
+    # Corre siempre: si test fallo, el acta lo refleja (suite_tests_verde=false)
+    # y el gate bloquea explicitamente en vez de skipearse silenciosamente.
+    if: always()
 
     steps:
       - uses: actions/checkout@v4

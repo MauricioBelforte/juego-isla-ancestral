@@ -900,6 +900,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: [test-suite]
+    # CORRE SIEMPRE, incluso si test-suite fallo: el acta tiene que reflejar que
+    # la suite fallo (suite_tests_verde=false). Sin esto, el gate se skipea
+    # justo cuando mas se necesita — cuando hay gates reales rotos.
+    if: always()
 
     steps:
       - name: Checkout repository
