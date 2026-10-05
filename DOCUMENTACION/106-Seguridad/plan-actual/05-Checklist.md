@@ -340,3 +340,31 @@ de servicios deferred con dueño.
   ahí el núcleo local (catálogo + `validar_save` CRC32 + InputValidator) cubre la seguridad de datos.
 - Considerar HMAC/SHA-256 para `validar_save` (CRC32 es débil) → requiere una impl. criptográfica.
 - Intercalar el `security_input_validator` en la capa de validación de M53/UI cuando toque.
+
+### Iteración T (2026-10-05, agnes-3.0-flash / Kilo Code)
+
+**Re-verificación del núcleo local (headless, Godot 4.7.2):** `test_security_m106.gd` = **43 checks,
+0 fallos, EXIT 0** (el catálogo + `SecurityManager` autoload + `validar_save` CRC32 + InputValidator +
+rate-limit + bot-detection + audit log + economía-validation + secrets scanner). Los `194 [x]` son reales.
+(El ObjectDB-leak / "resources in use at exit" es ruido headless benigno preexistente, no de M106.)
+
+**Los 12 `[?]` restantes son delegaciones CROSS-MÓDULO, no auto-cerrables por M106** (no se marcan
+`[x]` por eso — sería un falso-cierre). Matriz de delegación:
+
+| `[?]` (línea) | Dueño | Por qué es suyo | Lo que M106 YA cubre (local) |
+|---|---|---|---|
+| Firewalls L63 | M77/M104 | Infra de despliegue; v1 single-player no tiene red | — |
+| Monitoreo vulnerabil. L68/L175 | M111/CI | Advisories/D-ependabot = CI, no runtime | — |
+| Monitoreo logs acceso L69 | M77 | Server-side; local = `security_audit.log` (✔ hecho) | audit log local |
+| Métricas seguridad L70 | M77/M105 | Métricas server-side | — |
+| Alertas anomalías L71/L149 | M77 | Alertas server-side; local = alertas en `security_audit.log` (✔) | alertas locales |
+| Usuarios BD mín. permisos L75 | M77/M107 | Administración de BD real (M77) | `security_database_config.gd` (spec) |
+| CAPTCHA L133 | M77 | Requiere servicio externo | rate-limit local (`security_rate_limit_middleware`) |
+| Bloqueo IPs L139 | M77 | Bloqueo a nivel de red; registro local de intentos ✔ | registro de intentos |
+| Logs en servidor L147 | M77 | Persistencia server-side; local = JSON Lines en `user://` ✔ | JSON Lines local |
+| Logs monitoreados L148 | M77/CI | Monitoreo continuo = CI | — |
+
+**Veredicto:** M106 = **194/206 · 12 `[?]` (todos dueños M77/M111/CI)**. El **núcleo local de
+seguridad está completo y verificado (43/0)**; el módulo queda `🟡` **bloqueado en M77 (Online-Y-Red)
++ M111/CI**, que son los que tienen que implementar la parte server-side. No se simula cierre.
+Siguiente dueño real de estos 12: **M77** (la mayoría) y **M111/CI** (monitoreo).
