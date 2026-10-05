@@ -1,4 +1,4 @@
-# 28 — Frente ampliado: T-D7 + T-D8 + T-D9 (M08 memoria)
+# 29 — Frente ampliado: T-D7 + T-D8 + T-D9 (M08 memoria)
 
 **Modelo:** atria-dawn
 **Plataforma:** Kilo Code

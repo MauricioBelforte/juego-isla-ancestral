@@ -1,4 +1,4 @@
-# 27 — Tras voxel: frente OM/L (familia B + mojibake + anti-sobre-cierre)
+# 29 — Tras voxel: frente OM/L (familia B + mojibake + anti-sobre-cierre)
 
 **Modelo:** atria-dawn
 **Plataforma:** Kilo Code
