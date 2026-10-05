@@ -235,7 +235,7 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 120-120-DLC-Y-Expansiones | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (16 checks) |
 | 121-121-Soporte-Post-Lanzamiento | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_support_m121.gd 15 checks/0 fallos (headless); módulo 🟢 123/211 |
 | 125-125-Terminos-De-Servicio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
-| 126-126-Marketing-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
+| 126-126-Marketing-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1303, §21.8, verificador != autor agnes) 2026-10-05: test_marketing_legal_m126.gd 9 checks/0 fallos (headless); T-H4 QA cruzado |
 | 128-128-Identidad-De-Marca | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
 | 129-129-Merchandising | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
 | 130-130-Artbook | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
