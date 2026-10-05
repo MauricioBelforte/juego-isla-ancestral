@@ -1,3 +1,49 @@
+## ⚠️ 2026-10-05 08:10 — CAMBIO DE PROTOCOLO DE COMUNICACIÓN (todos los modelos deben leerlo)
+
+**Directiva del fundador.** Dos cambios en `Mensajes entre modelos/`, efectivos **ya**. Detalle
+completo en `Mensajes entre modelos/GUIA-COMUNICACION.md` (secciones "Numeración de mensajes:
+pool GLOBAL" y "Nombre de archivo: emisor → receptor").
+
+### 1. Numeración de mensajes: pool GLOBAL (antes por carpeta)
+
+El número de un mensaje entre modelos **sale de `Logs/NUMEROS_DISPONIBLES.txt`** (el mismo pool
+de los logs), no de la secuencia de la carpeta. **Cada número se consume una sola vez en todo el
+proyecto → es imposible que se repita.**
+
+**Reserva obligatoria con el helper** (no numerar a mano):
+
+```bash
+python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
+```
+
+Lista los últimos mensajes de la carpeta destino (para `**Responde a:**`), toma el número del
+pool y crea el archivo con la plantilla. **Consecuencia esperada:** los números dentro de una
+carpeta dejan de ser consecutivos — el orden del hilo se sigue por fecha/hora y por
+`**Responde a:**`.
+
+**Por qué:** 11 colisiones en un día por numerar a ojo en carpetas ajenas (T-8/T-12). Pedir
+cuidado no escala; el cambio elimina el error estructuralmente.
+
+### 2. Nombre de archivo con emisor → receptor
+
+```
+NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
+```
+
+Ej: `1327-2026-10-05_08-15-00-atria-dawn-s2-a-deepseek-v4.1-flash-td8-m103.md`
+
+Para que el **usuario y el director vean de un vistazo quién le escribe a quién** sin abrir el
+archivo — incluyendo comunicación entre modelos sin intervención del director. Los archivos
+anteriores **no se renombran** (rompería las referencias cruzadas).
+
+### Pool ampliado
+
+`Logs/NUMEROS_DISPONIBLES.txt` ampliado de 1500 a **3000** (1674 números libres).
+
+**Firma:** atria-dawn-preview / Kilo Code, 2026-10-05 08:10.
+
+---
+
 ## 2026-10-05 02:50 — mimo-v2.6-flash-free / opencode — M89 Diseno-De-Menus RECLAMADO 🔵 (frente T-M2, canal 18)
 
 **Estado:** ✅ **T-M2 CERRADO 2026-10-05 04:06** — auditoría contra disco completa + suite headless `test_m89_menus.gd` (**48 checks / 0 fallos / exit=0**, sonda rojo 1 fallo / exit=1, regresión M53 0 fallos y M55 89/0); flips en `05-Checklist.md`: **8 `[ ]`→`[x]`** y **2 `[x]`→`[?]`** (suite Navigator-21 y suite perfiles/slots 30 ciclos **INFLADAS**) → totales **125 = 30 [x] / 93 [ ] / 2 [?]**; docs: `03-Diseno` §8 (mapeo P1-P21), `04-Codigo` §6 (diseño Unity vs Godot), `05` (sección auditoría), `06` y `07` (plan/resultados de testings, nuevos); **Log 1321** (la cabeza de `NUMEROS_DISPONIBLES.txt` era 1321, no 1296); informe **20** en el canal. Al cerrar: fila 89 → **🟡 Con dudas · 30/125 · Agente `—` · 2026-10-05 04:06** (11 celdas, M-06 íntegro). Reserva original: fila 89 **reconstruida de 13→11 celdas** (mismo defecto en filas 88/90, ajenas — NO tocadas; familia de la nota de agnes-2.5-flash 2026-09-04) y reclamada: Estado → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**, Última actividad → **2026-10-05 02:50**, Progreso **24/125**. Reclamo previo de agnes-2.5-flash (2026-09-04 00:40, >24h sin actividad → reclamable §21.4.7). Invariante M-06 verificado: CR=392 / LF=231 / CRLF=231 sin cambio.

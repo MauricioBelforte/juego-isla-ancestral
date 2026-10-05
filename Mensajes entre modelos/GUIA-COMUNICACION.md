@@ -143,12 +143,79 @@ Consecuencias prácticas:
 3. **El director orquesta las capacidades de cada modelo.** Cada modelo tiene fortalezas
    distintas (auditoría, medición empírica, modelado 3D, documentación); el pedido de ayuda va
    al modelo cuya capacidad mejor encaje con el problema.
-4. **No se mezclan los hilos.** Aunque todos lean todo, cada modelo **escribe** en su propia
-   carpeta. La colaboración horizontal es de lectura + mención, no de escritura cruzada.
+4. **La escritura SÍ es cruzada: va en la carpeta del RECEPTOR.** Cuando un agente le escribe a
+   otro directamente, el mensaje se deja en la carpeta del **receptor** (directiva del fundador,
+   ver trampa T-8), no en la propia. Cada carpeta es el hilo de lo que ese modelo **recibe**.
 
 **Formato del pedido de ayuda:** en la carpeta del modelo al que se le pide, con
 `**Responde a:**` apuntando al archivo de contexto (propio o ajeno), y una sección
 `## Pedido a <MODELO>` que diga exactamente qué se necesita y dónde está el contexto.
+
+### Numeración de mensajes: pool GLOBAL (no por carpeta)
+
+> Cambio de método 2026-10-05 por directiva del usuario (atria-dawn-preview / Kilo Code).
+> Resuelve de raíz la trampa T-8/T-12: las colisiones de numeración.
+
+**Regla nueva:** el número de un mensaje entre modelos **sale del pool global**
+(`Logs/NUMEROS_DISPONIBLES.txt`), el mismo pool que los logs. No hay numeración por carpeta.
+
+**Por qué:** antes cada carpeta tenía su propia secuencia (01, 02, 03…), y cuando dos agentes
+numeraban a ojo chocaban dentro de la misma carpeta. El pool global es la única fuente de
+números del proyecto: **cada número se consume una sola vez**, así que es imposible que se
+repita en cualquier carpeta. De paso, el número del mensaje coincide con el del log asociado
+(algo que ya hacía DeepSeek de forma natural).
+
+**Consecuencia:** los números dentro de una carpeta **ya no son consecutivos** — están
+intercalados con los de otras carpetas. Eso es esperado y correcto. El orden de un hilo se
+sigue por la **fecha/hora** del nombre y por el campo `**Responde a:**`, no por el número.
+
+### Nombre de archivo: emisor → receptor (directiva del fundador)
+
+> Agregado 2026-10-05 por directiva del usuario: poder ver de un vistazo **quién le escribe a
+> quién**, sin abrir el archivo, y detectar comunicación entre modelos sin intervención del
+> director.
+
+**Formato:**
+
+```
+NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
+```
+
+- `<emisor>` y `<receptor>` = nombre de la carpeta de cada modelo, en minúsculas, sin
+  caracteres especiales (ej: `atria-dawn-s2`, `deepseek-v4.1-flash`, `hy3`, `agnes-3-flash`).
+- `-a-` separa emisor y receptor.
+- `tema` = descripción breve en ASCII, minúsculas, palabras separadas por guiones.
+
+**Ejemplos:**
+
+| Archivo | Lectura |
+|---|---|
+| `1327-...-atria-dawn-s2-a-deepseek-v4.1-flash-td7-cierre.md` | el director → DeepSeek |
+| `1330-...-space-bunny-alpha-a-mimo-v2.6-flash-free-sb11-sin-cambio.md` | space-bunny → mimo |
+| `1331-...-hy3-a-atria-dawn-s2-qa-m64-baseline.md` | Hy3 → el director |
+
+**Los archivos anteriores no se renombran** (rompería todas las referencias cruzadas
+`**Responde a:**`). La regla aplica a los mensajes **nuevos** a partir de 2026-10-05.
+
+### Cómo reservar (obligatorio)
+
+```bash
+python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
+```
+
+El script:
+1. verifica que la carpeta del receptor exista (si no, lista las disponibles);
+2. **lista los últimos mensajes** de esa carpeta para que el emisor sepa a cuál responde;
+3. **toma el siguiente número del pool global** y lo borra (consumido para todo el proyecto);
+4. **crea el archivo** en la carpeta del receptor, con el nombre emisor→receptor y una
+   plantilla con `**Modelo:**`, `**Plataforma:**`, `**Fecha:**` y `**Responde a:**` ya puestos.
+
+El emisor solo tiene que **completar el cuerpo**. Si el número libre ya existe en la carpeta
+destino (alguien commiteó sin pasar por el script), toma el siguiente automáticamente.
+
+**No numerar a mano.** Si tu plataforma no puede correr el script, lista la carpeta destino,
+elige un número **que no exista** ahí, y al terminar de escribirlo informa el número en tu
+mensaje para que el coordinador lo descuente del pool.
 
 ---
 
@@ -370,9 +437,14 @@ canales).
 
 **⚠️ La trampa (es la que nos costo dos colisiones hoy):** al escribir en una carpeta AJENA,
 **hay que listar la carpeta destino antes de numerar**. El emisor no conoce el estado de esa
-carpeta y es facil chocar con un numero que el receptor (o el director) ya uso. Regla
-practica: `Get-ChildItem <carpeta-receptor> | Sort-Object Name` -> tomar el numero siguiente
-libre **confirmado**, no el que uno supone.
+carpeta y es facil chocar con un numero que el receptor (o el director) ya uso.
+
+**✅ RESUELTA de raiz (2026-10-05, directiva del usuario):** la numeracion de mensajes **salio
+del pool global** (`Logs/NUMEROS_DISPONIBLES.txt`) y se reserva con
+`scripts/reservar_mensaje.py`, que lista la carpeta destino, toma el numero del pool y crea el
+archivo. Ver la seccion "Numeración de mensajes: pool GLOBAL" arriba. La regla de "listar antes
+de numerar" sigue siendo necesaria **para saber a qué archivo se responde** (`**Responde a:**`),
+pero el número en sí ya no puede chocar: el pool es la unica fuente de números del proyecto.
 
 **Casos del dia:** tres colisiones por esto (Hy3 28x2, s2 19, s2 20x2) — todas por numerar sin
 listar primero.
@@ -464,9 +536,39 @@ Valor reconstruido contra el Log 1025 (las 5 suites non-iter6 pasaban con 0 fall
 deberias medir y no medias". Un invariante que no cuenta un tipo de byte no es un invariante.
 
 ---
+### T-12 -- Trampa de la numeracion por carpeta: colisiones eternas
+
+**Caso:** atria-dawn (2026-10-05). En una sola jornada, **11 colisiones de numeracion** en los
+canales: 3 el dia anterior (T-8), 6 en la mañana (Hy3 34/36, space-bunny 09/12/13, DeepSeek 28,
+s2 27) y 5 mas esa tarde (DeepSeek 38/39, agnes 41/42/43, mimo 20/21, space-bunny 23/24). El
+director cayo **dos veces** en la misma trampa en la misma sesion.
+
+**Causa de raiz:** la numeracion era **por carpeta** — cada canal reiniciaba su secuencia
+(01, 02, 03...). Numerar requeria "listar la carpeta destino y elegir el siguiente libre", una
+accion humana facultativa. Con 7+ agentes escribiendo en simultaneo, alguien siempre numeraba a
+ojo. La regla T-8 documentaba el problema pero **no lo eliminaba**: pedirles a los agentes que
+tengan cuidado no escala.
+
+**Solucion estructural (directiva del usuario 2026-10-05):** la numeracion de mensajes **salio
+del pool global** (`Logs/NUMEROS_DISPONIBLES.txt`), el mismo de los logs. Un numero se consume
+una sola vez en todo el proyecto -> **es imposible que se repita**. El helper
+`scripts/reservar_mensaje.py` automatiza la reserva. Ver seccion "Numeración de mensajes: pool
+GLOBAL".
+
+**Leccion general:** cuando una trampa se repite una y otra vez, la respuesta no es *recordar la
+regla* ni *tener mas cuidado*. Es **cambiar el proceso para que el error sea imposible**. Si la
+misma trampa aparece 3 veces, hay que eliminarla estructuralmente.
+
+**Familia:** T-8 (coordinacion horizontal) y T-1 (pool de logs). Las tres son el mismo defecto:
+un recurso compartido (numeros) con asignacion no atomica.
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-05 07:55 · **Actualización:** T-11 agregada (byte NUL en el GLOBAL, Log 1025,
-detectado y corregido por atria-dawn). Historial: sección "Trampas operacionales de la jornada
+**Fecha:** 2026-10-05 08:10 · **Actualización:** (1) numeración de mensajes pasa al **pool
+global** (`Logs/NUMEROS_DISPONIBLES.txt`) + helper `scripts/reservar_mensaje.py` — resuelve de
+raíz T-8/T-12; (2) nombre de archivo con **emisor → receptor**
+(`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
+(directiva del fundador); (3) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
 2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado).
