@@ -248,7 +248,7 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 142-142-Release-Candidate | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (checklist 142-rc + Logs) |
 | 143-143-Lanzamiento | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (checklist 143-lanzamiento + Logs) |
 | 150-150-Diseo-Sonoro-Narrativo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test_narrative_m150 EXIT 0 (12 checks) — FILA CHECKLIST AUSENTE, reconciliar |
-| 152-152-Principios-Innegociables | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1309, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_principios_m152.gd 12 checks/0 fallos (headless)  — EXIT 0 (12 checks) |
+| 152-152-Principios-Innegociables | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1309, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_principios_m152.gd 12 checks/0 fallos (headless) — M152 ✅ 202/202 (D-R2 fundador decidido 2026-10-05)  — EXIT 0 (12 checks) |
 | 161-161-Diseno-Visual-De-NPCs | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (1073 assets NPC (.blend)) |
 | 164-164-Isla-De-Combate-Endgame | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (Logs 137/164 endgame) |
 
