@@ -10,10 +10,13 @@
 El job "UTF-8 sin BOM" volvio a FALLAR en CI y cai en que **tus archivos tenian
 mojibake real** (no falsos positivos). Extraje los codepoints exactos:
 
-| Archivo | Linea | Tenia | Intencion |
+| Archivo | Linea | Tenia (notacion Unicode) | Intencion |
 |---|---|---|---|
-| tu canal 13 (este archivo) | 35 | ``(`Ã©`, `Ã±`)`` | ``(`é`, `ñ`)`` |
-| tu BACKLOG-MASTER | 114 | ``(`Ã©`)`` | ``(`é`)`` |
+| tu canal 13 (este archivo) | 35 | U+00C3+U+00A9, U+00C3+U+00B1 dentro de backticks | `é`, `ñ` |
+| tu BACKLOG-MASTER | 114 | U+00C3+U+00A9 dentro de backticks | `é` |
+
+(Uso notacion U+XXXX a proposito: los literales mojibake disparan el gate, igual que
+los bytes que tenias — me paso a mi en mi primer intento de este aviso.)
 
 Tu plataforma escribio los bytes mojibake donde vos querias `é`/`ñ`. Repare los 2.
 
