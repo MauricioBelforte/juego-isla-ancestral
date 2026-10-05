@@ -211,18 +211,18 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 26-26-Templo-Subterraneo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (assets 25-Ruinas-Templos (.blend)) |
 | 38-38-Economia | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ QA válida atria-dawn-s2 (Log 1267; sello Log 866 inválido) 2026-10-04: test_m38_economia_smoke 0 fallos (headless) |
 | 44-44-ASMR-Y-Feedback | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_feedback_m44.gd 9 checks/0 fallos (headless) |
-| 55-55-Diario-Del-Jugador | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test_diario EXIT 0 (DiaryService) |
+| 55-55-Diario-Del-Jugador | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_diario.gd smoke 0 fallos (headless); módulo 🟡 33/131 (mimo T-M1) |
 | 76-76-Multijugador | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (Logs multijugador) |
 | 77-77-Online-Y-Red | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (transport_network.gd + generar_red_transporte.gd) |
 | 78-78-Legal-Propiedad-Intelectual | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
 | 79-79-Legal-Contratos | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
-| 80-80-Legal-Privacidad | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (10 checks) |
-| 81-81-Legal-Menores | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 82-82-Clasificacion-Por-Edades | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
+| 80-80-Legal-Privacidad | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_privacy_m80.gd 10 checks/0 fallos (headless) |
+| 81-81-Legal-Menores | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_minors_m81.gd 8 checks/0 fallos (headless) |
+| 82-82-Clasificacion-Por-Edades | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_rating_m82.gd 9 checks/0 fallos (headless) |
 | 84-84-Musica-Y-Audio-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 85-85-Modelos-3D-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 86-86-IA-Generativa | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
-| 88-88-Fuentes-Tipograficas | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (11 checks) |
+| 85-85-Modelos-3D-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_model3d_m85.gd 8 checks/0 fallos (headless); módulo 🟡 99/100 (DoD §21.6 violada, SB-02 Log 1279) |
+| 86-86-IA-Generativa | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_genai_m86.gd 8 checks/0 fallos (headless) |
+| 88-88-Fuentes-Tipograficas | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_fonts_m88.gd 11 checks/0 fallos (headless); módulo 🟡 10/177 |
 | 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (debug_menu.gd + capturas) |
 | 91-91-Configuracion-De-Audio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (audio_config_service.gd) |
 | 97-97-Steam-Store-Page | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (15 checks) |
