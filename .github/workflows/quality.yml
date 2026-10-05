@@ -101,7 +101,11 @@ jobs:
   formatting-check:
     name: GDScript Formatting Check
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # Ajustado a 15 min (antes 10): el job llego al limite (10m15s) despues de
+    # versionar el addon voxel (100 MB de binarios + iconos). Sin --import previo,
+    # Godot reimporta todo en el primer arranque. Margen para no perder el job
+    # por timeout cuando el repo crece (atria-dawn-s2, 2026-10-05).
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
