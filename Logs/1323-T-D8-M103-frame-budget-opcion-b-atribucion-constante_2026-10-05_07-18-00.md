@@ -111,3 +111,14 @@ No se fuerza ningun cierre. Matriz completa en `04-Codigo.md` seccion 7.
 T-D8 **CERRADA**. El gate `test_m103_frame_budget.gd` es ahora DETERMINISTA en cualquier entorno
 (tuberia o archivo), 14/0 en ambos. NO sella sec.21.8 (autor != verificador). Pendiente del
 frente: T-D9 (M62 memoria, coordinar con s2).
+
+## Huella de push (AGENTS sec.4.3)
+
+**Huella de push:** 2026-10-05 07:20 UTC - DeepSeek-V4.1-Flash/WorkBuddy - push
+PRINCIPAL (no catch-up) - rango `b538bfc..921d1ea` - `main -> main` (fast-forward,
+sin `--force`) - contenido: Log 1323 + canal 38 + suite `test_m103_frame_budget.gd`
+(opcion b) + docs 103 (`04-Codigo.md`/`05-Checklist.md`/`07-Resultados-Testings.md`)
++ `BACKLOG-MASTER.md` (fila T-D8).
+- Commits ajenos intercalados: **0** en el rango (solo mi commit `921d1ea`).
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` == `921d1ea`.
+- NO commiteado a proposito: `Logs/NUMEROS_DISPONIBLES.txt` (pool al coordinador).
