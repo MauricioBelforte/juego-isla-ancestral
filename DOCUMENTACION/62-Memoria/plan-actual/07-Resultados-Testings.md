@@ -17,9 +17,11 @@
 | `test_memoria_m62_iter3.gd` | 133 | 0 | 0 | idénticas |
 | `test_m62_liberacion.gd` (iter. 4) | 15 | 0 | 0 | idénticas (×5) |
 | `test_memoria_m62_iter5.gd` (iter. 5) | 60 | 0 | 0 | idénticas (×3) |
+| `test_m62_pureza_save.gd` (iter. 6) | 59 | 0 | 0 | idénticas (×2) |
+| `test_m62_leaks_teleport.gd` (iter. 7, T-D9) | 21 | 0 | 0 | idénticas (×3) |
 | `generar_budgets.gd -- --check` | 20 | 0 | 0 | sha256 `872f9321bc61ab21` en 2 escrituras |
 
-**Total: 307 checks de código, 0 fallos.** El conteo se compara sobre la secuencia de líneas
+**Total: 387 checks de código, 0 fallos** (366 de las 7 suites previas + 21 de la suite nueva de T-D9). El conteo se compara sobre la secuencia de líneas
 `[OK]`/`[FAIL]` **normalizada**, no sobre la salida cruda: la salida cruda trae timestamps de sesión y
 duraciones, y compararla entera daría «0 idénticas» con la suite perfectamente determinista.
 
@@ -263,4 +265,60 @@ nombrados) hizo su trabajo.
 ```bash
 "<godot_console>" --headless --path game/isla-ancestral \
   --script res://scripts/rendimiento/memoria/test_memoria_m62_iter5.gd
+```
+
+## 10. Iteración 7 (T-D9, Log 1325): test de leaks con teleport ×10
+
+### 10.1 `test_m62_leaks_teleport.gd` — 21 checks, 0 fallos, ×3 idénticas
+
+Cierra **L105** y **L143**. Headless, sin mundo: cada "teleport" deja atrás los chunks del borde como
+**candidatos a descarga** en la `UnloadPolicy`. Si la política los **retiene** después de
+`ejecutar_descarga()`, los `Resource` quedan vivos → fuga.
+
+| Bloque | Qué prueba | Checks |
+|---|---|---|
+| A | **Sonda del medidor** (control positivo): crear 64 nodos sube el contador de huérfanos; crear 256 `Resource` sube `objetos_vivos()`. Sin esto, la igualdad antes/después sería vacua. | 6 |
+| B | **Teleport ×10**: 10 ciclos × 24 chunks = 240 `Resource`. Tras `ejecutar_descarga()`: **0 retenidos** (WeakRef) y `objetos_vivos` **delta 0**. | 7 |
+| C | **Pool**: `liberar_todo()` libera de verdad (los 16 nodos quedan **encolados** para `queue_free`). Caza la regresión del defecto "solo vaciaba los arrays". | 6 |
+| D | **Guardián EN ROJO por inyección**: se deja una fuga a propósito (candidatos nunca descargados) y se exige que el detector la VEA (8 retenidos → 0 tras descargar). | 2 |
+
+### 10.2 Medición
+
+```
+10 ciclos de teleport x 24 chunks = 240 Resource
+objetos_vivos: base=3618  fin=3618  delta=0
+retenidos por la politica tras ejecutar_descarga(): 0
+cola maxima observada: 24 candidatos (== CHUNKS_POR_TELEPORT)
+```
+
+`queue_free()` es **diferido** (medido: el holder sigue con 16 hijos en el mismo frame) → el bloque C
+comprueba que están **encolados**, no que ya desaparecieron. Afirmar "holder sin hijos" ahí sería medir
+el frame equivocado. (Esa fue la 1.ª corrida en rojo: `21 checks, 1 fallo`.)
+
+### 10.3 Guardián probado EN ROJO (2 inyecciones)
+
+| # | Inyección | Resultado |
+|---|---|---|
+| 1 | Omitir los bloques C y D | `15 checks, 3 fallos` → EXIT 1 (nombra C y D + piso 21→15) |
+| 2 | Error de **runtime** en el bloque B (llamada sobre instancia nula) | `SCRIPT ERROR` aborta B; el resumen diferido **igual corre**, nombra B, `15 checks, 2 fallos` → EXIT 1 |
+| — | control sin mutar | `21 checks, 0 fallos` → **EXIT 0** |
+
+### 10.4 Regresión
+
+- 7 suites previas: `27+47+25+133+15+60+59 = 366`, 0 fallos. + la nueva = **387 / 0**.
+- `auditar_arquitectura_m62.py`: **0 hallazgos nuevos** (874 → 875 `.gd` revisados), `--selftest` en verde.
+- `generar_budgets.gd -- --check`: 20/0.
+- **NO cableada a `quality.yml`** (no lo toqué: es de s2/director). Queda **pendiente de wiring**.
+
+### 10.5 Alcance (lo que este test NO prueba)
+
+- El teleport con **mundo real** (M08/M63) y el frame con render: sigue siendo **Play Mode** (**L213 no se cierra**).
+- El RSS real del proceso: se mide el **conteo de objetos** y la **retención de recursos**, no
+  `OS.get_static_memory_usage()` bajo carga de mundo.
+
+### 10.6 Reproducir
+
+```bash
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://scripts/rendimiento/memoria/test_m62_leaks_teleport.gd
 ```

@@ -1,6 +1,6 @@
 **Modelo:** DeepSeek-V4.1-Flash (último modificador)
 **Plataforma:** WorkBuddy
-**Fecha:** 2026-10-02 (iter. 6 — Log 1196)
+**Fecha:** 2026-10-05 (iter. 7 — T-D9, Log 1325)
 
 # 05-Checklist.md — Módulo 62: Memoria
 
@@ -16,6 +16,7 @@
   - **iter. 4:** presupuesto de liberación por refcount **medido** (pico < 3 ms, delta de lote < 50 ms) + nodos huérfanos estables en reposo + **auditor estático de arquitectura de servicios** (`scripts/auditar_arquitectura_m62.py`, con selftest probado en rojo) + 2 gates nuevos de CI. 2 bugs nuevos (BUG-068/BUG-069).
   - **iter. 5 (Log 1187):** **handshake con M63** (el 62 nunca descarga lo que el 63 está cargando) + cola de transición de escena + región rápida → fuerza liberación + banco de audio diferido + atlas LRU con log + determinismo (RN9). Suite nueva `test_memoria_m62_iter5.gd` (**60 checks**, guardián probado con **5 sondas en rojo**, exit real verificado) + gate de CI. **9 ítems** de §K/§J/§F pasan a `[x]`. Total M62 = **307 checks**.
   - **iter. 6 (Log 1196):** **pureza de los datos de partida** (item L98): los 39 proveedores `ISaveProvider` registrados devuelven solo datos (0 Nodos) y el payload COMPLETO de `collect()` tambien. Suite `test_m62_pureza_save.gd` (58 checks) con escaner recursivo probado EN ROJO. Complemento estatico: **regla C** en `auditar_arquitectura_m62.py` (56 scripts con `get_save_data`, 0 hallazgos).
+  - **iter. 7 (Log 1325, T-D9):** **test de leaks con teleport x10** (items **L105** y **L143**). Suite nueva `test_m62_leaks_teleport.gd` (**21 checks**, guardián de 3 capas probado EN ROJO con 2 inyecciones). Mide que la cola de descarga (`UnloadPolicy`) **no retiene** los `Resource` de los chunks que el teleport deja atras: 10 ciclos, 0 retenidos, `objetos_vivos` delta **0**. **PENDIENTE de cablear a `quality.yml`** (no lo toqué: es de s2/director). Total M62 = **387 checks**.
 - Archivos: `game/isla-ancestral/scripts/rendimiento/memoria/` + `data/rendimiento/budgets.json` + `scripts/auditar_arquitectura_m62.py`
 - Fecha cierre: (pendiente — al cerrar con `--estado`)
 
@@ -102,7 +103,7 @@
 - [x] Los callables con bound parameters se desconectan en `_exit_tree` (anti-leak de lambdas) [M] — Log 1094: `LeakGuard.conectar()` guarda el Callable EXACTO (incluido el `.bind()`), así el disconnect funciona; probado
 - [ ] Ciclos entre servicios evitados con weakref o getters directos (sin referencias circulares) [C] — **iter. 4 (Log 1112): SIGUE ABIERTO, y ahora hay evidencia de por qué.** El auditor nuevo mide **2 componentes fuertemente conexas** (7 nodos: `CollectionRegistry, Fishing, GameTime, Inventario, SaveManager, TimeCalendar, Weather`; y 2 nodos: `ThemeService, UIManager`) más 9 referencias a un autoload declarado después. Escalado como **BUG-069**; el gate los tiene en lista de permitidos para que ningún ciclo NUEVO pase
 - [ ] Sesión de referencia: 30 min de juego sin drift > 5% sobre la línea base [C]
-- [ ] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual) [C]
+- [x] Test de leaks con teleport ×10 y conteo de objetos antes/después (debe ser igual) [C] — **iter. 7 (Log 1325, T-D9): MEDIDO.** `test_m62_leaks_teleport.gd` (21 checks, 0 fallos, ×3 idénticas): 10 ciclos de teleport dejan 240 `Resource` como candidatos a descarga; tras `ejecutar_descarga()` **0 retenidos** (verificado con `WeakRef`) y `objetos_vivos` **delta 0** (base 3618 = fin 3618). Guardián de 3 capas probado EN ROJO con 2 inyecciones. **Alcance:** mide la contratación de M62 (que su cola de descarga no retenga recursos), no el teleport con mundo real — eso sigue siendo Play Mode (L213).
 
 ## F. RN — Requisitos no funcionales
 
@@ -140,7 +141,7 @@
 - [ ] Generación de mallas en hilos (M08): resultados por cola sin copias extra [C]
 - [ ] Los diffs y ediciones del jugador (M08) no retienen historial infinito en RAM [M]
 - [ ] Al mover el anillo (M12/M63) se descargan los chunks del borde antes de cargar nuevos [M]
-- [ ] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test) [C]
+- [x] Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel (test) [C] — **iter. 7 (Log 1325, T-D9): MEDIDO** por la misma suite: 10 ciclos con `marcar_punto_de_interes("teleport_extremo")`, la cola queda VACÍA tras cada descarga y el conteo de objetos NO crece. **Alcance headless:** el "nivel de memoria" medido es el conteo de objetos + la retención de recursos; el RSS del mundo real (M08/M63) no es medible acá.
 - [x] El pool de chunks se ajusta al presupuesto voxel declarado (800 MB Alta) [M]
 
 ## I. Integración con M41-M44 (audio)
@@ -329,3 +330,22 @@ Re-verificación del delta iter.5+6 (el autor no puede auto-verificarse, trampa 
 - **Veredicto:** ✅ **Verificado por Hy3/WorkBuddy (Log 1223, §21.8).** Confirma el sello iter.4 (Log 856/1128) y cierra la QA pendiente del delta.
 - **Hallazgo AJENO (no tocado):** `A2|SubtitleManager->DataStore` (dueño M91).
 - Detalle: `Logs/1223-m62-qa21.8-iter56_2026-10-03.md`.
+
+## Delta iter. 7 — T-D9 (Log 1325, 2026-10-05)
+
+> El autor **NO sella §21.8** (trampa 46/119): este bloque es el **reporte del delta**, no una
+> verificación. La re-verificación del delta queda para un NO-autor.
+
+- **Suite nueva:** `test_m62_leaks_teleport.gd` — **21 checks, 0 fallos, EXIT 0, ×3 idénticas.**
+- **Items que pasan a `[x]`:** **L105** (test de leaks con teleport ×10 + conteo de objetos antes/después)
+  y **L143** (teleport extremo ×10 deja la memoria en el mismo nivel).
+- **Medición:** 10 ciclos × 24 chunks = 240 `Resource`; **0 retenidos** tras `ejecutar_descarga()`
+  (verificado con `WeakRef`); `objetos_vivos` base=3618 fin=3618 (**delta 0**).
+- **Guardián EN ROJO (2 inyecciones):** omitir los bloques C/D → el resumen **nombra** los bloques y baja
+  del piso (21→15), EXIT 1; error de runtime en B → el resumen diferido **igual corre**, nombra B, EXIT 1.
+- **Regresión:** las 7 suites previas siguen verdes (**366 checks**) + la nueva = **387 checks / 0 fallos**.
+  `auditar_arquitectura_m62.py`: **0 hallazgos nuevos**. `generar_budgets.gd -- --check`: 20/0.
+- **DoD medido tras el delta:** checklist **113[x] / 37[ ] / 0[?]** (150 items).
+- **Alcance headless:** mide la contratación de M62 (que su cola no retenga recursos). El teleport con
+  mundo real (M08/M63) sigue siendo Play Mode — **L213 no se cierra con esto**.
+- **PENDIENTE:** cablear la suite a `quality.yml` (no lo toqué — es de s2/director).

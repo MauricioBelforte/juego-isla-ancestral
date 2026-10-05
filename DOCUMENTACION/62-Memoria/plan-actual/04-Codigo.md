@@ -526,3 +526,68 @@ M59/M41–M44/M91) y luego solicitar sello limpio.
   queda para un NO-autor.
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-02 — Log 1196.
+
+## Notas del Agente — T-D9: test de leaks con teleport ×10 (Log 1325, 2026-10-05, DeepSeek-V4.1-Flash / WorkBuddy)
+
+**Cierra los items L105 y L143** (§E RF4 / §H): «Test de leaks con teleport ×10 y conteo de objetos
+antes/después (debe ser igual)» y «Teleport extremo ×10 y vuelta al spawn deja la memoria en el mismo nivel».
+
+### Qué se entregó
+
+- **`scripts/rendimiento/memoria/test_m62_leaks_teleport.gd`** (nueva suite headless, **21 checks,
+  0 fallos, EXIT 0, ×3 idénticas**). 4 bloques con el guardián anti-falso-verde de 3 capas de M62
+  (`_fin` por bloque + piso `CHECKS_MINIMOS=21` **medido** en verde + `_summary()` en un
+  `call_deferred` aparte):
+  - **A — sonda del medidor (control positivo):** crear 64 nodos sin padre sube el contador de
+    huérfanos; crear 256 `Resource` sube `objetos_vivos()`. Sin esto, «el conteo volvió a la base»
+    podría ser cierto porque el medidor nunca se movió (falso verde por OMISIÓN).
+  - **B — teleport ×10 (el núcleo):** 10 ciclos × 24 chunks = **240 `Resource`** registrados como
+    candidatos a descarga (`registrar_candidato_descarga`), `marcar_punto_de_interes("teleport_extremo")`
+    (L51), `ejecutar_descarga()` del lote completo. El llamador suelta sus referencias y se comprueba
+    con **`WeakRef`** que **0** quedaron retenidos. `objetos_vivos`: base=3618 fin=3618 (**delta 0**).
+  - **C — el pool libera de verdad:** `liberar_todo()` sobre 16 nodos con holder. `queue_free()` es
+    **diferido**, así que se comprueba que quedan **encolados** (no que ya desaparecieron): caza la
+    regresión del defecto «solo vaciaba los arrays».
+  - **D — guardián EN ROJO por inyección:** se deja una fuga a propósito (candidatos registrados y
+    NUNCA descargados: la `UnloadPolicy` los retiene, que es su contrato de cola) y se exige que el
+    detector la VEA (8 retenidos) y que la descarga rompa la retención (0). Sin este bloque, un
+    detector que nunca ve nada daría el mismo «0 retenidos» que un módulo sin fugas.
+
+### Por qué es medible headless (y qué NO mide)
+
+La retención que este test caza es **de refcount**: `UnloadPolicy._candidatos` guarda el `Resource`
+en un diccionario; si `ejecutar_descarga()` no lo borrara, el `Resource` sobreviviría al `clear()` del
+llamador. Eso es CPU pura y no necesita mundo. **No** mide el teleport con el mundo real (M08/M63) ni
+el frame con render — eso sigue siendo Play Mode (**L213 no se cierra** con esto).
+
+### Medición
+
+| Qué | Valor |
+|---|---|
+| Ciclos de teleport | **10** |
+| Chunks (Resource) por ciclo | **24** |
+| Total de Resource creados y soltados | **240** |
+| Retenidos por la política tras `ejecutar_descarga()` | **0** |
+| `objetos_vivos()` | base **3618** = fin **3618** (delta **0**) |
+| Suites M62 totales (8) | **387 checks, 0 fallos** |
+
+### Guardián probado EN ROJO (2 inyecciones)
+
+| # | Inyección | Resultado |
+|---|---|---|
+| 1 | Omitir los bloques C y D | `15 checks, 3 fallos` → EXIT 1 (nombra C y D + piso) |
+| 2 | Error de **runtime** en B (instancia nula) | `SCRIPT ERROR` aborta B; el resumen diferido **igual corre**, nombra B → EXIT 1 |
+| — | control sin mutar | `21 checks, 0 fallos` → **EXIT 0** |
+
+### Hallazgo de conteo (AJENO, no tocado)
+
+- `test_m62_pureza_save.gd` **rinde 59 checks**, no 58: el archivo **no cambió** desde `3759e57`
+  (iter. 6, Log 1196). El «58» de la sección iter. 6 de este archivo y del QA (Log 1223) coincide con
+  el **piso** `CHECKS_MINIMOS=58`, no con el total. Sin impacto en el guardián (59 ≥ 58); queda
+  **reportado**, no reescrito (es el registro de otro autor).
+
+### NO sella §21.8
+
+- El autor no puede auto-verificarse (trampa 46/119). El delta de T-D9 queda para un NO-autor.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy), 2026-10-05 — Log 1325.
