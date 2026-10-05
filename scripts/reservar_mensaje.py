@@ -30,6 +30,32 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MENSAJES = os.path.join(RAIZ, "Mensajes entre modelos")
 POOL = os.path.join(RAIZ, "Logs", "NUMEROS_DISPONIBLES.txt")
 
+# Alias cortos y legibles para el nombre del archivo (emisor-a-receptor).
+# La clave es el nombre de la carpeta; el valor es lo que va en el nombre del archivo.
+ALIASES = {
+    "atria-dawn-s2": "s2",
+    "DeepSeek-V4.1-Flash": "deepseek",
+    "Hy3": "hy3",
+    "agnes-3-flash": "agnes",
+    "mimo-v2.6-flash-free": "mimo",
+    "space-bunny-alpha": "bunny",
+    "kimi-k3": "kimi",
+    "atria-dawn": "atria",
+}
+# Inverso: alias -> carpeta (para que se pueda pasar el alias como argumento).
+ALIAS_A_CARPETA = {v: k for k, v in ALIASES.items()}
+
+
+def alias_de(carpeta):
+    return ALIASES.get(carpeta, re.sub(r"[^a-z0-9]+", "-", carpeta.lower()).strip("-"))
+
+
+def resolver(argumento):
+    """Acepta un alias o un nombre de carpeta; devuelve el nombre de carpeta."""
+    if argumento in ALIAS_A_CARPETA:
+        return ALIAS_A_CARPETA[argumento]
+    return argumento
+
 
 def sanear_tema(tema):
     t = tema.strip().lower()
@@ -44,12 +70,12 @@ def main():
     ap = argparse.ArgumentParser(description="Reserva un numero de mensaje de canal.")
     ap.add_argument("receptor", help="Carpeta del receptor dentro de 'Mensajes entre modelos'.")
     ap.add_argument("tema", help="Tema breve (solo ASCII, se normaliza a minusculas y guiones).")
-    ap.add_argument("--emisor", default="atria-dawn-s2",
-                    help="Carpeta del emisor (default: atria-dawn-s2).")
+    ap.add_argument("--emisor", default="atria-dawn",
+                    help="Emisor: alias (atria, s2, deepseek, hy3, agnes, mimo, bunny, kimi) o carpeta.")
     args = ap.parse_args()
 
-    receptor = args.receptor.strip().strip("/\\")
-    emisor = args.emisor.strip().strip("/\\")
+    receptor = resolver(args.receptor.strip().strip("/\\"))
+    emisor = resolver(args.emisor.strip().strip("/\\"))
     carpeta = os.path.join(MENSAJES, receptor)
     if not os.path.isdir(carpeta):
         print("ERROR: no existe la carpeta del receptor: %s" % receptor)
@@ -79,8 +105,8 @@ def main():
     fecha_interna = ahora.strftime("%Y-%m-%d %H:%M:%S")
 
     tema = sanear_tema(args.tema)
-    receptor_slug = re.sub(r"[^a-z0-9]+", "-", receptor.lower()).strip("-")
-    emisor_slug = re.sub(r"[^a-z0-9]+", "-", emisor.lower()).strip("-")
+    receptor_slug = alias_de(receptor)
+    emisor_slug = alias_de(emisor)
 
     # Reserva con reintento: si el numero ya esta usado en la carpeta, toma el siguiente.
     usados = set(e.split("-", 1)[0] for e in existentes)

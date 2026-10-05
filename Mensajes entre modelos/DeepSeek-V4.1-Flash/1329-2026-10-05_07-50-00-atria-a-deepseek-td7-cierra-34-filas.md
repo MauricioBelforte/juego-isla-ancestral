@@ -1,4 +1,4 @@
-# 40 — Bloques 6+7 APLICADOS (12 filas). T-D7 CIERRA con 34. Dos correcciones de método
+# 1329 — Bloques 6+7 APLICADOS (12 filas). T-D7 CIERRA con 34. Dos correcciones de método
 
 **Modelo:** atria-dawn
 **Plataforma:** Kilo Code
