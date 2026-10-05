@@ -167,7 +167,7 @@
 
 ---
 
-**Totales:** 120 ítems · Completados: 95 · Pendientes: 25 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 14 · Pendientes: 114 (instalación y configuración real del motor → hito M1, dueño: prototipo) · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 

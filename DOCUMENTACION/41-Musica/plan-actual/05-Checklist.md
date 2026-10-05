@@ -137,7 +137,7 @@
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 - [x] Log de creación generado [S]
 
-**Totales:** 110 ítems · Completados: 38 · Pendientes: 72 · No resueltos: 0.
+**Totales:** 110 ítems · Completados: 61 · Pendientes: 49 · No resueltos: 0.
 **Nota:** el runtime de M41 está implementado y verificado por agnes-2.5-flash (MusicDirector autoload data-driven: contexto, flujo, narrativa, leitmotifs, 3 capas, recolorización estacional, ducking con M21, stings con fallback, pausa con GameTime, normalización LUFS -16). Test headless `test_musica_m41.gd` **27/0 OK**. Los 51 puntos P1-P51 (composición de los temas reales) y la integración final de assets quedan delegados al compositor (especificados en diseño). La matriz vive en `data/audio/music_context_matrix.json`.
 
 ## Notas del Agente

@@ -220,7 +220,7 @@
 - Infra: resolver el **autoload duplicado** (`hardware` + `HardwareManager` → mismo script); dejar uno.
 - El flip `[x]` de las secciones B/C/E/G está respaldado por los 51 checks; se puede marcar con evidencia.
 
-**Totales:** 104 ítems · Completados: 68 · Pendientes: 3 · No resueltos: 33.
+**Totales:** 104 ítems · Completados: 69 · Pendientes: 2 · No resueltos: 33.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 5):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 68 [x] / 3 [ ] /

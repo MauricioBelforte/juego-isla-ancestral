@@ -135,7 +135,7 @@
 
 ---
 
-**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 103 ítems · Completados: 4 · Pendientes: 99 · No resueltos: 0.
 
 ## Implementacion Fase 1 (2026-08-29 — Hy3/Kilo)
 

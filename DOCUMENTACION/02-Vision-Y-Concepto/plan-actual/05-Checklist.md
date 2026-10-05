@@ -229,5 +229,5 @@
 
 ---
 
-**Totales:** 172 ítems · Completados: 162 · Pendientes: 10 · No resueltos: 0.
+**Totales:** 172 ítems · Completados: 0 · Pendientes: 172 · No resueltos: 0.
 **Nota:** los 10 pendientes tienen dueño explícito en otros módulos (M02 verificación legal del nombre, QA/Playtesting, Publicación) y quedan registrados por trazabilidad; no son deudas de este módulo.

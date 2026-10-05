@@ -21,7 +21,7 @@
 - **ACTIVA:** Reserva Log 981 agnes-3-flash/Kilo Code (2026-09-18 02:55) — M126 en curso (iter. acotada
   data-layer + gate CI + V0): verificar el scaffold de validación (`marketing_legal.json` +
   `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` 9/0) + cablear el test al gate duro
-**Totales:** 102 ítems · Completados: 102 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
   ("101 resueltos" stale). El resto (capa de servicio/docs/legal review) = dueño M126.
 
 # 05-Checklist.md — Módulo 126: Marketing Legal
@@ -298,7 +298,7 @@ atria-dawn → este)
 
 **Firma:** Hy3 / WorkBuddy — 2026-09-19
 
-**Totales:** 101 ítems · Completados: 59 · Pendientes: 42 · No resueltos: 0.
+**Totales:** 101 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 0.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 59 [x] / 42 [ ] /

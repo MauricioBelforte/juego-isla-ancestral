@@ -136,7 +136,7 @@
 
 - [x] Actualizar bancos de sonido cuando se agreguen nuevos biomas o estaciones
 
-**Totales:** 109 ítems · Completados: 37 · Pendientes: 72 · No resueltos: 0.
+**Totales:** 100 ítems · Completados: 63 · Pendientes: 37 · No resueltos: 0.
 **Nota:** el runtime de M42 está implementado y verificado por agnes-2.5-flash: AmbientDirector autoload data-driven (banco 13 biomas, capas por bioma/clima/fase, hasta 8 capas en bus Ambient con crossfade al cambiar, ducking -6 dB con M21, pausa real con GameTime, normalización -18 LUFS). Test headless `test_ambient_m42.gd` **14/0 OK**. Los 25 puntos P1-P25 (samples reales de ambientes) y fuentes posicionales 3D (RF3/RF5) quedan delegados al compositor/implementación de assets.
 
 ## Notas del Agente

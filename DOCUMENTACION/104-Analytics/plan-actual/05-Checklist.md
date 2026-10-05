@@ -150,7 +150,7 @@
 - [x] Indicador visual de envio en curso [S]
 - [ ] Histórico de consentimientos del usuario [S]
 
-**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 117 ítems · Completados: 49 · Pendientes: 68 · No resueltos: 0.
 **Nota:** los ítems de implementación (G2 en runtime) quedan para el agente delegado; diseño, privacidad y reglas cierran aquí.
 ## N. Implementacion (ox-alpha/Cline 2026-08-29, V0, verificado headless)
 

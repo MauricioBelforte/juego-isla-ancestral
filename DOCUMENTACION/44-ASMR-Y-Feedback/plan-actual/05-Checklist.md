@@ -158,6 +158,6 @@
 - [ ] 05-Checklist creado y firmado (este archivo) [S]
 - [ ] plan-actual espejo sincronizado [S]
 
-**Totales:** 113 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 0.
+**Totales:** 113 ítems · Completados: 76 · Pendientes: 37 · No resueltos: 0.
 **Nota:** los ítems de implementación (D-G2, J-L en runtime) quedan para el agente delegado;
 diseño, recetas, blacklist y reglas contextuales cierran aquí.
