@@ -89,6 +89,22 @@ IRREVERSIBLE    0
 EXIT=0
 ```
 
+### Autocorreccion: mis propios avisos disparaban el gate
+
+Mi primer intento de reportar este fix (canal 29 al director + canal 13 a space-bunny)
+**contenia los literales mojibake en sus tablas** — los habia escrito para documentar
+los bytes corruptos. Como NO estan en `./Logs/` (que si esta excluido por
+`EXCLUIDOS_DIR`), disparaban el gate que yo acababa de arreglar. Lo descubri con un
+clone limpio (`git clone` + `python scripts/diagnosticar_mojibake.py`), que replica
+exactamente lo que ve CI.
+
+Fix: reescritos con **notacion U+XXXX** (U+00C3+U+00A9 en vez del literal). Commit
+`6b8a718`.
+
+**Leccion instalada:** para documentar mojibake fuera de `Logs/`, **siempre notacion
+U+XXXX**. El detector ya no distingue "este literal es documentacion" si la linea no
+tiene las palabras clave de `PAT_LINEA_DOC` (caso E del selftest).
+
 ## Archivos Modificados/Creados
 
 - `Mensajes entre modelos/space-bunny-alpha/13-2026-10-05_01-15-00-sb06-gate-anti-cjk.md` (L35)
@@ -99,4 +115,10 @@ EXIT=0
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Push principal: `9e2bea8..2125743` (main -> main), 2026-10-05 00:05, atria-dawn-s2 / Kilo Code. Commit `2125743` "Se repararon 3 mojibakes reales en archivos de agentes (Log 1300)". Sin conflictos ni catch-ups (rango de 1 commit).
+- Push principal: `9e2bea8..2125743` (main -> main), 2026-10-05 00:05, atria-dawn-s2 / Kilo Code. Commit `2125743` "Se repararon 3 mojibakes reales en archivos de agentes (Log 1300)".
+- Push: `2125743..8a144d0` (huella de este log).
+- Push: `8a144d0..bb78383` (canal 29).
+- Push: `bb78383..0a5b13a4` (canal 13 a space-bunny).
+- Push: `0a5b13a4..6b8a718` (main -> main), 2026-10-05 00:12 — avisos reescritos con notacion U+XXXX (los literales mojibake disparaban el gate).
+
+Todos sin conflictos ni catch-ups (rangos de 1 commit cada uno).
