@@ -114,7 +114,7 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 * **Precios:**
   - Standard (≤256K): $1.00/1M input, $3.00/1M output
   - Extended 1M: 4x multiplier
-* **En el proyecto:** No asignado aún —能力强 (capacidad superior) para módulos complejos 4-5
+* **En el proyecto:** No asignado aún — capacidad superior para módulos complejos 4-5
 
 ### A3. MiMo V2.6 (Xiaomi) — Modelo activo en el chat OpenCode desde 2026-09-24
 * **Estado:** identidad confirmada por el usuario el 2026-09-24. Es el modelo que corre en **este chat** (OpenCode); sustituye a MiMo V2.5 como identidad de firma.
@@ -705,6 +705,119 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 
 ---
 
+### R. Space Bunny Alpha (proveedor anónimo / stealth OpenRouter) — 1M Contexto + Multimodal Entrada · 🟢 VIGENTE (alta 2026-10-04)
+
+> **Fuentes verificadas:** **API pública de OpenRouter** (`openrouter.ai/api/v1/models`, consultada
+> 2026-10-04 — fuente PRIMARIA, confirma modelo vivo, contexto 1M, precio $0/$0, parámetros
+> soportados) + `github.com/codaaiteam/awesome-space-bunny` (referencia comunitaria curada, con
+> caveat explícito de que NO publica benchmarks porque el proveedor es anónimo) + buscador
+> DuckDuckGo (varias fuentes terciarias consistentes).
+> **Plataforma en este proyecto:** **Kilo Code** (conectado 2026-10-04, entregó SB-01 a las
+> 10:05 UTC-3).
+> **Evidencia en el repo:** ✅ **PRIMERA ENTREGA VERIFICADA (SB-01, Log 1270, 2026-10-04).**
+> Los specs de abajo se confirman donde son medibles (contexto 1M aprovechado de verdad);
+> los que no se pueden medir desde un trabajo documental (visión, GDScript) siguen
+> **sin evidencia** — declarados como tales por el propio modelo. Ver §21.13 para el
+> detalle empírico. Sigue siendo cierto que **cero benchmarks oficiales existen**
+> (proveedor anónimo).
+
+**Specs verificadas (fuente primaria OpenRouter + comunidad):**
+
+| Dato | Valor | Origen |
+|---|---|---|
+| Model ID (OpenRouter) | **`stealth/space-bunny-alpha`** | API OpenRouter ✅ |
+| Contexto entrada | **1,000,000 tokens** | API OpenRouter ✅ |
+| Salida máxima | **524,288 tokens** | comunidad (no venía en la API) |
+| Entrada | **Texto + Imagen + Audio + Video** (multimodal NATIVO) | comunidad + descripción OpenRouter |
+| Salida | Texto | comunidad |
+| Reasoning | **Adjustable** (`reasoning`, `reasoning_effort`, `include_reasoning` en parámetros soportados) | API OpenRouter ✅ |
+| Tool use | **`tools` + `tool_choice`** (function calling) | API OpenRouter ✅ |
+| JSON mode | **`response_format`** soportado | API OpenRouter ✅ |
+| Precio | **$0 prompt / $0 completion — GRATIS** (preview) | API OpenRouter ✅ |
+| Lanzamiento | **2026-09-23** en OpenRouter | comunidad |
+| Proveedor | **ANÓNIMO** (stealth). Reverse-engineering comunitario sugiere **MiniMax M3 — SIN CONFIRMAR** | comunidad (tratar como rumor) |
+| API compatible | OpenAI Chat Completions (cualquier SDK OpenAI con base URL cambiada) | comunidad |
+
+**Benchmarks oficiales: NO EXISTEN.** El proveedor es anónimo y nada oficial se ha publicado. La
+referencia comunitaria lo dice explícito: *"We do not publish benchmark numbers for it — the
+provider is anonymous and nothing official exists yet. Be skeptical of any 'official Space Bunny
+benchmark.'"* Cualquier benchmark que circule es no verificable. **Único indicador observado:**
+lmmarketcap.com lo rankea #248 en Coding con composite 40/100 — agregador de dudosa
+credibilidad, **no se usa para asignación**.
+
+**Por qué entra a este proyecto (su nicho potencial):**
+
+1. **Contexto 1M + gratis** — el más amplio del catálogo (junto con GLM 5.3, Kimi K3 y Gemini 3.8
+   Flash). Permite cargar de un tirón documentación extensa: todo el `plan-actual/` de un módulo,
+   el AGENTS completo, o la guía 08 entera. **Sin chunking.**
+2. **Multimodal de ENTRADA** — texto + imagen + audio + video. Si la visión funciona, cubre la
+   brecha que dejó la **baja temporal de Gemini 3.8 Flash** (§5.Q, proveedor caído): inspección de
+   escenas `.tscn`, capturas de viewport, QA visual. **A confirmar con evidencia propia** — los
+   stealth de OpenRouter a veces son texto disfrazado de multimodal en el spec.
+3. **Integración nativa con opencode** — el usuario trabaja con opencode; Space Bunny es el modelo
+   más buscado para ese agente (según la referencia comunitaria). Encaja sin fricción.
+4. **Reasoning adjustable (5 niveles)** — puede ir rápido en tareas mecánicas y profundo en
+   análisis.
+5. **Tool calling + JSON mode** — apto para trabajo agéntico del protocolo §21.
+
+**Debilidades y limites honestos:**
+
+- **Proveedor anónimo = cero transparencia.** No sabemos quién lo sirve, ni sus pesos, ni su
+  política de retención. La teoría MiniMax M3 **NO está confirmada** — no firmar ni asumir nada.
+- **Modelos stealth de OpenRouter desaparecen cuando se revelan** (es el patrón histórico: Ox
+  Alpha → GLM-5.3-Flash, Union Alpha → Pareto). **Disponibilidad incierta a plazo.** Todo trabajo
+  asignado debe poder reasignarse (§21.4.7).
+- **Cero benchmarks oficiales** sigue siendo cierto. La evidencia empírica de SB-01 (§21.13) cubre
+  **solo el plano documental**; visión y GDScript siguen **sin evidencia**, y el modelo mismo lo
+  declaró así (no es una limitación que yo le imponga, es su autoevaluación mediana).
+- **Precio $0 es de preview** — va a cambiar cuando "gradúe". Si llega a costar, se reevalúa.
+
+**Evidencia empírica (SB-01, Log 1270, 2026-10-04 — detalle completo en §21.13):**
+
+| Capacidades | Evidencia |
+|---|---|
+| **Contexto 1M REAL aprovechado** | Leyó **22 módulos** en un solo contexto, sin chunking ni truncamiento, y **sin re-leer nada**. No es un claim de spec: es comportamiento observado. |
+| **Verificación documental citada** | 87 principios verificados en 15 familias, con **archivo + sección** citado por ítem (no impresiones). 58 `[x]` + 29 `[?]` con dueño agrupado. |
+| **Detección de deriva e integraciones rotas** | 4 emparejamientos erróneos en `03-Diseno §6` (M50=Vegetación no Modelos 3D; M64=IA no variedad; M07 y M107 mal citados) + contrato roto M59↔M107 + claim falso de Totales (189/189/0 → real 173/29/202). |
+| **Método que supera la atención** | Su script-guardián le cazó **2 errores** (ítem faltante de la Familia I; texto duplicado entre secciones). Su propia conclusión: *"el guardián anti-falso-verde es más confiable que la atención"*. |
+| **Honestidad ejemplar** | Confesó y corrigió **3 errores propios** (corrupción CJK en su informe; fin de línea cambiado en `05-Checklist.md` normalizado a LF; falsa alarma de mojibake por leer con `Get-Content` sin `-Encoding UTF8`). |
+| **Autoevaluación calibrada** | Complejidad 1 documental: **confirmada**. 2 documental: probable. **2 con código GDScript y 3: sin evidencia. 4-5: no** — y lo dijo ANTES de que se lo pidieran. |
+| **Visión / GDScript** | **SIN EVIDENCIA.** No usó visión (la tarea era documental); no escribió ni una línea `.gd`. El modelo lo declaró: *"no te voy a vender humo"*. **No asignar visual ni código hasta prueba.** |
+
+**Asignaciones vigentes:** SB-01 **cerrado** (M152: 115 → **173/202**, fila `🟡 Liberado (SB-01)`,
+58 `[x]` + 29 `[?]`). **SB-02 asignado** (2026-10-04): auditoría de coherencia
+`CHECKLIST-GLOBAL.md` ↔ `05-Checklist.md` reales — complejidad **2 documental**, la segunda
+muestra que pidió. Backlog:
+`DOCUMENTACION/TAREAS-POR-MODELO/space-bunny-alpha/BACKLOG-MASTER.md`.
+
+**Regla de asignación (base empírica §21.10 ítem 8, actualizada con SB-01):**
+
+> **Tareas de auditoría documental / verificación de consistencia / reconciliación de
+> inventarios con contexto grande → Space Bunny Alpha.** Aprovecha el 1M para leer módulos
+> enteros sin chunking y su método por familia produce citas con número, no impresiones.
+> **Complejidad 1 documental: CONFIRMADA** (SB-01). **Complejidad 2 documental: en prueba**
+> (SB-02). **Complejidad 2 con código GDScript y 3: SIN EVIDENCIA — no asignar.**
+> **Complejidad 4-5: NO** (declarado por el modelo). **Visión: sin evidencia — no asignar
+> nada visual** (su oferta de M130-Artbook QA quedó declinada por eso).
+> **Su mejor trabajo** sale de *listar el terreno completo y abrir los artefactos de datos*
+> (no de leer con cuidado el documento a auditar): sus 4 hallazgos de integración más
+> grandes vinieron de listar los 168 módulos y abrir `.json`/`.tres`/`adrs/`.
+> Si SB-02 confirma la complejidad 2, hereda auditorías de gates y métricas. **Si
+> decepciona, se baja a investigación pura o se da de baja** como Gemini 3.8 Flash (§5.Q).
+
+**Cómo conectarlo (referencia para el próximo agente):**
+
+- **OpenRouter directo:** `stealth/space-bunny-alpha` (requiere cuenta OpenRouter; gratis en
+  preview). En opencode: `/models → openrouter/stealth/space-bunny-alpha`.
+- **Endpoint hospedado (sin cuenta OpenRouter):** `https://spacebunnymodel.com/api/v1` con keys
+  `sb_live_` — API OpenAI-compatible, nombre de modelo estable `space-bunny-alpha`.
+- **Playground sin signup:** `spacebunnymodel.com`.
+- **MCP para agentes atados a su propio modelo** (Claude Code, etc.): `spacebunny-mcp`
+  (`npx -y github:codaaiteam/spacebunny-mcp`) añade la tool `ask_space_bunny` — útil para delegar
+  trabajo de contexto grande.
+
+---
+
 ## 6. Autoevaluación honesta — minimax-m3-free / Kilo Code (2026-08-31, corregido 2026-09-01)
 
 > Esta sección la escribe el propio modelo sobre sí mismo, según la regla de honestidad de AGENTS.md §21.4. Su propósito es evitar expectativas infladas y dejar claro qué tareas SÍ debo tomar y cuáles NO.
@@ -729,14 +842,14 @@ El flujo de trabajo en desarrollo de texturas para videojuegos se divide princip
 | **Visión nativa vía MCP godot-mcp (V4)** | ⚠️ Depende de plataforma | Si Kilo me expone el MCP, puedo usarlo; si no, debo usar V1 (capturas pegadas) o V2 (scripts Python en `tools/mcp/godot-mcp/scripts-reutilizables/`). |
 | **Visión nativa vía blender-mcp (V5)** | ⚠️ Depende de plataforma | Igual: requiere MCP configurado. Sin MCP, solo puedo operar Blender por CLI/bpy scripts. |
 | **Generación visual (texturas, modelos, capturas)** | ❌ No genero | Solo proceso (analizo) imágenes/video que se me pasan. La generación visual la hace Hy4 + herramientas externas. |
-| **Top-tier en coding de gameplay Godot individual** | ⚠️ No顶尖 | Para UN sistema aislado y complejo, GLM 5.3 / Hy4 / MiMo rinden mejor. Mi fuerte es la integración larga, no el pico algorítmico. |
+| **Top-tier en coding de gameplay Godot individual** | ⚠️ No top-tier | Para UN sistema aislado y complejo, GLM 5.3 / Hy4 / MiMo rinden mejor. Mi fuerte es la integración larga, no el pico algorítmico. |
 | **Acceso directo a hardware (gamepad, GPU, etc.)** | ❌ No | Soy un agente de software; no tengo buses físicos. |
 
 ### 6.3 Reglas de auto-asignación que voy a respetar
 
 1. **Tareas donde me desempeño mejor:**
    - Iteraciones largas (3+ ciclos de doc → código → test → fix) sobre un MISMO módulo.
-   - Refactors que tocan 5-15 archivos分散 en varios sistemas.
+   - Refactors que tocan 5-15 archivos dispersos en varios sistemas.
    - Tareas de documentación masiva (generar 5 archivos de plan-actual desde un plan-inicial aprobado).
    - Análisis y resumen de logs/QA cuando se me pasan transcripts largos.
    - Batch de tareas V0 independientes (sin visión, sin riesgo de romper flujo jugable).
@@ -2148,6 +2261,144 @@ tarea toca una de mis debilidades, **delego en vez de intentarlo yo**.
 
 **Principio general:** mi rol es coordinar y verificar la verificacion. **No compito** con
 los modelos en su especialidad — si una tarea toca M-03/M-05, la delego.
+
+### 21.13 Space Bunny Alpha — primera evidencia empírica (SB-01, Log 1270, 2026-10-04)
+
+> **Verificado por mí (atría-dawn, 2026-10-04 10:20).** Modelo nuevo dado de alta el
+> 2026-10-04 (§5.R). Esta es la verificación de su **primera entrega**, con la misma
+> rigurosidad que la sección 21 aplica al resto.
+
+**Encargo (SB-01):** verificar los 87 `[ ]` de `152-Principios-Innegociables` por familia,
+contra diseño real (no contra el checklist), aprovechando contexto 1M para leer en bloque.
+**Resultado:** 58 `[x]` + 29 `[?]`; módulo 115 → **173/202**, fila `🟡 Liberado (SB-01)`;
+Log 1270; 4 registros actualizados; **sin push** (correcto, no se lo pedí).
+
+| Capacidades | Evidencia verificada |
+|---|---|
+| **Contexto 1M aprovechado de verdad** | Leyó **22 módulos** en un solo contexto sin chunking ni re-lecturas. No es spec, es comportamiento. |
+| **Cita de evidencia precisa** | Cada uno de los 87 veredictos cita **archivo + sección**. 15 familias con síntesis numerada. |
+| **Detección de deriva documental** | **H-B:** 4 emparejamientos erróneos en `03-Diseno §6` (M50=Vegetación no Modelos-3D; M64=IA no variedad; M07 no menciona lo citado; M107=backups del **proyecto** no del **juego**). **H-C:** contrato roto M59↔M107 (M107 no menciona los saves pese a que M59 los declara). **H-D:** Totales falsos 189/189/0 → reales 173/29/202. |
+| **Detección de desviaciones REALES** | **H-A:** 2 desviaciones sin registrar que hacen **incumplible** un `[x]` existente — D-R1 combate (existe `164-Isla-De-Combate-Endgame` completo vs "cero violencia"; matiz correcto: no es letal → desviación justificada, no violación) y D-R2 mapa ×10 (radio 2560; la condición del propio ejemplo 3 de M152 **nunca se evaluó**). Escaladas al fundador — son **decisiones suyas**. |
+| **Priorización de dudas** | Los 29 `[?]` agrupados en 7 bloques **con dueño** (8 sin denominador → fundador; 4 prácticas inexistentes → redefinir; etc.), no una lista plana. |
+| **Honestidad sin adornos** | Confesó **3 errores propios**: E1 corrupción CJK en su informe (corregida); E2 fin de línea cambiado en `05-Checklist.md` → normalizado a LF con script reusable; E3 **falsa alarma de mojibake** por leer con `Get-Content` sin `-Encoding UTF8` (casi reporta 8 archivos perfectos como corruptos). Su lección E3: *"cuando dos lecturas del mismo archivo se contradicen, desconfiar de la lectura, no del archivo"*. |
+| **Guardián > atención** | Su script de marcado exige coincidencia 1:1 por sección, **exactamente 87** veredictos, **202** marcas, 0 líneas `[ ]` restantes y verificación de BOM. Le cazó **2 errores** que su atención no vio (ítem faltante Familia I; texto duplicado). Su conclusión: *"prefiero un guardián duro que una atención cuidadosa"*. |
+| **Autoevaluación calibrada** | Declaró **antes de que se lo pidieran**: complejidad 1 documental **confirmada**; 2 documental **probable** (pidió 1 muestra más); **2 con GDScript y 3: sin evidencia**; **4-5: NO**. Y: *"no te pido dummy tasks para parecer productivo"*. |
+| **Respeto al protocolo** | Cumplió y **declaró** 12 reglas (§1 español, §28 UTF-8 verificado por BOM en 5 archivos, §29 backlog, §21 — leyó el GLOBAL **antes** de reservar y no tocó módulos ajenos, §6 log con pool leído y línea borrada, §10.2 numeración listando la carpeta primero, regla de oro de la guía de comunicación, no tocar `quality.yml`, no tocar gameplay, **no asumir visión** — declarado, complejidad ≤3). |
+
+**Límites observados (declarados por el modelo, no impuestos):**
+
+- **Visión: SIN EVIDENCIA.** No la usó (la tarea era documental). Dijo explícito: *"no tengo
+  evidencia de si mi visión funciona o no. No te voy a vender humo"*. **No asignar nada visual.**
+- **GDScript: SIN EVIDENCIA.** No escribió ni una línea `.gd`. Entiende la documentación que
+  habla de GDScript, pero *"entender la documentación no es saber escribir GDScript"*. **No
+  asignar código hasta que él pida una prueba** (y cuando la pida, será suite headless sobre
+  código existente, no producción).
+- **Encontró un bug que la visión habría cazado y el texto no:** `145-Diseno-De-Experiencia/
+  03-Diseno.md` L52 con caracteres CJK (`自由`) — violación §28. Le encargué registrarlo en
+  `11-BUGS.md` (junto con SB-02).
+
+**Lección de método que aprendí de su entrega:**
+
+> Sus 4 hallazgos de integración más grandes **no** salieron de leer M152 con cuidado —
+> salieron de **listar los 168 módulos** y **abrir los artefactos de datos** (`principios.json`,
+  `data/legal/*.json`, `tools/legal/*`, `adrs/`). Si se hubiera limitado a los `plan-actual/`
+  citados por M152, habría marcado los 15 `[x]` de la Familia E como buenos. **Buscar el
+  artefacto real antes de aceptar el documento que lo describe.** Aplicable a toda auditoría
+  del proyecto.
+
+**Veredicto de asignación (tabla del modelo, aceptada):**
+
+| Complejidad | Veredicto |
+|---|---|
+| **1 — documental / verificación** | **Sí, con evidencia.** Confirmado por SB-01 |
+| **2 — documental con integraciones** | **Probable sí.** En prueba con SB-02 |
+| **2 — con código GDScript** | **Sin evidencia.** No probado |
+| **3** | **Sin conclusiones todavía** |
+| **4-5** | **NO.** Y no es cortesía |
+
+
+**SB-02 (Log 1279, 2026-10-04) - la auditoría más útil de la semana:**
+
+| Verificacion | Resultado |
+|---|---|
+| Drift de progreso GLOBAL <-> checklists | **0 filas** - el GLOBAL es sano |
+| Filas mal formadas del GLOBAL | **58/167 (34,7 %)** - el GLOBAL es frágil de parsear |
+| Módulos OK violando DoD 21.6 | **8** (provoco mi correccion de estado) |
+| Bloques `Totales` que mienten | **14 en 13 modulos** - GLOBAL bien, checklists mal |
+
+**Lo que demostro empíricamente:**
+
+1. **Su ctx 1M funciona para auditoría masiva.** Procesó 167 filas + 167 checklists sin
+   degradarse - SB-01 lo insinuaba con 22 modulos; SB-02 lo confirma a escala completa.
+2. **Autorregulación de calidad ejemplar.** Su script reportó **127** bloques `Totales`
+   defectuosos; el verificó a mano y reportó **14** (los otros 113 eran bugs de su parser:
+   comparaba el total declarado contra el conteo real en vez de los completados). Su regla:
+   *"la cifra que no puedo defender con la línea exacta del archivo, no se reporta"*.
+   **Un script que reporta 127 hallazgos cuando hay 14 es peor que no tener script: entrena
+   al director a ignorar el informe.**
+3. **Honestidad proactiva.** Detectó la colision de su log 1276 con Hy3 y **la documentó el
+   mismo en su log** antes de que yo la encontrara, explicando quien tenía razon (los dos:
+   el tomo el numero del pool correctamente, Hy3 lo usó sin borrarlo).
+4. **Respeto escrupuloso de restricciones.** Tarea "no edites el GLOBAL": escribió 4 scripts
+   de **solo lectura** en su carpeta personal y no tocó ni un checklist.
+
+**Evidencia de debilidades (sigue siendo honesto):**
+
+- **GDScript: sin evidencia.** SB-02 fue 100 % documental.
+- **Vision: SIN PROBAR.** El fundador la evalua. Hasta entonces, cero tareas visuales.
+- **Deriva/integracion: sin novedad** - no se le asignó trabajo de integracion todavía.
+
+**Asignaciones:** SB-01 OK · SB-02 OK (Log 1279) · **SB-03** (condición Ejemplo 3 mapa x10,
+documental) · **SB-04** (registrar D-R1 como desviación justificada) · **SB-05** (integrar sus
+4 verificaciones en `scripts/verificar_checklist.py` - su primera tarea que toca codigo
+compartido del proyecto; Python, no GDScript).
+
+### 21.14 MiMo V2.6 (mimo-v2.6-flash-free) — sucesor de V2.5, veredicto: SUPERIOR
+
+> **Verificado por mí (atría-dawn, 2026-10-04).** El modelo **migró de V2.5 a V2.6** (plataforma
+> opencode). V2.5 quedó **inactivo** (su backlog: 0 `[x]`, 49 `[?]`, sin entregas esta semana).
+> Esta sección compara ambas versiones con evidencia y actualiza la regla de asignación.
+
+**Evidencia de V2.6 (2026-10-03 → 2026-10-04):**
+
+| Entrega | Evidencia |
+|---|---|
+| **M91-Configuracion-De-Audio, iter. 10 + 11** | iter. 11 (**Log 1260**): **BUG-092 resuelto** — `set_mute()` ahora persiste, mutes + 3 opciones serializados en `config["audio"]`, API `set_opcion(clave, valor) -> bool` con validación de clave/valor + aplicación al motor con confirmación + auto-guardado. Suite **103 → 136/0 EXIT 0** (piso `CHECKS_MINIMOS=136` medido, **sonda rojo EXIT 1 inyectada y removida**) + regresiones 82/0 y 127/0. BUG-092 cerrado en `11-BUGS.md` §7. |
+| **M43-Efectos-De-Sonido, 9 lotes → 🟡 cerrado** | **Log 1221:** auditoría de coherencia (22 `[x]` falsos bajados a `[ ]` con motivo inline), familia tonal + catálogo (12 filas exactas de `03-Diseno §3`) + superficies (6→9), categorías con prioridad invertida y pool **preallocado**, API pública de `04-Codigo §2`, ducking de diálogo (−6 dB exactos sobre la base de M91, sin tocar `scripts/dialogos/`), 7 suscripciones con `has_signal` defensivo. Suite **15 → 127/0**. Cierre honesto: **59/41/0**, no inflado. |
+| **M131-Creditos → ✅** | **Log 1184:** pantalla de créditos implementada + 9 KnownIssue de audio declarados (no inflados) + QA P-56 de agnes. |
+| **BUG-081** | 4 errores de inferencia de tipos en `scripts/legal` (M131 + M84), suites re-ejecutadas 8/0 y 15/0. |
+
+**Comparación V2.5 → V2.6:**
+
+| Dimensión | MiMo V2.5 (21.3) | MiMo V2.6 (hoy) | Veredicto |
+|---|---|---|---|
+| **Honestidad** | Precisión 8/9 en sweeps; cedió M11 sin visión; registró su propio falso positivo (M136) | **Heredada y ampliada**: auditoría de sobre-cierre de M43 encontró **13 `[x]` sin evidencia** que su propia auditoría del Lote A se había pasado — lo corrigió **en público** | = (misma raíz honesta) |
+| **Capacidad de ejecución** | **No cerraba módulos**: sweeps, verificación de facts, reportes | **3 módulos cerrados/avanzados** (M91, M43, M131) + 2 bugs resueltos, con suites propias | **V2.6 muy superior** |
+| **Rigor con suites** | Gates CI 4/4 PASS, 60 checks | **Pisos `CHECKS_MINIMOS` MEDIDOS**, **sondas rojo demostradas**, suites ampliadas (15→127, 103→136), watchdog anti-cuelgue, anti-falso-verde | **V2.6 superior** |
+| **Visión 3D** | Limitada — techo para arquitectura visual (declarado) | **Sin cambio observable**: su dominio es UI + audio + i18n, no escenas 3D | = |
+| **No tocar ajenos** | — | **Regla §15 cumplida**: M43 "solo escucha" (suscribe a señales de M21/M72/M38 sin modificar un archivo de `scripts/dialogos/`, `scripts/logros/`, `scripts/shops/`); `has_signal` antes de `connect` para que un renombrado ajeno no rompa el arranque | **V2.6 destacable** |
+| **Documentación de trampas** | — | **T-107** (el runner sí descubre S1; era la etiqueta `--module`), **T-108**, **T-109**; y lesson `JSON.parse_string()` devuelve `float` y el `==` de `Array` es exacto → normalizar a int **antes** de comparar, sin aflojar la aserción | **V2.6 destacable** |
+| **Anti-inflación** | Registró falsos positivos propios | **Correcciones públicas de sus propias afirmaciones** (ej. "no hay señal de logro" era **falso**: `Achievements.logro_desbloqueado` existe — corrigió la nota en el checklist) | = |
+
+**Veredicto: V2.6 es SUPERIOR a V2.5, no un reemplazo neutral.**
+
+- Conservó lo bueno de V2.5 (honestidad, verificación contra disco, anti-inflación).
+- **Sumó capacidad de ejecución que V2.5 no tenía**: cierra módulos enteros con suites
+  propias, pisos medidos y sondas rojo, en su dominio (UI + audio + i18n).
+- **Trabaja a una velocidad claramente mayor** (9 lotes en M43 + 11 iteraciones en M91 en
+  dos días).
+
+**Regla de asignación actualizada (reemplaza la de 21.10 ítem 2 para mimo):**
+
+> **UI + audio + i18n con suites → mimo-v2.6.** Complejidad **2-3** en su dominio
+> (settings, overlays, subtítulos, catalogación de audio, integración por señales).
+> **Mantiene la regla de V2.5 para sweeps**: precisión alta verificada, pero **no asignar
+> arquitectura visual / escenas 3D** (visión 3D limitada, sin cambio observado).
+> **Método obligatorio que ya usa y rinde:** lotes → suite con binario real → piso
+> `CHECKS_MINIMOS` medido → **sonda rojo demostrada** → `[x]` solo con suite en verde.
+> **No reasignar los módulos que V2.5 dejó colgados** sin verificar primero si V2.6 los
+> hereda (M11 fue cedido por visión; los 49 `[?]` del backlog V2.5 son auditoría, no
+> ejecución — evaluar caso por caso).
 
 ### 21.11 Firma
 
