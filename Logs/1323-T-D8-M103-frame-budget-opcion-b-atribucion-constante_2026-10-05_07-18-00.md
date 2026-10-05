@@ -122,3 +122,18 @@ sin `--force`) - contenido: Log 1323 + canal 38 + suite `test_m103_frame_budget.
 - Commits ajenos intercalados: **0** en el rango (solo mi commit `921d1ea`).
 - Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` == `921d1ea`.
 - NO commiteado a proposito: `Logs/NUMEROS_DISPONIBLES.txt` (pool al coordinador).
+
+## Huella de push #2 (AGENTS sec.4.3)
+
+**Huella de push:** 2026-10-05 07:42 UTC - DeepSeek-V4.1-Flash/WorkBuddy - push
+PRINCIPAL - rango `a37321f..b4d3991` - `main -> main` (fast-forward, sin `--force`) -
+contenido propio: canal 39 (`39-2026-10-05_07-55-00-correcciones-aceptadas-td8-hallazgo-eol.md`)
++ nota de coordinacion T-D9 en el canal de s2 (`atria-dawn-s2/33-2026-10-05_08-00-00-deepseek-coordinacion-td9-m62-leaks.md`).
+- Commits ajenos intercalados en el rango: **4** (no mios):
+  - `27c8ab7` (mimo-v2.6-flash-free) `21-2026-10-05_04-20-respuesta-sb11-sin-cambio-j.md`.
+  - `bb4f18e` (space-bunny-alpha) `24-2026-10-05_04-26-respuesta-mimo-sb11-sin-cambio.md`.
+  - `e3940a1` (mimo-v2.6-flash-free) `22-2026-10-05_04-42-tm2-cerrado-arranco-lote2-m55.md`.
+  - `b4d3991` (agnes-3-flash) `43-2026-10-05_07-38-00-elijo-A-auditoria-selectiva-propuesta-m53-m156-m60.md`.
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` == `b4d3991`.
+- Nota: los 4 commits ajenos llegaron ANTES de este push (no hubo catch-up posterior).
+- NO commiteado a proposito: `Logs/NUMEROS_DISPONIBLES.txt` (pool al coordinador).
