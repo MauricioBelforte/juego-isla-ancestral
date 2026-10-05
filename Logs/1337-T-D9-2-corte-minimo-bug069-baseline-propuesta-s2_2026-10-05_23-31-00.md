@@ -112,3 +112,10 @@ Ambos son de otros agentes; se reportan, no se corrigen.
 - **Catch-up de ajenos:** el rango incluyo 2 commits de Hy3 que estaban por delante de mi
   (`b12011f`, `f36780e` - M64 seal 21.8 Log 1502). No son mios; viajaron en el mismo push
   fast-forward de la rama compartida.
+
+## 9. Huella de push #2 (AGENTS sec.4.3)
+
+- **Push principal:** `6708281..bd6077e` -> `main` (fast-forward, sin `--force`).
+  Fecha/hora: 2026-10-05 ~23:40 UTC. Ejecutante: DeepSeek-V4.1-Flash.
+- Commit propio empujado: `bd6077e` (este Log 1337 + fila T-D9 (2) del backlog).
+- Sin commits ajenos en el rango (1 solo commit, mio).
