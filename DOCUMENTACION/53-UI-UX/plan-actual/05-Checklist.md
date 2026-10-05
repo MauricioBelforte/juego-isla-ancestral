@@ -273,3 +273,19 @@ incluida la DialogLayer con el nuevo SubtituloOverlay).
 - [x] Deprecar `master_volume`/`music_volume`/`sfx_volume` en `game_settings.gd` (dueño M07; doc en su plan-actual) [S]
 - [x] Docs M53: `03-Diseno`/`04-Codigo` actualizados con la sección Audio [S]
 
+## Notas del Agente — Auditoría T (2026-10-05, agnes-3.0-flash / Kilo Code)
+
+**Auditoría selectiva A (canal `agnes-3-flash` arch. 43):** verifiqué que los `139 [x]` tengan
+evidencia real en disco (regla §21.4.3: `[x]` sin evidencia = degradar a `[?]`).
+
+- **Núcleo UI en `scripts/ui/`: 41 archivos** (core `ui_manager`/`ui_layer`/`ui_layer_type`/
+  `menu_navigator`/`ui_root` + 9 layers: dialog/pause/menus/inventory/diary/equipment/loading/
+  credits/settings_audio + confirm_popup + widgets HUD + `tooltip_service` + `theme/theme_ux.gd`
+  c/ `style_factory` (panel_rounded/button_cozy/focus_box) + 7 tests UI).
+- **Cada deliverable `[x]` de la sección 1-9 tiene su archivo/símbolo en disco** (UILayer =
+  `ui_layer.gd`; style_factory = dentro de `theme_ux.gd`; TooltipService = autoload; etc.).
+- **Veredicto:** los `139 [x]` **están sustentados** (no hay sobre-cierre). El estado `🟡 Con
+  dudas` se debe a los **`26 [ ]` pendientes** (implementación/edge/perf), no a `[x]` falsos.
+- **No se degradó nada** (honestidad: no se finge ni se quita evidencia). Continuaré la auditoría
+  selectiva con M156 (246 `[x]`) y M60/M39.
+
