@@ -15,6 +15,13 @@ Exclusiones:
   - ``.godot/``  cache del editor (regenerable).
   - ``addons/``  codigo de terceros (gdUnit4, zylann.voxel).
   - ``Godot/``   datos del editor.
+  - Scripts que extienden gdUnit4: ``tests/unit/*`` heredan de
+    ``res://addons/gdUnit4/src/GdUnitTestSuite.gd``. gdUnit4 es codigo de
+    terceros NO versionado (decision del fundador: solo voxel se versiono),
+    asi que Godot no puede resolver el ``extends`` y el preload del colector
+    falla con "Could not resolve script" + "Cannot infer the type of _gNNN"
+    (2 errores por script). Se detectan por contenido, no por carpeta: si
+    alguien agrega un test propio a tests/unit/ SI se valida (Log 1320).
 
 Uso:
   python3 tools/quality/gen_colector_sintaxis.py [--proyecto game/isla-ancestral]
@@ -29,7 +36,31 @@ from pathlib import Path
 
 EXCLUIR_DIR = {".godot", "addons", "Godot"}
 EXCLUIR_ARCHIVO = {"_colector_sintaxis.gd"}  # autoreferencia (preload de si mismo)
+# Scripts cuyo extends apunta a gdUnit4 (addon de terceros no versionado). Godot
+# no puede resolver la clase base y el preload falla en cascada (Log 1320).
+_MARCA_GDUNIT = "addons/gdUnit4/"
+_LINEAS_A_INSPECCIONAR = 3
 SALIDA = Path("scripts/editor/_colector_sintaxis.gd")
+
+
+def _usa_gdunit(path: Path) -> bool:
+    """True si el script hereda de gdUnit4 (addon de terceros no versionado).
+
+    Solo inspecciona las primeras lineas: ahi va el ``extends``. Mas barato que
+    leer el archivo entero y suficiente para el caso real.
+    """
+    try:
+        with path.open("r", encoding="utf-8") as fh:
+            for _ in range(_LINEAS_A_INSPECCIONAR):
+                linea = fh.readline()
+                if not linea:
+                    break
+                if _MARCA_GDUNIT in linea:
+                    return True
+    except (OSError, UnicodeDecodeError):
+        # Si no se puede leer, que lo valide el linter (queja ruidosa > silencio).
+        return False
+    return False
 
 
 def _encontrar_raiz(inicio: Path) -> Path:
@@ -40,16 +71,21 @@ def _encontrar_raiz(inicio: Path) -> Path:
     raise SystemExit(f"No se encontro project.godot desde {inicio}")
 
 
-def _recolectar(raiz: Path) -> list[str]:
+def _recolectar(raiz: Path) -> tuple[list[str], list[str]]:
+    """Devuelve (a_incluir, a_excluir). Los excluidos se reportan en el header."""
     archivos: list[str] = []
+    excluidos: list[str] = []
     for path in sorted(raiz.rglob("*.gd")):
         rel = path.relative_to(raiz)
         if rel.parts[0] in EXCLUIR_DIR:
             continue
         if rel.name in EXCLUIR_ARCHIVO:
             continue
+        if _usa_gdunit(path):
+            excluidos.append(rel.as_posix())
+            continue
         archivos.append(rel.as_posix())
-    return archivos
+    return archivos, excluidos
 
 
 def _generar(raiz: Path, archivos: list[str]) -> str:
@@ -70,6 +106,28 @@ def _generar(raiz: Path, archivos: list[str]) -> str:
     return "\n".join(lineas)
 
 
+def _generar_con_excluidos(raiz: Path, archivos: list[str], excluidos: list[str]) -> str:
+    """Genera el colector listando los excluidos en el header (trazabilidad)."""
+    base = _generar(raiz, archivos)
+    if not excluidos:
+        return base
+    nota = [
+        "",
+        "# Excluidos: heredan de gdUnit4 (addon de terceros NO versionado; solo",
+        "# voxel se versiono, Log 1320). No se puede validar la sintaxis de un",
+        "# script cuyo extends apunta a una clase ausente. Verificarlos con",
+        "# gdUnit4 instalado (local), no desde CI:",
+    ]
+    nota += [f"#   - {rel}" for rel in excluidos]
+    nota.append("")
+    # Se inserta justo antes del primer preload (linea 'const _g0 ...').
+    lineas = base.split("\n")
+    for idx, linea in enumerate(lineas):
+        if linea.startswith("const _g"):
+            return "\n".join(lineas[:idx] + nota + lineas[idx:])
+    return base
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -80,14 +138,18 @@ def main() -> int:
     args = parser.parse_args()
 
     raiz = _encontrar_raiz(args.proyecto or Path.cwd())
-    archivos = _recolectar(raiz)
+    archivos, excluidos = _recolectar(raiz)
     if not archivos:
         raise SystemExit(f"No se encontraron .gd en {raiz} — el gate no validaria nada")
+    if excluidos:
+        print("gdUnit4 excluidos (%d): %s" % (len(excluidos), ", ".join(excluidos)))
 
     destino = raiz / SALIDA
     destino.parent.mkdir(parents=True, exist_ok=True)
-    destino.write_text(_generar(raiz, archivos), encoding="utf-8", newline="\n")
-    print(f"Colector generado: {destino} ({len(archivos)} preloads)")
+    destino.write_text(
+        _generar_con_excluidos(raiz, archivos, excluidos), encoding="utf-8", newline="\n"
+    )
+    print(f"Colector generado: {destino} ({len(archivos)} preloads, {len(excluidos)} excluidos)")
     return 0
 
 
