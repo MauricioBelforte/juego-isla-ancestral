@@ -95,3 +95,41 @@ merch/
 - Probar calidad de soundtrack (audio, masterización).
 - Probar calidad de peluches (material, costura).
 - Probar calidad de figuras (material, pintura).
+
+## 6. Notas del Agente — Iteración T-A1 (capa de servicio + data-driven)
+
+**Modelo:** agnes-3.0-flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-05 01:45:00
+**Estado:** Parcial (capa de datos + servicio + docs resueltas; 5 `[?]` con dueño externo)
+
+### Lo que hice
+- **Capa de datos (data-driven):** enriquecí `data/legal/merchandising.json` a **v2** —
+  10 productos con specs estructuradas (`materiales`, `tamanos`, `colores`, `precio_usd`,
+  `margen`, `calidad`, `seguridad`, `formatos`, `paginas`) + `politicas` (margen objetivo,
+  normas de seguridad CE/ASTM-F963, margen por tipo).
+- **Capa de servicio (la brecha de Hy3):** creé `scripts/legal/merch_manager.gd`
+  (`MerchManager`, autoload) — carga el catálogo, expone `get_productos/get_product/
+  get_product_ids/get_margen/get_precio_usd/get_politicas/validar/esta_cargado` y se registra
+  en `ServiceRegistry` como contrato `"merch"` (patrón de `DataStore`). Cableado en
+  `project.godot` `[autoload]`.
+- **Validador (v2):** `merch_validator.gd` ahora valida tipo (enum), rangos `precio_usd`
+  (min>0, min<=max), `margen` en [0,1] y listas de spec no vacías; backward-compatible.
+- **Test headless:** `test_merch_m129.gd` expandido a **24 checks, 0 fallos** (datos v2 +
+  validator + margen/precios + MerchManager). `merch_catalog.md` creado (fuente de verdad
+  legible: catálogo + calidad + seguridad + packaging + guía de cuidado).
+- **Checklist:** 40 `[ ]` resueltos → **35 `[x]`** (specs ahora con evidencia data-driven) +
+  **5 `[?]`** (diseño artístico M45/M46, música M41, tienda web M53). Totales → `103/108 · 5 [?]`.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- Diseño **artístico** de camisetas/posters/artbook/peluches/figuras → dueño M45 (Arte 3D) /
+  M46 (Arte 2D). `[?]`.
+- Autoría/remaster de pistas del soundtrack → dueño M41 (Música). `[?]`.
+- Interfaz de tienda web inmersiva → dueño M53 (UI/UX). `[?]`.
+- Verificación física real de calidad/seguimiento de prototipos (headless no prueba física).
+
+### Recomendaciones para el próximo agente
+- Los 5 `[?]` son de contenido/UI externo: al cerrarse por M45/M46/M41/M53, pasar a `[x]`
+  y el módulo puede sellar ✅ (0 `[?]`).
+- `MerchManager` expone la capa de datos; la integración real con una tienda (carrito, checkout,
+  impuestos) es M95/M39/M125, no este módulo.

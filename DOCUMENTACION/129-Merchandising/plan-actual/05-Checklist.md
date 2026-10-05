@@ -11,84 +11,84 @@
 - [x] Test headless de validacion de merch [M]
 - [x] Datos data-driven: merchandising.json con 4 productos [S]
 - [x] Soundtrack
-- [ ] Peluches
-- [ ] Figuras
+- [x] Peluches
+- [x] Figuras
 
 ### [S] Camisetas
 - [x] Definir diseño (logo, personajes, escenas)
-- [ ] Definir materiales (algodón 100%)
-- [ ] Definir tallas (XS, S, M, L, XL, XXL)
-- [ ] Definir colores (blanco, negro, gris, azul)
+- [x] Definir materiales (algodón 100%)
+- [x] Definir tallas (XS, S, M, L, XL, XXL)
+- [x] Definir colores (blanco, negro, gris, azul)
 - [x] Diseñar producción (print on demand)
 - [x] Diseñar precios (USD 20-25)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Tazas
 - [x] Definir diseño (logo, personajes, escenas)
-- [ ] Definir materiales (cerámica)
-- [ ] Definir tamaño (11oz, 15oz)
-- [ ] Definir colores (blanco, negro, azul)
+- [x] Definir materiales (cerámica)
+- [x] Definir tamaño (11oz, 15oz)
+- [x] Definir colores (blanco, negro, azul)
 - [x] Diseñar producción (print on demand)
 - [x] Diseñar precios (USD 15-20)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Posters
 - [x] Definir diseño (logos, personajes, escenas)
-- [ ] Definir materiales (papel, CMYK)
-- [ ] Definir tamaños (11x17, 18x24, 24x36)
+- [x] Definir materiales (papel, CMYK)
+- [x] Definir tamaños (11x17, 18x24, 24x36)
 - [x] Diseñar producción (print on demand)
 - [x] Diseñar precios (USD 15-25)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Artbook
-- [ ] Definir diseño (concept art, sketches, renders)
-- [ ] Definir materiales (pasta dura, CMYK)
-- [ ] Definir tamaño (8x10, 9x12)
-- [ ] Definir páginas (100-200)
+- [?] Definir diseño (concept art, sketches, renders)
+- [x] Definir materiales (pasta dura, CMYK)
+- [x] Definir tamaño (8x10, 9x12)
+- [x] Definir páginas (100-200)
 - [x] Diseñar producción (lote mediano)
 - [x] Diseñar precios (USD 30-50)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Soundtrack
-- [ ] Definir diseño (tracks originales, remasters)
-- [ ] Definir formatos (digital, CD, vinyl)
+- [?] Definir diseño (tracks originales, remasters)
+- [x] Definir formatos (digital, CD, vinyl)
 - [x] Diseñar producción (digital + físico)
 - [x] Diseñar precios (USD 10-40)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Peluches
-- [ ] Definir diseño (personajes, cute/cozy)
-- [ ] Definir materiales (peluche suave, algodón)
-- [ ] Definir tamaños (8, 12, 18 pulgadas)
+- [?] Definir diseño (personajes, cute/cozy)
+- [x] Definir materiales (peluche suave, algodón)
+- [x] Definir tamaños (8, 12, 18 pulgadas)
 - [x] Diseñar producción (prototipos + lote)
 - [x] Diseñar precios (USD 20-50)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Figuras
-- [ ] Definir diseño (personajes, chibi/detallado)
-- [ ] Definir materiales (PVC, ABS)
-- [ ] Definir tamaños (4, 6, 8 pulgadas)
+- [?] Definir diseño (personajes, chibi/detallado)
+- [x] Definir materiales (PVC, ABS)
+- [x] Definir tamaños (4, 6, 8 pulgadas)
 - [x] Diseñar producción (prototipos + lote)
 - [x] Diseñar precios (USD 15-40)
-- [ ] Diseñar margen (40-50%)
+- [x] Diseñar margen (40-50%)
 
 ### [S] Archivos de implementación
 - [x] Diseñar merch/merch_catalog.md
 
 ### [S] Pruebas de merchandising
-- [ ] Diseñar prueba de calidad de camisetas (material, impresión)
-- [ ] Diseñar prueba de calidad de tazas (material, impresión)
-- [ ] Diseñar prueba de calidad de posters (papel, impresión)
+- [x] Diseñar prueba de calidad de camisetas (material, impresión)
+- [x] Diseñar prueba de calidad de tazas (material, impresión)
+- [x] Diseñar prueba de calidad de posters (papel, impresión)
 - [x] Diseñar prueba de calidad de artbook (papel, encuadernación)
 - [x] Diseñar prueba de calidad de soundtrack (audio, masterización)
-- [ ] Diseñar prueba de calidad de peluches (material, costura)
-- [ ] Diseñar prueba de calidad de figuras (material, pintura)
+- [x] Diseñar prueba de calidad de peluches (material, costura)
+- [x] Diseñar prueba de calidad de figuras (material, pintura)
 
-**Totales:** 108 ítems · Completados: 68 · Pendientes: 40 · No resueltos: 0.
+**Totales:** 108 ítems · Completados: 103 · Pendientes: 0 · No resueltos: 5.
 
 **Total de ítems:** 108
-**Ítems resueltos por documentación:** 68
-**Ítems pendientes de implementación:** 40 (capa de servicio MerchManager/MerchConfig ausente — ver Log 1249)
+**Ítems resueltos por documentación:** 103
+**Ítems pendientes de implementación:** 0 · **No resueltos `[?]:** 5 (dueño externo: M45/M46 arte, M41 música, M53 tienda web) — la capa de servicio `MerchManager`/`MerchConfig` está **IMPLEMENTADA** (T-A1 agnes-3-flash, Log 1299): `data/legal/merchandising.json` v2 + `merch_manager.gd` (autoload, contrato `"merch"`) + `merch_catalog.md` + test 24/0.
 
 ## Extensión QA cruzado (consolidación 2026-08-20)
 
@@ -100,7 +100,7 @@
 - [x] Diseñar protocolo de validación y control de calidad de prototipos físicos (peluches y figuras) antes de producción [M]
 - [x] Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M]
 - [x] Definir estándares de packaging ecológico, biodegradable y protección reforzada para envíos frágiles [S]
-- [ ] Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]
+- [x] Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]
 - [x] Diseñar matriz automatizada de cálculo de costos, aranceles, margen objetivo (40-50%) y precio de venta al público [M]
 - [x] Establecer marco contractual de licencias de fabricación y distribución para socios comerciales externos [M]
 - [x] Diseñar packaging y libreto de coleccionista para la edición física del soundtrack en formato vinilo y CD [M]
@@ -127,8 +127,8 @@
 
 ### Optimización
 - [x] Seleccionar proveedores de Print on Demand con centros logísticos multirregionales para reducir tiempos y costes de envío [M]
-- [ ] Optimizar archivos gráficos vectoriales y rasterizados para minimizar tiempos de procesamiento en imprenta [S]
-- [ ] Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]
+- [x] Optimizar archivos gráficos vectoriales y rasterizados para minimizar tiempos de procesamiento en imprenta [S]
+- [x] Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]
 - [x] Implementar modelo de preventa (pre-orders) para financiar tiradas físicas sin asumir riesgos de sobrestock [M]
 - [x] Automatizar el cálculo de impuestos y gastos de aduana en el checkout de la tienda online [M]
 - [x] Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M]
@@ -136,12 +136,12 @@
 - [x] Diseñar sistema de consolidación de paquetes para pedidos combinados con múltiples artículos [S]
 
 ### Documentación
-- [ ] Redactar guía de estándares de calidad y acabados para fabricantes y talleres textiles [M]
+- [x] Redactar guía de estándares de calidad y acabados para fabricantes y talleres textiles [M]
 - [x] Elaborar Brand Guidelines específicas para la aplicación de personajes y logotipos en merchandising físico [M]
 - [x] Publicar documento formal de políticas de envío, devoluciones, cambios y derecho de desistimiento [S]
 - [x] Recopilar y archivar certificados de conformidad de seguridad para juguetes y productos textiles (normas CE, ASTM) [M]
 - [x] Mantener registro de acuerdos de licencia y distribución con plataformas de e-commerce y partners [S]
-- [ ] Elaborar guía de cuidado, lavado y mantenimiento de prendas y cerámicas para el comprador final [S]
+- [x] Elaborar guía de cuidado, lavado y mantenimiento de prendas y cerámicas para el comprador final [S]
 - [x] Crear fichas técnicas por producto con desglose de dimensiones, pesos, materiales y advertencias de edad [S]
 - [x] Redactar FAQ de soporte post-venta y resolución de incidencias para clientes de la tienda oficial [S]
 
@@ -150,7 +150,7 @@
 - [x] Incluir tarjetas de agradecimiento coleccionables firmadas por el equipo de desarrollo en cada pedido [S]
 - [x] Incorporar acabados de lujo en el artbook y vinilo (estampado foil en caliente, barniz UVI selectivo, papel gofrado) [S]
 - [x] Seleccionar texturas ultrasuaves y materiales premium para lograr una experiencia táctil excepcional en peluches [S]
-- [ ] Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M]
+- [?] Diseñar una interfaz de tienda web limpia, inmersiva y totalmente integrada con la estética del juego [M]
 - [x] Diseñar una experiencia de unboxing memorable con papel de seda temático y pegatinas exclusivas [S]
 - [x] Emitir certificados de autenticidad numerados para tiradas limitadas de figuras de resina y vinilos [S]
 - [x] Producir fotografías de producto profesionales con luz natural y ambientación isleña para la tienda online [M]
@@ -180,7 +180,7 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 - Estado recomendado: **🟡 Con dudas** (scaffold de validación verificado; pendiente capa de servicio/docs).
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
-**Totales:** 108 ítems · Completados: 68 · Pendientes: 40 · No resueltos: 0.
+**Totales:** 108 ítems · Completados: 103 · Pendientes: 0 · No resueltos: 5.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 68 [x] / 40 [ ] / 0 [?].
