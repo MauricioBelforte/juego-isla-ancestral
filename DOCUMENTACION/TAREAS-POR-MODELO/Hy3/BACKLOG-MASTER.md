@@ -225,15 +225,15 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 88-88-Fuentes-Tipograficas | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_fonts_m88.gd 11 checks/0 fallos (headless); módulo 🟡 10/177 |
 | 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (debug_menu.gd + capturas) |
 | 91-91-Configuracion-De-Audio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (audio_config_service.gd) |
-| 97-97-Steam-Store-Page | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (15 checks) |
-| 98-98-Trailer | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (12 checks) |
-| 99-99-Marketing | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (11 checks) |
+| 97-97-Steam-Store-Page | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_store_m97.gd 15 checks/0 fallos (headless); módulo 🟢 129/195 |
+| 98-98-Trailer | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_trailer_m98.gd 12 checks/0 fallos (headless); módulo 🟢 4/102 |
+| 99-99-Marketing | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_marketing_m99.gd 11 checks/0 fallos (headless); módulo 🟢 7/169 |
 | 100-100-Community-Management | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
 | 106-106-Seguridad | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (12 checks) |
-| 113-113-Pruebas-De-Stress | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (19 checks) |
-| 114-114-Playtest | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (14 checks) |
+| 113-113-Pruebas-De-Stress | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_stress_m113.gd 19 checks/0 fallos (headless); módulo 🟡 102/132 |
+| 114-114-Playtest | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (ya verificado Log 1146, §21.8 válido) — Log 1301: test_playtest_m114.gd 14 checks/0 fallos (headless) |
 | 120-120-DLC-Y-Expansiones | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (16 checks) |
-| 121-121-Soporte-Post-Lanzamiento | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (15 checks) |
+| 121-121-Soporte-Post-Lanzamiento | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_support_m121.gd 15 checks/0 fallos (headless); módulo 🟢 123/211 |
 | 125-125-Terminos-De-Servicio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
 | 126-126-Marketing-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (9 checks) |
 | 128-128-Identidad-De-Marca | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test  — EXIT 0 (8 checks) |
