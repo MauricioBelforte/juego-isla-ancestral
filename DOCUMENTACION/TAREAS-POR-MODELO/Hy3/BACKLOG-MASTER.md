@@ -208,7 +208,7 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 2-02-Vision-Y-Concepto | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_vision_m02.gd 8 checks/0 fallos (headless) |
 | 3-03-Documentacion-Del-Proyecto | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — audit DeepSeek Log 1283: 117/133 🟡 |
 | 6-06-Control-De-Versiones | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_version_control_m06.gd 6 checks/0 fallos (headless) |
-| 26-26-Templo-Subterraneo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (assets 25-Ruinas-Templos (.blend)) |
+| 26-26-Templo-Subterraneo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 930, re-verify Hy3 — sello Log 867 inválido) 2026-09-16: test_templo_m26.gd 92 checks/0 fallos ×2 (EXIT 0) |
 | 38-38-Economia | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ QA válida atria-dawn-s2 (Log 1267; sello Log 866 inválido) 2026-10-04: test_m38_economia_smoke 0 fallos (headless) |
 | 44-44-ASMR-Y-Feedback | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1290, re-verify Hy3 — sello Log 866 inválido) 2026-10-04: test_feedback_m44.gd 9 checks/0 fallos (headless) |
 | 55-55-Diario-Del-Jugador | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_diario.gd smoke 0 fallos (headless); módulo 🟡 33/131 (mimo T-M1) |
@@ -223,8 +223,8 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 85-85-Modelos-3D-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_model3d_m85.gd 8 checks/0 fallos (headless); módulo 🟡 99/100 (DoD §21.6 violada, SB-02 Log 1279) |
 | 86-86-IA-Generativa | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_genai_m86.gd 8 checks/0 fallos (headless) |
 | 88-88-Fuentes-Tipograficas | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_fonts_m88.gd 11 checks/0 fallos (headless); módulo 🟡 10/177 |
-| 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (debug_menu.gd + capturas) |
-| 91-91-Configuracion-De-Audio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (audio_config_service.gd) |
+| 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1501, re-verify Hy3 — sello Log 867 inválido) 2026-10-05: test_m89_menus.gd 48 checks/0 fallos (headless, EXIT 0) |
+| 91-91-Configuracion-De-Audio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1225, re-verify Hy3 — sello Log 867 inválido) 2026-10-03: test_audio_config.gd 103/0 + test_audio_effects_m91.gd 82/0 |
 | 97-97-Steam-Store-Page | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_store_m97.gd 15 checks/0 fallos (headless); módulo 🟢 129/195 |
 | 98-98-Trailer | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_trailer_m98.gd 12 checks/0 fallos (headless); módulo 🟢 4/102 |
 | 99-99-Marketing | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_marketing_m99.gd 11 checks/0 fallos (headless); módulo 🟢 7/169 |
@@ -249,7 +249,7 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 143-143-Lanzamiento | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (checklist 143-lanzamiento + Logs) |
 | 150-150-Diseo-Sonoro-Narrativo | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 866, §21.8) 2026-09-12: test_narrative_m150 EXIT 0 (12 checks) — FILA CHECKLIST AUSENTE, reconciliar |
 | 152-152-Principios-Innegociables | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1309, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_principios_m152.gd 12 checks/0 fallos (headless) — M152 ✅ 202/202 (D-R2 fundador decidido 2026-10-05)  — EXIT 0 (12 checks) |
-| 161-161-Diseno-Visual-De-NPCs | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (1073 assets NPC (.blend)) |
+| 161-161-Diseno-Visual-De-NPCs | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 Sello Log 867 inválido (no verificado por Hy3): M161 es documental/asset, sin test ejecutable — re-grounding de assets NO es §21.8. |
 | 164-164-Isla-De-Combate-Endgame | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 867, §21.8) 2026-09-12: re-grounding (Logs 137/164 endgame) |
 
 ## Lote G — QA cruzado (§21.8) — 2026-09-13, hy3/WorkBuddy, Log 883/884
