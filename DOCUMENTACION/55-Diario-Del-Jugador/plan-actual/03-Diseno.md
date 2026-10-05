@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free (último modificador; base por Deepseek V4 Flash)
+**Plataforma:** opencode
 
 # 03-Diseno.md — Módulo 55: Diario del Jugador
 
@@ -118,3 +118,59 @@ cierre del diario / auto-save (M59)
 | M87/M88 | Localización de textos |
 | M61 | Virtualización y lazy loading |
 | M108/M118 | Importación y validación en CI |
+
+## 5. Implementación real (iter. 2 — UI, 2026-10-04, mimo-v2.6-flash-free/opencode)
+
+> Esta sección describe lo que **existe en disco** hoy. Los apartados 1–4 son el diseño
+> original (plan); donde difieren, manda lo aquí indicado.
+
+### 5.1 Rutas reales (drift vs §1)
+
+| Diseño (§1, plan) | Real implementado |
+|---|---|
+| `Assets/_Project/Diary/ui/diary_screen.gd` | `scripts/ui/layers/diary_layer.gd` (capa del framework M53) |
+| `diary_list_item.gd` / `diary_detail.gd` | unificados dentro de `diary_layer.gd` (filas y panel de detalle) |
+| `Assets/_Project/Diary/service/diary_service.gd` | `scripts/diario/diary_service.gd` (autoload, iter. 1) |
+| `diary_catalog.tres` | `data/diario/diario_catalog.json` (14 categorías, 44 entradas) |
+| `diary_save.gd` | persistencia vía ISaveProvider M59 dentro de `diary_service.gd` (`get_save_data`/`restore_save_data`, schema_version 1) |
+| `diary_entry.gd` / `diary_event.gd` | no existen: las entradas son Dictionaries y el registro es por señales reales (iter. 1) |
+| `validate_diary.gd` | **NO existe** (pendiente, checklist Y) |
+
+### 5.2 Composición de la capa (DiaryLayer)
+
+```
+DiaryLayer (UILayer, MODAL_FULL, nombre "DiaryLayer")
+├── FondoDim + PanelDiario
+│   ├── Cabecera: LblTitulo · ProgresoCat (ProgressBar) · LblProgresoGlobal · BtnCerrar
+│   ├── ColCategorias: LblCategorias + CategoriasBox (14 pestañas, botones por categoría)
+│   ├── ColLista: Buscador (LineEdit) · LblFiltro + FiltroEstado (5 opciones)
+│   │            · ScrollLista/ListaEntradas (filas "Fila_<id>": ★ + título · estado · día)
+│   │            · LblVacio ("Todavía no hay…" / "Sin resultados…")
+│   └── ColDetalle: LblDetalle · LblDetalleTitulo/Estado/Dia · BtnFavoritoDetalle
+│                   · LblSinSeleccion ("Seleccioná una entrada…")
+```
+
+- **Navegación 2 clics:** pestaña (clic 1) → fila (clic 2) muestra el detalle en la tercera columna.
+- **Filtros:** TODOS / NUEVOS / VISTOS / COMPLETADOS / FAVORITOS (`enum Filtro`) + búsqueda con
+  diacríticos (`buscar()` con `_slug()` en servicio y consulta, M87).
+- **% (anti-spoiler §3.2):** barra de categoría y % global se calculan SIEMPRE sobre lo
+  descubierto; tooltip `DIARY.PROGRESO_CAT` ("del contenido descubierto"); clamp [0,100].
+- **Secreto:** entrada `secreta` no registrada → "???" (`DIARY.BLOQUEADO`) — solo aplica a
+  entradas con la marca en el catálogo (hoy ninguna del JSON la trae: catálogo solo `{id, titulo}`).
+- **Apertura/cierre:** atajo `diario` (tecla J, 74/106) en `ui_manager._unhandled_input` →
+  `toggle()` de la capa; Esc/`close_top()` cierra la capa **visible** más reciente (fix de
+  pila: antes purgaba `stack[-1]` aunque estuviera oculta).
+- **Favorito:** atajo `favorito` (M53) consume la capa sólo si está visible; la estrella ★ vive
+  en la fila y en el botón del detalle (undo visual verificado en test).
+
+### 5.3 Flujo de apertura (real vs §2.2)
+
+```
+J (diario) → ui_manager._unhandled_input → DiaryLayer.toggle()
+  → on_layer_opened: re-registro idempotente en la pila + _aplicar_textos_estaticos (i18n)
+  → _refrescar_completo: pestañas (14) · lista de la categoría activa (solo lo descubierto)
+  · barra + % global · detalle (si hay selección persistida)
+```
+
+LazyLoad/virtualización (§2.2.1) **NO implementados** en iter. 2: la lista crea una fila por
+entrada descubierta de la categoría activa (checklist W pendiente para el lote de rendimiento).

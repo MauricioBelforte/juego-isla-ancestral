@@ -1,20 +1,32 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free (último modificador; base por Deepseek V4 Flash)
+**Plataforma:** opencode
 
 # 04-Codigo.md — Módulo 55: Diario del Jugador
 
 ## 1. Archivos Involucrados
 
-| Archivo | Ruta | Rol |
+### 1.1 Archivos REALES en disco (iter. 1 + iter. 2, verificados 2026-10-04)
+
+| Archivo | Ruta | Rol | Origen |
+|---|---|---|---|
+| `diary_service.gd` | `scripts/diario/` | Autoload: registro/estado/favoritos/búsqueda/%/persistencia (ISaveProvider M59) | iter. 1 (glm, Log 374) |
+| `diary_layer.gd` | `scripts/ui/layers/` | Capa MODAL_FULL: pestañas 14, lista, filtros, detalle, favoritos, i18n | iter. 2 (mimo, este log) |
+| `diario_catalog.json` | `data/diario/` | 14 categorías, 44 entradas, claves `{id, titulo}` | iter. 1 |
+| `test_diario.gd` | `scripts/diario/` | Suite del servicio: registro, 6 puentes de eventos, anti-spoiler, %, persistencia | iter. 1 |
+| `test_diario_ui.gd` | `scripts/ui/` | Suite de la capa: 89 checks (estructura, filtros, i18n, favoritos, pila, edge cases) | iter. 2 |
+| `ui_manager.gd` | `scripts/ui/core/` | Wiring: bloque `diario`/`favorito` en `_unhandled_input` + fix `close_top` (capa visible) | iter. 2 |
+| `es.po` / `en.po` | `locales/` | +19 claves `DIARY.*` por idioma (36 totales nuevas) | iter. 2 |
+| `project.godot` | raíz `game/isla-ancestral/` | Acción de input `diario` (tecla J, physical 74 / unicode 106) | iter. 2 |
+
+### 1.2 Archivos del diseño original (PLAN — aún no existen)
+
+| Archivo | Ruta (plan) | Estado |
 |---|---|---|
-| `diary_entry.gd` | `Assets/_Project/Diary/data/` | Modelo: id, categoría, estado, tags, favorito, secreto, refs |
-| `diary_catalog.tres` | `Assets/_Project/Diary/data/` | Catálogo estático: 14 categorías, entradas, totales reales |
-| `diary_service.gd` | `Assets/_Project/Diary/service/` | Autoload: registro por eventos, estado, % completado |
-| `diary_save.gd` | `Assets/_Project/Diary/service/` | Serialización en GameState (M59/M60) con schema_version |
-| `diary_screen.gd` | `Assets/_Project/Diary/ui/` | Pantalla: pestañas, listas virtualizadas, filtros, detalle |
-| `diary_list_item.gd` | `Assets/_Project/Diary/ui/` | Fila: icono (M46), título, estado, estrella favorito |
-| `diary_detail.gd` | `Assets/_Project/Diary/ui/` | Detalle: descripción, acciones, foto (M56) |
-| `validate_diary.gd` | `Assets/_Project/Diary/validators/` | Validador: mapeo, i18n, persistencia, rendimiento |
+| `diary_entry.gd` | `Assets/_Project/Diary/data/` | pendiente (entradas = Dictionary) |
+| `diary_catalog.tres` | `Assets/_Project/Diary/data/` | reemplazado por JSON (iter. 1) |
+| `diary_save.gd` | `Assets/_Project/Diary/service/` | integrado en `diary_service.gd` |
+| `diary_screen/list_item/detail.gd` | `Assets/_Project/Diary/ui/` | unificados en `diary_layer.gd` |
+| `validate_diary.gd` | `Assets/_Project/Diary/validators/` | **NO creado** (checklist Y) |
 
 ## 2. Funciones Clave y Logs Relacionados
 
@@ -138,3 +150,50 @@ El diario usa el sistema central de logs de consola (M118): prefijo `[DIARY]` pa
 - M36/M35/M16: al emitir avistamientos/desbloqueos, conectar 1 puente en _conectar_eventos() (patrón de los 6 existentes) y agregar entradas al JSON.
 - El catálogo escala SIN tocar código: nueva entrada = nueva línea en diario_catalog.json (checklist escalabilidad).
 - NUEVOS ids compuestos por señal: pasar SIEMPRE por _slug() (minúsculas/sin tildes) — el catálogo es ascii-plana.
+
+---
+
+## Notas del Agente — Iteración 2: UI del diario (historial, no borra las anteriores)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-04 21:50:00
+**Estado:** Parcial (lote 1 de UI completado y verificado; módulo liberado 🟡 con pendientes honestos)
+**Log:** 1295
+
+### Lo que hice
+- **`diary_layer.gd` reescrito por completo** (iter. 2): capa `DiaryLayer` MODAL_FULL sobre el framework M53 — 3 columnas (categorías / lista / detalle), 14 pestañas, barra de % por categoría + % global (siempre sobre lo descubierto, clamp [0,100], tooltip anti-spoiler), filtros (TODOS/NUEVOS/VISTOS/COMPLETADOS/FAVORITOS), búsqueda con diacríticos, ★ de favorito en fila y detalle con undo visual, "???" para entradas `secreta` no registradas, mensajes amistosos para categoría vacía y búsqueda sin resultados, wrap + tooltip en detalle, nodos con nombre para test (Fila_*, Tab_*, Lbl*), API consumida del servicio real (`get_categorias/entradas_de/buscar/progreso_categoria/alternar_favorito/nuevas_sesion`), `_t()` en todos los textos + `tooltip_text_key` (M87).
+- **`diary_service.gd`**: +`get_categorias() -> Array[String]` (la UI no debía mapear el JSON crudo) y `buscar()` con `_slug()` aplicado a **ambos** lados (consulta y candidato → búsqueda sin acentos funciona, M87).
+- **`ui_manager.gd`** (3 cambios): (1) bloque `diario` en `_unhandled_input` que hace `toggle()` de la capa "DiaryLayer"; (2) bloque `favorito` que delega a la capa solo si está visible; (3) **fix `close_top()`**: ahora purga la capa **visible** más reciente (antes siempre `stack[-1]`, con Esc sobre el diario purgaba SettingsAudioLayer oculta — bug real del framework M53). `_unhandled_input` también calcula `top_layer` = capa visible más reciente para pausa/nav.
+- **`project.godot`**: acción `diario` = tecla J (physical_keycode 74, unicode 106), insertada antes de `inventario` en `[input]` con CRLF preservado (script Python idempotente).
+- **`locales/es.po` + `en.po`**: +19 claves `DIARY.*` por idioma (título, detalle, buscar, 5 filtros, 3 estados, sin selección, sin resultados, favorito, progreso global/categoría, Día %s, BLOQUEADO "???"). Verificado sin BOM/FFFD y EOL LF.
+- **`test_diario_ui.gd`** (nuevo, ~300 L): SceneTree, 89 checks — estructura de nodos, apertura/cierre/pila, anti-spoiler, detalle en 2 clics, favorito round-trip, los 5 filtros, búsqueda con/sin acento y EN, categoría vacía, 13/14 categorías con entradas, scroll preservado, persistencia round-trip (snapshot/restore), clamp [0,100], Esc/`close_top` + re-registro, acciones `diario`/`favorito` vía `_unhandled_input(InputEventAction)`, locale EN + nombres propios sin traducir, sin tweens/partículas (source scan), wrap/tooltip, `_sin_claves_crudas` recursivo. **Sonda rojo ejecutada** (★ de fila sabotada → 1 FALLO, exit=1 → revert → verde).
+- **Regresión 4/4 verde** tras los cambios en `ui_manager.gd`: `test_diario` 0 fallos · `test_ui_i18n_m53` 0 fallos · `test_settings_audio_roundtrip` 51/0 · `test_ui_framework` 0 fallos.
+- Docs: 03-Diseno §5 (implementación real + drift), 04-Codigo §1.1/§1.2 (archivos reales vs plan), 05-Checklist (marcas honestas), 06/07 de testings nuevos.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Virtualización/pooling/LazyLoad (checklist W)**: la lista crea una fila por entrada descubierta; sin medir con 500+ entradas. Pendiente de un lote de rendimiento.
+- **Descripción/refs en el detalle (B/Q)**: el catálogo JSON solo tiene `{id, titulo}` — no hay descripción, refs ni iconos que mostrar. Requiere enriquecer el catálogo (dueños de las fuentes) o M56.
+- **Icono faltante con fallback (X)**: no hay iconos en las filas (solo texto + ★).
+- **3er idioma y plurales (V)**: solo `es.po`/`en.po` en el repo; plurales no resueltos.
+- **`validate_diary.gd` (Y)**: no creado.
+- **14 categorías con ≥1 entrada (Y)**: **13/14** — `fotografías` tiene 0 entradas (falta M56). Marcado `[?]`.
+- **Persistencia entre sesiones real (Z)**: el test hace round-trip `get_save_data`→`restore_save_data` en un solo proceso; no probé guardar→salir→cargar en ejecuciones separadas.
+- **Estética cozy comprobada (B)**: sin vía de visión operativa en esta sesión (M154 V1–V5 no usadas); la verificación fue estructural/por test, no estética. Ítem queda `[ ]`.
+- **CHECKLIST-GLOBAL fila 55**: NO se modificó (el único hunk de CG en mi working tree es ajeno — fila 120 de DeepSeek; el director gestiona el GLOBAL). Reclamo reportado por informe para su aplicación controlada.
+
+### Intentos fallidos / decisiones
+- **Bug propio encontrado por el test:** `_on_favorito_pressed` usaba `if not d.alternar_favorito(eid): return` — pero `alternar_favorito` devuelve el **nuevo estado** (false al desmarcar), así que el desmarcado salía sin refrescar la fila. Fix: guard con `esta_registrada()` + refresh incondicional.
+- **Locale EN no aplicaba a textos estáticos**: `on_layer_opened` no re-traducía (LblTitulo/Cerrar/pestañas…). Fix: `_aplicar_textos_estaticos()` al abrir.
+- **Test buscaba la capa por nombre `DiaryLayer` pero la capa se instanciaba como `DiaryTest`** → acciones `diario`/`favorito` no la encontraban. Fix: nombre correcto + liberación preventiva de una capa homónima previa (defensa contra UIRoot).
+- **Decisión:** NO traducir nombres propios ni títulos de entradas (son identidad, M87) — solo UI strings.
+- **Decisión:** NO tocar `interaction_manager.gd` (BUG-096, zona kimi-k3): el error preexistente `Nonexistent 'bool' constructor` en `interaction_manager.gd:669` se emite en todo `pop_layer` (aparece también en las suites de M53 y no aborta resultados). Documentado, no es regresión mía.
+- **Encoding/EOL (§28):** `.po`/`.gd` LF, `project.godot` CRLF; `.po` escritos con `Set-Content`/here-string (nunca `-c` inline) y verificados FFFD=0/BOM=0; guard de idempotencia en todos los scripts de inserción.
+
+### Recomendaciones para el próximo agente
+- **Lote de rendimiento (W/X):** virtualizar `ListaEntradas` (solo visible en árbol), pooling de filas (M62), LazyLoad de categorías; medir apertura con 500+ entradas.
+- **Catálogo rico (B/Q):** si se agregan `descripcion`/`refs`/`icono` al JSON, el detalle ya tiene dónde mostrarlos (`ColDetalle`); respetar que los títulos de entrada NO se traducen.
+- **M56 fotografías:** crear las entradas base de `fotografías` (pasa a 14/14) y enganchar FOTO_TOMADA (puente de 1 línea, patrón `_conectar_eventos`).
+- **`validate_diary.gd` (Y):** puede reutilizar las aserciones de `test_diario_ui.gd` (claves, estructura, anti-spoiler).
+- **Ojo con `alternar_favorito`:** devuelve estado, no éxito — usar `esta_registrada()` como guard.
+- **`close_top()`** ya purga la capa visible: no regresar al comportamiento `stack[-1]` (rompe Esc con capas ocultas en la pila).

@@ -638,3 +638,60 @@ msgid "SETTINGS.AUDIO_FALLA"
 msgstr "No se pudo aplicar el cambio."
 msgid "SETTINGS.VOLVER"
 msgstr "Volver"
+
+msgid "DIARY.TITULO"
+msgstr "Diario"
+
+msgid "DIARY.DETALLE"
+msgstr "Detalle"
+
+msgid "DIARY.BUSCAR"
+msgstr "Buscar en el diario…"
+
+msgid "DIARY.FILTRO"
+msgstr "Filtro"
+
+msgid "DIARY.FILTRO_TODOS"
+msgstr "Todos"
+
+msgid "DIARY.FILTRO_NUEVOS"
+msgstr "Nuevos"
+
+msgid "DIARY.FILTRO_VISTOS"
+msgstr "Vistos"
+
+msgid "DIARY.FILTRO_COMPLETADOS"
+msgstr "Completados"
+
+msgid "DIARY.FILTRO_FAVORITOS"
+msgstr "Favoritos"
+
+msgid "DIARY.ESTADO_NUEVO"
+msgstr "Nuevo"
+
+msgid "DIARY.ESTADO_VISTO"
+msgstr "Visto"
+
+msgid "DIARY.ESTADO_COMPLETADO"
+msgstr "Completado"
+
+msgid "DIARY.SIN_SELECCION"
+msgstr "Elegí una entrada para ver su detalle."
+
+msgid "DIARY.SIN_RESULTADOS"
+msgstr "Sin resultados para la búsqueda."
+
+msgid "DIARY.FAVORITO"
+msgstr "Favorito"
+
+msgid "DIARY.PROGRESO_GLOBAL"
+msgstr "Progreso del diario"
+
+msgid "DIARY.PROGRESO_CAT"
+msgstr "Completado del contenido descubierto"
+
+msgid "DIARY.DIA"
+msgstr "Día %s"
+
+msgid "DIARY.BLOQUEADO"
+msgstr "???"

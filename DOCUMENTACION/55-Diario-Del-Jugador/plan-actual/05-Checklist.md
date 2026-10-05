@@ -1,19 +1,21 @@
-**Modelo:** glm-5.3-flash (último modificador; documentación base por Deepseek V4 Flash)
+**Modelo:** mimo-v2.6-flash-free (último modificador; base por Deepseek V4 Flash, iter. 1 por glm-5.3-flash)
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 55: Diario del Jugador (131 ítems)
 
-> **Reserva actual (LIBERADA 🟡)**
-> **Agente:** glm-5.3-flash · **Plataforma:** Kilo Code · **Fecha:** 2026-09-01 12:25 · **Estado:** 🟡 Liberado (iter. 1 núcleo V0/V1, Log 374 — renumerado desde 327, ver Log 375)
-> **Entrada:** M07 ✅ + M22 ✅ + M19 ✅ + M28 ✅ + M29 ✅ (emiten las señales consumidas) · **Salida:** DiaryService autoload + catálogo 14 categorías JSON + registro por eventos reales + anti-spoiler + persistencia M59
-> **Archivos afectados:** `scripts/diario/diary_service.gd`, `data/diario/diario_catalog.json`, `scripts/diario/test_diario.gd`, `scripts/core/event_bus.gd` (dominio diary), `project.godot`
+> **Reserva actual (🔵 iter. 1 — 2026-10-04 17:55)**
+> **Agente:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04 17:55 · **Estado:** 🟡 Liberado 2026-10-04 (iter. 2 UI cerrada — lote 1 del frente T-M1; entregado con pendientes honestos en W/B/V/Y/Z, ver Notas del Agente en 04-Codigo.md; reclamo 🔵 original: frente T-M1 del canal 12 tras cerrar M53)
+> **Entrada:** M53 ✅ (UI framework: capas + settings_audio_layer cerrados hoy) + M07 EventBus + señales M19/M22/M28/M29 + DiaryService iter. 1 (glm, Log 374)
+> **Salida prevista:** UI del diario (capa nueva sobre el framework M53) + registro por eventos + persistencia M59; tests y docs plan-actual al cierre
+> **Archivos afectados:** `scripts/ui/layers/` (capa nueva), `scripts/diario/`, `locales/*.po`, `DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/`
+> **Reserva anterior (histórica):** glm-5.3-flash · iter. 1 núcleo V0/V1 (Log 374, liberado 2026-09-01)
 
-**Estado:** 7/131 completados (iter. 1 núcleo: catálogo, 6 mapeos de eventos reales, anti-spoiler, favoritos/búsqueda, persistencia). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 33/131 completados (8 previos + 25 de iter. 2), 1 [?], 97 pendientes — iter. 2 UI (mimo, Log 1295): capa DiaryLayer + i18n 36 claves + test_diario_ui 89/0 con sonda rojo. Ver 06/07-Testings. [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. Diseño General del Diario
 
-- [ ] Diseñar la pantalla principal del diario con pestañas por categoría [M]
-- [ ] Definir navegación de 2 clics hacia cualquier entrada [M]
+- [x] Diseñar la pantalla principal del diario con pestañas por categoría [M] — iter. 2 (mimo): diary_layer.gd, 14 pestañas en CategoriasBox (test_ui estructura OK)
+- [x] Definir navegación de 2 clics hacia cualquier entrada [M] — iter. 2: pestaña→fila→detalle en 3 columnas (test_ui verifica selección + detalle)
 - [ ] Definir estados de entrada: no_visto, visto, completado [S]
 - [ ] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M]
 - [x] Separar datos del catálogo de la lógica del servicio (M15) [M] — glm-5.3-flash 2026-09-01: catálogo data-driven en data/diario/diario_catalog.json + DiaryService autoload
@@ -22,8 +24,8 @@
 
 - [ ] Diseñar lista virtualizada por categoría con scroll suave [C]
 - [ ] Definir detalle de entrada con descripción, refs y acciones [M]
-- [ ] Añadir barra de progreso por categoría en la cabecera [M]
-- [ ] Añadir estrella de favorito en cada fila [S]
+- [x] Añadir barra de progreso por categoría en la cabecera [M] — iter. 2: ProgresoCat en cabecera + % global sobre lo descubierto, clamp [0,100] (test_ui)
+- [x] Añadir estrella de favorito en cada fila [S] — iter. 2: ★ en fila + BtnFavoritoDetalle con undo visual (test_ui, sonda rojo demostrada)
 - [ ] Mantener la estética cozy del proyecto en el diario [M]
 
 ## C. Registro por Eventos (EventBus M07)
@@ -148,27 +150,27 @@
 
 ## R. Filtros, Categorías y Búsqueda
 
-- [ ] Definir filtro por categoría (pestañas) [S]
-- [ ] Definir filtro por estado (nuevo/visto/favorito) [M]
+- [x] Definir filtro por categoría (pestañas) [S] — iter. 2: 14 pestañas filtran la lista (test_ui)
+- [x] Definir filtro por estado (nuevo/visto/favorito) [M] — iter. 2: enum Filtro (5 opciones) en FiltroEstado (test_ui)
 - [ ] Definir filtro por bioma para criaturas/lugares [M]
-- [ ] Definir búsqueda por texto localizado [M]
-- [ ] Testear búsqueda con diacríticos (M87) [M]
+- [x] Definir búsqueda por texto localizado [M] — iter. 2: buscar() + placeholder i18n + solo lo descubierto (test_ui)
+- [x] Testear búsqueda con diacríticos (M87) [M] — iter. 2: _slug() en consulta y candidato; test sin-tilde y locale EN (test_ui)
 
 ## S. Completado y Contenido Secreto
 
-- [ ] Calcular % de completado por categoría sobre lo DESCUBIERTO [M]
-- [ ] Calcular % global del diario [M]
+- [x] Calcular % de completado por categoría sobre lo DESCUBIERTO [M] — iter. 1 (progreso_categoria) + iter. 2 lo muestra con tooltip anti-spoiler (test_ui)
+- [x] Calcular % global del diario [M] — iter. 2: _refrescar_progreso() con % global en cabecera, sobre descubierto (test_ui)
 - [ ] Diseñar contenido secreto desbloqueable por acción concreta [M]
 - [ ] Mostrar "???" SOLO en secciones lore (nunca en colecciones) [M]
-- [ ] Validar que el % nunca supere 100 por corrupción de datos [M]
+- [x] Validar que el % nunca supere 100 por corrupción de datos [M] — iter. 2: clamp [0,100] verificado en UI (test_ui "% acotado"); defaults/purga de corrupción = M59 (test_diario huérfanas)
 
 ## T. Releer, Favoritos y Acciones
 
 - [ ] Permitir releer pistas, recetas y cartas desde el diario [S]
-- [ ] Permitir marcar/desmarcar favoritos con undo visual [S]
+- [x] Permitir marcar/desmarcar favoritos con undo visual [S] — iter. 2: toggle + refresco de fila ★ (test_ui round-trip)
 - [ ] Navegar al lugar en el mapa (M54) desde la entrada [M]
-- [ ] Mantener la posición de scroll al volver del detalle [S]
-- [ ] No bloquear la acción al cerrar el diario (M57) [S]
+- [x] Mantener la posición de scroll al volver del detalle [S] — iter. 2: scroll preservado en _refrescar_lista (test_ui: delta < 0.01)
+- [x] No bloquear la acción al cerrar el diario (M57) [S] — iter. 2: close_top purga la capa visible + re-registro idempotente al reabrir (test_ui Esc/atajo J)
 
 ## U. Persistencia (M59/M60)
 
@@ -180,8 +182,8 @@
 
 ## V. Localización (M87/M88)
 
-- [ ] Localizar todos los textos del diario por claves i18n [M]
-- [ ] Localizar nombres propios sin traducción [S]
+- [x] Localizar todos los textos del diario por claves i18n [M] — iter. 2: 19 claves DIARY.* ×2 idiomas + _aplicar_textos_estaticos al abrir; test EN (Close/Characters) sin claves crudas
+- [x] Localizar nombres propios sin traducción [S] — iter. 2: "Catalina Oso" intacto en locale EN (test_ui)
 - [ ] Dar soporte a plurales [S]
 - [ ] Testear el diario en 3 idiomas sin desbordes de UI [M]
 - [ ] Validar claves i18n con validate_diary.gd [M]
@@ -192,36 +194,36 @@
 - [ ] Virtualizar listas largas (SOLO visible en el árbol) [C]
 - [ ] Cargar perezosamente categorías no visibles (LazyLoad) [M]
 - [ ] Usar pooling de filas de lista (M62) [C]
-- [ ] Manejar texto muy largo con wrap y tooltip completo [M]
+- [x] Manejar texto muy largo con wrap y tooltip completo [M] — iter. 2: autowrap en detalle + tooltip con texto completo (test_ui)
 
 ## X. Rendimiento y Edge Cases (final)
 
-- [ ] Manejar categoría vacía con mensaje amistoso [S]
-- [ ] Manejar búsqueda sin resultados [S]
+- [x] Manejar categoría vacía con mensaje amistoso [S] — iter. 2: LblVacio "Todavía no hay entradas…" (test_ui con fotografías vacía)
+- [x] Manejar búsqueda sin resultados [S] — iter. 2: "Sin resultados para la búsqueda." (test_ui)
 - [ ] Manejar icono faltante con fallback genérico [S]
-- [ ] No emitir VFX en el diario (hábito estricto, M52) [S]
+- [x] No emitir VFX en el diario (hábito estricto, M52) [S] — iter. 2: source scan sin create_tween/GPUParticles/CPUParticles (test_ui)
 - [ ] Probar el diario con Reduce Motion activo (M58) [M]
 
 ## Y. Validación y QA
 
 - [ ] Crear validate_diary.gd (mapeo, i18n, persistencia, rendimiento) [C]
-- [ ] Probar ciclo completo: descubrir → registrar → ver → guardar → recargar [C]
-- [ ] Probar anti-spoilers: sin descubrir nada, diario vacío correcto [M]
-- [ ] Probar 14 categorías con al menos 1 entrada cada una [M]
-- [ ] Revisar logs DIARY-* en consola sin errores [S]
+- [x] Probar ciclo completo: descubrir → registrar → ver → guardar → recargar [C] — iter. 1 (eventos→registrar→persistir, test_diario) + iter. 2 (ver/guardar/recargar round-trip, test_ui)
+- [x] Probar anti-spoilers: sin descubrir nada, diario vacío correcto [M] — test_ui: vacío correcto + no-descubierto invisible + snapshot/restore
+- [?] Probar 14 categorías con al menos 1 entrada cada una [M] — 13/14: fotografías tiene 0 entradas (falta M56); test_ui aserta con_entradas==13
+- [x] Revisar logs DIARY-* en consola sin errores [S] — salida del test verde: solo DIARY-ADD esperados; el único SCRIPT ERROR es el preexistente interaction_manager.gd:669 (no es del diario)
 
 ## Z. Cierre del Módulo
 
 - [ ] Probar persistencia entre sesiones (guardar → salir → cargar) [C]
 - [ ] Probar migración de versión antigua de guardado [C]
-- [ ] Documentar plan de testings automáticos del diario [M]
-- [ ] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
+- [x] Documentar plan de testings automáticos del diario [M] — 06-Plan-Testings.md creado (iter. 2)
+- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] — Notas del Agente iteración 2 (2026-10-04) en 04-Codigo.md
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 8 · Pendientes: 123 · No resueltos: 0.
+**Totales:** 131 ítems · Completados: 33 · Pendientes: 97 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 8 [x] / 123 [ ] / 0 [?].

@@ -115,7 +115,15 @@ func _on_focus_moved_tooltip(node: Node) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _stack.is_empty():
 		return
+	# T-M1 (M55): "tope" = la capa VISIBLE más reciente. La pila guarda todas
+	# las capas montadas (registradas al entrar al árbol), no solo las abiertas:
+	# con el diario abierto, stack[-1] era SettingsAudioLayer (oculta) y el
+	# input se evaluaba contra la capa equivocada.
 	var top_layer := _stack[_stack.size() - 1]
+	for i in range(_stack.size() - 1, -1, -1):
+		if _stack[i].visible:
+			top_layer = _stack[i]
+			break
 	if event.is_action_pressed("pausa") and top_layer is UILayer:
 		close_top()
 		get_viewport().set_input_as_handled()
@@ -139,6 +147,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		set_hud_visible(not (_hud != null and _hud.visible))
 		get_viewport().set_input_as_handled()
 		return
+	# T-M1 M55: toggle del diario con acción `diario` (J)
+	if event.is_action_pressed("diario"):
+		var dia_layer = _buscar_capa("DiaryLayer")
+		if dia_layer and dia_layer.has_method("toggle"):
+			dia_layer.toggle()
+			get_viewport().set_input_as_handled()
+			return
+	# T-M1 M55: `favorito` alterna la entrada seleccionada del diario (si está visible)
+	if event.is_action_pressed("favorito"):
+		var dia_fav = _buscar_capa("DiaryLayer")
+		if dia_fav and dia_fav.visible and dia_fav.has_method("alternar_favorito_seleccionado"):
+			dia_fav.alternar_favorito_seleccionado()
+			get_viewport().set_input_as_handled()
+			return
 	# Navegación direccional con acciones del InputMap (M57)
 	var nav: Vector2i = Vector2i.ZERO
 	if event.is_action_pressed("mover_norte"):
@@ -244,7 +266,16 @@ func close_top() -> void:
 	if _closing:
 		return
 	_closing = true
-	pop_layer(_stack[_stack.size() - 1])
+	# T-M1 (M55): purgar la capa VISIBLE más reciente. Antes se poppaba
+	# siempre stack[-1]: con el diario abierto, Esc des-registraba a
+	# SettingsAudioLayer (oculta, montada después) y el diario quedaba abierto.
+	# Fallback: si nada está visible, se mantiene el comportamiento original.
+	var objetivo := _stack[_stack.size() - 1]
+	for i in range(_stack.size() - 1, -1, -1):
+		if _stack[i].visible:
+			objetivo = _stack[i]
+			break
+	pop_layer(objetivo)
 	_closing = false
 
 

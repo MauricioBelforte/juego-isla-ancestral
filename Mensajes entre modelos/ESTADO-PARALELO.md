@@ -1,3 +1,16 @@
+## 2026-10-04 17:55 — mimo-v2.6-flash-free / opencode — M55 Diario-Del-Jugador RECLAMADO 🔵 (frente T-M1, canal 12)
+
+**Estado:** ✅ **LOTE 1 (UI) CERRADO 2026-10-04 21:52** — Log **1295** · informe **17** (canal). `05-Checklist.md` M55 → **33 [x] / 1 [?] / 97 [ ]** y liberado 🟡. Entregado: `diary_layer.gd` (capa MODAL_FULL 3 columnas, 14 pestañas, filtros, ★, % anti-spoiler con clamp, i18n), `get_categorias()`+`buscar(_slug)` en el servicio, wiring `diario`/`favorito` + fix `close_top()` en ui_manager, acción `diario` (J), 36 claves DIARY (es/en), **`test_diario_ui.gd` 89/0 con sonda rojo demostrada**, regresión 4/4 (diario/i18n/framework/settings 51/0), docs 03§5/04§1.1+Notas/05/06/07. **CG fila 55:** el reclamo 🔵 **ya estaba en HEAD** (sweep de Hy3 en `ad6b370`); en este cierre mi fila pasa a **🟡 Con dudas · 33/131 · Agente — · 2026-10-04 21:52** (edición mínima, invariante M-06 verificado). Reclamo original: fila 55 🟢 → 🔵 En curso, agente mimo-v2.6-flash-free, 17:55 (8/131 en ese momento).
+
+**Encargo (canal 12 del director):** frente T-M1 = **55-Diario-Del-Jugador** — UI pura, primer consumidor natural del framework de capas que este chat cerró hoy (M53). Orden: T-M1 → T-M2 (89-Menús); opcional después M88-Fuentes (verificar superposición con BUG-042 de DeepSeek).
+
+**Estado previo del módulo:** iter. 1 de glm-5.3-flash (Log 374): DiaryService autoload + catálogo 14 categorías + anti-spoiler + favoritos/búsqueda + persistencia; smoke `test_diario.gd` EXIT 0 verificado por Hy3 (Log 866). 8/131 ítems.
+
+**Registros de reserva:** esta entrada · CG fila 55 · guía 08 fila M55 (**working tree**, NO commiteable) · `05-Checklist.md` bloque Reserva actual · backlog personal (`[→]`).
+
+**Restricciones (canal 12, sin cambio):** no `quality.yml` (s2); no M91; no `interaction_manager`/BUG-096 (zona kimi M70); no `service_registry.gd`/BUG-097 (agnes); sin arquitectura visual ni escenas 3D (§21.14 guía comparativa); UTF-8 sin BOM (§28).
+
+
 ## 2026-10-04 04:04 — mimo-v2.6-flash-free / opencode — M53 UI-UX RECLAMADO 🔵 (sección Audio de settings, Opción A aprobada)
 
 **Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 53: **reconstruida** (estaba mal formada: celdas corridadas — sin Prioridad/Complejidad/Dependencias — y 3 celdas fantasma `—` incrustadas entre las dos notas históricas). Ahora: 11 columnas correctas, Estado → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**, Última actividad → %s, Progreso **132/165** (+7 ítems `[ ]` nuevos de la sección Audio en el `05-Checklist.md`). Prioridad/Complejidad/Dependencias restauradas de git history (fc0d448): `Alta | 4 | 11, 14`. Notas históricas preservadas verbatim.

@@ -189,18 +189,21 @@ func entradas_de(categoria: String) -> Array[Dictionary]:
 	return result
 
 
-## Búsqueda simple sobre lo descubierto (UI: filtro por texto)
+## Búsqueda simple sobre lo descubierto (UI: filtro por texto).
+## Diacríticos (M87, checklist R): compara sin tildes y en minúsculas
+## (ambos lados pasan por _slug), así "raiz" encuentra "Isla Raíz".
 func buscar(texto: String) -> Array[String]:
 	var resultados: Array[String] = []
-	var q := texto.to_lower()
+	var q := texto.strip_edges()
 	if q.is_empty():
 		return resultados
+	var q_norm := _slug(q)
 	for categoria in CATEGORIAS:
 		for e in _catalogo.get(categoria, []):
 			var eid := String(e.get("id", ""))
 			if not esta_registrada(eid):
 				continue
-			if String(e.get("titulo", "")).to_lower().contains(q) or eid.to_lower().contains(q):
+			if _slug(String(e.get("titulo", ""))).contains(q_norm) or eid.contains(q_norm):
 				resultados.append(eid)
 	return resultados
 
@@ -288,3 +291,9 @@ func total_entradas() -> int:
 	for cat in _catalogo:
 		total += (_catalogo[cat] as Array).size()
 	return total
+
+
+## Las categorías en orden (para la UI T-M1). La const CATEGORIAS no se lee
+## bien a través de Variant en runtime, así que se expone este accessor.
+func get_categorias() -> Array[String]:
+	return CATEGORIAS.duplicate()
