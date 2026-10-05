@@ -51,6 +51,34 @@ def _flag(valor: str | None) -> bool:
     return valor.strip().lower() in ("1", "true", "yes", "si", "on")
 
 
+def _pendiente(duenio: str, fecha: str, desc: str) -> dict:
+    """Construye un gate PENDIENTE (no bloquea, directiva del fundador)."""
+    return {
+        "estado": "PENDIENTE",
+        "duenio": duenio,
+        "fecha": fecha,
+        "desc": desc,
+    }
+
+
+def _resolver_flag(
+    valor: str | None, duenio: str, fecha: str, desc: str
+) -> bool | dict:
+    """Convierte un argumento de gate: 1/0 -> bool, 'pendiente' -> dict PENDIENTE.
+
+    Un gate sin medicion (smoke/backup en ``quality.yml``) debe quedar PENDIENTE
+    (visible pero no bloqueante), no en False (bloquearia por algo no medible).
+    None (flag no pasado) tambien se trata como PENDIENTE, porque en CI nadie
+    mide esos gates desde este workflow: pasarlo a False es la trampa 100.
+    """
+    if valor is None:
+        return _pendiente(duenio, fecha, desc)
+    v = valor.strip().lower()
+    if v in ("pendiente", "p", "pdt"):
+        return _pendiente(duenio, fecha, desc)
+    return v in ("1", "true", "yes", "si", "on")
+
+
 def contar_criticos_abiertos(ruta_bugs: Path) -> tuple[int, list[str], list[str]]:
     """Cuenta bugs criticos NO resueltos en la tabla resumen de 11-BUGS.md.
 
@@ -109,7 +137,13 @@ def construir_gates(args: argparse.Namespace) -> tuple[dict, list[str]]:
 
     gates: dict = {
         "suite_tests_verde": _flag(args.suite_ok),
-        "smoke_aprobado": _flag(args.smoke_ok),
+        "smoke_aprobado": _resolver_flag(
+            args.smoke_ok,
+            "M114",
+            args.fecha_pendiente,
+            "Smoke test manual (M114): en este workflow no se corre un smoke "
+            "automatizado; queda pendiente hasta el release real.",
+        ),
         "zero_criticos_abiertos": n_criticos == 0,
         # Sin dato medible: directiva del fundador (PENDIENTE no bloquea).
         "crash_rate_cero": {
@@ -125,7 +159,13 @@ def construir_gates(args: argparse.Namespace) -> tuple[dict, list[str]]:
             "fecha": args.fecha_pendiente,
             "desc": "M87 tiene checklist, pero '6 idiomas sin claves rotas' necesita el build.",
         },
-        "backup_configurado": _flag(args.backup_ok),
+        "backup_configurado": _resolver_flag(
+            args.backup_ok,
+            "M107",
+            args.fecha_pendiente,
+            "Backup plan 3-2-1 (M107): en este workflow no se corre el job de "
+            "backup, asi que queda pendiente hasta el release real.",
+        ),
     }
     return gates, advertencias
 
@@ -135,9 +175,14 @@ def main() -> int:
         description="Regenera estado_release.json con el estado real de cada gate."
     )
     parser.add_argument("--suite-ok", help="1/0: la suite de tests salio verde")
-    parser.add_argument("--smoke-ok", help="1/0: el smoke test aprobo")
+    parser.add_argument(
+        "--smoke-ok",
+        help="1/0/pendiente: el smoke test aprobo (no medible -> 'pendiente')",
+    )
     parser.add_argument("--ci-gates-ok", help="1/0: los demas jobs del workflow pasaron")
-    parser.add_argument("--backup-ok", help="1/0: el backup esta configurado")
+    parser.add_argument(
+        "--backup-ok", help="1/0/pendiente: el backup esta configurado (no medible -> 'pendiente')"
+    )
     parser.add_argument(
         "--criticos-abiertos",
         type=int,

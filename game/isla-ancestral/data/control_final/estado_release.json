@@ -1,12 +1,32 @@
 {
-  "gates": {
-    "suite_tests_verde": true,
-    "smoke_aprobado": true,
-    "zero_criticos_abiertos": false,
-    "crash_rate_cero": true,
-    "ci_gates_verdes": false,
-    "textos_localizados": false,
-    "backup_configurado": true
-  },
-  "registro": "2026-09-02 18:00 — estado actual del proyecto (pre-release)"
+	"gates": {
+		"suite_tests_verde": true,
+		"smoke_aprobado": {
+			"estado": "PENDIENTE",
+			"duenio": "M114",
+			"fecha": "2026-10-05",
+			"desc": "Smoke test manual (M114): en este workflow no se corre un smoke automatizado; queda pendiente hasta el release real."
+		},
+		"zero_criticos_abiertos": false,
+		"crash_rate_cero": {
+			"estado": "PENDIENTE",
+			"duenio": "M143/M104",
+			"fecha": "2026-10-05",
+			"desc": "Requiere 72 h de telemetria en produccion (M143/M104)."
+		},
+		"ci_gates_verdes": true,
+		"textos_localizados": {
+			"estado": "PENDIENTE",
+			"duenio": "M87",
+			"fecha": "2026-10-05",
+			"desc": "M87 tiene checklist, pero '6 idiomas sin claves rotas' necesita el build."
+		},
+		"backup_configurado": {
+			"estado": "PENDIENTE",
+			"duenio": "M107",
+			"fecha": "2026-10-05",
+			"desc": "Backup plan 3-2-1 (M107): en este workflow no se corre el job de backup, asi que queda pendiente hasta el release real."
+		}
+	},
+	"registro": "2026-10-05T04:01 — regenerado por CI (commit 23b4cb9)"
 }

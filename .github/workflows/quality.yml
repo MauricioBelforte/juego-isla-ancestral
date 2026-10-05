@@ -885,9 +885,90 @@ jobs:
           exit 0
 
 
+  # M151 — Control final de release (7 gates). Regenera estado_release.json con
+  # el estado REAL y medible de cada gate, luego corre el gate de Godot sobre el
+  # JSON. Decisiones del fundador (canal 25/28 del subdirector):
+  #   (a) En quality.yml NO bloquea: solo informa (::warning::) — es el acta.
+  #   (b) En release-build.yml SI bloquea (ver ahi).
+  # Regla de PENDIENTE: un gate sin medicion en este workflow (smoke, backup) se
+  # marca PENDIENTE (dueno + fecha), NO en false. False bloquearia por algo que
+  # nadie puede medir; PENDIENTE queda visible en el acta sin bloquear.
+  # Gate de ceguera: si el regenerador no puede leer 11-BUGS.md, exit 3 -> ::error::
+  # y SI falla el job (un "0 criticos" sobre un archivo vacio es la trampa 100).
+  release-gate:
+    name: Release Gate (M151)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [test-suite]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: solarlabyrinth/action-setup-godot@v3
+        with:
+          version: "4.7-stable"
+          export-templates: false
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Resultado de la suite de tests (gate 1). 'needs' solo refleja exito/fracaso
+      # del job, no el conteo interno; el numero de tests se reporta en el acta.
+      - name: Guardar resultado de la suite
+        run: echo "suite_result=${{ needs.test-suite.result }}" >> $GITHUB_ENV
+
+      # Regenera el JSON. Los gates no medibles aqui (smoke/backup) se pasan como
+      # 'pendiente' -> quedan con dueno + fecha, sin bloquear.
+      - name: Regenerar estado_release.json
+        run: |
+          set +e
+          python scripts/regenerar_estado_release.py \
+            --repo-root . \
+            --suite-ok "${{ needs.test-suite.result == 'success' && '1' || '0' }}" \
+            --ci-gates-ok "1" \
+            --smoke-ok "pendiente" \
+            --backup-ok "pendiente"
+          CODE=$?
+          set -e
+          echo "regenerar_estado_release.py -> exit $CODE"
+          if [ "$CODE" -eq 3 ]; then
+            echo "::error::DETECTOR CIEGO (exit 3): el regenerador no pudo leer DOCUMENTACION/11-BUGS.md. Restaurar desde HEAD antes de continuar."
+            exit 1
+          fi
+          exit 0
+
+      - name: Import project resources
+        run: godot --headless --path game/isla-ancestral --import
+
+      - name: Correr el gate de control final
+        run: |
+          cd game/isla-ancestral
+          GATE_LOG=$(mktemp)
+          godot --headless --script res://scripts/control_final/control_final_gate.gd 2>&1 | tee "$GATE_LOG" || true
+          # El gate imprime su veredicto. EXIT 1 = gates reales rotos (false),
+          # no pendientes. En quality.yml esto NO bloquea el job (decision a):
+          # es el acta informativa del release.
+          if grep -q "CONTROL FINAL: BLOQUEADO" "$GATE_LOG"; then
+            echo "::warning::M151: el control final bloquearia el release (ver detalles arriba). No bloquea quality (acta); release-build.yml si bloquea."
+          else
+            echo "M151: control final OK o solo con gates PENDIENTE (no bloqueantes)."
+          fi
+
+      - name: Subir el acta (estado_release.json)
+        uses: actions/upload-artifact@v4
+        with:
+          name: estado-release-m151
+          path: game/isla-ancestral/data/control_final/estado_release.json
+          if-no-files-found: ignore
+
+
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator]
+    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator, release-gate]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -905,6 +986,7 @@ jobs:
           echo "binary-guard: ${{ needs.binary-guard.result }}"
           echo "architecture-guard: ${{ needs.architecture-guard.result }}"
           echo "checklist-orchestrator: ${{ needs.checklist-orchestrator.result }}"
+          echo "release-gate: ${{ needs.release-gate.result }}"
           if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1

@@ -46,10 +46,62 @@ jobs:
         run: |
           python tools/ci/lint_check.py
 
+  # M151 — Control final de release (7 gates), version BLOQUEANTE.
+  # Decision (b) del fundador (canal 25/28 del subdirector): aca si bloquea. Si el
+  # control final falla, no se buildea ni se publica nada. Es la puerta real.
+  # Gate de ceguera: si el regenerador no puede leer 11-BUGS.md, exit 3 -> fallo.
+  release-gate:
+    name: Release Gate (M151, bloqueante)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [test]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: solarlabyrinth/action-setup-godot@v3
+        with:
+          version: "4.7-stable"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerar estado_release.json
+        run: |
+          set +e
+          python scripts/regenerar_estado_release.py \
+            --repo-root . \
+            --suite-ok "${{ needs.test.result == 'success' && '1' || '0' }}" \
+            --ci-gates-ok "${{ needs.test.result == 'success' && '1' || '0' }}" \
+            --smoke-ok "pendiente" \
+            --backup-ok "pendiente"
+          CODE=$?
+          set -e
+          if [ "$CODE" -ne 0 ]; then
+            echo "::error::M151: no se pudo regenerar estado_release.json (exit $CODE). No se publica un release sin acta del control final."
+            exit 1
+          fi
+
+      - name: Import project resources
+        run: godot --headless --path game/isla-ancestral --import
+
+      # BLOQUEANTE. A diferencia de quality.yml (acta informativa), aca un gate
+      # en false (medible y roto) aborta la publicacion. Los PENDIENTE no
+      # bloquean (directiva del fundador).
+      - name: Correr el gate de control final
+        run: |
+          cd game/isla-ancestral
+          GATE_LOG=$(mktemp)
+          godot --headless --script res://scripts/control_final/control_final_gate.gd 2>&1 | tee "$GATE_LOG" || true
+          if grep -q "CONTROL FINAL: BLOQUEADO" "$GATE_LOG"; then
+            echo "::error::M151: CONTROL FINAL BLOQUEADO. Un gate medible esta roto; revisar el acta arriba. No se publica este release."
+            exit 1
+          fi
+          echo "M151: control final OK (o solo gates PENDIENTE, no bloqueantes). Se puede publicar."
+
   build:
     name: Build Release (${{ matrix.label }})
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [test, release-gate]
     strategy:
       fail-fast: false
       matrix:
