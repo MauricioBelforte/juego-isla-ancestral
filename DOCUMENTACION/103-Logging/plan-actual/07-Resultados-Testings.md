@@ -261,3 +261,52 @@ El número absoluto se **reporta** (`-- VEREDICTO`), **no** se asevera como gate
 `quality.yml:285` lo corre como gate duro). Lo asertado es un **orden** con holgura (`< 3x`).
 
 `CHECKS_MINIMOS` 9 → 12. Totales M103: **14 + 25 + 131 + 14 = 184 checks / 0 fallos**, sin `SCRIPT ERROR`.
+
+### 9.8 T-D8: cierre del falso positivo del frame-budget — opción (b) (2026-10-05, Log 1323)
+
+**El falso positivo (documentado por el director, mensaje 29):** el coste **absoluto** del `print()` a
+stdout depende del **destino** (tubería de CI vs archivo, **~25-35x**). La suite aseveraba la
+atribución con **ratios contra la llamada que ESCRIBE** (`_min_gateada < _min_escritura * 0.20`,
+`_min_filtrada < _min_escritura * 0.05`): bajo tubería daban 0,1-0,2 % y pasaban; con la escritura
+barata (archivo, o un runner más rápido) el mismo ratio sube y el gate **se pondría ROJO sin que
+nada del logger haya cambiado** → falso positivo (un gate que depende del entorno, no del código).
+
+**Decisión: opción (b)** — comparar el eco contra una **constante medida en local**, no contra la
+tubería del runner. La constante elegida es el **suelo del disco** (`_min_disco`, `store_line`+`flush`
+por línea), que es **estable e independiente del destino de stdout**.
+
+**Reproducir (medido, ambos destinos):**
+
+```bash
+GODOT="D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe"
+# a tubería (como CI):      ... | grep ATRIBUCION
+"$GODOT" --headless --path game/isla-ancestral --script res://scripts/logging/test_m103_frame_budget.gd
+# a archivo (como local):   > out.txt 2>&1 ; grep ATRIBUCION out.txt
+"$GODOT" --headless --path game/isla-ancestral --script res://scripts/logging/test_m103_frame_budget.gd > out.txt 2>&1
+```
+
+| Destino de stdout | eco (escritura-gateada) | suelo del disco (constante) | ratio eco/disco | ¿14/0? |
+|---|---|---|---|---|
+| **tubería** (3 corridas) | 10 460 · 7 414 · 10 549 µs | 5,9 · 5,8 · 8,2 µs | 1 774x · 1 289x · 1 285x | **sí** |
+| **archivo** (3 corridas) | 619 · 531 · 566 µs | 6,0 · 6,5 · 7,2 µs | 103x · 82x · 78x | **sí** |
+
+**Lectura:** el eco absoluto cae **~17x** entre tubería y archivo (10 460 → 619 µs), que es
+exactamente el artefacto del destino; pero **siempre supera el suelo del disco** (78x-1 774x) →
+la aserción `escritura > gateada + disco` es **cierta en ambos entornos**. El ratio eco/disco se
+**reporta**; la aserción es de **orden** (supera el disco), no de proporción.
+
+**Cambios en la suite (14 checks, siguen siendo 14):**
+- Se **eliminan** las dos aserciones con ratio contra `_min_escritura` (destino-dependientes).
+- `_min_filtrada < _min_escritura * 0.05` → `_min_filtrada < _min_disco` (constante local).
+- `_min_gateada < _min_escritura * 0.20` (eco ≥ 80 %) → `_min_escritura > _min_gateada + _min_disco`
+  (el eco supera el suelo del disco ⇒ el coste es el `print()`, no el disco).
+- El veredicto de presupuesto (`us_gateada`) se **reporta** y se asevera con holgura (`< 3x`), como
+  antes (su valor absoluto depende de la máquina, no del destino).
+
+**Guardián probado EN ROJO por inyección** (aborto al inicio del bloque B vía intermedio sin tipo):
+`_run()` aborta tras A → `6 checks, 2 fallos`, nombra `["B","C"]`, dispara el piso `solo 6 checks
+(minimo 14)` y sale con **exit 1 sin colgarse**. Sonda borrada.
+
+**Veredicto:** M103 sigue en **184 checks / 0 fallos** (14+25+131+14) en tubería **y** en archivo,
+sin `SCRIPT ERROR`. El ítem L199 sigue `[x]` (medido) y ahora el gate es **determinista en cualquier
+entorno**.

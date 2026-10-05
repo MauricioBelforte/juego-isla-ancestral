@@ -213,7 +213,7 @@ var _file: FileAccess = null
 | `test_logger.gd` (ox-alpha) | 14 | ✅ 14/0 — iter. 2: guardián de 3 capas + limpieza del export |
 | `test_logging_m103.gd` (deepseek-v4-flash/Kilo) | 25 | ✅ 25/0 — iter. 2: **11 checks inalcanzables resucitados** (trampa 46) |
 | `test_logging_m103_iter1.gd` (iter. 1) | 131 | ✅ **131/0 ×3**, 0 `SCRIPT ERROR`, guardián probado por inyección |
-| `test_m103_frame_budget.gd` (iter. 2, **nuevo**) | 9 | ✅ 9/0 — cierra el ítem L199 **por medición** |
+| `test_m103_frame_budget.gd` (iter. 2, **nuevo**) | 14 | ✅ 14/0 — cierra el ítem L199 **por medición**; iter. 2-bis (gate `console_echo`) y **T-D8 (opción b: atribución contra la constante local del disco)** |
 
 ## 5. Pendientes del módulo (con dueño)
 
@@ -325,7 +325,7 @@ Sello registrado en `CHECKLIST-QA-SEALS.md` (fila M103 actualizada a iter. 2 / L
 | Definir scroll en consola in-game | 187 | `[?]` → **M110** | No hay consola in-game propia; el consumidor es M110 (Debug Menu) |
 | Definir coloreado por nivel | 188 | `[?]` → **M110** | Verificado: `logging_config.gd` **no** define colores. El coloreado es de la UI (M110) |
 | Definir timestamp relativo («hace X s») | 189 | `[x]` **decisión documentada** | Formato **absoluto ISO 8601** deliberado (`03-Diseno.md` §9). El relativo exigiría un **delta por línea** (coste en el hot path) y sólo lo mostraría la consola de M110 |
-| Definir impacto máximo en frame budget (< 0,5 %) | 199 | `[x]` **MEDIDO** | **`test_m103_frame_budget.gd` (9 checks, Log 1109)**: llamada filtrada **1,11 µs** (caben 75/frame en el 0,5 %) · llamada que **escribe 512 µs** (caben **0**/frame) · atribución disco 1 % / consola+formato 99 %. Hallazgo escalado como **BUG-067** |
+| Definir impacto máximo en frame budget (< 0,5 %) | 199 | `[x]` **MEDIDO** | **`test_m103_frame_budget.gd` (14 checks, Log 1109 · iter. 2-bis Log 1180 · T-D8 Log 1323)**: llamada filtrada **1,11 µs** (caben 75/frame en el 0,5 %) · llamada que **escribe 512 µs** (caben **0**/frame) · atribución disco 1 % / consola+formato 99 %. Hallazgo escalado como **BUG-067**. **T-D8 (opción b):** la atribución ya no usa el ratio contra la tubería del runner (destino-dependiente, ~25-35x) sino contra la **constante local del disco**; el gate es determinista en tubería y en archivo. Ver §8 |
 | Criterios de aceptación cumplidos (5) | 212 | `[?]` → **M102** | **4 de 5** cumplidos. El nº4 (adjuntar logs a issues vía M102) depende de un módulo que no existe |
 | Implementar buffer + flush periódico (performance) | 227 | `[x]` **resuelto por medición** | Log 1109: **no se implementa** porque la medición demuestra que es innecesario (el coste está en la consola, no en el disco). Ver BUG-067 |
 | Regresión completa: 6 tests de economía/tiendas/tiempo | 240 | `[x]` **VERIFICADO 6/6** | Iter. 2: los **6** pasan con exit 0 (incluido `shops/test_loop_economico.gd`, que ya da **15 checks / 0 fallos** — el dueño de M38 lo arregló; antes daba 14/1). `scripts/economia/` y `scripts/shops/` limpios |
@@ -359,3 +359,43 @@ pasada en orden fijo miente):
 > ⚠️ **No se toca `logger.gd` en esta iteración**: el hallazgo es de **diseño/calibración**, y
 > cambiarlo alteraría el contrato de crash-proof (flush por línea) que el QA por logs necesita. Se
 > documenta y se escala; la decisión es de M61/M110.
+
+## 8. T-D8 — cierre del falso positivo del frame-budget (opción b, 2026-10-05, Log 1323)
+
+**Modelo:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Tarea:** T-D8 (director, mensajes 29/35)
+
+**El problema (falso positivo).** El coste **absoluto** del `print()` a stdout depende del **destino**:
+la **tubería** de CI (GitHub) lo infla **~25-35x** frente a un **archivo**. La suite de iter. 2-bis
+aseveraba la atribución del eco con **ratios contra la llamada que ESCRIBE**
+(`_min_gateada < _min_escritura * 0.20` y `_min_filtrada < _min_escritura * 0.05`). Bajo tubería esos
+ratios daban 0,1-0,2 % y pasaban; pero con la escritura barata (archivo local, o un runner más rápido)
+el **mismo** ratio sube y el gate **se pondría ROJO sin que nada del logger haya cambiado** → un gate
+que mide el **entorno**, no el **código**. Eso es el falso positivo.
+
+**La decisión: opción (b).** Comparar el eco contra una **constante medida en local**, no contra la
+tubería del runner. La constante es el **suelo del disco** (`_min_disco`, `store_line`+`flush` por
+línea), **estable e independiente del destino de stdout**. Se **eliminan** las dos aserciones con ratio
+contra `_min_escritura` y se sustituyen por:
+
+| Antes (destino-dependiente) | Ahora (constante local) |
+|---|---|
+| `_min_filtrada < _min_escritura * 0.05` | `_min_filtrada < _min_disco` |
+| `_min_gateada < _min_escritura * 0.20` (eco ≥ 80 %) | `_min_escritura > _min_gateada + _min_disco` (el eco supera el suelo del disco ⇒ el coste es el `print()`, no el disco) |
+
+El **ratio** eco/disco y el % disco/total se **reportan** (`-- ATRIBUCION`); la **aserción** es de
+**orden**, no de proporción. El veredicto de presupuesto (`us_gateada`) se **reporta** y se asevera con
+holgura (`< 3x`), como antes: su valor absoluto depende de la **máquina** (no del destino).
+
+**Medición (medida, ambos destinos — ver `07-Resultados-Testings.md` §9.8):** eco **10 460 µs** (tubería)
+vs **619 µs** (archivo) = **~17x** de diferencia (artefacto del destino), pero el eco supera el suelo
+del disco **78x-1 774x** en **ambos** → la aserción es cierta en cualquier entorno. **14 checks / 0
+fallos** en tubería **y** en archivo. Guardián probado EN ROJO por inyección (nombra `["B","C"]`, piso
+`minimo 14`, exit 1).
+
+**Por qué NO se tocó `logger.gd`:** T-D8 es una corrección **de la suite** (cómo se mide/atribuye), no
+del logger. El gate `console_echo` (BUG-067) ya existe y es correcto.
+
+**`[?]` de M103:** el ítem del frame budget (L199) ya estaba `[x]` (medido) desde iter. 2 — T-D8 **no
+cierra ningún `[?]`** porque los 6 que quedan son **dependencias externas reales** (RF18→M122;
+`bug_*.log`→M102; búsqueda/scroll/coloreado→M110; criterio de aceptación nº4→M102), no huecos de M103.
+No se fuerza ningún cierre.

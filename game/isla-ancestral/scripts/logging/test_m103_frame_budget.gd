@@ -1,6 +1,6 @@
 # Modelo: DeepSeek-V4.1-Flash
 # Plataforma: WorkBuddy
-# Fecha: 2026-09-20
+# Fecha: 2026-09-20 (iter. 2) · 2026-10-05 (T-D8, opcion b)
 #
 # M103: Logging — medicion del impacto en el frame budget (iter. 2, Log 1109).
 #
@@ -19,6 +19,17 @@
 #   (b) MINIMO por variante (descarta warm-up y ruido del asignador);
 #   (c) la suite se corre x3 y se comprueba que el SIGNO del resultado no cambia.
 #
+# ⚠️ ATRIBUCION — opcion (b) del director (T-D8, 2026-10-05): el coste ABSOLUTO
+# del `print()` a stdout depende del DESTINO (tuberia de CI vs archivo, ~25-35x),
+# asi que atribuir el coste comparandolo contra la llamada que ESCRIBE daba una
+# proporcion ("99 % consola") que solo era cierta bajo tuberia -> FALSO POSITIVO.
+# Ahora el eco se compara contra una CONSTANTE medida en local y estable en
+# cualquier destino: el SUELO DEL DISCO (`_min_disco`, store+flush por linea).
+# El eco del logger (`escritura - gateada`) supera ese suelo con holgura en
+# tuberia Y en archivo -> el veredicto es determinista en cualquier entorno.
+# El numero ABSOLUTO del eco sigue dependiendo del destino y por eso se REPORTA,
+# no se asevera como gate duro (ver `-- ATRIBUCION` y `-- VEREDICTO`).
+#
 # Uso:
 #   "<godot_console>" --headless --path game/isla-ancestral \
 #     --script res://scripts/logging/test_m103_frame_budget.gd
@@ -27,7 +38,7 @@ extends SceneTree
 
 const MODULO := "M103 frame-budget"
 const BLOQUES_ESPERADOS: Array[String] = ["A", "B", "C"]
-const CHECKS_MINIMOS := 12
+const CHECKS_MINIMOS := 14
 
 const RONDAS := 5
 const ITERACIONES := 200
@@ -94,7 +105,9 @@ func _run() -> void:
 	# Variante 1: el GATE solo (lo que cuesta preguntar si el nivel pasa).
 	# Variante 2: llamada FILTRADA (nivel por debajo de min_level -> debe salir
 	#             por el gate sin formatear ni escribir).
-	# Variante 3: llamada que ESCRIBE (formatea + sanitiza + disco + flush).
+	# Variante 3: llamada que ESCRIBE (formatea + sanitiza + disco + flush + print).
+	# Variante 4: SOLO disco (control de atribucion, sin consola ni formato).
+	# Variante 5: llamada que ESCRIBE con el eco a consola APAGADO (BUG-067).
 	for ronda in RONDAS:
 		_min_gate = mini(_min_gate, _medir_gate())
 		_min_filtrada = mini(_min_filtrada, _medir_filtrada())
@@ -107,14 +120,17 @@ func _run() -> void:
 	_check("la llamada FILTRADA cuesta menos que la que ESCRIBE (el gate corta antes de formatear)",
 		_min_filtrada < _min_escritura,
 		"filtrada=%d us  escritura=%d us" % [_min_filtrada, _min_escritura])
-	# El gate debe evitar la MAYOR PARTE del coste. Se compara contra la llamada
-	# que escribe, NO contra `is_level_enabled` solo: entre el gate y la llamada
-	# filtrada esta el formateo del string en el SITIO DE LLAMADA (`"... %d" % k`),
-	# que ninguna API puede evitar. Comparar con el gate daba 8x y era una
-	# expectativa mal calibrada, no un defecto.
-	_check("la llamada FILTRADA cuesta menos del 5%% de la que ESCRIBE (el gate evita el 95%% del coste)",
-		float(_min_filtrada) < float(_min_escritura) * 0.05,
-		"filtrada=%d us  escritura=%d us" % [_min_filtrada, _min_escritura])
+	# El gate debe evitar la MAYOR PARTE del coste. ⚠️ (opcion b, T-D8) NO se
+	# compara contra la llamada que ESCRIBE: su coste lo domina el `print()`, cuyo
+	# precio depende del DESTINO de stdout (la tuberia de CI lo infla ~25-35x
+	# frente a un archivo), asi que la proporcion filtrada/escritura era un
+	# ARTEFACTO del entorno. Se compara contra la CONSTANTE del disco
+	# (`_min_disco`, medida en local y estable en cualquier destino): una
+	# escritura real toca el disco, la filtrada ni siquiera llega ahi.
+	# Determinista en tuberia y en archivo.
+	_check("la llamada FILTRADA cuesta menos que el suelo del disco (el gate evita el formateo Y la escritura)",
+		_min_filtrada < _min_disco,
+		"filtrada=%d us  solo_disco=%d us" % [_min_filtrada, _min_disco])
 	# Invariante: escribir incluye el `print()` de consola ADEMAS del disco, asi
 	# que su coste debe superar al de solo-disco. (NO se afirma que el coste sea
 	# aceptable ni inaceptable: eso es lo que se REPORTA abajo. Afirmar el defecto
@@ -134,6 +150,8 @@ func _run() -> void:
 	var cabe_escrituras: int = int(floor(presupuesto_us / maxf(us_escritura, 0.001)))
 	var us_gateada: float = float(_min_gateada) / float(ITERACIONES)
 	var cabe_gateadas: int = int(floor(presupuesto_us / maxf(us_gateada, 0.001)))
+	# Coste atribuible AL ECO (el `print()` del logger) = escritura - gateada.
+	var us_delta_eco: float = float(_min_escritura - _min_gateada) / float(ITERACIONES)
 
 	print("-- presupuesto: %.2f%% de %.2f ms (60 FPS) = %.2f us por frame" % [LIMITE_PCT, PRESUPUESTO_FRAME_MS, presupuesto_us])
 	print("-- coste medido por llamada (MINIMO de %d rondas x %d iteraciones):" % [RONDAS, ITERACIONES])
@@ -142,10 +160,17 @@ func _run() -> void:
 	print("     solo disco (store+flush) .... %.3f us" % us_disco)
 	print("     llamada que ESCRIBE (total).. %.3f us   (caben %d por frame en el 0.5%%)" % [us_escritura, cabe_escrituras])
 	print("     ESCRIBE con eco APAGADO ..... %.3f us   (caben %d por frame en el 0.5%%)  <- BUG-067" % [us_gateada, cabe_gateadas])
-	print("-- ATRIBUCION del coste de escribir: disco=%.0f%%  resto(consola+formato)=%.0f%%" % [
-		100.0 * us_disco / maxf(us_escritura, 0.001),
-		100.0 * (1.0 - us_disco / maxf(us_escritura, 0.001))])
-	print("-- OJO: el coste de la consola depende del DESTINO de stdout (tuberia ~35x mas caro que archivo).")
+	# ⚠️ (opcion b, T-D8) La atribucion se hace contra la CONSTANTE del disco
+	# (medida en local, independiente del destino de stdout), NO contra la llamada
+	# que ESCRIBE: su coste lo domina el `print()`, cuyo precio depende del DESTINO
+	# (la tuberia de CI lo infla ~25-35x), de modo que la proporcion "99 %% consola"
+	# era un ARTEFACTO del entorno (falso positivo). El ratio eco/disco y el
+	# porcentaje disco/total se REPORTAN como informacion; el ratio absoluto del
+	# eco depende del destino y por eso no se asevera.
+	print("-- ATRIBUCION (opcion b): eco del logger = %.3f us  vs  suelo del disco = %.3f us  (ratio %.0fx) · disco = %.1f%% del coste de escribir" % [
+		us_delta_eco, us_disco, us_delta_eco / maxf(us_disco, 0.001),
+		100.0 * us_disco / maxf(us_escritura, 0.001)])
+	print("-- OJO: el coste ABSOLUTO de la consola depende del DESTINO de stdout (tuberia ~25-35x mas caro que archivo); por eso la atribucion se hace contra la constante local del disco, no contra la escritura.")
 
 	_check("una llamada FILTRADA cabe holgadamente en el presupuesto de 0.5%% de frame",
 		us_filtrada <= presupuesto_us,
@@ -153,15 +178,23 @@ func _run() -> void:
 	_check("el presupuesto admite al menos 10 llamadas FILTRADAS por frame", cabe_filtradas >= 10, "caben=%d" % cabe_filtradas)
 
 	# ── BUG-067: el eco a consola ES el coste, y apagarlo devuelve la llamada al frame ──
-	# Nota: estas 3 aserciones NO dependen del destino de stdout (con el eco apagado
-	# no hay `print`), asi que valen igual bajo tuberia que a archivo.
+	# ⚠️ (opcion b, T-D8) Estas aserciones NO comparan contra la llamada que
+	# ESCRIBE (su coste es el `print()`, que la tuberia de CI altera ~25-35x): se
+	# comparan contra la CONSTANTE del disco, medida en local y estable en
+	# cualquier destino de stdout. Asi el test es determinista en tuberia Y en
+	# archivo.
 	_check("apagar el eco a consola ABARATA la escritura (=> el coste es el `print`)",
 		_min_gateada < _min_escritura,
 		"con eco=%d us  sin eco=%d us" % [_min_escritura, _min_gateada])
-	_check("el eco a consola explica al menos el 80%% del coste de escribir",
-		float(_min_gateada) < float(_min_escritura) * 0.20,
-		"con eco=%d us  sin eco=%d us (queda el %.1f%%)" % [_min_escritura, _min_gateada,
-			100.0 * float(_min_gateada) / maxf(float(_min_escritura), 1.0)])
+	# La atribucion: el eco del logger (escritura - gateada) debe superar el SUELO
+	# DEL DISCO (constante local). Si el coste de escribir fuera el disco, el eco
+	# seria del orden del disco; supera el disco con holgura => el coste es el
+	# `print()`. Se usa la forma "escritura > gateada + disco" (sin resta, para no
+	# acumular el ruido de dos minimos independientes). Determinista: bajo tuberia
+	# y a archivo el eco siempre supera el disco.
+	_check("el eco a consola supera el suelo del disco (=> el coste NO es el disco; constante local)",
+		_min_escritura > _min_gateada + _min_disco,
+		"escritura=%d us  gateada+disco=%d us" % [_min_escritura, _min_gateada + _min_disco])
 	# ⚠️ El numero ABSOLUTO depende de la maquina — y del destino de stdout (BUG-067
 	# midio 29,5x entre tuberia y archivo) — asi que NO se asevera "<= 83,35 us"
 	# como gate duro: seria un gate que puede ponerse ROJO por la velocidad del
@@ -200,8 +233,10 @@ func _medir_escritura() -> int:
 
 
 ## Control: solo el disco (store_line + flush por linea), SIN consola ni formato
-## ni sanitizado. Sirve para ATRIBUIR: si escribir costara lo mismo que esto, el
-## cuello seria el disco; si cuesta mucho mas, el cuello esta en otro sitio.
+## ni sanitizado. Es la CONSTANTE LOCAL de atribucion (opcion b, T-D8): estable e
+## independiente del destino de stdout. Sirve para ATRIBUIR: si escribir costara
+## lo mismo que esto, el cuello seria el disco; si cuesta mucho mas, el cuello
+## esta en el `print()`.
 func _medir_disco() -> int:
 	var f := FileAccess.open(_tmp + ".ctrl", FileAccess.WRITE)
 	if f == null:
@@ -218,9 +253,9 @@ func _medir_disco() -> int:
 
 ## Variante 5 (BUG-067): la MISMA llamada que ESCRIBE, pero con el eco a consola
 ## APAGADO (`set_console_echo(false)`). Aisla el coste del `print()` sobre el
-## camino real: si la atribucion (99 % consola) es correcta, esta variante debe
-## caer al orden del disco. El archivo se sigue escribiendo y `line_emitted` se
-## sigue emitiendo: lo unico que desaparece es el `print()`.
+## camino real: si la atribucion (el coste es el eco) es correcta, esta variante
+## debe caer al orden del disco. El archivo se sigue escribiendo y `line_emitted`
+## se sigue emitiendo: lo unico que desaparece es el `print()`.
 func _medir_escritura_gateada() -> int:
 	_log.set_min_level(LV_WARNING)
 	_log.set_console_echo(false)
