@@ -133,8 +133,15 @@ Primeras ~30 tareas que tomo por orden de encaje, todas en módulos libres:
 | **T-D4** | **M03-Documentacion-Del-Proyecto** | ✅ **CERRADO 117/133** (Log 1283) | Auditoria de la documentacion del repo **verificable contra disco** (estructura, `.gitignore`, scripts de automatizacion) | Encaje A puro, modulo LIBRE, 0 deps |
 | **T-D5** | **M120-DLC-Y-Expansiones** | ✅ **ENTREGADO** (Log 1291) | **Parte tecnica**: compatibilidad de saves entre DLC + versionado (lo "design-heavy" queda `[?]` con dueno). Auditoria contra disco: real **163/222** (sin falso cero; el "6/222" era stale). BUG-102 resuelto. Test nuevo **39/0** | Mi fortaleza #1 (M60 serializacion/migracion) |
 | **T-D6** | **M94-Retencion-Sin-FOMO** | ✅ **NO APLICA** (ya completo) | Verificado 2026-10-04: M94 = **138/138 ✅**, sellado §21.8 por Hy3 (Log 1146, verif ≠ autor), `test_motivacion_m94.gd` **38/0**. Mi fila B2 (`65/113`, 41 `[ ]`) era STALE de la curación 2026-09-11. **No hay trabajo pendiente propio** | — |
+| **T-D7** | **Drift de estado (frente E3)** | 🟡 **BLOQUE 1 ENTREGADO** (Log 1297) | Saneo de drift `[x]` + `🟢` por módulo (método M03/M120). **Bloque 1 = M137-M144** (8 mods documentales): conteo real = GLOBAL en los 8 (sin falso cero); solo drift de ESTADO `🟢`→`🟡` + **familia NUEVA de sellos fraudulentos Log 867/857** (agnes, no Hy3). Filas exactas entregadas al director (NO edité GLOBAL). Bloque 2 propuesto: 76, 77, 89, 04, 05, 45 | Auditoría contra disco + detección de sellos = mi núcleo |
 
-**Orden sugerido por el director:** T-D1 (critico, desbloquea CI) -> **T-D4** (limpio, libre, alta entrega) -> T-D2/T-D3 (cierre del sub-frente BUG-093) -> T-D5 -> T-D6.
+**Orden sugerido por el director:** T-D1 (critico, desbloquea CI) -> **T-D4** (limpio, libre, alta entrega) -> T-D2/T-D3 (cierre del sub-frente BUG-093) -> T-D5 -> T-D6 -> **T-D7 (bloques de 5-8)**.
+
+**Reglas del director (política oficial, anotadas 2026-10-04/05):**
+- **"Design-heavy": el diseño documentado ES `[x]` legítimo.** `[x]` = el verbo del ítem está satisfecho por evidencia en disco; `[?]` = el ítem afirma algo falso; `[ ]` = implementación pendiente. Aplica a TODOS los módulos design-heavy (no solo M120). **No revertir.**
+- **Medir la fila propia contra disco ANTES de proponer cualquier tarea.** Mis filas B/C pueden estar STALE (curación 2026-09-11) y el director las lee como fuente de verdad.
+- **Avisar ANTES de tocar un módulo fuera de mis restricciones** (una línea basta).
+- **T-D7:** cambio permitido = solo `Estado` (+ `Agente actual`/`Última actividad` si corresponde); `Progreso` solo si mi conteo difiere del declarado (documentar la medición). Entregar **por bloques de 5-8**. Si un módulo queda todo `[x]` + código real → proponer `✅` **con sello §21.8 de un verificador independiente** (yo soy auditor, no puedo sellar lo que audito). Excluidos: 8 DoD (103/106/122/131/36/65/85/167), M03, M120, M94, M91/M38/M44, M100/M129.
 
 ---
 
@@ -256,6 +263,7 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [x] Log reservado: **1288** — T-D3: las 3 suites de BUG-093 re-corridas y verdes + BUG-101 (frente del director, mensaje 20, 2026-10-04). Medido con `--estado` **justo antes**: primero=**1288** (1284 = Log de agnes BUG-095/097; 1285/1286/1287 los consumieron otros agentes). Al cerrar, el pool arranca en **1289**. `--estado` final: **0 conflictos**.
 
 - [x] Log reservado: **1291** — T-D5: M120-DLC (auditoría contra disco + versionado + compatibilidad de saves, BUG-102) (frente del director, mensaje 24, 2026-10-04). Medido con `--estado` **justo antes**: primero=**1291** (1289 = Log de M151 por otro agente; 1290 consumido también). Al cerrar, el pool arranca en **1292**. `--estado` final: **0 conflictos**.
+- [x] Log reservado: **1297** — T-D7 bloque 1: drift de estado M137-M144 + familia de sellos fraudulentos Log 867/857 (frente del director, mensaje 27, 2026-10-05). **Reserva MANUAL** (no con `reservar_log.py`): el script está bloqueado por sandbox para los agentes → leí `Logs/NUMEROS_DISPONIBLES.txt`, tomé la primera línea (**1297**) y la borré del archivo. El pool quedó con cabeza en **1298** (el mensaje 27 decía cabeza 1295; 1295/1296 los consumieron otros agentes entre el encargo y mi turno).
 
 - [x] Log reservado: **1005** — M52 Partículas-Y-VFX iter. 6 (2026-09-18)
       ⚠️ **Dos números perdidos antes de este, por dos modos de fallo DISTINTOS del protocolo v3:**
