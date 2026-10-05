@@ -32,7 +32,7 @@
 - [x] No diseñar la economía alrededor del grind
 - [x] No sacrificar rendimiento por una pequeña mejora visual
 - [x] No añadir sistemas sin comprobar que aporten algo
-- [?] No ampliar el mapa solamente para hacerlo grande
+- [x] No ampliar el mapa solamente para hacerlo grande - **D-R2 APROBADA por el fundador 2026-10-05** (ampliacion parcial 2/3 patas; ver `desviaciones_justificadas.md`). Registro cerrado por decision del fundador (canal agnes-3-flash arch. 38), no por analisis propio.
 - [x] No confundir cantidad con profundidad
 - [x] No introducir monetización que destruya la experiencia
 - [x] No depender de servicios externos sin plan de contingencia
@@ -269,7 +269,7 @@ contradecía el conteo de marcas del propio archivo (115 `[x]` / 87 `[ ]`). Fue 
 hallazgo de la auditoría de atria-dawn-preview
 (`Mensajes entre modelos/atria-dawn-s2/06-...-m152-deuda-limpia-bug091-verificado.md` §1) y
 queda corregido aquí. **Conteo real tras SB-01: 173 `[x]` · 29 `[?]` = 202.**
-**Totales:** 202 ítems · Completados: 201 · No resueltos: 1 (D-R2 — fundador) · Pendientes: 0.
+**Totales:** 202 ítems · Completados: 202 · No resueltos: 0 · Pendientes: 0. (D-R2 aprobada por el fundador 2026-10-05; M152 en 🟡 hasta QA §21.8 de Hy3 T-H5).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 115 [x] / 87 [ ] / 0 [?].
@@ -310,7 +310,7 @@ con reglas validables + `auditoria.prohibido_totalmente`) — respalda los 115 `
 | No esconder información esencial | `[x]` | `24-Templos` §Sistema de ayuda (4 niveles redundantes: ambiental → familia → emisor exacto → solución paso a paso; «**Nunca** se penaliza usar ayuda»); `94` §5 «al no participar no hay pérdida: el siguiente ciclo lo repite»; `02-Vision` §7 «UI diegética reducida» |
 | Economía no alrededor del grind | `[x]` | `93-Balance` §2.2 reglas 8 («Sellos: **sin requisito de grind repetitivo**») y 11 (tope anti-inflación); `38-Economia/03-Diseno.md` §4.2 anti-arbitraje + §8 «venta nunca supera el 50-60 % de la compra» + §2.2 `limite_diario`; `16-Crafting` §1.3 regla 4 «El conocimiento de recetas es acumulativo y persistente; **nada lo borra**»; `principios.json` → `diversion_sostenida.no_grind_obligatorio` |
 | Performance > visuals | `[x]` | `61-Rendimiento/03-Diseno.md` §3.1 tabla de presupuestos (16,7 ms, tolerancia CI 10 %) + §2.3 técnicas obligatorias por sistema + §3.2 `validate_budget.gd` + gate CI (§2 «falla PR si excede»); `90-Configuracion-Grafica` §1 presets + detección automática de hardware; `50-Vegetacion` §1 `vegetation_budget.json` + `validate_vegetation.gd` en CI |
-| **No ampliar el mapa por hacerlo grande** | `[?]` | El principio **no se sostiene contra el estado real**: `AGENTS.md` §26 P-39 + `167-Isla-Raiz/01-Requerimientos.md` §Alcance documentan **radio 2560 / mundo 5120²** (ampliación ×10, commit `c107419`) **sin que exista desviación registrada**. El propio ejemplo 3 de M152 (§10) condicionaba la ampliación a «agregar NPCs, recursos, misiones en nuevas áreas», y esa condición nunca se evaluó. `02-Vision` §11 acota la v1.0 a 1-2 islas → la ampliación es un cambio de alcance sin registro. |
+| **No ampliar el mapa por hacerlo grande** | `[x]` (D-R2 aprobada por el fundador 2026-10-05) | El principio **no se sostiene contra el estado real**: `AGENTS.md` §26 P-39 + `167-Isla-Raiz/01-Requerimientos.md` §Alcance documentan **radio 2560 / mundo 5120²** (ampliación ×10, commit `c107419`) **sin que exista desviación registrada**. El propio ejemplo 3 de M152 (§10) condicionaba la ampliación a «agregar NPCs, recursos, misiones en nuevas áreas», y esa condición nunca se evaluó. `02-Vision` §11 acota la v1.0 a 1-2 islas → la ampliación es un cambio de alcance sin registro. |
 | No confundir cantidad con profundidad | `[x]` | `93-Balance` §2.2 reglas 6/8/10; `10-Generacion` §2 (determinismo); `07-Arquitectura/03-Diseno.md` §7 «Reglas anti-circulares (**verificables**)»; `02-Vision` §5 P4 «La facilidad de cada interacción está pulida **antes** de agregar complejidad» |
 | No monetización destructiva | `[x]` | `95-Monetizacion/03-Diseno.md` §2 **R1** 0 P2W / **R2** 0 loot boxes / **R3** historia 100 % en base / **R4** 0 microtransacciones; §8 «Lo que NO se hace»; `principios.json` → `salud_jugador.no_pay2win/no_lootbox` |
 | **No depender de servicios externos sin plan de contingencia** | `[?]` | Evidencia mixta y **error de categoría**: (a) el lado proyecto **sí** tiene plan de contingencia (`107-Backups/03-Diseno.md` §10, 4 escenarios de desastre con verificación); (b) pero el principio en M152 §4 se define como «el juego debe funcionar sin conexión» y la integración declarada es **M107**, que es de **backups del proyecto** (git/Drive/proyectos DAW), no del juego; (c) `77-Online-Y-Red/03-Diseno.md` §1 declara «**No hay código de red en v1**» y §4 «el save local (M59) sigue siendo la fuente single-player» → el juego **sí** es offline-first, pero eso no está conectado a M152; (d) `59-Guardado/03-Diseno.md` §4 promete «M107 Backups 3-2-1 externos» para **saves**, y el `03-Diseno.md` de M107 **no menciona saves en ningún momento** → contrato declarado y roto. |

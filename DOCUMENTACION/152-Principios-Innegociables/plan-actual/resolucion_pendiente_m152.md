@@ -65,6 +65,14 @@ espacial en `historia_principal.json`). space-bunny dejó el plan de cierre (tar
 decisión de cerrar D-R2 como justificada-parcial es del fundador** → ese `[?]` se mantiene
 (`- [?] No ampliar el mapa...`), con la propuesta P1/P2/P3 ya documentada. No se simula aprobación.
 
+> ⚡ **Cierre (2026-10-05, Log 1313):** el **fundador APROBÓ la ampliación parcial** (2 de 3
+> patas del plan P1/P2/P3) — decisión relayed por el director (canal `agnes-3-flash` archivo 38).
+> El `[?]` D-R2 se cierra como `[x]` **por decisión del fundador, NO por análisis mío** (registro
+> de gobernanza, coherente con "no simular aprobación"). Quedan las tareas P1/P2/P3 como
+> deuda de M22/M160/M167 (anclaje espacial de misiones), fuera de M152. M152 pasa a **202/202 ·
+> 0 `[?]`**, y el **✅ final depende de la QA §21.8 de Hy3 (T-H5)** — no lo sello yo (autor del
+> avance). El módulo sigue `🟡` hasta ese sello.
+
 ## 6. Pair programming / Knowledge sharing (Familia L) — decisión de alcance
 
 Este proyecto es **1 humano + agentes de IA**. El "pair programming" en el sentido tradicional
