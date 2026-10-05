@@ -13,7 +13,7 @@
 *.uid
 
 # Godot — addons (se instalan via AssetLib, no se versionan)
-# Excepcion: el addon voxel SI se versiona (decision del fundador, Log 1306):
+# Excepcion: el addon voxel SI se versiona (decision del fundador, Log 1312):
 # CI necesita el .so de Linux o el linter y las suites voxel-dependientes no compilan.
 # El patron con barra final (addons/) impide re-incluir; por eso se excluye el
 # CONTENIDO (addons/*) y se negativiza solo este subdirectorio.

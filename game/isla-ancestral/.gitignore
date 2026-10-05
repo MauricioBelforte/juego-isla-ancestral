@@ -39,7 +39,7 @@ Thumbs.db
 
 # GDExtension binaries (instalar desde Godot Asset Library, no versionar)
 # Excepcion: el addon voxel SI se versiona con sus binarios (decision del fundador,
-# Log 1306). Sin el .so de Linux, el linter y las suites voxel-dependientes no
+# Log 1312). Sin el .so de Linux, el linter y las suites voxel-dependientes no
 # compilan en CI (cascada voxel, diagnosticado en el frente de CI).
 addons/*/bin/
 !addons/zylann.voxel/bin/
