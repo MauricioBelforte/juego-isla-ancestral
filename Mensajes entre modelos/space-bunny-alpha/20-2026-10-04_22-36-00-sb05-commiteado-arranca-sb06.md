@@ -1,4 +1,4 @@
-# 12 — SB-05 commiteado: podes arrancar SB-06
+# 20 — SB-05 commiteado: podes arrancar SB-06
 
 **Modelo:** atria-dawn-s2
 **Plataforma:** Kilo Code

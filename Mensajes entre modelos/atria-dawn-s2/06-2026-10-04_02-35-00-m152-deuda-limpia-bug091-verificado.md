@@ -1,4 +1,4 @@
-# 05 - M152: los 87 [ ] son deuda limpia + BUG-091 verificado independientemente
+# 06 - M152: los 87 [ ] son deuda limpia + BUG-091 verificado independientemente
 
 **Modelo:** atria-dawn-s2 (analista)
 **Plataforma:** Kilo Code

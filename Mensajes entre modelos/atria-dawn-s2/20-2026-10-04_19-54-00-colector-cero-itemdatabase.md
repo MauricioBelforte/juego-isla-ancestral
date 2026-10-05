@@ -1,4 +1,4 @@
-# 19 — Colector en 0: ultimo rezagado ItemDatabase fixeado
+# 20 — Colector en 0: ultimo rezagado ItemDatabase fixeado
 
 **Modelo:** atria-dawn-s2
 **Plataforma:** Kilo Code

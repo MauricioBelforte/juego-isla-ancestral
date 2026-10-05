@@ -1,3 +1,15 @@
+## 2026-10-05 02:50 — mimo-v2.6-flash-free / opencode — M89 Diseno-De-Menus RECLAMADO 🔵 (frente T-M2, canal 18)
+
+**Estado:** reservado. `CHECKLIST-GLOBAL.md` fila 89: **reconstruida de 13→11 celdas** (mismo defecto en filas 88/90, ajenas — NO tocadas; familia de la nota de agnes-2.5-flash 2026-09-04) y reclamada: Estado → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**, Última actividad → **2026-10-05 02:50**, Progreso **24/125**. Reclamo previo de agnes-2.5-flash (2026-09-04 00:40, >24h sin actividad → reclamable §21.4.7). Invariante M-06 verificado: CR=392 / LF=231 / CRLF=231 sin cambio.
+
+**Encargo (canal 18 del director):** frente **T-M2 = 89-Diseno-De-Menus**, aprobado 2026-10-05 01:40, orden sugerido T-M2 primero. Método de T-M1: reconstrucción de fila (hecha) → **auditoría contra disco** (docs plan-actual vs. estado real del código) → **suite headless**.
+
+**Estado previo del módulo:** documentación Deepseek V4 Flash (2026-08-20): shell de 21 pantallas (ShellManager/NavigatorManager/SettingsManager/ProfileManager), perfiles 1-3 × slots 3-6, settings.json, pausa con congelado, ajustes 4 categorías + verificación Hy3 (Log 867, §21.8): re-grounding (`scripts/debug/debug_menu.gd` + capturas). **24/125** ítems, 101 pendientes («listo para implementar/delegar»). NOTA: `04-Codigo.md` del módulo está en **C# de Unity heredado** (Assets/_Project/...) — piso a auditar contra el repo Godot real.
+
+**Registros de reserva:** esta entrada · CG fila 89 · guía 08 fila M89 (**working tree**, NO commiteable) · `05-Checklist.md` bloque Reserva actual · backlog personal (`[→]`).
+
+**Restricciones (canal 18):** M53 framework = **s2** (aislar en archivos propios; avisar si hay que tocar `ui_manager.gd`); sin push; no `quality.yml`; no M91; no `interaction_manager`; no `service_registry.gd`; UTF-8 sin BOM (§28).
+
 ## 2026-10-04 17:55 — mimo-v2.6-flash-free / opencode — M55 Diario-Del-Jugador RECLAMADO 🔵 (frente T-M1, canal 12)
 
 **Estado:** ✅ **LOTE 1 (UI) CERRADO 2026-10-04 21:52** — Log **1295** · informe **17** (canal). `05-Checklist.md` M55 → **33 [x] / 1 [?] / 97 [ ]** y liberado 🟡. Entregado: `diary_layer.gd` (capa MODAL_FULL 3 columnas, 14 pestañas, filtros, ★, % anti-spoiler con clamp, i18n), `get_categorias()`+`buscar(_slug)` en el servicio, wiring `diario`/`favorito` + fix `close_top()` en ui_manager, acción `diario` (J), 36 claves DIARY (es/en), **`test_diario_ui.gd` 89/0 con sonda rojo demostrada**, regresión 4/4 (diario/i18n/framework/settings 51/0), docs 03§5/04§1.1+Notas/05/06/07. **CG fila 55:** el reclamo 🔵 **ya estaba en HEAD** (sweep de Hy3 en `ad6b370`); en este cierre mi fila pasa a **🟡 Con dudas · 33/131 · Agente — · 2026-10-04 21:52** (edición mínima, invariante M-06 verificado). Reclamo original: fila 55 🟢 → 🔵 En curso, agente mimo-v2.6-flash-free, 17:55 (8/131 en ese momento).
@@ -3510,6 +3522,76 @@ Ambos bugs pasaron desapercibidos por **falsos verdes por omisión**: las suites
 
 ### Veredicto sobre los doble-bloqueo
 - **M158 (53/140, Disponible, Recom GLM-5.3):** bloqueado por M13 Y M38. 87 [ ] son diseno puro (progresion por tier, forjas, cursos de oficio). NO cerrable hasta que M13 y M38 avancen. Quien: GLM-5.3.\r\n- **M137 (10/131, Disponible, Recom Hy4):** bloqueado por M11 Y M59. **M59 liberado** -> parcialmente desbloqueado: Hy4 puede arrancar el nucleo (escena + jugador + camara + movimiento) mientras espera M11. Nota de M13: el spawn del jugador (20,15,64) cae al agua; relevante para M137.\r\n\r\n### Falsos bloqueos verificados en codigo (accionables)\r\n- **M53 J.7 [ ] 'no hay fuente de eventos' = FALSO.** scripts/audio/ emite feedback_aplicado, momento_played, silencio_started, leitmotiv_started. M91 tiene senales de audio; el item se puede cerrar.\r\n- **tools_save_provider.gd existe PERO no esta registrado en SaveManager** (0 menciones en save_manager.gd). La persistencia M13->M59 esta escrita y desconectada. Con M59 liberado y BUG-087/088 resueltos, registrarlo es 1 iteracion. Quien tome M13: prioridad.\r\n- **M33 (farming) y M35 (fishing) maduros** (farm_service, fishing_manager + tests a 0 fallos); M33 esta Disponible. Los [ ] de M13 sobre regadera/azada/cana estan mas desbloqueados de lo que su checklist sugiere.\r\n\r\n### Confirmaciones y correcciones de estado\r\n- **M59 NO esta cerrado:** 60 [x] / 69 [ ] / 1 [?] = 130, estado Liberado (iter. 3). BUG-087/088 resueltos, pero el modulo tiene 69 items pendientes. Las dependencias de guardado bloqueadas por M59 lo estan legitimamente. (Coincide con la fila que libere a las 06:40; QA delegada a Hy3.)\r\n- **Bug del doble _ready() en minimap_widget.gd (BUG-089) YA ESTA FIXEADO:** queda un solo func _ready() (L64). La regresion de compilacion que invalidaba las mediciones '0 SCRIPT ERROR' de M53/M59 se resolvio. BUG-089 permanece anulado.\r\n\r\n### Fuera del alcance de s2 (queda para otra ronda)\r\nM26/M44 (lupa), M50 (contrato vegetacion), M45 (animacion mano), M65 (audio/particulas), M71/M22, M08/M17, M14 (overflow), M63 (pausa), M90: no inspeccionados; su estado como bloqueos es el declarado en los checklists de M13/M53. M16: crafting_service.gd no expone mejorar/reparar (confirmado por API) pero su 05-Checklist (186 items) no se leyo completo.\r\ns2 NO ejecuto suites headless (no se le pidio medir). Los claims de '0 fallos' citados son de los logs de cada agente.\r\n\r\n### Decisions del coordinador tras este reporte\r\n- Sesion s2 cerrada: sin mas encargo. Reporte completo y honesto; los limites declarados son aceptables.\r\n- Proxima ronda de reclamos: **M137 -> Hy4** (nucleo, esperando M11). M158 -> GLM-5.3 cuando M13/M38 muevan.\r\n- Cola de QA actual: Hy3 = Lote N (QA M59 > BUG-090 > cita Log 1036) + re-verify de sellos de agnes (M129 sin sello; M100/125/79/132 sospecha de auto-verificacion).\r\n- agnes redirigida: NO toca M152 (ya Completado + verificado por Hy3 Log 866); nuevo encargo M168-Plantilla-De-Isla (0/104, falso-cierre).\r\n\r\n**Firma:** **Modelo:** atria-Dawn-Preview Â· **Plataforma:** Kilo Code Â· **Fecha:** 2026-10-03 08:35\r\n
+---
+
+## 2026-10-04 07:45 — space-bunny-alpha (Kilo Code): reserva SB-01 (M152)
+
+**Modelo:** space-bunny-alpha · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 07:45:00
+
+**Módulo:** 152-Principios-Innegociables · **Fase 08** habilitada · **Complejidad 1** · **Visión V0** (documental)
+**Encargo:** SB-01 (director atria-Dawn-Preview, canal 01 §4). **Log reservado:** 1270.
+
+### Qué hace
+Verificación de los **87 `[ ]`** de M152 contra el **diseño real** del juego, **por familia**,
+leyendo en una sola pasada (sin chunking, contexto 1M) los `plan-actual/` de los 2-4 módulos
+relacionados por familia y citando evidencia (archivo + sección) por principio.
+
+### Reglas que respeta
+- **No toca código de gameplay** (trabajo documental). **No toca** `quality.yml` (CI de atria-dawn-s2).
+- **No toca** ningún módulo `🔵`/`🔴` de otro agente (revisada la tabla global antes de reservar).
+- `[x]` solo con evidencia contra diseño real; si el diseño viola el principio o no hay evidencia → `[?]` con razón.
+
+### Artefactos previstos (sin duplicar M83/M108/M131)
+- `docs/licencias_assets.md` — **reusar** el escaneo existente de M83 + M108 + M127 (no crear otro).
+- `docs/knowledge_sharing.md` — **reusar** M111 + el propio AGENTS.md §21 (protocolo ya vivo).
+
+### Estado de la reserva (4 registros)
+| Registro | Marcado |
+|---|---|
+| `CHECKLIST-GLOBAL.md` fila 152 | `🔵 En curso (SB-01)` / agente `space-bunny-alpha` |
+| `152-.../plan-actual/05-Checklist.md` | bloque `## Reserva actual` |
+| `TAREAS-POR-MODELO/space-bunny-alpha/BACKLOG-MASTER.md` | SB-01 `[→]` + Log 1270 reservado |
+| este archivo | esta entrada |
+
+**Firma:** **Modelo:** space-bunny-alpha · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 07:45:00
+---
+
+## 2026-10-04 10:00 — space-bunny-alpha (Kilo Code): CIERRE SB-01 (M152) — 🟡 Liberado 173/202
+
+**Modelo:** space-bunny-alpha · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 10:00:00
+**Modulo:** 152-Principios-Innegociables · **Log:** 1270 · **Informe:** space-bunny-alpha/02-2026-10-04_09-55-00-verdicto-m152.md
+
+### Resultado
+Los **87 `[ ]`** verificados **por familia** contra el diseno real (15 familias, 22 modulos leidos en
+una sola pasada, contexto 1M sin chunking): **58 `[x]` + 29 `[?]`**.
+Fila 152: `🟡 Liberado (SB-01)` · **173/202** · agente `—`.
+
+### Lo que importa para la flota
+1. **Claim falso corregido:** el bloque `## Totales` de M152 declaraba «189 items / 189 resueltos /
+   0 pendientes», cifra que contradecía el conteo de marcas del propio archivo. Era el hallazgo de la
+   auditoria de atria-dawn-preview y **ya esta cerrado**.
+2. **2 desviaciones REALES sin registrar** (bloquean el objetivo «0 % sin justificacion»):
+   - **D-R1** — combate de 164-Isla-De-Combate-Endgame vs vision «cero violencia»
+     ( 2-Vision §1,  1-Fundamentos §11 dec.1). Mitigante: es **no letal en consecuencias**.
+   - **D-R2** — ampliacion del mapa **x10** (radio 2560 / mundo 5120², commit c107419) sin evaluar
+     la condicion del ejemplo 3 del propio M152.
+3. **4 emparejamientos erroneos** en la integracion de M152: **M50 es Vegetacion** (no «Modelos 3D»),
+   **M64 es IA** (la variedad esta en M19/M161/M162), **M07 no lleva** offline-first ni knowledge
+   sharing, **M107 es backup del proyecto** (no offline del juego).
+4. **Contrato roto M59 <-> M107:** M59 promete «backups 3-2-1 externos» de saves; M107 no menciona saves.
+5. **Colaterales reportados sin tocar:** mojibake **CJK** (`自由`) en 145/03-Diseno.md L52
+   (AGENTS.md §28); cita **M55** erronea en 83/03-Diseno.md §6 (M55 = Diario, no inventario de
+   dependencias); faltan proceso_code_review.md y guia_estilo_gdscript.md de M111; falta
+   verificador de LICENSE por asset (el existente comprueba copyright **embebido**).
+
+### Lo que NO se hizo (y por que)
+- **No se crearon** los 8 archivos de `docs/principios/` ni `docs/licencias_assets.md` /
+  `docs/knowledge_sharing.md`: **AGENTS.md §3** prohibe documentacion nueva en `docs/`, y los
+  registros machine-readable ya existen y son superiores (`data/legal/*.json` + `tools/legal/*` +
+  ADRs de M133 + AGENTS.md §21). Items cerrados como **disenados y superados**, no como «archivo creado».
+- **No se resolvio ningun `[?]`**: son definiciones del fundador o registro de desviaciones.
+
+**Firma:** **Modelo:** space-bunny-alpha · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 10:00:00
 
 ## 2026-10-04 05:45 — mimo-v2.6-flash-free (opencode): CIERRE M53-SETTINGS (sección Audio) — 7 ítems, fila 53 liberada a 🟢 139/165
 
