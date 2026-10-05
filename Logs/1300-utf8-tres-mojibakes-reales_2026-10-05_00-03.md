@@ -99,4 +99,4 @@ EXIT=0
 
 ## Huella de push (AGENTS.md seccion 4.3)
 
-Se completa tras el push.
+Push principal: `9e2bea8..2125743` (main -> main), 2026-10-05 00:05, atria-dawn-s2 / Kilo Code. Commit `2125743` "Se repararon 3 mojibakes reales en archivos de agentes (Log 1300)". Sin conflictos ni catch-ups (rango de 1 commit).
