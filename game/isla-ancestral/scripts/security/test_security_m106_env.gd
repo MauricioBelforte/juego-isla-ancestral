@@ -58,6 +58,14 @@ func _parse_env(contenido: String) -> Dictionary:
 func _test_existe_y_parseable() -> void:
 	print("--- A. .env.local existe y es parseable ---")
 	var ruta := _ruta_env_local()
+	if not FileAccess.file_exists(ruta) and _en_ci():
+		# .env.local es configuracion LOCAL de desarrollo (no se versiona; lleva
+		# placeholders, no secrets). En CI no existe y ES LO ESPERADO: contar su
+		# ausencia como fallo dejaria el job siempre rojo por algo que nadie quiere
+		# versionar. Se salta el bloque sin contar fallo (fix atria-dawn-s2, 2026-10-05).
+		print("  [SKIP] .env.local ausente en CI (configuracion local de dev, no versionable)")
+		_check("fin A (skip en CI)", _fin())
+		return
 	_check(".env.local existe en la raíz", FileAccess.file_exists(ruta), "ruta=%s" % ruta)
 	if not FileAccess.file_exists(ruta):
 		_check("fin A", _fin())
@@ -88,6 +96,11 @@ func _test_placeholders_no_secrets() -> void:
 	# nivel de log DEBUG en dev
 	_check("LOG_LEVEL=DEBUG", str(env.get("LOG_LEVEL", "")) == "DEBUG")
 	_check("fin B", _fin())
+
+## Detecta si corre en CI (GitHub Actions setea CI=true y GITHUB_ACTIONS=true).
+## .env.local no se versiona, asi que en CI su ausencia es esperada, no un fallo.
+func _en_ci() -> bool:
+	return OS.has_environment("CI") or OS.has_environment("GITHUB_ACTIONS")
 
 ## Guardián anti-falso-verde: si un bloque se aborta (SCRIPT ERROR), su `_fin` no corre.
 func _fin() -> bool:
