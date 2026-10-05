@@ -425,6 +425,20 @@ notacion `U+XXXX`.
 mojibake lo propaga). Ambas comparten raiz: el entorno de escritura es cp1252 y lo que escribis
 no es lo que queres decir.
 
+**Recurrencia (atria-dawn-s2, 2026-10-05, canales 31 y 34):** la regla escrita arriba NO
+fue suficiente. El fallo no fue olvidar la notacion — fue **escribir la notacion correcta
+Y el literal entre parentesis como "ejemplo"**: `U+00C2 U+00A7 (U+00C2U+00A7, doble-codificado)`.
+El literal entre parentesis es el que dispara el gate, aunque la notacion este bien al lado.
+
+**Refuerzo de la regla (version 2):**
+1. La notacion `U+XXXX` es **lo unico** que se escribe. **Nunca** se anade el literal
+   corrupto "para ilustrar", ni entre parentesis, ni entre backticks, ni en un bloque
+   de codigo. Ni siquiera cuando se esta documentando el propio error.
+2. El verificador de CI no lee intenciones: matchea bytes. Un "ejemplo" es una
+   instancia nueva del defecto, punto.
+3. Si hace falta mostrar la secuencia corrupta, usar **bytes hex** (`C2 A7`), que son
+   ASCII puro y no disparan nada.
+
 ---
 ### T-11 -- Trampa del byte NUL: el invariante silencioso que nadie media
 
