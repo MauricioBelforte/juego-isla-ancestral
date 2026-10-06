@@ -172,12 +172,218 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-098 | **BUG-091 residuo: los 44 SCRIPT ERROR restantes** (frente del director, mensaje 18 d). Clasificados por familia: **11** autoload bare-identifier (EventBus x5, ServiceRegistry x2, MundoRaiz x2, ItemDatabase x1, GameLogger x1) + **1** cascada + **6** `CollectibleCategory` sin `class_name` + **13** `Cannot infer` + **4** `Warning treated as error` + **2** `AutoAdvanceManager` + **3** inner-class colisiona con `class_name` global + **3** funcion inexistente (`setdefault`/`autoload`/`add_child`) + **1** return-type. **42 fixeados; 1 delegado (agnes/BUG-095); 1 cascada dependiente; 0 falsos de `--script`.** Colector 44 -> 2; full load 0; M167 30/0 | transversal (BUG-091) | 🔴 Crítico | [x] **Resuelto en zona propia** (DeepSeek-V4.1-Flash, Log 1277) — residuo = `inventario_service.gd:171` (agnes) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-101 | **BUG REAL DE PRODUCTO (dormido, API muerta)**: `item_database.gd` (M159) poblaba `_by_category`/`_by_rarity`/`_by_fuente` con `Array` **sin tipar**, pero los getters declaran `-> Array[ItemData]` -> en Godot 4.7 la conversion implicita FALLA en runtime (`Trying to assign an array of type "Array" to a variable of type "Array[ItemData]"`) y `get_items_by_category()`/`get_items_by_rarity()`/`get_items_by_source()` devolvian **SIEMPRE vacio** desde el commit inicial `4234bca`. **0 consumidores en produccion** (unico llamador: `test_item_data.gd`). Medido: `_by_category[5]`=10 items pero `get_items_by_category(COCINA)`=0 pre-fix / 10 post-fix; `get_items_by_rarity(COMUN)`=0 / 78. Descubierto por DeepSeek-V4.1-Flash en T-D3 (Log 1288) | M159 (`scripts/data/item_database.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1288) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-102 | **BUG REAL DE PRODUCTO (dormido)**: `dlc_manager.gd` (M120) `es_compatible()` comparaba versiones como STRINGS -> `"1.10.0" >= "1.9.0"` = **false** (lexicografico). Un DLC que exige version >= 1.9.0 se reportaba INCOMPATIBLE con la base 1.10.0 (y al reves). Ademas `_activos` (DLCs activados) **NO se persistia**: activar un DLC, guardar y cargar lo perdia (el item de checklist "Activar/desactivar DLC con persistencia [M]" estaba marcado [x] sin respaldo). Descubierto y resuelto por DeepSeek-V4.1-Flash en T-D5 (Log 1291) | M120 (`scripts/dlc/dlc_manager.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1291) | DeepSeek-V4.1-Flash | 2026-10-04 |
+| BUG-103 | 3 logs de agosto escritos en cp1252 (no UTF-8): ilegibles para cualquier gate | Transversal / AGENTS.md §28 | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1296) | 2026-10-05 |
+| BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1310) | 2026-10-05 |
+| BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [~] Diagnóstico hecho (A/B), fix sin confirmar | space-bunny-alpha (Log 1310) | 2026-10-05 |
+| BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
 
 ## 6. Bugs Abiertos (pendientes)
 
 > Checklist vivo: `[ ]` = abierto, `[→]` = en progreso (indicar quién lo trabaja). Aquí se agregan los bugs nuevos con la plantilla de la sección 4.
 
 <!-- ================= BUGS NUEVOS: agregar debajo de esta línea ================= -->
+### BUG-104 — Dos autoloads apuntan al mismo archivo base en carpetas duplicadas
+
+- **Fecha de reporte:** 2026-10-05 05:40
+- **Módulo(s) afectado(s):** M87-Localizacion + boot del proyecto. Archivos:
+  `game/isla-ancestral/scripts/localization/localization_manager.gd` y
+  `game/isla-ancestral/scripts/localizacion/localization_manager.gd`
+- **Severidad:** 🟡 **Menor.** No rompe el boot (el juego arranca con los dos). Es deuda
+  estructural: dos nombres de autoload (`Localization` y `LocalizationManager`) sobre el **mismo
+  nombre de archivo** en **dos carpetas que difieren solo por el idioma** (`localization` en
+  inglés, `localizacion` en español). Eso es la firma de un **merge descuidado**, y cualquiera de
+  los dos puede quedar desactualizado sin que nada lo advierta.
+- **Evidencia** (medida, no supuesta) — leída de `project.godot`, sección `[autoload]`:
+
+  | Autoload | Ruta |
+  |---|---|
+  | `Localization` | `res://scripts/localization/localization_manager.gd` |
+  | `LocalizationManager` | `res://scripts/localizacion/localization_manager.gd` |
+
+  Detectado por el validador de autoloads de SB-08
+  (`scripts/validadores/validador_autoloads.gd`), que reporta aparte las rutas compartidas por mas
+  de un autoload. Los **dos** compilan y los **dos** resuelven (114/114 OK), asi que **esto NO es un
+  fallo de boot**: es duplicacion.
+- **Como reproducir:**
+  ```bash
+  "C:\Temp\godot\Godot_v4.7.2-stable_win64_console.exe" --headless \
+      --path game/isla-ancestral --script scripts/validadores/validador_autoloads.gd
+  # ver seccion "AVISO — N ruta(s) compartida(s) por mas de un autoload"
+  ```
+  O directo: `grep -n "localizacion" game/isla-ancestral/project.godot`
+- **Pregunta que NO respondo (no me corresponde):** ¿son dos capas legitimas (p.ej. una fachada y
+  una implementacion) o un duplicado? **No lo toco porque no lo sé**, y adivinar seria crear el
+  bug. Los dos archivos son distintos (distinto directorio) — hay que compararlos.
+- **Estado:** [ ] **Abierto.** No Registrado por un agente, sin tocar codigo.
+- **Reportado por:** space-bunny-alpha (Kilo Code) — SB-08/SB-11. El director pidio registrarlo y
+  derivarlo al dueno (probablemente M87) en el canal 18.
+
+---
+
+### BUG-105 — El agua se renderiza BLANCA, no azul
+
+- **Fecha de reporte:** 2026-10-05 05:40
+- **Módulo(s) afectado(s):** M08 (Terreno) / M167 (Isla Raiz) — renderizado del terreno.
+  **Dueño por determinar** (el director lo deriva).
+- **Severidad:** 🟠 **Mayor.** No rompe la mecanica, pero **rompe la legibilidad del mundo**: en una
+  isla cuya identidad visual es agua turquesa rodeando un interior (paleta Maldivas, segun
+  M167), el agua blanca cambia la lectura completa de la isla y oculta el limite
+  tierra/agua — que es informacion de gameplay (borde del mapa, playa).
+- **Evidencia:** captura de pantalla real del juego en marcha
+  (`%TEMP%\sb09_01_viewport_inicial.png`, 111.386 bytes). Se observa que la franja de agua en el
+  borde superior izquierdo y el lateral izquierdo se renderizan **blancos / grisáceos**, cuando el
+  resto de la paleta (pradera verde claro, verde oscuro, arena) si esta aplicada.
+- **Como reproducir:**
+  1. `Godot_v4.7.2-stable_win64.exe --path game/isla-ancestral`
+  2. Mirar el borde superior izquierdo del viewport: el agua es blanca.
+- **Lo que NO afirmo:** **no sé la causa.** Puede ser (a) agua sin texturizar, (b) material con
+  albedo por defecto, (c) niebla/nieve, (d) el voxel de agua no tiene emisive propio y recibe la
+  luz del cielo de forma saturada. **Es una hipótesis de lectura de pantalla, no un diagnóstico.**
+  Confirmarlo requiere leer el material/mesh del agua (M08/M50) o ver la escena con el editor.
+- **Estado:** [ ] **Abierto.** Derivado por el director al dueno del terreno.
+- **Reportado por:** space-bunny-alpha (Kilo Code) — SB-09, con la captura adjunta como evidencia.
+
+#### DIAGNÓSTICO (SB-14 / C3, 2026-10-05, Log 1326) — **el agua blanca la produce el SHADER**
+
+> ⚠️ **Actualización:** la hipótesis inicial de este bug («albedo/textura») era **incorrecta**.
+> Medido y confirmado por A/B controlado.
+
+**Hechos medidos en runtime** (sonda headless que instancia `main_island.tscn`):
+
+| Nodo | y | Tamaño | Material | Color medido |
+|---|---:|---|---|---|
+| `AguaAnimada` | 4.05 | 6200×6200 | **ShaderMaterial** (`agua_olas.gdshader`, M51) | uniforms **por defecto** |
+| `Oceano` | 1.20 | 4096×4096 | StandardMaterial3D | albedo **(0.08, 0.35, 0.62)** azul profundo |
+| `BaseArenaBlancaIsla` | 2.95 | cilindro **r=242** | StandardMaterial3D | albedo (0.96, 0.94, 0.88) blanco cálido |
+
+**Prueba que decide (una sola variable, sin tocar producción):**
+ocultando **solo** `AguaAnimada`, la banda que era **blanco** pasa a **azul claro**.
+
+| Captura | La misma banda |
+|---|---|
+| antes (juego normal) | **blanco** (23,0 % de la pantalla, RGB 228/234/241, **R−B = −14**, frío) |
+| test (`AguaAnimada` oculto) | **azul claro** |
+
+**Conclusión:** el blanco **lo introduce el shader `agua_olas.gdshader`**. El color es **frío**, lo
+que descarta al disco de arena (cálido, R−B ≈ +9) y apunta a `color_espuma = vec4(0.92,0.97,1.0,0.85)`.
+
+**Descartado por medición (no por suposición):**
+- El shader **sí** está aplicado (a `AguaAnimada`, no al `Oceano`).
+- **`hint_depth_texture` sí funciona**: el proyecto usa el renderer por defecto `forward_plus`.
+  Se descartó la hipótesis «no hay depth texture».
+- El disco `BaseArenaBlancaIsla` quedó en **r=242** (radio viejo, **no** reescalado en la
+  ampliación ×10 con isla 2560). **No es la causa de este bug** (el A/B lo descarta), pero queda
+  anotado como **deuda menor**: un disco de arena de 242 en una isla de 2560 es geometría
+  enterrada.
+
+**Hipótesis acotada, NO confirmada:** el shader mide
+`profundidad_agua = VERTEX.z - fondo_view.z` (L53) contra el `depth_texture`. El plano está en
+y=4.05 y `agua_animada.gd:15-17` lo coloca «ENCIMA del top del agua **voxel** (4.0)». Si los tiles
+de agua voxel son geometría opaca, el shader mide **la superficie voxel justo debajo** (caída
+0,05 m) y no el fondo del océano (y=1.20). Con `profundidad_agua ≈ 0` → `costa = 1` →
+`espuma_orilla ≈ 1` → `ALBEDO = mix(albedo, blanco, espuma*0.85)` ≈ blanco.
+
+**Para confirmar harían falta dos tests que NO se hicieron:** (a) subir `Y_SUPERFICIE` a 6.0 y
+capturar; (b) volcar `profundidad_agua` a un `COLOR` de debug. **Sin ellos no se afirma la causa
+ni se hace fix.**
+
+**Contribución secundaria:** aun sin el shader, el agua se ve **azul claro** en vez de azul
+profundo, por la **niebla** de `main_island.gd:222-230` (`fog_light_color` 0.75/0.85/0.95,
+`fog_density` 0.00018, `fog_aerial_perspective` 0.4). **No se toca**: está puesta a propósito y
+cambiarla es diseño, no fix.
+
+**Capturas:** `%TEMP%\kilo\sb14_ANTES_agua_blanca.png` y `sb14_TEST_sin_shader.png`.
+**Producción intacta** (`agua_olas.gdshader`, `agua_animada.gd`, `main_island.gd` sin modificar).
+
+**Responsable del fix:** M51 (el shader) — **no** M08 ni `mundo_raiz.gd`, así que no bloquea el
+frente de nadie.
+
+### BUG-103 — 3 logs de agosto escritos en cp1252: ilegibles para todo gate de codificación
+
+- **Fecha de reporte:** 2026-10-05 01:50
+- **Módulo(s) afectado(s):** Transversal — `Logs/`. Detectado por el gate anti-CJK
+  (`scripts/verificar_cjk.py`, SB-06 / Log 1294) alreportarar 3 archivos de texto no UTF-8.
+- **Severidad:** 🟡 **Menor.** No rompe el juego ni el build. Rompe la **verificabilidad**: un
+  archivo que no decodifica no puede ser leído por ninguna herramienta del proyecto, y un gate que
+  los traga en silencio daría un OK falso (trampa 91/100).
+- **Archivos afectados (3):**
+  - `Logs/353-M53-UI-UX-InventoryLayer_2026-08-30_20-25-00.md` — 2.469 bytes, 19 de 51 líneas
+  - `Logs/354-M16-M38-Coste-AO-Crafting_2026-08-30_20-35-00.md` — 1.877 bytes, 15 de 38 líneas
+  - `Logs/358-sincronizacion-doc-vs-codigo-m07-m15-m29-m30-m38-m39-m66_2026-08-30.md` —
+    3.472 bytes, 25 de 64 líneas
+- **Estado:** [ ] **Abierto.** El contenido **NO se pierde**: ver «Causa» — la corrección es un
+  transcodificado sin pérdida, no una recuperación.
+- **Reportado por:** space-bunny-alpha (Kilo Code) — SB-07, Log 1296. El director autorizó
+  explícitamente **borrar** los `_*.txt` de la raíz y_me pidió registrar estos tres como
+  históricos (canal 14).
+
+#### Causa exacta (diagnosticada, no supuesta)
+
+Los 3 archivos están escritos en **cp1252 (Windows-1252)**, no en UTF-8. **No es mojibake**: el
+contenido es español correcto guardado en la codificación equivocada.
+
+| Evidencia | Valor |
+|---|---|
+| Primer byte inválido | `0x97` (guion largo —) en el log 353, offset `0x1F` |
+| Acentos presentes | `0xF3` = ó · `0xED` = í · `0xEA` = é — todos válidos en cp1252 |
+| Decodifica como UTF-8 | **NO** (falla al 0,7 %–1,3 % del archivo) |
+| Decodifica como cp1252 | **SÍ, completo** |
+| Decodifica como latin-1 | **SÍ, completo** |
+| BOM | Ninguno (no es UTF-16 ni UTF-8 con BOM) |
+
+**Origen más probable:** el mismo patrón que documenta la regla T-9 del director
+(`GUIA-COMUNICACION.md`): **redirección `>` de PowerShell**, que escribe en cp1252/UTF-16 segun la
+configuracion. Coincide con la fecha (30 de agosto) y con el hecho de que solo 3 de los ~200 logs
+del repo esten afectados.
+
+#### Por qué NO es «mojibake» y por qué eso importa
+
+AGENTS.md §28.1 advierte que un tramo que no decodifica puede ser **texto legítimo** que hay que
+dejar intacto, y prohíbe usar `errors="replace"` (introduce U+FFFD irrecuperable). Aquí **no hay
+nada que recuperar**: `bytes.decode("cp1252")` funciona y devuelve el español correcto. Por lo tanto
+la corrección es:
+
+```
+python scripts/fix_encoding.py     # el fixer del proyecto (dry-run primero: --dry-run)
+```
+
+que debe **transcodificar cp1252 → UTF-8 sin BOM**. **Precondición para tocarlo:** verificar
+byte a byte que `len(codificar_utf8(decodificar_cp1252(b))) == len(b)` salvo los bytes de
+extensión, y **comparar el texto decodificado contra el original línea por línea** antes de
+escribir. Si el fixer del proyecto no cubre cp1252, hacerlo a mano con `cp1252` explícito (nunca
+`latin-1`, que aceptaría cualquier byte) y sin `errors=`.
+
+#### Riesgo residual
+
+Bajo, pero **no nulo**: si se pasan los archivos por un pipeline que ya interstitial decodifica
+(editor, `git`, Windows), el texto puede doble-decodificarse. **Por eso el orden correcto es
+verificar → transcodificar una sola vez → volver a correr el gate**, y confirmar que
+`verificar_cjk.py` deja de reportarlos.
+
+#### Nota sobre por qué NO los arreglé yo
+
+- El director dijo explícitamente: «los dejo como históricos, pero registrá el hallazgo».
+  Es una decisión suya sobre el archivo, no mía.
+- Además, `fix_encoding.py` es del proyecto compartido y su alcance (¿toca `Logs/`?) no lo
+  verifiqué; no voy a correr un fixer global sin que su dueño lo autorice.
+
+####Cómo reproducir
+
+```bash
+python scripts/verificar_cjk.py --json --sin-bom
+# -> "ilegibles": { "Logs/353-...": "no es UTF-8 valido (byte 31, razon: invalid start byte)", ... }
+
+python -c "print(open(r'Logs/353-M53-UI-UX-InventoryLayer_2026-08-30_20-25-00.md', encoding='utf-8').read()[:40])"
+# -> UnicodeDecodeError: 'utf-8' codec can't decode byte 0x97 in position 31
+```
+
+#### Relacionado
+
+- **AGENTS.md §28** (UTF-8 sin BOM obligatorio) y §28.1 (los 4 errores que ya costaron caro).
+- **BUG-049** — `reservar_log.py` ciego a los números de 1, 2 y 4+ dígitos. Distinto: ese es de
+  *visibilidad* de logs, este es de *codificación*.
+- **SB-06 / Log 1294** — el gate anti-CJK que lo detectó (§4 de ese log).
+
 
 ### BUG-091 — Gate `godot-lint` CIEGO: 73 parse errors reales versionados no detectados + colector obsoleto
 
@@ -2760,6 +2966,10 @@ nada (su entrada ya es 071 canónico).
 
 ## 9. Historial de Modificaciones de Este Archivo
 
+- **2026-10-05 05:40** — **actualizado 2026-10-05 (SB-14/C3, Log 1326):** el blanco lo produce el **shader `agua_olas.gdshader`**, confirmado por A/B controlado; la hipótesis de albedo/textura queda **descartada**. Fix **sin confirmar** (falta el test dirigido). — space-bunny-alpha (Kilo Code, Log 1310, SB-08/SB-09/SB-11): registrados **BUG-104** (autoloads `Localization`/`LocalizationManager` sobre el mismo archivo base en carpetas duplicadas) y **BUG-105** (el agua se renderiza blanca). Ambos **reportados sin tocar codigo**. El finding de los 3 metodos de chequeo de compilacion quedo en `GUIA-GODOT/01-gdscript-errores-comunes.md` §31.
+
+- **2026-10-05 01:50** — space-bunny-alpha (Kilo Code, Log 1296, SB-07): registrado **BUG-103** (3 logs de agosto en cp1252). El gate anti-CJK de SB-06 los detectó al reportar texto no UTF-8; se dejan como históricos por decisión del director (canal 14). Tabla §5 + entrada §6 actualizadas; ninguna marca previa tocada.
+
 | Fecha | Modelo | Plataforma | Resumen del cambio |
 |-------|--------|-----------|--------------------|
 | 2026-09-02 17:45 | Claude | Cline | Creación del documento 11-BUGS.md (propuesta del usuario) |
@@ -4560,7 +4770,7 @@ La lección del clasificador (hy3, Message 6): chequear que el archivo citado ex
 
 #### Por qué importa
 
-Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla la métrica de progreso de M118. Al ser Familia A, la corrección es descartar las marcas (no re-evaluar diseño).
+Un módulo ✅ 106/106 con 4 ítems de despliegue jamás hechos infla métrica de progreso de M118. Al ser Familia A, la corrección es descartar las marcas (no re-evaluar diseño).
 
 #### Estado
 
