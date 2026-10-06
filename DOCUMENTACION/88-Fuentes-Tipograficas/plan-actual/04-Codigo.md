@@ -463,3 +463,38 @@ func apply_high_contrast():
 - Al implementar `FontSettingsMenu` (M90), agregar el cableado al bloque G/H del test nuevo.
 - No confiar en sellos de la fila 88 anteriores al 2026-10-06: los 10 `[x]` de diseño siguen
   vigentes pero los sellos de ejecución ahora tienen re-corrida propia.
+
+## Notas del Agente — Iteración 4 de cierre (mensaje 35)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-06 16:45
+**Estado:** Cerrado — 174 [x] / 11 [?] / 0 [ ] = 185; candidato a ✅ (pendiente QA §21.8)
+
+### Lo que hice
+
+- Cierre de los 166 `[ ]` verificables contra sustento real (detalle y tabla por sección en
+  `05-Checklist.md` §Notas): `02-Analisis.md` §2-16, `03-Diseno.md` §3-14, `theme_ux.gd`,
+  `fonts.json`, disco y suites.
+- 158 `[x]` nuevos con sustento; 8 `[?]` nuevos con dueño (2 fuentes de diseñador sin entregar,
+  5 pruebas visuales bloqueadas por M154, 1 optimización sin herramienta); 3 `[?]` previos intactos.
+- Archivos tocados: `05-Checklist.md` (marcas, reserva, totales, notas), `06-Plan-Testings.md`
+  (CREADO, derivado de 02 §16 / 03 §14). **NO** toqué `theme_ux.gd`, `fonts.json` (restaurado
+  byte-exact tras la sonda), ni nada de M53.
+- Suites re-coradas sin confiar: 11/0 + 22/0 + 43/0, todas exit 0. Sonda de licencia validada
+  con whitelist intacta (exit 1 con "BSD no permitida"); lección: mutar TODAS las ocurrencias
+  de la licencia invalida la sonda (la whitelist mutada la autoriza).
+
+### Lo que NO pude hacer
+
+- Pruebas visuales de legibilidad (720p/1080p/4K/dispositivos): M154 caído, prohibido.
+- Entregar `Nunito-Medium.ttf` / `Nunito-Light.ttf`: requieren al diseñador (dueño humano).
+- Implementar subsetting/WOFF2 (diseñado en 03 §9, sin herramienta): dueño M88 futuro.
+- Limpiar la interferencia de `save_manager.gd` (roto en HEAD por ajeno): distorsiona el
+  exit code de `test_fonts_m88.gd` (-1 en vez de 1) sin bloquear los checks.
+
+### Recomendaciones
+
+- QA §21.8: re-correr 3 suites + sonda (whitelist intacta) + muestrear marcas por sección.
+- Si el director quiere ✅ directo: recordar que §21.6/21.8 piden QA con verificador ≠ mimo.
+- Coordinar con M89 (familia de UI): mismo criterio de cierre, sin tocar M53.
