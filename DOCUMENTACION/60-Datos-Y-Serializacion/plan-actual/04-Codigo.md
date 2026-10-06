@@ -22,7 +22,7 @@ game/isla-ancestral/scripts/datos/
 ├── buildings_save_provider.gd  ← class_name BuildingsSaveProvider (ISaveProvider "buildings") — iter. 3
 ├── gestor_backups.gd           ← class_name GestorBackups (ventana de 3 copias .bak) — iter. 3
 ├── test_datos_m60.gd           ← Test headless de regresión (94 checks, 0 fallos)
-├── test_datos_m60_iter3.gd     ← Test headless iter. 3 (132 checks, 0 fallos)
+├── test_datos_m60_iter3.gd     ← Test headless iter. 3 (134 checks, 0 fallos)
 └── test_datos_m60_iter4.gd     ← Test headless iter. 4 (152 checks, 0 fallos)
 ```
 
@@ -270,13 +270,13 @@ Ventana de copias de seguridad coordinada con M107 (T-075). **No** referencia `W
 - Conectar M17: implementar `obtener_estructuras()`/`restaurar_estructuras()` en el gestor de construcción; el provider ya los detecta sin cambios.
 - M19: alinear la sección `npc` con el schema (BUG-025) o registrar su sección propia en `SaveSchema`.
 - Si `VERSION_ACTUAL` sube: migración NUEVA en `MIGRACIONES`; jamás editar las existentes.
-- Test: `Godot --headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60_iter3.gd` (132 checks). Regresión: `test_datos_m60.gd` (94).
+- Test: `Godot --headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60_iter3.gd` (134 checks). Regresión: `test_datos_m60.gd` (94).
 
 ## Notas del Agente — iter. 4 (2026-09-15)
 
 **Modelo:** DeepSeek-V4.1-Flash · **Plataforma:** WorkBuddy · **Log:** 916
 
-**Contexto.** La auditoría del 2026-09-14 revirtió **todo** el checklist a `0/196` porque `agnes-2.5-flash` había marcado el módulo como completado sin verificación real. La reversión fue correcta en el fondo pero **demasiado ancha**: se llevó también los ítems de las iter. 2 y 3 del propio autor (DeepSeek-V4.1-Flash), que **sí** tenían test headless (94 y 132 checks, verdes hoy). Esta iteración re-marca **selectivamente** con evidencia y cierra los huecos que quedaban sin prueba ejecutable.
+**Contexto.** La auditoría del 2026-09-14 revirtió **todo** el checklist a `0/196` porque `agnes-2.5-flash` había marcado el módulo como completado sin verificación real. La reversión fue correcta en el fondo pero **demasiado ancha**: se llevó también los ítems de las iter. 2 y 3 del propio autor (DeepSeek-V4.1-Flash), que **sí** tenían test headless (94 y 134 checks, verdes hoy). Esta iteración re-marca **selectivamente** con evidencia y cierra los huecos que quedaban sin prueba ejecutable.
 
 ### Lo que hice
 
@@ -331,7 +331,7 @@ Los ítems 32/56/69/194 quedan `[x]` por el lado de M60: las llamadas son correc
 - **BUG-041 (M103) quedó en falso positivo** — no hay nada roto en el logging. Queda como **limpieza opcional de M103**: eliminar `log_buffer`/`_flush()` o alimentarlos de verdad.
 - **M08:** al implementar el contrato de `edits`, cerrar los ítems 115/117 y agregar el log de chunks cargados (122).
 - **Si `VERSION_ACTUAL` sube:** registrar la migración en `MIGRACIONES` usando los patrones nuevos; jamás editar las existentes. La rama de log `migrado vX -> vY` se activará sola.
-- **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (132) · `test_datos_m60_iter4.gd` (152). Los tres deben correr ×3 y con `grep "SCRIPT ERROR"` = 0.
+- **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (134) · `test_datos_m60_iter4.gd` (152). Los tres deben correr ×3 y con `grep "SCRIPT ERROR"` = 0.
 - **Regresión conocida:** `borrar_slot` ahora devuelve `false` para un slot in-range vacío. Si algún consumidor dependía del `true`, debe ajustarse.
 
 ---
@@ -371,4 +371,4 @@ La **primera** versión del arnés medía cada variante **una sola vez y en orde
 ### Recomendaciones para el próximo agente
 - **No reabrir el ítem 168 sin una medición nueva.** El arnés está ahí para eso. Si cambia la forma de los datos (chunks con muchos más vóxeles, payloads mucho más grandes), **re-medir antes de concluir**.
 - **Si algún día se busca un win real en el encoder**, el candidato medido es BULK, pero sólo cuando hay **muchos enteros por chunk**; hoy no es fiable.
-- **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (132) · `test_datos_m60_iter4.gd` (152) · `test_datos_m60_iter5.gd` (40). Los cuatro ×3 y con `grep "SCRIPT ERROR"` = 0.
+- **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (134) · `test_datos_m60_iter4.gd` (152) · `test_datos_m60_iter5.gd` (40). Los cuatro ×3 y con `grep "SCRIPT ERROR"` = 0.

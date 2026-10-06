@@ -8,12 +8,53 @@
 | Suite | Checks | Fallos | Corridas | `SCRIPT ERROR` | Exit |
 |---|---|---|---|---|---|
 | `test_datos_m60.gd` | **94** | **0** | ×3 | 0 | 0 |
-| `test_datos_m60_iter3.gd` | **132** | **0** | ×3 | 0 | 0 |
+| `test_datos_m60_iter3.gd` | **134** | **0** | ×3 | 0 | 0 |
 | `test_datos_m60_iter4.gd` | **152** | **0** | ×3 | 0 | 0 |
-| **TOTAL** | **378** | **0** | 9 corridas | **0** | **0** |
+| **TOTAL** | **380** | **0** | 9 corridas | **0** | **0** |
+
+> **Nota (2026-10-05, T-018):** `iter3` pasó de **132** a **134** checks. El bloque
+> `BuildingsSaveProvider` daba **6 fallos + 1 aborto silencioso** (ver §1-bis): medía el
+> autoload `Construccion` (M17, ya implementado) en vez de su fuente sintética, y al quedar
+> `fake.restauradas` vacío abortaba en `fake.restauradas[0]` (`SCRIPT ERROR: Out of bounds`),
+> descartando 2 checks sin contarlos. Corregido inyectando la fuente + **piso de checks
+> medido** (`CHECKS_MINIMOS := 134`).
 
 Binario: `D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64_console.exe`
 Invocación: `--headless --path game/isla-ancestral --script res://scripts/datos/<suite>.gd`
+
+## 1-bis. Fix del bloque T-018 (2026-10-05) — 6 fallos + un aborto silencioso
+
+Detectado en CI: `test_datos_m60_iter3.gd` daba **6 fallos**. Causa doble, **ambas del test, no
+del código de producción**:
+
+1. **El test medía el autoload, no su fuente.** `BuildingsSaveProvider.fuente()` devuelve el
+   **primer** hijo de `root` que exponga `obtener_estructuras()`. El bloque se escribió cuando M17
+   no existía y agregaba un `FuenteFake` al árbol — pero **M17 sí está implementado**
+   (`scripts/construccion/build_manager.gd`, autoload `Construccion`) y **gana la carrera** en
+   `root.get_children()`. Resultado: `get_save_data()`/`restore_save_data()` operaban sobre el
+   autoload real, no sobre el fake (5 checks en rojo).
+2. **Un aborto silencioso.** Con `fake.restauradas` vacío, la línea `fake.restauradas[0]["pos"]`
+   disparaba `SCRIPT ERROR: Out of bounds get index '0'` → **el helper abortaba y perdía sus 2
+   últimos checks sin contarlos como fallo**.
+
+**Fix (solo el test; producción intacta):**
+
+- Clase `ProviderInyectable extends BuildingsSaveProvider` que **inyecta** la fuente
+  (override de `fuente()`): el bloque queda determinista.
+- **Check nuevo** que documenta el wiring REAL: M17 (autoload `Construccion`) es la fuente por
+  duck-typing y expone ambos métodos.
+- **Piso medido** `CHECKS_MINIMOS := 134`: si un helper aborta y se pierden checks, el resumen
+  pasa a rojo en vez de decir "0 fallos".
+
+**Guardián probado EN ROJO** (inyección de aborto, corridas reales):
+
+| # | Estado | Resultado | Exit |
+|---|---|---|---|
+| 1 | Aborto inyectado + piso presente | `120 checks, 0 fallos` → `FALLIDO — solo 120 checks (piso 134): un bloque aborto en silencio` | **1** |
+| 2 | Aborto inyectado + piso **retirado** (contrafactual) | `120 checks, 0 fallos` → `TEST OK — todos los checks pasaron` | **0 (falso verde)** |
+| 3 | Aborto retirado | `134 checks, 0 fallos` · `OK` | **0** |
+
+Medición ×3 tras el fix: **134 checks, 0 fallos, 0 `SCRIPT ERROR`, exit 0** en las tres.
 
 ## 2. Desglose de la suite iter. 4 (152 checks)
 
@@ -148,5 +189,5 @@ Lo que la suite garantiza de verdad es la **equivalencia** (bloques A-D): si alg
 formato al "optimizar", el arnés lo detecta.
 
 **Regresión del resto del módulo (misma corrida):** `test_datos_m60.gd` **94/0** ·
-`test_datos_m60_iter3.gd` **132/0** · `test_datos_m60_iter4.gd` **152/0** — los tres con 0
+`test_datos_m60_iter3.gd` **134/0** · `test_datos_m60_iter4.gd` **152/0** — los tres con 0
 `SCRIPT ERROR` y exit 0.

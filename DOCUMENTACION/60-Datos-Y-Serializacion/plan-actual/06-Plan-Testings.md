@@ -29,7 +29,7 @@ GODOT="D:/ISLA ANCESTRAL/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win64
 | Suite | Checks | Alcance |
 |---|---|---|
 | `test_datos_m60.gd` | 94 | Núcleo: `Serializer` (JSON/canónico/binario IAVX1), `Validador` (CRC32 + contrato v1), `Versionador` (v0→v1, v1→v2, versión futura), `WriterAtomico` (atómico + `.bak` + restauración), `GestorSlot`, `GestorConfig`, catálogos, DataStore síncrono y **guardado asíncrono** (RF10: cola de profundidad 1, "la última gana") |
-| `test_datos_m60_iter3.gd` | 132 | `EstructurasCodec` (sección `buildings`), `BuildingsSaveProvider`, caracterización de los providers de M19/M36, rotación de backups (ventana 3), compresión ZIP_DEFLATE (bajo/sobre umbral + round-trip), catálogos perezosos (0 Resources en memoria), presupuestos RN medidos, progreso del guardado asíncrono |
+| `test_datos_m60_iter3.gd` | 134 | `EstructurasCodec` (sección `buildings`), `BuildingsSaveProvider`, caracterización de los providers de M19/M36, rotación de backups (ventana 3), compresión ZIP_DEFLATE (bajo/sobre umbral + round-trip), catálogos perezosos (0 Resources en memoria), presupuestos RN medidos, progreso del guardado asíncrono |
 | `test_datos_m60_iter4.gd` | 152 | **Huecos de verificación** que quedaron sin prueba tras la auditoría del 2026-09-14 (ver §3) |
 | `test_datos_m60_iter5.gd` | 40 | **Arnés de evaluación del ítem 168**: equivalencia byte a byte de 3 variantes del encoder binario (contra un oráculo independiente) y de 2 variantes de `a_plano`; reuso anidado, cambios de forma y **sin aliasing**. El bloque E **mide** (informativo, no aserción). Verdicto: la reutilización es 1,08-1,15× más lenta → **no se adoptó** (ver `04-Codigo.md`, iter. 5) |
 

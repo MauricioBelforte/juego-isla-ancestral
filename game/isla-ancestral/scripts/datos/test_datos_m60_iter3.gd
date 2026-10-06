@@ -18,6 +18,17 @@
 
 extends SceneTree
 
+## Piso de checks MEDIDO en verde (134 en 3 corridas, 2026-10-05).
+##
+## Por que existe: un `SCRIPT ERROR` dentro de un helper (p.ej. un
+## `Out of bounds get index '0'` al indexar una lista que resulto vacia) ABORTA
+## ese helper y descarta sus checks restantes SIN contarlos como fallo -> el
+## resumen diria "0 fallos" con cobertura incompleta (falso verde). Medido:
+## el bloque T-018 abortaba en `fake.restauradas[0]` y perdia 2 checks; el
+## resumen seguia diciendo "130 checks" en vez de 132 sin avisar. Este piso lo
+## convierte en rojo.
+const CHECKS_MINIMOS := 134
+
 var _fallos: int = 0
 var _checks: int = 0
 var _progreso_async: Array = []
@@ -40,6 +51,24 @@ class FuenteFake extends Node:
 class FuenteSoloLectura extends Node:
 	func obtener_estructuras() -> Array:
 		return [{"id": "solo_lectura", "tipo": "pared", "pos": [1, 0, 1], "rot_y": 0, "planta": 0, "variante": ""}]
+
+## Provider de prueba: fuente INYECTADA en vez de auto-descubierta.
+##
+## Por que: `BuildingsSaveProvider.fuente()` devuelve el PRIMER hijo de `root`
+## que exponga `obtener_estructuras()`. En el SceneTree real el autoload
+## `Construccion` (M17) SIEMPRE existe y gana esa carrera contra cualquier fake
+## que el test agregue despues -> el test mediria el autoload, no su fuente
+## sintetica (fue el fallo T-018: 6 checks en rojo). Inyectar la fuente hace el
+## bloque determinista SIN tocar produccion; el descubrimiento real se verifica
+## aparte, en el primer check del bloque.
+class ProviderInyectable extends BuildingsSaveProvider:
+	var _fuente_inyectada: Object = null
+
+	func con_fuente(f: Object) -> void:
+		_fuente_inyectada = f
+
+	func fuente() -> Object:
+		return _fuente_inyectada
 
 
 func _init() -> void:
@@ -162,7 +191,20 @@ func _test_estructuras_validar() -> void:
 
 func _test_buildings_provider() -> void:
 	print("--- BuildingsSaveProvider: contrato ISaveProvider ---")
-	var prov := BuildingsSaveProvider.new()
+
+	# 0) Integracion REAL: M17 (autoload Construccion) ya esta implementado y es
+	#    la fuente por duck-typing. Se verifica aqui; el resto del bloque usa una
+	#    fuente INYECTADA para ser determinista (ver ProviderInyectable).
+	var real_fuente := BuildingsSaveProvider.new().fuente()
+	_check("M17 (autoload Construccion) es la fuente real por duck-typing",
+		real_fuente != null and real_fuente.name == "Construccion",
+		"(null)" if real_fuente == null else String(real_fuente.name))
+	_check("la fuente real expone obtener_estructuras y restaurar_estructuras",
+		real_fuente != null and real_fuente.has_method("obtener_estructuras")
+		and real_fuente.has_method("restaurar_estructuras"), "")
+
+	# A partir de aqui: fuente INYECTADA (sin depender de la carrera en root).
+	var prov := ProviderInyectable.new()
 	_check("sección = buildings", prov.get_section_name() == "buildings", prov.get_section_name())
 	_check("sin fuente: sección con default",
 		prov.get_save_data() == {"structures": []}, str(prov.get_save_data()))
@@ -176,6 +218,7 @@ func _test_buildings_provider() -> void:
 		{"id": "muro_01", "tipo": "muro", "pos": [3, 0, 3], "rot_y": 0},
 	]
 	root.add_child(fake)
+	prov.con_fuente(fake)
 	_check("fuente detectada por duck-typing", prov.tiene_fuente())
 	var guardado := prov.get_save_data()
 	_check("get_save_data serializa la fuente",
@@ -208,6 +251,7 @@ func _test_buildings_provider() -> void:
 	await process_frame
 	var solo_lectura := FuenteSoloLectura.new()
 	root.add_child(solo_lectura)
+	prov.con_fuente(solo_lectura)
 	prov.restore_save_data({"structures": [{"id": "z", "pos": [0, 0, 0]}]})
 	_check("fuente sin restaurar_estructuras: no-op sin crash", true)
 	solo_lectura.queue_free()
@@ -571,6 +615,13 @@ func _es_monotonico(vals: Array) -> bool:
 
 func _summary() -> void:
 	print("=== Resumen M60 iter. 3: %d checks, %d fallos ===" % [_checks, _fallos])
+	# Guardia anti-aborto: si un helper murio por un SCRIPT ERROR, sus checks
+	# restantes no se contaron. Un piso medido convierte ese "0 fallos" en rojo.
+	if _checks < CHECKS_MINIMOS:
+		print("TEST M60 iter. 3 FALLIDO — solo %d checks (piso %d): un bloque aborto en silencio"
+			% [_checks, CHECKS_MINIMOS])
+		quit(1)
+		return
 	if _fallos > 0:
 		print("TEST M60 iter. 3 FALLIDO — salida con código 1")
 		quit(1)
