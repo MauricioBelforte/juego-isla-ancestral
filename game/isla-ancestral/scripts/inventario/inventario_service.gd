@@ -397,13 +397,36 @@ func get_save_data() -> Dictionary:
 		datos[str(id)] = contenedores[id].serializar()
 	return datos
 
+## BUG-108: convierte una clave de seccion a id de contenedor SOLO si es un
+## entero valido. Antes `int(id)` mapeaba claves no numericas ("basura",
+## "inventory") a 0 (= BOLSILLO), asi que un save corrupto/ajeno clobbereaba el
+## bolsillo del jugador en silencio. Devuelve -1 si la clave no es un entero.
+func _seccion_a_contenedor(id: Variant) -> int:
+	var t := typeof(id)
+	if t == TYPE_INT:
+		return id
+	if t == TYPE_FLOAT:
+		var f: float = id
+		return int(f) if f == floorf(f) else -1
+	if t == TYPE_STRING:
+		var s: String = id
+		return s.to_int() if s.is_valid_int() else -1
+	return -1
+
 func restore_save_data(data: Dictionary) -> void:
 	for id in data:
-		var c := int(id)
-		if contenedores.has(c):
-			var lista: Variant = data[id]
-			if typeof(lista) == TYPE_ARRAY:
-				contenedores[c].deserializar(lista)
+		var c := _seccion_a_contenedor(id)
+		if c < 0:
+			push_warning("[M59] Clave de seccion invalida '%s' en 'inventory', ignorada" % str(id))
+			continue
+		if not contenedores.has(c):
+			push_warning("[M59] Contenedor desconocido %d en 'inventory', ignorado" % c)
+			continue
+		var lista: Variant = data[id]
+		if typeof(lista) != TYPE_ARRAY:
+			push_warning("[M59] Seccion '%s' no es Array (tipo %d), ignorada" % [str(id), typeof(lista)])
+			continue
+		contenedores[c].deserializar(lista)
 	inventario_actualizado.emit()
 
 ## ── M163: acceso de lectura a slots para UI de encantamiento ──

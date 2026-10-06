@@ -135,6 +135,13 @@ func deserializar(lista: Array) -> void:
 				if slot.cantidad <= 0:
 					push_warning("[M14] Cantidad inválida (%d) para '%s' en slot %d, ignorado" % [slot.cantidad, slot.item_id, idx])
 					continue
+				# BUG-108: acotar al stack_max del item. Un save manipulado/antiguo
+				# podia traer cantidades > stack_max y romper el invariante del
+				# contenedor (validate_quantities existe pero no se llamaba en carga).
+				var tope := _stack_max_de(slot.item_id)
+				if slot.cantidad > tope:
+					push_warning("[M14] Cantidad %d > stack_max %d para '%s' en slot %d, acotada a %d" % [slot.cantidad, tope, slot.item_id, idx, tope])
+					slot.cantidad = tope
 			slots[idx] = slot
 
 ## Valida que todas las cantidades sean legales (≥0, ≤stack_max).
