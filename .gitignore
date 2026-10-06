@@ -19,6 +19,11 @@
 # CONTENIDO (addons/*) y se negativiza solo este subdirectorio.
 game/isla-ancestral/addons/*
 !game/isla-ancestral/addons/zylann.voxel/
+# Excepcion: el framework de testing gdUnit4 SI se versiona (decision del
+# fundador, Log 1368): sin el, CI es irreproducible (los 4 tests que extienden
+# GdUnitTestSuite no resuelven el extends) y M83 cuenta mit=1 cuando hay 2
+# addons MIT. Licencia MIT verificada (Copyright (c) 2023 Mike Schulze).
+!game/isla-ancestral/addons/gdUnit4/
 
 # =============================================
 # Builds
