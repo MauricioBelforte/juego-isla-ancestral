@@ -151,23 +151,34 @@ Consecuencias prácticas:
 `**Responde a:**` apuntando al archivo de contexto (propio o ajeno), y una sección
 `## Pedido a <MODELO>` que diga exactamente qué se necesita y dónde está el contexto.
 
-### Numeración de mensajes: pool GLOBAL (no por carpeta)
+### Numeración de mensajes: pool por CANAL (uno propio por carpeta)
 
-> Cambio de método 2026-10-05 por directiva del usuario (atria-dawn-preview / Kilo Code).
-> Resuelve de raíz la trampa T-8/T-12: las colisiones de numeración.
+> **Cambio de método 2026-10-05 por directiva del usuario** (atria-dawn-preview / Kilo Code).
+> Resuelve de raíz la trampa T-8/T-12: las colisiones de numeración, **sin** sacrificar la
+> legibilidad de los hilos.
 
-**Regla nueva:** el número de un mensaje entre modelos **sale del pool global**
-(`Logs/NUMEROS_DISPONIBLES.txt`), el mismo pool que los logs. No hay numeración por carpeta.
+**Regla:** el número de un mensaje entre modelos sale de **
+`Mensajes entre modelos/<carpeta>/NUMEROS_DISPONIBLES.txt`** — un listado propio de números
+disponibles **para cada canal**. Los **logs** siguen con el pool global
+(`Logs/NUMEROS_DISPONIBLES.txt`); logs y mensajes **no** comparten numeración.
 
-**Por qué:** antes cada carpeta tenía su propia secuencia (01, 02, 03…), y cuando dos agentes
-numeraban a ojo chocaban dentro de la misma carpeta. El pool global es la única fuente de
-números del proyecto: **cada número se consume una sola vez**, así que es imposible que se
-repita en cualquier carpeta. De paso, el número del mensaje coincide con el del log asociado
-(algo que ya hacía DeepSeek de forma natural).
+**Por qué:** antes cada carpeta tenía su propia secuencia (01, 02, 03…) pero **sin listado**: se
+numeraba "a ojo" listando la carpeta, y dos agentes chocaban dentro de la misma carpeta. Con un
+pool **propio por canal**, el número se consume una sola vez en ese canal → imposible repetirlo,
+y el hilo **sigue siendo consecutivo y legible** (01, 02, 03…).
 
-**Consecuencia:** los números dentro de una carpeta **ya no son consecutivos** — están
-intercalados con los de otras carpetas. Eso es esperado y correcto. El orden de un hilo se
-sigue por la **fecha/hora** del nombre y por el campo `**Responde a:**`, no por el número.
+**Historial (2026-10-05, ida y vuelta en el mismo día):**
+- **Mañana:** el fundador pidió que la numeración saliera del **pool global** (mismo pool que los
+  logs) para garantizar unicidad total. Funcionó: cero colisiones. **Pero** los hilos quedaron con
+  numeración alta y saltarina (1331, 1335, 1336, 1347… en la misma carpeta), difícil de leer.
+- **Noche (misma fecha):** el fundador revirtió: **numeración por canal con pool propio**. Los 15
+  mensajes con número global se renumeraron a la secuencia de su canal (T-15), y los números se
+  devolvieron al pool de logs. Los **logs** (Log 1330, 1342, 1344, 1502…) se quedaron con su
+  número global: son del pool de logs.
+
+**Consecuencia:** los números dentro de una carpeta **son consecutivos**. El orden del hilo se
+sigue por el número y, ante cualquier duda, por la **fecha/hora** del nombre y el campo
+`**Responde a:**`.
 
 ### Nombre de archivo: emisor → receptor (directiva del fundador)
 
@@ -218,7 +229,8 @@ python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-
 El script:
 1. verifica que la carpeta del receptor exista (si no, lista las disponibles);
 2. **lista los últimos mensajes** de esa carpeta para que el emisor sepa a cuál responde;
-3. **toma el siguiente número del pool global** y lo borra (consumido para todo el proyecto);
+3. **toma el siguiente número del pool DE ESA CARPETA** (`NUMEROS_DISPONIBLES.txt` del canal) y
+   lo borra (consumido para ese canal);
 4. **crea el archivo** en la carpeta del receptor, con el nombre emisor→receptor y una
    plantilla con `**Modelo:**`, `**Plataforma:**`, `**Fecha:**` y `**Responde a:**` ya puestos.
 
@@ -581,12 +593,105 @@ misma trampa aparece 3 veces, hay que eliminarla estructuralmente.
 un recurso compartido (numeros) con asignacion no atomica.
 
 ---
+
+### T-13 -- Trampa de compartir numero entre log y mensaje
+
+**Caso:** atria-dawn (2026-10-05). Hy3 cerró la re-verificación de M53 con **dos archivos**:
+el mensaje al director (`Mensajes entre modelos/Hy3/1341-...-m53-reverificacion.md`) **y** el log
+de QA (`Logs/1341-hy3-qa21.8-m53-reverificacion_...md`), **ambos con el número 1341**. Hy3
+reservó 1341 con el helper para el mensaje y, al escribir el log, reutilizó el mismo número "porque
+es la misma tarea". El verificador del pool lo marcó como cruce.
+
+**Causa de raiz:** ambigüedad de identificación. Cuando un agente cita "Log 1341" o "mensaje 1341"
+hay que aclarar cuál, y cualquier busqueda por número devuelve dos archivos. El pool unificado
+existe justamente para que un número identifique **una sola cosa**.
+
+**Regla:** **un número del pool = un archivo.** Si una tarea necesita log **y** mensaje, se
+reservan **dos** números (uno para cada). El helper `reservar_mensaje.py` sirve para ambos: toma el
+siguiente número del pool y crea el archivo con la plantilla — también para logs, llamándolo dos
+veces.
+
+**Resolucion del caso:** el log se renombró a **1342** (numero ya consumido del pool y libre de
+archivo), se actualizó el header (`# Log 1342:`) y la unica referencia cruzada (el mensaje que lo
+citaba). Detectado por `scripts/verificar_pool_numeros.py`.
+
+---
+
+### T-14 -- Trampa del pool corrupto: BOM + CRLF hacen invisibles numeros
+
+**Caso:** atria-dawn (2026-10-05). agnes truncó `NUMEROS_DISPONIBLES.txt` con un script y lo
+restauró con `git show HEAD:`. El restore dejó el archivo con **BOM (`EF BB BF`) + CRLF**. DeepSeek
+lo cazó midiendo bytes: `git show HEAD:` daba `31 33 34 31 0A` ("1341\n", sano) y el archivo en
+disco daba `EF BB BF 31 33 34 32 0D` (BOM + "1342\r").
+
+**Consecuencia real:** con el BOM delante, la **primera línea quedaba invisible** para el
+asignador (`isdigit()` falla con `\ufeff1342`) → **hueco fantasma**: al reservar, el helper saltó el
+1342 y consumió el 1343. Además, un agente que leyera "la primera línea" a mano podía tomar un
+número que el script no veía.
+
+**Causa de raiz:** dos vertientes, ambas mías:
+1. El restore de agnes introdujo BOM+CRLF (su plataforma escribe así).
+2. **Mi propio arreglo lo empeoró:** usé
+   `[System.IO.File]::WriteAllLines($p, $out, [System.Text.Encoding]::UTF8)` — ese encoding
+   **escribe BOM**, y `WriteAllLines` usa `Environment.NewLine` (CRLF en Windows). Mi script de
+   borrado del 1502 reintrodujo BOM+CRLF en un pool que DeepSeek había dejado limpio. Regla: para
+   escribir archivos planos en este proyecto desde PowerShell, usar **siempre**
+   `New-Object System.Text.UTF8Encoding($false)` (sin BOM) y normalizar a `\n` explicitamente, o
+   directamente Python con `newline="\n"`.
+
+**Solucion:** `scripts/verificar_pool_numeros.py` ahora valida no solo los cruces sino **la salud
+del propio archivo** (sin BOM, CR=0). Si la verificacion falla, el pool no se puede usar hasta
+normalizarlo (`python scripts/verificar_pool_numeros.py` sale 1).
+
+**Leccion:** el invariante del pool no es solo "los numeros no se repiten" — es también "el
+archivo se lee igual desde cualquier lenguaje". Un BOM es invisible para un humano y mortal para
+un script.
+
+**Familia:** T-11 (byte NUL silencioso) y §28 (codificacion UTF-8 obligatoria). Las tres son
+"invariantes que nadie media hasta que rompen algo".
+
+---
+
+### T-15 -- Trampa del pool global para mensajes: unicidad a costa de legibilidad
+
+**Caso:** atria-dawn (2026-10-05, ida y vuelta en el mismo dia). Por la mañana, para matar las
+colisiones de numeracion (T-8/T-12), pase los mensajes al **pool global** (el mismo de los logs).
+Funciono: cero colisiones. Pero los hilos quedaron asi:
+
+```
+atria-dawn-s2/  1331-...  1335-...  1336-...  1347-...
+Hy3/            1333-...  1339-...  1341-...
+```
+
+Numeros altos y saltarinos **dentro de la misma carpeta**. El fundador lo revirtio esa misma
+noche: *"no me gusta esa numeracion alta"* → **pool por canal**.
+
+**Causa de raiz:** soluciones el mismo problema de dos formas opuestas:
+- Pool global: unicidad total, pero el hilo pierde consecutividad (un hilo se lee
+  1331, 1335, 1336, 1347).
+- Pool por canal sin listado: legible, pero colisiona (T-8/T-12).
+
+**La solucion intermedia (la que quedo):** pool **por canal** con listado propio
+(`NUMEROS_DISPONIBLES.txt` dentro de cada carpeta). Conserva la consecutividad del hilo **y** la
+asignacion atomica del pool. Un numero se consume una sola vez **en ese canal**.
+
+**Migracion (2026-10-05, ejecutada por el director):** los 15 mensajes con numero global se
+renumeraron a la secuencia de su canal por orden cronologico (s2: 37-40, DeepSeek: 41-45,
+Hy3: 47-49, agnes: 48, mimo: 24-25). Las referencias `**Responde a:**` se reescribieron
+automaticamente (script). Los **logs** se quedaron con su numero del pool global (Log 1330, 1342,
+1344, 1502): ellos SI son del pool global. Los numeros 1329-1348 volvieron al pool de logs.
+
+**Leccion general:** cuando un invariante se puede garantizar de dos formas, **la forma que
+mejora la vida del lector del hilo** (numeracion consecutiva) suele ser la correcta, siempre que
+no rompa el invariante. Un invariante que se cumple **a costa de** la legibilidad es una
+solucion a medias. Y: si una directiva hay que revertirla en menos de 24 horas, esta bien —
+mientras este documentado el por que de ambas.
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-05 08:10 · **Actualización:** (1) numeración de mensajes pasa al **pool
-global** (`Logs/NUMEROS_DISPONIBLES.txt`) + helper `scripts/reservar_mensaje.py` — resuelve de
-raíz T-8/T-12; (2) nombre de archivo con **emisor → receptor**
+**Fecha:** 2026-10-06 00:35 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
 (directiva del fundador); (3) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado).
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales.

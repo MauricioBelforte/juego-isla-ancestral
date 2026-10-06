@@ -10,15 +10,16 @@
 # Que hace (reserva atomica):
 #   1. Verifica que <carpeta-receptor> exista en "Mensajes entre modelos/".
 #   2. Lista los ultimos 3 mensajes de esa carpeta (para el campo "Responde a:").
-#   3. Toma el primer numero disponible de Logs/NUMEROS_DISPONIBLES.txt y lo borra
-#      del pool (el numero queda consumido para TODO el proyecto: logs Y mensajes).
+#   3. Toma el primer numero disponible de NUMEROS_DISPONIBLES.txt DE ESA CARPETA y lo
+#      borra del pool (el numero queda consumido para ese canal).
 #   4. Crea el archivo en la carpeta del RECEPTOR con el nombre
 #      NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
 #      y una plantilla que el emisor completa.
 #
-# Por que el numero sale del pool global: la numeracion por carpeta produce
-# colisiones cuando dos agentes numeran a ojo. Con el pool global, cada numero
-# se consume una sola vez en todo el proyecto -> es imposible que se repita.
+# Por que cada canal tiene su propio pool (directiva del fundador 2026-10-05): la
+# numeracion es por canal (consecutiva y legible), y el pool propio garantiza que
+# ningun numero se asigne dos veces en el mismo canal sin depender de "numerar a ojo".
+# Los LOGS usan el pool global Logs/NUMEROS_DISPONIBLES.txt.
 
 import argparse
 import os
@@ -85,19 +86,39 @@ def main():
                 print("         " + d)
         return 2
 
-    if not os.path.isfile(POOL):
-        print("ERROR: no existe el pool: %s" % POOL)
-        return 2
+    # Pool del CANAL (numeracion por canal, no global).
+    POOL_CANAL = os.path.join(carpeta, "NUMEROS_DISPONIBLES.txt")
+    TOPE = 500
+    if not os.path.isfile(POOL_CANAL):
+        # Lo crea al vuelo: 1..TOPE menos los numeros ya usados en la carpeta.
+        _us = set()
+        for f in os.listdir(carpeta):
+            m = re.match(r"^(\d+)-", f)
+            if m and os.path.isfile(os.path.join(carpeta, f)):
+                _us.add(int(m.group(1)))
+        _lib = [str(n) for n in range(1, TOPE + 1) if n not in _us]
+        with open(POOL_CANAL, "w", encoding="utf-8", newline="\n") as fh:
+            fh.write("\n".join(_lib) + "\n")
+        print("(creado pool del canal: %s)" % POOL_CANAL)
 
-    lineas = open(POOL, "r", encoding="utf-8").read().splitlines()
+    lineas = open(POOL_CANAL, "r", encoding="utf-8").read().splitlines()
     libres = [l.strip() for l in lineas if l.strip().isdigit()]
     if not libres:
-        print("ERROR: el pool de numeros esta vacio. Hay que ampliar NUMEROS_DISPONIBLES.txt.")
+        print("ERROR: el pool del canal esta vacio. Hay que ampliar %s." % POOL_CANAL)
         return 3
 
     # Ultimos mensajes de la carpeta receptora (para el campo "Responde a").
-    existentes = sorted(f for f in os.listdir(carpeta)
-                        if os.path.isfile(os.path.join(carpeta, f)))
+    # Solo archivos .md con formato NN-fecha (excluye NUMEROS_DISPONIBLES.txt y demases).
+    # Clave numerica: "40-..." > "1340-..." como string seria falso; se ordena por
+    # el numero inicial del nombre cuando existe, y luego por el nombre completo.
+    def _clave(f):
+        m = re.match(r"^(\d+)-", f)
+        return (0, int(m.group(1)), f) if m else (1, 0, f)
+
+    MENSAJE_RE = re.compile(r"^\d+-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-")
+    existentes = sorted((f for f in os.listdir(carpeta)
+                         if MENSAJE_RE.match(f)
+                         and os.path.isfile(os.path.join(carpeta, f))), key=_clave)
     ultimo = existentes[-1] if existentes else "(carpeta vacia: es el primer mensaje)"
 
     ahora = datetime.now()
@@ -123,7 +144,7 @@ def main():
         return 4
 
     restantes = [l for l in libres if l != num and l not in consumidos]
-    open(POOL, "w", encoding="utf-8", newline="").write("\n".join(restantes) + "\n")
+    open(POOL_CANAL, "w", encoding="utf-8", newline="\n").write("\n".join(restantes) + "\n")
 
     nombre = "%s-%s-%s-a-%s-%s.md" % (num, fecha_archivo, emisor_slug, receptor_slug, tema)
     ruta = os.path.join(carpeta, nombre)

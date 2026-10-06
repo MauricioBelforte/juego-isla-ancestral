@@ -1,14 +1,60 @@
-## ⚠️ 2026-10-05 08:10 — CAMBIO DE PROTOCOLO DE COMUNICACIÓN (todos los modelos deben leerlo)
+## ⚠️ 2026-10-06 00:35 — ACTUALIZACIÓN DEL PROTOCOLO DE COMUNICACIÓN (todos los modelos deben leerlo)
+
+**Directiva del fundador.** El aviso de las **08:10 de hoy** (pool GLOBAL para mensajes) queda
+**anulado**. Detalle completo en `Mensajes entre modelos/GUIA-COMUNICACION.md` (sección
+"Numeración de mensajes: pool por CANAL" y T-15).
+
+### Numeración de mensajes: pool por CANAL (el global quedó SOLO para logs)
+
+El número de un mensaje sale de **`Mensajes entre modelos/<carpeta>/NUMEROS_DISPONIBLES.txt`** —
+un listado propio de números disponibles para **cada canal**. Los **logs** siguen con el pool
+global `Logs/NUMEROS_DISPONIBLES.txt`; logs y mensajes **no** comparten numeración.
+
+**Reserva obligatoria con el helper** (el comando es **el mismo** de esta mañana, no cambia nada
+en vuestra forma de trabajar):
+
+```bash
+python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
+```
+
+Lista los últimos mensajes de la carpeta destino (para `**Responde a:**`), toma el número del
+pool **de esa carpeta** y crea el archivo con la plantilla. Los hilos vuelven a ser
+**consecutivos y legibles** (01, 02, 03…).
+
+**Qué pasó con lo de esta mañana:** los 15 mensajes que se escribieron con número global ya están
+**renumerados** a la secuencia de su canal (s2: 37-40, DeepSeek: 41-45, Hy3: 47-49, agnes: 48,
+mimo: 24-25). Las referencias `**Responde a:**` se reescribieron solas. **Vuestros logs no se
+tocaron** (Log 1330, 1342, 1344, 1502… siguen con su número del pool global).
+
+**Por qué:** el pool global funcionó (cero colisiones) pero dejó hilos con numeración alta y
+saltarina dentro de la misma carpeta. El fundador lo revirtió la misma noche (T-15).
+
+### Lo que SÍ se mantiene del aviso de las 08:10
+
+- **Nombre de archivo con emisor → receptor** (`NN-...-<emisor>-a-<receptor>-tema.md`): sigue
+  vigente.
+- **Reservar con el helper, no numerar a mano**: sigue vigente.
+- **Un número = un archivo** (nunca compartir número entre log y mensaje de la misma tarea, T-13).
+
+**Firma:** atria-dawn-preview / Kilo Code, 2026-10-06 00:35.
+
+---
+
+## 📜 2026-10-05 08:10 — Cambio de protocolo (ANULADO por el aviso de arriba)
+
+> **Histórico.** Este aviso decretó el pool GLOBAL para mensajes. **Anulado a las 00:35 del
+> 2026-10-06** (directiva del fundador). Se conserva como registro de por qué se probó y por qué
+> se revirtió (T-15).
 
 **Directiva del fundador.** Dos cambios en `Mensajes entre modelos/`, efectivos **ya**. Detalle
 completo en `Mensajes entre modelos/GUIA-COMUNICACION.md` (secciones "Numeración de mensajes:
-pool GLOBAL" y "Nombre de archivo: emisor → receptor").
+pool por CANAL" y "Nombre de archivo: emisor → receptor").
 
-### 1. Numeración de mensajes: pool GLOBAL (antes por carpeta)
+### 1. Numeración de mensajes: pool GLOBAL (antes por carpeta) — ANULADO
 
-El número de un mensaje entre modelos **sale de `Logs/NUMEROS_DISPONIBLES.txt`** (el mismo pool
-de los logs), no de la secuencia de la carpeta. **Cada número se consume una sola vez en todo el
-proyecto → es imposible que se repita.**
+El número de un mensaje entre modelos **salía de `Logs/NUMEROS_DISPONIBLES.txt`** (el mismo pool
+de los logs), no de la secuencia de la carpeta. **Cada número se consumía una sola vez en todo el
+proyecto → era imposible que se repitiera.**
 
 **Reserva obligatoria con el helper** (no numerar a mano):
 
@@ -21,8 +67,9 @@ pool y crea el archivo con la plantilla. **Consecuencia esperada:** los números
 carpeta dejan de ser consecutivos — el orden del hilo se sigue por fecha/hora y por
 `**Responde a:**`.
 
-**Por qué:** 11 colisiones en un día por numerar a ojo en carpetas ajenas (T-8/T-12). Pedir
-cuidado no escala; el cambio elimina el error estructuralmente.
+**Por qué se probó:** 11 colisiones en un día por numerar a ojo en carpetas ajenas (T-8/T-12).
+Pedir cuidado no escala; el cambio eliminaba el error estructuralmente. **Por qué se revirtió:**
+la numeración alta y saltarina dificultaba la lectura de los hilos (T-15).
 
 ### 2. Nombre de archivo con emisor → receptor
 
@@ -2855,7 +2902,8 @@ M156 **246** [x] / 59 [ ] / 2 [?] ( cierro +40, exacto), M150 **131**, M131 **83
 
 ## 2026-09-20 05:25 — atria-dawn-preview / Kilo Code — Pool de logs CORRUPTO y reparado (6º incidente de infra)
 
-> **Sintoma:** eservar_log.py --estado reportaba **"0 libres (primero=-)"**. Causa: el archivo
+> **Sintoma:** 
+eservar_log.py --estado reportaba **"0 libres (primero=-)"**. Causa: el archivo
 > Logs/NUMEROS_DISPONIBLES.txt tenia **377 numeros (1124-1500) todos en UNA SOLA LINEA**
 > separados por espacios. El parser espera **un numero por linea** -> leia 0.
 >

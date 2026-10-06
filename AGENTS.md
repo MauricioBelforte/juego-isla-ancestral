@@ -503,18 +503,22 @@ Mensajes entre modelos/
    quién** sin abrir el archivo (directiva del fundador 2026-10-05).
    - Ejemplo: `1327-2026-10-05_08-15-00-atria-dawn-s2-a-deepseek-v4.1-flash-td8-m103.md`
    - Los archivos anteriores a 2026-10-05 **no se renombran** (rompería las referencias cruzadas).
-4. **Numeración de mensajes: pool GLOBAL (no por carpeta).** `NN` **no** es el siguiente número
-   libre de la carpeta: sale del **pool global** `Logs/NUMEROS_DISPONIBLES.txt` (el mismo de los
-   logs). Cada número se consume una sola vez en todo el proyecto, por lo que **es imposible que
-   se repita** entre carpetas. Reserva obligatoria con el helper:
+4. **Numeración de mensajes: pool por CANAL (uno propio por carpeta).** `NN` sale de
+   **`Mensajes entre modelos/<carpeta>/NUMEROS_DISPONIBLES.txt`** — cada canal tiene su propio
+   listado de números disponibles. Reserva obligatoria con el helper:
    ```bash
    python scripts/reservar_mensaje.py <carpeta-receptor> <tema> [--emisor <carpeta-emisor>]
    ```
    El helper lista los últimos mensajes de la carpeta destino (para el `**Responde a:**`), toma
-   el número del pool y crea el archivo con la plantilla. **No numerar a mano.** Consecuencia
-   esperada: los números dentro de una carpeta **dejan de ser consecutivos** — el orden del hilo
-   se sigue por fecha/hora y por `**Responde a:**`. (Antes la numeración era por carpeta y
-   produjo 11 colisiones en un día; ver `GUIA-COMUNICACION.md` T-8/T-12.)
+   el primer número del pool **de esa carpeta**, lo borra del pool y crea el archivo con la
+   plantilla. **No numerar a mano.** Si faltan números, se amplía el `NUMEROS_DISPONIBLES.txt`
+   del canal.
+   **Los LOGS usan el pool global** `Logs/NUMEROS_DISPONIBLES.txt` (logs y mensajes **no**
+   comparten numeración). **Un número = un archivo** dentro de su ámbito (T-13). Salud de los
+   pools: `python scripts/verificar_pool_numeros.py`.
+   (Historial: entre el 2026-10-05 por la mañana y la noche los mensajes salían del pool global;
+   el fundador revirtió la directiva esa misma noche — la numeración alta y saltarina dificultaba
+   la lectura de los hilos. Ver `GUIA-COMUNICACION.md` T-12/T-15.)
 5. **Firma en el contenido (obligatoria):** `**Modelo:**`, `**Plataforma:**`, `**Fecha:** AAAA-MM-DD HH:MM:SS`, `**Responde a:** <archivo anterior>`. Quien escribe puede ser el director (encargo, devolución, aviso) o el agente (informe, pregunta).
 6. **No se mezclan temas dentro de un archivo:** un informe por ítem o por iteración; si hay varios ítems, un archivo por iteración con una sección por ítem.
 7. **El backlog personal sigue siendo la fuente de tareas.** El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
