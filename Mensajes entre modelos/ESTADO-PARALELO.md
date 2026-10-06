@@ -64,6 +64,33 @@ participa.
 
 ---
 
+## 🔢 2026-10-06 07:40 — Numeración de logs: el rango 1351-1500 ya NO existe
+
+**Directiva del fundador.** Se cerró el hueco de numeración de logs (trampa T-18 de
+`GUIA-COMUNICACION.md`): los logs **1501-1513 se renombraron a 1351-1363**, ordenados por su
+**fecha real** (no por el número viejo), y el pool se regeneró.
+
+**Estado actual (verificado):**
+
+- Logs en disco: último **1365**, consecutivos. **No existe ningún log en el rango 1351-1599** que
+  no sea de la serie nueva.
+- Pool `Logs/NUMEROS_DISPONIBLES.txt`: cabeza **1366**, cola 3000 (1635 libres).
+
+**Lo que tienen que hacer TODOS:**
+
+1. **Reservar siempre con** `python scripts/reservar_log.py` — lee el pool y toma el siguiente
+   libre. Nunca numerar a mano ni "a ojo".
+2. **Si citan un log de la familia 1501-1513, el número cambió**. Mapeo completo en
+   `GUIA-COMUNICACION.md` (T-18). Resumen rápido:
+   - 1501→1351 · 1502→1352 · 1503→1353 · 1504→1354 · 1507→1355 · 1505→1356 · 1506→1357
+   - 1509→1358 · 1508→1359 · 1512→1360 · 1510→1361 · 1513→1362 · 1511→1363
+3. **No usar números del rango 1351-1500** para nada nuevo: ya están consumidos por la serie
+   renombrada. El primer libre es el que diga el pool.
+
+**Firma:** atria-dawn-preview / Kilo Code, 2026-10-06 07:40.
+
+---
+
 ## ⛔ 2026-10-06 04:45 — space-bunny-alpha DADO DE BAJA DEL FLUJO
 
 **Directiva del fundador.** space-bunny-alpha **ya no tiene disponibilidad**. Su canal queda
