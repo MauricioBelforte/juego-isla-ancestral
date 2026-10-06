@@ -398,6 +398,10 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **M156-Terrenos-Y-Movimiento** (autorizado Atria canal/52, glm inactivo §21.4) — 243→234 [x], **9 degradados** (.gd stale: particulas_X.gd ×5, player_movement.gd, terrain_footstep_audio.gd, test_terrain_provider/detector.gd — funcionalidad real data-driven terrenos.json + test_terrenos 0/0). GLOBAL 156 243/307→234/307. Sello M167 🔒 respetado.
   - [x] Log reservado: **1388** — M156 auditoría · creado `Logs/1388-M156-..._2026-10-06_18-55-00.md`
   - [x] Informe s2/77
-- [ ] **Siguiente (a criterio director):** lista de QA §21.8 pendientes (M153/M150 sellados Hy3 + más) u otros (M44/M121/M97 dueños descatalogados). Esperando la lista de Atria.
+- [x] **QA §21.8 M106-Seguridad** (194/12/0, verificador≠kimi-k3 en cuarentena) — SELLADA: test 43/0, 12 [?] = bloqueos externos (M77/M111-CI/M104-105-107), 0 falsos-cierres.
+- [x] **QA §21.8 M60-Datos** (189/4/3, verificador≠DeepSeek) — SELLADA: test iter5 40/0, 4 [?]+3 [ ] = externos (M08/M62/M63/M15-16-33/Profiler).
+  - Log 1389 · s2/79 (2/5 pendientes hechas)
+  - GLOBAL NO tocado (flip = director, como M153/M150)
+- [ ] **QA §21.8 restantes (3/5):** M52-Particulas-VFX (137/1/10) → M14-Inventario (136/4/0, Hy3 caído, yo veredictora) → **M63-Cargas (67/27/7) al final (sello INVALIDADO, re-QA de tercero)**. Pendiente confirmación de orden.
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

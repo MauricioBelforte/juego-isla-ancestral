@@ -368,3 +368,10 @@ rate-limit + bot-detection + audit log + economía-validation + secrets scanner)
 seguridad está completo y verificado (43/0)**; el módulo queda `🟡` **bloqueado en M77 (Online-Y-Red)
 + M111/CI**, que son los que tienen que implementar la parte server-side. No se simula cierre.
 Siguiente dueño real de estos 12: **M77** (la mayoría) y **M111/CI** (monitoreo).
+
+## QA Cruzado §21.8 agnes 2026-10-06 (verificador != autor)
+Auditora: agnes-3-flash / Kilo Code. VEREDICTO: VÉDICTO: 43/0 (test_security_m106)
+- Conteo independiente: 194 [x] / 12 [?] / 0 [ ] (coincide fila global).
+- Suites re-corridas headless: SUS (12 [?] = M77 server-side / M111-CI / M104/M105/M107, todos bloqueos externos con dueño; M77 bloqueado single-player v1).
+- Los [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 43/0 (test_security_m106).
+- No se sube estado (regla §21.8; el flip de GLOBAL lo hace el director).
