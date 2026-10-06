@@ -56,8 +56,16 @@ static func has_any_backup(slot: int) -> bool:
 
 ## Devuelve el contenido leído (String) del backup más reciente, o "" si no hay.
 static func read_latest_backup(slot: int) -> String:
-	var path := latest_backup(slot)
-	if path.is_empty() or not FileAccess.file_exists(path):
+	return read_backup(slot, 1)
+
+## Lee el contenido de una rotación concreta (1 = más reciente), o "" si no existe
+## o excede el cap (BUG-109).
+## BUG-110: expone rotaciones individuales para que el loader pueda intentar
+## r1, r2, ... en orden de frescura (antes r2 era un backup MUERTO: se conservaba
+## pero ningún camino lo consultaba).
+static func read_backup(slot: int, rotation: int) -> String:
+	var path := _bak_path(slot, rotation)
+	if not FileAccess.file_exists(path):
 		return ""
 	return SaveWriter.read_document(path)
 

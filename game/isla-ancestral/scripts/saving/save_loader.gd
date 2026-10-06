@@ -86,44 +86,55 @@ func load(slot: int) -> Dictionary:
 		"version": SaveSchema.SCHEMA_VERSION,
 	}
 
-## Intenta recuperar desde el backup local más reciente cuando el save
-## principal está corrupto. Devuelve LoadResult.RECOVERED si se pudo.
+## Intenta recuperar desde los backups locales cuando el save principal está
+## corrupto. Devuelve LoadResult.RECOVERED si se pudo.
+##
+## BUG-110: prueba TODAS las rotaciones (r1, r2, ...) en orden de frescura. Antes
+## solo se leía r1 y una sola vez, así que r2 era un backup MUERTO (se gastaba
+## I/O y disco en conservarlo, pero ningún camino de lectura lo consultaba). Si r1
+## estaba corrupto y r2 íntegro, se reportaba CORRUPTED pese a haber un backup
+## bueno.
 func _try_recover(slot: int, reason: String) -> Dictionary:
-	push_warning("[SAVE] Save slot %d corrupto (%s), intentando backup..." % [slot, reason])
-	var bak := SaveBackup.read_latest_backup(slot)
-	if bak.is_empty():
-		push_error("[SAVE] No hay backup válido para slot %d" % slot)
-		return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
+	push_warning("[SAVE] Save slot %d corrupto (%s), intentando backups..." % [slot, reason])
+	for rotation in range(1, SaveBackup.MAX_ROTATIONS + 1):
+		var bak := SaveBackup.read_backup(slot, rotation)
+		if bak.is_empty():
+			continue
 
-	var parsed := SaveWriter.parse_document(bak)
-	if not parsed.get("ok", false):
-		push_error("[SAVE] Backup de slot %d también está corrupto (%s)" % [slot, parsed.get("reason", "")])
-		return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
+		var parsed := SaveWriter.parse_document(bak)
+		if not parsed.get("ok", false):
+			push_warning("[SAVE] Backup r%d de slot %d también está corrupto (%s)" % [rotation, slot, parsed.get("reason", "")])
+			continue
 
-	var payload: Dictionary = parsed["payload"]
+		var payload: Dictionary = parsed["payload"]
 
-	# M59 iter. 2: el camino de backup debe ser tan estricto como el principal.
-	# Antes _try_recover() restauraba el payload SIN normalizar ni validar, así
-	# que un backup de versión FUTURA se cargaba como RECOVERED (degradando un
-	# save más nuevo, contra la regla dura "nunca degradar un save").
-	payload["schema_version"] = int(payload.get("schema_version", 0))
-	payload = SaveSchema.completar(payload)
-	var errors: Array[String] = SaveSchema.validate(payload)
-	if not errors.is_empty():
-		push_error("[SAVE] Backup de slot %d con estructura inválida (%s)" % [slot, ", ".join(errors)])
-		return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
-	var version := int(payload.get("schema_version", 0))
-	if version > SaveSchema.SCHEMA_VERSION:
-		push_warning("[SAVE] El backup del slot %d es de una versión FUTURA (v%d > v%d soportada). No se carga para no degradarlo." % [slot, version, SaveSchema.SCHEMA_VERSION])
-		return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
+		# M59 iter. 2: el camino de backup debe ser tan estricto como el principal.
+		# Antes _try_recover() restauraba el payload SIN normalizar ni validar, así
+		# que un backup de versión FUTURA se cargaba como RECOVERED (degradando un
+		# save más nuevo, contra la regla dura "nunca degradar un save").
+		payload["schema_version"] = int(payload.get("schema_version", 0))
+		payload = SaveSchema.completar(payload)
+		var errors: Array[String] = SaveSchema.validate(payload)
+		if not errors.is_empty():
+			push_warning("[SAVE] Backup r%d de slot %d con estructura inválida (%s)" % [rotation, slot, ", ".join(errors)])
+			continue
+		var version := int(payload.get("schema_version", 0))
+		if version > SaveSchema.SCHEMA_VERSION:
+			# No degradar: la rotación más fresca legible es de una versión futura.
+			# No se cae a rotaciones MÁS ANTIGUAS (sería degradar el save).
+			push_warning("[SAVE] El backup r%d del slot %d es de una versión FUTURA (v%d > v%d soportada). No se carga para no degradarlo." % [rotation, slot, version, SaveSchema.SCHEMA_VERSION])
+			return {"result": LoadResult.FUTURE_VERSION, "payload": {}, "version": version}
 
-	if snapshot != null:
-		snapshot.restore(payload)
-	return {
-		"result": LoadResult.RECOVERED,
-		"payload": payload,
-		"version": version,
-	}
+		if snapshot != null:
+			snapshot.restore(payload)
+		push_warning("[SAVE] Recuperado desde backup r%d del slot %d" % [rotation, slot])
+		return {
+			"result": LoadResult.RECOVERED,
+			"payload": payload,
+			"version": version,
+		}
+	push_error("[SAVE] No hay backup válido para slot %d" % slot)
+	return {"result": LoadResult.CORRUPTED, "payload": {}, "version": 0}
 
 ## Migración de schema (M60). Actualmente no hay migraciones registradas
 ## (v1 es la primera), pero se deja la infraestructura para el futuro.
