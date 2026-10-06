@@ -71,7 +71,7 @@ Archivo: game/isla-ancestral/scripts/saving/test_save_size_cap.gd
 - test_fishing_save_block.gd  : 11 checks, 0 fallos
 - test_save_collect_robust.gd : 10 checks, 0 fallos (Log 1377)
 - test_save_size_cap.gd       : 7 checks, 0 fallos (nueva)
-- validate_save.gd            : Bootstrap Completado (EXIT 0, sin FALLO)
+- validate_save.gd            : 16 checks, 0 fallos
 - test_inventario.gd          : 0 fallos (M14)
 - test_inventario_iter5.gd    : 0 fallos (M14)
 - test_inventario_restore_robusto.gd : 12 checks, 0 fallos (Log 1378)
