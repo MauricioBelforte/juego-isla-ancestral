@@ -417,3 +417,6 @@ junto con el fix del gate BUG-091 (modos A+B). Las líneas propuestas están en 
 §Iteración 2.
 
 **NO sella §21.8** (autor ≠ verificador). El módulo sigue 🟡.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
+Los [190 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_calendario.gd 13/0` = scripts/time/ en disco; 2 [?] in-flight (DeepSeek/Hy3 reciente) NO tocados, reportados al director.

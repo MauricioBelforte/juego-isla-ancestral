@@ -418,3 +418,5 @@ Los 4 puntos que requieren investigación son: P2/P7 (luna — luz funciona pero
 **Modelo:** mimo-v2.5
 **Plataforma:** OpenCode
 **Fecha:** 2026-09-19 06:30
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
+Los [120 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_ciclo_dia_noche.gd 16/0` = scripts/world/day_night_cycle.gd en disco.

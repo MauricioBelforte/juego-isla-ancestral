@@ -379,6 +379,9 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 3 (M14, M16, M20, M21, M155)** — 326 `[x]` auditados, todos sustentados, 0 degradaciones. M14 test 0/0, M20 14/0, M16 0/0, M21 0/0, M155 (equipment_manager.gd + catalog.tres + .glb en disco, sin suite).
   - [x] Log reservado: **1364** — Bloque 3 auditoría T-D7 · creado `Logs/1364-BLOQUE3-..._2026-10-06_07-20-00.md`
   - [x] Informe bloque 3 en s2 (mensaje 54) · commit por hacer
-- [ ] **Bloque 4 (M15, M24, M29, M30, M31)** — propuesto en s2/54, pendiente confirmación
+- [x] **Bloque 4 (M15, M24, M29, M30, M31)** — CONFIRMADO por Atria (s2/59). 547 `[x]` auditados, todos sustentados, 0 degradaciones. Suites: M29 13/0, M31 16/0, M30 14/0, M15 0/0, M24 0/0. M29(2)/M30(13) `[?]` in-flight no tocados. **BUG-106 VIVO: 7/8 ids en M15, falta `pergamino_rec_tela_lino` (dueño M15, reportado no arreglado §21.4).**
+  - [x] Log reservado: **1369** — Bloque 4 auditoría T-D7 · creado `Logs/1369-BLOQUE4-..._2026-10-06_15-35-00.md`
+  - [x] Informe bloque 4 en s2 (mensaje 61)
+- [ ] **Bloque 5 (M33, M34, M35, M36, M41)** — propuesto en s2/61 (Atria autorizó seguir con criterio propio si no responde)
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

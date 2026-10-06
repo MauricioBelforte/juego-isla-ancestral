@@ -373,3 +373,6 @@
 > (iter 3: 25 [x] + 135 [ ] + 5 [?]; iter 4 y 5 sin total de módulo). El conteo real
 > actual es 99 [x] / 115 [ ] / 8 [?] = 222, consistente con el 99/222 reportado en
 > la iter 6 (reserva actual, línea 10). Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
+Los [99 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_recursos.gd 0/0 + ItemDatabase` = ItemDatabase presente; 7/8 ids de BUG-106 (falta pergamino_rec_tela_lino) — deuda VIVA, dueño M15 (§21.4: reportar, no arreglar).

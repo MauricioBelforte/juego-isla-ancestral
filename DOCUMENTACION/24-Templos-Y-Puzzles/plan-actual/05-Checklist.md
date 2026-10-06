@@ -228,3 +228,6 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
+Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_puzzles.gd 0/0` = scripts/templos/ (puzzles) en disco.
