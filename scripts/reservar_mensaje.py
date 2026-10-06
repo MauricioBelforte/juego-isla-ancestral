@@ -121,6 +121,21 @@ def main():
                          and os.path.isfile(os.path.join(carpeta, f))), key=_clave)
     ultimo = existentes[-1] if existentes else "(carpeta vacia: es el primer mensaje)"
 
+    # Modelo EMISOR del mensaje anterior. Directiva del fundador (2026-10-06): el campo
+    # "Responde a" debe nombrar al MODELO al que se responde, no solo el archivo, para que
+    # se vea de un vistazo quien le escribe a quien sin abrir el archivo.
+    responde_modelo = "(canal nuevo, sin mensaje previo)"
+    if existentes:
+        try:
+            with open(os.path.join(carpeta, ultimo), encoding="utf-8") as fh:
+                for linea in fh:
+                    m = re.match(r"^\*\*Modelo:\*\*\s*(.+?)\s*$", linea)
+                    if m:
+                        responde_modelo = m.group(1)
+                        break
+        except OSError:
+            responde_modelo = "(no se pudo leer el archivo previo)"
+
     ahora = datetime.now()
     fecha_archivo = ahora.strftime("%Y-%m-%d_%H-%M-%S")
     fecha_interna = ahora.strftime("%Y-%m-%d %H:%M:%S")
@@ -155,16 +170,16 @@ def main():
         "**Modelo:** %s\n"
         "**Plataforma:** <completar>\n"
         "**Fecha:** %s\n"
-        "**Responde a:** %s\n"
+        "**Responde a:** %s - %s\n"
         "\n"
         "<cuerpo del mensaje aca>\n"
-    ) % (num, emisor, fecha_interna, ultimo)
+    ) % (num, emisor, fecha_interna, responde_modelo, ultimo)
 
     open(ruta, "w", encoding="utf-8", newline="").write(plantilla)
 
     print("OK reservado: %s" % num)
     print("archivo: %s" % os.path.relpath(ruta, RAIZ))
-    print("responde a: %s" % ultimo)
+    print("responde a: %s - %s" % (responde_modelo, ultimo))
     print("pool restante: %d (cabeza %s)" % (len(restantes), restantes[0] if restantes else "VACIO"))
     return 0
 

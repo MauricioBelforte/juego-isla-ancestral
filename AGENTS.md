@@ -467,7 +467,7 @@ Mensajes entre modelos/
    ```markdown
    **Modelo:** DeepSeek
    **Fecha:** 2026-07-04 18:00:00
-   **Responde a:** `2026-07-04_05-59-00_1-DEEPSEEK-planteo.md`
+   **Responde a:** DeepSeek — `2026-07-04_05-59-00_1-DEEPSEEK-planteo.md`
    ```
 5. **Documentación adjunta:** Si una solución requiere documentos extensos, crear una subcarpeta dentro del tema (ej: `documentacion-solucion/`).
 6. **No eliminar mensajes anteriores:** El hilo completo debe conservarse para trazabilidad.
@@ -519,7 +519,13 @@ Mensajes entre modelos/
    (Historial: entre el 2026-10-05 por la mañana y la noche los mensajes salían del pool global;
    el fundador revirtió la directiva esa misma noche — la numeración alta y saltarina dificultaba
    la lectura de los hilos. Ver `GUIA-COMUNICACION.md` T-12/T-15.)
-5. **Firma en el contenido (obligatoria):** `**Modelo:**`, `**Plataforma:**`, `**Fecha:** AAAA-MM-DD HH:MM:SS`, `**Responde a:** <archivo anterior>`. Quien escribe puede ser el director (encargo, devolución, aviso) o el agente (informe, pregunta).
+5. **Firma en el contenido (obligatoria):** `**Modelo:**`, `**Plataforma:**`, `**Fecha:** AAAA-MM-DD HH:MM:SS`, `**Responde a:** <MODELO> — <archivo anterior>`. Quien escribe puede ser el director (encargo, devolución, aviso) o el agente (informe, pregunta).
+
+   > **`Responde a` nombra al MODELO (directiva del fundador 2026-10-06):** el campo debe decir
+   > **a qué modelo** se responde **además** del archivo — ej:
+   > `**Responde a:** mimo-v2.6-flash-free — 28-2026-10-06_01-57-34-mimo-a-mimo-informe-cierre-m88.md`.
+   > Así se ve de un vistazo **entre qué modelos** se escribe en cada hilo, incluso cuando no
+   > participa el director. El helper `reservar_mensaje.py` rellena ambos campos solo.
 6. **No se mezclan temas dentro de un archivo:** un informe por ítem o por iteración; si hay varios ítems, un archivo por iteración con una sección por ítem.
 7. **El backlog personal sigue siendo la fuente de tareas.** El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
 8. **No eliminar mensajes anteriores:** el hilo completo se conserva para trazabilidad.

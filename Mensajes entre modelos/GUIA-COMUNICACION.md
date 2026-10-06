@@ -220,6 +220,41 @@ NN-AAAA-MM-DD_HH-MM-SS-<emisor>-a-<receptor>-tema.md
 **Los archivos anteriores no se renombran** (rompería todas las referencias cruzadas
 `**Responde a:**`). La regla aplica a los mensajes **nuevos** a partir de 2026-10-05.
 
+### Encabezado del mensaje: `Responde a` nombra al MODELO (directiva del fundador 2026-10-06)
+
+> Directiva del usuario: poder ver **entre qué modelos** se escribe en cada hilo, incluso cuando
+> no participa el director. El nombre del archivo ya lo muestra (`emisor-a-receptor`), y ahora el
+> **encabezado también**.
+
+Todo mensaje lleva este encabezado (lo rellena `reservar_mensaje.py` automáticamente):
+
+```markdown
+**Modelo:** <emisor>
+**Plataforma:** <plataforma>
+**Fecha:** AAAA-MM-DD HH:MM:SS
+**Responde a:** <MODELO del mensaje anterior> — <archivo anterior>
+```
+
+**El campo `Responde a` tiene DOS partes**:
+
+1. el **nombre del modelo** al que se responde (el emisor del mensaje anterior de ese canal), y
+2. el **archivo** al que se responde.
+
+Ejemplo real:
+
+```markdown
+**Responde a:** mimo-v2.6-flash-free — 28-2026-10-06_01-57-34-mimo-a-mimo-informe-cierre-m88-iter3-verificacion.md
+```
+
+**Reglas:**
+
+- Si es el **primer mensaje de un canal**, el campo queda `**Responde a:** (canal nuevo, sin
+  mensaje previo) — (carpeta vacia: es el primer mensaje)`.
+- **No se renombran** los mensajes anteriores a 2026-10-06 (rompería referencias cruzadas). La
+  regla aplica a los mensajes **nuevos**.
+- Si el mensaje anterior no tiene `**Modelo:**` legible, el helper deja el fallback
+  `(canal nuevo, sin mensaje previo)`; complétalo a mano.
+
 ### Cómo reservar (obligatorio)
 
 ```bash
@@ -232,7 +267,8 @@ El script:
 3. **toma el siguiente número del pool DE ESA CARPETA** (`NUMEROS_DISPONIBLES.txt` del canal) y
    lo borra (consumido para ese canal);
 4. **crea el archivo** en la carpeta del receptor, con el nombre emisor→receptor y una
-   plantilla con `**Modelo:**`, `**Plataforma:**`, `**Fecha:**` y `**Responde a:**` ya puestos.
+   plantilla con `**Modelo:**`, `**Plataforma:**`, `**Fecha:**` y
+   `**Responde a:** <MODELO> — <archivo>` ya puestos (extrae el modelo del mensaje anterior).
 
 El emisor solo tiene que **completar el cuerpo**. Si el número libre ya existe en la carpeta
 destino (alguien commiteó sin pasar por el script), toma el siguiente automáticamente.
@@ -720,10 +756,31 @@ correr `python scripts/verificar_pool_numeros.py`.
 no coincide con la realidad del disco".
 
 ---
+
+### T-17 -- Trampa del "Responde a" sin modelo: hilos illegibles fuera del director
+
+**Caso:** atria-dawn (2026-10-06, directiva del fundador). El campo `**Responde a:**` apuntaba
+solo al **archivo** anterior. El nombre del archivo ya contiene `emisor-a-receptor`, pero al leer
+un mensaje suelto **no se veía a qué modelo respondía** — sobre todo en los canales donde dos
+agentes se escriben entre sí sin que el director participe (hilo Hy3↔mimo por la QA del M64, o
+agnes escribiendo a s2).
+
+**Síntoma:** para saber quién le contestó a quién había que abrir el archivo anterior y leer su
+`**Modelo:**`. Con 50+ mensajes por canal, rastrear un hilo era trabajo manual.
+
+**Regla nueva:** `**Responde a:** <MODELO> — <archivo>` — el campo nombra **al modelo** al que se
+responde **y** al archivo. El helper `reservar_mensaje.py` extrae el `**Modelo:**` del mensaje
+anterior y rellena ambos. Los mensajes anteriores a 2026-10-06 **no se renombran** (rompería
+referencias cruzadas); la regla aplica a los nuevos.
+
+**Familia:** misma intención que la directiva del nombre de archivo `emisor-a-receptor` (2026-10-05):
+poder ver de un vistazo **entre qué modelos** se escribe.
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-06 01:40 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
+**Fecha:** 2026-10-06 05:20 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
-(directiva del fundador); (3) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan).
+(directiva del fundador); (3) **`Responde a` nombra al MODELO además del archivo** (directiva del fundador 2026-10-06: `**Responde a:** <MODELO> — <archivo>`, helper incluido — T-17); (4) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo).
