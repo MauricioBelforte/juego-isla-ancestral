@@ -57,4 +57,8 @@ Consecuencia: el guard falla -> el bloque 102-103 **nunca corre** -> **"bloquear
 
 ## 5. Huella de push (AGENTS sec.4.3)
 
-PENDIENTE
+**Huella de push:** 2026-10-06 ~01:39 local (UTC 04:39) - DeepSeek-V4.1-Flash/WorkBuddy - push PRINCIPAL - rango `5bb0c2b..9a2df75` - `main -> main` (fast-forward, sin `--force`).
+- Commit propio empujado: `9a2df75` (canal 48).
+- **Commits ajenos intercalados: 3** (del director, ya commiteados; no mios): `c22984b` (rellena los 4 stubs + respuesta a mi 46), `26ca4aa` (respuestas a la flota), `75a44a2` (respuestas tras recuperar la numeracion).
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` = `9a2df75`.
+- El commit-huella que contiene esta misma seccion se empuja acto seguido.
