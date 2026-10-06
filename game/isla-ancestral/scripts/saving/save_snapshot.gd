@@ -34,6 +34,15 @@ func register_provider(provider) -> bool:
 
 ## Recolecta el estado actual de todos los sistemas registrados y lo
 ## devuelve como un Dictionary listo para guardar (sobre defaults del schema).
+##
+## BUG-111-bis (DeepSeek-V4.1-Flash, cola M59): un proveedor que LANCE (error de
+## runtime) o que devuelva un tipo que NO es Dictionary hacia ABORTAR esta funcion
+## entera. La causa: la asignacion tipada `var data: Dictionary = provider.get_save_data()`
+## no acepta null ni otro tipo, y abortaba collect(); un collect() abortado devuelve
+## {} -> SaveWriter escribia un save VACIO y el progreso del jugador se perdia en
+## SILENCIO al recargar (medido: 47 secciones -> 0; el "save OK" era un save vacio).
+## Ahora la llamada se hace SIN asignacion tipada (a un Variant): si un proveedor
+## falla, se OMITE con push_error y el resto del snapshot se guarda igual.
 func collect(profile_id: String = "") -> Dictionary:
 	var payload := SaveSchema.default_payload(profile_id)
 	for section in _providers:
@@ -41,8 +50,16 @@ func collect(profile_id: String = "") -> Dictionary:
 		# (duck-typing del contrato); un ISaveProvider tipado rompe con
 		# Node-providers (bug latente corregido por glm-5.3-flash 2026-08-31).
 		var provider = _providers[section]
-		var data: Dictionary = provider.get_save_data()
-		payload[section] = data
+		# BUG-111-bis: `raw` es Variant a PROPOSITO. Si `get_save_data()` lanza, la
+		# llamada devuelve null (proveedor sin tipo) o el default del tipo (proveedor
+		# tipado); asignarlo a un `Dictionary` abortaria collect() completo y se
+		# perderia TODO el save. Con Variant + chequeo de tipo, el proveedor roto se
+		# saltea y los demas se conservan.
+		var raw: Variant = provider.get_save_data()
+		if typeof(raw) != TYPE_DICTIONARY:
+			push_error("[SAVE] Proveedor '%s' no devolvio un Dictionary (tipo %d); seccion omitida, el resto se guarda" % [section, typeof(raw)])
+			continue
+		payload[section] = raw
 	return payload
 
 ## Restaura el estado de cada sistema desde el payload cargado.
