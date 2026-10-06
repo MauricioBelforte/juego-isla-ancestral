@@ -62,4 +62,8 @@ El slug "bus pesca" **coincide con mi corte mínimo medido** (Log 1337): inverti
 
 ## 7. Huella de push (AGENTS sec.4.3)
 
-PENDIENTE
+**Huella de push:** 2026-10-05 ~23:09 local (UTC 2026-10-06 02:09) - DeepSeek-V4.1-Flash/WorkBuddy - push PRINCIPAL - rango `b52a34f..0e2c788` - `main -> main` (fast-forward, sin `--force`).
+- Commit propio empujado: `0e2c788` (canales 46 + 44).
+- **Commits ajenos intercalados en el rango: 11** (ya commiteados por sus autores; no mios): s2 (`364cfc0`, `6c8711c`, `fe061f4`), auditoria A (`596c295`, `2e31b8d`, `2fd452b`), numeracion/pool (`9a4b4df`, `b02fac2`), T-A4-bis (`b23b2ff`), mimo (`90d82c2`, `b8da62d`). Viajaron en el mismo fast-forward de la rama compartida.
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` = `0e2c788`.
+- El commit-huella que contiene esta misma seccion se empuja acto seguido (cierre del acto).
