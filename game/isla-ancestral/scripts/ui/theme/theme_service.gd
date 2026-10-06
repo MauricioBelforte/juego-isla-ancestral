@@ -60,7 +60,7 @@ func _on_locale_changed(_locale: String) -> void:
 func _on_window_size_changed() -> void:
 	# Reaplicar tema para que los widgets recalculen tamaños
 	aplicar_tema_global(_scale)
-	# Notificar a las capas abiertas que el viewport cambió
-	var ui_mgr = get_node_or_null("/root/UIManager")
-	if ui_mgr and ui_mgr.has_signal("viewport_resized"):
-		ui_mgr.viewport_resized.emit()
+	# BUG-069 (2026-10-06): se removió la notificación a capas vía
+	# `UIManager.viewport_resized`. Esa señal NUNCA existió en el proyecto
+	# (has_signal() siempre false -> bloque MUERTO, mismo patrón que BUG-116)
+	# y su referencia sostenía el ciclo ThemeService <-> UIManager.
