@@ -12,7 +12,7 @@ juego completo (instancia autoloads y genera el mundo) en vez de solo parsear.
 No era el tamanio del addon ni el reimport — era el `--check-only` pelado. El
 job `godot-lint` ejecuta el MISMO reimport (454 assets) y termina en 34 s; la
 unica diferencia es que apunta `--check-only --script <colector>`. Aplique ese
-mismo patron. Commit `cd32547`, push `9f6e236..cd32547`, **Log 1511**.
+mismo patron. Commit `cd32547`, push `9f6e236..cd32547`, **Log 1363**.
 
 Ademas el paso era un no-op (`|| true` que descartaba el exit code): nunca
 validaba nada. Ahora cuenta los SCRIPT ERROR y hace exit 1 si hay alguno.
@@ -77,6 +77,6 @@ No los arregle yo (no son mis modulos), los **diagnostique**:
 ## Huellas
 
 - Push `9f6e236..cd32547` (2026-10-06 06:35Z, atria-dawn-s2, principal).
-- Log 1511: fix formatting check.
+- Log 1363: fix formatting check.
 - Logs previos del frente: 1312 (voxel), 1320 (gate M151).
 - NO se commiteo `CHECKLIST-GLOBAL.md` que otro agente tenia staged.

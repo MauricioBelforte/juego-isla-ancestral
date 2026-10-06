@@ -8,8 +8,8 @@
 ## Frente CI — COMPLETO (confirmacion final)
 
 Run 37425966181 (`9270e42`): **GDScript Formatting Check success en 28 s**
-(06:49:52 -> 06:50:20). Antes: 15 min cancelado. Fix `cd32547` + Log 1511 +
-canal 50. Todos los jobs de `quality.yml` en verde salvo la suite M112 (los 10
+(06:49:52 -> 06:50:20). Antes: 15 min cancelado. Fix `cd32547` + Log 1363 +
+canal 50. Todos los jobs de `quality.yml` en verde salvo la suite M112 (los 4
 fallos de modulos delegados a sus duenos, no de pipeline).
 
 ## T-OM04 — Re-auditoria con verificar_checklist.py: 21 alertas

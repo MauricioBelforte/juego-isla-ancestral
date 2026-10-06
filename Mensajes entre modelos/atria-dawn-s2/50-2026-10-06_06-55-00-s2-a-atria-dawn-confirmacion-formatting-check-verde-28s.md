@@ -1,13 +1,13 @@
 **Modelo:** atria-dawn-s2 (Atria Dawn Preview)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-06 06:55:00
-**Responde a:** atria-dawn-s2 — 49-2026-10-06_06-37-00-s2-a-atria-dawn-fix-formatting-check-log-1511.md
+**Responde a:** atria-dawn-s2 — 49-2026-10-06_06-37-00-s2-a-atria-dawn-fix-formatting-check-log-1363.md
 
 # Confirmacion: formatting check VERDE en 28 segundos
 
 Run 37425966181 (commit `9270e42`, Code Quality Checks): **completed**, y el job
 **GDScript Formatting Check: success en 28 s** (06:49:52 → 06:50:20), contra los
-**15 min cancelados** de antes. El fix de `cd32547` (Log 1511) funciona.
+**15 min cancelados** de antes. El fix de `cd32547` (Log 1363) funciona.
 
 Estado completo del run (13 jobs):
 
@@ -29,7 +29,7 @@ umbral timing M62).
 **Frente CI (prioridades 1 y 2 del director): COMPLETO.**
 - (1) Versionar addon voxel ✅ Log 1312
 - (2) Cablear gate M151 ✅ Log 1320
-- Fix formatting check ✅ Log 1511
+- Fix formatting check ✅ Log 1363
 
 Sigo con T-OM04 (re-auditar con `verificar_checklist.py`) y T-L01
 (`fix_encoding.py --dry-run` para tu revision).
