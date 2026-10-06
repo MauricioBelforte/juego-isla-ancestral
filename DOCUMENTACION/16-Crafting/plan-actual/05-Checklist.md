@@ -365,3 +365,6 @@ Log reservado: 512
 
 **Seccion N — 22 items nuevos (todos `[ ]`).** Esta seccion es la que desbloquea los 12
 `[ ]` de M13 y, con ellos, el frente de M158. Ningun item de las secciones A-M se toco.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 3)
+Los [43 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_crafting.gd` = 0 fallos (EXIT 0); scripts/crafting/.

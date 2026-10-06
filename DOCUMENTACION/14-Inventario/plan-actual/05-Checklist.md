@@ -677,3 +677,5 @@ muelles físicos de M17 — el lado de datos está completo.
 >
 > **Veredicto:** M14 **definitivo** — sello §21.8 otorgado (ver fila 14 de
 > `CHECKLIST-QA-SEALS.md`, Log 1127).
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 3)
+Los [136 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_inventario_iter5.gd` = 0 fallos (EXIT 0); scripts/inventario/.

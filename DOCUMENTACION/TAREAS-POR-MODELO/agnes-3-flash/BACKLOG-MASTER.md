@@ -371,11 +371,14 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Saltar M59/M62 (otros en curso, §21.4). Reporte por bloque en canal `atria-dawn-s2`.
 
 - [x] **Bloque 1 (M61, M77, M45, M04, M13)** — 153 `[x]` auditados; 6 degradados (M77×4 mp/net_contract ausentes + bloqueado single-player v1; M45×2 asset_catalog/validate_mesh ausentes); M61/M04/M13 sustentados (M13 test 0 fallos).
-  - [x] Log reservado: **1505** — Bloque 1 auditoría T-D7 M77/M45 degradados · creado `Logs/1505-BLOQUE1-AUDITORIA-34-AMARILLOS-TD7-M77-M45_2026-10-06_05-00-00.md`
+  - [x] Log reservado: **1356** — Bloque 1 auditoría T-D7 M77/M45 degradados · creado `Logs/1356-BLOQUE1-AUDITORIA-34-AMARILLOS-TD7-M77-M45_2026-10-06_05-00-00.md`
   - [x] Informe bloque 1 en s2 (mensaje 46) · commit `99aa435`
 - [x] **Bloque 2 (M162, M164, M63, M26)** — 279 `[x]` auditados contra disco, todos sustentados, 0 degradaciones. M63: 45 `[x]`-con-`.gd` verificados en disco (no me dejé deslumbrar por el sello Hy3 §21.8). M26 rojo inyectado deliberado. Suites: M162 0/0, M164 0/0, M63 42/0, M26 92/0.
-  - [x] Log reservado: **1508** — Bloque 2 auditoría T-D7 M162/M164/M63/M26 · creado `Logs/1508-BLOQUE2-..._2026-10-06_06-20-00.md`
+  - [x] Log reservado: **1359** — Bloque 2 auditoría T-D7 M162/M164/M63/M26 · creado `Logs/1359-BLOQUE2-..._2026-10-06_06-20-00.md`
   - [x] Informe bloque 2 en s2 (mensaje 48)
-- [ ] **Bloque 3 (M14, M16, M20, M21, M155)** — propuesto en s2/48, pendiente confirmación del coordinador
+- [x] **Bloque 3 (M14, M16, M20, M21, M155)** — 326 `[x]` auditados, todos sustentados, 0 degradaciones. M14 test 0/0, M20 14/0, M16 0/0, M21 0/0, M155 (equipment_manager.gd + catalog.tres + .glb en disco, sin suite).
+  - [x] Log reservado: **1364** — Bloque 3 auditoría T-D7 · creado `Logs/1364-BLOQUE3-..._2026-10-06_07-20-00.md`
+  - [x] Informe bloque 3 en s2 (mensaje 54) · commit por hacer
+- [ ] **Bloque 4 (M15, M24, M29, M30, M31)** — propuesto en s2/54, pendiente confirmación
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

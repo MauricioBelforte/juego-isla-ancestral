@@ -210,3 +210,5 @@
 > "78/139 + 5 [?]" de la iteración 8 de Hy3; el módulo fue revertido por auditoría
 > 2026-09-14 (ver nota al inicio del archivo) y desde entonces los totales no se
 > recalculaban.
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 3)
+Los [13 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_dialogos.gd` = 0 fallos; scripts/dialogos/.

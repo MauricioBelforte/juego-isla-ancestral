@@ -201,3 +201,6 @@
 - [ ] Verificación V4 por log: [DOM-UI] capa registrada EquipmentLayer (pila=8) + capas montadas equipamiento=true + 0 parse errors
 - [ ] Verificación visual del panel abierto (tecla E) en ventana propia — COMPLETADO 2026-09-01 22:24 (Log 391): escena de preview scenes/preview_equipment.tscn (muestra la capa toggle) capturada y analizada: 4 slots (vacío), “16 prendas en el catálogo”, Amuleto ancestral 🔒 (capítulo), Brújula 🔒, Capa impermeable ✓, Chaleco explorador 🔒 (flag), Botas de barro ✓, hint E/ESC, bono +0%. Panel cozy crema/borde dorado correcto
 - [ ] Integración inventario→equipar (M14) [?] -- agnes-2026-09-06: IMPLEMENTADO en equipment_manager.gd (iter. 5 Log 716); _get_inventory() accede a /root/Inventario, equip_item consume 1x item con remove_item, unequip_slot devuelve con add_item
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 3)
+Los [84 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `equipment_manager.gd + equipment_catalog.tres` = 84 [x] en disco: scripts/player/equipment_manager.gd, data/equipment/equipment_catalog.tres + .glb vestimenta (alta/baja/media).
