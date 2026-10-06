@@ -10,15 +10,16 @@
 
 ## Reserva actual
 
-- Estado: Liberado 2026-08-28 (fue 🔵 En curso; ver Notas del Agente en `04-Codigo.md`)
-- Agente: GLM (Kilo)
+- Estado: 🔵 En curso (iteración acotada, mensaje 32 del director 2026-10-06)
+- Agente: mimo-v2.6-flash-free (OpenCode)
 - Fase: F0/gobernanza transversal, V0
 - Dificultad: 2
 - Visión: V0
-- Entrada: contrato O1-O19 documentado (Deepseek, 2026-08-19); dueños reales verificados
-- Salida: `operativa/vision_contract.json` (contrato completo) + `operativa/validate_vision.py` (guardián ejecutable, en verde) + `operativa/prueba_vision.md` (checklist para M114/M151)
-- Archivos: `DOCUMENTACION/153-Objetivo-Final/operativa/*`, `plan-actual/04-Codigo.md`, `plan-actual/05-Checklist.md`, `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`, `Logs/`
-- Fecha: 2026-08-28 23:35:00 (reserva) · 2026-08-28 24:00:00 (liberación)
+- Entrada: 120/130 [x] + 10 [ ] KnownIssue + 0 [?] (cierre hy3 2026-09-19, QA §21.8 hy3)
+- Salida: (1) deuda de los 10 [ ] vs realidad del código, (2) `validate_vision.py` re-corado en verde, (3) auditoría anti-sobre-cierre ligera de los 120 [x], (4) veredicto: ¿candidato a ✅?
+- Archivos: `DOCUMENTACION/153-Objetivo-Final/operativa/*`, `plan-actual/05-Checklist.md`, `CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`
+- Restricciones: sin `quality.yml`, sin `interaction_manager`, sin `service_registry`, sin M154, sin push, staging quirúrgico (Trampa 114)
+- Fecha: 2026-10-06 15:30 (reclamo)
 
 ---
 
@@ -187,7 +188,7 @@
 ## U. Guardián de Edición
 
 - [x] Definir validate_vision.gd (contrato + principios + cobertura) [M] → especificado en 04 §3; implementación ejecutable actual = validate_vision.py
-- [x] Definir visión_contract.json (O1-O19) [M] → creado v1.1 con titulo/indicador/tipo/dueños/prueba
+- [x] Definir vision_contract.json (O1-O19) [M] → creado v1.1 con titulo/indicador/tipo/dueños/prueba
 - [x] Definir chek de palabras M151 (combate/FOMO/grind) [M] → implementado (PROHIBIDAS); detectó y corrigió O2 (regla de redacción aprendida)
 - [x] Definir warn de cobertura (no error) para operaciones [S] → implementado (WARN no bloquea, exit 0)
 - [x] Documentar ejecución en editor/CI [M] → .gd destino `game/isla-ancestral/scripts/editor/` + integración CI = M118 (documentado en 04 y contrato _meta)
@@ -344,3 +345,83 @@ con dueño externo, no dudas de diseño). Corregido el texto para que coincida c
 > tal como está escrita en AGENTS.md no contempla esa excepción** — exige todos los
 > `[x]`. Si el usuario quiere formalizar la figura "KnownIssue no bloqueante" como
 > excepción válida en la DoD, este módulo es el candidato para restaurar el ✅.
+
+## Notas del Agente — Iteracion de verificacion (alcance B, mensaje 32)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-06 15:45
+**Estado:** Parcial (verificacion completa del alcance; modulo candidato a ✅ sujeto a QA §21.8)
+
+### Alcance ejecutado (iteracion acotada, sin gates nuevos)
+
+1. Deuda de los 10 `[ ]` vs realidad del codigo (NO implementar los `[ ]`).
+2. Re-correr `validate_vision.py` (Hy3 lo dejo en verde, Log 316/847).
+3. Auditoria anti-sobre-cierre ligera de los 120 `[x]`.
+4. Veredicto: candidatura a ✅ (sin aplicarla: QA §21.8 la asigna el director).
+
+### Evidencia
+
+**1. Guardian `validate_vision.py`: EN VERDE (EXIT 0).**
+Re-corrido de cero: 19 objetivos (esperados 19), `[OK] Contrato completo, sin violaciones
+de principios, prueba presente`; cobertura O# en 01-Requerimientos: `[OK]`.
+Confirmado el verde de Hy3 (Log 316/847).
+
+**2. `verificar_checklist.py` (sustento del L233): EXIT 1 con 21 alertas — 0 de M153.**
+Ninguna alerta pertenece a este modulo (son de 03/121/137-144/150/44/62/64/97-99 y
+3 bloqueos colgados 17/37/68 — todos ajenos). Se mantiene verdadera la afirmacion
+del item: "sin alertas nuevas attributable a 153".
+
+**3. Anti-sobre-cierre de los 120 `[x]` (verificacion automatizada de sustentos):**
+
+| Sustento | Resultado |
+|---|---|
+| Archivos citados (unicos) | 8 → 5 existen; los 3 restantes clasificados (ver abajo) |
+| Modulos M### citados en `[x]` | 51 menciones unicas → **todas existen en CHECKLIST-GLOBAL** |
+| `vision_contract.json` | 19/19 objetivos O1-O19 presentes |
+| Dueños declarados en contrato | todos existen en el GLOBAL |
+
+Clasificacion de los 3 "no existentes" (ninguno es sobre-cierre):
+- `validate_vision.gd` (L186/190/210): las propias lineas aclaran que es la
+  especificacion .gd y que el ejecutable actual es el .py → cita honesta.
+- `vision_contract.json` (L191): **typo con tilde → corregido** (correccion menor de
+  texto; la marca `[x]` no se toco, igual que en la auditoria de hy3).
+- `verificar_checklist.py` (L233): existe en `scripts/` (no en la carpeta del modulo).
+
+**4. Deuda de los 10 `[ ]` vs realidad del codigo:**
+
+| Tipo | Itens | Verificacion | Veredicto |
+|---|---|---|---|
+| Telemetria M104 (volver_a_casa, acercarse_puerto, pausa_contemplativa) | 3 | **0 ocurrencias** en `game/isla-ancestral/scripts/**` y `scripts/**`; los 3 estan especificados en `vision_contract.json` | **Deuda REAL** (no instrumentados, si en contrato) |
+| Verificaciones que exigen juego + playtest | 7 | Todos los M citados existen y sus estados son coherentes (M17 en curso, M104/M105/M45/M47/M161 en dudas, M54/M55/M59/M73/M74 liberados) | **Deuda REAL**, con matiz (ver abajo) |
+
+**Matiz honesto (3 de los 7):** M73 (colecciones), M59 (persistencia) y M55 (diario) **ya
+tienen codigo real** (`scripts/coleccionables/*`, `buildings_save_provider.gd`,
+`scripts/diario/*`). Sus `[ ]` dicen "requiere X implementado" → lo que falta hoy no es
+implementacion sino **verificacion empirica en juego** (playtest + vision M154, prohibidos
+en este alcance). La deuda sigue siendo legitima (KnownIssue) pero su justificacion
+esta desactualizada en esos 3 items.
+
+### Lo que NO hice (honestidad §21.4.3)
+
+- No implemente ninguno de los 10 `[ ]` (dependencias externas, prohibido por el mensaje 32).
+- No toque ninguna marca `[x]`/`[ ]`; conteo verificado por script: **120 [x] / 10 [ ] / 0 [?]**.
+- La auditoria de los 120 `[x]` es **automatizada sobre sustentos** (rutas, modulos, contrato),
+  no una revision manual uno por uno — la muestra manual la hizo atria-dawn y hy3 antes.
+- Sin M154: no verifique nada visualmente.
+- Sin `quality.yml`, sin `interaction_manager`, sin `service_registry`, sin push.
+
+### Veredicto
+
+**M153 califica como candidato a ✅** con los 10 `[ ]` como KnownIssue no bloqueante
+(patron M168/M36): DoD §21.6 satisfecha (0 `[?]`, sustentos verificados, guardian en verde,
+0 alertas propias de `verificar_checklist.py`). **No aplico el ✅** — el mensaje 32 es
+explicito: si califica, lo reporto y el director asigna un verificador independiente
+(QA §21.8; verificador ≠ mimo).
+
+### Recomendaciones para el proximo agente
+
+- El typo de L191 ya fue corregido; si aparecen otros, corregir solo texto sin tocar marcas.
+- Las 21 alertas de `verificar_checklist.py` son de otros modulos (no reclamarlos desde M153).
+- Al hacer QA §21.8: re-correr `validate_vision.py` + `verificar_checklist.py` + muestreo
+  manual de `[x]` (la automatizacion no cubre redaccion).

@@ -3844,3 +3844,25 @@ Medicion: 0/7 gates en verde verificable, 1 rojo real (BUG-078+BUG-091), 4 PENDI
 2 [?] de SB cerrados (release-build cableado por el usuario; JSON regenerado por CI), 3 hallazgos
 nuevos (ci_gates_verdes no mide, acta inexistente, CI del repo detras). **Sin push.**
 QA §21.8 de M88 sigue en cola de Hy3 (QA M55 → BUG-105 → QA M88).
+
+## 2026-10-06 15:30 - mimo-v2.6-flash-free / opencode - M153 Objetivo-Final RECLAMADO 🔵 (asignacion director, mensaje 32)
+
+**Estado:** reservado (iteracion acotada). Asignado por atria-dawn en el mensaje **32**
+(M151 iter.4 aceptado; M153 liberado por baja de space-bunny-alpha). La QA §21.8 de M151
+la hizo Hy3 (verificador ≠ mimo); la de M88 tambien esta en Hy3.
+`CHECKLIST-GLOBAL.md` fila 153: 🟡 → **🔵 En curso**, Agente → **mimo-v2.6-flash-free**, 2026-10-06 15:30.
+Backlog: linea nueva [→]. Restricciones: sin `quality.yml` (s2), sin `interaction_manager`
+(kimi), sin `service_registry` (agnes), sin M154, **sin push**, staging quirurgico (Trampa 114).
+Pool: canal cabeza 33, logs desde `reservar_log.py` (serie 1366+, rango 1351-1500 PROHIBIDO por
+T-18; mis logs renumerados: 1504→1354, 1512→1360).
+
+## 2026-10-06 15:38 - mimo-v2.6-flash-free / opencode - M153 Objetivo-Final CERRADO ✅ (iteracion alcance B)
+
+**Estado:** liberado. `CHECKLIST-GLOBAL.md` fila 153: 🔵 → **🟡 Con dudas (iter. mimo ✓)**,
+Agente **—**, 2026-10-06 15:38. Backlog: [→] → [x], log **1372**.
+Evidencia (detalle en `05-Checklist.md` §Notas): `validate_vision.py` **EXIT 0** (19/19 O);
+`verificar_checklist.py` 21 alertas **0 de M153**; sustentos de 120 `[x]` (51 M###, dueños, 19 O) todos
+reales; deuda de 10 `[ ]` **real** (telemetría sin instrumentar + 7 con matiz M73/M59/M55 ya tienen
+código). **Veredicto: CANDIDATO A ✅** con los 10 `[ ]` como KnownIssue (patrón M168/M36) —
+**reportado al director: pendiente QA §21.8 con verificador ≠ mimo** (no aplico el ✅ yo, regla 21.8).
+Logs: 1372. Canal: mensaje 34 (informe).
