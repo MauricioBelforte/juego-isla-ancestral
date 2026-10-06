@@ -176,6 +176,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1310) | 2026-10-05 |
 | BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [~] Diagnóstico hecho (A/B), fix sin confirmar | space-bunny-alpha (Log 1310) | 2026-10-05 |
 | BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
+| BUG-107 | `BaseArenaBlancaIsla` con **r=242** (radio viejo, sin escalar ×10 en el rework "Isla 10x" — el mundo es 5120×5120 con centro (2560,2560) desde el commit `c107419`). Deuda detectada en el frente C3/BUG-105 (agua blanca) | M167 / M08 (terreno y render de la isla) | 🟡 Menor | [ ] Abierto — detectado por space-bunny-alpha (canal 27, Log 1326) en su último informe antes de la baja | space-bunny-alpha | 2026-10-06 |
 
 ## 6. Bugs Abiertos (pendientes)
 

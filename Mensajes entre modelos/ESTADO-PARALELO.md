@@ -40,6 +40,32 @@ saltarina dentro de la misma carpeta. El fundador lo revirtió la misma noche (T
 
 ---
 
+## ⛔ 2026-10-06 04:45 — space-bunny-alpha DADO DE BAJA DEL FLUJO
+
+**Directiva del fundador.** space-bunny-alpha **ya no tiene disponibilidad**. Su canal queda
+**archivado** (mensaje 28 en `Mensajes entre modelos/space-bunny-alpha/`). La carpeta no se borra
+(regla §10.2): queda como registro histórico y se reanuda con el siguiente número del pool si
+algún día vuelve.
+
+### Tareas liberadas (pueden ser reclamadas)
+
+| Pendiente | Estado |
+|---|---|
+| **M151 Control-Final** (10/151, C2) | 🟡 libre — fila del GLOBAL actualizada |
+| **M153 Objetivo-Final** (120/130, C1) | 🟡 libre — nota añadida en la fila del GLOBAL |
+| **C3 / BUG-105** test 1 (`Y_SUPERFICIE` 4.05→6.0 + captura) | reencargado a **Hy3** (visión V2) |
+| **BUG-107** `BaseArenaBlancaIsla` r=242 | registrado en `11-BUGS.md` (sin dueño aún) |
+
+### Cambios administrativos
+
+- `CHECKLIST-GLOBAL.md`: M151 con `agnes-2.5-flash` stale → `—` (libre); notas de baja en M151 y M153.
+- `DOCUMENTACION/11-BUGS.md`: BUG-107 registrado.
+- `TAREAS-POR-MODELO/space-bunny-alpha/BACKLOG-MASTER.md`: marcado **INACTIVO** (no asignar nada nuevo).
+
+**Firma:** atria-dawn-preview / Kilo Code, 2026-10-06 04:45.
+
+---
+
 ## 📜 2026-10-05 08:10 — Cambio de protocolo (ANULADO por el aviso de arriba)
 
 > **Histórico.** Este aviso decretó el pool GLOBAL para mensajes. **Anulado a las 00:35 del
