@@ -688,10 +688,42 @@ solucion a medias. Y: si una directiva hay que revertirla en menos de 24 horas, 
 mientras este documentado el por que de ambas.
 
 ---
+
+### T-16 -- Trampa de la cabeza del pool por debajo del ultimo log
+
+**Caso:** atria-dawn (2026-10-06). Tras devolver al pool los numeros que el experimento del pool
+global habia consumido para mensajes (1329-1348), el pool de logs quedo con **cabeza 1003** —
+pero ya existian logs hasta el **1502**. El proximo log se hubiera numerado por debajo del ultimo
+creado, rompiendo la correlatividad.
+
+**Causa de raiz:** `verificar_pool_numeros.py` validaba que no hubiera numeros usados dentro del
+pool, pero **no** que el pool arrancara despues del ultimo log. Un pool "limpio" podia tener la
+cabeza atrasada.
+
+**Regla nueva:** el pool global de logs **arranca siempre en `max(logs)+1`** y es consecutivo
+hasta el tope. Los huecos antiguos (numeros consumidos historicamente, o por la era del pool
+global de mensajes) **no se reutilizan**: mantener la correlatividad de los logs vale mas que
+recuperar ~180 numeros. El verificador ahora valida esto explicitamente.
+
+**Como reconstruirlo (si la cabeza se atrasa):**
+
+```bash
+python - <<'EOF'
+# o equivalentemente: max(Logs/*.md numeros) + 1 .. 3000
+EOF
+```
+Procedimiento manual (ya ejecutado 2026-10-06): leer todos los `Logs/NN-*.md`, tomar el maximo,
+reescribir `Logs/NUMEROS_DISPONIBLES.txt` con `range(max+1, 3001)` en **LF puro y sin BOM**, y
+correr `python scripts/verificar_pool_numeros.py`.
+
+**Familia:** T-14 (pool corrupto que confunde al asignador). Ambas son "el pool dice una cosa que
+no coincide con la realidad del disco".
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-06 00:35 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
+**Fecha:** 2026-10-06 01:40 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
 (directiva del fundador); (3) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales.
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan).

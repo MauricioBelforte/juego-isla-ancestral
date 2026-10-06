@@ -49,9 +49,17 @@ for p in LOGS.glob("*.md"):
 fuga = pool_logs & logs_usados
 if fuga:
     fails.append(f"log(s) ya creado(s) pero su numero sigue en el pool global: {sorted(fuga)}")
+# correlatividad: el pool global debe arrancar justo despues del ultimo log existente
+# (los huecos antiguos no se reutilizan, T-16)
+if logs_usados and pool_logs:
+    mx = max(logs_usados)
+    if min(pool_logs) != mx + 1:
+        fails.append(f"pool global no es correlativo: arranca en {min(pool_logs)} "
+                     f"pero el ultimo log es {mx} (deberia arrancar en {mx + 1})")
+    # si hay un hueco entre el max log y el tope, todos los intermedios deben estar libres
 print(f"pool global (logs): {len(pool_logs)} libres, "
       f"rango {min(pool_logs)}..{max(pool_logs) if pool_logs else '-'} | "
-      f"{len(logs_usados)} logs en disco")
+      f"{len(logs_usados)} logs en disco, ultimo {max(logs_usados) if logs_usados else '-'}")
 
 # --- pools por canal ---
 print()
