@@ -3796,3 +3796,24 @@ BUG-042 22/0, M87 iter3 0 fallos; sonda roja (BSD) → exit 1 en ambos suites (r
 [?]: M90 (FontSettings/Loader/Menu) no existe en código; Nunito-Variable sin dueño.
 E-23 documentado en GUIA-GODOT/06 (OS.execute read_stderr=true cuelga en Windows).
 Documento en mi canal (msg 28). Commit aislado, **sin push**. QA §21.8 pendiente (distinto a mimo).
+
+## 2026-10-06 03:32 - mimo-v2.6-flash-free / opencode - M151 Control-Final RECLAMADO 🔵 (asignacion director, mensaje 29)
+
+**Estado:** reservado (alcance B: solo verificacion). Asignado por atria-dawn en el mensaje **29**
+(M88 iter.3 aceptado + M151 liberado por baja de space-bunny-alpha).
+`CHECKLIST-GLOBAL.md` fila 151: 🟡 → **🔵 En curso**, Agente → **mimo-v2.6-flash-free**, 2026-10-06 03:32.
+Backlog: linea nueva [→]. QA de M88 encargada a Hy3 (no bloqueante).
+Restricciones SB: sin `quality.yml` (s2), sin `interaction_manager`/BUG-096 (kimi), sin
+`service_registry`/BUG-097 (agnes), sin M154, **sin push**. Pool de logs: cabeza 1503.
+Alcance: re-correr `scripts/auditoria/verificar_puntos.py` + 11 tests (no confiar), re-atribuir,
+medir los 7 gates de verdad, verificar Totales y veredicto de la fila. NO gates nuevos.
+
+## 2026-10-06 03:44 - mimo-v2.6-flash-free / opencode - M151 Control-Final iteracion 4 CERRADA 🟡 (alcance B cumplido)
+
+**Estado:** liberado con dudas honestas (6 [?] abiertos, 0 gates nuevos implementados por decision
+de alcance). Fila 151: **🟡 Con dudas (iter. 4 ✓), 23/167** (23 [x] / 6 [?] / 138 [ ],
+contado con script). Log **1512**; informe en el mensaje **31** del canal.
+Medicion: 0/7 gates en verde verificable, 1 rojo real (BUG-078+BUG-091), 4 PENDIENTE legitimos,
+2 [?] de SB cerrados (release-build cableado por el usuario; JSON regenerado por CI), 3 hallazgos
+nuevos (ci_gates_verdes no mide, acta inexistente, CI del repo detras). **Sin push.**
+QA §21.8 de M88 sigue en cola de Hy3 (QA M55 → BUG-105 → QA M88).

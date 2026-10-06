@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 04-Codigo.md — Módulo 151: Control Final
 
@@ -118,8 +118,10 @@ Gates fijos PENDIENTE: crash_rate_cero (M143/M104, necesita 72 h de telemetria) 
 
 | Pipeline | Comportamiento | Detalle |
 |---|---|---|
-| .github/workflows/quality.yml job elease-gate | **Acta informativa, NO bloquea** (decision a del fundador) | Si el gate bloquea -> ::warning:: + exit 0. Sube el JSON como artifact. |
-| .github/workflows/release-build.yml job elease-gate | **Bloqueante** (decision b) | Si el gate bloquea -> ::error:: + exit 1; no se publica. uild depende de [test, release-gate]. |
+| .github/workflows/quality.yml job 
+elease-gate | **Acta informativa, NO bloquea** (decision a del fundador) | Si el gate bloquea -> ::warning:: + exit 0. Sube el JSON como artifact. |
+| .github/workflows/release-build.yml job 
+elease-gate | **Bloqueante** (decision b) | Si el gate bloquea -> ::error:: + exit 1; no se publica. uild depende de [test, release-gate]. |
 
 Ambos con if: always(): el gate se ejecuta **aunque la suite falle** (si no, se
 skipea justo cuando hay gates rotos). Corregido en commit 5d0ffd5 tras detectar el
@@ -127,7 +129,8 @@ job skipped en el primer run.
 
 ### Gate de ceguera (trampa 100)
 
-Si egenerar_estado_release.py no puede leer DOCUMENTACION/11-BUGS.md (exit 3),
+Si 
+egenerar_estado_release.py no puede leer DOCUMENTACION/11-BUGS.md (exit 3),
 **falla el job**: un "0 criticos abiertos" sobre un archivo vacio no es un aprobado,
 es "no mire". Mismo patron que erificar_checklist.py (BUG-075). El unico override
 es --criticos-abiertos N, que se usa solo en los tests.
@@ -137,3 +140,35 @@ es --criticos-abiertos N, que se usa solo en los tests.
 El gate queda **BLOQUEADO** por zero_criticos_abiertos (BUG-078 y BUG-091, criticos
 abiertos reales del proyecto). Es el comportamiento correcto: son bugs reales, no
 errores de cableo.
+
+
+## Notas del Agente — iteración 4 (verificación alcance B)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-06 03:45:00
+**Estado:** Completado (alcance B: verificación + re-atribución; 0 gates nuevos)
+
+### Lo que hice
+- Re-corrí sin confiar: `test_verificar_puntos.py` **14 PASS/0 FAIL exit 0** (SB decía 11),
+  `verificar_puntos.py` sin acta **exit 3** (detector ciego, BUG-075 funciona como proceso),
+  `--plantilla` exit 0 (26 puntos), `test_control_final_headless.gd` **12/0**, y el gate CLI
+  `control_final_gate.gd` contra el JSON real → **exit 1 BLOQUEADO** por `zero_criticos_abiertos`.
+- Medí los 7 gates de verdad (tabla en `05-Checklist.md`, iteración 4): 0 en verde verificable
+  hoy, 1 rojo real (2 críticos: BUG-078, BUG-091, contados con `contar_criticos_abiertos()`),
+  4 PENDIENTE legítimos. El acta del repo está detrás del último CI (`test-suite: failure`).
+- Cerré 2 `[?]` de SB que estaban desactualizados: el gate **ya** está cableado en
+  `release-build.yml` (usuario, commits `f8119c1`+`5d0ffd5` del 10-05) y el JSON **ya** se
+  regenera en ambos pipelines. Atribuí a sus autores reales; verifiqué leyendo los workflows.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- [?] `ci_gates_verdes` estructuralmente no mide los demás jobs (hardcode `1` en quality.yml;
+  `needs.test` en release-build) → lo dejé documentado, **sin tocar quality.yml** (restricción).
+- [?] El acta `acta-control-final.json` no existe y los 3 importadores siguen sin implementar
+  → fuera del alcance B (no implemento nada nuevo).
+- [?] El `test-suite: failure` del CI es ajeno a M151 → reportado, no perseguido.
+
+### Recomendaciones para el próximo agente
+- Que s2/director decidan sobre `ci_gates_verdes` (renombrar o cablear la consulta real).
+- Generar el acta con `--plantilla` y evaluarla recién cuando existan datos de los 26 puntos.
+- Re-correr la medición de gates tras el próximo push: el acta del repo se actualiza sola con el CI.
