@@ -124,13 +124,18 @@
 
 ## F. TerrainBlock (Terrenos en Escena)
 
-- [x] Crear terrain_block.gd [M]
+- [?] Crear terrain_block.gd [M] — **Auditoría A (agnes-3-flash, 2026-10-06):** el archivo NO existe
+  en disco. La implementación real es **data-driven**: `data/terrenos/terrenos.json` (7 tipos,
+  testeado, `[M156] Terrenos cargados: 7`) vía `terrain_data`/`terrain_provider`/`terrain_detector`/
+  `terrain_modifiers`. Suplantado, no creado → `[?]`.
 - [x] Implementar property terrain_id: int [S]
 - [x] Implementar get_terrain_id() [S]
 - [ ] Heredar de StaticBody3D [S]
 - [x] Requerir CollisionShape3D hijo [S]
 - [ ] Documentar uso por bloques de terreno [S]
-- [x] Crear escena base terrain_block.tscn [M]
+- [?] Crear escena base terrain_block.tscn [M] — **Auditoría A (agnes-3-flash, 2026-10-06):**
+  `.tscn` no existe; la escena base quedó suplanteda por los datos en `terrenos.json` +
+  `terrain_data` (Resource). → `[?]`.
 - [x] Configurar CollisionShape3D con BoxShape3D [S]
 - [ ] Asignar layer correcta segun terreno [M]
 - [x] Asignar terrain_id correcto [S]
@@ -242,7 +247,9 @@
 - [x] Definir Layer 7 = Terrain_Snow [S]
 - [x] Definir Layer 8 = Terrain_Rock [S]
 - [x] Configurar collision_mask del RayCast3D [S] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2)
-- [x] Asignar collision_layer a cada terrain_block [M]
+- [?] Asignar collision_layer a cada terrain_block [M] — **Auditoría A (agnes, 2026-10-06):**
+  referencia a `terrain_block` (inexistente, ver L127/L133). La colisión de terreno real es vía
+  `terrain_detector` (raycast). Verificación de assignment de collision_layer pendiente → `[?]`.
 - [ ] Verificar que el jugador NO tiene layers de terreno [S]
 - [x] Documentar configuracion de Layers [S]
 
@@ -381,7 +388,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 307 ítems · Completados: 246 · Pendientes: 59 · No resueltos: 2.
+**Totales:** 307 ítems · Completados: 243 · Pendientes: 59 · No resueltos: 5. (Auditoría A agnes 2026-10-06: 3 `[x]` degradados a `[?]` — terrain_block.gd/.tscn/collision_layer no existen, implementación real es data-driven vía terrenos.json + terrain_data/provider/detector/modifiers.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un
@@ -402,3 +409,26 @@ Un regex amplio de marcado automático marcó 7 ítems [x] que NO se hicieron (m
 - [x] Cache de clases globales regenerada (--editor --quit)
 - [x] Test fijo también en plugin_herramientas.gd (const preload sin := en const — parse del editor)
 - [?] Aviso de regresión AJENA: scripts/core/event_bus.gd con parse error ('Unexpected Indent in class body' + class name renombrada a EventBus_) — modificación reciente de otro agente (git M); el árbol no bootea hasta que el dueño lo corrija (NO se tocó, regla §21.4)
+
+## Notas del Agente — Auditoría T (2026-10-06, agnes-3.0-flash / Kilo Code)
+
+**Auditoría selectiva A** (canal `agnes-3-flash` arch. 1334): verificar que los `[x]` tengan
+evidencia real en disco; **degradar a `[?]` los que no la tengan** (precedentes M36/M65 Caso A).
+No subí estados yo — solo degradación honesta + reporte.
+
+**Núcleo (VERDADERO):** `test_terrenos.gd` = **0 fallos, EXIT 0**; runtime `[M156] Terrenos
+cargados: 7`; `terrain_detector/provider/modifiers/data` + `terrain_data_provider` +
+`test_terrain_modifiers` existen en `scripts/terrenos/`. El sistema de terreno es **data-driven**
+(`data/terrenos/terrenos.json`, 7 tipos) y funcional.
+
+**3 `[x]` degradados a `[?]`** (evidencia no existe en disco):
+- `Crear terrain_block.gd` (L127) y `Crear escena base terrain_block.tscn` (L133): **archivos NO
+  existen**. La implementación real es la data-driven (`terrenos.json` + `terrain_data`
+  Resource), no un `terrain_block.gd/.tscn` separados → suplantedo.
+- `Asignar collision_layer a cada terrain_block` (L250): referencia a `terrain_block`
+  inexistente; la colisión de terreno real es vía `terrain_detector` (raycast) → verificación
+  pendiente.
+
+**Totales:** `246 [x] → 243 [x]`, `2 [?] → 5 [?]` (M156 = 307 · 243·5·59). El estado `🟡` ya lo
+ponía el dueño/coordinador; mi trabajo fue la degradación honesta + esta nota. **No toqué el
+estado** ni el `event_bus.gd` ajeno (regla §21.4).
