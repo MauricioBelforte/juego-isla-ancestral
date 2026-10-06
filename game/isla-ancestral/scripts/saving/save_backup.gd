@@ -59,7 +59,7 @@ static func read_latest_backup(slot: int) -> String:
 	var path := latest_backup(slot)
 	if path.is_empty() or not FileAccess.file_exists(path):
 		return ""
-	return FileAccess.get_file_as_string(path)
+	return SaveWriter.read_document(path)
 
 static func _bak_path(slot: int, rotation: int) -> String:
 	return "%s/slot_%d_r%d%s" % [SaveSchema.SAVE_DIR, slot, rotation, BAK_SUFFIX]

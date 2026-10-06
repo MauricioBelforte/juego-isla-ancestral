@@ -38,7 +38,7 @@ func load(slot: int) -> Dictionary:
 			return _try_recover(slot, "falta el save principal (guardado interrumpido)")
 		return {"result": LoadResult.NOT_FOUND, "payload": {}, "version": 0}
 
-	var content := FileAccess.get_file_as_string(path)
+	var content := SaveWriter.read_document(path)
 	var parsed := SaveWriter.parse_document(content)
 	if not parsed.get("ok", false):
 		return _try_recover(slot, String(parsed.get("reason", "documento inválido")))

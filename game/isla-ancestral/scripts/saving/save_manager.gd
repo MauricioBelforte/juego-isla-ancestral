@@ -249,7 +249,7 @@ func load_slot(slot: int) -> int:
 func slot_metadata(slot: int) -> Dictionary:
 	if not SaveWriter.save_exists(slot):
 		return {}
-	var content: String = FileAccess.get_file_as_string(SaveWriter.path_for(slot))
+	var content: String = SaveWriter.read_document(SaveWriter.path_for(slot))
 	var doc: Dictionary = SaveWriter.parse_document(content)
 	if not doc.get("ok", false):
 		return {}

@@ -20,6 +20,27 @@ const TMP_SUFFIX: String = ".tmp"
 ## Sufijo del archivo final
 const SAVE_SUFFIX: String = ".save"
 
+## Cap de tamano (bytes) para leer un documento de save a memoria (BUG-109).
+## Un save real ronda los pocos KB (~4.6 KB medidos); 2 MB da ~450x de margen sin
+## permitir que un archivo fabricado (el checksum no es anti-trampas, ver BUG-115)
+## agote la memoria al leerse entero.
+const MAX_DOCUMENT_BYTES: int = 2 * 1024 * 1024
+
+## Lee un documento verificando existencia y tamano ANTES de cargarlo entero a
+## memoria. Devuelve "" si no existe, no se puede abrir o excede el cap (BUG-109).
+static func read_document(path: String) -> String:
+	if not FileAccess.file_exists(path):
+		return ""
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		return ""
+	var size := f.get_length()
+	f.close()
+	if size > MAX_DOCUMENT_BYTES:
+		push_error("[SAVE] Documento %s excede el cap (%d > %d bytes); no se lee (BUG-109)" % [path, size, MAX_DOCUMENT_BYTES])
+		return ""
+	return FileAccess.get_file_as_string(path)
+
 ## Calcula el SHA-256 en hexa de una cadena usando HashingContext.
 static func sha256_hex_str(s: String) -> String:
 	var ctx := HashingContext.new()
