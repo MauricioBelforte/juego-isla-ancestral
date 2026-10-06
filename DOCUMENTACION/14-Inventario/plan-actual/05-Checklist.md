@@ -679,3 +679,10 @@ muelles físicos de M17 — el lado de datos está completo.
 > `CHECKLIST-QA-SEALS.md`, Log 1127).
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 3)
 Los [136 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_inventario_iter5.gd` = 0 fallos (EXIT 0); scripts/inventario/.
+
+## QA Cruzado §21.8 agnes 2026-10-06 (verificador != autor)
+Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅
+- Conteo independiente: 136 [x] / 4 [?] / 0 [ ] (coincide fila global).
+- Suite re-corrida headless: test_inventario_iter5 0/0.
+- [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 4 [?] = acciones contextuales por slot / soporte gamepad+teclado-mouse / recolección bolsillo lleno / pickups flotantes — todos QA atria-dawn 2026-09-18 (dueño director), bloqueos externos reales.
+- 0 falsos-cierres. No se sube estado (flip GLOBAL = director).

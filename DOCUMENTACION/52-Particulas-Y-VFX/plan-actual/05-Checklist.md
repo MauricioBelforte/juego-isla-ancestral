@@ -383,3 +383,10 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
 Los [137 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_vfx_m52_iter6.gd 76/0 = scripts/particles/ (vfx catalog/director/factory/pool).
+
+## QA Cruzado §21.8 agnes 2026-10-06 (verificador != autor)
+Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅
+- Conteo independiente: 137 [x] / 1 [?] / 10 [ ] (coincide fila global).
+- Suite re-corrida headless: test_vfx_m52_iter6 76/0.
+- [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 1 [?] = catálogo VFX (M44 feedback + M92 tutorial); 10 [ ] = presets M90 / timelines M48 / chapoteo M13 / estelas M47 / menús M53 / Reduce-Motion M58 — todos dueño externo.
+- 0 falsos-cierres. No se sube estado (flip GLOBAL = director).
