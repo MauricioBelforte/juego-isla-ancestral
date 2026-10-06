@@ -215,3 +215,6 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 18 [x] / 101 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 8)
+M47: Sustentado, 0 degradaciones. Evidencia: test_materiales_m47.gd 17/0 = scripts/arte3d/; el mas bajo documental del tablero, sin agente activo.

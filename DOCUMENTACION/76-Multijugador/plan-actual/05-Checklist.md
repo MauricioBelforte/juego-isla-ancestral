@@ -9,7 +9,7 @@
 - [ ] Documentar la decisión con argumentos de género (AC/Stardew/CozyGrove) [M]
 - [ ] Documentar la decisión con argumentos de coste [M]
 - [ ] Verificar que el postgame (M75) cubre la vida de la isla sin red [M]
-- [x] Registrar la decisión en el manifiesto mp_contract.json [S]
+- [?] Registrar la decisión en el manifiesto mp_contract.json [S]  [Auditoria T-agnes blq8 2026-10-06: mp_contract.json AUSENTE + M76 bloqueado por producto (single-player v1, patron M77)]
 
 ## B. Modo Local (RF2)
 
@@ -112,7 +112,7 @@
 - [ ] Definir sin chat en v1 [S]
 - [ ] Definir frases rápidas (T-chat moderado) [M]
 - [ ] Definir sin texto libre en el cozy [S]
-- [x] Definir sistema de reporte si hay texto libre futuro [M]
+- [?] Definir sistema de reporte si hay texto libre futuro [M]  [Auditoria T-agnes blq8 2026-10-06: mp_contract.json AUSENTE + M76 bloqueado por producto (single-player v1, patron M77)]
 - [ ] Registrar chat=frases rapidas en el manifiesto [S]
 
 ## O. Emotes (RF15)
@@ -201,7 +201,7 @@
 - [ ] Documentar el flujo de apertura de FASE LOCAL [M]
 - [ ] Documentar el flujo de apertura de FASE ONLINE (M77) [M]
 - [ ] Entregar validate_mp_contract.gd (grep + manifiesto) [M]
-- [x] Entregar mp_contract.json [S]
+- [?] Entregar mp_contract.json [S]  [Auditoria T-agnes blq8 2026-10-06: mp_contract.json AUSENTE + M76 bloqueado por producto (single-player v1, patron M77)]
 
 ## Z. Cierre del Módulo
 
@@ -210,8 +210,11 @@
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
-**Totales:** 130 ítems · Completados: 4 · Pendientes: 126 · No resueltos: 0.
+**Totales:** 130 ítems · Completados: 1 · Pendientes: 126 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 126 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 8)
+M76: 3 [x] degradados (bloqueado por producto). Evidencia: mp_contract.json AUSENTE = M76 bloqueado single-player v1 (patron M77): 3 [x] -> [?] (mp_contract.json x2 + reporte futuro). 1 [x] queda (documentar decision single-player). Reportado al director.

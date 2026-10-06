@@ -349,3 +349,6 @@ Re-verificación del delta iter.5+6 (el autor no puede auto-verificarse, trampa 
 - **Alcance headless:** mide la contratación de M62 (que su cola no retenga recursos). El teleport con
   mundo real (M08/M63) sigue siendo Play Mode — **L213 no se cierra con esto**.
 - **PENDIENTE:** cablear la suite a `quality.yml` (no lo toqué — es de s2/director).
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 8)
+M62: Sustentado, 0 degradaciones. Evidencia: test_memoria_m62_iter5.gd 60/0 = scripts/rendimiento/memoria/; verificado contra disco.

@@ -343,3 +343,6 @@ La traducción `dia` (proveedor M29) → `day` (schema) vive ahora en un único 
 - `test_autosave_m59.gd`: 0 fallos, EXIT 0.
 - `validate_save.gd`: 16/0, EXIT 0 (gate duro).
 - **Rojo reproducible:** reintroducir BUG-088 (rotate tras write_atomic) → `test_rotate_m59` 8 fallos / EXIT 1; revertido sin diff.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 8)
+M59: Sustentado, 0 degradaciones. Evidencia: test_autosave_m59.gd 0/0 = scripts/saving/ (save_snapshot.gd + save_writer.gd re-verificados contra el codigo actual post-fix de DeepSeek BUG-108..115); 1 [?] externo.

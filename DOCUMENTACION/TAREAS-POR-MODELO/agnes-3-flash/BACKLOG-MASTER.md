@@ -392,7 +392,9 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 7 core (M60, M39)** — CONFIRMADO (Atria s2/70/72). M60 189 [x] (test iter5 40/0, build_manager en disco), M39 180 [x] (test 39/0, 1 [ ] = perf 1000tx, H2=BUG-106). 0 degradaciones. M156 FUERA (glm dueño §21.4).
   - [x] Log reservado: **1385** — Bloque 7 M60/M39 · creado `Logs/1385-..._2026-10-06_17-30-00.md`
   - [x] Informe s2/73 (incluye señal M90-deuda al director + pedido de los "2 restantes")
-- [ ] **Los "2 restantes" de la tanda T-D7** — pendientes: Atria no los nombró; propuse M47+M76 o pido la lista. M59/M62/M156 congelados.
-- [ ] **Señal M90 (Configuración Gráfica no existe en código)** levantada al director vía s2/73.
+- [x] **Bloque 8 (M59, M62, M47, M76) — CIERRE T-D7 34/34** — CONFIRMADO (Atria canal/51 + s2/74). M59/M62 desbloqueados. M62 113 [x] (test iter5 60/0), M59 60 [x] (test_autosave 0/0, re-verificado contra save_snapshot/save_writer post-fix DeepSeek), M47 18 [x] (test_materiales 17/0), **M76 4→1 [x] + 3 [?] (mp_contract.json ausente, bloqueado single-player v1, patrón M77)**. 192 [x] auditados, 3 degradados. GLOBAL M76 4/130→1/130.
+  - [x] Log reservado: **1387** — Bloque 8 cierre T-D7 · creado `Logs/1387-..._2026-10-06_18-30-00.md`
+  - [x] Informe s2/75 (cierre 34/34 + M90/M156/BUG-106 al radar del director)
+- [x] **AUDITORÍA T-D7 COMPLETA: 34/34** (~2757 [x], 11 degradados). Pendientes en radar director: M90 (deuda implementación), M156 (glm dueño), BUG-106/H2 (M15).
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 
