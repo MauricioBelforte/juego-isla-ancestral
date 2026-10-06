@@ -174,3 +174,28 @@ J (diario) → ui_manager._unhandled_input → DiaryLayer.toggle()
 
 LazyLoad/virtualización (§2.2.1) **NO implementados** en iter. 2: la lista crea una fila por
 entrada descubierta de la categoría activa (checklist W pendiente para el lote de rendimiento).
+
+## 9. T-M1 lote 2 — Modelo rico y detalle (2026-10-05)
+
+**Modelo de entrada** en `diario_catalog.json` (ya no solo `{id, titulo}`):
+
+```json
+{ "id": "vecino_catalina_oso", "titulo": "Catalina Oso",
+  "descripcion": "...", "refs": ["lugar_isla_raiz"] }
+```
+
+- `descripcion` (opcional): párrafo corto de contexto; **solo fuentes reales del repo**
+  (historia de villager .tres, historia_principal.json, secundarias.json).
+- `refs` (opcional): ids de otras entradas del catálogo. En la UI son botones navegables;
+  **cada ref se filtra con `esta_registrada()`** → no puede revelar contenido no descubierto.
+- `DiaryService.detalle_entrada(id)` devuelve `{id, titulo, descripcion, refs}`;
+  `categoria_de(id)` da la categoría de una entrada (para navegar desde otra pestaña).
+
+**Detalle del panel** (columna 3): título → estado/día → descripción (`LblDetalleDesc`,
+autowrap, oculto si no hay texto) → cabecera `Referencias` + botones `Ref_*` → acciones
+(favorito, etc.). Sin descripción/refs, los widgets extra se ocultan (sin huecos).
+
+**Persistencia de preferencias de UI:** el save del diario añade
+`"ui": {"filtro": <0-4>, "categoria": <slug>}`; `set_ui_prefs()` sanea valores fuera de
+rango a los defaults (0/"personajes"); al abrir la capa, `_aplicar_prefs_ui()` restaura
+el filtro y la pestaña de la sesión anterior.

@@ -3670,3 +3670,12 @@ quedan 26 `[ ]` de otros dueños).
 
 **Firma:** **Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04 05:45:00
 
+## 2026-10-05 21:14 - mimo-v2.6-flash-free / opencode - M55 Diario LOTE 2 CERRADO (frente T-M1, canal 18)
+
+**Estado:** ✅ **Lote 2 CERRADO 2026-10-05 21:14** — 4/4 encargos del director:
+1. `validate_diary.gd` (nuevo): 6 áreas (estructura/mapeo 14 cats, contenido, i18n es/en, persistencia, rendimiento, encoding); **verde 0 fallos/1 aviso** + **sonda roja 21 fallos/EXIT 1**.
+2. Descripciones/refs en el detalle: catálogo +8 descripciones +3 refs (solo fuentes reales: villager .tres, historia_principal, secundarias; **36/44 sin fuente, sin inventar**), `detalle_entrada`/`categoria_de`, `LblDetalleDesc` + refs navegables anti-spoiler, `DIARY.REFERENCIAS` es/en.
+3. Persistencia ★/filtros entre sesiones: `test_diario_persist.gd` 2 procesos con SaveManager M59 real (slot 3 con backup/restore) → **0 fallos EXIT 0**; ui prefs saneadas + restauradas al abrir.
+4. Fotos con 0 entradas: **diagnóstico — frente sin contenido M56, NO bug de datos**: no existe emisor `FOTO_TOMADA` (photo_service solo `modo_foto_cambiado`; `fauna_registry.especie_fotografiada` sin conectar) → documentado en 05 L53/L212, sin implementar.
+
+**Regresión 4/4 verde** (validate 0/1 → test_diario 0 → test_diario_ui 89/0 → persist 0). Docs 03 §9, 04 tablas+Notas iter3, 05 (7 flips: 37 [x]/3 [?]/91 [ ]), 06, 07 §6-7. **CG fila 55**: 33/131 → **37/131**, última actividad 2026-10-05 21:14, Estado 🟡 (quedan [?]). **Log 1345** reservado (pool). 🔵 **QA §21.8 pendiente** (verificador distinto a mimo). No tocado: ui_manager (s2), interaction_manager (kimi), service_registry (agnes), guía 08 (working tree ajeno). Sin push.

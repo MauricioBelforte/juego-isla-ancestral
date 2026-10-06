@@ -5,17 +5,19 @@
 
 ## 1. Archivos Involucrados
 
-### 1.1 Archivos REALES en disco (iter. 1 + iter. 2, verificados 2026-10-04)
+### 1.1 Archivos REALES en disco (iter. 1 + 2 + T-M1 lote 2, verificados 2026-10-05)
 
 | Archivo | Ruta | Rol | Origen |
 |---|---|---|---|
-| `diary_service.gd` | `scripts/diario/` | Autoload: registro/estado/favoritos/búsqueda/%/persistencia (ISaveProvider M59) | iter. 1 (glm, Log 374) |
-| `diary_layer.gd` | `scripts/ui/layers/` | Capa MODAL_FULL: pestañas 14, lista, filtros, detalle, favoritos, i18n | iter. 2 (mimo, este log) |
-| `diario_catalog.json` | `data/diario/` | 14 categorías, 44 entradas, claves `{id, titulo}` | iter. 1 |
+| `diary_service.gd` | `scripts/diario/` | Autoload: registro/estado/favoritos/búsqueda/%/persistencia (ISaveProvider M59) + `detalle_entrada`/`categoria_de`/ui prefs | iter. 1 (glm, Log 374) + lote 2 |
+| `diary_layer.gd` | `scripts/ui/layers/` | Capa MODAL_FULL: pestañas 14, lista, filtros, detalle (descripción + refs navegables), favoritos, i18n, prefs de UI | iter. 2 (mimo) + lote 2 |
+| `diario_catalog.json` | `data/diario/` | 14 categorías, 44 entradas; 8 con `descripcion`, 3 con `refs` (claves `{id, titulo, descripcion?, refs?}`) | iter. 1 + lote 2 |
 | `test_diario.gd` | `scripts/diario/` | Suite del servicio: registro, 6 puentes de eventos, anti-spoiler, %, persistencia | iter. 1 |
 | `test_diario_ui.gd` | `scripts/ui/` | Suite de la capa: 89 checks (estructura, filtros, i18n, favoritos, pila, edge cases) | iter. 2 |
+| `validate_diary.gd` | `scripts/diario/` | Validador headless: estructura/mapeo, descripciones/refs, i18n es/en, persistencia, rendimiento, encoding; ruta alterna vía user arg | **T-M1 lote 2** |
+| `test_diario_persist.gd` | `scripts/diario/` | Suite 2 procesos (padre/hijo) con SaveManager M59 real: guardar→salir→cargar en slot 3 | **T-M1 lote 2** |
 | `ui_manager.gd` | `scripts/ui/core/` | Wiring: bloque `diario`/`favorito` en `_unhandled_input` + fix `close_top` (capa visible) | iter. 2 |
-| `es.po` / `en.po` | `locales/` | +19 claves `DIARY.*` por idioma (36 totales nuevas) | iter. 2 |
+| `es.po` / `en.po` | `locales/` | 19 claves `DIARY.*` (iter. 2) + `DIARY.REFERENCIAS` (lote 2) = 37 | iter. 2 + lote 2 |
 | `project.godot` | raíz `game/isla-ancestral/` | Acción de input `diario` (tecla J, physical 74 / unicode 106) | iter. 2 |
 
 ### 1.2 Archivos del diseño original (PLAN — aún no existen)
@@ -26,7 +28,7 @@
 | `diary_catalog.tres` | `Assets/_Project/Diary/data/` | reemplazado por JSON (iter. 1) |
 | `diary_save.gd` | `Assets/_Project/Diary/service/` | integrado en `diary_service.gd` |
 | `diary_screen/list_item/detail.gd` | `Assets/_Project/Diary/ui/` | unificados en `diary_layer.gd` |
-| `validate_diary.gd` | `Assets/_Project/Diary/validators/` | **NO creado** (checklist Y) |
+| `validate_diary.gd` | `Assets/_Project/Diary/validators/` | **Creado** en `scripts/diario/` (T-M1 lote 2, checklist Y) |
 
 ## 2. Funciones Clave y Logs Relacionados
 
@@ -197,3 +199,43 @@ El diario usa el sistema central de logs de consola (M118): prefijo `[DIARY]` pa
 - **`validate_diary.gd` (Y):** puede reutilizar las aserciones de `test_diario_ui.gd` (claves, estructura, anti-spoiler).
 - **Ojo con `alternar_favorito`:** devuelve estado, no éxito — usar `esta_registrada()` como guard.
 - **`close_top()`** ya purga la capa visible: no regresar al comportamiento `stack[-1]` (rompe Esc con capas ocultas en la pila).
+
+## Notas del Agente - Iteración 3: T-M1 lote 2 (validador, detalle rico, persistencia real) — 2026-10-05
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-05
+**Estado:** Completado (4/4 encargos del director; con honestidades anotadas)
+
+### Lo que hice
+- **`validate_diary.gd`** (nuevo, ~290 L, SceneTree): 6 áreas — (1) estructura/mapeo: 14 categorías == `get_categorias()`, ids `^[a-z0-9_-]+$` únicos, títulos no vacíos, conteo vs `total_entradas`; (2) contenido: `descripcion` no vacía, `refs` existentes y sin self-ref; (3) i18n: claves `DIARY.*` usadas en `diary_layer.gd` (literales + `CAT_*` de las 14, excluyendo prefijos que terminan en `_`) presentes con msgstr no vacío en `es.po` Y `en.po`; (4) persistencia: round-trip + saneo de ui prefs; (5) rendimiento: 20 cargas < 500 ms; (6) encoding: BOM/FFFD en JSON y .po. Soporta catálogo alterno vía user arg (`-- res://ruta.json`) para sondas.
+  - **Verde:** `0 fallo(s), 1 aviso(s)` EXIT 0 (aviso = `fotografías` con 0 entradas). **Sonda roja:** catálogo truncado al 60% → 21 fallos EXIT 1 (luego copia borrada).
+- **Catálogo enriquecido:** 8 descripciones (5 personajes desde `historia` de los villager .tres; 3 misiones desde `historia_principal.json`/`secundarias.json`) + 3 refs textuales (`mision_prologo` y `mision_cadena-faro` → `vecino_finneas_zorro`; `mision_cadena-invernadero` → `vecino_mateo_mapache`). Formato original (tabs, objetos en línea) preservado; parseo verificado.
+- **`diary_service.gd`:** `_cargar_catalogo` propagа `descripcion`/`refs`; nuevas `detalle_entrada(id)`, `categoria_de(id)`, `_ui_prefs` + `set_ui_prefs(filtro, categoria)` (fuera de rango → defaults) + `get_ui_prefs()`; `get_save_data()` añade `"ui"`; `restore_save_data()` tolerante.
+- **`diary_layer.gd`:** `LblDetalleDesc` (autowrap), `LblRefs` + `RefsBox` con botones `Ref_*` (solo refs a entradas descubiertas = anti-spoiler), `_navegar_a_ref()` (cambia pestaña, limpia búsqueda/filtro, selecciona fila); `_guardar_prefs_ui()` en `_on_tab`/`_on_filtro_selected`, `_aplicar_prefs_ui()` en `on_layer_opened`; `DIARY.REFERENCIAS` en `_aplicar_textos_estaticos`.
+- **i18n:** `DIARY.REFERENCIAS` = "Referencias"/"References" en `es.po`/`en.po` (37 claves DIARY).
+- **`test_diario_persist.gd`** (nuevo): 2 fases con SaveManager M59 real — PADRE: backup byte a byte de slot 3 (`.save`+`.bak`), siembra (registrar 2, ★, estado VISTO, ui prefs 4/"personajes"), `current_slot=3` + `request_save` (espera `save_completed` por frames), `OS.execute` bloqueante del HIJO; HIJO: `load_slot(3)` y verifica todo, re-serializa; el padre restaura el slot previo + `cleanup_orphan_tmp`. **0 fallos EXIT 0** (con `read_stderr=false`; `true` colgaba el pipeline en Windows).
+- **Regresión final 4/4 verde:** validate 0/1·EXIT0 → test_diario 0·EXIT0 → test_diario_ui 89/0·EXIT0 → test_persist 0·EXIT0.
+- **Diagnóstico fotografías (encargo 4):** grep en todo el repo: **no existe emisor `FOTO_TOMADA`**; `photo_service.gd` solo tiene `signal modo_foto_cambiado`; `fauna_registry.gd` tiene `signal especie_fotografiada(especie_id, foto_id)` (M36) sin conectar al diario. Conclusión: **frente sin contenido (puente M56→M55 inexistente), NO bug de datos** → documentado en 05 L53/L212, sin implementar nada (depende de dueño M56).
+- Docs: 05 (7 flips: L20 `[?]`, L26/L189/L209/L217 `[x]`, L53 `[?]`, L212 nota), 04 (esta sección), 03, 06/07.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- **Icono de entrada (L20):** modelo sin campo `icono` ni fuente de arte → L20 queda `[?]` (4/5 campos), L203 sigue abierto.
+- **Descripciones para 36/44 entradas:** solo 8 tienen fuente real verificada en el repo. Sin fuente: lugares (world_data sin isla_sur/norte/brisa/espejo), eventos (festivals.tres describe festivales, no estaciones), cartas/sellos/criaturas/recetas/minerales/plantas/lore/museo (ids o granularidad no coinciden). **No inventé contenido.**
+- **Galería Q (L145-148):** fuera de alcance, requiere diseño de galería + M56.
+- **Foto ↔ M55:** sin puente (ver diagnóstico); L53/L212 quedan `[?]`.
+- **Estética cozy (L29):** sin vía de visión (M154) en esta sesión → no tocado.
+
+### Intentos fallidos / decisiones
+- **GDScript:** regex con comilla escapada rompe el parse → usar clase `[^"\\]`; `chr()` no existe → `String.chr()`; en SceneTree `await process_frame` (NO `get_frame().process_frame`, devuelve int); `var x := nodo.metodo()` con Node es Variant → tipar `var x: Dictionary = ...`.
+- **`OS.execute` con `read_stderr=true` colgaba el pipeline en Windows** (timeout sin EXIT) → `read_stderr=false` y captura solo del exit code: EXIT 0.
+- **Sonda roja del validador:** primer intento de corrupción falló en Python (el patrón `'}\n]'` no existe en el formato real) → segunda pasada truncando el 60% del JSON (confirmado `JSONDecodeError`).
+- **Anti-spoiler:** `_pintar_descripcion_refs` filtra cada ref con `esta_registrada()` — el catálogo no puede revelar contenido oculto.
+- **Persistencia de prefs:** solo se guardan al cambiar pestaña/filtro y al cerrar la capa (no cada frame); saneo en `set_ui_prefs` y en `restore_save_data`.
+- **NO toqué:** `interaction_manager.gd` (BUG-096, kimi), `service_registry.gd` (BUG-097, agnes), `ui_manager.gd` (s2), M91, `quality.yml`, guía 08 (working tree ajeno).
+
+### Recomendaciones para el próximo agente
+- **Enriquecer catálogo:** si aparecen fuentes para lugares/eventos/cartas/sellos, `diario_catalog.json` + `detalle_entrada` ya no necesitan cambios; respetar formato tabs/objeto-en-línea y no traducir títulos.
+- **Puente M56→M55:** cuando alguien conecte `FOTO_TOMADA` (patrón `_conectar_eventos` de 1 línea), crear entradas base de `fotografías` → 14/14 cierra L212/L53; `validate_diary.gd` dejará de avisar.
+- **Iconos:** si llegan assets, añadir campo `icono` al JSON + validación en `validate_diary` + display en fila/detalle (L203).
+- **Rendimiento (W/X):** sigue pendiente virtualización/pooling con 500+ entradas; el validador ya mide cargas de 20 iteraciones.

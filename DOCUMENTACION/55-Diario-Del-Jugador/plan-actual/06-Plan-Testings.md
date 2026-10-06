@@ -55,6 +55,7 @@ S3, S4 y S5 siempre en verde además de S1/S2. Si alguna cae → no se commitea.
 ## 6. Fuera de alcance de este plan (pendientes honestos)
 
 - Rendimiento con 500+ entradas (virtualización, checklist W) — requiere lote dedicado.
-- Persistencia entre sesiones reales (guardar → salir → cargar en ejecuciones separadas).
-- `validate_diary.gd` (checklist Y) cuando exista.
+- ~~Persistencia entre sesiones reales~~ → **cubierto 2026-10-05**: `test_diario_persist.gd` (2 procesos, SaveManager M59 real).
+- ~~`validate_diary.gd` (checklist Y)~~ → **cubierto 2026-10-05**: `scripts/diario/validate_diary.gd` (6 áreas + sonda roja EXIT 1).
+- Contenido fotográfico y puente FOTO_TOMADA (L53/L212) — depende de M56.
 - Tercer idioma / plurales (checklist V).

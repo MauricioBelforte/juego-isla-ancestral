@@ -17,13 +17,13 @@
 - [x] Diseñar la pantalla principal del diario con pestañas por categoría [M] — iter. 2 (mimo): diary_layer.gd, 14 pestañas en CategoriasBox (test_ui estructura OK)
 - [x] Definir navegación de 2 clics hacia cualquier entrada [M] — iter. 2: pestaña→fila→detalle en 3 columnas (test_ui verifica selección + detalle)
 - [ ] Definir estados de entrada: no_visto, visto, completado [S]
-- [ ] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M]
+- [?] Definir el modelo de entrada (id, categoría, título, descripción, icono) [M] - T-M1 lote 2 (mimo): id/título/descripción/refs implementados (JSON + DiaryService.detalle_entrada); ICONO pendiente (sin fuente de arte, L203 sigue abierto)
 - [x] Separar datos del catálogo de la lógica del servicio (M15) [M] — glm-5.3-flash 2026-09-01: catálogo data-driven en data/diario/diario_catalog.json + DiaryService autoload
 
 ## B. Diseño de UI (M53)
 
 - [ ] Diseñar lista virtualizada por categoría con scroll suave [C]
-- [ ] Definir detalle de entrada con descripción, refs y acciones [M]
+- [x] Definir detalle de entrada con descripción, refs y acciones [M] - T-M1 lote 2: LblDetalleDesc (autowrap, oculto sin texto) + botones Ref_* navegables (solo refs a entradas descubiertas = anti-spoiler) + acciones favorito/estado/día; clave DIARY.REFERENCIAS en es.po/en.po
 - [x] Añadir barra de progreso por categoría en la cabecera [M] — iter. 2: ProgresoCat en cabecera + % global sobre lo descubierto, clamp [0,100] (test_ui)
 - [x] Añadir estrella de favorito en cada fila [S] — iter. 2: ★ en fila + BtnFavoritoDetalle con undo visual (test_ui, sonda rojo demostrada)
 - [ ] Mantener la estética cozy del proyecto en el diario [M]
@@ -50,7 +50,7 @@
 - [ ] Mapear evento DESCUBRIMIENTO (M71) → entrada descubrimiento [M]
 - [x] Mapear evento MISION_CAMBIADA (M22/M23) → entrada misión [M] — IMPLEMENTADO: puente quest.quest_completed → misiones (testeado); quest_started/updated quedan para M22/M23 richer payloads
 - [x] Mapear evento EVENTO_OCURRIDO (M74/M29) → entrada evento [M] — IMPLEMENTADO: puente calendar.season_changed → eventos (testeado, slug sin tildes)
-- [ ] Mapear evento FOTO_TOMADA (M56) → entrada fotografía [M]
+- [?] Mapear evento FOTO_TOMADA (M56) → entrada fotografía [M] - T-M1 lote 2 (diagnóstico): NO existe emisor FOTO_TOMADA en el repo (grep 0); M56 está liberado con PhotoService (señal modo_foto_cambiado única) y fauna_registry.especie_fotografiada sin conectar al diario. La categoría vacía es un FRENTE SIN CONTENIDO, no bug de datos; puente M56→M55 pendiente de dueño M56
 
 ## F. Registro de Personajes (M19)
 
@@ -186,7 +186,7 @@
 - [x] Localizar nombres propios sin traducción [S] — iter. 2: "Catalina Oso" intacto en locale EN (test_ui)
 - [ ] Dar soporte a plurales [S]
 - [ ] Testear el diario en 3 idiomas sin desbordes de UI [M]
-- [ ] Validar claves i18n con validate_diary.gd [M]
+- [x] Validar claves i18n con validate_diary.gd [M] - T-M1 lote 2: extrae DIARY.* de diary_layer.gd (literales + CAT_* de las 14 categorías) y exige msgid con msgstr no vacío en es.po Y en.po (37 claves); corrida verde
 
 ## W. Rendimiento y Edge Cases (M61/M62)
 
@@ -206,15 +206,15 @@
 
 ## Y. Validación y QA
 
-- [ ] Crear validate_diary.gd (mapeo, i18n, persistencia, rendimiento) [C]
+- [x] Crear validate_diary.gd (mapeo, i18n, persistencia, rendimiento) [C] - T-M1 lote 2: 6 áreas (estructura/mapeo 14 cats == CATEGORIAS + ids ascii únicos + conteo vs total_entradas, descripciones/refs, i18n es/en, persistencia round-trip + saneamiento ui prefs, 20 cargas < 500 ms, encoding BOM/U+FFFD); sonda roja demostrada: JSON truncado → 21 fallos, EXIT 1
 - [x] Probar ciclo completo: descubrir → registrar → ver → guardar → recargar [C] — iter. 1 (eventos→registrar→persistir, test_diario) + iter. 2 (ver/guardar/recargar round-trip, test_ui)
 - [x] Probar anti-spoilers: sin descubrir nada, diario vacío correcto [M] — test_ui: vacío correcto + no-descubierto invisible + snapshot/restore
-- [?] Probar 14 categorías con al menos 1 entrada cada una [M] — 13/14: fotografías tiene 0 entradas (falta M56); test_ui aserta con_entradas==13
+- [?] Probar 14 categorías con al menos 1 entrada cada una [M] - 13/14: fotografías tiene 0 entradas (falta puente M56, ver L53); test_ui aserta con_entradas==13 y validate_diary emite AVISO (no fallo) para la categoría vacía
 - [x] Revisar logs DIARY-* en consola sin errores [S] — salida del test verde: solo DIARY-ADD esperados; el único SCRIPT ERROR es el preexistente interaction_manager.gd:669 (no es del diario)
 
 ## Z. Cierre del Módulo
 
-- [ ] Probar persistencia entre sesiones (guardar → salir → cargar) [C]
+- [x] Probar persistencia entre sesiones (guardar → salir → cargar) [C] - T-M1 lote 2: test_diario_persist.gd 2 fases con DOS procesos Godot y SaveManager M59 real (slot 3 con backup/restore byte a byte); verifica ★, registro, estado, día y ui prefs (filtro/categoría) tras load_slot; 0 fallos, EXIT 0
 - [ ] Probar migración de versión antigua de guardado [C]
 - [x] Documentar plan de testings automáticos del diario [M] — 06-Plan-Testings.md creado (iter. 2)
 - [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] — Notas del Agente iteración 2 (2026-10-04) en 04-Codigo.md

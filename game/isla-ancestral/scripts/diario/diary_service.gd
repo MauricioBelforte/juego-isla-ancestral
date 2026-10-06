@@ -28,7 +28,7 @@ const CATEGORIAS: Array[String] = [
 	"descubrimientos", "misiones", "eventos", "fotografias",
 ]
 
-## catálogo: categoria -> Array de {id, titulo, secreta: bool}
+## catálogo: categoria -> Array de {id, titulo, secreta, descripcion, refs}
 var _catalogo: Dictionary = {}
 ## estado: entrada_id -> {categoria, estado (Estado), favorito}
 var _estados: Dictionary = {}
@@ -36,6 +36,9 @@ var _estados: Dictionary = {}
 var _dia_registro: Dictionary = {}
 ## Entradas registradas esta sesión (notificación "¡Diario actualizado!" M53)
 var _nuevas_sesion: Array[String] = []
+## Preferencias de UI persistidas (T-M1 lote 2): filtro de estado y
+## categoría abierta del diario, guardadas con el save (sección diary, "ui")
+var _ui_prefs: Dictionary = {"filtro": 0, "categoria": "personajes"}
 
 
 func _ready() -> void:
@@ -57,10 +60,15 @@ func _cargar_catalogo() -> void:
 			continue
 		var entradas: Array[Dictionary] = []
 		for e in categoria.get("entradas", []):
+			var refs: Array[String] = []
+			for r in e.get("refs", []):
+				refs.append(String(r))
 			entradas.append({
 				"id": String(e.get("id", "")),
 				"titulo": String(e.get("titulo", "")),
 				"secreta": bool(e.get("secreta", false)),
+				"descripcion": String(e.get("descripcion", "")),
+				"refs": refs,
 			})
 		_catalogo[cat] = entradas
 	print("[M55] Catálogo: %d categorías, %d entradas" % [_catalogo.size(), total_entradas()])
@@ -168,6 +176,50 @@ func es_favorito(entrada_id: String) -> bool:
 	return bool(_estados.get(entrada_id, {}).get("favorito", false))
 
 
+## Detalle para el panel derecho de la UI (T-M1 lote 2): título crudo,
+## descripción y refs a otras entradas del catálogo. Devuelve {} si el id no
+## existe. El ANTI-SPOILER es responsabilidad de la capa: solo se pide el
+## detalle de una entrada ya seleccionada (visible en la lista).
+func detalle_entrada(entrada_id: String) -> Dictionary:
+	var cat := categoria_de(entrada_id)
+	if cat.is_empty():
+		return {}
+	for e in _catalogo[cat]:
+		if String(e.get("id", "")) == entrada_id:
+			return {
+				"id": entrada_id,
+				"titulo": String(e.get("titulo", "")),
+				"descripcion": String(e.get("descripcion", "")),
+				"refs": (e.get("refs", []) as Array).duplicate(),
+			}
+	return {}
+
+
+## Categoría a la que pertenece una entrada ("" si no existe).
+func categoria_de(entrada_id: String) -> String:
+	for cat in _catalogo:
+		for e in _catalogo[cat]:
+			if String(e.get("id", "")) == entrada_id:
+				return String(cat)
+	return ""
+
+
+## ── Preferencias de UI persistidas (T-M1 lote 2) ──────────────────
+
+## Guarda el filtro de estado y la categoría abierta del diario.
+## filtro: enum DiaryLayer.Filtro (0..4); categoría: id de CATEGORIAS.
+## Valores fuera de rango → default (save corrupto no rompe la UI).
+func set_ui_prefs(filtro: int, categoria: String) -> void:
+	_ui_prefs = {
+		"filtro": filtro if filtro >= 0 and filtro <= 4 else 0,
+		"categoria": categoria if categoria in CATEGORIAS else "personajes",
+	}
+
+
+func get_ui_prefs() -> Dictionary:
+	return _ui_prefs.duplicate()
+
+
 ## Entradas descubierto + registro, por categoría (UI: lista virtualizada M61)
 func entradas_de(categoria: String) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
@@ -259,12 +311,16 @@ func get_save_data() -> Dictionary:
 			"favorito": bool(_estados[eid].get("favorito", false)),
 			"dia": int(_dia_registro.get(eid, 0)),
 		}
-	return {"schema_version": 1, "entradas": entradas}
+	return {"schema_version": 1, "entradas": entradas, "ui": _ui_prefs.duplicate()}
 
 
 func restore_save_data(data: Dictionary) -> void:
 	_estados.clear()
 	_dia_registro.clear()
+	# Preferencias de UI (T-M1 lote 2): tolerante — sin "ui" o inválidas →
+	# defaults (los saves antiguos de M59 sin esta clave cargan igual).
+	var ui: Dictionary = data.get("ui", {})
+	set_ui_prefs(int(ui.get("filtro", 0)), String(ui.get("categoria", "personajes")))
 	var entradas: Dictionary = data.get("entradas", {})
 	for eid in entradas:
 		var e: Dictionary = entradas[eid]

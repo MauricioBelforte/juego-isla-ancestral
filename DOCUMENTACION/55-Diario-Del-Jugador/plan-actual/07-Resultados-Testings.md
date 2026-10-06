@@ -52,3 +52,38 @@ Corrida 1 de S2: **89 checks, 4 fallos + 1 error preexistente** → fixes B1–B
 - Rendimiento/500+ entradas, virtualización, pooling (W), tercer idioma (V), `validate_diary.gd` (Y),
   persistencia entre sesiones reales (Z): **fuera de esta corrida**, sin probar.
 - Estética "cozy": sin vía de visión (M154) usada en esta sesión; verificación solo estructural.
+
+---
+
+## 6. Corrida T-M1 lote 2 — 2026-10-05 (mimo-v2.6-flash-free / opencode)
+
+Entorno: Godot 4.7.2 headless, `C:\Temp\godot\godot472.exe`. Criterio: exit code + conteo de FALLO.
+
+| Suite | Comando (`--path game/isla-ancestral`) | Resultado | EXIT |
+|---|---|---|---|
+| Validador | `--script res://scripts/diario/validate_diary.gd` | **0 fallos, 1 aviso** (aviso = `fotografías` 0 entradas, pendiente M56) | 0 |
+| Servicio | `--script res://scripts/diario/test_diario.gd` | **0 fallos** | 0 |
+| UI (regresión) | `--script res://scripts/ui/test_diario_ui.gd` | **89 checks, 0 fallos** (SCRIPT ERROR `interaction_manager` = BUG-096 preexistente, no del diario) | 0 |
+| Persistencia 2 procesos | `--script res://scripts/diario/test_diario_persist.gd` | **0 fallos** (padre guarda M59 slot 3 → hijo `load_slot` verifica ★/estado/día/ui prefs → padre restaura backup) | 0 |
+
+**Sonda roja del validador** (demostración de que detecta catálogo roto):
+copia truncada al 60% (`JSONDecodeError` confirmado en Python) pasada como user arg →
+`21 fallos, 0 avisos`, **EXIT 1**. Copia borrada tras la prueba.
+
+**Persistencia — detalle:** el padre hace backup byte a byte de slot 3 (`.save` + `.bak`),
+siembra datos, `request_save` esperando `save_completed` por frames, lanza al hijo con
+`OS.execute` bloqueante y exige `salida == 0`; el hijo `load_slot(3)` verifica y
+re-serializa `get_save_data()`. Restauración del slot previo + `SaveWriter.cleanup_orphan_tmp()`
+garantizan que el save del jugador no queda tocado.
+
+**Decisión de pipeline:** `OS.execute(..., read_stderr=true)` colgaba el proceso en Windows
+(timeout sin EXIT) → `read_stderr=false` (el exit code es el contrato del test).
+
+**Estado de marcas tras la corrida:** 37 [x] / 3 [?] / 91 [ ] en `05-Checklist.md`.
+Los [?] restantes documentados en §5 y en el 05 (L20 icono, L53/L212 foto M56, L212 13/14).
+
+## 7. Pendientes heredados (siguen sin cubrirse)
+
+- Virtualización/pooling/LazyLoad y 500+ entradas (W) — lote de rendimiento aparte.
+- Tercer idioma / plurales (V).
+- Descripciones para 36/44 entradas, iconos (L203), galería Q, estética cozy (L29).

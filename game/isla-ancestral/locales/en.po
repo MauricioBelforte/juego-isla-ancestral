@@ -641,6 +641,9 @@ msgstr "Diary"
 msgid "DIARY.DETALLE"
 msgstr "Details"
 
+msgid "DIARY.REFERENCIAS"
+msgstr "References"
+
 msgid "DIARY.BUSCAR"
 msgstr "Search the diary…"
 

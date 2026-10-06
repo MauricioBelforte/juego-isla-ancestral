@@ -4,11 +4,11 @@
 		{
 			"id": "personajes",
 			"entradas": [
-				{ "id": "vecino_catalina_oso", "titulo": "Catalina Oso" },
-				{ "id": "vecino_finneas_zorro", "titulo": "Finneas Zorro" },
-				{ "id": "vecino_mateo_mapache", "titulo": "Mateo Mapache" },
-				{ "id": "vecino_luna_zorra", "titulo": "Luna Zorra" },
-				{ "id": "vecino_bruno_sapo", "titulo": "Bruno Sapo" }
+				{ "id": "vecino_catalina_oso", "titulo": "Catalina Oso" , "descripcion": "Catalina llegó a la isla buscando recetas ancestrales. Su mermelada de frutos silvestres es legendaria."},
+				{ "id": "vecino_finneas_zorro", "titulo": "Finneas Zorro" , "descripcion": "Finneas conoce las corrientes de Aurora mejor que nadie. Dice que la brisa le susurra dónde pescar."},
+				{ "id": "vecino_mateo_mapache", "titulo": "Mateo Mapache" , "descripcion": "Mateo llegó con una maleta llena de semillas y ninguna idea de dónde plantarlas. Catalina lo adoptó como ayudante."},
+				{ "id": "vecino_luna_zorra", "titulo": "Luna Zorra" , "descripcion": "Luna dibuja constelaciones en la arena y jura que se mueven cuando nadie mira."},
+				{ "id": "vecino_bruno_sapo", "titulo": "Bruno Sapo" , "descripcion": "Bruno construyó la mitad de las casas del continente y dice que la mitad justa. Nunca apura una viga."}
 			]
 		},
 		{
@@ -46,9 +46,9 @@
 			"id": "misiones",
 			"entradas": [
 				{ "id": "mision_test_quest", "titulo": "Encargo perdido" },
-				{ "id": "mision_prologo", "titulo": "La Llegada" },
-				{ "id": "mision_cadena-faro", "titulo": "El Faro de las Memorias" },
-				{ "id": "mision_cadena-invernadero", "titulo": "El Invernadero Olvidado" }
+				{ "id": "mision_prologo", "titulo": "La Llegada" , "descripcion": "El navegante llega a Aurora tras la tormenta y conoce a Finneas.", "refs": ["vecino_finneas_zorro"]},
+				{ "id": "mision_cadena-faro", "titulo": "El Faro de las Memorias" , "descripcion": "El farero recuerda la noche del eclipse; quiere encender el faro una vez más.", "refs": ["vecino_finneas_zorro"]},
+				{ "id": "mision_cadena-invernadero", "titulo": "El Invernadero Olvidado" , "descripcion": "Mateo encontró las llaves de un invernadero abandonado; cree que aún puede rescatar semillas antiguas.", "refs": ["vecino_mateo_mapache"]}
 			]
 		},
 		{

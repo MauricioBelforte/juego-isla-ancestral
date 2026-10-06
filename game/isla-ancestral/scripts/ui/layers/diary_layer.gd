@@ -60,6 +60,9 @@ var _lbl_vacio: Label
 var _lbl_det_titulo: Label
 var _lbl_det_estado: Label
 var _lbl_det_dia: Label
+var _lbl_det_desc: Label
+var _lbl_refs_hdr: Label
+var _refs_box: VBoxContainer
 var _btn_det_fav: Button
 var _lbl_sin_sel: Label
 
@@ -262,6 +265,27 @@ func _crear_ui() -> void:
 	_btn_det_fav.pressed.connect(_on_favorito_pressed)
 	col_der.add_child(_btn_det_fav)
 
+	# Descripción + referencias (T-M1 lote 2, checklist L20/L26)
+	_lbl_det_desc = Label.new()
+	_lbl_det_desc.name = "LblDetalleDesc"
+	_lbl_det_desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_lbl_det_desc.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_lbl_det_desc.text = ""
+	_lbl_det_desc.visible = false
+	col_der.add_child(_lbl_det_desc)
+
+	_lbl_refs_hdr = Label.new()
+	_lbl_refs_hdr.name = "LblRefs"
+	_lbl_refs_hdr.text = _t("DIARY.REFERENCIAS")
+	_lbl_refs_hdr.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_H2)
+	_lbl_refs_hdr.visible = false
+	col_der.add_child(_lbl_refs_hdr)
+
+	_refs_box = VBoxContainer.new()
+	_refs_box.name = "RefsBox"
+	_refs_box.add_theme_constant_override("separation", 4)
+	col_der.add_child(_refs_box)
+
 	_lbl_sin_sel = Label.new()
 	_lbl_sin_sel.name = "LblSinSeleccion"
 	_lbl_sin_sel.text = _t("DIARY.SIN_SELECCION")
@@ -411,6 +435,7 @@ func _refrescar_lista() -> void:
 
 
 func _refrescar_detalle() -> void:
+	_limpiar_detalle_extra()
 	var hay := _sel.size() > 0
 	_lbl_sin_sel.visible = not hay
 	if not hay:
@@ -428,13 +453,76 @@ func _refrescar_detalle() -> void:
 		_lbl_det_dia.text = ""
 		_btn_det_fav.disabled = true
 		_btn_det_fav.set_pressed_no_signal(false)
-		return
+		return  # sin descripción ni refs: anti-spoiler (§3.2)
 	_lbl_det_titulo.text = String(_sel.get("titulo", ""))
 	_lbl_det_estado.text = _texto_estado(int(_sel.get("estado", 0)))
 	var dia := int(_sel.get("dia", 0))
 	_lbl_det_dia.text = (_t("DIARY.DIA") % str(dia)) if dia > 0 else ""
 	_btn_det_fav.disabled = false
 	_btn_det_fav.set_pressed_no_signal(bool(_sel.get("favorito", false)))
+	_pintar_descripcion_refs(String(_sel.get("id", "")))
+
+
+## Oculta descripción y botones de refs (selección vacía o bloqueada).
+func _limpiar_detalle_extra() -> void:
+	_lbl_det_desc.text = ""
+	_lbl_det_desc.visible = false
+	_lbl_refs_hdr.visible = false
+	for hijo in _refs_box.get_children():
+		hijo.free()
+
+
+## Descripción + refs de la entrada seleccionada (T-M1 lote 2).
+## Anti-spoiler: las refs solo se muestran si la entrada apuntada YA está
+## descubierta (registrada); las secretas no registradas ni se consultan.
+func _pintar_descripcion_refs(eid: String) -> void:
+	var d = _diario()
+	if d == null or eid == "":
+		return
+	var det: Dictionary = d.detalle_entrada(eid)
+	var desc := String(det.get("descripcion", ""))
+	if desc != "":
+		_lbl_det_desc.text = desc
+		_lbl_det_desc.visible = true
+	var refs: Array = det.get("refs", [])
+	var visibles := 0
+	for r in refs:
+		var rid := String(r)
+		if not d.esta_registrada(rid):
+			continue
+		var rd: Dictionary = d.detalle_entrada(rid)
+		var btn := Button.new()
+		btn.name = "Ref_" + rid
+		btn.text = "→ " + String(rd.get("titulo", rid))
+		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		btn.tooltip_text = rid
+		btn.pressed.connect(_navegar_a_ref.bind(rid))
+		_refs_box.add_child(btn)
+		visibles += 1
+	if visibles > 0:
+		_lbl_refs_hdr.visible = true
+
+
+## Navega a una entrada referenciada: cambia de pestaña, limpia filtros
+## y la selecciona (dos clics → una clic con refs).
+func _navegar_a_ref(ref_id: String) -> void:
+	var d = _diario()
+	if d == null:
+		return
+	var cat := String(d.categoria_de(ref_id))
+	if cat == "":
+		return
+	if _busqueda != "":
+		_busqueda = ""
+		_buscador.text = ""
+	if _filtro != Filtro.TODOS:
+		_filtro = Filtro.TODOS
+		_filtro_op.select(Filtro.TODOS)
+	_on_tab(cat)
+	for e in _entradas_visibles():
+		if String(e.get("id", "")) == ref_id:
+			_on_fila_pressed(e)
+			return
 
 
 func _refrescar_progreso() -> void:
@@ -466,6 +554,7 @@ func _on_tab(cat: String) -> void:
 	if _busqueda != "":
 		_busqueda = ""
 		_buscador.text = ""  # sin text_changed (ya refrescamos abajo)
+	_guardar_prefs_ui()
 	_pintar_tabs_activos()
 	_refrescar_lista()
 	_refrescar_detalle()
@@ -482,8 +571,16 @@ func _on_busqueda_changed(txt: String) -> void:
 func _on_filtro_selected(idx: int) -> void:
 	_filtro = idx
 	_sel = {}
+	_guardar_prefs_ui()
 	_refrescar_lista()
 	_refrescar_detalle()
+
+
+## Persiste filtro y categoría en DiaryService (save "diary"→"ui", T-M1 lote 2)
+func _guardar_prefs_ui() -> void:
+	var d = _diario()
+	if d != null and d.has_method("set_ui_prefs"):
+		d.set_ui_prefs(_filtro, _categoria_actual)
 
 
 func _on_fila_pressed(e: Dictionary) -> void:
@@ -519,6 +616,7 @@ func _aplicar_textos_estaticos() -> void:
 	_lbl_titulo.text = _t("DIARY.TITULO")
 	_lbl_cats.text = _t("DIARY.CATEGORIAS")
 	_lbl_det_hdr.text = _t("DIARY.DETALLE")
+	_lbl_refs_hdr.text = _t("DIARY.REFERENCIAS")
 	_lbl_filtro.text = _t("DIARY.FILTRO")
 	_btn_cerrar.text = _t("SETTINGS.CERRAR")
 	_btn_det_fav.text = _t("DIARY.FAVORITO")
@@ -540,7 +638,23 @@ func on_layer_opened() -> void:
 	if um and um.has_method("register_layer"):
 		um.register_layer(self)
 	_aplicar_textos_estaticos()
+	_aplicar_prefs_ui()  # restaura filtro y categoría de la sesión anterior
 	_refrescar_completo()
+
+
+## Aplica las preferencias persistidas por DiaryService al abrir la capa
+## (T-M1 lote 2, checklist L217: filtros y categoría entre sesiones).
+func _aplicar_prefs_ui() -> void:
+	var d = _diario()
+	if d == null or not d.has_method("get_ui_prefs"):
+		return
+	var prefs: Dictionary = d.get_ui_prefs()
+	_filtro = int(prefs.get("filtro", 0))
+	if _filtro >= 0 and _filtro <= _filtro_op.item_count - 1:
+		_filtro_op.select(_filtro)
+	var cat := String(prefs.get("categoria", ""))
+	if cat != "" and d.get_categorias().has(cat):
+		_categoria_actual = cat
 
 
 func on_layer_closed() -> void:
