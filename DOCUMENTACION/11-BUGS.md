@@ -177,6 +177,15 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [~] Diagnóstico hecho (A/B), fix sin confirmar | space-bunny-alpha (Log 1310) | 2026-10-05 |
 | BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
 | BUG-107 | `BaseArenaBlancaIsla` con **r=242** (radio viejo, sin escalar ×10 en el rework "Isla 10x" — el mundo es 5120×5120 con centro (2560,2560) desde el commit `c107419`). Deuda detectada en el frente C3/BUG-105 (agua blanca) | M167 / M08 (terreno y render de la isla) | 🟡 Menor | [ ] Abierto — detectado por space-bunny-alpha (canal 27, Log 1326) en su último informe antes de la baja | space-bunny-alpha | 2026-10-06 |
+| BUG-108 | Restore de inventario: clave de sección no numérica → contenedor 0 + sin validar `stack_max` (inyección de cantidades) | M14/M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1378, `da6c974`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-109 | Sin cap de tamaño antes de `get_file_as_string` en save_loader/save_manager/save_backup (OOM con save enorme) | M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1380, `4e61ca0`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-110 | Recuperación de backup solo prueba la rotación 1; la rotación 2 existe pero jamás se lee (backup muerto) | M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1381, `0bfa62b`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-111 | Excepción en un proveedor deja `_writing=true` para siempre → la cola de guardado se traba en silencio **RECLASIFICADO (2026-10-06):** el sintoma literal es **falso positivo** (un error de runtime aborta solo la funcion, no propaga; `_writing` siempre se libera). El bug REAL adyacente (**BUG-111-bis**) esta en `SaveSnapshot.collect()`: un proveedor que lanza o vuelve no-Dictionary vaciaba el snapshot -> save **VALIDO pero VACIO** (47 -> 0), perdida total y silenciosa. | M59 | 🟡 Menor | [x] **Reclasificado** (falso positivo + **BUG-111-bis** REAL resuelto, Log 1377, `a089174`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-112 | Rotación de backups ignora el retorno de `DirAccess.rename_absolute` (rename fallido no se loguea ni propaga) | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-113 | Guardado de cierre (`NOTIFICATION_WM_CLOSE_REQUEST`) bypassa rotación y no chequea `_writing` (latente si M61 es async) | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-114 | `SaveWriter.write_atomic` y afines no validan rango de slot (1..SLOT_COUNT) — defensa en profundidad ausente | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-115 | Deuda informativa agrupada: checksum sin secreto (no anti-trampas) + `SaveSchema.validate()` vacua contra saves reales + tipos ausentes en campos no críticos | M59 | ⚪ Trivial | [x] **Documentado — deuda sin fix** (Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-116 | El bloqueo de guardado durante la pesca es una feature MUERTA: `SaveManager` conecta a `Fishing.sesion_iniciada`, señal que NO existe (el guard `has_signal` siempre falla) → el auto-save no se bloquea en el minijuego. La misma arista mantiene el SCC de 7 (BUG-069) | M59/M34 (arquitectura M62) | 🟡 Menor | [→] En progreso — fix (B) por DeepSeek-V4.1-Flash (pase T-D9 2) | DeepSeek-V4.1-Flash | 2026-10-06 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -1607,6 +1616,518 @@ secciones reales (headers `## X.Y`). Clasificación:
   **Fecha:** 2026-09-19
 
 
+### BUG-108 — Restore de inventario confía en la clave de sección como índice de contenedor y no valida `stack_max`
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M14 (Inventario) + M59 (Guardado) — scripts/inventario/inventario_service.gd, scripts/inventario/inventario_contenedor.gd, scripts/inventario/inventory_slot.gd
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1378, `da6c974`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+`inventario_service.restore_save_data()` itera las claves de la sección `inventory` y hace `int(id)` sin validar que la clave sea numérica. En GDScript `int()` de cualquier cadena no numérica devuelve `0`, que es el ID de `ContainerType.BOLSILLO`, así que cualquier clave ajena (`"items"`, `"evil"`, lo que sea) escribe en el bolsillo. Además `InventarioContenedor.deserializar()` valida `item_id` contra el catálogo y rechaza `cantidad <= 0`, pero **no clampea `cantidad` contra `stack_max`**: el límite solo se aplica en `add_item()`, nunca en la carga.Resultado: un save editado (el checksum no es anti-trampas, ver BUG-115) inyecta cantidades ilimitadas de cualquier ítem válido del catálogo en el contenedor 0.
+
+**Pasos para reproducir:**
+1. Craftear un save con `"inventory": {"cualquier_clave": [{"slot":0,"id":"madera","n":999999999}]}`
+2. Recalcular el SHA-256 del payload (no hay secreto)
+3. Escribir `checksum\npayload` en `user://saves/slot_1.save`
+4. Cargar el slot → el bolsillo queda con 999999999 de madera
+
+**Comportamiento esperado:**
+Cada clave de la sección `inventory` debe validarse como entero y estar en el rango de contenedores existentes; y `cantidad` debe clampearse a `stack_max` del ítem al deserializar.
+
+**Comportamiento actual:**
+La clave no numérica mapea a BOLSILLO y la cantidad se asigna sin límite.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `inventario_service.gd:400-407` — `func restore_save_data(data): for id in data: var c := int(id); if contenedores.has(c): ... deserializar(lista)` (verificado en disco).
+- `inventario_contenedor.gd:122-138` — `deserializar`: vacía los slots (L123-124, bien), bounds-check de `idx` (L127), valida `item_id` contra `ItemDatabase` (L130-134), rechaza `cantidad <= 0` (L135-137), pero asigna `slots[idx] = slot` (L138) **sin chequear `cantidad > stack_max`**.
+- `inventory_slot.gd:51` — `s.cantidad = int(d.get("n", 0))` sin clamp.
+- `save_schema.gd:117-123` — **el propio proyecto documenta el mecanismo**: "...`inventario_service.restore_save_data()` hace `for id in data: int(id)` y trata la clave como indice de contenedor, asi que una clave como \"items\" se leeria como el contenedor 0".
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-01.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`, `save_schema.gd`, `container_type.gd:11-18` (IDs 0..5)
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: Helper `_seccion_a_contenedor()` en `inventario_service.gd` (acepta solo un entero valido; una clave no numerica se rechaza con `push_warning` + `continue`, en vez de caer a `int()` -> 0 = BOLSILLO) + clamp de `cantidad` a `stack_max` del item al CARGAR, en `inventario_contenedor.deserializar()` y `inventory_slot.gd`.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/inventario/{inventario_service.gd,inventario_contenedor.gd,inventory_slot.gd}` + sonda `scripts/inventario/test_inventario_restore_robusto.gd`; commit `da6c974` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1378-M59-cola-bug108-restore-inventario-robusto_2026-10-06_16-45-45.md`
+- [x] Evidencia: sonda `test_inventario_restore_robusto` 12/0 x3; rojo por inyeccion = 4 fallos (medidos 9999 y 5 sin el fix).
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-109 — Sin límite de tamaño antes de leer un save completo a memoria
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_loader.gd, save_manager.gd, save_backup.gd
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1380, `4e61ca0`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+Los tres puntos de lectura usan `FileAccess.get_file_as_string(path)` sin comprobar previamente la existencia y el tamaño del archivo. Un save arbitrariamente grande (con checksum válido, trivial de fabricar porque no hay secreto) se lee íntegro en un `String` antes de cualquier validación → consumo de memoria masivo u OOM.
+
+**Pasos para reproducir:**
+1. Fabricar un `slot_1.save` de varios GB con checksum SHA-256 recalculado
+2. Solicitar la carga del slot
+
+**Comportamiento esperado:**
+Comprobar `FileAccess.file_exists()` y `get_length()` contra un cap razonable (típico: 1-10 MB) antes de leer, devolviendo `CORRUPTED`/error si se excede.
+
+**Comportamiento actual:**
+El archivo se lee completo a memoria sin límite.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_loader.gd:41` — `var content := FileAccess.get_file_as_string(path)`
+- `save_manager.gd:253` — `var content: String = FileAccess.get_file_as_string(SaveWriter.path_for(slot))` (en `slot_metadata`)
+- `save_backup.gd:62` — `return FileAccess.get_file_as_string(path)` (en `read_latest_backup`)
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-02.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: Documentación M59 `04-Codigo.md`
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: `SaveWriter.read_document(path)` comprueba existencia y tamano (`MAX_DOCUMENT_BYTES = 2 MB`) ANTES de leer; migrados los 3 puntos de lectura (`save_loader`, `save_manager.slot_metadata`, `save_backup.read_latest_backup`). Cap justificado: un save real medido en disco ~4,6 KB -> 2 MB = ~450x de margen.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_writer.gd,save_loader.gd,save_manager.gd,save_backup.gd}` + sonda `scripts/saving/test_save_size_cap.gd`; commit `4e61ca0` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1380-M59-cola-bug109-cap-tamano-lectura-save_2026-10-06_16-52-46.md`
+- [x] Evidencia: sonda `test_save_size_cap` 7/0 x3; rojo por inyeccion = 2 fallos (documento de cap+1 se leia).
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-110 — La recuperación de backup solo intenta la rotación 1; la rotación 2 se conserva pero jamás se lee
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_backup.gd, save_loader.gd
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1381, `0bfa62b`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+`MAX_ROTATIONS = 2` y `rotate()` mantiene `slot_N_r1.bak` y `slot_N_r2.bak`, pero `read_latest_backup()` lee **solo r1** y `_try_recover()` lo llama una sola vez. Si r1 está corrupto y r2 es íntegro (dos escrituras corruptas consecutivas, o corrupción que alcanzó al save rotado), el loader reporta `CORRUPTED` aunque existe un backup bueno en r2. Es un **backup muerto**: se gasta I/O y disco en conservarlo pero ningún camino de lectura lo consulta.
+
+**Pasos para reproducir:**
+1. Corromper `slot_N_r1.bak` (o que dos escrituras consecutivas fallen)
+2. Dejar `slot_N_r2.bak` íntegro
+3. Cargar el slot → devuelve CORRUPTED pese a existir un backup válido
+
+**Comportamiento esperado:**
+`_try_recover()` debe iterar `for i in range(1, SaveBackup.MAX_ROTATIONS + 1)` probando cada rotación en orden de frescura hasta una que pase `parse_document` + validación.
+
+**Comportamiento actual:**
+Solo se prueba r1; r2 es inalcanzable.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_backup.gd:12` — `const MAX_ROTATIONS: int = 2`
+- `save_backup.gd:17-30` — `rotate()` desplaza r1→r2 y mantiene ambos
+- `save_backup.gd:58-62` — `read_latest_backup` lee únicamente `latest_backup(slot)` = `_bak_path(slot, 1)`
+- `save_loader.gd:91-96` — `_try_recover` llama a `read_latest_backup` una sola vez
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-03.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: `SaveBackup.read_backup(slot, rotation)` expone cada rotacion; `SaveLoader._try_recover()` itera `range(1, MAX_ROTATIONS + 1)` de la mas fresca a la mas vieja hasta una que pase parse + validate. Se conserva la regla dura: si la rotacion mas fresca legible es de version FUTURA -> FUTURE_VERSION y NO se cae a una mas antigua (seria degradar).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_backup.gd,save_loader.gd}` + sonda `scripts/saving/test_backup_rotations.gd`; commit `0bfa62b` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1381-M59-cola-bug110-recuperacion-todas-rotaciones_2026-10-06_16-57-00.md`
+- [x] Evidencia: sonda `test_backup_rotations` 7/0 x3; rojo por inyeccion = 3 fallos (los casos que dependen de r2).
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-111 — Sin guarda ante excepciones en la cola de guardado: un proveedor que lance deja `_writing = true` para siempre
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_manager.gd (+ save_snapshot.gd)
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] **Reclasificado** — sintoma literal = **falso positivo**; bug REAL adyacente = **BUG-111-bis** resuelto (DeepSeek-V4.1-Flash, Log 1377, `a089174`). Ver nota de reclasificacion en esta entrada.
+
+**Descripción del problema:**
+`_process_queue()` pone `_writing = true` (L197) y solo lo restaura al final (L226). Si `_payload_para_slot()` → `snapshot.collect()`, `SaveBackup.rotate()` o `SaveWriter.write_atomic()` lanza una excepción, esta propaga fuera de la función y `_writing` queda en `true` permanentemente. Todo `request_save()` posterior encola pero `_process_queue()` retorna inmediato → **la cola nunca se drena y el juego deja de guardar en silencio** hasta reiniciar. GDScript no tiene `try/finally`, y no hay reset diferido.
+
+**Pasos para reproducir:**
+1. Registrar un proveedor cuyo `get_save_data()` lance (estado inconsistente, nodo liberado, etc.)
+2. Disparar un guardado → el lanzamiento propaga
+3. Disparar más guardados → se encolan pero nunca se ejecutan
+
+**Comportamiento esperado:**
+Un fallo en un proveedor no debe inmovilizar el guardado de los otros 55: `_writing` debe resetearse sí o sí (p.ej. ponerlo en `false` antes de las operaciones riesgosas o resetearlo por `call_deferred`).
+
+**Comportamiento actual:**
+La excepción deja `_writing = true` para siempre y se pierden silenciosamente todos los guardados siguientes.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_manager.gd:194-228` — `_process_queue`: L197 `_writing = true`, L203 `_payload_para_slot(slot)`, L216 `SaveBackup.rotate(slot)`, L217 `write_atomic(...)`, L226 `_writing = false`
+- `save_snapshot.gd:37-46` — `collect()` itera TODOS los proveedores registrados y llama `provider.get_save_data()`
+- Contexto: el proyecto mantiene `scripts/saving/auditar_aliasing.gd` precisamente porque los proveedores han tenido bugs que corrompen estado
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-04.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`, `auditar_aliasing.gd`
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Nota de reclasificacion (2026-10-06, autorizada por el director — canal 56 §2.2):**
+El sintoma literal del reporte (**"un proveedor que lance deja `_writing = true` para siempre"**) **NO se reproduce**: medido con 3 sondas que un error de runtime en GDScript **aborta solo la funcion donde ocurre y NO propaga** al llamador; como `_process_queue()` invoca unicamente funciones **tipadas**, la asignacion del llamador nunca falla y `_writing = false` **siempre** se alcanza. El director confirmo el falso positivo.
+
+En el MISMO camino se hallo un bug **real y mas grave**, registrado como **BUG-111-bis**: `SaveSnapshot.collect()` hacia `var data: Dictionary = provider.get_save_data()`; un proveedor que **lanzara** (o devolviera un tipo no-`Dictionary`) **abortaba `collect()` entero** -> devolvia `{}` -> `SaveWriter` escribia un save **VALIDO pero VACIO** -> **perdida TOTAL y silenciosa del progreso** al recargar (medido: **47 secciones -> 0**, con `[SAVE] OK` en el log). Fix en `collect()`: validar el tipo con `typeof()` y **omitir** el proveedor roto sin vaciar el resto. Sonda `test_save_collect_robust` 10/0 x3, rojo por inyeccion 4 fallos.
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: El sintoma literal NO se reproduce (falso positivo: un error de runtime aborta solo la funcion donde ocurre, no propaga; como `_process_queue` llama solo funciones tipadas, `_writing` siempre se libera). Bug REAL adyacente (**BUG-111-bis**): `SaveSnapshot.collect()` valida el tipo del retorno con `typeof()` y OMITE el proveedor roto sin vaciar el resto del snapshot (antes: un proveedor que lanzaba/vuelve no-Dictionary abortaba `collect()` -> `{}` -> el writer escribia un save VALIDO pero VACIO; medido 47 secciones -> 0).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/save_snapshot.gd` + sonda `scripts/saving/test_save_collect_robust.gd`; commit `a089174` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1377-M59-cola-bug111-reclasificado-collect-robusto_2026-10-06_16-38-08.md`
+- [x] Evidencia: sonda `test_save_collect_robust` 10/0 x3; rojo por inyeccion = 4 fallos.
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-112 — La rotación de backups ignora los códigos de retorno de `DirAccess.rename_absolute`
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_backup.gd
+- **Severidad:** ⚪ Trivial
+- **Prioridad sugerida:** Baja
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+`rotate()` descarta el retorno de `DirAccess.rename_absolute` (`var _e := ...`). Si un rename falla (disco lleno, permisos, archivo bloqueado), la rotación queda parcial o no ocurre, y `_process_queue` procede a `write_atomic` de todos modos: el `.bak` puede no contener el save anterior, así que si la escritura posterior falla no hay nada de qué recuperar. El error no se loguea ni se propaga (`rotate()` devuelve `void`).
+
+**Pasos para reproducir:**
+1. Llenar el disco / bloquear el archivo de backup
+2. Disparar un guardado → el rename falla silenciosamente
+
+**Comportamiento esperado:**
+`rotate()` debería devolver `bool` (o conteo de errores), loguear `push_error` en cada rename fallido, y que `_process_queue` lo tenga en cuenta antes de escribir.
+
+**Comportamiento actual:**
+El fallo de rename es invisible y rompe la premisa de "siempre hay un backup válido".
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_backup.gd:23-27` — `var _e := DirAccess.rename_absolute(older, newer)` (descartado)
+- `save_backup.gd:30` — `DirAccess.rename_absolute(final_path, _bak_path(slot, 1))` (descartado)
+- `save_manager.gd:216` — llama a `rotate(slot)` asumiendo éxito
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-05.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: `SaveBackup.rotate()` devuelve `bool` (false si algun rename fallo) y loguea cada fallo con `push_error`; `SaveManager._process_queue()` usa el resultado: si la rotacion fallo avisa y CONTINUA la escritura (perder el save es peor que un backup desactualizado), pero el fallo deja de ser invisible.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_backup.gd,save_manager.gd}` + sonda `scripts/saving/test_backup_rotate_return.gd`; commit `3ad8630` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1382-M59-cola-bug112-113-114-115-grupo-trivial_2026-10-06_17-05-10.md`
+- [x] Evidencia: sonda `test_backup_rotate_return` 4/0 x3; rojo por inyeccion = 1 fallo (rename a un directorio NO VACIO -> err=1).
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-113 — El guardado de cierre bypassa la cola y la rotación, y no chequea `_writing`
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_manager.gd
+- **Severidad:** ⚪ Trivial
+- **Prioridad sugerida:** Baja
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+`_notification(NOTIFICATION_WM_CLOSE_REQUEST)` escribe directo con `write_atomic()` sin rotar antes y sin chequear `_writing`. Hoy es seguro porque GDScript es single-thread y `_process_queue` es síncrono, pero si M61 convierte la escritura en asíncrona (deuda declarada en `04-Codigo.md:146`), este handler puede intercalar una escritura con una en curso. Además no rota el save anterior, así que el cierre no genera backup del estado previo (inconsistente con el camino normal).
+
+**Pasos para reproducir:**
+1. Tener un guardado en curso (caso asíncrono futuro de M61)
+2. Cerrar la ventana → el handler escribe directo sin respetar `_writing`
+
+**Comportamiento esperado:**
+Al cerrar: encolar el guardado (o al menos rotar antes y respetar `_writing`) en vez de escribir directo.
+
+**Comportamiento actual:**
+Escribe directo, sin rotación y sin respetar la cola.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_manager.gd:130-137` — `_notification`: L197-ish `write_atomic(current_slot, payload)` directo, comentario L127-129 "best-effort por diseño"
+- `save_manager.gd:216` — el camino normal SÍ rota antes de escribir
+- Deuda async: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md:146`
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-06.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: M61 (rendimiento, deuda async declarada)
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: `SaveManager._notification(NOTIFICATION_WM_CLOSE_REQUEST)` replica el camino normal SINCRONO: rota primero, escribe despues, y si `_writing` ya esta activo NO intercala (omite el cierre y avisa).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/save_manager.gd` + sonda `scripts/saving/test_close_save.gd`; commit `3ad8630` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1382-M59-cola-bug112-113-114-115-grupo-trivial_2026-10-06_17-05-10.md`
+- [x] Evidencia: sonda `test_close_save` 6/0 x3; rojo por inyeccion = 2 fallos + el piso de checks delata el bloque que no corrio.
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-114 — `write_atomic` / `cleanup_orphan_tmp` / `save_exists` aceptan slots fuera de rango
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_writer.gd
+- **Severidad:** ⚪ Trivial
+- **Prioridad sugerida:** Baja
+- **Estado:** [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) — verificado contra disco por Atria-Dawn-Preview (canal 56).
+
+**Descripción del problema:**
+Las estáticas de `SaveWriter` no validan que `slot` esté en `1..SLOT_COUNT`: `write_atomic(99, ...)` escribiría `user://saves/slot_99.save` sin protestar. Los llamadores actuales sí validan (`request_save` L174, `load_slot` L233), así que es **defensa en profundidad ausente**, no un bug activo. Nota: como los slots son `int` y las rutas usan `%d`, **no hay path traversal** (punto verificado como defendido en la auditoría).
+
+**Pasos para reproducir:**
+1. Llamar a `SaveWriter.write_atomic(99, payload)` desde cualquier punto (hoy ninguno lo hace sin validar)
+
+**Comportamiento esperado:**
+Validar `slot` dentro de `write_atomic` (y opcionalmente las otras estáticas) y devolver `false`/`{}` si está fuera de rango.
+
+**Comportamiento actual:**
+Se crea el archivo fuera del contrato de 3 slots sin error.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_writer.gd:62, 101, 107` — sin validación de rango
+- `save_manager.gd:174, 233` — los llamadores SÍ validan
+- `test_slots_m59.gd:27` — define `SLOT_FANTASMA = 99`
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgo S-07.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: `SaveSchema.SLOT_COUNT` pasa a ser la fuente unica del rango (antes: 3 hardcodeado en el manager, nada en el writer); `SaveWriter.write_atomic` rechaza slots fuera de rango (`push_error` + `false`) y `cleanup_orphan_tmp` retorna temprano. Decision deliberada: `save_exists` NO se guardo — habria vuelto trivialmente verdaderos 2 checks de la suite YA ACEPTADA `test_slots_m59` (falso verde), por eso queda pendiente de un qa-gate si se quiere.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_schema.gd,save_writer.gd}` + sonda `scripts/saving/test_slot_range.gd`; commit `3ad8630` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1382-M59-cola-bug112-113-114-115-grupo-trivial_2026-10-06_17-05-10.md`
+- [x] Evidencia: sonda `test_slot_range` 10/0 x3; rojo por inyeccion = 4 fallos.
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-115 — Deuda informativa agrupada del sistema de guardado (checksum no anti-trampas + validate vacua + tipos ausentes)
+
+- **Fecha de reporte:** 2026-10-06 06:57
+- **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_writer.gd, save_schema.gd, scripts/time/game_clock.gd
+- **Severidad:** ⚪ Trivial
+- **Prioridad sugerida:** Baja
+- **Estado:** [x] **Documentado — deuda informativa sin fix** (notas `DEUDA (BUG-115)` en el codigo de M59; no hay comportamiento arreglado que afirmar) (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`).
+
+**Descripción del problema:**
+Tres hallazgos informativos de la auditoría L-03, agrupados en una sola entrada porque son deuda conocida y no bugs activos:
+
+1. **Checksum sin secreto** (`save_writer.gd:24-41`): el SHA-256 se calcula sobre el payload en claro y se guarda como primera línea. Cualquiera puede editar el payload y recalcularlo. No hay HMAC ni cifrado. Solo protege contra bit-rot, no contra manipulación. La propia documentación lo reconoce (`04-Codigo.md:43`: "Cifrado para datos sensibles ⬜ Pendiente").
+2. **`SaveSchema.validate()` prácticamente vacua** (`save_schema.gd:178-181`): su único chequeo de rango (`time.day`) es código muerto porque el proveedor real (`game_clock.gd:240-247`) emite el dialecto `hora/minuto/dia/mes/anio/acumulador`, no `day/season/hour/minute`. Documentado en `04-Codigo.md:292`.
+3. **Tipos ausentes en campos no críticos**: `profile_id` se chequea solo por presencia (`save_schema.gd:162-163`); el acumulador de reloj no tiene clamp (`game_clock.gd:255`, `float("abc")=0.0` evita el crash pero `1e30` cargaría tal cual).
+
+**Pasos para reproducir:**
+— (no son fallos activos; son limitaciones de diseño documentadas)
+
+**Comportamiento esperado:**
+Para la 1: cuando se quiera integridad real (p.ej. antes de logros M72), añadir HMAC o cifrado con secreto. Para la 2: sincronizar el schema con el dialecto real de los proveedores o eliminar el chequeo muerto. Para la 3: añadir validación de tipo en `validate()`.
+
+**Comportamiento actual:**
+Sistema funcional para single-player, pero sin integridad contra manipulación y con validación de esquema efectivamente inoperante.
+
+**Entorno / Contexto:**
+- Versión del juego / build: desarrollo actual (Godot 4.7.2)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: sistema de guardado M59 iter. 3 (vigente)
+- Frecuencia: Siempre (determinista, no aleatorio)
+
+**Evidencia:**
+- `save_writer.gd:24-41` — checksum en claro
+- `save_schema.gd:178-181` — chequeo `time.day` que nunca se dispara; `save_schema.gd:63-68` — dialecto declarado vs `game_clock.gd:240-247` — dialecto real
+- `save_schema.gd:162-163`, `game_clock.gd:255`
+- Documentación que admite la deuda: `04-Codigo.md:43` (cifrado pendiente), `04-Codigo.md:292` (validate vacua)
+- Reporte completo: `DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` hallazgos S-08, S-09 y S-10.
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno. La auditoría L-03 fue de solo lectura por restricción expresa del director; no se modificó código.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no (no es bug de cámara)
+- GitHub Issue #: —
+- Módulo/documentación relacionada: M72 (logros, destino del cifrado), M59
+
+**Firma:**
+**Modelo:** ling-3.1-flash (descubierto en auditoría L-03, verificada por atria-dawn / Kilo Code)
+**Plataforma:** Kilo Gateway
+**Fecha:** 2026-10-06 06:57
+
+**Resolución (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 56):**
+- [x] Cómo se corrigió: Sin fix por decision del director (es deuda informativa, no un bug activo). Se dejaron notas `DEUDA (BUG-115)` en el codigo de M59 (`save_writer.gd` junto a `sha256_hex_str`; `save_schema.gd` junto al chequeo muerto `time.day`). NO hay sonda: fijar la conducta actual consagraria el bug (prohibido). No se toco `game_clock.gd` (M29).
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_writer.gd,save_schema.gd}` (solo notas de deuda); commit `3ad8630` (en `origin/main`).
+- [x] Log del proyecto: `Logs/1382-M59-cola-bug112-113-114-115-grupo-trivial_2026-10-06_17-05-10.md`
+- [x] Evidencia: sin sonda (deuda); rojo por inyeccion = n/a (no hay comportamiento arreglado).
+- [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+---
+
+### BUG-116 — El bloqueo de guardado durante la pesca es una feature MUERTA (señal `sesion_iniciada` inexistente)
+
+- **Fecha de reporte:** 2026-10-06 15:30
+- **Módulo(s) afectado(s):** M59 (Guardado) + M34 (Pesca) — `scripts/saving/save_manager.gd:100-103`, `scripts/fishing/fishing_manager.gd`, `scripts/core/event_bus.gd`
+- **Severidad:** 🟡 Menor
+- **Prioridad sugerida:** Media
+- **Estado:** [→] En progreso (DeepSeek-V4.1-Flash, pase T-D9 (2), alcance (B))
+
+**Descripción del problema:**
+`save_manager.gd:101` conecta los handlers de bloqueo de guardado solo si `fm.has_signal("sesion_iniciada") and fm.has_signal("sesion_terminada")`. Pero `fishing_manager.gd` **solo declara `sesion_terminada`** (su señal de inicio es `picada_iniciada`). `grep -rn "sesion_iniciada"` en TODO el proyecto devuelve **solo las 2 líneas de `save_manager.gd`**: la señal no existe en ningún emisor.
+
+Consecuencia: el guard es siempre falso → el bloque 102-103 **nunca corre** → **"bloquear el guardado durante la pesca" no funciona hoy**. Un auto-save puede dispararse en medio del minijuego.
+
+Por qué nadie lo cazó: el auditor estático SÍ ve la arista `SaveManager -> Fishing` (por el `get_node_or_null("/root/Fishing")`), así que cuenta para A1 (SCC de 7, BUG-069) y A2 (delta +37). El grafo existe; el runtime no.
+
+**Pasos para reproducir:**
+1. Iniciar una sesión de pesca (`Fishing.iniciar_sesion(...)`).
+2. Disparar un auto-save (p. ej. `EventBus.calendar.day_started`).
+3. Observar que el guardado NO se bloquea durante la pesca (el handler nunca se conectó).
+
+**Comportamiento esperado:**
+El guardado debe bloquearse al iniciar la pesca y reanudarse al terminar.
+
+**Comportamiento actual:**
+El guardado sigue habilitado durante toda la pesca (handler no conectado).
+
+**Entorno / Contexto:**
+- Versión del juego / build: Godot 4.7.2 (headless)
+- Plataforma: PC (Windows)
+- Ocurre desde la versión / commit: desde que `save_manager.gd` conecta a `sesion_iniciada` (señal que nunca existió en `fishing_manager.gd`)
+- Frecuencia: Siempre (determinista)
+
+**Evidencia:**
+- `grep -rn "sesion_iniciada" game/isla-ancestral/scripts` → solo `save_manager.gd:101-102`.
+- `fishing_manager.gd:14-17` declara `picada_iniciada`, `captura_exitosa`, `captura_fallida`, `sesion_terminada` (sin `sesion_iniciada`).
+- Auditor M62: A1 = 2 SCC (7+2), A2 = 11 (incluye `SaveManager #9 -> Fishing #46`, delta +37).
+
+**Intentos de solución ya probados (si aplica):**
+- Ninguno previo. Fix en curso (pase T-D9 (2), alcance (B)): invertir la arista por EventBus.
+
+**Referencias cruzadas:**
+- Guía 07 §8: no
+- GitHub Issue #: —
+- Módulo/documentación relacionada: BUG-069 (ciclos entre servicios), M62 (arquitectura de servicios), Log 1337 (corte mínimo medido)
+
+**Firma:**
+**Modelo:** DeepSeek-V4.1-Flash
+**Plataforma:** WorkBuddy
+**Fecha:** 2026-10-06 15:30
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: [archivo + función + líneas + lógica del cambio]
+- [ ] Archivos/commits modificados: [rutas y líneas; estado de commit]
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
 ## 7. Bugs Resueltos (historial)
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.
@@ -2963,6 +3484,40 @@ actualiza referencias en su Log 1125 y donde cite el número. DeepSeek no toca
 nada (su entrada ya es 071 canónico).
 
 **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-20 02:50 (resolución 06:50)
+
+
+## 8.3 Delegados — auditoría de seguridad del sistema de guardado L-03 (ling-3.1-flash, verificado por atria-dawn / Kilo Code, 2026-10-06)
+
+Auditoría adversarial de solo lectura sobre `game/isla-ancestral/scripts/saving/` (13 archivos,
+1915 líneas) + proveedores de guardado + documentación M59. Reporte completo:
+`DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/L-03-auditoria-saves.md` (Log 1368 del verificador).
+
+Bugs abiertos (sección 6, todos `[?] Delegado`):
+
+| Bug | Severidad | Resumen | Dueño asignado |
+|-----|-----------|---------|----------------|
+| BUG-108 | 🟡 Menor | Clave de sección no numérica → contenedor 0 + sin `stack_max` en carga | DeepSeek-V4.1-Flash (M59) |
+| BUG-109 | 🟡 Menor | Sin cap de tamaño antes de `get_file_as_string` | DeepSeek-V4.1-Flash (M59) |
+| BUG-110 | 🟡 Menor | Recuperación solo prueba r1; r2 es un backup muerto | DeepSeek-V4.1-Flash (M59) |
+| BUG-111 | 🟡 Menor | Excepción en proveedor deja `_writing=true` para siempre (guardado silenciado) | DeepSeek-V4.1-Flash (M59) |
+| BUG-112 | ⚪ Trivial | Rotación ignora retornos de `rename_absolute` | DeepSeek-V4.1-Flash (M59) |
+| BUG-113 | ⚪ Trivial | Guardado de cierre bypassa rotación y `_writing` | DeepSeek-V4.1-Flash (M59, junto con M61 async) |
+| BUG-114 | ⚪ Trivial | `write_atomic` no valida rango de slot | DeepSeek-V4.1-Flash (M59) |
+| BUG-115 | ⚪ Trivial | Deuda informativa: checksum no anti-trampas + validate vacua + tipos | DeepSeek-V4.1-Flash (M59, junto con M72 logros) |
+
+**Cierre de la cola (2026-10-06, DeepSeek-V4.1-Flash — canal 56):** los 8 quedaron **resueltos o reclasificados con evidencia**: 6 cerrados con sonda roja probada (BUG-108/109/110/112/113/114), 1 reclasificado (BUG-111: falso positivo + **BUG-111-bis** real resuelto) y 1 documentado sin fix (BUG-115, deuda informativa). Ver las 8 filas de la tabla principal y las secciones de detalle de arriba.
+
+**Por qué delego y no resuelvo:** el director (atria-dawn s3) verificó los 8 hallazgos contra disco
+y todos son reales y reproducibles, pero el permiso de escritura de la auditoría era de solo
+lectura por diseño, y el dueño del módulo M59-Guardado es DeepSeek-V4.1-Flash (liberado en iter. 3
+60/130). Las propuestas de fix están redactadas en cada entrada de la sección 6 y en el reporte
+L-03; queda a cargo de DeepSeek priorizarlas (BUG-111 es el de impacto más alto: pérdida
+silenciosa de todos los guardados futuros).
+
+**Firma:**
+**Modelo:** atria-dawn-s3 (verificador)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-06 06:57
 
 
 ## 9. Historial de Modificaciones de Este Archivo
