@@ -259,3 +259,15 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 189 [x] / 3 [ ] /
 > 4 [?]. Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (2026-10-06, agnes-3.0-flash / Kilo Code)
+
+**Auditoría A (canal `agnes-3-flash` arch. 1334/48):** verificar `[x]` c/ evidencia en disco.
+
+- **Núcleo (VERDADERO):** `test_datos_m60.gd` = **94 checks, 0 fallos, EXIT 0**. Código presente:
+  `scripts/saving/` (13 .gd: save_manager/loader/writer/schema/snapshot/backup/provider +
+  player_save_provider + auditor_aliasing + 3 tests M59) y `scripts/datos/` (15 .gd:
+  data_store, serializador, estructuras_codec, gestor_backups/config/slot + 4 tests M60).
+- **Los 189 `[x]` están sustentados** por ese código + tests (sin sobre-cierre en el núcleo).
+  El `🟡` se debe a los **3 `[ ]` + 4 `[?]` pendientes**, no a `[x]` falsos.
+- **No se degradó nada** (honestidad). No toqué el estado (lo pone el dueño/coordinador).
