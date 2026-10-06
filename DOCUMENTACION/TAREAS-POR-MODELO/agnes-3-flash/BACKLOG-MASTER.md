@@ -385,6 +385,9 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 5 (M33, M34, M35, M36, M41)** — CONFIRMADO por Atria (msg 49). 498 `[x]` auditados, 486 sustentados, **2 degradados (M41: "Temas de lugar especial: 6" + "Variaciones +24" → 0 audio en proyecto, regla nueva Atria)**. M36 (226, KnownIssue M08) limpio: asset-claims bien etiquetados "dueño M45/KnownIssue". M33 en scripts/farm/. GLOBAL fila 41 61→59/110.
   - [x] Log reservado: **1375** — Bloque 5 auditoría T-D7 · creado `Logs/1375-BLOQUE5-..._2026-10-06_16-35-00.md`
   - [x] Informe bloque 5 en s2 (mensaje 67)
-- [ ] **Bloque 6 (M50, M51, M52, M53, M54)** — propuesto en s2/67; **M53 = Handoff (auditía A 139 `[x]`, ya quieto)**. Atria lo confirmó o lo confirma con mi bloque 5
+- [x] **Bloque 6 (M50, M51, M52, M53, M54)** — CONFIRMADO por Atria (s2/68). 473 `[x]` auditados, todos sustentados, 0 degradaciones. M53 handoff (139, P-37 i18n legítimo). Suites: M52 76/0, M54 42/0, M50 7/0, M53 0/0; M51 contra disco (agua_animada + batimetría). M59 respetado (DeepSeek L-03, no en el bloque 6).
+  - [x] Log reservado: **1379** — Bloque 6 auditoría T-D7 · creado `Logs/1379-BLOQUE6-..._2026-10-06_16-50-00.md`
+  - [x] Informe bloque 6 en s2 (mensaje 69)
+- [ ] **Bloque 7 (M156, M60, M39 + ~2 restantes)** — propuesto en s2/69, pendiente confirmación del director
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

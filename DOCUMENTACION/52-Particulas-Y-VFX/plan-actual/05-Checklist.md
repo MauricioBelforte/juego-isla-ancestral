@@ -380,3 +380,6 @@ El catálogo real tiene **8 de los 25** efectos del plan maestro.
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 137 [x] / 10 [ ] /
 > 1 [?]. Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
+Los [137 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_vfx_m52_iter6.gd 76/0 = scripts/particles/ (vfx catalog/director/factory/pool).

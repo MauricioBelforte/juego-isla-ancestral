@@ -312,3 +312,5 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 35 [x] / 130 [ ] /
 > 1 [?]. Las marcas no se tocaron.
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
+Los [35 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: agua_animada.gd + batimetría en island_generator = M51 sin suite dedicada; verificado contra disco: scripts/world/agua_animada.gd + params de water_level en island_generator. (BUG-105 agua blanca = visual, pendiente, no toca los [x]).

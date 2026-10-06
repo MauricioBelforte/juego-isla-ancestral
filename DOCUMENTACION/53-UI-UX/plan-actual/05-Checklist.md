@@ -292,3 +292,6 @@ evidencia real en disco (regla §21.4.3: `[x]` sin evidencia = degradar a `[?]`)
 ## Notas de QA (hy3, 2026-10-06)
 
 - Mejora pendiente (H3, no bloqueante): `test_ui_framework.gd` imprime solo "0 fallo(s)" sin nombrar el piso de checks (15 `_check` ejecutados). Si el runner abortara antes de correrlos, el resumen seguira diciendo 0 fallos y enmascararia un falso verde. Al retomar M53, aplicar el estandar anti-falso-verde del proyecto (nombrar "N checks" y/o un piso medido, patron M105 / M60 piso 134), ya usado en `test_diario_ui.gd` (CHECKS_MINIMOS=55). Fuente: re-verificacion M53 (Log 1342).
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
+Los [139 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_ui_framework.gd 0/0 = scripts/ui/; P-37 (Log 1151) hooks i18n/accesibilidad en ui_manager.gd — [x] de traducción en vivo legítimos (confirmado por Atria s2/68).

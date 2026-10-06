@@ -246,3 +246,6 @@
 - **Rojo (inyección):** forzar `_check(false, "INYECTADO ROJO M54")` en copia temporal → **EXIT 1**. El contador de fallos vuelve ROJO; el verde no es heredado.
 - **HALLAZGO (fuera de P-59):** `test_mapa_m54_e2e.gd` está ROTA (SCRIPT ERROR parse: inferencia de tipos `markers`/`explored`/`regions`/`routes`, `explorerd` no declarado) pero devuelve **EXIT 0 = falso verde**. Suite huérfana previa a P-59 (agnes-2.5-flash). Recomendación: cuarentenar o reparar tipos; no editada por el verificador.
 - **DoD:** 127/177 (backlog) · 50 `[ ]` externos (deps M53/M58/M63/M69/M45/M46/M60) **no exigidos**. Módulo permanece 🟡 Liberado.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
+Los [133 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_mapa_m54.gd 42/0 = scripts/mapa/; P-59 OK 133/177 (Atria s2/68).

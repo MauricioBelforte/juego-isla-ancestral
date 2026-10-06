@@ -278,3 +278,5 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /
 > 3 [?]. Las marcas no se tocaron.
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
+Los [29 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_vegetation_headless.gd 7/0 = scripts/vegetacion/.
