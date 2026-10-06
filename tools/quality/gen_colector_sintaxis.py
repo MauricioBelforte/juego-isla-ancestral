@@ -36,31 +36,12 @@ from pathlib import Path
 
 EXCLUIR_DIR = {".godot", "addons", "Godot"}
 EXCLUIR_ARCHIVO = {"_colector_sintaxis.gd"}  # autoreferencia (preload de si mismo)
-# Scripts cuyo extends apunta a gdUnit4 (addon de terceros no versionado). Godot
-# no puede resolver la clase base y el preload falla en cascada (Log 1320).
-_MARCA_GDUNIT = "addons/gdUnit4/"
-_LINEAS_A_INSPECCIONAR = 3
+# NOTA (Log 1368): la exclusion de scripts que extienden gdUnit4 se elimino.
+# gdUnit4 ahora esta versionado en addons/gdUnit4 (decision del fundador), asi
+# que Godot resuelve el extends GdUnitTestSuite y el preload no falla en
+# cascada. Antes (Log 1320) el addon no estaba en git y 4 tests de tests/unit/
+# tenian que excluirse por contenido.
 SALIDA = Path("scripts/editor/_colector_sintaxis.gd")
-
-
-def _usa_gdunit(path: Path) -> bool:
-    """True si el script hereda de gdUnit4 (addon de terceros no versionado).
-
-    Solo inspecciona las primeras lineas: ahi va el ``extends``. Mas barato que
-    leer el archivo entero y suficiente para el caso real.
-    """
-    try:
-        with path.open("r", encoding="utf-8") as fh:
-            for _ in range(_LINEAS_A_INSPECCIONAR):
-                linea = fh.readline()
-                if not linea:
-                    break
-                if _MARCA_GDUNIT in linea:
-                    return True
-    except (OSError, UnicodeDecodeError):
-        # Si no se puede leer, que lo valide el linter (queja ruidosa > silencio).
-        return False
-    return False
 
 
 def _encontrar_raiz(inicio: Path) -> Path:
@@ -80,9 +61,6 @@ def _recolectar(raiz: Path) -> tuple[list[str], list[str]]:
         if rel.parts[0] in EXCLUIR_DIR:
             continue
         if rel.name in EXCLUIR_ARCHIVO:
-            continue
-        if _usa_gdunit(path):
-            excluidos.append(rel.as_posix())
             continue
         archivos.append(rel.as_posix())
     return archivos, excluidos
