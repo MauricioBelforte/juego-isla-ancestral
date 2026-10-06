@@ -101,10 +101,13 @@ jobs:
   formatting-check:
     name: GDScript Formatting Check
     runs-on: ubuntu-latest
-    # Ajustado a 15 min (antes 10): el job llego al limite (10m15s) despues de
-    # versionar el addon voxel (100 MB de binarios + iconos). Sin --import previo,
-    # Godot reimporta todo en el primer arranque. Margen para no perder el job
-    # por timeout cuando el repo crece (atria-dawn-s2, 2026-10-05).
+    # El paso de importacion es OBLIGATORIO (MODO B, BUG-091): en un checkout
+    # limpio (sin .godot/) la cache de class_names no existe, Godot reimporta
+    # TODO (incluidos los 100 MB del addon voxel) y luego intenta arrancar el
+    # juego completo en vez de solo parsear. Sin --import el job llega al
+    # timeout sin terminar (cancelado a los 15 m 16 s dos veces). Con la cache
+    # construida, --check-only termina en menos de 1 s (medido local).
+    # Verificado: fresh + import => termina; fresh sin import => timeout.
     timeout-minutes: 15
 
     steps:
@@ -116,6 +119,9 @@ jobs:
         with:
           version: "4.7-stable"
           export-templates: false
+
+      - name: Import project resources
+        run: godot --headless --path game/isla-ancestral --import
 
       - name: Check formatting (dry-run)
         run: |
