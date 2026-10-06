@@ -107,9 +107,9 @@
 - [ ] Headroom 3 dB en master (M84) [S]
 - [ ] Catálogo total ≈ 90 archivos (presupuesto M133) [S]
 - [ ] Temas de zona: 12 [S]
-- [x] Temas de lugar especial: 6 [S]
+- [?] Temas de lugar especial: 6 [S]  [Auditoria T-agnes b5 2026-10-06: Temas de lugar especial: 6 = 0 audio files en proyecto (M43); asset no entregado]
 - [ ] Capas de tiempo: 10 [S]
-- [x] Variaciones +24 (2 por tema) [S]
+- [?] Variaciones +24 (2 por tema) [S]  [Auditoria T-agnes b5 2026-10-06: Variaciones +24 = 0 audio files en proyecto (M43); asset no entregado]
 
 ## F. Data y tests (8)
 
@@ -137,7 +137,7 @@
 - [x] 05-Checklist creado y firmado (este archivo) [S]
 - [x] Log de creación generado [S]
 
-**Totales:** 110 ítems · Completados: 61 · Pendientes: 49 · No resueltos: 0.
+**Totales:** 110 ítems · Completados: 59 · Pendientes: 49 · No resueltos: 2.
 **Nota:** el runtime de M41 está implementado y verificado por agnes-2.5-flash (MusicDirector autoload data-driven: contexto, flujo, narrativa, leitmotifs, 3 capas, recolorización estacional, ducking con M21, stings con fallback, pausa con GameTime, normalización LUFS -16). Test headless `test_musica_m41.gd` **27/0 OK**. Los 51 puntos P1-P51 (composición de los temas reales) y la integración final de assets quedan delegados al compositor (especificados en diseño). La matriz vive en `data/audio/music_context_matrix.json`.
 
 ## Notas del Agente
@@ -160,3 +160,5 @@
 - Cuando el compositor entregue `.ogg/.mp3`, completar `archivo` en `music_context_matrix.json` y los 51 puntos P1-P51 del checklist.
 - Conectar `FeedbackDirector`/M44 a `sting()` para stings de feedback.
 - El crossfade real entre temas ocurre por swap de capas con control de `volume_db`; si se desea crossfade A/B de todo el tema, añadir un segundo juego de 3 players y alternar.
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
+[x] auditados contra disco (bloq 5). Sustentado (sistema+specs) pero 2 [x] degradados.  Evidencia: `test_musica_m41.gd 14/0 (sistema musical OK)` = 2 [x] DEGRADADOS a [?] (bloque 5, regla nueva Atria s2/49): 'Temas de lugar especial: 6' y 'Variaciones +24' citan audio entregado pero HAY 0 archivos de audio (.ogg/.wav) en el proyecto entero (constatado M43). Los 19 [x] de specs P# y el sistema musical se sostienen; solo las 2 cuentas de assets entregados caen a [?].

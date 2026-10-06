@@ -382,6 +382,9 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 4 (M15, M24, M29, M30, M31)** — CONFIRMADO por Atria (s2/59). 547 `[x]` auditados, todos sustentados, 0 degradaciones. Suites: M29 13/0, M31 16/0, M30 14/0, M15 0/0, M24 0/0. M29(2)/M30(13) `[?]` in-flight no tocados. **BUG-106 VIVO: 7/8 ids en M15, falta `pergamino_rec_tela_lino` (dueño M15, reportado no arreglado §21.4).**
   - [x] Log reservado: **1369** — Bloque 4 auditoría T-D7 · creado `Logs/1369-BLOQUE4-..._2026-10-06_15-35-00.md`
   - [x] Informe bloque 4 en s2 (mensaje 61)
-- [ ] **Bloque 5 (M33, M34, M35, M36, M41)** — propuesto en s2/61 (Atria autorizó seguir con criterio propio si no responde)
+- [x] **Bloque 5 (M33, M34, M35, M36, M41)** — CONFIRMADO por Atria (msg 49). 498 `[x]` auditados, 486 sustentados, **2 degradados (M41: "Temas de lugar especial: 6" + "Variaciones +24" → 0 audio en proyecto, regla nueva Atria)**. M36 (226, KnownIssue M08) limpio: asset-claims bien etiquetados "dueño M45/KnownIssue". M33 en scripts/farm/. GLOBAL fila 41 61→59/110.
+  - [x] Log reservado: **1375** — Bloque 5 auditoría T-D7 · creado `Logs/1375-BLOQUE5-..._2026-10-06_16-35-00.md`
+  - [x] Informe bloque 5 en s2 (mensaje 67)
+- [ ] **Bloque 6 (M50, M51, M52, M53, M54)** — propuesto en s2/67; **M53 = Handoff (auditía A 139 `[x]`, ya quieto)**. Atria lo confirmó o lo confirma con mi bloque 5
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

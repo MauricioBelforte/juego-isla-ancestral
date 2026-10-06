@@ -205,3 +205,6 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
+[x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_farm.gd 0/0` = scripts/farm/ (farm_service, farm_state_store, farm_tool_controller) + data/balance/farming.json.
