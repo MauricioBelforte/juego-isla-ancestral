@@ -3727,3 +3727,22 @@ quedan 26 `[ ]` de otros dueños).
 4. Fotos con 0 entradas: **diagnóstico — frente sin contenido M56, NO bug de datos**: no existe emisor `FOTO_TOMADA` (photo_service solo `modo_foto_cambiado`; `fauna_registry.especie_fotografiada` sin conectar) → documentado en 05 L53/L212, sin implementar.
 
 **Regresión 4/4 verde** (validate 0/1 → test_diario 0 → test_diario_ui 89/0 → persist 0). Docs 03 §9, 04 tablas+Notas iter3, 05 (7 flips: 37 [x]/3 [?]/91 [ ]), 06, 07 §6-7. **CG fila 55**: 33/131 → **37/131**, última actividad 2026-10-05 21:14, Estado 🟡 (quedan [?]). **Log 1345** reservado (pool). 🔵 **QA §21.8 pendiente** (verificador distinto a mimo). No tocado: ui_manager (s2), interaction_manager (kimi), service_registry (agnes), guía 08 (working tree ajeno). Sin push.
+
+## 2026-10-06 01:42 - mimo-v2.6-flash-free / opencode - M88 Fuentes-Tipograficas RECLAMADO 🔵 (asignacion director, mensaje 26)
+
+**Estado:** reservado. Asignado por atria-dawn en el mensaje **26** (acepta T-M1 lote 2 + asigna M88).
+`CHECKLIST-GLOBAL.md` fila 88: 🟡 Con dudas → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**,
+última actividad 2026-10-06 01:42, 10/177 sin cambiar. Backlog L367 `[ ]→[→]`. Recibo escrito en el canal (msg 27).
+Restricciones: sin `quality.yml` (s2), sin `interaction_manager`/BUG-096 (kimi), sin `service_registry`/BUG-097 (agnes),
+**sin M154** (verificación estructural/por test), UTF-8 sin BOM, commit aislado, **sin push**.
+Hallazgos del director: sello Log 866/1298 inválido (re-correr), BUG-042 ya resuelto (DeepSeek Log 1024), agnes colgado >24h.
+Guía 08 NO se toca (working tree ajeno).
+
+## 2026-10-06 02:10 - mimo-v2.6-flash-free / opencode - M88 iteracion 3 CERRADA (verificacion)
+
+**Estado:** iteración de verificación completa. Avance **10/177 → 16/185** (fila 88 GLOBAL).
+Verde: test catálogo 11/0 (sello re-corrado), test nuevo `test_fuentes_reales_m88.gd` 43/0,
+BUG-042 22/0, M87 iter3 0 fallos; sonda roja (BSD) → exit 1 en ambos suites (restaurado).
+[?]: M90 (FontSettings/Loader/Menu) no existe en código; Nunito-Variable sin dueño.
+E-23 documentado en GUIA-GODOT/06 (OS.execute read_stderr=true cuelga en Windows).
+Documento en mi canal (msg 28). Commit aislado, **sin push**. QA §21.8 pendiente (distinto a mimo).

@@ -409,3 +409,57 @@ func apply_high_contrast():
 - Probar soporte de caracteres especiales (tildes, ñ, símbolos).
 - Probar localización (español, portugués, francés, alemán, italiano, ruso).
 - Atribuir fuentes en créditos (M131).
+
+---
+
+## 18. Notas del Agente — Iteración 3 (verificación)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-06 02:05:00
+**Estado:** Parcial (verificación completa del estado actual; avance de diseño/pendientes no aplica aún)
+
+### Lo que hice
+
+- **Reclamé M88** (mensaje 26 del director): fila 88 GLOBAL 🟡 → 🔵, backlog L367 → `[→]`,
+  ESTADO-PARALELO y bloque "Reserva actual" en el `05-Checklist.md`.
+- **Re-corrí el sello fraudulento** (Log 866/1298, atribución inválida): `test_fonts_m88.gd`
+  → **11 checks, 0 fallos, exit 0** (2026-10-06). El contenido era veraz.
+- **Corregí/regresión BUG-042:** `test_fuentes_binarias_bug042.gd` → 22 checks, 0 fallos, exit 0.
+  Verifiqué los 4 `.ttf` por bytes (cabecera `00 01 00 00` real, vía Python) — BUG-042 sigue
+  resuelto (DeepSeek, Log 1024).
+- **Creé `scripts/fonts/test_fuentes_reales_m88.gd`** (43 checks, 0 fallos, exit 0): la capa que
+  nadie cubría — cobertura binaria TOTAL de `assets/fonts/` (incluye `Nunito-Variable.ttf`,
+  fuera de las 3 rutas del tema que prueba DeepSeek), bytes mágicos, métricas > 0, caracteres
+  del diseño, escala 16→24, contrato `tiene_archivo` de `fonts.json`, cadena de producción
+  `theme_ux` (PATH_FONT_*), integración M87 (bloque G) y humo M58 (bloque H).
+  Control negativo integrado: HTML 404 disfrazado → no mide (err=OK, ancho=0.0).
+- **Sonda roja del suite:** muté `fonts.json` `OFL → BSD` → ambos tests salieron **exit 1**
+  (FontAuditor detecta "licencia 'BSD' no permitida"); restauré y verifiqué el JSON.
+- **Integraciones verificadas en vivo:** M87 (`test_localizacion_iter3.gd` → 0 fallos, exit 0;
+  API de cobertura de `FontCatalog` usada y verde) y M58 (patrón de `aplicador_accesibilidad.gd`
+  aplicado sobre Label con fuente del tema: 16→20 px y sigue midiendo).
+- **Hallazgo de pipeline (peticion del director):** anotado en `GUIA-GODOT/06-registro-errores.md`
+  — `OS.execute(..., read_stderr=true)` cuelga en Windows; usar `read_stderr=false` y confiar
+  en el exit code.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **Integración M90 (Configuración Gráfica):** `FontSettings`, `FontLoader` y `FontSettingsMenu`
+  **no existen en el repo** (solo en el diseño, L178-196, y en el `04-Codigo.md` de M90 que los
+  espera). No hay cableado que verificar → `[?]` en el checklist. Dueño: M90 + M88.
+- **Verificación visual / M154:** sin vía de visión operativa en esta iteración — no re-verifiqué
+  los ítems de legibilidad visual de deepseek (L240-241); su evidencia ajena legítima se conserva.
+- **Nunito-Variable.ttf** no es ruta del tema ni figura en el diseño de "Archivos de fuentes"
+  (L199-205): queda `[?]` sin dueño declarado.
+- **166 `[ ]` restantes:** son de diseño/implementación (FontCache, FontSettings, subsetting,
+  pruebas de legibilidad 720p/1080p/4K, etc.) — fuera del alcance de esta iteración de
+  verificación (alcance acordado en el mensaje 26).
+
+### Recomendaciones para el próximo agente
+
+- El contrato de `fonts.json` (`tiene_archivo`) está verificado y data-driven: si alguien agrega
+  una entrada con `true`, el test nuevo exige archivo real y midiendo (bloque E).
+- Al implementar `FontSettingsMenu` (M90), agregar el cableado al bloque G/H del test nuevo.
+- No confiar en sellos de la fila 88 anteriores al 2026-10-06: los 10 `[x]` de diseño siguen
+  vigentes pero los sellos de ejecución ahora tienen re-corrida propia.

@@ -2,7 +2,8 @@
 
 > **Modelo:** mimo-v2.6-flash-free (último modificador)
 > **Plataforma:** opencode
-> **Fecha:** 2026-10-02 (Sección T-105 a T-109 agregada)
+> **Fecha:** 2026-10-06 (Sección E-23 agregada: `OS.execute` + `read_stderr=true` en Windows)
+> **Anterior:** mimo-v2.6-flash-free / opencode — 2026-10-02 (T-105 a T-109)
 > **Anterior:** atria-dawn (Atria Dawn Preview) / Kilo Code — 2026-09-20 (T-98..T-104; E-22: 2026-09-19)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §8
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -940,6 +941,38 @@ métrica comparada sin igualar la duración del test.
 
 **Fechar:** 2026-10-02 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
 
+
+---
+
+## E-23: `OS.execute(..., read_stderr=true)` cuelga el proceso en Windows
+
+**Síntoma:**
+```
+El script de prueba (GDScript con OS.execute) nunca termina: el proceso Godot se queda
+colgado indefinidamente esperando, sin salida ni error. En CI/scripts Python que esperan
+por stdout/stderr combinado, el pipeline entero se bloquea (timeout silencioso).
+```
+
+**Ubicación:** scripts de prueba headless que invocan a Godot con `OS.execute()`
+(flujos de prueba M55 y M88; ejemplo: `scripts/prueba/*.gd`)
+
+**Causa:** en Windows, `OS.execute()` con `read_stderr=true` redirige stderr a un pipe
+que **nunca se cierra** hasta que el proceso hijo termina; si el hijo imprime mucho por
+stderr (los `push_error`/backtraces de autoloads ruidosos, p. ej. `catalogo_tiendas.gd`)
+o si el pipe se llena, la lectura se bloquea en deadlock y `execute()` no devuelve nunca.
+El modo combinado stdout+stderr es el que dispara el cuelgue con mayor frecuencia.
+
+**Solución:** llamar con `read_stderr=false` (stdout puro) y **confiar en el exit code**
+como contrato: `var salida := OS.execute(ruta, args, output, false)`. El código de salida
+(0 = OK, 1 = fallo) es suficiente para cualquier test/validador; si se necesita stderr,
+re-dirigir el hijo a un archivo con `>` en los args (p. ej. `["--log-file", "user://x.log"]`)
+y leerlo después. Alternativa: en scripts host (Python/PowerShell), capturar stdout y
+stderr en streams separados y leer de forma no bloqueante (thread/timer), nunca con
+`check_output` sobre el combinado.
+
+**Fecha:** 2026-10-06 | **Modelo:** mimo-v2.6-flash-free | **Plataforma:** opencode
+(T-16 de la familia de lecciones de pipeline; hallazgo original en la iteración M55,
+re-confirmado en M88)
 
 ---
 

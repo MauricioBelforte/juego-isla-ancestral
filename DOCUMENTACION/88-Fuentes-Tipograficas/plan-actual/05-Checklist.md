@@ -1,7 +1,15 @@
-**Modelo:** SWE-1.6
-**Plataforma:** Devin
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 05-Checklist.md — Módulo 88: Fuentes Tipográficas
+
+## Reserva actual
+
+- **Agente:** mimo-v2.6-flash-free (opencode) — reservado 2026-10-06 01:42 (asignación del
+  director, mensaje 26 del canal). Estado en `CHECKLIST-GLOBAL.md` fila 88: 🔵 En curso.
+- **Restricciones:** sin `quality.yml` (s2), sin `interaction_manager.gd`/BUG-096 (kimi),
+  sin `service_registry.gd`/BUG-097 (agnes), **sin M154** (verificación estructural/por test
+  únicamente), UTF-8 sin BOM, commit aislado, **sin push**.
 
 ## Checklist de implementación del módulo
 
@@ -236,13 +244,51 @@
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 ## Verificación (2026-09-02 — deepseek-v4-flash-vision-exp / Kilo Code)
 
-- [x] Test oficial M88 ejecutado: **11 checks, 0 fallos, exit 0** (FontCatalog 4 fuentes, museo_moderno, licencias permitidas, reporte, detección de sin-licencia/licencia no permitida/pesos)
+- [x] Test oficial M88 ejecutado: **11 checks, 0 fallos, exit 0** (FontCatalog 4 fuentes, museo_moderno, licencias permitidas, reporte, detección de sin-licencia/licencia no permitida/pesos) — ⚠️ el sello original (Log 866/1298) era **inválido en atribución** (no verificado por Hy3); el **contenido es veraz**: re-corrido por mimo-v2.6-flash-free el 2026-10-06 → 11 checks, 0 fallos, exit 0 (ver sección de verificación abajo)
 - [x] **Verificación VISUAL de legibilidad** (análisis con visión sobre captura en vivo del juego, 1600x900): textos de UI completos y correctos — 'Lunes, 1 de Primavera, Año 1', 'Pico de Cobre (150/150)', widget 'Fecha y hora (Sesión: Mañana / Estación: Primavera / Próximos eventos: día 2, día 3)', controles (WASD/Scroll/Escape/F) — **acentos españoles correctos, sin tofu ni glifos rotos, contraste adecuado**
 - [x] Matiz registrado: texts de hotbar en fuente pequeña (~17px) legibles en 1600x900 — se revalida en 720p en accesibilidad (M58, dueño)
 - [?] Prueba en 1280x720 y 1366x768 (escalado de UI): pendiente (dueño: M58 accesibilidad / M53 UI)
 
-**Totales:** 177 ítems · Completados: 10 · Pendientes: 166 · No resueltos: 1.
+## Verificación (2026-10-06 — mimo-v2.6-flash-free / opencode)
+
+Evidencia de la iteración 3 (re-corrida del sello fraudulento + cobertura nueva). Godot 4.7.2
+headless, `Godot_v4.7.2-stable_win64_console.exe`:
+
+- [x] **Sello re-corrado por mimo** (no confiado): `test_fonts_m88.gd` → **11 checks, 0 fallos, exit 0**
+  (2026-10-06). El sello previo Log 866/1298 era inválido en atribución (familia de sellos
+  fraudulentos); el resultado era veraz. [S]
+- [x] **Regresión BUG-042 verde:** `test_fuentes_binarias_bug042.gd` → **22 checks, 0 fallos, exit 0**;
+  los 4 `.ttf` de `assets/fonts/` tienen cabecera TrueType real (`00 01 00 00`, byte a byte —
+  BUG-042 quedó resuelto: DeepSeek Log 1024). [S]
+- [x] **Test nuevo `test_fuentes_reales_m88.gd` → 43 checks, 0 fallos, exit 0** (iteración 3):
+  cobertura binaria TOTAL de `assets/fonts/` (incluye `Nunito-Variable.ttf`, que
+  `test_fuentes_binarias_bug042` no cubre), bytes mágicos, métricas > 0, caracteres del diseño
+  (ñÑáéíóú¿¡), escala 16→24 px, contrato `tiene_archivo` de `fonts.json`, cadena de producción
+  `theme_ux` (PATH_FONT_*), integración M87 y humo M58. Con control negativo integrado
+  (HTML 404 disfrazado → no mide, err=OK). [M]
+- [x] **Sonda roja del suite:** `fonts.json` mutado `OFL → BSD` → `test_fonts_m88.gd` **exit 1**
+  (2 fallos: "licencia 'BSD' no permitida") y `test_fuentes_reales_m88.gd` **exit 1** (1 fallo
+  FontAuditor). JSON restaurado y verificado (OFL, sin BSD). [S]
+- [x] **Integración M87 (i18n) verificada en vivo:** API de cobertura de `FontCatalog`
+  (`soporta_idioma`, `fuente_para_idioma`, `validar_cobertura_idiomas`) testeada y verde en
+  `test_localizacion_iter3.gd` → **0 fallos, exit 0** (además: bloque G de test nuevo). [S]
+- [x] **Integración M58 (Accesibilidad) verificada:** patrón de `aplicador_accesibilidad.gd`
+  (override `font_size` con factor 1.25) aplicado sobre Label con fuente del tema →
+  `16 → 20 px` y sigue midiendo texto (bloque H del test nuevo). [S]
+- [?] **Integración M90 (Configuración Gráfica): NO existe en código** — `FontSettings`,
+  `FontLoader` y `FontSettingsMenu` solo están en el diseño (este módulo L178-196 y el
+  `04-Codigo.md` de M90 que los espera). Sin implementación que verificar; dueño: M90 + M88. [C]
+- [?] `Nunito-Variable.ttf` (270 KB) existe en disco y lo usa M87
+  (`test_localizacion_iter6.gd`) pero **no es ruta del tema** ni figura en el diseño de
+  "Archivos de fuentes" (L199-205) — sin dueño declarado. [S]
+- Nota: los ítems de **verificación VISUAL** (L240-241) y M154 (L236) son evidencia de
+  deepseek-v4-flash-vision-exp con vía de visión operativa; mimo no tiene M154 en esta
+  iteración y **no los re-verifica** (no se revierten: la evidencia ajena es legítima).
+
+**Totales:** 185 ítems · Completados: 16 · Pendientes: 166 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 166 [ ] /
 > 1 [?]. Las marcas no se tocaron.
+> **Actualizado 2026-10-06 (mimo):** se agregaron 6 [x] y 2 [?] de verificación (sección nueva
+> arriba) sobre ítems nuevos del pool de verificación; los 166 [ ] originales no se tocaron.
