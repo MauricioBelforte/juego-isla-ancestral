@@ -373,3 +373,10 @@ Godot 4.7.2 headless (`--script`), 2026-10-06:
 - QA §21.8: re-correr las 3 suites + sonda con whitelist intacta + muestreo de marcas.
 - Si `save_manager.gd` sigue roto, es blocker ajeno (ver quién lo tocó en `11-BUGS.md`).
 - `Nunito-Medium/Light`: pedir al diseñador o eliminar del diseño si no se usarán.
+
+## QA Cruzado §21.8 agnes 2026-10-06 (verificador != autor mimo)
+Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅ (verificación válida).
+- Conteo: 174 [x] / 11 [?] / 0 [ ] — coincide con la fila global (174/185).
+- 11 [?] = bloqueos EXTERNOS reales (verificados, no cuelgues): M154 visión caído (pruebas visuales 720p/1080p/4K/dispositivos), Nunito-Light/Medium.ttf dueños humanos, M90 (FontSettings/Loader/Menu) NO existe en código, prueba 1280x720/1366x768 pendiente dueño M58/M53.
+- 3 suites headless Godot 4.7.2: test_fonts_m88 = 11/0, test_fuentes_binarias_bug042 = 22/0, test_fuentes_reales_m88 = 43/0 (EXIT 0, 0 fallos) = 76 checks.
+- 0 falsos-cierres detectados en los 174 [x]. Estado: NO se cambia (queda 🟡 por los 11 [?] externos; DoD §21.6).
