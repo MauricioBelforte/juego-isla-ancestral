@@ -127,14 +127,16 @@
 
 ## N. RF13 — Catálogo de assets
 
-- [x] Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]
+- [?] Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]
+  [Auditoria T-agnes: asset_catalog.json / validate_mesh.gd AUSENTES en disco (868 .glb + materiales_recursos.json si existen)]
 - [ ] Definir estados: planned → made → reviewed → imported [S]
 - [ ] Definir consultas por categoría y bioma [S]
 - [ ] Documentar que el runtime usa el catálogo, nunca paths directos [M]
 
 ## O. RF14 — Validación automática
 
-- [x] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
+- [?] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]
+  [Auditoria T-agnes: asset_catalog.json / validate_mesh.gd AUSENTES en disco (868 .glb + materiales_recursos.json si existen)]
 - [ ] Verificar escala 1:1 (< 1e-3) [S]
 - [ ] Verificar techos de tris por categoría [S]
 - [ ] Verificar topología (n-gons, vértices duplicados) [S]
@@ -276,7 +278,7 @@
 - [x] El pelo interfería con la cabeza (solapes pelo_top/cabeza z 1.7-1.8 + laterales 1×6×3 envolviendo media cara) — rediseñado: gorro fino 7×7×1 POR ENCIMA (z 1.8-1.9, sin solapar), nuca 7×1×2 atrás, patillas 1×1×2 solo mitad trasera [S] — Log 736
 - [x] GLB regenerado + reimport con pipeline de cache (.scn + .import borrados → --import) [S] — Log 736
 - [x] Verificación: render CYCLES + captura en juego tercera persona — cara limpia [S] — capturas/45/
-**Totales:** 171 ítems · Completados: 22 · Pendientes: 149 · No resueltos: 0.
+**Totales:** 171 ítems · Completados: 20 · Pendientes: 149 · No resueltos: 2.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 22 [x] / 149 [ ] / 0 [?].

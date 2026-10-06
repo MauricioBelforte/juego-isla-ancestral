@@ -9,14 +9,14 @@
 - [ ] Documentar servidor como autoridad total [S]
 - [ ] Documentar API Gateway (auth, rate limit) [M]
 - [ ] Documentar World Sim con snapshots @ 10 Hz [M]
-- [x] Verificar coherencia con mp_contract.json (M76) [S]
+- [?] Verificar coherencia con mp_contract.json (M76) [S]  [Auditoria T-agnes 2026-10-06: contractos mp/net ausentes en disco; M77 bloqueada v1 single-player]
 
 ## B. Evaluar P2P (RF2)
 
 - [ ] Evaluar P2P (NAT, host offline, trampas) [M]
 - [ ] Descartar P2P para online con argumentos [M]
 - [ ] Documentar P2P válido SOLO en local (M76) [S]
-- [x] Registrar p2p=false en net_contract.json [S]
+- [?] Registrar p2p=false en net_contract.json [S]
 - [ ] Verificar que el local no usa red [S]
 
 ## C. Servidores Dedicados (RF3)
@@ -189,7 +189,7 @@
 
 ## X. Coherencia con M76
 
-- [x] Respetar mp_contract.json como fuente de producto [S]
+- [?] Respetar mp_contract.json como fuente de producto [S]
 - [ ] Respetar chat sin texto libre [S]
 - [ ] Respetar progreso individual [S]
 - [ ] Respetar economía protegida [S]
@@ -197,7 +197,7 @@
 
 ## Y. Validación y Cierre Técnico
 
-- [x] Entregar net_contract.json (manifiesto técnico) [M]
+- [?] Entregar net_contract.json (manifiesto técnico) [M]
 - [ ] Entregar validate_net_contract.gd [M]
 - [ ] Verificar que v1 no abre puertos (grep) [S]
 - [ ] Documentar reconciliación offline→online futura [M]
@@ -210,8 +210,8 @@
 - [ ] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
 - [ ] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
 - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
-**Totales:** 130 ítems · Completados: 4 · Pendientes: 126 · No resueltos: 0.
+**Totales:** 130 ítems · Completados: 0 · Pendientes: 126 · No resueltos: 4.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
-> este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 126 [ ] / 0 [?].
+> este archivo no tenía línea de Totales. Conteo real de marcas (post-Auditoria T-agnes 2026-10-06): 0 [x] / 4 [?] / 126 [ ] (contractos mp/net ausentes en disco).
 > Las marcas no se tocaron.
