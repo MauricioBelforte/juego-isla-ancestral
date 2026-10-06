@@ -12,9 +12,13 @@ const RUTA_SHADER := "res://shaders/agua_olas.gdshader"
 ## M09 iter.: mundo 5120×5120 — el plano cubre todo + margen de mar abierto.
 ## El shore-fade (depth texture) dibuja la orilla real donde corresponda.
 const TAMANO_PLANO := 6200.0
-## Superficie base del plano: ENCIMA del top del agua voxel (4.0) para que
-## las olas se vean de cerca aunque el terreno real esté cargado.
-const Y_SUPERFICIE := 4.05
+## Superficie base del plano. BUG-105 (test 1): 4.05 -> 6.0. La costa real
+## esta en y>=5 (M51 05-Checklist L265); con 4.05 la banda costera somera del
+## shader era ancha y espuma_orilla inundaba la camara del jugador. Subir el
+## plano a 6.0 (por encima de la orilla) elimina la banda de agua somera y con
+## ella la espuma que inundaba la vista. Causa confirmada por SB (Log 1326,
+## A/B controlado: no es albedo, es color_espuma del shader agua_olas.gdshader).
+const Y_SUPERFICIE := 6.0
 ## Centro real de la isla (island_generator: island_radius=2560, mundo 5120²)
 const CENTRO := Vector3(2560.0, Y_SUPERFICIE, 2560.0)
 
