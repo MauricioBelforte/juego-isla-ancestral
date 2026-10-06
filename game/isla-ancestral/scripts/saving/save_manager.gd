@@ -18,8 +18,8 @@ signal slot_loaded(slot: int, result: int)
 ## Señal de bloqueo del auto-save por punto sensible (Aviso a UI/logs)
 signal auto_save_skipped(reason: String)
 
-## Número de slots disponibles
-const SLOT_COUNT: int = 3
+## Número de slots disponibles (fuente única: SaveSchema, BUG-114)
+const SLOT_COUNT: int = SaveSchema.SLOT_COUNT
 
 ## Intervalo en segundos del auto-save temporizado (0 = desactivado)
 @export var auto_save_interval: float = 300.0
@@ -128,12 +128,26 @@ func _on_dialogo_cerrado() -> void:
 ## El flush integrado al flujo M40 (SceneManager) queda con dueño M40.
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST and current_slot >= 1 and not _blocked:
+		# BUG-113: antes escribía DIRECTO, sin rotar el save anterior y sin
+		# respetar `_writing`. El camino normal (request_save -> _process_queue)
+		# rota antes de escribir. Al cerrar no se puede encolar (el árbol está por
+		# terminar y no habrá más frames), así que se replica el camino normal de
+		# forma SÍNCRONA: rotar primero y escribir después, respetando `_writing`
+		# para no intercalar una escritura en curso (defensivo ante el async
+		# declarado de M61, 04-Codigo.md:146).
+		if _writing:
+			push_warning("[SAVE] Cierre durante una escritura en curso (slot %d); se omite el guardado de cierre para no intercalar" % current_slot)
+			return
+		_writing = true
+		if not SaveBackup.rotate(current_slot):
+			push_warning("[SAVE] Guardado de cierre: la rotación de backup del slot %d falló" % current_slot)
 		var payload := _payload_para_slot(current_slot)
 		if SaveWriter.write_atomic(current_slot, payload):
 			_dirty = false
 			print("[SAVE] Guardado de cierre OK slot %d" % current_slot)
 		else:
 			push_error("[SAVE] Guardado de cierre FALLÓ slot %d" % current_slot)
+		_writing = false
 
 ## I4: registra el proveedor de la sección "player" del schema.
 func _registrar_provider_player() -> void:
@@ -212,7 +226,11 @@ func _process_queue() -> void:
 	# Orden correcto: rotar el save ANTERIOR a .bak y recién después escribir el
 	# nuevo. Si write_atomic falla, el save anterior queda íntegro en .bak y
 	# SaveLoader.load() lo recupera (ver fix en save_loader.gd).
-	SaveBackup.rotate(slot)
+	# BUG-112: rotate() ahora devuelve false si algún rename falló. La escritura
+	# sigue adelante (perder el save es peor que un backup desactualizado), pero el
+	# fallo queda VISIBLE en vez de silencioso.
+	if not SaveBackup.rotate(slot):
+		push_warning("[SAVE] La rotación de backup del slot %d falló; se escribe igual (el save es prioritario) pero el backup puede estar desactualizado" % slot)
 	var ok := SaveWriter.write_atomic(slot, payload)
 	if ok:
 		current_slot = slot

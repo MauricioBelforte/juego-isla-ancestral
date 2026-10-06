@@ -16,6 +16,16 @@ const SCHEMA_VERSION: int = 1
 ## Prefijo dentro de user:// para los archivos de save
 const SAVE_DIR: String = "user://saves"
 
+## Número de slots de guardado soportados (rango válido 1..SLOT_COUNT).
+## Fuente ÚNICA del contrato de rango que validan SaveWriter y SaveManager
+## (BUG-114). Antes SaveManager tenía su propio `const SLOT_COUNT = 3` y
+## SaveWriter no validaba nada.
+const SLOT_COUNT: int = 3
+
+## Devuelve true si `slot` está en el rango válido 1..SLOT_COUNT (BUG-114).
+static func slot_valido(slot: int) -> bool:
+	return slot >= 1 and slot <= SLOT_COUNT
+
 ## Devuelve un payload nuevo con los defaults de TODOS los sistemas.
 ## Los sistemas aún no implementados quedan con estructuras vacías pero
 ## presentes, para que el schema sea estable y forward-compatible.
@@ -175,6 +185,12 @@ static func validate(payload: Dictionary) -> Array[String]:
 			errors.append("Sección %s no es Dictionary" % section)
 
 	# Validaciones mínimas de rangos clave
+	# DEUDA (BUG-115): este único chequeo de rango es código MUERTO: el proveedor
+	# real de tiempo (game_clock.gd) emite el dialecto `dia/mes/anio/hora/minuto`,
+	# no `day/season/hour/minute`, así que `time.day` nunca está presente en un
+	# save real y el chequeo jamás se dispara. La validación del esquema es, en la
+	# práctica, vacua. NO se arregla acá: sincronizar el dialecto con los dueños de
+	# M14/M29/M38 (ver Log 1202) es un cambio de contrato, no un fix de M59.
 	if payload.has("time") and typeof(payload["time"]) == TYPE_DICTIONARY:
 		var time_dict: Dictionary = payload["time"]
 		if time_dict.has("day") and not _es_entero(time_dict["day"]):

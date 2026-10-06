@@ -14,20 +14,35 @@ const MAX_ROTATIONS: int = 2
 const BAK_SUFFIX: String = ".bak"
 
 ## Rota el save actual de un slot hacia slot_N.bak (conservando historial).
-static func rotate(slot: int) -> void:
+## Devuelve true si la rotación se completó (o no había nada que rotar), false si
+## algún rename falló.
+##
+## BUG-112: antes se descartaba el retorno de `DirAccess.rename_absolute`
+## (`var _e := ...`), así que un fallo (disco lleno, permisos, archivo bloqueado)
+## dejaba la rotación parcial EN SILENCIO y rompía la premisa "siempre hay un
+## backup válido". Ahora cada fallo se loguea y se propaga al llamador.
+static func rotate(slot: int) -> bool:
 	if not SaveWriter.save_exists(slot):
-		return
+		return true
 	var final_path := SaveWriter.path_for(slot)
+	var ok := true
 
 	# Desplazar backups existentes hacia atrás (el más antiguo se descarta)
 	for i in range(MAX_ROTATIONS - 1, 0, -1):
 		var older := _bak_path(slot, i)
 		var newer := _bak_path(slot, i + 1)
 		if FileAccess.file_exists(older):
-			var _e := DirAccess.rename_absolute(older, newer)
+			var e := DirAccess.rename_absolute(older, newer)
+			if e != OK:
+				push_error("[SAVE] rotate: no se pudo mover %s -> %s (err=%d)" % [older, newer, e])
+				ok = false
 
 	# El save actual pasa a ser la rotación 1
-	DirAccess.rename_absolute(final_path, _bak_path(slot, 1))
+	var e1 := DirAccess.rename_absolute(final_path, _bak_path(slot, 1))
+	if e1 != OK:
+		push_error("[SAVE] rotate: no se pudo rotar %s -> %s (err=%d)" % [final_path, _bak_path(slot, 1), e1])
+		ok = false
+	return ok
 
 ## Crea un backup manual fechado del save actual.
 ## Devuelve la ruta del backup creado, o "" si falló.

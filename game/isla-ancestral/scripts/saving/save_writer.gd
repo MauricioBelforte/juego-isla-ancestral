@@ -42,6 +42,12 @@ static func read_document(path: String) -> String:
 	return FileAccess.get_file_as_string(path)
 
 ## Calcula el SHA-256 en hexa de una cadena usando HashingContext.
+##
+## DEUDA (BUG-115): el checksum se calcula sobre el payload EN CLARO y no hay
+## secreto (ni HMAC ni cifrado), así que solo protege contra bit-rot, NO contra
+## manipulación: cualquiera puede editar el payload y recalcularlo. Documentado
+## como pendiente en 04-Codigo.md:43 ("Cifrado para datos sensibles"). NO se
+## arregla acá: es un cambio de diseño (secreto + migración de saves), no un fix.
 static func sha256_hex_str(s: String) -> String:
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
@@ -81,6 +87,12 @@ static func parse_document(content: String) -> Dictionary:
 ## Escribe un payload de forma atómica en el slot dado.
 ## Devuelve true si se escribió correctamente, false ante cualquier fallo.
 static func write_atomic(slot: int, payload: Dictionary) -> bool:
+	# BUG-114: defensa en profundidad. Los llamadores ya validan el rango, pero
+	# una llamada directa con un slot fuera de rango (p.ej. 99) no debe crear
+	# `slot_99.save` fuera del contrato de SLOT_COUNT slots.
+	if not SaveSchema.slot_valido(slot):
+		push_error("[SAVE] write_atomic: slot fuera de rango (%d; válido 1..%d)" % [slot, SaveSchema.SLOT_COUNT])
+		return false
 	var dir := DirAccess.open(SaveSchema.SAVE_DIR)
 	if dir == null:
 		dir = DirAccess.open("user://")
@@ -120,6 +132,9 @@ static func write_atomic(slot: int, payload: Dictionary) -> bool:
 
 ## Limpia un .tmp huérfano de un slot (tras arranque o fallo anterior).
 static func cleanup_orphan_tmp(slot: int) -> void:
+	# BUG-114: no operar sobre slots fuera de rango (defensa en profundidad).
+	if not SaveSchema.slot_valido(slot):
+		return
 	var tmp_path := "%s/slot_%d%s" % [SaveSchema.SAVE_DIR, slot, TMP_SUFFIX]
 	if FileAccess.file_exists(tmp_path):
 		DirAccess.remove_absolute(tmp_path)
