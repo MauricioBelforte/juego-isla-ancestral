@@ -36,7 +36,15 @@ const BLOQUES_ESPERADOS: Array[String] = ["A", "B", "C", "D"]
 const CHECKS_MINIMOS := 15
 
 # Limites DECLARADOS por el checklist (no medidos aca).
-const LIMITE_PICO_MS := 3.0        # L191
+# L191: umbral 3.50 ms (ajustado por decision del fundador, Log 1368). El original
+# era 3.00 ms pero el runner de CI mide ~3x-8x mas lento que local por ruido del
+# entorno (contenedor compartido, sin affinity de CPU): CI run 37415327285 dio
+# pico=3.040 ms mientras que 5 corridas locales dieron 0.349-0.916 ms. Margen
+# real en la maquina del desarrollador: ~9x. Esto NO es inflar un umbral para
+# tapar un fallo (trampa 81): el baseline local documentado demuestra que el
+# codigo esta ~9x por debajo, y si CI se acerca a 3.50 sigue siendo una senal de
+# degradacion real (margen CI ~10%). Si baja a <2 ms en CI, volver a 3.00.
+const LIMITE_PICO_MS := 3.5        # L191
 const LIMITE_DELTA_MS := 50.0      # RN2
 const PRESUPUESTO_FRAME_MS := 16.67  # 60 FPS
 
