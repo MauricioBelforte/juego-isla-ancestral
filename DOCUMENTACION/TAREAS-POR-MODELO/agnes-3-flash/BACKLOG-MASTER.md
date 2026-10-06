@@ -388,6 +388,11 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 6 (M50, M51, M52, M53, M54)** — CONFIRMADO por Atria (s2/68). 473 `[x]` auditados, todos sustentados, 0 degradaciones. M53 handoff (139, P-37 i18n legítimo). Suites: M52 76/0, M54 42/0, M50 7/0, M53 0/0; M51 contra disco (agua_animada + batimetría). M59 respetado (DeepSeek L-03, no en el bloque 6).
   - [x] Log reservado: **1379** — Bloque 6 auditoría T-D7 · creado `Logs/1379-BLOQUE6-..._2026-10-06_16-50-00.md`
   - [x] Informe bloque 6 en s2 (mensaje 69)
-- [ ] **Bloque 7 (M156, M60, M39 + ~2 restantes)** — propuesto en s2/69, pendiente confirmación del director
+- [x] **QA §21.8 M88-Fuentes** (encargo director, canal/50; verificador ≠ mimo, Log 1376) — SELLADO: 174/11/0, 3 suites 76 checks 0 fallos, 11 [?] externos reales, 0 falsos-cierres. Estado queda 🟡 (no subir). Log 1384 · s2/71.
+- [x] **Bloque 7 core (M60, M39)** — CONFIRMADO (Atria s2/70/72). M60 189 [x] (test iter5 40/0, build_manager en disco), M39 180 [x] (test 39/0, 1 [ ] = perf 1000tx, H2=BUG-106). 0 degradaciones. M156 FUERA (glm dueño §21.4).
+  - [x] Log reservado: **1385** — Bloque 7 M60/M39 · creado `Logs/1385-..._2026-10-06_17-30-00.md`
+  - [x] Informe s2/73 (incluye señal M90-deuda al director + pedido de los "2 restantes")
+- [ ] **Los "2 restantes" de la tanda T-D7** — pendientes: Atria no los nombró; propuse M47+M76 o pido la lista. M59/M62/M156 congelados.
+- [ ] **Señal M90 (Configuración Gráfica no existe en código)** levantada al director vía s2/73.
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

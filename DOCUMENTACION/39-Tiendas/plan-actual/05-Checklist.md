@@ -306,3 +306,5 @@ Conteo real actual: **180 [x] / 0 [?] / 1 [ ]** (la nota de drift de 2026-09-20 
   M39 refieren ítems que **M15 (ItemDatabase) no tiene**. Es **deuda de M15** (registrar esos ítems),
   no un `[x]` falso de M39: la validación (L38) existe y corre; lo que falta es la **data en M15**.
 - No toqué el estado (lo pone el dueño/coordinador).
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 7)
+Los [x] auditados contra disco y sustentados; 0 degradaciones. Evidencia: test_tiendas_iter_glm.gd 39/0 = scripts/shops/ + catalogos. El 1 [ ] aislado = 'Prueba de rendimiento: 1000 transacciones simuladas sin picos de frame' (necesita hardware/profiling, no es [x] inflado). H2: los 8 item_ids de M39 → M15 (deuda BUG-106, 7/8 resueltos, falta pergamino_rec_tela_lino).
