@@ -101,13 +101,12 @@ jobs:
   formatting-check:
     name: GDScript Formatting Check
     runs-on: ubuntu-latest
-    # El paso de importacion es OBLIGATORIO (MODO B, BUG-091): en un checkout
-    # limpio (sin .godot/) la cache de class_names no existe, Godot reimporta
-    # TODO (incluidos los 100 MB del addon voxel) y luego intenta arrancar el
-    # juego completo en vez de solo parsear. Sin --import el job llega al
-    # timeout sin terminar (cancelado a los 15 m 16 s dos veces). Con la cache
-    # construida, --check-only termina en menos de 1 s (medido local).
-    # Verificado: fresh + import => termina; fresh sin import => timeout.
+    # FIX (2026-10-06, atria-dawn-s2): `--check-only` SIN `--script` arranca el
+    # juego completo (main.cpp:4535 instancia autoloads y genera el mundo) en
+    # vez de solo parsear. El job llegaba a timeout una y otra vez sin terminar.
+    # Con `--script` apuntando al colector, Godot solo parsea los .gd (igual que
+    # hace godot-lint) y termina en segundos. Verificado: fresh + import +
+    # --script => segundos; sin --script => timeout.
     timeout-minutes: 15
 
     steps:
@@ -120,14 +119,29 @@ jobs:
           version: "4.7-stable"
           export-templates: false
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate syntax collector
+        run: python tools/quality/gen_colector_sintaxis.py --proyecto game/isla-ancestral
+
       - name: Import project resources
         run: godot --headless --path game/isla-ancestral --import
 
       - name: Check formatting (dry-run)
         run: |
           cd game/isla-ancestral
-          godot --headless --check-only 2>&1 || true
-          echo "Format check completed (exit code: $?)"
+          LINT_LOG=$(mktemp)
+          godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 | tee "$LINT_LOG" || true
+          PARSE_ERRORS=$(grep -c "SCRIPT ERROR" "$LINT_LOG" || true)
+          echo "SCRIPT ERROR detectados: $PARSE_ERRORS"
+          if [ "$PARSE_ERRORS" -gt 0 ]; then
+            echo "::error::Formatting check: $PARSE_ERRORS SCRIPT ERROR en scripts del proyecto"
+            exit 1
+          fi
+          echo "Format check completed (0 SCRIPT ERROR)"
 
   test-suite:
     name: Run Test Suite (M112 Integration)
