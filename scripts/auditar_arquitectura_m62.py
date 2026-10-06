@@ -152,12 +152,10 @@ PERMITIDOS = {
     # etiquetadas "BUG-068", pero A1/A2 (ciclos y orden de autoloads) son el
     # contenido de BUG-069. BUG-068 es SOLO el A3 (el mismo script como dos
     # autoloads). La etiqueta equivocada mandaba al bug que no era.
-    "A1|CollectionRegistry,Fishing,GameTime,Inventario,SaveManager,TimeCalendar,Weather": "BUG-069",
     "A1|ThemeService,UIManager": "BUG-069",
     # A2 — referencias a un autoload declarado despues (regla de capas).
     # Medido: NO es un fallo de runtime (en _ready() todos los autoloads ya
     # existen); es deuda arquitectonica. Ver BUG-069.
-    "A2|SaveManager->Fishing": "BUG-069",
     "A2|Localization->DataStore": "BUG-069",
     "A2|Friendship->VillagerManager": "BUG-069",
     "A2|WorldState->SaveManager": "BUG-069",
