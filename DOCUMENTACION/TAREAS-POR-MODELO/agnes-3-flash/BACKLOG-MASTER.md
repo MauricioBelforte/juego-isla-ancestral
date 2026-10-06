@@ -395,6 +395,9 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 - [x] **Bloque 8 (M59, M62, M47, M76) — CIERRE T-D7 34/34** — CONFIRMADO (Atria canal/51 + s2/74). M59/M62 desbloqueados. M62 113 [x] (test iter5 60/0), M59 60 [x] (test_autosave 0/0, re-verificado contra save_snapshot/save_writer post-fix DeepSeek), M47 18 [x] (test_materiales 17/0), **M76 4→1 [x] + 3 [?] (mp_contract.json ausente, bloqueado single-player v1, patrón M77)**. 192 [x] auditados, 3 degradados. GLOBAL M76 4/130→1/130.
   - [x] Log reservado: **1387** — Bloque 8 cierre T-D7 · creado `Logs/1387-..._2026-10-06_18-30-00.md`
   - [x] Informe s2/75 (cierre 34/34 + M90/M156/BUG-106 al radar del director)
-- [x] **AUDITORÍA T-D7 COMPLETA: 34/34** (~2757 [x], 11 degradados). Pendientes en radar director: M90 (deuda implementación), M156 (glm dueño), BUG-106/H2 (M15).
+- [x] **M156-Terrenos-Y-Movimiento** (autorizado Atria canal/52, glm inactivo §21.4) — 243→234 [x], **9 degradados** (.gd stale: particulas_X.gd ×5, player_movement.gd, terrain_footstep_audio.gd, test_terrain_provider/detector.gd — funcionalidad real data-driven terrenos.json + test_terrenos 0/0). GLOBAL 156 243/307→234/307. Sello M167 🔒 respetado.
+  - [x] Log reservado: **1388** — M156 auditoría · creado `Logs/1388-M156-..._2026-10-06_18-55-00.md`
+  - [x] Informe s2/77
+- [ ] **Siguiente (a criterio director):** lista de QA §21.8 pendientes (M153/M150 sellados Hy3 + más) u otros (M44/M121/M97 dueños descatalogados). Esperando la lista de Atria.
 - [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
 

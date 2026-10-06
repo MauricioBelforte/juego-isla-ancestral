@@ -161,7 +161,7 @@
 - [ ] No romper movimiento existente de M11 [M]
 - [ ] Mantener compatibilidad si no hay M156 [M]
 - [ ] Agregar null checks para referencias [S]
-- [x] Documentar cambios en player_movement.gd [S]
+- [?] Documentar cambios en player_movement.gd [S]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Verificar que move_and_slide() usa velocidad efectiva [M] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
 
 ## H. Integracion con M155 (Equipacion)
@@ -189,11 +189,11 @@
 - [x] Crear escena huella_rocas.tscn [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Crear sistema de particulas por terreno [M]
 - [ ] Crear particulas_ceped.gd [S]
-- [x] Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear particulas_arena.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear particulas_agua.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear particulas_nieve.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
-- [x] Crear particulas_rocas.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)
+- [?] Crear particulas_barro.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_arena.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_agua.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_nieve.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
+- [?] Crear particulas_rocas.gd [S] — data/terrenos/terrenos.json con los 7 tipos (testeado)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Configurar ParticleProcessMaterial para ceped [M]
 - [x] Configurar ParticleProcessMaterial para barro [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
 - [x] Configurar ParticleProcessMaterial para arena [M] — data/terrenos/terrenos.json con los 7 tipos (testeado)
@@ -211,7 +211,7 @@
 
 ## J. Feedback Audio
 
-- [x] Crear terrain_footstep_audio.gd [M]
+- [?] Crear terrain_footstep_audio.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Implementar referencia a AudioStreamPlayer3D [S]
 - [x] Implementar referencia a TerrainDataProvider [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
 - [x] Implementar play_footstep(terrain_id) [M]
@@ -278,12 +278,12 @@
 - [x] Test: calculate_effective_speed con todoterreno [S] — TerrainModifiers static cap 50% (testeado §4.2) — cap clampf 0-0.5 (testeado)
 - [x] Test: resultado nunca negativo [S]
 - [x] Test: resultado no excede 2x base [S]
-- [x] Crear test_terrain_provider.gd [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)
+- [?] Crear test_terrain_provider.gd [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Test: get_terrain_data retorna data valida [S]
 - [x] Test: get_terrain_data retorna null para ID invalido [S]
 - [x] Test: get_speed_modifier retorna valor correcto [S]
 - [x] Test: get_speed_modifier retorna 1.0 para ID invalido [S]
-- [x] Crear test_terrain_detector.gd [M]
+- [?] Crear test_terrain_detector.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta por test_terrenos.gd 0/0]
 - [x] Test: deteccion inicial es -1 [S]
 - [x] Test: deteccion actualiza terrain_id [S]
 - [x] Test: senal terrain_changed emite correctamente [S]
@@ -388,7 +388,7 @@
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 
-**Totales:** 307 ítems · Completados: 243 · Pendientes: 59 · No resueltos: 5. (Auditoría A agnes 2026-10-06: 3 `[x]` degradados a `[?]` — terrain_block.gd/.tscn/collision_layer no existen, implementación real es data-driven vía terrenos.json + terrain_data/provider/detector/modifiers.)
+**Totales:** 307 ítems · Completados: 234 · Pendientes: 59 · No resueltos: 14. (Auditoría A agnes 2026-10-06: 3 `[x]` degradados a `[?]` — terrain_block.gd/.tscn/collision_layer no existen, implementación real es data-driven vía terrenos.json + terrain_data/provider/detector/modifiers.)
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **lote 6):** la línea decía *"299 items - Completados: 299 - Pendientes: 0"* — un
@@ -432,3 +432,6 @@ cargados: 7`; `terrain_detector/provider/modifiers/data` + `terrain_data_provide
 **Totales:** `246 [x] → 243 [x]`, `2 [?] → 5 [?]` (M156 = 307 · 243·5·59). El estado `🟡` ya lo
 ponía el dueño/coordinador; mi trabajo fue la degradación honesta + esta nota. **No toqué el
 estado** ni el `event_bus.gd` ajeno (regla §21.4).
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque M156 autorizado por Atria canal/52)
+M156 (243 [x]) auditado método A con test_terrenos.gd 0/0 ('7 terrenos cargados'). 9 [x] DEGRADADOS a [?] (243 -> 234 [x], 5 -> 14 [?]): los [x] citaban .gd ausentes en disco (particulas_agua/arena/barro/nieve/rocas.gd, player_movement.gd, terrain_footstep_audio.gd, test_terrain_provider.gd, test_terrain_detector.gd) — la funcionalidad real es data-driven (data/terrenos/terrenos.json 7 tipos) + test_terrenos.gd. Sello 🔒 M167 (hy3) respetado; glm-5.3 inactivo (§21.4: asignación nominal muerta, auditoría autorizada). No pisé el sistema de terreno (core OK).
