@@ -289,3 +289,6 @@ evidencia real en disco (regla §21.4.3: `[x]` sin evidencia = degradar a `[?]`)
 - **No se degradó nada** (honestidad: no se finge ni se quita evidencia). Continuaré la auditoría
   selectiva con M156 (246 `[x]`) y M60/M39.
 
+## Notas de QA (hy3, 2026-10-06)
+
+- Mejora pendiente (H3, no bloqueante): `test_ui_framework.gd` imprime solo "0 fallo(s)" sin nombrar el piso de checks (15 `_check` ejecutados). Si el runner abortara antes de correrlos, el resumen seguira diciendo 0 fallos y enmascararia un falso verde. Al retomar M53, aplicar el estandar anti-falso-verde del proyecto (nombrar "N checks" y/o un piso medido, patron M105 / M60 piso 134), ya usado en `test_diario_ui.gd` (CHECKS_MINIMOS=55). Fuente: re-verificacion M53 (Log 1342).
