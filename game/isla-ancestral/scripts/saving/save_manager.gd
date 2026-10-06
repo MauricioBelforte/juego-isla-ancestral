@@ -95,12 +95,11 @@ func _conectar_eventos() -> void:
 	if em != null and em.has_signal("evento_terminado"):
 		em.evento_terminado.connect(_on_auto_save_evento)
 	# B5-bis: no auto-save durante minijuego (M34 pesca — sesión activa bloquea)
-	if bus.travel != null and bus.has_user_signal("pesca_iniciada"):
-		pass  # la señal de pesca vive en FishingManager, conectado abajo
-	var fm := get_node_or_null("/root/Fishing")
-	if fm != null and fm.has_signal("sesion_iniciada") and fm.has_signal("sesion_terminada"):
-		fm.sesion_iniciada.connect(func(_s): set_save_blocked(true))
-		fm.sesion_terminada.connect(func(_s): set_save_blocked(false))
+	# T-D9 (2)/BUG-116: por el bus, no por Fishing. La conexión directa anterior
+	# nunca corría (guardaba con has_signal("sesion_iniciada"), señal que NO existe
+	# en FishingManager) y además creaba la arista SaveManager -> Fishing (BUG-069).
+	bus.fishing.sesion_iniciada.connect(func(_s): set_save_blocked(true))
+	bus.fishing.sesion_terminada.connect(func(_s): set_save_blocked(false))
 	# B5: no auto-save durante diálogo (M21) — EventBus.ui
 	bus.ui.dialog_requested.connect(_on_dialogo_abierto)
 	bus.ui.dialog_finished.connect(_on_dialogo_cerrado)

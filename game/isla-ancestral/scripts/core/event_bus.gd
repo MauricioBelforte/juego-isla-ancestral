@@ -39,6 +39,8 @@ var player := PlayerEvents.new()
 var infra := InfraEvents.new()
 var diary := DiaryEvents.new()
 var progresion := ProgresionEvents.new()
+## ── Dominio: FISHING (M34) — aditivo (T-D9 (2), BUG-116) ──
+var fishing := FishingEvents.new()
 
 
 ## ── Clases de eventos por dominio ───────────────────────
@@ -186,3 +188,12 @@ class DiaryEvents:
 	signal categoria_completa(categoria: String)
 	## Progreso global del diario cambió (sobre lo descubierto, §3.2)
 	signal progreso_cambiado(porcentaje: float)
+
+## Dominio FISHING (M34): ciclo de vida de una sesión de pesca.
+## Aditivo (T-D9 (2), BUG-116) — M34 (FishingManager) emite, M59 (SaveManager) consume
+## para bloquear el guardado durante el minijuego sin acoplarse a Fishing.
+class FishingEvents:
+	## Se inició una sesión de pesca (minijuego activo).
+	signal sesion_iniciada(sesion)
+	## Terminó una sesión de pesca (captura o huida).
+	signal sesion_terminada(sesion)

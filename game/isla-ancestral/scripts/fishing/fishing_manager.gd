@@ -138,6 +138,11 @@ func iniciar_sesion(spot, cana: FishingRod, cebo: CeboDefinition = null):
 	ses.lanzar(_prng)
 	ses.estado_cambiado.connect(_on_estado_sesion.bind(ses, spot))
 	picada_iniciada.emit(ses)
+	# T-D9 (2)/BUG-116: aviso por el bus para que M59 (SaveManager) bloquee el
+	# guardado durante la pesca sin acoplarse a Fishing (rompe el ciclo BUG-069).
+	var bus := get_node_or_null("/root/EventBus")
+	if bus != null and bus.fishing != null:
+		bus.fishing.sesion_iniciada.emit(ses)
 	return ses
 
 func _on_estado_sesion(nuevo: int, ses, _spot) -> void:
@@ -157,6 +162,10 @@ func _on_estado_sesion(nuevo: int, ses, _spot) -> void:
 func _terminar() -> void:
 	if _sesion:
 		sesion_terminada.emit(_sesion)
+		# T-D9 (2)/BUG-116: reanuda el guardado por el bus (par del inicio).
+		var bus := get_node_or_null("/root/EventBus")
+		if bus != null and bus.fishing != null:
+			bus.fishing.sesion_terminada.emit(_sesion)
 		_sesion.queue_free()
 		_sesion = null
 
