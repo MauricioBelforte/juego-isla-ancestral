@@ -57,7 +57,7 @@ verdad. **No** implementes gates nuevos todavía.
 **Restricciones heredadas de SB**: sin `quality.yml` (lo edita s2), sin `interaction_manager.gd`
 (kimi/BUG-096), sin `service_registry.gd` (agnes/BUG-097), sin visión M154, **sin push**.
 
-**Pool de logs**: cabeza **1503**.
+**Pool de logs**: cabeza **1353**.
 
 ---
 

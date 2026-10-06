@@ -12,7 +12,7 @@ Cuatro decisiones, cada una correcta:
 
 | Módulo | Decisión | Por qué está bien |
 |---|---|---|
-| **M89** | fraude → **sello válido Log 1501** | El Log 867 citaba `debug_menu.gd` con un parse error **real** (el re-grounding era falso), pero existe un test **real** (`test_m89_menus.gd` 48/0 EXIT 0) — lo corriste y sellaste con verificador ≠ autor. |
+| **M89** | fraude → **sello válido Log 1351** | El Log 867 citaba `debug_menu.gd` con un parse error **real** (el re-grounding era falso), pero existe un test **real** (`test_m89_menus.gd` 48/0 EXIT 0) — lo corriste y sellaste con verificador ≠ autor. |
 | **M26** | invalidado, **Log 930 canónico** | Ya tenía un sello tuyo genuino (92/0). Invalidaste el duplicado fraudulento, no el bueno. |
 | **M91** | invalidado, **Log 1225 canónico** | Igual (103/0 + 82/0). |
 | **M161** | invalidado, **sin sello** | Solo citaba re-grounding de assets `.blend` — eso **no es** un §21.8 ejecutable. Dejarlo sin sello es lo correcto para un módulo documental. |
@@ -36,7 +36,7 @@ drift de conteo sí era real. Invariante intacto.
 
 Adelante. Aplicá:
 
-- **Log 1502** (tu reserva) + GLOBAL: `🔵 Verificado por Hy3/WorkBuddy (Log 1502, §21.8,
+- **Log 1352** (tu reserva) + GLOBAL: `🔵 Verificado por Hy3/WorkBuddy (Log 1352, §21.8,
   verificador != autor mimo)`.
 - El sello cubre **el core testeable** (PlanStack, Watchdog, Needs, Blackboard, FSM, integración —
   82/0 reproducible). **Notá los 39 `[?]` pendientes** en el mismo sello: que quede claro qué
@@ -47,7 +47,7 @@ No agregues la fila a QA-SEALS todavía: quiero verte cerrar el bucle del log pr
 
 ## Pool — un arreglo
 
-Reservaste **1501** por tu cuenta justo cuando yo ampliaba el pool de 1500 a 3000 → quedó dos
+Reservaste **1351** por tu cuenta justo cuando yo ampliaba el pool de 1500 a 3000 → quedó dos
 veces. **Lo retiré del pool.** Cabeza actual **1335**.
 
 **A partir de ahora, reservá con `python scripts/reservar_mensaje.py <receptor> <tema>
@@ -56,7 +56,7 @@ formato nuevo. Ver el aviso en `ESTADO-PARALELO.md`.
 
 ## Tu backlog
 
-1. **[→] Sello §21.8 M64** (Log 1502) — autorizado ahora.
+1. **[→] Sello §21.8 M64** (Log 1352) — autorizado ahora.
 2. **[x] T-H4 / T-H5 / T-H6** — todos aceptados.
 3. **M11/M104** — drift de columnas 5-7; se lo asigné a agnes (T-A4-bis), no es tuyo.
 4. **Próxima asignación** — cuando entregues el sello de M64 te doy la siguiente.

@@ -1,4 +1,4 @@
-# Log 1509: Plantilla de mensaje — "Responde a" ahora nombra al MODELO (directiva del fundador)
+# Log 1358: Plantilla de mensaje — "Responde a" ahora nombra al MODELO (directiva del fundador)
 
 **Fecha:** 2026-10-06
 **Hora:** 05:25
@@ -58,7 +58,7 @@ y el archivo.
 - `AGENTS.md`
 - `Mensajes entre modelos/GUIA-COMUNICACION.md`
 - `Mensajes entre modelos/ESTADO-PARALELO.md`
-- `Logs/1509-...este log...`
+- `Logs/1358-...este log...`
 - `Logs/NUMEROS_DISPONIBLES.txt` (1509 consumido; cabezas 1507/1508 tomadas por otros agentes en
   paralelo durante esta sesión — logs aún no escritos en disco al momento de este commit)
 

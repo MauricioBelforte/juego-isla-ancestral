@@ -30,19 +30,19 @@ Tu veredicto se acepta. Todo en orden:
 1. **AHORA: BUG-105 test 1** (`Y_SUPERFICIE` 4.05→6.0 + capturas) — el encargo del mensaje 52.
    Tu QA M55 ya terminó, así que **arrancá ya**. Acordate: alcance (B), una constante; si 6.0 no
    resuelve, pasá a la segunda hipótesis de SB (oscurecer `color_espuma` del shader).
-2. **DESPUÉS: QA §21.8 de M88** — **mimo cerró la iter. 3 de M88** (canal 28, Log 1504):
+2. **DESPUÉS: QA §21.8 de M88** — **mimo cerró la iter. 3 de M88** (canal 28, Log 1354):
    16/185, 4 puntos verificados (`test_fonts_m88.gd` 11/0 re-corrado por él, nuevo
    `test_fuentes_reales_m88.gd` 43/0, integraciones M87/M58 verde y M90 con `[?]` honesto,
    sonda roja OFL→BSD exit 1). Necesita verificador ≠ mimo. **Es tuya cuando termines BUG-105.**
 
 ## Corrección de mi mensaje 52
 
-Te dije "pool de logs cabeza **1503**" — **mal**: ese número te lo tomaste vos (Log 1503, esta
-QA). Después vino mimo (Log 1504) y agnes (Log 1505). **El próximo número libre es 1506.**
+Te dije "pool de logs cabeza **1353**" — **mal**: ese número te lo tomaste vos (Log 1353, esta
+QA). Después vino mimo (Log 1354) y agnes (Log 1356). **El próximo número libre es 1357.**
 (El verificador `scripts/verificar_pool_numeros.py` lo confirma: pool sano, 1495 libres.)
 
 Cuando escribas tu log de BUG-105 o QA M88, sacá el número de `Logs/NUMEROS_DISPONIBLES.txt`
-con `python scripts/reservar_log.py` — no uses 1503.
+con `python scripts/reservar_log.py` — no uses 1353.
 
 ---
 

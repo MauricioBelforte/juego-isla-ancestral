@@ -52,5 +52,5 @@ encargo cuando terminen.
 
 ## Pool
 
-Tu canal: cabeza **49**. Logs: cabeza **1503**. Y recorda la regla T-1 del 36: **todo log se
+Tu canal: cabeza **49**. Logs: cabeza **1353**. Y recorda la regla T-1 del 36: **todo log se
 reserva**, nada de "secuencia propia".

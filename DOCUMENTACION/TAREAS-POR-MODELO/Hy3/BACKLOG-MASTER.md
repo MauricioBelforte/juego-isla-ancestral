@@ -223,7 +223,7 @@ estática, y QA cruzado — Y que respetan los locks de otros modelos
 | 85-85-Modelos-3D-Legal | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_model3d_m85.gd 8 checks/0 fallos (headless); módulo 🟡 99/100 (DoD §21.6 violada, SB-02 Log 1279) |
 | 86-86-IA-Generativa | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1298, re-verify Hy3 — sello Log 866 inválido) 2026-10-05: test_genai_m86.gd 8 checks/0 fallos (headless) |
 | 88-88-Fuentes-Tipograficas | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1298: test_fonts_m88.gd 11 checks/0 fallos (headless); módulo 🟡 10/177 |
-| 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1501, re-verify Hy3 — sello Log 867 inválido) 2026-10-05: test_m89_menus.gd 48 checks/0 fallos (headless, EXIT 0) |
+| 89-89-Diseno-De-Menus | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1351, re-verify Hy3 — sello Log 867 inválido) 2026-10-05: test_m89_menus.gd 48 checks/0 fallos (headless, EXIT 0) |
 | 91-91-Configuracion-De-Audio | QA cruzado Hy3 (Lote F, §21.8) | — | ✅ VERIFICADO (Log 1225, re-verify Hy3 — sello Log 867 inválido) 2026-10-03: test_audio_config.gd 103/0 + test_audio_effects_m91.gd 82/0 |
 | 97-97-Steam-Store-Page | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_store_m97.gd 15 checks/0 fallos (headless); módulo 🟢 129/195 |
 | 98-98-Trailer | QA cruzado Hy3 (Lote F, §21.8) | — | 🔶 SELLO LOG 866 INVÁLIDO (no verificado por Hy3) — Log 1301: test_trailer_m98.gd 12 checks/0 fallos (headless); módulo 🟢 4/102 |

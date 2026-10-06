@@ -670,7 +670,7 @@ número que el script no veía.
 2. **Mi propio arreglo lo empeoró:** usé
    `[System.IO.File]::WriteAllLines($p, $out, [System.Text.Encoding]::UTF8)` — ese encoding
    **escribe BOM**, y `WriteAllLines` usa `Environment.NewLine` (CRLF en Windows). Mi script de
-   borrado del 1502 reintrodujo BOM+CRLF en un pool que DeepSeek había dejado limpio. Regla: para
+   borrado del 1352 reintrodujo BOM+CRLF en un pool que DeepSeek había dejado limpio. Regla: para
    escribir archivos planos en este proyecto desde PowerShell, usar **siempre**
    `New-Object System.Text.UTF8Encoding($false)` (sin BOM) y normalizar a `\n` explicitamente, o
    directamente Python con `newline="\n"`.
@@ -715,7 +715,7 @@ asignacion atomica del pool. Un numero se consume una sola vez **en ese canal**.
 renumeraron a la secuencia de su canal por orden cronologico (s2: 37-40, DeepSeek: 41-45,
 Hy3: 47-49, agnes: 48, mimo: 24-25). Las referencias `**Responde a:**` se reescribieron
 automaticamente (script). Los **logs** se quedaron con su numero del pool global (Log 1330, 1342,
-1344, 1502): ellos SI son del pool global. Los numeros 1329-1348 volvieron al pool de logs.
+1344, 1352): ellos SI son del pool global. Los numeros 1329-1348 volvieron al pool de logs.
 
 **Leccion general:** cuando un invariante se puede garantizar de dos formas, **la forma que
 mejora la vida del lector del hilo** (numeracion consecutiva) suele ser la correcta, siempre que
@@ -729,7 +729,7 @@ mientras este documentado el por que de ambas.
 
 **Caso:** atria-dawn (2026-10-06). Tras devolver al pool los numeros que el experimento del pool
 global habia consumido para mensajes (1329-1348), el pool de logs quedo con **cabeza 1003** —
-pero ya existian logs hasta el **1502**. El proximo log se hubiera numerado por debajo del ultimo
+pero ya existian logs hasta el **1352**. El proximo log se hubiera numerado por debajo del ultimo
 creado, rompiendo la correlatividad.
 
 **Causa de raiz:** `verificar_pool_numeros.py` validaba que no hubiera numeros usados dentro del
@@ -777,10 +777,59 @@ referencias cruzadas); la regla aplica a los nuevos.
 poder ver de un vistazo **entre qué modelos** se escribe.
 
 ---
+
+### T-18 -- Trampa del hueco de numeracion: logs 1351-1500 perdidos por doble asignador
+
+**Caso:** atria-dawn (2026-10-06, pedido del fundador). Los logs saltaban de **1350 a 1351**... no:
+saltaban de **1350 a 1501**, dejando un hueco de **150 numeros** (1351-1500) sin usar.
+
+**Causa de raiz (encadenada):**
+1. El pool de logs tenia tope **1500**. El commit del experimento del pool global lo amplio a 3000.
+2. Durante esa tarde, Hy3 creo los logs **1501 y 1502** (QA T-H6, M64) por encima del tope viejo,
+   mientras otros agentes seguian creando logs en la secuencia baja (1330-1350). **La numeracion se
+   cruzo en el tiempo**: el 1502 (20:25) se escribio ANTES que el 1350 (21:46).
+3. Al revertir al pool por canal (`b02fac2`), el director **regenero el pool con cabeza 1003** —
+   tomo un pool obsoleto (error). Luego lo recupero arreando la cabeza a `max(logs)+1 = 1503`
+   (`9a4b4df`), lo que **consolido el hueco 1351-1500** como permanente.
+
+**Solucion aplicada (2026-10-06, directiva del fundador):** renombrar los logs 1501-1513 a
+**1351-1363**, **ordenados por fecha real** (no por numero viejo), y regenerar el pool desde
+`max(logs)+1`. Mapeo:
+
+| log viejo | fecha real | log nuevo |
+|---|---|---|
+| 1501 | 10-05 | 1351 |
+| 1502 | 10-05 20:25 | 1352 |
+| 1503 | 10-06 01:46 | 1353 |
+| 1504 | 10-06 02:12 | 1354 |
+| 1507 | 10-06 03:32 | 1355 |
+| 1505 | 10-06 05:00 | 1356 |
+| 1506 | 10-06 05:10 | 1357 |
+| 1509 | 10-06 05:25 | 1358 |
+| 1508 | 10-06 06:20 | 1359 |
+| 1512 | 10-06 03:44:00 | 1360 |
+| 1510 | 10-06 03:44:02 | 1361 |
+| 1513 | 10-06 06:35 | 1362 |
+| 1511 | 10-06 06:37 | 1363 |
+
+**Lecciones:**
+- **El numero de un log no es su fecha.** Cuando dos asignadores corren en paralelo, el orden de
+  los numeros deja de coincidir con el orden cronologico. Si se necesita orden cronologico, hay que
+  **ordenar por la fecha del campo `**Fecha:**`** (o del timestamp del nombre), no por el numero.
+- **Regenerar un pool con una cabeza obsoleta es silencioso pero letal**: el pool "parece" sano y
+  empieza a repartir numeros por debajo del ultimo log.
+- **Cerrar un hueco cuesta**: renombrar N logs exige reescribir sus referencias en todo el repo
+  (en este caso, 23 archivos .md + headers). Por eso la regla T-16 prefiere NO reutilizar huecos
+  chicos; este hueco era de 150 numeros (5% del pool) y el fundador decidio cerrarlo.
+
+**Familia:** T-15/T-16 (consecuencias del experimento del pool global). Tres trampas de la misma
+jornada.
+
+---
 ---
 
 **Firma de actualización:** **Modelo:** atria-dawn-preview · **Plataforma:** Kilo Code ·
-**Fecha:** 2026-10-06 05:20 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
+**Fecha:** 2026-10-06 07:20 · **Actualización:** (1) numeración de mensajes pasa al **pool por canal** (un `NUMEROS_DISPONIBLES.txt` por carpeta; el global quedó SOLO para logs — el fundador revirtió el pool global la misma noche, T-15); (2) nombre de archivo con **emisor → receptor**
 (`NN-...-<emisor>-a-<receptor>-tema.md`) para ver de un vistazo quién le escribe a quién
 (directiva del fundador); (3) **`Responde a` nombra al MODELO además del archivo** (directiva del fundador 2026-10-06: `**Responde a:** <MODELO> — <archivo>`, helper incluido — T-17); (4) T-11 (byte NUL) y T-12 (numeración por carpeta) agregadas. Historial: sección "Trampas operacionales de la jornada
-2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo).
+2026-10-04" (T-1 a T-8), con casos reales de Hy3, space-bunny-alpha, s2 y DeepSeek-V4.1-Flash. T-6/T-7 anadidos a las 22:40 (EOL del GLOBAL + check muerto). T-8 anadido a las 23:50: coordinacion horizontal en carpeta del RECEPTOR (directiva del fundador) + trampa de numerar sin listar. T-9/T-10 anadidos 2026-10-05 (redireccion PowerShell + mojibake documentado). T-13/T-14 anadidos 2026-10-05 23:55 (numero compartido log+mensaje; pool con BOM/CRLF), mas `scripts/verificar_pool_numeros.py` como verificador permanente del pool. T-15 anadido 2026-10-06 00:35 (pool global para mensajes revertido: unicidad a costa de legibilidad) + renumeracion de los 15 mensajes globales a sus canales. T-16 anadido 2026-10-06 01:40 (cabeza del pool de logs por debajo del ultimo log: el pool global arranca en max(logs)+1, huecos no se reutilizan). T-17 anadido 2026-10-06 05:20 ("Responde a" debe nombrar al MODELO, no solo el archivo). T-18 anadido 2026-10-06 07:20 (hueco 1351-1500 por doble asignador del experimento del pool global: logs 1501-1513 renumerados a 1351-1363 por fecha real; el numero de un log no es su fecha).

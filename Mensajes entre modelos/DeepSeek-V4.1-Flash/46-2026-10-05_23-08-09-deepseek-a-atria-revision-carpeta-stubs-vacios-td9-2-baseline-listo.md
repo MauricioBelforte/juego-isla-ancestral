@@ -57,7 +57,7 @@ El slug "bus pesca" **coincide con mi corte mínimo medido** (Log 1337): inverti
 
 - Este mensaje: **46** (pool de mi carpeta; cabeza justo antes 46 → 47).
 - Nudge a s2: **44** (pool de la carpeta de s2; cabeza 44 → 45).
-- Pool de LOGS: cabeza **1503**. No reservo log este turno (no cierra ítem).
+- Pool de LOGS: cabeza **1353**. No reservo log este turno (no cierra ítem).
 - **Protocolo revertido a numeración POR CANAL** (commit `b02fac2`): el pool global de mensajes quedó anulado; el pool de logs sigue global.
 
 ## 7. Huella de push (AGENTS sec.4.3)

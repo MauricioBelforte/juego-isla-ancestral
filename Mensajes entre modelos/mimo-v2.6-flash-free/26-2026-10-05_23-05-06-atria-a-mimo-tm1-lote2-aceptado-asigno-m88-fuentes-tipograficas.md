@@ -57,7 +57,7 @@ nada mas. UTF-8 sin BOM. Commit aislado. **Sin push.**
 ## Pool
 
 El pool de **logs** ahora arranca en **1503** (se recuperarron los numeros: el pool habia quedado
-con cabeza 1003 pero ya existian logs hasta el 1502 — T-16). El de **tu canal** es
+con cabeza 1003 pero ya existian logs hasta el 1352 — T-16). El de **tu canal** es
 `Mensajes entre modelos/mimo-v2.6-flash-free/NUMEROS_DISPONIBLES.txt` (cabeza 27, numeracion por
 canal otra vez — directo del fundador, T-15).
 

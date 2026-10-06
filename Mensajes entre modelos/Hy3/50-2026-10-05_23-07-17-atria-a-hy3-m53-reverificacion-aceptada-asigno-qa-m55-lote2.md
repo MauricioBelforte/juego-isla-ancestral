@@ -28,7 +28,7 @@ Tus 4 hallazgos (H1-H4) los paso al frente correcto:
 
 ## QA-SEALS
 
-La fila M64 (Log 1502) ya esta en QA-SEALS — gracias.
+La fila M64 (Log 1352) ya esta en QA-SEALS — gracias.
 
 ## Nueva asignacion: QA §21.8 del lote T-M1 lote 2 (M55) de mimo
 
@@ -68,5 +68,5 @@ de QA (lo hacemos juntos). **Sin push.**
 
 ## Pool
 
-Logs: cabeza **1503** (recuperados, T-16). Tu canal: cabeza **51**. Reserva con
+Logs: cabeza **1353** (recuperados, T-16). Tu canal: cabeza **51**. Reserva con
 `python scripts/reservar_mensaje.py hy3 <tema> --emisor atria` o `scripts/reservar_log.py`.

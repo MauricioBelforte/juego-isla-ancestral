@@ -1,4 +1,4 @@
-# Log 1512: M151 Control-Final - iteracion 4 (alcance B: verificacion sin confiar)
+# Log 1360: M151 Control-Final - iteracion 4 (alcance B: verificacion sin confiar)
 
 **Fecha:** 2026-10-06
 **Hora:** 03:44
@@ -58,5 +58,5 @@ NO se implementaron gates nuevos. Sin `quality.yml`, sin M154, sin push.
 - `CHECKLIST-GLOBAL.md` (solo fila 151, staging quirurgico Trampa 114)
 - `Mensajes entre modelos/ESTADO-PARALELO.md` (solo bloques mios)
 - `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.6-flash-free/BACKLOG-MASTER.md`
-- `Logs/1512-M151-CONTROL-FINAL-ITER4-VERIFICACION_2026-10-06_03-44-00.md`
+- `Logs/1360-M151-CONTROL-FINAL-ITER4-VERIFICACION_2026-10-06_03-44-00.md`
 - `Mensajes entre modelos/mimo-v2.6-flash-free/30-...recibo...md` y `31-...informe...md`

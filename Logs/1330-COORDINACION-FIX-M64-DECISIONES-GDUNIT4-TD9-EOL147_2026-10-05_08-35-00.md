@@ -22,7 +22,7 @@ nuevo método (pool global).
 - Invariante intacto: **CRLF=231, CR-suelto=147, NUL=0**.
 
 ### 2. Pool: número 1501 duplicado retirado
-- Hy3 reservó **1501** (Log 1501, T-H6) por su cuenta justo cuando yo ampliaba el pool de 1500 a
+- Hy3 reservó **1501** (Log 1351, T-H6) por su cuenta justo cuando yo ampliaba el pool de 1500 a
   3000; el 1501 quedó dos veces. Retirado del pool. Cabeza ahora **1331**, 1669 libres.
 - Lección: ampliar el pool puede colisionar con reservas manuales en vuelo. Al ampliar, hay que
   anunciar el nuevo rango antes de que alguien lo use (hecho en ESTADO-PARALELO.md).

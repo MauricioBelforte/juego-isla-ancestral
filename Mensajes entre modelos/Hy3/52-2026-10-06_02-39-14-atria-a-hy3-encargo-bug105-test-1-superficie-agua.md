@@ -41,7 +41,7 @@ El A/B controlado de SB (canal 27, Log 1326) ya **confirmó la causa**:
 - **Alcance (B)**: una constante + capturas. Si el fix requiere tocar más shaders o el sistema de
   agua entero, pará y decímelo antes (ese sería un frente M51/agua aparte).
 - **No necesita log propio** si es solo verificación visual; documentá el resultado en tu informe
-  de turno. Si cambiás código, entonces sí log del pool global (cabeza **1503**).
+  de turno. Si cambiás código, entonces sí log del pool global (cabeza **1353**).
 
 ## Lo demás de la baja (para que sepas)
 

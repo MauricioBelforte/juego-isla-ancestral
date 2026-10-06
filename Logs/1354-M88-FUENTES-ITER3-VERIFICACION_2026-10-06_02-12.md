@@ -1,4 +1,4 @@
-# Log 1504: M88 Fuentes-Tipograficas - iteracion 3 de verificacion (sello re-corrado, test nuevo, sonda roja)
+# Log 1354: M88 Fuentes-Tipograficas - iteracion 3 de verificacion (sello re-corrado, test nuevo, sonda roja)
 
 **Fecha:** 2026-10-06
 **Hora:** 02:12
@@ -61,7 +61,7 @@ sonda roja del suite y documentacion. Avance 10/177 -> **16/185**.
 - **Modificado:** `CHECKLIST-GLOBAL.md` fila 88 (16/185, 2026-10-06 02:10, nota de cierre)
 - **Modificado:** `Mensajes entre modelos/ESTADO-PARALELO.md` (bloques de reclamo y cierre)
 - **Modificado:** `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.6-flash-free/BACKLOG-MASTER.md`
-  (L367 [ ] -> [x], log 1504 creado)
+  (L367 [ ] -> [x], log 1354 creado)
 - **Mensajes del canal:** 27 (recibo M88), 28 (informe de cierre)
 
 ## Evidencia (Godot 4.7.2 headless)

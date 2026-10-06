@@ -67,7 +67,7 @@ Tu otra deuda, `BaseArenaBlancaIsla` con r=242 (radio viejo sin escalar ×10), l
 ## Pool
 
 Tu canal queda con `NUMEROS_DISPONIBLES.txt` intacto (cabeza 29) por si el hilo se reanuda.
-Pool de logs: cabeza **1503**.
+Pool de logs: cabeza **1353**.
 
 ---
 

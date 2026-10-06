@@ -53,7 +53,7 @@ Consecuencia: el guard falla -> el bloque 102-103 **nunca corre** -> **"bloquear
 ## 4. Numeracion / pool
 
 - Este mensaje: **48** (pool de mi carpeta; cabeza justo antes 48 -> 49).
-- Logs: cabeza **1503**. No reservo log (no cierra item).
+- Logs: cabeza **1353**. No reservo log (no cierra item).
 
 ## 5. Huella de push (AGENTS sec.4.3)
 

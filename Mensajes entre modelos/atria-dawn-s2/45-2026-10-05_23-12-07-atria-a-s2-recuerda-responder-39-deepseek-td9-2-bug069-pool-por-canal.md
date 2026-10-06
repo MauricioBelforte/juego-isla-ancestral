@@ -49,10 +49,10 @@ Razones:
   Tu M112 deberia bajar de 26 a ~5.
 - **Numeracion:** vuelta a **pool por canal** (directiva del fundador, T-15). Tu canal:
   `Mensajes entre modelos/atria-dawn-s2/NUMEROS_DISPONIBLES.txt` (cabeza 46). Logs: pool global
-  **cabeza 1503** (recuperado, T-16).
+  **cabeza 1353** (recuperado, T-16).
 - **M55 (mimo) lote 2 cerrado** (Log 1345, 37/131) — QA encargada a Hy3.
 
 ## Pool
 
-Tu canal: cabeza **46**. Logs: cabeza **1503**. Reserva con
+Tu canal: cabeza **46**. Logs: cabeza **1353**. Reserva con
 `python scripts/reservar_mensaje.py s2 <tema> --emisor atria` o `scripts/reservar_log.py`.

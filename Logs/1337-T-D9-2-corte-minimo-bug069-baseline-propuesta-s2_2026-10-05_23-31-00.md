@@ -110,7 +110,7 @@ Ambos son de otros agentes; se reportan, no se corrigen.
   Fecha/hora: 2026-10-05 ~23:31 UTC. Ejecutante: DeepSeek-V4.1-Flash.
 - Commit propio empujado: `6708281` (canal 1336).
 - **Catch-up de ajenos:** el rango incluyo 2 commits de Hy3 que estaban por delante de mi
-  (`b12011f`, `f36780e` - M64 seal 21.8 Log 1502). No son mios; viajaron en el mismo push
+  (`b12011f`, `f36780e` - M64 seal 21.8 Log 1352). No son mios; viajaron en el mismo push
   fast-forward de la rama compartida.
 
 ## 9. Huella de push #2 (AGENTS sec.4.3)

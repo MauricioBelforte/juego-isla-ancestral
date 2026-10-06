@@ -3804,7 +3804,7 @@ Documento en mi canal (msg 28). Commit aislado, **sin push**. QA §21.8 pendient
 `CHECKLIST-GLOBAL.md` fila 151: 🟡 → **🔵 En curso**, Agente → **mimo-v2.6-flash-free**, 2026-10-06 03:32.
 Backlog: linea nueva [→]. QA de M88 encargada a Hy3 (no bloqueante).
 Restricciones SB: sin `quality.yml` (s2), sin `interaction_manager`/BUG-096 (kimi), sin
-`service_registry`/BUG-097 (agnes), sin M154, **sin push**. Pool de logs: cabeza 1503.
+`service_registry`/BUG-097 (agnes), sin M154, **sin push**. Pool de logs: cabeza 1353.
 Alcance: re-correr `scripts/auditoria/verificar_puntos.py` + 11 tests (no confiar), re-atribuir,
 medir los 7 gates de verdad, verificar Totales y veredicto de la fila. NO gates nuevos.
 
@@ -3812,7 +3812,7 @@ medir los 7 gates de verdad, verificar Totales y veredicto de la fila. NO gates 
 
 **Estado:** liberado con dudas honestas (6 [?] abiertos, 0 gates nuevos implementados por decision
 de alcance). Fila 151: **🟡 Con dudas (iter. 4 ✓), 23/167** (23 [x] / 6 [?] / 138 [ ],
-contado con script). Log **1512**; informe en el mensaje **31** del canal.
+contado con script). Log **1360**; informe en el mensaje **31** del canal.
 Medicion: 0/7 gates en verde verificable, 1 rojo real (BUG-078+BUG-091), 4 PENDIENTE legitimos,
 2 [?] de SB cerrados (release-build cableado por el usuario; JSON regenerado por CI), 3 hallazgos
 nuevos (ci_gates_verdes no mide, acta inexistente, CI del repo detras). **Sin push.**
