@@ -270,3 +270,6 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 6):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 80 [x] / 0 [ ] /
 > 40 [?]. Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
+Auditoría del bloque 2 (T-D7): los [80 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_contextual_dialogue_m162.gd` = 0 fallos (EXIT 0); scripts/dialogos/ + data/dialogues/contextual/*.json.

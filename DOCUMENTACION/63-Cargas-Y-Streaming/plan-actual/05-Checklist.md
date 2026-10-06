@@ -222,3 +222,6 @@ Re-verificación independiente del sello invalidado (Log 856 se apoyó en la sui
 - **DoD:** checklist 67[x]/7[ ]/27[?]; los 7[ ] y 27[?] tienen dueño externo documentado (0 sin dueño). 0[?] propios sin documentar.
 - **Veredicto:** ✅ **Verificado por Hy3/WorkBuddy (Log 1222, §21.8).** Confirma y mantiene el sello Log 1195. KnownIssues: 27[?] delegados a dueños externos (no bloquean).
 - Detalle: `Logs/1222-m63-qa21.8-reverificacion_2026-10-03.md`.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
+Auditoría del bloque 2 (T-D7): los [67 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_stream_m63_iter6.gd` = 42 checks / 0 fallos; scripts/stream/ (pantalla_carga, LRU chunks, load_threaded); 45 [x] con .gd verificados en disco (no solo sello Hy3).

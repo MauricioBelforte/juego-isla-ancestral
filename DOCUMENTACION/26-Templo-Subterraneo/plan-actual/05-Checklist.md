@@ -201,3 +201,6 @@ UI de M58 quedan pendientes de sus módulos.
 - [x] Test headless: **92 checks, 0 fallos, EXIT 0 ×3**, 0 `SCRIPT ERROR`
 - [x] Bug de proyecto encontrado y corregido de paso: `scripts/backup/backup_manager.gd` (M107) no compilaba — `DirAccess.new()` sobre clase abstracta (BUG-035)
 - [?] Calibración visual de las salas (luces, materiales, partículas): requiere Blender/Godot con vista y aprobación visual ajena (§15.3)
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
+Auditoría del bloque 2 (T-D7): los [62 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_templo_m26.gd` = 92 checks / 0 fallos (rojo de parse-JSON inyectado esperado); scripts/templos/ (templo_flow, puzzle_*, templo_validadores).

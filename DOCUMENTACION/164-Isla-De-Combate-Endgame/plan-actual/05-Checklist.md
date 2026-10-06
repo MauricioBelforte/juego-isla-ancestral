@@ -185,3 +185,6 @@
 > **Pendientes con dueño externo (no iter 1):** IA/spawner/meshes (M64/M45), combate y vida
 > (M11/M64), UI (M53), tienda (M39), NPC dialogo (M19/M162), skins (M155), decoraciones (M18),
 > logros (M71/M72), item gema M159 (M14). Todos marcados [ ] sin falsos-verdes.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
+Auditoría del bloque 2 (T-D7): los [70 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_combat_m164_atria.gd` = 0 fallos (EXIT 0); scripts/combat/ (combat_island_system, enemy/boss_data, island_zone, gem_save_provider).
