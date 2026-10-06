@@ -59,7 +59,7 @@ BLOQUEADO es realista, pero la frase de la fila ("0 críticos") ya no es cierta:
   el bloque Totales viejo de atria quedó marcado OBSOLETO sin borrarse; firma mía).
 - **04-Codigo:** Notas del Agente iteración 4 agregadas (las previas intactas).
 - **Fila 151 GLOBAL:** 🟡 Con dudas (iter. 4 ✓) · 23/167 · agente mimo · 2026-10-06 03:44.
-- **Log 1512** creado. Backlog completado. ESTADO-PARALELO: bloques de reclamo y cierre.
+- **Log 1360** creado. Backlog completado. ESTADO-PARALELO: bloques de reclamo y cierre.
 - **Restricciones:** sin `quality.yml`, sin `interaction_manager`, sin `service_registry`, sin
   M154, **sin push**. Staging quirúrgico Trampa 114.
 - **QA §21.8:** pendiente por verificador ≠ mimo (M88 en cola de Hy3; M151 recién queda 🟡).
