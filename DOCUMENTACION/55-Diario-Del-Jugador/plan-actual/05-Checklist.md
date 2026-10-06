@@ -10,7 +10,7 @@
 > **Archivos afectados:** `scripts/ui/layers/` (capa nueva), `scripts/diario/`, `locales/*.po`, `DOCUMENTACION/55-Diario-Del-Jugador/plan-actual/`
 > **Reserva anterior (histórica):** glm-5.3-flash · iter. 1 núcleo V0/V1 (Log 374, liberado 2026-09-01)
 
-**Estado:** 33/131 completados (8 previos + 25 de iter. 2), 1 [?], 97 pendientes — iter. 2 UI (mimo, Log 1295): capa DiaryLayer + i18n 36 claves + test_diario_ui 89/0 con sonda rojo. Ver 06/07-Testings. [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 37/131 completados (8 previos + 29 de iter. 2), 3 [?], 91 pendientes — iter. 2 UI (mimo, Log 1295): capa DiaryLayer + i18n 36 claves + test_diario_ui 89/0 con sonda rojo; +4 [x] del lote 2 (L26/L189/L209/L217) verificados por hy3 en QA §21.8 (Log 1503). Ver 06/07-Testings. [S]=Simple [M]=Medio [C]=Complejo.
 
 ## A. Diseño General del Diario
 
@@ -223,7 +223,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 131 ítems · Completados: 33 · Pendientes: 97 · No resueltos: 1.
+**Totales:** 131 ítems · Completados: 37 · Pendientes: 91 · No resueltos: 3.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 8 [x] / 123 [ ] / 0 [?].
