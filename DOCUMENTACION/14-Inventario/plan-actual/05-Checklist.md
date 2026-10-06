@@ -684,5 +684,5 @@ Los [136 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia
 Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅
 - Conteo independiente: 136 [x] / 4 [?] / 0 [ ] (coincide fila global).
 - Suite re-corrida headless: test_inventario_iter5 0/0.
-- [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 4 [?] = acciones contextuales por slot / soporte gamepad+teclado-mouse / recolección bolsillo lleno / pickups flotantes — todos QA atria-dawn 2026-09-18 (dueño director), bloqueos externos reales.
+- Los [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 4 [?] = acciones contextuales por slot / soporte gamepad+teclado-mouse / recolección bolsillo lleno / pickups flotantes — todos QA atria-dawn 2026-09-18 (dueño director), bloqueos externos reales.
 - 0 falsos-cierres. No se sube estado (flip GLOBAL = director).

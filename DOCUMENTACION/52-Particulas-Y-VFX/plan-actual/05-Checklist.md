@@ -388,5 +388,5 @@ Los [137 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia
 Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅
 - Conteo independiente: 137 [x] / 1 [?] / 10 [ ] (coincide fila global).
 - Suite re-corrida headless: test_vfx_m52_iter6 76/0.
-- [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 1 [?] = catálogo VFX (M44 feedback + M92 tutorial); 10 [ ] = presets M90 / timelines M48 / chapoteo M13 / estelas M47 / menús M53 / Reduce-Motion M58 — todos dueño externo.
+- Los [?]/[ ] = bloqueos EXTERNOS con dueño verificados: 1 [?] = catálogo VFX (M44 feedback + M92 tutorial); 10 [ ] = presets M90 / timelines M48 / chapoteo M13 / estelas M47 / menús M53 / Reduce-Motion M58 — todos dueño externo.
 - 0 falsos-cierres. No se sube estado (flip GLOBAL = director).

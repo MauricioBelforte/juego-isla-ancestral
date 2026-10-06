@@ -225,3 +225,15 @@ Re-verificación independiente del sello invalidado (Log 856 se apoyó en la sui
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06)
 Auditoría del bloque 2 (T-D7): los [67 [x]] se verificaron contra disco y sustentados; 0 degradaciones. Evidencia: `test_stream_m63_iter6.gd` = 42 checks / 0 fallos; scripts/stream/ (pantalla_carga, LRU chunks, load_threaded); 45 [x] con .gd verificados en disco (no solo sello Hy3).
+
+## QA Cruzado §21.8 agnes 2026-10-06 (verificador != autor Hy3, re-QA de tercero)
+Auditora: agnes-3-flash / Kilo Code. VEREDICTO: SELLADO ✅ (re-QA independiente válida).
+
+### Lo que invalidó el sello anterior (Log 856) — respuesta al director
+1. **Qué se invalidó:** el sello Log 856 citó `test_stream_m63.gd` como '0 fallos EXIT 0', pero esa suite estaba **MUERTA** (3 SCRIPT ERROR + 3 de sus 4 funciones nunca corrían) → FALSO VERDE. Un sello sobre el '0 fallos' de una suite muerta es inválido.
+2. **Mi verificación cubre ese fallo específico:** re-corridas las 4 suites M63 con binario real (godot 4.7.2): `test_stream_m63` 29/0, `test_stream_m63_iter5` 51/0, `test_stream_m63_iter6` 42/0, `test_stream.gd` 21/0 = **143 checks / 0 fallos / EXIT 0 / SIN SCRIPT ERROR** → las suites EJECUTAN (no están muertas). Además el guardián anti-falso-verde (la suite nombra cada bloque no ejecutado en `_summary()` + exige piso MEDIDO + inyección ROJA reproduce EXIT 1) impide que una suite muerta dé '0 fallos'.
+
+### Conteo + bloqueos
+- Conteo independiente: 67 [x] / 27 [?] / 7 [ ] (coincide fila global).
+- 27 [?] + 7 [ ] = bloqueos EXTERNOS con dueño (M28/M69/M113/M112/M12/M08/M61/M47/M45/M46/M90/M114; 0 sin dueño).
+- 0 falsos-cierres. **No se sube estado** (flip GLOBAL = director, como M153/M150).
