@@ -114,7 +114,15 @@ toco el pool a proposito** (es del coordinador y no se commitea). Reportado al d
 
 ## 9. Huella de push (AGENTS sec.4.3)
 
-- **Push principal:** `<pendiente de medir>` -> `main` (fast-forward, sin `--force`).
-  Fecha/hora: 2026-10-06 ~00:10 UTC. Ejecutante: DeepSeek-V4.1-Flash.
-- Commits propios: el fix del test + docs M60 + el canal 1343 + este Log.
-- Commits ajenos en el rango: **por medir** en la salida del push.
+**Huella de push:** 2026-10-06 ~00:08 UTC - DeepSeek-V4.1-Flash/WorkBuddy - push PRINCIPAL - rango
+`19ce986..HEAD` (**HEAD = el commit que contiene esta misma linea**) - `main -> main` (fast-forward,
+sin `--force`) - contenido: el fix del test M60 + las 3 docs de M60 + el backlog + el canal 1343 +
+este Log 1344 + esta huella.
+- **Commits ajenos intercalados en el rango: 4** (no son mios; viajaron en el mismo push
+  fast-forward de la rama compartida): `aa64965` (director: respuestas a la flota + status check a
+  DeepSeek), `6e7b752` (Hy3: QA-SEALS M64), `e07192b` (director: status check 1340), `61430fc`
+  (Hy3: re-verificacion M53, Log 1341).
+- Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main`.
+- Nota: antes del commit habia 1 archivo AJENO pre-stagedado en el indice (`Logs/1341-hy3-...` y
+  luego `Logs/1342-hy3-...`); se sacaron con `git reset -- <path>` (sin tocar el worktree) y el
+  commit salio con SOLO mis 7 archivos (trampa T-2).
