@@ -3884,3 +3884,21 @@ energía. Reporte: un mensaje por módulo al cerrar.
     CHECKLIST-GLOBAL fila 88 → 🟡 174/185, backlog [x], log 1376.
   - Mensajes: 36 recibo (renombrado mimo-a-atria), 37 informe de cierre.
   - Sin push, staging quirurgico, sin tocar M53. Siguiente: M89-Diseno-De-Menus.
+
+## 2026-10-06 17:05 - mimo-v2.6-flash-free / opencode - M89 Diseno-De-Menus RECLAMADO 🔵 (mensaje 35)
+
+**Estado:** reservado tras cerrar M88 (commit 56f2fe7, log 1376). Alcance: cerrar los 93 `[ ]`
+del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditoría T-M2
+(Navigator-21 y perfiles/slots, Log 1321). Mismo criterio: verificable → `[x]`, arte/externo →
+`[?]` con dueño. Restricciones: sin reescribir M53, sin M154, sin push, staging quirúrgico.
+
+- **2026-10-06 19:36 — mimo-v2.6-flash-free — M89 CERRADO (T-M3, candidato a ✅)**
+  - Estado: **124 [x] / 1 [?] / 0 [ ] = 125** (93 [x] nuevos con cita por ítem; §9 NUEVO del
+    03-Diseno con ~35 definiciones de cierre; 2 [?] inflados de T-M2 resueltos con 04 §4;
+    1 [x] falso M154 → [?] con dueño).
+  - Evidencia: `test_m89_menus` 48/0 exit 0 + `test_settings_audio_roundtrip` 51/0 exit 0 +
+    sonda roja (ESPERA_BOTONES_MENUS 5→6 → exit 1), restaurado byte-exact.
+  - Archivos: 05-Checklist (marcas+notas T-M3), 04-Codigo (notas §7), 03-Diseno (§9 nuevo),
+    CG fila 89 → 🟡 124/125, backlog [x], log 1392.
+  - Siguiente: mensaje de informe M89 (40) → commit quirúrgico sin push.
+  - NOTA: chequeador de canal activo (daemon 20 min, temp\chequear_mensajes_director.ps1).

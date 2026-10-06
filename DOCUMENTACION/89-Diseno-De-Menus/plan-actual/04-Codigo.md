@@ -99,3 +99,33 @@ Las secciones 1-5 describen el diseño **heredado de Unity** (C#, prefabs, `Shel
 - **Archivos Godot reales del módulo:** `ui/layers/menus_layer.gd`, `pause_layer.gd`, `credits_layer.gd`, `inventory_layer.gd`, `settings_audio_layer.gd` · `ui/core/ui_manager.gd`, `ui_layer.gd`, `menu_navigator.gd` · `ui/ui_root.gd` · tests `ui/test_m89_menus.gd` (nuevo, T-M2).
 - **Suite T-M2:** `test_m89_menus.gd` — verde 48/0 `exit=0`; sonda rojo 48/1 `exit=1`; regresión M53 0 fallos, M55 89/0.
 - **Zona s2:** `ui_manager.gd` pertenece a M53 (framework, canal 25) — solo lectura en T-M2.
+
+## 7. Notas del Agente — T-M3 (cierre, mensaje 35)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-06 17:25
+**Estado:** Cerrado — 124 [x] / 1 [?] / 0 [ ] = 125; candidato a ✅ pendiente QA §21.8.
+
+### Lo que hice
+
+- Cierre documental de los 93 `[ ]` con cita por ítem (01/03/04 + **§9 nuevo del 03**,
+  ~35 definiciones que faltaban: ver `05-Checklist.md` §Notas T-M3).
+- Resolví los 2 `[?]` inflados de T-M2: `NavigatorTests` y `ProfileSlotTests` **están
+  diseñados en §4** (el ítem es «Definir», no «ejecutar»); advertencias de implementación
+  conservadas en las citas (Navigator parcial, perfiles sin RF3).
+- Corregí 1 `[x]` falso: dependencia M154 → `[?]` (M154 caído, dueño visión).
+- Suites re-coradas: `test_m89_menus` 48/0 exit 0, `test_settings_audio_roundtrip` 51/0
+  exit 0; sonda roja `ESPERA_BOTONES_MENUS` 5→6 → exit 1 (restaurado byte-exact).
+
+### Lo que NO pude hacer
+
+- Nada de implementación (P4/P8/ajustes 1/4, enum, grafo): fuera de alcance documental.
+- Pruebas visuales: sin M154.
+- P12 mapa: zona DeepSeek (no tocar).
+
+### Recomendaciones
+
+- QA §21.8 con verificador ≠ mimo; muestrear §9.
+- El §9 nuevo es diseño mío: si un implementador lo contradice con mejor idea, actualizar
+  §9 y este módulo en el mismo commit.
