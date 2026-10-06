@@ -365,3 +365,14 @@ Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes e
 No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
 
 Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+## Auditoría de los 34 🟡 (T-D7) — encargo coordinador (mensaje 44)
+
+Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Saltar M59/M62 (otros en curso, §21.4). Reporte por bloque en canal `atria-dawn-s2`.
+
+- [x] **Bloque 1 (M61, M77, M45, M04, M13)** — 153 `[x]` auditados; 6 degradados (M77×4 mp/net_contract ausentes + bloqueado single-player v1; M45×2 asset_catalog/validate_mesh ausentes); M61/M04/M13 sustentados (M13 test 0 fallos).
+  - [x] Log reservado: **1505** — Bloque 1 auditoría T-D7 M77/M45 degradados · creado `Logs/1505-BLOQUE1-AUDITORIA-34-AMARILLOS-TD7-M77-M45_2026-10-06_05-00-00.md`
+  - [x] Informe bloque 1 en s2 (mensaje 46) · commit `99aa435`
+- [ ] **Bloque 2 (M162, M164, M63, M26)** — propuesto en s2/46, pendiente confirmación del coordinador
+- [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
+
