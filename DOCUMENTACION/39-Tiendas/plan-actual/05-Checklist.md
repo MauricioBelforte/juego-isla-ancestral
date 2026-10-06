@@ -290,3 +290,19 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 127 [x] / 54 [ ] /
 > 0 [?], consistente con la entrega de la iter. glm (Log 1017: 81 → 127 [x] / 54 [ ]).
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (2026-10-06, agnes-3.0-flash / Kilo Code)
+
+**Auditoría A (canal `agnes-3-flash` arch. 1334/48):** verificar `[x]` c/ evidencia en disco.
+Conteo real actual: **180 [x] / 0 [?] / 1 [ ]** (la nota de drift de 2026-09-20 dice 127/54, stale).
+
+- **Núcleo (VERDADERO):** `test_tiendas.gd` = **0 fallos**; `scripts/shops/` con 11 .gd
+  (shop_manager, catalogo_tiendas, + tests) y catálogos registrados (`[M39] Catálogos
+  definitivos: tienda_general, herreria, mercader_viajero`). Los 180 `[x]` del sistema de tiendas
+  están sustentados. **Sin degradación.**
+- **Hallazgo cross-módulo (H2, handoff a M15):** en runtime salen **8 warnings** `[M39] <tienda>:
+  item_id inexistente en M15` (madera_roble, piedra_caliza, baya_roja, fibra_algodon,
+  mineral_cobre, pergamino_rec_tela_lino, herramienta_basica, fragmento_ancestral). Los catálogos de
+  M39 refieren ítems que **M15 (ItemDatabase) no tiene**. Es **deuda de M15** (registrar esos ítems),
+  no un `[x]` falso de M39: la validación (L38) existe y corre; lo que falta es la **data en M15**.
+- No toqué el estado (lo pone el dueño/coordinador).
