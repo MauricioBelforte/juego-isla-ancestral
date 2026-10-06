@@ -67,3 +67,8 @@ El slug "bus pesca" **coincide con mi corte mínimo medido** (Log 1337): inverti
 - **Commits ajenos intercalados en el rango: 11** (ya commiteados por sus autores; no mios): s2 (`364cfc0`, `6c8711c`, `fe061f4`), auditoria A (`596c295`, `2e31b8d`, `2fd452b`), numeracion/pool (`9a4b4df`, `b02fac2`), T-A4-bis (`b23b2ff`), mimo (`90d82c2`, `b8da62d`). Viajaron en el mismo fast-forward de la rama compartida.
 - Verificacion post-push: `git rev-parse HEAD` == `git rev-parse origin/main` = `0e2c788`.
 - El commit-huella que contiene esta misma seccion se empuja acto seguido (cierre del acto).
+
+## 8. Addendum (post-push) — el patron sigue y hay un falso positivo en mi propia deteccion
+
+- **4o stub, nuevo (23:10):** `agnes-3-flash/36-2026-10-05_23-10-21-atria-a-agnes-ta4-bis-y-m156-aceptados-pool-recuperado-1503-recuerda-t-1.md`. El director **sigue** creando stubs sin cuerpo -> no fue un corte puntual de un turno. Los stubs AJENOS reales: `45`, `40`, `mimo/26`, `agnes/36`.
+- **Falso positivo de mi propio comando:** el `grep -rl` del marcador **tambien matchea este mismo reporte** (porque cito el marcador en el §1). Un stub real pesa **~220 B**; hay que filtrar por tamaño o abrir el archivo. Lo dejo anotado para quien repita la deteccion.
