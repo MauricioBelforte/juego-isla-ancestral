@@ -2,8 +2,8 @@
 
 > **Modelo:** mimo-v2.6-flash-free
 > **Plataforma:** opencode
-> **Fecha:** 2026-10-04 (M53: agregado §30 — `bool(null)` y suites colgadas)
-> **Histórico:** 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
+> **Fecha:** 2026-10-06 (hallazgos M88: §32 sonda de licencia / §33 git checkout Windows)
+> **Histórico:** 2026-10-06 mimo-v2.6-flash-free (M88: §32 sonda de licencia — reemplazo global muta la whitelist; §33 git checkout «unable to unlink» en Windows); 2026-10-04 mimo-v2.6-flash-free (M53: §30 — `bool(null)` y suites colgadas); 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-§9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -589,6 +589,91 @@ Prevención en suites nuevas:
 
 ---
 
+## 32. Sonda de licencia: el reemplazo global muta la whitelist y da falso verde (M88, 2026-10-06)
+
+> Descubierto el 2026-10-06 cerrando M88-Fuentes-Tipograficas (validador de licencias de
+> `data/fonts/fonts.json`, Godot 4.7.2). Familia nueva de falso-verde: no falla el codigo,
+> falla el **metodo de prueba**.
+
+**Sintoma:** para validar el gate de licencias ("solo OFL permitido") muté la sonda mas
+obvia — `"OFL"` -> `"BSD"` en TODO el JSON (reemplazo global). Corrida la suite: **exit 0,
+gate dijo TODO OK**. El gate debio rechazar (`exit 1`, «BSD no permitida») y no lo hizo:
+**la sonda roja salio verde.**
+
+**Causa:** el archivo contiene la licencia DOS veces con significados distintos:
+
+```json
+{ "licencias_permitidas": ["OFL"],          <- EL ESTANDAR que juzga
+  "fuentes": [ { "licencia": "OFL", ... } ] <- EL CASO bajo prueba
+```
+
+El reemplazo global cambio las dos: ahora «BSD» figuraba como **permitido** y como **usado**.
+El gate comparaba `licencia` contra `licencias_permitidas` y todo calzaba. **El test no
+verificaba la regla de negocio: verificaba mi propia edicion.**
+
+**Solucion:** mutar SOLO la entrada del objeto bajo prueba, dejando la whitelist intacta:
+
+```python
+# ✅ CORRECTO: una sola ocurrencia, la del caso bajo prueba
+t = t.replace('"licencia": "OFL"', '"licencia": "BSD"', 1)   # count=1
+# ❌ INCORRECTO: muta tambien licencias_permitidas -> falso verde
+# t = t.replace('"OFL"', '"BSD"')
+```
+
+Resultado: `exit 1` con `BSD no permitida` — gate cazado. Restaurar con `git checkout --`.
+
+**Regla general (aplica a cualquier sonda, no solo licencias):** una sonda debe mutar el
+**caso bajo prueba**, nunca el **estandar que lo juzga**. Si un reemplazo toca las dos
+caras de la comparacion (valor vs. regla, entrada vs. whitelist, dato vs. expectativa),
+el test deja de medir el sistema y pasa a medir tu propia edicion.
+
+**Control de salud de sondas (obligatorio antes de dar una por valida):** toda sonda
+necesita **rojo verificado** — mutar -> exit != 0 -> restaurar -> verde. Y si el rojo no
+sale, sospechar primero de la sonda (¿mutó también la regla?) antes de sospechar del sistema.
+
+**Modelo:** mimo-v2.6-flash-free / OpenCode
+
+## 33. `git checkout -- archivo` falla con "unable to unlink" en Windows (M88, 2026-10-06)
+
+> Descubierto el 2026-10-06 restaurando archivos mutados por sondas tras correr Godot
+> headless. Entorno: Windows + Godot 4.7.2.
+
+**Sintoma:**
+
+```
+error: unable to unlink '...': Permission denied
+```
+
+`git checkout -- <archivo>` no puede restaurar el archivo a HEAD. **No es corrupcion: es
+Windows.** Otro proceso (Godot editor/console, antivirus, indexador) tiene el archivo
+abierto y Windows prohibe borrar/reemplazar archivos con handles vivos.
+
+**Solucion (no requiere desbloquear nada) — reconstruir desde HEAD byte a byte:**
+
+```python
+import subprocess
+# 1) bytes de HEAD
+r = subprocess.run(['git', 'show', f'HEAD:{ruta}'], capture_output=True, check=True)
+# 2) sobrescribir el worktree (escritura binaria: sin decodificar ni re-codificar)
+with open(ruta, 'wb') as f:
+    f.write(r.stdout)
+```
+
+Equivalente exacto a `git checkout -- <archivo>` en contenido, pero sin tocar el inode
+(Windows permite escribir sobre un archivo abierto en muchos casos donde no permite
+borrarlo).
+
+**Si aun asi falla:** cerrar Godot (editor y consola), esperar unos segundos al release
+del handle, reintentar `git checkout --`. Como ultimo recurso, restaurar en otra sesion.
+
+**Nota de proceso:** si el archivo tenia cambios **propios** que debes conservar, NO lo
+restaures a HEAD — primero respalda tu version (`shutil.copy` a temp), aplica el metodo
+solo para descartar mutaciones de sondas, y re-aplica tu respaldo.
+
+**Modelo:** mimo-v2.6-flash-free / OpenCode
+
+
+
 ## Errores rápidos de referencia
 
 | Error | Solución | § |
@@ -607,3 +692,5 @@ Prevención en suites nuevas:
 | `JSON.parse_string()` da `float` y el `==` de Array es exacto | `_a_ints()` antes de comparar | §29 |
 | `Nonexistent 'bool' constructor` (runtime) | `== true` / `!= null` / default en `Dictionary.get`; nunca `bool(null)` | §30 |
 | Suite `extends SceneTree` colgada tras un error | `_run` abortado no llama `quit()`; mirar el PRIMER `SCRIPT ERROR` del log | §30.1 |
+| Sonda con reemplazo global muta whitelist/regla -> falso verde | Mutar SOLO la entrada del objeto (`count=1`); exigir rojo verificado | §32 |
+| `git checkout -- archivo` = «unable to unlink» (Windows) | `git show HEAD:<ruta>` + escritura binaria (`wb`); cerrar Godot si persiste | §33 |

@@ -3902,3 +3902,11 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
     CG fila 89 → 🟡 124/125, backlog [x], log 1392.
   - Siguiente: mensaje de informe M89 (40) → commit quirúrgico sin push.
   - NOTA: chequeador de canal activo (daemon 20 min, temp\chequear_mensajes_director.ps1).
+
+- **2026-10-06 20:05 — mimo-v2.6-flash-free — Hallazgos guía 01 documentados (§32/§33)**
+  - Aprobados en msg 38 §4 y msg 42 §5: trampa de sonda de licencia (falso verde por
+    reemplazo global que muta `licencias_permitidas`) y workaround Windows de
+    `git checkout` unable-to-unlink (`git show HEAD:` + escritura binaria).
+  - `GUIA-GODOT/01-gdscript-errores-comunes.md`: +§32, +§33, +2 filas de tabla rápida,
+    header actualizado. UTF-8 verificado (0 mojibake, sin BOM).
+  - Log 1394 · mensaje de informe 43. M89 intacto (QA → agnes).
