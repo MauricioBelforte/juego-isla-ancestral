@@ -1,8 +1,8 @@
 # GDScript — Errores Comunes y Reglas
 
-> **Modelo:** mimo-v2.6-flash-free
-> **Plataforma:** opencode
-> **Fecha:** 2026-10-06 (hallazgos M88: §32 sonda de licencia / §33 git checkout Windows)
+> **Modelo:** atria-dawn-s2
+> **Plataforma:** Kilo Code
+> **Fecha:** 2026-10-07 (BUG-117: atribución corregida M53/M91 → M66; §6.4 cross-ref a §30; parser 930 .gd: 0 bool de 2 args)
 > **Histórico:** 2026-10-06 mimo-v2.6-flash-free (M88: §32 sonda de licencia — reemplazo global muta la whitelist; §33 git checkout «unable to unlink» en Windows); 2026-10-04 mimo-v2.6-flash-free (M53: §30 — `bool(null)` y suites colgadas); 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-§9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -138,7 +138,19 @@ var ui_events: Variant = bus.get("ui")
 var oldest: Dictionary = _active.pop_front()
 ```
 
-### 6.4 `:=` sobre constantes de autoload vía instancia dinámica (§9.43)
+### 6.4 `bool(Variant)` con Nil — CRASH en Godot 4.7.2 (ver §30)
+
+> **Caso especial de la §6.2/§6.3.** En Godot 4.7.2, `bool(null)` (Variant de
+> tipo **Nil**) lanza `SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor`
+> en runtime. El patrón traidor es envolver un `Object.get()` sin default:
+> `bool(node.get("prop"))`. **Documentado en detalle en la §30** (mimo-v2.6-flash-free,
+> 2026-10-04, BUG-117) — ver ahí la solución, el backtrace y la trampa del grep
+> estático (los `bool(x.get("k", d))` son de 1 arg; la coma es del `.get()`).
+> Actualizado 2026-10-07 por atria-dawn-s2: atribución BUG-117 corregida
+> (M53/M91 audio → **M66 interacciones**); verificado por parser de balance de
+> paréntesis que NO existe ningún `bool(x, y)` de 2 args en los 930 .gd de `game/`.
+
+### 6.5 `:=` sobre constantes de autoload vía instancia dinámica (§9.43)
 
 ```gdscript
 # ❌ Incorrecto (Variant)
@@ -553,6 +565,15 @@ local de `_actualizar_pausa_mundo`), `Object.get()` devuelve `null` y el cast
 aborta `_on_ui_layers_changed` en cada cambio de pila de capas.
 Registrado en `DOCUMENTACION/11-BUGS.md` como bug delegado (módulo NO-toque).
 
+> **Actualizado 2026-10-07 por atria-dawn-s2 (canal s2/86):** la atribución del
+> BUG-117 estaba equivocada — se reportó como código de audio M53/M91
+> (`bool(x, y)` de 2 args hipotético), pero **el código dueño es M66
+> (interacciones)** y el bool es de 1 arg sobre Nil. Verificado con un parser
+> de balance de paréntesis sobre los **930 .gd de `game/`: NO existe ningún
+> `bool(x, y)` de 2 args** — todos los `bool(x.get("k", d))` que el grep
+> estático marcaba son de 1 arg (la coma es del `.get()`). Fix más corto que el
+> de arriba: `node.get("prop", false)` (`Object.get()` SÍ acepta default en 4.x).
+
 **Solución:**
 
 ```gdscript
@@ -588,6 +609,90 @@ Prevención en suites nuevas:
 **Fuente:** M53 Sección Audio (test round-trip) — mimo-v2.6-flash-free / opencode, 2026-10-04.
 
 ---
+
+
+## 31. Verificar si un `.gd` compila: los DOS metodos que mienten (SB-11, space-bunny-alpha)
+
+> Descubierto el 2026-10-05 construyendo `scripts/validadores/validador_autoloads.gd`
+> (Godot 4.7.2, binario real). No es un problema del repo: es una trampa de la API que
+> afecta a **cualquier** agente que quiera escribir un validador de scripts.
+
+**Sintoma:** escribi un validador de los 114 autoloads de `project.godot` y reporto **6
+autoloads rotos** (`EventBus`, `TooltipService`, `NotificationService`, `TermsManager`,
+`combat_island`, `gem_currency`). **Los 6 compilaban** — el log del boot mostraba `[DOM-UI]`,
+`[NPCManager]` y `[VillagerManager]` funcionando mientras el validador los declaraba rotos.
+
+**Causa:** el metodo "obvio" para compilar el fuente de un `.gd` es
+
+```gdscript
+# ❌ FALSO POSITIVO: produce "Parse error" en scripts PERFECTAMENTE VALIDOS
+var gs := GDScript.new()
+gs.source_code = FileAccess.get_file_as_string(ruta)
+var err := gs.reload()          # -> ERR_PARSE_ERROR
+```
+
+Un `GDScript` **anonimo** (sin `resource_path`) no tiene contexto de `class_name`. Godot lo
+dice explicitamente:
+
+```
+SCRIPT ERROR: Parse Error: Class "EventBus_" hides a global script class.
+```
+
+Es decir: el `class_name` del script ya esta registrado globalmente en el proyecto, y el
+segundo registro (el anonimo) **choca** con el. **No es un bug del codigo evaluado: es un bug del
+metodo de evaluacion.**
+
+Y el otro metodo "obvio" tampoco sirve:
+
+```gdscript
+# ❌ NO DETECTA errores de sintaxis: devuelve un GDScript igual
+var r := ResourceLoader.load(ruta, "", ResourceLoader.CACHE_MODE_IGNORE)   # -> GDScript, no null
+```
+
+Un `.gd` con `func roto(:` **carga "bien"**: el error de parse solo aflora al instanciarlo.
+
+**Solucion:** cargar el recurso y recargar **el recurso ya cargado** (que tiene ruta, y por lo
+tanto resuelve el `class_name`):
+
+```gdscript
+# ✅ CORRECTO: detecta la rotura real y no da falsos positivos
+if not ResourceLoader.exists(ruta):
+    return "el archivo no existe"
+var r := ResourceLoader.load(ruta, "", ResourceLoader.CACHE_MODE_IGNORE)
+if r == null:
+    return "ResourceLoader.load devolvio null"
+if not (r is GDScript):
+    return "la ruta no resuelve a un GDScript (%s)" % r.get_class()
+var gs := r as GDScript
+var err := gs.reload()
+if err != OK and err != ERR_ALREADY_IN_USE:
+    return "no compila (%s)" % error_string(err)
+if not gs.can_instantiate():
+    return "no se puede instanciar"
+return ""
+```
+
+**`ERR_ALREADY_IN_USE` NO es un fallo de compilacion.** Salen los autoloads que el proyecto ya
+instancio: si un script no compilara, nunca habria llegado a estar instanciado.
+
+**Metodos resumidos (medidos, no supuestos):**
+
+| Metodo | Detecta archivo ausente | Detecta error de sintaxis | Falsos positivos |
+|---|---|---|---|
+| `GDScript.new()` + `source_code` + `reload()` | no (necesita VFS) | si | **6 de 114** |
+| `ResourceLoader.load()` solo | si | **no** | 0 |
+| **`load()` + `reload()` sobre el recurso** | si | si | **0** |
+
+**Regla practica para validadores headless:** el chequeo de compilacion solo existe sobre
+rutas `res://`. Por eso los fixtures de una suite de este tipo deben vivir en `res://`
+(crear y borrar), no en disco: con un metodo que funciona en cualquier ruta, los falsos
+positivos serían inevitables.
+
+**Regla de proceso (mas importante que la API):** cuando un validador nuevo reporta N fallos,
+**verifícalos contra el runtime antes de reportarlos**. En este caso, un solo log de boot
+(`[DOM-UI] ... OK`) desmentia los 6 hallazgos. **Un validador que no se contrasta con una fuente
+independiente es un generador de bugs fantasma** — el mismo modo de fallo que un check que nunca
+dispara (ver §11 y §16: checks muertos), distinto sintoma.
 
 ## 32. Sonda de licencia: el reemplazo global muta la whitelist y da falso verde (M88, 2026-10-06)
 
@@ -671,7 +776,6 @@ restaures a HEAD — primero respalda tu version (`shutil.copy` a temp), aplica 
 solo para descartar mutaciones de sondas, y re-aplica tu respaldo.
 
 **Modelo:** mimo-v2.6-flash-free / OpenCode
-
 
 
 ## Errores rápidos de referencia

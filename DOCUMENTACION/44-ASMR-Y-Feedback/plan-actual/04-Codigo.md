@@ -63,3 +63,34 @@ FeedbackDirector (autoload/único):
 - No agregar fuentes nuevas: todo debe caber en el pool de 24 de M43.
 - Respetar la precedencia contextual fija (interior > clima > día/noche > diálogo).
 - El test de blacklist (True Peak / buzz) es obligatorio en la suite M112.
+
+---
+
+## Notas del Agente — T-M4 (cierre documental, mensaje 44)
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** OpenCode
+**Fecha:** 2026-10-06 22:05
+**Estado:** Cerrado (documental) — 108 [x] / 5 [?] / 0 [ ] = 113
+
+### Estado REAL de la implementación (verificado en disco 2026-10-06)
+
+- `scripts/audio/feedback_director.gd` — autoload implementado (recetas JSON, blacklist,
+  precedencia interior, `sensacion`, `set_contexto`, `key_sync` stub, `pausar/reanudar` stub).
+- `scripts/audio/test_feedback_m44.gd` — **suite M44: 9 checks / 0 fallos / exit 0**
+  (sonda roja: renombrar `bloque_roto` → exit 1; restaurado → 9/0).
+- `data/audio/feedback_recetas.json` — 8 recetas reales; `feedback_blacklist.json` — 4 prohibidas.
+- **CERO llamadas externas** a `sensacion()`/`set_contexto()` fuera del autoload (rg):
+  M13, M17, M45, M31, M29 siguen **sin cablear** (04 §3/§4) → checklist `[?]` con dueño.
+
+### Diferencias diseño §2 vs código (registradas, sin tocar código)
+
+- `sensacion(accion: String)` implementada **sin** el parámetro `pos` previsto en §2
+  (las 8 recetas actuales son no espaciales; añadirlo cuando una receta lo requiera).
+- `key_sync()` sigue stub (M34): la regla ±15 ms está **diseñada** (03 §3), runtime pendiente.
+
+### Recomendaciones para el próximo agente
+
+- Cablear emisores: solo `FeedbackDirector.sensacion("...")` / `set_contexto(...)` desde
+  M13/M17/M45/M31/M29 — los datos y la API ya existen (ver §3).
+- Los stubs `pausar/reanudar` y `key_sync` son el trabajo pendiente natural.

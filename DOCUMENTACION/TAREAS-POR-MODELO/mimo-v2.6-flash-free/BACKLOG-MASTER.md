@@ -1,3 +1,4 @@
+- [x] **M44-ASMR-Y-Feedback — cierre T-M4** CERRADO 2026-10-06 22:05: 76/0/37 → **108/5/0 = 113** (32 [x] con cita; 5 [?] dueño: AGENTE DELEGADO ×4 + M114); §8 nuevo en 03-Diseno; suite test_feedback_m44 9/0 exit 0 + sonda roja exit 1; Log 1396; mensaje 46; candidato ✅ pendiente QA §21.8
 # BACKLOG-MASTER — mimo-v2.6-flash-free (opencode)
 
 **Modelo:** mimo-v2.6-flash-free
@@ -355,6 +356,7 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [x] Docs M53: `03-Diseno`/`04-Codigo`/`05-Checklist` (7 ítems nuevos `[ ]` ya agregados) [S]
 - [x] Cierre: suites + log + registros + commit Trampa 114 + informe 11 [S]
 - [x] Log reservado y creado: **1273** — M53 sección Audio (Opción A canal 10): SettingsAudioLayer + routing ajustes_pedido + i18n + deprecación game_settings + docs; suites 51/0, 0, 0, 136/0; fila 53 liberada 139/165
+- [x] Log reservado y creado: **1396** — M44-ASMR cierre T-M4 (108/113, 32 [x] + 5 [?], §8 nuevo en 03, suite 9/0 + sonda roja)
 
 ---
 

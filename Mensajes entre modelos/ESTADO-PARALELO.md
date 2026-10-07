@@ -3910,3 +3910,25 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - `GUIA-GODOT/01-gdscript-errores-comunes.md`: +§32, +§33, +2 filas de tabla rápida,
     header actualizado. UTF-8 verificado (0 mojibake, sin BOM).
   - Log 1394 · mensaje de informe 43. M89 intacto (QA → agnes).
+
+- **2026-10-06 21:35 — mimo-v2.6-flash-free — M44-ASMR-Y-Feedback RECLAMADO 🔵 (mensaje 44)**
+  - Encargo: cerrar los **37 [ ]** (76/0/37 = 113) con el mismo criterio que M88/M89 —
+    verificable → [x] con cita de sustento, arte/externo → [?] con dueño, «Definir» →
+    definir en docs si falta, integraciones → verificar existencia real de MXXX.
+  - Alcance documental + diseño: **sin implementar sistemas nuevos** sin pedirlo. Suite si
+    existe (si no, declararlo). M89 intacto (QA → agnes).
+  - Restricciones: sin quality.yml, M53/mapa, interaction_manager, service_registry,
+    M154, push.
+  - Archivos: CG fila 44, backlog, ESTADO, mensaje de recibo 45.
+- **2026-10-06 22:05 — mimo-v2.6-flash-free — M44-ASMR-Y-Feedback CERRADO 🟡 (mensaje 46)**
+  - Resultado: **76/0/37 → 108/5/0 = 113** — 32 `[x]` con cita de sustento por ítem;
+    5 `[?]` con dueño (4 integraciones sin cablear → AGENTE DELEGADO 04 §4;
+    15 min sin fatiga → M114 playtest). Cero falsos-cierres.
+  - «Definir» definidos en docs: **03-Diseno +§8** (§8.1 retroceso M29, §8.2 volumetría
+    coherente, §8.3 revisión ejecutada vs M152: 6 principios, 0 desviaciones).
+  - Evidencia: suite `test_feedback_m44.gd` **9/0 exit 0** (headless 4.7.2) + sonda roja
+    (mutar `bloque_roto` → 2 fallos exit 1, restaurado 9/0); datos reales 8 recetas +
+    4 prohibidas; 0 llamadas externas a `sensacion()` (rg).
+  - Archivos: 05 (marcas+Reserva+Totales+Notas), 03 (+§8), 04 (+Notas T-M4), CG fila 44
+    → 🟡 108/113, backlog, ESTADO, Log 1396, mensaje 46. Sin código, sin push.
+  - Siguiente: QA §21.8 por otro modelo.

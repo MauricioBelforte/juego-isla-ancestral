@@ -155,7 +155,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 ---
 
 | BUG-071 | CI/CD sin implementar: despliegue itch.io, email a stakeholders, validación firebelley; 3 citas § fantasma | M118 | 🟠 Mayor | [ ] Abierto — revertido ✅→🟡 (4 marcas [x]→[ ]), Totales 102/4/0; BUG registrado por hy3 (Log 1125) | hy3 | 2026-09-19 |
-| BUG-078 | **El CI ejecuta 8 scripts que NO estan versionados** (`godot --headless --script <ruta>` sobre archivos que no existen en el repo): M11 + 5 de M64 + M116 + M117. En un checkout limpio `godot` sale con **EXIT 1** (`File not found`) -> el job `godot-lint` queda ROJO. Introducido por `0fb0141` (2) y por `11ac4d9` (6) — **el propio commit que arreglaba BUG-051**, que era el mismo defecto | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [ ] Parcial — M11 versionado (`5ce3aa9`); los 7 ajenos en `DEUDA_CONOCIDA` de `validar_workflows.py` | DeepSeek-V4.1-Flash | 2026-09-20 |
+| BUG-078 | **RESUELTO (2026-10-06, verificado por DeepSeek-V4.1-Flash, Log 1386)**: los 8 scripts ya están versionados — M11 `5ce3aa9` (09-20), 5×M64 `454d0ae` (09-29), M116+M117 `bcec7f5` (10-04); `DEUDA_CONOCIDA` de `validar_workflows.py` vacía y su selftest 6/6. **Definición de done cumplida:** checkout limpio de `HEAD` (`git archive`, 2727/2727 archivos) → `godot-lint` EXIT 0 (932 preloads, 0 SCRIPT ERROR), con el guard probado EN ROJO por inyección (parse error → EXIT 1 nombrando el archivo). Historial: introducido por `0fb0141` (2) y por `11ac4d9` (6) — el propio commit que arreglaba BUG-051, que era el mismo defecto | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1386) | DeepSeek-V4.1-Flash | 2026-10-06 |
 | BUG-076 | **`quality.yml`: 21 `\|\| true` y dos jobs que NUNCA pueden fallar** (`code-quality-script:78` y `formatting-check:107`: su unico check termina en `\|\| true`) pese a estar en el `needs:` del gate duro `summary` | M83 (CI) / M111 Codigo de Calidad | 🟠 Mayor | [ ] Abierto — reportado, NO tocado (es M83/M111) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-077 | **`quality.yml` era YAML INVALIDO**: un `name:` con `: ` sin comillas (linea 597) hacia que GitHub rechazara el archivo COMPLETO -> los 10 jobs del CI apagados ~3 h. Defecto propio de `1582ac2` | M83 (CI) — `.github/workflows/quality.yml` | 🔴 Critica | [x] **Resuelto** (`f1142e6`) + gate `validar_workflows.py` (`8f7d90f`) | DeepSeek-V4.1-Flash | 2026-09-20 |
 | BUG-087 | M59-Guardado no cargaba ninguna partida (JSON parse float vs TYPE_INT) | M59 | 🔴 Crítica | [x] Resuelto (verif. 2026-10-02, Log 1197) | DeepSeek-V4.1-Flash (atría-Dawn verif.) | 2026-10-02 |
@@ -186,6 +186,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-114 | `SaveWriter.write_atomic` y afines no validan rango de slot (1..SLOT_COUNT) — defensa en profundidad ausente | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-115 | Deuda informativa agrupada: checksum sin secreto (no anti-trampas) + `SaveSchema.validate()` vacua contra saves reales + tipos ausentes en campos no críticos | M59 | ⚪ Trivial | [x] **Documentado — deuda sin fix** (Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-116 | El bloqueo de guardado durante la pesca es una feature MUERTA: `SaveManager` conecta a `Fishing.sesion_iniciada`, señal que NO existe (el guard `has_signal` siempre falla) → el auto-save no se bloquea en el minijuego. La misma arista mantiene el SCC de 7 (BUG-069) | M59/M34 (arquitectura M62) | 🟡 Menor | [→] En progreso — fix (B) por DeepSeek-V4.1-Flash (pase T-D9 2) | DeepSeek-V4.1-Flash | 2026-10-06 |
+| BUG-117 | **SCRIPT ERROR latente: "Invalid call. Nonexistent 'bool' constructor"** — causa raíz: **`bool(null)` (Variant Nil) en Godot 4.7.2**, NO `bool(x,y)` de 2 args. Línea exacta: `interaction_manager.gd:669` `bool(ui.get("hay_modal"))` (backtrace runtime confirmado vía pop_layer ui_manager.gd:257). Detectado por la suite `test_settings_audio_roundtrip.gd` durante la QA §21.8 de M89 (agnes, 2026-10-06). **NO es de M89** (su suite propia 48/0 está limpia) | M66-Anti-Softlock / interacciones (NO M53/M91 audio como se reportó primero) | 🟠 Mayor | [ ] Abierto — causa raíz aislada por atria-dawn-s2 (2026-10-07); fix sugerido: `ui.get("hay_modal", false)` (Object.get acepta default en 4.x). Dueño M66 pendiente | pendiente | 2026-10-06 |
+
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -2184,6 +2186,63 @@ El guardado sigue habilitado durante toda la pesca (handler no conectado).
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-10-06 15:30
+
+**Resolución (completar cuando se resuelva):**
+- [ ] Cómo se corrigió: [archivo + función + líneas + lógica del cambio]
+- [ ] Archivos/commits modificados: [rutas y líneas; estado de commit]
+- [ ] Log del proyecto:
+- [ ] Verificado por:
+
+---
+
+### BUG-117 — SCRIPT ERROR latente "Nonexistent 'bool' constructor" (bool(null) en Godot 4.7.2)
+
+- **Fecha de reporte:** 2026-10-06 20:44 (agnes, QA M89) · **causa raíz aislada:** 2026-10-07 00:20 (atria-dawn-s2)
+- **Módulo(s) afectado(s):** M66-Anti-Softlock / interacciones (`interaction_manager.gd`). Reportado primero como M53/M91 (audio) — **corregido**: el test que lo levanta es de audio pero el código dueño es el gestor de interacciones.
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Media
+- **Estado:** [ ] Abierto — causa raíz aislada, fix sugerido, sin dueño asignado
+
+**Descripción del problema:**
+Al correr `test_settings_audio_roundtrip.gd` (y en general al abrir/cerrar capas UI), Godot imprime `SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor.` No aborta la suite (sigue 51/0) pero es un error latente que ensucia la consola y puede romper builds release estrictos.
+
+**Pasos para reproducir:**
+1. `godot472.exe --headless --path game/isla-ancestral --script res://scripts/ui/test_settings_audio_roundtrip.gd`
+2. El error aparece entre el catálogo M160 y el resumen "51 checks, 0 fallo(s)".
+
+**Comportamiento esperado:**
+`bool(Variant)` debería convertir Nil → false (como en Godot ≤ 4.6) o al menos no romper.
+
+**Comportamiento actual:**
+En **Godot 4.7.2, `bool(null)` lanza "Nonexistent 'bool' constructor"**. Reproducido con sonda minimal de 4 líneas (`bool(ui.get("hay_modal"))` donde `get()` retorna Nil).
+
+**Evidencia:**
+- Mensaje de error exacto + backtrace:
+  ```
+  SCRIPT ERROR: Invalid call. Nonexistent 'bool' constructor.
+     at: _on_ui_layers_changed (res://scripts/interacciones/interaction_manager.gd:669)
+       [0] _on_ui_layers_changed (...interaction_manager.gd:669)
+       [1] pop_layer (res://scripts/ui/core/ui_manager.gd:257)
+       [2] _run (res://scripts/ui/test_settings_audio_roundtrip.gd:186)
+  ```
+- Línea: `interaction_manager.gd:669` → `var hay_modal: bool = bool(ui.get("hay_modal"))`
+- La prop `hay_modal` SÍ existe (`var hay_modal := false` en `ui_manager.gd:83`), pero `Object.get()` retorna Nil en el frame del cierre de capa.
+- **Descartado:** NO existe ningún `bool(x, y)` de 2 args en los 930 .gd de `game/` (parser de balance de paréntesis). Los `bool(x.get("k", d))` encontrados por grep estático son de 1 arg (la coma es del `.get()`).
+
+**Fix sugerido (dueño de M66):**
+```gdscript
+var hay_modal: bool = ui.get("hay_modal", false)   # Object.get acepta default en 4.x
+```
+o defensivo:
+```gdscript
+var v = ui.get("hay_modal")
+var hay_modal: bool = v if v is bool else false
+```
+
+**Referencias:** QA §21.8 M89 (agnes, Log 1395); referencia cruzada en `GUIA-GODOT/01-gdscript-errores-comunes.md`.
+
+**Reportado por:** agnes-3-flash (Kilo Code), 2026-10-06 20:44 — hallazgo durante QA M89.
+**Causa raíz aislada por:** atria-dawn-s2 (Atria-Dawn-Preview) / Kilo Code, 2026-10-07 00:20 (canal s2/86).
 
 **Resolución (completar cuando se resuelva):**
 - [ ] Cómo se corrigió: [archivo + función + líneas + lógica del cambio]

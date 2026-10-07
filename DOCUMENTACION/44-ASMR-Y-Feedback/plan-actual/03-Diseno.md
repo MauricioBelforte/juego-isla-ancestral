@@ -77,3 +77,55 @@
 - Test M112: receta→capas correctas; keyframes sincronizados; blacklist de picos no dispara.
 - Recorrido M114: 15 min jugando sin fatiga; ninguna acción "chincha".
 - Master test: True Peak ≤ -1 dBFS en toda la sesión.
+## 8. Edge cases de integración, volumetría y revisión de pilar (T-M4)
+
+> Añadido 2026-10-06 en el cierre documental T-M4 (mimo-v2.6-flash-free): cierra por
+> diseño los huegos de los ítems de checklist K-«retroceso del reloj»,
+> L-«volumetría coherente» y L-«revisión contra el pilar cozy».
+
+### 8.1 Retroceso del reloj (M29) — capas sin desincronizar
+
+- **Regla:** `FeedbackDirector` no mantiene estado temporal propio — `sensacion()` es
+  inmediata por evento; el estado vivo es `_contexto` (interior/clima/hora).
+- **Al retroceder el reloj (M29):**
+  1. Las recetas en curso se **cancelan** (nada suena de un estado ya revertido).
+  2. El contexto se **re-aplica** con `set_contexto()` tras el salto temporal
+     (hora → M31, interior/clima → su fuente vigente).
+  3. No quedan capas "huérfanas" del tiempo revertido (toda capa nace de un evento
+     y muere con su receta; sin loops persistentes no ligados al contexto).
+- **Verificación prevista (delegado):** test de rewind — tras `rewind`, `set_contexto`
+  post-salto no conserva capas de la hora anterior.
+
+### 8.2 Volumetría coherente entre todas las capas
+
+- **Jerarquía relativa fija** (referencia: bus SFX con headroom -6 dB, 03 §4):
+
+  | Capa | Nivel relativo | Regla |
+  |---|---|---|
+  | Ambiente M42 | fondo 0 dB | nunca tapado por microfoley (03 §1, 02 P10) |
+  | Acción M43 | pico de atención | dentro de -3 LUFS de pico (03 §4) |
+  | Microfoley M44 | -18 dB sobre SFX base | dulce y premiador (02 §2-3) |
+  | Respuesta musical M41 | solo eventos | ducking -6 dB con diálogo (03 §5) |
+
+- Los ajustes contextuales (03 §5) aplican **solo sobre estas bases**; la precedencia
+  (interior > clima > día/noche > diálogo) garantiza que ningún caso supera el techo del
+  master (**-1 dBFS**, 03 §4).
+- **Coherencia = mismos límites y misma precedencia para las 4 capas, sin excepción por
+  contexto.**
+
+### 8.3 Revisión contra el pilar cozy (checklist de principios)
+
+- El «checklist M0» del plan original corresponde al corpus de **M152-Principios-Innegociables**
+  (`plan-actual/05-Checklist.md` → «Checklist de implementación»: Filosofía cozy,
+  Principios de diseño, Principios técnicos). Revisión de M44 contra los principios aplicables:
+
+  | Principio M152 | Cumplimiento en M44 | Sustento |
+  |---|---|---|
+  | Ambiente relajante y acogedor | M44 ES el sistema de sensación cozy (ASMR dulce, -18 dB, premiador) | 01 §1, 02 §2-3 |
+  | Sin sustos / sin castigos | Blacklist prohíbe scare chords y sustos; evento prohibido → silencio | 03 §4, blacklist.json (4 prohibidas) |
+  | Performance > visuals | Sin fuentes nuevas: reutiliza pool de 24 de M43 | 01 §3 |
+  | Licencias claras de assets | Documento de permisos de assets (ítem L) | 05 §L |
+  | Sistemas con propósito | 5º pilar cozy justificado; 17 puntos del plan resueltos | 01 §1, 02 §1 |
+  | Sin FOMO / sin penalización | Pausa M29 sin residuos de microfoley (diseño §7/04 §2); sin penalización por ritmo | 03 §5, 04 §2 |
+
+- **Resultado:** M44 cumple los 6 principios aplicables sin desviaciones registradas.
