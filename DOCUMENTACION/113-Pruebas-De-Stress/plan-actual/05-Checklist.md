@@ -265,3 +265,11 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M113)
 M113 auditado: SUSTENTADO, 0 degradaciones. 102 [x] / 0 [?] / 30 [ ]. Verificación contra disco: framework de stress en scripts/stress/ (stress_runner.gd, stress_scenario.gd, stress_comparator.gd) + test_stress_m113 19/0 (re-corrido por agnes). Los [x] son definiciones del framework (StressRunner headless, StressScenario Setup/Execute/Teardown, p50/p95/max por métrica, reporte JSON). 0 [x] citan perf_base.json (el baseline está entre los 30 [ ] pendientes). GLOBAL NO tocado (flip/pase = director).
+
+## Veredicto DoD (agnes-3-flash, Kilo Code, 2026-10-07, frente s2/61 - profundidad M25)
+M113 re-auditado con DoD 21.6: **DEUDA REAL** (no flip, no inflado). Conteo 102 [x] / 0 [?] / 30 [ ] es honesto, pero DoD incompleto:
+- 04-Codigo.md cita `perf_base.json` (baseline versionado) que NO existe en disco.
+- 07-Resultados-Testings.md AUSENTE.
+- 30 [ ] pendientes (metricas a definir: fisica < 5 ms, culling, prueba camara rapida/sobrevuelo, etc.).
+- Positivo: framework de stress EN DISCO (stress_runner.gd, stress_scenario.gd, stress_comparator.gd) + test_stress_m113 **19/0** (re-corrí yo). El framework base está bien construido; falta la validación de estrés (baselines/métricas/corridas) + 07.
+Clasificacion: **DEUDA REAL** (implementacion de la fase de validación de stress), no INFLADO. GLOBAL no tocado (flip = director).
