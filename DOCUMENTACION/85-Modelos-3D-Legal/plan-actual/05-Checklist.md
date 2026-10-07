@@ -163,3 +163,6 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M85)
+M85 auditado: 99 [x] SUSTENTADOS, 0 degradaciones. 99 [x] / 0 [?] / 1 [ ]. Verificación: los [x] son definiciones/diseño del modelo de licenciamiento de modelos 3D (Resource ModelLicense, enums ModelType/LicenseScope, Resource ModelCredit, Work-for-Hire vs License) — DISEÑADOS en 03-Diseno.md, no claims de archivo falsificables. El 1 [ ] SB-02 (L48 'inventario de todas las librerías de stock') = KNOWNISSUE NO BLOQUEANTE = DEUDA REAL → por regla de Atria (canal/59) NO lo marco [x]: lo dejo [ ] y lo reporto. GLOBAL/11-BUGS NO tocados (flip/pase = director).
