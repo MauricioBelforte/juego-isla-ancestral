@@ -286,6 +286,8 @@ Módulos cuyo **Recom no me nombra** pero cuya materia es 100 % mi especialidad 
 - [x] Log reservado: **1344** — M60 T-018: el bloque `BuildingsSaveProvider` **fallaba Y abortaba**; fix del test (fuente inyectada) + **piso de checks medido** (asignado por el director, mensaje 1340, 2026-10-05). **Reserva con `reservar_log.py --reservar`**: cabeza justo antes **1344**. Mensaje al director = **1343** (pool). **Hallazgo lateral**: el pool del worktree tenía **BOM + CRLF** (residuo del restore de agnes) → 1342 invisible; el script lo saltó y consumió 1343, y dejó el pool limpio. Reportado, no tocado. Cabeza tras mis reservas: **1345**.
 - [x] Log reservado: **1391** — BUG-069 (M62): **cierre de los ciclos (A1 1 -> 0)**. La ultima arista del SCC `{ThemeService, UIManager}` era **CODIGO MUERTO** (`viewport_resized` no existe en el proyecto -> `has_signal` siempre false; mismo patron que BUG-116); corte minimo medido con el Tarjan del auditor; sonda ROJA 0->1->0 byte-exacta; regresion M62/M59/M14/M53 (11 suites, todas EXIT 0). **A2 = 10 queda ABIERTA** (10 dependencias VIVAS -> inversion de dependencias en >=8 modulos, NO una arista). Fila BUG-069 -> `[->] Parcial`. Reporte al director: canal **59**.
 
+- [x] Log reservado: **1397** — **M59 / BUG-115: fix REAL (parcial)** — opcion 1 del canal 60 §4, autorizada por el usuario ("hacelos todos si tenes la informacion correcta y despues le escribis el informe"). **(2) validate() vacua -> RESUELTO**: valida AMBOS dialectos de `time` (real M29 `hora/minuto/dia/mes/anio/acumulador` + schema `day/season/hour/minute`), sin duplicar el maximo de `dia` (28, de M29) y **sin tocar `game_clock.gd`**. **(3) tipos -> RESUELTO**: `profile_id` String, `meta.last_saved`/`meta.playtime_seconds`, cota `MAX_CLOCK_ACUMULADOR = 3600.0`. **(1) checksum -> PARCIAL**: token `hmac256:<hex>` (HMAC-SHA256, clave por instalacion en `user://clave_integridad.key` — **fuera** de `user://saves`, que las suites borran), retrocompatible con el SHA-256 legado (`parse_document()` expone `legacy: bool`). Sonda nueva `test_checksum_hmac.gd` = **38/0 x3** (piso `CHECKS_MINIMOS = 38` MEDIDO), guardian probado **EN ROJO por 2 inyecciones** (3 y 4 fallos, EXIT 1); regresion **14 suites EXIT 0**; gate nuevo en `quality.yml`. **Fila BUG-115 -> `[->] Parcial`** (limitacion residual: el token legado se acepta -> NO es anti-trampas contra acceso local al FS; declararlo `[x] Resuelto` seria sello inflado). Commits `8125a9f` (fix, 7 archivos) + `ab36e12` (canal 61) **LOCALES, SIN push**. Reporte al director: canal **61**. **M24 (opcion 2) NO arrancada** (Cx 5): pedi confirmacion de alcance.
+
 - [x] Log reservado: **1005** — M52 Partículas-Y-VFX iter. 6 (2026-09-18)
       ⚠️ **Dos números perdidos antes de este, por dos modos de fallo DISTINTOS del protocolo v3:**
       **(1) 1001 — doble asignador.** `Logs/reservas/1001-hy3-M53.txt` (hy3, 03:37) existía cuando
@@ -1076,3 +1078,25 @@ Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes e
 No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
 
 Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+---
+
+## M24-Templos-Y-Puzzles - plan iter.1 propuesto (2026-10-06, automatizacion 22:45)
+
+- [x] **Log reservado: 1402** - M24 plan iter.1 + push NO-OP (huella 4.3) + hallazgo de drift.
+- [x] **Canal 63 (deepseek-a-atria)** - plan iter.1 entregado al director (plan-first; NO se escribio codigo).
+- [ ] **Bloqueado:** espera OK del director al alcance + liberacion del claim de agnes-2.5-flash sobre M24 (fila 24 del GLOBAL).
+- [ ] **iter.1 (propuesta):** framework datos-driven (`scripts/templos/puzzle_def.gd`) + validador de unicidad real (2^n) + familia presion (2 JSON en `data/templos/puzzles/presion/`) + `test_puzzle_datos.gd`. Cierra 4 items nuevos (32,34,75,76) + respalda 4 (145-148).
+- [ ] **Drift a reconciliar:** items 144/146 `[x]` sin respaldo en codigo; 145/147/148 parciales. NO toque marcas (espera decision del director).
+- [x] **Paradoja M24 resuelta:** el codigo existe en `game/isla-ancestral/scripts/templos/` (11 .gd + 3 tests); la auditoria T-D7 midio la carpeta del modulo.
+
+## M24-Templos-Y-Puzzles - iter.1 EJECUTADA (2026-10-06 23:50, automatizacion)
+
+- [x] **Log reservado: 1407** - M24 iter.1: framework datos-driven + validador de unicidad real + familia presion.
+- [x] **Canal 64 (atria-a-deepseek):** plan iter.1 APROBADO; claim de agnes-2.5-flash LIBERADO (fila 24 -> DeepSeek-V4.1-Flash, "En curso").
+- [x] **Implementado:** `puzzle_def.gd` (PuzzleDef), `test_puzzle_datos.gd` (42/0 EXIT 0 x3; piso CHECKS_MINIMOS=42 medido; guardian EN ROJO x3; detector de ambiguedad EN ROJO x1), 2 JSON de presion; aditivo a `puzzle_room.gd` (objetivo + Hamming) y `puzzle_emisor.gd` (umbral_peso + recibir_peso).
+- [x] **Regresiones:** test_puzzles 0 fallos, test_templo_headless 4/0, test_templo_m26 92/0 (EXIT 0).
+- [x] **Checklist M24:** 34 [x] / 1 [?] / 93 [ ] = 128 (flips 32/34/75/76; 144 -> [?] EditorPlugin; 145-148 con respaldo real medible).
+- [ ] **Pendiente (director):** aplicar el flip de la fila 24 del GLOBAL a 34/128 (no la toco yo).
+- [ ] **Pendiente (s2):** visto bueno para cablear el gate del test nuevo en `quality.yml` (aditivo, modo A BUG-091). Sin OK, corre manual.
+- [ ] **Sin push** (commit local selectivo; sin mezclar working tree ajeno).
