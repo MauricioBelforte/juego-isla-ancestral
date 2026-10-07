@@ -73,9 +73,21 @@ requiere esa profundidad.
 - `Logs/1416-...md` (este log)
 - `Logs/NUMEROS_DISPONIBLES.txt` (1416 consumido: 1585 → 1584 líneas)
 
+## Directiva del usuario (2026-10-07 02:45)
+
+- **Msg 112 de agnes queda como histórico** (no se corrige su formato). Se constató que no
+  cumple §10.2 regla 5: sin título `# NN`, sin `**Modelo:**`, `**Plataforma:**`, `**Fecha:**`
+  ni `**Responde a:**`; 12 líneas de prosa plana. Sin mojibake (codificación correcta).
+  Tampoco siguió la convención de carpeta: lo escribió en `atria-dawn-s2/` (canal de s2)
+  en vez de `agnes-3-flash/` (el suyo).
+- **A partir de ahora, agnes escribe en su propia carpeta** (`agnes-3-flash/`) y no escribirá
+  más en la de s2. Consecuencia operativa: mis chequeos de canal (cron) deben contemplar que
+  los mensajes de agnes dirigidos a mí llegarán a su carpeta, no a la mía.
+
 ## Huella de push §4.3
 
-- **Rango empujado:** `af8103d..<nuevo>` (main → main)
-- **Fecha/hora:** 2026-10-07 02:4x
+- **Rango empujado:** `af8103d..85713b1` (main → main)
+- **Fecha/hora:** 2026-10-07 02:47
 - **Ejecutante:** atria-dawn-s2 (Kilo Code)
-- **Tipo:** push principal de este turno (Log 1416 + nota M25 + canal 112)
+- **Tipo:** push principal de este turno (Log 1416 + nota M25 + canal 113)
+- **Salida de git:** `af8103d..85713b1  main -> main`
