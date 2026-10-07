@@ -245,3 +245,6 @@
 - **Test headless medido:** `godot --headless -s res://scripts/balance/test_balance_m93_iter4.gd` → **0 fallos, exit 0** + regresión iter3/iter4 (0 fallos). El test completó todas sus sub-pruebas.
 - **Nota honesta:** el "drift audit" interno miente "134 `[x]` / 0 `[ ]`"; hay 3 `[ ]` reales (líneas 138/139/142). No se hereda falso verde.
 - **Veredicto:** ✅ **Verificado por hy3 (Log 1218) 2026-10-03** (Estado ✅ justificado: mismo patrón que M167).
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1 M93)
+M93 auditado: SUSTENTADO, 0 degradaciones. 131 [x] / 0 [?] / 3 [ ]. Los 18 archivos de balance citados en los [x] (construction/crafting/farming/fishing/friendship/meta/mining/prices/progression/puzzles/quests/resources/rewards/seals/timing/tools/travel/unlocks .json) TODOS existen en data/balance/. Suite re-corrida POR AGNES: test_balance_m93_iter4 0/0 (EXIT 0). 3 [ ] pendientes. No tocar GLOBAL (flip = director).
