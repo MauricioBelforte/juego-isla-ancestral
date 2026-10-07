@@ -262,3 +262,6 @@ Conteo real de este archivo antes de la iteración: **101 `[x]` · 30 `[ ]` · 1
 > este archivo no tenía línea de Totales. Conteo real de marcas: 102 [x] / 30 [ ] /
 > 0 [?]. Las marcas no se tocaron.
 
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M113)
+M113 auditado: SUSTENTADO, 0 degradaciones. 102 [x] / 0 [?] / 30 [ ]. Verificación contra disco: framework de stress en scripts/stress/ (stress_runner.gd, stress_scenario.gd, stress_comparator.gd) + test_stress_m113 19/0 (re-corrido por agnes). Los [x] son definiciones del framework (StressRunner headless, StressScenario Setup/Execute/Teardown, p50/p95/max por métrica, reporte JSON). 0 [x] citan perf_base.json (el baseline está entre los 30 [ ] pendientes). GLOBAL NO tocado (flip/pase = director).
