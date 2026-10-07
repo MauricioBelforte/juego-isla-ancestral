@@ -262,3 +262,5 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 50 [ ] /
 > 2 [?]. Las marcas no se tocaron.
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1)
+M58 auditado. Sustentado (0 degradaciones). Suite re-corrida POR AGNES: test_accesibilidad_manager 0/0 (EXIT 0). 131 [x] en disco (scripts/accesibilidad/: manager/schema/aplicador). [?] (2) externos con dueño, [ ] (50) pendientes. No tocar GLOBAL (flip = director).

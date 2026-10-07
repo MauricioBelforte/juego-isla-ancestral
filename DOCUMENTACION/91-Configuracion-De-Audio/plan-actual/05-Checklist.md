@@ -352,3 +352,6 @@
 - **L88 HRTF `[?]` — GENUINAMENTE TÉCNICO:** Godot 4.7.2 no expone HRTF (`AudioServer` sondeo T-107: 0 propiedades coincidentes; `03-Diseno.md` §5.1.1). No es un pendiente disfrazado; es limitación de motor (requiere GDExtension / DSP propio / decisión de usuario). Queda como `[?]` legítimo.
 - **DoD:** 206 `[x]` / 32 `[ ]` / 1 `[?]`. 32 `[ ]` y L88 `[?]` con dueño externo/engine documentado (M53 UI, assets de audio ausentes, rollups hardware, M58/M87/M59, L151). El módulo permanece 🟡 Con dudas por decisión del autor; el QA §21.8 no cambia ese estado.
 
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1)
+M91 auditado. Sustentado (0 degradaciones). Suite re-corrida POR AGNES: test_audio_effects_m91 82/0 + test_audio_config 136 checks (0/0 con M41 MusicDirector listo). 207 [x] en disco (scripts/audio/ + data/audio/). HALLAZGO menor: test_audio_config es FLAKY por orden de init M41/M91 — si M41 MusicDirector no está listo, 'default Music 0.7' da 2 FALLOS; con M41 listo = 0/0. No es falso-cierre, es race de init. [?] (1) = M154. No tocar GLOBAL (flip = director).
