@@ -109,9 +109,12 @@ def test_normalizar_nombre_no_pierde_letras():
 def test_inferir_estado():
     assert gen.inferir_estado(0, 0, 0) == "⬜ Sin iniciar"
     assert gen.inferir_estado(0, 5, 0) == "🟢 Disponible"
-    assert gen.inferir_estado(2, 3, 0) == "🔵 En curso"
-    assert gen.inferir_estado(2, 3, 0, "🔴 En curso con riesgo") == "🔴 En curso con riesgo"
-    assert gen.inferir_estado(2, 3, 0, "🔵 En curso") == "🔵 En curso"
+    # 🔵 requiere agente activo (guarda §21.2); sin agente sería 🟢 Disponible
+    assert gen.inferir_estado(2, 3, 0) == "🟢 Disponible"
+    assert gen.inferir_estado(2, 3, 0, "", "agnes-3-flash", "2026-10-06") == "🔵 En curso"
+    # 🔴/🔵 previos se preservan solo con agente responsable (§21.4)
+    assert gen.inferir_estado(2, 3, 0, "🔴 En curso con riesgo", "hy3", "2026-10-04") == "🔴 En curso con riesgo"
+    assert gen.inferir_estado(2, 3, 0, "🔵 En curso", "agnes-3-flash", "2026-10-06") == "🔵 En curso"
     assert gen.inferir_estado(2, 0, 0) == "✅ Completado"
     assert gen.inferir_estado(1, 0, 2) == "🟡 Con dudas"
     # T-OM04 (fix 2026-10-07): un 🟡 Liberado previo NO se reclama como 🔵.
@@ -123,8 +126,42 @@ def test_inferir_estado():
     # (no es parte del bug T-OM04; el flip a ✅ real exige QA §21.8, que es
     # protección separada del bucle principal, no de esta función).
     assert gen.inferir_estado(5, 0, 0, "🟡 Liberado (Log 831)") == "✅ Completado"
-    # Sin estado previo, el comportamiento original se mantiene intacto
-    assert gen.inferir_estado(5, 3, 0, "") == "🔵 En curso"
+    # Sin estado previo NI agente: guarda §21.2 → 🟢 (un 🔵 sin dueño entierra el módulo)
+    assert gen.inferir_estado(5, 3, 0, "") == "🟢 Disponible"
+
+
+def test_inferir_estado_guarda_agente():
+    """§21.2: un módulo sin agente activo no puede estar 🔵 aunque tenga [x].
+
+    Guarda anti-unlock-falso: un 🔵 sin agente/actividad entierra el módulo
+    porque §21.4 prohíbe reclamar un 🔵 ajeno. Directiva del director (2026-10-07,
+    canal 98): el estado correcto para "tiene progreso, nadie lo trabaja" es
+    🟢 Disponible con el Progreso real.
+    """
+    # Sin agente ni actividad → 🟢 aunque tenga [x] acumulados
+    assert gen.inferir_estado(50, 5, 0, "", "", "") == "🟢 Disponible"
+    assert gen.inferir_estado(50, 5, 0, "", "—", "—") == "🟢 Disponible"
+    assert gen.inferir_estado(50, 5, 0, "", "-", "-") == "🟢 Disponible"
+    assert gen.inferir_estado(50, 5, 0, "", "Hy4", "—") == "🟢 Disponible"
+    assert gen.inferir_estado(50, 5, 0, "", "—", "2026-10-06") == "🟢 Disponible"
+    # Actividad sin fecha real (basura en la celda) → 🟢. Caso real M144:
+    # la columna de actividad contenía el nombre del agente, no una fecha.
+    assert gen.inferir_estado(50, 5, 0, "", "minimax-3 (Kilo Code)", "minimax-3 (Kilo Code") == "🟢 Disponible"
+    # Con agente Y actividad con fecha → 🔵 (comportamiento normal)
+    assert gen.inferir_estado(50, 5, 0, "", "agnes-3-flash", "2026-10-06 22:05") == "🔵 En curso"
+    # La guarda no afecta a estados previos respetados (🔵/🔴/🟡)
+    assert gen.inferir_estado(50, 5, 0, "🔵 En curso", "agnes-3-flash", "—") == "🔵 En curso"
+    # Lock preservado por ACTIVIDAD aunque el agente esté vacío (caso real M24:
+    # DeepSeek trabajando; Agente actual vacío, actividad de hoy)
+    assert gen.inferir_estado(34, 93, 1, "🔵 En curso (iter. 2 pendiente)", "—", "2026-10-07") == "🔵 En curso"
+    assert gen.inferir_estado(50, 5, 0, "🟡 Liberado (Log 831)", "", "") == "🟡 Con dudas"
+    # Ni a completos ni a con-dudas (ramas anteriores a la guarda)
+    assert gen.inferir_estado(50, 0, 0, "", "", "") == "✅ Completado"
+    assert gen.inferir_estado(50, 0, 3, "", "", "") == "🟡 Con dudas"
+    # Lock colgado §21.4.7: 🔵 previo SIN agente NI actividad → liberable
+    assert gen.inferir_estado(75, 56, 1, "🔵 En curso (iter. 3)", "—", "—") == "🟡 Con dudas"
+    # Caso real M24 visto al revés: si no hubiera actividad, sí sería liberable
+    assert gen.inferir_estado(34, 93, 1, "🔵 En curso (iter. 2 pendiente)", "—", "—") == "🟡 Con dudas"
 
 
 def test_leer_tabla_existente():

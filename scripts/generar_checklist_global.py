@@ -113,16 +113,79 @@ def contar_checklist(archivo: Path):
     return x, pendientes, dudas
 
 
-def inferir_estado(x: int, pendientes: int, dudas: int, estado_previo: str = ""):
+def _agente_activo(agente_actual: str) -> bool:
+    """¿La fila declara un agente responsable? Acepta "—" / "-" / vacío como
+    ausencia (claim stale o lock colgado)."""
+    ag = (agente_actual or "").strip()
+    return ag not in ("", "—", "-", "–")
+
+
+def _actividad_registrada(ultima_actividad: str) -> bool:
+    """¿La última actividad tiene pinta de fecha real?
+
+    Filtra celdas con basura (p. ej. el nombre del agente duplicado en la
+    columna de actividad). Se exige un año de 4 dígitos.
+    """
+    ult = (ultima_actividad or "").strip()
+    if ult in ("", "—", "-", "–"):
+        return False
+    return bool(re.search(r"\b(?:19|20)\d{2}\b", ult))
+
+
+def _hay_duenio(agente_actual: str, ultima_actividad: str) -> bool:
+    """¿Hay evidencia de que el módulo tiene dueño trabajando?
+
+    Para PRESERVAR un lock 🔵/🔴 existente basta una de las dos señales:
+    un agente responsable O una actividad con fecha (p. ej. M24: Agente
+    actual vacío pero actividad de hoy — DeepSeek trabajando).
+    """
+    return _agente_activo(agente_actual) or _actividad_registrada(ultima_actividad)
+
+
+def inferir_estado(
+    x: int,
+    pendientes: int,
+    dudas: int,
+    estado_previo: str = "",
+    agente_actual: str = "",
+    ultima_actividad: str = "",
+):
     """Infiere el estado del módulo según el conteo de subitems.
 
-    Respeta estados previos en curso (🔵/🔴) y liberados (🟡) para no
-    desmarcarlos: la inferencia solo puede *abrir* un módulo a En curso
-    cuando nadie lo había reclamado ni liberado antes.
+    Reglas de preservación (la inferencia nunca desbloquea lo que un agente
+    está trabajando, §21.4):
+
+    - Un 🔴/🔵 previo **con agente responsable** se mantiene: es un lock
+      legítimo y la inferencia no puede ni reclamarlo ni liberarlo.
+    - Un 🔴/🔵 previo **sin agente** es un *lock colgado* (§21.4.7): cae a
+      las reglas de conteo y queda liberable.
+
+    Reglas de apertura (la inferencia solo *abre* módulos sin dueño):
+
+    - 🔵 significa "bloqueado por un agente, avanzando" (§21.2). Un módulo
+      **sin agente o sin actividad registrada** no puede abrirse a 🔵 aunque
+      tenga [x] acumulados: sería un unlock falso que entierra el módulo
+      (§21.4 — nadie reclama un 🔵 ajeno). El estado correcto para "tiene
+      progreso, nadie lo trabaja" es 🟢 Disponible con el Progreso real.
+    - Un 🟡 Liberado previo no se reclama: la inferencia no sabe por qué se
+      liberó (deuda, integraciones externas); reclamarlo es decisión de un
+      agente.
     """
     total = x + pendientes + dudas
     if total == 0:
         return "⬜ Sin iniciar"
+
+    # Proteger locks activos: si hay agente O actividad reciente, el módulo
+    # está siendo trabajado y la inferencia no puede ni reclamarlo ni
+    # liberarlo (§21.4). Caso real: M24 con Agente actual vacío pero
+    # actividad de hoy — DeepSeek en iter. 2, no debe liberarse.
+    if "🔴" in estado_previo and _hay_duenio(agente_actual, ultima_actividad):
+        return "🔴 En curso con riesgo"
+    if "🔵" in estado_previo and _hay_duenio(agente_actual, ultima_actividad):
+        return "🔵 En curso"
+    # 🔴/🔵 sin agente NI actividad = lock colgado (§21.4.7): cae al
+    # recálculo de conteo y queda liberable para otro agente.
+
     if dudas > 0:
         return "🟡 Con dudas"
     if pendientes == 0:
@@ -130,19 +193,14 @@ def inferir_estado(x: int, pendientes: int, dudas: int, estado_previo: str = "")
 
     # Si hay items [x] y pendientes, el módulo está en progreso
     if x > 0:
-        # Mantener el estado en curso previo (🔵 o 🔴) si existía
-        if "🔴" in estado_previo:
-            return "🔴 En curso con riesgo"
-        if "🔵" in estado_previo:
-            return "🔵 En curso"
         # Respetar un 🟡 Liberado previo: no degradarlo a 🔵 En curso.
-        # La inferencia no sabe por qué se liberó con dudas (deuda de
-        # documentación, integraciones externas, etc.); reclamarlo como
-        # "en curso" es un cambio de estado que solo puede hacer un agente.
         # El texto manual p. ej. "🟡 Liberado (Log 831)" se conserva luego
         # por la protección de emoji-coincidente del bucle principal.
         if "🟡" in estado_previo:
             return "🟡 Con dudas"
+        # Guarda §21.2: sin agente o sin actividad registrada, no hay 🔵.
+        if not _agente_activo(agente_actual) or not _actividad_registrada(ultima_actividad):
+            return "🟢 Disponible"
         return "🔵 En curso"
 
     return "🟢 Disponible"
@@ -378,7 +436,14 @@ def generar_tabla(salida: Path, dry_run: bool = False):
         estado_previo = previo.get("estado", "")
 
         # Calcular estado y progreso
-        estado = inferir_estado(x, pendientes, dudas, estado_previo)
+        estado = inferir_estado(
+            x,
+            pendientes,
+            dudas,
+            estado_previo,
+            previo.get("agenteactual", ""),
+            previo.get("ultimaactividad", ""),
+        )
         progreso = f"{x}/{total_items_modulo}" if total_items_modulo > 0 else "0/0"
 
         # Conservar la anotación manual del Estado si el emoji coincide
