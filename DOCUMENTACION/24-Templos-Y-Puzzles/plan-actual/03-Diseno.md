@@ -78,3 +78,15 @@ El sistema respeta "nunca arbitrarios": toda pista está anclada a una regla del
 - Framework datos-driven: cada puzzle = archivo JSON/YAML serializable; runtime ≤ 1 ms por tick (sin allocations).
 - Validación en Editor (armado) + tests automáticos por familia + playtests externos con métricas de tiempo/pistas/abandonos.
 - Suite de integración con M66 (reinicio), M08 (terreno alterado), M13 (framework emisor→receptor, dependencia).
+
+## Semantica de objetivo y solucion (iter. 1 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+**Decision aprobada por el director (canal DeepSeek/64).** Resuelve el riesgo 5.2 de la nota de QA de Hy3 (Log 314): la semantica de `recalcular()` era ambigua para puzzles multi-receptor.
+
+- **Objetivo T:** se declara en los datos (`objetivo: [ids]`) y es el conjunto de emisores que deben estar ON. El puzzle se **completa** cuando el estado `S == T` — NO cuando "todas las reglas se cumplen". La conjuncion de todas las reglas queda como semantica legacy de la iter. 0; NO gobierna el completado datos-driven.
+- **Solucion:** un conjunto `M` de emisores es una solucion si **activa el receptor objetivo** (satisface al menos una regla). Es **minima** si ningun subconjunto propio la activa. `PuzzleDef.soluciones_minimas(def)` cuenta las soluciones minimas por fuerza bruta `2^n` con `n <= 16`; si un puzzle declara mas emisores, `validar_def()` lo **rechaza** en vez de silenciar la verificacion.
+- **Justicia (garantia de "puzzles justos"):** un puzzle es justo si tiene **exactamente 1** solucion minima y esa solucion == T. `validar_def(def)` devuelve `[]` en ese caso; si no, lista los motivos ("soluciones minimas = 2", "el objetivo declarado [...] no es la solucion minima unica [...]", "emisor huerfano N", "regla usa emisor inexistente N", "receptores multiples", etc.).
+- **Receptor unico:** en iter. 1 todas las reglas comparten un unico receptor (el objetivo debe ser unico); `validar_def` lo exige. Multi-receptor queda para iter. 2+.
+- **Casi solucion:** `PuzzleRoom.esta_a_casi_solucion()` = distancia de Hamming entre `S` y `T` igual a 1 (feedback sutil, item 148).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1407. Codigo: `scripts/templos/puzzle_def.gd`, `scripts/templos/test_puzzle_datos.gd`; datos `data/templos/puzzles/presion/`.

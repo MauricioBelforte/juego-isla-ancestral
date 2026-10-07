@@ -29,9 +29,9 @@
 - [ ] Definir Regla (conector declarativo con condiciones) [M]
 - [ ] Definir EstadoSala (vector de emisores) [M]
 - [ ] Definir Objetivo único verificable [M]
-- [ ] Definir Validador de arbitrariedad (1 solución alcanzable) [C]
+- [x] Definir Validador de arbitrariedad (1 solución alcanzable) [C] — `PuzzleDef.soluciones_minimas()` exige 1; detector de ambigüedad probado EN ROJO (Log 1407)
 - [x] Definir serialización JSON/YAML de cada puzzle [M]
-- [ ] Definir ejecución datos-driven (intérprete, no código por sala) [M]
+- [x] Definir ejecución datos-driven (intérprete, no código por sala) [M] — `PuzzleDef.a_puzzle_room()` + datos `data/templos/puzzles/presion/*.json`; 2 puzzles cargados y validados (Log 1407)
 - [ ] Documentar el framework en el plan-actual [M]
 
 ## Familia: puzzles de luz
@@ -72,8 +72,8 @@
 
 ## Familia: puzzles de presión
 
-- [ ] Definir placas con umbral de peso [M]
-- [ ] Definir peso estático (cajas) y dinámico (jugador) [M]
+- [x] Definir placas con umbral de peso [M] — `PuzzleEmisor.umbral_peso` + `recibir_peso()`; umbral declarado en datos (Log 1407)
+- [x] Definir peso estático (cajas) y dinámico (jugador) [M] — `presion_02.json`: placa estática umbral 3 + dinámica umbral 1 (Log 1407)
 - [ ] Definir elevadores por placas [S]
 - [ ] Definir puertas por placas encadenadas [S]
 - [ ] Definir sin fallo punitivo (reinicio del slot, M66) [S]
@@ -141,7 +141,7 @@
 
 ## Anti-arbitrariedad, anti-ambigüedad y métricas
 
-- [x] Implementar validación de arbitrariedad en Editor [C]
+- [?] Implementar validación de arbitrariedad en Editor [C] — **alcance futuro (EditorPlugin): no existe plugin de Editor; bajado de [x] por sobre-cierre (Logs 1402/1407)**
 - [x] Implementar validación de arbitrariedad en tests (falla → no build) [M]
 - [x] Implementar detección de 2+ soluciones (ambigüedad) [M]
 - [x] Implementar detección de regla desconectada [M]
@@ -223,7 +223,7 @@
 - `puzzle_invariant.gd` (M66) delega la validación concreta a M24/M26 (`_check()` siempre true). El framework de M24 ahora expone `validar()` lista para ser usada por ese invariante.
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.
-**Totales:** 128 ítems · Completados: 31 · Pendientes: 97 · No resueltos: 0.
+**Totales:** 128 ítems · Completados: 34 · Pendientes: 93 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].
@@ -231,3 +231,15 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
 Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_puzzles.gd 0/0` = scripts/templos/ (puzzles) en disco.
+
+
+## Iteracion 1 — framework datos-driven + validador de unicidad + familia presion (2026-10-07)
+
+**Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy | **Log:** 1407 | **Plan:** aprobado por el director (canal DeepSeek/64).
+
+- Nuevos: `game/isla-ancestral/scripts/templos/puzzle_def.gd` (PuzzleDef: cargar / validar_def / soluciones_minimas / solucion_minima / completado_por / a_puzzle_room) y `test_puzzle_datos.gd` (42 checks, 0 fallos, EXIT 0 x3; piso CHECKS_MINIMOS=42 medido en verde; guardian probado EN ROJO por 3 inyecciones; detector de ambiguedad probado EN ROJO por inyeccion).
+- Datos: `data/templos/puzzles/presion/presion_01.json` y `presion_02.json` (formato {emisores, reglas, objetivo}; umbral de peso por emisor).
+- Ediciones ADITIVAS (nada renombrado ni quitado): `puzzle_room.gd` (campo objetivo + vector_objetivo / distancia_objetivo / estado_igual_objetivo / esta_a_casi_solucion) y `puzzle_emisor.gd` (umbral_peso + recibir_peso).
+- Regresion: test_puzzles.gd 0 fallos, test_templo_headless.gd 4/0, test_templo_m26.gd 92/0 — todos EXIT 0.
+- Semantica decidida con el director: el objetivo T se declara en datos y completa con S == T (no "todas las reglas"). Ver `03-Diseno.md`, seccion "Semantica de objetivo y solucion".
+- Conteo MEDIDO: 34 completados / 1 con dudas / 93 pendientes = 128.

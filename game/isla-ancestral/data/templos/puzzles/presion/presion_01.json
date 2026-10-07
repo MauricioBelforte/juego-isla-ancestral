@@ -1,0 +1,14 @@
+{
+	"id": "presion_01",
+	"familia": "presion",
+	"schema_version": 1,
+	"descripcion": "Dos placas de presion: la puerta abre solo con ambas pisadas a la vez (peso dinamico del jugador, umbral 1).",
+	"emisores": [
+		{"id": 0, "tipo": "placa", "etiqueta": "placa_norte", "umbral_peso": 1},
+		{"id": 1, "tipo": "placa", "etiqueta": "placa_sur", "umbral_peso": 1}
+	],
+	"reglas": [
+		{"emisores": [0, 1], "receptor": "puerta_presion"}
+	],
+	"objetivo": [0, 1]
+}

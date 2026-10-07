@@ -21,9 +21,16 @@ var sala: PuzzleRoom = null
 @export var id: int = 0
 @export var etiqueta_export: String = ""
 
+## M24 iter. 1 (DeepSeek-V4.1-Flash): umbral de peso para placas (items 75/76).
+## 0 = emisor de accion directa (palanca/golpe). >0 = placa: se activa cuando el
+## peso encima alcanza el umbral (1 = jugador / peso dinamico; 3 = caja / estatico).
+var umbral_peso: int = 0
+@export var umbral_peso_export: int = 0
+
 func _ready() -> void:
 	emisor_id = id
 	etiqueta = etiqueta_export
+	umbral_peso = umbral_peso_export
 
 ## El jugador golpea el emisor con una herramienta (M13) — alterna el estado
 func recibir_golpe() -> void:
@@ -35,5 +42,15 @@ func recibir_golpe() -> void:
 ## Una placa se activa por peso (jugador o bloque encima)
 func set_activo(valor: bool) -> void:
 	activado = valor
+	if sala != null:
+		sala.set_emisor(emisor_id, activado)
+
+## M24 iter. 1 (DeepSeek-V4.1-Flash): peso encima de la placa. Se activa si el peso
+## alcanza `umbral_peso` (si el umbral es 0, basta con peso > 0). Actualiza la sala.
+func recibir_peso(peso: int) -> void:
+	if umbral_peso > 0:
+		activado = peso >= umbral_peso
+	else:
+		activado = peso > 0
 	if sala != null:
 		sala.set_emisor(emisor_id, activado)

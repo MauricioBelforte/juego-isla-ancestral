@@ -1,0 +1,15 @@
+{
+	"id": "presion_02",
+	"familia": "presion",
+	"schema_version": 1,
+	"descripcion": "Placa de peso estatico (caja, umbral 3) + placa de peso dinamico (jugador, umbral 1) + palanca: las tres a la vez abren la puerta.",
+	"emisores": [
+		{"id": 0, "tipo": "placa", "etiqueta": "placa_peso_estatico", "umbral_peso": 3},
+		{"id": 1, "tipo": "placa", "etiqueta": "placa_peso_dinamico", "umbral_peso": 1},
+		{"id": 2, "tipo": "palanca", "etiqueta": "palanca_override", "umbral_peso": 0}
+	],
+	"reglas": [
+		{"emisores": [0, 1, 2], "receptor": "puerta_presion"}
+	],
+	"objetivo": [0, 1, 2]
+}

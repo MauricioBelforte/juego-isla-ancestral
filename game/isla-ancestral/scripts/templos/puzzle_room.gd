@@ -27,6 +27,11 @@ var completada: bool = false
 ## Uso: sala.al_cambiar = func(activos): puerta_evaluar(activos)
 var al_cambiar: Callable = Callable()
 
+## M24 iter. 1 (DeepSeek-V4.1-Flash): objetivo T declarado en datos = conjunto de
+## ids de emisores que deben estar ON. La sala se completa cuando S == T.
+## (Semantica decidida con el director; ver PuzzleDef y 03-Diseno.md.)
+var objetivo: Array = []
+
 func _init(ids_emisores: Array = []) -> void:
 	for id in ids_emisores:
 		emisores[id] = false
@@ -95,6 +100,35 @@ func progreso() -> int:
 		if cumple:
 			n += 1
 	return n
+
+## M24 iter. 1 (DeepSeek-V4.1-Flash): objetivo T declarado. Solo lectura (copia).
+func vector_objetivo() -> Array:
+	return objetivo.duplicate()
+
+## Distancia de Hamming entre el estado actual S y el objetivo T: cuantos emisores
+## difieren de lo declarado en objetivo (ON<->OFF). 0 = completado.
+func distancia_objetivo() -> int:
+	var objetivo_set: Dictionary = {}
+	for id in objetivo:
+		objetivo_set[int(id)] = true
+	var d := 0
+	for id in emisores:
+		var esperado: bool = objetivo_set.has(int(id))
+		if bool(emisores[id]) != esperado:
+			d += 1
+	for id in objetivo_set:
+		if not emisores.has(int(id)):
+			d += 1
+	return d
+
+## True si el estado actual S coincide exactamente con el objetivo T.
+func estado_igual_objetivo() -> bool:
+	return distancia_objetivo() == 0
+
+## Feedback "casi solucion": el estado esta a UN paso (1 emisor) del objetivo.
+## M24 iter. 1 — item 148 del checklist. Requiere que `objetivo` este declarado.
+func esta_a_casi_solucion() -> bool:
+	return distancia_objetivo() == 1
 
 ## VALIDACION DE NO ARBITRARIEDAD: la suite exige que el puzzle tenga UNA solucion.
 ## Un puente trivial no basta: al menos un emisor debe poder estar OFF en la solucion.

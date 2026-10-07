@@ -60,3 +60,23 @@ public class ValidadorArbitrariedad
 - El módulo queda **DELEGABLE**: se integra con M13 (framework emisor→receptor, dependencia), M66 (reinicio), M25/M26 (salas) y M43 (cues).
 - Clave: el Validador de arbitrariedad (1 solución única) es la garantía de "puzzles justos".
 - Al implementar, actualizar fila 24 del CHECKLIST-GLOBAL y crear el Log correspondiente.
+
+## Implementacion real en Godot (iter. 1 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+Las rutas C# de arriba son **diseno heredado de Unity** (no existen en el proyecto). La implementacion viva del framework emisor->receptor esta en `game/isla-ancestral/scripts/templos/`:
+
+| Archivo | Contenido | Iter. |
+|---|---|---|
+| `scripts/templos/puzzle_room.gd` | `PuzzleRoom`: vector S, reglas, `recalcular()`, `validar()`. Iter. 1 anade (aditivo) el campo `objetivo`, `vector_objetivo()`, `distancia_objetivo()`, `estado_igual_objetivo()`, `esta_a_casi_solucion()`. | Hy3 / DeepSeek |
+| `scripts/templos/puzzle_emisor.gd` | `PuzzleEmisor`: golpe / placa. Iter. 1 anade (aditivo) `umbral_peso` + `recibir_peso(peso)`. | Hy3 / DeepSeek |
+| `scripts/templos/puzzle_puerta.gd` | `PuzzlePuerta`: receptor; abre el sello de voxels. | Hy3 |
+| `scripts/templos/puzzle_def.gd` | **NUEVO iter. 1.** `PuzzleDef` (RefCounted + static): `cargar`, `ids_emisores`, `ids_objetivo`, `validar_def`, `soluciones_minimas`, `solucion_minima`, `completado_por`, `a_puzzle_room`, `umbral_peso_de`. Interprete datos-driven + validador de unicidad real. | DeepSeek |
+| `scripts/templos/test_puzzles.gd` | Suite heredada del framework (0 fallos). | Hy3 |
+| `scripts/templos/test_puzzle_datos.gd` | **NUEVO iter. 1.** Suite headless del interprete datos-driven: 42 checks, 0 fallos, EXIT 0 x3; piso `CHECKS_MINIMOS` medido; guardian probado EN ROJO por 3 inyecciones; detector de ambiguedad probado EN ROJO. | DeepSeek |
+| `data/templos/puzzles/presion/presion_01.json`, `presion_02.json` | **NUEVOS iter. 1.** 2 puzzles de la familia presion en formato `{emisores, reglas, objetivo}` (umbral de peso por emisor). | DeepSeek |
+
+**Formato de datos:** `{ "id", "familia", "schema_version", "emisores": [{"id","tipo","etiqueta","umbral_peso"}], "reglas": [{"emisores":[ids],"receptor":"..."}], "objetivo": [ids] }`.
+
+**Contrato:** el codigo es solo el interprete; cada puzzle se define en datos (regla 1 de esta seccion). El validador de unicidad (`soluciones_minimas == 1`) corre en tests; el gate de CI queda **pendiente de visto bueno de s2** (dueno de `quality.yml`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1407.
