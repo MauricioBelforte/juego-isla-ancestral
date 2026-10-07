@@ -8,11 +8,19 @@ extends RefCounted
 ## renombra a slot_N.save (rename atómico del SO). Ante cualquier fallo el
 ## save anterior queda intacto.
 ##
-## Formato del archivo (DETERMINISTA para el checksum):
-##   línea 1: checksum SHA-256 hex del payload_str
+## Formato del archivo (DETERMINISTA para el token de integridad):
+##   línea 1: token de integridad del payload_str
 ##   línea 2+: payload JSON (la cadena EXACTA tal como se serializó)
-## El checksum se calcula sobre el payload_str literal, así que re-serializar
+## El token se calcula sobre el payload_str literal, así que re-serializar
 ## no introduce indeterminismo (cualquier byte alterado se detecta).
+##
+## BUG-115 (fix real): el token es un HMAC-SHA256 con clave por instalación
+## (`hmac256:<hex>`). Antes era un SHA-256 del payload EN CLARO sin secreto, así
+## que cualquiera podía editar el save y recalcular el checksum. El formato es
+## RETROCOMPATIBLE: un token SIN prefijo se interpreta como el SHA-256 legado y
+## se sigue aceptando (los saves previos al fix siguen cargando). La clave vive
+## en `user://saves/clave_integridad.key`; si se pierde, sólo dejan de verificar
+## los saves HMAC (los legados no dependen de la clave).
 
 ## Prefijo de archivos temporales
 const TMP_SUFFIX: String = ".tmp"
@@ -22,9 +30,26 @@ const SAVE_SUFFIX: String = ".save"
 
 ## Cap de tamano (bytes) para leer un documento de save a memoria (BUG-109).
 ## Un save real ronda los pocos KB (~4.6 KB medidos); 2 MB da ~450x de margen sin
-## permitir que un archivo fabricado (el checksum no es anti-trampas, ver BUG-115)
-## agote la memoria al leerse entero.
+## permitir que un archivo fabricado agote la memoria al leerse entero. El cap se
+## aplica ANTES de leer, así que no depende del token de integridad (que sólo se
+## verifica después de tener el contenido en memoria).
 const MAX_DOCUMENT_BYTES: int = 2 * 1024 * 1024
+
+## Prefijo del token de integridad HMAC-SHA256 (BUG-115). Un token SIN este
+## prefijo es un SHA-256 legado (formato previo al fix) y se acepta igual.
+const CHECKSUM_PREFIX: String = "hmac256:"
+
+## Longitud (bytes) de la clave HMAC por instalación.
+const KEY_LEN: int = 32
+
+## Ruta de la clave HMAC por instalación (hex de KEY_LEN bytes). Vive en la raíz
+## de `user://`, FUERA de SAVE_DIR: las suites de prueba y `_delete_save_dir()`
+## borran el contenido de `user://saves`, y la clave debe sobrevivir a eso (si no,
+## los saves escritos antes del borrado quedarían sin poder verificarse).
+const KEY_PATH: String = "user://clave_integridad.key"
+
+## Caché de la clave en memoria (evita releer el archivo en cada escritura).
+static var _clave_cache: PackedByteArray = PackedByteArray()
 
 ## Lee un documento verificando existencia y tamano ANTES de cargarlo entero a
 ## memoria. Devuelve "" si no existe, no se puede abrir o excede el cap (BUG-109).
@@ -43,11 +68,9 @@ static func read_document(path: String) -> String:
 
 ## Calcula el SHA-256 en hexa de una cadena usando HashingContext.
 ##
-## DEUDA (BUG-115): el checksum se calcula sobre el payload EN CLARO y no hay
-## secreto (ni HMAC ni cifrado), así que solo protege contra bit-rot, NO contra
-## manipulación: cualquiera puede editar el payload y recalcularlo. Documentado
-## como pendiente en 04-Codigo.md:43 ("Cifrado para datos sensibles"). NO se
-## arregla acá: es un cambio de diseño (secreto + migración de saves), no un fix.
+## LEGADO (BUG-115): formato previo al fix, sin secreto. Se conserva SOLO para
+## poder VERIFICAR saves escritos antes del fix (retrocompatibilidad). NO se usa
+## para escribir: `build_file_content()` emite HMAC-SHA256.
 static func sha256_hex_str(s: String) -> String:
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
@@ -58,31 +81,99 @@ static func sha256_hex_str(s: String) -> String:
 		hex += "%02x" % b
 	return hex
 
+## Carga (o genera una vez) la clave HMAC por instalación.
+##
+## BUG-115: la clave vive en `user://saves/clave_integridad.key` como hex de
+## KEY_LEN bytes aleatorios de Crypto. Si el archivo falta se genera; si está
+## corrupto se regenera (con aviso: los saves HMAC previos dejan de verificar,
+## no hay forma de recuperarlos sin la clave). Ante fallo de escritura se
+## devuelve una clave efímera de sesión (coherente mientras dure el proceso).
+static func _cargar_o_generar_clave() -> PackedByteArray:
+	if _clave_cache.size() == KEY_LEN:
+		return _clave_cache
+	if FileAccess.file_exists(KEY_PATH):
+		var hex := FileAccess.get_file_as_string(KEY_PATH).strip_edges()
+		if hex.length() == KEY_LEN * 2 and hex.is_valid_hex_number(false):
+			_clave_cache = hex.hex_decode()
+			return _clave_cache
+		push_error("[SAVE] Clave de integridad corrupta en %s; se regenera (BUG-115)" % KEY_PATH)
+	var clave: PackedByteArray = Crypto.new().generate_random_bytes(KEY_LEN)
+	var f := FileAccess.open(KEY_PATH, FileAccess.WRITE)
+	if f == null:
+		push_error("[SAVE] No se pudo persistir la clave de integridad; se usa una efímera (BUG-115)")
+		_clave_cache = clave
+		return clave
+	f.store_string(clave.hex_encode())
+	f.close()
+	_clave_cache = clave
+	return clave
+
+## Comparación en tiempo (razonablemente) constante de dos cadenas.
+static func _igualdad_constante(a: String, b: String) -> bool:
+	if a.length() != b.length():
+		return false
+	var diff := 0
+	for i in a.length():
+		diff |= a.unicode_at(i) ^ b.unicode_at(i)
+	return diff == 0
+
+## Firma un payload con HMAC-SHA256 y la clave por instalación (BUG-115).
+## Devuelve `hmac256:<hex>`, o "" si HMACContext no pudo iniciarse (el llamador
+## debe tratar "" como fallo; `build_file_content` produciría un documento que
+## `parse_document` rechaza, así que `write_atomic` no llega a renombrar).
+static func firmar_payload(payload_str: String) -> String:
+	var clave := _cargar_o_generar_clave()
+	var ctx := HMACContext.new()
+	if ctx.start(HashingContext.HASH_SHA256, clave) != OK:
+		push_error("[SAVE] HMACContext.start falló; no se puede firmar (BUG-115)")
+		return ""
+	ctx.update(payload_str.to_utf8_buffer())
+	return CHECKSUM_PREFIX + ctx.finish().hex_encode()
+
+## Verifica el token de integridad de un payload. Acepta el HMAC nuevo
+## (`hmac256:<hex>`) y el SHA-256 legado (64 hex sin prefijo) — BUG-115.
+static func verificar_checksum(payload_str: String, checksum: String) -> bool:
+	if checksum.begins_with(CHECKSUM_PREFIX):
+		var esperado := firmar_payload(payload_str)
+		return esperado != "" and _igualdad_constante(esperado, checksum)
+	return _igualdad_constante(sha256_hex_str(payload_str), checksum)
+
 ## Devuelve el payload serializado a JSON (string canónico del momento).
 static func serialize_payload(payload: Dictionary) -> String:
 	return JSON.stringify(payload)
 
-## Construye el contenido completo del archivo: checksum\npayload
+## Construye el contenido completo del archivo: token\npayload
+## El token es el HMAC-SHA256 (BUG-115), retrocompatible en lectura.
 static func build_file_content(payload_str: String) -> String:
-	var checksum := sha256_hex_str(payload_str)
-	return checksum + "\n" + payload_str
+	return firmar_payload(payload_str) + "\n" + payload_str
 
 ## Verifica y parsea el contenido de un archivo de save.
-## Devuelve { ok: bool, reason: String, checksum: String, payload_str: String, payload: Variant }
+## Devuelve { ok: bool, reason: String, checksum: String, payload_str: String,
+##           payload: Variant, legacy: bool }
+##
+## `legacy == true` significa que el token era un SHA-256 en claro (save previo
+## al fix BUG-115). Se acepta por RETROCOMPATIBILIDAD — regla dura del proyecto
+## "nunca degradar/inutilizar un save". LIMITACIÓN CONOCIDA Y DELIBERADA: como el
+## token legado se sigue aceptando, un atacante con acceso al sistema de archivos
+## puede reemplazar la línea 1 por `sha256(payload)` y el documento verifica. Es
+## decir: el HMAC NO convierte el save en a prueba de manipulación local — la
+## clave vive en `user://` junto a los saves y es legible. Lo que sí aporta el
+## fix es (a) detectar corrupción/tampering no reproducido por el algoritmo
+## público en los saves NUEVOS y (b) exponer el caso legado vía este flag.
 static func parse_document(content: String) -> Dictionary:
 	if content.is_empty():
-		return {"ok": false, "reason": "contenido vacío", "checksum": "", "payload_str": "", "payload": null}
+		return {"ok": false, "reason": "contenido vacío", "checksum": "", "payload_str": "", "payload": null, "legacy": false}
 	var newline := content.find("\n")
 	if newline <= 0:
-		return {"ok": false, "reason": "formato inválido", "checksum": "", "payload_str": "", "payload": null}
+		return {"ok": false, "reason": "formato inválido", "checksum": "", "payload_str": "", "payload": null, "legacy": false}
 	var checksum := content.substr(0, newline)
 	var payload_str := content.substr(newline + 1)
-	if sha256_hex_str(payload_str) != checksum:
-		return {"ok": false, "reason": "checksum no coincide", "checksum": checksum, "payload_str": payload_str, "payload": null}
+	if not verificar_checksum(payload_str, checksum):
+		return {"ok": false, "reason": "checksum no coincide", "checksum": checksum, "payload_str": payload_str, "payload": null, "legacy": false}
 	var payload: Variant = JSON.parse_string(payload_str)
 	if typeof(payload) != TYPE_DICTIONARY:
-		return {"ok": false, "reason": "payload no es JSON objeto", "checksum": checksum, "payload_str": payload_str, "payload": null}
-	return {"ok": true, "reason": "", "checksum": checksum, "payload_str": payload_str, "payload": payload}
+		return {"ok": false, "reason": "payload no es JSON objeto", "checksum": checksum, "payload_str": payload_str, "payload": null, "legacy": false}
+	return {"ok": true, "reason": "", "checksum": checksum, "payload_str": payload_str, "payload": payload, "legacy": not checksum.begins_with(CHECKSUM_PREFIX)}
 
 ## Escribe un payload de forma atómica en el slot dado.
 ## Devuelve true si se escribió correctamente, false ante cualquier fallo.

@@ -184,7 +184,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-112 | Rotación de backups ignora el retorno de `DirAccess.rename_absolute` (rename fallido no se loguea ni propaga) | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-113 | Guardado de cierre (`NOTIFICATION_WM_CLOSE_REQUEST`) bypassa rotación y no chequea `_writing` (latente si M61 es async) | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-114 | `SaveWriter.write_atomic` y afines no validan rango de slot (1..SLOT_COUNT) — defensa en profundidad ausente | M59 | ⚪ Trivial | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
-| BUG-115 | Deuda informativa agrupada: checksum sin secreto (no anti-trampas) + `SaveSchema.validate()` vacua contra saves reales + tipos ausentes en campos no críticos | M59 | ⚪ Trivial | [x] **Documentado — deuda sin fix** (Log 1382, `3ad8630`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
+| BUG-115 | Token de integridad sin secreto (no anti-trampas) + `SaveSchema.validate()` vacua contra saves reales + tipos ausentes en campos no críticos | M59 | ⚪ Trivial | [→] **Parcial** — validate + tipos RESUELTOS con sonda roja (38/0 ×3); integridad HMAC-SHA256 implementada, la retrocompatibilidad con el token legado mantiene un camino de downgrade (limitación residual documentada) (Log 1397) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
 | BUG-116 | El bloqueo de guardado durante la pesca es una feature MUERTA: `SaveManager` conecta a `Fishing.sesion_iniciada`, señal que NO existe (el guard `has_signal` siempre falla) → el auto-save no se bloquea en el minijuego. La misma arista mantiene el SCC de 7 (BUG-069) | M59/M34 (arquitectura M62) | 🟡 Menor | [→] En progreso — fix (B) por DeepSeek-V4.1-Flash (pase T-D9 2) | DeepSeek-V4.1-Flash | 2026-10-06 |
 | BUG-117 | **SCRIPT ERROR latente: "Invalid call. Nonexistent 'bool' constructor"** — causa raíz: **`bool(null)` (Variant Nil) en Godot 4.7.2**, NO `bool(x,y)` de 2 args. Línea exacta: `interaction_manager.gd:669` `bool(ui.get("hay_modal"))` (backtrace runtime confirmado vía pop_layer ui_manager.gd:257). Detectado por la suite `test_settings_audio_roundtrip.gd` durante la QA §21.8 de M89 (agnes, 2026-10-06). **NO es de M89** (su suite propia 48/0 está limpia) | M66-Anti-Softlock / interacciones (NO M53/M91 audio como se reportó primero) | 🟠 Mayor | [ ] Abierto — causa raíz aislada por atria-dawn-s2 (2026-10-07); fix sugerido: `ui.get("hay_modal", false)` (Object.get acepta default en 4.x). Dueño M66 pendiente | pendiente | 2026-10-06 |
 
@@ -2084,7 +2084,7 @@ Se crea el archivo fuera del contrato de 3 slots sin error.
 - **Módulo(s) afectado(s):** M59 (Guardado) — scripts/saving/save_writer.gd, save_schema.gd, scripts/time/game_clock.gd
 - **Severidad:** ⚪ Trivial
 - **Prioridad sugerida:** Baja
-- **Estado:** [x] **Documentado — deuda informativa sin fix** (notas `DEUDA (BUG-115)` en el codigo de M59; no hay comportamiento arreglado que afirmar) (DeepSeek-V4.1-Flash, Log 1382, `3ad8630`).
+- **Estado:** [→] **Parcial** — validate() y tipos RESUELTOS con sonda roja probada por inyección; integridad HMAC-SHA256 implementada con retrocompatibilidad del token legado (limitación residual documentada, ver Resolución iter. 4). (DeepSeek-V4.1-Flash, Log 1397)
 
 **Descripción del problema:**
 Tres hallazgos informativos de la auditoría L-03, agrupados en una sola entrada porque son deuda conocida y no bugs activos:
@@ -2134,6 +2134,17 @@ Sistema funcional para single-player, pero sin integridad contra manipulación y
 - [x] Log del proyecto: `Logs/1382-M59-cola-bug112-113-114-115-grupo-trivial_2026-10-06_17-05-10.md`
 - [x] Evidencia: sin sonda (deuda); rojo por inyeccion = n/a (no hay comportamiento arreglado).
 - [x] Verificado por: Atria-Dawn-Preview (director) — verifico los commits y los Logs contra disco (canal 56, 2026-10-06 17:19).
+
+**Resolución iter. 4 — fix real (2026-10-06, DeepSeek-V4.1-Flash — autorizada por el director, canal 60 §4):**
+- [x] Cómo se corrigió:
+  - **(2) validate vacua → RESUELTO.** `save_schema.gd::validate()` ahora valida **ambos dialectos** de `time`, solo las claves PRESENTES: real de M29 (`hora` 0..23, `minuto` 0..59, `dia` ≥ 1, `mes` 1..12, `anio` ≥ 1, `acumulador` finito en [0, `MAX_CLOCK_ACUMULADOR`=3600]) y schema (`hour`, `minute`, `day`, `season`). El chequeo muerto de `time.day` desapareció. NO se duplica el máximo real de `dia` (28, constante de M29) para no acoplar M59 a otro módulo. **No se tocó `game_clock.gd`.**
+  - **(3) tipos ausentes → RESUELTO.** `profile_id` debe ser String (antes solo presencia); `meta.last_saved` String y `meta.playtime_seconds` numérico ≥ 0. El `acumulador` de reloj se acota en la VALIDACIÓN (M59) en vez de clampearse en M29.
+  - **(1) checksum sin secreto → PARCIAL.** `save_writer.gd` emite `hmac256:<hex>` (HMAC-SHA256 con clave por instalación en `user://clave_integridad.key`, 32 bytes de `Crypto.generate_random_bytes`, cacheada en `static var`). La clave vive en la RAÍZ de `user://`, **fuera** de `user://saves`, porque las suites y `_delete_save_dir()` borran ese directorio. `verificar_checksum()` acepta HMAC y el SHA-256 legado (retrocompatibilidad); `parse_document()` expone `legacy: bool`. La autoverificación de `write_atomic()` sigue simétrica.
+- [x] Archivos/commits modificados: `game/isla-ancestral/scripts/saving/{save_writer.gd,save_schema.gd,test_checksum_hmac.gd}`, `.github/workflows/quality.yml`, `DOCUMENTACION/59-Guardado/plan-actual/04-Codigo.md`.
+- [x] Log del proyecto: `Logs/1397-M59-BUG115-hmac-validacion-no-vacua_2026-10-06_21-39-49.md`
+- [x] Evidencia: sonda nueva `test_checksum_hmac.gd` — **38 checks, 0 fallos, EXIT 0 ×3** (piso `CHECKS_MINIMOS = 38` MEDIDO). Guardián probado **EN ROJO por inyección** (2 inyecciones, revertidas y verificadas con `grep`): `verificar_checksum()` siempre `true` → **3 fallos, EXIT 1**; `_validar_entero_rango()` anulada → **4 fallos, EXIT 1**. Regresión: **14 suites EXIT 0**. Gate nuevo en `quality.yml` (`|| FAIL=1`).
+- [!] **LIMITACIÓN RESIDUAL (por qué NO es `[x] Resuelto`):** el token legado se sigue aceptando (regla dura: no inutilizar saves existentes) → un atacante con acceso al sistema de archivos puede reemplazar la línea 1 por `sha256(payload)` y el documento verifica; además la clave HMAC vive en `user://` y es legible. El HMAC **no** vuelve el save a prueba de manipulación local. Verificado y con valor real: (a) los saves nuevos no se re-firman sin la clave con el algoritmo público, (b) el caso legado queda expuesto vía `legacy`, (c) la validación de esquema ya no es vacua.
+- [ ] Verificado por: pendiente (QA §21.8 de tercero — el autor no se auto-verifica).
 
 ---
 
@@ -3627,9 +3638,11 @@ Bugs abiertos (sección 6, todos `[?] Delegado`):
 | BUG-112 | ⚪ Trivial | Rotación ignora retornos de `rename_absolute` | DeepSeek-V4.1-Flash (M59) |
 | BUG-113 | ⚪ Trivial | Guardado de cierre bypassa rotación y `_writing` | DeepSeek-V4.1-Flash (M59, junto con M61 async) |
 | BUG-114 | ⚪ Trivial | `write_atomic` no valida rango de slot | DeepSeek-V4.1-Flash (M59) |
-| BUG-115 | ⚪ Trivial | Deuda informativa: checksum no anti-trampas + validate vacua + tipos | DeepSeek-V4.1-Flash (M59, junto con M72 logros) |
+| BUG-115 | ⚪ Trivial | Token sin secreto (HMAC implementado, retrocompatibilidad legado) + validate vacua + tipos — iter. 4 | DeepSeek-V4.1-Flash (M59, junto con M72 logros) |
 
 **Cierre de la cola (2026-10-06, DeepSeek-V4.1-Flash — canal 56):** los 8 quedaron **resueltos o reclasificados con evidencia**: 6 cerrados con sonda roja probada (BUG-108/109/110/112/113/114), 1 reclasificado (BUG-111: falso positivo + **BUG-111-bis** real resuelto) y 1 documentado sin fix (BUG-115, deuda informativa). Ver las 8 filas de la tabla principal y las secciones de detalle de arriba.
+
+**Actualización iter. 4 (2026-10-06, DeepSeek-V4.1-Flash — Log 1397, canal 60 §4):** BUG-115 pasa de "documentado sin fix" a **[→] Parcial**: validate() y tipos de campos no críticos RESUELTOS con sonda roja (`test_checksum_hmac.gd`, 38/0 ×3, guardián probado en rojo por 2 inyecciones); integridad HMAC-SHA256 implementada con clave por instalación, manteniendo la aceptación del token legado por retrocompatibilidad (limitación residual documentada: no es anti-trampas contra un atacante con acceso al sistema de archivos).
 
 **Por qué delego y no resuelvo:** el director (atria-dawn s3) verificó los 8 hallazgos contra disco
 y todos son reales y reproducibles, pero el permiso de escritura de la auditoría era de solo

@@ -22,6 +22,13 @@ const SAVE_DIR: String = "user://saves"
 ## SaveWriter no validaba nada.
 const SLOT_COUNT: int = 3
 
+## Cota superior de sanidad para `time.acumulador` (segundos acumulados del reloj
+## de juego, BUG-115). El proveedor real (M29, game_clock.gd) drena el acumulador
+## mientras sea >= 1.0, así que en operación normal queda en [0, 1). 3600 s (1 h
+## de juego) es una cota holgada que sólo rechaza valores absurdos o corruptos
+## (NaN, INF, 1e300) sin acoplarse al detalle interno de M29.
+const MAX_CLOCK_ACUMULADOR: float = 3600.0
+
 ## Devuelve true si `slot` está en el rango válido 1..SLOT_COUNT (BUG-114).
 static func slot_valido(slot: int) -> bool:
 	return slot >= 1 and slot <= SLOT_COUNT
@@ -117,6 +124,32 @@ static func _es_entero(v: Variant) -> bool:
 		return is_finite(f) and f == floorf(f) and absf(f) <= 9007199254740992.0
 	return false
 
+## Devuelve true si el valor es un número (int o float).
+static func _es_numero(v: Variant) -> bool:
+	return typeof(v) == TYPE_INT or typeof(v) == TYPE_FLOAT
+
+## Agrega un error si `clave` está presente en `d` y no es un entero dentro de
+## [minimo, maximo]. Ausente = OK (no acopla la validación al dialecto).
+static func _validar_entero_rango(d: Dictionary, clave: String, minimo: int, maximo: int, errors: Array[String]) -> void:
+	if not d.has(clave):
+		return
+	if not _es_entero(d[clave]):
+		errors.append("time.%s no es int" % clave)
+		return
+	var v := int(d[clave])
+	if v < minimo or v > maximo:
+		errors.append("time.%s fuera de rango (%d; válido %d..%d)" % [clave, v, minimo, maximo])
+
+## Agrega un error si `clave` está presente en `d` y no es un entero >= minimo.
+static func _validar_entero_min(d: Dictionary, clave: String, minimo: int, errors: Array[String]) -> void:
+	if not d.has(clave):
+		return
+	if not _es_entero(d[clave]):
+		errors.append("time.%s no es int" % clave)
+		return
+	if int(d[clave]) < minimo:
+		errors.append("time.%s inválido (%d; mínimo %d)" % [clave, int(d[clave]), minimo])
+
 ## Completa con los defaults del schema toda SECCION de nivel superior que falte
 ## en un payload cargado. NO sobrescribe nada existente.
 ##
@@ -168,9 +201,13 @@ static func validate(payload: Dictionary) -> Array[String]:
 	elif int(payload["schema_version"]) < 1:
 		errors.append("schema_version inválido: %s" % payload["schema_version"])
 
-	# profile_id debe existir (puede ser vacío en slot nuevo)
+	# profile_id debe existir (puede ser vacío en slot nuevo) y ser String.
+	# BUG-115: antes sólo se chequeaba PRESENCIA; un `profile_id` numérico o un
+	# objeto pasaban la validación pese a que el contrato lo declara String.
 	if not payload.has("profile_id"):
 		errors.append("Falta profile_id")
+	elif typeof(payload["profile_id"]) != TYPE_STRING:
+		errors.append("profile_id no es String (es %s)" % type_string(typeof(payload["profile_id"])))
 
 	# Los sistemas principales deben existir como Dictionary
 	var required_sections := [
@@ -184,16 +221,47 @@ static func validate(payload: Dictionary) -> Array[String]:
 		elif typeof(payload[section]) != TYPE_DICTIONARY:
 			errors.append("Sección %s no es Dictionary" % section)
 
-	# Validaciones mínimas de rangos clave
-	# DEUDA (BUG-115): este único chequeo de rango es código MUERTO: el proveedor
-	# real de tiempo (game_clock.gd) emite el dialecto `dia/mes/anio/hora/minuto`,
-	# no `day/season/hour/minute`, así que `time.day` nunca está presente en un
-	# save real y el chequeo jamás se dispara. La validación del esquema es, en la
-	# práctica, vacua. NO se arregla acá: sincronizar el dialecto con los dueños de
-	# M14/M29/M38 (ver Log 1202) es un cambio de contrato, no un fix de M59.
+	# Validaciones de rango del reloj de juego.
+	#
+	# BUG-115 (no-vacuidad): el chequeo anterior leía `time.day`, que NUNCA existe
+	# en un save real — el proveedor de tiempo (M29, game_clock.gd) emite el
+	# dialecto `hora/minuto/dia/mes/anio/acumulador`. Era CÓDIGO MUERTO y la
+	# validación del esquema resultaba vacua en la práctica. Acá se validan AMBOS
+	# dialectos (sólo las claves PRESENTES, para no acoplar la validación):
+	#  - real (M29):              hora/minuto/dia/mes/anio/acumulador
+	#  - schema (default_payload): day/season/hour/minute
+	# Los límites de `dia` son sólo cotas inferiores: el máximo real (28) es una
+	# decisión de M29 y no se duplica acá para no crear acoplamiento entre módulos.
 	if payload.has("time") and typeof(payload["time"]) == TYPE_DICTIONARY:
-		var time_dict: Dictionary = payload["time"]
-		if time_dict.has("day") and not _es_entero(time_dict["day"]):
-			errors.append("time.day no es int")
+		var t: Dictionary = payload["time"]
+		_validar_entero_rango(t, "hora", 0, 23, errors)
+		_validar_entero_rango(t, "minuto", 0, 59, errors)
+		_validar_entero_min(t, "dia", 1, errors)
+		_validar_entero_rango(t, "mes", 1, 12, errors)
+		_validar_entero_min(t, "anio", 1, errors)
+		_validar_entero_rango(t, "hour", 0, 23, errors)
+		_validar_entero_rango(t, "minute", 0, 59, errors)
+		_validar_entero_min(t, "day", 1, errors)
+		_validar_entero_min(t, "season", 0, errors)
+		if t.has("acumulador"):
+			var acc: Variant = t["acumulador"]
+			if not _es_numero(acc):
+				errors.append("time.acumulador no es numérico")
+			else:
+				var f: float = acc
+				if not is_finite(f) or f < 0.0 or f > MAX_CLOCK_ACUMULADOR:
+					errors.append("time.acumulador fuera de rango (%s; válido 0..%s)" % [str(acc), str(MAX_CLOCK_ACUMULADOR)])
+
+	# Tipos de campos no críticos (BUG-115): el schema los declara y ningún
+	# proveedor los pisa, así que un tipo equivocado indica corrupción.
+	if payload.has("meta") and typeof(payload["meta"]) == TYPE_DICTIONARY:
+		var meta: Dictionary = payload["meta"]
+		if meta.has("last_saved") and typeof(meta["last_saved"]) != TYPE_STRING:
+			errors.append("meta.last_saved no es String")
+		if meta.has("playtime_seconds"):
+			if not _es_numero(meta["playtime_seconds"]):
+				errors.append("meta.playtime_seconds no es numérico")
+			elif float(meta["playtime_seconds"]) < 0.0:
+				errors.append("meta.playtime_seconds negativo")
 
 	return errors

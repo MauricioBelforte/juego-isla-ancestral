@@ -193,6 +193,15 @@ jobs:
           # nunca dejaba un save cargable. Las suites previas no lo veian
           # porque llamaban a write_atomic() directo, nunca a request_save().
           godot --headless --script scripts/saving/test_rotate_m59.gd 2>&1 || FAIL=1
+          # M59 cola de bugs (DeepSeek-V4.1-Flash): sonda de BUG-115. El token de
+          # integridad pasa a HMAC-SHA256 con clave por instalacion
+          # (`hmac256:<hex>`), retrocompatible con el SHA-256 legado (los saves
+          # previos siguen cargando), y SaveSchema.validate() deja de ser VACUA:
+          # valida el dialecto REAL de M29 (hora/minuto/dia/mes/anio/acumulador)
+          # y tipos de campos no criticos. 38 checks, piso CHECKS_MINIMOS medido
+          # en verde; guardian probado EN ROJO por inyeccion (verificar_checksum
+          # siempre true -> 3 fallos; validadores de rango anulados -> 4 fallos).
+          godot --headless --script scripts/saving/test_checksum_hmac.gd 2>&1 || FAIL=1
           # Run time calendar tests (M29)
           godot --headless --script scripts/time/test_calendario.gd 2>&1 || true
           # Run time consumers tests

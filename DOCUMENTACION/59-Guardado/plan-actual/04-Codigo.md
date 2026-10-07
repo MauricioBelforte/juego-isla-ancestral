@@ -11,18 +11,19 @@
 | Archivo real | Rol | Estado |
 |---|---|---|
 | `scripts/saving/save_schema.gd` | Esquema: SCHEMA_VERSION=1, defaults de las 14 secciones, validación de estructura | ✅ Implementado |
-| `scripts/saving/save_writer.gd` | Escritura atómica `.tmp`+rename, checksum SHA-256 determinista, parseo verificado | ✅ Implementado |
+| `scripts/saving/save_writer.gd` | Escritura atómica `.tmp`+rename, token de integridad HMAC-SHA256 por instalación (retrocompatible con el SHA-256 legado), parseo verificado | ✅ Implementado |
 | `scripts/saving/save_backup.gd` | Rotación local (`slot_N_rK.bak`, MAX_ROTATIONS=2), backups manuales fechados | ✅ Implementado |
 | `scripts/saving/save_loader.gd` | Carga validada (checksum→estructura→versión), recuperación desde backup, migración solo-hacia-delante | ✅ Implementado |
 | `scripts/saving/save_snapshot.gd` | Colecta/restaura vía ISaveProvider registrados; secciones sin proveedor quedan con defaults | ✅ Implementado |
 | `scripts/saving/save_provider.gd` | Contrato ISaveProvider (get_save_data / restore_save_data / get_section_name) | ✅ Implementado |
 | `scripts/saving/save_manager.gd` | Autoload: cola (1 guardado a la vez), slots 1-3, bloqueo, metadatos por slot, auto-save temporizado configurable | ✅ Implementado |
-| `scripts/saving/validate_save.gd` | QA headless: 13 checks (atómico, checksum, corrupción, backup, rotación, schema) — **VALIDACIÓN OK, exit 0** | ✅ Implementado |
+| `scripts/saving/validate_save.gd` | QA headless: **16 checks MEDIDOS** (atómico, checksum, corrupción, backup, rotación, schema, camino feliz de carga) — **VALIDACIÓN OK, exit 0** | ✅ Implementado |
+| `scripts/saving/test_checksum_hmac.gd` | QA headless BUG-115: **38 checks MEDIDOS** (formato HMAC, tampering de payload/token, retrocompatibilidad legado, end-to-end, clave persistente, validate no vacua) — **EXIT 0** | ✅ Implementado |
 | `save_menu.gd` / `save_toast.gd` | UI (M53/M44) | ⬜ Pendiente (requiere visión/UI) |
 
 ### Decisiones técnicas clave (desviaciones justificadas del diseño original)
 
-1. **Formato de archivo determinista:** `línea 1 = checksum SHA-256`, `línea 2+ = payload JSON`. El checksum se calcula sobre la cadena EXACTA del payload. El diseño original (checksum dentro de un dict JSON) era **no determinista**: al re-serializar el payload parseado el orden/round-trip producía hashes distintos y falsos positivos de corrupción (detectado y corregido durante la validación).
+1. **Formato de archivo determinista:** `línea 1 = token de integridad`, `línea 2+ = payload JSON`. El token se calcula sobre la cadena EXACTA del payload. El diseño original (checksum dentro de un dict JSON) era **no determinista**: al re-serializar el payload parseado el orden/round-trip producía hashes distintos y falsos positivos de corrupción (detectado y corregido durante la validación). Desde BUG-115 (iter. 4) el token es `hmac256:<hex>`; un token sin prefijo se interpreta como el SHA-256 legado y se sigue aceptando.
 2. **Escritura síncrona encolada (no background thread):** la cola procesa un guardado a la vez sin solaparse; el hilo de fondo queda pendiente para M61 (los saves actuales son <10 KB, escritura <5 ms medida implícitamente).
 3. **Proveedores opcionales por diseño:** los sistemas del juego aún no existen (M14, M19, M20...); el save funciona hoy con defaults y cada sistema futuro se registra con `SaveManager.register_provider()` sin tocar el núcleo (AGENTS §15).
 4. **Señales en vez de toasts:** `save_completed/save_failed/slot_loaded/auto_save_skipped`; la UI se conectará cuando exista M53.
@@ -40,7 +41,7 @@ Tras implementar, se auditó el código contra la skill instalada en el proyecto
 | Validar datos cargados (nunca confiar) | ✅ `SaveSchema.validate` + defaults tolerantes |
 | Chequear retorno de `store_string/store_buffer` (bool desde 4.4) | ✅ **Corregido tras auditoría** — fallo de escritura → return false, save anterior intacto |
 | No guardar durante física/animación de alta frecuencia | ⬜ bloqueo manual disponible (`set_save_blocked`); conexión con M07 pendiente |
-| Cifrado para datos sensibles | ⬜ Pendiente (recomendado antes de logros M72) |
+| Cifrado para datos sensibles | 🟡 Parcial (BUG-115): **integridad** con HMAC-SHA256 + clave por instalación; el **cifrado** del payload sigue pendiente (recomendado antes de logros M72) |
 
 Skills complementarias identificadas para próximas tareas del módulo: `godot-signal-architecture` (EventBus M07), `godot-autoload-architecture` (boot order), `godot-testing-patterns`, `godot-inventory-system` (primer provider real).
 
@@ -289,7 +290,7 @@ El orden de escritura es una **regla dura** del módulo. Desde iter. 2:
 
 ### Deuda de integración: dialecto schema ↔ proveedores
 
-`collect()` hace `payload[seccion] = data` y **reemplaza la sección entera**. Los proveedores reales NO usan las claves del schema: `time` usa `dia/mes/anio/hora/minuto`, `inventory` usa índices `"0".."5"`, `economy` usa `saldo/precios/historial/reputacion`. Consecuencia: `SaveSchema.validate()` es prácticamente vacua contra saves reales. **Reconciliar el dialecto es de los dueños de M14/M29/M38**; M59 mitiga lo suyo leyendo el dialecto real y sellando su propia sección `meta`.
+`collect()` hace `payload[seccion] = data` y **reemplaza la sección entera**. Los proveedores reales NO usan las claves del schema: `time` usa `dia/mes/anio/hora/minuto`, `inventory` usa índices `"0".."5"`, `economy` usa `saldo/precios/historial/reputacion`. Consecuencia original: `SaveSchema.validate()` era **prácticamente vacua contra saves reales**. **Reconciliar las CLAVES sigue siendo de los dueños de M14/M29/M38**; M59 mitiga lo suyo leyendo el dialecto real, sellando su propia sección `meta` y —desde la iter. 4 (BUG-115)— **validando AMBOS dialectos** (ver más abajo), así que la validación ya no es vacua sin tocar el contrato de los proveedores.
 
 ### Suite nueva
 
@@ -318,3 +319,28 @@ El orden de escritura es una **regla dura** del módulo. Desde iter. 2:
 ### Suite
 
 `test_rotate_m59.gd`: **43 checks, 9 bloques** (b8 = item H + control negativo; b9 = contrato del proveedor con nodo inyectado, incluido un nodo con `spawn_position`/`zone` creado con `GDScript` en runtime). Piso `CHECKS_MINIMOS = 43` medido en verde.
+
+---
+
+## Notas del Agente — Iteración 4: cola de bugs y fix real de BUG-115 (DeepSeek-V4.1-Flash, 2026-10-06)
+
+### Cola de 8 bugs (Logs 1377-1382)
+
+Se recorrió la cola BUG-108..115 del módulo: 6 cerrados con sonda roja probada por inyección, 1 reclasificado (BUG-111 = falso positivo, con un bug real adyacente en `collect()` → **BUG-111-bis** resuelto) y 1 (BUG-115) quedó como deuda informativa. Detalle en los logs citados y en las filas de `11-BUGS.md`.
+
+### BUG-115 — fix real: token HMAC + validación no vacua (Log 1397)
+
+**Antes** (deuda documentada en `3ad8630`): el token era un SHA-256 del payload EN CLARO, sin secreto; `validate()` era **vacua** (su único chequeo de rango leía `time.day`, clave que el proveedor real de tiempo —M29, `game_clock.gd`— nunca emite: usa `hora/minuto/dia/mes/anio/acumulador`); y `profile_id` se chequeaba solo por PRESENCIA, no por tipo.
+
+**Ahora:**
+
+1. `save_writer.gd` — token `hmac256:<hex>` (HMAC-SHA256 con clave por instalación). La clave vive en `user://clave_integridad.key` (32 bytes de `Crypto.generate_random_bytes`, hex) y se cachea en un `static var`.
+   - DECISIÓN: la clave va en la RAÍZ de `user://`, **fuera** de `user://saves`. Motivo medido: `validate_save.gd::_delete_save_dir()` y otras suites borran TODO el contenido de `user://saves`; si la clave viviera ahí, un borrado la eliminaría y los saves escritos antes quedarían sin poder verificarse.
+   - `verificar_checksum()` acepta HMAC (con prefijo) y, por RETROCOMPATIBILIDAD, el SHA-256 legado (sin prefijo). `parse_document()` expone además `legacy: bool`.
+   - La autoverificación interna de `write_atomic()` (`.tmp` → releer → `parse_document().ok`) sigue siendo SIMÉTRICA: ambos lados usan el mismo formato.
+2. `save_schema.gd` — `validate()` valida **ambos dialectos** de `time`, solo las claves PRESENTES (no acopla la validación a un dialecto): real (`hora` 0..23, `minuto` 0..59, `dia` ≥ 1, `mes` 1..12, `anio` ≥ 1, `acumulador` finito en [0, 3600]) y schema (`hour`, `minute`, `day`, `season`). Además `profile_id` debe ser String y `meta.last_saved`/`meta.playtime_seconds` se validan. Nueva constante `MAX_CLOCK_ACUMULADOR = 3600.0`.
+   - NO se duplica el máximo real de `dia` (28 es una constante de M29): sería acoplar M59 a una decisión de otro módulo. **No se tocó `game_clock.gd`.**
+
+**Evidencia:** `test_checksum_hmac.gd` (8 bloques, guardia de 3 capas) — **38 checks, 0 fallos, EXIT 0 ×3**; guardián probado **EN ROJO por inyección** (2 inyecciones, revertidas y verificadas con `grep`): `verificar_checksum()` devolviendo siempre `true` → 3 fallos, EXIT 1; `_validar_entero_rango()` anulada → 4 fallos, EXIT 1. Regresión: **14 suites EXIT 0** (validate_save 16/0, test_rotate_m59 43/0, test_slots_m59 22/0, test_autosave_m59, test_save_collect_robust 10/0, test_save_size_cap 7/0, test_backup_rotations 7/0, test_backup_rotate_return 4/0, test_close_save 6/0, test_slot_range 10/0, test_fishing_save_block 11/0, test_inventario_restore_robusto 12/0, test_diario_persist). Gate nuevo en `quality.yml` (`|| FAIL=1`, junto a las otras 3 suites de M59).
+
+**LIMITACIÓN RESIDUAL (honesta — NO es un sello de "a prueba de trampas"):** el token legado se sigue aceptando (regla dura del proyecto: no inutilizar un save existente), así que un atacante con acceso al sistema de archivos puede reemplazar la línea 1 por `sha256(payload)` y el documento verifica; y la clave HMAC vive en `user://`, junto a los saves, y es legible. El HMAC **no** vuelve el save a prueba de manipulación local. Lo que SÍ queda verificado: (a) los saves NUEVOS ya no se pueden re-firmar sin la clave con el algoritmo público; (b) el caso legado queda expuesto vía el flag `legacy`; (c) la validación de esquema, que era vacua, ahora rechaza rangos/tipos inválidos sobre el dialecto real — la parte con valor real y medible de este fix. Por eso la fila de BUG-115 en `11-BUGS.md` queda en `[->] Parcial`, no en `[x] Resuelto`.
