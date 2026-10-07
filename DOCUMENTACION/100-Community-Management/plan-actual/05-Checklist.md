@@ -305,3 +305,6 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 146 [x] / 76 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M100)
+M100 auditado: SUSTENTADO, 0 degradaciones. 146 [x] / 0 [?] / 76 [ ]. Verificación contra disco: los [x] son tareas de gestión/comunidad ABSTRACTAS (crear moderación, reportes, canales de feedback, recopilar sugerencias, gestionar filtraciones) — no citan archivos falsificables. Los datos de comunidad EXISTEN en disco: data/support/faq.json + data/community/community_calendar.json. 03-Diseno.md documenta el sistema (15.8KB). Los report_categories/roadmap/roles.json son NOMBRES DE DISEÑO no creados como archivos, pero 0 [x] los citan (el conteo por línea: 0). GLOBAL NO tocado (flip/pase = director).
