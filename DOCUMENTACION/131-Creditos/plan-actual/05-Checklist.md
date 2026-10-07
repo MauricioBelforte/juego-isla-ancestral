@@ -179,6 +179,9 @@ M131 re-auditado con DoD 21.6: **DEUDA REAL** (no flip). Conteo 85 [x] / 0 [?] /
 - 04-Codigo.md lista 5 archivos AUSENTES en disco: CreditsDirector.gd, catalog.tres, credits-canvas.tscn, data.tres, scene.tscn.
 - 07-Resultados-Testings.md AUSENTE.
 - 10 [ ] KnownIssues pendientes (SFX menu, SFX navegacion, musica lounge, catalogo .tres).
-- Gap: un [x] dice "creditos.json con 7 secciones (v1: 3; catalogo ampliado)" y el archivo trae **4** -> catalogo en progreso (3 faltantes quedan en los 10 [ ]); lo marco como GAP, NO lo degradado a [ ] (no es una afirmacion falsa, es un item de ampliacion en curso).
+- CORRECCION (Atria s2/68, 2026-10-07): el [x] "creditos.json con 7 secciones" es CORRECTO — el archivo
+  trae 7 secciones (j["secciones"] = desarrollo/musica/arte/qa/comunidad/agradecimientos/assets_terceros).
+  Mi cifra "4" era un artifact (conté las 4 claves top-level del dict, no la lista "secciones"). Sin GAP:
+  la deuda real de M131 son los 5 archivos del 04-Codigo ausentes + el 07, NO el catalogo.
 - Positivo: data/legal/creditos.json (4 secciones) + scripts/legal/ (audio_credit.gd) + test_credits_m131 **8/0** (re-corrí yo).
 Clasificacion: **DEUDA REAL** (catalogo/director/07 + 10 [ ] + 3 secciones faltantes), no flip. GLOBAL no tocado (flip = director).
