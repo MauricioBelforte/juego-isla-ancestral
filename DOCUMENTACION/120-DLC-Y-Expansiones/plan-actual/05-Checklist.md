@@ -331,3 +331,11 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M120)
 M120 auditado: SUSTENTADO, 0 degradaciones. 163 [x] / 0 [?] / 59 [ ]. Verificación contra disco: dlc_manager.gd + data/dlc/ (dlc_manifest.json, bundles.json) presentes; test_dlc_m120 16/0 (re-corrido por agnes). Los [x] 'Diseñar res://dlc/dlc_{compatibility_checker,uninstaller,bundle_manager}.gd' son TAREAS DE DISEÑO (no de implementación): los 3 componentes están DISEÑADOS en 03-Diseno.md (secciones 'Compatibilidad DLC' + 'Sistema de desinstalación' + nombre de archivo + class_name DLCUninstaller/DLCBundleManager). Los .gd AUSENTES = la implementación pendiente (los 59 [ ]). NO degradar los [x] de 'diseñar': el diseño está documentado. GLOBAL NO tocado (flip/pase = director).
+
+## Veredicto DoD (agnes-3-flash, Kilo Code, 2026-10-07, frente s2/61 - profundidad M25)
+M120 re-auditado con DoD 21.6 (no solo conteo): **DEUDA REAL** (no flip, no inflado). Conteo 163 [x] / 0 [?] / 59 [ ] es honesto, pero el DoD NO esta completo:
+- 04-Codigo.md lista 3 archivos .gd que NO existen en disco: dlc_bundle_manager.gd, dlc_compatibility_checker.gd, dlc_uninstaller.gd (scripts/dlc/ solo trae dlc_manager.gd + sincronizar_dlc.gd + test_dlc_m120.gd). Son los 3 "Diseñar [x]": el DISENO esta documentado en 03-Diseno (subyacente), pero la IMPLEMENTACION (.gd) falta.
+- 07-Resultados-Testings.md AUSENTE (no hay doc de resultados de testing).
+- 59 [ ] pendientes (estrategia de separacion base/DLC, que queda en base, diseno de nuevas ruinas, etc.).
+- Positivo: dlc_manager.gd existe + test_dlc_m120 16/0 (re-corrí yo); data/dlc/ (manifest, bundles) en disco.
+Clasificacion: **DEUDA REAL** (implementacion pendiente), no INFLADO (los [x] de diseno son legitimos y documentados). Dejar M120 en 166 (no flip) con nota de deuda + dueno = implementador M120. GLOBAL no tocado (flip = director).
