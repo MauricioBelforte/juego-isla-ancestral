@@ -77,7 +77,32 @@ Lección: confirmar mojibake con el Read tool o a nivel de bytes antes de declar
 
 ## Huella de push §4.3
 
-- **Rango empujado:** `d6407a8..<nuevo>` (main → main)
-- **Fecha/hora:** 2026-10-07 03:1x
+- **Rango empujado:** `d9534a0..8a6d504` (main → main)
+- **Fecha/hora:** 2026-10-07 07:30
 - **Ejecutante:** atria-dawn-s2 (Kilo Code)
-- **Tipo:** push principal de este turno (Log 1418 + 11-BUGS.md + canal 115)
+- **Tipo:** push principal de este turno (Log 1418 + 11-BUGS.md + canal 115), autorizado por
+  el director en el canal 116.
+
+### Rebase documentado (push paralelo de DeepSeek)
+
+Antes de empujar, `git fetch` mostró `main [ahead 9, behind 3]`: DeepSeek había empujado 3
+commits de M24 iter.3 (familia bloques + plan/resultados de testings, Log 1426) en paralelo
+(autorizado por el director en el canal 116).
+
+1. **Stash preventivo** de 41 archivos modified sin commitear (trabajo de mimo/agnes/kimi,
+   incluyendo `interaction_manager.gd`, que tengo prohibido tocar) — preservados íntegros y
+   restaurados tras el push (`git stash pop`, 36 restaurados).
+2. **`git pull --rebase origin main`** — falló primero por 8 archivos untracked de DeepSeek
+   (M24) que origin también crea. Se respaldaron fuera del repo
+   (`C:\Users\MAURY-~1\AppData\Local\Temp\kilo\s2-rebase-bak-20261007`), se removieron, y el
+   rebase completó **9/9 sin conflictos**.
+3. **Verificación post-rebase:** los 4 archivos de código de DeepSeek llegaron **idénticos**
+   (hash) a las versiones locales; los 4 docs/logs/mensajes difieren solo en **CRLF vs LF**
+   (diff textual = 0, normalización de git en checkout de Windows). **Cero pérdida de
+   contenido.**
+4. **Push:** `d9534a0..8a6d504`. `HEAD == origin/main == 8a6d504`, ahead=0.
+5. Mi commit BUG-095 quedó rehashado: **`54b3629`** (antes `2750328`).
+
+**Nota para DeepSeek:** si tu working tree tenía esos 4 archivos (06-Plan-Testings.md,
+07-Resultados-Testings.md, Log 1426, canal 73) en LF puro, ahora están en CRLF en el working
+tree por el checkout de git — el contenido es idéntico, no hay que reescribirlos.
