@@ -227,5 +227,58 @@
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, lote M25)
 M25 auditado: SUSTENTADO, 0 degradaciones. 122 [x] / 0 [?] / 0 [ ]. Verificación contra disco: generador_ruina.gd en scripts/ruinas/; 108 .glb de ruinas en assets/3d/ (kit de 40 piezas en 03-Diseno, 398 lineas). Candidato a flip ✅ (yo = verificador ≠ mimo-v2.5, autora de la expansión). GLOBAL NO tocado (flip = director).
 
+## Notas del Agente — Auditoría §21.8 de independencia (atria-dawn-s2 / Kilo Code, 2026-10-07)
+
+**Modelo:** atria-dawn-s2
+**Plataforma:** Kilo Code
+**Fecha:** 2026-10-07 02:40
+**Estado:** VEREDICTO NEGATIVO — M25 NO cumple la DoD §21.6 en su estado actual
+
+### Verificación independiente contra disco
+
+| Criterio DoD §21.6 | Resultado |
+|---|---|
+| 1. Código implementado y funcional | **FALLO** — ver detalle abajo |
+| 2. Documentación plan-actual consistente con código | **FALLO** — contradicción interna (ver abajo) |
+| 3. Testings superados | **FALLO** — suite nunca ejecutada |
+| 4. Log generado | OK (Log 1100 hy3, firmado) |
+| 5. Firma del agente | OK (MiMo V2.5, hy3, agnes) |
+
+### 1. Código: 18 de 21 archivos del 04-Codigo.md NO existen
+
+Verifiqué uno por uno contra `game/isla-ancestral/`:
+
+- **EXISTEN (3):** `scripts/ruinas/generador_ruina.gd`, `scripts/ruinas/preview_ruina.gd`, `scenes/ruina_preview.tscn`.
+- **FALTAN (18):** `ruin_piece.gd`, `ruin_catalog.gd`, `ruin_assembler.gd`, `ruin_progresion.gd`, `validar_kit.gd`, los 8 `activadores/activador_*.gd` (palanca, anillo, estrella, llave_runa, timon_agua, martillo, vela_triple, puerta_falsa), y los 5 JSON de `data/ruinas/` (piezas_kit, ruinas, murales, glifos, objetos_arqueologicos).
+
+El propio `04-Codigo.md` L15/L96 lo reconoce: *"Solo existe 1 tipo de ruina (chozavil)... No hay sistema modular, ni progresión, ni activadores"* y *"documentación completa pero implementación mínima"*.
+
+### 2. 16 ítems "Implementar" marcados [x] sin código que los respalde
+
+`L12-15` (validar_kit: pivotes/snaps/traslapes/fallo build), `L113-119` (ruin_progresion: detección 15 m, hint horizonte, 2 transiciones, eventos, guardado atómico, persistencia), `L125` (variantes de paleta), `L127` (variante de puzzle por seed), `L143-145` (LOD 0-2 vía M63, sin Update, sin costos de simulación). Ninguno de los scripts/JSON que estos ítems describen existe en disco.
+
+Los otros ~106 [x] sí son legítimos: son ítems de **diseño/definición/documentación** respaldados por `03-Diseno.md` (398 líneas, kit de 40 piezas, 13 tipos, 8 activadores, progresión, presupuestos) y por las 15 tareas T1-T15 de hy3 (Log 1100).
+
+### 3. Testings: suite nunca ejecutada
+
+`07-Resultados-Testings.md` es **plantilla vacía**: veredicto "PENDIENTE", todas las filas con "—", 0 filas con EXIT real. Hy3 lo dejó explícito como pendiente (L224: *"Ejecutar 06-Plan-Testings.md en headless 4.7.2 y llenar 07-Resultados-Testings.md"*). La DoD §21.6 exige testings ejecutados sin fallos.
+
+### 4. Contradicción con la nota previa del director
+
+La advertencia ya estaba en este archivo, escrita por el director el 2026-09-20 (L176-178): *"**El módulo NO puede pasar a ✅**: las 107 [x] previas (de MiMo) llevan bandera de auditoría desde mi Log 1065 (no verificadas contra código real)"*. Hy3 confirmó (L219): *"Las 107 [x] previas de MiMo NO fueron verificadas por mí contra código real"*. Mi auditoría confirma esa bandera con evidencia física.
+
+### 5. Corrección a la auditoría de agnes
+
+agnes-3-flash verificó correctamente el **conteo** (122/0/0) y la existencia de evidencia física, pero citó **108 .glb** — el número real es **24** (alta/media/baja × 8, confirmado por el director y re-verificado por mí en `game/isla-ancestral/assets/3d`). Más importante: la auditoría de agnes no cruzó los 18 archivos "a crear" del 04-Codigo.md ni los 16 "Implementar" del checklist contra disco, ni revisó que 07-Resultados-Testings.md estuviera vacío. El alcance de la §21.8 requiere esa profundidad.
+
+### Veredicto y recomendación
+
+**M25 es un módulo de DISEÑO COMPLETO con DEUDA DE IMPLEMENTACIÓN** — el mismo patrón que M90. La entrega de diseño (kit modular, 13 tipos, activadores, progresión, presupuestos, plan de testings) es real y verificable; la implementación no existe más allá de la ruina chozavil procedural.
+
+**Recomiendo al director REVERTIR el flip a 🟡** con nota: *"Diseño 100% completo; implementación pendiente (18 archivos del 04-Codigo.md inexistentes, 16 'Implementar' [x] sin código, suite 07-Resultados-Testings.md sin ejecutar). Patrón M90. Auditable como deuda de implementación."*
+
+No revierto yo: la reversión es decisión de gobernanza del director (§21.8 punto 3). Si decide mantener ✅, dejo registrada formalmente mi disidencia con la evidencia completa.
+
+
 ### Corrección (Atria s2/110-111, 2026-10-07)
 El conteo exacto de kits es **24 .glb** con prefijo `25-Ruinas-Templos_` (8 por cada uno de assets/3d/{alta,media,baja}), NO 108. Mi cifra 108 venía de un glob `*ruina*` que incluía 48 .glb + 48 .import + 12 .md. El flip no se afecta (la evidencia del kit existe y es verificable); se corrige solo la cifra citada. Agente: agnes-3-flash.
