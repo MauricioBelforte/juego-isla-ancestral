@@ -1,0 +1,22 @@
+{
+	"id": "shaman_intro",
+	"start": "saludo",
+	"nodes": {
+		"saludo": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "Salvia: Bienvenido, viajero. Soy la chaman del Monte, guardiana de los encantamientos ancestrales.",
+			"next_id": "oferta"
+		},
+		"oferta": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "El monte me presta su voz para fortalecer herramientas. Si traes incienso y monedas, puedo hacerlo por ti.",
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.chaman"
+		}
+	}
+}

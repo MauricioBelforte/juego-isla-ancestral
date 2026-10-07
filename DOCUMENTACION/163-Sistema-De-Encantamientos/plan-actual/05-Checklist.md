@@ -1,6 +1,6 @@
-**Modelo:** step-3.7-flash (último modificador; documentación base por Deepseek V4 Flash)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-09-02 23:31
+﻿**Modelo:** mimo-v2.6-flash-free (último modificador; base step-3.7-flash / GLM-5.3 Flash)
+**Plataforma:** opencode
+**Fecha:** 2026-10-07 03:05
 
 # 05-Checklist.md — Modulo 163: Sistema de Encantamientos
 
@@ -14,7 +14,7 @@
 | Campo | Valor |
 |-------|-------|
 | Módulo | M163 Sistema De Encantamientos |
-| Agente | step-3.7-flash (Kilo Code) |
+| Agente | **mimo-v2.6-flash-free** (iter. 1 asignada 2026-10-07 04:57 por atria-dawn-preview; anterior: step-3.7-flash → glm-5.3-flash, liberado 2026-09-02) |
 | Fase | F5 |
 | Dificultad | 3 |
 | Visión | V0 |
@@ -44,23 +44,23 @@
 
 - [x] Crear ShamanNPC.gd como InteractableBase (Node3D) [M]
 - [x] Definir posicion del chaman (Isla Raiz, montaña remota) [S]
-- [ ] Definir dialogo del chaman (M21) [M]
+- [x] Definir dialogo del chaman (M21) [M] (data/dialogues/shaman_intro|regreso|todas.json; validados por DialogueGraph.validate() + validador M21 en suite B)
 - [x] Crear ShamanUI.gd como Control básico [M]
-- [ ] ShamanUI muestra herramientas encantables del jugador [M]
-- [ ] ShamanUI muestra costo en incienso y monedas por tier [S]
-- [ ] ShamanUI valida incienso suficiente antes de encantar [M]
-- [ ] ShamanUI valida monedas suficientes antes de encantar [M]
-- [ ] Animacion de encantamiento (brillo, sonido, particulas) [M]
-- [ ] Feedback visual al encantar exitosamente [S]
-- [ ] Feedback visual al no tener recursos [S]
-- [ ] El chaman tiene dialogo contextual segun progresion [M]
-- [ ] El chaman recuerda cuantas veces encantaste [S]
-- [ ] El chaman tiene frase especial si encantas todas las herramientas [S]
-- [ ] Integrar chaman con M19 (NPCs y Vecinos) [M]
-- [ ] Integrar chaman con M162 (Dialogos contextuales) [M]
-- [ ] El chaman aparece en mapa de ubicaciones (M160) [S]
-- [ ] El chaman tiene rutina diaria (M19) [M]
-- [ ] El chaman se puede visitar en cualquier momento del dia [S]
+- [x] ShamanUI muestra herramientas encantables del jugador [M] (shaman_ui.gd: ids_herramientas + _cargar_herramientas con filtro ItemData.Categoria.HERRAMIENTAS; suite C8)
+- [x] ShamanUI muestra costo en incienso y monedas por tier [S] (_actualizar_info (incienso/monedas OK|FALTA) + boton con [T?] y costos; suite C9)
+- [x] ShamanUI valida incienso suficiente antes de encantar [M] (encantar_seleccion() con system.has_incense; suite C24/C25)
+- [x] ShamanUI valida monedas suficientes antes de encantar [M] (_puede_pagar/_retirar via EconomyManager — corrige bug GLM del item "moneda" inexistente; suite C26/C27)
+- [x] Animacion de encantamiento (brillo, sonido, particulas) [M] (_exito: tween flash del panel + CPUParticles2D one-shot teñido con visual_color + beep procedural AudioStreamWAV 660→880 Hz; suite C10)
+- [x] Feedback visual al encantar exitosamente [S] (label verde en _exito; suite C14)
+- [x] Feedback visual al no tener recursos [S] (label rojo en _fallo: seleccion/recursos/ya encantada; suite C23/C25/C27)
+- [x] El chaman tiene dialogo contextual segun progresion [M] (shaman_npc.interactuar elige intro/regreso/todas; suite C5/C16/C20)
+- [x] El chaman recuerda cuantas veces encantaste [S] (EnchantmentSystem.encantos_totales + session {encantos} en start_dialogue; suite C6/C17)
+- [x] El chaman tiene frase especial si encantas todas las herramientas [S] (todas_encantadas() + dialogo shaman_todas; suite C19/C20)
+- [?] Integrar chaman con M19 (NPCs y Vecinos) [M] — dueño: AGENTE DELEGADO M19 (requiere M19 completado; fuera del alcance de iter 1)
+- [?] Integrar chaman con M162 (Dialogos contextuales) [M] — dueño: AGENTE DELEGADO M162 (los 3 dialogos locales existen; la integracion con el registro contextual de M162 la cierra ese modulo)
+- [?] El chaman aparece en mapa de ubicaciones (M160) [S] — dueño: AGENTE DELEGADO M160 (requiere M160; posicion fija disponible: 320, 35, 300)
+- [?] El chaman tiene rutina diaria (M19) [M] — dueño: AGENTE DELEGADO M19 (diseno de rutina pendiente; L64 fija su ubicacion)
+- [x] El chaman se puede visitar en cualquier momento del dia [S] (shaman_npc no define requisitos de horario: InteractableBase.requisitos_cumplidos sin filtro de hora; E siempre despacha, suite C4/C16/C20)
 - [x] El chaman no se mueve de su ubicacion (vive en la montaña) [S]
 
 ## C. Incienso (15)
@@ -195,7 +195,44 @@
 - Priorizar interacción real chamán-jugador antes de ampliar secciones C/D.
 - Usar V4 (godot-mcp) para capturas de prueba de la UI de encantamientos.
 - Consultar DOCUMENTACION/GUIA-GODOT/INDICE.md para pitfalls conocidos de Godot 4.x.
-**Totales:** 124 ítems · Completados: 23 · Pendientes: 101 · No resueltos: 0.
+## Progreso iter 2 (2026-10-07 — mimo-v2.6-flash-free / opencode)
+
+- Seccion B completada (16/20 en esta iter: 4 [x] previos de GLM + 12 [x] nuevos; restantes 4 [ ] pasan a [?] con dueno)
+- Flujo real del chaman E2E: E -> DialogueManager (intro/regreso/todas) -> ShamanUI -> encantar con cobro EconomyManager
+- Corregidos 4 bugs: to_dict no serializaba enchantment_<tool_id> (A15); item_db.Categoria invalido en shaman_ui (x2, rompia la lista de herramientas); _actualizar_info pisaba el feedback de exito (C14); bug GLM de monedas via item "moneda" inexistente -> EconomyManager
+- Suite ampliada test_enchantment.gd: 58 checks / 0 fallos / exit 0 (unit A + validadores B + E2E C + 8 checks negativos)
+- Sonda roja obligatoria: guard de incienso en enchant_tool mutado -> A9 falla exit 1 -> restaurado -> 58/0 exit 0
+- 3 dialogos locales creados y validados (shaman_intro, shaman_regreso con {encantos}, shaman_todas)
+
+**Notas del Agente**
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-07 03:05
+**Estado:** Parcial — Seccion B cerrada (35 [x] / 4 [?] / 85 [ ]); secciones C-G intactas
+
+### Lo que hice
+- Cierre de la seccion B (12 [x] con cita + 4 [?] con dueno nombrado, criterio del director msg 49).
+- Codigo: enchantment_system.gd (contador encantos, todas_encantadas, persistencia to_dict/from_dict), shaman_ui.gd (tier, monedas EconomyManager, encantar_seleccion testeable, feedback brillo/particulas/sonido), shaman_npc.gd (dialogo por progresion con session {encantos}).
+- 3 dialogos locales en data/dialogues/ validados por DialogueGraph.validate() y el validador M21 (0 claves desconocidas).
+- Test: reescritura completa de test_enchantment.gd (58 checks: unit, validadores, E2E cadena E, 8 negativos). Sonda roja ejecutada y revertida.
+- Bugs corregidos en codigo de GLM: to_dict/from_dict incompleto; item_db.Categoria invalido x2; orden feedback vs _actualizar_info; cobro de monedas con item "moneda" inexistente.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- 4 items quedaron [?] con dueno: L59/L62 (M19), L60 (M162), L61 (M160) — dependen de otros modulos.
+- Feedback visual verificado por estado de la UI en headless, NO visualmente (M154 V0: sin via de vision en este chat; capturas pendientes si el director las requiere).
+- interaction_manager.gd NO se toco (cuarentena kimi): la cadena E funciona con el patron oficial de M70 (llamada manual a _evaluar_y_seleccionar; el _process del manager no corre en tests --script — hallazgo documentado aqui).
+
+### Intentos fallidos / decisiones
+- _process del InteractionManager no corre en tests --script (igual que el test M70 lo asume): solucion = _evaluar_y_seleccionar() manual antes de cada E, no es bug del juego.
+- La seccion A deja encantos_totales > 0 global: el E2E resetea estado con from_dict limpio antes de C para probar la primera visita.
+
+### Recomendaciones para el próximo agente
+- Siguientes iteraciones: seccion C (Incienso) y D (Encantamientos por Tier) — intactas.
+- Si se quiere ver el feedback en vivo, correr con V4 (godot-mcp) y capturar; la UI es un Control hijo de UIRoot.
+- La sonda roja se hizo mutando enchant_tool; repetirla al tocar esa funcion.
+
+**Totales:** 124 ítems · Completados: 35 · Pendientes: 85 · No resueltos: 4.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].

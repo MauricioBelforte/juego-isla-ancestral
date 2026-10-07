@@ -8,7 +8,7 @@
 ## Resumen
 
 Iteracion 3 de **M88 Fuentes-Tipograficas** cerrada. Fila 88: 🔵 10/177 -> **16/185**
-(16 [x] / 3 [?] / 166 [ ] = 185; conteo verificado). Log **1504**. Commit aislado, **sin push**.
+(16 [x] / 3 [?] / 166 [ ] = 185; conteo verificado). Log **1354**. Commit aislado, **sin push**.
 
 ## Los 4 puntos del alcance (mensaje 26)
 
@@ -51,7 +51,7 @@ Iteracion 3 de **M88 Fuentes-Tipograficas** cerrada. Fila 88: 🔵 10/177 -> **1
   seccion "Verificacion (2026-10-06 — mimo)" con 6 [x] + 2 [?], totales 16/166/3=185.
 - `04-Codigo.md`: seccion 18 (Notas del Agente iteracion 3) — sin borrar notas previas.
 - `CHECKLIST-GLOBAL.md` fila 88 y `ESTADO-PARALELO.md` actualizados (reclamo + cierre).
-- Backlog L367 `[ ]` -> `[x]`; log **1504** creado.
+- Backlog L367 `[ ]` -> `[x]`; log **1354** creado.
 
 ## Pendiente
 

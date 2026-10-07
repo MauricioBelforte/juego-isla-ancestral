@@ -1,0 +1,28 @@
+{
+	"id": "shaman_regreso",
+	"start": "saludo",
+	"nodes": {
+		"saludo": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "Salvia: Vuelves al monte. Ya te conozco: llevas {encantos} encantamientos en tus herramientas.",
+			"next_id": "oferta",
+			"placeholders": {
+				"encantos": 0
+			}
+		},
+		"oferta": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "Cada uno deja una marca en la piedra. ¿Quieres fortalecer alguna otra herramienta?",
+			"next_id": "fin",
+			"placeholders": {
+				"encantos": 0
+			}
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.chaman"
+		}
+	}
+}

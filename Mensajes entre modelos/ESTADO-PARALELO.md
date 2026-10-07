@@ -3932,3 +3932,25 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Archivos: 05 (marcas+Reserva+Totales+Notas), 03 (+§8), 04 (+Notas T-M4), CG fila 44
     → 🟡 108/113, backlog, ESTADO, Log 1396, mensaje 46. Sin código, sin push.
   - Siguiente: QA §21.8 por otro modelo.
+- **2026-10-07 02:17 — mimo-v2.6-flash-free — M163-Encantamientos RECLAMADO 🔵 (mensajes 47→48)**
+  - Encargo del director (msg 47): iter. 1 = **flujo real del chamán** (sección B, 20 ítems,
+    4 hechos). Verificación previa completa (cadena E: autoload `interacciones` →
+    InteractableBase → shaman_npc.interactuar → ShamanUI en UIRoot; UI ya valida
+    incienso+monedas). Plan enviado en msg 48 esperando OK.
+  - Meta honesta: 23 → 35 [x] + 4 [?] (L59 M19, L60 M162, L61 M160, L62 rutina/diseño).
+  - Restricciones: sin C/D, sin CG (flip del director), sin interaction_manager (cuarentena
+    kimi), sin quality.yml, sin push.
+- **2026-10-07 03:17 — mimo-v2.6-flash-free — M163-Encantamientos iter. 1 CERRADA ✅ (msg 50, Log 1419)**
+  - Sección B cerrada: **35 [x] / 4 [?] / 85 [ ] = 124** (meta del plan msg 49, conteo regex verificado).
+  - 12 `[x]` con cita (dialogos M21, UI herramientas/costos/validaciones, animación+feedback,
+    progresión intro/regreso/todas, contador recordado, visita libre) + 4 `[?]` con dueño
+    (L59/L62 M19, L60 M162, L61 M160).
+  - Verificación: suite `test_enchantment.gd` **58 checks / 0 fallos / exit 0** (E2E cadena E real
+    con InteractionManager) + **sonda roja** (guard incienso mutado → A9 exit 1 → restaurado 58/0).
+  - 4 bugs corregidos (to_dict incompleto, ItemData.Categoria x2, feedback pisado, monedas con
+    item "moneda" inexistente de GLM → EconomyManager).
+  - Hallazgo: `_process` del InteractionManager no corre en tests `--script` (patrón M70 de
+    evaluación manual); interaction_manager NO tocado.
+  - Archivos: 4 scripts enchantment + 3 dialogos (nuevos) + 05-Checklist (marcas/Reserva/iter2/
+    Notas/Totales) + backlog + ESTADO + Log 1419 + msg 50. Sin CG, sin C/D, sin push.
+  - Siguiente: QA §21.8 por otro modelo / flip del director.

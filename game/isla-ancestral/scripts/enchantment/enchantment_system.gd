@@ -3,8 +3,10 @@ extends Node
 signal enchantment_applied(tool_id: String, enchantment_id: String)
 signal enchantment_removed(tool_id: String)
 signal incense_changed(amount: int)
+signal encantos_changed(total: int)
 
 var _enchantments: Dictionary = {}
+var _encantos_totales: int = 0
 var _incense: int = 0
 var _catalog: Dictionary = {}
 
@@ -62,7 +64,9 @@ func enchant_tool(tool_id: String, enchantment_id: String) -> bool:
 		return false
 	_incense -= enchantment.incense_cost
 	_enchantments[tool_id] = enchantment
+	_encantos_totales += 1
 	incense_changed.emit(_incense)
+	encantos_changed.emit(_encantos_totales)
 	enchantment_applied.emit(tool_id, enchantment_id)
 	return true
 
@@ -73,6 +77,19 @@ func remove_enchantment(tool_id: String) -> void:
 		_enchantments.erase(tool_id)
 		incense_changed.emit(_incense)
 		enchantment_removed.emit(tool_id)
+
+func get_encantos_totales() -> int:
+	return _encantos_totales
+
+## M163 B: true solo si TODAS las herramientas dadas estan encantadas.
+## Lista vacia o sin herramientas -> false (no hay nada que festejar).
+func todas_encantadas(tool_ids: Array) -> bool:
+	if tool_ids.is_empty():
+		return false
+	for tool_id in tool_ids:
+		if not is_enchanted(tool_id):
+			return false
+	return true
 
 func get_sell_bonus(tool_id: String) -> float:
 	var ench = get_tool_enchantment(tool_id)
@@ -91,13 +108,20 @@ func get_active_ability(tool_id: String) -> Dictionary:
 	}
 
 func to_dict() -> Dictionary:
-	return {
+	var d := {
 		"enchantments": _enchantments.keys(),
-		"incense": _incense
+		"incense": _incense,
+		"encantos_totales": _encantos_totales
 	}
+	# M163: por-tool (from_dict lee "enchantment_<tool_id>"; sin esto la
+	# restauracion perdia los encantamientos — A15 del suite).
+	for tool_id in _enchantments:
+		d["enchantment_" + tool_id] = _enchantments[tool_id].id
+	return d
 
 func from_dict(data: Dictionary) -> void:
 	_incense = data.get("incense", 0)
+	_encantos_totales = int(data.get("encantos_totales", 0))
 	_enchantments.clear()
 	var ench_ids = data.get("enchantments", [])
 	for tool_id in ench_ids:

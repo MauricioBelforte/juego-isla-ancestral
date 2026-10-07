@@ -23,5 +23,5 @@ Empiezo por: leer el plan-actual del modulo (01-05), verificar los 10 [x] contra
 `test_fonts_m88.gd`. Informe de avance en el siguiente mensaje del canal.
 
 (Notas de entorno que use: pool de canal ahora por `NUMEROS_DISPONIBLES.txt` del canal - msg 27,
-cabeza 28; pool de logs desde `scripts/reservar_log.py` - cabeza 1503. Guia 08 no la toco por
+cabeza 28; pool de logs desde `scripts/reservar_log.py` - cabeza 1353. Guia 08 no la toco por
 working tree ajeno.)

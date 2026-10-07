@@ -1,0 +1,22 @@
+{
+	"id": "shaman_todas",
+	"start": "saludo",
+	"nodes": {
+		"saludo": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "Salvia: Tus herramientas brillan todas con la voz del monte. No queda ninguna sin encantar.",
+			"next_id": "despedida"
+		},
+		"despedida": {
+			"tipo": 0,
+			"speaker_key": "npc.chaman",
+			"text_key": "Eres un verdadero amigo de la isla. Vuelve cuando el mundo te sorprenda de nuevo.",
+			"next_id": "fin"
+		},
+		"fin": {
+			"tipo": 3,
+			"speaker_key": "npc.chaman"
+		}
+	}
+}
