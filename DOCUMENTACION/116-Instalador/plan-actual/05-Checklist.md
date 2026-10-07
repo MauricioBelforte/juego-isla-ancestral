@@ -289,3 +289,6 @@
 > *"totales REALES (192/192; la linea '180/6/12' estaba obsoleta)"*). Conteo real
 > de marcas: 192 [x] / 0 [ ] / 0 [?]. Las marcas no se tocaron. Se agrega la línea
 > canónica al final del archivo para uniformidad con el resto del bloque.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, paquete opción 1, bloque M152+M116)
+M116 auditado. Sustentado (0 degradaciones). Suites re-corridas POR AGNES: test_installer_m116 18/0 + test_instalador_m116 (build) 15/0, EXIT 0. 192 [x] en disco: scripts/installer/ (instalador_config) + scripts/build/ (build_config_manager, build_validator, validador_instalador) + data/installer + setup_windows.ps1 (fixtures m116). 0 [?]/0 [ ]. No tocar GLOBAL (flip = director).
