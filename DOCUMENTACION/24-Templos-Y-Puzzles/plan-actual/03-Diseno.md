@@ -90,3 +90,27 @@ El sistema respeta "nunca arbitrarios": toda pista está anclada a una regla del
 - **Casi solucion:** `PuzzleRoom.esta_a_casi_solucion()` = distancia de Hamming entre `S` y `T` igual a 1 (feedback sutil, item 148).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1407. Codigo: `scripts/templos/puzzle_def.gd`, `scripts/templos/test_puzzle_datos.gd`; datos `data/templos/puzzles/presion/`.
+
+## Framework emisor→receptor — definiciones (iter. 2 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+Cada concepto del framework queda anclado a su clase viva (implementada en iter. 1) y a los datos.
+Cierra los ítems 27-31 y 35 del checklist.
+
+| Concepto | Definición | Implementación viva |
+|---|---|---|
+| **Emisor** | Elemento que produce una señal por una **acción del jugador** (palanca, golpe) o **del mundo** (peso sobre una placa). Al activarse escribe su valor en el vector de sala. | `scripts/templos/puzzle_emisor.gd` (`PuzzleEmisor`): `recibir_golpe()` (alterna), `set_activo(bool)`, `recibir_peso(peso)` con `umbral_peso` (0 = acción directa; >0 = placa por peso). Llama `sala.set_emisor(id, valor)`. |
+| **Receptor** | Elemento que reacciona con un **efecto visible** cuando su regla se cumple. | `scripts/templos/puzzle_puerta.gd` (`PuzzlePuerta`): `evaluar(activos)` abre si su `nombre_receptor` está en la lista de receptores activos; `abrir()` remueve el sello de voxels. |
+| **Regla** | **Conector declarativo** entre emisores y un receptor, con condiciones. Se cumple cuando **todos** sus emisores están ON. | Datos: `{"emisores": [ids], "receptor": "..."}`; API: `PuzzleRoom.add_regla(emisores, receptor)`; lectura: `PuzzleDef.reglas_def(def)`. La condición extra (umbral de peso) vive en el emisor (`umbral_peso`). |
+| **EstadoSala** | **Vector de emisores** `S` con el valor de cada emisor de la sala. | `scripts/templos/puzzle_room.gd` (`PuzzleRoom`, RefCounted): `emisores` (diccionario id→bool), `get_vector_estado()`, `emisor_on_count()`, `recalcular()`. |
+| **Objetivo único verificable** | **Estado objetivo** `T` (emisores que deben estar ON), declarado en datos. El puzzle **se completa** cuando `S == T`. | Datos: `objetivo: [ids]`; API: `PuzzleDef.ids_objetivo(def)`, `PuzzleRoom.objetivo`, `estado_igual_objetivo()`, `esta_a_casi_solucion()` (Hamming-1). Garantía de justicia: `PuzzleDef.validar_def` exige **exactamente 1** solución mínima y que esa solución == T (`soluciones_minimas()` por fuerza bruta). |
+
+**Cierre de ítems:** 27 (Emisor), 28 (Receptor), 29 (Regla), 30 (EstadoSala), 31 (Objetivo único verificable) y 35 (Documentar el framework). Evidencia: las firmas reales de la tabla + suites `test_puzzle_datos.gd` (42/0) y `test_puzzle_multilateral.gd` (38/0).
+
+## Familia multilateral (iter. 2 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+El puzzle **multilateral** comparte el vector de estado de la sala (no un estado por puzzle suelto). Cierra los ítems 126, 127 y 128.
+
+- **Mapa-emisor central (126):** los sub-emisores de la sala central se declaran juntos en un único vector `S` y una **regla central** los une al receptor de la sala. La sala central de M26 ("Rotonda de la Columna") usa **7 anillos** (uno por glifo), migrados a `data/templos/puzzles/multilateral/multilateral_anillos.json` desde el legacy `puz_anillos` (emisor `columna_7_anillos`). Los 7 anillos juntos abren la sala del puzzle final.
+- **Puerta final por estado completo (127):** el receptor final (`receptor_final`) se activa cuando `S == T`; `T` = las **3 fases** del puzzle final (luz + sonido + agua), migradas a `multilateral_final_3fases.json` desde el legacy `puz_final_3fases` (emisor `espejo_maestro_gongs_timon`, solución `luz_sonido_agua`).
+- **Cruce con el catálogo real:** la suite `test_puzzle_multilateral.gd` verifica que el receptor migrado coincida con el `receptor` del legacy en `data/templos/templo_layout_diseno.json` (no se inventan datos), y que ambos legacy sean `tipo: "multilateral"`.
+- **Justicia:** ambos puzzles tienen exactamente 1 solución mínima == objetivo (`PuzzleDef.validar_def` sin errores). La **sonda roja** de la suite prueba que el detector discrimina: al reemplazar la regla AND por 2 caminos OR incomparables, `soluciones_minimas` pasa a 2 y `validar_def` falla con "ambiguo".

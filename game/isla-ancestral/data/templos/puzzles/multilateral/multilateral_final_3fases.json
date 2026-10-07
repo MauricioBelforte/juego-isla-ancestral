@@ -1,0 +1,22 @@
+{
+	"id": "multilateral_final_3fases",
+	"familia": "multilateral",
+	"schema_version": 1,
+	"descripcion": "Puzzle final de 3 fases (sala 'final' de M26): luz (espejo maestro al rayo cenital) + sonido (3 gongs en orden de glifos) + agua (timon sube el nivel). Migracion del legacy 'puz_final_3fases' (emisor 'espejo_maestro_gongs_timon', solucion 'luz_sonido_agua') al esquema datos-driven: 3 emisores de fase + una regla final AND + objetivo de estado completo.",
+	"origen_legacy": {
+		"id": "puz_final_3fases",
+		"archivo": "data/templos/templo_layout_diseno.json",
+		"emisor": "espejo_maestro_gongs_timon",
+		"receptor": "receptor_final",
+		"solucion": "luz_sonido_agua"
+	},
+	"emisores": [
+		{"id": 0, "tipo": "luz", "etiqueta": "espejo_maestro"},
+		{"id": 1, "tipo": "sonido", "etiqueta": "gongs"},
+		{"id": 2, "tipo": "agua", "etiqueta": "timon_agua"}
+	],
+	"reglas": [
+		{"emisores": [0, 1, 2], "receptor": "receptor_final"}
+	],
+	"objetivo": [0, 1, 2]
+}

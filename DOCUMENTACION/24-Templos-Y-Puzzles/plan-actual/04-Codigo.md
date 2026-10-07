@@ -80,3 +80,25 @@ Las rutas C# de arriba son **diseno heredado de Unity** (no existen en el proyec
 **Contrato:** el codigo es solo el interprete; cada puzzle se define en datos (regla 1 de esta seccion). El validador de unicidad (`soluciones_minimas == 1`) corre en tests; el gate de CI queda **pendiente de visto bueno de s2** (dueno de `quality.yml`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1407.
+
+## Framework emisor→receptor — mapa de conceptos a código (iter. 2 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+| Concepto | Archivo | API clave |
+|---|---|---|
+| Emisor | `scripts/templos/puzzle_emisor.gd` | `recibir_golpe()`, `set_activo(bool)`, `recibir_peso(peso)` (+ `umbral_peso`) |
+| Receptor | `scripts/templos/puzzle_puerta.gd` | `evaluar(activos)`, `abrir()` |
+| Regla | `scripts/templos/puzzle_room.gd` / `puzzle_def.gd` | `PuzzleRoom.add_regla(emisores, receptor)`, `PuzzleDef.reglas_def(def)` |
+| EstadoSala | `scripts/templos/puzzle_room.gd` | `emisores`, `get_vector_estado()`, `recalcular()` |
+| Objetivo único | `scripts/templos/puzzle_def.gd` / `puzzle_room.gd` | `PuzzleDef.ids_objetivo(def)`, `PuzzleRoom.objetivo`, `estado_igual_objetivo()` |
+
+## Familia multilateral (iter. 2 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+| Archivo | Contenido |
+|---|---|
+| `scripts/templos/test_puzzle_multilateral.gd` | **NUEVO iter. 2.** Suite headless de la familia multilateral: 38 checks, 0 fallos, EXIT 0 x3; piso `CHECKS_MINIMOS=38` medido; **sonda ROJA en vivo** (ambigüedad inyectada en el JSON real -> EXIT 1 con 6 fallos nombrados; JSON restaurado byte-exacto, sha256 verificado). |
+| `data/templos/puzzles/multilateral/multilateral_anillos.json` | **NUEVO iter. 2.** Migración de `puz_anillos` (columna de 7 anillos de M26): 7 emisores (glifos) + regla central AND + objetivo `[0..6]`. |
+| `data/templos/puzzles/multilateral/multilateral_final_3fases.json` | **NUEVO iter. 2.** Migración de `puz_final_3fases` (luz+sonido+agua): 3 emisores de fase + regla final AND + objetivo `[0..2]`. |
+
+**Contrato:** el código sigue siendo el intérprete; los 2 puzzles multilaterales se definen en datos y los valida `PuzzleDef.validar_def`. El gate de CI de la suite queda **pendiente de visto bueno de s2** (dueño de `quality.yml`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 2.

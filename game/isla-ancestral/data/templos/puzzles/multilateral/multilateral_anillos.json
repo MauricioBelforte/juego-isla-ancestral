@@ -1,0 +1,26 @@
+{
+	"id": "multilateral_anillos",
+	"familia": "multilateral",
+	"schema_version": 1,
+	"descripcion": "Columna de 7 anillos (sala central de M26). Migracion del puzzle legacy 'puz_anillos' (emisor 'columna_7_anillos', solucion '7_anillos_glifos') al esquema datos-driven: 7 emisores (un anillo por glifo) + una regla central AND + objetivo de estado completo. Los 7 anillos juntos abren la sala del puzzle final.",
+	"origen_legacy": {
+		"id": "puz_anillos",
+		"archivo": "data/templos/templo_layout_diseno.json",
+		"emisor": "columna_7_anillos",
+		"receptor": "receptor_columna",
+		"solucion": "7_anillos_glifos"
+	},
+	"emisores": [
+		{"id": 0, "tipo": "anillo", "etiqueta": "glifo_brisa"},
+		{"id": 1, "tipo": "anillo", "etiqueta": "glifo_raiz"},
+		{"id": 2, "tipo": "anillo", "etiqueta": "glifo_luna"},
+		{"id": 3, "tipo": "anillo", "etiqueta": "glifo_marea"},
+		{"id": 4, "tipo": "anillo", "etiqueta": "glifo_cenit"},
+		{"id": 5, "tipo": "anillo", "etiqueta": "glifo_eco"},
+		{"id": 6, "tipo": "anillo", "etiqueta": "glifo_sello"}
+	],
+	"reglas": [
+		{"emisores": [0, 1, 2, 3, 4, 5, 6], "receptor": "receptor_columna"}
+	],
+	"objetivo": [0, 1, 2, 3, 4, 5, 6]
+}

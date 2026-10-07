@@ -24,15 +24,15 @@
 
 ## Framework emisor→receptor
 
-- [ ] Definir Emisor (señal por acción del jugador o del mundo) [M]
-- [ ] Definir Receptor (efecto visible) [M]
-- [ ] Definir Regla (conector declarativo con condiciones) [M]
-- [ ] Definir EstadoSala (vector de emisores) [M]
-- [ ] Definir Objetivo único verificable [M]
+- [x] Definir Emisor (señal por acción del jugador o del mundo) [M] — `PuzzleEmisor`: `recibir_golpe()` (jugador) + `recibir_peso()`/`set_activo()` (mundo); ver 03-Diseno seccion "Framework emisor→receptor — definiciones"
+- [x] Definir Receptor (efecto visible) [M] — `PuzzlePuerta.evaluar(activos)`/`abrir()` remueve el sello de voxels (efecto visible)
+- [x] Definir Regla (conector declarativo con condiciones) [M] — datos `{emisores:[ids], receptor}` + `PuzzleRoom.add_regla()` + `PuzzleDef.reglas_def()`; condicion extra = `umbral_peso`
+- [x] Definir EstadoSala (vector de emisores) [M] — `PuzzleRoom.emisores` + `get_vector_estado()`/`recalcular()`
+- [x] Definir Objetivo único verificable [M] — `objetivo` en datos + `estado_igual_objetivo()`; unicidad por `PuzzleDef.validar_def` (1 solucion minima == T)
 - [x] Definir Validador de arbitrariedad (1 solución alcanzable) [C] — `PuzzleDef.soluciones_minimas()` exige 1; detector de ambigüedad probado EN ROJO (Log 1407)
 - [x] Definir serialización JSON/YAML de cada puzzle [M]
 - [x] Definir ejecución datos-driven (intérprete, no código por sala) [M] — `PuzzleDef.a_puzzle_room()` + datos `data/templos/puzzles/presion/*.json`; 2 puzzles cargados y validados (Log 1407)
-- [ ] Documentar el framework en el plan-actual [M]
+- [x] Documentar el framework en el plan-actual [M] — seccion nueva en 03-Diseno.md + mapa de conceptos en 04-Codigo.md (iter. 2)
 
 ## Familia: puzzles de luz
 
@@ -123,9 +123,9 @@
 - [ ] Definir uso de farol (iluminar runa) [S]
 - [ ] Definir condición de inventario presente para la herramienta [S]
 - [x] Definir puzzles multilaterales con estado compartido de sala [M]
-- [ ] Definir mapa-emisor central para multilaterales [M]
-- [ ] Definir puerta final por estado completo [S]
-- [ ] Documentar las familias de herramientas y multilaterales [S]
+- [x] Definir mapa-emisor central para multilaterales [M] — sala central de M26: 7 anillos en un unico vector S con regla central (`multilateral_anillos.json`); validado por `validar_def`
+- [x] Definir puerta final por estado completo [S] — `receptor_final` se activa con S == objetivo (3 fases luz+sonido+agua; `multilateral_final_3fases.json`)
+- [x] Documentar las familias de herramientas y multilaterales [S] — familia multilateral documentada en 03-Diseno/04-Codigo; 2 puzzles legacy migrados + suite `test_puzzle_multilateral.gd` (38/0)
 
 ## Pistas y sistema de ayuda
 
@@ -223,7 +223,7 @@
 - `puzzle_invariant.gd` (M66) delega la validación concreta a M24/M26 (`_check()` siempre true). El framework de M24 ahora expone `validar()` lista para ser usada por ese invariante.
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.
-**Totales:** 128 ítems · Completados: 34 · Pendientes: 93 · No resueltos: 1.
+**Totales:** 128 ítems · Completados: 43 · Pendientes: 84 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].
@@ -243,3 +243,12 @@ Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia:
 - Regresion: test_puzzles.gd 0 fallos, test_templo_headless.gd 4/0, test_templo_m26.gd 92/0 — todos EXIT 0.
 - Semantica decidida con el director: el objetivo T se declara en datos y completa con S == T (no "todas las reglas"). Ver `03-Diseno.md`, seccion "Semantica de objetivo y solucion".
 - Conteo MEDIDO: 34 completados / 1 con dudas / 93 pendientes = 128.
+
+## Iteracion 2 — framework documentado + familia multilateral migrada (2026-10-07)
+
+**Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy | **Plan:** aprobado por el director (canal DeepSeek/68).
+
+- **Frente A (docs, items 27-31 y 35):** 03-Diseno.md gana la seccion "Framework emisor→receptor — definiciones" (Emisor/Receptor/Regla/EstadoSala/Objetivo anclados a las clases reales) y 04-Codigo.md el mapa de conceptos a codigo.
+- **Frente B (familia multilateral, items 126-128):** NUEVOS `data/templos/puzzles/multilateral/multilateral_anillos.json` (7 anillos, migrado de `puz_anillos`) y `multilateral_final_3fases.json` (3 fases luz+sonido+agua, migrado de `puz_final_3fases`), ambos en esquema `{emisores, reglas, objetivo}`; NUEVO `test_puzzle_multilateral.gd` (38 checks, 0 fallos, EXIT 0 x3; piso `CHECKS_MINIMOS=38` medido; sonda ROJA en vivo: ambiguedad inyectada en el JSON real -> EXIT 1 con 6 fallos nombrados, JSON restaurado byte-exacto).
+- **Cruce contra el catalogo real:** la suite verifica que el receptor migrado coincida con `templo_layout_diseno.json` (no se inventan datos).
+- **Conteo MEDIDO:** 43 completados / 1 con dudas / 84 pendientes = 128.
