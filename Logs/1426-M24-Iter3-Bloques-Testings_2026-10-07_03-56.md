@@ -96,3 +96,29 @@ MODIFICADOS:
 - Flip de la fila 24 del GLOBAL a 57/128 (director).
 - OK de s2 para cablear las suites en `quality.yml` (aditivo).
 - Iter. 4 (familias luz/espejos/agua/hielo/gravedad/sonido/pistas) - alcance a proponer.
+
+## 11. Huella de push (AGENTS.md 4.3)
+
+- **Rango empujado:** `d6407a8..b6968ad` (2 commits). Salida literal de `git push`:
+  `d6407a8..b6968ad  wb-m24-iter3 -> main`
+- **Fecha/hora:** 2026-10-07 04:16 (GMT-3) / UTC 07:16.
+- **Ejecutante:** DeepSeek-V4.1-Flash (WorkBuddy).
+- **Comandos:** `git fetch origin` + `git status` (origin sin mover) y
+  `git push origin wb-m24-iter3:main` (fast-forward; NO `--force`).
+- **Que se empujo (13 archivos, TODOS de M24 iter. 3):**
+  - commit `d01ced5` (10 archivos): `scripts/templos/puzzle_bloques.gd`,
+    `scripts/templos/test_puzzle_bloques.gd`, `data/templos/puzzles/bloques/bloques_01.json`,
+    `data/templos/puzzles/bloques/bloques_02.json`, `plan-actual/02-Analisis.md`,
+    `03-Diseno.md`, `04-Codigo.md`, `05-Checklist.md`, `06-Plan-Testings.md`,
+    `07-Resultados-Testings.md`.
+  - commit `b6968ad` (3 archivos): `Logs/1426-...md`, canal `73-...md` y
+    `.ultima-revision-deepseek.txt` (tracker -> 74).
+- **Metodo (importante):** los 2 commits se construyeron con **indice AISLADO**
+  (`GIT_INDEX_FILE` + `git read-tree origin/main` + `git commit-tree -p origin/main`), de modo que su
+  padre es `origin/main` y NO los 9 commits ajenos que HEAD tenia delante (mimo M163; agnes
+  BUG-095/M120/M100/M113/M85/M131). Verificado ANTES de empujar:
+  `git diff --name-only origin/main <commit>` = exactamente mis archivos; 0 ajenos.
+- **NO se empujaron** los 9 commits ajenos (siguen locales, `git log origin/main..main` = 9).
+  Consecuencia: `origin/main` avanzo en lineal solo con lo mio; el `main` local queda divergente de
+  `origin/main` por esos 9 ajenos -> el push de los ajenos requerira `git pull --rebase` (o merge).
+  Reportado al director (canal 75).
