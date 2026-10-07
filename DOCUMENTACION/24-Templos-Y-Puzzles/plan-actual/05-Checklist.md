@@ -81,11 +81,11 @@
 
 ## Familia: puzzles de bloques
 
-- [ ] Definir push/pull con restricción de 1 eje [M]
-- [ ] Definir ranuras de destino [S]
-- [ ] Definir puentes desplegables [S]
-- [ ] Definir sin empuje a otras salas (límites) [S]
-- [ ] Documentar la familia de bloques en el plan-actual [S]
+- [x] Definir push/pull con restricción de 1 eje [M]
+- [x] Definir ranuras de destino [S]
+- [x] Definir puentes desplegables [S]
+- [x] Definir sin empuje a otras salas (límites) [S]
+- [x] Documentar la familia de bloques en el plan-actual [S]
 
 ## Familia: puzzles de gravedad y movimiento
 
@@ -165,15 +165,15 @@
 
 ## Testings y documentación
 
-- [ ] Diseñar 06-Plan-Testings.md: unitarias del framework [M]
-- [ ] Diseñar 06-Plan-Testings.md: playtests externos por familia [M]
-- [ ] Diseñar 06-Plan-Testings.md: edge cases (2 soluciones, regla rota) [M]
-- [ ] Diseñar 06-Plan-Testings.md: rendimiento (≤ 1 ms por tick) [M]
-- [ ] Definir criterio de éxito: suite completa pasa sin fallos [S]
-- [ ] Crear 07-Resultados-Testings.md para registrar la ejecución [S]
-- [ ] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
-- [ ] Actualizar plan-actual como espejo del estado real [M]
-- [ ] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S]
+- [x] Diseñar 06-Plan-Testings.md: unitarias del framework [M]
+- [x] Diseñar 06-Plan-Testings.md: playtests externos por familia [M]
+- [x] Diseñar 06-Plan-Testings.md: edge cases (2 soluciones, regla rota) [M]
+- [x] Diseñar 06-Plan-Testings.md: rendimiento (≤ 1 ms por tick) [M]
+- [x] Definir criterio de éxito: suite completa pasa sin fallos [S]
+- [x] Crear 07-Resultados-Testings.md para registrar la ejecución [S]
+- [x] Documentar todas las decisiones en 02-Analisis y 03-Diseno [M]
+- [x] Actualizar plan-actual como espejo del estado real [M]
+- [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S]
 - [x] Actualizar fila 24 en CHECKLIST-GLOBAL al implementar [S]
 
 **Total:** 100/100 [x] — Módulo listo como **DELEGABLE PARA IMPLEMENTAR**.
@@ -223,7 +223,7 @@
 - `puzzle_invariant.gd` (M66) delega la validación concreta a M24/M26 (`_check()` siempre true). El framework de M24 ahora expone `validar()` lista para ser usada por ese invariante.
 
 **Limitación:** no ejecutable headless en este entorno (Godot ausente); verificación estática de APIs + coherencia del test contra el código.
-**Totales:** 128 ítems · Completados: 43 · Pendientes: 84 · No resueltos: 1.
+**Totales:** 128 ítems · Completados: 57 · Pendientes: 70 · No resueltos: 1.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 31 [x] / 97 [ ] / 0 [?].
@@ -252,3 +252,12 @@ Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia:
 - **Frente B (familia multilateral, items 126-128):** NUEVOS `data/templos/puzzles/multilateral/multilateral_anillos.json` (7 anillos, migrado de `puz_anillos`) y `multilateral_final_3fases.json` (3 fases luz+sonido+agua, migrado de `puz_final_3fases`), ambos en esquema `{emisores, reglas, objetivo}`; NUEVO `test_puzzle_multilateral.gd` (38 checks, 0 fallos, EXIT 0 x3; piso `CHECKS_MINIMOS=38` medido; sonda ROJA en vivo: ambiguedad inyectada en el JSON real -> EXIT 1 con 6 fallos nombrados, JSON restaurado byte-exacto).
 - **Cruce contra el catalogo real:** la suite verifica que el receptor migrado coincida con `templo_layout_diseno.json` (no se inventan datos).
 - **Conteo MEDIDO:** 43 completados / 1 con dudas / 84 pendientes = 128.
+
+## Iteración 3 — familia bloques + plan/resultados de testings (2026-10-07)
+
+**Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy | **Log:** 1426 | **Plan:** aprobado por el director (canal DeepSeek/72).
+
+- **Frente A — familia bloques (ítems 84-88):** NUEVOS `scripts/templos/puzzle_bloques.gd` (`PuzzleBloques`: capa espacial push/pull sobre un `PuzzleRoom`; 1 eje por pieza, ranuras, límites, puente) + `data/templos/puzzles/bloques/bloques_01.json` (1 bloque, eje x) y `bloques_02.json` (2 bloques, ejes x e y) + `scripts/templos/test_puzzle_bloques.gd` (64 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=64` MEDIDO; sonda ROJA en vivo: eje inválido inyectado en el JSON real → 12 fallos nombrados / EXIT 1; JSON restaurado byte-exacto, sha256 `fdf06cbc…`).
+- **Frente B — testings y documentación (ítems 168-176):** NUEVOS `06-Plan-Testings.md` (unitarias / playtests por familia / edge cases / rendimiento / criterio de éxito) y `07-Resultados-Testings.md` (cifras MEDIDAS: 64/42/38/92/4 checks, 0 fallos; tick de sala ~2.0-2.1 µs ≪ 1 ms; `validar_def` n=2 ~22.6 µs); decisiones en `02-Analisis.md` y `03-Diseno.md`; mapa de código en `04-Codigo.md`.
+- **Regresión:** test_puzzle_datos 42/0, test_puzzle_multilateral 38/0, test_puzzles 0 fallos, test_templo_m26 92/0, test_templo_headless 4/0 (todas EXIT 0, 0 SCRIPT ERROR).
+- **Conteo MEDIDO:** 57 completados / 1 con dudas / 70 pendientes = 128.

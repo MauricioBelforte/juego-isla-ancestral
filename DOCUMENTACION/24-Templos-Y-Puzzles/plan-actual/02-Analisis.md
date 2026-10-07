@@ -49,3 +49,18 @@
 - **Estado global por sala** (no por puzzle suelto): el framework permite puzzles multilaterales compartiendo estado (mapa-emisor).
 - **Dificultad por banda + subida por intento:** si el jugador falla 3 veces → pista progresiva automática (nunca penaliza).
 - **Recompensas nunca duplicables** (integración M66 cofre) y siempre alineadas con el lore del templo.
+
+## Familia bloques: por qué una capa espacial aparte (iter. 3 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+- **Problema:** el framework emisor→receptor modela un **vector booleano de sala**; la familia
+  bloques (push/pull) necesita además una **grilla** con posiciones, un eje por pieza y límites de
+  sala. Meter esa semántica dentro de `PuzzleRoom` habría acoplado el framework a una sola familia.
+- **Decisión:** un intérprete propio, `PuzzleBloques` (`scripts/templos/puzzle_bloques.gd`), que
+  **traduce** posiciones→emisores sobre un `PuzzleRoom` ya existente. El framework no cambia; la
+  familia bloques se declara en datos (`{emisores, reglas, objetivo}` + bloque `bloques`).
+- **Alternativa descartada:** añadir campos espaciales a `PuzzleDef`/`PuzzleRoom`. Habría hecho
+  obligatoria la grilla para puzzles que no la usan (presión, multilateral).
+- **Verificación:** la capa espacial se valida aparte (`validar_espacial`) y se prueba con sonda roja
+  (eje inválido, límite abierto) **además** de la unicidad del framework (`validar_def`).
+- **Sin migración legacy:** el catálogo `templo_layout_diseno.json` no tiene ningún puzzle
+  `tipo: "bloques"`, así que esta familia se **diseña** (los ítems 84-88 son "Definir", no "Migrar").

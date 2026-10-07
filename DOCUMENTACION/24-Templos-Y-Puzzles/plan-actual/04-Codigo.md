@@ -102,3 +102,26 @@ Las rutas C# de arriba son **diseno heredado de Unity** (no existen en el proyec
 **Contrato:** el código sigue siendo el intérprete; los 2 puzzles multilaterales se definen en datos y los valida `PuzzleDef.validar_def`. El gate de CI de la suite queda **pendiente de visto bueno de s2** (dueño de `quality.yml`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 2.
+
+## Familia bloques (iter. 3 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+| Archivo | Contenido |
+|---|---|
+| `scripts/templos/puzzle_bloques.gd` | **NUEVO iter. 3.** `PuzzleBloques` (RefCounted): capa espacial de la familia bloques. `cargar` / `desde_def`, `empujar(pieza_id, dx, dy)`, `eje_de`, `posicion`, `ranura_de`, `ranuras_ocupadas`, `puente_activo`, `validar_espacial`. Traduce posiciones→emisores sobre un `PuzzleRoom`; no modifica el framework. |
+| `data/templos/puzzles/bloques/bloques_01.json` | **NUEVO iter. 3.** 1 bloque, eje `x`, 1 ranura, receptor `puente_bloques`. |
+| `data/templos/puzzles/bloques/bloques_02.json` | **NUEVO iter. 3.** 2 bloques (uno eje `x`, uno eje `y`), 2 ranuras, regla AND → `puente_bloques`. |
+| `scripts/templos/test_puzzle_bloques.gd` | **NUEVO iter. 3.** Suite headless: 64 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=64` **medido**; **sonda ROJA en vivo** (eje inválido inyectado en el JSON real → 12 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 verificado). |
+
+| Concepto (familia bloques) | Archivo | API clave |
+|---|---|---|
+| Pieza empujable | `scripts/templos/puzzle_bloques.gd` | `empujar(pieza_id, dx, dy)`, `eje_de(id)`, `posicion(id)` |
+| Ranura de destino | `scripts/templos/puzzle_bloques.gd` | `ranura_de(id)`, `ranuras_ocupadas()` |
+| Puente desplegable | `scripts/templos/puzzle_bloques.gd` / `puzzle_puerta.gd` | `puente_activo()` (receptor `puente_bloques`) |
+| Límites de sala | `scripts/templos/puzzle_bloques.gd` | `limites`, `validar_espacial()` |
+
+**Contrato:** `PuzzleBloques` es el intérprete espacial; los puzzles se definen en datos
+(`{emisores, reglas, objetivo}` + bloque `bloques`) y los validan `PuzzleDef.validar_def` +
+`PuzzleBloques.validar_espacial`. El gate de CI de la suite queda **pendiente del visto bueno de s2**
+(dueño de `quality.yml`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 3.

@@ -114,3 +114,49 @@ El puzzle **multilateral** comparte el vector de estado de la sala (no un estado
 - **Puerta final por estado completo (127):** el receptor final (`receptor_final`) se activa cuando `S == T`; `T` = las **3 fases** del puzzle final (luz + sonido + agua), migradas a `multilateral_final_3fases.json` desde el legacy `puz_final_3fases` (emisor `espejo_maestro_gongs_timon`, solución `luz_sonido_agua`).
 - **Cruce con el catálogo real:** la suite `test_puzzle_multilateral.gd` verifica que el receptor migrado coincida con el `receptor` del legacy en `data/templos/templo_layout_diseno.json` (no se inventan datos), y que ambos legacy sean `tipo: "multilateral"`.
 - **Justicia:** ambos puzzles tienen exactamente 1 solución mínima == objetivo (`PuzzleDef.validar_def` sin errores). La **sonda roja** de la suite prueba que el detector discrimina: al reemplazar la regla AND por 2 caminos OR incomparables, `soluciones_minimas` pasa a 2 y `validar_def` falla con "ambiguo".
+
+## Familia bloques (iter. 3 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **bloques** (push/pull) es la primera que necesita una **capa espacial** además del
+framework emisor→receptor: el movimiento ocurre en una grilla, no en un vector abstracto. Se resolvió
+con un intérprete propio (`PuzzleBloques`) que traduce posiciones→emisores sin tocar el framework.
+Cierra los ítems 84, 85, 86, 87 y 88.
+
+- **Push/pull con restricción de 1 eje (84):** cada pieza declara `eje` ∈ {`x`, `y`}.
+  `PuzzleBloques.empujar()` rechaza cualquier paso que no sea unitario y ortogonal al eje declarado;
+  un eje fuera del vocabulario se detecta en `validar_espacial()` (una pieza con eje inválido nunca
+  se mueve, jamás "en silencio").
+- **Ranuras de destino (85):** cada pieza declara `ranura` (celda objetivo). Cuando `pos == ranura`,
+  el emisor asociado pasa a ON; al completarse todas las ranuras, `S == T`.
+- **Puentes desplegables (86):** el receptor del puzzle es un **puente** (`puente_bloques`); su efecto
+  visible (desplegarse) ocurre cuando el estado de sala coincide con el objetivo.
+- **Sin empuje a otras salas (87):** la sala declara
+  `limites: {salir_de_grilla: false, salas_adyacentes: false}`. `empujar()` rechaza salir de la grilla
+  y ocupar una celda ocupada por otra pieza; `validar_espacial()` exige que ambos límites estén en `false`.
+- **Documentación (88):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `bloques_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "ranura", "etiqueta": "ranura_este"}],
+  "reglas":   [{"emisores": [0], "receptor": "puente_bloques"}],
+  "objetivo": [0],
+  "bloques": {
+    "grilla":   {"ancho": 4, "alto": 1},
+    "limites":  {"salir_de_grilla": false, "salas_adyacentes": false},
+    "piezas":   [{"id": "bloque_a", "pos": [0, 0], "eje": "x", "ranura": [3, 0], "emisor": 0}]
+  }
+}
+```
+
+**Por qué no hay migración legacy:** el catálogo `data/templos/templo_layout_diseno.json` no tiene
+ningún puzzle `tipo: "bloques"` (a diferencia de multilateral, que migró 2 legacy). Por eso la familia
+se **diseña** desde el esquema — los ítems 84-88 son "Definir", no "Migrar". Los datos viven en
+`data/templos/puzzles/bloques/`.
+
+**Justicia:** ambos puzzles tienen exactamente 1 solución mínima == objetivo (`PuzzleDef.validar_def`).
+La **sonda roja** de la suite prueba la capa espacial (eje inválido → 12 fallos nombrados, EXIT 1,
+JSON restaurado byte-exacto) y la ambigüedad de reglas.
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1426.

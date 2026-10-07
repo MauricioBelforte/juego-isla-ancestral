@@ -1,0 +1,20 @@
+{
+	"id": "bloques_01",
+	"familia": "bloques",
+	"schema_version": 1,
+	"descripcion": "Un bloque empujable SOLO en el eje X: llevarlo a su ranura de destino despliega el puente.",
+	"emisores": [
+		{"id": 0, "tipo": "ranura", "etiqueta": "ranura_este"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "puente_bloques"}
+	],
+	"objetivo": [0],
+	"bloques": {
+		"grilla": {"ancho": 4, "alto": 1},
+		"limites": {"salir_de_grilla": false, "salas_adyacentes": false},
+		"piezas": [
+			{"id": "bloque_a", "pos": [0, 0], "eje": "x", "ranura": [3, 0], "emisor": 0}
+		]
+	}
+}
