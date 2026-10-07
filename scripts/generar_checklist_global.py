@@ -116,7 +116,9 @@ def contar_checklist(archivo: Path):
 def inferir_estado(x: int, pendientes: int, dudas: int, estado_previo: str = ""):
     """Infiere el estado del módulo según el conteo de subitems.
 
-    Respeta estados previos en curso (🔵/🔴) para no desmarcarlos.
+    Respeta estados previos en curso (🔵/🔴) y liberados (🟡) para no
+    desmarcarlos: la inferencia solo puede *abrir* un módulo a En curso
+    cuando nadie lo había reclamado ni liberado antes.
     """
     total = x + pendientes + dudas
     if total == 0:
@@ -131,6 +133,16 @@ def inferir_estado(x: int, pendientes: int, dudas: int, estado_previo: str = "")
         # Mantener el estado en curso previo (🔵 o 🔴) si existía
         if "🔴" in estado_previo:
             return "🔴 En curso con riesgo"
+        if "🔵" in estado_previo:
+            return "🔵 En curso"
+        # Respetar un 🟡 Liberado previo: no degradarlo a 🔵 En curso.
+        # La inferencia no sabe por qué se liberó con dudas (deuda de
+        # documentación, integraciones externas, etc.); reclamarlo como
+        # "en curso" es un cambio de estado que solo puede hacer un agente.
+        # El texto manual p. ej. "🟡 Liberado (Log 831)" se conserva luego
+        # por la protección de emoji-coincidente del bucle principal.
+        if "🟡" in estado_previo:
+            return "🟡 Con dudas"
         return "🔵 En curso"
 
     return "🟢 Disponible"

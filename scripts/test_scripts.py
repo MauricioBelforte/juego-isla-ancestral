@@ -111,8 +111,20 @@ def test_inferir_estado():
     assert gen.inferir_estado(0, 5, 0) == "🟢 Disponible"
     assert gen.inferir_estado(2, 3, 0) == "🔵 En curso"
     assert gen.inferir_estado(2, 3, 0, "🔴 En curso con riesgo") == "🔴 En curso con riesgo"
+    assert gen.inferir_estado(2, 3, 0, "🔵 En curso") == "🔵 En curso"
     assert gen.inferir_estado(2, 0, 0) == "✅ Completado"
     assert gen.inferir_estado(1, 0, 2) == "🟡 Con dudas"
+    # T-OM04 (fix 2026-10-07): un 🟡 Liberado previo NO se reclama como 🔵.
+    # La inferencia no sabe por qué se liberó; solo un agente puede reclamarlo.
+    assert gen.inferir_estado(5, 3, 0, "🟡 Con dudas") == "🟡 Con dudas"
+    assert gen.inferir_estado(5, 3, 0, "🟡 Liberado (Log 831)") == "🟡 Con dudas"
+    assert gen.inferir_estado(5, 3, 0, "🟡 Con dudas (iter. agnes)") == "🟡 Con dudas"
+    # Caso límite: 🟡 con checklist completo al 100% sigue abriendo a ✅
+    # (no es parte del bug T-OM04; el flip a ✅ real exige QA §21.8, que es
+    # protección separada del bucle principal, no de esta función).
+    assert gen.inferir_estado(5, 0, 0, "🟡 Liberado (Log 831)") == "✅ Completado"
+    # Sin estado previo, el comportamiento original se mantiene intacto
+    assert gen.inferir_estado(5, 3, 0, "") == "🔵 En curso"
 
 
 def test_leer_tabla_existente():
