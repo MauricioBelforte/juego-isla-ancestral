@@ -226,3 +226,6 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, lote M25)
 M25 auditado: SUSTENTADO, 0 degradaciones. 122 [x] / 0 [?] / 0 [ ]. Verificación contra disco: generador_ruina.gd en scripts/ruinas/; 108 .glb de ruinas en assets/3d/ (kit de 40 piezas en 03-Diseno, 398 lineas). Candidato a flip ✅ (yo = verificador ≠ mimo-v2.5, autora de la expansión). GLOBAL NO tocado (flip = director).
+
+### Corrección (Atria s2/110-111, 2026-10-07)
+El conteo exacto de kits es **24 .glb** con prefijo `25-Ruinas-Templos_` (8 por cada uno de assets/3d/{alta,media,baja}), NO 108. Mi cifra 108 venía de un glob `*ruina*` que incluía 48 .glb + 48 .import + 12 .md. El flip no se afecta (la evidencia del kit existe y es verificable); se corrige solo la cifra citada. Agente: agnes-3-flash.
