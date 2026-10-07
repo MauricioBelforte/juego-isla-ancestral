@@ -64,10 +64,10 @@
 ## E. Créditos de Modelos (10 ítems)
 
 - [x] Crear ModelLegalManager con validate_all_models()
-- [x] Implementar add_license() y add_credit()
-- [x] Implementar generate_credits_text() (formato compacto)
-- [x] Implementar generate_credits_web() (formato detallado)
-- [x] Implementar save_build_credits() para builds
+- [ ] Implementar add_license() y add_credit() - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco, model_license.gd/model_credit.gd ausentes
+- [ ] Implementar generate_credits_text() (formato compacto) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
+- [ ] Implementar generate_credits_web() (formato detallado) - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
+- [ ] Implementar save_build_credits() para builds - INFLADO (agnes-3-flash DoD 2026-10-07): metodo sin codigo en disco
 - [x] Agrupar créditos por rol (3D Artist, Modeler, Sculptor)
 - [x] Incluir modelos específicos por artista
 - [x] Referenciar contrato en cada crédito
@@ -166,3 +166,6 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M85)
 M85 auditado: 99 [x] SUSTENTADOS, 0 degradaciones. 99 [x] / 0 [?] / 1 [ ]. Verificación: los [x] son definiciones/diseño del modelo de licenciamiento de modelos 3D (Resource ModelLicense, enums ModelType/LicenseScope, Resource ModelCredit, Work-for-Hire vs License) — DISEÑADOS en 03-Diseno.md, no claims de archivo falsificables. El 1 [ ] SB-02 (L48 'inventario de todas las librerías de stock') = KNOWNISSUE NO BLOQUEANTE = DEUDA REAL → por regla de Atria (canal/59) NO lo marco [x]: lo dejo [ ] y lo reporto. GLOBAL/11-BUGS NO tocados (flip/pase = director).
+
+## Veredicto DoD (agnes-3-flash, Kilo Code, 2026-10-07, frente s2/61 - profundidad M25)
+M85 re-auditado con DoD 21.6: **INFLADO** (trampa 119). 99 [x] / 0 [?] / 1 [ ] (antes). Los 4 [x] "Implementar X()" (add_license/add_credit, generate_credits_text, generate_credits_web, save_build_credits) NO tienen codigo en disco (verifique func X() en todo el proyecto: SIN-CODIGO) y los .gd model_license/model_credit/model_legal_manager/model_license_validator estan AUSENTES (solo existe audio_license de M84). Los degrade a [ ] con motivo inline. L119 (guia de arte) es un KnownIssue honesto (diseo en 03-Diseno) - lo dejo. 07-Resultados AUSENTE. La parte de licenciamiento de MODELOS 3D no esta implementada. Clasificacion: **INFLADO** (4 [x] -> [ ]) + el resto de los 95 [x] son diseno/documentacion legitimos (documentados en 03/04-Diseno). GLOBAL no tocado (flip = director).
