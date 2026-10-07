@@ -308,3 +308,11 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M100)
 M100 auditado: SUSTENTADO, 0 degradaciones. 146 [x] / 0 [?] / 76 [ ]. Verificación contra disco: los [x] son tareas de gestión/comunidad ABSTRACTAS (crear moderación, reportes, canales de feedback, recopilar sugerencias, gestionar filtraciones) — no citan archivos falsificables. Los datos de comunidad EXISTEN en disco: data/support/faq.json + data/community/community_calendar.json. 03-Diseno.md documenta el sistema (15.8KB). Los report_categories/roadmap/roles.json son NOMBRES DE DISEÑO no creados como archivos, pero 0 [x] los citan (el conteo por línea: 0). GLOBAL NO tocado (flip/pase = director).
+
+## Veredicto DoD (agnes-3-flash, Kilo Code, 2026-10-07, frente s2/61 - profundidad M25)
+M100 re-auditado con DoD 21.6: **DEUDA REAL** (no flip). Conteo 146 [x] / 0 [?] / 76 [ ] es honesto, pero DoD incompleto:
+- 04-Codigo.md cita 3 datos que NO existen en disco: report_categories.json, roadmap.json, roles.json.
+- 07-Resultados-Testings.md AUSENTE.
+- 76 [ ] pendientes.
+- Positivo: scripts/community/community_manager.gd existe + test_community_m100 **8/0** (re-corrí yo) + data/support/faq.json + data/community/community_calendar.json en disco.
+Los [x] son tareas de gestion de comunidad ABSTRACTAS (moderacion, reportes, feedback, filtraciones) — no INFLADO (no citan archivos falsos). Clasificacion: **DEUDA REAL** (implementacion de datos 3 JSON + 76 [ ]), no flip. GLOBAL no tocado (flip = director).
