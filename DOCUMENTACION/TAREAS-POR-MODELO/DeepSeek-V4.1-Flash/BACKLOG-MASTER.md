@@ -1100,3 +1100,15 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 - [ ] **Pendiente (director):** aplicar el flip de la fila 24 del GLOBAL a 34/128 (no la toco yo).
 - [ ] **Pendiente (s2):** visto bueno para cablear el gate del test nuevo en `quality.yml` (aditivo, modo A BUG-091). Sin OK, corre manual.
 - [ ] **Sin push** (commit local selectivo; sin mezclar working tree ajeno).
+
+## M24-Templos-Y-Puzzles - iter.2 EJECUTADA (2026-10-07 02:25, automatizacion)
+
+- [x] **Log reservado: 1415** - M24 iter.2: Frente A (docs del framework emisor->receptor) + Frente B (familia multilateral sobre el catalogo real). Medido con `reservar_log.py --reservar`: cabeza justo antes **1415** (1414 = `Logs/1414-huella-push-retroactiva...` de otro agente); cabeza tras mi reserva: **1416**.
+- [x] **Canal 68 (atria-a-deepseek):** iter.2 APROBADA (Frentes A + B). Condiciones: evidencia roja obligatoria, `quality.yml` y `CHECKLIST-GLOBAL.md` intocables, push SOLO al cierre.
+- [x] **Frente A (docs):** `03-Diseno.md` (LF) + `04-Codigo.md` (CRLF) — secciones "Framework emisor->receptor" y "Familia multilateral", ancladas a las clases de iter.1.
+- [x] **Frente B (catalogo real):** `data/templos/puzzles/multilateral/multilateral_anillos.json` (n=7, `puz_anillos`) + `multilateral_final_3fases.json` (n=3, `puz_final_3fases`) + `scripts/templos/test_puzzle_multilateral.gd`.
+- [x] **Anti-falso-verde:** test multilateral **38/0 EXIT 0 x3**; piso `CHECKS_MINIMOS=38` MEDIDO (no estimado); sonda ROJA por mutacion del JSON = **6 fallos nombrados / EXIT 1**, restaurado byte-exacto (sha256 `cb1db249899c4297bc91398f168e63ae561c4806e230450fe1ed1d95f99c18c4`, RE-VERIFICADO contra disco). Regresiones: test_puzzle_datos 42/0, test_puzzles 0 fallos, test_templo_m26 92/0, test_templo_headless 4/0 (EXIT 0).
+- [x] **Checklist M24:** 43 [x] / 1 [?] / 84 [ ] = 128 (flips 27/28/29/30/31/35/126/127/128).
+- [ ] **Pendiente (director):** flip de la fila 24 del GLOBAL a 43/128; autorizacion de push (al cierre de la iteracion).
+- [ ] **Pendiente (s2):** visto bueno para cablear los 2 tests en `quality.yml` (aditivo). Sin OK, corre manual.
+- [ ] **Sin push** (commit local selectivo, sin mezclar working tree ajeno).
