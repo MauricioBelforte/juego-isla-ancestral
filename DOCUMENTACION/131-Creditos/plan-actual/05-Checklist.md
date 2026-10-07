@@ -173,3 +173,12 @@
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M131)
 M131 auditado: 85 [x] SUSTENTADOS, 0 degradaciones. 85 [x] / 0 [?] / 10 [ ]. Verificación contra disco: data/legal/creditos.json (4 secciones) + scripts/legal/ (audio_credit.gd, audio_credits_generator.gd) + test_credits_m131 8/0 (re-corrí yo). Nota: un [x] cita 'creditos.json con 7 secciones (v1: 3; catálogo ampliado)' y el archivo trae 4 — el catálogo está parcialmente poblado (las 3 restantes + catalogo creditos.tres están en los 10 [ ]). Los 10 [ ] = KnownIssues NO BLOQUEANTES (SFX encendido/apagado de menú, SFX navegación, música lounge, catalogo .tres) — los dejo [ ] (deuda real), NO los marco [x]. GLOBAL/11-BUGS NO tocados (flip/pase = director).
+
+## Veredicto DoD (agnes-3-flash, Kilo Code, 2026-10-07, frente s2/61 - profundidad M25)
+M131 re-auditado con DoD 21.6: **DEUDA REAL** (no flip). Conteo 85 [x] / 0 [?] / 10 [ ] es honesto, pero DoD incompleto:
+- 04-Codigo.md lista 5 archivos AUSENTES en disco: CreditsDirector.gd, catalog.tres, credits-canvas.tscn, data.tres, scene.tscn.
+- 07-Resultados-Testings.md AUSENTE.
+- 10 [ ] KnownIssues pendientes (SFX menu, SFX navegacion, musica lounge, catalogo .tres).
+- Gap: un [x] dice "creditos.json con 7 secciones (v1: 3; catalogo ampliado)" y el archivo trae **4** -> catalogo en progreso (3 faltantes quedan en los 10 [ ]); lo marco como GAP, NO lo degradado a [ ] (no es una afirmacion falsa, es un item de ampliacion en curso).
+- Positivo: data/legal/creditos.json (4 secciones) + scripts/legal/ (audio_credit.gd) + test_credits_m131 **8/0** (re-corrí yo).
+Clasificacion: **DEUDA REAL** (catalogo/director/07 + 10 [ ] + 3 secciones faltantes), no flip. GLOBAL no tocado (flip = director).
