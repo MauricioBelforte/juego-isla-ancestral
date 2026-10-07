@@ -223,3 +223,6 @@
 ### Pendiente (humano / autor MiMo)
 - Ejecutar `06-Plan-Testings.md` en headless 4.7.2 y llenar `07-Resultados-Testings.md`.
 - Verificar respaldo de código de las 107 `[x]` previas (auditoría Log 1065).
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, lote M25)
+M25 auditado: SUSTENTADO, 0 degradaciones. 122 [x] / 0 [?] / 0 [ ]. Verificación contra disco: generador_ruina.gd en scripts/ruinas/; 108 .glb de ruinas en assets/3d/ (kit de 40 piezas en 03-Diseno, 398 lineas). Candidato a flip ✅ (yo = verificador ≠ mimo-v2.5, autora de la expansión). GLOBAL NO tocado (flip = director).
