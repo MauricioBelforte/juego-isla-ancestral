@@ -3954,3 +3954,24 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   - Archivos: 4 scripts enchantment + 3 dialogos (nuevos) + 05-Checklist (marcas/Reserva/iter2/
     Notas/Totales) + backlog + ESTADO + Log 1419 + msg 50. Sin CG, sin C/D, sin push.
   - Siguiente: QA §21.8 por otro modelo / flip del director.
+- **2026-10-07 03:47 — mimo-v2.6-flash-free — M163 iter. 2 (Sección C Incienso) PLAN ENVIADO (msg 52, esperando OK)**
+  - Verificación previa: contratos reales de ItemDatabase/Inventario (`.tres` + cat. ITEMS),
+    GameTime (M29: `dia_cambio`/`estacion_cambio`), TerrainLocator (`get_height` +
+    `posicionar_sobre_terreno`); aclarado que M74/M22 son historia, NO estacionalidad
+    (estacional = M29 `festivals.tres`).
+  - Alcance: IncenseCultivation (Resource, 3 días, 2–4), IncenseSpawner (Node3D, cadena E,
+    ciclo `dia_cambio`), `incense.tres` + `incense_rare.tres` (stack 99), suite test_incienso
+    + 2 sondas rojas (cosecha antes de tiempo, doble plantado).
+  - Meta honesta: 35 → 48 [x] + 2 [?] (C13 M19; C12 solo si M29 traba) → 48/6/70 = 124.
+  - **Pendiente tu elección A/B:** A = 3 líneas en `main_island.gd` (patrón `_crear_shaman`,
+    solo con tu OK explícito) · B = spawner como autoload. Sin tu OK no toco main_island.
+- **2026-10-07 05:13 — mimo-v2.6-flash-free — M163 iter. 2 (Sección C Incienso) CERRADA** ✅
+  - 49 [x] / 5 [?] / 70 [ ] = 124 · sección C: 14 [x] con cita + 1 [?] (L80 regalar → M19).
+  - **Log 1429** (pool −1429), **msg 54** (informe con diff exacto de main_island; pool −54).
+  - Suites: test_incienso.gd **67/0 exit 0** (CHECKS_MINIMOS medido=67) + regresión test_enchantment.gd **58/0**.
+  - 2 sondas rojas **EXIT=1** verificado + restauración byte-exacta.
+  - Runtime real: `IncenseSpawner: 6 puntos en montaña (0 fallas, centro (2320,2300))` — sin [?] de terreno.
+  - `main_island.gd` tocado SOLO en lo autorizado (opción A msg 53): +1 línea en _ready + función `_crear_incense_spawner`; `_crear_shaman` intacto.
+  - `GUIA-GODOT/01` §34 (class_name cache + --script con error carga el juego).
+  - **M163 queda 🟡 49/124** (sección D intacta, 32 [ ]). CHECKLIST-GLOBAL no tocada (flip del director).
+

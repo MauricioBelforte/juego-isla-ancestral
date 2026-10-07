@@ -1,8 +1,9 @@
 # GDScript — Errores Comunes y Reglas
 
-> **Modelo:** atria-dawn-s2
-> **Plataforma:** Kilo Code
-> **Fecha:** 2026-10-07 (BUG-117: atribución corregida M53/M91 → M66; §6.4 cross-ref a §30; parser 930 .gd: 0 bool de 2 args)
+> **Modelo:** mimo-v2.6-flash-free
+> **Plataforma:** opencode
+> **Fecha:** 2026-10-07 (M163: §34 class_name recién creado + --script con error de carga corre el juego)
+> **Histórico:** 2026-10-07 atria-dawn-s2 (BUG-117: atribución corregida M53/M91 → M66; §6.4 cross-ref a §30; parser 930 .gd: 0 bool de 2 args)
 > **Histórico:** 2026-10-06 mimo-v2.6-flash-free (M88: §32 sonda de licencia — reemplazo global muta la whitelist; §33 git checkout «unable to unlink» en Windows); 2026-10-04 mimo-v2.6-flash-free (M53: §30 — `bool(null)` y suites colgadas); 2026-10-03 mimo-v2.6-flash-free (M43 Lote B1: §29 — JSON->float); 2026-09-30 agnes-3-flash (P-52: §26-§28)
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §1 + §9.1-§9.19
 > **Validado en:** Isla Ancestral — Godot 4.7.2
@@ -778,6 +779,37 @@ solo para descartar mutaciones de sondas, y re-aplica tu respaldo.
 **Modelo:** mimo-v2.6-flash-free / OpenCode
 
 
+## 34. `class_name` recién creado no existe todavía + `--script` con error de carga ejecuta el JUEGO (M163, 2026-10-07)
+
+Dos trampas de la misma familia al crear scripts nuevos y testearlos en la misma sesión:
+
+**34.1 — Cache de class_name stale:** un `class_name` recién escrito NO está registrado
+hasta que el editor reescanea. `Identifier "MiClase" not declared in the current scope`
+en cada script que lo referencie (y cascada "Failed to compile depended scripts" en el
+suite). `--check-only` de un script aislado puede dar exit 0 y aun asi fallar el test.
+
+```bash
+# Solucion: refrescar global_script_class_cache.cfg
+godot --headless --path <proyecto> --editor --quit
+# Verificar: .godot/global_script_class_cache.cfg debe contener "class": &"MiClase"
+```
+
+**34.2 — `--script` con error de carga NO sale:** si el script `--script` no compila,
+Godot lo reporta y **ejecuta la main scene igual** → el "test" se convierte en el juego
+corriendo para siempre (spawners, NPCs, camara…) y el runner se "cuelga". Diferente de
+§30.1 (donde `_run` arranca y aborta): aquí `_run` **nunca arranca**.
+
+```text
+ERROR: Failed to load script "res://scripts/.../test_x.gd" with error "Compilation failed".
+   ← si esto aparece, NO estás corriendo tu suite
+```
+
+Prevencion: (1) correr con salida redirigida a archivo + `WaitForExit(ms)` + kill,
+nunca bloquear en la consola; (2) verificar SIEMPRE `exit=0` y la linea de Resumen;
+(3) si el stdout muestra prints de gameplay (spawners, villagers), el suite no corrio.
+
+---
+
 ## Errores rápidos de referencia
 
 | Error | Solución | § |
@@ -798,3 +830,5 @@ solo para descartar mutaciones de sondas, y re-aplica tu respaldo.
 | Suite `extends SceneTree` colgada tras un error | `_run` abortado no llama `quit()`; mirar el PRIMER `SCRIPT ERROR` del log | §30.1 |
 | Sonda con reemplazo global muta whitelist/regla -> falso verde | Mutar SOLO la entrada del objeto (`count=1`); exigir rojo verificado | §32 |
 | `git checkout -- archivo` = «unable to unlink» (Windows) | `git show HEAD:<ruta>` + escritura binaria (`wb`); cerrar Godot si persiste | §33 |
+| `Identifier "MiClase" not declared` con class_name recién creado | `godot --headless --editor --quit` para refrescar el cache | §34.1 |
+| `--script` con error de carga ejecuta el juego (runner colgado) | redirigir a archivo + timeout; exigir `exit=0` + Resumen | §34.2 |

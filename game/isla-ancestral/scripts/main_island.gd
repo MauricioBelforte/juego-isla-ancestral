@@ -22,6 +22,7 @@ func _ready():
 	_crear_estaciones_crafting()
 	_crear_farm_controller()
 	_crear_shaman()
+	_crear_incense_spawner()
 	print("Isla Ancestral — Isla Raíz")
 
 ## M33 (iter. 2): controller agrícola (arar/regar/cosechar con interactuar)
@@ -418,3 +419,12 @@ func _crear_shaman() -> void:
 	else:
 		shaman.global_position = Vector3(320, 35, 300)
 	print("[M163] Chaman del Monte spawneado en ", shaman.global_position)
+
+## M163 (iter. 2): spawner de puntos de incienso en la montaña del chaman.
+func _crear_incense_spawner() -> void:
+	var script = load("res://scripts/enchantment/incense_spawner.gd")
+	if script:
+		var sp = script.new()
+		sp.name = "IncenseSpawner"
+		add_child(sp)
+		print("[M163] IncenseSpawner montado")

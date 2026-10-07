@@ -1,6 +1,6 @@
 ﻿**Modelo:** mimo-v2.6-flash-free (último modificador; base step-3.7-flash / GLM-5.3 Flash)
 **Plataforma:** opencode
-**Fecha:** 2026-10-07 03:05
+**Fecha:** 2026-10-07 05:08
 
 # 05-Checklist.md — Modulo 163: Sistema de Encantamientos
 
@@ -14,7 +14,7 @@
 | Campo | Valor |
 |-------|-------|
 | Módulo | M163 Sistema De Encantamientos |
-| Agente | **mimo-v2.6-flash-free** (iter. 1 asignada 2026-10-07 04:57 por atria-dawn-preview; anterior: step-3.7-flash → glm-5.3-flash, liberado 2026-09-02) |
+| Agente | **mimo-v2.6-flash-free** (iter. 2 Sección C: asignada 2026-10-07 04:12 por atria-dawn-preview, plan OK con opción A; iter. 1 Sección B aceptada 2026-10-07 03:27; anterior: step-3.7-flash → glm-5.3-flash, liberado 2026-09-02) |
 | Fase | F5 |
 | Dificultad | 3 |
 | Visión | V0 |
@@ -65,21 +65,21 @@
 
 ## C. Incienso (15)
 
-- [ ] Crear IncenseCultivation.gd como Resource [M]
-- [ ] Definir incienso basico: se cultiva en plantas de montaña [S]
-- [ ] Definir incienso raro: se obtiene en eventos estacionales [S]
-- [ ] Tiempo de cultivo: 3 dias del juego para cosecha [M]
-- [ ] Rendimiento: 2-4 incienso por cosecha [S]
-- [ ] Crear IncenseSpawner.gd como Node3D [M]
-- [ ] Spawner genera puntos de incienso en montaña de Isla Raiz [M]
-- [ ] Los puntos se renuevan cada 3 dias del juego [M]
-- [ ] Incienso se guarda en inventario (M14) como item [S]
-- [ ] Incienso tiene stack_max de 99 [S]
-- [ ] Incienso es renewable: nunca se agota [S]
-- [ ] Eventos estacionales dan incienso raro (M29) [M]
-- [ ] Incienso se puede regalar a NPCs (M19) [S]
-- [ ] Incienso tiene precio de venta bajo (no es para vender) [S]
-- [ ] Incienso tiene descripcion tematica [S]
+- [x] Crear IncenseCultivation.gd como Resource [M] (scripts/enchantment/incense_cultivation.gd; suite B1-B16)
+- [x] Definir incienso basico: se cultiva en plantas de montaña [S] (incense_point.gd: planta InteractableBase categoria cosecha que nace plantado; D1-D4; runtime real 6/6 en montaña)
+- [x] Definir incienso raro: se obtiene en eventos estacionales [S] (punto con raro=true + incense_rare.tres; D10-D16)
+- [x] Tiempo de cultivo: 3 dias del juego para cosecha [M] (IncenseCultivation.DIAS_COSECHA=3 sobre GameTime.dia_absoluto; B6/B7/B8, C6-C8)
+- [x] Rendimiento: 2-4 incienso por cosecha [S] (RENDIMIENTO_MIN/MAX con rng diario inyectable; B9, C9)
+- [x] Crear IncenseSpawner.gd como Node3D [M] (incense_spawner.gd extends Node3D, spawneo determinista seed 163; D1)
+- [x] Spawner genera puntos de incienso en montaña de Isla Raiz [M] (centro = MundoRaiz.CENTRO-(240,260) como _crear_shaman, alturas via TerrainLocator; D2-D5 + runtime: '6 puntos, 0 fallas, centro (2320, 2300)')
+- [x] Los puntos se renuevan cada 3 dias del juego [M] (IncensePoint.renovar + IncenseSpawner._on_dia_cambio conectado a GameTime.dia_cambio; D7/D8, C13-C17)
+- [x] Incienso se guarda en inventario (M14) como item [S] (data/items/incense.tres + incense_rare.tres auto-cargados por ItemDatabase; add/count/remove; A1-A13, C9, D15)
+- [x] Incienso tiene stack_max de 99 [S] (A3/A4)
+- [x] Incienso es renewable: nunca se agota [S] (cosecha limpia lote y renovacion a los 3 dias; B11, C16-C17)
+- [x] Eventos estacionales dan incienso raro (M29) [M] (IncenseSpawner._on_estacion_cambio conectado a GameTime.estacion_cambio de M29 sin tocar M29; D10-D12)
+- [?] Incienso se puede regalar a NPCs (M19) [S] - dueño: AGENTE DELEGADO M19 (no existe sistema de regalos/afinidad; el item ya existe en M14 para cuando M19 lo habilite)
+- [x] Incienso tiene precio de venta bajo (no es para vender) [S] (precio_venta=5 incense / 20 rare; A8)
+- [x] Incienso tiene descripcion tematica [S] (descripcion en ambos .tres; A9)
 
 ## D. Encantamientos por Tier (30)
 
@@ -195,7 +195,7 @@
 - Priorizar interacción real chamán-jugador antes de ampliar secciones C/D.
 - Usar V4 (godot-mcp) para capturas de prueba de la UI de encantamientos.
 - Consultar DOCUMENTACION/GUIA-GODOT/INDICE.md para pitfalls conocidos de Godot 4.x.
-## Progreso iter 2 (2026-10-07 — mimo-v2.6-flash-free / opencode)
+## Progreso — Seccion B (iter. 1 de mimo-v2.6-flash-free, 2026-10-07)
 
 - Seccion B completada (16/20 en esta iter: 4 [x] previos de GLM + 12 [x] nuevos; restantes 4 [ ] pasan a [?] con dueno)
 - Flujo real del chaman E2E: E -> DialogueManager (intro/regreso/todas) -> ShamanUI -> encantar con cobro EconomyManager
@@ -204,7 +204,18 @@
 - Sonda roja obligatoria: guard de incienso en enchant_tool mutado -> A9 falla exit 1 -> restaurado -> 58/0 exit 0
 - 3 dialogos locales creados y validados (shaman_intro, shaman_regreso con {encantos}, shaman_todas)
 
-**Notas del Agente**
+## Progreso — Seccion C (iter. 2 de mimo-v2.6-flash-free, 2026-10-07 05:08)
+
+- Seccion C completada: 14 [x] con cita + 1 [?] (L80 regalar NPCs → dueño M19).
+- `incense_cultivation.gd` (Resource: 3 dias, 2-4, RNG diario M29), `incense_point.gd` (InteractableBase categoria cosecha, cadena E), `incense_spawner.gd` (Node3D: centro montaña = formula de _crear_shaman, alturas TerrainLocator, seed fija 163, renovacion via dia_cambio, raro via estacion_cambio).
+- 2 items: `data/items/incense.tres` (stack 99, cat ITEMS, precio 5) + `incense_rare.tres` (rareza RARO, precio 20).
+- `main_island.gd` opcion A AUTORIZADA (msg 53): +1 linea en _ready + funcion `_crear_incense_spawner()`; diff exacto informado en el informe de cierre.
+- Suite nueva `test_incienso.gd`: **67 checks / 0 fallos / exit 0** con CHECKS_MINIMOS MEDIDO = 67; regresion `test_enchantment.gd` **58/0 exit 0**.
+- 2 sondas rojas obligatorias con EXIT=1 verificado y restauracion byte-exacta: (1) guard de cosecha antes de tiempo mutado → 3 FAIL; (2) guard de doble plantado mutado → 1 FAIL.
+- Runtime real headless: `[M163] IncenseSpawner: 6 puntos en montaña (0 fallas de altura, centro (2320.0, 2300.0))` — sin [?] de terreno (condicion 3 del msg 53 no se activo).
+- Estacionalidad cableada a `GameTime.estacion_cambio` (M29) SIN tocar M29 → C12 queda [x] (mejor que la meta aprobada).
+
+**Notas del Agente (iter. 1 — Seccion B)**
 
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
@@ -232,7 +243,36 @@
 - Si se quiere ver el feedback en vivo, correr con V4 (godot-mcp) y capturar; la UI es un Control hijo de UIRoot.
 - La sonda roja se hizo mutando enchant_tool; repetirla al tocar esa funcion.
 
-**Totales:** 124 ítems · Completados: 35 · Pendientes: 85 · No resueltos: 4.
+**Notas del Agente (iter. 2 — Seccion C)**
+
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
+**Fecha:** 2026-10-07 05:08
+**Estado:** Parcial — Seccion C cerrada (49 [x] / 5 [?] / 70 [ ]); seccion D intacta
+
+### Lo que hice
+- Cierre de la seccion C: 14 [x] con cita de suite/runtime + 1 [?] (L80, dueño M19).
+- Meta aprobada 48 [x] + hasta 2 [?]: real 49 [x] + 1 [?] — C12 (estacionalidad M29) cableo, no quedo [?].
+- Runtime real verificado: 6/6 puntos sobre la montaña con TerrainLocator real (0 fallas de altura), sin hardcode de radio/centro de isla (check anti-P39 en suite D5/D6).
+- `main_island.gd` tocado SOLO en lo autorizado (opcion A, msg 53): llamada `_crear_incense_spawner()` en _ready + 9-linea de la funcion al final. `_crear_shaman()` intacto.
+
+### Lo que NO pude hacer (honestidad obligatoria)
+- L80 regalar incienso a NPCs → [?] dueño M19 (no existe sistema de regalos/afinidad).
+- Verificado en headless, NO visualmente (M154 V0: sin via de vision en este chat).
+- Persistencia de los puntos del spawner (M59) NO implementada: los 15 items de C no la piden; si se guarda/carga partida, los puntos se regeneran con su spawneo determinista (seed 163), no se serializa estado de cosecha. Documentado como mejora futura.
+
+### Intentos fallidos / decisiones
+- class_name nuevo no se registra hasta refrescar el cache: `godot --headless --path ... --editor --quit` (sin eso, el test moria con "Identifier IncenseCultivation not declared").
+- `var gt := _game_time()` con funcion sin `-> Node` producia Parse Error "Cannot infer the type" y tumbo la suite; corregido tipando el retorno.
+- Un `--script` con error de carga NO sale: Godot ejecuta el juego normal (colgado 75s) — capturar siempre con archivo + timeout.
+- Guard `dia_agotado < 0` rompia con dia_absoluto bajo en tests (dia 1 - 3 = -2) → guard `== -1`.
+
+### Recomendaciones para el próximo agente
+- Siguiente: seccion D (Encantamientos por Tier) — intacta, 32 [ ].
+- Si se necesita persistir puntos de incienso, agregar get_save_data/restore al spawner registrandolo como ISaveProvider (patron GameTime/resource_spawner).
+- Repetir las 2 sondas rojas al tocar los guards de `IncenseCultivation`.
+
+**Totales:** 124 ítems · Completados: 49 · Pendientes: 70 · No resueltos: 5.
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].
