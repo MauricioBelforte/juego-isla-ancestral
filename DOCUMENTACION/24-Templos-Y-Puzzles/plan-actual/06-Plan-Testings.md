@@ -3,7 +3,7 @@
 **Modelo:** DeepSeek-V4.1-Flash
 **Plataforma:** WorkBuddy
 **Fecha:** 2026-10-07
-**Estado:** vigente (iter. 3)
+**Estado:** vigente (iter. 4)
 **Cierra:** ítems 168, 169, 170, 171 y 172 del `05-Checklist.md`.
 
 Este documento define **cómo se prueba** el framework emisor→receptor de M24. No reemplaza al
@@ -20,6 +20,9 @@ Suites headless (Godot 4.7.2, `--headless --path game/isla-ancestral --script <r
 | `scripts/templos/test_puzzle_datos.gd` | Intérprete datos-driven (`PuzzleDef`): carga, validación, unicidad, "casi solución", umbral de peso, `a_puzzle_room`. | Bloques A-F nombrados; `CHECKS_MINIMOS` medido; `_summary()` en `call_deferred`; sonda de ambigüedad. |
 | `scripts/templos/test_puzzle_multilateral.gd` | Familia multilateral migrada (anillos n=7, final 3 fases) + cruce contra el catálogo real. | Igual + **sonda roja** (mutación de la regla AND → ambigüedad). |
 | `scripts/templos/test_puzzle_bloques.gd` | Familia bloques (push/pull): 1 eje, ranuras, límites, puente + capa espacial. | Igual + **sonda roja doble** (eje inválido / límite abierto / ambigüedad). |
+| `scripts/templos/test_puzzle_luz.gd` | Familia luz (grafo óptico): espejo 45°, lente, prisma, ocultación, cristal + validación por datos. | Igual + **sonda roja en vivo** (ángulo 30 en el JSON real → 11 fallos nombrados, EXIT 1). |
+| `scripts/templos/test_puzzle_espejos.gd` | Familia espejos (rotación discreta): rotar 45°, fijos/móviles, camino verificable, feedback + cadena con luz. | Igual + **sonda roja en vivo** (espejo fijo a 90 en el JSON real → 9 fallos nombrados, EXIT 1). |
+| `scripts/templos/test_regresion_templos.gd` | **Frente 0 — gate de regresión**: corre las 8 suites como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso. | Piso total MEDIDO; sonda roja del clasificador (9 casos sintéticos). |
 | `scripts/templos/test_puzzles.gd` | Framework base (transiciones, completado, no-arbitrariedad, integración emisor→puerta). | Suite original de Hy3 (0 fallos). |
 | `scripts/templos/test_templo_m26.gd` | Salas de M26 (7 anillos, fases). | 92 checks. |
 | `scripts/templos/test_templo_headless.gd` | Humo de arranque del templo. | 4 checks. |
@@ -53,6 +56,11 @@ externos) es el instrumento de registro.
 | **Eje inválido (bloques)** | Sonda roja sobre el JSON real. | `validar_espacial` falla con "eje 'z' no permitido". |
 | **Límite de sala abierto (bloques)** | Sonda roja. | `validar_espacial` falla con "debe ser false". |
 | **Empuje fuera de grilla / celda ocupada** | Simulación real. | `empujar()` devuelve false y la pieza no se mueve. |
+| **Ángulo de espejo no múltiplo de 45 (luz)** | Sonda roja sobre el JSON real. | `validar_optica` falla con "no es multiplo de 45". |
+| **Desvío de prisma no múltiplo de 90 (luz)** | Sonda sintética. | `validar_optica` falla con "no es multiplo de 90". |
+| **Rayo oculto por el jugador (luz)** | Simulación real. | `bloquear(celda)` → el rayo no llega y el receptor queda OFF. |
+| **Rotación de espejo fijo (espejos)** | Simulación real. | `rotar()` devuelve false y el ángulo no cambia. |
+| **Rotación no múltiplo de 45 (espejos)** | Simulación real. | `rotar()` devuelve false. |
 
 ## 4. Rendimiento (ítem 171)
 
@@ -63,6 +71,7 @@ receptores + distancia al objetivo (`set_emisor` + `recalcular` + `distancia_obj
 - El coste de la **herramienta de autoría** (`PuzzleDef.validar_def`, fuerza bruta 2^n) **no** es un
   tick: se mide aparte y solo se exige que sea usable en el Editor (< 10 ms para n=2).
 - Los valores medidos van en `07-Resultados-Testings.md` (nunca estimados).
+- Las familias luz y espejos miden su **re-trazado** (la operación del tick del rayo): `PuzzleLuz.trazar()` (luz) y `rotar + trazado` (espejos) sobre las salas 01/02. Valores en `07-Resultados-Testings.md`.
 
 ## 5. Criterio de éxito (ítem 172)
 
@@ -75,4 +84,4 @@ Una iteración de M24 se considera **cerrada con evidencia** solo si, en el mism
 4. Las cifras del `07-Resultados-Testings.md` son **medidas**, no copiadas de una corrida anterior.
 5. El `05-Checklist.md` marca `[x]` **solo** los ítems con la evidencia anterior; el resto queda `[ ]`.
 
-**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1426.
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1431 (iter. 4).

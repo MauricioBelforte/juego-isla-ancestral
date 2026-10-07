@@ -1,0 +1,26 @@
+{
+	"id": "luz_02",
+	"familia": "luz",
+	"schema_version": 1,
+	"descripcion": "La lente concentra el rayo y el prisma lo desvia 90 grados hacia el cristal, que exige concentracion 1.",
+	"emisores": [
+		{"id": 0, "tipo": "cristal", "etiqueta": "cristal_sur"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "runa_luz_2"}
+	],
+	"objetivo": [0],
+	"luz": {
+		"grilla": {"ancho": 6, "alto": 4},
+		"fuente": {"pos": [0, 0], "dir": [1, 0]},
+		"espejos": [],
+		"lentes": [
+			{"id": "lente_a", "pos": [2, 0], "concentracion": 1}
+		],
+		"prismas": [
+			{"id": "prisma_a", "pos": [4, 0], "desvio": 90}
+		],
+		"cristal": {"pos": [4, 2], "concentracion_requerida": 1, "emisor": 0},
+		"bloqueos": []
+	}
+}

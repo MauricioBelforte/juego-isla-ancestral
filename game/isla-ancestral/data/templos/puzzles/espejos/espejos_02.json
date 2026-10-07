@@ -1,0 +1,30 @@
+{
+	"id": "espejos_02",
+	"familia": "espejos",
+	"schema_version": 1,
+	"descripcion": "Dos espejos moviles en esquinas opuestas: hay que rotar ambos (90 grados cada uno) para cerrar el camino hasta el cristal.",
+	"emisores": [
+		{"id": 0, "tipo": "cristal", "etiqueta": "cristal_suroeste"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "runa_espejos_2"}
+	],
+	"objetivo": [0],
+	"luz": {
+		"grilla": {"ancho": 5, "alto": 5},
+		"fuente": {"pos": [0, 0], "dir": [1, 0]},
+		"espejos": [
+			{"id": "espejo_a", "pos": [4, 0], "angulo": 45},
+			{"id": "espejo_b", "pos": [4, 4], "angulo": 135}
+		],
+		"lentes": [],
+		"prismas": [],
+		"cristal": {"pos": [0, 4], "concentracion_requerida": 0, "emisor": 0},
+		"bloqueos": []
+	},
+	"espejos": {
+		"rotacion_grados": 45,
+		"fijos": [],
+		"moviles": ["espejo_a", "espejo_b"]
+	}
+}

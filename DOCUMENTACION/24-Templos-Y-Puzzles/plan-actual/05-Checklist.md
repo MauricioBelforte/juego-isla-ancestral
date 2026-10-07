@@ -36,22 +36,22 @@
 
 ## Familia: puzzles de luz
 
-- [ ] Definir espejo de luz con ángulo 45° verificable [M]
-- [ ] Definir lente que concentra el rayo [S]
-- [ ] Definir prisma que desvía el rayo [S]
-- [ ] Definir ocultación del rayo por el jugador [S]
-- [ ] Definir cristal receptor que activa runa [S]
-- [ ] Definir validación de rayos por datos (no física visual) [M]
-- [ ] Documentar la familia de luz en el plan-actual [S]
+- [x] Definir espejo de luz con ángulo 45° verificable [M] — `PuzzleLuz`: `angulo` en `ANGULOS_ESPEJO` (0/45/90/135), reflexión determinista; suite `test_puzzle_luz.gd` 60/0
+- [x] Definir lente que concentra el rayo [S] — `PuzzleLuz`: `lentes[id].concentracion` + `cristal.concentracion_requerida` (sin lente el receptor queda OFF)
+- [x] Definir prisma que desvía el rayo [S] — `PuzzleLuz`: `prismas[id].desvio` (múltiplos de 90, sentido horario)
+- [x] Definir ocultación del rayo por el jugador [S] — `PuzzleLuz.bloquear/desbloquear(celda)`: el rayo se corta; reversible
+- [x] Definir cristal receptor que activa runa [S] — `PuzzleLuz.receptor_activado()` activa el emisor del cristal (S == T)
+- [x] Definir validación de rayos por datos (no física visual) [M] — `PuzzleLuz.trazar()` determinista + `validar_optica()`; suite 60/0
+- [x] Documentar la familia de luz en el plan-actual [S] — 03-Diseno.md "Familia luz" + 04-Codigo.md (iter. 4)
 
 ## Familia: puzzles de espejos
 
-- [ ] Definir rotación de espejos en múltiplos de 45° [M]
-- [ ] Definir caminos verificables de rayo (Editor) [M]
-- [ ] Definir espejos fijos y móviles [S]
-- [ ] Definir interacción con la familia de luz (cadena) [S]
-- [ ] Definir feedback de dirección al rotar [S]
-- [ ] Documentar la familia de espejos en el plan-actual [S]
+- [x] Definir rotación de espejos en múltiplos de 45° [M] — `PuzzleEspejos.rotar(id, grados)` rechaza no-múltiplos de 45; suite `test_puzzle_espejos.gd` 62/0
+- [x] Definir caminos verificables de rayo (Editor) [M] — `PuzzleEspejos.camino()` + `validar_camino()` (contiguo, termina en el cristal)
+- [x] Definir espejos fijos y móviles [S] — `fijos`/`moviles` + `es_fijo()`/`es_movil()` (solo los móviles rotan)
+- [x] Definir interacción con la familia de luz (cadena) [S] — `PuzzleEspejos` COMPONE un `PuzzleLuz` (mismo trazado)
+- [x] Definir feedback de dirección al rotar [S] — `PuzzleEspejos.feedback(id)` → "E->N" tras el trazado
+- [x] Documentar la familia de espejos en el plan-actual [S] — 03-Diseno.md "Familia espejos" + 04-Codigo.md (iter. 4)
 
 ## Familia: puzzles de agua
 
@@ -261,3 +261,14 @@ Los [31 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia:
 - **Frente B — testings y documentación (ítems 168-176):** NUEVOS `06-Plan-Testings.md` (unitarias / playtests por familia / edge cases / rendimiento / criterio de éxito) y `07-Resultados-Testings.md` (cifras MEDIDAS: 64/42/38/92/4 checks, 0 fallos; tick de sala ~2.0-2.1 µs ≪ 1 ms; `validar_def` n=2 ~22.6 µs); decisiones en `02-Analisis.md` y `03-Diseno.md`; mapa de código en `04-Codigo.md`.
 - **Regresión:** test_puzzle_datos 42/0, test_puzzle_multilateral 38/0, test_puzzles 0 fallos, test_templo_m26 92/0, test_templo_headless 4/0 (todas EXIT 0, 0 SCRIPT ERROR).
 - **Conteo MEDIDO:** 57 completados / 1 con dudas / 70 pendientes = 128.
+
+## Iteración 4 — gate de regresión + familias luz y espejos (2026-10-07)
+
+**Modelo:** DeepSeek-V4.1-Flash | **Plataforma:** WorkBuddy | **Log:** 1431 | **Plan:** aprobado por el director (canal DeepSeek/77).
+
+- **Frente 0 — gate de regresión:** NUEVO `scripts/templos/test_regresion_templos.gd` (corre las 8 suites de M24 como subprocesos; exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso por suite; 51 checks, 0 fallos, EXIT 0 ×3; total MEDIDO 362 == piso 362; sonda roja del clasificador con 9 casos sintéticos).
+- **Frente A — familia luz (ítems 39-45):** NUEVOS `scripts/templos/puzzle_luz.gd` (`PuzzleLuz`: grafo óptico discreto) + `data/templos/puzzles/luz/luz_01.json` (espejo 45°) y `luz_02.json` (lente + prisma) + `scripts/templos/test_puzzle_luz.gd` (60 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=60` MEDIDO; sonda ROJA en vivo: ángulo 30 en el JSON real → 11 fallos nombrados / EXIT 1; JSON restaurado byte-exacto, sha256 `4f0000af…`).
+- **Frente B — familia espejos (ítems 49-54):** NUEVOS `scripts/templos/puzzle_espejos.gd` (`PuzzleEspejos`: capa de rotación que compone un `PuzzleLuz`) + `data/templos/puzzles/espejos/espejos_01.json` (fijo + móvil) y `espejos_02.json` (2 móviles) + `scripts/templos/test_puzzle_espejos.gd` (62 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=62` MEDIDO; sonda ROJA en vivo: espejo fijo a 90 → 9 fallos nombrados / EXIT 1; JSON restaurado byte-exacto, sha256 `e2b08324…`).
+- **Guardián anti-falso-verde:** probado EN ROJO por inyección en AMBAS suites (saltar el bloque F + su `_fin` → el resumen NOMBRA el bloque faltante y el piso lo caza; EXIT 1); revertido a verde.
+- **Regresión:** las 8 suites de M24 en verde (luz 60, espejos 62, bloques 64, datos 42, multilateral 38, m26 92, headless 4, puzzles sin contador); gate 362/0 EXIT 0.
+- **Conteo MEDIDO:** 70 completados / 1 con dudas / 57 pendientes = 128.

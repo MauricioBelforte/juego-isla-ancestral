@@ -1,0 +1,30 @@
+{
+	"id": "espejos_01",
+	"familia": "espejos",
+	"schema_version": 1,
+	"descripcion": "Un espejo fijo gira el rayo hacia el sur; el espejo movil debe rotarse 45 grados para enviarlo al cristal.",
+	"emisores": [
+		{"id": 0, "tipo": "cristal", "etiqueta": "cristal_oeste"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "runa_espejos"}
+	],
+	"objetivo": [0],
+	"luz": {
+		"grilla": {"ancho": 6, "alto": 6},
+		"fuente": {"pos": [0, 0], "dir": [1, 0]},
+		"espejos": [
+			{"id": "espejo_a", "pos": [2, 0], "angulo": 135},
+			{"id": "espejo_b", "pos": [2, 4], "angulo": 0}
+		],
+		"lentes": [],
+		"prismas": [],
+		"cristal": {"pos": [0, 4], "concentracion_requerida": 0, "emisor": 0},
+		"bloqueos": []
+	},
+	"espejos": {
+		"rotacion_grados": 45,
+		"fijos": ["espejo_a"],
+		"moviles": ["espejo_b"]
+	}
+}

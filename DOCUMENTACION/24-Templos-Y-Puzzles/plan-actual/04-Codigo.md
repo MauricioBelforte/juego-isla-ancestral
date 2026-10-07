@@ -125,3 +125,36 @@ Las rutas C# de arriba son **diseno heredado de Unity** (no existen en el proyec
 (dueño de `quality.yml`).
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 3.
+
+## Familias luz y espejos (iter. 4 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+| Archivo | Contenido |
+|---|---|
+| `scripts/templos/puzzle_luz.gd` | **NUEVO iter. 4.** `PuzzleLuz` (RefCounted): intérprete del grafo óptico. `cargar` / `desde_def`, `trazar()` (traza paso a paso; devuelve `{celdas, concentracion, llega, receptor_activado, salidas, pasos}`), `celdas` / `concentracion` / `llega` / `receptor_activado` / `pasos` / `salidas` / `direccion_salida`, `angulo_espejo` / `set_angulo_espejo`, `bloquear` / `desbloquear` / `esta_bloqueada`, `validar_optica`; estáticos `nombre_dir` / `_norm_angulo`. Mapea el recorrido del rayo → emisores sobre un `PuzzleRoom`; no modifica el framework. |
+| `data/templos/puzzles/luz/luz_01.json` | **NUEVO iter. 4.** 4x4, fuente (0,3)→E, espejo_a (3,3) a 45°, cristal (3,1) conc 0: el rayo E→N. |
+| `data/templos/puzzles/luz/luz_02.json` | **NUEVO iter. 4.** 6x4, fuente (0,0)→E, lente_a (2,0) conc 1, prisma_a (4,0) desvío 90°, cristal (4,2) conc 1: el rayo E→S. |
+| `scripts/templos/puzzle_espejos.gd` | **NUEVO iter. 4.** `PuzzleEspejos` (RefCounted): capa de rotación que **compone** un `PuzzleLuz` (ítem 52). `cargar` / `desde_def`, `rotar(id, grados)`, `es_movil` / `es_fijo` / `angulo`, `camino` / `validar_camino`, `feedback(id)`, `direccion_salida`, `validar_espejos`, `receptor_activado` / `llega` / `concentracion` / `sala`. |
+| `data/templos/puzzles/espejos/espejos_01.json` | **NUEVO iter. 4.** 6x6, espejo_a (2,0) 135° FIJO + espejo_b (2,4) 0° MÓVIL (+45°), cristal (0,4). |
+| `data/templos/puzzles/espejos/espejos_02.json` | **NUEVO iter. 4.** 5x5, espejo_a (4,0) 45° MÓVIL (+90°) + espejo_b (4,4) 135° MÓVIL (+90°), cristal (0,4). |
+| `scripts/templos/test_puzzle_luz.gd` | **NUEVO iter. 4.** Suite headless: 60 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=60` **medido**; **sonda ROJA en vivo** (ángulo 30 en el JSON real → 11 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 `4f0000af…`). |
+| `scripts/templos/test_puzzle_espejos.gd` | **NUEVO iter. 4.** Suite headless: 62 checks, 0 fallos, EXIT 0 ×3; piso `CHECKS_MINIMOS=62` **medido**; **sonda ROJA en vivo** (espejo fijo a 90 en el JSON real → 9 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 `e2b08324…`). |
+| `scripts/templos/test_regresion_templos.gd` | **NUEVO iter. 4.** Gate de regresión (Frente 0): corre las 8 suites como subprocesos y exige EXIT 0 + 0 `SCRIPT ERROR` + checks ≥ piso por suite; 51 checks, 0 fallos, EXIT 0 ×3; total MEDIDO 362 == piso 362; incluye sonda roja del clasificador. |
+
+| Concepto (familias luz/espejos) | Archivo | API clave |
+|---|---|---|
+| Fuente + dirección | `scripts/templos/puzzle_luz.gd` | `fuente_pos`, `fuente_dir` |
+| Espejo (ángulo 0/45/90/135) | `scripts/templos/puzzle_luz.gd` | `angulo_espejo(id)`, `direccion_salida(id)`, `_reflexion(dir, angulo)` |
+| Lente (concentración) | `scripts/templos/puzzle_luz.gd` | `concentracion()`, `lentes[id].concentracion` |
+| Prisma (desvío 90) | `scripts/templos/puzzle_luz.gd` | `_desviar(dir, grados)`, `prismas[id].desvio` |
+| Cristal receptor | `scripts/templos/puzzle_luz.gd` | `cristal_pos`, `cristal_requerida`, `receptor_activado()` |
+| Ocultación (jugador) | `scripts/templos/puzzle_luz.gd` | `bloquear(celda)`, `desbloquear(celda)`, `esta_bloqueada(celda)` |
+| Rotación discreta | `scripts/templos/puzzle_espejos.gd` | `rotar(id, grados)`, `es_movil(id)`, `es_fijo(id)` |
+| Camino verificable | `scripts/templos/puzzle_espejos.gd` | `camino()`, `validar_camino()` |
+| Feedback de dirección | `scripts/templos/puzzle_espejos.gd` | `feedback(id)` → `"E->N"` |
+
+**Contrato:** `PuzzleLuz` es el motor óptico y `PuzzleEspejos` la capa de rotación (compone a `PuzzleLuz`).
+Los puzzles se definen en datos (`{emisores, reglas, objetivo}` + bloque `luz` + bloque `espejos`) y los
+validan `PuzzleDef.validar_def` + `PuzzleLuz.validar_optica` + `PuzzleEspejos.validar_espejos`. El gate de
+CI de las suites queda **pendiente del visto bueno de s2** (dueño de `quality.yml`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — iter. 4.

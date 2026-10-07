@@ -1,0 +1,24 @@
+{
+	"id": "luz_01",
+	"familia": "luz",
+	"schema_version": 1,
+	"descripcion": "Un espejo a 45 grados desvia el rayo hacia el cristal receptor, que activa la runa.",
+	"emisores": [
+		{"id": 0, "tipo": "cristal", "etiqueta": "cristal_norte"}
+	],
+	"reglas": [
+		{"emisores": [0], "receptor": "runa_luz"}
+	],
+	"objetivo": [0],
+	"luz": {
+		"grilla": {"ancho": 4, "alto": 4},
+		"fuente": {"pos": [0, 3], "dir": [1, 0]},
+		"espejos": [
+			{"id": "espejo_a", "pos": [3, 3], "angulo": 45}
+		],
+		"lentes": [],
+		"prismas": [],
+		"cristal": {"pos": [3, 1], "concentracion_requerida": 0, "emisor": 0},
+		"bloqueos": []
+	}
+}

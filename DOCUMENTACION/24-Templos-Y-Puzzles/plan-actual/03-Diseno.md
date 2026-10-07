@@ -160,3 +160,99 @@ La **sonda roja** de la suite prueba la capa espacial (eje inválido → 12 fall
 JSON restaurado byte-exacto) y la ambigüedad de reglas.
 
 **Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1426.
+
+## Familia luz (iter. 4 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **luz** introduce un **grafo óptico discreto**: el rayo viaja por celdas enteras y los
+componentes (espejos, lentes, prismas) lo redirigen según reglas deterministas. No hay física visual:
+todo el trazado es verificable por datos. Se resolvió con un intérprete propio (`PuzzleLuz`) que
+traduce el recorrido del rayo → emisores sin tocar el framework. Cierra los ítems 39-45.
+
+- **Espejo a 45° verificable (39):** el ángulo de cada espejo es un dato (`angulo`) restringido a
+  múltiplos de 45 (`ANGULOS_ESPEJO = [0, 45, 90, 135]`). La reflexión es determinista: `0` invierte la
+  componente vertical (N↔S), `90` la horizontal (E↔O), `45` intercambia N↔E / S↔O y `135` intercambia
+  E↔S / N↔O. Un ángulo que no sea múltiplo de 45 se detecta en `validar_optica()`.
+- **Lente que concentra el rayo (40):** cada lente declara `concentracion`; el cristal receptor exige
+  una `concentracion_requerida`. Sin la lente (o con menos concentración) el receptor NO se activa.
+- **Prisma que desvía el rayo (41):** cada prisma declara `desvio` (múltiplos de 90, en sentido
+  horario). Un desvío fuera de ese vocabulario falla en `validar_optica()`; desvío `0` deja pasar el rayo.
+- **Ocultación del rayo por el jugador (42):** `bloquear(celda)`/`desbloquear(celda)` insertan/quitan
+  un obstáculo; el rayo se corta en esa celda y el receptor pasa a OFF (reversible, sin fallo punitivo).
+- **Cristal receptor que activa runa (43):** cuando el rayo llega al cristal con la concentración
+  requerida, el emisor asociado pasa a ON y `S == T` (`estado_igual_objetivo()`).
+- **Validación por datos (44):** el trazado es determinista — los mismos datos producen el mismo camino
+  (`celdas()`), sin física visual ni aleatoriedad.
+- **Documentación (45):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `luz_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "cristal", "etiqueta": "cristal_norte"}],
+  "reglas":   [{"emisores": [0], "receptor": "runa_luz"}],
+  "objetivo": [0],
+  "luz": {
+    "grilla":  {"ancho": 4, "alto": 4},
+    "fuente":  {"pos": [0, 3], "dir": [1, 0]},
+    "espejos": [{"id": "espejo_a", "pos": [3, 3], "angulo": 45}],
+    "lentes":  [],
+    "prismas": [],
+    "cristal": {"pos": [3, 1], "concentracion_requerida": 0, "emisor": 0},
+    "bloqueos": []
+  }
+}
+```
+
+**Por qué no hay migración legacy:** el catálogo `data/templos/templo_layout_diseno.json` no tiene
+ningún puzzle `tipo: "luz"`; la familia se **diseña** desde el esquema. Los datos viven en
+`data/templos/puzzles/luz/`.
+
+**Justicia:** ambos puzzles tienen exactamente 1 solución mínima == objetivo (`PuzzleDef.validar_def`).
+La **sonda roja** de la suite prueba la capa óptica EN VIVO sobre el JSON real (ángulo 30 en vez de 45 →
+11 fallos nombrados, EXIT 1; JSON restaurado byte-exacto, sha256 `4f0000af…`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1431.
+
+## Familia espejos (iter. 4 — DeepSeek-V4.1-Flash, 2026-10-07)
+
+La familia **espejos** es la segunda capa sobre el grafo óptico: no reimplementa el trazado, lo
+**compone** (contiene un `PuzzleLuz`) y agrega la **capa de rotación**. Cierra los ítems 49-54.
+
+- **Rotación en múltiplos de 45° (49):** `rotar(id, grados)` acepta solo múltiplos de 45, normaliza el
+  resultado al rango canónico (`_norm_angulo`, módulo 180) y rechaza espejos fijos o inexistentes. La
+  rotación es discreta: nunca hay ángulos intermedios.
+- **Caminos verificables (Editor) (50):** `camino()` devuelve la secuencia de celdas del rayo y
+  `validar_camino()` comprueba que cada paso sea contiguo (Manhattan == 1) y que, si el rayo llega,
+  termine en el cristal — verificable por datos, no por render.
+- **Espejos fijos y móviles (51):** cada espejo se declara en `fijos` o `moviles`; `es_movil()`/`es_fijo()`
+  y `rotar()` respetan esa distinción (un espejo fijo nunca rota).
+- **Cadena con la familia de luz (52):** los espejos **consumen** la salida de luz — el trazado es el
+  mismo `PuzzleLuz`; la rotación solo cambia los ángulos de entrada. Un puzzle de espejos es un puzzle de
+  luz + una capa de rotación.
+- **Feedback de dirección al rotar (53):** `feedback(id)` devuelve `"entrada->salida"` (p. ej. `"E->N"`)
+  del espejo indicado tras el último trazado, para retroalimentar al jugador al rotar.
+- **Documentación (54):** esta sección + el mapa de código en `04-Codigo.md`.
+
+**Esquema de datos (ejemplo `espejos_01.json`):**
+
+```json
+{
+  "emisores": [{"id": 0, "tipo": "cristal", "etiqueta": "cristal_oeste"}],
+  "reglas":   [{"emisores": [0], "receptor": "runa_espejos"}],
+  "objetivo": [0],
+  "luz": {
+    "grilla":  {"ancho": 6, "alto": 6},
+    "fuente":  {"pos": [0, 0], "dir": [1, 0]},
+    "espejos": [{"id": "espejo_a", "pos": [2, 0], "angulo": 135},
+                {"id": "espejo_b", "pos": [2, 4], "angulo": 0}],
+    "cristal": {"pos": [0, 4], "concentracion_requerida": 0, "emisor": 0}
+  },
+  "espejos": {"rotacion_grados": 45, "fijos": ["espejo_a"], "moviles": ["espejo_b"]}
+}
+```
+
+**Justicia:** ambos puzzles tienen 1 solución mínima == objetivo. La **sonda roja** de la suite prueba la
+capa de rotación EN VIVO sobre el JSON real (espejo fijo a 90 en vez de 135 → 9 fallos nombrados, EXIT 1;
+JSON restaurado byte-exacto, sha256 `e2b08324…`).
+
+**Firma:** DeepSeek-V4.1-Flash (WorkBuddy) — Log 1431.
