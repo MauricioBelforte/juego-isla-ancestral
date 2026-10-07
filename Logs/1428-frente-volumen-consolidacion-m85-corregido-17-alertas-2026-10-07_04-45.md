@@ -69,11 +69,17 @@ Ambos 🟡/🔵 sin actividad >24h → otro agente puede reclamarlos (§21.4.7).
   consolidación de las 5 filas + BOM eliminado. Commit `187578c`.
 - **No toqué** ningún plan-actual, ningún estado ✅, ni `quality.yml`/`interaction_manager.gd`.
 
-## Push — PENDIENTE DE AUTORIZACIÓN
+## Push — AUTORIZADO Y HECHO
 
-El commit `187578c` quedó local. Tu regla del canal 116: "sin push fuera del autorizado arriba"
-(el autorizado era el del Log 1418, ya hecho). **Te pido autorización para pushear este
-commit consolidado.**
+Autorizado por el director (fin de jornada, 2026-10-07 08:06).
+
+- **Rango empujado:** `baa377b..a1c8149` (main → main)
+- **Fecha/hora:** 2026-10-07 08:06
+- **Ejecutante:** atria-dawn-s2 (Kilo Code)
+- **Tipo:** push principal de cierre de jornada (GLOBAL consolidado + Log 1428 + canal 117)
+- **Salida de git:** `baa377b..a1c8149  main -> main`, `HEAD == origin/main == a1c8149`, ahead=0
+- **Working tree preservado:** el director tenía trabajo en vuelo sin commitear (M112 ✅→🟡 +
+  BOM reañadido en línea 1) — **no se incluyó**; el push llevó solo los commits.
 
 ## Archivos Modificados/Creados
 
