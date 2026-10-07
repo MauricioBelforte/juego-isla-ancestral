@@ -328,3 +328,6 @@
 >    completo; núcleo técnico = DlcManager; 3 servicios auxiliares pendientes).
 > 2. La fila 120 cita `🔵 Verificado por Hy3/WorkBuddy (Log 866, §21.8)` → **Log 866 es el log
 >    fraudulento** ya reemplazado por Hy3 (commit `ad6b370`). El sello §21.8 de M120 es INVÁLIDO.
+
+## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-07, volumen M120)
+M120 auditado: SUSTENTADO, 0 degradaciones. 163 [x] / 0 [?] / 59 [ ]. Verificación contra disco: dlc_manager.gd + data/dlc/ (dlc_manifest.json, bundles.json) presentes; test_dlc_m120 16/0 (re-corrido por agnes). Los [x] 'Diseñar res://dlc/dlc_{compatibility_checker,uninstaller,bundle_manager}.gd' son TAREAS DE DISEÑO (no de implementación): los 3 componentes están DISEÑADOS en 03-Diseno.md (secciones 'Compatibilidad DLC' + 'Sistema de desinstalación' + nombre de archivo + class_name DLCUninstaller/DLCBundleManager). Los .gd AUSENTES = la implementación pendiente (los 59 [ ]). NO degradar los [x] de 'diseñar': el diseño está documentado. GLOBAL NO tocado (flip/pase = director).
