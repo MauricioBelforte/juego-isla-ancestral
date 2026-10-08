@@ -13,14 +13,23 @@
 # Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS
 # MEDIDO + _summary() en call_deferred SEPARADO + watchdog.
 #
+# Fix 2026-10-08 (DeepSeek-V4.1-Flash, Log 1484): `await <nodo>.ready` tras
+# `root.add_child()` COLGABA la suite. Causa medida: add_child ya deja el nodo
+# listo de forma SINCRONA (is_node_ready()==true), asi que el await posterior
+# esperaba una re-emision que nunca llega. Reemplazado por `await process_frame`
+# (idioma del proyecto). Antes la suite corria 0 checks y el watchdog la abortaba.
+#
 # Ejecutar:
 #   godot --headless --path game/isla-ancestral --script res://tests/unit/player/test_equipment_manager.gd
 
 extends SceneTree
 
 const TIMEOUT_SEG := 60.0
-## Piso MEDIDO en verde (se fija tras la 1a corrida).
-const CHECKS_MINIMOS := 0
+## Piso MEDIDO (corrida 2026-10-08, Log 1484: 35 checks, 13 fallos). La suite esta
+## ROJA: los bloques B/C/L/U abortan por un SCRIPT ERROR del SUT de M155
+## (get_equipped_item devuelve Nil/Dictionary y el test espera un EquipmentSlot).
+## El piso es un LIMITE INFERIOR: al arreglar el SUT el conteo SUBE, no baja.
+const CHECKS_MINIMOS := 35
 const EQ_SCRIPT := preload("res://scripts/player/equipment_manager.gd")
 const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U']
 
@@ -126,7 +135,7 @@ func _bloque_A() -> void:
 	_ini("A. test_equipment_manager_ready")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 	_check("manager.player_equipment .is_not_null()", (manager.player_equipment) != null)
 	_check("manager.catalog .is_not_empty()", not (manager.catalog).is_empty())
 	print("[TEST] EquipmentManager inicializado con %d prendas" % manager.catalog.size())
@@ -138,7 +147,7 @@ func _bloque_B() -> void:
 	_ini("B. test_equip_item_head_slot")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var result: bool = manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.HEAD)
 	_check("result .is_true()", (result) == true)
@@ -154,7 +163,7 @@ func _bloque_C() -> void:
 	_ini("C. test_equip_item_feet_slot")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var result: bool = manager.equip_item("feet_boots_mud", EquipmentSlot.SlotType.FEET)
 	_check("result .is_true()", (result) == true)
@@ -169,7 +178,7 @@ func _bloque_D() -> void:
 	_ini("D. test_equip_wrong_slot_fails")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var result: bool = manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.FEET)
 	_check("result .is_false()", (result) == false)
@@ -181,7 +190,7 @@ func _bloque_E() -> void:
 	_ini("E. test_unequip_slot_returns_item_id")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.HEAD)
 	var previous_id: String = manager.unequip_slot(EquipmentSlot.SlotType.HEAD)
@@ -196,7 +205,7 @@ func _bloque_F() -> void:
 	_ini("F. test_is_item_equipped_true")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_boots_mud", EquipmentSlot.SlotType.FEET)
 	_check("manager.is_item_equipped(\"feet_boots_mud\") .is_true()", (manager.is_item_equipped("feet_boots_mud")) == true)
@@ -208,7 +217,7 @@ func _bloque_G() -> void:
 	_ini("G. test_is_item_equipped_false")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	_check("manager.is_item_equipped(\"feet_boots_mud\") .is_false()", (manager.is_item_equipped("feet_boots_mud")) == false)
 
@@ -219,7 +228,7 @@ func _bloque_H() -> void:
 	_ini("H. test_terrain_bonus_grass")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_skates", EquipmentSlot.SlotType.FEET)
 	var bonus: float = manager.get_terrain_bonus("grass")
@@ -232,7 +241,7 @@ func _bloque_I() -> void:
 	_ini("I. test_terrain_bonus_mud_with_boots")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_boots_mud", EquipmentSlot.SlotType.FEET)
 	var bonus: float = manager.get_terrain_bonus("mud")
@@ -245,7 +254,7 @@ func _bloque_J() -> void:
 	_ini("J. test_terrain_bonus_mud_with_skates_penalty")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_skates", EquipmentSlot.SlotType.FEET)
 	var bonus: float = manager.get_terrain_bonus("mud")
@@ -258,7 +267,7 @@ func _bloque_K() -> void:
 	_ini("K. test_comfort_penalty_head_rain")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.HEAD)
 	var penalty: float = manager.get_comfort_penalty("rain")
@@ -271,7 +280,7 @@ func _bloque_L() -> void:
 	_ini("L. test_serialize_deserialize")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_boots_mud", EquipmentSlot.SlotType.FEET)
 	manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.HEAD)
@@ -285,7 +294,7 @@ func _bloque_L() -> void:
 
 	var manager2 = EQ_SCRIPT.new()
 	root.add_child(manager2)
-	await manager2.ready
+	await process_frame
 	manager2.from_dict(data)
 
 	_check("manager2.is_item_equipped(\"feet_boots_mud\") .is_true()", (manager2.is_item_equipped("feet_boots_mud")) == true)
@@ -300,7 +309,7 @@ func _bloque_M() -> void:
 	_ini("M. test_clear_all_slots")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("feet_boots_mud", EquipmentSlot.SlotType.FEET)
 	manager.equip_item("head_hat_fisher", EquipmentSlot.SlotType.HEAD)
@@ -340,7 +349,7 @@ func _bloque_P() -> void:
 	_ini("P. test_is_item_unlocked_without_unlock")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var player_state: Dictionary = {}
 	_check("manager.is_item_unlocked(\"head_hat_fisher\", player_state) .is_true()", (manager.is_item_unlocked("head_hat_fisher", player_state)) == true)
@@ -352,7 +361,7 @@ func _bloque_Q() -> void:
 	_ini("Q. test_is_item_unlocked_with_chapter_requirement")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var player_state: Dictionary = {"capitulo_actual": 2}
 	_check("manager.is_item_unlocked(\"acc_amulet_ancestral\", player_state) .is_false()", (manager.is_item_unlocked("acc_amulet_ancestral", player_state)) == false)
@@ -366,7 +375,7 @@ func _bloque_R() -> void:
 	_ini("R. test_get_unlocked_items_filters_locked")
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var player_state: Dictionary = {"capitulo_actual": 1}
 	var unlocked: Array = manager.get_unlocked_items(player_state)
@@ -381,7 +390,7 @@ func _bloque_S() -> void:
 	# tiene unlock por flag "mochila_mejorada" — sin el flag NO se desbloquea.
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	var sin_flag: Dictionary = {}
 	_check("manager.is_item_unlocked(\"body_vest_explorer\", sin_flag) .is_false()", (manager.is_item_unlocked("body_vest_explorer", sin_flag)) == false)
@@ -399,7 +408,7 @@ func _bloque_T() -> void:
 	# viejas sin unlock. El catálogo debe tener 16 prendas ÚNICAS.
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	_check("manager.catalog.size() .is_equal(16)", (manager.catalog.size()) == (16))
 	_check("manager.catalog.has(\"body_vest_explorer\") .is_true()", (manager.catalog.has("body_vest_explorer")) == true)
@@ -414,7 +423,7 @@ func _bloque_U() -> void:
 	# Al equipar otra prenda del MISMO slot, el slot queda con la última.
 	var manager = EQ_SCRIPT.new()
 	root.add_child(manager)
-	await manager.ready
+	await process_frame
 
 	manager.equip_item("body_coat_rain", EquipmentSlot.SlotType.BODY)
 	var result: bool = manager.equip_item("body_shirt_casual", EquipmentSlot.SlotType.BODY)

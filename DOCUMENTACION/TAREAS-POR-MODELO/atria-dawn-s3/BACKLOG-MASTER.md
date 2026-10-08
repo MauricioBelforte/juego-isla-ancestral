@@ -145,6 +145,47 @@
 - **Siguiente propuesto:** M108 Pipeline-De-Assets (1 Familia A: `asset_preview.tscn`, 🟡 sin
   agente). Pendiente de confirmación del director.
 
+### L-09 — Ling: M108 Pipeline-De-Assets — `[→]` EN CURSO (Ling trabajando)
+
+- **Asignado por el director** (msg 52, 2026-10-08 21:55): M73 flips **aplicados por él**
+  (26/135 confirmado, header corregido, el "174" stale descartado) + **M108 confirmado**.
+- **Director pre-verificó M108:** `asset_preview.tscn` **0 archivos en disco**, 0 matches en
+  `git ls-files`. L115 en `[x]` con verbo "crear". Conteo M108: 124 `[x]` / 78 `[ ]` / 3 `[?]`
+  = 205.
+- **Ítem asignado:** L115 — `- [x] RF9: crear la escena asset_preview.tscn con caja de
+  referencia de 1 m y cámara orbitante [M]`.
+- **Extra opcional para Ling:** clasificar **L167** (`- [x] Diseñar asset_preview.tscn ...`)
+  como Familia A o B con justificación (regla H2), **sin revertir** — decisión del director.
+- **Lanzamiento:** prompt enviado a Ling en `ses_ee2ecce82ffe1vVnKY9tBf9y6s` (misma sesión).
+- **Baja de Ling:** el fundador no respondió. Director: mantener el patrón de encargo mínimo
+  acotado; si vuelve a fallar 3 veces seguidas, escalar con evidencia acumulada.
+- **Mi cola tras M108:** ~11 candidatos Familia A restantes de los 13 clasificados. Al
+  agotarse, el director da otro frente (auditoría de flips recientes o QA de módulos ✅ sin
+  sello).
+
+### L-09 — Ling: M108 Pipeline-De-Assets — `[x]` CERRADO (Ling entregó; verificado por mí)
+
+- **Asignado por el director** (msg 52): M108 confirmado tras pre-verificar
+  `asset_preview.tscn` (0 disco, 0 git). Ítem L115 en `[x]` con verbo "crear".
+- **Tuvo que mediar mi recordatorio:** Ling estaba idle sin reportar; tras el prompt entregó en
+  ~20 min (msg 53).
+- **Ling ENTREGÓ:** veredicto **INFLADO**, evidencia reproducible, conteo propio correcto,
+  respetó read-only. **2 encargos seguidos correctos** (M73, M108).
+- **Mi re-verificación independiente (todo correcto):**
+  - **Conteo: mi recuento = 124/78/3 = 205, idéntico al de Ling** ✓
+  - `preview_assets.tscn` + `preview_assets.gd` SÍ existen (trackeados en git) — el matiz de
+    Ling era correcto ✓
+  - `03-Diseno.md` L89 documenta el flujo de review con `asset_preview.tscn` ✓
+  - plan-inicial L100 en `[ ]` (nunca implementado) ✓
+- **Mi análisis del matiz:** `preview_assets` ≠ `asset_preview` (otro nombre, otra ruta). El
+  claim L115 cita literalmente `asset_preview.tscn` → **`[x]` falso, Familia A**.
+- **Flips para el director (msg 54):** L115 `[x]`→`[ ]`; conteo 124→123, 78→79 `[ ]`.
+- **L167 (extra opcional):** ambos, Ling y yo, clasificamos **Familia B** — verbo "Diseñar"
+  (H2) + artefacto de diseño documentado en `03-Diseno.md` L89. Recomendación: mantener `[x]`
+  (o `[?]` con dueño si criterio estricto). Decisión del director.
+- **Siguiente propuesto:** M154 Vision-Del-Agente — L109 "Crear `preview_personaje.tscn`"
+  (1 ítem Familia A puro, mismo patrón .tscn). Pendiente de confirmación del director.
+
 ### Candidato 2 — Módulos 🟡 de modelos inactivos — `[x]` COMPLETADA (espera aprobación director)
 
 - **Qué era:** auditar los módulos 🟡 de modelos inactivos para determinar si están colgados o

@@ -26,6 +26,12 @@ uniform float y_mar = 4.05;
 // < profundidad_min → alpha 0 (sobre la arena), > profundidad_max → alpha full.
 uniform float profundidad_min = 0.15;
 uniform float profundidad_max = 2.2;
+// BUG-105 (fix 2026-10-08): con la isla ×10 el mar lejano domina el viewport y
+// la espuma de crestas (color_espuma frio) promedia ~0.5 sobre toda la superficie
+// lejana → manto lechoso blanco (medido RGB 187/213/230, R-B=-44). La espuma de
+// crestas se desvanece con la distancia de camara; el look cercano (olas + espuma
+// de crestas y de orilla, gustados en M51) queda IDENTICO.
+uniform float espuma_distancia = 300.0;
 
 varying float altura_ola;
 
@@ -63,13 +69,24 @@ void fragment() {
 	ALPHA = clamp((color_agua.a + fresnel * 0.25) * (1.0 - costa) + costa * 0.45, 0.0, 0.95);
 	// Espuma de crestas en mar abierto (gustadas por el usuario)
 	float espuma_crestas = smoothstep(borde_espuma, 1.0, altura_ola * 0.5 + 0.5) * (1.0 - costa * 0.6);
+	// BUG-105: atenuacion por distancia de camara (VERTEX.z view-space, negativo
+	// hacia adelante). Mas alla de ~300 m la espuma de crestas desaparece y el
+	// agua vuelve a su albedo turquesa; cerca no cambia nada.
+	float dist_cam = -VERTEX.z;
+	espuma_crestas *= 1.0 - smoothstep(espuma_distancia * 0.4, espuma_distancia, dist_cam);
 	// Espuma de orilla: banda ESTRECHA pegada a la arena (vaivén natural)
 	float vaiven = 0.6 + 0.4 * sin(TIME * 1.6 + altura_ola * 2.0);
 	float espuma_orilla = (1.0 - smoothstep(0.0, profundidad_max * 0.22, profundidad_agua)) * vaiven;
 	float espuma = clamp(espuma_crestas + espuma_orilla, 0.0, 1.0);
 	ALBEDO = mix(ALBEDO, color_espuma.rgb, espuma * 0.85);
 	ALPHA = mix(ALPHA, color_espuma.a, espuma * 0.7);
-	SPECULAR = 0.5;
+	// BUG-105 (fix 2026-10-08): SPECULAR=0. Un specular 0.5 con roughness 0.15
+	// a angulos rasantes producia la banda blanca lechosa sobre todo el mar
+	// (causa dominante; verificado con capturas: cap_105_debug_prof_costa_espuma
+	// muestra prof/costa/espuma sanos en la banda, cap_105_test_sin_specular
+	// elimina la leche). El brillo del agua queda del fresnel en ALPHA.
+	// Sparks de sol: futura iteracion M51 si el usuario los pide.
+	SPECULAR = 0.0;
 	ROUGHNESS = 0.15;
 	EMISSION = color_espuma.rgb * espuma * 0.12;
 }

@@ -112,7 +112,7 @@
 - [ ] RF9: revisar peso estimado en memoria contra la tabla por tipo [M]
 - [ ] RF9: revisar que la ficha esté completa, incluida la licencia (M78) [S]
 - [x] RF8: crear la ficha de asset como fuente de verdad del estado [M]
-- [x] RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [M]
+- [ ] RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [M] (revertido: asset_preview.tscn inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 53, atria-dawn 2026-10-08)
 - [x] RF9: permitir review por lotes para escalar a 500+ assets [M]
 - [x] RF12: documentar el procedimiento de actualización de un asset con changelog en la ficha [S]
 

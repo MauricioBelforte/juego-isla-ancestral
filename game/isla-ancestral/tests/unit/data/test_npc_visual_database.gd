@@ -13,14 +13,22 @@
 # Guardia anti-falso-verde (3 capas): _fin() por bloque + CHECKS_MINIMOS
 # MEDIDO + _summary() en call_deferred SEPARADO + watchdog.
 #
+# Fix 2026-10-08 (DeepSeek-V4.1-Flash, Log 1484): `await <nodo>.ready` tras
+# `root.add_child()` COLGABA la suite. Causa medida: add_child ya deja el nodo
+# listo de forma SINCRONA (is_node_ready()==true), asi que el await posterior
+# esperaba una re-emision que nunca llega. Reemplazado por `await process_frame`
+# (idioma del proyecto). Antes la suite corria 0 checks y el watchdog la abortaba.
+#
 # Ejecutar:
 #   godot --headless --path game/isla-ancestral --script res://tests/unit/data/test_npc_visual_database.gd
 
 extends SceneTree
 
 const TIMEOUT_SEG := 60.0
-## Piso MEDIDO en verde (se fija tras la 1a corrida).
-const CHECKS_MINIMOS := 0
+## Piso MEDIDO (corrida 2026-10-08, Log 1484: 353 checks). La suite esta ROJA por
+## 3 fallos de DATOS de M161 (visual.sombrero.color_principal vacio en 3 NPCs):
+## el piso no cambia con ese fix (mismo numero de visuals). Re-medir si cambia.
+const CHECKS_MINIMOS := 353
 const DB_SCRIPT := preload("res://scripts/data/npc_visual_database.gd")
 const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
 
@@ -118,7 +126,7 @@ func _bloque_A() -> void:
 	_ini("A. test_npc_visual_database_ready")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 	_check("db.visuals .is_not_null()", (db.visuals) != null)
 	print("[TEST] NPCVisualDatabase inicializado con %d diseños" % db.visuals.size())
 
@@ -129,7 +137,7 @@ func _bloque_B() -> void:
 	_ini("B. test_get_visual_existing")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var visual = db.get_visual("NPC-RIZ-002")
 	_check("visual .is_not_null()", (visual) != null)
@@ -143,7 +151,7 @@ func _bloque_C() -> void:
 	_ini("C. test_get_visual_missing")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var visual = db.get_visual("NPC-INEXISTENTE")
 	_check("visual .is_null()", (visual) == null)
@@ -155,7 +163,7 @@ func _bloque_D() -> void:
 	_ini("D. test_get_visuals_by_island")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var visuals_riz = db.get_visuals_by_island("RIZ")
 	_check("visuals_riz .is_not_null()", (visuals_riz) != null)
@@ -168,7 +176,7 @@ func _bloque_E() -> void:
 	_ini("E. test_get_visuals_by_island_count")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var visuals_riz = db.get_visuals_by_island("RIZ")
 	_check("visuals_riz.size() .is_equal_to(8)", (visuals_riz.size()) == (8))
@@ -180,7 +188,7 @@ func _bloque_F() -> void:
 	_ini("F. test_get_visuals_all_islands")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	_check("db.get_visuals_by_island(\"RIZ\").size() .is_equal_to(8)", (db.get_visuals_by_island("RIZ").size()) == (8))
 	_check("db.get_visuals_by_island(\"COR\").size() .is_equal_to(5)", (db.get_visuals_by_island("COR").size()) == (5))
@@ -194,7 +202,7 @@ func _bloque_G() -> void:
 	_ini("G. test_get_seasonal_variant_returns_base_when_empty")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var visual = db.get_visual("NPC-RIZ-002")
 	if visual:
@@ -253,7 +261,7 @@ func _bloque_K() -> void:
 	_ini("K. test_npc_visual_has_required_fields")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	for npc_id in db.visuals.keys():
 		var visual = db.get_visual(npc_id)
@@ -271,7 +279,7 @@ func _bloque_L() -> void:
 	_ini("L. test_npc_visual_clothing_has_colors")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	for npc_id in db.visuals.keys():
 		var visual = db.get_visual(npc_id)
@@ -287,7 +295,7 @@ func _bloque_M() -> void:
 	_ini("M. test_npc_visual_hex_colors_valid")
 	var db = DB_SCRIPT.new()
 	root.add_child(db)
-	await db.ready
+	await process_frame
 
 	var hex_regex = RegEx.new()
 	hex_regex.compile("^#[0-9A-Fa-f]{6}$")
