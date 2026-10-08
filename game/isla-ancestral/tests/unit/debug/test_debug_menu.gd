@@ -8,7 +8,8 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 func test_diag_export_genera_archivo() -> void:
 	var menu = load("res://scripts/debug/debug_menu.gd").new()
 	add_child(menu)
-	await menu.ready
+	if not menu.is_node_ready():
+		await menu.ready
 	menu._export_diag()
 	await get_tree().process_frame
 	var diag_dir := "user://diagnostics"
@@ -26,8 +27,11 @@ func test_diag_export_genera_archivo() -> void:
 	dir.list_dir_end()
 	assert_that(n_diags).is_greater_equal(1)
 	if fname != "":
-		var txt := FileAccess.get_file_as_string("user://diagnostics/" + fname)
-		assert_that(txt).contains("=DIAG=")
+		var 		txt := FileAccess.get_file_as_string("user://diagnostics/" + fname)
+		# Formato vigente (debug_menu.gd:_export_diagnostic_zip): encabezado
+		# "DIAGNOSTICO Isla Ancestral" + Fecha + metadata + consola.
+		assert_that(txt).contains("DIAGNOSTICO Isla Ancestral")
+		assert_that(txt).contains("Fecha:")
 	menu.free()
 
 func test_menu_activo_solo_debug() -> void:
@@ -37,7 +41,8 @@ func test_menu_activo_solo_debug() -> void:
 func test_accion_teleport_center_ok() -> void:
 	var menu = load("res://scripts/debug/debug_menu.gd").new()
 	add_child(menu)
-	await menu.ready
+	if not menu.is_node_ready():
+		await menu.ready
 	menu._tp_center()  # no debe fallar con jugador/terreno vía null (defensivo)
 	assert_that(bool(1 == 1)).is_true()
 	menu.free()

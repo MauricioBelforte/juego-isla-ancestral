@@ -7,7 +7,8 @@ extends "res://addons/gdUnit4/src/GdUnitTestSuite.gd"
 func test_layer_builds_and_toggle() -> void:
 	var layer = load("res://scripts/ui/layers/equipment_layer.gd").new()
 	add_child(layer)
-	await layer.ready
+	if not layer.is_node_ready():
+		await layer.ready
 
 	assert_that(layer.visible).is_false()  # arranca oculta (capa modal)
 	layer.toggle()
@@ -19,7 +20,8 @@ func test_layer_builds_and_toggle() -> void:
 func test_layer_grid_has_16_items() -> void:
 	var layer = load("res://scripts/ui/layers/equipment_layer.gd").new()
 	add_child(layer)
-	await layer.ready
+	if not layer.is_node_ready():
+		await layer.ready
 	layer.toggle()  # fuerza el refresh del grid
 
 	var grid: GridContainer = null
@@ -34,7 +36,9 @@ func test_layer_grid_has_16_items() -> void:
 func test_layer_slot_buttons_exist() -> void:
 	var layer = load("res://scripts/ui/layers/equipment_layer.gd").new()
 	add_child(layer)
-	await layer.ready
+	if not layer.is_node_ready():
+		await layer.ready
+	layer.toggle()  # fuerza la construcción del grid de prendas
 
 	var buttons: Array = layer.find_children("*", "Button", true, false)
 	assert_that(buttons.size()).is_greater_equal(20)  # 4 slots + 16 prendas

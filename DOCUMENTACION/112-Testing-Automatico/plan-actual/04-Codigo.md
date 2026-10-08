@@ -1,7 +1,62 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** mimo-v2.6-flash-free
+**Plataforma:** opencode
 
 # 04-Codigo.md — Módulo 112: Testing Automático
+
+## 0. Estado REAL del framework (T-M112 / BUG-120 — 2026-10-07, mimo-v2.6-flash-free)
+
+> Etiquetado honesto post-BUG-120. Lo que sigue (§1 en adelante) es la
+> **especificación original** de Deepseek; esta sección refleja lo que hay
+> **realmente en disco** y cuánto de ella se implementó.
+
+**Qué es el framework HOY (medido contra disco, 2026-10-07):**
+
+| Afirmación original | Realidad medida |
+|---|---|
+| "Framework GdUnit4" como único motor | **HÍBRIDO NO DECLARADO**: 26 suites = **22 `extends SceneTree`** (suites propias del proyecto, contadores `checks/fallos`, patrón M24) + **4 GdUnit4** (`assert_that`, 21 test cases: foto 5, inventario 10, ui 3, debug 3) |
+| "187 test cases" | **No reproducible**. Lo medido hoy: **718 tests** (697 checks SceneTree + 21 GdUnit4) |
+| `run_tests.gd` = "punto de entrada único" verde | **BUG-120 (falso-verde)**: la v1 imprimía "RESULTADO: ÉXITO — Todos los tests pasaron" con **0 tests** y EXIT 0 |
+| `scenes/test_runner.tscn` funcional | Carga el mundo y **no termina** (ERROR SceneTree-as-Node) — sigue sin servir como runner |
+| `tools/ci/run_tests.py` (artifact listado) | **No existe en disco** |
+| `testing.yml` bloquea CI | ~~El paso corre GdUnitCmdTool con `\|\| true` → **nunca falla**~~ **Corregido 2026-10-08** (autorización director msg 59): paso `Run tests` con `-a <4 dirs> --ignoreHeadlessMode`, **sin `\|\| true`** (evidencia local 21/21, EXIT 0). **2026-10-08 (msg 61, autorizado)**: quitados ademas los 2 `\|\| true` del job `lint` → **0 en todo el archivo**. Ambos pasos del lint medidos como INAPTOS para CI (`--check-only` suelto cuelga arrancando el juego → timeout 10 min; `code_quality_check.gd` EditorScript falla estructuralmente → nunca corrio) → **BUG-122 [ ] delegado M118/M111**, pasos sin tocar (rojo honesto; Log 1453) |
+
+**Causa raíz del BUG-120 (reproducido y medido):**
+1. `run_tests.gd` v1 lanzaba `GdUnitCmdTool.gd -- --path res://tests --verbose`.
+2. El parser de GdUnit (`CmdArgumentParser.parse`) descarta todo hasta encontrar
+   el nombre de la tool en `OS.get_cmdline_args()` — y **Godot NO incluye en ese
+   array los argumentos posteriores a `--`** (van en `get_cmdline_user_args()`).
+3. Resultado: `GdUnitResult.empty()` → `show_help()` → `quit(RETURN_SUCCESS)` →
+   **EXIT 0 sin ejecutar ningún test** → v1 celebraba el verde.
+
+**`run_tests.gd` v2c (implementado 2026-10-07):**
+- Descubre `res://tests/**/test_*.gd` (excluye `helpers/`), clasifica SceneTree vs GdUnit4.
+- Ejecuta **cada suite como subproceso** con salida redirigida a archivo vía
+  `cmd /C` (patrón de `scripts/templos/test_regresion_templos.gd`: en este build
+  `OS.execute` **no** captura el stdout de un Godot hijo).
+- **Timeout 180 s por suite** (300 s GdUnit4) + `taskkill /T /F`: un SCRIPT ERROR
+  que aborta una suite sin `quit()` no puede colgar al runner (pasó con
+  `tests/test_debug_menu.gd` → loop eterno, ahora excluida y documentada).
+- GdUnit4 con **invocación correcta**: `godot --headless -s res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a <dir> --ignoreHeadlessMode` (**sin `--`, sin `--path`**; `--path` no es flag de GdUnit y el sin `--ignoreHeadlessMode` sale con rc 103).
+- **Guardas anti-falso-verde**: `ÉXITO MEDIDO` solo si suites ejecutadas ==
+  descubiertas-ejecutables **Y** tests reportados > 0 **Y** 0 fallos **Y** rc 0.
+  Códigos: 0 verde · 1 fallos · **2 = SIN EVIDENCIA (0 tests) — el verde mintiroso es estructuralmente imposible**.
+- Banner muestra evidencia numérica: `checks SceneTree` + `test cases GdUnit4`.
+
+**Evidencia de la corrida final (2026-10-07):**
+```
+[EVIDENCIA] suites descubiertas: 26 (22 SceneTree + 4 GdUnit4) · excluidas documentadas: 1
+[EVIDENCIA] suites OK: 19/25 ejecutables · checks SceneTree: 697 · GdUnit4: 21 · tests totales: 718
+RESULTADO: FALLO — 19 suites OK de 25 · 718 tests corridos · 3 con fallo(s)
+```
+El runner **funciona y es veraz**: hoy reporta FALLO con evidencia (antes decía
+ÉXITO con 0). Los 3 fallos son suites rotas de otros módulos (ver `11-BUGS.md`
+BUG-120 → hallazgos delegados).
+
+**Gate de regresión antes/después** (no se tocó quality.yml ni M103):
+`scripts/templos/test_regresion_templos.gd` → **76 checks, 0 fallos, EXIT 0**
+en ambas corridas (línea base idéntica).
+
+---
 
 ## 1. Carácter del Componente
 

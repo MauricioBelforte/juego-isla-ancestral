@@ -29,10 +29,29 @@ jobs:
           restore-keys: |
             gdunit4-
 
+      # T-M112 / BUG-120 (fix autorizado por el director, msg 59, 2026-10-08).
+      # Defectos corregidos:
+      #   1) `--path res://tests` NO es un flag de GdUnit4 (lo consumia Godot)
+      #      y sin `-a` el parser no encontraba suites -> 0 tests ejecutados.
+      #   2) `|| true` anulaba cualquier fallo -> este paso NUNCA podia fallar
+      #      (falso-verde de CI, la misma clase de bug que BUG-120 en local).
+      # Invocacion verificada localmente (Godot 4.7.2, igual que run_tests.gd v2c):
+      #   -a <dir> por suite + --ignoreHeadlessMode. Nota: sin ese flag GdUnit
+      #   sale con codigo 103 ("Headless mode is not supported").
+      # Alcance de este job: SOLO las 4 suites GdUnit4 del repo (21 test cases,
+      # 21/21 al 2026-10-07). Las 22 suites `extends SceneTree` NO son GdUnit4:
+      # las cubre res://tests/run_tests.gd en local (ver 11-BUGS -> BUG-120).
+      # Sin `|| true`: si una suite GdUnit4 falla, este paso y el quality-gate
+      # fallan a la vista (CI rojo-visible > CI verde-falso).
       - name: Run tests
         run: |
           cd game/isla-ancestral
-          godot --headless -s -d res://addons/gdUnit4/bin/GdUnitCmdTool.gd --path res://tests --verbose 2>&1 || true
+          godot --headless -s res://addons/gdUnit4/bin/GdUnitCmdTool.gd \
+            -a res://tests/unit/foto \
+            -a res://tests/unit/inventario \
+            -a res://tests/unit/ui \
+            -a res://tests/unit/debug \
+            --ignoreHeadlessMode 2>&1
 
       - name: Upload test results
         if: always()
@@ -64,15 +83,27 @@ jobs:
         with:
           version: "4.7-stable"
 
+      # T-M112 extra (autorizacion director, msg 61, 2026-10-08): se quitaron
+      # los `|| true` de los 2 pasos de este job. Hasta ahora el lint NUNCA
+      # podia fallar (mismo falso-verde que el paso de tests). Los pasos quedan
+      # HONESTOS tal como estan; hoy ambos son problematicos en local y eso se
+      # dejo visible a proposito (documentado en 11-BUGS -> BUG-122, dueños
+      # M111/M118) en vez de disimularlo:
+      #   - `--check-only` sin `--script` NO valida nada: arranca el juego
+      #     completo (boot de servicios) y queda corriendo -> timeout.
+      #   - `code_quality_check.gd` es un EditorScript que no hereda de
+      #     SceneTree/MainLoop -> Godot lo rechaza con 2 ERROR siempre.
+      # No se excluyo ni toco ningun paso (si M118/M111 lo arreglan, el paso
+      # empezara a fallar/success de verdad).
       - name: Check formatting
         run: |
           cd game/isla-ancestral
-          godot --headless --check-only 2>&1 || true
+          godot --headless --check-only 2>&1
 
       - name: Run static analysis (CodeQualityCheck)
         run: |
           cd game/isla-ancestral
-          godot --headless --script res://scripts/editor/code_quality_check.gd 2>&1 || true
+          godot --headless --script res://scripts/editor/code_quality_check.gd 2>&1
 
   quality-gate:
     name: Quality Gate

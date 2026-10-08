@@ -15,6 +15,7 @@
 - Archivos: res://addons/gdunit4/, res://tests/, .github/workflows/testing.yml, res://tests/run_tests.gd, res://scenes/test_runner.tscn
 - Fecha: 2026-08-28 14:45:00
 - Completado: 2026-08-29 00:20:00
+- Reabierto (T-M112 / BUG-120): 2026-10-07 - mimo-v2.6-flash-free (opencode). Cerrado 2026-10-07 con evidencia (718 tests medidos). Hallazgos delegados: [?] (ver seccion final).
 
 ## Checklist de implementación del módulo
 
@@ -264,3 +265,32 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 208 [x] / 0 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+### T-M112 / BUG-120 (2026-10-07, mimo-v2.6-flash-free (opencode))
+
+Reapertura puntual para: (1) arreglar el falso-verde de run_tests.gd (BUG-120)
+y (2) reetiquetar el framework honestamente en las docs del modulo. NO se toco
+.github/workflows/quality.yml ni el gate M103.
+
+- [x] Reproducir BUG-120: run_tests.gd v1 imprimia EXIT 0 + "RESULTADO: EXITO" con 0 tests [S]
+- [x] Diagnosticar causa raiz: CmdArgumentParser no ve los args posteriores a "--" (Godot los guarda aparte) -> GdUnitResult vacio -> show_help() -> quit(RETURN_SUCCESS) [M]
+- [x] Insertar el reporte del BUG-119 (falso positivo) en DOCUMENTACION/11-BUGS.md seccion 7 [S]
+- [x] Reescribir run_tests.gd (v2c): descubrimiento de suites, clasificacion SceneTree/GdUnit4, subproceso con salida a archivo, timeout por suite + taskkill, guardas anti-falso-verde (exit 2 si 0 tests) [C]
+- [x] Invocacion GdUnit4 corregida: -a <dirs> + --ignoreHeadlessMode, sin "--" ni "--path" [M]
+- [x] Fix de las 4 suites GdUnit4: guards is_node_ready(), captura de lambda, layer.toggle() en el test de slots, assert de diagnostico con el formato vigente -> 21/21 tests [M]
+- [x] Exclusion documentada de tests/test_debug_menu.gd (suite raiz con API muerta: is_visible/show_menu/... no existen) [S]
+- [x] Evidencia de corrida final medida: 26 suites descubiertas (22 SceneTree + 4 GdUnit4), 19/25 OK, 718 tests, RESULTADO: FALLO con conteos (antes: EXITO sin correr) [C]
+- [x] Gate de regresion antes y despues: scripts/templos/test_regresion_templos.gd -> 76 checks, 0 fallos, EXIT 0 en ambas corridas; quality.yml intacto [M]
+- [x] Reetiquetado honesto en 04-Codigo.md (nueva seccion 0: framework hibrido, artifacts inexistentes, testing.yml con "|| true") [M]
+- [x] BUG-120 registrado en DOCUMENTACION/11-BUGS.md con causa, fix y evidencia [S]
+- [x] Log de cierre en Logs/ + informe en el canal del modelo [S]
+
+**Hallazgos delegados (fuera de alcance de T-M112):**
+
+- [?] tests/unit/data/test_npc_visual_database.gd -> rc=1 sin resumen (watchdog aborta en el primer bloque). Dueno: suite de visual/NPC [C]
+- [?] tests/unit/player/test_equipment_manager.gd -> rc=1 sin resumen (watchdog en bloque A). Dueno: M59 / equipo [C]
+- [?] GdUnit4 tests/unit/debug/test_debug_menu.gd -> 201 orphans -> rc=101 con 0 failures (21/21 PASSED). Dueno: M110 [M]
+- [?] tests/test_debug_menu.gd (raiz) -> API muerta; excluida del runner. Dueno: M110 [S]
+- [x] .github/workflows/testing.yml -> flag "--path" invalido + "|| true" (el CI nunca falla). AUTORIZADO por el director (msg 59, 2026-10-08) y FIXEADO: paso "Run tests" con -a <4 dirs> + --ignoreHeadlessMode, sin "--"/"--path" ni "|| true"; evidencia local 21/21 tests, 4/4 suites, EXIT 0. Luego (msg 61, 2026-10-08): quitados tambien los 2 "|| true" del job lint -> 0 en todo el archivo; ambos pasos medidos inaptos para CI (colgante / EditorScript) -> BUG-122 [ ] delegado M118/M111, sin tocarlos (Log 1453). Dueno: M118 [x]
+
+**Totales T-M112:** 13 [x] / 4 [?] / 0 [ ] (testing.yml paso de [?] a [x] el 2026-10-08 con el fix autorizado en msg 59). La linea "Totales: 208" de arriba es el conteo historico del modulo; la auditoria debe sumar esta seccion aparte.

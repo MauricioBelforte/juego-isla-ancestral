@@ -21,7 +21,8 @@ func test_foto_schema_rechaza() -> void:
 func test_photo_service_presets_cargados() -> void:
 	var service := SERVICE.new()
 	add_child(service)
-	await service.ready
+	if not service.is_node_ready():
+		await service.ready
 	assert_that(service.presets().size()).is_equal(6)
 	assert_that(service.presets()).contains("crepusculo_rojo")
 	service.free()
@@ -29,12 +30,13 @@ func test_photo_service_presets_cargados() -> void:
 func test_photo_service_modo_y_preset() -> void:
 	var service := SERVICE.new()
 	add_child(service)
-	await service.ready
-	var senal := false
-	service.modo_foto_cambiado.connect(func(a): senal = a)
+	if not service.is_node_ready():
+		await service.ready
+	var senal := [false]
+	service.modo_foto_cambiado.connect(func(a): senal[0] = a)
 	service.set_modo_foto(true)
 	assert_that(service.modo_foto()).is_true()
-	assert_that(senal).is_true()
+	assert_that(senal[0]).is_true()
 	var preset := service.aplicar_preset("calido_playa")
 	assert_that(float(preset["temperatura"])).is_equal(0.12)
 	service.free()
@@ -42,7 +44,8 @@ func test_photo_service_modo_y_preset() -> void:
 func test_photo_service_preset_inexistente_vuelve_natural() -> void:
 	var service := SERVICE.new()
 	add_child(service)
-	await service.ready
+	if not service.is_node_ready():
+		await service.ready
 	var preset := service.aplicar_preset("no_existe")
 	assert_that(preset.has("nombre")).is_true()
 	service.free()
