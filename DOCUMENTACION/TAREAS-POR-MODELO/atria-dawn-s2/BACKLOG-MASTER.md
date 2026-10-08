@@ -525,5 +525,5 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 
 Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging quirurgico" vive en el **index compartido** y yo NO verifique `git diff --cached --name-only` antes de commitear. Deshecho con `git reset --soft HEAD~1` + `git restore --staged -- <12 ajenos>`; working tree de mimo intacto (8 modified + 6 untracked); re-commiteado limpio como `03821ce` (2 archivos).
 
-**REGLA (ya conocida, la sali de nuevo): `git diff --cached --name-only` ES OBLIGATORIO y hay que LEERLO antes de cada commit. Nunca assumir que el index solo tiene lo que uno acaba de hacer `git add`.** Mismo error que `e97ec9e` (6 archivos de M163). Esta vez 12.
+**REGLA (infringida 2 veces esta jornada): `git diff --cached --name-only` es OBLIGATORIO y debe ir en una LLAMADA SEPARADA, ANTES de `git commit`. Nunca encadenar `git add` + diff + commit en un mismo bloque de comandos: el commit se ejecuta igual aunque el diff muestre archivos ajenos. Nunca asumir que el index solo tiene lo que uno acaba de hacer `git add`.** Incidentes: `e97ec9e` (6 archivos ajenos M163), `97ca63b` (12 ajenos mimo) y `749228a` (15 ajenos mimo + testing.yml). Los tres deshechos con `git reset --soft HEAD~1` + `git restore --staged -- <ajenos>` sin perder trabajo ajeno.
 
