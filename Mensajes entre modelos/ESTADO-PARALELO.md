@@ -168,6 +168,16 @@ anteriores **no se renombran** (rompería las referencias cruzadas).
 
 ---
 
+## 2026-10-08 19:55 — mimo-v2.6-flash-free / opencode — BUG-119 (fix spawner) + encargo msg 74 (fix chamán + BUG-105 agua blanca) CERRADOS
+
+**Estado:** ambos frentes completados y verificados; **commit pendiente de OK del director** (msg 75 del canal).
+
+- **BUG-119** (Log 1475, commit `3bd021b` ya aceptado en msg 74): race de arranque del IncenseSpawner; fix defensivo en `incense_spawner.gd` (reintento `_process`, timeout 8 s).
+- **Fix del chamán (autorizado msg 74):** `shaman_npc.gd` con retry `_process` + `_locator` inyectable; **`main_island.gd` NO tocado**. Verificado: sonda 3/3 · Run A y=17 incienso 6/0 · `test_enchantment` 58/0.
+- **BUG-105 (agua blanca) RESUELTO:** causa dominante = `SPECULAR=0.5`+`ROUGHNESS=0.15` de `shaders/agua_olas.gdshader` a ángulos rasantes (banda lechosa en todo el mar). Fix: `SPECULAR=0.0` + fade de espuma de crestas por distancia (`espuma_distancia=300`). Atribución probada con shader de diagnóstico (prof≥5 sano → descarta hipótesis SB-14) + test una-variable sin specular. Capturas `cap_105_*` en `capturas/105-Agua-Blanca/`. 11-BUGS cerrado (tabla+entrada+historial).
+- **Regresión:** runner **19/25 / 780 / 3 preexistentes** (baseline post-merge intacto) + gate **76/0**.
+- **Log 1487** (reservado del pool global). **`CHECKLIST-GLOBAL.md` no tocado** (sin flips de módulo: trabajo por encargo de bugfix).
+
 ## 2026-10-05 02:50 — mimo-v2.6-flash-free / opencode — M89 Diseno-De-Menus RECLAMADO 🔵 (frente T-M2, canal 18)
 
 **Estado:** ✅ **T-M2 CERRADO 2026-10-05 04:06** — auditoría contra disco completa + suite headless `test_m89_menus.gd` (**48 checks / 0 fallos / exit=0**, sonda rojo 1 fallo / exit=1, regresión M53 0 fallos y M55 89/0); flips en `05-Checklist.md`: **8 `[ ]`→`[x]`** y **2 `[x]`→`[?]`** (suite Navigator-21 y suite perfiles/slots 30 ciclos **INFLADAS**) → totales **125 = 30 [x] / 93 [ ] / 2 [?]**; docs: `03-Diseno` §8 (mapeo P1-P21), `04-Codigo` §6 (diseño Unity vs Godot), `05` (sección auditoría), `06` y `07` (plan/resultados de testings, nuevos); **Log 1321** (la cabeza de `NUMEROS_DISPONIBLES.txt` era 1321, no 1296); informe **20** en el canal. Al cerrar: fila 89 → **🟡 Con dudas · 30/125 · Agente `—` · 2026-10-05 04:06** (11 celdas, M-06 íntegro). Reserva original: fila 89 **reconstruida de 13→11 celdas** (mismo defecto en filas 88/90, ajenas — NO tocadas; familia de la nota de agnes-2.5-flash 2026-09-04) y reclamada: Estado → **🔵 En curso**, Agente actual → **mimo-v2.6-flash-free**, Última actividad → **2026-10-05 02:50**, Progreso **24/125**. Reclamo previo de agnes-2.5-flash (2026-09-04 00:40, >24h sin actividad → reclamable §21.4.7). Invariante M-06 verificado: CR=392 / LF=231 / CRLF=231 sin cambio.

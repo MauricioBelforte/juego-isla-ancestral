@@ -10,6 +10,7 @@ extends SceneTree
 ##            --script res://tests/unit/ui/test_inventory_unificado.gd
 
 var _fallos: int = 0
+var _checks: int = 0
 
 func _initialize() -> void:
 	_run.call_deferred()
@@ -19,6 +20,9 @@ func _run() -> void:
 	_test_toggle()
 	_test_overlay()
 	_test_legacy()
+	# Formato reconocido por run_tests.gd (fix BUG-120, msg 141 del director):
+	# antes esta suite se contaba como OK con 0 checks al no declarar el conteo.
+	print("%d checks, %d fallos" % [_checks, _fallos])
 	if _fallos == 0:
 		print("[OK] Test inventario unificado: 0 fallos")
 	else:
@@ -27,6 +31,7 @@ func _run() -> void:
 
 func _check(desc: String, cond: bool) -> void:
 	if cond:
+		_checks += 1
 		print("  [x] %s" % desc)
 	else:
 		_fallos += 1

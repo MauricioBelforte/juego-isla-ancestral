@@ -174,7 +174,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-102 | **BUG REAL DE PRODUCTO (dormido)**: `dlc_manager.gd` (M120) `es_compatible()` comparaba versiones como STRINGS -> `"1.10.0" >= "1.9.0"` = **false** (lexicografico). Un DLC que exige version >= 1.9.0 se reportaba INCOMPATIBLE con la base 1.10.0 (y al reves). Ademas `_activos` (DLCs activados) **NO se persistia**: activar un DLC, guardar y cargar lo perdia (el item de checklist "Activar/desactivar DLC con persistencia [M]" estaba marcado [x] sin respaldo). Descubierto y resuelto por DeepSeek-V4.1-Flash en T-D5 (Log 1291) | M120 (`scripts/dlc/dlc_manager.gd`) | 🟡 Media | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1291) | DeepSeek-V4.1-Flash | 2026-10-04 |
 | BUG-103 | 3 logs de agosto escritos en cp1252 (no UTF-8): ilegibles para cualquier gate | Transversal / AGENTS.md §28 | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1296) | 2026-10-05 |
 | BUG-104 | Dos autoloads con el MISMO archivo base en dos carpetas `localization/` y `localizacion/` (sistema duplicado) | M87 / boot | 🟡 Menor | [ ] Abierto | space-bunny-alpha (Log 1310) | 2026-10-05 |
-| BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [~] Diagnóstico hecho (A/B), fix sin confirmar | space-bunny-alpha (Log 1310) | 2026-10-05 |
+| BUG-105 | El agua se renderiza **blanca**, no azul (captura de pantalla real) | M08 / M167 (render) | 🟠 Mayor | [x] **Resuelto** (mimo-v2.6-flash-free, opencode, Log 1487: causa = SPECULAR 0.5 rasante del shader) | space-bunny-alpha (Log 1310) | 2026-10-08 |
 | BUG-106 | **8 item_ids de los catálogos de M39 no existen en M15 (ItemDatabase)**: `madera_roble`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `herramienta_basica`, `fragmento_ancestral`, `piedra_caliza`, `pergamino_rec_tela_lino` → 8 warnings en runtime. Deuda de M15 (registrar los ítems), no de M39 | M15 (ItemDatabase) / M39 (Tiendas) | 🟡 Menor | [ ] Abierto — detectado por auditoría A de agnes-3-flash (Log 1350/`2fd452b`), documentado en `05-Checklist` M39 §Notas | agnes-3-flash (Kilo Code) | 2026-10-06 |
 | BUG-107 | `BaseArenaBlancaIsla` con **r=242** (radio viejo, sin escalar ×10 en el rework "Isla 10x" — el mundo es 5120×5120 con centro (2560,2560) desde el commit `c107419`). Deuda detectada en el frente C3/BUG-105 (agua blanca) | M167 / M08 (terreno y render de la isla) | 🟡 Menor | [ ] Abierto — detectado por space-bunny-alpha (canal 27, Log 1326) en su último informe antes de la baja | space-bunny-alpha | 2026-10-06 |
 | BUG-108 | Restore de inventario: clave de sección no numérica → contenedor 0 + sin validar `stack_max` (inyección de cantidades) | M14/M59 | 🟡 Menor | [x] **Resuelto** (DeepSeek-V4.1-Flash, Log 1378, `da6c974`) | DeepSeek-V4.1-Flash (fix) - ling-3.1-flash (L-03) | 2026-10-06 |
@@ -288,7 +288,8 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
   albedo por defecto, (c) niebla/nieve, (d) el voxel de agua no tiene emisive propio y recibe la
   luz del cielo de forma saturada. **Es una hipótesis de lectura de pantalla, no un diagnóstico.**
   Confirmarlo requiere leer el material/mesh del agua (M08/M50) o ver la escena con el editor.
-- **Estado:** [ ] **Abierto.** Derivado por el director al dueno del terreno.
+- **Estado:** [x] **Resuelto** 2026-10-08 por mimo-v2.6-flash-free (opencode, Log 1487) — ver
+  CIERRE al final de esta entrada. (Originalmente derivado por el director al dueño del terreno.)
 - **Reportado por:** space-bunny-alpha (Kilo Code) — SB-09, con la captura adjunta como evidencia.
 
 #### DIAGNÓSTICO (SB-14 / C3, 2026-10-05, Log 1326) — **el agua blanca la produce el SHADER**
@@ -345,6 +346,84 @@ cambiarla es diseño, no fix.
 
 **Responsable del fix:** M51 (el shader) — **no** M08 ni `mundo_raiz.gd`, así que no bloquea el
 frente de nadie.
+
+#### CIERRE (2026-10-08, mimo-v2.6-flash-free / opencode, Log 1487) — causa: `SPECULAR` rasante
+
+> **Resolución: fix aplicado en `shaders/agua_olas.gdshader`. `SPECULAR = 0.0` + atenuación por
+> distancia de la espuma de crestas.** El agua turquesa correcto (paleta Maldivas) volvió en
+> todo el mar. `main_island.gd`, terreno M08/M167 y texturas **no se tocaron**.
+
+**Causa dominante (confirmada con shader de diagnóstico + test una-variable):**
+
+`SPECULAR = 0.5` + `ROUGHNESS = 0.15` del shader `agua_olas.gdshader` producía un brillo
+especular intenso a ángulos rasantes — la vista normal del jugador — sobre **todo** el mar:
+la banda blanca lechosa era especular saturado, no espuma ni fondo.
+
+**Tests que el diagnóstico anterior (SB-14) pedía y NO se habían hecho — hechos ahora:**
+
+1. **(b) Volcar `profundidad_agua`/`costa`/`espuma_orilla` a un COLOR de debug** — shader
+   diagnóstico `ALBEDO = vec3(prof/5, costa, espuma_orilla)`:
+   - `cap_105_2026-10-08_debug_prof_costa_espuma.png` → el mar lejano de la banda lechosa
+     aparece **ROJO puro** (prof ≥ 5 m válido; costa=0; espuma_orilla=0).
+   - **Descarta** la hipótesis de SB-14 («prof≈0 → costa=1 → espuma_orilla≈1 → blanco»):
+     esa cadena es real SOLO en la franja costera legítima (allí el debug se ve cian
+     prof+orilla), no en el mar abierto donde estaba la leche.
+2. **Test una-variable `SPECULAR = 0`** (todo lo demás idéntico):
+   - `cap_105_2026-10-08_test_sin_specular.png` → la leche desaparece **por completo**;
+     agua turquesa. Prueba de atribución directa.
+3. **(a) `Y_SUPERFICIE` a 6.0** — ya estaba hecho como «test 1» previo en `agua_animada.gd`
+   (plano se reposiciona en `_ready`; el `main_island.tscn` conserva y=4.05 en el archivo
+   pero se sobreescribe en runtime). Se mantuvo sin tocar.
+
+**Causa secundaria (real, corregida en el mismo fix):** la espuma de crestas promedia ~0.5 a
+distancia (el campo de ondas aliasa a su media cuando la isla es ×10). Se atenúa con el nuevo
+uniform `espuma_distancia = 300.0` (fade `smoothstep` 120→300 m). El look cercano queda idéntico.
+
+**Fix final (`shaders/agua_olas.gdshader`, ambos cambios):**
+
+```glsl
+uniform float espuma_distancia := 300.0;   // fade de espuma de crestas lejana
+...
+espuma_crestas *= 1.0 - smoothstep(espuma_distancia * 0.4, espuma_distancia, -VERTEX.z);
+...
+const float SPECULAR := 0.0;  // BUG-105: 0.5 + roughness 0.15 = leche rasante
+const float ROUGHNESS := 0.15;
+```
+
+El brillo del agua queda dado por el **fresnel en ALPHA** (ya existente). Los «sparks» de sol
+sobre el agua son una posible futura iteración M51 si el usuario los pide (shimmer propio, no
+el especular global).
+
+**Medidas A/B (free-run, encuadre del jugador; caveat: encuadres antes/después no idénticos —
+la prueba de atribución es el debug + el test sin specular, no la comparación numérica):**
+
+| Captura | Región mar abierto (RGB) | R−B | Lectura |
+|---|---|---:|---|
+| `cap_105_..._antes_shader_actual.png` | (187, 213, 230) | −44 | lechosa (G≈B, R alto) |
+| `cap_105_..._despues_fix_specular_cero.png` | turquesa en todo el mar | ≈ −80+ | sano, identidad Maldivas |
+
+**Capturas (todas en `tools/mcp/godot-mcp/capturas/105-Agua-Blanca/`, gitignore):**
+
+- `cap_105_2026-10-08_antes_shader_actual.png`
+- `cap_105_2026-10-08_debug_prof_costa_espuma.png`
+- `cap_105_2026-10-08_test_sin_specular.png`
+- `cap_105_2026-10-08_despues_fix_specular_cero.png` ← canónica «después»
+
+**Regresión (sin impacto del shader):**
+
+- Runner `res://tests/run_tests.gd`: **25 suites / 19 OK / 780 tests / 3 fallos preexistentes**
+  (equip, npcviz, GdUnit 101) — idéntico al baseline post-merge.
+- Gate `res://scripts/templos/test_regresion_templos.gd`: **76 checks / 0 fallos**.
+
+**Notas para el futuro (M51 / agua):**
+
+- Si se quiere «sparkle» solar: agregar shimmer procedural propio en el fragment shader en vez
+  de resucitar el specular global (evita volver a la leche).
+- El shader debug (`prof/5`, costa, espuma) es reutilizable como herramienta de diagnóstico.
+- Sonda A/B determinista usada (`tests/_probe_bug105_cap.gd`: cámara fija + viewer movido a
+  cámara + captura de viewport) fue monouso y se borró; el patrón está documentado en el Log 1487.
+
+**Firma del cierre:** mimo-v2.6-flash-free · opencode · 2026-10-08 19:51 · Log 1487.
 
 ### BUG-103 — 3 logs de agosto escritos en cp1252: ilegibles para todo gate de codificación
 
@@ -3949,6 +4028,8 @@ silenciosa de todos los guardados futuros).
 
 
 ## 9. Historial de Modificaciones de Este Archivo
+
+- **2026-10-08 19:51** — **BUG-105 [x] Resuelto (mimo-v2.6-flash-free, opencode, encargo msg 74, Log 1487):** causa dominante = `SPECULAR = 0.5` + `ROUGHNESS = 0.15` de `shaders/agua_olas.gdshader` a ángulos rasantes (banda blanca lechosa sobre todo el mar). Fix: `SPECULAR = 0.0` + atenuación por distancia (`espuma_distancia = 300`) de la espuma de crestas (causa secundaria). Evidencia A/B con shader de diagnóstico (prof≥5 válido en la banda → descarta hipótesis SB-14 de prof≈0) y test una-variable sin specular (leche eliminada por completo); capturas `cap_105_*` en `tools/mcp/godot-mcp/capturas/105-Agua-Blanca/`. Regresión: runner 19/25/780/3 preexistentes + gate 76/0. **Nota:** fix autorizado del chamán en el mismo encargo (msg 74): retry `_process` con timeout 8 s en `shaman_npc.gd` (patrón M50, `_locator` inyectable); `main_island.gd` NO tocado; verificado 3/3 + Run A incienso 6/0 + `test_enchantment` 58/0.
 
 - **2026-10-08 05:20** — **BUG-122 [x] Resuelto (mimo-v2.6-flash-free, opencode, frente B del msg 70, Log 1469):** el job lint de 	esting.yml quedó honesto — paso Check formatting colgado **reemplazado** por gate de parseo con colector (receta BUG-051/091, medido 971 preloads / 0 SCRIPT ERROR / EXIT 0) y paso Run static analysis **retirado con evidencia** (sonda: EditorScript.new() no es instanciable en headless → adaptar exige tocar code_quality_check.gd, M111, pendiente de coordinación). Solo se tocó .github/workflows/testing.yml; regresión runner 25/0/718/3 preexistentes + gate 76/0 idéntica al baseline. Pendientes derivados (quality.yml code-quality-script con || true, nombre del job vs branch protection) reportados al director en el msg 71 del canal.
 
