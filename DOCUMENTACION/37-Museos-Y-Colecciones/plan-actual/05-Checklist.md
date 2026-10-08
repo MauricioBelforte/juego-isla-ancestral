@@ -72,7 +72,7 @@
 - [ ] Iluminacion interior calida y estatica (horneada) [S]
 - [ ] Construccion voxel de vitrinas coherente con el estilo del mundo [C]
 - [ ] Navegabilidad completa de salas sin colisiones molestas [S]
-- [ ] El museo es accesible desde el inicio de la partida (sin bloqueos) [S]
+- [x] El museo es accesible desde el inicio de la partida (sin bloqueos) [S] (RF2a: placiar_en_mundo, agnes-3-flash)
 
 ## E. ExhibitSlot: vitrinas instanciadas (12)
 
@@ -263,3 +263,9 @@ vitrinas instanciadas, place_item (libre/sobrescritura), inspect 'Por donar', re
 request_donation_ui. PENDING (fuera de este slice): construccion VOXEL 3D de vitrinas (item [C]),
 panel UI M53 de donacion + escena museum.tscn posicionada en el mundo. Los [x] de arriba son la
 logica verificada, no el 3D/UI.
+
+## NOTA-AGNES RF2a (escena + posicionamiento, 2026-10-08, agnes-3-flash)
+- Escena scenes/museo/museum.tscn creada (Museum Node3D + vitrinas instanciadas en runtime por data/museum/exhibiciones.json).
+- Museum.placiar_en_mundo(pos=MUSEO_POS) posiciona el edificio en el mundo con TerrainLocator.posicionar_sobre_terreno (anti-flotamiento get_height+1; NEVER IslandGenerator). Test headless: test_museo_rf2.gd 0/0 EXIT 0 (estructura + XZ; el snapping del terreno se verifica en-editor).
+- museum_placer.gd instanciado + posiciona el museo en el mundo.
+- PENDING (RF2b / M53, NO marcados): construccion VOXEL 3D de vitrinas [C]; mostrador + cartel de progreso (UI M53); escena exhibit_slot.tscn; registro persistente por exposicion; reconstruccion posicional al cargar. No sobremarcaron esas lineas.

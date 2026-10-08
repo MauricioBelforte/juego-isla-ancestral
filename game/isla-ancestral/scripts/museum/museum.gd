@@ -117,15 +117,17 @@ func _cargar_exposiciones() -> Array:
 ## (regla anti-flotamiento de AGENTS.md: TerrainLocator.get_height + 1, NUNCA
 ## IslandGenerator propio). Devuelve true si quedó posicionado sobre terreno válido.
 func placiar_en_mundo(pos: Vector2 = MUSEO_POS) -> bool:
+	var wx := float(pos.x)
+	var wz := float(pos.y)
 	var locator = get_node_or_null("/root/TerrainLocator")
 	if locator != null and locator.has_method("posicionar_sobre_terreno"):
-		var ok: bool = locator.posicionar_sobre_terreno(self, float(pos.x), float(pos.z))
+		var ok: bool = locator.posicionar_sobre_terreno(self, wx, wz)
 		if ok:
 			return true
 		# Fallback (terreno aún no listo / fuera de isla): y base + coordenada directa.
-		global_position = Vector3(pos.x, 30.0, pos.z)
+		global_position = Vector3(wx, 30.0, wz)
 		return false
 	# Sin TerrainLocator (headless temprano): dejo la coordenada XZ correcta.
-	global_position = Vector3(pos.x, 0.0, pos.z)
+	global_position = Vector3(wx, 0.0, wz)
 	return false
 

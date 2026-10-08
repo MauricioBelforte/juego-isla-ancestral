@@ -17,14 +17,15 @@ func _run() -> void:
 		_fin()
 		return
 	# (b) Instanciar + añadir al árbol → _ready construye salas + vitrinas + curador.
-	var museo: Node3D = escena.instantiate()
+	var museo = escena.instantiate()  # Variant (duck-typed: el componente Museum.gd)
 	root.add_child(museo)
 	await process_frame
-	_check(museo.get_room("flora") != null, "instanciado tiene sala (estructura RF1)")
-	_check(museo.get_curator() != null, "instanciado tiene curador (museo visitable)")
-	_check(museo.get_vitrina("flora", "baya_roja") != null, "vitrinas instanciadas en runtime")
+	_check(museo.has_method("get_room"), "instancia tiene el componente Museum")
+	_check(museo.call("get_room", "flora") != null, "instanciado tiene sala (estructura RF1)")
+	_check(museo.call("get_curator") != null, "instanciado tiene curador (museo visitable)")
+	_check(museo.call("get_vitrina", "flora", "baya_roja") != null, "vitrinas instanciadas en runtime")
 	# (c) Placiar en el mundo deja la coordenada XZ correcta (RF2).
-	var plac = museo.placiar_en_mundo()
+	var plac = museo.call("placiar_en_mundo")
 	_check(is_equal_approx(museo.global_position.x, 3900.0), "museo X = MUSEO_POS.x (%f)" % museo.global_position.x)
 	_check(is_equal_approx(museo.global_position.z, 3830.0), "museo Z = MUSEO_POS.z (%f)" % museo.global_position.z)
 	# El snapping al terreno (get_height+1) solo aplica si el locator está listo; si no,
@@ -33,10 +34,10 @@ func _run() -> void:
 	print("[M37 RF2] placiar_en_mundo -> posicionado_sobre_terreno=%s, pos=%s" % [str(plac), str(museo.global_position)])
 	# (d) El placer helper instancia + posiciona correctamente.
 	var helper = load("res://scripts/museum/museum_placer.gd").new()
-	var museo2: Node3D = helper.crear_en_mundo(root)
+	var museo2 = helper.crear_en_mundo(root)
 	_check(museo2 != null, "MuseumPlacer.crear_en_mundo instancia el museo")
 	if museo2 != null:
-		_check(museo2.get_room("peces") != null, "el museo colocado tiene salas (peces)")
+		_check(museo2.has_method("get_room") and museo2.call("get_room", "peces") != null, "el museo colocado tiene salas (peces)")
 		museo2.queue_free()
 	museo.queue_free()
 	_fin()
