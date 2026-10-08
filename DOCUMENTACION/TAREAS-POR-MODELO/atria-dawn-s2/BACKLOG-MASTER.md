@@ -560,6 +560,12 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] **run_tests.gd localizado y leído**: `game/isla-ancestral/tests/run_tests.gd` (309 líneas, v2c de mimo, Log 1451). El BUG-120 original (v1) ya resuelto por mimo.
 - [ ] **Auditar la v2c actual**: verificar que las guardas anti-falso-verde funcionan (probar en rojo) y diagnosticar las 6/25 suites que fallan (¿fallos reales o falsos negativos del runner?).
 - [ ] **Veredicto honesto**: arreglar (si es acotado) o documentar como no-funcional con evidencia. **Avisar al director antes de tocar archivos de M111/M112.**
+- [x] **Fix AUTORIZADO (msg 139 del director)**: patrón 4 `passed=N failed=M` + detección `FALLO:` sin corchetes + patrón `N fallo(s)` en `_analizar_salida()`.
+- [x] **Sonda unitaria en rojo y verde: 12/12 OK, 0 fallos, EXIT 0** (M111 verde/rojo, inventory_unificado verde/rojo, rc != 0, regresiones `[FIN]` y `OK/fallos`).
+- [x] **Runner real con fix: M111 checks=0 → 62; tests totales 718 → 780**; residual inventory_unificado checks=0 (no declara conteo, sus fallos sí se detectan); los 3 fallos del runner son los `[?]` conocidos de M112.
+- [x] **Fix ya en HEAD** (merge `41765e6` del director, absorbido con mis comentarios exactos).
+- [ ] **Log del fix pendiente**: pool de logs prohibido por restricción del director — preguntado en msg 140.
+- [ ] **"familia B"**: significado preguntado en msg 140 (¿Familia B de BUG-070? ¿suites no reconocidas?).
 - Restricciones: nada de `quality.yml` (BUG-091), `interaction_manager.gd` (kimi), `service_registry.gd`/`bootstrap.gd` (BUG-097), pool de logs.
 
 ## Push pendiente de confirmacion (msgs 131-132)
