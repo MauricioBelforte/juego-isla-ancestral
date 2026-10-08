@@ -6,6 +6,10 @@
 # Valida: BackupManager (crear backup, verificar integridad con checksum,
 # restaurar, retención, categorías RF1-RF8, compresión, manifest).
 
+# NOTA (agnes-3-flash, 2026-10-08, BUG-121): los SCRIPT ERROR "instantiate" sobre null que se ven
+# al correr este test en headless vienen del AUTOLOAD DE FAUNA (tortuga/cangrejo/jabali _instanciar_modelo:
+# load(.glb) devuelve null en headless y no hay null-guard antes de .instantiate()), NO de este test.
+# Los checks de modulo de ESTE test pasan. Fix = null-guard en M30-fauna (dueño lo asigna el director).
 extends SceneTree
 
 var _fallos: int = 0

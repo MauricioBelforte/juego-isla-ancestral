@@ -12,6 +12,26 @@ var _catalog: Dictionary = {}
 
 func _ready() -> void:
 	_load_catalog()
+	_registrar_proveedor_guardado()
+
+## M163 D: registro en SaveManager (M59, patron WeatherService/AudioConfig).
+## Seccion "enchantments" ADITIVA: saves viejos sin la seccion se restauran a
+## estado vacio valido via from_dict (defaults) — nunca degradan el save.
+func _registrar_proveedor_guardado() -> void:
+	var sm := get_node_or_null("/root/SaveManager")
+	if sm != null and sm.has_method("register_provider"):
+		sm.register_provider(self)
+
+# ── Contrato ISaveProvider (duck-typing, M59) ────────────────────────
+
+func get_section_name() -> String:
+	return "enchantments"
+
+func get_save_data() -> Dictionary:
+	return to_dict()
+
+func restore_save_data(data: Dictionary) -> void:
+	from_dict(data)
 
 func _load_catalog() -> void:
 	var dir = DirAccess.open("res://data/enchantments/")

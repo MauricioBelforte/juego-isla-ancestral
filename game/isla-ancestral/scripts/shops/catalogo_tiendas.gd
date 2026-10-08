@@ -9,6 +9,19 @@
 # NOTA: data-driven en código (consistente con M93/M15/M16); migración a .tres
 # opcional cuando exista el editor de catálogos (M108).
 
+# BUG-106 (agnes-3-flash, 2026-10-08): los item_ids originales de M39 eran NOMBRES
+# EN ESPAOL que M15 nunca tuvo (M15 usa 'id' en ingles u 'OBJ-*'). Mapeados a ids
+# VALIDOS de M15 (por el campo 'nombre' de M15, data/items/*.tres):
+#   madera_roble           -> wood          (M15: Madera)
+#   piedra_caliza          -> stone         (M15: Piedra)
+#   baya_roja              -> OBJ-ITE-024   (M15: Bayas)
+#   mineral_cobre          -> copper_ore    (M15: Cobre)
+#   fragmento_ancestral    -> OBJ-ART-003   (M15: Cristel ancestral)
+#   pergamino_rec_tela_lino-> OBJ-ART-002   (M15: Pergamino mistico)
+#   herramienta_basica     -> OBJ-HER-001   (M15: Hacha de madera)
+#   fibra_algodon          -> grass         (M15: no tiene fibra -> SUSTITUTO, flag)
+# Ver: test_catalogo_m39_m15.gd (guardian anti-regresion) + Log del BUG-106.
+
 extends Node
 
 const SHOP_SCRIPT := preload("res://scripts/shops/shop_data.gd")
@@ -97,19 +110,19 @@ func _registrar_tienda_general(sm) -> void:
 	var franja_g: Array[Vector2i] = [Vector2i(8, 20)]
 	def.franjas_horarias = franja_g
 	def.catalogo_venta = [
-		_entry("madera_roble", 5, 15, 1.0, true),
-		_entry("piedra_caliza", 5, 12, 1.0, true),
-		_entry("baya_roja", 3, 10, 1.0, true),
-		_entry("fibra_algodon", 3, 8, 1.2, false),
-		_entry("mineral_cobre", 1, 4, 2.0, false),
+		_entry("wood", 5, 15, 1.0, true),
+		_entry("stone", 5, 12, 1.0, true),
+		_entry("OBJ-ITE-024", 3, 10, 1.0, true),
+		_entry("grass", 3, 8, 1.2, false),
+		_entry("copper_ore", 1, 4, 2.0, false),
 		# M16 RF14 (glm-5.3-flash): pergaminos de receta (origen "compra" en
 		# balance/crafting.json) — usar_item → Crafting.usar_pergamino aprende
 		# la receta. Stock limitado 1 por día (recompensa de progresión cozy).
-		_entry("pergamino_rec_tela_lino", 1, 1, 2.0, false),
+		_entry("OBJ-ART-002", 1, 1, 2.0, false),
 	]
 	var recompra_g: Array[String] = [
-		"madera_roble", "piedra_caliza", "baya_roja", "fibra_algodon",
-		"mineral_cobre", "fragmento_ancestral",
+		"wood", "stone", "OBJ-ITE-024", "grass",
+		"copper_ore", "OBJ-ART-003",
 	]
 	def.catalogo_recompra = recompra_g
 	def.restock_diario = 8
@@ -124,10 +137,10 @@ func _registrar_herreria(sm) -> void:
 	def.franjas_horarias = franja_h
 	def.dias_descanso = [] as Array[int]  # descanso semanal: día 6/7 según calendario M29
 	def.catalogo_venta = [
-		_entry("herramienta_basica", 1, 3, 1.0, true),
-		_entry("mineral_cobre", 2, 6, 1.5, true),
+		_entry("OBJ-HER-001", 1, 3, 1.0, true),
+		_entry("copper_ore", 2, 6, 1.5, true),
 	]
-	var recompra_h: Array[String] = ["mineral_cobre", "piedra_caliza"]
+	var recompra_h: Array[String] = ["copper_ore", "stone"]
 	def.catalogo_recompra = recompra_h
 	def.restock_diario = 4
 	_registrar_validada(sm, def)
@@ -142,12 +155,12 @@ func _registrar_mercader_viajero(sm) -> void:
 	def.dias_aparicion_mercader = 3           # aparece 1 de cada 3 días (PRNG)
 	def.recargo_mercader_pct = 12.0
 	def.catalogo_venta = [
-		_entry("fragmento_ancestral", 1, 2, 3.0, false),
-		_entry("baya_roja", 5, 12, 1.0, true),
-		_entry("mineral_cobre", 2, 5, 1.5, false),
+		_entry("OBJ-ART-003", 1, 2, 3.0, false),
+		_entry("OBJ-ITE-024", 5, 12, 1.0, true),
+		_entry("copper_ore", 2, 5, 1.5, false),
 	]
 	var recompra_m: Array[String] = [
-		"fragmento_ancestral", "mineral_cobre", "madera_roble", "baya_roja",
+		"OBJ-ART-003", "copper_ore", "wood", "OBJ-ITE-024",
 	]
 	def.catalogo_recompra = recompra_m
 	def.restock_diario = 3
