@@ -2412,7 +2412,7 @@ var hay_modal: bool = v if v is bool else false
 
 - **Modelo (entrada original):** atria-dawn / Plataforma: Kilo Code — 2026-10-07 20:52
 - **Modelo (investigacion):** mimo-v2.6-flash-free / Plataforma: opencode — 2026-10-07 19:15 (re-escrita 21:25 tras incidente de stash)
-- **Estado:** [x] CERRADO — falso positivo en arranque normal
+- **Estado:** [x] Resuelto 2026-10-08 — falso positivo en arranque normal + fix defensivo APLICADO (retry por frame)
 - **Modulo:** M163 Sistema de Encantamientos · **Severidad:** Media
 
 **Reporte original (atria-dawn):** el chamán/IncenseSpawner generaba 0 puntos en
@@ -2445,7 +2445,47 @@ BUG-119 cerrado como falso positivo. El fix defensivo (call_deferred +
 backoff comprobando get_height >= 0 en incense_spawner.gd, ~10 lineas)
 queda AUTORIZADO como mejora opcional de robustez, NO como correccion.
 
+**Fix defensivo APLICADO (mimo-v2.6-flash-free, opencode — 2026-10-08, encargo msg 72):**
+
+- **Caracterizacion medida del race (solo arranque `--script`):** Run A
+  (`--headless --quit-after 300`): bootstrap detecta escena activa y omite
+  recarga -> 6 puntos / 0 fallas (montaje unico). Run B (`--script` con
+  probe): `change_scene_to_file` diferido de bootstrap.gd:168 ->
+  `_crear_incense_spawner` (main_island.gd:429) corre en el mismo frame del
+  montaje ANTES de que TerrainLocator resuelva el VoxelTerrain en su
+  `_process` -> `get_height` = -1 en los 24 intentos -> 0 puntos (RED exacto
+  del reporte original). Colateral medido: `_crear_shaman` (main_island.gd)
+  cae a su fallback hardcodeado y=35 ante `get_height < 0` (Run B: chaman en
+  y=35 vs y=17 real) -> MISMO race en otro spawner, OCULTO. No tocado:
+  requiere aviso previo (main_island.gd).
+- **Fix (SOLO scripts/enchantment/incense_spawner.gd, ~25 lineas):** intento
+  sincronico original intacto en `_ready`; si 0 puntos -> reintento via
+  `_process` (1 probe por frame, patron M50 vegetation_spawner) hasta
+  `get_height(centro) >= 0` o timeout 8000 ms con warning honesto;
+  `set_process(false)` al terminar (coste 0 en el camino sincronico y en la
+  suite con mock). La 1a version con `call_deferred` recursivo revienta el
+  proceso con SIGSEGV (Godot 4 puede re-procesar el MessageQueue en el mismo
+  flush -> recursion infinita; crash medido en _reintentar_spawn:78) ->
+  reemplazada por el patron _process.
+- **Verificacion post-fix:** Run B: warning honesto del intento inicial +
+  `[M163] IncenseSpawner: 6 puntos en montaña (24 fallas de altura, ...)`
+  sin crash. Run A: 6 puntos / 0 fallas, sin retries. Suite `test_incienso.gd`
+  standalone: 67 checks / 0 fallos. Runner regresion: 25 descubiertas /
+  0 excluidas / 19 OK / 718 tests / 3 fallos preexistentes = baseline
+  (1a corrida muerta a mitad de la fase GdUnit sin RESULTADO -> flake, OK a
+  la repetida). Gate templos: 76 checks / 0 fallos.
+- **Regla para proximos fixes:** NUNCA re-encolar `call_deferred` desde la
+  propia funcion diferida en Godot 4 (riesgo de recursion infinita en el
+  mismo flush -> SIGSEGV). Usar `_process` con timeout o
+  `await get_tree().process_frame`.
+- **Archivos tocados:** SOLO `scripts/enchantment/incense_spawner.gd` (M163).
+  NINGUN archivo de terreno M163/M167 ni `main_island.gd` tocado.
+- **Registro:** Log 1475, msg 73.
+
 **Evidencia:** logs TEMP/bug119/ (r1-r4, suites, sonda), Log 1434, msg 56.
+Logs TEMP/bug119/ post-fix: runB_postfix2.txt, runA_postfix.txt,
+test_incienso_postfix.txt, runner_bug119_fix2.txt, gate_bug119_fix.txt.
+Log 1475, msg 73.
 
 
 > Cuando un bug se corrige y verifica, se mueve aquí con su fecha de resolución, la solución aplicada y la firma de quien lo resolvió.

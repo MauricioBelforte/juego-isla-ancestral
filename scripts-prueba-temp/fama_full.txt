@@ -1,0 +1,277 @@
+Total checklists plan-actual: 167
+
+MODULO                               [x]    OK     W     X   [ ]   [?]
+112-Testing-Automatico               222    55    24     7     0     3
+88-Fuentes-Tipograficas              174     7    11     4     0    11
+80-Legal-Privacidad                  144     2     8     4     0     0
+121-Soporte-Post-Lanzamiento         123     4     7     4    88     0
+154-Vision-Del-Agente                155     6    24     3     0     0
+122-Crash-Reporting                  254     9    15     2     0    11
+120-DLC-Y-Expansiones                163     4     4     2    59     0
+108-Pipeline-De-Assets               124    17    11     2    78     3
+64-IA-De-NPC                         100     7    72     2     0    17
+73-Coleccionables                     28     4     4     2   105     2
+47-Texturas-Y-Materiales              18     4     5     2   101     0
+156-Terrenos-Y-Movimiento            203    29    78     1    90    14
+150-Diseo-Sonoro-Narrativo           146    38    84     1     0     4
+52-Particulas-Y-VFX                  137    19    13     1    10     1
+81-Legal-Menores                     137     1    23     1     0     0
+93-Balance                           131    50     7     1     3     0
+105-Telemetria-De-Gameplay           120     0    15     1     0    45
+153-Objetivo-Final                   120    24     6     1    10     0
+84-Musica-Y-Audio-Legal               99    28    16     1     0     0
+92-Tutorial                           97     0    10     1    87     1
+85-Modelos-3D-Legal                   95     0    18     1     5     0
+147-World-Building                    65     6     3     1    68     1
+42-Sonido-Ambiental                   63     0     4     1    37     0
+163-Sistema-De-Encantamientos         61    11     3     1    48    15
+41-Musica                             59     0     5     1    49     2
+137-Prototipo                         10     0     2     1   121     0
+48-Animacion                           9     0     5     1   114     0
+36-Fauna                             226    12    10     0     2     0
+101-QA-General                       209     0    17     0     0     0
+111-Codigo-De-Calidad                209    28     8     0     0     0
+91-Configuracion-De-Audio            207    18    31     0    31     1
+152-Principios-Innegociables         202     0    51     0     0     0
+136-Roadmap                          199     0    14     0     0     0
+106-Seguridad                        194    25    10     0     0    12
+116-Instalador                       192     1    21     0     0     0
+29-Tiempo-Y-Calendario               190    23    10     0     3     2
+60-Datos-Y-Serializacion             189    10    18     0     3     4
+114-Playtest                         186     0    13     0     0     0
+39-Tiendas                           181     2    24     0     0     0
+103-Logging                          173    36    24     0     0     6
+38-Economia                          164    13    46     0     0     0
+78-Legal-Propiedad-Intelectual       157    13     6     0     0     0
+160-Diseno-De-Ubicaciones-Del-Mundo   148    61    24     0     3     4
+100-Community-Management             146     2    19     0    76     0
+102-Bug-Tracking                     140     0    26     0     0     0
+53-UI-UX                             139     3    26     0    26     0
+94-Retencion-Sin-FOMO                138     8     3     0     0     0
+14-Inventario                        136     6     5     0     0     4
+135-Riesgos-Del-Proyecto             134     0    18     0     0     0
+54-Mapa                              133    23    25     0    44     0
+58-Accesibilidad                     131     3    10     0    50     2
+87-Localizacion                      131     5    30     0     0     5
+86-IA-Generativa                     129     2    35     0     0     0
+97-Steam-Store-Page                  129     0     7     0    66     0
+133-Gestion-Del-Proyecto             127     3    19     0     0     0
+89-Diseno-De-Menus                   124     4     7     0     0     1
+25-Ruinas                            122     2    23     0     0     0
+110-Debug-Menu                       121     3     9     0     0   104
+32-Clima                             121     3     7     0     0     0
+31-Ciclo-Dia-Noche                   120    30     9     0     0    49
+03-Documentacion-Del-Proyecto        117     0    16     0     9     7
+167-Isla-Raiz                        113     3     9     0     1     0
+62-Memoria                           113    26    10     0    37     0
+166-Variantes-Y-Perfil-De-Rendimiento   111    24    12     0     0     1
+119-Actualizaciones                  109     3     7     0     9     0
+66-Anti-Softlock                     109     0    90     0     0     8
+123-Modding                          108     3     3     0     0     0
+44-ASMR-Y-Feedback                   108     5     6     0     0     5
+30-Reloj-En-Tiempo-Real              107    12     7     0     0    13
+07-Arquitectura-General              105     7     2     0     0     0
+08-Mundo-Voxel                       105     0     7     0     0     0
+125-Terminos-De-Servicio             105     2     6     0     0     0
+132-Produccion-De-Equipo             105     0    28     0     0     0
+145-Diseno-De-Experiencia            105     0    18     0     0     0
+168-Plantilla-De-Isla                104     0     7     0     0     0
+129-Merchandising                    103     2     7     0     0     5
+79-Legal-Contratos                   103     0     2     0     0     0
+113-Pruebas-De-Stress                102     0     5     0    30     0
+118-CI-CD                            102     5    15     0     4     0
+126-Marketing-Legal                  101     3    17     0     0     0
+09-Terreno-Y-Geografia               100     3     6     0     0     5
+134-Presupuesto                      100     5    19     0     0     0
+146-Diseno-Emocional                 100     0    18     0     0     0
+24-Templos-Y-Puzzles                 100    16    21     0    27     1
+82-Clasificacion-Por-Edades          100     0    12     0     0     0
+06-Control-De-Versiones               99     1    10     0     1     0
+107-Backups                           99    13    23     0    59    18
+149-Nombres-Y-Nomenclatura            99     5    27     0     0     1
+15-Recursos                           99    26     7     0   115     8
+27-Islas-Del-Mundo                    99    12     9     0     0    93
+130-Artbook                           96     0     7     0    50     0
+40-Infraestructura                    95     4     8     0   114     2
+74-Eventos                            95     9    13     0     2   188
+161-Diseno-Visual-De-NPCs             94     6    25     0    42     2
+117-Build-System                      92     4     4     0     0    18
+57-Interfaz-De-Control                91     1    12     0    27     1
+10-Generacion-Del-Mundo               90     0    18     0     0    16
+65-Animales-IA                        89     5     3     0     1     0
+131-Creditos                          85    26     6     0    10     0
+13-Herramientas                       84     4     5     0    34     2
+155-Vestimenta-Y-Accesorios           84    11    19     0    24     0
+34-Pesca                              84    11     4     0     0    69
+124-Contenido-Generado-Por-Usuarios    83     1     1     0     0    25
+162-Dialogos-Contextuales-De-NPCs     80     2    28     0     0    40
+70-Interacciones                      77     0     9     0   121     0
+68-Transporte-Y-Navegacion            75     4     5     0    42    14
+71-Progresion                         72     0     6     0     0   141
+96-Plataformas                        71     6     4     0    34     1
+164-Isla-De-Combate-Endgame           70     8     5     0    58     2
+115-Hardware                          69     5     8     0     2    33
+159-Catalogo-De-Objetos               69     2    31     0    25    52
+90-Configuracion-Grafica              69     0    11     0   180     0
+33-Agricultura                        67     1    18     0    86     0
+63-Cargas-Y-Streaming                 67    45    11     0     7    27
+26-Templo-Subterraneo                 62    14     6     0    57    10
+35-Mineria                            60     3     8     0    69    13
+59-Guardado                           60     9    10     0    69     1
+43-Efectos-De-Sonido                  59    37     1     0    41     0
+17-Construccion                       58     0     5     0   116     1
+12-Camara                             57     7     3     0     0    45
+11-Personaje-Del-Jugador              53     4     2     0     0    70
+128-Identidad-De-Marca                53     4     6     0    47     0
+158-Herramientas-Y-Desbloqueo-De-Zonas    53     2     1     0    87     0
+49-Iluminacion                        53    11    17     0     0    90
+127-Copyright-Del-Juego               52    24     0     0    24    25
+22-Historia-Principal                 51     6    26     0    49     0
+20-Sistema-De-Amistad                 50     1     2     0    98     0
+28-Viajes                             50     4     5     0    80     0
+104-Analytics                         49     4    17     0    68     0
+165-Voxel-Tools-Guia                  48     1    18     0     0     0
+19-NPC-Y-Vecinos                      48     1     7     0    83     0
+16-Crafting                           43     2     5     0   156     9
+61-Rendimiento                        39     8     2     0   101     4
+55-Diario-Del-Jugador                 37     6    10     0    91     3
+37-Museos-Y-Colecciones               36     3     7     0   112     0
+51-Agua                               35     4     7     0   130     1
+50-Vegetacion                         29     9     5     0   110     3
+109-Herramientas-Internas             27     6     0     0   108     3
+23-Historias-Secundarias              24     2    15     0    80     0
+142-Release-Candidate                 23     0     1     0   106     0
+148-Lore-Ambiental                    23     1     1     0    92     2
+151-Control-Final                     23    11     3     0   138     6
+56-Fotografia                         21     3     7     0   114     2
+45-Arte-3D                            20     5     7     0   149     2
+67-Vehiculos                          19     3     2     0   112     0
+95-Monetizacion                       19    10     0     0    94     0
+143-Lanzamiento                       18     0     1     0    93     0
+69-Fast-Travel                        18     3     5     0   130     2
+75-Postgame                           17     1     0     0   113     0
+83-Licencias-De-Software              16     2     7     0    84     0
+141-Beta                              15     0     3     0   136     0
+04-Game-Engine                        14     3     7     0   114     0
+140-Alpha                             14     0     0     0   110     0
+21-Dialogos                           13     8     1     0   123     7
+139-Pre-Alpha                         12     0     5     0   130     0
+138-Vertical-Slice                    11     0     2     0   120     0
+99-Marketing                           7     0     0     0   162     0
+05-Lenguaje-Y-Programacion             4     4     0     0    99     0
+144-Despues-Del-Lanzamiento            4     0     0     0   101     0
+18-Casas                               4     0     3     0   122     0
+98-Trailer                             4     0     1     0    98     0
+72-Sistema-De-Logros                   1     1     0     0   184     0
+76-Multijugador                        1     0     0     0   126     3
+01-Fundamentos-Del-Proyecto            0     0     0     0   152     0
+02-Vision-Y-Concepto                   0     0     0     0   172     0
+46-Arte-2D                             0     0     0     0   110     0
+77-Online-Y-Red                        0     0     0     0   126     4
+TOTAL                              14889  1222  2010    50  7714  1428
+
+=== MODULOS CON ❌ (Familia A confirmada) — detalle ===
+
+## 112-Testing-Automatico  (X=7, [x]=222)
+  L74 | Crear tests de integración NPC → amistad (diálogos, mood) [C] → test_villager_social.gd | citado-inexistente=['test_villager_social.gd']
+  L76 | Crear tests de integración crafting → inventario (consumo + resultado) [C] → test_crafting | citado-inexistente=['test_crafting_inventory.gd']
+  L77 | Crear tests de integración agricultura → inventario (semillas + cosechas) [C] → test_farmi | citado-inexistente=['test_farming_inventory.gd']
+  L78 | Crear tests de integración pesca → economía (pescar + vender) [C] → test_fishing_economy.g | citado-inexistente=['test_fishing_economy.gd']
+  L154 | Crear autoload_overrides.gd para mockear servicios [M] | citado-inexistente=['autoload_overrides.gd']
+  L156 | Crear fixture_terrain.tscn con seed fijo [C] -- agnes-2.5-flash 2026-09-13: fixture disena | citado-inexistente=['fixture_terrain.tscn']
+  L157 | Crear fixture_npc.tscn mínimo sin UI [M] -- agnes-2.5-flash 2026-09-13: fixture disenado e | citado-inexistente=['fixture_npc.tscn']
+
+## 88-Fuentes-Tipograficas  (X=4, [x]=174)
+  L169 | Diseñar font_sizes.gd (H1, H2, H3, BODY, SMALL, MICRO) | citado-inexistente=['font_sizes.gd']
+  L170 | Diseñar font_weights.gd (LIGHT, REGULAR, MEDIUM, BOLD) | citado-inexistente=['font_weights.gd']
+  L171 | Diseñar font_tracking.gd (NORMAL, TIGHT, LOOSE) | citado-inexistente=['font_tracking.gd']
+  L172 | Diseñar line_height.gd (TITLE, BODY, PARAGRAPH) | citado-inexistente=['line_height.gd']
+
+## 80-Legal-Privacidad  (X=4, [x]=144)
+  L114 | Diseñar privacy_menu.gd (renderiza el texto embebido) [M] | citado-inexistente=['privacy_menu.gd']
+  L115 | Diseñar privacy_consent.gd (diálogo condicionado a M104) [C] | citado-inexistente=['privacy_consent.gd']
+  L123 | M104: privacy_menu.gd consulta el estado sin modificarlo [S] | citado-inexistente=['privacy_menu.gd']
+  L124 | M104: privacy_consent.gd solo actúa si AnalyticsDirector existe [C] | citado-inexistente=['privacy_consent.gd']
+
+## 121-Soporte-Post-Lanzamiento  (X=4, [x]=123)
+  L254 | Diseñar res://support/faq_manager.gd | citado-inexistente=['res://support/faq_manager.gd', '//support/faq_manager.gd']
+  L255 | Diseñar res://support/ticket_manager.gd | citado-inexistente=['res://support/ticket_manager.gd', '//support/ticket_manager.gd']
+  L256 | Diseñar res://support/hotfix_manager.gd | citado-inexistente=['res://support/hotfix_manager.gd', '//support/hotfix_manager.gd']
+  L257 | Diseñar res://support/patch_manager.gd | citado-inexistente=['res://support/patch_manager.gd', '//support/patch_manager.gd']
+
+## 154-Vision-Del-Agente  (X=3, [x]=155)
+  L43 | Diseñar API de screenshot_mcp.py (V2): capture_screen/capture_window/save_capture [S] | citado-inexistente=['screenshot_mcp.py']
+  L109 | Crear preview_personaje.tscn en el proyecto Godot [M] -- agnes-2.5-flash 2026-09-12: escen | citado-inexistente=['preview_personaje.tscn']
+  L113 | Slot para modelo voxel intercambiable [M] -- agnes-2.5-flash 2026-09-12: slot disenado en  | citado-inexistente=['preview_personaje.tscn']
+
+## 122-Crash-Reporting  (X=2, [x]=254)
+  L167 | Diseñar CrashDashboard.gd | citado-inexistente=['CrashDashboard.gd']
+  L259 | Diseñar CrashDashboard.gd | citado-inexistente=['CrashDashboard.gd']
+
+## 120-DLC-Y-Expansiones  (X=2, [x]=163)
+  L265 | Diseñar res://dlc/dlc_compatibility_checker.gd | citado-inexistente=['res://dlc/dlc_compatibility_checker.gd', '//dlc/dlc_compatibility_checker.gd']
+  L267 | Diseñar res://dlc/dlc_bundle_manager.gd | citado-inexistente=['res://dlc/dlc_bundle_manager.gd', '//dlc/dlc_bundle_manager.gd']
+
+## 108-Pipeline-De-Assets  (X=2, [x]=124)
+  L115 | RF9: crear la escena asset_preview.tscn con caja de referencia de 1 m y cámara orbitante [ | citado-inexistente=['asset_preview.tscn']
+  L167 | Diseñar asset_preview.tscn con referencia de escala y luces estándar [M] | citado-inexistente=['asset_preview.tscn']
+
+## 64-IA-De-NPC  (X=2, [x]=100)
+  L75 | Crear RoutineDefinition.gd como Resource — NO requerido: rutinas son Dictionary en Village | citado-inexistente=['RoutineDefinition.gd']
+  L76 | Crear RoutineSlot.gd con hour, minute, action, location — NO requerido: mismo motivo | citado-inexistente=['RoutineSlot.gd']
+
+## 73-Coleccionables  (X=2, [x]=28)
+  L15 | Validar ids unicos con validate_collectibles.gd [M] | citado-inexistente=['validate_collectibles.gd']
+  L203 | Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C] | citado-inexistente=['validate_collectibles.gd']
+
+## 47-Texturas-Y-Materiales  (X=2, [x]=18)
+  L93 | Definir script validate_material.gd [M] | citado-inexistente=['validate_material.gd']
+  L115 | Definir script generate_textures.gd con seed = hash(semilla, superficie, bioma, variante)  | citado-inexistente=['generate_textures.gd']
+
+## 156-Terrenos-Y-Movimiento  (X=1, [x]=203)
+  L258 | Crear escena terrain_indicator.tscn [M] | citado-inexistente=['terrain_indicator.tscn']
+
+## 150-Diseo-Sonoro-Narrativo  (X=1, [x]=146)
+  L178 | Diseñar res://audio/leitmotif_config.gd → no needed (data-driven from JSON) | citado-inexistente=['res://audio/leitmotif_config.gd', '//audio/leitmotif_config.gd']
+
+## 52-Particulas-Y-VFX  (X=1, [x]=137)
+  L144 | Definir validate_vfx.gd [M] | citado-inexistente=['validate_vfx.gd']
+
+## 81-Legal-Menores  (X=1, [x]=137)
+  L75 | Diseñar DataSanitizer.cs como servicio central de sanitización _(diseno heredado: `DataSan | citado-inexistente=['DataSanitizer.cs', 'DataSanitizer.cs']
+
+## 93-Balance  (X=1, [x]=131)
+  L190 | Definir `balance_report.gd` que genera reporte markdown legible [M] | citado-inexistente=['balance_report.gd']
+
+## 105-Telemetria-De-Gameplay  (X=1, [x]=120)
+  L306 | Diseñar res://telemetry/gameplay_telemetry.gd | citado-inexistente=['res://telemetry/gameplay_telemetry.gd', '//telemetry/gameplay_telemetry.gd']
+
+## 153-Objetivo-Final  (X=1, [x]=120)
+  L210 | Incluir check de principios en validate_vision.gd [S] → validate_principios en ambos (.gd  | citado-inexistente=['validate_vision.gd']
+
+## 84-Musica-Y-Audio-Legal  (X=1, [x]=99)
+  L108 | Agregar paso de validación de audio en build_script.gd → audio_legal_manager.validate_all_ | citado-inexistente=['build_script.gd']
+
+## 92-Tutorial  (X=1, [x]=97)
+  L50 | RF19: mapeo de revalidación por dominio+señal en `revalidacion.gd` (M70, M33, M34, M35, M1 | citado-inexistente=['revalidacion.gd']
+
+## 85-Modelos-3D-Legal  (X=1, [x]=95)
+  L105 | Agregar paso de validación de modelos en build_script.gd | citado-inexistente=['build_script.gd']
+
+## 147-World-Building  (X=1, [x]=65)
+  L199 | Definir `sync_world_data.gd` que regenera el JSON desde los MD [C] | citado-inexistente=['sync_world_data.gd']
+
+## 42-Sonido-Ambiental  (X=1, [x]=63)
+  L120 | Suite en caso_ambiental_tests.gd (M112) [M] | citado-inexistente=['caso_ambiental_tests.gd']
+
+## 163-Sistema-De-Encantamientos  (X=1, [x]=61)
+  L113 | No se puede encantar una herramienta ya encantada [S] — B3 + guard enchant_system.gd:78 (s | citado-inexistente=['enchant_system.gd']
+
+## 41-Musica  (X=1, [x]=59)
+  L123 | Suite en caso_musica_tests.gd (M112) [M] | citado-inexistente=['caso_musica_tests.gd']
+
+## 137-Prototipo  (X=1, [x]=10)
+  L122 | Definir `playtest_runner.gd` que loguea eventos y FPS [C] | citado-inexistente=['playtest_runner.gd']
+
+## 48-Animacion  (X=1, [x]=9)
+  L106 | Definir script validate_animation.gd [M] | citado-inexistente=['validate_animation.gd']

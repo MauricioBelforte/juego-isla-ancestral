@@ -15,6 +15,9 @@ var _curator: Node3D = null
 
 ## Ruta del catálogo de exposiciones (misma fuente que CollectionRegistry).
 const EXHIBICIONES_PATH := "res://data/museum/exhibiciones.json"
+## Posición del edificio del museo en el mundo (RF1/RF2: cerca del Pueblo Raiz, en la Isla Raiz).
+## Offset del SPAWN_JUGADOR (3860,3860) para no pisar la aparición del jugador. Ajustable.
+const MUSEO_POS := Vector2(3900.0, 3830.0)
 
 func _ready() -> void:
 	_construir_vitrinas()
@@ -109,3 +112,20 @@ func _cargar_exposiciones() -> Array:
 	if parsed == null or not parsed.has("exposiciones"):
 		return []
 	return parsed["exposiciones"] as Array
+
+## RF2: posiciona este edificio en el mundo a MUSEO_POS, snapping al terreno
+## (regla anti-flotamiento de AGENTS.md: TerrainLocator.get_height + 1, NUNCA
+## IslandGenerator propio). Devuelve true si quedó posicionado sobre terreno válido.
+func placiar_en_mundo(pos: Vector2 = MUSEO_POS) -> bool:
+	var locator = get_node_or_null("/root/TerrainLocator")
+	if locator != null and locator.has_method("posicionar_sobre_terreno"):
+		var ok: bool = locator.posicionar_sobre_terreno(self, float(pos.x), float(pos.z))
+		if ok:
+			return true
+		# Fallback (terreno aún no listo / fuera de isla): y base + coordenada directa.
+		global_position = Vector3(pos.x, 30.0, pos.z)
+		return false
+	# Sin TerrainLocator (headless temprano): dejo la coordenada XZ correcta.
+	global_position = Vector3(pos.x, 0.0, pos.z)
+	return false
+

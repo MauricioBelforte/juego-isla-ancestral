@@ -60,6 +60,47 @@
   M156 subestimado. **Toda la verificación real la hice yo.** Para la próxima: encargos a Ling
   más chicos y acotados (un módulo por vez). El trial de Ling 3.1 Flash vence 2026-10-13.
 
+## Tareas en curso (Ling bajo mi supervisión)
+
+> **Política de reintentos (directiva del fundador, 2026-10-08):** si Ling se trunca por error
+> interno, de API o lo que sea, **intentar que termine la tarea varias veces** antes de tomarla
+> yo. Relanzar la sesión / re-prompt / simplificar el encargo. Solo si fracasa reiteradamente la
+> termino yo, y lo reporto.
+
+### L-07 — Ling: M15 Recursos — `[x]` CERRADO (Ling no entregó; verificado por mí)
+
+- **Qué era:** verificar los 26 `[x]` de M15 que citan archivos (99/115/8 = 222).
+- **Ling NO entregó.** Hizo la corrida (sesión idle) e **ignoró 3 pedidos de reporte** por Agent
+  Manager (20:00, 20:20, 20:25). Agoté los reintentos de la directiva del fundador.
+- **Mi verificación: M15 es LIMPIO.** 15+ claims verificados contra disco con líneas exactas:
+  `resource_definition.gd:9/18-19/20/21-22/23/29/49`, `resource_node.gd:47-50/95-115`,
+  `resource_manager.gd:13/193/200/229-235/278`, `resource_spawner.gd:69`.
+  Suite `test_m15_iter6_atria.gd` → **0 fallos, EXIT 0**.
+- **Los 8 `[?]` son deuda honesta con dueño** (meshes → M45/M47; recolección área → M13).
+- **Contraste con M156:** M15 cita líneas reales de código que existen; M156 citaba 31 archivos
+  inexistentes.
+- **Tercera falla consecutiva de Ling** (L-05 subestimó, L-06 desapareció, L-07 ignoró 3
+  pedidos). Evidencia pasada al director; decisión de baja es suya.
+- **Evidencia:** informe `Mensajes entre modelos/atria-dawn-s3/46`.
+
+### M78 — Verificación de frente ya resuelto — `[x]` CERRADO (sin acción)
+
+- **Qué era:** el director me asignó revertir los 157 `[x]` de M78 (sobre-cierre revocado por
+  hy3, Log 1113).
+- **Hallazgo:** **agnes-3-flash ya lo saneó el 2026-10-07** (Log 1436, frente canal 72). La
+  reversión del 2026-09-14 era una **sobre-reversión sin verificación**; el cierre original era
+  legítimo.
+- **Mi re-verificación independiente:** 11 artefactos citados existen
+  (`ASSETS-LICENSE.md` y `THIRD-PARTY-NOTICES.md` en la raíz del repo, `legal_data.json`,
+  `legal_validator.gd`, `asset_validation_m78.gd`, `test_legal_m78_v2.gd` + 3 docs de
+  plan-actual). Checklist 157/0/0, banner SANEADO, GLOBAL ✅ 157/157.
+- **Error propio corregido:** al principio busqué los .md de licencia en `game/isla-ancestral/`
+  y reporté "no existen" — estaban en la **raíz del repo**. Agnes tenía razón.
+- **KnownIssue no bloqueante:** `inventarios_2d.json` existe en
+  `game/isla-ancestral/data/arte2d/` pero la ruta citada no coincide. Coincido con agnes: no es
+  `[x]` falso.
+- **Sin acción:** no toqué nada. Informe `Mensajes entre modelos/atria-dawn-s3/44`.
+
 ## Tareas completadas
 
 ### S-01 — Independencia de verificadores: caso K-01 (kimi-k3 / M37) — `[x]` COMPLETADA Y APROBADA

@@ -214,12 +214,29 @@ func _analizar_salida(texto: String, exit: int) -> Dictionary:
 				encontrado = true
 			if encontrado:
 				checks = total
+			else:
+				# 4) "passed=N failed=M" (suites estilo M111; fix BUG-120:
+				# antes estas suites se contaban como OK con 0 checks, sin
+				# contabilizar sus tests ni detectar sus fallos).
+				var m4 := RegEx.create_from_string("passed=(\\d+)\\s+failed=(\\d+)").search(texto)
+				if m4 != null:
+					checks = int(m4.get_string(1))
+					fallos = int(m4.get_string(2))
 
 	if texto.contains("SCRIPT ERROR"):
 		motivos.append("SCRIPT ERROR")
 	if texto.contains("[FAIL]") and fallos == 0:
 		fallos = 1
 		motivos.append("[FAIL] en salida")
+	# Fix BUG-120: "FALLO:" sin corchetes (M111) y "N fallo(s)" (inventory_unificado).
+	# Antes el runner solo cazaba "[FAIL]" literal, dejando suites ciegas a sus propios fallos.
+	if texto.contains("FALLO:") and fallos == 0:
+		fallos = 1
+		motivos.append("FALLO: en salida")
+	var mf := RegEx.create_from_string("(\\d+)\\s+fallo\\(s\\)").search(texto)
+	if mf != null and fallos == 0:
+		fallos = int(mf.get_string(1))
+		motivos.append("%s fallo(s) declarado(s)" % mf.get_string(1))
 	if RegEx.create_from_string("RESULTADO:\\s*FALLOS").search(texto) and fallos == 0:
 		fallos = 1
 		motivos.append("RESULTADO: FALLOS")

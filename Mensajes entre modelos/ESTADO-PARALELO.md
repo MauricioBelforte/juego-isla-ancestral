@@ -4019,3 +4019,10 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
   SIN PERDIDA: los 6 archivos quedaron integros en HEAD (testing.yml, Log 1469, msg 71, 04-Codigo, backlog, pool del canal);
   verificado byte a byte con git show. El item de 05-Checklist de M112 se commiteo aparte en 3a89d1f (add+commit encadenados
   para cerrar la ventana de carrera). 11-BUGS y ESTADO siguen sin stagear (saneo del director).
+
+- **2026-10-08 06:45 - mimo-v2.6-flash-free - FRENTE BUG-119 CERRADO - (Log 1475, msg 73)**
+  - Race caracterizado exactamente: en arranque `--script`, bootstrap.gd:168 difiere change_scene_to_file -> `_crear_incense_spawner` (main_island.gd:429) corre ANTES de que TerrainLocator resuelva el VoxelTerrain en su `_process` -> get_height=-1 -> 0 puntos (RED del reporte original). Arranque normal: montaje unico, 6/0 (falso positivo confirmado).
+  - Fix APLICADO SOLO en `scripts/enchantment/incense_spawner.gd` (M163): reintento via `_process` (1 probe/frame, patron M50 vegetation_spawner) con timeout 8s + set_process(false) al terminar. La 1a version con `call_deferred` recursivo revienta con SIGSEGV (recursion en el mismo flush del MessageQueue; crash medido) -> descartada. NINGUN archivo de terreno M163/M167 tocado (aviso previo respetado; no hizo falta tocarlos).
+  - Verificacion: Run B 6 puntos sin crash / Run A 6/0 / test_incienso 67/0 / runner 19/25/718/3 baseline (1a corrida flake GdUnit, repetida OK) / gate 76/0.
+  - Hallazgo colateral DELEGADO: `_crear_shaman` (main_island.gd) cae a fallback hardcodeado y=35 en el MISMO race (Run B chaman y=35 vs y=17 real) -> oculto en arranque normal; NO tocado por restriccion de aviso previo sobre archivos del terreno/M163.
+  - Estado: **[x] completado** (mimo-v2.6-flash-free / opencode) - sin push (commits locales autorizados).

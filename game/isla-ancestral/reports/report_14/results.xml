@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-08" name="report_14" tests="21" failures="0" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_debug_menu" package="tests/unit/debug" timestamp="2026-10-08T20:16:48" hostname="localhost" tests="3" failures="0" errors="0" skipped="0" flaky="0" time="0.362">
+		<testcase name="test_diag_export_genera_archivo" classname="test_debug_menu" time="0.170">
+		</testcase>
+		<testcase name="test_menu_activo_solo_debug" classname="test_debug_menu" time="0.045">
+		</testcase>
+		<testcase name="test_accion_teleport_center_ok" classname="test_debug_menu" time="0.044">
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="test_photo_service" package="tests/unit/foto" timestamp="2026-10-08T20:16:49" hostname="localhost" tests="5" failures="0" errors="0" skipped="0" flaky="0" time="0.410">
+		<testcase name="test_foto_schema_valida_ok" classname="test_photo_service" time="0.043">
+		</testcase>
+		<testcase name="test_foto_schema_rechaza" classname="test_photo_service" time="0.042">
+		</testcase>
+		<testcase name="test_photo_service_presets_cargados" classname="test_photo_service" time="0.043">
+		</testcase>
+		<testcase name="test_photo_service_modo_y_preset" classname="test_photo_service" time="0.049">
+		</testcase>
+		<testcase name="test_photo_service_preset_inexistente_vuelve_natural" classname="test_photo_service" time="0.046">
+		</testcase>
+	</testsuite>
+	<testsuite id="2" name="test_inventory_slot" package="tests/unit/inventario" timestamp="2026-10-08T20:16:49" hostname="localhost" tests="10" failures="0" errors="0" skipped="0" flaky="0" time="0.783">
+		<testcase name="test_slot_empty_by_default" classname="test_inventory_slot" time="0.045">
+		</testcase>
+		<testcase name="test_ocupar" classname="test_inventory_slot" time="0.048">
+		</testcase>
+		<testcase name="test_vaciar" classname="test_inventory_slot" time="0.044">
+		</testcase>
+		<testcase name="test_puede_apilar_true" classname="test_inventory_slot" time="0.042">
+		</testcase>
+		<testcase name="test_puede_apilar_false_empty_slot" classname="test_inventory_slot" time="0.041">
+		</testcase>
+		<testcase name="test_puede_apilar_false_exceeds_max" classname="test_inventory_slot" time="0.046">
+		</testcase>
+		<testcase name="test_serializar_empty_slot" classname="test_inventory_slot" time="0.041">
+		</testcase>
+		<testcase name="test_serializar_full_slot" classname="test_inventory_slot" time="0.044">
+		</testcase>
+		<testcase name="test_deserializar" classname="test_inventory_slot" time="0.038">
+		</testcase>
+		<testcase name="test_deserializar_defaults" classname="test_inventory_slot" time="0.045">
+		</testcase>
+	</testsuite>
+	<testsuite id="3" name="test_equipment_layer" package="tests/unit/ui" timestamp="2026-10-08T20:16:50" hostname="localhost" tests="3" failures="0" errors="0" skipped="0" flaky="0" time="0.304">
+		<testcase name="test_layer_builds_and_toggle" classname="test_equipment_layer" time="0.062">
+		</testcase>
+		<testcase name="test_layer_grid_has_16_items" classname="test_equipment_layer" time="0.059">
+		</testcase>
+		<testcase name="test_layer_slot_buttons_exist" classname="test_equipment_layer" time="0.062">
+		</testcase>
+	</testsuite>
+</testsuites>
