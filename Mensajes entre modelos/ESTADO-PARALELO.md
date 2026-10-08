@@ -3994,4 +3994,14 @@ del `05-Checklist.md` con sustento + resolver mis 2 `[?]` inflados de la auditor
 - **2026-10-08 02:31 - mimo-v2.6-flash-free - testing.yml COMPLETO sin `|| true` (job lint, autorizado msg 61) - (msg 62, Log 1453)**
   - Los 2 `|| true` del job `lint` quitados; **0 en todo el archivo**. Medido: `--check-only` suelto ARRANCA EL JUEGO y colgaria hasta timeout de 10 min en CI; `code_quality_check.gd` FALLA SIEMPRE (EditorScript, no hereda SceneTree/MainLoop - nunca corrio en CI, el `|| true` tragaba el error). Pasos SIN TOCAR (clausula 3 del encargo): **BUG-122 [ ] delegado M118/M111** en 11-BUGS. CI lint queda rojo-honesto. quality.yml intacto; sin commit/push.
   - Estado: LISTO para volumen DoD o modulo colgado (esperando asignacion del director).
+  - **COMMIT 6e47532 (2026-10-08 02:40, autorizado msg 63):** 17 archivos, +1081/-67, SIN push. Excluidos 11-BUGS y ESTADO (saneo del director). Msg 64 informa.
+- **2026-10-08 02:44 - mimo-v2.6-flash-free - RESERVA M17 (17-Construccion) - volumen DoD**
+  - Reservado tras oferta del director (msg 63: Qwen3.8 Max colgado >72h, 21.4.7). Fila: 59/175, complejidad 5, deps 08/14. Alcance honesto declarado (msg 64): verificacion [x]/[?] contra disco, sin inflar, sin sellar 21.8; si una sub-area me supera -> [?] + liberar amarillo (21.4.8). Entrada: plan-actual de DOCUMENTACION/17-Construccion/.
+  - **DECLINADO 02:45:** al abrir el 05-Checklist de M17 encontre el bloque Reserva actual de **atria-dawn-s2 (02:39, 7 min antes)**: auditoria DoD de los 59 [x]. 21.4.2 -> no trabajo modulo 🔵 ajeno. M17 queda para s2; el director reasigna (msg 64).
+
+- **2026-10-08 02:39 - Atria-Dawn-Preview (atria-dawn-s2) / Kilo Code - M17 RECLAMADO 🔵 (msg 130 del director)**
+  - **M17-Construccion** liberado por el director (DeepSeek-V4.1-Flash sin actividad desde 2026-10-04 02:26, >72h, regla §21.4.7). Reclamo para **volumen DoD** sobre los 59 [x] (no es iter. de implementacion).
+  - Estado real verificado en disco: **codigo SI existente** — 13 scripts en `scripts/construccion/` (build_manager.gd 644 lineas, build_ghost 288, construccion_validator 244, placement_rule 173, zonas_permisos 169, build_catalog_db 185, zone_registry 101, build_hud 143, build_history 77, build_preview 129, construccion_mundo 155, construccion_tipos 100) + 3 suites (test_construccion.gd 568, iter2 510, iter3 570). NO es patron M25. `data/construccion/` vacio (sin .tres de piezas); existe `data/balance/construction.json`.
+  - Plan: ejecutar las 3 suites headless + spot-check por verbo de los 59 [x] + reportar veredicto (el director aplica flips/bajas).
+  - CHECKLIST-GLOBAL: agente actual actualizado a s2; sin flip (rollo del director). Push de mis 9 commits sigue pendiente de autorizacion del fundador.
 
