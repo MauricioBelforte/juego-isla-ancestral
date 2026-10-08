@@ -7,6 +7,37 @@
 #
 # Prueba: toggle, RF1-20 stubs/real, visual toggles, diagnóstico, señales.
 #         0 fallos requeridos.
+#
+# ============================================================
+# OBSOLETA — movida a tests/Obsoletos/ (2026-10-08)
+# ============================================================
+# **Modelo:** mimo-v2.6-flash-free
+# **Plataforma:** opencode
+# **Fecha:** 2026-10-08
+#
+# Motivo (diagnóstico medido, no supuesto):
+#   La suite fue escrita 2026-09-01 contra la API v1 de debug_menu.gd
+#   (is_visible/show_menu/hide_menu/toggle_menu/get_current_panel/set_panel/
+#   _tp_pos/_hora/_dar/_dar_ao/_stub/_toggle_*/_exportar_diagnostico/
+#   _list_npcs + señal debug_action). Ese menú fue REFACTORIZADO después a
+#   API v2 data-driven (commits f02b4ca/64ce433/72a6fea): hoy expone
+#   alternar()/esta_visible()/pestanas()/ejecutar_comando()/teleport_player()/
+#   set_game_time()/dar_objetos()/dar_dinero()/toggle_*(enabled)/
+#   _export_diag()/metricas_sistema() y las señales toggle_visual_cambiado/
+#   estacion_solicitada/clima_solicitado. Casi ninguna llamada de esta suite
+#   existe en la API viva -> SCRIPT ERROR sin quit() y colgaba el runner
+#   (por eso run_tests.gd la excluía documentadamente).
+#
+#   Cobertura NO perdida (3 suites vivas ya prueban la API v2):
+#     - tests/unit/debug/test_debug_menu.gd (GdUnit4, 21/21 tras fix 2026-10-07)
+#     - scripts/debug/test_debug_m110.gd (SceneTree, en el runner)
+#     - scripts/debug/test_debug_menu_headless.gd + test_m110_iter_atria.gd
+#   Reescribirla a API v2 = duplicado; se decide por obsolescencia (encargo
+#   del director msg 65, frente A: "fixear o marcar obsoleta con justificación").
+#
+#   Dueño del módulo: M110 (el 05-Checklist NO se tocó — auditoría Ling L-05).
+#   Evidencia: Log de cierre en Logs/ + corridas runner antes/después.
+# ============================================================
 
 extends SceneTree
 

@@ -9,7 +9,8 @@ extends SceneTree
 ##   2. Clasifica: SceneTree (subprocesos propios) vs GdUnit4 (GdUnitCmdTool).
 ##   3. Ejecuta cada suite como subproceso CON TIMEOUT; un SCRIPT ERROR que
 ##      aborta una suite sin quit() no puede colgar al runner (patrón real:
-##      res://tests/test_debug_menu.gd, API refactorizada → loop eterno).
+##      tests/test_debug_menu.gd v1, API refactorizada → loop eterno; hoy
+##      esa suite está en tests/Obsoletos/, ver su cabecera).
 ##   4. El banner ÉXITO exige EVIDENCIA: suites ejecutadas + excluidas ==
 ##      descubiertas, tests reportados > 0, 0 fallos, 0 timeout, rc 0.
 ##
@@ -25,10 +26,12 @@ const GDUNIT_TOOL := "res://addons/gdUnit4/bin/GdUnitCmdTool.gd"
 const TIMEOUT_MS := 180000
 
 ## Suites documentadamente excluidas (motivo honesto, no silencio).
-const EXCLUIR: Dictionary = {
-	"res://tests/test_debug_menu.gd":
-		"API de debug_menu.gd refactorizada (is_visible/show_menu/set_panel ya no existen) → la suite aborta con SCRIPT ERROR sin quit() y colgaba. Cubierta por tests/unit/debug/test_debug_menu.gd (GdUnit4). [?] dueño M110",
-}
+## Vacío desde 2026-10-08 (T-M112 extra, frente A del msg 65): la única
+## excluida (res://tests/test_debug_menu.gd, API v1 muerta) fue MOVIDA a
+## tests/Obsoletos/2026-09-01_00-00-00_test_debug_menu_v1_api_muerta.gd con
+## cabecera de obsolescencia — cobertura viva en tests/unit/debug/ (GdUnit4)
+## y scripts/debug/test_debug_m110.gd. Log: ver Logs/ del cierre.
+const EXCLUIR: Dictionary = {}
 
 var _scenetree: Array[String] = []
 var _gdunit_dirs: Array[String] = []

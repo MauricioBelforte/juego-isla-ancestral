@@ -25,4 +25,4 @@ donde me supero. Veredictos:
   deuda `[?]`/artefactos pendientes (regla 0-deuda): M115 33 `[?]`, M117 18 `[?]`, M96 1 `[?]`.
 - **M46 = sin `[x]`** (0/110, módulo pendiente). No hay que "verificar" `[x]`; es un módulo por iniciar.
 
-No flippeo ni sello nada (es tuyo). **Log 1458.**
+No flippeo ni sello nada (es tuyo). **Log 1463** (renombrado de 1458: colisionaba con tu M156).
