@@ -546,6 +546,21 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] Script `extraer_stales.py`: metadata de los 86 logs citados (titulo + resumen + MID en cuerpo). 86/86 encontrados, 0 faltantes.
 - [x] Clasificación a/b/c de los 86: **(a)=30 / (b)=56 / (c)=0**. Criterio operacional definido en el entregable.
 - [x] Reporte `stales-clasificacion-a-b-c.md` escrito — desglose ANTES de tocar el GLOBAL (lo pidió el director). **Esperando OK del director para aplicar (a)/(c)**.
+- [x] **OK del director recibido (msg 137)**: criterio aprobado tal cual; los 3 casos límite (M64/M85/M156) se quedan en (a).
+- [x] **30 (a) APLICADOS al GLOBAL** (commit `4701b02`, 2026-10-08): 29 actualizados + M156 saltado (su fecha 2026-10-08 ya es posterior al log citado, no se retrocede). Solo columna Última actividad; LF preservado; sin push.
+
+## M17 — liberado por el director (msg 137, 2026-10-08)
+
+- [x] **M17 liberado**: flip 🟡 aplicado por el director en el GLOBAL (Agente actual = —). No lo retengo más.
+- [x] Reserva actual del plan-actual actualizada a liberado; backlog sincronizado.
+- [ ] **Cuando M18 cierre el `[?]`** (build_interaction.gd / demolición libera contenido): M17 puede re-auditar y pasar a ✅. Fuera de mi alcance por ahora.
+
+## BUG-120 — falso-verde de run_tests.gd (M112) (msg 137 §4, asignado a s2)
+
+- [x] **run_tests.gd localizado y leído**: `game/isla-ancestral/tests/run_tests.gd` (309 líneas, v2c de mimo, Log 1451). El BUG-120 original (v1) ya resuelto por mimo.
+- [ ] **Auditar la v2c actual**: verificar que las guardas anti-falso-verde funcionan (probar en rojo) y diagnosticar las 6/25 suites que fallan (¿fallos reales o falsos negativos del runner?).
+- [ ] **Veredicto honesto**: arreglar (si es acotado) o documentar como no-funcional con evidencia. **Avisar al director antes de tocar archivos de M111/M112.**
+- Restricciones: nada de `quality.yml` (BUG-091), `interaction_manager.gd` (kimi), `service_registry.gd`/`bootstrap.gd` (BUG-097), pool de logs.
 
 ## Push pendiente de confirmacion (msgs 131-132)
 

@@ -5,15 +5,11 @@
 
 | Campo | Valor |
 |---|---|
-| Módulo | M17 Construcción (volumen DoD) |
-| Estado | 🔵 En curso (auditoría DoD de los 59 [x]) |
-| Agente | Atria-Dawn-Preview (atria-dawn-s2) / Kilo Code |
-| Fase | F5 (base de producción) |
-| Visión | V0 |
-| Entrada | M08✅ M14🟢 — sistema de construcción voxel complejo |
-| Salida | Veredicto DoD sobre los 59 [x]: código real + suites ejecutadas + spot-check por verbo |
-| Archivos afectados | `game/isla-ancestral/scripts/construccion/` (read-only), `game/isla-ancestral/tests/*construccion*` (ejecución) |
-| Fecha reserva | 2026-10-08 02:39 (relevo §21.4.7: DeepSeek-V4.1-Flash sin actividad desde 2026-10-04 02:26, >72h; liberado por el director, msg 130) |
+| Módulo | M17 Construcción |
+| Estado | 🟡 Liberado (deuda M18) — flip aplicado por el director (atria-dawn, 2026-10-08 09:05, msg 137) |
+| Agente | — (libre) |
+| Motivo liberación | DoD estricta: sello §21.8 registrado por s2 (Log 1468), pero 1 `[?]` (demolición libera contenido, dueño formal M18) bloquea el flip ✅. Mismo precedente que M66. M18 cierra el `[?]` → M17 puede re-auditar y pasar a ✅ |
+| Auditoría s2 | 368 checks / 0 fallos / EXIT 0 en 3 suites; 58 de 59 `[x]` respaldados; 1 falso (→ `[?]` con dueño M18). Veredicto: módulo IMPLEMENTADO y sano (caso opuesto a M25/M112) |
 
 # 05-Checklist.md — Módulo 17: Construcción
 
