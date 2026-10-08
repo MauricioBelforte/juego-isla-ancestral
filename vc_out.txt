@@ -1,0 +1,698 @@
+============================================================
+🔍 VERIFICACIÓN DE CONSISTENCIA DEL PROTOCOLO MULTIAGENTE
+============================================================
+
+📋 01-Fundamentos-Del-Proyecto:
+   - [x] completados: 0
+   - [ ] pendientes:  152
+   - [?] con dudas:   0
+📋 02-Vision-Y-Concepto:
+   - [x] completados: 0
+   - [ ] pendientes:  172
+   - [?] con dudas:   0
+📋 03-Documentacion-Del-Proyecto:
+   - [x] completados: 117
+   - [ ] pendientes:  9
+   - [?] con dudas:   7
+📋 04-Game-Engine:
+   - [x] completados: 14
+   - [ ] pendientes:  114
+   - [?] con dudas:   0
+📋 05-Lenguaje-Y-Programacion:
+   - [x] completados: 4
+   - [ ] pendientes:  99
+   - [?] con dudas:   0
+📋 06-Control-De-Versiones:
+   - [x] completados: 99
+   - [ ] pendientes:  1
+   - [?] con dudas:   0
+📋 07-Arquitectura-General:
+   - [x] completados: 105
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 08-Mundo-Voxel:
+   - [x] completados: 105
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 09-Terreno-Y-Geografia:
+   - [x] completados: 100
+   - [ ] pendientes:  0
+   - [?] con dudas:   5
+📋 10-Generacion-Del-Mundo:
+   - [x] completados: 90
+   - [ ] pendientes:  0
+   - [?] con dudas:   16
+📋 100-Community-Management:
+   - [x] completados: 146
+   - [ ] pendientes:  76
+   - [?] con dudas:   0
+📋 101-QA-General:
+   - [x] completados: 209
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 102-Bug-Tracking:
+   - [x] completados: 140
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 103-Logging:
+   - [x] completados: 173
+   - [ ] pendientes:  0
+   - [?] con dudas:   6
+📋 104-Analytics:
+   - [x] completados: 49
+   - [ ] pendientes:  68
+   - [?] con dudas:   0
+📋 105-Telemetria-De-Gameplay:
+   - [x] completados: 120
+   - [ ] pendientes:  0
+   - [?] con dudas:   45
+📋 106-Seguridad:
+   - [x] completados: 194
+   - [ ] pendientes:  0
+   - [?] con dudas:   12
+📋 107-Backups:
+   - [x] completados: 99
+   - [ ] pendientes:  59
+   - [?] con dudas:   18
+📋 108-Pipeline-De-Assets:
+   - [x] completados: 124
+   - [ ] pendientes:  78
+   - [?] con dudas:   3
+📋 109-Herramientas-Internas:
+   - [x] completados: 27
+   - [ ] pendientes:  108
+   - [?] con dudas:   3
+📋 11-Personaje-Del-Jugador:
+   - [x] completados: 53
+   - [ ] pendientes:  0
+   - [?] con dudas:   70
+📋 110-Debug-Menu:
+   - [x] completados: 121
+   - [ ] pendientes:  0
+   - [?] con dudas:   104
+📋 111-Codigo-De-Calidad:
+   - [x] completados: 209
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 112-Testing-Automatico:
+   - [x] completados: 208
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 113-Pruebas-De-Stress:
+   - [x] completados: 102
+   - [ ] pendientes:  30
+   - [?] con dudas:   0
+📋 114-Playtest:
+   - [x] completados: 186
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 115-Hardware:
+   - [x] completados: 69
+   - [ ] pendientes:  2
+   - [?] con dudas:   33
+📋 116-Instalador:
+   - [x] completados: 192
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 117-Build-System:
+   - [x] completados: 92
+   - [ ] pendientes:  0
+   - [?] con dudas:   18
+📋 118-CI-CD:
+   - [x] completados: 102
+   - [ ] pendientes:  4
+   - [?] con dudas:   0
+📋 119-Actualizaciones:
+   - [x] completados: 109
+   - [ ] pendientes:  9
+   - [?] con dudas:   0
+📋 12-Camara:
+   - [x] completados: 57
+   - [ ] pendientes:  0
+   - [?] con dudas:   45
+📋 120-DLC-Y-Expansiones:
+   - [x] completados: 163
+   - [ ] pendientes:  59
+   - [?] con dudas:   0
+📋 121-Soporte-Post-Lanzamiento:
+   - [x] completados: 123
+   - [ ] pendientes:  88
+   - [?] con dudas:   0
+📋 122-Crash-Reporting:
+   - [x] completados: 254
+   - [ ] pendientes:  0
+   - [?] con dudas:   11
+📋 123-Modding:
+   - [x] completados: 108
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 124-Contenido-Generado-Por-Usuarios:
+   - [x] completados: 83
+   - [ ] pendientes:  0
+   - [?] con dudas:   25
+📋 125-Terminos-De-Servicio:
+   - [x] completados: 105
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 126-Marketing-Legal:
+   - [x] completados: 101
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 127-Copyright-Del-Juego:
+   - [x] completados: 52
+   - [ ] pendientes:  24
+   - [?] con dudas:   25
+📋 128-Identidad-De-Marca:
+   - [x] completados: 53
+   - [ ] pendientes:  47
+   - [?] con dudas:   0
+📋 129-Merchandising:
+   - [x] completados: 103
+   - [ ] pendientes:  0
+   - [?] con dudas:   5
+📋 13-Herramientas:
+   - [x] completados: 84
+   - [ ] pendientes:  34
+   - [?] con dudas:   2
+📋 130-Artbook:
+   - [x] completados: 96
+   - [ ] pendientes:  50
+   - [?] con dudas:   0
+📋 131-Creditos:
+   - [x] completados: 85
+   - [ ] pendientes:  10
+   - [?] con dudas:   0
+📋 132-Produccion-De-Equipo:
+   - [x] completados: 105
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 133-Gestion-Del-Proyecto:
+   - [x] completados: 127
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 134-Presupuesto:
+   - [x] completados: 100
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 135-Riesgos-Del-Proyecto:
+   - [x] completados: 134
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 136-Roadmap:
+   - [x] completados: 199
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 137-Prototipo:
+   - [x] completados: 10
+   - [ ] pendientes:  121
+   - [?] con dudas:   0
+📋 138-Vertical-Slice:
+   - [x] completados: 11
+   - [ ] pendientes:  120
+   - [?] con dudas:   0
+📋 139-Pre-Alpha:
+   - [x] completados: 12
+   - [ ] pendientes:  130
+   - [?] con dudas:   0
+📋 14-Inventario:
+   - [x] completados: 136
+   - [ ] pendientes:  0
+   - [?] con dudas:   4
+📋 140-Alpha:
+   - [x] completados: 14
+   - [ ] pendientes:  110
+   - [?] con dudas:   0
+📋 141-Beta:
+   - [x] completados: 15
+   - [ ] pendientes:  136
+   - [?] con dudas:   0
+📋 142-Release-Candidate:
+   - [x] completados: 23
+   - [ ] pendientes:  106
+   - [?] con dudas:   0
+📋 143-Lanzamiento:
+   - [x] completados: 18
+   - [ ] pendientes:  93
+   - [?] con dudas:   0
+📋 144-Despues-Del-Lanzamiento:
+   - [x] completados: 4
+   - [ ] pendientes:  101
+   - [?] con dudas:   0
+📋 145-Diseno-De-Experiencia:
+   - [x] completados: 105
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 146-Diseno-Emocional:
+   - [x] completados: 100
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 147-World-Building:
+   - [x] completados: 65
+   - [ ] pendientes:  68
+   - [?] con dudas:   1
+📋 148-Lore-Ambiental:
+   - [x] completados: 23
+   - [ ] pendientes:  92
+   - [?] con dudas:   2
+📋 149-Nombres-Y-Nomenclatura:
+   - [x] completados: 99
+   - [ ] pendientes:  0
+   - [?] con dudas:   1
+📋 15-Recursos:
+   - [x] completados: 99
+   - [ ] pendientes:  115
+   - [?] con dudas:   8
+📋 150-Diseo-Sonoro-Narrativo:
+   - [x] completados: 146
+   - [ ] pendientes:  0
+   - [?] con dudas:   4
+📋 151-Control-Final:
+   - [x] completados: 23
+   - [ ] pendientes:  138
+   - [?] con dudas:   6
+📋 152-Principios-Innegociables:
+   - [x] completados: 202
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 153-Objetivo-Final:
+   - [x] completados: 120
+   - [ ] pendientes:  10
+   - [?] con dudas:   0
+📋 154-Vision-Del-Agente:
+   - [x] completados: 155
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 155-Vestimenta-Y-Accesorios:
+   - [x] completados: 84
+   - [ ] pendientes:  24
+   - [?] con dudas:   0
+📋 156-Terrenos-Y-Movimiento:
+   - [x] completados: 243
+   - [ ] pendientes:  59
+   - [?] con dudas:   5
+📋 158-Herramientas-Y-Desbloqueo-De-Zonas:
+   - [x] completados: 53
+   - [ ] pendientes:  87
+   - [?] con dudas:   0
+📋 159-Catalogo-De-Objetos:
+   - [x] completados: 69
+   - [ ] pendientes:  25
+   - [?] con dudas:   52
+📋 16-Crafting:
+   - [x] completados: 43
+   - [ ] pendientes:  156
+   - [?] con dudas:   9
+📋 160-Diseno-De-Ubicaciones-Del-Mundo:
+   - [x] completados: 148
+   - [ ] pendientes:  3
+   - [?] con dudas:   4
+📋 161-Diseno-Visual-De-NPCs:
+   - [x] completados: 94
+   - [ ] pendientes:  42
+   - [?] con dudas:   2
+📋 162-Dialogos-Contextuales-De-NPCs:
+   - [x] completados: 80
+   - [ ] pendientes:  0
+   - [?] con dudas:   40
+📋 163-Sistema-De-Encantamientos:
+   - [x] completados: 23
+   - [ ] pendientes:  101
+   - [?] con dudas:   0
+📋 164-Isla-De-Combate-Endgame:
+   - [x] completados: 70
+   - [ ] pendientes:  58
+   - [?] con dudas:   2
+📋 165-Voxel-Tools-Guia:
+   - [x] completados: 48
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 166-Variantes-Y-Perfil-De-Rendimiento:
+   - [x] completados: 111
+   - [ ] pendientes:  0
+   - [?] con dudas:   1
+📋 167-Isla-Raiz:
+   - [x] completados: 113
+   - [ ] pendientes:  1
+   - [?] con dudas:   0
+📋 168-Plantilla-De-Isla:
+   - [x] completados: 104
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 17-Construccion:
+   - [x] completados: 59
+   - [ ] pendientes:  116
+   - [?] con dudas:   0
+📋 18-Casas:
+   - [x] completados: 4
+   - [ ] pendientes:  122
+   - [?] con dudas:   0
+📋 19-NPC-Y-Vecinos:
+   - [x] completados: 48
+   - [ ] pendientes:  83
+   - [?] con dudas:   0
+📋 20-Sistema-De-Amistad:
+   - [x] completados: 50
+   - [ ] pendientes:  98
+   - [?] con dudas:   0
+📋 21-Dialogos:
+   - [x] completados: 13
+   - [ ] pendientes:  123
+   - [?] con dudas:   7
+📋 22-Historia-Principal:
+   - [x] completados: 51
+   - [ ] pendientes:  49
+   - [?] con dudas:   0
+📋 23-Historias-Secundarias:
+   - [x] completados: 24
+   - [ ] pendientes:  80
+   - [?] con dudas:   0
+📋 24-Templos-Y-Puzzles:
+   - [x] completados: 31
+   - [ ] pendientes:  97
+   - [?] con dudas:   0
+📋 25-Ruinas:
+   - [x] completados: 122
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 26-Templo-Subterraneo:
+   - [x] completados: 62
+   - [ ] pendientes:  57
+   - [?] con dudas:   10
+📋 27-Islas-Del-Mundo:
+   - [x] completados: 99
+   - [ ] pendientes:  0
+   - [?] con dudas:   93
+📋 28-Viajes:
+   - [x] completados: 50
+   - [ ] pendientes:  80
+   - [?] con dudas:   0
+📋 29-Tiempo-Y-Calendario:
+   - [x] completados: 190
+   - [ ] pendientes:  3
+   - [?] con dudas:   2
+📋 30-Reloj-En-Tiempo-Real:
+   - [x] completados: 107
+   - [ ] pendientes:  0
+   - [?] con dudas:   13
+📋 31-Ciclo-Dia-Noche:
+   - [x] completados: 120
+   - [ ] pendientes:  0
+   - [?] con dudas:   49
+📋 32-Clima:
+   - [x] completados: 121
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 33-Agricultura:
+   - [x] completados: 67
+   - [ ] pendientes:  86
+   - [?] con dudas:   0
+📋 34-Pesca:
+   - [x] completados: 84
+   - [ ] pendientes:  0
+   - [?] con dudas:   69
+📋 35-Mineria:
+   - [x] completados: 60
+   - [ ] pendientes:  69
+   - [?] con dudas:   13
+📋 36-Fauna:
+   - [x] completados: 226
+   - [ ] pendientes:  2
+   - [?] con dudas:   0
+📋 37-Museos-Y-Colecciones:
+   - [x] completados: 36
+   - [ ] pendientes:  112
+   - [?] con dudas:   0
+📋 38-Economia:
+   - [x] completados: 164
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 39-Tiendas:
+   - [x] completados: 180
+   - [ ] pendientes:  1
+   - [?] con dudas:   0
+📋 40-Infraestructura:
+   - [x] completados: 95
+   - [ ] pendientes:  114
+   - [?] con dudas:   2
+📋 41-Musica:
+   - [x] completados: 61
+   - [ ] pendientes:  49
+   - [?] con dudas:   0
+📋 42-Sonido-Ambiental:
+   - [x] completados: 63
+   - [ ] pendientes:  37
+   - [?] con dudas:   0
+📋 43-Efectos-De-Sonido:
+   - [x] completados: 59
+   - [ ] pendientes:  41
+   - [?] con dudas:   0
+📋 44-ASMR-Y-Feedback:
+   - [x] completados: 76
+   - [ ] pendientes:  37
+   - [?] con dudas:   0
+📋 45-Arte-3D:
+   - [x] completados: 20
+   - [ ] pendientes:  149
+   - [?] con dudas:   2
+📋 46-Arte-2D:
+   - [x] completados: 0
+   - [ ] pendientes:  110
+   - [?] con dudas:   0
+📋 47-Texturas-Y-Materiales:
+   - [x] completados: 18
+   - [ ] pendientes:  101
+   - [?] con dudas:   0
+📋 48-Animacion:
+   - [x] completados: 9
+   - [ ] pendientes:  114
+   - [?] con dudas:   0
+📋 49-Iluminacion:
+   - [x] completados: 53
+   - [ ] pendientes:  0
+   - [?] con dudas:   90
+📋 50-Vegetacion:
+   - [x] completados: 29
+   - [ ] pendientes:  110
+   - [?] con dudas:   3
+📋 51-Agua:
+   - [x] completados: 35
+   - [ ] pendientes:  130
+   - [?] con dudas:   1
+📋 52-Particulas-Y-VFX:
+   - [x] completados: 137
+   - [ ] pendientes:  10
+   - [?] con dudas:   1
+📋 53-UI-UX:
+   - [x] completados: 139
+   - [ ] pendientes:  26
+   - [?] con dudas:   0
+📋 54-Mapa:
+   - [x] completados: 133
+   - [ ] pendientes:  44
+   - [?] con dudas:   0
+📋 55-Diario-Del-Jugador:
+   - [x] completados: 37
+   - [ ] pendientes:  91
+   - [?] con dudas:   3
+📋 56-Fotografia:
+   - [x] completados: 21
+   - [ ] pendientes:  114
+   - [?] con dudas:   2
+📋 57-Interfaz-De-Control:
+   - [x] completados: 91
+   - [ ] pendientes:  27
+   - [?] con dudas:   1
+📋 58-Accesibilidad:
+   - [x] completados: 131
+   - [ ] pendientes:  50
+   - [?] con dudas:   2
+📋 59-Guardado:
+   - [x] completados: 60
+   - [ ] pendientes:  69
+   - [?] con dudas:   1
+📋 60-Datos-Y-Serializacion:
+   - [x] completados: 189
+   - [ ] pendientes:  3
+   - [?] con dudas:   4
+📋 61-Rendimiento:
+   - [x] completados: 39
+   - [ ] pendientes:  101
+   - [?] con dudas:   4
+📋 62-Memoria:
+   - [x] completados: 113
+   - [ ] pendientes:  37
+   - [?] con dudas:   0
+📋 63-Cargas-Y-Streaming:
+   - [x] completados: 67
+   - [ ] pendientes:  7
+   - [?] con dudas:   27
+📋 64-IA-De-NPC:
+   - [x] completados: 100
+   - [ ] pendientes:  0
+   - [?] con dudas:   17
+📋 65-Animales-IA:
+   - [x] completados: 89
+   - [ ] pendientes:  1
+   - [?] con dudas:   0
+📋 66-Anti-Softlock:
+   - [x] completados: 109
+   - [ ] pendientes:  0
+   - [?] con dudas:   8
+📋 67-Vehiculos:
+   - [x] completados: 19
+   - [ ] pendientes:  112
+   - [?] con dudas:   0
+📋 68-Transporte-Y-Navegacion:
+   - [x] completados: 75
+   - [ ] pendientes:  42
+   - [?] con dudas:   14
+📋 69-Fast-Travel:
+   - [x] completados: 18
+   - [ ] pendientes:  130
+   - [?] con dudas:   2
+📋 70-Interacciones:
+   - [x] completados: 155
+   - [ ] pendientes:  5
+   - [?] con dudas:   38
+📋 71-Progresion:
+   - [x] completados: 72
+   - [ ] pendientes:  0
+   - [?] con dudas:   141
+📋 72-Sistema-De-Logros:
+   - [x] completados: 1
+   - [ ] pendientes:  184
+   - [?] con dudas:   0
+📋 73-Coleccionables:
+   - [x] completados: 28
+   - [ ] pendientes:  105
+   - [?] con dudas:   2
+📋 74-Eventos:
+   - [x] completados: 95
+   - [ ] pendientes:  2
+   - [?] con dudas:   188
+📋 75-Postgame:
+   - [x] completados: 17
+   - [ ] pendientes:  113
+   - [?] con dudas:   0
+📋 76-Multijugador:
+   - [x] completados: 4
+   - [ ] pendientes:  126
+   - [?] con dudas:   0
+📋 77-Online-Y-Red:
+   - [x] completados: 0
+   - [ ] pendientes:  126
+   - [?] con dudas:   4
+📋 78-Legal-Propiedad-Intelectual:
+   - [x] completados: 157
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 79-Legal-Contratos:
+   - [x] completados: 103
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 80-Legal-Privacidad:
+   - [x] completados: 144
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 81-Legal-Menores:
+   - [x] completados: 137
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 82-Clasificacion-Por-Edades:
+   - [x] completados: 100
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 83-Licencias-De-Software:
+   - [x] completados: 16
+   - [ ] pendientes:  84
+   - [?] con dudas:   0
+📋 84-Musica-Y-Audio-Legal:
+   - [x] completados: 99
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 85-Modelos-3D-Legal:
+   - [x] completados: 99
+   - [ ] pendientes:  1
+   - [?] con dudas:   0
+📋 86-IA-Generativa:
+   - [x] completados: 129
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 87-Localizacion:
+   - [x] completados: 131
+   - [ ] pendientes:  0
+   - [?] con dudas:   5
+📋 88-Fuentes-Tipograficas:
+   - [x] completados: 16
+   - [ ] pendientes:  166
+   - [?] con dudas:   3
+📋 89-Diseno-De-Menus:
+   - [x] completados: 30
+   - [ ] pendientes:  93
+   - [?] con dudas:   2
+📋 90-Configuracion-Grafica:
+   - [x] completados: 69
+   - [ ] pendientes:  180
+   - [?] con dudas:   0
+📋 91-Configuracion-De-Audio:
+   - [x] completados: 207
+   - [ ] pendientes:  31
+   - [?] con dudas:   1
+📋 92-Tutorial:
+   - [x] completados: 97
+   - [ ] pendientes:  87
+   - [?] con dudas:   1
+📋 93-Balance:
+   - [x] completados: 131
+   - [ ] pendientes:  3
+   - [?] con dudas:   0
+📋 94-Retencion-Sin-FOMO:
+   - [x] completados: 138
+   - [ ] pendientes:  0
+   - [?] con dudas:   0
+📋 95-Monetizacion:
+   - [x] completados: 19
+   - [ ] pendientes:  94
+   - [?] con dudas:   0
+📋 96-Plataformas:
+   - [x] completados: 71
+   - [ ] pendientes:  34
+   - [?] con dudas:   1
+📋 97-Steam-Store-Page:
+   - [x] completados: 129
+   - [ ] pendientes:  66
+   - [?] con dudas:   0
+📋 98-Trailer:
+   - [x] completados: 4
+   - [ ] pendientes:  98
+   - [?] con dudas:   0
+📋 99-Marketing:
+   - [x] completados: 7
+   - [ ] pendientes:  162
+   - [?] con dudas:   0
+
+============================================================
+⚠️  SE ENCONTRARON 21 ALERTAS:
+   ❌ Inconsistencia en 03-Documentacion-Del-Proyecto: CHECKLIST-GLOBAL dice '0/133' pero el 05-Checklist.md tiene '117/133'.
+   ❌ Inconsistencia en 03-Documentacion-Del-Proyecto: tiene 117 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 121-Soporte-Post-Lanzamiento: tiene 123 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 137-Prototipo: tiene 10 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 138-Vertical-Slice: tiene 11 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 139-Pre-Alpha: tiene 12 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 140-Alpha: tiene 14 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 141-Beta: tiene 15 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 142-Release-Candidate: tiene 23 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 143-Lanzamiento: tiene 18 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 144-Despues-Del-Lanzamiento: tiene 4 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 150-Diseo-Sonoro-Narrativo: tiene 146 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 44-ASMR-Y-Feedback: tiene 76 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 62-Memoria: CHECKLIST-GLOBAL dice '111/150' pero el 05-Checklist.md tiene '113/150'.
+   ❌ Inconsistencia en 64-IA-De-NPC: CHECKLIST-GLOBAL dice '78/117' pero el 05-Checklist.md tiene '100/117'.
+   ❌ Inconsistencia en 97-Steam-Store-Page: tiene 129 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 98-Trailer: tiene 4 items [x] pero su estado global es '🟢 Disponible'.
+   ❌ Inconsistencia en 99-Marketing: tiene 7 items [x] pero su estado global es '🟢 Disponible'.
+   ⚠️ Módulo 17 (17-Construccion) está en curso pero sin actividad desde 2026-10-04 02:26. Posible bloqueo colgado (regla 21.4.7).
+   ⚠️ Módulo 37 (37-Museos-Y-Colecciones) está en curso pero sin actividad desde 2026-10-03 19:40. Posible bloqueo colgado (regla 21.4.7).
+   ⚠️ Módulo 68 (68-Transporte-Y-Navegacion) está en curso pero sin actividad desde 2026-10-04 03:21. Posible bloqueo colgado (regla 21.4.7).
+
+Recomendación: corregir las inconsistencias antes de continuar.
