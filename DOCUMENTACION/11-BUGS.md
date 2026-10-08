@@ -2308,11 +2308,15 @@ var hay_modal: bool = v if v is bool else false
   (GDScript Lint & Format) **no podia fallar nunca** (`|| true` en ambos pasos), igual que el
   paso de tests (BUG-120). El `quality-gate` exigía `needs.lint.result == success` de un job
   que siempre lo era.
-- **Estado:** `[ ]` Abierto / **delegado a M118 + M111** con evidencia. Los `|| true` ya se
-  quitaron (autorización director, msg 61, 2026-10-08) para que los pasos queden **honestos**;
-  hoy ambos pasos son problematicos y eso queda **visible a proposito** (decision documentada
-  en el propio YAML). **No se excluyo, toco ni "arreglo" ningun paso** (explicito del encargo:
-  derivar al dueño en vez de disimular).
+- **Estado:** `[x]` **Resuelto 2026-10-08 por mimo-v2.6-flash-free (opencode, frente B del msg 70
+  del director, Log 1469)** — el job `lint` quedó **honesto** ("o funciona o no existe", criterio
+  del director): paso `Check formatting` (colgado) **reemplazado** por gate de parseo con colector
+  (receta probada BUG-051/091, medido: 971 preloads, 0 SCRIPT ERROR, EXIT 0) y paso
+  `Run static analysis` **retirado con evidencia** (sonda medida: ni un wrapper SceneTree puede
+  instanciar `EditorScript.new()` en headless → adaptarlo exige tocar `code_quality_check.gd`,
+  archivo de M111 pendiente de coordinación director ↔ M111, ver resolución abajo). Solo se tocó
+  `.github/workflows/testing.yml` (sin restricción); `quality.yml` y `code_quality_check.gd`
+  intactos. Regresión: runner 25/0/718/3 fallos preexistentes + gate 76/0, idénticos al baseline.
 - **Pasos para reproducir (medido en local, Godot 4.7.2, 2026-10-08 02:23):**
 
   1. **Paso `Check formatting`** — comando: `godot --headless --check-only 2>&1`
@@ -2339,18 +2343,43 @@ var hay_modal: bool = v if v is bool else false
   qué se dejaron honestos). Validación: `yaml.safe_load` OK y **0 ocurrencias de `|| true`**
   en todo el archivo tras el fix.
 - **Qué se pide a los dueños (decision del equipo, no del agente):**
-  - M118: decidir si `Check formatting` se reemplaza por un comando que **sí** valide
-    (ej. `godot --headless --script <checker>` con un script SceneTree) o se retira el paso.
+  - ~~M118: decidir si `Check formatting` se reemplaza por un comando que **sí** valide
+    (ej. `godot --headless --script <checker>` con un script SceneTree) o se retira el paso.~~
+    **HECHO 2026-10-08 (frente B, Log 1469):** se reemplazó por gate de parseo con colector
+    (receta BUG-051/091) — el director autorizó exactamente esa opción en el msg 70.
   - M111: hacer que `code_quality_check.gd` pueda correr en headless (adaptar a SceneTree/MainLoop
     o invocarlo vía `--check-only --script`) **o** proponer su retiro del CI.
-  - Mientras tanto el job `lint` quedará **rojo a la vista** en CI (pasos que no terminan /
-    fallan siempre) — preferible al verde falso anterior; asi lo pidio el director (msg 59/61).
+    **Estado: paso retirado del CI por ahora** (sonda: ni un wrapper SceneTree puede instanciarlo);
+    la adaptación real sigue pendiente de coordinación director ↔ M111.
+  - ~~Mientras tanto el job `lint` quedará **rojo a la vista** en CI (pasos que no terminan /
+    fallan siempre)~~ → hoy el job **corre de verdad** (parseo con gate duro de SCRIPT ERROR) y
+    queda rojo solo si hay errores de parseo reales; el paso de análisis estático ya no existe
+    en el archivo.
 - **Relacion:** par directo de BUG-120 (mismo archivo, paso de tests) — patrón `|| true`
   que anulaba fallos; ya sin `|| true` en todo `testing.yml`.
+- **Resolución (mimo-v2.6-flash-free, opencode, frente B del msg 70, 2026-10-08, Log 1469):**
+  - **Paso 1 reemplazado** en `.github/workflows/testing.yml`: `Setup Python` +
+    `Generate syntax collector` (`tools/quality/gen_colector_sintaxis.py`) + `Import project
+    resources` + **`Check GDScript parse (gate duro)`** = `--check-only --script
+    res://scripts/editor/_colector_sintaxis.gd` + conteo de `SCRIPT ERROR` con `exit 1` si > 0.
+    Sin `|| true` operativos (los 3 restantes del archivo son comentarios históricos).
+  - **Paso 2 (`Run static analysis`) RETIRADO con evidencia** en vez de dejarlo fallando siempre:
+    sonda medida (wrapper SceneTree + `load()` + `.new()` sobre `code_quality_check.gd` en
+    headless) = `Class 'EditorScript' can only be instantiated by editor` +
+    `Can't inherit from a virtual class` → adaptarlo **exige modificar el archivo de M111**
+    (restricción "avisame antes" del msg 70) → pendiente de coordinación.
+  - **Medido en local:** colector 971 preloads, 0 SCRIPT ERROR, EXIT 0, termina en segundos;
+    `yaml.safe_load` OK. **Regresión post-cambio:** runner 25 descubiertas / 0 excluidas /
+    19 OK / 718 tests / 3 fallos preexistentes + gate 76 checks / 0 fallos → **idénticos al
+    baseline** (cambios solo YAML; ningún `.gd` del juego tocado; sondas borradas).
+  - **Pendientes derivados (reportados al director, msg 71):** adaptación M111 de
+    `code_quality_check.gd`; en `quality.yml` (restringido) el job `code-quality-script` corre
+    el mismo comando roto con `|| true`; nombre del job `GDScript Lint & Format` conservado
+    por posible branch protection.
 
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
-**Fecha:** 2026-10-08 02:30
+**Fecha:** 2026-10-08 05:20 (resolución; reporte original 02:30)
 
 ### BUG-120 — `run_tests.gd` era un runner falso-verde: reportaba EXIT 0 con 0 tests corridos; M112 marcado ✅ 208/208 sobre evidencia invalida
 
@@ -3880,6 +3909,8 @@ silenciosa de todos los guardados futuros).
 
 
 ## 9. Historial de Modificaciones de Este Archivo
+
+- **2026-10-08 05:20** — **BUG-122 [x] Resuelto (mimo-v2.6-flash-free, opencode, frente B del msg 70, Log 1469):** el job lint de 	esting.yml quedó honesto — paso Check formatting colgado **reemplazado** por gate de parseo con colector (receta BUG-051/091, medido 971 preloads / 0 SCRIPT ERROR / EXIT 0) y paso Run static analysis **retirado con evidencia** (sonda: EditorScript.new() no es instanciable en headless → adaptar exige tocar code_quality_check.gd, M111, pendiente de coordinación). Solo se tocó .github/workflows/testing.yml; regresión runner 25/0/718/3 preexistentes + gate 76/0 idéntica al baseline. Pendientes derivados (quality.yml code-quality-script con || true, nombre del job vs branch protection) reportados al director en el msg 71 del canal.
 
 - **2026-10-05 05:40** — **actualizado 2026-10-05 (SB-14/C3, Log 1326):** el blanco lo produce el **shader `agua_olas.gdshader`**, confirmado por A/B controlado; la hipótesis de albedo/textura queda **descartada**. Fix **sin confirmar** (falta el test dirigido). — space-bunny-alpha (Kilo Code, Log 1310, SB-08/SB-09/SB-11): registrados **BUG-104** (autoloads `Localization`/`LocalizationManager` sobre el mismo archivo base en carpetas duplicadas) y **BUG-105** (el agua se renderiza blanca). Ambos **reportados sin tocar codigo**. El finding de los 3 metodos de chequeo de compilacion quedo en `GUIA-GODOT/01-gdscript-errores-comunes.md` §31.
 
