@@ -25,11 +25,11 @@
 - [x] Definir el problema: museo como sistema de coleccion visitable y gratificante [S]
 - [ ] Registrar dependencias: M36 (fauna), M34 (pesca), M25 (ruinas), M55 (diario) [S]
 - [ ] Registrar relaciones: M29/M31 (reloj), M71 (logros), M39 (infraestructura), M69 (fast travel) [S]
-- [ ] RF1: edificio de museo visitable en Aurora [S]
+- [x] RF1: edificio de museo visitable en Aurora [S]
 - [x] RF2: donacion de fauna avistada desde M36 [S] — iter. 3: exposición "fauna" con las 7 especies reales del catálogo M36 (gaviota/conejo/nutria/lechuza/salamandra/cangrejo/halcón); donación testeada
 - [x] RF3: donacion de peces capturados desde M34 [S] — glm-5.3-flash 2026-09-01: implementado y testeado (trucha del catálogo M34 al acuario)
 - [x] RF4: donacion de fosiles y piezas de ruinas desde M25 [S] — mecánica implementada (sala fósiles con fragmento_ancestral); los fósiles llegan cuando M25 emita más ítems
-- [ ] RF5: donacion de obras de arte ancestral [S]
+- [x] RF5: donacion de obras de arte ancestral [S]
 - [x] RF6: exposiciones completables con recompensa por coleccion completa [S] — recompensa única idempotente al completar (testeado §4.2)
 - [x] RF7+RF8: registro de donaciones, colecciones y recompensas en M55 Diario [S] — iter. 3: puente diary.entrada_nueva por donación (donaciones); colecciones/recompensas legibles vía get_resumen_para_ui (entradas por completar exposición M55 dueño)
 
@@ -39,7 +39,7 @@
 - [ ] Analizar alternativa B: museo fisico visitable con vitrinas instanciadas [S]
 - [ ] Analizar alternativa C: tour guiado con camara fija y galeria cinematica [S]
 - [ ] Analizar alternativa D: catalogo integrado unicamente en M55 Diario [S]
-- [ ] Decidir: edificio visitable con vitrinas instanciadas (alternativa B) [S]
+- [x] Decidir: edificio visitable con vitrinas instanciadas (alternativa B) [S]
 - [x] Decidir: CollectionRegistry como autoridad unica de progreso [S] — implementado como autoload autoridad única
 - [x] Decidir: DonationService separado para validacion y consumo [S] — implementado como autoload separado (§2.4)
 - [ ] Documentar alternativas descartadas con justificacion tecnica [S]
@@ -77,10 +77,10 @@
 ## E. ExhibitSlot: vitrinas instanciadas (12)
 
 - [ ] Escena exhibit_slot.tscn generica y reutilizable [S]
-- [ ] Instanciado de vitrinas en runtime segun ExhibitionData [M]
-- [ ] place_item valida vitrina libre y tipo de pieza correcto [S]
-- [ ] Vitrina ocupada muestra el modelo/iscon de la pieza registrada [M]
-- [ ] Vitrina libre muestra silueta y etiqueta "Por donar" [S]
+- [x] Instanciado de vitrinas en runtime segun ExhibitionData [M]
+- [x] place_item valida vitrina libre y tipo de pieza correcto [S]
+- [x] Vitrina ocupada muestra el modelo/iscon de la pieza registrada [M]
+- [x] Vitrina libre muestra silueta y etiqueta "Por donar" [S]
 - [ ] Inspeccion de pieza abre panel con nombre, procedencia y curiosidad [S]
 - [ ] Variante para peces: acuario con nado animado por spline [C]
 - [ ] Variante para fosiles: montaje en pedestal con iluminacion suave [S]
@@ -148,7 +148,7 @@
 ## J. Edge cases y manejo de errores (12)
 
 - [x] Donacion duplicada rechazada sin consumir inventario [S] — reason "duplicate" (testeado §4.3)
-- [ ] Vitrina ocupada nunca sobrescrita con otra pieza [S]
+- [x] Vitrina ocupada nunca sobrescrita con otra pieza [S]
 - [ ] Items donables registrados antes de restaurar el museo (cola pendiente) [M]
 - [ ] Inventario vacio al abrir el panel de donacion (UI vacia elegante) [S]
 - [ ] Fallo de senal de modulo origen (M36/M34/M25) sin crasheo [M]
@@ -255,3 +255,11 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 36 [x] / 112 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+## NOTA-AGNES (slice RF1/RF5, 2026-10-08, agnes-3-flash)
+Este slice implemento la LOGICA del museo (Museum.gd + ExhibitSlot.gd, Node3D headless-friendly)
++ el cableado de donacion/refresh (RF5). El teste test_museo_rf1.gd (0/0) verifica: edificio,
+vitrinas instanciadas, place_item (libre/sobrescritura), inspect 'Por donar', refresh_from_registry,
+request_donation_ui. PENDING (fuera de este slice): construccion VOXEL 3D de vitrinas (item [C]),
+panel UI M53 de donacion + escena museum.tscn posicionada en el mundo. Los [x] de arriba son la
+logica verificada, no el 3D/UI.
