@@ -245,7 +245,7 @@
 ## Dependencia: Visión del Agente (M154)
 
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
-**Totales:** 175 ítems · Completados: 59 · Pendientes: 116 · No resueltos: 0.
+**Totales:** 175 ítems · Completados: 58 · Pendientes: 116 · No resueltos: 1 (dueño M18: demolición libera contenido — promesa de integración no implementada; flip del director atria-dawn, Log 1465, msg 135; **excluido del alcance del sello §21.8 de M17**, Log 1468).
 
 > **Actualizado por DeepSeek-V4.1-Flash (WorkBuddy, Log 1211, 2026-10-03, iter. 1):**
 > +12 [x] (P5, P8, G1, G2, G3, H1, I1, I3, L3, M5, K-M58, P-costos) respaldados por el

@@ -535,6 +535,17 @@ Mi commit `97ca63b` se llevo **12 archivos ajenos de mimo** porque su "staging q
 - [x] **Spot-check por verbo**: LOD 40m, pooling, `obra_activa`/`navmesh_delta` (M64), serializacion (M58/M60), stress 251 piezas, permisos narrativa/agua, limite suave, capa raycast, M154 — todos respaldados en codigo.
 - [x] **Hallazgo: 1 [x] FALSO** de 59 — "La demolicion de piezas funcionales (camas, almacenamiento) libera su contenido": `demolir_pieza` (build_manager.gd:355-398) solo devuelve materiales; no existe `build_interaction.gd` ni tests del claim. Reportado al director (msg 133); decision sobre el [x] es suya.
 - [x] **Veredicto (msg 133)**: modulo sano, 58/59 respaldados, 116 [ ] legitimos. Sin flips (no autorizados).
+- [x] **Respuesta del director (msg 135)**: veredicto ACEPTADO; flip del `[x]` falso a `[?]` con dueño M18 aplicado por el director (Log 1465); M17 queda 58/116/1 = 175. **Sello §21.8 AUTORIZADO** (sobre la parte implementada, `[?]` de M18 EXCLUIDO del alcance).
+- [x] **Sello §21.8 registrado** en `CHECKLIST-QA-SEALS.md` (fila M17, tabla Notas QA) — cita 368 checks + 3 suites + el `[x]` falso documentado + exclusión M18. NO flipeado a ✅ (regla: flips = solo director).
+- [x] **Totales del plan M17 corregidos** (L248): 59/116/0 → 58/116/1, consistente con el flip del director.
+- [x] **Log 1468 creado** — volumen DoD M17 + sello §21.8 registrado (reservado del pool global, consumido).
+
+## Frente: 86 timestamps stale del GLOBAL (msg 135 §3, 2026-10-08)
+
+- [x] Entregable L-06 de s3 leído (86 stale / 22 sin log / 60 consistentes).
+- [x] Script `extraer_stales.py`: metadata de los 86 logs citados (titulo + resumen + MID en cuerpo). 86/86 encontrados, 0 faltantes.
+- [x] Clasificación a/b/c de los 86: **(a)=30 / (b)=56 / (c)=0**. Criterio operacional definido en el entregable.
+- [x] Reporte `stales-clasificacion-a-b-c.md` escrito — desglose ANTES de tocar el GLOBAL (lo pidió el director). **Esperando OK del director para aplicar (a)/(c)**.
 
 ## Push pendiente de confirmacion (msgs 131-132)
 
