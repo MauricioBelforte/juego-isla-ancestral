@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-07" name="report_1" tests="5" failures="1" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_photo_service" package="tests/unit/foto" timestamp="2026-10-08T00:53:03" hostname="localhost" tests="5" failures="1" errors="0" skipped="0" flaky="0" time="0.159">
+		<testcase name="test_foto_schema_valida_ok" classname="test_photo_service" time="0.018">
+		</testcase>
+		<testcase name="test_foto_schema_rechaza" classname="test_photo_service" time="0.018">
+		</testcase>
+		<testcase name="test_photo_service_presets_cargados" classname="test_photo_service" time="0.021">
+		</testcase>
+		<testcase name="test_photo_service_modo_y_preset" classname="test_photo_service" time="0.021">
+			<failure message="FAILED: res://tests/unit/foto/test_photo_service.gd:39" type="FAILURE">
+<![CDATA[
+Expecting: 'true' but is 'false'
+	at 'test_photo_service_modo_y_preset' in res://tests/unit/foto/test_photo_service.gd:39
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

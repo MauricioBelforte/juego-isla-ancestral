@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-07" name="report_2" tests="16" failures="2" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="test_inventory_slot" package="tests/unit/inventario" timestamp="2026-10-08T00:54:36" hostname="localhost" tests="10" failures="0" errors="0" skipped="0" flaky="0" time="0.428">
+		<testcase name="test_slot_empty_by_default" classname="test_inventory_slot" time="0.026">
+		</testcase>
+		<testcase name="test_ocupar" classname="test_inventory_slot" time="0.025">
+		</testcase>
+		<testcase name="test_vaciar" classname="test_inventory_slot" time="0.029">
+		</testcase>
+		<testcase name="test_puede_apilar_true" classname="test_inventory_slot" time="0.026">
+		</testcase>
+		<testcase name="test_puede_apilar_false_empty_slot" classname="test_inventory_slot" time="0.020">
+		</testcase>
+		<testcase name="test_puede_apilar_false_exceeds_max" classname="test_inventory_slot" time="0.023">
+		</testcase>
+		<testcase name="test_serializar_empty_slot" classname="test_inventory_slot" time="0.020">
+		</testcase>
+		<testcase name="test_serializar_full_slot" classname="test_inventory_slot" time="0.022">
+		</testcase>
+		<testcase name="test_deserializar" classname="test_inventory_slot" time="0.020">
+		</testcase>
+		<testcase name="test_deserializar_defaults" classname="test_inventory_slot" time="0.020">
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="test_equipment_layer" package="tests/unit/ui" timestamp="2026-10-08T00:54:36" hostname="localhost" tests="3" failures="1" errors="0" skipped="0" flaky="0" time="0.340">
+		<testcase name="test_layer_builds_and_toggle" classname="test_equipment_layer" time="0.083">
+		</testcase>
+		<testcase name="test_layer_grid_has_16_items" classname="test_equipment_layer" time="0.063">
+		</testcase>
+		<testcase name="test_layer_slot_buttons_exist" classname="test_equipment_layer" time="0.054">
+			<failure message="FAILED: res://tests/unit/ui/test_equipment_layer.gd:43" type="FAILURE">
+<![CDATA[
+Expecting to be greater than or equal:
+ 20 but was 4
+	at 'test_layer_slot_buttons_exist' in res://tests/unit/ui/test_equipment_layer.gd:43
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite id="2" name="test_debug_menu" package="tests/unit/debug" timestamp="2026-10-08T00:54:37" hostname="localhost" tests="3" failures="1" errors="0" skipped="0" flaky="0" time="0.156">
+		<testcase name="test_diag_export_genera_archivo" classname="test_debug_menu" time="0.070">
+			<failure message="FAILED: res://tests/unit/debug/test_debug_menu.gd:31" type="FAILURE">
+<![CDATA[
+Expecting:
+ 'DIAGNOSTICO Isla Ancestral
+Fecha: 2026-10-07T21:54:37
+Plataforma: Windows
+version_juego: Isla Ancestral v0.1
+fecha: 2026-10-07T21:54:37
+plataforma: Windows
+usuario: C:/Users/Maury-New/AppData/Roaming/Godot/app_userdata/isla-ancestral
+comandos_ejecutados: 0
+fps_actual: 3.0
+memoria_mb: 138.045363426209
+nodos_activos: 1270.0
+resolucion: 1152x648
+
+--- Console (0 lineas) ---
+'
+ do contains
+ '=DIAG='
+	at 'test_diag_export_genera_archivo' in res://tests/unit/debug/test_debug_menu.gd:31
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="CatalogoCategorias" format=3]
+
+[ext_resource type="Script" path="res://scripts/interacciones/categoria_interaccion.gd" id="1_a76ue"]
+[ext_resource type="Script" path="res://scripts/interacciones/catalogo_categorias.gd" id="2_pye06"]
+
+[sub_resource type="Resource" id="Resource_mv5qm"]
+script = ExtResource("1_a76ue")
+id = &"npc"
+etiqueta = "M70_CAT_NPC"
+prioridad_base = 100
+requiere_vision = true
+
+[sub_resource type="Resource" id="Resource_ibuub"]
+script = ExtResource("1_a76ue")
+id = &"cofre"
+etiqueta = "M70_CAT_COFRE"
+prioridad_base = 90
+requiere_vision = true
+
+[sub_resource type="Resource" id="Resource_seth1"]
+script = ExtResource("1_a76ue")
+id = &"puerta"
+etiqueta = "M70_CAT_PUERTA"
+prioridad_base = 80
+requiere_vision = true
+
+[sub_resource type="Resource" id="Resource_ngxpd"]
+script = ExtResource("1_a76ue")
+id = &"evento"
+etiqueta = "M70_CAT_EVENTO"
+prioridad_base = 70
+requiere_vision = true
+
+[sub_resource type="Resource" id="Resource_kjwdm"]
+script = ExtResource("1_a76ue")
+id = &"cosecha"
+etiqueta = "M70_CAT_COSECHA"
+prioridad_base = 60
+
+[sub_resource type="Resource" id="Resource_pqi1b"]
+script = ExtResource("1_a76ue")
+id = &"animal"
+etiqueta = "M70_CAT_ANIMAL"
+prioridad_base = 50
+
+[sub_resource type="Resource" id="Resource_s42lx"]
+script = ExtResource("1_a76ue")
+id = &"objeto"
+etiqueta = "M70_CAT_OBJETO"
+prioridad_base = 30
+
+[sub_resource type="Resource" id="Resource_jvl1g"]
+script = ExtResource("1_a76ue")
+id = &"decorativo"
+etiqueta = "M70_CAT_DECORATIVO"
+prioridad_base = 10
+
+[resource]
+script = ExtResource("2_pye06")
+categorias = Array[ExtResource("1_a76ue")]([SubResource("Resource_mv5qm"), SubResource("Resource_ibuub"), SubResource("Resource_seth1"), SubResource("Resource_ngxpd"), SubResource("Resource_kjwdm"), SubResource("Resource_pqi1b"), SubResource("Resource_s42lx"), SubResource("Resource_jvl1g")])
