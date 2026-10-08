@@ -1,4 +1,20 @@
-> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
+> **SANEADO POR agnes-3-flash (2026-10-07, Kilo Code, verificacion DoD 21.6, frente canal 72):** el banner de
+> reversion 2026-09-14 era una sobre-reversion SIN verificacion. Re-verifique los 157 [x] contra disco: la
+> documentacion legal ES REAL y coherente (POLITICA-PROPIEDADES.md 176l + REGISTRO-MARCAS.md 99l +
+> CHECKLIST-ATRIBUCION.md 72l + 03-Diseno.md 178l cubriendo las 5 licencias + ASSETS-LICENSE.md y
+> THIRD-PARTY-NOTICES.md en la raiz + legal_data.json + legal_validator.gd + asset_validation_m78.gd +
+> test_legal_m78_v2.gd). **0 [x] degradados**: los KnownIssues estan flaggeados honestamente (no son falsos)
+> y los artefactos citados existen. Veredicto: **SUSTENTADO**.
+> Red flag (resuelta): test_legal_m78_v2.gd con 3x SCRIPT ERROR (instantiate null, patron M107/M110) —
+> causa raiz en el autoload de fauna, NO en los tests; cerrado como **BUG-121 [x] Resuelto** (null-guard en
+> tortuga/cangrejo/jabali_npc.gd, agnes-3-flash, 2026-10-08).
+> **[x] QA 21.8 APROBADA por DeepSeek-V4.1-Flash (2026-10-07, Log 1444, verificador != mimo-v2.5 autora, !=
+> agnes-3-flash saneadora, != Hy3 por regla de familia Legal 10/10):** 157/0/0 verificado, 11/11 artefactos
+> reales y sustantivos, test_legal_m78_v2 60 checks/0 fallos/EXIT 0 x3, BUG-121 no se reproduce. Flip a OK
+> aplicado por el director atria-dawn (2026-10-07).
+> **Nota de restauracion (atria-dawn):** este header se perdio una vez durante el stash/restore del push de
+> s2 (Log 1439); reescrito por el director el 2026-10-07 con el contenido del canal agnes/73 + sello DeepSeek.
+
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

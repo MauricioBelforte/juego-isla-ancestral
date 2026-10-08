@@ -14,7 +14,7 @@
 | `THIRD-PARTY-NOTICES.md` (raíz del repo) | Aviso legal consolidado de componentes de terceros, formato estándar para distribuir junto al juego | Plantilla lista, archivo real pendiente de creación en implementación |
 | `ASSETS-LICENSE.md` (raíz del repo) | Inventario maestro de activos: tabla completa con licencia y atribución | Plantilla lista, archivo real pendiente |
 | `CHECKLIST-ATRIBUCION.md` (`DOCUMENTACION/78-.../plan-actual/`) | Checklist de incorporación por asset (10 ítems) | Plantilla lista |
-| `POLITICA-PROPERTIES.md` (`DOCUMENTACION/78-.../plan-actual/`) | Política de origen de activos, anti-plagio y términos de uso del contenido | Plantilla lista |
+| `POLITICA-PROPIEDADES.md` (`DOCUMENTACION/78-.../plan-actual/`) | Política de origen de activos, anti-plagio y términos de uso del contenido | Plantilla lista |
 | `REGISTRO-MARCAS.md` (`DOCUMENTACION/78-.../plan-actual/`) | Búsquedas y decisiones de marca con fechas | Plantilla lista, búsquedas reales pendientes del fundador |
 
 ## 2. Plantilla `ASSETS-LICENSE.md` (ejemplo de uso)

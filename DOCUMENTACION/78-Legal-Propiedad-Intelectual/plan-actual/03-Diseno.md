@@ -31,7 +31,7 @@ RAÍZ DEL REPOSITORIO
 | `ASSETS-LICENSE.md` | Inventario maestro consultable | Tabla con: ID, nombre del asset, tipo, origen, autor, fuente (URL), licencia, uso permitido, atribución (SI/NO), estado, fecha de ingreso |
 | `THIRD-PARTY-NOTICES.md` | Aviso legal consolidado para distribuir | Lista de componentes de terceros con: nombre, versión, autor, licencia, texto/URL de la licencia, atribución requerida |
 | `CHECKLIST-ATRIBUCION.md` (plantilla, dentro del módulo) | Checklist de incorporación por asset | 10 ítems verificables de origen, licencia, uso comercial, compatibilidad y atribución |
-| `POLITICA-PROPERTIES.md` (dentro del módulo) | Política del proyecto | Origen de activos, escala de preferencia de licencias, política anti-plagio, términos de uso del contenido por la comunidad |
+| `POLITICA-PROPIEDADES.md` (dentro del módulo) | Política del proyecto | Origen de activos, escala de preferencia de licencias, política anti-plagio, términos de uso del contenido por la comunidad |
 | `REGISTRO-MARCAS.md` (dentro del módulo) | Decisiones de marca | Búsquedas realizadas, fechas, resultados, decisiones y fecha de re-revisión |
 
 ### 1.2 Cómo se relaciona con el repositorio
@@ -85,7 +85,7 @@ Fuente: https://freesound.org/...
 
 Regla: **cada entrada de `THIRD-PARTY-NOTICES.md` se actualiza cuando se agrega/modifica/retira un asset**, en el mismo commit que `ASSETS-LICENSE.md`.
 
-## 4. Política del proyecto (documento `POLITICA-PROPERTIES.md`)
+## 4. Política del proyecto (documento `POLITICA-PROPIEDADES.md`)
 
 ### 4.1 Origen de activos
 
@@ -158,7 +158,7 @@ Necesito un asset
 | Inventario maestro de activos | `ASSETS-LICENSE.md` | Raíz del repo |
 | Aviso legal consolidado | `THIRD-PARTY-NOTICES.md` | Raíz del repo |
 | Checklist de atribución por asset | `CHECKLIST-ATRIBUCION.md` | `DOCUMENTACION/78-Legal-Propiedad-Intelectual/plan-actual/` |
-| Política del proyecto (origen, anti-plagio, términos de uso) | `POLITICA-PROPERTIES.md` | Ídem |
+| Política del proyecto (origen, anti-plagio, términos de uso) | `POLITICA-PROPIEDADES.md` | Ídem |
 | Decisiones de marca | `REGISTRO-MARCAS.md` | Ídem |
 | Requisitos, análisis, diseño, código, checklist | 01 a 05 de este módulo | Ídem |
 | Créditos en pantalla con atribuciones | Módulo M131 (Créditos) | `DOCUMENTACION/131-Creditos/` |

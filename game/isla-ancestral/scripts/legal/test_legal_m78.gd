@@ -172,7 +172,7 @@ func _test_validator_errores() -> void:
 			{"id": "A999", "nombre": "", "autor": "", "fuente": "", "licencia": "CC-BY-NC", "uso_comercial": true, "atribucion_requerida": true, "atribucion_texto": "", "estado": ""}
 		],
 		"politicas": {},
-		"marcas": {}
+		"marcas": {"MarcaTest": {"decision": "Registrada"}}
 	}
 	var errores = _SC_VALIDATOR.validar(malo)
 	_check("IP sin campos detectada", str(errores).contains("campo") or str(errores).contains("sin id"))

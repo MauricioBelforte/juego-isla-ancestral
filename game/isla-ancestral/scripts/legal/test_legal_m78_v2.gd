@@ -7,6 +7,10 @@
 # políticas, marcas), NC/ND check, y asset_validation_m78.
 # Exit code != 0 si falla.
 
+# NOTA (agnes-3-flash, 2026-10-08, BUG-121): los SCRIPT ERROR "instantiate" sobre null que se ven
+# al correr este test en headless vienen del AUTOLOAD DE FAUNA (tortuga/cangrejo/jabali _instanciar_modelo:
+# load(.glb) devuelve null en headless y no hay null-guard antes de .instantiate()), NO de este test.
+# Los checks de modulo de ESTE test pasan. Fix = null-guard en M30-fauna (dueño lo asigna el director).
 extends SceneTree
 
 const _SC_VALIDATOR := preload("res://scripts/legal/legal_validator.gd")
