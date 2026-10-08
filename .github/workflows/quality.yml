@@ -69,35 +69,27 @@ jobs:
           echo "Godot headless lint completed (FAIL=$FAIL)"
           exit $FAIL
 
-  code-quality-script:
-    name: Custom Code Quality Check (M111)
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Godot 4.7.2
-        uses: solarlabyrinth/action-setup-godot@v3
-        with:
-          version: "4.7-stable"
-          export-templates: false
-
-      - name: Run M111 CodeQualityCheck EditorScript
-        run: |
-          cd game/isla-ancestral
-          godot --headless --script scripts/editor/code_quality_check.gd 2>&1 || true
-          echo "CodeQualityCheck completed (exit code: $?)"
-
-      - name: Upload Quality Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-quality-report
-          path: game/isla-ancestral/user://code_quality_report.txt
-          retention-days: 7
-
+  # BUG-122 (gemelo en quality.yml) RESUELTO (2026-10-08, DeepSeek-V4.1-Flash;
+  # encargo del director, msg 91 del canal DeepSeek): "o funciona o no existe".
+  #
+  # El job `code-quality-script` era un FALSO VERDE estructural (misma clase que
+  # BUG-122 en testing.yml, cerrado por mimo):
+  #   - `godot --headless --script scripts/editor/code_quality_check.gd 2>&1 || true`
+  #     -> el `|| true` anula cualquier fallo: el job NUNCA podia fallar.
+  #   - El paso `Upload Quality Report` subia `game/isla-ancestral/user://
+  #     code_quality_report.txt` con `if: always()` -> la ruta `user://` NO existe en
+  #     un runner de CI (sin import ni perfil de Godot): subia vacio o ni eso.
+  #   - El summary gate exigia `code-quality-script.result == "success"` de un job
+  #     que siempre lo era.
+  #
+  # Sonda medida (Log 1469, mimo): `code_quality_check.gd` es un `EditorScript` ->
+  # "Class 'EditorScript' can only be instantiated by editor" + "Can't inherit from
+  # a virtual class". Ni un wrapper SceneTree puede instanciarlo en headless: el
+  # comando del job NO puede funcionar en CI, punto.
+  #
+  # Decision (camino (a) del msg 91): RETIRAR el job + sacarlo del `needs` del
+  # summary. La adaptacion a headless de `code_quality_check.gd` (M111, dueno
+  # formal) queda pendiente de coordinacion director <-> M111 (camino (b)).
   formatting-check:
     name: GDScript Formatting Check
     runs-on: ubuntu-latest
@@ -1005,7 +997,7 @@ jobs:
 
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, code-quality-script, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator, release-gate]
+    needs: [godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, architecture-guard, checklist-orchestrator, release-gate]
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -1013,7 +1005,6 @@ jobs:
         run: |
           echo "Quality gate summary:"
           echo "godot-lint: ${{ needs.godot-lint.result }}"
-          echo "code-quality-script: ${{ needs.code-quality-script.result }}"
           echo "formatting-check: ${{ needs.formatting-check.result }}"
           echo "test-suite: ${{ needs.test-suite.result }}"
           echo "legal-tools: ${{ needs.legal-tools.result }}"
@@ -1024,7 +1015,7 @@ jobs:
           echo "architecture-guard: ${{ needs.architecture-guard.result }}"
           echo "checklist-orchestrator: ${{ needs.checklist-orchestrator.result }}"
           echo "release-gate: ${{ needs.release-gate.result }}"
-          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.code-quality-script.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
+          if [[ "${{ needs.godot-lint.result }}" != "success" ]] || [[ "${{ needs.formatting-check.result }}" != "success" ]] || [[ "${{ needs.test-suite.result }}" != "success" ]] || [[ "${{ needs.legal-tools.result }}" != "success" ]] || [[ "${{ needs.security-scan.result }}" != "success" ]] || [[ "${{ needs.encoding-guard.result }}" != "success" ]] || [[ "${{ needs.log-protocol.result }}" != "success" ]] || [[ "${{ needs.binary-guard.result }}" != "success" ]] || [[ "${{ needs.architecture-guard.result }}" != "success" ]] || [[ "${{ needs.checklist-orchestrator.result }}" != "success" ]]; then
             echo "::error::One or more quality checks failed"
             exit 1
           fi

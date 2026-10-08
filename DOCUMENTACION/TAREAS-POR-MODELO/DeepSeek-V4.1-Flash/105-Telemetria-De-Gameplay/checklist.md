@@ -176,7 +176,7 @@
 - [?] T-152 Diseñar GameplayTelemetrySaver
 - [x] T-153 Diseñar método save_opt_in_status() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Implementado como `_persistir_opt_in()` (ConfigFile con `make_dir_recursive_absolute`).
 - [?] T-154 Diseñar integración al cerrar el juego
-- [x] T-155 Diseñar res://telemetry/gameplay_telemetry.gd
+- [x] T-155 Diseñar res://scripts/telemetry/telemetry_director.gd — BUG-070 Familia B (fix de cita 2026-10-08, DeepSeek-V4.1-Flash): la ruta `res://telemetry/gameplay_telemetry.gd` del plan inicial no existe; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). No es over-mark: el diseno y la implementacion existen.
 - [?] T-156 Diseñar res://telemetry/gameplay_telemetry_loader.gd
 - [?] T-157 Diseñar res://telemetry/gameplay_telemetry_saver.gd
 - [x] T-158 Diseñar prueba de opt-in y opt-out de telemetría

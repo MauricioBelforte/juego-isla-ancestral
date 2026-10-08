@@ -303,7 +303,7 @@ cruzado sigue pendiente de un verificador externo. Los 45 `[?]` no se tocaron.
 - [?] Diseñar integración al cerrar el juego
 
 ### [S] Archivos de implementación
-- [x] Diseñar res://telemetry/gameplay_telemetry.gd
+- [x] Diseñar res://scripts/telemetry/telemetry_director.gd — BUG-070 Familia B (fix de cita 2026-10-08, DeepSeek-V4.1-Flash): la ruta `res://telemetry/gameplay_telemetry.gd` del plan inicial no existe; el archivo real es `scripts/telemetry/telemetry_director.gd` (autoload TelemetryDirector). No es over-mark: el diseno y la implementacion existen.
 - [?] Diseñar res://telemetry/gameplay_telemetry_loader.gd
 - [?] Diseñar res://telemetry/gameplay_telemetry_saver.gd
 
